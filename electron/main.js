@@ -65,7 +65,15 @@ function buildMenu(p) {
   const isMac = process.platform === 'darwin';
   const open = (dir) => () => { fs.mkdirSync(dir, { recursive: true }); shell.openPath(dir); };
   const template = [
-    ...(isMac ? [{ role: 'appMenu' }] : []),
+    ...(isMac ? [{
+      label: 'LCNDA',
+      submenu: [
+        { role: 'about', label: 'À propos de LCNDA' }, { type: 'separator' },
+        { role: 'hide', label: 'Masquer LCNDA' }, { role: 'hideOthers', label: 'Masquer les autres' },
+        { role: 'unhide', label: 'Tout afficher' }, { type: 'separator' },
+        { role: 'quit', label: 'Quitter LCNDA' },
+      ],
+    }] : []),
     {
       label: 'Fichier',
       submenu: [
@@ -73,20 +81,34 @@ function buildMenu(p) {
         { label: 'Ouvrir le dossier des médias', click: open(p.mediaDir) },
         { label: 'Afficher le journal technique (PHP)', click: () => shell.showItemInFolder(p.logFile) },
         { type: 'separator' },
-        isMac ? { role: 'close' } : { role: 'quit' },
+        isMac ? { role: 'close', label: 'Fermer la fenêtre' } : { role: 'quit', label: 'Quitter' },
       ],
     },
-    { role: 'editMenu' },
+    {
+      label: 'Édition',
+      submenu: [
+        { role: 'undo', label: 'Annuler' }, { role: 'redo', label: 'Rétablir' }, { type: 'separator' },
+        { role: 'cut', label: 'Couper' }, { role: 'copy', label: 'Copier' }, { role: 'paste', label: 'Coller' },
+        { role: 'selectAll', label: 'Tout sélectionner' },
+      ],
+    },
     {
       label: 'Affichage',
       submenu: [
-        { role: 'reload' }, { role: 'forceReload' }, { type: 'separator' },
-        { role: 'resetZoom' }, { role: 'zoomIn' }, { role: 'zoomOut' }, { type: 'separator' },
-        { role: 'togglefullscreen' },
-        ...(app.isPackaged ? [] : [{ type: 'separator' }, { role: 'toggleDevTools' }]),
+        { role: 'reload', label: 'Recharger' }, { role: 'forceReload', label: 'Forcer le rechargement' }, { type: 'separator' },
+        { role: 'resetZoom', label: 'Taille réelle' }, { role: 'zoomIn', label: 'Zoom avant' }, { role: 'zoomOut', label: 'Zoom arrière' }, { type: 'separator' },
+        { role: 'togglefullscreen', label: 'Plein écran' },
+        ...(app.isPackaged ? [] : [{ type: 'separator' }, { role: 'toggleDevTools', label: 'Outils de développement' }]),
       ],
     },
-    { role: 'windowMenu' },
+    {
+      label: 'Fenêtre',
+      submenu: [
+        { role: 'minimize', label: 'Réduire' },
+        ...(isMac ? [{ role: 'zoom', label: 'Agrandir' }, { type: 'separator' }, { role: 'front', label: 'Tout ramener au premier plan' }] : []),
+        { role: 'close', label: 'Fermer la fenêtre' },
+      ],
+    },
   ];
   Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 }
