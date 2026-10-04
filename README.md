@@ -1,0 +1,86 @@
+<p align="center"><img src="electron/build/icon.png" width="128" alt="Icône LCNDA : deux parents reliés à leur enfant"></p>
+
+# LCNDA — Le Carnet numérique des ancêtres
+
+Une application de généalogie **locale, gratuite et open source** pour travailler son histoire familiale :
+personnes, familles, événements, actes, photos, archives, enquêtes et cartes.
+
+- **Vos données restent chez vous.** Tout est enregistré sur votre ordinateur, dans une base SQLite. Aucun compte,
+  aucun serveur, aucun envoi.
+- **Une vraie application de bureau** pour macOS, Windows et Linux, sans rien à installer à côté.
+- **Des sauvegardes automatiques** avant chaque mise à jour de la structure de la base.
+
+> Pensé et designé par **Victor Baissait**. Codé par **Codex (ChatGPT)** et **Claude**, sous la supervision de
+> Victor Baissait.
+
+## Télécharger
+
+Les installateurs sont publiés dans la page **Releases** de ce dépôt :
+
+| Système | Fichier | Minimum |
+|---|---|---|
+| macOS (Apple Silicon ou Intel) | `LCNDA-…-mac-arm64.dmg` / `…-mac-x64.dmg` | macOS 13 Ventura |
+| Windows (PC x64, et Windows 11 ARM) | `LCNDA-…-windows-x64.exe` | Windows 10 |
+| Linux (x64 ou ARM) | `LCNDA-…-linux-….AppImage` ou `.deb` | distribution récente |
+
+Les versions actuelles ne sont pas encore signées : au premier lancement, macOS demande de l'autoriser dans
+*Réglages Système → Confidentialité et sécurité → Ouvrir quand même*, et Windows affiche « Windows a protégé votre
+ordinateur » (*Informations complémentaires → Exécuter quand même*).
+
+## Licence
+
+Le code de LCNDA est distribué sous licence **GNU Affero General Public License v3.0 ou ultérieure**
+(AGPL-3.0-or-later). Texte complet : [LICENSE](LICENSE).
+
+**En langage simple, vous pouvez :**
+- utiliser LCNDA librement, pour vous, votre famille, une association ;
+- étudier et modifier son code ;
+- le redistribuer, modifié ou non.
+
+**En échange :**
+- toute version modifiée que vous distribuez doit rester sous la même licence, avec son code source ;
+- si vous faites utiliser une version modifiée **par internet** (un site, un service en ligne), vous devez aussi
+  donner accès à son code source à ses utilisateurs — c'est ce qu'ajoute l'AGPL à la GPL ;
+- conservez les mentions de licence et les crédits des auteurs.
+
+**Pourquoi l'AGPL ?** LCNDA est, au fond, une application web (PHP + une page). Sans la clause réseau de l'AGPL,
+n'importe qui pourrait en faire un service en ligne payant et fermé sans partager ses améliorations. L'AGPL garantit
+que LCNDA reste un bien commun.
+
+LCNDA est fourni **sans aucune garantie** (articles 15 et 16 de la licence) : faites des sauvegardes.
+
+## Composants tiers
+
+Ces composants gardent leur propre licence :
+
+| Composant | Rôle | Licence |
+|---|---|---|
+| [Electron](https://www.electronjs.org) | fenêtre de l'application (inclut Chromium et Node.js) | MIT (+ licences Chromium, fournies avec l'application) |
+| [PHP](https://www.php.net) | moteur de l'application | PHP License 3.01 |
+| [static-php-cli](https://github.com/crazywhalecc/static-php-cli) | PHP embarqué pour macOS et Linux | MIT (bibliothèques incluses sous leurs licences) |
+| [SQLite](https://sqlite.org) | base de données | domaine public |
+| [three.js](https://threejs.org) r162 | graphiques en 3D | MIT |
+
+Les fonds de carte (OpenStreetMap, CARTO, OpenTopoMap, IGN, Esri…) sont chargés depuis internet, uniquement quand
+vous affichez une carte, et restent soumis aux conditions de leurs fournisseurs.
+
+## Pour les développeurs
+
+Prérequis : [Node.js](https://nodejs.org) 22.12 ou plus récent.
+
+```bash
+npm install            # installe Electron et les outils de fabrication
+npm run fetch:php      # télécharge et vérifie (sha256) le PHP embarqué de votre système
+npm run test:php       # 21 vérifications : serveur, sécurité, relais multi-PHP
+npm run test:migrations  # 8 vérifications : mises à jour de la base, sauvegardes
+npm start              # lance l'application
+npm run dist:mac-arm64 # fabrique l'installateur (voir aussi dist:mac, dist:win, dist:linux)
+```
+
+Organisation : `index.php`, `api.php`, `upload.php`, `router.php` et `lib/` (application PHP) ;
+`assets/` (interface) ; `electron/` (fenêtre, pilotage de PHP, fabrication) ; `lib/migrations.php` (structure de la
+base, numérotée) ; `tests/`.
+
+**Données personnelles :** le dépôt ne contient et ne doit contenir aucune base, aucun média, aucune sauvegarde
+(`.gitignore`). La fabrication des installateurs s'arrête d'elle-même si elle en trouve (garde-fou dans
+`electron/build/hooks.js`).

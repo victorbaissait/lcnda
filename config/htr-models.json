@@ -1,0 +1,220 @@
+[
+  {
+    "id": "fr-actes",
+    "label": "Français · manuscrit généalogique",
+    "language": "fra",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "McCATMuS, modèle Kraken générique pour documents manuscrits, imprimés et dactylographiés du XVIe au XXIe siècle."
+  },
+  {
+    "id": "en-handwritten",
+    "label": "Anglais · handwritten",
+    "language": "eng",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "McCATMuS, modèle Kraken générique incluant notamment français et anglais."
+  },
+  {
+    "id": "latin-medieval",
+    "label": "Latin / médiéval · ancien",
+    "language": "lat",
+    "engine": "kraken",
+    "model": "models/htr/catmus-medieval.mlmodel",
+    "description": "CATMuS Medieval, modèle pour manuscrits médiévaux en latin, ancien/moyen français, espagnol et italien."
+  },
+  {
+    "id": "spanish-historical",
+    "label": "Espagnol · historique",
+    "language": "spa",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "McCATMuS, modèle générique incluant l'espagnol dans ses données d'entraînement."
+  },
+  {
+    "id": "german-19",
+    "label": "Allemand · registres XIXe",
+    "language": "deu",
+    "engine": "kraken",
+    "model": "models/htr/rec-bohemica-german-19.mlmodel",
+    "description": "Modèle Kraken entraîné sur des documents historiques du XIXe siècle, surtout des registres juifs germanophones de Bohême."
+  },
+  {
+    "id": "italian-medieval",
+    "label": "Italien · médiéval / ancien",
+    "language": "ita",
+    "engine": "kraken",
+    "model": "models/htr/catmus-medieval.mlmodel",
+    "description": "CATMuS Medieval, profil expérimental pour italien ancien en écriture latine médiévale."
+  },
+  {
+    "id": "dutch-experimental",
+    "label": "Néerlandais · expérimental",
+    "language": "nld",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Aucun bon modèle néerlandais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+  },
+  {
+    "id": "portuguese-16-19",
+    "label": "Portugais · XVIe-XIXe",
+    "language": "por",
+    "engine": "kraken",
+    "model": "models/htr/traprinq-portuguese-16-19.mlmodel",
+    "description": "TraPrInq, modèle pour textes manuscrits portugais du XVIe au XIXe siècle."
+  },
+  {
+    "id": "polish-experimental",
+    "label": "Polonais · expérimental",
+    "language": "pol",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Aucun bon modèle polonais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+  },
+  {
+    "id": "russian-cyrillic",
+    "label": "Russe / cyrillique · ancien",
+    "language": "rus",
+    "engine": "kraken",
+    "model": "models/htr/old-cyrillic-11-16.mlmodel",
+    "description": "Modèle ancien cyrillique, adapté surtout aux styles onciale et semi-onciale des XIe-XVIe siècles, pas au russe moderne."
+  },
+  {
+    "id": "danish-old-norse",
+    "label": "Danois · nordique ancien",
+    "language": "dan",
+    "engine": "kraken",
+    "model": "models/htr/bifrost-old-norse.mlmodel",
+    "description": "Bifrost, modèle expérimental Old Norse. Utile surtout pour textes nordiques anciens, pas pour danois moderne."
+  },
+  {
+    "id": "swedish-old-norse",
+    "label": "Suédois · nordique ancien",
+    "language": "swe",
+    "engine": "kraken",
+    "model": "models/htr/bifrost-old-norse.mlmodel",
+    "description": "Bifrost, modèle expérimental Old Norse. Utile surtout pour textes nordiques anciens, pas pour suédois moderne."
+  },
+  {
+    "id": "finnish-experimental",
+    "label": "Finlandais · expérimental",
+    "language": "fin",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Aucun bon modèle finlandais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base expérimentale."
+  },
+  {
+    "id": "norwegian-old-norse",
+    "label": "Norvégien · nordique ancien",
+    "language": "nor",
+    "engine": "kraken",
+    "model": "models/htr/bifrost-old-norse.mlmodel",
+    "description": "Bifrost, modèle expérimental Old Norse. Utile surtout pour textes nordiques anciens, pas pour norvégien moderne."
+  },
+  {
+    "id": "serbian-cyrillic-old",
+    "label": "Serbe · cyrillique ancien",
+    "language": "srp",
+    "engine": "kraken",
+    "model": "models/htr/old-cyrillic-11-16.mlmodel",
+    "description": "Modèle ancien cyrillique expérimental pour textes serbes anciens ; pas adapté au serbe moderne imprimé."
+  },
+  {
+    "id": "croatian-experimental",
+    "label": "Croate · expérimental",
+    "language": "hrv",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Aucun bon modèle croate Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+  },
+  {
+    "id": "czech-bohemia-19",
+    "label": "Tchèque · Bohême XIXe",
+    "language": "ces",
+    "engine": "kraken",
+    "model": "models/htr/rec-bohemica-german-19.mlmodel",
+    "description": "Profil expérimental basé sur le modèle de documents de Bohême du XIXe siècle, principalement germanophones."
+  },
+  {
+    "id": "hungarian-experimental",
+    "label": "Hongrois · expérimental",
+    "language": "hun",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents hongrois."
+  },
+  {
+    "id": "slovak-experimental",
+    "label": "Slovaque · expérimental",
+    "language": "slk",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Aucun bon modèle slovaque Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+  },
+  {
+    "id": "estonian-experimental",
+    "label": "Estonien · expérimental",
+    "language": "est",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents estoniens."
+  },
+  {
+    "id": "latvian-experimental",
+    "label": "Letton · expérimental",
+    "language": "lav",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents lettons."
+  },
+  {
+    "id": "lithuanian-experimental",
+    "label": "Lituanien · expérimental",
+    "language": "lit",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents lituaniens."
+  },
+  {
+    "id": "irish-experimental",
+    "label": "Irlandais · expérimental",
+    "language": "gle",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents irlandais."
+  },
+  {
+    "id": "greek-historical",
+    "label": "Grec · modèle à installer",
+    "language": "ell",
+    "engine": "kraken",
+    "model": "models/htr/greek-historical.mlmodel",
+    "description": "Profil prévu pour le grec. Aucun modèle Kraken .mlmodel fiable n'est encore installé localement."
+  },
+  {
+    "id": "romanian-experimental",
+    "label": "Roumain · expérimental",
+    "language": "ron",
+    "engine": "kraken",
+    "model": "models/htr/mccatmus-fr-en.mlmodel",
+    "description": "Aucun bon modèle roumain Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+  },
+  {
+    "id": "ukrainian-cyrillic-old",
+    "label": "Ukrainien · cyrillique ancien",
+    "language": "ukr",
+    "engine": "kraken",
+    "model": "models/htr/old-cyrillic-11-16.mlmodel",
+    "description": "Modèle ancien cyrillique expérimental ; utile surtout pour slavon/cyrillique ancien, pas pour ukrainien moderne."
+  },
+  {
+    "id": "yiddish-hebrew-script",
+    "label": "Yiddish · alphabet hébreu à installer",
+    "language": "yid",
+    "engine": "kraken",
+    "model": "models/htr/yiddish-hebrew.mlmodel",
+    "segment_direction": "horizontal-rl",
+    "base_dir": "R",
+    "description": "Profil prévu pour yiddish en alphabet hébreu. Aucun fichier .mlmodel installable n'a été trouvé dans les résultats consultés."
+  }
+]

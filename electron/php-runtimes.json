@@ -1,0 +1,35 @@
+{
+  "_comment": "PHP embarqué, un par système. Mac et Linux : static-php-cli (https://static-php.dev), version « common », un seul fichier avec toutes les extensions. Windows : PHP officiel (windows.php.net), extensions chargées depuis ext/. L'empreinte sha256 garantit qu'on installe exactement ce fichier. Pour changer de version : modifier url + sha256, puis npm run fetch:php.",
+  "darwin-arm64": {
+    "version": "8.5.8",
+    "url": "https://dl.static-php.dev/static-php-cli/common/php-8.5.8-cli-macos-aarch64.tar.gz",
+    "sha256": "cba9bd8b38b51ef2c7cebf02af689e4481bbd07f65edc0b63d3a43b04e0c9db7",
+    "binary": "php"
+  },
+  "darwin-x64": {
+    "version": "8.5.8",
+    "url": "https://dl.static-php.dev/static-php-cli/common/php-8.5.8-cli-macos-x86_64.tar.gz",
+    "sha256": "05751000c6643f82e8377ed19d55bc159f84bbed46ace1fcc6f62be9866c787c",
+    "binary": "php"
+  },
+  "linux-arm64": {
+    "version": "8.5.8",
+    "url": "https://dl.static-php.dev/static-php-cli/common/php-8.5.8-cli-linux-aarch64.tar.gz",
+    "sha256": "af995ef6b3187b39932a00714dfb97e44bfa40a9243c4c29f61f19d583950753",
+    "binary": "php"
+  },
+  "linux-x64": {
+    "version": "8.5.8",
+    "url": "https://dl.static-php.dev/static-php-cli/common/php-8.5.8-cli-linux-x86_64.tar.gz",
+    "sha256": "517a18e0f0874de35669fe134eb3c52508e128a6d1da5bf890760cb800ada410",
+    "binary": "php"
+  },
+  "win32-x64": {
+    "version": "8.5.11",
+    "url": "https://windows.php.net/downloads/releases/php-8.5.11-nts-Win32-vs17-x64.zip",
+    "sha256": "0ea96e0d2b9b737a6036f05cf4e95c49313faa6d0f27bd97edb2742503f0c043",
+    "binary": "php.exe",
+    "extensions": ["mbstring", "fileinfo", "gd", "zip", "pdo_sqlite", "sqlite3"],
+    "_note": "Nécessite le « Visual C++ Redistributable 2015-2022 » (vcruntime140.dll) : à fournir par l'installateur (étape 5)."
+  }
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Icône LCNDA : deux parents, le trait de filiation, l'enfant. Grille Apple : carré arrondi 824 px, marge 100 px. -->
+  <defs>
+    <filter id="ombre" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" ry="185" fill="#ffffff" filter="url(#ombre)"/>
+  <g fill="#000000">
+    <!-- parents -->
+    <rect x="217" y="300" width="250" height="78"/>
+    <rect x="557" y="300" width="250" height="78"/>
+    <!-- trait de filiation (20 px), séparé des parents et de l'enfant par un léger espace de 23 px -->
+    <rect x="332" y="401" width="20" height="109"/>
+    <rect x="672" y="401" width="20" height="109"/>
+    <rect x="332" y="490" width="360" height="20"/>
+    <rect x="502" y="510" width="20" height="77"/>
+    <!-- enfant -->
+    <rect x="262" y="610" width="500" height="122"/>
+  </g>
+</svg>

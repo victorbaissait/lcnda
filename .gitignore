@@ -1,0 +1,73 @@
+# ─── DONNÉES PERSONNELLES : NE JAMAIS PUBLIER ─────────────────────────────────────────────
+# La généalogie de Victor (bases, médias, sauvegardes, exports) reste sur son ordinateur.
+/data/*
+!/data/schema.sql
+# Où qu'ils soient (copies, dossiers décompressés…) : médias, données, sauvegardes, sessions
+**/media/
+**/backups/
+**/sess/
+**/sessions/
+**/data/*.sqlite
+# Copies de test décompressées (paquets Windows) et dossiers de travail
+/Carnet/
+/Carnet */
+/apres/
+# Images, documents, sons et vidéos : l'application n'en contient aucun ; tout fichier de ce type est un média personnel
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.heic
+*.tif
+*.tiff
+*.bmp
+*.pdf
+*.mp3
+*.m4a
+*.wav
+*.aif
+*.aifc
+*.ogg
+*.mp4
+*.mov
+*.webm
+# Seule exception : l'icône de l'application (dessinée pour LCNDA, aucune donnée personnelle)
+!/electron/build/icon.png
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.db
+*.db-wal
+*.db-shm
+*.mftpkg
+*.ged
+*.gedcom
+*.zip
+*.migration-lock
+*.before-*
+
+# Données géographiques importées (volumineuses, non utilisées par l'application)
+/geo/
+
+# Notes de travail de développement (contiennent des chemins et détails personnels)
+/CLAUDE.md
+/LISEZ-MOI-ETAPE2.md
+
+# Reconnaissance manuscrite (modèles et environnement Python, plusieurs Go)
+/.venv-htr/
+/models/
+
+# ─── Fichiers produits ou téléchargés (se recréent automatiquement) ─────────────────────
+/node_modules/
+/vendor/php/
+/dist/
+/build/
+
+**/__pycache__/
+
+# ─── Système ────────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
