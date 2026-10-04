@@ -4,6 +4,9 @@
 # - Nouvelle version : pousser une étiquette, ex. « git tag v0.0.3 && git push origin v0.0.3 » → les installateurs
 #   sont rassemblés dans un BROUILLON de version (onglet « Releases »), publié à la main.
 #
+# Versions des systèmes fixées exprès (pas de « -latest ») : un changement chez GitHub ne doit pas modifier les
+# installateurs sans prévenir. Linux est fabriqué sur Ubuntu 22.04 pour rester compatible avec plus de distributions.
+#
 # Chaque machine vérifie le PHP embarqué (sha256), lance les tests, puis fabrique ; le garde-fou
 # (electron/build/hooks.js) arrête tout si une base, un média ou une sauvegarde se trouvait dans l'application.
 
@@ -26,21 +29,21 @@ jobs:
       matrix:
         include:
           - name: macOS (Apple Silicon + Intel)
-            os: macos-14
+            os: macos-15
             php: darwin-arm64 darwin-x64
             dist: --mac --arm64 --x64
           - name: Windows (x64)
-            os: windows-latest
+            os: windows-2025
             php: win32-x64
             dist: --win --x64
           - name: Linux (x64 + ARM)
-            os: ubuntu-latest
+            os: ubuntu-22.04
             php: linux-x64 linux-arm64
             dist: --linux --x64 --arm64
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
@@ -72,7 +75,7 @@ jobs:
       - name: Fabrication des installateurs
         run: npx electron-builder ${{ matrix.dist }} --publish never
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: LCNDA-${{ runner.os }}
           if-no-files-found: error
@@ -86,11 +89,11 @@ jobs:
     name: Brouillon de version
     if: startsWith(github.ref, 'refs/tags/v')
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: installateurs
           merge-multiple: true
