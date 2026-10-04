@@ -60,9 +60,14 @@ async function install(key, rt) {
   fs.mkdirSync(dir, { recursive: true });
   // .tar.gz (Mac, Linux) ou .zip (Windows). Le « tar » de Mac et de Windows 10+ lit aussi les .zip ; pas celui de Linux.
   const isZip = archive.endsWith('.zip');
+  // Windows : le tar de Windows (System32), pas celui de Git, qui prend « D:\… » pour un ordinateur distant
+  // et ne sait pas ouvrir les .zip.
+  const tar = process.platform === 'win32'
+    ? path.join(process.env.SystemRoot || 'C:\\Windows', 'System32', 'tar.exe')
+    : 'tar';
   const t = isZip && process.platform === 'linux'
     ? spawnSync('unzip', ['-q', archive, '-d', dir], { stdio: 'inherit' })
-    : spawnSync('tar', [isZip ? '-xf' : '-xzf', archive, '-C', dir], { stdio: 'inherit' });
+    : spawnSync(tar, [isZip ? '-xf' : '-xzf', archive, '-C', dir], { stdio: 'inherit' });
   if (t.status !== 0) throw new Error('décompression impossible');
   const bin = path.join(dir, rt.binary);
   if (!fs.existsSync(bin)) throw new Error('exécutable absent de l’archive : ' + rt.binary);
