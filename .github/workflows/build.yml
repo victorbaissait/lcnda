@@ -1,0 +1,105 @@
+# Fabrication des installateurs de LCNDA (macOS, Windows, Linux).
+#
+# - Lancement manuel : onglet « Actions » → « Installateurs » → « Run workflow » (fichiers dans « Artifacts »).
+# - Nouvelle version : pousser une étiquette, ex. « git tag v0.0.3 && git push origin v0.0.3 » → les installateurs
+#   sont rassemblés dans un BROUILLON de version (onglet « Releases »), publié à la main.
+#
+# Chaque machine vérifie le PHP embarqué (sha256), lance les tests, puis fabrique ; le garde-fou
+# (electron/build/hooks.js) arrête tout si une base, un média ou une sauvegarde se trouvait dans l'application.
+
+name: Installateurs
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macOS (Apple Silicon + Intel)
+            os: macos-14
+            php: darwin-arm64 darwin-x64
+            dist: --mac --arm64 --x64
+          - name: Windows (x64)
+            os: windows-latest
+            php: win32-x64
+            dist: --win --x64
+          - name: Linux (x64 + ARM)
+            os: ubuntu-latest
+            php: linux-x64 linux-arm64
+            dist: --linux --x64 --arm64
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Installer les dépendances
+        run: npm ci
+
+      - name: PHP embarqué (téléchargé et vérifié par empreinte sha256)
+        shell: bash
+        run: for key in ${{ matrix.php }}; do node electron/fetch-php.js "$key"; done
+
+      - name: Composant Microsoft Visual C++ (officiel, signature vérifiée)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force vendor/vcredist | Out-Null
+          Invoke-WebRequest -Uri https://aka.ms/vs/17/release/vc_redist.x64.exe -OutFile vendor/vcredist/vc_redist.x64.exe
+          $sig = Get-AuthenticodeSignature vendor/vcredist/vc_redist.x64.exe
+          if ($sig.Status -ne 'Valid' -or $sig.SignerCertificate.Subject -notmatch 'O=Microsoft Corporation') {
+            throw "Signature Microsoft invalide : $($sig.Status) $($sig.SignerCertificate.Subject)"
+          }
+          Write-Host "Signé par : $($sig.SignerCertificate.Subject)"
+
+      - name: Tests (serveur PHP, sécurité, relais, migrations)
+        run: |
+          npm run test:php
+          npm run test:migrations
+
+      - name: Fabrication des installateurs
+        run: npx electron-builder ${{ matrix.dist }} --publish never
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LCNDA-${{ runner.os }}
+          if-no-files-found: error
+          path: |
+            dist/*.dmg
+            dist/*.exe
+            dist/*.AppImage
+            dist/*.deb
+
+  release:
+    name: Brouillon de version
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: installateurs
+          merge-multiple: true
+      - name: Empreintes sha256 des installateurs
+        run: cd installateurs && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - name: Créer le brouillon
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "${{ github.ref_name }}" installateurs/*
+          --repo "${{ github.repository }}" --draft --title "LCNDA ${{ github.ref_name }}"
+          --notes "Installateurs de LCNDA ${{ github.ref_name }} — vérifie les empreintes dans SHA256SUMS.txt."

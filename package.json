@@ -80,7 +80,13 @@
       "target": [
         "nsis"
       ],
-      "artifactName": "LCNDA-${version}-windows-${arch}.${ext}"
+      "artifactName": "LCNDA-${version}-windows-${arch}.${ext}",
+      "extraResources": [
+        {
+          "from": "vendor/vcredist/vc_redist.x64.exe",
+          "to": "vc_redist.x64.exe"
+        }
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -88,7 +94,8 @@
       "allowToChangeInstallationDirectory": true,
       "license": "LICENSE",
       "shortcutName": "LCNDA",
-      "uninstallDisplayName": "LCNDA — Carnet numérique des ancêtres"
+      "uninstallDisplayName": "LCNDA — Carnet numérique des ancêtres",
+      "include": "electron/build/installer.nsh"
     },
     "linux": {
       "target": [
@@ -106,6 +113,7 @@
           "Comment": "Carnet numérique des ancêtres : généalogie locale (personnes, actes, images et archives)"
         }
       }
-    }
+    },
+    "publish": null
   }
 }
