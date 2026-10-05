@@ -563,6 +563,15 @@ function gedcom_event_type_id(PDO $pdo, array &$cache, string $scope, string $ta
         $stmt->execute([$scope, $tag]);
         $id = $stmt->fetchColumn() ?: null;
     }
+    if (!$id && $tag !== 'EVEN' && $label === '') {
+        // Balise absente de la base (ex. BAPM) : reprendre le type qui porte déjà son nom français (« Baptême »)
+        $frLabel = (gedimport_event_labels() + gedcom_extra_event_labels())[$tag] ?? '';
+        if ($frLabel !== '') {
+            $stmt = $pdo->prepare('SELECT id FROM event_types WHERE scope=? AND label=? COLLATE NOCASE ORDER BY id LIMIT 1');
+            $stmt->execute([$scope, $frLabel]);
+            $id = $stmt->fetchColumn() ?: null;
+        }
+    }
     if (!$id) {
         $labels = gedimport_event_labels() + gedcom_extra_event_labels();
         $name = $label !== '' ? $label : ($labels[$tag] ?? (ucfirst(strtolower(ltrim($tag, '_'))) ?: 'Événement'));

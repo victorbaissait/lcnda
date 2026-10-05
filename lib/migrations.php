@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 2;
+const SCHEMA_VERSION = 3;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -23,6 +23,7 @@ function migration_steps(): array
     return [
         1 => 'schema_v1',
         2 => 'schema_v2',
+        3 => 'schema_v3',
     ];
 }
 
@@ -151,6 +152,108 @@ function schema_v2(PDO $pdo): void
 {
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_families_partner1 ON families(partner1_id)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_families_partner2 ON families(partner2_id)');
+}
+
+/**
+ * Structure n°3 (2026-10-05) : catalogue complet des types d'événements, pour qu'une base neuve (ou importée
+ * d'Hérédis, d'un GEDCOM…) propose les mêmes types que la généalogie de référence de Victor. On AJOUTE seulement
+ * les types absents (même portée et même balise, ou même libellé) : rien n'est supprimé, désactivé ou réactivé,
+ * aucun événement n'est touché. Les libellés restés en anglais (anciens imports MacFamilyTree) sont traduits.
+ */
+function event_type_catalog(): array
+{
+    // [portée, slug, libellé, balise, icône, couleur]
+    return [
+        ['person', 'naissance', 'Naissance', 'BIRT', 'star', '#00cc8f'],
+        ['person', 'bapteme', 'Baptême', 'CHR', 'churchBuilding', '#00ccb4'],
+        ['person', 'deces', 'Décès', 'DEAT', 'cross', '#111111'],
+        ['person', 'inhumation', 'Inhumation', 'BURI', 'grave', '#111111'],
+        ['person', 'incineration', 'Incinération', 'CREM', 'diamond', '#0066cc'],
+        ['person', 'obseques', 'Obsèques', 'FUNE', 'diamond', '#0066cc'],
+        ['person', 'profession', 'Profession', 'OCCU', 'tool', '#0066cc'],
+        ['person', 'lieu-de-residence', 'Lieu de résidence', 'RESI', 'house', '#cc4700'],
+        ['person', 'domicile', 'Domicile', '', 'house', '#cc8100'],
+        ['person', 'recensement', 'Recensement', 'CENS', 'diamond', '#0066cc'],
+        ['person', 'adoption', 'Adoption', 'ADOP', 'diamond', '#0066cc'],
+        ['person', 'reconnaissance', 'Reconnaissance', '', 'flower', '#00b4cc'],
+        ['person', 'jugement-de-naissance', 'Jugement de naissance', '', 'diamondX', '#00aacc'],
+        ['person', 'premiere-communion', 'Première communion', 'FCOM', 'diamond', '#0066cc'],
+        ['person', 'confirmation', 'Confirmation', 'CONF', 'diamond', '#0066cc'],
+        ['person', 'bar-mitzvah', 'Bar Mitzvah', 'BARM', 'diamond', '#0066cc'],
+        ['person', 'bas-mitzvah', 'Bas Mitzvah', 'BASM', 'diamond', '#0066cc'],
+        ['person', 'circoncision', 'Circoncision', 'CIRC', 'diamond', '#0066cc'],
+        ['person', 'ordination', 'Ordination', 'ORDN', 'diamond', '#0066cc'],
+        ['person', 'religion', 'Religion', 'RELI', 'diamond', '#0066cc'],
+        ['person', 'excommunication', 'Excommunication', 'EXCO', 'diamond', '#0066cc'],
+        ['person', 'formation', 'Formation', 'EDUC', 'diamond', '#0066cc'],
+        ['person', 'apprentissage', 'Apprentissage', 'APPR', 'diamond', '#0066cc'],
+        ['person', 'diplome', 'Diplôme', 'GRAD', 'diamond', '#0066cc'],
+        ['person', 'retraite', 'Retraite', 'RETI', 'diamond', '#0066cc'],
+        ['person', 'service-militaire', 'Service militaire', 'MISE', 'diamond', '#0066cc'],
+        ['person', 'incorporation-militaire', 'Incorporation militaire', 'MIIN', 'diamond', '#0066cc'],
+        ['person', 'liberation-militaire', 'Libération du service militaire', 'MIDE', 'diamond', '#0066cc'],
+        ['person', 'recompense-militaire', 'Récompense militaire', 'MIAW', 'diamond', '#0066cc'],
+        ['person', 'prisonnier-de-guerre', 'Prisonnier de guerre', '', 'chains', '#a000cc'],
+        ['person', 'mission', 'Mission', 'MISS', 'diamond', '#0066cc'],
+        ['person', 'emigration', 'Émigration', 'EMIG', 'diamond', '#0066cc'],
+        ['person', 'immigration', 'Immigration', 'IMMI', 'diamond', '#0066cc'],
+        ['person', 'naturalisation', 'Naturalisation', 'NATU', 'diamond', '#0066cc'],
+        ['person', 'nationalite', 'Nationalité', 'NATI', 'diamond', '#0066cc'],
+        ['person', 'titre-de-noblesse', 'Titre de noblesse', 'NOBI', 'diamond', '#0066cc'],
+        ['person', 'surnom', 'Surnom', 'NICK', 'diamond', '#0066cc'],
+        ['person', 'maladie', 'Maladie', 'ILL', 'diamond', '#0066cc'],
+        ['person', 'fausse-couche', 'Fausse-couche', 'MISC', 'diamond', '#0066cc'],
+        ['person', 'testament', 'Testament', 'WILL', 'diamond', '#0066cc'],
+        ['person', 'acte', 'Acte', 'DEED', 'circle', '#0066cc'],
+        ['person', 'transaction-fonciere', 'Transaction foncière', 'LATR', 'diamond', '#0066cc'],
+        ['family', 'mariage', 'Mariage', 'MARR', 'rings', '#7a47db'],
+        ['family', 'mariage-civil', 'Mariage civil', 'MRCI', 'diamond', '#0066cc'],
+        ['family', 'mariage-religieux', 'Mariage religieux', 'MRRE', 'diamond', '#0066cc'],
+        ['family', 'licence-de-mariage', 'Licence de mariage', 'MARL', 'diamond', '#0066cc'],
+        ['family', 'publication-des-bans', 'Publication des bans', 'MARB', 'diamond', '#0066cc'],
+        ['family', 'contrat-de-mariage', 'Contrat de mariage', 'MARC', 'diamond', '#0066cc'],
+        ['family', 'accord-de-mariage', 'Accord de mariage', 'MARS', 'diamond', '#0066cc'],
+        ['family', 'fiancailles', 'Fiançailles', 'ENGA', 'diamond', '#0066cc'],
+        ['family', 'union-libre', 'Union libre', '_PRS', 'diamond', '#0066cc'],
+        ['family', 'separation', 'Séparation', '_SEP', 'diamond', '#0066cc'],
+        ['family', 'divorce', 'Divorce', 'DIV', 'diamond', '#cc0014'],
+        ['family', 'recensement-famille', 'Recensement', 'CENS', 'diamond', '#0066cc'],
+        ['family', 'autre-evenement', 'Autre événement', 'EVEN', 'diamond', '#0066cc'],
+    ];
+}
+
+function schema_v3(PDO $pdo): void
+{
+    // Libellés anglais laissés par d'anciens imports → français (seulement le libellé exact, rien d'autre)
+    $english = [
+        ['family', 'Contract', 'Contrat de mariage'], ['family', 'Partnership', 'Union libre'], ['family', 'Separation', 'Séparation'],
+        ['family', 'Settlement', 'Accord de mariage'], ['person', 'Apprenticeship', 'Apprentissage'],
+        ['person', 'Land Transaction', 'Transaction foncière'], ['person', 'Military Discharge', 'Libération du service militaire'],
+        ['person', 'Military Induction', 'Incorporation militaire'], ['person', 'Récompense Militaire', 'Récompense militaire'],
+        ['person', 'surnom', 'Surnom'], ['person', 'Jugement de Naissance', 'Jugement de naissance'],
+    ];
+    $exists = $pdo->prepare('SELECT count(*) FROM event_types WHERE scope=? AND label=?');
+    $rename = $pdo->prepare('UPDATE event_types SET label=? WHERE scope=? AND label=?');
+    foreach ($english as [$scope, $from, $to]) {
+        $exists->execute([$scope, $to]);
+        if ((int) $exists->fetchColumn() === 0) { $rename->execute([$to, $scope, $from]); }
+    }
+
+    $known = [];
+    foreach ($pdo->query('SELECT scope, label, gedcom_tag, slug FROM event_types') as $t) {
+        $known[$t['scope'] . '|label|' . ascii_fold(mb_strtolower(trim((string) $t['label'])))] = true;
+        if (trim((string) $t['gedcom_tag']) !== '' && $t['gedcom_tag'] !== 'EVEN') { $known[$t['scope'] . '|tag|' . strtoupper((string) $t['gedcom_tag'])] = true; }
+        $known['slug|' . $t['slug']] = true;
+    }
+    $insert = $pdo->prepare("INSERT INTO event_types(scope,slug,label,gedcom_tag,icon,color,is_custom,is_active,is_artistic,custom_fields) VALUES(?,?,?,?,?,?,0,1,0,'')");
+    foreach (event_type_catalog() as [$scope, $slug, $label, $tag, $icon, $color]) {
+        if (isset($known[$scope . '|label|' . ascii_fold(mb_strtolower($label))])) { continue; }
+        if ($tag !== '' && $tag !== 'EVEN' && isset($known[$scope . '|tag|' . $tag])) { continue; }
+        $finalSlug = isset($known['slug|' . $slug]) ? $slug . '-' . bin2hex(random_bytes(3)) : $slug;
+        $insert->execute([$scope, $finalSlug, $label, $tag, $icon, $color]);
+        $known[$scope . '|label|' . ascii_fold(mb_strtolower($label))] = true;
+        $known['slug|' . $finalSlug] = true;
+    }
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */
