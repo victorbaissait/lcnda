@@ -180,7 +180,7 @@ function restore_package_upload(array $file): never
             $dbEntry = null;
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $name = (string) $zip->getNameIndex($i);
-                if (str_ends_with($name, '/') || str_contains($name, '..') || str_starts_with($name, '/') || preg_match('#(^|/)(__MACOSX|\.)#', $name)) { continue; }
+                if (str_ends_with($name, '/') || str_contains($name, '..') || str_contains($name, '\\') || preg_match('#^(/|[A-Za-z]:)#', $name) || preg_match('#(^|/)(__MACOSX|\.)#', $name)) { continue; } // chemins absolus (Mac, Windows) refusés
                 if ($dbEntry === null && preg_match('/\.(db|sqlite)$/i', $name)) { $dbEntry = $i; continue; }
                 if (in_array(strtolower(pathinfo($name, PATHINFO_EXTENSION)), BACKUP_MEDIA_EXTENSIONS, true)) { $mediaEntries[$i] = $name; }
             }

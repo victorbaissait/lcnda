@@ -672,11 +672,13 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $stored = null;
         if ($raw !== '') {
             $path = str_replace('\\', '/', preg_replace('#^file://#', '', rawurldecode($raw)) ?? $raw);
+            $path = preg_replace('#^/([A-Za-z]:/)#', '$1', $path) ?? $path; // « file:///C:/… » → « C:/… »
             $name = basename($path);
             $allowed = (bool) preg_match('/\.(jpe?g|png|gif|webp|heic|tiff?|bmp|pdf|mp3|m4a|wav|aiff?|aifc|ogg|mp4|mov|webm)$/i', $name);
             if ($allowed && $mediaIndex) { $stored = gedimport_store_media($mediaIndex, $raw); }
             if (!$stored && $allowed && is_file(MEDIA_DIR . '/' . $name)) { $stored = $name; }          // déjà dans LCNDA
-            if (!$stored && $allowed && str_starts_with($path, '/') && is_file($path)) {                // fichier sur l'ordinateur
+            // Fichier sur l'ordinateur : chemin complet Mac/Linux (« /Users/… ») ou Windows (« C:\Users\… », écrit par Hérédis PC)
+            if (!$stored && $allowed && preg_match('#^(/|[A-Za-z]:/)#', $path) && is_file($path)) {
                 if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
                 $target = bin2hex(random_bytes(16)) . '.' . strtolower(pathinfo($name, PATHINFO_EXTENSION));
                 if (@copy($path, MEDIA_DIR . '/' . $target)) { $stored = $target; }
