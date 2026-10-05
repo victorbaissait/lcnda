@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/lib/bootstrap.php';
 require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
+require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
 const EVENT_FACT_CONFIDENCE_LEVELS = ['unknown','certain','deduced','estimated','doubt'];
@@ -85,7 +86,7 @@ try {
 
     // Actions de type upload : elles construisent elles-mêmes leur réponse JSON
     // (json_response + exit) plutôt que de passer par le journal avant/après de handle_write.
-    $uploadActions = ['verify_gedcom', 'compare_gedcom', 'import_analyse', 'init_database', 'import_package', 'insee_import'];
+    $uploadActions = ['verify_gedcom', 'compare_gedcom', 'import_analyse', 'init_database', 'import_package', 'import_local_path', 'insee_import'];
 
     // Actions utilisables depuis l'écran d'installation, avant que la base n'existe.
     $autoInitFirstPerson = $action === 'save_person' && $isWrite && empty($payload['id']) && !empty($payload['init_if_missing']);
@@ -97,6 +98,18 @@ try {
     if ($isWrite && !is_file(DB_PATH) && (in_array($action, $uploadActions, true) || $autoInitFirstPerson)) {
         init_empty_database();
         $justInitialized = true;
+    }
+
+    // Fichier lu directement sur le disque (application de bureau : choisi dans la fenêtre système).
+    $importFile = null;
+    if ($isWrite && $action === 'import_local_path') {
+        $importFile = local_import_file($payload);
+    } elseif ($isWrite && $action === 'import_package') {
+        $importFile = $_FILES['file'] ?? null;
+    }
+    // Ouvrir une base .db/.sqlite ou une sauvegarde complète .zip : avant db(), la base vide va être remplacée.
+    if ($importFile && ($importFile['error'] ?? 1) === UPLOAD_ERR_OK && is_restore_upload($importFile)) {
+        restore_package_upload($importFile);
     }
 
     $pdo = db();
@@ -169,6 +182,7 @@ try {
         'export_gedcom' => export_gedcom($pdo),
         'export_json' => export_json($pdo),
         'export_sqlite' => export_sqlite($pdo),
+        'export_full_backup' => export_full_backup($pdo),
         'export_research_report' => export_research_report($pdo),
         'export_family_book' => export_family_book($pdo),
         'backup_sqlite_status' => backup_sqlite_status($pdo, safe_text($_GET['dir'] ?? ''), safe_int($_GET['max_files'] ?? 10, 10)),
@@ -178,7 +192,7 @@ try {
         'compare_gedcom' => compare_gedcom($pdo),
         'import_analyse' => import_analyse($pdo),
         'init_database' => json_response(['ok' => true]),
-        'import_package' => import_package($pdo),
+        'import_package', 'import_local_path' => import_package($pdo, $importFile),
         'event_types_admin' => event_types_admin($pdo),
         'sosa_map' => sosa_map_data($pdo, safe_int($_GET['root_id'] ?? 0)),
         'daboville_map' => daboville_map_data($pdo, safe_int($_GET['root_id'] ?? 0)),
@@ -6328,18 +6342,19 @@ function import_analyse(PDO $pdo): never
 
 // ─── Import direct depuis l'écran d'installation (GEDCOM et MacFamilyTree réels) ──
 
-function import_package(PDO $pdo): never
+function import_package(PDO $pdo, ?array $file): never
 {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') { json_response(['error'=>'POST requis'], 405); }
-    $file = $_FILES['file'] ?? null;
     if (!$file || $file['error'] !== UPLOAD_ERR_OK) { json_response(['error'=>upload_failure_message($file)], 422); }
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $existingPersons = (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn();
+    @set_time_limit(0); // un gros paquet (photos) peut dépasser les 300 s par défaut
 
     $pdo->beginTransaction();
     try {
         if (in_array($ext, ['ged', 'gedcom'], true)) {
-            $stats = import_gedcom_into_db($pdo, $file['tmp_name']);
+            // Fichier lu sur place : les médias cités par un chemin relatif sont cherchés à côté du .ged.
+            $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null);
         } elseif ($ext === 'mftpkg') {
             $stats = import_mftpkg_into_db($pdo, $file['tmp_name']);
         } elseif (in_array($ext, ['zip', 'gdz'], true)) {
@@ -6548,6 +6563,21 @@ function mft_extract_year(?string $date): ?int
     return (int) $m[1];
 }
 
+function mft_fact_label(string $identifier, string $typeName): string
+{
+    if ($typeName !== '') { return $typeName; }
+    $labels = ['Hobby' => 'Loisir', 'Height' => 'Taille', 'Weight' => 'Poids', 'Clan' => 'Clan', 'TribeName' => 'Tribu',
+        'EyeColor' => 'Couleur des yeux', 'NationalID' => 'Numéro d’identité', 'Race' => 'Origine ethnique',
+        'NationalOrTribalOrigin' => 'Origine nationale', 'Possession' => 'Possession', 'PhysicalDescription' => 'Description physique',
+        'Email' => 'Adresse e-mail', 'SkinColor' => 'Couleur de peau', 'SocialSecurityNumber' => 'Numéro de sécurité sociale',
+        'Phone' => 'Téléphone', 'HairColor' => 'Couleur des cheveux', 'Honors' => 'Distinctions', 'CasteName' => 'Caste',
+        'BloodType' => 'Groupe sanguin'];
+    $key = preg_replace('/^_PersonFact_/', '', $identifier) ?: $identifier;
+    if (isset($labels[$key])) { return $labels[$key]; }
+    $label = preg_replace('/([a-z])([A-Z])/', '$1 $2', $key) ?: $key;
+    return $label !== '' ? $label : 'Caractéristique';
+}
+
 function mft_core_date(mixed $value): ?string
 {
     if ($value === null || $value === '') { return null; }
@@ -6643,20 +6673,25 @@ function import_gedzip_into_db(PDO $pdo, string $zipPath): array
  */
 function import_mftpkg_into_db(PDO $dst, string $zipPath): array
 {
-    $tmpDir = sys_get_temp_dir() . '/mftpkg_' . bin2hex(random_bytes(8));
-    if (!mkdir($tmpDir, 0775, true) && !is_dir($tmpDir)) {
+    // Un .mftpkg est un dossier (application de bureau : lu sur place, en lecture seule) ; envoyé par un
+    // navigateur, il arrive zippé et on l'extrait dans un dossier temporaire.
+    $isFolder = is_dir($zipPath);
+    $tmpDir = $isFolder ? null : sys_get_temp_dir() . '/mftpkg_' . bin2hex(random_bytes(8));
+    if ($tmpDir !== null && !mkdir($tmpDir, 0775, true) && !is_dir($tmpDir)) {
         throw new RuntimeException('Impossible de créer un dossier temporaire pour l\'extraction');
     }
     try {
-        $za = new ZipArchive();
-        if ($za->open($zipPath) !== true) {
-            throw new RuntimeException("Impossible d'ouvrir le paquet .mftpkg (format inattendu)");
+        if (!$isFolder) {
+            $za = new ZipArchive();
+            if ($za->open($zipPath) !== true) {
+                throw new RuntimeException("Impossible d'ouvrir le paquet .mftpkg (format inattendu)");
+            }
+            $za->extractTo($tmpDir);
+            $za->close();
         }
-        $za->extractTo($tmpDir);
-        $za->close();
 
         $sourceDb = null; $resourcesDir = null;
-        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpDir, FilesystemIterator::SKIP_DOTS));
+        $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($isFolder ? $zipPath : $tmpDir, FilesystemIterator::SKIP_DOTS));
         foreach ($iterator as $fileInfo) {
             if ($fileInfo->isFile() && $fileInfo->getFilename() === 'database') {
                 $sourceDb = $fileInfo->getPathname();
@@ -6668,7 +6703,10 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             throw new RuntimeException("Base MacFamilyTree introuvable dans le paquet (fichier 'database' absent).");
         }
 
-        $src = new PDO('sqlite:' . $sourceDb, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+        // Paquet d'origine : ouvert en lecture seule (immutable = aucun fichier -wal/-shm créé à côté).
+        $src = $isFolder
+            ? new PDO('sqlite:file:' . rawurlencode($sourceDb) . '?mode=ro&immutable=1', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC])
+            : new PDO('sqlite:' . $sourceDb, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
         $dst->exec('PRAGMA foreign_keys = OFF');
 
         // ── Résolution dynamique des Z_ENT depuis Z_PRIMARYKEY ────────────────────
@@ -6739,7 +6777,7 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
         $placeCountryCol = in_array('ZCACHED_TOPLEVELGROUPINGLOCATIONSTRING', $allBoCols, true)
             ? 'ZCACHED_TOPLEVELGROUPINGLOCATIONSTRING' : 'ZCOUNTRY';
 
-        $personMap = []; $groupMap = [];
+        $personMap = []; $groupMap = []; $mediaMissing = 0;
         $insertGroup = $dst->prepare('INSERT OR IGNORE INTO surname_groups(name) VALUES(?)');
         $findGroup = $dst->prepare('SELECT id FROM surname_groups WHERE name = ? COLLATE NOCASE');
         $insertPerson = $dst->prepare('INSERT INTO persons(source_id,unique_id,gedcom_id,first_name,middle_name,last_name,prefix,suffix,gender,living_status,is_private,is_bookmarked,is_start,surname_group_id,reference_number,familysearch_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
@@ -6834,21 +6872,37 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
         $insertMedia = $dst->prepare('INSERT INTO media(source_id,title,description,media_type,filename,thumbnail,date_text) VALUES(?,?,?,?,?,?,?)');
         $mediaDir = MEDIA_DIR;
         if (!is_dir($mediaDir)) { mkdir($mediaDir, 0775, true); }
-        foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entMedia}") as $m) {
-            $original = (string) ($m['ZPICTUREFILEIDENTIFIER'] ?? '');
-            $thumb = (string) ($m['ZTHUMBNAILFILEIDENTIFIER1'] ?? '');
-            $originalName = $original !== '' ? basename($original) : '';
-            $thumbName = $thumb !== '' ? basename($thumb) : '';
-            if ($resourcesDir) {
+        // Photos, PDF, sons et vidéos : chaque sorte a sa propre colonne de fichier dans MacFamilyTree.
+        $mediaKinds = [];
+        foreach ([['MediaPicture', 'image', ['ZPICTUREFILEIDENTIFIER', 'ZORIGINALPICTUREFILEIDENTIFIER']],
+                  ['MediaPDF', 'pdf', ['ZPDFFILEIDENTIFIER']],
+                  ['MediaAudio', 'audio', ['ZAUDIOFILEIDENTIFIER']],
+                  ['MediaVideo', 'video', ['ZVIDEOFILEIDENTIFIER']]] as [$entName, $mediaType, $fileCols]) {
+            if (isset($entMap[$entName]) || $entName === 'MediaPicture') {
+                $mediaKinds[] = [$entName === 'MediaPicture' ? $entMedia : $entMap[$entName], $mediaType, $fileCols];
+            }
+        }
+        $thumbCols = array_values(array_filter(['ZTHUMBNAILFILEIDENTIFIER1', 'ZTHUMBNAILFILEIDENTIFIER', 'ZTHUMBNAILFILEIDENTIFIER2'], static fn ($c) => in_array($c, $allBoCols, true)));
+        $mediaEnts = [];
+        foreach ($mediaKinds as [$ent, $mediaType, $fileCols]) {
+            $mediaEnts[] = $ent;
+            foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$ent}") as $m) {
+                $original = '';
+                foreach ($fileCols as $col) { if (trim((string) ($m[$col] ?? '')) !== '') { $original = (string) $m[$col]; break; } }
+                $thumb = '';
+                foreach ($thumbCols as $col) { if (trim((string) ($m[$col] ?? '')) !== '') { $thumb = (string) $m[$col]; break; } }
+                $originalName = $original !== '' ? basename($original) : '';
+                $thumbName = $thumb !== '' ? basename($thumb) : '';
                 foreach ([[$original, $originalName], [$thumb, $thumbName]] as [$relative, $name]) {
                     if ($relative === '' || $name === '') { continue; }
-                    $from = rtrim($resourcesDir, '/') . '/' . ltrim($relative, '/');
+                    $from = $resourcesDir ? rtrim($resourcesDir, '/') . '/' . ltrim($relative, '/') : '';
                     $to = $mediaDir . '/' . $name;
-                    if (is_file($from) && !is_file($to)) { copy($from, $to); }
+                    if ($from !== '' && is_file($from) && !is_file($to)) { copy($from, $to); }
+                    if ($relative === $original && !is_file($to)) { $mediaMissing++; }
                 }
+                $insertMedia->execute([$m['Z_PK'], $m['ZTITLE'] ?? '', $m['ZUSERDESCRIPTION'] ?? '', $mediaType, $originalName, $thumbName, $m['ZDATE'] ?? '']);
+                $mediaMap[(int) $m['Z_PK']] = (int) $dst->lastInsertId();
             }
-            $insertMedia->execute([$m['Z_PK'], $m['ZTITLE'] ?? '', $m['ZUSERDESCRIPTION'] ?? '', 'image', $originalName, $thumbName, $m['ZDATE'] ?? '']);
-            $mediaMap[(int) $m['Z_PK']] = (int) $dst->lastInsertId();
         }
 
         $insertLink = $dst->prepare('INSERT INTO media_links(source_id,media_id,entity_type,entity_id,position) VALUES(?,?,?,?,?)');
@@ -6871,9 +6925,18 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
         }
 
         $insertNote = $dst->prepare('INSERT INTO notes(source_id,entity_type,entity_id,title,body,created_at,updated_at) VALUES(?,?,?,?,?,?,?)');
+        $entToDo = $entMap['ToDo'] ?? -1;
+        $todoNotes = []; $notesCount = 0;
+        $appendMediaNote = $dst->prepare("UPDATE media SET description = CASE WHEN trim(description)='' THEN ? ELSE description || char(10) || char(10) || ? END WHERE id=?");
         foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entNote}") as $n) {
             $sourceObject = (int) ($n['ZOBJECT'] ?? 0);
             $objectEnt = (int) ($n[$noteObjectCol] ?? 0);
+            $body = trim((string) ($n['ZTEXT'] ?? ''));
+            if ($objectEnt === $entToDo) { if ($body !== '') { $todoNotes[$sourceObject][] = $body; } continue; }
+            if (in_array($objectEnt, $mediaEnts, true)) {
+                if ($body !== '' && isset($mediaMap[$sourceObject])) { $appendMediaNote->execute([$body, $body, $mediaMap[$sourceObject]]); $notesCount++; }
+                continue;
+            }
             if ($objectEnt === $entPerson) { $entityType = 'person'; }
             elseif ($objectEnt === $entFamily) { $entityType = 'family'; }
             elseif ($objectEnt === $entFamilyEvent || $objectEnt === $entPersonEvent) { $entityType = 'event'; }
@@ -6884,7 +6947,166 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
                 'event' => $eventMap[$sourceObject] ?? null,
                 default => null,
             };
-            if ($entityType && $entityId) { $insertNote->execute([$n['Z_PK'], $entityType, $entityId, $n['ZTITLE'] ?? '', $n['ZTEXT'] ?? '', mft_core_date($n['ZCREATIONDATE'] ?? null), mft_core_date($n['ZCHANGEDATE'] ?? null)]); }
+            if ($entityType && $entityId) { $insertNote->execute([$n['Z_PK'], $entityType, $entityId, $n['ZTITLE'] ?? '', $n['ZTEXT'] ?? '', mft_core_date($n['ZCREATIONDATE'] ?? null), mft_core_date($n['ZCHANGEDATE'] ?? null)]); $notesCount++; }
+        }
+
+        // ── Caractéristiques (taille, couleur des yeux…) → événements avec leur valeur ──
+        $factsCount = 0;
+        $entFact = $entMap['PersonFact'] ?? null;
+        if ($entFact !== null) {
+            $factPersonCol = null; $factTypeCol = null;
+            foreach ($allBoCols as $col) {
+                if (preg_match('/^ZPERSON\d*$/', $col) && $factPersonCol === null && (int) $src->query("SELECT count(*) FROM ZBASEOBJECT WHERE Z_ENT={$entFact} AND {$col}>0")->fetchColumn() > 0) { $factPersonCol = $col; }
+                if (preg_match('/^ZCONCLUSIONTYPE\d*$/', $col) && $factTypeCol === null && (int) $src->query("SELECT count(*) FROM ZBASEOBJECT WHERE Z_ENT={$entFact} AND {$col}>0")->fetchColumn() > 0) { $factTypeCol = $col; }
+            }
+            if ($factPersonCol && $factTypeCol) {
+                $factTypes = [];
+                foreach ($src->query('SELECT Z_PK, ZIDENTIFIER, ZTYPENAME, ZGEDCOMTAG FROM ZCONCLUSIONTYPE') as $t) { $factTypes[(int) $t['Z_PK']] = $t; }
+                $findType = $dst->prepare("SELECT id FROM event_types WHERE scope='person' AND label=? COLLATE NOCASE LIMIT 1");
+                $factTypeIds = [];
+                foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entFact}") as $f) {
+                    $personId = $personMap[(int) ($f[$factPersonCol] ?? 0)] ?? null;
+                    $t = $factTypes[(int) ($f[$factTypeCol] ?? 0)] ?? null;
+                    if (!$personId || !$t) { continue; }
+                    $label = mft_fact_label((string) ($t['ZIDENTIFIER'] ?? ''), (string) ($t['ZTYPENAME'] ?? ''));
+                    if (!isset($factTypeIds[$label])) {
+                        $findType->execute([$label]);
+                        $typeId = (int) $findType->fetchColumn();
+                        if (!$typeId) {
+                            $insertType->execute([null, 'person', (mft_slugify($label) ?: 'fait') . '-' . $t['Z_PK'], $label, (string) ($t['ZGEDCOMTAG'] ?? ''), 'diamond', '#0066cc', 0, 1]);
+                            $typeId = (int) $dst->lastInsertId();
+                        }
+                        $factTypeIds[$label] = $typeId;
+                    }
+                    $date = trim((string) ($f[$eventDateCol] ?? ''));
+                    $insertEvent->execute([$f['Z_PK'], 'person', $personId, null, $factTypeIds[$label], $date, mft_extract_year($date), $placeMap[(int) ($f['ZASSIGNEDPLACE'] ?? 0)] ?? null,
+                        '', trim((string) ($f['ZVALUE'] ?? '')), $f['ZUSERDESCRIPTION1'] ?? '', '', '']);
+                    $eventMap[(int) $f['Z_PK']] = (int) $dst->lastInsertId();
+                    $factsCount++;
+                }
+            }
+        }
+
+        // ── Sources et citations ──
+        $sourceMap = []; $citationsCount = 0;
+        $insertSource = $dst->prepare('INSERT INTO sources(source_id,title,author,agency,publication,url,text,source_type) VALUES(?,?,?,?,?,?,?,?)');
+        $insertCitation = $dst->prepare('INSERT INTO source_links(source_id,entity_type,entity_id,source_record_id,page,quality,note) VALUES(?,?,?,?,?,?,?)');
+        $entSource = $entMap['Source'] ?? null;
+        if ($entSource !== null) {
+            $sourceValues = [];
+            try {
+                foreach ($src->query('SELECT kv.ZSOURCE, kv.ZVALUE, k.ZGEDCOMTAG, k.ZNAME FROM ZSOURCEKEYVALUE kv LEFT JOIN ZSOURCETEMPLATEKEY k ON k.Z_PK = kv.ZTEMPLATEKEY ORDER BY kv.Z_PK') as $kv) {
+                    $value = trim((string) ($kv['ZVALUE'] ?? ''));
+                    if ($value !== '') { $sourceValues[(int) $kv['ZSOURCE']][] = [strtoupper((string) ($kv['ZGEDCOMTAG'] ?? '')), (string) ($kv['ZNAME'] ?? ''), $value]; }
+                }
+            } catch (Throwable) { /* ancienne version de MacFamilyTree sans modèles de sources */ }
+            $repositories = [];
+            if (isset($entMap['SourceRepository'])) {
+                foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entMap['SourceRepository']}") as $r) {
+                    $repositories[(int) $r['Z_PK']] = trim((string) ($r['ZNAME'] ?? '')) ?: trim((string) ($r['ZCACHED_TITLE'] ?? ''));
+                }
+            }
+            foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entSource}") as $so) {
+                $fields = ['title' => '', 'author' => '', 'agency' => '', 'publication' => '', 'url' => ''];
+                $extra = [];
+                foreach ($sourceValues[(int) $so['Z_PK']] ?? [] as [$tag, $name, $value]) {
+                    $field = match ($tag) { 'TITL' => 'title', 'AUTH', 'AUTA', 'AUTC' => 'author', 'PUBL', 'PUB' => 'publication', 'AGNC' => 'agency', default => null };
+                    if ($field !== null && $fields[$field] === '') { $fields[$field] = $value; continue; }
+                    $extra[] = (preg_replace('/^SourceTemplate_KeyName_/', '', $name) ?: $tag) . ' : ' . $value;
+                }
+                if ($fields['title'] === '') { $fields['title'] = trim((string) ($so['ZCACHED_TITLE'] ?? '')); }
+                if ($fields['agency'] === '') { $fields['agency'] = $repositories[(int) ($so['ZSOURCEREPOSITORY'] ?? 0)] ?? ''; }
+                $text = trim((string) ($so['ZTEXT'] ?? ''));
+                if ($fields['title'] === '' && $text === '' && !$extra) { continue; } // source vide
+                if (preg_match('#^https?://\S+$#i', $fields['title'])) { $fields['url'] = $fields['title']; }
+                // Titre très long (MacFamilyTree y met parfois tout l'acte) : le texte complet va dans « texte ».
+                if (mb_strlen($fields['title']) > 200 || str_contains($fields['title'], "\n")) {
+                    $text = trim($fields['title'] . ($text !== '' ? "\n\n" . $text : ''));
+                    $firstLine = trim((string) strtok($fields['title'], "\n"));
+                    $fields['title'] = mb_strlen($firstLine) > 200 ? mb_substr($firstLine, 0, 197) . '…' : $firstLine;
+                }
+                if ($extra) { $text = trim($text . "\n\n" . implode("\n", $extra)); }
+                $insertSource->execute([$so['Z_PK'], $fields['title'] ?: 'Source sans titre', $fields['author'], $fields['agency'], $fields['publication'], $fields['url'], $text, $fields['url'] !== '' ? 'internet' : 'other']);
+                $sourceMap[(int) $so['Z_PK']] = (int) $dst->lastInsertId();
+            }
+            $entSourceRel = $entMap['SourceRelation'] ?? null;
+            $containerCol = null;
+            foreach ($allBoCols as $col) { if (preg_match('/^Z\d+_SOURCECONTAINER$/', $col)) { $containerCol = $col; break; } }
+            if ($entSourceRel !== null && $containerCol) {
+                foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entSourceRel}") as $c) {
+                    $sourceId = $sourceMap[(int) ($c['ZSOURCE'] ?? 0)] ?? null;
+                    $container = (int) ($c['ZSOURCECONTAINER'] ?? 0);
+                    $containerEnt = (int) ($c[$containerCol] ?? 0);
+                    [$entityType, $entityId] = match (true) {
+                        $containerEnt === $entPerson => ['person', $personMap[$container] ?? null],
+                        $containerEnt === $entFamily => ['family', $familyMap[$container] ?? null],
+                        in_array($containerEnt, [$entFamilyEvent, $entPersonEvent, $entFact ?? -1], true) => ['event', $eventMap[$container] ?? null],
+                        default => [null, null],
+                    };
+                    if (!$sourceId || !$entityType || !$entityId) { continue; }
+                    $quality = trim((string) ($c['ZQUALITYSOURCE'] ?? ''));
+                    $insertCitation->execute([$c['Z_PK'], $entityType, $entityId, $sourceId, trim((string) ($c['ZPAGE'] ?? '')), $quality === '0' ? '' : $quality, trim((string) ($c['ZTEXT'] ?? ''))]);
+                    $citationsCount++;
+                }
+            }
+        }
+
+        // ── Liens Internet (médias « URL ») → sources Internet liées aux mêmes fiches ──
+        if (isset($entMap['MediaURL'])) {
+            $urlSources = [];
+            foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entMap['MediaURL']}") as $u) {
+                $url = trim((string) ($u['ZURL'] ?? ''));
+                if ($url === '') { continue; }
+                $insertSource->execute([null, trim((string) ($u['ZTITLE'] ?? '')) ?: $url, '', '', '', $url, trim((string) ($u['ZUSERDESCRIPTION'] ?? '')), 'internet']);
+                $urlSources[(int) $u['Z_PK']] = (int) $dst->lastInsertId();
+                $sourceMap['url' . $u['Z_PK']] = $urlSources[(int) $u['Z_PK']];
+            }
+            if ($urlSources) {
+                foreach ($src->query('SELECT * FROM ZMEDIARELATION') as $r) {
+                    $sourceId = $urlSources[(int) ($r['ZBASEMEDIA'] ?? 0)] ?? null;
+                    if (!$sourceId) { continue; }
+                    $container = (int) ($r['ZMEDIACONTAINER'] ?? 0);
+                    $containerEnt = (int) ($r[$mediaContainerCol] ?? 0);
+                    [$entityType, $entityId] = match (true) {
+                        $containerEnt === $entPerson => ['person', $personMap[$container] ?? null],
+                        $containerEnt === $entFamily => ['family', $familyMap[$container] ?? null],
+                        in_array($containerEnt, [$entFamilyEvent, $entPersonEvent], true) => ['event', $eventMap[$container] ?? null],
+                        default => [null, null],
+                    };
+                    if ($entityType && $entityId) { $insertCitation->execute([null, $entityType, $entityId, $sourceId, '', '', '']); $citationsCount++; }
+                }
+            }
+        }
+
+        // ── Tâches (ToDo) → rappels libres ; leurs notes vont dans le rappel ──
+        $tasksCount = 0;
+        if ($entToDo > 0) {
+            $types = [];
+            foreach ($src->query('SELECT Z_PK, ZIDENTIFIER FROM ZCONCLUSIONTYPE') as $t) { $types[(int) $t['Z_PK']] = (string) ($t['ZIDENTIFIER'] ?? ''); }
+            $todoTitleCols = array_values(array_filter($allBoCols, static fn ($c) => (bool) preg_match('/^ZTITLE\d*$/', $c)));
+            $insertReminder = $dst->prepare('INSERT INTO standalone_reminders(title,notes,reminder_mode,reminder_due_at,reminder_done,reminder_done_at,reminder_category,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?)');
+            $priorities = ['_ToDo_Priority_High' => 'priorité haute', '_ToDo_Priority_Medium' => 'priorité moyenne', '_ToDo_Priority_Low' => 'priorité basse'];
+            $statuses = ['_ToDo_Status_InProgress' => 'en cours', '_ToDo_Status_OnHold' => 'en attente'];
+            $todoTypes = ['_ToDo_Type_MissingEvents' => 'Événements manquants', '_ToDo_Type_Verify' => 'Vérifier', '_ToDo_Type_FurtherResearch' => 'Recherches complémentaires',
+                '_ToDo_Type_SourceMissing' => 'Source manquante', '_ToDo_Type_Plausibility' => 'Vraisemblance', '_ToDo_Type_CleanUp' => 'Nettoyage', '_ToDo_Type_MissingNames' => 'Noms manquants'];
+            $today = date('Y-m-d');
+            foreach ($src->query("SELECT * FROM ZBASEOBJECT WHERE Z_ENT={$entToDo}") as $td) {
+                $title = '';
+                foreach ($todoTitleCols as $col) { if (trim((string) ($td[$col] ?? '')) !== '') { $title = trim((string) $td[$col]); break; } }
+                $status = $types[(int) ($td['ZSTATUSCONCLUSIONTYPE'] ?? 0)] ?? '';
+                $type = $todoTypes[$types[(int) ($td['ZTYPECONCLUSIONTYPE'] ?? 0)] ?? ''] ?? '';
+                $details = array_filter([$type, $priorities[$types[(int) ($td['ZPRIORITYCONCLUSIONTYPE'] ?? 0)] ?? ''] ?? '', $statuses[$status] ?? '']);
+                $notes = trim(implode("\n\n", array_filter([$details ? 'MacFamilyTree : ' . implode(', ', $details) : '', ...($todoNotes[(int) $td['Z_PK']] ?? [])])));
+                $due = '';
+                if (!empty($td['ZCACHED_DUEDATEASDATE'])) { $due = substr((string) mft_core_date($td['ZCACHED_DUEDATEASDATE']), 0, 10); }
+                // Un rappel sans date n'apparaît nulle part : sans échéance, « à faire à partir de la date d'import ».
+                $mode = $due !== '' ? 'on' : 'after';
+                $done = $status === '_ToDo_Status_Done' ? 1 : 0;
+                $created = mft_core_date($td['ZCREATIONDATE'] ?? null) ?? date('Y-m-d H:i:s');
+                $insertReminder->execute([$title !== '' ? $title : ($type !== '' ? $type : 'Tâche MacFamilyTree'), $notes, $mode, $due !== '' ? $due : $today,
+                    $done, $done ? (mft_core_date($td['ZCHANGEDATE'] ?? null) ?? '') : '', '', $created, mft_core_date($td['ZCHANGEDATE'] ?? null) ?? $created]);
+                $tasksCount++;
+            }
         }
 
         $dst->exec("UPDATE persons SET living_status='deceased' WHERE id IN (SELECT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT')");
@@ -6911,11 +7133,18 @@ function import_mftpkg_into_db(PDO $dst, string $zipPath): array
             'format' => 'mftpkg',
             'persons' => count($personMap),
             'families' => count($familyMap),
-            'events' => count($eventMap),
+            'events' => count($eventMap) - $factsCount,
+            'facts' => $factsCount,
+            'notes' => $notesCount,
+            'sources' => count($sourceMap),
+            'citations' => $citationsCount,
+            'tasks' => $tasksCount,
             'media' => count($mediaMap),
+            'media_missing' => $mediaMissing,
         ];
     } finally {
-        mft_delete_directory($tmpDir);
+        $src = null;
+        if ($tmpDir !== null) { mft_delete_directory($tmpDir); }
     }
 }
 

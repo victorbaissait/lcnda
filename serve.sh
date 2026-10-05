@@ -15,7 +15,7 @@ echo "Application disponible sur http://127.0.0.1:${PORT}   (Ctrl+C pour arrête
 # - boucle de relance : si PHP s'arrête de lui-même, il redémarre en 1 s et le message d'erreur reste affiché.
 while true; do
   php \
-    -d upload_max_filesize=300M -d post_max_size=1100M \
+    -d upload_max_filesize=8G -d post_max_size=8G \
     -d memory_limit=1024M -d max_execution_time=300 -d max_input_time=-1 \
     -S "127.0.0.1:${PORT}" -t . router.php
   code=$?

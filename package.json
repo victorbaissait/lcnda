@@ -15,7 +15,8 @@
     "dist:mac-arm64": "electron-builder --mac --arm64",
     "dist:win": "electron-builder --win --x64",
     "dist:linux": "electron-builder --linux --x64 --arm64",
-    "test:gedcom": "node tests/test-gedcom.js"
+    "test:gedcom": "node tests/test-gedcom.js",
+    "test:import": "node tests/test-import.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",
@@ -38,6 +39,7 @@
       "package.json",
       "electron/main.js",
       "electron/php-server.js",
+      "electron/preload.js",
       "electron/loading.html"
     ],
     "extraResources": [

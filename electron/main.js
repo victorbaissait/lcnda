@@ -7,7 +7,8 @@
  *   npm run start:local     données = dossiers data/ et media/ du projet (pour tester avec tes copies)
  *   GENEALOGY_DATA_DIR=… GENEALOGY_MEDIA_DIR=… npm start     dossiers de ton choix
  */
-const { app, BrowserWindow, Menu, dialog, session, shell } = require('electron');
+const { app, BrowserWindow, Menu, dialog, ipcMain, session, shell } = require('electron');
+const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const { PhpServer, findPhp, checkPhp, devBundledPhp, SECRET_HEADER } = require('./php-server');
@@ -117,7 +118,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 1440, height: 900, minWidth: 900, minHeight: 600,
     show: false, title: APP_TITLE, backgroundColor: '#fbfbfb',
-    webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false },
+    webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: path.join(__dirname, 'preload.js') },
   });
   win.once('ready-to-show', () => win.show());
   win.on('closed', () => { win = null; });
@@ -126,6 +127,44 @@ function createWindow() {
   win.loadFile(path.join(__dirname, 'loading.html')).catch(() => {});
   return win;
 }
+
+/**
+ * Import d'un fichier choisi dans la fenêtre système (écran de démarrage). Un paquet MacFamilyTree (.mftpkg) est
+ * un dossier : la page web ne peut pas l'envoyer (« Failed to fetch »). Le processus principal garde le chemin
+ * choisi et ne donne à la page qu'un jeton à usage unique ; PHP lit ensuite le fichier sur place.
+ */
+const chosenFiles = new Map();
+function fromApp(event) {
+  return Boolean(server && win && event.sender === win.webContents && String(event.senderFrame?.url || '').startsWith(server.origin));
+}
+ipcMain.handle('lcnda:choose-import-file', async (event) => {
+  if (!fromApp(event)) return { canceled: true };
+  const result = await dialog.showOpenDialog(win, {
+    title: 'Importer une généalogie',
+    buttonLabel: 'Importer',
+    properties: ['openFile'],
+    filters: [
+      { name: 'Généalogies (GEDCOM, MacFamilyTree, sauvegarde LCNDA)', extensions: ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'] },
+      { name: 'Tous les fichiers', extensions: ['*'] },
+    ],
+  });
+  if (result.canceled || !result.filePaths[0]) return { canceled: true };
+  const token = crypto.randomBytes(16).toString('hex');
+  chosenFiles.clear();
+  chosenFiles.set(token, result.filePaths[0]);
+  return { token, name: path.basename(result.filePaths[0]) };
+});
+ipcMain.handle('lcnda:import-chosen-file', async (event, token) => {
+  if (!fromApp(event)) return { status: 403, data: { error: 'Refusé' } };
+  const filePath = chosenFiles.get(token);
+  chosenFiles.delete(token);
+  if (!filePath) return { status: 400, data: { error: 'Choisis d’abord un fichier.' } };
+  try {
+    return await server.importLocalFile(filePath);
+  } catch (err) {
+    return { status: 500, data: { error: 'Import impossible : ' + err.message } };
+  }
+});
 
 /** La fenêtre ne peut afficher que l'application ; tout lien externe s'ouvre dans le navigateur. */
 function lockNavigation(webContents, origin) {

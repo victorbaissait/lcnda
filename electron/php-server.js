@@ -155,6 +155,9 @@ class PhpServer extends EventEmitter {
     super();
     this.o = o;
     this.secret = crypto.randomBytes(24).toString('hex');
+    // Second secret, connu seulement du processus principal : autorise l'import d'un fichier lu directement sur le
+    // disque (choisi dans la fenêtre système). La page web ne le connaît pas et ne peut donc pas désigner un chemin.
+    this.localSecret = crypto.randomBytes(24).toString('hex');
     this.port = 0;
     this.poolSize = Math.max(1, Math.min(16, Math.floor(o.pool || 1)));
     this.backends = []; // { id, port, child, active, ready }
@@ -208,7 +211,7 @@ class PhpServer extends EventEmitter {
     const o = this.o;
     const args = [
       ...phpRuntimeArgs(o.phpPath),
-      '-d', 'upload_max_filesize=300M', '-d', 'post_max_size=1100M',
+      '-d', 'upload_max_filesize=8G', '-d', 'post_max_size=8G',
       '-d', 'memory_limit=1024M', '-d', 'max_execution_time=300', '-d', 'max_input_time=-1',
       '-d', 'display_errors=0', '-d', 'log_errors=1',
       '-S', `127.0.0.1:${b.port}`, '-t', o.appRoot, path.join(o.appRoot, 'router.php'),
@@ -219,6 +222,7 @@ class PhpServer extends EventEmitter {
       GENEALOGY_MEDIA_DIR: o.mediaDir,
       GENEALOGY_SESSION_DIR: o.sessionDir,
       GENEALOGY_APP_SECRET: this.secret,
+      GENEALOGY_LOCAL_SECRET: this.localSecret,
     };
     if (o.workers && process.platform !== 'win32') env.PHP_CLI_SERVER_WORKERS = String(o.workers);
 
@@ -352,9 +356,10 @@ class PhpServer extends EventEmitter {
   }
 
   /** Requête avec ou sans secret (tests, préparation de la base). timeout 0 = attendre sans limite. */
-  request(pathname, { withSecret = true, method = 'GET', timeout = 5000 } = {}) {
+  request(pathname, { withSecret = true, method = 'GET', timeout = 5000, headers: extra = {}, body = null } = {}) {
     return new Promise((resolve, reject) => {
-      const headers = withSecret ? { [SECRET_HEADER]: this.secret } : {};
+      const headers = { ...(withSecret ? { [SECRET_HEADER]: this.secret } : {}), ...extra };
+      if (body !== null) headers['content-length'] = Buffer.byteLength(body);
       const opts = { host: '127.0.0.1', port: this.port, path: pathname, method, headers, agent: false };
       if (timeout) opts.timeout = timeout;
       const req = http.request(opts, (res) => {
@@ -364,8 +369,27 @@ class PhpServer extends EventEmitter {
       });
       req.on('timeout', () => req.destroy(new Error('timeout')));
       req.on('error', reject);
-      req.end();
+      req.end(body === null ? undefined : body);
     });
+  }
+
+  /**
+   * Importe un fichier (ou un paquet .mftpkg, qui est un dossier) lu directement sur le disque, sans l'envoyer :
+   * pas de limite de taille, et l'original n'est jamais modifié. Réservé au processus principal (second secret).
+   * @returns {Promise<{status: number, data: object}>}
+   */
+  async importLocalFile(filePath) {
+    const home = await this.request('/', { timeout: 15000 });
+    const cookie = String((home.headers['set-cookie'] || [])[0] || '').split(';')[0];
+    const csrf = JSON.parse((home.body.toString().match(/window\.INSTALL_CSRF = ("[^"]*")/) || [])[1] || '""');
+    const body = JSON.stringify({ path: filePath, csrf });
+    const r = await this.request('/api.php?action=import_local_path', {
+      method: 'POST', timeout: 0, body,
+      headers: { 'content-type': 'application/json', 'x-csrf-token': csrf, 'x-carnet-local': this.localSecret, cookie },
+    });
+    let data;
+    try { data = JSON.parse(r.body.toString()); } catch { data = { error: 'Réponse illisible du serveur (' + r.status + ')' }; }
+    return { status: r.status, data };
   }
 
   /**

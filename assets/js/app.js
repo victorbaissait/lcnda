@@ -921,13 +921,61 @@
 
         const importForm = $('#install-import-form');
         if (importForm) {
+            const result = $('#install-import-result');
+            const showImported = (data) => {
+                const st = data.stats || {};
+                const n = (v) => Number(v || 0).toLocaleString('fr-FR');
+                const parts = [`${n(st.persons || st.personnes)} personne(s)`];
+                if (st.sources) parts.push(`${n(st.sources)} source(s)`);
+                if (st.tasks) parts.push(`${n(st.tasks)} tâche(s) devenue(s) des rappels`);
+                if (st.media) parts.push(`${n(st.media)} média(s)`);
+                const missing = Number(st.media_missing || 0);
+                result.innerHTML = `<p>Import terminé : ${parts.join(', ')}.</p>`
+                    + (missing ? `<p class="muted">${n(missing)} fichier(s) de média introuvable(s) : les fiches existent, mais sans le fichier. Avec une base .db seule, utilise plutôt la « Sauvegarde complète (.zip) » (Maintenance → Export), qui contient les médias.</p><p><button class="button" type="button" data-install-continue>Continuer</button></p>` : '<p class="muted">Rechargement…</p>');
+                if (missing) result.querySelector('[data-install-continue]').addEventListener('click', () => location.reload());
+                else setTimeout(() => location.reload(), 900);
+            };
+            // Application de bureau : fenêtre de choix du système, puis lecture du fichier sur place. Indispensable
+            // pour un paquet MacFamilyTree (.mftpkg), qui est un dossier : la page ne peut pas l'envoyer.
+            let chosen = null;
+            const fileInput = importForm.elements.file;
+            if (window.lcnda && fileInput) {
+                const pickButton = document.createElement('button');
+                pickButton.type = 'button';
+                pickButton.className = 'button small secondary';
+                pickButton.textContent = 'Choisir un fichier…';
+                const chosenLabel = document.createElement('span');
+                chosenLabel.className = 'muted';
+                chosenLabel.textContent = ' Aucun fichier choisi';
+                fileInput.hidden = true;
+                fileInput.after(pickButton, chosenLabel);
+                pickButton.addEventListener('click', async () => {
+                    const picked = await window.lcnda.chooseImportFile();
+                    if (!picked || picked.canceled) return;
+                    chosen = picked;
+                    chosenLabel.textContent = ' ' + picked.name;
+                });
+            }
             importForm.addEventListener('submit', async event => {
                 event.preventDefault();
-                const file = importForm.elements.file.files[0];
-                const result = $('#install-import-result');
+                if (chosen) {
+                    const picked = chosen;
+                    chosen = null;
+                    result.innerHTML = `<p class="muted">Import de ${escapeHtml(picked.name)} en cours… (quelques minutes pour une grande généalogie avec photos)</p>`;
+                    try {
+                        const {status, data} = await window.lcnda.importChosenFile(picked.token);
+                        if (status >= 400 || data.error) throw new Error(data.error || 'Erreur serveur');
+                        showImported(data);
+                    } catch (error) {
+                        result.innerHTML = '';
+                        toast(error.message, 'error');
+                    }
+                    return;
+                }
+                const file = fileInput.files[0];
                 if (!file) { toast('Sélectionne un fichier', 'error'); return; }
                 const ext = (file.name.split('.').pop() || '').toLowerCase();
-                const isRealImport = ['ged', 'gedcom', 'mftpkg', 'zip'].includes(ext);
+                const isRealImport = ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'].includes(ext);
                 const action = isRealImport ? 'import_package' : 'import_analyse';
                 result.innerHTML = `<p class="muted">${isRealImport ? 'Import' : 'Analyse'} en cours…</p>`;
                 try {
@@ -938,8 +986,7 @@
                     const data = await resp.json().catch(() => ({error: 'Réponse illisible'}));
                     if (!resp.ok || data.error) throw new Error(data.error || 'Erreur serveur');
                     if (isRealImport) {
-                        result.innerHTML = `<p>Import terminé : ${(data.stats.persons || data.stats.personnes || 0).toLocaleString('fr-FR')} personne(s) importée(s). Rechargement…</p>`;
-                        setTimeout(() => location.reload(), 900);
+                        showImported(data);
                     } else {
                         result.innerHTML = `<p class="muted">Fichier analysé (${escapeHtml(data.format || '')}). L'import direct pour ce format n'est pas encore disponible ; utilise un fichier GEDCOM ou .mftpkg pour importer directement.</p>`;
                     }
@@ -7294,7 +7341,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
   </form>
 </section>`;
     }
-    function renderExportTools(token=++state.workspaceToken){if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='export')return;const privacy=exportPrivacySettings();const exportUrl=(action,params={})=>{const url=new URL('api.php',location.href);url.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));if(privacy.enabled&&action!=='export_sqlite'){url.searchParams.set('privacy','1');if(privacy.deathCutoffYear)url.searchParams.set('death_cutoff_year',privacy.deathCutoffYear);}return url.toString();};$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">EXPORT</span><h2>Export des données</h2><p>Télécharge les données dans les formats disponibles.</p></div></header>
+    function renderExportTools(token=++state.workspaceToken){if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='export')return;const privacy=exportPrivacySettings();const exportUrl=(action,params={})=>{const url=new URL('api.php',location.href);url.searchParams.set('action',action);Object.entries(params).forEach(([k,v])=>url.searchParams.set(k,v));if(privacy.enabled&&action!=='export_sqlite'&&action!=='export_full_backup'){url.searchParams.set('privacy','1');if(privacy.deathCutoffYear)url.searchParams.set('death_cutoff_year',privacy.deathCutoffYear);}return url.toString();};$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">EXPORT</span><h2>Export des données</h2><p>Télécharge les données dans les formats disponibles.</p></div></header>
 
 ${exportPrivacySectionHtml(privacy)}
 
@@ -7335,8 +7382,14 @@ ${exportPrivacySectionHtml(privacy)}
 </section>
 
 <section class="maintenance-panel">
+  <h3>Sauvegarde complète (.zip)</h3>
+  <p>La base <b>et</b> tous les médias (photos, documents, sons, vidéos) dans un seul fichier. C’est le fichier à garder en lieu sûr, ou à ouvrir sur un autre ordinateur : écran de démarrage de LCNDA → « Importer un fichier ». La préparation peut prendre une minute s’il y a beaucoup de photos.</p>
+  <div class="page-actions"><a class="button" href="${exportUrl('export_full_backup')}" download>Télécharger la sauvegarde complète</a></div>
+</section>
+
+<section class="maintenance-panel">
   <h3>Base SQLite (.db)</h3>
-  <p>Téléchargement direct du fichier de base de données. Conserve la structure complète, les relations et les index. À ouvrir avec DB Browser for SQLite ou équivalent.</p>
+  <p>Le fichier de base de données seul, <b>sans les médias</b> (il ne contient que le nom des fichiers). Conserve la structure complète, les relations et les index. À ouvrir avec DB Browser for SQLite ou équivalent.</p>
   <div class="page-actions"><a class="button secondary" href="${exportUrl('export_sqlite')}" download>Télécharger le .db</a></div>
 </section>
 
