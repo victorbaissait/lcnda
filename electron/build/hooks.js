@@ -54,10 +54,15 @@ function walk(dir, visit) {
  */
 function checkReference(dir, problems) {
   const zlib = require('node:zlib');
+  for (const needed of ['geo-fr.sqlite.gz', 'geo-world.sqlite.gz']) {
+    if (!fs.existsSync(path.join(dir, needed))) problems.push(`référence absente : ${needed} (npm run fetch:geo pour geo-world)`);
+  }
   for (const name of fs.readdirSync(dir)) {
     const full = path.join(dir, name);
     if (!/^geo-[a-z]+\.sqlite\.gz$/.test(name)) { problems.push('fichier inattendu dans data/reference/ : ' + full); continue; }
-    const raw = zlib.gunzipSync(fs.readFileSync(full));
+    // Le schéma (sqlite_master) est au début du fichier : on ne décompresse que les 2 premiers Mo.
+    const fd = fs.openSync(full, 'r'); const head = Buffer.alloc(Math.min(2 * 1024 * 1024, fs.fstatSync(fd).size)); fs.readSync(fd, head, 0, head.length, 0); fs.closeSync(fd);
+    const raw = zlib.gunzipSync(head, { finishFlush: zlib.constants.Z_SYNC_FLUSH });
     const text = raw.toString('latin1');
     if (!text.startsWith('SQLite format 3') || !text.includes('CREATE TABLE reference_info')) problems.push('référence illisible : ' + full);
     for (const table of ['persons', 'events', 'families', 'media', 'notes', 'sources']) {

@@ -45,7 +45,7 @@ function ensure_reference_data(PDO $pdo, string $dbPath): void
     } catch (Throwable) {
         return; // base sans table meta (ancienne structure en cours de migration) : on réessaiera
     }
-    if ($done !== false) { return; }
+    if ($done !== false) { fix_contour_articles($pdo); return; }
     $ref = reference_database_path();
     if ($ref === null) { return; }
 
@@ -87,6 +87,33 @@ function ensure_reference_data(PDO $pdo, string $dbPath): void
         flock($lock, LOCK_UN);
         fclose($lock);
     }
+    fix_contour_articles($pdo);
+}
+
+/**
+ * Bases chargées avant le 2026-10-05 (dont celle de Victor) : le fichier des contours avait perdu l'article de ~2 000
+ * communes (« Réole »). On reprend le nom de la référence seulement s'il ne diffère que par l'article. Une fois.
+ */
+function fix_contour_articles(PDO $pdo): void
+{
+    try {
+        if ($pdo->query("SELECT value FROM meta WHERE key='reference_contour_articles'")->fetchColumn() !== false) { return; }
+        $ref = reference_database_path();
+        if ($ref === null) { return; }
+        $pdo->exec('ATTACH DATABASE ' . $pdo->quote($ref) . ' AS ref');
+        $pdo->beginTransaction();
+        $fixed = $pdo->exec("UPDATE commune_contours SET name = (SELECT r.name FROM ref.commune_contours r WHERE r.insee_code = commune_contours.insee_code)
+            WHERE EXISTS (SELECT 1 FROM ref.commune_contours r WHERE r.insee_code = commune_contours.insee_code
+                AND r.name IN ('Le ' || commune_contours.name, 'La ' || commune_contours.name, 'Les ' || commune_contours.name, 'L''' || commune_contours.name))");
+        $pdo->prepare("INSERT OR REPLACE INTO meta(key,value) VALUES('reference_contour_articles',?)")->execute([(string) $fixed]);
+        $pdo->commit();
+        if ($fixed) { error_log("[référence] articles rétablis dans {$fixed} noms de communes"); }
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        error_log('[référence] noms de communes : ' . $e->getMessage());
+    } finally {
+        try { $pdo->exec('DETACH DATABASE ref'); } catch (Throwable) {}
+    }
 }
 
 // ── Villes du monde (data/reference/geo-world.sqlite.gz, scripts/build-reference-world.php) ──
@@ -96,13 +123,30 @@ function world_reference(): ?PDO
 {
     static $pdo = false;
     if ($pdo !== false) { return $pdo; }
+    $pdo = null;
     $path = reference_database_path('geo-world');
+    if (!$path) { return null; }
     try {
-        $pdo = $path ? new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]) : null;
-    } catch (Throwable) {
+        $pdo = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+        $pdo->exec('PRAGMA busy_timeout = 60000');
+        // L'index de recherche n'est pas livré (fichier plus léger) : créé une fois sur cet ordinateur (~10 s).
+        if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='index' AND name='idx_world_big'")->fetchColumn()) {
+            @set_time_limit(0);
+            $pdo->exec('CREATE INDEX IF NOT EXISTS idx_world_search ON world_places(search_key)');
+            $pdo->exec('CREATE INDEX IF NOT EXISTS idx_world_big ON world_places(search_key) WHERE population >= 1000');
+        }
+    } catch (Throwable $e) {
+        error_log('[référence] villes du monde indisponibles : ' . $e->getMessage());
         $pdo = null;
     }
     return $pdo;
+}
+
+/** Prépare les villes du monde (décompression + index) : appelé au démarrage pour ne pas faire attendre la saisie. */
+function prepare_world_reference(): void
+{
+    if (getenv('GENEALOGY_SKIP_REFERENCE') === '1') { return; }
+    world_reference();
 }
 
 function world_search_key(string $value): string
@@ -110,26 +154,45 @@ function world_search_key(string $value): string
     return trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower(ascii_fold($value))));
 }
 
-/** Villes du monde dont le nom (ou un mot du nom) commence par $q ; pays facultatif (nom français). */
+/**
+ * Villes du monde dont le nom commence par $q ; pays facultatif (nom français). Trois passes sur index, rapides
+ * même sur 5 millions de lieux : villes de plus de 1 000 habitants, puis nom exact, puis petits lieux.
+ */
 function world_place_suggestions(string $q, string $country = '', int $limit = 10): array
 {
     $world = world_reference();
     $key = world_search_key($q);
     if (!$world || mb_strlen($key) < 2 || $limit <= 0) { return []; }
-    $params = [$key . '%', '% ' . $key . '%'];
-    $where = '(search_key LIKE ? OR search_key LIKE ?)';
-    if (trim($country) !== '') { $where .= ' AND country = ? COLLATE NOCASE'; $params[] = trim($country); }
-    $stmt = $world->prepare("SELECT geoname_id, name, state, country, latitude, longitude, population FROM world_places WHERE {$where}
-        ORDER BY (search_key LIKE ?) DESC, population DESC LIMIT " . (int) $limit);
-    $stmt->execute([...$params, $key . '%']);
-    return $stmt->fetchAll();
+    $code = '';
+    if (trim($country) !== '') {
+        $stmt = $world->prepare('SELECT code FROM countries WHERE name = ? COLLATE NOCASE');
+        $stmt->execute([trim($country)]);
+        $code = (string) $stmt->fetchColumn();
+        if ($code === '') { return []; }
+    }
+    $countryWhere = $code !== '' ? ' AND country_code = ' . $world->quote($code) : '';
+    $select = 'SELECT w.geoname_id, w.name, w.search_key, w.state, w.country_code, w.latitude, w.longitude, w.population, c.name AS country FROM world_places w JOIN countries c ON c.code = w.country_code';
+    $out = [];
+    $add = static function (array $rows) use (&$out, $limit): void { foreach ($rows as $r) { if (count($out) < $limit) { $out[(int) $r['geoname_id']] = $r; } } };
+    $passes = [
+        "{$select} WHERE w.search_key >= ? AND w.search_key < ? AND w.population >= 1000{$countryWhere} ORDER BY w.population DESC LIMIT 50",
+        "{$select} WHERE w.search_key = ?{$countryWhere} ORDER BY w.population DESC LIMIT 50",
+        "{$select} WHERE w.geoname_id IN (SELECT geoname_id FROM world_places WHERE search_key >= ? AND search_key < ?{$countryWhere} LIMIT 200) ORDER BY w.population DESC",
+    ];
+    foreach ($passes as $i => $sql) {
+        if (count($out) >= $limit) { break; }
+        $stmt = $world->prepare($sql);
+        $stmt->execute($i === 1 ? [$key] : [$key, $key . '~']);
+        $add($stmt->fetchAll());
+    }
+    return array_values($out);
 }
 
 function world_place(int $geonameId): ?array
 {
     $world = world_reference();
     if (!$world || $geonameId <= 0) { return null; }
-    $stmt = $world->prepare('SELECT * FROM world_places WHERE geoname_id=?');
+    $stmt = $world->prepare('SELECT w.*, c.name AS country FROM world_places w JOIN countries c ON c.code = w.country_code WHERE w.geoname_id=?');
     $stmt->execute([$geonameId]);
     return $stmt->fetch() ?: null;
 }
@@ -140,12 +203,9 @@ function world_place_exact(string $name, string $country): ?array
     $world = world_reference();
     $key = world_search_key($name);
     if (!$world || $key === '' || trim($country) === '') { return null; }
-    $stmt = $world->prepare('SELECT * FROM world_places WHERE (search_key = ? OR search_key LIKE ?) AND country = ? COLLATE NOCASE ORDER BY population DESC LIMIT 1');
-    $stmt->execute([$key . ' ' . $key, $key . ' %', trim($country)]);
-    $row = $stmt->fetch();
-    // search_key = « nom nom_ascii » : le nom doit correspondre en entier, pas seulement au début
-    if ($row && world_search_key((string) $row['name']) !== $key) { return null; }
-    return $row ?: null;
+    $stmt = $world->prepare('SELECT w.*, c.name AS country FROM world_places w JOIN countries c ON c.code = w.country_code WHERE w.search_key = ? AND c.name = ? COLLATE NOCASE ORDER BY w.population DESC LIMIT 1');
+    $stmt->execute([$key, trim($country)]);
+    return $stmt->fetch() ?: null;
 }
 
 /** Lieu de la base pour une ville du monde : réutilise celui qui a déjà ce geoname_id, sinon le crée. */

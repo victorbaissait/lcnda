@@ -10,6 +10,7 @@
     "start:local": "electron . --use-project-data",
     "test:php": "node electron/test-php-server.js",
     "fetch:php": "node electron/fetch-php.js",
+    "fetch:geo": "node electron/fetch-geo.js",
     "test:migrations": "node tests/test-migrations.js",
     "dist:mac": "electron-builder --mac --arm64 --x64",
     "dist:mac-arm64": "electron-builder --mac --arm64",

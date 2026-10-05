@@ -55,6 +55,10 @@ jobs:
         shell: bash
         run: for key in ${{ matrix.php }}; do node electron/fetch-php.js "$key"; done
 
+      - name: Répertoire mondial des lieux (GeoNames allCountries, ~420 Mo → ~140 Mo)
+        shell: bash
+        run: npm run fetch:geo
+
       - name: Composant Microsoft Visual C++ (officiel, signature vérifiée)
         if: runner.os == 'Windows'
         shell: pwsh

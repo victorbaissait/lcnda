@@ -78,7 +78,8 @@ $info->execute(['contours_sha256', hash_file('sha256', $geojsonPath)]);
 // ── GeoNames : communes et lieux habités de France ──
 $places = 0;
 if ($geonamesZip !== '' && is_file($geonamesZip)) {
-    $features = ['PPL' => 1, 'PPLA' => 1, 'PPLA2' => 1, 'PPLA3' => 1, 'PPLA4' => 1, 'PPLA5' => 1, 'PPLC' => 1, 'PPLX' => 1];
+    // Tous les lieux habités (classe P), y compris historiques, abandonnés ou détruits (PPLH, PPLQ, PPLW) : utiles
+    // en généalogie. Les communes (ADM4) sans aucun lieu habité (villages détruits de Verdun…) sont ajoutées ensuite.
     $norm = static function (string $v): string {
         $v = mb_strtolower(trim($v));
         $v = strtr($v, ['à'=>'a','â'=>'a','ä'=>'a','é'=>'e','è'=>'e','ê'=>'e','ë'=>'e','î'=>'i','ï'=>'i','ô'=>'o','ö'=>'o','ù'=>'u','û'=>'u','ü'=>'u','ç'=>'c','œ'=>'oe','æ'=>'ae','ÿ'=>'y']);
@@ -86,6 +87,7 @@ if ($geonamesZip !== '' && is_file($geonamesZip)) {
     };
     $read = static function () use ($geonamesZip) { $h = fopen('zip://' . $geonamesZip . '#FR.txt', 'r'); if (!$h) { throw new RuntimeException('FR.txt introuvable dans ' . $geonamesZip); } return $h; };
     $maps = ['admin1' => [], 'admin2' => [], 'admin4' => []];
+    $communes = []; $officialNames = [];
     $h = $read();
     while (($line = fgets($h)) !== false) {
         $r = explode("\t", rtrim($line, "\r\n"));
@@ -93,7 +95,7 @@ if ($geonamesZip !== '' && is_file($geonamesZip)) {
         [$feature, $a1, $a2, $a3, $a4] = [$r[7] ?? '', $r[10] ?? '', $r[11] ?? '', $r[12] ?? '', $r[13] ?? ''];
         if ($feature === 'ADM1') { $maps['admin1'][$a1] = $r[1]; }
         elseif ($feature === 'ADM2') { $maps['admin2']["$a1.$a2"] = preg_replace('/^Département du? /u', '', $r[1]) ?: $r[1]; }
-        elseif ($feature === 'ADM4') { $maps['admin4']["$a1.$a2.$a3.$a4"] = $r[1]; }
+        elseif ($feature === 'ADM4') { $maps['admin4']["$a1.$a2.$a3.$a4"] = $r[1]; $communes["$a1.$a2.$a3.$a4"] = $r; $officialNames[$a4] = $r[1]; }
     }
     fclose($h);
     $insertPlace = $db->prepare('INSERT OR IGNORE INTO geo_places VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
@@ -101,17 +103,39 @@ if ($geonamesZip !== '' && is_file($geonamesZip)) {
     $h = $read();
     while (($line = fgets($h)) !== false) {
         $r = explode("\t", rtrim($line, "\r\n"));
-        if (($r[6] ?? '') !== 'P' || !isset($features[$r[7] ?? ''])) { continue; }
+        if (($r[6] ?? '') !== 'P') { continue; }
         [$raw, $a1, $a2, $a3, $a4] = [$r[1] ?? '', $r[10] ?? '', $r[11] ?? '', $r[12] ?? '', $r[13] ?? ''];
         if ((int) $r[0] === 0 || $raw === '') { continue; }
         // Un lieu-dit prend le nom de sa commune, son propre nom va en « subdivision » (comme l'import d'origine)
         $commune = $maps['admin4']["$a1.$a2.$a3.$a4"] ?? '';
+        // Commune fusionnée : nouvelle commune en nom, ancienne commune (ou lieu-dit) en sous-nom — même règle que la
+        // version web (scripts/import_geonames_fr.php), sans son défaut d'accents (iconv).
         [$name, $sub] = ($commune !== '' && $norm($commune) !== $norm($raw)) ? [$commune, $raw] : [$raw, ''];
         $insertPlace->execute([(int) $r[0], $name, $sub, $maps['admin2']["$a1.$a2"] ?? '', $maps['admin1'][$a1] ?? '', 'France',
             $r[3] ?? '', (float) $r[4], (float) $r[5], $a1, $a2, $a3, $a4, $r[7], (int) ($r[14] ?? 0)]);
         $places++;
+        unset($communes["$a1.$a2.$a3.$a4"]);
     }
     fclose($h);
+    // Communes sans lieu habité dans GeoNames : la commune elle-même devient le lieu
+    $added = 0;
+    foreach ($communes as $code => $r) {
+        [$a1, $a2] = explode('.', $code);
+        $insertPlace->execute([(int) $r[0], $r[1], '', $maps['admin2']["$a1.$a2"] ?? '', $maps['admin1'][$a1] ?? '', 'France',
+            $r[3] ?? '', (float) $r[4], (float) $r[5], ...explode('.', $code), 'ADM4', (int) ($r[14] ?? 0)]);
+        $added++;
+    }
+    $places += $added;
+    echo "Communes ajoutées faute de lieu habité : {$added}\n";
+    // Le fichier des contours a perdu l'article de ~2 500 communes (« Réole » pour « La Réole ») : on reprend le nom
+    // officiel de GeoNames (code INSEE = admin4) seulement quand il ne diffère que par l'article. Les communes
+    // fusionnées depuis gardent leur ancien nom (plus utile en généalogie).
+    $fixName = $db->prepare('UPDATE commune_contours SET name=? WHERE insee_code=? AND name=?');
+    $fixed = 0;
+    foreach ($officialNames as $insee => $official) {
+        if (preg_match("/^(?:Le |La |Les |L')(.+)$/u", $official, $m)) { $fixName->execute([$official, $insee, $m[1]]); $fixed += $fixName->rowCount(); }
+    }
+    echo "Articles rétablis dans les noms de communes : {$fixed}\n";
     $db->commit();
     $info->execute(['geonames_source', 'GeoNames FR.zip (CC BY 4.0, https://www.geonames.org)']);
     $info->execute(['geonames_sha256', hash_file('sha256', $geonamesZip)]);

@@ -5,7 +5,8 @@
 # Données publiques de référence (communes françaises, scripts/build-reference.php) : livrées avec l'app
 !/data/reference/
 /data/reference/*
-!/data/reference/geo-*.sqlite.gz
+!/data/reference/geo-fr.sqlite.gz
+# geo-world.sqlite.gz (~140 Mo, trop gros pour GitHub) : fabriqué par « npm run fetch:geo »
 # Où qu'ils soient (copies, dossiers décompressés…) : médias, données, sauvegardes, sessions
 **/media/
 **/backups/
@@ -67,7 +68,8 @@
 
 # ─── Fichiers produits ou téléchargés (se recréent automatiquement) ─────────────────────
 /node_modules/
-/vendor/php/
+/vendor/php
+/vendor/geo/
 /dist/
 /build/
 

@@ -118,6 +118,7 @@ try {
     // La structure de la base (tables, colonnes, types d’événements de base) est mise à jour une seule fois
     // par numéro de version dans lib/migrations.php, à l’ouverture de la base (db()).
     if (!$isWrite && $action === 'schema_status') {
+        prepare_world_reference(); // décompression + index des villes du monde, une fois (~20 s au premier lancement)
         json_response(['version' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'expected' => SCHEMA_VERSION]);
     }
     if ($isWrite && $action === 'backup_sqlite') {
@@ -9072,9 +9073,10 @@ function place_suggestions_data(PDO $pdo): never
             $places[]=$w;
             if(count($places)>=14)break;
         }
-        // Classement commun : nom exact, puis nom qui commence par le texte tapé, puis les lieux les plus peuplés
+        // Classement commun : d'abord les lieux de la base et les villes (1 000 habitants ou plus) au nom exact, puis
+        // celles qui commencent par le texte tapé, puis les hameaux du monde ; à égalité, les plus peuplés.
         $key=world_search_key($q);
-        $rank=static function(array $p)use($key):array{$n=world_search_key((string)($p['name']??''));return [$n===$key?0:1,str_starts_with($n,$key)?0:1,-(int)($p['population']??0)];};
+        $rank=static function(array $p)use($key):array{$n=world_search_key((string)($p['name']??''));$main=empty($p['world'])||(int)($p['population']??0)>=1000;$exact=$n===$key;$prefix=str_starts_with($n,$key);return [$exact&&$main?0:($prefix&&$main?1:($exact?2:3)),-(int)($p['population']??0)];};
         usort($places,static fn($a,$b)=>$rank($a)<=>$rank($b));
     }
     json_response(['places'=>$places]);
