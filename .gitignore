@@ -12,6 +12,7 @@
 /Carnet/
 /Carnet */
 /apres/
+/test-import/
 # Images, documents, sons et vidéos : l'application n'en contient aucun ; tout fichier de ce type est un média personnel
 *.jpg
 *.jpeg
