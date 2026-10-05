@@ -34,6 +34,7 @@
 *.webm
 # Seule exception : l'icône de l'application (dessinée pour LCNDA, aucune donnée personnelle)
 !/electron/build/icon.png
+# Fichier GEDCOM d'essai des tests (généalogie fictive, aucune donnée personnelle)
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
@@ -71,3 +72,6 @@
 .DS_Store
 Thumbs.db
 *.log
+
+# Exceptions : fichiers d'essai des tests (fictifs)
+!/tests/fixtures/*.ged

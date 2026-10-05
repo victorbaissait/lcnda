@@ -1,0 +1,86 @@
+0 HEAD
+1 SOUR Heredis MAC2027
+2 VERS 2027
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 PLAC
+2 FORM Town, Area code, County, Region, Country, Subdivision
+0 @I1@ INDI
+1 NAME Jean Pierre/DUPONT/
+2 GIVN Jean Pierre
+2 SURN DUPONT
+2 NICK JeanJean
+1 NAME Jean Pierre/DURAND/
+2 TYPE married
+1 SEX M
+1 OCCU Professeur
+1 _FIL ADOPTED_CHILD
+1 BIRT
+2 DATE 28 JUN 1814
+2 PLAC Arnac-la-Poste,87160,Haute-Vienne,Nouvelle-Aquitaine,FRANCE,
+3 MAP
+4 LATI N46.265970
+4 LONG E1.373750
+2 CAUS accouchement à domicile
+2 NOTE {\rtf1\ansi\ansicpg1252\cocoartf2907
+3 CONT \cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+3 CONT {\colortbl;\red255\green255\blue255;}
+3 CONT \pard\tx560\pardirnatural\partightenfactor0
+3 CONT
+3 CONT \f0\fs20 \cf0 note de naissance}
+2 SOUR @S1@
+3 PAGE folio 12
+3 QUAY 3
+1 EVEN
+2 TYPE Reconnaissance
+2 DATE ABT 1820
+1 DEAT
+2 DATE BET 1880 AND 1885
+1 NOTE {\rtf1\ansi\ansicpg1252\cocoartf2907
+2 CONT {\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+2 CONT \pard\f0\fs20 \cf0 ceci est une note avec un accent : \'e9t\'e9}
+1 SOUR @S1@
+2 PAGE acte n° 4
+1 OBJE @O1@
+1 FAMC @F1@
+0 @I2@ INDI
+1 NAME Louis/DUPONT/
+1 SEX M
+1 NOTE Mot1 suivi d’un espace, Mot2 suivi d’un espace, Mot3 suivi d’un espace, Mot4 suivi d’un espace, Mot5 suivi d’un espace, Mot6 suivi d’un espace, Mot7 suivi d’un espace, Mot8 suivi d’un espace, Mot9 suivi d’un espace, Mot10 suivi d’un espace, Mot11 suivi d’un espace, Mot12 suivi d’un espace, Mot13 suivi d’un espace, Mot14 suivi d’un espace, Mot15 suivi d’un espace, Mot16 suivi d’un espace, Mot17 suivi d’un espace, Mot18 suivi d’un espace, Mot19 suivi d’un espace, Mot20 suivi d’un espace, Mot21 suivi d’un espace, Mot22 suivi d’un espace, Mot23 suivi d’un espace, Mot24 suivi d’un espace, Mot25 suivi d’un espace, Mot26 suivi d’un espace, Mot27 suivi d’un espace, Mot28 suivi d’un espace, Mot29 suivi d’un espace, Mot30 suivi d’un espace,
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Marie Louise/LEROY/
+2 GIVN Marie Louise
+2 _MIDN Louise
+2 SURN LEROY
+1 SEX F
+1 BIRT
+2 DATE 1790
+2 PLAC Ulm, , Regierungsbezirk Tübingen, Baden-Württemberg, Allemagne,
+1 NOTE @N1@
+1 FAMS @F1@
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
+1 CHIL @I1@
+1 MARR
+2 DATE 12 FEB 1810
+2 PLAC Limoges,87000,Haute-Vienne,Nouvelle-Aquitaine,FRANCE,
+1 EVEN
+2 TYPE Mariage religieux
+2 DATE 13 FEB 1810
+0 @S1@ SOUR
+1 TITL Registres paroissiaux d’Arnac
+1 AUTH Curé d’Arnac
+1 REPO @R1@
+0 @R1@ REPO
+1 NAME AD de la Haute-Vienne
+0 @O1@ OBJE
+1 FILE __PHOTO__
+2 FORM png
+1 TITL Portrait de Jean
+0 @N1@ NOTE Ligne 1 de la note
+1 CONT Ligne 2 de la note
+0 TRLR

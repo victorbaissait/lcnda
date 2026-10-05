@@ -67,10 +67,11 @@ jobs:
           }
           Write-Host "Signé par : $($sig.SignerCertificate.Subject)"
 
-      - name: Tests (serveur PHP, sécurité, relais, migrations)
+      - name: Tests (serveur PHP, sécurité, relais, migrations, GEDCOM)
         run: |
           npm run test:php
           npm run test:migrations
+          npm run test:gedcom
 
       - name: Fabrication des installateurs
         run: npx electron-builder ${{ matrix.dist }} --publish never
