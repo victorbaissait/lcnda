@@ -58,6 +58,7 @@
           "assets/**/*",
           "config/**/*",
           "data/schema.sql",
+          "data/reference/geo-*.sqlite.gz",
           "!**/.DS_Store"
         ]
       },

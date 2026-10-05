@@ -1,4 +1,6 @@
 'use strict';
+// Les communes livrées avec l'app (lib/reference.php) ne sont pas chargées ici : tests plus rapides.
+process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
  * Test automatique du pilotage de PHP, sans ouvrir de fenêtre :   npm run test:php
  * Utilise des dossiers temporaires : ne touche à aucune de tes données.

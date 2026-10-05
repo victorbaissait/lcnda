@@ -1,6 +1,39 @@
 (() => {
     'use strict';
 
+    // ── Réglages de l'interface rangés aussi dans la base (structure n°4, lib/settings.php) ──
+    // Les réglages restent lus dans le localStorage (rapide, comme avant) ; la base en garde une copie pour qu'ils
+    // suivent la sauvegarde complète et un autre ordinateur. Au démarrage : la base gagne pour les clés qu'elle
+    // connaît ; les clés seulement présentes ici (réglages d'avant la mise à jour) y sont envoyées. Ensuite, chaque
+    // setItem / removeItem d'une clé « genealogie-* » est renvoyé à la base (groupé, ~1 s plus tard).
+    (function syncSettingsWithDatabase(){
+        const fromBase=window.LCNDA_SETTINGS;
+        if(!window.GENEALOGY_READY||!fromBase||typeof fromBase!=='object')return;
+        let store;try{store=window.localStorage;store.length;}catch(_){return;}
+        const LOCAL_ONLY=new Set(['genealogie-auto-backup-lock','genealogie-baissait-ui-v2','genealogie-last-route']);
+        const synced=key=>typeof key==='string'&&/^genealogie-[a-z0-9-]{1,80}$/.test(key)&&!LOCAL_ONLY.has(key);
+        const proto=Object.getPrototypeOf(store);
+        const originalSet=proto.setItem,originalRemove=proto.removeItem;
+        const pending={set:{},remove:new Set()};let timer=null;
+        const flush=(keepalive=false)=>{
+            clearTimeout(timer);timer=null;
+            const set=pending.set,remove=[...pending.remove];
+            if(!Object.keys(set).length&&!remove.length)return;
+            pending.set={};pending.remove.clear();
+            const csrf=window.INSTALL_CSRF||'';
+            fetch('api.php?action=save_settings',{method:'POST',keepalive,headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({set,remove,csrf})})
+                .catch(()=>{Object.assign(pending.set,set);remove.forEach(k=>pending.remove.add(k));});
+        };
+        const schedule=()=>{if(!timer)timer=setTimeout(()=>flush(false),1000);};
+        const base=Array.isArray(fromBase)?{}:fromBase;
+        for(const [key,value] of Object.entries(base)){if(synced(key)&&typeof value==='string'){try{originalSet.call(store,key,value);}catch(_){}}}
+        for(let i=0;i<store.length;i++){const key=store.key(i);if(synced(key)&&!(key in base)){pending.set[key]=store.getItem(key);}}
+        if(Object.keys(pending.set).length)schedule();
+        proto.setItem=function(key,value){originalSet.call(this,key,value);if(this===store&&synced(String(key))){pending.remove.delete(String(key));pending.set[String(key)]=String(value);schedule();}};
+        proto.removeItem=function(key){originalRemove.call(this,key);if(this===store&&synced(String(key))){delete pending.set[String(key)];pending.remove.add(String(key));schedule();}};
+        window.addEventListener('pagehide',()=>flush(true));
+    })();
+
     const $ = (selector, root = document) => root.querySelector(selector);
     const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
     const escapeHtml = (value = '') => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));

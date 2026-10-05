@@ -126,6 +126,9 @@ try {
     if ($isWrite && $action === 'clone_database') {
         clone_database($pdo, $payload);
     }
+    if ($isWrite && $action === 'save_settings') {
+        save_app_settings($pdo, $payload);
+    }
     if ($isWrite && $action === 'delete_empty_families') {
         delete_empty_families($pdo);
     }
@@ -1133,7 +1136,8 @@ function dashboard_data(PDO $pdo): never
         'persons' => $count('persons'),
         'events' => $count('events'),
         'media' => $count('media'),
-        'places' => $count('places'),
+        // Lieux de la généalogie (cités par un événement ou un recensement), pas les ~80 000 communes du répertoire.
+        'places' => (int)$pdo->query('SELECT count(*) FROM (SELECT place_id FROM events WHERE place_id IS NOT NULL UNION SELECT place_id FROM census_records WHERE place_id IS NOT NULL)')->fetchColumn(),
         'sources' => $count('sources'),
         'labels' => $count('labels'),
         'investigations' => $count('investigations'),

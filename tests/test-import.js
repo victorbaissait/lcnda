@@ -1,4 +1,6 @@
 'use strict';
+// Les communes livrées avec l'app (lib/reference.php) ne sont pas chargées ici : tests plus rapides.
+process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
  * Test de l'ouverture d'une base et de la sauvegarde complète :   npm run test:import
  * Passe par la vraie application (PHP + envoi du fichier comme l'interface), sur des dossiers temporaires.
@@ -8,7 +10,8 @@
  *  3. une base déjà remplie n'est jamais remplacée ; un fichier qui n'est pas une base est refusé ;
  *  4. import d'un fichier lu sur le disque (application de bureau) : refusé sans le secret du processus principal ;
  *  5. fichier Hérédis natif (dossier .hmw fabriqué ici, fictif) : personnes, union, événements, lieu, témoin,
- *     source, photo, étiquette, tâche ; l'original n'est pas modifié.
+ *     source, photo, étiquette, tâche ; l'original n'est pas modifié ;
+ *  6. une base neuve reçoit les communes françaises livrées avec l'app (contours, voisinages, GeoNames).
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -202,8 +205,27 @@ async function download(s, base, action) {
     assert.ok(before.equals(fs.readFileSync(file)) && fs.readdirSync(hmw).sort().join(',') === 'Essai.heredis,Media', 'original non modifié');
   });
 
+  await step('base neuve : communes françaises livrées avec l’application', async () => {
+    process.env.GENEALOGY_SKIP_REFERENCE = '0';
+    const dir = path.join(tmp, 'F');
+    try {
+      await withServer(dir, async (s, base) => {
+        const r = await upload(s, base, fs.readFileSync(ged), 'complet.ged');
+        assert.equal(r.status, 200, JSON.stringify(r.data));
+        const dash = await (await fetch(base + '/api.php?action=dashboard', { headers: { 'x-carnet-secret': s.secret, cookie: r.cookie } })).json();
+        assert.ok(dash.stats.places < 10, 'le tableau de bord ne compte que les lieux de la généalogie, pas le répertoire');
+      });
+    } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; }
+    const db = path.join(dir, 'data', 'genealogy.sqlite');
+    assert.ok(count(db, 'commune_contours') > 34000, 'contours des communes');
+    assert.ok(count(db, 'commune_neighbors') > 200000, 'communes voisines');
+    const arnac = rows(db, "SELECT count(*) n FROM places WHERE geoname_id IS NOT NULL AND name='Arnac-la-Poste'")[0].n;
+    assert.ok(arnac >= 1, 'communes GeoNames');
+    assert.equal(count(db, 'persons'), 3, 'la généalogie importée est intacte');
+  });
+
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`\n${passed}/5 vérifications réussies.`);
+  console.log(`\n${passed}/6 vérifications réussies.`);
 })().catch((e) => {
   if (!e || !e.reported) console.error(e);
   process.exitCode = 1;

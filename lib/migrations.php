@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 3;
+const SCHEMA_VERSION = 4;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -24,6 +24,7 @@ function migration_steps(): array
         1 => 'schema_v1',
         2 => 'schema_v2',
         3 => 'schema_v3',
+        4 => 'schema_v4',
     ];
 }
 
@@ -254,6 +255,19 @@ function schema_v3(PDO $pdo): void
         $known[$scope . '|label|' . ascii_fold(mb_strtolower($label))] = true;
         $known['slug|' . $finalSlug] = true;
     }
+}
+
+/**
+ * Structure n°4 (2026-10-05) : réglages de l'interface (menus, apparence, tableau de bord, archives enregistrées,
+ * liens externes… : clés « genealogie-* » du navigateur) rangés aussi dans la base, pour qu'ils suivent la
+ * sauvegarde complète et un autre ordinateur. Voir save_settings (api.php) et le début d'assets/js/app.js.
+ */
+function schema_v4(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS app_settings (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

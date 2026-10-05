@@ -2,6 +2,10 @@
 # La généalogie de Victor (bases, médias, sauvegardes, exports) reste sur son ordinateur.
 /data/*
 !/data/schema.sql
+# Données publiques de référence (communes françaises, scripts/build-reference.php) : livrées avec l'app
+!/data/reference/
+/data/reference/*
+!/data/reference/geo-*.sqlite.gz
 # Où qu'ils soient (copies, dossiers décompressés…) : médias, données, sauvegardes, sessions
 **/media/
 **/backups/

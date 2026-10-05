@@ -48,6 +48,24 @@ function walk(dir, visit) {
   }
 }
 
+/**
+ * data/reference/ : seulement les données publiques de référence (communes françaises), fabriquées par
+ * scripts/build-reference.php. On vérifie qu'aucune table de généalogie ne s'y trouve.
+ */
+function checkReference(dir, problems) {
+  const zlib = require('node:zlib');
+  for (const name of fs.readdirSync(dir)) {
+    const full = path.join(dir, name);
+    if (!/^geo-[a-z]+\.sqlite\.gz$/.test(name)) { problems.push('fichier inattendu dans data/reference/ : ' + full); continue; }
+    const raw = zlib.gunzipSync(fs.readFileSync(full));
+    const text = raw.toString('latin1');
+    if (!text.startsWith('SQLite format 3') || !text.includes('CREATE TABLE reference_info')) problems.push('référence illisible : ' + full);
+    for (const table of ['persons', 'events', 'families', 'media', 'notes', 'sources']) {
+      if (new RegExp('CREATE TABLE "?' + table + '"?\\s*\\(').test(text)) problems.push(`table « ${table} » dans la référence : ` + full);
+    }
+  }
+}
+
 function verifyPackage(context) {
   const problems = [];
   walk(context.appOutDir, (full, entry) => {
@@ -62,7 +80,11 @@ function verifyPackage(context) {
     });
     const dataDir = path.join(phpApp, 'data');
     const dataFiles = fs.existsSync(dataDir) ? fs.readdirSync(dataDir) : [];
-    for (const name of dataFiles) if (name !== 'schema.sql') problems.push('fichier dans data/ : ' + path.join(dataDir, name));
+    for (const name of dataFiles) {
+      if (name === 'schema.sql') continue;
+      if (name === 'reference') { checkReference(path.join(dataDir, name), problems); continue; }
+      problems.push('fichier dans data/ : ' + path.join(dataDir, name));
+    }
   }
   if (problems.length) {
     throw new Error('GARDE-FOU : l’application contient des données personnelles, fabrication arrêtée.\n  '

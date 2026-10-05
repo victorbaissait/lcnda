@@ -4,6 +4,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/paths.php';   // APP_ROOT, DATA_DIR, MEDIA_DIR
 require_once __DIR__ . '/text.php';    // ascii_fold()
 require_once __DIR__ . '/migrations.php'; // migrate_database(), SCHEMA_VERSION
+require_once __DIR__ . '/reference.php';
+require_once __DIR__ . '/settings.php';   // réglages de l'interface rangés dans la base  // ensure_reference_data() : communes françaises livrées avec l'app
 
 // Aucun avertissement PHP ne doit s'afficher dans une réponse : il s'ajouterait au JSON et l'interface
 // afficherait « réponse illisible du serveur ». Les erreurs restent journalisées (visibles dans le Terminal).
@@ -142,6 +144,8 @@ function db(): PDO
     } catch (Throwable $_) {
     }
     migrate_database($pdo, DB_PATH);
+    // Communes françaises (contours, voisinages, GeoNames) : chargées une fois si la base ne les a pas.
+    ensure_reference_data($pdo, DB_PATH);
     return $pdo;
 }
 

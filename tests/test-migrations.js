@@ -1,4 +1,6 @@
 'use strict';
+// Les communes livrées avec l'app (lib/reference.php) ne sont pas chargées ici : tests plus rapides.
+process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
  * Test des migrations de la base (lib/migrations.php) :   npm run test:migrations
  * Bases temporaires créées pour l'occasion : ne touche à aucune de tes données.

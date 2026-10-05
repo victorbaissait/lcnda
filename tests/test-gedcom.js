@@ -1,4 +1,6 @@
 'use strict';
+// Les communes livrées avec l'app (lib/reference.php) ne sont pas chargées ici : tests plus rapides.
+process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
 /**
  * Test de l'import / export GEDCOM :   npm run test:gedcom
  * Passe par la vraie application (PHP + envoi du fichier comme l'interface), sur des dossiers temporaires.
