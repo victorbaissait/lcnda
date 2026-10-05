@@ -11,7 +11,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  4. import d'un fichier lu sur le disque (application de bureau) : refusé sans le secret du processus principal ;
  *  5. fichier Hérédis natif (dossier .hmw fabriqué ici, fictif) : personnes, union, événements, lieu, témoin,
  *     source, photo, étiquette, tâche ; l'original n'est pas modifié ;
- *  6. une base neuve reçoit les communes françaises livrées avec l'app (contours, voisinages, GeoNames).
+ *  6. une base neuve reçoit les communes françaises livrées avec l'app (contours, voisinages, GeoNames) ;
+ *  7. n'importe quelle ville du monde : suggérée (avec coordonnées) ou tapée librement, même inconnue.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -224,8 +225,33 @@ async function download(s, base, action) {
     assert.equal(count(db, 'persons'), 3, 'la généalogie importée est intacte');
   });
 
+  await step('villes du monde : suggestion, saisie à la main, village inconnu', async () => {
+    const dir = path.join(tmp, 'G');
+    await withServer(dir, async (s, base) => {
+      await upload(s, base, fs.readFileSync(ged), 'complet.ged');
+      const h = { 'x-carnet-secret': s.secret };
+      const boot = await fetch(base + '/api.php?action=bootstrap', { headers: h });
+      const cookie = (boot.headers.get('set-cookie') || '').split(';')[0];
+      const b = await boot.json();
+      const sug = async (q) => (await (await fetch(`${base}/api.php?action=place_suggestions&world=1&country=&q=${encodeURIComponent(q)}`, { headers: { ...h, cookie } })).json()).places;
+      const montreal = (await sug('Montréal'))[0];
+      assert.deepEqual([montreal.name, montreal.country, String(montreal.id).startsWith('w')], ['Montréal', 'Canada', true], 'Montréal (Canada) en tête');
+      const birth = b.eventTypes.find((t) => t.gedcom_tag === 'BIRT').id;
+      const add = async (body) => {
+        const r = await fetch(base + '/api.php?action=add_event', { method: 'POST', headers: { ...h, cookie, 'content-type': 'application/json', 'X-CSRF-Token': b.csrf }, body: JSON.stringify({ ...body, person_id: b.startPersonId, event_type_id: birth, csrf: b.csrf }) });
+        assert.equal(r.status, 200, await r.text());
+      };
+      await add({ date_text: '1900', place_id: montreal.id, place_name: montreal.label, country: 'Canada' });
+      await add({ date_text: '1901', place_id: '', place_name: 'Wabag', country: 'Papouasie-Nouvelle-Guinée' });
+      await add({ date_text: '1902', place_id: '', place_name: 'Yibab', country: 'Papouasie-Nouvelle-Guinée' });
+    });
+    const got = rows(path.join(dir, 'data', 'genealogy.sqlite'), "SELECT e.date_text d, p.name, p.country, p.latitude IS NOT NULL gps FROM events e JOIN places p ON p.id=e.place_id WHERE e.date_text IN ('1900','1901','1902') ORDER BY e.date_text");
+    assert.deepEqual(got.map((r) => [r.d, r.name, r.country, r.gps]), [
+      ['1900', 'Montréal', 'Canada', 1], ['1901', 'Wabag', 'Papouasie-Nouvelle-Guinée', 1], ['1902', 'Yibab', 'Papouasie-Nouvelle-Guinée', 0]]);
+  });
+
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`\n${passed}/6 vérifications réussies.`);
+  console.log(`\n${passed}/7 vérifications réussies.`);
 })().catch((e) => {
   if (!e || !e.reported) console.error(e);
   process.exitCode = 1;

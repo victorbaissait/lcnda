@@ -8984,12 +8984,17 @@ function find_or_create_place(PDO $pdo,string $placeName,string $country='France
     $find->execute([$placeName,$country]);
     $placeId=$find->fetchColumn();
     if($placeId)return (int)$placeId;
+    // Ville hors de France tapée à la main : si le répertoire mondial la connaît (même nom, même pays), on reprend
+    // ses coordonnées et sa région ; sinon le lieu est créé tel quel (n'importe quel nom reste accepté).
+    if($country!==''&&mb_strtolower($country)!=='france'&&($world=world_place_exact($placeName,$country)))return place_from_world($pdo,$world);
     $pdo->prepare('INSERT INTO places(name,country) VALUES(?,?)')->execute([$placeName,$country]);
     return (int)$pdo->lastInsertId();
 }
 
 function place_id_from_data(PDO $pdo,array $data): ?int
 {
+    // Suggestion venant du répertoire mondial (« w » + identifiant GeoNames) : le lieu entre alors dans la base.
+    if(preg_match('/^w(\d+)$/',(string)($data['place_id']??''),$m)&&($world=world_place((int)$m[1])))return place_from_world($pdo,$world);
     $placeId=safe_int($data['place_id']??0);
     if($placeId){
         $stmt=$pdo->prepare('SELECT id FROM places WHERE id=?');
@@ -9052,6 +9057,26 @@ function place_suggestions_data(PDO $pdo): never
     $places=$stmt->fetchAll();
     foreach($places as &$place)$place['label']=place_label($place);
     unset($place);
+    // Formulaires de saisie (world=1) : compléter avec les villes du monde absentes de la base
+    // (4 places au moins leur sont gardées : sinon « Montréal » ne montrerait que les communes françaises)
+    if(($_GET['world']??'')==='1'){
+        $places=array_slice($places,0,10);
+        $known=[];
+        foreach($pdo->query('SELECT geoname_id FROM places WHERE geoname_id IS NOT NULL') as $row)$known[(int)$row['geoname_id']]=true;
+        $same=static fn(array $p):string=>world_search_key((string)($p['name']??'')).'|'.world_search_key((string)($p['country']??''));
+        $listed=array_flip(array_map($same,$places));
+        foreach(world_place_suggestions($q,$country,40) as $w){
+            if(isset($known[(int)$w['geoname_id']])||isset($listed[$same($w)])||mb_strtolower((string)$w['country'])==='france')continue;
+            $w=['id'=>'w'.$w['geoname_id'],'name'=>$w['name'],'subdivision'=>'','county'=>'','state'=>$w['state'],'country'=>$w['country'],'latitude'=>$w['latitude'],'longitude'=>$w['longitude'],'population'=>$w['population'],'world'=>true];
+            $w['label']=place_label($w);
+            $places[]=$w;
+            if(count($places)>=14)break;
+        }
+        // Classement commun : nom exact, puis nom qui commence par le texte tapé, puis les lieux les plus peuplés
+        $key=world_search_key($q);
+        $rank=static function(array $p)use($key):array{$n=world_search_key((string)($p['name']??''));return [$n===$key?0:1,str_starts_with($n,$key)?0:1,-(int)($p['population']??0)];};
+        usort($places,static fn($a,$b)=>$rank($a)<=>$rank($b));
+    }
     json_response(['places'=>$places]);
 }
 
