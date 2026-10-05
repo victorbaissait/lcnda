@@ -682,7 +682,7 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $description = trim(implode("\n\n", array_map($noteText, gedimport_children($obje, 'NOTE'))));
         $date = ($d = gedimport_child($obje, 'DATE')) ? gedcom_date_to_text($d->value) : '';
         $ext = strtolower(pathinfo($stored, PATHINFO_EXTENSION));
-        $type = match (true) { in_array($ext, ['pdf'], true) => 'document', in_array($ext, ['mp3', 'm4a', 'wav', 'aif', 'aiff', 'aifc', 'ogg'], true) => 'audio', in_array($ext, ['mp4', 'mov', 'webm'], true) => 'video', default => 'image' };
+        $type = match (true) { in_array($ext, ['pdf'], true) => 'pdf', in_array($ext, ['mp3', 'm4a', 'wav', 'aif', 'aiff', 'aifc', 'ogg'], true) => 'audio', in_array($ext, ['mp4', 'mov', 'webm'], true) => 'video', default => 'image' };
         $insertMedia->execute([$title, $description, $type, $stored, '', $date]);
         $id = (int) $pdo->lastInsertId();
         $stats['media']++;

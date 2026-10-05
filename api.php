@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/lib/bootstrap.php';
 require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
+require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .heredis)
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
@@ -125,6 +126,9 @@ try {
     if ($isWrite && $action === 'clone_database') {
         clone_database($pdo, $payload);
     }
+    if ($isWrite && $action === 'delete_empty_families') {
+        delete_empty_families($pdo);
+    }
 
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
@@ -168,6 +172,7 @@ try {
         'media_duplicates' => media_duplicates_data($pdo),
         'deed_preview' => deed_preview($pdo),
         'issues' => issues_data($pdo),
+        'ghost_families' => ghost_families_data($pdo),
         'bulk_preview' => bulk_preview($pdo),
         'lock_candidates' => lock_candidates($pdo),
         'labels' => labels_data($pdo),
@@ -5011,7 +5016,13 @@ function compute_issues(PDO $pdo): array
       LEFT JOIN events cb ON cb.person_id=c.id AND cb.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='BIRT')
       LEFT JOIN events pb ON pb.person_id=p.id AND pb.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='BIRT')
       WHERE cb.year IS NOT NULL AND pb.year IS NOT NULL AND cb.year-pb.year<12 LIMIT 500")->fetchAll();
-    foreach($parentIssues as $r)$issues[]=['key'=>"young-parent:{$r['parent_id']}:{$r['child_id']}",'severity'=>'warning','person_id'=>(int)$r['parent_id'],'title'=>'Âge parental improbable','detail'=>"{$r['parent_name']} aurait ".((int)$r['child_birth']-(int)$r['parent_birth'])." ans à la naissance de {$r['child_name']}."];
+    foreach($parentIssues as $r){
+        $age=(int)$r['child_birth']-(int)$r['parent_birth'];
+        // Même clé qu'avant : une exception déjà mémorisée reste valable.
+        $issues[]=$age<=0
+            ?['key'=>"young-parent:{$r['parent_id']}:{$r['child_id']}",'severity'=>'error','person_id'=>(int)$r['parent_id'],'title'=>'Parent né après son enfant','detail'=>"{$r['parent_name']} (né en {$r['parent_birth']}) est indiqué comme parent de {$r['child_name']} (né en {$r['child_birth']}) : date ou filiation à vérifier."]
+            :['key'=>"young-parent:{$r['parent_id']}:{$r['child_id']}",'severity'=>'warning','person_id'=>(int)$r['parent_id'],'title'=>'Âge parental improbable','detail'=>"{$r['parent_name']} aurait {$age} an".($age>1?'s':'')." à la naissance de {$r['child_name']}."];
+    }
     $afterDeath=$pdo->query("SELECT c.id child_id,trim(c.first_name||' '||c.last_name) child_name,cb.year child_birth,p.id parent_id,trim(p.first_name||' '||p.last_name) parent_name,pd.year parent_death
       FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN persons c ON c.id=fc.child_id
       JOIN persons p ON p.id=f.partner1_id OR p.id=f.partner2_id
@@ -5068,6 +5079,62 @@ function issues_data(PDO $pdo): never
         if($includeDismissed||!$issue['dismissed'])$issues[]=$issue;
     }
     json_response(['issues'=>$issues,'dismissedCount'=>count($dismissed)]);
+}
+
+/**
+ * « Familles fantômes » : familles sans aucun conjoint (souvent laissées par MacFamilyTree ou un import).
+ * Vides = ni enfant, ni événement, ni note, ni média, ni source : sans aucune information, supprimables.
+ * Les autres (mariage daté, enfants…) sont seulement signalées : il manque les conjoints, à compléter à la main.
+ */
+// Fonctions (et non constantes) : api.php répond avant d'avoir lu les constantes déclarées plus bas.
+function ghost_family_where(): string { return "f.partner1_id IS NULL AND f.partner2_id IS NULL"; }
+function empty_family_where(): string { return ghost_family_where() . "
+    AND NOT EXISTS (SELECT 1 FROM family_children c WHERE c.family_id=f.id)
+    AND NOT EXISTS (SELECT 1 FROM events e WHERE e.family_id=f.id)
+    AND NOT EXISTS (SELECT 1 FROM notes n WHERE n.entity_type='family' AND n.entity_id=f.id)
+    AND NOT EXISTS (SELECT 1 FROM media_links m WHERE m.entity_type='family' AND m.entity_id=f.id)
+    AND NOT EXISTS (SELECT 1 FROM source_links s WHERE s.entity_type='family' AND s.entity_id=f.id)"; }
+
+function ghost_families_data(PDO $pdo): never
+{
+    $empty = (int) $pdo->query('SELECT count(*) FROM families f WHERE ' . empty_family_where())->fetchColumn();
+    $rows = $pdo->query("SELECT f.id,
+            (SELECT group_concat(trim(t.label || ' ' || COALESCE(e.date_text,'') || CASE WHEN pl.name IS NOT NULL THEN ' à ' || pl.name ELSE '' END), ' · ')
+               FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.family_id=f.id) AS events,
+            (SELECT group_concat(c.child_id || ':' || trim(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')), '|')
+               FROM family_children c JOIN persons p ON p.id=c.child_id WHERE c.family_id=f.id) AS children,
+            (SELECT count(*) FROM notes n WHERE n.entity_type='family' AND n.entity_id=f.id) AS notes
+        FROM families f WHERE " . ghost_family_where() . " AND f.id NOT IN (SELECT f.id FROM families f WHERE " . empty_family_where() . ")
+        ORDER BY f.id LIMIT 500")->fetchAll();
+    $total = (int) $pdo->query('SELECT count(*) FROM families f WHERE ' . ghost_family_where())->fetchColumn();
+    foreach ($rows as &$r) {
+        $children = [];
+        foreach (array_filter(explode('|', (string) $r['children'])) as $c) {
+            [$id, $name] = array_pad(explode(':', $c, 2), 2, '');
+            $children[] = ['id' => (int) $id, 'name' => $name !== '' ? $name : 'Sans nom'];
+        }
+        $r = ['id' => (int) $r['id'], 'events' => (string) $r['events'], 'children' => $children, 'notes' => (int) $r['notes']];
+    }
+    unset($r);
+    json_response(['total' => $total, 'empty' => $empty, 'with_content' => $rows, 'with_content_count' => $total - $empty]);
+}
+
+function delete_empty_families(PDO $pdo): never
+{
+    $count = (int) $pdo->query('SELECT count(*) FROM families f WHERE ' . empty_family_where())->fetchColumn();
+    if ($count === 0) { json_response(['ok' => true, 'deleted' => 0, 'backup' => null]); }
+    // Copie de sécurité d'abord (jamais supprimée par la rotation des sauvegardes)
+    $dir = DATA_DIR . '/backups';
+    if (!is_dir($dir) && !mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('Impossible de créer le dossier de sauvegarde.'); }
+    $backup = 'genealogie-backup-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '-avant-nettoyage.db';
+    $pdo->exec('VACUUM main INTO ' . $pdo->quote($dir . '/' . $backup));
+    $pdo->beginTransaction();
+    $ids = $pdo->query('SELECT f.id FROM families f WHERE ' . empty_family_where())->fetchAll(PDO::FETCH_COLUMN);
+    $delete = $pdo->prepare('DELETE FROM families WHERE id=?');
+    foreach ($ids as $id) { $delete->execute([$id]); }
+    log_change($pdo, 'family', 0, 'delete', 'Nettoyage : ' . count($ids) . ' famille(s) vide(s) supprimée(s)', ['family_ids' => array_map('intval', $ids)], ['backup' => $backup]);
+    $pdo->commit();
+    json_response(['ok' => true, 'deleted' => count($ids), 'backup' => $backup]);
 }
 
 function changes_data(PDO $pdo): never
@@ -5965,8 +6032,8 @@ function backup_sqlite(PDO $pdo, array $data): never
 
     $files = backup_files($dir);
     $deleted = [];
-    // Les copies faites avant une mise à jour de structure (« -migration- ») ne sont jamais supprimées ici.
-    $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-')));
+    // Les copies faites avant une mise à jour de structure (« -migration- ») ou un nettoyage ne sont jamais supprimées ici.
+    $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-') && !str_contains($file['name'], '-avant-nettoyage')));
     foreach (array_slice($rotating, $maxFiles) as $file) {
         if (is_file($file['path']) && @unlink($file['path'])) {
             $deleted[] = $file['name'];
@@ -6355,6 +6422,8 @@ function import_package(PDO $pdo, ?array $file): never
         if (in_array($ext, ['ged', 'gedcom'], true)) {
             // Fichier lu sur place : les médias cités par un chemin relatif sont cherchés à côté du .ged.
             $stats = import_gedcom_into_db($pdo, $file['tmp_name'], !empty($file['local']) ? dirname($file['tmp_name']) : null);
+        } elseif (in_array($ext, ['hmw', 'heredis'], true)) {
+            $stats = heredis_import_into_db($pdo, $file['tmp_name']);
         } elseif ($ext === 'mftpkg') {
             $stats = import_mftpkg_into_db($pdo, $file['tmp_name']);
         } elseif (in_array($ext, ['zip', 'gdz'], true)) {
@@ -6616,17 +6685,36 @@ function import_zip_package_into_db(PDO $pdo, string $zipPath): array
     }
     $hasGed = false;
     $hasDatabase = false;
+    $hasHeredis = false;
     for ($i = 0; $i < $za->numFiles; $i++) {
         $name = $za->getNameIndex($i);
         if ($name === false) { continue; }
         $base = basename($name);
         if (preg_match('/\.(ged|gedcom)$/i', $base)) { $hasGed = true; }
         if ($base === 'database') { $hasDatabase = true; }
+        if (preg_match('/\.heredis$/i', $base)) { $hasHeredis = true; }
     }
     $za->close();
+    if ($hasHeredis && !$hasGed) {
+        $tmpDir = sys_get_temp_dir() . '/heredis_' . bin2hex(random_bytes(8));
+        mkdir($tmpDir, 0700, true);
+        try {
+            $za = new ZipArchive();
+            $za->open($zipPath);
+            $za->extractTo($tmpDir);
+            $za->close();
+            $found = null;
+            foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($tmpDir, FilesystemIterator::SKIP_DOTS)) as $f) {
+                if ($f->isFile() && preg_match('/\.heredis$/i', $f->getFilename())) { $found = $f->getPath(); break; }
+            }
+            return heredis_import_into_db($pdo, (string) $found);
+        } finally {
+            mft_delete_directory($tmpDir);
+        }
+    }
     if ($hasGed) { return import_gedzip_into_db($pdo, $zipPath); }
     if ($hasDatabase) { return import_mftpkg_into_db($pdo, $zipPath); }
-    throw new RuntimeException("Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database') trouvés dans le paquet.");
+    throw new RuntimeException("Format d'archive non reconnu : ni fichier GEDCOM (.ged), ni base MacFamilyTree ('database'), ni fichier Hérédis (.heredis) dans le paquet.");
 }
 
 /**

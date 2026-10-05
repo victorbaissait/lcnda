@@ -142,9 +142,10 @@ ipcMain.handle('lcnda:choose-import-file', async (event) => {
   const result = await dialog.showOpenDialog(win, {
     title: 'Importer une généalogie',
     buttonLabel: 'Importer',
-    properties: ['openFile'],
+    // Sur Mac, un fichier Hérédis (.hmw) est un dossier : on autorise aussi le choix d'un dossier.
+    properties: process.platform === 'darwin' ? ['openFile', 'openDirectory'] : ['openFile'],
     filters: [
-      { name: 'Généalogies (GEDCOM, MacFamilyTree, sauvegarde LCNDA)', extensions: ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'] },
+      { name: 'Généalogies (GEDCOM, Hérédis, MacFamilyTree, sauvegarde LCNDA)', extensions: ['ged', 'gedcom', 'hmw', 'heredis', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'] },
       { name: 'Tous les fichiers', extensions: ['*'] },
     ],
   });

@@ -253,10 +253,12 @@ function local_import_file(array $payload): array
     $name = basename($real);
     $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
     if (is_dir($real)) {
-        if ($ext !== 'mftpkg' || !is_file($real . '/database')) {
-            json_response(['error' => 'Ce dossier n’est pas un paquet MacFamilyTree (.mftpkg).'], 422);
+        if (is_heredis_path($real)) {
+            $name = pathinfo($name, PATHINFO_FILENAME) . '.hmw'; // dossier Hérédis, même sans l'extension
+        } elseif ($ext !== 'mftpkg' || !is_file($real . '/database')) {
+            json_response(['error' => 'Ce dossier n’est ni un paquet MacFamilyTree (.mftpkg), ni un fichier Hérédis (.hmw).'], 422);
         }
-    } elseif (!in_array($ext, ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite'], true)) {
+    } elseif (!in_array($ext, ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite', 'heredis'], true)) {
         json_response(['error' => "Format non pris en charge : .{$ext}"], 422);
     }
     return ['name' => $name, 'tmp_name' => $real, 'error' => UPLOAD_ERR_OK, 'size' => is_file($real) ? (int) filesize($real) : 0, 'local' => true];

@@ -6,7 +6,9 @@
  *     installation vide : personnes et photo retrouvées ;
  *  2. la base .db seule s'ouvre aussi (la photo est alors signalée manquante) ;
  *  3. une base déjà remplie n'est jamais remplacée ; un fichier qui n'est pas une base est refusé ;
- *  4. import d'un fichier lu sur le disque (application de bureau) : refusé sans le secret du processus principal.
+ *  4. import d'un fichier lu sur le disque (application de bureau) : refusé sans le secret du processus principal ;
+ *  5. fichier Hérédis natif (dossier .hmw fabriqué ici, fictif) : personnes, union, événements, lieu, témoin,
+ *     source, photo, étiquette, tâche ; l'original n'est pas modifié.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -22,6 +24,52 @@ async function step(name, fn) {
   try { await fn(); passed++; console.log('  ✓ ' + name); }
   catch (e) { console.log('  ✗ ' + name + '\n      ' + (e && e.message ? e.message : e)); process.exitCode = 1; if (e && typeof e === 'object') e.reported = true; throw e; }
 }
+
+function php(code, ...args) {
+  const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code, ...args], { encoding: 'utf8' });
+  if (r.status !== 0) throw new Error((r.stderr || r.stdout).trim());
+  return r.stdout;
+}
+const rows = (dbFile, sql) => JSON.parse(php(`$d=new PDO('sqlite:'.$argv[1]);$d->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);echo json_encode($d->query($argv[2])->fetchAll(),JSON_UNESCAPED_UNICODE);`, dbFile, sql));
+
+/** Petit fichier Hérédis fictif : mêmes tables et colonnes qu'un vrai (Hérédis 2019+), réduites au nécessaire. */
+const HEREDIS_SQL = `
+CREATE TABLE Notes (CodeID integer PRIMARY KEY, Note text DEFAULT '', NoteRTF text DEFAULT '');
+CREATE TABLE Individus (CodeID integer PRIMARY KEY, XrefUnionParents integer, Noms text DEFAULT '', Prenoms text DEFAULT '', Prefixe text DEFAULT '', Suffixe text DEFAULT '', Profession text DEFAULT '', Sexe integer DEFAULT 0, Numero text DEFAULT '', Confidentiel boolean DEFAULT 0, Surnom text DEFAULT '', Titre text DEFAULT '', XrefNote integer, XrefNoteRecherche integer);
+CREATE TABLE Unions (CodeID integer PRIMARY KEY, XrefEpoux integer, XrefEpouse integer, XrefNote integer);
+CREATE TABLE LiensIndividuParents (CodeID integer PRIMARY KEY, XrefIndividu integer, XrefUnionParents integer, TypePere integer DEFAULT 0, TypeMere integer DEFAULT 0);
+CREATE TABLE Lieux (CodeID integer PRIMARY KEY, CodeLieu text DEFAULT '', Ville text DEFAULT '', Departement text DEFAULT '', Region text DEFAULT '', Pays text DEFAULT '', Latitude double DEFAULT 2000000.0, Longitude double DEFAULT 2000000.0, XrefNote integer);
+CREATE TABLE Subdivisions (CodeID integer PRIMARY KEY, Titre text DEFAULT '', Latitude double DEFAULT 2000000.0, Longitude double DEFAULT 2000000.0, XrefLieu integer);
+CREATE TABLE Evenements (CodeID integer PRIMARY KEY, EventType integer DEFAULT 0, XrefLieu integer, XrefSubdivision integer, DateGed text DEFAULT '', Titre text DEFAULT '', Cause text DEFAULT '', XrefNote integer, XrefIndividuProprio integer, XrefUnionProprio integer);
+CREATE TABLE LienIndividuEvenement (CodeID integer PRIMARY KEY, XrefEvenement integer, XrefIndividuOrig integer, TypeLienIndividu integer DEFAULT 0, Commentaire text DEFAULT '', Age text DEFAULT '', Titre text DEFAULT '');
+CREATE TABLE Repositories (CodeID integer PRIMARY KEY, Titre text DEFAULT '');
+CREATE TABLE Sources (CodeID integer PRIMARY KEY, Titre text DEFAULT '', Document text DEFAULT '', Cote text DEFAULT '', Archivage text DEFAULT '', Numero text DEFAULT '', Auteur text DEFAULT '', Url text DEFAULT '', DateGED text DEFAULT '', XrefRepository integer, XrefNote integer, XrefNoteTranscription integer);
+CREATE TABLE LiensSourceEvenement (CodeID integer PRIMARY KEY, XrefSource integer, XrefEvenement integer, Citation text DEFAULT '', XrefNote integer, XrefNoteTranscription integer);
+CREATE TABLE Medias (CodeID integer PRIMARY KEY, FilePath text DEFAULT '', FileName text DEFAULT '', DateGed text DEFAULT '', XrefNote integer);
+CREATE TABLE LiensMediaIndividu (CodeID integer PRIMARY KEY, XrefMedia integer, Ordre integer DEFAULT 0, MediaPrincipal boolean DEFAULT 0, XrefIndividu integer);
+CREATE TABLE Etiquettes (CodeID integer PRIMARY KEY, Titre text DEFAULT '', Description text DEFAULT '', Couleur integer DEFAULT 0);
+CREATE TABLE LiensEtiquetteIndividu (CodeID integer PRIMARY KEY, XrefEtiquette integer, XrefIndividu integer);
+CREATE TABLE Taches (CodeID integer PRIMARY KEY, DateEcheance timestamp DEFAULT 0, Titre text DEFAULT '', Description text DEFAULT '', Priorite integer DEFAULT 0, TacheRealisee boolean DEFAULT 0);
+CREATE TABLE LiensTachesIndis (XrefTache integer, XrefIndividu integer);
+CREATE TABLE NumerosSosa (XrefIndividu integer PRIMARY KEY, XrefDeCujus integer);
+INSERT INTO Notes VALUES (1,'Note de Jean',''),(2,'Né à la maison','');
+INSERT INTO Individus VALUES (1,2,'DUPONT','Jean','','','Professeur',109,'12',0,'JeanJean','',1,NULL),(2,NULL,'DUPONT','Louis','','','',109,'',0,'','',NULL,NULL),(3,NULL,'LEROY','Marie','','','',102,'',0,'','',NULL,NULL),(4,NULL,'MARTIN','Paul','','','',109,'',0,'','',NULL,NULL);
+INSERT INTO Unions VALUES (2,2,3,NULL);
+INSERT INTO LiensIndividuParents VALUES (1,1,2,0,0);
+INSERT INTO Lieux VALUES (1,'87160','Arnac-la-Poste','Haute-Vienne','Nouvelle-Aquitaine','France',46.26597,1.37375,NULL);
+INSERT INTO Subdivisions VALUES (1,'Le Bourg',2000000.0,2000000.0,1);
+INSERT INTO Evenements VALUES (1,4,1,1,'28 JUN 1814','','',2,1,NULL),(2,61,1,NULL,'ABT 1810','','',NULL,NULL,2),(3,12,NULL,NULL,'BET 1880 AND 1885','','vieillesse',NULL,1,NULL),(4,15,NULL,NULL,'1820','Reconnaissance','',NULL,1,NULL),(5,23,NULL,NULL,'1840','Instituteur','',NULL,1,NULL);
+INSERT INTO LienIndividuEvenement VALUES (1,1,4,0,'voisin','40 ans','Témoin');
+INSERT INTO Repositories VALUES (1,'AD de la Haute-Vienne');
+INSERT INTO Sources VALUES (1,'Registre paroissial d’Arnac','Acte de naissance','3 E 12','','','Curé','','',1,NULL,NULL);
+INSERT INTO LiensSourceEvenement VALUES (1,1,1,'folio 12',NULL,NULL);
+INSERT INTO Medias VALUES (1,'/chemin/qui/n-existe/plus/portrait.png','portrait.png','',NULL);
+INSERT INTO LiensMediaIndividu VALUES (1,1,0,1,1);
+INSERT INTO Etiquettes VALUES (1,'Mort pour la France','',-65281);
+INSERT INTO LiensEtiquetteIndividu VALUES (1,1,1);
+INSERT INTO Taches VALUES (1,'2027-03-01 00:00:00','Chercher le mariage','Archives de Limoges',3,0);
+INSERT INTO LiensTachesIndis VALUES (1,1);
+INSERT INTO NumerosSosa VALUES (1,1);`;
 
 function count(dbFile, table) {
   const code = `$d=new PDO('sqlite:'.$argv[1]);echo $d->query('SELECT count(*) FROM '.$argv[2])->fetchColumn();`;
@@ -123,8 +171,39 @@ async function download(s, base, action) {
     assert.ok(fs.existsSync(ged), 'le fichier d’origine est toujours là');
   });
 
+  await step('fichier Hérédis natif (.hmw) : tout est repris, l’original est intact', async () => {
+    const hmw = path.join(tmp, 'Essai.hmw');
+    fs.mkdirSync(path.join(hmw, 'Media', '#1'), { recursive: true });
+    fs.copyFileSync(photo, path.join(hmw, 'Media', '#1', 'portrait.png'));
+    const file = path.join(hmw, 'Essai.heredis');
+    php('$d=new PDO("sqlite:".$argv[1]);$d->exec($argv[2]);', file, HEREDIS_SQL);
+    const before = fs.readFileSync(file);
+    const dir = path.join(tmp, 'E');
+    await withServer(dir, async (s) => {
+      const r = await s.importLocalFile(hmw);
+      assert.equal(r.status, 200, JSON.stringify(r.data));
+      const st = r.data.stats;
+      assert.deepEqual([st.format, st.persons, st.families, st.sources, st.citations, st.media, st.media_missing, st.tasks, st.witnesses], ['heredis', 4, 1, 1, 1, 1, 0, 1, 1]);
+    });
+    const db = path.join(dir, 'data', 'genealogy.sqlite');
+    const ev = rows(db, "SELECT t.label,t.gedcom_tag,e.date_text,e.title,e.description,e.cause,pl.name,pl.subdivision,pl.latitude FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY e.id");
+    assert.deepEqual(ev.map((e) => [e.gedcom_tag || e.label, e.date_text, e.title || e.description || e.cause]), [
+      ['BIRT', '28 juin 1814', 'Né à la maison'], ['MARR', 'vers 1810', ''], ['DEAT', 'entre 1880 et 1885', 'vieillesse'],
+      ['Reconnaissance', '1820', ''], ['OCCU', '1840', 'Instituteur'], ['OCCU', '', 'Professeur']]);
+    assert.deepEqual([ev[0].name, ev[0].subdivision, ev[0].latitude], ['Arnac-la-Poste', 'Le Bourg', 46.26597], 'lieu, subdivision et coordonnées');
+    const jean = rows(db, "SELECT * FROM persons WHERE first_name='Jean'")[0];
+    assert.deepEqual([jean.gender, jean.is_start, jean.reference_number, jean.living_status], ['male', 1, '12', 'deceased']);
+    assert.ok(jean.portrait_media_id, 'photo principale');
+    assert.equal(rows(db, "SELECT count(*) n FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=" + jean.id)[0].n, 1, 'filiation');
+    assert.equal(rows(db, 'SELECT note FROM event_witnesses')[0].note, 'Témoin — âge : 40 ans — voisin');
+    assert.equal(rows(db, 'SELECT agency FROM sources')[0].agency, 'AD de la Haute-Vienne');
+    assert.equal(rows(db, "SELECT l.name FROM label_links k JOIN labels l ON l.id=k.label_id WHERE k.entity_type='person'")[0].name, 'Mort pour la France');
+    assert.deepEqual(Object.values(rows(db, 'SELECT title,reminder_due_at FROM standalone_reminders')[0]), ['Chercher le mariage', '2027-03-01']);
+    assert.ok(before.equals(fs.readFileSync(file)) && fs.readdirSync(hmw).sort().join(',') === 'Essai.heredis,Media', 'original non modifié');
+  });
+
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`\n${passed}/4 vérifications réussies.`);
+  console.log(`\n${passed}/5 vérifications réussies.`);
 })().catch((e) => {
   if (!e || !e.reported) console.error(e);
   process.exitCode = 1;

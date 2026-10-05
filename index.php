@@ -75,10 +75,10 @@ header('Cache-Control: no-store, private');
                 <div class="install-options">
                     <div class="install-card">
                         <h3>Importer un fichier</h3>
-                        <p class="muted">GEDCOM (.ged), MacFamilyTree (.mftpkg ou .zip), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
+                        <p class="muted">GEDCOM (.ged), Hérédis (.hmw ou .heredis), MacFamilyTree (.mftpkg), base LCNDA (.db) ou sauvegarde complète LCNDA (.zip, base + médias). Les fichiers JSON et CSV sont analysés mais pas encore importés.</p>
                         <form id="install-import-form" class="import-form">
                             <label>Fichier
-                                <input type="file" name="file" accept=".ged,.gedcom,.mftpkg,.zip,.gdz,.json,.csv,.db,.sqlite">
+                                <input type="file" name="file" accept=".ged,.gedcom,.heredis,.mftpkg,.zip,.gdz,.json,.csv,.db,.sqlite">
                             </label>
                             <button class="button" type="submit">Importer</button>
                         </form>
@@ -1059,7 +1059,7 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;</script>
-<script src="assets/js/app.js?v=231" defer></script>
+<script src="assets/js/app.js?v=232" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');
