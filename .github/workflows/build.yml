@@ -30,13 +30,18 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Créer le brouillon
+      - name: Créer le brouillon, sauf s'il existe déjà (relance)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >
-          gh release create "${{ github.ref_name }}" --draft
-          --repo "${{ github.repository }}" --title "LCNDA ${{ github.ref_name }}"
-          --notes "Installateurs de LCNDA ${{ github.ref_name }} — vérifie les empreintes dans SHA256SUMS.txt."
+          R: ${{ github.repository }}
+          T: ${{ github.ref_name }}
+        run: |
+          if gh release list --repo "$R" --limit 100 --json tagName -q '.[].tagName' | grep -qx "$T"; then
+            echo "Brouillon $T déjà présent"
+          else
+            gh release create "$T" --draft --repo "$R" --title "LCNDA $T" \
+              --notes "Installateurs de LCNDA $T — vérifie les empreintes dans SHA256SUMS.txt."
+          fi
 
   build:
     name: ${{ matrix.name }}
@@ -109,11 +114,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cd dist
-          files=$(ls *.dmg *.exe *.AppImage *.deb 2>/dev/null)
-          test -n "$files"
+          shopt -s nullglob
+          files=(*.dmg *.exe *.AppImage *.deb)
+          test ${#files[@]} -gt 0
           if command -v sha256sum >/dev/null; then sum="sha256sum"; else sum="shasum -a 256"; fi
-          $sum $files > "SHA256SUMS-${{ runner.os }}.txt" && cat "SHA256SUMS-${{ runner.os }}.txt"
-          gh release upload "${{ github.ref_name }}" $files "SHA256SUMS-${{ runner.os }}.txt" --clobber --repo "${{ github.repository }}"
+          $sum "${files[@]}" > "SHA256SUMS-${{ runner.os }}.txt" && cat "SHA256SUMS-${{ runner.os }}.txt"
+          gh release upload "${{ github.ref_name }}" "${files[@]}" "SHA256SUMS-${{ runner.os }}.txt" --clobber --repo "${{ github.repository }}"
 
       - uses: actions/upload-artifact@v7
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
