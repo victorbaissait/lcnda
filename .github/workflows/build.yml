@@ -85,6 +85,8 @@ jobs:
         with:
           name: LCNDA-${{ runner.os }}
           if-no-files-found: error
+          # Copie de passage vers la Release : effacée au bout d'un jour (l'espace de stockage GitHub est limité)
+          retention-days: 1
           path: |
             dist/*.dmg
             dist/*.exe
