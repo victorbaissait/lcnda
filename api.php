@@ -176,6 +176,7 @@ try {
         'media_duplicates' => media_duplicates_data($pdo),
         'deed_preview' => deed_preview($pdo),
         'issues' => issues_data($pdo),
+        'person_count' => json_response(['count' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn()]),
         'ghost_families' => ghost_families_data($pdo),
         'bulk_preview' => bulk_preview($pdo),
         'lock_candidates' => lock_candidates($pdo),
@@ -7472,15 +7473,14 @@ function commune_suggestions_data(PDO $pdo): never
     if(mb_strlen($q)<2)json_response(['communes'=>[]]);
     $like='%'.$q.'%';
     $prefix=$q.'%';
+    // Département, région et nombre de voisines calculés seulement pour les 20 communes gardées (sous-requêtes sur
+    // index) : la jointure de toutes les communes trouvées avec les lieux prenait jusqu'à 3 minutes.
     $stmt=$pdo->prepare("SELECT c.insee_code,c.name,c.centroid_lat,c.centroid_lon,
-        COALESCE(MAX(NULLIF(p.county,'')),'') AS admin2,
-        COALESCE(MAX(NULLIF(p.state,'')),'') AS admin1,
-        COUNT(n.neighbor_insee_code) AS neighbor_count
+        COALESCE((SELECT p.county FROM places p WHERE p.admin4_code=c.insee_code AND p.country='France' AND p.county<>'' LIMIT 1),'') AS admin2,
+        COALESCE((SELECT p.state FROM places p WHERE p.admin4_code=c.insee_code AND p.country='France' AND p.state<>'' LIMIT 1),'') AS admin1,
+        (SELECT count(*) FROM commune_neighbors n WHERE n.insee_code=c.insee_code) AS neighbor_count
         FROM commune_contours c
-        LEFT JOIN places p ON p.admin4_code=c.insee_code AND p.country='France'
-        LEFT JOIN commune_neighbors n ON n.insee_code=c.insee_code
         WHERE c.name LIKE ? COLLATE NOCASE OR replace(c.name,'-',' ') LIKE ? COLLATE NOCASE OR c.insee_code LIKE ? COLLATE NOCASE
-        GROUP BY c.insee_code
         ORDER BY CASE WHEN c.name LIKE ? COLLATE NOCASE OR replace(c.name,'-',' ') LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END,
             c.name COLLATE NOCASE,
             c.insee_code

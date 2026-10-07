@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 4;
+const SCHEMA_VERSION = 5;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -25,6 +25,7 @@ function migration_steps(): array
         2 => 'schema_v2',
         3 => 'schema_v3',
         4 => 'schema_v4',
+        5 => 'schema_v5',
     ];
 }
 
@@ -268,6 +269,15 @@ function schema_v4(PDO $pdo): void
         key TEXT PRIMARY KEY,
         value TEXT NOT NULL,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+}
+
+/**
+ * Structure n°5 (2026-10-07) : index sur places(admin4_code) (code INSEE des communes GeoNames). La recherche de la
+ * commune de départ d'une battue reliait chaque commune aux ~81 000 lieux sans index : 176 s pour « ar ».
+ */
+function schema_v5(PDO $pdo): void
+{
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_places_admin4 ON places(admin4_code)');
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

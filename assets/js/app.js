@@ -415,9 +415,9 @@
     const courrierFilters = [['','En cours'],['fait_utilise','Faits — utilisés'],['fait_non_utilise','Faits — non utilisés'],['fait_tous','Tous les faits'],['tous','Tout (en cours + faits)']];
     const defaultMapTypes = [['all','Tous les événements'],['BIRT','Naissances'],['DEAT','Décès'],['MARR','Mariages'],['BURI','Inhumations']];
     const defaultPersonBlocks = [
-        ['identity','Identité'],['events','Événements'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['local_access','Accès local'],['person_exports','Exports fiche']
+        ['identity','Identité'],['events','Événements'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['person_exports','Exports fiche']
     ];
-    const defaultPersonBlockSpans={identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',local_access:'6',person_exports:'6'};
+    const defaultPersonBlockSpans={identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',person_exports:'6'};
     const personBlockWidthChoices=[['12','1'],['6','1/2'],['4','1/3'],['3','1/4'],['8','2/3'],['9','3/4']];
     function savedOrder(key,defaults){try{const stored=JSON.parse(localStorage.getItem(key)||'[]');const order=stored.filter(item=>defaults.includes(item));defaults.forEach((item,index)=>{if(order.includes(item))return;const previous=defaults.slice(0,index).reverse().find(value=>order.includes(value));const next=defaults.slice(index+1).find(value=>order.includes(value));if(previous)order.splice(order.indexOf(previous)+1,0,item);else if(next)order.splice(order.indexOf(next),0,item);else order.push(item);});return order;}catch(_){return defaults;}}
     function orderedMenuKeys(){return savedOrder('genealogie-menu-order',defaultMenuOrder);}
@@ -699,7 +699,9 @@
         const order=Array.isArray(stored.order)?stored.order:[];
         const hidden=Array.isArray(stored.hidden)?stored.hidden:[];
         const legacyOrder=[...order.filter(key=>defaults.includes(key)),...defaults.filter(key=>!order.includes(key))];
-        const widgets=legacyOrder.filter(key=>!hidden.includes(key)).map(key=>dashboardNewWidget(key,{width:stored.widths?.[key],limit:stored.limits?.[key]}));
+        // Identifiant FIXE pour les widgets par défaut : un identifiant tiré au hasard changeait à chaque affichage, et le
+        // crayon (qui réaffiche le tableau de bord) ne retrouvait plus le widget à modifier sur une base jamais personnalisée.
+        const widgets=legacyOrder.filter(key=>!hidden.includes(key)).map(key=>dashboardNewWidget(key,{id:`${key}-defaut`,width:stored.widths?.[key],limit:stored.limits?.[key]}));
         return {widgets};
     }
     function saveDashboardBlockSettings(settings){localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))}));}
@@ -768,7 +770,60 @@
         const response = await fetch(url, init);
         const data = await response.json().catch(() => ({error:'Réponse illisible du serveur'}));
         if (!response.ok || data.error) throw new Error(data.error || `Erreur ${response.status}`);
+        // Après une modification, le nombre de personnes affiché est recompté (création, suppression, fusion,
+        // ajout d'un parent… : il n'était calculé qu'à l'ouverture de l'application).
+        if (options.method && options.method !== 'GET' && action !== 'save_settings') schedulePersonCountRefresh();
         return data;
+    }
+
+    function personCountLabel(count) { const n = Number(count) || 0; return `${n.toLocaleString('fr-FR')} personne${n > 1 ? 's' : ''}`; }
+    let personCountTimer = null;
+    // Barre de menus du haut plus large que la fenêtre : la molette d'une souris (défilement vertical) la fait défiler
+    // de côté. Sans trackpad, les derniers menus étaient sinon inaccessibles.
+    document.addEventListener('wheel', event => {
+        const nav = event.target.closest?.('.main-nav');
+        if (!nav || nav.scrollWidth <= nav.clientWidth || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+        nav.scrollLeft += event.deltaY;
+        event.preventDefault();
+    }, {passive: false});
+
+    function schedulePersonCountRefresh() {
+        clearTimeout(personCountTimer);
+        personCountTimer = setTimeout(async () => {
+            try {
+                const {count} = await api('person_count');
+                if (state.bootstrap?.stats) state.bootstrap.stats.personnes = Number(count) || 0;
+                const label = personCountLabel(count);
+                const status = $('#database-status');
+                if (status) status.textContent = label;
+                const footerCount = $('[data-person-count]');
+                if (footerCount) footerCount.textContent = `${label} dans la base`;
+            } catch (_) { /* sans gravité : le compteur sera juste à la prochaine ouverture */ }
+        }, 400);
+    }
+
+    /**
+     * Fenêtre de saisie de l'application, à la place de window.prompt() : Electron ne la fournit pas (« prompt() is
+     * not supported » : le bouton ne faisait alors rien). Renvoie le texte saisi, ou null si on annule.
+     * confirmWord : le bouton reste inactif tant que ce mot n'est pas tapé (ex. « SUPPRIMER »).
+     */
+    function askText({title='', message='', value='', placeholder='', okLabel='Valider', danger=false, confirmWord='', inputMode='text'}={}){
+        return new Promise(resolve=>{
+            const dialog=document.createElement('dialog');
+            dialog.className='modal small-modal ask-text-dialog';
+            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><h2>${escapeHtml(title)}</h2>${message?`<p style="white-space:pre-line">${escapeHtml(message)}</p>`:''}</div><button class="icon-button" type="button" data-ask-cancel aria-label="Annuler">×</button></div><div class="form-grid one-column"><label>${confirmWord?`Tape <b>${escapeHtml(confirmWord)}</b> pour confirmer`:'Réponse'}<input name="answer" autocomplete="off" inputmode="${escapeHtml(inputMode)}" placeholder="${escapeHtml(placeholder)}"></label></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-ask-cancel>Annuler</button><button class="button${danger?' danger':''}" type="submit" data-ask-ok>${escapeHtml(okLabel)}</button></div></form>`;
+            document.body.appendChild(dialog);
+            const input=dialog.querySelector('input'),ok=dialog.querySelector('[data-ask-ok]');
+            input.value=value;
+            let answer=null;
+            const sync=()=>{if(confirmWord)ok.disabled=input.value.trim()!==confirmWord;};
+            input.addEventListener('input',sync);sync();
+            dialog.querySelector('form').addEventListener('submit',event=>{event.preventDefault();if(ok.disabled)return;answer=input.value;dialog.close();});
+            dialog.querySelectorAll('[data-ask-cancel]').forEach(button=>button.addEventListener('click',()=>dialog.close()));
+            dialog.addEventListener('close',()=>{dialog.remove();resolve(answer);});
+            dialog.showModal();
+            input.focus();input.select();
+        });
     }
 
     function toast(message, type = '') {
@@ -938,7 +993,7 @@
             const urlPersonId = Number(new URLSearchParams(location.search).get('person')) || 0;
             state.currentPersonId = urlPersonId || Number(state.currentPersonId) || state.bootstrap.startPersonId;
             $('#app').classList.toggle('sidebar-collapsed',Boolean(persisted.sidebarCollapsed));
-            $('#database-status').textContent = `${state.bootstrap.stats.personnes.toLocaleString('fr-FR')} personnes`;
+            $('#database-status').textContent = personCountLabel(state.bootstrap.stats.personnes);
             const initialRoute = chooseInitialRoute(urlPersonId);
             if(initialRoute.maintenanceTab)state.maintenanceTab=initialRoute.maintenanceTab;
             await setModule((urlPersonId ? 'personnes' : (initialRoute.module || 'dashboard')), false);
@@ -1869,7 +1924,7 @@
             <div class="segmented"><button class="${state.personTab === 'all' ? 'is-active':''}" data-person-tab="all">Personnes</button><button class="${state.personTab === 'bookmarked' ? 'is-active':''}" data-person-tab="bookmarked">Signets</button></div>
             <div class="search-box"><label for="person-search">Prénom, nom (de naissance ou mariage) ou variante</label><div class="search-row"><input id="person-search" value="${escapeHtml(state.peopleQuery)}" placeholder="Dupont, Dupond…"><button id="person-search-button" aria-label="Rechercher">⌕</button></div><label class="check-line" title="Tolère les variantes orthographiques d'époque et rattrape les erreurs de transcription via un Soundex français combiné"><input type="checkbox" id="person-phonetic" ${state.peoplePhonetic?'checked':''}> Recherche phonétique</label></div>
             <div class="person-list" id="person-list"><div class="loading-block">Chargement…</div></div>`;
-        footer.innerHTML = `<button class="button small" id="new-person">+ Nouvelle personne</button><span style="display:block;margin-top:9px">${state.bootstrap.stats.personnes.toLocaleString('fr-FR')} personnes dans la base</span>`;
+        footer.innerHTML = `<button class="button small" id="new-person">+ Nouvelle personne</button><span style="display:block;margin-top:9px" data-person-count>${personCountLabel(state.bootstrap.stats.personnes)} dans la base</span>`;
         content.addEventListener('click', event => {
             const tab = event.target.closest('[data-person-tab]');
             if (tab) { state.personTab = tab.dataset.personTab; renderSidebar(); loadPeople(); }
@@ -2150,12 +2205,6 @@
         }).join('');
     }
     function applyBlockWidth(html,width){return width?html.replace(/\bspan-(3|4|5|6|7|8|9|12)\b/,`span-${width}`):html;}
-    function personShareUrl(personId){
-        const url=new URL(location.href);
-        url.searchParams.set('person',String(personId));
-        url.hash='personnes';
-        return url.toString();
-    }
 
     function renderPerson(detail) {
         const {person, events, parents, partners, families=[], children, siblings=[], variants, labels=[], notes, media, signatures=[], sources, investigations=[], battues=[], hypotheses=[], evidence=[], census={}, completion={score:0,items:[]}, biography='', onlineSheets=[]} = detail;
@@ -2319,11 +2368,6 @@
                 const renderArtisticEv=ev=>{let workValues={};if(ev.work_fields){try{workValues=JSON.parse(ev.work_fields)||{};}catch(_){workValues={};}}const workDetailsHtml=Object.keys(workValues).length?`<dl class="work-fields-list">${Object.entries(workValues).map(([k,v])=>`<div><dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd></div>`).join('')}</dl>`:'';return `<div class="event-row"><span class="event-icon" style="--event-color:${escapeHtml(ev.color)}">${typeGlyph(ev.icon,ev.gedcom_tag)}</span><div class="event-date">${escapeHtml(ev.date_text||'Date inconnue')}${eventConvertedDateHtml(ev)}<small>${escapeHtml(eventAgeText(ev,birthEvent))}</small></div><div class="event-content"><div class="item-title-row"><strong>${escapeHtml(ev.type_label)}</strong><span class="item-title-extra"><span class="inline-actions">${mediaForEvent(orderedMedia,ev.id).length?actionButton('media','Voir les médias liés',`data-view-event-media="${ev.id}"`):''}${editOnly(`${actionButton('source',`Source${eventSources(ev.id).length?` (${eventSources(ev.id).length})`:''}`,`data-add-event-source="${ev.id}"`)}${actionButton('edit','Modifier',`data-edit-event="${ev.id}"`)}${actionButton('delete','Supprimer',`data-delete-event="${ev.id}"`)}`)}</span></span></div>${ev.title||ev.description?`<p>${escapeHtml(ev.title||ev.description)}</p>`:''}${eventFactConfidenceHtml(ev)}${workDetailsHtml}</div></div>`;};
                 const body=artisticEvs.length?`<div class="event-list">${artisticEvs.map(renderArtisticEv).join('')}</div>`:empty('Aucune œuvre ou réalisation enregistrée.');
                 return card(index,`Œuvres — ${escapeHtml(disciplineLabel)}`,artisticEvs.length,body,'span-12',editOnly(actionButton('add','Ajouter une œuvre / réalisation',`data-add-event-inline-artistic="${person.id}"`)));
-            },
-            local_access:index=>{
-                const url=personShareUrl(person.id);
-                const body=`<div class="local-access-block"><p>Adresse à ouvrir depuis un autre appareil du même réseau, si le serveur local est accessible.</p><code>${escapeHtml(url)}</code><button class="button small secondary" type="button" data-copy-person-local-url="${escapeHtml(url)}">Copier l’adresse</button></div>`;
-                return card(index,'Accès local','',body,'span-6');
             },
             person_exports:index=>{
                 const body=`<div class="person-export-block"><p>Exports rapides de cette fiche. Le PDF utilise l’impression du navigateur, avec l’ordre, la taille et la visibilité des blocs de cette fiche.</p><div class="page-actions"><button class="button small secondary" type="button" data-customize-person-export="${person.id}">Personnaliser l’export</button><button class="button small secondary" type="button" data-print-person="${person.id}">PDF / imprimer</button><button class="button small secondary" type="button" data-export-person-json="${person.id}">JSON fiche</button></div></div>`;
@@ -2858,10 +2902,6 @@
                 await selectPerson(detail.person.id);
             }catch(error){toast(error.message,'error');}
         }));
-        $$('[data-copy-person-local-url]').forEach(button=>button.addEventListener('click',async()=>{
-            try{await navigator.clipboard.writeText(button.dataset.copyPersonLocalUrl);toast('Adresse locale copiée.');}
-            catch(_){window.prompt('Adresse locale à copier',button.dataset.copyPersonLocalUrl);}
-        }));
         $$('[data-print-person]').forEach(button=>button.addEventListener('click',()=>window.print()));
         $$('[data-export-person-json]').forEach(button=>button.addEventListener('click',()=>{
             const payload={exported_at:new Date().toISOString(),person:detail.person,events:detail.events,parents:detail.parents,partners:detail.partners,children:detail.children,notes:detail.notes,media:detail.media,sources:detail.sources,investigations:detail.investigations,battues:detail.battues};
@@ -2938,8 +2978,8 @@
         $$('[data-toggle-census-details]').forEach(button => button.addEventListener('click',()=>{setCensusDetailsPreference(detail.person.id,button.dataset.censusDetailsValue);selectPerson(detail.person.id);}));
         $$('[data-reset-census-details]').forEach(button => button.addEventListener('click',()=>{resetCensusDetailsPreference(detail.person.id);selectPerson(detail.person.id);}));
         $$('[data-manage-census-media]').forEach(button => button.addEventListener('click',()=>openCensusMediaDialog(detail,Number(button.dataset.manageCensusMedia))));
-        $$('[data-add-special-census]').forEach(button => button.addEventListener('click',()=>{
-            const value=window.prompt('Année du recensement spécial ?');
+        $$('[data-add-special-census]').forEach(button => button.addEventListener('click',async()=>{
+            const value=await askText({title:'Recensement spécial',message:'Année du recensement spécial (par exemple 1946) :',placeholder:'1946',okLabel:'Continuer',inputMode:'numeric'});
             if(value===null)return;
             const year=Number(String(value).trim());
             if(!Number.isInteger(year)||year<1700||year>2100){toast('Année invalide pour un recensement spécial.','error');return;}
@@ -3032,7 +3072,7 @@
         const person = detail.person;
         const name = personName(person);
         const message = `Supprimer définitivement la fiche « ${name} » ?\n\nLes relations, événements, notes, variantes, enquêtes et liens directs seront retirés. Les fichiers médias restent sur le disque, mais leurs liens à cette fiche seront supprimés.\n\nTape SUPPRIMER pour confirmer.`;
-        if (window.prompt(message) !== 'SUPPRIMER') return;
+        if ((await askText({title:'Supprimer cette fiche',message:message.replace(/\n\nTape SUPPRIMER pour confirmer\.$/,''),okLabel:'Supprimer définitivement',danger:true,confirmWord:'SUPPRIMER'})) === null) return;
         try {
             await api('delete_person', {}, {method:'POST', body:{id:person.id}});
             toast('Fiche supprimée.');
@@ -5231,7 +5271,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         form.addEventListener('submit',async event=>{event.preventDefault();try{await api('save_archive_digest_transcription_line',{}, {method:'POST',body:formObject(form)});toast('Ligne ajoutée.');await refresh();}catch(error){toast(error.message||'Enregistrement impossible.','error');}});
         $$('[data-archive-transcription-line-delete]',root).forEach(button=>button.addEventListener('click',async()=>{if(!confirm('Retirer cette ligne ?'))return;try{await api('delete_archive_digest_transcription_line',{}, {method:'POST',body:{id:Number(button.dataset.archiveTranscriptionLineDelete)}});await refresh();}catch(error){toast(error.message||'Suppression impossible.','error');}}));
         $$('[data-archive-transcription-focus]',root).forEach(button=>button.addEventListener('click',()=>{mediaSelect.value=button.dataset.archiveTranscriptionFocus||'';draw(archiveDigestLineZone({zone_json:button.dataset.zone||''}));zoneBox.scrollIntoView({behavior:'smooth',block:'center'});}));
-        $('[data-archive-transcription-snapshot]',root)?.addEventListener('click',async()=>{const title=window.prompt('Nom de cette version (facultatif)')||'';try{await api('save_archive_digest_transcription_version',{}, {method:'POST',body:{archive_digest_id:data.entry.id,title}});toast('Version enregistrée.');await refresh();}catch(error){toast(error.message||'Version impossible.','error');}});
+        $('[data-archive-transcription-snapshot]',root)?.addEventListener('click',async()=>{const title=await askText({title:'Enregistrer une version',message:'Nom de cette version (facultatif) :',okLabel:'Enregistrer'});if(title===null)return;try{await api('save_archive_digest_transcription_version',{}, {method:'POST',body:{archive_digest_id:data.entry.id,title}});toast('Version enregistrée.');await refresh();}catch(error){toast(error.message||'Version impossible.','error');}});
         $('[data-archive-transcription-compare]',root)?.addEventListener('click',()=>{const a=versions.find(version=>Number(version.id)===Number($('[data-archive-transcription-version-a]',root)?.value)),b=versions.find(version=>Number(version.id)===Number($('[data-archive-transcription-version-b]',root)?.value));const target=$('[data-archive-transcription-comparison]',root);if(target&&a&&b)target.innerHTML=archiveDigestTranscriptionDiff(a,b);});
     }
     function renderArchiveDigestZone(box,media,initialZone,hidden){
@@ -6003,7 +6043,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $$('[data-open-investigation-media]').forEach(button=>button.addEventListener('click',()=>openLightbox(visibleMedia,Number(button.dataset.openInvestigationMedia))));
         $$('[data-open-folder]').forEach(button=>button.addEventListener('click',()=>{state.investigationFolderId=Number(button.dataset.openFolder)||0;renderInvestigationDetail(investigationId);}));$('#folder-sort-btn')?.addEventListener('click',()=>{state.folderSortAsc=state.folderSortAsc===false?true:false;renderInvestigationDetail(investigationId);});
         $('#new-investigation-folder')?.addEventListener('click',async()=>{
-            const name=window.prompt('Nom du nouveau dossier :','');
+            const name=await askText({title:'Nouveau dossier',message:'Nom du nouveau dossier :',okLabel:'Créer'});
             if(!name||!name.trim())return;
             try{await api('save_investigation_media_folder',{},{method:'POST',body:{investigation_id:investigationId,parent_id:state.investigationFolderId||'',name:name.trim()}});renderInvestigationDetail(investigationId);}
             catch(error){toast(error.message,'error');}
@@ -6012,7 +6052,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             event.stopPropagation();
             const folderId=Number(button.dataset.renameFolder);
             const folder=folders.find(item=>Number(item.id)===folderId);
-            const name=window.prompt('Nouveau nom du dossier :',folder?.name||'');
+            const name=await askText({title:'Renommer le dossier',message:'Nouveau nom du dossier :',value:folder?.name||'',okLabel:'Renommer'});
             if(!name||!name.trim())return;
             try{await api('save_investigation_media_folder',{},{method:'POST',body:{id:folderId,name:name.trim()}});renderInvestigationDetail(investigationId);}
             catch(error){toast(error.message,'error');}
@@ -8075,10 +8115,10 @@ ${backupSectionHtml()}
             renderDesignTools();
         }));
         $$('[data-edit-preset]').forEach(button=>button.addEventListener('click',()=>openEditPresetDialog(button.dataset.editPreset)));
-        $$('[data-rename-preset]').forEach(button=>button.addEventListener('click',()=>{
+        $$('[data-rename-preset]').forEach(button=>button.addEventListener('click',async()=>{
             const presets=designPresets(),preset=presets[button.dataset.renamePreset];
             if(!preset)return;
-            const name=window.prompt('Nouveau nom pour ce design :',preset.name||'');
+            const name=await askText({title:'Renommer le design',message:'Nouveau nom pour ce design :',value:preset.name||'',okLabel:'Renommer'});
             if(name===null)return;
             const trimmed=name.trim();
             if(!trimmed){toast('Le nom ne peut pas être vide.','error');return;}
@@ -9129,6 +9169,28 @@ ${backupSectionHtml()}
         if(item?.linked_persons&&Array.isArray(item.linked_persons)){extraPersons=item.linked_persons.map(p=>({id:String(p.person_id),name:p.person_name,role:p.role||'secondary'}));}
         else{extraPersons=[];}
         syncExtraPersonsInput();renderExtraPersons();
+        // Personne principale : affichée et modifiable (avant, elle était choisie d'office et invisible, et la recherche
+        // des personnes supplémentaires la cachait sans explication).
+        const mainBox=$('#investigation-main-person'),mainSearch=$('#investigation-main-person-search'),mainSugg=$('#investigation-main-person-suggestions');
+        const mainId=()=>String(form.elements.person_id.value||'');
+        const renderMain=name=>{if(mainBox)mainBox.innerHTML=mainId()?`<div class="inv-extra-person-chip primary"><span class="inv-extra-person-badge primary">Principale</span><span>${escapeHtml(name||'Personne #'+mainId())}</span></div>`:'<p class="muted">Aucune : choisis la personne principale de l’enquête.</p>';};
+        renderMain(Number(state.currentPerson?.person?.id)===Number(personId)?personName(state.currentPerson.person):'');
+        if(mainId()&&Number(state.currentPerson?.person?.id)!==Number(personId))api('person',{id:mainId()}).then(detail=>renderMain(personName(detail.person))).catch(()=>{});
+        if(mainSearch&&mainSugg){
+            mainSearch.value='';mainSugg.hidden=true;mainSugg.innerHTML='';
+            mainSearch.oninput=debounce(async()=>{
+                const q=mainSearch.value.trim();if(q.length<2){mainSugg.hidden=true;mainSugg.innerHTML='';return;}
+                const results=await api('people',{q,limit:8});
+                mainSugg.innerHTML=(results.people||[]).filter(p=>String(p.id)!==mainId()).map(p=>`<button type="button" data-pid="${p.id}" data-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('');
+                mainSugg.hidden=!mainSugg.innerHTML;
+                mainSugg.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+                    form.elements.person_id.value=btn.dataset.pid;
+                    extraPersons=extraPersons.filter(p=>String(p.id)!==String(btn.dataset.pid));
+                    syncExtraPersonsInput();renderExtraPersons();renderMain(btn.dataset.name);
+                    mainSearch.value='';mainSugg.hidden=true;mainSugg.innerHTML='';
+                }));
+            });
+        }
         // Autocomplete recherche
         if(extraSearch){
             extraSearch.value='';
@@ -9137,7 +9199,7 @@ ${backupSectionHtml()}
                 const q=extraSearch.value.trim();if(q.length<2){if(extraSugg){extraSugg.hidden=true;extraSugg.innerHTML='';}return;}
                 const results=await api('people',{q,limit:8});
                 if(!extraSugg)return;
-                extraSugg.innerHTML=(results.people||[]).filter(p=>String(p.id)!==String(personId)&&!extraPersons.some(ep=>String(ep.id)===String(p.id))).map(p=>`<button type="button" data-pid="${p.id}" data-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('');
+                extraSugg.innerHTML=(results.people||[]).filter(p=>String(p.id)!==mainId()&&!extraPersons.some(ep=>String(ep.id)===String(p.id))).map(p=>`<button type="button" data-pid="${p.id}" data-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('');
                 extraSugg.hidden=!extraSugg.innerHTML;
                 extraSugg.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{extraPersons.push({id:btn.dataset.pid,name:btn.dataset.name,role:'secondary'});syncExtraPersonsInput();renderExtraPersons();extraSearch.value='';extraSugg.hidden=true;extraSugg.innerHTML='';},{signal:extraSearchController.signal}));
             });

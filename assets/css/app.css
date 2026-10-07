@@ -111,9 +111,12 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .brand strong { background: var(--blue); color: white; justify-self: start; padding: 4px 6px; transform: rotate(-5deg); z-index: 1; text-transform: uppercase; }
 .brand small { grid-column: 1 / -1; font-size: 10px; letter-spacing: .18em; align-self: end; text-align: center; color: var(--muted); }
 
-.main-nav { height: 100%; display: flex; align-items: center; overflow-x: auto; overflow-y: hidden; scrollbar-width: thin; scrollbar-color: var(--blue) transparent; padding: 6px 16px 14px; gap: 8px; }
+/* Pas de scrollbar-width / scrollbar-color : avec eux, Chromium ignore le style ci-dessous et applique la barre « cachée
+   tant qu'on ne défile pas » de macOS (menus de droite inaccessibles avec une souris, constaté dans une VM). */
+.main-nav { height: 100%; display: flex; align-items: center; overflow-x: auto; overflow-y: hidden; padding: 6px 16px 14px; gap: 8px; }
 .main-nav::-webkit-scrollbar { display: block; height: 8px; }
 .main-nav::-webkit-scrollbar-thumb { background: var(--blue); border: 2px solid #fff; }
+.main-nav::-webkit-scrollbar-track { background: transparent; }
 .nav-item {
     border: 2px solid transparent;
     background: transparent;
