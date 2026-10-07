@@ -265,7 +265,9 @@ async function download(s, base, action) {
         const get = async (a) => (await fetch(`${base}/api.php?action=${a}`, { headers: { ...h, cookie } })).json();
         const post = async (a, body) => (await fetch(`${base}/api.php?action=${a}`, { method: 'POST', headers: { ...h, cookie, 'content-type': 'application/json', 'X-CSRF-Token': csrf }, body: JSON.stringify({ ...body, csrf }) })).json();
         const available = (await get('reference_countries')).available;
-        assert.deepEqual(Object.keys(available).sort(), ['AT', 'BE', 'CH', 'DE', 'ES', 'IT', 'LI', 'LU', 'OM']);
+        for (const cc of ['AT', 'BE', 'CH', 'DE', 'ES', 'IT', 'LI', 'LU', 'OM', 'CZ', 'SK', 'PL', 'NL', 'SI', 'HU', 'PT', 'HR', 'BA', 'AD', 'MC', 'SM', 'VA', 'QC']) {
+          assert.ok(available[cc], 'pays proposé : ' + cc);
+        }
         const be = await post('set_reference_country', { country: 'BE', enabled: true });
         assert.ok(be.communes > 500 && be.border_links > 100, 'Belgique ajoutée avec ses voisinages frontaliers');
         assert.ok((await post('set_reference_country', { country: 'LU', enabled: true })).communes === 100);

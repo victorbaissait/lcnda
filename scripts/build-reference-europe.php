@@ -16,6 +16,10 @@ declare(strict_types=1);
  *   - Autriche : Gemeinden 2026 © Statistik Austria, CC BY 4.0 ;
  *   - Espagne : recintos municipales © Instituto Geográfico Nacional (CNIG), CC BY 4.0 ;
  *   - outre-mer français : france-geojson (IGN Admin Express, Licence Ouverte) ;
+ *   - Tchéquie : RÚIAN © ČÚZK (CC BY 4.0) ; Slovaquie : INSPIRE AU © ÚGKK SR (CC BY 4.0) ; Pologne : PRG © GUGiK ;
+ *     Pays-Bas : Bestuurlijke Gebieden © Kadaster (CC BY 4.0) ; Slovénie : RPE © GURS (CC BY 4.0) ;
+ *     Hongrie : MKH © Lechner Tudásközpont ; Québec : SDA © Gouvernement du Québec (CC BY 4.0) ;
+ *   - Portugal, Croatie, Bosnie, Andorre, Monaco, Saint-Marin, Vatican : © OpenStreetMap (ODbL), par Overpass ;
  *   - lieux et anciennes communes : GeoNames <pays>.zip (CC BY 4.0) ;
  *   - France métropolitaine (seulement pour les voisinages aux frontières) : data/geo/communes.geojson.
  *
@@ -68,6 +72,140 @@ function utm_to_wgs84(float $e, float $n, int $zone): array
         + (61 + 90 * $t1 + 298 * $c1 + 45 * $t1 ** 2 - 252 * $ep2 - 3 * $c1 ** 2) * $d ** 6 / 720);
     $lon = ($d - (1 + 2 * $t1 + $c1) * $d ** 3 / 6 + (5 - 2 * $c1 + 28 * $t1 - 3 * $c1 ** 2 + 8 * $ep2 + 24 * $t1 ** 2) * $d ** 5 / 120) / cos($phi1);
     return [round(rad2deg($lon) + ($zone * 6 - 183), 6), round(rad2deg($lat), 6)];
+}
+
+/** Coordonnées géographiques sur un ellipsoïde local → WGS84, par translation + rotation (Helmert, convention « position vector »). */
+function helmert_to_wgs84(float $latDeg, float $lonDeg, float $a, float $invF, array $p): array
+{
+    $f = 1 / $invF; $e2 = $f * (2 - $f);
+    $lat = deg2rad($latDeg); $lon = deg2rad($lonDeg);
+    $n = $a / sqrt(1 - $e2 * sin($lat) ** 2);
+    $x = $n * cos($lat) * cos($lon); $y = $n * cos($lat) * sin($lon); $z = $n * (1 - $e2) * sin($lat);
+    [$tx, $ty, $tz, $rx, $ry, $rz, $s] = $p + [0, 0, 0, 0, 0, 0, 0];
+    $k = 1 + $s * 1e-6; $rx = deg2rad($rx / 3600); $ry = deg2rad($ry / 3600); $rz = deg2rad($rz / 3600);
+    $x2 = $tx + $k * ($x - $rz * $y + $ry * $z);
+    $y2 = $ty + $k * ($rz * $x + $y - $rx * $z);
+    $z2 = $tz + $k * (-$ry * $x + $rx * $y + $z);
+    $A = 6378137.0; $E2 = (1 / 298.257223563) * (2 - 1 / 298.257223563);
+    $pp = hypot($x2, $y2); $la = atan2($z2, $pp * (1 - $E2));
+    for ($i = 0; $i < 6; $i++) { $nn = $A / sqrt(1 - $E2 * sin($la) ** 2); $la = atan2($z2 + $E2 * $nn * sin($la), $pp); }
+    return [round(rad2deg(atan2($y2, $x2)), 6), round(rad2deg($la), 6)];
+}
+
+/** Tchéquie / Slovaquie : S-JTSK Křovák Est-Nord (EPSG:5514) → GPS (formules EPSG, puis Helmert S-JTSK → WGS84). */
+function krovak_to_wgs84(float $e, float $n): array
+{
+    static $c = null;
+    $a = 6377397.155; $invF = 299.1528128; $f = 1 / $invF; $e2 = $f * (2 - $f); $ee = sqrt($e2);
+    if ($c === null) {
+        $phiC = deg2rad(49.5); $alphaC = deg2rad(30 + 17 / 60 + 17.30311 / 3600); $phiP = deg2rad(78.5); $kp = 0.9999;
+        $A = $a * sqrt(1 - $e2) / (1 - $e2 * sin($phiC) ** 2);
+        $B = sqrt(1 + $e2 * cos($phiC) ** 4 / (1 - $e2));
+        $g0 = asin(sin($phiC) / $B);
+        $t0 = tan(M_PI / 4 + $g0 / 2) * ((1 + $ee * sin($phiC)) / (1 - $ee * sin($phiC))) ** ($ee * $B / 2) / tan(M_PI / 4 + $phiC / 2) ** $B;
+        $c = compact('alphaC', 'phiP', 'B', 't0') + ['n' => sin($phiP), 'r0' => $kp * $A / tan($phiP)];
+    }
+    $x = -$n; $y = -$e; // Křovák classique : X vers le sud, Y vers l'ouest
+    $r = hypot($x, $y); $theta = atan2($y, $x); $D = $theta / sin($c['phiP']);
+    $T = 2 * (atan(($c['r0'] / $r) ** (1 / $c['n']) * tan(M_PI / 4 + $c['phiP'] / 2)) - M_PI / 4);
+    $U = asin(cos($c['alphaC']) * sin($T) - sin($c['alphaC']) * cos($T) * cos($D));
+    $V = asin(cos($T) * sin($D) / cos($U));
+    $phi = $U;
+    for ($i = 0; $i < 8; $i++) {
+        $phi = 2 * (atan($c['t0'] ** (-1 / $c['B']) * tan($U / 2 + M_PI / 4) ** (1 / $c['B']) * ((1 + $ee * sin($phi)) / (1 - $ee * sin($phi))) ** ($ee / 2)) - M_PI / 4);
+    }
+    $lon = deg2rad(24 + 50 / 60) - $V / $c['B'];
+    return helmert_to_wgs84(rad2deg($phi), rad2deg($lon), $a, $invF, [570.8, 85.7, 462.8, 4.998, 1.587, 5.261, 3.56]);
+}
+
+/** Hongrie : EOV (EPSG:23700, Hotine oblique Mercator variante B) → GPS (Helmert HD72 → WGS84). */
+function eov_to_wgs84(float $e, float $n): array
+{
+    static $c = null;
+    $a = 6378160.0; $invF = 298.247167427; $f = 1 / $invF; $e2 = $f * (2 - $f); $ee = sqrt($e2);
+    if ($c === null) {
+        $phiC = deg2rad(47 + 8 / 60 + 39.8174 / 3600); $lamC = deg2rad(19 + 2 / 60 + 54.8584 / 3600); $alphaC = deg2rad(90); $kc = 0.99993;
+        $B = sqrt(1 + $e2 * cos($phiC) ** 4 / (1 - $e2));
+        $A = $a * $B * $kc * sqrt(1 - $e2) / (1 - $e2 * sin($phiC) ** 2);
+        $t0 = tan(M_PI / 4 - $phiC / 2) / ((1 - $ee * sin($phiC)) / (1 + $ee * sin($phiC))) ** ($ee / 2);
+        $D = max(1.0, $B * sqrt(1 - $e2) / (cos($phiC) * sqrt(1 - $e2 * sin($phiC) ** 2)));
+        $F = $D + sqrt($D * $D - 1);
+        $H = $F * $t0 ** $B; $G = ($F - 1 / $F) / 2;
+        $g0 = asin(sin($alphaC) / $D);
+        $lam0 = $lamC - asin($G * tan($g0)) / $B;
+        $uc = $A * ($lamC - $lam0); // azimut de 90° : cas particulier de la variante B
+        $c = compact('A', 'B', 'H', 'g0', 'lam0', 'uc') + ['gc' => deg2rad(90)];
+    }
+    $v = ($e - 650000) * cos($c['gc']) - ($n - 200000) * sin($c['gc']);
+    $u = ($n - 200000) * cos($c['gc']) + ($e - 650000) * sin($c['gc']) + $c['uc'];
+    $Q = exp(-$c['B'] * $v / $c['A']); $S = ($Q - 1 / $Q) / 2; $T = ($Q + 1 / $Q) / 2; $V = sin($c['B'] * $u / $c['A']);
+    $U = ($V * cos($c['g0']) + $S * sin($c['g0'])) / $T;
+    $t = ($c['H'] / sqrt((1 + $U) / (1 - $U))) ** (1 / $c['B']);
+    $chi = M_PI / 2 - 2 * atan($t);
+    $phi = $chi + sin(2 * $chi) * ($e2 / 2 + 5 * $e2 ** 2 / 24 + $e2 ** 3 / 12 + 13 * $e2 ** 4 / 360)
+        + sin(4 * $chi) * (7 * $e2 ** 2 / 48 + 29 * $e2 ** 3 / 240 + 811 * $e2 ** 4 / 11520)
+        + sin(6 * $chi) * (7 * $e2 ** 3 / 120 + 81 * $e2 ** 4 / 1120) + sin(8 * $chi) * (4279 * $e2 ** 4 / 161280);
+    $lam = $c['lam0'] - atan2($S * cos($c['g0']) - $V * sin($c['g0']), cos($c['B'] * $u / $c['A'])) / $c['B'];
+    return helmert_to_wgs84(rad2deg($phi), rad2deg($lam), $a, $invF, [52.17, -71.82, -14.9]);
+}
+
+/** Pays-Bas : RD New (EPSG:28992) → GPS, formules approchées officielles (Schreutelkamp et Strang van Hees, ~1 m). */
+function rd_to_wgs84(float $x, float $y): array
+{
+    $dx = ($x - 155000) * 1e-5; $dy = ($y - 463000) * 1e-5;
+    $n = 3235.65389 * $dy - 32.58297 * $dx ** 2 - 0.2475 * $dy ** 2 - 0.84978 * $dx ** 2 * $dy - 0.0655 * $dy ** 3 - 0.01709 * $dx ** 2 * $dy ** 2
+        - 0.00738 * $dx + 0.0053 * $dx ** 4 - 0.00039 * $dx ** 2 * $dy ** 3 + 0.00033 * $dx ** 4 * $dy - 0.00012 * $dx * $dy;
+    $e = 5260.52916 * $dx + 105.94684 * $dx * $dy + 2.45656 * $dx * $dy ** 2 - 0.81885 * $dx ** 3 + 0.05594 * $dx * $dy ** 3 - 0.05607 * $dx ** 3 * $dy
+        + 0.01199 * $dy - 0.00256 * $dx ** 3 * $dy ** 2 + 0.00128 * $dx * $dy ** 4 + 0.00022 * $dy ** 2 - 0.00022 * $dx ** 2 + 0.00026 * $dx ** 5;
+    return [round(5.387206 + $e / 3600, 6), round(52.15517 + $n / 3600, 6)];
+}
+
+/** Relation OpenStreetMap (réponse Overpass « out geom ») → polygones : les chemins sont raccordés bout à bout en anneaux. */
+function osm_polygons(array $rel): array
+{
+    $ways = ['outer' => [], 'inner' => []];
+    foreach ($rel['members'] ?? [] as $m) {
+        if (($m['type'] ?? '') !== 'way' || empty($m['geometry'])) { continue; }
+        $pts = array_map(static fn($g) => [round((float) $g['lon'], 7), round((float) $g['lat'], 7)], $m['geometry']);
+        $ways[($m['role'] ?? '') === 'inner' ? 'inner' : 'outer'][] = $pts;
+    }
+    $key = static fn(array $p): string => $p[0] . ',' . $p[1];
+    $rings = [];
+    foreach ($ways as $role => $list) {
+        while ($list) {
+            $ring = array_shift($list);
+            while ($key($ring[0]) !== $key(end($ring))) {
+                $found = false;
+                foreach ($list as $i => $w) {
+                    if ($key($w[0]) === $key(end($ring))) { array_pop($ring); $ring = array_merge($ring, $w); }
+                    elseif ($key(end($w)) === $key(end($ring))) { array_pop($ring); $ring = array_merge($ring, array_reverse($w)); }
+                    else { continue; }
+                    unset($list[$i]); $found = true; break;
+                }
+                if (!$found) { $ring[] = $ring[0]; break; } // anneau incomplet dans OSM : refermé tel quel
+            }
+            if (count($ring) >= 4) { $rings[$role][] = $ring; }
+        }
+    }
+    $polys = array_map(static fn($r) => [$r], $rings['outer'] ?? []);
+    foreach ($rings['inner'] ?? [] as $hole) {
+        foreach ($polys as $i => $poly) { if (point_in_polygons($hole[0][0], $hole[0][1], [[$poly[0]]])) { $polys[$i][] = $hole; break; } }
+    }
+    return $polys;
+}
+
+function geonames_rows(string $zip, string $cc): Generator
+{
+    $h = fopen("zip://{$zip}#{$cc}.txt", 'r');
+    if (!$h) { throw new RuntimeException("{$cc}.txt introuvable dans {$zip}"); }
+    while (($line = fgets($h)) !== false) { yield explode("\t", rtrim($line, "\r\n")); }
+    fclose($h);
+}
+
+/** Fichier Overpass → éléments (relations). */
+function osm_elements(string $file): array
+{
+    return json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['elements'] ?? [];
 }
 
 /** Géométrie GeoPackage (en-tête GP + WKB, avec ou sans Z) → liste de polygones [anneaux [[x,y]…]…]. */
@@ -125,6 +263,7 @@ function shapefile_records(string $shp, callable $project): Generator
     $cpgFile = preg_replace('/\.shp$/i', '.cpg', $shp);
     $cpg = is_file($cpgFile) ? strtoupper(trim((string) file_get_contents($cpgFile))) : '';
     $utf8 = str_contains($cpg, 'UTF');
+    $charset = preg_match('/^(?:CP|WINDOWS-?)?(125[0-8])$/', $cpg, $m) ? 'CP' . $m[1] : 'ISO-8859-1';
     fseek($dbf, $headerLen);
     $shpH = fopen($shp, 'rb');
     fseek($shpH, 100);
@@ -133,7 +272,7 @@ function shapefile_records(string $shp, callable $project): Generator
         $attrs = []; $off = 1;
         foreach ($fields as [$name, $len]) {
             $v = trim(substr($rec, $off, $len)); $off += $len;
-            $attrs[$name] = $utf8 ? $v : mb_convert_encoding($v, 'UTF-8', 'ISO-8859-1');
+            $attrs[$name] = $utf8 ? $v : (string) iconv($charset, 'UTF-8//IGNORE', $v);
         }
         $rh = fread($shpH, 8);
         $contentLen = unpack('N', substr($rh, 4, 4))[1] * 2;
@@ -229,16 +368,17 @@ function point_in_polygons(float $x, float $y, array $polys): bool
     return false;
 }
 
-/** Points le long des limites extérieures, un tous les SAMPLE_M mètres. */
+/** Points le long de toutes les limites (contours extérieurs ET trous : une enclave touche la commune qui l'entoure), un tous les SAMPLE_M mètres. */
 function boundary_samples(array $polys): array
 {
     $pts = [];
     foreach ($polys as $poly) {
-        $ring = $poly[0];
+        foreach ($poly as $ring) {
         for ($i = 0, $n = count($ring) - 1; $i < $n; $i++) {
             $a = $ring[$i]; $b = $ring[$i + 1];
             $steps = max(1, (int) ceil(meters($a, $b) / SAMPLE_M));
             for ($s = 0; $s < $steps; $s++) { $t = $s / $steps; $pts[] = [$a[0] + ($b[0] - $a[0]) * $t, $a[1] + ($b[1] - $a[1]) * $t]; }
+        }
         }
     }
     return $pts;
@@ -277,7 +417,11 @@ function neighbors_by_distance(array $communes, float $tolerance, ?callable $onl
 // ─── Pays : lecture des communes (tracé de travail allégé à 15 m) ───────────────────────────
 
 $countryNames = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg', 'DE' => 'Allemagne', 'IT' => 'Italie',
-    'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français', 'FR' => 'France'];
+    'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français', 'CZ' => 'Tchéquie', 'SK' => 'Slovaquie', 'PL' => 'Pologne',
+    'NL' => 'Pays-Bas', 'SI' => 'Slovénie', 'HU' => 'Hongrie', 'PT' => 'Portugal', 'HR' => 'Croatie', 'BA' => 'Bosnie-Herzégovine',
+    'AD' => 'Andorre', 'MC' => 'Monaco', 'SM' => 'Saint-Marin', 'VA' => 'Vatican', 'QC' => 'Québec', 'FR' => 'France'];
+// Pays des lieux (« Québec » est une province du Canada, l'outre-mer est la France)
+$placeCountryOf = static fn(string $cc): string => ['OM' => 'France', 'QC' => 'Canada'][$cc] ?? $countryNames[$cc];
 $sources = [
     'BE' => 'Communes 2025 : IGN-NGI (Institut géographique national belge, licence ouverte), via ODWB',
     'CH' => 'swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)', 'LI' => 'swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)',
@@ -286,7 +430,11 @@ $sources = [
     'AT' => 'Gemeinden 2026 © Statistik Austria – data.statistik.gv.at (CC BY 4.0)',
     'ES' => 'Recintos municipales © Instituto Geográfico Nacional – CNIG (CC BY 4.0)',
     'OM' => 'Communes d’outre-mer : IGN Admin Express via france-geojson (Licence Ouverte 2.0)',
-];
+    'CZ' => 'RÚIAN © ČÚZK (CC BY 4.0)', 'SK' => 'ZBGIS – INSPIRE Administrative Units © ÚGKK SR / GKÚ (CC BY 4.0)',
+    'PL' => 'Państwowy Rejestr Granic © GUGiK (données libres)', 'NL' => 'Bestuurlijke Gebieden © Kadaster / PDOK (CC BY 4.0)',
+    'SI' => 'Register prostorskih enot © GURS (CC BY 4.0)', 'HU' => 'Magyarország Közigazgatási Határai © Lechner Tudásközpont',
+    'QC' => 'Découpages administratifs (SDA 1:20 000) © Gouvernement du Québec (CC BY 4.0)',
+] + array_fill_keys(['PT', 'HR', 'BA', 'AD', 'MC', 'SM', 'VA'], '© les contributeurs d’OpenStreetMap (ODbL 1.0)');
 $countries = [];
 $add = static function (string $cc, string $code, string $name, string $county, string $state, array $polys, string $alt = '') use (&$countries): void {
     if (!$polys || $name === '') { return; }
@@ -373,6 +521,111 @@ foreach (['guadeloupe' => 'Guadeloupe', 'martinique' => 'Martinique', 'guyane' =
     $om = json_decode((string) file_get_contents("{$cache}/communes-{$file}.geojson"), true, 512, JSON_THROW_ON_ERROR);
     foreach ($om['features'] as $f) { $add('OM', (string) $f['properties']['code'], (string) $f['properties']['nom'], $region, $region, geojson_polygons($f['geometry'])); }
 }
+// Tchéquie (RÚIAN : Křovák, S-JTSK ; districts et régions d'après leurs propres fichiers)
+$czOkresy = []; foreach (shapefile_records("{$cache}/cz/1/OKRESY_P.shp", static fn($x, $y) => [0, 0]) as [$a]) { $czOkresy[$a['KOD']] = $a['NAZEV']; }
+$czKraje = []; foreach (shapefile_records("{$cache}/cz/1/VUSC_P.shp", static fn($x, $y) => [0, 0]) as [$a]) { $czKraje[$a['KOD']] = $a['NAZEV']; }
+foreach (shapefile_records("{$cache}/cz/1/OBCE_P.shp", static fn(float $x, float $y) => krovak_to_wgs84($x, $y)) as [$a, $polys]) {
+    $add('CZ', 'CZ-' . $a['KOD'], $a['NAZEV'], (string) ($czOkresy[$a['OKRES_KOD']] ?? ''), (string) ($czKraje[$a['VUSC_KOD']] ?? ''), $polys);
+}
+
+// Slovaquie (INSPIRE : obce = 4e niveau ; district et région d'après les niveaux supérieurs)
+$sk = new PDO('sqlite:' . "{$cache}/sk/INSPIRE_AU.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+$skUnits = []; foreach ($sk->query("SELECT id, name, upperLevelUnit FROM AdministrativeUnit") as $r) { $skUnits[$r['id']] = $r; }
+foreach ($sk->query("SELECT nationalCode, name, upperLevelUnit, geometry FROM AdministrativeUnit WHERE nationalLevel LIKE '%4thOrder'") as $r) {
+    $okres = $skUnits[$r['upperLevelUnit']] ?? null; $kraj = $okres ? ($skUnits[$okres['upperLevelUnit']] ?? null) : null;
+    $add('SK', 'SK-' . $r['nationalCode'], $r['name'], trim(preg_replace('/^okres /u', '', (string) ($okres['name'] ?? '')) ?? ''),
+        (string) ($kraj['name'] ?? ''), gpkg_polygons($r['geometry'], static fn(float $x, float $y) => [round($x, 6), round($y, 6)]));
+}
+$sk = null;
+
+// Pologne (PRG : ETRS89 en degrés ; gmina = 6 premiers chiffres du code TERYT, comme GeoNames)
+$plPowiaty = []; foreach (shapefile_records("{$cache}/pl/A02_Granice_powiatow.shp", static fn($x, $y) => [0, 0]) as [$a]) { $plPowiaty[$a['JPT_KOD_JE']] = preg_replace('/^powiat /u', '', $a['JPT_NAZWA_']); }
+$plWoj = []; foreach (shapefile_records("{$cache}/pl/A01_Granice_wojewodztw.shp", static fn($x, $y) => [0, 0]) as [$a]) { $plWoj[$a['JPT_KOD_JE']] = preg_replace('/^województwo /u', '', $a['JPT_NAZWA_']); }
+foreach (shapefile_records("{$cache}/pl/A03_Granice_gmin.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
+    $k = (string) $a['JPT_KOD_JE'];
+    $add('PL', 'PL-' . substr($k, 0, 6), $a['JPT_NAZWA_'], (string) ($plPowiaty[substr($k, 0, 4)] ?? ''), (string) ($plWoj[substr($k, 0, 2)] ?? ''), $polys);
+}
+
+// Pays-Bas (Kadaster : RD New)
+$nl = new PDO('sqlite:' . "{$cache}/nl/BestuurlijkeGebieden_2026.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+foreach ($nl->query('SELECT code, naam, ligt_in_provincie_naam, geom FROM gemeentegebied') as $r) {
+    $add('NL', 'NL-' . $r['code'], $r['naam'], '', (string) $r['ligt_in_provincie_naam'], gpkg_polygons($r['geom'], static fn(float $x, float $y) => rd_to_wgs84($x, $y)));
+}
+$nl = null;
+
+// Slovénie (GURS, service web déjà en GPS)
+$si = json_decode((string) file_get_contents("{$cache}/si/obcine.json"), true, 512, JSON_THROW_ON_ERROR);
+foreach ($si['features'] as $f) { $add('SI', 'SI-' . $f['properties']['SIFRA'], (string) $f['properties']['NAZIV'], '', '', geojson_polygons($f['geometry'])); }
+unset($si);
+
+// Hongrie (Lechner : EOV ; comitat retrouvé par position)
+$huCounties = []; $huSettlements = [];
+foreach (shapefile_records("{$cache}/hu/AdministrativeUnits.shp", static fn(float $x, float $y) => eov_to_wgs84($x, $y)) as [$a, $polys]) {
+    if ($a['namespace'] === 'HU.AU.CY') { $huCounties[$a['namn']] = $polys; }
+    elseif ($a['namespace'] === 'HU.AU.ST') { $huSettlements[] = [$a, $polys]; }
+}
+$containing = static function (array $polys, array $areas): string {
+    $b = bounds($polys); [$x, $y] = [($b[0] + $b[2]) / 2, ($b[1] + $b[3]) / 2];
+    foreach ($polys as $poly) { foreach ($poly[0] as $pt) { if (point_in_polygons(($pt[0] + $x) / 2, ($pt[1] + $y) / 2, [$poly])) { [$x, $y] = [($pt[0] + $x) / 2, ($pt[1] + $y) / 2]; break 2; } } }
+    foreach ($areas as $name => $area) { if (point_in_polygons($x, $y, $area)) { return (string) $name; } }
+    return '';
+};
+foreach ($huSettlements as [$a, $polys]) {
+    $add('HU', 'HU-' . substr($a['shn'], 2), str_replace('_', ' ', $a['namn']), '', $containing($polys, $huCounties), $polys);
+}
+unset($huSettlements);
+
+// OpenStreetMap (Portugal, Croatie, Bosnie, micro-États)
+// « Језеро / Opština Jezero » → « Jezero » ; « Grad Dugo Selo » → « Dugo Selo »
+$stripPrefix = static fn(string $n): string => trim((string) preg_replace('/^(Grad|Općina|Opcina|Opština|Opstina|Општина|Град)\s+/u', '',
+    str_contains($n, ' / ') ? trim(substr($n, strrpos($n, ' / ') + 3)) : $n));
+$ptCounty = []; $ptState = []; $ptA1 = [];
+foreach (geonames_rows("{$cache}/geonames-PT.zip", 'PT') as $r) {
+    if (($r[6] ?? '') !== 'A') { continue; }
+    if ($r[7] === 'ADM1') { $ptA1[$r[10]] = preg_replace('/^(Distrito de |Distrito do |Região Autónoma d[aoe]s? )/u', '', $r[1]); }
+    if ($r[7] === 'ADM2') { $ptCounty[$r[11]] = [$r[1], $r[10]]; }
+}
+foreach (osm_elements("{$cache}/osm/PT-8.json") as $e) {
+    $ine = (string) ($e['tags']['ref:ine'] ?? ''); if ($ine === '') { continue; }
+    [$county, $a1] = $ptCounty[substr($ine, 0, 4)] ?? ['', ''];
+    $add('PT', 'PT-' . $ine, (string) $e['tags']['name'], (string) $county, (string) ($ptA1[$a1] ?? ''), osm_polygons($e));
+}
+$hrCounties = [];
+foreach (osm_elements("{$cache}/osm/HR-6.json") as $e) { if (str_starts_with((string) ($e['tags']['ISO3166-2'] ?? ''), 'HR-')) { $hrCounties[$e['tags']['name']] = osm_polygons($e); } }
+// Zagreb : ville au rang de comitat (niveau 4), sans commune en dessous
+foreach (osm_elements("{$cache}/osm/HR-6.json") as $e) { if (($e['tags']['ISO3166-2'] ?? '') === 'HR-21') { $add('HR', 'HR-' . $e['id'], 'Zagreb', 'Grad Zagreb', '', osm_polygons($e)); } }
+foreach (osm_elements("{$cache}/osm/HR-7.json") as $e) {
+    if (str_contains((string) $e['tags']['name'], 'Upravna enota')) { continue; } // unité slovène (Piran) captée par la zone croate
+    $polys = osm_polygons($e);
+    $add('HR', 'HR-' . $e['id'], $stripPrefix((string) $e['tags']['name']), $containing($polys, $hrCounties), '', $polys);
+}
+$baMunicipalities = [];
+foreach (osm_elements("{$cache}/osm/BA-7.json") as $e) {
+    if (str_starts_with((string) $e['tags']['name'], 'MZ ')) { continue; } // « mjesna zajednica » (quartier) mal rangé dans OSM
+    $polys = osm_polygons($e); $baMunicipalities[] = $polys; $add('BA', 'BA-' . $e['id'], $stripPrefix((string) $e['tags']['name']), '', '', $polys); }
+foreach (osm_elements("{$cache}/osm/BA-68.json") as $e) {
+    if (($e['tags']['admin_level'] ?? '') !== '6') { continue; }
+    $city = osm_polygons($e);
+    $split = false; // ville déjà découpée en communes (Sarajevo, Istočno Sarajevo) : on garde les communes
+    foreach ($baMunicipalities as $m) { if ($containing($m, ['in' => $city]) === 'in') { $split = true; break; } }
+    if (!$split) { $add('BA', 'BA-' . $e['id'], $stripPrefix((string) $e['tags']['name']), '', '', $city); }
+}
+foreach (osm_elements("{$cache}/osm/BA-BRC.json") as $e) { $add('BA', 'BA-' . $e['id'], 'Brčko', '', '', osm_polygons($e)); } // district à statut propre
+foreach (osm_elements("{$cache}/osm/AD-7.json") as $e) { $add('AD', 'AD-' . $e['id'], (string) $e['tags']['name'], '', '', osm_polygons($e)); }
+foreach (osm_elements("{$cache}/osm/MC-8.json") as $e) { $add('MC', 'MC-' . $e['id'], 'Monaco', '', '', osm_polygons($e)); }
+foreach (osm_elements("{$cache}/osm/VA-2.json") as $e) { if (($e['tags']['ISO3166-1'] ?? '') === 'VA') { $add('VA', 'VA-' . $e['id'], 'Città del Vaticano', '', '', osm_polygons($e)); } }
+$smCountry = []; foreach (osm_elements("{$cache}/osm/SM-2.json") as $e) { $smCountry = osm_polygons($e); }
+foreach (osm_elements("{$cache}/osm/SM-8.json") as $e) {
+    $polys = osm_polygons($e);
+    if ($polys && $containing($polys, ['SM' => $smCountry]) === 'SM') { $add('SM', 'SM-' . $e['id'], (string) $e['tags']['name'], '', '', $polys); }
+}
+
+// Québec (SDA 1:20 000 : NAD83, équivalent GPS ; municipalités, territoires non organisés et réserves)
+$qc = new PDO('sqlite:' . "{$cache}/qc/SDA.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+foreach ($qc->query('SELECT MUS_CO_GEO, MUS_NM_MUN, MUS_NM_MRC, geom FROM munic_s') as $r) {
+    $add('QC', 'QC-' . $r['MUS_CO_GEO'], (string) $r['MUS_NM_MUN'], (string) $r['MUS_NM_MRC'], 'Québec', gpkg_polygons($r['geom'], static fn(float $x, float $y) => [round($x, 6), round($y, 6)]));
+}
+$qc = null;
 foreach ($countries as $cc => $list) { printf("%-20s %6d communes\n", $countryNames[$cc], count($list)); }
 
 // ─── Voisinages internes ─────────────────────────────────────────────────────────────────────
@@ -421,13 +674,6 @@ ksort($byPair);
 foreach ($byPair as $k => $n) { echo "Voisinages entre pays {$k} : {$n} paires\n"; }
 
 // ─── Lieux GeoNames (anciennes communes et lieux-dits en sous-nom) ───────────────────────────
-function geonames_rows(string $zip, string $cc): Generator
-{
-    $h = fopen("zip://{$zip}#{$cc}.txt", 'r');
-    if (!$h) { throw new RuntimeException("{$cc}.txt introuvable dans {$zip}"); }
-    while (($line = fgets($h)) !== false) { yield explode("\t", rtrim($line, "\r\n")); }
-    fclose($h);
-}
 /** Clé de commune GeoNames → code de nos contours, selon la façon dont chaque pays est numéroté. */
 function geonames_commune_key(string $cc, array $r): ?string
 {
@@ -439,6 +685,8 @@ function geonames_commune_key(string $cc, array $r): ?string
         'AT' => ($r[7] ?? '') === 'ADM3' ? 'AT-' . $r[12] : null,
         'ES' => ($r[7] ?? '') === 'ADM3' ? 'ES-' . $r[12] : null,
         'GP', 'MQ', 'GF', 'RE', 'YT' => ($r[7] ?? '') === 'ADM4' ? (string) $r[13] : null,
+        'CZ', 'SK', 'PL', 'PT' => ($r[7] ?? '') === 'ADM3' ? $cc . '-' . $r[12] : null,
+        'NL' => ($r[7] ?? '') === 'ADM2' ? 'NL-' . $r[11] : null,
         default => null,
     };
 }
@@ -446,11 +694,13 @@ function geonames_place_key(string $cc, array $r): string
 {
     return match ($cc) {
         'BE', 'DE', 'GP', 'MQ', 'GF', 'RE', 'YT' => 'a4:' . ($r[13] ?? ''),
-        'CH' => 'a3:' . (int) ($r[12] ?? 0), 'IT', 'AT', 'ES' => 'a3:' . ($r[12] ?? ''),
+        'CH' => 'a3:' . (int) ($r[12] ?? 0), 'IT', 'AT', 'ES', 'CZ', 'SK', 'PL', 'PT' => 'a3:' . ($r[12] ?? ''), 'NL' => 'a2:' . ($r[11] ?? ''),
         'LU' => 'a2:' . ($r[10] ?? '') . '.' . ($r[11] ?? ''), 'LI' => 'a1:' . ($r[10] ?? ''), default => '',
     };
 }
-$geonamesFiles = ['BE' => ['BE'], 'CH' => ['CH'], 'LI' => ['LI'], 'LU' => ['LU'], 'DE' => ['DE'], 'IT' => ['IT'], 'AT' => ['AT'], 'ES' => ['ES'], 'OM' => ['GP', 'MQ', 'GF', 'RE', 'YT']];
+$geonamesFiles = ['BE' => ['BE'], 'CH' => ['CH'], 'LI' => ['LI'], 'LU' => ['LU'], 'DE' => ['DE'], 'IT' => ['IT'], 'AT' => ['AT'], 'ES' => ['ES'], 'OM' => ['GP', 'MQ', 'GF', 'RE', 'YT'],
+    'CZ' => ['CZ'], 'SK' => ['SK'], 'PL' => ['PL'], 'NL' => ['NL'], 'SI' => ['SI'], 'HU' => ['HU'], 'PT' => ['PT'], 'HR' => ['HR'], 'BA' => ['BA'],
+    'AD' => ['AD'], 'MC' => ['MC'], 'SM' => ['SM'], 'VA' => ['VA'], 'QC' => ['CA']];
 $places = [];
 foreach ($geonamesFiles as $cc => $files) {
     $byName = []; foreach ($countries[$cc] as $code => $c) { $byName[$fold($c['name'])] = $code; }
@@ -465,7 +715,7 @@ foreach ($geonamesFiles as $cc => $files) {
         $zip = "{$cache}/geonames-{$gn}.zip";
         $communeOf = [];
         foreach (geonames_rows($zip, $gn) as $r) {
-            if (($r[6] ?? '') !== 'A') { continue; }
+            if (($r[6] ?? '') !== 'A' || ($cc === 'QC' && ($r[10] ?? '') !== '10')) { continue; }
             if ($cc === 'AT' && ($r[7] ?? '') === 'ADM2') { $atDistricts[$r[11]] = preg_replace('/^Politischer Bezirk /u', '', $r[1]); }
             $key = geonames_commune_key($gn, $r);
             if ($key === null && $cc === 'LU' && ($r[7] ?? '') === 'ADM2') { $key = $byName[$fold($r[1])] ?? null; }
@@ -477,7 +727,7 @@ foreach ($geonamesFiles as $cc => $files) {
             }
         }
         foreach (geonames_rows($zip, $gn) as $r) {
-            if (($r[6] ?? '') !== 'P' || (int) ($r[0] ?? 0) === 0) { continue; }
+            if (($r[6] ?? '') !== 'P' || (int) ($r[0] ?? 0) === 0 || ($cc === 'QC' && ($r[10] ?? '') !== '10')) { continue; }
             $code = $communeOf[geonames_place_key($gn, $r)] ?? null;
             if ($code === null) {
                 [$lx, $ly] = [(float) $r[5], (float) $r[4]];
@@ -489,7 +739,7 @@ foreach ($geonamesFiles as $cc => $files) {
             $c = $code ? $countries[$cc][$code] : null;
             $raw = $r[1];
             [$name, $sub] = ($c && $fold($c['name']) !== $fold($raw)) ? [$c['name'], $raw] : [$c['name'] ?? $raw, ''];
-            $placeCountry = $cc === 'OM' ? 'France' : $countryNames[$cc];
+            $placeCountry = $placeCountryOf($cc);
             $places[$cc][] = [(int) $r[0], $name, $sub, $c['county'] ?? '', $c['state'] ?? '', $placeCountry, mb_substr($r[3] ?? '', 0, 500), (float) $r[4], (float) $r[5], $code ?? '', $r[7], (int) ($r[14] ?? 0)];
             if ($code) { $seen[$code] = true; }
         }
@@ -503,7 +753,7 @@ foreach ($geonamesFiles as $cc => $files) {
     foreach ($countries[$cc] as $code => $c) {
         if (isset($seen[$code])) { continue; }
         $b = bounds($c['polys']);
-        $places[$cc][] = [null, $c['name'], '', $c['county'], $c['state'], $cc === 'OM' ? 'France' : $countryNames[$cc], $c['alt'], round(($b[1] + $b[3]) / 2, 6), round(($b[0] + $b[2]) / 2, 6), $code, 'ADM', 0];
+        $places[$cc][] = [null, $c['name'], '', $c['county'], $c['state'], $placeCountryOf($cc), $c['alt'], round(($b[1] + $b[3]) / 2, 6), round(($b[0] + $b[2]) / 2, 6), $code, 'ADM', 0];
     }
     printf("Lieux GeoNames en %-18s : %6d (hors de toute commune : %d)\n", $countryNames[$cc], count($places[$cc]), $unmapped);
 }

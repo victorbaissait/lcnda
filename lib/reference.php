@@ -240,7 +240,10 @@ function reference_countries_available(): array
         $cc = strtoupper(substr(basename($file), 4, 2));
         if ($cc === 'FR') { continue; }
         $out[$cc] = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg', 'DE' => 'Allemagne',
-            'IT' => 'Italie', 'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français'][$cc] ?? $cc;
+            'IT' => 'Italie', 'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français', 'CZ' => 'Tchéquie',
+            'SK' => 'Slovaquie', 'PL' => 'Pologne', 'NL' => 'Pays-Bas', 'SI' => 'Slovénie', 'HU' => 'Hongrie', 'PT' => 'Portugal',
+            'HR' => 'Croatie', 'BA' => 'Bosnie-Herzégovine', 'AD' => 'Andorre', 'MC' => 'Monaco', 'SM' => 'Saint-Marin',
+            'VA' => 'Vatican', 'QC' => 'Québec (Canada)'][$cc] ?? $cc;
     }
     asort($out);
     return $out;

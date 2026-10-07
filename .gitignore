@@ -15,6 +15,20 @@
 !/data/reference/geo-at.sqlite.gz
 !/data/reference/geo-es.sqlite.gz
 !/data/reference/geo-om.sqlite.gz
+!/data/reference/geo-cz.sqlite.gz
+!/data/reference/geo-sk.sqlite.gz
+!/data/reference/geo-pl.sqlite.gz
+!/data/reference/geo-nl.sqlite.gz
+!/data/reference/geo-si.sqlite.gz
+!/data/reference/geo-hu.sqlite.gz
+!/data/reference/geo-pt.sqlite.gz
+!/data/reference/geo-hr.sqlite.gz
+!/data/reference/geo-ba.sqlite.gz
+!/data/reference/geo-ad.sqlite.gz
+!/data/reference/geo-mc.sqlite.gz
+!/data/reference/geo-sm.sqlite.gz
+!/data/reference/geo-va.sqlite.gz
+!/data/reference/geo-qc.sqlite.gz
 !/data/reference/geo-frontieres.sqlite.gz
 # geo-world.sqlite.gz (~140 Mo, trop gros pour GitHub) : fabriqué par « npm run fetch:geo »
 # Où qu'ils soient (copies, dossiers décompressés…) : médias, données, sauvegardes, sessions

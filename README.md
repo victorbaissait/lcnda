@@ -70,6 +70,14 @@ Ces composants gardent leur propre licence :
 | Communes d'Autriche (© [Statistik Austria](https://data.statistik.gv.at/)) | battues (`geo-at`) | CC BY 4.0 |
 | Communes d'Espagne (recintos municipales, © [IGN / CNIG](https://www.ign.es/)) | battues (`geo-es`) | CC BY 4.0 |
 | Communes d'outre-mer (IGN Admin Express, via france-geojson) | battues (`geo-om`) | Licence Ouverte 2.0 |
+| Communes de Tchéquie (RÚIAN, © [ČÚZK](https://cuzk.gov.cz/)) | battues (`geo-cz`) | CC BY 4.0 |
+| Communes de Slovaquie (ZBGIS, © [ÚGKK SR](https://www.geoportal.sk/)) | battues (`geo-sk`) | CC BY 4.0 |
+| Communes de Pologne (PRG, © [GUGiK](https://www.geoportal.gov.pl/)) | battues (`geo-pl`) | données libres, tout usage |
+| Communes des Pays-Bas (Bestuurlijke Gebieden, © [Kadaster / PDOK](https://www.pdok.nl/)) | battues (`geo-nl`) | CC BY 4.0 |
+| Communes de Slovénie (RPE, © [GURS](https://www.e-prostor.gov.si/)) | battues (`geo-si`) | CC BY 4.0 |
+| Communes de Hongrie (MKH, © [Lechner Tudásközpont](https://lechnerkozpont.hu/)) | battues (`geo-hu`) | libre accès et usage |
+| Municipalités du Québec (SDA, © [Gouvernement du Québec](https://www.donneesquebec.ca/)) | battues (`geo-qc`) | CC BY 4.0 |
+| Communes du Portugal, de Croatie, de Bosnie-Herzégovine, d'Andorre, de Monaco, de Saint-Marin et du Vatican (© les contributeurs d'[OpenStreetMap](https://www.openstreetmap.org/copyright)) | battues (`geo-pt`, `geo-hr`, `geo-ba`, `geo-ad`, `geo-mc`, `geo-sm`, `geo-va`) | [ODbL 1.0](https://opendatacommons.org/licenses/odbl/) : ces fichiers restent sous ODbL |
 
 Les fonds de carte (OpenStreetMap, CARTO, OpenTopoMap, IGN, Esri…) sont chargés depuis internet, uniquement quand
 vous affichez une carte, et restent soumis aux conditions de leurs fournisseurs.
