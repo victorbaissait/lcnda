@@ -5776,15 +5776,33 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const available=Object.entries(data.available||{});
         if(!available.length){box.innerHTML='';return;}
         const active=new Set(data.active||[]);
-        box.innerHTML=`<section class="maintenance-panel battue-countries"><h3>Pays des battues</h3><p>La France est toujours disponible. Ajoute les pays voisins utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre de la frontière.</p><div class="check-row-list">${available.map(([code,name])=>`<label class="check-row"><input type="checkbox" data-battue-country="${escapeHtml(code)}" ${active.has(code)?'checked':''}> ${escapeHtml(name)}</label>`).join('')}</div><p class="muted" data-battue-country-status></p></section>`;
+        box.innerHTML=`<section class="maintenance-panel battue-countries"><h3>Pays des battues</h3><p>La France est toujours disponible. Ajoute les pays voisins utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre de la frontière.</p><div class="check-row-list">${available.map(([code,name])=>`<label class="check-row"><input type="checkbox" data-battue-country="${escapeHtml(code)}" ${active.has(code)?'checked':''}> ${escapeHtml(name)}</label>`).join('')}</div><div class="battue-countries-actions"><button type="button" class="button small" data-battue-countries-all="1">Tout cocher</button><button type="button" class="button small" data-battue-countries-all="0">Tout décocher</button></div><p class="muted" data-battue-country-status></p></section>`;
+        const status=box.querySelector('[data-battue-country-status]');
+        const lock=on=>box.querySelectorAll('input,button').forEach(el=>el.disabled=on);
+        const setCountry=(country,enabled)=>api('set_reference_country',{}, {method:'POST',body:{country,enabled}});
         box.querySelectorAll('[data-battue-country]').forEach(input=>input.addEventListener('change',async()=>{
-            const status=box.querySelector('[data-battue-country-status]');
-            box.querySelectorAll('input').forEach(i=>i.disabled=true);
+            lock(true);
             status.textContent=input.checked?'Ajout des communes en cours…':'Retrait en cours…';
             try{
-                const r=await api('set_reference_country',{}, {method:'POST',body:{country:input.dataset.battueCountry,enabled:input.checked}});
+                const r=await setCountry(input.dataset.battueCountry,input.checked);
                 toast(input.checked?`${r.communes.toLocaleString('fr-FR')} communes ajoutées (${r.border_links} liens de voisinage avec les pays voisins).`:`${r.communes.toLocaleString('fr-FR')} communes retirées.`);
             }catch(error){input.checked=!input.checked;toast(error.message,'error');}
+            renderBattueCountries(token);
+        }));
+        // Tout cocher / décocher : un pays après l'autre ; un pays utilisé par une battue reste coché (retrait refusé)
+        box.querySelectorAll('[data-battue-countries-all]').forEach(button=>button.addEventListener('click',async()=>{
+            const enabled=button.dataset.battueCountriesAll==='1';
+            const todo=[...box.querySelectorAll('[data-battue-country]')].filter(input=>input.checked!==enabled);
+            if(!todo.length)return;
+            lock(true);
+            let communes=0;const refused=[];
+            for(const [index,input] of todo.entries()){
+                const name=input.parentElement.textContent.trim();
+                status.textContent=`${enabled?'Ajout':'Retrait'} : ${name} (${index+1}/${todo.length})…`;
+                try{communes+=Number((await setCountry(input.dataset.battueCountry,enabled)).communes||0);}
+                catch(_){refused.push(name);}
+            }
+            toast(`${communes.toLocaleString('fr-FR')} communes ${enabled?'ajoutées':'retirées'}.`+(refused.length?` Non ${enabled?'ajoutés':'retirés'} : ${refused.join(', ')}${enabled?'':' (utilisés par une battue)'}.`:''),refused.length?'error':undefined);
             renderBattueCountries(token);
         }));
     }

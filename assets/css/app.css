@@ -3498,3 +3498,4 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 /* Pays des battues (communes des pays voisins) */
 .battue-countries { margin-bottom: 18px; }
 .check-row-list { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 10px 0 4px; }
+.battue-countries-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
