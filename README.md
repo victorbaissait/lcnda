@@ -62,6 +62,9 @@ Ces composants gardent leur propre licence :
 | [three.js](https://threejs.org) r162 | graphiques en 3D | MIT |
 | [GeoNames](https://www.geonames.org) (FR.zip, cities1000) | communes, lieux-dits et villes du monde (`data/reference/`) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Contours des communes (IGN Admin Express, via [france-geojson](https://github.com/gregoiredavid/france-geojson)) | battues, cartes (`data/reference/geo-fr`) | [Licence Ouverte 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) |
+| Communes de Belgique 2025 (IGN-NGI, via [ODWB](https://www.odwb.be/)) | battues (`data/reference/geo-be`) | Licence ouverte IGN-NGI (mention de la source) |
+| Communes de Suisse et du Liechtenstein (swissBOUNDARIES3D, [swisstopo](https://www.swisstopo.admin.ch/)) | battues (`geo-ch`, `geo-li`) | Opendata BY (mention « © swisstopo ») |
+| Communes du Luxembourg (cadastre, [data.public.lu](https://data.public.lu/)) | battues (`geo-lu`) | CC0 |
 
 Les fonds de carte (OpenStreetMap, CARTO, OpenTopoMap, IGN, Esri…) sont chargés depuis internet, uniquement quand
 vous affichez une carte, et restent soumis aux conditions de leurs fournisseurs.

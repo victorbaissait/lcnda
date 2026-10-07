@@ -3494,3 +3494,7 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .goose-color-choice{display:grid!important;grid-template-columns:auto minmax(0,1fr) 34px;align-items:center;gap:6px;font-size:12px!important;color:var(--ink)}.goose-color-choice select{min-height:32px!important;padding:4px 6px!important}.goose-color-choice input[type="color"]{display:block;width:34px;height:32px;min-height:32px!important;padding:2px!important;border:2px solid #000!important}.goose-color-choice input[type="color"][hidden]{display:none!important}.goose-player-fields>label.has-color-conflict .goose-color-choice{outline:3px solid #d93636;outline-offset:3px}
 .goose-dice b{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:5px;padding:9px;box-sizing:border-box;place-items:stretch}
 .goose-dice b i{display:block;width:100%;height:100%;min-width:0;min-height:0;border-radius:50%;background:transparent}.goose-dice b i.is-on{background:#000;box-shadow:inset 0 0 0 1px #000}
+
+/* Pays des battues (communes des pays voisins) */
+.battue-countries { margin-bottom: 18px; }
+.check-row-list { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 10px 0 4px; }

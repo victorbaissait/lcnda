@@ -12,7 +12,9 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  5. fichier Hérédis natif (dossier .hmw fabriqué ici, fictif) : personnes, union, événements, lieu, témoin,
  *     source, photo, étiquette, tâche ; l'original n'est pas modifié ;
  *  6. une base neuve reçoit les communes françaises livrées avec l'app (contours, voisinages, GeoNames) ;
- *  7. n'importe quelle ville du monde : suggérée (avec coordonnées) ou tapée librement, même inconnue.
+ *  7. n'importe quelle ville du monde : suggérée (avec coordonnées) ou tapée librement, même inconnue ;
+ *  8. battues au-delà des frontières : pays voisins ajoutés, battue d'Halluin qui passe en Belgique, retrait refusé
+ *     tant qu'une battue utilise le pays, retrait complet sinon.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -250,8 +252,42 @@ async function download(s, base, action) {
       ['1900', 'Montréal', 'Canada', 1], ['1901', 'Wabag', 'Papouasie-Nouvelle-Guinée', 1], ['1902', 'Yibab', 'Papouasie-Nouvelle-Guinée', 0]]);
   });
 
+  await step('battues : pays voisins, voisinages de part et d’autre de la frontière', async () => {
+    process.env.GENEALOGY_SKIP_REFERENCE = '0';
+    const dir = path.join(tmp, 'H');
+    try {
+      await withServer(dir, async (s, base) => {
+        await upload(s, base, fs.readFileSync(ged), 'complet.ged');
+        const h = { 'x-carnet-secret': s.secret };
+        const boot = await fetch(base + '/api.php?action=bootstrap', { headers: h });
+        const cookie = (boot.headers.get('set-cookie') || '').split(';')[0];
+        const { csrf } = await boot.json();
+        const get = async (a) => (await fetch(`${base}/api.php?action=${a}`, { headers: { ...h, cookie } })).json();
+        const post = async (a, body) => (await fetch(`${base}/api.php?action=${a}`, { method: 'POST', headers: { ...h, cookie, 'content-type': 'application/json', 'X-CSRF-Token': csrf }, body: JSON.stringify({ ...body, csrf }) })).json();
+        const available = (await get('reference_countries')).available;
+        assert.deepEqual(Object.keys(available).sort(), ['BE', 'CH', 'LI', 'LU']);
+        const be = await post('set_reference_country', { country: 'BE', enabled: true });
+        assert.ok(be.communes > 500 && be.border_links > 100, 'Belgique ajoutée avec ses voisinages frontaliers');
+        assert.ok((await post('set_reference_country', { country: 'LU', enabled: true })).communes === 100);
+        const tournai = (await get('commune_suggestions&q=Tournai')).communes[0];
+        assert.deepEqual([tournai.insee_code, tournai.label.endsWith('Belgique')], ['BE-57081', true]);
+        const battue = await post('save_battue', { title: 'Frontière', target_type: 'naissance', start_insee_code: '59279', max_level: 1 });
+        const detail = await get('battue_detail&id=' + battue.result.id);
+        const names = Object.values(detail.communes).map((c) => c.name);
+        assert.ok(names.includes('Menen') && names.includes('Wervik'), 'Halluin → Menin et Wervik (Belgique) : ' + names.join(', '));
+        await post('save_battue', { title: 'Départ belge', target_type: 'naissance', start_insee_code: 'BE-34027', max_level: 1 });
+        assert.match((await post('set_reference_country', { country: 'BE', enabled: false })).error || '', /battues utilisent/, 'retrait refusé : une battue part de Menin');
+        const lu = await post('set_reference_country', { country: 'LU', enabled: false });
+        assert.deepEqual([lu.ok, lu.active], [true, ['BE']]);
+      });
+    } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; }
+    const db = path.join(dir, 'data', 'genealogy.sqlite');
+    assert.equal(rows(db, "SELECT count(*) n FROM places WHERE country='Luxembourg'")[0].n, 0, 'lieux du Luxembourg retirés');
+    assert.equal(rows(db, "SELECT count(*) n FROM commune_contours WHERE insee_code LIKE 'BE-%'")[0].n, 565, 'Belgique toujours présente');
+  });
+
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`\n${passed}/7 vérifications réussies.`);
+  console.log(`\n${passed}/8 vérifications réussies.`);
 })().catch((e) => {
   if (!e || !e.reported) console.error(e);
   process.exitCode = 1;

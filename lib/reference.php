@@ -227,3 +227,124 @@ function place_from_world(PDO $pdo, array $w): int
         ->execute([(int) $w['geoname_id'], (string) $w['name'], (string) $w['state'], (string) $w['country'], $w['latitude'], $w['longitude'], (int) $w['population'], (string) ($w['feature_code'] ?? '')]);
     return (int) $pdo->lastInsertId();
 }
+
+// ── Pays voisins activables pour les battues (data/reference/geo-<pays>.sqlite.gz, scripts/build-reference-europe.php) ──
+// Codes préfixés (« BE-57081 ») ; la France garde ses codes INSEE. Chaque base choisit ses pays (meta.reference_countries).
+
+/** Pays livrés avec l'application (hors France, toujours présente) : code => nom. */
+function reference_countries_available(): array
+{
+    $out = [];
+    foreach (glob(APP_ROOT . '/data/reference/geo-??.sqlite.gz') ?: [] as $file) {
+        $cc = strtoupper(substr(basename($file), 4, 2));
+        if ($cc === 'FR') { continue; }
+        $out[$cc] = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg'][$cc] ?? $cc;
+    }
+    asort($out);
+    return $out;
+}
+
+function reference_countries_active(PDO $pdo): array
+{
+    try { $v = $pdo->query("SELECT value FROM meta WHERE key='reference_countries'")->fetchColumn(); } catch (Throwable) { return []; }
+    $list = $v ? json_decode((string) $v, true) : [];
+    return is_array($list) ? array_values(array_filter($list, 'is_string')) : [];
+}
+
+/** Nom du pays d'une commune d'après son code (sans préfixe = France). */
+function commune_country_name(string $code): string
+{
+    return preg_match('/^([A-Z]{2})-/', $code, $m) ? (reference_countries_available()[$m[1]] ?? $m[1]) : 'France';
+}
+
+/** Ajoute les communes, voisinages, lieux d'un pays, puis les voisinages avec les pays déjà présents. */
+function enable_reference_country(PDO $pdo, string $cc): array
+{
+    $cc = strtoupper($cc);
+    if (!isset(reference_countries_available()[$cc])) { throw new RuntimeException('Pays non disponible.'); }
+    $ref = reference_database_path('geo-' . strtolower($cc));
+    $borders = reference_database_path('geo-frontieres');
+    if ($ref === null) { throw new RuntimeException('Données de ce pays introuvables.'); }
+    @set_time_limit(0);
+    $pdo->exec('ATTACH DATABASE ' . $pdo->quote($ref) . ' AS refc');
+    if ($borders) { $pdo->exec('ATTACH DATABASE ' . $pdo->quote($borders) . ' AS refb'); }
+    try {
+        $pdo->beginTransaction();
+        $contours = $pdo->exec('INSERT OR IGNORE INTO commune_contours(insee_code,name,geometry_json,min_lon,min_lat,max_lon,max_lat,centroid_lon,centroid_lat,updated_at)
+            SELECT insee_code,name,geometry_json,min_lon,min_lat,max_lon,max_lat,centroid_lon,centroid_lat,CURRENT_TIMESTAMP FROM refc.commune_contours');
+        $pdo->exec('INSERT OR IGNORE INTO commune_neighbors(insee_code,neighbor_insee_code) SELECT insee_code,neighbor_insee_code FROM refc.commune_neighbors');
+        // Lieux : seulement ceux qui n'existent pas déjà (même identifiant GeoNames)
+        $places = $pdo->exec('INSERT OR IGNORE INTO places(geoname_id,name,subdivision,county,state,country,alternate_names,latitude,longitude,admin4_code,feature_code,population)
+            SELECT geoname_id,name,subdivision,county,state,country,alternate_names,latitude,longitude,admin4_code,feature_code,population FROM refc.geo_places g
+            WHERE g.geoname_id IS NULL OR NOT EXISTS (SELECT 1 FROM places p WHERE p.geoname_id=g.geoname_id)');
+        $across = 0;
+        if ($borders) {
+            $across = $pdo->exec('INSERT OR IGNORE INTO commune_neighbors(insee_code,neighbor_insee_code)
+                SELECT b.insee_code,b.neighbor_insee_code FROM refb.border_neighbors b
+                WHERE EXISTS (SELECT 1 FROM commune_contours c WHERE c.insee_code=b.insee_code)
+                  AND EXISTS (SELECT 1 FROM commune_contours c WHERE c.insee_code=b.neighbor_insee_code)');
+        }
+        $active = array_values(array_unique([...reference_countries_active($pdo), $cc]));
+        sort($active);
+        $pdo->prepare("INSERT OR REPLACE INTO meta(key,value) VALUES('reference_countries',?)")->execute([json_encode($active)]);
+        $pdo->commit();
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        throw $e;
+    } finally {
+        try { $pdo->exec('DETACH DATABASE refc'); } catch (Throwable) {}
+        if ($borders) { try { $pdo->exec('DETACH DATABASE refb'); } catch (Throwable) {} }
+    }
+    return ['country' => $cc, 'communes' => (int) $contours, 'places' => (int) $places, 'border_links' => (int) $across];
+}
+
+/**
+ * Retire un pays. REFUSÉ si une battue (ou toute autre donnée) utilise une de ses communes : les annotations de battue
+ * seraient sinon effacées en cascade. Les lieux cités par un événement ou un recensement sont gardés.
+ */
+function disable_reference_country(PDO $pdo, string $cc): array
+{
+    $cc = strtoupper($cc);
+    if (!preg_match('/^[A-Z]{2}$/', $cc) || $cc === 'FR') { throw new RuntimeException('La France ne peut pas être retirée.'); }
+    $prefix = $cc . '-%';
+    foreach ($pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT IN ('commune_contours','commune_neighbors')")->fetchAll(PDO::FETCH_COLUMN) as $table) {
+        foreach ($pdo->query('PRAGMA table_info("' . str_replace('"', '""', $table) . '")') as $col) {
+            if (!preg_match('/insee_code$/', (string) $col['name'])) { continue; }
+            $stmt = $pdo->prepare('SELECT count(*) FROM "' . str_replace('"', '""', $table) . '" WHERE "' . $col['name'] . '" LIKE ?');
+            $stmt->execute([$prefix]);
+            if ((int) $stmt->fetchColumn() > 0) {
+                throw new RuntimeException('Des battues utilisent des communes de ce pays : retire-les d’abord de ces battues (rien n’a été supprimé).');
+            }
+        }
+    }
+    // Fichier du pays rattaché AVANT la transaction (SQLite refuse ATTACH pendant une transaction)
+    $ref = reference_database_path('geo-' . strtolower($cc));
+    $fromFile = '';
+    if ($ref !== null) { $pdo->exec('ATTACH DATABASE ' . $pdo->quote($ref) . ' AS refc'); $fromFile = ' OR geoname_id IN (SELECT geoname_id FROM refc.geo_places WHERE geoname_id IS NOT NULL)'; }
+    try {
+    $pdo->beginTransaction();
+    $pdo->prepare('DELETE FROM commune_neighbors WHERE insee_code LIKE ? OR neighbor_insee_code LIKE ?')->execute([$prefix, $prefix]);
+    $deleted = $pdo->prepare('DELETE FROM commune_contours WHERE insee_code LIKE ?');
+    $deleted->execute([$prefix]);
+    // Lieux du pays : gardés dès qu'une donnée les utilise (toute colonne « place_id », dans n'importe quelle table)
+    $usedBy = [];
+    foreach ($pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name<>'places'")->fetchAll(PDO::FETCH_COLUMN) as $table) {
+        foreach ($pdo->query('PRAGMA table_info("' . str_replace('"', '""', $table) . '")') as $col) {
+            if (preg_match('/(^|_)place_id$/', (string) $col['name'])) {
+                $usedBy[] = 'NOT EXISTS (SELECT 1 FROM "' . str_replace('"', '""', $table) . '" u WHERE u."' . $col['name'] . '"=places.id)';
+            }
+        }
+    }
+    // Lieux venus du fichier de ce pays (par leur code de commune, ou par leur identifiant GeoNames)
+    $pdo->prepare('DELETE FROM places WHERE (admin4_code LIKE ?' . $fromFile . ')' . ($usedBy ? ' AND ' . implode(' AND ', $usedBy) : ''))->execute([$prefix]);
+    $active = array_values(array_diff(reference_countries_active($pdo), [$cc]));
+    $pdo->prepare("INSERT OR REPLACE INTO meta(key,value) VALUES('reference_countries',?)")->execute([json_encode($active)]);
+    $pdo->commit();
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        throw $e;
+    } finally {
+        if ($ref !== null) { try { $pdo->exec('DETACH DATABASE refc'); } catch (Throwable) {} }
+    }
+    return ['country' => $cc, 'communes' => $deleted->rowCount()];
+}

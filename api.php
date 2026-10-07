@@ -127,6 +127,12 @@ try {
     if ($isWrite && $action === 'clone_database') {
         clone_database($pdo, $payload);
     }
+    if ($isWrite && $action === 'set_reference_country') {
+        $cc = safe_text($payload['country'] ?? '');
+        $result = !empty($payload['enabled']) ? enable_reference_country($pdo, $cc) : disable_reference_country($pdo, $cc);
+        log_change($pdo, 'meta', 0, 'update', (!empty($payload['enabled']) ? 'Pays ajouté aux battues : ' : 'Pays retiré des battues : ') . $cc, null, $result);
+        json_response(['ok' => true] + $result + ['active' => reference_countries_active($pdo)]);
+    }
     if ($isWrite && $action === 'save_settings') {
         save_app_settings($pdo, $payload);
     }
@@ -178,6 +184,7 @@ try {
         'issues' => issues_data($pdo),
         'person_count' => json_response(['count' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn()]),
         'ghost_families' => ghost_families_data($pdo),
+        'reference_countries' => json_response(['available' => reference_countries_available(), 'active' => reference_countries_active($pdo)]),
         'bulk_preview' => bulk_preview($pdo),
         'lock_candidates' => lock_candidates($pdo),
         'labels' => labels_data($pdo),
@@ -7476,8 +7483,8 @@ function commune_suggestions_data(PDO $pdo): never
     // Département, région et nombre de voisines calculés seulement pour les 20 communes gardées (sous-requêtes sur
     // index) : la jointure de toutes les communes trouvées avec les lieux prenait jusqu'à 3 minutes.
     $stmt=$pdo->prepare("SELECT c.insee_code,c.name,c.centroid_lat,c.centroid_lon,
-        COALESCE((SELECT p.county FROM places p WHERE p.admin4_code=c.insee_code AND p.country='France' AND p.county<>'' LIMIT 1),'') AS admin2,
-        COALESCE((SELECT p.state FROM places p WHERE p.admin4_code=c.insee_code AND p.country='France' AND p.state<>'' LIMIT 1),'') AS admin1,
+        COALESCE((SELECT p.county FROM places p WHERE p.admin4_code=c.insee_code AND p.county<>'' LIMIT 1),'') AS admin2,
+        COALESCE((SELECT p.state FROM places p WHERE p.admin4_code=c.insee_code AND p.state<>'' LIMIT 1),'') AS admin1,
         (SELECT count(*) FROM commune_neighbors n WHERE n.insee_code=c.insee_code) AS neighbor_count
         FROM commune_contours c
         WHERE c.name LIKE ? COLLATE NOCASE OR replace(c.name,'-',' ') LIKE ? COLLATE NOCASE OR c.insee_code LIKE ? COLLATE NOCASE
@@ -7491,7 +7498,7 @@ function commune_suggestions_data(PDO $pdo): never
         $parts=[$row['name']];
         if($row['admin2'])$parts[]=$row['admin2'];
         if($row['admin1']&&$row['admin1']!==$row['admin2'])$parts[]=$row['admin1'];
-        $parts[]='France';
+        $parts[]=commune_country_name((string)$row['insee_code']);
         $row['label']=implode(' · ',array_filter($parts));
     }
     unset($row);
@@ -9138,8 +9145,13 @@ function place_name_search_data(PDO $pdo): never
     if ($hasContours) {
         $contourWhere = ["name LIKE :q ESCAPE '\\' COLLATE NOCASE"];
         $contourParams = [':q' => $pattern];
-        if ($country !== '' && mb_stripos('France', $country) === false && mb_stripos($country, 'FR') === false) {
-            $contourWhere[] = '0=1';
+        // Pays de chaque commune d'après son code (« BE-… » = Belgique ; sans préfixe = France)
+        $countrySql = "CASE";
+        foreach (reference_countries_available() as $cc => $countryName) { $countrySql .= " WHEN c.insee_code GLOB " . $pdo->quote($cc . '-*') . " THEN " . $pdo->quote($countryName); }
+        $countrySql .= " ELSE 'France' END";
+        if ($country !== '') {
+            $contourWhere[] = "($countrySql) LIKE :contourCountry COLLATE NOCASE";
+            $contourParams[':contourCountry'] = (mb_stripos('France', $country) !== false || strtoupper($country) === 'FR') ? 'France' : '%' . addcslashes($country, "\\%_") . '%';
         }
         if ($division !== '') {
             $contourWhere[] = '(insee_code LIKE :divisionPrefix OR name LIKE :division ESCAPE \'\\\' COLLATE NOCASE)';
@@ -9148,7 +9160,7 @@ function place_name_search_data(PDO $pdo): never
             $contourParams[':division'] = '%' . addcslashes($division, "\\%_") . '%';
         }
         $contourSql = "
-            SELECT NULL AS id, c.name, '' AS subdivision, substr(c.insee_code,1,2) AS county, '' AS state, 'France' AS country,
+            SELECT NULL AS id, c.name, '' AS subdivision, CASE WHEN c.insee_code GLOB '[A-Z][A-Z]-*' THEN '' ELSE substr(c.insee_code,1,2) END AS county, '' AS state, $countrySql AS country,
                    c.centroid_lat AS latitude, c.centroid_lon AS longitude, NULL AS population,
                    0 AS event_count, 0 AS census_count, c.insee_code AS insee_code
             FROM commune_contours c
@@ -9156,14 +9168,14 @@ function place_name_search_data(PDO $pdo): never
               AND NOT EXISTS (
                   SELECT 1 FROM places p
                   WHERE p.name = c.name COLLATE NOCASE
-                    AND (p.country = 'France' OR p.country = 'FR' OR p.country = '')
+                    AND (p.country = ($countrySql) OR (($countrySql) = 'France' AND (p.country = 'FR' OR p.country = '')))
               )
             ORDER BY c.name COLLATE NOCASE
             LIMIT 200";
         $contourStmt = $pdo->prepare($contourSql);
         $contourStmt->execute($contourParams);
         foreach ($contourStmt->fetchAll() as $row) {
-            $row['label'] = trim($row['name'] . ' (' . $row['insee_code'] . ') · commune officielle française');
+            $row['label'] = trim($row['name'] . ' (' . $row['insee_code'] . ') · ' . ($row['country'] === 'France' ? 'commune officielle française' : 'commune officielle · ' . $row['country']));
             $places[] = $row;
         }
     }

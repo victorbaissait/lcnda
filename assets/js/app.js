@@ -5760,9 +5760,33 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         state.battueTargetTypes=data.target_types||state.battueTargetTypes;
         const sortedBattues=applyListSort(data.battues,state.battueSort,'title','created_at');
         $('#workspace').innerHTML=`<section class="page battue-page"><header class="page-header"><div><span class="eyebrow">BATTUE</span><h2>${data.battues.length} battue(s)</h2><p>Recherche commune par commune, niveaux de voisinage et suivi des tables consultées.</p></div><label class="media-filter-label" style="font-size:.8em">Trier <select id="battue-sort-select" class="button small secondary" style="padding:.3rem .6rem;font-size:.8em">${sortOptionsHtml(state.battueSort)}</select></label></header>
+        <div id="battue-countries"></div>
         ${state.investigationDisplay==='cards'?battueCardsHtml(sortedBattues,data.target_types):battueTable(sortedBattues,data.target_types)}</section>`;
+        renderBattueCountries(token);
         $$('[data-open-battue]').forEach(button=>button.addEventListener('click',()=>{state.currentBattueId=Number(button.dataset.openBattue);persistUiState();renderBattues();}));
         $('#battue-sort-select')?.addEventListener('change',event=>{state.battueSort=event.target.value;persistUiState();renderBattues();});
+    }
+
+    // Pays des battues : la France est toujours présente ; chaque pays voisin s'ajoute (communes, voisinages de part et
+    // d'autre de la frontière, anciennes communes en sous-nom) ou se retire (refusé si une battue l'utilise).
+    async function renderBattueCountries(token){
+        const box=$('#battue-countries');if(!box)return;
+        let data;try{data=await api('reference_countries');}catch(_){return;}
+        if(token!==state.workspaceToken||!document.body.contains(box))return;
+        const available=Object.entries(data.available||{});
+        if(!available.length){box.innerHTML='';return;}
+        const active=new Set(data.active||[]);
+        box.innerHTML=`<section class="maintenance-panel battue-countries"><h3>Pays des battues</h3><p>La France est toujours disponible. Ajoute les pays voisins utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre de la frontière.</p><div class="check-row-list">${available.map(([code,name])=>`<label class="check-row"><input type="checkbox" data-battue-country="${escapeHtml(code)}" ${active.has(code)?'checked':''}> ${escapeHtml(name)}</label>`).join('')}</div><p class="muted" data-battue-country-status></p></section>`;
+        box.querySelectorAll('[data-battue-country]').forEach(input=>input.addEventListener('change',async()=>{
+            const status=box.querySelector('[data-battue-country-status]');
+            box.querySelectorAll('input').forEach(i=>i.disabled=true);
+            status.textContent=input.checked?'Ajout des communes en cours…':'Retrait en cours…';
+            try{
+                const r=await api('set_reference_country',{}, {method:'POST',body:{country:input.dataset.battueCountry,enabled:input.checked}});
+                toast(input.checked?`${r.communes.toLocaleString('fr-FR')} communes ajoutées (${r.border_links} liens de voisinage avec les pays voisins).`:`${r.communes.toLocaleString('fr-FR')} communes retirées.`);
+            }catch(error){input.checked=!input.checked;toast(error.message,'error');}
+            renderBattueCountries(token);
+        }));
     }
 
     function battueCardsHtml(battues,targetTypes){
@@ -7029,7 +7053,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             <article class="maintenance-panel"><h3>Recherche et enquêtes</h3><p>Les modules de recherche aident à retrouver des personnes, des dates, des lieux, des transcriptions OCR/HTR, des pistes et des noms de lieux partiellement lisibles. Les enquêtes et battues permettent de suivre le travail commune par commune, source par source.</p></article>
             <article class="maintenance-panel"><h3>Médias et transcriptions</h3><p>Les images, actes, cartes postales et documents peuvent être rattachés aux personnes, événements, enquêtes ou battues. Les zones de personnes et de signatures peuvent être identifiées, comparées et enrichies par OCR ou reconnaissance manuscrite si les modèles sont installés.</p></article>
             <article class="maintenance-panel"><h3>Cartes, chronologie et statistiques</h3><p>Le logiciel affiche les lieux, les migrations, les itinéraires, les cartes de battue et les frises personnelles. Les graphiques et statistiques aident à lire les âges, métiers, prénoms, décès, SOSA, branches et tendances de la base.</p></article>
-            <article class="maintenance-panel"><h3>Données géographiques</h3><p>Les communes françaises, leurs contours et leurs voisinages, ainsi que les villes du monde proposées à la saisie d’un lieu, sont livrés avec le logiciel :</p><ul><li>Communes, lieux-dits et villes du monde : <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>, licence <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" target="_blank" rel="noopener">Creative Commons Attribution 4.0 (CC BY 4.0)</a>.</li><li>Contours des communes : IGN, Admin Express, via <a href="https://github.com/gregoiredavid/france-geojson" target="_blank" rel="noopener">france-geojson</a>, <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>.</li></ul><p>N’importe quel autre lieu peut être saisi librement.</p></article>
+            <article class="maintenance-panel"><h3>Données géographiques</h3><p>Les communes françaises, leurs contours et leurs voisinages, ainsi que les villes du monde proposées à la saisie d’un lieu, sont livrés avec le logiciel :</p><ul><li>Communes, lieux-dits et villes du monde : <a href="https://www.geonames.org" target="_blank" rel="noopener">GeoNames</a>, licence <a href="https://creativecommons.org/licenses/by/4.0/deed.fr" target="_blank" rel="noopener">Creative Commons Attribution 4.0 (CC BY 4.0)</a>.</li><li>Contours des communes : IGN, Admin Express, via <a href="https://github.com/gregoiredavid/france-geojson" target="_blank" rel="noopener">france-geojson</a>, <a href="https://www.etalab.gouv.fr/licence-ouverte-open-licence/" target="_blank" rel="noopener">Licence Ouverte 2.0 (Etalab)</a>.</li><li>Communes de Belgique : IGN-NGI (Institut géographique national belge), licence ouverte, via <a href="https://www.odwb.be/" target="_blank" rel="noopener">ODWB</a>.</li><li>Communes de Suisse et du Liechtenstein : swissBOUNDARIES3D © <a href="https://www.swisstopo.admin.ch/" target="_blank" rel="noopener">swisstopo</a> (Opendata BY).</li><li>Communes du Luxembourg : Administration du cadastre et de la topographie, <a href="https://data.public.lu/" target="_blank" rel="noopener">data.public.lu</a> (CC0).</li></ul><p>N’importe quel autre lieu peut être saisi librement.</p></article>
                         <article class="maintenance-panel"><h3>Maintenance et export</h3><p>La maintenance regroupe les imports, exports, sauvegardes, réglages d’apparence, listes, calendriers, mesures anciennes, journal des modifications, restauration de suppressions et outils de contrôle. Le travail reste pensé pour une utilisation locale, sans service distant obligatoire.</p></article>
         </div></section>`;
     }
