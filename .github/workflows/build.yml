@@ -2,7 +2,7 @@
 #
 # - Lancement manuel : onglet « Actions » → « Installateurs » → « Run workflow » (fichiers dans « Artifacts »).
 # - Nouvelle version : pousser une étiquette, ex. « git tag v0.0.3 && git push origin v0.0.3 » → les installateurs
-#   sont rassemblés dans un BROUILLON de version (onglet « Releases »), publié à la main.
+#   sont envoyés directement dans un BROUILLON de version (onglet « Releases »), publié à la main.
 #
 # Versions des systèmes fixées exprès (pas de « -latest ») : un changement chez GitHub ne doit pas modifier les
 # installateurs sans prévenir. Linux est fabriqué sur Ubuntu 22.04 pour rester compatible avec plus de distributions.
@@ -21,9 +21,30 @@ permissions:
   contents: read
 
 jobs:
+  # Version (étiquette v*) : un seul job crée le brouillon, puis chaque machine y envoie directement ses installateurs
+  # (une Release n'occupe pas l'espace de stockage des « Artifacts », limité et déjà saturé une fois).
+  prepare:
+    name: Brouillon de version
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Créer le brouillon
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "${{ github.ref_name }}" --draft
+          --repo "${{ github.repository }}" --title "LCNDA ${{ github.ref_name }}"
+          --notes "Installateurs de LCNDA ${{ github.ref_name }} — vérifie les empreintes dans SHA256SUMS.txt."
+
   build:
     name: ${{ matrix.name }}
+    needs: prepare
+    if: ${{ !cancelled() && needs.prepare.result != 'failure' }}
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       fail-fast: false
       matrix:
@@ -81,11 +102,25 @@ jobs:
       - name: Fabrication des installateurs
         run: npx electron-builder ${{ matrix.dist }} --publish never
 
+      - name: Envoi dans le brouillon de version
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd dist
+          files=$(ls *.dmg *.exe *.AppImage *.deb 2>/dev/null)
+          test -n "$files"
+          if command -v sha256sum >/dev/null; then sum="sha256sum"; else sum="shasum -a 256"; fi
+          $sum $files > "SHA256SUMS-${{ runner.os }}.txt" && cat "SHA256SUMS-${{ runner.os }}.txt"
+          gh release upload "${{ github.ref_name }}" $files "SHA256SUMS-${{ runner.os }}.txt" --clobber --repo "${{ github.repository }}"
+
       - uses: actions/upload-artifact@v7
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         with:
           name: LCNDA-${{ runner.os }}
           if-no-files-found: error
-          # Copie de passage vers la Release : effacée au bout d'un jour (l'espace de stockage GitHub est limité)
+          # Lancement manuel seulement ; effacé au bout d'un jour (l'espace de stockage GitHub est limité)
           retention-days: 1
           path: |
             dist/*.dmg
@@ -93,24 +128,21 @@ jobs:
             dist/*.AppImage
             dist/*.deb
 
-  release:
-    name: Brouillon de version
+  sums:
+    name: Empreintes sha256
     if: startsWith(github.ref, 'refs/tags/v')
     needs: build
     runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v8
-        with:
-          path: installateurs
-          merge-multiple: true
-      - name: Empreintes sha256 des installateurs
-        run: cd installateurs && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt
-      - name: Créer le brouillon
+      - name: Rassembler SHA256SUMS.txt
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >
-          gh release create "${{ github.ref_name }}" installateurs/*
-          --repo "${{ github.repository }}" --draft --title "LCNDA ${{ github.ref_name }}"
-          --notes "Installateurs de LCNDA ${{ github.ref_name }} — vérifie les empreintes dans SHA256SUMS.txt."
+          R: ${{ github.repository }}
+          T: ${{ github.ref_name }}
+        run: |
+          gh release download "$T" --repo "$R" --pattern 'SHA256SUMS-*.txt'
+          cat SHA256SUMS-*.txt | sort -k2 > SHA256SUMS.txt && cat SHA256SUMS.txt
+          gh release upload "$T" SHA256SUMS.txt --clobber --repo "$R"
+          for f in SHA256SUMS-*.txt; do gh release delete-asset "$T" "$f" --yes --repo "$R"; done
