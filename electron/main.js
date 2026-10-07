@@ -172,6 +172,11 @@ function lockNavigation(webContents, origin) {
   const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };
   webContents.setWindowOpenHandler(({ url }) => {
     if (url.startsWith(origin)) return { action: 'allow' };
+    // Fenêtre vide que la page remplit elle-même pour une impression (graphique, feuille de mission aux archives,
+    // bordereau de copies) : autorisée, isolée et sans accès au pont de l'application. Avant : bloquée (null).
+    if (url === 'about:blank' || url === '') {
+      return { action: 'allow', overrideBrowserWindowOptions: { autoHideMenuBar: true, webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, preload: undefined } } };
+    }
     external(url);
     return { action: 'deny' };
   });

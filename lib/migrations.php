@@ -272,12 +272,17 @@ function schema_v4(PDO $pdo): void
 }
 
 /**
- * Structure n°5 (2026-10-07) : index sur places(admin4_code) (code INSEE des communes GeoNames). La recherche de la
- * commune de départ d'une battue reliait chaque commune aux ~81 000 lieux sans index : 176 s pour « ar ».
+ * Structure n°5 (2026-10-07) : index pour les ~81 000 communes livrées avec l'app.
+ *  - places(admin4_code) : recherche de la commune de départ d'une battue (176 s pour « ar » → 0,02 s) ;
+ *  - places(name COLLATE NOCASE) : recherche de lieux mal lisibles, qui vérifie pour chaque commune qu'aucun lieu du
+ *    même nom n'existe (21 s pour « sa » → 0,09 s) ;
+ *  - census_records(place_id) : recensements d'un lieu.
  */
 function schema_v5(PDO $pdo): void
 {
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_places_admin4 ON places(admin4_code)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_places_name_nocase ON places(name COLLATE NOCASE)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_census_records_place ON census_records(place_id)');
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */
