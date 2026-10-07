@@ -10,6 +10,11 @@
 !/data/reference/geo-ch.sqlite.gz
 !/data/reference/geo-li.sqlite.gz
 !/data/reference/geo-lu.sqlite.gz
+!/data/reference/geo-de.sqlite.gz
+!/data/reference/geo-it.sqlite.gz
+!/data/reference/geo-at.sqlite.gz
+!/data/reference/geo-es.sqlite.gz
+!/data/reference/geo-om.sqlite.gz
 !/data/reference/geo-frontieres.sqlite.gz
 # geo-world.sqlite.gz (~140 Mo, trop gros pour GitHub) : fabriqué par « npm run fetch:geo »
 # Où qu'ils soient (copies, dossiers décompressés…) : médias, données, sauvegardes, sessions
@@ -87,3 +92,6 @@ Thumbs.db
 
 # Exceptions : fichiers d'essai des tests (fictifs)
 !/tests/fixtures/*.ged
+
+# Limites officielles espagnoles (CNIG), téléchargées par Victor : source de scripts/build-reference-europe.php
+/lineas_limite/

@@ -14,7 +14,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  6. une base neuve reçoit les communes françaises livrées avec l'app (contours, voisinages, GeoNames) ;
  *  7. n'importe quelle ville du monde : suggérée (avec coordonnées) ou tapée librement, même inconnue ;
  *  8. battues au-delà des frontières : pays voisins ajoutés, battue d'Halluin qui passe en Belgique, retrait refusé
- *     tant qu'une battue utilise le pays, retrait complet sinon.
+ *     tant qu'une battue utilise le pays, retrait complet sinon ; Strasbourg ↔ Kehl ; outre-mer ajouté puis retiré.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -265,7 +265,7 @@ async function download(s, base, action) {
         const get = async (a) => (await fetch(`${base}/api.php?action=${a}`, { headers: { ...h, cookie } })).json();
         const post = async (a, body) => (await fetch(`${base}/api.php?action=${a}`, { method: 'POST', headers: { ...h, cookie, 'content-type': 'application/json', 'X-CSRF-Token': csrf }, body: JSON.stringify({ ...body, csrf }) })).json();
         const available = (await get('reference_countries')).available;
-        assert.deepEqual(Object.keys(available).sort(), ['BE', 'CH', 'LI', 'LU']);
+        assert.deepEqual(Object.keys(available).sort(), ['AT', 'BE', 'CH', 'DE', 'ES', 'IT', 'LI', 'LU', 'OM']);
         const be = await post('set_reference_country', { country: 'BE', enabled: true });
         assert.ok(be.communes > 500 && be.border_links > 100, 'Belgique ajoutée avec ses voisinages frontaliers');
         assert.ok((await post('set_reference_country', { country: 'LU', enabled: true })).communes === 100);
@@ -279,11 +279,24 @@ async function download(s, base, action) {
         assert.match((await post('set_reference_country', { country: 'BE', enabled: false })).error || '', /battues utilisent/, 'retrait refusé : une battue part de Menin');
         const lu = await post('set_reference_country', { country: 'LU', enabled: false });
         assert.deepEqual([lu.ok, lu.active], [true, ['BE']]);
+        // Allemagne : Strasbourg ↔ Kehl, de l'autre côté du Rhin
+        assert.ok((await post('set_reference_country', { country: 'DE', enabled: true })).communes > 10000);
+        const rhin = await post('save_battue', { title: 'Rhin', target_type: 'naissance', start_insee_code: '67482', max_level: 1 });
+        const rhinNames = Object.values((await get('battue_detail&id=' + rhin.result.id)).communes).map((c) => c.name);
+        assert.ok(rhinNames.includes('Kehl'), 'Strasbourg → Kehl : ' + rhinNames.join(', '));
+        // Outre-mer : codes INSEE sans préfixe, pays France ; retrait limité aux codes 97…
+        const om = await post('set_reference_country', { country: 'OM', enabled: true });
+        assert.equal(om.communes, 129);
+        const abymes = (await get('commune_suggestions&q=Abymes')).communes[0];
+        assert.equal(abymes.insee_code, '97101');
+        const omOff = await post('set_reference_country', { country: 'OM', enabled: false });
+        assert.equal(omOff.communes, 129);
       });
     } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; }
     const db = path.join(dir, 'data', 'genealogy.sqlite');
     assert.equal(rows(db, "SELECT count(*) n FROM places WHERE country='Luxembourg'")[0].n, 0, 'lieux du Luxembourg retirés');
     assert.equal(rows(db, "SELECT count(*) n FROM commune_contours WHERE insee_code LIKE 'BE-%'")[0].n, 565, 'Belgique toujours présente');
+    assert.ok(rows(db, "SELECT count(*) n FROM commune_contours WHERE insee_code NOT LIKE '%-%'")[0].n > 34000, 'France métropolitaine intacte après le retrait de l’outre-mer');
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });

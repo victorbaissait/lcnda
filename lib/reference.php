@@ -229,7 +229,8 @@ function place_from_world(PDO $pdo, array $w): int
 }
 
 // ── Pays voisins activables pour les battues (data/reference/geo-<pays>.sqlite.gz, scripts/build-reference-europe.php) ──
-// Codes préfixés (« BE-57081 ») ; la France garde ses codes INSEE. Chaque base choisit ses pays (meta.reference_countries).
+// Codes préfixés (« BE-57081 ») ; la France garde ses codes INSEE, outre-mer compris (« OM » = codes 97…, pays France).
+// Chaque base choisit ses pays (meta.reference_countries).
 
 /** Pays livrés avec l'application (hors France, toujours présente) : code => nom. */
 function reference_countries_available(): array
@@ -238,7 +239,8 @@ function reference_countries_available(): array
     foreach (glob(APP_ROOT . '/data/reference/geo-??.sqlite.gz') ?: [] as $file) {
         $cc = strtoupper(substr(basename($file), 4, 2));
         if ($cc === 'FR') { continue; }
-        $out[$cc] = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg'][$cc] ?? $cc;
+        $out[$cc] = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg', 'DE' => 'Allemagne',
+            'IT' => 'Italie', 'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français'][$cc] ?? $cc;
     }
     asort($out);
     return $out;
@@ -306,7 +308,7 @@ function disable_reference_country(PDO $pdo, string $cc): array
 {
     $cc = strtoupper($cc);
     if (!preg_match('/^[A-Z]{2}$/', $cc) || $cc === 'FR') { throw new RuntimeException('La France ne peut pas être retirée.'); }
-    $prefix = $cc . '-%';
+    $prefix = $cc === 'OM' ? '97%' : $cc . '-%';
     foreach ($pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT IN ('commune_contours','commune_neighbors')")->fetchAll(PDO::FETCH_COLUMN) as $table) {
         foreach ($pdo->query('PRAGMA table_info("' . str_replace('"', '""', $table) . '")') as $col) {
             if (!preg_match('/insee_code$/', (string) $col['name'])) { continue; }

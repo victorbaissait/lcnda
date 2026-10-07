@@ -65,6 +65,11 @@ Ces composants gardent leur propre licence :
 | Communes de Belgique 2025 (IGN-NGI, via [ODWB](https://www.odwb.be/)) | battues (`data/reference/geo-be`) | Licence ouverte IGN-NGI (mention de la source) |
 | Communes de Suisse et du Liechtenstein (swissBOUNDARIES3D, [swisstopo](https://www.swisstopo.admin.ch/)) | battues (`geo-ch`, `geo-li`) | Opendata BY (mention « © swisstopo ») |
 | Communes du Luxembourg (cadastre, [data.public.lu](https://data.public.lu/)) | battues (`geo-lu`) | CC0 |
+| Communes d'Allemagne (VG250, © [GeoBasis-DE / BKG](https://gdz.bkg.bund.de/)) | battues (`geo-de`) | [dl-de/by-2-0](https://www.govdata.de/dl-de/by-2-0) |
+| Communes d'Italie (confini amministrativi, © [ISTAT](https://www.istat.it/)) | battues (`geo-it`) | CC BY 4.0 |
+| Communes d'Autriche (© [Statistik Austria](https://data.statistik.gv.at/)) | battues (`geo-at`) | CC BY 4.0 |
+| Communes d'Espagne (recintos municipales, © [IGN / CNIG](https://www.ign.es/)) | battues (`geo-es`) | CC BY 4.0 |
+| Communes d'outre-mer (IGN Admin Express, via france-geojson) | battues (`geo-om`) | Licence Ouverte 2.0 |
 
 Les fonds de carte (OpenStreetMap, CARTO, OpenTopoMap, IGN, Esri…) sont chargés depuis internet, uniquement quand
 vous affichez une carte, et restent soumis aux conditions de leurs fournisseurs.
