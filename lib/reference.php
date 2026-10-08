@@ -65,7 +65,8 @@ function download_reference_country(string $cc): array
     $out = fopen($partial, 'wb');
     $ch = curl_init(rtrim((string) reference_catalogue()['base_url'], '/') . '/' . $entry['file']);
     curl_setopt_array($ch, [CURLOPT_FILE => $out, CURLOPT_FOLLOWLOCATION => true, CURLOPT_FAILONERROR => true, CURLOPT_CONNECTTIMEOUT => 20,
-        CURLOPT_TIMEOUT => 1800, CURLOPT_USERAGENT => 'LCNDA']);
+        CURLOPT_TIMEOUT => 1800, CURLOPT_USERAGENT => 'LCNDA']
+        + (PHP_OS_FAMILY === 'Windows' && defined('CURLSSLOPT_NATIVE_CA') ? [CURLOPT_SSL_OPTIONS => CURLSSLOPT_NATIVE_CA] : []));
     $ok = curl_exec($ch);
     $error = curl_error($ch);
     fclose($out);

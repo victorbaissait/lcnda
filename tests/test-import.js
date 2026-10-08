@@ -336,8 +336,17 @@ async function download(s, base, action) {
     fs.copyFileSync(lu, path.join(remote, 'geo-zz.sqlite.gz')); fs.copyFileSync(lu, path.join(remote, 'geo-zy.sqlite.gz'));
     const sha = require('node:crypto').createHash('sha256').update(fs.readFileSync(lu)).digest('hex');
     const catalogue = path.join(tmp, 'catalogue.json');
-    // Adresse file:// valide partout (sous Windows : file:///D:/…, et non file://D:\…)
-    fs.writeFileSync(catalogue, JSON.stringify({ base_url: require('node:url').pathToFileURL(remote).href, countries: {
+    // Les fichiers sont servis par un petit serveur web local, comme le vrai téléchargement (http), sur tous les systèmes
+    const http = require('node:http');
+    const files = http.createServer((req, res) => {
+      const name = path.basename(decodeURIComponent((req.url || '').split('?')[0]));
+      const file = path.join(remote, name);
+      if (!/^geo-[a-z]{2}\.sqlite\.gz$/.test(name) || !fs.existsSync(file)) { res.writeHead(404); res.end(); return; }
+      res.writeHead(200, { 'content-type': 'application/gzip', 'content-length': fs.statSync(file).size });
+      fs.createReadStream(file).pipe(res);
+    });
+    await new Promise((resolve) => files.listen(0, '127.0.0.1', resolve));
+    fs.writeFileSync(catalogue, JSON.stringify({ base_url: `http://127.0.0.1:${files.address().port}/`, countries: {
       ZZ: { name: 'Pays d’essai', region: 'Autres', file: 'geo-zz.sqlite.gz', size: fs.statSync(lu).size, sha256: sha },
       ZY: { name: 'Pays abîmé', region: 'Autres', file: 'geo-zy.sqlite.gz', size: fs.statSync(lu).size, sha256: '0'.repeat(64) } } }));
     Object.assign(process.env, { GENEALOGY_SKIP_REFERENCE: '0', LCNDA_REFERENCE_CATALOGUE: catalogue });
@@ -354,12 +363,13 @@ async function download(s, base, action) {
         assert.deepEqual([details.ZZ.present, details.ZZ.region], [false, 'Autres']);
         const [status, first] = await send('set_reference_country', { country: 'ZZ', enabled: true });
         assert.deepEqual([status, first.download_required?.country], [409, 'ZZ'], 'pays absent : téléchargement demandé');
-        assert.equal((await send('download_reference_country', { country: 'ZZ' }))[1].downloaded, true);
+        const [dlStatus, dl] = await send('download_reference_country', { country: 'ZZ' });
+        assert.equal(dl.downloaded, true, 'téléchargement : ' + dlStatus + ' ' + JSON.stringify(dl));
         assert.equal((await send('set_reference_country', { country: 'ZZ', enabled: true }))[1].communes, 100);
         const [badStatus, bad] = await send('download_reference_country', { country: 'ZY' });
         assert.ok(badStatus >= 400 && /abîmé/.test(bad.error || ''), 'empreinte fausse refusée : ' + JSON.stringify(bad));
       });
-    } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; delete process.env.LCNDA_REFERENCE_CATALOGUE; }
+    } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; delete process.env.LCNDA_REFERENCE_CATALOGUE; files.close(); }
     const kept = fs.readdirSync(path.join(dir, 'data', 'reference'));
     assert.deepEqual(kept, ['geo-zz.sqlite.gz'], 'seul le bon fichier est rangé dans les données : ' + kept.join(', '));
   });

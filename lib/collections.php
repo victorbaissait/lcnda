@@ -383,6 +383,12 @@ function precise_place_detail(PDO $pdo, string $key, int $radius = 30): array
 
 /* ─── Entretien : liens web ─────────────────────────────────────────── */
 
+/** Sous Windows, PHP n'a pas de liste de certificats : on utilise celle du système (sinon tout site https paraît en défaut). */
+function lcnda_curl_tls(): array
+{
+    return PHP_OS_FAMILY === 'Windows' && defined('CURLSSLOPT_NATIVE_CA') ? [CURLOPT_SSL_OPTIONS => CURLSSLOPT_NATIVE_CA] : [];
+}
+
 /** Toutes les adresses web enregistrées, avec leur origine (table, fiche) et le dernier contrôle. */
 function link_inventory(PDO $pdo): array
 {
@@ -443,7 +449,7 @@ function check_links(PDO $pdo, array $data): array
         curl_setopt_array($ch, [CURLOPT_NOBODY => false, CURLOPT_RANGE => '0-2047', CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 6,
             CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 20, CURLOPT_SSL_VERIFYPEER => true, CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
             CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-            CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, verification de liens genealogiques)', CURLOPT_HTTPHEADER => ['Accept: text/html,*/*;q=0.8', 'Accept-Language: fr,en;q=0.8']]);
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, verification de liens genealogiques)', CURLOPT_HTTPHEADER => ['Accept: text/html,*/*;q=0.8', 'Accept-Language: fr,en;q=0.8']] + lcnda_curl_tls());
         curl_multi_add_handle($mh, $ch);
         $handles[$u] = $ch;
     }
@@ -506,7 +512,7 @@ function link_really_moved(string $from, string $to): bool
 function link_archive_copy(string $url): string
 {
     $ch = curl_init('https://archive.org/wayback/available?url=' . rawurlencode($url));
-    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8, CURLOPT_USERAGENT => 'LCNDA (verification de liens)']);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8, CURLOPT_USERAGENT => 'LCNDA (verification de liens)'] + lcnda_curl_tls());
     $body = curl_exec($ch);
     curl_close($ch);
     $data = is_string($body) ? json_decode($body, true) : null;
