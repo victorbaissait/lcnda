@@ -3578,3 +3578,13 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .quick-search-results li.is-active,.quick-search-results li:hover{background:var(--blue-soft)}
 .quick-search-results li.quick-search-empty{cursor:default;color:var(--muted)}
 .quick-search-results li.quick-search-empty:hover{background:none}
+
+/* Recherche → Chercher sur internet */
+.web-search-tool .maintenance-panel{margin-bottom:1rem}
+.web-search-tool-from{display:flex;flex-wrap:wrap;gap:.6rem;align-items:flex-end;position:relative;margin-bottom:.8rem}
+.web-search-tool-from label{flex:1 1 260px}
+.web-search-tool-from .autocomplete-list{position:absolute;top:100%;left:0;z-index:20;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;min-width:280px;max-height:260px;overflow:auto}
+.web-search-tool-from .autocomplete-list button{text-align:left;padding:.4rem .6rem;border:0;background:none;cursor:pointer}
+.web-search-tool-from .autocomplete-list button:hover{background:var(--blue-soft)}
+.web-search-tool-form{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.web-search-links .is-disabled{opacity:.5}
