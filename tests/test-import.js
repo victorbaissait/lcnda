@@ -95,13 +95,14 @@ async function withServer(dir, fn) {
 }
 
 /** Ouvre une session comme la fenêtre, puis envoie le fichier à l'import (comme l'écran d'installation). */
-async function upload(s, base, content, name) {
+async function upload(s, base, content, name, password = '') {
   const home = await fetch(base + '/', { headers: { 'x-carnet-secret': s.secret } });
   const cookie = (home.headers.get('set-cookie') || '').split(';')[0];
   const csrf = JSON.parse(((await home.text()).match(/window\.INSTALL_CSRF = ("[^"]*")/) || [])[1] || '""');
   const fd = new FormData();
   fd.append('file', new Blob([content]), name);
   fd.append('csrf', csrf);
+  if (password) fd.append('password', password);
   const r = await fetch(base + '/api.php?action=import_package', { method: 'POST', headers: { 'x-carnet-secret': s.secret, 'X-CSRF-Token': csrf, cookie }, body: fd });
   return { status: r.status, data: await r.json(), csrf, cookie };
 }
@@ -149,6 +150,32 @@ async function download(s, base, action) {
     });
     assert.equal(fs.readdirSync(path.join(dir, 'media')).filter((f) => f.endsWith('.png')).length, 1, 'photo restaurée');
     assert.equal(count(path.join(dir, 'data', 'genealogy.sqlite'), 'sources'), 1);
+  });
+
+  await step('sauvegarde protégée par mot de passe (AES-256) : illisible sans lui, rouverte avec lui', async () => {
+    let locked;
+    await withServer(path.join(tmp, 'A'), async (s, base) => {
+      const home = await fetch(base + '/', { headers: { 'x-carnet-secret': s.secret } });
+      const cookie = (home.headers.get('set-cookie') || '').split(';')[0];
+      const boot = await (await fetch(base + '/api.php?action=bootstrap', { headers: { 'x-carnet-secret': s.secret, cookie } })).json();
+      const post = (password) => fetch(base + '/api.php?action=export_full_backup', { method: 'POST',
+        headers: { 'x-carnet-secret': s.secret, cookie, 'content-type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams({ csrf: boot.csrf, password }) });
+      assert.equal((await post('court')).status, 422, 'mot de passe trop court refusé');
+      const r = await post('Mot de passe très sûr');
+      assert.equal(r.status, 200);
+      assert.match(r.headers.get('content-disposition') || '', /protegee/);
+      locked = Buffer.from(await r.arrayBuffer());
+    });
+    assert.ok(!locked.includes(Buffer.from('SQLite format 3')), 'la base ne doit pas être lisible en clair dans l’archive');
+    await withServer(path.join(tmp, 'B2'), async (s, base) => {
+      const none = await upload(s, base, locked, 'protegee.zip');
+      assert.equal(none.status, 401); assert.ok(none.data.password_required);
+      const wrong = await upload(s, base, locked, 'protegee.zip', 'pas le bon');
+      assert.equal(wrong.status, 401); assert.ok(wrong.data.wrong_password, JSON.stringify(wrong.data));
+      const ok = await upload(s, base, locked, 'protegee.zip', 'Mot de passe très sûr');
+      assert.equal(ok.status, 200, JSON.stringify(ok.data));
+      assert.deepEqual([ok.data.stats.persons, ok.data.stats.media, ok.data.stats.media_missing], [3, 1, 0]);
+    });
   });
 
   await step('ouverture d’une base .db seule ; fichier invalide refusé', async () => {
@@ -337,7 +364,7 @@ async function download(s, base, action) {
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`\n${passed}/9 vérifications réussies.`);
+  console.log(`\n${passed}/10 vérifications réussies.`);
 })().catch((e) => {
   if (!e || !e.reported) console.error(e);
   process.exitCode = 1;

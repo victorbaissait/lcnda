@@ -33,9 +33,16 @@ function backup_media_files(): array
     return $files;
 }
 
-function export_full_backup(PDO $pdo): never
+/**
+ * Sauvegarde complète (.zip). Avec un mot de passe ($password, 8 caractères au moins), chaque fichier est chiffré en
+ * AES-256 (zip standard) : sans le mot de passe, la base et les photos sont illisibles. Seul le LISEZ-MOI reste en clair.
+ * Le mot de passe n'est jamais enregistré : s'il est perdu, la sauvegarde ne peut plus être ouverte.
+ */
+function export_full_backup(PDO $pdo, string $password = ''): never
 {
     @set_time_limit(0);
+    if ($password !== '' && mb_strlen($password) < 8) { json_response(['error' => 'Le mot de passe doit faire au moins 8 caractères.'], 422); }
+    if ($password !== '' && !defined('ZipArchive::EM_AES_256')) { json_response(['error' => 'Le chiffrement des sauvegardes n’est pas disponible sur cet ordinateur.'], 500); }
     $tmpDir = sys_get_temp_dir() . '/lcnda-sauvegarde-' . bin2hex(random_bytes(6));
     if (!mkdir($tmpDir, 0700, true) && !is_dir($tmpDir)) {
         json_response(['error' => 'Impossible de créer le dossier temporaire de la sauvegarde.'], 500);
@@ -74,12 +81,22 @@ function export_full_backup(PDO $pdo): never
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
         $zip->addFromString('LISEZ-MOI.txt', "Sauvegarde complète du Carnet numérique des ancêtres (LCNDA).\n\n"
             . "genealogie.db : la base (personnes, événements, notes, sources…).\nmedia/ : les photos, documents, sons et vidéos.\n\n"
-            . "Pour la rouvrir : sur l'écran de démarrage de LCNDA, « Importer un fichier » et choisir ce .zip.\n");
+            . "Pour la rouvrir : sur l'écran de démarrage de LCNDA, « Importer un fichier » et choisir ce .zip.\n"
+            . ($password !== '' ? "\nCette sauvegarde est PROTÉGÉE PAR UN MOT DE PASSE (chiffrement AES-256) : LCNDA le demandera à l'ouverture.\n"
+                . "Hors de LCNDA, l'utilitaire d'archives de macOS ne sait pas l'ouvrir : utiliser Keka (Mac) ou 7-Zip (Windows, Linux).\n"
+                . "Sans le mot de passe, personne ne peut lire son contenu, pas même toi : garde-le en lieu sûr.\n" : ''));
         $zip->addFile($dbCopy, 'genealogie.db');
         foreach ($media as $relative => $absolute) {
             $zip->addFile($absolute, 'media/' . $relative);
             // Les photos et vidéos sont déjà compressées : les stocker telles quelles est bien plus rapide.
             $zip->setCompressionName('media/' . $relative, ZipArchive::CM_STORE);
+        }
+        if ($password !== '') {
+            for ($i = 0; $i < $zip->numFiles; $i++) {
+                $entry = (string) $zip->getNameIndex($i);
+                if ($entry === 'LISEZ-MOI.txt') { continue; }
+                if (!$zip->setEncryptionIndex($i, ZipArchive::EM_AES_256, $password)) { throw new RuntimeException('Chiffrement impossible : ' . $entry); }
+            }
         }
         if (!$zip->close()) { throw new RuntimeException('Écriture de l’archive impossible.'); }
     } catch (Throwable $e) {
@@ -90,7 +107,7 @@ function export_full_backup(PDO $pdo): never
     ignore_user_abort(true);
     while (ob_get_level() > 0) { ob_end_clean(); }
     header('Content-Type: application/zip');
-    header('Content-Disposition: attachment; filename="LCNDA-sauvegarde-complete-' . date('Ymd-His') . '.zip"');
+    header('Content-Disposition: attachment; filename="LCNDA-sauvegarde-complete-' . ($password !== '' ? 'protegee-' : '') . date('Ymd-His') . '.zip"');
     header('Content-Length: ' . $size);
     header('Cache-Control: no-store');
     readfile($zipPath);
@@ -177,6 +194,15 @@ function restore_package_upload(array $file): never
             $stats['format'] = 'sauvegarde complète';
             $zip = new ZipArchive();
             if ($zip->open((string) $file['tmp_name']) !== true) { throw new RuntimeException('Impossible d’ouvrir l’archive.'); }
+            // Sauvegarde protégée : il faut le mot de passe (demandé par l'interface, jamais enregistré)
+            $encrypted = false;
+            for ($i = 0; $i < $zip->numFiles; $i++) { if ((int) ($zip->statIndex($i)['encryption_method'] ?? 0) !== 0) { $encrypted = true; break; } }
+            if ($encrypted) {
+                $password = (string) ($file['password'] ?? ($_POST['password'] ?? ''));
+                if ($password === '') { $zip->close(); $zip = null; json_response(['error' => 'Cette sauvegarde est protégée par un mot de passe.', 'password_required' => true], 401); }
+                $zip->setPassword($password);
+                $stats['protected'] = true;
+            }
             $dbEntry = null;
             for ($i = 0; $i < $zip->numFiles; $i++) {
                 $name = (string) $zip->getNameIndex($i);
@@ -187,8 +213,12 @@ function restore_package_upload(array $file): never
             if ($dbEntry === null) { throw new RuntimeException('Aucune base (.db) dans cette archive.'); }
             $in = $zip->getStream((string) $zip->getNameIndex($dbEntry));
             $out = fopen($incoming, 'wb');
-            if (!$in || !$out || stream_copy_to_stream($in, $out) === false) { throw new RuntimeException('Lecture de la base impossible dans l’archive.'); }
-            fclose($in); fclose($out);
+            $copied = ($in && $out) ? @stream_copy_to_stream($in, $out) : false;
+            if ($in) { fclose($in); } if ($out) { fclose($out); }
+            if ($copied === false || ($encrypted && !@filesize($incoming))) {
+                if ($encrypted) { @unlink($incoming); $zip->close(); $zip = null; json_response(['error' => 'Mot de passe incorrect.', 'password_required' => true, 'wrong_password' => true], 401); }
+                throw new RuntimeException('Lecture de la base impossible dans l’archive.');
+            }
         } elseif (!(empty($file['local']) && move_uploaded_file((string) $file['tmp_name'], $incoming)) && !copy((string) $file['tmp_name'], $incoming)) {
             throw new RuntimeException('Impossible d’enregistrer le fichier reçu.');
         }
@@ -261,5 +291,6 @@ function local_import_file(array $payload): array
     } elseif (!in_array($ext, ['ged', 'gedcom', 'mftpkg', 'zip', 'gdz', 'db', 'sqlite', 'heredis'], true)) {
         json_response(['error' => "Format non pris en charge : .{$ext}"], 422);
     }
-    return ['name' => $name, 'tmp_name' => $real, 'error' => UPLOAD_ERR_OK, 'size' => is_file($real) ? (int) filesize($real) : 0, 'local' => true];
+    return ['name' => $name, 'tmp_name' => $real, 'error' => UPLOAD_ERR_OK, 'size' => is_file($real) ? (int) filesize($real) : 0, 'local' => true,
+        'password' => (string) ($payload['password'] ?? '')];
 }

@@ -398,7 +398,7 @@
         coverage:'Taux de fiches avec naissance, décès, média et source.',
         places:'Lieux les plus présents dans les événements.'
     };
-    const defaultListTypes = [['persons','01','Personnes'],['events','02','Événements'],['places','03','Lieux'],['precise_places','03b','Lieux précis'],['media','04','Médias'],['labels','05','Étiquettes'],['occupations','06','Métiers'],['employers','07','Employeurs'],['census','08','Recensements'],['reminders','09','Rappels'],['research_budget','10','Budget de recherche'],['signatures','11','Signatures'],['sosa','12','SOSA'],['daboville','12b',"d'Aboville"],['archives','13','Archives'],['external_links','14','Liens externes utiles'],['courriers','15','Registre de courriers'],['archive_visits','16','Planificateur de visite d’archives'],['living_contacts','17','Répertoire des vivants'],['family_objects','18','Objets de famille'],['family_memories','19','Mémoire familiale']];
+    const defaultListTypes = [['persons','01','Personnes'],['events','02','Événements'],['places','03','Lieux'],['precise_places','03b','Lieux précis'],['media','04','Médias'],['labels','05','Étiquettes'],['occupations','06','Métiers'],['employers','07','Employeurs'],['census','08','Recensements'],['reminders','09','Rappels'],['research_budget','10','Budget de recherche'],['signatures','11','Signatures'],['sosa','12','SOSA'],['daboville','12b',"d'Aboville"],['archives','13','Archives'],['external_links','14','Liens externes utiles'],['courriers','15','Registre de courriers'],['archive_visits','16','Planificateur de visite d’archives'],['living_contacts','17','Répertoire des vivants'],['family_objects','18','Objets de famille'],['family_memories','19','Mémoire familiale'],['fairs','20','Salons et événements']];
     const defaultExternalLinks=[
         {id:'socface',name:'Projet SocFace',url:'https://socface.site.ined.fr/',access:'public',cost:'gratuit',category:'Population / histoire sociale',country:'France',description:'Projet scientifique utile pour croiser histoire sociale, familles et populations.'},
         {id:'francearchives',name:'FranceArchives',url:'https://francearchives.gouv.fr/',access:'public',cost:'gratuit',category:'Archives',country:'France',description:'Portail national des archives françaises.'},
@@ -437,7 +437,7 @@
     function dynamicMapTypes(){const tags=(state.bootstrap?.mapEventTags||[]);const extra=tags.map(t=>[t.gedcom_tag,t.label]);const all=[['all','Tous les événements'],...extra];return all;}function orderedMapTypes(includeHidden=false){const dynamic=dynamicMapTypes();const keys=dynamic.map(i=>i[0]);const order=savedOrder('genealogie-map-order',keys);const hidden=mapHiddenKeys();return order.filter(value=>includeHidden||value==='all'||!hidden.includes(value)).map((value,index)=>{const item=dynamic.find(r=>r[0]===value)||[value,value];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
     const defaultMaintenanceTabs=[['design','01','Apparence'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire / tuto / FAQ'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien']];
     function orderedMaintenanceTabs(){const order=savedOrder('genealogie-maintenance-order',defaultMaintenanceTabs.map(item=>item[0]));return order.map((value,index)=>{const item=defaultMaintenanceTabs.find(row=>row[0]===value);return [item[0],String(index+1).padStart(2,'0'),item[2]];});}
-    function mapBackgroundValue(value){return ['color','grid','dark','osmfr','light','minimal','roads','relief','cyclosm','wikimedia','satellite','ohm','esri_topo','esri_street','voyager','osmde','cassini','cassini_royal','etatmajor','nls_6inch','nls_natgrid','cartoweb','swisstopo','swisstopo_dufour','swisstopo_siegfried','ferraris','vandermaelen','popp','frickx','buurtwegen','ign_ortho_1950','ign_scan50_1950','ign_hr_ortho','ign_planv2','nls_25inch','nls_1inch','gsgs3906','london_1940s','usgs_topo','usgs_imagery','ign_es_mtn50','ign_es_pnoa','esri_ocean','esri_natgeo','esri_physical','esri_relief','nasa_modis','nasa_landsat_weld'].includes(value)?value:'bw';}
+    function mapBackgroundValue(value){return ['offline','color','grid','dark','osmfr','light','minimal','roads','relief','cyclosm','wikimedia','satellite','ohm','esri_topo','esri_street','voyager','osmde','cassini','cassini_royal','etatmajor','nls_6inch','nls_natgrid','cartoweb','swisstopo','swisstopo_dufour','swisstopo_siegfried','ferraris','vandermaelen','popp','frickx','buurtwegen','ign_ortho_1950','ign_scan50_1950','ign_hr_ortho','ign_planv2','nls_25inch','nls_1inch','gsgs3906','london_1940s','usgs_topo','usgs_imagery','ign_es_mtn50','ign_es_pnoa','esri_ocean','esri_natgeo','esri_physical','esri_relief','nasa_modis','nasa_landsat_weld'].includes(value)?value:'bw';}
     function mapBackgroundSelectHtml(mapBg){
         const cats=orderedTileCategories(false);
         return cats.map(cat=>{
@@ -445,7 +445,25 @@
             return `<optgroup label="${escapeHtml('— '+cat.label+' —')}">${options}</optgroup>`;
         }).join('');
     }
+    /**
+     * Fond hors ligne : tuiles dessinées par l'application à partir des contours de communes de la base. Utilisé quand on le
+     * choisit, quand l'ordinateur n'a pas Internet, et à la place de toute tuile qui ne se charge pas.
+     */
+    const offlineTileFallback=new Map();
+    function offlineTileUrl(z,x,y){const n=2**z;return `api.php?action=offline_tile&z=${z}&x=${((x%n)+n)%n}&y=${y}`;}
     function mapTileUrl(bg,z,x,y){
+        if(bg==='offline'||(typeof navigator!=='undefined'&&navigator.onLine===false))return offlineTileUrl(z,x,y);
+        const url=mapTileUrlOnline(bg,z,x,y);
+        if(url){offlineTileFallback.set(url,offlineTileUrl(z,x,y));if(offlineTileFallback.size>4000)offlineTileFallback.delete(offlineTileFallback.keys().next().value);}
+        return url;
+    }
+    // Une tuile d'Internet qui ne vient pas (pas de réseau, site en panne) : remplacée par la tuile hors ligne
+    document.addEventListener('error',event=>{const el=event.target;if(!el||!el.getAttribute)return;
+        const attr=el.tagName==='IMG'?'src':(el.tagName?.toLowerCase()==='image'?'href':'');if(!attr)return;
+        const src=el.getAttribute(attr)||el.getAttribute('xlink:href')||'';const alt=offlineTileFallback.get(src);
+        if(alt&&src!==alt){el.setAttribute(attr,alt);if(el.hasAttribute('xlink:href'))el.setAttribute('xlink:href',alt);}},true);
+    window.addEventListener('offline',()=>{toast('Pas d’Internet : les cartes passent au fond hors ligne.');if(['carte','enquetes','personnes','listes'].includes(state.module))setModule(state.module,false);});
+    function mapTileUrlOnline(bg,z,x,y){
         if(bg==='dark')return `https://a.basemaps.cartocdn.com/dark_all/${z}/${x}/${y}.png`;
         if(bg==='osmfr')return `https://a.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png`;
         if(bg==='light')return `https://a.basemaps.cartocdn.com/light_all/${z}/${x}/${y}.png`;
@@ -801,7 +819,8 @@
         addPlace('birth','Naissance',birth);addPlace('death','Décès',death);addPlace('other','Mariage',eventOf(['MARR']));
         const firstOnly=String(person.first_name||'').trim().split(/\s+/)[0]||first;
         const estimates=detail?.estimates||{};
-        return {id:Number(person.id)||0,first,firstOnly,last,female:person.gender==='female',birthYear,deathYear,birthEst:estimates.birth||null,deathEst:estimates.death||null,places,
+        const dated=events.map(event=>{const d=parsedGenealogyDate(event.date_text||'');return d?.exact?{label:event.type_label||'Événement',tag:event.gedcom_tag,date:d.date}:null;}).filter(Boolean);
+        return {id:Number(person.id)||0,first,firstOnly,last,female:person.gender==='female',birthYear,deathYear,birthEst:estimates.birth||null,deathEst:estimates.death||null,dated,places,
             partners:partners.map(partner=>({first:[partner.first_name,partner.middle_name].filter(Boolean).join(' ').trim(),firstOnly:String(partner.first_name||'').trim().split(/\s+/)[0]||'',last:String(partner.last_name||'').trim()})).filter(partner=>partner.first||partner.last)};
     }
     /** Plage de vie proposée : naissance → décès ; sinon dates estimées ; sinon une durée de vie probable. */
@@ -851,8 +870,24 @@
         </div>`;
         const groups=webSearchGroups.map(group=>[group,visible.filter(site=>site[2]===group)]).filter(([,list])=>list.length);
         const buttons=visible.length?groups.map(([group,list])=>`<div class="web-search-group"><span>${escapeHtml(group)}</span><div class="web-search-links">${list.map(site=>`<span class="web-search-site"><input type="checkbox" data-ws-pick="${escapeHtml(site[0])}" aria-label="Cocher ${escapeHtml(site[1])}"><a class="button small secondary" data-ws-site="${escapeHtml(site[0])}" href="#" target="_blank" rel="noopener noreferrer">${escapeHtml(site[1])}</a></span>`).join('')}</div></div>`).join(''):empty('Aucun site choisi : règle-les dans Maintenance → Apparence.');
+        const news=webSearchNewsHtml(ctx);
         const multi=visible.length>1?`<div class="web-search-multi"><button class="button small secondary" type="button" data-ws-pick-all>Tout cocher</button><button class="button small secondary" type="button" data-ws-pick-none>Tout décocher</button><button class="button small" type="button" data-ws-open-picked disabled>Ouvrir les sites cochés</button></div>`:'';
-        return `<div class="web-search-panel" data-web-search="${escapeHtml(uid)}"><p class="muted">S’ouvre dans ton navigateur. Coche le lieu, les années ou le conjoint pour écarter les homonymes.</p>${options}${multi}${buttons}</div>`;
+        return `<div class="web-search-panel" data-web-search="${escapeHtml(uid)}"><p class="muted">S’ouvre dans ton navigateur. Coche le lieu, les années ou le conjoint pour écarter les homonymes.</p>${options}${multi}${buttons}${news}</div>`;
+    }
+    /** Journaux numérisés sur Gallica, consultables à une date précise (adresse « …/date AAAAMMJJ »). */
+    const gallicaDailies=[['Le Petit Journal','cb32895690j',1863,1944],['Le Petit Parisien','cb34419111x',1876,1944],['Le Figaro','cb34355551z',1854,1942],['Le Temps','cb34431794k',1861,1942]];
+    function gallicaDailyUrl(ark,date){const p=n=>String(n).padStart(2,'0');return `https://gallica.bnf.fr/ark:/12148/${ark}/date${date.getUTCFullYear()}${p(date.getUTCMonth()+1)}${p(date.getUTCDate())}`;}
+    function webSearchNewsHtml(ctx){
+        const order=['BIRT','CHR','BAPM','MARR','DEAT','BURI'];
+        const events=(ctx.dated||[]).filter(e=>{const y=e.date.getUTCFullYear();return y>=1854&&y<=1944;}).sort((a,b)=>((order.indexOf(a.tag)+1)||9)-((order.indexOf(b.tag)+1)||9)||a.date-b.date);
+        if(!events.length)return '';
+        const fmt=d=>d.toLocaleDateString('fr-FR',{timeZone:'UTC',day:'numeric',month:'long',year:'numeric'});
+        return `<div class="web-search-group web-search-news"><span>La une du jour (Gallica)</span><label class="web-search-news-pick">Le jour de <select data-ws-news>${events.map((e,i)=>`<option value="${i}" data-date="${e.date.toISOString().slice(0,10)}">${escapeHtml(e.label)} · ${escapeHtml(fmt(e.date))}</option>`).join('')}</select></label><div class="web-search-links" data-ws-news-links></div><small class="muted">Journaux numérisés de 1854 à 1944. Si le journal n’est pas paru ce jour-là, Gallica montre le calendrier du mois.</small></div>`;
+    }
+    function updateWebSearchNews(panel){
+        const select=$('[data-ws-news]',panel),box=$('[data-ws-news-links]',panel);if(!select||!box)return;
+        const date=new Date(select.selectedOptions[0].dataset.date+'T00:00:00Z');const y=date.getUTCFullYear();
+        box.innerHTML=gallicaDailies.filter(([, ,from,to])=>y>=from&&y<=to).map(([name,ark])=>`<a class="button small secondary" href="${escapeHtml(gallicaDailyUrl(ark,date))}" target="_blank" rel="noopener noreferrer">${escapeHtml(name)}</a>`).join('')||'<small class="muted">Aucun de ces journaux n’est numérisé pour cette année.</small>';
     }
     /** Met à jour les adresses des boutons quand une option change (et au premier affichage). */
     function bindWebSearchPanels(root=document){
@@ -864,6 +899,7 @@
                 $$('[data-ws-site]',panel).forEach(link=>{const site=sites.find(item=>item[0]===link.dataset.wsSite);if(site){try{link.href=site[3](p);}catch(_){link.removeAttribute('href');}}});
             };
             const updatePicked=()=>{const count=$$('[data-ws-pick]:checked',panel).length;const open=$('[data-ws-open-picked]',panel);if(open){open.disabled=!count;open.textContent=count?`Ouvrir les ${count} site${count>1?'s':''} cochés`:'Ouvrir les sites cochés';}};
+            updateWebSearchNews(panel);$('[data-ws-news]',panel)?.addEventListener('change',()=>updateWebSearchNews(panel));
             panel.addEventListener('input',update);panel.addEventListener('change',event=>{if(event.target.matches?.('[data-ws-middle]')){try{localStorage.setItem('genealogie-web-search-middle',event.target.checked?'1':'0');}catch(_){}}update();updatePicked();});update();
             $('[data-ws-pick-all]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]',panel).forEach(input=>{input.checked=true;});updatePicked();});
             $('[data-ws-pick-none]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]',panel).forEach(input=>{input.checked=false;});updatePicked();});
@@ -919,7 +955,7 @@
     function orderedGraphStatsItems(includeHidden=false){const keys=defaultGraphStatsItems.map(i=>i[0]);const order=savedOrder('genealogie-graph-stats-order',keys);const hidden=graphStatsHiddenKeys();return order.filter(v=>includeHidden||!hidden.includes(v)).map((v,idx)=>{const item=defaultGraphStatsItems.find(r=>r[0]===v)||[v,v];return [item[0],String(idx+1).padStart(2,'0'),item[1]];});}
     // Tile layers with categories
     const TILE_LAYER_CATEGORIES=[
-        {id:'standard',label:'Fond de cartes standard',items:[['bw','Noir & blanc'],['color','Couleur (OSM)'],['light','Claire'],['minimal','Minimaliste'],['roads','Routes seules'],['dark','Sombre'],['osmfr','OSM France'],['relief','Relief léger'],['cyclosm','CyclOSM (relief + routes)'],['wikimedia','Wikimedia Maps'],['satellite','Satellite (Esri)'],['esri_topo','Topographique (Esri)'],['esri_street','Rues couleur (Esri)'],['esri_ocean','Océan (Esri)'],['esri_natgeo','National Geographic (Esri)'],['esri_physical','Physique (Esri)'],['esri_relief','Ombrage relief (Esri)'],['voyager','Voyager (avec labels)'],['osmde','OSM Allemagne'],['cartoweb','CartoWeb.be (Belgique, IGN)'],['swisstopo','Swisstopo (Suisse)'],['grid','Quadrillé']]},
+        {id:'standard',label:'Fond de cartes standard',items:[['bw','Noir & blanc'],['offline','Hors ligne (frontières et communes, sans Internet)'],['color','Couleur (OSM)'],['light','Claire'],['minimal','Minimaliste'],['roads','Routes seules'],['dark','Sombre'],['osmfr','OSM France'],['relief','Relief léger'],['cyclosm','CyclOSM (relief + routes)'],['wikimedia','Wikimedia Maps'],['satellite','Satellite (Esri)'],['esri_topo','Topographique (Esri)'],['esri_street','Rues couleur (Esri)'],['esri_ocean','Océan (Esri)'],['esri_natgeo','National Geographic (Esri)'],['esri_physical','Physique (Esri)'],['esri_relief','Ombrage relief (Esri)'],['voyager','Voyager (avec labels)'],['osmde','OSM Allemagne'],['cartoweb','CartoWeb.be (Belgique, IGN)'],['swisstopo','Swisstopo (Suisse)'],['grid','Quadrillé']]},
         {id:'historical',label:'Cartes historiques',items:[['ohm','OpenHistoricalMap'],['cassini','Carte de Cassini (18e s.)'],['cassini_royal','Cassini — exemplaire du roi'],['etatmajor','État-Major (France, 19e s.)'],['swisstopo_dufour','Swisstopo — Carte Dufour (Suisse, 1845-1865)'],['swisstopo_siegfried','Swisstopo — Carte Siegfried (Suisse, 1870-1949)'],['nls_6inch','OS 6-inch Écosse (1842-1882)'],['nls_natgrid','OS National Grid UK (1940-1960)'],['ferraris','Carte de Ferraris (Belgique, 1777)'],['vandermaelen','Carte Vandermaelen (Belgique, 1846-1854)'],['popp','Atlas Popp (Belgique, 1842-1879)'],['frickx','Carte Fricx (Belgique, 1744)'],['buurtwegen','Atlas der Buurtwegen (Flandre, ~1840)']]},
         {id:'ign_fr',label:'France IGN (Géoplateforme)',items:[['ign_ortho_1950','Photos aériennes historiques IGN (1950-1965)'],['ign_scan50_1950','Scan50 1950 — carte papier IGN'],['ign_hr_ortho','Orthophotos actuelles HD IGN'],['ign_planv2','Plan IGN v2 (actuel)']]},
         {id:'nls_gb',label:'Grande-Bretagne (NLS)',items:[['nls_25inch','OS 25-inch Écosse (1892-1905)'],['nls_1inch','OS 1-inch GB (1885-1900)'],['gsgs3906','GSGS 3906 — War Office 1940-1943 (Écosse)'],['london_1940s','Londres 1940s (1:1250/1:2500)']]},
@@ -1009,11 +1045,16 @@
      * not supported » : le bouton ne faisait alors rien). Renvoie le texte saisi, ou null si on annule.
      * confirmWord : le bouton reste inactif tant que ce mot n'est pas tapé (ex. « SUPPRIMER »).
      */
-    function askText({title='', message='', value='', placeholder='', okLabel='Valider', danger=false, confirmWord='', inputMode='text'}={}){
+    /** Mot de passe d'une sauvegarde protégée (null si on annule). */
+    async function askBackupPassword(wrong=false){
+        const value=await askText({title:'Sauvegarde protégée',message:wrong?'Mot de passe incorrect. Réessaie (attention aux majuscules).':'Cette sauvegarde est protégée par un mot de passe.',placeholder:'Mot de passe',okLabel:'Ouvrir',inputType:'password'});
+        return value===null||value===undefined?null:String(value);
+    }
+    function askText({title='', message='', value='', placeholder='', okLabel='Valider', danger=false, confirmWord='', inputMode='text', inputType='text'}={}){
         return new Promise(resolve=>{
             const dialog=document.createElement('dialog');
             dialog.className='modal small-modal ask-text-dialog';
-            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><h2>${escapeHtml(title)}</h2>${message?`<p style="white-space:pre-line">${escapeHtml(message)}</p>`:''}</div><button class="icon-button" type="button" data-ask-cancel aria-label="Annuler">×</button></div><div class="form-grid one-column"><label>${confirmWord?`Tape <b>${escapeHtml(confirmWord)}</b> pour confirmer`:'Réponse'}<input name="answer" autocomplete="off" inputmode="${escapeHtml(inputMode)}" placeholder="${escapeHtml(placeholder)}"></label></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-ask-cancel>Annuler</button><button class="button${danger?' danger':''}" type="submit" data-ask-ok>${escapeHtml(okLabel)}</button></div></form>`;
+            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><h2>${escapeHtml(title)}</h2>${message?`<p style="white-space:pre-line">${escapeHtml(message)}</p>`:''}</div><button class="icon-button" type="button" data-ask-cancel aria-label="Annuler">×</button></div><div class="form-grid one-column"><label>${confirmWord?`Tape <b>${escapeHtml(confirmWord)}</b> pour confirmer`:'Réponse'}<input name="answer" type="${inputType==='password'?'password':'text'}" autocomplete="off" inputmode="${escapeHtml(inputMode)}" placeholder="${escapeHtml(placeholder)}"></label></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-ask-cancel>Annuler</button><button class="button${danger?' danger':''}" type="submit" data-ask-ok>${escapeHtml(okLabel)}</button></div></form>`;
             document.body.appendChild(dialog);
             const input=dialog.querySelector('input'),ok=dialog.querySelector('[data-ask-ok]');
             input.value=value;
@@ -1256,7 +1297,12 @@
                     chosen = null;
                     result.innerHTML = `<p class="muted">Import de ${escapeHtml(picked.name)} en cours… (quelques minutes pour une grande généalogie avec photos)</p>`;
                     try {
-                        const {status, data} = await window.lcnda.importChosenFile(picked.token);
+                        let {status, data} = await window.lcnda.importChosenFile(picked.token);
+                        while (status === 401 && data.password_required) {
+                            const password = await askBackupPassword(data.wrong_password);
+                            if (password === null) { result.innerHTML = ''; return; }
+                            ({status, data} = await window.lcnda.importChosenFile(picked.token, password));
+                        }
                         if (status >= 400 || data.error) throw new Error(data.error || 'Erreur serveur');
                         showImported(data);
                     } catch (error) {
@@ -1272,11 +1318,20 @@
                 const action = isRealImport ? 'import_package' : 'import_analyse';
                 result.innerHTML = `<p class="muted">${isRealImport ? 'Import' : 'Analyse'} en cours…</p>`;
                 try {
-                    const fd = new FormData();
-                    fd.append('file', file);
-                    fd.append('csrf', csrf);
-                    const resp = await fetch(`api.php?action=${action}`, {method: 'POST', headers: {'X-CSRF-Token': csrf}, body: fd});
-                    const data = await resp.json().catch(() => ({error: 'Réponse illisible'}));
+                    const send = async (password = '') => {
+                        const fd = new FormData();
+                        fd.append('file', file);
+                        fd.append('csrf', csrf);
+                        if (password) fd.append('password', password);
+                        const resp = await fetch(`api.php?action=${action}`, {method: 'POST', headers: {'X-CSRF-Token': csrf}, body: fd});
+                        return {resp, data: await resp.json().catch(() => ({error: 'Réponse illisible'}))};
+                    };
+                    let {resp, data} = await send();
+                    while (resp.status === 401 && data.password_required) {
+                        const password = await askBackupPassword(data.wrong_password);
+                        if (password === null) { result.innerHTML = ''; return; }
+                        ({resp, data} = await send(password));
+                    }
                     if (!resp.ok || data.error) throw new Error(data.error || 'Erreur serveur');
                     if (isRealImport) {
                         showImported(data);
@@ -4073,13 +4128,14 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     async function renderList(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='listes')return;
-        const validTypes=['precise_places','family_objects','family_memories','persons','events','places','media','labels','occupations','employers','census','reminders','research_budget','signatures','sosa','daboville','archives','external_links','courriers','archive_visits','living_contacts','changes'];if(!validTypes.includes(state.listType)){$('#workspace').innerHTML='<section class="empty-state"><span class="eyebrow">LISTES</span><h2>Choisis une liste</h2><p>Personnes, événements, lieux, médias, étiquettes, métiers, employeurs, recensements, rappels, budget, signatures, SOSA, d’Aboville, archives, liens utiles, registre de courriers, visites d’archives ou répertoire des vivants.</p></section>';return;}
+        const validTypes=['fairs','precise_places','family_objects','family_memories','persons','events','places','media','labels','occupations','employers','census','reminders','research_budget','signatures','sosa','daboville','archives','external_links','courriers','archive_visits','living_contacts','changes'];if(!validTypes.includes(state.listType)){$('#workspace').innerHTML='<section class="empty-state"><span class="eyebrow">LISTES</span><h2>Choisis une liste</h2><p>Personnes, événements, lieux, médias, étiquettes, métiers, employeurs, recensements, rappels, budget, signatures, SOSA, d’Aboville, archives, liens utiles, registre de courriers, visites d’archives ou répertoire des vivants.</p></section>';return;}
         listController?.abort();listController=new AbortController();
         const type=state.listType;
         if(type==='external_links')return renderExternalLinksList(token);
         if(type==='precise_places')return renderPrecisePlacesList(token);
         if(type==='family_objects')return renderFamilyObjectsList(token);
         if(type==='family_memories')return renderFamilyMemoriesList(token);
+        if(type==='fairs')return renderFairsList(token);
         if(type==='archive_visits')return renderArchiveVisitPlanner(token);
         const labels={persons:'Personnes',events:'Événements',places:'Lieux',media:'Médias',labels:'Étiquettes',occupations:'Métiers',employers:'Employeurs',census:'Recensements',reminders:'Rappels',research_budget:'Budget de recherche',signatures:'Signatures',sosa:'SOSA',daboville:"d'Aboville",archives:'Archives départementales',external_links:'Liens externes utiles',courriers:'Registre de courriers',living_contacts:'Répertoire des vivants',changes:'Journal des modifications'};
         const genderFilterHtml=type==='persons'?`<label class="list-gender-filter">Sexe <select id="list-gender"><option value="" ${state.listGender===''?'selected':''}>Tous</option><option value="male" ${state.listGender==='male'?'selected':''}>Homme</option><option value="female" ${state.listGender==='female'?'selected':''}>Femme</option><option value="unknown" ${state.listGender==='unknown'?'selected':''}>Sexe inconnu</option></select></label>`:'';
@@ -6746,6 +6802,53 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
                 delete state.linkResults?.[old];toast(`Lien remplacé (${Number(r.result.replaced)+(b.dataset.upkeepLocal?1:0)}).`);renderUpkeep();}catch(error){toast(error.message,'error');}}));
         bindTableLinks();
     }
+    /** Listes → Salons et événements de généalogie */
+    function fairDateText(f){
+        if(!f.date_start)return 'Date à préciser';
+        const d=v=>new Date(v+'T12:00:00').toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+        const today=new Date();today.setHours(0,0,0,0);const start=new Date(f.date_start+'T00:00:00'),end=new Date((f.date_end||f.date_start)+'T00:00:00');
+        const days=Math.round((start-today)/86400000);
+        const when=end<today?'passé':(start<=today?'en ce moment':(days===1?'demain':`dans ${days} jours`));
+        return `${d(f.date_start)}${f.date_end&&f.date_end!==f.date_start?` au ${d(f.date_end)}`:''} · ${when}`;
+    }
+    function fairCardHtml(f){
+        const today=new Date().toISOString().slice(0,10);const past=(f.date_end||f.date_start)&&(f.date_end||f.date_start)<today;
+        const section=(title,text)=>text?`<div class="fair-section"><h5>${escapeHtml(title)}</h5><p>${escapeHtml(text)}</p></div>`:'';
+        return `<article class="fair-card${past?' is-past':''}"><header><div><span class="collection-kind">${escapeHtml(f.kind||'Salon')}</span>${Number(f.attended)?' <span class="fair-badge">J’y suis allé</span>':''}<h4>${escapeHtml(f.title)}</h4><p class="fair-when">${escapeHtml(fairDateText(f))}${f.hours_text?` · ${escapeHtml(f.hours_text)}`:''}</p>${f.place_text||f.address?`<p class="muted">${escapeHtml([f.place_text,f.address].filter(Boolean).join(' · '))}</p>`:''}</div><button type="button" class="button small secondary" data-edit-fair="${f.id}">Modifier</button></header>
+            <details${past?'':' open'}><summary>Détails</summary>${section('Tarif',f.price_text)}${section('Comment y aller',f.access_text)}${section('Que prévoir',f.prepare_text)}${section('Stands à voir',f.stands_text)}
+            ${f.link_list?.length?`<div class="fair-section"><h5>Liens</h5><ul>${f.link_list.map(l=>`<li><a href="${escapeHtml(l.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label||l.url)}</a></li>`).join('')}</ul></div>`:''}${section('Notes',f.notes)}</details></article>`;
+    }
+    async function renderFairsList(token,editId=null){
+        const data=await api('genealogy_fairs');if(token!==state.workspaceToken||state.module!=='listes')return;
+        const rows=data.fairs||[];const editing=editId===0?{id:0,kind:'Salon'}:rows.find(f=>Number(f.id)===Number(editId));
+        const today=new Date().toISOString().slice(0,10);const upcoming=rows.filter(f=>!f.date_start||(f.date_end||f.date_start)>=today),past=rows.filter(f=>f.date_start&&(f.date_end||f.date_start)<today);
+        $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Salons et événements</h2><p>Salons, forums, congrès, journées portes ouvertes des archives… avec la date, le lieu, comment y aller, que prévoir, les stands à voir et les liens utiles.</p></div></header>
+            <div class="collection-toolbar"><button type="button" class="button" id="fair-add">+ Salon ou événement</button></div>
+            ${editing?fairFormHtml(editing):''}
+            <h3>À venir</h3><div class="fair-list">${upcoming.map(fairCardHtml).join('')||empty('Aucun salon à venir.')}</div>
+            ${past.length?`<h3>Passés</h3><div class="fair-list">${past.map(fairCardHtml).join('')}</div>`:''}</section>`;
+        $('#fair-add').addEventListener('click',()=>renderFairsList(++state.workspaceToken,0));
+        $$('[data-edit-fair]').forEach(b=>b.addEventListener('click',()=>renderFairsList(++state.workspaceToken,Number(b.dataset.editFair))));
+        if(editing){const form=$('#fair-form');form.scrollIntoView({block:'start'});
+            $('#fair-cancel').addEventListener('click',()=>renderFairsList(++state.workspaceToken));
+            $('#fair-delete')?.addEventListener('click',async()=>{if(!confirm(`Supprimer « ${editing.title} » ?`))return;await api('delete_genealogy_fair',{}, {method:'POST',body:{id:editing.id}});toast('Supprimé.');renderFairsList(++state.workspaceToken);});
+            form.addEventListener('submit',async event=>{event.preventDefault();const v=formObject(form);v.id=editing.id;v.attended=form.elements.attended.checked;v.remind=form.elements.remind.checked;
+                try{await api('save_genealogy_fair',{}, {method:'POST',body:v});toast(v.remind&&v.date_start?'Enregistré (avec un rappel).':'Enregistré.');renderFairsList(++state.workspaceToken);}catch(error){toast(error.message,'error');}});}
+    }
+    function fairFormHtml(f){
+        const v=k=>escapeHtml(f[k]||'');
+        return `<form id="fair-form" class="maintenance-panel collection-form"><h3>${f.id?'Modifier':'Nouveau salon ou événement'}</h3>
+            <div class="form-grid"><label>Nom<input name="title" required value="${v('title')}" placeholder="Salon de la généalogie"></label><label>Type<input name="kind" value="${v('kind')}" list="fair-kinds" placeholder="Salon, forum, congrès…"><datalist id="fair-kinds"><option>Salon</option><option>Forum</option><option>Congrès</option><option>Journée portes ouvertes</option><option>Conférence</option><option>Atelier</option><option>Visite</option></datalist></label>
+            <label>Du<input type="date" name="date_start" value="${v('date_start')}"></label><label>Au (si plusieurs jours)<input type="date" name="date_end" value="${v('date_end')}"></label><label>Horaires<input name="hours_text" value="${v('hours_text')}" placeholder="10 h – 18 h"></label><label>Tarif<input name="price_text" value="${v('price_text')}" placeholder="Entrée libre"></label>
+            <label>Lieu<input name="place_text" value="${v('place_text')}" placeholder="Mairie du 15e, Paris"></label><label>Adresse<input name="address" value="${v('address')}" placeholder="31 rue Péclet, 75015 Paris"></label>
+            <label style="grid-column:1/-1">Comment y aller<textarea name="access_text" rows="2" placeholder="Métro Vaugirard ; parking à 300 m…">${v('access_text')}</textarea></label>
+            <label style="grid-column:1/-1">Que prévoir<textarea name="prepare_text" rows="3" placeholder="Liste des branches bloquées, clé USB, questions pour le cercle du Limousin…">${v('prepare_text')}</textarea></label>
+            <label style="grid-column:1/-1">Stands à voir<textarea name="stands_text" rows="3" placeholder="Cercle généalogique de la Corrèze (stand 12), Archives départementales…">${v('stands_text')}</textarea></label>
+            <label style="grid-column:1/-1">Liens (un par ligne, avec un nom si tu veux : « Programme https://… »)<textarea name="links" rows="3">${v('links')}</textarea></label>
+            <label style="grid-column:1/-1">Notes<textarea name="notes" rows="3">${v('notes')}</textarea></label></div>
+            <div class="checkbox-group"><label class="checkbox-line"><input type="checkbox" name="remind" ${f.reminder_id||!f.id?'checked':''}> Me le rappeler <input type="number" name="remind_days" min="0" max="60" value="7" style="width:4.5em"> jours avant (Rappels et notification)</label><label class="checkbox-line"><input type="checkbox" name="attended" ${Number(f.attended)?'checked':''}> J’y suis allé</label></div>
+            <div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" id="fair-cancel">Annuler</button>${f.id?'<button class="button secondary danger" type="button" id="fair-delete">Supprimer</button>':''}</div></form>`;
+    }
     function battueCommuneByInsee(insee){return state.currentBattueDetail?.communes?.find(c=>String(c.insee_code)===String(insee));}
     function applyBattueCommuneFilter(){
         const active=state.battueCommuneFilter||'all';
@@ -8343,6 +8446,14 @@ ${exportPrivacySectionHtml(privacy)}
   <h3>Sauvegarde complète (.zip)</h3>
   <p>La base <b>et</b> tous les médias (photos, documents, sons, vidéos) dans un seul fichier. C’est le fichier à garder en lieu sûr, ou à ouvrir sur un autre ordinateur : écran de démarrage de LCNDA → « Importer un fichier ». La préparation peut prendre une minute s’il y a beaucoup de photos.</p>
   <div class="page-actions"><a class="button" href="${exportUrl('export_full_backup')}" download>Télécharger la sauvegarde complète</a></div>
+  <iframe name="protected-backup-frame" id="protected-backup-frame" hidden></iframe>
+  <form id="protected-backup-form" class="backup-protect" method="post" action="api.php?action=export_full_backup" target="protected-backup-frame" autocomplete="off">
+    <h4>Protégée par un mot de passe</h4>
+    <p class="muted">Pour la mettre sur iCloud, Dropbox ou une clé USB sans risque si elle est perdue ou piratée : la base et les photos sont chiffrées (AES-256). Le mot de passe n’est enregistré nulle part : <strong>s’il est perdu, la sauvegarde ne pourra plus être ouverte</strong>. Hors de LCNDA, elle s’ouvre avec Keka (Mac) ou 7-Zip (Windows, Linux).</p>
+    <input type="hidden" name="csrf" value="${escapeHtml(state.csrf)}">
+    <div class="form-grid"><label>Mot de passe (8 caractères au moins)<input type="password" name="password" minlength="8" required autocomplete="new-password"></label><label>Le retaper<input type="password" name="password_confirm" minlength="8" required autocomplete="new-password"></label></div>
+    <div class="page-actions"><button class="button" type="submit">Télécharger la sauvegarde protégée</button></div>
+  </form>
 </section>
 
 <section class="maintenance-panel">
@@ -8365,7 +8476,14 @@ ${exportPrivacySectionHtml(privacy)}
 
 ${backupSectionHtml()}
 
-</section>`;$('#export-privacy-form')?.addEventListener('change',event=>{const form=event.currentTarget;saveExportPrivacySettings({enabled:form.elements.enabled.checked,deathCutoffYear:String(form.elements.deathCutoffYear.value||'').trim()});renderExportTools();});$('#gedcom-export-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;location.assign(exportUrl('export_gedcom',{gedcom_version:form.elements.gedcom_version.value,include_living:form.elements.include_living.checked?'1':'0',include_media:form.elements.include_media.checked?'1':'0',include_notes:form.elements.include_notes.checked?'1':'0',include_sources:form.elements.include_sources.checked?'1':'0',share:form.elements.share.checked?'1':'0'}));});$('#gedcom-export-form [name=share]')?.addEventListener('change',event=>{const living=event.currentTarget.form.elements.include_living;living.disabled=event.currentTarget.checked;if(event.currentTarget.checked)living.checked=true;});bindAutoBackupControls();}
+</section>`;
+        // Sauvegarde protégée : envoi dans un cadre caché (le fichier se télécharge ; une erreur s'y affiche en JSON)
+        $('#protected-backup-form')?.addEventListener('submit',event=>{const form=event.currentTarget;
+            if(form.elements.password.value!==form.elements.password_confirm.value){event.preventDefault();toast('Les deux mots de passe ne sont pas identiques.','error');return;}
+            form.elements.csrf.value=state.csrf;toast('Préparation de la sauvegarde protégée… (le téléchargement va commencer)');
+            setTimeout(()=>{form.elements.password.value='';form.elements.password_confirm.value='';},500);});
+        $('#protected-backup-frame')?.addEventListener('load',event=>{try{const text=event.currentTarget.contentDocument?.body?.innerText||'';if(text.trim().startsWith('{')){const data=JSON.parse(text);if(data.error)toast(data.error,'error');}}catch(_){}});
+        $('#export-privacy-form')?.addEventListener('change',event=>{const form=event.currentTarget;saveExportPrivacySettings({enabled:form.elements.enabled.checked,deathCutoffYear:String(form.elements.deathCutoffYear.value||'').trim()});renderExportTools();});$('#gedcom-export-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;location.assign(exportUrl('export_gedcom',{gedcom_version:form.elements.gedcom_version.value,include_living:form.elements.include_living.checked?'1':'0',include_media:form.elements.include_media.checked?'1':'0',include_notes:form.elements.include_notes.checked?'1':'0',include_sources:form.elements.include_sources.checked?'1':'0',share:form.elements.share.checked?'1':'0'}));});$('#gedcom-export-form [name=share]')?.addEventListener('change',event=>{const living=event.currentTarget.form.elements.include_living;living.disabled=event.currentTarget.checked;if(event.currentTarget.checked)living.checked=true;});bindAutoBackupControls();}
     function readAutoBackupForm(){
         const form=$('#auto-backup-form');
         const data=formObject(form);

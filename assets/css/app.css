@@ -3661,3 +3661,25 @@ html.is-embedded .screen-tool{display:none}
 .upkeep-table td{vertical-align:top;overflow-wrap:anywhere}
 .upkeep-table tr.upkeep-dead td:nth-child(3){color:#b03a2e;font-weight:600}
 .upkeep-table tr.upkeep-moved td:nth-child(3){color:#b46b00;font-weight:600}
+
+.web-search-news-pick{display:flex;align-items:center;gap:.4rem;margin:.2rem 0 .4rem;font-size:.9rem}
+.web-search-news small{display:block;margin-top:.3rem}
+
+.backup-protect{margin-top:1rem;padding-top:.8rem;border-top:1px solid var(--line)}
+.backup-protect h4{margin:0 0 .3rem}
+
+/* Salons et événements */
+.fair-list{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.2rem}
+.fair-card{border:1px solid var(--line);background:var(--paper);padding:.8rem 1rem;border-radius:6px}
+.fair-card.is-past{opacity:.75}
+.fair-card header{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}
+.fair-card h4{margin:.15rem 0}
+.fair-card p{margin:.1rem 0}
+.fair-when{font-weight:600;text-transform:none}
+.fair-when::first-letter{text-transform:uppercase}
+.fair-badge{font-size:.72rem;font-weight:700;color:#1d8a4f}
+.fair-card details{margin-top:.5rem}
+.fair-card summary{cursor:pointer;font-weight:600}
+.fair-section h5{margin:.6rem 0 .15rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.fair-section p{white-space:pre-line;overflow-wrap:anywhere}
+.fair-section ul{margin:.2rem 0;padding-left:1.1rem}

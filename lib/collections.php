@@ -392,6 +392,16 @@ function link_inventory(PDO $pdo): array
             $urls[$u]['uses'][] = ['table' => $table, 'column' => $col, 'id' => (int) $r['id'], 'person_id' => (int) ($r['person_id'] ?? 0), 'what' => $label, 'label' => (string) $r['label']];
         }
     }
+    try {
+        foreach ($pdo->query("SELECT id, title, links FROM genealogy_fairs WHERE links LIKE '%http%'") as $r) {
+            if (!preg_match_all('#https?://[^\s<>"]+#i', (string) $r['links'], $m)) { continue; }
+            foreach (array_unique($m[0]) as $u) {
+                $u = rtrim($u, '.,;)');
+                $urls[$u]['url'] = $u;
+                $urls[$u]['uses'][] = ['table' => 'genealogy_fairs', 'column' => 'links', 'id' => (int) $r['id'], 'person_id' => 0, 'what' => 'Salon', 'label' => (string) $r['title'], 'contains' => true];
+            }
+        }
+    } catch (Throwable) { /* base sans la structure n°7 */ }
     $checks = [];
     foreach ($pdo->query('SELECT * FROM link_checks') as $c) { $checks[$c['url']] = $c; }
     foreach ($urls as $u => &$row) { $row['check'] = $checks[$u] ?? null; }
@@ -494,12 +504,85 @@ function replace_link(PDO $pdo, array $data): array
         if ($row['url'] !== $old) { continue; }
         foreach ($row['uses'] as $use) {
             if (!preg_match('/^[a-z_]+$/', $use['table']) || !preg_match('/^[a-z_]+$/', $use['column'])) { continue; }
-            $stmt = $pdo->prepare("UPDATE {$use['table']} SET {$use['column']}=? WHERE id=? AND {$use['column']}=?");
-            $stmt->execute([$new, $use['id'], $old]);
+            if (!empty($use['contains'])) {
+                $stmt = $pdo->prepare("UPDATE {$use['table']} SET {$use['column']}=replace({$use['column']},?,?) WHERE id=?");
+                $stmt->execute([$old, $new, $use['id']]);
+            } else {
+                $stmt = $pdo->prepare("UPDATE {$use['table']} SET {$use['column']}=? WHERE id=? AND {$use['column']}=?");
+                $stmt->execute([$new, $use['id'], $old]);
+            }
             $count += $stmt->rowCount();
         }
     }
     $pdo->prepare('DELETE FROM link_checks WHERE url=?')->execute([$old]);
     log_change($pdo, 'link', null, 'update', "Lien remplacé ({$count}) : {$old} → {$new}");
     return ['replaced' => $count];
+}
+
+/* ─── Salons et événements de généalogie ─────────────────────────────── */
+
+function genealogy_fairs_data(PDO $pdo): array
+{
+    $rows = $pdo->query("SELECT * FROM genealogy_fairs ORDER BY CASE WHEN COALESCE(NULLIF(date_end,''), date_start) >= date('now') OR date_start='' THEN 0 ELSE 1 END,
+        CASE WHEN COALESCE(NULLIF(date_end,''), date_start) >= date('now') OR date_start='' THEN date_start END ASC, date_start DESC, id DESC")->fetchAll();
+    foreach ($rows as &$r) {
+        $r['link_list'] = array_values(array_filter(array_map(static function ($line) {
+            $line = trim($line);
+            if (!preg_match('#(https?://\S+)#i', $line, $m)) { return null; }
+            $label = trim(str_replace($m[1], '', $line), " \t-–:|");
+            return ['url' => $m[1], 'label' => $label];
+        }, preg_split('/\R/u', (string) $r['links']))));
+    }
+    unset($r);
+    return $rows;
+}
+
+function save_genealogy_fair(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $title = safe_text($data['title'] ?? '');
+    if ($title === '') { throw new RuntimeException('Donne un nom (ex. « Salon de généalogie de Paris »).'); }
+    $date = static fn($v) => preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $v) ? (string) $v : '';
+    $long = static fn($k) => trim(mb_substr((string) ($data[$k] ?? ''), 0, 8000));
+    $start = $date($data['date_start'] ?? ''); $end = $date($data['date_end'] ?? '');
+    if ($end !== '' && $start !== '' && $end < $start) { [$start, $end] = [$end, $start]; }
+    $fields = [$title, safe_text($data['kind'] ?? ''), $start, $end, safe_text($data['hours_text'] ?? ''), safe_text($data['place_text'] ?? ''), safe_text($data['address'] ?? ''),
+        $long('access_text'), $long('prepare_text'), $long('stands_text'), $long('links'), safe_text($data['price_text'] ?? ''), $long('notes'), !empty($data['attended']) ? 1 : 0];
+    if ($id) {
+        $pdo->prepare('UPDATE genealogy_fairs SET title=?,kind=?,date_start=?,date_end=?,hours_text=?,place_text=?,address=?,access_text=?,prepare_text=?,stands_text=?,links=?,price_text=?,notes=?,attended=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$fields, $id]);
+        log_change($pdo, 'genealogy_fair', $id, 'update', 'Salon modifié : ' . $title);
+    } else {
+        $pdo->prepare('INSERT INTO genealogy_fairs(title,kind,date_start,date_end,hours_text,place_text,address,access_text,prepare_text,stands_text,links,price_text,notes,attended) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)')->execute($fields);
+        $id = (int) $pdo->lastInsertId();
+        log_change($pdo, 'genealogy_fair', $id, 'create', 'Salon ajouté : ' . $title);
+    }
+    // Rappel (dans la liste des Rappels et en notification) quelques jours avant
+    $row = $pdo->prepare('SELECT reminder_id FROM genealogy_fairs WHERE id=?'); $row->execute([$id]); $reminderId = (int) $row->fetchColumn(); $row->closeCursor();
+    $days = max(0, min(60, safe_int($data['remind_days'] ?? 0)));
+    if (!empty($data['remind']) && $start !== '') {
+        $due = date('Y-m-d', strtotime($start . ' -' . $days . ' days'));
+        $text = 'Salon : ' . $title . ($fields[5] !== '' ? ' (' . $fields[5] . ')' : '');
+        $exists = $reminderId ? (int) $pdo->query('SELECT count(*) FROM standalone_reminders WHERE id=' . $reminderId)->fetchColumn() : 0;
+        if ($exists) {
+            $pdo->prepare("UPDATE standalone_reminders SET title=?, reminder_due_at=?, updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$text, $due, $reminderId]);
+        } else {
+            $pdo->prepare("INSERT INTO standalone_reminders(title,notes,reminder_mode,reminder_due_at,reminder_category) VALUES(?,?,'on',?,'Salons')")->execute([$text, 'Voir Listes → Salons et événements.', $due]);
+            $pdo->prepare('UPDATE genealogy_fairs SET reminder_id=? WHERE id=?')->execute([(int) $pdo->lastInsertId(), $id]);
+        }
+    } elseif (empty($data['remind']) && $reminderId) {
+        $pdo->prepare('DELETE FROM standalone_reminders WHERE id=? AND reminder_done=0')->execute([$reminderId]);
+        $pdo->prepare('UPDATE genealogy_fairs SET reminder_id=NULL WHERE id=?')->execute([$id]);
+    }
+    return ['id' => $id];
+}
+
+function delete_genealogy_fair(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $row = $pdo->prepare('SELECT title, reminder_id FROM genealogy_fairs WHERE id=?'); $row->execute([$id]); $fair = $row->fetch(); $row->closeCursor();
+    if (!$fair) { throw new RuntimeException('Salon introuvable'); }
+    if ($fair['reminder_id']) { $pdo->prepare('DELETE FROM standalone_reminders WHERE id=? AND reminder_done=0')->execute([(int) $fair['reminder_id']]); }
+    $pdo->prepare('DELETE FROM genealogy_fairs WHERE id=?')->execute([$id]);
+    log_change($pdo, 'genealogy_fair', $id, 'delete', 'Salon supprimé : ' . $fair['title']);
+    return ['deleted' => $id];
 }

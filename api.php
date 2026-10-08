@@ -148,6 +148,10 @@ try {
         delete_empty_families($pdo);
     }
 
+    // Sauvegarde complète protégée : le mot de passe arrive en POST (jamais dans l'adresse)
+    if ($isWrite && $action === 'export_full_backup') {
+        export_full_backup($pdo, (string) ($payload['password'] ?? ''));
+    }
     if ($isWrite && !in_array($action, $uploadActions, true)) {
         handle_write($pdo, $action, $payload);
     }
@@ -160,6 +164,8 @@ try {
         'goose_quiz' => goose_quiz_data($pdo),
         'person' => person_detail($pdo, safe_int($_GET['id'] ?? 0)),
         'due_reminders' => json_response(due_reminders_data($pdo)),
+        'offline_tile' => offline_tile_response($pdo),
+        'genealogy_fairs' => json_response(['fairs' => genealogy_fairs_data($pdo)]),
         'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
         'family_memories' => json_response(['memories' => family_memories_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''), safe_text($_GET['kind'] ?? '')), 'kinds' => MEMORY_KINDS]),
         'precise_places' => json_response(['places' => precise_places_list($pdo, safe_text($_GET['q'] ?? ''), max(5, min(500, safe_int($_GET['radius'] ?? 30))))]),
@@ -8720,6 +8726,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'remove_grave_person' => remove_grave_person($pdo,$data),
             'delete_grave' => delete_grave($pdo,$data),
             'save_personal_dictionary_entry' => save_personal_dictionary_entry($pdo,$data),
+            'save_genealogy_fair' => save_genealogy_fair($pdo,$data),
+            'delete_genealogy_fair' => delete_genealogy_fair($pdo,$data),
             'save_family_object' => save_family_object($pdo,$data),
             'delete_family_object' => delete_family_object($pdo,$data),
             'save_family_memory' => save_family_memory($pdo,$data),

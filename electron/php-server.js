@@ -378,11 +378,11 @@ class PhpServer extends EventEmitter {
    * pas de limite de taille, et l'original n'est jamais modifié. Réservé au processus principal (second secret).
    * @returns {Promise<{status: number, data: object}>}
    */
-  async importLocalFile(filePath) {
+  async importLocalFile(filePath, password = '') {
     const home = await this.request('/', { timeout: 15000 });
     const cookie = String((home.headers['set-cookie'] || [])[0] || '').split(';')[0];
     const csrf = JSON.parse((home.body.toString().match(/window\.INSTALL_CSRF = ("[^"]*")/) || [])[1] || '""');
-    const body = JSON.stringify({ path: filePath, csrf });
+    const body = JSON.stringify({ path: filePath, csrf, password });
     const r = await this.request('/api.php?action=import_local_path', {
       method: 'POST', timeout: 0, body,
       headers: { 'content-type': 'application/json', 'x-csrf-token': csrf, 'x-carnet-local': this.localSecret, cookie },

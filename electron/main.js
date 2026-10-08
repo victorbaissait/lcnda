@@ -202,14 +202,17 @@ ipcMain.handle('lcnda:choose-import-file', async (event) => {
   chosenFiles.set(token, result.filePaths[0]);
   return { token, name: path.basename(result.filePaths[0]) };
 });
-ipcMain.handle('lcnda:import-chosen-file', async (event, token) => {
+ipcMain.handle('lcnda:import-chosen-file', async (event, token, password) => {
   if (!fromApp(event)) return { status: 403, data: { error: 'Refusé' } };
   const filePath = chosenFiles.get(token);
-  chosenFiles.delete(token);
   if (!filePath) return { status: 400, data: { error: 'Choisis d’abord un fichier.' } };
   try {
-    return await server.importLocalFile(filePath);
+    const result = await server.importLocalFile(filePath, typeof password === 'string' ? password : '');
+    // Sauvegarde protégée : on garde le fichier choisi le temps que la page demande le mot de passe
+    if (!(result.status === 401 && result.data?.password_required)) chosenFiles.delete(token);
+    return result;
   } catch (err) {
+    chosenFiles.delete(token);
     return { status: 500, data: { error: 'Import impossible : ' + err.message } };
   }
 });

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 6;
+const SCHEMA_VERSION = 7;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -27,6 +27,7 @@ function migration_steps(): array
         4 => 'schema_v4',
         5 => 'schema_v5',
         6 => 'schema_v6',
+        7 => 'schema_v7',
     ];
 }
 
@@ -352,6 +353,32 @@ function schema_v6(PDO $pdo): void
         error TEXT NOT NULL DEFAULT '',
         checked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
+}
+
+/** Structure n°7 (2026-10-08) : salons et événements de généalogie (forums, congrès, journées portes ouvertes…). */
+function schema_v7(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS genealogy_fairs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT '',
+        date_start TEXT NOT NULL DEFAULT '',
+        date_end TEXT NOT NULL DEFAULT '',
+        hours_text TEXT NOT NULL DEFAULT '',
+        place_text TEXT NOT NULL DEFAULT '',
+        address TEXT NOT NULL DEFAULT '',
+        access_text TEXT NOT NULL DEFAULT '',
+        prepare_text TEXT NOT NULL DEFAULT '',
+        stands_text TEXT NOT NULL DEFAULT '',
+        links TEXT NOT NULL DEFAULT '',
+        price_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        attended INTEGER NOT NULL DEFAULT 0,
+        reminder_id INTEGER,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_genealogy_fairs_date ON genealogy_fairs(date_start)');
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

@@ -11,7 +11,7 @@ contextBridge.exposeInMainWorld('lcnda', {
   /** @returns {Promise<{canceled: true} | {token: string, name: string}>} */
   chooseImportFile: () => ipcRenderer.invoke('lcnda:choose-import-file'),
   /** @returns {Promise<{status: number, data: object}>} */
-  importChosenFile: (token) => ipcRenderer.invoke('lcnda:import-chosen-file', String(token || '')),
+  importChosenFile: (token, password) => ipcRenderer.invoke('lcnda:import-chosen-file', String(token || ''), typeof password === 'string' ? password : ''),
   /** Télécharge les communes d'un pays des battues (adresse et empreinte : catalogue de l'application). */
   downloadReference: (country) => ipcRenderer.invoke('lcnda:download-reference', String(country || '')),
   /** Commandes du menu de l'application (« quick-search », « open-reminders ») ; la page ne reçoit que leur nom. */
