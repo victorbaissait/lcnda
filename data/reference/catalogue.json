@@ -33,6 +33,26 @@
             "places": 32574,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "AG": {
+            "name": "Antigua-et-Barbuda",
+            "region": "Caraïbes",
+            "file": "geo-ag.sqlite.gz",
+            "size": 20071,
+            "sha256": "d0edf7d68488d0aec8b90a7a18d6612bdb0f1add4ba86089e5c6a8632bd06321",
+            "communes": 8,
+            "places": 191,
+            "source": "geoBoundaries (gbOpen, 2009) – geoBoundaries, Wikimedia (Public Domain)"
+        },
+        "AI": {
+            "name": "Anguilla",
+            "region": "Caraïbes",
+            "file": "geo-ai.sqlite.gz",
+            "size": 11628,
+            "sha256": "f5a4b71007ce86a33e000456685ae1f880322e6f61334b191b6210c6efb689e2",
+            "communes": 1,
+            "places": 45,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "AL": {
             "name": "Albanie",
             "region": "Balkans et Grèce",
@@ -93,6 +113,16 @@
             "places": 19240,
             "source": "Local Government Areas 2024 © Australian Bureau of Statistics (CC BY 4.0)"
         },
+        "AW": {
+            "name": "Aruba",
+            "region": "Caraïbes",
+            "file": "geo-aw.sqlite.gz",
+            "size": 10390,
+            "sha256": "e0d4f6b7b73bc0c4277d2a757beca02318ed9fce87cd3e88202e719726a9034f",
+            "communes": 1,
+            "places": 172,
+            "source": "geoBoundaries (gbOpen, 2021) – Sentinel-2 10m LandCover (Creative Commons Attribution 4.0 (CC BY 4.0))"
+        },
         "AZ": {
             "name": "Azerbaïdjan",
             "region": "Afrique du Nord et Moyen-Orient",
@@ -112,6 +142,16 @@
             "communes": 143,
             "places": 21984,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "BB": {
+            "name": "Barbade",
+            "region": "Caraïbes",
+            "file": "geo-bb.sqlite.gz",
+            "size": 26587,
+            "sha256": "c7d781927e3bdf2f8eded8744bf2a3b8f7fff02f001458c6360958d8d1026dc8",
+            "communes": 11,
+            "places": 588,
+            "source": "geoBoundaries (gbOpen, 2005) – geoBoundaries, Wikimedia (Creative Commons Attribution 2.5 Generic)"
         },
         "BD": {
             "name": "Bangladesh",
@@ -183,6 +223,16 @@
             "places": 3833,
             "source": "geoBoundaries (gbOpen, 2021) – uMap, Open Street Map (Open Data Commons Open Database License 1.0)"
         },
+        "BM": {
+            "name": "Bermudes",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-bm.sqlite.gz",
+            "size": 8049,
+            "sha256": "2c80feae4d862339d9c9d65320303bb86527f361756915f72ce9beff9f12f16a",
+            "communes": 1,
+            "places": 31,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "BN": {
             "name": "Brunei",
             "region": "Asie",
@@ -203,6 +253,16 @@
             "places": 25805,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "BQ": {
+            "name": "Bonaire, Saint-Eustache et Saba",
+            "region": "Caraïbes",
+            "file": "geo-bq.sqlite.gz",
+            "size": 20079,
+            "sha256": "0b5798c403b1ab49b766152da8fea42c6ddf425312fbf771a3b1874c6eba09cb",
+            "communes": 1,
+            "places": 119,
+            "source": "geoBoundaries (gbOpen, 2021) – Sentinel-2 10-Meter Land Use/LandCover (Creative Commons Attribution 4.0 (CC BY 4.0))"
+        },
         "BR": {
             "name": "Brésil",
             "region": "Amérique du Sud",
@@ -212,6 +272,16 @@
             "communes": 5604,
             "places": 72393,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "BS": {
+            "name": "Bahamas",
+            "region": "Caraïbes",
+            "file": "geo-bs.sqlite.gz",
+            "size": 411029,
+            "sha256": "af25ec5d8588997c448245a230a8cf7463c8c06f03d745e66411bb8bb9fb6cd0",
+            "communes": 33,
+            "places": 355,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wambacher (Open Data Commons Open Database License 1.0)"
         },
         "BT": {
             "name": "Bhoutan",
@@ -257,9 +327,9 @@
             "name": "Canada (hors Québec)",
             "region": "Amérique du Nord et centrale",
             "file": "geo-ca.sqlite.gz",
-            "size": 2352689,
-            "sha256": "7e4fbfdcb8b6456950dac0cab10b8fa952c1f0fdf01cc946cc781f4a1c5f7d13",
-            "communes": 2723,
+            "size": 2494687,
+            "sha256": "0fe1d09cda86aada0bc897a4fcd87facc4eb187296b96ee8d4de2b13c650766d",
+            "communes": 2733,
             "places": 19425,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
@@ -313,6 +383,16 @@
             "places": 12076,
             "source": "geoBoundaries (gbOpen, 2021) – Comité National de Télédétection et d'Information Géographique (CNTIG), OCHA ROWCA (Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO))"
         },
+        "CK": {
+            "name": "Îles Cook",
+            "region": "Océanie",
+            "file": "geo-ck.sqlite.gz",
+            "size": 10287,
+            "sha256": "747aa1a836c456d988c6b8913320792f43850a50401e68d36c01a81b04dbda59",
+            "communes": 1,
+            "places": 56,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "CL": {
             "name": "Chili",
             "region": "Amérique du Sud",
@@ -363,6 +443,16 @@
             "places": 5906,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "CU": {
+            "name": "Cuba",
+            "region": "Caraïbes",
+            "file": "geo-cu.sqlite.gz",
+            "size": 906633,
+            "sha256": "f0115b5a4906f966985a0f41f21202e71246e4a78d957e036302688add6e88f6",
+            "communes": 168,
+            "places": 16083,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wambacher (Open Data Commons Open Database License 1.0)"
+        },
         "CV": {
             "name": "Cap-Vert",
             "region": "Afrique",
@@ -372,6 +462,16 @@
             "communes": 32,
             "places": 2846,
             "source": "geoBoundaries (gbOpen, 2020) – OCHA ROWCA, OCHA ROWCA (Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO))"
+        },
+        "CW": {
+            "name": "Curaçao",
+            "region": "Caraïbes",
+            "file": "geo-cw.sqlite.gz",
+            "size": 10772,
+            "sha256": "ec89fc348662c92fdb659dc1dadb729809d1778dea92a4888c2646ca95552802",
+            "communes": 1,
+            "places": 100,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "CY": {
             "name": "Chypre",
@@ -422,6 +522,26 @@
             "communes": 98,
             "places": 7288,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "DM": {
+            "name": "Dominique",
+            "region": "Caraïbes",
+            "file": "geo-dm.sqlite.gz",
+            "size": 15762,
+            "sha256": "a0b72dae496691afb26a820df0cfb4093014982cb0406286f841bab6590e54a2",
+            "communes": 10,
+            "places": 132,
+            "source": "geoBoundaries (gbOpen, 2005) – geoBoundaries, Wikimedia Commons (Creative Commons Attribution 2.5 Generic)"
+        },
+        "DO": {
+            "name": "République dominicaine",
+            "region": "Caraïbes",
+            "file": "geo-do.sqlite.gz",
+            "size": 492159,
+            "sha256": "41361202241294902e9361160313ba87c3fa9e81469cf34c5eaf727c11e3f5bb",
+            "communes": 155,
+            "places": 7938,
+            "source": "geoBoundaries (gbOpen, 2020) – Caribbean GeoPortal, N/A (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "DZ": {
             "name": "Algérie",
@@ -498,10 +618,50 @@
             "region": "Europe du Nord",
             "file": "geo-fi.sqlite.gz",
             "size": 1892893,
-            "sha256": "9493af1d6c471594496863554228806c7d8d43b5773bcacd75cb1366ed872459",
+            "sha256": "b6dbb437a7709a6534d2b38bd7a5d593d7a7d447a738ff24d023b339f7c3062c",
             "communes": 308,
             "places": 29250,
             "source": "Kunnat 2025 © Tilastokeskus / Statistics Finland (CC BY 4.0)"
+        },
+        "FJ": {
+            "name": "Fidji",
+            "region": "Océanie",
+            "file": "geo-fj.sqlite.gz",
+            "size": 711198,
+            "sha256": "14e25cb810ef890e3f040cb2e74e3a10987bf986fb76ef9f05ea2e545a11d527",
+            "communes": 1597,
+            "places": 3168,
+            "source": "geoBoundaries (gbOpen, 2007) – Pacific Data Hub (Creative Commons Attribution 4.0 (CC BY 4.0))"
+        },
+        "FK": {
+            "name": "Îles Malouines",
+            "region": "Amérique du Sud",
+            "file": "geo-fk.sqlite.gz",
+            "size": 269902,
+            "sha256": "86dafd9cf1fd8fe2128569415b3c3e1501784fd9b30e6aa6c47851cc1a56b28a",
+            "communes": 1,
+            "places": 57,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
+        "FM": {
+            "name": "Micronésie",
+            "region": "Océanie",
+            "file": "geo-fm.sqlite.gz",
+            "size": 60040,
+            "sha256": "bcd37df590277b352c6e0045faee2c57656787e1a71d3486aaeb4bb3650b5065",
+            "communes": 75,
+            "places": 473,
+            "source": "geoBoundaries (gbOpen, 2019) – OCHA ROP, Federated States of Micronesia Division of Statistics, 2010 Census of Population and Housing and Secretariat of the Pacific Community, Statistics for Development Division (Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO))"
+        },
+        "FO": {
+            "name": "Îles Féroé",
+            "region": "Europe du Nord",
+            "file": "geo-fo.sqlite.gz",
+            "size": 51102,
+            "sha256": "5a7506c017abb1acb7e5016e977ce35be16f468832443a5cf3c4e0cd0fcf8a1f",
+            "communes": 1,
+            "places": 185,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "GA": {
             "name": "Gabon",
@@ -523,6 +683,16 @@
             "places": 44205,
             "source": "Parishes 2026 © ONS, contains OS data © Crown copyright (OGL v3) ; civil parishes © National Records of Scotland (OGL v3)"
         },
+        "GD": {
+            "name": "Grenade",
+            "region": "Caraïbes",
+            "file": "geo-gd.sqlite.gz",
+            "size": 18423,
+            "sha256": "127f794824ae40aa8e1c54809250e70fb50a561dc3270923d65b2a9e48ba3c52",
+            "communes": 7,
+            "places": 300,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wikipedia (Creative Commons Attribution-ShareAlike 2.0)"
+        },
         "GE": {
             "name": "Géorgie",
             "region": "Afrique du Nord et Moyen-Orient",
@@ -533,6 +703,16 @@
             "places": 5417,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "GG": {
+            "name": "Guernesey",
+            "region": "Europe de l’Ouest",
+            "file": "geo-gg.sqlite.gz",
+            "size": 17354,
+            "sha256": "94a8ec2e98d38afccbfe4d91b48cadfb5e46c3a123bfce57835eb08bb2b1906a",
+            "communes": 1,
+            "places": 262,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "GH": {
             "name": "Ghana",
             "region": "Afrique",
@@ -542,6 +722,26 @@
             "communes": 261,
             "places": 15997,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "GI": {
+            "name": "Gibraltar",
+            "region": "Europe de l’Ouest",
+            "file": "geo-gi.sqlite.gz",
+            "size": 2812,
+            "sha256": "ebab41dd53e521178b37933d833c66cd5962acb9268fc927f21afa48c18c5af7",
+            "communes": 1,
+            "places": 10,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / erase adm0 overlap / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
+        "GL": {
+            "name": "Groenland",
+            "region": "Europe du Nord",
+            "file": "geo-gl.sqlite.gz",
+            "size": 497197,
+            "sha256": "df0d695608778b6f97543467926dbc87a87ceca0e708eb7b768ad570fe460b9f",
+            "communes": 6,
+            "places": 255,
+            "source": "geoBoundaries (gbOpen, 2020) – GeoBoundaries, Wikipedia (Creative Commons Attribution-ShareAlike 3.0 Unported)"
         },
         "GM": {
             "name": "Gambie",
@@ -643,6 +843,16 @@
             "places": 11632,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "HT": {
+            "name": "Haïti",
+            "region": "Caraïbes",
+            "file": "geo-ht.sqlite.gz",
+            "size": 532292,
+            "sha256": "f4f0d1efa76c6314d09697b3b15a0ec4d3aa64144c9df9660199d9547106d9b5",
+            "communes": 140,
+            "places": 10945,
+            "source": "geoBoundaries (gbOpen, 2018) – FEWS NET (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "HU": {
             "name": "Hongrie",
             "region": "Europe centrale et de l’Est",
@@ -682,6 +892,16 @@
             "communes": 235,
             "places": 1852,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "IM": {
+            "name": "Île de Man",
+            "region": "Europe de l’Ouest",
+            "file": "geo-im.sqlite.gz",
+            "size": 10674,
+            "sha256": "37dc42682b7975941c03aedf801b0627ae815ea550eea69fe14b77cf2f87a691",
+            "communes": 1,
+            "places": 43,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "IN": {
             "name": "Inde",
@@ -733,6 +953,26 @@
             "places": 63043,
             "source": "Confini amministrativi 2026 © ISTAT (CC BY 4.0)"
         },
+        "JE": {
+            "name": "Jersey",
+            "region": "Europe de l’Ouest",
+            "file": "geo-je.sqlite.gz",
+            "size": 4798,
+            "sha256": "24a7a8366d216c85821bece4a3efdebbd0eb686ee971b5a418e397c32151811a",
+            "communes": 1,
+            "places": 85,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0) — territoire entier"
+        },
+        "JM": {
+            "name": "Jamaïque",
+            "region": "Caraïbes",
+            "file": "geo-jm.sqlite.gz",
+            "size": 566020,
+            "sha256": "c952729e545e21170c247827b8f2c0709f3c62456501ed028c908cae6daef785",
+            "communes": 827,
+            "places": 3929,
+            "source": "geoBoundaries (gbOpen, 2017) – Justin Meyers, Planning Office of Jamaica (Open Data Commons Open Database License 1.0)"
+        },
         "JO": {
             "name": "Jordanie",
             "region": "Afrique du Nord et Moyen-Orient",
@@ -783,6 +1023,16 @@
             "places": 11224,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "KI": {
+            "name": "Kiribati",
+            "region": "Océanie",
+            "file": "geo-ki.sqlite.gz",
+            "size": 27699,
+            "sha256": "52c16bebfa587d20a77bc754470e2a21d81865337cb6df15d2385d2171a5d20a",
+            "communes": 24,
+            "places": 207,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wambacher (Open Data Commons Open Database License 1.0)"
+        },
         "KM": {
             "name": "Comores",
             "region": "Afrique",
@@ -792,6 +1042,16 @@
             "communes": 55,
             "places": 395,
             "source": "geoBoundaries (gbOpen, 2019) – Comoros National Disaster Management Agency (COSEP-Centre des secours et de la protection civil), OCHA ROSEA (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
+        "KN": {
+            "name": "Saint-Christophe-et-Niévès",
+            "region": "Caraïbes",
+            "file": "geo-kn.sqlite.gz",
+            "size": 14323,
+            "sha256": "425643b274e6103e95050721e51e0fa8689366d79d203fc31ed2e1c35fe82ff7",
+            "communes": 14,
+            "places": 129,
+            "source": "geoBoundaries (gbOpen, 2021) – OpenStreetMap (Creative Commons Attribution-ShareAlike 2.0)"
         },
         "KP": {
             "name": "Corée du Nord",
@@ -823,6 +1083,16 @@
             "places": 127,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "KY": {
+            "name": "Îles Caïmans",
+            "region": "Caraïbes",
+            "file": "geo-ky.sqlite.gz",
+            "size": 12445,
+            "sha256": "221d48b26e1be88d56399fafb3e7e35ba80024e67e8dea4e1dcbca843d30275d",
+            "communes": 1,
+            "places": 80,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "KZ": {
             "name": "Kazakhstan",
             "region": "Asie",
@@ -852,6 +1122,16 @@
             "communes": 1031,
             "places": 3757,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "LC": {
+            "name": "Sainte-Lucie",
+            "region": "Caraïbes",
+            "file": "geo-lc.sqlite.gz",
+            "size": 178160,
+            "sha256": "c166e76889fbf3c346eb2f1ea24f7ac0011c312964920b88b83dc745d48f11f9",
+            "communes": 547,
+            "places": 623,
+            "source": "geoBoundaries (gbOpen, 2019) – Department of Physical Planning, Saint Lucia Open Data (Creative Commons Attribution 4.0 (CC BY 4.0))"
         },
         "LI": {
             "name": "Liechtenstein",
@@ -983,6 +1263,16 @@
             "places": 24199,
             "source": "geoBoundaries (gbOpen, 2020) – Madagascar National Disaster Management Office (BNGRC), OCHA ROSA (Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO))"
         },
+        "MH": {
+            "name": "Îles Marshall",
+            "region": "Océanie",
+            "file": "geo-mh.sqlite.gz",
+            "size": 21434,
+            "sha256": "738e75aa3389e76a08fd97feaed4410cd5718310c5192d31c0c8e33f247ab6ba",
+            "communes": 24,
+            "places": 113,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wambacher (Open Data Commons Open Database License 1.0)"
+        },
         "MK": {
             "name": "Macédoine du Nord",
             "region": "Balkans et Grèce",
@@ -1042,6 +1332,16 @@
             "communes": 15,
             "places": 7653,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "MS": {
+            "name": "Montserrat",
+            "region": "Caraïbes",
+            "file": "geo-ms.sqlite.gz",
+            "size": 6936,
+            "sha256": "77951dc82b4aef9e01c52ba68284aeca96279d9f6faa05a5d4b789dd6c594568",
+            "communes": 1,
+            "places": 83,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "MT": {
             "name": "Malte",
@@ -1143,6 +1443,16 @@
             "places": 13066,
             "source": "geoBoundaries (gbOpen, 2012) – OCHA ROWCA, Open Street Map (Creative Commons Attribution 3.0 License)"
         },
+        "NF": {
+            "name": "Île Norfolk",
+            "region": "Océanie",
+            "file": "geo-nf.sqlite.gz",
+            "size": 2151,
+            "sha256": "c3bbf38a25f6bae3e5e7bdaa1f25144f30d41f82a8846997481289d3da99991c",
+            "communes": 1,
+            "places": 4,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0) — territoire entier"
+        },
         "NG": {
             "name": "Nigeria",
             "region": "Afrique",
@@ -1192,6 +1502,26 @@
             "communes": 749,
             "places": 87925,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "NR": {
+            "name": "Nauru",
+            "region": "Océanie",
+            "file": "geo-nr.sqlite.gz",
+            "size": 6522,
+            "sha256": "14672436730314462fc64264756b1708d463424c2acb4430bf7988e51154df86",
+            "communes": 14,
+            "places": 21,
+            "source": "geoBoundaries (gbOpen, 2005) – geoBoundaries, FreeMapViewer (Public Domain)"
+        },
+        "NU": {
+            "name": "Niue",
+            "region": "Océanie",
+            "file": "geo-nu.sqlite.gz",
+            "size": 7832,
+            "sha256": "5778be767193e24262418c77159a5dbda5cba05c738a0a9758fca979706adb65",
+            "communes": 14,
+            "places": 49,
+            "source": "geoBoundaries (gbOpen, 2020) – Pacific Data Hub (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "NZ": {
             "name": "Nouvelle-Zélande",
@@ -1283,6 +1613,16 @@
             "places": 47944,
             "source": "Państwowy Rejestr Granic © GUGiK (données libres)"
         },
+        "PN": {
+            "name": "Îles Pitcairn",
+            "region": "Océanie",
+            "file": "geo-pn.sqlite.gz",
+            "size": 1980,
+            "sha256": "91e95b23fd3125ec6f6e9245c774f14f7140bb5254eeba3dc2065342d461ef03",
+            "communes": 1,
+            "places": 2,
+            "source": "geoBoundaries (gbOpen, 2021) – Sentinel-2 10-Meter Land Use/LandCover (Creative Commons Attribution 4.0 (CC BY 4.0))"
+        },
         "PS": {
             "name": "Palestine",
             "region": "Afrique du Nord et Moyen-Orient",
@@ -1302,6 +1642,16 @@
             "communes": 3258,
             "places": 16655,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "PW": {
+            "name": "Palaos",
+            "region": "Océanie",
+            "file": "geo-pw.sqlite.gz",
+            "size": 69800,
+            "sha256": "9ebd7842b72e0c5a68a8eac5db71b43222948e27b09742830ecf3b20b6673475",
+            "communes": 77,
+            "places": 109,
+            "source": "geoBoundaries (gbOpen, 2015) – Pacific Data Hub, SPC Statistics for Development Division (SDD) (Creative Commons Attribution 4.0 (CC BY 4.0))"
         },
         "PY": {
             "name": "Paraguay",
@@ -1393,6 +1743,16 @@
             "places": 5119,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "SB": {
+            "name": "Îles Salomon",
+            "region": "Océanie",
+            "file": "geo-sb.sqlite.gz",
+            "size": 414378,
+            "sha256": "d2fa05f1c9e17f16927232ade95fef7a66e0ddf99186528eba7396b38b83f31f",
+            "communes": 50,
+            "places": 3079,
+            "source": "geoBoundaries (gbOpen, 2018) – Solomon Islands National Statistics Office (SINSO), OCHA ROAP (Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO))"
+        },
         "SC": {
             "name": "Seychelles",
             "region": "Afrique",
@@ -1432,6 +1792,16 @@
             "communes": 55,
             "places": 394,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "SH": {
+            "name": "Sainte-Hélène",
+            "region": "Afrique",
+            "file": "geo-sh.sqlite.gz",
+            "size": 10931,
+            "sha256": "aa0cf92189e22b6a82ec2cefcdaaf5b1dee0a04220378a140a4223086aac96f7",
+            "communes": 1,
+            "places": 20,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "SI": {
             "name": "Slovénie",
@@ -1533,6 +1903,16 @@
             "places": 4889,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "SX": {
+            "name": "Sint Maarten",
+            "region": "Caraïbes",
+            "file": "geo-sx.sqlite.gz",
+            "size": 4378,
+            "sha256": "6ac18041fe0834a78c1ed433bdc108797a006f57a1ce585a98e601daab3144a8",
+            "communes": 1,
+            "places": 62,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0) — territoire entier"
+        },
         "SY": {
             "name": "Syrie",
             "region": "Afrique du Nord et Moyen-Orient",
@@ -1552,6 +1932,16 @@
             "communes": 53,
             "places": 703,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "TC": {
+            "name": "Îles Turques-et-Caïques",
+            "region": "Caraïbes",
+            "file": "geo-tc.sqlite.gz",
+            "size": 220914,
+            "sha256": "903b6c2da7f1a13e31dabfaaee5e2434fccfab01b2ca2421f733ab2a65f0517d",
+            "communes": 1,
+            "places": 43,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "TD": {
             "name": "Tchad",
@@ -1593,6 +1983,16 @@
             "places": 2801,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "TK": {
+            "name": "Tokelau",
+            "region": "Océanie",
+            "file": "geo-tk.sqlite.gz",
+            "size": 13863,
+            "sha256": "56dcc57c1abbb733d2c561adde149c981b13dee5b757ceb56d35d452157c62f2",
+            "communes": 1,
+            "places": 5,
+            "source": "geoBoundaries (gbOpen, 2022) – raster 2 polygon from Sentinel-2 10m Land Cover where Image Year = 2022 / exclude gridcode = 1 (water) / dissolve (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "TL": {
             "name": "Timor oriental",
             "region": "Asie",
@@ -1623,6 +2023,16 @@
             "places": 2249,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "TO": {
+            "name": "Tonga",
+            "region": "Océanie",
+            "file": "geo-to.sqlite.gz",
+            "size": 28104,
+            "sha256": "c4a8dcc580edfe8272543e7c31d72acecb51aa9bd3da51981522c0d7a4117a1d",
+            "communes": 23,
+            "places": 150,
+            "source": "geoBoundaries (gbOpen, 2020) – Pacific Data Hub (Creative Commons Attribution 4.0 International (CC BY 4.0))"
+        },
         "TR": {
             "name": "Turquie",
             "region": "Afrique du Nord et Moyen-Orient",
@@ -1632,6 +2042,26 @@
             "communes": 974,
             "places": 54669,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "TT": {
+            "name": "Trinité-et-Tobago",
+            "region": "Caraïbes",
+            "file": "geo-tt.sqlite.gz",
+            "size": 34314,
+            "sha256": "a0cd9a84714cf540d8b4ef0a972d646f735a9e000bfbdc704425b62f68d728a3",
+            "communes": 14,
+            "places": 460,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wambacher (Open Data Commons Open Database License 1.0)"
+        },
+        "TV": {
+            "name": "Tuvalu",
+            "region": "Océanie",
+            "file": "geo-tv.sqlite.gz",
+            "size": 11228,
+            "sha256": "1d4860f0e97581592359c776f3262f376a77c1e20d31eee37f15cfcfd1836c67",
+            "communes": 34,
+            "places": 38,
+            "source": "geoBoundaries (gbOpen, 2017) – Pacific Data Hub (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "TW": {
             "name": "Taïwan",
@@ -1677,10 +2107,10 @@
             "name": "États-Unis",
             "region": "Amérique du Nord et centrale",
             "file": "geo-us.sqlite.gz",
-            "size": 6594135,
-            "sha256": "5994d7fc64d2c1eed237591c975f4602926eb7e34dac5f470c131fe4e3df94f6",
+            "size": 6621573,
+            "sha256": "3819b3a8f8c7bd8f7d958ab700ef80845cf550c6b59270421a4929732940f689",
             "communes": 3235,
-            "places": 41620,
+            "places": 41924,
             "source": "Cartographic Boundary Files 2024 (comtés) – U.S. Census Bureau (domaine public)"
         },
         "UY": {
@@ -1713,6 +2143,16 @@
             "places": 1,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "VC": {
+            "name": "Saint-Vincent-et-les-Grenadines",
+            "region": "Caraïbes",
+            "file": "geo-vc.sqlite.gz",
+            "size": 14449,
+            "sha256": "4c38c36017f800be13ad9691c694a4df0c7ccc9b03365252c9815ce39c38223a",
+            "communes": 6,
+            "places": 165,
+            "source": "geoBoundaries (gbOpen, 2017) – OpenStreetMap, Wambacher (Open Data Commons Open Database License 1.0)"
+        },
         "VE": {
             "name": "Venezuela",
             "region": "Amérique du Sud",
@@ -1722,6 +2162,16 @@
             "communes": 1227,
             "places": 25582,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "VG": {
+            "name": "Îles Vierges britanniques",
+            "region": "Caraïbes",
+            "file": "geo-vg.sqlite.gz",
+            "size": 22104,
+            "sha256": "d3e3fd898145d62025531566d9516582820624556dba9e9b14329241d46996e0",
+            "communes": 1,
+            "places": 142,
+            "source": "geoBoundaries (gbOpen, 2021) – raster2polygon from Sentinel-2 10m Land Cover where Image Year = 2021 / exclude gridcode = 1 (water) / dissolve / processed by IMB (Creative Commons Attribution 4.0 International (CC BY 4.0))"
         },
         "VN": {
             "name": "Viêt Nam",
@@ -1733,6 +2183,16 @@
             "places": 42018,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
         },
+        "VU": {
+            "name": "Vanuatu",
+            "region": "Océanie",
+            "file": "geo-vu.sqlite.gz",
+            "size": 139133,
+            "sha256": "4b7b41aa85165961daa702189ffb3a41b7d8d63cd69addeef6770db706a2e6e4",
+            "communes": 65,
+            "places": 1924,
+            "source": "geoBoundaries (gbOpen, 2019) – Secretarial of the Pacific Community (SPC), Statistics for Development Division, OCHA ROP (Creative Commons Attribution 3.0 Intergovernmental Organisations (CC BY 3.0 IGO))"
+        },
         "WF": {
             "name": "Wallis-et-Futuna",
             "region": "France d’outre-mer",
@@ -1742,6 +2202,16 @@
             "communes": 3,
             "places": 99,
             "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "WS": {
+            "name": "Samoa",
+            "region": "Océanie",
+            "file": "geo-ws.sqlite.gz",
+            "size": 47002,
+            "sha256": "33acf64cd1ccbf467236841e921d888790afd9eabcfa8bd1d1102f0f0591c5bd",
+            "communes": 43,
+            "places": 408,
+            "source": "geoBoundaries (gbOpen, 2011) – Pacific Data Hub, SPC Statistics for Development Division (SDD) (Creative Commons Attribution 4.0 (CC BY 4.0))"
         },
         "XK": {
             "name": "Kosovo",

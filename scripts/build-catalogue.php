@@ -19,16 +19,17 @@ const CATALOGUE_BASE_URL = 'https://github.com/victorbaissait/lcnda-donnees/rele
     $regionOf = static function (string $cc): string {
         static $groups = [
             'France d’outre-mer' => 'OM NC PF WF',
-            'Europe de l’Ouest' => 'BE LU NL CH LI DE AT IT SM VA MC ES PT AD MT GB IE',
-            'Europe du Nord' => 'DK SE NO FI IS EE LV LT',
+            'Europe de l’Ouest' => 'BE LU NL CH LI DE AT IT SM VA MC ES PT AD MT GB IE GI JE GG IM',
+            'Europe du Nord' => 'DK SE NO FI IS EE LV LT GL FO',
             'Europe centrale et de l’Est' => 'PL CZ SK HU SI RO BG UA BY MD RU',
             'Balkans et Grèce' => 'HR BA RS ME MK AL XK GR CY',
             'Afrique du Nord et Moyen-Orient' => 'MA DZ TN LY EG LB JO TR GE AM AZ SY IQ IR IL PS SA KW BH QA AE QO YE EH',
-            'Amérique du Nord et centrale' => 'QC CA US MX GT BZ SV HN NI CR PA',
-            'Amérique du Sud' => 'BR AR CL PE CO UY PY BO EC VE GY SR',
+            'Amérique du Nord et centrale' => 'QC CA US MX GT BZ SV HN NI CR PA BM',
+        'Caraïbes' => 'CU DO HT JM BS TT BB LC VC GD AG DM KN AW CW SX BQ VG KY TC AI MS',
+            'Amérique du Sud' => 'BR AR CL PE CO UY PY BO EC VE GY SR FK',
             'Asie' => 'JP KR KP CN TW HK MO MN RU KZ UZ KG TJ TM AF PK IN BD LK NP BT MV MM TH LA KH VN MY SG BN ID TL PH',
-            'Afrique' => 'SN ML MR GN CI BF NE BJ TG GH NG GM GW SL LR CV CM TD CF GA CG CD GQ AO ST ET ER DJ SO KE UG RW BI TZ SS SD ZA NA BW ZW ZM MW MZ MG MU KM SC LS SZ',
-            'Océanie' => 'AU NZ PG',
+            'Afrique' => 'SN ML MR GN CI BF NE BJ TG GH NG GM GW SL LR CV CM TD CF GA CG CD GQ AO ST ET ER DJ SO KE UG RW BI TZ SS SD ZA NA BW ZW ZM MW MZ MG MU KM SC LS SZ SH',
+            'Océanie' => 'AU NZ PG FJ SB VU WS TO KI TV NR PW FM MH CK NU TK NF PN',
         ];
         foreach ($groups as $region => $codes) { if (in_array($cc, explode(' ', $codes), true)) { return $region; } }
         return 'Autres';
