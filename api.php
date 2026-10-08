@@ -8775,7 +8775,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 
 function allowed_label_entity_types(): array
 {
-    return ['person','event','place','media','census','note','source','investigation','view','archive_visit'];
+    return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory'];
 }
 
 function normalize_label_color(string $color): string

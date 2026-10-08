@@ -22,6 +22,20 @@ function collection_people(PDO $pdo, array $ids): array
     return $out;
 }
 
+/** Étiquettes (les mêmes que pour les personnes, lieux…) des objets ou souvenirs. */
+function collection_labels(PDO $pdo, string $type, array $ids): array
+{
+    $ids = array_values(array_filter(array_map('intval', $ids)));
+    if (!$ids) { return []; }
+    $stmt = $pdo->prepare('SELECT ll.entity_id, l.id, l.name, l.color, l.description FROM label_links ll JOIN labels l ON l.id=ll.label_id
+        WHERE ll.entity_type=? AND ll.entity_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') ORDER BY l.name COLLATE NOCASE');
+    $stmt->execute([$type, ...$ids]);
+    $out = [];
+    foreach ($stmt->fetchAll() as $l) { $eid = (int) $l['entity_id']; unset($l['entity_id']); $out[$eid][] = $l; }
+    $stmt->closeCursor();
+    return $out;
+}
+
 function collection_media(PDO $pdo, string $type, array $ids): array
 {
     $ids = array_values(array_filter(array_map('intval', $ids)));
@@ -45,7 +59,7 @@ function family_objects_data(PDO $pdo, int $personId = 0, string $q = ''): array
         $where[] = '(o.holder_person_id=? OR o.id IN (SELECT object_id FROM family_object_transfers WHERE from_person_id=? OR to_person_id=?))';
         array_push($params, $personId, $personId, $personId);
     }
-    if ($q !== '') { $where[] = '(o.title LIKE ? OR o.kind LIKE ? OR o.description LIKE ? OR o.holder_text LIKE ?)'; array_push($params, "%{$q}%", "%{$q}%", "%{$q}%", "%{$q}%"); }
+    if ($q !== '') { $where[] = "(o.title LIKE ? OR o.kind LIKE ? OR o.description LIKE ? OR o.holder_text LIKE ? OR o.id IN (SELECT ll.entity_id FROM label_links ll JOIN labels l ON l.id=ll.label_id WHERE ll.entity_type='family_object' AND l.name LIKE ?))"; array_push($params, "%{$q}%", "%{$q}%", "%{$q}%", "%{$q}%", "%{$q}%"); }
     $stmt = $pdo->prepare('SELECT o.* FROM family_objects o' . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ' ORDER BY o.title COLLATE NOCASE, o.id');
     $stmt->execute($params);
     $objects = $stmt->fetchAll();
@@ -61,7 +75,9 @@ function family_objects_data(PDO $pdo, int $personId = 0, string $q = ''): array
     foreach ($objects as $o) { $personIds[] = $o['holder_person_id']; }
     $people = collection_people($pdo, $personIds);
     $media = collection_media($pdo, 'family_object', $ids);
+    $labels = collection_labels($pdo, 'family_object', $ids);
     foreach ($objects as &$o) {
+        $o['labels'] = $labels[(int) $o['id']] ?? [];
         $o['transfers'] = array_map(static function ($t) use ($people) {
             $t['from_person'] = $people[(int) $t['from_person_id']] ?? null;
             $t['to_person'] = $people[(int) $t['to_person_id']] ?? null;
@@ -111,6 +127,7 @@ function delete_family_object(PDO $pdo, array $data): array
     $row = $pdo->prepare('SELECT title FROM family_objects WHERE id=?'); $row->execute([$id]); $title = $row->fetchColumn(); $row->closeCursor();
     if ($title === false) { throw new RuntimeException('Objet introuvable'); }
     $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='family_object' AND collection_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='family_object' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM family_objects WHERE id=?')->execute([$id]);
     log_change($pdo, 'family_object', $id, 'delete', 'Objet de famille supprimé : ' . $title);
     return ['deleted' => $id];
@@ -122,7 +139,7 @@ function family_memories_data(PDO $pdo, int $personId = 0, string $q = '', strin
 {
     $where = []; $params = [];
     if ($personId) { $where[] = 'm.id IN (SELECT memory_id FROM family_memory_people WHERE person_id=?)'; $params[] = $personId; }
-    if ($q !== '') { $where[] = '(m.title LIKE ? OR m.content LIKE ? OR m.origin_text LIKE ?)'; array_push($params, "%{$q}%", "%{$q}%", "%{$q}%"); }
+    if ($q !== '') { $where[] = "(m.title LIKE ? OR m.content LIKE ? OR m.origin_text LIKE ? OR m.id IN (SELECT ll.entity_id FROM label_links ll JOIN labels l ON l.id=ll.label_id WHERE ll.entity_type='family_memory' AND l.name LIKE ?))"; array_push($params, "%{$q}%", "%{$q}%", "%{$q}%", "%{$q}%"); }
     if ($kind !== '' && isset(MEMORY_KINDS[$kind])) { $where[] = 'm.kind=?'; $params[] = $kind; }
     $stmt = $pdo->prepare('SELECT m.* FROM family_memories m' . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ' ORDER BY m.kind, m.title COLLATE NOCASE, m.id');
     $stmt->execute($params);
@@ -137,7 +154,9 @@ function family_memories_data(PDO $pdo, int $personId = 0, string $q = '', strin
     $lp->closeCursor();
     $people = collection_people($pdo, $pids);
     $media = collection_media($pdo, 'family_memory', $ids);
+    $labels = collection_labels($pdo, 'family_memory', $ids);
     foreach ($rows as &$r) {
+        $r['labels'] = $labels[(int) $r['id']] ?? [];
         $r['kind_label'] = MEMORY_KINDS[$r['kind']] ?? 'Autre';
         $r['people'] = array_values(array_filter(array_map(static fn($l) => isset($people[(int) $l['person_id']]) ? ['role' => $l['role'], 'person' => $people[(int) $l['person_id']]] : null, $links[(int) $r['id']] ?? [])));
         $r['media'] = $media[(int) $r['id']] ?? [];
@@ -181,6 +200,7 @@ function delete_family_memory(PDO $pdo, array $data): array
     $row = $pdo->prepare('SELECT title FROM family_memories WHERE id=?'); $row->execute([$id]); $title = $row->fetchColumn(); $row->closeCursor();
     if ($title === false) { throw new RuntimeException('Souvenir introuvable'); }
     $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='family_memory' AND collection_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='family_memory' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM family_memories WHERE id=?')->execute([$id]);
     log_change($pdo, 'family_memory', $id, 'delete', 'Mémoire familiale supprimée : ' . $title);
     return ['deleted' => $id];

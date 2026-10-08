@@ -2767,9 +2767,15 @@
         const q=(query||'').trim().toLowerCase();
         const matches=all.filter(l=>!currentIds.has(Number(l.id))&&(!q||String(l.name||'').toLowerCase().includes(q))).slice(0,8);
         const optionsHtml=matches.map(l=>`<button type="button" class="labels-suggestion" data-pick-label="${l.id}">${labelChip(l)}</button>`).join('');
-        box.innerHTML=optionsHtml||'<div class="labels-suggestion-empty">Aucune étiquette existante disponible.</div>';
+        // Aucune étiquette de ce nom : on peut la créer sur place (au lieu de passer par Listes → Étiquettes)
+        const typed=(query||'').trim();
+        const exists=all.some(l=>String(l.name||'').trim().toLowerCase()===typed.toLowerCase());
+        const createHtml=typed&&!exists?`<button type="button" class="labels-suggestion labels-create" data-create-label="${escapeHtml(typed)}">+ Créer l’étiquette « ${escapeHtml(typed)} »</button>`:'';
+        box.innerHTML=(optionsHtml+createHtml)||'<div class="labels-suggestion-empty">Tape le nom d’une étiquette.</div>';
         box.hidden=false;
         $$('[data-pick-label]',box).forEach(btn=>btn.addEventListener('click',()=>addLabelToField(field,Number(btn.dataset.pickLabel))));
+        $('[data-create-label]',box)?.addEventListener('click',async event=>{const name=event.currentTarget.dataset.createLabel;
+            try{const created=await api('save_label',{}, {method:'POST',body:{name}});const label=created.result;state.currentLabelsCache=null;if(label?.id)await addLabelToField(field,Number(label.id));toast(`Étiquette « ${name} » créée.`);}catch(error){toast(error.message,'error');}});
     }
     async function addLabelToField(field,labelId){
         const entityType=field.dataset.labelsEntityType,entityId=Number(field.dataset.labelsEntityId);
@@ -2796,6 +2802,7 @@
     }
     function bindEntityLabelsFields(){
         $$('.labels-field').forEach(field=>{
+            if(field.dataset.labelsBound)return;field.dataset.labelsBound='1'; // déjà branché : ne pas doubler les clics
             const addBtn=$('[data-labels-add]',field);
             const inputRow=$('.labels-input-row',field);
             if(addBtn&&inputRow){
@@ -2828,7 +2835,7 @@
             addBtn?.classList.remove('is-active');
         });
     });
-    function labelEntityTypesText(value=''){const names={person:'Personnes',event:'Événements',place:'Lieux',media:'Médias',census:'Recensements',note:'Notes',source:'Sources',investigation:'Enquêtes',view:'Vues enregistrées'};return String(value||'').split(',').filter(Boolean).map(type=>names[type]||type).join(', ')||'—';}
+    function labelEntityTypesText(value=''){const names={person:'Personnes',event:'Événements',place:'Lieux',media:'Médias',census:'Recensements',note:'Notes',source:'Sources',investigation:'Enquêtes',view:'Vues enregistrées',archive_visit:'Visites d’archives',family_object:'Objets de famille',family_memory:'Mémoire familiale'};return String(value||'').split(',').filter(Boolean).map(type=>names[type]||type).join(', ')||'—';}
     function mediaDocumentSummary(item){const parts=[item.document_reference,item.document_title,item.document_pages?`pages/vues ${item.document_pages}`:''].filter(Boolean);return parts.join(' · ');}
     function mediaDocumentLink(item){const summary=mediaDocumentSummary(item);if(!summary&&!item.document_url)return '';const label=summary||item.document_url;return item.document_url?`<a href="${escapeHtml(item.document_url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`:escapeHtml(label);}
     function sourceTypeText(type){return ({internet:'Internet',book:'Livre / registre',archive:'Archive sans média',testimony:'Témoignage',other:'Autre source'}[type]||'Internet');}
@@ -6616,6 +6623,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const who=(person,text)=>person?personName(person):(text||'?');
         return `${escapeHtml(who(t.from_person,t.from_text))} → ${escapeHtml(who(t.to_person,t.to_text))}${t.date_text?` <small>(${escapeHtml(t.date_text)})</small>`:''}`;
     }
+    function collectionLabelChips(labels){return labels?.length?`<div class="collection-labels">${labels.map(l=>{const color=l.color||'#0066cc';return `<span class="label-chip" style="--label-bg:${escapeHtml(color)};--label-fg:${escapeHtml(labelTextColor(color))}"><span>${escapeHtml(l.name)}</span></span>`;}).join('')}</div>`:'';}
     function familyObjectCardHtml(o,compact=false){
         const photo=o.media?.find(m=>m.media_type==='image');
         const holder=o.holder_person?personChip(o.holder_person):escapeHtml(o.holder_text||'');
@@ -6623,6 +6631,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             ${!compact&&o.description?`<p>${escapeHtml(o.description)}</p>`:''}
             ${o.transfers?.length?`<div class="collection-chain">${o.transfers.map(transferText).join('<span class="sep"> · </span>')}</div>`:''}
             ${holder?`<div class="collection-holder">Aujourd’hui : ${holder}${o.location_text?` <small>· ${escapeHtml(o.location_text)}</small>`:''}</div>`:''}
+            ${collectionLabelChips(o.labels)}
             ${compact?'':`<div class="page-actions"><button type="button" class="button small secondary" data-edit-object="${o.id}">Modifier</button></div>`}</div></article>`;
     }
     function familyMemoryCardHtml(m,compact=false){
@@ -6631,6 +6640,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             ${excerpt?`<p class="collection-text">${escapeHtml(excerpt)}${String(m.content||'').length>excerpt.length?'…':''}</p>`:''}
             ${m.people?.length?`<div class="collection-holder">${m.people.map(l=>`${personChip(l.person)} <small>(${escapeHtml({transmitted:'l’a transmis',received:'l’a reçu',about:'concerné'}[l.role]||'')})</small>`).join(' · ')}</div>`:''}
             ${m.origin_text?`<small class="muted">${escapeHtml(m.origin_text)}</small>`:''}
+            ${collectionLabelChips(m.labels)}
             ${compact?'':`<div class="page-actions"><button type="button" class="button small secondary" data-edit-memory="${m.id}">Modifier</button></div>`}</div></article>`;
     }
     /** Listes → Objets de famille */
@@ -6639,7 +6649,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const data=await api('family_objects',{q});if(token!==state.workspaceToken||state.module!=='listes')return;
         const objects=data.objects||[];const editing=editId===0?{id:0,title:'',transfers:[],media:[]}:objects.find(o=>Number(o.id)===Number(editId));
         $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Objets de famille</h2><p>La bague, l’horloge, le livre de messe… avec leur photo, de qui à qui ils sont passés, et qui les a aujourd’hui.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="objects-q" value="${escapeHtml(q)}" placeholder="Chercher un objet…"><button type="button" class="button" id="object-add">+ Objet</button></div>
+            <div class="collection-toolbar"><input type="search" id="objects-q" value="${escapeHtml(q)}" placeholder="Chercher un objet ou une étiquette…"><button type="button" class="button" id="object-add">+ Objet</button></div>
             ${editing?familyObjectFormHtml(editing):''}
             <div class="collection-grid">${objects.map(o=>familyObjectCardHtml(o)).join('')||empty('Aucun objet pour l’instant. Ajoute le premier avec « + Objet ».')}</div></section>`;
         $('#objects-q').addEventListener('change',event=>{state.familyObjectsQuery=event.target.value.trim();renderFamilyObjectsList(++state.workspaceToken);});
@@ -6655,6 +6665,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             <label>Origine<input name="origin_text" value="${escapeHtml(o.origin_text||'')}" placeholder="Achetée à la foire de Tulle vers 1850"></label>
             <label>Aujourd’hui chez${collectionPersonField('holder_person_id',o.holder_person,'Personne de la base…')}</label><label>ou (nom libre)<input name="holder_text" value="${escapeHtml(o.holder_text||'')}" placeholder="Cousine Anne"></label><label>Où est-il<input name="location_text" value="${escapeHtml(o.location_text||'')}" placeholder="Salon, maison de Brive"></label>
             <label style="grid-column:1/-1">Description<textarea name="description" rows="3">${escapeHtml(o.description||'')}</textarea></label></div>
+            <div class="collection-labels-edit">${o.id?entityLabelsField('family_object',o.id,o.labels||[]):'<small class="muted">Étiquettes : enregistre d’abord l’objet, puis ajoute-les ici.</small>'}</div>
             <h4>Transmission (de qui à qui)</h4><div id="transfer-rows">${(o.transfers?.length?o.transfers:[{}]).map(row).join('')}</div><button type="button" class="button small secondary" id="transfer-add">+ Étape</button>
             <h4>Photos</h4><div class="collection-media-edit">${(o.media||[]).map(m=>`<span class="collection-media-item">${mediaThumbHtml(m)}<button type="button" data-remove-media="${m.id}" aria-label="Retirer">✕</button></span>`).join('')}</div><input type="file" name="files" multiple accept="image/*,application/pdf">
             <label style="display:block;margin-top:.6rem">Notes<textarea name="notes" rows="2">${escapeHtml(o.notes||'')}</textarea></label>
@@ -6662,7 +6673,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             <template id="transfer-template">${row()}</template></form>`;
     }
     function bindFamilyObjectForm(o){
-        const form=$('#object-form');bindCollectionPersonFields(form);form.scrollIntoView({block:'start'});
+        const form=$('#object-form');bindCollectionPersonFields(form);bindEntityLabelsFields();form.scrollIntoView({block:'start'});
         $('#transfer-add').addEventListener('click',()=>{$('#transfer-rows').insertAdjacentHTML('beforeend',$('#transfer-template').innerHTML);bindCollectionPersonFields(form);});
         form.addEventListener('click',async event=>{
             if(event.target.closest('[data-remove-transfer]'))event.target.closest('.transfer-row').remove();
@@ -6674,7 +6685,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             const v=formObject(form);
             const transfers=$$('.transfer-row',form).map(r=>({from_person_id:r.querySelector('[name=from_person_id]').value,from_text:r.querySelector('[name=from_text]').value,to_person_id:r.querySelector('[name=to_person_id]').value,to_text:r.querySelector('[name=to_text]').value,date_text:r.querySelector('[name=date_text]').value,note:r.querySelector('[name=note]').value}));
             try{const saved=await api('save_family_object',{}, {method:'POST',body:{id:o.id,title:v.title,kind:v.kind,origin_text:v.origin_text,holder_person_id:form.querySelector('[name=holder_person_id]').value,holder_text:v.holder_text,location_text:v.location_text,description:v.description,notes:v.notes,transfers}});
-                await uploadCollectionFiles('family_object',saved.result.id,form.elements.files.files);toast('Objet enregistré.');renderFamilyObjectsList(++state.workspaceToken);}catch(error){toast(error.message,'error');}
+                await uploadCollectionFiles('family_object',saved.result.id,form.elements.files.files);toast(o.id?'Objet enregistré.':'Objet enregistré : tu peux maintenant lui mettre des étiquettes.');renderFamilyObjectsList(++state.workspaceToken,o.id?null:saved.result.id);}catch(error){toast(error.message,'error');}
         });
     }
     /** Listes → Mémoire familiale */
@@ -6683,7 +6694,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const data=await api('family_memories',{q,kind});if(token!==state.workspaceToken||state.module!=='listes')return;
         const rows=data.memories||[],kinds=data.kinds||{};const editing=editId===0?{id:0,kind:'recipe',title:'',people:[],media:[]}:rows.find(m=>Number(m.id)===Number(editId));
         $('#workspace').innerHTML=`<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Mémoire familiale</h2><p>Les recettes de grand-mère, les expressions, les chansons, les surnoms, les traditions, rattachés aux personnes qui les ont transmis.</p></div></header>
-            <div class="collection-toolbar"><input type="search" id="memories-q" value="${escapeHtml(q)}" placeholder="Chercher…"><select id="memories-kind"><option value="">Tout</option>${Object.entries(kinds).map(([k,l])=>`<option value="${k}" ${kind===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select><button type="button" class="button" id="memory-add">+ Souvenir</button></div>
+            <div class="collection-toolbar"><input type="search" id="memories-q" value="${escapeHtml(q)}" placeholder="Chercher (texte ou étiquette)…"><select id="memories-kind"><option value="">Tout</option>${Object.entries(kinds).map(([k,l])=>`<option value="${k}" ${kind===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select><button type="button" class="button" id="memory-add">+ Souvenir</button></div>
             ${editing?familyMemoryFormHtml(editing,kinds):''}
             <div class="collection-grid">${rows.map(m=>familyMemoryCardHtml(m)).join('')||empty('Rien pour l’instant. Ajoute une recette, une expression ou une chanson avec « + Souvenir ».')}</div></section>`;
         $('#memories-q').addEventListener('change',event=>{state.familyMemoriesQuery=event.target.value.trim();renderFamilyMemoriesList(++state.workspaceToken);});
@@ -6699,13 +6710,14 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             <div class="form-grid"><label>Sorte<select name="kind">${Object.entries(kinds).map(([k,l])=>`<option value="${k}" ${m.kind===k?'selected':''}>${escapeHtml(l)}</option>`).join('')}</select></label><label>Titre<input name="title" required value="${escapeHtml(m.title||'')}" placeholder="La tarte aux pommes de mémé"></label>
             <label>D’où ça vient<input name="origin_text" value="${escapeHtml(m.origin_text||'')}" placeholder="Raconté par tante Lucie en 1985"></label>
             <label style="grid-column:1/-1">Texte (recette, paroles, sens de l’expression…)<textarea name="content" rows="6">${escapeHtml(m.content||'')}</textarea></label></div>
+            <div class="collection-labels-edit">${m.id?entityLabelsField('family_memory',m.id,m.labels||[]):'<small class="muted">Étiquettes : enregistre d’abord, puis ajoute-les ici.</small>'}</div>
             <h4>Personnes</h4><div id="memory-people">${(m.people?.length?m.people:[{}]).map(row).join('')}</div><button type="button" class="button small secondary" id="memory-person-add">+ Personne</button>
             <h4>Photos, enregistrements</h4><div class="collection-media-edit">${(m.media||[]).map(x=>`<span class="collection-media-item">${mediaThumbHtml(x)}<button type="button" data-remove-media="${x.id}" aria-label="Retirer">✕</button></span>`).join('')}</div><input type="file" name="files" multiple accept="image/*,audio/*,video/*,application/pdf">
             <div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" id="memory-cancel">Annuler</button>${m.id?'<button class="button secondary danger" type="button" id="memory-delete">Supprimer</button>':''}</div>
             <template id="memory-person-template">${row()}</template></form>`;
     }
     function bindFamilyMemoryForm(m){
-        const form=$('#memory-form');bindCollectionPersonFields(form);form.scrollIntoView({block:'start'});
+        const form=$('#memory-form');bindCollectionPersonFields(form);bindEntityLabelsFields();form.scrollIntoView({block:'start'});
         $('#memory-person-add').addEventListener('click',()=>{$('#memory-people').insertAdjacentHTML('beforeend',$('#memory-person-template').innerHTML);bindCollectionPersonFields(form);});
         form.addEventListener('click',async event=>{
             if(event.target.closest('[data-remove-transfer]'))event.target.closest('.transfer-row').remove();
@@ -6716,7 +6728,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         form.addEventListener('submit',async event=>{event.preventDefault();const v=formObject(form);
             const people=$$('#memory-people .transfer-row',form).map(r=>({person_id:r.querySelector('[name=person_id]').value,role:r.querySelector('[name=role]').value})).filter(p=>Number(p.person_id));
             try{const saved=await api('save_family_memory',{}, {method:'POST',body:{id:m.id,kind:v.kind,title:v.title,content:v.content,origin_text:v.origin_text,people}});
-                await uploadCollectionFiles('family_memory',saved.result.id,form.elements.files.files);toast('Enregistré.');renderFamilyMemoriesList(++state.workspaceToken);}catch(error){toast(error.message,'error');}
+                await uploadCollectionFiles('family_memory',saved.result.id,form.elements.files.files);toast(m.id?'Enregistré.':'Enregistré : tu peux maintenant lui mettre des étiquettes.');renderFamilyMemoriesList(++state.workspaceToken,m.id?null:saved.result.id);}catch(error){toast(error.message,'error');}
         });
     }
     /** Listes → Lieux précis (adresse, ferme, maison) et leur fiche « en un coup d'œil » */

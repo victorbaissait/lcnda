@@ -3683,3 +3683,6 @@ html.is-embedded .screen-tool{display:none}
 .fair-section h5{margin:.6rem 0 .15rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
 .fair-section p{white-space:pre-line;overflow-wrap:anywhere}
 .fair-section ul{margin:.2rem 0;padding-left:1.1rem}
+
+.collection-labels{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.15rem}
+.collection-labels-edit{margin:.8rem 0 .2rem}
