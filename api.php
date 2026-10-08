@@ -159,6 +159,7 @@ try {
         'dashboard_quiz' => dashboard_quiz_data($pdo),
         'goose_quiz' => goose_quiz_data($pdo),
         'person' => person_detail($pdo, safe_int($_GET['id'] ?? 0)),
+        'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
         'person_labels' => json_response(['people' => person_labels($pdo, (string) ($_GET['ids'] ?? ''))]),
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
@@ -5286,6 +5287,10 @@ function restore_change_state(PDO $pdo,array $row,array $before=[]): array
     if(($row['action']??'')!=='delete')return ['state'=>'none','reason'=>''];
     $type=(string)($row['entity_type']??'');
     $kind=(string)($before['_restore_kind']??'');
+    if($type==='person'&&$kind==='person_delete'){
+        $id=safe_int($before['id']??$row['entity_id']??0);
+        return $id&&!record_exists($pdo,'persons',$id)?['state'=>'available','reason'=>'']:['state'=>'none','reason'=>''];
+    }
     if($type==='event'&&$kind==='event_delete'){
         $event=$before['event']??[];$id=safe_int($event['id']??$row['entity_id']??0);
         if(!$id||record_exists($pdo,'events',$id))return ['state'=>'none','reason'=>''];
@@ -5384,6 +5389,7 @@ function restore_change(PDO $pdo,array $data): array
     if(!$change)throw new RuntimeException('Modification introuvable.');
     $before=json_decode((string)($change['before_json']??''),true) ?: [];
     if(!can_restore_change($pdo,$change,$before))throw new RuntimeException('Cette suppression ne peut pas être restaurée proprement.');
+    if(($change['entity_type']??'')==='person')return restore_deleted_person($pdo,$change,$before);
     if(($change['entity_type']??'')==='event')return restore_deleted_event($pdo,$change,$before);
     if(($change['entity_type']??'')==='media')return restore_deleted_media($pdo,$change,$before);
     if(($change['entity_type']??'')==='note')return restore_deleted_note($pdo,$change,$before);
@@ -10569,6 +10575,7 @@ function delete_person(PDO $pdo,array $data): array
     $person=$stmt->fetch();
     if(!$person)throw new RuntimeException('Personne introuvable');
     assert_person_unlocked($pdo,$id);
+    $snapshot=person_delete_snapshot($pdo,$id); // pour pouvoir restaurer la fiche avec tout ce qui en dépend
 
     $eventIds=$pdo->prepare('SELECT id FROM events WHERE person_id=?');
     $eventIds->execute([$id]);
@@ -10591,8 +10598,86 @@ function delete_person(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE branches SET root_person_id=NULL WHERE root_person_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM person_search WHERE person_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$id]);
-    log_change($pdo,'person',$id,'delete','Suppression de '.full_name($person),$person,null);
+    log_change($pdo,'person',$id,'delete','Suppression de '.full_name($person),$person+['_restore_kind'=>'person_delete','_snapshot'=>$snapshot],null);
     return ['id'=>$id];
+}
+
+/**
+ * Tout ce que la suppression d'une fiche efface ou vide, pour la restaurer : lignes supprimées en cascade (en suivant les
+ * clés étrangères ON DELETE CASCADE, de proche en proche : événements, variantes de nom, filiations, enquêtes et leurs
+ * pistes…), références vidées (ON DELETE SET NULL et mises à NULL par delete_person : conjoint d'une famille, membre d'un
+ * recensement…) et rattachements polymorphes effacés (notes, médias, sources de la fiche et de ses événements).
+ */
+function person_delete_snapshot(PDO $pdo,int $personId): array
+{
+    $tables=$pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")->fetchAll(PDO::FETCH_COLUMN);
+    $fks=[];
+    foreach($tables as $table){foreach($pdo->query('PRAGMA foreign_key_list("'.str_replace('"','""',$table).'")')->fetchAll() as $fk){$fks[(string)$fk['table']][]=['table'=>$table,'column'=>(string)$fk['from'],'on_delete'=>strtoupper((string)$fk['on_delete'])];}}
+    $snapshot=['rows'=>[],'nulls'=>[],'links'=>[]];
+    $queue=[['persons',[$personId]]];$seen=[];
+    while($queue){
+        [$parent,$ids]=array_shift($queue);
+        if(!$ids)continue;
+        foreach($fks[$parent]??[] as $fk){
+            $marks=implode(',',array_fill(0,count($ids),'?'));
+            $stmt=$pdo->prepare('SELECT * FROM "'.$fk['table'].'" WHERE "'.$fk['column'].'" IN ('.$marks.')');
+            $stmt->execute($ids);
+            $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(!$rows)continue;
+            if($fk['on_delete']==='CASCADE'){
+                $fresh=[];
+                foreach($rows as $row){$key=$fk['table'].':'.json_encode($row);if(isset($seen[$key]))continue;$seen[$key]=true;$snapshot['rows'][$fk['table']][]=$row;if(isset($row['id']))$fresh[]=(int)$row['id'];}
+                if($fresh)$queue[]=[$fk['table'],$fresh];
+            }elseif($fk['on_delete']==='SET NULL'&&isset($rows[0]['id'])){
+                foreach($rows as $row)$snapshot['nulls'][]=['table'=>$fk['table'],'column'=>$fk['column'],'id'=>(int)$row['id'],'value'=>$row[$fk['column']]];
+            }
+        }
+    }
+    // Références vidées par delete_person lui-même (sans clé étrangère déclarée)
+    foreach([['census_members','person_id'],['archive_digest_people','person_id'],['families','partner1_id'],['families','partner2_id'],['hypotheses','related_person_id'],['branches','root_person_id']] as [$table,$column]){
+        if(!in_array($table,$tables,true))continue;
+        $stmt=$pdo->prepare("SELECT id FROM {$table} WHERE {$column}=?");$stmt->execute([$personId]);
+        foreach($stmt->fetchAll(PDO::FETCH_COLUMN) as $rowId)$snapshot['nulls'][]=['table'=>$table,'column'=>$column,'id'=>(int)$rowId,'value'=>$personId];
+    }
+    // Notes, médias et sources rattachés à la fiche ou à ses événements
+    $eventIds=array_map(static fn($row)=>(int)$row['id'],$snapshot['rows']['events']??[]);
+    foreach(['media_links','source_links','notes'] as $table){
+        $stmt=$pdo->prepare("SELECT * FROM {$table} WHERE entity_type='person' AND entity_id=?");$stmt->execute([$personId]);
+        foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)$snapshot['links'][$table][]=$row;
+        if($eventIds){
+            $stmt=$pdo->prepare("SELECT * FROM {$table} WHERE entity_type='event' AND entity_id IN (".implode(',',array_fill(0,count($eventIds),'?')).')');$stmt->execute($eventIds);
+            foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)$snapshot['links'][$table][]=$row;
+        }
+    }
+    return $snapshot;
+}
+
+function restore_deleted_person(PDO $pdo,array $change,array $before): array
+{
+    $snapshot=$before['_snapshot']??null;
+    if(!is_array($snapshot))throw new RuntimeException('Cette suppression est trop ancienne : elle ne contient pas de quoi restaurer la fiche.');
+    $person=array_diff_key($before,['_restore_kind'=>1,'_snapshot'=>1]);
+    $personId=safe_int($person['id']??$change['entity_id']??0);
+    if(!$personId||record_exists($pdo,'persons',$personId))throw new RuntimeException('Cette fiche existe déjà.');
+    $skipped=0;
+    $insert=static function(string $table,array $row) use ($pdo,&$skipped): void {
+        try{insert_snapshot_row($pdo,$table,$row,true);}catch(Throwable){$skipped++;} // ex. : la famille liée a été supprimée depuis
+    };
+    // (déjà dans la transaction de l'action d'écriture : tout ou rien)
+    {
+        if(!empty($person['portrait_media_id'])&&!record_exists($pdo,'media',(int)$person['portrait_media_id']))$person['portrait_media_id']=null;
+        if(!empty($person['surname_group_id'])){$stmt=$pdo->prepare('SELECT 1 FROM surname_groups WHERE id=?');$stmt->execute([(int)$person['surname_group_id']]);if(!$stmt->fetchColumn())$person['surname_group_id']=null;}
+        insert_snapshot_row($pdo,'persons',$person);
+        foreach($snapshot['rows']??[] as $table=>$rows){foreach($rows as $row)$insert((string)$table,$row);}
+        foreach($snapshot['nulls']??[] as $ref){
+            if(!preg_match('/^[a-z0-9_]+$/',(string)$ref['table'].(string)$ref['column']))continue;
+            $pdo->prepare('UPDATE "'.$ref['table'].'" SET "'.$ref['column'].'"=? WHERE id=? AND "'.$ref['column'].'" IS NULL')->execute([$ref['value'],(int)$ref['id']]);
+        }
+        foreach($snapshot['links']??[] as $table=>$rows){foreach($rows as $row)$insert((string)$table,$row);}
+    }
+    rebuild_search($pdo,$personId);
+    log_change($pdo,'person',$personId,'restore','Restauration de la fiche supprimée '.full_name($person),null,['restored_from_change_id'=>(int)$change['id'],'person_id'=>$personId,'skipped'=>$skipped]);
+    return ['entity_type'=>'person','entity_id'=>$personId,'skipped'=>$skipped];
 }
 
 function add_variant(PDO $pdo,array $data): array

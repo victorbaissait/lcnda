@@ -54,8 +54,8 @@ async function importFile(s, file, name) {
   return { stats: data.stats, cookie };
 }
 
-async function exportFile(s, version) {
-  const r = await fetch(`http://127.0.0.1:${s.port}/api.php?action=export_gedcom&gedcom_version=${version}`, { headers: { 'x-carnet-secret': s.secret } });
+async function exportFile(s, version, extra = '') {
+  const r = await fetch(`http://127.0.0.1:${s.port}/api.php?action=export_gedcom&gedcom_version=${version}${extra}`, { headers: { 'x-carnet-secret': s.secret } });
   assert.equal(r.status, 200);
   return r.text();
 }
@@ -145,6 +145,32 @@ function checkContent(db, mediaDir, label) {
       checkContent(path.join(dir, 'genealogy.sqlite'), media, 'aller-retour ' + version);
     });
   }
+
+  await step('export « pour partager » : vivants et fiches confidentielles masqués', async () => {
+    // Personnes fictives : Paul (né en 1950, sans décès) = vivant ; Lucie (née en 1985) = vivante ; Émile (mort en 1900)
+    // = visible ; Rose (née en 1880 mais marquée confidentielle après l'import) = masquée.
+    const ged = ['0 HEAD', '1 GEDC', '2 VERS 5.5.1', '1 CHAR UTF-8',
+      '0 @I1@ INDI', '1 NAME Paul/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 3 MAR 1950', '2 PLAC Tulle', '1 NOTE secret de Paul', '1 FAMS @F1@',
+      '0 @I2@ INDI', '1 NAME Lucie/MARTIN/', '1 SEX F', '1 BIRT', '2 DATE 1985', '1 FAMC @F1@',
+      '0 @I3@ INDI', '1 NAME Émile/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 1830', '1 DEAT', '2 DATE 1900', '1 FAMS @F2@',
+      '0 @I4@ INDI', '1 NAME Rose/BERNARD/', '1 SEX F', '1 BIRT', '2 DATE 1880', '1 DEAT', '2 DATE 1950', '1 FAMS @F2@',
+      '0 @F1@ FAM', '1 HUSB @I1@', '1 CHIL @I2@', '1 MARR', '2 DATE 1975', '2 PLAC Brive',
+      '0 @F2@ FAM', '1 HUSB @I3@', '1 WIFE @I4@', '1 MARR', '2 DATE 1899', '2 PLAC Uzerche', '0 TRLR', ''].join('\n');
+    const dir = path.join(tmp, 'P'); const file = path.join(tmp, 'partage.ged');
+    fs.writeFileSync(file, ged);
+    await withServer(dir, path.join(tmp, 'media-p'), async (s) => { await importFile(s, file, 'partage.ged'); });
+    const code = `$d=new PDO('sqlite:'.$argv[1]);$d->exec("UPDATE persons SET is_private=1 WHERE first_name='Rose'");`;
+    spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code, path.join(dir, 'genealogy.sqlite')]);
+    const [full, shared] = await withServer(dir, path.join(tmp, 'media-p'), async (s) => [await exportFile(s, '7'), await exportFile(s, '7', '&share=1')]);
+    assert.ok(full.includes('Paul') && full.includes('Rose'), 'export normal : tout le monde est là');
+    for (const hiddenText of ['Paul', 'Lucie', 'Rose', 'secret de Paul', '1950', '1985', 'Tulle', 'Brive', 'Uzerche', '1975']) {
+      assert.ok(!shared.includes(hiddenText), 'sorti dans l’export à partager : « ' + hiddenText + ' »');
+    }
+    assert.ok(shared.includes('1 NAME Émile /MARTIN/') && shared.includes('2 DATE 1830'), 'Émile (mort en 1900) reste visible');
+    assert.equal((shared.match(/NAME Personne \/vivante\//g) || []).length, 2, 'deux personnes vivantes anonymes');
+    assert.equal((shared.match(/NAME Fiche \/confidentielle\//g) || []).length, 1, 'une fiche confidentielle anonyme');
+    assert.equal((shared.match(/^0 @F\d+@ FAM$/gm) || []).length, 2, 'les familles restent (liens familiaux)');
+  });
 
   fs.rmSync(tmp, { recursive: true, force: true });
   console.log(`\n${passed} vérifications réussies.`);

@@ -3519,3 +3519,15 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .web-search-custom-list, .person-exception-list { display: grid; gap: 6px; margin: 8px 0 12px; }
 .web-search-custom-row, .person-exception-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
 .web-search-custom-row small { flex: 1 1 100%; overflow-wrap: anywhere; opacity: .75; }
+
+/* Registres en ligne d'une commune de battue */
+.battue-registers{margin:.6rem 0;padding:.7rem .8rem;border:1px solid var(--line,#ddd);border-radius:10px;background:var(--paper)}
+.battue-registers-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem 1rem;margin-bottom:.4rem}
+.battue-registers-name{display:flex;align-items:center;gap:.4rem;font-size:.85rem;margin-left:auto}
+.battue-registers ul{list-style:none;margin:0 0 .4rem;padding:0}
+.battue-registers li{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.35rem 0;border-top:1px solid var(--line,#eee)}
+.battue-registers li:first-child{border-top:0}
+.battue-registers li>div{display:flex;flex-direction:column;min-width:0}
+.battue-registers li small{color:var(--muted,#777)}
+.battue-registers-label{font-weight:600;overflow-wrap:anywhere}
+.battue-registers li .button{flex:none}

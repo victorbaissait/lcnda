@@ -1635,7 +1635,7 @@
         $$('[data-dashboard-restore]').forEach(button=>button.addEventListener('click',async()=>{
             if(!confirm('Restaurer cette suppression ?'))return;
             button.disabled=true;
-            try{await api('restore_change',{}, {method:'POST',body:{id:button.dataset.dashboardRestore}});toast('Suppression restaurée.');await renderDashboard();}
+            try{const r=await api('restore_change',{}, {method:'POST',body:{id:button.dataset.dashboardRestore}});toast(restoreDoneText(r));await renderDashboard();}
             catch(error){button.disabled=false;toast(error.message,'error');}
         }));
         $$('[data-dashboard-quiz-choice]').forEach(button=>button.addEventListener('click',()=>{
@@ -1798,6 +1798,12 @@
         const limitMax=widget.type==='person_quiz'?8:80;
         const limitMin=widget.type==='person_quiz'?3:1;
         return `<div class="order-row dashboard-order-row" data-widget-id="${escapeHtml(widget.id)}" data-widget-type="${escapeHtml(widget.type)}"><span class="order-grip" draggable="true" aria-hidden="true">↕</span><span class="order-number">${String(index+1).padStart(2,'0')}</span><b>${escapeHtml(label)}${subtitle}</b><div class="block-widths" aria-label="Largeur du widget">${personBlockWidthChoices.map(([value,text])=>`<button type="button" data-block-width="${value}" aria-pressed="${String(widget.width)===value?'true':'false'}" title="Largeur ${text}">${text}</button>`).join('')}</div>${defaultDashboardBlockLimits[widget.type]?`<label class="dashboard-limit" title="${widget.type==='person_quiz'?'Nombre de propositions':'Nombre d’éléments'}">${limitLabel} <input type="number" min="${limitMin}" max="${limitMax}" value="${escapeHtml(widget.limit||defaultDashboardBlockLimits[widget.type])}"></label>`:'<span></span>'}</div>`;
+    }
+    /** Message après une restauration (une fiche restaurée peut avoir perdu un lien vers un élément supprimé depuis). */
+    function restoreDoneText(result){
+        const r=result?.result||result||{};const skipped=Number(r.skipped)||0;
+        const what=r.entity_type==='person'?'Fiche restaurée avec ses événements, liens familiaux, notes, médias et sources.':'Suppression restaurée.';
+        return skipped?`${what} ${skipped} élément(s) n’ont pas pu être remis (un élément lié a été supprimé depuis).`:what;
     }
     function dashboardWebSearchCard(index,detail,widget,spanClass){
         const specific=widget.config?.personMode==='specific';
@@ -6147,7 +6153,34 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const aliases=commune.aliases||[],items=commune.items||[];
         const counts=Object.entries(commune.status_counts||{}).map(([status,count])=>`<span>${escapeHtml(data.statuses?.[status]||status)} : ${count}</span>`).join('');
         const communeStatus=commune.commune_status||'not_started';
-        return `<article class="battue-commune commune-status-${escapeHtml(communeStatus)}" id="battue-commune-${escapeHtml(commune.insee_code)}" data-battue-commune-card="${escapeHtml(commune.insee_code)}" data-commune-status="${escapeHtml(communeStatus)}"><header><div><h4>${escapeHtml(commune.name)}</h4><small>INSEE ${escapeHtml(commune.insee_code)} · niveau ${Number(commune.level)}</small></div><div class="battue-commune-controls"><label>État d'exploration<select data-battue-commune-status="${escapeHtml(commune.insee_code)}">${battueCommuneStatusOptions(data.commune_statuses,communeStatus)}</select></label><div class="page-actions"><button class="button small secondary" data-add-battue-alias="${escapeHtml(commune.insee_code)}">+ Commune liée</button><button class="button small" data-add-battue-item="${escapeHtml(commune.insee_code)}">+ Annotation</button></div></div></header><div class="battue-commune-status-line">${escapeHtml(battueCommuneStatusText(data.commune_statuses,communeStatus))}</div>${counts?`<div class="battue-counts">${counts}</div>`:''}<div class="battue-aliases">${aliases.map(alias=>`<span class="battue-chip">${escapeHtml(alias.name)}<button type="button" data-edit-battue-alias="${alias.id}" aria-label="Modifier">✎</button><button type="button" data-delete-battue-alias="${alias.id}" aria-label="Supprimer">×</button></span>`).join('')||'<small class="cell-muted">Aucune ancienne commune liée.</small>'}</div>${battueCommuneSearchGroupsHtml(commune,data)}</article>`;
+        return `<article class="battue-commune commune-status-${escapeHtml(communeStatus)}" id="battue-commune-${escapeHtml(commune.insee_code)}" data-battue-commune-card="${escapeHtml(commune.insee_code)}" data-commune-status="${escapeHtml(communeStatus)}"><header><div><h4>${escapeHtml(commune.name)}</h4><small>INSEE ${escapeHtml(commune.insee_code)} · niveau ${Number(commune.level)}</small></div><div class="battue-commune-controls"><label>État d'exploration<select data-battue-commune-status="${escapeHtml(commune.insee_code)}">${battueCommuneStatusOptions(data.commune_statuses,communeStatus)}</select></label><div class="page-actions"><button class="button small secondary" data-add-battue-alias="${escapeHtml(commune.insee_code)}">+ Commune liée</button><button class="button small secondary" data-battue-registers="${escapeHtml(commune.insee_code)}" aria-expanded="false">Registres en ligne</button><button class="button small" data-add-battue-item="${escapeHtml(commune.insee_code)}">+ Annotation</button></div></div></header><div class="battue-registers" data-battue-registers-panel="${escapeHtml(commune.insee_code)}" hidden></div><div class="battue-commune-status-line">${escapeHtml(battueCommuneStatusText(data.commune_statuses,communeStatus))}</div>${counts?`<div class="battue-counts">${counts}</div>`:''}<div class="battue-aliases">${aliases.map(alias=>`<span class="battue-chip">${escapeHtml(alias.name)}<button type="button" data-edit-battue-alias="${alias.id}" aria-label="Modifier">✎</button><button type="button" data-delete-battue-alias="${alias.id}" aria-label="Supprimer">×</button></span>`).join('')||'<small class="cell-muted">Aucune ancienne commune liée.</small>'}</div>${battueCommuneSearchGroupsHtml(commune,data)}</article>`;
+    }
+    // « Registres en ligne » : services d'archives du pays ou de la région de la commune (liens seulement, rien n'est téléchargé)
+    async function copyText(text){try{await navigator.clipboard.writeText(text);return true;}catch(_){const area=document.createElement('textarea');area.value=text;area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();let ok=false;try{ok=document.execCommand('copy');}catch(__){}area.remove();return ok;}}
+    async function toggleBattueRegisters(button){
+        const code=button.dataset.battueRegisters;
+        const panel=document.querySelector(`[data-battue-registers-panel="${CSS.escape(code)}"]`);
+        if(!panel)return;
+        const open=panel.hidden;
+        panel.hidden=!open;button.setAttribute('aria-expanded',String(open));
+        if(!open||panel.dataset.loaded)return;
+        const commune=battueCommuneByInsee(code);
+        const names=[commune?.name,...(commune?.aliases||[]).map(alias=>alias.name)].filter(Boolean).filter((name,index,list)=>list.indexOf(name)===index);
+        panel.innerHTML='<small class="cell-muted">Recherche des services d\'archives…</small>';
+        try{
+            const result=await api('online_registers',{code,name:commune?.name||''});
+            panel.dataset.loaded='1';
+            const place=[result.region,result.country].filter(Boolean).join(', ');
+            const nameChoice=names.length>1?`<label class="battue-registers-name">Nom à chercher<select data-registers-name>${names.map(name=>`<option>${escapeHtml(name)}</option>`).join('')}</select></label>`:'';
+            panel.innerHTML=`<div class="battue-registers-head"><strong>Registres en ligne</strong>${place?`<small>${escapeHtml(place)}</small>`:''}${nameChoice}</div><ul>${(result.links||[]).map(link=>`<li><div><span class="battue-registers-label">${escapeHtml(link.label)}</span>${link.note?`<small>${escapeHtml(link.note)}</small>`:''}</div>${link.kind==='prefilled'?`<button type="button" class="button small" data-registers-open="${escapeHtml(link.url)}" data-registers-prefilled="1">Ouvrir sur ce lieu</button>`:`<button type="button" class="button small secondary" data-registers-open="${escapeHtml(link.url)}" title="Le nom de la commune est copié : colle-le dans la recherche du site.">Copier le nom et ouvrir</button>`}</li>`).join('')}</ul><small class="cell-muted">Liens vers les sites des archives : rien n'est téléchargé dans le logiciel. Certains sites demandent un compte gratuit.</small>`;
+            panel.querySelectorAll('[data-registers-open]').forEach(link=>link.addEventListener('click',async()=>{
+                const name=panel.querySelector('[data-registers-name]')?.value||commune?.name||'';
+                let url=link.dataset.registersOpen;
+                if(link.dataset.registersPrefilled&&name!==commune?.name)url=url.split(encodeURIComponent(commune?.name||'')).join(encodeURIComponent(name));
+                if(!link.dataset.registersPrefilled){const ok=await copyText(name);toast(ok?`« ${name} » copié : colle-le dans la recherche du site.`:`Cherche « ${name} » sur le site.`);}
+                window.open(url,'_blank','noopener');
+            }));
+        }catch(error){panel.innerHTML=`<small class="cell-muted">${escapeHtml(error.message)}</small>`;}
     }
     function battueCommuneByInsee(insee){return state.currentBattueDetail?.communes?.find(c=>String(c.insee_code)===String(insee));}
     function applyBattueCommuneFilter(){
@@ -6231,6 +6264,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $$('[data-edit-battue-alias]').forEach(button=>button.addEventListener('click',()=>{const aliasId=Number(button.dataset.editBattueAlias);const commune=data.communes.find(c=>(c.aliases||[]).some(a=>Number(a.id)===aliasId));const alias=commune?.aliases.find(a=>Number(a.id)===aliasId);if(commune&&alias)openBattueAliasDialog(data.battue.id,commune,alias);}));
         $$('[data-delete-battue-alias]').forEach(button=>button.addEventListener('click',async()=>{if(!confirm('Supprimer cette commune liée ?'))return;await api('delete_battue_alias',{},{method:'POST',body:{id:button.dataset.deleteBattueAlias}});renderBattueDetail(data.battue.id);}));
         $$('[data-add-battue-item]').forEach(button=>button.addEventListener('click',()=>openBattueSearchDialog(data.battue.id,battueCommuneByInsee(button.dataset.addBattueItem))));
+        $$('[data-battue-registers]').forEach(button=>button.addEventListener('click',()=>toggleBattueRegisters(button)));
         $$('[data-edit-battue-item]').forEach(button=>button.addEventListener('click',()=>{const itemId=Number(button.dataset.editBattueItem);const commune=data.communes.find(c=>(c.items||[]).some(i=>Number(i.id)===itemId));const item=commune?.items.find(i=>Number(i.id)===itemId);if(commune&&item)openBattueSearchDialog(data.battue.id,commune,item);}));
         $$('[data-delete-battue-item]').forEach(button=>button.addEventListener('click',async()=>{if(!confirm('Supprimer cette annotation ?'))return;await api('delete_battue_search_item',{},{method:'POST',body:{id:button.dataset.deleteBattueItem}});renderBattueDetail(data.battue.id);}));
         $$('[data-add-battue-media]').forEach(button=>button.addEventListener('click',()=>{const itemId=Number(button.dataset.addBattueMedia);const commune=data.communes.find(c=>(c.items||[]).some(i=>Number(i.id)===itemId));const item=commune?.items.find(i=>Number(i.id)===itemId);if(item)openBattueMediaDialog(item);}));
@@ -7428,8 +7462,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
                 if(!confirm('Restaurer cette suppression ?'))return;
                 button.disabled=true;
                 try{
-                    await api('restore_change',{}, {method:'POST',body:{id:button.dataset.restoreChange}});
-                    toast('Suppression restaurée.');
+                    const restored=await api('restore_change',{}, {method:'POST',body:{id:button.dataset.restoreChange}});
+                    toast(restoreDoneText(restored));
                     await renderChanges();
                 }catch(error){
                     button.disabled=false;
@@ -7671,6 +7705,7 @@ ${exportPrivacySectionHtml(privacy)}
     <div class="checkbox-group"><label class="checkbox-line"><input type="checkbox" name="include_media" checked> Inclure les médias</label></div>
     <div class="checkbox-group"><label class="checkbox-line"><input type="checkbox" name="include_notes" checked> Inclure les notes</label></div>
     <div class="checkbox-group"><label class="checkbox-line"><input type="checkbox" name="include_sources" checked> Inclure les sources</label></div>
+    <div class="checkbox-group" style="grid-column:1/-1"><label class="checkbox-line"><input type="checkbox" name="share"> Pour partager : masquer les vivants et les fiches confidentielles</label><p class="muted" style="margin:.3rem 0 0">Les personnes vivantes (ou probablement vivantes : sans décès et nées il y a moins de 100 ans) et les fiches confidentielles restent dans l'arbre sous le nom « Personne vivante » ou « Fiche confidentielle », avec seulement leur sexe et leurs liens familiaux. Rien d'autre d'elles n'est exporté : ni dates, ni lieux, ni notes, ni médias, ni sources.</p></div>
     <div class="page-actions" style="grid-column:1/-1"><button class="button" type="submit">Télécharger le GEDCOM</button></div>
   </form>
   <p class="muted" style="margin-top:.5rem;font-size:.85em">GEDCOM 5.5.1 est une version ancienne. Préférer GEDCOM 7.0 lorsque le logiciel destinataire le permet.</p>
@@ -7724,7 +7759,7 @@ ${exportPrivacySectionHtml(privacy)}
 
 ${backupSectionHtml()}
 
-</section>`;$('#export-privacy-form')?.addEventListener('change',event=>{const form=event.currentTarget;saveExportPrivacySettings({enabled:form.elements.enabled.checked,deathCutoffYear:String(form.elements.deathCutoffYear.value||'').trim()});renderExportTools();});$('#gedcom-export-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;location.assign(exportUrl('export_gedcom',{gedcom_version:form.elements.gedcom_version.value,include_living:form.elements.include_living.checked?'1':'0',include_media:form.elements.include_media.checked?'1':'0',include_notes:form.elements.include_notes.checked?'1':'0',include_sources:form.elements.include_sources.checked?'1':'0'}));});bindAutoBackupControls();}
+</section>`;$('#export-privacy-form')?.addEventListener('change',event=>{const form=event.currentTarget;saveExportPrivacySettings({enabled:form.elements.enabled.checked,deathCutoffYear:String(form.elements.deathCutoffYear.value||'').trim()});renderExportTools();});$('#gedcom-export-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;location.assign(exportUrl('export_gedcom',{gedcom_version:form.elements.gedcom_version.value,include_living:form.elements.include_living.checked?'1':'0',include_media:form.elements.include_media.checked?'1':'0',include_notes:form.elements.include_notes.checked?'1':'0',include_sources:form.elements.include_sources.checked?'1':'0',share:form.elements.share.checked?'1':'0'}));});$('#gedcom-export-form [name=share]')?.addEventListener('change',event=>{const living=event.currentTarget.form.elements.include_living;living.disabled=event.currentTarget.checked;if(event.currentTarget.checked)living.checked=true;});bindAutoBackupControls();}
     function readAutoBackupForm(){
         const form=$('#auto-backup-form');
         const data=formObject(form);

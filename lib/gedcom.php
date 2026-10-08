@@ -334,9 +334,14 @@ function export_gedcom(PDO $pdo): never
     $includeSources = export_option_enabled('include_sources', true);
     $includeMedia = export_option_enabled('include_media', true);
 
-    $persons = array_values(array_filter($pdo->query(person_select() . ' ORDER BY p.id')->fetchAll(), 'export_person_allowed'));
-    $visible = array_fill_keys(array_map(static fn($p) => (int) $p['id'], $persons), true);
+    $allPersons = $pdo->query(person_select() . ' ORDER BY p.id')->fetchAll();
     $families = $pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
+    // « Pour partager » (ou mode confidentialité) : les vivants, même probables, et les fiches confidentielles restent dans
+    // l'arbre mais anonymes (« Personne vivante », sexe et liens familiaux seulement), pour que les branches se rejoignent.
+    $share = export_option_enabled('share', false) || export_privacy_enabled();
+    $hidden = $share ? gedcom_share_hidden($pdo, $allPersons, $families) : [];
+    $persons = $share ? $allPersons : array_values(array_filter($allPersons, 'export_person_allowed'));
+    $visible = array_fill_keys(array_map(static fn($p) => (int) $p['id'], $persons), true);
     $childrenByFamily = []; $famcByChild = []; $famsBySpouse = [];
     foreach ($families as $f) {
         foreach (['partner1_id', 'partner2_id'] as $k) { if ((int) ($f[$k] ?? 0) > 0) { $famsBySpouse[(int) $f[$k]][(int) $f['id']] = true; } }
@@ -348,16 +353,22 @@ function export_gedcom(PDO $pdo): never
     $events = $pdo->query("SELECT e.*,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude
         FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
         ORDER BY COALESCE(e.sort_date,''),COALESCE(e.year,9999),e.id")->fetchAll();
-    $eventsByPerson = []; $eventsByFamily = [];
+    $hiddenFamily = [];
+    foreach ($families as $f) { if (isset($hidden[(int) ($f['partner1_id'] ?? 0)]) || isset($hidden[(int) ($f['partner2_id'] ?? 0)])) { $hiddenFamily[(int) $f['id']] = true; } }
+    $eventsByPerson = []; $eventsByFamily = []; $hiddenEvent = [];
     foreach ($events as $e) {
-        if (($e['scope'] ?? '') === 'person' && (int) ($e['person_id'] ?? 0) > 0 && isset($visible[(int) $e['person_id']])) { $eventsByPerson[(int) $e['person_id']][] = $e; }
-        if (($e['scope'] ?? '') === 'family' && (int) ($e['family_id'] ?? 0) > 0) { $eventsByFamily[(int) $e['family_id']][] = $e; }
+        $pidE = (int) ($e['person_id'] ?? 0); $fidE = (int) ($e['family_id'] ?? 0);
+        if (($pidE && isset($hidden[$pidE])) || ($fidE && isset($hiddenFamily[$fidE]))) { $hiddenEvent[(int) $e['id']] = true; continue; }
+        if (($e['scope'] ?? '') === 'person' && $pidE > 0 && isset($visible[$pidE])) { $eventsByPerson[$pidE][] = $e; }
+        if (($e['scope'] ?? '') === 'family' && $fidE > 0) { $eventsByFamily[$fidE][] = $e; }
     }
+    // Cible d'une note, d'une citation ou d'un média appartenant à une personne masquée : jamais exportée
+    $secret = static fn(string $type, int $id): bool => ($type === 'person' && isset($hidden[$id])) || ($type === 'event' && isset($hiddenEvent[$id])) || ($type === 'family' && isset($hiddenFamily[$id]));
     $notesByTarget = [];
     if ($includeNotes) {
         foreach ($pdo->query('SELECT entity_type,entity_id,title,body FROM notes ORDER BY id') as $n) {
             $body = trim((string) $n['body']); $title = trim((string) $n['title']);
-            if ($body === '' && $title === '') { continue; }
+            if (($body === '' && $title === '') || $secret((string) $n['entity_type'], (int) $n['entity_id'])) { continue; }
             $notesByTarget[$n['entity_type'] . ':' . (int) $n['entity_id']][] = $title !== '' && !str_starts_with($body, $title) ? $title . "\n" . $body : $body;
         }
     }
@@ -369,12 +380,20 @@ function export_gedcom(PDO $pdo): never
             if ($agency !== '' && !isset($repos[gedcom_fold($agency)])) { $repos[gedcom_fold($agency)] = ['id' => count($repos) + 1, 'name' => $agency]; }
         }
         foreach ($pdo->query('SELECT * FROM source_links WHERE source_record_id IS NOT NULL ORDER BY id') as $l) {
-            if (isset($sources[(int) $l['source_record_id']])) { $citations[$l['entity_type'] . ':' . (int) $l['entity_id']][] = $l; }
+            if (isset($sources[(int) $l['source_record_id']]) && !$secret((string) $l['entity_type'], (int) $l['entity_id'])) { $citations[$l['entity_type'] . ':' . (int) $l['entity_id']][] = $l; }
+        }
+        if ($hidden) { // une source citée SEULEMENT par des personnes masquées n'est pas exportée
+            $cited = [];
+            foreach ($citations as $list) { foreach ($list as $l) { $cited[(int) $l['source_record_id']] = true; } }
+            $linkedElsewhere = $pdo->query("SELECT DISTINCT source_record_id FROM source_links WHERE source_record_id IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN);
+            $allCited = array_fill_keys(array_map('intval', $linkedElsewhere), true);
+            foreach (array_keys($sources) as $sid) { if (isset($allCited[$sid]) && !isset($cited[$sid])) { unset($sources[$sid]); } }
         }
     }
     $mediaByTarget = []; $media = [];
     if ($includeMedia) {
         foreach ($pdo->query('SELECT ml.entity_type,ml.entity_id,ml.media_id,m.* FROM media_links ml JOIN media m ON m.id=ml.media_id ORDER BY ml.position,ml.id') as $m) {
+            if ($secret((string) $m['entity_type'], (int) $m['entity_id'])) { continue; }
             $mediaByTarget[$m['entity_type'] . ':' . (int) $m['entity_id']][] = (int) $m['media_id'];
             $media[(int) $m['media_id']] = $m;
         }
@@ -437,6 +456,13 @@ function export_gedcom(PDO $pdo): never
     foreach ($persons as $p) {
         $pid = (int) $p['id'];
         $line(0, '@I' . $pid . '@', 'INDI');
+        if (isset($hidden[$pid])) {
+            $line(1, 'NAME', $hidden[$pid] === 'private' ? 'Fiche /confidentielle/' : 'Personne /vivante/');
+            $line(1, 'SEX', match ($p['gender'] ?? 'unknown') { 'male' => 'M', 'female' => 'F', default => 'U' });
+            foreach (array_keys($famcByChild[$pid] ?? []) as $famId) { $line(1, 'FAMC', '@F' . $famId . '@'); }
+            foreach (array_keys($famsBySpouse[$pid] ?? []) as $famId) { $line(1, 'FAMS', '@F' . $famId . '@'); }
+            continue;
+        }
         $writeName = static function (array $n, ?string $type, ?string $lcndaType) use ($line): void {
             $given = trim(implode(' ', array_filter([trim((string) ($n['first_name'] ?? '')), trim((string) ($n['middle_name'] ?? ''))])));
             $surname = trim((string) ($n['last_name'] ?? ''));
@@ -853,4 +879,45 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     $pdo->exec("UPDATE persons SET living_status='deceased' WHERE living_status='unknown' AND id IN (SELECT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('DEAT','BURI','CREM'))");
     gedimport_rebuild_search($pdo);
     return ['format' => 'gedcom'] + $stats;
+}
+
+/**
+ * Personnes à masquer dans un export « pour partager » : id => 'living' | 'private'.
+ * Confidentielle (is_private) ; vivante déclarée ; ou probablement vivante : ni décès ni inhumation, et née il y a moins de
+ * 100 ans (naissance estimée, si elle manque, d'après le mariage, les enfants ou les parents) ; ou décédée depuis
+ * l'année limite du mode confidentialité.
+ */
+function gedcom_share_hidden(PDO $pdo, array $persons, array $families): array
+{
+    $now = (int) date('Y'); $limit = $now - 100; $cutoff = export_death_cutoff_year();
+    $byId = []; foreach ($persons as $p) { $byId[(int) $p['id']] = $p; }
+    $dead = array_fill_keys(array_map('intval', $pdo->query("SELECT DISTINCT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('DEAT','BURI','CREM') AND e.person_id IS NOT NULL")->fetchAll(PDO::FETCH_COLUMN)), true);
+    $partners = []; $childrenOf = []; $parentsOf = [];
+    $kidsByFamily = [];
+    foreach ($pdo->query('SELECT family_id, child_id FROM family_children') as $c) { $kidsByFamily[(int) $c['family_id']][] = (int) $c['child_id']; }
+    foreach ($families as $f) {
+        foreach ($kidsByFamily[(int) $f['id']] ?? [] as $c) {
+            foreach ([(int) ($f['partner1_id'] ?? 0), (int) ($f['partner2_id'] ?? 0)] as $parent) { if ($parent) { $childrenOf[$parent][] = $c; $parentsOf[$c][] = $parent; } }
+        }
+    }
+    $year = static fn($v): ?int => $v !== null && $v !== '' && (int) $v > 0 ? (int) $v : null;
+    $estimate = static function (int $id) use ($byId, $childrenOf, $parentsOf, $year): ?int {
+        $p = $byId[$id] ?? []; if ($y = $year($p['birth_year'] ?? null)) { return $y; }
+        if ($y = $year($p['marr_year'] ?? null)) { return $y - 25; }
+        $kids = array_filter(array_map(static fn($c) => $year($byId[$c]['birth_year'] ?? null), $childrenOf[$id] ?? []));
+        if ($kids) { return min($kids) - 25; }
+        $parents = array_filter(array_map(static fn($c) => $year($byId[$c]['birth_year'] ?? null), $parentsOf[$id] ?? []));
+        return $parents ? max($parents) + 25 : null;
+    };
+    $hidden = [];
+    foreach ($byId as $id => $p) {
+        if ((int) ($p['is_private'] ?? 0) === 1) { $hidden[$id] = 'private'; continue; }
+        if (($p['living_status'] ?? '') === 'living') { $hidden[$id] = 'living'; continue; }
+        $deathYear = $year($p['death_year'] ?? null);
+        if ($cutoff && $deathYear && $deathYear >= $cutoff) { $hidden[$id] = 'living'; continue; }
+        if (($p['living_status'] ?? '') === 'deceased' || isset($dead[$id]) || $deathYear) { continue; }
+        $born = $estimate($id);
+        if ($born !== null && $born >= $limit) { $hidden[$id] = 'living'; }
+    }
+    return $hidden;
 }
