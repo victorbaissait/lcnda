@@ -5817,6 +5817,9 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             if(!todo.length)return;
             const toDownload=enabled?todo.map(input=>details[input.dataset.battueCountry]).filter(info=>info&&!info.present):[];
             if(toDownload.length&&!confirm(`${toDownload.length} pays à télécharger (${megabytes(toDownload.reduce((sum,info)=>sum+(info.size||0),0))} en tout). Continuer ?`))return;
+            // Beaucoup de lieux copiés dans la base (≈ 250 octets chacun) : on prévient avant
+            const places=enabled?todo.reduce((sum,input)=>sum+(details[input.dataset.battueCountry]?.places||0),0):0;
+            if(places>300000&&!confirm(`Cela ajoutera environ ${places.toLocaleString('fr-FR')} lieux à ta base (environ ${megabytes(places*250)} de plus). Les pays restent retirables à tout moment. Continuer ?`))return;
             lock(true);
             let communes=0;const refused=[];
             for(const [index,input] of todo.entries()){

@@ -314,7 +314,7 @@ function reference_countries_details(): array
     foreach (reference_countries_available() as $cc => $name) {
         $entry = reference_catalogue()['countries'][$cc] ?? [];
         $details[$cc] = ['name' => $name, 'region' => (string) ($entry['region'] ?? 'Autres'), 'size' => (int) ($entry['size'] ?? 0),
-            'communes' => (int) ($entry['communes'] ?? 0), 'present' => reference_country_present($cc)];
+            'communes' => (int) ($entry['communes'] ?? 0), 'places' => (int) ($entry['places'] ?? 0), 'present' => reference_country_present($cc)];
     }
     return $details;
 }
