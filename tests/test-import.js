@@ -336,7 +336,8 @@ async function download(s, base, action) {
     fs.copyFileSync(lu, path.join(remote, 'geo-zz.sqlite.gz')); fs.copyFileSync(lu, path.join(remote, 'geo-zy.sqlite.gz'));
     const sha = require('node:crypto').createHash('sha256').update(fs.readFileSync(lu)).digest('hex');
     const catalogue = path.join(tmp, 'catalogue.json');
-    fs.writeFileSync(catalogue, JSON.stringify({ base_url: 'file://' + remote, countries: {
+    // Adresse file:// valide partout (sous Windows : file:///D:/…, et non file://D:\…)
+    fs.writeFileSync(catalogue, JSON.stringify({ base_url: require('node:url').pathToFileURL(remote).href, countries: {
       ZZ: { name: 'Pays d’essai', region: 'Autres', file: 'geo-zz.sqlite.gz', size: fs.statSync(lu).size, sha256: sha },
       ZY: { name: 'Pays abîmé', region: 'Autres', file: 'geo-zy.sqlite.gz', size: fs.statSync(lu).size, sha256: '0'.repeat(64) } } }));
     Object.assign(process.env, { GENEALOGY_SKIP_REFERENCE: '0', LCNDA_REFERENCE_CATALOGUE: catalogue });
