@@ -24,7 +24,7 @@ header('Cache-Control: no-store, private');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=184">
+    <link rel="stylesheet" href="assets/css/app.css?v=185">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
 <body>
@@ -46,6 +46,7 @@ header('Cache-Control: no-store, private');
             <button class="nav-item" data-module="maintenance"><span>10</span>Maintenance</button>
         </nav>
         <div class="topbar-meta">
+            <button type="button" class="side-panel-open" id="side-panel-open" title="Ouvrir un deuxième écran à côté de celui-ci (⇧ + Entrée dans la recherche rapide ⌘K)">⧉ À côté</button>
             <span class="status-dot"></span>
             <span id="database-status">Base locale</span>
         </div>
@@ -1059,7 +1060,7 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=250" defer></script>
+<script src="assets/js/app.js?v=251" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

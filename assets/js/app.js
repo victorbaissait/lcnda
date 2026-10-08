@@ -178,6 +178,11 @@
     };
 
     const PERSIST_KEY = 'genealogie-baissait-ui-v2';
+    // Deuxième écran (panneau « À côté » ou fenêtre détachée) : ouvert avec ?view=… ; il ne mémorise ni sa page ni son
+    // état, pour ne pas écraser ceux de la fenêtre principale (même localStorage).
+    const SECONDARY_VIEW=(()=>{try{const raw=new URLSearchParams(location.search).get('view');return raw?JSON.parse(raw):null;}catch(_){return null;}})();
+    const IS_SECONDARY=Boolean(SECONDARY_VIEW);
+    const IS_EMBEDDED=(()=>{try{return window.self!==window.top;}catch(_){return true;}})();
     const LAST_ROUTE_KEY = 'genealogie-last-route';
     const STATS_COLORS_KEY = 'genealogie-stats-colors';
     const STATS_COLORS_PRESETS_KEY = 'genealogie-stats-colors-presets';
@@ -1161,10 +1166,13 @@
             state.csrf = state.bootstrap.csrf;
             applySiteDefaults(state.bootstrap.siteDefaults,false);
             applyMenuOrder();
-            setupAutoBackupTimer();
+            if(!IS_SECONDARY)setupAutoBackupTimer();
             const urlPersonId = Number(new URLSearchParams(location.search).get('person')) || 0;
             state.currentPersonId = urlPersonId || Number(state.currentPersonId) || state.bootstrap.startPersonId;
             $('#app').classList.toggle('sidebar-collapsed',Boolean(persisted.sidebarCollapsed));
+            if(IS_SECONDARY){applyViewSnapshot(SECONDARY_VIEW);document.documentElement.classList.toggle('is-embedded',IS_EMBEDDED);if(IS_EMBEDDED)$('#app').classList.add('sidebar-collapsed');
+                await setModule(SECONDARY_VIEW.module||'personnes',false);bindSidePanelButton();return;}
+            bindSidePanelButton();
             $('#database-status').textContent = personCountLabel(state.bootstrap.stats.personnes);
             const initialRoute = chooseInitialRoute(urlPersonId);
             if(initialRoute.maintenanceTab)state.maintenanceTab=initialRoute.maintenanceTab;
@@ -1364,7 +1372,9 @@
         });
     }
 
-    async function setModule(module, pushHash = true) {
+    var setModuleImpl=null; // var : peut servir avant cette ligne (démarrage)
+    function setModule(module,pushHash=true){return setModuleImpl?setModuleImpl(module,pushHash):setModuleReal(module,pushHash);}
+    async function setModuleReal(module, pushHash = true) {
         if(state.module==='carte'&&module!=='carte'){hideMapTooltip();const surnameBox=document.getElementById('map-surname-suggestions');if(surnameBox)surnameBox.hidden=true;}
         if(state.hasRendered)saveScrollPosition();
         if (!modules[module]) module = 'personnes';
@@ -1440,6 +1450,7 @@
     }
 
     function saveLastRoute(hash){
+        if(IS_SECONDARY)return;
         try{localStorage.setItem(LAST_ROUTE_KEY,JSON.stringify({hash,ts:Date.now()}));}catch(_){}
     }
 
@@ -1472,6 +1483,7 @@
     }
 
     function persistUiState() {
+        if(IS_SECONDARY)return;
         const data = {
             module:state.module,currentPersonId:state.currentPersonId,peopleQuery:state.peopleQuery,peoplePhonetic:state.peoplePhonetic,personTab:state.personTab,
             graphTab:state.graphTab,graphMode:state.graphMode,graphDepth:state.graphDepth,graphStatsType:state.graphStatsType,graphStatsYearFrom:state.graphStatsYearFrom,graphStatsYearTo:state.graphStatsYearTo,graphStatsLimit:state.graphStatsLimit,graphStatsGender:state.graphStatsGender,graphKinship:state.graphKinship,graphCompare:state.graphCompare,graphPlaceMonograph:state.graphPlaceMonograph,mapTag:state.mapTag,mapDisplay:state.mapDisplay,mapMode:state.mapMode,mapZoom:state.mapZoom,mapYearFrom:state.mapYearFrom,mapYearTo:state.mapYearTo,mapGender:state.mapGender,mapSurname:state.mapSurname,mapSurnameMode:state.mapSurnameMode,mapAgeFrom:state.mapAgeFrom,mapAgeTo:state.mapAgeTo,mapTimelineYear:state.mapTimelineYear,mapRouteArrows:state.mapRouteArrows,mapRouteStep:state.mapRouteStep,mapRoutePeople:state.mapRoutePeople,mapOverlayBg:state.mapOverlayBg,mapOverlayOpacity:state.mapOverlayOpacity,
@@ -6380,12 +6392,19 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const existing=$('#quick-search');if(existing){$('input',existing)?.focus();return;}
         const fold=text=>String(text||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
         const dialog=document.createElement('div');dialog.id='quick-search';dialog.className='quick-search-backdrop';
-        dialog.innerHTML=`<div class="quick-search" role="dialog" aria-label="Recherche rapide"><input type="search" placeholder="Une personne, une battue, une enquête, un lieu, un écran…" autocomplete="off" spellcheck="false"><ul class="quick-search-results" role="listbox"></ul><small class="muted">↑ ↓ pour choisir · Entrée pour ouvrir · Échap pour fermer · « battue », « enquête » ou « lieu » devant le mot pour ne chercher que cela</small></div>`;
+        dialog.innerHTML=`<div class="quick-search" role="dialog" aria-label="Recherche rapide"><input type="search" placeholder="Une personne, une battue, une enquête, un lieu, un écran…" autocomplete="off" spellcheck="false"><ul class="quick-search-results" role="listbox"></ul><small class="muted">↑ ↓ pour choisir · Entrée pour ouvrir · ⇧ + Entrée pour ouvrir à côté · Échap pour fermer · « battue », « enquête » ou « lieu » devant le mot pour ne chercher que cela</small></div>`;
         document.body.append(dialog);
         const input=$('input',dialog),list=$('ul',dialog);let items=[],active=0,seq=0;
         const close=()=>dialog.remove();
         const paint=()=>{list.innerHTML=items.length?items.map((item,index)=>`<li role="option" class="${index===active?'is-active':''}" data-qs-index="${index}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.hint)}</small></li>`).join(''):`<li class="quick-search-empty">${input.value.trim()?'Aucun résultat':'Tape quelques lettres'}</li>`;list.querySelector('.is-active')?.scrollIntoView({block:'nearest'});};
-        const choose=index=>{const item=items[index];if(!item)return;close();item.go();};
+        // Maj+Entrée (ou Maj+clic) : ouvrir à côté. On rejoue l'action dans un état copié pour savoir quel écran ouvrir.
+        const choose=(index,aside=false)=>{const item=items[index];if(!item)return;close();
+            if(!aside){item.go();return;}
+            const saved=viewSnapshot(),realSetModule=setModuleImpl;let target=null;
+            setModuleImpl=module=>{target={...viewSnapshot(),module};};
+            try{item.go();}finally{setModuleImpl=realSetModule;}
+            applyViewSnapshot(saved);state.module=saved.module;
+            if(target)openSidePanel(target);};
         const search=async()=>{
             const q=input.value.trim();const id=++seq;
             const words=fold(q).split(/\s+/).filter(Boolean);
@@ -6405,10 +6424,10 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         input.addEventListener('keydown',event=>{
             if(event.key==='ArrowDown'){event.preventDefault();active=Math.min(items.length-1,active+1);paint();}
             else if(event.key==='ArrowUp'){event.preventDefault();active=Math.max(0,active-1);paint();}
-            else if(event.key==='Enter'){event.preventDefault();choose(active);}
+            else if(event.key==='Enter'){event.preventDefault();choose(active,event.shiftKey);}
             else if(event.key==='Escape'){event.preventDefault();close();}
         });
-        list.addEventListener('click',event=>{const row=event.target.closest('[data-qs-index]');if(row)choose(Number(row.dataset.qsIndex));});
+        list.addEventListener('click',event=>{const row=event.target.closest('[data-qs-index]');if(row)choose(Number(row.dataset.qsIndex),event.shiftKey);});
         dialog.addEventListener('mousedown',event=>{if(event.target===dialog)close();});
         paint();input.focus();
     }
@@ -6417,6 +6436,53 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&!event.altKey&&!event.shiftKey&&String(event.key).toLowerCase()==='k'){event.preventDefault();openQuickSearch();}});
     // Commandes du menu de l'application de bureau (Fichier → Recherche rapide ; clic sur une notification de rappel)
     try{window.lcnda?.onCommand?.(command=>{if(command==='quick-search')openQuickSearch();if(command==='open-reminders'){state.listType='reminders';setModule('listes');}});}catch(_){}
+    /** Ce qu'il faut pour rouvrir le même écran ailleurs (panneau à côté, fenêtre détachée). */
+    function viewSnapshot(){
+        return {module:state.module,currentPersonId:Number(state.currentPersonId)||0,currentBattueId:Number(state.currentBattueId)||0,currentInvestigationId:Number(state.currentInvestigationId)||0,
+            investigationFolderId:Number(state.investigationFolderId)||0,enquetesTab:state.enquetesTab||'',maintenanceTab:state.maintenanceTab||'',graphMode:state.graphMode||'',listType:state.listType||'',
+            researchKind:state.researchKind||'',graphPlaceMonograph:state.graphPlaceMonograph||null};
+    }
+    function applyViewSnapshot(view){
+        if(!view||typeof view!=='object')return;
+        ['currentPersonId','currentBattueId','currentInvestigationId','investigationFolderId','enquetesTab','maintenanceTab','graphMode','listType','researchKind'].forEach(key=>{if(view[key]!==undefined&&view[key]!==''&&view[key]!==null)state[key]=view[key];});
+        if(view.graphPlaceMonograph&&typeof view.graphPlaceMonograph==='object')state.graphPlaceMonograph={...state.graphPlaceMonograph,...view.graphPlaceMonograph};
+        if(!view.currentBattueId)state.currentBattueId=0;if(!view.currentInvestigationId)state.currentInvestigationId=0;
+    }
+    window.lcndaViewSnapshot=viewSnapshot; // lu par la fenêtre principale (même origine) pour détacher le panneau
+    function viewUrl(view){return `${location.pathname}?view=${encodeURIComponent(JSON.stringify(view))}`;}
+    /** Ouvre un écran dans le panneau de droite (un seul panneau : il remplace le précédent). */
+    function openSidePanel(view=viewSnapshot()){
+        if(IS_SECONDARY){location.href=viewUrl(view);return;}
+        let panel=$('#side-panel');
+        if(!panel){
+            panel=document.createElement('aside');panel.id='side-panel';panel.className='side-panel';
+            panel.innerHTML=`<div class="side-panel-resize" title="Glisser pour changer la largeur"></div><header class="side-panel-head"><strong id="side-panel-title">À côté</strong><div class="side-panel-actions"><button type="button" class="button small secondary" id="side-panel-here" title="Afficher cet écran dans la partie principale">⇠ Ici</button><button type="button" class="button small secondary" id="side-panel-window" title="Ouvrir ce panneau dans une vraie fenêtre (pratique avec deux écrans)">Fenêtre ↗</button><button type="button" class="button small secondary" id="side-panel-close" aria-label="Fermer le panneau">✕</button></div></header><iframe id="side-panel-frame" title="Deuxième écran"></iframe>`;
+            document.body.append(panel);
+            let width=0;try{width=Number(localStorage.getItem('lcnda-side-panel-width'))||0;}catch(_){}
+            setSidePanelWidth(width||Math.round(window.innerWidth*0.42));
+            const frame=$('#side-panel-frame',panel);
+            const current=()=>{try{return frame.contentWindow.lcndaViewSnapshot?.()||null;}catch(_){return null;}};
+            const title=()=>{try{const doc=frame.contentDocument;const name=doc.querySelector('.person-hero h1, .page-header h2, .battue-detail h2, h2')?.textContent?.trim();const module=doc.querySelector('#sidebar-title')?.textContent?.trim();$('#side-panel-title').textContent=[module,name&&name!==module?name:''].filter(Boolean).join(' · ')||'À côté';}catch(_){}};
+            frame.addEventListener('load',title);setInterval(()=>{if(document.body.contains(panel))title();},1500);
+            $('#side-panel-close',panel).addEventListener('click',closeSidePanel);
+            $('#side-panel-window',panel).addEventListener('click',()=>{const view=current();window.open(viewUrl(view||viewSnapshot()),'_blank');closeSidePanel();});
+            $('#side-panel-here',panel).addEventListener('click',()=>{const view=current();if(!view)return;closeSidePanel();applyViewSnapshot(view);setModule(view.module||'personnes');});
+            const handle=$('.side-panel-resize',panel);
+            handle.addEventListener('pointerdown',event=>{event.preventDefault();handle.setPointerCapture(event.pointerId);document.body.classList.add('is-resizing-side-panel');
+                const move=e=>setSidePanelWidth(window.innerWidth-e.clientX);
+                const up=()=>{handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',up);document.body.classList.remove('is-resizing-side-panel');try{localStorage.setItem('lcnda-side-panel-width',String(parseInt(getComputedStyle(document.body).getPropertyValue('--side-panel-w'))||0));}catch(_){}};
+                handle.addEventListener('pointermove',move);handle.addEventListener('pointerup',up);});
+        }
+        document.body.classList.add('has-side-panel');
+        $('#side-panel-frame').src=viewUrl(view);
+    }
+    function setSidePanelWidth(px){const w=Math.max(340,Math.min(Math.round(window.innerWidth*0.75),Math.round(px)));document.body.style.setProperty('--side-panel-w',`${w}px`);}
+    function closeSidePanel(){$('#side-panel')?.remove();document.body.classList.remove('has-side-panel');}
+    function bindSidePanelButton(){
+        const button=$('#side-panel-open');if(!button)return;
+        if(IS_EMBEDDED){button.hidden=true;return;}
+        button.addEventListener('click',()=>openSidePanel());
+    }
     function battueCommuneByInsee(insee){return state.currentBattueDetail?.communes?.find(c=>String(c.insee_code)===String(insee));}
     function applyBattueCommuneFilter(){
         const active=state.battueCommuneFilter||'all';

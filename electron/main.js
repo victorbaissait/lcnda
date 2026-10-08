@@ -259,7 +259,11 @@ ipcMain.handle('lcnda:download-reference', async (event, country) => {
 function lockNavigation(webContents, origin) {
   const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };
   webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith(origin)) return { action: 'allow' };
+    // Deuxième écran détaché (« Fenêtre ↗ » du panneau À côté) : vraie fenêtre de l'application, même pont et même sécurité
+    if (url.startsWith(origin)) {
+      return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, minWidth: 700, minHeight: 500, backgroundColor: '#fbfbfb',
+        webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: path.join(__dirname, 'preload.js') } } };
+    }
     // Fenêtre vide que la page remplit elle-même pour une impression (graphique, feuille de mission aux archives,
     // bordereau de copies) : autorisée, isolée et sans accès au pont de l'application. Avant : bloquée (null).
     if (url === 'about:blank' || url === '') {
