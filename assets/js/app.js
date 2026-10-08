@@ -883,7 +883,7 @@
     function graphDiagramHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-diagram-hidden')||'[]');}catch(_){return[];}}
     function graphStatsHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-stats-hidden')||'[]');}catch(_){return[];}}
     function tileLayerHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-tile-hidden')||'[]');}catch(_){return[];}}
-    const defaultGraphDiagramItems=[['ancestors','Arbre des ascendants'],['descendants','Arbre des descendants'],['hourglass','Sablier familial'],['fan','Éventail des générations'],['kinship','Liens de parenté'],['social','Réseau : témoins et voisins'],['occupations','Transmission des métiers'],['migrations','Migrations d’une branche'],['household','Maisonnée et recensements'],['square','Carré'],['circular','Circulaire'],['symmetric','Symétrique'],['fractal','Arbre fractal'],['genogram','Génogramme détaillé'],['distribution','Distribution'],['place_monograph','Monographie de commune']];
+    const defaultGraphDiagramItems=[['ancestors','Arbre des ascendants'],['descendants','Arbre des descendants'],['hourglass','Sablier familial'],['fan','Éventail des générations'],['kinship','Liens de parenté'],['implexe','Implexe (ancêtres répétés)'],['social','Réseau : témoins et voisins'],['occupations','Transmission des métiers'],['migrations','Migrations d’une branche'],['household','Maisonnée et recensements'],['square','Carré'],['circular','Circulaire'],['symmetric','Symétrique'],['fractal','Arbre fractal'],['genogram','Génogramme détaillé'],['distribution','Distribution'],['place_monograph','Monographie de commune']];
     const defaultGraphStatsItems=[['surnames','Noms'],['firstnames','Prénoms'],['firstnames_by_generation','Distribution des prénoms par génération'],['birth_places','Lieux de naissance'],['marriage_places','Lieux de mariage'],['death_places','Lieux de décès'],['birth_countries','Pays de naissance'],['death_countries','Pays de décès'],['sex_distribution','Sexes'],['age_at_death','Âge au décès'],['genealogy_age_pyramid','Pyramide des âges complète'],['death_age_by_generation','Âge au décès par génération'],['life_expectancy_generation_century','Espérance de vie génération/siècle'],['life_expectancy_lineage_generation_century','Espérance de vie dans ta lignée'],['life_expectancy_century_branch','Espérance de vie siècle/branche'],['marriage_first_birth_age','Âge mariage / naissances'],['sibling_birth_interval','Intervalle des fratries'],['infant_mortality_period','Mortalité infantile par période'],['marital_patterns','Remariage, veuvage, célibat'],['death_causes','Causes de décès'],['completeness','Complétude des données'],['family_gravity_migration','Migration — centre familial'],['farthest_from_origin','Lieux les plus éloignés'],['residence_duration','Durée de résidence'],['mobility_by_generation','Mobilité par génération'],['birth_years','Années de naissance'],['death_years','Années de décès'],['children_per_family','Enfants par famille'],['occupation_timeline','Métiers dans le temps'],['occupation_by_generation','Métiers par génération'],['occupation_branch_evolution','Métiers par branche'],['endogamy_index','Endogamie / consanguinité']];
     function orderedGraphDiagramItems(includeHidden=false){const keys=defaultGraphDiagramItems.map(i=>i[0]);const order=savedOrder('genealogie-graph-diagram-order',keys);const hidden=graphDiagramHiddenKeys();return order.filter(v=>includeHidden||!hidden.includes(v)).map((v,idx)=>{const item=defaultGraphDiagramItems.find(r=>r[0]===v)||[v,v];return [item[0],String(idx+1).padStart(2,'0'),item[1]];});}
     function orderedGraphStatsItems(includeHidden=false){const keys=defaultGraphStatsItems.map(i=>i[0]);const order=savedOrder('genealogie-graph-stats-order',keys);const hidden=graphStatsHiddenKeys();return order.filter(v=>includeHidden||!hidden.includes(v)).map((v,idx)=>{const item=defaultGraphStatsItems.find(r=>r[0]===v)||[v,v];return [item[0],String(idx+1).padStart(2,'0'),item[1]];});}
@@ -961,6 +961,7 @@
     function schedulePersonCountRefresh() {
         clearTimeout(personCountTimer);
         personCountTimer = setTimeout(async () => {
+            try{window.lcnda?.refreshReminders?.();}catch(_){} // chiffre des rappels sur l'icône de l'application
             try {
                 const {count} = await api('person_count');
                 if (state.bootstrap?.stats) state.bootstrap.stats.personnes = Number(count) || 0;
@@ -2398,7 +2399,7 @@
     function applyBlockWidth(html,width){return width?html.replace(/\bspan-(3|4|5|6|7|8|9|12)\b/,`span-${width}`):html;}
 
     function renderPerson(detail) {
-        const {person, events, parents, partners, families=[], children, siblings=[], variants, labels=[], notes, media, signatures=[], sources, investigations=[], battues=[], hypotheses=[], evidence=[], census={}, completion={score:0,items:[]}, biography='', onlineSheets=[]} = detail;
+        const {person, estimates={}, events, parents, partners, families=[], children, siblings=[], variants, labels=[], notes, media, signatures=[], sources, investigations=[], battues=[], hypotheses=[], evidence=[], census={}, completion={score:0,items:[]}, biography='', onlineSheets=[]} = detail;
         const birthEvent=events.find(event=>event.gedcom_tag==='BIRT');
         const isLocked=Number(person.is_locked)===1;
         const editOnly=html=>isLocked?'':html;
@@ -2413,7 +2414,7 @@
             ['Prénom',person.first_name],['Autres prénoms',person.middle_name],['Nom inscrit',person.last_name],['Titre / préfixe',[person.prefix,person.suffix].filter(Boolean).join(' ')],['Genre',genderText(person.gender)],['Statut',lifeText(person.living_status)],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Métier / activité',person.occupation],['Taille',person.height_text],['Description physique',person.physical_description],['Yeux',person.eye_color],['Peau',person.skin_color],['Nationalité',person.nationality],['Origine / mention',person.ethnicity],...( person.mort_pour_la_france==='yes'?[['Mort Pour La France','Oui']]:[] ),['Référence',person.reference_number]
         ].map(([label,value])=>identityDataRow(label,value,blockSettings)).join('');
         const personBlockRenderers={
-            identity:index=>card(index,'Identité','',`<dl class="data-list">${identityRows}</dl>${identityVariantsHtml(events,census,person,orderedMedia,blockSettings)}${person.surname_group?`<div class="identity-variants identity-surname"><dl class="data-list">${dataRow('Famille / groupe',person.surname_group)}</dl></div>`:''}${onlineSheetsHtml(onlineSheets,person.id,isLocked)}<div class="identity-labels">${entityLabelsField('person',person.id,labels,isLocked)}</div>`,'span-4',editOnly(`${actionButton('edit','Modifier l’identité',`data-edit-person-inline="${person.id}"`)}`)),
+            identity:index=>card(index,'Identité','',`<dl class="data-list">${identityRows}</dl>${dateEstimatesHtml(estimates,person)}${identityVariantsHtml(events,census,person,orderedMedia,blockSettings)}${person.surname_group?`<div class="identity-variants identity-surname"><dl class="data-list">${dataRow('Famille / groupe',person.surname_group)}</dl></div>`:''}${onlineSheetsHtml(onlineSheets,person.id,isLocked)}<div class="identity-labels">${entityLabelsField('person',person.id,labels,isLocked)}</div>`,'span-4',editOnly(`${actionButton('edit','Modifier l’identité',`data-edit-person-inline="${person.id}"`)}`)),
             events:index=>{
                 const witnessEvs=detail.witnessEvents||[];
                 const mode=state.eventDisplayMode||'all_mixed';
@@ -3476,6 +3477,20 @@
         bindGraphExportControls();
     }
 
+    /** Implexe : ancêtres présents à plusieurs places de l'ascendance, et taux par génération. */
+    function renderImplexe(data,root){
+        const rootName=personName(root||{})||'cette personne';
+        const sosaList=list=>list.map(n=>`Sosa ${n}`).join(', ').replace(/, ([^,]*)$/,' et $1');
+        const row=item=>`<li class="implexe-row${item.entry?' is-entry':''}"><button class="table-link" type="button" data-tree-person="${item.id}">${escapeHtml(personName(item.person||{}))}</button> <small>${escapeHtml(years(item.person||{}))}</small><span>est ${escapeHtml(sosaList(item.sosas))}${item.count>item.sosas.length?` (… ${item.count} places en tout)`:''} · génération${item.generations.length>1?'s':''} ${item.generations.join(', ')}</span></li>`;
+        const entries=data.repeated.filter(item=>item.entry),others=data.repeated.filter(item=>!item.entry);
+        const table=`<table class="implexe-table"><thead><tr><th>Génération</th><th>Places théoriques</th><th>Places connues</th><th>Personnes différentes</th><th>Implexe</th><th>Implexe cumulé</th></tr></thead><tbody>${data.generations.map(g=>`<tr><td>${g.generation}</td><td>${g.theoretical===null?'—':Number(g.theoretical).toLocaleString('fr-FR')}</td><td>${g.slots}</td><td>${g.people}</td><td>${String(g.rate).replace('.',',')} %</td><td>${String(g.cumulative_rate).replace('.',',')} %</td></tr>`).join('')}</tbody></table>`;
+        return `<div class="implexe-view"><span class="eyebrow">IMPLEXE</span><h2>Ancêtres répétés de ${escapeHtml(rootName)}</h2>
+            <p class="muted">Quand deux ancêtres sont cousins, leurs propres ancêtres apparaissent plusieurs fois dans l’arbre : c’est l’implexe. Seules les filiations biologiques comptent. Le taux = 1 − personnes différentes ÷ places connues.</p>
+            <div class="implexe-summary"><div><strong>${data.slots}</strong><span>places connues</span></div><div><strong>${data.people}</strong><span>ancêtres différents</span></div><div><strong>${String(data.rate).replace('.',',')} %</strong><span>implexe global</span></div><div><strong>${data.repeated_total}</strong><span>ancêtres répétés</span></div></div>
+            ${data.truncated?'<p class="muted">Calcul arrêté : arbre trop grand.</p>':''}
+            ${data.repeated_total?`<h3>Les couples communs les plus proches</h3><p class="muted">C’est ici que les branches se rejoignent ; leurs ancêtres sont répétés à leur suite.</p><ul class="implexe-list">${entries.map(row).join('')}</ul>${others.length?`<details class="implexe-more"><summary>Voir aussi leurs ancêtres répétés (${others.length})</summary><ul class="implexe-list">${others.map(row).join('')}</ul></details>`:''}`:empty('Aucun ancêtre répété : chaque ancêtre connu n’apparaît qu’une fois.')}
+            <h3>Par génération</h3><div class="implexe-table-wrap">${table}</div></div>`;
+    }
     async function renderGraph(token=++state.workspaceToken) {
         const current = summaryFromState();
         if (state.graphMode === 'stats') return renderGraphStats(token);
@@ -3485,6 +3500,8 @@
             const data=await api('graph_distribution',{name_mode:state.distributionNameMode});if(token!==state.workspaceToken||state.module!=='graphiques')return;stageHtml=renderDistributionDiagram(data);
         } else if(['social','occupations','migrations','household'].includes(state.graphMode)){
             const data=await api('graph_network',{kind:state.graphMode,id:state.currentPersonId});if(token!==state.workspaceToken||state.module!=='graphiques')return;stageHtml=renderGraphNetwork(data);
+        } else if(state.graphMode==='implexe'){
+            const data=await api('implexe',{id:state.currentPersonId});if(token!==state.workspaceToken||state.module!=='graphiques')return;stageHtml=renderImplexe(data,current);
         } else if(state.graphMode==='kinship'){
             if(!state.graphKinship.from||!state.graphKinship.to)stageHtml=`<div class="kinship-empty"><span class="eyebrow">LIENS DE PARENTÉ</span><h2>Choisis deux personnes</h2><p>Recherche les deux individus dans la colonne de gauche pour afficher le chemin familial le plus court.</p></div>`;
             else{const data=await api('kinship',{from:state.graphKinship.from,to:state.graphKinship.to});if(token!==state.workspaceToken||state.module!=='graphiques')return;stageHtml=data.path.length?`<div class="kinship-path">${data.path.map((person,index)=>`${index?`<div class="kinship-connector"><span>${escapeHtml(data.relations[index-1]||'lié à')}</span><i>→</i></div>`:''}<button class="kinship-person gender-${person.gender||'unknown'} ${index===0||index===data.path.length-1?'is-endpoint':''}" data-tree-person="${person.id}">${person.portrait?`<img src="media/${encodeURIComponent(person.portrait)}" alt="">`:'<span class="kinship-initial">'+escapeHtml((person.first_name?.[0]||'')+(person.last_name?.[0]||''))+'</span>'}<strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></button>`).join('')}</div><p class="kinship-summary">${data.length} lien(s) entre les deux personnes.</p>`:empty('Aucun chemin familial trouvé entre ces deux personnes.')}
@@ -6194,6 +6211,153 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             }));
         }catch(error){panel.innerHTML=`<small class="cell-muted">${escapeHtml(error.message)}</small>`;}
     }
+    /** Dates manquantes estimées d'après la famille et les actes (aide pour savoir quels registres consulter). */
+    function dateEstimatesHtml(estimates,person){
+        const rows=[['birth',person?.gender==='female'?'Née':'Né'],['death',person?.gender==='female'?'Décédée':'Décédé']].filter(([key])=>estimates?.[key]?.label);
+        if(!rows.length)return '';
+        return `<div class="date-estimates"><strong>Dates estimées</strong>${rows.map(([key,verb])=>{const e=estimates[key];return `<div class="date-estimate"><span>${escapeHtml(verb)} ${escapeHtml(e.label)}</span><small>D’après : ${escapeHtml((e.reasons||[]).join(' ; '))}${e.other_reasons?.length?`<br>Autres indices compatibles : ${escapeHtml(e.other_reasons.join(' ; '))}`:''}${e.conflicts?.length?`<br><em>Indices contradictoires, à vérifier : ${escapeHtml(e.conflicts.join(' ; '))}</em>`:''}</small></div>`;}).join('')}<small class="muted">Estimation pour orienter les recherches dans les registres, pas une date prouvée.</small></div>`;
+    }
+    /** Aide à la lecture des actes anciens : abréviations, latin des registres, écriture lettre par lettre. */
+    const readingAbbreviations=[
+        ['led., lad., lesd.','ledit, ladite, lesdits : la personne ou la chose déjà nommée plus haut'],
+        ['dud., desd.','dudit, desdits'],
+        ['susd., sd.','susdit(e) : nommé(e) ci-dessus'],
+        ['d., dit, dite','surnom ou nom de terre : « Jean Martin dit Lafleur »'],
+        ['fils de feu, fille de feu','le père (ou la mère) est déjà mort au moment de l’acte'],
+        ['fils de défunt, de deffunct','même sens que « fils de feu »'],
+        ['vve, Vve, veufve','veuve'],
+        ['fe, fme, fem.','femme (épouse)'],
+        ['épx, épse','époux, épouse'],
+        ['Me, Mtre','maître (notaire, avocat, chirurgien, artisan reçu maître)'],
+        ['Mre','messire (noble ou prêtre)'],
+        ['Sr, Sieur','sieur : homme de condition (bourgeois, marchand, officier)'],
+        ['Sgr, Seigr','seigneur'],
+        ['Ecr, Ec.','écuyer (titre de noblesse)'],
+        ['Dlle, Damlle','demoiselle : femme de rang, même mariée, sous l’Ancien Régime'],
+        ['hon., honn.','honnête (« honnête homme ») : qualificatif social'],
+        ['md, mard, marchd','marchand'],
+        ['labr, labour.','laboureur (paysan qui possède un attelage)'],
+        ['manouv.','manouvrier, journalier'],
+        ['par., psse, paroe','paroisse'],
+        ['bapt., bap.','baptisé, baptême'],
+        ['inh.','inhumé'],
+        ['pnt, pt, pnts','présent, présents'],
+        ['soubs., soussig.','soussignés'],
+        ['n’a sceu signer','n’a pas su signer (ne savait pas écrire)'],
+        ['aagé de','âgé de'],
+        ['7bre, 8bre, 9bre, Xbre, 10bre','septembre, octobre, novembre, décembre'],
+        ['&, &c','et, et cetera'],
+        ['ledit jour et an que dessus','à la date déjà écrite en tête de l’acte'],
+        ['en légitime mariage','enfant de parents mariés entre eux'],
+        ['fils naturel, fille naturelle','né(e) hors mariage'],
+        ['posthume','né(e) après la mort du père'],
+        ['mineur','moins de 25 ans sous l’Ancien Régime, moins de 21 ans de 1792 à 1974'],
+        ['an VI, 12 brumaire','date du calendrier républicain (convertisseur dans Calendrier / mesures)'],
+        ['+, †, croix','décédé'],
+    ];
+    const readingLatin=[
+        ['baptizavi','j’ai baptisé'],['baptizatus, baptizata','baptisé, baptisée'],['natus, nata','né, née'],['hodie, heri','aujourd’hui, hier'],
+        ['filius, filia','fils, fille'],['legitimus, legitima','légitime'],['naturalis, illegitimus','naturel, illégitime'],['gemelli','jumeaux'],
+        ['infans, proles','enfant'],['pater, mater','père, mère'],['patrinus, matrina','parrain, marraine'],['susceptores, levantes','parrain et marraine (ceux qui ont tenu l’enfant)'],
+        ['domi baptizatus ob periculum mortis','ondoyé à la maison en danger de mort'],['conjuges','les époux (le couple)'],
+        ['matrimonium contraxerunt','ils se sont mariés'],['matrimonio juncti','unis par le mariage'],['sponsus, sponsa','fiancé, fiancée ou époux, épouse'],
+        ['proclamationibus factis, bannis','les bans ayant été publiés'],['dispensatio in tertio gradu consanguinitatis','dispense de parenté (cousins issus de germains)'],
+        ['viduus, vidua','veuf, veuve'],['relicta','veuve de (« laissée par »)'],['quondam, q., defunctus, def.','feu, défunt'],
+        ['obiit','il (elle) est mort(e)'],['sepultus est, sepulta est','a été inhumé(e)'],['in coemeterio','au cimetière'],['in ecclesia','dans l’église'],
+        ['annorum circiter quadraginta','âgé d’environ quarante ans'],['aetatis suae','de son âge'],['anno Domini','l’an du Seigneur'],
+        ['die, mensis','le jour, du mois'],['ejusdem mensis','du même mois'],['hujus parochiae, ex hac parochia','de cette paroisse'],['parochianus','paroissien'],
+        ['testes, praesentibus','témoins, en présence de'],['infrascriptus, subsignatus','soussigné'],['parochus, curatus, rector','curé'],['vicarius','vicaire'],
+        ['sacerdos, presbyter','prêtre'],['Januarii … Decembris','de janvier … de décembre'],['primo, secundo, tertio die','le premier, deuxième, troisième jour'],
+        ['agricola','cultivateur'],['faber','forgeron'],['sutor','cordonnier'],['textor','tisserand'],['molitor','meunier'],['sartor','tailleur'],['miles','soldat'],
+    ];
+    const readingLetters=[
+        ['ſ (s long)','s','au début et au milieu des mots ; ressemble à un f sans barre. Le s rond n’est qu’en fin de mot : « ſœur » = sœur.'],
+        ['u / v','u ou v','interchangeables jusqu’au XVIIe siècle : « vne » = une, « auoir » = avoir.'],
+        ['i / j','i ou j','même lettre : « iour » = jour, « Iean » = Jean ; J et I majuscules se confondent.'],
+        ['y final','i','« cecy », « luy », « icy ».'],
+        ['ff au début','F','majuscule : « ffrançois » = François.'],
+        ['s muet devant consonne','accent circonflexe aujourd’hui','« estoit » = était, « teste » = tête, « maistre » = maître.'],
+        ['-oit, -oient','-ait, -aient','imparfait et conditionnel : « il demeuroit » = il demeurait.'],
+        ['-ez final','-és','« bontez » = bontés, « nez » peut valoir « nés ».'],
+        ['trait ou tilde sur une voyelle','m ou n omis','« cõme » = comme, « mōsieur » = monsieur.'],
+        ['ꝑ (p barré)','per / par','« ꝑoisse » = paroisse.'],
+        ['ꝓ (p bouclé)','pro','« ꝓcureur » = procureur.'],
+        ['q̃, qͥ','que, qui','lettre surmontée d’un signe.'],
+        ['lettres en exposant','abréviation','« Mʳ » = monsieur, « ledᵗ » = ledit, « 7ᵇʳᵉ » = septembre.'],
+        ['ꝛ (r rond)','r','après o, b, p : ressemble à un 2 ou à un z.'],
+        ['d oncial','d','hampe recourbée vers la gauche, comme ∂.'],
+        ['e en boucle','e','petit e souvent fermé comme un o ou un c bouclé selon la main.'],
+        ['h','h','descend sous la ligne avec une boucle ; se confond avec un z.'],
+        ['chiffres romains en j','i final','« iiij » = 4, « vj » = 6, « iiijxx » = quatre-vingts.'],
+        ['pas de ponctuation ni d’accent','—','les phrases s’enchaînent et les mots sont coupés en fin de ligne sans tiret ; lire à voix haute aide.'],
+    ];
+    function readingAidsHtml(){
+        const dl=rows=>`<dl>${rows.map(([term,definition])=>`<div class="help-term"><dt>${escapeHtml(term)}</dt><dd>${escapeHtml(definition)}</dd></div>`).join('')}</dl>`;
+        return `<section class="maintenance-panel full-width help-intro reading-aids"><h3>Aide à la lecture des actes anciens</h3><p>Repères pour déchiffrer les registres paroissiaux et l’état civil ancien. Tape un mot pour filtrer.</p><label class="reading-aids-filter">Chercher<input type="search" id="reading-aids-filter" placeholder="ex. vve, obiit, ſ…"></label>
+            <details class="reading-aid" open><summary>Abréviations et formules courantes (${readingAbbreviations.length})</summary><div class="help-glossary"><section class="help-letter">${dl(readingAbbreviations)}</section></div></details>
+            <details class="reading-aid"><summary>Latin des registres paroissiaux (${readingLatin.length})</summary><div class="help-glossary"><section class="help-letter">${dl(readingLatin)}</section></div></details>
+            <details class="reading-aid"><summary>Écriture ancienne lettre par lettre (${readingLetters.length})</summary><table class="reading-letters"><thead><tr><th>Ce qu’on voit</th><th>Se lit</th><th>Remarque</th></tr></thead><tbody>${readingLetters.map(([seen,read,note])=>`<tr><td>${escapeHtml(seen)}</td><td>${escapeHtml(read)}</td><td>${escapeHtml(note)}</td></tr>`).join('')}</tbody></table></details>
+        </section>`;
+    }
+    const foldText=text=>String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    function bindReadingAids(){
+        $('#reading-aids-filter')?.addEventListener('input',event=>{
+            const q=foldText(event.target.value.trim());
+            $$('.reading-aid').forEach(details=>{let shown=0;$$('.help-term, tbody tr',details).forEach(row=>{const ok=!q||foldText(row.textContent).includes(q);row.hidden=!ok;if(ok)shown++;});if(q)details.open=shown>0;});
+        });
+    }
+    /**
+     * Recherche rapide (⌘K sur Mac, Ctrl+K ailleurs) : personnes, battues, enquêtes, lieux cités et écrans de l'application.
+     * Flèches pour choisir, Entrée pour y aller, Échap pour fermer.
+     */
+    function quickSearchScreens(){
+        const rows=[];
+        Object.entries(modules).filter(([key])=>key!=='jeu').forEach(([key,[,label]])=>rows.push({label,hint:'Écran',go:()=>setModule(key)}));
+        defaultMaintenanceTabs.forEach(([key,,label])=>rows.push({label,hint:'Maintenance',go:()=>{state.maintenanceTab=key;setModule('maintenance');}}));
+        defaultGraphDiagramItems.forEach(([key,label])=>rows.push({label,hint:'Graphiques',go:()=>{state.graphMode=key;setModule('graphiques');}}));
+        rows.push({label:'Rappels',hint:'Listes',go:()=>{state.listType='reminders';setModule('listes');}});
+        rows.push({label:'Battues',hint:'Enquêtes',go:()=>{state.enquetesTab='battue';state.currentBattueId=0;state.currentInvestigationId=0;setModule('enquetes');}});
+        return rows;
+    }
+    async function openQuickSearch(){
+        const existing=$('#quick-search');if(existing){$('input',existing)?.focus();return;}
+        const fold=text=>String(text||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+        const dialog=document.createElement('div');dialog.id='quick-search';dialog.className='quick-search-backdrop';
+        dialog.innerHTML=`<div class="quick-search" role="dialog" aria-label="Recherche rapide"><input type="search" placeholder="Une personne, une battue, une enquête, un lieu, un écran…" autocomplete="off" spellcheck="false"><ul class="quick-search-results" role="listbox"></ul><small class="muted">↑ ↓ pour choisir · Entrée pour ouvrir · Échap pour fermer · « battue », « enquête » ou « lieu » devant le mot pour ne chercher que cela</small></div>`;
+        document.body.append(dialog);
+        const input=$('input',dialog),list=$('ul',dialog);let items=[],active=0,seq=0;
+        const close=()=>dialog.remove();
+        const paint=()=>{list.innerHTML=items.length?items.map((item,index)=>`<li role="option" class="${index===active?'is-active':''}" data-qs-index="${index}"><span>${escapeHtml(item.label)}</span><small>${escapeHtml(item.hint)}</small></li>`).join(''):`<li class="quick-search-empty">${input.value.trim()?'Aucun résultat':'Tape quelques lettres'}</li>`;list.querySelector('.is-active')?.scrollIntoView({block:'nearest'});};
+        const choose=index=>{const item=items[index];if(!item)return;close();item.go();};
+        const search=async()=>{
+            const q=input.value.trim();const id=++seq;
+            const words=fold(q).split(/\s+/).filter(Boolean);
+            const screens=words.length?quickSearchScreens().filter(row=>words.every(word=>fold(row.label+' '+row.hint).includes(word))).slice(0,6):[];
+            items=screens;active=0;paint();
+            if(q.length<2)return;
+            let data={};try{data=await api('quick_search',{q});}catch(_){return;}
+            if(id!==seq||!document.body.contains(dialog))return;
+            const people=(data.persons||[]).map(person=>({label:`${personName(person)}${/\d/.test(years(person)||'')?` (${years(person)})`:''}`,hint:'Personne',go:()=>{state.currentPersonId=Number(person.id);setModule('personnes');}}));
+            const battues=(data.battues||[]).map(row=>({label:row.title||'Battue sans titre',hint:`Battue${row.start_name?` · ${row.start_name}`:''}`,go:()=>{state.enquetesTab='battue';state.currentInvestigationId=0;state.currentBattueId=Number(row.id);setModule('enquetes');}}));
+            const investigations=(data.investigations||[]).map(row=>({label:row.title||'Enquête sans titre',hint:'Enquête',go:()=>{state.enquetesTab='enquetes';state.currentBattueId=0;state.currentInvestigationId=Number(row.id);state.investigationFolderId=0;setModule('enquetes');}}));
+            const places=(data.places||[]).map(row=>({label:[row.name,row.county,row.country].filter(Boolean).join(', '),hint:`Lieu · ${row.uses} événement${Number(row.uses)>1?'s':''}`,go:()=>{state.graphPlaceMonograph={...state.graphPlaceMonograph,id:Number(row.id),name:row.name||'',county:row.county||'',country:row.country||''};state.graphMode='place_monograph';setModule('graphiques');}}));
+            items=[...people,...battues,...investigations,...places,...screens];active=0;paint();
+        };
+        let timer=0;
+        input.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(search,150);});
+        input.addEventListener('keydown',event=>{
+            if(event.key==='ArrowDown'){event.preventDefault();active=Math.min(items.length-1,active+1);paint();}
+            else if(event.key==='ArrowUp'){event.preventDefault();active=Math.max(0,active-1);paint();}
+            else if(event.key==='Enter'){event.preventDefault();choose(active);}
+            else if(event.key==='Escape'){event.preventDefault();close();}
+        });
+        list.addEventListener('click',event=>{const row=event.target.closest('[data-qs-index]');if(row)choose(Number(row.dataset.qsIndex));});
+        dialog.addEventListener('mousedown',event=>{if(event.target===dialog)close();});
+        paint();input.focus();
+    }
+    document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&!event.altKey&&!event.shiftKey&&String(event.key).toLowerCase()==='k'){event.preventDefault();openQuickSearch();}});
+    // Commandes du menu de l'application de bureau (Fichier → Recherche rapide ; clic sur une notification de rappel)
+    try{window.lcnda?.onCommand?.(command=>{if(command==='quick-search')openQuickSearch();if(command==='open-reminders'){state.listType='reminders';setModule('listes');}});}catch(_){}
     function battueCommuneByInsee(insee){return state.currentBattueDetail?.communes?.find(c=>String(c.insee_code)===String(insee));}
     function applyBattueCommuneFilter(){
         const active=state.battueCommuneFilter||'all';
@@ -7291,6 +7455,45 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const deniers=total%12;
         return `${sign}${livres} livre${livres>1?'s':''}, ${sols} sol${sols>1?'s':''}, ${deniers} denier${deniers>1?'s':''}`;
     }
+    /**
+     * Pouvoir d'achat : un montant ancien exprimé en journées de travail d'un journalier (manœuvre agricole de province),
+     * puis en euros au salaire d'une journée d'aujourd'hui. Ordres de grandeur : les salaires variaient selon la région,
+     * la saison et le métier (Paris nettement plus haut). Avant 1795 : sols par jour (livre tournois) ; ensuite francs par jour
+     * (anciens francs jusqu'en 1959, nouveaux francs ensuite) ; après 1914, d'après le salaire minimum horaire × 8 h.
+     */
+    const journalierWages=[[1550,4],[1600,6],[1650,8],[1700,10],[1726,10],[1750,12],[1770,15],[1789,20],[1795,1.25*20],[1820,1.25*20],[1840,1.4*20],[1850,1.5*20],[1860,1.8*20],[1870,2*20],[1880,2.3*20],[1900,2.6*20],[1913,3.2*20],[1920,10*20],[1930,20*20],[1938,30*20],[1945,120*20],[1950,600*20],[1959,1100*20],[1960,12*20*100],[1970,28*20*100],[1980,105*20*100],[1990,250*20*100],[2001,340*20*100]];
+    /** Salaire d'une journée, en sols (avant 1960 : 1 franc compté comme 1 livre = 20 sols ; à partir de 1960 : en sols d'anciens francs). */
+    function journalierWageSols(year){
+        const rows=journalierWages;if(year<=rows[0][0])return rows[0][1];if(year>=rows[rows.length-1][0])return rows[rows.length-1][1];
+        for(let i=1;i<rows.length;i++){const [y1,w1]=rows[i-1],[y2,w2]=rows[i];if(year<=y2)return w1+(w2-w1)*(year-y1)/(y2-y1);}
+        return rows[rows.length-1][1];
+    }
+    function purchasingPowerPanelHtml(){
+        return `<section class="maintenance-panel purchasing-power"><h3>Pouvoir d’achat d’une somme ancienne</h3><form id="purchasing-power-form" class="form-grid" style="padding:0">
+            <label>Montant<input name="amount" type="number" step="any" min="0" placeholder="300" required></label>
+            <label>Monnaie<select name="unit"><option value="livre">livres tournois (ou francs)</option><option value="sol">sols / sous</option><option value="denier">deniers</option><option value="ecu">écus de 3 livres</option><option value="ecu6">écus de 6 livres</option><option value="louis">louis d’or (24 livres)</option><option value="nf">nouveaux francs (1960-2001)</option></select></label>
+            <label>Année<input name="year" type="number" min="1550" max="2001" placeholder="1780" required></label>
+            <label>Salaire d’une journée aujourd’hui (€)<input name="today" type="number" step="1" min="1" value="84"></label>
+            <div class="page-actions" style="grid-column:1/-1"><button class="button small" type="submit">Calculer</button></div></form>
+            <div id="purchasing-power-result" class="purchasing-power-result"></div>
+            <p class="muted">Ordre de grandeur seulement. La somme est convertie en journées de travail d’un journalier de province (Paris : salaires plus élevés), puis en euros au salaire d’une journée d’aujourd’hui (84 € ≈ salaire minimum brut de 7 heures : à ajuster). Entre 1791 et 1797, les assignats perdent vite leur valeur. 1 franc de 1795 vaut à peu près 1 livre.</p></section>`;
+    }
+    function bindPurchasingPower(){
+        $('#purchasing-power-form')?.addEventListener('submit',event=>{
+            event.preventDefault();
+            const v=formObject(event.currentTarget);const year=Math.round(Number(v.year));const amount=Number(v.amount);const today=Number(v.today)||84;
+            if(!year||!(amount>=0))return;
+            const perUnit={livre:20,sol:1,denier:1/12,ecu:60,ecu6:120,louis:480,nf:20*100}[v.unit]||20;
+            let sols=amount*perUnit;
+            // À partir de 1960, « francs » veut dire nouveaux francs (1 NF = 100 anciens francs)
+            if(v.unit==='livre'&&year>=1960)sols*=100;
+            const wage=journalierWageSols(year);const days=sols/wage;const workYears=days/250;
+            const fmt=(n,d=0)=>Number(n).toLocaleString('fr-FR',{maximumFractionDigits:d});
+            const wageText=year<1795?`${fmt(wage,1)} sols par jour`:(year<1960?`${fmt(wage/20,2)} francs par jour`:`${fmt(wage/2000,2)} nouveaux francs par jour`);
+            const span=workYears>=1?`soit environ ${fmt(workYears,1)} année${workYears>=2?'s':''} de travail (250 jours par an)`:`soit environ ${fmt(days/25,1)} mois de travail`;
+            $('#purchasing-power-result').innerHTML=`<strong>≈ ${fmt(days,days<10?1:0)} journées de travail d’un journalier</strong><span>${span}</span><span>≈ ${fmt(days*today)} € d’aujourd’hui au salaire d’une journée de ${fmt(today)} €</span><small>Salaire retenu en ${year} : ${wageText}${year>=1791&&year<=1797?' — attention : période des assignats':''}.</small>`;
+        });
+    }
     function renderCalendarMeasureTools(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='calendar_measures')return;
         const design=JSON.parse(localStorage.getItem('genealogie-design')||'{}');
@@ -7303,7 +7506,9 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             <section class="maintenance-panel"><h3>Calendrier républicain</h3><ul class="calendar-info-list">${republicanMonths.map((month,index)=>`<li><strong>${escapeHtml(month)}</strong>${index<12?' · 30 jours':' · 5 ou 6 jours'}</li>`).join('')}</ul><p>Le calendrier républicain commence le 22 septembre 1792 et cesse officiellement le 1er janvier 1806. Les douze mois font 30 jours. Les 5 jours complémentaires, ou 6 en année sextile, terminent l’année.</p></section>
             <section class="maintenance-panel"><h3>Unités anciennes</h3><form id="unit-converter-form" class="form-grid" style="padding:0"><label>Valeur<input name="value" type="number" step="any" placeholder="3"></label><label>De<select name="from">${unitOptions}</select></label><label>Vers<select name="to">${unitOptions}</select></label><button class="button" type="submit">Convertir</button></form><div id="unit-converter-result" class="unit-result">Entre une valeur et deux unités compatibles.</div></section>
             <section class="maintenance-panel"><h3>Monnaies anciennes</h3><form id="currency-converter-form" class="form-grid" style="padding:0"><label>Livres<input name="livres" type="number" step="1" placeholder="12"></label><label>Sols / sous<input name="sols" type="number" step="1" placeholder="10"></label><label>Deniers<input name="deniers" type="number" step="1" placeholder="6"></label><label>Francs germinal indicatifs<input name="francs" type="number" step="any" placeholder="0"></label><button class="button span-2" type="submit">Convertir</button></form><div id="currency-converter-result" class="unit-result">1 livre = 20 sols = 240 deniers. Le franc indiqué ici est une équivalence pratique, pas une valeur historique absolue.</div></section>
+            ${purchasingPowerPanelHtml()}
         </div></section>`;
+        bindPurchasingPower();
         $('#default-calendar-select')?.addEventListener('change',event=>{const current=JSON.parse(localStorage.getItem('genealogie-design')||'{}');current.defaultCalendar=event.target.value;localStorage.setItem('genealogie-design',JSON.stringify(current));toast(`Calendrier par défaut : ${calendarLabel(event.target.value)}.`);});
         $('#calendar-converter-form')?.addEventListener('submit',event=>{event.preventDefault();$('#calendar-converter-result').innerHTML=calendarConversionCards(readCalendarJdn(event.currentTarget));});
         $('#unit-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),result=convertUnitValue(Number(values.value),values.from,values.to);$('#unit-converter-result').textContent=result===null?'Unités incompatibles ou valeur invalide.':`${Number(values.value).toLocaleString('fr-FR')} → ${result.toLocaleString('fr-FR',{maximumFractionDigits:4})}`;});
@@ -8095,7 +8300,9 @@ ${backupSectionHtml()}
         <div class="help-glossary">${glossaryHtml}</div>
         <section class="maintenance-panel full-width help-intro old-occupations-intro"><h3>Glossaire des métiers anciens</h3><p>Définitions courtes pour lire les actes et distinguer les statuts sociaux derrière les métiers.</p></section>
         <div class="help-glossary">${oldOccupationsHtml}</div>
+        ${readingAidsHtml()}
         ${dictionaryHtml}</section>`;
+        bindReadingAids();
         const dictionaryForm=$('#personal-dictionary-form');
         const resetDictionaryForm=()=>{dictionaryForm?.reset();if(dictionaryForm)dictionaryForm.elements.id.value='';const submit=dictionaryForm?.querySelector('[type="submit"]');if(submit)submit.textContent='Ajouter au dictionnaire';};
         dictionaryForm?.addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;try{await api('save_personal_dictionary_entry',{}, {method:'POST',body:formObject(form)});toast(form.elements.id.value?'Définition modifiée.':'Définition ajoutée.');await renderHelpGlossary();}catch(error){toast(error.message,'error');}});

@@ -14,4 +14,8 @@ contextBridge.exposeInMainWorld('lcnda', {
   importChosenFile: (token) => ipcRenderer.invoke('lcnda:import-chosen-file', String(token || '')),
   /** Télécharge les communes d'un pays des battues (adresse et empreinte : catalogue de l'application). */
   downloadReference: (country) => ipcRenderer.invoke('lcnda:download-reference', String(country || '')),
+  /** Commandes du menu de l'application (« quick-search », « open-reminders ») ; la page ne reçoit que leur nom. */
+  /** Recalcule le chiffre des rappels sur l'icône (après une modification). */
+  refreshReminders: () => ipcRenderer.send('lcnda:refresh-reminders'),
+  onCommand: (callback) => ipcRenderer.on('lcnda:command', (_event, command) => callback(String(command || ''))),
 });

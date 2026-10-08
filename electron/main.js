@@ -7,7 +7,7 @@
  *   npm run start:local     données = dossiers data/ et media/ du projet (pour tester avec tes copies)
  *   GENEALOGY_DATA_DIR=… GENEALOGY_MEDIA_DIR=… npm start     dossiers de ton choix
  */
-const { app, BrowserWindow, Menu, dialog, ipcMain, session, shell } = require('electron');
+const { app, BrowserWindow, Menu, Notification, dialog, ipcMain, session, shell } = require('electron');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -82,6 +82,12 @@ function buildMenu(p) {
         { label: 'Ouvrir le dossier des médias', click: open(p.mediaDir) },
         { label: 'Afficher le journal technique (PHP)', click: () => shell.showItemInFolder(p.logFile) },
         { type: 'separator' },
+        { label: 'Recherche rapide…', accelerator: 'CmdOrCtrl+K', click: () => sendToPage('quick-search') },
+        {
+          label: 'Notifications des rappels', type: 'checkbox', checked: readConfig(p.configFile).reminderNotifications !== false,
+          click: (item) => { writeConfig(p.configFile, { ...readConfig(p.configFile), reminderNotifications: item.checked }); checkReminders(); },
+        },
+        { type: 'separator' },
         isMac ? { role: 'close', label: 'Fermer la fenêtre' } : { role: 'quit', label: 'Quitter' },
       ],
     },
@@ -127,6 +133,47 @@ function createWindow() {
   win.loadFile(path.join(__dirname, 'loading.html')).catch(() => {});
   return win;
 }
+
+/** Commande envoyée à la page (menu de l'application) : la page l'écoute par window.lcnda.onCommand. */
+function sendToPage(command) {
+  if (!win || !server) return;
+  if (win.isMinimized()) win.restore();
+  win.show(); win.focus();
+  win.webContents.send('lcnda:command', command);
+}
+
+/**
+ * Rappels arrivés à échéance : chiffre sur l'icône (Dock sur Mac, lanceur sous Linux) et notification du système,
+ * une seule fois par rappel et par échéance (clés gardées dans reminders-notified.json). Vérifié au lancement puis
+ * toutes les 15 minutes. Un clic sur la notification ouvre la liste des rappels.
+ */
+let reminderTimer = null;
+async function checkReminders() {
+  if (!server || quitting) return;
+  const p = paths();
+  const enabled = readConfig(p.configFile).reminderNotifications !== false;
+  let data = { count: 0, due: [] };
+  try {
+    const r = await server.request('/api.php?action=due_reminders', { timeout: 30000 });
+    if (r.status === 200) data = JSON.parse(r.body.toString());
+  } catch { return; }
+  try { app.setBadgeCount(enabled ? Number(data.count) || 0 : 0); } catch { /* système sans badge (Windows) */ }
+  if (!enabled || !Notification.isSupported()) return;
+  const file = path.join(p.userData, 'reminders-notified.json');
+  const notified = new Set(readConfig(file).keys || []);
+  const fresh = (data.due || []).filter((d) => !notified.has(d.key));
+  if (!fresh.length) return;
+  const first = fresh[0];
+  const n = new Notification({
+    title: fresh.length > 1 ? `${fresh.length} rappels à faire` : 'Rappel',
+    body: fresh.length > 1 ? fresh.slice(0, 3).map((d) => '• ' + d.title).join('\n') + (fresh.length > 3 ? '\n…' : '') : `${first.title}\n${first.date_label} · ${first.origin}`,
+  });
+  n.on('click', () => sendToPage('open-reminders'));
+  n.show();
+  fresh.forEach((d) => notified.add(d.key));
+  writeConfig(file, { keys: [...notified].slice(-500) });
+}
+ipcMain.on('lcnda:refresh-reminders', (event) => { if (fromApp(event)) checkReminders(); });
 
 /**
  * Import d'un fichier choisi dans la fenêtre système (écran de démarrage). Un paquet MacFamilyTree (.mftpkg) est
@@ -301,6 +348,10 @@ async function boot() {
     await win.loadURL(server.origin + (selfTestFile && process.env.CARNET_SELFTEST_PATH ? process.env.CARNET_SELFTEST_PATH : '/'));
     if (selfTestFile) await selfTest(selfTestFile);
   }
+  if (!selfTestFile && !prepared.noDatabase) {
+    setTimeout(() => checkReminders(), 8000);
+    reminderTimer = setInterval(() => checkReminders(), 15 * 60 * 1000);
+  }
 }
 
 /** Test automatique (CARNET_SELFTEST=chemin.png) : charge l'app, vérifie, prend une capture, quitte. */
@@ -338,6 +389,8 @@ if (!app.requestSingleInstanceLock()) {
     if (quitting || !server) return;
     event.preventDefault();
     quitting = true;
+    clearInterval(reminderTimer);
+    try { app.setBadgeCount(0); } catch { /* ignore */ }
     server.stop().finally(() => app.quit());
   });
 }

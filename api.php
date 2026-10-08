@@ -159,6 +159,9 @@ try {
         'dashboard_quiz' => dashboard_quiz_data($pdo),
         'goose_quiz' => goose_quiz_data($pdo),
         'person' => person_detail($pdo, safe_int($_GET['id'] ?? 0)),
+        'due_reminders' => json_response(due_reminders_data($pdo)),
+        'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
+        'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
         'person_labels' => json_response(['people' => person_labels($pdo, (string) ($_GET['ids'] ?? ''))]),
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
@@ -1859,6 +1862,7 @@ function person_detail(PDO $pdo, int $id): never
 
     json_response([
         'person' => $person,
+        'estimates' => date_estimates($pdo, $id),
         'onlineSheets' => $onlineSheetRows,
         'events' => $completion['_events'],
         'witnessEvents' => $witnessEventRows,
@@ -2605,6 +2609,33 @@ function reminder_list_rows(PDO $pdo,string $like,int $limit,int $offset,string 
         return strcmp((string)($b['id'] ?? ''), (string)($a['id'] ?? ''));
     });
     return array_slice($rows, $offset, $limit);
+}
+
+/**
+ * Rappels à signaler maintenant (notifications de l'application de bureau, chiffre sur l'icône) :
+ * « le » et « après le » à partir du jour dit ; « avant le » dans les 7 jours qui précèdent l'échéance.
+ */
+function due_reminders_data(PDO $pdo): array
+{
+    $today = date('Y-m-d');
+    $soon = date('Y-m-d', strtotime('+7 days'));
+    $due = [];
+    foreach (reminder_list_rows($pdo, '%%', 100000, 0) as $row) {
+        if ((int)($row['reminder_done'] ?? 0) === 1) continue;
+        $at = substr((string)($row['reminder_due_at'] ?? ''), 0, 10);
+        if ($at === '') continue;
+        $mode = (string)($row['reminder_mode'] ?? 'on');
+        if ($mode === 'none') continue;
+        if (!($mode === 'before' ? $at <= $soon : $at <= $today)) continue;
+        $labels = ['on' => 'À faire le', 'before' => 'Avant le', 'after' => 'Après le'];
+        $due[] = [
+            'key' => (($row['source_type'] ?? '') === 'standalone' ? 's' : 'i') . (int)($row['id'] ?? 0) . '-' . $at,
+            'title' => (string)($row['item_title'] ?? 'Rappel'),
+            'date_label' => trim(($labels[$mode] ?? 'À faire le') . ' ' . date('d/m/Y', strtotime($at))),
+            'origin' => (($row['source_type'] ?? '') === 'standalone') ? 'Rappel libre' : (string)($row['investigation_title'] ?? 'Enquête'),
+        ];
+    }
+    return ['count' => count($due), 'due' => array_slice($due, 0, 50)];
 }
 
 function reminder_list_count(PDO $pdo,string $like,string $reminderMode='',string $reminderCategory=''): int

@@ -3536,3 +3536,45 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .web-search-multi{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 .2rem}
 .web-search-site{display:inline-flex;align-items:center;gap:.3rem}
 .web-search-site input{margin:0;width:16px;height:16px;flex:none}
+
+/* Dates estimées (fiche personne, bloc Identité) */
+.date-estimates{margin:.8rem 0;padding:.6rem .75rem;border:1px dashed var(--line);border-radius:8px;display:flex;flex-direction:column;gap:.4rem}
+.date-estimate{display:flex;flex-direction:column}
+.date-estimate span{font-weight:600}
+.date-estimate small,.date-estimates>small{color:var(--muted);overflow-wrap:anywhere}
+
+/* Implexe (Graphiques) */
+.implexe-view{max-width:980px;padding:1rem;text-align:left}
+.implexe-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin:1rem 0}
+.implexe-summary div{border:1px solid var(--line);border-radius:8px;padding:.6rem;display:flex;flex-direction:column}
+.implexe-summary strong{font-size:1.4rem}
+.implexe-list{list-style:none;padding:0;margin:.4rem 0 1rem}
+.implexe-row{padding:.35rem 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.3rem .6rem;align-items:baseline}
+.implexe-row span{color:var(--muted)}
+.implexe-table{border-collapse:collapse;width:100%;font-size:.9rem}
+.implexe-table th,.implexe-table td{border-bottom:1px solid var(--line);padding:.3rem .5rem;text-align:right}
+.implexe-table th:first-child,.implexe-table td:first-child{text-align:left}
+.implexe-table-wrap{overflow-x:auto}
+
+/* Aide à la lecture des actes anciens (Glossaire) */
+.reading-aids details{margin-top:.8rem}
+.reading-aids summary{cursor:pointer;font-weight:600}
+.reading-aids-filter{display:flex;gap:.5rem;align-items:center;max-width:420px}
+.reading-letters{border-collapse:collapse;width:100%;margin-top:.5rem;font-size:.92rem}
+.reading-letters th,.reading-letters td{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:left;vertical-align:top}
+.reading-letters td:first-child{font-size:1.05rem;white-space:nowrap}
+
+/* Pouvoir d'achat (Calendrier / mesures) */
+.purchasing-power-result{display:flex;flex-direction:column;gap:.2rem;margin:.6rem 0}
+.purchasing-power-result small{color:var(--muted)}
+
+/* Recherche rapide ⌘K */
+.quick-search-backdrop{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.25);display:flex;justify-content:center;align-items:flex-start;padding:12vh 16px 16px}
+.quick-search{width:min(640px,100%);background:var(--paper,#fff);color:var(--ink);border:2px solid var(--ink);box-shadow:var(--shadow);padding:.6rem;display:flex;flex-direction:column;gap:.4rem}
+.quick-search input{width:100%;font-size:1.1rem;padding:.6rem .7rem;border:1px solid var(--line)}
+.quick-search-results{list-style:none;margin:0;padding:0;max-height:55vh;overflow:auto}
+.quick-search-results li{display:flex;justify-content:space-between;gap:1rem;padding:.45rem .6rem;cursor:pointer;border-radius:6px}
+.quick-search-results li small{color:var(--muted);white-space:nowrap}
+.quick-search-results li.is-active,.quick-search-results li:hover{background:var(--blue-soft)}
+.quick-search-results li.quick-search-empty{cursor:default;color:var(--muted)}
+.quick-search-results li.quick-search-empty:hover{background:none}
