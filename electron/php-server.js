@@ -119,7 +119,7 @@ function explainPhpFailure(r) {
 /** Vérifie que ce PHP possède tout ce dont l'application a besoin. */
 function checkPhp(phpPath) {
   const code = [
-    "$need=['pdo_sqlite','sqlite3','mbstring','fileinfo','zip','gd','session'];",
+    "$need=['pdo_sqlite','sqlite3','mbstring','fileinfo','zip','gd','session','curl'];",
     '$miss=array_values(array_filter($need,fn($e)=>!extension_loaded($e)));',
     "try{$p=new PDO('sqlite::memory:');$p->exec('CREATE VIRTUAL TABLE t USING fts5(a)');}catch(Throwable $e){$miss[]='fts5';}",
     "echo json_encode(['version'=>PHP_VERSION,'missing'=>$miss]);",
