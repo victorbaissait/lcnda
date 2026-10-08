@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 5;
+const SCHEMA_VERSION = 6;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -26,6 +26,7 @@ function migration_steps(): array
         3 => 'schema_v3',
         4 => 'schema_v4',
         5 => 'schema_v5',
+        6 => 'schema_v6',
     ];
 }
 
@@ -283,6 +284,74 @@ function schema_v5(PDO $pdo): void
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_places_admin4 ON places(admin4_code)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_places_name_nocase ON places(name COLLATE NOCASE)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_census_records_place ON census_records(place_id)');
+}
+
+/**
+ * Structure n°6 (2026-10-08) : objets de famille (et leur transmission), mémoire familiale (recettes, expressions,
+ * chansons, surnoms, traditions) avec leurs personnes, photos de ces deux collections, contrôle des liens web.
+ */
+function schema_v6(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_objects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT '',
+        description TEXT NOT NULL DEFAULT '',
+        origin_text TEXT NOT NULL DEFAULT '',
+        holder_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        holder_text TEXT NOT NULL DEFAULT '',
+        location_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_object_transfers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        object_id INTEGER NOT NULL REFERENCES family_objects(id) ON DELETE CASCADE,
+        from_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        from_text TEXT NOT NULL DEFAULT '',
+        to_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        to_text TEXT NOT NULL DEFAULT '',
+        date_text TEXT NOT NULL DEFAULT '',
+        year INTEGER,
+        note TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_object_transfers_object ON family_object_transfers(object_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_memories (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        kind TEXT NOT NULL DEFAULT 'other',
+        title TEXT NOT NULL DEFAULT '',
+        content TEXT NOT NULL DEFAULT '',
+        origin_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_memory_people (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        memory_id INTEGER NOT NULL REFERENCES family_memories(id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        role TEXT NOT NULL DEFAULT 'transmitted',
+        UNIQUE(memory_id, person_id, role)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_memory_people_person ON family_memory_people(person_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_collection_media (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        collection_type TEXT NOT NULL CHECK(collection_type IN ('family_object','family_memory')),
+        collection_id INTEGER NOT NULL,
+        media_id INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_collection_media ON family_collection_media(collection_type, collection_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS link_checks (
+        url TEXT PRIMARY KEY,
+        status INTEGER,
+        final_url TEXT NOT NULL DEFAULT '',
+        archive_url TEXT NOT NULL DEFAULT '',
+        error TEXT NOT NULL DEFAULT '',
+        checked_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

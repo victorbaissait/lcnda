@@ -160,6 +160,13 @@ try {
         'goose_quiz' => goose_quiz_data($pdo),
         'person' => person_detail($pdo, safe_int($_GET['id'] ?? 0)),
         'due_reminders' => json_response(due_reminders_data($pdo)),
+        'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
+        'family_memories' => json_response(['memories' => family_memories_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''), safe_text($_GET['kind'] ?? '')), 'kinds' => MEMORY_KINDS]),
+        'precise_places' => json_response(['places' => precise_places_list($pdo, safe_text($_GET['q'] ?? ''), max(5, min(500, safe_int($_GET['radius'] ?? 30))))]),
+        'precise_place' => json_response(precise_place_detail($pdo, safe_text($_GET['key'] ?? ''), max(5, min(500, safe_int($_GET['radius'] ?? 30))))),
+        'link_inventory' => json_response(['links' => link_inventory($pdo)]),
+        'saint_of_day' => json_response(saint_of_day_data($pdo, max(1, min(12, safe_int($_GET['month'] ?? 0) ?: (int) date('n'))), max(1, min(31, safe_int($_GET['day'] ?? 0) ?: (int) date('j'))))),
+        'saint_stats' => json_response(saint_stats_data($pdo)),
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -491,6 +498,7 @@ function dashboard_media_unlinked(PDO $pdo): array
     return $pdo->query("SELECT id,title,filename,media_type,date_text,document_reference,document_title FROM media m
         WHERE NOT EXISTS(SELECT 1 FROM media_links ml WHERE ml.media_id=m.id)
           AND NOT EXISTS(SELECT 1 FROM investigation_media im WHERE im.media_id=m.id)
+          AND NOT EXISTS(SELECT 1 FROM family_collection_media cm WHERE cm.media_id=m.id)
         ORDER BY created_at DESC,id DESC LIMIT 60")->fetchAll();
 }
 
@@ -1866,6 +1874,9 @@ function person_detail(PDO $pdo, int $id): never
     json_response([
         'person' => $person,
         'estimates' => date_estimates($pdo, $id),
+        'saint' => person_saint_info($pdo, $person),
+        'family_objects' => family_objects_data($pdo, $id),
+        'family_memories' => family_memories_data($pdo, $id),
         'onlineSheets' => $onlineSheetRows,
         'events' => $completion['_events'],
         'witnessEvents' => $witnessEventRows,
@@ -8709,6 +8720,13 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'remove_grave_person' => remove_grave_person($pdo,$data),
             'delete_grave' => delete_grave($pdo,$data),
             'save_personal_dictionary_entry' => save_personal_dictionary_entry($pdo,$data),
+            'save_family_object' => save_family_object($pdo,$data),
+            'delete_family_object' => delete_family_object($pdo,$data),
+            'save_family_memory' => save_family_memory($pdo,$data),
+            'delete_family_memory' => delete_family_memory($pdo,$data),
+            'remove_collection_media' => remove_collection_media($pdo,$data),
+            'check_links' => check_links($pdo,$data),
+            'replace_link' => replace_link($pdo,$data),
             'delete_personal_dictionary_entry' => delete_personal_dictionary_entry($pdo,$data),
             'add_media_link' => add_media_link($pdo,$data),
             'remove_media_link' => remove_media_link($pdo,$data),

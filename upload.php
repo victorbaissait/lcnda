@@ -11,7 +11,11 @@ try {
 	    $isPersonPhoto=isset($_POST['is_person_photo'])&&$_POST['is_person_photo']!=='0'?1:0;
 	    $mediaSubjectType=safe_text($_POST['media_subject_type']??'');
 	    if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo'],true))$mediaSubjectType='';
-    if(!$personId&&!$battueItemId&&!$archiveDigestId)throw new RuntimeException('Personne, annotation de battue ou dépouillement manquant');
+    // Photo d'un objet de famille ou d'un souvenir (mémoire familiale) : rattachée à la collection, pas à une personne
+    $collectionType=safe_text($_POST['collection_type']??'');$collectionId=safe_int($_POST['collection_id']??0);
+    if(!in_array($collectionType,['family_object','family_memory'],true)){$collectionType='';$collectionId=0;}
+    if($collectionType&&!$collectionId)throw new RuntimeException('Objet ou souvenir manquant');
+    if(!$personId&&!$battueItemId&&!$archiveDigestId&&!$collectionType)throw new RuntimeException('Personne, annotation de battue ou dépouillement manquant');
     if(empty($_FILES['files']))throw new RuntimeException('Aucun fichier reçu');
     $files=$_FILES['files'];$count=is_array($files['name'])?count($files['name']):1;$allowed=[
         'image/jpeg'=>'jpg','image/png'=>'png','image/webp'=>'webp','image/gif'=>'gif','application/pdf'=>'pdf',
@@ -68,7 +72,9 @@ try {
             $mediaTitle=$title!==''?($count>1?"{$title} — ".($postcardSide?:pathinfo($name,PATHINFO_FILENAME)):$title):pathinfo($name,PATHINFO_FILENAME);if($postcardSide&&stripos($mediaTitle,$postcardSide)===false)$mediaTitle.=' — '.$postcardSide;
 	            $pdo->prepare('INSERT INTO media(title,media_type,filename,thumbnail,document_reference,document_title,document_url,document_pages,postcard_group,postcard_side,is_person_photo,media_subject_type) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')->execute([$mediaTitle,$mediaType,$stored,$mediaType==='image'?$stored:'',$documentReference,$documentTitle,$documentUrl,$documentPages,$postcardGroup,$postcardSide,$isPersonPhoto,$mediaSubjectType]);$mediaId=(int)$pdo->lastInsertId();
             $entityTypeOverride=safe_text($_POST['entity_type_override']??'');$allowedOverrides=['military'];
-            if($archiveDigestId){
+            if($collectionType){
+                $pdo->prepare('INSERT INTO family_collection_media(collection_type,collection_id,media_id,position) VALUES(?,?,?,?)')->execute([$collectionType,$collectionId,$mediaId,$i]);
+            }elseif($archiveDigestId){
                 $pdo->prepare('INSERT INTO archive_digest_media(archive_digest_id,media_id,page_number) VALUES(?,?,?)')->execute([$archiveDigestId,$mediaId,$archiveDigestPageNumber]);
             }else{
                 $entityType=$battueItemId?'battue_item':($entityTypeOverride&&in_array($entityTypeOverride,$allowedOverrides,true)?'person':($censusId?'census':($eventId?'event':'person')));$entityId=$battueItemId?:($entityTypeOverride==='military'?$personId:($censusId?:($eventId?:$personId)));$pdo->prepare('INSERT INTO media_links(media_id,entity_type,entity_id,position) VALUES(?,?,?,?)')->execute([$mediaId,$entityType,$entityId,microtime(true)]);
@@ -76,7 +82,8 @@ try {
             $created[]=$mediaId;
             if($investigationId){$pdo->prepare('INSERT INTO investigation_media(investigation_id,media_id,verdict,reason,folder_id) VALUES(?,?,?,?,?)')->execute([$investigationId,$mediaId,($_POST['investigation_verdict']??'interesting')==='rejected'?'rejected':'interesting',safe_text($_POST['investigation_reason']??''),$investigationFolderId]);$linkId=(int)$pdo->lastInsertId();$checkItem=$pdo->prepare('SELECT 1 FROM investigation_items WHERE id=? AND investigation_id=?');$linkItem=$pdo->prepare('INSERT OR IGNORE INTO investigation_media_items(investigation_media_id,investigation_item_id) VALUES(?,?)');foreach((array)($_POST['investigation_item_ids']??[]) as $itemId){$itemId=safe_int($itemId);$checkItem->execute([$itemId,$investigationId]);if($itemId&&$checkItem->fetchColumn())$linkItem->execute([$linkId,$itemId]);}}
         }
-        if($battueItemId)log_change($pdo,'battue_item',$battueItemId,'upload',count($created).' média(s) ajouté(s)');
+        if($collectionType)log_change($pdo,$collectionType,$collectionId,'upload',count($created).' média(s) ajouté(s)');
+        else if($battueItemId)log_change($pdo,'battue_item',$battueItemId,'upload',count($created).' média(s) ajouté(s)');
         else if($archiveDigestId)log_change($pdo,'archive_digest',$archiveDigestId,'upload',count($created).' média(s) ajouté(s)');
         else log_change($pdo,'person',$personId,'upload',count($created).' média(s) ajouté(s)');
         $pdo->commit();json_response(['ok'=>true,'media'=>$created]);
