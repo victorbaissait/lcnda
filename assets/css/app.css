@@ -3499,3 +3499,7 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .battue-countries { margin-bottom: 18px; }
 .check-row-list { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 10px 0 4px; }
 .battue-countries-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.battue-country-group { border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent); padding: 8px 0; }
+.battue-country-group > summary { cursor: pointer; font-weight: 700; padding: 4px 0; }
+.battue-country-group > summary small { font-weight: 600; opacity: .7; margin-left: 6px; }
+.battue-country-group .battue-countries-actions { margin: 6px 0 4px; }

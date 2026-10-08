@@ -243,7 +243,14 @@ function reference_countries_available(): array
             'IT' => 'Italie', 'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français', 'CZ' => 'Tchéquie',
             'SK' => 'Slovaquie', 'PL' => 'Pologne', 'NL' => 'Pays-Bas', 'SI' => 'Slovénie', 'HU' => 'Hongrie', 'PT' => 'Portugal',
             'HR' => 'Croatie', 'BA' => 'Bosnie-Herzégovine', 'AD' => 'Andorre', 'MC' => 'Monaco', 'SM' => 'Saint-Marin',
-            'VA' => 'Vatican', 'QC' => 'Québec (Canada)'][$cc] ?? $cc;
+            'VA' => 'Vatican', 'QC' => 'Québec (Canada)', 'US' => 'États-Unis', 'GB' => 'Royaume-Uni', 'IE' => 'Irlande', 'FI' => 'Finlande',
+            'AU' => 'Australie', 'EE' => 'Estonie', 'LV' => 'Lettonie', 'LT' => 'Lituanie', 'SE' => 'Suède', 'NO' => 'Norvège', 'IS' => 'Islande',
+            'DK' => 'Danemark', 'BG' => 'Bulgarie', 'GR' => 'Grèce', 'TR' => 'Turquie', 'UA' => 'Ukraine', 'BY' => 'Biélorussie', 'GE' => 'Géorgie',
+            'AM' => 'Arménie', 'AZ' => 'Azerbaïdjan', 'ME' => 'Monténégro', 'MK' => 'Macédoine du Nord', 'AL' => 'Albanie', 'XK' => 'Kosovo',
+            'RS' => 'Serbie', 'RO' => 'Roumanie', 'MT' => 'Malte', 'CY' => 'Chypre', 'NZ' => 'Nouvelle-Zélande', 'MX' => 'Mexique',
+            'GT' => 'Guatemala', 'BZ' => 'Belize', 'SV' => 'Salvador', 'HN' => 'Honduras', 'NI' => 'Nicaragua', 'CR' => 'Costa Rica',
+            'PA' => 'Panama', 'DZ' => 'Algérie', 'MA' => 'Maroc', 'TN' => 'Tunisie', 'LB' => 'Liban', 'JO' => 'Jordanie',
+            'NC' => 'Nouvelle-Calédonie', 'PF' => 'Polynésie française', 'CA' => 'Canada (hors Québec)', 'WF' => 'Wallis-et-Futuna'][$cc] ?? $cc;
     }
     asort($out);
     return $out;

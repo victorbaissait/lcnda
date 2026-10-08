@@ -26,10 +26,10 @@ declare(strict_types=1);
  * Codes : préfixés par le pays (« BE-57081 », « DE-08311000 ») pour ne jamais se confondre avec un code INSEE.
  * La France, outre-mer compris, garde ses codes INSEE (97101 = Les Abymes).
  *
- *   php -d memory_limit=8G scripts/build-reference-europe.php
+ *   php scripts/build-reference-europe.php        (plusieurs dizaines de minutes, ~25 Go de mémoire)
  */
 
-ini_set('memory_limit', '8192M');
+ini_set('memory_limit', getenv('LCNDA_BUILD_MEMORY') ?: '40G'); // ~25 Go avec tous les pays
 require __DIR__ . '/../lib/text.php';
 $root = dirname(__DIR__);
 $cache = $root . '/vendor/geo/.cache';
@@ -172,17 +172,19 @@ function osm_polygons(array $rel): array
     $key = static fn(array $p): string => $p[0] . ',' . $p[1];
     $rings = [];
     foreach ($ways as $role => $list) {
-        while ($list) {
-            $ring = array_shift($list);
+        // Index des extrémités : chemin => ses deux bouts (raccordement en temps linéaire, même pour des milliers de tronçons)
+        $byEnd = []; $used = [];
+        foreach ($list as $i => $w) { $byEnd[$key($w[0])][] = $i; $byEnd[$key(end($w))][] = $i; }
+        foreach ($list as $start => $first) {
+            if (isset($used[$start])) { continue; }
+            $used[$start] = true; $ring = $first;
             while ($key($ring[0]) !== $key(end($ring))) {
-                $found = false;
-                foreach ($list as $i => $w) {
-                    if ($key($w[0]) === $key(end($ring))) { array_pop($ring); $ring = array_merge($ring, $w); }
-                    elseif ($key(end($w)) === $key(end($ring))) { array_pop($ring); $ring = array_merge($ring, array_reverse($w)); }
-                    else { continue; }
-                    unset($list[$i]); $found = true; break;
-                }
-                if (!$found) { $ring[] = $ring[0]; break; } // anneau incomplet dans OSM : refermé tel quel
+                $tail = $key(end($ring)); $next = null;
+                foreach ($byEnd[$tail] ?? [] as $i) { if (!isset($used[$i])) { $next = $i; break; } }
+                if ($next === null) { $ring[] = $ring[0]; break; } // anneau incomplet dans OSM : refermé tel quel
+                $used[$next] = true; $w = $list[$next];
+                array_pop($ring);
+                $ring = array_merge($ring, $key($w[0]) === $tail ? $w : array_reverse($w));
             }
             if (count($ring) >= 4) { $rings[$role][] = $ring; }
         }
@@ -419,9 +421,19 @@ function neighbors_by_distance(array $communes, float $tolerance, ?callable $onl
 $countryNames = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg', 'DE' => 'Allemagne', 'IT' => 'Italie',
     'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français', 'CZ' => 'Tchéquie', 'SK' => 'Slovaquie', 'PL' => 'Pologne',
     'NL' => 'Pays-Bas', 'SI' => 'Slovénie', 'HU' => 'Hongrie', 'PT' => 'Portugal', 'HR' => 'Croatie', 'BA' => 'Bosnie-Herzégovine',
-    'AD' => 'Andorre', 'MC' => 'Monaco', 'SM' => 'Saint-Marin', 'VA' => 'Vatican', 'QC' => 'Québec', 'FR' => 'France'];
+    'AD' => 'Andorre', 'MC' => 'Monaco', 'SM' => 'Saint-Marin', 'VA' => 'Vatican', 'QC' => 'Québec', 'FR' => 'France',
+    'US' => 'États-Unis', 'GB' => 'Royaume-Uni', 'IE' => 'Irlande', 'FI' => 'Finlande', 'AU' => 'Australie', 'EE' => 'Estonie', 'LV' => 'Lettonie',
+    'LT' => 'Lituanie', 'SE' => 'Suède', 'NO' => 'Norvège', 'IS' => 'Islande', 'DK' => 'Danemark', 'BG' => 'Bulgarie', 'GR' => 'Grèce',
+    'TR' => 'Turquie', 'UA' => 'Ukraine', 'BY' => 'Biélorussie', 'GE' => 'Géorgie', 'AM' => 'Arménie', 'AZ' => 'Azerbaïdjan',
+    'ME' => 'Monténégro', 'MK' => 'Macédoine du Nord', 'AL' => 'Albanie', 'XK' => 'Kosovo', 'RS' => 'Serbie', 'RO' => 'Roumanie',
+    'MT' => 'Malte', 'CY' => 'Chypre', 'NZ' => 'Nouvelle-Zélande', 'MX' => 'Mexique', 'GT' => 'Guatemala', 'BZ' => 'Belize',
+    'SV' => 'Salvador', 'HN' => 'Honduras', 'NI' => 'Nicaragua', 'CR' => 'Costa Rica', 'PA' => 'Panama', 'DZ' => 'Algérie', 'MA' => 'Maroc',
+    'TN' => 'Tunisie', 'LB' => 'Liban', 'JO' => 'Jordanie', 'NC' => 'Nouvelle-Calédonie', 'PF' => 'Polynésie française', 'CA' => 'Canada (hors Québec)',
+    'WF' => 'Wallis-et-Futuna'];
 // Pays des lieux (« Québec » est une province du Canada, l'outre-mer est la France)
-$placeCountryOf = static fn(string $cc): string => ['OM' => 'France', 'QC' => 'Canada'][$cc] ?? $countryNames[$cc];
+$placeCountryOf = static fn(string $cc): string => ['OM' => 'France', 'QC' => 'Canada', 'CA' => 'Canada', 'NC' => 'France', 'PF' => 'France', 'WF' => 'France'][$cc] ?? $countryNames[$cc];
+// Grandes unités (comtés, districts, communes suédoises…) : un village garde son nom, l'unité devient le « comté » du lieu
+$coarse = array_flip(['US', 'AU', 'FI', 'SE', 'NO', 'IS', 'DK', 'EE', 'BG', 'GR', 'TR', 'UA', 'GE', 'ME', 'MK', 'RS', 'NZ', 'MX', 'GT', 'HN', 'SV', 'NI', 'BZ', 'AM', 'AZ', 'LB', 'JO', 'TN']);
 $sources = [
     'BE' => 'Communes 2025 : IGN-NGI (Institut géographique national belge, licence ouverte), via ODWB',
     'CH' => 'swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)', 'LI' => 'swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)',
@@ -434,7 +446,13 @@ $sources = [
     'PL' => 'Państwowy Rejestr Granic © GUGiK (données libres)', 'NL' => 'Bestuurlijke Gebieden © Kadaster / PDOK (CC BY 4.0)',
     'SI' => 'Register prostorskih enot © GURS (CC BY 4.0)', 'HU' => 'Magyarország Közigazgatási Határai © Lechner Tudásközpont',
     'QC' => 'Découpages administratifs (SDA 1:20 000) © Gouvernement du Québec (CC BY 4.0)',
-] + array_fill_keys(['PT', 'HR', 'BA', 'AD', 'MC', 'SM', 'VA'], '© les contributeurs d’OpenStreetMap (ODbL 1.0)');
+    'US' => 'Cartographic Boundary Files 2024 (comtés) – U.S. Census Bureau (domaine public)',
+    'GB' => 'Parishes 2026 © ONS, contains OS data © Crown copyright (OGL v3) ; civil parishes © National Records of Scotland (OGL v3)',
+    'IE' => 'Civil Parishes – National Statutory Boundaries 2026 © Tailte Éireann (CC BY 4.0)',
+    'FI' => 'Kunnat 2025 © Tilastokeskus / Statistics Finland (CC BY 4.0)', 'AU' => 'Local Government Areas 2024 © Australian Bureau of Statistics (CC BY 4.0)',
+] + array_fill_keys(['PT', 'HR', 'BA', 'AD', 'MC', 'SM', 'VA', 'EE', 'LV', 'LT', 'SE', 'NO', 'IS', 'DK', 'BG', 'GR', 'TR', 'UA', 'BY', 'GE', 'AM', 'AZ',
+    'ME', 'MK', 'AL', 'XK', 'RS', 'RO', 'MT', 'CY', 'NZ', 'MX', 'GT', 'BZ', 'SV', 'HN', 'NI', 'CR', 'PA', 'DZ', 'MA', 'TN', 'LB', 'JO', 'NC', 'PF', 'CA', 'WF'],
+    '© les contributeurs d’OpenStreetMap (ODbL 1.0)');
 $countries = [];
 $add = static function (string $cc, string $code, string $name, string $county, string $state, array $polys, string $alt = '') use (&$countries): void {
     if (!$polys || $name === '') { return; }
@@ -564,10 +582,25 @@ foreach (shapefile_records("{$cache}/hu/AdministrativeUnits.shp", static fn(floa
     if ($a['namespace'] === 'HU.AU.CY') { $huCounties[$a['namn']] = $polys; }
     elseif ($a['namespace'] === 'HU.AU.ST') { $huSettlements[] = [$a, $polys]; }
 }
+/** Nom de la zone (parmi $areas) qui contient un point intérieur de $polys ; rectangles englobants mis en cache. */
 $containing = static function (array $polys, array $areas): string {
+    static $boxes = [];
     $b = bounds($polys); [$x, $y] = [($b[0] + $b[2]) / 2, ($b[1] + $b[3]) / 2];
-    foreach ($polys as $poly) { foreach ($poly[0] as $pt) { if (point_in_polygons(($pt[0] + $x) / 2, ($pt[1] + $y) / 2, [$poly])) { [$x, $y] = [($pt[0] + $x) / 2, ($pt[1] + $y) / 2]; break 2; } } }
-    foreach ($areas as $name => $area) { if (point_in_polygons($x, $y, $area)) { return (string) $name; } }
+    // Point intérieur : milieu entre le centre et un point du contour (au plus 24 essais répartis le long du contour)
+    foreach ($polys as $poly) {
+        $ring = $poly[0]; $step = max(1, intdiv(count($ring), 24));
+        for ($i = 0, $n = count($ring); $i < $n; $i += $step) {
+            [$px, $py] = [($ring[$i][0] + $x) / 2, ($ring[$i][1] + $y) / 2];
+            if (point_in_polygons($px, $py, [$poly])) { [$x, $y] = [$px, $py]; break 2; }
+        }
+    }
+    foreach ($areas as $name => $area) {
+        if (!$area) { continue; }
+        $k = $name . '|' . count($area) . '|' . count($area[0][0]) . '|' . implode(',', $area[0][0][0]);
+        $box = $boxes[$k] ??= bounds($area);
+        if ($x < $box[0] || $x > $box[2] || $y < $box[1] || $y > $box[3]) { continue; }
+        if (point_in_polygons($x, $y, $area)) { return (string) $name; }
+    }
     return '';
 };
 foreach ($huSettlements as [$a, $polys]) {
@@ -626,6 +659,152 @@ foreach ($qc->query('SELECT MUS_CO_GEO, MUS_NM_MUN, MUS_NM_MRC, geom FROM munic_
     $add('QC', 'QC-' . $r['MUS_CO_GEO'], (string) $r['MUS_NM_MUN'], (string) $r['MUS_NM_MRC'], 'Québec', gpkg_polygons($r['geom'], static fn(float $x, float $y) => [round($x, 6), round($y, 6)]));
 }
 $qc = null;
+// ─── Autres continents et reste de l'Europe ───
+
+// États-Unis : comtés (Census Bureau, NAD83 ≈ GPS)
+foreach (shapefile_records("{$cache}/us/cb_2024_us_county_500k.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
+    $add('US', 'US-' . $a['GEOID'], $a['NAMELSAD'], '', $a['STATE_NAME'], $polys);
+}
+// Finlande : communes (Statistics Finland, service web en GPS ; nom finnois, nom suédois en variante)
+$fi = json_decode((string) file_get_contents("{$cache}/fi/kunnat.json"), true, 512, JSON_THROW_ON_ERROR);
+foreach ($fi['features'] as $f) { $p = $f['properties']; $add('FI', 'FI-' . $p['kunta'], $p['nimi'], '', '', geojson_polygons($f['geometry']), $p['namn'] !== $p['nimi'] ? (string) $p['namn'] : ''); }
+unset($fi);
+// Australie : collectivités locales (ABS, GDA2020 ≈ GPS) ; les zones « non incorporées » ou sans adresse sont gardées
+foreach (shapefile_records("{$cache}/au/LGA_2024_AUST_GDA2020.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
+    $add('AU', 'AU-' . $a['LGA_CODE24'], (string) $a['LGA_NAME24'], '', (string) $a['STE_NAME21'], $polys);
+}
+// Irlande : paroisses civiles (Tailte Éireann) ; une paroisse coupée par une limite de comté est regroupée par son identifiant
+$ieCounties = []; foreach (osm_elements("{$cache}/osm/IE-6.json") as $e) { $ieCounties[preg_replace('/^County /u', '', (string) ($e['tags']['name:en'] ?? $e['tags']['name']))] = osm_polygons($e); }
+foreach (glob("{$cache}/ie/parishes-*.geojson") as $file) {
+    foreach (json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'] as $f) {
+        $p = $f['properties']; $polys = geojson_polygons($f['geometry'] ?? []);
+        if (!$polys) { continue; }
+        $name = mb_convert_case(trim((string) preg_replace('/^Part of /i', '', (string) $p['ENG_NAME_VALUE'])), MB_CASE_TITLE);
+        $add('IE', 'IE-' . (int) $p['BDY_ID'], $name, $containing($polys, $ieCounties), '', $polys, trim((string) preg_replace('/^Cuid de /u', '', (string) $p['GLE_NAME_VALUE'])));
+    }
+}
+// Royaume-Uni : paroisses d'Angleterre et du pays de Galles (ONS) et paroisses civiles d'Écosse (NRS)
+foreach (glob("{$cache}/gb/parishes-*.geojson") as $file) {
+    foreach (json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'] as $f) {
+        $p = $f['properties'];
+        $welsh = trim((string) $p['PARNCP26NW']);
+        $add('GB', 'GB-' . $p['PARNCP26CD'], (string) $p['PARNCP26NM'], (string) $p['LAD26NM'], str_starts_with((string) $p['PARNCP26CD'], 'W') ? 'Wales' : 'England',
+            geojson_polygons($f['geometry'] ?? []), $welsh !== '' && $welsh !== $p['PARNCP26NM'] ? $welsh : '');
+    }
+}
+foreach (glob("{$cache}/gb/scotland-parishes-*.geojson") as $file) {
+    foreach (json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'] as $f) {
+        $add('GB', 'GB-SCP' . $f['properties']['code'], (string) $f['properties']['name'], '', 'Scotland', geojson_polygons($f['geometry'] ?? []));
+    }
+}
+
+// Pays décrits par OpenStreetMap : [fichier, niveau des communes, niveaux qui comblent les vides, niveau « comté », niveau « région »]
+$osmCountries = [
+    'EE' => ['EE-76', '7', [], '6', ''], 'SE' => ['SE-74', '7', [], '', '4'], 'NO' => ['NO-74', '7', [], '', '4'], 'IS' => ['IS-65', '6', [], '', '5'],
+    'DK' => ['DK-74', '7', [], '', '4'], 'BG' => ['BG-54', '5', [], '', '4'], 'GR' => ['GR-75', '7', [], '', '5'], 'TR' => ['TR-64', '6', [], '', '4'],
+    'UA' => ['UA-74', '7', [], '', '4'], 'GE' => ['GE-64', '6', [], '', '4'], 'ME' => ['ME-6', '6', [], '', ''], 'MK' => ['MK-7', '7', [], '', ''],
+    'AL' => ['AL-86', '8', ['6'], '6', ''], 'RS' => ['RS-876', '8', ['7'], '6', ''], 'LT' => ['LT-654', '6', ['5'], '5', '4'],
+    'LV' => ['LV-875', '8', ['7', '5'], '5', ''], 'RO' => ['RO-84', '8', [], '4', ''], 'MT' => ['MT-8', '8', [], '', ''], 'CY' => ['CY-86', '8', ['6'], '6', ''],
+    'NZ' => ['NZ-64', '6', [], '', '4'], 'MX' => ['MX-64', '6', [], '', '4'], 'GT' => ['GT-64', '6', [], '', '4'], 'HN' => ['HN-64', '6', [], '', '4'],
+    'SV' => ['SV-64', '6', [], '', '4'], 'NI' => ['NI-64', '6', [], '', '4'], 'CR' => ['CR-864', '8', ['6'], '6', '4'], 'PA' => ['PA-864', '8', ['6'], '6', '4'],
+    'DZ' => ['DZ-84', '8', [], '', '4'], 'MA' => ['MA-84', '8', [], '', '4'], 'BY' => ['BY-864', '8', ['6'], '6', '4'],
+    'AM' => ['AM-54', '5', [], '', '4'], 'AZ' => ['AZ-6', '6', [], '', ''], 'XK' => ['XK-65', '6', [], '5', ''], 'TN' => ['TN-54', '5', [], '', '4'],
+    'LB' => ['LB-754', '7', ['5'], '5', '4'], 'JO' => ['JO-654', '6', ['5'], '5', '4'], 'BZ' => ['BZ-4', '4', [], '', ''],
+    'NC' => ['FR-NC-8', '8', [], '', ''], 'PF' => ['FR-PF-8', '8', [], '', ''], 'WF' => ['FR-WF-87', '8', ['7'], '', ''],
+    // Canada hors Québec (le Québec vient de sa source officielle) : une province par fichier, « CA-NB-86 »…
+    'CA' => ['CA-*-86', '8', ['6'], '6', ''],
+];
+// Organisation propre à chaque province dans OSM : [niveaux des communes (tous gardés), niveaux qui comblent les vides]
+$caLevels = ['NB' => [['8'], []], 'NS' => [['6'], []], 'PE' => [['8'], ['6']], 'ON' => [['8'], ['6']], 'MB' => [['6'], []], 'NL' => [['6'], []],
+    'SK' => [['8', '6'], []], 'AB' => [['6'], []], 'BC' => [['6'], []]];
+$caProvinces = ['NB' => 'Nouveau-Brunswick', 'NS' => 'Nouvelle-Écosse', 'PE' => 'Île-du-Prince-Édouard', 'ON' => 'Ontario', 'MB' => 'Manitoba',
+    'NL' => 'Terre-Neuve-et-Labrador', 'SK' => 'Saskatchewan', 'AB' => 'Alberta', 'BC' => 'Colombie-Britannique'];
+/** Translittération officielle du cyrillique : ukrainien (KMU 2010), bulgare (2009), sinon russe/biélorusse simplifié. */
+function cyrillic_to_latin(string $text, string $lang): string
+{
+    $map = ['а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g', 'ґ' => 'g', 'д' => 'd', 'е' => 'e', 'ё' => 'e', 'є' => 'ie', 'ж' => 'zh', 'з' => 'z',
+        'и' => 'i', 'і' => 'i', 'ї' => 'i', 'й' => 'i', 'к' => 'k', 'л' => 'l', 'м' => 'm', 'н' => 'n', 'о' => 'o', 'п' => 'p', 'р' => 'r',
+        'с' => 's', 'т' => 't', 'у' => 'u', 'ў' => 'u', 'ф' => 'f', 'х' => 'kh', 'ц' => 'ts', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'shch', 'ъ' => '',
+        'ы' => 'y', 'ь' => '', 'э' => 'e', 'ю' => 'iu', 'я' => 'ia', '’' => '', 'ʼ' => '', "'" => ''];
+    if ($lang === 'uk') { $map = ['г' => 'h', 'и' => 'y', 'й' => 'i'] + $map; }
+    if ($lang === 'bg') { $map = ['щ' => 'sht', 'ъ' => 'a', 'ю' => 'yu', 'я' => 'ya', 'й' => 'y', 'х' => 'h', 'ь' => 'y'] + $map; }
+    $out = '';
+    foreach (mb_str_split($text) as $i => $ch) {
+        $lower = mb_strtolower($ch);
+        if (!isset($map[$lower])) { $out .= $ch; continue; }
+        $latin = $map[$lower];
+        // ukrainien : є, ї, ю, я, й en début de mot s'écrivent ye, yi, yu, ya, y
+        if ($lang === 'uk' && ($i === 0 || !preg_match('/\p{L}/u', mb_substr($text, $i - 1, 1)))) {
+            $latin = ['є' => 'ye', 'ї' => 'yi', 'ю' => 'yu', 'я' => 'ya', 'й' => 'y'][$lower] ?? $latin;
+        }
+        $out .= $lower !== $ch ? mb_convert_case($latin, MB_CASE_TITLE) : $latin;
+    }
+    return $out;
+}
+/** Nom lisible : écriture latine telle quelle, sinon nom français, latin ou anglais, sinon translittéré (le nom local reste en variante). */
+$osmName = static function (array $tags, string $cc = '') use ($stripPrefix): array {
+    $local = trim((string) ($tags['name'] ?? ''));
+    $clean = static fn(string $n): string => trim((string) preg_replace(['/^(Municipality of|Municipalité de|Municipalité d’|Municipalité d\'|Municipio de|Municipio|Distrito de|Dimos|Comuna|Oraș|Orașul|Municipiul)\s+/u',
+        '/\s+(kommun|kommune|municipality|municipal district|community)$/iu'], '', $stripPrefix($n)));
+    $latin = static fn(string $n): bool => (bool) preg_match('/^[\p{Latin}\p{Common}\p{Inherited}]+$/u', $n);
+    if ($local !== '' && $latin($local)) { return [$clean($local), '']; }
+    foreach (['name:fr', 'name:sr-Latn', 'name:en', 'int_name', 'name:latin', 'name:uk-Latn', 'name:be-Latn', 'name:bg-Latn'] as $k) {
+        if (!empty($tags[$k]) && $latin((string) $tags[$k])) { return [$clean((string) $tags[$k]), $local]; }
+    }
+    if (preg_match('/\p{Cyrillic}/u', $local)) { return [$clean(cyrillic_to_latin($local, ['UA' => 'uk', 'BG' => 'bg'][$cc] ?? 'ru')), $local]; }
+    return [$clean($local), ''];
+};
+foreach ($osmCountries as $cc => [$file, $level, $fill, $countyLevel, $stateLevel]) {
+  $paths = glob("{$cache}/osm/{$file}.json");
+  if (!$paths) { echo "  (pas de fichier {$file}.json : {$countryNames[$cc]} ignoré)\n"; continue; }
+  foreach ($paths as $path) {
+    $fixedState = $cc === 'CA' && preg_match('/CA-([A-Z]{2})-/', $path, $pm) ? ($caProvinces[$pm[1]] ?? '') : '';
+    // La zone d'Overpass renvoie aussi les unités des pays voisins qui touchent la frontière : on ne garde que celles dont
+    // un point intérieur est dans le contour du pays (ou de la province).
+    $outlineKey = $cc === 'CA' ? 'CA-' . ($pm[1] ?? '') : $cc;
+    $outline = [];
+    // Îles (Nouvelle-Calédonie, Polynésie, Wallis-et-Futuna) : aucun voisin terrestre, et leur contour OSM n'englobe pas toutes les îles
+    if (!in_array($cc, ['NC', 'PF', 'WF'], true)) {
+        foreach (is_file("{$cache}/osm/{$outlineKey}-pays.json") ? osm_elements("{$cache}/osm/{$outlineKey}-pays.json") : [] as $e) { foreach (osm_polygons($e) as $poly) { $outline[] = $poly; } }
+        if (!$outline) { echo "  (contour de {$outlineKey} absent : unités non filtrées)\n"; }
+    }
+    $fineLevels = [$level];
+    if ($cc === 'CA' && isset($caLevels[$pm[1] ?? ''])) { [$fineLevels, $fill] = $caLevels[$pm[1]]; }
+    $outside = 0;
+    $byLevel = [];
+    foreach (osm_elements($path) as $e) { $byLevel[(string) ($e['tags']['admin_level'] ?? '')][] = $e; }
+    $parents = static function (string $l) use (&$byLevel, $osmName, $cc): array {
+        $out = []; foreach ($byLevel[$l] ?? [] as $e) { $out[$osmName($e['tags'], $cc)[0]] = osm_polygons($e); } return $out;
+    };
+
+    $counties = $countyLevel !== '' && !in_array($countyLevel, $fineLevels, true) ? $parents($countyLevel) : [];
+    $states = $stateLevel !== '' ? $parents($stateLevel) : [];
+    $kept = [];
+    foreach ([...$fineLevels, ...$fill] as $i => $l) {
+        foreach ($byLevel[$l] ?? [] as $e) {
+            $polys = osm_polygons($e);
+            if (!$polys) { continue; }
+            if ($outline && $containing($polys, ['in' => $outline]) !== 'in') { $outside++; continue; }
+            if ($i >= count($fineLevels)) { // niveau supérieur : seulement là où aucune commune n'existe (grandes villes non découpées…)
+                $covered = false;
+                foreach ($kept as $k) { if ($containing($k, ['in' => $polys]) === 'in') { $covered = true; break; } }
+                if ($covered) { continue; }
+            }
+            [$name, $alt] = $osmName($e['tags'], $cc);
+            $code = in_array($cc, ['NC', 'PF', 'WF'], true) && !empty($e['tags']['ref:INSEE']) ? $cc . '-' . $e['tags']['ref:INSEE'] : $cc . '-' . $e['id'];
+            $add($cc, $code, $name, $counties ? $containing($polys, $counties) : '', $fixedState ?: ($states ? $containing($polys, $states) : ''), $polys, $alt);
+            $kept[] = $polys;
+        }
+    }
+    if ($outside) { echo "  {$outlineKey} : {$outside} unité(s) d'un pays voisin écartée(s)\n"; }
+  }
+}
+foreach (['FR-PM' => 'Saint-Pierre-et-Miquelon', 'FR-BL' => 'Saint-Barthélemy', 'FR-MF' => 'Saint-Martin'] as $file => $territory) {
+    foreach (is_file("{$cache}/osm/{$file}-8.json") ? osm_elements("{$cache}/osm/{$file}-8.json") : [] as $e) {
+        $insee = (string) ($e['tags']['ref:INSEE'] ?? '');
+        if (preg_match('/^97[578]\d\d$/', $insee)) { $add('OM', $insee, (string) $e['tags']['name'], $territory, $territory, osm_polygons($e)); }
+    }
+}
 foreach ($countries as $cc => $list) { printf("%-20s %6d communes\n", $countryNames[$cc], count($list)); }
 
 // ─── Voisinages internes ─────────────────────────────────────────────────────────────────────
@@ -698,9 +877,10 @@ function geonames_place_key(string $cc, array $r): string
         'LU' => 'a2:' . ($r[10] ?? '') . '.' . ($r[11] ?? ''), 'LI' => 'a1:' . ($r[10] ?? ''), default => '',
     };
 }
-$geonamesFiles = ['BE' => ['BE'], 'CH' => ['CH'], 'LI' => ['LI'], 'LU' => ['LU'], 'DE' => ['DE'], 'IT' => ['IT'], 'AT' => ['AT'], 'ES' => ['ES'], 'OM' => ['GP', 'MQ', 'GF', 'RE', 'YT'],
+$geonamesFiles = ['BE' => ['BE'], 'CH' => ['CH'], 'LI' => ['LI'], 'LU' => ['LU'], 'DE' => ['DE'], 'IT' => ['IT'], 'AT' => ['AT'], 'ES' => ['ES'], 'OM' => ['GP', 'MQ', 'GF', 'RE', 'YT', 'PM', 'BL', 'MF'],
     'CZ' => ['CZ'], 'SK' => ['SK'], 'PL' => ['PL'], 'NL' => ['NL'], 'SI' => ['SI'], 'HU' => ['HU'], 'PT' => ['PT'], 'HR' => ['HR'], 'BA' => ['BA'],
     'AD' => ['AD'], 'MC' => ['MC'], 'SM' => ['SM'], 'VA' => ['VA'], 'QC' => ['CA']];
+foreach (array_keys($countries) as $cc) { if (!isset($geonamesFiles[$cc]) && is_file("{$cache}/geonames-{$cc}.zip")) { $geonamesFiles[$cc] = [$cc]; } }
 $places = [];
 foreach ($geonamesFiles as $cc => $files) {
     $byName = []; foreach ($countries[$cc] as $code => $c) { $byName[$fold($c['name'])] = $code; }
@@ -715,7 +895,7 @@ foreach ($geonamesFiles as $cc => $files) {
         $zip = "{$cache}/geonames-{$gn}.zip";
         $communeOf = [];
         foreach (geonames_rows($zip, $gn) as $r) {
-            if (($r[6] ?? '') !== 'A' || ($cc === 'QC' && ($r[10] ?? '') !== '10')) { continue; }
+            if (($r[6] ?? '') !== 'A' || ($cc === 'QC' && ($r[10] ?? '') !== '10') || ($cc === 'CA' && ($r[10] ?? '') === '10')) { continue; }
             if ($cc === 'AT' && ($r[7] ?? '') === 'ADM2') { $atDistricts[$r[11]] = preg_replace('/^Politischer Bezirk /u', '', $r[1]); }
             $key = geonames_commune_key($gn, $r);
             if ($key === null && $cc === 'LU' && ($r[7] ?? '') === 'ADM2') { $key = $byName[$fold($r[1])] ?? null; }
@@ -727,7 +907,7 @@ foreach ($geonamesFiles as $cc => $files) {
             }
         }
         foreach (geonames_rows($zip, $gn) as $r) {
-            if (($r[6] ?? '') !== 'P' || (int) ($r[0] ?? 0) === 0 || ($cc === 'QC' && ($r[10] ?? '') !== '10')) { continue; }
+            if (($r[6] ?? '') !== 'P' || (int) ($r[0] ?? 0) === 0 || ($cc === 'QC' && ($r[10] ?? '') !== '10') || ($cc === 'CA' && ($r[10] ?? '') === '10')) { continue; }
             $code = $communeOf[geonames_place_key($gn, $r)] ?? null;
             if ($code === null) {
                 [$lx, $ly] = [(float) $r[5], (float) $r[4]];
@@ -738,9 +918,14 @@ foreach ($geonamesFiles as $cc => $files) {
             if ($code === null) { $unmapped++; }
             $c = $code ? $countries[$cc][$code] : null;
             $raw = $r[1];
-            [$name, $sub] = ($c && $fold($c['name']) !== $fold($raw)) ? [$c['name'], $raw] : [$c['name'] ?? $raw, ''];
+            if (isset($coarse[$cc])) { // grande unité : « Chicago, Cook County, Illinois »
+                [$name, $sub, $county] = [$raw, '', $c['name'] ?? ''];
+            } else {
+                [$name, $sub] = ($c && $fold($c['name']) !== $fold($raw)) ? [$c['name'], $raw] : [$c['name'] ?? $raw, ''];
+                $county = $c['county'] ?? '';
+            }
             $placeCountry = $placeCountryOf($cc);
-            $places[$cc][] = [(int) $r[0], $name, $sub, $c['county'] ?? '', $c['state'] ?? '', $placeCountry, mb_substr($r[3] ?? '', 0, 500), (float) $r[4], (float) $r[5], $code ?? '', $r[7], (int) ($r[14] ?? 0)];
+            $places[$cc][] = [(int) $r[0], $name, $sub, $county, $c['state'] ?? '', $placeCountry, mb_substr($r[3] ?? '', 0, 500), (float) $r[4], (float) $r[5], $code ?? '', $r[7], (int) ($r[14] ?? 0)];
             if ($code) { $seen[$code] = true; }
         }
     }

@@ -288,11 +288,11 @@ async function download(s, base, action) {
         assert.ok(rhinNames.includes('Kehl'), 'Strasbourg → Kehl : ' + rhinNames.join(', '));
         // Outre-mer : codes INSEE sans préfixe, pays France ; retrait limité aux codes 97…
         const om = await post('set_reference_country', { country: 'OM', enabled: true });
-        assert.equal(om.communes, 129);
+        assert.equal(om.communes, 133); // DOM + Saint-Pierre-et-Miquelon, Saint-Barthélemy, Saint-Martin
         const abymes = (await get('commune_suggestions&q=Abymes')).communes[0];
         assert.equal(abymes.insee_code, '97101');
         const omOff = await post('set_reference_country', { country: 'OM', enabled: false });
-        assert.equal(omOff.communes, 129);
+        assert.equal(omOff.communes, 133);
       });
     } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; }
     const db = path.join(dir, 'data', 'genealogy.sqlite');

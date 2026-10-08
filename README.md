@@ -77,7 +77,12 @@ Ces composants gardent leur propre licence :
 | Communes de Slovénie (RPE, © [GURS](https://www.e-prostor.gov.si/)) | battues (`geo-si`) | CC BY 4.0 |
 | Communes de Hongrie (MKH, © [Lechner Tudásközpont](https://lechnerkozpont.hu/)) | battues (`geo-hu`) | libre accès et usage |
 | Municipalités du Québec (SDA, © [Gouvernement du Québec](https://www.donneesquebec.ca/)) | battues (`geo-qc`) | CC BY 4.0 |
-| Communes du Portugal, de Croatie, de Bosnie-Herzégovine, d'Andorre, de Monaco, de Saint-Marin et du Vatican (© les contributeurs d'[OpenStreetMap](https://www.openstreetmap.org/copyright)) | battues (`geo-pt`, `geo-hr`, `geo-ba`, `geo-ad`, `geo-mc`, `geo-sm`, `geo-va`) | [ODbL 1.0](https://opendatacommons.org/licenses/odbl/) : ces fichiers restent sous ODbL |
+| Comtés des États-Unis ([U.S. Census Bureau](https://www.census.gov/), Cartographic Boundary Files) | battues (`geo-us`) | domaine public |
+| Paroisses d'Angleterre et du pays de Galles (© [ONS](https://geoportal.statistics.gov.uk/), contient des données OS © Crown copyright) et paroisses civiles d'Écosse (© [National Records of Scotland](https://www.nrscotland.gov.uk/)) | battues (`geo-gb`) | [Open Government Licence v3](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) |
+| Paroisses civiles d'Irlande (© [Tailte Éireann](https://tailte.ie/)) | battues (`geo-ie`) | CC BY 4.0 |
+| Communes de Finlande (© [Statistics Finland](https://stat.fi/)) | battues (`geo-fi`) | CC BY 4.0 |
+| Collectivités locales d'Australie (© [Australian Bureau of Statistics](https://www.abs.gov.au/)) | battues (`geo-au`) | CC BY 4.0 |
+| Communes des autres pays : Portugal, Croatie, Bosnie-Herzégovine, micro-États, pays baltes et nordiques, Balkans, Roumanie, Bulgarie, Grèce, Turquie, Caucase, Ukraine, Biélorussie, Maghreb, Liban, Jordanie, reste du Canada, Mexique, Amérique centrale, Nouvelle-Zélande, Nouvelle-Calédonie, Polynésie, Wallis-et-Futuna (© les contributeurs d'[OpenStreetMap](https://www.openstreetmap.org/copyright), récupérées par `scripts/fetch-osm-boundaries.php`) | battues (`geo-<code du pays>`) | [ODbL 1.0](https://opendatacommons.org/licenses/odbl/) : ces fichiers restent sous ODbL |
 
 Les fonds de carte (OpenStreetMap, CARTO, OpenTopoMap, IGN, Esri…) sont chargés depuis internet, uniquement quand
 vous affichez une carte, et restent soumis aux conditions de leurs fournisseurs.
