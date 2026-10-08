@@ -1520,7 +1520,10 @@ function sosa_map_data(PDO $pdo, int $rootId): never
         if ($father && !isset($map[$father])) { $map[$father] = $sosa * 2; $queue[] = [$father, $sosa * 2]; }
         if ($mother && !isset($map[$mother])) { $map[$mother] = $sosa * 2 + 1; $queue[] = [$mother, $sosa * 2 + 1]; }
     }
-    json_response(['root_id' => $rootId, 'map' => $map]);
+    // Ancêtres présents plusieurs fois (implexe) : tous leurs numéros, pour la pastille « Sosa 42 & 46 »
+    $multi = [];
+    foreach (implexe_data($pdo, $rootId)['repeated'] as $row) { $multi[$row['id']] = $row['sosas']; }
+    json_response(['root_id' => $rootId, 'map' => $map, 'multi' => $multi]);
 }
 
 // ─── Numérotation d'Aboville (descendants) ────────────────────────────────
