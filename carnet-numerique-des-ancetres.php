@@ -73,6 +73,14 @@
         .presentation-changes-body h4 { margin:18px 0 6px; font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--presentation-blue); }
         .presentation-changes-body ul { margin:0; padding-left:20px; }
         .presentation-changes-body li { margin:4px 0; }
+        .presentation-changes-old { margin-top:12px; }
+        .presentation-version { margin-top:14px; border:1px solid #d7d7d7; }
+        .presentation-version summary { padding:12px 16px; font-size:16px; cursor:pointer; list-style:none; font-weight:800; }
+        .presentation-version summary::-webkit-details-marker { display:none; }
+        .presentation-version summary::after { content:"+"; float:right; font-weight:800; }
+        .presentation-version[open] summary::after { content:"−"; }
+        .presentation-version summary small { display:block; color:var(--presentation-muted); font-size:13px; font-weight:700; }
+        .presentation-version-body { padding:0 16px 14px; }
         .presentation-callout { display:grid; grid-template-columns:200px 1fr; gap:18px; margin-top:22px; padding:19px 22px; border:2px solid var(--presentation-ink); background:#fff5d6; box-shadow:5px 5px 0 rgba(8,8,8,.14); font-size:14px; line-height:1.5; }
         .presentation-callout p { margin:0; }
         .presentation-callout p + p { margin-top:8px; }
@@ -140,7 +148,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.2.1</span>
+                <span class="eyebrow">VERSION BÊTA · 0.3.0</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source et gratuit pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -169,8 +177,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.2.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 319 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.2.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 325 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.3.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 319 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.3.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 325 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -179,7 +187,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.2.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 335 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.3.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 335 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -190,16 +198,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.2.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 314 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.2.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 289 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.3.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 314 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.3.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 289 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.2.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 316 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.2.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 285 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.3.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 316 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.3.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 285 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.2.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.3.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -207,17 +215,66 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.2.1. Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique avec <code>npm run fetch:geo</code>.</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.3.0. Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique avec <code>npm run fetch:geo</code>.</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.2.1.zip"><span>Archive .zip<small>Windows, macOS · 41 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.2.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 41 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.3.0.zip"><span>Archive .zip<small>Windows, macOS · 41 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.3.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 41 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.2.1<small>Battues au-delà des frontières et corrections</small></span></summary>
+                <summary><span>Nouveautés de la version 0.3.0<small>Aide à la recherche, battues dans le monde entier, objets et mémoire de famille</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>Battues dans le monde entier</h4>
+                    <ul>
+                        <li>Les communes de <b>226 pays et territoires</b> sont livrées avec le logiciel (Europe, Amériques, Afrique, Asie, Océanie, Caraïbes), toutes utilisables hors ligne ; les communes voisines de part et d'autre d'une frontière sont reliées.</li>
+                        <li>Bouton <b>« Registres en ligne »</b> sur chaque commune d'une battue : les archives départementales, Matricula, Antenati, les Archives de l'État en Belgique, FamilySearch…</li>
+                        <li>Le pays s'affiche au survol de la carte.</li>
+                    </ul>
+                    <h4>Aide à la recherche</h4>
+                    <ul>
+                        <li><b>Dates estimées</b> : une naissance ou un décès manquant reçoit une fourchette (« né entre 1753 et 1772 »), d'après l'âge au décès, le mariage, les enfants, les frères et sœurs, les parents.</li>
+                        <li><b>Implexe</b> : les ancêtres présents plusieurs fois dans l'arbre et le taux par génération ; la fiche affiche tous les numéros Sosa d'un ancêtre (« Sosa 42, 68 &amp; 92 »).</li>
+                        <li><b>Chercher sur internet</b> depuis une fiche, un widget ou l'onglet Recherche : Geneanet, FamilySearch, Filae, presse ancienne, moteurs de recherche… avec les années de vie, le lieu et le conjoint pour écarter les homonymes, et plusieurs sites ouverts d'un coup.</li>
+                        <li><b>La une du jour</b> : Le Petit Journal, Le Petit Parisien, Le Figaro ou Le Temps du jour d'une naissance, d'un mariage ou d'un décès (1854-1944, Gallica).</li>
+                        <li><b>Le prénom et le saint du jour</b> : sur la fiche (« Né le 24 juin, prénommé Jean : saint Jean-Baptiste »), dans un widget et en statistique par famille et par époque.</li>
+                        <li>Aide à la lecture des actes anciens : abréviations, latin des registres paroissiaux, écriture ancienne lettre par lettre.</li>
+                        <li>Pouvoir d'achat d'une somme ancienne (« 300 livres en 1780 ≈ 340 journées de travail d'un journalier »).</li>
+                        <li>Les liens des 100 archives départementales vérifiés un par un.</li>
+                    </ul>
+                    <h4>L'histoire autour des personnes</h4>
+                    <ul>
+                        <li><b>Lieux précis</b> : une adresse, une ferme, une maison en un coup d'œil, avec ses habitants successifs et tous les événements qui s'y sont passés.</li>
+                        <li><b>Objets de famille</b> : photo, transmission de qui à qui, et qui les a aujourd'hui.</li>
+                        <li><b>Mémoire familiale</b> : recettes, expressions, chansons, surnoms, traditions, rattachés aux personnes qui les ont transmis.</li>
+                        <li>Étiquettes sur les objets et les souvenirs ; une étiquette se crée directement en la tapant.</li>
+                        <li><b>Salons et événements</b> de généalogie : date, lieu, comment y aller, que prévoir, stands à voir, liens, avec un rappel quelques jours avant.</li>
+                    </ul>
+                    <h4>Confort</h4>
+                    <ul>
+                        <li><b>Recherche rapide</b> avec ⌘K (Mac) ou Ctrl+K (Windows, Linux) : une personne, une battue, une enquête, un lieu ou un écran.</li>
+                        <li><b>Écran divisé</b> (côte à côte ou haut et bas) et ouverture d'un écran dans une nouvelle fenêtre.</li>
+                        <li><b>Rappels en notification</b> du système, avec le nombre de rappels sur l'icône (Mac, Linux).</li>
+                        <li><b>Carte sans Internet</b> : un fond simple (communes et frontières) remplace la carte quand la connexion manque.</li>
+                        <li>Widget <b>Bilan de recherche</b> : ce que vous avez fait ce mois-ci et cette année.</li>
+                    </ul>
+                    <h4>Protection et partage</h4>
+                    <ul>
+                        <li><b>Sauvegarde complète protégée par un mot de passe</b> (chiffrement AES-256), pour la ranger sur iCloud, Dropbox ou une clé USB sans risque.</li>
+                        <li>Export GEDCOM <b>« pour partager »</b> : les personnes vivantes et les fiches confidentielles y deviennent anonymes.</li>
+                        <li>Une personne supprimée par erreur se <b>restaure</b> avec tout ce qui lui était attaché.</li>
+                        <li>Maintenance → Entretien : vérification des liens web enregistrés, avec la nouvelle adresse ou une copie archivée quand une page a disparu.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.2.1 <small>Battues au-delà des frontières et corrections</small></summary>
+                        <div class="presentation-version-body">
                     <h4>Battues au-delà des frontières</h4>
                     <ul>
                         <li>Les battues ne s'arrêtent plus à la frontière : vous pouvez ajouter les communes de <b>Belgique, Suisse, Luxembourg, Liechtenstein, Allemagne, Italie, Autriche et Espagne</b>, ainsi que celles de l'<b>outre-mer français</b> (Guadeloupe, Martinique, Guyane, La Réunion, Mayotte).</li>
@@ -235,6 +292,8 @@
                         <li>Barre de menus du haut : défilement à la molette et barre visible, pour atteindre les menus de droite sur un petit écran.</li>
                         <li>Le bloc « Accès local », inutile dans le logiciel, a été retiré.</li>
                     </ul>
+                        </div>
+                    </details>
                 </div>
             </details>
 
@@ -375,7 +434,7 @@
                 </article>
                 <article class="presentation-about">
                     <h3>Les lieux du monde entier, même hors ligne</h3>
-                    <p>Toutes les communes de France, avec leurs contours, leurs voisines et les anciennes communes fusionnées, et plus de 5 millions de localités dans le monde. En tapant un nom de lieu, vous obtenez des suggestions et les coordonnées GPS, sans connexion. Un lieu introuvable peut toujours être saisi librement.</p>
+                    <p>Toutes les communes de France et de plus de 220 autres pays et territoires, avec leurs contours, leurs voisines (même de l’autre côté d’une frontière) et les anciennes communes fusionnées, et plus de 5 millions de localités dans le monde. En tapant un nom de lieu, vous obtenez des suggestions et les coordonnées GPS, sans connexion. Un lieu introuvable peut toujours être saisi librement.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Voir sa famille autrement</h3>
@@ -395,7 +454,7 @@
                 <div><strong>Modulable et personnalisable</strong><span>L’interface s’organise selon votre généalogie, pas l’inverse.</span></div>
                 <div><strong>Gratuit et libre</strong><span>Licence AGPL-3.0 : pas d’abonnement, pas de version payante, code source ouvert.</span></div>
                 <div><strong>Vos données restent chez vous</strong><span>Aucun compte, aucun envoi sur internet, un fichier SQLite lisible par d’autres outils.</span></div>
-                <div><strong>Fonctionne hors ligne</strong><span>Communes de France et lieux du monde compris.</span></div>
+                <div><strong>Fonctionne hors ligne</strong><span>Communes de 226 pays, lieux du monde et fond de carte compris.</span></div>
                 <div><strong>Mac, Windows et Linux</strong><span>La même application partout.</span></div>
                 <div><strong>Pensé pour la recherche</strong><span>Pas seulement pour la saisie.</span></div>
                 <div><strong>Arrivée facile</strong><span>Depuis Hérédis, MacFamilyTree ou n’importe quel logiciel compatible GEDCOM.</span></div>
@@ -405,7 +464,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.2.1 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.3.0 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script>
