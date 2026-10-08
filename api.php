@@ -165,6 +165,7 @@ try {
         'person' => person_detail($pdo, safe_int($_GET['id'] ?? 0)),
         'due_reminders' => json_response(due_reminders_data($pdo)),
         'offline_tile' => offline_tile_response($pdo),
+        'research_progress' => json_response(research_progress_data($pdo)),
         'genealogy_fairs' => json_response(['fairs' => genealogy_fairs_data($pdo)]),
         'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
         'family_memories' => json_response(['memories' => family_memories_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''), safe_text($_GET['kind'] ?? '')), 'kinds' => MEMORY_KINDS]),

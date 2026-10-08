@@ -3686,3 +3686,11 @@ html.is-embedded .screen-tool{display:none}
 
 .collection-labels{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.15rem}
 .collection-labels-edit{margin:.8rem 0 .2rem}
+
+/* Widget Bilan de recherche */
+.progress-line{margin:0 0 .5rem}
+.progress-up{color:#1d8a4f;font-weight:600;font-size:.85rem}
+.progress-chart{display:flex;align-items:flex-end;gap:4px;height:84px;margin:.4rem 0 .3rem}
+.progress-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
+.progress-bar span{display:block;width:100%;max-width:26px;background:var(--blue);border-radius:2px 2px 0 0}
+.progress-bar small{font-size:.66rem;color:var(--muted);margin-top:2px;white-space:nowrap}

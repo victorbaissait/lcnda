@@ -339,3 +339,82 @@ function quick_search_data(PDO $pdo, string $q): array
     }
     return $out;
 }
+
+/** Ancêtres de la racine Sosa (choisie dans Listes → SOSA, sinon la personne de départ). */
+function research_sosa_ancestor_ids(PDO $pdo): array
+{
+    $root = 0;
+    try { $root = (int) $pdo->query("SELECT value FROM app_settings WHERE key='genealogie-sosa-root'")->fetchColumn(); } catch (Throwable) {}
+    if (!$root) { $root = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn(); }
+    if (!$root) { return []; }
+    $parents = [];
+    foreach ($pdo->query('SELECT fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id') as $r) {
+        foreach (['partner1_id', 'partner2_id'] as $c) { if ($r[$c]) { $parents[(int) $r['child_id']][] = (int) $r[$c]; } }
+    }
+    $seen = [$root => true]; $queue = [$root];
+    while ($queue) { $p = array_pop($queue); foreach ($parents[$p] ?? [] as $a) { if (!isset($seen[$a])) { $seen[$a] = true; $queue[] = $a; } } }
+    unset($seen[$root]);
+    return $seen;
+}
+
+/**
+ * Bilan de recherche (widget « Motivation ») : ce qui a été fait ce mois-ci et cette année, d'après le journal des
+ * modifications. Les imports en bloc (GEDCOM, MacFamilyTree…) ne comptent pas comme « fiches créées » : c'est le travail
+ * fait à la main qui est montré.
+ */
+function research_progress_data(PDO $pdo): array
+{
+    $sosa = research_sosa_ancestor_ids($pdo);
+    $period = static function (string $from, string $to) use ($pdo, $sosa): array {
+        $count = static function (string $where, array $params = []) use ($pdo, $from, $to): int {
+            $stmt = $pdo->prepare("SELECT count(*) FROM change_log WHERE created_at>=? AND created_at<? AND {$where}");
+            $stmt->execute([$from, $to, ...$params]);
+            $n = (int) $stmt->fetchColumn(); $stmt->closeCursor(); return $n;
+        };
+        $created = $pdo->prepare("SELECT DISTINCT entity_id FROM change_log WHERE entity_type='person' AND action='create' AND created_at>=? AND created_at<?");
+        $created->execute([$from, $to]);
+        $createdIds = array_map('intval', $created->fetchAll(PDO::FETCH_COLUMN));
+        $created->closeCursor();
+        $upload = $pdo->prepare("SELECT summary FROM change_log WHERE action='upload' AND created_at>=? AND created_at<?");
+        $upload->execute([$from, $to]);
+        $media = 0; foreach ($upload->fetchAll(PDO::FETCH_COLUMN) as $s) { $media += preg_match('/(\d+)/', (string) $s, $m) ? (int) $m[1] : 1; }
+        $upload->closeCursor();
+        $edited = $pdo->prepare("SELECT count(DISTINCT entity_id) FROM change_log WHERE entity_type='person' AND action NOT IN ('create','delete','lock','unlock') AND created_at>=? AND created_at<?");
+        $edited->execute([$from, $to]); $editedPeople = (int) $edited->fetchColumn(); $edited->closeCursor();
+        $days = $pdo->prepare('SELECT count(DISTINCT substr(created_at,1,10)) FROM change_log WHERE created_at>=? AND created_at<?');
+        $days->execute([$from, $to]); $workDays = (int) $days->fetchColumn(); $days->closeCursor();
+        $closed = static function (string $table) use ($pdo, $from, $to): int {
+            try { $s = $pdo->prepare("SELECT count(*) FROM {$table} WHERE status='closed' AND updated_at>=? AND updated_at<?"); $s->execute([$from, $to]); return (int) $s->fetchColumn(); } catch (Throwable) { return 0; }
+        };
+        return [
+            'persons_created' => count($createdIds),
+            'persons_edited' => $editedPeople,
+            'sosa_new' => count(array_filter($createdIds, static fn($id) => isset($sosa[$id]))),
+            'events_created' => $count("entity_type='event' AND action='create'"),
+            'sources_created' => $count("entity_type='source' AND action='create'"),
+            'census_created' => $count("entity_type='census' AND action='create'"),
+            'media_added' => $media,
+            'battues_closed' => $closed('battues'),
+            'investigations_closed' => $closed('investigations'),
+            'changes' => $count('1'),
+            'work_days' => $workDays,
+        ];
+    };
+    $now = new DateTimeImmutable('now');
+    $monthStart = $now->format('Y-m-01');
+    $nextMonth = $now->modify('first day of next month')->format('Y-m-01');
+    $yearStart = $now->format('Y-01-01');
+    $nextYear = ((int) $now->format('Y') + 1) . '-01-01';
+    // Activité des 12 derniers mois (nombre de modifications par mois)
+    $months = [];
+    for ($i = 11; $i >= 0; $i--) {
+        $start = $now->modify("first day of -{$i} month")->format('Y-m-01');
+        $end = (new DateTimeImmutable($start))->modify('first day of next month')->format('Y-m-01');
+        $s = $pdo->prepare("SELECT count(*), count(DISTINCT CASE WHEN entity_type='person' AND action='create' THEN entity_id END) FROM change_log WHERE created_at>=? AND created_at<?");
+        $s->execute([$start, $end]); [$changes, $persons] = $s->fetch(PDO::FETCH_NUM); $s->closeCursor();
+        $months[] = ['month' => substr($start, 0, 7), 'changes' => (int) $changes, 'persons' => (int) $persons];
+    }
+    $prevStart = $now->modify('first day of last month')->format('Y-m-01');
+    return ['month' => $period($monthStart, $nextMonth), 'previous_month' => $period($prevStart, $monthStart), 'year' => $period($yearStart, $nextYear),
+        'months' => $months, 'month_label' => $now->format('Y-m'), 'year_label' => $now->format('Y')];
+}
