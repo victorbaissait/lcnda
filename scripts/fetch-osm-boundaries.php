@@ -40,7 +40,9 @@ function overpass(string $query, int $timeout = 900): ?string
 }
 
 // « CA-NB » : une province ou un État seulement (pays immenses)
-$area = str_contains($cc, '-') ? "area[\"ISO3166-2\"=\"{$cc}\"]->.a;" : "area[\"ISO3166-1\"=\"{$cc}\"][admin_level=2]->.a;";
+// Hong Kong, Macao, Palestine, Sahara occidental… ne sont pas au niveau 2 dans OSM : OSM_AREA_ANY=1 enlève ce filtre
+$level2 = getenv('OSM_AREA_ANY') ? '' : '[admin_level=2]';
+$area = str_contains($cc, '-') ? "area[\"ISO3166-2\"=\"{$cc}\"]->.a;" : "area[\"ISO3166-1\"=\"{$cc}\"]{$level2}->.a;";
 if ($mode === 'count') {
     [$from, $to] = array_map('intval', explode('-', $levels[0]) + [1 => $levels[0]]);
     for ($l = $from; $l <= $to; $l++) {

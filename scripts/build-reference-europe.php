@@ -40,9 +40,18 @@ const SIMPLIFY_M = 150;   // tracés livrés (la France métropolitaine est enco
 const PRESIMPLIFY_M = 15; // tracés de travail, pour calculer les voisinages sans saturer la mémoire
 const INTERNAL_M = 40;    // voisines dans un même pays : limites à moins de 40 m (sources cohérentes)
 const BORDER_M = 165;     // voisines de part et d'autre d'une frontière : moins de ~150 m (+ marge de travail)
-const SAMPLE_M = 40;
-const PLACES_LIGHT_ABOVE = 100000; // au-delà, lieux allégés (voir plus bas)      // un point tous les 40 m le long des limites
+const SAMPLE_M = 40;      // un point tous les 40 m le long des limites
+const PLACES_LIGHT_ABOVE = 100000; // au-delà, lieux allégés (voir plus bas)
 
+if (($argv[1] ?? '') === '--compact') { osm_compact($argv[2]); exit(0); }
+// Compactage des réponses Overpass nouvelles ou modifiées, un processus par fichier (mémoire libérée entre deux)
+foreach (($argv[1] ?? '') === '--country' ? [] : (glob("{$cache}/osm/*.json") ?: []) as $osmFile) { // seul le pilote compacte
+    if (str_ends_with($osmFile, '-tags.json')) { continue; } // inventaires sans tracés
+    if (filemtime($osmFile) > time() - 60) { echo "  (fichier en cours de téléchargement, ignoré : " . basename($osmFile) . ")\n"; continue; }
+    if (is_file("{$osmFile}.compact") && filemtime("{$osmFile}.compact") >= filemtime($osmFile)) { continue; }
+    passthru(escapeshellarg(PHP_BINARY) . ' -d memory_limit=24G ' . escapeshellarg(__FILE__) . ' --compact ' . escapeshellarg($osmFile), $status);
+    if ($status !== 0) { fwrite(STDERR, "Compactage impossible : {$osmFile}\n"); exit(1); }
+}
 $fold = static fn(string $v): string => trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower(ascii_fold($v))));
 
 // ─── Géométrie ───────────────────────────────────────────────────────────────────────────────
@@ -164,6 +173,7 @@ function rd_to_wgs84(float $x, float $y): array
 /** Relation OpenStreetMap (réponse Overpass « out geom ») → polygones : les chemins sont raccordés bout à bout en anneaux. */
 function osm_polygons(array $rel): array
 {
+    if (isset($rel['polys'])) { return $rel['polys']; } // version compacte
     $ways = ['outer' => [], 'inner' => []];
     foreach ($rel['members'] ?? [] as $m) {
         if (($m['type'] ?? '') !== 'way' || empty($m['geometry'])) { continue; }
@@ -208,7 +218,30 @@ function geonames_rows(string $zip, string $cc): Generator
 /** Fichier Overpass → éléments (relations). */
 function osm_elements(string $file): array
 {
+    // Version compacte (contours déjà assemblés et allégés à 15 m) si elle est à jour : voir osm_compact()
+    $compact = $file . '.compact';
+    if (is_file($compact) && filemtime($compact) >= filemtime($file)) { return unserialize((string) gzdecode((string) file_get_contents($compact))) ?: []; }
     return json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['elements'] ?? [];
+}
+
+/**
+ * Réponses Overpass de plusieurs centaines de Mo (Brésil : 629 Mo) : chacune est lue UNE fois, dans son propre processus,
+ * et rangée en version compacte <fichier>.compact (tags utiles + polygones allégés à 15 m) ; la fabrication ne lit plus que
+ * celles-ci (sinon des dizaines de Go de mémoire).
+ */
+function osm_compact(string $file): void
+{
+    $keep = array_flip(['name', 'name:fr', 'name:en', 'int_name', 'name:latin', 'name:sr-Latn', 'name:uk-Latn', 'name:be-Latn', 'name:bg-Latn',
+        'name:zh-Latn-pinyin', 'name:ja-Latn', 'name:ja_rm', 'name:ko-Latn', 'name:ru-Latn', 'name:th-Latn', 'name:ar-Latn', 'name:fa-Latn',
+        'admin_level', 'ISO3166-1', 'ISO3166-2', 'ref:INSEE', 'ref:ine', 'border_type']);
+    $out = [];
+    foreach (json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['elements'] ?? [] as $e) {
+        $polys = simplify_polygons(osm_polygons($e), PRESIMPLIFY_M);
+        foreach ($polys as &$poly) { foreach ($poly as &$ring) { foreach ($ring as &$pt) { $pt = [round($pt[0], 6), round($pt[1], 6)]; } } }
+        unset($poly, $ring, $pt);
+        $out[] = ['type' => 'relation', 'id' => $e['id'], 'tags' => array_intersect_key($e['tags'] ?? [], $keep), 'polys' => $polys];
+    }
+    file_put_contents($file . '.compact', gzencode(serialize($out), 6));
 }
 
 /** Géométrie GeoPackage (en-tête GP + WKB, avec ou sans Z) → liste de polygones [anneaux [[x,y]…]…]. */
@@ -430,11 +463,15 @@ $countryNames = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 
     'MT' => 'Malte', 'CY' => 'Chypre', 'NZ' => 'Nouvelle-Zélande', 'MX' => 'Mexique', 'GT' => 'Guatemala', 'BZ' => 'Belize',
     'SV' => 'Salvador', 'HN' => 'Honduras', 'NI' => 'Nicaragua', 'CR' => 'Costa Rica', 'PA' => 'Panama', 'DZ' => 'Algérie', 'MA' => 'Maroc',
     'TN' => 'Tunisie', 'LB' => 'Liban', 'JO' => 'Jordanie', 'NC' => 'Nouvelle-Calédonie', 'PF' => 'Polynésie française', 'CA' => 'Canada (hors Québec)',
-    'WF' => 'Wallis-et-Futuna'];
+    'WF' => 'Wallis-et-Futuna',
+    'PS' => 'Palestine', 'MO' => 'Macao', 'HK' => 'Hong Kong', 'MD' => 'Moldavie', 'MV' => 'Maldives', 'TW' => 'Taïwan', 'SZ' => 'Eswatini', 'LS' => 'Lesotho', 'ZW' => 'Zimbabwe', 'ZM' => 'Zambie', 'SC' => 'Seychelles', 'MZ' => 'Mozambique', 'MW' => 'Malawi', 'MU' => 'Maurice', 'MG' => 'Madagascar', 'KM' => 'Comores', 'ZA' => 'Afrique du Sud', 'TZ' => 'Tanzanie', 'SS' => 'Soudan du Sud', 'SD' => 'Soudan', 'NA' => 'Namibie', 'LY' => 'Libye', 'BW' => 'Botswana', 'BI' => 'Burundi', 'LR' => 'Liberia', 'UG' => 'Ouganda', 'TD' => 'Tchad', 'ST' => 'São Tomé-et-Principe', 'SO' => 'Somalie', 'SL' => 'Sierra Leone', 'RW' => 'Rwanda', 'KE' => 'Kenya', 'GW' => 'Guinée-Bissau', 'GQ' => 'Guinée équatoriale', 'GA' => 'Gabon', 'ET' => 'Éthiopie', 'ER' => 'Érythrée', 'DJ' => 'Djibouti', 'CV' => 'Cap-Vert', 'CM' => 'Cameroun', 'CG' => 'Congo', 'CF' => 'Centrafrique', 'CD' => 'Congo (RDC)', 'AO' => 'Angola', 'BR' => 'Brésil', 'AR' => 'Argentine', 'CL' => 'Chili', 'CO' => 'Colombie', 'EC' => 'Équateur', 'PE' => 'Pérou', 'BO' => 'Bolivie', 'VE' => 'Venezuela', 'PY' => 'Paraguay', 'UY' => 'Uruguay', 'GY' => 'Guyana', 'SR' => 'Suriname', 'EG' => 'Égypte', 'SY' => 'Syrie', 'IQ' => 'Irak', 'IR' => 'Iran', 'IL' => 'Israël', 'SA' => 'Arabie saoudite', 'AE' => 'Émirats arabes unis', 'BH' => 'Bahreïn', 'QA' => 'Qatar', 'KW' => 'Koweït', 'QO' => 'Oman', 'YE' => 'Yémen', 'CN' => 'Chine', 'JP' => 'Japon', 'KR' => 'Corée du Sud', 'KP' => 'Corée du Nord', 'RU' => 'Russie', 'IN' => 'Inde', 'BD' => 'Bangladesh', 'LK' => 'Sri Lanka', 'VN' => 'Viêt Nam', 'TH' => 'Thaïlande', 'KH' => 'Cambodge', 'LA' => 'Laos', 'MM' => 'Myanmar', 'ID' => 'Indonésie', 'MY' => 'Malaisie', 'BN' => 'Brunei', 'BT' => 'Bhoutan', 'KG' => 'Kirghizistan', 'KZ' => 'Kazakhstan', 'MN' => 'Mongolie', 'NP' => 'Népal', 'PG' => 'Papouasie-Nouvelle-Guinée', 'SG' => 'Singapour', 'TJ' => 'Tadjikistan', 'TL' => 'Timor oriental', 'TM' => 'Turkménistan', 'UZ' => 'Ouzbékistan', 'PH' => 'Philippines', 'AF' => 'Afghanistan', 'PK' => 'Pakistan', 'SN' => 'Sénégal', 'ML' => 'Mali', 'MR' => 'Mauritanie', 'BF' => 'Burkina Faso', 'BJ' => 'Bénin', 'CI' => 'Côte d’Ivoire', 'GH' => 'Ghana', 'GM' => 'Gambie', 'NE' => 'Niger', 'NG' => 'Nigeria', 'TG' => 'Togo', 'GN' => 'Guinée'];
 // Pays des lieux (« Québec » est une province du Canada, l'outre-mer est la France)
+// Codes internes différents du code ISO (« OM » désigne déjà l'outre-mer français) : code interne => code ISO
+$isoOf = ['QO' => 'OM'];
 $placeCountryOf = static fn(string $cc): string => ['OM' => 'France', 'QC' => 'Canada', 'CA' => 'Canada', 'NC' => 'France', 'PF' => 'France', 'WF' => 'France'][$cc] ?? $countryNames[$cc];
 // Grandes unités (comtés, districts, communes suédoises…) : un village garde son nom, l'unité devient le « comté » du lieu
-$coarse = array_flip(['US', 'AU', 'FI', 'SE', 'NO', 'IS', 'DK', 'EE', 'BG', 'GR', 'TR', 'UA', 'GE', 'ME', 'MK', 'RS', 'NZ', 'MX', 'GT', 'HN', 'SV', 'NI', 'BZ', 'AM', 'AZ', 'LB', 'JO', 'TN']);
+$coarse = array_flip(['US', 'AU', 'FI', 'SE', 'NO', 'IS', 'DK', 'EE', 'BG', 'GR', 'TR', 'UA', 'GE', 'ME', 'MK', 'RS', 'NZ', 'MX', 'GT', 'HN', 'SV', 'NI', 'BZ', 'AM', 'AZ', 'LB', 'JO', 'TN',
+    'PS', 'MO', 'HK', 'MD', 'MV', 'SZ', 'LS', 'ZW', 'ZM', 'SC', 'MZ', 'MW', 'MG', 'KM', 'ZA', 'TZ', 'SS', 'SD', 'NA', 'LY', 'BW', 'BI', 'LR', 'UG', 'TD', 'ST', 'SO', 'SL', 'RW', 'KE', 'GW', 'GQ', 'GA', 'ET', 'ER', 'DJ', 'CV', 'CM', 'CG', 'CF', 'CD', 'AO', 'BR', 'AR', 'CL', 'CO', 'BO', 'UY', 'EG', 'SY', 'IQ', 'IR', 'SA', 'AE', 'BH', 'QA', 'KW', 'QO', 'YE', 'CN', 'KR', 'KP', 'RU', 'IN', 'BD', 'LK', 'TH', 'KH', 'LA', 'MM', 'ID', 'MY', 'KG', 'KZ', 'MN', 'PG', 'SG', 'TJ', 'TL', 'TM', 'UZ', 'PH', 'AF', 'PK', 'ML', 'MR', 'BJ', 'CI', 'GH', 'GM', 'NE', 'NG', 'TG', 'GN']);
 $sources = [
     'BE' => 'Communes 2025 : IGN-NGI (Institut géographique national belge, licence ouverte), via ODWB',
     'CH' => 'swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)', 'LI' => 'swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)',
@@ -452,137 +489,18 @@ $sources = [
     'IE' => 'Civil Parishes – National Statutory Boundaries 2026 © Tailte Éireann (CC BY 4.0)',
     'FI' => 'Kunnat 2025 © Tilastokeskus / Statistics Finland (CC BY 4.0)', 'AU' => 'Local Government Areas 2024 © Australian Bureau of Statistics (CC BY 4.0)',
 ] + array_fill_keys(['PT', 'HR', 'BA', 'AD', 'MC', 'SM', 'VA', 'EE', 'LV', 'LT', 'SE', 'NO', 'IS', 'DK', 'BG', 'GR', 'TR', 'UA', 'BY', 'GE', 'AM', 'AZ',
-    'ME', 'MK', 'AL', 'XK', 'RS', 'RO', 'MT', 'CY', 'NZ', 'MX', 'GT', 'BZ', 'SV', 'HN', 'NI', 'CR', 'PA', 'DZ', 'MA', 'TN', 'LB', 'JO', 'NC', 'PF', 'CA', 'WF'],
+    'ME', 'MK', 'AL', 'XK', 'RS', 'RO', 'MT', 'CY', 'NZ', 'MX', 'GT', 'BZ', 'SV', 'HN', 'NI', 'CR', 'PA', 'DZ', 'MA', 'TN', 'LB', 'JO', 'NC', 'PF', 'CA', 'WF', 'PS', 'MO', 'HK', 'MD', 'MV', 'TW', 'SZ', 'LS', 'ZW', 'ZM', 'SC', 'MZ', 'MW', 'MU', 'MG', 'KM', 'ZA', 'TZ', 'SS', 'SD', 'NA', 'LY', 'BW', 'BI', 'LR', 'UG', 'TD', 'ST', 'SO', 'SL', 'RW', 'KE', 'GW', 'GQ', 'GA', 'ET', 'ER', 'DJ', 'CV', 'CM', 'CG', 'CF', 'CD', 'AO', 'BR', 'AR', 'CL', 'CO', 'EC', 'PE', 'BO', 'VE', 'PY', 'UY', 'GY', 'SR', 'EG', 'SY', 'IQ', 'IR', 'IL', 'SA', 'AE', 'BH', 'QA', 'KW', 'QO', 'YE', 'CN', 'JP', 'KR', 'KP', 'RU', 'IN', 'BD', 'LK', 'VN', 'TH', 'KH', 'LA', 'MM', 'ID', 'MY', 'BN', 'BT', 'KG', 'KZ', 'MN', 'NP', 'PG', 'SG', 'TJ', 'TL', 'TM', 'UZ', 'PH', 'AF', 'PK', 'SN', 'ML', 'MR', 'BF', 'BJ', 'CI', 'GH', 'GM', 'NE', 'NG', 'TG', 'GN'],
     '© les contributeurs d’OpenStreetMap (ODbL 1.0)');
 $countries = [];
-$add = static function (string $cc, string $code, string $name, string $county, string $state, array $polys, string $alt = '') use (&$countries): void {
-    if (!$polys || $name === '') { return; }
+$onlyCountry = ''; // (rempli plus bas) en mode « un pays », les autres pays lus par la même source sont ignorés
+$add = static function (string $cc, string $code, string $name, string $county, string $state, array $polys, string $alt = '') use (&$countries, &$onlyCountry): void {
+    if (!$polys || $name === '' || ($onlyCountry !== '' && $cc !== $onlyCountry)) { return; }
     $polys = simplify_polygons($polys, PRESIMPLIFY_M);
     if (isset($countries[$cc][$code])) { foreach ($polys as $p) { $countries[$cc][$code]['polys'][] = $p; } return; }
     $countries[$cc][$code] = ['name' => $name, 'alt' => $alt, 'county' => $county, 'state' => $state, 'polys' => $polys];
 };
 $first = static fn($v): string => is_array($v) ? (string) ($v[0] ?? '') : (string) ($v ?? '');
 
-// Belgique
-$be = json_decode((string) file_get_contents("{$cache}/communes-belgique-2025.geojson"), true, 512, JSON_THROW_ON_ERROR);
-foreach ($be['features'] as $f) {
-    $p = $f['properties'];
-    $langs = (array) ($p['mun_off_language'] ?? ['FR']);
-    $lang = in_array('FR', $langs, true) ? 'fr' : strtolower((string) $langs[0]);
-    $name = $first($p['mun_name_' . $lang] ?? '') ?: $first($p['mun_name_fr'] ?? '');
-    $alt = array_values(array_unique(array_filter([$first($p['mun_name_fr'] ?? ''), $first($p['mun_name_nl'] ?? ''), $first($p['mun_name_de'] ?? '')], static fn($n) => $n !== '' && $n !== $name)));
-    $add('BE', 'BE-' . $first($p['mun_code'] ?? ''), $name, trim((string) preg_replace("/^Province (de |du |d’|d')/u", '', $first($p['prov_name_fr'] ?? ''))),
-        $first($p['reg_name_fr'] ?? ''), geojson_polygons($f['geometry'] ?? []), implode(',', $alt));
-}
-unset($be);
-
-// Suisse et Liechtenstein
-$gpkg = glob("{$cache}/ch/*.gpkg")[0] ?? '';
-$ch = new PDO('sqlite:' . $gpkg, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-$cantons = []; foreach ($ch->query('SELECT kantonsnummer, name FROM tlm_kantonsgebiet') as $r) { $cantons[(int) $r['kantonsnummer']] = $r['name']; }
-$districts = []; foreach ($ch->query('SELECT bezirksnummer, name FROM tlm_bezirksgebiet') as $r) { $districts[(int) $r['bezirksnummer']] = $r['name']; }
-foreach ($ch->query("SELECT bfs_nummer, name, icc, kantonsnummer, bezirksnummer, geom FROM tlm_hoheitsgebiet WHERE objektart='Gemeindegebiet' AND icc IN ('CH','LI') ORDER BY bfs_nummer") as $r) {
-    $cc = $r['icc'];
-    $add($cc, $cc . '-' . (int) $r['bfs_nummer'], $r['name'], $cc === 'CH' ? (string) ($districts[(int) $r['bezirksnummer']] ?? '') : '',
-        $cc === 'CH' ? (string) ($cantons[(int) $r['kantonsnummer']] ?? '') : '', gpkg_polygons($r['geom'], static fn(float $x, float $y) => lv95_to_wgs84($x, $y)));
-}
-$ch = null;
-
-// Luxembourg
-$lu = json_decode((string) file_get_contents("{$cache}/communes-luxembourg-4326.geojson"), true, 512, JSON_THROW_ON_ERROR);
-foreach ($lu['features'] as $f) { $p = $f['properties']; $add('LU', 'LU-' . $p['LAU2'], (string) $p['COMMUNE'], (string) $p['CANTON'], '', geojson_polygons($f['geometry'])); }
-unset($lu);
-
-// Allemagne (VG250 : UTM 32 ; seulement les terres, GF = 4)
-$de = new PDO('sqlite:' . glob("{$cache}/de/*/DE_VG250.gpkg")[0], null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-$lander = []; foreach ($de->query('SELECT DISTINCT SN_L, GEN FROM vg250_lan WHERE GF=4') as $r) { $lander[$r['SN_L']] = $r['GEN']; }
-$kreise = []; foreach ($de->query('SELECT DISTINCT AGS, GEN, BEZ FROM vg250_krs WHERE GF=4') as $r) { $kreise[$r['AGS']] = $r['GEN']; }
-foreach ($de->query('SELECT AGS, GEN, SN_L, geom FROM vg250_gem WHERE GF=4') as $r) {
-    $add('DE', 'DE-' . $r['AGS'], $r['GEN'], (string) ($kreise[substr($r['AGS'], 0, 5)] ?? ''), (string) ($lander[$r['SN_L']] ?? ''),
-        gpkg_polygons($r['geom'], static fn(float $x, float $y) => utm_to_wgs84($x, $y, 32)));
-}
-$de = null;
-
-// Italie (ISTAT généralisé : UTM 32 WGS84)
-$itRegions = []; foreach (shapefile_records(glob("{$cache}/it/Reg*/*.shp")[0], static fn($x, $y) => [0, 0]) as [$a]) { $itRegions[(int) $a['COD_REG']] = $a['DEN_REG']; }
-$itProv = []; foreach (shapefile_records(glob("{$cache}/it/ProvCM*/*.shp")[0], static fn($x, $y) => [0, 0]) as [$a]) { $itProv[(int) $a['COD_UTS']] = $a['DEN_UTS']; }
-foreach (shapefile_records(glob("{$cache}/it/Com*/*.shp")[0], static fn(float $x, float $y) => utm_to_wgs84($x, $y, 32)) as [$a, $polys]) {
-    $add('IT', 'IT-' . $a['PRO_COM_T'], $a['COMUNE'], (string) ($itProv[(int) $a['COD_UTS']] ?? ''), (string) ($itRegions[(int) $a['COD_REG']] ?? ''), $polys);
-}
-
-// Autriche (GPS ; Land d'après le 1er chiffre du code, district d'après GeoNames plus bas)
-$atLander = [1 => 'Burgenland', 2 => 'Kärnten', 3 => 'Niederösterreich', 4 => 'Oberösterreich', 5 => 'Salzburg', 6 => 'Steiermark', 7 => 'Tirol', 8 => 'Vorarlberg', 9 => 'Wien'];
-$at = json_decode((string) file_get_contents("{$cache}/communes-autriche-2026.geojson"), true, 512, JSON_THROW_ON_ERROR);
-foreach ($at['features'] as $f) {
-    $id = (string) $f['properties']['g_id'];
-    $add('AT', 'AT-' . $id, (string) $f['properties']['g_name'], '', $atLander[(int) $id[0]] ?? '', geojson_polygons($f['geometry']));
-}
-unset($at);
-
-// Espagne (CNIG : ETRS89 / REGCAN95, équivalents GPS ; NATCODE = 34 + communauté + province + code INE)
-$esDir = $root . '/lineas_limite';
-$esCommunities = []; $esProvinces = [];
-foreach (['peninbal_etrs89', 'canarias_wgs84'] as $zone) {
-    $dir = $zone === 'canarias_wgs84' ? 'SHP_WGS84' : 'SHP_ETRS89';
-    foreach (shapefile_records("{$esDir}/{$dir}/recintos_autonomicas_inspire_{$zone}/recintos_autonomicas_inspire_{$zone}.shp", static fn($x, $y) => [0, 0]) as [$a]) { $esCommunities[substr($a['NATCODE'], 2, 2)] = $a['NAMEUNIT']; }
-    foreach (shapefile_records("{$esDir}/{$dir}/recintos_provinciales_inspire_{$zone}/recintos_provinciales_inspire_{$zone}.shp", static fn($x, $y) => [0, 0]) as [$a]) { $esProvinces[substr($a['NATCODE'], 4, 2)] = $a['NAMEUNIT']; }
-}
-foreach (['peninbal_etrs89', 'canarias_wgs84'] as $zone) {
-    $dir = $zone === 'canarias_wgs84' ? 'SHP_WGS84' : 'SHP_ETRS89';
-    foreach (shapefile_records("{$esDir}/{$dir}/recintos_municipales_inspire_{$zone}/recintos_municipales_inspire_{$zone}.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
-        $nat = (string) $a['NATCODE'];
-        $add('ES', 'ES-' . substr($nat, -5), (string) $a['NAMEUNIT'], (string) ($esProvinces[substr($nat, 4, 2)] ?? ''), (string) ($esCommunities[substr($nat, 2, 2)] ?? ''), $polys);
-    }
-}
-
-// Outre-mer français (codes INSEE, sans préfixe)
-foreach (['guadeloupe' => 'Guadeloupe', 'martinique' => 'Martinique', 'guyane' => 'Guyane', 'la-reunion' => 'La Réunion', 'mayotte' => 'Mayotte'] as $file => $region) {
-    $om = json_decode((string) file_get_contents("{$cache}/communes-{$file}.geojson"), true, 512, JSON_THROW_ON_ERROR);
-    foreach ($om['features'] as $f) { $add('OM', (string) $f['properties']['code'], (string) $f['properties']['nom'], $region, $region, geojson_polygons($f['geometry'])); }
-}
-// Tchéquie (RÚIAN : Křovák, S-JTSK ; districts et régions d'après leurs propres fichiers)
-$czOkresy = []; foreach (shapefile_records("{$cache}/cz/1/OKRESY_P.shp", static fn($x, $y) => [0, 0]) as [$a]) { $czOkresy[$a['KOD']] = $a['NAZEV']; }
-$czKraje = []; foreach (shapefile_records("{$cache}/cz/1/VUSC_P.shp", static fn($x, $y) => [0, 0]) as [$a]) { $czKraje[$a['KOD']] = $a['NAZEV']; }
-foreach (shapefile_records("{$cache}/cz/1/OBCE_P.shp", static fn(float $x, float $y) => krovak_to_wgs84($x, $y)) as [$a, $polys]) {
-    $add('CZ', 'CZ-' . $a['KOD'], $a['NAZEV'], (string) ($czOkresy[$a['OKRES_KOD']] ?? ''), (string) ($czKraje[$a['VUSC_KOD']] ?? ''), $polys);
-}
-
-// Slovaquie (INSPIRE : obce = 4e niveau ; district et région d'après les niveaux supérieurs)
-$sk = new PDO('sqlite:' . "{$cache}/sk/INSPIRE_AU.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-$skUnits = []; foreach ($sk->query("SELECT id, name, upperLevelUnit FROM AdministrativeUnit") as $r) { $skUnits[$r['id']] = $r; }
-foreach ($sk->query("SELECT nationalCode, name, upperLevelUnit, geometry FROM AdministrativeUnit WHERE nationalLevel LIKE '%4thOrder'") as $r) {
-    $okres = $skUnits[$r['upperLevelUnit']] ?? null; $kraj = $okres ? ($skUnits[$okres['upperLevelUnit']] ?? null) : null;
-    $add('SK', 'SK-' . $r['nationalCode'], $r['name'], trim(preg_replace('/^okres /u', '', (string) ($okres['name'] ?? '')) ?? ''),
-        (string) ($kraj['name'] ?? ''), gpkg_polygons($r['geometry'], static fn(float $x, float $y) => [round($x, 6), round($y, 6)]));
-}
-$sk = null;
-
-// Pologne (PRG : ETRS89 en degrés ; gmina = 6 premiers chiffres du code TERYT, comme GeoNames)
-$plPowiaty = []; foreach (shapefile_records("{$cache}/pl/A02_Granice_powiatow.shp", static fn($x, $y) => [0, 0]) as [$a]) { $plPowiaty[$a['JPT_KOD_JE']] = preg_replace('/^powiat /u', '', $a['JPT_NAZWA_']); }
-$plWoj = []; foreach (shapefile_records("{$cache}/pl/A01_Granice_wojewodztw.shp", static fn($x, $y) => [0, 0]) as [$a]) { $plWoj[$a['JPT_KOD_JE']] = preg_replace('/^województwo /u', '', $a['JPT_NAZWA_']); }
-foreach (shapefile_records("{$cache}/pl/A03_Granice_gmin.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
-    $k = (string) $a['JPT_KOD_JE'];
-    $add('PL', 'PL-' . substr($k, 0, 6), $a['JPT_NAZWA_'], (string) ($plPowiaty[substr($k, 0, 4)] ?? ''), (string) ($plWoj[substr($k, 0, 2)] ?? ''), $polys);
-}
-
-// Pays-Bas (Kadaster : RD New)
-$nl = new PDO('sqlite:' . "{$cache}/nl/BestuurlijkeGebieden_2026.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-foreach ($nl->query('SELECT code, naam, ligt_in_provincie_naam, geom FROM gemeentegebied') as $r) {
-    $add('NL', 'NL-' . $r['code'], $r['naam'], '', (string) $r['ligt_in_provincie_naam'], gpkg_polygons($r['geom'], static fn(float $x, float $y) => rd_to_wgs84($x, $y)));
-}
-$nl = null;
-
-// Slovénie (GURS, service web déjà en GPS)
-$si = json_decode((string) file_get_contents("{$cache}/si/obcine.json"), true, 512, JSON_THROW_ON_ERROR);
-foreach ($si['features'] as $f) { $add('SI', 'SI-' . $f['properties']['SIFRA'], (string) $f['properties']['NAZIV'], '', '', geojson_polygons($f['geometry'])); }
-unset($si);
-
-// Hongrie (Lechner : EOV ; comitat retrouvé par position)
-$huCounties = []; $huSettlements = [];
-foreach (shapefile_records("{$cache}/hu/AdministrativeUnits.shp", static fn(float $x, float $y) => eov_to_wgs84($x, $y)) as [$a, $polys]) {
-    if ($a['namespace'] === 'HU.AU.CY') { $huCounties[$a['namn']] = $polys; }
-    elseif ($a['namespace'] === 'HU.AU.ST') { $huSettlements[] = [$a, $polys]; }
-}
 /** Nom de la zone (parmi $areas) qui contient un point intérieur de $polys ; rectangles englobants mis en cache. */
 $containing = static function (array $polys, array $areas): string {
     static $boxes = [];
@@ -604,15 +522,183 @@ $containing = static function (array $polys, array $areas): string {
     }
     return '';
 };
+// « Језеро / Opština Jezero » → « Jezero » ; « Grad Dugo Selo » → « Dugo Selo »
+$stripPrefix = static fn(string $n): string => trim((string) preg_replace('/^(Grad|Općina|Opcina|Opština|Opstina|Општина|Град)\s+/u', '',
+    str_contains($n, ' / ') ? trim(substr($n, strrpos($n, ' / ') + 3)) : $n));
+
+// ─── Pilote : un processus par pays (mémoire libérée entre deux), puis voisinages entre pays ───
+//   php scripts/build-reference-europe.php                tous les pays, puis frontières et catalogue
+//   php scripts/build-reference-europe.php --only DE,PL   seulement ces pays (les autres fichiers restent), puis frontières
+//   php scripts/build-reference-europe.php --country DE   (interne) un pays : son fichier geo-de + ses points de limite extérieure
+$work = "{$cache}/work";
+@mkdir($work, 0775, true);
+$onlyCountry = ($argv[1] ?? '') === '--country' ? strtoupper((string) ($argv[2] ?? '')) : '';
+$wanted = static fn(string ...$codes): bool => in_array($onlyCountry, $codes, true);
+if ($onlyCountry === '') {
+    $todo = ($argv[1] ?? '') === '--only' ? array_map('strtoupper', explode(',', (string) ($argv[2] ?? ''))) : ['FR', ...array_keys(array_diff_key($countryNames, ['FR' => 1]))];
+    // 3 pays à la fois (le plus gros, la Russie ou le Royaume-Uni, prend ~8 Go)
+    $running = []; $failed = [];
+    while ($todo || $running) {
+        while ($todo && count($running) < 3) {
+            $cc = array_shift($todo);
+            $log = "{$work}/log-{$cc}.txt";
+            $running[$cc] = proc_open([PHP_BINARY, '-d', 'memory_limit=24G', __FILE__, '--country', $cc], [1 => ['file', $log, 'w'], 2 => ['file', $log, 'a']], $pipes);
+        }
+        foreach ($running as $cc => $proc) {
+            $st = proc_get_status($proc);
+            if ($st['running']) { continue; }
+            proc_close($proc); unset($running[$cc]);
+            $log = (string) @file_get_contents("{$work}/log-{$cc}.txt");
+            if ($st['exitcode'] !== 0) { $failed[] = $cc; echo "ÉCHEC {$cc} :\n{$log}\n"; } else { echo $log; }
+        }
+        usleep(200000);
+    }
+    if ($failed) { fwrite(STDERR, 'Pays en échec : ' . implode(', ', $failed) . "\n"); exit(1); }
+    goto borders;
+}
+
+if ($wanted('BE')) {
+// Belgique
+$be = json_decode((string) file_get_contents("{$cache}/communes-belgique-2025.geojson"), true, 512, JSON_THROW_ON_ERROR);
+foreach ($be['features'] as $f) {
+    $p = $f['properties'];
+    $langs = (array) ($p['mun_off_language'] ?? ['FR']);
+    $lang = in_array('FR', $langs, true) ? 'fr' : strtolower((string) $langs[0]);
+    $name = $first($p['mun_name_' . $lang] ?? '') ?: $first($p['mun_name_fr'] ?? '');
+    $alt = array_values(array_unique(array_filter([$first($p['mun_name_fr'] ?? ''), $first($p['mun_name_nl'] ?? ''), $first($p['mun_name_de'] ?? '')], static fn($n) => $n !== '' && $n !== $name)));
+    $add('BE', 'BE-' . $first($p['mun_code'] ?? ''), $name, trim((string) preg_replace("/^Province (de |du |d’|d')/u", '', $first($p['prov_name_fr'] ?? ''))),
+        $first($p['reg_name_fr'] ?? ''), geojson_polygons($f['geometry'] ?? []), implode(',', $alt));
+}
+unset($be);
+}
+if ($wanted('CH', 'LI')) {
+// Suisse et Liechtenstein
+$gpkg = glob("{$cache}/ch/*.gpkg")[0] ?? '';
+$ch = new PDO('sqlite:' . $gpkg, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+$cantons = []; foreach ($ch->query('SELECT kantonsnummer, name FROM tlm_kantonsgebiet') as $r) { $cantons[(int) $r['kantonsnummer']] = $r['name']; }
+$districts = []; foreach ($ch->query('SELECT bezirksnummer, name FROM tlm_bezirksgebiet') as $r) { $districts[(int) $r['bezirksnummer']] = $r['name']; }
+foreach ($ch->query("SELECT bfs_nummer, name, icc, kantonsnummer, bezirksnummer, geom FROM tlm_hoheitsgebiet WHERE objektart='Gemeindegebiet' AND icc IN ('CH','LI') ORDER BY bfs_nummer") as $r) {
+    $cc = $r['icc'];
+    $add($cc, $cc . '-' . (int) $r['bfs_nummer'], $r['name'], $cc === 'CH' ? (string) ($districts[(int) $r['bezirksnummer']] ?? '') : '',
+        $cc === 'CH' ? (string) ($cantons[(int) $r['kantonsnummer']] ?? '') : '', gpkg_polygons($r['geom'], static fn(float $x, float $y) => lv95_to_wgs84($x, $y)));
+}
+$ch = null;
+}
+if ($wanted('LU')) {
+// Luxembourg
+$lu = json_decode((string) file_get_contents("{$cache}/communes-luxembourg-4326.geojson"), true, 512, JSON_THROW_ON_ERROR);
+foreach ($lu['features'] as $f) { $p = $f['properties']; $add('LU', 'LU-' . $p['LAU2'], (string) $p['COMMUNE'], (string) $p['CANTON'], '', geojson_polygons($f['geometry'])); }
+unset($lu);
+}
+if ($wanted('DE')) {
+// Allemagne (VG250 : UTM 32 ; seulement les terres, GF = 4)
+$de = new PDO('sqlite:' . glob("{$cache}/de/*/DE_VG250.gpkg")[0], null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+$lander = []; foreach ($de->query('SELECT DISTINCT SN_L, GEN FROM vg250_lan WHERE GF=4') as $r) { $lander[$r['SN_L']] = $r['GEN']; }
+$kreise = []; foreach ($de->query('SELECT DISTINCT AGS, GEN, BEZ FROM vg250_krs WHERE GF=4') as $r) { $kreise[$r['AGS']] = $r['GEN']; }
+foreach ($de->query('SELECT AGS, GEN, SN_L, geom FROM vg250_gem WHERE GF=4') as $r) {
+    $add('DE', 'DE-' . $r['AGS'], $r['GEN'], (string) ($kreise[substr($r['AGS'], 0, 5)] ?? ''), (string) ($lander[$r['SN_L']] ?? ''),
+        gpkg_polygons($r['geom'], static fn(float $x, float $y) => utm_to_wgs84($x, $y, 32)));
+}
+$de = null;
+}
+if ($wanted('IT')) {
+// Italie (ISTAT généralisé : UTM 32 WGS84)
+$itRegions = []; foreach (shapefile_records(glob("{$cache}/it/Reg*/*.shp")[0], static fn($x, $y) => [0, 0]) as [$a]) { $itRegions[(int) $a['COD_REG']] = $a['DEN_REG']; }
+$itProv = []; foreach (shapefile_records(glob("{$cache}/it/ProvCM*/*.shp")[0], static fn($x, $y) => [0, 0]) as [$a]) { $itProv[(int) $a['COD_UTS']] = $a['DEN_UTS']; }
+foreach (shapefile_records(glob("{$cache}/it/Com*/*.shp")[0], static fn(float $x, float $y) => utm_to_wgs84($x, $y, 32)) as [$a, $polys]) {
+    $add('IT', 'IT-' . $a['PRO_COM_T'], $a['COMUNE'], (string) ($itProv[(int) $a['COD_UTS']] ?? ''), (string) ($itRegions[(int) $a['COD_REG']] ?? ''), $polys);
+}
+}
+if ($wanted('AT')) {
+// Autriche (GPS ; Land d'après le 1er chiffre du code, district d'après GeoNames plus bas)
+$atLander = [1 => 'Burgenland', 2 => 'Kärnten', 3 => 'Niederösterreich', 4 => 'Oberösterreich', 5 => 'Salzburg', 6 => 'Steiermark', 7 => 'Tirol', 8 => 'Vorarlberg', 9 => 'Wien'];
+$at = json_decode((string) file_get_contents("{$cache}/communes-autriche-2026.geojson"), true, 512, JSON_THROW_ON_ERROR);
+foreach ($at['features'] as $f) {
+    $id = (string) $f['properties']['g_id'];
+    $add('AT', 'AT-' . $id, (string) $f['properties']['g_name'], '', $atLander[(int) $id[0]] ?? '', geojson_polygons($f['geometry']));
+}
+unset($at);
+}
+if ($wanted('ES')) {
+// Espagne (CNIG : ETRS89 / REGCAN95, équivalents GPS ; NATCODE = 34 + communauté + province + code INE)
+$esDir = $root . '/lineas_limite';
+$esCommunities = []; $esProvinces = [];
+foreach (['peninbal_etrs89', 'canarias_wgs84'] as $zone) {
+    $dir = $zone === 'canarias_wgs84' ? 'SHP_WGS84' : 'SHP_ETRS89';
+    foreach (shapefile_records("{$esDir}/{$dir}/recintos_autonomicas_inspire_{$zone}/recintos_autonomicas_inspire_{$zone}.shp", static fn($x, $y) => [0, 0]) as [$a]) { $esCommunities[substr($a['NATCODE'], 2, 2)] = $a['NAMEUNIT']; }
+    foreach (shapefile_records("{$esDir}/{$dir}/recintos_provinciales_inspire_{$zone}/recintos_provinciales_inspire_{$zone}.shp", static fn($x, $y) => [0, 0]) as [$a]) { $esProvinces[substr($a['NATCODE'], 4, 2)] = $a['NAMEUNIT']; }
+}
+foreach (['peninbal_etrs89', 'canarias_wgs84'] as $zone) {
+    $dir = $zone === 'canarias_wgs84' ? 'SHP_WGS84' : 'SHP_ETRS89';
+    foreach (shapefile_records("{$esDir}/{$dir}/recintos_municipales_inspire_{$zone}/recintos_municipales_inspire_{$zone}.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
+        $nat = (string) $a['NATCODE'];
+        $add('ES', 'ES-' . substr($nat, -5), (string) $a['NAMEUNIT'], (string) ($esProvinces[substr($nat, 4, 2)] ?? ''), (string) ($esCommunities[substr($nat, 2, 2)] ?? ''), $polys);
+    }
+}
+}
+if ($wanted('OM')) {
+// Outre-mer français (codes INSEE, sans préfixe)
+foreach (['guadeloupe' => 'Guadeloupe', 'martinique' => 'Martinique', 'guyane' => 'Guyane', 'la-reunion' => 'La Réunion', 'mayotte' => 'Mayotte'] as $file => $region) {
+    $om = json_decode((string) file_get_contents("{$cache}/communes-{$file}.geojson"), true, 512, JSON_THROW_ON_ERROR);
+    foreach ($om['features'] as $f) { $add('OM', (string) $f['properties']['code'], (string) $f['properties']['nom'], $region, $region, geojson_polygons($f['geometry'])); }
+}
+}
+if ($wanted('CZ')) {
+// Tchéquie (RÚIAN : Křovák, S-JTSK ; districts et régions d'après leurs propres fichiers)
+$czOkresy = []; foreach (shapefile_records("{$cache}/cz/1/OKRESY_P.shp", static fn($x, $y) => [0, 0]) as [$a]) { $czOkresy[$a['KOD']] = $a['NAZEV']; }
+$czKraje = []; foreach (shapefile_records("{$cache}/cz/1/VUSC_P.shp", static fn($x, $y) => [0, 0]) as [$a]) { $czKraje[$a['KOD']] = $a['NAZEV']; }
+foreach (shapefile_records("{$cache}/cz/1/OBCE_P.shp", static fn(float $x, float $y) => krovak_to_wgs84($x, $y)) as [$a, $polys]) {
+    $add('CZ', 'CZ-' . $a['KOD'], $a['NAZEV'], (string) ($czOkresy[$a['OKRES_KOD']] ?? ''), (string) ($czKraje[$a['VUSC_KOD']] ?? ''), $polys);
+}
+}
+if ($wanted('SK')) {
+// Slovaquie (INSPIRE : obce = 4e niveau ; district et région d'après les niveaux supérieurs)
+$sk = new PDO('sqlite:' . "{$cache}/sk/INSPIRE_AU.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+$skUnits = []; foreach ($sk->query("SELECT id, name, upperLevelUnit FROM AdministrativeUnit") as $r) { $skUnits[$r['id']] = $r; }
+foreach ($sk->query("SELECT nationalCode, name, upperLevelUnit, geometry FROM AdministrativeUnit WHERE nationalLevel LIKE '%4thOrder'") as $r) {
+    $okres = $skUnits[$r['upperLevelUnit']] ?? null; $kraj = $okres ? ($skUnits[$okres['upperLevelUnit']] ?? null) : null;
+    $add('SK', 'SK-' . $r['nationalCode'], $r['name'], trim(preg_replace('/^okres /u', '', (string) ($okres['name'] ?? '')) ?? ''),
+        (string) ($kraj['name'] ?? ''), gpkg_polygons($r['geometry'], static fn(float $x, float $y) => [round($x, 6), round($y, 6)]));
+}
+$sk = null;
+}
+if ($wanted('PL')) {
+// Pologne (PRG : ETRS89 en degrés ; gmina = 6 premiers chiffres du code TERYT, comme GeoNames)
+$plPowiaty = []; foreach (shapefile_records("{$cache}/pl/A02_Granice_powiatow.shp", static fn($x, $y) => [0, 0]) as [$a]) { $plPowiaty[$a['JPT_KOD_JE']] = preg_replace('/^powiat /u', '', $a['JPT_NAZWA_']); }
+$plWoj = []; foreach (shapefile_records("{$cache}/pl/A01_Granice_wojewodztw.shp", static fn($x, $y) => [0, 0]) as [$a]) { $plWoj[$a['JPT_KOD_JE']] = preg_replace('/^województwo /u', '', $a['JPT_NAZWA_']); }
+foreach (shapefile_records("{$cache}/pl/A03_Granice_gmin.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
+    $k = (string) $a['JPT_KOD_JE'];
+    $add('PL', 'PL-' . substr($k, 0, 6), $a['JPT_NAZWA_'], (string) ($plPowiaty[substr($k, 0, 4)] ?? ''), (string) ($plWoj[substr($k, 0, 2)] ?? ''), $polys);
+}
+}
+if ($wanted('NL')) {
+// Pays-Bas (Kadaster : RD New)
+$nl = new PDO('sqlite:' . "{$cache}/nl/BestuurlijkeGebieden_2026.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+foreach ($nl->query('SELECT code, naam, ligt_in_provincie_naam, geom FROM gemeentegebied') as $r) {
+    $add('NL', 'NL-' . $r['code'], $r['naam'], '', (string) $r['ligt_in_provincie_naam'], gpkg_polygons($r['geom'], static fn(float $x, float $y) => rd_to_wgs84($x, $y)));
+}
+$nl = null;
+}
+if ($wanted('SI')) {
+// Slovénie (GURS, service web déjà en GPS)
+$si = json_decode((string) file_get_contents("{$cache}/si/obcine.json"), true, 512, JSON_THROW_ON_ERROR);
+foreach ($si['features'] as $f) { $add('SI', 'SI-' . $f['properties']['SIFRA'], (string) $f['properties']['NAZIV'], '', '', geojson_polygons($f['geometry'])); }
+unset($si);
+}
+if ($wanted('HU')) {
+// Hongrie (Lechner : EOV ; comitat retrouvé par position)
+$huCounties = []; $huSettlements = [];
+foreach (shapefile_records("{$cache}/hu/AdministrativeUnits.shp", static fn(float $x, float $y) => eov_to_wgs84($x, $y)) as [$a, $polys]) {
+    if ($a['namespace'] === 'HU.AU.CY') { $huCounties[$a['namn']] = $polys; }
+    elseif ($a['namespace'] === 'HU.AU.ST') { $huSettlements[] = [$a, $polys]; }
+}
 foreach ($huSettlements as [$a, $polys]) {
     $add('HU', 'HU-' . substr($a['shn'], 2), str_replace('_', ' ', $a['namn']), '', $containing($polys, $huCounties), $polys);
 }
 unset($huSettlements);
-
+}
+if ($wanted('PT', 'HR', 'BA', 'AD', 'MC', 'VA', 'SM')) {
 // OpenStreetMap (Portugal, Croatie, Bosnie, micro-États)
-// « Језеро / Opština Jezero » → « Jezero » ; « Grad Dugo Selo » → « Dugo Selo »
-$stripPrefix = static fn(string $n): string => trim((string) preg_replace('/^(Grad|Općina|Opcina|Opština|Opstina|Општина|Град)\s+/u', '',
-    str_contains($n, ' / ') ? trim(substr($n, strrpos($n, ' / ') + 3)) : $n));
 $ptCounty = []; $ptState = []; $ptA1 = [];
 foreach (geonames_rows("{$cache}/geonames-PT.zip", 'PT') as $r) {
     if (($r[6] ?? '') !== 'A') { continue; }
@@ -653,27 +739,36 @@ foreach (osm_elements("{$cache}/osm/SM-8.json") as $e) {
     $polys = osm_polygons($e);
     if ($polys && $containing($polys, ['SM' => $smCountry]) === 'SM') { $add('SM', 'SM-' . $e['id'], (string) $e['tags']['name'], '', '', $polys); }
 }
-
+}
+if ($wanted('QC')) {
 // Québec (SDA 1:20 000 : NAD83, équivalent GPS ; municipalités, territoires non organisés et réserves)
 $qc = new PDO('sqlite:' . "{$cache}/qc/SDA.gpkg", null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 foreach ($qc->query('SELECT MUS_CO_GEO, MUS_NM_MUN, MUS_NM_MRC, geom FROM munic_s') as $r) {
     $add('QC', 'QC-' . $r['MUS_CO_GEO'], (string) $r['MUS_NM_MUN'], (string) $r['MUS_NM_MRC'], 'Québec', gpkg_polygons($r['geom'], static fn(float $x, float $y) => [round($x, 6), round($y, 6)]));
 }
 $qc = null;
+}
 // ─── Autres continents et reste de l'Europe ───
 
+if ($wanted('US')) {
 // États-Unis : comtés (Census Bureau, NAD83 ≈ GPS)
 foreach (shapefile_records("{$cache}/us/cb_2024_us_county_500k.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
     $add('US', 'US-' . $a['GEOID'], $a['NAMELSAD'], '', $a['STATE_NAME'], $polys);
 }
+}
+if ($wanted('FI')) {
 // Finlande : communes (Statistics Finland, service web en GPS ; nom finnois, nom suédois en variante)
 $fi = json_decode((string) file_get_contents("{$cache}/fi/kunnat.json"), true, 512, JSON_THROW_ON_ERROR);
 foreach ($fi['features'] as $f) { $p = $f['properties']; $add('FI', 'FI-' . $p['kunta'], $p['nimi'], '', '', geojson_polygons($f['geometry']), $p['namn'] !== $p['nimi'] ? (string) $p['namn'] : ''); }
 unset($fi);
+}
+if ($wanted('AU')) {
 // Australie : collectivités locales (ABS, GDA2020 ≈ GPS) ; les zones « non incorporées » ou sans adresse sont gardées
 foreach (shapefile_records("{$cache}/au/LGA_2024_AUST_GDA2020.shp", static fn(float $x, float $y) => [round($x, 6), round($y, 6)]) as [$a, $polys]) {
     $add('AU', 'AU-' . $a['LGA_CODE24'], (string) $a['LGA_NAME24'], '', (string) $a['STE_NAME21'], $polys);
 }
+}
+if ($wanted('IE')) {
 // Irlande : paroisses civiles (Tailte Éireann) ; une paroisse coupée par une limite de comté est regroupée par son identifiant
 $ieCounties = []; foreach (osm_elements("{$cache}/osm/IE-6.json") as $e) { $ieCounties[preg_replace('/^County /u', '', (string) ($e['tags']['name:en'] ?? $e['tags']['name']))] = osm_polygons($e); }
 foreach (glob("{$cache}/ie/parishes-*.geojson") as $file) {
@@ -684,6 +779,8 @@ foreach (glob("{$cache}/ie/parishes-*.geojson") as $file) {
         $add('IE', 'IE-' . (int) $p['BDY_ID'], $name, $containing($polys, $ieCounties), '', $polys, trim((string) preg_replace('/^Cuid de /u', '', (string) $p['GLE_NAME_VALUE'])));
     }
 }
+}
+if ($wanted('GB')) {
 // Royaume-Uni : paroisses d'Angleterre et du pays de Galles (ONS) et paroisses civiles d'Écosse (NRS)
 foreach (glob("{$cache}/gb/parishes-*.geojson") as $file) {
     foreach (json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'] as $f) {
@@ -697,6 +794,7 @@ foreach (glob("{$cache}/gb/scotland-parishes-*.geojson") as $file) {
     foreach (json_decode((string) file_get_contents($file), true, 512, JSON_THROW_ON_ERROR)['features'] as $f) {
         $add('GB', 'GB-SCP' . $f['properties']['code'], (string) $f['properties']['name'], '', 'Scotland', geojson_polygons($f['geometry'] ?? []));
     }
+}
 }
 
 // Pays décrits par OpenStreetMap : [fichier, niveau des communes, niveaux qui comblent les vides, niveau « comté », niveau « région »]
@@ -714,6 +812,117 @@ $osmCountries = [
     'NC' => ['FR-NC-8', '8', [], '', ''], 'PF' => ['FR-PF-8', '8', [], '', ''], 'WF' => ['FR-WF-87', '8', ['7'], '', ''],
     // Canada hors Québec (le Québec vient de sa source officielle) : une province par fichier, « CA-NB-86 »…
     'CA' => ['CA-*-86', '8', ['6'], '6', ''],
+    // Amérique du Sud, Moyen-Orient, Asie, Afrique (2026-10-08)
+    'PS' => ['PS-54', '5', ['4'], '', '4'],
+    'MO' => ['MO-6', '6', [], '', ''],
+    'HK' => ['CN-HK-6', '6', [], '', ''],
+    'MD' => ['MD-4', '4', [], '', ''],
+    'MV' => ['MV-4', '4', [], '', ''],
+    'TW' => ['TW-74', '7', ['4'], '', '4'],
+    'SZ' => ['SZ-64', '6', ['4'], '', '4'],
+    'LS' => ['LS-4', '4', [], '', ''],
+    'ZW' => ['ZW-64', '6', [], '', '4'],
+    'ZM' => ['ZM-54', '5', [], '', '4'],
+    'SC' => ['SC-6', '6', [], '', ''],
+    'MZ' => ['MZ-54', '5', [], '', '4'],
+    'MW' => ['MW-4', '4', [], '', ''],
+    'MU' => ['MU-84', '8', ['4'], '4', ''],
+    'MG' => ['MG-64', '6', [], '', '4'],
+    'KM' => ['KM-6', '6', [], '', ''],
+    'ZA' => ['ZA-864', '8', ['6'], '6', '4'],
+    'TZ' => ['TZ-54', '5', [], '', '4'],
+    'SS' => ['SS-54', '5', [], '', '4'],
+    'SD' => ['SD-64', '6', ['4'], '', '4'],
+    'NA' => ['NA-4', '4', [], '', ''],
+    'LY' => ['LY-4', '4', [], '', ''],
+    'BW' => ['BW-4', '4', [], '', ''],
+    'BI' => ['BI-64', '6', ['4'], '', '4'],
+    'LR' => ['LR-4', '4', [], '', ''],
+    'UG' => ['UG-4', '4', [], '', ''],
+    'TD' => ['TD-4', '4', [], '', ''],
+    'ST' => ['ST-6', '6', [], '', ''],
+    'SO' => ['SO-654', '6', [], '5', '4'],
+    'SL' => ['SL-54', '5', [], '', '4'],
+    'RW' => ['RW-864', '8', ['6'], '6', '4'],
+    'KE' => ['KE-64', '6', ['4'], '4', ''],
+    'GW' => ['GW-64', '6', [], '', '4'],
+    'GQ' => ['GQ-64', '6', ['4'], '', '4'],
+    'GA' => ['GA-64', '6', [], '', '4'],
+    'ET' => ['ET-54', '5', ['4'], '', '4'],
+    'ER' => ['ER-4', '4', [], '', ''],
+    'DJ' => ['DJ-4', '4', [], '', ''],
+    'CV' => ['CV-6', '6', [], '', ''],
+    'CM' => ['CM-864', '8', ['6'], '6', '4'],
+    'CG' => ['CG-654', '6', ['5', '4'], '', '4'],
+    'CF' => ['CF-4', '4', [], '', ''],
+    'CD' => ['CD-64', '6', ['4'], '', '4'],
+    'AO' => ['AO-64', '6', ['4'], '', '4'],
+    'BR' => ['BR-84', '8', [], '', '4'],
+    'AR' => ['AR-54', '5', [], '', '4'],
+    'CL' => ['CL-864', '8', [], '6', '4'],
+    'CO' => ['CO-64', '6', [], '', '4'],
+    'EC' => ['EC-864', '8', ['6'], '6', '4'],
+    'PE' => ['PE-864', '8', [], '6', '4'],
+    'BO' => ['BO-864', '8', [], '6', '4'],
+    'VE' => ['VE-764', '7', ['6'], '6', '4'],
+    'PY' => ['PY-84', '8', ['4'], '', '4'],
+    'UY' => ['UY-4', '4', [], '', ''],
+    'GY' => ['GY-64', '6', ['4'], '4', ''],
+    'SR' => ['SR-64', '6', [], '', '4'],
+    'EG' => ['EG-4', '4', [], '', ''],
+    'SY' => ['SY-654', '6', [], '5', '4'],
+    'IQ' => ['IQ-64', '6', [], '', '4'],
+    'IR' => ['IR-654', '6', ['5'], '5', '4'],
+    'IL' => ['IL-854', '8', ['5'], '5', '4'],
+    'SA' => ['SA-64', '6', [], '', '4'],
+    'AE' => ['AE-4', '4', [], '', ''],
+    'BH' => ['BH-4', '4', [], '', ''],
+    'QA' => ['QA-4', '4', [], '', ''],
+    'KW' => ['KW-4', '4', [], '', ''],
+    'QO' => ['OM-64', '6', [], '', '4'],
+    'YE' => ['YE-64', '6', [], '', '4'],
+    'CN' => ['CN-654', '6', [], '5', '4'],
+    'JP' => ['JP-764', '7', [], '6', '4'],
+    'KR' => ['KR-64', '6', [], '', '4'],
+    'KP' => ['KP-64', '6', [], '', '4'],
+    'RU' => ['RU-64', '6', [], '', '4'],
+    'IN' => ['IN-654', '6', ['5'], '5', '4'],
+    'BD' => ['BD-654', '6', [], '5', '4'],
+    'LK' => ['LK-54', '5', [], '', '4'],
+    'VN' => ['VN-64', '6', [], '', '4'],
+    'TH' => ['TH-64', '6', [], '', '4'],
+    'KH' => ['KH-64', '6', [], '', '4'],
+    'LA' => ['LA-64', '6', [], '', '4'],
+    'MM' => ['MM-764', '7', [], '6', '4'],
+    'ID' => ['ID-54', '5', [], '', '4'],
+    'MY' => ['MY-64', '6', [], '', '4'],
+    'BN' => ['BN-64', '6', [], '', '4'],
+    'BT' => ['BT-64', '6', [], '', '4'],
+    'KG' => ['KG-64', '6', [], '', '4'],
+    'KZ' => ['KZ-64', '6', [], '', '4'],
+    'MN' => ['MN-64', '6', [], '', '4'],
+    'NP' => ['NP-764', '7', [], '6', '4'],
+    'PG' => ['PG-54', '5', [], '', '4'],
+    'SG' => ['SG-6', '6', [], '', ''],
+    'TJ' => ['TJ-64', '6', [], '', '4'],
+    'TL' => ['TL-54', '5', [], '', '4'],
+    'TM' => ['TM-54', '5', [], '', '4'],
+    'UZ' => ['UZ-64', '6', [], '', '4'],
+    'PH' => ['PH-64', '6', [], '', '4'],
+    'AF' => ['AF-54', '5', [], '', '4'],
+    'PK' => ['PK-764', '7', ['6'], '6', '4'],
+    'SN' => ['SN-854', '8', ['5'], '5', '4'],
+    'ML' => ['ML-64', '6', [], '', '4'],
+    'MR' => ['MR-4', '4', [], '', ''],
+    'BF' => ['BF-654', '6', [], '5', '4'],
+    'BJ' => ['BJ-64', '6', [], '', '4'],
+    'CI' => ['CI-764', '7', ['6'], '6', '4'],
+    'GH' => ['GH-64', '6', [], '', '4'],
+    'GM' => ['GM-64', '6', [], '', '4'],
+    'NE' => ['NE-64', '6', [], '', '4'],
+    'NG' => ['NG-64', '6', [], '', '4'],
+    'TG' => ['TG-64', '6', ['4'], '', '4'],
+    'GN' => ['GN-64', '6', [], '', '4'],
 ];
 // Organisation propre à chaque province dans OSM : [niveaux des communes (tous gardés), niveaux qui comblent les vides]
 $caLevels = ['NB' => [['8'], []], 'NS' => [['6'], []], 'PE' => [['8'], ['6']], 'ON' => [['8'], ['6']], 'MB' => [['6'], []], 'NL' => [['6'], []],
@@ -749,20 +958,22 @@ $osmName = static function (array $tags, string $cc = '') use ($stripPrefix): ar
         '/\s+(kommun|kommune|municipality|municipal district|community)$/iu'], '', $stripPrefix($n)));
     $latin = static fn(string $n): bool => (bool) preg_match('/^[\p{Latin}\p{Common}\p{Inherited}]+$/u', $n);
     if ($local !== '' && $latin($local)) { return [$clean($local), '']; }
-    foreach (['name:fr', 'name:sr-Latn', 'name:en', 'int_name', 'name:latin', 'name:uk-Latn', 'name:be-Latn', 'name:bg-Latn'] as $k) {
+    foreach (['name:fr', 'name:sr-Latn', 'name:en', 'int_name', 'name:latin', 'name:uk-Latn', 'name:be-Latn', 'name:bg-Latn', 'name:zh-Latn-pinyin',
+        'name:ja-Latn', 'name:ja_rm', 'name:ko-Latn', 'name:ru-Latn', 'name:th-Latn', 'name:ar-Latn', 'name:fa-Latn'] as $k) {
         if (!empty($tags[$k]) && $latin((string) $tags[$k])) { return [$clean((string) $tags[$k]), $local]; }
     }
     if (preg_match('/\p{Cyrillic}/u', $local)) { return [$clean(cyrillic_to_latin($local, ['UA' => 'uk', 'BG' => 'bg'][$cc] ?? 'ru')), $local]; }
     return [$clean($local), ''];
 };
 foreach ($osmCountries as $cc => [$file, $level, $fill, $countyLevel, $stateLevel]) {
+  if (!$wanted($cc)) { continue; }
   $paths = glob("{$cache}/osm/{$file}.json");
   if (!$paths) { echo "  (pas de fichier {$file}.json : {$countryNames[$cc]} ignoré)\n"; continue; }
   foreach ($paths as $path) {
     $fixedState = $cc === 'CA' && preg_match('/CA-([A-Z]{2})-/', $path, $pm) ? ($caProvinces[$pm[1]] ?? '') : '';
     // La zone d'Overpass renvoie aussi les unités des pays voisins qui touchent la frontière : on ne garde que celles dont
     // un point intérieur est dans le contour du pays (ou de la province).
-    $outlineKey = $cc === 'CA' ? 'CA-' . ($pm[1] ?? '') : $cc;
+    $outlineKey = $cc === 'CA' ? 'CA-' . ($pm[1] ?? '') : ($isoOf[$cc] ?? $cc);
     $outline = [];
     // Îles (Nouvelle-Calédonie, Polynésie, Wallis-et-Futuna) : aucun voisin terrestre, et leur contour OSM n'englobe pas toutes les îles
     if (!in_array($cc, ['NC', 'PF', 'WF'], true)) {
@@ -800,11 +1011,34 @@ foreach ($osmCountries as $cc => [$file, $level, $fill, $countyLevel, $stateLeve
     if ($outside) { echo "  {$outlineKey} : {$outside} unité(s) d'un pays voisin écartée(s)\n"; }
   }
 }
-foreach (['FR-PM' => 'Saint-Pierre-et-Miquelon', 'FR-BL' => 'Saint-Barthélemy', 'FR-MF' => 'Saint-Martin'] as $file => $territory) {
+// geoBoundaries (gbOpen, licences ouvertes) : pays qu'OpenStreetMap n'a pas pu fournir (serveurs saturés) — voir fetch-geoboundaries.php
+if ($onlyCountry !== '' && !isset($countries[$onlyCountry]) && is_file("{$cache}/geob/{$onlyCountry}.json")) {
+    $meta = json_decode((string) file_get_contents("{$cache}/geob/{$onlyCountry}.json"), true);
+    $gbStates = [];
+    if ($meta['state'] !== '') {
+        foreach (json_decode((string) file_get_contents("{$cache}/geob/{$onlyCountry}-{$meta['state']}.geojson"), true)['features'] ?? [] as $f) {
+            $gbStates[(string) ($f['properties']['shapeName'] ?? '')] = geojson_polygons($f['geometry'] ?? []);
+        }
+    }
+    foreach (json_decode((string) file_get_contents("{$cache}/geob/{$onlyCountry}-{$meta['fine']}.geojson"), true)['features'] ?? [] as $f) {
+        $polys = geojson_polygons($f['geometry'] ?? []);
+        if (!$polys) { continue; }
+        $id = (string) ($f['properties']['shapeID'] ?? md5(json_encode($f['properties'])));
+        $add($onlyCountry, $onlyCountry . '-' . substr(md5($id), 0, 10), trim((string) ($f['properties']['shapeName'] ?? '')), '', $gbStates ? $containing($polys, $gbStates) : '', $polys);
+    }
+    $sources[$onlyCountry] = 'geoBoundaries (gbOpen, ' . $meta['year'] . ') – ' . $meta['source'] . ' (' . $meta['license'] . ')';
+    $coarse[$onlyCountry] = true; // unités souvent étendues : le lieu garde son nom
+}
+foreach ($wanted('OM') ? ['FR-PM' => 'Saint-Pierre-et-Miquelon', 'FR-BL' => 'Saint-Barthélemy', 'FR-MF' => 'Saint-Martin'] : [] as $file => $territory) {
     foreach (is_file("{$cache}/osm/{$file}-8.json") ? osm_elements("{$cache}/osm/{$file}-8.json") : [] as $e) {
         $insee = (string) ($e['tags']['ref:INSEE'] ?? '');
         if (preg_match('/^97[578]\d\d$/', $insee)) { $add('OM', $insee, (string) $e['tags']['name'], $territory, $territory, osm_polygons($e)); }
     }
+}
+if ($wanted('FR')) {
+    $fr = json_decode((string) file_get_contents($root . '/data/geo/communes.geojson'), true, 512, JSON_THROW_ON_ERROR);
+    foreach ($fr['features'] as $f) { $add('FR', (string) $f['properties']['code'], (string) $f['properties']['nom'], '', '', geojson_polygons($f['geometry'] ?? [])); }
+    unset($fr);
 }
 foreach ($countries as $cc => $list) { printf("%-20s %6d communes\n", $countryNames[$cc], count($list)); }
 
@@ -816,42 +1050,37 @@ foreach ($countries as $cc => $list) {
     printf("Voisinages en %-18s : %6d paires (%.0f s)\n", $countryNames[$cc], array_sum(array_map('count', $internal[$cc])) / 2, microtime(true) - $t);
 }
 
-// ─── Voisinages de part et d'autre des frontières ────────────────────────────────────────────
-// Seules les communes proches d'un autre pays sont comparées : grille de cellules de 0,05° marquant les pays présents.
+// ─── Communes au bord du pays (frontière ou côte : un point de leur limite sans commune voisine du même pays à moins de INTERNAL_M) ───
+// Rangés par cellules de 0,05° : le pilote ne compare ensuite que les cellules où deux pays se touchent.
 $countryOf = static fn(string $code): string => preg_match('/^([A-Z]{2})-/', $code, $m) ? $m[1] : (str_starts_with($code, '97') ? 'OM' : 'FR');
-$fr = json_decode((string) file_get_contents($root . '/data/geo/communes.geojson'), true, 512, JSON_THROW_ON_ERROR);
-$all = [];
-foreach ($fr['features'] as $f) { $polys = geojson_polygons($f['geometry'] ?? []); if ($polys) { $all[(string) $f['properties']['code']] = simplify_polygons($polys, PRESIMPLIFY_M); } }
-unset($fr);
-foreach ($countries as $cc => $list) { if ($cc !== 'OM') { foreach ($list as $code => $c) { $all[$code] = $c['polys']; } } }
-$cell = 0.05; $occupancy = []; $boxesAll = [];
-foreach ($all as $code => $polys) {
-    $b = $boxesAll[$code] = bounds($polys);
-    for ($x = (int) floor($b[0] / $cell); $x <= (int) floor($b[2] / $cell); $x++) { for ($y = (int) floor($b[1] / $cell); $y <= (int) floor($b[3] / $cell); $y++) { $occupancy["{$x}:{$y}"][$countryOf((string) $code)] = true; } }
-}
-$candidates = [];
-foreach ($boxesAll as $code => $b) {
-    $mine = $countryOf((string) $code);
-    for ($x = (int) floor($b[0] / $cell) - 1; $x <= (int) floor($b[2] / $cell) + 1 && !isset($candidates[$code]); $x++) {
-        for ($y = (int) floor($b[1] / $cell) - 1; $y <= (int) floor($b[3] / $cell) + 1; $y++) {
-            foreach ($occupancy["{$x}:{$y}"] ?? [] as $cc => $_) { if ($cc !== $mine) { $candidates[$code] = $all[$code]; break 2; } }
+foreach ($countries as $cc => $list) {
+    $cellLat = INTERNAL_M / 110540; $grid = []; $samples = [];
+    foreach ($list as $code => $c) {
+        $samples[$code] = boundary_samples($c['polys']);
+        foreach ($samples[$code] as $p) { $grid[(int) floor($p[0] / (INTERNAL_M / (111320 * cos(deg2rad($p[1]))))) . ':' . (int) floor($p[1] / $cellLat)][$code][] = $p; }
+    }
+    $edges = []; $n = 0;
+    foreach ($samples as $code => $pts) {
+        $isEdge = false;
+        foreach ($pts as $p) {
+            $cx = (int) floor($p[0] / (INTERNAL_M / (111320 * cos(deg2rad($p[1]))))); $cy = (int) floor($p[1] / $cellLat); $shared = false;
+            for ($dx = -1; $dx <= 1 && !$shared; $dx++) { for ($dy = -1; $dy <= 1 && !$shared; $dy++) {
+                foreach ($grid[($cx + $dx) . ':' . ($cy + $dy)] ?? [] as $other => $otherPts) {
+                    if ($other === $code) { continue; }
+                    foreach ($otherPts as $q) { if (meters($p, $q) <= INTERNAL_M) { $shared = true; break 2; } }
+                }
+            } }
+            if (!$shared) { $isEdge = true; break; }
         }
+        // Commune au bord du pays : TOUT son contour est gardé (une commune qui ne touche la frontière que sur quelques
+        // mètres, près d'un point de jonction, serait sinon perdue)
+        if ($isEdge) { foreach ($pts as $p) { $edges[(int) floor($p[0] / 0.05) . ':' . (int) floor($p[1] / 0.05)][$code][] = [round($p[0], 6), round($p[1], 6)]; $n++; } }
     }
+    unset($grid, $samples);
+    file_put_contents("{$work}/edges-{$cc}.ser.gz", gzencode(serialize($edges), 6));
+    printf("Limites extérieures de %-18s : %d points\n", $countryNames[$cc], $n);
 }
-unset($all, $occupancy);
-printf("Communes proches d'une frontière : %d\n", count($candidates));
-$border = neighbors_by_distance($candidates, BORDER_M, static fn(string $a, string $b) => $countryOf($a) !== $countryOf($b));
-$borderPairs = []; $byPair = [];
-foreach ($border as $a => $list) {
-    foreach ($list as $b => $_) {
-        if (strcmp((string) $a, (string) $b) >= 0) { continue; }
-        $borderPairs[] = [(string) $a, (string) $b];
-        $k = implode('-', [min($countryOf((string) $a), $countryOf((string) $b)), max($countryOf((string) $a), $countryOf((string) $b))]);
-        $byPair[$k] = ($byPair[$k] ?? 0) + 1;
-    }
-}
-ksort($byPair);
-foreach ($byPair as $k => $n) { echo "Voisinages entre pays {$k} : {$n} paires\n"; }
+if ($wanted('FR')) { exit(0); } // la France n'a besoin que de ses limites (geo-fr est fabriqué par build-reference.php)
 
 // ─── Lieux GeoNames (anciennes communes et lieux-dits en sous-nom) ───────────────────────────
 /** Clé de commune GeoNames → code de nos contours, selon la façon dont chaque pays est numéroté. */
@@ -881,9 +1110,10 @@ function geonames_place_key(string $cc, array $r): string
 $geonamesFiles = ['BE' => ['BE'], 'CH' => ['CH'], 'LI' => ['LI'], 'LU' => ['LU'], 'DE' => ['DE'], 'IT' => ['IT'], 'AT' => ['AT'], 'ES' => ['ES'], 'OM' => ['GP', 'MQ', 'GF', 'RE', 'YT', 'PM', 'BL', 'MF'],
     'CZ' => ['CZ'], 'SK' => ['SK'], 'PL' => ['PL'], 'NL' => ['NL'], 'SI' => ['SI'], 'HU' => ['HU'], 'PT' => ['PT'], 'HR' => ['HR'], 'BA' => ['BA'],
     'AD' => ['AD'], 'MC' => ['MC'], 'SM' => ['SM'], 'VA' => ['VA'], 'QC' => ['CA']];
-foreach (array_keys($countries) as $cc) { if (!isset($geonamesFiles[$cc]) && is_file("{$cache}/geonames-{$cc}.zip")) { $geonamesFiles[$cc] = [$cc]; } }
+foreach (array_keys($countries) as $cc) { $iso = $isoOf[$cc] ?? $cc; if (!isset($geonamesFiles[$cc]) && is_file("{$cache}/geonames-{$iso}.zip")) { $geonamesFiles[$cc] = [$iso]; } }
 $places = [];
 foreach ($geonamesFiles as $cc => $files) {
+    if (!isset($countries[$cc])) { continue; }
     $byName = []; foreach ($countries[$cc] as $code => $c) { $byName[$fold($c['name'])] = $code; }
     // Index spatial (cellules de 0,1°) pour rattacher un lieu à la commune qui le contient
     $grid = [];
@@ -988,6 +1218,57 @@ foreach ($countries as $cc => $list) {
     $db->commit(); $db->exec('VACUUM'); $db = null;
     write_gz($tmp, "{$out}/geo-" . strtolower($cc) . '.sqlite.gz');
 }
+exit(0); // fin d'un pays
+
+// ─── Pilote : voisinages entre pays, à partir des limites extérieures de chacun ───
+borders:
+$cell = 0.05;
+$cellsOf = []; // cellule => pays présents
+foreach (glob("{$work}/edges-*.ser.gz") ?: [] as $file) {
+    $cc = substr(basename($file), 6, 2);
+    foreach (array_keys(unserialize((string) gzdecode((string) file_get_contents($file)))) as $k) { $cellsOf[$k][$cc] = true; }
+}
+// Cellules utiles : celles où un autre pays est présent dans la cellule ou une cellule voisine
+$useful = [];
+foreach ($cellsOf as $k => $ccs) {
+    [$x, $y] = array_map('intval', explode(':', $k));
+    for ($dx = -1; $dx <= 1; $dx++) { for ($dy = -1; $dy <= 1; $dy++) {
+        foreach ($cellsOf[($x + $dx) . ':' . ($y + $dy)] ?? [] as $other => $_) { if (count($ccs) > 1 || !isset($ccs[$other])) { $useful[$k] = true; break 2; } }
+    } }
+}
+$cellLat = BORDER_M / 110540; $grid = [];
+foreach (glob("{$work}/edges-*.ser.gz") ?: [] as $file) {
+    foreach (unserialize((string) gzdecode((string) file_get_contents($file))) as $k => $byCode) {
+        if (!isset($useful[$k])) { continue; }
+        foreach ($byCode as $code => $pts) { foreach ($pts as $p) { $grid[(int) floor($p[0] / (BORDER_M / (111320 * cos(deg2rad($p[1]))))) . ':' . (int) floor($p[1] / $cellLat)][$code][] = $p; } }
+    }
+}
+$countryOf = static fn(string $code): string => preg_match('/^([A-Z]{2})-/', $code, $m) ? $m[1] : (str_starts_with($code, '97') ? 'OM' : 'FR');
+$pairs = [];
+foreach ($grid as $k => $byCode) {
+    [$cx, $cy] = array_map('intval', explode(':', $k));
+    foreach ($byCode as $code => $pts) {
+        $mine = $countryOf((string) $code);
+        for ($dx = -1; $dx <= 1; $dx++) { for ($dy = -1; $dy <= 1; $dy++) {
+            foreach ($grid[($cx + $dx) . ':' . ($cy + $dy)] ?? [] as $other => $otherPts) {
+                if ($countryOf((string) $other) === $mine || isset($pairs[$code][$other])) { continue; }
+                foreach ($pts as $p) { foreach ($otherPts as $q) { if (meters($p, $q) <= BORDER_M) { $pairs[$code][$other] = $pairs[$other][$code] = true; break 2; } } }
+            }
+        } }
+    }
+}
+unset($grid);
+$borderPairs = []; $byPair = [];
+foreach ($pairs as $a => $list) {
+    foreach ($list as $b => $_) {
+        if (strcmp((string) $a, (string) $b) >= 0) { continue; }
+        $borderPairs[] = [(string) $a, (string) $b];
+        $kk = implode('-', [min($countryOf((string) $a), $countryOf((string) $b)), max($countryOf((string) $a), $countryOf((string) $b))]);
+        $byPair[$kk] = ($byPair[$kk] ?? 0) + 1;
+    }
+}
+ksort($byPair);
+foreach ($byPair as $kk => $n) { echo "Voisinages entre pays {$kk} : {$n} paires\n"; }
 $tmp = sys_get_temp_dir() . '/lcnda-frontieres-' . bin2hex(random_bytes(3)) . '.sqlite';
 $db = new PDO('sqlite:' . $tmp, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 $db->exec("CREATE TABLE reference_info (key TEXT PRIMARY KEY, value TEXT NOT NULL)");
@@ -999,6 +1280,7 @@ $info = $db->prepare('INSERT INTO reference_info VALUES(?,?)');
 foreach (['tolerance_m' => (string) BORDER_M, 'version' => date('Ymd'), 'built_at' => date(DATE_ATOM)] as $k => $v) { $info->execute([$k, $v]); }
 $db->commit(); $db->exec('VACUUM'); $db = null;
 write_gz($tmp, "{$out}/geo-frontieres.sqlite.gz");
+
 
 // ─── Catalogue (livré avec l'application) ───
 require __DIR__ . '/build-catalogue.php';

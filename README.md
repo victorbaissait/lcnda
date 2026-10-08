@@ -83,6 +83,7 @@ Ces composants gardent leur propre licence :
 | Communes de Finlande (© [Statistics Finland](https://stat.fi/)) | battues (`geo-fi`) | CC BY 4.0 |
 | Collectivités locales d'Australie (© [Australian Bureau of Statistics](https://www.abs.gov.au/)) | battues (`geo-au`) | CC BY 4.0 |
 | Communes des autres pays : Portugal, Croatie, Bosnie-Herzégovine, micro-États, pays baltes et nordiques, Balkans, Roumanie, Bulgarie, Grèce, Turquie, Caucase, Ukraine, Biélorussie, Maghreb, Liban, Jordanie, reste du Canada, Mexique, Amérique centrale, Nouvelle-Zélande, Nouvelle-Calédonie, Polynésie, Wallis-et-Futuna (© les contributeurs d'[OpenStreetMap](https://www.openstreetmap.org/copyright), récupérées par `scripts/fetch-osm-boundaries.php`) | battues (`geo-<code du pays>`) | [ODbL 1.0](https://opendatacommons.org/licenses/odbl/) : ces fichiers restent sous ODbL |
+| Communes d'une partie de l'Afrique et de Taïwan ([geoBoundaries](https://www.geoboundaries.org), d'après gouvernements, OCHA, Banque mondiale, GRID3… ; récupérées par `scripts/fetch-geoboundaries.php`) | battues (`geo-<code du pays>`) | licences ouvertes, indiquées dans la table `reference_info` de chaque fichier (domaine public, CC BY, CC BY IGO, ODbL ; CC BY-SA pour le Togo et Taïwan) |
 
 Les fonds de carte (OpenStreetMap, CARTO, OpenTopoMap, IGN, Esri…) sont chargés depuis internet, uniquement quand
 vous affichez une carte, et restent soumis aux conditions de leurs fournisseurs.
