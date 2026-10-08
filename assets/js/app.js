@@ -787,17 +787,20 @@
         const birthYear=Number(birth?.year||person.birth_year)||0;const deathYear=Number(death?.year||person.death_year)||0;
         const places=[];const addPlace=(kind,label,event)=>{const value=String(event?.place_name||'').split(',')[0].trim();if(value&&!places.some(p=>p.value===value))places.push({kind,label:`${label} : ${value}`,value});};
         addPlace('birth','Naissance',birth);addPlace('death','Décès',death);addPlace('other','Mariage',eventOf(['MARR']));
-        return {id:Number(person.id)||0,first,last,female:person.gender==='female',birthYear,deathYear,places,
-            partners:partners.map(partner=>({first:[partner.first_name,partner.middle_name].filter(Boolean).join(' ').trim(),last:String(partner.last_name||'').trim()})).filter(partner=>partner.first||partner.last)};
+        const firstOnly=String(person.first_name||'').trim().split(/\s+/)[0]||first;
+        return {id:Number(person.id)||0,first,firstOnly,last,female:person.gender==='female',birthYear,deathYear,places,
+            partners:partners.map(partner=>({first:[partner.first_name,partner.middle_name].filter(Boolean).join(' ').trim(),firstOnly:String(partner.first_name||'').trim().split(/\s+/)[0]||'',last:String(partner.last_name||'').trim()})).filter(partner=>partner.first||partner.last)};
     }
     /** Paramètres de la recherche d'après les options cochées sous les boutons. */
     function webSearchParams(ctx,options){
-        const p={first:ctx.first,last:ctx.last,name:[ctx.first,ctx.last].filter(Boolean).join(' '),place:'',placeKind:'birth',y1:0,y2:0,year:0,spouseFirst:'',spouseLast:'',spouseName:''};
+        // Sans « Deuxièmes prénoms » : seulement le premier prénom (« Bernard » et non « Bernard Raoul Auguste »)
+        const first=options.middle?ctx.first:(ctx.firstOnly||ctx.first);
+        const p={first,last:ctx.last,name:[first,ctx.last].filter(Boolean).join(' '),place:'',placeKind:'birth',y1:0,y2:0,year:0,spouseFirst:'',spouseLast:'',spouseName:''};
         if(options.place){const place=ctx.places.find(item=>item.value===options.place);p.place=options.place;p.placeKind=place?.kind||'birth';}
         if(options.years){p.y1=Number(options.y1)||0;p.y2=Number(options.y2)||p.y1;if(p.y1&&p.y2<p.y1)[p.y1,p.y2]=[p.y2,p.y1];p.year=p.y1&&p.y2?Math.round((p.y1+p.y2)/2):0;}
         const spouse=options.spouse!==''&&options.spouse!==undefined?ctx.partners[Number(options.spouse)]:null;
-        if(spouse){p.spouseFirst=spouse.first;p.spouseLast=spouse.last;p.spouseName=[spouse.first,spouse.last].filter(Boolean).join(' ');}
-        const married=options.married&&spouse?.last&&spouse.last!==ctx.last?`${ctx.first} ${spouse.last}`.trim():'';
+        if(spouse){const spouseFirst=options.middle?spouse.first:(spouse.firstOnly||spouse.first);p.spouseFirst=spouseFirst;p.spouseLast=spouse.last;p.spouseName=[spouseFirst,spouse.last].filter(Boolean).join(' ');}
+        const married=options.married&&spouse?.last&&spouse.last!==ctx.last?`${first} ${spouse.last}`.trim():'';
         p.q=[married?`("${p.name}" OR "${married}")`:`"${p.name}"`,p.place,p.year?String(p.year):'',p.spouseName?`"${p.spouseName}"`:''].filter(Boolean).join(' ');
         return p;
     }
@@ -807,26 +810,35 @@
         if(!ctx.first&&!ctx.last)return empty('Cette fiche n’a ni prénom ni nom à chercher.');
         const sites=webSearchAllSites();const visible=settings.order.filter(key=>!settings.hidden.includes(key)).map(key=>sites.find(site=>site[0]===key)).filter(Boolean);
         const y1=ctx.birthYear?ctx.birthYear-5:(ctx.deathYear?ctx.deathYear-80:'');const y2=ctx.birthYear?ctx.birthYear+5:(ctx.deathYear||'');
+        const hasMiddle=ctx.first!==ctx.firstOnly||ctx.partners.some(partner=>partner.first!==partner.firstOnly);
+        let middleChecked=false;try{middleChecked=localStorage.getItem('genealogie-web-search-middle')==='1';}catch(_){}
         const options=`<div class="web-search-options">
+            ${hasMiddle?`<label class="checkbox-line" title="${escapeHtml(ctx.first)}"><input type="checkbox" data-ws-middle ${middleChecked?'checked':''}> Deuxièmes prénoms</label>`:''}
             <label class="checkbox-line"><input type="checkbox" data-ws-years ${y1?'checked':''}> Années <input type="number" data-ws-y1 value="${escapeHtml(y1)}" placeholder="de" min="1000" max="2100"> – <input type="number" data-ws-y2 value="${escapeHtml(y2)}" placeholder="à" min="1000" max="2100"></label>
             ${ctx.places.length?`<label>Lieu <select data-ws-place><option value="">Aucun</option>${ctx.places.map(place=>`<option value="${escapeHtml(place.value)}">${escapeHtml(place.label)}</option>`).join('')}</select></label>`:''}
             ${ctx.partners.length?`<label>Conjoint <select data-ws-spouse><option value="">Aucun</option>${ctx.partners.map((partner,index)=>`<option value="${index}">${escapeHtml([partner.first,partner.last].filter(Boolean).join(' '))}</option>`).join('')}</select></label>`:''}
             ${ctx.female&&ctx.partners.some(partner=>partner.last&&partner.last!==ctx.last)?`<label class="checkbox-line"><input type="checkbox" data-ws-married> Aussi sous le nom d’épouse (moteurs de recherche)</label>`:''}
         </div>`;
         const groups=webSearchGroups.map(group=>[group,visible.filter(site=>site[2]===group)]).filter(([,list])=>list.length);
-        const buttons=visible.length?groups.map(([group,list])=>`<div class="web-search-group"><span>${escapeHtml(group)}</span><div class="web-search-links">${list.map(site=>`<a class="button small secondary" data-ws-site="${escapeHtml(site[0])}" href="#" target="_blank" rel="noopener noreferrer">${escapeHtml(site[1])}</a>`).join('')}</div></div>`).join(''):empty('Aucun site choisi : règle-les dans Maintenance → Apparence.');
-        return `<div class="web-search-panel" data-web-search="${escapeHtml(uid)}"><p class="muted">S’ouvre dans ton navigateur. Coche le lieu, les années ou le conjoint pour écarter les homonymes.</p>${options}${buttons}</div>`;
+        const buttons=visible.length?groups.map(([group,list])=>`<div class="web-search-group"><span>${escapeHtml(group)}</span><div class="web-search-links">${list.map(site=>`<span class="web-search-site"><input type="checkbox" data-ws-pick="${escapeHtml(site[0])}" aria-label="Cocher ${escapeHtml(site[1])}"><a class="button small secondary" data-ws-site="${escapeHtml(site[0])}" href="#" target="_blank" rel="noopener noreferrer">${escapeHtml(site[1])}</a></span>`).join('')}</div></div>`).join(''):empty('Aucun site choisi : règle-les dans Maintenance → Apparence.');
+        const multi=visible.length>1?`<div class="web-search-multi"><button class="button small secondary" type="button" data-ws-pick-all>Tout cocher</button><button class="button small secondary" type="button" data-ws-pick-none>Tout décocher</button><button class="button small" type="button" data-ws-open-picked disabled>Ouvrir les sites cochés</button></div>`:'';
+        return `<div class="web-search-panel" data-web-search="${escapeHtml(uid)}"><p class="muted">S’ouvre dans ton navigateur. Coche le lieu, les années ou le conjoint pour écarter les homonymes.</p>${options}${multi}${buttons}</div>`;
     }
     /** Met à jour les adresses des boutons quand une option change (et au premier affichage). */
     function bindWebSearchPanels(root=document){
         $$('[data-web-search]',root).forEach(panel=>{
             const ctx=webSearchContexts.get(panel.dataset.webSearch);if(!ctx||panel.dataset.wsBound)return;panel.dataset.wsBound='1';
             const update=()=>{
-                const p=webSearchParams(ctx,{years:$('[data-ws-years]',panel)?.checked,y1:$('[data-ws-y1]',panel)?.value,y2:$('[data-ws-y2]',panel)?.value,place:$('[data-ws-place]',panel)?.value||'',spouse:$('[data-ws-spouse]',panel)?.value??'',married:$('[data-ws-married]',panel)?.checked});
+                const p=webSearchParams(ctx,{middle:$('[data-ws-middle]',panel)?.checked,years:$('[data-ws-years]',panel)?.checked,y1:$('[data-ws-y1]',panel)?.value,y2:$('[data-ws-y2]',panel)?.value,place:$('[data-ws-place]',panel)?.value||'',spouse:$('[data-ws-spouse]',panel)?.value??'',married:$('[data-ws-married]',panel)?.checked});
                 const sites=webSearchAllSites();
                 $$('[data-ws-site]',panel).forEach(link=>{const site=sites.find(item=>item[0]===link.dataset.wsSite);if(site){try{link.href=site[3](p);}catch(_){link.removeAttribute('href');}}});
             };
-            panel.addEventListener('input',update);panel.addEventListener('change',update);update();
+            const updatePicked=()=>{const count=$$('[data-ws-pick]:checked',panel).length;const open=$('[data-ws-open-picked]',panel);if(open){open.disabled=!count;open.textContent=count?`Ouvrir les ${count} site${count>1?'s':''} cochés`:'Ouvrir les sites cochés';}};
+            panel.addEventListener('input',update);panel.addEventListener('change',event=>{if(event.target.matches?.('[data-ws-middle]')){try{localStorage.setItem('genealogie-web-search-middle',event.target.checked?'1':'0');}catch(_){}}update();updatePicked();});update();
+            $('[data-ws-pick-all]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]',panel).forEach(input=>{input.checked=true;});updatePicked();});
+            $('[data-ws-pick-none]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]',panel).forEach(input=>{input.checked=false;});updatePicked();});
+            // Ouvre chaque site coché dans un onglet du navigateur (dans un navigateur web, autoriser les fenêtres surgissantes)
+            $('[data-ws-open-picked]',panel)?.addEventListener('click',()=>{$$('[data-ws-pick]:checked',panel).forEach(input=>{const link=$(`[data-ws-site="${CSS.escape(input.dataset.wsPick)}"]`,panel);if(link?.href&&!link.href.endsWith('#'))window.open(link.href,'_blank','noopener');});});
         });
     }
     /** Éditeur des sites (Apparence et réglages du widget) : glisser pour l'ordre, cocher pour afficher. */
