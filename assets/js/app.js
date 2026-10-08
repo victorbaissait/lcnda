@@ -1170,7 +1170,7 @@
             const urlPersonId = Number(new URLSearchParams(location.search).get('person')) || 0;
             state.currentPersonId = urlPersonId || Number(state.currentPersonId) || state.bootstrap.startPersonId;
             $('#app').classList.toggle('sidebar-collapsed',Boolean(persisted.sidebarCollapsed));
-            if(IS_SECONDARY){applyViewSnapshot(SECONDARY_VIEW);document.documentElement.classList.toggle('is-embedded',IS_EMBEDDED);if(IS_EMBEDDED)$('#app').classList.add('sidebar-collapsed');
+            if(IS_SECONDARY){applyViewSnapshot(SECONDARY_VIEW);document.documentElement.classList.toggle('is-embedded',IS_EMBEDDED);
                 await setModule(SECONDARY_VIEW.module||'personnes',false);bindSidePanelButton();return;}
             bindSidePanelButton();
             $('#database-status').textContent = personCountLabel(state.bootstrap.stats.personnes);
@@ -6452,14 +6452,14 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function viewUrl(view){return `${location.pathname}?view=${encodeURIComponent(JSON.stringify(view))}`;}
     /** Ouvre un écran dans le panneau de droite (un seul panneau : il remplace le précédent). */
     function openSidePanel(view=viewSnapshot()){
-        if(IS_SECONDARY){location.href=viewUrl(view);return;}
         let panel=$('#side-panel');
         if(!panel){
             panel=document.createElement('aside');panel.id='side-panel';panel.className='side-panel';
-            panel.innerHTML=`<div class="side-panel-resize" title="Glisser pour changer la largeur"></div><header class="side-panel-head"><strong id="side-panel-title">À côté</strong><div class="side-panel-actions"><button type="button" class="button small secondary" id="side-panel-here" title="Afficher cet écran dans la partie principale">⇠ Ici</button><button type="button" class="button small secondary" id="side-panel-window" title="Ouvrir ce panneau dans une vraie fenêtre (pratique avec deux écrans)">Fenêtre ↗</button><button type="button" class="button small secondary" id="side-panel-close" aria-label="Fermer le panneau">✕</button></div></header><iframe id="side-panel-frame" title="Deuxième écran"></iframe>`;
+            panel.innerHTML=`<div class="side-panel-resize" title="Glisser pour changer la largeur"></div><header class="side-panel-head"><strong id="side-panel-title">À côté</strong><div class="side-panel-actions"><button type="button" class="button small secondary side-panel-orient" data-orientation="right" title="Côte à côte" aria-label="Côte à côte"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="button small secondary side-panel-orient" data-orientation="bottom" title="En haut et en bas" aria-label="En haut et en bas"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="3" y1="12" x2="21" y2="12" stroke="currentColor" stroke-width="2"/></svg></button><button type="button" class="button small secondary" id="side-panel-here" title="Afficher cet écran dans la partie principale">⇠ Ici</button><button type="button" class="button small secondary" id="side-panel-window" title="Ouvrir ce panneau dans une vraie fenêtre (pratique avec deux écrans)">Fenêtre ↗</button><button type="button" class="button small secondary" id="side-panel-close" aria-label="Fermer le panneau">✕</button></div></header><iframe id="side-panel-frame" title="Deuxième écran"></iframe>`;
             document.body.append(panel);
-            let width=0;try{width=Number(localStorage.getItem('lcnda-side-panel-width'))||0;}catch(_){}
-            setSidePanelWidth(width||Math.round(window.innerWidth*0.42));
+            let width=0,height=0,orientation='right';try{width=Number(localStorage.getItem('lcnda-side-panel-width'))||0;height=Number(localStorage.getItem('lcnda-side-panel-height'))||0;orientation=localStorage.getItem('lcnda-side-panel-orientation')||'right';}catch(_){}
+            setSidePanelWidth(width||Math.round(window.innerWidth*0.45));setSidePanelHeight(height||Math.round(window.innerHeight*0.45));setSidePanelOrientation(orientation);
+            $$('.side-panel-orient',panel).forEach(button=>button.addEventListener('click',()=>{setSidePanelOrientation(button.dataset.orientation);try{localStorage.setItem('lcnda-side-panel-orientation',button.dataset.orientation);}catch(_){}}));
             const frame=$('#side-panel-frame',panel);
             const current=()=>{try{return frame.contentWindow.lcndaViewSnapshot?.()||null;}catch(_){return null;}};
             const title=()=>{try{const doc=frame.contentDocument;const name=doc.querySelector('.person-hero h1, .page-header h2, .battue-detail h2, h2')?.textContent?.trim();const module=doc.querySelector('#sidebar-title')?.textContent?.trim();$('#side-panel-title').textContent=[module,name&&name!==module?name:''].filter(Boolean).join(' · ')||'À côté';}catch(_){}};
@@ -6469,19 +6469,23 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             $('#side-panel-here',panel).addEventListener('click',()=>{const view=current();if(!view)return;closeSidePanel();applyViewSnapshot(view);setModule(view.module||'personnes');});
             const handle=$('.side-panel-resize',panel);
             handle.addEventListener('pointerdown',event=>{event.preventDefault();handle.setPointerCapture(event.pointerId);document.body.classList.add('is-resizing-side-panel');
-                const move=e=>setSidePanelWidth(window.innerWidth-e.clientX);
-                const up=()=>{handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',up);document.body.classList.remove('is-resizing-side-panel');try{localStorage.setItem('lcnda-side-panel-width',String(parseInt(getComputedStyle(document.body).getPropertyValue('--side-panel-w'))||0));}catch(_){}};
+                const bottom=document.body.classList.contains('side-panel-bottom');
+                const move=e=>bottom?setSidePanelHeight(window.innerHeight-e.clientY):setSidePanelWidth(window.innerWidth-e.clientX);
+                const up=()=>{handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',up);document.body.classList.remove('is-resizing-side-panel');try{const css=getComputedStyle(document.body);localStorage.setItem(bottom?'lcnda-side-panel-height':'lcnda-side-panel-width',String(parseInt(css.getPropertyValue(bottom?'--side-panel-h':'--side-panel-w'))||0));}catch(_){}};
                 handle.addEventListener('pointermove',move);handle.addEventListener('pointerup',up);});
         }
         document.body.classList.add('has-side-panel');
         $('#side-panel-frame').src=viewUrl(view);
     }
+    function setSidePanelHeight(px){const h=Math.max(220,Math.min(Math.round(window.innerHeight*0.8),Math.round(px)));document.body.style.setProperty('--side-panel-h',`${h}px`);}
+    function setSidePanelOrientation(value){const bottom=value==='bottom';document.body.classList.toggle('side-panel-bottom',bottom);$$('.side-panel-orient').forEach(button=>button.classList.toggle('is-active',(button.dataset.orientation==='bottom')===bottom));const handle=$('.side-panel-resize');if(handle)handle.title=bottom?'Glisser pour changer la hauteur':'Glisser pour changer la largeur';}
     function setSidePanelWidth(px){const w=Math.max(340,Math.min(Math.round(window.innerWidth*0.75),Math.round(px)));document.body.style.setProperty('--side-panel-w',`${w}px`);}
-    function closeSidePanel(){$('#side-panel')?.remove();document.body.classList.remove('has-side-panel');}
+    function closeSidePanel(){$('#side-panel')?.remove();document.body.classList.remove('has-side-panel','side-panel-bottom');}
     function bindSidePanelButton(){
-        const button=$('#side-panel-open');if(!button)return;
-        if(IS_EMBEDDED){button.hidden=true;return;}
-        button.addEventListener('click',()=>openSidePanel());
+        const split=$('#side-panel-open'),win=$('#new-window-open');
+        if(IS_EMBEDDED){if(split)split.hidden=true;if(win)win.hidden=true;return;}
+        split?.addEventListener('click',()=>{if($('#side-panel'))closeSidePanel();else openSidePanel();});
+        win?.addEventListener('click',()=>window.open(viewUrl(viewSnapshot()),'_blank'));
     }
     function battueCommuneByInsee(insee){return state.currentBattueDetail?.communes?.find(c=>String(c.insee_code)===String(insee));}
     function applyBattueCommuneFilter(){
