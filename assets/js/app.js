@@ -334,8 +334,8 @@
         enquetes: ['08 — ENQUÊTER', 'Enquêtes'], comparaison: ['09 — COMPARER', 'Comparaison'], maintenance: ['10 — VÉRIFIER', 'Maintenance'],
     };
     const defaultMenuOrder = Object.keys(modules).filter(key=>key!=='jeu');
-    const defaultDashboardBlocks = [['stats','Chiffres clés'],['upcoming','Cette semaine dans l’histoire familiale'],['today','Anniversaires du jour'],['reminders','Rappels'],['recent_changes','Dernières modifications'],['recent_deletions','Dernières suppressions'],['locked_people','Personnes verrouillées récemment'],['recent_people','Dernières fiches consultées'],['random_person','Personne au hasard'],['chosen_person','Personne choisie'],['person_quiz','Quiz personne'],['person_block','Bloc de fiche personne'],['random_media','Image au hasard'],['favorite_image','Image favorite'],['kinship_widget','Lien entre deux personnes'],['favorites','Personnes favorites'],['work','Travail à suivre'],['completion','Personnes à compléter'],['persons_without_sources','Personnes sans source'],['events_without_sources','Événements sans source'],['events_without_media','Événements sans média'],['recent_media','Derniers médias ajoutés'],['media_unlinked','Médias non rattachés'],['media_to_transcribe','Médias à transcrire'],['media_to_identify','Médias à identifier'],['signatures_to_compare','Signatures à comparer'],['places_to_complete','Communes à compléter'],['branches_less_documented','Branches les moins documentées'],['couples_without_marriage','Couples sans mariage'],['children_missing_parents','Enfants sans parents complets'],['consistency_issues','Incohérences et conflits'],['baptisms_without_sponsors','Baptêmes sans parrain/marraine'],['sosa_missing_near','SOSA manquants proches'],['battue_towns','Communes à explorer'],['battues_priority','Battues prioritaires'],['sources_to_check','Sources à vérifier'],['archive_favorites','Archives favorites'],['daily_research','Liste de travail quotidienne'],['reread_items','À relire'],['sosa_progress','Progression SOSA'],['duplicates','Doublons probables'],['labels','Étiquettes'],['map_overview','Carte globale'],['branch_map','Carte d’une branche'],['random_person_map','Carte d’une personne'],['person_timeline','Timeline d’une personne'],['quick_stat','Stat rapide'],['session_goal','Objectif de session'],['coverage','Couverture de la base'],['places','Lieux les plus présents']];
-    const defaultDashboardBlockSpans={stats:'12',upcoming:'12',today:'6',reminders:'6',recent_changes:'6',recent_deletions:'6',locked_people:'6',recent_people:'6',random_person:'6',chosen_person:'6',person_quiz:'6',person_block:'6',random_media:'6',favorite_image:'6',kinship_widget:'6',favorites:'6',work:'6',completion:'6',persons_without_sources:'6',events_without_sources:'6',events_without_media:'6',recent_media:'6',media_unlinked:'6',media_to_transcribe:'6',media_to_identify:'6',signatures_to_compare:'6',places_to_complete:'6',branches_less_documented:'6',couples_without_marriage:'6',children_missing_parents:'6',consistency_issues:'6',baptisms_without_sponsors:'6',sosa_missing_near:'6',battue_towns:'6',battues_priority:'6',sources_to_check:'6',archive_favorites:'6',daily_research:'6',reread_items:'6',sosa_progress:'6',duplicates:'6',labels:'6',map_overview:'12',branch_map:'12',random_person_map:'12',person_timeline:'6',quick_stat:'6',session_goal:'6',coverage:'6',places:'6'};
+    const defaultDashboardBlocks = [['stats','Chiffres clés'],['upcoming','Cette semaine dans l’histoire familiale'],['today','Anniversaires du jour'],['reminders','Rappels'],['recent_changes','Dernières modifications'],['recent_deletions','Dernières suppressions'],['locked_people','Personnes verrouillées récemment'],['recent_people','Dernières fiches consultées'],['random_person','Personne au hasard'],['chosen_person','Personne choisie'],['person_quiz','Quiz personne'],['person_block','Bloc de fiche personne'],['random_media','Image au hasard'],['favorite_image','Image favorite'],['kinship_widget','Lien entre deux personnes'],['favorites','Personnes favorites'],['work','Travail à suivre'],['completion','Personnes à compléter'],['persons_without_sources','Personnes sans source'],['events_without_sources','Événements sans source'],['events_without_media','Événements sans média'],['recent_media','Derniers médias ajoutés'],['media_unlinked','Médias non rattachés'],['media_to_transcribe','Médias à transcrire'],['media_to_identify','Médias à identifier'],['signatures_to_compare','Signatures à comparer'],['places_to_complete','Communes à compléter'],['branches_less_documented','Branches les moins documentées'],['couples_without_marriage','Couples sans mariage'],['children_missing_parents','Enfants sans parents complets'],['consistency_issues','Incohérences et conflits'],['baptisms_without_sponsors','Baptêmes sans parrain/marraine'],['sosa_missing_near','SOSA manquants proches'],['battue_towns','Communes à explorer'],['battues_priority','Battues prioritaires'],['sources_to_check','Sources à vérifier'],['archive_favorites','Archives favorites'],['daily_research','Liste de travail quotidienne'],['reread_items','À relire'],['sosa_progress','Progression SOSA'],['duplicates','Doublons probables'],['labels','Étiquettes'],['map_overview','Carte globale'],['branch_map','Carte d’une branche'],['random_person_map','Carte d’une personne'],['person_timeline','Timeline d’une personne'],['quick_stat','Stat rapide'],['session_goal','Objectif de session'],['coverage','Couverture de la base'],['places','Lieux les plus présents'],['web_search','Chercher sur internet']];
+    const defaultDashboardBlockSpans={web_search:'6',stats:'12',upcoming:'12',today:'6',reminders:'6',recent_changes:'6',recent_deletions:'6',locked_people:'6',recent_people:'6',random_person:'6',chosen_person:'6',person_quiz:'6',person_block:'6',random_media:'6',favorite_image:'6',kinship_widget:'6',favorites:'6',work:'6',completion:'6',persons_without_sources:'6',events_without_sources:'6',events_without_media:'6',recent_media:'6',media_unlinked:'6',media_to_transcribe:'6',media_to_identify:'6',signatures_to_compare:'6',places_to_complete:'6',branches_less_documented:'6',couples_without_marriage:'6',children_missing_parents:'6',consistency_issues:'6',baptisms_without_sponsors:'6',sosa_missing_near:'6',battue_towns:'6',battues_priority:'6',sources_to_check:'6',archive_favorites:'6',daily_research:'6',reread_items:'6',sosa_progress:'6',duplicates:'6',labels:'6',map_overview:'12',branch_map:'12',random_person_map:'12',person_timeline:'6',quick_stat:'6',session_goal:'6',coverage:'6',places:'6'};
     const defaultDashboardBlockLimits={upcoming:8,today:8,reminders:6,recent_changes:6,recent_deletions:6,locked_people:6,recent_people:6,person_quiz:4,favorites:6,completion:6,persons_without_sources:6,events_without_sources:6,events_without_media:6,recent_media:6,media_unlinked:6,media_to_transcribe:6,media_to_identify:6,signatures_to_compare:6,places_to_complete:6,branches_less_documented:6,couples_without_marriage:6,children_missing_parents:6,consistency_issues:6,baptisms_without_sponsors:6,sosa_missing_near:8,battue_towns:6,battues_priority:6,sources_to_check:6,archive_favorites:6,daily_research:5,reread_items:6,duplicates:6,labels:10,places:8,map_overview:80,branch_map:80,random_person_map:40,person_timeline:10};
     defaultDashboardBlocks.push(['achievements','Accomplissements']);
     defaultDashboardBlockSpans.achievements='6';
@@ -349,6 +349,7 @@
         locked_people:'Personnes verrouillées récemment.',
         recent_people:'Fiches ouvertes récemment sur ce navigateur.',
         random_person:'Affiche une personne au hasard ou une personne précise.',
+        web_search:'Cherche une personne (choisie, ou la dernière fiche consultée) sur les moteurs de recherche, les sites de généalogie, la presse ancienne… Le crayon règle la personne et les sites affichés.',
         person_quiz:'Quiz rapide sur une personne choisie ou aléatoire.',
         person_block:'Affiche un bloc de fiche personne pour une personne choisie ou aléatoire.',
         random_media:'Affiche une image au hasard.',
@@ -415,9 +416,9 @@
     const courrierFilters = [['','En cours'],['fait_utilise','Faits — utilisés'],['fait_non_utilise','Faits — non utilisés'],['fait_tous','Tous les faits'],['tous','Tout (en cours + faits)']];
     const defaultMapTypes = [['all','Tous les événements'],['BIRT','Naissances'],['DEAT','Décès'],['MARR','Mariages'],['BURI','Inhumations']];
     const defaultPersonBlocks = [
-        ['identity','Identité'],['events','Événements'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['person_exports','Exports fiche']
+        ['identity','Identité'],['web_search','Chercher sur internet'],['events','Événements'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['person_exports','Exports fiche']
     ];
-    const defaultPersonBlockSpans={identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',person_exports:'6'};
+    const defaultPersonBlockSpans={web_search:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',person_exports:'6'};
     const personBlockWidthChoices=[['12','1'],['6','1/2'],['4','1/3'],['3','1/4'],['8','2/3'],['9','3/4']];
     function savedOrder(key,defaults){try{const stored=JSON.parse(localStorage.getItem(key)||'[]');const order=stored.filter(item=>defaults.includes(item));defaults.forEach((item,index)=>{if(order.includes(item))return;const previous=defaults.slice(0,index).reverse().find(value=>order.includes(value));const next=defaults.slice(index+1).find(value=>order.includes(value));if(previous)order.splice(order.indexOf(previous)+1,0,item);else if(next)order.splice(order.indexOf(next),0,item);else order.push(item);});return order;}catch(_){return defaults;}}
     function orderedMenuKeys(){return savedOrder('genealogie-menu-order',defaultMenuOrder);}
@@ -707,6 +708,164 @@
     function saveDashboardBlockSettings(settings){localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))}));}
     function eventsFilterSettings(personId=0){const defaults={hiddenTypeIds:[],showCensus:false};let settings={...defaults};try{settings={...settings,...JSON.parse(localStorage.getItem('genealogie-events-filter')||'{}')};}catch(_){}if(personId){try{const ps=JSON.parse(localStorage.getItem(`genealogie-events-filter-${personId}`)||'{}');if(Object.keys(ps).length)settings={...settings,...ps};}catch(_){}}settings.hiddenTypeIds=(settings.hiddenTypeIds||[]).map(Number).filter(n=>n>0);settings.showCensus=!!settings.showCensus;return settings;}
     function saveEventsFilterSettings(settings,personId=0){const key=personId?`genealogie-events-filter-${personId}`:'genealogie-events-filter';localStorage.setItem(key,JSON.stringify({hiddenTypeIds:(settings.hiddenTypeIds||[]).map(Number).filter(n=>n>0),showCensus:!!settings.showCensus}));}
+    // ── Chercher sur internet (bloc de fiche + widget) : chaque bouton ouvre la recherche du site dans le navigateur ──
+    // Adresses vérifiées le 2026-10-08 (Geneanet, FamilySearch, Filae, matchID…). Léonore, Mémoire des hommes et Yad Vashem
+    // ne gardent pas la recherche dans leur adresse : recherche Google limitée à leur site.
+    const webSearchGroups=['Moteurs de recherche','Généalogie','Archives et bases','Presse et livres','Autres','Mes sites'];
+    const webSearchEnc=value=>encodeURIComponent(String(value||'').trim());
+    const webSearchSlug=value=>String(value||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+    const webSearchGoogleSite=(site,p)=>`https://www.google.com/search?q=${webSearchEnc(`site:${site} "${p.last}" "${p.first}"`)}`;
+    const webSearchSites=[
+        ['google','Google','Moteurs de recherche',p=>`https://www.google.com/search?q=${webSearchEnc(p.q)}`],
+        ['bing','Bing','Moteurs de recherche',p=>`https://www.bing.com/search?q=${webSearchEnc(p.q)}`],
+        ['duckduckgo','DuckDuckGo','Moteurs de recherche',p=>`https://duckduckgo.com/?q=${webSearchEnc(p.q)}`],
+        ['qwant','Qwant','Moteurs de recherche',p=>`https://www.qwant.com/?q=${webSearchEnc(p.q)}`],
+        ['ecosia','Ecosia','Moteurs de recherche',p=>`https://www.ecosia.org/search?q=${webSearchEnc(p.q)}`],
+        ['brave','Brave Search','Moteurs de recherche',p=>`https://search.brave.com/search?q=${webSearchEnc(p.q)}`],
+        ['startpage','Startpage','Moteurs de recherche',p=>`https://www.startpage.com/do/search?query=${webSearchEnc(p.q)}`],
+        ['yahoo','Yahoo','Moteurs de recherche',p=>`https://search.yahoo.com/search?p=${webSearchEnc(p.q)}`],
+        ['yandex','Yandex','Moteurs de recherche',p=>`https://yandex.com/search/?text=${webSearchEnc(p.q)}`],
+        ['baidu','Baidu','Moteurs de recherche',p=>`https://www.baidu.com/s?wd=${webSearchEnc(p.q)}`],
+        ['mojeek','Mojeek','Moteurs de recherche',p=>`https://www.mojeek.com/search?q=${webSearchEnc(p.q)}`],
+        ['geneanet','Geneanet','Généalogie',p=>`https://www.geneanet.org/fonds/individus/?go=1&nom=${webSearchEnc(p.last)}&prenom=${webSearchEnc(p.first)}${p.place?`&place__0__=${webSearchEnc(p.place)}`:''}${p.y1?`&type_periode=between&from=${p.y1}&to=${p.y2}`:''}`],
+        ['familysearch','FamilySearch','Généalogie',p=>`https://www.familysearch.org/fr/search/record/results?q.givenName=${webSearchEnc(p.first)}&q.surname=${webSearchEnc(p.last)}${p.place?`&q.${p.placeKind==='death'?'deathLikePlace':'birthLikePlace'}=${webSearchEnc(p.place)}`:''}${p.y1?`&q.birthLikeDate.from=${p.y1}&q.birthLikeDate.to=${p.y2}`:''}${p.spouseFirst?`&q.spouseGivenName=${webSearchEnc(p.spouseFirst)}`:''}${p.spouseLast?`&q.spouseSurname=${webSearchEnc(p.spouseLast)}`:''}`],
+        ['filae','Filae','Généalogie',p=>`https://www.filae.com/search?ln=${webSearchEnc(p.last)}&fn=${webSearchEnc(p.first)}${p.y1?`&sy=${p.y1}&ey=${p.y2}`:''}`],
+        ['myheritage','MyHeritage','Généalogie',p=>`https://www.myheritage.fr/names/${webSearchSlug(p.first)}_${webSearchSlug(p.last)}`],
+        ['ancestry','Ancestry','Généalogie',p=>`https://www.ancestry.fr/search/?name=${webSearchEnc(p.first)}_${webSearchEnc(p.last)}${p.year?`&birth=${p.year}${p.place?`_${webSearchEnc(p.place)}`:''}`:''}`],
+        ['findmypast','Findmypast','Généalogie',p=>`https://www.findmypast.fr/search/results?firstname=${webSearchEnc(p.first)}&lastname=${webSearchEnc(p.last)}${p.year?`&yearofbirth=${p.year}&yearofbirth_offset=5`:''}`],
+        ['wikitree','WikiTree','Généalogie',p=>`https://www.wikitree.com/index.php?title=Special:SearchPerson&wpFirst=${webSearchEnc(p.first)}&wpLast=${webSearchEnc(p.last)}`],
+        ['geni','Geni','Généalogie',p=>`https://www.geni.com/search?search_type=people&names=${webSearchEnc(p.name)}`],
+        ['findagrave','Find a Grave','Généalogie',p=>`https://www.findagrave.com/memorial/search?firstname=${webSearchEnc(p.first)}&lastname=${webSearchEnc(p.last)}${p.year?`&birthyear=${p.year}&birthyearfilter=5`:''}`],
+        ['billiongraves','BillionGraves','Généalogie',p=>`https://billiongraves.com/search/results?given_names=${webSearchEnc(p.first)}&family_names=${webSearchEnc(p.last)}${p.year?`&birth_year=${p.year}&year_range=5`:''}`],
+        ['matchid','Décès INSEE depuis 1970 (matchID)','Archives et bases',p=>`https://deces.matchid.io/search?q=${webSearchEnc([p.first,p.last,p.year].filter(Boolean).join(' '))}`],
+        ['memoiredeshommes','Mémoire des hommes','Archives et bases',p=>webSearchGoogleSite('memoiredeshommes.sga.defense.gouv.fr',p)],
+        ['leonore','Léonore (Légion d’honneur)','Archives et bases',p=>webSearchGoogleSite('leonore.archives-nationales.culture.gouv.fr',p)],
+        ['francearchives','FranceArchives','Archives et bases',p=>`https://francearchives.gouv.fr/fr/search?q=${webSearchEnc(`"${p.name}"`)}`],
+        ['arolsen','Arolsen Archives','Archives et bases',p=>`https://collections.arolsen-archives.org/en/search?s=${webSearchEnc(p.name)}`],
+        ['yadvashem','Yad Vashem (victimes de la Shoah)','Archives et bases',p=>webSearchGoogleSite('collections.yadvashem.org',p)],
+        ['gallica','Gallica (BnF)','Presse et livres',p=>`https://gallica.bnf.fr/services/engine/search/sru?operation=searchRetrieve&version=1.2&query=${webSearchEnc(`(gallica all "${p.name}")${p.place?` and (gallica all "${p.place}")`:''}`)}`],
+        ['retronews','RetroNews','Presse et livres',p=>`https://www.retronews.fr/search#allTerms=${webSearchEnc(`"${p.name}"${p.place?` ${p.place}`:''}`)}&sort=score&page=1&searchIn=all`],
+        ['europeana','Europeana','Presse et livres',p=>`https://www.europeana.eu/fr/search?query=${webSearchEnc(p.q)}`],
+        ['googlebooks','Google Livres','Presse et livres',p=>`https://www.google.com/search?tbm=bks&q=${webSearchEnc(p.q)}`],
+        ['archiveorg','Internet Archive','Presse et livres',p=>`https://archive.org/search?query=${webSearchEnc(`"${p.name}"`)}`],
+        ['newspapers','Newspapers.com','Presse et livres',p=>`https://www.newspapers.com/search/?query=${webSearchEnc(`"${p.name}"`)}`],
+        ['chroniclingamerica','Chronicling America (États-Unis)','Presse et livres',p=>`https://www.loc.gov/collections/chronicling-america/?q=${webSearchEnc(`"${p.name}"`)}`],
+        ['trove','Trove (Australie)','Presse et livres',p=>`https://trove.nla.gov.au/search/category/newspapers?keyword=${webSearchEnc(`"${p.name}"`)}`],
+        ['delpher','Delpher (Pays-Bas)','Presse et livres',p=>`https://www.delpher.nl/nl/kranten/results?query=${webSearchEnc(`"${p.name}"`)}&coll=ddd`],
+        ['anno','ANNO (Autriche)','Presse et livres',p=>`https://anno.onb.ac.at/anno-suche#searchMode=simple&query=${webSearchEnc(`"${p.name}"`)}`],
+        ['wikipedia','Wikipédia','Autres',p=>`https://fr.wikipedia.org/w/index.php?search=${webSearchEnc(p.q)}`],
+        ['wikidata','Wikidata','Autres',p=>`https://www.wikidata.org/w/index.php?search=${webSearchEnc(p.name)}`],
+    ];
+    const webSearchDefaultVisible=['google','duckduckgo','qwant','bing','geneanet','familysearch','filae','myheritage','ancestry','matchid','memoiredeshommes','leonore','francearchives','gallica','retronews','findagrave','wikipedia'];
+    /** Sites ajoutés par l'utilisateur : adresse modèle avec {prénom}, {nom}, {nom_complet}, {lieu}, {année}, {de}, {à}, {conjoint}, {requête}. */
+    function webSearchCustomSites(){try{const list=JSON.parse(localStorage.getItem('genealogie-web-search-custom')||'[]');return Array.isArray(list)?list.filter(site=>site&&site.key&&site.label&&/^https?:\/\//i.test(String(site.url||''))):[];}catch(_){return[];}}
+    function saveWebSearchCustomSites(list){localStorage.setItem('genealogie-web-search-custom',JSON.stringify(list.map(site=>({key:site.key,label:String(site.label).slice(0,80),url:String(site.url).slice(0,500)}))));}
+    function webSearchAllSites(){
+        const fill=(template,p)=>String(template).replace(/\{(prénom|prenom|nom|nom_complet|lieu|année|annee|de|à|a|conjoint|requête|requete)\}/gi,(_,key)=>{
+            const k=key.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+            return webSearchEnc({prenom:p.first,nom:p.last,nom_complet:p.name,lieu:p.place,annee:p.year,de:p.y1,a:p.y2,conjoint:p.spouseName,requete:p.q}[k]);
+        });
+        return [...webSearchSites,...webSearchCustomSites().map(site=>[site.key,site.label,'Mes sites',p=>fill(site.url,p)])];
+    }
+    function webSearchSettings(personId=0,base=null){
+        const keys=webSearchAllSites().map(site=>site[0]);
+        let settings={order:keys,hidden:keys.filter(key=>!webSearchDefaultVisible.includes(key)&&!key.startsWith('custom-'))};
+        try{const stored=JSON.parse(localStorage.getItem('genealogie-web-search')||'{}');if(Array.isArray(stored.order))settings={order:stored.order,hidden:Array.isArray(stored.hidden)?stored.hidden:[]};}catch(_){}
+        if(base)settings={order:base.order||settings.order,hidden:base.hidden||settings.hidden};
+        if(personId){try{const ps=JSON.parse(localStorage.getItem(`genealogie-web-search-${personId}`)||'{}');if(Array.isArray(ps.order))settings={order:ps.order,hidden:Array.isArray(ps.hidden)?ps.hidden:[]};}catch(_){}}
+        settings.order=[...settings.order.filter(key=>keys.includes(key)),...keys.filter(key=>!settings.order.includes(key))];
+        settings.hidden=settings.hidden.filter(key=>keys.includes(key));
+        return settings;
+    }
+    function saveWebSearchSettings(settings,personId=0){localStorage.setItem(personId?`genealogie-web-search-${personId}`:'genealogie-web-search',JSON.stringify({order:settings.order,hidden:settings.hidden||[]}));}
+    /** Ce que la fiche apporte à la recherche : nom, années, lieux, conjoints, nom d'épouse. */
+    function webSearchContext(detail){
+        const person=detail?.person||{};const events=detail?.events||[];const partners=detail?.partners||[];
+        const first=[person.first_name,person.middle_name].filter(Boolean).join(' ').trim();const last=String(person.last_name||'').trim();
+        const eventOf=tags=>events.find(event=>tags.includes(event.gedcom_tag));
+        const birth=eventOf(['BIRT'])||eventOf(['CHR','BAPM']);const death=eventOf(['DEAT'])||eventOf(['BURI']);
+        const birthYear=Number(birth?.year||person.birth_year)||0;const deathYear=Number(death?.year||person.death_year)||0;
+        const places=[];const addPlace=(kind,label,event)=>{const value=String(event?.place_name||'').split(',')[0].trim();if(value&&!places.some(p=>p.value===value))places.push({kind,label:`${label} : ${value}`,value});};
+        addPlace('birth','Naissance',birth);addPlace('death','Décès',death);addPlace('other','Mariage',eventOf(['MARR']));
+        return {id:Number(person.id)||0,first,last,female:person.gender==='female',birthYear,deathYear,places,
+            partners:partners.map(partner=>({first:[partner.first_name,partner.middle_name].filter(Boolean).join(' ').trim(),last:String(partner.last_name||'').trim()})).filter(partner=>partner.first||partner.last)};
+    }
+    /** Paramètres de la recherche d'après les options cochées sous les boutons. */
+    function webSearchParams(ctx,options){
+        const p={first:ctx.first,last:ctx.last,name:[ctx.first,ctx.last].filter(Boolean).join(' '),place:'',placeKind:'birth',y1:0,y2:0,year:0,spouseFirst:'',spouseLast:'',spouseName:''};
+        if(options.place){const place=ctx.places.find(item=>item.value===options.place);p.place=options.place;p.placeKind=place?.kind||'birth';}
+        if(options.years){p.y1=Number(options.y1)||0;p.y2=Number(options.y2)||p.y1;if(p.y1&&p.y2<p.y1)[p.y1,p.y2]=[p.y2,p.y1];p.year=p.y1&&p.y2?Math.round((p.y1+p.y2)/2):0;}
+        const spouse=options.spouse!==''&&options.spouse!==undefined?ctx.partners[Number(options.spouse)]:null;
+        if(spouse){p.spouseFirst=spouse.first;p.spouseLast=spouse.last;p.spouseName=[spouse.first,spouse.last].filter(Boolean).join(' ');}
+        const married=options.married&&spouse?.last&&spouse.last!==ctx.last?`${ctx.first} ${spouse.last}`.trim():'';
+        p.q=[married?`("${p.name}" OR "${married}")`:`"${p.name}"`,p.place,p.year?String(p.year):'',p.spouseName?`"${p.spouseName}"`:''].filter(Boolean).join(' ');
+        return p;
+    }
+    const webSearchContexts=new Map();
+    function webSearchPanelHtml(detail,settings,uid){
+        const ctx=webSearchContext(detail);webSearchContexts.set(uid,ctx);
+        if(!ctx.first&&!ctx.last)return empty('Cette fiche n’a ni prénom ni nom à chercher.');
+        const sites=webSearchAllSites();const visible=settings.order.filter(key=>!settings.hidden.includes(key)).map(key=>sites.find(site=>site[0]===key)).filter(Boolean);
+        const y1=ctx.birthYear?ctx.birthYear-5:(ctx.deathYear?ctx.deathYear-80:'');const y2=ctx.birthYear?ctx.birthYear+5:(ctx.deathYear||'');
+        const options=`<div class="web-search-options">
+            <label class="checkbox-line"><input type="checkbox" data-ws-years ${y1?'checked':''}> Années <input type="number" data-ws-y1 value="${escapeHtml(y1)}" placeholder="de" min="1000" max="2100"> – <input type="number" data-ws-y2 value="${escapeHtml(y2)}" placeholder="à" min="1000" max="2100"></label>
+            ${ctx.places.length?`<label>Lieu <select data-ws-place><option value="">Aucun</option>${ctx.places.map(place=>`<option value="${escapeHtml(place.value)}">${escapeHtml(place.label)}</option>`).join('')}</select></label>`:''}
+            ${ctx.partners.length?`<label>Conjoint <select data-ws-spouse><option value="">Aucun</option>${ctx.partners.map((partner,index)=>`<option value="${index}">${escapeHtml([partner.first,partner.last].filter(Boolean).join(' '))}</option>`).join('')}</select></label>`:''}
+            ${ctx.female&&ctx.partners.some(partner=>partner.last&&partner.last!==ctx.last)?`<label class="checkbox-line"><input type="checkbox" data-ws-married> Aussi sous le nom d’épouse (moteurs de recherche)</label>`:''}
+        </div>`;
+        const groups=webSearchGroups.map(group=>[group,visible.filter(site=>site[2]===group)]).filter(([,list])=>list.length);
+        const buttons=visible.length?groups.map(([group,list])=>`<div class="web-search-group"><span>${escapeHtml(group)}</span><div class="web-search-links">${list.map(site=>`<a class="button small secondary" data-ws-site="${escapeHtml(site[0])}" href="#" target="_blank" rel="noopener noreferrer">${escapeHtml(site[1])}</a>`).join('')}</div></div>`).join(''):empty('Aucun site choisi : règle-les dans Maintenance → Apparence.');
+        return `<div class="web-search-panel" data-web-search="${escapeHtml(uid)}"><p class="muted">S’ouvre dans ton navigateur. Coche le lieu, les années ou le conjoint pour écarter les homonymes.</p>${options}${buttons}</div>`;
+    }
+    /** Met à jour les adresses des boutons quand une option change (et au premier affichage). */
+    function bindWebSearchPanels(root=document){
+        $$('[data-web-search]',root).forEach(panel=>{
+            const ctx=webSearchContexts.get(panel.dataset.webSearch);if(!ctx||panel.dataset.wsBound)return;panel.dataset.wsBound='1';
+            const update=()=>{
+                const p=webSearchParams(ctx,{years:$('[data-ws-years]',panel)?.checked,y1:$('[data-ws-y1]',panel)?.value,y2:$('[data-ws-y2]',panel)?.value,place:$('[data-ws-place]',panel)?.value||'',spouse:$('[data-ws-spouse]',panel)?.value??'',married:$('[data-ws-married]',panel)?.checked});
+                const sites=webSearchAllSites();
+                $$('[data-ws-site]',panel).forEach(link=>{const site=sites.find(item=>item[0]===link.dataset.wsSite);if(site){try{link.href=site[3](p);}catch(_){link.removeAttribute('href');}}});
+            };
+            panel.addEventListener('input',update);panel.addEventListener('change',update);update();
+        });
+    }
+    /** Éditeur des sites (Apparence et réglages du widget) : glisser pour l'ordre, cocher pour afficher. */
+    function webSearchSitesEditor(id,title,settings,{personId=0,saveButton=true,resetLabel='Annuler l’exception'}={}){
+        const sites=webSearchAllSites();
+        const rows=settings.order.map((key,index)=>{const site=sites.find(item=>item[0]===key);return site?menuOrderRow(key,`${site[1]} · ${site[2]}`,index,true,!settings.hidden.includes(key)):'';}).join('');
+        return `<section class="maintenance-panel order-editor block-order-editor web-search-editor"><div class="item-title-row"><h3>${escapeHtml(title)}</h3>${personId?`<button class="button small secondary" type="button" data-reset-web-search="${personId}">${escapeHtml(resetLabel)}</button>`:''}</div><div class="page-actions"><button class="button small secondary" type="button" data-ws-all="${id}">Tout sélectionner</button><button class="button small secondary" type="button" data-ws-none="${id}">Tout désélectionner</button></div><div class="order-list" id="${id}">${rows}</div>${saveButton?`<div class="page-actions action-zone"><button class="button small" type="button" data-web-search-save="${id}" data-web-search-person-id="${personId}">Enregistrer ces sites</button></div>`:''}</section>`;
+    }
+    function webSearchCustomSitesEditorHtml(){
+        const list=webSearchCustomSites();
+        return `<section class="maintenance-panel order-editor block-order-editor"><h3>Mes sites</h3><p class="muted">Adresse de recherche d’un site, avec à la place du nom cherché : <code>{prénom}</code> <code>{nom}</code> <code>{nom_complet}</code> <code>{lieu}</code> <code>{année}</code> <code>{de}</code> <code>{à}</code> <code>{conjoint}</code> ou <code>{requête}</code> (nom entre guillemets + options). Ex. : <code>https://exemple.fr/recherche?nom={nom}&amp;prenom={prénom}</code></p>${list.length?`<div class="web-search-custom-list">${list.map(site=>`<div class="web-search-custom-row"><strong>${escapeHtml(site.label)}</strong><small>${escapeHtml(site.url)}</small><button class="button small secondary" type="button" data-ws-custom-delete="${escapeHtml(site.key)}">Supprimer</button></div>`).join('')}</div>`:''}<div class="form-grid"><label>Nom du site<input type="text" id="ws-custom-label" maxlength="80" placeholder="Ex : Archives du Lot"></label><label>Adresse de recherche<input type="url" id="ws-custom-url" maxlength="500" placeholder="https://…{nom}…"></label></div><div class="page-actions action-zone"><button class="button small" type="button" id="ws-custom-add">Ajouter ce site</button></div></section>`;
+    }
+    /** Fiches qui ont leur propre réglage (blocs, filtres d'événements, sites de recherche) : lues dans les réglages enregistrés. */
+    async function renderPersonExceptionsList(){
+        const box=$('#person-exceptions-list');if(!box)return;
+        const kinds=[['person-blocks','Blocs de la fiche'],['events-filter','Filtres du bloc Événements'],['web-search','Chercher sur internet']];
+        const found=Object.fromEntries(kinds.map(([kind])=>[kind,[]]));
+        for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i)||'';const m=key.match(/^genealogie-(person-blocks|events-filter|web-search)-(\d+)$/);if(m)found[m[1]].push(Number(m[2]));}
+        const ids=[...new Set(Object.values(found).flat())];
+        let people={};
+        if(ids.length){try{(await api('person_labels',{ids:ids.join(',')})).people.forEach(person=>{people[person.id]=person;});}catch(_){}}
+        if(!document.body.contains(box))return;
+        // Titre « Exception pour Personne #… » quand la fiche n'était pas encore chargée : le vrai nom
+        const currentId=Number(state.currentPersonId)||0;
+        if(currentId&&!state.currentPerson?.person){
+            if(!people[currentId]){try{(await api('person_labels',{ids:String(currentId)})).people.forEach(person=>{people[person.id]=person;});}catch(_){}}
+            const label=people[currentId]?`${personName(people[currentId])}${years(people[currentId])?` (${years(people[currentId])})`:''}`:'';
+            if(label)$$('.person-block-config h3').forEach(h3=>{if(h3.textContent===`Exception pour Personne #${currentId}`)h3.textContent=`Exception pour ${label}`;});
+        }
+        const nameOf=id=>people[id]?`${personName(people[id])}${years(people[id])?` · ${years(people[id])}`:''}`:`Fiche n° ${id} (supprimée ?)`;
+        box.innerHTML=kinds.map(([kind,title])=>`<section class="maintenance-panel order-editor block-order-editor"><h3>${escapeHtml(title)} <small>(${found[kind].length})</small></h3>${found[kind].length?`<div class="person-exception-list">${found[kind].sort((a,b)=>nameOf(a).localeCompare(nameOf(b),'fr')).map(id=>`<div class="person-exception-row"><button class="link-button" type="button" data-exception-open="${id}">${escapeHtml(nameOf(id))}</button><button class="button small secondary" type="button" data-exception-delete="genealogie-${kind}-${id}">Retirer l’exception</button></div>`).join('')}</div>`:'<p class="muted">Aucune fiche : toutes suivent le réglage commun.</p>'}</section>`).join('');
+        $$('[data-exception-open]',box).forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.exceptionOpen);setModule('personnes');}));
+        $$('[data-exception-delete]',box).forEach(button=>button.addEventListener('click',()=>{if(!confirm('Retirer le réglage particulier de cette fiche ? Elle suivra le réglage de toutes les fiches.'))return;localStorage.removeItem(button.dataset.exceptionDelete);toast('Exception retirée.');renderDesignTools();}));
+    }
+    function readWebSearchSitesEditor(list){const rows=$$('.order-row',list);return {order:rows.map(row=>row.dataset.orderKey),hidden:rows.filter(row=>!row.querySelector('input[type="checkbox"]')?.checked).map(row=>row.dataset.orderKey)};}
+    function bindWebSearchSitesEditors(root=document){
+        $$('.web-search-editor .order-list',root).forEach(list=>{if(!list.dataset.dragBound){list.dataset.dragBound='1';setupDragOrder(list);}});
+        $$('[data-ws-all],[data-ws-none]',root).forEach(button=>button.addEventListener('click',()=>{const list=document.getElementById(button.dataset.wsAll||button.dataset.wsNone);$$('input[type="checkbox"]',list).forEach(input=>{input.checked=!!button.dataset.wsAll;});}));
+    }
     function menuHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');}catch(_){return[];}}
     function mapHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');}catch(_){return[];}}
     function graphDiagramHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-diagram-hidden')||'[]');}catch(_){return[];}}
@@ -1383,6 +1542,9 @@
         if(token!==state.workspaceToken||state.module!=='dashboard')return;
         const personBlockIds=[...new Set(settings.widgets.filter(widget=>['person_block','person_timeline'].includes(widget.type)).map(widget=>widget.config?.personMode==='specific'?Number(widget.config.personId):Number(data.widget_people?.[widget.id]?.id||data.random_person?.id)).filter(Boolean))];
         const personBlockDetails={};
+        // « Chercher sur internet » : la personne choisie, ou la dernière fiche consultée
+        const webSearchPersonId=widget=>widget.config?.personMode==='specific'?Number(widget.config.personId)||0:Number(dashboardRecentPeople()[0]?.id)||0;
+        settings.widgets.filter(widget=>widget.type==='web_search').forEach(widget=>{const id=webSearchPersonId(widget);if(id&&!personBlockIds.includes(id))personBlockIds.push(id);});
         await Promise.all(personBlockIds.map(async id=>{try{personBlockDetails[id]=await api('person',{id});}catch(_){personBlockDetails[id]=null;}}));
         if(token!==state.workspaceToken||state.module!=='dashboard')return;
         let index=1;
@@ -1402,6 +1564,7 @@
             recent_people:widget=>dashboardRecentPeopleCard(String(index++).padStart(2,'0'),dashboardRecentPeople().slice(0,limit(widget)),span(widget)),
             random_person:widget=>dashboardRandomPersonCard(String(index++).padStart(2,'0'),widgetPerson(widget),span(widget),false,widget.id),
             chosen_person:widget=>dashboardRandomPersonCard(String(index++).padStart(2,'0'),widgetPerson(widget),span(widget),true,widget.id),
+            web_search:widget=>dashboardWebSearchCard(String(index++).padStart(2,'0'),personBlockDetails[webSearchPersonId(widget)]||null,widget,span(widget)),
             person_quiz:widget=>dashboardPersonQuizCard(String(index++).padStart(2,'0'),quizData[widget.id],span(widget),widget.id),
             person_block:widget=>dashboardPersonBlockCard(String(index++).padStart(2,'0'),widgetPersonDetail(widget),widget.config?.personBlockKey||'identity',span(widget),widget.config?.personMode==='specific',widget.id),
             random_media:widget=>dashboardRandomMediaCard(String(index++).padStart(2,'0'),data.widget_media?.[widget.id]||data.random_media,span(widget),widget.id),
@@ -1459,6 +1622,8 @@
         }));
         setupDashboardWidgetPersonPickers();
         setupDashboardWidgetMediaPickers();
+        bindWebSearchPanels($('#workspace'));
+        bindWebSearchSitesEditors($('#workspace'));
         $$('[data-open-dashboard-person]').forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.openDashboardPerson);setModule('personnes');}));
         const dashboardMediaPool=[data.random_media,...Object.values(data.widget_media||{}),...settings.widgets.filter(widget=>widget.type==='favorite_image'&&Number(widget.config?.mediaId)).map(widget=>({id:widget.config.mediaId,title:widget.config.mediaTitle,filename:widget.config.mediaFilename,thumbnail:widget.config.mediaThumbnail,media_type:'image'}))].filter(Boolean);
         $$('[data-open-dashboard-media]').forEach(button=>button.addEventListener('click',()=>{const item=dashboardMediaPool.find(media=>Number(media.id)===Number(button.dataset.openDashboardMedia));if(item)openLightbox([item],0,true);}));
@@ -1510,7 +1675,7 @@
         const quizTypes=(state.bootstrap?.eventTypes||[]).filter(type=>Number(type.usage_count)>0).sort((a,b)=>String(a.label||'').localeCompare(String(b.label||''),'fr',{sensitivity:'base'}));
         const quizPanel=widget.type==='person_quiz'?`<label>Nombre de propositions<input type="number" min="3" max="8" data-dashboard-quiz-choices value="${escapeHtml(widget.limit||defaultDashboardBlockLimits.person_quiz||4)}"></label><label class="checkbox-line"><input type="checkbox" data-dashboard-quiz-sosa-only ${widget.config?.quizSosaOnly?'checked':''}> Seulement les SOSA</label><fieldset class="dashboard-quiz-type-editor"><legend>Types d’évènements</legend><label class="checkbox-line"><input type="checkbox" data-dashboard-quiz-all ${quizAll?'checked':''}> Tous</label><div>${quizTypes.map(type=>`<label class="checkbox-line"><input type="checkbox" data-dashboard-quiz-type value="${type.id}" ${quizTypeIds.includes(Number(type.id))?'checked':''} ${quizAll?'disabled':''}> ${escapeHtml(type.label)} <small>${Number(type.usage_count).toLocaleString('fr-FR')}</small></label>`).join('')}</div></fieldset>`:'';
         const sessionGoalPanel=widget.type==='session_goal'?`<label>Objectif<textarea data-dashboard-session-goal rows="3" placeholder="Ex : trouver la date de naissance de Jean Dupont">${escapeHtml(widget.config?.sessionGoal||'')}</textarea></label><div class="dashboard-person-widget-settings">${personPicker('Personne liée (facultatif)','personName','personId')}</div>`:'';
-        return `<div class="dashboard-widget-back" data-dashboard-widget-editor="${escapeHtml(widget.id)}"><div class="dashboard-widget-back-title"><strong>Réglages du widget</strong><span>${escapeHtml(dashboardWidgetLabel(widget.type))}</span></div><label>Largeur<div class="block-widths dashboard-widget-widths">${personBlockWidthChoices.map(([value,text])=>`<button type="button" data-block-width="${value}" aria-pressed="${String(widget.width)===value?'true':'false'}" title="Largeur ${text}">${text}</button>`).join('')}</div></label>${hasLimit?`<label>Nombre d’éléments<input type="number" min="1" max="80" data-dashboard-widget-limit value="${escapeHtml(widget.limit||defaultDashboardBlockLimits[widget.type])}"></label>`:''}${quizPanel}${widget.type==='person_block'?`<label>Bloc de fiche à afficher<select data-dashboard-person-block-key>${defaultPersonBlocks.map(([key,label])=>`<option value="${escapeHtml(key)}" ${(widget.config?.personBlockKey||'identity')===key?'selected':''}>${escapeHtml(label)}</option>`).join('')}</select></label>`:''}${widget.type==='branch_map'?`<label>Branche / patronyme<input type="text" data-dashboard-branch-name list="dashboard-branch-options" value="${escapeHtml(widget.config?.branchName||'')}" placeholder="Ex : Dupont"><datalist id="dashboard-branch-options">${(state.bootstrap?.surnameGroups||[]).map(group=>`<option value="${escapeHtml(group.name||group)}"></option>`).join('')}</datalist></label>`:''}${widget.type==='quick_stat'?`<label>Statistique affichée<select data-dashboard-quick-stat>${quickStatOptions.map(([key,label])=>`<option value="${escapeHtml(key)}" ${(widget.config?.quickStat||'persons')===key?'selected':''}>${escapeHtml(label)}</option>`).join('')}</select></label>`:''}${sessionGoalPanel}${widget.type==='favorite_image'?`<label>Image favorite<input type="text" data-dashboard-media-search value="${escapeHtml(widget.config?.mediaTitle||'')}" placeholder="Tape le prénom/nom d’une personne…" autocomplete="off"><input type="hidden" data-dashboard-media-id value="${escapeHtml(widget.config?.mediaId||'')}"><input type="hidden" data-dashboard-media-title value="${escapeHtml(widget.config?.mediaTitle||'')}"><input type="hidden" data-dashboard-media-filename value="${escapeHtml(widget.config?.mediaFilename||'')}"><input type="hidden" data-dashboard-media-thumbnail value="${escapeHtml(widget.config?.mediaThumbnail||'')}"><div class="place-suggestions dashboard-media-suggestions" hidden></div></label><label>Provenance affichée<input type="text" data-dashboard-media-origin value="${escapeHtml(widget.config?.mediaOrigin||'')}" placeholder="Ex : Jean Dupont · Enquête"></label>`:''}${personWidget?`<div class="dashboard-person-widget-settings">${widget.type==='chosen_person'?'<input type="hidden" data-dashboard-person-mode value="specific">':`<label>Personne affichée<select data-dashboard-person-mode><option value="random" ${mode==='random'?'selected':''}>Aléatoire</option><option value="specific" ${mode==='specific'?'selected':''}>Personne précise</option></select></label>`}${personPicker('Choisir une personne','personName','personId')}</div>`:''}${secondPersonWidget?`<div class="dashboard-person-widget-settings">${personPicker('Première personne','personName','personId')}${personPicker('Deuxième personne','personName2','personId2')}</div>`:''}<div class="page-actions compact"><button class="button small" type="button" data-save-dashboard-widget="${escapeHtml(widget.id)}">Enregistrer</button><button class="button small secondary" type="button" data-cancel-dashboard-widget="${escapeHtml(widget.id)}">Annuler</button></div></div>`;
+        return `<div class="dashboard-widget-back" data-dashboard-widget-editor="${escapeHtml(widget.id)}"><div class="dashboard-widget-back-title"><strong>Réglages du widget</strong><span>${escapeHtml(dashboardWidgetLabel(widget.type))}</span></div><label>Largeur<div class="block-widths dashboard-widget-widths">${personBlockWidthChoices.map(([value,text])=>`<button type="button" data-block-width="${value}" aria-pressed="${String(widget.width)===value?'true':'false'}" title="Largeur ${text}">${text}</button>`).join('')}</div></label>${hasLimit?`<label>Nombre d’éléments<input type="number" min="1" max="80" data-dashboard-widget-limit value="${escapeHtml(widget.limit||defaultDashboardBlockLimits[widget.type])}"></label>`:''}${quizPanel}${widget.type==='person_block'?`<label>Bloc de fiche à afficher<select data-dashboard-person-block-key>${defaultPersonBlocks.map(([key,label])=>`<option value="${escapeHtml(key)}" ${(widget.config?.personBlockKey||'identity')===key?'selected':''}>${escapeHtml(label)}</option>`).join('')}</select></label>`:''}${widget.type==='branch_map'?`<label>Branche / patronyme<input type="text" data-dashboard-branch-name list="dashboard-branch-options" value="${escapeHtml(widget.config?.branchName||'')}" placeholder="Ex : Dupont"><datalist id="dashboard-branch-options">${(state.bootstrap?.surnameGroups||[]).map(group=>`<option value="${escapeHtml(group.name||group)}"></option>`).join('')}</datalist></label>`:''}${widget.type==='quick_stat'?`<label>Statistique affichée<select data-dashboard-quick-stat>${quickStatOptions.map(([key,label])=>`<option value="${escapeHtml(key)}" ${(widget.config?.quickStat||'persons')===key?'selected':''}>${escapeHtml(label)}</option>`).join('')}</select></label>`:''}${sessionGoalPanel}${widget.type==='web_search'?`<div class="dashboard-person-widget-settings"><label>Personne<select data-dashboard-person-mode><option value="last" ${widget.config?.personMode!=='specific'?'selected':''}>Dernière fiche consultée</option><option value="specific" ${widget.config?.personMode==='specific'?'selected':''}>Personne choisie</option></select></label>${personPicker('Choisir une personne','personName','personId')}</div>${webSearchSitesEditor(`ws-widget-${widget.id}`,'Sites affichés',widget.config?.sites?webSearchSettings(0,widget.config.sites):webSearchSettings(),{saveButton:false})}`:''}${widget.type==='favorite_image'?`<label>Image favorite<input type="text" data-dashboard-media-search value="${escapeHtml(widget.config?.mediaTitle||'')}" placeholder="Tape le prénom/nom d’une personne…" autocomplete="off"><input type="hidden" data-dashboard-media-id value="${escapeHtml(widget.config?.mediaId||'')}"><input type="hidden" data-dashboard-media-title value="${escapeHtml(widget.config?.mediaTitle||'')}"><input type="hidden" data-dashboard-media-filename value="${escapeHtml(widget.config?.mediaFilename||'')}"><input type="hidden" data-dashboard-media-thumbnail value="${escapeHtml(widget.config?.mediaThumbnail||'')}"><div class="place-suggestions dashboard-media-suggestions" hidden></div></label><label>Provenance affichée<input type="text" data-dashboard-media-origin value="${escapeHtml(widget.config?.mediaOrigin||'')}" placeholder="Ex : Jean Dupont · Enquête"></label>`:''}${personWidget?`<div class="dashboard-person-widget-settings">${widget.type==='chosen_person'?'<input type="hidden" data-dashboard-person-mode value="specific">':`<label>Personne affichée<select data-dashboard-person-mode><option value="random" ${mode==='random'?'selected':''}>Aléatoire</option><option value="specific" ${mode==='specific'?'selected':''}>Personne précise</option></select></label>`}${personPicker('Choisir une personne','personName','personId')}</div>`:''}${secondPersonWidget?`<div class="dashboard-person-widget-settings">${personPicker('Première personne','personName','personId')}${personPicker('Deuxième personne','personName2','personId2')}</div>`:''}<div class="page-actions compact"><button class="button small" type="button" data-save-dashboard-widget="${escapeHtml(widget.id)}">Enregistrer</button><button class="button small secondary" type="button" data-cancel-dashboard-widget="${escapeHtml(widget.id)}">Annuler</button></div></div>`;
     }
     function saveDashboardWidgetFromEditor(widgetId){
         const settings=dashboardBlockSettings();
@@ -1529,6 +1694,7 @@
         if(branchName!==undefined)widget.config={...(widget.config||{}),branchName:branchName.trim()};
         const quickStat=$('[data-dashboard-quick-stat]',editor)?.value;
         if(quickStat)widget.config={...(widget.config||{}),quickStat};
+        if(widget.type==='web_search'){const list=$(`#ws-widget-${CSS.escape(widget.id)}`,editor);if(list)widget.config={...(widget.config||{}),sites:readWebSearchSitesEditor(list)};}
         const sessionGoal=$('[data-dashboard-session-goal]',editor)?.value;
         if(sessionGoal!==undefined)widget.config={...(widget.config||{}),sessionGoal:sessionGoal.trim()};
         if(widget.type==='session_goal'){
@@ -1632,6 +1798,13 @@
         const limitMax=widget.type==='person_quiz'?8:80;
         const limitMin=widget.type==='person_quiz'?3:1;
         return `<div class="order-row dashboard-order-row" data-widget-id="${escapeHtml(widget.id)}" data-widget-type="${escapeHtml(widget.type)}"><span class="order-grip" draggable="true" aria-hidden="true">↕</span><span class="order-number">${String(index+1).padStart(2,'0')}</span><b>${escapeHtml(label)}${subtitle}</b><div class="block-widths" aria-label="Largeur du widget">${personBlockWidthChoices.map(([value,text])=>`<button type="button" data-block-width="${value}" aria-pressed="${String(widget.width)===value?'true':'false'}" title="Largeur ${text}">${text}</button>`).join('')}</div>${defaultDashboardBlockLimits[widget.type]?`<label class="dashboard-limit" title="${widget.type==='person_quiz'?'Nombre de propositions':'Nombre d’éléments'}">${limitLabel} <input type="number" min="${limitMin}" max="${limitMax}" value="${escapeHtml(widget.limit||defaultDashboardBlockLimits[widget.type])}"></label>`:'<span></span>'}</div>`;
+    }
+    function dashboardWebSearchCard(index,detail,widget,spanClass){
+        const specific=widget.config?.personMode==='specific';
+        const person=detail?.person;
+        const settings=widget.config?.sites?webSearchSettings(0,widget.config.sites):webSearchSettings(person?.id||0);
+        const body=person?`<p class="web-search-person"><button class="link-button" type="button" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button> <small>${escapeHtml(years(person))}${specific?'':' · dernière fiche consultée'}</small></p>${webSearchPanelHtml(detail,settings,`widget-${widget.id}`)}`:empty(specific?'Choisis une personne avec le crayon.':'Ouvre une fiche : elle apparaîtra ici.');
+        return card(index,'Chercher sur internet','',body,spanClass);
     }
     function dashboardRecentPeople(){
         try{return JSON.parse(localStorage.getItem('genealogie-dashboard-recent-people')||'[]').filter(item=>item&&Number(item.id));}catch(_){return[];}
@@ -2369,6 +2542,7 @@
                 const body=artisticEvs.length?`<div class="event-list">${artisticEvs.map(renderArtisticEv).join('')}</div>`:empty('Aucune œuvre ou réalisation enregistrée.');
                 return card(index,`Œuvres — ${escapeHtml(disciplineLabel)}`,artisticEvs.length,body,'span-12',editOnly(actionButton('add','Ajouter une œuvre / réalisation',`data-add-event-inline-artistic="${person.id}"`)));
             },
+            web_search:index=>card(index,'Chercher sur internet','',webSearchPanelHtml(detail,webSearchSettings(person.id),`person-${person.id}`),'span-12'),
             person_exports:index=>{
                 const body=`<div class="person-export-block"><p>Exports rapides de cette fiche. Le PDF utilise l’impression du navigateur, avec l’ordre, la taille et la visibilité des blocs de cette fiche.</p><div class="page-actions"><button class="button small secondary" type="button" data-customize-person-export="${person.id}">Personnaliser l’export</button><button class="button small secondary" type="button" data-print-person="${person.id}">PDF / imprimer</button><button class="button small secondary" type="button" data-export-person-json="${person.id}">JSON fiche</button></div></div>`;
                 return card(index,'Exports fiche','',body,'span-6');
@@ -2878,6 +3052,7 @@
     }
 
     function bindPersonPage(detail) {
+        bindWebSearchPanels($('#workspace'));
         $$('[data-edit-person-inline]').forEach(button=>button.addEventListener('click',()=>openPersonDialog(detail)));
         $$('[data-delete-person]').forEach(button=>button.addEventListener('click',()=>deletePerson(detail)));
         $$('[data-person-history]').forEach(button=>button.addEventListener('click',()=>openPersonHistoryDialog(Number(button.dataset.personHistory),detail)));
@@ -5917,8 +6092,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function battueMapHtml(communes){
         const w=1000,h=560,bounds=battueBounds(communes);
         const scale=battueDistanceScale(bounds);
-        const paths=communes.flatMap(c=>battueGeometryPaths(c.geometry,bounds,w,h).map(d=>`<path d="${d}" class="battue-map-shape level-${Number(c.level)} commune-status-${escapeHtml(c.commune_status||'not_started')}" data-map-commune="${escapeHtml(c.insee_code)}" data-map-name="${escapeHtml(c.name)}" data-map-level="${Number(c.level)}" data-commune-status="${escapeHtml(c.commune_status||'not_started')}" tabindex="0"><title>${escapeHtml(c.name)} · niveau ${Number(c.level)}</title></path>`)).join('');
-        return `<div class="battue-map-distance-scale" aria-label="Échelle de distance"><span>Échelle</span><strong>${escapeHtml(scale.label)}</strong><i style="width:${scale.width.toFixed(2)}%"></i></div><div class="battue-map-hover" id="battue-map-hover"><span>Commune</span><strong>Survole la carte</strong><small>Nom et niveau</small></div><svg class="battue-map" viewBox="0 0 ${w} ${h}" role="img" aria-label="Carte des communes de la battue">${paths}</svg><div class="battue-map-legend">${battueMapLevels.map(level=>`<span><i class="level-${level}"></i>Niveau ${level}</span>`).join('')}<button type="button" class="button small secondary battue-colors-button" id="open-battue-level-colors">Couleurs</button><span class="battue-scale">Contours locaux · voisinage par frontière commune</span><span class="battue-boundary-note">Bord sans voisine : limite extérieure possible (mer/océan ou frontière)</span></div>`;
+        const paths=communes.flatMap(c=>battueGeometryPaths(c.geometry,bounds,w,h).map(d=>`<path d="${d}" class="battue-map-shape level-${Number(c.level)} commune-status-${escapeHtml(c.commune_status||'not_started')}" data-map-commune="${escapeHtml(c.insee_code)}" data-map-name="${escapeHtml(c.name)}" data-map-country="${escapeHtml(c.country||'')}" data-map-level="${Number(c.level)}" data-commune-status="${escapeHtml(c.commune_status||'not_started')}" tabindex="0"><title>${escapeHtml(c.name)}${c.country?` (${escapeHtml(c.country)})`:''} · niveau ${Number(c.level)}</title></path>`)).join('');
+        return `<div class="battue-map-distance-scale" aria-label="Échelle de distance"><span>Échelle</span><strong>${escapeHtml(scale.label)}</strong><i style="width:${scale.width.toFixed(2)}%"></i></div><div class="battue-map-hover" id="battue-map-hover"><span>Commune</span><strong>Survole la carte</strong><small>Nom, pays et niveau</small></div><svg class="battue-map" viewBox="0 0 ${w} ${h}" role="img" aria-label="Carte des communes de la battue">${paths}</svg><div class="battue-map-legend">${battueMapLevels.map(level=>`<span><i class="level-${level}"></i>Niveau ${level}</span>`).join('')}<button type="button" class="button small secondary battue-colors-button" id="open-battue-level-colors">Couleurs</button><span class="battue-scale">Contours locaux · voisinage par frontière commune</span><span class="battue-boundary-note">Bord sans voisine : limite extérieure possible (mer/océan ou frontière)</span></div>`;
     }
     function battueCommuneFilterHtml(statuses){
         const filters=[['all','Tous'],...Object.entries(statuses||{})];
@@ -6027,8 +6202,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $('#delete-battue').addEventListener('click',async()=>{if(!confirm('Supprimer cette battue et ses annotations ?'))return;await api('delete_battue',{},{method:'POST',body:{id:data.battue.id}});state.currentBattueId=0;toast('Battue supprimée.');persistUiState();renderBattues();});
         $('#open-battue-level-colors')?.addEventListener('click',()=>openBattueLevelColorsDialog());
         const hover=$('#battue-map-hover');
-        const setHover=path=>{if(!hover||!path)return;hover.classList.add('is-active');hover.innerHTML=`<span>Commune</span><strong>${escapeHtml(path.dataset.mapName||'')}</strong><small>INSEE ${escapeHtml(path.dataset.mapCommune||'')} · niveau ${escapeHtml(path.dataset.mapLevel||'')}</small>`;};
-        const clearHover=()=>{if(!hover)return;hover.classList.remove('is-active');hover.innerHTML='<span>Commune</span><strong>Survole la carte</strong><small>Nom et niveau</small>';};
+        const setHover=path=>{if(!hover||!path)return;hover.classList.add('is-active');const code=path.dataset.mapCommune||'';hover.innerHTML=`<span>Commune</span><strong>${escapeHtml(path.dataset.mapName||'')}</strong>${path.dataset.mapCountry?`<em class="battue-map-hover-country">${escapeHtml(path.dataset.mapCountry)}</em>`:''}<small>${/^[A-Z]{2}-/.test(code)?'Code':'INSEE'} ${escapeHtml(code)} · niveau ${escapeHtml(path.dataset.mapLevel||'')}</small>`;};
+        const clearHover=()=>{if(!hover)return;hover.classList.remove('is-active');hover.innerHTML='<span>Commune</span><strong>Survole la carte</strong><small>Nom, pays et niveau</small>';};
         $('.battue-map')?.addEventListener('mousemove',event=>{const path=event.target.closest?.('[data-map-commune]');if(path)setHover(path);});
         $('.battue-map')?.addEventListener('mouseleave',clearHover);
         $$('[data-map-commune]').forEach(path=>{path.addEventListener('click',()=>document.getElementById(`battue-commune-${path.dataset.mapCommune}`)?.scrollIntoView({behavior:'smooth',block:'center'}));path.addEventListener('mouseenter',()=>setHover(path));path.addEventListener('focus',()=>setHover(path));path.addEventListener('mouseleave',clearHover);path.addEventListener('blur',clearHover);});
@@ -8082,6 +8257,12 @@ ${backupSectionHtml()}
         <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Filtres du bloc Événements</h3><p>Choisis les types d'événements à afficher dans le bloc Événements. Décoche un type pour le masquer.</p></header>
             <div class="design-order-grid block-grid">${eventsFilterEditor('events-filter-global','Toutes les fiches',eventsFilterSettings(),0)}${personId?eventsFilterEditor('events-filter-person',`Exception pour ${personName(current)}`,eventsFilterSettings(personId),personId):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour créer une exception propre à sa fiche.</p></section>'}</div>
         </section>
+        <section class="person-block-config" id="web-search-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Chercher sur internet</h3><p>Choisis les sites proposés dans le bloc « Chercher sur internet » (fiches et widget) et leur ordre. Glisse pour réordonner, décoche pour masquer.</p></header>
+            <div class="design-order-grid block-grid">${webSearchSitesEditor('web-search-global','Toutes les fiches',webSearchSettings())}${personId?webSearchSitesEditor('web-search-person',`Exception pour ${personName(current)}`,webSearchSettings(personId),{personId}):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour lui donner ses propres sites.</p></section>'}${webSearchCustomSitesEditorHtml()}</div>
+        </section>
+        <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Fiches avec un réglage particulier</h3><p>Les fiches qui ont leurs propres blocs, filtres d’événements ou sites de recherche (au lieu du réglage de toutes les fiches).</p></header>
+            <div class="design-order-grid block-grid" id="person-exceptions-list"><p class="muted">Recherche des fiches…</p></div>
+        </section>
         </section>`;
         enhanceDesignFormOptions(design);
         reorderDesignPrimaryFields();
@@ -8438,6 +8619,12 @@ ${backupSectionHtml()}
         $$('[data-reset-person-blocks]').forEach(button=>button.addEventListener('click',()=>{localStorage.removeItem(`genealogie-person-blocks-${button.dataset.resetPersonBlocks}`);toast('Exception supprimée.');renderDesignTools();}));
         $$('[data-events-filter-save]').forEach(button=>button.addEventListener('click',()=>{const listId=button.dataset.eventsFilterSave;const list=$(`#${listId}`);if(!list)return;const personId=Number(button.dataset.eventsFilterPersonId)||0;const hiddenTypeIds=$$('.events-filter-row[data-filter-type-id]',list).filter(row=>!$('input[type=checkbox]',row)?.checked).map(row=>Number(row.dataset.filterTypeId));const showCensus=!!$('.events-filter-row[data-filter-census] input[type=checkbox]',list)?.checked;saveEventsFilterSettings({hiddenTypeIds,showCensus},personId);toast(personId?'Exception de filtres enregistrée.':'Filtres des événements enregistrés.');if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);}));
         $$('[data-reset-events-filter]').forEach(button=>button.addEventListener('click',()=>{localStorage.removeItem(`genealogie-events-filter-${button.dataset.resetEventsFilter}`);toast('Exception de filtres supprimée.');renderDesignTools();}));
+        bindWebSearchSitesEditors($('#workspace'));
+        $$('[data-web-search-save]').forEach(button=>button.addEventListener('click',()=>{const list=document.getElementById(button.dataset.webSearchSave);if(!list)return;saveWebSearchSettings(readWebSearchSitesEditor(list),Number(button.dataset.webSearchPersonId)||0);toast('Sites de recherche enregistrés.');renderDesignTools();}));
+        $$('[data-reset-web-search]').forEach(button=>button.addEventListener('click',()=>{localStorage.removeItem(`genealogie-web-search-${button.dataset.resetWebSearch}`);toast('Exception de sites supprimée.');renderDesignTools();}));
+        $('#ws-custom-add')?.addEventListener('click',()=>{const label=$('#ws-custom-label').value.trim();const url=$('#ws-custom-url').value.trim();if(!label||!/^https?:\/\/\S+$/i.test(url)){toast('Indique un nom et une adresse qui commence par https://','error');return;}if(!/\{(prénom|prenom|nom|nom_complet|lieu|année|annee|de|à|a|conjoint|requête|requete)\}/i.test(url)&&!confirm('Cette adresse ne contient aucun champ comme {nom} : elle ouvrira toujours la même page. Ajouter quand même ?'))return;saveWebSearchCustomSites([...webSearchCustomSites(),{key:`custom-${Date.now().toString(36)}`,label,url}]);toast('Site ajouté.');renderDesignTools();});
+        $$('[data-ws-custom-delete]').forEach(button=>button.addEventListener('click',()=>{if(!confirm('Supprimer ce site de la liste ?'))return;saveWebSearchCustomSites(webSearchCustomSites().filter(site=>site.key!==button.dataset.wsCustomDelete));toast('Site supprimé.');renderDesignTools();}));
+        renderPersonExceptionsList();
     }
 
     function setupDragOrder(list){

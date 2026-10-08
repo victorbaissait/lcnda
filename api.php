@@ -159,6 +159,7 @@ try {
         'dashboard_quiz' => dashboard_quiz_data($pdo),
         'goose_quiz' => goose_quiz_data($pdo),
         'person' => person_detail($pdo, safe_int($_GET['id'] ?? 0)),
+        'person_labels' => json_response(['people' => person_labels($pdo, (string) ($_GET['ids'] ?? ''))]),
         'census_member_memberships' => census_member_memberships_data($pdo, safe_int($_GET['person_id'] ?? 0)),
         'tree' => tree_data($pdo, safe_int($_GET['id'] ?? 0)),
         'kinship' => kinship_data($pdo, safe_int($_GET['from'] ?? 0), safe_int($_GET['to'] ?? 0)),
@@ -7570,6 +7571,7 @@ function battue_detail(PDO $pdo,int $id): never
     foreach($contours->fetchAll() as $row){
         $insee=(string)$row['insee_code'];
         $row['level']=$levelByInsee[$insee]??99;
+        $row['country']=commune_country_name($insee); // affiché au survol de la carte
         $row['geometry']=json_decode((string)$row['geometry_json'],true);
         unset($row['geometry_json']);
         $row['aliases']=[];
@@ -11833,4 +11835,17 @@ function delete_media_tag(PDO $pdo, array $data): array
     }
     log_change($pdo,'media',$tag['media_id'],'untag','Suppression de '.($tag['tag_type']==='signature'?'la signature':'l\'identification').' de '.trim($tag['first_name'].' '.$tag['last_name']).' sur le média #'.$tag['media_id']);
     return ['id'=>$tagId,'media_id'=>$tag['media_id'],'person_id'=>$tag['person_id']];
+}
+
+/** Nom et années de quelques personnes (Apparence : fiches qui ont un réglage particulier). */
+function person_labels(PDO $pdo, string $ids): array
+{
+    $list = array_values(array_unique(array_filter(array_map('intval', explode(',', $ids)), static fn(int $id): bool => $id > 0)));
+    if (!$list) { return []; }
+    $list = array_slice($list, 0, 500);
+    $stmt = $pdo->prepare('SELECT * FROM (' . person_select() . ') WHERE id IN (' . implode(',', array_fill(0, count($list), '?')) . ')');
+    $stmt->execute($list);
+    return array_map(static fn(array $r): array => ['id' => (int) $r['id'], 'prefix' => $r['prefix'] ?? '', 'first_name' => $r['first_name'] ?? '',
+        'middle_name' => $r['middle_name'] ?? '', 'last_name' => $r['last_name'] ?? '', 'suffix' => $r['suffix'] ?? '',
+        'birth_year' => $r['birth_year'] ?? null, 'death_year' => $r['death_year'] ?? null], $stmt->fetchAll(PDO::FETCH_ASSOC));
 }

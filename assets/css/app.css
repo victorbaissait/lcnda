@@ -2910,6 +2910,7 @@ button.occ-person-name:hover { color: var(--blue); text-decoration: underline; }
 .battue-map-hover span { display: block; color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
 .battue-map-hover strong { display: block; margin-top: 3px; font-size: 18px; line-height: 1.15; }
 .battue-map-hover small { display: block; margin-top: 3px; color: var(--muted); font-weight: 800; }
+.battue-map-hover-country { display: block; margin-top: 2px; font-style: normal; font-size: 13px; font-weight: 900; }
 .battue-map-hover.is-active { background: #fff; }
 .battue-map-shape.level-0 { fill: var(--battue-level-0, #0066cc); }
 .battue-map-shape.level-1 { fill: var(--battue-level-1, #37a36b); }
@@ -3503,3 +3504,18 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 .battue-country-group > summary { cursor: pointer; font-weight: 700; padding: 4px 0; }
 .battue-country-group > summary small { font-weight: 600; opacity: .7; margin-left: 6px; }
 .battue-country-group .battue-countries-actions { margin: 6px 0 4px; }
+
+/* Chercher sur internet (bloc de fiche, widget, Apparence) */
+.web-search-panel > p { margin: 0 0 10px; }
+.web-search-options { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; margin-bottom: 12px; }
+.web-search-options label { display: flex; align-items: center; gap: 6px; font-weight: 700; }
+.web-search-options input[type="number"] { width: 6.5em; }
+.web-search-options select { max-width: 22em; }
+.web-search-group { margin: 8px 0; }
+.web-search-group > span { display: block; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: var(--blue); margin-bottom: 5px; }
+.web-search-links { display: flex; flex-wrap: wrap; gap: 6px; }
+.web-search-links a { text-decoration: none; }
+.web-search-person { margin: 0 0 10px; }
+.web-search-custom-list, .person-exception-list { display: grid; gap: 6px; margin: 8px 0 12px; }
+.web-search-custom-row, .person-exception-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.web-search-custom-row small { flex: 1 1 100%; overflow-wrap: anywhere; opacity: .75; }
