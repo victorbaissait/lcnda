@@ -733,7 +733,7 @@
         ['baidu','Baidu','Moteurs de recherche',p=>`https://www.baidu.com/s?wd=${webSearchEnc(p.q)}`],
         ['mojeek','Mojeek','Moteurs de recherche',p=>`https://www.mojeek.com/search?q=${webSearchEnc(p.q)}`],
         ['geneanet','Geneanet','Généalogie',p=>`https://www.geneanet.org/fonds/individus/?go=1&nom=${webSearchEnc(p.last)}&prenom=${webSearchEnc(p.first)}${p.place?`&place__0__=${webSearchEnc(p.place)}`:''}${p.y1?`&type_periode=between&from=${p.y1}&to=${p.y2}`:''}`],
-        ['familysearch','FamilySearch','Généalogie',p=>`https://www.familysearch.org/fr/search/record/results?q.givenName=${webSearchEnc(p.first)}&q.surname=${webSearchEnc(p.last)}${p.place?`&q.${p.placeKind==='death'?'deathLikePlace':'birthLikePlace'}=${webSearchEnc(p.place)}`:''}${p.y1?`&q.birthLikeDate.from=${p.y1}&q.birthLikeDate.to=${p.y2}`:''}${p.spouseFirst?`&q.spouseGivenName=${webSearchEnc(p.spouseFirst)}`:''}${p.spouseLast?`&q.spouseSurname=${webSearchEnc(p.spouseLast)}`:''}`],
+        ['familysearch','FamilySearch','Généalogie',p=>`https://www.familysearch.org/fr/search/record/results?q.givenName=${webSearchEnc(p.first)}&q.surname=${webSearchEnc(p.last)}${p.place?`&q.${p.placeKind==='death'?'deathLikePlace':'birthLikePlace'}=${webSearchEnc(p.place)}`:''}${p.birthFrom?`&q.birthLikeDate.from=${p.birthFrom}&q.birthLikeDate.to=${p.birthTo}`:''}${p.deathFrom?`&q.deathLikeDate.from=${p.deathFrom}&q.deathLikeDate.to=${p.deathTo}`:''}${p.spouseFirst?`&q.spouseGivenName=${webSearchEnc(p.spouseFirst)}`:''}${p.spouseLast?`&q.spouseSurname=${webSearchEnc(p.spouseLast)}`:''}`],
         ['filae','Filae','Généalogie',p=>`https://www.filae.com/search?ln=${webSearchEnc(p.last)}&fn=${webSearchEnc(p.first)}${p.y1?`&sy=${p.y1}&ey=${p.y2}`:''}`],
         ['myheritage','MyHeritage','Généalogie',p=>`https://www.myheritage.fr/names/${webSearchSlug(p.first)}_${webSearchSlug(p.last)}`],
         ['ancestry','Ancestry','Généalogie',p=>`https://www.ancestry.fr/search/?name=${webSearchEnc(p.first)}_${webSearchEnc(p.last)}${p.year?`&birth=${p.year}${p.place?`_${webSearchEnc(p.place)}`:''}`:''}`],
@@ -793,8 +793,17 @@
         const places=[];const addPlace=(kind,label,event)=>{const value=String(event?.place_name||'').split(',')[0].trim();if(value&&!places.some(p=>p.value===value))places.push({kind,label:`${label} : ${value}`,value});};
         addPlace('birth','Naissance',birth);addPlace('death','Décès',death);addPlace('other','Mariage',eventOf(['MARR']));
         const firstOnly=String(person.first_name||'').trim().split(/\s+/)[0]||first;
-        return {id:Number(person.id)||0,first,firstOnly,last,female:person.gender==='female',birthYear,deathYear,places,
+        const estimates=detail?.estimates||{};
+        return {id:Number(person.id)||0,first,firstOnly,last,female:person.gender==='female',birthYear,deathYear,birthEst:estimates.birth||null,deathEst:estimates.death||null,places,
             partners:partners.map(partner=>({first:[partner.first_name,partner.middle_name].filter(Boolean).join(' ').trim(),firstOnly:String(partner.first_name||'').trim().split(/\s+/)[0]||'',last:String(partner.last_name||'').trim()})).filter(partner=>partner.first||partner.last)};
+    }
+    /** Plage de vie proposée : naissance → décès ; sinon dates estimées ; sinon une durée de vie probable. */
+    function webSearchLifeRange(ctx){
+        const now=new Date().getFullYear();
+        let from=ctx.birthYear||ctx.birthEst?.from||ctx.birthEst?.to||0;let to=ctx.deathYear||ctx.deathEst?.to||0;
+        if(!from&&to)from=to-80;if(from&&!to)to=Math.min(from+90,now);
+        if(from&&!ctx.deathYear)to=Math.min(to,from+90,now); // décès seulement estimé : au plus 90 ans de vie
+        return {from:from||'',to:to||'',estimated:Boolean(from&&(!ctx.birthYear||!ctx.deathYear))};
     }
     /** Paramètres de la recherche d'après les options cochées sous les boutons. */
     function webSearchParams(ctx,options){
@@ -802,11 +811,20 @@
         const first=options.middle?ctx.first:(ctx.firstOnly||ctx.first);
         const p={first,last:ctx.last,name:[first,ctx.last].filter(Boolean).join(' '),place:'',placeKind:'birth',y1:0,y2:0,year:0,spouseFirst:'',spouseLast:'',spouseName:''};
         if(options.place){const place=ctx.places.find(item=>item.value===options.place);p.place=options.place;p.placeKind=place?.kind||'birth';}
-        if(options.years){p.y1=Number(options.y1)||0;p.y2=Number(options.y2)||p.y1;if(p.y1&&p.y2<p.y1)[p.y1,p.y2]=[p.y2,p.y1];p.year=p.y1&&p.y2?Math.round((p.y1+p.y2)/2):0;}
+        // Années : y1–y2 = plage de vie (Geneanet, Filae) ; birthFrom/To et deathFrom/To = champs « naissance » / « décès »
+        // (FamilySearch) ; year = année de naissance (Ancestry, Find a Grave…). Les moteurs de recherche n'en reçoivent aucune.
+        if(options.years){
+            p.y1=Number(options.y1)||0;p.y2=Number(options.y2)||p.y1;if(p.y1&&p.y2<p.y1)[p.y1,p.y2]=[p.y2,p.y1];
+            if(ctx.birthYear){p.birthFrom=ctx.birthYear-2;p.birthTo=ctx.birthYear+2;}
+            else if(ctx.birthEst?.from||ctx.birthEst?.to){p.birthFrom=ctx.birthEst.from||ctx.birthEst.to-30;p.birthTo=ctx.birthEst.to||ctx.birthEst.from+30;}
+            else if(p.y1){p.birthFrom=p.y1-5;p.birthTo=p.y1+5;}
+            if(ctx.deathYear){p.deathFrom=ctx.deathYear-2;p.deathTo=ctx.deathYear+2;}
+            p.year=p.birthFrom?Math.round((p.birthFrom+p.birthTo)/2):0;
+        }
         const spouse=options.spouse!==''&&options.spouse!==undefined?ctx.partners[Number(options.spouse)]:null;
         if(spouse){const spouseFirst=options.middle?spouse.first:(spouse.firstOnly||spouse.first);p.spouseFirst=spouseFirst;p.spouseLast=spouse.last;p.spouseName=[spouseFirst,spouse.last].filter(Boolean).join(' ');}
         const married=options.married&&spouse?.last&&spouse.last!==ctx.last?`${first} ${spouse.last}`.trim():'';
-        p.q=[married?`("${p.name}" OR "${married}")`:`"${p.name}"`,p.place,p.year?String(p.year):'',p.spouseName?`"${p.spouseName}"`:''].filter(Boolean).join(' ');
+        p.q=[married?`("${p.name}" OR "${married}")`:`"${p.name}"`,p.place,p.spouseName?`"${p.spouseName}"`:''].filter(Boolean).join(' ');
         return p;
     }
     const webSearchContexts=new Map();
@@ -814,12 +832,12 @@
         const ctx=webSearchContext(detail);webSearchContexts.set(uid,ctx);
         if(!ctx.first&&!ctx.last)return empty('Cette fiche n’a ni prénom ni nom à chercher.');
         const sites=webSearchAllSites();const visible=settings.order.filter(key=>!settings.hidden.includes(key)).map(key=>sites.find(site=>site[0]===key)).filter(Boolean);
-        const y1=ctx.birthYear?ctx.birthYear-5:(ctx.deathYear?ctx.deathYear-80:'');const y2=ctx.birthYear?ctx.birthYear+5:(ctx.deathYear||'');
+        const life=webSearchLifeRange(ctx);const y1=life.from,y2=life.to;
         const hasMiddle=ctx.first!==ctx.firstOnly||ctx.partners.some(partner=>partner.first!==partner.firstOnly);
         let middleChecked=false;try{middleChecked=localStorage.getItem('genealogie-web-search-middle')==='1';}catch(_){}
         const options=`<div class="web-search-options">
             ${hasMiddle?`<label class="checkbox-line" title="${escapeHtml(ctx.first)}"><input type="checkbox" data-ws-middle ${middleChecked?'checked':''}> Deuxièmes prénoms</label>`:''}
-            <label class="checkbox-line"><input type="checkbox" data-ws-years ${y1?'checked':''}> Années <input type="number" data-ws-y1 value="${escapeHtml(y1)}" placeholder="de" min="1000" max="2100"> – <input type="number" data-ws-y2 value="${escapeHtml(y2)}" placeholder="à" min="1000" max="2100"></label>
+            <label class="checkbox-line" title="De la naissance au décès ; pour les sites qui ont des champs de date (Geneanet, Filae, FamilySearch…). Les moteurs de recherche ne reçoivent pas d’année."><input type="checkbox" data-ws-years ${y1?'checked':''}> Années${life.estimated?' <small class="muted">(estimées)</small>':''} <input type="number" data-ws-y1 value="${escapeHtml(y1)}" placeholder="de" min="1000" max="2100"> – <input type="number" data-ws-y2 value="${escapeHtml(y2)}" placeholder="à" min="1000" max="2100"></label>
             ${ctx.places.length?`<label>Lieu <select data-ws-place><option value="">Aucun</option>${ctx.places.map(place=>`<option value="${escapeHtml(place.value)}">${escapeHtml(place.label)}</option>`).join('')}</select></label>`:''}
             ${ctx.partners.length?`<label>Conjoint <select data-ws-spouse><option value="">Aucun</option>${ctx.partners.map((partner,index)=>`<option value="${index}">${escapeHtml([partner.first,partner.last].filter(Boolean).join(' '))}</option>`).join('')}</select></label>`:''}
             ${ctx.female&&ctx.partners.some(partner=>partner.last&&partner.last!==ctx.last)?`<label class="checkbox-line"><input type="checkbox" data-ws-married> Aussi sous le nom d’épouse (moteurs de recherche)</label>`:''}
@@ -5123,8 +5141,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
                 <label>Nom<input name="last" value="${v('last')}" placeholder="Dupont"></label>
                 <label>Lieu<input name="place" value="${v('place')}" placeholder="Arras"></label>
                 <label>Ce lieu est celui<select name="placeKind"><option value="birth" ${f.placeKind==='birth'?'selected':''}>de la naissance</option><option value="death" ${f.placeKind==='death'?'selected':''}>du décès</option><option value="other" ${f.placeKind==='other'?'selected':''}>du mariage ou d’un autre événement</option></select></label>
-                <label>Né entre<input name="y1" type="number" min="1000" max="2100" value="${v('y1')}" placeholder="1770"></label>
-                <label>et<input name="y2" type="number" min="1000" max="2100" value="${v('y2')}" placeholder="1780"></label>
+                <label>Année de naissance<input name="y1" type="number" min="1000" max="2100" value="${v('y1')}" placeholder="1775"></label>
+                <label>Année de décès<input name="y2" type="number" min="1000" max="2100" value="${v('y2')}" placeholder="1840"></label>
                 <label>Prénom du conjoint<input name="spouseFirst" value="${v('spouseFirst')}"></label>
                 <label>Nom du conjoint<input name="spouseLast" value="${v('spouseLast')}"></label>
                 <div class="checkbox-group"><label class="checkbox-line"><input type="checkbox" name="useMiddle" ${f.useMiddle?'checked':''}> Deuxièmes prénoms</label><label class="checkbox-line"><input type="checkbox" name="married" ${f.married?'checked':''}> Aussi sous le nom d’épouse</label></div>
@@ -5134,9 +5152,10 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const update=()=>{
             const x=formObject(form);x.useMiddle=form.elements.useMiddle.checked;x.married=form.elements.married.checked;Object.assign(f,x);
             const first=[x.first,x.middle].filter(Boolean).join(' ').trim();
-            const ctx={first,firstOnly:String(x.first||'').trim().split(/\s+/)[0]||first,last:String(x.last||'').trim(),places:x.place?[{value:x.place.trim(),kind:x.placeKind}]:[],
+            const ctx={first,firstOnly:String(x.first||'').trim().split(/\s+/)[0]||first,last:String(x.last||'').trim(),birthYear:Number(x.y1)||0,deathYear:Number(x.y2)||0,places:x.place?[{value:x.place.trim(),kind:x.placeKind}]:[],
                 partners:(x.spouseFirst||x.spouseLast)?[{first:String(x.spouseFirst||'').trim(),firstOnly:String(x.spouseFirst||'').trim().split(/\s+/)[0]||'',last:String(x.spouseLast||'').trim()}]:[]};
-            const p=webSearchParams(ctx,{middle:x.useMiddle,years:Boolean(x.y1||x.y2),y1:x.y1||x.y2,y2:x.y2||x.y1,place:x.place?x.place.trim():'',spouse:ctx.partners.length?'0':'',married:x.married});
+            const life=webSearchLifeRange(ctx);
+            const p=webSearchParams(ctx,{middle:x.useMiddle,years:Boolean(x.y1||x.y2),y1:life.from,y2:life.to,place:x.place?x.place.trim():'',spouse:ctx.partners.length?'0':'',married:x.married});
             const ok=Boolean(ctx.first||ctx.last);
             $('#wst-query').textContent=ok?`Recherche : ${p.q}`:'Tape au moins un prénom ou un nom.';
             $$('[data-ws-site]',panel).forEach(link=>{const site=sites.find(item=>item[0]===link.dataset.wsSite);link.classList.toggle('is-disabled',!ok);if(site&&ok){try{link.href=site[3](p);}catch(_){link.removeAttribute('href');}}else link.setAttribute('href','#');});
@@ -5157,7 +5176,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             const person=detail.person||{};const ctx=webSearchContext(detail);const spouse=(detail.partners||[])[0];
             const placeOf=kind=>ctx.places.find(place=>place.kind===kind);const place=placeOf('birth')||placeOf('death')||ctx.places[0];
             state.webSearchForm={first:String(person.first_name||'').trim(),middle:String(person.middle_name||'').trim(),last:String(person.last_name||'').trim(),place:place?.value||'',placeKind:place?.kind||'birth',
-                y1:ctx.birthYear?ctx.birthYear-5:(ctx.deathYear?ctx.deathYear-80:''),y2:ctx.birthYear?ctx.birthYear+5:(ctx.deathYear||''),spouseFirst:spouse?String(spouse.first_name||'').trim():'',spouseLast:spouse?String(spouse.last_name||'').trim():'',useMiddle:f.useMiddle,married:false};
+                y1:ctx.birthYear||ctx.birthEst?.from||'',y2:ctx.deathYear||ctx.deathEst?.to||'',spouseFirst:spouse?String(spouse.first_name||'').trim():'',spouseLast:spouse?String(spouse.last_name||'').trim():'',useMiddle:f.useMiddle,married:false};
             renderWebSearchTool();});
     }
     async function renderResearch(token=++state.workspaceToken){
