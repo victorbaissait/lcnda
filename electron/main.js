@@ -167,6 +167,47 @@ ipcMain.handle('lcnda:import-chosen-file', async (event, token) => {
   }
 });
 
+/**
+ * Pays des battues téléchargés à la demande : la page donne seulement un code pays ; l'adresse et l'empreinte sha256 viennent
+ * du catalogue livré avec l'application ; le fichier n'est rangé (DATA_DIR/reference) que si l'empreinte est la bonne.
+ */
+const downloads = new Map();
+ipcMain.handle('lcnda:download-reference', async (event, country) => {
+  if (!fromApp(event)) return { ok: false, error: 'Refusé' };
+  const cc = String(country || '').toUpperCase();
+  if (!/^[A-Z]{2}$/.test(cc)) return { ok: false, error: 'Pays inconnu.' };
+  if (downloads.has(cc)) return downloads.get(cc);
+  const job = (async () => {
+    let catalogue;
+    try { catalogue = JSON.parse(fs.readFileSync(path.join(APP_ROOT, 'data', 'reference', 'catalogue.json'), 'utf8')); }
+    catch { return { ok: false, error: 'Catalogue des pays absent.' }; }
+    const entry = catalogue.countries?.[cc];
+    if (!entry || !/^geo-[a-z]{2}\.sqlite\.gz$/.test(entry.file || '') || !/^[0-9a-f]{64}$/.test(entry.sha256 || '')) return { ok: false, error: 'Pays inconnu du catalogue.' };
+    const dir = path.join(paths().dataDir, 'reference');
+    const target = path.join(dir, entry.file);
+    if (fs.existsSync(target) || fs.existsSync(path.join(APP_ROOT, 'data', 'reference', entry.file))) return { ok: true, already: true };
+    const base = process.env.LCNDA_REFERENCE_BASE_URL || catalogue.base_url || '';
+    const partial = `${target}.${crypto.randomBytes(4).toString('hex')}.part`;
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+      const response = await fetch(base.replace(/\/+$/, '') + '/' + entry.file, { redirect: 'follow' });
+      if (!response.ok) throw new Error(`le serveur répond ${response.status}`);
+      const bytes = Buffer.from(await response.arrayBuffer());
+      if (crypto.createHash('sha256').update(bytes).digest('hex') !== entry.sha256) throw new Error('fichier abîmé (empreinte différente), rien n’a été installé');
+      fs.writeFileSync(partial, bytes);
+      fs.renameSync(partial, target);
+      return { ok: true, size: bytes.length };
+    } catch (err) {
+      try { fs.unlinkSync(partial); } catch { /* rien à effacer */ }
+      return { ok: false, error: 'Téléchargement impossible : ' + err.message + '. Vérifie la connexion à internet.' };
+    } finally {
+      downloads.delete(cc);
+    }
+  })();
+  downloads.set(cc, job);
+  return job;
+});
+
 /** La fenêtre ne peut afficher que l'application ; tout lien externe s'ouvre dans le navigateur. */
 function lockNavigation(webContents, origin) {
   const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };

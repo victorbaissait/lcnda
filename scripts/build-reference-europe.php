@@ -40,7 +40,8 @@ const SIMPLIFY_M = 150;   // tracés livrés (la France métropolitaine est enco
 const PRESIMPLIFY_M = 15; // tracés de travail, pour calculer les voisinages sans saturer la mémoire
 const INTERNAL_M = 40;    // voisines dans un même pays : limites à moins de 40 m (sources cohérentes)
 const BORDER_M = 165;     // voisines de part et d'autre d'une frontière : moins de ~150 m (+ marge de travail)
-const SAMPLE_M = 40;      // un point tous les 40 m le long des limites
+const SAMPLE_M = 40;
+const PLACES_LIGHT_ABOVE = 100000; // au-delà, lieux allégés (voir plus bas)      // un point tous les 40 m le long des limites
 
 $fold = static fn(string $v): string => trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower(ascii_fold($v))));
 
@@ -940,6 +941,14 @@ foreach ($geonamesFiles as $cc => $files) {
         $b = bounds($c['polys']);
         $places[$cc][] = [null, $c['name'], '', $c['county'], $c['state'], $placeCountryOf($cc), $c['alt'], round(($b[1] + $b[3]) / 2, 6), round(($b[0] + $b[2]) / 2, 6), $code, 'ADM', 0];
     }
+    // Très grands pays (> 100 000 lieux) : seulement les lieux principaux sont copiés dans les bases (« lieux allégés ») ; les
+    // hameaux sans population connue et les quartiers restent proposés à la saisie par le répertoire mondial (geo-world).
+    $all = count($places[$cc]);
+    if ($all > PLACES_LIGHT_ABOVE) {
+        $places[$cc] = array_values(array_filter($places[$cc], static fn(array $p): bool => $p[0] === null || $p[11] > 0
+            || in_array($p[10], ['PPLC', 'PPLA', 'PPLA2', 'PPLA3', 'PPLA4', 'PPLA5', 'PPLG', 'PPLH', 'PPLQ', 'PPLW', 'PPLCH', 'ADM'], true)));
+        printf("  lieux allégés : %d sur %d gardés\n", count($places[$cc]), $all);
+    }
     printf("Lieux GeoNames en %-18s : %6d (hors de toute commune : %d)\n", $countryNames[$cc], count($places[$cc]), $unmapped);
 }
 
@@ -990,3 +999,6 @@ $info = $db->prepare('INSERT INTO reference_info VALUES(?,?)');
 foreach (['tolerance_m' => (string) BORDER_M, 'version' => date('Ymd'), 'built_at' => date(DATE_ATOM)] as $k => $v) { $info->execute([$k, $v]); }
 $db->commit(); $db->exec('VACUUM'); $db = null;
 write_gz($tmp, "{$out}/geo-frontieres.sqlite.gz");
+
+// ─── Catalogue (livré avec l'application) ───
+require __DIR__ . '/build-catalogue.php';

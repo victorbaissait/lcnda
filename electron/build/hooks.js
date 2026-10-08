@@ -59,6 +59,11 @@ function checkReference(dir, problems) {
   }
   for (const name of fs.readdirSync(dir)) {
     const full = path.join(dir, name);
+    if (name === 'catalogue.json') { // liste des pays téléchargeables : seulement des noms, tailles et empreintes
+      try { const c = JSON.parse(fs.readFileSync(full, 'utf8')); if (typeof c.countries !== 'object') problems.push('catalogue illisible : ' + full); }
+      catch { problems.push('catalogue illisible : ' + full); }
+      continue;
+    }
     if (!/^geo-[a-z]+\.sqlite\.gz$/.test(name)) { problems.push('fichier inattendu dans data/reference/ : ' + full); continue; }
     // Le schéma (sqlite_master) est au début du fichier : on ne décompresse que les 2 premiers Mo.
     const fd = fs.openSync(full, 'r'); const head = Buffer.alloc(Math.min(2 * 1024 * 1024, fs.fstatSync(fd).size)); fs.readSync(fd, head, 0, head.length, 0); fs.closeSync(fd);

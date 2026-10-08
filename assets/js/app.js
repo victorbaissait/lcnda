@@ -5769,35 +5769,37 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     // Pays des battues : la France est toujours présente ; chaque pays voisin s'ajoute (communes, voisinages de part et
     // d'autre de la frontière, anciennes communes en sous-nom) ou se retire (refusé si une battue l'utilise).
-    // Pays des battues rangés par grandes régions (un code absent tombe dans « Autres »)
-    const battueCountryGroups=[
-        ['France d’outre-mer',['OM','NC','PF','WF']],
-        ['Europe de l’Ouest',['BE','LU','NL','CH','LI','DE','AT','IT','SM','VA','MC','ES','PT','AD','MT','GB','IE']],
-        ['Europe du Nord',['DK','SE','NO','FI','IS','EE','LV','LT']],
-        ['Europe centrale et de l’Est',['PL','CZ','SK','HU','SI','RO','BG','UA','BY']],
-        ['Balkans et Grèce',['HR','BA','RS','ME','MK','AL','XK','GR','CY']],
-        ['Afrique du Nord et Proche-Orient',['MA','DZ','TN','LB','JO','TR','GE','AM','AZ']],
-        ['Amériques',['QC','CA','US','MX','GT','BZ','SV','HN','NI','CR','PA']],
-        ['Océanie',['AU','NZ']]
-    ];
+    // Pays des battues rangés par grandes régions (régions données par le catalogue ; ordre d'affichage ci-dessous)
+    const battueRegionOrder=['France d’outre-mer','Europe de l’Ouest','Europe du Nord','Europe centrale et de l’Est','Balkans et Grèce','Afrique du Nord et Moyen-Orient','Amérique du Nord et centrale','Amérique du Sud','Asie','Afrique','Océanie','Autres'];
+    const megabytes=bytes=>bytes>=1048576?`${(bytes/1048576).toLocaleString('fr-FR',{maximumFractionDigits:1})} Mo`:`${Math.max(1,Math.round(bytes/1024))} Ko`;
 
     async function renderBattueCountries(token){
         const box=$('#battue-countries');if(!box)return;
         let data;try{data=await api('reference_countries');}catch(_){return;}
         if(token!==state.workspaceToken||!document.body.contains(box))return;
-        const available=data.available||{};
-        if(!Object.keys(available).length){box.innerHTML='';return;}
+        const details=data.details||Object.fromEntries(Object.entries(data.available||{}).map(([code,name])=>[code,{name,region:'Autres',present:true,size:0}]));
+        if(!Object.keys(details).length){box.innerHTML='';return;}
         const active=new Set(data.active||[]);
-        const known=new Set(battueCountryGroups.flatMap(([,codes])=>codes));
-        const groups=[...battueCountryGroups,['Autres',Object.keys(available).filter(code=>!known.has(code))]]
-            .map(([title,codes])=>[title,codes.filter(code=>available[code]).sort((a,b)=>available[a].localeCompare(available[b],'fr'))])
-            .filter(([,codes])=>codes.length);
-        const checkbox=code=>`<label class="check-row"><input type="checkbox" data-battue-country="${escapeHtml(code)}" ${active.has(code)?'checked':''}> ${escapeHtml(available[code])}</label>`;
+        const byRegion=new Map(battueRegionOrder.map(region=>[region,[]]));
+        Object.entries(details).forEach(([code,info])=>{const region=byRegion.has(info.region)?info.region:'Autres';byRegion.get(region).push(code);});
+        const groups=[...byRegion].filter(([,codes])=>codes.length).map(([title,codes])=>[title,codes.sort((a,b)=>details[a].name.localeCompare(details[b].name,'fr'))]);
+        const checkbox=code=>{const info=details[code];const extra=!info.present&&!active.has(code)?` <small class="muted">${escapeHtml(megabytes(info.size||0))} à télécharger</small>`:'';return `<label class="check-row"><input type="checkbox" data-battue-country="${escapeHtml(code)}" ${active.has(code)?'checked':''}> ${escapeHtml(info.name)}${extra}</label>`;};
         const counted=codes=>{const n=codes.filter(code=>active.has(code)).length;return n?` <small>${n}/${codes.length}</small>`:'';};
-        box.innerHTML=`<section class="maintenance-panel battue-countries"><h3>Pays des battues</h3><p>La France est toujours disponible. Ajoute les pays utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre des frontières.</p>${groups.map(([title,codes],index)=>`<details class="battue-country-group" ${codes.some(code=>active.has(code))||index===1?'open':''}><summary>${escapeHtml(title)}${counted(codes)}</summary><div class="check-row-list">${codes.map(checkbox).join('')}</div><div class="battue-countries-actions"><button type="button" class="button small secondary" data-battue-countries-all="1" data-battue-group="${index}">Tout cocher</button><button type="button" class="button small secondary" data-battue-countries-all="0" data-battue-group="${index}">Tout décocher</button></div></details>`).join('')}<div class="battue-countries-actions"><button type="button" class="button small" data-battue-countries-all="1">Tout cocher (tous les pays)</button><button type="button" class="button small" data-battue-countries-all="0">Tout décocher (tous les pays)</button></div><p class="muted" data-battue-country-status></p></section>`;
+        box.innerHTML=`<section class="maintenance-panel battue-countries"><h3>Pays des battues</h3><p>La France est toujours disponible. Ajoute les pays utiles à tes recherches : leurs communes, leurs anciennes communes et les communes voisines de part et d’autre des frontières. Certains pays sont téléchargés la première fois qu’on les coche (il faut alors internet), puis restent sur l’ordinateur.</p>${groups.map(([title,codes],index)=>`<details class="battue-country-group" ${codes.some(code=>active.has(code))||title==='Europe de l’Ouest'?'open':''}><summary>${escapeHtml(title)}${counted(codes)}</summary><div class="check-row-list">${codes.map(checkbox).join('')}</div><div class="battue-countries-actions"><button type="button" class="button small secondary" data-battue-countries-all="1" data-battue-group="${index}">Tout cocher</button><button type="button" class="button small secondary" data-battue-countries-all="0" data-battue-group="${index}">Tout décocher</button></div></details>`).join('')}<div class="battue-countries-actions"><button type="button" class="button small" data-battue-countries-all="1">Tout cocher (tous les pays)</button><button type="button" class="button small" data-battue-countries-all="0">Tout décocher (tous les pays)</button></div><p class="muted" data-battue-country-status></p></section>`;
         const status=box.querySelector('[data-battue-country-status]');
         const lock=on=>box.querySelectorAll('input,button').forEach(el=>el.disabled=on);
-        const setCountry=(country,enabled)=>api('set_reference_country',{}, {method:'POST',body:{country,enabled}});
+        // Ajout d'un pays : s'il n'est pas sur l'ordinateur, on télécharge d'abord son fichier (Electron, sinon le serveur PHP)
+        const setCountry=async(country,enabled)=>{
+            try{return await api('set_reference_country',{}, {method:'POST',body:{country,enabled}});}
+            catch(error){
+                if(!enabled||!/téléchargées/.test(String(error.message||'')))throw error;
+                status.textContent=`Téléchargement : ${details[country]?.name||country} (${megabytes(details[country]?.size||0)})…`;
+                if(window.lcnda?.downloadReference){const r=await window.lcnda.downloadReference(country);if(!r?.ok)throw new Error(r?.error||'Téléchargement impossible.');}
+                else await api('download_reference_country',{}, {method:'POST',body:{country}});
+                status.textContent=`Ajout des communes : ${details[country]?.name||country}…`;
+                return api('set_reference_country',{}, {method:'POST',body:{country,enabled}});
+            }
+        };
         box.querySelectorAll('[data-battue-country]').forEach(input=>input.addEventListener('change',async()=>{
             lock(true);
             status.textContent=input.checked?'Ajout des communes en cours…':'Retrait en cours…';
@@ -5813,15 +5815,17 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             const scope=button.dataset.battueGroup!==undefined?button.closest('.battue-country-group'):box;
             const todo=[...scope.querySelectorAll('[data-battue-country]')].filter(input=>input.checked!==enabled);
             if(!todo.length)return;
+            const toDownload=enabled?todo.map(input=>details[input.dataset.battueCountry]).filter(info=>info&&!info.present):[];
+            if(toDownload.length&&!confirm(`${toDownload.length} pays à télécharger (${megabytes(toDownload.reduce((sum,info)=>sum+(info.size||0),0))} en tout). Continuer ?`))return;
             lock(true);
             let communes=0;const refused=[];
             for(const [index,input] of todo.entries()){
-                const name=input.parentElement.textContent.trim();
+                const name=details[input.dataset.battueCountry]?.name||input.dataset.battueCountry;
                 status.textContent=`${enabled?'Ajout':'Retrait'} : ${name} (${index+1}/${todo.length})…`;
                 try{communes+=Number((await setCountry(input.dataset.battueCountry,enabled)).communes||0);}
                 catch(_){refused.push(name);}
             }
-            toast(`${communes.toLocaleString('fr-FR')} communes ${enabled?'ajoutées':'retirées'}.`+(refused.length?` Non ${enabled?'ajoutés':'retirés'} : ${refused.join(', ')}${enabled?'':' (utilisés par une battue)'}.`:''),refused.length?'error':undefined);
+            toast(`${communes.toLocaleString('fr-FR')} communes ${enabled?'ajoutées':'retirées'}.`+(refused.length?` Non ${enabled?'ajoutés':'retirés'} : ${refused.join(', ')}${enabled?' (téléchargement impossible ?)':' (utilisés par une battue)'}.`:''),refused.length?'error':undefined);
             renderBattueCountries(token);
         }));
     }

@@ -1,7 +1,8 @@
 'use strict';
 /**
  * Pont minimal entre la page et l'application de bureau (fenêtre isolée, sandbox). La page peut seulement :
- * ouvrir la fenêtre système de choix d'un fichier à importer, puis lancer l'import du fichier choisi.
+ * ouvrir la fenêtre système de choix d'un fichier à importer, puis lancer l'import du fichier choisi ; télécharger les
+ * communes d'un pays des battues (code pays seulement).
  * Elle ne voit jamais de chemin et ne peut pas en désigner un elle-même.
  */
 const { contextBridge, ipcRenderer } = require('electron');
@@ -11,4 +12,6 @@ contextBridge.exposeInMainWorld('lcnda', {
   chooseImportFile: () => ipcRenderer.invoke('lcnda:choose-import-file'),
   /** @returns {Promise<{status: number, data: object}>} */
   importChosenFile: (token) => ipcRenderer.invoke('lcnda:import-chosen-file', String(token || '')),
+  /** Télécharge les communes d'un pays des battues (adresse et empreinte : catalogue de l'application). */
+  downloadReference: (country) => ipcRenderer.invoke('lcnda:download-reference', String(country || '')),
 });

@@ -13,7 +13,68 @@ declare(strict_types=1);
 
 function reference_archive_path(string $name = 'geo-fr'): string
 {
-    return APP_ROOT . '/data/reference/' . $name . '.sqlite.gz';
+    // Livré avec l'application, sinon téléchargé à la demande dans le dossier des données (DATA_DIR/reference)
+    $bundled = APP_ROOT . '/data/reference/' . $name . '.sqlite.gz';
+    $downloaded = reference_download_dir() . '/' . $name . '.sqlite.gz';
+    return !is_file($bundled) && is_file($downloaded) ? $downloaded : $bundled;
+}
+
+function reference_download_dir(): string
+{
+    return DATA_DIR . '/reference';
+}
+
+/** Catalogue des pays (data/reference/catalogue.json, fabriqué avec les fichiers) : nom, région, fichier, taille, sha256. */
+function reference_catalogue(): array
+{
+    static $catalogue = null;
+    if ($catalogue === null) {
+        $raw = @file_get_contents(getenv('LCNDA_REFERENCE_CATALOGUE') ?: APP_ROOT . '/data/reference/catalogue.json'); // autre catalogue : tests
+        $catalogue = is_string($raw) ? (json_decode($raw, true) ?: []) : [];
+        $catalogue['countries'] = is_array($catalogue['countries'] ?? null) ? $catalogue['countries'] : [];
+        // Pour les essais : autre adresse de téléchargement (dossier local file://…, serveur de test)
+        if (getenv('LCNDA_REFERENCE_BASE_URL')) { $catalogue['base_url'] = getenv('LCNDA_REFERENCE_BASE_URL'); }
+    }
+    return $catalogue;
+}
+
+/** Le fichier d'un pays est-il sur cet ordinateur (livré ou déjà téléchargé) ? */
+function reference_country_present(string $cc): bool
+{
+    return is_file(reference_archive_path('geo-' . strtolower($cc)));
+}
+
+/**
+ * Télécharge le fichier d'un pays (navigateur sans Electron ; dans l'application, Electron s'en charge) : adresse du
+ * catalogue, empreinte sha256 vérifiée, fichier rangé dans DATA_DIR/reference. Rien n'est gardé si l'empreinte diffère.
+ */
+function download_reference_country(string $cc): array
+{
+    $cc = strtoupper($cc);
+    $entry = reference_catalogue()['countries'][$cc] ?? null;
+    if (!$entry || !preg_match('/^geo-[a-z]{2}\.sqlite\.gz$/', (string) ($entry['file'] ?? '')) || !preg_match('/^[0-9a-f]{64}$/', (string) ($entry['sha256'] ?? ''))) {
+        throw new RuntimeException('Pays inconnu du catalogue.');
+    }
+    if (reference_country_present($cc)) { return ['country' => $cc, 'downloaded' => false]; }
+    if (!function_exists('curl_init')) { throw new RuntimeException('Téléchargement impossible : PHP n’a pas l’extension curl.'); }
+    $dir = reference_download_dir();
+    if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('Dossier de téléchargement impossible à créer.'); }
+    @set_time_limit(0);
+    $target = $dir . '/' . $entry['file'];
+    $partial = $target . '.' . bin2hex(random_bytes(4)) . '.part';
+    $out = fopen($partial, 'wb');
+    $ch = curl_init(rtrim((string) reference_catalogue()['base_url'], '/') . '/' . $entry['file']);
+    curl_setopt_array($ch, [CURLOPT_FILE => $out, CURLOPT_FOLLOWLOCATION => true, CURLOPT_FAILONERROR => true, CURLOPT_CONNECTTIMEOUT => 20,
+        CURLOPT_TIMEOUT => 1800, CURLOPT_USERAGENT => 'LCNDA']);
+    $ok = curl_exec($ch);
+    $error = curl_error($ch);
+    fclose($out);
+    if (!$ok || !hash_equals((string) $entry['sha256'], (string) hash_file('sha256', $partial))) {
+        @unlink($partial);
+        throw new RuntimeException($ok ? 'Fichier téléchargé abîmé (empreinte différente) : rien n’a été installé.' : 'Téléchargement impossible : ' . $error);
+    }
+    if (!@rename($partial, $target)) { @unlink($partial); throw new RuntimeException('Fichier impossible à ranger.'); }
+    return ['country' => $cc, 'downloaded' => true, 'size' => filesize($target)];
 }
 
 /** Fichier de référence décompressé (une fois, dans DATA_DIR/cache), ou null s'il n'est pas livré. */
@@ -232,28 +293,30 @@ function place_from_world(PDO $pdo, array $w): int
 // Codes préfixés (« BE-57081 ») ; la France garde ses codes INSEE, outre-mer compris (« OM » = codes 97…, pays France).
 // Chaque base choisit ses pays (meta.reference_countries).
 
-/** Pays livrés avec l'application (hors France, toujours présente) : code => nom. */
+/** Pays proposés (hors France, toujours présente) : ceux du catalogue, plus tout fichier présent sur l'ordinateur. Code => nom. */
 function reference_countries_available(): array
 {
     $out = [];
-    foreach (glob(APP_ROOT . '/data/reference/geo-??.sqlite.gz') ?: [] as $file) {
+    foreach (reference_catalogue()['countries'] as $cc => $entry) { $out[(string) $cc] = (string) ($entry['name'] ?? $cc); }
+    foreach ([...(glob(APP_ROOT . '/data/reference/geo-??.sqlite.gz') ?: []), ...(glob(reference_download_dir() . '/geo-??.sqlite.gz') ?: [])] as $file) {
         $cc = strtoupper(substr(basename($file), 4, 2));
-        if ($cc === 'FR') { continue; }
-        $out[$cc] = ['BE' => 'Belgique', 'CH' => 'Suisse', 'LI' => 'Liechtenstein', 'LU' => 'Luxembourg', 'DE' => 'Allemagne',
-            'IT' => 'Italie', 'AT' => 'Autriche', 'ES' => 'Espagne', 'OM' => 'Outre-mer français', 'CZ' => 'Tchéquie',
-            'SK' => 'Slovaquie', 'PL' => 'Pologne', 'NL' => 'Pays-Bas', 'SI' => 'Slovénie', 'HU' => 'Hongrie', 'PT' => 'Portugal',
-            'HR' => 'Croatie', 'BA' => 'Bosnie-Herzégovine', 'AD' => 'Andorre', 'MC' => 'Monaco', 'SM' => 'Saint-Marin',
-            'VA' => 'Vatican', 'QC' => 'Québec (Canada)', 'US' => 'États-Unis', 'GB' => 'Royaume-Uni', 'IE' => 'Irlande', 'FI' => 'Finlande',
-            'AU' => 'Australie', 'EE' => 'Estonie', 'LV' => 'Lettonie', 'LT' => 'Lituanie', 'SE' => 'Suède', 'NO' => 'Norvège', 'IS' => 'Islande',
-            'DK' => 'Danemark', 'BG' => 'Bulgarie', 'GR' => 'Grèce', 'TR' => 'Turquie', 'UA' => 'Ukraine', 'BY' => 'Biélorussie', 'GE' => 'Géorgie',
-            'AM' => 'Arménie', 'AZ' => 'Azerbaïdjan', 'ME' => 'Monténégro', 'MK' => 'Macédoine du Nord', 'AL' => 'Albanie', 'XK' => 'Kosovo',
-            'RS' => 'Serbie', 'RO' => 'Roumanie', 'MT' => 'Malte', 'CY' => 'Chypre', 'NZ' => 'Nouvelle-Zélande', 'MX' => 'Mexique',
-            'GT' => 'Guatemala', 'BZ' => 'Belize', 'SV' => 'Salvador', 'HN' => 'Honduras', 'NI' => 'Nicaragua', 'CR' => 'Costa Rica',
-            'PA' => 'Panama', 'DZ' => 'Algérie', 'MA' => 'Maroc', 'TN' => 'Tunisie', 'LB' => 'Liban', 'JO' => 'Jordanie',
-            'NC' => 'Nouvelle-Calédonie', 'PF' => 'Polynésie française', 'CA' => 'Canada (hors Québec)', 'WF' => 'Wallis-et-Futuna'][$cc] ?? $cc;
+        if ($cc !== 'FR' && !isset($out[$cc])) { $out[$cc] = $cc; }
     }
+    unset($out['FR']);
     asort($out);
     return $out;
+}
+
+/** Pour l'interface : région, taille du fichier, et s'il faut le télécharger. */
+function reference_countries_details(): array
+{
+    $details = [];
+    foreach (reference_countries_available() as $cc => $name) {
+        $entry = reference_catalogue()['countries'][$cc] ?? [];
+        $details[$cc] = ['name' => $name, 'region' => (string) ($entry['region'] ?? 'Autres'), 'size' => (int) ($entry['size'] ?? 0),
+            'communes' => (int) ($entry['communes'] ?? 0), 'present' => reference_country_present($cc)];
+    }
+    return $details;
 }
 
 function reference_countries_active(PDO $pdo): array
@@ -274,6 +337,7 @@ function enable_reference_country(PDO $pdo, string $cc): array
 {
     $cc = strtoupper($cc);
     if (!isset(reference_countries_available()[$cc])) { throw new RuntimeException('Pays non disponible.'); }
+    if (!reference_country_present($cc)) { throw new ReferenceDownloadRequired($cc); }
     $ref = reference_database_path('geo-' . strtolower($cc));
     $borders = reference_database_path('geo-frontieres');
     if ($ref === null) { throw new RuntimeException('Données de ce pays introuvables.'); }
@@ -359,4 +423,13 @@ function disable_reference_country(PDO $pdo, string $cc): array
         if ($ref !== null) { try { $pdo->exec('DETACH DATABASE refc'); } catch (Throwable) {} }
     }
     return ['country' => $cc, 'communes' => $deleted->rowCount()];
+}
+
+/** Le fichier du pays n'est pas sur l'ordinateur : l'interface le télécharge puis redemande. */
+final class ReferenceDownloadRequired extends RuntimeException
+{
+    public function __construct(public readonly string $country)
+    {
+        parent::__construct('Les communes de ce pays doivent d’abord être téléchargées.');
+    }
 }

@@ -1,0 +1,697 @@
+{
+    "_comment": "Fabriqué par scripts/build-catalogue.php. base_url : où l'application télécharge les pays absents.",
+    "base_url": "https://github.com/victorbaissait/lcnda-donnees/releases/latest/download/",
+    "version": "20261008",
+    "countries": {
+        "AD": {
+            "name": "Andorre",
+            "region": "Europe de l’Ouest",
+            "file": "geo-ad.sqlite.gz",
+            "size": 9542,
+            "sha256": "f7353231c203538b446d3cf32107837f8ed387bf4e029fff1c0f499c9a25241d",
+            "communes": 7,
+            "places": 72,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "AL": {
+            "name": "Albanie",
+            "region": "Balkans et Grèce",
+            "file": "geo-al.sqlite.gz",
+            "size": 402626,
+            "sha256": "65b3c4a5631f13d774bb98d1d655551860e6de6e0b4c66d149cbe5ebdca82a5a",
+            "communes": 371,
+            "places": 4448,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "AM": {
+            "name": "Arménie",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-am.sqlite.gz",
+            "size": 260568,
+            "sha256": "390484367df5c5c90020c3b4c0fb88836e3cfeb53e09a51320a0024efd42af8e",
+            "communes": 81,
+            "places": 2271,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "AT": {
+            "name": "Autriche",
+            "region": "Europe de l’Ouest",
+            "file": "geo-at.sqlite.gz",
+            "size": 1588708,
+            "sha256": "19829fc90619ed5b91598d023d9f93eb111dcc28e266ff3c1b9ec900d0bdceea",
+            "communes": 2114,
+            "places": 20915,
+            "source": "Gemeinden 2026 © Statistik Austria – data.statistik.gv.at (CC BY 4.0)"
+        },
+        "AU": {
+            "name": "Australie",
+            "region": "Océanie",
+            "file": "geo-au.sqlite.gz",
+            "size": 2417826,
+            "sha256": "c651d3af8483b013567290668e7664055fb5eee450ee5d5629eda63e873e3a70",
+            "communes": 547,
+            "places": 19240,
+            "source": "Local Government Areas 2024 © Australian Bureau of Statistics (CC BY 4.0)"
+        },
+        "AZ": {
+            "name": "Azerbaïdjan",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-az.sqlite.gz",
+            "size": 565024,
+            "sha256": "c0fafbbaa473236e10581f99fc84c8c69ea056f659dc596213f9b45b6e11d2c6",
+            "communes": 79,
+            "places": 5295,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "BA": {
+            "name": "Bosnie-Herzégovine",
+            "region": "Balkans et Grèce",
+            "file": "geo-ba.sqlite.gz",
+            "size": 955871,
+            "sha256": "fbb26f3fb4d2f0b14f696a818f3f605c3b586b64a9c8aa6d5f3f6d771dfaeda0",
+            "communes": 143,
+            "places": 21984,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "BE": {
+            "name": "Belgique",
+            "region": "Europe de l’Ouest",
+            "file": "geo-be.sqlite.gz",
+            "size": 1108816,
+            "sha256": "ffd8c8a48f74fd0fe9a86c9c3603f72ac8e083a4828fe946b347feb9356041e0",
+            "communes": 565,
+            "places": 12669,
+            "source": "Communes 2025 : IGN-NGI (Institut géographique national belge, licence ouverte), via ODWB"
+        },
+        "BG": {
+            "name": "Bulgarie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-bg.sqlite.gz",
+            "size": 740467,
+            "sha256": "09728806be8fc46984c164bb17c42a1fbd8818075b9d5b62e7d5d31b10ae36b6",
+            "communes": 265,
+            "places": 7239,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "BY": {
+            "name": "Biélorussie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-by.sqlite.gz",
+            "size": 2528621,
+            "sha256": "918f4b7855916eab5b9c4e737d1ce7d5303aace5098f7d58a24a39ed6092263b",
+            "communes": 1296,
+            "places": 26801,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "BZ": {
+            "name": "Belize",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-bz.sqlite.gz",
+            "size": 36008,
+            "sha256": "97d8f98b30ca2a39d09aad97e37a703795f56f6e713066f2786120f0bf9c1d5f",
+            "communes": 6,
+            "places": 528,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "CA": {
+            "name": "Canada (hors Québec)",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-ca.sqlite.gz",
+            "size": 2499293,
+            "sha256": "c418c46de6f6f47163f35352bfc69059af5f78cbd6a56505b51207a04fad8ddc",
+            "communes": 2723,
+            "places": 19425,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "CH": {
+            "name": "Suisse",
+            "region": "Europe de l’Ouest",
+            "file": "geo-ch.sqlite.gz",
+            "size": 1272767,
+            "sha256": "865ee0375268272314f04d84623cbd83ae3bfeeb2bc456892439298bfbb4922d",
+            "communes": 2110,
+            "places": 13223,
+            "source": "swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)"
+        },
+        "CR": {
+            "name": "Costa Rica",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-cr.sqlite.gz",
+            "size": 561678,
+            "sha256": "8154fd4585058cb7080151b92f9c6dece4b5db7b931b496daba2d39366d11104",
+            "communes": 495,
+            "places": 5906,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "CY": {
+            "name": "Chypre",
+            "region": "Balkans et Grèce",
+            "file": "geo-cy.sqlite.gz",
+            "size": 310234,
+            "sha256": "e2768220350d1fb59cb13458bee40993fea7e98c18f4216e19fce471f1fa9561",
+            "communes": 674,
+            "places": 889,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "CZ": {
+            "name": "Tchéquie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-cz.sqlite.gz",
+            "size": 3161137,
+            "sha256": "05a8202407542aec82ab78edef0372e449aa71d8cd740780bdb227c68484fdd4",
+            "communes": 6258,
+            "places": 16646,
+            "source": "RÚIAN © ČÚZK (CC BY 4.0)"
+        },
+        "DE": {
+            "name": "Allemagne",
+            "region": "Europe de l’Ouest",
+            "file": "geo-de.sqlite.gz",
+            "size": 8818468,
+            "sha256": "b0f3f4dac0eada82d2b8e6f4b4cc2bec38c90b74acac80c29cd6af4cbbf3b820",
+            "communes": 10939,
+            "places": 82612,
+            "source": "VG250 01.01. © GeoBasis-DE / BKG (dl-de/by-2-0)"
+        },
+        "DK": {
+            "name": "Danemark",
+            "region": "Europe du Nord",
+            "file": "geo-dk.sqlite.gz",
+            "size": 454432,
+            "sha256": "9600374993811ae5f3d0c22d31d272badefd57d3203e07a5580ddafe228b7000",
+            "communes": 98,
+            "places": 7288,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "DZ": {
+            "name": "Algérie",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-dz.sqlite.gz",
+            "size": 1290361,
+            "sha256": "4cb24ea1281a9ac1c82f6c24ba3b50a0473af0d50ddd2e74c21f6efe10c663bb",
+            "communes": 1537,
+            "places": 8419,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "EE": {
+            "name": "Estonie",
+            "region": "Europe du Nord",
+            "file": "geo-ee.sqlite.gz",
+            "size": 542869,
+            "sha256": "7ce1b982d4d12346a68c1b7f9b2b9bdbf09108ed66fa1fc7972777f747deaf52",
+            "communes": 78,
+            "places": 7091,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "ES": {
+            "name": "Espagne",
+            "region": "Europe de l’Ouest",
+            "file": "geo-es.sqlite.gz",
+            "size": 5212598,
+            "sha256": "e9fde7da2b30a6d03dfeee7efe578598afa1dac60e29bae057803c85c1ccc8ad",
+            "communes": 8220,
+            "places": 31165,
+            "source": "Recintos municipales © Instituto Geográfico Nacional – CNIG (CC BY 4.0)"
+        },
+        "FI": {
+            "name": "Finlande",
+            "region": "Europe du Nord",
+            "file": "geo-fi.sqlite.gz",
+            "size": 1892893,
+            "sha256": "727f834c5fa9993ad4ecf5bf1b7a206fc03fcc2623d08d91ed6f6e77c8816568",
+            "communes": 308,
+            "places": 29250,
+            "source": "Kunnat 2025 © Tilastokeskus / Statistics Finland (CC BY 4.0)"
+        },
+        "GB": {
+            "name": "Royaume-Uni",
+            "region": "Europe de l’Ouest",
+            "file": "geo-gb.sqlite.gz",
+            "size": 7940572,
+            "sha256": "144ad77d80f8157642d37082db57a53c45d06d047a2b07026b9abdbda92ab9f4",
+            "communes": 12413,
+            "places": 44205,
+            "source": "Parishes 2026 © ONS, contains OS data © Crown copyright (OGL v3) ; civil parishes © National Records of Scotland (OGL v3)"
+        },
+        "GE": {
+            "name": "Géorgie",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-ge.sqlite.gz",
+            "size": 453546,
+            "sha256": "7a3690ea9265c8180ab2cc9bbb68e634cd543fba2606a2755eac58be5e98f073",
+            "communes": 77,
+            "places": 5417,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "GR": {
+            "name": "Grèce",
+            "region": "Balkans et Grèce",
+            "file": "geo-gr.sqlite.gz",
+            "size": 1473805,
+            "sha256": "80be8bc14d0587e5cf0ca09366fa9f5b0be26be5ab3d497b21218caa34e278d0",
+            "communes": 327,
+            "places": 15558,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "GT": {
+            "name": "Guatemala",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-gt.sqlite.gz",
+            "size": 901392,
+            "sha256": "0e2171c1ef751444fbb4a39e66cff290e0f28069cf8a3c6333b837d975d5ce88",
+            "communes": 316,
+            "places": 16981,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "HN": {
+            "name": "Honduras",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-hn.sqlite.gz",
+            "size": 637091,
+            "sha256": "89d9b51ec8070a8fa8e6aec735e788b5a5f780a259025d3c699ccbf17f198d2c",
+            "communes": 298,
+            "places": 12966,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "HR": {
+            "name": "Croatie",
+            "region": "Balkans et Grèce",
+            "file": "geo-hr.sqlite.gz",
+            "size": 941981,
+            "sha256": "c8501885bc03b5a240a230440e7a96d668a83723a874dc0c8a2d00c06db9b984",
+            "communes": 557,
+            "places": 11632,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "HU": {
+            "name": "Hongrie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-hu.sqlite.gz",
+            "size": 1836951,
+            "sha256": "42f17846edc8666945b7d136eb0900063fc6c4846d77ee580e7ca7ddbb679fad",
+            "communes": 3176,
+            "places": 16025,
+            "source": "Magyarország Közigazgatási Határai © Lechner Tudásközpont"
+        },
+        "IE": {
+            "name": "Irlande",
+            "region": "Europe de l’Ouest",
+            "file": "geo-ie.sqlite.gz",
+            "size": 1594429,
+            "sha256": "e3616739c27ef3e3f37ff7e0c0e5236910a192a2f64736990680950e5502d816",
+            "communes": 2556,
+            "places": 12720,
+            "source": "Civil Parishes – National Statutory Boundaries 2026 © Tailte Éireann (CC BY 4.0)"
+        },
+        "IS": {
+            "name": "Islande",
+            "region": "Europe du Nord",
+            "file": "geo-is.sqlite.gz",
+            "size": 126069,
+            "sha256": "56976b93edab561a7b3130ef23be71831b798255e2740b0b2579bf3c0392cc49",
+            "communes": 61,
+            "places": 125,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "IT": {
+            "name": "Italie",
+            "region": "Europe de l’Ouest",
+            "file": "geo-it.sqlite.gz",
+            "size": 5543356,
+            "sha256": "925cdea670b2771ba27b119b9bc1a9aeb8dad4ac83b0884cb0668a27e28138d9",
+            "communes": 7896,
+            "places": 63043,
+            "source": "Confini amministrativi 2026 © ISTAT (CC BY 4.0)"
+        },
+        "JO": {
+            "name": "Jordanie",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-jo.sqlite.gz",
+            "size": 166064,
+            "sha256": "bedead44d5847b16e6a83197d4d484d47d37b5ccaa1b5213a1bffb6f1661bd60",
+            "communes": 89,
+            "places": 1756,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "LB": {
+            "name": "Liban",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-lb.sqlite.gz",
+            "size": 530282,
+            "sha256": "d3de5bcffbca85097dbabb4b57c5313fee96cccac4962ce18e15a956762cc159",
+            "communes": 1031,
+            "places": 3757,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "LI": {
+            "name": "Liechtenstein",
+            "region": "Europe de l’Ouest",
+            "file": "geo-li.sqlite.gz",
+            "size": 18982,
+            "sha256": "75eb6af332088f3baf2ec878df3ad5e742318061941958036a540eaff32a0b75",
+            "communes": 11,
+            "places": 361,
+            "source": "swissBOUNDARIES3D 2026 © swisstopo (Opendata BY)"
+        },
+        "LT": {
+            "name": "Lituanie",
+            "region": "Europe du Nord",
+            "file": "geo-lt.sqlite.gz",
+            "size": 1609259,
+            "sha256": "3a7c8869cf0d3419f32e2b62c290f3d47aaf29ef206e1e47233b284add5c8c2d",
+            "communes": 515,
+            "places": 20796,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "LU": {
+            "name": "Luxembourg",
+            "region": "Europe de l’Ouest",
+            "file": "geo-lu.sqlite.gz",
+            "size": 104860,
+            "sha256": "c3335a6b07b2df66f3613e51c879bef33bdc73a8c83798f78a76092d62e69177",
+            "communes": 100,
+            "places": 692,
+            "source": "Communes : Administration du cadastre et de la topographie (data.public.lu, CC0)"
+        },
+        "LV": {
+            "name": "Lettonie",
+            "region": "Europe du Nord",
+            "file": "geo-lv.sqlite.gz",
+            "size": 879661,
+            "sha256": "1c4dbfc34a3c949afb79c788a22cfe2ba71f435776efebda547113cb830cc589",
+            "communes": 593,
+            "places": 7790,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "MA": {
+            "name": "Maroc",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-ma.sqlite.gz",
+            "size": 2651473,
+            "sha256": "a68d6c5826754a774cc451f61cf65b05154ca3fd83df172172c50a611de568d3",
+            "communes": 1495,
+            "places": 46972,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "MC": {
+            "name": "Monaco",
+            "region": "Europe de l’Ouest",
+            "file": "geo-mc.sqlite.gz",
+            "size": 2225,
+            "sha256": "9b54c3ad762ccadb2df760799c00566eebd757d46b50101289d785c7118a0532",
+            "communes": 1,
+            "places": 14,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "ME": {
+            "name": "Monténégro",
+            "region": "Balkans et Grèce",
+            "file": "geo-me.sqlite.gz",
+            "size": 180835,
+            "sha256": "e8156b4714d58bfea40764f29c814b2f6010364b74a7f7a5a8d146c3f766ff93",
+            "communes": 25,
+            "places": 4041,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "MK": {
+            "name": "Macédoine du Nord",
+            "region": "Balkans et Grèce",
+            "file": "geo-mk.sqlite.gz",
+            "size": 233429,
+            "sha256": "75783abc23aa12b30e5bf3aadbd283bb61a7945b0ebdd393e2af4fe5ea2b4e85",
+            "communes": 80,
+            "places": 2773,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "MT": {
+            "name": "Malte",
+            "region": "Europe de l’Ouest",
+            "file": "geo-mt.sqlite.gz",
+            "size": 47475,
+            "sha256": "6e9dac028060401977c5e1e17a23194f3942403b2b196679645e82c879020820",
+            "communes": 68,
+            "places": 291,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "MX": {
+            "name": "Mexique",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-mx.sqlite.gz",
+            "size": 16519948,
+            "sha256": "4dd8dd3ac711ae83bf991dd08669baba50dd3bc257e990da5f7b2f2ff59a2eb2",
+            "communes": 2470,
+            "places": 306630,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "NC": {
+            "name": "Nouvelle-Calédonie",
+            "region": "France d’outre-mer",
+            "file": "geo-nc.sqlite.gz",
+            "size": 86197,
+            "sha256": "0e9882f49d8b0d16bb724318e16c9b028138d3334675ea4d7587f50657414428",
+            "communes": 33,
+            "places": 741,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "NI": {
+            "name": "Nicaragua",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-ni.sqlite.gz",
+            "size": 266982,
+            "sha256": "dcfaac40c308dc3dd1f9132533126c4cc7977219dc0fcd141520420fad5ee28c",
+            "communes": 153,
+            "places": 2632,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "NL": {
+            "name": "Pays-Bas",
+            "region": "Europe de l’Ouest",
+            "file": "geo-nl.sqlite.gz",
+            "size": 515220,
+            "sha256": "abd9621db56242afbffff600df8c9fe8f60c0cc517befc7cf6fd447efbea26f3",
+            "communes": 342,
+            "places": 7805,
+            "source": "Bestuurlijke Gebieden © Kadaster / PDOK (CC BY 4.0)"
+        },
+        "NO": {
+            "name": "Norvège",
+            "region": "Europe du Nord",
+            "file": "geo-no.sqlite.gz",
+            "size": 857019,
+            "sha256": "0a317b9541490d75975ec92fd3b6c21e283ae01a8d95f475e7041f0aa60d2f5c",
+            "communes": 366,
+            "places": 13823,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "NZ": {
+            "name": "Nouvelle-Zélande",
+            "region": "Océanie",
+            "file": "geo-nz.sqlite.gz",
+            "size": 383310,
+            "sha256": "a096e65ee23271ff14d47da40ebe24d20934aa87836133b1be5ec095ffc8bfbc",
+            "communes": 66,
+            "places": 3043,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "OM": {
+            "name": "Outre-mer français",
+            "region": "France d’outre-mer",
+            "file": "geo-om.sqlite.gz",
+            "size": 296524,
+            "sha256": "633ed95ed508ce6f5532022446dccbf0f649205a773be619acf07ee2bb123ee0",
+            "communes": 133,
+            "places": 4659,
+            "source": "Communes d’outre-mer : IGN Admin Express via france-geojson (Licence Ouverte 2.0)"
+        },
+        "PA": {
+            "name": "Panama",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-pa.sqlite.gz",
+            "size": 982682,
+            "sha256": "1345f8180ffe500721675acb46895c13e05998117eedb539eff3e5a41a6ce549",
+            "communes": 440,
+            "places": 13268,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "PF": {
+            "name": "Polynésie française",
+            "region": "France d’outre-mer",
+            "file": "geo-pf.sqlite.gz",
+            "size": 88628,
+            "sha256": "a8c670128f22af7100d9baeca6acc6d46f08f80d6ea5aeaf894e44536c07009c",
+            "communes": 36,
+            "places": 409,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "PL": {
+            "name": "Pologne",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-pl.sqlite.gz",
+            "size": 4269076,
+            "sha256": "2a0b798f4fbd1a5780899451d3cf2768aaec19fcb0ad6d97d3501c29488ab4f1",
+            "communes": 2479,
+            "places": 47944,
+            "source": "Państwowy Rejestr Granic © GUGiK (données libres)"
+        },
+        "PT": {
+            "name": "Portugal",
+            "region": "Europe de l’Ouest",
+            "file": "geo-pt.sqlite.gz",
+            "size": 1850670,
+            "sha256": "e1fc204d410befbb042f91398099b4f700b80ff471940e195561475ca87e6a6d",
+            "communes": 3258,
+            "places": 16655,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "QC": {
+            "name": "Québec",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-qc.sqlite.gz",
+            "size": 1444955,
+            "sha256": "26bce056470a5e914588ec7ec6b6bd9f78df6e40e32a078c981cb6d189df5861",
+            "communes": 1340,
+            "places": 3055,
+            "source": "Découpages administratifs (SDA 1:20 000) © Gouvernement du Québec (CC BY 4.0)"
+        },
+        "RO": {
+            "name": "Roumanie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-ro.sqlite.gz",
+            "size": 2604200,
+            "sha256": "79f3bc64544d3e0f4f1b9c4c5c685d141c6b1d128af9da65e6d32184cfffe8f3",
+            "communes": 3179,
+            "places": 18250,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "RS": {
+            "name": "Serbie",
+            "region": "Balkans et Grèce",
+            "file": "geo-rs.sqlite.gz",
+            "size": 666751,
+            "sha256": "d94202a28abba3aad1258bc2d70420a3f3d01a28bfcfcc66dcd43dde063e9ab2",
+            "communes": 169,
+            "places": 9515,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "SE": {
+            "name": "Suède",
+            "region": "Europe du Nord",
+            "file": "geo-se.sqlite.gz",
+            "size": 1417709,
+            "sha256": "4bb0a489734a516cd045810a1f13b5614a2bced06ec71575b38b3b146eb5f771",
+            "communes": 290,
+            "places": 28471,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "SI": {
+            "name": "Slovénie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-si.sqlite.gz",
+            "size": 601610,
+            "sha256": "7e9907d7dea526227985633c452634df5c2d29e4cf172896c312e24d4c1ea241",
+            "communes": 212,
+            "places": 6640,
+            "source": "Register prostorskih enot © GURS (CC BY 4.0)"
+        },
+        "SK": {
+            "name": "Slovaquie",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-sk.sqlite.gz",
+            "size": 1287486,
+            "sha256": "77801827c45faa790feab056c1dfc2459874b7eb33da26c2fc7317534d2993be",
+            "communes": 2927,
+            "places": 5110,
+            "source": "ZBGIS – INSPIRE Administrative Units © ÚGKK SR / GKÚ (CC BY 4.0)"
+        },
+        "SM": {
+            "name": "Saint-Marin",
+            "region": "Europe de l’Ouest",
+            "file": "geo-sm.sqlite.gz",
+            "size": 7215,
+            "sha256": "457cb2c91ce0e10fb79f601cb794893594891377f02d5317b5c67363c9aa7085",
+            "communes": 9,
+            "places": 24,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "SV": {
+            "name": "Salvador",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-sv.sqlite.gz",
+            "size": 334489,
+            "sha256": "977722878ec651020388460d2ec41e4a05580da435fa26e46e9b1f09616bbc5e",
+            "communes": 262,
+            "places": 4889,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "TN": {
+            "name": "Tunisie",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-tn.sqlite.gz",
+            "size": 325412,
+            "sha256": "e9a58ad5d9363b67948b19ed54e9eb64e075ca3971b9c43a606a1a7888275788",
+            "communes": 266,
+            "places": 2249,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "TR": {
+            "name": "Turquie",
+            "region": "Afrique du Nord et Moyen-Orient",
+            "file": "geo-tr.sqlite.gz",
+            "size": 3905849,
+            "sha256": "fcb4fa86e57c1bb68dd515d26ffca6d9eda9944414435c27ac7256a5652663bf",
+            "communes": 974,
+            "places": 54669,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "UA": {
+            "name": "Ukraine",
+            "region": "Europe centrale et de l’Est",
+            "file": "geo-ua.sqlite.gz",
+            "size": 3779070,
+            "sha256": "7238c848aa58107955f2b7dc6cf8549bb8f299c7c95a1a37ac02672951a11b5c",
+            "communes": 1469,
+            "places": 33743,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "US": {
+            "name": "États-Unis",
+            "region": "Amérique du Nord et centrale",
+            "file": "geo-us.sqlite.gz",
+            "size": 12499083,
+            "sha256": "1f5c17f995680bcacde3ce6d1467acd63fdf06ffbe39d4e26efd4d1bd915818e",
+            "communes": 3235,
+            "places": 193871,
+            "source": "Cartographic Boundary Files 2024 (comtés) – U.S. Census Bureau (domaine public)"
+        },
+        "VA": {
+            "name": "Vatican",
+            "region": "Europe de l’Ouest",
+            "file": "geo-va.sqlite.gz",
+            "size": 1374,
+            "sha256": "05b968f24c1be512b54553adc0f927bd5bcff3708234fd2b999008b6347ada57",
+            "communes": 1,
+            "places": 1,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "WF": {
+            "name": "Wallis-et-Futuna",
+            "region": "France d’outre-mer",
+            "file": "geo-wf.sqlite.gz",
+            "size": 6958,
+            "sha256": "18b3986268fb603a97c4ff62f3b30f711534a892c27ef01be4f5b9633497f1e2",
+            "communes": 3,
+            "places": 99,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        },
+        "XK": {
+            "name": "Kosovo",
+            "region": "Balkans et Grèce",
+            "file": "geo-xk.sqlite.gz",
+            "size": 194741,
+            "sha256": "212d090d0fe88d6751a815dc672e513b9afb4a78c68260e0358eef6cbfea1b18",
+            "communes": 38,
+            "places": 2605,
+            "source": "© les contributeurs d’OpenStreetMap (ODbL 1.0)"
+        }
+    }
+}

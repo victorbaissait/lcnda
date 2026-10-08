@@ -60,6 +60,7 @@
           "config/**/*",
           "data/schema.sql",
           "data/reference/geo-*.sqlite.gz",
+          "data/reference/catalogue.json",
           "!**/.DS_Store"
         ]
       },

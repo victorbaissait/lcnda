@@ -15,6 +15,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  *  7. n'importe quelle ville du monde : suggérée (avec coordonnées) ou tapée librement, même inconnue ;
  *  8. battues au-delà des frontières : pays voisins ajoutés, battue d'Halluin qui passe en Belgique, retrait refusé
  *     tant qu'une battue utilise le pays, retrait complet sinon ; Strasbourg ↔ Kehl ; outre-mer ajouté puis retiré.
+ *  9. pays téléchargé à la demande (catalogue d'essai, fichiers servis par file://) : empreinte vérifiée, fichier abîmé refusé.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -301,8 +302,42 @@ async function download(s, base, action) {
     assert.ok(rows(db, "SELECT count(*) n FROM commune_contours WHERE insee_code NOT LIKE '%-%'")[0].n > 34000, 'France métropolitaine intacte après le retrait de l’outre-mer');
   });
 
+  await step('pays téléchargé à la demande : empreinte vérifiée, fichier abîmé refusé', async () => {
+    // Faux pays « ZZ » (copie du Luxembourg) servi depuis un dossier local ; « ZY » a une empreinte fausse
+    const remote = path.join(tmp, 'distant'); fs.mkdirSync(remote, { recursive: true });
+    const lu = path.join(appRoot, 'data', 'reference', 'geo-lu.sqlite.gz');
+    fs.copyFileSync(lu, path.join(remote, 'geo-zz.sqlite.gz')); fs.copyFileSync(lu, path.join(remote, 'geo-zy.sqlite.gz'));
+    const sha = require('node:crypto').createHash('sha256').update(fs.readFileSync(lu)).digest('hex');
+    const catalogue = path.join(tmp, 'catalogue.json');
+    fs.writeFileSync(catalogue, JSON.stringify({ base_url: 'file://' + remote, countries: {
+      ZZ: { name: 'Pays d’essai', region: 'Autres', file: 'geo-zz.sqlite.gz', size: fs.statSync(lu).size, sha256: sha },
+      ZY: { name: 'Pays abîmé', region: 'Autres', file: 'geo-zy.sqlite.gz', size: fs.statSync(lu).size, sha256: '0'.repeat(64) } } }));
+    Object.assign(process.env, { GENEALOGY_SKIP_REFERENCE: '0', LCNDA_REFERENCE_CATALOGUE: catalogue });
+    const dir = path.join(tmp, 'J');
+    try {
+      await withServer(dir, async (s, base) => {
+        await upload(s, base, fs.readFileSync(ged), 'complet.ged');
+        const h = { 'x-carnet-secret': s.secret };
+        const boot = await fetch(base + '/api.php?action=bootstrap', { headers: h });
+        const cookie = (boot.headers.get('set-cookie') || '').split(';')[0];
+        const { csrf } = await boot.json();
+        const send = async (a, body) => { const r = await fetch(`${base}/api.php?action=${a}`, { method: 'POST', headers: { ...h, cookie, 'content-type': 'application/json', 'X-CSRF-Token': csrf }, body: JSON.stringify({ ...body, csrf }) }); return [r.status, await r.json()]; };
+        const details = (await (await fetch(`${base}/api.php?action=reference_countries`, { headers: { ...h, cookie } })).json()).details;
+        assert.deepEqual([details.ZZ.present, details.ZZ.region], [false, 'Autres']);
+        const [status, first] = await send('set_reference_country', { country: 'ZZ', enabled: true });
+        assert.deepEqual([status, first.download_required?.country], [409, 'ZZ'], 'pays absent : téléchargement demandé');
+        assert.equal((await send('download_reference_country', { country: 'ZZ' }))[1].downloaded, true);
+        assert.equal((await send('set_reference_country', { country: 'ZZ', enabled: true }))[1].communes, 100);
+        const [badStatus, bad] = await send('download_reference_country', { country: 'ZY' });
+        assert.ok(badStatus >= 400 && /abîmé/.test(bad.error || ''), 'empreinte fausse refusée : ' + JSON.stringify(bad));
+      });
+    } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; delete process.env.LCNDA_REFERENCE_CATALOGUE; }
+    const kept = fs.readdirSync(path.join(dir, 'data', 'reference'));
+    assert.deepEqual(kept, ['geo-zz.sqlite.gz'], 'seul le bon fichier est rangé dans les données : ' + kept.join(', '));
+  });
+
   fs.rmSync(tmp, { recursive: true, force: true });
-  console.log(`\n${passed}/8 vérifications réussies.`);
+  console.log(`\n${passed}/9 vérifications réussies.`);
 })().catch((e) => {
   if (!e || !e.reported) console.error(e);
   process.exitCode = 1;

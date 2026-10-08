@@ -127,9 +127,17 @@ try {
     if ($isWrite && $action === 'clone_database') {
         clone_database($pdo, $payload);
     }
+    if ($isWrite && $action === 'download_reference_country') { // navigateur sans Electron (Electron télécharge lui-même)
+        json_response(['ok' => true] + download_reference_country(safe_text($payload['country'] ?? '')));
+    }
     if ($isWrite && $action === 'set_reference_country') {
         $cc = safe_text($payload['country'] ?? '');
-        $result = !empty($payload['enabled']) ? enable_reference_country($pdo, $cc) : disable_reference_country($pdo, $cc);
+        try {
+            $result = !empty($payload['enabled']) ? enable_reference_country($pdo, $cc) : disable_reference_country($pdo, $cc);
+        } catch (ReferenceDownloadRequired $e) {
+            $entry = reference_catalogue()['countries'][$e->country] ?? [];
+            json_response(['error' => $e->getMessage(), 'download_required' => ['country' => $e->country, 'size' => (int) ($entry['size'] ?? 0)]], 409);
+        }
         log_change($pdo, 'meta', 0, 'update', (!empty($payload['enabled']) ? 'Pays ajouté aux battues : ' : 'Pays retiré des battues : ') . $cc, null, $result);
         json_response(['ok' => true] + $result + ['active' => reference_countries_active($pdo)]);
     }
@@ -184,7 +192,7 @@ try {
         'issues' => issues_data($pdo),
         'person_count' => json_response(['count' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn()]),
         'ghost_families' => ghost_families_data($pdo),
-        'reference_countries' => json_response(['available' => reference_countries_available(), 'active' => reference_countries_active($pdo)]),
+        'reference_countries' => json_response(['available' => reference_countries_available(), 'details' => reference_countries_details(), 'active' => reference_countries_active($pdo)]),
         'bulk_preview' => bulk_preview($pdo),
         'lock_candidates' => lock_candidates($pdo),
         'labels' => labels_data($pdo),
