@@ -5805,17 +5805,21 @@ function export_json(PDO $pdo): never
     $events=array_values(array_filter($pdo->query("SELECT e.*,t.slug,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY e.id")->fetchAll(),static fn($e)=>!export_privacy_enabled()||($e['scope']??'person')!=='person'||isset($visiblePersonIds[(int)($e['person_id']??0)])));
     $notes=$pdo->query('SELECT * FROM notes ORDER BY id')->fetchAll();
     $sources=$pdo->query('SELECT * FROM sources ORDER BY id')->fetchAll();
-    $places=$pdo->query('SELECT * FROM places ORDER BY id')->fetchAll();
+    // Seulement les lieux cités par la généalogie (toute colonne place_id) : la table contient aussi le répertoire
+    // des communes et lieux du monde (dizaines de milliers de lignes), qui faisait manquer de mémoire.
+    $used=[];
+    foreach($pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name<>'places'")->fetchAll(PDO::FETCH_COLUMN) as $table){
+        $cols=array_column($pdo->query('PRAGMA table_info('.$pdo->quote((string)$table).')')->fetchAll(),'name');
+        foreach($cols as $col){if($col==='place_id'||str_ends_with((string)$col,'_place_id')){$used[]='SELECT "'.str_replace('"','""',$col).'" FROM "'.str_replace('"','""',(string)$table).'"';}}
+    }
+    $places=$used?$pdo->query('SELECT * FROM places WHERE id IN ('.implode(' UNION ',$used).') ORDER BY id')->fetchAll():[];
 
-    echo json_encode([
-        'meta'=>['exported_at'=>date('c'),'generator'=>'Genealogie','version'=>'1.0'],
-        'persons'=>$persons,
-        'families'=>$families,
-        'events'=>$events,
-        'notes'=>$notes,
-        'sources'=>$sources,
-        'places'=>$places,
-    ],JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
+    // Écrit morceau par morceau (moins de mémoire qu'un seul json_encode de tout)
+    $flags=JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT;
+    $parts=['meta'=>['exported_at'=>date('c'),'generator'=>'Genealogie','version'=>'1.0'],'persons'=>$persons,'families'=>$families,'events'=>$events,'notes'=>$notes,'sources'=>$sources,'places'=>$places];
+    echo "{\n";$first=true;
+    foreach($parts as $key=>$value){echo ($first?'':",\n").'    '.json_encode($key).': '.str_replace("\n","\n    ",(string)json_encode($value,$flags));$first=false;unset($parts[$key]);}
+    echo "\n}";
     exit;
 }
 

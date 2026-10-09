@@ -478,7 +478,7 @@ function check_links(PDO $pdo, array $data): array
             curl_exec($retry);
             $code = (int) curl_getinfo($retry, CURLINFO_RESPONSE_CODE);
             $final = (string) curl_getinfo($retry, CURLINFO_EFFECTIVE_URL);
-            curl_close($retry);
+            unset($retry); // curl_close() : sans effet depuis PHP 8, obsolète en 8.5
             $error = $code ? 'Certificat du site incomplet (la page répond)' : $error;
         }
         $ok = ($code >= 200 && $code < 400) || $code === 416; // 416 : la page existe (plage refusée)
@@ -514,7 +514,7 @@ function link_archive_copy(string $url): string
     $ch = curl_init('https://archive.org/wayback/available?url=' . rawurlencode($url));
     curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_TIMEOUT => 15, CURLOPT_CONNECTTIMEOUT => 8, CURLOPT_USERAGENT => 'LCNDA (verification de liens)'] + lcnda_curl_tls());
     $body = curl_exec($ch);
-    curl_close($ch);
+    unset($ch);
     $data = is_string($body) ? json_decode($body, true) : null;
     $snap = $data['archived_snapshots']['closest'] ?? null;
     return is_array($snap) && !empty($snap['available']) && preg_match('#^https?://web\.archive\.org/#', (string) ($snap['url'] ?? '')) ? (string) $snap['url'] : '';
