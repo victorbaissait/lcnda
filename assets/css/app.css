@@ -3716,3 +3716,6 @@ html.is-embedded .screen-tool{display:none}
 .branch-closed-badge.certainty-likely{background:#fdf2d5;color:#7a5600}.branch-status.certainty-likely{border-color:#d4a017}
 .branch-closed-badge.certainty-maybe{background:#fde7d6;color:#8a4200}.branch-status.certainty-maybe{border-color:#e07b24}
 .branch-closed-badge.certainty-doubtful{background:#f8dcdc;color:#8a1f1f}.branch-status.certainty-doubtful{border-color:#b03a2e}
+
+.lineage-graph{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;padding:1rem;text-align:left;max-width:1400px}
+.lineage-graph h3{margin:0 0 .6rem}

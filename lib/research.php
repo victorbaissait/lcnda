@@ -529,7 +529,8 @@ function closed_branches_data(PDO $pdo, int $personId = 0): array
 function save_closed_branch(PDO $pdo, array $data): array
 {
     $personId = safe_int($data['person_id'] ?? 0);
-    $direction = in_array($data['direction'] ?? '', ['ascendance', 'descendance'], true) ? $data['direction'] : '';
+    // Seule une descendance se ferme (lignée éteinte) : une ascendance existe toujours, même inconnue (choix de Victor)
+    $direction = ($data['direction'] ?? '') === 'descendance' ? 'descendance' : '';
     if (!$personId || $direction === '') { throw new RuntimeException('Personne ou sens de la branche manquant.'); }
     $certainty = isset(BRANCH_CERTAINTIES[$data['certainty'] ?? '']) ? $data['certainty'] : 'likely';
     $reason = isset(BRANCH_REASONS[$data['reason'] ?? '']) ? $data['reason'] : '';
