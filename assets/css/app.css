@@ -3799,3 +3799,12 @@ tr.is-key-row td{background:color-mix(in srgb,var(--blue) 8%,transparent)}
 /* Signets : ruban de la fiche (plein = en signet) et petit ruban dans la liste des personnes */
 .icon-action.icon-bookmark-on svg{fill:var(--blue);stroke:var(--blue)}
 .bookmark-mark{display:inline-block;width:8px;height:11px;margin-right:5px;vertical-align:-1px;background:var(--blue);clip-path:polygon(0 0,100% 0,100% 100%,50% 72%,0 100%)}
+
+/* Petits widgets et petits blocs : le titre garde sa place (au moins ~180 px), les boutons passent en dessous au besoin ;
+   le carré du numéro ne se fait plus écraser */
+.card-head{flex-wrap:wrap;row-gap:8px}
+.card-title{flex:1 1 180px}
+.card-index{flex:none}
+.card-head h3{min-width:0;overflow-wrap:break-word;hyphens:auto}
+.dashboard-widget .card-head-actions{flex:0 1 auto;justify-content:flex-end}
+.dashboard-widget-tools{flex:none;margin-left:auto}
