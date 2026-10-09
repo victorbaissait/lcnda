@@ -3740,7 +3740,7 @@ html.is-embedded .screen-tool{display:none}
 
 /* Raccourcis clavier */
 .shortcut-kbd{display:inline-block;min-width:1.6em;padding:.05rem .45rem;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;background:var(--paper);font:600 .82rem/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:nowrap;text-align:center}
-.shortcut-table th{text-align:left;padding-top:1rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.shortcut-table th{text-align:left;padding-top:1rem;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:#000}
 .shortcut-table td:nth-child(2){white-space:nowrap}
 .shortcut-table .shortcut-info td{color:var(--muted)}
 .shortcut-custom{color:var(--blue);font-weight:600}

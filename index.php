@@ -24,7 +24,7 @@ header('Cache-Control: no-store, private');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=195">
+    <link rel="stylesheet" href="assets/css/app.css?v=196">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
 <body>
