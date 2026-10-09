@@ -147,6 +147,13 @@ try {
     if ($isWrite && $action === 'delete_empty_families') {
         delete_empty_families($pdo);
     }
+    // Fusion de l'arbre d'un cousin : hors de la transaction générale (copie de sécurité VACUUM INTO d'abord)
+    if ($isWrite && $action === 'merge_gedcom_analyse') {
+        merge_gedcom_analyse($pdo, $_FILES['file'] ?? null);
+    }
+    if ($isWrite && $action === 'merge_gedcom_apply') {
+        merge_gedcom_apply($pdo, $payload);
+    }
 
     // Sauvegarde complète protégée : le mot de passe arrive en POST (jamais dans l'adresse)
     if ($isWrite && $action === 'export_full_backup') {
@@ -6116,7 +6123,7 @@ function backup_sqlite(PDO $pdo, array $data): never
     $files = backup_files($dir);
     $deleted = [];
     // Les copies faites avant une mise à jour de structure (« -migration- ») ou un nettoyage ne sont jamais supprimées ici.
-    $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-') && !str_contains($file['name'], '-avant-nettoyage')));
+    $rotating = array_values(array_filter($files, static fn($file) => !str_contains($file['name'], '-migration-') && !str_contains($file['name'], '-avant-nettoyage') && !str_contains($file['name'], '-avant-fusion')));
     foreach (array_slice($rotating, $maxFiles) as $file) {
         if (is_file($file['path']) && @unlink($file['path'])) {
             $deleted[] = $file['name'];

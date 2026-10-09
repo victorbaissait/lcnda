@@ -3719,3 +3719,21 @@ html.is-embedded .screen-tool{display:none}
 
 .lineage-graph{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.5rem;padding:1rem;text-align:left;max-width:1400px}
 .lineage-graph h3{margin:0 0 .6rem}
+
+/* Fusionner un arbre */
+.merge-summary{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.2rem}
+.merge-summary .page-actions{margin-left:auto}
+.merge-filters{margin:.8rem 0}
+.merge-bulk{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem}
+.merge-list{display:flex;flex-direction:column;gap:.5rem}
+.merge-row{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:1rem;border:1px solid var(--line);background:var(--paper);padding:.6rem .8rem;border-radius:6px}
+.merge-row.merge-check{border-left:4px solid #d4a017}.merge-row.merge-same{border-left:4px solid #1d8a4f}.merge-row.merge-new{border-left:4px solid var(--blue)}
+.merge-incoming{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+.merge-incoming small{color:var(--muted);overflow-wrap:anywhere}
+.merge-choice{display:flex;flex-direction:column;gap:.25rem}
+.merge-candidate{flex-wrap:wrap;align-items:baseline}
+.merge-candidate small{display:block;width:100%;margin-left:1.6rem;color:var(--muted)}
+.merge-against{color:#b03a2e!important}
+.merge-score{font-weight:700;font-size:.8rem;color:var(--blue)}
+.merge-missing{color:#1d8a4f}
+@media (max-width:800px){.merge-row{grid-template-columns:1fr}}

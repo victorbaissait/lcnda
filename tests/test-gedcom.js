@@ -6,7 +6,7 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * Passe par la vraie application (PHP + envoi du fichier comme l'interface), sur des dossiers temporaires.
  *  1. import de tests/fixtures/complet.ged (pièges d'Hérédis : notes RTF, lieux en 6 morceaux, MAP, _FIL…) ;
  *  2. export GEDCOM 5.5.1 puis réimport dans une base neuve : rien ne doit se perdre ;
- *  3. idem en GEDCOM 7.
+ *  3. idem en GEDCOM 7 ; 4. export « pour partager » ; 5. fusion de l'arbre d'un cousin.
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -170,6 +170,64 @@ function checkContent(db, mediaDir, label) {
     assert.equal((shared.match(/NAME Personne \/vivante\//g) || []).length, 2, 'deux personnes vivantes anonymes');
     assert.equal((shared.match(/NAME Fiche \/confidentielle\//g) || []).length, 1, 'une fiche confidentielle anonyme');
     assert.equal((shared.match(/^0 @F\d+@ FAM$/gm) || []).length, 2, 'les familles restent (liens familiaux)');
+  });
+
+  await step('fusion de l’arbre d’un cousin : mêmes personnes complétées, nouvelles ajoutées, homonyme séparé, rien en double', async () => {
+    const head = ['0 HEAD', '1 GEDC', '2 VERS 5.5.1', '1 CHAR UTF-8'];
+    const mine = [...head,
+      '0 @I1@ INDI', '1 NAME Émile/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 1830', '2 PLAC Tulle', '1 DEAT', '2 DATE 1900', '1 FAMS @F1@',
+      '0 @I2@ INDI', '1 NAME Rose/BERNARD/', '1 SEX F', '1 BIRT', '2 DATE 1835', '1 FAMS @F1@',
+      '0 @I3@ INDI', '1 NAME Paul/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 1860', '1 FAMC @F1@',
+      '0 @F1@ FAM', '1 HUSB @I1@', '1 WIFE @I2@', '1 CHIL @I3@', '1 MARR', '2 DATE 1859', '0 TRLR', ''].join('\n');
+    // Arbre du cousin : mêmes Émile et Rose (Émile a en plus une profession et une note), Paul né « en 1861 »,
+    // une sœur Jeanne inconnue chez moi, et un autre Émile MARTIN né en 1950 (homonyme : ne doit pas être fusionné).
+    const cousin = [...head,
+      '0 @P1@ INDI', '1 NAME Emile/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 1830', '2 PLAC Tulle', '1 DEAT', '2 DATE 1900', '1 OCCU Sabotier', '1 NOTE Note du cousin sur Émile', '1 FAMS @G1@',
+      '0 @P2@ INDI', '1 NAME Rose/BERNARD/', '1 SEX F', '1 FAMS @G1@',
+      '0 @P3@ INDI', '1 NAME Paul/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 1861', '1 FAMC @G1@',
+      '0 @P4@ INDI', '1 NAME Jeanne/MARTIN/', '1 SEX F', '1 BIRT', '2 DATE 1863', '1 FAMC @G1@',
+      '0 @P5@ INDI', '1 NAME Émile/MARTIN/', '1 SEX M', '1 BIRT', '2 DATE 1950',
+      '0 @G1@ FAM', '1 HUSB @P1@', '1 WIFE @P2@', '1 CHIL @P3@', '1 CHIL @P4@', '1 MARR', '2 DATE 1859', '0 TRLR', ''].join('\n');
+    const dir = path.join(tmp, 'M'); const db = path.join(dir, 'genealogy.sqlite');
+    fs.writeFileSync(path.join(tmp, 'mien.ged'), mine); fs.writeFileSync(path.join(tmp, 'cousin.ged'), cousin);
+    await withServer(dir, path.join(tmp, 'media-m'), async (s) => {
+      await importFile(s, path.join(tmp, 'mien.ged'), 'mien.ged');
+      const base = `http://127.0.0.1:${s.port}`;
+      const boot = await fetch(base + '/api.php?action=bootstrap', { headers: { 'x-carnet-secret': s.secret } });
+      const cookie = (boot.headers.get('set-cookie') || '').split(';')[0];
+      const csrf = (await boot.json()).csrf;
+      const headers = { 'x-carnet-secret': s.secret, 'X-CSRF-Token': csrf, cookie };
+      const analyse = async () => {
+        const fd = new FormData(); fd.append('file', new Blob([cousin]), 'cousin.ged'); fd.append('csrf', csrf);
+        const r = await fetch(base + '/api.php?action=merge_gedcom_analyse', { method: 'POST', headers, body: fd });
+        const d = await r.json(); if (!r.ok || d.error) throw new Error('analyse : ' + (d.error || r.status)); return d;
+      };
+      const apply = async (d) => {
+        const decisions = {};
+        for (const row of d.rows) decisions[row.id] = row.proposal === 'new' ? { action: 'new' } : { action: 'same', target: row.candidates[0].id };
+        const r = await fetch(base + '/api.php?action=merge_gedcom_apply', { method: 'POST', headers: { ...headers, 'Content-Type': 'application/json' }, body: JSON.stringify({ csrf, token: d.token, origin: 'Arbre de Paul', decisions }) });
+        const res = await r.json(); if (!r.ok || res.error) throw new Error('fusion : ' + (res.error || r.status)); return res;
+      };
+      const d = await analyse();
+      const by = (fn, yr) => d.rows.find((r) => r.person.first_name === fn && r.person.birth === yr);
+      assert.equal(by('Emile', 1830).proposal, 'same', 'Émile reconnu malgré l’accent');
+      assert.equal(by('Paul', 1861).proposal, 'same', 'Paul reconnu à un an près');
+      assert.equal(by('Jeanne', 1863).proposal, 'new', 'Jeanne est nouvelle');
+      assert.equal(by('Émile', 1950).proposal, 'new', 'l’homonyme de 1950 n’est pas fusionné');
+      assert.ok(by('Emile', 1830).missing.some((m) => m.includes('Sabotier') || m.includes('Profession')), 'la profession manquante est annoncée');
+      const res = await apply(d);
+      assert.equal(res.stats.added, 2); assert.ok(res.backup.endsWith('-avant-fusion.db') && fs.existsSync(path.join(dir, 'backups', res.backup)), 'copie de sécurité');
+      // Refaire la même fusion n'ajoute rien
+      const again = await apply(await analyse());
+      assert.deepEqual([again.stats.added, again.stats.events, again.stats.notes, again.stats.families, again.stats.children_links], [0, 0, 0, 0, 0], 'deuxième fusion identique : rien en double');
+    });
+    assert.equal(one(db, 'SELECT count(*) n FROM persons').n, 5, '3 personnes + Jeanne + l’homonyme');
+    assert.equal(one(db, "SELECT count(*) n FROM events e JOIN persons p ON p.id=e.person_id JOIN event_types t ON t.id=e.event_type_id WHERE p.first_name='Émile' AND p.last_name='MARTIN' AND t.gedcom_tag='BIRT'").n, 2, 'une naissance par Émile, pas de doublon');
+    assert.equal(one(db, "SELECT e.title FROM events e JOIN persons p ON p.id=e.person_id JOIN event_types t ON t.id=e.event_type_id WHERE p.first_name='Émile' AND t.gedcom_tag='OCCU'").title, 'Sabotier', 'profession ajoutée à mon Émile');
+    assert.equal(one(db, "SELECT count(*) n FROM family_children fc JOIN persons c ON c.id=fc.child_id JOIN families f ON f.id=fc.family_id JOIN persons pa ON pa.id=f.partner1_id WHERE c.first_name='Jeanne' AND pa.first_name='Émile'").n, 1, 'Jeanne rattachée à Émile et Rose');
+    assert.equal(one(db, 'SELECT count(*) n FROM families').n, 1, 'pas de famille en double');
+    assert.equal(one(db, "SELECT count(*) n FROM notes WHERE body LIKE 'Note du cousin%'").n, 1, 'note ajoutée une seule fois');
+    assert.equal(one(db, "SELECT count(*) n FROM label_links l JOIN labels b ON b.id=l.label_id WHERE b.name='Fusion : Arbre de Paul'").n, 3, 'étiquette sur Émile (complété), Jeanne et l’homonyme');
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });
