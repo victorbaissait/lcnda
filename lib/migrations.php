@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 7;
+const SCHEMA_VERSION = 8;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -28,6 +28,7 @@ function migration_steps(): array
         5 => 'schema_v5',
         6 => 'schema_v6',
         7 => 'schema_v7',
+        8 => 'schema_v8',
     ];
 }
 
@@ -379,6 +380,27 @@ function schema_v7(PDO $pdo): void
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_genealogy_fairs_date ON genealogy_fairs(date_start)');
+}
+
+/**
+ * Structure n°8 (2026-10-09) : branches fermées. Une ascendance (plus d'ancêtres à trouver) ou une descendance (lignée
+ * éteinte) déclarée fermée depuis une personne ou un couple, avec un degré de certitude et la raison.
+ */
+function schema_v8(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS closed_branches (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        partner_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        direction TEXT NOT NULL CHECK(direction IN ('ascendance','descendance')),
+        certainty TEXT NOT NULL DEFAULT 'likely',
+        reason TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(person_id, direction)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_closed_branches_partner ON closed_branches(partner_id)');
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

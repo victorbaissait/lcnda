@@ -3694,3 +3694,25 @@ html.is-embedded .screen-tool{display:none}
 .progress-bar{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
 .progress-bar span{display:block;width:100%;max-width:26px;background:var(--blue);border-radius:2px 2px 0 0}
 .progress-bar small{font-size:.66rem;color:var(--muted);margin-top:2px;white-space:nowrap}
+
+/* Ascendants / descendants et branches fermées */
+.lineage-tree,.lineage-tree ul{list-style:none;margin:0;padding:0}
+.lineage-tree ul{margin-left:.55rem;padding-left:.9rem;border-left:1px solid var(--line)}
+.lineage-tree li{position:relative;padding:.18rem 0;line-height:1.35}
+.lineage-tree ul>li::before{content:"";position:absolute;left:-.9rem;top:.85rem;width:.7rem;border-top:1px solid var(--line)}
+.lineage-role{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.lineage-person{font-weight:600}
+.lineage-more{display:inline-block;margin-left:.45rem;padding:0 .35rem;border:1px dashed var(--muted);border-radius:10px;font-size:.72rem;color:var(--muted)}
+.lineage-depth{display:flex;align-items:center;gap:.35rem;font-size:.8rem}
+.lineage-depth select{padding:.15rem .3rem}
+.lineage-widget-title{margin:.6rem 0 .3rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.05em;color:var(--blue)}
+.branch-status{margin:0 0 .6rem}
+.branch-status.is-closed{padding:.45rem .6rem;border-left:4px solid #6b6b6b;background:var(--paper)}
+.branch-status.is-closed p{margin:.25rem 0}
+.branch-status .button{margin-top:.3rem}
+.branch-closed-badge{display:inline-block;margin-left:.35rem;padding:0 .4rem;border-radius:10px;font-size:.7rem;font-weight:700;background:#ececec;color:#333}
+.certainty-certain.branch-closed-badge,.branch-status.certainty-certain{border-color:#1d8a4f}.branch-closed-badge.certainty-certain{background:#dff3e8;color:#145c36}
+.branch-closed-badge.certainty-very_likely{background:#e8f0dc;color:#3d5a14}.branch-status.certainty-very_likely{border-color:#6b8e23}
+.branch-closed-badge.certainty-likely{background:#fdf2d5;color:#7a5600}.branch-status.certainty-likely{border-color:#d4a017}
+.branch-closed-badge.certainty-maybe{background:#fde7d6;color:#8a4200}.branch-status.certainty-maybe{border-color:#e07b24}
+.branch-closed-badge.certainty-doubtful{background:#f8dcdc;color:#8a1f1f}.branch-status.certainty-doubtful{border-color:#b03a2e}

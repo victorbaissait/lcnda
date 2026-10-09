@@ -418,3 +418,136 @@ function research_progress_data(PDO $pdo): array
     return ['month' => $period($monthStart, $nextMonth), 'previous_month' => $period($prevStart, $monthStart), 'year' => $period($yearStart, $nextYear),
         'months' => $months, 'month_label' => $now->format('Y-m'), 'year_label' => $now->format('Y')];
 }
+
+/**
+ * Ascendants et descendants d'une personne sur quelques générations, en version légère (blocs de fiche, widget).
+ * Chaque personne dit s'il existe d'autres générations au-delà de ce qui est affiché (« more »), pour dessiner un trait.
+ */
+function lineage_data(PDO $pdo, int $id, int $ascDepth, int $descDepth): array
+{
+    $ascDepth = max(0, min(10, $ascDepth)); $descDepth = max(0, min(10, $descDepth));
+    $parents = []; $childrenOf = []; $spousesOf = [];
+    foreach ($pdo->query('SELECT f.id, f.partner1_id, f.partner2_id FROM families f') as $f) {
+        foreach ([[$f['partner1_id'], $f['partner2_id']], [$f['partner2_id'], $f['partner1_id']]] as [$a, $b]) {
+            if ($a) { $spousesOf[(int) $a][(int) $f['id']] = $b ? (int) $b : 0; }
+        }
+    }
+    $famKids = [];
+    foreach ($pdo->query('SELECT fc.family_id, fc.child_id, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id ORDER BY fc.position, fc.id') as $r) {
+        $famKids[(int) $r['family_id']][] = (int) $r['child_id'];
+        foreach (['partner1_id', 'partner2_id'] as $c) { if ($r[$c]) { $parents[(int) $r['child_id']][] = (int) $r[$c]; $childrenOf[(int) $r[$c]][(int) $r['child_id']] = true; } }
+    }
+    $closed = [];
+    try {
+        foreach ($pdo->query('SELECT * FROM closed_branches') as $c) {
+            $closed[(int) $c['person_id']][$c['direction']] = $c;
+            if ($c['partner_id']) { $closed[(int) $c['partner_id']][$c['direction']] ??= $c; }
+        }
+    } catch (Throwable) { /* base sans la structure n°8 */ }
+    $need = [$id => true]; $budget = 1500;
+    $ascTree = static function (int $pid, int $level) use (&$ascTree, $parents, $ascDepth, &$need, &$budget): array {
+        $node = ['id' => $pid];
+        $ps = array_values(array_unique($parents[$pid] ?? []));
+        if ($level >= $ascDepth || $budget <= 0) { $node['more'] = count($ps) > 0; return $node; }
+        $node['parents'] = [];
+        foreach ($ps as $p) { $budget--; $need[$p] = true; $node['parents'][] = $ascTree($p, $level + 1); }
+        return $node;
+    };
+    $descTree = static function (int $pid, int $level, array $path) use (&$descTree, $spousesOf, $famKids, $childrenOf, $descDepth, &$need, &$budget): array {
+        $node = ['id' => $pid];
+        if ($level >= $descDepth || $budget <= 0) {
+            $node['more'] = !empty($childrenOf[$pid]);
+            $node['more_count'] = count($childrenOf[$pid] ?? []);
+            return $node;
+        }
+        $node['unions'] = [];
+        $seenKids = [];
+        foreach ($spousesOf[$pid] ?? [] as $famId => $spouse) {
+            $kids = array_values(array_filter($famKids[$famId] ?? [], static fn($k) => !isset($path[$k])));
+            if ($spouse) { $need[$spouse] = true; }
+            $union = ['spouse' => $spouse ?: null, 'children' => []];
+            foreach ($kids as $k) { $seenKids[$k] = true; $budget--; $need[$k] = true; $union['children'][] = $descTree($k, $level + 1, $path + [$k => true]); }
+            if ($spouse || $union['children']) { $node['unions'][] = $union; }
+        }
+        // Enfants rattachés à une famille sans ce parent (cas rares) : à la suite
+        $other = array_values(array_filter(array_keys($childrenOf[$pid] ?? []), static fn($k) => !isset($seenKids[$k]) && !isset($path[$k])));
+        if ($other) {
+            $union = ['spouse' => null, 'children' => []];
+            foreach ($other as $k) { $budget--; $need[$k] = true; $union['children'][] = $descTree($k, $level + 1, $path + [$k => true]); }
+            $node['unions'][] = $union;
+        }
+        return $node;
+    };
+    $asc = $ascDepth ? $ascTree($id, 0) : null;
+    $desc = $descDepth ? $descTree($id, 0, [$id => true]) : null;
+    $people = [];
+    foreach (array_chunk(array_keys($need), 400) as $chunk) {
+        $stmt = $pdo->prepare('SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, p.living_status,
+            (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN (\'BIRT\',\'CHR\',\'BAPM\') AND e.year>0) AS birth_year,
+            (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN (\'DEAT\',\'BURI\') AND e.year>0) AS death_year
+            FROM persons p WHERE p.id IN (' . implode(',', array_fill(0, count($chunk), '?')) . ')');
+        $stmt->execute($chunk);
+        foreach ($stmt->fetchAll() as $p) {
+            $pid = (int) $p['id'];
+            $p['closed'] = array_values(array_map(static fn($c) => ['direction' => $c['direction'], 'certainty' => $c['certainty'], 'id' => (int) $c['id']], $closed[$pid] ?? []));
+            $people[$pid] = $p;
+        }
+        $stmt->closeCursor();
+    }
+    return ['root' => $id, 'asc_depth' => $ascDepth, 'desc_depth' => $descDepth, 'ascendants' => $asc, 'descendants' => $desc, 'people' => $people, 'truncated' => $budget <= 0];
+}
+
+/* ─── Branches fermées ─────────────────────────────────────────────── */
+
+const BRANCH_CERTAINTIES = ['certain' => 'Sûr', 'very_likely' => 'Très probable', 'likely' => 'Probable', 'maybe' => 'Peut-être', 'doubtful' => 'Gros doute'];
+const BRANCH_REASONS = [
+    'extinct' => 'Lignée éteinte (aucun descendant)', 'no_children' => 'Mort sans enfant', 'unknown_father' => 'Enfant naturel, père inconnu',
+    'foundling' => 'Enfant trouvé, parents inconnus', 'records_lost' => 'Registres détruits ou perdus', 'no_more_records' => 'Plus d’actes plus anciens',
+    'searched' => 'Recherches complètes sans résultat', 'other' => 'Autre raison',
+];
+
+function closed_branches_data(PDO $pdo, int $personId = 0): array
+{
+    $sql = 'SELECT * FROM closed_branches' . ($personId ? ' WHERE person_id=? OR partner_id=?' : '') . ' ORDER BY updated_at DESC, id DESC';
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($personId ? [$personId, $personId] : []);
+    $rows = $stmt->fetchAll();
+    $stmt->closeCursor();
+    $ids = [];
+    foreach ($rows as $r) { $ids[] = $r['person_id']; $ids[] = $r['partner_id']; }
+    $people = collection_people($pdo, $ids);
+    foreach ($rows as &$r) {
+        $r['person'] = $people[(int) $r['person_id']] ?? null;
+        $r['partner'] = $people[(int) $r['partner_id']] ?? null;
+        $r['certainty_label'] = BRANCH_CERTAINTIES[$r['certainty']] ?? $r['certainty'];
+        $r['reason_label'] = BRANCH_REASONS[$r['reason']] ?? '';
+    }
+    unset($r);
+    return $rows;
+}
+
+function save_closed_branch(PDO $pdo, array $data): array
+{
+    $personId = safe_int($data['person_id'] ?? 0);
+    $direction = in_array($data['direction'] ?? '', ['ascendance', 'descendance'], true) ? $data['direction'] : '';
+    if (!$personId || $direction === '') { throw new RuntimeException('Personne ou sens de la branche manquant.'); }
+    $certainty = isset(BRANCH_CERTAINTIES[$data['certainty'] ?? '']) ? $data['certainty'] : 'likely';
+    $reason = isset(BRANCH_REASONS[$data['reason'] ?? '']) ? $data['reason'] : '';
+    $partner = safe_int($data['partner_id'] ?? 0) ?: null;
+    $note = trim(mb_substr((string) ($data['note'] ?? ''), 0, 4000));
+    $pdo->prepare("INSERT INTO closed_branches(person_id,partner_id,direction,certainty,reason,note) VALUES(?,?,?,?,?,?)
+        ON CONFLICT(person_id,direction) DO UPDATE SET partner_id=excluded.partner_id, certainty=excluded.certainty, reason=excluded.reason, note=excluded.note, updated_at=CURRENT_TIMESTAMP")
+        ->execute([$personId, $partner, $direction, $certainty, $reason, $note]);
+    log_change($pdo, 'person', $personId, 'update', ($direction === 'ascendance' ? 'Ascendance' : 'Descendance') . ' déclarée fermée (' . BRANCH_CERTAINTIES[$certainty] . ')');
+    return ['branches' => closed_branches_data($pdo, $personId)];
+}
+
+function delete_closed_branch(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $row = $pdo->prepare('SELECT person_id, direction FROM closed_branches WHERE id=?'); $row->execute([$id]); $b = $row->fetch(); $row->closeCursor();
+    if (!$b) { throw new RuntimeException('Branche introuvable'); }
+    $pdo->prepare('DELETE FROM closed_branches WHERE id=?')->execute([$id]);
+    log_change($pdo, 'person', (int) $b['person_id'], 'update', ($b['direction'] === 'ascendance' ? 'Ascendance' : 'Descendance') . ' rouverte');
+    return ['branches' => closed_branches_data($pdo, (int) $b['person_id'])];
+}
