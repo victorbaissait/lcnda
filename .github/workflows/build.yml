@@ -27,6 +27,7 @@ jobs:
     name: Brouillon de version
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-24.04
+    timeout-minutes: 60  # jamais plus d'une heure (un blocage a duré 6 h le 2026-10-08)
     permissions:
       contents: write
     steps:
@@ -48,6 +49,7 @@ jobs:
     needs: prepare
     if: ${{ !cancelled() && needs.prepare.result != 'failure' }}
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 60  # jamais plus d'une heure (un blocage a duré 6 h le 2026-10-08)
     permissions:
       contents: write
     strategy:
@@ -139,6 +141,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs: build
     runs-on: ubuntu-24.04
+    timeout-minutes: 60  # jamais plus d'une heure (un blocage a duré 6 h le 2026-10-08)
     permissions:
       contents: write
     steps:

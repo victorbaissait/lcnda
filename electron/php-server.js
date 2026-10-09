@@ -189,7 +189,30 @@ class PhpServer extends EventEmitter {
       await this._startProxy();
       this._logLine(`relais sur le port ${this.port} → ${this.poolSize} processus PHP`);
     }
-    await Promise.all(this.backends.map(async (b) => { this._spawn(b); await this._waitReady(b, 20000); }));
+    // Démarrage : un port choisi « libre » peut avoir été pris entre-temps (plusieurs PHP lancés en même temps, autre
+    // logiciel) ; PHP s'arrête alors aussitôt. On réessaie sur un autre port (3 fois). Si cela échoue quand même, on arrête
+    // tout ce qui a été lancé, pour ne rien laisser tourner derrière soi.
+    this._starting = true;
+    try {
+      await Promise.all(this.backends.map(async (b) => {
+        for (let attempt = 1; ; attempt++) {
+          this._spawn(b);
+          try { await this._waitReady(b, 20000); return; } catch (err) {
+            const exited = b.child && (b.child.exitCode !== null || b.child.signalCode);
+            if (!exited || attempt >= 3) throw err;
+            const single = this.poolSize === 1;
+            b.port = await randomFreePort();
+            if (single) this.port = b.port;
+            this._logLine(`PHP${single ? '' : ' n°' + b.id} n'a pas pu démarrer : nouvel essai sur le port ${b.port}`);
+          }
+        }
+      }));
+    } catch (err) {
+      this._starting = false;
+      await this.stop().catch(() => {});
+      throw err;
+    }
+    this._starting = false;
     return this.port;
   }
 
@@ -238,7 +261,7 @@ class PhpServer extends EventEmitter {
     child.once('exit', (code, signal) => {
       b.ready = false;
       this._logLine(`PHP${tag} s'est arrêté (code ${code}, signal ${signal})`);
-      if (this._stopping || b.child !== child) return;
+      if (this._stopping || b.child !== child || this._starting) return; // pendant le démarrage, start() réessaie lui-même
       this.emit('crash', { id: b.id, code, signal });
       this._scheduleRestart(b);
     });
