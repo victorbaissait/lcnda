@@ -936,6 +936,9 @@
             const label=people[currentId]?`${personName(people[currentId])}${years(people[currentId])?` (${years(people[currentId])})`:''}`:'';
             if(label)$$('.person-block-config h3').forEach(h3=>{if(h3.textContent===`Exception pour Personne #${currentId}`)h3.textContent=`Exception pour ${label}`;});
         }
+        // Dans chaque rubrique : sur quelles fiches une exception a été mise
+        $$('[data-exception-summary]').forEach(el=>{const ids=(found[el.dataset.exceptionSummary]||[]);el.innerHTML=ids.length?`<strong>Exception mise sur ${ids.length} fiche${ids.length>1?'s':''} :</strong> ${ids.map(id=>`<button class="link-button" type="button" data-exception-open="${id}">${escapeHtml(people[id]?personName(people[id]):`Fiche n° ${id}`)}</button>`).join(', ')}`:'<span class="muted">Aucune fiche n’a d’exception : toutes suivent ce réglage.</span>';});
+        $$('[data-exception-summary] [data-exception-open]').forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.exceptionOpen);setModule('personnes');}));
         const nameOf=id=>people[id]?`${personName(people[id])}${years(people[id])?` · ${years(people[id])}`:''}`:`Fiche n° ${id} (supprimée ?)`;
         box.innerHTML=kinds.map(([kind,title])=>`<section class="maintenance-panel order-editor block-order-editor"><h3>${escapeHtml(title)} <small>(${found[kind].length})</small></h3>${found[kind].length?`<div class="person-exception-list">${found[kind].sort((a,b)=>nameOf(a).localeCompare(nameOf(b),'fr')).map(id=>`<div class="person-exception-row"><button class="link-button" type="button" data-exception-open="${id}">${escapeHtml(nameOf(id))}</button><button class="button small secondary" type="button" data-exception-delete="genealogie-${kind}-${id}">Retirer l’exception</button></div>`).join('')}</div>`:'<p class="muted">Aucune fiche : toutes suivent le réglage commun.</p>'}</section>`).join('');
         $$('[data-exception-open]',box).forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.exceptionOpen);setModule('personnes');}));
@@ -1608,7 +1611,7 @@
     function renderDashboardSidebar(content, footer) {
         const catalog=orderedDashboardWidgetTypes(false);
         content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${catalog.map(([type,number,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${escapeHtml(number)}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="Ajouter ${escapeHtml(label)}">+</button></div></div>`).join('')}</div>`;
-        footer.innerHTML = `<button class="button small secondary" id="dashboard-open-design">Apparence</button><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
+        footer.innerHTML = `<div class="dashboard-footer-actions"><button class="button small secondary" id="dashboard-open-design">Apparence</button><button class="button small secondary" id="dashboard-reorder" title="Changer l’ordre des widgets de la vue générale">Réordonner les widgets</button></div><span style="display:block;margin-top:9px">Widgets duplicables et configurables.</span>`;
         $$('[data-info-dashboard-widget]',content).forEach(button=>button.addEventListener('click',()=>toast(dashboardWidgetInfo[button.dataset.infoDashboardWidget]||dashboardWidgetLabel(button.dataset.infoDashboardWidget)),{signal:sidebarController.signal}));
         $$('[data-add-dashboard-widget]',content).forEach(button=>button.addEventListener('click',async()=>{
             const settings=dashboardBlockSettings();
@@ -1618,6 +1621,7 @@
             await renderDashboard();
         },{signal:sidebarController.signal}));
         $('#dashboard-open-design')?.addEventListener('click',()=>{state.maintenanceTab='design';setModule('maintenance');},{signal:sidebarController.signal});
+        $('#dashboard-reorder')?.addEventListener('click',()=>openDashboardReorderDialog(),{signal:sidebarController.signal});
     }
 
     async function renderDashboard(token=++state.workspaceToken){
@@ -1902,6 +1906,28 @@
             },220);
             input.addEventListener('input',run);
         });
+    }
+    /** Tableau de bord → « Réordonner les widgets » : glisser une ligne, ou ses flèches ↑ ↓, puis Enregistrer. */
+    function openDashboardReorderDialog(){
+        const settings=dashboardBlockSettings();let widgets=[...settings.widgets];
+        if(!widgets.length)return toast('Aucun widget sur le tableau de bord.');
+        const subtitle=w=>w.config?.personMode==='specific'&&w.config?.personName?w.config.personName:(w.type==='person_block'?(defaultPersonBlocks.find(r=>r[0]===(w.config?.personBlockKey||'identity'))||[,''])[1]:'');
+        const widthText=w=>(personBlockWidthChoices.find(([v])=>String(v)===String(w.width))||[,''])[1];
+        const dialog=document.createElement('dialog');dialog.className='modal dashboard-reorder-dialog';
+        const draw=()=>{$('.dashboard-reorder-list',dialog).innerHTML=widgets.map((w,i)=>`<li class="dashboard-reorder-row" draggable="true" data-index="${i}"><span class="order-grip" aria-hidden="true">↕</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><b>${escapeHtml(dashboardWidgetLabel(w.type))}${subtitle(w)?` <small>${escapeHtml(subtitle(w))}</small>`:''}</b><small class="cell-muted">${escapeHtml(widthText(w))}</small><span class="dashboard-reorder-moves"><button type="button" class="icon-button" data-move="-1" ${i===0?'disabled':''} aria-label="Monter">↑</button><button type="button" class="icon-button" data-move="1" ${i===widgets.length-1?'disabled':''} aria-label="Descendre">↓</button></span></li>`).join('');};
+        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">TABLEAU DE BORD</span><h2>Réordonner les widgets</h2><p>Glisse une ligne, ou utilise ses flèches. Le premier widget est en haut à gauche de la vue générale.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div><ol class="dashboard-reorder-list"></ol><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer l’ordre</button></div>`;
+        document.body.append(dialog);draw();
+        const list=$('.dashboard-reorder-list',dialog);let dragFrom=-1;
+        list.addEventListener('click',e=>{const b=e.target.closest('[data-move]');if(!b)return;const i=Number(b.closest('[data-index]').dataset.index),j=i+Number(b.dataset.move);if(j<0||j>=widgets.length)return;[widgets[i],widgets[j]]=[widgets[j],widgets[i]];dialog.dataset.dirty='1';draw();list.querySelector(`[data-index="${j}"] [data-move="${b.dataset.move}"]`)?.focus();});
+        list.addEventListener('dragstart',e=>{const row=e.target.closest('[data-index]');if(!row)return;dragFrom=Number(row.dataset.index);row.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';});
+        list.addEventListener('dragover',e=>{if(dragFrom<0)return;e.preventDefault();$$('.is-drop-target',list).forEach(r=>r.classList.remove('is-drop-target'));e.target.closest('[data-index]')?.classList.add('is-drop-target');});
+        list.addEventListener('drop',e=>{e.preventDefault();const row=e.target.closest('[data-index]');if(!row||dragFrom<0)return;const to=Number(row.dataset.index);const [moved]=widgets.splice(dragFrom,1);widgets.splice(to,0,moved);dragFrom=-1;dialog.dataset.dirty='1';draw();});
+        list.addEventListener('dragend',()=>{dragFrom=-1;$$('.is-dragging,.is-drop-target',list).forEach(r=>r.classList.remove('is-dragging','is-drop-target'));});
+        const close=()=>{dialog.close();dialog.remove();};
+        $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',close));
+        $('[data-save]',dialog).addEventListener('click',async()=>{saveDashboardBlockSettings({widgets});dialog.dataset.dirty='';close();toast('Ordre des widgets enregistré.');if(state.module==='dashboard')await renderDashboard();});
+        dialog.addEventListener('close',()=>dialog.remove());
+        dialog.showModal();
     }
     function dashboardBlockEditor(settings,labels){
         return `<section class="maintenance-panel order-editor block-order-editor dashboard-block-editor"><h3>Widgets posés sur le tableau de bord</h3><p style="font-size:.8rem;color:var(--muted);margin:.25rem 0 .75rem">Règle l’ordre, la largeur et le nombre d’éléments des widgets déjà affichés.</p><div class="order-list block-order-list" id="dashboard-blocks">${settings.widgets.map((widget,index)=>dashboardOrderRow(widget,labels[widget.type]||widget.type,index)).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" data-order-save="dashboard-blocks">Enregistrer ces widgets</button></div></section>`;
@@ -6578,6 +6604,30 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     document.addEventListener('click',event=>{const b=event.target.closest?.('[data-open-list]');if(!b)return;state.listType=b.dataset.openList;state.precisePlaceKey='';setModule('listes');});
     // Commandes du menu de l'application de bureau (Fichier → Recherche rapide ; clic sur une notification de rappel)
     try{window.lcnda?.onCommand?.(command=>{if(command==='quick-search')openQuickSearch();if(command==='open-reminders'){state.listType='reminders';setModule('listes');}if(command.startsWith('shortcut:'))runShortcutCommand(command.slice(9));});}catch(_){}
+    /* ── Plusieurs fenêtres (ou écran divisé) : un réglage changé dans l'une est repris par les autres ──
+     * Les fenêtres de l'application partagent le même stockage local : le navigateur prévient les AUTRES fenêtres
+     * (événement « storage »). On réapplique l'apparence et on réaffiche l'écran, sauf pendant une saisie (on attend). */
+    const CROSS_WINDOW_IGNORED=/^(genealogie-(last-route|baissait-ui-v2|auto-backup-lock|auto-backup-settings|dashboard-recent-people|sosa-map|daboville-map|goose-active-v1|goose-games-v1)$|lcnda-side-panel-)/;
+    let crossWindowTimer=null,crossWindowPending=false;
+    window.addEventListener('storage',event=>{
+        if(event.storageArea&&event.storageArea!==localStorage)return;
+        if(event.key&&(!/^(genealogie-|lcnda-)/.test(event.key)||CROSS_WINDOW_IGNORED.test(event.key)))return;
+        crossWindowPending=true;clearTimeout(crossWindowTimer);crossWindowTimer=setTimeout(applyCrossWindowChange,500);
+    });
+    function applyCrossWindowChange(){
+        if(!crossWindowPending)return;
+        const busy=isTypingTarget(document.activeElement)||openModalDialog()||$('#lightbox')?.open||shortcutCaptureHandler;
+        if(busy){clearTimeout(crossWindowTimer);crossWindowTimer=setTimeout(applyCrossWindowChange,1500);return;}
+        crossWindowPending=false;
+        try{applyDesign();}catch(_){}
+        try{applyMenuOrder();}catch(_){}
+        try{document.documentElement.classList.toggle('transcription-stacked',localStorage.getItem('genealogie-transcription-layout')==='stacked');}catch(_){}
+        publishShortcutsToMenu();
+        if(!state.hasRendered)return;
+        if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);
+        else setModule(state.module,false);
+    }
+
     /* ── Raccourcis clavier ──────────────────────────────────────────────────────────────────────────────────────
      * Une seule liste (SHORTCUT_DEFS) sert à tout : la lecture des touches, le menu de l'application de bureau, l'aide
      * (F1) et l'onglet Maintenance → Raccourcis. « Mod » = ⌘ sur Mac, Ctrl sur Windows et Linux. Les lettres sont lues
@@ -9693,16 +9743,16 @@ ${backupSectionHtml()}
         <section class="person-block-config"><header><span class="eyebrow">TABLEAU DE BORD</span><h3>Widgets et bibliothèque</h3><p>Réorganise la bibliothèque de widgets de la colonne de gauche, puis règle les widgets déjà posés sur le tableau de bord.</p></header>
             <div class="design-order-grid block-grid dashboard-widget-settings-grid">${dashboardWidgetCatalogEditor(dashboardCatalogItems,dashboardCatalogHidden)}${dashboardBlockEditor(dashboardBlockSettings(),Object.fromEntries(defaultDashboardBlocks))}</div>
         </section>
-        <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Ordre et visibilité des blocs</h3><p>Glisse les blocs pour changer leur ordre. Décoche un bloc pour le masquer.</p></header>
+        <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Ordre et visibilité des blocs</h3><p>Glisse les blocs pour changer leur ordre. Décoche un bloc pour le masquer.</p><p class="person-exception-summary" data-exception-summary="person-blocks"></p></header>
             <div class="design-order-grid block-grid">${blockOrderEditor('person-blocks-global','Toutes les fiches',personBlockSettings(),0)}${personId?blockOrderEditor('person-blocks-person',`Exception pour ${personName(current)}`,personBlockSettings(personId),personId):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour créer une exception propre à sa fiche.</p></section>'}</div>
         </section>
-        <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Filtres du bloc Événements</h3><p>Choisis les types d'événements à afficher dans le bloc Événements. Décoche un type pour le masquer.</p></header>
+        <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Filtres du bloc Événements</h3><p>Choisis les types d'événements à afficher dans le bloc Événements. Décoche un type pour le masquer.</p><p class="person-exception-summary" data-exception-summary="events-filter"></p></header>
             <div class="design-order-grid block-grid">${eventsFilterEditor('events-filter-global','Toutes les fiches',eventsFilterSettings(),0)}${personId?eventsFilterEditor('events-filter-person',`Exception pour ${personName(current)}`,eventsFilterSettings(personId),personId):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour créer une exception propre à sa fiche.</p></section>'}</div>
         </section>
-        <section class="person-block-config" id="lineage-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Ascendants et descendants</h3><p>Nombre de générations affichées dans les blocs « Ascendants » et « Descendants » des fiches. Un trait « ┄ suite » signale qu’il y a d’autres générations au-delà.</p></header>
+        <section class="person-block-config" id="lineage-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Ascendants et descendants</h3><p>Nombre de générations affichées dans les blocs « Ascendants » et « Descendants » des fiches. Un trait « ┄ suite » signale qu’il y a d’autres générations au-delà.</p><p class="person-exception-summary" data-exception-summary="lineage"></p></header>
             <div class="design-order-grid block-grid">${lineageSettingsEditor('lineage-global','Toutes les fiches',lineageSettings())}${personId?lineageSettingsEditor('lineage-person',`Exception pour ${personName(current)}`,lineageSettings(personId),personId):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour lui donner son propre réglage.</p></section>'}</div>
         </section>
-        <section class="person-block-config" id="web-search-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Chercher sur internet</h3><p>Choisis les sites proposés dans le bloc « Chercher sur internet » (fiches et widget) et leur ordre. Glisse pour réordonner, décoche pour masquer.</p></header>
+        <section class="person-block-config" id="web-search-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Chercher sur internet</h3><p>Choisis les sites proposés dans le bloc « Chercher sur internet » (fiches et widget) et leur ordre. Glisse pour réordonner, décoche pour masquer.</p><p class="person-exception-summary" data-exception-summary="web-search"></p></header>
             <div class="design-order-grid block-grid">${webSearchSitesEditor('web-search-global','Toutes les fiches',webSearchSettings())}${personId?webSearchSitesEditor('web-search-person',`Exception pour ${personName(current)}`,webSearchSettings(personId),{personId}):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour lui donner ses propres sites.</p></section>'}${webSearchCustomSitesEditorHtml()}</div>
         </section>
         <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Fiches avec un réglage particulier</h3><p>Les fiches qui ont leurs propres blocs, filtres d’événements ou sites de recherche (au lieu du réglage de toutes les fiches).</p></header>

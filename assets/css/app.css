@@ -3773,3 +3773,25 @@ tr.is-key-row td{background:color-mix(in srgb,var(--blue) 8%,transparent)}
 .choose-list-item{text-align:left;border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:.5rem .7rem;cursor:pointer;font:inherit}
 .choose-list-item:focus,.choose-list-item:hover{border-color:var(--blue);outline:none}
 .choose-list-item small{color:var(--muted)}
+
+/* Widget du tableau de bord en cours de réglage (crayon) : jamais plus étroit que la moitié, rien ne déborde du cadre */
+.dashboard-widget{min-width:0}
+.card.dashboard-widget.is-editing.span-3,.card.dashboard-widget.is-editing.span-4{grid-column:span 6}
+.dashboard-widget-back{min-width:0;overflow-wrap:anywhere}
+.dashboard-widget-back *{min-width:0;max-width:100%}
+.dashboard-widget-back .block-widths{justify-content:flex-start}
+.dashboard-widget-back-title{flex-wrap:wrap}
+.dashboard-widget.is-editing .card-head{flex-wrap:wrap}
+.dashboard-widget.is-editing .card-title h3{overflow-wrap:anywhere}
+@media(max-width:1100px){.card.dashboard-widget.is-editing{grid-column:1 / -1}}
+
+/* Tableau de bord : réordonner les widgets */
+.dashboard-footer-actions{display:flex;flex-wrap:wrap;gap:6px}
+.dashboard-reorder-dialog{width:min(620px,94vw)}
+.dashboard-reorder-list{list-style:none;margin:0;padding:0 1.4rem;max-height:60vh;overflow:auto;display:flex;flex-direction:column;gap:6px}
+.dashboard-reorder-row{display:grid;grid-template-columns:18px 26px minmax(0,1fr) auto auto;align-items:center;gap:8px;padding:6px 8px;border:1.5px solid var(--ink);background:var(--card-bg);cursor:grab}
+.dashboard-reorder-row b{overflow-wrap:anywhere}.dashboard-reorder-row b small{font-weight:400;color:var(--muted)}
+.dashboard-reorder-row.is-dragging{opacity:.4}.dashboard-reorder-row.is-drop-target{outline:2px solid var(--blue)}
+.dashboard-reorder-moves{display:flex;gap:4px}
+.person-exception-summary{margin-top:6px;font-size:13px;overflow-wrap:anywhere}
+.person-exception-summary .link-button{font-size:13px}
