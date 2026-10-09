@@ -164,7 +164,7 @@ function buildMenu(p) {
     {
       label: 'Fiche',
       submenu: [
-        sk('edit_person', 'Modifier la fiche'), sk('bookmark', 'Ajouter aux favoris / retirer'), sk('copy_ref', 'Copier la référence'), { type: 'separator' },
+        sk('edit_person', 'Modifier la fiche'), sk('bookmark', 'Ajouter aux signets / retirer'), sk('copy_ref', 'Copier la référence'), { type: 'separator' },
         sk('add_event', 'Ajouter un événement…'), sk('add_media', 'Ajouter un média…'), sk('add_source', 'Ajouter une source…'), sk('add_reminder', 'Créer un rappel…'),
       ],
     },

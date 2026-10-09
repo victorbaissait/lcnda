@@ -3795,3 +3795,7 @@ tr.is-key-row td{background:color-mix(in srgb,var(--blue) 8%,transparent)}
 .dashboard-reorder-moves{display:flex;gap:4px}
 .person-exception-summary{margin-top:6px;font-size:13px;overflow-wrap:anywhere}
 .person-exception-summary .link-button{font-size:13px}
+
+/* Signets : ruban de la fiche (plein = en signet) et petit ruban dans la liste des personnes */
+.icon-action.icon-bookmark-on svg{fill:var(--blue);stroke:var(--blue)}
+.bookmark-mark{display:inline-block;width:8px;height:11px;margin-right:5px;vertical-align:-1px;background:var(--blue);clip-path:polygon(0 0,100% 0,100% 100%,50% 72%,0 100%)}
