@@ -148,7 +148,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.3.0</span>
+                <span class="eyebrow">VERSION BÊTA · 0.3.1</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source et gratuit pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -177,8 +177,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.3.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 537 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.3.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.3.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 537 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.3.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -187,7 +187,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.3.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.3.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -198,16 +198,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.3.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 532 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.3.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 507 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.3.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 532 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.3.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 507 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.3.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.3.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 503 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.3.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.3.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 503 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.3.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.3.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -215,17 +215,50 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.3.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique avec <code>npm run fetch:geo</code>.</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.3.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique avec <code>npm run fetch:geo</code>.</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.3.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.3.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.3.1.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.3.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.3.0<small>Aide à la recherche, battues dans le monde entier, objets et mémoire de famille</small></span></summary>
+                <summary><span>Nouveautés de la version 0.3.1<small>Ascendants et descendants, fusion de l'arbre d'un cousin, raccourcis clavier</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>Famille</h4>
+                    <ul>
+                        <li>Blocs <b>« Ascendants »</b> et <b>« Descendants »</b> sur chaque fiche, en liste : vous choisissez le nombre de générations (pour toutes les fiches ou pour une seule), et un trait « ┄ suite » signale qu'il y en a d'autres au-delà. Aussi en widget du tableau de bord et dans Graphiques.</li>
+                        <li><b>Branches fermées</b> : déclarez qu'une descendance est éteinte, avec un degré de certitude (sûr, très probable, probable, peut-être, gros doute) et la raison ; la mention « lignée éteinte » apparaît dans les arbres, et la liste des branches fermées est dans Listes.</li>
+                        <li><b>Fusionner l'arbre d'un cousin</b> (Maintenance) : son fichier GEDCOM est comparé à votre base avant tout import, puis vous décidez fiche par fiche : « c'est la même personne, compléter la mienne », « nouvelle personne, l'ajouter » ou « ignorer ». Rien de votre fiche n'est effacé ni remplacé, et une copie de sécurité est faite juste avant.</li>
+                        <li><b>Signets</b> : un ruban en haut de chaque fiche pour la garder sous la main ; les signets ont leur onglet dans la liste des personnes.</li>
+                    </ul>
+                    <h4>Raccourcis clavier</h4>
+                    <ul>
+                        <li>Plus de 50 raccourcis, visibles dans les menus de l'application et avec la touche <b>F1</b> : se promener dans la famille (⌥↑ le père, ⌥↓ un enfant, frères et sœurs, conjoint…), écran précédent et suivant, rubriques ⌘1 à ⌘9, enregistrer avec ⌘Entrée, visionneuse, transcription, battues…</li>
+                        <li>⌘-clic sur une personne, une battue ou une enquête : l'ouvrir dans l'autre moitié de l'écran.</li>
+                        <li><b>⌘Z</b> en dehors d'une case de texte : annuler la dernière modification d'une fiche, toujours après confirmation.</li>
+                        <li>Dans un champ de date, taper « v », « av », « ap » ou « en » propose « vers », « avant », « après », « entre … et ».</li>
+                        <li>Maintenance → <b>Raccourcis clavier</b> : changez n'importe quel raccourci ; le logiciel vous prévient s'il est déjà pris par macOS, Windows ou Linux, et vous pouvez enregistrer vos réglages sous un nom.</li>
+                        <li>(Sur Windows et Linux, ⌘ se remplace par Ctrl, et ⌥ par Alt.)</li>
+                    </ul>
+                    <h4>Confort et corrections</h4>
+                    <ul>
+                        <li>Bouton <b>« Réordonner les widgets »</b> en bas du tableau de bord.</li>
+                        <li>Avec deux fenêtres ou l'écran divisé, un réglage changé dans l'une est repris aussitôt dans l'autre.</li>
+                        <li>Apparence : chaque rubrique indique sur quelles fiches une exception a été mise.</li>
+                        <li>Les petits widgets n'écrasent plus leur titre ni leur numéro, et leurs réglages (crayon) ne débordent plus du cadre.</li>
+                        <li>L'export JSON fonctionne de nouveau sur les grandes bases.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.3.0 <small>Aide à la recherche, battues dans le monde entier, objets et mémoire de famille</small></summary>
+                        <div class="presentation-version-body">
                     <h4>Battues dans le monde entier</h4>
                     <ul>
                         <li>Les communes de <b>226 pays et territoires</b> sont livrées avec le logiciel (Europe, Amériques, Afrique, Asie, Océanie, Caraïbes), toutes utilisables hors ligne ; les communes voisines de part et d'autre d'une frontière sont reliées.</li>
@@ -267,11 +300,7 @@
                         <li>Maintenance → Entretien : vérification des liens web enregistrés, avec la nouvelle adresse ou une copie archivée quand une page a disparu.</li>
                     </ul>
                 </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
-                <div class="presentation-changes-body">
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.2.1 <small>Battues au-delà des frontières et corrections</small></summary>
                         <div class="presentation-version-body">
@@ -464,7 +493,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.3.0 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.3.1 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script>
