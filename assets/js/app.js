@@ -437,7 +437,7 @@
     function listHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-list-hidden')||'[]');}catch(_){return[];}}
     function orderedListTypes(includeHidden=false){const order=savedOrder('genealogie-list-order',defaultListTypes.map(item=>item[0]));const hidden=listHiddenKeys();let visibleIndex=0;return order.filter(value=>includeHidden||!hidden.includes(value)).map((value,index)=>{const item=defaultListTypes.find(row=>row[0]===value);return [item[0],String(includeHidden?index+1:++visibleIndex).padStart(2,'0'),item[2]];});}
     function dynamicMapTypes(){const tags=(state.bootstrap?.mapEventTags||[]);const extra=tags.map(t=>[t.gedcom_tag,t.label]);const all=[['all','Tous les événements'],...extra];return all;}function orderedMapTypes(includeHidden=false){const dynamic=dynamicMapTypes();const keys=dynamic.map(i=>i[0]);const order=savedOrder('genealogie-map-order',keys);const hidden=mapHiddenKeys();return order.filter(value=>includeHidden||value==='all'||!hidden.includes(value)).map((value,index)=>{const item=dynamic.find(r=>r[0]===value)||[value,value];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
-    const defaultMaintenanceTabs=[['design','01','Apparence'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire / tuto / FAQ'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre']];
+    const defaultMaintenanceTabs=[['design','01','Apparence'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire / tuto / FAQ'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre'],['raccourcis','17','Raccourcis clavier']];
     function orderedMaintenanceTabs(){const order=savedOrder('genealogie-maintenance-order',defaultMaintenanceTabs.map(item=>item[0]));return order.map((value,index)=>{const item=defaultMaintenanceTabs.find(row=>row[0]===value);return [item[0],String(index+1).padStart(2,'0'),item[2]];});}
     function mapBackgroundValue(value){return ['offline','color','grid','dark','osmfr','light','minimal','roads','relief','cyclosm','wikimedia','satellite','ohm','esri_topo','esri_street','voyager','osmde','cassini','cassini_royal','etatmajor','nls_6inch','nls_natgrid','cartoweb','swisstopo','swisstopo_dufour','swisstopo_siegfried','ferraris','vandermaelen','popp','frickx','buurtwegen','ign_ortho_1950','ign_scan50_1950','ign_hr_ortho','ign_planv2','nls_25inch','nls_1inch','gsgs3906','london_1940s','usgs_topo','usgs_imagery','ign_es_mtn50','ign_es_pnoa','esri_ocean','esri_natgeo','esri_physical','esri_relief','nasa_modis','nasa_landsat_weld'].includes(value)?value:'bw';}
     function mapBackgroundSelectHtml(mapBg){
@@ -6576,9 +6576,473 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     setTimeout(()=>{const rootId=sosaRootId();if(rootId)recalculateSosaMap(rootId).catch(()=>{});},4000);
     // Boutons « Gérer les objets », « Tout voir »… : ouvrent la liste correspondante
     document.addEventListener('click',event=>{const b=event.target.closest?.('[data-open-list]');if(!b)return;state.listType=b.dataset.openList;state.precisePlaceKey='';setModule('listes');});
-    document.addEventListener('keydown',event=>{if((event.metaKey||event.ctrlKey)&&!event.altKey&&!event.shiftKey&&String(event.key).toLowerCase()==='k'){event.preventDefault();openQuickSearch();}});
     // Commandes du menu de l'application de bureau (Fichier → Recherche rapide ; clic sur une notification de rappel)
-    try{window.lcnda?.onCommand?.(command=>{if(command==='quick-search')openQuickSearch();if(command==='open-reminders'){state.listType='reminders';setModule('listes');}});}catch(_){}
+    try{window.lcnda?.onCommand?.(command=>{if(command==='quick-search')openQuickSearch();if(command==='open-reminders'){state.listType='reminders';setModule('listes');}if(command.startsWith('shortcut:'))runShortcutCommand(command.slice(9));});}catch(_){}
+    /* ── Raccourcis clavier ──────────────────────────────────────────────────────────────────────────────────────
+     * Une seule liste (SHORTCUT_DEFS) sert à tout : la lecture des touches, le menu de l'application de bureau, l'aide
+     * (F1) et l'onglet Maintenance → Raccourcis. « Mod » = ⌘ sur Mac, Ctrl sur Windows et Linux. Les lettres sont lues
+     * d'après le caractère tapé (AZERTY compris) ; les chiffres d'après la position de la touche (sinon « & é " »).
+     * Règle : un raccourci sans ⌘/Ctrl (lettre seule, ⌥ + flèche…) ne marche jamais pendant qu'on écrit dans une case.
+     */
+    const IS_MAC=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent||'');
+    const SHORTCUT_PLATFORM=IS_MAC?'mac':(/Win/.test(navigator.platform||navigator.userAgent||'')?'win':'linux');
+    const SHORTCUTS_KEY='genealogie-shortcuts',SHORTCUT_PRESETS_KEY='genealogie-shortcut-presets';
+    const SHORTCUT_GROUPS=[['windows','Fenêtres et écran divisé'],['move','Se déplacer'],['person','Sur une fiche personne'],['family','Se promener dans la famille'],['form','Pendant la saisie'],['list','Dans les listes'],['viewer','Dans la visionneuse de médias'],['transcription','Dans une transcription'],['battue','Dans une battue'],['safety','Sécurité']];
+    // Ordre de priorité quand une même touche sert à plusieurs endroits (la visionneuse ouverte passe avant la battue…)
+    const SHORTCUT_CTX_ORDER=['viewer','form','transcription','battue','list','person','global'];
+    const sc=(id,group,label,keys,ctx,run,extra={})=>({id,group,label,keys:typeof keys==='string'?{mac:keys,other:keys}:keys,ctx,run,...extra});
+    const SHORTCUT_DEFS=[
+        sc('new_window','windows','Ouvrir l’écran actuel dans une nouvelle fenêtre','Mod+N','global',()=>window.open(viewUrl(viewSnapshot()),'_blank'),{menu:true}),
+        sc('split','windows','Diviser l’écran en deux (ou le refermer)','Mod+Shift+D','global',()=>splitScreenToggle(),{menu:true}),
+        sc('split_orientation','windows','Écran divisé : côte à côte ou en haut et en bas','Mod+Shift+O','global',()=>splitScreenOrientation(),{menu:true}),
+        sc('switch_half','windows','Passer d’une moitié de l’écran à l’autre','F6','global',()=>switchScreenHalf(),{menu:true}),
+        ...Array.from({length:9},(_,i)=>sc(`go_${i+1}`,'move',`Aller à la rubrique n° ${i+1} de la barre du haut`,`Mod+${i+1}`,'global',()=>goToMenuSection(i),{menu:true})),
+        sc('back','move','Écran précédent',{mac:'Mod+ArrowLeft',other:'Alt+ArrowLeft'},'global',()=>navHistoryGo(-1),{noTyping:true,menu:true}),
+        sc('forward','move','Écran suivant',{mac:'Mod+ArrowRight',other:'Alt+ArrowRight'},'global',()=>navHistoryGo(1),{noTyping:true,menu:true}),
+        sc('find','move','Chercher un mot dans l’écran affiché','Mod+F','global',()=>openFindBar(),{menu:true}),
+        sc('quick_search','move','Recherche rapide (personnes, battues, enquêtes, lieux, écrans)','Mod+K','global',()=>openQuickSearch(),{menu:true}),
+        sc('settings','move','Ouvrir les réglages (Apparence)','Mod+,','global',()=>{state.maintenanceTab='design';setModule('maintenance');},{menu:true}),
+        sc('help','move','Afficher la liste des raccourcis','F1','any',()=>openShortcutHelp(),{menu:true}),
+        sc('edit_person','person','Modifier la fiche ouverte','Mod+E','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openPersonDialog(state.currentPerson);},{noTyping:true,menu:true}),
+        sc('new_person','person','Nouvelle personne','Mod+Shift+N','global',()=>openNewPersonDialog(),{menu:true}),
+        sc('bookmark','person','Ajouter ou retirer des personnes favorites','Mod+D','person',()=>togglePersonBookmark(),{menu:true}),
+        sc('print','person','Imprimer la fiche ou l’écran','Mod+P','global',()=>window.print(),{menu:true}),
+        sc('copy_ref','person','Copier la référence de la personne (nom, années, Sosa)','Mod+Shift+C','person',()=>copyPersonReference(),{menu:true}),
+        sc('go_father','family','Aller au père','Alt+ArrowUp','person',()=>goToRelative('father')),
+        sc('go_mother','family','Aller à la mère','Alt+Shift+ArrowUp','person',()=>goToRelative('mother')),
+        sc('go_child','family','Aller à un enfant (une liste s’ouvre s’il y en a plusieurs)','Alt+ArrowDown','person',()=>goToRelative('child')),
+        sc('go_prev_sibling','family','Frère ou sœur précédent (par ordre de naissance)','Alt+Shift+ArrowLeft','person',()=>goToRelative('prev_sibling')),
+        sc('go_next_sibling','family','Frère ou sœur suivant','Alt+Shift+ArrowRight','person',()=>goToRelative('next_sibling')),
+        sc('go_spouse','family','Aller au conjoint','Alt+Shift+C','person',()=>goToRelative('spouse')),
+        sc('go_root','family','Revenir au de cujus (personne de départ)','Mod+Shift+H','global',()=>{const id=Number(state.bootstrap?.startPersonId)||0;if(!id)return toast('Aucune personne de départ n’est définie.','error');openPersonById(id);},{menu:true}),
+        sc('save_form','form','Enregistrer le formulaire ouvert','Mod+Enter','form',()=>submitActiveForm()),
+        sc('add_event','form','Ajouter un événement à la fiche','Mod+Shift+E','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openEventDialog(state.currentPerson);},{menu:true}),
+        sc('add_media','form','Ajouter un média à la fiche','Mod+Shift+M','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openMediaDialog(state.currentPerson);},{menu:true}),
+        sc('add_source','form','Ajouter une source ou une citation','Mod+Shift+S','person',()=>{if(personIsLocked())return toast('Cette fiche est verrouillée.','error');openSourceDialog(state.currentPerson.person.id);},{menu:true}),
+        sc('add_reminder','form','Créer un rappel lié à la fiche','Mod+Alt+R','person',()=>openPersonReminderDialog(),{menu:true}),
+        sc('list_down','list','Ligne suivante','ArrowDown','list',()=>moveListCursor(1)),
+        sc('list_up','list','Ligne précédente','ArrowUp','list',()=>moveListCursor(-1)),
+        sc('list_open','list','Ouvrir la ligne choisie','Enter','list',()=>openListCursor(),{when:()=>!!listCursorRow()}),
+        sc('list_preview','list','Aperçu rapide (photo, document) sans quitter la liste','Space','list',()=>previewListCursor(),{when:()=>!!listCursorRow()}),
+        sc('viewer_prev','viewer','Média précédent','ArrowLeft','viewer',()=>moveLightbox(-1)),
+        sc('viewer_next','viewer','Média suivant','ArrowRight','viewer',()=>moveLightbox(1)),
+        sc('viewer_rotate','viewer','Tourner l’image (vers la droite)','R','viewer',()=>rotateCurrentMedia('right')),
+        sc('viewer_zoom_in','viewer','Zoom avant','+','viewer',()=>lightboxZoomBy(1.25),{aliases:['=']}),
+        sc('viewer_zoom_out','viewer','Zoom arrière','-','viewer',()=>lightboxZoomBy(0.8)),
+        sc('viewer_zoom_reset','viewer','Taille d’origine','0','viewer',()=>resetLightboxZoom()),
+        sc('viewer_play','viewer','Lecture / pause (audio, vidéo)','Space','viewer',()=>lightboxPlayer(p=>p.paused?p.play():p.pause())),
+        sc('viewer_back','viewer','Reculer de 10 secondes','J','viewer',()=>lightboxPlayer(p=>{p.currentTime=Math.max(0,p.currentTime-10);})),
+        sc('viewer_forward','viewer','Avancer de 10 secondes','L','viewer',()=>lightboxPlayer(p=>{p.currentTime=Math.min(p.duration||1e9,p.currentTime+10);})),
+        sc('tr_illegible','transcription','Insérer « [illisible] »','Mod+Shift+L','transcription',()=>insertInTranscription('[illisible]')),
+        sc('tr_uncertain','transcription','Insérer « [?] » après un mot incertain','Mod+Shift+U','transcription',()=>insertInTranscription('[?]')),
+        sc('tr_layout','transcription','Image et texte côte à côte, ou l’un sous l’autre','Mod+Shift+T','transcription',()=>toggleTranscriptionLayout()),
+        sc('battue_1','battue','La commune choisie passe à « Pas commencé »','1','battue',()=>setBattueCommuneStatusByKey('not_started')),
+        sc('battue_2','battue','La commune choisie passe à « Pas terminé »','2','battue',()=>setBattueCommuneStatusByKey('unfinished')),
+        sc('battue_3','battue','La commune choisie passe à « Terminé »','3','battue',()=>setBattueCommuneStatusByKey('done')),
+        sc('battue_next','battue','Aller à la prochaine commune pas encore terminée','N','battue',()=>moveBattueCursor()),
+        sc('battue_registers','battue','Ouvrir les registres en ligne de la commune choisie','R','battue',()=>{const card=battueActiveCard();card?.querySelector('[data-battue-registers]')?.click();}),
+        sc('backup_now','safety','Faire une sauvegarde tout de suite','Mod+Shift+B','global',()=>backupNow(),{menu:true}),
+        sc('undo','safety','Annuler la dernière modification d’une fiche (hors d’une case de texte, avec confirmation)','Mod+Z','global',()=>undoLastChange(),{noTyping:true}),
+    ];
+    // Raccourcis du système : une touche choisie ici ne marcherait pas (ou ferait autre chose). « all » = les trois systèmes,
+    // pour les raccourcis du menu de l'application (copier, coller, recharger…).
+    const OS_SHORTCUTS={
+        all:{'Mod+C':'Copier','Mod+V':'Coller','Mod+X':'Couper','Mod+A':'Tout sélectionner','Mod+Shift+Z':'Rétablir','Mod+R':'Recharger l’écran','Mod+Shift+R':'Forcer le rechargement','Mod+0':'Taille réelle de l’affichage','Mod++':'Zoom de l’affichage','Mod+=':'Zoom de l’affichage','Mod+-':'Zoom arrière de l’affichage','Mod+W':'Fermer la fenêtre','Mod+Q':'Quitter','Mod+M':'Réduire la fenêtre','Tab':'Passer d’un champ à l’autre','Shift+Tab':'Champ précédent','Escape':'Fermer une fenêtre de saisie'},
+        mac:{'Mod+H':'Masquer l’application','Mod+Alt+H':'Masquer les autres applications','Mod+Tab':'Changer d’application','Mod+Space':'Spotlight','Mod+Alt+Space':'Recherche du Finder','Mod+Shift+3':'Capture d’écran','Mod+Shift+4':'Capture d’une zone','Mod+Shift+5':'Outil de capture','Mod+Ctrl+Q':'Verrouiller l’écran','Mod+Ctrl+F':'Plein écran','Mod+Alt+Escape':'Forcer à quitter','Mod+?':'Recherche dans le menu Aide','Mod+Alt+D':'Afficher / masquer le Dock','Mod+`':'Passer d’une fenêtre à l’autre','Ctrl+ArrowLeft':'Bureau précédent (Mission Control)','Ctrl+ArrowRight':'Bureau suivant (Mission Control)','Ctrl+ArrowUp':'Mission Control','Ctrl+ArrowDown':'Fenêtres de l’application','Mod+Ctrl+Space':'Emoji et symboles','Mod+Shift+Q':'Fermer la session','Mod+Alt+M':'Réduire toutes les fenêtres'},
+        win:{'Alt+F4':'Fermer la fenêtre','Alt+Tab':'Changer d’application','Mod+Escape':'Menu Démarrer','Mod+Shift+Escape':'Gestionnaire des tâches','Mod+Alt+Delete':'Écran de sécurité','Alt+Space':'Menu de la fenêtre','Mod+Alt+ArrowUp':'Rotation de l’écran (pilotes Intel)','Mod+Alt+ArrowDown':'Rotation de l’écran (pilotes Intel)','Mod+Alt+ArrowLeft':'Rotation de l’écran (pilotes Intel)','Mod+Alt+ArrowRight':'Rotation de l’écran (pilotes Intel)','Mod+Y':'Rétablir','F11':'Plein écran','F10':'Menu de la fenêtre','Mod+Shift+I':'Outils de développement (version de test)','Alt':'Menu de la fenêtre'},
+        linux:{'Alt+F4':'Fermer la fenêtre','Alt+Tab':'Changer d’application','Mod+Alt+T':'Ouvrir un terminal','Mod+Alt+L':'Verrouiller l’écran','Mod+Alt+Delete':'Fermer la session','Mod+Alt+ArrowUp':'Changer de bureau','Mod+Alt+ArrowDown':'Changer de bureau','Mod+Alt+ArrowLeft':'Changer de bureau','Mod+Alt+ArrowRight':'Changer de bureau','Alt+F2':'Lancer une commande','Alt+F1':'Menu des applications','Alt+F7':'Déplacer la fenêtre','Alt+F8':'Redimensionner la fenêtre','Alt+Space':'Menu de la fenêtre','Mod+Shift+U':'Taper un caractère Unicode (dans les cases de texte)','Mod+Y':'Rétablir','F11':'Plein écran','Mod+Shift+I':'Outils de développement (version de test)'},
+    };
+    // Touches qui marchent mal sans précaution (affiché à titre d'information, sans empêcher le choix)
+    const OS_SHORTCUT_NOTES={mac:{'F1':'Sur beaucoup de claviers Mac, il faut appuyer aussi sur fn (sinon F1 baisse la luminosité).','F6':'Sur beaucoup de claviers Mac, il faut appuyer aussi sur fn.','Mod+E':'Dans une case de texte, ⌘E sert à « chercher la sélection » : le raccourci ne marche donc qu’en dehors des cases.'},win:{},linux:{}};
+
+    function shortcutOverrides(){try{const v=JSON.parse(localStorage.getItem(SHORTCUTS_KEY)||'{}');return v&&typeof v==='object'?v:{};}catch(_){return {};}}
+    function saveShortcutOverrides(map){try{localStorage.setItem(SHORTCUTS_KEY,JSON.stringify(map));}catch(_){}publishShortcutsToMenu();}
+    const shortcutDefault=def=>IS_MAC?def.keys.mac:def.keys.other;
+    function shortcutFor(def){const o=shortcutOverrides();return Object.prototype.hasOwnProperty.call(o,def.id)?String(o[def.id]||''):shortcutDefault(def);}
+    const shortcutHasMod=combo=>/(^|\+)(Mod|Ctrl|Meta)\+/.test(combo);
+    const shortcutIsFKey=combo=>/(^|\+)F\d{1,2}$/.test(combo);
+    /** Ce qu'a tapé la personne, sous la forme « Mod+Shift+D » (même forme que les réglages). */
+    function eventCombo(e){
+        let key=String(e.key||'');
+        if(['Meta','Control','Alt','Shift','OS','AltGraph','CapsLock','Dead','Fn','Unidentified',''].includes(key))return '';
+        const code=String(e.code||'');let digit=false,symbol=false;
+        if(/^Digit\d$/.test(code)){key=code.slice(5);digit=true;}
+        else if(/^Numpad\d$/.test(code)){key=code.slice(6);digit=true;}
+        else if(key.length===1&&/[a-z]/i.test(key)&&/^[\x20-\x7e]$/.test(key))key=key.toUpperCase();
+        else if(/^Key[A-Z]$/.test(code)&&(e.altKey||e.metaKey||e.ctrlKey))key=code.slice(3); // ⌥ + lettre sur Mac donne « ç », « ∂ »…
+        else if(key===' ')key='Space';
+        else if(key.length===1){symbol=true;}
+        else if(key==='Esc')key='Escape';
+        const parts=[];
+        if(IS_MAC?e.metaKey:e.ctrlKey)parts.push('Mod');
+        if(IS_MAC&&e.ctrlKey)parts.push('Ctrl');
+        if(!IS_MAC&&e.metaKey)parts.push('Meta');
+        if(e.altKey)parts.push('Alt');
+        // Chiffre sans ⌘/Ctrl : la Majuscule est ignorée (sur AZERTY, « 1 » se tape avec Maj)
+        if(e.shiftKey&&!symbol&&!(digit&&!parts.includes('Mod')&&!parts.includes('Ctrl')))parts.push('Shift');
+        return [...parts,key].join('+');
+    }
+    function comboLabel(combo){
+        if(!combo)return '—';
+        const keyNames={ArrowUp:'↑',ArrowDown:'↓',ArrowLeft:'←',ArrowRight:'→',Enter:IS_MAC?'↩︎':'Entrée',Escape:'Échap',Space:'Espace',Backspace:IS_MAC?'⌫':'Retour arrière',Delete:'Suppr',Tab:'Tab'};
+        const raw=combo==='+'?['+']:combo.endsWith('++')?[...combo.slice(0,-2).split('+').filter(Boolean),'+']:combo.split('+');
+        const key=raw[raw.length-1],mods=raw.slice(0,-1);
+        if(IS_MAC){const g={Ctrl:'⌃',Alt:'⌥',Shift:'⇧',Mod:'⌘'};return mods.map(m=>g[m]||m).join('')+(keyNames[key]||key);}
+        const g={Mod:'Ctrl',Alt:'Alt',Shift:'Maj',Meta:'Win'};return [...mods.map(m=>g[m]||m),keyNames[key]||key].join('+');
+    }
+    const kbd=combo=>`<kbd class="shortcut-kbd">${escapeHtml(comboLabel(combo))}</kbd>`;
+    function shortcutOsConflict(combo){return (OS_SHORTCUTS[SHORTCUT_PLATFORM]||{})[combo]||OS_SHORTCUTS.all[combo]||'';}
+
+    const isTypingTarget=el=>!!el&&(el.isContentEditable||(!!el.matches&&el.matches('textarea,select,input')&&!(el.matches('input')&&['checkbox','radio','button','submit','reset','range','color','file','image'].includes(el.type))));
+    const openModalDialog=()=>[...document.querySelectorAll('dialog[open]')].find(d=>d.id!=='lightbox'&&!d.classList.contains('find-bar'));
+    function shortcutContextActive(ctx){
+        const lightboxOpen=!!$('#lightbox')?.open,modal=openModalDialog(),active=document.activeElement;
+        if(ctx==='any')return true;
+        if(ctx==='viewer')return lightboxOpen&&!modal;
+        if(ctx==='form')return !!(active?.closest?.('form')||modal?.querySelector('form'));
+        if(ctx==='transcription')return !!(transcriptionArea()||($('#lightbox')?.open)||$('.archive-transcription-layout'));
+        if(modal||lightboxOpen)return false;
+        if(ctx==='battue')return !!$('[data-battue-commune-card]');
+        if(ctx==='list')return !!listCursorRows().length&&(!!active?.closest?.('#sidebar-content')||state.module==='listes'||!!$('.is-key-row'));
+        if(ctx==='person')return state.module==='personnes'&&!!state.currentPerson?.person;
+        return true;
+    }
+    let lastShortcutRun={id:'',t:0,source:''};
+    function runShortcut(def,source){
+        // Le même raccourci peut arriver deux fois (touche lue par la page ET menu de l'application) : une seule exécution
+        const now=Date.now();if(lastShortcutRun.id===def.id&&lastShortcutRun.source!==source&&now-lastShortcutRun.t<400)return;lastShortcutRun={id:def.id,t:now,source};
+        try{const r=def.run();if(r&&typeof r.catch==='function')r.catch(error=>toast(error.message,'error'));}catch(error){toast(error.message,'error');}
+    }
+    let shortcutCaptureHandler=null; // onglet Raccourcis : la prochaine touche est enregistrée au lieu d'agir
+    document.addEventListener('keydown',event=>{
+        if(shortcutCaptureHandler){event.preventDefault();event.stopPropagation();shortcutCaptureHandler(event);return;}
+        if(event.isComposing||event.repeat&&!/Arrow/.test(event.key))return;
+        const combo=eventCombo(event);if(!combo)return;
+        const typing=isTypingTarget(event.target);
+        const matches=SHORTCUT_DEFS.filter(def=>{const c=shortcutFor(def);return c&&(c===combo||(c===shortcutDefault(def)&&(def.aliases||[]).includes(combo)));})
+            .sort((a,b)=>SHORTCUT_CTX_ORDER.indexOf(a.ctx)-SHORTCUT_CTX_ORDER.indexOf(b.ctx));
+        for(const def of matches){
+            const allowedTyping=!def.noTyping&&(shortcutHasMod(combo)||shortcutIsFKey(combo));
+            if(typing&&!allowedTyping)continue;
+            if(!shortcutContextActive(def.ctx))continue;
+            if(def.when&&!def.when())continue;
+            event.preventDefault();event.stopPropagation();runShortcut(def,'key');return;
+        }
+    },true);
+    // Commandes du menu de l'application de bureau (« shortcut:<id> »), avec les mêmes règles que les touches
+    function runShortcutCommand(id){
+        if(id==='customize_shortcuts'){state.maintenanceTab='raccourcis';setModule('maintenance');return;}
+        if(id==='edit_undo'||id==='edit_redo'){if(isTypingTarget(document.activeElement)){document.execCommand(id==='edit_undo'?'undo':'redo');return;}if(id==='edit_redo')return;id='undo';}const def=SHORTCUT_DEFS.find(d=>d.id===id);if(!def)return;if(def.noTyping&&isTypingTarget(document.activeElement))return;if(!shortcutContextActive(def.ctx))return toast(def.ctx==='person'?'Ouvre d’abord une fiche personne.':'Ce raccourci ne sert pas sur cet écran.');runShortcut(def,'menu');}
+    /** Envoie les raccourcis au menu de l'application (Mac, Windows, Linux) pour qu'il les affiche. */
+    function publishShortcutsToMenu(){
+        if(IS_EMBEDDED||!window.lcnda?.setShortcuts)return;
+        const visible=orderedMenuKeys().filter(key=>key==='maintenance'||!menuHiddenKeys().includes(key));
+        const items={};SHORTCUT_DEFS.filter(d=>d.menu).forEach(def=>{const combo=shortcutFor(def);
+            // Seuls les raccourcis avec ⌘/Ctrl ou une touche F sont « enregistrés » dans le menu ; les autres y sont seulement affichés
+            items[def.id]={combo,label:def.id.startsWith('go_')?(modules[visible[Number(def.id.slice(3))-1]]?.[1]||''):'',register:!!combo&&!def.noTyping&&(shortcutHasMod(combo)||shortcutIsFKey(combo))};});
+        try{window.lcnda.setShortcuts(items);}catch(_){}
+    }
+
+    /* Actions */
+    const personIsLocked=()=>Number(state.currentPerson?.person?.is_locked)===1;
+    function openPersonById(id){if(!id)return;if(state.module==='personnes')return selectPerson(Number(id));state.currentPersonId=Number(id);setModule('personnes');}
+    function goToMenuSection(index){const keys=orderedMenuKeys().filter(key=>key==='maintenance'||!menuHiddenKeys().includes(key));const key=keys[index];if(key)setModule(key);}
+    function splitScreenToggle(){if(IS_EMBEDDED){try{return window.parent.lcndaSplitToggle?.();}catch(_){return;}}if($('#side-panel'))closeSidePanel();else openSidePanel();}
+    window.lcndaSplitToggle=splitScreenToggle;
+    function splitScreenOrientation(){if(IS_EMBEDDED){try{return window.parent.lcndaSplitOrientation?.();}catch(_){return;}}if(!$('#side-panel'))openSidePanel();const next=document.body.classList.contains('side-panel-bottom')?'right':'bottom';setSidePanelOrientation(next);try{localStorage.setItem('lcnda-side-panel-orientation',next);}catch(_){}}
+    window.lcndaSplitOrientation=splitScreenOrientation;
+    function switchScreenHalf(){
+        if(IS_EMBEDDED){try{window.parent.focus();window.parent.lcndaFlashHalf?.('main');}catch(_){}return;}
+        const frame=$('#side-panel-frame');if(!frame)return toast('L’écran n’est pas divisé (⌘⇧D / Ctrl+Maj+D pour le diviser).'.replace(IS_MAC?' / Ctrl+Maj+D':'⌘⇧D / ',''));
+        frame.focus();try{frame.contentWindow.focus();}catch(_){}lcndaFlashHalf('side');
+    }
+    function lcndaFlashHalf(which){const el=which==='side'?$('#side-panel'):$('#workspace');if(!el)return;el.classList.remove('is-half-flash');void el.offsetWidth;el.classList.add('is-half-flash');setTimeout(()=>el.classList.remove('is-half-flash'),700);}
+    window.lcndaFlashHalf=lcndaFlashHalf;
+    /** Ouvre un écran dans la partie principale (appelé par le panneau de droite pour un ⌘-clic). */
+    window.lcndaOpenView=view=>{applyViewSnapshot(view);setModule(view.module||'personnes');window.focus();};
+    // ⌘-clic (Ctrl-clic) sur une personne, une battue ou une enquête : l'ouvrir dans l'autre moitié ; ⌘⇧-clic : nouvelle fenêtre
+    document.addEventListener('click',event=>{
+        if(!(IS_MAC?event.metaKey:event.ctrlKey)||event.button!==0)return;
+        const el=event.target.closest?.('[data-open-person],[data-open-dashboard-person],.person-list-item[data-person-id],[data-open-battue],[data-open-battue-from-person],[data-open-investigation]');
+        if(!el)return;
+        const base={...viewSnapshot()};let view=null;
+        const pid=Number(el.dataset.openPerson||el.dataset.openDashboardPerson||el.dataset.personId||0);
+        if(pid)view={...base,module:'personnes',currentPersonId:pid};
+        const bid=Number(el.dataset.openBattue||el.dataset.openBattueFromPerson||0);
+        if(bid)view={...base,module:'enquetes',enquetesTab:'battue',currentInvestigationId:0,currentBattueId:bid};
+        const iid=Number(el.dataset.openInvestigation||0);
+        if(iid)view={...base,module:'enquetes',currentInvestigationId:iid,investigationFolderId:0,currentBattueId:0};
+        if(!view)return;
+        event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();
+        if(event.shiftKey)return window.open(viewUrl(view),'_blank');
+        if(IS_EMBEDDED){try{window.parent.lcndaOpenView(view);}catch(_){}return;}
+        openSidePanel(view);
+    },true);
+
+    // Précédent / suivant : historique des écrans visités (relevé toutes les 0,6 s, sans rien enregistrer sur le disque)
+    const navHistory={stack:[],index:-1,lockUntil:0};
+    function navSnapshotKey(view){const {graphPlaceMonograph,...rest}=view;return JSON.stringify(rest);}
+    setInterval(()=>{if(!state.hasRendered||Date.now()<navHistory.lockUntil)return;const view=viewSnapshot();const key=navSnapshotKey(view);if(navHistory.index>=0&&navSnapshotKey(navHistory.stack[navHistory.index])===key)return;navHistory.stack=navHistory.stack.slice(0,navHistory.index+1);navHistory.stack.push(view);if(navHistory.stack.length>100)navHistory.stack.shift();navHistory.index=navHistory.stack.length-1;},600);
+    function navHistoryGo(step){
+        const target=navHistory.index+step;
+        if(target<0||target>=navHistory.stack.length)return toast(step<0?'Pas d’écran précédent.':'Pas d’écran suivant.');
+        navHistory.index=target;navHistory.lockUntil=Date.now()+1500;
+        const view=navHistory.stack[target];
+        if(view.module==='personnes'&&state.module==='personnes'&&view.currentPersonId){applyViewSnapshot(view);selectPerson(view.currentPersonId);return;}
+        applyViewSnapshot(view);setModule(view.module||'personnes');
+    }
+    // Boutons « précédent / suivant » des souris
+    window.addEventListener('mouseup',event=>{if(event.button===3||event.button===4){event.preventDefault();navHistoryGo(event.button===3?-1:1);}});
+
+    // Chercher dans l'écran (⌘F)
+    function openFindBar(){
+        let bar=$('#find-bar');
+        if(!bar){
+            bar=document.createElement('div');bar.id='find-bar';bar.className='find-bar';bar.setAttribute('role','search');
+            bar.innerHTML=`<input type="search" placeholder="Chercher dans l’écran…" aria-label="Chercher dans l’écran"><button type="button" class="button small secondary" data-find="-1" title="Précédent (Maj+Entrée)">↑</button><button type="button" class="button small secondary" data-find="1" title="Suivant (Entrée)">↓</button><span class="find-bar-count" aria-live="polite"></span><button type="button" class="icon-button" data-find-close aria-label="Fermer">×</button>`;
+            document.body.append(bar);
+            const input=$('input',bar),count=$('.find-bar-count',bar);
+            const go=dir=>{const q=input.value;if(!q)return;const found=window.find(q,false,dir<0,true,false,false,false);count.textContent=found?'':'Introuvable';input.focus({preventScroll:true});};
+            input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go(e.shiftKey?-1:1);}if(e.key==='Escape'){e.preventDefault();bar.hidden=true;}});
+            input.addEventListener('input',()=>{count.textContent='';});
+            $$('[data-find]',bar).forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.find))));
+            $('[data-find-close]',bar).addEventListener('click',()=>{bar.hidden=true;});
+        }
+        bar.hidden=false;const input=$('input',bar);const sel=String(window.getSelection?.()||'').trim();if(sel&&sel.length<80)input.value=sel;input.focus();input.select();
+    }
+
+    async function togglePersonBookmark(){
+        const p=state.currentPerson.person;const on=Number(p.is_bookmarked)?0:1;
+        await api('set_person_bookmark',{},{method:'POST',body:{person_id:p.id,bookmarked:on}});
+        p.is_bookmarked=on;const listed=(state.people||[]).find(x=>Number(x.id)===Number(p.id));if(listed)listed.is_bookmarked=on;
+        toast(on?`${personName(p)} est dans les favoris.`:`${personName(p)} n’est plus dans les favoris.`);
+    }
+    function personReferenceText(p){const b=p.birth_year||'',d=p.death_year||'';const yrs=b||d?` (${b||'?'}-${d||(p.living_status==='living'?'':'?')})`:'';const sosa=sosaNumbersText(p.id);return `${personName(p)}${yrs}${sosa?`, Sosa ${sosa}`:''}`;}
+    async function copyPersonReference(){const text=personReferenceText(state.currentPerson.person);try{await navigator.clipboard.writeText(text);}catch(_){const area=document.createElement('textarea');area.value=text;document.body.append(area);area.select();document.execCommand('copy');area.remove();}toast(`Copié : ${text}`);}
+    function chooseFromList(title,items){
+        return new Promise(resolve=>{
+            const dialog=document.createElement('dialog');dialog.className='modal small-modal choose-list-dialog';
+            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><h2>${escapeHtml(title)}</h2><p>Flèches puis Entrée, ou un clic.</p></div><button class="icon-button" type="button" data-choose-cancel aria-label="Fermer">×</button></div><div class="choose-list">${items.map((item,i)=>`<button type="button" class="choose-list-item" data-choose="${i}">${escapeHtml(item.label)}${item.hint?` <small>${escapeHtml(item.hint)}</small>`:''}</button>`).join('')}</div></form>`;
+            document.body.append(dialog);let finished=false;
+            const finish=value=>{if(finished)return;finished=true;if(dialog.open)dialog.close();dialog.remove();resolve(value);};
+            $$('[data-choose]',dialog).forEach(b=>b.addEventListener('click',()=>finish(items[Number(b.dataset.choose)])));
+            dialog.addEventListener('keydown',e=>{if(!['ArrowDown','ArrowUp'].includes(e.key))return;e.preventDefault();e.stopPropagation();const list=$$('[data-choose]',dialog);const i=list.indexOf(document.activeElement);list[(i+(e.key==='ArrowDown'?1:-1)+list.length)%list.length]?.focus();});
+            $('[data-choose-cancel]',dialog).addEventListener('click',()=>finish(null));
+            dialog.addEventListener('close',()=>finish(null));
+            dialog.showModal();$('[data-choose]',dialog)?.focus();
+        });
+    }
+    const byBirth=(a,b)=>(Number(a.birth_year)||9999)-(Number(b.birth_year)||9999)||Number(a.id)-Number(b.id);
+    async function goToRelative(kind){
+        const d=state.currentPerson,p=d.person,parents=d.parents||[];
+        const pick=async(list,title,empty)=>{if(!list.length)return toast(empty);if(list.length===1)return openPersonById(list[0].id);const chosen=await chooseFromList(title,list.map(x=>({id:x.id,label:personName(x),hint:years(x)})));if(chosen)openPersonById(chosen.id);};
+        if(kind==='father')return pick(parents.filter(x=>x.gender==='male'),'Aller à quel père ?','Aucun père connu.');
+        if(kind==='mother')return pick(parents.filter(x=>x.gender==='female'),'Aller à quelle mère ?','Aucune mère connue.');
+        if(kind==='child')return pick([...(d.children||[])].sort(byBirth),'Aller à quel enfant ?','Aucun enfant connu.');
+        if(kind==='spouse')return pick(d.partners||[],'Aller à quel conjoint ?','Aucun conjoint connu.');
+        const all=[...(d.siblings||[]).filter(x=>Number(x.id)!==Number(p.id)),p].sort(byBirth);
+        const i=all.findIndex(x=>Number(x.id)===Number(p.id));const next=all[i+(kind==='next_sibling'?1:-1)];
+        if(!next)return toast((d.siblings||[]).length?(kind==='next_sibling'?'C’est le dernier de la fratrie.':'C’est l’aîné de la fratrie.'):'Aucun frère ni sœur connu.');
+        openPersonById(next.id);
+    }
+    function submitActiveForm(){
+        const active=document.activeElement;const form=active?.closest?.('form')||openModalDialog()?.querySelector('form');
+        if(!form)return;active?.dispatchEvent?.(new Event('change',{bubbles:true}));
+        const submit=form.querySelector('button[type="submit"]:not([disabled]),button:not([type]):not([disabled])');
+        if(form.requestSubmit)form.requestSubmit(submit||undefined);else submit?.click();
+    }
+    async function openPersonReminderDialog(){
+        const p=state.currentPerson.person;
+        const dialog=document.createElement('dialog');dialog.className='modal small-modal';
+        const today=new Date();const iso=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+        dialog.innerHTML=`<form method="dialog" class="person-reminder-form"><div class="modal-head"><div><span class="eyebrow">RAPPEL</span><h2>Rappel pour ${escapeHtml(personName(p))}</h2></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div><div class="form-grid single"><label>Ce qu’il faut faire<input name="title" required value="${escapeHtml(personReferenceText(p))} : "></label><label>Le<input type="date" name="reminder_due_at" required value="${iso}"></label><label>Notes<textarea name="notes" rows="3"></textarea></label></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="submit">Créer le rappel</button></div></form>`;
+        document.body.append(dialog);
+        $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',()=>{dialog.close();dialog.remove();}));
+        dialog.addEventListener('close',()=>dialog.remove());
+        $('form',dialog).addEventListener('submit',async event=>{event.preventDefault();const f=event.currentTarget;
+            try{await api('save_standalone_reminder',{},{method:'POST',body:{title:f.elements.title.value.trim(),reminder_due_at:f.elements.reminder_due_at.value,reminder_mode:'on',reminder_category:'Fiche',notes:`${f.elements.notes.value.trim()}${f.elements.notes.value.trim()?'\n\n':''}Fiche : ${personReferenceText(p)} (n° ${p.id})`}});dialog.dataset.dirty='';dialog.close();dialog.remove();toast('Rappel créé (Listes → Rappels).');try{window.lcnda?.refreshReminders?.();}catch(_){}}
+            catch(error){toast(error.message,'error');}});
+        dialog.showModal();const t=$('[name="title"]',dialog);t.focus();t.setSelectionRange(t.value.length,t.value.length);
+    }
+
+    // Listes : ↑ ↓ Entrée Espace (liste des personnes à gauche, ou tableau d'une liste)
+    function listCursorRows(){
+        if(document.activeElement?.closest?.('#sidebar-content')||(!$('.is-key-row')&&state.module==='personnes'))return $$('#sidebar-content .person-list-item').filter(el=>el.offsetParent);
+        return $$('#workspace .data-table tbody tr').filter(el=>el.offsetParent);
+    }
+    function moveListCursor(step){
+        const rows=listCursorRows();if(!rows.length)return;
+        const current=rows.findIndex(r=>r.classList.contains('is-key-row'));const fallback=rows.findIndex(r=>r===document.activeElement||r.classList.contains('is-active'));
+        const from=current>=0?current:fallback;const next=rows[Math.max(0,Math.min(rows.length-1,from<0?(step>0?0:rows.length-1):from+step))];
+        $$('.is-key-row').forEach(r=>r.classList.remove('is-key-row'));next.classList.add('is-key-row');next.scrollIntoView({block:'nearest'});
+        if(next.matches('button'))next.focus({preventScroll:true});
+    }
+    const listCursorRow=()=>$('.is-key-row')||(document.activeElement?.matches?.('#sidebar-content .person-list-item')?document.activeElement:null);
+    function openListCursor(){const row=listCursorRow();if(!row)return;(row.matches('button')?row:row.querySelector('[data-open-person],[data-open-battue],[data-open-investigation],[data-open-media],a[href],button'))?.click()||row.click();}
+    function previewListCursor(){const row=listCursorRow();const target=row?.querySelector('[data-open-media],[data-open-dashboard-media],img');if(target)target.click();else toast('Rien à prévisualiser sur cette ligne.');}
+
+    // Visionneuse
+    function lightboxZoomBy(factor){const image=$('#lightbox-image');if(!image||image.hidden)return;state.lightboxZoom=Math.max(1,Math.min(8,state.lightboxZoom*factor));if(state.lightboxZoom===1)state.lightboxPan={x:0,y:0};applyLightboxTransform();}
+    function lightboxPlayer(fn){const p=[$('#lightbox-video'),$('#lightbox-audio')].find(el=>el&&!el.hidden);if(p)fn(p);}
+
+    // Transcription
+    const transcriptionArea=()=>{const a=document.activeElement;return a?.matches?.('#lightbox-transcription,[data-archive-transcription-form] textarea')?a:null;};
+    function insertInTranscription(text){
+        const area=transcriptionArea()||($('#lightbox')?.open?$('#lightbox-transcription'):$('[data-archive-transcription-form] textarea'));
+        if(!area)return;area.focus();const s=area.selectionStart??area.value.length,e=area.selectionEnd??s;
+        const before=area.value.slice(0,s),sep=text==='[?]'||!before||/\s$/.test(before)?'':' ';
+        area.setRangeText(sep+text,s,e,'end');area.dispatchEvent(new Event('input',{bubbles:true}));
+    }
+    function toggleTranscriptionLayout(){
+        const stacked=!document.documentElement.classList.contains('transcription-stacked');
+        document.documentElement.classList.toggle('transcription-stacked',stacked);
+        try{localStorage.setItem('genealogie-transcription-layout',stacked?'stacked':'side');}catch(_){}
+        toast(stacked?'Image et texte l’un sous l’autre.':'Image et texte côte à côte.');
+    }
+    try{if(localStorage.getItem('genealogie-transcription-layout')==='stacked')document.documentElement.classList.add('transcription-stacked');}catch(_){}
+    // Bouton « ſ » (s long) à côté des cases de transcription
+    function addLongSButtons(root=document){
+        $$('#lightbox-transcription,[data-archive-transcription-form] textarea',root).forEach(area=>{
+            if(area.dataset.longS)return;area.dataset.longS='1';
+            const bar=document.createElement('div');bar.className='transcription-tools';
+            bar.innerHTML=`<button type="button" class="button small secondary" data-insert="ſ" title="Insérer le s long">ſ</button><button type="button" class="button small secondary" data-insert="[illisible]" title="${escapeHtml(comboLabel(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='tr_illegible'))))}">[illisible]</button><button type="button" class="button small secondary" data-insert="[?]" title="${escapeHtml(comboLabel(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='tr_uncertain'))))}">[?]</button>`;
+            area.before(bar);
+            $$('[data-insert]',bar).forEach(b=>b.addEventListener('mousedown',e=>e.preventDefault()));
+            $$('[data-insert]',bar).forEach(b=>b.addEventListener('click',()=>{area.focus();const t=b.dataset.insert;if(t==='ſ'){const s=area.selectionStart,e=area.selectionEnd;area.setRangeText('ſ',s,e,'end');area.dispatchEvent(new Event('input',{bubbles:true}));}else insertInTranscription(t);}));
+        });
+    }
+    new MutationObserver(()=>addLongSButtons()).observe(document.body,{childList:true,subtree:true});
+    addLongSButtons();
+
+    // Battue : la commune « choisie » = la dernière sur laquelle on a cliqué (ou survolée au clavier)
+    function battueActiveCard(){return $('.battue-commune.is-key-commune')||null;}
+    document.addEventListener('click',event=>{const card=event.target.closest?.('[data-battue-commune-card]');if(!card)return;$$('.battue-commune.is-key-commune').forEach(c=>c.classList.remove('is-key-commune'));card.classList.add('is-key-commune');});
+    function setBattueCommuneStatusByKey(status){
+        const card=battueActiveCard();if(!card)return toast('Clique d’abord sur une commune de la liste (ou N pour aller à la prochaine).');
+        const select=card.querySelector('[data-battue-commune-status]');if(!select)return;
+        if(![...select.options].some(o=>o.value===status))return;select.value=status;select.dispatchEvent(new Event('change',{bubbles:true}));
+    }
+    function moveBattueCursor(){
+        const cards=$$('[data-battue-commune-card]').filter(c=>c.offsetParent);if(!cards.length)return;
+        const from=cards.indexOf(battueActiveCard());
+        const ordered=[...cards.slice(from+1),...cards.slice(0,from+1)];
+        const next=ordered.find(c=>(c.querySelector('[data-battue-commune-status]')?.value||c.dataset.communeStatus)!=='done');
+        if(!next)return toast('Toutes les communes affichées sont terminées.');
+        $$('.battue-commune.is-key-commune').forEach(c=>c.classList.remove('is-key-commune'));next.classList.add('is-key-commune');next.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+
+    async function backupNow(){
+        const settings=autoBackupSettings();toast('Sauvegarde en cours…');
+        const result=await api('backup_sqlite',{}, {method:'POST',body:{dir:settings.dir,max_files:settings.maxFiles,mode:'manual'}});
+        toast(`Sauvegarde faite : ${result.file||'fichier créé'}.`);
+    }
+    async function undoLastChange(){
+        const c=await api('undo_candidate');
+        if(!c.available)return toast(c.summary?`Impossible d’annuler « ${c.summary} » : ${c.reason}`:c.reason,'error');
+        const when=c.created_at?new Date(c.created_at.replace(' ','T')+'Z').toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}):'';
+        if(!confirm(`Annuler la dernière modification ?\n\n« ${c.summary} »${when?`\n(${when})`:''}\n\n${c.mode==='restore'?'Ce qui a été supprimé sera remis.':'La fiche reprendra exactement son état d’avant cette modification.'}`))return;
+        const r=await api('undo_change',{},{method:'POST',body:{id:c.id}});
+        toast(`Annulé : ${r.result?.undone||c.summary}`);
+        if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);else setModule(state.module,false);
+    }
+
+    // Échap dans une fenêtre de saisie : demander avant de perdre ce qui a été tapé
+    document.addEventListener('input',event=>{const d=event.target.closest?.('dialog');if(d&&d.id!=='lightbox')d.dataset.dirty='1';},true);
+    document.addEventListener('change',event=>{const d=event.target.closest?.('dialog');if(d&&d.id!=='lightbox'&&!event.target.matches('[type="file"]'))d.dataset.dirty='1';},true);
+    const nativeShowModal=HTMLDialogElement.prototype.showModal;
+    HTMLDialogElement.prototype.showModal=function(...args){this.dataset.dirty='';return nativeShowModal.apply(this,args);};
+    document.addEventListener('submit',event=>{const d=event.target.closest?.('dialog');if(d)d.dataset.dirty='';},true);
+    document.addEventListener('cancel',event=>{const d=event.target;if(!(d instanceof HTMLDialogElement)||d.id==='lightbox'||d.dataset.dirty!=='1')return;if(!confirm('Fermer sans enregistrer ce que tu as tapé ?'))event.preventDefault();else d.dataset.dirty='';},true);
+
+    // Champs de date : « v », « av », « ap », « en » au début → proposer « vers », « avant », « après », « entre … et »
+    const DATE_FIELD_SELECTOR='input[name="date_text"],input[name="create_event_date"],input[name="date_alternative"]';
+    const DATE_WORDS=[['vers','vers '],['avant','avant '],['après','après '],['entre … et','entre  et ']];
+    function hideDateHints(){$('#date-hints')?.remove();}
+    document.addEventListener('input',event=>{
+        const input=event.target;if(!input.matches?.(DATE_FIELD_SELECTOR))return;hideDateHints();
+        const v=input.value.trim().toLowerCase();if(!v||v.length>4||/\d/.test(v))return;
+        const fold=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'');
+        const options=DATE_WORDS.filter(([label])=>fold(label).startsWith(fold(v))&&fold(label)!==fold(v));if(!options.length)return;
+        const box=document.createElement('div');box.id='date-hints';box.className='date-hints';
+        box.innerHTML=options.map(([label,text],i)=>`<button type="button" data-date-word="${escapeHtml(text)}" class="${i===0?'is-active':''}">${escapeHtml(label)}</button>`).join('')+'<small>Tab pour choisir</small>';
+        const r=input.getBoundingClientRect();box.style.left=`${r.left}px`;box.style.top=`${r.bottom+2}px`;
+        (input.closest('dialog')||document.body).append(box);
+        const choose=text=>{input.value=text;const pos=text.startsWith('entre')?6:text.length;input.focus();input.setSelectionRange(pos,pos);hideDateHints();input.dispatchEvent(new Event('change',{bubbles:true}));};
+        $$('[data-date-word]',box).forEach(b=>{b.addEventListener('mousedown',e=>e.preventDefault());b.addEventListener('click',()=>choose(b.dataset.dateWord));});
+        input._dateHintChoose=()=>choose($('.is-active',box).dataset.dateWord);
+    });
+    document.addEventListener('keydown',event=>{
+        const box=$('#date-hints');if(!box||!event.target.matches?.(DATE_FIELD_SELECTOR))return;
+        if(event.key==='Tab'||(event.key==='Enter'&&!event.metaKey&&!event.ctrlKey)){event.preventDefault();event.target._dateHintChoose?.();}
+        else if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();const list=$$('[data-date-word]',box);const i=list.findIndex(b=>b.classList.contains('is-active'));list[i]?.classList.remove('is-active');list[(i+(event.key==='ArrowDown'?1:-1)+list.length)%list.length].classList.add('is-active');}
+        else if(event.key==='Escape'){event.preventDefault();event.stopPropagation();hideDateHints();}
+    },true);
+    document.addEventListener('focusout',event=>{if(event.target.matches?.(DATE_FIELD_SELECTOR))setTimeout(hideDateHints,120);});
+
+    /* Aide (F1) et onglet Maintenance → Raccourcis */
+    function shortcutTableHtml(editable){
+        return SHORTCUT_GROUPS.map(([group,title])=>{const defs=SHORTCUT_DEFS.filter(d=>d.group===group);if(!defs.length)return '';
+            const extra=group==='windows'?`<tr class="shortcut-info"><td>Ouvrir une personne, une battue ou une enquête dans l’autre moitié de l’écran</td><td>${kbd(IS_MAC?'Mod+clic':'Mod+clic')}</td>${editable?'<td colspan="2"><small>Geste de la souris : non modifiable</small></td>':''}</tr><tr class="shortcut-info"><td>… dans une nouvelle fenêtre</td><td>${kbd('Mod+Shift+clic')}</td>${editable?'<td colspan="2"></td>':''}</tr>`
+                :group==='form'?`<tr class="shortcut-info"><td>Fermer sans enregistrer (avec une confirmation si tu as tapé quelque chose)</td><td>${kbd('Escape')}</td>${editable?'<td colspan="2"><small>Touche du système</small></td>':''}</tr><tr class="shortcut-info"><td>Dans un champ de date : taper « v », « av », « ap » ou « en » propose « vers », « avant », « après », « entre … et »</td><td>${kbd('Tab')}</td>${editable?'<td colspan="2"></td>':''}</tr>`:'';
+            return `<tbody class="shortcut-group"><tr><th colspan="${editable?4:2}">${escapeHtml(title)}</th></tr>${defs.map(def=>{const combo=shortcutFor(def),custom=combo!==shortcutDefault(def);
+                return `<tr data-shortcut-row="${def.id}"><td>${escapeHtml(def.label)}${!shortcutHasMod(combo)&&!shortcutIsFKey(combo)&&combo&&!['viewer','list','battue'].includes(def.ctx)?' <small class="cell-muted">(hors des cases de texte)</small>':''}</td><td>${kbd(combo)}${custom?' <small class="shortcut-custom">personnalisé</small>':''}</td>${editable?`<td><button type="button" class="button small secondary" data-shortcut-change="${def.id}">Changer</button></td><td>${custom?`<button type="button" class="button small secondary" data-shortcut-reset="${def.id}" title="Revenir à ${escapeHtml(comboLabel(shortcutDefault(def)))}">Réinitialiser</button>`:''}</td>`:''}</tr>`;}).join('')}${extra}</tbody>`;}).join('');
+    }
+    function openShortcutHelp(){
+        $('#shortcut-help')?.remove();
+        const dialog=document.createElement('dialog');dialog.id='shortcut-help';dialog.className='modal shortcut-help-dialog';
+        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">AIDE</span><h2>Raccourcis clavier</h2><p>${IS_MAC?'⌘ = touche Commande, ⌥ = Option, ⇧ = Majuscule.':'Ctrl = Contrôle, Maj = Majuscule.'} Les raccourcis sans ${IS_MAC?'⌘':'Ctrl'} ne marchent qu’en dehors des cases de texte.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div><div class="shortcut-help-body"><table class="data-table shortcut-table">${shortcutTableHtml(false)}</table></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-shortcut-customize>Personnaliser…</button><button class="button" type="button" data-close>Fermer</button></div>`;
+        document.body.append(dialog);
+        $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',()=>{dialog.close();dialog.remove();}));
+        $('[data-shortcut-customize]',dialog).addEventListener('click',()=>{dialog.close();dialog.remove();state.maintenanceTab='raccourcis';setModule('maintenance');});
+        dialog.addEventListener('close',()=>dialog.remove());dialog.showModal();
+    }
+    function shortcutPresets(){try{const v=JSON.parse(localStorage.getItem(SHORTCUT_PRESETS_KEY)||'[]');return Array.isArray(v)?v:[];}catch(_){return [];}}
+    function saveShortcutPresets(list){try{localStorage.setItem(SHORTCUT_PRESETS_KEY,JSON.stringify(list));}catch(_){}}
+    function renderShortcutSettings(token=++state.workspaceToken){
+        if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='raccourcis')return;
+        const presets=shortcutPresets(),customCount=Object.keys(shortcutOverrides()).length;
+        $('#workspace').innerHTML=`<section class="page shortcut-page"><header class="page-header"><div><span class="eyebrow">RACCOURCIS CLAVIER</span><h2>Raccourcis clavier</h2><p>Clique sur « Changer » puis appuie sur la nouvelle combinaison. Le logiciel te prévient si elle est déjà prise par ${IS_MAC?'macOS':SHORTCUT_PLATFORM==='win'?'Windows':'Linux'} ou par un autre raccourci. Ces réglages suivent ta base (comme l’apparence). La liste s’affiche aussi avec ${kbd(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='help')))}.</p></div><div class="page-actions"><button class="button secondary" type="button" id="shortcut-reset-all" ${customCount?'':'disabled'}>Tout réinitialiser</button></div></header>
+            <div class="maintenance-panel shortcut-presets"><h3>Mes réglages enregistrés</h3><p>Comme pour l’apparence : garde un jeu de raccourcis sous un nom, pour y revenir plus tard.</p><div class="shortcut-preset-save"><input id="shortcut-preset-name" placeholder="Nom du réglage (ex. Mes raccourcis)" maxlength="60"><button class="button small" type="button" id="shortcut-preset-save">Enregistrer le réglage actuel</button></div>${presets.length?`<ul class="shortcut-preset-list">${presets.map((p,i)=>`<li><strong>${escapeHtml(p.name)}</strong> <small>${Object.keys(p.map||{}).length} personnalisé(s)</small><button class="button small secondary" type="button" data-preset-apply="${i}">Appliquer</button><button class="button small secondary" type="button" data-preset-delete="${i}">Supprimer</button></li>`).join('')}</ul>`:'<p class="cell-muted">Aucun réglage enregistré.</p>'}</div>
+            <div class="data-table-wrap"><table class="data-table shortcut-table is-editable">${shortcutTableHtml(true)}</table></div></section>`;
+        $$('[data-shortcut-change]').forEach(button=>button.addEventListener('click',()=>captureShortcut(SHORTCUT_DEFS.find(d=>d.id===button.dataset.shortcutChange))));
+        $$('[data-shortcut-reset]').forEach(button=>button.addEventListener('click',()=>{const o=shortcutOverrides();delete o[button.dataset.shortcutReset];saveShortcutOverrides(o);renderShortcutSettings();}));
+        $('#shortcut-reset-all').addEventListener('click',()=>{if(!confirm('Revenir aux raccourcis d’origine pour tout ?'))return;saveShortcutOverrides({});renderShortcutSettings();toast('Raccourcis d’origine rétablis.');});
+        $('#shortcut-preset-save').addEventListener('click',()=>{const name=$('#shortcut-preset-name').value.trim();if(!name)return toast('Donne un nom au réglage.','error');const list=shortcutPresets().filter(p=>p.name!==name);list.push({name,map:shortcutOverrides(),saved_at:new Date().toISOString()});saveShortcutPresets(list);renderShortcutSettings();toast(`Réglage « ${name} » enregistré.`);});
+        $$('[data-preset-apply]').forEach(b=>b.addEventListener('click',()=>{const p=shortcutPresets()[Number(b.dataset.presetApply)];if(!p)return;saveShortcutOverrides({...(p.map||{})});renderShortcutSettings();toast(`Réglage « ${p.name} » appliqué.`);}));
+        $$('[data-preset-delete]').forEach(b=>b.addEventListener('click',()=>{const list=shortcutPresets();const p=list[Number(b.dataset.presetDelete)];if(!p||!confirm(`Supprimer le réglage « ${p.name} » ?`))return;list.splice(Number(b.dataset.presetDelete),1);saveShortcutPresets(list);renderShortcutSettings();}));
+    }
+    function captureShortcut(def){
+        if(!def)return;
+        const dialog=document.createElement('dialog');dialog.className='modal small-modal shortcut-capture';
+        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">NOUVEAU RACCOURCI</span><h2>${escapeHtml(def.label)}</h2><p>Appuie maintenant sur la combinaison voulue.<br>Échap : annuler · Retour arrière : aucun raccourci.</p></div></div><div class="shortcut-capture-key">${kbd(shortcutFor(def))}</div><div class="shortcut-capture-warning" aria-live="polite"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-cancel>Annuler</button><button class="button" type="button" data-ok disabled>Utiliser ce raccourci</button></div>`;
+        document.body.append(dialog);let combo=null;
+        const warn=$('.shortcut-capture-warning',dialog),ok=$('[data-ok]',dialog);
+        const done=()=>{shortcutCaptureHandler=null;dialog.close();dialog.remove();};
+        dialog.addEventListener('close',()=>{shortcutCaptureHandler=null;dialog.remove();});
+        $('[data-cancel]',dialog).addEventListener('click',done);
+        shortcutCaptureHandler=event=>{
+            if(event.target.closest?.('[data-cancel],[data-ok]')&&(event.key==='Enter'||event.key===' ')){event.target.click();return;}
+            if(event.key==='Escape'&&!event.metaKey&&!event.ctrlKey&&!event.altKey&&!event.shiftKey)return done();
+            if(event.key==='Backspace'&&!event.metaKey&&!event.ctrlKey&&!event.altKey){combo='';}
+            else{const c=eventCombo(event);if(!c)return;combo=c;}
+            $('.shortcut-capture-key',dialog).innerHTML=kbd(combo);
+            const notes=[];
+            const os=shortcutOsConflict(combo);if(os)notes.push(`<p class="is-danger">⚠️ Déjà pris par ${IS_MAC?'macOS':SHORTCUT_PLATFORM==='win'?'Windows':'Linux'} ou par le menu de l’application : « ${escapeHtml(os)} ». Il risque de ne pas marcher.</p>`);
+            const osNote=(OS_SHORTCUT_NOTES[SHORTCUT_PLATFORM]||{})[combo];if(osNote)notes.push(`<p>${escapeHtml(osNote)}</p>`);
+            const others=SHORTCUT_DEFS.filter(d=>d.id!==def.id&&combo&&shortcutFor(d)===combo&&(d.ctx===def.ctx||d.ctx==='global'||def.ctx==='global'||d.ctx==='any'||def.ctx==='any'));
+            if(others.length)notes.push(`<p class="is-danger">⚠️ Déjà utilisé ici pour « ${escapeHtml(others.map(d=>d.label).join(' », « '))} ». Si tu valides, ${others.length>1?'ces raccourcis seront retirés':'ce raccourci sera retiré'} de l’autre action.</p>`);
+            if(combo&&!shortcutHasMod(combo)&&!shortcutIsFKey(combo)&&!['viewer','list','battue'].includes(def.ctx))notes.push('<p>Sans ⌘/Ctrl, il ne marchera qu’en dehors des cases de texte.</p>'.replace('⌘/Ctrl',IS_MAC?'⌘':'Ctrl'));
+            if(combo&&!IS_MAC&&/^Alt\+[A-Z]$/.test(combo))notes.push('<p>Sous Windows, Alt + lettre peut aussi ouvrir un menu.</p>');
+            if(combo&&IS_MAC&&/^Alt\+(Shift\+)?[A-Z0-9]$/.test(combo))notes.push('<p>Sur Mac, ⌥ + lettre écrit un caractère spécial dans les cases de texte : ce raccourci ne marchera qu’en dehors des cases.</p>');
+            if(combo===''){notes.length=0;notes.push('<p>Cette action n’aura plus de raccourci.</p>');}
+            warn.innerHTML=notes.join('')||'<p class="is-ok">✓ Aucun conflit connu.</p>';
+            ok.disabled=false;
+            ok.onclick=()=>{const o=shortcutOverrides();others.forEach(d=>{o[d.id]='';});if(combo===shortcutDefault(def))delete o[def.id];else o[def.id]=combo;others.forEach(d=>{if(shortcutDefault(d)===''&&o[d.id]==='')delete o[d.id];});saveShortcutOverrides(o);done();renderShortcutSettings();toast(combo?`Nouveau raccourci : ${comboLabel(combo)}`:'Raccourci retiré.');};
+        };
+        dialog.showModal();
+    }
+    // Menu de l'application : raccourcis envoyés au démarrage (et après chaque changement)
+    setTimeout(publishShortcutsToMenu,1500);
     /** Ce qu'il faut pour rouvrir le même écran ailleurs (panneau à côté, fenêtre détachée). */
     function viewSnapshot(){
         return {module:state.module,currentPersonId:Number(state.currentPersonId)||0,currentBattueId:Number(state.currentBattueId)||0,currentInvestigationId:Number(state.currentInvestigationId)||0,
@@ -8233,6 +8697,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     async function renderMaintenance(token=++state.workspaceToken){
         if(state.maintenanceTab==='entretien')return renderUpkeep(token);
         if(state.maintenanceTab==='fusion')return renderMergeTool(token);
+        if(state.maintenanceTab==='raccourcis')return renderShortcutSettings(token);
         if(state.maintenanceTab==='issues')return renderIssues(token);if(state.maintenanceTab==='duplicates')return renderDuplicates(token);if(state.maintenanceTab==='branches')return renderBranches(token);if(state.maintenanceTab==='bulk')return renderBulk(token);if(state.maintenanceTab==='changes')return renderChanges(token);if(state.maintenanceTab==='repair'){state.maintenanceTab='import';return renderImportTools(token);}if(state.maintenanceTab==='export')return renderExportTools(token);if(state.maintenanceTab==='import')return renderImportTools(token);if(state.maintenanceTab==='safety')return renderDataSafetyTools(token);if(state.maintenanceTab==='labels')return renderLabelTools(token);if(state.maintenanceTab==='event_types')return renderEventTypes(token);if(state.maintenanceTab==='calendar_measures')return renderCalendarMeasureTools(token);if(state.maintenanceTab==='help')return renderHelpGlossary(token);if(state.maintenanceTab==='infos')return renderSoftwareInfos(token);return renderDesignTools(token);
     }
     async function renderIssues(token=++state.workspaceToken){const [data,ghosts]=await Promise.all([api('issues'),api('ghost_families').catch(()=>null)]);if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='issues')return;const n=v=>Number(v||0).toLocaleString('fr-FR');const ghostPanel=ghosts&&ghosts.total?`<section class="maintenance-panel"><h3>Familles sans conjoint : ${n(ghosts.total)}</h3><p>Des familles où aucun des deux conjoints n’est renseigné, souvent laissées par un ancien logiciel ou un import. Elles n’apparaissent dans aucun arbre et ne sont pas exportées en GEDCOM.</p>${ghosts.empty?`<p><b>${n(ghosts.empty)} famille(s) vide(s)</b> : ni enfant, ni événement, ni note, ni média, ni source. Elles ne contiennent aucune information et peuvent être supprimées (une copie de sécurité de la base est faite juste avant).</p><div class="page-actions"><button class="button" type="button" id="delete-empty-families">Supprimer les ${n(ghosts.empty)} familles vides</button></div>`:''}${ghosts.with_content_count?`<p style="margin-top:1rem"><b>${n(ghosts.with_content_count)} famille(s) avec des informations</b> (mariage, enfants…) mais sans conjoint : à compléter à la main, elles ne sont jamais supprimées automatiquement.</p><div class="issue-list">${ghosts.with_content.slice(0,200).map(g=>`<article class="issue warning"><span class="issue-mark">?</span><div><h3>Famille n°${g.id}</h3><p>${escapeHtml(g.events||'Aucun événement')}${g.children.length?` · enfant(s) : ${g.children.map(c=>escapeHtml(c.name)).join(', ')}`:''}${g.notes?` · ${g.notes} note(s)`:''}</p></div><div class="page-actions">${g.children.length?`<button class="button small secondary" data-open-person="${g.children[0].id}">Voir l’enfant</button>`:''}</div></article>`).join('')}</div>${ghosts.with_content_count>200?`<p class="muted">… et ${n(ghosts.with_content_count-200)} autre(s).</p>`:''}`:''}</section>`:'';$('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">ASSISTANT DE COHÉRENCE AVANCÉE</span><h2>${data.issues.length} alertes à vérifier</h2><p>Dates impossibles, longévités extrêmes, âges parentaux improbables, événements après décès et fratries suspectes. Une exception ignorée n’est pas supprimée : elle est documentée.</p></div></header>${ghostPanel}<div class="issue-list">${data.issues.length?data.issues.map(issue=>`<article class="issue ${issue.severity}"><span class="issue-mark">!</span><div><h3>${escapeHtml(issue.title)}</h3><p>${escapeHtml(issue.detail)}</p></div><div class="page-actions"><button class="button small secondary" data-open-person="${issue.person_id}">Voir</button><button class="button small" data-dismiss-issue="${escapeHtml(issue.key)}">Ce n’est pas une incohérence</button></div></article>`).join(''):empty('Aucune incohérence active.')}</div></section>`;bindTableLinks();$('#delete-empty-families')?.addEventListener('click',async event=>{if(!confirm(`Supprimer les ${n(ghosts.empty)} familles vides ?\n\nElles ne contiennent aucune information (ni conjoint, ni enfant, ni événement, ni note, ni média, ni source). Une copie de sécurité de la base est faite juste avant.`))return;event.currentTarget.disabled=true;try{const r=await api('delete_empty_families',{}, {method:'POST',body:{}});toast(`${n(r.deleted)} famille(s) vide(s) supprimée(s). Copie de sécurité : ${r.backup}`);}catch(error){toast(error.message,'error');}await renderIssues();});$$('[data-dismiss-issue]').forEach(button=>button.addEventListener('click',async()=>{await api('dismiss_issue',{}, {method:'POST',body:{key:button.dataset.dismissIssue,reason:'Vérifié manuellement : faux positif'}});toast('Exception mémorisée.');await renderIssues();}));}
@@ -9867,7 +10332,8 @@ ${backupSectionHtml()}
         $('#lightbox-signatures-visible-toggle')?.addEventListener('change',event=>{state.lightboxTagsVisible=event.target.checked;syncTagVisibilityToggles(state.lightboxTagsVisible);renderMediaTagOverlays();});
         $('#lightbox').addEventListener('click',event=>{if(event.target===$('#lightbox'))$('#lightbox').close();});
         bindLightboxZoom();
-        document.addEventListener('keydown',event=>{if(!$('#lightbox').open||event.target.matches('textarea,input,select'))return;if(event.key==='ArrowLeft'){event.preventDefault();moveLightbox(-1);}if(event.key==='ArrowRight'){event.preventDefault();moveLightbox(1);}if(event.key==='Escape')$('#lightbox').close();});
+        // Flèches, R, +/−, J/L… : voir les raccourcis clavier (SHORTCUT_DEFS, contexte « viewer »)
+        document.addEventListener('keydown',event=>{if(!$('#lightbox').open||event.target.matches('textarea,input,select'))return;if(event.key==='Escape')$('#lightbox').close();});
     }
 
     function openPersonDialog(detail){const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));try{const d=JSON.parse(localStorage.getItem('genealogie-design')||'{}');if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);

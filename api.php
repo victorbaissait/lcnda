@@ -230,6 +230,7 @@ try {
         'battue_detail' => battue_detail($pdo, safe_int($_GET['id'] ?? 0)),
         'changes' => changes_data($pdo),
         'person_history' => person_history_data($pdo),
+        'undo_candidate' => json_response(undo_candidate($pdo)),
         'export_csv' => export_csv($pdo),
         'export_csv_global' => export_csv_global($pdo),
         'export_gedcom' => export_gedcom($pdo),
@@ -8631,6 +8632,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
         $result = match ($action) {
             'save_person' => save_person($pdo,$data),
             'set_person_lock' => set_person_lock($pdo,$data),
+            'set_person_bookmark' => set_person_bookmark($pdo,$data),
+            'undo_change' => undo_change($pdo,$data),
             'bulk_lock_people' => bulk_lock_people($pdo,$data),
             'delete_person' => delete_person($pdo,$data),
             'add_variant' => add_variant($pdo,$data),

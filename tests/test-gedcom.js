@@ -6,7 +6,8 @@ process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '
  * Passe par la vraie application (PHP + envoi du fichier comme l'interface), sur des dossiers temporaires.
  *  1. import de tests/fixtures/complet.ged (pièges d'Hérédis : notes RTF, lieux en 6 morceaux, MAP, _FIL…) ;
  *  2. export GEDCOM 5.5.1 puis réimport dans une base neuve : rien ne doit se perdre ;
- *  3. idem en GEDCOM 7 ; 4. export « pour partager » ; 5. fusion de l'arbre d'un cousin.
+ *  3. idem en GEDCOM 7 ; 4. export « pour partager » ; 5. fusion de l'arbre d'un cousin ;
+ *  6. favori et annulation de la dernière modification (raccourcis ⌘D et ⌘Z).
  */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -228,6 +229,38 @@ function checkContent(db, mediaDir, label) {
     assert.equal(one(db, 'SELECT count(*) n FROM families').n, 1, 'pas de famille en double');
     assert.equal(one(db, "SELECT count(*) n FROM notes WHERE body LIKE 'Note du cousin%'").n, 1, 'note ajoutée une seule fois');
     assert.equal(one(db, "SELECT count(*) n FROM label_links l JOIN labels b ON b.id=l.label_id WHERE b.name='Fusion : Arbre de Paul'").n, 3, 'étiquette sur Émile (complété), Jeanne et l’homonyme');
+  });
+
+  // Pas du GEDCOM, mais la même base sert : ce dont les raccourcis clavier ont besoin côté serveur
+  await step('raccourcis : favori (⌘D) et annulation de la dernière modification (⌘Z)', async () => {
+    const dir = path.join(tmp, 'M'); const db = path.join(dir, 'genealogy.sqlite');
+    const emile = one(db, "SELECT * FROM persons WHERE first_name='Émile' AND last_name='MARTIN' ORDER BY id LIMIT 1");
+    await withServer(dir, path.join(tmp, 'media-m'), async (s) => {
+      const base = `http://127.0.0.1:${s.port}`;
+      const boot = await fetch(base + '/api.php?action=bootstrap', { headers: { 'x-carnet-secret': s.secret } });
+      const cookie = (boot.headers.get('set-cookie') || '').split(';')[0];
+      const csrf = (await boot.json()).csrf;
+      const call = async (action, body) => {
+        const r = await fetch(base + '/api.php?action=' + action, body ? { method: 'POST', headers: { 'x-carnet-secret': s.secret, 'X-CSRF-Token': csrf, cookie, 'Content-Type': 'application/json' }, body: JSON.stringify({ csrf, ...body }) } : { headers: { 'x-carnet-secret': s.secret, cookie } });
+        const d = await r.json(); if (!r.ok || d.error) throw new Error(action + ' : ' + (d.error || r.status)); return d;
+      };
+      await call('set_person_bookmark', { person_id: emile.id, bookmarked: 1 });
+      assert.equal(one(db, `SELECT is_bookmarked b FROM persons WHERE id=${emile.id}`).b, 1, 'favori');
+      await call('save_person', { ...emile, occupation: 'Tonnelier' });
+      assert.equal(one(db, `SELECT occupation o FROM persons WHERE id=${emile.id}`).o, 'Tonnelier');
+      const c = await call('undo_candidate');
+      assert.ok(c.available && c.mode === 'revert' && c.summary.includes('Émile'), 'la modification est proposée à l’annulation : ' + JSON.stringify(c));
+      await call('undo_change', { id: c.id });
+      assert.equal(one(db, `SELECT occupation o FROM persons WHERE id=${emile.id}`).o || '', emile.occupation || '', 'métier d’avant remis');
+      // Modifiée « par ailleurs » depuis : refus, rien n'est touché
+      await call('save_person', { ...emile, occupation: 'Charron' });
+      const code = `$d=new PDO('sqlite:'.$argv[1]);$d->exec("UPDATE persons SET occupation='Autre chose' WHERE id=${emile.id}");`;
+      spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code, db]);
+      const c2 = await call('undo_candidate');
+      assert.equal(c2.available, false, 'fiche retouchée depuis : pas d’annulation automatique');
+      await assert.rejects(call('undo_change', { id: c2.id }));
+      assert.equal(one(db, `SELECT occupation o FROM persons WHERE id=${emile.id}`).o, 'Autre chose');
+    });
   });
 
   fs.rmSync(tmp, { recursive: true, force: true });

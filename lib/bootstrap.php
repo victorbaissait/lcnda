@@ -10,7 +10,8 @@ require_once __DIR__ . '/research.php';
 require_once __DIR__ . '/saints.php';     // prénom et saint du jour
 require_once __DIR__ . '/collections.php';
 require_once __DIR__ . '/offline_map.php';
-require_once __DIR__ . '/merge.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues
+require_once __DIR__ . '/merge.php';
+require_once __DIR__ . '/shortcuts.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues
 require_once __DIR__ . '/settings.php';   // réglages de l'interface rangés dans la base  // ensure_reference_data() : communes françaises livrées avec l'app
 
 // Aucun avertissement PHP ne doit s'afficher dans une réponse : il s'ajouterait au JSON et l'interface

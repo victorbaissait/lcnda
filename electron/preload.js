@@ -17,5 +17,7 @@ contextBridge.exposeInMainWorld('lcnda', {
   /** Commandes du menu de l'application (« quick-search », « open-reminders ») ; la page ne reçoit que leur nom. */
   /** Recalcule le chiffre des rappels sur l'icône (après une modification). */
   refreshReminders: () => ipcRenderer.send('lcnda:refresh-reminders'),
+  /** Raccourcis clavier choisis dans l'application, pour les afficher dans le menu ({id: {combo, label, register}}). */
+  setShortcuts: (items) => ipcRenderer.send('lcnda:set-shortcuts', items && typeof items === 'object' ? JSON.parse(JSON.stringify(items)) : {}),
   onCommand: (callback) => ipcRenderer.on('lcnda:command', (_event, command) => callback(String(command || ''))),
 });

@@ -62,14 +62,50 @@ async function fatal(title, message) {
   app.exit(1);
 }
 
+/**
+ * Raccourcis clavier choisis dans l'application (Maintenance → Raccourcis) : la page les envoie au démarrage et après
+ * chaque changement ; le menu est refait pour les afficher. Un clic sur l'élément du menu (ou sa touche) renvoie la
+ * commande « shortcut:<id> » à la fenêtre active, qui applique les mêmes règles que la touche lue dans la page.
+ */
+let menuPaths = null;
+let shortcutItems = {};
+const ACCEL_KEYS = { ArrowLeft: 'Left', ArrowRight: 'Right', ArrowUp: 'Up', ArrowDown: 'Down', Enter: 'Return', Escape: 'Esc', '+': 'Plus' };
+function toAccelerator(combo) {
+  if (!combo || typeof combo !== 'string' || combo.length > 40) return '';
+  const raw = combo === '+' ? ['+'] : combo.endsWith('++') ? [...combo.slice(0, -2).split('+').filter(Boolean), '+'] : combo.split('+');
+  const key = raw.pop();
+  const mods = raw.map((m) => ({ Mod: 'CmdOrCtrl', Ctrl: 'Ctrl', Alt: 'Alt', Shift: 'Shift', Meta: 'Super' }[m]));
+  if (mods.some((m) => !m)) return '';
+  const k = ACCEL_KEYS[key] || key;
+  if (!/^([A-Z0-9]|F[1-9]|F1[0-9]|F2[0-4]|Left|Right|Up|Down|Return|Esc|Space|Tab|Backspace|Delete|Plus|[,\-=.;/`])$/.test(k)) return '';
+  return [...mods, k].join('+');
+}
+function sendShortcut(id) {
+  const target = BrowserWindow.getFocusedWindow() || win;
+  if (!target || !server) return;
+  target.webContents.send('lcnda:command', 'shortcut:' + id);
+}
 function buildMenu(p) {
+  if (p) menuPaths = p; else p = menuPaths;
   const isMac = process.platform === 'darwin';
   const open = (dir) => () => { fs.mkdirSync(dir, { recursive: true }); shell.openPath(dir); };
+  /** Élément de menu d'un raccourci de l'application. */
+  const sk = (id, label) => {
+    const item = shortcutItems[id] || {};
+    const accel = toAccelerator(item.combo);
+    const entry = { label: item.label || label, click: () => sendShortcut(id) };
+    if (accel && item.register) entry.accelerator = accel;
+    // Raccourci affiché sans être « pris » par le menu (lettre seule, ⌘← dans une case de texte…) : Windows et Linux
+    else if (accel && !isMac) { entry.accelerator = accel; entry.registerAccelerator = false; }
+    return entry;
+  };
+  const go = Array.from({ length: 9 }, (_, i) => shortcutItems[`go_${i + 1}`]?.label ? sk(`go_${i + 1}`, '') : null).filter(Boolean);
   const template = [
     ...(isMac ? [{
       label: 'LCNDA',
       submenu: [
         { role: 'about', label: 'À propos de LCNDA' }, { type: 'separator' },
+        sk('settings', 'Réglages…'), { type: 'separator' },
         { role: 'hide', label: 'Masquer LCNDA' }, { role: 'hideOthers', label: 'Masquer les autres' },
         { role: 'unhide', label: 'Tout afficher' }, { type: 'separator' },
         { role: 'quit', label: 'Quitter LCNDA' },
@@ -78,11 +114,13 @@ function buildMenu(p) {
     {
       label: 'Fichier',
       submenu: [
+        sk('new_window', 'Nouvelle fenêtre'), sk('new_person', 'Nouvelle personne…'), { type: 'separator' },
+        sk('quick_search', 'Recherche rapide…'), sk('find', 'Chercher dans l’écran…'), { type: 'separator' },
+        sk('backup_now', 'Sauvegarder maintenant'), sk('print', 'Imprimer…'), { type: 'separator' },
+        ...(isMac ? [] : [sk('settings', 'Réglages (Apparence)'), { type: 'separator' }]),
         { label: 'Ouvrir le dossier des données', click: open(p.dataDir) },
         { label: 'Ouvrir le dossier des médias', click: open(p.mediaDir) },
         { label: 'Afficher le journal technique (PHP)', click: () => shell.showItemInFolder(p.logFile) },
-        { type: 'separator' },
-        { label: 'Recherche rapide…', accelerator: 'CmdOrCtrl+K', click: () => sendToPage('quick-search') },
         {
           label: 'Notifications des rappels', type: 'checkbox', checked: readConfig(p.configFile).reminderNotifications !== false,
           click: (item) => { writeConfig(p.configFile, { ...readConfig(p.configFile), reminderNotifications: item.checked }); checkReminders(); },
@@ -94,18 +132,40 @@ function buildMenu(p) {
     {
       label: 'Édition',
       submenu: [
-        { role: 'undo', label: 'Annuler' }, { role: 'redo', label: 'Rétablir' }, { type: 'separator' },
+        // Mac : Annuler / Rétablir passent par la page (dans une case de texte : annuler la frappe ; ailleurs : annuler la
+        // dernière modification d'une fiche grâce au journal, avec confirmation). Windows / Linux : comportement standard.
+        ...(isMac
+          ? [{ label: 'Annuler', accelerator: 'Cmd+Z', click: () => sendShortcut('edit_undo') }, { label: 'Rétablir', accelerator: 'Shift+Cmd+Z', click: () => sendShortcut('edit_redo') }]
+          : [{ role: 'undo', label: 'Annuler' }, { role: 'redo', label: 'Rétablir' }]),
+        { type: 'separator' },
         { role: 'cut', label: 'Couper' }, { role: 'copy', label: 'Copier' }, { role: 'paste', label: 'Coller' },
         { role: 'selectAll', label: 'Tout sélectionner' },
+        ...(isMac ? [] : [{ type: 'separator' }, { label: 'Annuler la dernière modification d’une fiche…', click: () => sendShortcut('undo') }]),
       ],
     },
     {
       label: 'Affichage',
       submenu: [
+        sk('split', 'Diviser l’écran en deux'), sk('split_orientation', 'Écran divisé : côte à côte / haut et bas'), sk('switch_half', 'Passer à l’autre moitié de l’écran'), { type: 'separator' },
         { role: 'reload', label: 'Recharger' }, { role: 'forceReload', label: 'Forcer le rechargement' }, { type: 'separator' },
         { role: 'resetZoom', label: 'Taille réelle' }, { role: 'zoomIn', label: 'Zoom avant' }, { role: 'zoomOut', label: 'Zoom arrière' }, { type: 'separator' },
         { role: 'togglefullscreen', label: 'Plein écran' },
         ...(app.isPackaged ? [] : [{ type: 'separator' }, { role: 'toggleDevTools', label: 'Outils de développement' }]),
+      ],
+    },
+    {
+      label: 'Aller',
+      submenu: [
+        sk('back', 'Écran précédent'), sk('forward', 'Écran suivant'), { type: 'separator' },
+        ...go, ...(go.length ? [{ type: 'separator' }] : []),
+        sk('go_root', 'De cujus (personne de départ)'),
+      ],
+    },
+    {
+      label: 'Fiche',
+      submenu: [
+        sk('edit_person', 'Modifier la fiche'), sk('bookmark', 'Ajouter aux favoris / retirer'), sk('copy_ref', 'Copier la référence'), { type: 'separator' },
+        sk('add_event', 'Ajouter un événement…'), sk('add_media', 'Ajouter un média…'), sk('add_source', 'Ajouter une source…'), sk('add_reminder', 'Créer un rappel…'),
       ],
     },
     {
@@ -116,8 +176,17 @@ function buildMenu(p) {
         { role: 'close', label: 'Fermer la fenêtre' },
       ],
     },
+    {
+      role: 'help',
+      label: 'Aide',
+      submenu: [
+        sk('help', 'Raccourcis clavier'),
+        { label: 'Personnaliser les raccourcis…', click: () => sendShortcut('customize_shortcuts') },
+      ],
+    },
   ];
-  Menu.setApplicationMenu(Menu.buildFromTemplate(template));
+  try { Menu.setApplicationMenu(Menu.buildFromTemplate(template)); }
+  catch (error) { console.error('Menu :', error.message); shortcutItems = {}; if (template.length) Menu.setApplicationMenu(Menu.buildFromTemplate(template.map((m) => ({ ...m, submenu: (m.submenu || []).map(({ accelerator, registerAccelerator, ...rest }) => rest) })))); }
 }
 
 function createWindow() {
@@ -184,6 +253,18 @@ const chosenFiles = new Map();
 function fromApp(event) {
   return Boolean(server && win && event.sender === win.webContents && String(event.senderFrame?.url || '').startsWith(server.origin));
 }
+/** Raccourcis envoyés par une fenêtre de l'application (principale ou détachée) : seulement des noms et des touches. */
+ipcMain.on('lcnda:set-shortcuts', (event, items) => {
+  const fromWindow = server && BrowserWindow.getAllWindows().some((w) => w.webContents === event.sender) && String(event.senderFrame?.url || '').startsWith(server.origin);
+  if (!fromWindow || !items || typeof items !== 'object') return;
+  const clean = {};
+  for (const [id, item] of Object.entries(items).slice(0, 100)) {
+    if (!/^[a-z0-9_]{1,40}$/.test(id) || !item || typeof item !== 'object') continue;
+    clean[id] = { combo: typeof item.combo === 'string' ? item.combo.slice(0, 40) : '', label: typeof item.label === 'string' ? item.label.slice(0, 60) : '', register: item.register === true };
+  }
+  shortcutItems = clean;
+  buildMenu();
+});
 ipcMain.handle('lcnda:choose-import-file', async (event) => {
   if (!fromApp(event)) return { canceled: true };
   const result = await dialog.showOpenDialog(win, {
@@ -378,6 +459,8 @@ async function selfTest(outFile) {
     report.imageLoad = await win.webContents.executeJavaScript(
       `new Promise((res) => { const i = new Image(); i.onload = () => res('ok ' + i.naturalWidth + 'x' + i.naturalHeight); i.onerror = () => res('ERREUR'); i.src = 'media/${firstMedia}'; })`);
   }
+  // Menu avec les raccourcis envoyés par la page (Maintenance → Raccourcis)
+  report.menu = (Menu.getApplicationMenu()?.items || []).map((m) => ({ label: m.label, items: (m.submenu?.items || []).filter((i) => i.type !== 'separator').map((i) => i.label + (i.accelerator ? ' [' + i.accelerator + (i.registerAccelerator === false ? ' affiché' : '') + ']' : '')) }));
   const image = await win.webContents.capturePage();
   fs.writeFileSync(outFile, image.toPNG());
   fs.writeFileSync(outFile + '.json', JSON.stringify(report, null, 2));
