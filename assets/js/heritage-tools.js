@@ -20,7 +20,17 @@
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
-    const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
+    const isCurrent = token => token === S().workspaceToken && ['listes', 'maintenance'].includes(S().module);
+    /** Redessine l'écran ouvert (une liste, ou un onglet de Maintenance). */
+    const rerender = () => S().module === 'maintenance' ? A().renderMaintenance() : rerender();
+    ext.maintenance = ext.maintenance || {};
+    document.addEventListener('click', event => {
+        const b = event.target.closest?.('[data-h-open-maint]');
+        if (!b) return;
+        event.preventDefault();
+        S().maintenanceTab = b.dataset.hOpenMaint;
+        A().setModule('maintenance');
+    });
     const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
     const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
     const fold = text => String(text || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[’']/g, "'");
@@ -207,7 +217,7 @@
             const r = await api('scan_inbox_run', {}, {method: 'POST', body: {}});
             if (r.imported?.length) {
                 toast(`📥 ${plural(r.imported.length, 'fichier arrivé', 'fichiers arrivés')} par le dossier Scans : à identifier dans les médias.`);
-                if (S().module === 'listes' && S().listType === 'scan_inbox') A().renderList();
+                if (S().module === 'maintenance' && S().maintenanceTab === 'scan_inbox') rerender();
             }
             (r.skipped || []).slice(0, 3).forEach(s => toast(`${s.name} : ${s.reason}`, 'error'));
         } catch (_) {} finally { scanBusy = false; }
@@ -220,11 +230,11 @@
     setTimeout(loadScanState, 2500);
     document.addEventListener('visibilitychange', () => { if (!document.hidden) scanTick(); });
 
-    ext.lists.scan_inbox = async token => {
+    ext.maintenance.scan_inbox = async token => {
         const s = await api('scan_inbox_status');
         if (!isCurrent(token)) return;
         scanState = s;
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Dossier « Scans » surveillé', 'Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une.')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Dossier « Scans » surveillé', 'Choisis un dossier sur ton ordinateur. Chaque fichier qui y arrive (depuis le scanner, le téléphone ou AirDrop) entre tout seul dans l’app, dans les médias à identifier. Plus besoin d’importer tes photos d’archives une par une.')}
             <form class="maintenance-panel" id="h-scan-form"><div class="form-grid"><label class="span-2">Dossier surveillé<input name="dir" value="${esc(s.dir)}" placeholder="~/Documents/Scans généalogie" list="h-scan-suggest"><datalist id="h-scan-suggest"><option value="~/Documents/Scans généalogie"><option value="~/Desktop/Scans"><option value="~/Downloads"><option value="~/Library/Mobile Documents/com~apple~CloudDocs/Scans"></datalist></label>
                 <label class="checkbox-line"><input type="checkbox" name="enabled" ${s.enabled ? 'checked' : ''}> Surveiller ce dossier (toutes les 20 secondes, tant que l’app est ouverte)</label>
                 <label class="checkbox-line"><input type="checkbox" name="move_imported" ${s.move_imported ? 'checked' : ''}> Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA »</label></div>
@@ -234,14 +244,14 @@
         const form = A().$('#h-scan-form');
         form.addEventListener('submit', async event => {
             event.preventDefault();
-            try { await api('save_scan_inbox_settings', {}, {method: 'POST', body: {dir: form.dir.value, enabled: form.enabled.checked, move_imported: form.move_imported.checked}}); toast(form.enabled.checked ? 'Dossier surveillé.' : 'Réglages enregistrés.'); await loadScanState(); A().renderList(); }
+            try { await api('save_scan_inbox_settings', {}, {method: 'POST', body: {dir: form.dir.value, enabled: form.enabled.checked, move_imported: form.move_imported.checked}}); toast(form.enabled.checked ? 'Dossier surveillé.' : 'Réglages enregistrés.'); await loadScanState(); rerender(); }
             catch (error) { toast(error.message, 'error'); }
         });
-        A().$('[data-h-scan-now]')?.addEventListener('click', async () => { const before = scanState?.enabled; scanState = {...scanState, enabled: true}; await scanTick(); scanState.enabled = before; A().renderList(); });
+        A().$('[data-h-scan-now]')?.addEventListener('click', async () => { const before = scanState?.enabled; scanState = {...scanState, enabled: true}; await scanTick(); scanState.enabled = before; rerender(); });
         A().$('[data-h-scan-identify]')?.addEventListener('click', () => { S().listType = 'media'; A().setModule('listes'); });
     };
-    ext.dashboard.scan_inbox_widget = {load: () => api('scan_inbox_status'), render: (index, widget, span, s) => card(index, 'Dossier Scans', s?.total || '', !s?.dir ? `${empty('Aucun dossier surveillé.')}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-list="scan_inbox">Choisir un dossier</button></div>`
-        : `<p>${s.enabled ? '📥 Surveillé' : '⏸ Pas surveillé'} : <code>${esc(s.dir)}</code>${s.pending ? ` · ${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : ''}</p>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.slice(0, 6).map(r => `<span class="collection-media-item">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div>` : ''}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-list="scan_inbox">Réglages</button></div>`, span)};
+    ext.dashboard.scan_inbox_widget = {load: () => api('scan_inbox_status'), render: (index, widget, span, s) => card(index, 'Dossier Scans', s?.total || '', !s?.dir ? `${empty('Aucun dossier surveillé.')}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Choisir un dossier</button></div>`
+        : `<p>${s.enabled ? '📥 Surveillé' : '⏸ Pas surveillé'} : <code>${esc(s.dir)}</code>${s.pending ? ` · ${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : ''}</p>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.slice(0, 6).map(r => `<span class="collection-media-item">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div>` : ''}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Réglages</button></div>`, span)};
 
     /* ═══════════════════════ ⛪ PAROISSES D'ANCIEN RÉGIME ═══════════════════════ */
 
@@ -293,22 +303,22 @@
                 <div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-parish-cancel>Annuler</button>${e.id ? '<button class="button secondary danger" type="button" data-h-parish-delete>Supprimer</button>' : ''}</div></form>` : ''}
             ${rows.length ? `<table class="data-table"><thead><tr><th>Lieu</th><th>Avant</th><th>Paroisse</th><th>Événements concernés</th><th>Note</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.place_name || r.place_text)}</strong>${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), 'événement', 'événements') : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ce rattachement', `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', 'Supprimer ce rattachement', `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table>` : (e ? '' : empty('Aucun rattachement. Ajoute le premier avec « + Rattachement ».'))}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('#h-parish-q').addEventListener('change', ev => { S().hParishQ = ev.target.value.trim(); A().renderList(); });
+        ws.querySelector('#h-parish-q').addEventListener('change', ev => { S().hParishQ = ev.target.value.trim(); rerender(); });
         ws.querySelector('[data-h-parish-new]').addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: 0}));
-        ws.querySelectorAll('[data-h-parish-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer ce rattachement ?')) return; await api('delete_parish', {}, {method: 'POST', body: {id: b.dataset.hParishDel}}); await loadParishMap(); A().renderList(); }));
+        ws.querySelectorAll('[data-h-parish-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer ce rattachement ?')) return; await api('delete_parish', {}, {method: 'POST', body: {id: b.dataset.hParishDel}}); await loadParishMap(); rerender(); }));
         ws.querySelectorAll('[data-h-parish-edit]').forEach(b => b.addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: Number(b.dataset.hParishEdit)})));
         const form = ws.querySelector('#h-parish-form');
         if (!form) return;
         if (e.place_id) form.querySelector('[name=place_id]').value = e.place_id;
         if (e.parish_place_id) form.querySelector('[name=parish_place_id]').value = e.parish_place_id;
-        form.querySelector('[data-h-parish-cancel]').addEventListener('click', () => A().renderList());
-        form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!confirm('Supprimer ce rattachement ?')) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); A().renderList(); });
+        form.querySelector('[data-h-parish-cancel]').addEventListener('click', () => rerender());
+        form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!confirm('Supprimer ce rattachement ?')) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); rerender(); });
         form.addEventListener('submit', async ev => {
             ev.preventDefault();
             const v = A().formObject(form);
             try {
                 await api('save_parish', {}, {method: 'POST', body: {...v, id: e.id, place_text: form.querySelector('[data-h-pp=place_id]').value, parish_name: v.parish_name || (Number(v.parish_place_id) ? '' : form.querySelector('[data-h-pp=parish_place_id]').value)}});
-                toast('Rattachement enregistré.'); await loadParishMap(); A().renderList();
+                toast('Rattachement enregistré.'); await loadParishMap(); rerender();
             } catch (error) { toast(error.message, 'error'); }
         });
     };
@@ -341,14 +351,14 @@
             <div class="collection-toolbar">${tabs}<input type="search" id="h-cite-q" value="${esc(q)}" placeholder="${tab === 'index' ? 'Chercher un nom, un métier, un lieu…' : 'Chercher dans les transcriptions…'}"></div>${body}</section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
-        ws.querySelectorAll('[data-h-cite-tab]').forEach(b => b.addEventListener('click', () => { st.hCiteTab = b.dataset.hCiteTab; A().renderList(); }));
-        ws.querySelector('#h-cite-q').addEventListener('change', ev => { st.hCiteQ = ev.target.value.trim(); A().renderList(); });
+        ws.querySelectorAll('[data-h-cite-tab]').forEach(b => b.addEventListener('click', () => { st.hCiteTab = b.dataset.hCiteTab; rerender(); }));
+        ws.querySelector('#h-cite-q').addEventListener('change', ev => { st.hCiteQ = ev.target.value.trim(); rerender(); });
         ws.querySelectorAll('[data-h-cite-open]').forEach(b => b.addEventListener('click', () => ext.lists.cited_names(++st.workspaceToken, {media: Number(b.dataset.hCiteOpen)})));
-        ws.querySelectorAll('[data-h-cite-del]').forEach(b => b.addEventListener('click', async () => { await api('delete_cited_name', {}, {method: 'POST', body: {id: b.dataset.hCiteDel}}); A().renderList(); }));
+        ws.querySelectorAll('[data-h-cite-del]').forEach(b => b.addEventListener('click', async () => { await api('delete_cited_name', {}, {method: 'POST', body: {id: b.dataset.hCiteDel}}); rerender(); }));
     };
     async function renderTranscriptionMarking(token, mediaId) {
         let data;
-        try { data = await api('media_transcription', {id: mediaId}); } catch (error) { S().hCiteMedia = 0; toast(error.message, 'error'); return A().renderList(); }
+        try { data = await api('media_transcription', {id: mediaId}); } catch (error) { S().hCiteMedia = 0; toast(error.message, 'error'); return rerender(); }
         if (!isCurrent(token)) return;
         const m = data.media, roles = data.roles || [];
         const year = Number(String(m.date_text || '').match(/\b(1[0-9]{3})\b/)?.[1] || m.events?.[0]?.year || 0) || '';
@@ -414,24 +424,24 @@
     function journeysTable(alerts) {
         return `<table class="data-table h-journeys"><thead><tr><th>Fiche</th><th>D’abord</th><th>Puis</th><th>Écart</th></tr></thead><tbody>${alerts.map(a => `<tr><td>${a.person ? personLink(a.person.id, A().personName(a.person), A().years(a.person)) : '?'}</td><td>${journeyEvent(a.a)}</td><td>${journeyEvent(a.b)}</td><td><strong>${fmt(a.km)} km</strong> en ${a.days ? plural(a.days, 'jour', 'jours') : 'moins d’un jour'}<br><small class="muted">au plus ≈ ${fmt(a.speed_limit)} km par jour à cette époque</small></td></tr>`).join('')}</tbody></table>`;
     }
-    ext.lists.impossible_journeys = async token => {
+    ext.maintenance.journeys = async token => {
         const data = await api('impossible_journeys');
         if (!isCurrent(token)) return;
         const alerts = data.alerts || [];
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Voyages impossibles', 'Une même fiche se trouve à deux endroits trop éloignés en trop peu de temps (« parrain à Lille le 3 mars, témoin à Marseille le 4 mars 1790 ») : c’est le signe classique de deux homonymes confondus dans une seule fiche. Seuls les événements avec une date exacte et un lieu placé sur la carte sont comparés (y compris comme témoin).')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Voyages impossibles', 'Une même fiche se trouve à deux endroits trop éloignés en trop peu de temps (« parrain à Lille le 3 mars, témoin à Marseille le 4 mars 1790 ») : c’est le signe classique de deux homonymes confondus dans une seule fiche. Seuls les événements avec une date exacte et un lieu placé sur la carte sont comparés (y compris comme témoin).')}
             ${alerts.length ? `<p class="muted">${plural(alerts.length, 'alerte', 'alertes')}, les plus nettes d’abord.</p>${journeysTable(alerts)}` : empty('Aucun voyage impossible repéré.')}</section>`;
         A().bindTableLinks();
     };
     ext.dashboard.journeys_widget = {load: () => api('impossible_journeys'), render: (index, widget, span, data) => {
         const alerts = (data?.alerts || []).slice(0, 5);
-        return card(index, 'Voyages impossibles', (data?.alerts || []).length || '', alerts.length ? `${journeysTable(alerts)}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-list="impossible_journeys">Tout voir</button></div>` : empty('Aucun voyage impossible repéré.'), span);
+        return card(index, 'Voyages impossibles', (data?.alerts || []).length || '', alerts.length ? `${journeysTable(alerts)}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="journeys">Tout voir</button></div>` : empty('Aucun voyage impossible repéré.'), span);
     }};
 
     /* ═══════════════════════ 🤝 TRAVAIL À DEUX ═══════════════════════ */
 
     const opLabel = {create: 'Ajout', update: 'Modification', delete: 'Suppression'};
     const stateLabel = {new: 'nouveau', ok: 'à appliquer', conflict: '⚠ tu as aussi modifié', same: 'déjà identique', missing: 'absent chez toi'};
-    ext.lists.sync = async (token, preview = null) => {
+    ext.maintenance.sync = async (token, preview = null) => {
         const s = await api('sync_status');
         if (!isCurrent(token)) return;
         const intro = 'Toi et un cousin, chacun sur son ordinateur, sur la même généalogie. L’app échange des « paquets de modifications » : tu reçois les siens, tu acceptes ou refuses chaque changement. On ne partage jamais la base elle-même par iCloud ou Dropbox (risque de fichier abîmé).';
@@ -449,11 +459,11 @@
                 ${preview ? syncPreviewHtml(preview) : ''}
                 ${s.log?.length ? `<h3>Paquets échangés</h3><table class="data-table"><thead><tr><th>Date</th><th>Sens</th><th>De</th><th>Contenu</th></tr></thead><tbody>${s.log.map(l => `<tr><td>${esc(l.created_at)}</td><td>${l.direction === 'sent' ? '📤 envoyé' : '📥 reçu'}</td><td>${esc(l.author)}</td><td>${esc(l.summary)}${l.direction === 'received' ? ` <small>(${l.accepted_count}/${l.change_count} acceptés)</small>` : ''}</td></tr>`).join('')}</tbody></table>` : ''}`;
         }
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Travail à deux', intro)}${body}</section>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Travail à deux', intro)}${body}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('#h-sync-start')?.addEventListener('submit', async ev => { ev.preventDefault(); try { await api('sync_start', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin.'); A().renderList(); } catch (error) { toast(error.message, 'error'); } });
+        ws.querySelector('#h-sync-start')?.addEventListener('submit', async ev => { ev.preventDefault(); try { await api('sync_start', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Travail à deux commencé. Donne maintenant une copie de ta base à ton cousin.'); rerender(); } catch (error) { toast(error.message, 'error'); } });
         ws.querySelector('#h-sync-author')?.addEventListener('submit', async ev => { ev.preventDefault(); await api('sync_set_author', {}, {method: 'POST', body: {author: ev.currentTarget.author.value}}); toast('Enregistré.'); });
-        ws.querySelector('[data-h-sync-export]')?.addEventListener('click', () => { location.assign('api.php?action=sync_export'); setTimeout(() => A().renderList(), 2500); });
+        ws.querySelector('[data-h-sync-export]')?.addEventListener('click', () => { location.assign('api.php?action=sync_export'); setTimeout(() => rerender(), 2500); });
         ws.querySelector('#h-sync-receive')?.addEventListener('submit', async ev => {
             ev.preventDefault();
             const fd = new FormData(ev.currentTarget); fd.append('csrf', S().csrf);
@@ -461,7 +471,7 @@
                 const r = await fetch('api.php?action=sync_preview', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}});
                 const data = await r.json();
                 if (!r.ok || data.error) throw new Error(data.error || 'Paquet illisible');
-                ext.lists.sync(++S().workspaceToken, data);
+                ext.maintenance.sync(++S().workspaceToken, data);
             } catch (error) { toast(error.message, 'error'); }
         });
         const apply = ws.querySelector('#h-sync-apply');
@@ -476,7 +486,7 @@
                     const r = await api('sync_apply', {}, {method: 'POST', body: {token: preview.token, accepted}});
                     toast(`${plural(r.applied, 'changement appliqué', 'changements appliqués')}.`);
                     (r.errors || []).slice(0, 5).forEach(e => toast(e, 'error'));
-                    ext.lists.sync(++S().workspaceToken);
+                    ext.maintenance.sync(++S().workspaceToken);
                 } catch (error) { toast(error.message, 'error'); }
             });
         }
