@@ -329,3 +329,21 @@ fieldset.h-citation legend{font-weight:700;font-size:.85em;padding:0 .3rem}
 .h-be-icon-field .h-be-icons{flex-wrap:nowrap;gap:.5rem}
 .h-be-icon-field input.h-be-icon{width:5rem;flex:none;font-size:1.5rem;text-align:center}
 .h-be-display p.muted{font-size:.85em;margin:.4rem 0 0}
+/* Fiche d'un village */
+.h-village-stats{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;margin:.6rem 0 1rem}
+.h-village-stats strong{font-size:1.25em}
+.h-village-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:1rem;align-items:start;margin-bottom:1rem}
+.h-village-mapbox{grid-column:1/-1}
+.h-village-mapwrap{overflow:hidden;max-width:100%}
+.h-village-map{position:relative;overflow:hidden;max-width:100%;border:1px solid var(--muted);background:#eee}
+.h-village-map img{position:absolute;width:256px;height:256px;max-width:none}
+.h-village-pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);font-size:1.8rem;filter:drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+.h-tabs .spacer{flex:1}
+.h-bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.3rem}
+.h-bars li{display:grid;grid-template-columns:minmax(110px,1fr) 2fr auto;gap:.6rem;align-items:center}
+.h-bar{height:.8rem;background:rgba(128,128,128,.15)}
+.h-bar i{display:block;height:100%;background:#2b5d8a}
+.h-decades{display:flex;align-items:flex-end;gap:2px;overflow-x:auto;padding-bottom:.2rem}
+.h-decades span{display:flex;flex-direction:column;align-items:center;min-width:2.2rem}
+.h-decades i{display:block;width:70%;background:#2b5d8a}
+.h-decades small{font-size:.7em;writing-mode:vertical-rl;transform:rotate(180deg);margin-top:.2rem}

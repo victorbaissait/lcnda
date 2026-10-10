@@ -21,7 +21,8 @@
     "test:heritage": "node tests/test-heritage.js",
     "test:tools": "node tests/test-tools.js",
     "test:links": "node tests/test-links.js",
-    "test:more": "node tests/test-more.js"
+    "test:more": "node tests/test-more.js",
+    "test:village": "node tests/test-village.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

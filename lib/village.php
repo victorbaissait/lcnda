@@ -1,0 +1,209 @@
+<?php
+declare(strict_types=1);
+
+/**
+ * 🏘️ Fiche d'un village (Listes → Fiche d'un village, structure n°13) : pour une commune, les familles de la base qui
+ * y ont vécu, les métiers dominants, l'église et la paroisse, la population au fil des recensements, la carte de Cassini.
+ *
+ * Une « commune » regroupe tous les lieux de la base qui portent son code INSEE (hameaux compris) ; sans code, le nom
+ * et le département. Les notes (église, saint patron, populations relevées…) sont dans village_profiles.
+ */
+
+function village_key(array $place): string
+{
+    $code = trim((string) ($place['admin4_code'] ?? ''));
+    if ($code !== '') { return $code; }
+    return 'n:' . mb_strtolower(trim((string) ($place['name'] ?? ''))) . '|' . mb_strtolower(trim((string) ($place['county'] ?? '')));
+}
+
+/** Lieux de la base qui composent cette commune. */
+function village_place_ids(PDO $pdo, string $key): array
+{
+    if (str_starts_with($key, 'n:')) {
+        [$name, $county] = array_pad(explode('|', substr($key, 2), 2), 2, '');
+        $s = $pdo->prepare("SELECT id FROM places WHERE lower(trim(name))=? AND lower(trim(COALESCE(county,'')))=? AND COALESCE(admin4_code,'')=''");
+        $s->execute([$name, $county]);
+    } else {
+        $s = $pdo->prepare('SELECT id FROM places WHERE admin4_code=?');
+        $s->execute([$key]);
+    }
+    return array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN));
+}
+
+/** Les communes où la famille a vécu (au moins un événement ou un recensement), les plus riches d'abord. */
+function villages_list(PDO $pdo, string $q = ''): array
+{
+    $rows = $pdo->query("SELECT p.id, p.name, p.county, p.state, p.country, p.admin4_code,
+            (SELECT count(*) FROM events e WHERE e.place_id=p.id) AS events,
+            (SELECT count(DISTINCT e.person_id) FROM events e WHERE e.place_id=p.id AND e.person_id IS NOT NULL) AS persons,
+            (SELECT min(e.year) FROM events e WHERE e.place_id=p.id) AS y1, (SELECT max(e.year) FROM events e WHERE e.place_id=p.id) AS y2,
+            (SELECT count(*) FROM census_records c WHERE c.place_id=p.id) AS census
+        FROM places p WHERE EXISTS (SELECT 1 FROM events e WHERE e.place_id=p.id) OR EXISTS (SELECT 1 FROM census_records c WHERE c.place_id=p.id)")->fetchAll();
+    $out = [];
+    foreach ($rows as $r) {
+        $k = village_key($r);
+        $v = &$out[$k];
+        $v ??= ['key' => $k, 'name' => '', 'county' => $r['county'], 'country' => $r['country'], 'insee' => $r['admin4_code'], 'events' => 0, 'persons' => 0, 'census' => 0, 'from' => null, 'to' => null, 'places' => 0];
+        // Nom de la commune : celui du lieu « principal » (le plus utilisé) d'un même code
+        if ($v['name'] === '' || (int) $r['events'] > ($v['_best'] ?? -1)) { $v['name'] = $r['name']; $v['_best'] = (int) $r['events']; }
+        $v['events'] += (int) $r['events']; $v['persons'] += (int) $r['persons']; $v['census'] += (int) $r['census']; $v['places']++;
+        if ($r['y1']) { $v['from'] = $v['from'] === null ? (int) $r['y1'] : min($v['from'], (int) $r['y1']); }
+        if ($r['y2']) { $v['to'] = max((int) $v['to'], (int) $r['y2']); }
+        unset($v);
+    }
+    // Nom officiel de la commune quand le code INSEE est connu (pas celui d'un hameau)
+    $official = $pdo->prepare('SELECT name FROM commune_contours WHERE insee_code=?');
+    foreach ($out as &$v) {
+        unset($v['_best']);
+        if ($v['insee'] && !str_starts_with($v['key'], 'n:')) { try { $official->execute([$v['insee']]); $n = $official->fetchColumn(); if ($n) { $v['name'] = $n; } } catch (Throwable $_) {} }
+    }
+    unset($v);
+    $out = array_values($out);
+    if ($q !== '') { $fq = ascii_fold(mb_strtolower($q)); $out = array_values(array_filter($out, static fn($v) => str_contains(ascii_fold(mb_strtolower($v['name'] . ' ' . $v['county'])), $fq))); }
+    usort($out, static fn($a, $b) => $b['persons'] <=> $a['persons'] ?: $b['events'] <=> $a['events'] ?: strcmp($a['name'], $b['name']));
+    return $out;
+}
+
+function village_profile(PDO $pdo, string $key): array
+{
+    $s = $pdo->prepare('SELECT * FROM village_profiles WHERE place_key=?'); $s->execute([$key]);
+    $p = $s->fetch() ?: ['id' => 0, 'place_key' => $key, 'church' => '', 'patron_saint' => '', 'diocese' => '', 'populations_json' => '[]', 'notes' => ''];
+    $p['populations'] = json_decode((string) $p['populations_json'], true) ?: [];
+    unset($p['populations_json']);
+    return $p;
+}
+
+/** « 1793 : 450 », « 1806 = 512 hab. », « 1836 ; 1 204 » → [[1793, 450], …] (une ligne par recensement). */
+function parse_populations(string $text): array
+{
+    $out = [];
+    foreach (preg_split('/\R/u', $text) as $line) {
+        if (!preg_match('/\b(1[5-9]\d\d|20\d\d)\b\D+([\d\s  .]+)/u', $line, $m)) { continue; }
+        $n = (int) preg_replace('/\D/', '', $m[2]);
+        if ($n > 0) { $out[(int) $m[1]] = $n; }
+    }
+    ksort($out);
+    return array_map(static fn($y, $n) => [$y, $n], array_keys($out), array_values($out));
+}
+
+function village_detail(PDO $pdo, string $key): array
+{
+    $ids = village_place_ids($pdo, $key);
+    if (!$ids) { throw new RuntimeException('Commune introuvable.'); }
+    $in = implode(',', $ids);
+    $places = $pdo->query("SELECT id, name, county, state, country, latitude, longitude, admin4_code, COALESCE(population,0) AS population FROM places WHERE id IN ({$in})")->fetchAll();
+    $main = $places[0];
+    foreach ($places as $p) { if ($p['latitude'] !== null && ($main['latitude'] === null || (int) $p['population'] > (int) $main['population'])) { $main = $p; } }
+    $name = $main['name'];
+    if (!str_starts_with($key, 'n:')) { try { $c = $pdo->prepare('SELECT name, centroid_lat, centroid_lon FROM commune_contours WHERE insee_code=?'); $c->execute([$key]); if ($row = $c->fetch()) { $name = $row['name']; if ($main['latitude'] === null && $row['centroid_lat'] !== null) { $main['latitude'] = $row['centroid_lat']; $main['longitude'] = $row['centroid_lon']; } } } catch (Throwable $_) {} }
+
+    // Personnes qui ont un événement ici (le leur, ou celui de leur couple)
+    $ev = $pdo->query("SELECT e.id, e.person_id, e.family_id, e.year, e.date_text, t.gedcom_tag, t.label FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.place_id IN ({$in})")->fetchAll();
+    $personYears = [];
+    $add = static function (int $pid, $year) use (&$personYears): void { if (!$pid) { return; } $personYears[$pid] ??= []; if ($year) { $personYears[$pid][] = (int) $year; } };
+    $tags = [];
+    $decades = [];
+    foreach ($ev as $e) {
+        if ($e['person_id']) { $add((int) $e['person_id'], $e['year']); }
+        elseif ($e['family_id']) { $f = $pdo->query('SELECT partner1_id, partner2_id FROM families WHERE id=' . (int) $e['family_id'])->fetch(); if ($f) { $add((int) $f['partner1_id'], $e['year']); $add((int) $f['partner2_id'], $e['year']); } }
+        $tags[$e['gedcom_tag']] = ($tags[$e['gedcom_tag']] ?? 0) + 1;
+        if ($e['year']) { $d = (int) (floor($e['year'] / 10) * 10); $decades[$d] = ($decades[$d] ?? 0) + 1; }
+    }
+    foreach ($pdo->query("SELECT cm.person_id, c.year FROM census_members cm JOIN census_records c ON c.id=cm.census_id WHERE c.place_id IN ({$in}) AND cm.person_id IS NOT NULL") as $r) { $add((int) $r['person_id'], $r['year']); }
+    ksort($decades);
+    $people = collection_people($pdo, array_keys($personYears));
+
+    // Familles : par nom de famille (écritures voisines regroupées)
+    $families = [];
+    foreach ($people as $pid => $p) {
+        $ln = trim((string) $p['last_name']);
+        if ($ln === '') { continue; }
+        // Écritures voisines d'un même nom (Dupont, DUPONT, Dupond) : même famille
+        $k = preg_replace('/(?<=[a-z])[dt]$/', '', variant_loose(variant_key($ln, 'last_name')));
+        $f = &$families[$k];
+        $f ??= ['name' => $ln, 'names' => [], 'count' => 0, 'from' => null, 'to' => null, 'people' => []];
+        $f['names'][$ln] = ($f['names'][$ln] ?? 0) + 1;
+        $f['count']++;
+        $years = $personYears[$pid] ?: array_filter([$p['birth_year'] ?? null, $p['death_year'] ?? null]);
+        if ($years) { $f['from'] = $f['from'] === null ? min($years) : min($f['from'], min($years)); $f['to'] = max((int) $f['to'], max($years)); }
+        $f['people'][] = $p;
+        unset($f);
+    }
+    foreach ($families as &$f) {
+        arsort($f['names']); $f['name'] = (string) array_key_first($f['names']); $f['variants'] = array_keys($f['names']); unset($f['names']);
+        usort($f['people'], static fn($a, $b) => ((int) ($a['birth_year'] ?? 9999)) <=> ((int) ($b['birth_year'] ?? 9999)));
+        $f['generations'] = $f['from'] !== null && $f['to'] !== null ? max(1, (int) round(($f['to'] - $f['from']) / 30) + 1) : 1;
+    }
+    unset($f);
+    $families = array_values($families);
+    usort($families, static fn($a, $b) => $b['count'] <=> $a['count'] ?: strcmp($a['name'], $b['name']));
+
+    // Métiers dominants : métier des fiches + métiers notés ici (événement « Profession »)
+    $jobs = [];
+    $addJob = static function (string $job, $year, int $pid) use (&$jobs): void {
+        $job = trim($job);
+        if ($job === '') { return; }
+        $k = function_exists('variant_key') ? variant_loose(variant_key($job, 'occupation')) : mb_strtolower($job);
+        $j = &$jobs[$k];
+        $j ??= ['name' => $job, 'people' => [], 'from' => null, 'to' => null];
+        $j['people'][$pid] = true;
+        if ($year) { $j['from'] = $j['from'] === null ? (int) $year : min($j['from'], (int) $year); $j['to'] = max((int) $j['to'], (int) $year); }
+        unset($j);
+    };
+    foreach ($people as $pid => $p) { $addJob((string) ($p['occupation'] ?? ''), $personYears[$pid] ? min($personYears[$pid]) : null, (int) $pid); }
+    foreach ($pdo->query("SELECT e.person_id, e.title, e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='OCCU' AND e.place_id IN ({$in}) AND e.person_id IS NOT NULL") as $r) { $addJob((string) $r['title'], $r['year'], (int) $r['person_id']); }
+    $jobs = array_values(array_map(static fn($j) => ['name' => $j['name'], 'count' => count($j['people']), 'from' => $j['from'], 'to' => $j['to']], $jobs));
+    usort($jobs, static fn($a, $b) => $b['count'] <=> $a['count'] ?: strcmp($a['name'], $b['name']));
+
+    // Recensements de la base à cet endroit
+    $census = $pdo->query("SELECT c.year, count(DISTINCT c.id) AS households, count(cm.id) AS members FROM census_records c LEFT JOIN census_members cm ON cm.census_id=c.id WHERE c.place_id IN ({$in}) AND c.year IS NOT NULL GROUP BY c.year ORDER BY c.year")->fetchAll();
+
+    // Paroisse (Ancien Régime), registres en ligne, cimetières
+    $parish = [];
+    if (function_exists('parish_map')) {
+        $map = parish_map($pdo);
+        foreach ($ids as $id) { foreach ($map['by_place'][$id] ?? [] as $x) { $parish[$x['parish'] . $x['until']] = $x; } }
+        if (!str_starts_with($key, 'n:')) { foreach ($map['by_insee'][$key] ?? [] as $x) { $parish[$x['parish'] . $x['until']] = $x; } }
+    }
+    $registers = [];
+    if (!str_starts_with($key, 'n:') && function_exists('online_registers')) { try { $registers = array_slice(online_registers($pdo, $key, (string) $name, false)['links'] ?? [], 0, 4); } catch (Throwable $_) {} }
+    $graves = [];
+    try { $g = $pdo->prepare("SELECT cemetery_name, count(*) AS n FROM graves WHERE city=? COLLATE NOCASE GROUP BY cemetery_name ORDER BY n DESC"); $g->execute([$name]); $graves = $g->fetchAll(); } catch (Throwable $_) {}
+
+    $profile = village_profile($pdo, $key);
+    $media = $profile['id'] && function_exists('heritage_media') ? (heritage_media($pdo, 'village', [(int) $profile['id']])[(int) $profile['id']] ?? []) : [];
+    $labels = $profile['id'] ? (collection_labels($pdo, 'village', [(int) $profile['id']])[(int) $profile['id']] ?? []) : [];
+    $current = 0; foreach ($places as $p) { $current = max($current, (int) $p['population']); }
+
+    return [
+        'key' => $key, 'name' => $name, 'county' => $main['county'], 'state' => $main['state'], 'country' => $main['country'], 'insee' => str_starts_with($key, 'n:') ? '' : $key,
+        'lat' => $main['latitude'] !== null ? (float) $main['latitude'] : null, 'lon' => $main['longitude'] !== null ? (float) $main['longitude'] : null,
+        'place_id' => (int) $main['id'], 'places' => village_used_place_names($pdo, $in),
+        'families' => $families, 'jobs' => array_slice($jobs, 0, 20), 'people_count' => count($people),
+        'acts' => ['baptemes' => ($tags['BIRT'] ?? 0) + ($tags['CHR'] ?? 0) + ($tags['BAPM'] ?? 0), 'mariages' => $tags['MARR'] ?? 0, 'deces' => ($tags['DEAT'] ?? 0) + ($tags['BURI'] ?? 0)],
+        'decades' => $decades, 'census' => $census, 'current_population' => $current,
+        'parish' => array_values($parish), 'registers' => $registers, 'graves' => $graves,
+        'profile' => $profile, 'media' => $media, 'labels' => $labels,
+    ];
+}
+
+function save_village_profile(PDO $pdo, array $data): array
+{
+    $key = safe_text($data['key'] ?? '');
+    if ($key === '' || !village_place_ids($pdo, $key)) { throw new RuntimeException('Commune introuvable.'); }
+    $pops = is_array($data['populations'] ?? null) ? $data['populations'] : parse_populations((string) ($data['populations_text'] ?? ''));
+    $pops = array_values(array_filter(array_map(static fn($r) => is_array($r) ? [(int) ($r[0] ?? 0), (int) ($r[1] ?? 0)] : null, $pops), static fn($r) => $r && $r[0] >= 1500 && $r[0] <= 2100 && $r[1] > 0));
+    $pdo->prepare('INSERT INTO village_profiles(place_key, name, church, patron_saint, diocese, populations_json, notes, updated_at) VALUES(?,?,?,?,?,?,?,CURRENT_TIMESTAMP)
+        ON CONFLICT(place_key) DO UPDATE SET name=excluded.name, church=excluded.church, patron_saint=excluded.patron_saint, diocese=excluded.diocese, populations_json=excluded.populations_json, notes=excluded.notes, updated_at=CURRENT_TIMESTAMP')
+        ->execute([$key, safe_text($data['name'] ?? ''), safe_text($data['church'] ?? ''), safe_text($data['patron_saint'] ?? ''), safe_text($data['diocese'] ?? ''), json_encode($pops), h_long($data, 'notes', 40000)]);
+    $id = (int) $pdo->query('SELECT id FROM village_profiles WHERE place_key=' . $pdo->quote($key))->fetchColumn();
+    log_change($pdo, 'meta', 0, 'update', 'Fiche du village enregistrée : ' . safe_text($data['name'] ?? $key));
+    return ['id' => $id];
+}
+
+/** Noms des lieux de la commune vraiment utilisés par la famille (événements, recensements), sans doublon. */
+function village_used_place_names(PDO $pdo, string $in): array
+{
+    return $pdo->query("SELECT DISTINCT name FROM places WHERE id IN ({$in}) AND (EXISTS (SELECT 1 FROM events e WHERE e.place_id=places.id) OR EXISTS (SELECT 1 FROM census_records c WHERE c.place_id=places.id)) ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
+}
+

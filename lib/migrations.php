@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 12;
+const SCHEMA_VERSION = 13;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -33,6 +33,7 @@ function migration_steps(): array
         10 => 'schema_v10',
         11 => 'schema_v11',
         12 => 'schema_v12',
+        13 => 'schema_v13',
     ];
 }
 
@@ -1322,4 +1323,20 @@ function schema_v1_api_part(PDO $pdo): void
         }
     }
     unset($releasedStatement);
+}
+
+/** n°13 : fiche d'un village (église, paroisse, populations relevées, notes) — Listes → Fiche d'un village. */
+function schema_v13(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS village_profiles (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        place_key TEXT NOT NULL UNIQUE,
+        name TEXT NOT NULL DEFAULT '',
+        church TEXT NOT NULL DEFAULT '',
+        patron_saint TEXT NOT NULL DEFAULT '',
+        diocese TEXT NOT NULL DEFAULT '',
+        populations_json TEXT NOT NULL DEFAULT '[]',
+        notes TEXT NOT NULL DEFAULT '',
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
 }

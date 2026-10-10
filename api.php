@@ -237,6 +237,8 @@ try {
         'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''))),
         'languages_overview' => json_response(languages_overview($pdo)),
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
+        'villages' => json_response(['villages' => villages_list($pdo, safe_text($_GET['q'] ?? ''))]),
+        'village' => json_response(village_detail($pdo, safe_text($_GET['key'] ?? ''))),
         'recent_acts' => json_response(['acts' => recent_acts($pdo)]),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
         'historical_context' => json_response(historical_context($pdo)),
@@ -8871,6 +8873,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'set_no_inherited_language' => set_no_inherited_language($pdo,$data),
             'save_record_languages' => save_record_languages($pdo,$data),
             'save_help_request' => save_help_request($pdo,$data),
+            'save_village_profile' => save_village_profile($pdo,$data),
             'create_act_request' => create_act_request($pdo,$data),
             'act_open_reminder' => act_open_reminder($pdo,$data),
             'vault_delete' => vault_delete($pdo,$data),
@@ -8929,7 +8932,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village'];
 }
 
 function normalize_label_color(string $color): string
