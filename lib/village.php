@@ -103,11 +103,18 @@ function village_detail(PDO $pdo, string $key): array
     $add = static function (int $pid, $year) use (&$personYears): void { if (!$pid) { return; } $personYears[$pid] ??= []; if ($year) { $personYears[$pid][] = (int) $year; } };
     $tags = [];
     $decades = [];
+    $byType = [];
     foreach ($ev as $e) {
         if ($e['person_id']) { $add((int) $e['person_id'], $e['year']); }
         elseif ($e['family_id']) { $f = $pdo->query('SELECT partner1_id, partner2_id FROM families WHERE id=' . (int) $e['family_id'])->fetch(); if ($f) { $add((int) $f['partner1_id'], $e['year']); $add((int) $f['partner2_id'], $e['year']); } }
         $tags[$e['gedcom_tag']] = ($tags[$e['gedcom_tag']] ?? 0) + 1;
-        if ($e['year']) { $d = (int) (floor($e['year'] / 10) * 10); $decades[$d] = ($decades[$d] ?? 0) + 1; }
+        if ($e['year']) {
+            $d = (int) (floor($e['year'] / 10) * 10);
+            $decades[$d] = ($decades[$d] ?? 0) + 1;
+            // Par sorte d'acte : naissances, mariages, décès regroupés ; les autres sous leur nom
+            $group = match (true) { in_array($e['gedcom_tag'], ['BIRT', 'CHR', 'BAPM'], true) => 'Naissances et baptêmes', in_array($e['gedcom_tag'], ['MARR', 'MARC', 'MARB', 'ENGA'], true) => 'Mariages', in_array($e['gedcom_tag'], ['DEAT', 'BURI', 'CREM'], true) => 'Décès et sépultures', default => (string) $e['label'] };
+            $byType[$group][$d] = ($byType[$group][$d] ?? 0) + 1;
+        }
     }
     foreach ($pdo->query("SELECT cm.person_id, c.year FROM census_members cm JOIN census_records c ON c.id=cm.census_id WHERE c.place_id IN ({$in}) AND cm.person_id IS NOT NULL") as $r) { $add((int) $r['person_id'], $r['year']); }
     ksort($decades);
@@ -181,7 +188,7 @@ function village_detail(PDO $pdo, string $key): array
         'place_id' => (int) $main['id'], 'places' => village_used_place_names($pdo, $in),
         'families' => $families, 'jobs' => array_slice($jobs, 0, 20), 'people_count' => count($people),
         'acts' => ['baptemes' => ($tags['BIRT'] ?? 0) + ($tags['CHR'] ?? 0) + ($tags['BAPM'] ?? 0), 'mariages' => $tags['MARR'] ?? 0, 'deces' => ($tags['DEAT'] ?? 0) + ($tags['BURI'] ?? 0)],
-        'decades' => $decades, 'census' => $census, 'current_population' => $current,
+        'decades' => $decades, 'decades_by_type' => village_decades_by_type($byType), 'census' => $census, 'current_population' => $current,
         'parish' => array_values($parish), 'registers' => $registers, 'graves' => $graves,
         'profile' => $profile, 'media' => $media, 'labels' => $labels,
     ];
@@ -205,5 +212,17 @@ function save_village_profile(PDO $pdo, array $data): array
 function village_used_place_names(PDO $pdo, string $in): array
 {
     return $pdo->query("SELECT DISTINCT name FROM places WHERE id IN ({$in}) AND (EXISTS (SELECT 1 FROM events e WHERE e.place_id=places.id) OR EXISTS (SELECT 1 FROM census_records c WHERE c.place_id=places.id)) ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
+}
+
+/** Sortes d'actes dans l'ordre : naissances, mariages, décès, puis les autres (les plus nombreuses d'abord). */
+function village_decades_by_type(array $byType): array
+{
+    $first = ['Naissances et baptêmes', 'Mariages', 'Décès et sépultures'];
+    $out = [];
+    foreach ($first as $k) { if (isset($byType[$k])) { ksort($byType[$k]); $out[] = ['label' => $k, 'decades' => $byType[$k], 'total' => array_sum($byType[$k])]; } }
+    $others = array_diff_key($byType, array_flip($first));
+    uksort($others, static fn($a, $b) => array_sum($others[$b]) <=> array_sum($others[$a]) ?: strcmp($a, $b));
+    foreach ($others as $k => $d) { ksort($d); $out[] = ['label' => $k, 'decades' => $d, 'total' => array_sum($d)]; }
+    return $out;
 }
 

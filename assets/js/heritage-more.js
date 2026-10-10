@@ -828,12 +828,25 @@
     };
     let villageTimer = 0;
     const debounceVillage = fn => e => { clearTimeout(villageTimer); villageTimer = setTimeout(() => fn(e), 300); };
+    /** Barres par décennie (toutes les décennies de la commune, même vides), pour tous les actes ou une seule sorte. */
+    function decadesHtml(v, type) {
+        const all = Object.keys(v.decades).map(Number);
+        const data = type ? ((v.decades_by_type || []).find(t => t.label === type)?.decades || {}) : v.decades;
+        const top = Math.max(1, ...Object.values(data));
+        const bars = [];
+        for (let d = Math.min(...all); d <= Math.max(...all); d += 10) {
+            const n = Number(data[d] || 0);
+            bars.push(`<span title="${d}–${d + 9} : ${n} acte${n > 1 ? 's' : ''}">${n ? `<b>${n}</b>` : ''}<i style="height:${n ? Math.round(n / top * 110) + 3 : 0}px"></i><small>${d}</small></span>`);
+        }
+        return `<div class="h-decades">${bars.join('')}</div>`;
+    }
     async function renderVillage(token, key) {
         const st = S();
         let v;
         try { v = await api('village', {key}); } catch (error) { st.hVillage = ''; toast(error.message, 'error'); return ext.lists.villages(++st.workspaceToken); }
         if (!isCurrent(token, 'listes')) return;
         const bg = st.hVillageMap || 'cassini', zoom = Number(st.hVillageZoom) || 13;
+        const actsType = (v.decades_by_type || []).some(t => t.label === st.hVillageActs) ? st.hVillageActs : '';
         const pr = v.profile;
         const pops = [...(pr.populations || [])];
         if (v.current_population && !pops.some(p => p[0] >= new Date().getFullYear() - 5)) pops.push([new Date().getFullYear(), v.current_population]);
@@ -861,7 +874,7 @@
             <section class="maintenance-panel"><h3>⚒️ Métiers dominants</h3>${v.jobs.length ? `<ul class="h-bars">${v.jobs.map(j => `<li><span class="h-bar-label">${esc(j.name)}</span><span class="h-bar"><i style="width:${Math.round(j.count / topJob * 100)}%"></i></span><span>${j.count}${j.from ? ` <small class="muted">${j.from}${j.to && j.to !== j.from ? '–' + j.to : ''}</small>` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Aucun métier noté pour les personnes de cette commune.</p>'}</section>
             </div>
             <section class="maintenance-panel"><h3>🏠 Les familles qui y ont vécu (${v.families.length})</h3>${v.families.length ? `<table class="data-table"><thead><tr><th>Famille</th><th>Personnes</th><th>Période</th><th>Générations</th><th>Qui</th></tr></thead><tbody>${v.families.map(f => `<tr><td><strong>${esc(f.name)}</strong>${f.variants.length > 1 ? `<br><small class="muted">${esc(f.variants.join(', '))}</small>` : ''}</td><td>${f.count}</td><td>${f.from ? esc(f.from + (f.to && f.to !== f.from ? '–' + f.to : '')) : '—'}</td><td>${f.generations}</td><td>${f.people.slice(0, 8).map(p => personLink(p.id, pname(p) + (p.birth_year ? ` (${p.birth_year})` : ''))).join(', ')}${f.people.length > 8 ? ` <small>et ${f.people.length - 8} autres</small>` : ''}</td></tr>`).join('')}</tbody></table>` : empty('Aucune personne de la famille rattachée à cette commune.')}</section>
-            ${Object.keys(v.decades).length > 1 ? `<section class="maintenance-panel"><h3>📜 Actes de la famille par décennie</h3><div class="h-decades">${Object.entries(v.decades).map(([d, n]) => `<span title="${d} : ${n}"><i style="height:${Math.round(n / Math.max(...Object.values(v.decades)) * 80) + 4}px"></i><small>${d}</small></span>`).join('')}</div></section>` : ''}
+            ${Object.keys(v.decades).length > 1 ? `<section class="maintenance-panel"><div class="h-panel-head"><h3>📜 Actes de la famille par décennie</h3><label class="h-inline">Afficher <select data-h-village-acts><option value="">Tous les actes (${fmt(Object.values(v.decades).reduce((a, b) => a + b, 0))})</option>${(v.decades_by_type || []).map(t => `<option value="${esc(t.label)}" ${t.label === actsType ? 'selected' : ''}>${esc(t.label)} (${fmt(t.total)})</option>`).join('')}</select></label></div><div data-h-village-decades>${decadesHtml(v, actsType)}</div></section>` : ''}
             ${pr.notes || v.media.length ? `<section class="maintenance-panel"><h3>📝 Notes et photos</h3>${pr.notes ? `<p class="h-transcription">${nl(pr.notes)}</p>` : ''}${ext.thumbs ? ext.thumbs('village-' + pr.id, v.media) : ''}</section>` : ''}
             </section>`;
         A().bindTableLinks();
@@ -871,6 +884,7 @@
         ws.querySelector('[data-h-village-mono]').addEventListener('click', () => { st.graphMode = 'place_monograph'; st.graphPlaceMonograph = {...(st.graphPlaceMonograph || {}), id: v.place_id, name: v.name, county: v.county || '', country: v.country || ''}; A().setModule('graphiques'); });
         ws.querySelectorAll('[data-h-village-bg]').forEach(b => b.addEventListener('click', () => { st.hVillageMap = b.dataset.hVillageBg; again(); }));
         ws.querySelectorAll('[data-h-village-zoom]').forEach(b => b.addEventListener('click', () => { st.hVillageZoom = Math.max(10, Math.min(16, zoom + Number(b.dataset.hVillageZoom))); again(); }));
+        ws.querySelector('[data-h-village-acts]')?.addEventListener('change', e => { st.hVillageActs = e.target.value; ws.querySelector('[data-h-village-decades]').innerHTML = decadesHtml(v, e.target.value); });
         ws.querySelector('[data-h-village-main]')?.addEventListener('click', () => { st.mapCenter = {lat: v.lat, lon: v.lon}; st.mapZoom = 14; st.mapKeepCenter = true; A().setModule('carte'); });
         ws.querySelector('[data-h-village-edit]').addEventListener('click', () => openVillageDialog(v, again));
         ws.querySelector('[data-h-village-clear]').addEventListener('click', async () => {

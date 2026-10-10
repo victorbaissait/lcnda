@@ -36,6 +36,7 @@ $v = village_detail($pdo, '87187');
 $out['families'] = array_map(fn($f) => [$f['name'], $f['count'], $f['from'], $f['to']], $v['families']);
 $out['jobs'] = array_map(fn($j) => [$j['name'], $j['count']], $v['jobs']);
 $out['acts'] = $v['acts'];
+$out['bytype'] = array_map(fn($t) => [$t['label'], $t['total']], $v['decades_by_type']);
 $out['current'] = $v['current_population'];
 $out['pop'] = parse_populations("1793 : 1 450\n1806 = 1512 hab.\nsans chiffre\n1836 ; 1 604");
 $saved = save_village_profile($pdo, ['key' => '87187', 'name' => 'Saint-Yrieix', 'church' => 'Collégiale du Moûtier', 'patron_saint' => 'saint Yrieix', 'populations_text' => "1793 : 1450\n1806 : 1512", 'pending_labels' => []]);
@@ -56,6 +57,7 @@ const checks = [
   ['familles : Dupont / DUPONT / Dupond regroupés, période', () => assert.deepEqual(out.families[0], ['Dupont', 3, 1750, 1820])],
   ['métiers dominants', () => assert.deepEqual(out.jobs, [['laboureur', 2], ['meunier', 1]])],
   ['actes de la famille', () => assert.deepEqual(out.acts, { baptemes: 2, mariages: 1, deces: 2 })],
+  ['actes par sorte : naissances, mariages, décès d’abord', () => assert.deepEqual(out.bytype, [['Naissances et baptêmes', 2], ['Mariages', 1], ['Décès et sépultures', 2]])],
   ['population actuelle', () => assert.equal(out.current, 6800)],
   ['populations collées', () => assert.deepEqual(out.pop, [[1793, 1450], [1806, 1512], [1836, 1604]])],
   ['fiche du village enregistrée', () => assert.deepEqual(out.profile, ['Collégiale du Moûtier', 2])],

@@ -25,7 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=198">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=7">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=8">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
 <body>
@@ -1077,7 +1077,7 @@ header('Cache-Control: no-store, private');
 <script src="assets/js/heritage.js?v=5" defer></script>
 <script src="assets/js/heritage-tools.js?v=5" defer></script>
 <script src="assets/js/heritage-links.js?v=3" defer></script>
-<script src="assets/js/heritage-more.js?v=3" defer></script>
+<script src="assets/js/heritage-more.js?v=4" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');
