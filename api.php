@@ -53,6 +53,14 @@ try {
     if ($isWrite) {
         verify_csrf($payload);
     }
+    // Mode consultation : la famille peut tout regarder, rien modifier (lib/heritage_tools.php)
+    if ($action === 'kiosk_state') {
+        json_response(kiosk_state());
+    }
+    if ($isWrite && $action === 'kiosk_exit') {
+        kiosk_exit($payload);
+    }
+    kiosk_guard((string) $action, $isWrite);
     if (!$isWrite && $action === 'database_profiles') {
         json_response(['current' => active_database_key(), 'databases' => available_database_profiles()]);
     }
@@ -147,6 +155,15 @@ try {
     if ($isWrite && $action === 'insee_prenoms_import') {
         insee_prenoms_import($pdo, $_FILES['file'] ?? null);
     }
+    if ($isWrite && $action === 'scan_inbox_run') {
+        scan_inbox_run($pdo);
+    }
+    if ($isWrite && $action === 'sync_preview') {
+        sync_preview($pdo, $_FILES['file'] ?? null);
+    }
+    if ($isWrite && $action === 'sync_apply') {
+        sync_apply($pdo, $payload);
+    }
     if ($isWrite && $action === 'offsite_copy_now') {
         offsite_copy_now($pdo, $payload);
     }
@@ -198,6 +215,16 @@ try {
         'firstnames_france' => json_response(firstnames_france_data($pdo, max(1800, min(2100, safe_int($_GET['min_year'] ?? 1900, 1900))))),
         'probate_inventories' => json_response(['inventories' => probate_inventories_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'categories' => PROBATE_CATEGORIES]),
         'offsite_status' => json_response(offsite_status($pdo)),
+        'scan_inbox_status' => json_response(scan_inbox_status($pdo)),
+        'parishes' => json_response(['parishes' => parishes_data($pdo, safe_text($_GET['q'] ?? ''))]),
+        'parish_map' => json_response(parish_map($pdo)),
+        'parish_place_search' => json_response(['places' => parish_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
+        'cited_names' => json_response(['groups' => cited_names_data($pdo, safe_text($_GET['q'] ?? '')), 'roles' => CITED_ROLES]),
+        'transcriptions_list' => json_response(['media' => transcriptions_list($pdo, safe_text($_GET['q'] ?? ''))]),
+        'media_transcription' => json_response(['media' => media_transcription_detail($pdo, safe_int($_GET['id'] ?? 0)), 'roles' => CITED_ROLES]),
+        'impossible_journeys' => json_response(['alerts' => impossible_journeys($pdo, safe_int($_GET['person_id'] ?? 0))]),
+        'sync_status' => json_response(sync_status($pdo)),
+        'sync_export' => sync_export($pdo),
         'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
         'family_memories' => json_response(['memories' => family_memories_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''), safe_text($_GET['kind'] ?? '')), 'kinds' => MEMORY_KINDS]),
         'precise_places' => json_response(['places' => precise_places_list($pdo, safe_text($_GET['q'] ?? ''), max(5, min(500, safe_int($_GET['radius'] ?? 30))))]),
@@ -1910,6 +1937,7 @@ function person_detail(PDO $pdo, int $id): never
         return $row;
     }, $onlineSheets->fetchAll());
 
+    if (kiosk_state()['on']) { $person['is_locked'] = 1; $person['kiosk'] = 1; } // mode consultation : fiche en lecture seule
     json_response([
         'person' => $person,
         'estimates' => date_estimates($pdo, $id),
@@ -8802,6 +8830,14 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_probate_inventory' => save_probate_inventory($pdo,$data),
             'delete_probate_inventory' => delete_probate_inventory($pdo,$data),
             'save_offsite_settings' => save_offsite_settings($pdo,$data),
+            'save_scan_inbox_settings' => save_scan_inbox_settings($pdo,$data),
+            'save_parish' => save_parish($pdo,$data),
+            'delete_parish' => delete_parish($pdo,$data),
+            'save_cited_name' => save_cited_name($pdo,$data),
+            'delete_cited_name' => delete_cited_name($pdo,$data),
+            'sync_start' => sync_start($pdo,$data),
+            'sync_set_author' => sync_set_author($pdo,$data),
+            'kiosk_enter' => kiosk_enter($data),
             'check_links' => check_links($pdo,$data),
             'replace_link' => replace_link($pdo,$data),
             'delete_personal_dictionary_entry' => delete_personal_dictionary_entry($pdo,$data),

@@ -6,6 +6,7 @@ require __DIR__ . '/lib/bootstrap.php';
 try {
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') json_response(['error'=>'Méthode refusée'],405);
     verify_csrf($_POST);
+    kiosk_guard('upload', true);
     $personId=safe_int($_POST['person_id']??0);$eventId=safe_int($_POST['event_id']??0);$censusId=safe_int($_POST['census_id']??0);$investigationId=safe_int($_POST['investigation_id']??0);$battueItemId=safe_int($_POST['battue_item_id']??0);$archiveDigestId=safe_int($_POST['archive_digest_id']??0);$archiveDigestPageNumber=safe_text($_POST['archive_digest_page_number']??'');$title=safe_text($_POST['title']??'');
     $documentReference=safe_text($_POST['document_reference']??'');$documentTitle=safe_text($_POST['document_title']??'');$documentUrl=safe_text($_POST['document_url']??'');$documentPages=safe_text($_POST['document_pages']??'');
 	    $isPersonPhoto=isset($_POST['is_person_photo'])&&$_POST['is_person_photo']!=='0'?1:0;

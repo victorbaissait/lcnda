@@ -18,7 +18,8 @@
     "dist:linux": "electron-builder --linux --x64 --arm64",
     "test:gedcom": "node tests/test-gedcom.js",
     "test:import": "node tests/test-import.js",
-    "test:heritage": "node tests/test-heritage.js"
+    "test:heritage": "node tests/test-heritage.js",
+    "test:tools": "node tests/test-tools.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

@@ -9,7 +9,7 @@ declare(strict_types=1);
  * Matricula est rangé par diocèse : sa recherche par lieu (/de/suchen/?place=) évite d'avoir à connaître le diocèse.
  */
 
-function online_registers(PDO $pdo, string $code, string $name): array
+function online_registers(PDO $pdo, string $code, string $name, bool $withParish = true): array
 {
     $cc = preg_match('/^([A-Z]{2})-/', $code, $m) ? $m[1] : 'FR';
     $q = rawurlencode($name);
@@ -119,6 +119,10 @@ function online_registers(PDO $pdo, string $code, string $name): array
     // Partout : FamilySearch (gratuit, compte demandé pour certaines images)
     $add('FamilySearch : actes indexés de ce lieu', "https://www.familysearch.org/search/record/results?q.anyPlace={$q}", 'prefilled', 'Compte gratuit demandé.');
     $add('FamilySearch : catalogue des registres de ce lieu', "https://www.familysearch.org/search/catalog/results?count=20&query=%2Bplace%3A{$q}", 'prefilled', 'Registres microfilmés, souvent consultables en ligne.');
+    // Hameau ou village rattaché avant 1790 à la paroisse d'à côté (Listes → Paroisses d'Ancien Régime)
+    if ($withParish && function_exists('parish_register_links')) {
+        try { $links = [...parish_register_links($pdo, $code), ...$links]; } catch (Throwable $_) {}
+    }
     return ['code' => $code, 'name' => $name, 'country' => commune_country_name($code), 'region' => $state, 'links' => $links];
 }
 

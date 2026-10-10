@@ -57,7 +57,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure n°9', () => assert.equal(out.version, 9)],
+  ['structure à jour (n°10)', () => assert.equal(out.version, 10)],
   ['voyage : année, trajet Le Havre → Québec, bloc coché', () => assert.deepEqual(out.voyage, [1850, 2, 1])],
   ['enfant placé : durée calculée', () => assert.equal(out.placement, '2 ans et 3 mois')],
   ['armoiries liées à leurs porteurs', () => assert.equal(out.coat, 1)],

@@ -176,3 +176,41 @@ tr.is-new td{background:rgba(204,71,0,.08)}
 .h-offsite-dirs code{font-size:.85em;word-break:break-all}
 .collection-kind.is-warn{color:#cc4700;border-color:#cc4700}
 .h-offsite-suggestions{display:flex;gap:.3rem;flex-wrap:wrap}
+
+/* ── Outils (assets/js/heritage-tools.js) ── */
+/* Mode consultation */
+#kiosk-banner{position:sticky;top:0;z-index:200;display:flex;gap:1rem;align-items:center;justify-content:center;padding:.45rem 1rem;background:#7a47db;color:#fff;font-size:.9em}
+#kiosk-banner .button{background:#fff;color:#111}
+#kiosk-toggle.is-active{background:#7a47db;color:#fff}
+body.is-kiosk .nav-item[data-module="maintenance"],
+body.is-kiosk .icon-edit,body.is-kiosk .icon-add,body.is-kiosk .icon-delete,body.is-kiosk .icon-unlock,body.is-kiosk .icon-lock,
+body.is-kiosk .button.danger,body.is-kiosk [data-delete-person],body.is-kiosk [data-edit-person-inline],
+body.is-kiosk .labels-add-btn,body.is-kiosk .label-chip-remove,body.is-kiosk #new-person,body.is-kiosk .sidebar-footer .button,
+body.is-kiosk [data-h-voyage-edit],body.is-kiosk [data-h-placement-edit],body.is-kiosk [data-h-coat-edit],body.is-kiosk [data-h-coat-link],body.is-kiosk [data-h-poilu-edit]{display:none !important}
+
+/* Fêtes religieuses */
+.h-feast-hint{margin-top:.3rem;font-size:.85em;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.h-feast-result{margin:.4rem 0}
+
+/* Paroisses */
+.h-parish-hint{font-size:.8em;margin-top:.2rem;color:#7a47db}
+
+/* Noms cités */
+.h-cite-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,1fr);gap:1rem;align-items:start}
+@media(max-width:1000px){.h-cite-layout{grid-template-columns:1fr}}
+.h-cite-text{font-family:Georgia,'Times New Roman',serif;line-height:1.7;white-space:normal;user-select:text;cursor:text;max-height:70vh;overflow:auto}
+.h-cite-text mark{background:#ffe08a;color:#111;padding:0 .1em}
+.h-cite-image{max-width:100%;border:var(--line)}
+.h-cite-marks{padding-left:1.1rem;margin:.3rem 0}
+.h-cite-marks li{margin:.3rem 0}
+.h-cite-float{position:absolute;z-index:60}
+.h-cite-groups{display:flex;flex-direction:column;gap:.6rem}
+.h-cite-items{padding-left:1.1rem}
+
+/* Travail à deux */
+.h-sync-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:1000px){.h-sync-grid{grid-template-columns:1fr}}
+.h-steps li{margin:.3rem 0}
+.h-sync-table tr.is-conflict td{background:rgba(204,71,0,.1)}
+.h-sync-fields{margin:0;padding-left:1rem;font-size:.85em}
+.h-journeys td{vertical-align:top}

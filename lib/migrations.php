@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 9;
+const SCHEMA_VERSION = 10;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -30,6 +30,7 @@ function migration_steps(): array
         7 => 'schema_v7',
         8 => 'schema_v8',
         9 => 'schema_v9',
+        10 => 'schema_v10',
     ];
 }
 
@@ -634,6 +635,77 @@ function schema_v9(PDO $pdo): void
         position INTEGER NOT NULL DEFAULT 0
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_probate_items_inventory ON probate_items(inventory_id, position)');
+}
+
+/**
+ * Structure n°10 (2026-10-11) : paroisses d'Ancien Régime (rattachement d'un lieu à la paroisse d'à côté), index des noms
+ * cités dans les transcriptions (le « cercle » autour des ancêtres), dossier « Scans » surveillé, travail à deux
+ * (identifiants communs uid sur les fiches, photo de ce qui a déjà été envoyé, journal des paquets).
+ */
+function schema_v10(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS place_parishes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        place_id INTEGER REFERENCES places(id) ON DELETE CASCADE,
+        place_text TEXT NOT NULL DEFAULT '',
+        parish_name TEXT NOT NULL DEFAULT '',
+        parish_place_id INTEGER REFERENCES places(id) ON DELETE SET NULL,
+        until_year INTEGER NOT NULL DEFAULT 1790,
+        from_year INTEGER,
+        note TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_place_parishes_place ON place_parishes(place_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS cited_names (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
+        name_key TEXT NOT NULL DEFAULT '',
+        role TEXT NOT NULL DEFAULT '',
+        occupation TEXT NOT NULL DEFAULT '',
+        place_text TEXT NOT NULL DEFAULT '',
+        year INTEGER,
+        date_text TEXT NOT NULL DEFAULT '',
+        media_id INTEGER REFERENCES media(id) ON DELETE CASCADE,
+        event_id INTEGER REFERENCES events(id) ON DELETE SET NULL,
+        person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        snippet TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_cited_names_key ON cited_names(name_key)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_cited_names_media ON cited_names(media_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS scan_inbox_files (
+        hash TEXT PRIMARY KEY,
+        filename TEXT NOT NULL DEFAULT '',
+        media_id INTEGER,
+        imported_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    foreach (['persons', 'families', 'family_children', 'events', 'places', 'notes'] as $table) {
+        $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('{$table}') WHERE name='uid'")->fetchColumn();
+        if (!$has) { $pdo->exec("ALTER TABLE {$table} ADD COLUMN uid TEXT"); }
+        $pdo->exec("CREATE INDEX IF NOT EXISTS idx_{$table}_uid ON {$table}(uid)");
+    }
+    $pdo->exec("CREATE TABLE IF NOT EXISTS sync_snapshot (
+        tbl TEXT NOT NULL,
+        uid TEXT NOT NULL,
+        hash TEXT NOT NULL,
+        row_json TEXT NOT NULL,
+        PRIMARY KEY (tbl, uid)
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS sync_packages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        direction TEXT NOT NULL,
+        package_uid TEXT NOT NULL DEFAULT '',
+        author TEXT NOT NULL DEFAULT '',
+        change_count INTEGER NOT NULL DEFAULT 0,
+        accepted_count INTEGER NOT NULL DEFAULT 0,
+        summary TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

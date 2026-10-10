@@ -9,7 +9,8 @@ require_once __DIR__ . '/registers.php';
 require_once __DIR__ . '/research.php';
 require_once __DIR__ . '/saints.php';     // prénom et saint du jour
 require_once __DIR__ . '/collections.php';
-require_once __DIR__ . '/heritage.php';    // départs, enfants placés, armoiries, poilus, circuits, papiers, cartes anciennes…
+require_once __DIR__ . '/heritage.php';
+require_once __DIR__ . '/heritage_tools.php'; // dossier Scans, paroisses, noms cités, voyages impossibles, travail à deux, consultation    // départs, enfants placés, armoiries, poilus, circuits, papiers, cartes anciennes…
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';
 require_once __DIR__ . '/shortcuts.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues

@@ -464,7 +464,22 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'poilu' => poilu_data($pdo, $personId),
         'probate_inventories' => $inv,
         'family_papers' => family_papers_data($pdo, '', $personId),
+        'parishes' => person_parishes($pdo, $personId),
     ];
+}
+
+/** Paroisses d'Ancien Régime des lieux où cette personne a des événements : place_id → rattachements. */
+function person_parishes(PDO $pdo, int $personId): array
+{
+    if (!function_exists('parish_map')) { return []; }
+    $stmt = $pdo->prepare("SELECT DISTINCT e.place_id FROM events e WHERE e.place_id IS NOT NULL AND (e.person_id=? OR e.family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?))");
+    $stmt->execute([$personId, $personId, $personId]);
+    $ids = array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+    if (!$ids) { return []; }
+    $map = parish_map($pdo)['by_place'];
+    $out = [];
+    foreach ($ids as $id) { if (isset($map[$id])) { $out[$id] = $map[$id]; } }
+    return $out;
 }
 
 /** Widgets du tableau de bord : tous les voyages, placements, armoiries et poilus. */
