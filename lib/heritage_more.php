@@ -790,7 +790,7 @@ function save_custom_block_def(PDO $pdo, array $data): array
     $fields = custom_fields_clean(is_array($data['fields'] ?? null) ? $data['fields'] : []);
     if (!$fields) { throw new RuntimeException('Ajoute au moins un champ.'); }
     $display = in_array($data['display'] ?? '', ['flag', 'always', 'filled'], true) ? $data['display'] : 'flag';
-    $vals = [$name, mb_substr(safe_text($data['icon'] ?? '🧩'), 0, 8) ?: '🧩', h_long($data, 'description', 2000), json_encode($fields, JSON_UNESCAPED_UNICODE), !empty($data['repeatable']) ? 1 : 0, $display, !isset($data['labels']) || !empty($data['labels']) ? 1 : 0, safe_text($data['author'] ?? '')];
+    $vals = [$name, mb_substr(safe_text($data['icon'] ?? '🧩'), 0, 16) ?: '🧩', h_long($data, 'description', 2000), json_encode($fields, JSON_UNESCAPED_UNICODE), !empty($data['repeatable']) ? 1 : 0, $display, !isset($data['labels']) || !empty($data['labels']) ? 1 : 0, safe_text($data['author'] ?? '')];
     if ($id) { $pdo->prepare('UPDATE custom_block_defs SET name=?, icon=?, description=?, fields_json=?, repeatable=?, display=?, labels=?, author=?, version=version+1, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$vals, $id]); }
     else { $pdo->prepare('INSERT INTO custom_block_defs(name, icon, description, fields_json, repeatable, display, labels, author, uid, position) VALUES(?,?,?,?,?,?,?,?,?,(SELECT COALESCE(max(position),0)+1 FROM custom_block_defs))')->execute([...$vals, safe_text($data['uid'] ?? '') ?: bin2hex(random_bytes(8))]); $id = (int) $pdo->lastInsertId(); }
     log_change($pdo, 'meta', 0, 'update', 'Bloc personnalisé enregistré : ' . $name);

@@ -310,3 +310,22 @@ fieldset.h-citation legend{font-weight:700;font-size:.85em;padding:0 .3rem}
 .h-letter{font-family:inherit;width:100%}
 .is-up{color:#2e7d32}.is-down{color:#b5523b}
 @media (max-width:800px){.h-be-layout{grid-template-columns:1fr}.h-be-layout aside{position:static}}
+/* Blocs personnalisés : fiches remplies sans cadre dans le cadre ; palette d'émojis */
+.h-cb-entries{display:flex;flex-direction:column}
+.h-cb-entry+.h-cb-entry{border-top:1px solid var(--muted);margin-top:.6rem;padding-top:.6rem}
+.h-cb-entry-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;min-height:0}
+.h-cb-entry-head .h-tools{margin-left:auto}
+.h-cb-entry .data-list{margin:.2rem 0 0}
+.h-be-icon-field{display:flex;flex-direction:column;gap:.3rem}
+.h-be-icon-title{font-size:.8em;font-weight:700}
+.h-emoji-panel{border:1px solid var(--muted);padding:.5rem;background:var(--card-bg,#fff);max-width:640px}
+.h-emoji-panel[hidden]{display:none}
+.h-emoji-tabs{display:flex;flex-wrap:wrap;gap:.2rem .7rem;margin-bottom:.4rem;font-size:.85em}
+.h-emoji-tabs .is-active{font-weight:800;text-decoration:underline}
+.h-emoji-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(2.3rem,1fr));gap:.15rem;max-height:220px;overflow:auto}
+.h-emoji-grid[hidden]{display:none}
+.h-emoji-grid button{font-size:1.35rem;line-height:1;padding:.3rem;border:1px solid transparent;background:none;cursor:pointer}
+.h-emoji-grid button:hover{border-color:currentColor}
+.h-be-icon-field .h-be-icons{flex-wrap:nowrap;gap:.5rem}
+.h-be-icon-field input.h-be-icon{width:5rem;flex:none;font-size:1.5rem;text-align:center}
+.h-be-display p.muted{font-size:.85em;margin:.4rem 0 0}

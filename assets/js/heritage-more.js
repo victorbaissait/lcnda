@@ -308,6 +308,14 @@
     ];
     const typeInfo = t => FIELD_TYPES.find(x => x[0] === t) || FIELD_TYPES[0];
     const INFOS = [['birth', 'Naissance (date et lieu)'], ['death', 'Décès (date et lieu)'], ['age', 'Âge au décès'], ['occupation', 'Métier'], ['parents', 'Parents'], ['spouses', 'Conjoints'], ['children', 'Nombre d’enfants'], ['birthplace', 'Lieu de naissance'], ['residence', 'Lieu de résidence']];
+    const INFO_DEFAULT = 'Info tirée d’une fiche';
+    /** Intitulé affiché : celui choisi, sinon le nom de l'info (« Naissance (date et lieu) »…), avec la fiche d'origine. */
+    const infoLabel = (f, fields = []) => {
+        const base = f.label && f.label !== INFO_DEFAULT ? f.label : (INFOS.find(i => i[0] === f.info)?.[1] || 'Info');
+        const from = f.from && f.from !== 'self' ? fields.find(x => x.key === f.from) : null;
+        return from && !base.includes(from.label) ? `${base} — ${from.label}` : base;
+    };
+    const fieldLabel = (f, fields) => f.type === 'person_info' ? infoLabel(f, fields) : f.label;
     const ACCEPT = {image: 'image/*', video: 'video/*', audio: 'audio/*', all: 'image/*,video/*,audio/*,application/pdf'};
     const DISPLAY = {flag: 'Dans « Blocs à afficher sur la fiche » : je coche la case sur les fiches concernées', always: 'Sur toutes les fiches', filled: 'Seulement sur les fiches où il est rempli'};
     const blockPoints = (def, entries) => {
@@ -330,8 +338,8 @@
         }
     }
     function entryHtml(def, e, editable) {
-        const rows = def.fields.filter(f => f.type !== 'map').map(f => { const h = fieldValueHtml(def, f, e); return h ? `<div class="data-row"><dt>${esc(f.label)}</dt><dd>${h}</dd></div>` : ''; }).join('');
-        return `<article class="h-record h-cb-entry"><header><div>${ext.labelChips(e.labels)}</div>${editable ? tools(`data-h-cb-edit="${e.id}" data-h-cb-block="${def.id}"`, `data-h-cb-del="${e.id}"`, 'cette fiche du bloc') : ''}</header><dl class="data-list">${rows || '<p class="muted">Vide.</p>'}</dl></article>`;
+        const rows = def.fields.filter(f => f.type !== 'map').map(f => { const h = fieldValueHtml(def, f, e); return h ? `<div class="data-row"><dt>${esc(fieldLabel(f, def.fields))}</dt><dd>${h}</dd></div>` : ''; }).join('');
+        return `<article class="h-cb-entry"><div class="h-cb-entry-head">${ext.labelChips(e.labels)}${editable ? tools(`data-h-cb-edit="${e.id}" data-h-cb-block="${def.id}"`, `data-h-cb-del="${e.id}"`, 'cette fiche du bloc') : ''}</div><dl class="data-list">${rows || '<p class="muted">Vide.</p>'}</dl></article>`;
     }
     let currentBlocks = [];
     ext.personBlocks.custom_blocks = (index, detail, {editOnly}) => {
@@ -346,9 +354,9 @@
             const canAdd = Number(b.repeatable) || !b.entries.length;
             const hasMap = b.fields.some(f => f.type === 'map');
             const pts = hasMap ? blockPoints(b, b.entries) : [];
-            const selfInfos = b.fields.filter(f => f.type === 'person_info' && f.from === 'self' && b.self_info?.[f.key]).map(f => `<span class="collection-kind">${esc(f.label)} : ${esc(b.self_info[f.key])}</span>`).join(' ');
+            const selfInfos = b.fields.filter(f => f.type === 'person_info' && f.from === 'self' && b.self_info?.[f.key]).map(f => `<span class="collection-kind">${esc(infoLabel(f, b.fields))} : ${esc(b.self_info[f.key])}</span>`).join(' ');
             const body = `${b.description ? `<p class="muted">${esc(b.description)}</p>` : ''}${b.entries.length ? '' : selfInfos ? `<p>${selfInfos}</p>` : ''}
-                ${b.entries.length ? `<div class="${pts.length ? 'h-voyage-layout' : ''}"><div class="h-records">${b.entries.map(e => entryHtml(b, e, editable)).join('')}</div>${pts.length && ext.miniMap ? `<div>${ext.miniMap(pts, pts.length > 1 ? [{coords: pts.map(x => [x.lat, x.lon]), color: '#555', dashed: true}] : [], {height: 300})}</div>` : ''}</div>` : empty('Rien de rempli pour l’instant.')}`;
+                ${b.entries.length ? `<div class="${pts.length ? 'h-voyage-layout' : ''}"><div class="h-cb-entries">${b.entries.map(e => entryHtml(b, e, editable)).join('')}</div>${pts.length && ext.miniMap ? `<div>${ext.miniMap(pts, pts.length > 1 ? [{coords: pts.map(x => [x.lat, x.lon]), color: '#555', dashed: true}] : [], {height: 300})}</div>` : ''}</div>` : empty('Rien de rempli pour l’instant.')}`;
             cards.push(card(index, `${b.icon || '🧩'} ${b.name}`, b.entries.length || '', body, 'span-12', editOnly(canAdd ? `<button type="button" class="button small secondary" data-h-cb-edit="0" data-h-cb-block="${b.id}">+ Remplir</button>` : '')));
         });
         if (waiting.length && editable) cards.push(editOnly(card(index, 'Mes blocs', '', `<p class="muted">Blocs créés dans Maintenance → Éditeur de blocs, affichés seulement une fois remplis :</p><div class="page-actions">${waiting.map(b => `<button type="button" class="button small secondary" data-h-cb-edit="0" data-h-cb-block="${b.id}">${esc(b.icon || '🧩')} ${esc(b.name)}</button>`).join('')}</div>`, 'span-6')));
@@ -362,7 +370,7 @@
             try { await api('delete_custom_block_entry', {}, {method: 'POST', body: {id: del.dataset.hCbDel}}); toast('Supprimé.'); refresh(); } catch (error) { toast(error.message, 'error'); }
         }
     });
-    function fieldInputHtml(f, value, entry) {
+    function fieldInputHtml(f, value, entry, allFields = []) {
         const help = f.help ? `<small class="muted">${esc(f.help)}</small>` : '';
         const req = f.required ? ' required' : '';
         const name = `f_${f.key}`;
@@ -374,7 +382,7 @@
             case 'url': return `<label>${esc(f.label)}${help}<input type="url" name="${name}" value="${esc(value ?? '')}" placeholder="https://…"></label>`;
             case 'person': return `<label>${esc(f.label)}${help}${A().collectionPersonField(name, entry?.people?.[f.key] || null, 'Tape un nom…')}</label>`;
             case 'place': return `<label>${esc(f.label)}${help}${ext.placeField ? ext.placeField(name, value?.text || '', value?.lat ?? '', value?.lon ?? '', 'Commune, adresse…') : `<input name="${name}" value="${esc(value?.text || '')}">`}</label>`;
-            case 'person_info': return `<div class="h-cb-info"><strong>${esc(f.label)}</strong> <small class="muted">(repris tout seul de la fiche${f.from !== 'self' ? ' choisie' : ''})</small>${value ? ` : ${esc(value)}` : ''}</div>`;
+            case 'person_info': return `<div class="h-cb-info"><strong>ℹ️ ${esc(infoLabel(f, allFields))}</strong> <small class="muted">(repris tout seul de la fiche${f.from !== 'self' ? ' choisie' : ''})</small>${value ? ` : ${esc(value)}` : ' : <span class="muted">rien de connu pour l’instant</span>'}</div>`;
             case 'map': return `<p class="muted span-2">🗺️ ${esc(f.label)} : la carte montrera les lieux de ce bloc.</p>`;
             case 'media': return '';
             default: return `<label>${esc(f.label)}${help}<input name="${name}" value="${esc(value ?? '')}"${req}${f.type === 'date' ? ' placeholder="12 mai 1885"' : ''}></label>`;
@@ -389,7 +397,7 @@
         const mediaFields = def.fields.filter(f => f.type === 'media');
         dialog({
             eyebrow: (def.icon || '🧩') + ' ' + def.name.toUpperCase(), title: entryId ? 'Modifier' : 'Remplir le bloc', wide: def.fields.length > 4, labels: Number(def.labels) ? ['custom_block_entry', entry.labels] : null,
-            body: `${def.description ? `<p class="muted">${esc(def.description)}</p>` : ''}<div class="form-grid">${def.fields.map(f => fieldInputHtml(f, f.type === 'person_info' ? (entry.data[f.key] || def.self_info?.[f.key] || '') : entry.data[f.key], entry)).join('')}</div>
+            body: `${def.description ? `<p class="muted">${esc(def.description)}</p>` : ''}<div class="form-grid">${def.fields.map(f => fieldInputHtml(f, f.type === 'person_info' ? (entry.data[f.key] || def.self_info?.[f.key] || '') : entry.data[f.key], entry, def.fields)).join('')}</div>
                 ${mediaFields.length && ext.mediaEditorHtml ? ext.mediaEditorHtml('custom_block_entry', entry.id, entry.media || [], mediaFields.map(f => [f.key, f.label, ACCEPT[f.accept] || ACCEPT.all])) : ''}`,
             onSubmit: async form => {
                 const data = {};
@@ -432,10 +440,10 @@
     const TEMPLATES = [
         {name: 'Décorations et médailles', icon: '🎖️', description: 'Médailles, décorations, distinctions reçues.', repeatable: 1, fields: [['text', 'Décoration'], ['date', 'Date'], ['longtext', 'Motif, citation'], ['media', 'Diplôme, photo de la médaille']]},
         {name: 'Maison de famille', icon: '🏡', description: 'Les maisons où la famille a vécu.', repeatable: 1, fields: [['place', 'Adresse'], ['text', 'Période'], ['longtext', 'Souvenirs'], ['media', 'Photos'], ['map', 'Carte des maisons']]},
-        {name: 'Témoignage enregistré', icon: '🎙️', description: 'Souvenirs racontés par un proche.', repeatable: 1, fields: [['person', 'Raconté par'], ['date', 'Enregistré le'], ['media', 'Enregistrement (son ou vidéo)'], ['longtext', 'Résumé, transcription'], ['person_info', 'Naissance de la personne']]},
+        {name: 'Témoignage enregistré', icon: '🎙️', description: 'Souvenirs racontés par un proche.', repeatable: 1, fields: [['person', 'Raconté par'], ['date', 'Enregistré le'], ['media', 'Enregistrement (son ou vidéo)'], ['longtext', 'Résumé, transcription'], ['person_info', 'Naissance (date et lieu)']]},
         {name: 'Bloc vide', icon: '🧩', description: '', repeatable: 1, fields: [['text', 'Titre']]},
     ];
-    const newField = (type, label) => ({key: 'f' + Math.random().toString(36).slice(2, 8), type, label: label || typeInfo(type)[2], help: '', options: type === 'select' ? ['Choix 1', 'Choix 2'] : [], info: 'birth', from: 'self', accept: 'all', required: false});
+    const newField = (type, label) => ({key: 'f' + Math.random().toString(36).slice(2, 8), type, label: label || (type === 'person_info' ? INFOS[0][1] : typeInfo(type)[2]), help: '', options: type === 'select' ? ['Choix 1', 'Choix 2'] : [], info: 'birth', from: 'self', accept: 'all', required: false});
     let editorDef = null;
     ext.maintenance.block_editor = async token => {
         const data = await api('custom_blocks_defs');
@@ -472,13 +480,29 @@
             })),
         });
     }
+    const EMOJIS = {
+        'Famille': '👪 👨‍👩‍👧‍👦 👨‍👩‍👧 👩‍👧 👨‍👦 👶 👧 👦 👩 👨 👵 👴 🧓 🤰 🤱 👰 🤵 💍 💒 💐 💌 💕 ❤️ 🫶 🤝 🎂 🎁 🎉 🍼 🧸 🪆 👼 ✝️ ⚰️ 🪦 🕯️ 🌹 🥀',
+        'Maison et lieux': '🏡 🏠 🏘️ 🏚️ 🏰 🏯 ⛪ 🕌 🕍 🛕 🏛️ 🏫 🏥 🏭 🏪 🏨 🏢 🗼 🌉 🏞️ ⛰️ 🏔️ 🌋 🏖️ 🏝️ 🌾 🌲 🌳 🌻 🗺️ 🧭 📍 📌 🚩 🏳️ 🌍 🌎 🌏',
+        'Métiers': '🧑‍🌾 🚜 🐄 🐑 🐴 🐓 🍇 🍷 🧑‍🍳 🍞 🥖 🧀 🧑‍🔧 🔨 🪚 ⚒️ 🛠️ ⛏️ 🧱 🪵 🧑‍🏭 ⚙️ 🧵 🪡 🧶 👗 👞 🧑‍⚕️ ⚕️ 💊 🩺 🧑‍🏫 🎓 📚 ✒️ 🧑‍⚖️ ⚖️ 🧑‍✈️ ⚓ 🚢 🎣 🧑‍🚒 👮 💂 🧑‍🎨 🎨 🎭 🎻 🎹 🎺 🥁 🎤 📷 🖋️ 💼 💰 🏦',
+        'Guerre et mémoire': '🎖️ 🏅 🥇 🎗️ ⚔️ 🗡️ 🛡️ 🪖 🔫 💣 ✊ 🕊️ ✉️ 📯 🚂 🚃 ⛓️ 🔒 🗝️ 🇫🇷 🏴 🏳️ 🪦 🕯️ 📜 📃 📰 🗞️',
+        'Documents': '📜 📃 📄 📑 📋 🗂️ 📁 📂 🗃️ 🗄️ 📒 📓 📔 📕 📗 📘 📙 📚 📖 🔖 🏷️ ✉️ 📨 📮 📝 ✏️ 🖊️ 🖋️ ✒️ 📎 🖇️ 📏 🔍 🔎 🧾 🪪 💳 📸 🖼️ 🎞️ 📹 🎥 🎙️ 📻 📺 💾 💿 📼',
+        'Voyages': '🚢 ⛵ 🛶 ⚓ 🚂 🚃 🚋 🚌 🚗 🚲 🛵 ✈️ 🛩️ 🚀 🧳 🎒 🗺️ 🧭 🌐 🏝️ 🗽 🗼 🏔️ 🛤️ 🚉 🛂 🛃',
+        'Loisirs et santé': '⚽ 🏉 🚴 🏊 🎣 🏹 ♟️ 🎲 🃏 🎯 🎪 🎠 🎡 📯 🎵 🎶 🎼 💃 🕺 🍾 🥂 🍽️ 🩺 💉 🩹 🧬 🦷 👓 🦯 ♿ 🏥',
+        'Nature et animaux': '🌸 🌼 🌷 🌹 🍀 🍂 🍁 🌿 🌱 🌳 🌲 🌾 🍎 🍐 🍒 🥔 🌽 🐶 🐱 🐴 🐄 🐖 🐑 🐐 🐓 🦆 🐝 🦋 🐟 🐚 🦉 🐦 ☀️ 🌙 ⭐ ❄️ 🌧️ ⛈️ 🌈 🔥 💧',
+        'Symboles': '🧩 ⭐ 🌟 ✨ 💡 🔔 📣 ❗ ❓ ✅ ☑️ ❌ ⚠️ 🔴 🟠 🟡 🟢 🔵 🟣 ⚫ ⚪ 🟤 ♥️ ♦️ ♣️ ♠️ ⚜️ 🔱 ☘️ ✡️ ☪️ ☮️ ☯️ ♾️ 🔗 🧬 🧪 🔬 🔭 ⌛ ⏳ ⏰ 📅 🗓️',
+    };
+    function emojiPanelHtml() {
+        const groups = Object.entries(EMOJIS);
+        return `<div class="h-emoji-panel" hidden><div class="h-emoji-tabs">${groups.map(([g], i) => `<button type="button" class="link-button ${i ? '' : 'is-active'}" data-emoji-tab="${esc(g)}">${esc(g)}</button>`).join('')}</div>
+            ${groups.map(([g, list], i) => `<div class="h-emoji-grid" data-emoji-group="${esc(g)}" ${i ? 'hidden' : ''}>${list.split(' ').filter(Boolean).map(e => `<button type="button" data-be-icon="${e}" title="${e}">${e}</button>`).join('')}</div>`).join('')}</div>`;
+    }
     function fieldRowHtml(f, i, all) {
         const [, icon, typeName] = typeInfo(f.type);
         const personFields = all.filter(x => x.type === 'person');
         let extra = '';
         if (f.type === 'select') extra = `<label class="span-2">Les choix <small>(un par ligne)</small><textarea rows="3" data-be="options">${esc(f.options.join('\n'))}</textarea></label>`;
         if (f.type === 'media') extra = `<label>Fichiers acceptés<select data-be="accept">${[['all', 'Photos, vidéos, sons, PDF'], ['image', 'Photos seulement'], ['video', 'Vidéos seulement'], ['audio', 'Sons seulement']].map(([k, l]) => `<option value="${k}" ${f.accept === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
-        if (f.type === 'person_info') extra = `<label>Quelle info ?<select data-be="info">${INFOS.map(([k, l]) => `<option value="${k}" ${f.info === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>De quelle fiche ?<select data-be="from"><option value="self">La fiche où est le bloc</option>${personFields.map(p => `<option value="${esc(p.key)}" ${f.from === p.key ? 'selected' : ''}>La personne du champ « ${esc(p.label)} »</option>`).join('')}</select></label>`;
+        if (f.type === 'person_info') extra = `<p class="muted span-2">ℹ️ Rien à taper : l’info est reprise toute seule de la fiche, et se met à jour quand la fiche change.</p><label>Quelle info ?<select data-be="info">${INFOS.map(([k, l]) => `<option value="${k}" ${f.info === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>De quelle fiche ?<select data-be="from"><option value="self">La fiche où est le bloc</option>${personFields.map(p => `<option value="${esc(p.key)}" ${f.from === p.key ? 'selected' : ''}>La personne du champ « ${esc(p.label)} »</option>`).join('')}</select></label>`;
         const canRequire = ['text', 'longtext', 'date', 'select', 'person'].includes(f.type);
         return `<div class="h-be-field" data-be-i="${i}"><div class="h-be-field-head"><span class="h-be-type" title="${esc(typeName)}">${icon}</span><input data-be="label" value="${esc(f.label)}" placeholder="Nom du champ" aria-label="Nom du champ"><small class="muted">${esc(typeName)}</small>
             <span class="h-row-actions"><button type="button" class="icon-button" data-be-up title="Monter">↑</button><button type="button" class="icon-button" data-be-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-be-del title="Retirer ce champ">🗑</button></span></div>
@@ -486,7 +510,7 @@
     }
     function previewHtml(d) {
         const fake = {id: 0, data: {}, media: [], people: {}};
-        return `<div class="card span-12 h-be-preview"><header class="card-head"><div class="card-title"><h3>${esc(d.icon || '🧩')} ${esc(d.name || 'Mon bloc')}</h3></div></header><div class="card-body">${d.description ? `<p class="muted">${esc(d.description)}</p>` : ''}<div class="form-grid">${d.fields.map(f => fieldInputHtml(f, '', fake)).join('')}${d.fields.filter(f => f.type === 'media').map(f => `<label>${esc(f.label)}<input type="file" disabled></label>`).join('')}</div>${Number(d.labels) ? '<p><small>🏷️ Étiquettes</small></p>' : ''}</div></div>`;
+        return `<div class="card span-12 h-be-preview"><header class="card-head"><div class="card-title"><h3>${esc(d.icon || '🧩')} ${esc(d.name || 'Mon bloc')}</h3></div></header><div class="card-body">${d.description ? `<p class="muted">${esc(d.description)}</p>` : ''}<div class="form-grid">${d.fields.map(f => fieldInputHtml(f, '', fake, d.fields)).join('')}${d.fields.filter(f => f.type === 'media').map(f => `<label>${esc(f.label)}<input type="file" disabled></label>`).join('')}</div>${Number(d.labels) ? '<p><small>🏷️ Étiquettes</small></p>' : ''}</div></div>`;
     }
     function renderBlockEditor(token) {
         const d = editorDef;
@@ -494,7 +518,8 @@
             <div class="h-be-layout"><div>
             <section class="maintenance-panel"><h3>1. Le bloc</h3><div class="form-grid">
                 <label>Nom<input data-bd="name" value="${esc(d.name)}" placeholder="Décorations, Maison de famille…" required></label>
-                <label>Icône<span class="h-be-icons"><input data-bd="icon" value="${esc(d.icon)}" maxlength="4" class="h-be-icon">${['🧩', '🎖️', '🏡', '🎙️', '⚓', '⛪', '🏭', '🚜', '⚕️', '🎓', '📜', '💌', '🍷', '🐴', '⚽', '🎵'].map(e => `<button type="button" class="link-button" data-be-icon="${e}">${e}</button>`).join('')}</span></label>
+                <div class="h-be-icon-field span-2"><span class="h-be-icon-title">Icône</span><span class="h-be-icons"><input data-bd="icon" value="${esc(d.icon)}" maxlength="16" class="h-be-icon" aria-label="Icône (n’importe quel émoji)"><button type="button" class="button small secondary" data-be-emoji-open>Choisir un émoji…</button></span>
+                    <small class="muted">Ou colle n’importe quel émoji dans la case (sur Mac : Ctrl + ⌘ + Espace).</small>${emojiPanelHtml()}</div>
                 <label class="span-2">Description <small>(facultatif)</small><input data-bd="description" value="${esc(d.description)}" placeholder="À quoi sert ce bloc ?"></label>
                 <fieldset class="span-2 h-be-display"><legend>Où apparaît ce bloc ?</legend>${Object.entries(DISPLAY).map(([k, l]) => `<label class="checkbox-line"><input type="radio" name="be-display" value="${k}" ${d.display === k ? 'checked' : ''}> ${esc(l)}</label>`).join('')}<p class="muted">Avec le premier choix, une case « ${esc(d.icon || '🧩')} ${esc(d.name || 'Mon bloc')} » apparaît dans la fenêtre Identité, rubrique « Blocs à afficher sur la fiche », à côté de Départs, Poilu, Résistant…</p></fieldset>
                 <label class="checkbox-line"><input type="checkbox" data-bd="repeatable" ${Number(d.repeatable) ? 'checked' : ''}> Plusieurs fois sur une même fiche (ex. plusieurs médailles)</label>
@@ -512,7 +537,14 @@
         ws.querySelectorAll('[data-bd]').forEach(el => el.addEventListener('input', () => { d[el.dataset.bd] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : el.value; preview(); }));
         ws.querySelectorAll('[data-bd][type=checkbox]').forEach(el => el.addEventListener('change', () => { d[el.dataset.bd] = el.checked ? 1 : 0; preview(); }));
         ws.querySelectorAll('[name=be-display]').forEach(el => el.addEventListener('change', () => { d.display = el.value; }));
-        ws.querySelectorAll('[data-be-icon]').forEach(b => b.addEventListener('click', () => { d.icon = b.dataset.beIcon; ws.querySelector('[data-bd=icon]').value = d.icon; preview(); }));
+        const panel = ws.querySelector('.h-emoji-panel');
+        ws.querySelector('[data-be-emoji-open]').addEventListener('click', () => { panel.hidden = !panel.hidden; });
+        panel.addEventListener('click', e => {
+            const tab = e.target.closest('[data-emoji-tab]');
+            if (tab) { panel.querySelectorAll('[data-emoji-tab]').forEach(t => t.classList.toggle('is-active', t === tab)); panel.querySelectorAll('[data-emoji-group]').forEach(g => { g.hidden = g.dataset.emojiGroup !== tab.dataset.emojiTab; }); return; }
+            const pick = e.target.closest('[data-be-icon]');
+            if (pick) { d.icon = pick.dataset.beIcon; ws.querySelector('[data-bd=icon]').value = d.icon; panel.hidden = true; preview(); }
+        });
         ws.querySelectorAll('[data-be-add]').forEach(b => b.addEventListener('click', () => { d.fields.push(newField(b.dataset.beAdd)); again(); setTimeout(() => { const rows = A().$$('.h-be-field'); rows[rows.length - 1]?.querySelector('[data-be=label]')?.select(); }, 0); }));
         const box = ws.querySelector('[data-be-fields]');
         box.addEventListener('input', e => {
@@ -523,7 +555,17 @@
             else if (k) f[k] = e.target.value;
             preview();
         });
-        box.addEventListener('change', e => { const row = e.target.closest('[data-be-i]'); if (!row) return; const f = d.fields[Number(row.dataset.beI)], k = e.target.dataset.be; if (k === 'required') f.required = e.target.checked; else if (k && e.target.tagName === 'SELECT') f[k] = e.target.value; preview(); });
+        box.addEventListener('change', e => {
+            const row = e.target.closest('[data-be-i]'); if (!row) return;
+            const f = d.fields[Number(row.dataset.beI)], k = e.target.dataset.be;
+            if (k === 'required') f.required = e.target.checked;
+            else if (k && e.target.tagName === 'SELECT') {
+                const auto = f.type === 'person_info' && (!f.label || f.label === INFO_DEFAULT || INFOS.some(i => i[1] === f.label));
+                f[k] = e.target.value;
+                if (k === 'info' && auto) { f.label = INFOS.find(i => i[0] === f.info)?.[1] || f.label; row.querySelector('[data-be=label]').value = f.label; }
+            }
+            preview();
+        });
         box.addEventListener('click', e => {
             const row = e.target.closest('[data-be-i]'); if (!row) return;
             const i = Number(row.dataset.beI);
