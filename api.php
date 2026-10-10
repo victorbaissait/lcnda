@@ -225,6 +225,11 @@ try {
         'impossible_journeys' => json_response(['alerts' => impossible_journeys($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'sync_status' => json_response(sync_status($pdo)),
         'sync_export' => sync_export($pdo),
+        'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''))),
+        'languages_overview' => json_response(languages_overview($pdo)),
+        'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
+        'help_requests' => json_response(help_requests_data($pdo, safe_text($_GET['status'] ?? 'open'))),
+        'help_request_draft' => json_response(['message' => help_request_message($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['target'] ?? 'other'), safe_text($_GET['question'] ?? ''), safe_text($_GET['format'] ?? 'forum'))]),
         'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
         'family_memories' => json_response(['memories' => family_memories_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''), safe_text($_GET['kind'] ?? '')), 'kinds' => MEMORY_KINDS]),
         'precise_places' => json_response(['places' => precise_places_list($pdo, safe_text($_GET['q'] ?? ''), max(5, min(500, safe_int($_GET['radius'] ?? 30))))]),
@@ -1819,7 +1824,7 @@ function person_detail(PDO $pdo, int $id): never
         GROUP BY m.id ORDER BY COALESCE(min(ev.year),9999),COALESCE(m.date_text,''),link_position,m.id");
     $media->execute([$id, $id, $id, $id, $id, $id, $id, $id, $id, $id, $id]);
 
-    $sources = $pdo->prepare("SELECT DISTINCT s.*,sl.id AS link_id,sl.page,sl.note,sl.entity_type,sl.entity_id FROM sources s JOIN source_links sl ON sl.source_record_id=s.id
+    $sources = $pdo->prepare("SELECT DISTINCT s.*,sl.id AS link_id,sl.page,sl.note,sl.entity_type,sl.entity_id,sl.citation_json FROM sources s JOIN source_links sl ON sl.source_record_id=s.id
         WHERE (sl.entity_type='person' AND sl.entity_id=?) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=? OR family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?))) ORDER BY s.id DESC");
     $sources->execute([$id,$id,$id,$id]);
 
@@ -8838,6 +8843,12 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'sync_start' => sync_start($pdo,$data),
             'sync_set_author' => sync_set_author($pdo,$data),
             'kiosk_enter' => kiosk_enter($data),
+            'save_person_language' => save_person_language($pdo,$data),
+            'delete_person_language' => delete_person_language($pdo,$data),
+            'set_no_inherited_language' => set_no_inherited_language($pdo,$data),
+            'save_record_languages' => save_record_languages($pdo,$data),
+            'save_help_request' => save_help_request($pdo,$data),
+            'delete_help_request' => delete_help_request($pdo,$data),
             'check_links' => check_links($pdo,$data),
             'replace_link' => replace_link($pdo,$data),
             'delete_personal_dictionary_entry' => delete_personal_dictionary_entry($pdo,$data),
@@ -10726,7 +10737,7 @@ function save_person(PDO $pdo,array $data): array
     $set[]="artist_events_display=?";$values[]=$artistDisplay;
     $set[]="show_military_block=?";$values[]=(isset($data['show_military_block'])&&$data['show_military_block']?1:0);
     // Blocs à afficher sur demande (cases de la fenêtre Identité) : départs, enfant placé, blason, poilu
-    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
+    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
     if(!$set)return $before;
     $values[]=$id;$pdo->prepare('UPDATE persons SET '.implode(',',$set).',updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute($values);
     $stmt->execute([$id]);$after=$stmt->fetch();log_change($pdo,'person',$id,'update','Modification de '.full_name($after),$before,$after);
@@ -11145,6 +11156,7 @@ function add_web_source(PDO $pdo,array $data): array
     $stmt->execute([$type,$title,safe_text($data['author']??''),safe_text($data['website']??''),safe_text($data['accessed_at']??''),$url,safe_text($data['text']??'')]);
     $sourceId=(int)$pdo->lastInsertId();
     $pdo->prepare('INSERT INTO source_links(entity_type,entity_id,source_record_id,page,note) VALUES(?,?,?,?,?)')->execute([$entityType,$entityId,$sourceId,safe_text($data['page']??''),safe_text($data['note']??'')]);
+    store_citation($pdo,(int)$pdo->lastInsertId(),$data); // référence détaillée (service d'archives, cote, vue, acte…)
     log_change($pdo,'source',$sourceId,'create','Ajout de la source « '.$title.' » à '.($entityType==='event'?'l’événement #'.$entityId:'la fiche #'.$personId));
     return ['id'=>$sourceId];
 }
@@ -11161,6 +11173,7 @@ function save_source(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE sources SET source_type=?,title=?,author=?,agency=?,publication=?,url=?,text=? WHERE id=?')
         ->execute([$type,$title,safe_text($data['author']??''),safe_text($data['website']??''),safe_text($data['accessed_at']??''),$url,safe_text($data['text']??''),$sourceId]);
     if($linkId){[$entityType,$entityId]=source_target($data,$personId);$pdo->prepare('UPDATE source_links SET entity_type=?,entity_id=?,page=?,note=? WHERE id=?')->execute([$entityType,$entityId,safe_text($data['page']??''),safe_text($data['note']??''),$linkId]);}
+    if($linkId)store_citation($pdo,$linkId,$data);
     $stmt->execute([$sourceId]);$sourceAfter=$stmt->fetch();
     log_change($pdo,'source',$sourceId,'update','Modification de la source « '.$title.' »',['source'=>$sourceBefore,'link'=>$linkBefore],$sourceAfter);
     return $sourceAfter;

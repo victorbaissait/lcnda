@@ -169,16 +169,27 @@ function voyages_data(PDO $pdo, int $personId = 0): array
 {
     $sql = 'SELECT v.*, trim(p.first_name||\' \'||p.last_name) AS person_name, p.gender FROM person_voyages v JOIN persons p ON p.id=v.person_id';
     if ($personId) {
-        $stmt = $pdo->prepare($sql . ' WHERE v.person_id=? ORDER BY COALESCE(v.departure_year, 9999), v.id');
-        $stmt->execute([$personId]);
+        // Voyage commun : il apparaît aussi sur la fiche de chacun des compagnons
+        $stmt = $pdo->prepare($sql . ' WHERE v.person_id=? OR v.id IN (SELECT voyage_id FROM voyage_people WHERE person_id=?) ORDER BY COALESCE(v.departure_year, 9999), v.id');
+        $stmt->execute([$personId, $personId]);
     } else {
         $stmt = $pdo->query($sql . ' ORDER BY COALESCE(v.departure_year, 9999), v.id');
     }
     $rows = $stmt->fetchAll();
     $media = heritage_media($pdo, 'voyage', array_column($rows, 'id'));
+    $companions = [];
+    if ($rows) {
+        $ids = array_map(static fn($r) => (int) $r['id'], $rows);
+        $cp = $pdo->prepare('SELECT * FROM voyage_people WHERE voyage_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') ORDER BY id');
+        $cp->execute($ids);
+        $cpRows = $cp->fetchAll();
+        $people = collection_people($pdo, array_column($cpRows, 'person_id'));
+        foreach ($cpRows as $c) { if (isset($people[(int) $c['person_id']])) { $companions[(int) $c['voyage_id']][] = $c + ['person' => $people[(int) $c['person_id']]]; } }
+    }
     foreach ($rows as &$r) {
         $r['media'] = $media[(int) $r['id']] ?? [];
         $r['route'] = h_json_list($r['route_json']);
+        $r['companion_people'] = $companions[(int) $r['id']] ?? [];
         unset($r['route_json']);
     }
     unset($r);
@@ -211,6 +222,20 @@ function save_voyage(PDO $pdo, array $data): array
         $id = (int) $pdo->lastInsertId();
         log_change($pdo, 'person', $personId, 'update', 'Voyage ajouté : ' . ($fields[4] ?: $fields[5] ?: 'départ'));
         $pdo->prepare('UPDATE persons SET show_voyage_block=1 WHERE id=?')->execute([$personId]);
+    }
+    // Partis ensemble : chaque compagnon a sa fiche, et sa propre naturalisation à l'arrivée
+    if (isset($data['companion_people']) && is_array($data['companion_people'])) {
+        $prev = $pdo->prepare('SELECT person_id FROM voyage_people WHERE voyage_id=?'); $prev->execute([$id]);
+        $before = array_fill_keys(array_map('intval', $prev->fetchAll(PDO::FETCH_COLUMN)), true);
+        $pdo->prepare('DELETE FROM voyage_people WHERE voyage_id=?')->execute([$id]);
+        $ins = $pdo->prepare('INSERT OR IGNORE INTO voyage_people(voyage_id, person_id, relation, naturalization_date, naturalization_place, naturalization_text) VALUES(?,?,?,?,?,?)');
+        $flag = $pdo->prepare('UPDATE persons SET show_voyage_block=1 WHERE id=?');
+        foreach ($data['companion_people'] as $c) {
+            $pid = safe_int(is_array($c) ? ($c['person_id'] ?? 0) : 0);
+            if (!$pid || $pid === $personId) { continue; }
+            $ins->execute([$id, $pid, safe_text($c['relation'] ?? ''), safe_text($c['naturalization_date'] ?? ''), safe_text($c['naturalization_place'] ?? ''), h_long($c, 'naturalization_text', 8000)]);
+            if (!isset($before[$pid])) { $flag->execute([$pid]); }
+        }
     }
     return ['id' => $id, 'dep' => [$depLat, $depLon], 'dest' => [$destLat, $destLon]];
 }
@@ -465,6 +490,9 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'probate_inventories' => $inv,
         'family_papers' => family_papers_data($pdo, '', $personId),
         'parishes' => person_parishes($pdo, $personId),
+        'languages' => function_exists('person_languages_resolved') ? person_languages_resolved($pdo, $personId) : null,
+        'event_languages' => function_exists('record_languages_for') ? record_languages_for($pdo, 'event', array_map('intval', $pdo->query('SELECT id FROM events WHERE person_id=' . $personId . ' OR family_id IN (SELECT id FROM families WHERE partner1_id=' . $personId . ' OR partner2_id=' . $personId . ')')->fetchAll(PDO::FETCH_COLUMN))) : [],
+        'mentions' => function_exists('person_mentions') ? person_mentions($pdo, $personId) : [],
     ];
 }
 
@@ -1035,6 +1063,8 @@ function saved_search_criteria(array $c): array
         'event' => $event, 'place' => safe_text($c['place'] ?? ''), 'year_from' => $year($c['year_from'] ?? null), 'year_to' => $year($c['year_to'] ?? null),
         'occupation' => safe_text($c['occupation'] ?? ''), 'label_id' => safe_int($c['label_id'] ?? 0) ?: null,
         'living' => in_array($c['living'] ?? '', ['living', 'deceased', 'unknown'], true) ? $c['living'] : '',
+        'ancestors' => !empty($c['ancestors']) ? 1 : 0,
+        'same_birthday' => safe_int($c['same_birthday'] ?? 0) ?: null,
     ];
 }
 
@@ -1042,6 +1072,7 @@ function saved_search_criteria(array $c): array
 function run_saved_search(PDO $pdo, array $criteria): array
 {
     $c = saved_search_criteria($criteria);
+    if ($c['same_birthday'] && function_exists('same_birthday_ids')) { return same_birthday_ids($pdo, (int) $c['same_birthday']); }
     $where = []; $params = [];
     if ($c['last_name'] !== '') {
         $value = match ($c['name_mode']) { 'contains' => '%' . $c['last_name'] . '%', 'starts' => $c['last_name'] . '%', default => $c['last_name'] };
@@ -1070,10 +1101,18 @@ function run_saved_search(PDO $pdo, array $criteria): array
         $where[] = 'EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ' . implode(' AND ', $cond) . ')';
         array_push($params, ...$sub);
     }
-    if (!$where) { throw new RuntimeException('Indique au moins un critère.'); }
+    if (!$where && !$c['ancestors']) { throw new RuntimeException('Indique au moins un critère.'); }
+    if (!$where) { $where[] = '1=1'; }
     $stmt = $pdo->prepare('SELECT p.id FROM persons p WHERE ' . implode(' AND ', $where) . ' ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE LIMIT 5000');
     $stmt->execute($params);
-    return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+    $ids = array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+    if ($c['ancestors']) { // seulement les ancêtres de la personne de départ de l'arbre
+        $start = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 ORDER BY id LIMIT 1')->fetchColumn();
+        $anc = $start ? h_ancestors($pdo, $start, 40) : [];
+        unset($anc[$start]);
+        $ids = array_values(array_filter($ids, static fn($id) => isset($anc[$id])));
+    }
+    return $ids;
 }
 
 function saved_search_label(array $c): string
@@ -1089,6 +1128,8 @@ function saved_search_label(array $c): string
     elseif ($c['year_from']) { $parts[] = "{$ev} après {$c['year_from']}"; }
     elseif ($c['year_to']) { $parts[] = "{$ev} avant {$c['year_to']}"; }
     if ($c['occupation'] !== '') { $parts[] = 'métier ' . $c['occupation']; }
+    if ($c['ancestors']) { $parts[] = 'ancêtres seulement'; }
+    if ($c['same_birthday']) { $parts[] = 'né le même jour que la fiche #' . $c['same_birthday']; }
     return implode(' · ', $parts);
 }
 

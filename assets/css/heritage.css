@@ -214,3 +214,48 @@ body.is-kiosk [data-h-voyage-edit],body.is-kiosk [data-h-placement-edit],body.is
 .h-sync-table tr.is-conflict td{background:rgba(204,71,0,.1)}
 .h-sync-fields{margin:0;padding-left:1rem;font-size:.85em}
 .h-journeys td{vertical-align:top}
+
+/* Boutons « Supprimer » : rouge sur blanc (ils étaient noir sur noir avec .secondary) */
+.button.secondary.danger{background:#fff;color:#a31625;border-color:#a31625}
+.button.secondary.danger:hover{background:#c91d2e;color:#fff}
+:root[data-theme="dark"] .button.secondary.danger{background:var(--white);color:#ff6b6b;border-color:#ff6b6b}
+
+/* ⌘F : toutes les occurrences surlignées, l'occurrence courante en orange */
+::highlight(lcnda-find){background:#ffe08a;color:#111}
+::highlight(lcnda-find-current){background:#ff9a3c;color:#111}
+.find-bar-count{color:var(--muted) !important;min-width:4.5em;text-align:right}
+.find-bar-count.is-none{color:#b03a2e !important}
+
+/* ── Relier et raconter (assets/js/heritage-links.js) ── */
+.h-flag-always{font-weight:normal;color:var(--muted);font-size:.85em}
+.h-flag-table td{vertical-align:middle}
+.h-companion-row input{flex:1 1 120px}
+.h-question-form{display:flex;gap:.5rem}
+.h-question-form input{flex:1;font-size:1.05em}
+.h-understood .collection-kind{margin:.1rem}
+.h-lang-chip{display:inline-block;padding:.05rem .45rem;border:1px solid var(--ink);border-radius:10px;font-size:.85em;background:var(--card-bg);margin:.1rem}
+.h-lang-chip.is-probable{border-style:dashed}
+.h-lang-chip.is-doute{border-style:dotted;color:var(--muted)}
+.h-lang-x{border:0;background:none;cursor:pointer;color:#a31625;padding:0 0 0 .2rem}
+.h-lang-row{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap;margin:.25rem 0}
+.h-lang-editor{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;margin:.6rem 0}
+.h-event-langs{padding:0 20px}
+.h-lang-add{display:inline-flex;gap:.3rem;align-items:center}
+.h-lang-add input{width:9em}
+.h-lang-legend{display:flex;flex-wrap:wrap;gap:.8rem;margin:.5rem 0}
+.h-lang-legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:.3rem;vertical-align:middle}
+.h-mention-list{position:fixed;z-index:9500;background:var(--paper);border:1px solid var(--ink);display:flex;flex-direction:column;min-width:240px;max-height:220px;overflow:auto;box-shadow:var(--shadow-small)}
+.h-mention-list button{text-align:left;padding:.35rem .55rem;border:0;background:none;cursor:pointer;color:var(--ink)}
+.h-mention-list button:hover{background:var(--blue-soft)}
+.h-mention-list small.muted{padding:.3rem .55rem}
+.h-mention{font-weight:700}
+.h-mentions{padding-left:1rem;margin:.3rem 0}
+.h-mentions li{margin:.4rem 0;list-style:none}
+fieldset.h-citation{border:1px dashed var(--muted);padding:.6rem .8rem;margin:.4rem 0}
+fieldset.h-citation legend{font-weight:700;font-size:.85em;padding:0 .3rem}
+.h-citation-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.5rem}
+.h-citation-grid .span-2{grid-column:1/-1}
+@media(max-width:800px){.h-citation-grid{grid-template-columns:1fr 1fr}}
+.h-citation-preview{margin:.4rem 0 0;font-family:Georgia,serif}
+.h-film-preview canvas{width:100%;height:auto;border:var(--line);background:#dfe6ea;margin-top:.6rem}
+[data-h-film]{white-space:nowrap}

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 10;
+const SCHEMA_VERSION = 11;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -31,6 +31,7 @@ function migration_steps(): array
         8 => 'schema_v8',
         9 => 'schema_v9',
         10 => 'schema_v10',
+        11 => 'schema_v11',
     ];
 }
 
@@ -706,6 +707,67 @@ function schema_v10(PDO $pdo): void
         summary TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
+}
+
+/**
+ * Structure n°11 (2026-10-12) : compagnons d'un voyage (avec la naturalisation de chacun), langues parlées (par une
+ * personne et sa descendance) et langues des actes et des documents (avec un degré de certitude), demandes d'entraide,
+ * citations de sources détaillées (service d'archives, cote, vue, acte…).
+ */
+function schema_v11(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS voyage_people (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        voyage_id INTEGER NOT NULL REFERENCES person_voyages(id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        relation TEXT NOT NULL DEFAULT '',
+        naturalization_date TEXT NOT NULL DEFAULT '',
+        naturalization_place TEXT NOT NULL DEFAULT '',
+        naturalization_text TEXT NOT NULL DEFAULT '',
+        UNIQUE(voyage_id, person_id)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_voyage_people_person ON voyage_people(person_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS person_languages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        language TEXT NOT NULL,
+        certainty TEXT NOT NULL DEFAULT 'certain',
+        to_descendants INTEGER NOT NULL DEFAULT 1,
+        note TEXT NOT NULL DEFAULT ''
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_person_languages_person ON person_languages(person_id)');
+    $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('persons') WHERE name='no_inherited_language'")->fetchColumn();
+    if (!$has) { $pdo->exec("ALTER TABLE persons ADD COLUMN no_inherited_language INTEGER NOT NULL DEFAULT 0"); }
+    $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('persons') WHERE name='show_language_block'")->fetchColumn();
+    if (!$has) { $pdo->exec("ALTER TABLE persons ADD COLUMN show_language_block INTEGER NOT NULL DEFAULT 0"); }
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS record_languages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        entity_type TEXT NOT NULL CHECK(entity_type IN ('event','media')),
+        entity_id INTEGER NOT NULL,
+        language TEXT NOT NULL,
+        certainty TEXT NOT NULL DEFAULT 'certain',
+        UNIQUE(entity_type, entity_id, language)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_record_languages ON record_languages(entity_type, entity_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS help_requests (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER REFERENCES persons(id) ON DELETE CASCADE,
+        target TEXT NOT NULL DEFAULT '',
+        question TEXT NOT NULL DEFAULT '',
+        message TEXT NOT NULL DEFAULT '',
+        status TEXT NOT NULL DEFAULT 'draft',
+        posted_where TEXT NOT NULL DEFAULT '',
+        posted_url TEXT NOT NULL DEFAULT '',
+        answer TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('source_links') WHERE name='citation_json'")->fetchColumn();
+    if (!$has) { $pdo->exec("ALTER TABLE source_links ADD COLUMN citation_json TEXT NOT NULL DEFAULT ''"); }
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

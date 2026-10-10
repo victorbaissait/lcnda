@@ -19,7 +19,8 @@
     "test:gedcom": "node tests/test-gedcom.js",
     "test:import": "node tests/test-import.js",
     "test:heritage": "node tests/test-heritage.js",
-    "test:tools": "node tests/test-tools.js"
+    "test:tools": "node tests/test-tools.js",
+    "test:links": "node tests/test-links.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

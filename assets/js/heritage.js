@@ -268,8 +268,73 @@
         }).join('');
         return `<div class="person-map-stage h-map map-bg-${esc(bg)}" style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
     }
+    /* ─── Blocs spéciaux de la fiche : cochés fiche par fiche, ou sur toutes les fiches (Apparence) ─── */
+    const FLAG_BLOCKS = [['show_voyage_block', '🚢 Départs / émigration'], ['show_placement_block', '👶 Enfant placé'], ['show_heraldry_block', '🛡️ Noblesse / blason'], ['show_poilu_block', '🎖️ Poilu 14-18'], ['show_language_block', '🗣️ Langues']];
+    function flagSettings() {
+        let v = {};
+        try { v = JSON.parse(localStorage.getItem('genealogie-heritage-flags') || '{}') || {}; } catch (_) {}
+        const keys = FLAG_BLOCKS.map(f => f[0]);
+        const order = [...(Array.isArray(v.order) ? v.order.filter(k => keys.includes(k)) : []), ...keys.filter(k => !(v.order || []).includes(k))];
+        return {always: Array.isArray(v.always) ? v.always : [], hidden: Array.isArray(v.hidden) ? v.hidden : [], order};
+    }
+    ext.flagSettings = flagSettings;
+    /** Le bloc s'affiche-t-il sur cette fiche ? (masqué dans Apparence → jamais ; « toutes les fiches » → toujours) */
+    function flagShown(person, key) {
+        const s = flagSettings();
+        if (s.hidden.includes(key)) return false;
+        return s.always.includes(key) || Number(person?.[key]) === 1;
+    }
+    ext.flagShown = flagShown;
+    /** Fenêtre IDENTITÉ : ordre des cases, cases masquées, et mention « sur toutes les fiches ». */
+    function applyFlagSettings() {
+        const box = document.querySelector('#person-form .person-heritage-flags');
+        if (!box) return;
+        const s = flagSettings();
+        s.order.forEach(key => {
+            const label = box.querySelector(`[name="${key}"]`)?.closest('label');
+            if (!label) return;
+            box.appendChild(label);
+            label.hidden = s.hidden.includes(key);
+            const input = label.querySelector('input');
+            input.style.display = s.always.includes(key) ? 'none' : '';
+            let note = label.querySelector('.h-flag-always');
+            if (s.always.includes(key) && !note) { note = document.createElement('em'); note.className = 'h-flag-always'; note.textContent = ' — affiché sur toutes les fiches (Apparence)'; label.insertBefore(note, label.querySelector('small')); }
+            if (!s.always.includes(key)) note?.remove();
+        });
+        box.hidden = s.order.every(k => s.hidden.includes(k));
+    }
+    ext.applyFlagSettings = applyFlagSettings;
+    setTimeout(applyFlagSettings, 0);
+    ext.designPanels = ext.designPanels || [];
+    ext.afterDesign = ext.afterDesign || [];
+    ext.designPanels.push(() => {
+        const s = flagSettings();
+        return `<section class="person-block-config" id="h-flag-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Blocs à afficher sur demande</h3><p>Départs, Enfant placé, Blason, Poilu, Langues : d’habitude, on coche la case sur chaque fiche (IDENTITÉ → Modifier la personne). Coche « Sur toutes les fiches » pour qu’un bloc s’affiche partout sans rien cocher. Décoche « Proposé » pour le masquer complètement. Les flèches changent l’ordre des cases.</p></header>
+            <table class="data-table h-flag-table"><thead><tr><th>Ordre</th><th>Bloc</th><th>Proposé</th><th>Sur toutes les fiches</th></tr></thead><tbody>${s.order.map((key, i) => { const label = FLAG_BLOCKS.find(f => f[0] === key)[1]; return `<tr><td><button type="button" class="icon-button" data-h-flag-move="${key}" data-dir="-1" ${i ? '' : 'disabled'} aria-label="Monter">↑</button><button type="button" class="icon-button" data-h-flag-move="${key}" data-dir="1" ${i < s.order.length - 1 ? '' : 'disabled'} aria-label="Descendre">↓</button></td><td>${esc(label)}</td><td><input type="checkbox" data-h-flag-offered="${key}" ${s.hidden.includes(key) ? '' : 'checked'}></td><td><input type="checkbox" data-h-flag-always="${key}" ${s.always.includes(key) ? 'checked' : ''} ${s.hidden.includes(key) ? 'disabled' : ''}></td></tr>`; }).join('')}</tbody></table></section>`;
+    });
+    ext.afterDesign.push(() => {
+        const box = document.getElementById('h-flag-config');
+        if (!box) return;
+        const save = s => { localStorage.setItem('genealogie-heritage-flags', JSON.stringify(s)); applyFlagSettings(); const fresh = document.createElement('div'); fresh.innerHTML = ext.designPanels.find(fn => fn.toString().includes('h-flag-config'))(); box.replaceWith(fresh.firstElementChild); ext.afterDesign.forEach(fn => { if (fn.toString().includes('h-flag-config')) fn(); }); toast('Réglage enregistré.'); };
+        box.addEventListener('click', event => {
+            const b = event.target.closest('[data-h-flag-move]');
+            if (!b) return;
+            const s = flagSettings(), i = s.order.indexOf(b.dataset.hFlagMove), j = i + Number(b.dataset.dir);
+            if (j < 0 || j >= s.order.length) return;
+            [s.order[i], s.order[j]] = [s.order[j], s.order[i]];
+            save(s);
+        });
+        box.addEventListener('change', event => {
+            const s = flagSettings(), t = event.target;
+            if (t.dataset.hFlagOffered) { const k = t.dataset.hFlagOffered; s.hidden = t.checked ? s.hidden.filter(x => x !== k) : [...new Set([...s.hidden, k])]; if (!t.checked) s.always = s.always.filter(x => x !== k); }
+            if (t.dataset.hFlagAlways) { const k = t.dataset.hFlagAlways; s.always = t.checked ? [...new Set([...s.always, k])] : s.always.filter(x => x !== k); }
+            save(s);
+        });
+    });
+
     /** Crayon + poubelle, comme dans le bloc Événements. */
     const tools = (editAttr, deleteAttr, what) => `<span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ' + what, editAttr)}${A().actionButton('delete', 'Supprimer ' + what, deleteAttr)}</span>`;
+    setTimeout(() => { ext.miniMap = miniMap; ext.uploadFiles = uploadFiles; ext.openDialog = openDialog; ext.tools = tools; ext.refreshView = refreshView; }, 0);
     const finite = v => v !== null && v !== '' && v !== undefined && Number.isFinite(Number(v));
 
     /* ═══════════════════════ 🚢 DÉPARTS : VOYAGES ET ÉMIGRATION ═══════════════════════ */
@@ -294,21 +359,28 @@
         const photos = media.filter(m => !['passagers', 'papiers', 'naturalisation'].includes(m.role || ''));
         const row = (label, value) => value ? `<div class="data-row"><dt>${esc(label)}</dt><dd>${nl(value)}</dd></div>` : '';
         return `<article class="h-record h-voyage"><header><div>${withPerson ? `<div>${personLink(v.person_id, v.person_name)}</div>` : ''}<strong>🚢 ${esc(voyageTitle(v))}</strong>${v.ship_name ? `<span class="h-ship">à bord du navire <em>${esc(v.ship_name)}</em></span>` : ''}</div>${editable ? tools(`data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}"`, `data-h-voyage-delete="${v.id}"`, 'ce voyage') : ''}</header>
-            <dl class="data-list">${row('Départ', [v.departure_date, v.departure_port].filter(Boolean).join(' · '))}${row('Escales', v.stopovers)}${row('Arrivée', [v.arrival_date, v.arrival_port].filter(Boolean).join(' · '))}${row('Destination', v.destination)}${row('Motif', v.reason)}${row('Partis avec', v.companions)}</dl>
+            <dl class="data-list">${row('Départ', [v.departure_date, v.departure_port].filter(Boolean).join(' · '))}${row('Escales', v.stopovers)}${row('Arrivée', [v.arrival_date, v.arrival_port].filter(Boolean).join(' · '))}${row('Destination', v.destination)}${row('Motif', v.reason)}
+            ${v.companion_people?.length || v.companions ? `<div class="data-row"><dt>Partis ensemble</dt><dd>${[personLink(v.person_id, v.person_name), ...(v.companion_people || []).map(c => personLink(c.person.id, A().personName(c.person), c.relation))].join(', ')}${v.companions ? `<br><small>${nl(v.companions)}</small>` : ''}</dd></div>` : ''}</dl>
             ${v.passenger_list_ref || v.passenger_list_url || v.passenger_list_text || byRole('passagers').length ? `<details class="h-section" open><summary>Liste de passagers</summary>${v.passenger_list_ref ? `<p><strong>Référence :</strong> ${esc(v.passenger_list_ref)}</p>` : ''}${v.passenger_list_url ? `<p><a href="${esc(v.passenger_list_url)}" target="_blank" rel="noopener noreferrer">Voir la liste en ligne ↗</a></p>` : ''}${thumbs('voyage-pass-' + v.id, byRole('passagers'))}${v.passenger_list_text ? `<p class="h-transcription">${nl(v.passenger_list_text)}</p>` : ''}</details>` : ''}
-            ${v.naturalization_date || v.naturalization_place || v.naturalization_text || byRole('naturalisation').length ? `<details class="h-section" open><summary>Naturalisation à l’arrivée</summary><p>${esc([v.naturalization_date, v.naturalization_place].filter(Boolean).join(' · '))}</p>${v.naturalization_text ? `<p>${nl(v.naturalization_text)}</p>` : ''}${thumbs('voyage-nat-' + v.id, byRole('naturalisation'))}</details>` : ''}
+            ${(() => { const naturalized = [{name: v.person_name, id: v.person_id, date: v.naturalization_date, place: v.naturalization_place, text: v.naturalization_text}, ...(v.companion_people || []).map(c => ({name: A().personName(c.person), id: c.person.id, date: c.naturalization_date, place: c.naturalization_place, text: c.naturalization_text}))].filter(n => n.date || n.place || n.text);
+                return naturalized.length || byRole('naturalisation').length ? `<details class="h-section" open><summary>Naturalisation à l’arrivée</summary>${naturalized.map(n => `<p>${(v.companion_people || []).length ? `<strong>${personLink(n.id, n.name)}</strong> : ` : ''}${esc([n.date, n.place].filter(Boolean).join(' · '))}${n.text ? `<br><small>${nl(n.text)}</small>` : ''}</p>`).join('')}${thumbs('voyage-nat-' + v.id, byRole('naturalisation'))}</details>` : ''; })()}
             ${v.papers_text || byRole('papiers').length ? `<details class="h-section"><summary>Papiers d’émigration</summary>${thumbs('voyage-pap-' + v.id, byRole('papiers'))}${v.papers_text ? `<p class="h-transcription">${nl(v.papers_text)}</p>` : ''}</details>` : ''}
             ${photos.length ? `<div class="h-section"><h5>Photos</h5>${thumbs('voyage-photo-' + v.id, photos)}</div>` : ''}
             ${v.notes ? `<p class="muted">${nl(v.notes)}</p>` : ''}</article>`;
     }
     ext.personBlocks.voyages = (index, detail, {editOnly}) => {
         const p = detail.person;
-        if (!Number(p.show_voyage_block)) return '';
+        if (!flagShown(p, 'show_voyage_block')) return '';
         const rows = detail.heritage?.voyages || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(v => voyageCardHtml(v, {editable: !Number(p.is_locked)})).join('')}</div><div class="h-voyage-map">${voyagePaths(rows)}<small class="muted">Trajet en mer tracé au plus court à travers l’océan (grand cercle) ; en pointillés, le trajet à terre jusqu’à la destination.</small></div></div>`
             : empty('Aucun voyage pour l’instant. Ajoute le départ : date, port, navire, destination, liste de passagers, naturalisation…');
         return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">+ Voyage</button>`));
     };
+    // Champs préfixés « c_ » : ne pas se mélanger avec la naturalisation de la personne principale
+    function companionRow(c = {}) {
+        return `<div class="transfer-row h-companion-row">${A().collectionPersonField('c_person_id', c.person || null, 'Fiche (époux, enfant, frère…)')}<input name="c_relation" value="${esc(c.relation || '')}" placeholder="Lien (épouse, fils…)">
+            <input name="c_naturalization_date" value="${esc(c.naturalization_date || '')}" placeholder="Naturalisé·e le…"><input name="c_naturalization_place" value="${esc(c.naturalization_place || '')}" placeholder="Lieu / tribunal"><input name="c_naturalization_text" value="${esc(c.naturalization_text || '')}" placeholder="Détails"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+    }
     async function openVoyageDialog(id, personId) {
         let v = {person_id: personId, media: []};
         if (id) { const data = await api('voyages', {person_id: personId}); v = (data.voyages || []).find(r => Number(r.id) === Number(id)) || v; }
@@ -321,7 +393,7 @@
                 <label>Nom du navire<input name="ship_name" value="${f('ship_name')}" placeholder="La Bretagne"></label>
                 <label>Motif<input name="reason" value="${f('reason')}" placeholder="Travail, famille, service militaire…"></label>
                 <label>Escales <small>(une par ligne)</small><textarea name="stopovers" rows="2" placeholder="Liverpool">${f('stopovers')}</textarea></label>
-                <label>Partis avec<textarea name="companions" rows="2" placeholder="Sa femme et leurs deux enfants">${f('companions')}</textarea></label>
+                <label>Partis avec (texte libre, si pas de fiche)<textarea name="companions" rows="2" placeholder="Deux cousins du village">${f('companions')}</textarea></label>
                 <label>Date d’arrivée<input name="arrival_date" value="${f('arrival_date')}" placeholder="24 mai 1885"></label>
                 <label>Port d’arrivée${placeField('arrival_port', v.arrival_port, v.dest_lat, v.dest_lon, 'New York, Québec, Buenos Aires, Alger…')}</label>
                 <label class="span-2">Destination finale <small>(si elle est ailleurs que le port)</small><input name="destination" value="${f('destination')}" placeholder="Montréal, Pampa, Oran…"></label>
@@ -330,7 +402,9 @@
                 <label>Référence (archive, registre, page)<input name="passenger_list_ref" value="${f('passenger_list_ref')}" placeholder="Ellis Island, manifeste T715, rouleau 0427"></label>
                 <label>Lien en ligne<input name="passenger_list_url" value="${f('passenger_list_url')}" placeholder="https://…"></label>
                 <label class="span-2">Ce qui est écrit (transcription)<textarea name="passenger_list_text" rows="3">${f('passenger_list_text')}</textarea></label></div>
-            <h4>Naturalisation à l’arrivée</h4><div class="form-grid">
+            <h4>Partis ensemble (fiches)</h4><p class="muted">Le voyage s’affichera aussi sur leur fiche. Chacun a sa propre naturalisation à l’arrivée.</p>
+            <div class="h-rows" data-h-rows="companions">${(v.companion_people || []).map(companionRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="companions">+ Personne partie avec</button><template data-h-template="companions">${companionRow()}</template>
+            <h4>Naturalisation à l’arrivée${(v.companion_people || []).length ? ' de ' + esc(v.person_name || 'la personne') : ''}</h4><div class="form-grid">
                 <label>Date<input name="naturalization_date" value="${f('naturalization_date')}" placeholder="1892"></label>
                 <label>Lieu / tribunal<input name="naturalization_place" value="${f('naturalization_place')}" placeholder="Cour de district de Chicago"></label>
                 <label class="span-2">Détails<textarea name="naturalization_text" rows="2">${f('naturalization_text')}</textarea></label></div>
@@ -340,7 +414,9 @@
             <h4>Images</h4>${mediaEditorHtml('voyage', v.id, v.media, [['passagers', 'Liste de passagers (image)'], ['papiers', 'Papiers d’émigration'], ['naturalisation', 'Naturalisation'], ['', 'Photos (navire, départ, famille…)']])}`,
             onSubmit: async form => {
                 const val = values(form);
-                const saved = await api('save_voyage', {}, {method: 'POST', body: {...val, id: v.id || 0, person_id: personId, dep_lat: coord(val, 'departure_port'), dep_lon: val.departure_port_lon, dest_lat: coord(val, 'arrival_port'), dest_lon: val.arrival_port_lon}});
+                const companion_people = [...form.querySelectorAll('.h-companion-row')].map(r => Object.fromEntries(['person_id', 'relation', 'naturalization_date', 'naturalization_place', 'naturalization_text'].map(k => [k, r.querySelector(`[name=c_${k}]`).value]))).filter(c => Number(c.person_id));
+                Object.keys(val).filter(k => k.startsWith('c_')).forEach(k => delete val[k]);
+                const saved = await api('save_voyage', {}, {method: 'POST', body: {...val, companion_people, id: v.id || 0, person_id: v.person_id || personId, dep_lat: coord(val, 'departure_port'), dep_lon: val.departure_port_lon, dest_lat: coord(val, 'arrival_port'), dest_lon: val.arrival_port_lon}});
                 await uploadMediaEditor(form, 'voyage', saved.result.id);
                 const r = saved.result;
                 toast(r.dep?.[0] == null || r.dest?.[0] == null ? 'Voyage enregistré (un lieu n’a pas été trouvé : choisis-le dans les suggestions pour tracer le trajet).' : 'Voyage enregistré.');
@@ -404,7 +480,7 @@
     }
     ext.personBlocks.placements = (index, detail, {editOnly}) => {
         const p = detail.person;
-        if (!Number(p.show_placement_block)) return '';
+        if (!flagShown(p, 'show_placement_block')) return '';
         const rows = detail.heritage?.placements || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(r => placementCardHtml(r, {editable: !Number(p.is_locked)})).join('')}</div><div>${placementMap(rows)}</div></div>`
             : empty('Aucun placement enregistré : nourrice, abandon, hospice, Assistance publique… avec le lieu et la durée.');
@@ -463,7 +539,7 @@
     function registerCoatMedia(rows) { rows.forEach(c => { const img = coatImage(c); if (img) mediaGroups['coat-' + c.id] = (c.media || []).filter(m => m.media_type === 'image'); }); }
     ext.personBlocks.heraldry = (index, detail, {editOnly}) => {
         const p = detail.person;
-        if (!Number(p.show_heraldry_block)) return '';
+        if (!flagShown(p, 'show_heraldry_block')) return '';
         const rows = detail.heritage?.coats_of_arms || [];
         registerCoatMedia(rows);
         const body = rows.length ? `<div class="h-coats">${rows.map(c => coatCardHtml(c, {compact: true, currentPersonId: p.id})).join('')}</div>` : empty('Aucune armoirie liée à cette personne.');
@@ -569,7 +645,7 @@
     }
     ext.personBlocks.poilu = (index, detail, {editOnly}) => {
         const p = detail.person;
-        if (!Number(p.show_poilu_block)) return '';
+        if (!flagShown(p, 'show_poilu_block')) return '';
         const data = detail.heritage?.poilu || {units: [], events: []};
         return card(index, 'Poilu 14-18', (data.units || []).length || '', poiluHtml(data, p), 'span-12', editOnly(tools(`data-h-poilu-edit="${p.id}"`, `data-h-poilu-clear="${p.id}"`, 'le parcours de poilu')));
     };

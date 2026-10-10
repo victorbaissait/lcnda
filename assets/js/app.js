@@ -345,8 +345,8 @@
     defaultDashboardBlocks.push(['achievements','Accomplissements']);
     defaultDashboardBlockSpans.achievements='6';
     // Fiches « patrimoine » (assets/js/heritage.js)
-    defaultDashboardBlocks.push(['voyages_widget','Départs et émigration'],['placements_widget','Enfants placés'],['heraldry_widget','Armoiries'],['poilus_widget','Poilus 14-18'],['saved_searches_widget','Recherches enregistrées'],['field_trips_widget','Circuits sur le terrain'],['offsite_backup_widget','Copie hors de l’ordinateur'],['scan_inbox_widget','Dossier Scans'],['journeys_widget','Voyages impossibles'],['cited_names_widget','Le cercle des ancêtres']);
-    Object.assign(defaultDashboardBlockSpans,{voyages_widget:'12',placements_widget:'12',heraldry_widget:'6',poilus_widget:'6',saved_searches_widget:'6',field_trips_widget:'6',offsite_backup_widget:'6',scan_inbox_widget:'6',journeys_widget:'6',cited_names_widget:'6'});
+    defaultDashboardBlocks.push(['voyages_widget','Départs et émigration'],['placements_widget','Enfants placés'],['heraldry_widget','Armoiries'],['poilus_widget','Poilus 14-18'],['saved_searches_widget','Recherches enregistrées'],['field_trips_widget','Circuits sur le terrain'],['offsite_backup_widget','Copie hors de l’ordinateur'],['scan_inbox_widget','Dossier Scans'],['journeys_widget','Voyages impossibles'],['cited_names_widget','Le cercle des ancêtres'],['help_requests_widget','Demandes d’entraide']);
+    Object.assign(defaultDashboardBlockSpans,{voyages_widget:'12',placements_widget:'12',heraldry_widget:'6',poilus_widget:'6',saved_searches_widget:'6',field_trips_widget:'6',offsite_backup_widget:'6',scan_inbox_widget:'6',journeys_widget:'6',cited_names_widget:'6',help_requests_widget:'6'});
     const dashboardWidgetInfo={
         stats:'Résumé chiffré de la base.',
         upcoming:'Dates familiales qui reviennent dans les prochains jours.',
@@ -410,10 +410,11 @@
         offsite_backup_widget:'Date de ta dernière copie hors de cet ordinateur (disque externe, clé, iCloud, Dropbox…).',
         scan_inbox_widget:'Les derniers fichiers arrivés par le dossier Scans surveillé (scanner, téléphone, AirDrop), à identifier.',
         journeys_widget:'Une même fiche à deux endroits trop éloignés en trop peu de temps : signe de deux homonymes confondus.',
+        help_requests_widget:'Tes demandes d’entraide en cours (forums, Geneanet, Facebook) : rédigées, publiées, réponse reçue.',
         cited_names_widget:'Les personnes sans fiche qui reviennent le plus souvent dans tes transcriptions (témoins, voisins, parrains…).',
         places:'Lieux les plus présents dans les événements.'
     };
-    const defaultListTypes = [['persons','01','Personnes'],['events','02','Événements'],['places','03','Lieux'],['precise_places','03b','Lieux précis'],['media','04','Médias'],['labels','05','Étiquettes'],['occupations','06','Métiers'],['employers','07','Employeurs'],['census','08','Recensements'],['reminders','09','Rappels'],['research_budget','10','Budget de recherche'],['signatures','11','Signatures'],['sosa','12','SOSA'],['daboville','12b',"d'Aboville"],['archives','13','Archives'],['external_links','14','Liens externes utiles'],['courriers','15','Registre de courriers'],['archive_visits','16','Planificateur de visite d’archives'],['living_contacts','17','Répertoire des vivants'],['family_objects','18','Objets de famille'],['family_memories','19','Mémoire familiale'],['fairs','20','Salons et événements'],['closed_branches','21','Branches fermées'],['field_trips','22','Circuits sur le terrain'],['family_papers','23','Papiers de famille'],['coats_of_arms','24','Armoiries'],['old_maps','25','Cartes anciennes'],['probate','26','Inventaires après décès'],['voyages_list','27','Départs et émigration'],['placements_list','28','Enfants placés'],['poilus_list','29','Poilus 14-18'],['parishes','30','Paroisses d’Ancien Régime'],['cited_names','31','Noms cités (le cercle)']];
+    const defaultListTypes = [['persons','01','Personnes'],['events','02','Événements'],['places','03','Lieux'],['precise_places','03b','Lieux précis'],['media','04','Médias'],['labels','05','Étiquettes'],['occupations','06','Métiers'],['employers','07','Employeurs'],['census','08','Recensements'],['reminders','09','Rappels'],['research_budget','10','Budget de recherche'],['signatures','11','Signatures'],['sosa','12','SOSA'],['daboville','12b',"d'Aboville"],['archives','13','Archives'],['external_links','14','Liens externes utiles'],['courriers','15','Registre de courriers'],['archive_visits','16','Planificateur de visite d’archives'],['living_contacts','17','Répertoire des vivants'],['family_objects','18','Objets de famille'],['family_memories','19','Mémoire familiale'],['fairs','20','Salons et événements'],['closed_branches','21','Branches fermées'],['field_trips','22','Circuits sur le terrain'],['family_papers','23','Papiers de famille'],['coats_of_arms','24','Armoiries'],['old_maps','25','Cartes anciennes'],['probate','26','Inventaires après décès'],['voyages_list','27','Départs et émigration'],['placements_list','28','Enfants placés'],['poilus_list','29','Poilus 14-18'],['parishes','30','Paroisses d’Ancien Régime'],['cited_names','31','Noms cités (le cercle)'],['languages','32','Langues de la famille'],['help_requests','33','Demandes d’entraide']];
     const defaultExternalLinks=[
         {id:'socface',name:'Projet SocFace',url:'https://socface.site.ined.fr/',access:'public',cost:'gratuit',category:'Population / histoire sociale',country:'France',description:'Projet scientifique utile pour croiser histoire sociale, familles et populations.'},
         {id:'francearchives',name:'FranceArchives',url:'https://francearchives.gouv.fr/',access:'public',cost:'gratuit',category:'Archives',country:'France',description:'Portail national des archives françaises.'},
@@ -439,9 +440,9 @@
     const courrierFilters = [['','En cours'],['fait_utilise','Faits — utilisés'],['fait_non_utilise','Faits — non utilisés'],['fait_tous','Tous les faits'],['tous','Tout (en cours + faits)']];
     const defaultMapTypes = [['all','Tous les événements'],['BIRT','Naissances'],['DEAT','Décès'],['MARR','Mariages'],['BURI','Inhumations']];
     const defaultPersonBlocks = [
-        ['identity','Identité'],['web_search','Chercher sur internet'],['family_objects','Objets de famille'],['family_memories','Mémoire familiale'],['events','Événements'],['ascendants','Ascendants'],['descendants','Descendants'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['voyages','Départs / émigration'],['placements','Enfant placé'],['heraldry','Blason / noblesse'],['poilu','Poilu 14-18'],['probate','Inventaire après décès'],['family_papers_block','Papiers de famille (originaux)'],['person_exports','Exports fiche']
+        ['identity','Identité'],['web_search','Chercher sur internet'],['family_objects','Objets de famille'],['family_memories','Mémoire familiale'],['events','Événements'],['ascendants','Ascendants'],['descendants','Descendants'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['voyages','Départs / émigration'],['placements','Enfant placé'],['heraldry','Blason / noblesse'],['poilu','Poilu 14-18'],['probate','Inventaire après décès'],['family_papers_block','Papiers de famille (originaux)'],['languages','Langues'],['mentions','Cité dans'],['person_exports','Exports fiche']
     ];
-    const defaultPersonBlockSpans={ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',person_exports:'6'};
+    const defaultPersonBlockSpans={ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',languages:'6',mentions:'6',person_exports:'6'};
     const personBlockWidthChoices=[['12','1'],['6','1/2'],['4','1/3'],['3','1/4'],['8','2/3'],['9','3/4']];
     function savedOrder(key,defaults){try{const stored=JSON.parse(localStorage.getItem(key)||'[]');const order=stored.filter(item=>defaults.includes(item));defaults.forEach((item,index)=>{if(order.includes(item))return;const previous=defaults.slice(0,index).reverse().find(value=>order.includes(value));const next=defaults.slice(index+1).find(value=>order.includes(value));if(previous)order.splice(order.indexOf(previous)+1,0,item);else if(next)order.splice(order.indexOf(next),0,item);else order.push(item);});return order;}catch(_){return defaults;}}
     function orderedMenuKeys(){return savedOrder('genealogie-menu-order',defaultMenuOrder);}
@@ -4222,7 +4223,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     async function renderList(token=++state.workspaceToken){
         if(token!==state.workspaceToken||state.module!=='listes')return;
-        const validTypes=['parishes','cited_names','field_trips','family_papers','coats_of_arms','old_maps','probate','voyages_list','placements_list','poilus_list','closed_branches','fairs','precise_places','family_objects','family_memories','persons','events','places','media','labels','occupations','employers','census','reminders','research_budget','signatures','sosa','daboville','archives','external_links','courriers','archive_visits','living_contacts','changes'];if(!validTypes.includes(state.listType)){$('#workspace').innerHTML='<section class="empty-state"><span class="eyebrow">LISTES</span><h2>Choisis une liste</h2><p>Personnes, événements, lieux, médias, étiquettes, métiers, employeurs, recensements, rappels, budget, signatures, SOSA, d’Aboville, archives, liens utiles, registre de courriers, visites d’archives ou répertoire des vivants.</p></section>';return;}
+        const validTypes=['parishes','cited_names','languages','help_requests','field_trips','family_papers','coats_of_arms','old_maps','probate','voyages_list','placements_list','poilus_list','closed_branches','fairs','precise_places','family_objects','family_memories','persons','events','places','media','labels','occupations','employers','census','reminders','research_budget','signatures','sosa','daboville','archives','external_links','courriers','archive_visits','living_contacts','changes'];if(!validTypes.includes(state.listType)){$('#workspace').innerHTML='<section class="empty-state"><span class="eyebrow">LISTES</span><h2>Choisis une liste</h2><p>Personnes, événements, lieux, médias, étiquettes, métiers, employeurs, recensements, rappels, budget, signatures, SOSA, d’Aboville, archives, liens utiles, registre de courriers, visites d’archives ou répertoire des vivants.</p></section>';return;}
         listController?.abort();listController=new AbortController();
         const type=state.listType;
         if(type==='external_links')return renderExternalLinksList(token);
@@ -6875,20 +6876,44 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     window.addEventListener('mouseup',event=>{if(event.button===3||event.button===4){event.preventDefault();navHistoryGo(event.button===3?-1:1);}});
 
     // Chercher dans l'écran (⌘F)
+    /**
+     * ⌘F / Ctrl+F : cherche dans l'écran affiché, surligne toutes les occurrences (sans toucher à la page : surlignage
+     * CSS Custom Highlight) et affiche « 3 / 12 ». Entrée : suivante ; Maj+Entrée : précédente ; Échap : fermer.
+     */
+    const findState={ranges:[],index:-1};
+    function findRoots(){const open=[...document.querySelectorAll('dialog[open]')];return open.length?[open[open.length-1]]:[$('#workspace'),$('#sidebar')].filter(Boolean);}
+    function findCollect(q){
+        const ranges=[];if(!q)return ranges;const needle=q.toLocaleLowerCase('fr');
+        const fold=t=>t.toLocaleLowerCase('fr');
+        findRoots().forEach(root=>{const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:node=>{const p=node.parentElement;if(!p||p.closest('script,style,textarea,#find-bar,[hidden]'))return NodeFilter.FILTER_REJECT;if(!p.offsetParent&&p.getClientRects().length===0)return NodeFilter.FILTER_REJECT;return node.nodeValue.trim()?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;}});
+            let node;while((node=walker.nextNode())){const text=fold(node.nodeValue);let at=text.indexOf(needle);while(at>=0){const r=document.createRange();r.setStart(node,at);r.setEnd(node,at+q.length);ranges.push(r);at=text.indexOf(needle,at+Math.max(1,q.length));}}
+        });
+        return ranges;
+    }
+    function findPaint(){
+        if(!window.CSS?.highlights)return;
+        CSS.highlights.delete('lcnda-find');CSS.highlights.delete('lcnda-find-current');
+        if(findState.ranges.length)CSS.highlights.set('lcnda-find',new Highlight(...findState.ranges));
+        const cur=findState.ranges[findState.index];if(cur){CSS.highlights.set('lcnda-find-current',new Highlight(cur));const el=cur.startContainer.parentElement;el?.scrollIntoView({block:'center',behavior:'smooth'});}
+    }
     function openFindBar(){
         let bar=$('#find-bar');
         if(!bar){
             bar=document.createElement('div');bar.id='find-bar';bar.className='find-bar';bar.setAttribute('role','search');
-            bar.innerHTML=`<input type="search" placeholder="Chercher dans l’écran…" aria-label="Chercher dans l’écran"><button type="button" class="button small secondary" data-find="-1" title="Précédent (Maj+Entrée)">↑</button><button type="button" class="button small secondary" data-find="1" title="Suivant (Entrée)">↓</button><span class="find-bar-count" aria-live="polite"></span><button type="button" class="icon-button" data-find-close aria-label="Fermer">×</button>`;
+            bar.innerHTML=`<input type="search" placeholder="Chercher dans l’écran…" aria-label="Chercher dans l’écran"><span class="find-bar-count" aria-live="polite"></span><button type="button" class="button small secondary" data-find="-1" title="Précédente (Maj+Entrée)">↑</button><button type="button" class="button small secondary" data-find="1" title="Suivante (Entrée)">↓</button><button type="button" class="icon-button" data-find-close aria-label="Fermer">×</button>`;
             document.body.append(bar);
             const input=$('input',bar),count=$('.find-bar-count',bar);
-            const go=dir=>{const q=input.value;if(!q)return;const found=window.find(q,false,dir<0,true,false,false,false);count.textContent=found?'':'Introuvable';input.focus({preventScroll:true});};
-            input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go(e.shiftKey?-1:1);}if(e.key==='Escape'){e.preventDefault();bar.hidden=true;}});
-            input.addEventListener('input',()=>{count.textContent='';});
+            const show=()=>{const n=findState.ranges.length;count.textContent=input.value?(n?`${findState.index+1} / ${n}`:'Aucune'):'';count.classList.toggle('is-none',!!input.value&&!n);};
+            const refresh=()=>{findState.ranges=findCollect(input.value);findState.index=findState.ranges.length?0:-1;findPaint();show();};
+            const go=dir=>{if(!findState.ranges.length){refresh();return;}findState.index=(findState.index+dir+findState.ranges.length)%findState.ranges.length;findPaint();show();input.focus({preventScroll:true});};
+            const close=()=>{bar.hidden=true;findState.ranges=[];findState.index=-1;findPaint();};
+            input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go(e.shiftKey?-1:1);}if(e.key==='Escape'){e.preventDefault();close();}});
+            let timer=0;input.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(refresh,120);});
             $$('[data-find]',bar).forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.find))));
-            $('[data-find-close]',bar).addEventListener('click',()=>{bar.hidden=true;});
+            $('[data-find-close]',bar).addEventListener('click',close);
+            bar._refresh=refresh;
         }
-        bar.hidden=false;const input=$('input',bar);const sel=String(window.getSelection?.()||'').trim();if(sel&&sel.length<80)input.value=sel;input.focus();input.select();
+        bar.hidden=false;const input=$('input',bar);const sel=String(window.getSelection?.()||'').trim();if(sel&&sel.length<80)input.value=sel;input.focus();input.select();if(input.value)bar._refresh();
     }
 
     function bookmarkButtonLabel(person){const keys=comboLabel(shortcutFor(SHORTCUT_DEFS.find(d=>d.id==='bookmark')));return `${Number(person.is_bookmarked)?'Retirer des signets':'Ajouter aux signets'}${keys&&keys!=='—'?` (${keys})`:''}`;}
@@ -9789,6 +9814,7 @@ ${backupSectionHtml()}
         <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Ordre et visibilité des blocs</h3><p>Glisse les blocs pour changer leur ordre. Décoche un bloc pour le masquer.</p><p class="person-exception-summary" data-exception-summary="person-blocks"></p></header>
             <div class="design-order-grid block-grid">${blockOrderEditor('person-blocks-global','Toutes les fiches',personBlockSettings(),0)}${personId?blockOrderEditor('person-blocks-person',`Exception pour ${personName(current)}`,personBlockSettings(personId),personId):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour créer une exception propre à sa fiche.</p></section>'}</div>
         </section>
+        ${(window.LCNDA_EXT?.designPanels||[]).map(fn=>{try{return fn();}catch(error){console.error(error);return '';}}).join('')}
         <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Filtres du bloc Événements</h3><p>Choisis les types d'événements à afficher dans le bloc Événements. Décoche un type pour le masquer.</p><p class="person-exception-summary" data-exception-summary="events-filter"></p></header>
             <div class="design-order-grid block-grid">${eventsFilterEditor('events-filter-global','Toutes les fiches',eventsFilterSettings(),0)}${personId?eventsFilterEditor('events-filter-person',`Exception pour ${personName(current)}`,eventsFilterSettings(personId),personId):'<section class="maintenance-panel order-editor block-order-editor"><h3>Exception fiche actuelle</h3><p>Ouvre une personne pour créer une exception propre à sa fiche.</p></section>'}</div>
         </section>
@@ -10163,6 +10189,7 @@ ${backupSectionHtml()}
         $('#ws-custom-add')?.addEventListener('click',()=>{const label=$('#ws-custom-label').value.trim();const url=$('#ws-custom-url').value.trim();if(!label||!/^https?:\/\/\S+$/i.test(url)){toast('Indique un nom et une adresse qui commence par https://','error');return;}if(!/\{(prénom|prenom|nom|nom_complet|lieu|année|annee|de|à|a|conjoint|requête|requete)\}/i.test(url)&&!confirm('Cette adresse ne contient aucun champ comme {nom} : elle ouvrira toujours la même page. Ajouter quand même ?'))return;saveWebSearchCustomSites([...webSearchCustomSites(),{key:`custom-${Date.now().toString(36)}`,label,url}]);toast('Site ajouté.');renderDesignTools();});
         $$('[data-ws-custom-delete]').forEach(button=>button.addEventListener('click',()=>{if(!confirm('Supprimer ce site de la liste ?'))return;saveWebSearchCustomSites(webSearchCustomSites().filter(site=>site.key!==button.dataset.wsCustomDelete));toast('Site supprimé.');renderDesignTools();}));
         renderPersonExceptionsList();
+        (window.LCNDA_EXT?.afterDesign||[]).forEach(fn=>{try{fn();}catch(error){console.error(error);}});
     }
 
     function setupDragOrder(list){
@@ -10432,7 +10459,7 @@ ${backupSectionHtml()}
     function openPersonDialog(detail){const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));try{const d=JSON.parse(localStorage.getItem('genealogie-design')||'{}');if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);
         // Artiste
         const isArtistCb=form.elements.is_artist;if(isArtistCb){isArtistCb.checked=!!(Number(p.is_artist)||0);}
-        ['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block'].forEach(key=>{if(form.elements[key])form.elements[key].checked=!!Number(p[key]||0);});
+        ['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block'].forEach(key=>{if(form.elements[key])form.elements[key].checked=!!Number(p[key]||0);});
         if(form.elements.artist_discipline)form.elements.artist_discipline.value=p.artist_discipline||'';
         if(form.elements.artist_events_display)form.elements.artist_events_display.value=p.artist_events_display||'events';
         const disciplineWrap=$('#person-artist-discipline-wrap');const displayWrap=$('#person-artist-display-wrap');
