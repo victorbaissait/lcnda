@@ -144,6 +144,12 @@ try {
     if ($isWrite && $action === 'save_settings') {
         save_app_settings($pdo, $payload);
     }
+    if ($isWrite && $action === 'insee_prenoms_import') {
+        insee_prenoms_import($pdo, $_FILES['file'] ?? null);
+    }
+    if ($isWrite && $action === 'offsite_copy_now') {
+        offsite_copy_now($pdo, $payload);
+    }
     if ($isWrite && $action === 'delete_empty_families') {
         delete_empty_families($pdo);
     }
@@ -176,6 +182,22 @@ try {
         'closed_branches' => json_response(['branches' => closed_branches_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'certainties' => BRANCH_CERTAINTIES, 'reasons' => BRANCH_REASONS]),
         'research_progress' => json_response(research_progress_data($pdo)),
         'genealogy_fairs' => json_response(['fairs' => genealogy_fairs_data($pdo)]),
+        'heritage_overview' => json_response(heritage_overview($pdo)),
+        'heritage_place_search' => json_response(['places' => heritage_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
+        'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
+        'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
+        'placements' => json_response(['placements' => placements_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'kinds' => PLACEMENT_KINDS]),
+        'coats_of_arms' => json_response(['coats' => coats_of_arms_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
+        'poilus' => json_response(['poilus' => poilus_overview($pdo), 'kinds' => POILU_EVENT_KINDS]),
+        'field_trips' => json_response(field_trips_data($pdo, safe_text($_GET['status'] ?? 'todo'))),
+        'field_trip' => json_response(['trip' => field_trip_detail($pdo, safe_int($_GET['id'] ?? 0))]),
+        'family_papers' => json_response(['papers' => family_papers_data($pdo, safe_text($_GET['q'] ?? ''), safe_int($_GET['person_id'] ?? 0)), 'next_number' => next_paper_number($pdo)]),
+        'old_maps' => json_response(['maps' => old_maps_data($pdo)]),
+        'saved_searches' => json_response(saved_searches_data($pdo)),
+        'saved_search_results' => json_response(saved_search_results($pdo, json_decode((string) ($_GET['criteria'] ?? '{}'), true) ?: [], safe_int($_GET['id'] ?? 0))),
+        'firstnames_france' => json_response(firstnames_france_data($pdo, max(1800, min(2100, safe_int($_GET['min_year'] ?? 1900, 1900))))),
+        'probate_inventories' => json_response(['inventories' => probate_inventories_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'categories' => PROBATE_CATEGORIES]),
+        'offsite_status' => json_response(offsite_status($pdo)),
         'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
         'family_memories' => json_response(['memories' => family_memories_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''), safe_text($_GET['kind'] ?? '')), 'kinds' => MEMORY_KINDS]),
         'precise_places' => json_response(['places' => precise_places_list($pdo, safe_text($_GET['q'] ?? ''), max(5, min(500, safe_int($_GET['radius'] ?? 30))))]),
@@ -1895,6 +1917,7 @@ function person_detail(PDO $pdo, int $id): never
         'closed_branches' => closed_branches_data($pdo, $id),
         'family_objects' => family_objects_data($pdo, $id),
         'family_memories' => family_memories_data($pdo, $id),
+        'heritage' => heritage_person_data($pdo, $id),
         'onlineSheets' => $onlineSheetRows,
         'events' => $completion['_events'],
         'witnessEvents' => $witnessEventRows,
@@ -8753,6 +8776,32 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_family_memory' => save_family_memory($pdo,$data),
             'delete_family_memory' => delete_family_memory($pdo,$data),
             'remove_collection_media' => remove_collection_media($pdo,$data),
+            'link_collection_media' => link_collection_media($pdo,$data),
+            'save_voyage' => save_voyage($pdo,$data),
+            'delete_voyage' => delete_voyage($pdo,$data),
+            'save_placement' => save_placement($pdo,$data),
+            'delete_placement' => delete_placement($pdo,$data),
+            'save_coat_of_arms' => save_coat_of_arms($pdo,$data),
+            'delete_coat_of_arms' => delete_coat_of_arms($pdo,$data),
+            'save_poilu' => save_poilu($pdo,$data),
+            'save_field_trip' => save_field_trip($pdo,$data),
+            'set_field_trip_status' => set_field_trip_status($pdo,$data),
+            'delete_field_trip' => delete_field_trip($pdo,$data),
+            'generate_field_trip' => generate_field_trip_stops($pdo,safe_int($data['id']??0)),
+            'save_field_trip_stop' => save_field_trip_stop($pdo,$data),
+            'set_field_trip_stop_done' => set_field_trip_stop_done($pdo,$data),
+            'move_field_trip_stop' => move_field_trip_stop($pdo,$data),
+            'delete_field_trip_stop' => delete_field_trip_stop($pdo,$data),
+            'save_family_paper' => save_family_paper($pdo,$data),
+            'delete_family_paper' => delete_family_paper($pdo,$data),
+            'save_old_map' => save_old_map($pdo,$data),
+            'delete_old_map' => delete_old_map($pdo,$data),
+            'save_saved_search' => save_saved_search($pdo,$data),
+            'mark_saved_search_seen' => mark_saved_search_seen($pdo,$data),
+            'delete_saved_search' => delete_saved_search($pdo,$data),
+            'save_probate_inventory' => save_probate_inventory($pdo,$data),
+            'delete_probate_inventory' => delete_probate_inventory($pdo,$data),
+            'save_offsite_settings' => save_offsite_settings($pdo,$data),
             'check_links' => check_links($pdo,$data),
             'replace_link' => replace_link($pdo,$data),
             'delete_personal_dictionary_entry' => delete_personal_dictionary_entry($pdo,$data),
@@ -10640,6 +10689,8 @@ function save_person(PDO $pdo,array $data): array
     $validDisplays=['events','block','both'];$artistDisplay=in_array($data['artist_events_display']??'',$validDisplays,true)?$data['artist_events_display']:'events';
     $set[]="artist_events_display=?";$values[]=$artistDisplay;
     $set[]="show_military_block=?";$values[]=(isset($data['show_military_block'])&&$data['show_military_block']?1:0);
+    // Blocs à afficher sur demande (cases de la fenêtre Identité) : départs, enfant placé, blason, poilu
+    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
     if(!$set)return $before;
     $values[]=$id;$pdo->prepare('UPDATE persons SET '.implode(',',$set).',updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute($values);
     $stmt->execute([$id]);$after=$stmt->fetch();log_change($pdo,'person',$id,'update','Modification de '.full_name($after),$before,$after);

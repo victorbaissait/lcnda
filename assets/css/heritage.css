@@ -1,0 +1,178 @@
+/* Fiches « patrimoine » (assets/js/heritage.js) : départs, enfants placés, armoiries, poilus, circuits, papiers,
+   cartes anciennes, recherches enregistrées, comparaisons avec la France, copie hors de l'ordinateur. */
+
+/* Fenêtre IDENTITÉ : cases des blocs à afficher */
+.person-heritage-flags{display:flex;flex-direction:column;gap:.2rem;padding:.6rem .8rem;border:1px dashed var(--muted);margin-top:.3rem}
+.person-heritage-flags-title{font-size:.72em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* Fenêtres de saisie */
+dialog.h-modal{width:min(760px,96vw);max-height:92vh}
+dialog.h-modal.h-modal-wide{width:min(1040px,97vw)}
+.h-dialog-body{padding:4px 20px 8px;max-height:calc(92vh - 150px);overflow:auto}
+.h-dialog-body h4,.collection-form h4{margin:1rem 0 .4rem;font-size:.78em;text-transform:uppercase;letter-spacing:.08em}
+.h-block-label{display:block;margin:.5rem 0}
+.h-block-label textarea,.h-block-label input,.h-block-label select{width:100%}
+.h-inline{display:inline-flex;align-items:center;gap:.35rem}
+.h-narrow{width:5.5em !important;flex:0 0 auto !important}
+.span-2{grid-column:1/-1}
+
+/* Champ lieu avec suggestions */
+.h-place{position:relative;display:block}
+.h-place input[type=text]{width:100%}
+.h-place-ok{position:absolute;right:.4rem;top:50%;transform:translateY(-50%);pointer-events:none}
+.h-place-list{position:absolute;top:100%;left:0;right:0;z-index:40;background:var(--paper);border:1px solid var(--ink);display:flex;flex-direction:column;max-height:240px;overflow:auto}
+.h-place-list button{text-align:left;padding:.35rem .55rem;border:0;background:none;cursor:pointer;color:var(--ink)}
+.h-place-list button:hover{background:var(--blue-soft)}
+.h-place-list small{padding:.35rem .55rem}
+
+/* Fichiers d'une fiche */
+.h-media-editor{display:flex;flex-direction:column;gap:.5rem}
+.h-media-role h5{margin:.2rem 0;font-size:.85em}
+.h-media-link{position:relative;display:flex;gap:.4rem;flex-wrap:wrap}
+.h-media-link input{flex:1 1 260px}
+.h-media-results{position:absolute;top:100%;left:0;right:0;z-index:40;background:var(--paper);border:1px solid var(--ink);max-height:260px;overflow:auto;display:flex;flex-direction:column}
+.h-media-pick{display:flex;align-items:center;gap:.5rem;padding:.3rem .5rem;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink)}
+.h-media-pick:hover{background:var(--blue-soft)}
+.h-media-pick img{width:40px;height:40px;object-fit:cover}
+.h-thumbs{display:flex;flex-wrap:wrap;gap:.4rem;margin:.3rem 0}
+.h-thumb{width:84px;height:84px;padding:0;border:1px solid var(--ink);background:var(--card-bg);cursor:zoom-in;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.h-thumb img{width:100%;height:100%;object-fit:cover}
+.h-thumb .collection-file{font-size:.7em;padding:.2rem}
+
+/* Fiches (voyage, placement, inventaire, circuit) */
+.h-records{display:flex;flex-direction:column;gap:.8rem}
+.h-records-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:.8rem;margin-top:1rem}
+.h-record{border:var(--line);background:var(--card-bg);padding:.7rem .8rem;box-shadow:var(--shadow-small)}
+.h-record>header{display:flex;justify-content:space-between;gap:.6rem;align-items:flex-start;margin-bottom:.3rem}
+.h-record>header strong{font-size:1.02em}
+.h-record .data-list{margin:.3rem 0}
+.h-ship,.h-duration{display:block;font-size:.88em;color:var(--muted)}
+.h-section{margin:.4rem 0;padding:.3rem 0;border-top:1px dotted var(--muted)}
+.h-section summary{cursor:pointer;font-weight:700;font-size:.9em}
+.h-section h5{margin:.2rem 0;font-size:.85em}
+.h-transcription{white-space:normal;font-family:Georgia,'Times New Roman',serif;font-size:.92em;background:var(--blue-soft);padding:.4rem .6rem;margin:.3rem 0}
+.h-voyage-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:1rem;align-items:start}
+.h-voyage-map{position:sticky;top:.5rem}
+@media(max-width:1000px){.h-voyage-layout{grid-template-columns:1fr}.h-voyage-map{position:static}}
+.h-map{margin:.4rem 0}
+.h-map-empty{aspect-ratio:auto;padding:1rem}
+.h-map-label{paint-order:stroke;stroke:#fff;stroke-width:3px;fill:#111}
+
+/* Armoiries */
+.h-coats{display:flex;flex-direction:column;gap:.7rem}
+.h-coats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.9rem}
+.h-coat{display:flex;gap:.8rem;border:var(--line);background:var(--card-bg);padding:.6rem;box-shadow:var(--shadow-small)}
+.h-coat-shield{flex:0 0 96px}
+.h-coat-shield .h-thumb{width:96px;height:112px;border:0;background:none}
+.h-coat-shield .h-thumb img{object-fit:contain}
+.h-coat-placeholder{display:flex;width:96px;height:112px;align-items:center;justify-content:center;font-size:3rem;opacity:.35;border:1px dashed var(--muted)}
+.h-coat-body{flex:1;min-width:0}
+.h-blazon{font-family:Georgia,'Times New Roman',serif;font-style:italic;margin:.3rem 0}
+.h-motto{margin:.2rem 0;font-size:.9em}
+.h-blazon-words{display:flex;flex-direction:column;gap:.25rem;font-size:.85em}
+.h-blazon-words small{display:inline-block;width:5.5em;font-weight:700;color:var(--muted)}
+.h-word{border:1px solid var(--muted);background:var(--paper);color:var(--ink);padding:.1rem .4rem;margin:.1rem;cursor:pointer;font-size:.92em}
+.h-word:hover{background:var(--blue-soft)}
+
+/* Poilus */
+.h-poilu-units td{vertical-align:top}
+.h-jmo-links{display:flex;flex-wrap:wrap;gap:.25rem .8rem;font-size:.9em}
+.h-poilu-events{margin:.6rem 0;padding-left:1.2rem}
+.h-poilu-event{margin:.4rem 0}
+.h-poilu-event.is-blesse>strong,.h-poilu-event.is-tue>strong,.h-poilu-event.is-gaze>strong{color:#cc0014}
+.h-poilu-where{font-size:.9em;margin-top:.15rem}
+.h-poilu-help{font-size:.82em}
+
+/* Inventaires */
+.h-items input,.h-items select{width:100%}
+.h-probate-total{margin:.2rem 0}
+.h-probate-live{margin-left:.6rem}
+.h-bar-cell{width:30%}
+.h-bar{display:block;height:12px;background:var(--blue)}
+
+/* Papiers */
+.h-paper-number{display:inline-block;font-weight:900;font-family:'Courier New',monospace;border:2px solid var(--ink);padding:0 .3rem;white-space:nowrap}
+.h-paper-mini{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem}
+.h-papers td{vertical-align:top}
+.h-papers .h-thumb{width:56px;height:56px}
+
+/* Listes : barre d'outils */
+.segmented-filter{display:inline-flex;gap:.3rem;flex-wrap:wrap}
+.h-person-add{display:inline-flex;gap:.4rem;align-items:center;flex-wrap:wrap}
+.h-person-add .collection-person-field{position:relative}
+
+/* Circuits */
+.h-trip-list{display:flex;flex-direction:column;gap:.7rem;margin-top:.8rem}
+.h-trip.is-done{opacity:.78}
+.h-progress{height:6px;background:var(--blue-soft);margin-top:.35rem;max-width:280px}
+.h-progress span{display:block;height:100%;background:var(--blue)}
+.h-day{margin:1rem 0}
+.h-day-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;border-bottom:var(--line);padding-bottom:.3rem}
+.h-day-head h3{margin:0;display:flex;align-items:center;gap:.4rem}
+.h-day-dot{display:inline-block;width:14px;height:14px;border-radius:50%}
+.h-route-links{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.h-stops{list-style:none;padding:0;margin:.4rem 0}
+.h-stop{display:flex;gap:.6rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px dotted var(--muted)}
+.h-stop.is-done .h-stop-body{opacity:.55;text-decoration:line-through}
+.h-stop-check{display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.h-stop-n{font-weight:900;font-size:.8em}
+.h-stop-body{flex:1;min-width:0}
+.h-stop-body>div{font-size:.88em;margin-top:.15rem}
+.h-stop-tools{display:flex;gap:.25rem;align-items:center;flex-wrap:wrap}
+.h-stop-tools select{width:auto}
+
+/* Cartes anciennes : calage */
+.h-calib{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.6rem 0}
+@media(max-width:1000px){.h-calib{grid-template-columns:1fr}}
+.h-calib-image{border:var(--line);max-height:620px;overflow:auto;background:#eee}
+.h-calib-imgwrap{position:relative;display:inline-block;cursor:crosshair;line-height:0}
+.h-calib-imgwrap img{max-width:100%;display:block;user-select:none}
+.h-calib-pins{position:absolute;inset:0;pointer-events:none}
+.h-pin{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:#0066cc;color:#fff;font:700 12px/22px Arial,sans-serif;text-align:center;border:2px solid #fff;box-shadow:0 0 0 1px #000}
+.h-pin.is-active{background:#cc0014}
+.h-pin.is-house{background:#7a47db;font-size:11px}
+.h-calib-map{height:620px}
+.h-calib-tools{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.h-houses{margin:.3rem 0;padding-left:1.1rem}
+.h-slippy{position:relative;overflow:hidden;border:var(--line);background:#dce4e8;touch-action:none;cursor:grab;user-select:none}
+.h-slippy-tiles img,.h-slippy-overlay img{position:absolute;width:256px;height:256px;pointer-events:none}
+.h-slippy-overlay img{transform-origin:0 0;left:0;top:0;max-width:none}
+.h-slippy-overlay{position:absolute;inset:0;pointer-events:none}
+.h-slippy-marks{position:absolute;inset:0;pointer-events:none}
+.h-slippy-mark{position:absolute;transform:translate(-50%,-50%);min-width:20px;height:20px;padding:0 4px;border-radius:10px;background:var(--c);color:#fff;font:700 11px/20px Arial,sans-serif;text-align:center;border:2px solid #fff}
+.h-slippy-zoom{position:absolute;right:8px;top:8px;display:flex;flex-direction:column;gap:2px;z-index:3}
+.h-slippy-zoom button{width:30px;height:30px;border:var(--line);background:var(--paper);color:var(--ink);font-weight:900;cursor:pointer}
+
+/* Carte principale : carte ancienne superposée */
+.h-oldmap-layer{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.h-oldmap-layer img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none}
+.h-houses-layer{position:absolute;inset:0}
+.h-house{position:absolute;transform:translate(-50%,-50%);font-size:18px;text-shadow:0 0 3px #fff}
+.h-house b{position:absolute;left:20px;top:0;white-space:nowrap;font:700 11px Arial,sans-serif;background:rgba(255,255,255,.85);color:#111;padding:0 3px}
+.h-oldmap-ctl{display:inline-flex;gap:.6rem;align-items:center}
+
+/* Recherches enregistrées */
+.h-search-layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:1rem;align-items:start}
+@media(max-width:1000px){.h-search-layout{grid-template-columns:1fr}}
+.h-search-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.h-saved{display:flex;flex-direction:column;gap:.1rem;padding:.5rem 0;border-bottom:1px dotted var(--muted)}
+.h-saved.is-active{background:var(--blue-soft);padding-left:.4rem}
+.h-saved-tools{display:flex;gap:.6rem;font-size:.85em}
+.h-new-badge{display:inline-block;background:#cc4700;color:#fff;font-size:.75em;font-weight:900;padding:.05rem .4rem;border-radius:8px}
+tr.is-new td{background:rgba(204,71,0,.08)}
+
+/* Prénoms */
+.h-spark{color:var(--blue);display:block}
+.h-names-table td{vertical-align:top}
+
+/* Widgets */
+.h-widget-list{margin:.4rem 0;padding-left:1.1rem}
+.h-widget-list li{margin:.25rem 0}
+
+/* Copie hors de l'ordinateur */
+.h-offsite-sentence{font-weight:700;margin:.2rem 0}
+.h-offsite-sentence.is-warn{color:#cc4700}
+.h-offsite-dirs{padding-left:1.1rem}
+.h-offsite-dirs code{font-size:.85em;word-break:break-all}
+.collection-kind.is-warn{color:#cc4700;border-color:#cc4700}
+.h-offsite-suggestions{display:flex;gap:.3rem;flex-wrap:wrap}

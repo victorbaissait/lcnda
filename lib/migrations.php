@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 8;
+const SCHEMA_VERSION = 9;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -29,6 +29,7 @@ function migration_steps(): array
         6 => 'schema_v6',
         7 => 'schema_v7',
         8 => 'schema_v8',
+        9 => 'schema_v9',
     ];
 }
 
@@ -401,6 +402,238 @@ function schema_v8(PDO $pdo): void
         UNIQUE(person_id, direction)
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_closed_branches_partner ON closed_branches(partner_id)');
+}
+
+/**
+ * Structure n°9 (2026-10-10) : départs (voyages, émigration), enfants placés, armoiries, poilus (unités et journaux de
+ * marche), circuits « sur les traces de mes ancêtres », inventaire des papiers de famille, cartes anciennes posées sur la
+ * carte, recherches enregistrées, prénoms de l'INSEE, inventaires après décès. Les photos de ces fiches vont dans
+ * family_collection_media, recréée sans la liste fermée des types (et avec un rôle : liste de passagers, papiers…).
+ */
+function schema_v9(PDO $pdo): void
+{
+    foreach (['show_voyage_block', 'show_placement_block', 'show_heraldry_block', 'show_poilu_block'] as $col) {
+        $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('persons') WHERE name=" . $pdo->quote($col))->fetchColumn();
+        if (!$has) { $pdo->exec("ALTER TABLE persons ADD COLUMN {$col} INTEGER NOT NULL DEFAULT 0"); }
+    }
+
+    $pdo->exec("CREATE TABLE family_collection_media_v9 (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        collection_type TEXT NOT NULL,
+        collection_id INTEGER NOT NULL,
+        media_id INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+        position INTEGER NOT NULL DEFAULT 0,
+        role TEXT NOT NULL DEFAULT ''
+    )");
+    $pdo->exec('INSERT INTO family_collection_media_v9(id,collection_type,collection_id,media_id,position) SELECT id,collection_type,collection_id,media_id,position FROM family_collection_media');
+    $pdo->exec('DROP TABLE family_collection_media');
+    $pdo->exec('ALTER TABLE family_collection_media_v9 RENAME TO family_collection_media');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_collection_media ON family_collection_media(collection_type, collection_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_collection_media_media ON family_collection_media(media_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS person_voyages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        departure_date TEXT NOT NULL DEFAULT '',
+        departure_year INTEGER,
+        departure_port TEXT NOT NULL DEFAULT '',
+        ship_name TEXT NOT NULL DEFAULT '',
+        destination TEXT NOT NULL DEFAULT '',
+        arrival_date TEXT NOT NULL DEFAULT '',
+        arrival_port TEXT NOT NULL DEFAULT '',
+        reason TEXT NOT NULL DEFAULT '',
+        companions TEXT NOT NULL DEFAULT '',
+        passenger_list_ref TEXT NOT NULL DEFAULT '',
+        passenger_list_url TEXT NOT NULL DEFAULT '',
+        passenger_list_text TEXT NOT NULL DEFAULT '',
+        naturalization_date TEXT NOT NULL DEFAULT '',
+        naturalization_place TEXT NOT NULL DEFAULT '',
+        naturalization_text TEXT NOT NULL DEFAULT '',
+        papers_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        stopovers TEXT NOT NULL DEFAULT '',
+        dep_lat REAL, dep_lon REAL, dest_lat REAL, dest_lon REAL,
+        route_json TEXT NOT NULL DEFAULT '[]',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_person_voyages_person ON person_voyages(person_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS child_placements (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        kind TEXT NOT NULL DEFAULT 'nourrice',
+        institution TEXT NOT NULL DEFAULT '',
+        matricule TEXT NOT NULL DEFAULT '',
+        start_date TEXT NOT NULL DEFAULT '',
+        start_year INTEGER,
+        end_date TEXT NOT NULL DEFAULT '',
+        end_year INTEGER,
+        duration_text TEXT NOT NULL DEFAULT '',
+        origin_text TEXT NOT NULL DEFAULT '',
+        origin_lat REAL, origin_lon REAL,
+        place_text TEXT NOT NULL DEFAULT '',
+        lat REAL, lon REAL,
+        nurse_name TEXT NOT NULL DEFAULT '',
+        nurse_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        wage_text TEXT NOT NULL DEFAULT '',
+        outcome TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_child_placements_person ON child_placements(person_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS coats_of_arms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        blazon TEXT NOT NULL DEFAULT '',
+        motto TEXT NOT NULL DEFAULT '',
+        title_of_nobility TEXT NOT NULL DEFAULT '',
+        origin_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS coat_of_arms_people (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        coat_id INTEGER NOT NULL REFERENCES coats_of_arms(id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        note TEXT NOT NULL DEFAULT '',
+        UNIQUE(coat_id, person_id)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_coat_people_person ON coat_of_arms_people(person_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS poilu_units (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        unit_name TEXT NOT NULL DEFAULT '',
+        date_from TEXT NOT NULL DEFAULT '',
+        date_to TEXT NOT NULL DEFAULT '',
+        jmo_cote TEXT NOT NULL DEFAULT '',
+        jmo_url TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_poilu_units_person ON poilu_units(person_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS poilu_events (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        event_date TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT 'autre',
+        place_text TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT ''
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_poilu_events_person ON poilu_events(person_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS field_trips (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        status TEXT NOT NULL DEFAULT 'todo',
+        date_start TEXT NOT NULL DEFAULT '',
+        date_end TEXT NOT NULL DEFAULT '',
+        start_place TEXT NOT NULL DEFAULT '',
+        stops_per_day INTEGER NOT NULL DEFAULT 6,
+        people_json TEXT NOT NULL DEFAULT '[]',
+        notes TEXT NOT NULL DEFAULT '',
+        done_at TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS field_trip_stops (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        trip_id INTEGER NOT NULL REFERENCES field_trips(id) ON DELETE CASCADE,
+        day INTEGER NOT NULL DEFAULT 1,
+        position INTEGER NOT NULL DEFAULT 0,
+        kind TEXT NOT NULL DEFAULT 'autre',
+        title TEXT NOT NULL DEFAULT '',
+        place_text TEXT NOT NULL DEFAULT '',
+        address TEXT NOT NULL DEFAULT '',
+        lat REAL, lon REAL,
+        to_photograph TEXT NOT NULL DEFAULT '',
+        opening_hours TEXT NOT NULL DEFAULT '',
+        people_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        done INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_field_trip_stops_trip ON field_trip_stops(trip_id, day, position)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_papers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        class_number TEXT NOT NULL DEFAULT '',
+        title TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT '',
+        date_text TEXT NOT NULL DEFAULT '',
+        storage_location TEXT NOT NULL DEFAULT '',
+        holder_text TEXT NOT NULL DEFAULT '',
+        condition_text TEXT NOT NULL DEFAULT '',
+        description TEXT NOT NULL DEFAULT '',
+        people_json TEXT NOT NULL DEFAULT '[]',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS old_maps (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        year_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        media_id INTEGER REFERENCES media(id) ON DELETE SET NULL,
+        img_w INTEGER NOT NULL DEFAULT 0,
+        img_h INTEGER NOT NULL DEFAULT 0,
+        control_points TEXT NOT NULL DEFAULT '[]',
+        transform TEXT NOT NULL DEFAULT '',
+        markers TEXT NOT NULL DEFAULT '[]',
+        opacity INTEGER NOT NULL DEFAULT 70,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS saved_searches (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
+        criteria TEXT NOT NULL DEFAULT '{}',
+        seen_ids TEXT NOT NULL DEFAULT '[]',
+        last_count INTEGER NOT NULL DEFAULT 0,
+        last_run_at TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS insee_prenoms (
+        prenom TEXT NOT NULL,
+        sexe INTEGER NOT NULL,
+        annee INTEGER NOT NULL,
+        nombre INTEGER NOT NULL
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_insee_prenoms_prenom ON insee_prenoms(prenom, annee)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS probate_inventories (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        date_text TEXT NOT NULL DEFAULT '',
+        year INTEGER,
+        notary TEXT NOT NULL DEFAULT '',
+        place_text TEXT NOT NULL DEFAULT '',
+        currency TEXT NOT NULL DEFAULT 'livre',
+        reference TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_probate_inventories_person ON probate_inventories(person_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS probate_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        inventory_id INTEGER NOT NULL REFERENCES probate_inventories(id) ON DELETE CASCADE,
+        room TEXT NOT NULL DEFAULT '',
+        category TEXT NOT NULL DEFAULT 'autre',
+        description TEXT NOT NULL DEFAULT '',
+        quantity TEXT NOT NULL DEFAULT '',
+        value REAL,
+        value_text TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_probate_items_inventory ON probate_items(inventory_id, position)');
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */

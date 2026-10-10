@@ -13,7 +13,7 @@ try {
 	    if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo'],true))$mediaSubjectType='';
     // Photo d'un objet de famille ou d'un souvenir (mémoire familiale) : rattachée à la collection, pas à une personne
     $collectionType=safe_text($_POST['collection_type']??'');$collectionId=safe_int($_POST['collection_id']??0);
-    if(!in_array($collectionType,['family_object','family_memory'],true)){$collectionType='';$collectionId=0;}
+    if(!in_array($collectionType,HERITAGE_COLLECTION_TYPES,true)){$collectionType='';$collectionId=0;}$collectionRole=mb_substr(safe_text($_POST['collection_role']??''),0,40);
     if($collectionType&&!$collectionId)throw new RuntimeException('Objet ou souvenir manquant');
     if(!$personId&&!$battueItemId&&!$archiveDigestId&&!$collectionType)throw new RuntimeException('Personne, annotation de battue ou dépouillement manquant');
     if(empty($_FILES['files']))throw new RuntimeException('Aucun fichier reçu');
@@ -73,7 +73,7 @@ try {
 	            $pdo->prepare('INSERT INTO media(title,media_type,filename,thumbnail,document_reference,document_title,document_url,document_pages,postcard_group,postcard_side,is_person_photo,media_subject_type) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')->execute([$mediaTitle,$mediaType,$stored,$mediaType==='image'?$stored:'',$documentReference,$documentTitle,$documentUrl,$documentPages,$postcardGroup,$postcardSide,$isPersonPhoto,$mediaSubjectType]);$mediaId=(int)$pdo->lastInsertId();
             $entityTypeOverride=safe_text($_POST['entity_type_override']??'');$allowedOverrides=['military'];
             if($collectionType){
-                $pdo->prepare('INSERT INTO family_collection_media(collection_type,collection_id,media_id,position) VALUES(?,?,?,?)')->execute([$collectionType,$collectionId,$mediaId,$i]);
+                $pdo->prepare('INSERT INTO family_collection_media(collection_type,collection_id,media_id,position,role) VALUES(?,?,?,?,?)')->execute([$collectionType,$collectionId,$mediaId,$i,$collectionRole]);
             }elseif($archiveDigestId){
                 $pdo->prepare('INSERT INTO archive_digest_media(archive_digest_id,media_id,page_number) VALUES(?,?,?)')->execute([$archiveDigestId,$mediaId,$archiveDigestPageNumber]);
             }else{

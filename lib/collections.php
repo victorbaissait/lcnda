@@ -209,7 +209,7 @@ function delete_family_memory(PDO $pdo, array $data): array
 function remove_collection_media(PDO $pdo, array $data): array
 {
     $type = safe_text($data['collection_type'] ?? '');
-    if (!in_array($type, ['family_object', 'family_memory'], true)) { throw new RuntimeException('Type inconnu'); }
+    if (!in_array($type, HERITAGE_COLLECTION_TYPES, true)) { throw new RuntimeException('Type inconnu'); }
     $pdo->prepare('DELETE FROM family_collection_media WHERE collection_type=? AND collection_id=? AND media_id=?')
         ->execute([$type, safe_int($data['collection_id'] ?? 0), safe_int($data['media_id'] ?? 0)]);
     return ['ok' => true];

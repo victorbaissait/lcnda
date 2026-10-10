@@ -25,6 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=198">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
 <body>
@@ -171,6 +172,14 @@ header('Cache-Control: no-store, private');
                     <small style="font-weight:normal;color:#666">(informations du registre matricule)</small>
                 </label>
                 <p id="person-military-disabled-hint" style="display:none;margin:.3rem 0 0 1.6rem;font-size:.8em;color:#c00">Activez le bloc militaire dans Maintenance → Ordre et visibilité des blocs avant de pouvoir cocher cette option.</p>
+            </div>
+            <input type="hidden" name="heritage_flags" value="1">
+            <div class="span-2 person-heritage-flags">
+                <span class="person-heritage-flags-title">Blocs à afficher sur la fiche</span>
+                <label class="checkbox-line"><input type="checkbox" name="show_voyage_block" value="1"> 🚢 Départs / émigration <small style="font-weight:normal;color:#666">(voyage, port, navire, destination, liste de passagers, naturalisation, papiers d’émigration, trajet sur la carte)</small></label>
+                <label class="checkbox-line"><input type="checkbox" name="show_placement_block" value="1"> 👶 Enfant placé <small style="font-weight:normal;color:#666">(mis en nourrice, abandonné, recueilli par l’hospice : lieu, durée, carte)</small></label>
+                <label class="checkbox-line"><input type="checkbox" name="show_heraldry_block" value="1"> 🛡️ Noblesse / blason <small style="font-weight:normal;color:#666">(armoiries portées : image, blasonnement, devise, titre)</small></label>
+                <label class="checkbox-line"><input type="checkbox" name="show_poilu_block" value="1"> 🎖️ Poilu 14-18 <small style="font-weight:normal;color:#666">(régiments, blessures, journaux de marche et opérations)</small></label>
             </div>
         </div>
         <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Enregistrer</button></div>
@@ -1061,7 +1070,8 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=270" defer></script>
+<script src="assets/js/app.js?v=271" defer></script>
+<script src="assets/js/heritage.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

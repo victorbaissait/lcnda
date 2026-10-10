@@ -297,7 +297,7 @@ function gedcom_conc_chunks(string $row, int $size): array
 function export_gedcom(PDO $pdo): never
 {
     $version = ($_GET['gedcom_version'] ?? '5.5.1') === '7' ? '7' : '5.5.1';
-    $filename = 'genealogie-' . date('Ymd-His') . '.ged';
+    $filename = 'genealogie-' . (($_GET['branch_mode'] ?? '') !== '' ? 'branche-' : '') . date('Ymd-His') . '.ged';
     header('Content-Type: text/plain; charset=utf-8');
     header('Content-Disposition: attachment; filename="' . $filename . '"');
     $out = fopen('php://output', 'w');
@@ -336,6 +336,19 @@ function export_gedcom(PDO $pdo): never
 
     $allPersons = $pdo->query(person_select() . ' ORDER BY p.id')->fetchAll();
     $families = $pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
+    // Une seule branche (ascendants d'une personne, ou descendants d'un couple) au lieu de toute la base
+    $branch = gedcom_branch_ids($pdo);
+    $keptFamilies = null;
+    if ($branch !== null) {
+        $kids = [];
+        foreach ($pdo->query('SELECT family_id, child_id FROM family_children') as $c) { $kids[(int) $c['family_id']][] = (int) $c['child_id']; }
+        $allPersons = array_values(array_filter($allPersons, static fn($p) => isset($branch[(int) $p['id']])));
+        $families = array_values(array_filter($families, static function ($f) use ($branch, $kids) {
+            $members = array_filter([(int) ($f['partner1_id'] ?? 0), (int) ($f['partner2_id'] ?? 0), ...($kids[(int) $f['id']] ?? [])], static fn($id) => isset($branch[$id]));
+            return count($members) >= 2;
+        }));
+        $keptFamilies = array_fill_keys(array_map(static fn($f) => (int) $f['id'], $families), true);
+    }
     // « Pour partager » (ou mode confidentialité) : les vivants, même probables, et les fiches confidentielles restent dans
     // l'arbre mais anonymes (« Personne vivante », sexe et liens familiaux seulement), pour que les branches se rejoignent.
     $share = export_option_enabled('share', false) || export_privacy_enabled();
@@ -347,6 +360,7 @@ function export_gedcom(PDO $pdo): never
         foreach (['partner1_id', 'partner2_id'] as $k) { if ((int) ($f[$k] ?? 0) > 0) { $famsBySpouse[(int) $f[$k]][(int) $f['id']] = true; } }
     }
     foreach ($pdo->query('SELECT * FROM family_children ORDER BY family_id,position,id') as $c) {
+        if ($keptFamilies !== null && !isset($keptFamilies[(int) $c['family_id']])) { continue; }
         $childrenByFamily[(int) $c['family_id']][(int) $c['child_id']] = $c;
         $famcByChild[(int) $c['child_id']][(int) $c['family_id']] = $c;
     }
@@ -920,4 +934,28 @@ function gedcom_share_hidden(PDO $pdo, array $persons, array $families): array
         if ($born !== null && $born >= $limit) { $hidden[$id] = 'living'; }
     }
     return $hidden;
+}
+
+/**
+ * Personnes d'une branche à exporter (null = toute la base) :
+ *  - branch_mode=ascendants&branch_person=ID[&branch_generations=N] : la personne et ses ascendants ;
+ *  - branch_mode=descendants&branch_person=ID[&branch_partner=ID][&branch_spouses=0] : le couple, ses descendants
+ *    et (par défaut) les conjoints des descendants.
+ */
+function gedcom_branch_ids(PDO $pdo): ?array
+{
+    $mode = (string) ($_GET['branch_mode'] ?? '');
+    $person = (int) ($_GET['branch_person'] ?? 0);
+    if (!in_array($mode, ['ascendants', 'descendants'], true) || $person <= 0) { return null; }
+    $generations = max(1, min(60, (int) ($_GET['branch_generations'] ?? 60)));
+    if ($mode === 'ascendants') { return h_ancestors($pdo, $person, $generations); }
+    $partner = (int) ($_GET['branch_partner'] ?? 0);
+    $spouses = ($_GET['branch_spouses'] ?? '1') !== '0';
+    if (!$partner) { return h_descendants($pdo, [$person], $generations, $spouses); }
+    // Descendants de CE couple seulement (pas les enfants d'une autre union de l'un des deux)
+    $stmt = $pdo->prepare('SELECT fc.child_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE (f.partner1_id=? AND f.partner2_id=?) OR (f.partner1_id=? AND f.partner2_id=?)');
+    $stmt->execute([$person, $partner, $partner, $person]);
+    $children = array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+    $keep = $children ? h_descendants($pdo, $children, $generations - 1, $spouses) : [];
+    return $keep + [$person => true, $partner => true];
 }
