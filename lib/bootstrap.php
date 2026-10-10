@@ -12,6 +12,7 @@ require_once __DIR__ . '/collections.php';
 require_once __DIR__ . '/heritage.php';
 require_once __DIR__ . '/heritage_tools.php';
 require_once __DIR__ . '/heritage_links.php'; // question en français, langues, liens @, citations détaillées, entraide // dossier Scans, paroisses, noms cités, voyages impossibles, travail à deux, consultation    // départs, enfants placés, armoiries, poilus, circuits, papiers, cartes anciennes…
+require_once __DIR__ . '/heritage_more.php';  // actes à demander, contexte historique, coffre cousin, âges, variantes, lieux, tailles, résistants, éditeur de blocs
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';
 require_once __DIR__ . '/shortcuts.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues

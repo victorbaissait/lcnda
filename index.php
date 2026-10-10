@@ -25,7 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=198">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=4">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=5">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
 <body>
@@ -165,22 +165,23 @@ header('Cache-Control: no-store, private');
                     </select>
                 </label>
             </div>
-            <label class="span-2 checkbox-line"><input type="checkbox" name="outside_genealogy" value="1"> Hors de ma généalogie <small style="font-weight:normal;color:#666">(individu utile pour une enquête, mais pas dans ma lignée directe)</small></label>
-            <div class="span-2" id="person-military-toggle-wrap" style="display:none">
-                <label class="checkbox-line" id="person-military-toggle-label">
-                    <input type="checkbox" name="show_military_block" value="1" id="person-show-military">
-                    🎖 Afficher le bloc militaire
-                    <small style="font-weight:normal;color:#666">(informations du registre matricule)</small>
-                </label>
-                <p id="person-military-disabled-hint" style="display:none;margin:.3rem 0 0 1.6rem;font-size:.8em;color:#c00">Activez le bloc militaire dans Maintenance → Ordre et visibilité des blocs avant de pouvoir cocher cette option.</p>
-            </div>
             <input type="hidden" name="heritage_flags" value="1">
             <div class="span-2 person-heritage-flags">
                 <span class="person-heritage-flags-title">Blocs à afficher sur la fiche</span>
+                <label class="checkbox-line"><input type="checkbox" name="outside_genealogy" value="1"> Hors de ma généalogie <small style="font-weight:normal;color:#666">(individu utile pour une enquête, mais pas dans ma lignée directe)</small></label>
+                <div id="person-military-toggle-wrap" style="display:none">
+                    <label class="checkbox-line" id="person-military-toggle-label">
+                        <input type="checkbox" name="show_military_block" value="1" id="person-show-military">
+                        🎖 Afficher le bloc militaire
+                        <small style="font-weight:normal;color:#666">(informations du registre matricule)</small>
+                    </label>
+                    <p id="person-military-disabled-hint" style="display:none;margin:.3rem 0 0 1.6rem;font-size:.8em;color:#c00">Activez le bloc militaire dans Maintenance → Ordre et visibilité des blocs avant de pouvoir cocher cette option.</p>
+                </div>
                 <label class="checkbox-line"><input type="checkbox" name="show_voyage_block" value="1"> 🚢 Départs / émigration <small style="font-weight:normal;color:#666">(voyage, port, navire, destination, liste de passagers, naturalisation, papiers d’émigration, trajet sur la carte)</small></label>
                 <label class="checkbox-line"><input type="checkbox" name="show_placement_block" value="1"> 👶 Enfant placé <small style="font-weight:normal;color:#666">(mis en nourrice, abandonné, recueilli par l’hospice : lieu, durée, carte)</small></label>
                 <label class="checkbox-line"><input type="checkbox" name="show_heraldry_block" value="1"> 🛡️ Noblesse / blason <small style="font-weight:normal;color:#666">(armoiries portées : image, blasonnement, devise, titre)</small></label>
                 <label class="checkbox-line"><input type="checkbox" name="show_poilu_block" value="1"> 🎖️ Poilu 14-18 <small style="font-weight:normal;color:#666">(régiments, blessures, journaux de marche et opérations)</small></label>
+                <label class="checkbox-line"><input type="checkbox" name="show_resistance_block" value="1"> ✊ Résistant <small style="font-weight:normal;color:#666">(réseau, nom de guerre, arrestation, caches, parcours jour par jour sur la carte, compagnons)</small></label>
                 <label class="checkbox-line"><input type="checkbox" name="show_language_block" value="1"> 🗣️ Langues <small style="font-weight:normal;color:#666">(langues parlées par la personne et sa descendance ; s’affiche aussi tout seul quand une langue est connue)</small></label>
             </div>
         </div>
@@ -1072,10 +1073,11 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=274" defer></script>
-<script src="assets/js/heritage.js?v=4" defer></script>
-<script src="assets/js/heritage-tools.js?v=4" defer></script>
-<script src="assets/js/heritage-links.js?v=2" defer></script>
+<script src="assets/js/app.js?v=275" defer></script>
+<script src="assets/js/heritage.js?v=5" defer></script>
+<script src="assets/js/heritage-tools.js?v=5" defer></script>
+<script src="assets/js/heritage-links.js?v=3" defer></script>
+<script src="assets/js/heritage-more.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

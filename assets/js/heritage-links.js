@@ -15,6 +15,8 @@
     const esc = value => A().escapeHtml(value ?? '');
     const nl = value => esc(value).replace(/\n/g, '<br>');
     const api = (...args) => A().api(...args);
+    const LP = (type, labels) => window.LCNDA_EXT?.labelsPicker?.(type, labels) || ''; // étiquettes (heritage-more.js)
+    const LC = labels => window.LCNDA_EXT?.labelChips?.(labels) || '';
     const toast = (...args) => A().toast(...args);
     const empty = text => A().empty(text);
     const card = (...args) => A().card(...args);
@@ -309,7 +311,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Demandes d’entraide', 'Pour un ancêtre où tu es bloqué, l’app rédige un message prêt à copier sur un forum, sur l’entraide de Geneanet ou sur un groupe Facebook : ce que l’on sait (avec les sources), ce que l’on cherche, ce qui a déjà été essayé (tiré des enquêtes). Les demandes bien présentées obtiennent beaucoup plus de réponses.')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-help-new>+ Demande</button><div class="segmented-filter">${[['open', `En cours (${counts.open})`], ['closed', `Terminées (${counts.closed})`], ['all', 'Toutes']].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-help-filter="${k}">${esc(l)}</button>`).join('')}</div></div>
             ${e ? helpFormHtml(e) : ''}
-            ${rows.length ? `<div class="h-records">${rows.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong> — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">Mise à jour : ${esc(r.updated_at)}</small></article>`).join('')}</div>` : (e ? '' : empty(filter === 'closed' ? 'Aucune demande terminée.' : 'Aucune demande en cours. Prépare la première avec « + Demande ».'))}</section>`;
+            ${rows.length ? `<div class="h-records">${rows.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">Mise à jour : ${esc(r.updated_at)}</small></article>`).join('')}</div>` : (e ? '' : empty(filter === 'closed' ? 'Aucune demande terminée.' : 'Aucune demande en cours. Prépare la première avec « + Demande ».'))}</section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
         ws.querySelector('[data-h-help-new]').addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: 0}));
@@ -328,7 +330,7 @@
             <div class="page-actions"><button type="button" class="button small secondary" data-h-help-copy>Copier le message</button>${helpWhere.map(([l, u]) => `<a class="button small secondary" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(l)} ↗</a>`).join('')}</div>
             <h4>Suivi</h4><div class="form-grid"><label>État<select name="status">${Object.entries(helpStatuses).map(([k, l]) => `<option value="${k}" ${e.status === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Publiée où<input name="posted_where" value="${esc(e.posted_where || '')}" placeholder="Entraide Geneanet, groupe « Généalogie du Nord »…"></label>
             <label class="span-2">Lien vers la demande publiée<input name="posted_url" value="${esc(e.posted_url || '')}" placeholder="https://…"></label><label class="span-2">Réponses reçues, pistes<textarea name="answer" rows="3">${esc(e.answer || '')}</textarea></label></div>
-            <div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-help-cancel>Annuler</button></div></form>`;
+            ${LP('help_request', e.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-help-cancel>Annuler</button></div></form>`;
     }
     function bindHelpForm(e) {
         const form = A().$('#h-help-form');

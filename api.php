@@ -164,6 +164,15 @@ try {
     if ($isWrite && $action === 'sync_apply') {
         sync_apply($pdo, $payload);
     }
+    if ($isWrite && $action === 'vault_export') {
+        vault_export($pdo, $payload);
+    }
+    if ($isWrite && $action === 'vault_store') {
+        vault_store($pdo, $_FILES['file'] ?? null);
+    }
+    if ($isWrite && $action === 'vault_open') {
+        vault_open($pdo, $_FILES['file'] ?? null, (string) ($_POST['password'] ?? $payload['password'] ?? ''));
+    }
     if ($isWrite && $action === 'offsite_copy_now') {
         offsite_copy_now($pdo, $payload);
     }
@@ -228,6 +237,20 @@ try {
         'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''))),
         'languages_overview' => json_response(languages_overview($pdo)),
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
+        'recent_acts' => json_response(['acts' => recent_acts($pdo)]),
+        'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
+        'historical_context' => json_response(historical_context($pdo)),
+        'vault_status' => json_response(vault_status($pdo)),
+        'vault_download' => vault_download($pdo, safe_int($_GET['id'] ?? 0)),
+        'age_checks' => json_response(age_checks($pdo)),
+        'variant_groups' => json_response(['groups' => variant_groups($pdo, safe_text($_GET['field'] ?? 'occupation'))]),
+        'suspicious_places' => json_response(suspicious_places($pdo)),
+        'heights_data' => json_response(heights_data($pdo)),
+        'resistance' => json_response(resistance_data($pdo, safe_int($_GET['person_id'] ?? 0))),
+        'resistance_overview' => json_response(['people' => resistance_overview($pdo), 'kinds' => RESISTANCE_KINDS]),
+        'custom_blocks_defs' => json_response(['blocks' => custom_blocks_defs($pdo), 'types' => CUSTOM_FIELD_TYPES]),
+        'export_custom_block_def' => export_custom_block_def($pdo, safe_int($_GET['id'] ?? 0)),
+        'compare_people' => json_response(compare_people($pdo, safe_int($_GET['a'] ?? 0), safe_int($_GET['b'] ?? 0))),
         'help_requests' => json_response(help_requests_data($pdo, safe_text($_GET['status'] ?? 'open'))),
         'help_request_draft' => json_response(['message' => help_request_message($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['target'] ?? 'other'), safe_text($_GET['question'] ?? ''), safe_text($_GET['format'] ?? 'forum'))]),
         'family_objects' => json_response(['objects' => family_objects_data($pdo, safe_int($_GET['person_id'] ?? 0), safe_text($_GET['q'] ?? ''))]),
@@ -8848,6 +8871,19 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'set_no_inherited_language' => set_no_inherited_language($pdo,$data),
             'save_record_languages' => save_record_languages($pdo,$data),
             'save_help_request' => save_help_request($pdo,$data),
+            'create_act_request' => create_act_request($pdo,$data),
+            'act_open_reminder' => act_open_reminder($pdo,$data),
+            'vault_delete' => vault_delete($pdo,$data),
+            'apply_variants' => apply_variants($pdo,$data),
+            'fix_place' => fix_place($pdo,$data),
+            'save_resistance' => save_resistance($pdo,$data),
+            'clear_resistance' => clear_resistance($pdo,$data),
+            'save_custom_block_def' => save_custom_block_def($pdo,$data),
+            'delete_custom_block_def' => delete_custom_block_def($pdo,$data),
+            'import_custom_block_def' => import_custom_block_def($pdo,$data),
+            'save_custom_block_entry' => save_custom_block_entry($pdo,$data),
+            'delete_custom_block_entry' => delete_custom_block_entry($pdo,$data),
+            'set_custom_block_flags' => set_custom_block_flags($pdo,$data),
             'delete_help_request' => delete_help_request($pdo,$data),
             'check_links' => check_links($pdo,$data),
             'replace_link' => replace_link($pdo,$data),
@@ -8881,6 +8917,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rotate_media_image' => rotate_media_image($pdo,$data),
             default => throw new RuntimeException('Action d’écriture inconnue'),
         };
+        apply_pending_labels($pdo, $action, $data, $result);
         $pdo->commit();
         json_response(['ok'=>true,'result'=>$result]);
     } catch(Throwable $e){
@@ -8891,7 +8928,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
 
 function allowed_label_entity_types(): array
 {
-    return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory'];
+    return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry'];
 }
 
 function normalize_label_color(string $color): string
@@ -10737,7 +10775,7 @@ function save_person(PDO $pdo,array $data): array
     $set[]="artist_events_display=?";$values[]=$artistDisplay;
     $set[]="show_military_block=?";$values[]=(isset($data['show_military_block'])&&$data['show_military_block']?1:0);
     // Blocs à afficher sur demande (cases de la fenêtre Identité) : départs, enfant placé, blason, poilu
-    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
+    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block','show_resistance_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
     if(!$set)return $before;
     $values[]=$id;$pdo->prepare('UPDATE persons SET '.implode(',',$set).',updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute($values);
     $stmt->execute([$id]);$after=$stmt->fetch();log_change($pdo,'person',$id,'update','Modification de '.full_name($after),$before,$after);

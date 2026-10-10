@@ -10,7 +10,7 @@ declare(strict_types=1);
  * Les photos de ces fiches passent par family_collection_media (upload.php, collection_type + role).
  */
 
-const HERITAGE_COLLECTION_TYPES = ['family_object', 'family_memory', 'voyage', 'placement', 'coat_of_arms', 'family_paper', 'old_map', 'probate_inventory', 'poilu'];
+const HERITAGE_COLLECTION_TYPES = ['family_object', 'family_memory', 'voyage', 'placement', 'coat_of_arms', 'family_paper', 'old_map', 'probate_inventory', 'poilu', 'resistance', 'custom_block_entry'];
 const PLACEMENT_KINDS = ['nourrice' => 'Mis en nourrice', 'abandon' => 'Abandonné', 'hospice' => 'Recueilli par l’hospice', 'assistance' => 'Pupille de l’Assistance publique', 'orphelinat' => 'Orphelinat', 'recueilli' => 'Recueilli par une famille', 'autre' => 'Autre placement'];
 const POILU_EVENT_KINDS = ['incorpore' => 'Incorporé', 'blesse' => 'Blessé', 'malade' => 'Malade / évacué', 'gaze' => 'Gazé', 'prisonnier' => 'Fait prisonnier', 'disparu' => 'Disparu', 'tue' => 'Tué', 'cite' => 'Cité / décoré', 'permission' => 'Permission', 'mutation' => 'Changement d’unité', 'autre' => 'Autre'];
 const PROBATE_CATEGORIES = ['meubles' => 'Meubles', 'betail' => 'Bétail', 'outils' => 'Outils', 'linge' => 'Linge', 'vetements' => 'Vêtements', 'vaisselle' => 'Vaisselle, cuisine', 'grains' => 'Grains, récoltes, provisions', 'argent' => 'Argent, créances', 'immeubles' => 'Maisons, terres', 'livres' => 'Livres, papiers', 'bijoux' => 'Bijoux', 'dettes' => 'Dettes (à déduire)', 'autre' => 'Autre'];
@@ -193,7 +193,7 @@ function voyages_data(PDO $pdo, int $personId = 0): array
         unset($r['route_json']);
     }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'voyage', $rows);
 }
 
 function save_voyage(PDO $pdo, array $data): array
@@ -292,7 +292,7 @@ function placements_data(PDO $pdo, int $personId = 0): array
         $r['duration'] = placement_duration($r);
     }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'placement', $rows);
 }
 
 /** Durée lisible (« 2 ans et 3 mois ») d'après les dates, sinon le texte saisi. */
@@ -379,7 +379,7 @@ function coats_of_arms_data(PDO $pdo, int $personId = 0, string $q = ''): array
         $r['media'] = $media[(int) $r['id']] ?? [];
     }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'coat_of_arms', $rows);
 }
 
 function save_coat_of_arms(PDO $pdo, array $data): array
@@ -435,7 +435,7 @@ function poilu_data(PDO $pdo, int $personId): array
     $eventRows = $events->fetchAll();
     foreach ($eventRows as &$e) { $e['kind_label'] = POILU_EVENT_KINDS[$e['kind']] ?? $e['kind']; }
     unset($e);
-    return ['units' => $units->fetchAll(), 'events' => $eventRows];
+    return ['units' => $units->fetchAll(), 'events' => $eventRows, 'labels' => collection_labels($pdo, 'poilu', [$personId])[$personId] ?? []];
 }
 
 /** Tous les poilus de la base (case cochée, ou unité saisie), avec leurs unités et leurs événements datés. */
@@ -493,6 +493,8 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'languages' => function_exists('person_languages_resolved') ? person_languages_resolved($pdo, $personId) : null,
         'event_languages' => function_exists('record_languages_for') ? record_languages_for($pdo, 'event', array_map('intval', $pdo->query('SELECT id FROM events WHERE person_id=' . $personId . ' OR family_id IN (SELECT id FROM families WHERE partner1_id=' . $personId . ' OR partner2_id=' . $personId . ')')->fetchAll(PDO::FETCH_COLUMN))) : [],
         'mentions' => function_exists('person_mentions') ? person_mentions($pdo, $personId) : [],
+        'resistance' => function_exists('resistance_data') ? resistance_data($pdo, $personId) : null,
+        'custom_blocks' => function_exists('custom_blocks_for_person') ? custom_blocks_for_person($pdo, $personId) : [],
     ];
 }
 
@@ -596,7 +598,7 @@ function field_trips_data(PDO $pdo, string $status = 'todo'): array
     $counts = $pdo->query("SELECT sum(CASE WHEN status='done' THEN 1 ELSE 0 END) AS done, sum(CASE WHEN status<>'done' THEN 1 ELSE 0 END) AS todo FROM field_trips")->fetch();
     foreach ($rows as &$r) { $r['people'] = h_json_list($r['people_json']); unset($r['people_json']); }
     unset($r);
-    return ['trips' => $rows, 'counts' => ['todo' => (int) ($counts['todo'] ?? 0), 'done' => (int) ($counts['done'] ?? 0)], 'kinds' => FIELD_TRIP_KINDS];
+    return ['trips' => with_labels($pdo, 'field_trip', $rows), 'counts' => ['todo' => (int) ($counts['todo'] ?? 0), 'done' => (int) ($counts['done'] ?? 0)], 'kinds' => FIELD_TRIP_KINDS];
 }
 
 function field_trip_detail(PDO $pdo, int $id): array
@@ -610,6 +612,7 @@ function field_trip_detail(PDO $pdo, int $id): array
     $stops = $pdo->prepare('SELECT * FROM field_trip_stops WHERE trip_id=? ORDER BY day, position, id'); $stops->execute([$id]);
     $trip['stops'] = $stops->fetchAll();
     $trip['kinds'] = FIELD_TRIP_KINDS;
+    $trip['labels'] = collection_labels($pdo, 'field_trip', [$id])[$id] ?? [];
     return $trip;
 }
 
@@ -903,7 +906,7 @@ function family_papers_data(PDO $pdo, string $q = '', int $personId = 0): array
         $r['media'] = $media[(int) $r['id']] ?? [];
     }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'family_paper', $rows);
 }
 
 function next_paper_number(PDO $pdo): string
@@ -1000,7 +1003,7 @@ function old_maps_data(PDO $pdo): array
         $r['transform'] = is_array($t) && count($t) === 6 ? array_map('floatval', $t) : null;
     }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'old_map', $rows);
 }
 
 function save_old_map(PDO $pdo, array $data): array
@@ -1360,7 +1363,7 @@ function probate_inventories_data(PDO $pdo, int $personId = 0): array
         $r['by_category'] = $byCat; $r['by_room'] = $byRoom;
     }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'probate_inventory', $rows);
 }
 
 function save_probate_inventory(PDO $pdo, array $data): array

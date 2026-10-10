@@ -449,7 +449,7 @@ function help_requests_data(PDO $pdo, string $status = 'open'): array
     $where = match ($status) { 'closed' => "WHERE h.status IN ('solved','abandoned')", 'all' => '', default => "WHERE h.status NOT IN ('solved','abandoned')" };
     $rows = $pdo->query("SELECT h.*, trim(p.first_name||' '||p.last_name) AS person_name FROM help_requests h LEFT JOIN persons p ON p.id=h.person_id {$where} ORDER BY h.updated_at DESC")->fetchAll();
     $counts = $pdo->query("SELECT sum(CASE WHEN status IN ('solved','abandoned') THEN 0 ELSE 1 END) AS open, sum(CASE WHEN status IN ('solved','abandoned') THEN 1 ELSE 0 END) AS closed FROM help_requests")->fetch();
-    return ['requests' => $rows, 'counts' => ['open' => (int) ($counts['open'] ?? 0), 'closed' => (int) ($counts['closed'] ?? 0)], 'targets' => HELP_TARGETS, 'statuses' => HELP_STATUSES];
+    return ['requests' => with_labels($pdo, 'help_request', $rows), 'counts' => ['open' => (int) ($counts['open'] ?? 0), 'closed' => (int) ($counts['closed'] ?? 0)], 'targets' => HELP_TARGETS, 'statuses' => HELP_STATUSES];
 }
 
 function save_help_request(PDO $pdo, array $data): array

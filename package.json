@@ -20,7 +20,8 @@
     "test:import": "node tests/test-import.js",
     "test:heritage": "node tests/test-heritage.js",
     "test:tools": "node tests/test-tools.js",
-    "test:links": "node tests/test-links.js"
+    "test:links": "node tests/test-links.js",
+    "test:more": "node tests/test-more.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

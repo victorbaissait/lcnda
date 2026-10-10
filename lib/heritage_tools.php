@@ -36,7 +36,7 @@ function kiosk_guard(string $action, bool $isWrite): void
 function kiosk_blocks(string $action, bool $isWrite): bool
 {
     $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'scan_inbox_run'];
-    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export'];
+    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download'];
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
 
@@ -199,7 +199,7 @@ function parishes_data(PDO $pdo, string $q = ''): array
     if ($q !== '') { $sql .= ' WHERE p.name LIKE ? OR pp.place_text LIKE ? OR pp.parish_name LIKE ? OR pr.name LIKE ?'; $params = array_fill(0, 4, "%{$q}%"); }
     $stmt = $pdo->prepare($sql . ' ORDER BY COALESCE(p.name, pp.place_text) COLLATE NOCASE');
     $stmt->execute($params);
-    return $stmt->fetchAll();
+    return with_labels($pdo, 'parish', $stmt->fetchAll());
 }
 
 function save_parish(PDO $pdo, array $data): array
@@ -277,7 +277,7 @@ function cited_names_data(PDO $pdo, string $q = ''): array
         FROM cited_names c LEFT JOIN media m ON m.id=c.media_id LEFT JOIN persons p ON p.id=c.person_id{$where} ORDER BY c.name_key, COALESCE(c.year, 9999)");
     $stmt->execute($params);
     $groups = [];
-    foreach ($stmt->fetchAll() as $r) {
+    foreach (with_labels($pdo, 'cited_name', $stmt->fetchAll()) as $r) {
         $g = &$groups[$r['name_key']];
         $g ??= ['key' => $r['name_key'], 'name' => $r['name'], 'items' => [], 'roles' => [], 'occupations' => [], 'places' => [], 'from' => null, 'to' => null, 'person_id' => null, 'person_name' => ''];
         $g['items'][] = $r;

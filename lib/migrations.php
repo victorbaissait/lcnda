@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 11;
+const SCHEMA_VERSION = 12;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -32,6 +32,7 @@ function migration_steps(): array
         9 => 'schema_v9',
         10 => 'schema_v10',
         11 => 'schema_v11',
+        12 => 'schema_v12',
     ];
 }
 
@@ -768,6 +769,99 @@ function schema_v11(PDO $pdo): void
 
     $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('source_links') WHERE name='citation_json'")->fetchColumn();
     if (!$has) { $pdo->exec("ALTER TABLE source_links ADD COLUMN citation_json TEXT NOT NULL DEFAULT ''"); }
+}
+
+/**
+ * Structure n°12 (2026-10-13) : parcours de résistant, blocs créés avec l'éditeur de blocs (définitions, fiches,
+ * cases par personne), coffre des copies confiées par les cousins, lien courrier → acte demandé.
+ */
+function schema_v12(PDO $pdo): void
+{
+    $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('persons') WHERE name='show_resistance_block'")->fetchColumn();
+    if (!$has) { $pdo->exec("ALTER TABLE persons ADD COLUMN show_resistance_block INTEGER NOT NULL DEFAULT 0"); }
+    $pdo->exec("CREATE TABLE IF NOT EXISTS resistance_profiles (
+        person_id INTEGER PRIMARY KEY REFERENCES persons(id) ON DELETE CASCADE,
+        nom_de_guerre TEXT NOT NULL DEFAULT '',
+        network TEXT NOT NULL DEFAULT '',
+        movement TEXT NOT NULL DEFAULT '',
+        rank TEXT NOT NULL DEFAULT '',
+        joined TEXT NOT NULL DEFAULT '',
+        left_date TEXT NOT NULL DEFAULT '',
+        recognition TEXT NOT NULL DEFAULT '',
+        arrested INTEGER NOT NULL DEFAULT 0,
+        deported INTEGER NOT NULL DEFAULT 0,
+        killed INTEGER NOT NULL DEFAULT 0,
+        fate TEXT NOT NULL DEFAULT '',
+        file_ref TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS resistance_steps (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        date_start TEXT NOT NULL DEFAULT '',
+        date_end TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT 'autre',
+        place_text TEXT NOT NULL DEFAULT '',
+        lat REAL, lon REAL,
+        linked_person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        linked_text TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_resistance_steps_person ON resistance_steps(person_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_resistance_steps_linked ON resistance_steps(linked_person_id)');
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS custom_block_defs (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        uid TEXT NOT NULL UNIQUE,
+        name TEXT NOT NULL DEFAULT '',
+        icon TEXT NOT NULL DEFAULT '🧩',
+        description TEXT NOT NULL DEFAULT '',
+        fields_json TEXT NOT NULL DEFAULT '[]',
+        repeatable INTEGER NOT NULL DEFAULT 1,
+        display TEXT NOT NULL DEFAULT 'flag',
+        labels INTEGER NOT NULL DEFAULT 1,
+        author TEXT NOT NULL DEFAULT '',
+        version INTEGER NOT NULL DEFAULT 1,
+        position INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS custom_block_entries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        block_id INTEGER NOT NULL REFERENCES custom_block_defs(id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        data_json TEXT NOT NULL DEFAULT '{}',
+        position INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_custom_block_entries ON custom_block_entries(person_id, block_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS custom_block_flags (
+        block_id INTEGER NOT NULL REFERENCES custom_block_defs(id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        PRIMARY KEY (block_id, person_id)
+    )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS cousin_vault (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        owner TEXT NOT NULL DEFAULT '',
+        copy_created_at TEXT NOT NULL DEFAULT '',
+        received_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        filename TEXT NOT NULL DEFAULT '',
+        size INTEGER NOT NULL DEFAULT 0,
+        note TEXT NOT NULL DEFAULT ''
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS cousin_vault_sent (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        cousin TEXT NOT NULL DEFAULT '',
+        sent_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        size INTEGER NOT NULL DEFAULT 0,
+        with_media INTEGER NOT NULL DEFAULT 0
+    )");
+    $has = (int) $pdo->query("SELECT count(*) FROM pragma_table_info('courriers') WHERE name='event_id'")->fetchColumn();
+    if (!$has) { try { $pdo->exec("ALTER TABLE courriers ADD COLUMN event_id INTEGER"); } catch (Throwable $_) {} }
 }
 
 /** Bloc déplacé tel quel depuis le début d'api.php (il y tournait à chaque requête). */
