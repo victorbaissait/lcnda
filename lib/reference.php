@@ -187,7 +187,9 @@ function world_reference(): ?PDO
     if ($pdo !== false) { return $pdo; }
     $pdo = null;
     // Répertoire mondial complet (npm run fetch:geo) ; sinon, secours fabriqué depuis les fichiers des pays livrés
-    $path = reference_database_path('geo-world') ?? world_reference_from_countries();
+    $path = reference_database_path('geo-world');
+    if ($path) { foreach (glob(DATA_DIR . '/cache/reference-world-pays-*.sqlite') ?: [] as $old) { @unlink($old); } } // le secours ne sert plus
+    $path ??= world_reference_from_countries();
     if (!$path) { return null; }
     try {
         $pdo = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * Ce fichier n'est PAS copié dans les bases : il est interrogé à la demande (lib/reference.php). Seuls les lieux
  * choisis par l'utilisateur entrent dans sa base.
  *
- *   php scripts/build-reference-world.php <allCountries.zip | cities1000.zip>
+ *   php scripts/build-reference-world.php <allCountries.zip | cities1000.zip> [fichier de sortie]
  */
 
 ini_set('memory_limit', '1024M');
@@ -67,8 +67,11 @@ $info->execute(['sha256', hash_file('sha256', $zip)]);
 $info->execute(['version', date('Ymd')]);
 $db->exec('VACUUM');
 $db = null;
-$out = dirname(__DIR__) . '/data/reference/geo-world.sqlite.gz';
-$in = fopen($tmp, 'rb'); $gz = gzopen($out, 'wb9');
+// Sortie : 2e argument, sinon data/reference/. Écrite à côté puis renommée : l'application ne lit jamais un fichier à moitié écrit.
+$out = $argv[2] ?? dirname(__DIR__) . '/data/reference/geo-world.sqlite.gz';
+if (!is_dir(dirname($out))) { mkdir(dirname($out), 0775, true); }
+$in = fopen($tmp, 'rb'); $gz = gzopen($out . '.part', 'wb6');
 while (!feof($in)) { gzwrite($gz, (string) fread($in, 1 << 20)); }
 fclose($in); gzclose($gz); unlink($tmp);
+rename($out . '.part', $out);
 printf("%d lieux dans le monde → %s (%.1f Mo)\n", $n, $out, filesize($out) / 1048576);

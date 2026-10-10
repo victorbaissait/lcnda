@@ -440,6 +440,38 @@ async function boot() {
     setTimeout(() => checkReminders(), 8000);
     reminderTimer = setInterval(() => checkReminders(), 15 * 60 * 1000);
   }
+  if (!selfTestFile) ensureWorldPlaces(p, phpPath);
+}
+
+/**
+ * Toutes les localités du monde (~5 millions, GeoNames) : data/reference/geo-world.sqlite.gz est livré dans l'application
+ * construite, mais il n'est pas dans le dépôt Git (trop gros). En développement (git pull + npm start), il est donc
+ * téléchargé et fabriqué tout seul, une fois, en arrière-plan (electron/fetch-geo.js --auto). En attendant, la recherche
+ * de lieux utilise le répertoire de secours tiré des fichiers des pays (lib/reference.php). Un échec (pas d'Internet)
+ * est retenté au lancement suivant, au plus une fois par jour.
+ */
+let worldFetch = null;
+function ensureWorldPlaces(p, phpPath) {
+  if (app.isPackaged || process.env.LCNDA_NO_WORLD_FETCH) return;
+  const out = path.join(APP_ROOT, 'data', 'reference', 'geo-world.sqlite.gz');
+  if (fs.existsSync(out)) return;
+  const marker = path.join(p.dataDir, 'cache', 'geo-world-essai.json');
+  try { if (Date.now() - JSON.parse(fs.readFileSync(marker, 'utf8')).at < 86400e3) return; } catch (_) {}
+  try { fs.mkdirSync(path.dirname(marker), { recursive: true }); fs.writeFileSync(marker, JSON.stringify({ at: Date.now() })); } catch (_) {}
+  const toast = (text) => { if (win && !win.isDestroyed()) win.webContents.executeJavaScript(`window.LCNDA_APP?.toast(${JSON.stringify(text)})`).catch(() => {}); };
+  const log = fs.openSync(path.join(path.dirname(p.logFile), 'geo-world.log'), 'a');
+  const { spawn } = require('node:child_process');
+  setTimeout(() => toast('Préparation de toutes les villes du monde (une seule fois, quelques minutes en arrière-plan)…'), 4000);
+  worldFetch = spawn(process.execPath, [path.join(__dirname, 'fetch-geo.js'), '--auto'], {
+    env: { ...process.env, ELECTRON_RUN_AS_NODE: '1', LCNDA_GEO_OUT: out, LCNDA_PHP: phpPath },
+    stdio: ['ignore', log, log],
+  });
+  worldFetch.marker = marker;
+  worldFetch.on('exit', (code) => {
+    worldFetch = null;
+    try { fs.closeSync(log); } catch (_) {}
+    if (code === 0 && fs.existsSync(out)) { try { fs.rmSync(marker, { force: true }); } catch (_) {} toast('Toutes les villes du monde sont prêtes : la recherche de lieux les propose maintenant.'); }
+  });
 }
 
 /** Test automatique (CARNET_SELFTEST=chemin.png) : charge l'app, vérifie, prend une capture, quitte. */
@@ -475,6 +507,7 @@ if (!app.requestSingleInstanceLock()) {
   app.on('second-instance', () => { if (win) { if (win.isMinimized()) win.restore(); win.focus(); } });
   app.whenReady().then(boot);
   app.on('window-all-closed', () => app.quit());
+  app.on('will-quit', () => { if (worldFetch) { try { worldFetch.kill(); fs.rmSync(worldFetch.marker, { force: true }); } catch (_) {} } }); // repris au prochain lancement
   app.on('before-quit', (event) => {
     if (quitting || !server) return;
     event.preventDefault();
