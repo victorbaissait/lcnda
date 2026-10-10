@@ -148,7 +148,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.3.1</span>
+                <span class="eyebrow">VERSION BÊTA · 0.4.0</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source et gratuit pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -177,8 +177,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.3.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 537 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.3.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.4.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 537 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.4.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -187,7 +187,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.3.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.4.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -198,16 +198,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.3.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 532 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.3.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 507 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.4.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 532 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.4.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 507 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.3.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.3.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 503 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.4.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 534 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.4.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 503 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.3.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.4.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -215,17 +215,68 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.3.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique avec <code>npm run fetch:geo</code>.</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.4.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.3.1.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.3.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.4.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.4.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.3.1<small>Ascendants et descendants, fusion de l'arbre d'un cousin, raccourcis clavier</small></span></summary>
+                <summary><span>Nouveautés de la version 0.4.0<small>Nouveaux blocs, éditeur de blocs, fiche d'un village, base propre, travail à deux, copie chez un cousin</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>De nouveaux blocs sur les fiches</h4>
+                    <ul>
+                        <li><b>Départs et émigration</b> : port, navire, escales, liste de passagers, personnes parties ensemble, naturalisation de chacun, papiers d'émigration, et le trajet du navire sur la carte.</li>
+                        <li><b>Enfant placé</b> (nourrice, hospice, Assistance publique, avec la durée), <b>Blason et noblesse</b>, <b>Poilu 14-18</b> (régiments, blessures, liens vers les journaux de marche), <b>Résistant</b> (réseau, nom de guerre, arrestation, caches, parcours jour par jour sur la carte, compagnons) et <b>Langues</b> parlées, transmises à la descendance.</li>
+                        <li>Ces blocs se cochent dans la fiche (« Blocs à afficher sur la fiche ») ou s'affichent sur toutes les fiches (Apparence), dans l'ordre que vous choisissez.</li>
+                        <li><b>Éditeur de blocs</b> (Maintenance) : créez vos propres blocs sans programmer (texte, date, liste de choix, personne liée, lieu, photos, vidéos et sons, info reprise d'une fiche, carte), partagez-les avec un proche et importez les siens.</li>
+                        <li><b>Étiquettes</b> sur tous ces blocs, dès leur création.</li>
+                    </ul>
+                    <h4>De nouvelles listes</h4>
+                    <ul>
+                        <li><b>Fiche d'un village</b> : pour chaque commune de la famille, les familles qui y ont vécu, les métiers dominants, l'église et la paroisse, la population au fil des recensements, les actes par décennie et la carte de Cassini.</li>
+                        <li><b>Épidémies, guerres, hivers terribles</b> à côté des décès de la famille, pour comprendre une vague de morts (choléra de 1832, Grand Hiver de 1709, grippe espagnole…).</li>
+                        <li><b>Actes à demander</b> (Registre de courriers) : les actes trop récents pour être en ligne, la lettre à la mairie prête à envoyer et un rappel le jour où l'acte devient public.</li>
+                        <li>Circuits sur le terrain, papiers de famille, inventaires après décès, cartes anciennes calées sur la carte, paroisses d'Ancien Régime, noms cités dans les actes (le « cercle » des ancêtres), demandes d'entraide, résistants.</li>
+                    </ul>
+                    <h4>Chercher et comprendre</h4>
+                    <ul>
+                        <li><b>Poser une question en français</b> : « Quels ancêtres étaient boulangers à Lille avant 1850 ? ». Les recherches peuvent être enregistrées.</li>
+                        <li>Liens <b>« @Jean Dupont »</b> dans les notes, et la rubrique « Cité dans » sur la fiche citée ; citations de sources détaillées, référence rédigée toute seule.</li>
+                        <li>Fêtes religieuses en date exacte, prénoms comparés au fichier de l'INSEE, taille des ancêtres comparée à la moyenne française, âge au mariage et écart entre les naissances.</li>
+                        <li><b>Le film de la famille</b> : la carte animée de la famille au fil des siècles, enregistrée en vidéo.</li>
+                        <li><b>⌘F</b> surligne les mots cherchés et donne leur nombre.</li>
+                        <li>Les suggestions de lieux trouvent les villes du monde entier (Boston, Abidjan…), la plus peuplée d'abord.</li>
+                    </ul>
+                    <h4>Une base propre</h4>
+                    <ul>
+                        <li>Alertes sur les âges : mère de 55 ans, enfant né après la mort du père, naissances trop rapprochées.</li>
+                        <li><b>Harmoniser les variantes</b> (« Laboureur », « labour. », « Labourreur »), après confirmation et annulable.</li>
+                        <li>Lieux mal placés (coordonnées inversées, mauvais département pour un homonyme), voyages impossibles, comparaison des deux fiches côte à côte avant de fusionner un doublon.</li>
+                        <li><b>Dossier « Scans » surveillé</b> : chaque photo ou PDF qui y arrive entre dans l'application.</li>
+                    </ul>
+                    <h4>Partager et protéger</h4>
+                    <ul>
+                        <li><b>Travailler à deux</b> sur la même généalogie : paquets de modifications à échanger, à accepter ou refuser un par un.</li>
+                        <li><b>Copie chez un cousin</b> : une copie chiffrée qu'il garde sans pouvoir la lire, et qu'il vous rend le jour où votre ordinateur vous lâche.</li>
+                        <li>Copie hors de l'ordinateur (dossier iCloud, Dropbox, clé USB), export d'une seule branche, et <b>mode consultation</b> protégé par un mot de passe pour montrer l'arbre sans risque.</li>
+                    </ul>
+                    <h4>Corrections</h4>
+                    <ul>
+                        <li>« Mort pour la France » est désormais enregistré sur la fiche.</li>
+                        <li>Nombreuses corrections après une relecture complète du code.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.3.1 <small>Ascendants et descendants, fusion de l'arbre d'un cousin, raccourcis clavier</small></summary>
+                        <div class="presentation-version-body">
                     <h4>Famille</h4>
                     <ul>
                         <li>Blocs <b>« Ascendants »</b> et <b>« Descendants »</b> sur chaque fiche, en liste : vous choisissez le nombre de générations (pour toutes les fiches ou pour une seule), et un trait « ┄ suite » signale qu'il y en a d'autres au-delà. Aussi en widget du tableau de bord et dans Graphiques.</li>
@@ -250,12 +301,8 @@
                         <li>Les petits widgets n'écrasent plus leur titre ni leur numéro, et leurs réglages (crayon) ne débordent plus du cadre.</li>
                         <li>L'export JSON fonctionne de nouveau sur les grandes bases.</li>
                     </ul>
-                </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
-                <div class="presentation-changes-body">
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.3.0 <small>Aide à la recherche, battues dans le monde entier, objets et mémoire de famille</small></summary>
                         <div class="presentation-version-body">
@@ -493,7 +540,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.3.1 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.4.0 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script>
