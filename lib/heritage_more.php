@@ -277,6 +277,7 @@ function vault_read_header(string $path): array
 function vault_decrypt_file(string $src, string $dest, string $password): array
 {
     $header = vault_read_header($src);
+    if (!is_string($header['salt'] ?? null) || !is_string($header['iv'] ?? null)) { throw new RuntimeException('Copie chiffrée abîmée.'); }
     [$enc, $mac] = vault_keys($password, base64_decode($header['salt']));
     $iv = base64_decode($header['iv']);
     $size = filesize($src);
@@ -360,6 +361,7 @@ function vault_status(PDO $pdo): array
 function vault_download(PDO $pdo, int $id): never
 {
     $s = $pdo->prepare('SELECT * FROM cousin_vault WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
+    if ($r) { $r['filename'] = basename((string) $r['filename']); } // un nom de fichier, jamais un chemin
     if (!$r || !is_file(vault_dir() . '/' . $r['filename'])) { json_response(['error' => 'Copie introuvable'], 404); }
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="copie-chiffree-' . preg_replace('/[^a-z0-9]+/i', '-', ascii_fold((string) $r['owner'])) . '-' . substr((string) $r['copy_created_at'], 0, 10) . '.lcnda-coffre"');
@@ -372,7 +374,7 @@ function vault_delete(PDO $pdo, array $data): array
 {
     $s = $pdo->prepare('SELECT filename FROM cousin_vault WHERE id=?'); $s->execute([safe_int($data['id'] ?? 0)]);
     $f = $s->fetchColumn();
-    if ($f) { @unlink(vault_dir() . '/' . $f); }
+    if ($f) { @unlink(vault_dir() . '/' . basename((string) $f)); }
     $pdo->prepare('DELETE FROM cousin_vault WHERE id=?')->execute([safe_int($data['id'] ?? 0)]);
     return ['ok' => true];
 }
@@ -530,7 +532,9 @@ function variant_groups(PDO $pdo, string $field): array
     foreach ($counts as $v => $n) {
         $k = variant_key($v, $field);
         if ($k === '') { continue; }
-        $byLoose[variant_loose($k)][$v] = $n;
+        // Rapprochement « sonore » (Labourreur → laboureur) seulement pour les métiers et les lieux :
+        // pour les prénoms et les noms il confondrait Jean et Jeanne, Louis et Louise, Martin et Martine
+        $byLoose[in_array($field, ['first_name', 'last_name'], true) ? str_replace(' ', '', $k) : variant_loose($k)][$v] = $n;
     }
     // Abréviations (« labour. » → « laboureur ») : rattachées au groupe dont la forme commence pareil
     $groups = $byLoose;
@@ -564,27 +568,65 @@ function apply_variants(PDO $pdo, array $data): array
 {
     $field = safe_text($data['field'] ?? '');
     $target = trim(safe_text($data['target'] ?? ''));
-    $from = array_values(array_filter(array_map(static fn($v) => (string) $v, is_array($data['values'] ?? null) ? $data['values'] : []), static fn($v) => $v !== $target));
+    $from = array_values(array_filter(array_map(static fn($v) => trim((string) $v), is_array($data['values'] ?? null) ? $data['values'] : []), static fn($v) => $v !== '' && $v !== $target));
     if ($target === '' || !$from) { throw new RuntimeException('Rien à harmoniser.'); }
-    $n = 0;
-    foreach ($from as $v) {
-        switch ($field) {
-            case 'occupation':
-                $s = $pdo->prepare('UPDATE persons SET occupation=? WHERE occupation=?'); $s->execute([$target, $v]); $n += $s->rowCount();
-                $s = $pdo->prepare("UPDATE events SET title=? WHERE title=? AND event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='OCCU')"); $s->execute([$target, $v]); $n += $s->rowCount();
-                break;
-            case 'last_name': $s = $pdo->prepare('UPDATE persons SET last_name=? WHERE last_name=?'); $s->execute([$target, $v]); $n += $s->rowCount(); break;
-            case 'first_name': $s = $pdo->prepare('UPDATE persons SET first_name=? WHERE first_name=?'); $s->execute([$target, $v]); $n += $s->rowCount(); break;
-            case 'place': $s = $pdo->prepare('UPDATE places SET name=? WHERE name=?'); $s->execute([$target, $v]); $n += $s->rowCount(); break;
-            default: throw new RuntimeException('Champ inconnu');
-        }
+    // [table, colonne, condition] ; trim() : « laboureur » et « laboureur  » (espace en trop) sont le même mot
+    $targets = match ($field) {
+        'occupation' => [['persons', 'occupation', ''], ['events', 'title', " AND event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='OCCU')"]],
+        'last_name' => [['persons', 'last_name', '']],
+        'first_name' => [['persons', 'first_name', '']],
+        'place' => [['places', 'name', '']],
+        default => throw new RuntimeException('Champ inconnu'),
+    };
+    $rows = []; // ce qui est changé, pour pouvoir annuler : [table, id, colonne, ancienne valeur]
+    $marks = implode(',', array_fill(0, count($from), '?'));
+    foreach ($targets as [$table, $col, $extra]) {
+        $s = $pdo->prepare("SELECT id, {$col} AS v FROM {$table} WHERE trim({$col}) IN ({$marks}){$extra}");
+        $s->execute($from);
+        foreach ($s->fetchAll() as $r) { $rows[] = [$table, (int) $r['id'], $col, (string) $r['v']]; }
+        $pdo->prepare("UPDATE {$table} SET {$col}=? WHERE trim({$col}) IN ({$marks}){$extra}")->execute([$target, ...$from]);
     }
     if (in_array($field, ['last_name', 'first_name'], true) && function_exists('rebuild_search')) {
-        $ids = $pdo->prepare("SELECT id FROM persons WHERE {$field}=?"); $ids->execute([$target]);
-        foreach ($ids->fetchAll(PDO::FETCH_COLUMN) as $id) { try { rebuild_search($pdo, (int) $id); } catch (Throwable $_) {} }
+        foreach ($rows as [, $id]) { try { rebuild_search($pdo, $id); } catch (Throwable $_) {} }
     }
-    log_change($pdo, 'meta', 0, 'update', "Harmonisation ({$field}) : " . implode(', ', $from) . " → {$target} ({$n} modification(s))", ['values' => $from], ['target' => $target]);
+    $n = count($rows);
+    log_change($pdo, 'meta', 0, 'update', "Harmonisation ({$field}) : " . implode(', ', $from) . " → {$target} ({$n} modification(s))", ['harmonize' => $field, 'rows' => $rows], ['target' => $target]);
     return ['changed' => $n];
+}
+
+/** Les dernières harmonisations, chacune annulable. */
+function harmonize_history(PDO $pdo): array
+{
+    $out = [];
+    foreach ($pdo->query("SELECT id, created_at, summary, before_json FROM change_log WHERE entity_type='meta' AND summary LIKE 'Harmonisation (%' ORDER BY id DESC LIMIT 15") as $r) {
+        $b = json_decode((string) $r['before_json'], true) ?: [];
+        $out[] = ['id' => (int) $r['id'], 'at' => $r['created_at'], 'summary' => $r['summary'], 'undoable' => !empty($b['rows']) && empty($b['undone']), 'undone' => !empty($b['undone'])];
+    }
+    return $out;
+}
+
+/** Remet les anciennes écritures (seulement là où l'écriture harmonisée n'a pas été changée depuis). */
+function undo_harmonize(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $r = $pdo->query("SELECT * FROM change_log WHERE id={$id} AND entity_type='meta' AND summary LIKE 'Harmonisation (%'")->fetch();
+    if (!$r) { throw new RuntimeException('Harmonisation introuvable.'); }
+    $b = json_decode((string) $r['before_json'], true) ?: [];
+    $a = json_decode((string) $r['after_json'], true) ?: [];
+    if (empty($b['rows']) || !empty($b['undone'])) { throw new RuntimeException('Cette harmonisation ne peut pas être annulée.'); }
+    $allowed = ['persons' => ['occupation', 'last_name', 'first_name'], 'events' => ['title'], 'places' => ['name']];
+    $n = 0;
+    foreach ($b['rows'] as [$table, $rowId, $col, $old]) {
+        if (!in_array($col, $allowed[$table] ?? [], true)) { continue; }
+        $s = $pdo->prepare("UPDATE {$table} SET {$col}=? WHERE id=? AND {$col}=?");
+        $s->execute([$old, (int) $rowId, (string) ($a['target'] ?? '')]);
+        $n += $s->rowCount();
+        if ($table === 'persons' && $col !== 'occupation' && function_exists('rebuild_search')) { try { rebuild_search($pdo, (int) $rowId); } catch (Throwable $_) {} }
+    }
+    $b['undone'] = date('c');
+    $pdo->prepare('UPDATE change_log SET before_json=? WHERE id=?')->execute([json_encode($b, JSON_UNESCAPED_UNICODE), $id]);
+    log_change($pdo, 'meta', 0, 'update', 'Annulation : ' . $r['summary'] . " ({$n} remise(s) en l’état)");
+    return ['restored' => $n];
 }
 
 /* ─── 📍 Lieux mal placés ─────────────────────────────────────────────── */
@@ -741,6 +783,7 @@ function clear_resistance(PDO $pdo, array $data): array
     $personId = safe_int($data['person_id'] ?? 0);
     $pdo->prepare('DELETE FROM resistance_steps WHERE person_id=?')->execute([$personId]);
     $pdo->prepare('DELETE FROM resistance_profiles WHERE person_id=?')->execute([$personId]);
+    heritage_delete_media_links($pdo, 'resistance', $personId); // médias et étiquettes du parcours
     log_change($pdo, 'person', $personId, 'update', 'Parcours de résistant effacé');
     return ['ok' => true];
 }
@@ -800,6 +843,7 @@ function save_custom_block_def(PDO $pdo, array $data): array
 function delete_custom_block_def(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
+    foreach ($pdo->query('SELECT id FROM custom_block_entries WHERE block_id=' . $id)->fetchAll(PDO::FETCH_COLUMN) as $e) { heritage_delete_media_links($pdo, 'custom_block_entry', (int) $e); }
     $pdo->prepare('DELETE FROM custom_block_entries WHERE block_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM custom_block_flags WHERE block_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM custom_block_defs WHERE id=?')->execute([$id]);
@@ -914,6 +958,10 @@ function save_custom_block_entry(PDO $pdo, array $data): array
         if (!empty($f['required']) && in_array($f['type'], ['text', 'longtext', 'date', 'select', 'person'], true) && ($clean[$f['key']] ?? '') === '') { throw new RuntimeException('Le champ « ' . $f['label'] . ' » est obligatoire.'); }
     }
     $json = json_encode($clean, JSON_UNESCAPED_UNICODE);
+    if ($id) {
+        $own = $pdo->prepare('SELECT 1 FROM custom_block_entries WHERE id=? AND block_id=? AND person_id=?'); $own->execute([$id, $blockId, $personId]);
+        if (!$own->fetchColumn()) { throw new RuntimeException('Cette fiche n’appartient pas à ce bloc.'); }
+    }
     if ($id) { $pdo->prepare('UPDATE custom_block_entries SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$json, $id]); }
     else { $pdo->prepare('INSERT INTO custom_block_entries(block_id, person_id, data_json, position) VALUES(?,?,?,(SELECT COALESCE(max(position),0)+1 FROM custom_block_entries WHERE block_id=? AND person_id=?))')->execute([$blockId, $personId, $json, $blockId, $personId]); $id = (int) $pdo->lastInsertId(); $pdo->prepare('INSERT OR IGNORE INTO custom_block_flags(block_id, person_id) VALUES(?,?)')->execute([$blockId, $personId]); }
     log_change($pdo, 'person', $personId, 'update', 'Bloc « ' . $def['name'] . ' » rempli');

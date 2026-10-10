@@ -33,8 +33,9 @@ async function main() {
     console.log('Téléchargement de GeoNames allCountries.zip (~420 Mo)…');
     const res = await fetch(URL_ALL, { redirect: 'follow' });
     if (!res.ok || !res.body) throw new Error(`téléchargement impossible (${res.status}) : ${URL_ALL}`);
-    await pipeline(Readable.fromWeb(res.body), fs.createWriteStream(archive + '.part'));
-    fs.renameSync(archive + '.part', archive);
+    const part = archive + '.' + process.pid + '.part'; // propre à ce lancement
+    await pipeline(Readable.fromWeb(res.body), fs.createWriteStream(part));
+    fs.renameSync(part, archive);
   }
   if (fs.statSync(archive).size < 100 * 1024 * 1024) throw new Error('archive GeoNames trop petite : téléchargement incomplet ?');
   const php = process.env.LCNDA_PHP || findPhp([devBundledPhp()]);

@@ -20,9 +20,16 @@ function village_key(array $place): string
 function village_place_ids(PDO $pdo, string $key): array
 {
     if (str_starts_with($key, 'n:')) {
-        [$name, $county] = array_pad(explode('|', substr($key, 2), 2), 2, '');
-        $s = $pdo->prepare("SELECT id FROM places WHERE lower(trim(name))=? AND lower(trim(COALESCE(county,'')))=? AND COALESCE(admin4_code,'')=''");
-        $s->execute([$name, $county]);
+        [$name] = explode('|', substr($key, 2), 2);
+        // Comparaison faite en PHP : lower() de SQLite ne met pas « É » en minuscule
+        $s = $pdo->prepare("SELECT id, name, county, admin4_code FROM places WHERE name LIKE ? AND COALESCE(admin4_code,'')=''");
+        $s->execute(['%' . mb_substr($name, 1)]);
+        $ids = [];
+        foreach ($s->fetchAll() as $r) { if (village_key($r) === $key) { $ids[] = (int) $r['id']; } }
+        if (!$ids) { // nom tout en majuscules accentuées, ou très court : on parcourt tous les lieux sans code
+            foreach ($pdo->query("SELECT id, name, county, admin4_code FROM places WHERE COALESCE(admin4_code,'')=''") as $r) { if (village_key($r) === $key) { $ids[] = (int) $r['id']; } }
+        }
+        return $ids;
     } else {
         $s = $pdo->prepare('SELECT id FROM places WHERE admin4_code=?');
         $s->execute([$key]);

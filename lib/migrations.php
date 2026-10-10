@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 13;
+const SCHEMA_VERSION = 14;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -34,6 +34,7 @@ function migration_steps(): array
         11 => 'schema_v11',
         12 => 'schema_v12',
         13 => 'schema_v13',
+        14 => 'schema_v14',
     ];
 }
 
@@ -73,6 +74,7 @@ function migrate_database(PDO $pdo, string $dbPath): void
                 continue;
             }
             try {
+                if ($target === 9) { migration_v9_recover($pdo); }
                 $step($pdo);
             } catch (Throwable $e) {
                 throw new RuntimeException(
@@ -1340,3 +1342,21 @@ function schema_v13(PDO $pdo): void
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
 }
+
+/** n°14 : « Mort pour la France » enregistré sur la fiche ; étapes de circuit préparées par l'app (refaites) ou ajoutées à la main (gardées). */
+function schema_v14(PDO $pdo): void
+{
+    $has = static fn(string $t, string $c): bool => (bool) $pdo->query("SELECT count(*) FROM pragma_table_info('{$t}') WHERE name=" . $pdo->quote($c))->fetchColumn();
+    if (!$has('persons', 'mort_pour_la_france')) { $pdo->exec("ALTER TABLE persons ADD COLUMN mort_pour_la_france TEXT NOT NULL DEFAULT 'unknown'"); }
+    if (!$has('field_trip_stops', 'auto')) { $pdo->exec('ALTER TABLE field_trip_stops ADD COLUMN auto INTEGER NOT NULL DEFAULT 0'); }
+}
+
+/** n°9 interrompue entre la copie et le renommage : on repart d'un état propre (la migration se relance ensuite). */
+function migration_v9_recover(PDO $pdo): void
+{
+    $exists = static fn(string $t): bool => (bool) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name=" . $pdo->quote($t))->fetchColumn();
+    if (!$exists('family_collection_media_v9')) { return; }
+    if ($exists('family_collection_media')) { $pdo->exec('DROP TABLE family_collection_media_v9'); }
+    else { $pdo->exec('ALTER TABLE family_collection_media_v9 RENAME TO family_collection_media'); }
+}
+

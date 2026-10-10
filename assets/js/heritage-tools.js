@@ -486,7 +486,7 @@
                 if (!confirm(`Appliquer ${accepted.length} changement(s) ? Une copie de sécurité de ta base est faite avant.`)) return;
                 try {
                     const r = await api('sync_apply', {}, {method: 'POST', body: {token: preview.token, accepted}});
-                    toast(`${plural(r.applied, 'changement appliqué', 'changements appliqués')}.`);
+                    toast(`${plural(r.applied, 'changement appliqué', 'changements appliqués')}${r.locked_skipped ? ` ; ${plural(r.locked_skipped, 'changement ignoré', 'changements ignorés')} (fiche verrouillée)` : ''}.`);
                     (r.errors || []).slice(0, 5).forEach(e => toast(e, 'error'));
                     ext.maintenance.sync(++S().workspaceToken);
                 } catch (error) { toast(error.message, 'error'); }
@@ -500,7 +500,7 @@
             ${p.already_received ? '<p class="h-offsite-sentence is-warn">⚠ Ce paquet a déjà été reçu une fois.</p>' : ''}
             <p>${plural(items.length, 'changement', 'changements')}${items.length - shown.length ? `, dont ${items.length - shown.length} déjà identiques chez toi (ignorés)` : ''}. Coche ce que tu acceptes. Les conflits (tu as aussi modifié la même chose) sont décochés : regarde-les.</p>
             <label class="checkbox-line"><input type="checkbox" data-h-sync-all checked> Tout cocher / décocher</label>
-            <table class="data-table h-sync-table"><thead><tr><th></th><th>Changement</th><th>Détail</th></tr></thead><tbody>${shown.map(i => `<tr class="is-${esc(i.state)}"><td><input type="checkbox" name="accept" value="${i.index}" ${i.state === 'conflict' || i.state === 'missing' ? '' : 'checked'}></td><td><strong>${esc(opLabel[i.op])}</strong> — ${esc(i.label)}<br><small class="muted">${esc(stateLabel[i.state] || i.state)}</small></td><td>${i.fields?.length ? `<ul class="h-sync-fields">${i.fields.map(f => `<li><code>${esc(f.field)}</code> : <s>${esc(f.mine ?? '—')}</s> → <strong>${esc(f.theirs ?? '—')}</strong></li>`).join('')}</ul>` : ''}</td></tr>`).join('') || '<tr><td colspan="3">Rien de nouveau.</td></tr>'}</tbody></table>
+            <table class="data-table h-sync-table"><thead><tr><th></th><th>Changement</th><th>Détail</th></tr></thead><tbody>${shown.map(i => `<tr class="is-${esc(i.state)}"><td><input type="checkbox" name="accept" value="${Number(i.index)}" ${i.state === 'conflict' || i.state === 'missing' ? '' : 'checked'}></td><td><strong>${esc(opLabel[i.op])}</strong> — ${esc(i.label)}<br><small class="muted">${esc(stateLabel[i.state] || i.state)}</small></td><td>${i.fields?.length ? `<ul class="h-sync-fields">${i.fields.map(f => `<li><code>${esc(f.field)}</code> : <s>${esc(f.mine ?? '—')}</s> → <strong>${esc(f.theirs ?? '—')}</strong></li>`).join('')}</ul>` : ''}</td></tr>`).join('') || '<tr><td colspan="3">Rien de nouveau.</td></tr>'}</tbody></table>
             <div class="page-actions action-zone"><button class="button" type="submit">Appliquer les changements cochés</button></div></form>`;
     }
 })();

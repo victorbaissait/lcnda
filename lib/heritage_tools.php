@@ -35,7 +35,8 @@ function kiosk_guard(string $action, bool $isWrite): void
 /** Ce que le mode consultation refuse : toute écriture (sauf exceptions), les exports et le changement de base. */
 function kiosk_blocks(string $action, bool $isWrite): bool
 {
-    $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'scan_inbox_run'];
+    // backup_sqlite : seulement la sauvegarde automatique dans le dossier de l'app (vérifié dans api.php)
+    $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now'];
     $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download'];
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
@@ -287,7 +288,7 @@ function cited_names_data(PDO $pdo, string $q = ''): array
         unset($g);
     }
     $out = array_values($groups);
-    foreach ($out as &$g) { $g['acts'] = count(array_unique(array_map(static fn($i) => $i['media_id'] ?: ('e' . $i['event_id'] ?: 'n' . $i['id']), $g['items']))); }
+    foreach ($out as &$g) { $g['acts'] = count(array_unique(array_map(static fn($i) => $i['media_id'] ?: ($i['event_id'] ? 'e' . $i['event_id'] : 'n' . $i['id']), $g['items']))); }
     unset($g);
     usort($out, static fn($a, $b) => $b['acts'] <=> $a['acts'] ?: strcmp($a['key'], $b['key']));
     return $out;
@@ -640,7 +641,7 @@ function sync_preview(PDO $pdo, ?array $file): never
 {
     if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
     $package = json_decode((string) file_get_contents($file['tmp_name']), true);
-    if (!is_array($package) || ($package['format'] ?? '') !== 'lcnda-changes' || !is_array($package['changes'] ?? null)) { json_response(['error' => 'Ce fichier n’est pas un paquet de modifications LCNDA.'], 422); }
+    if (!is_array($package) || ($package['format'] ?? '') !== 'lcnda-changes' || !is_array($package['changes'] ?? null) || !array_is_list($package['changes'])) { json_response(['error' => 'Ce fichier n’est pas un paquet de modifications LCNDA.'], 422); }
     $s = sync_settings($pdo);
     if ($s['base_uid'] === '') { json_response(['error' => 'Le travail à deux n’est pas commencé sur cette base : ouvre la copie reçue de ton cousin, ou commence le partage.'], 422); }
     if ($package['base_uid'] !== $s['base_uid']) { json_response(['error' => 'Ce paquet vient d’une autre généalogie (pas de la même base de départ).'], 422); }
@@ -667,7 +668,7 @@ function sync_preview(PDO $pdo, ?array $file): never
                 if (json_encode($a) !== json_encode($v)) { $fields[] = ['field' => $k, 'mine' => is_array($a) ? ($a['label'] ?? '') : $a, 'theirs' => is_array($v) ? ($v['label'] ?? '') : $v]; }
             }
         }
-        $items[] = ['index' => $i, 'tbl' => $c['tbl'], 'uid' => $c['uid'], 'op' => $c['op'], 'state' => $state, 'label' => sync_label($byUid, $c['tbl'], $target ?? $c['before']), 'fields' => array_slice($fields, 0, 30)];
+        $items[] = ['index' => (int) $i, 'tbl' => $c['tbl'], 'uid' => $c['uid'], 'op' => $c['op'], 'state' => $state, 'label' => sync_label($byUid, $c['tbl'], $target ?? $c['before']), 'fields' => array_slice($fields, 0, 30)];
     }
     $token = bin2hex(random_bytes(8));
     $dir = DATA_DIR . '/sync-inbox';
@@ -719,8 +720,20 @@ function sync_apply(PDO $pdo, array $data): never
             $t = $c['tbl'];
             if (!in_array($t, SYNC_TABLES, true)) { continue; }
             $localId = $idOf($t, $c['uid']);
+            // Fiche verrouillée : le paquet du cousin ne la modifie pas
+            if ($t === 'persons' && $localId && (int) $pdo->query('SELECT COALESCE(is_locked,0) FROM persons WHERE id=' . (int) $localId)->fetchColumn()) { $lockedSkipped = ($lockedSkipped ?? 0) + 1; continue; }
             if ($c['op'] === 'delete') {
-                if ($localId) { $pdo->prepare("DELETE FROM {$t} WHERE id=?")->execute([$localId]); $applied++; }
+                if ($localId) {
+                    if ($t === 'persons' && function_exists('delete_person')) {
+                        delete_person($pdo, ['id' => $localId]); // même nettoyage qu'à la main (médias, sources, notes, recherche) et fiche restaurable
+                    } else {
+                        if ($t === 'events') {
+                            foreach (['media_links', 'source_links', 'notes', 'label_links'] as $dep) { $pdo->prepare("DELETE FROM {$dep} WHERE entity_type='event' AND entity_id=?")->execute([$localId]); }
+                        }
+                        $pdo->prepare("DELETE FROM {$t} WHERE id=?")->execute([$localId]);
+                    }
+                    $applied++;
+                }
                 $touched[] = [$t, $c['uid']];
                 continue;
             }
@@ -760,5 +773,5 @@ function sync_apply(PDO $pdo, array $data): never
         json_response(['error' => 'Rien n’a été appliqué : ' . $e->getMessage()], 500);
     }
     @unlink($path);
-    json_response(['ok' => true, 'applied' => $applied, 'errors' => $errors]);
+    json_response(['ok' => true, 'applied' => $applied, 'errors' => $errors, 'locked_skipped' => $lockedSkipped ?? 0]);
 }

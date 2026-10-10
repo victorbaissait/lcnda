@@ -82,7 +82,7 @@
 
     // Les formulaires des blocs appellent « save_… » : on y ajoute les étiquettes choisies (pending_labels).
     const LABELED = {save_voyage: 'voyage', save_placement: 'placement', save_coat_of_arms: 'coat_of_arms', save_poilu: 'poilu', save_field_trip: 'field_trip', save_family_paper: 'family_paper', save_old_map: 'old_map',
-        save_probate_inventory: 'probate_inventory', save_help_request: 'help_request', save_parish: 'parish', save_cited_name: 'cited_name', save_resistance: 'resistance', save_custom_block_entry: 'custom_block_entry'};
+        save_probate_inventory: 'probate_inventory', save_help_request: 'help_request', save_parish: 'parish', save_cited_name: 'cited_name', save_resistance: 'resistance', save_custom_block_entry: 'custom_block_entry', save_village_profile: 'village'};
     let lastForm = null;
     document.addEventListener('submit', event => { lastForm = event.target; }, true);
     function wrapApi() {
@@ -426,14 +426,14 @@
         if (!defs.length) return;
         box.insertAdjacentHTML('beforeend', `<div class="h-cb-flags" data-cb-person="${Number(p.id)}">${defs.map(b => `<label class="checkbox-line"><input type="checkbox" data-cb-flag="${b.id}" ${flagged.has(Number(b.id)) ? 'checked' : ''}> ${esc(b.icon || '🧩')} ${esc(b.name)} <small style="font-weight:normal;color:#666">(mon bloc${b.description ? ' : ' + esc(b.description.slice(0, 80)) : ''})</small></label>`).join('')}</div>`);
     });
-    document.addEventListener('submit', event => {
-        const form = event.target;
-        if (form.getAttribute?.('id') !== 'person-form' || event.submitter?.value === 'cancel') return; // (form.id = le champ « id » du formulaire)
+    // Après l'enregistrement réussi de la fiche (app.js) : les cases des blocs perso
+    ext.afterPersonSave = ext.afterPersonSave || [];
+    ext.afterPersonSave.push(async (saved, form) => {
         const box = form.querySelector('.h-cb-flags');
         if (!box || !Number(box.dataset.cbPerson)) return;
         const ids = [...box.querySelectorAll('[data-cb-flag]:checked')].map(i => Number(i.dataset.cbFlag));
-        setTimeout(async () => { try { await api('set_custom_block_flags', {}, {method: 'POST', body: {person_id: box.dataset.cbPerson, block_ids: ids}}); refresh(); } catch (error) { toast(error.message, 'error'); } }, 400);
-    }, true);
+        await api('set_custom_block_flags', {}, {method: 'POST', body: {person_id: box.dataset.cbPerson, block_ids: ids}});
+    });
 
     /* ═══════════════════════ 🧩 ÉDITEUR DE BLOCS (Maintenance) ═══════════════════════ */
 
@@ -602,15 +602,22 @@
     const HARM_FIELDS = [['occupation', 'Métiers'], ['last_name', 'Noms de famille'], ['first_name', 'Prénoms'], ['place', 'Lieux']];
     ext.maintenance.harmonize = async token => {
         const field = S().hHarmField || 'occupation';
-        const data = await api('variant_groups', {field});
+        const [data, hist] = await Promise.all([api('variant_groups', {field}), api('harmonize_history').catch(() => ({items: []}))]);
         if (!isCurrent(token)) return;
         const groups = data.groups || [];
+        const history = hist.items || [];
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Harmoniser les variantes', 'Une base propre : « Laboureur », « laboureur », « labour. » et « Labourreur » deviennent une seule écriture. Rien n’est changé sans ton accord : choisis l’écriture à garder, décoche ce qui ne doit pas bouger, puis confirme.')}
             <div class="h-tabs">${HARM_FIELDS.map(([k, l]) => `<button type="button" class="button small ${k === field ? '' : 'secondary'}" data-h-harm-field="${k}">${esc(l)}</button>`).join('')}</div>
             ${groups.length ? `<p>${plural(groups.length, 'groupe de variantes trouvé', 'groupes de variantes trouvés')}.</p><div class="h-records">${groups.map((g, gi) => `<article class="h-record h-harm" data-h-harm="${gi}"><div class="h-harm-variants">${g.variants.map(v => `<label class="checkbox-line"><input type="checkbox" data-h-harm-v value="${esc(v.value)}" checked> <span class="h-harm-value">${esc(v.value)}</span> <small>(${v.count})</small> <button type="button" class="link-button" data-h-harm-pick="${esc(v.value)}" title="Garder cette écriture">← garder</button></label>`).join('')}</div>
-                <div class="h-harm-target"><label>Écrire partout<input data-h-harm-target value="${esc(g.proposal)}"></label><button type="button" class="button small" data-h-harm-apply>Harmoniser</button></div></article>`).join('')}</div>` : empty('Aucune variante trouvée pour ce champ.')}</section>`;
+                <div class="h-harm-target"><label>Écrire partout<input data-h-harm-target value="${esc(g.proposal)}"></label><button type="button" class="button small" data-h-harm-apply>Harmoniser</button></div></article>`).join('')}</div>` : empty('Aucune variante trouvée pour ce champ.')}
+            ${history.length ? `<section class="maintenance-panel"><h3>Dernières harmonisations</h3><table class="data-table"><tbody>${history.map(h => `<tr><td><small>${esc(dateTimeFr(h.at))}</small></td><td>${esc(h.summary)}</td><td>${h.undoable ? `<button type="button" class="button small secondary" data-h-harm-undo="${h.id}">↶ Annuler</button>` : `<small class="muted">${h.undone ? 'annulée' : 'faite avant l’annulation possible'}</small>`}</td></tr>`).join('')}</tbody></table></section>` : ''}</section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-h-harm-field]').forEach(b => b.addEventListener('click', () => { S().hHarmField = b.dataset.hHarmField; ext.maintenance.harmonize(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-harm-undo]').forEach(b => b.addEventListener('click', async () => {
+            if (!confirm('Remettre les anciennes écritures pour cette harmonisation ?')) return;
+            try { const r = await api('undo_harmonize', {}, {method: 'POST', body: {id: b.dataset.hHarmUndo}}); toast(`${plural(r.result.restored, 'écriture remise', 'écritures remises')}.`); ext.maintenance.harmonize(++S().workspaceToken); }
+            catch (error) { toast(error.message, 'error'); }
+        }));
         ws.querySelectorAll('[data-h-harm]').forEach(box => {
             const g = groups[Number(box.dataset.hHarm)];
             box.querySelectorAll('[data-h-harm-pick]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); box.querySelector('[data-h-harm-target]').value = b.dataset.hHarmPick; }));
@@ -619,7 +626,7 @@
                 const values = [...box.querySelectorAll('[data-h-harm-v]:checked')].map(i => i.value).filter(v => v !== target);
                 if (!target || !values.length) return toast('Rien à changer.', 'error');
                 const n = g.variants.filter(v => values.includes(v.value)).reduce((s, v) => s + v.count, 0);
-                if (!confirm(`Remplacer ${values.map(v => `« ${v} »`).join(', ')} par « ${target} » ?\n\n${plural(n, 'élément sera modifié', 'éléments seront modifiés')}. (Annulable depuis l’historique des modifications.)`)) return;
+                if (!confirm(`Remplacer ${values.map(v => `« ${v} »`).join(', ')} par « ${target} » ?\n\n${plural(n, 'élément sera modifié', 'éléments seront modifiés')}. (Annulable ensuite : « Dernières harmonisations », en bas de cette page.)`)) return;
                 try { const r = await api('apply_variants', {}, {method: 'POST', body: {field, target, values}}); toast(`${plural(r.result.changed, 'modification', 'modifications')}.`); ext.maintenance.harmonize(++S().workspaceToken); }
                 catch (error) { toast(error.message, 'error'); }
             });

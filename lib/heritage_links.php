@@ -72,8 +72,9 @@ function question_to_criteria(PDO $pdo, string $question): array
         }
     }
 
-    // Lieu : « à Lille », « dans le Nord », « en Bretagne », « au Québec »
-    if (preg_match('/(?:^|\s)(?:à|a|dans le|dans la|dans les|dans l[\'’]|en|au|aux|de|du)\s*((?:[A-ZÉÈÀÂÎÔ][\p{L}\'’-]*)(?:[\s-](?:sur|sous|en|de|du|la|le|les|lès|lez|[A-ZÉÈÀÂÎÔ][\p{L}\'’-]*))*)/u', $q, $m)) {
+    // Lieu : « à Lille », « dans le Nord », « en Bretagne », « au Québec » (un siècle, « au XVIIIe », n'est pas un lieu)
+    $qPlace = preg_replace('/\b(?:au|du|aux|des)\s+[XVIL]+\s*(?:e|è|ème|eme)?\s+si[eè]cles?/u', ' ', $q);
+    if (preg_match('/(?:^|\s)(?:à|a|dans le|dans la|dans les|dans l[\'’]|en|au|aux|de|du)\s*((?:[A-ZÉÈÀÂÎÔ][\p{L}\'’-]*)(?:[\s-](?:sur|sous|en|de|du|la|le|les|lès|lez|[A-ZÉÈÀÂÎÔ][\p{L}\'’-]*))*)/u', $qPlace, $m)) {
         $place = trim(preg_replace('/\s+(sur|sous|en|de|du|la|le|les)$/u', '', $m[1]));
         $isName = $place !== '' && question_is_name($pdo, $place);
         if ($place !== '' && !$isName && !preg_match('/^(Quels?|Quelles?|Qui|Combien|Où)$/u', $place)) { $c['place'] = $place; $understood[] = "lieu : {$place}"; $used[strtolower(ascii_fold($place))] = true; }
@@ -259,7 +260,7 @@ function languages_overview(PDO $pdo): array
     $speakers = [];
     $blocked = array_fill_keys(array_map('intval', $pdo->query('SELECT id FROM persons WHERE no_inherited_language=1')->fetchAll(PDO::FETCH_COLUMN)), true);
     $own = [];
-    foreach ($declared as $d) { $own[(int) $d['person_id']][lang_clean($d['language'])] = true; }
+    foreach ($declared as $d) { if ((int) $d['to_descendants']) { $own[(int) $d['person_id']][lang_clean($d['language'])] = true; } }
     foreach ($declared as $d) {
         $lang = lang_clean($d['language']);
         $speakers[$lang][(int) $d['person_id']] = ['how' => 'déclaré', 'certainty' => $d['certainty']];

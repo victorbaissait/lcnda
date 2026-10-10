@@ -68,6 +68,12 @@ $groups = variant_groups($pdo, 'occupation');
 $out['variants'] = $groups ? [$groups[0]['proposal'], count($groups[0]['variants'])] : null;
 $out['apply'] = apply_variants($pdo, ['field' => 'occupation', 'target' => 'laboureur', 'values' => ['Laboureur', 'labour.', 'Labourreur']])['changed'];
 $out['occupations'] = $pdo->query("SELECT DISTINCT occupation FROM persons WHERE occupation<>''")->fetchAll(PDO::FETCH_COLUMN);
+$pdo->exec("INSERT INTO persons(first_name,last_name,occupation) VALUES('Jean','X',''),('Jeanne','X',''),('Louis','X',''),('Louise','X','laboureur ')");
+$out['firstnames'] = array_map(fn($g) => array_column($g['variants'], 'value'), variant_groups($pdo, 'first_name'));
+$hv = apply_variants($pdo, ['field' => 'occupation', 'target' => 'Laboureur', 'values' => ['laboureur']]);
+$out['trim'] = [$hv['changed'], (int) $pdo->query("SELECT count(*) FROM persons WHERE occupation='Laboureur'")->fetchColumn()];
+$hist = harmonize_history($pdo);
+$out['undo'] = [undo_harmonize($pdo, ['id' => $hist[0]['id']])['restored'], (int) $pdo->query("SELECT count(*) FROM persons WHERE occupation='Laboureur'")->fetchColumn(), harmonize_history($pdo)[0]['undoable']];
 $names = variant_groups($pdo, 'last_name');
 $out['names'] = $names[0]['proposal'] ?? null;
 
@@ -117,7 +123,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°13)', () => assert.equal(out.version, 13)],
+  ['structure à jour (n°14)', () => assert.equal(out.version, 14)],
   ['actes de moins de 100 ans, réservés jusqu’à 75 ans', () => { assert.deepEqual(out.acts.map(a => a[0]), ['naissance']); assert.equal(out.acts[0][1], false); assert.equal(out.acts[0][2], '2065-04-04'); }],
   ['lettre de demande à la mairie', () => assert.deepEqual(out.letter, [true, true, true])],
   ['courrier créé, relié à l’acte, rappel à l’ouverture', () => { assert.deepEqual(out.request, [true, true, 1]); assert.equal(out.acts_after, true); }],
@@ -127,6 +133,9 @@ const checks = [
   ['âges : naissance après le décès du père, mère trop âgée, écart trop court', () => { for (const t of ['Né(e) N ans après le décès du père', 'Mère de N ans à la naissance', 'Seulement N mois après son aîné(e)']) assert.ok(out.ages.includes(t), t + ' absent : ' + out.ages.join(' / ')); }],
   ['variantes de métier regroupées (4 écritures)', () => assert.deepEqual(out.variants, ['laboureur', 4])],
   ['harmonisation appliquée', () => { assert.equal(out.apply, 3); assert.deepEqual(out.occupations, ['laboureur']); }],
+  ['prénoms : Jean ≠ Jeanne, Louis ≠ Louise', () => assert.deepEqual(out.firstnames, [])],
+  ['harmonisation : valeur avec espace en trop comprise', () => assert.deepEqual(out.trim, [5, 5])],
+  ['harmonisation annulée', () => assert.deepEqual(out.undo, [5, 0, false])],
   ['DUPONT / Dupont : forme proposée', () => assert.equal(out.names, 'Dupont')],
   ['lieu aux coordonnées inversées repéré puis corrigé', () => { assert.deepEqual(out.misplaced[0], ['Roubaix', 'Inverser latitude et longitude']); assert.equal(out.misplaced_after, 0); }],
   ['tailles lues dans toutes les écritures', () => { assert.deepEqual(out.heights, [1.65, 1.6, 1.65, 1.72, null]); assert.equal(out.heights_people, 3); }],

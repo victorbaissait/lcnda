@@ -65,6 +65,7 @@ function heritage_media(PDO $pdo, string $type, array $ids): array
 function heritage_delete_media_links(PDO $pdo, string $type, int $id): void
 {
     $pdo->prepare('DELETE FROM family_collection_media WHERE collection_type=? AND collection_id=?')->execute([$type, $id]);
+    $pdo->prepare('DELETE FROM label_links WHERE entity_type=? AND entity_id=?')->execute([$type, $id]); // étiquettes de la fiche
 }
 
 /** Rattache un média déjà dans l'application (ex. le scan d'un acte) à une fiche. */
@@ -209,7 +210,10 @@ function save_voyage(PDO $pdo, array $data): array
     $personId = safe_int($data['person_id'] ?? 0);
     h_person_exists($pdo, $personId);
     [$depLat, $depLon] = h_place_coords($pdo, $data, 'departure_port', 'dep_lat', 'dep_lon');
-    [$destLat, $destLon] = h_place_coords($pdo, $data, safe_text($data['arrival_port'] ?? '') !== '' ? 'arrival_port' : 'destination', 'dest_lat', 'dest_lon');
+    $byPort = safe_text($data['arrival_port'] ?? '') !== '';
+    // Sans port d'arrivée, la destination (champ sans suggestions) est toujours re-cherchée : les coordonnées postées
+    // pouvaient venir d'une ancienne destination
+    [$destLat, $destLon] = h_place_coords($pdo, $byPort ? $data : array_diff_key($data, ['dest_lat' => 1, 'dest_lon' => 1]), $byPort ? 'arrival_port' : 'destination', 'dest_lat', 'dest_lon');
     $departure = safe_text($data['departure_date'] ?? '');
     $fields = [
         $personId, $departure, h_year($departure), safe_text($data['departure_port'] ?? ''), safe_text($data['ship_name'] ?? ''),
@@ -307,8 +311,9 @@ function placement_duration(array $r): string
 {
     if (trim((string) $r['duration_text']) !== '') { return (string) $r['duration_text']; }
     $parse = static function (string $v): ?DateTimeImmutable {
-        if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $v)) { return new DateTimeImmutable($v); }
-        if (preg_match('#^(\d{1,2})/(\d{1,2})/(\d{4})$#', $v, $m)) { return new DateTimeImmutable(sprintf('%04d-%02d-%02d', $m[3], $m[2], $m[1])); }
+        // Date impossible (« 12/25/1880 », 31 février…) : pas de durée calculée, jamais d'erreur
+        if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $v, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { return new DateTimeImmutable($v); }
+        if (preg_match('#^(\d{1,2})/(\d{1,2})/(\d{4})$#', $v, $m) && checkdate((int) $m[2], (int) $m[1], (int) $m[3])) { return new DateTimeImmutable(sprintf('%04d-%02d-%02d', $m[3], $m[2], $m[1])); }
         return null;
     };
     $a = $parse((string) $r['start_date']); $b = $parse((string) $r['end_date']);
@@ -479,7 +484,8 @@ function save_poilu(PDO $pdo, array $data): array
         if ($d === '' && safe_text($e['note'] ?? '') === '' && safe_text($e['place_text'] ?? '') === '') { continue; }
         $ins->execute([$personId, $d, $kind, safe_text($e['place_text'] ?? ''), safe_text($e['note'] ?? '')]);
     }
-    if (!$had) { $pdo->prepare('UPDATE persons SET show_poilu_block=1 WHERE id=?')->execute([$personId]); }
+    $has = (int) $pdo->query('SELECT (SELECT count(*) FROM poilu_units WHERE person_id=' . $personId . ') + (SELECT count(*) FROM poilu_events WHERE person_id=' . $personId . ')')->fetchColumn();
+    if (!$had && $has) { $pdo->prepare('UPDATE persons SET show_poilu_block=1 WHERE id=?')->execute([$personId]); }
     log_change($pdo, 'person', $personId, 'update', 'Parcours de poilu (14-18) enregistré');
     return ['ok' => true] + poilu_data($pdo, $personId);
 }
@@ -665,6 +671,7 @@ function delete_field_trip(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
     $pdo->prepare('DELETE FROM field_trip_stops WHERE trip_id=?')->execute([$id]);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='field_trip' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM field_trips WHERE id=?')->execute([$id]);
     log_change($pdo, 'field_trip', $id, 'delete', 'Circuit supprimé');
     return ['deleted' => $id];
@@ -869,11 +876,19 @@ function generate_field_trip_stops(PDO $pdo, int $tripId): array
     }
     foreach ($unlocated as $t) { $route[] = $t; }
 
-    // Étapes gardées : faites, ou ajoutées à la main (kind/notes modifiées) — on garde celles qui sont faites
-    $pdo->prepare('DELETE FROM field_trip_stops WHERE trip_id=? AND done=0')->execute([$tripId]);
+    // Étapes gardées : celles déjà faites, et celles ajoutées à la main ; seules les étapes préparées par l'app et pas encore faites sont refaites
+    $pdo->prepare('DELETE FROM field_trip_stops WHERE trip_id=? AND done=0 AND auto=1')->execute([$tripId]);
+    $kept = [];
+    $last = ['day' => 1, 'pos' => -1];
+    foreach ($pdo->query('SELECT kind, title, day, position FROM field_trip_stops WHERE trip_id=' . (int) $tripId) as $k) {
+        $kept[$k['kind'] . '|' . mb_strtolower(trim((string) $k['title']))] = true;
+        $last['day'] = max($last['day'], (int) $k['day']); $last['pos'] = max($last['pos'], (int) $k['position']);
+    }
+    foreach ($route as &$t) { $t['stops'] = array_values(array_filter($t['stops'], static fn($s) => !isset($kept[$s['kind'] . '|' . mb_strtolower(trim((string) $s['title']))]))); }
+    unset($t);
     $perDay = max(1, (int) $trip['stops_per_day']);
-    $day = 1; $inDay = 0; $pos = 0;
-    $ins = $pdo->prepare('INSERT INTO field_trip_stops(trip_id,day,position,kind,title,place_text,address,lat,lon,to_photograph,opening_hours,people_text,notes,done) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,0)');
+    $day = $kept ? $last['day'] : 1; $inDay = 0; $pos = $last['pos'] + 1;
+    $ins = $pdo->prepare('INSERT INTO field_trip_stops(trip_id,day,position,kind,title,place_text,address,lat,lon,to_photograph,opening_hours,people_text,notes,done,auto) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,0,1)');
     $count = 0;
     foreach ($route as $t) {
         $n = count($t['stops']);

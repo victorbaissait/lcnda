@@ -70,8 +70,9 @@ $db = null;
 // Sortie : 2e argument, sinon data/reference/. Écrite à côté puis renommée : l'application ne lit jamais un fichier à moitié écrit.
 $out = $argv[2] ?? dirname(__DIR__) . '/data/reference/geo-world.sqlite.gz';
 if (!is_dir(dirname($out))) { mkdir(dirname($out), 0775, true); }
-$in = fopen($tmp, 'rb'); $gz = gzopen($out . '.part', 'wb6');
+$part = $out . '.' . getmypid() . '.part'; // un fichier par fabrication : deux fabrications simultanées ne se mélangent pas
+$in = fopen($tmp, 'rb'); $gz = gzopen($part, 'wb6');
 while (!feof($in)) { gzwrite($gz, (string) fread($in, 1 << 20)); }
 fclose($in); gzclose($gz); unlink($tmp);
-rename($out . '.part', $out);
+rename($part, $out);
 printf("%d lieux dans le monde → %s (%.1f Mo)\n", $n, $out, filesize($out) / 1048576);

@@ -23,10 +23,10 @@ $src = file_get_contents('api.php');
 foreach (['function person_select', 'function set_label_links', 'function labels_for_entity', 'function allowed_label_entity_types'] as $fn) { $a = strpos($src, $fn); $b = strpos($src, "\n}\n", $a); if (!function_exists(substr($fn, 9))) eval(substr($src, $a, $b - $a + 3)); }
 $out = ['version' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()];
 $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='$tag' LIMIT 1")->fetchColumn();
-$pdo->exec("INSERT INTO places(name,county,country,latitude,longitude,admin4_code,population) VALUES('Saint-Yrieix','Haute-Vienne','France',45.5,1.2,'87187',6800),('Le Moulin','Haute-Vienne','France',45.51,1.21,'87187',0),('Lille','Nord','France',50.6,3.0,'59350',230000),('Lieu-sans-code','Corrèze','France',45.2,1.8,'',0)");
+$pdo->exec("INSERT INTO places(name,county,country,latitude,longitude,admin4_code,population) VALUES('Saint-Yrieix','Haute-Vienne','France',45.5,1.2,'87187',6800),('Le Moulin','Haute-Vienne','France',45.51,1.21,'87187',0),('Lille','Nord','France',50.6,3.0,'59350',230000),('Lieu-sans-code','Corrèze','France',45.2,1.8,'',0),('Étampes','Essonne','France',48.4,2.1,'',0)");
 $pdo->exec("INSERT INTO persons(first_name,last_name,gender,occupation) VALUES('Jean','Dupont','male','laboureur'),('Pierre','DUPONT','male','Laboureur'),('Marie','Dupond','female',''),('Paul','Martin','male','meunier'),('Luc','Petit','male','tisserand')");
 $pdo->exec("INSERT INTO events(scope,person_id,event_type_id,date_text,year,place_id) VALUES
-  ('person',1,{$t('BIRT')},'1750',1750,1),('person',2,{$t('BIRT')},'1780',1780,2),('person',3,{$t('DEAT')},'1820',1820,1),('person',4,{$t('BURI')},'1800',1800,2),('person',5,{$t('BIRT')},'1850',1850,3),('person',5,{$t('RESI')},'1880',1880,4)");
+  ('person',1,{$t('BIRT')},'1750',1750,1),('person',2,{$t('BIRT')},'1780',1780,2),('person',3,{$t('DEAT')},'1820',1820,1),('person',4,{$t('BURI')},'1800',1800,2),('person',5,{$t('BIRT')},'1850',1850,3),('person',5,{$t('RESI')},'1880',1880,4),('person',5,{$t('DEAT')},'1890',1890,5)");
 $pdo->exec("INSERT INTO families(partner1_id,partner2_id) VALUES(4,3)");
 $pdo->exec("INSERT INTO events(scope,family_id,event_type_id,date_text,year,place_id) VALUES('family',1,{$t('MARR')},'1790',1790,1)");
 $list = villages_list($pdo);
@@ -43,6 +43,7 @@ $saved = save_village_profile($pdo, ['key' => '87187', 'name' => 'Saint-Yrieix',
 apply_pending_labels($pdo, 'save_village_profile', ['pending_labels' => []], $saved);
 $out['profile'] = [village_detail($pdo, '87187')['profile']['church'], count(village_detail($pdo, '87187')['profile']['populations'])];
 $out['nocode'] = village_detail($pdo, 'n:lieu-sans-code|corrèze')['families'][0]['name'] ?? null;
+$out['accent'] = village_detail($pdo, 'n:étampes|essonne')['name'];
 try { village_detail($pdo, '00000'); $out['missing'] = 'trouvé'; } catch (Throwable $e) { $out['missing'] = 'refusé'; }
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
@@ -50,7 +51,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°13)', () => assert.equal(out.version, 13)],
+  ['structure à jour (n°14)', () => assert.equal(out.version, 14)],
   ['communes : hameaux du même code regroupés, la plus peuplée de la famille d’abord', () => assert.deepEqual(out.list[0], ['87187', 'Saint-Yrieix', 4, 2])],
   ['commune sans code INSEE gardée (nom + département)', () => assert.ok(out.list.some(v => v[0] === 'n:lieu-sans-code|corrèze'))],
   ['recherche sans accents ni majuscules', () => assert.deepEqual(out.search, ['87187'])],
@@ -62,6 +63,7 @@ const checks = [
   ['populations collées', () => assert.deepEqual(out.pop, [[1793, 1450], [1806, 1512], [1836, 1604]])],
   ['fiche du village enregistrée', () => assert.deepEqual(out.profile, ['Collégiale du Moûtier', 2])],
   ['commune sans code : fiche', () => assert.equal(out.nocode, 'Petit')],
+  ['commune sans code au nom accentué (Étampes)', () => assert.equal(out.accent, 'Étampes')],
   ['commune inconnue refusée', () => assert.equal(out.missing, 'refusé')],
 ];
 let failed = 0;

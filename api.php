@@ -130,6 +130,10 @@ try {
         json_response(['version' => (int) $pdo->query('PRAGMA user_version')->fetchColumn(), 'expected' => SCHEMA_VERSION]);
     }
     if ($isWrite && $action === 'backup_sqlite') {
+        // Mode consultation : la sauvegarde automatique continue, mais aucune copie de la base vers un autre dossier
+        if (kiosk_state()['on'] && (($payload['mode'] ?? '') !== 'auto' || normalize_backup_dir(safe_text($payload['dir'] ?? '')) !== normalize_backup_dir(''))) {
+            json_response(['error' => 'Mode consultation : pas de copie de la base vers un autre dossier.', 'kiosk' => true], 423);
+        }
         backup_sqlite($pdo, $payload);
     }
     if ($isWrite && $action === 'clone_database') {
@@ -245,6 +249,7 @@ try {
         'vault_status' => json_response(vault_status($pdo)),
         'vault_download' => vault_download($pdo, safe_int($_GET['id'] ?? 0)),
         'age_checks' => json_response(age_checks($pdo)),
+        'harmonize_history' => json_response(['items' => harmonize_history($pdo)]),
         'variant_groups' => json_response(['groups' => variant_groups($pdo, safe_text($_GET['field'] ?? 'occupation'))]),
         'suspicious_places' => json_response(suspicious_places($pdo)),
         'heights_data' => json_response(heights_data($pdo)),
@@ -8878,6 +8883,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'act_open_reminder' => act_open_reminder($pdo,$data),
             'vault_delete' => vault_delete($pdo,$data),
             'apply_variants' => apply_variants($pdo,$data),
+            'undo_harmonize' => undo_harmonize($pdo,$data),
             'fix_place' => fix_place($pdo,$data),
             'save_resistance' => save_resistance($pdo,$data),
             'clear_resistance' => clear_resistance($pdo,$data),
@@ -10763,12 +10769,12 @@ function save_person(PDO $pdo,array $data): array
         $stmt=$pdo->prepare('INSERT INTO persons(first_name,middle_name,last_name,prefix,suffix,gender,living_status,reference_number,surname_group_id,occupation,height_text,physical_description,eye_color,skin_color,nationality,ethnicity,verify_status,outside_genealogy,is_artist,artist_discipline,artist_events_display,show_military_block) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
         $validDisplaysI=['events','block','both'];$artistDisplayI=in_array($data['artist_events_display']??'',$validDisplaysI,true)?$data['artist_events_display']:'events';
         $stmt->execute([$first,safe_text($data['middle_name']??''),$last,safe_text($data['prefix']??''),safe_text($data['suffix']??''),safe_text($data['gender']??'unknown'),safe_text($data['living_status']??'unknown'),safe_text($data['reference_number']??''),safe_int($data['surname_group_id']??0)?:null,safe_text($data['occupation']??''),safe_text($data['height_text']??''),safe_text($data['physical_description']??''),safe_text($data['eye_color']??''),safe_text($data['skin_color']??''),safe_text($data['nationality']??''),safe_text($data['ethnicity']??''),in_array(($data['verify_status']??'normal'),['normal','verify'],true)?($data['verify_status']??'normal'):'normal',(isset($data['outside_genealogy'])&&$data['outside_genealogy']?1:0),(isset($data['is_artist'])&&$data['is_artist']?1:0),safe_text($data['artist_discipline']??''),$artistDisplayI,(isset($data['show_military_block'])&&$data['show_military_block']?1:0)]);
-        $id=(int)$pdo->lastInsertId();$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
+        $id=(int)$pdo->lastInsertId();if(array_key_exists('mort_pour_la_france',$data)){$pdo->prepare('UPDATE persons SET mort_pour_la_france=? WHERE id=?')->execute([safe_text($data['mort_pour_la_france'])?:'unknown',$id]);}$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
     }
     $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Personne introuvable');
     assert_person_unlocked($pdo,$id);
-    $allowed=['first_name','middle_name','last_name','prefix','suffix','gender','living_status','reference_number','surname_group_id','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','verify_status'];
+    $allowed=['first_name','middle_name','last_name','prefix','suffix','gender','living_status','reference_number','surname_group_id','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','verify_status','mort_pour_la_france'];
     $set=[];$values=[];
     foreach($allowed as $field)if(array_key_exists($field,$data)){$set[]="$field=?";$values[]=$field==='surname_group_id'?(safe_int($data[$field])?:null):safe_text($data[$field]);}
     $set[]="outside_genealogy=?";$values[]=(isset($data['outside_genealogy'])&&$data['outside_genealogy']?1:0);
