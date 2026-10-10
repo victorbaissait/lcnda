@@ -268,6 +268,8 @@
         }).join('');
         return `<div class="person-map-stage h-map map-bg-${esc(bg)}" style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
     }
+    /** Crayon + poubelle, comme dans le bloc Événements. */
+    const tools = (editAttr, deleteAttr, what) => `<span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ' + what, editAttr)}${A().actionButton('delete', 'Supprimer ' + what, deleteAttr)}</span>`;
     const finite = v => v !== null && v !== '' && v !== undefined && Number.isFinite(Number(v));
 
     /* ═══════════════════════ 🚢 DÉPARTS : VOYAGES ET ÉMIGRATION ═══════════════════════ */
@@ -291,7 +293,7 @@
         const byRole = role => media.filter(m => (m.role || '') === role);
         const photos = media.filter(m => !['passagers', 'papiers', 'naturalisation'].includes(m.role || ''));
         const row = (label, value) => value ? `<div class="data-row"><dt>${esc(label)}</dt><dd>${nl(value)}</dd></div>` : '';
-        return `<article class="h-record h-voyage"><header><div>${withPerson ? `<div>${personLink(v.person_id, v.person_name)}</div>` : ''}<strong>🚢 ${esc(voyageTitle(v))}</strong>${v.ship_name ? `<span class="h-ship">à bord du navire <em>${esc(v.ship_name)}</em></span>` : ''}</div>${editable ? `<div class="page-actions compact"><button type="button" class="button small secondary" data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}">Modifier</button></div>` : ''}</header>
+        return `<article class="h-record h-voyage"><header><div>${withPerson ? `<div>${personLink(v.person_id, v.person_name)}</div>` : ''}<strong>🚢 ${esc(voyageTitle(v))}</strong>${v.ship_name ? `<span class="h-ship">à bord du navire <em>${esc(v.ship_name)}</em></span>` : ''}</div>${editable ? tools(`data-h-voyage-edit="${v.id}" data-h-voyage-person="${v.person_id}"`, `data-h-voyage-delete="${v.id}"`, 'ce voyage') : ''}</header>
             <dl class="data-list">${row('Départ', [v.departure_date, v.departure_port].filter(Boolean).join(' · '))}${row('Escales', v.stopovers)}${row('Arrivée', [v.arrival_date, v.arrival_port].filter(Boolean).join(' · '))}${row('Destination', v.destination)}${row('Motif', v.reason)}${row('Partis avec', v.companions)}</dl>
             ${v.passenger_list_ref || v.passenger_list_url || v.passenger_list_text || byRole('passagers').length ? `<details class="h-section" open><summary>Liste de passagers</summary>${v.passenger_list_ref ? `<p><strong>Référence :</strong> ${esc(v.passenger_list_ref)}</p>` : ''}${v.passenger_list_url ? `<p><a href="${esc(v.passenger_list_url)}" target="_blank" rel="noopener noreferrer">Voir la liste en ligne ↗</a></p>` : ''}${thumbs('voyage-pass-' + v.id, byRole('passagers'))}${v.passenger_list_text ? `<p class="h-transcription">${nl(v.passenger_list_text)}</p>` : ''}</details>` : ''}
             ${v.naturalization_date || v.naturalization_place || v.naturalization_text || byRole('naturalisation').length ? `<details class="h-section" open><summary>Naturalisation à l’arrivée</summary><p>${esc([v.naturalization_date, v.naturalization_place].filter(Boolean).join(' · '))}</p>${v.naturalization_text ? `<p>${nl(v.naturalization_text)}</p>` : ''}${thumbs('voyage-nat-' + v.id, byRole('naturalisation'))}</details>` : ''}
@@ -352,6 +354,35 @@
         if (b) openVoyageDialog(Number(b.dataset.hVoyageEdit), Number(b.dataset.hVoyagePerson)).catch(error => toast(error.message, 'error'));
     });
 
+    // Poubelles des blocs (voyage, placement, armoiries, parcours de poilu, inventaire, papier)
+    document.addEventListener('click', async event => {
+        const b = event.target.closest?.('[data-h-voyage-delete],[data-h-placement-delete],[data-h-coat-delete],[data-h-poilu-clear],[data-h-probate-delete],[data-h-paper-delete]');
+        if (!b) return;
+        event.preventDefault();
+        try {
+            const d = b.dataset;
+            if (d.hVoyageDelete) { if (!confirm('Supprimer ce voyage ?')) return; await api('delete_voyage', {}, {method: 'POST', body: {id: d.hVoyageDelete}}); toast('Voyage supprimé.'); }
+            else if (d.hPlacementDelete) { if (!confirm('Supprimer ce placement ?')) return; await api('delete_placement', {}, {method: 'POST', body: {id: d.hPlacementDelete}}); toast('Placement supprimé.'); }
+            else if (d.hCoatDelete) {
+                const coat = ((await api('coats_of_arms')).coats || []).find(c => Number(c.id) === Number(d.hCoatDelete));
+                if (!coat) return;
+                const personId = Number(d.hCoatPerson) || 0, others = (coat.people || []).filter(l => Number(l.person.id) !== personId);
+                if (personId && others.length) {
+                    if (!confirm(`Retirer « ${coat.title} » de cette fiche ? Les armoiries restent pour les ${others.length} autre(s) porteur(s).`)) return;
+                    await api('save_coat_of_arms', {}, {method: 'POST', body: {...coat, people: others.map(l => ({person_id: l.person.id, note: l.note}))}});
+                    toast('Armoiries retirées de cette fiche.');
+                } else {
+                    if (!confirm(`Supprimer les armoiries « ${coat.title} » ?`)) return;
+                    await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: coat.id}}); toast('Armoiries supprimées.');
+                }
+            }
+            else if (d.hPoiluClear) { if (!confirm('Effacer tout le parcours de poilu (unités et événements) ?')) return; await api('save_poilu', {}, {method: 'POST', body: {person_id: d.hPoiluClear, units: [], events: []}}); toast('Parcours effacé.'); }
+            else if (d.hProbateDelete) { if (!confirm('Supprimer cet inventaire après décès ?')) return; await api('delete_probate_inventory', {}, {method: 'POST', body: {id: d.hProbateDelete}}); toast('Inventaire supprimé.'); }
+            else if (d.hPaperDelete) { if (!confirm('Retirer ce document de l’inventaire des papiers ?')) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: d.hPaperDelete}}); toast('Document retiré.'); }
+            await refreshView();
+        } catch (error) { toast(error.message, 'error'); }
+    });
+
     /* ═══════════════════════ 👶 ENFANTS PLACÉS ═══════════════════════ */
 
     const placementKinds = {nourrice: 'Mis en nourrice', abandon: 'Abandonné', hospice: 'Recueilli par l’hospice', assistance: 'Pupille de l’Assistance publique', orphelinat: 'Orphelinat', recueilli: 'Recueilli par une famille', autre: 'Autre placement'};
@@ -367,7 +398,7 @@
     function placementCardHtml(r, {withPerson = false, editable = true} = {}) {
         const row = (label, value) => value ? `<div class="data-row"><dt>${esc(label)}</dt><dd>${nl(value)}</dd></div>` : '';
         const when = [r.start_date, r.end_date].filter(Boolean).join(' → ');
-        return `<article class="h-record h-placement"><header><div>${withPerson ? `<div>${personLink(r.person_id, r.person_name)}</div>` : ''}<strong>👶 ${esc(r.kind_label || placementKinds[r.kind] || 'Placement')}${r.place_text ? ` à ${esc(r.place_text)}` : ''}</strong>${r.duration ? `<span class="h-duration">${esc(r.duration)}</span>` : ''}</div>${editable ? `<button type="button" class="button small secondary" data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}">Modifier</button>` : ''}</header>
+        return `<article class="h-record h-placement"><header><div>${withPerson ? `<div>${personLink(r.person_id, r.person_name)}</div>` : ''}<strong>👶 ${esc(r.kind_label || placementKinds[r.kind] || 'Placement')}${r.place_text ? ` à ${esc(r.place_text)}` : ''}</strong>${r.duration ? `<span class="h-duration">${esc(r.duration)}</span>` : ''}</div>${editable ? tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement') : ''}</header>
             <dl class="data-list">${row('Période', when)}${row('Parti de', r.origin_text)}${row('Institution', r.institution)}${row('N° matricule', r.matricule)}${row('Nourrice / famille', [r.nurse_person_name, r.nurse_name].filter(Boolean).join(' · '))}${row('Mois de nourrice / pension', r.wage_text)}${row('Ce qu’il est devenu', r.outcome)}</dl>
             ${thumbs('placement-' + r.id, r.media)}${r.notes ? `<p class="h-transcription">${nl(r.notes)}</p>` : ''}</article>`;
     }
@@ -427,7 +458,7 @@
             ${c.motto ? `<p class="h-motto">Devise : <em>${esc(c.motto)}</em></p>` : ''}
             ${!compact && c.origin_text ? `<p class="muted">${nl(c.origin_text)}</p>` : ''}
             ${others.length ? `<div class="collection-holder">${currentPersonId ? 'Aussi porté par' : 'Porté par'} : ${others.map(l => chip(l.person) + (l.note ? ` <small>(${esc(l.note)})</small>` : '')).join(' · ')}</div>` : ''}
-            <div class="page-actions compact"><button type="button" class="button small secondary" data-h-coat-edit="${c.id}">Modifier</button></div></div></article>`;
+            <div class="page-actions compact">${tools(`data-h-coat-edit="${c.id}"`, `data-h-coat-delete="${c.id}" data-h-coat-person="${Number(currentPersonId) || 0}"`, 'ces armoiries')}</div></div></article>`;
     }
     function registerCoatMedia(rows) { rows.forEach(c => { const img = coatImage(c); if (img) mediaGroups['coat-' + c.id] = (c.media || []).filter(m => m.media_type === 'image'); }); }
     ext.personBlocks.heraldry = (index, detail, {editOnly}) => {
@@ -540,7 +571,7 @@
         const p = detail.person;
         if (!Number(p.show_poilu_block)) return '';
         const data = detail.heritage?.poilu || {units: [], events: []};
-        return card(index, 'Poilu 14-18', (data.units || []).length || '', poiluHtml(data, p), 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-poilu-edit="${p.id}">Modifier le parcours</button>`));
+        return card(index, 'Poilu 14-18', (data.units || []).length || '', poiluHtml(data, p), 'span-12', editOnly(tools(`data-h-poilu-edit="${p.id}"`, `data-h-poilu-clear="${p.id}"`, 'le parcours de poilu')));
     };
     async function openPoiluDialog(personId) {
         const detail = await api('person', {id: personId});
@@ -594,7 +625,7 @@
     function probateSummaryHtml(inv) {
         const days = workDays(inv.net, inv.currency, inv.year);
         const cats = Object.entries(inv.by_category || {}).sort((a, b) => b[1] - a[1]).slice(0, 4);
-        return `<article class="h-record"><header><div><strong>📜 Inventaire ${inv.date_text ? 'du ' + esc(inv.date_text) : ''}</strong>${inv.notary ? ` <small>— ${esc(inv.notary)}</small>` : ''}${inv.person_name ? `<div>${personLink(inv.person_id, inv.person_name)}</div>` : ''}</div><button type="button" class="button small secondary" data-h-open-list="probate" data-h-edit="${inv.id}">Ouvrir</button></header>
+        return `<article class="h-record"><header><div><strong>📜 Inventaire ${inv.date_text ? 'du ' + esc(inv.date_text) : ''}</strong>${inv.notary ? ` <small>— ${esc(inv.notary)}</small>` : ''}${inv.person_name ? `<div>${personLink(inv.person_id, inv.person_name)}</div>` : ''}</div>${tools(`data-h-open-list="probate" data-h-edit="${inv.id}"`, `data-h-probate-delete="${inv.id}"`, 'cet inventaire')}</header>
             <p class="h-probate-total">Total : <strong>${esc(moneyText(inv.total, inv.currency))}</strong>${inv.debts ? ` · dettes ${esc(moneyText(inv.debts, inv.currency))} · net <strong>${esc(moneyText(inv.net, inv.currency))}</strong>` : ''}${days ? ` · ≈ <strong>${fmt(days)} journées de travail</strong> d’un journalier (${fmt(days / 250, 1)} années)` : ''}</p>
             ${cats.length ? `<p class="muted">${cats.map(([k, v]) => `${esc(probateCategories[k] || k)} : ${esc(moneyText(v, inv.currency))}`).join(' · ')}</p>` : ''}${thumbs('probate-' + inv.id, inv.media)}</article>`;
     }
@@ -609,7 +640,7 @@
     ext.personBlocks.family_papers_block = (index, detail) => {
         const rows = detail.heritage?.family_papers || [];
         if (!rows.length) return '';
-        return card(index, 'Papiers de famille (originaux)', rows.length, `<ul class="h-paper-mini">${rows.map(r => `<li><span class="h-paper-number">${esc(r.class_number)}</span> <strong>${esc(r.title)}</strong>${r.date_text ? ` <small>${esc(r.date_text)}</small>` : ''}<br><small>📦 ${esc(r.storage_location || 'rangement à préciser')}${r.holder_text ? ' · chez ' + esc(r.holder_text) : ''}</small> ${thumbs('paper-' + r.id, r.media)}</li>`).join('')}</ul>`, 'span-6', '<button type="button" class="button small secondary" data-h-open-list="family_papers">Inventaire</button>');
+        return card(index, 'Papiers de famille (originaux)', rows.length, `<ul class="h-paper-mini">${rows.map(r => `<li><span class="h-paper-number">${esc(r.class_number)}</span> <strong>${esc(r.title)}</strong>${r.date_text ? ` <small>${esc(r.date_text)}</small>` : ''}<br><small>📦 ${esc(r.storage_location || 'rangement à préciser')}${r.holder_text ? ' · chez ' + esc(r.holder_text) : ''}</small> ${tools(`data-h-open-list="family_papers" data-h-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')} ${thumbs('paper-' + r.id, r.media)}</li>`).join('')}</ul>`, 'span-6', '<button type="button" class="button small secondary" data-h-open-list="family_papers">Inventaire</button>');
     };
 
     /* ═══════════════════════ LISTES ═══════════════════════ */
@@ -647,7 +678,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Enfants placés', 'Enfants mis en nourrice, abandonnés ou recueillis par l’hospice : lieu et durée du placement. Beaucoup d’enfants de Paris partaient en nourrice dans le Morvan.')}
             <div class="collection-toolbar">${personPickerAdd('+ Placement', 'data-h-placement-add-list')}</div>
             ${rows.length ? `<p class="muted">${plural(rows.length, 'placement', 'placements')} · ${Object.entries(places).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${placementMap(rows)}
-            <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td><button type="button" class="button small secondary" data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}">Modifier</button></td></tr>`).join('')}</tbody></table>` : empty('Aucun placement enregistré.')}</section>`;
+            <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table>` : empty('Aucun placement enregistré.')}</section>`;
         A().bindCollectionPersonFields(A().$('#workspace'));
         A().$('[data-h-placement-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return toast('Choisis d’abord la personne.', 'error'); openPlacementDialog(0, pid); });
     };
@@ -671,7 +702,7 @@
         if (!isCurrent(token)) return;
         const rows = data.poilus || [];
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Poilus 14-18', 'Les soldats de la Grande Guerre : leurs unités et, pour chaque date importante (blessure, disparition…), le lien vers le journal de marche de leur régiment ce jour-là.')}
-            ${rows.length ? rows.map(r => `<article class="h-record"><header><div>${chip(r.person)}${(r.person.mort_pour_la_france === 'yes') ? ' <span class="collection-kind">Mort pour la France</span>' : ''}</div><button type="button" class="button small secondary" data-h-poilu-edit="${r.person.id}">Modifier</button></header>${poiluHtml(r, r.person)}</article>`).join('') : empty('Aucun poilu : coche « Poilu 14-18 » dans IDENTITÉ → Modifier la personne, puis saisis son parcours.')}</section>`;
+            ${rows.length ? rows.map(r => `<article class="h-record"><header><div>${chip(r.person)}${(r.person.mort_pour_la_france === 'yes') ? ' <span class="collection-kind">Mort pour la France</span>' : ''}</div>${tools(`data-h-poilu-edit="${r.person.id}"`, `data-h-poilu-clear="${r.person.id}"`, 'ce parcours')}</header>${poiluHtml(r, r.person)}</article>`).join('') : empty('Aucun poilu : coche « Poilu 14-18 » dans IDENTITÉ → Modifier la personne, puis saisis son parcours.')}</section>`;
         A().bindTableLinks();
     };
 
@@ -689,7 +720,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Inventaires après décès', 'Saisis un inventaire pièce par pièce (meubles, bétail, outils, linge…) avec la valeur de chaque objet. Le total est converti en journées de travail d’un journalier pour comparer la richesse d’une génération à l’autre (Graphiques → Statistiques → Richesse).')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-probate-new>+ Inventaire</button><button type="button" class="button secondary" data-h-probate-compare>Comparer les générations</button></div>
             ${editing ? probateFormHtml(editing) : ''}
-            ${rows.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Notaire</th><th>Total</th><th>Net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => { const d = workDays(r.net, r.currency, r.year); return `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td>${esc(moneyText(r.total, r.currency))}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${d ? fmt(d) : '—'}</td><td><button type="button" class="button small secondary" data-h-probate-edit="${r.id}">Modifier</button></td></tr>`; }).join('')}</tbody></table>` : (editing ? '' : empty('Aucun inventaire après décès.'))}</section>`;
+            ${rows.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Notaire</th><th>Total</th><th>Net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => { const d = workDays(r.net, r.currency, r.year); return `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td>${esc(moneyText(r.total, r.currency))}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${d ? fmt(d) : '—'}</td><td>${tools(`data-h-probate-edit="${r.id}"`, `data-h-probate-delete="${r.id}"`, 'cet inventaire')}</td></tr>`; }).join('')}</tbody></table>` : (editing ? '' : empty('Aucun inventaire après décès.'))}</section>`;
         const ws = A().$('#workspace');
         ws.querySelector('[data-h-probate-new]').addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: 0}));
         ws.querySelector('[data-h-probate-compare]').addEventListener('click', () => { S().graphTab = 'stats'; S().graphStatsType = 'probate_wealth'; A().setModule('graphiques'); });
@@ -756,7 +787,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Papiers de famille', 'L’inventaire de tes originaux papier (livrets de famille, actes anciens, lettres, photos papier) : où chacun est rangé, son numéro de classement, une étiquette à imprimer et à coller sur la chemise, et le lien vers son scan.')}
             <div class="collection-toolbar"><input type="search" id="h-papers-q" value="${esc(q)}" placeholder="Chercher (titre, n°, rangement, chez qui)…"><button type="button" class="button" data-h-paper-new>+ Document</button><button type="button" class="button secondary" data-h-paper-labels>Imprimer les étiquettes</button><button type="button" class="button secondary" data-h-paper-print>Imprimer l’inventaire</button></div>
             ${editing ? paperFormHtml(editing, locations) : ''}
-            ${rows.length ? Object.entries(groups).map(([loc, list]) => `<h3>📦 ${esc(loc)} <small>(${list.length})</small></h3><table class="data-table h-papers"><thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th>N°</th><th>Document</th><th>Date</th><th>Chez</th><th>Personnes</th><th>Scan</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td><button type="button" class="button small secondary" data-h-paper-edit="${r.id}">Modifier</button></td></tr>`).join('')}</tbody></table>`).join('') : (editing ? '' : empty('Aucun document. Ajoute le premier avec « + Document ».'))}</section>`;
+            ${rows.length ? Object.entries(groups).map(([loc, list]) => `<h3>📦 ${esc(loc)} <small>(${list.length})</small></h3><table class="data-table h-papers"><thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th>N°</th><th>Document</th><th>Date</th><th>Chez</th><th>Personnes</th><th>Scan</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`).join('')}</tbody></table>`).join('') : (editing ? '' : empty('Aucun document. Ajoute le premier avec « + Document ».'))}</section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
         ws.querySelector('#h-papers-q').addEventListener('change', event => { S().hPapersQuery = event.target.value.trim(); A().renderList(); });
@@ -912,7 +943,7 @@
         const stopHtml = s => { k++; return `<li class="h-stop ${Number(s.done) ? 'is-done' : ''}"><label class="h-stop-check"><input type="checkbox" data-h-stop-done="${s.id}" ${Number(s.done) ? 'checked' : ''}><span class="h-stop-n">${k}</span></label>
             <div class="h-stop-body"><strong>${tripIcons[s.kind] || '📍'} ${esc(s.title || tripKinds[s.kind])}</strong> <small class="muted">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}${finite(s.lat) ? '' : ' · ⚠ pas de coordonnées'}</small>
             ${s.people_text ? `<div class="h-stop-people">${nl(s.people_text)}</div>` : ''}${s.to_photograph ? `<div class="h-stop-photo">📷 ${nl(s.to_photograph)}</div>` : ''}${s.opening_hours ? `<div class="h-stop-hours">🕘 ${nl(s.opening_hours)}</div>` : ''}${s.notes ? `<div class="muted">${nl(s.notes)}</div>` : ''}</div>
-            <div class="h-stop-tools"><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="-1" title="Monter">↑</button><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="1" title="Descendre">↓</button><select data-h-stop-day="${s.id}" title="Jour">${[...new Set([...dayNums, dayNums.length + 1])].map(d => `<option value="${d}" ${d === Number(s.day) ? 'selected' : ''}>Jour ${d}</option>`).join('')}</select><button type="button" class="button small secondary" data-h-stop-edit="${s.id}">Modifier</button></div></li>`; };
+            <div class="h-stop-tools"><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="-1" title="Monter">↑</button><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="1" title="Descendre">↓</button><select data-h-stop-day="${s.id}" title="Jour">${[...new Set([...dayNums, dayNums.length + 1])].map(d => `<option value="${d}" ${d === Number(s.day) ? 'selected' : ''}>Jour ${d}</option>`).join('')}</select>${tools(`data-h-stop-edit="${s.id}"`, `data-h-stop-delete="${s.id}"`, 'cette étape')}</div></li>`; };
         A().$('#workspace').innerHTML = `<section class="page collection-page h-trip-page">${pageHeader(t.status === 'done' ? 'CIRCUIT FAIT' : 'CIRCUIT', t.title, `${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''} · ${plural(t.stops.length, 'étape', 'étapes')} sur ${plural(dayNums.length, 'jour', 'jours')} · pour ${(t.people_rows || []).map(p => esc(A().personName(p))).join(', ') || '—'}`,
             `<button type="button" class="button secondary" data-h-trip-back>← Tous les circuits</button><button type="button" class="button secondary" data-h-trip-edit>Modifier</button><button type="button" class="button secondary" data-h-trip-regen>Préparer à nouveau</button><button type="button" class="button" data-h-trip-print>Carnet de route à imprimer</button><button type="button" class="button secondary" data-h-trip-done>${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button><button type="button" class="button secondary danger" data-h-trip-delete>Supprimer</button>`)}
             ${t.stops.length ? miniMap(points, paths) : ''}
@@ -930,6 +961,7 @@
         ws.querySelectorAll('[data-h-stop-done]').forEach(c => c.addEventListener('change', async () => { await api('set_field_trip_stop_done', {}, {method: 'POST', body: {id: c.dataset.hStopDone, done: c.checked ? 1 : 0}}); c.closest('.h-stop').classList.toggle('is-done', c.checked); }));
         ws.querySelectorAll('[data-h-stop-move]').forEach(b => b.addEventListener('click', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopMove, direction: Number(b.dataset.dir)}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-day]').forEach(sel => sel.addEventListener('change', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: sel.dataset.hStopDay, day: Number(sel.value)}}); reload(); }));
+        ws.querySelectorAll('[data-h-stop-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette étape ?')) return; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopDelete}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-edit]').forEach(b => b.addEventListener('click', () => {
             const s = t.stops.find(x => Number(x.id) === Number(b.dataset.hStopEdit)) || {id: 0, kind: 'autre', day: dayNums[dayNums.length - 1] || 1};
             openDialog({
