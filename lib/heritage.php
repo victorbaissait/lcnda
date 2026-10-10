@@ -105,53 +105,60 @@ function heritage_geocode(PDO $pdo, string $text): ?array
     if ($text === '') { return null; }
     $parts = preg_split('/\s*[,(;]\s*/u', $text);
     $name = trim((string) ($parts[0] ?? ''), " )\t");
-    $country = trim((string) ($parts[1] ?? ''), " )\t");
+    $hint = trim(implode(' ', array_slice($parts, 1)), " )\t"); // « Boston, États-Unis », « Saint-Martin (Nord) »…
     if ($name === '') { return null; }
-    $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude FROM places
-        WHERE name = ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL AND (latitude <> 0 OR longitude <> 0)
-        ORDER BY CASE WHEN ? <> '' AND (country = ? COLLATE NOCASE OR state = ? COLLATE NOCASE OR county = ? COLLATE NOCASE) THEN 0 ELSE 1 END LIMIT 1");
-    $stmt->execute([$name, $country, $country, $country, $country]);
-    if ($row = $stmt->fetch()) {
-        return ['lat' => (float) $row['latitude'], 'lon' => (float) $row['longitude'], 'label' => implode(', ', array_filter([$row['name'], $row['county'] ?: $row['state'], $row['country']]))];
-    }
-    try {
-        $world = world_place_suggestions($name, '', 5);
-    } catch (Throwable $_) {
-        $world = [];
-    }
+    $cands = [];
+    $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, COALESCE(population,0) AS population FROM places
+        WHERE name = ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL AND (latitude <> 0 OR longitude <> 0) LIMIT 30");
+    try { $stmt->execute([$name]); } catch (Throwable $_) { $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, 0 AS population FROM places WHERE name = ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL LIMIT 30"); $stmt->execute([$name]); }
+    foreach ($stmt->fetchAll() as $r) { $cands[] = ['row' => $r, 'state' => $r['county'] ?: $r['state'], 'base' => 1]; }
+    try { $world = world_place_suggestions($name, '', 12); } catch (Throwable $_) { $world = []; }
     foreach ($world as $w) {
-        if ($country !== '' && stripos((string) $w['country'], $country) === false && stripos((string) $w['state'], $country) === false) { continue; }
         if (world_search_key((string) $w['name']) !== world_search_key($name)) { continue; }
-        return ['lat' => (float) $w['latitude'], 'lon' => (float) $w['longitude'], 'label' => implode(', ', array_filter([$w['name'], $w['state'], $w['country']]))];
+        $cands[] = ['row' => $w, 'state' => $w['state'], 'base' => 0];
     }
-    return null;
+    if (!$cands) { return null; }
+    $hintKey = world_search_key($hint);
+    $score = static function (array $c) use ($hintKey): array {
+        $r = $c['row'];
+        $match = $hintKey !== '' && (str_contains(world_search_key((string) $r['country'] . ' ' . $c['state'] . ' ' . ($r['county'] ?? '') . ' ' . ($r['state'] ?? '')), $hintKey)) ? 1 : 0;
+        return [$match, (int) ($r['population'] ?? 0), $c['base']];
+    };
+    usort($cands, static fn($a, $b) => $score($b) <=> $score($a));
+    $best = $cands[0];
+    return ['lat' => (float) $best['row']['latitude'], 'lon' => (float) $best['row']['longitude'], 'label' => implode(', ', array_filter([$best['row']['name'], $best['state'], $best['row']['country']]))];
 }
 
-/** Suggestions de lieux (base + villes du monde) avec coordonnées, pour les champs « port », « destination »… */
+/** Suggestions de lieux (base + villes du monde) avec coordonnées : nom exact d'abord, puis les plus peuplées. */
 function heritage_place_search(PDO $pdo, string $q): array
 {
     if (mb_strlen($q) < 2) { return []; }
-    $out = [];
-    $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude FROM places
+    $rows = [];
+    $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, COALESCE(population,0) AS population FROM places
         WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL
-        ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, COALESCE(population,0) DESC, name COLLATE NOCASE LIMIT 8");
+        ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, COALESCE(population,0) DESC, name COLLATE NOCASE LIMIT 12");
     try {
         $stmt->execute(["%{$q}%", "{$q}%"]);
     } catch (Throwable $_) { // anciennes bases sans colonne population
-        $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY name COLLATE NOCASE LIMIT 8");
+        $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, 0 AS population FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY name COLLATE NOCASE LIMIT 12");
         $stmt->execute(["{$q}%"]);
     }
-    foreach ($stmt->fetchAll() as $r) {
-        $label = implode(', ', array_filter([$r['name'], $r['county'] ?: $r['state'], $r['country']]));
-        $out[$label] = ['label' => $label, 'lat' => (float) $r['latitude'], 'lon' => (float) $r['longitude']];
-    }
+    foreach ($stmt->fetchAll() as $r) { $rows[] = ['name' => $r['name'], 'sub' => $r['county'] ?: $r['state'], 'country' => $r['country'], 'lat' => $r['latitude'], 'lon' => $r['longitude'], 'pop' => (int) $r['population']]; }
     try {
-        foreach (world_place_suggestions($q, '', 8) as $w) {
-            $label = implode(', ', array_filter([$w['name'], $w['state'], $w['country']]));
-            $out[$label] ??= ['label' => $label, 'lat' => (float) $w['latitude'], 'lon' => (float) $w['longitude']];
-        }
+        foreach (world_place_suggestions($q, '', 12) as $w) { $rows[] = ['name' => $w['name'], 'sub' => $w['state'], 'country' => $w['country'], 'lat' => $w['latitude'], 'lon' => $w['longitude'], 'pop' => (int) $w['population']]; }
     } catch (Throwable $_) {}
-    return array_values(array_slice($out, 0, 14));
+    $key = world_search_key($q);
+    $rank = static fn($r) => [world_search_key((string) $r['name']) === $key ? 2 : (str_starts_with(world_search_key((string) $r['name']), $key) ? 1 : 0), $r['pop']];
+    usort($rows, static fn($a, $b) => $rank($b) <=> $rank($a));
+    $out = [];
+    foreach ($rows as $r) {
+        $label = implode(', ', array_filter([$r['name'], $r['sub'], $r['country']]));
+        // Même ville déjà vue (base et répertoire mondial) : une seule ligne
+        $dup = world_search_key($r['name'] . ' ' . $r['country']) . round((float) $r['lat'], 1) . round((float) $r['lon'], 1);
+        if (isset($out[$dup])) { continue; }
+        $out[$dup] = ['label' => $label, 'lat' => (float) $r['lat'], 'lon' => (float) $r['lon']];
+    }
+    return array_values(array_slice($out, 0, 12));
 }
 
 /** Coordonnées envoyées par le formulaire, sinon trouvées à partir du texte du lieu. */

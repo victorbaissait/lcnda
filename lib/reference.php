@@ -186,7 +186,8 @@ function world_reference(): ?PDO
     static $pdo = false;
     if ($pdo !== false) { return $pdo; }
     $pdo = null;
-    $path = reference_database_path('geo-world');
+    // Répertoire mondial complet (npm run fetch:geo) ; sinon, secours fabriqué depuis les fichiers des pays livrés
+    $path = reference_database_path('geo-world') ?? world_reference_from_countries();
     if (!$path) { return null; }
     try {
         $pdo = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
@@ -202,6 +203,80 @@ function world_reference(): ?PDO
         $pdo = null;
     }
     return $pdo;
+}
+
+/**
+ * Secours quand data/reference/geo-world.sqlite.gz manque (il n'est pas dans le dépôt : npm run fetch:geo) :
+ * un répertoire des villes du monde fabriqué UNE fois depuis les fichiers des pays livrés (geo-??.sqlite.gz, ~226 pays),
+ * au même format que geo-world. Refabriqué seulement si la liste des fichiers change. Pendant la fabrication
+ * (~1 min au premier lancement), les autres requêtes ne l'attendent pas : pas de suggestions mondiales en attendant.
+ */
+function world_reference_from_countries(): ?string
+{
+    if (getenv('GENEALOGY_SKIP_REFERENCE') === '1') { return null; } // tests rapides
+    $files = [...(glob(APP_ROOT . '/data/reference/geo-??.sqlite.gz') ?: []), ...(glob(reference_download_dir() . '/geo-??.sqlite.gz') ?: [])];
+    $byCc = [];
+    foreach ($files as $f) { $cc = strtoupper(substr(basename($f), 4, 2)); if ($cc !== 'FR') { $byCc[$cc] ??= $f; } }
+    if (!$byCc) { return null; }
+    ksort($byCc);
+    $dir = DATA_DIR . '/cache';
+    if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { return null; }
+    $sig = substr(sha1(implode('|', array_map(static fn($f) => basename($f) . ':' . filesize($f), $byCc))), 0, 12);
+    $target = $dir . '/reference-world-pays-' . $sig . '.sqlite';
+    if (is_file($target)) { return $target; }
+    $lock = fopen($target . '.lock', 'c');
+    if (!$lock || !flock($lock, LOCK_EX | LOCK_NB)) { return null; } // déjà en fabrication par une autre requête
+    try {
+        if (is_file($target)) { return $target; }
+        @set_time_limit(0);
+        $partial = $target . '.part';
+        @unlink($partial);
+        $db = new PDO('sqlite:' . $partial, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+        $db->exec('PRAGMA journal_mode = OFF'); $db->exec('PRAGMA synchronous = OFF');
+        $db->exec('CREATE TABLE countries (code TEXT PRIMARY KEY, name TEXT NOT NULL)');
+        $db->exec("CREATE TABLE world_places (geoname_id INTEGER PRIMARY KEY, name TEXT NOT NULL, search_key TEXT NOT NULL,
+            state TEXT NOT NULL DEFAULT '', country_code TEXT NOT NULL DEFAULT '', latitude REAL, longitude REAL,
+            population INTEGER NOT NULL DEFAULT 0, feature_code TEXT NOT NULL DEFAULT '')");
+        $insert = $db->prepare('INSERT OR IGNORE INTO world_places VALUES(?,?,?,?,?,?,?,?,?)');
+        $country = $db->prepare('INSERT OR IGNORE INTO countries VALUES(?,?)');
+        $catalogue = reference_catalogue()['countries'];
+        $fake = -1;
+        foreach ($byCc as $cc => $gz) {
+            $tmp = $dir . '/world-pays-' . strtolower($cc) . '-' . bin2hex(random_bytes(3)) . '.tmp';
+            try {
+                $in = gzopen($gz, 'rb'); $out = fopen($tmp, 'wb');
+                if (!$in || !$out) { continue; }
+                while (!gzeof($in)) { fwrite($out, (string) gzread($in, 1 << 20)); }
+                gzclose($in); fclose($out);
+                $src = new PDO('sqlite:' . $tmp, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+                if (!$src->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='geo_places'")->fetchColumn()) { $src = null; continue; }
+                $name = (string) ($catalogue[$cc]['name'] ?? $src->query("SELECT country FROM geo_places WHERE country<>'' LIMIT 1")->fetchColumn() ?: $cc);
+                $country->execute([$cc, $name]);
+                $db->beginTransaction();
+                foreach ($src->query('SELECT geoname_id, name, state, latitude, longitude, population, feature_code FROM geo_places WHERE latitude IS NOT NULL AND longitude IS NOT NULL') as $r) {
+                    $key = world_search_key((string) $r['name']);
+                    if ($key === '') { continue; }
+                    $insert->execute([$r['geoname_id'] ?: $fake--, $r['name'], $key, (string) $r['state'], $cc, $r['latitude'], $r['longitude'], (int) $r['population'], (string) $r['feature_code']]);
+                }
+                $db->commit();
+                $src = null;
+            } catch (Throwable $e) {
+                if ($db->inTransaction()) { $db->rollBack(); }
+                error_log('[référence] pays ' . $cc . ' ignoré pour les villes du monde : ' . $e->getMessage());
+            } finally { @unlink($tmp); }
+        }
+        $db->exec('CREATE INDEX idx_world_search ON world_places(search_key)');
+        $db->exec('CREATE INDEX idx_world_big ON world_places(search_key) WHERE population >= 1000');
+        $db = null;
+        if (!@rename($partial, $target)) { @unlink($partial); return null; }
+        foreach (glob($dir . '/reference-world-pays-*.sqlite') ?: [] as $old) { if ($old !== $target) { @unlink($old); } }
+        return $target;
+    } catch (Throwable $e) {
+        error_log('[référence] villes du monde (secours) impossibles : ' . $e->getMessage());
+        return null;
+    } finally {
+        flock($lock, LOCK_UN); fclose($lock); @unlink($target . '.lock');
+    }
 }
 
 /** Prépare les villes du monde (décompression + index) : appelé au démarrage pour ne pas faire attendre la saisie. */
