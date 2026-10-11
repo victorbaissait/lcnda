@@ -36,8 +36,8 @@ function kiosk_guard(string $action, bool $isWrite): void
 function kiosk_blocks(string $action, bool $isWrite): bool
 {
     // backup_sqlite : seulement la sauvegarde automatique dans le dossier de l'app (vérifié dans api.php)
-    $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now'];
-    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download'];
+    $allowedWrites = ['kiosk_exit', 'save_settings', 'backup_sqlite', 'offsite_copy_now', 'museum_sign']; // le livre d'or du musée se signe aussi en consultation
+    $blockedReads = ['export_csv', 'export_csv_global', 'export_gedcom', 'export_json', 'export_sqlite', 'export_full_backup', 'export_research_report', 'export_family_book', 'sync_export', 'vault_download', 'museum_export'];
     return ($isWrite && !in_array($action, $allowedWrites, true)) || (!$isWrite && in_array($action, $blockedReads, true)) || in_array($action, ['switch_database', 'delete_database', 'clone_database'], true);
 }
 

@@ -45,7 +45,8 @@ function my_list_clean_definition(array $d, string $source): array
             'type' => $c['type'], 'options' => array_values(array_filter(array_map(static fn($o) => mb_substr(safe_text($o), 0, 60), is_array($c['options'] ?? null) ? $c['options'] : [])))];
     }
     return ['match' => ($d['match'] ?? '') === 'any' ? 'any' : 'all', 'rules' => $rules, 'columns' => $columns, 'custom' => $custom,
-        'sort' => in_array($d['sort'] ?? '', ['date', 'name', 'place'], true) ? $d['sort'] : ($source === 'events' ? 'date' : 'name')];
+        'sort' => in_array($d['sort'] ?? '', ['date', 'name', 'place'], true) ? $d['sort'] : ($source === 'events' ? 'date' : 'name'),
+        'in_lists' => !empty($d['in_lists'])]; // aussi affichée dans l'onglet Listes
 }
 
 function save_my_list(PDO $pdo, array $data): array
@@ -292,3 +293,74 @@ function my_list_free_rows(PDO $pdo, array $list, array $def): array
     return ['list' => $list, 'rows' => $rows, 'columns' => [], 'truncated' => false];
 }
 
+
+/**
+ * Partage d'une liste : un fichier que n'importe quel utilisateur de LCNDA importe (Maintenance → Mes listes).
+ * Les types d'événements et les étiquettes y sont désignés par leur nom (leurs numéros changent d'une base à l'autre) ;
+ * pour une liste écrite à la main, les lignes partent avec, sans les liens vers les fiches (propres à chaque base).
+ */
+function export_my_list(PDO $pdo, int $id): array
+{
+    $s = $pdo->prepare('SELECT * FROM custom_lists WHERE id=?'); $s->execute([$id]);
+    $list = $s->fetch();
+    if (!$list) { throw new RuntimeException('Liste introuvable.'); }
+    $def = my_list_clean_definition(json_decode((string) $list['definition_json'], true) ?: [], (string) $list['source']);
+    $types = []; foreach ($pdo->query('SELECT id, label, gedcom_tag FROM event_types') as $t) { $types[(int) $t['id']] = ['tag' => (string) $t['gedcom_tag'], 'label' => (string) $t['label']]; }
+    $labels = []; foreach ($pdo->query('SELECT id, name, color FROM labels') as $l) { $labels[(int) $l['id']] = ['name' => (string) $l['name'], 'color' => (string) $l['color']]; }
+    foreach ($def['rules'] as &$r) {
+        if ($r['field'] === 'event_type') { $r['values'] = array_values(array_filter(array_map(static fn($v) => $types[$v] ?? null, $r['values']))); }
+        if ($r['field'] === 'label') { $r['values'] = array_values(array_filter(array_map(static fn($v) => $labels[$v] ?? null, $r['values']))); }
+    }
+    unset($r);
+    $rows = [];
+    if ($list['source'] === 'free') {
+        $personKeys = array_column(array_filter($def['custom'], static fn($c) => $c['type'] === 'person'), 'key');
+        $q = $pdo->prepare("SELECT data_json FROM custom_list_rows WHERE list_id=? AND row_key LIKE 'f:%' ORDER BY CAST(substr(row_key,3) AS INTEGER)"); $q->execute([$id]);
+        foreach ($q->fetchAll(PDO::FETCH_COLUMN) as $json) { $rows[] = array_diff_key(json_decode((string) $json, true) ?: [], array_flip($personKeys)); }
+    }
+    return ['type' => 'lcnda-liste', 'version' => 1, 'name' => $list['name'], 'icon' => $list['icon'], 'description' => $list['description'], 'source' => $list['source'], 'definition' => $def, 'rows' => $rows];
+}
+
+function import_my_list(PDO $pdo, array $data): array
+{
+    $pkg = json_decode((string) ($data['json'] ?? ''), true);
+    if (!is_array($pkg) || ($pkg['type'] ?? '') !== 'lcnda-liste' || !is_array($pkg['definition'] ?? null)) { throw new RuntimeException('Ce fichier n’est pas une liste LCNDA.'); }
+    $def = $pkg['definition'];
+    $typeByTag = []; $typeByLabel = [];
+    foreach ($pdo->query('SELECT id, label, gedcom_tag FROM event_types') as $t) { if ($t['gedcom_tag'] !== '' && $t['gedcom_tag'] !== null) { $typeByTag[(string) $t['gedcom_tag']] ??= (int) $t['id']; } $typeByLabel[mb_strtolower((string) $t['label'])] = (int) $t['id']; }
+    $missing = [];
+    foreach (is_array($def['rules'] ?? null) ? $def['rules'] : [] as $i => $r) {
+        if (!is_array($r)) { continue; }
+        $ids = [];
+        foreach (is_array($r['values'] ?? null) ? $r['values'] : [] as $v) {
+            if (!is_array($v)) { continue; }
+            if (($r['field'] ?? '') === 'event_type') {
+                $id = $typeByLabel[mb_strtolower((string) ($v['label'] ?? ''))] ?? ($typeByTag[(string) ($v['tag'] ?? '')] ?? 0);
+                if ($id) { $ids[] = $id; } else { $missing[] = 'type d’événement « ' . ($v['label'] ?? '?') . ' »'; }
+            }
+            if (($r['field'] ?? '') === 'label') { // étiquette absente : elle est créée
+                $name = mb_substr(safe_text($v['name'] ?? ''), 0, 80);
+                if ($name === '') { continue; }
+                $q = $pdo->prepare('SELECT id FROM labels WHERE name=? COLLATE NOCASE'); $q->execute([$name]);
+                $id = (int) $q->fetchColumn();
+                if (!$id) { $pdo->prepare('INSERT INTO labels(name, color) VALUES(?,?)')->execute([$name, preg_match('/^#[0-9a-f]{6}$/i', (string) ($v['color'] ?? '')) ? $v['color'] : '#0066cc']); $id = (int) $pdo->lastInsertId(); }
+                $ids[] = $id;
+            }
+        }
+        $def['rules'][$i]['values'] = $ids;
+    }
+    $saved = save_my_list($pdo, ['name' => (string) ($pkg['name'] ?? 'Liste importée'), 'icon' => (string) ($pkg['icon'] ?? '📋'), 'description' => (string) ($pkg['description'] ?? ''), 'source' => (string) ($pkg['source'] ?? 'persons'), 'definition' => $def]);
+    $count = 0;
+    if (($pkg['source'] ?? '') === 'free') {
+        $s = $pdo->prepare('SELECT definition_json FROM custom_lists WHERE id=?'); $s->execute([$saved['id']]);
+        $keys = array_column(json_decode((string) $s->fetchColumn(), true)['custom'] ?? [], 'key');
+        $ins = $pdo->prepare('INSERT INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,1,?)');
+        foreach (array_slice(is_array($pkg['rows'] ?? null) ? $pkg['rows'] : [], 0, 5000) as $row) {
+            if (!is_array($row)) { continue; }
+            $values = [];
+            foreach ($keys as $k) { if (isset($row[$k]) && is_scalar($row[$k])) { $values[$k] = mb_substr(safe_text((string) $row[$k]), 0, 2000); } }
+            $ins->execute([$saved['id'], 'f:' . (++$count), json_encode($values, JSON_UNESCAPED_UNICODE)]);
+        }
+    }
+    return ['id' => $saved['id'], 'rows' => $count, 'missing' => array_values(array_unique($missing))];
+}

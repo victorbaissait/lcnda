@@ -25,7 +25,8 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=198">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=9">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=10">
+    <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
 <body>
@@ -1066,18 +1067,21 @@ header('Cache-Control: no-store, private');
                 <p class="lightbox-tag-hint" id="lightbox-signature-hint" hidden>Tracez la zone de la signature, puis choisissez la personne à laquelle elle appartient.</p>
                 <div id="lightbox-signature-form" hidden></div>
             </div>
-            <div class="lightbox-actions"><button class="button secondary" id="compare-media">Comparer</button><button class="button secondary" id="rotate-media-left">Rotation gauche</button><button class="button secondary" id="rotate-media-right">Rotation droite</button><button class="button secondary" id="assist-transcription">Structurer</button><button class="button" id="save-transcription">Enregistrer la transcription</button><button class="button secondary" id="save-media-meta">Enregistrer le média</button><button class="button secondary" id="set-portrait">Utiliser comme portrait</button><button class="button danger" id="delete-media">Supprimer ce média</button></div>
+            <div class="lightbox-actions"><button class="button secondary" id="compare-media">Comparer</button><button class="button secondary" id="rotate-media-left">Rotation gauche</button><button class="button secondary" id="rotate-media-right">Rotation droite</button><button class="button secondary" id="retouch-media" hidden>🎚️ Retoucher</button><button class="button secondary" id="assist-transcription">Structurer</button><button class="button" id="save-transcription">Enregistrer la transcription</button><button class="button secondary" id="save-media-meta">Enregistrer le média</button><button class="button secondary" id="set-portrait">Utiliser comme portrait</button><button class="button danger" id="delete-media">Supprimer ce média</button></div>
             <p class="keyboard-help">Touches ← et → pour changer de document. Molette sur l’image : zoomer.</p>
         </aside>
     </div>
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=278" defer></script>
+<script src="assets/js/app.js?v=279" defer></script>
 <script src="assets/js/heritage.js?v=5" defer></script>
 <script src="assets/js/heritage-tools.js?v=6" defer></script>
 <script src="assets/js/heritage-links.js?v=3" defer></script>
-<script src="assets/js/heritage-more.js?v=9" defer></script>
+<script src="assets/js/heritage-more.js?v=10" defer></script>
+<script src="assets/js/heritage-studio.js?v=1" defer></script>
+<script src="assets/js/museum-viewer.js?v=1" defer></script>
+<script src="assets/js/heritage-museum.js?v=1" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

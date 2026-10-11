@@ -1,0 +1,128 @@
+'use strict';
+process.env.GENEALOGY_SKIP_REFERENCE = process.env.GENEALOGY_SKIP_REFERENCE || '1';
+/**
+ * Test de lib/museum.php, lib/studio.php et du partage des listes (lib/my_lists.php) :   npm run test:studio
+ * Musée (salles, œuvres, ordre, livre d'or, paquet de partage, site web), listes partagées, original d'une photo retouchée.
+ */
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+const { spawnSync } = require('node:child_process');
+const { findPhp, devBundledPhp, phpRuntimeArgs } = require('../electron/php-server');
+
+const appRoot = path.resolve(__dirname, '..');
+const phpPath = findPhp([devBundledPhp()]);
+const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'carnet-studio-'));
+const code = String.raw`
+require 'lib/paths.php';
+(new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'))->exec(file_get_contents(APP_ROOT.'/data/schema.sql'));
+require 'lib/bootstrap.php';
+$pdo = db();
+$out = ['version' => (int) $pdo->query('PRAGMA user_version')->fetchColumn()];
+$pdo->exec("INSERT INTO persons(first_name,last_name) VALUES('Pierre','Dupont')");
+// Une vraie petite image dans media/
+$img = imagecreatetruecolor(40, 30); imagefill($img, 0, 0, imagecolorallocate($img, 200, 40, 40)); imagejpeg($img, MEDIA_DIR . '/portrait.jpg');
+$pdo->exec("INSERT INTO media(title,media_type,filename,thumbnail,date_text) VALUES('Portrait de Pierre','image','portrait.jpg','portrait.jpg','1890')");
+$pdo->exec("INSERT INTO media_links(media_id,entity_type,entity_id,position) VALUES(1,'person',1,1)");
+$pdo->exec("INSERT INTO family_objects(title,kind) VALUES('Montre à gousset','montre')");
+$pdo->exec("INSERT INTO family_collection_media(collection_type,collection_id,media_id) VALUES('family_object',1,1)");
+
+// Musée : créé tout seul avec une salle
+$m = museum_get($pdo, 0);
+$out['museum'] = [$m['title'], count($m['rooms']), $m['imported']];
+$room = $m['rooms'][0]['id'];
+$a = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'photo', 'wall' => 'left', 'media_id' => 1, 'title' => 'Pierre', 'cartel' => "1890\nPhotographie", 'in_tour' => 1, 'settings' => ['scale' => 1.4, 'model' => 'piano', 'bad' => 'x']]);
+$b = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'object', 'object_id' => 1, 'title' => 'Montre', 'in_tour' => 1]);
+$c = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'seat', 'wall' => 'back', 'settings' => ['model' => 'bench', 'px' => 0.5, 'pz' => -0.5]]);
+$d = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'text', 'wall' => 'nimporte', 'title' => 'Bienvenue', 'description' => 'Texte </script><b>']);
+$m = museum_get($pdo, 0);
+$it = $m['rooms'][0]['items'];
+$out['items'] = array_map(fn($i) => [$i['kind'], $i['wall'], $i['image']], $it);
+$out['settings'] = [$it[0]['settings'], $it[2]['settings']];
+museum_reorder($pdo, ['what' => 'items', 'ids' => [$d['id'], $c['id'], $b['id'], $a['id']]]);
+$out['order'] = array_column(museum_get($pdo, 0)['rooms'][0]['items'], 'kind');
+$r2 = museum_save_room($pdo, ['name' => 'Salle des objets', 'settings' => ['size' => 'large', 'floor' => 'wood', 'wall' => '#f0e0d0', 'size2' => 'x']]);
+museum_reorder($pdo, ['what' => 'rooms', 'ids' => [$r2['id'], $room]]);
+$out['rooms'] = array_map(fn($r) => [$r['name'], $r['settings']], museum_get($pdo, 0)['rooms']);
+$out['sign'] = count(museum_sign($pdo, ['name' => 'Tante Lucie', 'message' => 'Très émouvant !'])['guestbook']);
+try { museum_sign($pdo, ['name' => '', 'message' => '']); $out['sign_empty'] = 'accepté'; } catch (Throwable $e) { $out['sign_empty'] = 'refusé'; }
+$out['pick'] = [count(museum_pick($pdo, 'media', 'Pierre')), museum_pick($pdo, 'media', 'Dupont')[0]['person_name'] ?? null, museum_pick($pdo, 'objects', '')[0]['url'] ?? null];
+try { museum_delete($pdo, ['id' => $m['id']]); $out['own_delete'] = 'accepté'; } catch (Throwable $e) { $out['own_delete'] = 'refusé'; }
+
+// Un même fichier pour deux œuvres : en retirer une ne l'efface pas
+@mkdir(MEDIA_DIR . '/musee/1', 0775, true); file_put_contents(MEDIA_DIR . '/musee/1/x.mp3', 'son');
+$s1 = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'text', 'title' => 'A']); $s2 = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'text', 'title' => 'B']);
+$pdo->exec("UPDATE museum_items SET audio_file='musee/1/x.mp3' WHERE id IN ({$s1['id']},{$s2['id']})");
+museum_delete_item($pdo, ['id' => $s1['id']]); $gc1 = is_file(MEDIA_DIR . '/musee/1/x.mp3');
+museum_delete_item($pdo, ['id' => $s2['id']]); $out['gc'] = [$gc1, is_file(MEDIA_DIR . '/musee/1/x.mp3')];
+
+// Paquet de partage (fichier LCNDA) et site web
+$zip = new ZipArchive(); $zp = DATA_DIR . '/m.zip'; $zip->open($zp, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+$pkg = museum_package($pdo, $m['id'], 'lcnda', $zip); $zip->addFromString('musee.json', json_encode($pkg)); $zip->close();
+$z = new ZipArchive(); $z->open($zp);
+$out['package'] = [$pkg['type'], count($pkg['rooms']), $pkg['rooms'][1]['items'][3]['image'] ?? null, $z->locateName('fichiers/1.jpg') !== false, count($pkg['guestbook'])];
+$z->close();
+$zip = new ZipArchive(); $zip->open(DATA_DIR . '/s.zip', ZipArchive::CREATE | ZipArchive::OVERWRITE);
+$site = museum_package($pdo, $m['id'], 'site', $zip); $zip->close();
+$html = museum_site_html($site);
+$out['site'] = [str_contains($html, 'const THREE = {'), !str_contains($html, "\nexport {"), str_starts_with($site['rooms'][1]['items'][3]['image'], 'data:image/jpeg;base64,'), substr_count(strtolower($html), '</script') === 2, str_contains($html, 'LCNDA_MUSEUM_VIEWER.mount')];
+
+// Listes partagées : types d'événements et étiquettes désignés par leur nom
+$pdo->exec("INSERT INTO labels(name,color) VALUES('Salon 2026','#cc0000')");
+$tag = (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='MARR' LIMIT 1")->fetchColumn();
+$l = save_my_list($pdo, ['name' => 'Mariages', 'icon' => '💍', 'source' => 'events', 'definition' => ['rules' => [['field' => 'event_type', 'values' => [$tag]], ['field' => 'label', 'values' => [1]]], 'in_lists' => true, 'custom' => [['label' => 'Fait', 'type' => 'checkbox']]]]);
+$exp = export_my_list($pdo, $l['id']);
+$out['list_export'] = [$exp['type'], $exp['definition']['rules'][0]['values'][0]['tag'] ?? null, $exp['definition']['rules'][1]['values'][0]['name'] ?? null, $exp['definition']['in_lists']];
+$pdo->exec("DELETE FROM labels");
+$imp = import_my_list($pdo, ['json' => json_encode($exp)]);
+$def = array_values(array_filter(my_lists($pdo), fn($x) => $x['id'] === $imp['id']))[0]['definition'];
+$out['list_import'] = [$def['rules'][0]['values'] === [$tag], (string) $pdo->query('SELECT name FROM labels')->fetchColumn(), $def['in_lists']];
+$f = save_my_list($pdo, ['name' => 'Stands', 'source' => 'free', 'definition' => ['custom' => [['label' => 'Stand', 'type' => 'text'], ['label' => 'Qui', 'type' => 'person']]]]);
+$fk = array_values(array_filter(my_lists($pdo), fn($x) => $x['id'] === $f['id']))[0]['definition']['custom'];
+$k = save_my_list_row($pdo, ['list_id' => $f['id'], 'row_key' => 'f:new'])['row_key'];
+save_my_list_row($pdo, ['list_id' => $f['id'], 'row_key' => $k, 'field' => $fk[0]['key'], 'value' => 'Cercle du Nord']);
+save_my_list_row($pdo, ['list_id' => $f['id'], 'row_key' => $k, 'field' => $fk[1]['key'], 'value' => '1']);
+$fe = export_my_list($pdo, $f['id']);
+$fi = import_my_list($pdo, ['json' => json_encode($fe)]);
+$out['free_share'] = [$fi['rows'], array_values(my_list_rows($pdo, $fi['id'])['rows'][0]['values'])];
+try { import_my_list($pdo, ['json' => '{"type":"autre"}']); $out['list_bad'] = 'accepté'; } catch (Throwable $e) { $out['list_bad'] = 'refusé'; }
+
+// Photo retouchée : l'original mis de côté, puis remis
+@mkdir(MEDIA_DIR . '/originaux', 0775, true);
+rename(MEDIA_DIR . '/portrait.jpg', MEDIA_DIR . '/originaux/portrait.jpg');
+copy(MEDIA_DIR . '/originaux/portrait.jpg', MEDIA_DIR . '/retouche.jpg');
+$pdo->exec("UPDATE media SET filename='retouche.jpg', thumbnail='retouche.jpg' WHERE id=1");
+$pdo->exec("INSERT INTO media_originals(media_id, filename) VALUES(1,'portrait.jpg')");
+$out['has_original'] = retouch_has_original($pdo, 1);
+$back = retouch_restore_original($pdo, ['media_id' => 1]);
+$out['restore'] = [$back['filename'], is_file(MEDIA_DIR . '/portrait.jpg'), is_file(MEDIA_DIR . '/retouche.jpg'), retouch_has_original($pdo, 1)];
+echo json_encode($out, JSON_UNESCAPED_UNICODE);
+`;
+const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media') } });
+if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
+const out = JSON.parse(r.stdout.trim().split('\n').pop());
+const checks = [
+  ['structure à jour (n°16)', () => assert.equal(out.version, 16)],
+  ['musée créé tout seul avec une première salle', () => assert.deepEqual(out.museum, ['Musée de la famille', 1, 0])],
+  ['œuvres : photo de la base, objet (photo de l’objet), siège et texte au milieu ou au mur', () => assert.deepEqual(out.items, [['photo', 'left', 'media/portrait.jpg'], ['object', 'center', 'media/portrait.jpg'], ['seat', 'center', ''], ['text', 'back', '']])],
+  ['réglages filtrés (taille bornée, modèle connu, position)', () => assert.deepEqual(out.settings, [{scale: 1.4, model: 'piano'}, {model: 'bench', px: 0.5, pz: -0.5}])],
+  ['ordre des œuvres changé', () => assert.deepEqual(out.order, ['text', 'seat', 'object', 'photo'])],
+  ['salles : ordre et réglages', () => assert.deepEqual(out.rooms, [['Salle des objets', {size: 'large', wall: '#f0e0d0', floor: 'wood'}], ['Les visages de la famille', {size: 'medium', wall: '#ffffff', floor: 'light'}]])],
+  ['livre d’or signé, message vide refusé', () => { assert.equal(out.sign, 1); assert.equal(out.sign_empty, 'refusé'); }],
+  ['choix des photos (par titre ou par personne) et des objets', () => assert.deepEqual(out.pick, [1, 'Pierre Dupont', 'media/portrait.jpg'])],
+  ['fichier partagé par deux œuvres : effacé seulement quand plus rien ne s’en sert', () => assert.deepEqual(out.gc, [true, false])],
+  ['son propre musée ne se supprime pas', () => assert.equal(out.own_delete, 'refusé')],
+  ['fichier LCNDA : salles, images, livre d’or', () => assert.deepEqual(out.package, ['lcnda-musee', 2, 'fichiers/1.jpg', true, 1])],
+  ['site web : Three.js dans la page, images incluses, pas de </script> parasite', () => assert.deepEqual(out.site, [true, true, true, true, true])],
+  ['liste partagée : types d’événements et étiquettes par leur nom', () => assert.deepEqual(out.list_export, ['lcnda-liste', 'MARR', 'Salon 2026', true])],
+  ['liste importée : type retrouvé, étiquette recréée', () => assert.deepEqual(out.list_import, [true, 'Salon 2026', true])],
+  ['liste écrite à la main partagée avec ses lignes, sans lien vers les fiches', () => assert.deepEqual(out.free_share, [1, ['Cercle du Nord']])],
+  ['fichier qui n’est pas une liste refusé', () => assert.equal(out.list_bad, 'refusé')],
+  ['photo retouchée : l’original est remis, la retouche effacée', () => { assert.equal(out.has_original, true); assert.deepEqual(out.restore, ['portrait.jpg', true, false, false]); }],
+];
+let failed = 0;
+for (const [name, fn] of checks) { try { fn(); console.log('  ✓ ' + name); } catch (e) { failed++; console.log('  ✗ ' + name + '\n      ' + e.message); } }
+fs.rmSync(dir, { recursive: true, force: true });
+console.log(`\n${checks.length - failed} vérifications réussies${failed ? `, ${failed} échec(s)` : ''}.`);
+process.exitCode = failed ? 1 : 0;

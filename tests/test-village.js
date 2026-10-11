@@ -51,7 +51,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°15)', () => assert.equal(out.version, 15)],
+  ['structure à jour (n°16)', () => assert.equal(out.version, 16)],
   ['communes : hameaux du même code regroupés, la plus peuplée de la famille d’abord', () => assert.deepEqual(out.list[0], ['87187', 'Saint-Yrieix', 4, 2])],
   ['commune sans code INSEE gardée (nom + département)', () => assert.ok(out.list.some(v => v[0] === 'n:lieu-sans-code|corrèze'))],
   ['recherche sans accents ni majuscules', () => assert.deepEqual(out.search, ['87187'])],

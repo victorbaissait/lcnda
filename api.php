@@ -168,6 +168,15 @@ try {
     if ($isWrite && $action === 'sync_apply') {
         sync_apply($pdo, $payload);
     }
+    if ($isWrite && $action === 'museum_upload') {
+        museum_upload($pdo, $_FILES['file'] ?? null, $_POST);
+    }
+    if ($isWrite && $action === 'museum_import') {
+        museum_import($pdo, $_FILES['file'] ?? null);
+    }
+    if ($isWrite && $action === 'retouch_media') {
+        retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
+    }
     if ($isWrite && $action === 'htr_upload_model') {
         htr_upload_model($_FILES['file'] ?? null, safe_text($_POST['target'] ?? ''));
     }
@@ -252,6 +261,12 @@ try {
         'htr_setup_status' => json_response(htr_setup_status()),
         'my_lists' => json_response(['lists' => my_lists($pdo), 'event_types' => $pdo->query('SELECT id, label, gedcom_tag FROM event_types ORDER BY label COLLATE NOCASE')->fetchAll(), 'labels' => $pdo->query('SELECT id, name, color FROM labels ORDER BY name COLLATE NOCASE')->fetchAll(), 'columns' => ['events' => LIST_EVENT_COLUMNS, 'persons' => LIST_PERSON_COLUMNS]]),
         'my_list_rows' => json_response(my_list_rows($pdo, safe_int($_GET['id'] ?? 0))),
+        'export_my_list' => json_response(export_my_list($pdo, safe_int($_GET['id'] ?? 0))),
+        'museums' => json_response(['museums' => museums_list($pdo)]),
+        'museum' => json_response(['museum' => museum_get($pdo, safe_int($_GET['id'] ?? 0))]),
+        'museum_pick' => json_response(['items' => museum_pick($pdo, (string) ($_GET['what'] ?? 'media'), mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
+        'museum_export' => museum_export($pdo, safe_int($_GET['id'] ?? 0), (string) ($_GET['format'] ?? 'lcnda')),
+        'media_retouch_info' => json_response(['has_original' => retouch_has_original($pdo, safe_int($_GET['id'] ?? 0))]),
         'recent_acts' => json_response(['acts' => recent_acts($pdo)]),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
         'historical_context' => json_response(historical_context($pdo)),
@@ -8895,6 +8910,17 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_my_list' => save_my_list($pdo,$data),
             'delete_my_list' => delete_my_list($pdo,$data),
             'save_my_list_row' => save_my_list_row($pdo,$data),
+            'import_my_list' => import_my_list($pdo,$data),
+            'retouch_restore_original' => retouch_restore_original($pdo,$data),
+            'save_museum' => museum_save($pdo,$data),
+            'save_museum_room' => museum_save_room($pdo,$data),
+            'delete_museum_room' => museum_delete_room($pdo,$data),
+            'museum_reorder' => museum_reorder($pdo,$data),
+            'save_museum_item' => museum_save_item($pdo,$data),
+            'delete_museum_item' => museum_delete_item($pdo,$data),
+            'museum_sign' => museum_sign($pdo,$data),
+            'delete_museum_guestbook' => museum_delete_guestbook($pdo,$data),
+            'delete_museum' => museum_delete($pdo,$data),
             'create_act_request' => create_act_request($pdo,$data),
             'act_open_reminder' => act_open_reminder($pdo,$data),
             'vault_delete' => vault_delete($pdo,$data),

@@ -1,0 +1,41 @@
+/* 🏛️ Musée de famille : visite 3D (app et site web exporté), même esprit que la pièce d'archives : blanc, noir, épuré. */
+.lcnda-museum { position:relative; width:100%; height:100%; overflow:hidden; background:#fff; color:#111; font-family:Georgia, 'Times New Roman', serif; outline:none; }
+.lcnda-museum .lm-canvas, .lcnda-museum .lm-canvas canvas { position:absolute; inset:0; width:100%; height:100%; display:block; outline:none; }
+.lcnda-museum button, .lcnda-museum select { font:inherit; font-size:14px; }
+.lm-top { position:absolute; left:0; right:0; top:0; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding:12px 14px; pointer-events:none; flex-wrap:wrap; }
+.lm-top > * { pointer-events:auto; }
+.lm-title { display:grid; gap:2px; background:#fff; border:2px solid #111; padding:7px 12px; max-width:min(520px, 100%); }
+.lm-title strong { font-size:18px; letter-spacing:.02em; }
+.lm-title span { font-size:13px; color:#555; }
+.lm-actions { display:flex; flex-wrap:wrap; gap:6px; justify-content:flex-end; }
+.lm-actions button, .lm-actions select, .lm-tourbar button, .lm-book button[type=submit] { background:#fff; color:#111; border:2px solid #111; padding:6px 11px; cursor:pointer; border-radius:0; }
+.lm-actions button:hover, .lm-tourbar button:hover, .lm-book button[type=submit]:hover { background:#111; color:#fff; }
+.lm-actions select { max-width:240px; }
+.lm-help { position:absolute; left:14px; bottom:10px; font-size:12px; color:#555; background:rgba(255,255,255,.85); padding:4px 8px; pointer-events:none; }
+.lm-caption { position:absolute; left:50%; bottom:62px; transform:translateX(-50%); width:min(720px, calc(100% - 28px)); background:#fff; border:2px solid #111; padding:12px 16px; box-shadow:6px 6px 0 rgba(0,0,0,.12); max-height:40%; overflow:auto; }
+.lm-caption strong { display:block; font-size:19px; margin-bottom:4px; }
+.lm-caption p { margin:4px 0 0; font-size:15px; line-height:1.45; }
+.lm-caption .lm-kicker { display:block; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#666; }
+.lm-cartel { font-style:italic; color:#444; }
+.lm-tourbar { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); display:flex; gap:6px; align-items:center; background:#fff; border:2px solid #111; padding:5px 8px; }
+.lm-tourbar span { font-size:13px; padding:0 6px; color:#555; }
+.lm-overlay { position:absolute; inset:0; background:rgba(255,255,255,.88); display:flex; align-items:center; justify-content:center; padding:20px; z-index:3; }
+.lm-overlay[hidden], .lm-caption[hidden], .lm-tourbar[hidden] { display:none; }
+.lm-sheet { position:relative; background:#fff; border:2px solid #111; max-width:min(1100px, 100%); max-height:100%; overflow:auto; display:flex; gap:22px; padding:22px; box-shadow:10px 10px 0 rgba(0,0,0,.1); }
+.lm-sheet img { max-width:min(60vw, 640px); max-height:calc(100vh - 120px); object-fit:contain; border:1px solid #111; align-self:flex-start; }
+.lm-sheet-text { min-width:240px; max-width:420px; }
+.lm-sheet h3 { margin:0 0 8px; font-size:24px; }
+.lm-sheet p { line-height:1.5; }
+.lm-sheet audio { width:100%; margin-top:10px; }
+.lm-close { position:absolute; right:8px; top:6px; background:none; border:0; font-size:28px; cursor:pointer; line-height:1; }
+.lm-book { display:block; width:min(620px, 100%); }
+.lm-book .lm-sheet-text { max-width:none; }
+.lm-book-list { max-height:40vh; overflow:auto; border-top:1px solid #111; border-bottom:1px solid #111; margin:10px 0; padding:4px 0; }
+.lm-book-list article { padding:10px 2px; border-bottom:1px dotted #bbb; }
+.lm-book-list article p { margin:0 0 4px; font-style:italic; }
+.lm-book-list small, .lm-muted { color:#666; }
+.lm-book form { display:grid; gap:8px; }
+.lm-book label { display:grid; gap:3px; font-size:14px; }
+.lm-book input, .lm-book textarea { font:inherit; border:1px solid #111; padding:6px 8px; }
+.lm-empty { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:20px; }
+@media (max-width:700px) { .lm-sheet { flex-direction:column; } .lm-sheet img { max-width:100%; } .lm-help { display:none; } .lm-title strong { font-size:15px; } }

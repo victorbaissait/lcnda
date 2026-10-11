@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 15;
+const SCHEMA_VERSION = 16;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -36,6 +36,7 @@ function migration_steps(): array
         13 => 'schema_v13',
         14 => 'schema_v14',
         15 => 'schema_v15',
+        16 => 'schema_v16',
     ];
 }
 
@@ -1384,3 +1385,60 @@ function schema_v15(PDO $pdo): void
     )");
 }
 
+
+/** Retouche des photos (l'original est gardé) et musée de famille en 3D (pièce d'archives). */
+function schema_v16(PDO $pdo): void
+{
+    // Photo retouchée : l'original est rangé dans media/originaux/ pour pouvoir y revenir
+    $pdo->exec("CREATE TABLE IF NOT EXISTS media_originals (
+        media_id INTEGER PRIMARY KEY REFERENCES media(id) ON DELETE CASCADE,
+        filename TEXT NOT NULL,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS museums (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        subtitle TEXT NOT NULL DEFAULT '',
+        intro TEXT NOT NULL DEFAULT '',
+        author TEXT NOT NULL DEFAULT '',
+        imported INTEGER NOT NULL DEFAULT 0,
+        settings_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS museum_rooms (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        museum_id INTEGER NOT NULL REFERENCES museums(id) ON DELETE CASCADE,
+        position INTEGER NOT NULL DEFAULT 0,
+        name TEXT NOT NULL DEFAULT '',
+        intro TEXT NOT NULL DEFAULT '',
+        audio_file TEXT NOT NULL DEFAULT '',
+        settings_json TEXT NOT NULL DEFAULT '{}'
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_museum_rooms ON museum_rooms(museum_id, position)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS museum_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        room_id INTEGER NOT NULL REFERENCES museum_rooms(id) ON DELETE CASCADE,
+        position INTEGER NOT NULL DEFAULT 0,
+        wall TEXT NOT NULL DEFAULT 'back',
+        kind TEXT NOT NULL DEFAULT 'photo',
+        media_id INTEGER REFERENCES media(id) ON DELETE SET NULL,
+        object_id INTEGER REFERENCES family_objects(id) ON DELETE SET NULL,
+        person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        file TEXT NOT NULL DEFAULT '',
+        title TEXT NOT NULL DEFAULT '',
+        cartel TEXT NOT NULL DEFAULT '',
+        description TEXT NOT NULL DEFAULT '',
+        audio_file TEXT NOT NULL DEFAULT '',
+        in_tour INTEGER NOT NULL DEFAULT 1,
+        settings_json TEXT NOT NULL DEFAULT '{}'
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_museum_items ON museum_items(room_id, position)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS museum_guestbook (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        museum_id INTEGER NOT NULL REFERENCES museums(id) ON DELETE CASCADE,
+        name TEXT NOT NULL DEFAULT '',
+        message TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+}

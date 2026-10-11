@@ -448,7 +448,21 @@
         {name: 'Témoignage enregistré', icon: '🎙️', description: 'Souvenirs racontés par un proche.', repeatable: 1, fields: [['person', 'Raconté par'], ['date', 'Enregistré le'], ['media', 'Enregistrement (son ou vidéo)'], ['longtext', 'Résumé, transcription'], ['person_info', 'Naissance (date et lieu)']]},
         {name: 'Bloc vide', icon: '🧩', description: '', repeatable: 1, fields: [['text', 'Titre']]},
     ];
-    const newField = (type, label) => ({key: 'f' + Math.random().toString(36).slice(2, 8), type, label: label || (type === 'person_info' ? INFOS[0][1] : typeInfo(type)[2]), help: '', options: type === 'select' ? ['Choix 1', 'Choix 2'] : [], info: 'birth', from: 'self', accept: 'all', required: false});
+    /** Les blocs de l'application, à reprendre comme point de départ (champ : [type, intitulé, choix]). */
+    const APP_BLOCK_TEMPLATES = [
+        {name: 'Départs et émigration', icon: '🚢', description: 'Un départ : port, navire, destination, papiers.', repeatable: 1, fields: [['date', 'Date de départ'], ['place', 'Port de départ'], ['text', 'Navire'], ['text', 'Escales'], ['date', 'Date d’arrivée'], ['place', 'Destination'], ['select', 'Motif', ['travail', 'famille', 'guerre', 'religion', 'misère', 'aventure', 'autre']], ['person', 'Parti avec'], ['url', 'Liste de passagers (lien)'], ['date', 'Naturalisation'], ['media', 'Papiers d’émigration, photos'], ['longtext', 'Notes'], ['map', 'Trajet sur la carte']]},
+        {name: 'Enfant placé', icon: '🍼', description: 'Nourrice, hospice, Assistance publique.', repeatable: 1, fields: [['select', 'Placement', ['nourrice', 'hospice', 'Assistance publique', 'orphelinat', 'famille d’accueil', 'autre']], ['text', 'Institution'], ['text', 'Matricule'], ['date', 'Début'], ['date', 'Fin'], ['place', 'Lieu de placement'], ['person', 'Nourrice'], ['text', 'Salaire de la nourrice'], ['longtext', 'Devenir, notes'], ['media', 'Dossier, photos'], ['map', 'Carte']]},
+        {name: 'Blason et noblesse', icon: '🛡️', description: 'Armoiries, devise, titre.', repeatable: 0, fields: [['text', 'Titre'], ['longtext', 'Blasonnement'], ['text', 'Devise'], ['text', 'Titre de noblesse'], ['longtext', 'Origine'], ['media', 'Dessin du blason']]},
+        {name: 'Poilu 14-18', icon: '🪖', description: 'Régiments, blessures, journaux de marche.', repeatable: 1, fields: [['text', 'Régiment, unité'], ['date', 'Du'], ['date', 'Au'], ['text', 'Cote du journal de marche (JMO)'], ['url', 'Lien vers le JMO'], ['select', 'Événement', ['incorporation', 'blessure', 'citation', 'prisonnier', 'disparu', 'mort', 'démobilisation', 'autre']], ['place', 'Lieu'], ['longtext', 'Notes'], ['media', 'Photos, lettres'], ['map', 'Carte']]},
+        {name: 'Résistant', icon: '✊', description: 'Réseau, nom de guerre, arrestation, parcours.', repeatable: 0, fields: [['text', 'Nom de guerre'], ['text', 'Réseau'], ['text', 'Mouvement'], ['text', 'Grade'], ['date', 'Entré en résistance'], ['date', 'Sorti'], ['checkbox', 'Arrêté'], ['checkbox', 'Déporté'], ['checkbox', 'Mort'], ['text', 'Reconnaissance (médaille, homologation)'], ['text', 'Cote du dossier (SHD)'], ['person', 'Compagnon'], ['place', 'Cache'], ['longtext', 'Notes'], ['media', 'Documents'], ['map', 'Carte']]},
+        {name: 'Langues', icon: '🗣️', description: 'Langues parlées.', repeatable: 1, fields: [['text', 'Langue'], ['select', 'Certitude', ['certain', 'probable', 'supposé']], ['checkbox', 'Transmise aux enfants'], ['text', 'Note']]},
+        {name: 'Militaire (registre matricule)', icon: '🎖', description: 'Informations du registre matricule.', repeatable: 0, fields: [['text', 'Classe'], ['text', 'Numéro matricule'], ['text', 'Bureau de recrutement'], ['text', 'Taille'], ['text', 'Cheveux, yeux'], ['text', 'Degré d’instruction'], ['longtext', 'Détail des services'], ['longtext', 'Campagnes, blessures, décorations'], ['url', 'Lien vers le registre'], ['media', 'Page du registre']]},
+        {name: 'Sépulture', icon: '🪦', description: 'Tombe, cimetière, concession.', repeatable: 1, fields: [['place', 'Cimetière'], ['text', 'Carré, allée, numéro'], ['text', 'Concession'], ['longtext', 'Inscription'], ['person', 'Inhumé avec'], ['media', 'Photos de la tombe'], ['map', 'Carte']]},
+        {name: 'Objet de famille', icon: '🏺', description: 'Un objet transmis.', repeatable: 1, fields: [['text', 'Objet'], ['text', 'Nature'], ['longtext', 'Histoire'], ['person', 'Le garde aujourd’hui'], ['place', 'Où il se trouve'], ['media', 'Photos']]},
+        {name: 'Mémoire familiale', icon: '📖', description: 'Recettes, expressions, chansons, surnoms.', repeatable: 1, fields: [['select', 'Sorte', ['recette', 'expression', 'chanson', 'surnom', 'tradition', 'anecdote']], ['text', 'Titre'], ['longtext', 'Texte'], ['person', 'Transmis par'], ['media', 'Enregistrement, photo']]},
+        {name: 'Recensement', icon: '🏠', description: 'Une ligne de recensement.', repeatable: 1, fields: [['text', 'Année'], ['place', 'Commune'], ['text', 'Adresse, quartier'], ['text', 'Rang dans le ménage'], ['person_info', 'Métier'], ['url', 'Lien vers la page'], ['media', 'Page du recensement']]},
+    ];
+    const newField = (type, label, options) => ({key: 'f' + Math.random().toString(36).slice(2, 8), type, label: label || (type === 'person_info' ? INFOS[0][1] : typeInfo(type)[2]), help: '', options: type === 'select' ? (options?.length ? [...options] : ['Choix 1', 'Choix 2']) : [], info: type === 'person_info' && label === 'Métier' ? 'occupation' : 'birth', from: 'self', accept: 'all', required: false});
     let editorDef = null;
     ext.maintenance.block_editor = async token => {
         const data = await api('custom_blocks_defs');
@@ -461,7 +475,7 @@
                 ${b.description ? `<p>${esc(b.description)}</p>` : ''}<p class="muted">${b.fields.map(f => typeInfo(f.type)[1] + ' ' + esc(f.label)).join(' · ')}</p><p><small>📌 ${esc(DISPLAY[b.display] || '')}</small></p>
                 <div class="page-actions"><a class="button small secondary" href="api.php?action=export_custom_block_def&id=${b.id}" download>📤 Partager (fichier)</a></div></article>`).join('')}</div>` : empty('Aucun bloc pour l’instant : clique sur « + Nouveau bloc ».')}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-h-be-new]').addEventListener('click', () => chooseTemplate(token));
+        ws.querySelector('[data-h-be-new]').addEventListener('click', () => chooseTemplate(token, blocks));
         ws.querySelectorAll('[data-h-be-edit]').forEach(b => b.addEventListener('click', () => { const d = blocks.find(x => Number(x.id) === Number(b.dataset.hBeEdit)); editorDef = JSON.parse(JSON.stringify(d)); renderBlockEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-h-be-del]').forEach(b => b.addEventListener('click', async () => {
             const d = blocks.find(x => Number(x.id) === Number(b.dataset.hBeDel));
@@ -474,15 +488,25 @@
             catch (error) { toast(error.message, 'error'); }
         });
     };
-    function chooseTemplate(token) {
+    function chooseTemplate(token, mine = []) {
+        const btn = (t, attr, sub) => `<button type="button" class="h-template" ${attr}><span>${esc(t.icon || '🧩')}</span><strong>${esc(t.name)}</strong><small>${esc(sub)}</small></button>`;
         dialog({
-            eyebrow: 'NOUVEAU BLOC', title: 'Par quoi commencer ?',
-            body: `<div class="h-templates">${TEMPLATES.map((t, i) => `<button type="button" class="h-template" data-h-tpl="${i}"><span>${t.icon}</span><strong>${esc(t.name)}</strong><small>${esc(t.fields.map(f => f[1]).join(', '))}</small></button>`).join('')}</div>`,
-            onOpen: d => d.querySelectorAll('[data-h-tpl]').forEach(b => b.addEventListener('click', () => {
-                const t = TEMPLATES[Number(b.dataset.hTpl)];
-                editorDef = {id: 0, name: t.name === 'Bloc vide' ? '' : t.name, icon: t.icon, description: t.description, repeatable: t.repeatable, display: 'flag', labels: 1, author: ls('lcnda-act-requester'), fields: t.fields.map(([type, label]) => newField(type, label))};
-                d.close(); renderBlockEditor(++S().workspaceToken);
-            })),
+            eyebrow: 'NOUVEAU BLOC', title: 'Par quoi commencer ?', wide: true,
+            body: `<h4>Modèles</h4><div class="h-templates">${TEMPLATES.map((t, i) => btn(t, `data-h-tpl="${i}"`, t.fields.map(f => f[1]).join(', '))).join('')}</div>
+                <h4>Partir d’un bloc de l’app</h4><p class="muted">Ses champs sont repris dans un bloc à toi, que tu modifies comme tu veux (le bloc de l’app ne change pas).</p><div class="h-templates">${APP_BLOCK_TEMPLATES.map((t, i) => btn(t, `data-h-tpl-app="${i}"`, t.fields.map(f => f[1]).join(', '))).join('')}</div>
+                ${mine.length ? `<h4>Partir d’un de mes blocs</h4><div class="h-templates">${mine.map(b => btn(b, `data-h-tpl-mine="${b.id}"`, b.fields.map(f => fieldLabel(f, b.fields)).join(', '))).join('')}</div>` : ''}`,
+            onOpen: d => {
+                const start = (t, name, fields) => { editorDef = {id: 0, name, icon: t.icon, description: t.description || '', repeatable: t.repeatable ?? 1, display: 'flag', labels: 1, author: ls('lcnda-act-requester'), fields}; d.close(); renderBlockEditor(++S().workspaceToken); };
+                d.querySelectorAll('[data-h-tpl]').forEach(b => b.addEventListener('click', () => { const t = TEMPLATES[Number(b.dataset.hTpl)]; start(t, t.name === 'Bloc vide' ? '' : t.name, t.fields.map(([type, label]) => newField(type, label))); }));
+                d.querySelectorAll('[data-h-tpl-app]').forEach(b => b.addEventListener('click', () => { const t = APP_BLOCK_TEMPLATES[Number(b.dataset.hTplApp)]; start(t, t.name + ' (mon bloc)', t.fields.map(([type, label, options]) => newField(type, label, options))); }));
+                d.querySelectorAll('[data-h-tpl-mine]').forEach(b => b.addEventListener('click', () => {
+                    const t = mine.find(x => Number(x.id) === Number(b.dataset.hTplMine)); if (!t) return;
+                    // Nouvelles clés pour les champs, mais les « infos tirées d'une fiche » gardent leur lien vers le bon champ personne
+                    const keys = {}; const fields = JSON.parse(JSON.stringify(t.fields)).map(f => { const k = 'f' + Math.random().toString(36).slice(2, 8); keys[f.key] = k; return {...f, key: k}; });
+                    fields.forEach(f => { if (f.from && f.from !== 'self') f.from = keys[f.from] || 'self'; });
+                    start(t, 'Copie de ' + t.name, fields);
+                }));
+            },
         });
     }
     const EMOJIS = {
@@ -968,7 +992,7 @@
         ['Fiches', [
             ['Comment ajouter un enfant, un parent ou un conjoint ?', 'Ouvre la fiche, puis dans les blocs Parents, Conjoints ou Enfants clique sur « + ». Tu peux choisir une personne qui existe déjà ou en créer une nouvelle.'],
             ['Comment afficher un bloc (Départs, Poilu, Résistant…) sur une fiche ?', 'Fiche → Identité (crayon) → « Blocs à afficher sur la fiche » : coche le bloc. Pour l’avoir sur toutes les fiches : Maintenance → Apparence → « Blocs à afficher sur demande ».'],
-            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, ajoute les champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ».'],
+            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, d’un bloc de l’app (Départs, Poilu, Résistant, Sépulture…) ou d’un de tes blocs, ajoute ou enlève des champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ».'],
             ['Comment mettre une étiquette ?', 'Dans presque tous les formulaires, la ligne « 🏷️ Étiquettes » : clique sur « + », tape le début du nom ou crée une nouvelle étiquette. La liste de toutes les étiquettes est dans Listes → Étiquettes.'],
             ['Comment protéger une fiche contre les modifications ?', 'Le cadenas en haut de la fiche la verrouille : plus rien ne peut y être changé, même par le travail à deux.'],
         ]],
@@ -977,7 +1001,7 @@
             ['Peut-on poser une question en français ?', 'Oui : Recherche → « Poser une question », par exemple « Quels ancêtres étaient boulangers à Lille avant 1850 ? ». La recherche peut ensuite être enregistrée.'],
             ['Comment chercher un mot dans la page ?', '⌘F (Mac) ou Ctrl+F : les mots trouvés sont surlignés et comptés.'],
             ['Comment revenir à l’écran précédent ?', '⌘← et ⌘→ sur Mac, Alt+← et Alt+→ sur Windows et Linux. Tous les raccourcis : touche F1.'],
-            ['Comment faire ma propre liste (ex. tous les divorces entre 1850 et 1920) ?', 'Maintenance → Mes listes → « + Nouvelle liste » : choisis des événements, des personnes, ou des lignes que tu écris toi-même (stands d’un salon…) ; combine les critères, choisis les colonnes, ajoute tes colonnes à remplir (texte, menu, case à cocher, lien, personne de la base) et des étiquettes. Exportable en CSV et imprimable.'],
+            ['Comment faire ma propre liste (ex. tous les divorces entre 1850 et 1920) ?', 'Maintenance → Mes listes → « + Nouvelle liste » : choisis des événements, des personnes, ou des lignes que tu écris toi-même (stands d’un salon…) ; combine les critères, choisis les colonnes, ajoute tes colonnes à remplir (texte, menu, case à cocher, lien, personne de la base) et des étiquettes. Tu peux aussi partir d’une liste de l’app (Naissances, Mariages, SOSA…) ou d’une de tes listes, l’afficher dans l’onglet Listes, et la partager avec un proche (bouton « Partager », puis « Importer une liste… » chez lui). Exportable en CSV et imprimable.'],
             ['Où voir l’histoire d’un village ?', 'Listes → Fiche d’un village : les familles, les métiers, l’église, la population au fil des recensements et la carte de Cassini.'],
         ]],
         ['Lieux et cartes', [
@@ -987,6 +1011,7 @@
         ]],
         ['Documents', [
             ['Comment ajouter des photos ou des scans ?', 'Dans le bloc Médias de la fiche (bouton « + »). Pour un dossier entier qui se remplit tout seul (scanner, téléphone) : Maintenance → Dossier « Scans » surveillé.'],
+            ['Comment éclaircir ou retoucher une vieille photo ?', 'Ouvre la photo, puis « 🎚️ Retoucher » : luminosité, contraste, ombres, couleurs, noir et blanc, sépia, négatif et une courbe comme dans Photoshop. « Remplacer la photo » garde toujours l’original (« Revenir à l’original ») ; « Enregistrer une copie » ajoute la version retouchée à côté.'],
             ['Comment demander un acte récent à la mairie ?', 'Listes → Registre de courriers → « Actes à demander à la mairie » : la lettre est préparée, et un rappel peut être posé le jour où l’acte devient public.'],
             ['La reconnaissance d’écriture manuscrite ne marche pas ?', 'Elle demande un module à installer une seule fois : Maintenance → Reconnaissance d’écriture (HTR), bouton « Installer ».'],
         ]],
@@ -994,6 +1019,7 @@
             ['Comment faire une sauvegarde ?', 'Maintenance → Sécurité & comparaison : sauvegarde automatique programmée, et ⌘⇧B (Ctrl+Maj+B) pour une sauvegarde tout de suite. La sauvegarde complète avec tous les médias, protégée par un mot de passe si tu veux, est dans Maintenance → Export propre.'],
             ['Comment mettre une copie chez un cousin ?', 'Maintenance → Copie chez un cousin : la copie est chiffrée, il la garde sans pouvoir la lire et te la rend si ton ordinateur tombe en panne.'],
             ['Comment travailler à deux sur la même généalogie ?', 'Maintenance → Travail à deux : vous partez de la même base, puis vous vous échangez des paquets de modifications, acceptés ou refusés un par un.'],
+            ['Comment garder ou partager ma mise en page ?', 'Maintenance → Apparence → « Mes mises en page enregistrées » : donne un nom aux réglages actuels (design, menus affichés ou masqués et leur ordre, blocs, couleurs…), reviens-y en un clic, ou envoie le fichier à un autre utilisateur qui l’importe au même endroit.'],
             ['Comment montrer l’arbre sans risque qu’on le modifie ?', 'Le mode consultation (cadenas en haut à droite) bloque toute modification ; il se quitte avec ton mot de passe.'],
             ['Comment récupérer une fiche supprimée par erreur ?', 'Maintenance → Journal des modifications : une suppression se restaure avec tout ce qui était attaché. ⌘Z annule la dernière modification d’une fiche.'],
         ]],
@@ -1076,6 +1102,28 @@
             {name: 'Liste vide', icon: '📋', source: 'persons', definition: {match: 'all', rules: [], columns: ['name', 'birth', 'death'], custom: []}},
         ];
     };
+    /** Les listes de l'onglet Listes qui peuvent servir de point de départ. */
+    const APP_LIST_TEMPLATES = (types) => {
+        const tag = t => types.filter(x => x.gedcom_tag === t).map(x => Number(x.id));
+        const ev = (name, icon, t) => ({name, icon, source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tag(t)}], columns: ['date', 'who', 'place', 'age'], custom: []}});
+        return [
+            {name: 'Personnes', icon: '👤', source: 'persons', definition: {match: 'all', rules: [], columns: ['name', 'birth', 'birthplace', 'death', 'deathplace'], custom: []}},
+            {name: 'Événements', icon: '📅', source: 'events', definition: {match: 'all', rules: [], columns: ['date', 'type', 'who', 'place'], custom: []}},
+            ev('Naissances', '👶', 'BIRT'), ev('Mariages', '💍', 'MARR'), ev('Décès', '✝️', 'DEAT'), ev('Recensements', '🏠', 'CENS'),
+            {name: 'Métiers', icon: '🛠️', source: 'persons', definition: {match: 'all', rules: [], columns: ['name', 'occupation', 'birth', 'death'], custom: [], sort: 'name'}},
+            {name: 'SOSA (mes ancêtres)', icon: '🌳', source: 'persons', definition: {match: 'all', rules: [{field: 'sosa'}], columns: ['sosa', 'name', 'birth', 'birthplace', 'death'], custom: []}},
+            {name: 'Étiquettes', icon: '🏷️', source: 'persons', definition: {match: 'all', rules: [{field: 'label', values: []}], columns: ['name', 'labels', 'birth', 'death'], custom: []}},
+        ];
+    };
+    /** Les listes « Mes listes » affichées aussi dans l'onglet Listes (gardées en mémoire pour le menu de gauche). */
+    let pinnedLists = [];
+    async function refreshPinnedLists() {
+        try { const r = await api('my_lists'); pinnedLists = (r.lists || []).filter(l => l.definition?.in_lists).map(l => ({id: Number(l.id), name: l.name, icon: l.icon || '📋'})); } catch (_) { return; }
+        if (S().module === 'listes') A().renderSidebar?.();
+    }
+    ext.extraListTypes = () => pinnedLists.map(l => ['mylist:' + l.id, l.icon, l.name]);
+    ext.listHandler = type => String(type || '').startsWith('mylist:') ? (token => renderListView(token, Number(type.slice(7)), true)) : null;
+    setTimeout(refreshPinnedLists, 0);
     let listMeta = null, listEditor = null;
     ext.maintenance.my_lists = async token => {
         listMeta = await api('my_lists');
@@ -1084,18 +1132,43 @@
         if (listEditor) return renderListEditor(token);
         const lists = listMeta.lists || [];
         const ruleText = (l) => l.source === 'free' ? 'rien ne vient de la base : tu écris toi-même chaque ligne' : (l.definition.rules || []).map(r => (RULES[r.field]?.[l.source === 'events' ? 'ev' : 'pe'] || r.field) + (r.value ? ` « ${r.value} »` : '') + (r.from || r.to ? ` ${r.from || '…'}–${r.to || '…'}` : '')).join(l.definition.match === 'any' ? ' OU ' : ' ET ') || 'aucun critère';
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Mes listes', 'Des listes sur mesure : choisis ce que tu listes (des événements, comme les divorces, ou des personnes), combine des critères (période, lieu, nom, étiquette, ancêtres…), choisis les colonnes, et ajoute tes propres colonnes à remplir (texte, menu, case à cocher) — par exemple pour préparer un salon.', '<button type="button" class="button" data-h-list-new>+ Nouvelle liste</button>')}
-            ${lists.length ? `<div class="h-records">${lists.map(l => `<article class="h-record"><header><div><button type="button" class="table-link" data-h-list-open="${l.id}"><strong>${esc(l.icon)} ${esc(l.name)}</strong></button> <small class="muted">${{events: 'événements', persons: 'personnes', free: 'lignes écrites à la main'}[l.source] || ''}</small>${ext.labelChips(l.labels)}</div>${tools(`data-h-list-edit="${l.id}"`, `data-h-list-del="${l.id}"`, 'cette liste')}</header>
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Mes listes', 'Des listes sur mesure : choisis ce que tu listes (des événements, comme les divorces, ou des personnes), combine des critères (période, lieu, nom, étiquette, ancêtres…), choisis les colonnes, et ajoute tes propres colonnes à remplir (texte, menu, case à cocher) — par exemple pour préparer un salon.', '<button type="button" class="button" data-h-list-new>+ Nouvelle liste</button><button type="button" class="button secondary" data-h-list-import>Importer une liste…</button>')}
+            ${lists.length ? `<div class="h-records">${lists.map(l => `<article class="h-record"><header><div><button type="button" class="table-link" data-h-list-open="${l.id}"><strong>${esc(l.icon)} ${esc(l.name)}</strong></button> <small class="muted">${{events: 'événements', persons: 'personnes', free: 'lignes écrites à la main'}[l.source] || ''}${l.definition.in_lists ? ' · aussi dans l’onglet Listes' : ''}</small>${ext.labelChips(l.labels)}</div><span class="h-list-actions"><button type="button" class="link-button" data-h-list-share="${l.id}" title="Fichier à envoyer à un autre utilisateur de LCNDA">Partager</button>${tools(`data-h-list-edit="${l.id}"`, `data-h-list-del="${l.id}"`, 'cette liste')}</span></header>
                 ${l.description ? `<p>${esc(l.description)}</p>` : ''}<p class="muted">${esc(ruleText(l))}${(l.definition.custom || []).length ? ` · colonnes à remplir : ${esc(l.definition.custom.map(c => c.label).join(', '))}` : ''}</p></article>`).join('')}</div>` : empty('Aucune liste pour l’instant : clique sur « + Nouvelle liste ».')}</section>`;
         const ws = A().$('#workspace');
         ws.querySelector('[data-h-list-new]').addEventListener('click', () => dialog({
             eyebrow: 'NOUVELLE LISTE', title: 'Par quoi commencer ?',
-            body: `<div class="h-templates">${LIST_TEMPLATES(listMeta.event_types).map((t, i) => `<button type="button" class="h-template" data-h-ltpl="${i}"><span>${t.icon}</span><strong>${esc(t.name)}</strong><small>${{events: 'Des événements', persons: 'Des personnes', free: 'Des lignes écrites à la main'}[t.source]}</small></button>`).join('')}</div>`,
-            onOpen: d => d.querySelectorAll('[data-h-ltpl]').forEach(b => b.addEventListener('click', () => { listEditor = JSON.parse(JSON.stringify({id: 0, description: '', ...LIST_TEMPLATES(listMeta.event_types)[Number(b.dataset.hLtpl)]})); if (listEditor.name === 'Liste vide') listEditor.name = ''; d.close(); renderListEditor(++S().workspaceToken); })),
+            body: (() => {
+                const kind = t => ({events: 'Des événements', persons: 'Des personnes', free: 'Des lignes écrites à la main'}[t.source] || '');
+                const btn = (t, attr) => `<button type="button" class="h-template" ${attr}><span>${esc(t.icon || '📋')}</span><strong>${esc(t.name)}</strong><small>${kind(t)}</small></button>`;
+                return `<h4>Modèles</h4><div class="h-templates">${LIST_TEMPLATES(listMeta.event_types).map((t, i) => btn(t, `data-h-ltpl="${i}"`)).join('')}</div>
+                    <h4>Partir d’une liste de l’app</h4><div class="h-templates">${APP_LIST_TEMPLATES(listMeta.event_types).map((t, i) => btn(t, `data-h-lapp="${i}"`)).join('')}</div>
+                    ${lists.length ? `<h4>Partir d’une de mes listes</h4><p class="muted">Ses critères et ses colonnes sont repris ; la nouvelle liste démarre sans lignes.</p><div class="h-templates">${lists.map(l => btn(l, `data-h-lcopy="${l.id}"`)).join('')}</div>` : ''}`;
+            })(),
+            onOpen: d => {
+                const start = (t, name) => { listEditor = JSON.parse(JSON.stringify({id: 0, description: '', ...t, labels: []})); listEditor.name = name; d.close(); renderListEditor(++S().workspaceToken); };
+                d.querySelectorAll('[data-h-ltpl]').forEach(b => b.addEventListener('click', () => { const t = LIST_TEMPLATES(listMeta.event_types)[Number(b.dataset.hLtpl)]; start(t, t.name === 'Liste vide' ? '' : t.name); }));
+                d.querySelectorAll('[data-h-lapp]').forEach(b => b.addEventListener('click', () => { const t = APP_LIST_TEMPLATES(listMeta.event_types)[Number(b.dataset.hLapp)]; start(t, t.name + ' (ma version)'); }));
+                d.querySelectorAll('[data-h-lcopy]').forEach(b => b.addEventListener('click', () => {
+                    const l = lists.find(x => x.id === Number(b.dataset.hLcopy)); if (!l) return;
+                    const def = JSON.parse(JSON.stringify(l.definition)); def.in_lists = false; (def.custom || []).forEach(c => { delete c.key; });
+                    start({icon: l.icon, description: l.description, source: l.source, definition: def}, 'Copie de ' + l.name);
+                }));
+            },
+        }));
+        ws.querySelector('[data-h-list-import]').addEventListener('click', async () => {
+            const text = await ext.pickFile('.json,application/json');
+            if (text === null) return;
+            try { const r = await api('import_my_list', {}, {method: 'POST', body: {json: text}}); toast(`Liste importée${r.result.rows ? ` avec ${plural(r.result.rows, 'ligne', 'lignes')}` : ''}.${r.result.missing.length ? ` Absent de ta base : ${r.result.missing.join(', ')}.` : ''}`); S().hListOpen = r.result.id; refreshPinnedLists(); ext.maintenance.my_lists(++S().workspaceToken); }
+            catch (error) { toast(error.message, 'error'); }
+        });
+        ws.querySelectorAll('[data-h-list-share]').forEach(b => b.addEventListener('click', async () => {
+            try { const pkg = await api('export_my_list', {id: b.dataset.hListShare}); ext.downloadText(`liste-${String(pkg.name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase()}.lcnda-liste.json`, JSON.stringify(pkg, null, 1)); toast('Fichier prêt : l’autre personne l’importe dans Maintenance → Mes listes → « Importer une liste… ».'); }
+            catch (error) { toast(error.message, 'error'); }
         }));
         ws.querySelectorAll('[data-h-list-open]').forEach(b => b.addEventListener('click', () => { S().hListOpen = Number(b.dataset.hListOpen); ext.maintenance.my_lists(++S().workspaceToken); }));
         ws.querySelectorAll('[data-h-list-edit]').forEach(b => b.addEventListener('click', () => { const l = lists.find(x => x.id === Number(b.dataset.hListEdit)); listEditor = JSON.parse(JSON.stringify(l)); renderListEditor(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-h-list-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id: b.dataset.hListDel}}); ext.maintenance.my_lists(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-list-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id: b.dataset.hListDel}}); refreshPinnedLists(); ext.maintenance.my_lists(++S().workspaceToken); }));
     };
     function ruleRowHtml(r, i, source) {
         const meta = RULES[r.field] || {}; const k = source === 'events' ? 'ev' : 'pe';
@@ -1116,6 +1189,7 @@
             <section class="maintenance-panel"><h3>1. La liste</h3><div class="form-grid"><label>Nom<input data-le="name" value="${esc(L.name)}" placeholder="Divorces 1850–1920"></label><label>Icône<input data-le="icon" value="${esc(L.icon || '📋')}" maxlength="16" class="h-be-icon"></label>
                 <label class="span-2">Description <small>(facultatif)</small><input data-le="description" value="${esc(L.description || '')}"></label>
                 <fieldset class="span-2 h-be-display"><legend>Je liste</legend><label class="checkbox-line"><input type="radio" name="le-source" value="events" ${L.source === 'events' ? 'checked' : ''}> des événements (une ligne par événement : divorces, mariages, décès…)</label><label class="checkbox-line"><input type="radio" name="le-source" value="persons" ${L.source === 'persons' ? 'checked' : ''}> des personnes (une ligne par personne)</label><label class="checkbox-line"><input type="radio" name="le-source" value="free" ${L.source === 'free' ? 'checked' : ''}> des lignes que j’écris moi-même (stands d’un salon, choses à chercher aux archives…) : rien ne vient de la base</label></fieldset>
+                <label class="checkbox-line span-2"><input type="checkbox" data-le-inlists ${d.in_lists ? 'checked' : ''}> Afficher aussi cette liste dans l’onglet <b>Listes</b> (menu de gauche)</label>
                 <div class="span-2">${ext.labelsPicker('custom_list', L.labels || [])}</div></div></section>
             ${L.source === 'free' ? '' : `<section class="maintenance-panel"><h3>2. Les critères</h3><p class="muted">Ajoute autant de critères que tu veux. « pas » inverse un critère (ex. « pas » + « Sans source » = seulement ce qui a une source).</p>
                 <div class="h-tabs"><label class="checkbox-line"><input type="radio" name="le-match" value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions (ET)</label><label class="checkbox-line"><input type="radio" name="le-match" value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une (OU)</label></div>
@@ -1133,6 +1207,7 @@
         const keepLabels = () => { const b = ws.querySelector('[data-pending-labels="custom_list"]'); if (b) L.labels = pickerIds(b).map(id => (labelsCache || []).find(l => Number(l.id) === id) || (L.labels || []).find(l => Number(l.id) === id) || {id, name: '#' + id}); };
         ws.querySelectorAll('[name=le-source]').forEach(el => el.addEventListener('change', () => { L.source = el.value; d.columns = Object.keys(listMeta.columns[L.source] || {}).slice(0, 4); if (L.source === 'free' && !d.custom.length) d.custom.push({label: '', type: 'text', options: []}); keepLabels(); again(); }));
         ws.querySelectorAll('[name=le-match]').forEach(el => el.addEventListener('change', () => { d.match = el.value; }));
+        ws.querySelector('[data-le-inlists]').addEventListener('change', e => { d.in_lists = e.target.checked; });
         ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : '', values: []}); again(); } });
         const rulesBox = ws.querySelector('[data-le-rules]') || document.createElement('div');
         const readRule = row => { const r = d.rules[Number(row.dataset.lrI)]; row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (Number(el.value) || null) : el.value; }); };
@@ -1148,14 +1223,22 @@
         ws.querySelector('[data-le-save]').addEventListener('click', async () => {
             if (!String(L.name || '').trim()) { toast('Donne un nom à la liste.', 'error'); return; }
             const lb = ws.querySelector('[data-pending-labels="custom_list"]');
-            try { const r = await api('save_my_list', {}, {method: 'POST', body: {id: L.id, name: L.name, icon: L.icon, description: L.description, source: L.source, definition: d, pending_labels: lb ? pickerIds(lb) : []}}); listEditor = null; S().hListOpen = r.result.id; ext.maintenance.my_lists(++S().workspaceToken); }
+            try { const r = await api('save_my_list', {}, {method: 'POST', body: {id: L.id, name: L.name, icon: L.icon, description: L.description, source: L.source, definition: d, pending_labels: lb ? pickerIds(lb) : []}}); listEditor = null; S().hListOpen = r.result.id; refreshPinnedLists(); ext.maintenance.my_lists(++S().workspaceToken); }
             catch (error) { toast(error.message, 'error'); }
         });
     }
-    async function renderListView(token, id) {
+    /** Une de « Mes listes » : dans Maintenance, ou dans l'onglet Listes (inLists) quand elle y est affichée. */
+    async function renderListView(token, id, inLists = false) {
+        const module = inLists ? 'listes' : 'maintenance';
         let data;
-        try { data = await api('my_list_rows', {id}); } catch (error) { S().hListOpen = 0; toast(error.message, 'error'); return ext.maintenance.my_lists(++S().workspaceToken); }
-        if (!isCurrent(token)) return;
+        try { data = await api('my_list_rows', {id}); }
+        catch (error) {
+            toast(error.message, 'error');
+            if (inLists) { pinnedLists = pinnedLists.filter(l => l.id !== id); A().$('#workspace').innerHTML = empty('Cette liste n’existe plus.'); A().renderSidebar?.(); return; }
+            S().hListOpen = 0; return ext.maintenance.my_lists(++S().workspaceToken);
+        }
+        if (!isCurrent(token, module)) return;
+        const goEdit = () => { listEditor = JSON.parse(JSON.stringify(data.list)); S().hListOpen = 0; if (inLists) { S().maintenanceTab = 'my_lists'; A().setModule('maintenance'); } else ext.maintenance.my_lists(++S().workspaceToken); };
         const L = data.list, d = L.definition, cols = d.columns, custom = d.custom || [];
         const isEv = L.source === 'events', isFree = L.source === 'free';
         const cell = (r, c) => c === 'who' || c === 'name' ? r.people.map(p => personLink(p.id, pname(p))).join(' et ') : esc(r.cells[c] ?? '');
@@ -1166,17 +1249,21 @@
             if (c.type === 'select') return `<select data-lv="${esc(c.key)}"><option value=""></option>${c.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
             return `<input type="${c.type === 'date' ? 'text' : c.type === 'number' ? 'number' : 'text'}" data-lv="${esc(c.key)}" value="${esc(v)}" ${c.type === 'date' ? 'placeholder="date"' : ''}>`; };
         A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header('MES LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(data.rows.length, isEv ? 'événement' : isFree ? 'ligne' : 'personne', isEv ? 'événements' : isFree ? 'lignes' : 'personnes')}</strong>${data.truncated ? ' (les 3 000 premiers)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
-                `<button type="button" class="button secondary" data-lv-back>← Mes listes</button><button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
+                `${inLists ? '' : '<button type="button" class="button secondary" data-lv-back>← Mes listes</button>'}<button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
             ${isFree ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>+ Ajouter une ligne</button></div>' : ''}
             ${!isEv && !isFree ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
             ${data.rows.length || isFree ? `<div class="h-lv-scroll"><table class="data-table h-lv-table"><thead><tr>${cols.map(c => `<th>${esc(data.columns[c] || c)}</th>`).join('')}${custom.map(c => `<th class="h-lv-own">${esc(c.label)}</th>`).join('')}<th></th></tr></thead><tbody>${data.rows.map(r => `<tr data-lv-key="${esc(r.key)}">${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}${custom.map(c => `<td class="h-lv-own">${customCell(r, c)}</td>`).join('')}<td><button type="button" class="icon-button" data-lv-remove title="Retirer de la liste (la fiche n’est pas touchée)">✕</button>${r.manual && !isFree ? ' <small class="muted" title="ajoutée à la main">✋</small>' : ''}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune ligne ne répond à ces critères.')}</section>`;
         A().bindTableLinks?.();
         A().bindCollectionPersonFields(A().$('#workspace'));
         const ws = A().$('#workspace');
-        const reload = () => renderListView(++S().workspaceToken, id);
-        ws.querySelector('[data-lv-back]').addEventListener('click', () => { S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
-        ws.querySelector('[data-lv-edit]').addEventListener('click', () => { listEditor = JSON.parse(JSON.stringify(L)); S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
-        ws.querySelector('[data-lv-del]').addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
+        const reload = () => renderListView(++S().workspaceToken, id, inLists);
+        ws.querySelector('[data-lv-back]')?.addEventListener('click', () => { S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
+        ws.querySelector('[data-lv-edit]').addEventListener('click', goEdit);
+        ws.querySelector('[data-lv-del]').addEventListener('click', async () => {
+            if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return;
+            await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; await refreshPinnedLists();
+            if (inLists) { S().listType = 'persons'; A().renderSidebar?.(); A().renderList?.(); } else ext.maintenance.my_lists(++S().workspaceToken);
+        });
         ws.querySelector('[data-lv-print]').addEventListener('click', () => window.print());
         ws.querySelector('[data-lv-csv]').addEventListener('click', () => {
             const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';

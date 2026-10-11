@@ -22,7 +22,8 @@
     "test:tools": "node tests/test-tools.js",
     "test:links": "node tests/test-links.js",
     "test:more": "node tests/test-more.js",
-    "test:village": "node tests/test-village.js"
+    "test:village": "node tests/test-village.js",
+    "test:studio": "node tests/test-studio.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

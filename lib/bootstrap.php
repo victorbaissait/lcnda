@@ -15,6 +15,8 @@ require_once __DIR__ . '/heritage_links.php'; // question en français, langues,
 require_once __DIR__ . '/heritage_more.php';
 require_once __DIR__ . '/village.php';
 require_once __DIR__ . '/htr_setup.php';
+require_once __DIR__ . '/studio.php';         // retouche des photos (l'original est gardé)
+require_once __DIR__ . '/museum.php';         // musée de famille en 3D (pièce d'archives), visite guidée, partage
 require_once __DIR__ . '/my_lists.php';        // Mes listes : listes sur mesure (critères, colonnes, colonnes à remplir)       // reconnaissance d'écriture : installation de Kraken et des modèles         // fiche d'un village (familles, métiers, église, population, Cassini)  // actes à demander, contexte historique, coffre cousin, âges, variantes, lieux, tailles, résistants, éditeur de blocs
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';
