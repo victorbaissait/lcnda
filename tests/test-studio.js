@@ -101,6 +101,22 @@ $unk = $exp; $unk['definition']['rules'][0]['values'] = [['tag' => 'ZZZ', 'label
 try { import_my_list($pdo, ['json' => json_encode($unk)]); $out['list_unknown'] = 'accepté'; } catch (Throwable $e) { $out['list_unknown'] = str_contains($e->getMessage(), 'Type inventé') ? 'refusé' : $e->getMessage(); }
 try { import_my_list($pdo, ['json' => '{"type":"autre"}']); $out['list_bad'] = 'accepté'; } catch (Throwable $e) { $out['list_bad'] = 'refusé'; }
 
+// Plan du musée : place sur le mur, hauteur, orientation (bornées)
+$pl = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'photo', 'wall' => 'right', 'title' => 'P', 'settings' => ['along' => -0.25, 'y' => 9, 'rot' => 450]]);
+$out['plan'] = array_values(array_filter(museum_get($pdo, 0)['rooms'], fn($r) => $r['id'] === $room))[0]['items'];
+$out['plan'] = array_values(array_filter($out['plan'], fn($i) => $i['id'] === $pl['id']))[0]['settings'];
+
+// Mes listes reprises de l'onglet Listes, filtres de colonnes gardés
+$src = file_get_contents('api.php'); foreach (['function person_select'] as $fn) { $a = strpos($src, $fn); $b = strpos($src, "\n}\n", $a); if (!function_exists(substr($fn, 9))) eval(substr($src, $a, $b - $a + 3)); }
+$pdo->exec("INSERT INTO places(name,country) VALUES('Lille','France'),('Gand','Belgique')");
+$pdo->exec("INSERT INTO events(scope,person_id,event_type_id,year,place_id) SELECT 'person',1,(SELECT id FROM event_types WHERE gedcom_tag='BIRT' LIMIT 1),1900,id FROM places WHERE name IN ('Lille','Gand')");
+$tl = save_my_list($pdo, ['name' => 'Lieux', 'source' => 'places', 'definition' => ['columns' => ['name', 'country', 'events'], 'rules' => [['field' => 'place', 'value' => 'x']], 'filters' => ['country' => ['values' => ['France']], 'inconnue' => ['contains' => 'x']]]]);
+$tr = my_list_rows($pdo, $tl['id']);
+$out['table_list'] = [array_column(array_column($tr['rows'], 'cells'), 'name'), $tr['list']['definition']['rules'], $tr['list']['definition']['filters']];
+$out['filters_saved'] = save_my_list_filters($pdo, ['id' => $tl['id'], 'filters' => ['name' => ['contains' => 'Li', 'from' => 1800]]])['filters'];
+$k = save_my_list_row($pdo, ['list_id' => $tl['id'], 'row_key' => $tr['rows'][0]['key'], 'field' => 'note', 'value' => 'ok']);
+$out['table_row'] = $k['row_key'] === $tr['rows'][0]['key'];
+
 // Versions d'une photo : original gardé, version affichée au choix, l'original ne se supprime pas
 $out['v0'] = array_map(fn($v) => [$v['label'], $v['shown']], retouch_versions($pdo, 1));
 copy(MEDIA_DIR . '/portrait.jpg', MEDIA_DIR . '/retouche.jpg');
@@ -137,6 +153,10 @@ const checks = [
   ['liste écrite à la main partagée avec ses lignes, sans lien vers les fiches', () => assert.deepEqual(out.free_share, [1, ['Cercle du Nord']])],
   ['fichier qui n’est pas une liste refusé', () => assert.equal(out.list_bad, 'refusé')],
   ['liste dont le type d’événement n’existe pas ici : refusée (sinon elle montrerait tout)', () => assert.equal(out.list_unknown, 'refusé')],
+  ['plan du musée : position, hauteur et orientation gardées (bornées)', () => assert.deepEqual(out.plan, {along: -0.25, y: 3.4, rot: 90})],
+  ['liste reprise des Lieux : toutes les lignes, pas de critères, filtres de colonnes connus seulement', () => { assert.deepEqual(out.table_list[0].sort(), ['Gand', 'Lille']); assert.deepEqual(out.table_list[1], []); assert.deepEqual(out.table_list[2], {country: {values: ['France']}}); }],
+  ['filtres de colonnes enregistrés depuis la liste', () => assert.deepEqual(out.filters_saved, {name: {contains: 'Li', from: 1800}})],
+  ['liste reprise : on peut remplir ses propres colonnes', () => assert.equal(out.table_row, true)],
   ['photo jamais retouchée : une seule version, l’original, affichée', () => assert.deepEqual(out.v0, [['Original', true]])],
   ['retouche : l’original et la retouche sont gardés, la retouche affichée', () => assert.deepEqual(out.v1, [['Original', false], ['Retouche 1', true]])],
   ['retour à l’original par défaut : la retouche reste disponible', () => assert.deepEqual(out.v2, ['portrait.jpg', 'portrait.jpg', true])],

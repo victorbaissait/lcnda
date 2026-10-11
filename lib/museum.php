@@ -131,7 +131,8 @@ function museum_clean_settings(mixed $raw, array $allowed): string
         $v = $raw[$k];
         if ($type === 'color') { if (is_string($v) && preg_match('/^#[0-9a-f]{6}$/i', $v)) { $out[$k] = $v; } }
         elseif ($type === 'bool') { $out[$k] = !empty($v) && $v !== '0'; }
-        elseif ($type === 'num') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = max(-1, min(3, round((float) $v, 3))); } }
+        elseif ($type === 'num') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = max(-1, min(3.4, round((float) $v, 3))); } }
+        elseif ($type === 'deg') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = (int) round(fmod((float) $v + 540, 360) - 180); } }
         elseif (is_array($type)) { if (in_array($v, $type, true)) { $out[$k] = $v; } }
     }
     return json_encode($out);
@@ -218,7 +219,7 @@ function museum_save_item(PDO $pdo, array $data): array
     $kind = in_array($data['kind'] ?? '', MUSEUM_KINDS, true) ? $data['kind'] : 'photo';
     $wall = in_array($data['wall'] ?? '', MUSEUM_WALLS, true) ? $data['wall'] : (in_array($kind, ['object', 'decor', 'seat'], true) ? 'center' : 'back');
     if (in_array($kind, ['decor', 'seat'], true)) { $wall = 'center'; }
-    $settings = museum_clean_settings($data['settings'] ?? [], ['scale' => 'num', 'px' => 'num', 'pz' => 'num', 'model' => MUSEUM_MODELS]);
+    $settings = museum_clean_settings($data['settings'] ?? [], ['scale' => 'num', 'px' => 'num', 'pz' => 'num', 'along' => 'num', 'y' => 'num', 'rot' => 'deg', 'model' => MUSEUM_MODELS]);
     $file = safe_text($data['file'] ?? '');
     if ($file !== '' && (!str_starts_with($file, 'musee/') || str_contains($file, '..'))) { $file = ''; }
     $vals = [$kind, $wall, safe_int($data['media_id'] ?? 0) ?: null, safe_int($data['object_id'] ?? 0) ?: null, safe_int($data['person_id'] ?? 0) ?: null, $file,

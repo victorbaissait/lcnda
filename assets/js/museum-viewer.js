@@ -19,6 +19,44 @@
     const isWallKind = k => !['decor', 'seat'].includes(k);
     const tourKinds = k => !['decor', 'seat'].includes(k);
 
+    const isNum = v => v !== null && v !== undefined && v !== '' && !isNaN(Number(v));
+    /** Position le long d'un mur (« along ») ↔ coordonnée du plan (x pour le fond et l'entrée, z pour les côtés). */
+    const alongOf = (wall, world) => (wall === 'front' || wall === 'right') ? -world : world;
+    /** Les limites où l'on peut accrocher sur un mur (l'entrée garde la place des portes). */
+    const wallLimit = (wall, W, D) => wall === 'front' ? W / 2 - 2.2 : ((wall === 'back' ? W : D) / 2 - 0.5);
+    /**
+     * Où va chaque élément d'une salle : sur un mur (position, hauteur) ou au milieu (x, z, orientation).
+     * Placé à la main sur le plan (settings.along / y, ou px / pz / rot), sinon réparti tout seul.
+     * Servi aussi au plan de l'aménagement, pour qu'il montre exactement la même chose que la visite.
+     */
+    function layoutRoom(room) {
+        const [W, D] = SIZES[room.settings?.size] || SIZES.medium;
+        const spots = new Map();
+        const byWall = {back: [], left: [], right: [], front: []}; const center = [];
+        (room.items || []).forEach(it => { if (!isWallKind(it.kind) || it.wall === 'center') center.push(it); else (byWall[it.wall] || byWall.back).push(it); });
+        Object.entries(byWall).forEach(([wall, list]) => {
+            const auto = list.filter(it => !isNum(it.settings?.along));
+            const full = wall === 'back' || wall === 'front' ? W : D;
+            const len = full - (wall === 'front' ? 5.4 : 1.4), slot = auto.length ? len / auto.length : len;
+            list.forEach(it => {
+                let along, sl;
+                if (isNum(it.settings?.along)) { along = alongOf(wall, Math.max(-1, Math.min(1, Number(it.settings.along))) * wallLimit(wall, W, D)); sl = Math.min(len, 2.6); }
+                else { along = -len / 2 + slot * (auto.indexOf(it) + 0.5); sl = slot; }
+                spots.set(it, {wall, along, slot: sl, y: isNum(it.settings?.y) ? Math.max(0.6, Math.min(3.4, Number(it.settings.y))) : null});
+            });
+        });
+        const auto = center.filter(it => !(isNum(it.settings?.px) && isNum(it.settings?.pz)));
+        const n = auto.length, usableW = W - 4, usableD = D - 5.2;
+        const cols = Math.max(1, Math.min(n || 1, Math.round(Math.sqrt(n * usableW / usableD)) || 1)), rows = Math.ceil((n || 1) / cols);
+        center.forEach(it => {
+            let x, z;
+            if (isNum(it.settings?.px) && isNum(it.settings?.pz)) { x = Number(it.settings.px) * (W / 2 - 1); z = Number(it.settings.pz) * (D / 2 - 1); }
+            else { const k = auto.indexOf(it), c = k % cols, r = Math.floor(k / cols); x = -usableW / 2 + usableW * (c + 0.5) / cols; z = -usableD / 2 + 0.2 + usableD * (r + 0.5) / rows; }
+            spots.set(it, {center: true, x, z, rot: isNum(it.settings?.rot) ? Number(it.settings.rot) * Math.PI / 180 : 0});
+        });
+        return {W, D, spots};
+    }
+
     function wrapLines(ctx, text, maxWidth) {
         const out = [];
         String(text || '').split('\n').forEach(par => {
@@ -54,24 +92,25 @@
         const camera = new THREE.PerspectiveCamera(62, 1, 0.05, 120);
         const raycaster = new THREE.Raycaster(), pointer = new THREE.Vector2();
         const loader = new THREE.TextureLoader();
-        let scene = null, targets = [], roomIndex = -1, W = 14, D = 10, dirty = true, disposed = false;
+        let scene = null, target = null, targets = [], roomIndex = -1, W = 14, D = 10, dirty = true, disposed = false;
         let yaw = 0, pitch = 0;
         const pos = new THREE.Vector3(0, EYE, 3);
         let anim = null; // déplacement doux de la caméra
         let voice = opts.voice !== false;
 
         const ink = () => new THREE.LineBasicMaterial({color: 0x111111});
-        function outline(mesh) { const e = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), ink()); e.position.copy(mesh.position); e.rotation.copy(mesh.rotation); e.scale.copy(mesh.scale); mesh.parent ? mesh.parent.add(e) : scene.add(e); return e; }
+        function outline(mesh) { const e = new THREE.LineSegments(new THREE.EdgesGeometry(mesh.geometry), ink()); e.position.copy(mesh.position); e.rotation.copy(mesh.rotation); e.scale.copy(mesh.scale); (mesh.parent || target || scene).add(e); return e; }
+        const put = obj => { (target || scene).add(obj); return obj; }; // dans le groupe en cours (élément tourné au milieu de la salle) ou dans la salle
         function box(w, h, d, x, y, z, color = 0xffffff, parent = null) {
             const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), new THREE.MeshBasicMaterial({color}));
-            m.position.set(x, y, z); (parent || scene).add(m);
-            const e = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry), ink()); e.position.copy(m.position); (parent || scene).add(e);
+            m.position.set(x, y, z); (parent || target || scene).add(m);
+            const e = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry), ink()); e.position.copy(m.position); (parent || target || scene).add(e);
             return m;
         }
         function cyl(rt, rb, h, x, y, z, color = 0xffffff, seg = 18, parent = null) {
             const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), new THREE.MeshBasicMaterial({color}));
-            m.position.set(x, y, z); (parent || scene).add(m);
-            const e = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry, 30), ink()); e.position.copy(m.position); (parent || scene).add(e);
+            m.position.set(x, y, z); (parent || target || scene).add(m);
+            const e = new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry, 30), ink()); e.position.copy(m.position); (parent || target || scene).add(e);
             return m;
         }
         function textTexture(lines, {width = 900, pad = 40, bg = '#ffffff', fg = '#111111', border = 0, sizes = [56, 30]} = {}) {
@@ -149,15 +188,8 @@
             else if (opts.onExit) door('left', 'Sortie', {type: 'exit'});
             if (i < rooms.length - 1) door('right', `Salle ${i + 2} : ${rooms[i + 1].name || ''}`, {type: 'room', index: i + 1});
             // Œuvres aux murs
-            const items = room.items || [];
-            const byWall = {back: [], left: [], right: [], front: []}; const center = [];
-            items.forEach(it => { if (!isWallKind(it.kind) || it.wall === 'center') center.push(it); else (byWall[it.wall] || byWall.back).push(it); });
-            Object.entries(byWall).forEach(([wall, list]) => {
-                if (!list.length) return;
-                const len = wallLength(wall) - (wall === 'front' ? 5.4 : 1.4), slot = len / list.length;
-                list.forEach((it, k) => { const along = -len / 2 + slot * (k + 0.5); placeWallItem(it, wall, along, slot); });
-            });
-            placeCenter(center);
+            const lay = layoutRoom(room);
+            (room.items || []).forEach(it => { const sp = lay.spots.get(it); if (!sp) return; if (sp.center) placeCenter(it, sp); else placeWallItem(it, sp); });
             if (i === 0 && data.settings?.guestbook !== false) lectern(-W / 2 + 1.6, D / 2 - 2.2);
             $('[data-lm-room]').textContent = `Salle ${i + 1} / ${rooms.length} · ${room.name || ''}`;
             $('[data-lm-rooms]').value = String(i);
@@ -191,64 +223,73 @@
             });
             return g;
         }
-        function placeWallItem(it, wall, along, slot) {
+        function placeWallItem(it, {wall, along, slot, y}) {
             const scale = Math.max(0.4, Math.min(2.6, Number(it.settings?.scale) || 1));
             if (it.kind === 'text') {
                 const t = textTexture([it.title || '', it.description || it.cartel || ''].filter(Boolean), {width: 1100, bg: null, sizes: [64, 34]});
-                const w = Math.min(slot * 0.88, 2.6 * scale), m = plane(t.tex, w, w / t.aspect, true);
-                m.userData.item = it; targets.push(m); onWall(m, wall, along, Math.min(2.9, 1.75 + (w / t.aspect) / 4)); scene.add(m);
-                it._spot = {wall, along, y: 1.7}; return;
+                const w = Math.min(slot * 0.88, 2.6 * scale), h = w / t.aspect, m = plane(t.tex, w, h, true);
+                const yy = y ?? Math.min(2.9, 1.75 + h / 4);
+                m.userData.item = it; targets.push(m); onWall(m, wall, along, yy); scene.add(m);
+                const g = new THREE.Group(); onWall(g, wall, along, yy, 0.03); const b = audioBadge(it); b.position.set(w / 2 + 0.12, -h / 2 + 0.1, 0.01); g.add(b); scene.add(g);
+                it._spot = {wall, along, y: yy}; return;
             }
+            const yy = y ?? 1.6;
             const g = framed(it, Math.min(slot * 0.7, 1.35 * scale), 1.3 * scale, (w, h) => {
                 const c = cartelMesh(it);
-                if (slot / 2 > w / 2 + 0.75) c.position.set(w / 2 + 0.45, -0.35, 0.02); // à côté du cadre, à hauteur d'yeux d'enfant
+                if (slot / 2 > w / 2 + 0.85) c.position.set(w / 2 + 0.45, Math.max(-h / 2, 1.25 - yy), 0.02); // à côté du cadre, à hauteur d'yeux d'enfant
                 else c.position.set(Math.min(0, -w / 2 + 0.25), -h / 2 - 0.3, 0.02); // sinon dessous
                 g.add(c);
+                const b = audioBadge(it); b.position.set(c.position.x + 0.34, c.position.y, 0.02); g.add(b);
             });
-            onWall(g, wall, along, 1.6, 0.03); scene.add(g);
-            it._spot = {wall, along, y: 1.6};
+            onWall(g, wall, along, yy, 0.03); scene.add(g);
+            it._spot = {wall, along, y: yy};
         }
-        function centerPositions(list) {
-            const n = list.length; if (!n) return [];
-            const usableW = W - 4, usableD = D - 5.2;
-            const cols = Math.max(1, Math.min(n, Math.round(Math.sqrt(n * usableW / usableD)) || 1)), rows = Math.ceil(n / cols);
-            return list.map((it, k) => {
-                const px = it.settings?.px, pz = it.settings?.pz;
-                if (px !== null && px !== undefined && px !== '' && pz !== null && pz !== undefined && pz !== '') return [Number(px) * (W / 2 - 1), Number(pz) * (D / 2 - 1)];
-                const c = k % cols, r = Math.floor(k / cols);
-                return [-usableW / 2 + usableW * (c + 0.5) / cols, -usableD / 2 + 0.2 + usableD * (r + 0.5) / rows];
-            });
+        /** Le petit casque d'audioguide à côté d'un cartel : un clic lance le commentaire de cette œuvre. */
+        let badgeTex = null;
+        function audioBadge(it) {
+            if (!badgeTex) {
+                const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+                x.fillStyle = '#111'; x.beginPath(); x.arc(64, 64, 60, 0, Math.PI * 2); x.fill();
+                x.strokeStyle = '#fff'; x.lineWidth = 9; x.beginPath(); x.arc(64, 70, 32, Math.PI, 0); x.stroke();
+                x.fillStyle = '#fff'; x.fillRect(26, 66, 16, 30); x.fillRect(86, 66, 16, 30);
+                badgeTex = new THREE.CanvasTexture(c); badgeTex.colorSpace = THREE.SRGBColorSpace;
+            }
+            const m = new THREE.Mesh(new THREE.PlaneGeometry(0.17, 0.17), new THREE.MeshBasicMaterial({map: badgeTex, transparent: true}));
+            m.userData.audio = it; targets.push(m); return m;
         }
-        function placeCenter(list) {
-            centerPositions(list).forEach(([x, z], k) => {
-                const it = list[k], m = it.settings?.model;
-                it._spot = {center: true, x, z};
-                if (it.kind === 'decor' || it.kind === 'seat') { model(m || (it.kind === 'seat' ? 'bench' : 'plant'), x, z, it); return; }
-                if (it.kind === 'object' || m === 'vitrine') { vitrine(it, x, z); return; }
-                easel(it, x, z);
-            });
+        function placeCenter(it, {x, z, rot}) {
+            const m = it.settings?.model;
+            it._spot = {center: true, x, z, rot};
+            // Chaque élément est construit autour de (0, 0) dans un groupe placé et tourné comme sur le plan
+            const g = new THREE.Group(); g.position.set(x, 0, z); g.rotation.y = rot || 0; scene.add(g); target = g;
+            try {
+                if (it.kind === 'decor' || it.kind === 'seat') model(m || (it.kind === 'seat' ? 'bench' : 'plant'), 0, 0, it);
+                else if (it.kind === 'object' || m === 'vitrine') vitrine(it, 0, 0);
+                else easel(it, 0, 0);
+            } finally { target = null; }
         }
         function vitrine(it, x, z) {
             box(0.8, 1.0, 0.8, x, 0.5, z);
             const glass = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.85, 0.8), new THREE.MeshBasicMaterial({color: 0xe8f2f7, transparent: true, opacity: 0.18, depthWrite: false}));
-            glass.position.set(x, 1.43, z); scene.add(glass); const e = new THREE.LineSegments(new THREE.EdgesGeometry(glass.geometry), ink()); e.position.copy(glass.position); scene.add(e);
-            const g = framed({...it, kind: 'object'}, 0.62, 0.7); g.position.set(x, 1.42, z); scene.add(g);
-            const c = cartelMesh(it, 0.46); c.position.set(x, 0.62, z + 0.402); scene.add(c);
+            glass.position.set(x, 1.43, z); put(glass); const e = new THREE.LineSegments(new THREE.EdgesGeometry(glass.geometry), ink()); e.position.copy(glass.position); put(e);
+            const g = framed({...it, kind: 'object'}, 0.62, 0.7); g.position.set(x, 1.42, z); put(g);
+            const c = cartelMesh(it, 0.46); c.position.set(x, 0.62, z + 0.402); put(c);
+            const b = audioBadge(it); b.position.set(x + 0.33, 0.62, z + 0.404); put(b);
             glass.userData.item = it; targets.push(glass);
         }
         function easel(it, x, z) {
             [-0.45, 0.45].forEach(dx => { const l = box(0.05, 1.9, 0.05, x + dx, 0.95, z); l.rotation.z = dx > 0 ? -0.06 : 0.06; });
             box(0.05, 1.7, 0.05, x, 0.85, z - 0.35).rotation.x = -0.25;
             box(1.0, 0.05, 0.12, x, 0.75, z + 0.05);
-            const g = framed(it, 0.95, 1.1, (w, h) => { g.position.y = 0.8 + h / 2 + 0.08; const c = cartelMesh(it, 0.42); c.position.set(0, -h / 2 - 0.42, 0.02); g.add(c); });
-            g.position.set(x, 1.4, z + 0.09); g.rotation.x = -0.06; scene.add(g);
+            const g = framed(it, 0.95, 1.1, (w, h) => { g.position.y = 0.8 + h / 2 + 0.08; const c = cartelMesh(it, 0.42); c.position.set(0, -h / 2 - 0.42, 0.02); g.add(c); const b = audioBadge(it); b.position.set(0.32, -h / 2 - 0.42, 0.02); g.add(b); });
+            g.position.set(x, 1.4, z + 0.09); g.rotation.x = -0.06; put(g);
         }
         function lectern(x, z) {
             box(0.5, 1.05, 0.4, x, 0.52, z); const top = box(0.7, 0.05, 0.5, x, 1.1, z); top.rotation.x = -0.35;
             const t = textTexture(['Livre d’or', 'Signez ici'], {width: 520, sizes: [52, 30], border: 8});
             const p = plane(t.tex, 0.6, 0.6 / t.aspect); p.position.set(x, 1.15, z + 0.02); p.rotation.x = -1.22;
-            p.userData.action = {type: 'book'}; targets.push(p); scene.add(p);
-            const t2 = textTexture(['Livre d’or'], {width: 400, sizes: [48], bg: null}); const p2 = plane(t2.tex, 0.55, 0.55 / t2.aspect, true); p2.position.set(x, 1.6, z); scene.add(p2); p2.userData.action = {type: 'book'}; targets.push(p2);
+            p.userData.action = {type: 'book'}; targets.push(p); put(p);
+            const t2 = textTexture(['Livre d’or'], {width: 400, sizes: [48], bg: null}); const p2 = plane(t2.tex, 0.55, 0.55 / t2.aspect, true); p2.position.set(x, 1.6, z); put(p2); p2.userData.action = {type: 'book'}; targets.push(p2);
         }
         function model(kind, x, z, it) {
             const w = 0xffffff;
@@ -256,17 +297,17 @@
             if (kind === 'bench') { box(1.8, 0.08, 0.45, x, 0.46, z); [-0.8, 0.8].forEach(dx => box(0.08, 0.42, 0.4, x + dx, 0.21, z)); }
             else if (kind === 'chair') { box(0.48, 0.06, 0.48, x, 0.47, z); [[-0.2, -0.2], [0.2, -0.2], [-0.2, 0.2], [0.2, 0.2]].forEach(([a, b]) => box(0.05, 0.45, 0.05, x + a, 0.22, z + b)); box(0.48, 0.55, 0.05, x, 0.78, z - 0.22); }
             else if (kind === 'sofa') { box(2.0, 0.42, 0.85, x, 0.21, z); box(2.0, 0.55, 0.2, x, 0.6, z - 0.33); box(0.2, 0.3, 0.85, x - 0.9, 0.55, z); box(0.2, 0.3, 0.85, x + 0.9, 0.55, z); }
-            else if (kind === 'plant') { cyl(0.26, 0.2, 0.5, x, 0.25, z); [0, 1.2, 2.4, 3.6, 4.8].forEach((a, k) => { const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.9 + (k % 2) * 0.3, 6), new THREE.MeshBasicMaterial({color: w})); leaf.position.set(x + Math.cos(a) * 0.12, 0.95, z + Math.sin(a) * 0.12); leaf.rotation.set(Math.sin(a) * 0.35, 0, Math.cos(a) * 0.35); scene.add(leaf); outline(leaf); }); }
+            else if (kind === 'plant') { cyl(0.26, 0.2, 0.5, x, 0.25, z); [0, 1.2, 2.4, 3.6, 4.8].forEach((a, k) => { const leaf = new THREE.Mesh(new THREE.ConeGeometry(0.12, 0.9 + (k % 2) * 0.3, 6), new THREE.MeshBasicMaterial({color: w})); leaf.position.set(x + Math.cos(a) * 0.12, 0.95, z + Math.sin(a) * 0.12); leaf.rotation.set(Math.sin(a) * 0.35, 0, Math.cos(a) * 0.35); put(leaf); outline(leaf); }); }
             else if (kind === 'column') { cyl(0.28, 0.28, HEIGHT - 0.3, x, (HEIGHT - 0.3) / 2 + 0.15, z, w, 16); box(0.75, 0.15, 0.75, x, 0.075, z); box(0.75, 0.15, 0.75, x, HEIGHT - 0.075, z); }
             else if (kind === 'pedestal') { box(0.6, 1.0, 0.6, x, 0.5, z); }
-            else if (kind === 'rope') { [-1, 1].forEach(dx => { cyl(0.04, 0.04, 0.95, x + dx, 0.48, z); cyl(0.14, 0.16, 0.05, x + dx, 0.03, z); }); const curve = new THREE.QuadraticBezierCurve3(new THREE.Vector3(x - 1, 0.9, z), new THREE.Vector3(x, 0.62, z), new THREE.Vector3(x + 1, 0.9, z)); scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 20, 0.02, 6), new THREE.MeshBasicMaterial({color: 0x8b1a1a}))); }
-            else if (kind === 'rug') { const r = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({color: 0xf1ece4})); r.rotation.x = -Math.PI / 2; r.position.set(x, 0.01, z); scene.add(r); outline(r); const r2 = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.6), new THREE.MeshBasicMaterial({color: 0xf1ece4})); r2.rotation.x = -Math.PI / 2; r2.position.set(x, 0.012, z); scene.add(r2); outline(r2); }
+            else if (kind === 'rope') { [-1, 1].forEach(dx => { cyl(0.04, 0.04, 0.95, x + dx, 0.48, z); cyl(0.14, 0.16, 0.05, x + dx, 0.03, z); }); const curve = new THREE.QuadraticBezierCurve3(new THREE.Vector3(x - 1, 0.9, z), new THREE.Vector3(x, 0.62, z), new THREE.Vector3(x + 1, 0.9, z)); put(new THREE.Mesh(new THREE.TubeGeometry(curve, 20, 0.02, 6), new THREE.MeshBasicMaterial({color: 0x8b1a1a}))); }
+            else if (kind === 'rug') { const r = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), new THREE.MeshBasicMaterial({color: 0xf1ece4})); r.rotation.x = -Math.PI / 2; r.position.set(x, 0.01, z); put(r); outline(r); const r2 = new THREE.Mesh(new THREE.PlaneGeometry(2.6, 1.6), new THREE.MeshBasicMaterial({color: 0xf1ece4})); r2.rotation.x = -Math.PI / 2; r2.position.set(x, 0.012, z); put(r2); outline(r2); }
             else if (kind === 'lamp') { cyl(0.18, 0.2, 0.04, x, 0.02, z); cyl(0.025, 0.025, 1.6, x, 0.82, z); cyl(0.18, 0.3, 0.35, x, 1.75, z); }
-            else if (kind === 'vase') { const pts = [[0.1, 0], [0.2, 0.15], [0.22, 0.35], [0.12, 0.6], [0.09, 0.7], [0.14, 0.8]].map(([a, b]) => new THREE.Vector2(a, b)); box(0.5, 0.9, 0.5, x, 0.45, z); const v = new THREE.Mesh(new THREE.LatheGeometry(pts, 18), new THREE.MeshBasicMaterial({color: w, side: THREE.DoubleSide})); v.position.set(x, 0.9, z); scene.add(v); outline(v); }
+            else if (kind === 'vase') { const pts = [[0.1, 0], [0.2, 0.15], [0.22, 0.35], [0.12, 0.6], [0.09, 0.7], [0.14, 0.8]].map(([a, b]) => new THREE.Vector2(a, b)); box(0.5, 0.9, 0.5, x, 0.45, z); const v = new THREE.Mesh(new THREE.LatheGeometry(pts, 18), new THREE.MeshBasicMaterial({color: w, side: THREE.DoubleSide})); v.position.set(x, 0.9, z); put(v); outline(v); }
             else if (kind === 'piano') { box(1.5, 1.2, 0.6, x, 0.6, z); box(1.5, 0.05, 0.3, x, 0.75, z + 0.42); box(0.7, 0.45, 0.35, x, 0.23, z + 0.95); }
             else if (kind === 'table') { box(1.6, 0.06, 0.9, x, 0.75, z); [[-0.7, -0.38], [0.7, -0.38], [-0.7, 0.38], [0.7, 0.38]].forEach(([a, b]) => box(0.06, 0.72, 0.06, x + a, 0.36, z + b)); }
             else if (kind === 'screen') { [-0.9, -0.3, 0.3, 0.9].forEach((dx, k) => { const p = box(0.6, 1.8, 0.03, x + dx, 0.9, z + (k % 2 ? 0.12 : 0)); p.rotation.y = k % 2 ? 0.35 : -0.35; }); }
-            if (it?.title && (it.cartel || it.description)) { const c = cartelMesh(it, 0.38); c.position.set(x, 0.3, z + 0.7); c.rotation.x = -0.9; scene.add(c); touch(c); }
+            if (it?.title && (it.cartel || it.description)) { const c = cartelMesh(it, 0.38); c.position.set(x, 0.3, z + 0.7); c.rotation.x = -0.9; put(c); touch(c); const b = audioBadge(it); b.position.set(x + 0.3, 0.3, z + 0.7); b.rotation.x = -0.9; put(b); }
         }
 
         /* ── Caméra et déplacements ── */
@@ -279,7 +320,7 @@
         }
         function spotView(it) {
             const s = it._spot; if (!s) return null;
-            if (s.center) return {x: s.x, z: Math.min(D / 2 - 0.7, s.z + 2.3), yaw: 0, pitch: -0.06};
+            if (s.center) { const r = s.rot || 0; return {x: Math.max(-W / 2 + 0.7, Math.min(W / 2 - 0.7, s.x + Math.sin(r) * 2.3)), z: Math.max(-D / 2 + 0.7, Math.min(D / 2 - 0.7, s.z + Math.cos(r) * 2.3)), yaw: 0, pitch: -0.06}; }
             const [nx, nz] = wallNormal(s.wall), dist = 2.4;
             let wx, wz;
             if (s.wall === 'back') { wx = s.along; wz = -D / 2; } if (s.wall === 'front') { wx = -s.along; wz = D / 2; }
@@ -331,6 +372,7 @@
             if (u.action?.type === 'room') { stopTour(); enterRoom(u.action.index); return; }
             if (u.action?.type === 'exit') { opts.onExit?.(); return; }
             if (u.action?.type === 'book') { openBook(); return; }
+            if (u.audio) { playItem(u.audio); return; }
             if (u.item) openItem(u.item);
         }
 
@@ -435,7 +477,17 @@
             if (t.paused) return;
             t.timer = setTimeout(() => { if (tour === t && !t.paused && t.run === run) runStop(k + 1); }, 1400);
         }
+        /** Audioguide d'une seule œuvre (le casque à côté du cartel) : un 2e clic l'arrête. */
+        let playing = null;
+        async function playItem(it) {
+            if (playing === it) { playing = null; stopAudio(); caption(''); return; }
+            stopTour(); stopAudio(); playing = it;
+            caption(`<span class="lm-kicker">🎧 Audioguide</span><strong>${esc(it.title || '')}</strong>${it.cartel ? `<p class="lm-cartel">${esc(it.cartel).replace(/\n/g, '<br>')}</p>` : ''}${it.description ? `<p>${esc(it.description)}</p>` : ''}`);
+            await (it.audio ? play(it.audio) : speak([it.title, it.cartel, it.description].filter(Boolean).join('. ')));
+            if (playing === it) { playing = null; setTimeout(() => { if (!playing && !tour) caption(''); }, 1500); }
+        }
         function startTour(from = 0) {
+            playing = null;
             stopTour(); const stops = tourStops(); if (!stops.length) return;
             tour = {stops, index: 0, paused: false};
             $('[data-lm-tourbar]').hidden = false; $('[data-lm-tour]').textContent = '■ Arrêter la visite';
@@ -491,5 +543,5 @@
             goRoom: i => enterRoom(i), startTour, stopTour,
         };
     }
-    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS};
+    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, alongOf, wallLimit};
 })();

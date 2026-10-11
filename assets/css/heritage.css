@@ -496,3 +496,30 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-lv-table thead .h-lv-filter:hover, .h-lv-table thead .h-lv-filter.is-on { opacity:1; }
 .h-lv-table thead .h-lv-filter.is-on { background:#fff; color:#0066cc; }
 .h-lv-help { font-size:12px; margin:0 0 6px; }
+/* Musée : plan de la salle (vu de dessus) */
+.h-me-plan { margin-top:14px; border-top:1px solid var(--line, #ddd); padding-top:10px; }
+.h-me-plan-head { display:grid; gap:2px; margin-bottom:6px; }
+.h-me-plan-wrap { display:grid; grid-template-columns:minmax(0, 1fr) 230px; gap:12px; align-items:start; }
+.h-me-plan svg { width:100%; max-height:52vh; background:#fff; border:1px solid var(--line, #ddd); touch-action:none; user-select:none; }
+.h-me-plan .pl-room { fill:#fafafa; stroke:#111; stroke-width:0.1; }
+.h-me-plan .pl-grid { stroke:#e5e5e5; stroke-width:0.02; }
+.h-me-plan .pl-wall { font:600 0.34px Inter, Arial, sans-serif; text-anchor:middle; fill:#555; }
+.h-me-plan .pl-small { font:0.26px Inter, Arial, sans-serif; text-anchor:middle; fill:#888; }
+.h-me-plan .pl-door { fill:#fff; stroke:#111; stroke-width:0.04; }
+.h-me-plan .pl-g { cursor:grab; }
+.h-me-plan .pl-item { fill:#fff; stroke:#111; stroke-width:0.05; }
+.h-me-plan .pl-hang { fill:#111; stroke:#111; stroke-width:0.02; }
+.h-me-plan .pl-item.is-sel, .h-me-plan .pl-hang.is-sel { fill:#0066cc; stroke:#0066cc; }
+.h-me-plan .pl-front { fill:#111; }
+.h-me-plan .pl-num { font:700 0.34px Inter, Arial, sans-serif; text-anchor:middle; fill:#0066cc; paint-order:stroke; stroke:#fff; stroke-width:0.08px; pointer-events:none; }
+.h-me-plan-side { border:1px solid var(--line, #ddd); padding:10px; display:grid; gap:8px; font-size:13px; }
+.h-me-plan-side label { display:grid; gap:2px; }
+.h-me-plan-side output { float:right; color:var(--muted, #666); }
+@media (max-width:900px) { .h-me-plan-wrap { grid-template-columns:1fr; } }
+/* Aménagement : fenêtre à la taille de l'écran, flèches visibles sur la salle choisie */
+.h-museum-editor { max-height:calc(100vh - 20px); overflow:hidden; display:flex; flex-direction:column; }
+.h-museum-editor .h-me-grid { flex:1 1 auto; min-height:0; max-height:none; overflow:auto; }
+.h-me-rooms li.is-active .icon-button { background:transparent; color:#fff; border-color:#fff; }
+.h-me-rooms li.is-active .icon-button:disabled { opacity:.35; }
+.h-me-thumb { position:relative; }
+.h-me-n { position:absolute; left:2px; top:2px; background:#0066cc; color:#fff; font-size:11px; line-height:1; padding:2px 4px; }

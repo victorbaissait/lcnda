@@ -90,8 +90,10 @@
                     <label>Couleur des murs<input type="color" name="wall" value="${esc(room.settings.wall || '#ffffff')}"></label>
                     <div class="h-me-audio">${audioField('room', room)}</div>
                     <div class="span-2 h-me-buttons"><button class="button small" type="submit">Enregistrer la salle</button><button class="button small secondary danger" type="button" data-me-room-del>Supprimer la salle</button></div></form>`}
+                <section class="h-me-plan"><div class="h-me-plan-head"><h3>Plan de la salle</h3><small class="muted">${readOnly ? 'Vu de dessus.' : 'Vu de dessus : glisse chaque élément où tu veux. Contre un mur, il y est accroché ; au milieu, il est posé au sol. Clique sur un élément pour régler sa hauteur, sa taille, son orientation.'}</small></div>
+                    <div class="h-me-plan-wrap"><svg data-me-plan aria-label="Plan de la salle"></svg><aside class="h-me-plan-side" data-me-plan-side><p class="muted">Clique sur un élément du plan.</p></aside></div></section>
                 <div class="h-me-items-head"><h3>Dans cette salle</h3>${readOnly ? '' : `<div class="h-me-buttons"><button type="button" class="button small" data-me-add="media">+ Photo ou document de la base</button><button type="button" class="button small secondary" data-me-add="object">+ Objet de famille</button><button type="button" class="button small secondary" data-me-add="upload">+ Image de l’ordinateur</button><button type="button" class="button small secondary" data-me-add="text">+ Texte au mur</button><button type="button" class="button small secondary" data-me-add="decor">+ Décor ou siège</button></div>`}</div>
-                ${room.items.length ? `<ol class="h-me-items">${room.items.map((it, k) => `<li><span class="h-me-thumb">${thumb(it)}</span><div><strong>${esc(it.title || it.source_title || MODELS[it.settings?.model] || 'Sans titre')}</strong><small>${esc(KINDS[it.kind] || it.kind)} · ${esc(WALLS[it.wall] || '')}${Number(it.in_tour) && !['decor', 'seat'].includes(it.kind) ? ' · visite guidée' : ''}${it.audio ? ' · 🎧' : ''}</small></div>
+                ${room.items.length ? `<ol class="h-me-items">${room.items.map((it, k) => `<li><span class="h-me-thumb">${thumb(it)}<b class="h-me-n">${k + 1}</b></span><div><strong>${esc(it.title || it.source_title || MODELS[it.settings?.model] || 'Sans titre')}</strong><small>${esc(KINDS[it.kind] || it.kind)} · ${esc(WALLS[it.wall] || '')}${Number(it.in_tour) && !['decor', 'seat'].includes(it.kind) ? ' · visite guidée' : ''}${it.audio ? ' · 🎧' : ''}</small></div>
                     ${readOnly ? '' : `<span class="h-me-item-actions"><button type="button" class="icon-button" data-me-up="${k}" title="Avant" ${k ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-me-down="${k}" title="Après" ${k < room.items.length - 1 ? '' : 'disabled'}>↓</button><button type="button" class="icon-button" data-me-edit="${k}" title="Modifier">✎</button><button type="button" class="icon-button danger" data-me-del="${k}" title="Retirer du musée (la photo reste dans la base)">🗑</button></span>`}</li>`).join('')}</ol>
                     <p class="muted">L’ordre de la liste est l’ordre de la visite guidée et, mur par mur, l’ordre d’accrochage de gauche à droite.</p>` : '<p class="muted">Salle vide : ajoute des photos, des objets, des textes…</p>'}` : '<p>Aucune salle.</p>'}
             </section></div>
@@ -102,6 +104,7 @@
         const again = (ri = data.rooms.indexOf(room)) => { dlg.close(); openEditor(data.id, Math.max(0, ri)); };
         const guard = fn => async (...args) => { try { await fn(...args); } catch (error) { toast(error.message, 'error'); } };
         dlg.querySelectorAll('[data-me-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
+        if (room) mountPlan(dlg, room, readOnly, () => again());
         dlg.querySelector('[data-me-visit]').addEventListener('click', () => { dlg.close(); openMuseum(data.id, Math.max(0, data.rooms.indexOf(room))); });
         dlg.querySelector('[data-me-print]').addEventListener('click', () => { dlg.close(); openMuseum(data.id, 0).then(() => document.querySelector('#h-museum-dialog [data-lm-catalog]')?.click()); });
         dlg.querySelectorAll('[data-me-room]').forEach(b => b.addEventListener('click', () => again(Number(b.dataset.meRoom))));
@@ -139,6 +142,92 @@
         }));
     }
     ext.openMuseumEditor = openEditor;
+
+    /* ───────── Plan de la salle (vu de dessus, comme un plan d'architecte) ───────── */
+
+    const FOOT = {bench: [1.8, 0.45], chair: [0.5, 0.5], sofa: [2, 0.85], plant: [0.6, 0.6, 'c'], column: [0.56, 0.56, 'c'], pedestal: [0.6, 0.6], rope: [2.1, 0.12], rug: [3, 2],
+        lamp: [0.4, 0.4, 'c'], vase: [0.5, 0.5], piano: [1.5, 1.6], table: [1.6, 0.9], screen: [2.4, 0.3], vitrine: [0.8, 0.8]};
+    const ICON = {photo: '🖼️', document: '📜', artwork: '🎨', object: '🏺', text: '🔤', decor: '🪴', seat: '🪑'};
+    function mountPlan(dlg, room, readOnly, reopen) {
+        const V = window.LCNDA_MUSEUM_VIEWER, svg = dlg.querySelector('[data-me-plan]'), side = dlg.querySelector('[data-me-plan-side]');
+        if (!V || !svg) return;
+        let selected = null, drag = null;
+        const num = v => v !== null && v !== undefined && v !== '' && !isNaN(Number(v));
+        const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        const canHang = it => !['decor', 'seat'].includes(it.kind);
+        const toWorld = (wall, along, W, D) => wall === 'back' ? [along, -D / 2] : wall === 'front' ? [-along, D / 2] : wall === 'left' ? [-W / 2, along] : [W / 2, -along];
+        const draw = () => {
+            const {W, D, spots} = V.layoutRoom(room);
+            svg.setAttribute('viewBox', `${-W / 2 - 1} ${-D / 2 - 1} ${W + 2} ${D + 2}`);
+            let h = `<rect x="${-W / 2}" y="${-D / 2}" width="${W}" height="${D}" class="pl-room"/>`;
+            for (let x = Math.ceil(-W / 2); x < W / 2; x++) h += `<line x1="${x}" y1="${-D / 2}" x2="${x}" y2="${D / 2}" class="pl-grid"/>`;
+            for (let z = Math.ceil(-D / 2); z < D / 2; z++) h += `<line x1="${-W / 2}" y1="${z}" x2="${W / 2}" y2="${z}" class="pl-grid"/>`;
+            h += `<text x="0" y="${-D / 2 - 0.35}" class="pl-wall">Mur du fond</text><text x="0" y="${D / 2 + 0.65}" class="pl-wall">Mur d’entrée</text>`;
+            h += `<text x="${-W / 2 - 0.35}" y="0" class="pl-wall" transform="rotate(-90 ${-W / 2 - 0.35} 0)">Mur de gauche</text><text x="${W / 2 + 0.35}" y="0" class="pl-wall" transform="rotate(90 ${W / 2 + 0.35} 0)">Mur de droite</text>`;
+            [-(W / 2 - 1.3), W / 2 - 1.3].forEach((x, k) => { h += `<rect x="${x - 0.63}" y="${D / 2 - 0.08}" width="1.26" height="0.16" class="pl-door"/><text x="${x}" y="${D / 2 - 0.3}" class="pl-small">${k ? 'porte' : 'porte'}</text>`; });
+            h += `<text x="0" y="${D / 2 - 0.5}" class="pl-small">▲ on entre ici</text>`;
+            (room.items || []).forEach((it, k) => {
+                const sp = spots.get(it); if (!sp) return;
+                const sel = selected === it ? ' is-sel' : '', label = esc(it.title || it.source_title || MODELS[it.settings?.model] || '');
+                if (sp.center) {
+                    const m = it.kind === 'decor' || it.kind === 'seat' ? (it.settings?.model || (it.kind === 'seat' ? 'bench' : 'plant')) : it.kind === 'object' ? 'vitrine' : 'easel';
+                    const [fw, fd, round] = FOOT[m] || [1, 0.5];
+                    const shape = round ? `<circle r="${fw / 2}" class="pl-item${sel}"/>` : `<rect x="${-fw / 2}" y="${-fd / 2}" width="${fw}" height="${fd}" class="pl-item${sel}"/>`;
+                    h += `<g class="pl-g" data-pl="${k}" transform="translate(${sp.x} ${sp.z}) rotate(${-(sp.rot || 0) * 180 / Math.PI})"><title>${label}</title>${shape}<path d="M -0.12 ${fd / 2 + 0.05} L 0.12 ${fd / 2 + 0.05} L 0 ${fd / 2 + 0.22} Z" class="pl-front"/><text y="0.12" class="pl-num">${k + 1}</text></g>`;
+                } else {
+                    const [x, z] = toWorld(sp.wall, sp.along, W, D), w = Math.min(sp.slot * 0.7, 1.35 * (Number(it.settings?.scale) || 1));
+                    const horiz = sp.wall === 'back' || sp.wall === 'front', ins = sp.wall === 'back' || sp.wall === 'left' ? 0.12 : -0.12;
+                    const rx = horiz ? x - w / 2 : x + (sp.wall === 'left' ? 0 : -0.24), rz = horiz ? z + (sp.wall === 'back' ? 0 : -0.24) : z - w / 2;
+                    h += `<g class="pl-g" data-pl="${k}"><title>${label}</title><rect x="${rx}" y="${rz}" width="${horiz ? w : 0.24}" height="${horiz ? 0.24 : w}" class="pl-hang${sel}"/><text x="${horiz ? x : x + ins * 3}" y="${horiz ? z + ins * 3 + 0.12 : z + 0.12}" class="pl-num">${k + 1}</text></g>`;
+                }
+            });
+            svg.innerHTML = h;
+        };
+        const sideHtml = () => {
+            const it = selected; if (!it) { side.innerHTML = '<p class="muted">Clique sur un élément du plan.</p>'; return; }
+            const {spots} = V.layoutRoom(room), sp = spots.get(it), st = it.settings || {};
+            side.innerHTML = `<p><strong>${ICON[it.kind] || ''} ${esc(it.title || it.source_title || MODELS[st.model] || 'Sans titre')}</strong><br><small class="muted">${sp?.center ? 'Au milieu de la salle' : esc(WALLS[it.wall] || '')}</small></p>
+                ${readOnly ? '' : `${sp?.center ? `<label>Orientation <output>${Math.round((sp.rot || 0) * 180 / Math.PI)}°</output><input type="range" min="-180" max="180" step="15" value="${Math.round((sp.rot || 0) * 180 / Math.PI)}" data-pl-set="rot"></label>`
+                    : `<label>Hauteur au mur <output>${(sp?.y ?? 1.6).toFixed(2)} m</output><input type="range" min="0.8" max="2.8" step="0.05" value="${sp?.y ?? (it.kind === 'text' ? 1.9 : 1.6)}" data-pl-set="y"></label>`}
+                ${['decor', 'seat'].includes(it.kind) ? '' : `<label>Taille <output>× ${Number(st.scale || 1).toFixed(1)}</output><input type="range" min="0.5" max="2.5" step="0.1" value="${st.scale || 1}" data-pl-set="scale"></label>`}
+                <div class="h-me-buttons"><button type="button" class="button small secondary" data-pl-edit>✎ Cartel, audio…</button><button type="button" class="button small secondary" data-pl-auto title="L’app le place toute seule">↺ Placement auto</button></div>`}`;
+            side.querySelectorAll('[data-pl-set]').forEach(inp => {
+                inp.addEventListener('input', () => { const k = inp.dataset.plSet; it.settings = {...(it.settings || {}), [k]: Number(inp.value)}; inp.previousElementSibling.textContent = k === 'rot' ? inp.value + '°' : k === 'y' ? Number(inp.value).toFixed(2) + ' m' : '× ' + Number(inp.value).toFixed(1); draw(); });
+                inp.addEventListener('change', () => save(it));
+            });
+            side.querySelector('[data-pl-edit]')?.addEventListener('click', () => itemDialog(room, it, reopen));
+            side.querySelector('[data-pl-auto]')?.addEventListener('click', () => { const s2 = {...(it.settings || {})}; ['along', 'y', 'px', 'pz', 'rot'].forEach(k => delete s2[k]); it.settings = s2; draw(); sideHtml(); save(it); });
+        };
+        const save = async it => {
+            try { await post('save_museum_item', {...itemPayload(it), room_id: room.id}); dlg.querySelector(`.h-me-items li:nth-child(${room.items.indexOf(it) + 1}) small`)?.replaceChildren(document.createTextNode(`${KINDS[it.kind] || it.kind} · ${WALLS[it.wall] || ''}`)); }
+            catch (error) { toast(error.message, 'error'); }
+        };
+        const point = e => { const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY; const p2 = pt.matrixTransform(svg.getScreenCTM().inverse()); return [p2.x, p2.y]; };
+        svg.addEventListener('pointerdown', e => {
+            const g = e.target.closest('[data-pl]'); if (!g) { selected = null; draw(); sideHtml(); return; }
+            selected = room.items[Number(g.dataset.pl)]; draw(); sideHtml();
+            if (readOnly) return;
+            drag = {it: selected, moved: false}; svg.setPointerCapture(e.pointerId); e.preventDefault();
+        });
+        svg.addEventListener('pointermove', e => {
+            if (!drag) return;
+            const {W, D} = V.layoutRoom(room), [x, z] = point(e), it = drag.it, st = {...(it.settings || {})};
+            const dist = {back: z + D / 2, front: D / 2 - z, left: x + W / 2, right: W / 2 - x};
+            const wall = Object.entries(dist).sort((a, b) => a[1] - b[1])[0];
+            if (canHang(it) && wall[1] < 0.9) {
+                it.wall = wall[0];
+                const coord = wall[0] === 'back' || wall[0] === 'front' ? x : z;
+                st.along = Math.round(clamp(coord / V.wallLimit(wall[0], W, D), -1, 1) * 1000) / 1000; delete st.px; delete st.pz; delete st.rot;
+            } else {
+                it.wall = 'center';
+                st.px = Math.round(clamp(x / (W / 2 - 1), -1, 1) * 1000) / 1000; st.pz = Math.round(clamp(z / (D / 2 - 1), -1, 1) * 1000) / 1000; delete st.along; delete st.y;
+            }
+            it.settings = st; drag.moved = true; draw();
+        });
+        const end = () => { if (!drag) return; const d = drag; drag = null; if (d.moved) { sideHtml(); save(d.it); } };
+        svg.addEventListener('pointerup', end); svg.addEventListener('pointercancel', end);
+        draw();
+    }
 
     function audioField(kind, rec) {
         return `<span class="section-label">🎧 Commentaire audio ${kind === 'room' ? 'de la salle' : ''}</span>${rec.audio ? `<audio controls src="${esc(rec.audio)}"></audio><button type="button" class="link-button" data-me-audio-del>Retirer le son</button>` : '<small class="muted">Aucun : la visite guidée lira le texte avec la voix de l’ordinateur.</small>'}
