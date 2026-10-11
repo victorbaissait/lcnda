@@ -101,16 +101,25 @@ $unk = $exp; $unk['definition']['rules'][0]['values'] = [['tag' => 'ZZZ', 'label
 try { import_my_list($pdo, ['json' => json_encode($unk)]); $out['list_unknown'] = 'accepté'; } catch (Throwable $e) { $out['list_unknown'] = str_contains($e->getMessage(), 'Type inventé') ? 'refusé' : $e->getMessage(); }
 try { import_my_list($pdo, ['json' => '{"type":"autre"}']); $out['list_bad'] = 'accepté'; } catch (Throwable $e) { $out['list_bad'] = 'refusé'; }
 
-// Photo retouchée : un fichier partagé par deux médias (import GEDCOM) n'est jamais effacé
-$pdo->exec("INSERT INTO media(title,media_type,filename,thumbnail) VALUES('Doublon','image','portrait.jpg','portrait.jpg')");
-$out['shared'] = [retouch_file_shared($pdo, 1, 'portrait.jpg'), retouch_file_shared($pdo, 1, 'autre.jpg')];
+// Versions d'une photo : original gardé, version affichée au choix, l'original ne se supprime pas
+$out['v0'] = array_map(fn($v) => [$v['label'], $v['shown']], retouch_versions($pdo, 1));
+copy(MEDIA_DIR . '/portrait.jpg', MEDIA_DIR . '/retouche.jpg');
+$pdo->exec("INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(1,'portrait.jpg','Original',1),(1,'retouche.jpg','Retouche 1',0)");
+$pdo->exec("UPDATE media SET filename='retouche.jpg', thumbnail='retouche.jpg' WHERE id=1");
+$vs = retouch_versions($pdo, 1);
+$out['v1'] = array_map(fn($v) => [$v['label'], $v['shown']], $vs);
+$back = retouch_show_version($pdo, ['media_id' => 1, 'version_id' => $vs[0]['id']]);
+$out['v2'] = [$back['filename'], (string) $pdo->query('SELECT filename FROM media WHERE id=1')->fetchColumn(), is_file(MEDIA_DIR . '/retouche.jpg')];
+try { retouch_show_version($pdo, ['media_id' => 2, 'version_id' => $vs[1]['id']]); $out['v_other'] = 'accepté'; } catch (Throwable $e) { $out['v_other'] = 'refusé'; }
+$pdo->exec("INSERT INTO media(title,media_type,filename,thumbnail) VALUES('Doublon','image','autre.jpg','autre.jpg')");
+$out['used'] = [retouch_file_used($pdo, 'retouche.jpg'), retouch_file_used($pdo, 'retouche.jpg', $vs[1]['id']), retouch_file_used($pdo, 'autre.jpg'), retouch_file_used($pdo, 'rien.jpg')];
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media') } });
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°16)', () => assert.equal(out.version, 16)],
+  ['structure à jour (n°17)', () => assert.equal(out.version, 17)],
   ['musée créé tout seul avec une première salle', () => assert.deepEqual(out.museum, ['Musée de la famille', 1, 0])],
   ['œuvres : photo de la base, objet (photo de l’objet), siège et texte au milieu ou au mur', () => assert.deepEqual(out.items, [['photo', 'left', 'media/portrait.jpg'], ['object', 'center', 'media/portrait.jpg'], ['seat', 'center', ''], ['text', 'back', '']])],
   ['réglages filtrés (taille bornée, modèle connu, position)', () => assert.deepEqual(out.settings, [{scale: 1.4, model: 'piano'}, {model: 'bench', px: 0.5, pz: -0.5}])],
@@ -128,7 +137,11 @@ const checks = [
   ['liste écrite à la main partagée avec ses lignes, sans lien vers les fiches', () => assert.deepEqual(out.free_share, [1, ['Cercle du Nord']])],
   ['fichier qui n’est pas une liste refusé', () => assert.equal(out.list_bad, 'refusé')],
   ['liste dont le type d’événement n’existe pas ici : refusée (sinon elle montrerait tout)', () => assert.equal(out.list_unknown, 'refusé')],
-  ['photo retouchée : fichier partagé avec un autre média reconnu', () => assert.deepEqual(out.shared, [true, false])],
+  ['photo jamais retouchée : une seule version, l’original, affichée', () => assert.deepEqual(out.v0, [['Original', true]])],
+  ['retouche : l’original et la retouche sont gardés, la retouche affichée', () => assert.deepEqual(out.v1, [['Original', false], ['Retouche 1', true]])],
+  ['retour à l’original par défaut : la retouche reste disponible', () => assert.deepEqual(out.v2, ['portrait.jpg', 'portrait.jpg', true])],
+  ['version d’une autre photo refusée', () => assert.equal(out.v_other, 'refusé')],
+  ['fichier encore utile reconnu (version, autre média)', () => assert.deepEqual(out.used, [true, false, true, false])],
 ];
 let failed = 0;
 for (const [name, fn] of checks) { try { fn(); console.log('  ✓ ' + name); } catch (e) { failed++; console.log('  ✗ ' + name + '\n      ' + e.message); } }

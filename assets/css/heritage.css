@@ -463,3 +463,18 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-me-place { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
 .h-me-place[hidden] { display:none; }
 @media (max-width:900px) { .h-me-grid { grid-template-columns:1fr; } .h-me-roomform { grid-template-columns:1fr; } }
+.h-rt-versions { margin-top:12px; border-top:1px solid var(--line, #ddd); padding-top:8px; }
+.h-rt-versions h3 { margin:0 0 6px; font-size:13px; text-transform:uppercase; letter-spacing:.06em; }
+.h-rt-vlist { display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; }
+.h-rt-vlist figure { margin:0; flex:0 0 150px; border:2px solid var(--line, #ddd); padding:5px; display:grid; gap:4px; background:#fff; }
+.h-rt-vlist figure.is-shown { border-color:#111; }
+.h-rt-vlist figure.is-source { outline:3px solid #0066cc; outline-offset:-1px; }
+.h-rt-vlist img { width:100%; height:86px; object-fit:cover; background:#f3f3f3; }
+.h-rt-vlist figcaption { display:grid; gap:2px; font-size:12px; }
+.h-rt-vlist figcaption .link-button { justify-self:start; font-size:12px; }
+.h-rt-badge { justify-self:start; background:#111; color:#fff; font-size:11px; padding:1px 6px; }
+/* La fenêtre de retouche tient dans l'écran, boutons compris */
+.h-retouch { max-height:calc(100vh - 20px); overflow:auto; }
+.h-retouch .h-rt-stage { max-height:calc(100vh - 430px); min-height:240px; }
+.h-retouch .h-rt-stage canvas { max-height:calc(100vh - 432px); }
+.h-retouch .h-rt-tools { max-height:calc(100vh - 430px); min-height:240px; }

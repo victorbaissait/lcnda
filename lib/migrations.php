@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 16;
+const SCHEMA_VERSION = 17;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -37,6 +37,7 @@ function migration_steps(): array
         14 => 'schema_v14',
         15 => 'schema_v15',
         16 => 'schema_v16',
+        17 => 'schema_v17',
     ];
 }
 
@@ -1441,4 +1442,38 @@ function schema_v16(PDO $pdo): void
         message TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
+}
+
+/**
+ * Versions d'une photo : l'original est toujours gardé, chaque retouche est une version de plus, et on choisit celle
+ * qui s'affiche (media.filename). Tous les fichiers restent dans media/ ; les originaux mis de côté par la
+ * structure n°16 (media/originaux/) y reviennent.
+ */
+function schema_v17(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS media_versions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        media_id INTEGER NOT NULL REFERENCES media(id) ON DELETE CASCADE,
+        filename TEXT NOT NULL,
+        label TEXT NOT NULL DEFAULT '',
+        is_original INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(media_id, filename)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_media_versions ON media_versions(media_id)');
+    $hasOld = (bool) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='media_originals'")->fetchColumn();
+    if (!$hasOld) { return; }
+    $rows = $pdo->query('SELECT o.media_id, o.filename AS original, o.created_at, m.filename AS current FROM media_originals o JOIN media m ON m.id=o.media_id')->fetchAll();
+    $ins = $pdo->prepare('INSERT OR IGNORE INTO media_versions(media_id, filename, label, is_original, created_at) VALUES(?,?,?,?,?)');
+    foreach ($rows as $r) {
+        $name = basename((string) $r['original']);
+        $from = MEDIA_DIR . '/originaux/' . $name;
+        if (is_file($from)) {
+            if (is_file(MEDIA_DIR . '/' . $name)) { $name = bin2hex(random_bytes(4)) . '_' . $name; }
+            if (!@rename($from, MEDIA_DIR . '/' . $name)) { continue; }
+        } elseif (!is_file(MEDIA_DIR . '/' . $name)) { continue; }
+        $ins->execute([(int) $r['media_id'], $name, 'Original', 1, (string) $r['created_at']]);
+        $ins->execute([(int) $r['media_id'], basename((string) $r['current']), 'Retouche', 0, (string) $r['created_at']]);
+    }
+    $pdo->exec('DELETE FROM media_originals');
 }

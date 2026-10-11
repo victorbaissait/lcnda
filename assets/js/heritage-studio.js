@@ -247,14 +247,16 @@
         ['Négatif → positif', st => Object.assign(st, {invert: true, contrast: 15})],
     ];
     const mediaSrc = m => `media/${encodeURIComponent(m.filename)}?v=${m._cacheBust || ''}`;
-    async function openRetouch() {
+    /** Retouche d'une photo : on part de la version affichée (ou d'une autre, `source`), le résultat devient une nouvelle version. */
+    async function openRetouch(source = '') {
         const st0 = A().state, item = st0.lightboxMedia?.[st0.lightboxIndex];
         if (!item) return;
+        let versions = [];
+        try { versions = (await api('media_versions', {id: item.id})).versions || []; } catch (_) {}
+        const from = source || item.filename;
         const img = new Image(); img.decoding = 'async';
-        img.src = mediaSrc(item);
+        img.src = `media/${encodeURIComponent(from)}?v=${item._cacheBust || ''}`;
         try { await img.decode(); } catch (_) { return toast('Impossible d’ouvrir cette image.', 'error'); }
-        let hasOriginal = false;
-        try { hasOriginal = !!(await api('media_retouch_info', {id: item.id})).has_original; } catch (_) {}
         const st = rtDefault(); let channel = 'rgb';
         const scale = Math.min(1, 1100 / Math.max(img.naturalWidth, img.naturalHeight));
         const pw = Math.max(1, Math.round(img.naturalWidth * scale)), ph = Math.max(1, Math.round(img.naturalHeight * scale));
@@ -274,8 +276,9 @@
                 <svg class="h-rt-curve" viewBox="-6 -6 268 268" data-rt-curve><path class="h-rt-hist" d="${histPath}"/><g class="h-rt-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rt-diag"/></g><path class="h-rt-line" data-rt-line/><g data-rt-points></g></svg>
                 <p class="muted h-rt-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · double-clic : l’enlever. Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste.</p>
                 <button type="button" class="link-button" data-rt-reset>Tout remettre à zéro</button></div></div>
-            <div class="modal-actions">${hasOriginal ? '<button type="button" class="button secondary" data-rt-restore title="La photo d’avant toute retouche">↺ Revenir à l’original</button>' : ''}<span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy">Enregistrer une copie</button><button type="button" class="button" data-rt-save="replace">Remplacer la photo</button></div>
-            <p class="muted h-rt-note">« Remplacer » garde toujours la toute première version : « Revenir à l’original » la remet à tout moment.</p>`;
+            <section class="h-rt-versions" data-rt-versions></section>
+            <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
+            <p class="muted h-rt-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
         dlg.querySelectorAll('[data-rt-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
@@ -329,8 +332,26 @@
                 else ext.refreshView?.();
             } catch (_) {}
         };
+        // Les versions : l'original, puis les retouches ; on choisit celle qui s'affiche par défaut
+        const applyShown = file => { if (file && file !== item.filename) { item.filename = item.thumbnail = file; item._cacheBust = Date.now(); A().renderLightboxItem?.(); refreshAfter(); } };
+        const drawVersions = () => {
+            const box = dlg.querySelector('[data-rt-versions]');
+            box.innerHTML = `<h3>Versions de la photo</h3><div class="h-rt-vlist">${versions.map(v => `<figure class="${v.shown ? 'is-shown' : ''} ${v.filename === from ? 'is-source' : ''}"><img src="media/${encodeURIComponent(v.filename)}" alt="" loading="lazy"><figcaption><strong>${esc(v.label)}</strong>${v.shown ? '<span class="h-rt-badge">affichée</span>' : (v.id ? `<button type="button" class="link-button" data-rt-vshow="${v.id}">Afficher par défaut</button>` : '')}
+                ${v.filename !== from ? `<button type="button" class="link-button" data-rt-vfrom="${esc(v.filename)}">Retoucher celle-ci</button>` : '<small>en cours de retouche</small>'}${!v.is_original && v.id ? `<button type="button" class="link-button danger" data-rt-vdel="${v.id}">Supprimer</button>` : ''}</figcaption></figure>`).join('')}</div>`;
+            box.querySelectorAll('[data-rt-vshow]').forEach(b => b.addEventListener('click', async () => {
+                try { const r = await api('retouch_show_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rtVshow}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version affichée par défaut changée.'); }
+                catch (error) { toast(error.message, 'error'); }
+            }));
+            box.querySelectorAll('[data-rt-vdel]').forEach(b => b.addEventListener('click', async () => {
+                if (!confirm('Supprimer cette version retouchée ? L’original et les autres versions restent.')) return;
+                try { const r = await api('retouch_delete_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rtVdel}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version supprimée.'); }
+                catch (error) { toast(error.message, 'error'); }
+            }));
+            box.querySelectorAll('[data-rt-vfrom]').forEach(b => b.addEventListener('click', () => { dlg.close(); openRetouch(b.dataset.rtVfrom); }));
+        };
+        drawVersions();
         dlg.querySelectorAll('[data-rt-save]').forEach(b => b.addEventListener('click', async () => {
-            const mode = b.dataset.rtSave;
+            const mode = b.dataset.rtSave, label0 = b.textContent;
             const mpx = img.naturalWidth * img.naturalHeight / 1e6;
             if (mpx > 60 && !confirm(`Cette image est très grande (${Math.round(mpx)} millions de points) : l’enregistrement peut être long, voire échouer. Continuer ?`)) return;
             dlg.querySelectorAll('.modal-actions button').forEach(x => { x.disabled = true; });
@@ -340,28 +361,23 @@
                 const full = document.createElement('canvas'); full.width = img.naturalWidth; full.height = img.naturalHeight;
                 const fctx = full.getContext('2d', {willReadFrequently: true}); fctx.drawImage(img, 0, 0);
                 const data = fctx.getImageData(0, 0, full.width, full.height); fctx.putImageData(rtApply(data, data, st), 0, 0);
-                const ext0 = String(item.filename || '').split('.').pop().toLowerCase();
+                const ext0 = String(from || '').split('.').pop().toLowerCase();
                 const type = ext0 === 'png' ? 'image/png' : ext0 === 'webp' ? 'image/webp' : ext0 === 'gif' ? 'image/png' : 'image/jpeg';
                 const blob = await new Promise(res => full.toBlob(res, type, 0.93));
                 if (!blob) throw new Error('Image trop grande pour être enregistrée par le navigateur.');
-                const fd = new FormData(); fd.append('file', blob, 'retouche.' + (type.split('/')[1] === 'jpeg' ? 'jpg' : type.split('/')[1])); fd.append('media_id', item.id); fd.append('mode', mode); fd.append('csrf', A().state.csrf);
+                const fd = new FormData(); fd.append('file', blob, 'retouche.' + (type.split('/')[1] === 'jpeg' ? 'jpg' : type.split('/')[1])); fd.append('media_id', item.id); fd.append('mode', mode === 'copy' ? 'copy' : 'version'); fd.append('show', mode === 'show' ? '1' : '0'); fd.append('csrf', A().state.csrf);
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                 const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                 if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
-                if (mode === 'replace') { item.filename = item.thumbnail = j.result.filename; item._cacheBust = Date.now(); A().renderLightboxItem?.(); toast('Photo retouchée. L’original est gardé.'); }
-                else toast('Copie retouchée ajoutée aux mêmes fiches.');
-                dlg.close(); refreshAfter();
+                if (mode === 'copy') { toast('Copie retouchée ajoutée aux mêmes fiches.'); dlg.close(); refreshAfter(); return; }
+                if (mode === 'show') { applyShown(j.result.filename); toast('Nouvelle version affichée. L’original est gardé dans les versions.'); dlg.close(); return; }
+                versions = j.result.versions; toast('Version enregistrée (non affichée).'); dlg.close();
             } catch (error) {
                 toast(error.message, 'error');
                 dlg.querySelectorAll('.modal-actions button').forEach(x => { x.disabled = false; });
-                b.textContent = mode === 'copy' ? 'Enregistrer une copie' : 'Remplacer la photo';
+                b.textContent = label0;
             }
         }));
-        dlg.querySelector('[data-rt-restore]')?.addEventListener('click', async () => {
-            if (!confirm('Remettre la photo dans son état d’origine ? La retouche actuelle sera perdue.')) return;
-            try { const r = await api('retouch_restore_original', {}, {method: 'POST', body: {media_id: item.id}}); item.filename = item.thumbnail = r.result.filename; item._cacheBust = Date.now(); A().renderLightboxItem?.(); toast('Original remis.'); dlg.close(); refreshAfter(); }
-            catch (error) { toast(error.message, 'error'); }
-        });
         dlg.showModal();
         syncControls();
     }

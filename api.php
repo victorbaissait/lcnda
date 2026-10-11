@@ -174,8 +174,8 @@ try {
     if ($isWrite && $action === 'museum_import') {
         museum_import($pdo, $_FILES['file'] ?? null);
     }
-    if ($isWrite && $action === 'retouch_restore_original') {
-        retouch_restore_original($pdo, $payload);
+    if ($isWrite && $action === 'retouch_delete_version') {
+        retouch_delete_version($pdo, $payload);
     }
     if ($isWrite && $action === 'retouch_media') {
         retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
@@ -269,7 +269,7 @@ try {
         'museum' => json_response(['museum' => museum_get($pdo, safe_int($_GET['id'] ?? 0))]),
         'museum_pick' => json_response(['items' => museum_pick($pdo, (string) ($_GET['what'] ?? 'media'), mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
         'museum_export' => museum_export($pdo, safe_int($_GET['id'] ?? 0), (string) ($_GET['format'] ?? 'lcnda')),
-        'media_retouch_info' => json_response(['has_original' => retouch_has_original($pdo, safe_int($_GET['id'] ?? 0))]),
+        'media_versions' => json_response(['versions' => retouch_versions($pdo, safe_int($_GET['id'] ?? 0))]),
         'recent_acts' => json_response(['acts' => recent_acts($pdo)]),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
         'historical_context' => json_response(historical_context($pdo)),
@@ -6303,6 +6303,7 @@ function data_health_report(PDO $pdo): never
     $media=$pdo->query('SELECT id,title,filename,thumbnail FROM media WHERE trim(COALESCE(filename,\'\'))<>\'\' ORDER BY id')->fetchAll();
     $missing=[];$linked=[];
     foreach($media as $row){$path=safety_media_path((string)$row['filename']);if(!$path||!is_file($path))$missing[]=['id'=>(int)$row['id'],'title'=>(string)$row['title'],'filename'=>(string)$row['filename']];else $linked[basename((string)$row['filename'])]=true;}
+    foreach($pdo->query('SELECT filename FROM media_versions')->fetchAll(PDO::FETCH_COLUMN) as $versionFile)$linked[basename((string)$versionFile)]=true; // versions d'une photo retouchée : gardées exprès
     $files=safety_file_candidates();$orphans=array_values(array_filter($files,static fn($file)=>!isset($linked[$file['name']])));
     $counts=[];foreach(['persons','families','events','sources','media','notes'] as $table){try{$counts[$table]=(int)$pdo->query("SELECT count(*) FROM {$table}")->fetchColumn();}catch(Throwable){$counts[$table]=0;}}
     $pdo->exec('CREATE TABLE IF NOT EXISTS backup_restore_tests (id INTEGER PRIMARY KEY AUTOINCREMENT, backup_name TEXT NOT NULL, integrity TEXT NOT NULL, tested_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)');
@@ -8914,6 +8915,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_my_list' => delete_my_list($pdo,$data),
             'save_my_list_row' => save_my_list_row($pdo,$data),
             'import_my_list' => import_my_list($pdo,$data),
+            'retouch_show_version' => retouch_show_version($pdo,$data),
             'save_museum' => museum_save($pdo,$data),
             'save_museum_room' => museum_save_room($pdo,$data),
             'delete_museum_room' => museum_delete_room($pdo,$data),

@@ -4,19 +4,13 @@ declare(strict_types=1);
 /**
  * 🖼️ Retouche des photos (visionneuse → « Retoucher ») : luminosité, contraste, couleurs et courbe sont calculés
  * dans le navigateur ; le serveur reçoit l'image finie.
- *  - « Remplacer » : l'original est rangé dans media/originaux/ (une seule fois : c'est toujours le tout premier
- *    qui est gardé) et la fiche du média pointe vers l'image retouchée ; « Revenir à l'original » le remet.
- *  - « Enregistrer une copie » : un nouveau média, rattaché aux mêmes fiches, l'original ne change pas.
+ *  - L'original est toujours gardé. Chaque retouche est une version de plus de la même photo (structure n°17,
+ *    table media_versions) ; on choisit la version affichée partout (media.filename), et on peut en changer.
+ *  - « Enregistrer une copie » crée au contraire un autre média, rattaché aux mêmes fiches.
+ * Tous les fichiers restent dans media/. Un fichier n'est effacé que s'il ne sert plus à rien.
  */
 
 const RETOUCH_TYPES = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-
-function retouch_originals_dir(): string
-{
-    $dir = MEDIA_DIR . '/originaux';
-    if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('Impossible de créer le dossier des originaux.'); }
-    return $dir;
-}
 
 /** Range le fichier reçu dans media/ sous un nouveau nom ; rend ce nom. */
 function retouch_store_upload(?array $file): string
@@ -32,17 +26,30 @@ function retouch_store_upload(?array $file): string
     return $name;
 }
 
-/** Un autre média utilise-t-il ce fichier ? (un import GEDCOM peut faire partager un fichier à deux médias) */
-function retouch_file_shared(PDO $pdo, int $id, string $file): bool
+/** Un fichier sert-il encore (à un média ou à une version) ? Un import GEDCOM peut faire partager un fichier à deux médias. */
+function retouch_file_used(PDO $pdo, string $file, int $exceptVersion = 0): bool
 {
-    $s = $pdo->prepare('SELECT count(*) FROM media WHERE id<>? AND (filename=? OR thumbnail=?)'); $s->execute([$id, $file, $file]);
+    $s = $pdo->prepare('SELECT (SELECT count(*) FROM media WHERE filename=? OR thumbnail=?) + (SELECT count(*) FROM media_versions WHERE filename=? AND id<>?)');
+    $s->execute([$file, $file, $file, $exceptVersion]);
     return (int) $s->fetchColumn() > 0;
+}
+
+/** Les versions d'une photo (l'original en premier) et celle qui est affichée. */
+function retouch_versions(PDO $pdo, int $id): array
+{
+    $m = $pdo->prepare('SELECT filename FROM media WHERE id=?'); $m->execute([$id]);
+    $shown = (string) $m->fetchColumn();
+    $s = $pdo->prepare('SELECT id, filename, label, is_original, created_at FROM media_versions WHERE media_id=? ORDER BY is_original DESC, id'); $s->execute([$id]);
+    $rows = $s->fetchAll();
+    if (!$rows) { return [['id' => 0, 'filename' => $shown, 'label' => 'Original', 'is_original' => 1, 'created_at' => '', 'shown' => true]]; }
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'filename' => $r['filename'], 'label' => $r['label'], 'is_original' => (int) $r['is_original'], 'created_at' => $r['created_at'], 'shown' => $r['filename'] === $shown], $rows);
 }
 
 function retouch_media(PDO $pdo, ?array $file, array $post): never
 {
     $id = safe_int($post['media_id'] ?? 0);
-    $mode = ($post['mode'] ?? '') === 'copy' ? 'copy' : 'replace';
+    $mode = ($post['mode'] ?? '') === 'copy' ? 'copy' : 'version';
+    $show = !empty($post['show']) && $post['show'] !== '0';
     $s = $pdo->prepare('SELECT * FROM media WHERE id=?'); $s->execute([$id]);
     $media = $s->fetch();
     if (!$media) { json_response(['error' => 'Média introuvable.'], 404); }
@@ -53,7 +60,6 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
         json_response(['error' => $e->getMessage()], 422);
     }
     $current = basename((string) $media['filename']);
-    $keptCopy = null; // copie de l'original rangée dans originaux/ par ce passage
     $pdo->beginTransaction();
     try {
         if ($mode === 'copy') {
@@ -73,68 +79,69 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
                 SELECT ?, entity_type, entity_id, position + 0.5, collection_key, collection_label FROM media_links WHERE media_id=?')->execute([$newId, $id]);
             log_change($pdo, 'media', $newId, 'create', 'Copie retouchée du média « ' . ($media['title'] ?: $media['filename']) . ' »');
             $result = ['mode' => 'copy', 'media_id' => $newId];
-            $pdo->commit();
         } else {
-            $orig = $pdo->prepare('SELECT filename FROM media_originals WHERE media_id=?'); $orig->execute([$id]);
-            $kept = $orig->fetchColumn();
-            if ($kept === false) {
-                // Premier passage : on COPIE l'original dans originaux/ (rien n'est déplacé tant que la base n'est pas à jour)
-                $dest = retouch_originals_dir() . '/' . $current;
-                if (is_file($dest)) { $dest = retouch_originals_dir() . '/' . bin2hex(random_bytes(4)) . '_' . $current; }
-                if (!@copy(media_file_path($current), $dest)) { throw new RuntimeException('Impossible de mettre l’original de côté.'); }
-                $keptCopy = $dest;
-                $pdo->prepare('INSERT INTO media_originals(media_id, filename) VALUES(?,?)')->execute([$id, basename($dest)]);
+            // Première retouche : la photo d'avant devient la version « Original »
+            $has = $pdo->prepare('SELECT count(*) FROM media_versions WHERE media_id=?'); $has->execute([$id]);
+            if (!(int) $has->fetchColumn()) {
+                $pdo->prepare('INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?,?,?,1)')->execute([$id, $current, 'Original']);
             }
-            $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
-            log_change($pdo, 'media', $id, 'update', 'Photo retouchée « ' . ($media['title'] ?: $current) . ' » (original gardé)', ['filename' => $current], ['filename' => $name]);
-            $result = ['mode' => 'replace', 'media_id' => $id, 'filename' => $name];
-            $pdo->commit();
-            // Base à jour : l'ancien fichier (original déjà copié, ou retouche intermédiaire) peut partir, sauf s'il sert ailleurs
-            if ($current !== '' && !retouch_file_shared($pdo, $id, $current)) { @unlink(MEDIA_DIR . '/' . $current); }
-            $thumb = basename((string) $media['thumbnail']); // ancienne vignette à part (si elle existait)
-            if ($thumb !== '' && $thumb !== $current && !retouch_file_shared($pdo, $id, $thumb)) { @unlink(MEDIA_DIR . '/' . $thumb); }
+            $n = $pdo->prepare('SELECT count(*) FROM media_versions WHERE media_id=? AND is_original=0'); $n->execute([$id]);
+            $label = 'Retouche ' . ((int) $n->fetchColumn() + 1) . ' — ' . date('d/m/Y');
+            $pdo->prepare('INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?,?,?,0)')->execute([$id, $name, $label]);
+            if ($show) {
+                $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
+            }
+            log_change($pdo, 'media', $id, 'update', 'Nouvelle version retouchée de « ' . ($media['title'] ?: $current) . ' »' . ($show ? ' (affichée)' : ''), ['filename' => $current], ['filename' => $show ? $name : $current]);
+            $result = ['mode' => 'version', 'media_id' => $id, 'filename' => $show ? $name : $current, 'versions' => retouch_versions($pdo, $id)];
         }
-    } catch (Throwable $e) {
-        if ($pdo->inTransaction()) { $pdo->rollBack(); }
-        @unlink(MEDIA_DIR . '/' . $name);
-        if ($keptCopy) { @unlink($keptCopy); }
-        json_response(['error' => $e->getMessage()], 500);
-    }
-    json_response(['ok' => true, 'result' => $result]);
-}
-
-/** Remet l'original (route à part, hors de la transaction générale : les fichiers ne bougent qu'une fois la base à jour). */
-function retouch_restore_original(PDO $pdo, array $data): never
-{
-    $id = safe_int($data['media_id'] ?? 0);
-    $s = $pdo->prepare('SELECT m.filename AS current, o.filename AS original FROM media m JOIN media_originals o ON o.media_id=m.id WHERE m.id=?'); $s->execute([$id]);
-    $row = $s->fetch();
-    if (!$row) { json_response(['error' => 'Cette photo n’a pas été retouchée.'], 422); }
-    $from = retouch_originals_dir() . '/' . basename((string) $row['original']);
-    if (!is_file($from)) { json_response(['error' => 'L’original n’est plus dans media/originaux/.'], 422); }
-    $name = basename((string) $row['original']);
-    if (is_file(MEDIA_DIR . '/' . $name)) { $name = bin2hex(random_bytes(4)) . '_' . $name; }
-    if (!@copy($from, MEDIA_DIR . '/' . $name)) { json_response(['error' => 'Impossible de remettre l’original.'], 500); }
-    $pdo->beginTransaction();
-    try {
-        $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
-        $pdo->prepare('DELETE FROM media_originals WHERE media_id=?')->execute([$id]);
-        log_change($pdo, 'media', $id, 'update', 'Photo remise dans son état d’origine');
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         @unlink(MEDIA_DIR . '/' . $name);
         json_response(['error' => $e->getMessage()], 500);
     }
-    @unlink($from);
-    $current = basename((string) $row['current']);
-    if ($current !== '' && $current !== $name && !retouch_file_shared($pdo, $id, $current)) { @unlink(MEDIA_DIR . '/' . $current); }
-    json_response(['ok' => true, 'result' => ['filename' => $name]]);
+    json_response(['ok' => true, 'result' => $result]);
 }
 
-/** Les médias (parmi ceux demandés) qui ont un original gardé. */
-function retouch_has_original(PDO $pdo, int $id): bool
+/** Choisir la version affichée par défaut (l'original ou une retouche). */
+function retouch_show_version(PDO $pdo, array $data): array
 {
-    $s = $pdo->prepare('SELECT 1 FROM media_originals WHERE media_id=?'); $s->execute([$id]);
-    return (bool) $s->fetchColumn();
+    $id = safe_int($data['media_id'] ?? 0);
+    $s = $pdo->prepare('SELECT filename FROM media_versions WHERE id=? AND media_id=?'); $s->execute([safe_int($data['version_id'] ?? 0), $id]);
+    $file = $s->fetchColumn();
+    if ($file === false) { throw new RuntimeException('Version introuvable.'); }
+    if (!is_file(MEDIA_DIR . '/' . basename((string) $file))) { throw new RuntimeException('Le fichier de cette version n’est plus dans le dossier des médias.'); }
+    $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$file, $file, $id]);
+    log_change($pdo, 'media', $id, 'update', 'Version affichée changée');
+    return ['filename' => $file, 'versions' => retouch_versions($pdo, $id)];
+}
+
+/** Supprimer une retouche (jamais l'original). Si elle était affichée, c'est l'original qui reprend sa place. */
+function retouch_delete_version(PDO $pdo, array $data): never
+{
+    $id = safe_int($data['media_id'] ?? 0);
+    $vid = safe_int($data['version_id'] ?? 0);
+    $s = $pdo->prepare('SELECT filename, is_original FROM media_versions WHERE id=? AND media_id=?'); $s->execute([$vid, $id]);
+    $v = $s->fetch();
+    if (!$v) { json_response(['error' => 'Version introuvable.'], 404); }
+    if ((int) $v['is_original']) { json_response(['error' => 'L’original ne se supprime pas.'], 422); }
+    $pdo->beginTransaction();
+    try {
+        $m = $pdo->prepare('SELECT filename FROM media WHERE id=?'); $m->execute([$id]);
+        if ((string) $m->fetchColumn() === (string) $v['filename']) {
+            $o = $pdo->prepare('SELECT filename FROM media_versions WHERE media_id=? AND is_original=1'); $o->execute([$id]);
+            $orig = (string) $o->fetchColumn();
+            $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$orig, $orig, $id]);
+        }
+        $pdo->prepare('DELETE FROM media_versions WHERE id=?')->execute([$vid]);
+        log_change($pdo, 'media', $id, 'update', 'Version retouchée supprimée');
+        $pdo->commit();
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        json_response(['error' => $e->getMessage()], 500);
+    }
+    // Base à jour : le fichier part s'il ne sert plus à rien
+    if (!retouch_file_used($pdo, (string) $v['filename'])) { @unlink(MEDIA_DIR . '/' . basename((string) $v['filename'])); }
+    $vs = retouch_versions($pdo, $id);
+    json_response(['ok' => true, 'result' => ['versions' => $vs, 'filename' => (array_values(array_filter($vs, static fn($x) => $x['shown']))[0]['filename'] ?? '')]]);
 }
