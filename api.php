@@ -8954,7 +8954,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list'];
 }
 
 function normalize_label_color(string $color): string

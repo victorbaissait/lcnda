@@ -9,19 +9,21 @@ declare(strict_types=1);
  *  - les colonnes reprises des fiches, et des colonnes à soi (texte, menu déroulant, case à cocher, date, nombre)
  *    remplies ligne par ligne (ex. « à demander au salon », « fait ») ;
  *  - des personnes ajoutées ou retirées à la main.
+ *  - ou des lignes écrites soi-même, sans rien venir de la base (« free » : stands d'un salon, courses aux archives…),
+ *    avec seulement ses propres colonnes (dont « lien internet » et « personne de la base », facultative).
  * definition_json = {match: all|any, rules: [{field, value, from, to, values}], columns: [...], custom: [{key, label, type, options}]}
  */
 
 const LIST_EVENT_COLUMNS = ['date' => 'Date', 'type' => 'Événement', 'who' => 'Personne(s)', 'place' => 'Lieu', 'description' => 'Description', 'age' => 'Âge', 'sources' => 'Sources'];
 const LIST_PERSON_COLUMNS = ['name' => 'Personne', 'birth' => 'Naissance', 'birthplace' => 'Lieu de naissance', 'death' => 'Décès', 'deathplace' => 'Lieu de décès', 'age' => 'Âge au décès', 'occupation' => 'Métier', 'gender' => 'Sexe', 'parents' => 'Parents', 'sosa' => 'Sosa', 'sources' => 'Sources', 'labels' => 'Étiquettes'];
-const LIST_CUSTOM_TYPES = ['text', 'select', 'checkbox', 'date', 'number'];
+const LIST_CUSTOM_TYPES = ['text', 'select', 'checkbox', 'date', 'number', 'url', 'person'];
 
 function my_lists(PDO $pdo): array
 {
     $rows = $pdo->query('SELECT * FROM custom_lists ORDER BY position, id')->fetchAll();
     foreach ($rows as &$r) { $r['definition'] = json_decode((string) $r['definition_json'], true) ?: []; unset($r['definition_json']); }
     unset($r);
-    return $rows;
+    return with_labels($pdo, 'custom_list', $rows);
 }
 
 function my_list_clean_definition(array $d, string $source): array
@@ -33,8 +35,9 @@ function my_list_clean_definition(array $d, string $source): array
         $rules[] = ['field' => $r['field'], 'value' => mb_substr(safe_text($r['value'] ?? ''), 0, 200), 'from' => safe_int($r['from'] ?? 0) ?: null, 'to' => safe_int($r['to'] ?? 0) ?: null,
             'values' => array_values(array_filter(array_map('intval', is_array($r['values'] ?? null) ? $r['values'] : []))), 'not' => !empty($r['not'])];
     }
-    $allowed = array_keys($source === 'events' ? LIST_EVENT_COLUMNS : LIST_PERSON_COLUMNS);
-    $columns = array_values(array_intersect(is_array($d['columns'] ?? null) ? $d['columns'] : [], $allowed)) ?: array_slice($allowed, 0, 4);
+    if ($source === 'free') { $rules = []; }
+    $allowed = $source === 'free' ? [] : array_keys($source === 'events' ? LIST_EVENT_COLUMNS : LIST_PERSON_COLUMNS);
+    $columns = $source === 'free' ? [] : (array_values(array_intersect(is_array($d['columns'] ?? null) ? $d['columns'] : [], $allowed)) ?: array_slice($allowed, 0, 4));
     $custom = [];
     foreach (is_array($d['custom'] ?? null) ? $d['custom'] : [] as $c) {
         if (!is_array($c) || !in_array($c['type'] ?? '', LIST_CUSTOM_TYPES, true)) { continue; }
@@ -50,8 +53,9 @@ function save_my_list(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0);
     $name = mb_substr(safe_text($data['name'] ?? ''), 0, 80);
     if ($name === '') { throw new RuntimeException('Donne un nom à la liste.'); }
-    $source = ($data['source'] ?? '') === 'events' ? 'events' : 'persons';
+    $source = in_array($data['source'] ?? '', ['events', 'persons', 'free'], true) ? $data['source'] : 'persons';
     $def = my_list_clean_definition(is_array($data['definition'] ?? null) ? $data['definition'] : [], $source);
+    if ($source === 'free' && !$def['custom']) { throw new RuntimeException('Ajoute au moins une colonne à remplir.'); }
     $vals = [$name, mb_substr(safe_text($data['icon'] ?? '📋'), 0, 16) ?: '📋', h_long($data, 'description', 2000), $source, json_encode($def, JSON_UNESCAPED_UNICODE)];
     if ($id) { $pdo->prepare('UPDATE custom_lists SET name=?, icon=?, description=?, source=?, definition_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$vals, $id]); }
     else { $pdo->prepare('INSERT INTO custom_lists(name, icon, description, source, definition_json, position) VALUES(?,?,?,?,?,(SELECT COALESCE(max(position),0)+1 FROM custom_lists))')->execute($vals); $id = (int) $pdo->lastInsertId(); }
@@ -62,6 +66,7 @@ function delete_my_list(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
     $pdo->prepare('DELETE FROM custom_list_rows WHERE list_id=?')->execute([$id]);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='custom_list' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM custom_lists WHERE id=?')->execute([$id]);
     return ['ok' => true];
 }
@@ -71,14 +76,26 @@ function save_my_list_row(PDO $pdo, array $data): array
 {
     $listId = safe_int($data['list_id'] ?? 0);
     $key = safe_text($data['row_key'] ?? '');
-    if (!preg_match('/^[pe]:\d+$/', $key)) { throw new RuntimeException('Ligne invalide.'); }
+    $exists = $pdo->prepare('SELECT 1 FROM custom_lists WHERE id=?'); $exists->execute([$listId]);
+    if (!$exists->fetchColumn()) { throw new RuntimeException('Liste introuvable.'); }
+    if ($key === 'f:new') { // nouvelle ligne écrite à la main
+        $n = (int) $pdo->query("SELECT COALESCE(max(CAST(substr(row_key,3) AS INTEGER)),0)+1 FROM custom_list_rows WHERE list_id=" . $listId . " AND row_key LIKE 'f:%'")->fetchColumn();
+        $key = 'f:' . $n;
+        $pdo->prepare("INSERT INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,1,'{}')")->execute([$listId, $key]);
+        if (!isset($data['field'])) { return ['ok' => true, 'row_key' => $key]; }
+    }
+    if (!preg_match('/^[pef]:\d+$/', $key)) { throw new RuntimeException('Ligne invalide.'); }
     $s = $pdo->prepare('SELECT * FROM custom_list_rows WHERE list_id=? AND row_key=?'); $s->execute([$listId, $key]);
     $row = $s->fetch() ?: ['included' => 0, 'data_json' => '{}'];
     $values = json_decode((string) $row['data_json'], true) ?: [];
     if (array_key_exists('included', $data)) { $row['included'] = max(-1, min(1, (int) $data['included'])); }
     if (isset($data['field'])) { $values[preg_replace('/[^a-z0-9_]/', '', strtolower((string) $data['field']))] = mb_substr(safe_text($data['value'] ?? ''), 0, 2000); }
+    if (str_starts_with($key, 'f:') && (int) $row['included'] === -1) { // ligne écrite à la main supprimée
+        $pdo->prepare('DELETE FROM custom_list_rows WHERE list_id=? AND row_key=?')->execute([$listId, $key]);
+        return ['ok' => true];
+    }
     $pdo->prepare('INSERT OR REPLACE INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,?,?)')->execute([$listId, $key, (int) $row['included'], json_encode($values, JSON_UNESCAPED_UNICODE)]);
-    return ['ok' => true];
+    return ['ok' => true, 'row_key' => $key];
 }
 
 /** Les numéros Sosa de la personne de départ (si l'application sait les calculer). */
@@ -96,6 +113,7 @@ function my_list_rows(PDO $pdo, int $listId): array
     $list = $s->fetch();
     if (!$list) { throw new RuntimeException('Liste introuvable.'); }
     $def = my_list_clean_definition(json_decode((string) $list['definition_json'], true) ?: [], (string) $list['source']);
+    if ($list['source'] === 'free') { return my_list_free_rows($pdo, $list, $def); }
     $isEvents = $list['source'] === 'events';
     $sosas = (in_array('sosa', $def['columns'], true) || array_filter($def['rules'], static fn($r) => $r['field'] === 'sosa')) ? my_list_sosas($pdo) : [];
     $conds = []; $params = [];
@@ -223,6 +241,7 @@ function my_list_rows(PDO $pdo, int $listId): array
     if (!$isEvents && $def['sort'] === 'date') { usort($out, static fn($a, $b) => ($a['year'] ?? 9999) <=> ($b['year'] ?? 9999)); }
     if (!$isEvents && $def['sort'] === 'place') { usort($out, static fn($a, $b) => strcmp((string) $a['cells']['birthplace'], (string) $b['cells']['birthplace'])); }
     $list['definition'] = $def; unset($list['definition_json']);
+    $list['labels'] = collection_labels($pdo, 'custom_list', [(int) $list['id']])[(int) $list['id']] ?? [];
     return ['list' => $list, 'rows' => $out, 'columns' => $isEvents ? LIST_EVENT_COLUMNS : LIST_PERSON_COLUMNS, 'truncated' => count($raw) >= 3000];
 }
 
@@ -248,3 +267,27 @@ function my_list_life(PDO $pdo, array $ids): array
     }
     return $out;
 }
+
+/** Liste aux lignes écrites à la main : dans l'ordre où elles ont été ajoutées ; les personnes choisies sont reliées à leur fiche. */
+function my_list_free_rows(PDO $pdo, array $list, array $def): array
+{
+    $s = $pdo->prepare("SELECT row_key, data_json FROM custom_list_rows WHERE list_id=? AND row_key LIKE 'f:%' AND included>=0 ORDER BY CAST(substr(row_key,3) AS INTEGER)");
+    $s->execute([(int) $list['id']]);
+    $rows = [];
+    $personCols = array_column(array_filter($def['custom'], static fn($c) => $c['type'] === 'person'), 'key');
+    $ids = [];
+    foreach ($s->fetchAll() as $r) {
+        $values = json_decode((string) $r['data_json'], true) ?: [];
+        foreach ($personCols as $k) { if (!empty($values[$k])) { $ids[] = (int) $values[$k]; } }
+        $rows[] = ['key' => $r['row_key'], 'values' => $values, 'manual' => true, 'people' => [], 'cells' => []];
+    }
+    $people = collection_people($pdo, $ids);
+    foreach ($rows as &$r) {
+        foreach ($personCols as $k) { $id = (int) ($r['values'][$k] ?? 0); $r['linked'][$k] = $id && isset($people[$id]) ? $people[$id] : null; }
+    }
+    unset($r);
+    $list['definition'] = $def; unset($list['definition_json']);
+    $list['labels'] = collection_labels($pdo, 'custom_list', [(int) $list['id']])[(int) $list['id']] ?? [];
+    return ['list' => $list, 'rows' => $rows, 'columns' => [], 'truncated' => false];
+}
+

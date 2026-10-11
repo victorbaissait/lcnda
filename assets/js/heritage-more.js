@@ -977,7 +977,7 @@
             ['Peut-on poser une question en français ?', 'Oui : Recherche → « Poser une question », par exemple « Quels ancêtres étaient boulangers à Lille avant 1850 ? ». La recherche peut ensuite être enregistrée.'],
             ['Comment chercher un mot dans la page ?', '⌘F (Mac) ou Ctrl+F : les mots trouvés sont surlignés et comptés.'],
             ['Comment revenir à l’écran précédent ?', '⌘← et ⌘→ sur Mac, Alt+← et Alt+→ sur Windows et Linux. Tous les raccourcis : touche F1.'],
-            ['Comment faire ma propre liste (ex. tous les divorces entre 1850 et 1920) ?', 'Maintenance → Mes listes → « + Nouvelle liste » : choisis des événements ou des personnes, combine les critères, choisis les colonnes et ajoute tes colonnes à remplir (texte, menu, case à cocher). Exportable en CSV et imprimable.'],
+            ['Comment faire ma propre liste (ex. tous les divorces entre 1850 et 1920) ?', 'Maintenance → Mes listes → « + Nouvelle liste » : choisis des événements, des personnes, ou des lignes que tu écris toi-même (stands d’un salon…) ; combine les critères, choisis les colonnes, ajoute tes colonnes à remplir (texte, menu, case à cocher, lien, personne de la base) et des étiquettes. Exportable en CSV et imprimable.'],
             ['Où voir l’histoire d’un village ?', 'Listes → Fiche d’un village : les familles, les métiers, l’église, la population au fil des recensements et la carte de Cassini.'],
         ]],
         ['Lieux et cartes', [
@@ -1071,6 +1071,7 @@
         return [
             {name: 'Divorces 1850–1920', icon: '💔', source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tag('DIV')}, {field: 'year', from: 1850, to: 1920}], columns: ['date', 'type', 'who', 'place', 'age'], custom: [{label: 'Jugement demandé', type: 'checkbox'}, {label: 'Note', type: 'text'}]}},
             {name: 'Préparer un salon', icon: '🎪', description: 'Mes ancêtres dont les parents sont inconnus : à demander aux associations du salon.', source: 'persons', definition: {match: 'all', rules: [{field: 'sosa'}, {field: 'no_parents'}], columns: ['name', 'birth', 'birthplace', 'sosa'], custom: [{label: 'Association / stand', type: 'text'}, {label: 'Priorité', type: 'select', options: ['haute', 'moyenne', 'basse']}, {label: 'Fait', type: 'checkbox'}]}},
+            {name: 'Salon : stands à visiter', icon: '🎪', description: 'Les stands et associations à voir au salon, ce que je veux leur demander, et ce qui est fait.', source: 'free', definition: {match: 'all', rules: [], columns: [], custom: [{label: 'Stand / association', type: 'text'}, {label: 'Thème', type: 'select', options: ['état civil', 'registres paroissiaux', 'notaires', 'militaire', 'paléographie', 'émigration', 'autre']}, {label: 'Question à poser', type: 'text'}, {label: 'Ancêtre concerné', type: 'person'}, {label: 'Site internet', type: 'url'}, {label: 'Fait', type: 'checkbox'}]}},
             {name: 'Mariages sans source', icon: '💍', source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tag('MARR')}, {field: 'no_source'}], columns: ['date', 'who', 'place'], custom: [{label: 'Archives à consulter', type: 'text'}, {label: 'Trouvé', type: 'checkbox'}]}},
             {name: 'Liste vide', icon: '📋', source: 'persons', definition: {match: 'all', rules: [], columns: ['name', 'birth', 'death'], custom: []}},
         ];
@@ -1082,14 +1083,14 @@
         if (S().hListOpen) return renderListView(token, S().hListOpen);
         if (listEditor) return renderListEditor(token);
         const lists = listMeta.lists || [];
-        const ruleText = (l) => (l.definition.rules || []).map(r => (RULES[r.field]?.[l.source === 'events' ? 'ev' : 'pe'] || r.field) + (r.value ? ` « ${r.value} »` : '') + (r.from || r.to ? ` ${r.from || '…'}–${r.to || '…'}` : '')).join(l.definition.match === 'any' ? ' OU ' : ' ET ') || 'aucun critère';
+        const ruleText = (l) => l.source === 'free' ? 'rien ne vient de la base : tu écris toi-même chaque ligne' : (l.definition.rules || []).map(r => (RULES[r.field]?.[l.source === 'events' ? 'ev' : 'pe'] || r.field) + (r.value ? ` « ${r.value} »` : '') + (r.from || r.to ? ` ${r.from || '…'}–${r.to || '…'}` : '')).join(l.definition.match === 'any' ? ' OU ' : ' ET ') || 'aucun critère';
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Mes listes', 'Des listes sur mesure : choisis ce que tu listes (des événements, comme les divorces, ou des personnes), combine des critères (période, lieu, nom, étiquette, ancêtres…), choisis les colonnes, et ajoute tes propres colonnes à remplir (texte, menu, case à cocher) — par exemple pour préparer un salon.', '<button type="button" class="button" data-h-list-new>+ Nouvelle liste</button>')}
-            ${lists.length ? `<div class="h-records">${lists.map(l => `<article class="h-record"><header><div><button type="button" class="table-link" data-h-list-open="${l.id}"><strong>${esc(l.icon)} ${esc(l.name)}</strong></button> <small class="muted">${l.source === 'events' ? 'événements' : 'personnes'}</small></div>${tools(`data-h-list-edit="${l.id}"`, `data-h-list-del="${l.id}"`, 'cette liste')}</header>
+            ${lists.length ? `<div class="h-records">${lists.map(l => `<article class="h-record"><header><div><button type="button" class="table-link" data-h-list-open="${l.id}"><strong>${esc(l.icon)} ${esc(l.name)}</strong></button> <small class="muted">${{events: 'événements', persons: 'personnes', free: 'lignes écrites à la main'}[l.source] || ''}</small>${ext.labelChips(l.labels)}</div>${tools(`data-h-list-edit="${l.id}"`, `data-h-list-del="${l.id}"`, 'cette liste')}</header>
                 ${l.description ? `<p>${esc(l.description)}</p>` : ''}<p class="muted">${esc(ruleText(l))}${(l.definition.custom || []).length ? ` · colonnes à remplir : ${esc(l.definition.custom.map(c => c.label).join(', '))}` : ''}</p></article>`).join('')}</div>` : empty('Aucune liste pour l’instant : clique sur « + Nouvelle liste ».')}</section>`;
         const ws = A().$('#workspace');
         ws.querySelector('[data-h-list-new]').addEventListener('click', () => dialog({
             eyebrow: 'NOUVELLE LISTE', title: 'Par quoi commencer ?',
-            body: `<div class="h-templates">${LIST_TEMPLATES(listMeta.event_types).map((t, i) => `<button type="button" class="h-template" data-h-ltpl="${i}"><span>${t.icon}</span><strong>${esc(t.name)}</strong><small>${t.source === 'events' ? 'Des événements' : 'Des personnes'}</small></button>`).join('')}</div>`,
+            body: `<div class="h-templates">${LIST_TEMPLATES(listMeta.event_types).map((t, i) => `<button type="button" class="h-template" data-h-ltpl="${i}"><span>${t.icon}</span><strong>${esc(t.name)}</strong><small>${{events: 'Des événements', persons: 'Des personnes', free: 'Des lignes écrites à la main'}[t.source]}</small></button>`).join('')}</div>`,
             onOpen: d => d.querySelectorAll('[data-h-ltpl]').forEach(b => b.addEventListener('click', () => { listEditor = JSON.parse(JSON.stringify({id: 0, description: '', ...LIST_TEMPLATES(listMeta.event_types)[Number(b.dataset.hLtpl)]})); if (listEditor.name === 'Liste vide') listEditor.name = ''; d.close(); renderListEditor(++S().workspaceToken); })),
         }));
         ws.querySelectorAll('[data-h-list-open]').forEach(b => b.addEventListener('click', () => { S().hListOpen = Number(b.dataset.hListOpen); ext.maintenance.my_lists(++S().workspaceToken); }));
@@ -1109,42 +1110,45 @@
     }
     function renderListEditor(token) {
         const L = listEditor, d = L.definition = L.definition || {match: 'all', rules: [], columns: [], custom: []};
-        const cols = listMeta.columns[L.source];
+        const cols = listMeta.columns[L.source] || {};
         const k = L.source === 'events' ? 'ev' : 'pe';
         A().$('#workspace').innerHTML = `<section class="page collection-page h-be">${header('MES LISTES', L.id ? 'Modifier « ' + L.name + ' »' : 'Nouvelle liste', 'Trois étapes : ce que tu listes, les critères, puis les colonnes.', '<button type="button" class="button secondary" data-le-cancel>← Retour</button>')}
             <section class="maintenance-panel"><h3>1. La liste</h3><div class="form-grid"><label>Nom<input data-le="name" value="${esc(L.name)}" placeholder="Divorces 1850–1920"></label><label>Icône<input data-le="icon" value="${esc(L.icon || '📋')}" maxlength="16" class="h-be-icon"></label>
                 <label class="span-2">Description <small>(facultatif)</small><input data-le="description" value="${esc(L.description || '')}"></label>
-                <fieldset class="span-2 h-be-display"><legend>Je liste</legend><label class="checkbox-line"><input type="radio" name="le-source" value="events" ${L.source === 'events' ? 'checked' : ''}> des événements (une ligne par événement : divorces, mariages, décès…)</label><label class="checkbox-line"><input type="radio" name="le-source" value="persons" ${L.source !== 'events' ? 'checked' : ''}> des personnes (une ligne par personne)</label></fieldset></div></section>
-            <section class="maintenance-panel"><h3>2. Les critères</h3><p class="muted">Ajoute autant de critères que tu veux. « pas » inverse un critère (ex. « pas » + « Sans source » = seulement ce qui a une source).</p>
+                <fieldset class="span-2 h-be-display"><legend>Je liste</legend><label class="checkbox-line"><input type="radio" name="le-source" value="events" ${L.source === 'events' ? 'checked' : ''}> des événements (une ligne par événement : divorces, mariages, décès…)</label><label class="checkbox-line"><input type="radio" name="le-source" value="persons" ${L.source === 'persons' ? 'checked' : ''}> des personnes (une ligne par personne)</label><label class="checkbox-line"><input type="radio" name="le-source" value="free" ${L.source === 'free' ? 'checked' : ''}> des lignes que j’écris moi-même (stands d’un salon, choses à chercher aux archives…) : rien ne vient de la base</label></fieldset>
+                <div class="span-2">${ext.labelsPicker('custom_list', L.labels || [])}</div></div></section>
+            ${L.source === 'free' ? '' : `<section class="maintenance-panel"><h3>2. Les critères</h3><p class="muted">Ajoute autant de critères que tu veux. « pas » inverse un critère (ex. « pas » + « Sans source » = seulement ce qui a une source).</p>
                 <div class="h-tabs"><label class="checkbox-line"><input type="radio" name="le-match" value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions (ET)</label><label class="checkbox-line"><input type="radio" name="le-match" value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une (OU)</label></div>
                 <div data-le-rules>${d.rules.map((r, i) => ruleRowHtml(r, i, L.source)).join('') || '<p class="muted">Aucun critère : toute la base.</p>'}</div>
-                <label>+ Ajouter un critère <select data-le-addrule><option value="">choisir…</option>${Object.entries(RULES).filter(([, m]) => m[k]).map(([f, m]) => `<option value="${f}">${esc(m[k])}</option>`).join('')}</select></label></section>
-            <section class="maintenance-panel"><h3>3. Les colonnes</h3><div class="h-village-maps-grid">${Object.entries(cols).map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" data-le-col="${c}" ${d.columns.includes(c) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>
-                <label>Trier par <select data-le="sort">${[['date', 'date'], ['name', 'nom'], ['place', 'lieu']].map(([v, l]) => `<option value="${v}" ${(d.sort || (L.source === 'events' ? 'date' : 'name')) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                <h4>Mes colonnes à remplir</h4><div data-le-custom>${d.custom.map((c, i) => `<div class="h-lr-row" data-lc-i="${i}"><input data-lc="label" value="${esc(c.label)}" placeholder="Nom de la colonne"><select data-lc="type">${[['text', 'Texte libre'], ['select', 'Menu déroulant'], ['checkbox', 'Case à cocher'], ['date', 'Date'], ['number', 'Nombre']].map(([v, l]) => `<option value="${v}" ${c.type === v ? 'selected' : ''}>${l}</option>`).join('')}</select>${c.type === 'select' ? `<input data-lc="options" value="${esc((c.options || []).join(', '))}" placeholder="choix séparés par des virgules">` : ''}<button type="button" class="icon-button danger" data-lc-del>🗑</button></div>`).join('')}</div>
+                <label>+ Ajouter un critère <select data-le-addrule><option value="">choisir…</option>${Object.entries(RULES).filter(([, m]) => m[k]).map(([f, m]) => `<option value="${f}">${esc(m[k])}</option>`).join('')}</select></label></section>`}
+            <section class="maintenance-panel"><h3>${L.source === 'free' ? '2' : '3'}. Les colonnes</h3>${L.source === 'free' ? '<p class="muted">Crée les colonnes de ta liste ; tu ajouteras ensuite les lignes une par une.</p>' : `<div class="h-village-maps-grid">${Object.entries(cols).map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" data-le-col="${c}" ${d.columns.includes(c) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>
+                <label>Trier par <select data-le="sort">${[['date', 'date'], ['name', 'nom'], ['place', 'lieu']].map(([v, l]) => `<option value="${v}" ${(d.sort || (L.source === 'events' ? 'date' : 'name')) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`}
+                <h4>Mes colonnes à remplir</h4><div data-le-custom>${d.custom.map((c, i) => `<div class="h-lr-row" data-lc-i="${i}"><input data-lc="label" value="${esc(c.label)}" placeholder="Nom de la colonne"><select data-lc="type">${[['text', 'Texte libre'], ['select', 'Menu déroulant'], ['checkbox', 'Case à cocher'], ['date', 'Date'], ['number', 'Nombre'], ['url', 'Lien internet'], ['person', 'Personne de la base']].map(([v, l]) => `<option value="${v}" ${c.type === v ? 'selected' : ''}>${l}</option>`).join('')}</select>${c.type === 'select' ? `<input data-lc="options" value="${esc((c.options || []).join(', '))}" placeholder="choix séparés par des virgules">` : ''}<button type="button" class="icon-button danger" data-lc-del>🗑</button></div>`).join('')}</div>
                 <button type="button" class="button small secondary" data-le-addcol>+ Colonne à remplir</button></section>
             <div class="page-actions"><button type="button" class="button" data-le-save>Enregistrer et voir la liste</button><button type="button" class="button secondary" data-le-cancel>Annuler</button></div></section>`;
         const ws = A().$('#workspace');
         const again = () => renderListEditor(token);
         ws.querySelectorAll('[data-le-cancel]').forEach(b => b.addEventListener('click', () => { listEditor = null; ext.maintenance.my_lists(++S().workspaceToken); }));
         ws.querySelectorAll('[data-le]').forEach(el => el.addEventListener('input', () => { if (el.dataset.le === 'sort') d.sort = el.value; else L[el.dataset.le] = el.value; }));
-        ws.querySelectorAll('[name=le-source]').forEach(el => el.addEventListener('change', () => { L.source = el.value; d.columns = Object.keys(listMeta.columns[L.source]).slice(0, 4); again(); }));
+        const keepLabels = () => { const b = ws.querySelector('[data-pending-labels="custom_list"]'); if (b) L.labels = pickerIds(b).map(id => (labelsCache || []).find(l => Number(l.id) === id) || (L.labels || []).find(l => Number(l.id) === id) || {id, name: '#' + id}); };
+        ws.querySelectorAll('[name=le-source]').forEach(el => el.addEventListener('change', () => { L.source = el.value; d.columns = Object.keys(listMeta.columns[L.source] || {}).slice(0, 4); if (L.source === 'free' && !d.custom.length) d.custom.push({label: '', type: 'text', options: []}); keepLabels(); again(); }));
         ws.querySelectorAll('[name=le-match]').forEach(el => el.addEventListener('change', () => { d.match = el.value; }));
-        ws.querySelector('[data-le-addrule]').addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: '', values: []}); again(); } });
-        const rulesBox = ws.querySelector('[data-le-rules]');
+        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: '', values: []}); again(); } });
+        const rulesBox = ws.querySelector('[data-le-rules]') || document.createElement('div');
         const readRule = row => { const r = d.rules[Number(row.dataset.lrI)]; row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (Number(el.value) || null) : el.value; }); };
         rulesBox.addEventListener('input', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });
         rulesBox.addEventListener('change', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });
         rulesBox.addEventListener('click', e => { const row = e.target.closest('[data-lr-i]'); if (row && e.target.closest('[data-lr-del]')) { d.rules.splice(Number(row.dataset.lrI), 1); again(); } });
         ws.querySelectorAll('[data-le-col]').forEach(el => el.addEventListener('change', () => { d.columns = [...ws.querySelectorAll('[data-le-col]:checked')].map(x => x.dataset.leCol); }));
-        ws.querySelector('[data-le-addcol]').addEventListener('click', () => { d.custom.push({label: '', type: 'text', options: []}); again(); });
+        ws.querySelector('[data-le-addcol]').addEventListener('click', () => { keepLabels(); d.custom.push({label: '', type: 'text', options: []}); again(); });
         const customBox = ws.querySelector('[data-le-custom]');
         customBox.addEventListener('input', e => { const row = e.target.closest('[data-lc-i]'); if (!row) return; const c = d.custom[Number(row.dataset.lcI)]; const f = e.target.dataset.lc; c[f] = f === 'options' ? e.target.value.split(',').map(x => x.trim()).filter(Boolean) : e.target.value; if (f === 'type') again(); });
         customBox.addEventListener('change', e => { if (e.target.dataset.lc === 'type') { d.custom[Number(e.target.closest('[data-lc-i]').dataset.lcI)].type = e.target.value; again(); } });
         customBox.addEventListener('click', e => { const row = e.target.closest('[data-lc-i]'); if (row && e.target.closest('[data-lc-del]')) { d.custom.splice(Number(row.dataset.lcI), 1); again(); } });
         ws.querySelector('[data-le-save]').addEventListener('click', async () => {
             if (!String(L.name || '').trim()) { toast('Donne un nom à la liste.', 'error'); return; }
-            try { const r = await api('save_my_list', {}, {method: 'POST', body: {id: L.id, name: L.name, icon: L.icon, description: L.description, source: L.source, definition: d}}); listEditor = null; S().hListOpen = r.result.id; ext.maintenance.my_lists(++S().workspaceToken); }
+            const lb = ws.querySelector('[data-pending-labels="custom_list"]');
+            try { const r = await api('save_my_list', {}, {method: 'POST', body: {id: L.id, name: L.name, icon: L.icon, description: L.description, source: L.source, definition: d, pending_labels: lb ? pickerIds(lb) : []}}); listEditor = null; S().hListOpen = r.result.id; ext.maintenance.my_lists(++S().workspaceToken); }
             catch (error) { toast(error.message, 'error'); }
         });
     }
@@ -1153,16 +1157,19 @@
         try { data = await api('my_list_rows', {id}); } catch (error) { S().hListOpen = 0; toast(error.message, 'error'); return ext.maintenance.my_lists(++S().workspaceToken); }
         if (!isCurrent(token)) return;
         const L = data.list, d = L.definition, cols = d.columns, custom = d.custom || [];
-        const isEv = L.source === 'events';
+        const isEv = L.source === 'events', isFree = L.source === 'free';
         const cell = (r, c) => c === 'who' || c === 'name' ? r.people.map(p => personLink(p.id, pname(p))).join(' et ') : esc(r.cells[c] ?? '');
         const customCell = (r, c) => { const v = r.values?.[c.key] ?? '';
             if (c.type === 'checkbox') return `<input type="checkbox" data-lv="${esc(c.key)}" ${v === '1' ? 'checked' : ''}>`;
+            if (c.type === 'person') { const p = r.linked?.[c.key] || (v && r.people?.find(x => Number(x.id) === Number(v))); return `${p ? personLink(p.id, pname(p)) : '<span class="muted">—</span>'} <button type="button" class="link-button" data-lv-person="${esc(c.key)}">${p ? 'changer' : 'choisir…'}</button>`; }
+            if (c.type === 'url') return `<span class="h-lv-url"><input type="url" data-lv="${esc(c.key)}" value="${esc(v)}" placeholder="https://…">${/^https?:\/\//i.test(v) ? `<a href="${esc(v)}" target="_blank" rel="noopener noreferrer" title="Ouvrir">↗</a>` : ''}</span>`;
             if (c.type === 'select') return `<select data-lv="${esc(c.key)}"><option value=""></option>${c.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
             return `<input type="${c.type === 'date' ? 'text' : c.type === 'number' ? 'number' : 'text'}" data-lv="${esc(c.key)}" value="${esc(v)}" ${c.type === 'date' ? 'placeholder="date"' : ''}>`; };
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header('MES LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(data.rows.length, isEv ? 'événement' : 'personne', isEv ? 'événements' : 'personnes')}</strong>${data.truncated ? ' (les 3 000 premiers)' : ''}`,
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header('MES LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(data.rows.length, isEv ? 'événement' : isFree ? 'ligne' : 'personne', isEv ? 'événements' : isFree ? 'lignes' : 'personnes')}</strong>${data.truncated ? ' (les 3 000 premiers)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
                 `<button type="button" class="button secondary" data-lv-back>← Mes listes</button><button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
-            ${!isEv ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
-            ${data.rows.length ? `<div class="h-lv-scroll"><table class="data-table h-lv-table"><thead><tr>${cols.map(c => `<th>${esc(data.columns[c] || c)}</th>`).join('')}${custom.map(c => `<th class="h-lv-own">${esc(c.label)}</th>`).join('')}<th></th></tr></thead><tbody>${data.rows.map(r => `<tr data-lv-key="${esc(r.key)}">${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}${custom.map(c => `<td class="h-lv-own">${customCell(r, c)}</td>`).join('')}<td><button type="button" class="icon-button" data-lv-remove title="Retirer de la liste (la fiche n’est pas touchée)">✕</button>${r.manual ? ' <small class="muted" title="ajoutée à la main">✋</small>' : ''}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune ligne ne répond à ces critères.')}</section>`;
+            ${isFree ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>+ Ajouter une ligne</button></div>' : ''}
+            ${!isEv && !isFree ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
+            ${data.rows.length || isFree ? `<div class="h-lv-scroll"><table class="data-table h-lv-table"><thead><tr>${cols.map(c => `<th>${esc(data.columns[c] || c)}</th>`).join('')}${custom.map(c => `<th class="h-lv-own">${esc(c.label)}</th>`).join('')}<th></th></tr></thead><tbody>${data.rows.map(r => `<tr data-lv-key="${esc(r.key)}">${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}${custom.map(c => `<td class="h-lv-own">${customCell(r, c)}</td>`).join('')}<td><button type="button" class="icon-button" data-lv-remove title="Retirer de la liste (la fiche n’est pas touchée)">✕</button>${r.manual && !isFree ? ' <small class="muted" title="ajoutée à la main">✋</small>' : ''}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune ligne ne répond à ces critères.')}</section>`;
         A().bindTableLinks?.();
         A().bindCollectionPersonFields(A().$('#workspace'));
         const ws = A().$('#workspace');
@@ -1174,9 +1181,19 @@
         ws.querySelector('[data-lv-csv]').addEventListener('click', () => {
             const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
             const lines = [[...cols.map(c => data.columns[c] || c), ...custom.map(c => c.label)].map(q).join(';'),
-                ...data.rows.map(r => [...cols.map(c => c === 'who' || c === 'name' ? r.people.map(pname).join(' et ') : r.cells[c]), ...custom.map(c => c.type === 'checkbox' ? (r.values?.[c.key] === '1' ? 'oui' : '') : r.values?.[c.key])].map(q).join(';'))];
+                ...data.rows.map(r => [...cols.map(c => c === 'who' || c === 'name' ? r.people.map(pname).join(' et ') : r.cells[c]), ...custom.map(c => c.type === 'checkbox' ? (r.values?.[c.key] === '1' ? 'oui' : '') : c.type === 'person' ? (r.linked?.[c.key] ? pname(r.linked[c.key]) : '') : r.values?.[c.key])].map(q).join(';'))];
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
         });
+        ws.querySelector('[data-lv-newrow]')?.addEventListener('click', async () => {
+            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: 'f:new'}}); await reload(); const last = [...A().$$('.h-lv-table tbody tr')].pop(); last?.querySelector('input,select')?.focus(); }
+            catch (error) { toast(error.message, 'error'); }
+        });
+        ws.querySelectorAll('[data-lv-person]').forEach(b => b.addEventListener('click', () => {
+            const key = b.closest('[data-lv-key]').dataset.lvKey, field = b.dataset.lvPerson;
+            dialog({eyebrow: 'MES LISTES', title: 'Relier à une fiche', submitLabel: 'Relier',
+                body: `<label class="h-block-label">Personne${A().collectionPersonField('lv_pick', null, 'Tape un nom…')}</label><p class="muted">Laisse vide puis « Relier » pour enlever le lien.</p>`,
+                onSubmit: async form => { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: key, field, value: form.querySelector('[name=lv_pick]').value}}); reload(); }});
+        }));
         ws.querySelector('[data-lv-addbtn]')?.addEventListener('click', async () => {
             const pid = Number(ws.querySelector('[name=lv_add]').value);
             if (!pid) return toast('Choisis une personne dans les suggestions.', 'error');
@@ -1190,7 +1207,8 @@
         ws.querySelector('.h-lv-table')?.addEventListener('click', async e => {
             const b = e.target.closest('[data-lv-remove]'); if (!b) return;
             const tr = b.closest('[data-lv-key]');
-            await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: tr.dataset.lvKey, included: -1}}); tr.remove(); toast('Retirée de la liste.');
+            if (isFree && !confirm('Supprimer cette ligne ?')) return;
+            await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: tr.dataset.lvKey, included: -1}}); tr.remove(); toast(isFree ? 'Ligne supprimée.' : 'Retirée de la liste.');
         });
     }
 })();
