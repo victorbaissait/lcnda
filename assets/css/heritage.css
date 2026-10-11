@@ -350,3 +350,33 @@ fieldset.h-citation legend{font-weight:700;font-size:.85em;padding:0 .3rem}
 .h-panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem}
 .h-panel-head h3{margin:0}
 .h-decades small{font-size:.7em;writing-mode:vertical-rl;transform:rotate(180deg);margin-top:.2rem}
+.place-monograph-open{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+/* Actes à demander : toute la largeur, textes qui passent à la ligne, boutons dans le cadre */
+.maintenance-panel.h-acts{max-width:none;width:100%;box-sizing:border-box}
+.h-acts-tools{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;align-items:center;margin:.4rem 0}
+.h-acts-table{width:100%;table-layout:auto}
+.h-acts-table .h-badge{white-space:normal}
+.h-acts-table td:last-child{min-width:11rem}
+.h-acts-table td:last-child .button{white-space:nowrap}
+.h-faq h4{margin:1rem 0 .3rem}
+.h-faq-item{border-top:1px solid rgba(128,128,128,.25);padding:.45rem 0}
+.h-faq-item summary{cursor:pointer;font-weight:700}
+.h-faq-item p{margin:.35rem 0 .2rem 1rem}
+.h-village-popchart{margin-top:1rem;border-top:1px dotted rgba(128,128,128,.4);padding-top:.6rem}
+.h-village-popchart h4{margin:0 0 .3rem}
+.h-village-maps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.1rem 1rem;padding:.3rem 0 .6rem}
+select[data-h-village-bgsel]{max-width:220px}
+.h-htr-steps{line-height:1.6}
+.h-htr-steps li.is-done{opacity:.75}
+.h-htr-log{max-height:280px;overflow:auto;font-size:.78em;white-space:pre-wrap;background:rgba(128,128,128,.08);padding:.6rem}
+.h-htr-up{cursor:pointer}
+/* Mes listes */
+.h-lr-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.45rem 0;border-bottom:1px dotted rgba(128,128,128,.35)}
+.h-lr-row select[multiple]{min-width:220px}
+.h-lr-year{width:6rem}
+.h-lr-not{font-size:.85em;opacity:.8}
+.h-lv-scroll{overflow-x:auto}
+.h-lv-table td input[type=text],.h-lv-table td input[type=number],.h-lv-table td select{min-width:8rem;width:100%}
+.h-lv-own{background:rgba(255,230,140,.12)}
+.h-lv-add{display:flex;align-items:center;gap:.5rem}
+@media print{.h-mylist .page-actions,.h-mylist .collection-toolbar,.h-mylist [data-lv-remove]{display:none}}

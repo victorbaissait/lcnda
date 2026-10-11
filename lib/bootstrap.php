@@ -13,7 +13,9 @@ require_once __DIR__ . '/heritage.php';
 require_once __DIR__ . '/heritage_tools.php';
 require_once __DIR__ . '/heritage_links.php'; // question en français, langues, liens @, citations détaillées, entraide // dossier Scans, paroisses, noms cités, voyages impossibles, travail à deux, consultation    // départs, enfants placés, armoiries, poilus, circuits, papiers, cartes anciennes…
 require_once __DIR__ . '/heritage_more.php';
-require_once __DIR__ . '/village.php';         // fiche d'un village (familles, métiers, église, population, Cassini)  // actes à demander, contexte historique, coffre cousin, âges, variantes, lieux, tailles, résistants, éditeur de blocs
+require_once __DIR__ . '/village.php';
+require_once __DIR__ . '/htr_setup.php';
+require_once __DIR__ . '/my_lists.php';        // Mes listes : listes sur mesure (critères, colonnes, colonnes à remplir)       // reconnaissance d'écriture : installation de Kraken et des modèles         // fiche d'un village (familles, métiers, église, population, Cassini)  // actes à demander, contexte historique, coffre cousin, âges, variantes, lieux, tailles, résistants, éditeur de blocs
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';
 require_once __DIR__ . '/shortcuts.php';       // fusion de l'arbre d'un cousin // fond de carte sans Internet // objets, mémoire familiale, lieux précis, liens web   // dates estimées, implexe  // « Registres en ligne » des battues

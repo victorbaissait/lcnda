@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 14;
+const SCHEMA_VERSION = 15;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -35,6 +35,7 @@ function migration_steps(): array
         12 => 'schema_v12',
         13 => 'schema_v13',
         14 => 'schema_v14',
+        15 => 'schema_v15',
     ];
 }
 
@@ -1358,5 +1359,28 @@ function migration_v9_recover(PDO $pdo): void
     if (!$exists('family_collection_media_v9')) { return; }
     if ($exists('family_collection_media')) { $pdo->exec('DROP TABLE family_collection_media_v9'); }
     else { $pdo->exec('ALTER TABLE family_collection_media_v9 RENAME TO family_collection_media'); }
+}
+
+/** n°15 : « Mes listes » (Maintenance) — listes faites sur mesure : critères, colonnes, colonnes à remplir soi-même. */
+function schema_v15(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS custom_lists (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
+        icon TEXT NOT NULL DEFAULT '📋',
+        description TEXT NOT NULL DEFAULT '',
+        source TEXT NOT NULL DEFAULT 'persons',
+        definition_json TEXT NOT NULL DEFAULT '{}',
+        position INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS custom_list_rows (
+        list_id INTEGER NOT NULL REFERENCES custom_lists(id) ON DELETE CASCADE,
+        row_key TEXT NOT NULL,
+        included INTEGER NOT NULL DEFAULT 0,
+        data_json TEXT NOT NULL DEFAULT '{}',
+        PRIMARY KEY (list_id, row_key)
+    )");
 }
 

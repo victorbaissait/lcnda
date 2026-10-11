@@ -168,6 +168,12 @@ try {
     if ($isWrite && $action === 'sync_apply') {
         sync_apply($pdo, $payload);
     }
+    if ($isWrite && $action === 'htr_upload_model') {
+        htr_upload_model($_FILES['file'] ?? null, safe_text($_POST['target'] ?? ''));
+    }
+    if ($isWrite && $action === 'htr_install') {
+        json_response(['ok' => true, 'result' => htr_install_start($payload)]);
+    }
     if ($isWrite && $action === 'vault_export') {
         vault_export($pdo, $payload);
     }
@@ -243,6 +249,9 @@ try {
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
         'villages' => json_response(['villages' => villages_list($pdo, safe_text($_GET['q'] ?? ''))]),
         'village' => json_response(village_detail($pdo, safe_text($_GET['key'] ?? ''))),
+        'htr_setup_status' => json_response(htr_setup_status()),
+        'my_lists' => json_response(['lists' => my_lists($pdo), 'event_types' => $pdo->query('SELECT id, label, gedcom_tag FROM event_types ORDER BY label COLLATE NOCASE')->fetchAll(), 'labels' => $pdo->query('SELECT id, name, color FROM labels ORDER BY name COLLATE NOCASE')->fetchAll(), 'columns' => ['events' => LIST_EVENT_COLUMNS, 'persons' => LIST_PERSON_COLUMNS]]),
+        'my_list_rows' => json_response(my_list_rows($pdo, safe_int($_GET['id'] ?? 0))),
         'recent_acts' => json_response(['acts' => recent_acts($pdo)]),
         'act_request_letter' => json_response(act_request_letter($pdo, safe_int($_GET['event_id'] ?? 0), safe_text($_GET['requester'] ?? ''), safe_text($_GET['relation'] ?? ''))),
         'historical_context' => json_response(historical_context($pdo)),
@@ -3553,10 +3562,14 @@ function place_monograph_data(PDO $pdo): never
     if ($yearFrom) { $eventWhere[] = 'e.year>=?'; $eventParams[] = $yearFrom; }
     if ($yearTo) { $eventWhere[] = 'e.year<=?'; $eventParams[] = $yearTo; }
     if ($eventTypeId) { $eventWhere[] = 'e.event_type_id=?'; $eventParams[] = $eventTypeId; }
+    // Événement de couple (mariage…) : les deux conjoints, chacun avec son bouton « Ouvrir »
     $eventSql = "SELECT e.id,e.person_id,e.date_text,e.year,e.title,e.description,t.label AS type_label,
-        trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name
+        trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person_name,
+        f.partner1_id, trim(COALESCE(p1.first_name,'')||' '||COALESCE(p1.last_name,'')) AS partner1_name,
+        f.partner2_id, trim(COALESCE(p2.first_name,'')||' '||COALESCE(p2.last_name,'')) AS partner2_name
         FROM events e JOIN event_types t ON t.id=e.event_type_id
         LEFT JOIN persons p ON p.id=e.person_id
+        LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
         WHERE ".implode(' AND ', $eventWhere)."
         ORDER BY CASE WHEN e.year IS NULL THEN 1 ELSE 0 END,e.year,e.id LIMIT 100";
     $eventStmt = $pdo->prepare($eventSql);
@@ -8879,6 +8892,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_record_languages' => save_record_languages($pdo,$data),
             'save_help_request' => save_help_request($pdo,$data),
             'save_village_profile' => save_village_profile($pdo,$data),
+            'save_my_list' => save_my_list($pdo,$data),
+            'delete_my_list' => delete_my_list($pdo,$data),
+            'save_my_list_row' => save_my_list_row($pdo,$data),
             'create_act_request' => create_act_request($pdo,$data),
             'act_open_reminder' => act_open_reminder($pdo,$data),
             'vault_delete' => vault_delete($pdo,$data),
@@ -11460,14 +11476,18 @@ function htr_recognize_media(PDO $pdo,array $data): array
     $modelId = safe_text($data['model'] ?? 'fr-actes') ?: 'fr-actes';
     $language = safe_text($data['language'] ?? '');
     $model = htr_model_by_id($modelId);
-    $modelPath = realpath(__DIR__ . '/' . (string)$model['model']);
-    if (!$modelPath || !is_file($modelPath)) {
-        throw new RuntimeException('Modèle Kraken introuvable : ' . (string)$model['model'] . '. Place un fichier .mlmodel dans models/htr ou modifie config/htr-models.json.');
+    // Modèle et Kraken : installés dans le dossier des données (Maintenance → Reconnaissance d'écriture), sinon dans l'application
+    $modelPath = htr_model_file($model);
+    if (!$modelPath) {
+        throw new RuntimeException('Le modèle « ' . (string)($model['label'] ?? $modelId) . ' » n’est pas encore installé : Maintenance → Reconnaissance d’écriture (HTR) → « Installer », ou ajoute le fichier ' . basename((string)$model['model']) . ' à la main.');
     }
 
     $script = __DIR__ . '/scripts/htr_recognize.py';
     if (!is_file($script)) throw new RuntimeException('Script HTR local introuvable.');
-    $venvPython = __DIR__ . '/.venv-htr/bin/python3';
+    $venvPython = htr_venv_python() ?? '';
+    if ($venvPython === '' && !trim((string) @shell_exec('command -v kraken 2>/dev/null'))) {
+        throw new RuntimeException('La reconnaissance d’écriture n’est pas encore installée : Maintenance → Reconnaissance d’écriture (HTR) → « Installer » (une seule fois).');
+    }
     $scriptArgs = ['--image',$imagePath,'--model',$modelPath,'--language',$language ?: (string)($model['language'] ?? ''),'--engine',(string)($model['engine'] ?? 'kraken')];
     if (!empty($model['segment_direction'])) {
         $scriptArgs[] = '--segment-direction';
@@ -11477,7 +11497,7 @@ function htr_recognize_media(PDO $pdo,array $data): array
         $scriptArgs[] = '--base-dir';
         $scriptArgs[] = (string)$model['base_dir'];
     }
-    $cmd = is_file($venvPython)
+    $cmd = $venvPython !== '' && is_file($venvPython)
         ? array_merge([$venvPython,$script], $scriptArgs)
         : array_merge(['/usr/bin/env','python3',$script], $scriptArgs);
     $descriptors = [1=>['pipe','w'],2=>['pipe','w']];

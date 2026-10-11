@@ -652,8 +652,16 @@ function suspicious_places(PDO $pdo): array
     $center = [$lats[intdiv(count($lats), 2)], $lons[intdiv(count($lons), 2)]];
     $ignored = array_fill_keys(ht_setting($pdo, 'lcnda-place-ignored', ['ids' => []])['ids'] ?? [], true);
     $alerts = [];
-    $namesake = null;
-    try { $namesake = $pdo->prepare('SELECT insee_code, name, centroid_lat, centroid_lon FROM commune_contours WHERE name=? COLLATE NOCASE AND centroid_lat IS NOT NULL'); } catch (Throwable $_) {}
+    // Communes homonymes : UN seul passage sur les contours (une requête par lieu prenait des minutes avec 226 pays)
+    $wanted = [];
+    foreach ($rows as $r) { if ($r['name']) { $wanted[mb_strtolower(trim((string) $r['name']))] = true; } }
+    $byName = [];
+    try {
+        foreach ($pdo->query('SELECT insee_code, name, centroid_lat, centroid_lon FROM commune_contours WHERE centroid_lat IS NOT NULL') as $c) {
+            $k = mb_strtolower(trim((string) $c['name']));
+            if (isset($wanted[$k])) { $byName[$k][] = $c; }
+        }
+    } catch (Throwable $_) {}
     foreach ($rows as $r) {
         if (isset($ignored[(int) $r['id']])) { continue; }
         $lat = (float) $r['lat']; $lon = (float) $r['lon'];
@@ -670,10 +678,9 @@ function suspicious_places(PDO $pdo): array
             }
         }
         $dist = h_distance_km($center[0], $center[1], $lat, $lon);
-        if ($namesake && $r['name']) {
-            $namesake->execute([$r['name']]);
+        if ($r['name'] && isset($byName[mb_strtolower(trim((string) $r['name']))])) {
             $best = null;
-            foreach ($namesake->fetchAll() as $c) { $dc = h_distance_km($center[0], $center[1], (float) $c['centroid_lat'], (float) $c['centroid_lon']); if (!$best || $dc < $best['d']) { $best = ['d' => $dc, 'c' => $c]; } }
+            foreach ($byName[mb_strtolower(trim((string) $r['name']))] as $c) { $dc = h_distance_km($center[0], $center[1], (float) $c['centroid_lat'], (float) $c['centroid_lon']); if (!$best || $dc < $best['d']) { $best = ['d' => $dc, 'c' => $c]; } }
             if ($best && $best['d'] + 150 < $dist && $best['c']['insee_code'] !== $r['admin4_code']) {
                 $reasons[] = 'Une autre commune « ' . $r['name'] . ' » est beaucoup plus près du reste de la famille (' . round($best['d']) . ' km au lieu de ' . round($dist) . ' km) : département ' . substr((string) $best['c']['insee_code'], 0, 2);
                 $suggest ??= ['lat' => (float) $best['c']['centroid_lat'], 'lon' => (float) $best['c']['centroid_lon'], 'insee' => $best['c']['insee_code'], 'why' => 'Prendre la commune du département ' . substr((string) $best['c']['insee_code'], 0, 2)];

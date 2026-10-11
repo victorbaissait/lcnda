@@ -114,6 +114,18 @@ try { import_custom_block_def($pdo, ['json' => '{"a":1}']); $out['import_bad'] =
 set_custom_block_flags($pdo, ['person_id' => 4, 'block_ids' => [$imp2['id']]]);
 $out['flags'] = array_map(fn($b) => $b['flagged'], custom_blocks_for_person($pdo, 4));
 
+// Mes listes : divorces/mariages entre deux dates, colonne à remplir, retrait à la main, critères OU
+$mar = (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='MARR' LIMIT 1")->fetchColumn();
+$ml = save_my_list($pdo, ['name' => 'Mariages', 'source' => 'events', 'definition' => ['rules' => [['field' => 'event_type', 'values' => [$mar]], ['field' => 'year', 'from' => 1800, 'to' => 1850]], 'columns' => ['date', 'who', 'age'], 'custom' => [['label' => 'Fait', 'type' => 'checkbox']]]]);
+$rows = my_list_rows($pdo, $ml['id'])['rows'];
+$out['mylist'] = [count($rows), count($rows[0]['people'] ?? []), $rows[0]['cells']['age'] ?? null];
+save_my_list_row($pdo, ['list_id' => $ml['id'], 'row_key' => $rows[0]['key'], 'field' => my_lists($pdo)[0]['definition']['custom'][0]['key'], 'value' => '1']);
+$out['mylist_value'] = array_values(my_list_rows($pdo, $ml['id'])['rows'][0]['values']);
+save_my_list_row($pdo, ['list_id' => $ml['id'], 'row_key' => $rows[0]['key'], 'included' => -1]);
+$out['mylist_removed'] = count(my_list_rows($pdo, $ml['id'])['rows']);
+$any = save_my_list($pdo, ['name' => 'OU', 'source' => 'persons', 'definition' => ['match' => 'any', 'rules' => [['field' => 'first_name', 'value' => 'Lucie'], ['field' => 'first_name', 'value' => 'Pierre']]]]);
+$out['mylist_any'] = array_map(fn($r) => $r['people'][0]['first_name'], my_list_rows($pdo, $any['id'])['rows']);
+
 // Comparaison avant fusion
 $cmp = compare_people($pdo, 1, 5);
 $out['compare'] = [$cmp['a']['person']['first_name'], count($cmp['a']['events']) > 0, $cmp['a']['children']];
@@ -123,7 +135,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°14)', () => assert.equal(out.version, 14)],
+  ['structure à jour (n°15)', () => assert.equal(out.version, 15)],
   ['actes de moins de 100 ans, réservés jusqu’à 75 ans', () => { assert.deepEqual(out.acts.map(a => a[0]), ['naissance']); assert.equal(out.acts[0][1], false); assert.equal(out.acts[0][2], '2065-04-04'); }],
   ['lettre de demande à la mairie', () => assert.deepEqual(out.letter, [true, true, true])],
   ['courrier créé, relié à l’acte, rappel à l’ouverture', () => { assert.deepEqual(out.request, [true, true, 1]); assert.equal(out.acts_after, true); }],
@@ -145,6 +157,9 @@ const checks = [
   ['étiquettes posées à l’enregistrement d’un bloc', () => { assert.deepEqual(out.labels, [1, 1]); assert.deepEqual(out.voyage_labels, ['À vérifier']); }],
   ['partage de blocs : mise à jour par identifiant, nouveau bloc, fichier refusé', () => { assert.deepEqual(out.import, [true, false, 2]); assert.equal(out.import_bad, 'refusé'); }],
   ['cases « Blocs à afficher sur la fiche » des blocs perso', () => assert.deepEqual(out.flags, [false, true])],
+  ['mes listes : mariages 1800–1850, les deux époux, âge', () => assert.deepEqual(out.mylist, [1, 2, '25 ans'])],
+  ['mes listes : case cochée gardée, ligne retirée', () => { assert.deepEqual(out.mylist_value, ['1']); assert.equal(out.mylist_removed, 0); }],
+  ['mes listes : critères OU', () => assert.deepEqual(out.mylist_any.sort(), ['Lucie', 'Pierre'])],
   ['comparaison de deux fiches', () => assert.deepEqual(out.compare, ['Pierre', true, ['Louis Dupont (1838)', 'Marie Dupont (1838)', 'Lucie Dupont (1836)']])],
 ];
 let failed = 0;

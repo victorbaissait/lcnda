@@ -5,7 +5,8 @@
     "language": "fra",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "McCATMuS, modèle Kraken générique pour documents manuscrits, imprimés et dactylographiés du XVIe au XXIe siècle."
+    "description": "McCATMuS, modèle Kraken générique pour documents manuscrits, imprimés et dactylographiés du XVIe au XXIe siècle.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "en-handwritten",
@@ -13,7 +14,8 @@
     "language": "eng",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "McCATMuS, modèle Kraken générique incluant notamment français et anglais."
+    "description": "McCATMuS, modèle Kraken générique incluant notamment français et anglais.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "latin-medieval",
@@ -21,7 +23,8 @@
     "language": "lat",
     "engine": "kraken",
     "model": "models/htr/catmus-medieval.mlmodel",
-    "description": "CATMuS Medieval, modèle pour manuscrits médiévaux en latin, ancien/moyen français, espagnol et italien."
+    "description": "CATMuS Medieval, modèle pour manuscrits médiévaux en latin, ancien/moyen français, espagnol et italien.",
+    "doi": "10.5281/zenodo.12743230"
   },
   {
     "id": "spanish-historical",
@@ -29,7 +32,8 @@
     "language": "spa",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "McCATMuS, modèle générique incluant l'espagnol dans ses données d'entraînement."
+    "description": "McCATMuS, modèle générique incluant l'espagnol dans ses données d'entraînement.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "german-19",
@@ -45,7 +49,8 @@
     "language": "ita",
     "engine": "kraken",
     "model": "models/htr/catmus-medieval.mlmodel",
-    "description": "CATMuS Medieval, profil expérimental pour italien ancien en écriture latine médiévale."
+    "description": "CATMuS Medieval, profil expérimental pour italien ancien en écriture latine médiévale.",
+    "doi": "10.5281/zenodo.12743230"
   },
   {
     "id": "dutch-experimental",
@@ -53,7 +58,8 @@
     "language": "nld",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Aucun bon modèle néerlandais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+    "description": "Aucun bon modèle néerlandais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "portuguese-16-19",
@@ -69,7 +75,8 @@
     "language": "pol",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Aucun bon modèle polonais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+    "description": "Aucun bon modèle polonais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "russian-cyrillic",
@@ -101,7 +108,8 @@
     "language": "fin",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Aucun bon modèle finlandais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base expérimentale."
+    "description": "Aucun bon modèle finlandais Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base expérimentale.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "norwegian-old-norse",
@@ -125,7 +133,8 @@
     "language": "hrv",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Aucun bon modèle croate Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+    "description": "Aucun bon modèle croate Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "czech-bohemia-19",
@@ -141,7 +150,8 @@
     "language": "hun",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents hongrois."
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents hongrois.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "slovak-experimental",
@@ -149,7 +159,8 @@
     "language": "slk",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Aucun bon modèle slovaque Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+    "description": "Aucun bon modèle slovaque Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "estonian-experimental",
@@ -157,7 +168,8 @@
     "language": "est",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents estoniens."
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents estoniens.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "latvian-experimental",
@@ -165,7 +177,8 @@
     "language": "lav",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents lettons."
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents lettons.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "lithuanian-experimental",
@@ -173,7 +186,8 @@
     "language": "lit",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents lituaniens."
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents lituaniens.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "irish-experimental",
@@ -181,7 +195,8 @@
     "language": "gle",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents irlandais."
+    "description": "Profil expérimental latin avec McCATMuS ; à relire attentivement sur les documents irlandais.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "greek-historical",
@@ -197,7 +212,8 @@
     "language": "ron",
     "engine": "kraken",
     "model": "models/htr/mccatmus-fr-en.mlmodel",
-    "description": "Aucun bon modèle roumain Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale."
+    "description": "Aucun bon modèle roumain Kraken n'a été trouvé localement ; ce profil utilise McCATMuS comme base latine expérimentale.",
+    "doi": "10.5281/zenodo.13788177"
   },
   {
     "id": "ukrainian-cyrillic-old",

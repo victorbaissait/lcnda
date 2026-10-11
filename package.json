@@ -65,7 +65,7 @@
           "config/**/*",
           "data/schema.sql",
           "data/reference/geo-*.sqlite.gz",
-          "data/reference/catalogue.json",
+          "data/reference/catalogue.json", "scripts/htr_recognize.py", "scripts/htr_install.php",
           "!**/.DS_Store"
         ]
       },

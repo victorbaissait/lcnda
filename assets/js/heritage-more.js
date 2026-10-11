@@ -113,22 +113,27 @@
         const page = A().$('#workspace .page');
         if (!page || page.querySelector('.h-acts')) return;
         const showAll = ls('lcnda-acts-all') === '1';
-        const acts = (data.acts || []).filter(a => showAll || (!a.has_copy && !a.courrier_id));
+        const kindFilter = ls('lcnda-acts-kind', '');
+        const acts = (data.acts || []).filter(a => (showAll || (!a.has_copy && !a.courrier_id)) && (!kindFilter || a.kind === kindFilter));
+        const limit = Number(S().hActsLimit) || 25;
         const todayIso = new Date().toISOString().slice(0, 10);
         const state = a => a.tag === 'DEAT' ? '<span class="h-badge is-ok">Communicable à tous</span>'
             : a.public ? `<span class="h-badge is-ok">Ouvert à tous depuis ${esc(dateTimeFr(a.open_at))}</span>`
             : `<span class="h-badge is-warn">Réservé à la famille directe jusqu’au ${esc(dateTimeFr(a.open_at))}</span>`;
         const html = `<details class="maintenance-panel h-acts" ${acts.length ? 'open' : ''}><summary><strong>📮 Actes à demander à la mairie</strong> <small>(${acts.length})</small></summary>
             <p class="muted">Les actes de moins de 100 ans ne sont en général pas en ligne : il faut les demander à la mairie. Naissances et mariages de moins de 75 ans : copie intégrale réservée à la personne, ses ascendants, descendants et conjoint (sinon extrait sans filiation). Décès : communicables à tous.</p>
-            <label class="checkbox-line"><input type="checkbox" data-h-acts-all ${showAll ? 'checked' : ''}> Montrer aussi ceux que j’ai déjà (copie, source) ou déjà demandés</label>
-            ${acts.length ? `<table class="data-table"><thead><tr><th>Acte</th><th>Personne(s)</th><th>Date, lieu</th><th>Accès</th><th>En ligne aux archives</th><th></th></tr></thead><tbody>${acts.map(a => `<tr>
+            <div class="h-acts-tools"><label class="checkbox-line"><input type="checkbox" data-h-acts-all ${showAll ? 'checked' : ''}> Montrer aussi ceux que j’ai déjà (copie, source) ou déjà demandés</label>
+                <label>Actes <select data-h-acts-kind><option value="">tous</option>${['naissance', 'mariage', 'décès'].map(k => `<option ${k === kindFilter ? 'selected' : ''}>${k}</option>`).join('')}</select></label></div>
+            ${acts.length ? `<table class="data-table h-acts-table"><thead><tr><th>Acte</th><th>Personne(s)</th><th>Date, lieu</th><th>Accès</th><th>En ligne aux archives</th><th></th></tr></thead><tbody>${acts.slice(0, limit).map(a => `<tr>
                 <td><strong>${esc(a.kind)}</strong>${a.has_copy ? '<br><small>✅ copie ou source déjà là</small>' : ''}</td><td>${a.people.map(pLink).join('<br>')}</td>
                 <td>${esc(a.date_text)}${a.place ? `<br><small>${esc(a.place)}${a.county ? ' (' + esc(a.county) + ')' : ''}</small>` : ''}</td><td>${state(a)}</td>
                 <td><small>vers ${a.online_from}${a.online_from <= Number(todayIso.slice(0, 4)) ? ' (peut-être déjà)' : ''}</small></td>
-                <td>${a.courrier_id ? `<small>✉️ courrier ${esc(a.courrier_statut || '')}</small>` : `<button type="button" class="button small" data-h-act-letter="${a.event_id}">Préparer la lettre</button>`}${!a.public && a.tag !== 'DEAT' ? `<br><button type="button" class="link-button" data-h-act-remind="${a.event_id}">🔔 Me rappeler à l’ouverture</button>` : ''}</td></tr>`).join('')}</tbody></table>` : empty('Aucun acte récent à demander.')}</details>`;
+                <td>${a.courrier_id ? `<small>✉️ courrier ${esc(a.courrier_statut || '')}</small>` : `<button type="button" class="button small" data-h-act-letter="${a.event_id}">Préparer la lettre</button>`}${!a.public && a.tag !== 'DEAT' ? `<br><button type="button" class="link-button" data-h-act-remind="${a.event_id}">🔔 Me rappeler à l’ouverture</button>` : ''}</td></tr>`).join('')}</tbody></table>${acts.length > limit ? `<div class="page-actions"><button type="button" class="button secondary" data-h-acts-more>Voir ${Math.min(25, acts.length - limit)} de plus (${acts.length - limit} restants)</button></div>` : ''}` : empty('Aucun acte récent à demander.')}</details>`;
         (page.querySelector('.page-header') || page.firstElementChild).insertAdjacentHTML('afterend', html);
         const box = page.querySelector('.h-acts');
         box.querySelector('[data-h-acts-all]').addEventListener('change', e => { lsSet('lcnda-acts-all', e.target.checked ? '1' : '0'); A().renderList(); });
+        box.querySelector('[data-h-acts-kind]').addEventListener('change', e => { lsSet('lcnda-acts-kind', e.target.value); S().hActsLimit = 25; A().renderList(); });
+        box.querySelector('[data-h-acts-more]')?.addEventListener('click', () => { S().hActsLimit = limit + 25; A().renderList(); });
         box.querySelectorAll('[data-h-act-remind]').forEach(b => b.addEventListener('click', async () => {
             try { const r = await api('act_open_reminder', {}, {method: 'POST', body: {event_id: b.dataset.hActRemind}}); toast(`Rappel posé au ${dateTimeFr(r.result.date)}.`); b.disabled = true; }
             catch (error) { toast(error.message, 'error'); }
@@ -481,16 +486,20 @@
         });
     }
     const EMOJIS = {
-        'Famille': '👪 👨‍👩‍👧‍👦 👨‍👩‍👧 👩‍👧 👨‍👦 👶 👧 👦 👩 👨 👵 👴 🧓 🤰 🤱 👰 🤵 💍 💒 💐 💌 💕 ❤️ 🫶 🤝 🎂 🎁 🎉 🍼 🧸 🪆 👼 ✝️ ⚰️ 🪦 🕯️ 🌹 🥀',
-        'Maison et lieux': '🏡 🏠 🏘️ 🏚️ 🏰 🏯 ⛪ 🕌 🕍 🛕 🏛️ 🏫 🏥 🏭 🏪 🏨 🏢 🗼 🌉 🏞️ ⛰️ 🏔️ 🌋 🏖️ 🏝️ 🌾 🌲 🌳 🌻 🗺️ 🧭 📍 📌 🚩 🏳️ 🌍 🌎 🌏',
-        'Métiers': '🧑‍🌾 🚜 🐄 🐑 🐴 🐓 🍇 🍷 🧑‍🍳 🍞 🥖 🧀 🧑‍🔧 🔨 🪚 ⚒️ 🛠️ ⛏️ 🧱 🪵 🧑‍🏭 ⚙️ 🧵 🪡 🧶 👗 👞 🧑‍⚕️ ⚕️ 💊 🩺 🧑‍🏫 🎓 📚 ✒️ 🧑‍⚖️ ⚖️ 🧑‍✈️ ⚓ 🚢 🎣 🧑‍🚒 👮 💂 🧑‍🎨 🎨 🎭 🎻 🎹 🎺 🥁 🎤 📷 🖋️ 💼 💰 🏦',
-        'Guerre et mémoire': '🎖️ 🏅 🥇 🎗️ ⚔️ 🗡️ 🛡️ 🪖 🔫 💣 ✊ 🕊️ ✉️ 📯 🚂 🚃 ⛓️ 🔒 🗝️ 🇫🇷 🏴 🏳️ 🪦 🕯️ 📜 📃 📰 🗞️',
-        'Documents': '📜 📃 📄 📑 📋 🗂️ 📁 📂 🗃️ 🗄️ 📒 📓 📔 📕 📗 📘 📙 📚 📖 🔖 🏷️ ✉️ 📨 📮 📝 ✏️ 🖊️ 🖋️ ✒️ 📎 🖇️ 📏 🔍 🔎 🧾 🪪 💳 📸 🖼️ 🎞️ 📹 🎥 🎙️ 📻 📺 💾 💿 📼',
-        'Voyages': '🚢 ⛵ 🛶 ⚓ 🚂 🚃 🚋 🚌 🚗 🚲 🛵 ✈️ 🛩️ 🚀 🧳 🎒 🗺️ 🧭 🌐 🏝️ 🗽 🗼 🏔️ 🛤️ 🚉 🛂 🛃',
-        'Loisirs et santé': '⚽ 🏉 🚴 🏊 🎣 🏹 ♟️ 🎲 🃏 🎯 🎪 🎠 🎡 📯 🎵 🎶 🎼 💃 🕺 🍾 🥂 🍽️ 🩺 💉 🩹 🧬 🦷 👓 🦯 ♿ 🏥',
-        'Nature et animaux': '🌸 🌼 🌷 🌹 🍀 🍂 🍁 🌿 🌱 🌳 🌲 🌾 🍎 🍐 🍒 🥔 🌽 🐶 🐱 🐴 🐄 🐖 🐑 🐐 🐓 🦆 🐝 🦋 🐟 🐚 🦉 🐦 ☀️ 🌙 ⭐ ❄️ 🌧️ ⛈️ 🌈 🔥 💧',
-        'Symboles': '🧩 ⭐ 🌟 ✨ 💡 🔔 📣 ❗ ❓ ✅ ☑️ ❌ ⚠️ 🔴 🟠 🟡 🟢 🔵 🟣 ⚫ ⚪ 🟤 ♥️ ♦️ ♣️ ♠️ ⚜️ 🔱 ☘️ ✡️ ☪️ ☮️ ☯️ ♾️ 🔗 🧬 🧪 🔬 🔭 ⌛ ⏳ ⏰ 📅 🗓️',
+        'Famille': '👪 👨‍👩‍👧‍👦 👨‍👩‍👧 👨‍👩‍👦‍👦 👨‍👩‍👧‍👧 👩‍👩‍👦 👨‍👨‍👧 👩‍👧 👩‍👦 👨‍👧 👨‍👦 👶 🧒 👧 👦 🧑 👩 👨 👵 👴 🧓 👱‍♀️ 👱 🧔 👩‍🦳 👨‍🦳 👩‍🦰 👨‍🦰 🤰 🤱 👩‍🍼 👨‍🍼 👰 🤵 💍 💒 💐 💌 💕 💞 💖 ❤️ 🧡 💛 💚 💙 💜 🤎 🖤 🤍 🫶 🤝 👫 👬 👭 💏 💑 🎂 🎁 🎉 🎊 🍼 🧸 🪆 👼 🕊️ ✝️ ⚰️ 🪦 🕯️ 🌹 🥀 🏠 📷 🖼️',
+        'Maison et lieux': '🏡 🏠 🏘️ 🏚️ 🏗️ 🏰 🏯 ⛪ 🕌 🕍 🛕 ⛩️ 🏛️ 🏫 🏥 🏭 🏪 🏬 🏨 🏦 🏤 🏢 🗼 🗽 🌉 🌁 🏞️ ⛰️ 🏔️ 🗻 🌋 🏕️ 🏖️ 🏜️ 🏝️ 🌾 🌲 🌳 🌴 🌻 ⛲ ⛺ 🛖 🧱 🚪 🪟 🛏️ 🪑 🛁 🗺️ 🧭 📍 📌 🚩 🌍 🌎 🌏 🌐 🏙️ 🌆 🌃 🌄 🌅',
+        'Métiers': '🧑‍🌾 👨‍🌾 👩‍🌾 🚜 🐄 🐑 🐴 🐓 🌾 🍇 🍷 🧑‍🍳 👨‍🍳 🍞 🥖 🥐 🧀 🥩 🐟 🧑‍🔧 🔨 🪚 🪓 ⚒️ 🛠️ ⛏️ 🪛 🔧 🔩 ⚙️ 🧱 🪵 🧑‍🏭 🏭 🧵 🪡 🧶 👗 👔 👞 👢 🎩 🧑‍⚕️ 👩‍⚕️ ⚕️ 💊 🩺 🧑‍🏫 👩‍🏫 🎓 📚 ✒️ 🧑‍⚖️ ⚖️ 🧑‍✈️ ✈️ ⚓ 🚢 🎣 🧑‍🚒 🚒 👮 💂 🕵️ 🧑‍🎨 🎨 🎭 🎻 🎹 🎺 🎷 🥁 🎤 📷 🖋️ 💼 💰 🏦 🧑‍💼 🧑‍🔬 🧑‍💻 🧑‍🚀 🧑‍🍼 💈 ✂️ 🕰️ ⌚ 💎 🛒 🧺 🪣 🛢️ ⛽ 🚂 🚚',
+        'Guerre et mémoire': '🎖️ 🏅 🥇 🥈 🥉 🏆 🎗️ ⚔️ 🗡️ 🛡️ 🪖 🔫 💣 🧨 🏹 ✊ 🕊️ ✉️ 📯 🥁 🚂 🚃 ✈️ 🚁 ⚓ 🚢 🛳️ ⛓️ 🔒 🔓 🗝️ 🏳️ 🏴 🚩 🪦 ⚰️ 🕯️ 🌹 🥀 📜 📃 📰 🗞️ 🧭 🗺️ 🪧 ⛺ 🔥 💥',
+        'Documents': '📜 📃 📄 📑 📋 🗂️ 📁 📂 🗃️ 🗄️ 🗒️ 🗓️ 📅 📆 📒 📓 📔 📕 📗 📘 📙 📚 📖 🔖 🏷️ ✉️ 📨 📩 📧 📮 📪 📫 📬 📭 📝 ✏️ 🖊️ 🖋️ ✒️ 🖌️ 🖍️ 📎 🖇️ 📏 📐 🔍 🔎 🧾 🪪 💳 📸 📷 📹 🎥 🎞️ 📽️ 🖼️ 🎙️ 📻 📺 📼 💾 💿 📀 🖨️ ⌨️ 💻 🖥️ 📱 ☎️ 📞 📠 🗳️ 🔏 🔐',
+        'Voyages': '🚢 ⛵ 🛶 🚤 🛥️ ⚓ 🚂 🚃 🚄 🚅 🚋 🚌 🚎 🚐 🚕 🚗 🚙 🛻 🚲 🛵 🏍️ 🛺 🐎 🐪 ✈️ 🛩️ 🛫 🛬 🪂 🚁 🚀 🛸 🧳 🎒 👜 🗺️ 🧭 🌐 🏝️ 🗽 🗼 🏔️ 🛤️ 🚉 🛂 🛃 🛄 🛅 🎫 🏨 ⛽ 🚦 🛣️ 🌉',
+        'Loisirs et santé': '⚽ 🏀 🏈 🏉 🎾 🏐 🏓 🏸 🥊 🚴 🏊 🏇 ⛷️ 🏂 🧗 🎣 🏹 ♟️ 🎲 🃏 🀄 🎯 🎳 🎮 🧩 🪁 🎪 🎠 🎡 🎢 🎭 🎬 📯 🎵 🎶 🎼 🎸 🪕 🪗 💃 🕺 🍾 🥂 🍻 🍽️ ☕ 🍰 🧁 🩺 💉 🩹 🩼 🦷 🦴 👓 🦯 🦽 ♿ 🏥 💤 🧘 🛀',
+        'Nature et animaux': '🌸 🌼 🌷 🌹 🌺 💮 🪷 🍀 ☘️ 🍂 🍁 🌿 🌱 🌵 🌳 🌲 🌴 🌾 🍄 🌰 🍎 🍐 🍊 🍋 🍒 🍓 🍇 🍑 🥔 🥕 🌽 🧅 🧄 🐶 🐱 🐭 🐰 🦊 🐻 🐴 🐄 🐖 🐑 🐐 🐓 🦆 🦢 🦉 🐦 🕊️ 🦅 🐝 🐞 🦋 🐌 🐟 🐠 🦞 🦀 🐚 🐢 🐸 🦌 🐗 🐺 ☀️ 🌤️ ⛅ 🌧️ ⛈️ 🌩️ ❄️ ☃️ 🌨️ 🌬️ 🌈 🌙 ⭐ 🌟 🔥 💧 🌊',
+        'Symboles': '🧩 ⭐ 🌟 ✨ 💫 💡 🔔 📣 📢 ❗ ❓ ❕ ❔ ✅ ☑️ ✔️ ❌ ⭕ 🚫 ⚠️ 🔴 🟠 🟡 🟢 🔵 🟣 ⚫ ⚪ 🟤 🟥 🟧 🟨 🟩 🟦 🟪 ⬛ ⬜ 🟫 ♥️ ♦️ ♣️ ♠️ ⚜️ 🔱 ☘️ ✝️ ☦️ ✡️ ☪️ ☮️ ☯️ 🕉️ ♾️ 🔗 🧬 🧪 🔬 🔭 ⌛ ⏳ ⏰ 🕰️ 📅 🗓️ 🔢 🔤 🆕 🆗 🆘 ♻️ 🔰 🌀 ➕ ➖ ✖️ ➗ 💯 #️⃣ 1️⃣ 2️⃣ 3️⃣',
     };
+    // Tous les drapeaux de pays (lettres régionales), puis les drapeaux spéciaux
+    const FLAG_CODES = 'AC AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CP CR CU CV CW CX CY CZ DE DG DJ DK DM DO DZ EA EC EE EG EH ER ES ET EU FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU IC ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TA TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM UN US UY UZ VA VC VE VG VI VN VU WF WS XK YE YT ZA ZM ZW';
+    const flagOf = cc => String.fromCodePoint(...[...cc].map(c => 0x1F1E6 + c.charCodeAt(0) - 65));
+    EMOJIS['Drapeaux'] = ['🏳️', '🏴', '🏁', '🚩', '🎌', '🏳️‍🌈', '🏳️‍⚧️', '🏴‍☠️', '\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}', '\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}', '\u{1F3F4}\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}', ...FLAG_CODES.split(' ').map(flagOf)].join(' ');
     function emojiPanelHtml() {
         const groups = Object.entries(EMOJIS);
         return `<div class="h-emoji-panel" hidden><div class="h-emoji-tabs">${groups.map(([g], i) => `<button type="button" class="link-button ${i ? '' : 'is-active'}" data-emoji-tab="${esc(g)}">${esc(g)}</button>`).join('')}</div>
@@ -794,7 +803,13 @@
     }
     /* ═══════════════════════ 🏘️ FICHE D'UN VILLAGE (Listes) ═══════════════════════ */
 
-    const VILLAGE_MAPS = [['cassini', 'Cassini (XVIIIe)'], ['cassini_royal', 'Cassini, exemplaire du roi'], ['etatmajor', 'État-major (1820-1866)'], ['osmfr', 'Aujourd’hui']];
+    const VILLAGE_MAPS_DEFAULT = ['cassini', 'cassini_royal', 'etatmajor', 'osmfr'];
+    const VILLAGE_MAP_SHORT = {cassini: 'Cassini (XVIIIe)', cassini_royal: 'Cassini, exemplaire du roi', etatmajor: 'État-major (1820-1866)', osmfr: 'Aujourd’hui'};
+    /** Tous les fonds de la carte principale, par catégorie. */
+    const tileCats = () => A().tileLayerCategories || [{id: 'v', label: 'Fonds', items: Object.entries(VILLAGE_MAP_SHORT)}];
+    const tileLabel = key => VILLAGE_MAP_SHORT[key] || tileCats().flatMap(c => c.items).find(i => i[0] === key)?.[1] || key;
+    /** Fonds affichés en boutons sur la fiche d'un village (Maintenance → Apparence). */
+    const villageMapButtons = () => { try { const v = JSON.parse(ls('genealogie-village-maps', 'null')); return Array.isArray(v) && v.length ? v : VILLAGE_MAPS_DEFAULT; } catch (_) { return VILLAGE_MAPS_DEFAULT; } };
     /** Petite carte en tuiles (Cassini par défaut), centrée sur la commune. */
     function villageMapHtml(v, bg, zoom) {
         if (v.lat === null || v.lon === null) return empty('La commune n’a pas de coordonnées : place-la sur la carte depuis Listes → Lieux.');
@@ -866,15 +881,17 @@
             ${ext.labelChips(v.labels)}
             <div class="h-village-stats"><span><strong>${fmt(v.people_count)}</strong> personnes de la famille</span><span>${plural(v.families.length, 'famille', 'familles').replace(/^(\S+)/, '<strong>$1</strong>')}</span><span><strong>${fmt(v.acts.baptemes)}</strong> naissances / baptêmes</span><span><strong>${fmt(v.acts.mariages)}</strong> mariages</span><span><strong>${fmt(v.acts.deces)}</strong> décès / sépultures</span>${v.current_population ? `<span><strong>${fmt(v.current_population)}</strong> habitants aujourd’hui</span>` : ''}</div>
             <div class="h-village-grid">
-            <section class="maintenance-panel h-village-mapbox"><h3>🗺️ La carte</h3><div class="h-tabs">${VILLAGE_MAPS.map(([k, l]) => `<button type="button" class="button small ${k === bg ? '' : 'secondary'}" data-h-village-bg="${k}">${esc(l)}</button>`).join('')}<span class="spacer"></span><button type="button" class="icon-button" data-h-village-zoom="-1" title="Dézoomer">−</button><button type="button" class="icon-button" data-h-village-zoom="1" title="Zoomer">+</button></div>
-                <div class="h-village-mapwrap">${villageMapHtml(v, bg, zoom)}</div>${geoportail ? `<p class="h-links"><a href="${esc(geoportail)}" target="_blank" rel="noopener noreferrer">Ouvrir sur le Géoportail ↗</a> · <button type="button" class="link-button" data-h-village-main>Voir sur la carte de l’app</button></p>` : ''}</section>
+            <section class="maintenance-panel h-village-mapbox"><h3>🗺️ La carte</h3><div class="h-tabs">${villageMapButtons().map(k => `<button type="button" class="button small ${k === bg ? '' : 'secondary'}" data-h-village-bg="${esc(k)}">${esc(tileLabel(k))}</button>`).join('')}
+                    <select data-h-village-bgsel aria-label="Autres fonds de carte"><option value="">Autres fonds…</option>${tileCats().map(c => `<optgroup label="${esc(c.label)}">${c.items.map(([k, l]) => `<option value="${esc(k)}" ${k === bg && !villageMapButtons().includes(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select><span class="spacer"></span><button type="button" class="icon-button" data-h-village-zoom="-1" title="Dézoomer">−</button><button type="button" class="icon-button" data-h-village-zoom="1" title="Zoomer">+</button></div>
+                <div class="h-village-mapwrap">${villageMapHtml(v, bg, zoom)}</div>
+                ${pops.length > 1 ? `<div class="h-village-popchart"><h4>Évolution du nombre d’habitants</h4>${populationChart(pops)}</div>` : ''}${geoportail ? `<p class="h-links"><a href="${esc(geoportail)}" target="_blank" rel="noopener noreferrer">Ouvrir sur le Géoportail ↗</a> · <button type="button" class="link-button" data-h-village-main>Voir sur la carte de l’app</button></p>` : ''}</section>
             <section class="maintenance-panel"><h3>⛪ Église et paroisse</h3>
                 <dl class="data-list">${pr.church ? `<div class="data-row"><dt>Église</dt><dd>${esc(pr.church)}</dd></div>` : ''}${pr.patron_saint ? `<div class="data-row"><dt>Saint patron</dt><dd>${esc(pr.patron_saint)}</dd></div>` : ''}${pr.diocese ? `<div class="data-row"><dt>Diocèse</dt><dd>${esc(pr.diocese)}</dd></div>` : ''}</dl>
                 ${!pr.church && !pr.patron_saint && !pr.diocese ? '<p class="muted">Église, saint patron et diocèse à noter (crayon en haut).</p>' : ''}
                 ${v.parish.length ? `<h4>Avant la Révolution</h4><ul>${v.parish.map(x => `<li>Dépendait de la paroisse de <strong>${esc(x.parish)}</strong>${x.until ? ` jusqu’en ${x.until}` : ''}${x.from ? ` (depuis ${x.from})` : ''}${x.note ? ` — <small>${esc(x.note)}</small>` : ''}</li>`).join('')}</ul>` : '<p class="muted">Aucun rattachement à une autre paroisse noté (Listes → Paroisses d’Ancien Régime).</p>'}
                 ${v.registers.length ? `<h4>Registres en ligne</h4><ul>${v.registers.map(l => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ↗</a>${l.note ? ` <small class="muted">${esc(l.note)}</small>` : ''}</li>`).join('')}</ul>` : ''}
                 ${v.graves.length ? `<h4>Cimetières</h4><ul>${v.graves.map(g => `<li>${esc(g.cemetery_name || 'Cimetière')} <small>(${plural(g.n, 'sépulture notée', 'sépultures notées')})</small></li>`).join('')}</ul>` : ''}</section>
-            <section class="maintenance-panel"><h3>👥 Population au fil des recensements</h3>${populationChart(pops) || '<p class="muted">Ajoute les chiffres des recensements (crayon en haut) : ils sont sur la page Wikipédia de la commune (« Évolution démographique », d’après Cassini/EHESS et l’INSEE).</p>'}
+            <section class="maintenance-panel"><h3>👥 Population au fil des recensements</h3>${pops.length > 1 ? '<p class="muted">La courbe est sous la carte.</p>' : '<p class="muted">Ajoute les chiffres des recensements (crayon en haut) : ils sont sur la page Wikipédia de la commune (« Évolution démographique », d’après Cassini/EHESS et l’INSEE).</p>'}
                 ${pops.length ? `<details><summary>Les chiffres (${pops.length})</summary><table class="data-table"><tbody>${pops.map(p => `<tr><td>${p[0]}</td><td>${fmt(p[1])} habitants</td></tr>`).join('')}</tbody></table></details>` : ''}
                 ${v.census.length ? `<h4>Recensements de la famille ici</h4><table class="data-table"><thead><tr><th>Année</th><th>Foyers</th><th>Personnes relevées</th></tr></thead><tbody>${v.census.map(c => `<tr><td>${c.year}</td><td>${c.households}</td><td>${c.members}</td></tr>`).join('')}</tbody></table>` : ''}
                 <p class="h-links"><a href="${esc(wiki)}" target="_blank" rel="noopener noreferrer">Wikipédia (évolution démographique) ↗</a> · <a href="http://cassini.ehess.fr/" target="_blank" rel="noopener noreferrer">Des villages de Cassini aux communes d’aujourd’hui (EHESS) ↗</a></p></section>
@@ -891,6 +908,7 @@
         ws.querySelector('[data-h-village-back]').addEventListener('click', () => { st.hVillage = ''; ext.lists.villages(++st.workspaceToken); });
         ws.querySelector('[data-h-village-mono]').addEventListener('click', () => { st.graphMode = 'place_monograph'; st.graphPlaceMonograph = {...(st.graphPlaceMonograph || {}), id: v.place_id, name: v.name, county: v.county || '', country: v.country || ''}; A().setModule('graphiques'); });
         ws.querySelectorAll('[data-h-village-bg]').forEach(b => b.addEventListener('click', () => { st.hVillageMap = b.dataset.hVillageBg; again(); }));
+        ws.querySelector('[data-h-village-bgsel]')?.addEventListener('change', e => { if (e.target.value) { st.hVillageMap = e.target.value; again(); } });
         ws.querySelectorAll('[data-h-village-zoom]').forEach(b => b.addEventListener('click', () => { st.hVillageZoom = Math.max(10, Math.min(16, zoom + Number(b.dataset.hVillageZoom))); again(); }));
         ws.querySelectorAll('[data-h-village-more]').forEach(b => b.addEventListener('click', () => {
             const rest = b.previousElementSibling, open = rest.hidden;
@@ -905,6 +923,27 @@
             try { await api('save_village_profile', {}, {method: 'POST', body: {key, name: v.name, populations: [], pending_labels: []}}); toast('Fiche du village effacée.'); again(); } catch (error) { toast(error.message, 'error'); }
         });
     }
+    ext.designPanels = ext.designPanels || [];
+    ext.afterDesign = ext.afterDesign || [];
+    ext.designPanels.push(() => {
+        const on = villageMapButtons();
+        return `<section class="person-block-config" id="h-village-maps-config"><header><span class="eyebrow">FICHE D’UN VILLAGE</span><h3>Fonds de carte en boutons</h3><p>Les fonds cochés apparaissent en boutons sur la carte de chaque village ; tous les autres restent dans le menu « Autres fonds… ».</p></header>
+            ${tileCats().map(c => `<details ${c.items.some(([k]) => on.includes(k)) ? 'open' : ''}><summary>${esc(c.label)}</summary><div class="h-village-maps-grid">${c.items.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-h-vmap="${esc(k)}" ${on.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div></details>`).join('')}
+            <p><button type="button" class="link-button" data-h-vmap-reset>Revenir aux fonds proposés au départ</button></p></section>`;
+    });
+    ext.afterDesign.push(() => {
+        const box = document.getElementById('h-village-maps-config');
+        if (!box) return;
+        const save = list => { lsSet('genealogie-village-maps', JSON.stringify(list)); try { window.dispatchEvent(new StorageEvent('storage', {key: 'genealogie-village-maps'})); } catch (_) {} };
+        box.addEventListener('change', e => {
+            const k = e.target.dataset.hVmap; if (!k) return;
+            const list = villageMapButtons().filter(x => x !== k);
+            if (e.target.checked) list.push(k);
+            if (!list.length) { e.target.checked = true; return toast('Garde au moins un fond en bouton.', 'error'); }
+            save(list); toast('Fonds de carte des villages enregistrés.');
+        });
+        box.querySelector('[data-h-vmap-reset]').addEventListener('click', () => { save(VILLAGE_MAPS_DEFAULT); box.querySelectorAll('[data-h-vmap]').forEach(i => { i.checked = VILLAGE_MAPS_DEFAULT.includes(i.dataset.hVmap); }); toast('Fonds de départ remis.'); });
+    });
     function openVillageDialog(v, done) {
         const pr = v.profile;
         dialog({
@@ -921,6 +960,237 @@
                 toast('Fiche du village enregistrée.');
                 done();
             },
+        });
+    }
+    /* ═══════════════════════ ❓ MINI FAQ (Maintenance → Glossaire / tuto / FAQ, tout en bas) ═══════════════════════ */
+
+    const FAQ = [
+        ['Fiches', [
+            ['Comment ajouter un enfant, un parent ou un conjoint ?', 'Ouvre la fiche, puis dans les blocs Parents, Conjoints ou Enfants clique sur « + ». Tu peux choisir une personne qui existe déjà ou en créer une nouvelle.'],
+            ['Comment afficher un bloc (Départs, Poilu, Résistant…) sur une fiche ?', 'Fiche → Identité (crayon) → « Blocs à afficher sur la fiche » : coche le bloc. Pour l’avoir sur toutes les fiches : Maintenance → Apparence → « Blocs à afficher sur demande ».'],
+            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, ajoute les champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ».'],
+            ['Comment mettre une étiquette ?', 'Dans presque tous les formulaires, la ligne « 🏷️ Étiquettes » : clique sur « + », tape le début du nom ou crée une nouvelle étiquette. La liste de toutes les étiquettes est dans Listes → Étiquettes.'],
+            ['Comment protéger une fiche contre les modifications ?', 'Le cadenas en haut de la fiche la verrouille : plus rien ne peut y être changé, même par le travail à deux.'],
+        ]],
+        ['Recherche', [
+            ['Comment retrouver vite une personne ou un lieu ?', '⌘K (Mac) ou Ctrl+K (Windows, Linux) : tape un nom, un lieu, une battue ou le nom d’un écran.'],
+            ['Peut-on poser une question en français ?', 'Oui : Recherche → « Poser une question », par exemple « Quels ancêtres étaient boulangers à Lille avant 1850 ? ». La recherche peut ensuite être enregistrée.'],
+            ['Comment chercher un mot dans la page ?', '⌘F (Mac) ou Ctrl+F : les mots trouvés sont surlignés et comptés.'],
+            ['Comment revenir à l’écran précédent ?', '⌘← et ⌘→ sur Mac, Alt+← et Alt+→ sur Windows et Linux. Tous les raccourcis : touche F1.'],
+            ['Comment faire ma propre liste (ex. tous les divorces entre 1850 et 1920) ?', 'Maintenance → Mes listes → « + Nouvelle liste » : choisis des événements ou des personnes, combine les critères, choisis les colonnes et ajoute tes colonnes à remplir (texte, menu, case à cocher). Exportable en CSV et imprimable.'],
+            ['Où voir l’histoire d’un village ?', 'Listes → Fiche d’un village : les familles, les métiers, l’église, la population au fil des recensements et la carte de Cassini.'],
+        ]],
+        ['Lieux et cartes', [
+            ['Un lieu est mal placé sur la carte, que faire ?', 'Maintenance → Lieux mal placés : l’app repère les coordonnées improbables et propose la correction en un clic.'],
+            ['Comment changer le fond de carte ?', 'Carte → réglages de la carte : Cassini, État-major, IGN, satellite, cadastre ancien… La fiche d’un village a aussi son propre choix.'],
+            ['Un lieu étranger n’est pas proposé ?', 'Les villes du monde sont préparées une fois au premier lancement (quelques minutes). Un lieu introuvable peut toujours être tapé à la main.'],
+        ]],
+        ['Documents', [
+            ['Comment ajouter des photos ou des scans ?', 'Dans le bloc Médias de la fiche (bouton « + »). Pour un dossier entier qui se remplit tout seul (scanner, téléphone) : Maintenance → Dossier « Scans » surveillé.'],
+            ['Comment demander un acte récent à la mairie ?', 'Listes → Registre de courriers → « Actes à demander à la mairie » : la lettre est préparée, et un rappel peut être posé le jour où l’acte devient public.'],
+            ['La reconnaissance d’écriture manuscrite ne marche pas ?', 'Elle demande un module à installer une seule fois : Maintenance → Reconnaissance d’écriture (HTR), bouton « Installer ».'],
+        ]],
+        ['Sauvegarde et partage', [
+            ['Comment faire une sauvegarde ?', 'Maintenance → Sécurité & comparaison : sauvegarde automatique programmée, et ⌘⇧B (Ctrl+Maj+B) pour une sauvegarde tout de suite. La sauvegarde complète avec tous les médias, protégée par un mot de passe si tu veux, est dans Maintenance → Export propre.'],
+            ['Comment mettre une copie chez un cousin ?', 'Maintenance → Copie chez un cousin : la copie est chiffrée, il la garde sans pouvoir la lire et te la rend si ton ordinateur tombe en panne.'],
+            ['Comment travailler à deux sur la même généalogie ?', 'Maintenance → Travail à deux : vous partez de la même base, puis vous vous échangez des paquets de modifications, acceptés ou refusés un par un.'],
+            ['Comment montrer l’arbre sans risque qu’on le modifie ?', 'Le mode consultation (cadenas en haut à droite) bloque toute modification ; il se quitte avec ton mot de passe.'],
+            ['Comment récupérer une fiche supprimée par erreur ?', 'Maintenance → Journal des modifications : une suppression se restaure avec tout ce qui était attaché. ⌘Z annule la dernière modification d’une fiche.'],
+        ]],
+        ['Import et export', [
+            ['Comment importer mon arbre d’un autre logiciel ?', 'Maintenance → Import : fichier GEDCOM, Hérédis (.hmw) ou MacFamilyTree, sans passer par un export.'],
+            ['Comment ajouter l’arbre d’un cousin à ma base ?', 'Maintenance → Fusionner un arbre : son GEDCOM est comparé au tien, puis tu décides fiche par fiche.'],
+            ['Comment exporter seulement une branche ?', 'Maintenance → Export propre : choisis la personne de départ et les ascendants ou descendants à exporter.'],
+        ]],
+    ];
+    ext.faqHtml = () => `<section class="maintenance-panel full-width help-intro h-faq"><h3>Questions fréquentes</h3><p>Comment faire ceci ou cela dans LCNDA.</p>
+        ${FAQ.map(([group, items]) => `<h4>${esc(group)}</h4>${items.map(([q, a]) => `<details class="h-faq-item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}`).join('')}</section>`;
+    /* ═══════════════════════ ✍️ RECONNAISSANCE D'ÉCRITURE (HTR) : installation ═══════════════════════ */
+
+    let htrTimer = 0;
+    ext.maintenance.htr = async token => {
+        clearTimeout(htrTimer);
+        const s = await api('htr_setup_status');
+        if (!isCurrent(token)) return;
+        const running = s.install?.state === 'running';
+        const missing = s.models.filter(m => !m.present);
+        const state = s.ready ? '<p class="h-offsite-sentence">✅ La reconnaissance d’écriture est prête : bouton « Reconnaissance manuscrite » sur les images (médias, transcriptions).</p>'
+            : running ? `<p class="h-offsite-sentence">⏳ ${esc(s.install.step || 'Installation en cours…')}</p>`
+            : s.install?.state === 'error' ? `<p class="h-offsite-sentence is-warn">⚠️ ${esc(s.install.step)}</p>`
+            : `<p class="h-offsite-sentence is-warn">Pas encore installée.</p>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Reconnaissance d’écriture (HTR)', 'Lire automatiquement un acte manuscrit : l’app propose une transcription, que tu corriges ensuite. Elle s’appuie sur Kraken, un logiciel libre de recherche (EPHE, Inria), qui fonctionne sans Internet une fois installé.')}
+            <section class="maintenance-panel">${state}
+                <ol class="h-htr-steps">
+                    <li class="${s.kraken ? 'is-done' : ''}"><strong>Python 3.10 ou 3.11</strong> doit être sur l’ordinateur (une seule fois). ${s.kraken ? '✅' : `Si l’installation dit qu’il manque : <a href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">python.org/downloads ↗</a>${s.windows ? ' (coche « Add python.exe to PATH »)' : ''}.`}</li>
+                    <li class="${s.kraken ? 'is-done' : ''}"><strong>Kraken</strong> et ses modèles : bouton ci-dessous. Compte 5 à 15 minutes et environ 1 Go ; tu peux continuer à travailler pendant ce temps. ${s.kraken ? '✅ installé' : ''}</li>
+                    <li class="${missing.length ? '' : 'is-done'}"><strong>Modèles</strong> : téléchargés tout seuls quand c’est possible ; sinon, ajoute le fichier .mlmodel à la main dans le tableau. ${missing.length ? '' : '✅'}</li>
+                </ol>
+                <div class="page-actions"><button type="button" class="button" data-h-htr-install ${running ? 'disabled' : ''}>${s.kraken ? 'Réinstaller / compléter les modèles' : 'Installer la reconnaissance d’écriture'}</button>${s.kraken && missing.length ? '<button type="button" class="button secondary" data-h-htr-models>Télécharger seulement les modèles</button>' : ''}</div>
+                <p class="muted">Tout est rangé dans le dossier des données de LCNDA (<code>${esc(s.dir)}</code>), pas dans l’application : rien n’est perdu à la mise à jour de LCNDA.</p>
+                ${s.log ? `<details ${running ? 'open' : ''}><summary>Journal de l’installation</summary><pre class="h-htr-log">${esc(s.log)}</pre></details>` : ''}</section>
+            <section class="maintenance-panel"><h3>Modèles d’écriture</h3>
+                <table class="data-table"><thead><tr><th>Fichier</th><th>Pour</th><th>État</th><th>Ajouter à la main</th></tr></thead><tbody>${s.models.map(m => `<tr><td><code>${esc(m.file)}</code></td><td><small>${esc(m.labels.join(' · '))}</small></td>
+                    <td>${m.present ? `✅ ${sizeText(m.size)}` : m.doi ? '⬇️ téléchargé à l’installation' : '— <small class="muted">à ajouter à la main</small>'}</td>
+                    <td><label class="button small secondary h-htr-up">Choisir le fichier…<input type="file" accept=".mlmodel" data-h-htr-up="${esc(m.file)}" hidden></label>${m.doi ? ` <a href="https://doi.org/${esc(m.doi)}" target="_blank" rel="noopener noreferrer"><small>source ↗</small></a>` : ''}</td></tr>`).join('')}</tbody></table>
+                <p class="muted">Les modèles Kraken se trouvent sur Zenodo et HTR-United (<a href="https://htr-united.github.io/" target="_blank" rel="noopener noreferrer">htr-united.github.io ↗</a>). Un modèle ajouté à la main remplace celui du même nom.</p></section></section>`;
+        const ws = A().$('#workspace');
+        const start = async only => {
+            try { const r = await api('htr_install', {}, {method: 'POST', body: {only}}); toast(r.result?.already ? 'Une installation est déjà en cours.' : 'Installation lancée en arrière-plan.'); ext.maintenance.htr(++S().workspaceToken); }
+            catch (error) { toast(error.message, 'error'); }
+        };
+        ws.querySelector('[data-h-htr-install]').addEventListener('click', () => start(''));
+        ws.querySelector('[data-h-htr-models]')?.addEventListener('click', () => start('models'));
+        ws.querySelectorAll('[data-h-htr-up]').forEach(input => input.addEventListener('change', async () => {
+            if (!input.files[0]) return;
+            const fd = new FormData(); fd.append('file', input.files[0]); fd.append('target', input.dataset.hHtrUp);
+            try { const j = await postForm('htr_upload_model', fd); toast(`Modèle ${j.file} ajouté (${sizeText(j.size)}).`); ext.maintenance.htr(++S().workspaceToken); }
+            catch (error) { toast(error.message, 'error'); }
+        }));
+        if (running) htrTimer = setTimeout(() => { if (S().module === 'maintenance' && S().maintenanceTab === 'htr') ext.maintenance.htr(++S().workspaceToken); }, 4000);
+    };
+    /* ═══════════════════════ 📋 MES LISTES (Maintenance) ═══════════════════════ */
+
+    const RULES = {
+        event_type: {ev: 'Type d’événement', pe: 'A eu un événement', ui: 'types'},
+        year: {ev: 'Année entre', pe: 'Né(e) entre', ui: 'range'},
+        death_year: {pe: 'Mort(e) entre', ui: 'range'},
+        place: {ev: 'Lieu contient', pe: 'Né(e) à (lieu contient)', ui: 'text'},
+        any_place: {pe: 'A un événement à (lieu contient)', ui: 'text'},
+        last_name: {ev: 'Nom contient', pe: 'Nom contient', ui: 'text'},
+        first_name: {ev: 'Prénom contient', pe: 'Prénom contient', ui: 'text'},
+        occupation: {ev: 'Métier contient', pe: 'Métier contient', ui: 'text'},
+        gender: {ev: 'Sexe', pe: 'Sexe', ui: 'gender'},
+        label: {ev: 'Étiquette', pe: 'Étiquette', ui: 'labels'},
+        sosa: {ev: 'Seulement mes ancêtres (Sosa)', pe: 'Seulement mes ancêtres (Sosa)', ui: 'none'},
+        no_parents: {ev: 'Parents inconnus', pe: 'Parents inconnus', ui: 'none'},
+        no_source: {ev: 'Sans source', pe: 'Sans source', ui: 'none'},
+        text: {ev: 'Description contient', pe: 'Description contient', ui: 'text'},
+    };
+    const LIST_TEMPLATES = (types) => {
+        const tag = t => types.filter(x => x.gedcom_tag === t).map(x => Number(x.id));
+        return [
+            {name: 'Divorces 1850–1920', icon: '💔', source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tag('DIV')}, {field: 'year', from: 1850, to: 1920}], columns: ['date', 'type', 'who', 'place', 'age'], custom: [{label: 'Jugement demandé', type: 'checkbox'}, {label: 'Note', type: 'text'}]}},
+            {name: 'Préparer un salon', icon: '🎪', description: 'Mes ancêtres dont les parents sont inconnus : à demander aux associations du salon.', source: 'persons', definition: {match: 'all', rules: [{field: 'sosa'}, {field: 'no_parents'}], columns: ['name', 'birth', 'birthplace', 'sosa'], custom: [{label: 'Association / stand', type: 'text'}, {label: 'Priorité', type: 'select', options: ['haute', 'moyenne', 'basse']}, {label: 'Fait', type: 'checkbox'}]}},
+            {name: 'Mariages sans source', icon: '💍', source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tag('MARR')}, {field: 'no_source'}], columns: ['date', 'who', 'place'], custom: [{label: 'Archives à consulter', type: 'text'}, {label: 'Trouvé', type: 'checkbox'}]}},
+            {name: 'Liste vide', icon: '📋', source: 'persons', definition: {match: 'all', rules: [], columns: ['name', 'birth', 'death'], custom: []}},
+        ];
+    };
+    let listMeta = null, listEditor = null;
+    ext.maintenance.my_lists = async token => {
+        listMeta = await api('my_lists');
+        if (!isCurrent(token)) return;
+        if (S().hListOpen) return renderListView(token, S().hListOpen);
+        if (listEditor) return renderListEditor(token);
+        const lists = listMeta.lists || [];
+        const ruleText = (l) => (l.definition.rules || []).map(r => (RULES[r.field]?.[l.source === 'events' ? 'ev' : 'pe'] || r.field) + (r.value ? ` « ${r.value} »` : '') + (r.from || r.to ? ` ${r.from || '…'}–${r.to || '…'}` : '')).join(l.definition.match === 'any' ? ' OU ' : ' ET ') || 'aucun critère';
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Mes listes', 'Des listes sur mesure : choisis ce que tu listes (des événements, comme les divorces, ou des personnes), combine des critères (période, lieu, nom, étiquette, ancêtres…), choisis les colonnes, et ajoute tes propres colonnes à remplir (texte, menu, case à cocher) — par exemple pour préparer un salon.', '<button type="button" class="button" data-h-list-new>+ Nouvelle liste</button>')}
+            ${lists.length ? `<div class="h-records">${lists.map(l => `<article class="h-record"><header><div><button type="button" class="table-link" data-h-list-open="${l.id}"><strong>${esc(l.icon)} ${esc(l.name)}</strong></button> <small class="muted">${l.source === 'events' ? 'événements' : 'personnes'}</small></div>${tools(`data-h-list-edit="${l.id}"`, `data-h-list-del="${l.id}"`, 'cette liste')}</header>
+                ${l.description ? `<p>${esc(l.description)}</p>` : ''}<p class="muted">${esc(ruleText(l))}${(l.definition.custom || []).length ? ` · colonnes à remplir : ${esc(l.definition.custom.map(c => c.label).join(', '))}` : ''}</p></article>`).join('')}</div>` : empty('Aucune liste pour l’instant : clique sur « + Nouvelle liste ».')}</section>`;
+        const ws = A().$('#workspace');
+        ws.querySelector('[data-h-list-new]').addEventListener('click', () => dialog({
+            eyebrow: 'NOUVELLE LISTE', title: 'Par quoi commencer ?',
+            body: `<div class="h-templates">${LIST_TEMPLATES(listMeta.event_types).map((t, i) => `<button type="button" class="h-template" data-h-ltpl="${i}"><span>${t.icon}</span><strong>${esc(t.name)}</strong><small>${t.source === 'events' ? 'Des événements' : 'Des personnes'}</small></button>`).join('')}</div>`,
+            onOpen: d => d.querySelectorAll('[data-h-ltpl]').forEach(b => b.addEventListener('click', () => { listEditor = JSON.parse(JSON.stringify({id: 0, description: '', ...LIST_TEMPLATES(listMeta.event_types)[Number(b.dataset.hLtpl)]})); if (listEditor.name === 'Liste vide') listEditor.name = ''; d.close(); renderListEditor(++S().workspaceToken); })),
+        }));
+        ws.querySelectorAll('[data-h-list-open]').forEach(b => b.addEventListener('click', () => { S().hListOpen = Number(b.dataset.hListOpen); ext.maintenance.my_lists(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-list-edit]').forEach(b => b.addEventListener('click', () => { const l = lists.find(x => x.id === Number(b.dataset.hListEdit)); listEditor = JSON.parse(JSON.stringify(l)); renderListEditor(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-list-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id: b.dataset.hListDel}}); ext.maintenance.my_lists(++S().workspaceToken); }));
+    };
+    function ruleRowHtml(r, i, source) {
+        const meta = RULES[r.field] || {}; const k = source === 'events' ? 'ev' : 'pe';
+        let input = '';
+        if (meta.ui === 'text') input = `<input data-lr="value" value="${esc(r.value || '')}" placeholder="…">`;
+        if (meta.ui === 'range') input = `<input type="number" data-lr="from" value="${esc(r.from || '')}" placeholder="de" class="h-lr-year"> et <input type="number" data-lr="to" value="${esc(r.to || '')}" placeholder="à" class="h-lr-year">`;
+        if (meta.ui === 'gender') input = `<select data-lr="value">${[['female', 'Femme'], ['male', 'Homme'], ['unknown', 'Inconnu']].map(([v, l]) => `<option value="${v}" ${r.value === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+        if (meta.ui === 'types') input = `<select data-lr="values" multiple size="4">${listMeta.event_types.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select>${source === 'persons' ? ` entre <input type="number" data-lr="from" value="${esc(r.from || '')}" placeholder="de" class="h-lr-year"> et <input type="number" data-lr="to" value="${esc(r.to || '')}" placeholder="à" class="h-lr-year">` : ''}`;
+        if (meta.ui === 'labels') input = `<select data-lr="values" multiple size="3">${listMeta.labels.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select>`;
+        if (meta.ui === 'types' || meta.ui === 'labels') input += '<small class="muted">⌘-clic (Ctrl-clic) pour en choisir plusieurs</small>';
+        return `<div class="h-lr-row" data-lr-i="${i}"><label class="checkbox-line h-lr-not" title="Inverser ce critère"><input type="checkbox" data-lr="not" ${r.not ? 'checked' : ''}> pas</label><strong>${esc(meta[k] || r.field)}</strong> ${input}<button type="button" class="icon-button danger" data-lr-del title="Retirer ce critère">🗑</button></div>`;
+    }
+    function renderListEditor(token) {
+        const L = listEditor, d = L.definition = L.definition || {match: 'all', rules: [], columns: [], custom: []};
+        const cols = listMeta.columns[L.source];
+        const k = L.source === 'events' ? 'ev' : 'pe';
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-be">${header('MES LISTES', L.id ? 'Modifier « ' + L.name + ' »' : 'Nouvelle liste', 'Trois étapes : ce que tu listes, les critères, puis les colonnes.', '<button type="button" class="button secondary" data-le-cancel>← Retour</button>')}
+            <section class="maintenance-panel"><h3>1. La liste</h3><div class="form-grid"><label>Nom<input data-le="name" value="${esc(L.name)}" placeholder="Divorces 1850–1920"></label><label>Icône<input data-le="icon" value="${esc(L.icon || '📋')}" maxlength="16" class="h-be-icon"></label>
+                <label class="span-2">Description <small>(facultatif)</small><input data-le="description" value="${esc(L.description || '')}"></label>
+                <fieldset class="span-2 h-be-display"><legend>Je liste</legend><label class="checkbox-line"><input type="radio" name="le-source" value="events" ${L.source === 'events' ? 'checked' : ''}> des événements (une ligne par événement : divorces, mariages, décès…)</label><label class="checkbox-line"><input type="radio" name="le-source" value="persons" ${L.source !== 'events' ? 'checked' : ''}> des personnes (une ligne par personne)</label></fieldset></div></section>
+            <section class="maintenance-panel"><h3>2. Les critères</h3><p class="muted">Ajoute autant de critères que tu veux. « pas » inverse un critère (ex. « pas » + « Sans source » = seulement ce qui a une source).</p>
+                <div class="h-tabs"><label class="checkbox-line"><input type="radio" name="le-match" value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions (ET)</label><label class="checkbox-line"><input type="radio" name="le-match" value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une (OU)</label></div>
+                <div data-le-rules>${d.rules.map((r, i) => ruleRowHtml(r, i, L.source)).join('') || '<p class="muted">Aucun critère : toute la base.</p>'}</div>
+                <label>+ Ajouter un critère <select data-le-addrule><option value="">choisir…</option>${Object.entries(RULES).filter(([, m]) => m[k]).map(([f, m]) => `<option value="${f}">${esc(m[k])}</option>`).join('')}</select></label></section>
+            <section class="maintenance-panel"><h3>3. Les colonnes</h3><div class="h-village-maps-grid">${Object.entries(cols).map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" data-le-col="${c}" ${d.columns.includes(c) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>
+                <label>Trier par <select data-le="sort">${[['date', 'date'], ['name', 'nom'], ['place', 'lieu']].map(([v, l]) => `<option value="${v}" ${(d.sort || (L.source === 'events' ? 'date' : 'name')) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <h4>Mes colonnes à remplir</h4><div data-le-custom>${d.custom.map((c, i) => `<div class="h-lr-row" data-lc-i="${i}"><input data-lc="label" value="${esc(c.label)}" placeholder="Nom de la colonne"><select data-lc="type">${[['text', 'Texte libre'], ['select', 'Menu déroulant'], ['checkbox', 'Case à cocher'], ['date', 'Date'], ['number', 'Nombre']].map(([v, l]) => `<option value="${v}" ${c.type === v ? 'selected' : ''}>${l}</option>`).join('')}</select>${c.type === 'select' ? `<input data-lc="options" value="${esc((c.options || []).join(', '))}" placeholder="choix séparés par des virgules">` : ''}<button type="button" class="icon-button danger" data-lc-del>🗑</button></div>`).join('')}</div>
+                <button type="button" class="button small secondary" data-le-addcol>+ Colonne à remplir</button></section>
+            <div class="page-actions"><button type="button" class="button" data-le-save>Enregistrer et voir la liste</button><button type="button" class="button secondary" data-le-cancel>Annuler</button></div></section>`;
+        const ws = A().$('#workspace');
+        const again = () => renderListEditor(token);
+        ws.querySelectorAll('[data-le-cancel]').forEach(b => b.addEventListener('click', () => { listEditor = null; ext.maintenance.my_lists(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-le]').forEach(el => el.addEventListener('input', () => { if (el.dataset.le === 'sort') d.sort = el.value; else L[el.dataset.le] = el.value; }));
+        ws.querySelectorAll('[name=le-source]').forEach(el => el.addEventListener('change', () => { L.source = el.value; d.columns = Object.keys(listMeta.columns[L.source]).slice(0, 4); again(); }));
+        ws.querySelectorAll('[name=le-match]').forEach(el => el.addEventListener('change', () => { d.match = el.value; }));
+        ws.querySelector('[data-le-addrule]').addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: '', values: []}); again(); } });
+        const rulesBox = ws.querySelector('[data-le-rules]');
+        const readRule = row => { const r = d.rules[Number(row.dataset.lrI)]; row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (Number(el.value) || null) : el.value; }); };
+        rulesBox.addEventListener('input', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });
+        rulesBox.addEventListener('change', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });
+        rulesBox.addEventListener('click', e => { const row = e.target.closest('[data-lr-i]'); if (row && e.target.closest('[data-lr-del]')) { d.rules.splice(Number(row.dataset.lrI), 1); again(); } });
+        ws.querySelectorAll('[data-le-col]').forEach(el => el.addEventListener('change', () => { d.columns = [...ws.querySelectorAll('[data-le-col]:checked')].map(x => x.dataset.leCol); }));
+        ws.querySelector('[data-le-addcol]').addEventListener('click', () => { d.custom.push({label: '', type: 'text', options: []}); again(); });
+        const customBox = ws.querySelector('[data-le-custom]');
+        customBox.addEventListener('input', e => { const row = e.target.closest('[data-lc-i]'); if (!row) return; const c = d.custom[Number(row.dataset.lcI)]; const f = e.target.dataset.lc; c[f] = f === 'options' ? e.target.value.split(',').map(x => x.trim()).filter(Boolean) : e.target.value; if (f === 'type') again(); });
+        customBox.addEventListener('change', e => { if (e.target.dataset.lc === 'type') { d.custom[Number(e.target.closest('[data-lc-i]').dataset.lcI)].type = e.target.value; again(); } });
+        customBox.addEventListener('click', e => { const row = e.target.closest('[data-lc-i]'); if (row && e.target.closest('[data-lc-del]')) { d.custom.splice(Number(row.dataset.lcI), 1); again(); } });
+        ws.querySelector('[data-le-save]').addEventListener('click', async () => {
+            if (!String(L.name || '').trim()) { toast('Donne un nom à la liste.', 'error'); return; }
+            try { const r = await api('save_my_list', {}, {method: 'POST', body: {id: L.id, name: L.name, icon: L.icon, description: L.description, source: L.source, definition: d}}); listEditor = null; S().hListOpen = r.result.id; ext.maintenance.my_lists(++S().workspaceToken); }
+            catch (error) { toast(error.message, 'error'); }
+        });
+    }
+    async function renderListView(token, id) {
+        let data;
+        try { data = await api('my_list_rows', {id}); } catch (error) { S().hListOpen = 0; toast(error.message, 'error'); return ext.maintenance.my_lists(++S().workspaceToken); }
+        if (!isCurrent(token)) return;
+        const L = data.list, d = L.definition, cols = d.columns, custom = d.custom || [];
+        const isEv = L.source === 'events';
+        const cell = (r, c) => c === 'who' || c === 'name' ? r.people.map(p => personLink(p.id, pname(p))).join(' et ') : esc(r.cells[c] ?? '');
+        const customCell = (r, c) => { const v = r.values?.[c.key] ?? '';
+            if (c.type === 'checkbox') return `<input type="checkbox" data-lv="${esc(c.key)}" ${v === '1' ? 'checked' : ''}>`;
+            if (c.type === 'select') return `<select data-lv="${esc(c.key)}"><option value=""></option>${c.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
+            return `<input type="${c.type === 'date' ? 'text' : c.type === 'number' ? 'number' : 'text'}" data-lv="${esc(c.key)}" value="${esc(v)}" ${c.type === 'date' ? 'placeholder="date"' : ''}>`; };
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header('MES LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(data.rows.length, isEv ? 'événement' : 'personne', isEv ? 'événements' : 'personnes')}</strong>${data.truncated ? ' (les 3 000 premiers)' : ''}`,
+                `<button type="button" class="button secondary" data-lv-back>← Mes listes</button><button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
+            ${!isEv ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
+            ${data.rows.length ? `<div class="h-lv-scroll"><table class="data-table h-lv-table"><thead><tr>${cols.map(c => `<th>${esc(data.columns[c] || c)}</th>`).join('')}${custom.map(c => `<th class="h-lv-own">${esc(c.label)}</th>`).join('')}<th></th></tr></thead><tbody>${data.rows.map(r => `<tr data-lv-key="${esc(r.key)}">${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}${custom.map(c => `<td class="h-lv-own">${customCell(r, c)}</td>`).join('')}<td><button type="button" class="icon-button" data-lv-remove title="Retirer de la liste (la fiche n’est pas touchée)">✕</button>${r.manual ? ' <small class="muted" title="ajoutée à la main">✋</small>' : ''}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune ligne ne répond à ces critères.')}</section>`;
+        A().bindTableLinks?.();
+        A().bindCollectionPersonFields(A().$('#workspace'));
+        const ws = A().$('#workspace');
+        const reload = () => renderListView(++S().workspaceToken, id);
+        ws.querySelector('[data-lv-back]').addEventListener('click', () => { S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
+        ws.querySelector('[data-lv-edit]').addEventListener('click', () => { listEditor = JSON.parse(JSON.stringify(L)); S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
+        ws.querySelector('[data-lv-del]').addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
+        ws.querySelector('[data-lv-print]').addEventListener('click', () => window.print());
+        ws.querySelector('[data-lv-csv]').addEventListener('click', () => {
+            const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+            const lines = [[...cols.map(c => data.columns[c] || c), ...custom.map(c => c.label)].map(q).join(';'),
+                ...data.rows.map(r => [...cols.map(c => c === 'who' || c === 'name' ? r.people.map(pname).join(' et ') : r.cells[c]), ...custom.map(c => c.type === 'checkbox' ? (r.values?.[c.key] === '1' ? 'oui' : '') : r.values?.[c.key])].map(q).join(';'))];
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
+        });
+        ws.querySelector('[data-lv-addbtn]')?.addEventListener('click', async () => {
+            const pid = Number(ws.querySelector('[name=lv_add]').value);
+            if (!pid) return toast('Choisis une personne dans les suggestions.', 'error');
+            await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: 'p:' + pid, included: 1}}); toast('Ajoutée à la liste.'); reload();
+        });
+        ws.querySelector('.h-lv-table')?.addEventListener('change', async e => {
+            const tr = e.target.closest('[data-lv-key]'), f = e.target.dataset.lv; if (!tr || !f) return;
+            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: tr.dataset.lvKey, field: f, value: e.target.type === 'checkbox' ? (e.target.checked ? '1' : '') : e.target.value}}); }
+            catch (error) { toast(error.message, 'error'); }
+        });
+        ws.querySelector('.h-lv-table')?.addEventListener('click', async e => {
+            const b = e.target.closest('[data-lv-remove]'); if (!b) return;
+            const tr = b.closest('[data-lv-key]');
+            await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: tr.dataset.lvKey, included: -1}}); tr.remove(); toast('Retirée de la liste.');
         });
     }
 })();

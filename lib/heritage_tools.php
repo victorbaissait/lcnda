@@ -480,26 +480,32 @@ function sync_columns(PDO $pdo, string $table): array
 
 function sync_assign_uids(PDO $pdo): int
 {
+    // Une seule requête par table (une écriture par ligne bloquait la base plusieurs minutes sur une grande généalogie)
     $n = 0;
     foreach (SYNC_TABLES as $t) {
-        $ids = $pdo->query("SELECT id FROM {$t} WHERE uid IS NULL OR uid=''")->fetchAll(PDO::FETCH_COLUMN);
-        $upd = $pdo->prepare("UPDATE {$t} SET uid=? WHERE id=?");
-        foreach ($ids as $id) { $upd->execute([bin2hex(random_bytes(10)), $id]); $n++; }
+        if (!(int) $pdo->query("SELECT EXISTS(SELECT 1 FROM {$t} WHERE uid IS NULL OR uid='')")->fetchColumn()) { continue; }
+        $n += (int) $pdo->exec("UPDATE {$t} SET uid=lower(hex(randomblob(10))) WHERE uid IS NULL OR uid=''");
     }
     return $n;
+}
+
+/** Lieux partagés : seulement ceux que la famille utilise (pas les dizaines de milliers de communes de référence). */
+function sync_where(string $t): string
+{
+    return $t === 'places' ? ' WHERE id IN (SELECT place_id FROM events WHERE place_id IS NOT NULL)' : '';
 }
 
 /** Toutes les lignes partagées, sous une forme « portable » (liens par uid, type d'événement par son code). */
 function sync_portable_rows(PDO $pdo): array
 {
     $uidOf = [];
-    foreach (SYNC_TABLES as $t) { foreach ($pdo->query("SELECT id, uid FROM {$t}") as $r) { $uidOf[$t][(int) $r['id']] = (string) $r['uid']; } }
+    foreach (SYNC_TABLES as $t) { foreach ($pdo->query("SELECT id, uid FROM {$t}" . sync_where($t)) as $r) { $uidOf[$t][(int) $r['id']] = (string) $r['uid']; } }
     $types = [];
     foreach ($pdo->query('SELECT id, slug, label, scope, gedcom_tag FROM event_types') as $r) { $types[(int) $r['id']] = $r; }
     $out = [];
     foreach (SYNC_TABLES as $t) {
         $cols = sync_columns($pdo, $t);
-        foreach ($pdo->query('SELECT uid, ' . implode(',', array_map(static fn($c) => '"' . $c . '"', $cols)) . " FROM {$t}") as $r) {
+        foreach ($pdo->query('SELECT uid, ' . implode(',', array_map(static fn($c) => '"' . $c . '"', $cols)) . " FROM {$t}" . sync_where($t)) as $r) {
             $uid = (string) $r['uid']; unset($r['uid']);
             foreach (SYNC_REFS[$t] ?? [] as $col => $ref) { $r[$col] = $r[$col] ? ($uidOf[$ref][(int) $r[$col]] ?? null) : null; }
             if ($t === 'events') { $et = $types[(int) $r['event_type_id']] ?? null; $r['event_type_id'] = $et ? ['slug' => $et['slug'], 'label' => $et['label'], 'scope' => $et['scope'], 'tag' => $et['gedcom_tag']] : null; }
@@ -555,6 +561,8 @@ function sync_set_author(PDO $pdo, array $data): array
 
 function sync_take_snapshot(PDO $pdo, ?array $only = null): void
 {
+    // Toujours dans une transaction : des milliers d'écritures séparées tenaient la base verrouillée
+    if (!$pdo->inTransaction()) { $pdo->beginTransaction(); try { sync_take_snapshot($pdo, $only); $pdo->commit(); } catch (Throwable $e) { $pdo->rollBack(); throw $e; } return; }
     $rows = sync_portable_rows($pdo);
     $ins = $pdo->prepare('INSERT OR REPLACE INTO sync_snapshot(tbl, uid, hash, row_json) VALUES(?,?,?,?)');
     if ($only === null) {
@@ -585,6 +593,7 @@ function sync_diff(PDO $pdo): array
         }
     }
     foreach (array_reverse(SYNC_TABLES) as $t) {
+        if ($t === 'places') { continue; } // un lieu qui n'est plus utilisé ici reste chez le cousin (données de référence)
         foreach ($snap[$t] ?? [] as $uid => $old) {
             if (!isset($rows[$t][$uid])) { $changes[] = ['tbl' => $t, 'uid' => $uid, 'op' => 'delete', 'before' => json_decode($old['row_json'], true), 'after' => null]; }
         }
