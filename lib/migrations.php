@@ -1470,10 +1470,11 @@ function schema_v17(PDO $pdo): void
         $from = MEDIA_DIR . '/originaux/' . $name;
         if (is_file($from)) {
             if (is_file(MEDIA_DIR . '/' . $name)) { $name = bin2hex(random_bytes(4)) . '_' . $name; }
-            if (!@rename($from, MEDIA_DIR . '/' . $name)) { continue; }
-        } elseif (!is_file(MEDIA_DIR . '/' . $name)) { continue; }
+            if (!@rename($from, MEDIA_DIR . '/' . $name)) { error_log('[migration 17] original non déplacé : ' . $from); continue; }
+        } elseif (!is_file(MEDIA_DIR . '/' . $name)) { error_log('[migration 17] original introuvable : ' . $name); continue; }
         $ins->execute([(int) $r['media_id'], $name, 'Original', 1, (string) $r['created_at']]);
         $ins->execute([(int) $r['media_id'], basename((string) $r['current']), 'Retouche', 0, (string) $r['created_at']]);
+        // seulement ce qui a été repris : un original qui n'a pas pu bouger reste noté (et dans media/originaux/)
+        $pdo->prepare('DELETE FROM media_originals WHERE media_id=?')->execute([(int) $r['media_id']]);
     }
-    $pdo->exec('DELETE FROM media_originals');
 }

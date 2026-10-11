@@ -85,8 +85,8 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
             if (!(int) $has->fetchColumn()) {
                 $pdo->prepare('INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?,?,?,1)')->execute([$id, $current, 'Original']);
             }
-            $n = $pdo->prepare('SELECT count(*) FROM media_versions WHERE media_id=? AND is_original=0'); $n->execute([$id]);
-            $label = 'Retouche ' . ((int) $n->fetchColumn() + 1) . ' — ' . date('d/m/Y');
+            $n = $pdo->prepare("SELECT COALESCE(max(CAST(substr(label, 10, instr(substr(label, 10), ' ')) AS INTEGER)), 0) FROM media_versions WHERE media_id=? AND label LIKE 'Retouche %'"); $n->execute([$id]);
+            $label = 'Retouche ' . ((int) $n->fetchColumn() + 1) . ' — ' . date('d/m/Y'); // jamais deux fois le même numéro, même après une suppression
             $pdo->prepare('INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?,?,?,0)')->execute([$id, $name, $label]);
             if ($show) {
                 $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
@@ -131,6 +131,7 @@ function retouch_delete_version(PDO $pdo, array $data): never
         if ((string) $m->fetchColumn() === (string) $v['filename']) {
             $o = $pdo->prepare('SELECT filename FROM media_versions WHERE media_id=? AND is_original=1'); $o->execute([$id]);
             $orig = (string) $o->fetchColumn();
+            if ($orig === '' || !is_file(MEDIA_DIR . '/' . basename($orig))) { throw new RuntimeException('L’original n’est plus dans le dossier des médias : affiche d’abord une autre version.'); }
             $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$orig, $orig, $id]);
         }
         $pdo->prepare('DELETE FROM media_versions WHERE id=?')->execute([$vid]);

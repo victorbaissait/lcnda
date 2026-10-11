@@ -23,7 +23,9 @@
     /** Position le long d'un mur (« along ») ↔ coordonnée du plan (x pour le fond et l'entrée, z pour les côtés). */
     const alongOf = (wall, world) => (wall === 'front' || wall === 'right') ? -world : world;
     /** Les limites où l'on peut accrocher sur un mur (l'entrée garde la place des portes). */
-    const wallLimit = (wall, W, D) => wall === 'front' ? W / 2 - 2.2 : ((wall === 'back' ? W : D) / 2 - 0.5);
+    const wallLimit = (wall, W, D, half = 0) => wall === 'front' ? Math.max(0, W / 2 - 2.05 - half) : Math.max(0, (wall === 'back' ? W : D) / 2 - 0.35 - half);
+    /** Demi-largeur approximative d'un élément accroché (cadre ou texte), pour qu'il ne déborde ni sur une porte ni dans un coin. */
+    const halfWidth = it => it.kind === 'text' ? Math.min(1.3, 1.3 * (Number(it.settings?.scale) || 1)) : Math.min(1.25, 0.5 * 1.35 * (Number(it.settings?.scale) || 1) + 0.15);
     /**
      * Où va chaque élément d'une salle : sur un mur (position, hauteur) ou au milieu (x, z, orientation).
      * Placé à la main sur le plan (settings.along / y, ou px / pz / rot), sinon réparti tout seul.
@@ -40,7 +42,7 @@
             const len = full - (wall === 'front' ? 5.4 : 1.4), slot = auto.length ? len / auto.length : len;
             list.forEach(it => {
                 let along, sl;
-                if (isNum(it.settings?.along)) { along = alongOf(wall, Math.max(-1, Math.min(1, Number(it.settings.along))) * wallLimit(wall, W, D)); sl = Math.min(len, 2.6); }
+                if (isNum(it.settings?.along)) { along = alongOf(wall, Math.max(-1, Math.min(1, Number(it.settings.along))) * wallLimit(wall, W, D, halfWidth(it))); sl = Math.min(len, 2.6); }
                 else { along = -len / 2 + slot * (auto.indexOf(it) + 0.5); sl = slot; }
                 spots.set(it, {wall, along, slot: sl, y: isNum(it.settings?.y) ? Math.max(0.6, Math.min(3.4, Number(it.settings.y))) : null});
             });
@@ -432,8 +434,8 @@
         }
 
         /* ── Visite guidée : on va d'œuvre en œuvre, avec l'enregistrement ou la voix de synthèse ── */
-        let tour = null, audio = null;
-        function stopAudio() { if (audio) { audio.pause(); audio = null; } try { window.speechSynthesis?.cancel(); } catch (_) {} }
+        let tour = null, audio = null, playing = null; // visite guidée, son en cours, œuvre écoutée au casque
+        function stopAudio() { if (audio) { const a = audio; audio = null; a.pause(); a.onended?.(); } playing = null; try { window.speechSynthesis?.cancel(); } catch (_) {} } // l'attente en cours se termine aussi
         function tourStops() {
             const stops = [];
             rooms.forEach((r, i) => { stops.push({room: i}); (r.items || []).forEach(it => { if (tourKinds(it.kind) && Number(it.in_tour ?? 1)) stops.push({room: i, item: it}); }); });
@@ -478,9 +480,8 @@
             t.timer = setTimeout(() => { if (tour === t && !t.paused && t.run === run) runStop(k + 1); }, 1400);
         }
         /** Audioguide d'une seule œuvre (le casque à côté du cartel) : un 2e clic l'arrête. */
-        let playing = null;
         async function playItem(it) {
-            if (playing === it) { playing = null; stopAudio(); caption(''); return; }
+            if (playing === it) { stopAudio(); caption(''); return; }
             stopTour(); stopAudio(); playing = it;
             caption(`<span class="lm-kicker">🎧 Audioguide</span><strong>${esc(it.title || '')}</strong>${it.cartel ? `<p class="lm-cartel">${esc(it.cartel).replace(/\n/g, '<br>')}</p>` : ''}${it.description ? `<p>${esc(it.description)}</p>` : ''}`);
             await (it.audio ? play(it.audio) : speak([it.title, it.cartel, it.description].filter(Boolean).join('. ')));
@@ -543,5 +544,5 @@
             goRoom: i => enterRoom(i), startTour, stopTour,
         };
     }
-    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, alongOf, wallLimit};
+    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, alongOf, wallLimit, halfWidth};
 })();

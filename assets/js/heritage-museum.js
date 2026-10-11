@@ -104,7 +104,7 @@
         const again = (ri = data.rooms.indexOf(room)) => { dlg.close(); openEditor(data.id, Math.max(0, ri)); };
         const guard = fn => async (...args) => { try { await fn(...args); } catch (error) { toast(error.message, 'error'); } };
         dlg.querySelectorAll('[data-me-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
-        if (room) mountPlan(dlg, room, readOnly, () => again());
+        if (room) mountPlan(dlg, room, readOnly, () => again(), {first: data.rooms.indexOf(room) === 0, last: data.rooms.indexOf(room) === data.rooms.length - 1});
         dlg.querySelector('[data-me-visit]').addEventListener('click', () => { dlg.close(); openMuseum(data.id, Math.max(0, data.rooms.indexOf(room))); });
         dlg.querySelector('[data-me-print]').addEventListener('click', () => { dlg.close(); openMuseum(data.id, 0).then(() => document.querySelector('#h-museum-dialog [data-lm-catalog]')?.click()); });
         dlg.querySelectorAll('[data-me-room]').forEach(b => b.addEventListener('click', () => again(Number(b.dataset.meRoom))));
@@ -148,7 +148,7 @@
     const FOOT = {bench: [1.8, 0.45], chair: [0.5, 0.5], sofa: [2, 0.85], plant: [0.6, 0.6, 'c'], column: [0.56, 0.56, 'c'], pedestal: [0.6, 0.6], rope: [2.1, 0.12], rug: [3, 2],
         lamp: [0.4, 0.4, 'c'], vase: [0.5, 0.5], piano: [1.5, 1.6], table: [1.6, 0.9], screen: [2.4, 0.3], vitrine: [0.8, 0.8]};
     const ICON = {photo: '🖼️', document: '📜', artwork: '🎨', object: '🏺', text: '🔤', decor: '🪴', seat: '🪑'};
-    function mountPlan(dlg, room, readOnly, reopen) {
+    function mountPlan(dlg, room, readOnly, reopen, pos = {}) {
         const V = window.LCNDA_MUSEUM_VIEWER, svg = dlg.querySelector('[data-me-plan]'), side = dlg.querySelector('[data-me-plan-side]');
         if (!V || !svg) return;
         let selected = null, drag = null;
@@ -164,7 +164,11 @@
             for (let z = Math.ceil(-D / 2); z < D / 2; z++) h += `<line x1="${-W / 2}" y1="${z}" x2="${W / 2}" y2="${z}" class="pl-grid"/>`;
             h += `<text x="0" y="${-D / 2 - 0.35}" class="pl-wall">Mur du fond</text><text x="0" y="${D / 2 + 0.65}" class="pl-wall">Mur d’entrée</text>`;
             h += `<text x="${-W / 2 - 0.35}" y="0" class="pl-wall" transform="rotate(-90 ${-W / 2 - 0.35} 0)">Mur de gauche</text><text x="${W / 2 + 0.35}" y="0" class="pl-wall" transform="rotate(90 ${W / 2 + 0.35} 0)">Mur de droite</text>`;
-            [-(W / 2 - 1.3), W / 2 - 1.3].forEach((x, k) => { h += `<rect x="${x - 0.63}" y="${D / 2 - 0.08}" width="1.26" height="0.16" class="pl-door"/><text x="${x}" y="${D / 2 - 0.3}" class="pl-small">${k ? 'porte' : 'porte'}</text>`; });
+            // Les mêmes portes que dans la visite : vers la salle précédente (ou la sortie), vers la suivante
+            const doors = [];
+            doors.push([W / 2 - 1.3, pos.first ? 'sortie' : 'salle précédente']);
+            if (!pos.last) doors.push([-(W / 2 - 1.3), 'salle suivante']);
+            doors.forEach(([x, t]) => { h += `<rect x="${x - 0.63}" y="${D / 2 - 0.08}" width="1.26" height="0.16" class="pl-door"/><text x="${x}" y="${D / 2 - 0.3}" class="pl-small">${t}</text>`; });
             h += `<text x="0" y="${D / 2 - 0.5}" class="pl-small">▲ on entre ici</text>`;
             (room.items || []).forEach((it, k) => {
                 const sp = spots.get(it); if (!sp) return;
@@ -217,7 +221,7 @@
             if (canHang(it) && wall[1] < 0.9) {
                 it.wall = wall[0];
                 const coord = wall[0] === 'back' || wall[0] === 'front' ? x : z;
-                st.along = Math.round(clamp(coord / V.wallLimit(wall[0], W, D), -1, 1) * 1000) / 1000; delete st.px; delete st.pz; delete st.rot;
+                st.along = Math.round(clamp(coord / Math.max(0.01, V.wallLimit(wall[0], W, D, V.halfWidth(it))), -1, 1) * 1000) / 1000; delete st.px; delete st.pz; delete st.rot;
             } else {
                 it.wall = 'center';
                 st.px = Math.round(clamp(x / (W / 2 - 1), -1, 1) * 1000) / 1000; st.pz = Math.round(clamp(z / (D / 2 - 1), -1, 1) * 1000) / 1000; delete st.along; delete st.y;

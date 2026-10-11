@@ -31,7 +31,7 @@ const LIST_TABLE_SOURCES = [
             (SELECT group_concat(l.name, ', ') FROM label_links ll JOIN labels l ON l.id=ll.label_id WHERE ll.entity_type='media' AND ll.entity_id=m.id) AS labels,
             (SELECT ml.entity_id FROM media_links ml WHERE ml.media_id=m.id AND ml.entity_type='person' ORDER BY ml.position LIMIT 1) AS person_id FROM media m ORDER BY m.id DESC"],
     'occupations' => ['label' => 'Métiers', 'columns' => ['occupation' => 'Métier', 'people' => 'Personnes', 'names' => 'Qui'],
-        'sql' => "SELECT 0 AS id, trim(occupation) AS occupation, count(*) AS people,
+        'sql' => "SELECT 0 AS id, lower(trim(occupation)) AS group_key, trim(occupation) AS occupation, count(*) AS people,
             group_concat(trim(COALESCE(first_name,'') || ' ' || COALESCE(last_name,'')), ', ') AS names, NULL AS person_id FROM persons WHERE trim(COALESCE(occupation,''))<>'' GROUP BY lower(trim(occupation)) ORDER BY occupation COLLATE NOCASE"],
     'census' => ['label' => 'Recensements', 'columns' => ['year' => 'Année', 'date' => 'Date', 'place' => 'Lieu', 'address' => 'Adresse', 'members' => 'Membres', 'names' => 'Qui'],
         'sql' => "SELECT c.id, c.year, c.date_text AS date, pl.name AS place, c.address, (SELECT count(*) FROM census_members cm WHERE cm.census_id=c.id) AS members,
@@ -99,7 +99,7 @@ function my_list_clean_definition(array $d, string $source): array
     foreach (is_array($d['filters'] ?? null) ? $d['filters'] : [] as $col => $f) {
         if (!is_array($f) || !in_array((string) $col, $filterable, true)) { continue; }
         $clean = [];
-        if (isset($f['values']) && is_array($f['values'])) { $clean['values'] = array_values(array_slice(array_map(static fn($v) => mb_substr(trim((string) $v), 0, 200), array_filter($f['values'], 'is_scalar')), 0, 2000)); }
+        if (isset($f['values']) && is_array($f['values'])) { $clean['values'] = array_values(array_slice(array_map(static fn($v) => mb_substr(trim((string) $v), 0, 4000), array_filter($f['values'], 'is_scalar')), 0, 2000)); }
         if (trim((string) ($f['contains'] ?? '')) !== '') { $clean['contains'] = mb_substr(trim((string) $f['contains']), 0, 200); }
         if (safe_int($f['from'] ?? 0)) { $clean['from'] = safe_int($f['from']); }
         if (safe_int($f['to'] ?? 0)) { $clean['to'] = safe_int($f['to']); }
@@ -302,6 +302,7 @@ function my_list_rows(PDO $pdo, int $listId): array
         }
         $out[] = $row;
     }
+    my_list_link_people($pdo, $out, $def);
     if (!$isEvents && $def['sort'] === 'date') { usort($out, static fn($a, $b) => ($a['year'] ?? 9999) <=> ($b['year'] ?? 9999)); }
     if (!$isEvents && $def['sort'] === 'place') { usort($out, static fn($a, $b) => strcmp((string) $a['cells']['birthplace'], (string) $b['cells']['birthplace'])); }
     $list['definition'] = $def; unset($list['definition_json']);
@@ -443,7 +444,7 @@ function my_list_table_rows(PDO $pdo, array $list, array $def): array
     $people = collection_people($pdo, array_filter(array_map(static fn($r) => (int) ($r['person_id'] ?? 0), $raw)));
     $out = [];
     foreach ($raw as $r) {
-        if ($list['source'] === 'occupations') { $r['id'] = crc32(mb_strtolower((string) $r['occupation'])); } // un métier n'a pas de numéro : on en tire un de son nom
+        if ($list['source'] === 'occupations') { $r['id'] = crc32((string) $r['group_key']); } // un métier n'a pas de numéro : on en tire un de son nom (le même regroupement que la requête)
         $key = 't:' . (int) $r['id'];
         if (($manual[$key]['included'] ?? 0) === -1) { continue; }
         $cells = [];
@@ -452,9 +453,22 @@ function my_list_table_rows(PDO $pdo, array $list, array $def): array
         if (array_key_exists('person', $cells)) { $cells['person'] = $p ? trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')) : (string) ($r['holder_text'] ?? ''); }
         $out[] = ['key' => $key, 'values' => $manual[$key]['values'] ?? [], 'manual' => false, 'people' => $p ? [$p] : [], 'cells' => $cells];
     }
+    my_list_link_people($pdo, $out, $def);
     $list['definition'] = $def; unset($list['definition_json']);
     $list['labels'] = collection_labels($pdo, 'custom_list', [(int) $list['id']])[(int) $list['id']] ?? [];
     return ['list' => $list, 'rows' => $out, 'columns' => $src['columns'], 'truncated' => count($raw) >= 5000];
+}
+
+/** Colonnes à soi de sorte « personne de la base » : la fiche choisie, pour l'afficher (lien), la filtrer et l'exporter. */
+function my_list_link_people(PDO $pdo, array &$rows, array $def): void
+{
+    $cols = array_column(array_filter($def['custom'] ?? [], static fn($c) => $c['type'] === 'person'), 'key');
+    if (!$cols) { return; }
+    $ids = [];
+    foreach ($rows as $r) { foreach ($cols as $k) { if (!empty($r['values'][$k])) { $ids[] = (int) $r['values'][$k]; } } }
+    $people = collection_people($pdo, $ids);
+    foreach ($rows as &$r) { foreach ($cols as $k) { $id = (int) ($r['values'][$k] ?? 0); $r['linked'][$k] = $id && isset($people[$id]) ? $people[$id] : null; } }
+    unset($r);
 }
 
 /** Enregistre les filtres de colonnes d'une liste (choisis depuis la liste elle-même). */

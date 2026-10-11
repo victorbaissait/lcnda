@@ -1218,7 +1218,8 @@
         return `<div class="h-lr-row" data-lr-i="${i}"><label class="checkbox-line h-lr-not" title="Inverser ce critère"><input type="checkbox" data-lr="not" ${r.not ? 'checked' : ''}> pas</label><strong>${esc(meta[k] || r.field)}</strong> ${input}<button type="button" class="icon-button danger" data-lr-del title="Retirer ce critère">🗑</button></div>`;
     }
     function renderListEditor(token) {
-        const L = listEditor, d = L.definition = L.definition || {match: 'all', rules: [], columns: [], custom: []};
+        const L = listEditor, d = L.definition = L.definition || {};
+        d.match ??= 'all'; d.rules ??= []; d.columns ??= []; d.custom ??= []; d.filters ??= {}; // un modèle peut n'avoir que ses colonnes
         const cols = listMeta.columns[L.source] || {};
         const k = L.source === 'events' ? 'ev' : 'pe';
         A().$('#workspace').innerHTML = `<section class="page collection-page h-be">${header('MES LISTES', L.id ? 'Modifier « ' + L.name + ' »' : 'Nouvelle liste', 'Trois étapes : ce que tu listes, les critères, puis les colonnes.', '<button type="button" class="button secondary" data-le-cancel>← Retour</button>')}
@@ -1290,7 +1291,7 @@
         const yearOf = v => { const m = String(v).match(/(?<!\d)(\d{4})(?!\d)/); return m ? Number(m[1]) : null; };
         const filters = d.filters || {};
         const passes = r => Object.entries(filters).every(([c, f]) => {
-            const v = text(r, c);
+            const v = text(r, c).trim();
             if (f.values && !f.values.includes(v)) return false;
             if (f.contains && !v.toLowerCase().includes(f.contains.toLowerCase())) return false;
             if (f.from || f.to) { const y = yearOf(v); if (y === null || (f.from && y < f.from) || (f.to && y > f.to)) return false; }
@@ -1328,7 +1329,7 @@
         ws.querySelectorAll('[data-lv-filter]').forEach(b => b.addEventListener('click', () => {
             const c = b.dataset.lvFilter, label = allCols.find(x => x[0] === c)?.[1] || c, f = filters[c] || {};
             // Toutes les valeurs de la colonne, avec leur nombre
-            const counts = new Map(); data.rows.forEach(r => { const v = text(r, c); counts.set(v, (counts.get(v) || 0) + 1); });
+            const counts = new Map(); data.rows.forEach(r => { const v = text(r, c).trim(); counts.set(v, (counts.get(v) || 0) + 1); });
             const values = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr', {numeric: true, sensitivity: 'base'}));
             const hasYears = values.some(([v]) => yearOf(v) !== null);
             dialog({eyebrow: 'FILTRER LA COLONNE', title: label, submitLabel: 'Appliquer',

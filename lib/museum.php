@@ -132,7 +132,7 @@ function museum_clean_settings(mixed $raw, array $allowed): string
         if ($type === 'color') { if (is_string($v) && preg_match('/^#[0-9a-f]{6}$/i', $v)) { $out[$k] = $v; } }
         elseif ($type === 'bool') { $out[$k] = !empty($v) && $v !== '0'; }
         elseif ($type === 'num') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = max(-1, min(3.4, round((float) $v, 3))); } }
-        elseif ($type === 'deg') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = (int) round(fmod((float) $v + 540, 360) - 180); } }
+        elseif ($type === 'deg') { if ($v !== '' && $v !== null && is_numeric($v)) { $d = fmod((float) $v + 180, 360); if ($d < 0) { $d += 360; } $out[$k] = (int) round($d - 180); } }
         elseif (is_array($type)) { if (in_array($v, $type, true)) { $out[$k] = $v; } }
     }
     return json_encode($out);

@@ -5670,6 +5670,7 @@ function restore_deleted_media(PDO $pdo,array $change,array $before): array
     insert_snapshot_row($pdo,'media',$media);
     foreach(($before['media_links']??[]) as $row)insert_snapshot_row($pdo,'media_links',$row);
     foreach(($before['label_links']??[]) as $row)insert_snapshot_row($pdo,'label_links',$row,true);
+    foreach(($before['media_versions']??[]) as $row)insert_snapshot_row($pdo,'media_versions',$row,true);
     foreach(($before['portrait_person_ids']??[]) as $personId){
         $personId=safe_int($personId);
         if($personId&&record_exists($pdo,'persons',$personId))$pdo->prepare('UPDATE persons SET portrait_media_id=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND portrait_media_id IS NULL')->execute([$mediaId,$personId]);
@@ -11375,7 +11376,9 @@ function delete_media(PDO $pdo,array $data): array
     $mediaLinks=$pdo->prepare('SELECT * FROM media_links WHERE media_id=?');$mediaLinks->execute([$mediaId]);
     $labelLinks=$pdo->prepare("SELECT * FROM label_links WHERE entity_type='media' AND entity_id=?");$labelLinks->execute([$mediaId]);
     $portraits=$pdo->prepare('SELECT id FROM persons WHERE portrait_media_id=?');$portraits->execute([$mediaId]);
+    $versions=$pdo->prepare('SELECT * FROM media_versions WHERE media_id=?');$versions->execute([$mediaId]);
     $snapshot=[
+        'media_versions'=>$versions->fetchAll(), // l'original et les retouches reviennent avec le média restauré
         '_restore_kind'=>'media_delete',
         'media'=>$before,
         'media_links'=>$mediaLinks->fetchAll(),
