@@ -1080,8 +1080,8 @@ header('Cache-Control: no-store, private');
 <script src="assets/js/heritage-links.js?v=3" defer></script>
 <script src="assets/js/heritage-more.js?v=10" defer></script>
 <script src="assets/js/heritage-studio.js?v=1" defer></script>
-<script src="assets/js/museum-viewer.js?v=2" defer></script>
-<script src="assets/js/heritage-museum.js?v=1" defer></script>
+<script src="assets/js/museum-viewer.js?v=3" defer></script>
+<script src="assets/js/heritage-museum.js?v=2" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

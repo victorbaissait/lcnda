@@ -256,6 +256,8 @@ function museum_sign(PDO $pdo, array $data): array
 {
     $id = safe_int($data['museum_id'] ?? 0) ?: museum_own_id($pdo);
     museum_check($pdo, $id);
+    $st = $pdo->prepare('SELECT settings_json FROM museums WHERE id=?'); $st->execute([$id]);
+    if ((museum_settings((string) $st->fetchColumn())['guestbook'] ?? true) === false) { throw new RuntimeException('Ce musée n’a pas de livre d’or.'); }
     $name = mb_substr(safe_text($data['name'] ?? ''), 0, 80);
     $message = mb_substr(trim((string) ($data['message'] ?? '')), 0, 2000);
     if ($name === '' || $message === '') { throw new RuntimeException('Il faut un nom et un message.'); }
@@ -364,6 +366,7 @@ function museum_export(PDO $pdo, int $id, string $format): never
 {
     if (!class_exists('ZipArchive')) { json_response(['error' => 'Export impossible : l’extension PHP zip manque.'], 500); }
     $id = $id ?: museum_own_id($pdo);
+    try { museum_check($pdo, $id); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 404); }
     $format = $format === 'site' ? 'site' : 'lcnda';
     $tmp = tempnam(sys_get_temp_dir(), 'musee');
     $zip = new ZipArchive();
@@ -434,8 +437,10 @@ function museum_import(PDO $pdo, ?array $file): never
             $ref = (string) $ref;
             if (isset($taken[$ref])) { return $taken[$ref]; } // même image pour deux œuvres : un seul fichier
             if (!preg_match('#^fichiers/(\d+)\.([a-z0-9]{2,5})$#', $ref, $mm) || !in_array($mm[2], $allowed, true)) { return ''; }
+            $stat = $zip->statName($ref); // taille vérifiée AVANT de décompresser (un petit zip peut cacher un énorme fichier)
+            if (!$stat || (int) $stat['size'] > 200 * 1024 * 1024) { return ''; }
             $bytes = $zip->getFromName($ref);
-            if ($bytes === false || strlen($bytes) > 200 * 1024 * 1024) { return ''; }
+            if ($bytes === false) { return ''; }
             $name = bin2hex(random_bytes(10)) . '.' . $mm[2];
             file_put_contents($dir . '/' . $name, $bytes);
             return $taken[$ref] = 'musee/' . $mid . '/' . $name;
@@ -462,6 +467,8 @@ function museum_import(PDO $pdo, ?array $file): never
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         $zip->close();
+        // les fichiers déjà copiés ne servent plus (et le numéro du musée sera réutilisé)
+        if (isset($mid)) { foreach (glob(MEDIA_DIR . '/musee/' . (int) $mid . '/*') ?: [] as $f) { @unlink($f); } @rmdir(MEDIA_DIR . '/musee/' . (int) $mid); }
         json_response(['error' => 'Import impossible : ' . $e->getMessage()], 500);
     }
     $zip->close();

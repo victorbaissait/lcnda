@@ -118,7 +118,7 @@
         }));
         dlg.querySelector('[data-me-room-add]').addEventListener('click', guard(async () => { await post('save_museum_room', {museum_id: data.id, name: `Salle ${data.rooms.length + 1}`, settings: {size: 'medium', floor: 'light', wall: '#ffffff'}}); again(data.rooms.length); }));
         const reorder = async (what, list, from, to) => { const ids = list.map(x => x.id); const [m] = ids.splice(from, 1); ids.splice(to, 0, m); await post('museum_reorder', {what, ids}); };
-        dlg.querySelectorAll('[data-me-room-up],[data-me-room-down]').forEach(b => b.addEventListener('click', guard(async () => { const i = Number(b.dataset.meRoomUp ?? b.dataset.meRoomDown), to = b.dataset.meRoomUp !== undefined ? i - 1 : i + 1; await reorder('rooms', data.rooms, i, to); again(data.rooms[i] === room ? to : data.rooms.indexOf(room)); })));
+        dlg.querySelectorAll('[data-me-room-up],[data-me-room-down]').forEach(b => b.addEventListener('click', guard(async () => { const i = Number(b.dataset.meRoomUp ?? b.dataset.meRoomDown), to = b.dataset.meRoomUp !== undefined ? i - 1 : i + 1; const ids = data.rooms.map(r => r.id); const [mv] = ids.splice(i, 1); ids.splice(to, 0, mv); await post('museum_reorder', {what: 'rooms', ids}); again(ids.indexOf(room?.id)); })));
         if (!room) return;
         const rf = dlg.querySelector('[data-me-roomform]');
         rf.addEventListener('submit', guard(async e => { e.preventDefault(); await post('save_museum_room', {id: room.id, name: rf.name.value, intro: rf.intro.value, settings: {size: rf.size.value, floor: rf.floor.value, wall: rf.wall.value}}); toast('Salle enregistrée.'); again(); }));
@@ -183,6 +183,7 @@
                     await post('save_museum_item', what === 'object'
                         ? {room_id: room.id, kind: 'object', wall: 'center', object_id: r.id, title: r.title, cartel, description: r.description || '', in_tour: 1}
                         : {room_id: room.id, kind: /acte|registre|lettre|document|carte/i.test(r.title || '') ? 'document' : 'photo', wall: 'back', media_id: r.id, person_id: r.person_id || null, title: r.title || '', cartel, description: r.description || '', in_tour: 1});
+                    el.classList.remove('is-chosen'); el.disabled = true; el.title = 'Déjà ajouté'; // en cas d'erreur plus loin, pas de doublon au nouvel essai
                 }
                 toast(`${chosen.length} élément(s) ajouté(s).`); done();
             }});
@@ -223,7 +224,8 @@
                 const kind = isDecor ? (SEATS.includes(f.model.value) ? 'seat' : 'decor') : f.kind.value;
                 const file = f.image?.files?.[0];
                 if (it._upload && !file && isNew) { toast('Choisis une image.', 'error'); return false; }
-                const saved = await post('save_museum_item', {...itemPayload(it), room_id: room.id, kind, wall: isDecor ? 'center' : f.wall.value, title: f.title.value, cartel: f.cartel?.value || '', description: f.description.value, in_tour: f.in_tour ? (f.in_tour.checked ? 1 : 0) : 0, settings});
+                const saved = await post('save_museum_item', {...itemPayload(it), id: it.id, room_id: room.id, kind, wall: isDecor ? 'center' : f.wall.value, title: f.title.value, cartel: f.cartel?.value || '', description: f.description.value, in_tour: f.in_tour ? (f.in_tour.checked ? 1 : 0) : 0, settings});
+                it.id = saved.result.id; it.room_id = room.id; // si l'envoi de l'image échoue, un nouvel essai modifie cet élément au lieu d'en créer un autre
                 if (file) { const fd = new FormData(); fd.append('file', file); fd.append('target', 'item_image'); fd.append('id', saved.result.id); await postForm('museum_upload', fd); }
                 toast('Enregistré.'); done();
             }});

@@ -174,6 +174,9 @@ try {
     if ($isWrite && $action === 'museum_import') {
         museum_import($pdo, $_FILES['file'] ?? null);
     }
+    if ($isWrite && $action === 'retouch_restore_original') {
+        retouch_restore_original($pdo, $payload);
+    }
     if ($isWrite && $action === 'retouch_media') {
         retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -8911,7 +8914,6 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_my_list' => delete_my_list($pdo,$data),
             'save_my_list_row' => save_my_list_row($pdo,$data),
             'import_my_list' => import_my_list($pdo,$data),
-            'retouch_restore_original' => retouch_restore_original($pdo,$data),
             'save_museum' => museum_save($pdo,$data),
             'save_museum_room' => museum_save_room($pdo,$data),
             'delete_museum_room' => museum_delete_room($pdo,$data),

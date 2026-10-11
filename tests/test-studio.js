@@ -86,17 +86,13 @@ save_my_list_row($pdo, ['list_id' => $f['id'], 'row_key' => $k, 'field' => $fk[1
 $fe = export_my_list($pdo, $f['id']);
 $fi = import_my_list($pdo, ['json' => json_encode($fe)]);
 $out['free_share'] = [$fi['rows'], array_values(my_list_rows($pdo, $fi['id'])['rows'][0]['values'])];
+$unk = $exp; $unk['definition']['rules'][0]['values'] = [['tag' => 'ZZZ', 'label' => 'Type inventé']];
+try { import_my_list($pdo, ['json' => json_encode($unk)]); $out['list_unknown'] = 'accepté'; } catch (Throwable $e) { $out['list_unknown'] = str_contains($e->getMessage(), 'Type inventé') ? 'refusé' : $e->getMessage(); }
 try { import_my_list($pdo, ['json' => '{"type":"autre"}']); $out['list_bad'] = 'accepté'; } catch (Throwable $e) { $out['list_bad'] = 'refusé'; }
 
-// Photo retouchée : l'original mis de côté, puis remis
-@mkdir(MEDIA_DIR . '/originaux', 0775, true);
-rename(MEDIA_DIR . '/portrait.jpg', MEDIA_DIR . '/originaux/portrait.jpg');
-copy(MEDIA_DIR . '/originaux/portrait.jpg', MEDIA_DIR . '/retouche.jpg');
-$pdo->exec("UPDATE media SET filename='retouche.jpg', thumbnail='retouche.jpg' WHERE id=1");
-$pdo->exec("INSERT INTO media_originals(media_id, filename) VALUES(1,'portrait.jpg')");
-$out['has_original'] = retouch_has_original($pdo, 1);
-$back = retouch_restore_original($pdo, ['media_id' => 1]);
-$out['restore'] = [$back['filename'], is_file(MEDIA_DIR . '/portrait.jpg'), is_file(MEDIA_DIR . '/retouche.jpg'), retouch_has_original($pdo, 1)];
+// Photo retouchée : un fichier partagé par deux médias (import GEDCOM) n'est jamais effacé
+$pdo->exec("INSERT INTO media(title,media_type,filename,thumbnail) VALUES('Doublon','image','portrait.jpg','portrait.jpg')");
+$out['shared'] = [retouch_file_shared($pdo, 1, 'portrait.jpg'), retouch_file_shared($pdo, 1, 'autre.jpg')];
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media') } });
@@ -119,7 +115,8 @@ const checks = [
   ['liste importée : type retrouvé, étiquette recréée', () => assert.deepEqual(out.list_import, [true, 'Salon 2026', true])],
   ['liste écrite à la main partagée avec ses lignes, sans lien vers les fiches', () => assert.deepEqual(out.free_share, [1, ['Cercle du Nord']])],
   ['fichier qui n’est pas une liste refusé', () => assert.equal(out.list_bad, 'refusé')],
-  ['photo retouchée : l’original est remis, la retouche effacée', () => { assert.equal(out.has_original, true); assert.deepEqual(out.restore, ['portrait.jpg', true, false, false]); }],
+  ['liste dont le type d’événement n’existe pas ici : refusée (sinon elle montrerait tout)', () => assert.equal(out.list_unknown, 'refusé')],
+  ['photo retouchée : fichier partagé avec un autre média reconnu', () => assert.deepEqual(out.shared, [true, false])],
 ];
 let failed = 0;
 for (const [name, fn] of checks) { try { fn(); console.log('  ✓ ' + name); } catch (e) { failed++; console.log('  ✗ ' + name + '\n      ' + e.message); } }

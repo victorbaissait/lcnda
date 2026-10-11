@@ -32,6 +32,13 @@ function retouch_store_upload(?array $file): string
     return $name;
 }
 
+/** Un autre média utilise-t-il ce fichier ? (un import GEDCOM peut faire partager un fichier à deux médias) */
+function retouch_file_shared(PDO $pdo, int $id, string $file): bool
+{
+    $s = $pdo->prepare('SELECT count(*) FROM media WHERE id<>? AND (filename=? OR thumbnail=?)'); $s->execute([$id, $file, $file]);
+    return (int) $s->fetchColumn() > 0;
+}
+
 function retouch_media(PDO $pdo, ?array $file, array $post): never
 {
     $id = safe_int($post['media_id'] ?? 0);
@@ -45,6 +52,8 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
     } catch (RuntimeException $e) {
         json_response(['error' => $e->getMessage()], 422);
     }
+    $current = basename((string) $media['filename']);
+    $keptCopy = null; // copie de l'original rangée dans originaux/ par ce passage
     $pdo->beginTransaction();
     try {
         if ($mode === 'copy') {
@@ -52,6 +61,8 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
             unset($row['id'], $row['source_id']);
             $row['filename'] = $name; $row['thumbnail'] = $name;
             $row['title'] = trim((string) $media['title']) !== '' ? $media['title'] . ' (retouchée)' : 'Photo retouchée';
+            // La copie n'est ni un côté de carte postale, ni une lettre de la correspondance, ni le portrait
+            foreach (['postcard_group' => '', 'postcard_side' => '', 'is_person_photo' => 0, 'correspondence_reply_to_media_id' => 0] as $col => $val) { if (array_key_exists($col, $row)) { $row[$col] = $val; } }
             if (array_key_exists('created_at', $row)) { $row['created_at'] = date('Y-m-d H:i:s'); }
             if (array_key_exists('updated_at', $row)) { $row['updated_at'] = date('Y-m-d H:i:s'); }
             $cols = array_keys($row);
@@ -62,46 +73,61 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
                 SELECT ?, entity_type, entity_id, position + 0.5, collection_key, collection_label FROM media_links WHERE media_id=?')->execute([$newId, $id]);
             log_change($pdo, 'media', $newId, 'create', 'Copie retouchée du média « ' . ($media['title'] ?: $media['filename']) . ' »');
             $result = ['mode' => 'copy', 'media_id' => $newId];
+            $pdo->commit();
         } else {
             $orig = $pdo->prepare('SELECT filename FROM media_originals WHERE media_id=?'); $orig->execute([$id]);
             $kept = $orig->fetchColumn();
-            $current = (string) $media['filename'];
-            if ($kept === false) { // premier passage : l'original part dans media/originaux/
-                $from = media_file_path($current);
-                if (!@rename($from, retouch_originals_dir() . '/' . basename($current))) { throw new RuntimeException('Impossible de mettre l’original de côté.'); }
-                $pdo->prepare('INSERT INTO media_originals(media_id, filename) VALUES(?,?)')->execute([$id, basename($current)]);
-            } elseif ($current !== '' && is_file(MEDIA_DIR . '/' . basename($current))) { // retouche d'une retouche : l'intermédiaire ne sert plus
-                @unlink(MEDIA_DIR . '/' . basename($current));
+            if ($kept === false) {
+                // Premier passage : on COPIE l'original dans originaux/ (rien n'est déplacé tant que la base n'est pas à jour)
+                $dest = retouch_originals_dir() . '/' . $current;
+                if (is_file($dest)) { $dest = retouch_originals_dir() . '/' . bin2hex(random_bytes(4)) . '_' . $current; }
+                if (!@copy(media_file_path($current), $dest)) { throw new RuntimeException('Impossible de mettre l’original de côté.'); }
+                $keptCopy = $dest;
+                $pdo->prepare('INSERT INTO media_originals(media_id, filename) VALUES(?,?)')->execute([$id, basename($dest)]);
             }
             $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
             log_change($pdo, 'media', $id, 'update', 'Photo retouchée « ' . ($media['title'] ?: $current) . ' » (original gardé)', ['filename' => $current], ['filename' => $name]);
             $result = ['mode' => 'replace', 'media_id' => $id, 'filename' => $name];
+            $pdo->commit();
+            // Base à jour : l'ancien fichier (original déjà copié, ou retouche intermédiaire) peut partir, sauf s'il sert ailleurs
+            if ($current !== '' && !retouch_file_shared($pdo, $id, $current)) { @unlink(MEDIA_DIR . '/' . $current); }
         }
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) { $pdo->rollBack(); }
+        @unlink(MEDIA_DIR . '/' . $name);
+        if ($keptCopy) { @unlink($keptCopy); }
+        json_response(['error' => $e->getMessage()], 500);
+    }
+    json_response(['ok' => true, 'result' => $result]);
+}
+
+/** Remet l'original (route à part, hors de la transaction générale : les fichiers ne bougent qu'une fois la base à jour). */
+function retouch_restore_original(PDO $pdo, array $data): never
+{
+    $id = safe_int($data['media_id'] ?? 0);
+    $s = $pdo->prepare('SELECT m.filename AS current, o.filename AS original FROM media m JOIN media_originals o ON o.media_id=m.id WHERE m.id=?'); $s->execute([$id]);
+    $row = $s->fetch();
+    if (!$row) { json_response(['error' => 'Cette photo n’a pas été retouchée.'], 422); }
+    $from = retouch_originals_dir() . '/' . basename((string) $row['original']);
+    if (!is_file($from)) { json_response(['error' => 'L’original n’est plus dans media/originaux/.'], 422); }
+    $name = basename((string) $row['original']);
+    if (is_file(MEDIA_DIR . '/' . $name)) { $name = bin2hex(random_bytes(4)) . '_' . $name; }
+    if (!@copy($from, MEDIA_DIR . '/' . $name)) { json_response(['error' => 'Impossible de remettre l’original.'], 500); }
+    $pdo->beginTransaction();
+    try {
+        $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
+        $pdo->prepare('DELETE FROM media_originals WHERE media_id=?')->execute([$id]);
+        log_change($pdo, 'media', $id, 'update', 'Photo remise dans son état d’origine');
         $pdo->commit();
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         @unlink(MEDIA_DIR . '/' . $name);
         json_response(['error' => $e->getMessage()], 500);
     }
-    json_response(['ok' => true, 'result' => $result]);
-}
-
-function retouch_restore_original(PDO $pdo, array $data): array
-{
-    $id = safe_int($data['media_id'] ?? 0);
-    $s = $pdo->prepare('SELECT m.filename AS current, o.filename AS original FROM media m JOIN media_originals o ON o.media_id=m.id WHERE m.id=?'); $s->execute([$id]);
-    $row = $s->fetch();
-    if (!$row) { throw new RuntimeException('Cette photo n’a pas été retouchée.'); }
-    $from = retouch_originals_dir() . '/' . basename((string) $row['original']);
-    if (!is_file($from)) { throw new RuntimeException('L’original n’est plus dans media/originaux/.'); }
-    $to = MEDIA_DIR . '/' . basename((string) $row['original']);
-    if (is_file($to)) { $to = MEDIA_DIR . '/' . bin2hex(random_bytes(4)) . '_' . basename((string) $row['original']); }
-    if (!@rename($from, $to)) { throw new RuntimeException('Impossible de remettre l’original.'); }
-    $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([basename($to), basename($to), $id]);
-    $pdo->prepare('DELETE FROM media_originals WHERE media_id=?')->execute([$id]);
-    if ((string) $row['current'] !== '' && basename((string) $row['current']) !== basename($to)) { @unlink(MEDIA_DIR . '/' . basename((string) $row['current'])); }
-    log_change($pdo, 'media', $id, 'update', 'Photo remise dans son état d’origine');
-    return ['filename' => basename($to)];
+    @unlink($from);
+    $current = basename((string) $row['current']);
+    if ($current !== '' && $current !== $name && !retouch_file_shared($pdo, $id, $current)) { @unlink(MEDIA_DIR . '/' . $current); }
+    json_response(['ok' => true, 'result' => ['filename' => $name]]);
 }
 
 /** Les médias (parmi ceux demandés) qui ont un original gardé. */

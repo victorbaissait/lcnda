@@ -347,6 +347,10 @@ function import_my_list(PDO $pdo, array $data): array
                 $ids[] = $id;
             }
         }
+        // Un critère dont aucun choix n'existe ici serait ignoré et la liste montrerait tout : on refuse plutôt
+        if (!$ids && ($r['field'] ?? '') === 'event_type' && !empty($r['values'])) {
+            throw new RuntimeException('Cette liste utilise ' . implode(', ', array_unique($missing)) . ', absent de ta base. Crée-le d’abord (Maintenance → Types d’événements), puis importe la liste de nouveau.');
+        }
         $def['rules'][$i]['values'] = $ids;
     }
     $saved = save_my_list($pdo, ['name' => (string) ($pkg['name'] ?? 'Liste importée'), 'icon' => (string) ($pkg['icon'] ?? '📋'), 'description' => (string) ($pkg['description'] ?? ''), 'source' => (string) ($pkg['source'] ?? 'persons'), 'definition' => $def]);

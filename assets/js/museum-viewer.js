@@ -350,13 +350,13 @@
             el.innerHTML = html; el.hidden = false;
             if (ms) captionTimer = setTimeout(() => { el.hidden = true; }, ms);
         }
-        function closeOverlay() { const o = $('[data-lm-overlay]'); o.hidden = true; o.innerHTML = ''; o.querySelectorAll('audio').forEach(a => a.pause()); cv.focus(); }
+        function closeOverlay() { const o = $('[data-lm-overlay]'); o.querySelectorAll('audio').forEach(a => a.pause()); o.hidden = true; o.innerHTML = ''; cv.focus(); }
+        $('[data-lm-overlay]').addEventListener('click', e => { if (e.target === e.currentTarget) closeOverlay(); }); // clic à côté de la fiche : on la ferme
         function openItem(it) {
             const o = $('[data-lm-overlay]');
             o.innerHTML = `<div class="lm-sheet"><button type="button" class="lm-close" data-lm-close aria-label="Fermer">×</button>${it.image ? `<img src="${esc(it.image)}" alt="">` : ''}<div class="lm-sheet-text"><h3>${esc(it.title || 'Sans titre')}</h3>${it.cartel ? `<p class="lm-cartel">${esc(it.cartel).replace(/\n/g, '<br>')}</p>` : ''}${it.description ? `<p>${esc(it.description).replace(/\n/g, '<br>')}</p>` : ''}${it.audio ? `<audio controls src="${esc(it.audio)}"></audio>` : ''}</div></div>`;
             o.hidden = false;
             o.querySelector('[data-lm-close]').addEventListener('click', closeOverlay);
-            o.addEventListener('click', e => { if (e.target === o) closeOverlay(); }, {once: true});
         }
         function bookHtml(list) {
             return (list || []).length ? (list || []).map(g => `<article><p>${esc(g.message).replace(/\n/g, '<br>')}</p><small>— ${esc(g.name || 'Anonyme')}${g.date ? ', ' + esc(g.date) : ''}</small></article>`).join('') : '<p class="lm-muted">Personne n’a encore signé. Soyez le premier !</p>';
@@ -418,11 +418,13 @@
             const room = rooms[stop.room]; let text = '', url = '';
             if (!stop.item) {
                 await glideTo(0, D / 2 - 1.4, 0, 0.05, 900);
+                if (t !== tour || t.run !== run || t.paused) return; // mis en pause pendant le déplacement : la reprise rejoue cet arrêt
                 caption(`<span class="lm-kicker">Salle ${stop.room + 1}</span><strong>${esc(room.name || '')}</strong>${room.intro ? `<p>${esc(room.intro)}</p>` : ''}`);
                 text = [`Salle ${stop.room + 1}. ${room.name || ''}.`, room.intro || ''].join(' '); url = room.audio || '';
             } else {
                 const it = stop.item, v = spotView(it);
                 if (v) { const yw = it._spot.center ? yawTowards(v.x, v.z, it._spot.x, it._spot.z) : yawTowards(v.x, v.z, v.x - wallNormal(it._spot.wall)[0], v.z - wallNormal(it._spot.wall)[1]); await glideTo(v.x, v.z, yw, v.pitch); }
+                if (t !== tour || t.run !== run || t.paused) return;
                 caption(`<strong>${esc(it.title || '')}</strong>${it.cartel ? `<p class="lm-cartel">${esc(it.cartel).replace(/\n/g, '<br>')}</p>` : ''}${it.description ? `<p>${esc(it.description)}</p>` : ''}`);
                 text = [it.title, it.cartel, it.description].filter(Boolean).join('. '); url = it.audio || '';
             }
@@ -451,8 +453,8 @@
                 tour.paused = !tour.paused; b.textContent = tour.paused ? '▶' : '⏸';
                 if (tour.paused) { clearTimeout(tour.timer); audio?.pause(); try { speechSynthesis.pause(); } catch (_) {} return; }
                 if (audio && !audio.ended && !tour.done) { audio.play().catch(() => {}); return; }
-                if (!tour.done) { try { if (speechSynthesis.paused) { speechSynthesis.resume(); return; } } catch (_) {} }
-                runStop(tour.index + 1); return;
+                if (!tour.done) { try { if (speechSynthesis.paused && speechSynthesis.speaking) { speechSynthesis.resume(); return; } } catch (_) {} }
+                runStop(tour.done ? tour.index + 1 : tour.index); return;
             }
             clearTimeout(tour.timer); tour.paused = false; container.querySelector('[data-lm-t="pause"]').textContent = '⏸';
             runStop(Math.max(0, tour.index + (a === 'next' ? 1 : -1)));
@@ -480,12 +482,12 @@
         }
         if (!rooms.length) {
             container.querySelector('.lm-canvas').innerHTML = '<div class="lm-empty">Ce musée n’a pas encore de salle.</div>';
-            return {destroy() { disposed = true; }, goRoom() {}, startTour() {}, stopTour() {}};
+            return {destroy() { disposed = true; ro?.disconnect(); window.removeEventListener('resize', resize); container.removeEventListener('keydown', onKey); renderer.dispose(); renderer.forceContextLoss?.(); container.innerHTML = ''; }, goRoom() {}, startTour() {}, stopTour() {}};
         }
         resize(); enterRoom(Math.max(0, Math.min(rooms.length - 1, Number(opts.startRoom) || 0))); requestAnimationFrame(frame);
         setTimeout(() => cv.focus(), 50);
         return {
-            destroy() { disposed = true; stopTour(); stopAudio(); ro?.disconnect(); window.removeEventListener('resize', resize); container.removeEventListener('keydown', onKey); disposeScene(); renderer.dispose(); container.innerHTML = ''; },
+            destroy() { disposed = true; stopTour(); stopAudio(); ro?.disconnect(); window.removeEventListener('resize', resize); container.removeEventListener('keydown', onKey); disposeScene(); renderer.dispose(); renderer.forceContextLoss?.(); container.innerHTML = ''; },
             goRoom: i => enterRoom(i), startTour, stopTour,
         };
     }
