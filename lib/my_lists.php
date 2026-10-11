@@ -18,6 +18,55 @@ const LIST_EVENT_COLUMNS = ['date' => 'Date', 'type' => 'Événement', 'who' => 
 const LIST_PERSON_COLUMNS = ['name' => 'Personne', 'birth' => 'Naissance', 'birthplace' => 'Lieu de naissance', 'death' => 'Décès', 'deathplace' => 'Lieu de décès', 'age' => 'Âge au décès', 'occupation' => 'Métier', 'gender' => 'Sexe', 'parents' => 'Parents', 'sosa' => 'Sosa', 'sources' => 'Sources', 'labels' => 'Étiquettes'];
 const LIST_CUSTOM_TYPES = ['text', 'select', 'checkbox', 'date', 'number', 'url', 'person'];
 
+/**
+ * Les listes de l'onglet Listes, comme point de départ d'une de « Mes listes » : une requête par sorte, ses colonnes,
+ * et (facultatif) la personne reliée à chaque ligne. Le tri et les filtres se font ensuite colonne par colonne.
+ */
+const LIST_TABLE_SOURCES = [
+    'places' => ['label' => 'Lieux', 'columns' => ['name' => 'Lieu', 'county' => 'Département / comté', 'state' => 'Région', 'country' => 'Pays', 'events' => 'Événements', 'people' => 'Personnes'],
+        'sql' => "SELECT pl.id, pl.name, pl.county, pl.state, pl.country, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS events,
+            (SELECT count(DISTINCT e.person_id) FROM events e WHERE e.place_id=pl.id) AS people, NULL AS person_id FROM places pl WHERE EXISTS (SELECT 1 FROM events e WHERE e.place_id=pl.id) ORDER BY pl.name COLLATE NOCASE"],
+    'media' => ['label' => 'Médias', 'columns' => ['title' => 'Titre', 'kind' => 'Sorte', 'date' => 'Date', 'person' => 'Personne', 'reference' => 'Cote', 'labels' => 'Étiquettes'],
+        'sql' => "SELECT m.id, m.title, m.media_type AS kind, m.date_text AS date, m.document_reference AS reference,
+            (SELECT group_concat(l.name, ', ') FROM label_links ll JOIN labels l ON l.id=ll.label_id WHERE ll.entity_type='media' AND ll.entity_id=m.id) AS labels,
+            (SELECT ml.entity_id FROM media_links ml WHERE ml.media_id=m.id AND ml.entity_type='person' ORDER BY ml.position LIMIT 1) AS person_id FROM media m ORDER BY m.id DESC"],
+    'occupations' => ['label' => 'Métiers', 'columns' => ['occupation' => 'Métier', 'people' => 'Personnes', 'names' => 'Qui'],
+        'sql' => "SELECT 0 AS id, trim(occupation) AS occupation, count(*) AS people,
+            group_concat(trim(COALESCE(first_name,'') || ' ' || COALESCE(last_name,'')), ', ') AS names, NULL AS person_id FROM persons WHERE trim(COALESCE(occupation,''))<>'' GROUP BY lower(trim(occupation)) ORDER BY occupation COLLATE NOCASE"],
+    'census' => ['label' => 'Recensements', 'columns' => ['year' => 'Année', 'date' => 'Date', 'place' => 'Lieu', 'address' => 'Adresse', 'members' => 'Membres', 'names' => 'Qui'],
+        'sql' => "SELECT c.id, c.year, c.date_text AS date, pl.name AS place, c.address, (SELECT count(*) FROM census_members cm WHERE cm.census_id=c.id) AS members,
+            (SELECT group_concat(trim(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')), ', ') FROM census_members cm JOIN persons p ON p.id=cm.person_id WHERE cm.census_id=c.id) AS names,
+            NULL AS person_id FROM census_records c LEFT JOIN places pl ON pl.id=c.place_id ORDER BY c.year, pl.name"],
+    'reminders' => ['label' => 'Rappels', 'columns' => ['title' => 'Rappel', 'due' => 'Échéance', 'category' => 'Catégorie', 'done' => 'Fait', 'notes' => 'Notes'],
+        'sql' => "SELECT id, title, reminder_due_at AS due, reminder_category AS category, CASE WHEN reminder_done THEN 'oui' ELSE '' END AS done, notes, NULL AS person_id FROM standalone_reminders ORDER BY reminder_due_at"],
+    'sources' => ['label' => 'Sources', 'columns' => ['title' => 'Source', 'author' => 'Auteur', 'agency' => 'Dépôt', 'publication' => 'Publication', 'url' => 'Lien', 'citations' => 'Citations'],
+        'sql' => "SELECT s.id, s.title, s.author, s.agency, s.publication, s.url, (SELECT count(*) FROM source_links sl WHERE sl.source_record_id=s.id) AS citations, NULL AS person_id FROM sources s ORDER BY s.title COLLATE NOCASE"],
+    'family_objects' => ['label' => 'Objets de famille', 'columns' => ['title' => 'Objet', 'kind' => 'Nature', 'person' => 'Le garde', 'location' => 'Où', 'origin' => 'Origine'],
+        'sql' => "SELECT o.id, o.title, o.kind, o.location_text AS location, o.origin_text AS origin, o.holder_text, o.holder_person_id AS person_id FROM family_objects o ORDER BY o.title COLLATE NOCASE"],
+    'courriers' => ['label' => 'Registre de courriers', 'columns' => ['organisme' => 'Organisme', 'destinataire' => 'Destinataire', 'objet' => 'Objet', 'sent' => 'Envoyé le', 'statut' => 'Statut', 'relance' => 'Relance'],
+        'sql' => "SELECT id, organisme, destinataire, objet, date_envoi AS sent, statut, relance_date AS relance, NULL AS person_id FROM courriers ORDER BY date_envoi DESC"],
+    'graves' => ['label' => 'Sépultures', 'columns' => ['cemetery' => 'Cimetière', 'city' => 'Commune', 'country' => 'Pays', 'plan' => 'Emplacement', 'state' => 'État', 'names' => 'Qui'],
+        'sql' => "SELECT g.id, g.cemetery_name AS cemetery, g.city, g.country, g.plan_ref AS plan, g.condition_state AS state,
+            (SELECT group_concat(trim(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')), ', ') FROM grave_persons gp JOIN persons p ON p.id=gp.person_id WHERE gp.grave_id=g.id) AS names, NULL AS person_id FROM graves g ORDER BY g.city, g.cemetery_name"],
+    'budget' => ['label' => 'Budget de recherche', 'columns' => ['title' => 'Dépense', 'category' => 'Catégorie', 'amount' => 'Montant', 'date' => 'Date', 'vendor' => 'Fournisseur'],
+        'sql' => "SELECT id, title, category, trim(COALESCE(amount,'') || ' ' || COALESCE(currency,'')) AS amount, expense_date AS date, vendor, NULL AS person_id FROM research_budget ORDER BY expense_date DESC"],
+    'living' => ['label' => 'Répertoire des vivants', 'columns' => ['name' => 'Nom', 'relationship' => 'Lien de parenté', 'city' => 'Ville', 'email' => 'E-mail', 'phone' => 'Téléphone'],
+        'sql' => "SELECT id, trim(COALESCE(first_name,'') || ' ' || COALESCE(last_name,'')) AS name, relationship, city, email, COALESCE(NULLIF(phone_mobile,''), NULLIF(phone,''), phone_landline) AS phone, person_id FROM living_contacts ORDER BY last_name COLLATE NOCASE"],
+];
+const LIST_SOURCES = ['events', 'persons', 'free', ...['places', 'media', 'occupations', 'census', 'reminders', 'sources', 'family_objects', 'courriers', 'graves', 'budget', 'living']];
+
+/** Colonnes de chaque sorte de liste (pour l'écran). */
+function my_list_columns(): array
+{
+    $out = ['events' => LIST_EVENT_COLUMNS, 'persons' => LIST_PERSON_COLUMNS];
+    foreach (LIST_TABLE_SOURCES as $k => $t) { $out[$k] = $t['columns']; }
+    return $out;
+}
+function my_list_source_labels(): array
+{
+    return array_map(static fn($t) => $t['label'], LIST_TABLE_SOURCES);
+}
+
 function my_lists(PDO $pdo): array
 {
     $rows = $pdo->query('SELECT * FROM custom_lists ORDER BY position, id')->fetchAll();
@@ -35,8 +84,8 @@ function my_list_clean_definition(array $d, string $source): array
         $rules[] = ['field' => $r['field'], 'value' => mb_substr(safe_text($r['value'] ?? ''), 0, 200), 'from' => safe_int($r['from'] ?? 0) ?: null, 'to' => safe_int($r['to'] ?? 0) ?: null,
             'values' => array_values(array_filter(array_map('intval', is_array($r['values'] ?? null) ? $r['values'] : []))), 'not' => !empty($r['not'])];
     }
-    if ($source === 'free') { $rules = []; }
-    $allowed = $source === 'free' ? [] : array_keys($source === 'events' ? LIST_EVENT_COLUMNS : LIST_PERSON_COLUMNS);
+    if ($source !== 'events' && $source !== 'persons') { $rules = []; } // listes écrites à la main ou reprises de l'onglet Listes : on trie avec les filtres de colonnes
+    $allowed = $source === 'free' ? [] : array_keys(my_list_columns()[$source] ?? LIST_PERSON_COLUMNS);
     $columns = $source === 'free' ? [] : (array_values(array_intersect(is_array($d['columns'] ?? null) ? $d['columns'] : [], $allowed)) ?: array_slice($allowed, 0, 4));
     $custom = [];
     foreach (is_array($d['custom'] ?? null) ? $d['custom'] : [] as $c) {
@@ -44,7 +93,19 @@ function my_list_clean_definition(array $d, string $source): array
         $custom[] = ['key' => preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($c['key'] ?? ''))) ?: 'c' . bin2hex(random_bytes(3)), 'label' => mb_substr(safe_text($c['label'] ?? ''), 0, 60) ?: 'Colonne',
             'type' => $c['type'], 'options' => array_values(array_filter(array_map(static fn($o) => mb_substr(safe_text($o), 0, 60), is_array($c['options'] ?? null) ? $c['options'] : [])))];
     }
-    return ['match' => ($d['match'] ?? '') === 'any' ? 'any' : 'all', 'rules' => $rules, 'columns' => $columns, 'custom' => $custom,
+    // Filtres par colonne : ne garder que certaines valeurs, un texte, ou une période (années)
+    $filters = [];
+    $filterable = array_merge($allowed, array_column($custom, 'key'));
+    foreach (is_array($d['filters'] ?? null) ? $d['filters'] : [] as $col => $f) {
+        if (!is_array($f) || !in_array((string) $col, $filterable, true)) { continue; }
+        $clean = [];
+        if (isset($f['values']) && is_array($f['values'])) { $clean['values'] = array_values(array_slice(array_map(static fn($v) => mb_substr(trim((string) $v), 0, 200), array_filter($f['values'], 'is_scalar')), 0, 2000)); }
+        if (trim((string) ($f['contains'] ?? '')) !== '') { $clean['contains'] = mb_substr(trim((string) $f['contains']), 0, 200); }
+        if (safe_int($f['from'] ?? 0)) { $clean['from'] = safe_int($f['from']); }
+        if (safe_int($f['to'] ?? 0)) { $clean['to'] = safe_int($f['to']); }
+        if ($clean) { $filters[(string) $col] = $clean; }
+    }
+    return ['match' => ($d['match'] ?? '') === 'any' ? 'any' : 'all', 'rules' => $rules, 'columns' => $columns, 'custom' => $custom, 'filters' => $filters,
         'sort' => in_array($d['sort'] ?? '', ['date', 'name', 'place'], true) ? $d['sort'] : ($source === 'events' ? 'date' : 'name'),
         'in_lists' => !empty($d['in_lists'])]; // aussi affichée dans l'onglet Listes
 }
@@ -54,7 +115,7 @@ function save_my_list(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0);
     $name = mb_substr(safe_text($data['name'] ?? ''), 0, 80);
     if ($name === '') { throw new RuntimeException('Donne un nom à la liste.'); }
-    $source = in_array($data['source'] ?? '', ['events', 'persons', 'free'], true) ? $data['source'] : 'persons';
+    $source = in_array($data['source'] ?? '', LIST_SOURCES, true) ? $data['source'] : 'persons';
     $def = my_list_clean_definition(is_array($data['definition'] ?? null) ? $data['definition'] : [], $source);
     if ($source === 'free' && !$def['custom']) { throw new RuntimeException('Ajoute au moins une colonne à remplir.'); }
     $vals = [$name, mb_substr(safe_text($data['icon'] ?? '📋'), 0, 16) ?: '📋', h_long($data, 'description', 2000), $source, json_encode($def, JSON_UNESCAPED_UNICODE)];
@@ -85,7 +146,7 @@ function save_my_list_row(PDO $pdo, array $data): array
         $pdo->prepare("INSERT INTO custom_list_rows(list_id, row_key, included, data_json) VALUES(?,?,1,'{}')")->execute([$listId, $key]);
         if (!isset($data['field'])) { return ['ok' => true, 'row_key' => $key]; }
     }
-    if (!preg_match('/^[pef]:\d+$/', $key)) { throw new RuntimeException('Ligne invalide.'); }
+    if (!preg_match('/^[peft]:\d+$/', $key)) { throw new RuntimeException('Ligne invalide.'); }
     $s = $pdo->prepare('SELECT * FROM custom_list_rows WHERE list_id=? AND row_key=?'); $s->execute([$listId, $key]);
     $row = $s->fetch() ?: ['included' => 0, 'data_json' => '{}'];
     $values = json_decode((string) $row['data_json'], true) ?: [];
@@ -115,6 +176,7 @@ function my_list_rows(PDO $pdo, int $listId): array
     if (!$list) { throw new RuntimeException('Liste introuvable.'); }
     $def = my_list_clean_definition(json_decode((string) $list['definition_json'], true) ?: [], (string) $list['source']);
     if ($list['source'] === 'free') { return my_list_free_rows($pdo, $list, $def); }
+    if (isset(LIST_TABLE_SOURCES[$list['source']])) { return my_list_table_rows($pdo, $list, $def); }
     $isEvents = $list['source'] === 'events';
     $sosas = (in_array('sosa', $def['columns'], true) || array_filter($def['rules'], static fn($r) => $r['field'] === 'sosa')) ? my_list_sosas($pdo) : [];
     $conds = []; $params = [];
@@ -368,4 +430,43 @@ function import_my_list(PDO $pdo, array $data): array
         }
     }
     return ['id' => $saved['id'], 'rows' => $count, 'missing' => array_values(array_unique($missing))];
+}
+
+/** Une liste reprise de l'onglet Listes (lieux, médias, métiers…) : toutes ses lignes, avec mes colonnes à remplir. */
+function my_list_table_rows(PDO $pdo, array $list, array $def): array
+{
+    $src = LIST_TABLE_SOURCES[$list['source']];
+    $raw = $pdo->query($src['sql'] . ' LIMIT 5000')->fetchAll();
+    $manual = [];
+    $ms = $pdo->prepare("SELECT row_key, included, data_json FROM custom_list_rows WHERE list_id=? AND row_key LIKE 't:%'"); $ms->execute([(int) $list['id']]);
+    foreach ($ms->fetchAll() as $m) { $manual[$m['row_key']] = ['included' => (int) $m['included'], 'values' => json_decode((string) $m['data_json'], true) ?: []]; }
+    $people = collection_people($pdo, array_filter(array_map(static fn($r) => (int) ($r['person_id'] ?? 0), $raw)));
+    $out = [];
+    foreach ($raw as $r) {
+        if ($list['source'] === 'occupations') { $r['id'] = crc32(mb_strtolower((string) $r['occupation'])); } // un métier n'a pas de numéro : on en tire un de son nom
+        $key = 't:' . (int) $r['id'];
+        if (($manual[$key]['included'] ?? 0) === -1) { continue; }
+        $cells = [];
+        foreach (array_keys($src['columns']) as $c) { $cells[$c] = $c === 'person' ? '' : (string) ($r[$c] ?? ''); }
+        $p = $people[(int) ($r['person_id'] ?? 0)] ?? null;
+        if (array_key_exists('person', $cells)) { $cells['person'] = $p ? trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')) : (string) ($r['holder_text'] ?? ''); }
+        $out[] = ['key' => $key, 'values' => $manual[$key]['values'] ?? [], 'manual' => false, 'people' => $p ? [$p] : [], 'cells' => $cells];
+    }
+    $list['definition'] = $def; unset($list['definition_json']);
+    $list['labels'] = collection_labels($pdo, 'custom_list', [(int) $list['id']])[(int) $list['id']] ?? [];
+    return ['list' => $list, 'rows' => $out, 'columns' => $src['columns'], 'truncated' => count($raw) >= 5000];
+}
+
+/** Enregistre les filtres de colonnes d'une liste (choisis depuis la liste elle-même). */
+function save_my_list_filters(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT source, definition_json FROM custom_lists WHERE id=?'); $s->execute([$id]);
+    $l = $s->fetch();
+    if (!$l) { throw new RuntimeException('Liste introuvable.'); }
+    $def = json_decode((string) $l['definition_json'], true) ?: [];
+    $def['filters'] = is_array($data['filters'] ?? null) ? $data['filters'] : [];
+    $def = my_list_clean_definition($def, (string) $l['source']);
+    $pdo->prepare('UPDATE custom_lists SET definition_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($def, JSON_UNESCAPED_UNICODE), $id]);
+    return ['filters' => $def['filters']];
 }

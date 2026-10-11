@@ -55,6 +55,16 @@
             });
         } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
     }
+    // Recherche → « Poser une question en français » : un écran à part
+    ext.question = async token => {
+        if (token !== S().workspaceToken || S().module !== 'recherche') return;
+        A().$('#workspace').innerHTML = `<section class="page">${header('RECHERCHE', 'Poser une question', 'Écris ta question comme tu la dirais : l’app cherche dans toute la base, sans Internet.')}${questionPanelHtml(S().hQuestion || '')}</section>`;
+        const form = A().$('#h-question-form');
+        form.addEventListener('submit', event => { event.preventDefault(); runQuestion(form.q.value); });
+        A().$$('[data-h-question-example]').forEach(b => b.addEventListener('click', () => { form.q.value = b.dataset.hQuestionExample; runQuestion(form.q.value); }));
+        form.q.focus();
+        if (S().hQuestion) runQuestion(S().hQuestion);
+    };
     // Ajouté en haut de « Recherche → Recherche multicritère / recherches enregistrées »
     const baseResearch = ext.research;
     ext.research = async token => {

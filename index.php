@@ -25,7 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=198">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=12">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=13">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -1074,11 +1074,11 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=280" defer></script>
+<script src="assets/js/app.js?v=281" defer></script>
 <script src="assets/js/heritage.js?v=5" defer></script>
 <script src="assets/js/heritage-tools.js?v=6" defer></script>
-<script src="assets/js/heritage-links.js?v=3" defer></script>
-<script src="assets/js/heritage-more.js?v=11" defer></script>
+<script src="assets/js/heritage-links.js?v=4" defer></script>
+<script src="assets/js/heritage-more.js?v=12" defer></script>
 <script src="assets/js/heritage-studio.js?v=3" defer></script>
 <script src="assets/js/museum-viewer.js?v=3" defer></script>
 <script src="assets/js/heritage-museum.js?v=3" defer></script>
