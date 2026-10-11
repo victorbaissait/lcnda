@@ -91,6 +91,8 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
             $pdo->commit();
             // Base à jour : l'ancien fichier (original déjà copié, ou retouche intermédiaire) peut partir, sauf s'il sert ailleurs
             if ($current !== '' && !retouch_file_shared($pdo, $id, $current)) { @unlink(MEDIA_DIR . '/' . $current); }
+            $thumb = basename((string) $media['thumbnail']); // ancienne vignette à part (si elle existait)
+            if ($thumb !== '' && $thumb !== $current && !retouch_file_shared($pdo, $id, $thumb)) { @unlink(MEDIA_DIR . '/' . $thumb); }
         }
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) { $pdo->rollBack(); }

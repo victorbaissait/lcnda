@@ -353,6 +353,7 @@ function import_my_list(PDO $pdo, array $data): array
         }
         $def['rules'][$i]['values'] = $ids;
     }
+    $def['in_lists'] = false; // une liste reçue ne s'ajoute pas d'elle-même au menu des Listes
     $saved = save_my_list($pdo, ['name' => (string) ($pkg['name'] ?? 'Liste importée'), 'icon' => (string) ($pkg['icon'] ?? '📋'), 'description' => (string) ($pkg['description'] ?? ''), 'source' => (string) ($pkg['source'] ?? 'persons'), 'definition' => $def]);
     $count = 0;
     if (($pkg['source'] ?? '') === 'free') {

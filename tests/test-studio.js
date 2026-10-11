@@ -68,6 +68,17 @@ $site = museum_package($pdo, $m['id'], 'site', $zip); $zip->close();
 $html = museum_site_html($site);
 $out['site'] = [str_contains($html, 'const THREE = {'), !str_contains($html, "\nexport {"), str_starts_with($site['rooms'][1]['items'][3]['image'], 'data:image/jpeg;base64,'), substr_count(strtolower($html), '</script') === 2, str_contains($html, 'LCNDA_MUSEUM_VIEWER.mount')];
 
+// Musée reçu : lecture seule ; ordre limité à une même salle
+$pdo->exec("INSERT INTO museums(title, imported) VALUES('Reçu', 1)"); $rid = (int) $pdo->lastInsertId();
+$pdo->exec("INSERT INTO museum_rooms(museum_id, name) VALUES($rid, 'Salle reçue')"); $rroom = (int) $pdo->lastInsertId();
+$ro = [];
+foreach ([fn() => museum_save_room($pdo, ['id' => $rroom, 'name' => 'X']), fn() => museum_save_item($pdo, ['room_id' => $rroom, 'kind' => 'text', 'title' => 'X']), fn() => museum_delete_room($pdo, ['id' => $rroom]), fn() => museum_save($pdo, ['id' => $rid, 'title' => 'X'])] as $f) { try { $f(); $ro[] = 'accepté'; } catch (Throwable $e) { $ro[] = 'refusé'; } }
+$i1 = museum_save_item($pdo, ['room_id' => $room, 'kind' => 'text', 'title' => 'i1']);
+$i2 = museum_save_item($pdo, ['room_id' => $r2['id'], 'kind' => 'text', 'title' => 'i2']);
+try { museum_reorder($pdo, ['what' => 'items', 'ids' => [$i1['id'], $i2['id']]]); $ro[] = 'accepté'; } catch (Throwable $e) { $ro[] = 'refusé'; }
+$out['readonly'] = $ro;
+museum_delete_item($pdo, ['id' => $i1['id']]); museum_delete_item($pdo, ['id' => $i2['id']]);
+
 // Listes partagées : types d'événements et étiquettes désignés par leur nom
 $pdo->exec("INSERT INTO labels(name,color) VALUES('Salon 2026','#cc0000')");
 $tag = (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='MARR' LIMIT 1")->fetchColumn();
@@ -112,7 +123,8 @@ const checks = [
   ['fichier LCNDA : salles, images, livre d’or', () => assert.deepEqual(out.package, ['lcnda-musee', 2, 'fichiers/1.jpg', true, 1])],
   ['site web : Three.js dans la page, images incluses, pas de </script> parasite', () => assert.deepEqual(out.site, [true, true, true, true, true])],
   ['liste partagée : types d’événements et étiquettes par leur nom', () => assert.deepEqual(out.list_export, ['lcnda-liste', 'MARR', 'Salon 2026', true])],
-  ['liste importée : type retrouvé, étiquette recréée', () => assert.deepEqual(out.list_import, [true, 'Salon 2026', true])],
+  ['liste importée : type retrouvé, étiquette recréée, pas ajoutée d’elle-même au menu Listes', () => assert.deepEqual(out.list_import, [true, 'Salon 2026', false])],
+  ['musée reçu non modifiable ; ordre refusé entre deux salles', () => assert.deepEqual(out.readonly, ['refusé', 'refusé', 'refusé', 'refusé', 'refusé'])],
   ['liste écrite à la main partagée avec ses lignes, sans lien vers les fiches', () => assert.deepEqual(out.free_share, [1, ['Cercle du Nord']])],
   ['fichier qui n’est pas une liste refusé', () => assert.equal(out.list_bad, 'refusé')],
   ['liste dont le type d’événement n’existe pas ici : refusée (sinon elle montrerait tout)', () => assert.equal(out.list_unknown, 'refusé')],

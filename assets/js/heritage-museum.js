@@ -28,24 +28,27 @@
 
     /* ───────── Visite ───────── */
 
-    let viewer = null, current = {id: 0, room: 0};
+    let current = {id: 0, room: 0}, opening = false;
     async function openMuseum(id = current.id, room = 0) {
+        if (opening) return;
         let data;
-        try { data = (await api('museum', {id})).museum; } catch (error) { return toast(error.message, 'error'); }
+        opening = true;
+        let THREE;
+        try { data = (await api('museum', {id})).museum; THREE = await loadThree(); } catch (error) { return toast(error.message, 'error'); } finally { opening = false; }
         current = {id: data.id, room};
-        const THREE = await loadThree();
         document.getElementById('h-museum-dialog')?.close();
         const dlg = document.createElement('dialog');
         dlg.className = 'h-museum-dialog'; dlg.id = 'h-museum-dialog';
         dlg.innerHTML = '<div class="h-museum-stage" tabindex="0"></div>';
         document.body.appendChild(dlg);
         dlg.addEventListener('cancel', e => { if (dlg.querySelector('.lm-overlay:not([hidden])')) e.preventDefault(); });
+        let viewer = null; // propre à cette fenêtre : en fermer une ancienne ne détruit jamais la nouvelle
         dlg.addEventListener('close', () => { viewer?.destroy(); viewer = null; dlg.remove(); });
         dlg.showModal();
         viewer = window.LCNDA_MUSEUM_VIEWER.mount(THREE, dlg.querySelector('.h-museum-stage'), data, {
-            startRoom: room, canEdit: true,
+            startRoom: room, canEdit: !document.body.classList.contains('is-kiosk'), // un musée reçu s'ouvre en lecture seule dans l'aménagement
             onRoom: i => { current.room = i; },
-            onExit: () => { dlg.close(); document.getElementById('open-archive-room')?.click(); },
+            onExit: () => { dlg.close(); A().openArchiveRoom?.(); },
             onEdit: i => { dlg.close(); openEditor(data.id, i); },
             onSign: async (name, message) => (await post('museum_sign', {museum_id: data.id, name, message})).result.guestbook,
         });

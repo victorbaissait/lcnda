@@ -97,6 +97,25 @@ function museum_get(PDO $pdo, int $id): array
         'settings' => museum_settings((string) $m['settings_json']), 'rooms' => $out, 'guestbook' => $guestbook];
 }
 
+/** Un musée reçu se visite mais ne se modifie pas (sauf pendant son import). */
+function museum_writable(PDO $pdo, int $museumId): void
+{
+    $s = $pdo->prepare('SELECT imported FROM museums WHERE id=?'); $s->execute([$museumId]);
+    $v = $s->fetchColumn();
+    if ($v === false) { throw new RuntimeException('Musée introuvable.'); }
+    if ((int) $v === 1 && empty($GLOBALS['museum_importing'])) { throw new RuntimeException('Un musée reçu ne se modifie pas.'); }
+}
+function museum_of_room(PDO $pdo, int $roomId): int
+{
+    $s = $pdo->prepare('SELECT museum_id FROM museum_rooms WHERE id=?'); $s->execute([$roomId]);
+    return (int) $s->fetchColumn();
+}
+function museum_of_item(PDO $pdo, int $itemId): int
+{
+    $s = $pdo->prepare('SELECT r.museum_id FROM museum_items i JOIN museum_rooms r ON r.id=i.room_id WHERE i.id=?'); $s->execute([$itemId]);
+    return (int) $s->fetchColumn();
+}
+
 function museum_check(PDO $pdo, int $museumId): void
 {
     $s = $pdo->prepare('SELECT 1 FROM museums WHERE id=?'); $s->execute([$museumId]);
@@ -121,7 +140,7 @@ function museum_clean_settings(mixed $raw, array $allowed): string
 function museum_save(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0) ?: museum_own_id($pdo);
-    museum_check($pdo, $id);
+    museum_writable($pdo, $id);
     $pdo->prepare('UPDATE museums SET title=?, subtitle=?, intro=?, author=?, settings_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([
         mb_substr(safe_text($data['title'] ?? ''), 0, 120) ?: 'Musée de la famille', mb_substr(safe_text($data['subtitle'] ?? ''), 0, 200), h_long($data, 'intro', 4000),
         mb_substr(safe_text($data['author'] ?? ''), 0, 120), museum_clean_settings($data['settings'] ?? [], ['guestbook' => 'bool', 'wall' => 'color']), $id]);
@@ -134,12 +153,13 @@ function museum_save_room(PDO $pdo, array $data): array
     $settings = museum_clean_settings($data['settings'] ?? [], ['size' => ['small', 'medium', 'large'], 'wall' => 'color', 'floor' => ['light', 'wood', 'stone', 'dark']]);
     $vals = [mb_substr(safe_text($data['name'] ?? ''), 0, 120) ?: 'Nouvelle salle', h_long($data, 'intro', 4000), $settings];
     if ($id) {
+        museum_writable($pdo, museum_of_room($pdo, $id));
         $pdo->prepare('UPDATE museum_rooms SET name=?, intro=?, settings_json=? WHERE id=?')->execute([...$vals, $id]);
         if (array_key_exists('audio_file', $data) && $data['audio_file'] === '') { museum_drop_file($pdo, 'museum_rooms', $id); }
         return ['id' => $id];
     }
     $museumId = safe_int($data['museum_id'] ?? 0) ?: museum_own_id($pdo);
-    museum_check($pdo, $museumId);
+    museum_writable($pdo, $museumId);
     $pdo->prepare('INSERT INTO museum_rooms(museum_id, position, name, intro, settings_json) VALUES(?,(SELECT COALESCE(max(position),0)+1 FROM museum_rooms WHERE museum_id=?),?,?,?)')->execute([$museumId, $museumId, ...$vals]);
     return ['id' => (int) $pdo->lastInsertId()];
 }
@@ -167,6 +187,7 @@ function museum_drop_file(PDO $pdo, string $table, int $id): void
 function museum_delete_room(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
+    museum_writable($pdo, museum_of_room($pdo, $id));
     $files = $pdo->prepare("SELECT audio_file FROM museum_rooms WHERE id=? UNION ALL SELECT audio_file FROM museum_items WHERE room_id=? UNION ALL SELECT file FROM museum_items WHERE room_id=?");
     $files->execute([$id, $id, $id]);
     $list = $files->fetchAll(PDO::FETCH_COLUMN);
@@ -179,9 +200,15 @@ function museum_delete_room(PDO $pdo, array $data): array
 /** Change l'ordre des salles d'un musée, ou des œuvres d'une salle (liste des numéros dans le nouvel ordre). */
 function museum_reorder(PDO $pdo, array $data): array
 {
-    $table = ($data['what'] ?? '') === 'rooms' ? 'museum_rooms' : 'museum_items';
-    $up = $pdo->prepare("UPDATE {$table} SET position=? WHERE id=?");
-    foreach (array_values(array_map('intval', is_array($data['ids'] ?? null) ? $data['ids'] : [])) as $k => $id) { $up->execute([$k + 1, $id]); }
+    $rooms = ($data['what'] ?? '') === 'rooms';
+    $ids = array_values(array_map('intval', is_array($data['ids'] ?? null) ? $data['ids'] : []));
+    if (!$ids) { return ['ok' => true]; }
+    // Tous dans le même musée (salles) ou la même salle (œuvres), et ce musée doit être modifiable
+    $groups = array_unique(array_map(static fn($id) => $rooms ? museum_of_room($pdo, $id) : museum_of_item($pdo, $id) . ':' . (int) $pdo->query('SELECT room_id FROM museum_items WHERE id=' . $id)->fetchColumn(), $ids));
+    if (count($groups) !== 1 || str_starts_with((string) reset($groups), '0')) { throw new RuntimeException('Ordre impossible : éléments de salles différentes.'); }
+    museum_writable($pdo, (int) reset($groups));
+    $up = $pdo->prepare('UPDATE ' . ($rooms ? 'museum_rooms' : 'museum_items') . ' SET position=? WHERE id=?');
+    foreach ($ids as $k => $id) { $up->execute([$k + 1, $id]); }
     return ['ok' => true];
 }
 
@@ -197,6 +224,7 @@ function museum_save_item(PDO $pdo, array $data): array
     $vals = [$kind, $wall, safe_int($data['media_id'] ?? 0) ?: null, safe_int($data['object_id'] ?? 0) ?: null, safe_int($data['person_id'] ?? 0) ?: null, $file,
         mb_substr(safe_text($data['title'] ?? ''), 0, 200), h_long($data, 'cartel', 1000), h_long($data, 'description', 6000), !empty($data['in_tour']) ? 1 : 0, $settings];
     if ($id) {
+        museum_writable($pdo, museum_of_item($pdo, $id));
         $pdo->prepare('UPDATE museum_items SET kind=?, wall=?, media_id=?, object_id=?, person_id=?, file=?, title=?, cartel=?, description=?, in_tour=?, settings_json=? WHERE id=?')->execute([...$vals, $id]);
         if (array_key_exists('audio_file', $data) && $data['audio_file'] === '') { museum_drop_file($pdo, 'museum_items', $id); }
         return ['id' => $id];
@@ -204,6 +232,7 @@ function museum_save_item(PDO $pdo, array $data): array
     $roomId = safe_int($data['room_id'] ?? 0);
     $s = $pdo->prepare('SELECT 1 FROM museum_rooms WHERE id=?'); $s->execute([$roomId]);
     if (!$s->fetchColumn()) { throw new RuntimeException('Salle introuvable.'); }
+    museum_writable($pdo, museum_of_room($pdo, $roomId));
     $pdo->prepare('INSERT INTO museum_items(kind, wall, media_id, object_id, person_id, file, title, cartel, description, in_tour, settings_json, room_id, position)
         VALUES(?,?,?,?,?,?,?,?,?,?,?,?,(SELECT COALESCE(max(position),0)+1 FROM museum_items WHERE room_id=?))')->execute([...$vals, $roomId, $roomId]);
     return ['id' => (int) $pdo->lastInsertId()];
@@ -212,6 +241,7 @@ function museum_save_item(PDO $pdo, array $data): array
 function museum_delete_item(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
+    museum_writable($pdo, museum_of_item($pdo, $id));
     $s = $pdo->prepare('SELECT audio_file, file FROM museum_items WHERE id=?'); $s->execute([$id]);
     $list = array_values((array) $s->fetch(PDO::FETCH_NUM));
     $pdo->prepare('DELETE FROM museum_items WHERE id=?')->execute([$id]);
@@ -236,6 +266,7 @@ function museum_upload(PDO $pdo, ?array $file, array $post): never
     $s = $pdo->prepare($q); $s->execute([$id]);
     $museumId = (int) $s->fetchColumn();
     if (!$museumId) { json_response(['error' => 'Salle ou œuvre introuvable.'], 404); }
+    try { museum_writable($pdo, $museumId); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); }
     $name = bin2hex(random_bytes(10)) . '.' . $ext;
     $dest = museum_dir($museumId) . '/' . $name;
     if (!@move_uploaded_file((string) $file['tmp_name'], $dest) && !@copy((string) $file['tmp_name'], $dest)) { json_response(['error' => 'Impossible de ranger le fichier.'], 500); }
@@ -299,7 +330,7 @@ function museum_pick(PDO $pdo, string $what, string $q): array
             (SELECT TRIM(COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')) FROM media_links l JOIN persons p ON p.id=l.entity_id WHERE l.media_id=m.id AND l.entity_type='person' ORDER BY l.position LIMIT 1) AS person_name,
             (SELECT l.entity_id FROM media_links l WHERE l.media_id=m.id AND l.entity_type='person' ORDER BY l.position LIMIT 1) AS person_id
         FROM media m WHERE m.media_type='image' AND (? = '' OR m.title LIKE ? OR m.description LIKE ? OR m.date_text LIKE ? OR m.id IN (
-            SELECT l.media_id FROM media_links l JOIN persons p ON p.id=l.entity_id WHERE l.entity_type='person' AND (p.first_name || ' ' || p.last_name) LIKE ?))
+            SELECT l.media_id FROM media_links l JOIN persons p ON p.id=l.entity_id WHERE l.entity_type='person' AND (COALESCE(p.first_name,'') || ' ' || COALESCE(p.last_name,'')) LIKE ?))
         ORDER BY m.id DESC LIMIT 120");
     $s->execute([$q, $like, $like, $like, $like]);
     return array_map(static fn($r) => $r + ['url' => museum_url((string) $r['filename'])], $s->fetchAll());
@@ -426,6 +457,7 @@ function museum_import(PDO $pdo, ?array $file): never
     $pkg = json_decode((string) $zip->getFromName('musee.json'), true);
     if (!is_array($pkg) || ($pkg['type'] ?? '') !== 'lcnda-musee') { $zip->close(); json_response(['error' => 'Ce fichier n’est pas un musée LCNDA.'], 422); }
     $pdo->beginTransaction();
+    $GLOBALS['museum_importing'] = true;
     try {
         $pdo->prepare('INSERT INTO museums(title, subtitle, intro, author, imported, settings_json) VALUES(?,?,?,?,1,?)')->execute([
             mb_substr(safe_text($pkg['title'] ?? ''), 0, 120) ?: 'Musée reçu', mb_substr(safe_text($pkg['subtitle'] ?? ''), 0, 200), mb_substr((string) ($pkg['intro'] ?? ''), 0, 4000),
@@ -464,7 +496,9 @@ function museum_import(PDO $pdo, ?array $file): never
             if (is_array($g) && trim((string) ($g['message'] ?? '')) !== '') { $ins->execute([$mid, mb_substr(safe_text($g['name'] ?? ''), 0, 80), mb_substr((string) $g['message'], 0, 2000)]); }
         }
         $pdo->commit();
+        $GLOBALS['museum_importing'] = false;
     } catch (Throwable $e) {
+        $GLOBALS['museum_importing'] = false;
         if ($pdo->inTransaction()) { $pdo->rollBack(); }
         $zip->close();
         // les fichiers déjà copiés ne servent plus (et le numéro du musée sera réutilisé)

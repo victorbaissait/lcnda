@@ -44,7 +44,7 @@
         'genealogie-person-blocks', 'genealogie-dashboard-blocks', 'genealogie-dashboard-widget-catalog-order', 'genealogie-dashboard-widget-catalog-hidden',
         'genealogie-events-filter', 'genealogie-stats-colors', 'genealogie-gender-colors', 'genealogie-tree-card-fields', 'genealogie-identity-name-variants-display',
         'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-archive-digest-category-order', 'genealogie-heritage-flags',
-        'genealogie-village-maps', 'genealogie-transcription-layout', 'genealogie-my-lists-in-lists',
+        'genealogie-village-maps', 'genealogie-transcription-layout'
     ];
     const LAYOUT_PREFIXES = ['genealogie-tile-items-'];
     const PROFILES_KEY = 'genealogie-layout-profiles';
@@ -73,7 +73,7 @@
     };
     /** Applique une mise en page : chaque réglage enregistré est remis, les autres reviennent au réglage de départ. */
     async function applyLayout(settings) {
-        const removed = [];
+        const removed = []; // (un fichier reçu a déjà été vérifié à l'import)
         for (let i = localStorage.length - 1; i >= 0; i--) {
             const key = localStorage.key(i);
             if (key && isLayoutKey(key) && !(key in settings)) { removed.push(key); lsDel(key); }
@@ -84,11 +84,26 @@
         // sinon la page rechargée reprendrait les anciens.
         try {
             const csrf = window.INSTALL_CSRF || S().csrf || '';
-            await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed, csrf})});
-        } catch (_) {}
+            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed, csrf})});
+            if (!r.ok) throw new Error();
+        } catch (_) { toast('La base n’a pas pu enregistrer la mise en page : réessaie.', 'error'); return; }
         // Tout l'écran se redessine avec la nouvelle mise en page (menus, blocs, couleurs).
         location.reload();
     }
+    /**
+     * Valeurs d'un fichier de mise en page reçu : seulement ce que l'écran Apparence peut lui-même produire.
+     * (Certaines valeurs, comme les couleurs des graphiques, sont écrites telles quelles dans la page.)
+     */
+    const COLOR_KEYS = ['genealogie-stats-colors', 'genealogie-battue-level-colors', 'genealogie-person-badge-colors', 'genealogie-gender-colors'];
+    function safeLayoutValue(key, value) {
+        if (typeof value !== 'string' || value.length > 200000) return false;
+        if (/[<>`]|javascript:|expression\(|url\(/i.test(value)) return false;
+        let parsed; try { parsed = JSON.parse(value); } catch (_) { return !/["']/.test(value); }
+        const leaves = []; const walk = v => { if (v && typeof v === 'object') Object.values(v).forEach(walk); else leaves.push(v); }; walk(parsed);
+        if (COLOR_KEYS.includes(key)) return leaves.every(v => typeof v === 'string' && /^#[0-9a-f]{3,8}$/i.test(v));
+        return leaves.every(v => typeof v !== 'string' || !/["\\]/.test(v));
+    }
+    const cleanLayout = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isLayoutKey(k) && safeLayoutValue(k, v)));
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
     ext.designPanels.push(() => {
         const list = profiles();
@@ -119,13 +134,14 @@
             if (text === null) return;
             let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas une mise en page LCNDA.', 'error'); }
             if (data?.type !== 'lcnda-mise-en-page' || !validProfile(data)) return toast('Ce fichier n’est pas une mise en page LCNDA.', 'error');
-            const settings = Object.fromEntries(Object.entries(data.settings).filter(([k, v]) => isLayoutKey(k) && typeof v === 'string'));
+            const settings = cleanLayout(data.settings);
+            const ignored = Object.keys(data.settings).length - Object.keys(settings).length;
             const list = profiles();
             let name = data.name.slice(0, 60);
             while (list.some(p => p.name === name)) name = `${name} (2)`;
             list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings});
             saveProfiles(list);
-            toast(`Mise en page « ${name} » importée : clique sur « Appliquer » pour l’utiliser.`); rerender();
+            toast(`Mise en page « ${name} » importée : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored} réglage(s) illisible(s) laissé(s) de côté)` : ''}`); rerender();
         });
         const at = (attr, fn) => box.querySelectorAll(`[${attr}]`).forEach(b => b.addEventListener('click', () => { const list = profiles(), i = Number(b.getAttribute(attr)); if (list[i]) fn(list, i, list[i]); }));
         at('data-h-layout-apply', (list, i, p) => {
@@ -220,6 +236,7 @@
         while (lo < 254 && (acc += hist[lo]) < n * 0.005) lo++;
         acc = 0; while (hi > lo + 1 && (acc += hist[hi]) < n * 0.005) hi--;
         Object.assign(st, rtDefault(), {bw: st.bw, sepia: st.sepia, invert: st.invert});
+        if (hi - lo < 8) return; // image presque d'une seule teinte : rien à étirer
         st.curves.rgb = [[lo, 0], [Math.round((lo + hi) / 2), 128], [hi, 255]];
     }
     const RT_PRESETS = [
@@ -303,12 +320,19 @@
         });
         svg.addEventListener('pointerup', () => { dragging = -1; });
         svg.addEventListener('dblclick', e => { const hit = e.target.closest('[data-rt-pt]'); const pts = st.curves[channel]; if (hit && pts.length > 2) { pts.splice(Number(hit.dataset.rtPt), 1); drawCurve(); draw(); } });
+        // Tout ce qui montrait l'ancien fichier (fiche, liste des médias…) est redessiné
         const refreshAfter = async () => {
             const state = A().state;
-            if (state.currentPersonId && state.module === 'personnes') { try { await A().selectPerson(state.currentPersonId, false); } catch (_) {} }
+            try {
+                if (state.module === 'listes') await A().renderList();
+                else if (state.currentPersonId && state.module === 'personnes') await A().selectPerson(state.currentPersonId, false);
+                else ext.refreshView?.();
+            } catch (_) {}
         };
         dlg.querySelectorAll('[data-rt-save]').forEach(b => b.addEventListener('click', async () => {
             const mode = b.dataset.rtSave;
+            const mpx = img.naturalWidth * img.naturalHeight / 1e6;
+            if (mpx > 60 && !confirm(`Cette image est très grande (${Math.round(mpx)} millions de points) : l’enregistrement peut être long, voire échouer. Continuer ?`)) return;
             dlg.querySelectorAll('.modal-actions button').forEach(x => { x.disabled = true; });
             b.textContent = 'Enregistrement…';
             try {
@@ -319,7 +343,7 @@
                 const ext0 = String(item.filename || '').split('.').pop().toLowerCase();
                 const type = ext0 === 'png' ? 'image/png' : ext0 === 'webp' ? 'image/webp' : ext0 === 'gif' ? 'image/png' : 'image/jpeg';
                 const blob = await new Promise(res => full.toBlob(res, type, 0.93));
-                if (!blob) throw new Error('Image impossible à fabriquer.');
+                if (!blob) throw new Error('Image trop grande pour être enregistrée par le navigateur.');
                 const fd = new FormData(); fd.append('file', blob, 'retouche.' + (type.split('/')[1] === 'jpeg' ? 'jpg' : type.split('/')[1])); fd.append('media_id', item.id); fd.append('mode', mode); fd.append('csrf', A().state.csrf);
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                 const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));

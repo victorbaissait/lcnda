@@ -211,7 +211,8 @@
         outside_bg:'#ffeac0', outside_text:'#7a3800',
         artist_bg:'#e8d5f5', artist_text:'#5c1a99',
     };
-    function getStatsColors(){try{const stored=JSON.parse(localStorage.getItem(STATS_COLORS_KEY)||'null');if(Array.isArray(stored)&&stored.length>=1){const out=[...stored];while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLORS.length]);return out;}return [...DEFAULT_STATS_COLORS];}catch(_){return [...DEFAULT_STATS_COLORS];}}
+    function getStatsColors(){try{const stored=JSON.parse(localStorage.getItem(STATS_COLORS_KEY)||'null');if(Array.isArray(stored)&&stored.length>=1){const out=stored.map((c,i)=>/^#[0-9a-f]{3,8}$/i.test(String(c))?c:DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length]);// seulement de vraies couleurs : elles sont écrites telles quelles dans le HTML des graphiques
+while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLORS.length]);return out;}return [...DEFAULT_STATS_COLORS];}catch(_){return [...DEFAULT_STATS_COLORS];}}
     function saveStatsColors(colors){localStorage.setItem(STATS_COLORS_KEY,JSON.stringify(colors));}
     function getStatsColorPresets(){try{return JSON.parse(localStorage.getItem(STATS_COLORS_PRESETS_KEY)||'{}');}catch(_){return {};}}
     function saveStatsColorPresets(presets){localStorage.setItem(STATS_COLORS_PRESETS_KEY,JSON.stringify(presets));}
@@ -10459,7 +10460,7 @@ ${backupSectionHtml()}
         $('#lightbox').addEventListener('click',event=>{if(event.target===$('#lightbox'))$('#lightbox').close();});
         bindLightboxZoom();
         // Flèches, R, +/−, J/L… : voir les raccourcis clavier (SHORTCUT_DEFS, contexte « viewer »)
-        document.addEventListener('keydown',event=>{if(!$('#lightbox').open||event.target.matches('textarea,input,select'))return;if(event.key==='Escape')$('#lightbox').close();});
+        document.addEventListener('keydown',event=>{if(!$('#lightbox').open||event.target.matches('textarea,input,select'))return;if(event.key==='Escape'&&![...document.querySelectorAll('dialog[open]')].some(d=>d!==$('#lightbox')&&$('#lightbox').compareDocumentPosition(d)&Node.DOCUMENT_POSITION_FOLLOWING))$('#lightbox').close();});// Échap dans une fenêtre ouverte par-dessus (retouche…) ne ferme pas aussi la visionneuse
     }
 
     function openPersonDialog(detail){const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));try{const d=JSON.parse(localStorage.getItem('genealogie-design')||'{}');if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);
@@ -12638,7 +12639,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     window.LCNDA_APP={api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
-        drawMap,renderMaintenance,renderLightboxItem,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,tileLayerCategories:TILE_LAYER_CATEGORIES};
+        drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,tileLayerCategories:TILE_LAYER_CATEGORIES};
 
     init();
 })();

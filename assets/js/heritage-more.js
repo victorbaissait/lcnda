@@ -1234,7 +1234,7 @@
         try { data = await api('my_list_rows', {id}); }
         catch (error) {
             toast(error.message, 'error');
-            if (inLists) { pinnedLists = pinnedLists.filter(l => l.id !== id); A().$('#workspace').innerHTML = empty('Cette liste n’existe plus.'); A().renderSidebar?.(); return; }
+            if (inLists) { if (isCurrent(token, 'listes')) A().$('#workspace').innerHTML = empty('Liste impossible à ouvrir : ' + esc(error.message)); refreshPinnedLists(); return; }
             S().hListOpen = 0; return ext.maintenance.my_lists(++S().workspaceToken);
         }
         if (!isCurrent(token, module)) return;
