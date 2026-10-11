@@ -135,7 +135,7 @@
             });
             // Nom de la salle en grandes lettres sur le mur du fond
             const title = textTexture([room.name || `Salle ${i + 1}`], {width: 1400, bg: null, sizes: [78], pad: 20});
-            const tp = plane(title.tex, 4.2, 4.2 / title.aspect, true); onWall(tp, 'back', 0, 3.6); scene.add(tp);
+            const tw = Math.min(W * 0.55, 7.5), tp = plane(title.tex, tw, tw / title.aspect, true); onWall(tp, 'back', 0, 3.65); scene.add(tp);
             // Portes : salle précédente (ou sortie) à gauche, salle suivante à droite, sur le mur d'entrée
             const door = (side, label, action) => {
                 const g = new THREE.Group(); const x = side === 'left' ? (W / 2 - 1.3) : -(W / 2 - 1.3); // vu de l'intérieur, face au mur d'entrée
