@@ -1133,7 +1133,7 @@
         const keepLabels = () => { const b = ws.querySelector('[data-pending-labels="custom_list"]'); if (b) L.labels = pickerIds(b).map(id => (labelsCache || []).find(l => Number(l.id) === id) || (L.labels || []).find(l => Number(l.id) === id) || {id, name: '#' + id}); };
         ws.querySelectorAll('[name=le-source]').forEach(el => el.addEventListener('change', () => { L.source = el.value; d.columns = Object.keys(listMeta.columns[L.source] || {}).slice(0, 4); if (L.source === 'free' && !d.custom.length) d.custom.push({label: '', type: 'text', options: []}); keepLabels(); again(); }));
         ws.querySelectorAll('[name=le-match]').forEach(el => el.addEventListener('change', () => { d.match = el.value; }));
-        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: '', values: []}); again(); } });
+        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : '', values: []}); again(); } });
         const rulesBox = ws.querySelector('[data-le-rules]') || document.createElement('div');
         const readRule = row => { const r = d.rules[Number(row.dataset.lrI)]; row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (Number(el.value) || null) : el.value; }); };
         rulesBox.addEventListener('input', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });

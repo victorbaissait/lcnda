@@ -190,13 +190,14 @@ function my_list_rows(PDO $pdo, int $listId): array
                 array_push($params, $like, $like);
                 break;
         }
-        if ($c !== null) { $conds[] = $r['not'] ? "NOT {$c}" : $c; }
+        if ($c !== null) { $conds[] = $r['not'] ? "NOT COALESCE({$c}, 0)" : $c; } // « pas » garde aussi ce qui n'a pas de valeur
     }
     // Ajouts et retraits à la main
     $manual = [];
     $ms = $pdo->prepare('SELECT row_key, included, data_json FROM custom_list_rows WHERE list_id=?'); $ms->execute([$listId]);
     foreach ($ms->fetchAll() as $m) { $manual[$m['row_key']] = ['included' => (int) $m['included'], 'values' => json_decode((string) $m['data_json'], true) ?: []]; }
-    $added = array_map(static fn($k) => (int) substr($k, 2), array_keys(array_filter($manual, static fn($m) => $m['included'] === 1)));
+    $prefix = $isEvents ? 'e:' : 'p:'; // une liste changée de sorte ne reprend pas les ajouts de l'autre sorte
+    $added = array_map(static fn($k) => (int) substr($k, 2), array_keys(array_filter($manual, static fn($m, $k) => $m['included'] === 1 && str_starts_with((string) $k, $prefix), ARRAY_FILTER_USE_BOTH)));
     $where = $conds ? '(' . implode($def['match'] === 'any' ? ' OR ' : ' AND ', $conds) . ')' : '1';
     if ($added) { $where = "({$where} OR " . ($isEvents ? 'e.id' : 'p.id') . ' IN (' . implode(',', $added) . '))'; }
     if ($isEvents) {

@@ -25,10 +25,13 @@ def respond(payload: dict, status: int = 0) -> int:
 def run_kraken(image: Path, model: Path, segment_direction: str = "horizontal-lr", base_dir: str = "auto") -> dict:
     venv_kraken = Path(sys.prefix) / "bin" / "kraken"
     executable_kraken = Path(sys.executable).parent / "kraken"
+    windows_kraken = Path(sys.executable).parent / "kraken.exe"  # Windows : venv\Scripts\kraken.exe
     if venv_kraken.is_file():
         kraken = str(venv_kraken)
     elif executable_kraken.is_file():
         kraken = str(executable_kraken)
+    elif windows_kraken.is_file():
+        kraken = str(windows_kraken)
     else:
         kraken = shutil.which("kraken")
     if not kraken:

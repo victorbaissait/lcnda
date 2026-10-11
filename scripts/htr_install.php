@@ -31,17 +31,20 @@ function run(array $cmd, ?string &$out = null): int
     if (!is_resource($p)) { return 127; }
     $out = '';
     stream_set_blocking($pipes[1], false); stream_set_blocking($pipes[2], false);
-    while (true) {
-        $r = [$pipes[1], $pipes[2]]; $w = $e = null;
+    $open = [$pipes[1], $pipes[2]];
+    while ($open) { // on ne surveille plus un tuyau fermé (sinon la boucle tourne à vide)
+        $r = $open; $w = $e = null;
         if (@stream_select($r, $w, $e, 5) === false) { break; }
         foreach ($r as $pipe) { $chunk = (string) fread($pipe, 8192); $out .= $chunk; echo $chunk; }
-        if (feof($pipes[1]) && feof($pipes[2])) { break; }
+        $open = array_values(array_filter($open, static fn($p) => !feof($p)));
     }
     fclose($pipes[1]); fclose($pipes[2]);
     return proc_close($p);
 }
 
 function fail(string $message): never { status('error', $message); exit(1); }
+// Toute erreur imprévue termine l'installation proprement (sinon l'écran reste « en cours » deux heures)
+set_exception_handler(static function (Throwable $e): void { status('error', 'Installation interrompue : ' . $e->getMessage()); exit(1); });
 
 $venv = $htrDir . '/venv';
 $venvPython = $win ? $venv . '/Scripts/python.exe' : $venv . '/bin/python3';
@@ -95,8 +98,8 @@ foreach ($catalog as $m) {
             if (!$found) { // sinon : le plus récent dans les dossiers où Kraken range ses modèles
                 $home = getenv('HOME') ?: getenv('USERPROFILE') ?: '';
                 foreach ([$home . '/.local/share/htrmopo', $home . '/.config/kraken', $home . '/Library/Application Support/htrmopo', getenv('APPDATA') . '/htrmopo'] as $dir) {
-                    if (!is_dir($dir)) { continue; }
-                    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)) as $f) {
+                    if (!is_dir($dir) || !is_readable($dir)) { continue; }
+                    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::LEAVES_ONLY, RecursiveIteratorIterator::CATCH_GET_CHILD) as $f) {
                         if (str_ends_with((string) $f, '.mlmodel') && $f->getMTime() >= $started - 5 && (!$found || $f->getMTime() > filemtime($found))) { $found = (string) $f; }
                     }
                 }
