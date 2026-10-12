@@ -174,6 +174,25 @@ function my_list_rows(PDO $pdo, int $listId): array
     $s = $pdo->prepare('SELECT * FROM custom_lists WHERE id=?'); $s->execute([$listId]);
     $list = $s->fetch();
     if (!$list) { throw new RuntimeException('Liste introuvable.'); }
+    return my_list_rows_for($pdo, $list);
+}
+
+/**
+ * Widgets à soi (tableau de bord) : les lignes d'une de « Mes listes », ou d'une source décrite dans le widget
+ * (personnes, événements ou une liste de l'app, avec des critères), sans l'enregistrer comme liste.
+ */
+function widget_rows(PDO $pdo, array $q): array
+{
+    if (safe_int($q['list_id'] ?? 0)) { return my_list_rows($pdo, safe_int($q['list_id'])); }
+    $source = in_array($q['source'] ?? '', LIST_SOURCES, true) && ($q['source'] ?? '') !== 'free' ? (string) $q['source'] : 'persons';
+    $def = is_array($q['definition'] ?? null) ? $q['definition'] : [];
+    $def['columns'] = array_keys(my_list_columns()[$source] ?? LIST_PERSON_COLUMNS); // toutes : le widget choisit à l'affichage
+    return my_list_rows_for($pdo, ['id' => 0, 'name' => '', 'icon' => '', 'description' => '', 'source' => $source, 'definition_json' => json_encode($def)]);
+}
+
+function my_list_rows_for(PDO $pdo, array $list): array
+{
+    $listId = (int) $list['id'];
     $def = my_list_clean_definition(json_decode((string) $list['definition_json'], true) ?: [], (string) $list['source']);
     if ($list['source'] === 'free') { return my_list_free_rows($pdo, $list, $def); }
     if (isset(LIST_TABLE_SOURCES[$list['source']])) { return my_list_table_rows($pdo, $list, $def); }

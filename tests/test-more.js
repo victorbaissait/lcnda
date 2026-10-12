@@ -125,6 +125,8 @@ save_my_list_row($pdo, ['list_id' => $ml['id'], 'row_key' => $rows[0]['key'], 'i
 $out['mylist_removed'] = count(my_list_rows($pdo, $ml['id'])['rows']);
 $any = save_my_list($pdo, ['name' => 'OU', 'source' => 'persons', 'definition' => ['match' => 'any', 'rules' => [['field' => 'first_name', 'value' => 'Lucie'], ['field' => 'first_name', 'value' => 'Pierre']]]]);
 $out['mylist_any'] = array_map(fn($r) => $r['people'][0]['first_name'], my_list_rows($pdo, $any['id'])['rows']);
+$out['widget_rows'] = [array_map(fn($r) => $r['people'][0]['first_name'], widget_rows($pdo, ['source' => 'persons', 'definition' => ['match' => 'any', 'rules' => [['field' => 'first_name', 'value' => 'Lucie'], ['field' => 'first_name', 'value' => 'Pierre']]]])['rows']),
+    count(widget_rows($pdo, ['list_id' => $any['id']])['rows']), isset(widget_rows($pdo, ['source' => 'places'])['columns']['name']), widget_rows($pdo, ['source' => 'free'])['list']['source']];
 $free = save_my_list($pdo, ['name' => 'Salon', 'source' => 'free', 'definition' => ['custom' => [['label' => 'Stand', 'type' => 'text'], ['label' => 'Ancêtre', 'type' => 'person']]]]);
 $fdef = my_lists($pdo); $fdef = array_values(array_filter($fdef, fn($l) => $l['id'] === $free['id']))[0]['definition']['custom'];
 $k1 = save_my_list_row($pdo, ['list_id' => $free['id'], 'row_key' => 'f:new'])['row_key'];
@@ -168,6 +170,7 @@ const checks = [
   ['partage de blocs : mise à jour par identifiant, nouveau bloc, fichier refusé', () => { assert.deepEqual(out.import, [true, false, 2]); assert.equal(out.import_bad, 'refusé'); }],
   ['cases « Blocs à afficher sur la fiche » des blocs perso', () => assert.deepEqual(out.flags, [false, true])],
   ['mes listes : mariages 1800–1850, les deux époux, âge', () => assert.deepEqual(out.mylist, [1, 2, '25 ans'])],
+  ['widgets à soi : mêmes critères que Mes listes, une liste enregistrée, une liste de l’app (jamais une liste à remplir)', () => { assert.deepEqual(out.widget_rows[0], out.mylist_any); assert.equal(out.widget_rows[1], out.mylist_any.length); assert.equal(out.widget_rows[2], true); assert.equal(out.widget_rows[3], 'persons'); }],
   ['mes listes : case cochée gardée, ligne retirée', () => { assert.deepEqual(out.mylist_value, ['1']); assert.equal(out.mylist_removed, 0); }],
   ['mes listes : lignes écrites à la main, ancêtre relié, ligne supprimée', () => { assert.deepEqual(out.free, [1, 'Cercle du Nord', 'Pierre', 'f:1', 'f:2']); assert.equal(out.free_empty, 'refusé'); }],
   ['mes listes : critères OU', () => assert.deepEqual(out.mylist_any.sort(), ['Lucie', 'Pierre'])],

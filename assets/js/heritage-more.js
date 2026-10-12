@@ -1043,6 +1043,7 @@
         ['Fiches', [
             ['Comment ajouter un enfant, un parent ou un conjoint ?', 'Ouvre la fiche, puis dans les blocs Parents, Conjoints ou Enfants clique sur « + ». Tu peux choisir une personne qui existe déjà ou en créer une nouvelle.'],
             ['Comment afficher un bloc (Départs, Poilu, Résistant…) sur une fiche ?', 'Fiche → Identité (crayon) → « Blocs à afficher sur la fiche » : coche le bloc. Pour l’avoir sur toutes les fiches : Maintenance → Apparence → « Blocs à afficher sur demande ».'],
+            ['Comment créer mon propre widget du tableau de bord ?', 'Maintenance → Éditeur de widgets (ou « + Créer un widget » en bas de la colonne du tableau de bord) → « + Nouveau widget ». Pars de rien (chiffres, liste, graphique, texte, raccourcis), d’un widget de l’app (copie modifiable, ou le même widget habillé de ton titre, ton icône, ta couleur), d’un de tes widgets ou d’un exemple. L’aperçu se met à jour pendant que tu règles. Il apparaît ensuite dans la colonne de gauche du tableau de bord ; « Partager » en fait un fichier pour un proche.'],
             ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, d’un bloc de l’app (Départs, Poilu, Résistant, Sépulture…) ou d’un de tes blocs, ajoute ou enlève des champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ».'],
             ['Comment mettre une étiquette ?', 'Dans presque tous les formulaires, la ligne « 🏷️ Étiquettes » : clique sur « + », tape le début du nom ou crée une nouvelle étiquette. La liste de toutes les étiquettes est dans Listes → Étiquettes.'],
             ['Comment protéger une fiche contre les modifications ?', 'Le cadenas en haut de la fiche la verrouille : plus rien ne peut y être changé, même par le travail à deux.'],
@@ -1232,6 +1233,9 @@
         ws.querySelectorAll('[data-h-list-edit]').forEach(b => b.addEventListener('click', () => { const l = lists.find(x => x.id === Number(b.dataset.hListEdit)); listEditor = JSON.parse(JSON.stringify(l)); renderListEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-h-list-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id: b.dataset.hListDel}}); refreshPinnedLists(); ext.maintenance.my_lists(++S().workspaceToken); }));
     };
+    /** Pour l'éditeur de widgets (heritage-widgets.js) : les mêmes critères que « Mes listes ». */
+    ext.listRules = () => RULES;
+    ext.listRuleRowHtml = (r, i, source, meta) => { if (meta) listMeta = meta; return ruleRowHtml(r, i, source); };
     function ruleRowHtml(r, i, source) {
         const meta = RULES[r.field] || {}; const k = source === 'events' ? 'ev' : 'pe';
         let input = '';
