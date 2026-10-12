@@ -31,17 +31,23 @@ jobs:
     permissions:
       contents: write
     steps:
+      # Seulement le dossier des nouveautés : release-notes/<étiquette>.md devient la description de la version
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: release-notes
       - name: Créer le brouillon, sauf s'il existe déjà (relance)
         env:
           GH_TOKEN: ${{ github.token }}
           R: ${{ github.repository }}
           T: ${{ github.ref_name }}
         run: |
+          notes="release-notes/$T.md"
+          if [ ! -f "$notes" ]; then printf 'Installateurs de LCNDA %s — vérifie les empreintes dans SHA256SUMS.txt.\n' "$T" > /tmp/notes.md; notes=/tmp/notes.md; fi
           if gh release list --repo "$R" --limit 100 --json tagName -q '.[].tagName' | grep -qx "$T"; then
-            echo "Brouillon $T déjà présent"
+            echo "Brouillon $T déjà présent : description remise à jour"
+            gh release edit "$T" --repo "$R" --notes-file "$notes"
           else
-            gh release create "$T" --draft --repo "$R" --title "LCNDA $T" \
-              --notes "Installateurs de LCNDA $T — vérifie les empreintes dans SHA256SUMS.txt."
+            gh release create "$T" --draft --repo "$R" --title "LCNDA $T" --notes-file "$notes"
           fi
 
   build:
