@@ -4933,6 +4933,11 @@ function insee_deces_import(PDO $pdo): never
         fclose($out);
         fclose($stream);
         $zip->close();
+        // fichier en positions fixes (.txt de data.gouv.fr) : converti en CSV comme un .txt téléchargé
+        if (preg_match('/\.txt$/i', $entryName)) {
+            try { $csvPath = insee_fixed_width_to_csv($cleanupPath); } catch (Throwable $e) { @unlink($cleanupPath); json_response(['error' => 'Lecture du fichier INSEE impossible : ' . $e->getMessage()], 422); }
+            if ($csvPath !== '') { @unlink($cleanupPath); $cleanupPath = $csvPath; }
+        }
         $tmpPath = $cleanupPath;
         $originalName .= ' / ' . basename($entryName);
     }

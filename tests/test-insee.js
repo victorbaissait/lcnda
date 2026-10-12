@@ -54,6 +54,15 @@ $u = 'https://static.data.gouv.fr/resources/x/';
 $list2 = insee_remote_files($pdo, [['url' => $u . 'deces-2025.txt'], ['url' => $u . 'deces-2025-m09.txt'], ['url' => $u . 'deces-2026-m01.txt'], ['url' => $u . 'deces-2025-m08.txt']])['files'];
 echo json_encode(['rows' => $rows, 'list' => $list, 'list2' => $list2], JSON_UNESCAPED_UNICODE);
 `);
+// 2) un .zip qui contient le .txt en positions fixes (périodes publiées seulement en .zip)
+fs.writeFileSync(path.join(dir, 'deces-2022.txt'), line('MARTIN*LOUISE/', '2', '19200101', '59350', 'LILLE', '', '20220303', '59350', '42') + '\n');
+const zipImp = php(head + String.raw`
+$z = new ZipArchive(); $z->open('${path.join(dir, 'deces-2022.zip')}', ZipArchive::CREATE); $z->addFile('${path.join(dir, 'deces-2022.txt')}', 'deces-2022.txt'); $z->close();
+$_SERVER['REQUEST_METHOD'] = 'POST';
+$_FILES['file'] = ['name' => 'deces-2022.zip', 'tmp_name' => '${path.join(dir, 'deces-2022.zip')}', 'error' => UPLOAD_ERR_OK, 'size' => filesize('${path.join(dir, 'deces-2022.zip')}')];
+insee_deces_import($pdo);
+`);
+const zipRow = php(head + String.raw`echo json_encode($pdo->query("SELECT nom, prenom, date_deces FROM insee_deces WHERE nom='MARTIN'")->fetch(), JSON_UNESCAPED_UNICODE);`);
 const files = Object.fromEntries(after.list.files.map(f => [f.name, f]));
 const checks = [
   ['import du .txt converti : 2 décès', () => assert.equal(imp.inserted, 2)],
@@ -65,6 +74,7 @@ const checks = [
   ['nouveau : plus récent que ce qui est importé', () => { assert.ok(files['deces-2025-m01.txt'].new); assert.equal(after.list.new_count, 1); assert.equal(files['deces-2025-m01.txt'].label, 'Décès de janvier 2025'); }],
   ['adresses hors data.gouv.fr et autres fichiers ignorés', () => { assert.ok(!files['deces-2026.csv']); assert.ok(!files['documentation.pdf']); }],
   ['fichier de l’année après des mois déjà importés : nouveau, et classé avant ses mois', () => { assert.ok(after.list2.find(f => f.name === 'deces-2025.txt').new); assert.equal(after.list2[0].name, 'deces-2026-m01.txt'); assert.equal(after.list2[1].name, 'deces-2025.txt'); assert.ok(after.list2.find(f => f.name === 'deces-2025-m09.txt').superseded); }],
+  ['.zip contenant le .txt en positions fixes : importé', () => { assert.equal(zipImp.inserted, 1); assert.deepEqual(zipRow, { nom: 'MARTIN', prenom: 'LOUISE', date_deces: '20220303' }); }],
   ['du plus récent au plus ancien', () => assert.equal(after.list.files[0].name, 'deces-2025-m01.txt')],
 ];
 let failed = 0;
