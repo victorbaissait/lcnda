@@ -239,7 +239,12 @@
      */
     function miniMap(points = [], paths = [], {height = 360, emptyText = 'Rien à placer sur la carte (lieux sans coordonnées).'} = {}) {
         const app = A();
-        const drawn = paths.map(p => ({...p, coords: p.ocean ? p.coords.slice(1).reduce((acc, c, i) => acc.concat(greatCircle(p.coords[i], c).slice(i ? 1 : 0)), []) : p.coords}))
+        // En mer : le trajet qui ne passe que par la mer (sea-route.js) ; en attendant sa carte, le grand cercle
+        const seaPath = p => window.LCNDA_SEA?.route(p.coords, p.year) || p.coords.slice(1).reduce((acc, c, i) => acc.concat(greatCircle(p.coords[i], c).slice(i ? 1 : 0)), []);
+        // Carte terre / mer pas encore chargée : cette carte se redessine d'elle-même dès qu'elle l'est
+        const mapId = paths.some(p => p.ocean) && window.LCNDA_SEA && !window.LCNDA_SEA.ready() ? 'h-map-' + Math.random().toString(36).slice(2, 9) : '';
+        if (mapId) window.LCNDA_SEA.onReady(() => { const el = document.getElementById(mapId); if (el) el.outerHTML = miniMap(points, paths, {height, emptyText}); });
+        const drawn = paths.map(p => ({...p, coords: p.ocean ? seaPath(p) : p.coords}))
             .filter(p => p.coords.length > 1);
         const all = [...points.filter(p => Number.isFinite(p.lat) && Number.isFinite(p.lon)).map(p => [p.lat, p.lon]), ...drawn.flatMap(p => p.coords)];
         if (!all.length) return `<div class="person-map-stage person-map-empty h-map-empty">${empty(emptyText)}</div>`;
@@ -268,7 +273,7 @@
             const [x, y] = px([p.lat, p.lon]);
             return `<g class="h-map-point" transform="translate(${x.toFixed(1)} ${y.toFixed(1)})"><title>${esc(p.label || '')}</title><circle r="${p.n ? 11 : 7}" fill="${esc(p.color || '#0066cc')}" stroke="#fff" stroke-width="2"/>${p.n ? `<text text-anchor="middle" dy="4" font-size="11" font-weight="700" fill="#fff">${esc(p.n)}</text>` : ''}${p.showLabel ? `<text x="12" y="-10" font-size="13" font-weight="700" class="h-map-label">${esc(p.label || '')}</text>` : ''}</g>`;
         }).join('');
-        return `<div class="person-map-stage h-map map-bg-${esc(bg)}" style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
+        return `<div class="person-map-stage h-map map-bg-${esc(bg)}"${mapId ? ` id="${mapId}"` : ''} style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
     }
     /* ─── Blocs spéciaux de la fiche : cochés fiche par fiche, ou sur toutes les fiches (Apparence) ─── */
     const FLAG_BLOCKS = [['show_voyage_block', '🚢 Départs / émigration'], ['show_placement_block', '👶 Enfant placé'], ['show_heraldry_block', '🛡️ Noblesse / blason'], ['show_poilu_block', '🎖️ Poilu 14-18'], ['show_resistance_block', '✊ Résistant'], ['show_language_block', '🗣️ Langues']];
@@ -349,7 +354,7 @@
             const route = (v.route || []).filter(r => finite(r.lat) && finite(r.lon));
             if (!route.length && finite(v.dep_lat) && finite(v.dest_lat)) route.push({lat: +v.dep_lat, lon: +v.dep_lon, label: v.departure_port, kind: 'depart'}, {lat: +v.dest_lat, lon: +v.dest_lon, label: v.arrival_port || v.destination, kind: 'arrivee'});
             const sea = route.filter(r => r.kind !== 'destination'), land = route.filter((r, k) => r.kind === 'destination' || route[k + 1]?.kind === 'destination');
-            if (sea.length > 1) paths.push({coords: sea.map(r => [+r.lat, +r.lon]), color, ocean: true});
+            if (sea.length > 1) paths.push({coords: sea.map(r => [+r.lat, +r.lon]), color, ocean: true, year: Number(v.departure_year) || Number(String(v.departure_date || '').match(/\d{4}/)?.[0]) || 0});
             if (land.length > 1) paths.push({coords: land.map(r => [+r.lat, +r.lon]), color, dashed: true});
             route.forEach(r => points.push({lat: +r.lat, lon: +r.lon, label: `${r.label}${v.person_name ? ' — ' + v.person_name : ''}`, color, showLabel: rows.length < 4}));
         });
@@ -374,7 +379,7 @@
         const p = detail.person;
         if (!flagShown(p, 'show_voyage_block')) return '';
         const rows = detail.heritage?.voyages || [];
-        const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(v => voyageCardHtml(v, {editable: !Number(p.is_locked)})).join('')}</div><div class="h-voyage-map">${voyagePaths(rows)}<small class="muted">Trajet en mer tracé au plus court à travers l’océan (grand cercle) ; en pointillés, le trajet à terre jusqu’à la destination.</small></div></div>`
+        const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(v => voyageCardHtml(v, {editable: !Number(p.is_locked)})).join('')}</div><div class="h-voyage-map">${voyagePaths(rows)}<small class="muted">Trajet en mer tracé au plus court en ne passant que par la mer (détroits ; canaux de Suez, Kiel et Panama seulement après leur ouverture) ; en pointillés, le trajet à terre jusqu’à la destination.</small></div></div>`
             : empty('Aucun voyage pour l’instant. Ajoute le départ : date, port, navire, destination, liste de passagers, naturalisation…');
         return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">+ Voyage</button>`));
     };
