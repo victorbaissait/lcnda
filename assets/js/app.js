@@ -8797,6 +8797,28 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const start=republicanToJdn(year,month,1),len=month===13?(republicanLeap(year)?6:5):30,end=start+len-1;
         return {start:jdnToGregorian(start),end:jdnToGregorian(end),len};
     }
+    /* ── Autres calendriers du convertisseur : éthiopien, indien (Saka), japonais (ères), coréen (Dangi et lunaire) ── */
+    // Éthiopien : 13 mois (12 × 30 jours + Pagumé de 5 ou 6 jours), an 1 = 8 de notre ère (calcul exact)
+    const ethiopicMonths=['Meskerem','Tikimt','Hidar','Tahsas','Tir','Yekatit','Megabit','Miyazya','Ginbot','Sene','Hamle','Nehasé','Pagumé'];
+    const ETHIOPIC_EPOCH=1724221;
+    function ethiopicToJdn(year,month,day){return ETHIOPIC_EPOCH-1+365*(year-1)+Math.floor(year/4)+30*(month-1)+day;}
+    function jdnToEthiopic(jdn){const year=Math.floor((4*(jdn-ETHIOPIC_EPOCH)+1463)/1461),month=Math.floor((jdn-ethiopicToJdn(year,1,1))/30)+1;return {year,month,day:jdn-ethiopicToJdn(year,month,1)+1};}
+    // Indien (calendrier national, ère Saka) : l'an commence le 22 mars (21 les années bissextiles), an Saka = année grégorienne − 78
+    const indianMonths=['Chaitra','Vaishakha','Jyeshtha','Ashadha','Shravana','Bhadra','Ashvin','Kartika','Agrahayana','Pausha','Magha','Phalguna'];
+    const gregLeap=y=>y%4===0&&(y%100!==0||y%400===0);
+    function indianMonthDays(year,month){return month===1?(gregLeap(year+78)?31:30):month<=6?31:30;}
+    function indianToJdn(year,month,day){let jdn=gregorianToJdn(year+78,3,gregLeap(year+78)?21:22);for(let m=1;m<month;m++)jdn+=indianMonthDays(year,m);return jdn+day-1;}
+    function jdnToIndian(jdn){const g=jdnToGregorian(jdn);let year=g.year-78;if(jdn<indianToJdn(year,1,1))year--;let rest=jdn-indianToJdn(year,1,1),month=1;while(rest>=indianMonthDays(year,month)){rest-=indianMonthDays(year,month);month++;}return {year,month,day:rest+1};}
+    // Japonais : calendrier grégorien depuis le 1er janvier 1873 (Meiji 6), les années comptées par ère
+    const japaneseEras=[['meiji','Meiji 明治',[1868,10,23]],['taisho','Taishō 大正',[1912,7,30]],['showa','Shōwa 昭和',[1926,12,25]],['heisei','Heisei 平成',[1989,1,8]],['reiwa','Reiwa 令和',[2019,5,1]]];
+    const JAPAN_GREGORIAN=gregorianToJdn(1873,1,1);
+    function japaneseToJdn(era,year,month,day){const e=japaneseEras.find(x=>x[0]===era);if(!e)return null;const jdn=gregorianToJdn(e[2][0]+year-1,month,day);return jdn>=gregorianToJdn(...e[2])?jdn:null;}
+    function jdnToJapanese(jdn){if(jdn<JAPAN_GREGORIAN)return null;let e=japaneseEras[0];japaneseEras.forEach(x=>{if(jdn>=gregorianToJdn(...x[2]))e=x;});const g=jdnToGregorian(jdn),y=g.year-e[2][0]+1;return {era:e,year:y,month:g.month,day:g.day};}
+    // Coréen : année Dangi (an grégorien + 2333) ; date lunaire traditionnelle d'après le navigateur (calendrier « dangi »)
+    function koreanLunarParts(jdn){try{const g=jdnToGregorian(jdn),parts=new Intl.DateTimeFormat('en-u-ca-dangi',{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12)));const get=t=>parts.find(p=>p.type===t)?.value||'';const monthText=get('month');return {year:Number(get('relatedYear'))||0,month:parseInt(monthText,10)||0,leap:/bis|leap/i.test(monthText),day:Number(get('day'))||0};}catch(_){return null;}}
+    function koreanLunarToJdn(year,month,day,leap=false){const from=gregorianToJdn(year,1,1),to=gregorianToJdn(year+1,4,1);for(let j=from;j<to;j++){const k=koreanLunarParts(j);if(k&&k.year===year&&k.month===month&&k.day===day&&k.leap===!!leap)return j;}return null;}
+    function formatKoreanLunar(jdn){const k=koreanLunarParts(jdn);return k&&k.year?`${k.day} du ${k.month}${k.month===1?'er':'e'} mois${k.leap?' intercalaire':''} de l’année lunaire ${k.year} (Dangi ${k.year+2333})`:'Non disponible dans ce navigateur';}
+    function rangeText(startJdn,len){return `du ${shortGregorian(jdnToGregorian(startJdn))} au ${shortGregorian(jdnToGregorian(startJdn+len-1))}`;}
     function shortGregorian(d,withYear=true){return `${d.day}${d.day===1?'er':''} ${shortMonthsFr[d.month-1]}${withYear?' '+d.year:''}`;}
     function readCalendarJdn(form){
         const type=form.elements.calendar_type.value;
@@ -8806,8 +8828,15 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(type==='islamic')return islamicToJdn(year,month,day);
         if(type==='republican')return republicanToJdn(year,month,day);
         if(type==='hebrew')return hebrewToJdn(year,month,day);
+        if(type==='ethiopic')return month>13||day>(month===13?(year%4===3?6:5):30)?null:ethiopicToJdn(year,month,day);
+        if(type==='indian')return month>12||day>indianMonthDays(year,month)?null:indianToJdn(year,month,day);
+        if(type==='japanese')return japaneseToJdn(form.elements.era?.value||'',year,month,day);
+        if(type==='korean')return gregorianToJdn(year-2333,month,day);
+        if(type==='korean_lunar')return koreanLunarToJdn(year,month,day,form.elements.leap_month?.checked);
         return gregorianToJdn(year,month,day);
     }
+    // Le convertisseur connaît en plus quelques calendriers qui ne servent pas dans les fiches
+    const converterCalendarOptions=[...calendarTypeOptions,['ethiopic','Éthiopien'],['indian','Indien (national, ère Saka)'],['japanese','Japonais (ères, depuis 1873)'],['korean','Coréen (année Dangi)'],['korean_lunar','Coréen lunaire (traditionnel)']];
     function parseNumericCalendarDate(text){
         const value=String(text||'').trim();
         let match=value.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{1,4})$/);
@@ -8887,7 +8916,17 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function calendarConversionCards(jdn){
         if(!jdn)return '<p class="muted">Entre une date complète pour convertir.</p>';
         const gregorian=jdnToGregorian(jdn),julian=jdnToJulian(jdn),islamic=jdnToIslamic(jdn),republican=jdnToRepublican(jdn);
-        return `<div class="calendar-result-grid"><div class="calendar-result-card"><strong>Grégorien</strong>${formatCalendarDate(gregorian)}</div><div class="calendar-result-card"><strong>Julien</strong>${formatCalendarDate(julian)}</div><div class="calendar-result-card"><strong>Musulman civil</strong>${formatCalendarDate(islamic)}</div><div class="calendar-result-card"><strong>Républicain</strong>${formatRepublicanDate(republican)}${republican?(()=>{const r=republicanMonthRange(republican.year,republican.month);return `<small class="muted" style="display:block">${escapeHtml(republicanMonths[republican.month-1])} an ${republican.year} : du ${shortGregorian(r.start)} au ${shortGregorian(r.end)}</small>`;})():''}</div><div class="calendar-result-card"><strong>Juif</strong>${escapeHtml(hebrewDateFromJdn(jdn)||'Avant le début du calendrier')}</div></div>`;
+        return `<div class="calendar-result-grid"><div class="calendar-result-card"><strong>Grégorien</strong>${formatCalendarDate(gregorian)}</div><div class="calendar-result-card"><strong>Julien</strong>${formatCalendarDate(julian)}</div><div class="calendar-result-card"><strong>Musulman civil</strong>${formatCalendarDate(islamic)}</div><div class="calendar-result-card"><strong>Républicain</strong>${formatRepublicanDate(republican)}${republican?(()=>{const r=republicanMonthRange(republican.year,republican.month);return `<small class="muted" style="display:block">${escapeHtml(republicanMonths[republican.month-1])} an ${republican.year} : du ${shortGregorian(r.start)} au ${shortGregorian(r.end)}</small>`;})():''}</div><div class="calendar-result-card"><strong>Juif</strong>${escapeHtml(hebrewDateFromJdn(jdn)||'Avant le début du calendrier')}</div>${otherCalendarCards(jdn)}</div>`;
+    }
+    function otherCalendarCards(jdn){
+        const card=(title,main,small='')=>`<div class="calendar-result-card"><strong>${escapeHtml(title)}</strong>${escapeHtml(main)}${small?`<small class="muted" style="display:block">${escapeHtml(small)}</small>`:''}</div>`;
+        const et=jdnToEthiopic(jdn),etStart=ethiopicToJdn(et.year,et.month,1),etLen=et.month===13?(et.year%4===3?6:5):30;
+        const ind=jdnToIndian(jdn),indStart=indianToJdn(ind.year,ind.month,1);
+        const jp=jdnToJapanese(jdn),g=jdnToGregorian(jdn);
+        return card('Éthiopien',`${et.day} ${ethiopicMonths[et.month-1]} ${et.year}`,`${ethiopicMonths[et.month-1]} ${et.year} : ${rangeText(etStart,etLen)}`)
+            +card('Indien (Saka)',`${ind.day} ${indianMonths[ind.month-1]} ${ind.year}`,`${indianMonths[ind.month-1]} ${ind.year} : ${rangeText(indStart,indianMonthDays(ind.year,ind.month))}`)
+            +card('Japonais',jp?`${jp.day}${jp.day===1?'er':''} ${['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][jp.month-1]} de l’an ${jp.year===1?'1 (gannen)':jp.year} de l’ère ${jp.era[1]}`:'Avant 1873 : calendrier luni-solaire japonais (non calculé)',jp?`Même jour et même mois que le grégorien ; seule l’année change`:'')
+            +card('Coréen',`Dangi ${g.year+2333} (année)`,formatKoreanLunar(jdn));
     }
     function convertUnitValue(value,from,to){
         const units={toise:{kind:'length',factor:1.949},pied:{kind:'length',factor:.32484},pouce:{kind:'length',factor:.02707},ligne:{kind:'length',factor:.002256},lieue:{kind:'length',factor:3898},arpent_area:{kind:'area',factor:3418.89},livre_weight:{kind:'weight',factor:.4895},once:{kind:'weight',factor:.03059},marc:{kind:'weight',factor:.24475}};
@@ -8953,7 +8992,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">CALENDRIER / MESURES</span><h2>Convertisseurs de recherche</h2><p>Conversions utiles pour les actes anciens, les pays passés tardivement au grégorien et les notes de transcription.</p></div></header>
         <div class="calendar-tools-grid">
             <section class="maintenance-panel"><h3>Calendrier par défaut</h3><label>Calendrier utilisé par défaut dans les champs de date<select id="default-calendar-select">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><p class="muted">Grégorien reste le plus courant en France. Julien est utile pour certains pays orthodoxes et certaines sources anciennes.</p></section>
-            <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label>Mois<span data-calendar-month-field></span></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
+            <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${converterCalendarOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><label data-calendar-era hidden>Ère<select name="era">${japaneseEras.map(([k,l,start])=>`<option value="${k}" ${k==='showa'?'selected':''}>${escapeHtml(l)} (depuis ${start[0]})</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label class="checkbox-line" data-calendar-leap hidden><input type="checkbox" name="leap_month"> Mois intercalaire (lunaire)</label><label>Mois<span data-calendar-month-field></span></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
             <section class="maintenance-panel"><h3>Calendrier républicain</h3><ul class="calendar-info-list">${republicanMonths.map((month,index)=>{const r=republicanMonthRange(2,index+1);return `<li><strong>${escapeHtml(month)}</strong>${index<12?' · 30 jours':' · 5 ou 6 jours'} · ${r.start.month===r.end.month?shortMonthsFr[r.start.month-1]:`${shortMonthsFr[r.start.month-1]} à ${shortMonthsFr[r.end.month-1]}`} <small class="muted">(du ${shortGregorian(r.start,false)} au ${shortGregorian(r.end,false)})</small></li>`;}).join('')}</ul><p class="muted" style="font-size:.85em">Dates de l’an II (1793-1794) : selon l’année, le début et la fin peuvent glisser d’un jour (le convertisseur donne les dates exactes).</p><p>Le calendrier républicain commence le 22 septembre 1792 et cesse officiellement le 1er janvier 1806. Les douze mois font 30 jours. Les 5 jours complémentaires, ou 6 en année sextile, terminent l’année.</p></section>
             <section class="maintenance-panel"><h3>Unités anciennes</h3><form id="unit-converter-form" class="form-grid" style="padding:0"><label>Valeur<input name="value" type="number" step="any" placeholder="3"></label><label>De<select name="from">${unitOptions}</select></label><label>Vers<select name="to">${unitOptions}</select></label><button class="button" type="submit">Convertir</button></form><div id="unit-converter-result" class="unit-result">Entre une valeur et deux unités compatibles.</div></section>
             <section class="maintenance-panel"><h3>Monnaies anciennes</h3><form id="currency-converter-form" class="form-grid" style="padding:0"><label>Livres<input name="livres" type="number" step="1" placeholder="12"></label><label>Sols / sous<input name="sols" type="number" step="1" placeholder="10"></label><label>Deniers<input name="deniers" type="number" step="1" placeholder="6"></label><label>Francs germinal indicatifs<input name="francs" type="number" step="any" placeholder="0"></label><button class="button span-2" type="submit">Convertir</button></form><div id="currency-converter-result" class="unit-result">1 livre = 20 sols = 240 deniers. Le franc indiqué ici est une équivalence pratique, pas une valeur historique absolue.</div></section>
@@ -8975,7 +9014,15 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
                     holder.innerHTML=`<select name="month"><option value="">—</option>${republicanMonths.map((name,i)=>{const r=y?republicanMonthRange(y,i+1):null;return `<option value="${i+1}">${escapeHtml(name)}${r?` (${shortGregorian(r.start)} → ${shortGregorian(r.end)})`:''}</option>`;}).join('')}</select>`;
                 }else if(type==='hebrew'){
                     holder.innerHTML=`<select name="month"><option value="">—</option>${hebrewMonthOrder(year).map(m=>`<option value="${m}">${escapeHtml(year?hebrewMonthName(m,year):(m===12?'Adar (Adar I)':hebrewMonthNames[m-1]))}</option>`).join('')}</select>`;
-                }else holder.innerHTML='<input name="month" type="number" min="1" max="12" placeholder="1">';
+                }else if(type==='ethiopic'){
+                    const y=year>0?year:0;
+                    holder.innerHTML=`<select name="month"><option value="">—</option>${ethiopicMonths.map((name,i)=>{const len=i===12?(y%4===3?6:5):30;return `<option value="${i+1}">${escapeHtml(name)}${y?` (${rangeText(ethiopicToJdn(y,i+1,1),len).replace(/^du /,'').replace(' au ',' → ')})`:''}</option>`;}).join('')}</select>`;
+                }else if(type==='indian'){
+                    const y=year>0?year:0;
+                    holder.innerHTML=`<select name="month"><option value="">—</option>${indianMonths.map((name,i)=>`<option value="${i+1}">${escapeHtml(name)}${y?` (${rangeText(indianToJdn(y,i+1,1),indianMonthDays(y,i+1)).replace(/^du /,'').replace(' au ',' → ')})`:''}</option>`).join('')}</select>`;
+                }else holder.innerHTML=`<input name="month" type="number" min="1" max="${type==='korean_lunar'?12:12}" placeholder="1">`;
+                $('[data-calendar-era]',converterForm).hidden=type!=='japanese';
+                $('[data-calendar-leap]',converterForm).hidden=type!=='korean_lunar';
                 const field=converterForm.elements.month;
                 if(previous&&[...(field.options||[])].some(o=>o.value===previous))field.value=previous;else if(!field.options)field.value=previous;
             };
@@ -8983,7 +9030,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             converterForm.elements.year.addEventListener('change',monthField);
             monthField();
             converterForm.elements.year.placeholder=converterForm.elements.calendar_type.value==='hebrew'?'5600':converterForm.elements.calendar_type.value==='republican'?'2':'1793';
-            converterForm.elements.calendar_type.addEventListener('change',()=>{const t=converterForm.elements.calendar_type.value;converterForm.elements.year.placeholder=t==='hebrew'?'5600':t==='republican'?'2':t==='islamic'?'1200':'1793';});
+            converterForm.elements.calendar_type.addEventListener('change',()=>{const t=converterForm.elements.calendar_type.value;converterForm.elements.year.placeholder={hebrew:'5600',republican:'2',islamic:'1200',ethiopic:'1900',indian:'1800',japanese:'20',korean:'4280',korean_lunar:'1900'}[t]||'1793';});
         }
         $('#unit-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),result=convertUnitValue(Number(values.value),values.from,values.to);$('#unit-converter-result').textContent=result===null?'Unités incompatibles ou valeur invalide.':`${Number(values.value).toLocaleString('fr-FR')} → ${result.toLocaleString('fr-FR',{maximumFractionDigits:4})}`;});
         $('#currency-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),total=oldCurrencyTotalDeniers(values),francs=total/240;$('#currency-converter-result').textContent=`${oldCurrencyBreakdown(total)} · ${total.toLocaleString('fr-FR')} denier(s) · environ ${francs.toLocaleString('fr-FR',{maximumFractionDigits:2})} franc(s) germinal indicatif(s).`;});
