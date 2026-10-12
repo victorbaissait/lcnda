@@ -351,17 +351,26 @@ const LOADING_URL = require('url').pathToFileURL(path.join(__dirname, 'loading.h
  */
 const sideWindows = new WeakSet();
 const SIDE_FRAME = 'lcnda-side';
+let sideWindow = null;
+
+/** Ouvre (ou réutilise) la fenêtre « à côté ». Créée par l'application : sans lien vers elle (pas d'opener), session à part. */
+function openSideWindow(url) {
+  if (sideWindow && !sideWindow.isDestroyed()) { sideWindow.webContents.loadURL(url); sideWindow.show(); sideWindow.focus(); return; }
+  sideWindow = new BrowserWindow({ width: 1100, height: 900, autoHideMenuBar: true, title: 'Recherche',
+    webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, partition: 'persist:lcnda-web' } });
+  sideWindows.add(sideWindow.webContents);
+  sideWindow.on('closed', () => { sideWindow = null; });
+  sideWindow.loadURL(url);
+}
 
 /** La fenêtre ne peut afficher que l'application ; tout lien externe s'ouvre dans le navigateur. */
 function lockNavigation(webContents, origin) {
   const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };
-  webContents.on('did-create-window', (child, details) => { if (details.frameName === SIDE_FRAME && !sameOrigin(details.url, origin)) sideWindows.add(child.webContents); });
+  const sideSafe = (url) => /^https?:/i.test(url) && !sameOrigin(url, origin);
   webContents.setWindowOpenHandler(({ url, frameName }) => {
-    if (sideWindows.has(webContents)) { external(url); return { action: 'deny' }; } // un lien « nouvel onglet » du site consulté : dans le navigateur
-    if (frameName === SIDE_FRAME && /^https?:/i.test(url) && !sameOrigin(url, origin)) {
-      return { action: 'allow', overrideBrowserWindowOptions: { width: 1100, height: 900, autoHideMenuBar: true, title: 'Recherche',
-        webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, preload: undefined, partition: 'persist:lcnda-web' } } };
-    }
+    // dans la fenêtre « à côté » : un lien « nouvel onglet » s'ouvre dans cette même fenêtre (jamais l'app, jamais d'onglets en rafale)
+    if (sideWindows.has(webContents)) { if (sideSafe(url)) webContents.loadURL(url); return { action: 'deny' }; }
+    if (frameName === SIDE_FRAME && sideSafe(url)) { openSideWindow(url); return { action: 'deny' }; }
     // Deuxième écran détaché (« Fenêtre ↗ » du panneau À côté) : vraie fenêtre de l'application, même pont et même sécurité
     if (sameOrigin(url, origin)) {
       return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, minWidth: 700, minHeight: 500, backgroundColor: '#fbfbfb',
@@ -375,8 +384,12 @@ function lockNavigation(webContents, origin) {
     external(url);
     return { action: 'deny' };
   });
+  // fenêtre « à côté » : redirections et cadres aussi, pour qu'elle ne charge jamais l'application ni autre chose que le web
+  const sideGuard = (event, url) => { if (sideWindows.has(webContents) && !sideSafe(url)) event.preventDefault(); };
+  webContents.on('will-redirect', sideGuard);
+  webContents.on('will-frame-navigate', (event) => { if (sideWindows.has(webContents) && !sideSafe(event.url)) event.preventDefault(); });
   webContents.on('will-navigate', (event, url) => {
-    if (sideWindows.has(webContents)) { if (!/^https?:/i.test(url) || sameOrigin(url, origin)) event.preventDefault(); return; } // le site consulté navigue librement, sans jamais charger l'application
+    if (sideWindows.has(webContents)) { if (!sideSafe(url)) event.preventDefault(); return; } // le site consulté navigue librement, sans jamais charger l'application
     if (sameOrigin(url, origin) || url.split('#')[0] === LOADING_URL) return;
     event.preventDefault();
     external(url);

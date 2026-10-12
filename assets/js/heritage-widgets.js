@@ -172,9 +172,10 @@
     }
     // « Tout voir » : les données d'une liste affichée, gardées le temps de la page
     const fullViews = new Map(); let fullSeq = 0;
+    const keepView = (key, v) => { fullViews.set(key, v); if (fullViews.size > 400) fullViews.delete(fullViews.keys().next().value); }; // les plus anciennes s'effacent (aperçus successifs)
     function mediaCell(r, text) {
         const m = r.media; if (!m) return text;
-        const key = 'm' + (++fullSeq); fullViews.set(key, {media: m});
+        const key = 'm' + (++fullSeq); keepView(key, {media: m});
         const thumb = m.media_type === 'image' && (m.thumbnail || m.filename) ? `<img class="h-cw-thumb" src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : '';
         return `<button type="button" class="table-link h-cw-media" data-cw-media="${key}">${thumb}${text || 'Voir le média'}</button>`;
     }
@@ -194,7 +195,7 @@
         if (!rows.length) return '<p class="muted">Aucune ligne.</p>';
         let more = '';
         if (rows.length > n) {
-            const key = 'l' + (++fullSeq); fullViews.set(key, {title: d.title || d.name || 'Liste', caption: d.caption || '', html: () => listTableHtml(data, d, rows, cols, all), count: rows.length});
+            const key = 'l' + (++fullSeq); keepView(key, {title: d.title || d.name || 'Liste', caption: d.caption || '', html: () => listTableHtml(data, d, rows, cols, all), count: rows.length});
             more = `<p class="h-cw-more"><small class="muted">${fmt(n)} sur ${fmt(rows.length)}${data.truncated ? '+' : ''}</small> <button type="button" class="link-button" data-cw-all="${key}">Tout voir (${fmt(rows.length)})</button></p>`;
         }
         return listTableHtml(data, d, rows.slice(0, n), cols, all) + more;
@@ -208,7 +209,7 @@
         const v = fullViews.get(b.dataset.cwAll); if (!v) return;
         document.getElementById('h-cw-all-dialog')?.remove();
         const dlg = document.createElement('dialog');
-        dlg.className = 'modal h-cw-all-dialog'; dlg.id = 'h-cw-all-dialog';
+        dlg.className = 'modal h-modal h-cw-all-dialog'; dlg.id = 'h-cw-all-dialog'; // h-modal : se ferme quand on ouvre une fiche depuis la liste
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">WIDGET</span><h2>${esc(v.title)} <small class="muted">(${fmt(v.count)})</small></h2>${v.caption ? `<p class="muted">${nl(v.caption)}</p>` : ''}</div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div><div class="h-cw-all-body">${v.html()}</div>`;
         document.body.appendChild(dlg);
         dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());

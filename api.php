@@ -11281,7 +11281,7 @@ function sanitize_online_sheet_checks($raw): string
         $field = safe_text($check['field'] ?? '');
         if ($field === '') continue;
         $status = safe_text($check['status'] ?? '');
-        if (!in_array($status, ONLINE_SHEET_CHECK_STATUSES, true)) $status = 'inconnu';
+        if ($status !== '' && !in_array($status, ONLINE_SHEET_CHECK_STATUSES, true)) $status = 'inconnu'; // '' = pas encore vérifié (champ libre gardé tel quel)
         $clean[] = [
             'field' => $field,
             'field_label' => safe_text($check['field_label'] ?? $field),

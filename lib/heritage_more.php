@@ -729,7 +729,11 @@ const FRANCE_OVERSEAS_BOXES = [
     'La Réunion' => [-21.5, -20.8, 55.1, 55.9], 'Mayotte' => [-13.1, -12.6, 44.9, 45.4], 'Saint-Pierre-et-Miquelon' => [46.7, 47.2, -56.5, -56.0],
     'Saint-Barthélemy et Saint-Martin' => [17.8, 18.2, -63.2, -62.7], 'Polynésie française' => [-28.0, -7.0, -155.0, -134.0],
     'Nouvelle-Calédonie' => [-23.0, -19.0, 158.0, 169.0], 'Wallis-et-Futuna' => [-14.5, -13.0, -178.3, -176.0],
-    'Terres australes et antarctiques' => [-50.1, -11.0, 37.0, 78.0], 'Clipperton' => [10.2, 10.4, -109.3, -109.1],
+    // Terres australes : une petite boîte par archipel (une seule grande boîte englobait Madagascar, Maurice et les Comores)
+    'Kerguelen' => [-50.1, -48.4, 68.4, 70.7], 'Crozet' => [-46.6, -45.9, 50.0, 52.5], 'Amsterdam et Saint-Paul' => [-38.8, -37.7, 77.4, 77.7],
+    'Terre Adélie' => [-69.0, -65.0, 136.0, 142.0], 'Europa' => [-22.5, -22.2, 40.2, 40.5], 'Juan de Nova' => [-17.1, -16.9, 42.6, 42.8],
+    'Bassas da India' => [-21.6, -21.4, 39.6, 39.8], 'Glorieuses' => [-11.7, -11.4, 47.2, 47.5], 'Tromelin' => [-15.95, -15.85, 54.45, 54.6],
+    'Clipperton' => [10.2, 10.4, -109.3, -109.1],
 ];
 
 /** Le point est-il dans le pays (pour la France : métropole, Corse et outre-mer) ? */

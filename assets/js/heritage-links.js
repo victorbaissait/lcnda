@@ -47,12 +47,15 @@
             after?.();
         } catch (error) { toast(error.message, 'error'); }
     }
+    let questionSeq = 0;
     async function runQuestion(q, after, personId = 0) {
         const out = document.getElementById('h-question-out');
         if (!out || !q.trim()) return;
         out.innerHTML = '<p class="muted">Recherche…</p>';
         try {
+            const seq = ++questionSeq;
             const r = await api('ask_question', personId ? {q, person_id: personId} : {q});
+            if (seq !== questionSeq) return; // une question plus récente a été posée entre-temps
             S().hQuestion = q;
             // Homonymes : toutes les fiches qui portent ce nom, pour répondre pour une autre
             const homonyms = (r.homonyms || []).length > 1 ? `<div class="h-question-homonyms"><p><strong>${r.homonyms.length} fiches portent ce nom :</strong></p><ul>${r.homonyms.map(h => `<li>${personLink(h.id, h.name, h.life ? `(${h.life})` : '')} <small class="muted">fiche n°${h.id}</small> ${h.chosen ? '<span class="collection-kind">réponse ci-dessous</span>' : `<button type="button" class="button small secondary" data-h-question-person="${h.id}">Répondre pour celle-ci</button>`}</li>`).join('')}</ul></div>` : '';

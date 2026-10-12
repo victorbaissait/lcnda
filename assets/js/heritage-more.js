@@ -1413,7 +1413,9 @@
                 onSubmit: async form => {
                     const checked = [...form.querySelectorAll('[data-lv-v]')].filter(i => i.checked).map(i => values[Number(i.dataset.lvV)][0]);
                     const nf = {};
-                    if (checked.length < Math.min(values.length, 1500)) nf.values = checked;
+                    // au-delà des 1 500 valeurs affichées : on garde ce qui était déjà retenu (elles n'ont pas pu être décochées)
+                    const hidden = values.slice(1500).map(([v]) => v).filter(v => !f.values || f.values.includes(v));
+                    if (checked.length < Math.min(values.length, 1500)) nf.values = checked.concat(hidden);
                     if (form.contains.value.trim()) nf.contains = form.contains.value.trim();
                     if (form.from?.value) nf.from = Number(form.from.value);
                     if (form.to?.value) nf.to = Number(form.to.value);

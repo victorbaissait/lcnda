@@ -2419,7 +2419,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const source=event?.date_calendar||'gregorian';
         const target=defaultCalendarSetting();
         if(source===target)return '';
-        const converted=event?.date_converted||automaticEquivalentFromDateText(event?.date_text||'',source,target);
+        // recalculée à l'affichage : le calendrier par défaut a pu changer depuis l'enregistrement
+        const converted=automaticEquivalentFromDateText(event?.date_text||'',source,target)||(String(event?.date_converted||'').startsWith(calendarLabel(target)+' :')?event.date_converted:'');
         return converted?`<small class="event-date-converted">${escapeHtml(converted)}</small>`:'';
     }
 
@@ -8764,8 +8765,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function jdnToGregorian(jdn){const a=jdn+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor(146097*b/4),d=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*d/4),m=Math.floor((5*e+2)/153);return {year:100*b+d-4800+Math.floor(m/10),month:m+3-12*Math.floor(m/10),day:e-Math.floor((153*m+2)/5)+1};}
     function julianToJdn(year,month,day){const a=Math.floor((14-month)/12),y=year+4800-a,m=month+12*a-3;return day+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-32083;}
     function jdnToJulian(jdn){const c=jdn+32082,d=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*d/4),m=Math.floor((5*e+2)/153);return {year:d-4800+Math.floor(m/10),month:m+3-12*Math.floor(m/10),day:e-Math.floor((153*m+2)/5)+1};}
-    function islamicToJdn(year,month,day){return day+Math.ceil(29.5*(month-1))+(year-1)*354+Math.floor((3+11*year)/30)+1948439-1;}
-    function jdnToIslamic(jdn){const year=Math.floor((30*(jdn-1948439)+10646)/10631),month=Math.min(12,Math.max(1,Math.ceil((jdn-(29+islamicToJdn(year,1,1)))/29.5)+1)),day=jdn-islamicToJdn(year,month,1)+1;return {year,month,day};}
+    function islamicToJdn(year,month,day){return day+Math.ceil(29.5*(month-1))+(year-1)*354+Math.floor((3+11*year)/30)+1948440-1;} // 1er mouharram an 1 = vendredi 16 juillet 622 (julien)
+    function jdnToIslamic(jdn){const year=Math.floor((30*(jdn-1948440)+10646)/10631),month=Math.min(12,Math.max(1,Math.ceil((jdn-(29+islamicToJdn(year,1,1)))/29.5)+1)),day=jdn-islamicToJdn(year,month,1)+1;return {year,month,day};}
     function republicanLeap(year){return [3,7,11].includes(year);}
     function republicanYearDays(year){return republicanLeap(year)?366:365;}
     function republicanToJdn(year,month,day){let days=0;for(let y=1;y<year;y++)days+=republicanYearDays(y);return gregorianToJdn(1792,9,22)+days+(month-1)*30+day-1;}
@@ -8833,14 +8834,16 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function japaneseToJdn(era,year,month,day){const e=japaneseEras.find(x=>x[0]===era);if(!e)return null;const jdn=gregorianToJdn(e[2][0]+year-1,month,day);return jdn>=gregorianToJdn(...e[2])?jdn:null;}
     function jdnToJapanese(jdn){if(jdn<JAPAN_GREGORIAN)return null;let e=japaneseEras[0];japaneseEras.forEach(x=>{if(jdn>=gregorianToJdn(...x[2]))e=x;});const g=jdnToGregorian(jdn),y=g.year-e[2][0]+1;return {era:e,year:y,month:g.month,day:g.day};}
     // Coréen : année Dangi (an grégorien + 2333) ; date lunaire traditionnelle d'après le navigateur (calendrier « dangi »)
-    function koreanLunarParts(jdn,cal='dangi'){try{const g=jdnToGregorian(jdn),parts=new Intl.DateTimeFormat(`en-u-ca-${cal}`,{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12)));const get=t=>parts.find(p=>p.type===t)?.value||'';const monthText=get('month');return {year:Number(get('relatedYear'))||0,month:parseInt(monthText,10)||0,leap:/bis|leap/i.test(monthText),day:Number(get('day'))||0};}catch(_){return null;}}
+    // Date JavaScript à midi UTC d'un jour donné (Date.UTC lirait les années 0 à 99 comme 1900 à 1999)
+    function utcNoon(g){const d=new Date(0);d.setUTCFullYear(g.year,g.month-1,g.day);d.setUTCHours(12);return d;}
+    function koreanLunarParts(jdn,cal='dangi'){try{const g=jdnToGregorian(jdn),parts=new Intl.DateTimeFormat(`en-u-ca-${cal}`,{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(utcNoon(g));const get=t=>parts.find(p=>p.type===t)?.value||'';const monthText=get('month');return {year:Number(get('relatedYear'))||0,month:parseInt(monthText,10)||0,leap:/bis|leap/i.test(monthText),day:Number(get('day'))||0};}catch(_){return null;}}
     function koreanLunarToJdn(year,month,day,leap=false,cal='dangi'){const from=gregorianToJdn(year,1,1),to=gregorianToJdn(year+1,4,1);for(let j=from;j<to;j++){const k=koreanLunarParts(j,cal);if(k&&k.year===year&&k.month===month&&k.day===day&&k.leap===!!leap)return j;}return null;}
     function formatKoreanLunar(jdn){const k=koreanLunarParts(jdn);return k&&k.year?`${k.day} du ${k.month}${k.month===1?'er':'e'} mois${k.leap?' intercalaire':''} de l’année lunaire ${k.year} (Dangi ${k.year+2333})`:'Non disponible dans ce navigateur';}
     // Chinois : même calcul luni-solaire (calendrier « chinese » du navigateur), avec le nom de l'année (tronc céleste et animal)
     const zodiacAnimals=['Rat','Bœuf','Tigre','Lapin','Dragon','Serpent','Cheval','Chèvre','Singe','Coq','Chien','Cochon'];
     const zodiacElements=['Bois','Feu','Terre','Métal','Eau'];
     function sexagenaryName(lunarYear){const k=((lunarYear-4)%60+60)%60;return `${zodiacElements[Math.floor((k%10)/2)]}-${zodiacAnimals[k%12]}`;}
-    function chineseYearHan(jdn){try{const g=jdnToGregorian(jdn);return new Intl.DateTimeFormat('zh-u-ca-chinese',{year:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12))).find(p=>p.type==='yearName')?.value||'';}catch(_){return '';}}
+    function chineseYearHan(jdn){try{const g=jdnToGregorian(jdn);return new Intl.DateTimeFormat('zh-u-ca-chinese',{year:'numeric',timeZone:'UTC'}).formatToParts(utcNoon(g)).find(p=>p.type==='yearName')?.value||'';}catch(_){return '';}}
     function formatChineseLunar(jdn){const k=koreanLunarParts(jdn,'chinese');if(!k||!k.year)return 'Non disponible dans ce navigateur';const han=chineseYearHan(jdn);return `${k.day} du ${k.month}${k.month===1?'er':'e'} mois${k.leap?' intercalaire':''} de l’année ${k.year} ${han?`(${han}, `:'('}${sexagenaryName(k.year)})`;}
     // Bengali (calendrier révisé du Bangladesh, 2019) : l'an commence le 14 avril ; 6 mois de 31 jours, puis 30 ; Falgun 29 jours (30 les années bissextiles)
     const bengaliMonths=['Boishakh','Joishtho','Asharh','Srabon','Bhadro','Ashwin','Kartik','Ogrohayon','Poush','Magh','Falgun','Choitro'];
@@ -8869,17 +8872,17 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function jdnToCoptic(jdn){const year=Math.floor((4*(jdn-COPTIC_EPOCH)+1463)/1461),month=Math.floor((jdn-copticToJdn(year,1,1))/30)+1;return {year,month,day:jdn-copticToJdn(year,month,1)+1};}
     // Hégirien Umm al-Qura (calendrier officiel de l'Arabie saoudite, d'après le navigateur)
     const hijriMonths=['Mouharram','Safar','Rabia al-awal','Rabia ath-thani','Joumada al-oula','Joumada ath-thania','Rajab','Chaabane','Ramadan','Chawwal','Dhou al-qi’da','Dhou al-hijja'];
-    function formatUmmAlQura(jdn){try{const g=jdnToGregorian(jdn),p=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12))),get=t=>Number(p.find(x=>x.type===t)?.value);return get('year')>0?`${get('day')} ${hijriMonths[get('month')-1]} ${get('year')}`:'—';}catch(_){return 'Non disponible dans ce navigateur';}}
+    function formatUmmAlQura(jdn){try{const g=jdnToGregorian(jdn),p=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(utcNoon(g)),get=t=>Number(p.find(x=>x.type===t)?.value);return get('year')>0?`${get('day')} ${hijriMonths[get('month')-1]} ${get('year')}`:'—';}catch(_){return 'Non disponible dans ce navigateur';}}
     // Byzantin (Anno Mundi, création du monde en 5509 av. J.-C.) : jours et mois juliens, l'année commence le 1er septembre (Russie jusqu'en 1700)
     function byzantineYear(j){return j.month>=9?j.year+5509:j.year+5508;}
     function byzantineToJdn(year,month,day){return julianToJdn(month>=9?year-5509:year-5508,month,day);}
     const frenchMonthNames=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
     // Angleterre, ancien style : julien jusqu'au 2 septembre 1752, l'année commençait le 25 mars (d'où « 10 février 1712/13 »)
     const BRITISH_REFORM=gregorianToJdn(1752,9,14);
-    function englishOldStyle(jdn){if(jdn>=BRITISH_REFORM)return null;const j=jdnToJulian(jdn),before=j.month<3||(j.month===3&&j.day<25);return {...j,text:`${j.day===1?"1er":j.day} ${frenchMonthNames[j.month-1]} ${before?`${j.year-1}/${String(j.year).slice(-2)}`:j.year}`};}
+    function englishOldStyle(jdn){if(jdn>=BRITISH_REFORM)return null;const j=jdnToJulian(jdn),before=j.year!==1752&&(j.month<3||(j.month===3&&j.day<25)); /* 1752 commence déjà au 1er janvier */return {...j,text:`${j.day===1?"1er":j.day} ${frenchMonthNames[j.month-1]} ${before?`${j.year-1}/${String(j.year).slice(-2)}`:j.year}`};}
     // France, style de Pâques : jusqu'à l'édit de Roussillon (appliqué en 1567), l'année commençait à Pâques
     function julianEaster(y){const a=y%4,b=y%7,c=y%19,d=(19*c+15)%30,e=(2*a+4*b-d+34)%7;return {month:Math.floor((d+e+114)/31),day:(d+e+114)%31+1};}
-    function easterStyle(jdn){if(jdn>=gregorianToJdn(1567,1,1))return null;const j=jdnToJulian(jdn),e=julianEaster(j.year),year=jdn<julianToJdn(j.year,e.month,e.day)?j.year-1:j.year;return {...j,year,text:`${j.day===1?"1er":j.day} ${frenchMonthNames[j.month-1]} ${year}${year!==j.year?` (notre ${j.year})`:''}`,easter:`${e.day} ${frenchMonthNames[e.month-1]}`};}
+    function easterStyle(jdn){if(jdn>=julianToJdn(1567,1,1))return null;const j=jdnToJulian(jdn),e=julianEaster(j.year),year=jdn<julianToJdn(j.year,e.month,e.day)?j.year-1:j.year;return {...j,year,text:`${j.day===1?"1er":j.day} ${frenchMonthNames[j.month-1]} ${year}${year!==j.year?` (notre ${j.year})`:''}`,easter:`${e.day} ${frenchMonthNames[e.month-1]}`};}
     // Calendrier romain : calendes, nones et ides (actes en latin) ; julien avant la réforme de 1582
     const romanMonths=['Ian.','Feb.','Mart.','Apr.','Mai.','Iun.','Iul.','Aug.','Sept.','Oct.','Nov.','Dec.'];
     function toRoman(n){return [['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]].reduce((out,[r,v])=>{while(n>=v){out+=r;n-=v;}return out;},'');}
@@ -8903,7 +8906,24 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function mayaLongCount(jdn){let d=jdn-584283;if(d<0)return '';const out=[];for(const n of [144000,7200,360,20,1]){out.push(Math.floor(d/n));d%=n;}return out.join('.');}
     function rangeText(startJdn,len){return `du ${shortGregorian(jdnToGregorian(startJdn))} au ${shortGregorian(jdnToGregorian(startJdn+len-1))}`;}
     function shortGregorian(d,withYear=true){return `${d.day}${d.day===1?'er':''} ${shortMonthsFr[d.month-1]}${withYear?' '+d.year:''}`;}
+    // Une date impossible (31 avril, 29 février d'une année ordinaire, Heisei 40…) ne doit pas glisser en silence au jour d'après
+    function calendarRoundTrip(type,jdn,year,month,day,form){
+        if(!jdn)return null;
+        const same=d=>d&&d.year===year&&d.month===month&&d.day===day;
+        const g=jdnToGregorian(jdn),j=jdnToJulian(jdn);
+        const back={gregorian:()=>same(g),julian:()=>same(j),islamic:()=>same(jdnToIslamic(jdn)),republican:()=>same(jdnToRepublican(jdn)),hebrew:()=>same(jdnToHebrew(jdn)),
+            ethiopic:()=>same(jdnToEthiopic(jdn)),indian:()=>same(jdnToIndian(jdn)),coptic:()=>same(jdnToCoptic(jdn)),bengali:()=>same(jdnToBengali(jdn)),persian:()=>same(jdnToPersian(jdn)),
+            juche:()=>same({year:g.year-1911,month:g.month,day:g.day}),minguo:()=>same({year:g.year-1911,month:g.month,day:g.day}),korean:()=>same({year:g.year+2333,month:g.month,day:g.day}),
+            thai:()=>same({year:thaiYear(g),month:g.month,day:g.day}),byzantine:()=>same({year:byzantineYear(j),month:j.month,day:j.day}),
+            japanese:()=>{const jp=jdnToJapanese(jdn);return !!jp&&jp.era[0]===(form.elements.era?.value||'')&&same({year:jp.year,month:jp.month,day:jp.day});}}[type];
+        return !back||back()?jdn:null;
+    }
     function readCalendarJdn(form){
+        const jdn=readCalendarJdnRaw(form),type=form.elements.calendar_type.value;
+        if(!jdn||['korean_lunar','chinese'].includes(type))return jdn;
+        return calendarRoundTrip(type,jdn,Number(form.elements.year.value),Number(form.elements.month.value),Number(form.elements.day.value),form);
+    }
+    function readCalendarJdnRaw(form){
         const type=form.elements.calendar_type.value;
         const year=Number(form.elements.year.value),month=Number(form.elements.month.value),day=Number(form.elements.day.value);
         if(!year||!month||!day)return null;
@@ -9136,7 +9156,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         bindPurchasingPower();
         (window.LCNDA_EXT?.afterCalendar||[]).forEach(fn=>{try{fn();}catch(error){console.error(error);}});
         $('#default-calendar-select')?.addEventListener('change',event=>{const current=readDesignSettings();current.defaultCalendar=event.target.value;localStorage.setItem('genealogie-design',JSON.stringify(current));toast(`Calendrier par défaut : ${calendarLabel(event.target.value)}.`);});
-        $('#calendar-converter-form')?.addEventListener('submit',event=>{event.preventDefault();$('#calendar-converter-result').innerHTML=calendarConversionCards(readCalendarJdn(event.currentTarget));});
+        $('#calendar-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const f=event.currentTarget,jdn=readCalendarJdn(f),filled=f.elements.year.value&&f.elements.month.value&&f.elements.day.value;$('#calendar-converter-result').innerHTML=!jdn&&filled?'<p class="h-offsite-sentence is-warn">Cette date n’existe pas dans ce calendrier (jour trop grand pour ce mois, année hors de l’ère choisie…).</p>':calendarConversionCards(jdn);});
         const converterForm=$('#calendar-converter-form');
         if(converterForm){
             // Mois : liste des noms pour les calendriers républicain et juif (avec la période grégorienne pour le républicain)
@@ -11946,7 +11966,9 @@ ${backupSectionHtml()}
         const customChecks=(sheet?.checks||[]).filter(check=>String(check.field).startsWith('custom_'));
         $('#online-sheet-checks-list').innerHTML=onlineSheetFields.map(([field,label])=>onlineSheetCheckRowHtml(field,label,checksByField.get(field))).join('')+customChecks.map(check=>onlineSheetCheckRowHtml(check.field,check.field_label||'',check,true)).join('');
         form.elements.screenshot_media_id.value=sheet?.screenshot_media_id||'';
-        renderOnlineSheetShot(sheet?.screenshot_media_id?{id:sheet.screenshot_media_id,filename:sheet.screenshot_filename,thumbnail:sheet.screenshot_thumbnail}:null);
+        form.dataset.openSeq=String((Number(form.dataset.openSeq)||0)+1);
+        if(sheet?.screenshot_media_id&&!sheet.screenshot_filename)form.elements.screenshot_media_id.value=''; // média supprimé depuis
+        renderOnlineSheetShot(sheet?.screenshot_media_id&&sheet.screenshot_filename?{id:sheet.screenshot_media_id,filename:sheet.screenshot_filename,thumbnail:sheet.screenshot_thumbnail}:null);
         renderOnlineSheetSearch(personId);
         $('#online-sheet-dialog-title').textContent=sheet?'Modifier une fiche en ligne':'Ajouter une fiche en ligne';
         $('#online-sheet-submit').textContent=sheet?'Enregistrer':'Ajouter';
@@ -11969,7 +11991,7 @@ ${backupSectionHtml()}
         box.querySelector('[data-online-shot-remove]')?.addEventListener('click',()=>{$('#online-sheet-form').elements.screenshot_media_id.value='';renderOnlineSheetShot(null);});
     }
     async function uploadOnlineSheetShot(file){
-        const form=$('#online-sheet-form'),personId=form.elements.person_id.value;
+        const form=$('#online-sheet-form'),personId=form.elements.person_id.value,openSeq=form.dataset.openSeq;
         if(!file||!/^image\//.test(file.type)){toast('Choisis une image (capture d’écran).','error');return;}
         const box=$('#online-sheet-shot');if(box)box.innerHTML='<p class="muted">Envoi de la capture…</p>';
         try{
@@ -11979,6 +12001,7 @@ ${backupSectionHtml()}
             const response=await fetch('upload.php',{method:'POST',body:fd});const result=await response.json();
             if(!response.ok||result.error)throw new Error(result.error||'Envoi impossible');
             const id=Number(result.media?.[0]||0);if(!id)throw new Error('Envoi impossible');
+            if(form.dataset.openSeq!==openSeq||!$('#online-sheet-dialog')?.open){toast('Capture rangée dans les médias de la fiche (la fenêtre avait été fermée).');return;} // fenêtre fermée ou rouverte pour une autre fiche
             form.elements.screenshot_media_id.value=id;
             renderOnlineSheetShot({id,src:URL.createObjectURL(file)}); // aperçu tiré du fichier lui-même
         }catch(error){toast(error.message,'error');renderOnlineSheetShot(null);}
@@ -12001,7 +12024,7 @@ ${backupSectionHtml()}
             const form=$('#online-sheet-form'),site=sites.find(item=>item[0]===link.dataset.wsSite);
             if(site&&!form.elements.site.value.trim())form.elements.site.value=site[1]; // le site cherché devient celui de la fiche
             if(site&&!form.elements.label.value.trim())form.elements.label.value=`${site[1]} — ${personName(detail.person)}`;
-            if(box.querySelector('[data-online-side]')?.checked){event.preventDefault();window.open(link.href,'lcnda-side','popup,width=1100,height=900');}
+            if(box.querySelector('[data-online-side]')?.checked){event.preventDefault();window.open(link.href,'lcnda-side','popup,width=1100,height=900,noopener');}
         };
     }
     function openNoteDialog(personId,note=null){const form=$('#note-form');form.reset();form.elements.person_id.value=personId;form.elements.id.value=note?.id||'';form.elements.title.value=note?.title||'';form.elements.body.value=note?.body||'';$('#note-dialog-title').textContent=note?'Modifier une note':'Ajouter une note';$('#note-submit').textContent=note?'Enregistrer':'Ajouter';renderLabelPicker('#note-label-picker','note',note?.id||0,note?.labels||[]);$('#note-dialog').showModal();}
