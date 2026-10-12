@@ -1089,7 +1089,7 @@ header('Cache-Control: no-store, private');
 <script src="assets/js/heritage.js?v=9" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=7" defer></script>
-<script src="assets/js/heritage-more.js?v=18" defer></script>
+<script src="assets/js/heritage-more.js?v=19" defer></script>
 <script src="assets/js/heritage-voters.js?v=2" defer></script>
 <script src="assets/js/heritage-widgets.js?v=5" defer></script>
 <script src="assets/js/heritage-studio.js?v=6" defer></script>

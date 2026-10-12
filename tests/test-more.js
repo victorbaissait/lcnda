@@ -58,6 +58,20 @@ $out['vault_header'] = vault_read_header(DATA_DIR . '/c.coffre')['owner'];
 vault_decrypt_file(DATA_DIR . '/c.coffre', DATA_DIR . '/back.bin', 'motdepasse123');
 $out['vault_roundtrip'] = hash_file('sha256', $plain) === hash_file('sha256', DATA_DIR . '/back.bin');
 try { vault_decrypt_file(DATA_DIR . '/c.coffre', DATA_DIR . '/bad.bin', 'mauvais!!'); $out['vault_bad'] = 'accepté'; } catch (Throwable $e) { $out['vault_bad'] = file_exists(DATA_DIR . '/bad.bin') ? 'fichier écrit' : 'refusé'; }
+$out['vault_v2'] = [file_get_contents(DATA_DIR . '/c.coffre', false, null, 0, 15) === VAULT_MAGIC2, vault_read_header(DATA_DIR . '/c.coffre')['kdf_params']['kdf'] ?? ''];
+// une ancienne copie (version 1, PBKDF2 à 200 000 tours) s'ouvre toujours
+$salt = random_bytes(16); $iv = random_bytes(16); [$k1, $m1] = vault_keys('ancienmotdepasse', $salt);
+$head = VAULT_MAGIC . json_encode(['owner' => 'Ancien', 'salt' => base64_encode($salt), 'iv' => base64_encode($iv)]) . "\n";
+$body = openssl_encrypt('vieille base', 'aes-256-ctr', $k1, OPENSSL_RAW_DATA, $iv);
+file_put_contents(DATA_DIR . '/v1.coffre', $head . $body . hash_hmac('sha256', $head . $body, $m1, true));
+vault_decrypt_file(DATA_DIR . '/v1.coffre', DATA_DIR . '/v1.bin', 'ancienmotdepasse');
+$out['vault_v1'] = file_get_contents(DATA_DIR . '/v1.bin');
+// en-tête trafiqué (réglages affaiblis) ou fichier coupé : refusés
+$raw = file_get_contents(DATA_DIR . '/c.coffre');
+file_put_contents(DATA_DIR . '/weak.coffre', preg_replace('/"kdf_params":\{[^}]*\}/', '"kdf_params":{"kdf":"pbkdf2-sha256","iter":1}', $raw, 1));
+try { vault_decrypt_file(DATA_DIR . '/weak.coffre', DATA_DIR . '/weak.bin', 'motdepasse123'); $out['vault_weak'] = 'accepté'; } catch (Throwable $e) { $out['vault_weak'] = 'refusé'; }
+file_put_contents(DATA_DIR . '/cut.coffre', substr($raw, 0, -1000));
+try { vault_decrypt_file(DATA_DIR . '/cut.coffre', DATA_DIR . '/cut.bin', 'motdepasse123'); $out['vault_cut'] = 'accepté'; } catch (Throwable $e) { $out['vault_cut'] = 'refusé'; }
 
 // Âges et écarts
 $ages = age_checks($pdo);
@@ -152,13 +166,14 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°20)', () => assert.equal(out.version, 20)],
+  ['structure à jour (n°21)', () => assert.equal(out.version, 21)],
   ['actes de moins de 100 ans, réservés jusqu’à 75 ans', () => { assert.deepEqual(out.acts.map(a => a[0]), ['naissance']); assert.equal(out.acts[0][1], false); assert.equal(out.acts[0][2], '2065-04-04'); }],
   ['lettre de demande à la mairie', () => assert.deepEqual(out.letter, [true, true, true])],
   ['courrier créé, relié à l’acte, rappel à l’ouverture', () => { assert.deepEqual(out.request, [true, true, 1]); assert.equal(out.acts_after, true); }],
   ['choléra de 1832 : décès de la famille retrouvé', () => assert.deepEqual(out.cholera, [1])],
   ['coffre : en-tête lisible, données chiffrées puis rendues à l’identique', () => { assert.equal(out.vault_header, 'Victor'); assert.equal(out.vault_roundtrip, true); }],
   ['coffre : mauvais mot de passe refusé sans rien écrire', () => assert.equal(out.vault_bad, 'refusé')],
+  ['coffre : nouvelles copies en version 2 (Argon2id), anciennes copies toujours lisibles, en-tête affaibli ou fichier coupé refusés', () => { assert.deepEqual(out.vault_v2, [true, 'argon2id']); assert.equal(out.vault_v1, 'vieille base'); assert.equal(out.vault_weak, 'refusé'); assert.equal(out.vault_cut, 'refusé'); }],
   ['âges : naissance après le décès du père, mère trop âgée, écart trop court', () => { for (const t of ['Né(e) N ans après le décès du père', 'Mère de N ans à la naissance', 'Seulement N mois après son aîné(e)']) assert.ok(out.ages.includes(t), t + ' absent : ' + out.ages.join(' / ')); }],
   ['variantes de métier regroupées (4 écritures)', () => assert.deepEqual(out.variants, ['laboureur', 4])],
   ['harmonisation appliquée', () => { assert.equal(out.apply, 3); assert.deepEqual(out.occupations, ['laboureur']); }],

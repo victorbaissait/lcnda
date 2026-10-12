@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 20;
+const SCHEMA_VERSION = 21;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -41,6 +41,7 @@ function migration_steps(): array
         18 => 'schema_v18',
         19 => 'schema_v19',
         20 => 'schema_v20',
+        21 => 'schema_v21',
     ];
 }
 
@@ -1545,4 +1546,11 @@ function schema_v20(PDO $pdo): void
     if (!in_array('date_uncertain', $cols, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN date_uncertain INTEGER NOT NULL DEFAULT 0'); }
     $cols = array_column($pdo->query('PRAGMA table_info(person_online_sheets)')->fetchAll(), 'name');
     if (!in_array('screenshot_media_id', $cols, true)) { $pdo->exec('ALTER TABLE person_online_sheets ADD COLUMN screenshot_media_id INTEGER'); }
+}
+
+/** n°21 : coffre des cousins rangé par base (identifiant au hasard dans l'en-tête des copies), plus par nom. */
+function schema_v21(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(cousin_vault)')->fetchAll(), 'name');
+    if ($cols && !in_array('base_uid', $cols, true)) { $pdo->exec("ALTER TABLE cousin_vault ADD COLUMN base_uid TEXT NOT NULL DEFAULT ''"); }
 }

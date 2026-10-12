@@ -225,11 +225,32 @@ function historical_context(PDO $pdo): array
 
 /* ─── 🔐 Copie chiffrée confiée à un cousin ──────────────────────────── */
 
-const VAULT_MAGIC = "LCNDA-COFFRE-1\n";
+const VAULT_MAGIC = "LCNDA-COFFRE-1\n";   // anciennes copies : PBKDF2-SHA256 à 200 000 tours (encore lues)
+const VAULT_MAGIC2 = "LCNDA-COFFRE-2\n";  // depuis 0.4.3 : Argon2id (ou PBKDF2 à 600 000 tours sans sodium), paramètres dans l'en-tête signé
+const VAULT_PBKDF2_V2 = 600000;
 
-function vault_keys(string $password, string $salt): array
+/** Réglages de dérivation pour une nouvelle copie : Argon2id si PHP a sodium (Mac, Linux), sinon PBKDF2 renforcé (Windows). */
+function vault_new_kdf(): array
 {
-    $k = hash_pbkdf2('sha256', $password, $salt, 200000, 64, true);
+    if (function_exists('sodium_crypto_pwhash') && defined('SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13')) {
+        return ['kdf' => 'argon2id', 'ops' => SODIUM_CRYPTO_PWHASH_OPSLIMIT_MODERATE, 'mem' => SODIUM_CRYPTO_PWHASH_MEMLIMIT_MODERATE];
+    }
+    return ['kdf' => 'pbkdf2-sha256', 'iter' => VAULT_PBKDF2_V2];
+}
+
+/** Clés de chiffrement et de signature. Seuls des réglages connus sont acceptés (une copie trafiquée ne peut ni affaiblir ni bloquer le calcul). */
+function vault_keys(string $password, string $salt, array $kdf = ['kdf' => 'pbkdf2-sha256', 'iter' => 200000]): array
+{
+    if (($kdf['kdf'] ?? '') === 'argon2id') {
+        if (!function_exists('sodium_crypto_pwhash')) { throw new RuntimeException('Cette copie demande Argon2id, que le PHP de cet ordinateur ne connaît pas : ouvre-la sur un Mac ou sous Linux.'); }
+        $ops = (int) ($kdf['ops'] ?? 0); $mem = (int) ($kdf['mem'] ?? 0);
+        if ($ops < 2 || $ops > 10 || $mem < 64 * 1024 * 1024 || $mem > 1024 * 1024 * 1024 || strlen($salt) !== SODIUM_CRYPTO_PWHASH_SALTBYTES) { throw new RuntimeException('Copie chiffrée abîmée.'); }
+        $k = sodium_crypto_pwhash(64, $password, $salt, $ops, $mem, SODIUM_CRYPTO_PWHASH_ALG_ARGON2ID13);
+    } else {
+        $iter = (int) ($kdf['iter'] ?? 0);
+        if (!in_array($iter, [200000, VAULT_PBKDF2_V2], true)) { throw new RuntimeException('Copie chiffrée abîmée.'); }
+        $k = hash_pbkdf2('sha256', $password, $salt, $iter, 64, true);
+    }
     return [substr($k, 0, 32), substr($k, 32, 32)];
 }
 
@@ -242,67 +263,116 @@ function vault_ctr(string $iv, int $blocks): string
     return pack('C*', ...$bytes);
 }
 
+/** Écrit tout ou s'arrête (disque plein…) : une copie à moitié écrite ne doit jamais passer pour bonne. */
+function vault_write($fh, string $data): void
+{
+    $len = strlen($data); $done = 0;
+    while ($done < $len) {
+        $w = fwrite($fh, $done ? substr($data, $done) : $data);
+        if ($w === false || $w === 0) { throw new RuntimeException('Écriture impossible (disque plein ?) : la copie n’a pas été faite.'); }
+        $done += $w;
+    }
+}
+
 /** Chiffre un fichier par morceaux (AES-256-CTR + HMAC-SHA256) : ne charge jamais toute la base en mémoire. */
 function vault_encrypt_file(string $src, string $dest, string $password, array $meta): void
 {
-    $salt = random_bytes(16); $iv = random_bytes(16);
-    [$enc, $mac] = vault_keys($password, $salt);
-    $header = json_encode($meta + ['salt' => base64_encode($salt), 'iv' => base64_encode($iv), 'kdf' => 'pbkdf2-sha256-200000', 'cipher' => 'aes-256-ctr+hmac-sha256'], JSON_UNESCAPED_UNICODE);
-    $in = fopen($src, 'rb'); $out = fopen($dest, 'wb');
-    $h = hash_init('sha256', HASH_HMAC, $mac);
-    $head = VAULT_MAGIC . $header . "\n";
-    fwrite($out, $head); hash_update($h, $head);
-    $chunk = 1 << 20; $n = 0;
-    while (!feof($in)) {
-        $plain = fread($in, $chunk);
-        if ($plain === '' || $plain === false) { break; }
-        $c = openssl_encrypt($plain, 'aes-256-ctr', $enc, OPENSSL_RAW_DATA, vault_ctr($iv, $n * ($chunk >> 4)));
-        fwrite($out, $c); hash_update($h, $c); $n++;
-    }
-    fwrite($out, hash_final($h, true));
-    fclose($in); fclose($out);
+    $kdf = vault_new_kdf();
+    $salt = random_bytes($kdf['kdf'] === 'argon2id' ? SODIUM_CRYPTO_PWHASH_SALTBYTES : 16); $iv = random_bytes(16);
+    [$enc, $mac] = vault_keys($password, $salt, $kdf);
+    $header = json_encode($meta + ['salt' => base64_encode($salt), 'iv' => base64_encode($iv), 'kdf_params' => $kdf, 'cipher' => 'aes-256-ctr+hmac-sha256'], JSON_UNESCAPED_UNICODE);
+    $in = @fopen($src, 'rb'); $out = @fopen($dest, 'wb');
+    if (!$in || !$out) { throw new RuntimeException('Fichier temporaire impossible à créer.'); }
+    try {
+        $h = hash_init('sha256', HASH_HMAC, $mac);
+        $head = VAULT_MAGIC2 . $header . "\n";
+        vault_write($out, $head); hash_update($h, $head);
+        $chunk = 1 << 20; $n = 0;
+        while (!feof($in)) {
+            $plain = fread($in, $chunk);
+            if ($plain === false) { throw new RuntimeException('Lecture de la base impossible.'); }
+            if ($plain === '') { break; }
+            $c = openssl_encrypt($plain, 'aes-256-ctr', $enc, OPENSSL_RAW_DATA, vault_ctr($iv, $n * ($chunk >> 4)));
+            if ($c === false) { throw new RuntimeException('Chiffrement impossible.'); }
+            vault_write($out, $c); hash_update($h, $c); $n++;
+        }
+        vault_write($out, hash_final($h, true));
+        if (!fflush($out)) { throw new RuntimeException('Écriture impossible (disque plein ?) : la copie n’a pas été faite.'); }
+    } finally { fclose($in); fclose($out); }
 }
 
 function vault_read_header(string $path): array
 {
-    $fh = fopen($path, 'rb');
+    $fh = @fopen($path, 'rb');
+    if (!$fh) { throw new RuntimeException('Fichier illisible.'); }
     $magic = fread($fh, strlen(VAULT_MAGIC));
-    if ($magic !== VAULT_MAGIC) { fclose($fh); throw new RuntimeException('Ce fichier n’est pas une copie chiffrée LCNDA.'); }
+    if ($magic !== VAULT_MAGIC && $magic !== VAULT_MAGIC2) { fclose($fh); throw new RuntimeException('Ce fichier n’est pas une copie chiffrée LCNDA.'); }
     $header = json_decode((string) fgets($fh, 65536), true);
     fclose($fh);
     if (!is_array($header)) { throw new RuntimeException('Copie chiffrée abîmée.'); }
+    $header['_version'] = $magic === VAULT_MAGIC2 ? 2 : 1;
     return $header;
+}
+
+/** Vérifie le sceau (HMAC) de tout le fichier ; rend [clé de chiffrement, iv, début du corps, taille du corps, en-tête]. */
+function vault_verify(string $src, string $password): array
+{
+    $header = vault_read_header($src);
+    if (!is_string($header['salt'] ?? null) || !is_string($header['iv'] ?? null)) { throw new RuntimeException('Copie chiffrée abîmée.'); }
+    $kdf = $header['_version'] === 2 ? (is_array($header['kdf_params'] ?? null) ? $header['kdf_params'] : []) : ['kdf' => 'pbkdf2-sha256', 'iter' => 200000];
+    [$enc, $mac] = vault_keys($password, (string) base64_decode($header['salt'], true), $kdf);
+    $iv = (string) base64_decode($header['iv'], true);
+    if (strlen($iv) !== 16) { throw new RuntimeException('Copie chiffrée abîmée.'); }
+    $size = filesize($src);
+    $fh = fopen($src, 'rb');
+    $magic = fread($fh, strlen(VAULT_MAGIC)); $line = fgets($fh, 65536);
+    $headLen = strlen($magic) + strlen((string) $line);
+    $bodyLen = $size - $headLen - 32;
+    if ($bodyLen < 0) { fclose($fh); throw new RuntimeException('Copie chiffrée incomplète.'); }
+    $h = hash_init('sha256', HASH_HMAC, $mac);
+    hash_update($h, $magic . $line);
+    $left = $bodyLen;
+    while ($left > 0) { $c = fread($fh, min(1 << 20, $left)); if ($c === '' || $c === false) { fclose($fh); throw new RuntimeException('Copie chiffrée incomplète.'); } hash_update($h, $c); $left -= strlen($c); }
+    $tag = fread($fh, 32);
+    fclose($fh);
+    if (!hash_equals(hash_final($h, true), (string) $tag)) { throw new RuntimeException('Mot de passe incorrect, ou fichier abîmé.'); }
+    return [$enc, $iv, $headLen, $bodyLen, $header];
 }
 
 function vault_decrypt_file(string $src, string $dest, string $password): array
 {
-    $header = vault_read_header($src);
-    if (!is_string($header['salt'] ?? null) || !is_string($header['iv'] ?? null)) { throw new RuntimeException('Copie chiffrée abîmée.'); }
-    [$enc, $mac] = vault_keys($password, base64_decode($header['salt']));
-    $iv = base64_decode($header['iv']);
-    $size = filesize($src);
-    $fh = fopen($src, 'rb');
-    fread($fh, strlen(VAULT_MAGIC)); $line = fgets($fh, 65536);
-    $headLen = strlen(VAULT_MAGIC) + strlen((string) $line);
-    $bodyLen = $size - $headLen - 32;
-    if ($bodyLen < 0) { fclose($fh); throw new RuntimeException('Copie chiffrée incomplète.'); }
     // 1. Vérifier le sceau avant d'écrire quoi que ce soit (mauvais mot de passe ou fichier abîmé)
-    $h = hash_init('sha256', HASH_HMAC, $mac);
-    hash_update($h, VAULT_MAGIC . $line);
-    $left = $bodyLen;
-    while ($left > 0) { $c = fread($fh, min(1 << 20, $left)); hash_update($h, $c); $left -= strlen($c); }
-    $tag = fread($fh, 32);
-    if (!hash_equals(hash_final($h, true), (string) $tag)) { fclose($fh); throw new RuntimeException('Mot de passe incorrect, ou fichier abîmé.'); }
+    [$enc, $iv, $headLen, $bodyLen, $header] = vault_verify($src, $password);
     // 2. Déchiffrer
-    fseek($fh, $headLen);
-    $out = fopen($dest, 'wb');
-    $chunk = 1 << 20; $n = 0; $left = $bodyLen;
-    while ($left > 0) {
-        $c = fread($fh, min($chunk, $left)); $left -= strlen($c);
-        fwrite($out, openssl_decrypt($c, 'aes-256-ctr', $enc, OPENSSL_RAW_DATA, vault_ctr($iv, $n * ($chunk >> 4)))); $n++;
-    }
-    fclose($fh); fclose($out);
+    $fh = fopen($src, 'rb'); fseek($fh, $headLen);
+    $out = @fopen($dest, 'wb');
+    if (!$out) { fclose($fh); throw new RuntimeException('Fichier de sortie impossible à créer.'); }
+    try {
+        $chunk = 1 << 20; $n = 0; $left = $bodyLen;
+        while ($left > 0) {
+            $c = fread($fh, min($chunk, $left)); $left -= strlen($c);
+            vault_write($out, (string) openssl_decrypt($c, 'aes-256-ctr', $enc, OPENSSL_RAW_DATA, vault_ctr($iv, $n * ($chunk >> 4)))); $n++;
+        }
+    } finally { fclose($fh); fclose($out); }
+    unset($header['_version']);
     return $header;
+}
+
+/** Identifiant au hasard de cette base (dans l'en-tête des copies) : le coffre d'un cousin range les copies par base, pas par nom. */
+function vault_base_uid(PDO $pdo): string
+{
+    $uid = (string) (ht_setting($pdo, 'lcnda-vault-base-uid', ['uid' => ''])['uid'] ?? '');
+    if (!preg_match('/^[a-f0-9]{32}$/', $uid)) { $uid = bin2hex(random_bytes(16)); ht_save_setting($pdo, 'lcnda-vault-base-uid', ['uid' => $uid]); }
+    return $uid;
+}
+
+/** Dossier de travail privé (dans les données de l'app, pas dans le dossier temporaire partagé du système). */
+function vault_tmp_dir(): string
+{
+    $d = DATA_DIR . '/backups/.coffre-tmp';
+    if (!is_dir($d)) { @mkdir($d, 0700, true); }
+    @chmod($d, 0700);
+    return $d;
 }
 
 function vault_dir(): string
@@ -316,20 +386,28 @@ function vault_dir(): string
 function vault_export(PDO $pdo, array $data): never
 {
     @set_time_limit(0);
+    ignore_user_abort(true); // téléchargement annulé : on efface quand même les fichiers de travail
     $password = (string) ($data['password'] ?? '');
-    if (mb_strlen($password) < 8) { json_response(['error' => 'Choisis un mot de passe d’au moins 8 caractères (à garder précieusement : sans lui, la copie est illisible, même pour toi).'], 422); }
+    if (mb_strlen($password) < 12) { json_response(['error' => 'Choisis un mot de passe d’au moins 12 caractères, par exemple une phrase de quelques mots (à garder précieusement : sans lui, la copie est illisible, même pour toi).'], 422); }
     $owner = safe_text($data['owner'] ?? '') ?: 'Généalogie';
     $cousin = safe_text($data['cousin'] ?? '');
-    $tmp = tempnam(sys_get_temp_dir(), 'lcnda');
-    @unlink($tmp);
-    $pdo->exec('PRAGMA wal_checkpoint(FULL)');
-    $pdo->exec('VACUUM main INTO ' . $pdo->quote($tmp));
-    $out = $tmp . '.coffre';
-    vault_encrypt_file($tmp, $out, $password, ['owner' => $owner, 'created_at' => date('c'), 'persons' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn(), 'app' => 'LCNDA']);
-    @unlink($tmp);
-    $pdo->prepare('INSERT INTO cousin_vault_sent(cousin, size) VALUES(?,?)')->execute([$cousin, (int) filesize($out)]);
+    $base = vault_tmp_dir() . '/' . bin2hex(random_bytes(12));
+    $tmp = $base . '.db'; $out = $base . '.coffre';
+    try {
+        $pdo->exec('PRAGMA wal_checkpoint(FULL)');
+        $old = umask(0077);
+        try { $pdo->exec('VACUUM main INTO ' . $pdo->quote($tmp)); } finally { umask($old); }
+        @chmod($tmp, 0600);
+        vault_encrypt_file($tmp, $out, $password, ['owner' => $owner, 'created_at' => date('c'), 'base_uid' => vault_base_uid($pdo), 'app' => 'LCNDA']);
+        @unlink($tmp);
+        vault_verify($out, $password); // relue avant d'être donnée : jamais une copie abîmée
+        $pdo->prepare('INSERT INTO cousin_vault_sent(cousin, size) VALUES(?,?)')->execute([$cousin, (int) filesize($out)]);
+    } catch (Throwable $e) {
+        @unlink($tmp); @unlink($out);
+        json_response(['error' => $e->getMessage()], 500);
+    }
     header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="copie-chiffree-' . preg_replace('/[^a-z0-9]+/i', '-', ascii_fold($owner)) . '-' . date('Ymd') . '.lcnda-coffre"');
+    header('Content-Disposition: attachment; filename="copie-chiffree-' . date('Ymd') . '.lcnda-coffre"'); // pas de nom de famille dans le nom du fichier envoyé
     header('Content-Length: ' . filesize($out));
     readfile($out);
     @unlink($out);
@@ -341,12 +419,17 @@ function vault_store(PDO $pdo, ?array $file): never
 {
     if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { json_response(['error' => 'Fichier non reçu.'], 422); }
     try { $h = vault_read_header((string) $file['tmp_name']); } catch (Throwable $e) { json_response(['error' => $e->getMessage()], 422); }
+    $size = (int) @filesize((string) $file['tmp_name']);
+    if ($size < 200 || $size > 8 * 1024 * 1024 * 1024) { json_response(['error' => 'Ce fichier n’a pas la taille d’une copie chiffrée LCNDA.'], 422); }
     $name = bin2hex(random_bytes(8)) . '.lcnda-coffre';
     if (!@move_uploaded_file((string) $file['tmp_name'], vault_dir() . '/' . $name) && !@copy((string) $file['tmp_name'], vault_dir() . '/' . $name)) { json_response(['error' => 'Impossible de ranger la copie.'], 500); }
-    $pdo->prepare('INSERT INTO cousin_vault(owner, copy_created_at, filename, size) VALUES(?,?,?,?)')->execute([safe_text($h['owner'] ?? '?'), safe_text($h['created_at'] ?? ''), $name, (int) filesize(vault_dir() . '/' . $name)]);
-    // On garde les 3 dernières copies de chaque cousin
-    $s = $pdo->prepare('SELECT id, filename FROM cousin_vault WHERE owner=? ORDER BY copy_created_at DESC, id DESC'); $s->execute([safe_text($h['owner'] ?? '?')]);
-    foreach (array_slice($s->fetchAll(), 3) as $old) { @unlink(vault_dir() . '/' . $old['filename']); $pdo->prepare('DELETE FROM cousin_vault WHERE id=?')->execute([$old['id']]); }
+    $uid = preg_match('/^[a-f0-9]{32}$/', (string) ($h['base_uid'] ?? '')) ? (string) $h['base_uid'] : '';
+    $pdo->prepare('INSERT INTO cousin_vault(owner, copy_created_at, filename, size, base_uid) VALUES(?,?,?,?,?)')->execute([safe_text($h['owner'] ?? '?'), safe_text($h['created_at'] ?? ''), $name, (int) filesize(vault_dir() . '/' . $name), $uid]);
+    // On garde les 3 dernières copies reçues de la même base (repérée par son identifiant, pas par le nom : deux cousins « Jean » ne s'effacent pas)
+    if ($uid !== '') {
+        $s = $pdo->prepare('SELECT id, filename FROM cousin_vault WHERE base_uid=? ORDER BY id DESC'); $s->execute([$uid]);
+        foreach (array_slice($s->fetchAll(), 3) as $old) { @unlink(vault_dir() . '/' . basename((string) $old['filename'])); $pdo->prepare('DELETE FROM cousin_vault WHERE id=?')->execute([$old['id']]); }
+    }
     json_response(['ok' => true, 'owner' => $h['owner'] ?? '?', 'created_at' => $h['created_at'] ?? '']);
 }
 
