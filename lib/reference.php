@@ -88,15 +88,31 @@ function reference_database_path(string $name = 'geo-fr'): ?string
     $target = $dir . '/reference-' . $name . '-' . substr(sha1((string) filesize($archive) . ':' . filemtime($archive)), 0, 12) . '.sqlite';
     if (is_file($target)) { return $target; }
     $partial = $target . '.' . bin2hex(random_bytes(4)) . '.part';
-    $in = gzopen($archive, 'rb');
-    $out = fopen($partial, 'wb');
-    if (!$in || !$out) { return null; }
-    while (!gzeof($in)) { fwrite($out, (string) gzread($in, 1 << 20)); }
-    gzclose($in);
-    fclose($out);
+    if (!reference_gunzip($archive, $partial)) { @unlink($partial); return null; } // disque plein, archive abîmée : rien de gardé
     if (!@rename($partial, $target)) { @unlink($partial); }
     foreach (glob($dir . '/reference-' . $name . '-*.sqlite') ?: [] as $old) { if ($old !== $target) { @unlink($old); } }
     return is_file($target) ? $target : null;
+}
+
+/**
+ * Décompresse une archive .gz dans $to. Faux si l'écriture ou la lecture échoue, ou si le résultat n'est pas une
+ * base SQLite lisible : un fichier tronqué (disque plein) ne doit jamais être gardé dans le cache.
+ */
+function reference_gunzip(string $from, string $to): bool
+{
+    $in = @gzopen($from, 'rb'); $out = @fopen($to, 'wb');
+    if (!$in || !$out) { if ($in) { gzclose($in); } if ($out) { fclose($out); } return false; }
+    $ok = true;
+    while (!gzeof($in)) {
+        $chunk = gzread($in, 1 << 20);
+        if ($chunk === false) { $ok = false; break; }
+        if ($chunk === '') { if (!gzeof($in)) { $ok = false; } break; } // archive abîmée : ne pas tourner en rond
+        if (fwrite($out, $chunk) !== strlen($chunk)) { $ok = false; break; }
+    }
+    gzclose($in); fclose($out);
+    if (!$ok) { return false; }
+    try { return (new PDO('sqlite:' . $to, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]))->query('PRAGMA quick_check')->fetchColumn() === 'ok'; }
+    catch (Throwable $_) { return false; }
 }
 
 function ensure_reference_data(PDO $pdo, string $dbPath): void
@@ -246,10 +262,7 @@ function world_reference_from_countries(): ?string
         foreach ($byCc as $cc => $gz) {
             $tmp = $dir . '/world-pays-' . strtolower($cc) . '-' . bin2hex(random_bytes(3)) . '.tmp';
             try {
-                $in = gzopen($gz, 'rb'); $out = fopen($tmp, 'wb');
-                if (!$in || !$out) { continue; }
-                while (!gzeof($in)) { fwrite($out, (string) gzread($in, 1 << 20)); }
-                gzclose($in); fclose($out);
+                if (!reference_gunzip($gz, $tmp)) { @unlink($tmp); continue; }
                 $src = new PDO('sqlite:' . $tmp, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
                 if (!$src->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='geo_places'")->fetchColumn()) { $src = null; continue; }
                 $name = (string) ($catalogue[$cc]['name'] ?? $src->query("SELECT country FROM geo_places WHERE country<>'' LIMIT 1")->fetchColumn() ?: $cc);

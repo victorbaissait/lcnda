@@ -251,11 +251,11 @@ ipcMain.on('lcnda:refresh-reminders', (event) => { if (fromApp(event)) checkRemi
  */
 const chosenFiles = new Map();
 function fromApp(event) {
-  return Boolean(server && win && event.sender === win.webContents && String(event.senderFrame?.url || '').startsWith(server.origin));
+  return Boolean(server && win && event.sender === win.webContents && sameOrigin(event.senderFrame?.url || '', server.origin));
 }
 /** Raccourcis envoyés par une fenêtre de l'application (principale ou détachée) : seulement des noms et des touches. */
 ipcMain.on('lcnda:set-shortcuts', (event, items) => {
-  const fromWindow = server && BrowserWindow.getAllWindows().some((w) => w.webContents === event.sender) && String(event.senderFrame?.url || '').startsWith(server.origin);
+  const fromWindow = server && BrowserWindow.getAllWindows().some((w) => w.webContents === event.sender) && sameOrigin(event.senderFrame?.url || '', server.origin);
   if (!fromWindow || !items || typeof items !== 'object') return;
   const clean = {};
   for (const [id, item] of Object.entries(items).slice(0, 100)) {
@@ -339,12 +339,18 @@ ipcMain.handle('lcnda:download-reference', async (event, country) => {
   return job;
 });
 
+/** Même origine que le serveur de l'application (pas « http://127.0.0.1:port@autre-site/ », qui commence pareil). */
+function sameOrigin(url, origin) {
+  try { return new URL(String(url)).origin === new URL(origin).origin; } catch { return false; }
+}
+const LOADING_URL = require('url').pathToFileURL(path.join(__dirname, 'loading.html')).href;
+
 /** La fenêtre ne peut afficher que l'application ; tout lien externe s'ouvre dans le navigateur. */
 function lockNavigation(webContents, origin) {
   const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };
   webContents.setWindowOpenHandler(({ url }) => {
     // Deuxième écran détaché (« Fenêtre ↗ » du panneau À côté) : vraie fenêtre de l'application, même pont et même sécurité
-    if (url.startsWith(origin)) {
+    if (sameOrigin(url, origin)) {
       return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, minWidth: 700, minHeight: 500, backgroundColor: '#fbfbfb',
         webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false, preload: path.join(__dirname, 'preload.js') } } };
     }
@@ -357,7 +363,7 @@ function lockNavigation(webContents, origin) {
     return { action: 'deny' };
   });
   webContents.on('will-navigate', (event, url) => {
-    if (url.startsWith(origin) || url.startsWith('file:')) return;
+    if (sameOrigin(url, origin) || url.split('#')[0] === LOADING_URL) return;
     event.preventDefault();
     external(url);
   });

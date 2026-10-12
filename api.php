@@ -5685,6 +5685,12 @@ function restore_deleted_media(PDO $pdo,array $change,array $before): array
     foreach(($before['media_links']??[]) as $row)insert_snapshot_row($pdo,'media_links',$row);
     foreach(($before['label_links']??[]) as $row)insert_snapshot_row($pdo,'label_links',$row,true);
     foreach(($before['media_versions']??[]) as $row)insert_snapshot_row($pdo,'media_versions',$row,true);
+    // Ce qui dépendait du média (supprimé ou vidé avec lui) : remis tel quel, dans l'ordre (les lignes « parents » d'abord)
+    foreach(($before['dependents']['rows']??[]) as $table=>$rows){foreach($rows as $row){try{insert_snapshot_row($pdo,(string)$table,$row,true);}catch(Throwable $_){}}}
+    foreach(($before['dependents']['nulls']??[]) as $n){
+        if(!preg_match('/^[a-z_][a-z0-9_]*$/',(string)$n['table'])||!preg_match('/^[a-z_][a-z0-9_]*$/',(string)$n['column']))continue;
+        $pdo->prepare("UPDATE {$n['table']} SET {$n['column']}=? WHERE id=? AND {$n['column']} IS NULL")->execute([$mediaId,(int)$n['id']]);
+    }
     foreach(($before['portrait_person_ids']??[]) as $personId){
         $personId=safe_int($personId);
         if($personId&&record_exists($pdo,'persons',$personId))$pdo->prepare('UPDATE persons SET portrait_media_id=?,updated_at=CURRENT_TIMESTAMP WHERE id=? AND portrait_media_id IS NULL')->execute([$mediaId,$personId]);
@@ -11458,13 +11464,44 @@ function delete_media(PDO $pdo,array $data): array
         'media_links'=>$mediaLinks->fetchAll(),
         'label_links'=>$labelLinks->fetchAll(),
         'portrait_person_ids'=>array_map('intval',$portraits->fetchAll(PDO::FETCH_COLUMN)),
+        'dependents'=>media_dependent_rows($pdo,$mediaId), // enquêtes, noms cités, dépouillements, cartes anciennes, musée…
     ];
     $pdo->prepare('UPDATE persons SET portrait_media_id=NULL,updated_at=CURRENT_TIMESTAMP WHERE portrait_media_id=?')->execute([$mediaId]);
+    $pdo->prepare('DELETE FROM media_tags WHERE media_id=?')->execute([$mediaId]); // zones identifiées : gardées dans la copie ci-dessus
     $pdo->prepare('DELETE FROM media_links WHERE media_id=?')->execute([$mediaId]);
     $pdo->prepare("DELETE FROM label_links WHERE entity_type='media' AND entity_id=?")->execute([$mediaId]);
     $pdo->prepare('DELETE FROM media WHERE id=?')->execute([$mediaId]);
     log_change($pdo,'media',$mediaId,'delete','Suppression du média « '.($before['title']?:$before['filename']?:'#'.$mediaId).' » de la base locale',$snapshot,null);
     return ['id'=>$mediaId];
+}
+
+/**
+ * Tout ce qui dépend d'un média et partirait (ON DELETE CASCADE, en cascade aussi pour les tables filles) ou serait
+ * vidé (SET NULL) quand on le supprime, d'après les clés étrangères de la base, plus les zones identifiées (media_tags).
+ */
+function media_dependent_rows(PDO $pdo,int $mediaId): array
+{
+    $tables=$pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")->fetchAll(PDO::FETCH_COLUMN);
+    $fks=[];
+    foreach($tables as $t){foreach($pdo->query('PRAGMA foreign_key_list("'.str_replace('"','""',(string)$t).'")')->fetchAll() as $fk)$fks[(string)$fk['table']][]=['table'=>(string)$t,'column'=>(string)$fk['from'],'on_delete'=>strtoupper((string)$fk['on_delete'])];}
+    $out=['rows'=>[],'nulls'=>[]];$queue=[['media',[$mediaId]]];$seen=[];
+    while($queue){
+        [$parent,$ids]=array_shift($queue);
+        foreach($fks[$parent]??[] as $fk){
+            if($fk['table']==='media_links'||$fk['table']==='media_versions')continue; // déjà gardés à part
+            $stmt=$pdo->prepare('SELECT * FROM "'.$fk['table'].'" WHERE "'.$fk['column'].'" IN ('.implode(',',array_fill(0,count($ids),'?')).')');$stmt->execute($ids);
+            $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);if(!$rows)continue;
+            if($fk['on_delete']==='CASCADE'){
+                $fresh=[];
+                foreach($rows as $row){$key=$fk['table'].':'.json_encode($row);if(isset($seen[$key]))continue;$seen[$key]=true;$out['rows'][$fk['table']][]=$row;if(isset($row['id']))$fresh[]=(int)$row['id'];}
+                if($fresh)$queue[]=[$fk['table'],$fresh];
+            }elseif($fk['on_delete']==='SET NULL'&&isset($rows[0]['id'])&&$parent==='media'){
+                foreach($rows as $row)$out['nulls'][]=['table'=>$fk['table'],'column'=>$fk['column'],'id'=>(int)$row['id']];
+            }
+        }
+    }
+    if(in_array('media_tags',$tables,true)){$t=$pdo->prepare('SELECT * FROM media_tags WHERE media_id=?');$t->execute([$mediaId]);if($r=$t->fetchAll(PDO::FETCH_ASSOC))$out['rows']['media_tags']=$r;}
+    return $out;
 }
 
 function save_media_transcription(PDO $pdo,array $data): array

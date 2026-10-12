@@ -127,6 +127,12 @@ function migration_backup(PDO $pdo, string $dbPath, int $fromVersion): ?string
             . '(il faut environ ' . round($size / 1024 ** 3, 1) . ' Go libres). La base n’a pas été modifiée.'
         );
     }
+    // Mise à jour qui a échoué puis relancée : la copie déjà faite pour ce même passage suffit si la base n'a pas
+    // changé depuis (sinon une copie complète de plus à chaque lancement remplirait le disque).
+    $changed = max((int) @filemtime($dbPath), (int) @filemtime($dbPath . '-wal'));
+    foreach (glob($dir . '/genealogie-backup-*-migration-v' . $fromVersion . '-v' . SCHEMA_VERSION . '.db') ?: [] as $previous) {
+        if ((int) @filemtime($previous) >= $changed && (int) @filesize($previous) > 0) { return $previous; }
+    }
     $name = sprintf(
         'genealogie-backup-%s-%s-migration-v%d-v%d.db',
         date('Ymd-His'), bin2hex(random_bytes(2)), $fromVersion, SCHEMA_VERSION

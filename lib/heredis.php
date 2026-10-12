@@ -44,17 +44,29 @@ function heredis_locate(string $path): array
 {
     if (is_file($path)) { return [$path, dirname($path)]; }
     if (!is_dir($path)) { throw new RuntimeException('Fichier Hérédis introuvable.'); }
-    $candidates = glob(rtrim($path, '/\\') . '/*.heredis') ?: [];
+    $candidates = heredis_list_dir(rtrim($path, '/\\'), 'heredis');
     if (!$candidates) { throw new RuntimeException('Aucun fichier .heredis dans ce dossier Hérédis.'); }
     usort($candidates, static fn($a, $b) => filemtime($b) <=> filemtime($a));
     return [$candidates[0], $path];
 }
 
 /** Vrai si ce dossier (ou ce fichier) est un fichier Hérédis. */
+/** Fichiers d'un dossier (sans glob : un nom de dossier avec [ ] * ? casserait le motif), filtrés par extension. */
+function heredis_list_dir(string $dir, string $ext = ''): array
+{
+    $out = [];
+    foreach (@scandir($dir) ?: [] as $f) {
+        if ($f === '.' || $f === '..' || !is_file($dir . '/' . $f)) { continue; }
+        if ($ext === '' || strtolower(pathinfo($f, PATHINFO_EXTENSION)) === $ext) { $out[] = $dir . '/' . $f; }
+    }
+    sort($out);
+    return $out;
+}
+
 function is_heredis_path(string $path): bool
 {
     $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-    if (is_dir($path)) { return $ext === 'hmw' || (bool) glob(rtrim($path, '/\\') . '/*.heredis'); }
+    if (is_dir($path)) { return $ext === 'hmw' || (bool) heredis_list_dir(rtrim($path, '/\\'), 'heredis'); }
     return $ext === 'heredis';
 }
 
@@ -175,8 +187,9 @@ function heredis_import_into_db(PDO $pdo, string $path): array
     $insertChild = $pdo->prepare('INSERT INTO family_children(family_id,child_id,relation_to_partner1,relation_to_partner2,position) VALUES(?,?,?,?,?)');
     $linked = [];
     $parentLinks = $has('LiensIndividuParents') ? $rows('SELECT * FROM LiensIndividuParents') : [];
+    $withLink = array_fill_keys(array_map(static fn($l) => (int) $l['XrefIndividu'], $parentLinks), true); // (pas de recherche par personne : trop lent sur 50 000 fiches)
     foreach ($individus as $i) {   // anciennes bases : seul Individus.XrefUnionParents est rempli
-        if ($i['XrefUnionParents'] && !array_filter($parentLinks, static fn($l) => (int) $l['XrefIndividu'] === (int) $i['CodeID'])) {
+        if ($i['XrefUnionParents'] && !isset($withLink[(int) $i['CodeID']])) {
             $parentLinks[] = ['XrefIndividu' => $i['CodeID'], 'XrefUnionParents' => $i['XrefUnionParents'], 'TypePere' => 0, 'TypeMere' => 0];
         }
     }
@@ -290,7 +303,7 @@ function heredis_import_into_db(PDO $pdo, string $path): array
         if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
         $insertMedia = $pdo->prepare('INSERT INTO media(title,description,media_type,filename,thumbnail,date_text) VALUES(?,?,?,?,?,?)');
         foreach ($rows('SELECT * FROM Medias') as $m) {
-            $candidates = glob($packageDir . '/Media/#' . (int) $m['CodeID'] . '/*') ?: [];
+            $candidates = heredis_list_dir($packageDir . '/Media/#' . (int) $m['CodeID']);
             $candidates = array_values(array_filter($candidates, 'is_file'));
             $from = $candidates[0] ?? (is_file((string) $m['FilePath']) ? (string) $m['FilePath'] : null);
             $name = $txt($m['FileName']) ?: basename((string) $m['FilePath']);
