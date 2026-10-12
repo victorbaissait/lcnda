@@ -612,3 +612,4 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cw-parts-tabs{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;margin:.3rem 0 .7rem}
 .h-cw-part-add{display:inline-flex;gap:.3rem;align-items:center;font-size:.9em}
 #online-sheet-search .web-search-news{display:none}
+.archive-visit-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 .8rem}

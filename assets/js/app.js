@@ -772,7 +772,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     // ── Chercher sur internet (bloc de fiche + widget) : chaque bouton ouvre la recherche du site dans le navigateur ──
     // Adresses vérifiées le 2026-10-08 (Geneanet, FamilySearch, Filae, matchID…). Léonore, Mémoire des hommes et Yad Vashem
     // ne gardent pas la recherche dans leur adresse : recherche Google limitée à leur site.
-    const webSearchGroups=['Moteurs de recherche','Généalogie','Archives et bases','Presse et livres','Autres','Mes sites'];
+    const webSearchGroups=['Moteurs de recherche','Généalogie','Archives et bases','Presse et livres','Notices d’autorité','Autres','Mes sites'];
     const webSearchEnc=value=>encodeURIComponent(String(value||'').trim());
     const webSearchSlug=value=>String(value||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
     const webSearchGoogleSite=(site,p)=>`https://www.google.com/search?q=${webSearchEnc(`site:${site} "${p.last}" "${p.first}"`)}`;
@@ -814,10 +814,18 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         ['trove','Trove (Australie)','Presse et livres',p=>`https://trove.nla.gov.au/search/category/newspapers?keyword=${webSearchEnc(`"${p.name}"`)}`],
         ['delpher','Delpher (Pays-Bas)','Presse et livres',p=>`https://www.delpher.nl/nl/kranten/results?query=${webSearchEnc(`"${p.name}"`)}&coll=ddd`],
         ['anno','ANNO (Autriche)','Presse et livres',p=>`https://anno.onb.ac.at/anno-suche#searchMode=simple&query=${webSearchEnc(`"${p.name}"`)}`],
+        // Notices d'autorité : identifiants des personnes connues des bibliothèques (auteurs, artistes, militaires, notables…)
+        ['viaf','VIAF','Notices d’autorité',p=>webSearchGoogleSite('viaf.org',p)],
+        ['isni','ISNI','Notices d’autorité',p=>`https://isni.oclc.org/xslt/CMD?ACT=SRCHA&IKT=8006&TRM=${webSearchEnc(`${p.last} ${p.first}`.trim())}`],
+        ['idref','IdRef','Notices d’autorité',p=>webSearchGoogleSite('idref.fr',p)],
+        ['gnd','GND','Notices d’autorité',p=>`https://lobid.org/gnd/search?q=${webSearchEnc(p.name)}&filter=type:Person`],
+        ['databnf','data.bnf.fr','Notices d’autorité',p=>`https://data.bnf.fr/search?term=${webSearchEnc(p.name)}`],
+        ['bnfauth','BnF (autorités)','Notices d’autorité',p=>`https://catalogue.bnf.fr/rechercher.do?motRecherche=${webSearchEnc(p.name)}&critereRecherche=0`],
+        ['loc','Library of Congress','Notices d’autorité',p=>`https://id.loc.gov/search/?q=${webSearchEnc(p.name)}&q=cs:http://id.loc.gov/authorities/names`],
         ['wikipedia','Wikipédia','Autres',p=>`https://fr.wikipedia.org/w/index.php?search=${webSearchEnc(p.q)}`],
         ['wikidata','Wikidata','Autres',p=>`https://www.wikidata.org/w/index.php?search=${webSearchEnc(p.name)}`],
     ];
-    const webSearchDefaultVisible=['google','duckduckgo','qwant','bing','geneanet','familysearch','filae','myheritage','ancestry','matchid','memoiredeshommes','leonore','francearchives','gallica','retronews','findagrave','wikipedia'];
+    const webSearchDefaultVisible=['google','duckduckgo','qwant','bing','geneanet','familysearch','filae','myheritage','ancestry','matchid','memoiredeshommes','leonore','francearchives','gallica','retronews','findagrave','viaf','isni','idref','gnd','wikipedia'];
     /** Sites ajoutés par l'utilisateur : adresse modèle avec {prénom}, {nom}, {nom_complet}, {lieu}, {année}, {de}, {à}, {conjoint}, {requête}. */
     function webSearchCustomSites(){try{const list=JSON.parse(localStorage.getItem('genealogie-web-search-custom')||'[]');return Array.isArray(list)?list.filter(site=>site&&site.key&&site.label&&/^https?:\/\//i.test(String(site.url||''))):[];}catch(_){return[];}}
     function saveWebSearchCustomSites(list){localStorage.setItem('genealogie-web-search-custom',JSON.stringify(list.map(site=>({key:site.key,label:String(site.label).slice(0,80),url:String(site.url).slice(0,500)}))));}
@@ -4513,7 +4521,15 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $('#workspace').innerHTML=`<section class="page archive-visit-page"><header class="page-header"><div><span class="eyebrow">AVANT LA VISITE</span><h2>Planificateur de visite d’archives</h2><p>Prépare une feuille de mission par centre d’archives à partir des cotes déjà suivies, ou ajoute une cote libre.</p></div><div class="page-actions"><button class="button" type="button" id="add-archive-visit">+ Feuille de mission</button></div></header><p class="archive-visit-notice">Les horaires et périodes de fermeture sont à vérifier auprès du centre avant le départ, notamment pour les fermetures estivales d’août.</p><div id="archive-visit-plans"><div class="loading-block">Préparation des visites…</div></div></section>`;
         let data;try{data=await api('archive_visit_plans');}catch(error){$('#archive-visit-plans').innerHTML=empty(error.message||'Chargement impossible.');return;}
         if(token!==state.workspaceToken||state.listType!=='archive_visits')return;
-        const plans=data.plans||[];$('#archive-visit-plans').innerHTML=plans.length?`<div class="archive-visit-plans">${plans.map(archiveVisitPlanCard).join('')}</div>`:empty('Aucune feuille de mission. Crée une visite pour réunir les cotes à consulter.');
+        const plans=data.plans||[];
+        // À venir (date à venir ou à préciser) / Passés / Tous
+        const today=new Date().toISOString().slice(0,10),isPast=plan=>/^\d{4}-\d{2}-\d{2}/.test(String(plan.visit_date||''))&&String(plan.visit_date).slice(0,10)<today;
+        const filter=['upcoming','past','all'].includes(state.archiveVisitFilter)?state.archiveVisitFilter:'upcoming';
+        const counts={upcoming:plans.filter(plan=>!isPast(plan)).length,past:plans.filter(isPast).length,all:plans.length};
+        const shown=plans.filter(plan=>filter==='all'||(filter==='past')===isPast(plan)).sort((a,b)=>{const da=String(a.visit_date||'9999'),db=String(b.visit_date||'9999');return filter==='past'?db.localeCompare(da):da.localeCompare(db);});
+        const tabs=`<div class="archive-visit-tabs" role="tablist">${[['upcoming','À venir'],['past','Passés'],['all','Tous']].map(([k,l])=>`<button type="button" class="button small ${filter===k?'':'secondary'}" role="tab" aria-selected="${filter===k}" data-archive-visit-filter="${k}">${l} <small>(${counts[k]})</small></button>`).join('')}</div>`;
+        $('#archive-visit-plans').innerHTML=tabs+(shown.length?`<div class="archive-visit-plans">${shown.map(archiveVisitPlanCard).join('')}</div>`:empty(plans.length?(filter==='past'?'Aucune visite passée.':'Aucune visite à venir.'):'Aucune feuille de mission. Crée une visite pour réunir les cotes à consulter.'));
+        $$('[data-archive-visit-filter]').forEach(button=>button.addEventListener('click',()=>{state.archiveVisitFilter=button.dataset.archiveVisitFilter;renderArchiveVisitPlanner();}));
         $('#add-archive-visit')?.addEventListener('click',()=>openArchiveVisitPlanDialog());
         $$('[data-edit-archive-visit]').forEach(button=>button.addEventListener('click',()=>openArchiveVisitPlanDialog(plans.find(plan=>Number(plan.id)===Number(button.dataset.editArchiveVisit)))));
         $$('[data-edit-archive-visit-links]').forEach(button=>button.addEventListener('click',()=>{const plan=plans.find(row=>Number(row.id)===Number(button.dataset.editArchiveVisitLinks));if(plan)openArchiveVisitLinksDialog(plan);}));
