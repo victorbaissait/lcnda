@@ -268,7 +268,7 @@ try {
         'htr_setup_status' => json_response(htr_setup_status()),
         'my_lists' => json_response(['lists' => my_lists($pdo), 'event_types' => $pdo->query('SELECT id, label, gedcom_tag FROM event_types ORDER BY label COLLATE NOCASE')->fetchAll(), 'labels' => $pdo->query('SELECT id, name, color FROM labels ORDER BY name COLLATE NOCASE')->fetchAll(), 'columns' => my_list_columns(), 'sources' => my_list_source_labels()]),
         'my_list_rows' => json_response(my_list_rows($pdo, safe_int($_GET['id'] ?? 0))),
-        'widget_rows' => json_response(widget_rows($pdo, json_decode((string) ($_GET['q'] ?? '{}'), true) ?: [])),
+        'widget_rows' => json_response(widget_rows($pdo, is_array($wq = json_decode((string) ($_GET['q'] ?? '{}'), true)) ? $wq : [])),
         'export_my_list' => json_response(export_my_list($pdo, safe_int($_GET['id'] ?? 0))),
         'museums' => json_response(['museums' => museums_list($pdo)]),
         'museum' => json_response(['museum' => museum_get($pdo, safe_int($_GET['id'] ?? 0))]),

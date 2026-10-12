@@ -187,14 +187,16 @@ function widget_rows(PDO $pdo, array $q): array
     $source = in_array($q['source'] ?? '', LIST_SOURCES, true) && ($q['source'] ?? '') !== 'free' ? (string) $q['source'] : 'persons';
     $def = is_array($q['definition'] ?? null) ? $q['definition'] : [];
     $def['columns'] = array_keys(my_list_columns()[$source] ?? LIST_PERSON_COLUMNS); // toutes : le widget choisit à l'affichage
-    return my_list_rows_for($pdo, ['id' => 0, 'name' => '', 'icon' => '', 'description' => '', 'source' => $source, 'definition_json' => json_encode($def)]);
+    return my_list_rows_for($pdo, ['id' => 0, 'name' => '', 'icon' => '', 'description' => '', 'source' => $source, 'definition_json' => json_encode($def)], !empty($q['count']));
 }
 
-function my_list_rows_for(PDO $pdo, array $list): array
+/** $countOnly : seulement le nombre de lignes (widget « Chiffres »), sans limite et sans calculer les colonnes. */
+function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
 {
     $listId = (int) $list['id'];
     $def = my_list_clean_definition(json_decode((string) $list['definition_json'], true) ?: [], (string) $list['source']);
     if ($list['source'] === 'free') { return my_list_free_rows($pdo, $list, $def); }
+    if ($countOnly && isset(LIST_TABLE_SOURCES[$list['source']])) { return ['count' => (int) $pdo->query('SELECT count(*) FROM (' . LIST_TABLE_SOURCES[$list['source']]['sql'] . ')')->fetchColumn()]; }
     if (isset(LIST_TABLE_SOURCES[$list['source']])) { return my_list_table_rows($pdo, $list, $def); }
     $isEvents = $list['source'] === 'events';
     $sosas = (in_array('sosa', $def['columns'], true) || array_filter($def['rules'], static fn($r) => $r['field'] === 'sosa')) ? my_list_sosas($pdo) : [];
@@ -289,6 +291,10 @@ function my_list_rows_for(PDO $pdo, array $list): array
             WHERE {$where} ORDER BY " . ($def['sort'] === 'place' ? 'pl.name COLLATE NOCASE, ' : '') . "COALESCE(e.year, 9999), e.id LIMIT 3000";
     } else {
         $sql = "SELECT p.id FROM persons p WHERE {$where} ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE LIMIT 3000";
+    }
+    if ($countOnly) { // liste jamais enregistrée : pas de lignes ajoutées ou retirées à la main
+        $c = $pdo->prepare('SELECT count(*) FROM (' . preg_replace('/ ORDER BY .*$/s', '', $sql) . ')'); $c->execute($params);
+        return ['count' => (int) $c->fetchColumn()];
     }
     $st = $pdo->prepare($sql); $st->execute($params);
     $raw = $st->fetchAll();

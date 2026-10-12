@@ -55,6 +55,13 @@
         if (own) { const v = r.values?.[c] ?? ''; return own.type === 'checkbox' ? (v === '1' ? 'oui' : 'non') : own.type === 'person' ? (r.linked?.[c] ? pname(r.linked[c]) : '') : String(v); }
         return isPeopleCol(data, c) && r.people?.length ? r.people.map(pname).join(' et ') : String(r.cells?.[c] ?? '');
     }
+    /** Colonnes proposées : celles d'une de « Mes listes » (dans son ordre, avec ses colonnes à remplir), sinon toutes */
+    const dataColumns = data => {
+        const all = Object.entries(data.columns || {});
+        if (!data.list?.id) return all;
+        const own = (data.list.definition?.columns || []).map(k => [k, data.columns?.[k] || k]);
+        return (own.length ? own : all).concat((data.list.definition?.custom || []).map(c => [c.key, c.label]));
+    };
     const yearOf = v => { const m = String(v).match(/(?<!\d)(\d{4})(?!\d)/); return m ? Number(m[1]) : null; };
     /** Les filtres de colonnes enregistrés dans une de « Mes listes » */
     function applyListFilters(data) {
@@ -71,7 +78,10 @@
     async function loadData(d) {
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
-            try { const data = await api('widget_rows', {q: JSON.stringify(srcQuery(src))}); return {...data, shown: applyListFilters(data)}; }
+            try {
+                if (d.kind === 'numbers' && !src.list_id) { const r = await api('widget_rows', {q: JSON.stringify({...srcQuery(src), count: 1})}); return {count: Number(r.count) || 0, rows: [], shown: []}; }
+                const data = await api('widget_rows', {q: JSON.stringify(srcQuery(src))}); return {...data, shown: applyListFilters(data)};
+            }
             catch (error) { return {error: error.message, rows: [], shown: []}; }
         }));
     }
@@ -79,9 +89,11 @@
     /* ─── Affichage ─── */
     const PALETTE = ['#0066cc', '#cc4700', '#2f8f5b', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#d4588f', '#5d6d7e', '#8bc34a', '#ff9800', '#3f51b5'];
     function groupRows(data, d) {
-        const col = d.group || Object.keys(data.columns || {})[0] || 'name';
+        const col = d.group || dataColumns(data)[0]?.[0] || 'name';
         const counts = new Map();
+        let counted = 0;
         for (const r of data.shown) {
+            let any = false;
             let vals = [cellText(data, r, col).trim()];
             if (col === 'labels' || col === 'names') vals = vals[0].split(/\s*,\s*/);
             for (let v of vals) {
@@ -91,13 +103,17 @@
                 }
                 if (v === '' && d.skipEmpty !== false) continue;
                 counts.set(v || '(vide)', (counts.get(v || '(vide)') || 0) + 1);
+                any = true;
             }
+            if (any) counted++;
         }
         let entries = [...counts.entries()];
         const timeline = ['decade', 'century', 'year'].includes(d.groupBy);
-        entries.sort((a, b) => timeline ? (yearOf(a[0]) ?? Number.parseInt(a[0], 10) ?? 0) - (yearOf(b[0]) ?? Number.parseInt(b[0], 10) ?? 0) : b[1] - a[1] || a[0].localeCompare(b[0], 'fr'));
+        const when = v => { const k = yearOf(v) ?? Number.parseInt(v, 10); return Number.isFinite(k) ? k : Infinity; }; // « (vide) » en dernier
+        entries.sort((a, b) => timeline ? when(a[0]) - when(b[0]) : b[1] - a[1] || a[0].localeCompare(b[0], 'fr'));
         const top = Math.max(1, Math.min(60, Number(d.limit) || 10));
         if (!timeline && entries.length > top) { const rest = entries.slice(top).reduce((n, e) => n + e[1], 0); entries = entries.slice(0, top); if (rest) entries.push(['autres', rest]); }
+        entries.counted = counted; // lignes comptées (une personne à deux étiquettes compte une fois)
         return entries;
     }
     function chartHtml(data, d) {
@@ -112,7 +128,7 @@
         return `<ul class="h-bars h-cw-bars">${entries.map(([v, n]) => `<li><span class="h-bar-label" title="${esc(v)}">${esc(v)}</span><span class="h-bar"><i style="width:${Math.round(n / max * 100)}%"></i></span><span>${fmt(n)}</span></li>`).join('')}</ul>`;
     }
     function listHtml(data, d) {
-        const all = Object.entries(data.columns || {}).concat((data.list?.definition?.custom || []).map(c => [c.key, c.label]));
+        const all = dataColumns(data);
         const cols = (d.columns?.length ? d.columns : all.slice(0, 3).map(c => c[0])).filter(c => all.some(x => x[0] === c));
         let rows = [...data.shown];
         if (d.sort?.col) {
@@ -140,12 +156,12 @@
         if (d.kind === 'links') return linksHtml(d);
         const err = datas.find(x => x?.error);
         if (err) return `<p class="h-offsite-sentence is-warn">${esc(err.error)}</p>`;
-        if (d.kind === 'numbers') return `<div class="h-cw-numbers">${(d.counters || []).map((c, i) => { const x = datas[i] || {shown: []}; return `<div class="h-cw-number"><strong>${fmt(x.shown.length)}${x.truncated ? '+' : ''}</strong><span>${esc(c.label || 'Nombre')}</span></div>`; }).join('')}</div>`;
+        if (d.kind === 'numbers') return `<div class="h-cw-numbers">${(d.counters || []).map((c, i) => { const x = datas[i] || {shown: []}; return `<div class="h-cw-number"><strong>${fmt(x.count ?? x.shown.length)}${x.count === undefined && x.truncated ? '+' : ''}</strong><span>${esc(c.label || 'Nombre')}</span></div>`; }).join('')}</div>`;
         if (d.kind === 'list') return listHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
         return '';
     }
-    const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : d.kind === 'chart' && datas[0]?.shown ? groupRows(datas[0], d).reduce((n, e) => n + e[1], 0) : '';
+    const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : d.kind === 'chart' && datas[0]?.shown ? groupRows(datas[0], d).counted : '';
     function widgetCard(d, index, span, datas) {
         return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', countOf(d, datas), bodyHtml(d, datas), span));
     }
@@ -216,12 +232,12 @@
     }
 
     /* ─── Écran de l'éditeur ─── */
-    let editing = null, meta = null;
+    let editing = null, meta = null, previewSeq = 0;
     async function loadMeta() { meta = await api('my_lists'); return meta; }
     ext.maintenance.widget_editor = async token => {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
-        if (editing) return renderEditor(token);
+        editing = null; // revenir sur l'onglet : la liste (un brouillon abandonné ne revient pas)
         const list = defs(), onBoard = new Set(A().dashboardBlockSettings().widgets.map(w => w.type));
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
             <section class="maintenance-panel"><h3>Importer un widget reçu</h3><p class="muted">Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données.</p><input type="file" accept=".json,application/json" data-cw-import></section>
@@ -231,7 +247,7 @@
         const ws = A().$('#workspace');
         const find = id => list.find(d => d.id === id);
         ws.querySelector('[data-cw-new]').addEventListener('click', () => chooseStart(token));
-        ws.querySelectorAll('[data-cw-edit]').forEach(b => b.addEventListener('click', () => { editing = JSON.parse(JSON.stringify(find(b.dataset.cwEdit))); editing._existing = true; renderEditor(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-cw-edit]').forEach(b => b.addEventListener('click', () => { const cur = find(b.dataset.cwEdit); editing = {...baseDef(cur), id: cur.id, _existing: true}; renderEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-dup]').forEach(b => b.addEventListener('click', () => { const d = find(b.dataset.cwDup); editing = baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'}); renderEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-add]').forEach(b => b.addEventListener('click', () => { addToDashboard(b.dataset.cwAdd); ext.maintenance.widget_editor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-share]').forEach(b => b.addEventListener('click', () => shareDef(find(b.dataset.cwShare))));
@@ -280,7 +296,7 @@
 
     /* Choix des données : personnes, événements, une liste de l'app ou une de « Mes listes » (+ critères) */
     function columnsOf(src) {
-        if (src.list_id) { const l = (meta.lists || []).find(x => Number(x.id) === Number(src.list_id)); return l ? Object.entries(meta.columns[l.source] || {}).filter(([k]) => (l.definition?.columns || []).includes(k)).concat((l.definition?.custom || []).map(c => [c.key, c.label])) : []; }
+        if (src.list_id) { const l = (meta.lists || []).find(x => Number(x.id) === Number(src.list_id)); return l ? (l.definition?.columns || []).map(k => [k, meta.columns[l.source]?.[k] || k]).concat((l.definition?.custom || []).map(c => [c.key, c.label])) : []; }
         return Object.entries(meta.columns[src.source || 'persons'] || {});
     }
     function sourceHtml(src, path) {
@@ -347,8 +363,9 @@
             const box = ws.querySelector('[data-cw-preview]'); if (!box) return;
             if (d.kind === 'app') { box.innerHTML = ext.dressWidget(d, A().card('01', appCatalog().find(x => x[0] === d.base)?.[1] || d.base, '', '<p class="muted">Le contenu du widget de l’app s’affiche ici sur le tableau de bord.</p>', 'span-12')); return; }
             box.innerHTML = '<p class="muted">Calcul…</p>';
+            const seq = ++previewSeq;
             const datas = await loadData(d);
-            if (document.body.contains(box)) { box.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
+            if (seq === previewSeq && document.body.contains(box)) { box.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
         }, 350); };
         preview();
         ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; ext.maintenance.widget_editor(++S().workspaceToken); }));
@@ -440,7 +457,7 @@
         if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', 'year', 'decade', 'century'].includes(d.groupBy) ? d.groupBy : 'value', style: d.style === 'pie' ? 'pie' : 'bars', skipEmpty: d.skipEmpty !== false});
         if (kind === 'text') out.text = str(d.text, 5000);
         if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
-        if (kind === 'app') out.base = /^[a-z0-9_]{1,40}$/.test(String(d.base)) && !String(d.base).startsWith('cw_') ? d.base : 'stats';
+        if (kind === 'app') out.base = appCatalog().some(([k]) => k === d.base) ? d.base : 'stats'; // un widget de l'app qui n'existe pas ici
         return out;
     }
     /** Dans le fichier : les types d'événements et les étiquettes par leur nom (leurs numéros changent d'une base à l'autre) */

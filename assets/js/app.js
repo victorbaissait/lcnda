@@ -733,9 +733,12 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function savePersonBlockSettings(settings,personId=0){const key=personId?`genealogie-person-blocks-${personId}`:'genealogie-person-blocks';localStorage.setItem(key,JSON.stringify({order:settings.order,hidden:settings.hidden||[],widths:settings.widths||{},hideEmptyIdentity:!!settings.hideEmptyIdentity}));}
     function dashboardWidgetId(type){return `${type}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;}
     function dashboardWidgetLabel(type){return (defaultDashboardBlocks.find(item=>item[0]===type)||[,type])[1];}
+    /** Un widget à soi qui habille un widget de l'app (Éditeur de widgets) se règle comme ce widget-là. */
+    function dashboardBaseType(type){const d=String(type).startsWith('cw_')?window.LCNDA_EXT?.customWidgetDefs?.()?.[type]:null;return d&&d.kind==='app'&&d.base?d.base:type;}
     function dashboardNewWidget(type,source={}){
         const width=String(source.width||defaultDashboardBlockSpans[type]||'6');
-        const limit=defaultDashboardBlockLimits[type]?Math.max(1,Math.min(80,Number(source.limit||defaultDashboardBlockLimits[type])||defaultDashboardBlockLimits[type])):0;
+        const lt=dashboardBaseType(type);
+        const limit=defaultDashboardBlockLimits[lt]?Math.max(1,Math.min(80,Number(source.limit||defaultDashboardBlockLimits[lt])||defaultDashboardBlockLimits[lt])):0;
         return {id:source.id||dashboardWidgetId(type),type,width:personBlockWidthChoices.some(choice=>choice[0]===width)?width:(defaultDashboardBlockSpans[type]||'6'),limit,config:{...(source.config||{})}};
     }
     function dashboardNormalizeWidget(widget){
@@ -1835,9 +1838,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const widget=settings.widgets.find(item=>item.id===widgetId);
         const editor=$$('[data-dashboard-widget-editor]').find(node=>node.dataset.dashboardWidgetEditor===widgetId);
         if(!widget||!editor)return;
+        const wt=dashboardBaseType(widget.type);
         widget.width=$('.block-widths [aria-pressed="true"]',editor)?.dataset.blockWidth||widget.width;
         const limitInput=$('[data-dashboard-widget-limit]',editor);
-        if(limitInput)widget.limit=Math.max(1,Math.min(80,Number(limitInput.value)||defaultDashboardBlockLimits[widget.type]||6));
+        if(limitInput)widget.limit=Math.max(1,Math.min(80,Number(limitInput.value)||defaultDashboardBlockLimits[wt]||6));
         const quizChoices=$('[data-dashboard-quiz-choices]',editor);
         if(quizChoices)widget.limit=Math.max(3,Math.min(8,Number(quizChoices.value)||defaultDashboardBlockLimits.person_quiz||4));
         const mode=$('[data-dashboard-person-mode]',editor)?.value;
@@ -1847,15 +1851,15 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(branchName!==undefined)widget.config={...(widget.config||{}),branchName:branchName.trim()};
         const quickStat=$('[data-dashboard-quick-stat]',editor)?.value;
         if(quickStat)widget.config={...(widget.config||{}),quickStat};
-        if(widget.type==='lineage_widget')widget.config={...(widget.config||{}),lineageDirection:$('[data-lineage-direction]',editor)?.value||'desc',lineageAsc:Number($('[data-lineage-asc]',editor)?.value)||3,lineageDesc:Number($('[data-lineage-desc]',editor)?.value)||2};
-        if(widget.type==='web_search'){const list=$(`#ws-widget-${CSS.escape(widget.id)}`,editor);if(list)widget.config={...(widget.config||{}),sites:readWebSearchSitesEditor(list)};}
+        if(wt==='lineage_widget')widget.config={...(widget.config||{}),lineageDirection:$('[data-lineage-direction]',editor)?.value||'desc',lineageAsc:Number($('[data-lineage-asc]',editor)?.value)||3,lineageDesc:Number($('[data-lineage-desc]',editor)?.value)||2};
+        if(wt==='web_search'){const list=$(`#ws-widget-${CSS.escape(widget.id)}`,editor);if(list)widget.config={...(widget.config||{}),sites:readWebSearchSitesEditor(list)};}
         const sessionGoal=$('[data-dashboard-session-goal]',editor)?.value;
         if(sessionGoal!==undefined)widget.config={...(widget.config||{}),sessionGoal:sessionGoal.trim()};
-        if(widget.type==='session_goal'){
+        if(wt==='session_goal'){
             widget.config={...(widget.config||{}),personId:Number($('[data-dashboard-person-id]',editor)?.value)||0,personName:$('[data-dashboard-person-search]',editor)?.value.trim()||''};
         }
-        if(widget.type==='favorite_image')widget.config={...(widget.config||{}),mediaId:Number($('[data-dashboard-media-id]',editor)?.value)||0,mediaTitle:$('[data-dashboard-media-title]',editor)?.value.trim()||$('[data-dashboard-media-search]',editor)?.value.trim()||'',mediaFilename:$('[data-dashboard-media-filename]',editor)?.value.trim()||'',mediaThumbnail:$('[data-dashboard-media-thumbnail]',editor)?.value.trim()||'',mediaOrigin:$('[data-dashboard-media-origin]',editor)?.value.trim()||''};
-        if(widget.type==='person_quiz'){
+        if(wt==='favorite_image')widget.config={...(widget.config||{}),mediaId:Number($('[data-dashboard-media-id]',editor)?.value)||0,mediaTitle:$('[data-dashboard-media-title]',editor)?.value.trim()||$('[data-dashboard-media-search]',editor)?.value.trim()||'',mediaFilename:$('[data-dashboard-media-filename]',editor)?.value.trim()||'',mediaThumbnail:$('[data-dashboard-media-thumbnail]',editor)?.value.trim()||'',mediaOrigin:$('[data-dashboard-media-origin]',editor)?.value.trim()||''};
+        if(wt==='person_quiz'){
             const allTypes=$('[data-dashboard-quiz-all]',editor)?.checked;
             const quizEventTypeIds=allTypes?[]:$$('[data-dashboard-quiz-type]:checked',editor).map(input=>Number(input.value)).filter(Boolean);
             widget.config={...(widget.config||{}),quizSosaOnly:!!$('[data-dashboard-quiz-sosa-only]',editor)?.checked,quizEventTypeIds};
@@ -1867,7 +1871,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 widget.config.personName=$('[data-dashboard-person-search]',editor)?.value.trim()||'';
             }
         }
-        if(widget.type==='kinship_widget')$$('[data-dashboard-person-search]',editor).forEach(input=>{const idKey=input.dataset.dashboardPersonIdKey||'personId',nameKey=input.dataset.dashboardPersonNameKey||'personName';widget.config={...(widget.config||{}),[idKey]:Number(input.parentElement.querySelector('[data-dashboard-person-id]')?.value)||0,[nameKey]:input.value.trim()};});
+        if(wt==='kinship_widget')$$('[data-dashboard-person-search]',editor).forEach(input=>{const idKey=input.dataset.dashboardPersonIdKey||'personId',nameKey=input.dataset.dashboardPersonNameKey||'personName';widget.config={...(widget.config||{}),[idKey]:Number(input.parentElement.querySelector('[data-dashboard-person-id]')?.value)||0,[nameKey]:input.value.trim()};});
         saveDashboardBlockSettings(settings);
     }
     function setupDashboardWidgetPersonPickers(){
@@ -1966,14 +1970,15 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         return `<section class="maintenance-panel order-editor block-order-editor dashboard-block-editor"><h3>Widgets posés sur le tableau de bord</h3><p style="font-size:.8rem;color:var(--muted);margin:.25rem 0 .75rem">Règle l’ordre, la largeur et le nombre d’éléments des widgets déjà affichés.</p><div class="order-list block-order-list" id="dashboard-blocks">${settings.widgets.map((widget,index)=>dashboardOrderRow(widget,labels[widget.type]||widget.type,index)).join('')}</div><div class="page-actions action-zone"><button class="button small" type="button" data-order-save="dashboard-blocks">Enregistrer ces widgets</button></div></section>`;
     }
     function dashboardOrderRow(widget,label,index){
+        const bt=dashboardBaseType(widget.type);
         const parts=[];
-        if(widget.type==='person_block')parts.push((defaultPersonBlocks.find(row=>row[0]===(widget.config?.personBlockKey||'identity'))||[, 'Identité'])[1]);
+        if(bt==='person_block')parts.push((defaultPersonBlocks.find(row=>row[0]===(widget.config?.personBlockKey||'identity'))||[, 'Identité'])[1]);
         if(widget.config?.personMode==='specific'&&widget.config?.personName)parts.push(widget.config.personName);
         const subtitle=parts.length?`<small>${escapeHtml(parts.join(' · '))}</small>`:'';
-        const limitLabel=widget.type==='person_quiz'?'Prop.':'Nb.';
-        const limitMax=widget.type==='person_quiz'?8:80;
-        const limitMin=widget.type==='person_quiz'?3:1;
-        return `<div class="order-row dashboard-order-row" data-widget-id="${escapeHtml(widget.id)}" data-widget-type="${escapeHtml(widget.type)}"><span class="order-grip" draggable="true" aria-hidden="true">↕</span><span class="order-number">${String(index+1).padStart(2,'0')}</span><b>${escapeHtml(label)}${subtitle}</b><div class="block-widths" aria-label="Largeur du widget">${personBlockWidthChoices.map(([value,text])=>`<button type="button" data-block-width="${value}" aria-pressed="${String(widget.width)===value?'true':'false'}" title="Largeur ${text}">${text}</button>`).join('')}</div>${defaultDashboardBlockLimits[widget.type]?`<label class="dashboard-limit" title="${widget.type==='person_quiz'?'Nombre de propositions':'Nombre d’éléments'}">${limitLabel} <input type="number" min="${limitMin}" max="${limitMax}" value="${escapeHtml(widget.limit||defaultDashboardBlockLimits[widget.type])}"></label>`:'<span></span>'}</div>`;
+        const limitLabel=bt==='person_quiz'?'Prop.':'Nb.';
+        const limitMax=bt==='person_quiz'?8:80;
+        const limitMin=bt==='person_quiz'?3:1;
+        return `<div class="order-row dashboard-order-row" data-widget-id="${escapeHtml(widget.id)}" data-widget-type="${escapeHtml(widget.type)}"><span class="order-grip" draggable="true" aria-hidden="true">↕</span><span class="order-number">${String(index+1).padStart(2,'0')}</span><b>${escapeHtml(label)}${subtitle}</b><div class="block-widths" aria-label="Largeur du widget">${personBlockWidthChoices.map(([value,text])=>`<button type="button" data-block-width="${value}" aria-pressed="${String(widget.width)===value?'true':'false'}" title="Largeur ${text}">${text}</button>`).join('')}</div>${defaultDashboardBlockLimits[bt]?`<label class="dashboard-limit" title="${bt==='person_quiz'?'Nombre de propositions':'Nombre d’éléments'}">${limitLabel} <input type="number" min="${limitMin}" max="${limitMax}" value="${escapeHtml(widget.limit||defaultDashboardBlockLimits[bt])}"></label>`:'<span></span>'}</div>`;
     }
     /** Message après une restauration (une fiche restaurée peut avoir perdu un lien vers un élément supprimé depuis). */
     function restoreDoneText(result){
