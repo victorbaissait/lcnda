@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 17;
+const SCHEMA_VERSION = 18;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -38,6 +38,7 @@ function migration_steps(): array
         15 => 'schema_v15',
         16 => 'schema_v16',
         17 => 'schema_v17',
+        18 => 'schema_v18',
     ];
 }
 
@@ -1477,4 +1478,11 @@ function schema_v17(PDO $pdo): void
         // seulement ce qui a été repris : un original qui n'a pas pu bouger reste noté (et dans media/originaux/)
         $pdo->prepare('DELETE FROM media_originals WHERE media_id=?')->execute([(int) $r['media_id']]);
     }
+}
+
+/** Fiche d'un village : d'où viennent les chiffres de population (page Wikipédia récupérée). */
+function schema_v18(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(village_profiles)')->fetchAll(), 'name');
+    if (!in_array('population_source', $cols, true)) { $pdo->exec("ALTER TABLE village_profiles ADD COLUMN population_source TEXT NOT NULL DEFAULT ''"); }
 }

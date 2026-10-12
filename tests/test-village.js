@@ -42,6 +42,14 @@ $out['pop'] = parse_populations("1793 : 1 450\n1806 = 1512 hab.\nsans chiffre\n1
 $saved = save_village_profile($pdo, ['key' => '87187', 'name' => 'Saint-Yrieix', 'church' => 'Collégiale du Moûtier', 'patron_saint' => 'saint Yrieix', 'populations_text' => "1793 : 1450\n1806 : 1512", 'pending_labels' => []]);
 apply_pending_labels($pdo, 'save_village_profile', ['pending_labels' => []], $saved);
 $out['profile'] = [village_detail($pdo, '87187')['profile']['church'], count(village_detail($pdo, '87187')['profile']['populations'])];
+$fr = '<div class="mw-heading mw-heading3"><h3 id="Démographie">Démographie</h3></div><div class="mw-heading mw-heading4"><h4 id="Évolution_démographique">Évolution démographique</h4></div><p>Texte</p><table class="wikitable"><tbody><tr><th colspan="3">Évolution de la population</th></tr><tr><th>1793</th><th>1800</th><th>1806</th></tr><tr><td>4&#160;520</td><td>4&#160;612<sup class="reference">[1]</sup></td><td>—</td></tr><tr><th>2016</th><th>2021</th><th>2022</th></tr><tr><td>20&#8239;953</td><td>21&#160;002</td><td>21&#160;104</td></tr></tbody></table><div class="mw-heading mw-heading4"><h4 id="Pyramide_des_âges">Pyramide des âges</h4></div><table><tr><td>1990</td><td>12,5</td></tr></table>';
+$out['wiki_fr'] = village_parse_population_html($fr);
+$en = '<h2 id="Demographics">Demographics</h2><table class="toccolours"><tr><th>Year</th><th>Pop.</th><th>±%</th></tr><tr><td>1850</td><td>1,204</td><td>—</td></tr><tr><td>1900</td><td>2,310</td><td>+91.9%</td></tr></table><h2 id="Notes">Notes</h2><table><tr><td>1950</td><td>999</td></tr></table>';
+$out['wiki_en'] = village_parse_population_html($en);
+$out['wiki_none'] = village_parse_population_html('<h2 id="Histoire">Histoire</h2><table><tr><th>1793</th><th>1800</th></tr><tr><td>1</td><td>2</td></tr></table>');
+save_village_populations($pdo, ['key' => '87187', 'name' => 'Saint-Yrieix', 'populations' => [[1806, 1600], [1999, 7000]], 'source' => 'https://fr.wikipedia.org/wiki/Saint-Yrieix-la-Perche']);
+$pp = village_detail($pdo, '87187')['profile'];
+$out['wiki_saved'] = [$pp['populations'], $pp['population_source'], $pp['church']];
 $out['nocode'] = village_detail($pdo, 'n:lieu-sans-code|corrèze')['families'][0]['name'] ?? null;
 $out['accent'] = village_detail($pdo, 'n:étampes|essonne')['name'];
 try { village_detail($pdo, '00000'); $out['missing'] = 'trouvé'; } catch (Throwable $e) { $out['missing'] = 'refusé'; }
@@ -51,7 +59,11 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°17)', () => assert.equal(out.version, 17)],
+  ['structure à jour (n°18)', () => assert.equal(out.version, 18)],
+  ['Wikipédia (fr) : années puis habitants, notes et espaces enlevés, la pyramide des âges ignorée', () => assert.deepEqual(out.wiki_fr, [[1793, 4520], [1800, 4612], [2016, 20953], [2021, 21002], [2022, 21104]])],
+  ['Wikipedia (en) : année | habitants', () => assert.deepEqual(out.wiki_en, [[1850, 1204], [1900, 2310]])],
+  ['pas de section démographie → rien', () => assert.deepEqual(out.wiki_none, [])],
+  ['chiffres récupérés fusionnés avec ceux saisis, source gardée, le reste de la fiche intact', () => assert.deepEqual(out.wiki_saved, [[[1793, 1450], [1806, 1600], [1999, 7000]], 'https://fr.wikipedia.org/wiki/Saint-Yrieix-la-Perche', 'Collégiale du Moûtier'])],
   ['communes : hameaux du même code regroupés, la plus peuplée de la famille d’abord', () => assert.deepEqual(out.list[0], ['87187', 'Saint-Yrieix', 4, 2])],
   ['commune sans code INSEE gardée (nom + département)', () => assert.ok(out.list.some(v => v[0] === 'n:lieu-sans-code|corrèze'))],
   ['recherche sans accents ni majuscules', () => assert.deepEqual(out.search, ['87187'])],

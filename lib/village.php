@@ -74,7 +74,7 @@ function villages_list(PDO $pdo, string $q = ''): array
 function village_profile(PDO $pdo, string $key): array
 {
     $s = $pdo->prepare('SELECT * FROM village_profiles WHERE place_key=?'); $s->execute([$key]);
-    $p = $s->fetch() ?: ['id' => 0, 'place_key' => $key, 'church' => '', 'patron_saint' => '', 'diocese' => '', 'populations_json' => '[]', 'notes' => ''];
+    $p = $s->fetch() ?: ['id' => 0, 'place_key' => $key, 'church' => '', 'patron_saint' => '', 'diocese' => '', 'populations_json' => '[]', 'notes' => '', 'population_source' => ''];
     $p['populations'] = json_decode((string) $p['populations_json'], true) ?: [];
     unset($p['populations_json']);
     return $p;
@@ -208,7 +208,8 @@ function save_village_profile(PDO $pdo, array $data): array
     $pops = is_array($data['populations'] ?? null) ? $data['populations'] : parse_populations((string) ($data['populations_text'] ?? ''));
     $pops = array_values(array_filter(array_map(static fn($r) => is_array($r) ? [(int) ($r[0] ?? 0), (int) ($r[1] ?? 0)] : null, $pops), static fn($r) => $r && $r[0] >= 1500 && $r[0] <= 2100 && $r[1] > 0));
     $pdo->prepare('INSERT INTO village_profiles(place_key, name, church, patron_saint, diocese, populations_json, notes, updated_at) VALUES(?,?,?,?,?,?,?,CURRENT_TIMESTAMP)
-        ON CONFLICT(place_key) DO UPDATE SET name=excluded.name, church=excluded.church, patron_saint=excluded.patron_saint, diocese=excluded.diocese, populations_json=excluded.populations_json, notes=excluded.notes, updated_at=CURRENT_TIMESTAMP')
+        ON CONFLICT(place_key) DO UPDATE SET name=excluded.name, church=excluded.church, patron_saint=excluded.patron_saint, diocese=excluded.diocese, populations_json=excluded.populations_json, notes=excluded.notes,
+            population_source=CASE WHEN excluded.populations_json=\'[]\' THEN \'\' ELSE village_profiles.population_source END, updated_at=CURRENT_TIMESTAMP')
         ->execute([$key, safe_text($data['name'] ?? ''), safe_text($data['church'] ?? ''), safe_text($data['patron_saint'] ?? ''), safe_text($data['diocese'] ?? ''), json_encode($pops), h_long($data, 'notes', 40000)]);
     $id = (int) $pdo->query('SELECT id FROM village_profiles WHERE place_key=' . $pdo->quote($key))->fetchColumn();
     log_change($pdo, 'meta', 0, 'update', 'Fiche du village enregistrée : ' . safe_text($data['name'] ?? $key));
@@ -233,3 +234,129 @@ function village_decades_by_type(array $byType): array
     return $out;
 }
 
+/* ─── 📈 Population de la commune, d'après Wikipédia ─────────────────── */
+
+function wiki_get_json(string $url): array
+{
+    if (!function_exists('curl_init')) { throw new RuntimeException('Téléchargement impossible : PHP n’a pas l’extension curl.'); }
+    $ch = curl_init($url);
+    curl_setopt_array($ch, [CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 4, CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 25,
+        CURLOPT_PROTOCOLS => CURLPROTO_HTTPS, CURLOPT_USERAGENT => 'LCNDA/0.4 (logiciel de genealogie ; https://github.com/victorbaissait/lcnda)', CURLOPT_HTTPHEADER => ['Accept: application/json']] + lcnda_curl_tls());
+    $body = curl_exec($ch);
+    $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+    $err = curl_error($ch);
+    unset($ch);
+    if ($body === false || $code !== 200) { throw new RuntimeException('Wikipédia ne répond pas' . ($err !== '' ? ' (' . $err . ')' : ($code ? " (erreur {$code})" : '')) . '. Vérifie la connexion à Internet.'); }
+    $json = json_decode((string) $body, true);
+    if (!is_array($json)) { throw new RuntimeException('Réponse de Wikipédia illisible.'); }
+    return $json;
+}
+
+/** La page Wikipédia de la commune (« Halluin », « Saint-Martin (Gers) »…), ou '' si on ne la trouve pas. */
+function village_wiki_title(string $lang, string $name, string $county): string
+{
+    $api = "https://{$lang}.wikipedia.org/w/api.php?format=json&formatversion=2&";
+    $fold = static fn($x) => ascii_fold(mb_strtolower(trim($x)));
+    $r = wiki_get_json($api . http_build_query(['action' => 'query', 'list' => 'search', 'srlimit' => 10, 'srnamespace' => 0,
+        'srsearch' => '"' . $name . '" ' . ($lang === 'fr' ? 'commune ' : 'town ') . $county]));
+    $cands = [];
+    foreach ($r['query']['search'] ?? [] as $i => $hit) {
+        $t = (string) $hit['title'];
+        if ($fold($t) === $fold($name)) { $cands[] = [$i, $t]; }
+        elseif (str_starts_with($fold($t), $fold($name) . ' (') || str_starts_with($fold($t), $fold($name) . ', ')) { $cands[] = [$county !== '' && str_contains($fold($t), $fold($county)) ? $i - 20 : $i + 5, $t]; }
+    }
+    usort($cands, static fn($a, $b) => $a[0] <=> $b[0]);
+    foreach ($cands as [, $t]) { // pas une page d'homonymie
+        $p = wiki_get_json($api . http_build_query(['action' => 'query', 'prop' => 'pageprops', 'ppprop' => 'disambiguation', 'redirects' => 1, 'titles' => $t]));
+        $page = $p['query']['pages'][0] ?? [];
+        if (!empty($page['missing']) || isset($page['pageprops']['disambiguation'])) { continue; }
+        return (string) ($page['title'] ?? $t);
+    }
+    return '';
+}
+
+/**
+ * Chiffres de population d'une page Wikipédia déjà mise en forme (HTML) : la section « Évolution démographique »
+ * (frwiki : une ligne d'années, puis une ligne d'habitants) ou « Historical population » (enwiki : année | habitants).
+ */
+function village_parse_population_html(string $html): array
+{
+    $at = -1; $level = 2;
+    foreach (['Évolution_démographique', 'Démographie', 'Historical_population', 'Population_history', 'Demographics', 'Population', 'Bevölkerungsentwicklung', 'Einwohnerentwicklung'] as $id) {
+        if (preg_match('/<h([2-6])[^>]*\bid="' . preg_quote($id, '/') . '"/u', $html, $m, PREG_OFFSET_CAPTURE)) { $at = $m[0][1]; $level = (int) $m[1][0]; break; }
+    }
+    if ($at < 0) { return []; }
+    $rest = substr($html, $at + 10);
+    $end = preg_match('/<h[2-' . $level . '][\s>]/', $rest, $m, PREG_OFFSET_CAPTURE) ? $m[0][1] : strlen($rest);
+    $part = substr($rest, 0, $end);
+    $part = preg_replace('#<sup\b.*?</sup>#su', '', $part); // appels de notes [1], [a]
+    $dom = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $dom->loadHTML('<?xml encoding="utf-8"?><div>' . $part . '</div>');
+    libxml_clear_errors();
+    $year = static fn(string $t) => preg_match('/^\D{0,3}(1[5-9]\d\d|20\d\d)\D{0,4}$/u', trim($t), $m) ? (int) $m[1] : 0;
+    $count = static function (string $t): int {
+        $t = trim(preg_replace('/\(.*?\)/u', '', $t));
+        if (!preg_match('/^[\d\s\x{00A0}\x{202F}.,\x{2009}]+$/u', $t)) { return 0; }
+        $t = preg_replace('/[.,]\d{1,2}$/', '', $t); // décimales éventuelles
+        return (int) preg_replace('/\D/', '', $t);
+    };
+    $out = [];
+    foreach ($dom->getElementsByTagName('table') as $table) {
+        $rows = [];
+        foreach ($table->getElementsByTagName('tr') as $tr) {
+            $cells = [];
+            foreach ($tr->childNodes as $c) { if ($c instanceof DOMElement && in_array($c->nodeName, ['td', 'th'], true)) { $cells[] = trim(preg_replace('/\s+/u', ' ', $c->textContent)); } }
+            if ($cells) { $rows[] = $cells; }
+        }
+        for ($i = 0; $i < count($rows); $i++) {
+            $ys = array_map($year, $rows[$i]);
+            // une ligne d'années suivie d'une ligne d'habitants
+            if (count($ys) >= 2 && count(array_filter($ys)) === count($ys) && isset($rows[$i + 1]) && count($rows[$i + 1]) === count($ys)) {
+                foreach ($ys as $k => $y) { $n = $count($rows[$i + 1][$k]); if ($n > 0) { $out[$y] = $n; } }
+                $i++;
+                continue;
+            }
+            // année | habitants (| évolution)
+            if (count($rows[$i]) >= 2 && $year($rows[$i][0]) && ($n = $count($rows[$i][1])) > 0) { $out[$year($rows[$i][0])] = $n; }
+        }
+    }
+    ksort($out);
+    $out = array_filter($out, static fn($n) => $n < 40000000);
+    return array_map(static fn($y, $n) => [$y, $n], array_keys($out), array_values($out));
+}
+
+/** Va chercher la page Wikipédia de la commune et en tire l'évolution du nombre d'habitants. */
+function village_wiki_population(PDO $pdo, string $key, string $title = ''): array
+{
+    $v = village_detail($pdo, $key);
+    $country = ascii_fold(mb_strtolower((string) ($v['country'] ?? '')));
+    $langs = in_array($country, ['', 'france', 'belgique', 'suisse', 'luxembourg', 'monaco', 'canada', 'quebec'], true) ? ['fr', 'en'] : (in_array($country, ['allemagne', 'deutschland', 'germany', 'autriche', 'osterreich', 'austria'], true) ? ['de', 'en', 'fr'] : ['en', 'fr']);
+    foreach ($langs as $lang) {
+        $t = $title !== '' && $lang === $langs[0] ? $title : village_wiki_title($lang, (string) $v['name'], (string) ($v['county'] ?? ''));
+        if ($t === '') { continue; }
+        $p = wiki_get_json("https://{$lang}.wikipedia.org/w/api.php?format=json&formatversion=2&" . http_build_query(['action' => 'parse', 'page' => $t, 'prop' => 'text', 'redirects' => 1, 'disablelimitreport' => 1, 'disableeditsection' => 1]));
+        $pops = village_parse_population_html((string) ($p['parse']['text'] ?? ''));
+        $real = (string) ($p['parse']['title'] ?? $t);
+        if (count($pops) >= 2) { return ['populations' => $pops, 'title' => $real, 'url' => "https://{$lang}.wikipedia.org/wiki/" . rawurlencode(str_replace(' ', '_', $real)), 'lang' => $lang]; }
+    }
+    throw new RuntimeException('Pas de chiffres de population trouvés sur Wikipédia pour ' . $v['name'] . '. Tu peux les saisir à la main (crayon en haut).');
+}
+
+/** Enregistre les chiffres récupérés (ils remplacent ceux des mêmes années ; les autres saisis à la main restent). */
+function save_village_populations(PDO $pdo, array $data): array
+{
+    $key = safe_text($data['key'] ?? '');
+    if ($key === '' || !village_place_ids($pdo, $key)) { throw new RuntimeException('Commune introuvable.'); }
+    $merged = [];
+    foreach (village_profile($pdo, $key)['populations'] as $r) { $merged[(int) $r[0]] = (int) $r[1]; }
+    foreach ((array) ($data['populations'] ?? []) as $r) { if (is_array($r) && (int) ($r[0] ?? 0) >= 1500 && (int) $r[0] <= 2100 && (int) ($r[1] ?? 0) > 0) { $merged[(int) $r[0]] = (int) $r[1]; } }
+    ksort($merged);
+    $pops = array_map(static fn($y, $n) => [$y, $n], array_keys($merged), array_values($merged));
+    $source = preg_match('#^https://[a-z]{2,3}\.wikipedia\.org/wiki/#', (string) ($data['source'] ?? '')) ? (string) $data['source'] : '';
+    $pdo->prepare("INSERT INTO village_profiles(place_key, name, populations_json, population_source, updated_at) VALUES(?,?,?,?,CURRENT_TIMESTAMP)
+        ON CONFLICT(place_key) DO UPDATE SET populations_json=excluded.populations_json, population_source=excluded.population_source, updated_at=CURRENT_TIMESTAMP")
+        ->execute([$key, safe_text($data['name'] ?? ''), json_encode($pops), $source]);
+    log_change($pdo, 'meta', 0, 'update', 'Population du village récupérée : ' . safe_text($data['name'] ?? $key));
+    return ['populations' => $pops];
+}

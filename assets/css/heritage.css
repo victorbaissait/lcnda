@@ -362,7 +362,8 @@ fieldset.h-citation legend{font-weight:700;font-size:.85em;padding:0 .3rem}
 .h-faq-item{border-top:1px solid rgba(128,128,128,.25);padding:.45rem 0}
 .h-faq-item summary{cursor:pointer;font-weight:700}
 .h-faq-item p{margin:.35rem 0 .2rem 1rem}
-.h-village-popchart{margin-top:1rem;border-top:1px dotted rgba(128,128,128,.4);padding-top:.6rem}
+.h-village-popchart{margin-top:1rem}
+.h-village-popchart .h-chart{width:100%;height:auto;max-height:340px}
 .h-village-popchart h4{margin:0 0 .3rem}
 .h-village-maps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.1rem 1rem;padding:.3rem 0 .6rem}
 select[data-h-village-bgsel]{max-width:220px}
