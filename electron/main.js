@@ -345,10 +345,23 @@ function sameOrigin(url, origin) {
 }
 const LOADING_URL = require('url').pathToFileURL(path.join(__dirname, 'loading.html')).href;
 
+/**
+ * Fenêtre « à côté » pour consulter un site (Geneanet, Filae… depuis une fiche en ligne) : une page web ordinaire,
+ * isolée (pas de pont vers l'application, session à part), où l'on peut naviguer. Une seule, réutilisée.
+ */
+const sideWindows = new WeakSet();
+const SIDE_FRAME = 'lcnda-side';
+
 /** La fenêtre ne peut afficher que l'application ; tout lien externe s'ouvre dans le navigateur. */
 function lockNavigation(webContents, origin) {
   const external = (url) => { if (/^https?:/i.test(url)) shell.openExternal(url); };
-  webContents.setWindowOpenHandler(({ url }) => {
+  webContents.on('did-create-window', (child, details) => { if (details.frameName === SIDE_FRAME && !sameOrigin(details.url, origin)) sideWindows.add(child.webContents); });
+  webContents.setWindowOpenHandler(({ url, frameName }) => {
+    if (sideWindows.has(webContents)) { external(url); return { action: 'deny' }; } // un lien « nouvel onglet » du site consulté : dans le navigateur
+    if (frameName === SIDE_FRAME && /^https?:/i.test(url) && !sameOrigin(url, origin)) {
+      return { action: 'allow', overrideBrowserWindowOptions: { width: 1100, height: 900, autoHideMenuBar: true, title: 'Recherche',
+        webPreferences: { contextIsolation: true, nodeIntegration: false, sandbox: true, preload: undefined, partition: 'persist:lcnda-web' } } };
+    }
     // Deuxième écran détaché (« Fenêtre ↗ » du panneau À côté) : vraie fenêtre de l'application, même pont et même sécurité
     if (sameOrigin(url, origin)) {
       return { action: 'allow', overrideBrowserWindowOptions: { width: 1280, height: 860, minWidth: 700, minHeight: 500, backgroundColor: '#fbfbfb',
@@ -363,6 +376,7 @@ function lockNavigation(webContents, origin) {
     return { action: 'deny' };
   });
   webContents.on('will-navigate', (event, url) => {
+    if (sideWindows.has(webContents)) { if (!/^https?:/i.test(url) || sameOrigin(url, origin)) event.preventDefault(); return; } // le site consulté navigue librement, sans jamais charger l'application
     if (sameOrigin(url, origin) || url.split('#')[0] === LOADING_URL) return;
     event.preventDefault();
     external(url);

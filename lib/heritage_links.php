@@ -30,7 +30,7 @@ function q_base(string $word): string
  * naissance / mariage / décès, « ancêtres », hommes / femmes, « né le même jour que moi ».
  * Renvoie les critères de recherche (comme une recherche enregistrée) et ce qui a été compris.
  */
-function question_to_criteria(PDO $pdo, string $question): array
+function question_to_criteria(PDO $pdo, string $question, int $personId = 0): array
 {
     $q = trim(preg_replace('/\s+/u', ' ', $question));
     $t = ' ' . strtolower(ascii_fold($q)) . ' ';
@@ -51,7 +51,7 @@ function question_to_criteria(PDO $pdo, string $question): array
         $understood[] = 'personne de référence introuvable (« moi » = la personne de départ de l’arbre)';
     }
     // Parenté d'une personne nommée : « Adrien Paul Baissait a-t-il eu des enfants ? », « les petites-filles de Marie Dupont »
-    $rel = question_relation($pdo, $q, $t);
+    $rel = question_relation($pdo, $q, $t, $personId);
     if ($rel) {
         $c['relation'] = $rel['relation']; $c['relation_of'] = $rel['person'];
         if ($rel['gender']) { $c['gender'] = $rel['gender']; }
@@ -152,7 +152,7 @@ const QUESTION_RELATIONS = [
  * Une question sur les proches d'une personne nommée ? On cherche d'abord la personne (les mots en majuscule qui
  * forment un prénom + un nom de la base), puis un mot de parenté. Rend null si ce n'est pas ce genre de question.
  */
-function question_relation(PDO $pdo, string $q, string $t): ?array
+function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?array
 {
     // Les mots de la question, avec leur place (« d'Émile » → « d », « Émile » ; « L'épouse » → « L », « épouse »)
     preg_match_all('/[\p{L}\p{M}-]+/u', $q, $mm, PREG_OFFSET_CAPTURE);
@@ -197,8 +197,11 @@ function question_relation(PDO $pdo, string $q, string $t): ?array
             usort($matches, static fn($a, $b) => $a['extra'] <=> $b['extra'] ?: $a['id'] <=> $b['id']);
             $score = count($words) * 10 - $matches[0]['extra'];
             if (!$best || $score > $best['score']) {
-                $same = count(array_filter($matches, static fn($m) => $m['extra'] === $matches[0]['extra']));
-                $best = ['score' => $score, 'id' => $matches[0]['id'], 'homonyms' => $same, 'from' => $i, 'to' => $j];
+                $same = array_values(array_map(static fn($m) => $m['id'], array_filter($matches, static fn($m) => $m['extra'] === $matches[0]['extra'])));
+                // une fiche choisie parmi les homonymes (« Répondre pour celle-ci »)
+                $pick = $chosenId && in_array($chosenId, array_column($matches, 'id'), true) ? $chosenId : $matches[0]['id'];
+                if ($pick !== $matches[0]['id'] && !in_array($pick, $same, true)) { $same[] = $pick; }
+                $best = ['score' => $score, 'id' => $pick, 'homonyms' => $same, 'from' => $i, 'to' => $j];
             }
         }
     }
@@ -214,7 +217,8 @@ function question_relation(PDO $pdo, string $q, string $t): ?array
     }
     $low = mb_strtolower($q);
     return ['relation' => $relation, 'person' => $id, 'gender' => $gender, 'labels' => $labels,
-        'label' => $labels[1] . ' de ' . $name . ($life !== '' ? " ({$life})" : '') . ($best['homonyms'] > 1 ? " — {$best['homonyms']} fiches portent ce nom, réponse pour la fiche n°{$id}" : ''), 'name' => $name,
+        'label' => $labels[1] . ' de ' . $name . ($life !== '' ? " ({$life})" : '') . (count($best['homonyms']) > 1 ? ' — ' . count($best['homonyms']) . " fiches portent ce nom, réponse pour la fiche n°{$id}" : ''), 'name' => $name,
+        'homonyms' => count($best['homonyms']) > 1 ? $best['homonyms'] : [],
         'yesno' => (bool) preg_match('/\b(a-t-(il|elle)|ont-(ils|elles)|avai(t|ent)-(il|elle|ils|elles)|est-ce qu|y a-t-il|a t il|a t elle)/u', $low) && !preg_match('/\b(qui|quels?|quelles?|combien|liste|donne|montre)\b/u', $low),
         'rest' => trim(preg_replace('/\s+/u', ' ', $rest))];
 }
@@ -264,9 +268,9 @@ function same_birthday_ids(PDO $pdo, int $personId): array
     return array_values(array_keys(array_filter($md, static fn($v, $id) => $v === $target && $id !== $personId, ARRAY_FILTER_USE_BOTH)));
 }
 
-function ask_question(PDO $pdo, string $question): array
+function ask_question(PDO $pdo, string $question, int $personId = 0): array
 {
-    $r = question_to_criteria($pdo, $question);
+    $r = question_to_criteria($pdo, $question, $personId);
     $ids = !empty($r['criteria']['same_birthday']) ? same_birthday_ids($pdo, (int) $r['criteria']['same_birthday']) : run_saved_search($pdo, $r['criteria']);
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
     $answer = '';
@@ -285,7 +289,12 @@ function ask_question(PDO $pdo, string $question): array
         else { $answer = $n ? "{$rel['name']} : {$what}." : ucfirst($none) . " {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
         }
     }
-    return ['understood' => $r['understood'], 'answer' => $answer, 'criteria' => $r['criteria'], 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
+    // Plusieurs fiches portent le nom cité : on les montre toutes, pour pouvoir répondre pour une autre
+    $homonyms = [];
+    foreach ($r['relation']['homonyms'] ?? [] as $hid) {
+        $homonyms[] = ['id' => (int) $hid, 'name' => question_person_name($pdo, (int) $hid), 'life' => person_life_years($pdo, (int) $hid), 'chosen' => (int) $hid === (int) $r['relation']['person']];
+    }
+    return ['understood' => $r['understood'], 'answer' => $answer, 'criteria' => $r['criteria'], 'homonyms' => $homonyms, 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
 }
 
 /* ─── 🗣️ Langues ─────────────────────────────────────────────────────── */

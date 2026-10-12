@@ -47,18 +47,21 @@
             after?.();
         } catch (error) { toast(error.message, 'error'); }
     }
-    async function runQuestion(q, after) {
+    async function runQuestion(q, after, personId = 0) {
         const out = document.getElementById('h-question-out');
         if (!out || !q.trim()) return;
         out.innerHTML = '<p class="muted">Recherche…</p>';
         try {
-            const r = await api('ask_question', {q});
+            const r = await api('ask_question', personId ? {q, person_id: personId} : {q});
             S().hQuestion = q;
-            out.innerHTML = `<p class="h-understood">J’ai compris : ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>
+            // Homonymes : toutes les fiches qui portent ce nom, pour répondre pour une autre
+            const homonyms = (r.homonyms || []).length > 1 ? `<div class="h-question-homonyms"><p><strong>${r.homonyms.length} fiches portent ce nom :</strong></p><ul>${r.homonyms.map(h => `<li>${personLink(h.id, h.name, h.life ? `(${h.life})` : '')} <small class="muted">fiche n°${h.id}</small> ${h.chosen ? '<span class="collection-kind">réponse ci-dessous</span>' : `<button type="button" class="button small secondary" data-h-question-person="${h.id}">Répondre pour celle-ci</button>`}</li>`).join('')}</ul></div>` : '';
+            out.innerHTML = `<p class="h-understood">J’ai compris : ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>${homonyms}
                 ${r.answer ? `<p class="h-question-answer">${esc(r.answer)}</p>` : ''}
                 <h4>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4>${r.people.length ? resultsTable(r.people) : empty('Aucune fiche ne répond à cette question.')}
                 ${r.criteria && !r.criteria.same_birthday ? '<p><button type="button" class="button small secondary" data-h-question-save>Enregistrer comme recherche</button></p>' : ''}`;
             out.querySelector('[data-h-question-save]')?.addEventListener('click', () => saveQuestion(q, r.criteria, after));
+            out.querySelectorAll('[data-h-question-person]').forEach(b => b.addEventListener('click', () => runQuestion(q, after, Number(b.dataset.hQuestionPerson))));
         } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
     }
     // Les recherches enregistrées, en bas de l'écran « Poser une question », dans une section qui se déplie

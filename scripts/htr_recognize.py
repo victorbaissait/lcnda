@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
 import shutil
 import subprocess
 import sys
@@ -20,6 +22,21 @@ def respond(payload: dict, status: int = 0) -> int:
     sys.stdout.write(json.dumps(payload, ensure_ascii=False))
     sys.stdout.write("\n")
     return status
+
+
+def model_path_for_kraken(model: Path, tmpdir: Path) -> Path:
+    """Kraken 5 et 6 découpent la valeur de « -m » comme une ligne de commande (« tag:modèle ») :
+    un espace dans le chemin (« Application Support » sur Mac) ou un « : » (C:\\ sous Windows)
+    donnait « Mappings must be in format tag:model ». On lui passe un nom simple, relatif au dossier
+    temporaire dans lequel Kraken est lancé."""
+    if re.match(r"^[\w/.+\-()=^&;,]+$", str(model)):
+        return model
+    target = tmpdir / ("model" + model.suffix)
+    try:
+        os.symlink(model, target)
+    except OSError:
+        shutil.copyfile(model, target)
+    return Path(target.name)
 
 
 def run_kraken(image: Path, model: Path, segment_direction: str = "horizontal-lr", base_dir: str = "auto") -> dict:
@@ -40,7 +57,7 @@ def run_kraken(image: Path, model: Path, segment_direction: str = "horizontal-lr
         }
 
     def recognize(cmd: list[str], output: Path) -> tuple[int, str, str, str]:
-        proc = subprocess.run(cmd, text=True, capture_output=True, check=False)
+        proc = subprocess.run(cmd, text=True, capture_output=True, check=False, cwd=str(output.parent))
         if proc.returncode != 0:
             details = (proc.stderr or proc.stdout or "").strip()
             return proc.returncode, "", details, "error"
@@ -51,6 +68,7 @@ def run_kraken(image: Path, model: Path, segment_direction: str = "horizontal-lr
 
     with tempfile.TemporaryDirectory(prefix="genealogy-htr-") as tmpdir:
         output = Path(tmpdir) / "recognized.txt"
+        model = model_path_for_kraken(model, Path(tmpdir))
         segmented_cmd = [
             kraken,
             "-i",

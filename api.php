@@ -259,7 +259,7 @@ try {
         'impossible_journeys' => json_response(['alerts' => impossible_journeys($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'sync_status' => json_response(sync_status($pdo)),
         'sync_export' => sync_export($pdo),
-        'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''))),
+        'ask_question' => json_response(ask_question($pdo, safe_text($_GET['q'] ?? ''), safe_int($_GET['person_id'] ?? 0))),
         'languages_overview' => json_response(languages_overview($pdo)),
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
         'villages' => json_response(['villages' => villages_list($pdo, safe_text($_GET['q'] ?? ''))]),
@@ -1999,7 +1999,7 @@ function person_detail(PDO $pdo, int $id): never
         ORDER BY marriage_year IS NULL, marriage_year, f.id");
     $families->execute([$id, $id, $id, $id]);
 
-    $onlineSheets = $pdo->prepare('SELECT * FROM person_online_sheets WHERE person_id=? ORDER BY updated_at DESC,id DESC');
+    $onlineSheets = $pdo->prepare('SELECT s.*, m.filename AS screenshot_filename, m.thumbnail AS screenshot_thumbnail, m.title AS screenshot_title FROM person_online_sheets s LEFT JOIN media m ON m.id=s.screenshot_media_id WHERE s.person_id=? ORDER BY s.updated_at DESC,s.id DESC');
     $onlineSheets->execute([$id]);
     $onlineSheetRows = array_map(static function($row){
         $checks = json_decode((string)($row['checks_json'] ?? '[]'), true);
@@ -11141,6 +11141,7 @@ function add_event(PDO $pdo,array $data): array
     $stmt=$pdo->prepare("INSERT INTO events(scope,person_id,family_id,event_type_id,date_text,date_calendar,date_converted,date_alternative,year,place_id,title,description,address,extra_info,former_place_name,former_country,precise_lat,precise_lon,first_name,last_name,work_fields,fact_confidence,confidence_origin,confidence_media_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     $stmt->execute([$scope,$scope==='person'?$personId:null,$scope==='family'?$familyId:null,$typeId,$date,$dateCalendar,$dateConverted,safe_text($data['date_alternative']??''),$year,$placeId?:null,safe_text($data['title']??''),safe_text($data['description']??''),safe_text($data['address']??''),safe_text($data['extra_info']??''),safe_text($data['former_place_name']??''),safe_text($data['former_country']??''),$preciseLat,$preciseLon,safe_text($data['first_name']??''),safe_text($data['last_name']??''),$workFields,$factConfidence,$confidenceOrigin,$confidenceMediaId]);
     $id=(int)$pdo->lastInsertId();
+    if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]);
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     log_change($pdo,'event',$id,'create',$scope==='family'?'Ajout d’un événement à la famille #'.$familyId:'Ajout d’un événement à la fiche #'.$personId);
     return ['id'=>$id];
@@ -11197,6 +11198,7 @@ function save_event(PDO $pdo,array $data): array
         $pdo->prepare('UPDATE events SET event_type_id=?,date_text=?,date_calendar=?,date_converted=?,date_alternative=?,year=?,place_id=?,title=?,description=?,address=?,extra_info=?,former_place_name=?,former_country=?,first_name=?,last_name=?,work_fields=?,fact_confidence=?,confidence_origin=?,confidence_media_id=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
             ->execute([$typeId,$date,$dateCalendar,$dateConverted,$dateAlternative,$year,$placeId?:null,safe_text($data['title']??''),safe_text($data['description']??''),safe_text($data['address']??''),safe_text($data['extra_info']??''),safe_text($data['former_place_name']??''),safe_text($data['former_country']??''),safe_text($data['first_name']??''),safe_text($data['last_name']??''),$workFields,$factConfidence,$confidenceOrigin,$confidenceMediaId,$id]);
     }
+    if(array_key_exists('date_uncertain',$data))$pdo->prepare('UPDATE events SET date_uncertain=? WHERE id=?')->execute([!empty($data['date_uncertain'])&&$data['date_uncertain']!=='0'?1:0,$id]); // « date incertaine » cochée
     link_event_confidence_media($pdo,$id,$confidenceMediaId);
     $stmt->execute([$id]);$after=$stmt->fetch();
     log_change($pdo,'event',$id,'update','Modification de l’événement #'.$id,$before,$after);
@@ -11260,18 +11262,21 @@ function save_online_sheet(PDO $pdo,array $data): array
     $url = safe_text($data['url'] ?? '');
     $notes = safe_text($data['notes'] ?? '');
     $checksJson = sanitize_online_sheet_checks($data['checks'] ?? '[]');
+    // Capture d'écran de l'arbre : un média déjà envoyé (vide = aucune)
+    $shot = safe_int($data['screenshot_media_id'] ?? 0) ?: null;
+    if ($shot && !record_exists($pdo, 'media', $shot)) { $shot = null; }
     if ($id) {
         $stmt = $pdo->prepare('SELECT * FROM person_online_sheets WHERE id=?'); $stmt->execute([$id]);
         $before = $stmt->fetch();
         if (!$before) throw new RuntimeException('Fiche en ligne introuvable');
-        $pdo->prepare('UPDATE person_online_sheets SET label=?,site=?,url=?,notes=?,checks_json=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
-            ->execute([$label,$site,$url,$notes,$checksJson,$id]);
+        $pdo->prepare('UPDATE person_online_sheets SET label=?,site=?,url=?,notes=?,checks_json=?,screenshot_media_id=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
+            ->execute([$label,$site,$url,$notes,$checksJson,$shot,$id]);
         $stmt->execute([$id]); $after = $stmt->fetch();
         log_change($pdo,'person_online_sheet',$id,'update','Modification de la fiche en ligne « '.$label.' »',$before,$after);
         return $after;
     }
-    $stmt = $pdo->prepare('INSERT INTO person_online_sheets(person_id,label,site,url,notes,checks_json,created_at,updated_at) VALUES(?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)');
-    $stmt->execute([$personId,$label,$site,$url,$notes,$checksJson]);
+    $stmt = $pdo->prepare('INSERT INTO person_online_sheets(person_id,label,site,url,notes,checks_json,screenshot_media_id,created_at,updated_at) VALUES(?,?,?,?,?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)');
+    $stmt->execute([$personId,$label,$site,$url,$notes,$checksJson,$shot]);
     $newId = (int)$pdo->lastInsertId();
     log_change($pdo,'person_online_sheet',$newId,'create','Ajout d’une fiche en ligne « '.$label.' » à la fiche #'.$personId);
     $stmt = $pdo->prepare('SELECT * FROM person_online_sheets WHERE id=?'); $stmt->execute([$newId]);

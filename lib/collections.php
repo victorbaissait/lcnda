@@ -393,7 +393,7 @@ function lcnda_curl_tls(): array
 function link_inventory(PDO $pdo): array
 {
     $sources = [
-        ['person_online_sheets', 'url', "SELECT s.id, s.url AS value, s.person_id, COALESCE(s.title,'') AS label FROM person_online_sheets s WHERE s.url LIKE 'http%'", 'Fiche en ligne'],
+        ['person_online_sheets', 'url', "SELECT s.id, s.url AS value, s.person_id, COALESCE(s.label,'') AS label FROM person_online_sheets s WHERE s.url LIKE 'http%'", 'Fiche en ligne'],
         ['sources', 'url', "SELECT s.id, s.url AS value, NULL AS person_id, COALESCE(s.title,'') AS label FROM sources s WHERE s.url LIKE 'http%'", 'Source'],
         ['media', 'document_url', "SELECT m.id, m.document_url AS value, NULL AS person_id, COALESCE(m.title,'') AS label FROM media m WHERE m.document_url LIKE 'http%'", 'Média'],
     ];

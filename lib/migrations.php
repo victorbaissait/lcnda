@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 19;
+const SCHEMA_VERSION = 20;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -40,6 +40,7 @@ function migration_steps(): array
         17 => 'schema_v17',
         18 => 'schema_v18',
         19 => 'schema_v19',
+        20 => 'schema_v20',
     ];
 }
 
@@ -1535,4 +1536,13 @@ function schema_v19(PDO $pdo): void
         position INTEGER NOT NULL DEFAULT 0
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_voter_votes_person ON voter_votes(person_id)');
+}
+
+/** n°20 : « date incertaine » cochée sur un événement ; capture d'écran de l'arbre d'une fiche en ligne. */
+function schema_v20(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(events)')->fetchAll(), 'name');
+    if (!in_array('date_uncertain', $cols, true)) { $pdo->exec('ALTER TABLE events ADD COLUMN date_uncertain INTEGER NOT NULL DEFAULT 0'); }
+    $cols = array_column($pdo->query('PRAGMA table_info(person_online_sheets)')->fetchAll(), 'name');
+    if (!in_array('screenshot_media_id', $cols, true)) { $pdo->exec('ALTER TABLE person_online_sheets ADD COLUMN screenshot_media_id INTEGER'); }
 }

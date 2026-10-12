@@ -85,7 +85,8 @@
             <section class="h-me-main">${room ? `
                 ${readOnly ? `<h3>${esc(room.name)}</h3>${room.intro ? `<p>${esc(room.intro)}</p>` : ''}` : `<form data-me-roomform class="h-me-form h-me-roomform"><label class="span-2">Nom de la salle<input name="name" value="${esc(room.name)}" maxlength="120"></label>
                     <label class="span-2">Texte d’accueil de la salle <small>(lu au début de la visite guidée)</small><textarea name="intro" rows="2">${esc(room.intro)}</textarea></label>
-                    <label>Taille<select name="size">${[['small', 'Petite'], ['medium', 'Moyenne'], ['large', 'Grande']].map(([v, l]) => `<option value="${v}" ${(room.settings.size || 'medium') === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <label>Taille<select name="size">${[['small', 'Petite (10 × 8 m)'], ['medium', 'Moyenne (14 × 10 m)'], ['large', 'Grande (18 × 12 m)'], ['custom', 'Sur mesure…']].map(([v, l]) => `<option value="${v}" ${(room.settings.size || 'medium') === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <span class="h-me-size-custom" data-me-size-custom ${room.settings.size === 'custom' ? '' : 'hidden'}><label>Largeur (m)<input type="number" name="width" min="8" max="40" step="0.5" value="${esc(room.settings.width ?? 14)}"></label><label>Profondeur (m)<input type="number" name="depth" min="8" max="40" step="0.5" value="${esc(room.settings.depth ?? 10)}"></label></span>
                     <label>Sol<select name="floor">${[['light', 'Clair'], ['wood', 'Parquet'], ['stone', 'Pierre'], ['dark', 'Sombre']].map(([v, l]) => `<option value="${v}" ${(room.settings.floor || 'light') === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <label>Couleur des murs<input type="color" name="wall" value="${esc(room.settings.wall || '#ffffff')}"></label>
                     <div class="h-me-audio">${audioField('room', room)}</div>
@@ -127,9 +128,13 @@
         dlg.querySelectorAll('[data-me-room-up],[data-me-room-down]').forEach(b => b.addEventListener('click', guard(async () => { const i = Number(b.dataset.meRoomUp ?? b.dataset.meRoomDown), to = b.dataset.meRoomUp !== undefined ? i - 1 : i + 1; const ids = data.rooms.map(r => r.id); const [mv] = ids.splice(i, 1); ids.splice(to, 0, mv); await post('museum_reorder', {what: 'rooms', ids}); again(ids.indexOf(room?.id)); })));
         if (!room) return;
         const rf = dlg.querySelector('[data-me-roomform]');
-        rf.addEventListener('submit', guard(async e => { e.preventDefault(); await post('save_museum_room', {id: room.id, name: rf.name.value, intro: rf.intro.value, settings: {size: rf.size.value, floor: rf.floor.value, wall: rf.wall.value}}); toast('Salle enregistrée.'); again(); }));
+        rf.addEventListener('submit', guard(async e => { e.preventDefault(); await post('save_museum_room', {id: room.id, name: rf.name.value, intro: rf.intro.value, settings: {size: rf.size.value, floor: rf.floor.value, wall: rf.wall.value, ...(rf.size.value === 'custom' ? {width: rf.width.value, depth: rf.depth.value} : {})}}); toast('Salle enregistrée.'); again(); }));
         dlg.querySelector('[data-me-room-del]').addEventListener('click', guard(async () => { if (!confirm(`Supprimer la salle « ${room.name} » et tout ce qui y est exposé ? (les photos restent dans la base)`)) return; await post('delete_museum_room', {id: room.id}); again(0); }));
         bindAudio(rf, 'room', room, () => again());
+        rf.size.addEventListener('change', () => { // « Sur mesure » part de la taille actuelle
+            const box = rf.querySelector('[data-me-size-custom]'); box.hidden = rf.size.value !== 'custom';
+            if (rf.size.value === 'custom' && room.settings.size !== 'custom') { const [w, d] = window.LCNDA_MUSEUM_VIEWER.roomSize(room.settings); rf.width.value = w; rf.depth.value = d; }
+        });
         dlg.querySelectorAll('[data-me-up],[data-me-down]').forEach(b => b.addEventListener('click', guard(async () => { const k = Number(b.dataset.meUp ?? b.dataset.meDown); await reorder('items', room.items, k, b.dataset.meUp !== undefined ? k - 1 : k + 1); again(); })));
         dlg.querySelectorAll('[data-me-del]').forEach(b => b.addEventListener('click', guard(async () => { const it = room.items[Number(b.dataset.meDel)]; if (!confirm(`Retirer « ${it.title || 'cet élément'} » du musée ?`)) return; await post('delete_museum_item', {id: it.id}); again(); })));
         dlg.querySelectorAll('[data-me-edit]').forEach(b => b.addEventListener('click', () => itemDialog(room, room.items[Number(b.dataset.meEdit)], () => again())));

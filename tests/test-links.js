@@ -44,6 +44,12 @@ $pdo->exec("INSERT INTO families(id,partner1_id,partner2_id) VALUES(21,7,22)");
 foreach (['particule' => 'Les enfants de Emile Le Gall', 'debut' => 'Enfants de Émile Le Gall', 'minuscules' => 'les enfants de emile le gall', 'elision' => 'Quels sont les enfants d’Émile Le Gall ?', 'epouse' => 'Qui a épousé Louis Baissait ?', 'filtre' => 'Les enfants de Adrien Paul Baissait nés à Lille'] as $k => $qq) {
     $a = ask_question($pdo, $qq); $out['rel2_' . $k] = [array_column($a['people'], 'id'), $a['answer'], $a['understood']];
 }
+// Homonymes : deux Rose Le Gall ; la seconde a un enfant, on répond pour elle quand on la choisit
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender) VALUES(30,'Rose','Le Gall','female'),(31,'Anne','Le Gall','female')");
+$pdo->exec("INSERT INTO families(id,partner2_id) VALUES(30,30)"); $pdo->exec("INSERT INTO family_children(family_id,child_id) VALUES(30,31)");
+$h1 = ask_question($pdo, 'Les enfants de Rose Le Gall'); $h2 = ask_question($pdo, 'Les enfants de Rose Le Gall', 30);
+$out['homonyms'] = [array_column($h1['homonyms'], 'id'), array_column($h1['homonyms'], 'chosen'), array_column($h2['people'], 'id'), array_column($h2['homonyms'], 'chosen'), ask_question($pdo, 'Les enfants de Rose Le Gall', 9999)['homonyms'][0]['chosen']];
+$pdo->exec('DELETE FROM family_children WHERE family_id=30'); $pdo->exec('DELETE FROM families WHERE id=30'); $pdo->exec('DELETE FROM persons WHERE id IN (30,31)');
 $sv = save_saved_search($pdo, ['name' => 'Enfants', 'criteria' => ask_question($pdo, 'les enfants de Adrien Paul Baissait')['criteria']]);
 $out['rel_saved'] = [$sv['count'], saved_search_label(saved_searches_data($pdo)['searches'][0]['criteria'])];
 save_person_language($pdo, ['person_id' => 4, 'language' => 'Breton', 'certainty' => 'certain']);
@@ -75,6 +81,7 @@ const checks = [
   ['question : nom à particule, accents ou minuscules, question qui commence par « Enfants », élision « d’ »', () => { for (const k of ['particule', 'debut', 'minuscules', 'elision']) assert.deepEqual(out['rel2_' + k][0], [21], k); }],
   ['question : « qui a épousé » ne cherche pas en plus un mariage', () => assert.deepEqual(out.rel2_epouse[0], [22])],
   ['question : des enfants, mais aucun ne répond aux autres critères', () => { assert.deepEqual(out.rel2_filtre[0], []); assert.ok(out.rel2_filtre[1].includes('2 enfants dans l’arbre'), out.rel2_filtre[1]); }],
+  ['question : homonymes listés, réponse pour celui qu’on choisit', () => assert.deepEqual(out.homonyms, [[21, 30], [true, false], [31], [false, true], true])],
   ['recherche enregistrée sur la parenté', () => { assert.equal(out.rel_saved[0], 2); assert.ok(out.rel_saved[1].startsWith('enfants de Adrien Paul Baissait')); }],
   ['langue héritée d’un arrière-grand-parent', () => assert.deepEqual(out.lang_moi, ['breton'])],
   ['refus explicite de l’héritage', () => assert.deepEqual(out.lang_jean, [])],

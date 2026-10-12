@@ -130,6 +130,7 @@ function museum_clean_settings(mixed $raw, array $allowed): string
         if (!array_key_exists($k, $raw)) { continue; }
         $v = $raw[$k];
         if ($type === 'color') { if (is_string($v) && preg_match('/^#[0-9a-f]{6}$/i', $v)) { $out[$k] = $v; } }
+        elseif ($type === 'meters') { if (is_numeric($v)) { $out[$k] = max(8, min(40, round((float) $v * 2) / 2)); } } // taille d'une salle sur mesure
         elseif ($type === 'bool') { $out[$k] = !empty($v) && $v !== '0'; }
         elseif ($type === 'num') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = max(-1, min(3.4, round((float) $v, 3))); } }
         elseif ($type === 'deg') { if ($v !== '' && $v !== null && is_numeric($v)) { $d = fmod((float) $v + 180, 360); if ($d < 0) { $d += 360; } $out[$k] = (int) round($d - 180); } }
@@ -151,7 +152,7 @@ function museum_save(PDO $pdo, array $data): array
 function museum_save_room(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
-    $settings = museum_clean_settings($data['settings'] ?? [], ['size' => ['small', 'medium', 'large'], 'wall' => 'color', 'floor' => ['light', 'wood', 'stone', 'dark']]);
+    $settings = museum_clean_settings($data['settings'] ?? [], ['size' => ['small', 'medium', 'large', 'custom'], 'width' => 'meters', 'depth' => 'meters', 'wall' => 'color', 'floor' => ['light', 'wood', 'stone', 'dark']]);
     $vals = [mb_substr(safe_text($data['name'] ?? ''), 0, 120) ?: 'Nouvelle salle', h_long($data, 'intro', 4000), $settings];
     if ($id) {
         museum_writable($pdo, museum_of_room($pdo, $id));

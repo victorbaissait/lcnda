@@ -13,6 +13,12 @@
 (() => {
     'use strict';
     const SIZES = {small: [10, 8], medium: [14, 10], large: [18, 12]};
+    // Taille d'une salle : petite, moyenne, grande, ou sur mesure (largeur × profondeur en mètres)
+    const clampM = (v, def) => { const n = Number(v); return Number.isFinite(n) && n > 0 ? Math.max(8, Math.min(40, n)) : def; };
+    function roomSize(st = {}) {
+        if (st.size === 'custom') return [clampM(st.width, 14), clampM(st.depth, 10)];
+        return SIZES[st.size] || SIZES.medium;
+    }
     const HEIGHT = 4.4, EYE = 1.62;
     const MODELS = {bench: 'Banc', chair: 'Chaise', sofa: 'Canapé', plant: 'Plante', column: 'Colonne', pedestal: 'Socle', rope: 'Cordon', rug: 'Tapis', lamp: 'Lampadaire', vase: 'Vase', piano: 'Piano', table: 'Table', screen: 'Paravent'};
     const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[c]));
@@ -32,7 +38,7 @@
      * Servi aussi au plan de l'aménagement, pour qu'il montre exactement la même chose que la visite.
      */
     function layoutRoom(room) {
-        const [W, D] = SIZES[room.settings?.size] || SIZES.medium;
+        const [W, D] = roomSize(room.settings);
         const spots = new Map();
         const byWall = {back: [], left: [], right: [], front: []}; const center = [];
         (room.items || []).forEach(it => { if (!isWallKind(it.kind) || it.wall === 'center') center.push(it); else (byWall[it.wall] || byWall.back).push(it); });
@@ -74,12 +80,14 @@
 
     function mount(THREE, container, data, opts = {}) {
         const rooms = (data.rooms || []).filter(Boolean);
+        let voiceRate = 1; // vitesse de la voix de synthèse, gardée d'une visite à l'autre
+        try { voiceRate = [0.75, 1, 1.25, 1.5, 1.75, 2].includes(Number(localStorage.getItem('lcnda-museum-voice-rate'))) ? Number(localStorage.getItem('lcnda-museum-voice-rate')) : 1; } catch (_) {}
         container.classList.add('lcnda-museum');
         container.innerHTML = `<div class="lm-canvas"></div>
             <header class="lm-top"><div class="lm-title"><strong>${esc(data.title || 'Musée de famille')}</strong><span data-lm-room></span></div>
                 <div class="lm-actions"><select data-lm-rooms aria-label="Aller dans une salle">${rooms.map((r, i) => `<option value="${i}">${i + 1}. ${esc(r.name || 'Salle')}</option>`).join('')}</select>
                 <button type="button" data-lm-tour>▶ Visite guidée</button>${data.settings?.guestbook === false ? '' : '<button type="button" data-lm-book>📖 Livre d’or</button>'}<button type="button" data-lm-catalog>🗂 Catalogue</button>
-                <button type="button" data-lm-voice title="Lire à voix haute les cartels sans enregistrement">${opts.voice === false ? '🔇' : '🔊'}</button>${opts.canEdit ? '<button type="button" data-lm-edit>✎ Aménager</button>' : ''}${opts.onExit ? '<button type="button" data-lm-exit title="Retour">✕</button>' : ''}</div></header>
+                <button type="button" data-lm-voice title="Lire à voix haute les cartels sans enregistrement">${opts.voice === false ? '🔇' : '🔊'}</button><select data-lm-rate title="Vitesse de la voix de synthèse (pas des enregistrements)" aria-label="Vitesse de la voix">${[0.75, 1, 1.25, 1.5, 1.75, 2].map(r => `<option value="${r}" ${r === voiceRate ? 'selected' : ''}>×${String(r).replace('.', ',')}</option>`).join('')}</select>${opts.canEdit ? '<button type="button" data-lm-edit>✎ Aménager</button>' : ''}${opts.onExit ? '<button type="button" data-lm-exit title="Retour">✕</button>' : ''}</div></header>
             <div class="lm-caption" data-lm-caption hidden></div>
             <div class="lm-tourbar" data-lm-tourbar hidden><button type="button" data-lm-t="prev" title="Précédent">⏮</button><button type="button" data-lm-t="pause" title="Pause">⏸</button><button type="button" data-lm-t="next" title="Suivant">⏭</button><button type="button" data-lm-t="stop" title="Arrêter la visite">⏹</button><span data-lm-tourpos></span></div>
             <footer class="lm-help">Flèches ou Z Q S D : se déplacer · glisser : regarder · clic sur une œuvre : la voir de près · clic au sol : y aller</footer>
@@ -154,7 +162,7 @@
             disposeScene(); stopAudio();
             const room = rooms[i]; roomIndex = i;
             const st = room.settings || {};
-            [W, D] = SIZES[st.size] || SIZES.medium;
+            [W, D] = roomSize(st);
             scene = new THREE.Scene();
             const wallColor = new THREE.Color(st.wall || data.settings?.wall || '#ffffff');
             scene.background = new THREE.Color(0xffffff);
@@ -444,7 +452,7 @@
         function speak(text) {
             return new Promise(resolve => {
                 if (!voice || !window.speechSynthesis || !text) { setTimeout(resolve, Math.max(4500, String(text || '').split(/\s+/).length * 330)); return; }
-                const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = 0.98;
+                const u = new SpeechSynthesisUtterance(text); u.lang = 'fr-FR'; u.rate = 0.98 * voiceRate;
                 const fr = speechSynthesis.getVoices().find(v => /^fr/i.test(v.lang)); if (fr) u.voice = fr;
                 u.onend = u.onerror = () => resolve(); speechSynthesis.speak(u);
             });
@@ -515,6 +523,10 @@
         $('[data-lm-rooms]').addEventListener('change', e => { stopTour(); enterRoom(Number(e.target.value)); cv.focus(); });
         $('[data-lm-book]')?.addEventListener('click', openBook);
         $('[data-lm-catalog]').addEventListener('click', printCatalog);
+        $('[data-lm-rate]').addEventListener('change', e => { // vaut à partir du cartel suivant
+            voiceRate = Number(e.target.value) || 1; try { localStorage.setItem('lcnda-museum-voice-rate', String(voiceRate)); } catch (_) {}
+            cv.focus();
+        });
         $('[data-lm-voice]').addEventListener('click', e => { voice = !voice; e.target.textContent = voice ? '🔊' : '🔇'; if (!voice) try { speechSynthesis.cancel(); } catch (_) {} });
         $('[data-lm-exit]')?.addEventListener('click', () => opts.onExit?.());
         $('[data-lm-edit]')?.addEventListener('click', () => opts.onEdit?.(roomIndex));
@@ -544,5 +556,5 @@
             goRoom: i => enterRoom(i), startTour, stopTour,
         };
     }
-    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, alongOf, wallLimit, halfWidth};
+    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, roomSize, alongOf, wallLimit, halfWidth};
 })();

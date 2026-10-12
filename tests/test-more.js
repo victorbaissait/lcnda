@@ -77,8 +77,11 @@ $out['undo'] = [undo_harmonize($pdo, ['id' => $hist[0]['id']])['restored'], (int
 $names = variant_groups($pdo, 'last_name');
 $out['names'] = $names[0]['proposal'] ?? null;
 
-// Lieux mal placés : Roubaix a latitude et longitude inversées
+// Lieux mal placés : Roubaix a latitude et longitude inversées ; Cayenne (Guyane) est bien en France
+$pdo->exec("INSERT INTO places(name,county,country,latitude,longitude) VALUES('Cayenne','Guyane','France',4.9333,-52.3333)");
+$pdo->prepare('INSERT INTO events(scope,person_id,event_type_id,place_id) VALUES(?,1,(SELECT min(id) FROM event_types),?)')->execute(['person', $cayenne = (int) $pdo->lastInsertId()]);
 $sus = suspicious_places($pdo);
+$pdo->exec('DELETE FROM events WHERE place_id=' . $cayenne); $pdo->exec('DELETE FROM places WHERE id=' . $cayenne);
 $out['misplaced'] = array_map(fn($a) => [$a['place']['name'], $a['suggest']['why'] ?? null], $sus['alerts']);
 fix_place($pdo, ['id' => 2, 'lat' => $sus['alerts'][0]['suggest']['lat'], 'lon' => $sus['alerts'][0]['suggest']['lon']]);
 $out['misplaced_after'] = count(suspicious_places($pdo)['alerts']);
@@ -149,7 +152,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°19)', () => assert.equal(out.version, 19)],
+  ['structure à jour (n°20)', () => assert.equal(out.version, 20)],
   ['actes de moins de 100 ans, réservés jusqu’à 75 ans', () => { assert.deepEqual(out.acts.map(a => a[0]), ['naissance']); assert.equal(out.acts[0][1], false); assert.equal(out.acts[0][2], '2065-04-04'); }],
   ['lettre de demande à la mairie', () => assert.deepEqual(out.letter, [true, true, true])],
   ['courrier créé, relié à l’acte, rappel à l’ouverture', () => { assert.deepEqual(out.request, [true, true, 1]); assert.equal(out.acts_after, true); }],
@@ -163,7 +166,7 @@ const checks = [
   ['harmonisation : valeur avec espace en trop comprise', () => assert.deepEqual(out.trim, [5, 5])],
   ['harmonisation annulée', () => assert.deepEqual(out.undo, [5, 0, false])],
   ['DUPONT / Dupont : forme proposée', () => assert.equal(out.names, 'Dupont')],
-  ['lieu aux coordonnées inversées repéré puis corrigé', () => { assert.deepEqual(out.misplaced[0], ['Roubaix', 'Inverser latitude et longitude']); assert.equal(out.misplaced_after, 0); }],
+  ['lieu aux coordonnées inversées repéré puis corrigé', () => { assert.deepEqual(out.misplaced, [['Roubaix', 'Inverser latitude et longitude']]); assert.equal(out.misplaced_after, 0); }],
   ['tailles lues dans toutes les écritures', () => { assert.deepEqual(out.heights, [1.65, 1.6, 1.65, 1.72, null]); assert.equal(out.heights_people, 3); }],
   ['résistant : profil, étapes dans l’ordre, case cochée, « cité dans »', () => assert.deepEqual(out.resistance, ['Max', ['cache', 'arrestation'], 1, 1])],
   ['bloc personnalisé : champ obligatoire', () => assert.equal(out.required, 'refusé')],

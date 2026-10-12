@@ -640,6 +640,30 @@ const COUNTRY_BOXES = [
     'canada' => [41.6, 83.2, -141.1, -52.6], 'etats-unis' => [18.9, 71.4, -179.2, -66.9], 'argentine' => [-55.1, -21.8, -73.6, -53.6], 'bresil' => [-33.8, 5.3, -74.0, -34.8],
 ];
 
+/** La France d'outre-mer : départements, collectivités et territoires (ce n'est pas « hors de France »). */
+const FRANCE_OVERSEAS_BOXES = [
+    'Guadeloupe' => [15.8, 16.6, -61.9, -60.9], 'Martinique' => [14.3, 14.9, -61.3, -60.7], 'Guyane' => [2.0, 5.9, -54.7, -51.5],
+    'La Réunion' => [-21.5, -20.8, 55.1, 55.9], 'Mayotte' => [-13.1, -12.6, 44.9, 45.4], 'Saint-Pierre-et-Miquelon' => [46.7, 47.2, -56.5, -56.0],
+    'Saint-Barthélemy et Saint-Martin' => [17.8, 18.2, -63.2, -62.7], 'Polynésie française' => [-28.0, -7.0, -155.0, -134.0],
+    'Nouvelle-Calédonie' => [-23.0, -19.0, 158.0, 169.0], 'Wallis-et-Futuna' => [-14.5, -13.0, -178.3, -176.0],
+    'Terres australes et antarctiques' => [-50.1, -11.0, 37.0, 78.0], 'Clipperton' => [10.2, 10.4, -109.3, -109.1],
+];
+
+/** Le point est-il dans le pays (pour la France : métropole, Corse et outre-mer) ? */
+function place_in_country(string $country, float $lat, float $lon): bool
+{
+    $boxes = [COUNTRY_BOXES[$country]];
+    if ($country === 'france') { $boxes = [...$boxes, ...array_values(FRANCE_OVERSEAS_BOXES)]; }
+    foreach ($boxes as [$a, $b, $c, $d]) { if ($lat >= $a && $lat <= $b && $lon >= $c && $lon <= $d) { return true; } }
+    return false;
+}
+
+function france_overseas_name(float $lat, float $lon): ?string
+{
+    foreach (FRANCE_OVERSEAS_BOXES as $name => [$a, $b, $c, $d]) { if ($lat >= $a && $lat <= $b && $lon >= $c && $lon <= $d) { return $name; } }
+    return null;
+}
+
 function suspicious_places(PDO $pdo): array
 {
     $rows = $pdo->query("SELECT p.id, p.name, p.county, p.state, p.country, p.latitude AS lat, p.longitude AS lon, p.admin4_code, count(e.id) AS n
@@ -671,7 +695,7 @@ function suspicious_places(PDO $pdo): array
         if ($lat == 0.0 && $lon == 0.0) { $reasons[] = 'Coordonnées 0, 0 (en plein océan, au large de l’Afrique)'; }
         elseif (isset(COUNTRY_BOXES[$country])) {
             [$a, $b, $c, $d] = COUNTRY_BOXES[$country];
-            if (!($lat >= $a && $lat <= $b && $lon >= $c && $lon <= $d)) {
+            if (!place_in_country($country, $lat, $lon)) {
                 $reasons[] = 'Hors de ' . ($r['country'] ?: 'France') . ' alors que le pays indiqué est ' . ($r['country'] ?: 'France');
                 if ($lon >= $a && $lon <= $b && $lat >= $c && $lat <= $d) { $reasons[] = 'Latitude et longitude probablement inversées'; $suggest = ['lat' => $lon, 'lon' => $lat, 'why' => 'Inverser latitude et longitude']; }
                 elseif ($country === 'france' && $lat >= $a && $lat <= $b && -$lon >= $c && -$lon <= $d) { $reasons[] = 'Longitude probablement de mauvais signe (est / ouest)'; $suggest = ['lat' => $lat, 'lon' => -$lon, 'why' => 'Corriger le signe de la longitude']; }
@@ -686,7 +710,7 @@ function suspicious_places(PDO $pdo): array
                 $suggest ??= ['lat' => (float) $best['c']['centroid_lat'], 'lon' => (float) $best['c']['centroid_lon'], 'insee' => $best['c']['insee_code'], 'why' => 'Prendre la commune du département ' . substr((string) $best['c']['insee_code'], 0, 2)];
             }
         }
-        if (!$reasons && $dist > 1500 && $country === 'france') { $reasons[] = 'À ' . round($dist) . ' km du reste de la famille'; }
+        if (!$reasons && $dist > 1500 && $country === 'france' && !france_overseas_name($lat, $lon)) { $reasons[] = 'À ' . round($dist) . ' km du reste de la famille'; }
         if ($reasons) { $alerts[] = ['place' => $r, 'distance' => round($dist), 'reasons' => $reasons, 'suggest' => $suggest]; }
     }
     usort($alerts, static fn($a, $b) => $b['distance'] <=> $a['distance']);

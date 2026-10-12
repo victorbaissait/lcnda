@@ -2404,6 +2404,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function parsedGenealogyDate(text=''){const clean=String(text).trim().toLowerCase();let m=clean.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);if(m)return {exact:true,date:new Date(Date.UTC(+m[3],+m[2]-1,+m[1])),year:+m[3]};const months={janvier:0,février:1,fevrier:1,mars:2,avril:3,mai:4,juin:5,juillet:6,août:7,aout:7,septembre:8,octobre:9,novembre:10,décembre:11,decembre:11};m=clean.match(/^(\d{1,2})\s+([a-zéû]+)\s+(\d{4})$/);if(m&&months[m[2]]!==undefined)return {exact:true,date:new Date(Date.UTC(+m[3],months[m[2]],+m[1])),year:+m[3]};m=clean.match(/(1[0-9]{3}|20[0-9]{2})/);return m?{exact:false,year:+m[1]}:null;}
     function eventAgeText(event,birthEvent){if(!birthEvent||event.id===birthEvent.id)return event.id===birthEvent?.id?'À la naissance':'';const birth=parsedGenealogyDate(birthEvent.date_text||birthEvent.year),target=parsedGenealogyDate(event.date_text||event.year);if(!birth||!target)return '';if(birth.exact&&target.exact&&target.date>=birth.date){let years=target.date.getUTCFullYear()-birth.date.getUTCFullYear(),months=target.date.getUTCMonth()-birth.date.getUTCMonth(),days=target.date.getUTCDate()-birth.date.getUTCDate();if(days<0){months--;days+=new Date(Date.UTC(target.date.getUTCFullYear(),target.date.getUTCMonth(),0)).getUTCDate();}if(months<0){years--;months+=12;}return `${years} an${years!==1?'s':''} ${months} mois et ${days} jour${days!==1?'s':''}`;}const years=(target.year||0)-(birth.year||0);return years>=0?`Environ ${years} an${years!==1?'s':''}`:'';}
     function eventConvertedDateHtml(event){
+        const uncertain=Number(event?.date_uncertain)===1?'<small class="event-date-uncertain" title="Date incertaine (cochée dans « Modifier l’événement »)">? date incertaine</small>':'';
+        return uncertain+eventCalendarEquivalentHtml(event);
+    }
+    function eventCalendarEquivalentHtml(event){
         const source=event?.date_calendar||'gregorian';
         const target=defaultCalendarSetting();
         if(source===target)return '';
@@ -2826,6 +2830,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             </div>
             ${sheet.url?`<a class="table-link" href="${escapeHtml(safeUrl(sheet.url))}" target="_blank" rel="noopener">${escapeHtml(sheet.url)}</a>`:''}
             ${sheet.notes?`<p>${escapeHtml(sheet.notes)}</p>`:''}
+            ${sheet.screenshot_media_id&&sheet.screenshot_filename?`<button type="button" class="online-sheet-shot-thumb" data-online-shot-open="${sheet.id}" title="Voir la capture de l’arbre en grand"><img src="media/${encodeURIComponent(sheet.screenshot_thumbnail||sheet.screenshot_filename)}" alt="Capture d’écran de l’arbre"></button>`:''}
             ${onlineSheetChecksSummaryHtml(sheet.checks)}
         </article>`).join('');
         return `<div class="dialog-labels-block online-sheets-block"><span class="section-label">Fiches en ligne</span><div class="online-sheets-list">${items||'<p class="muted">Aucune fiche en ligne rattachée.</p>'}</div>${locked?'':`<button type="button" class="button small secondary" data-add-online-sheet="${personId}">+ Ajouter une fiche en ligne</button>`}</div>`;
@@ -3345,6 +3350,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $$('[data-add-memory-inline]').forEach(button=>button.addEventListener('click',()=>openMediaDialog(detail,{memory:true})));
         $$('[data-add-note-inline]').forEach(button=>button.addEventListener('click',()=>openNoteDialog(detail.person.id)));
         $$('[data-add-online-sheet]').forEach(button=>button.addEventListener('click',()=>openOnlineSheetDialog(detail.person.id)));
+        $$('[data-online-shot-open]').forEach(button=>button.addEventListener('click',()=>{const sheet=(detail.onlineSheets||[]).find(item=>Number(item.id)===Number(button.dataset.onlineShotOpen));if(sheet)openLightbox([{id:sheet.screenshot_media_id,filename:sheet.screenshot_filename,thumbnail:sheet.screenshot_thumbnail,media_type:'image',title:sheet.screenshot_title||'Capture de l’arbre'}],0,true);}));
         $$('[data-edit-online-sheet]').forEach(button=>button.addEventListener('click',()=>openOnlineSheetDialog(detail.person.id,(detail.onlineSheets||[]).find(item=>Number(item.id)===Number(button.dataset.editOnlineSheet)))));
         $$('[data-delete-online-sheet]').forEach(button=>button.addEventListener('click',async()=>{
             if(!confirm('Supprimer cette fiche en ligne ?'))return;
@@ -8748,7 +8754,50 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function jdnToRepublican(jdn){const epoch=gregorianToJdn(1792,9,22);if(jdn<epoch)return null;let days=jdn-epoch,year=1;while(days>=republicanYearDays(year)){days-=republicanYearDays(year);year++;if(year>20)return null;}const month=Math.floor(days/30)+1,day=days%30+1;if(month>13||month===13&&day>(republicanLeap(year)?6:5))return null;return {year,month,day};}
     function formatCalendarDate(date){return `${String(date.day).padStart(2,'0')}/${String(date.month).padStart(2,'0')}/${date.year}`;}
     function formatRepublicanDate(date){return date?`${date.day} ${republicanMonths[date.month-1]} an ${date.year}`:'Hors période républicaine officielle';}
-    function hebrewDateFromJdn(jdn){try{const g=jdnToGregorian(jdn),date=new Date(Date.UTC(g.year,g.month-1,g.day));return new Intl.DateTimeFormat('fr-FR-u-ca-hebrew',{day:'numeric',month:'long',year:'numeric'}).format(date);}catch(_){return 'Non disponible dans ce navigateur';}}
+    // Calendrier juif (calcul arithmétique de Reingold et Dershowitz) : mois numérotés depuis Nissan (1) ; l'année commence en Tichri (7) ; Adar II (13) les années embolismiques
+    const hebrewMonthNames=['Nissan','Iyar','Sivan','Tamouz','Av','Eloul','Tichri','Heshvan','Kislev','Tevet','Chevat','Adar','Adar II'];
+    const HEBREW_EPOCH_RD=-1373427,RD_TO_JDN=1721425;
+    function hebrewLeap(year){return ((7*year+1)%19+19)%19<7;}
+    function hebrewElapsedDays(year){const months=Math.floor((235*year-234)/19),parts=12084+13753*months,day=29*months+Math.floor(parts/25920);return (3*(day+1))%7<3?day+1:day;}
+    function hebrewNewYearRd(year){const ny0=hebrewElapsedDays(year-1),ny1=hebrewElapsedDays(year),ny2=hebrewElapsedDays(year+1);return HEBREW_EPOCH_RD+ny1+(ny2-ny1===356?2:ny1-ny0===382?1:0);}
+    function hebrewYearDays(year){return hebrewNewYearRd(year+1)-hebrewNewYearRd(year);}
+    function hebrewMonthDays(month,year){const len=hebrewYearDays(year);if([2,4,6,10,13].includes(month)||(month===12&&!hebrewLeap(year))||(month===8&&![355,385].includes(len))||(month===9&&[353,383].includes(len)))return 29;return 30;}
+    function hebrewMonthName(month,year){return month===12&&hebrewLeap(year)?'Adar I':hebrewMonthNames[month-1];}
+    function hebrewToJdn(year,month,day){
+        const last=hebrewLeap(year)?13:12;
+        if(month<1||month>last||day<1||day>hebrewMonthDays(month,year))return null;
+        let rd=hebrewNewYearRd(year)+day-1;
+        if(month<7){for(let m=7;m<=last;m++)rd+=hebrewMonthDays(m,year);for(let m=1;m<month;m++)rd+=hebrewMonthDays(m,year);}
+        else for(let m=7;m<month;m++)rd+=hebrewMonthDays(m,year);
+        return rd+RD_TO_JDN;
+    }
+    function jdnToHebrew(jdn){
+        const rd=jdn-RD_TO_JDN;
+        let year=Math.floor((rd-HEBREW_EPOCH_RD)/(35975351/98496))+1;
+        while(hebrewNewYearRd(year)>rd)year--;
+        while(hebrewNewYearRd(year+1)<=rd)year++;
+        let month=rd<hebrewToJdn(year,1,1)-RD_TO_JDN?7:1;
+        while(rd>hebrewToJdn(year,month,hebrewMonthDays(month,year))-RD_TO_JDN)month++;
+        return {year,month,day:rd-(hebrewToJdn(year,month,1)-RD_TO_JDN)+1};
+    }
+    function hebrewDateFromJdn(jdn){if(!jdn||jdn<HEBREW_EPOCH_RD+RD_TO_JDN)return '';const h=jdnToHebrew(jdn);return `${h.day} ${hebrewMonthName(h.month,h.year)} ${h.year}`;}
+    // Les mois dans l'ordre de l'année (de Tichri à Eloul), pour les listes déroulantes
+    function hebrewMonthOrder(year){return [7,8,9,10,11,12,...(year&&!hebrewLeap(year)?[]:[13]),1,2,3,4,5,6];}
+    function parseHebrewDateText(text){
+        const fold=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+        const m=fold(text).match(/^(\d{1,2})(?: er)? ([a-z]+(?: (?:i|ii|1|2|bet|beth|aleph))?) (\d{3,4})$/);
+        if(!m)return null;
+        const alias={nissan:1,nisan:1,iyar:2,iyyar:2,sivan:3,tamouz:4,tammouz:4,tammuz:4,av:5,ab:5,eloul:6,elul:6,tichri:7,tishri:7,tisri:7,heshvan:8,hechvan:8,cheshvan:8,marheshvan:8,kislev:9,tevet:10,teveth:10,tebet:10,chevat:11,shevat:11,shvat:11,adar:12,'adar i':12,'adar 1':12,'adar aleph':12,'adar ii':13,'adar 2':13,'adar bet':13,'adar beth':13};
+        const month=alias[m[2]];
+        return month?{day:Number(m[1]),month,year:Number(m[3])}:null;
+    }
+    // Période grégorienne d'un mois républicain (« du 22 sept. 1793 au 21 oct. 1793 »)
+    const shortMonthsFr=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+    function republicanMonthRange(year,month){
+        const start=republicanToJdn(year,month,1),len=month===13?(republicanLeap(year)?6:5):30,end=start+len-1;
+        return {start:jdnToGregorian(start),end:jdnToGregorian(end),len};
+    }
+    function shortGregorian(d,withYear=true){return `${d.day}${d.day===1?'er':''} ${shortMonthsFr[d.month-1]}${withYear?' '+d.year:''}`;}
     function readCalendarJdn(form){
         const type=form.elements.calendar_type.value;
         const year=Number(form.elements.year.value),month=Number(form.elements.month.value),day=Number(form.elements.day.value);
@@ -8756,7 +8805,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(type==='julian')return julianToJdn(year,month,day);
         if(type==='islamic')return islamicToJdn(year,month,day);
         if(type==='republican')return republicanToJdn(year,month,day);
-        if(type==='hebrew')return null;
+        if(type==='hebrew')return hebrewToJdn(year,month,day);
         return gregorianToJdn(year,month,day);
     }
     function parseNumericCalendarDate(text){
@@ -8789,14 +8838,16 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     }
     function calendarDateFromText(text,type){
         if(type==='republican')return parseRepublicanDateText(text)||parseNumericCalendarDate(text);
+        if(type==='hebrew')return parseHebrewDateText(text);
         return parseNumericCalendarDate(text);
     }
     function jdnFromCalendarDate(parsed,type){
-        if(!parsed||!parsed.year||!parsed.month||!parsed.day||type==='gregorian'||type==='hebrew')return '';
+        if(!parsed||!parsed.year||!parsed.month||!parsed.day||type==='gregorian')return '';
         let jdn=null;
         if(type==='julian')jdn=julianToJdn(parsed.year,parsed.month,parsed.day);
         if(type==='islamic')jdn=islamicToJdn(parsed.year,parsed.month,parsed.day);
         if(type==='republican')jdn=republicanToJdn(parsed.year,parsed.month,parsed.day);
+        if(type==='hebrew')jdn=hebrewToJdn(parsed.year,parsed.month,parsed.day);
         return jdn||null;
     }
     function formatCalendarByType(jdn,type){
@@ -8812,7 +8863,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     }
     function automaticEquivalentFromDateText(text,sourceType,targetType=defaultCalendarSetting()){
         const parsed=calendarDateFromText(text,sourceType);
-        if(!parsed||sourceType==='hebrew')return '';
+        if(!parsed)return '';
         const jdn=sourceType==='gregorian'?gregorianToJdn(parsed.year,parsed.month,parsed.day):jdnFromCalendarDate(parsed,sourceType);
         if(!jdn)return '';
         return `${calendarLabel(targetType)} : ${formatCalendarByType(jdn,targetType)}`;
@@ -8836,7 +8887,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function calendarConversionCards(jdn){
         if(!jdn)return '<p class="muted">Entre une date complète pour convertir.</p>';
         const gregorian=jdnToGregorian(jdn),julian=jdnToJulian(jdn),islamic=jdnToIslamic(jdn),republican=jdnToRepublican(jdn);
-        return `<div class="calendar-result-grid"><div class="calendar-result-card"><strong>Grégorien</strong>${formatCalendarDate(gregorian)}</div><div class="calendar-result-card"><strong>Julien</strong>${formatCalendarDate(julian)}</div><div class="calendar-result-card"><strong>Musulman civil</strong>${formatCalendarDate(islamic)}</div><div class="calendar-result-card"><strong>Républicain</strong>${formatRepublicanDate(republican)}</div><div class="calendar-result-card"><strong>Juif</strong>${escapeHtml(hebrewDateFromJdn(jdn))}</div></div>`;
+        return `<div class="calendar-result-grid"><div class="calendar-result-card"><strong>Grégorien</strong>${formatCalendarDate(gregorian)}</div><div class="calendar-result-card"><strong>Julien</strong>${formatCalendarDate(julian)}</div><div class="calendar-result-card"><strong>Musulman civil</strong>${formatCalendarDate(islamic)}</div><div class="calendar-result-card"><strong>Républicain</strong>${formatRepublicanDate(republican)}${republican?(()=>{const r=republicanMonthRange(republican.year,republican.month);return `<small class="muted" style="display:block">${escapeHtml(republicanMonths[republican.month-1])} an ${republican.year} : du ${shortGregorian(r.start)} au ${shortGregorian(r.end)}</small>`;})():''}</div><div class="calendar-result-card"><strong>Juif</strong>${escapeHtml(hebrewDateFromJdn(jdn)||'Avant le début du calendrier')}</div></div>`;
     }
     function convertUnitValue(value,from,to){
         const units={toise:{kind:'length',factor:1.949},pied:{kind:'length',factor:.32484},pouce:{kind:'length',factor:.02707},ligne:{kind:'length',factor:.002256},lieue:{kind:'length',factor:3898},arpent_area:{kind:'area',factor:3418.89},livre_weight:{kind:'weight',factor:.4895},once:{kind:'weight',factor:.03059},marc:{kind:'weight',factor:.24475}};
@@ -8902,8 +8953,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">CALENDRIER / MESURES</span><h2>Convertisseurs de recherche</h2><p>Conversions utiles pour les actes anciens, les pays passés tardivement au grégorien et les notes de transcription.</p></div></header>
         <div class="calendar-tools-grid">
             <section class="maintenance-panel"><h3>Calendrier par défaut</h3><label>Calendrier utilisé par défaut dans les champs de date<select id="default-calendar-select">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><p class="muted">Grégorien reste le plus courant en France. Julien est utile pour certains pays orthodoxes et certaines sources anciennes.</p></section>
-            <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''} ${key==='hebrew'?'disabled':''}>${label}${key==='hebrew'?' — affichage seulement':''}</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label>Mois<input name="month" type="number" min="1" max="13" placeholder="1"></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
-            <section class="maintenance-panel"><h3>Calendrier républicain</h3><ul class="calendar-info-list">${republicanMonths.map((month,index)=>`<li><strong>${escapeHtml(month)}</strong>${index<12?' · 30 jours':' · 5 ou 6 jours'}</li>`).join('')}</ul><p>Le calendrier républicain commence le 22 septembre 1792 et cesse officiellement le 1er janvier 1806. Les douze mois font 30 jours. Les 5 jours complémentaires, ou 6 en année sextile, terminent l’année.</p></section>
+            <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label>Mois<span data-calendar-month-field></span></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
+            <section class="maintenance-panel"><h3>Calendrier républicain</h3><ul class="calendar-info-list">${republicanMonths.map((month,index)=>{const r=republicanMonthRange(2,index+1);return `<li><strong>${escapeHtml(month)}</strong>${index<12?' · 30 jours':' · 5 ou 6 jours'} · ${r.start.month===r.end.month?shortMonthsFr[r.start.month-1]:`${shortMonthsFr[r.start.month-1]} à ${shortMonthsFr[r.end.month-1]}`} <small class="muted">(du ${shortGregorian(r.start,false)} au ${shortGregorian(r.end,false)})</small></li>`;}).join('')}</ul><p class="muted" style="font-size:.85em">Dates de l’an II (1793-1794) : selon l’année, le début et la fin peuvent glisser d’un jour (le convertisseur donne les dates exactes).</p><p>Le calendrier républicain commence le 22 septembre 1792 et cesse officiellement le 1er janvier 1806. Les douze mois font 30 jours. Les 5 jours complémentaires, ou 6 en année sextile, terminent l’année.</p></section>
             <section class="maintenance-panel"><h3>Unités anciennes</h3><form id="unit-converter-form" class="form-grid" style="padding:0"><label>Valeur<input name="value" type="number" step="any" placeholder="3"></label><label>De<select name="from">${unitOptions}</select></label><label>Vers<select name="to">${unitOptions}</select></label><button class="button" type="submit">Convertir</button></form><div id="unit-converter-result" class="unit-result">Entre une valeur et deux unités compatibles.</div></section>
             <section class="maintenance-panel"><h3>Monnaies anciennes</h3><form id="currency-converter-form" class="form-grid" style="padding:0"><label>Livres<input name="livres" type="number" step="1" placeholder="12"></label><label>Sols / sous<input name="sols" type="number" step="1" placeholder="10"></label><label>Deniers<input name="deniers" type="number" step="1" placeholder="6"></label><label>Francs germinal indicatifs<input name="francs" type="number" step="any" placeholder="0"></label><button class="button span-2" type="submit">Convertir</button></form><div id="currency-converter-result" class="unit-result">1 livre = 20 sols = 240 deniers. Le franc indiqué ici est une équivalence pratique, pas une valeur historique absolue.</div></section>
             ${purchasingPowerPanelHtml()}
@@ -8913,6 +8964,27 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         (window.LCNDA_EXT?.afterCalendar||[]).forEach(fn=>{try{fn();}catch(error){console.error(error);}});
         $('#default-calendar-select')?.addEventListener('change',event=>{const current=readDesignSettings();current.defaultCalendar=event.target.value;localStorage.setItem('genealogie-design',JSON.stringify(current));toast(`Calendrier par défaut : ${calendarLabel(event.target.value)}.`);});
         $('#calendar-converter-form')?.addEventListener('submit',event=>{event.preventDefault();$('#calendar-converter-result').innerHTML=calendarConversionCards(readCalendarJdn(event.currentTarget));});
+        const converterForm=$('#calendar-converter-form');
+        if(converterForm){
+            // Mois : liste des noms pour les calendriers républicain et juif (avec la période grégorienne pour le républicain)
+            const monthField=()=>{
+                const holder=$('[data-calendar-month-field]',converterForm);if(!holder)return;
+                const type=converterForm.elements.calendar_type.value,year=Number(converterForm.elements.year.value)||0,previous=converterForm.elements.month?.value||'';
+                if(type==='republican'){
+                    const y=year>=1&&year<=20?year:0;
+                    holder.innerHTML=`<select name="month"><option value="">—</option>${republicanMonths.map((name,i)=>{const r=y?republicanMonthRange(y,i+1):null;return `<option value="${i+1}">${escapeHtml(name)}${r?` (${shortGregorian(r.start)} → ${shortGregorian(r.end)})`:''}</option>`;}).join('')}</select>`;
+                }else if(type==='hebrew'){
+                    holder.innerHTML=`<select name="month"><option value="">—</option>${hebrewMonthOrder(year).map(m=>`<option value="${m}">${escapeHtml(year?hebrewMonthName(m,year):(m===12?'Adar (Adar I)':hebrewMonthNames[m-1]))}</option>`).join('')}</select>`;
+                }else holder.innerHTML='<input name="month" type="number" min="1" max="12" placeholder="1">';
+                const field=converterForm.elements.month;
+                if(previous&&[...(field.options||[])].some(o=>o.value===previous))field.value=previous;else if(!field.options)field.value=previous;
+            };
+            converterForm.elements.calendar_type.addEventListener('change',()=>{converterForm.elements.month.value='';monthField();});
+            converterForm.elements.year.addEventListener('change',monthField);
+            monthField();
+            converterForm.elements.year.placeholder=converterForm.elements.calendar_type.value==='hebrew'?'5600':converterForm.elements.calendar_type.value==='republican'?'2':'1793';
+            converterForm.elements.calendar_type.addEventListener('change',()=>{const t=converterForm.elements.calendar_type.value;converterForm.elements.year.placeholder=t==='hebrew'?'5600':t==='republican'?'2':t==='islamic'?'1200':'1793';});
+        }
         $('#unit-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),result=convertUnitValue(Number(values.value),values.from,values.to);$('#unit-converter-result').textContent=result===null?'Unités incompatibles ou valeur invalide.':`${Number(values.value).toLocaleString('fr-FR')} → ${result.toLocaleString('fr-FR',{maximumFractionDigits:4})}`;});
         $('#currency-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),total=oldCurrencyTotalDeniers(values),francs=total/240;$('#currency-converter-result').textContent=`${oldCurrencyBreakdown(total)} · ${total.toLocaleString('fr-FR')} denier(s) · environ ${francs.toLocaleString('fr-FR',{maximumFractionDigits:2})} franc(s) germinal indicatif(s).`;});
     }
@@ -9947,6 +10019,7 @@ ${backupSectionHtml()}
         <section class="person-block-config"><header><span class="eyebrow">FICHES PERSONNES</span><h3>Fiches avec un réglage particulier</h3><p>Les fiches qui ont leurs propres blocs, filtres d’événements ou sites de recherche (au lieu du réglage de toutes les fiches).</p></header>
             <div class="design-order-grid block-grid" id="person-exceptions-list"><p class="muted">Recherche des fiches…</p></div>
         </section>
+        ${(window.LCNDA_EXT?.designPanelsEnd||[]).map(fn=>{try{return fn();}catch(error){console.error(error);return '';}}).join('')}
         </section>`;
         enhanceDesignFormOptions(design);
         reorderDesignPrimaryFields();
@@ -10430,7 +10503,7 @@ ${backupSectionHtml()}
                 },220);
             });
         })();
-        $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||''}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();toast(values.id?'Événement modifié.':'Événement ajouté.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);if(event.currentTarget.elements.date_uncertain)values.date_uncertain=event.currentTarget.elements.date_uncertain.checked?'1':'0';try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||''}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();toast(values.id?'Événement modifié.':'Événement ajouté.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         (()=>{const wrap=$('#event-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});bindEventDateAlternative();})();
         (()=>{const wrap=$('#media-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
         (()=>{const textInput=$('#lightbox-date');const hiddenPicker=$('#lightbox-date-picker');const toggleBtn=$('#lightbox-date-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
@@ -10458,6 +10531,10 @@ ${backupSectionHtml()}
         $('#relation-results').addEventListener('click',event=>{const button=event.target.closest('[data-relation-person]');if(!button)return;$$('[data-relation-person]',$('#relation-results')).forEach(item=>item.classList.toggle('is-selected',item===button));$('#relation-form').elements.related_id.value=button.dataset.relationPerson;});
         $('#relation-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,values=formObject(form);try{if(['none','none_suspected'].includes(values.entry_mode)){await api('set_relation_status',{}, {method:'POST',body:{person_id:values.person_id,relation_type:values.relation_type,status:values.entry_mode}});$('#relation-dialog').close();toast('Mention familiale enregistrée.');await selectPerson(Number(values.person_id));return;}let relatedId=Number(values.related_id)||0;if(values.entry_mode==='new'){const created=await api('save_person',{}, {method:'POST',body:{first_name:values.new_first_name,last_name:values.new_last_name,gender:values.new_gender,living_status:values.new_living_status}});relatedId=Number(created.result.id);}if(!relatedId)throw new Error('Choisis une personne dans les résultats.');await api('add_relation',{}, {method:'POST',body:{person_id:values.person_id,related_id:relatedId,relation_type:values.relation_type}});$('#relation-dialog').close();toast('Relation familiale ajoutée.');await loadPeople();await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
         $('#note-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{const result=await api(values.id?'save_note':'add_note',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#note-label-picker',savedId);$('#note-dialog').close();toast(values.id?'Note modifiée.':'Note ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        $('#online-sheet-add-field').addEventListener('click',()=>{const list=$('#online-sheet-checks-list');list.insertAdjacentHTML('beforeend',onlineSheetCheckRowHtml(`custom_${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`,'',null,true));list.lastElementChild.querySelector('[data-check-label]')?.focus();});
+        $('#online-sheet-checks-list').addEventListener('click',event=>{if(event.target.closest('[data-check-remove]'))event.target.closest('.online-sheet-check-row')?.remove();});
+        $('#online-sheet-shot-file').addEventListener('change',event=>{const file=event.target.files?.[0];event.target.value='';if(file)uploadOnlineSheetShot(file);});
+        $('#online-sheet-dialog').addEventListener('paste',event=>{if(event.target.matches?.('input[type=text],input:not([type]),textarea')&&!(event.clipboardData?.files||[]).length)return;const file=[...(event.clipboardData?.files||[])].find(f=>/^image\//.test(f.type));if(file){event.preventDefault();uploadOnlineSheetShot(file);}});
         $('#online-sheet-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);values.checks=JSON.stringify(collectOnlineSheetChecks());try{await api('save_online_sheet',{}, {method:'POST',body:values});$('#online-sheet-dialog').close();toast(values.id?'Fiche en ligne modifiée.':'Fiche en ligne ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#source-form').elements.entity_type.addEventListener('change',updateSourceTargetFields);
         $('#source-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{const result=await api(values.id?'save_source':'add_web_source',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#source-label-picker',savedId);$('#source-dialog').close();toast(values.id?'Source modifiée.':'Source ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
@@ -11052,7 +11129,7 @@ ${backupSectionHtml()}
             });
             form.elements.event_scope.dataset.familyBound='1';
         }
-        form.elements.date_text.value=eventItem?.date_text||'';if(form.elements.date_calendar)form.elements.date_calendar.value=eventItem?.date_calendar||defaultCalendarSetting();if(form.elements.date_converted)form.elements.date_converted.value=eventItem?.date_converted||automaticEquivalentFromDateText(eventItem?.date_text||'',form.elements.date_calendar?.value||'gregorian');if(form.elements.date_alternative)form.elements.date_alternative.value=eventItem?.date_alternative||'';form.elements.title.value=eventItem?.title||'';form.elements.place_name.value=eventItem?placeDisplay(eventItem):(eventItem?.place_name||'');form.elements.country.value=eventItem?.country||'France';form.elements.description.value=eventItem?.description||'';if(form.elements.fact_confidence)form.elements.fact_confidence.value=eventItem?.fact_confidence||'unknown';if(form.elements.confidence_origin)form.elements.confidence_origin.value=eventItem?.confidence_origin||'';renderEventConfidenceMediaChoices(detail,eventItem?.confidence_media_id||0);setupEventConfidencePickers(detail);
+        form.elements.date_text.value=eventItem?.date_text||'';if(form.elements.date_uncertain)form.elements.date_uncertain.checked=Number(eventItem?.date_uncertain||0)===1;if(form.elements.date_calendar)form.elements.date_calendar.value=eventItem?.date_calendar||defaultCalendarSetting();if(form.elements.date_converted)form.elements.date_converted.value=eventItem?.date_converted||automaticEquivalentFromDateText(eventItem?.date_text||'',form.elements.date_calendar?.value||'gregorian');if(form.elements.date_alternative)form.elements.date_alternative.value=eventItem?.date_alternative||'';form.elements.title.value=eventItem?.title||'';form.elements.place_name.value=eventItem?placeDisplay(eventItem):(eventItem?.place_name||'');form.elements.country.value=eventItem?.country||'France';form.elements.description.value=eventItem?.description||'';if(form.elements.fact_confidence)form.elements.fact_confidence.value=eventItem?.fact_confidence||'unknown';if(form.elements.confidence_origin)form.elements.confidence_origin.value=eventItem?.confidence_origin||'';renderEventConfidenceMediaChoices(detail,eventItem?.confidence_media_id||0);setupEventConfidencePickers(detail);
         $('#event-dialog-title').dataset.artisticOnly=artisticOnly?'1':'';
         if(form.elements.first_name)form.elements.first_name.value=eventItem?.first_name||'';
         if(form.elements.last_name)form.elements.last_name.value=eventItem?.last_name||'';
@@ -11654,11 +11731,12 @@ ${backupSectionHtml()}
     function clearCensusMemberPerson(keepSearch=false){const form=$('#census-member-form');form.elements.person_id.value='';if(!keepSearch)$('#census-member-search').value='';$('#census-member-selected').hidden=true;$('#census-member-selected span').textContent='';$('#census-member-results').innerHTML='<p>Saisis au moins deux caractères.</p>';}
     function selectCensusMemberPerson(personId,name,yearText=''){const form=$('#census-member-form');form.elements.person_id.value=personId;$('#census-member-search').value=name||'';if(!form.elements.display_name.value.trim())form.elements.display_name.value=name||'';$('#census-member-selected span').textContent=`Fiche liée : ${name||'Personne'}${yearText?` · ${yearText}`:''} · #${personId}`;$('#census-member-selected').hidden=false;$('#census-member-results').innerHTML='';}
     function openCensusMemberDialog(censusId,returnPersonId,member=null){const form=$('#census-member-form');form.reset();form.elements.id.value=member?.id||'';form.elements.census_id.value=censusId;form.elements.return_person_id.value=returnPersonId;form.elements.person_id.value=member?.person_id||'';if(form.elements.member_first_name)form.elements.member_first_name.value=member?.first_name||'';['display_name','age_text','birth_place','occupation','employer','nationality','household_position','personal_status','extra_info'].forEach(field=>form.elements[field].value=member?.[field]||'');$('#census-member-dialog-title').textContent=member?'Modifier un membre':'Ajouter un membre';$('#census-member-submit').textContent=member?'Enregistrer':'Ajouter';$('#census-member-results').innerHTML='<p>Saisis au moins deux caractères.</p>';const linkedName=member?.person_name||member?.display_name||'';$('#census-member-search').value=member?.person_id?linkedName:'';if(member?.person_id)selectCensusMemberPerson(member.person_id,linkedName,relationYears(member));else clearCensusMemberPerson();$('#census-member-dialog').showModal();setTimeout(()=>$('#census-member-search').focus(),30);}
-    function onlineSheetCheckRowHtml(field,fieldLabel,check){
+    function onlineSheetCheckRowHtml(field,fieldLabel,check,custom=false){
         const status=check?.status||'';
         const comment=check?.comment||'';
-        return `<div class="online-sheet-check-row" data-check-field="${escapeHtml(field)}">
-            <span class="online-sheet-check-row-label">${escapeHtml(fieldLabel)}</span>
+        // champ libre : l'intitulé se tape, et la ligne peut être retirée
+        return `<div class="online-sheet-check-row${custom?' is-custom':''}" data-check-field="${escapeHtml(field)}">
+            ${custom?`<span class="online-sheet-check-row-label"><input type="text" data-check-label value="${escapeHtml(fieldLabel)}" placeholder="Intitulé (ex : Parrain, Cote de l’acte…)" maxlength="80"><button type="button" class="icon-button" data-check-remove title="Retirer ce champ" aria-label="Retirer ce champ">×</button></span>`:`<span class="online-sheet-check-row-label">${escapeHtml(fieldLabel)}</span>`}
             <select class="online-sheet-check-status" data-check-status>
                 <option value="">— non vérifié —</option>
                 ${onlineSheetStatuses.map(([value,text])=>`<option value="${value}" ${status===value?'selected':''}>${text}</option>`).join('')}
@@ -11675,7 +11753,11 @@ ${backupSectionHtml()}
         form.elements.url.value=sheet?.url||'';
         form.elements.notes.value=sheet?.notes||'';
         const checksByField=new Map((sheet?.checks||[]).map(check=>[check.field,check]));
-        $('#online-sheet-checks-list').innerHTML=onlineSheetFields.map(([field,label])=>onlineSheetCheckRowHtml(field,label,checksByField.get(field))).join('');
+        const customChecks=(sheet?.checks||[]).filter(check=>String(check.field).startsWith('custom_'));
+        $('#online-sheet-checks-list').innerHTML=onlineSheetFields.map(([field,label])=>onlineSheetCheckRowHtml(field,label,checksByField.get(field))).join('')+customChecks.map(check=>onlineSheetCheckRowHtml(check.field,check.field_label||'',check,true)).join('');
+        form.elements.screenshot_media_id.value=sheet?.screenshot_media_id||'';
+        renderOnlineSheetShot(sheet?.screenshot_media_id?{id:sheet.screenshot_media_id,filename:sheet.screenshot_filename,thumbnail:sheet.screenshot_thumbnail}:null);
+        renderOnlineSheetSearch(personId);
         $('#online-sheet-dialog-title').textContent=sheet?'Modifier une fiche en ligne':'Ajouter une fiche en ligne';
         $('#online-sheet-submit').textContent=sheet?'Enregistrer':'Ajouter';
         $('#online-sheet-dialog').showModal();
@@ -11683,11 +11765,54 @@ ${backupSectionHtml()}
     function collectOnlineSheetChecks(){
         return $$('#online-sheet-checks-list [data-check-field]').map(row=>{
             const field=row.dataset.checkField;
-            const fieldLabel=(onlineSheetFields.find(item=>item[0]===field)||[,field])[1];
+            const custom=row.querySelector('[data-check-label]');
+            const fieldLabel=custom?custom.value.trim():(onlineSheetFields.find(item=>item[0]===field)||[,field])[1];
+            if(custom&&!fieldLabel)return null; // champ libre sans intitulé : ignoré
             const status=row.querySelector('[data-check-status]')?.value||'';
             const comment=row.querySelector('[data-check-comment]')?.value||'';
             return {field,field_label:fieldLabel,status,comment};
-        }).filter(check=>check.status||check.comment);
+        }).filter(check=>check&&(check.status||check.comment||String(check.field).startsWith('custom_')));
+    }
+    function renderOnlineSheetShot(media){
+        const box=$('#online-sheet-shot');if(!box)return;
+        box.innerHTML=media?.id?`<figure><img src="${media.src?escapeHtml(media.src):`media/${encodeURIComponent(media.thumbnail||media.filename||'')}`}" alt="Capture d’écran de l’arbre"><figcaption><button type="button" class="link-button" data-online-shot-remove>Retirer la capture</button> <small class="muted">(l’image reste dans les médias)</small></figcaption></figure>`:'<p class="muted">Aucune capture.</p>';
+        box.querySelector('[data-online-shot-remove]')?.addEventListener('click',()=>{$('#online-sheet-form').elements.screenshot_media_id.value='';renderOnlineSheetShot(null);});
+    }
+    async function uploadOnlineSheetShot(file){
+        const form=$('#online-sheet-form'),personId=form.elements.person_id.value;
+        if(!file||!/^image\//.test(file.type)){toast('Choisis une image (capture d’écran).','error');return;}
+        const box=$('#online-sheet-shot');if(box)box.innerHTML='<p class="muted">Envoi de la capture…</p>';
+        try{
+            const fd=new FormData();fd.append('person_id',personId);fd.append('csrf',state.csrf);
+            fd.append('title',`Capture de l’arbre — ${form.elements.label.value.trim()||form.elements.site.value.trim()||'fiche en ligne'}`);
+            fd.append('files[]',file,file.name||'capture.png');
+            const response=await fetch('upload.php',{method:'POST',body:fd});const result=await response.json();
+            if(!response.ok||result.error)throw new Error(result.error||'Envoi impossible');
+            const id=Number(result.media?.[0]||0);if(!id)throw new Error('Envoi impossible');
+            form.elements.screenshot_media_id.value=id;
+            renderOnlineSheetShot({id,src:URL.createObjectURL(file)}); // aperçu tiré du fichier lui-même
+        }catch(error){toast(error.message,'error');renderOnlineSheetShot(null);}
+    }
+    // Chercher la personne sur les sites de généalogie, avec ce qu'on sait déjà d'elle
+    function renderOnlineSheetSearch(personId){
+        const box=$('#online-sheet-search');if(!box)return;
+        const detail=state.currentPerson;
+        if(!detail||Number(detail.person?.id)!==Number(personId)){box.hidden=true;box.innerHTML='';return;}
+        const base=webSearchSettings(personId),sites=webSearchAllSites();
+        const genealogy=key=>['Généalogie','Mes sites'].includes(sites.find(site=>site[0]===key)?.[2]);
+        const settings={order:base.order,hidden:base.order.filter(key=>!genealogy(key)||(base.hidden.includes(key)&&!['geneanet','filae','familysearch','myheritage','ancestry'].includes(key)))};
+        let side=true;try{side=localStorage.getItem('genealogie-online-sheet-side')!=='0';}catch(_){}
+        box.hidden=false;
+        box.innerHTML=`<span class="section-label">Chercher cette personne en ligne</span><label class="checkbox-line"><input type="checkbox" data-online-side ${side?'checked':''}> Ouvrir à côté, dans une fenêtre séparée (sinon dans le navigateur)</label>${webSearchPanelHtml(detail,settings,`online-sheet-${personId}`)}`;
+        bindWebSearchPanels(box);
+        box.querySelector('[data-online-side]').addEventListener('change',event=>{try{localStorage.setItem('genealogie-online-sheet-side',event.target.checked?'1':'0');}catch(_){}});
+        box.onclick=event=>{ // la boîte reste d'une ouverture à l'autre : un seul gestionnaire
+            const link=event.target.closest('[data-ws-site]');if(!link||!link.href||link.href.endsWith('#'))return;
+            const form=$('#online-sheet-form'),site=sites.find(item=>item[0]===link.dataset.wsSite);
+            if(site&&!form.elements.site.value.trim())form.elements.site.value=site[1]; // le site cherché devient celui de la fiche
+            if(site&&!form.elements.label.value.trim())form.elements.label.value=`${site[1]} — ${personName(detail.person)}`;
+            if(box.querySelector('[data-online-side]')?.checked){event.preventDefault();window.open(link.href,'lcnda-side','popup,width=1100,height=900');}
+        };
     }
     function openNoteDialog(personId,note=null){const form=$('#note-form');form.reset();form.elements.person_id.value=personId;form.elements.id.value=note?.id||'';form.elements.title.value=note?.title||'';form.elements.body.value=note?.body||'';$('#note-dialog-title').textContent=note?'Modifier une note':'Ajouter une note';$('#note-submit').textContent=note?'Enregistrer':'Ajouter';renderLabelPicker('#note-label-picker','note',note?.id||0,note?.labels||[]);$('#note-dialog').showModal();}
     function updateSourceTargetFields(){const form=$('#source-form'),isEvent=form.elements.entity_type.value==='event';$('#source-event-label').hidden=!isEvent;form.elements.event_id.disabled=!isEvent;}

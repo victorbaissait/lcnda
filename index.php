@@ -25,7 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=198">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=21">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=22">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -362,6 +362,7 @@ header('Cache-Control: no-store, private');
                     <input type="date" class="date-picker-hidden" aria-hidden="true" tabindex="-1">
                 </div>
             </label>
+            <label class="checkbox-line date-uncertain-line" title="La date est douteuse : lecture difficile, sources qui se contredisent, âge recalculé…"><input type="checkbox" name="date_uncertain" value="1"> Date incertaine</label>
             <label>Calendrier de cette date<select name="date_calendar">
                 <option value="gregorian">Grégorien</option>
                 <option value="julian">Julien</option>
@@ -499,10 +500,18 @@ header('Cache-Control: no-store, private');
             <label class="span-2">Lien web<input name="url" type="url" placeholder="https://…"></label>
             <label class="span-2">Note<textarea name="notes" rows="3"></textarea></label>
         </div>
+        <div class="dialog-labels-block online-sheet-search-block" id="online-sheet-search" hidden></div>
         <div class="dialog-labels-block">
             <span class="section-label">Vérification champ par champ</span>
             <p class="muted">Pour chaque information de cette fiche, indique si elle est exacte, inexacte, incomplète, approximative ou inconnue par rapport à ta fiche. Ajoute un commentaire si besoin (ex : « date de mariage inexacte : c’est 1892 et non 1898 »).</p>
             <div id="online-sheet-checks-list"></div>
+            <button type="button" class="button small secondary" id="online-sheet-add-field">+ Ajouter un champ</button>
+        </div>
+        <div class="dialog-labels-block">
+            <span class="section-label">Capture d’écran de l’arbre</span>
+            <input type="hidden" name="screenshot_media_id">
+            <div id="online-sheet-shot" class="online-sheet-shot"></div>
+            <p class="online-sheet-shot-actions"><label class="button small secondary">Choisir une image<input type="file" accept="image/*" id="online-sheet-shot-file" hidden></label> <span class="muted">… ou colle une capture (⌘V / Ctrl+V) dans cette fenêtre. Elle est aussi rangée dans les médias de la fiche.</span></p>
         </div>
         <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="online-sheet-submit">Enregistrer</button></div>
     </form>
@@ -1075,17 +1084,17 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=287" defer></script>
+<script src="assets/js/app.js?v=288" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=9" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
-<script src="assets/js/heritage-links.js?v=6" defer></script>
+<script src="assets/js/heritage-links.js?v=7" defer></script>
 <script src="assets/js/heritage-more.js?v=18" defer></script>
 <script src="assets/js/heritage-voters.js?v=2" defer></script>
-<script src="assets/js/heritage-widgets.js?v=3" defer></script>
-<script src="assets/js/heritage-studio.js?v=5" defer></script>
-<script src="assets/js/museum-viewer.js?v=5" defer></script>
-<script src="assets/js/heritage-museum.js?v=6" defer></script>
+<script src="assets/js/heritage-widgets.js?v=4" defer></script>
+<script src="assets/js/heritage-studio.js?v=6" defer></script>
+<script src="assets/js/museum-viewer.js?v=6" defer></script>
+<script src="assets/js/heritage-museum.js?v=7" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

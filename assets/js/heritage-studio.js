@@ -7,7 +7,7 @@
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     for (const key of ['lists', 'maintenance']) ext[key] = ext[key] || {};
-    for (const key of ['designPanels', 'afterDesign']) ext[key] = ext[key] || [];
+    for (const key of ['designPanels', 'designPanelsEnd', 'afterDesign']) ext[key] = ext[key] || [];
     const esc = value => A().escapeHtml(value ?? '');
     const api = (...args) => A().api(...args);
     const toast = (...args) => A().toast(...args);
@@ -105,7 +105,7 @@
     }
     const cleanLayout = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isLayoutKey(k) && safeLayoutValue(k, v)));
     const validProfile = p => p && typeof p === 'object' && typeof p.name === 'string' && p.settings && typeof p.settings === 'object';
-    ext.designPanels.push(() => {
+    ext.designPanelsEnd.push(() => { // tout en bas de l'Apparence : on enregistre une fois tout réglé
         const list = profiles();
         return `<section class="person-block-config h-layouts" id="h-layouts"><header><span class="eyebrow">MISES EN PAGE</span><h3>Mes mises en page enregistrées</h3><p>Garde <b>tous</b> les réglages de l’Apparence sous un nom : design, menus affichés ou masqués et leur ordre, listes, cartes, graphiques, blocs des fiches et du tableau de bord, couleurs, fonds de carte. Tu peux y revenir en un clic, ou envoyer le fichier à un autre utilisateur de LCNDA.</p></header>
             <div class="h-layouts-save"><input type="text" id="h-layout-name" maxlength="60" placeholder="Nom de la mise en page (ex. Mode salon, Ma version épurée)"><button type="button" class="button small" data-h-layout-save>Enregistrer la mise en page actuelle</button><button type="button" class="button small secondary" data-h-layout-import>Importer un fichier…</button></div>

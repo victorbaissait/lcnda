@@ -75,7 +75,13 @@
             return true;
         }));
     }
+    /** Données du widget, et celles de chaque partie en plus (datas.parts) */
     async function loadData(d) {
+        const [main, ...parts] = await Promise.all([loadOne(d), ...(d.kind === 'app' ? [] : (d.parts || []).map(loadOne))]);
+        main.parts = parts;
+        return main;
+    }
+    async function loadOne(d) {
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
             try {
@@ -161,9 +167,15 @@
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
         return '';
     }
+    const PART_KINDS = ['numbers', 'list', 'chart', 'text', 'links'];
+    function partsHtml(d, datas) {
+        if (d.kind === 'app') return '';
+        return (d.parts || []).map((p, i) => `<section class="h-cw-part">${p.title ? `<h4>${esc(p.title)}</h4>` : ''}${bodyHtml(p, datas?.parts?.[i] || [])}</section>`).join('');
+    }
     const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : d.kind === 'chart' && datas[0]?.shown ? groupRows(datas[0], d).counted : '';
     function widgetCard(d, index, span, datas) {
-        return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', countOf(d, datas), bodyHtml(d, datas), span));
+        const parts = partsHtml(d, datas);
+        return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', parts ? '' : countOf(d, datas), bodyHtml(d, datas) + parts, span));
     }
     /** Titre, icône, couleur et texte à soi, posés sur la carte d'un widget (le sien ou un widget de l'app) */
     ext.dressWidget = (d, html) => {
@@ -173,7 +185,7 @@
         const c = box.querySelector('.card');
         if (!c) return html;
         c.classList.add('h-cw');
-        if (color(d.color)) c.style.setProperty('--cw-accent', color(d.color));
+        if (color(d.color)) { c.classList.add('h-cw-accent'); c.style.setProperty('--cw-accent', color(d.color)); }
         const h = c.querySelector('.card-title h3');
         if (h && d.name) { const small = h.querySelector('small'); h.textContent = `${d.icon ? d.icon + ' ' : ''}${d.name}`; if (small) h.append(' ', small); }
         if (d.note) c.querySelector('.card-body')?.insertAdjacentHTML('afterbegin', `<p class="h-cw-note">${nl(d.note)}</p>`);
@@ -228,11 +240,12 @@
     ];
     const appCatalog = () => A().orderedDashboardWidgetTypes(true).filter(([k]) => !String(k).startsWith('cw_')).map(([k, , l]) => [k, l]);
     function baseDef(over = {}) {
-        return {id: newId(), name: '', icon: '🧱', color: '', width: '6', note: '', kind: 'numbers', counters: [{label: 'Personnes', src: P()}], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: [], base: '', ...JSON.parse(JSON.stringify(over)), id: newId()};
+        return {id: newId(), name: '', icon: '🧱', color: '', width: '6', note: '', kind: 'numbers', counters: [{label: 'Personnes', src: P()}], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: [], base: '', parts: [], ...JSON.parse(JSON.stringify(over)), id: newId()};
     }
 
     /* ─── Écran de l'éditeur ─── */
-    let editing = null, meta = null, previewSeq = 0;
+    let editing = null, meta = null, previewSeq = 0, partIndex = -1; // partIndex : -1 = partie principale, sinon une partie en plus
+    const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : []});
     async function loadMeta() { meta = await api('my_lists'); return meta; }
     ext.maintenance.widget_editor = async token => {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
@@ -247,8 +260,8 @@
         const ws = A().$('#workspace');
         const find = id => list.find(d => d.id === id);
         ws.querySelector('[data-cw-new]').addEventListener('click', () => chooseStart(token));
-        ws.querySelectorAll('[data-cw-edit]').forEach(b => b.addEventListener('click', () => { const cur = find(b.dataset.cwEdit); editing = {...baseDef(cur), id: cur.id, _existing: true}; renderEditor(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-cw-dup]').forEach(b => b.addEventListener('click', () => { const d = find(b.dataset.cwDup); editing = baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'}); renderEditor(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-cw-edit]').forEach(b => b.addEventListener('click', () => { const cur = find(b.dataset.cwEdit); editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-cw-dup]').forEach(b => b.addEventListener('click', () => { const d = find(b.dataset.cwDup); editing = baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'}); partIndex = -1; renderEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-add]').forEach(b => b.addEventListener('click', () => { addToDashboard(b.dataset.cwAdd); ext.maintenance.widget_editor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-share]').forEach(b => b.addEventListener('click', () => shareDef(find(b.dataset.cwShare))));
         ws.querySelectorAll('[data-cw-del]').forEach(b => b.addEventListener('click', () => {
@@ -283,7 +296,7 @@
                 ${mine.length ? `<h4>Partir d’un de mes widgets</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cw-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
                 <h4>Exemples</h4><div class="h-templates">${ex.map((d, i) => tile(d.icon, d.name, KINDS[d.kind][1], `data-cw-ex="${i}"`)).join('')}</div>`,
             onOpen: dlg => {
-                const go = d => { editing = d; dlg.close(); renderEditor(++S().workspaceToken); };
+                const go = d => { editing = d; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
                 const label = k => appCatalog().find(x => x[0] === k)?.[1] || k;
                 dlg.querySelectorAll('[data-cw-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cwKind; go(baseDef({kind: k, icon: KINDS[k][0], name: k === 'app' ? '' : KINDS[k][1], base: k === 'app' ? appCatalog()[0]?.[0] || 'stats' : '', links: k === 'links' ? [{label: 'Carte', target: 'module:carte'}] : []})); }));
                 dlg.querySelectorAll('[data-cw-copy]').forEach(b => b.addEventListener('click', () => go(baseDef({name: label(b.dataset.cwCopy), ...FROM_APP[b.dataset.cwCopy](meta || {})}))));
@@ -315,9 +328,10 @@
                 <label>+ Critère <select data-cw-addrule><option value="">choisir…</option>${Object.entries(ext.listRules ? ext.listRules() : {}).filter(([, m]) => m[k]).map(([f, m]) => `<option value="${f}">${esc(m[k])}</option>`).join('')}</select></label>`
             : src.list_id ? '<p class="muted">La liste est reprise telle qu’elle est enregistrée (critères, lignes ajoutées à la main, filtres de colonnes).</p>' : '<p class="muted">Toutes les lignes de cette liste de l’app.</p>'}</div>`;
     }
-    const srcAt = path => { const [kind, i] = path.split('.'); return kind === 'c' ? editing.counters[Number(i)].src : editing.src; };
+    const target = () => partIndex >= 0 && editing.parts?.[partIndex] ? editing.parts[partIndex] : editing;
+    const srcAt = path => { const [kind, i] = path.split('.'), t = target(); return kind === 'c' ? t.counters[Number(i)].src : t.src; };
     function kindHtml() {
-        const d = editing;
+        const d = target();
         if (d.kind === 'numbers') return `${(d.counters || []).map((c, i) => `<fieldset class="h-cw-counter"><legend>Chiffre ${i + 1}</legend><label>Libellé<input data-cw-counter="${i}" value="${esc(c.label || '')}" placeholder="Personnes nées en Bretagne"></label>${sourceHtml(c.src = c.src || P(), 'c.' + i)}${d.counters.length > 1 ? `<button type="button" class="link-button" data-cw-counter-del="${i}">retirer ce chiffre</button>` : ''}</fieldset>`).join('')}
             <button type="button" class="button small secondary" data-cw-counter-add>+ Chiffre</button>`;
         if (d.kind === 'list' || d.kind === 'chart') {
@@ -344,36 +358,52 @@
         return '';
     }
     function renderEditor(token) {
-        const d = editing;
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header('ÉDITEUR DE WIDGETS', d._existing ? `Modifier « ${d.name || 'Mon widget'} »` : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
+        const root = editing;
+        if (partIndex >= (root.parts || []).length || root.kind === 'app') partIndex = -1;
+        const d = target();
+        const partTabs = root.kind === 'app' ? '' : `<div class="h-cw-parts-tabs"><button type="button" class="button small ${partIndex < 0 ? '' : 'secondary'}" data-cw-part="-1">${esc(KINDS[root.kind]?.[0] || '')} Partie principale</button>${(root.parts || []).map((p, i) => `<button type="button" class="button small ${partIndex === i ? '' : 'secondary'}" data-cw-part="${i}">${esc(KINDS[p.kind]?.[0] || '')} ${esc(p.title || 'Partie ' + (i + 2))}</button>`).join('')}
+            ${(root.parts || []).length < 8 ? `<label class="h-cw-part-add">+ Ajouter une partie <select data-cw-partadd><option value="">choisir…</option>${PART_KINDS.map(k => `<option value="${k}">${KINDS[k][0]} ${esc(KINDS[k][1])}</option>`).join('')}</select></label>` : ''}</div>`;
+        const partHead = partIndex >= 0 ? `<div class="form-grid"><label>Sous-titre de cette partie<input data-cw-parttitle value="${esc(d.title || '')}" placeholder="Ex. : À faire, Mes chiffres, Liens utiles"></label>
+            <label>Sorte <select data-cw-partkind>${PART_KINDS.map(k => `<option value="${k}" ${d.kind === k ? 'selected' : ''}>${KINDS[k][0]} ${esc(KINDS[k][1])}</option>`).join('')}</select></label>
+            <p class="span-2"><button type="button" class="button small secondary" data-cw-partup ${partIndex ? '' : 'disabled'}>↑ Monter</button> <button type="button" class="button small secondary" data-cw-partdown ${partIndex < root.parts.length - 1 ? '' : 'disabled'}>↓ Descendre</button> <button type="button" class="button small secondary danger" data-cw-partdel>Retirer cette partie</button></p></div>` : '';
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header('ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
             <div class="h-cw-layout"><div>
             <section class="maintenance-panel"><h3>1. Le widget</h3><div class="form-grid">
-                <label>Titre<input data-cw="name" value="${esc(d.name || '')}" placeholder="Mes ancêtres bretons"></label><label>Icône<input data-cw="icon" value="${esc(d.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🧱"></label>
-                <label>Sorte <select data-cw-kindsel>${Object.entries(KINDS).map(([k, [i, l]]) => `<option value="${k}" ${d.kind === k ? 'selected' : ''}>${i} ${esc(l)}</option>`).join('')}</select></label>
-                <label>Largeur <select data-cw="width">${WIDTHS.map(([v, l]) => `<option value="${v}" ${String(d.width) === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <div class="span-2"><span class="section-label">Couleur</span><div class="h-cw-colors"><button type="button" class="h-cw-swatch ${!color(d.color) ? 'is-on' : ''}" data-cw-color="" title="Aucune">∅</button>${COLORS.map(c => `<button type="button" class="h-cw-swatch ${d.color === c ? 'is-on' : ''}" data-cw-color="${c}" style="background:${c}" title="${c}"></button>`).join('')}<input type="color" data-cw-colorpick value="${esc(color(d.color) || '#0066cc')}" title="Autre couleur"></div></div>
-                <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(d.note || '')}</textarea></label></div></section>
-            <section class="maintenance-panel"><h3>2. ${esc(KINDS[d.kind]?.[1] || '')}</h3><p class="muted">${esc(KINDS[d.kind]?.[2] || '')}</p><div data-cw-kind-box>${kindHtml()}</div></section>
-            <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${d._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
+                <label>Titre<input data-cw="name" value="${esc(root.name || '')}" placeholder="Mes ancêtres bretons"></label><label>Icône<input data-cw="icon" value="${esc(root.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🧱"></label>
+                <label>Sorte <select data-cw-kindsel>${Object.entries(KINDS).map(([k, [i, l]]) => `<option value="${k}" ${root.kind === k ? 'selected' : ''}>${i} ${esc(l)}</option>`).join('')}</select></label>
+                <label>Largeur <select data-cw="width">${WIDTHS.map(([v, l]) => `<option value="${v}" ${String(root.width) === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <div class="span-2"><span class="section-label">Couleur</span><div class="h-cw-colors"><button type="button" class="h-cw-swatch ${!color(root.color) ? 'is-on' : ''}" data-cw-color="" title="Aucune">∅</button>${COLORS.map(c => `<button type="button" class="h-cw-swatch ${root.color === c ? 'is-on' : ''}" data-cw-color="${c}" style="background:${c}" title="${c}"></button>`).join('')}<input type="color" data-cw-colorpick value="${esc(color(root.color) || '#0066cc')}" title="Autre couleur"></div></div>
+                <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(root.note || '')}</textarea></label></div></section>
+            <section class="maintenance-panel"><h3>2. ${partIndex >= 0 ? `Partie ${partIndex + 2} : ` : ''}${esc(KINDS[d.kind]?.[1] || '')}</h3>${partTabs}${partHead}<p class="muted">${esc(KINDS[d.kind]?.[2] || '')}${root.kind !== 'app' && partIndex < 0 && !(root.parts || []).length ? ' Pour mettre plusieurs choses dans le même widget (plusieurs textes, des chiffres et des raccourcis…), « + Ajouter une partie ».' : ''}</p><div data-cw-kind-box>${kindHtml()}</div></section>
+            <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
             </div><aside class="h-cw-preview"><h3>Aperçu <button type="button" class="link-button" data-cw-refresh>actualiser</button></h3><div class="card-grid" data-cw-preview></div></aside></div></section>`;
         const ws = A().$('#workspace');
         const again = () => renderEditor(token);
         let previewTimer = 0;
         const preview = () => { clearTimeout(previewTimer); previewTimer = setTimeout(async () => {
             const box = ws.querySelector('[data-cw-preview]'); if (!box) return;
-            if (d.kind === 'app') { box.innerHTML = ext.dressWidget(d, A().card('01', appCatalog().find(x => x[0] === d.base)?.[1] || d.base, '', '<p class="muted">Le contenu du widget de l’app s’affiche ici sur le tableau de bord.</p>', 'span-12')); return; }
+            if (root.kind === 'app') { box.innerHTML = ext.dressWidget(root, A().card('01', appCatalog().find(x => x[0] === root.base)?.[1] || root.base, '', '<p class="muted">Le contenu du widget de l’app s’affiche ici sur le tableau de bord.</p>', 'span-12')); return; }
             box.innerHTML = '<p class="muted">Calcul…</p>';
             const seq = ++previewSeq;
-            const datas = await loadData(d);
-            if (seq === previewSeq && document.body.contains(box)) { box.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
+            const datas = await loadData(root);
+            if (seq === previewSeq && document.body.contains(box)) { box.innerHTML = widgetCard(root, '01', 'span-12', datas); A().bindTableLinks?.(); }
         }, 350); };
         preview();
         ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; ext.maintenance.widget_editor(++S().workspaceToken); }));
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
-        ws.querySelectorAll('[data-cw]').forEach(el => el.addEventListener('input', () => { d[el.dataset.cw] = el.value; preview(); }));
-        ws.querySelector('[data-cw-kindsel]').addEventListener('change', e => { const k = e.target.value; d.kind = k; if (k === 'app' && !d.base) d.base = appCatalog()[0]?.[0]; if (k === 'numbers' && !d.counters?.length) d.counters = [{label: 'Personnes', src: P()}]; again(); });
-        ws.querySelectorAll('[data-cw-color]').forEach(b => b.addEventListener('click', () => { d.color = b.dataset.cwColor; again(); }));
-        ws.querySelector('[data-cw-colorpick]').addEventListener('change', e => { d.color = e.target.value; again(); });
+        ws.querySelectorAll('[data-cw]').forEach(el => el.addEventListener('input', () => { root[el.dataset.cw] = el.value; preview(); }));
+        ws.querySelector('[data-cw-kindsel]').addEventListener('change', e => { const k = e.target.value; root.kind = k; if (k === 'app' && !root.base) root.base = appCatalog()[0]?.[0]; if (k === 'numbers' && !root.counters?.length) root.counters = [{label: 'Personnes', src: P()}]; partIndex = -1; again(); });
+        ws.querySelectorAll('[data-cw-color]').forEach(b => b.addEventListener('click', () => { root.color = b.dataset.cwColor; again(); }));
+        ws.querySelector('[data-cw-colorpick]').addEventListener('change', e => { root.color = e.target.value; again(); });
+        // les parties en plus : choisir, ajouter, renommer, changer de sorte, déplacer, retirer
+        ws.querySelectorAll('[data-cw-part]').forEach(b => b.addEventListener('click', () => { partIndex = Number(b.dataset.cwPart); again(); }));
+        ws.querySelector('[data-cw-partadd]')?.addEventListener('change', e => { if (!e.target.value) return; root.parts = root.parts || []; root.parts.push(newPart(e.target.value)); partIndex = root.parts.length - 1; again(); });
+        ws.querySelector('[data-cw-parttitle]')?.addEventListener('input', e => { d.title = e.target.value; ws.querySelector(`[data-cw-part="${partIndex}"]`)?.replaceChildren(`${KINDS[d.kind]?.[0] || ''} ${d.title || 'Partie ' + (partIndex + 2)}`); preview(); });
+        ws.querySelector('[data-cw-partkind]')?.addEventListener('change', e => { const k = e.target.value; d.kind = k; if (k === 'numbers' && !d.counters?.length) d.counters = [{label: 'Personnes', src: P()}]; if (k === 'links' && !d.links?.length) d.links = [{label: 'Carte', target: 'module:carte'}]; again(); });
+        const movePart = to => { const [p] = root.parts.splice(partIndex, 1); root.parts.splice(to, 0, p); partIndex = to; again(); };
+        ws.querySelector('[data-cw-partup]')?.addEventListener('click', () => movePart(partIndex - 1));
+        ws.querySelector('[data-cw-partdown]')?.addEventListener('click', () => movePart(partIndex + 1));
+        ws.querySelector('[data-cw-partdel]')?.addEventListener('click', () => { root.parts.splice(partIndex, 1); partIndex = -1; again(); });
         const box = ws.querySelector('[data-cw-kind-box]');
         // données et critères
         box.addEventListener('change', e => {
@@ -427,11 +457,17 @@
             preview();
         }
         const save = andAdd => {
-            if (!String(d.name || '').trim()) { toast('Donne un titre au widget.', 'error'); ws.querySelector('[data-cw="name"]').focus(); return; }
-            const clean = cleanDef(d), list = defs(), i = list.findIndex(x => x.id === clean.id);
+            if (!String(root.name || '').trim()) { toast('Donne un titre au widget.', 'error'); ws.querySelector('[data-cw="name"]').focus(); return; }
+            const clean = cleanDef(root), list = defs(), i = list.findIndex(x => x.id === clean.id), before = i >= 0 ? list[i] : null;
             if (i >= 0) list[i] = clean; else list.push(clean);
             saveDefs(list);
-            if (andAdd) addToDashboard(clean.id); else toast('Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
+            // Déjà sur le tableau de bord : on le met à jour (largeur comprise) au lieu d'en proposer un deuxième
+            const settings = A().dashboardBlockSettings(), placed = settings.widgets.filter(w => w.type === clean.id);
+            if (placed.length) {
+                if (before && String(before.width) !== String(clean.width)) { placed.forEach(w => { w.width = clean.width; }); A().saveDashboardBlockSettings(settings); }
+                toast('Widget enregistré : le tableau de bord est à jour.');
+            } else if (andAdd) addToDashboard(clean.id);
+            else toast('Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
             editing = null;
             if (andAdd) A().setModule('dashboard'); else ext.maintenance.widget_editor(++S().workspaceToken);
         };
@@ -451,13 +487,19 @@
     function cleanDef(d) {
         const kind = KINDS[d.kind] ? d.kind : 'text';
         const out = {id: /^cw_[a-z0-9]{4,24}$/.test(String(d.id)) ? d.id : newId(), name: str(d.name, 80).trim(), icon: str(d.icon, 16), color: color(d.color), width: WIDTHS.some(w => w[0] === String(d.width)) ? String(d.width) : '6', note: str(d.note, 1000), kind};
+        Object.assign(out, kindFields(d, kind));
+        out.parts = kind === 'app' ? [] : (Array.isArray(d.parts) ? d.parts : []).slice(0, 8).filter(p => p && PART_KINDS.includes(p.kind)).map(p => ({kind: p.kind, title: str(p.title, 80).trim(), ...kindFields(p, p.kind)}));
+        if (kind === 'app') out.base = appCatalog().some(([k]) => k === d.base) ? d.base : 'stats'; // un widget de l'app qui n'existe pas ici
+        return out;
+    }
+    function kindFields(d, kind) {
+        const out = {};
         if (kind === 'numbers') out.counters = (Array.isArray(d.counters) ? d.counters : []).slice(0, 8).map(c => ({label: str(c.label, 80), src: cleanSrc(c.src)}));
         if (kind === 'list' || kind === 'chart') { out.src = cleanSrc(d.src); out.limit = Math.max(1, Math.min(100, Number(d.limit) || 8)); }
         if (kind === 'list') { out.columns = (Array.isArray(d.columns) ? d.columns : []).map(c => str(c, 40)).slice(0, 12); out.sort = d.sort?.col ? {col: str(d.sort.col, 40), dir: d.sort.dir === 'desc' ? 'desc' : 'asc'} : null; }
         if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', 'year', 'decade', 'century'].includes(d.groupBy) ? d.groupBy : 'value', style: d.style === 'pie' ? 'pie' : 'bars', skipEmpty: d.skipEmpty !== false});
         if (kind === 'text') out.text = str(d.text, 5000);
         if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
-        if (kind === 'app') out.base = appCatalog().some(([k]) => k === d.base) ? d.base : 'stats'; // un widget de l'app qui n'existe pas ici
         return out;
     }
     /** Dans le fichier : les types d'événements et les étiquettes par leur nom (leurs numéros changent d'une base à l'autre) */
@@ -475,8 +517,7 @@
     }
     function shareDef(d) {
         const w = JSON.parse(JSON.stringify(d));
-        if (w.src) w.src = portableSrc(w.src);
-        (w.counters || []).forEach(c => { c.src = portableSrc(c.src); });
+        [w, ...(w.parts || [])].forEach(p => { if (p.src) p.src = portableSrc(p.src); (p.counters || []).forEach(c => { c.src = portableSrc(c.src); }); });
         const file = JSON.stringify({format: 'lcnda-widget', version: 1, widget: w}, null, 2);
         const name = (d.name || 'widget').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase() + '.lcnda-widget.json';
         if (ext.downloadText) ext.downloadText(name, file, 'application/json');
@@ -485,8 +526,7 @@
     function importDef(json) {
         if (json?.format !== 'lcnda-widget' || !json.widget) throw new Error('ce n’est pas un widget LCNDA.');
         const w = json.widget, missing = [];
-        if (w.src) w.src = localSrc(w.src, missing);
-        (w.counters || []).forEach(c => { c.src = localSrc(c.src, missing); });
+        [w, ...(Array.isArray(w.parts) ? w.parts : [])].forEach(p => { if (p && p.src) p.src = localSrc(p.src, missing); (p?.counters || []).forEach(c => { c.src = localSrc(c.src, missing); }); });
         if (missing.length) toast(`Liste absente de ta base (${missing.join(', ')}) : remplacée par « Personnes ».`, 'error');
         return cleanDef({...w, id: newId(), name: w.name || 'Widget importé'});
     }
