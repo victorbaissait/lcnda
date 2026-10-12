@@ -336,7 +336,11 @@ function village_wiki_population(PDO $pdo, string $key, string $title = ''): arr
         $t = $title !== '' && $lang === $langs[0] ? $title : village_wiki_title($lang, (string) $v['name'], (string) ($v['county'] ?? ''));
         if ($t === '') { continue; }
         $p = wiki_get_json("https://{$lang}.wikipedia.org/w/api.php?format=json&formatversion=2&" . http_build_query(['action' => 'parse', 'page' => $t, 'prop' => 'text', 'redirects' => 1, 'disablelimitreport' => 1, 'disableeditsection' => 1]));
-        $pops = village_parse_population_html((string) ($p['parse']['text'] ?? ''));
+        $html = (string) ($p['parse']['text'] ?? '');
+        // une commune homonyme d'un autre département : la page doit parler du nôtre
+        $county = trim((string) ($v['county'] ?? ''));
+        if ($county !== '' && !str_contains(ascii_fold(mb_strtolower(html_entity_decode(strip_tags($html)))), ascii_fold(mb_strtolower($county)))) { continue; }
+        $pops = village_parse_population_html($html);
         $real = (string) ($p['parse']['title'] ?? $t);
         if (count($pops) >= 2) { return ['populations' => $pops, 'title' => $real, 'url' => "https://{$lang}.wikipedia.org/wiki/" . rawurlencode(str_replace(' ', '_', $real)), 'lang' => $lang]; }
     }

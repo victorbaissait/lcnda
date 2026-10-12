@@ -49,7 +49,10 @@ const after = php(head + String.raw`
 $rows = $pdo->query('SELECT nom, prenom, prenoms, sexe, date_naissance, commune_naissance, pays_naissance, date_deces, code_lieu_deces, numero_acte_deces FROM insee_deces ORDER BY id')->fetchAll();
 $pdo->exec("INSERT INTO insee_deces_imports(filename,row_count,inserted_count) VALUES('deces-2023.csv',1,1)");
 $list = insee_remote_files($pdo, json_decode('${res}', true));
-echo json_encode(['rows' => $rows, 'list' => $list], JSON_UNESCAPED_UNICODE);
+$pdo->exec("INSERT INTO insee_deces_imports(filename,row_count,inserted_count) VALUES('deces-2025-m07.txt',1,1),('deces-2025-m08.txt',1,1)");
+$u = 'https://static.data.gouv.fr/resources/x/';
+$list2 = insee_remote_files($pdo, [['url' => $u . 'deces-2025.txt'], ['url' => $u . 'deces-2025-m09.txt'], ['url' => $u . 'deces-2026-m01.txt'], ['url' => $u . 'deces-2025-m08.txt']])['files'];
+echo json_encode(['rows' => $rows, 'list' => $list, 'list2' => $list2], JSON_UNESCAPED_UNICODE);
 `);
 const files = Object.fromEntries(after.list.files.map(f => [f.name, f]));
 const checks = [
@@ -61,6 +64,7 @@ const checks = [
   ['mois remplacés par le fichier de l’année', () => assert.ok(files['deces-2024-m03.txt'].superseded)],
   ['nouveau : plus récent que ce qui est importé', () => { assert.ok(files['deces-2025-m01.txt'].new); assert.equal(after.list.new_count, 1); assert.equal(files['deces-2025-m01.txt'].label, 'Décès de janvier 2025'); }],
   ['adresses hors data.gouv.fr et autres fichiers ignorés', () => { assert.ok(!files['deces-2026.csv']); assert.ok(!files['documentation.pdf']); }],
+  ['fichier de l’année après des mois déjà importés : nouveau, et classé avant ses mois', () => { assert.ok(after.list2.find(f => f.name === 'deces-2025.txt').new); assert.equal(after.list2[0].name, 'deces-2026-m01.txt'); assert.equal(after.list2[1].name, 'deces-2025.txt'); assert.ok(after.list2.find(f => f.name === 'deces-2025-m09.txt').superseded); }],
   ['du plus récent au plus ancien', () => assert.equal(after.list.files[0].name, 'deces-2025-m01.txt')],
 ];
 let failed = 0;

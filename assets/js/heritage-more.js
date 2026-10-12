@@ -982,7 +982,7 @@
                 const r = await api('village_wiki_population', {key});
                 await api('save_village_populations', {}, {method: 'POST', body: {key, name: v.name, populations: r.populations, source: r.url}});
                 if (!auto) toast(`${plural(r.populations.length, 'recensement récupéré', 'recensements récupérés')} (${r.title}).`);
-                if (isCurrent(token, 'listes') || !auto) again();
+                if (S().module === 'listes' && st.listType === 'villages' && st.hVillage === key) again(); // toujours sur ce village
             } catch (error) {
                 if (!document.body.contains(btn)) return;
                 btn.disabled = false; btn.textContent = 'Récupérer sur Wikipédia';

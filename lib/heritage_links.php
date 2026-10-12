@@ -154,34 +154,69 @@ const QUESTION_RELATIONS = [
  */
 function question_relation(PDO $pdo, string $q, string $t): ?array
 {
-    $found = null;
+    // Les mots de la question, avec leur place (« d'Émile » → « d », « Émile » ; « L'épouse » → « L », « épouse »)
+    preg_match_all('/[\p{L}\p{M}-]+/u', $q, $mm, PREG_OFFSET_CAPTURE);
+    $tokens = array_map(static fn($m) => ['text' => $m[0], 'at' => $m[1], 'fold' => strtolower(ascii_fold($m[0]))], $mm[0]);
+    if (!$tokens) { return null; }
+    // Le mot de parenté, cherché dans les mots mis bout à bout (« petits enfants » et « petits-enfants »)
+    $joined = ''; $starts = [];
+    foreach ($tokens as $i => $tk) { $starts[$i] = strlen($joined) + ($i ? 1 : 0); $joined .= ($i ? ' ' : '') . $tk['fold']; }
+    $found = null; $relTokens = [];
     foreach (QUESTION_RELATIONS as $re => [$relation, $gender, $labels]) {
-        if (preg_match('/(?<![a-z-])(' . $re . ')(?![a-z-])/', $t, $m)) { $found = [$relation, $gender, $labels]; break; }
+        if (preg_match('/(?<![a-z-])(' . $re . ')(?![a-z-])/', $joined, $m, PREG_OFFSET_CAPTURE)) {
+            $found = [$relation, $gender, $labels];
+            $from = $m[1][1]; $to = $from + strlen($m[1][0]);
+            foreach ($starts as $i => $st) { if ($st >= $from && $st < $to) { $relTokens[$i] = true; } }
+            break;
+        }
     }
     if (!$found) { return null; }
-    // Suites de mots en majuscule (« Adrien Paul Baissait », « Marie-Thérèse de La Fontaine »)
-    $stop = ['Est-ce', 'Est', 'Qui', 'Quel', 'Quels', 'Quelle', 'Quelles', 'Combien', 'Les', 'Le', 'La', 'Des', 'Donne', 'Montre', 'Liste', 'Cherche', 'Trouve', 'Y', 'A', 'À', 'Et', 'Ou', 'Il', 'Elle', 'Ils', 'Elles', 'Mes', 'Ses', 'Leurs', 'Tous', 'Toutes'];
-    preg_match_all('/(?:\p{Lu}[\p{L}\'’-]*)(?:\s+(?:(?:de|du|des|d[\'’]|la|le|van|von|di|da)\s+)?\p{Lu}[\p{L}\'’-]*)*/u', $q, $mm);
-    $best = 0; $bestText = '';
-    foreach ($mm[0] as $chunk) {
-        $words = array_values(array_filter(preg_split('/\s+/u', $chunk), static fn($w) => !in_array($w, $stop, true)));
-        if (count($words) < 2) { continue; }
-        // du plus long au plus court : « Adrien Paul Baissait », puis « Adrien Baissait »…
-        for ($drop = 0; $drop <= count($words) - 2 && !$best; $drop++) {
-            $try = $drop ? array_merge(array_slice($words, 0, count($words) - 1 - $drop), [end($words)]) : $words;
-            $id = question_find_person($pdo, implode(' ', $try));
-            if ($id) { $best = $id; $bestText = implode(' ', $words); }
+    // La personne : la plus longue suite de mots qui forme un prénom et un nom de la base (accents et majuscules sans importance)
+    $particles = ['de', 'du', 'des', 'd', 'la', 'le', 'les', 'l', 'van', 'von', 'der', 'di', 'da', 'y', 'et'];
+    $people = [];
+    foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons") as $r) {
+        $first = preg_split('/[\s-]+/', strtolower(ascii_fold((string) $r['f'])), -1, PREG_SPLIT_NO_EMPTY);
+        $last = preg_split('/[\s-]+/', strtolower(ascii_fold((string) $r['l'])), -1, PREG_SPLIT_NO_EMPTY);
+        if ($first && $last) { $people[] = ['id' => (int) $r['id'], 'first' => $first, 'last' => $last]; }
+    }
+    $best = null;
+    $n = count($tokens);
+    for ($i = 0; $i < $n; $i++) {
+        for ($j = min($n - 1, $i + 7); $j > $i; $j--) {
+            if (isset($relTokens[$i]) || isset($relTokens[$j]) || in_array($tokens[$i]['fold'], $particles, true) || in_array($tokens[$j]['fold'], $particles, true)) { continue; }
+            $words = [];
+            for ($k = $i; $k <= $j; $k++) { if (isset($relTokens[$k])) { continue 2; } foreach (preg_split('/-/', $tokens[$k]['fold'], -1, PREG_SPLIT_NO_EMPTY) as $w) { if (!in_array($w, $particles, true)) { $words[] = $w; } } }
+            if (count($words) < 2) { continue; }
+            $matches = [];
+            foreach ($people as $p) {
+                $all = array_merge($p['first'], $p['last']);
+                if (array_diff($words, $all) || !array_intersect($words, $p['first']) || !array_intersect($words, array_diff($p['last'], $particles))) { continue; }
+                $matches[] = ['id' => $p['id'], 'extra' => count(array_diff(array_diff($all, $particles), $words))];
+            }
+            if (!$matches) { continue; }
+            usort($matches, static fn($a, $b) => $a['extra'] <=> $b['extra'] ?: $a['id'] <=> $b['id']);
+            $score = count($words) * 10 - $matches[0]['extra'];
+            if (!$best || $score > $best['score']) {
+                $same = count(array_filter($matches, static fn($m) => $m['extra'] === $matches[0]['extra']));
+                $best = ['score' => $score, 'id' => $matches[0]['id'], 'homonyms' => $same, 'from' => $i, 'to' => $j];
+            }
         }
-        if ($best) { break; }
     }
     if (!$best) { return null; }
     [$relation, $gender, $labels] = $found;
-    $name = question_person_name($pdo, $best);
-    $life = person_life_years($pdo, $best);
-    return ['relation' => $relation, 'person' => $best, 'gender' => $gender, 'labels' => $labels,
-        'label' => $labels[1] . ' de ' . $name . ($life !== '' ? " ({$life})" : ''), 'name' => $name,
-        'yesno' => (bool) preg_match('/\b(a-t-(il|elle)|ont-(ils|elles)|avait-(il|elle)|est-ce qu|y a-t-il|a t il|a t elle)\b|\?\s*$/u', mb_strtolower($q)) && !preg_match('/\b(qui|quels?|quelles?|combien|liste|donne|montre)\b/u', mb_strtolower($q)),
-        'rest' => trim(str_replace($bestText, ' ', $q))];
+    $id = $best['id'];
+    $name = question_person_name($pdo, $id);
+    $life = person_life_years($pdo, $id);
+    // Ce qui reste de la question, sans le nom ni le mot de parenté (ils ne doivent pas devenir un lieu, un prénom ou « mariage »)
+    $rest = $q;
+    for ($k = $n - 1; $k >= 0; $k--) {
+        if (($k >= $best['from'] && $k <= $best['to']) || isset($relTokens[$k])) { $rest = substr_replace($rest, str_repeat(' ', strlen($tokens[$k]['text'])), $tokens[$k]['at'], strlen($tokens[$k]['text'])); }
+    }
+    $low = mb_strtolower($q);
+    return ['relation' => $relation, 'person' => $id, 'gender' => $gender, 'labels' => $labels,
+        'label' => $labels[1] . ' de ' . $name . ($life !== '' ? " ({$life})" : '') . ($best['homonyms'] > 1 ? " — {$best['homonyms']} fiches portent ce nom, réponse pour la fiche n°{$id}" : ''), 'name' => $name,
+        'yesno' => (bool) preg_match('/\b(a-t-(il|elle)|ont-(ils|elles)|avai(t|ent)-(il|elle|ils|elles)|est-ce qu|y a-t-il|a t il|a t elle)/u', $low) && !preg_match('/\b(qui|quels?|quelles?|combien|liste|donne|montre)\b/u', $low),
+        'rest' => trim(preg_replace('/\s+/u', ' ', $rest))];
 }
 
 /** « 1850-1921 » à partir des événements de naissance et de décès (ou vide). */
@@ -240,8 +275,15 @@ function ask_question(PDO $pdo, string $question): array
         $n = count($ids);
         $what = $n === 1 ? "1 {$one}" : "{$n} {$many}";
         $none = $rel['gender'] === 'female' ? 'aucune' : 'aucun';
+        $relIds = search_relatives($pdo, $rel['relation'], (int) $rel['person']);
+        if ($rel['gender'] && $relIds) { $g = $pdo->prepare('SELECT count(*) FROM persons WHERE gender=? AND id IN (' . implode(',', array_map('intval', $relIds)) . ')'); $g->execute([$rel['gender']]); $all = (int) $g->fetchColumn(); }
+        else { $all = count($relIds); }
+        if (!$n && $all) { // il y en a, mais aucun ne répond aux autres critères de la question
+            $answer = ($rel['yesno'] ? 'Non : ' : '') . "{$rel['name']} a " . ($all === 1 ? "1 {$rel['labels'][0]}" : "{$all} {$rel['labels'][1]}") . " dans l’arbre, mais {$none} ne répond aux autres critères de la question.";
+        } else {
         if ($rel['yesno']) { $answer = $n ? "Oui, {$what}." : "Non : {$none} {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
         else { $answer = $n ? "{$rel['name']} : {$what}." : ucfirst($none) . " {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
+        }
     }
     return ['understood' => $r['understood'], 'answer' => $answer, 'criteria' => $r['criteria'], 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
 }

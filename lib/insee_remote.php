@@ -21,7 +21,9 @@ function insee_file_period(string $name): ?array
     $month = ($m[2] ?? '') === 'm' ? (int) $m[3] : 0;
     $quarter = ($m[2] ?? '') === 't' ? (int) $m[3] : 0;
     if ($month > 12 || $quarter > 4) { return null; }
-    return ['year' => $year, 'month' => $month, 'quarter' => $quarter, 'key' => sprintf('%04d-%s%02d', $year, $month ? 'm' : ($quarter ? 't' : 'a'), $month ?: $quarter)];
+    // order : pour comparer deux fichiers (le fichier de l'année vient après ses mois et ses trimestres)
+    return ['year' => $year, 'month' => $month, 'quarter' => $quarter, 'key' => sprintf('%04d-%s%02d', $year, $month ? 'm' : ($quarter ? 't' : 'a'), $month ?: $quarter),
+        'order' => $year * 100 + ($month ?: ($quarter ? $quarter * 3 : 13))];
 }
 
 function insee_period_label(array $p): string
@@ -50,7 +52,7 @@ function insee_remote_files(PDO $pdo, ?array $resources = null): array
         if ($p) { $imported['#' . $p['key']] = (string) $r['imported_at']; } // même période, nom un peu différent
     }
     $byPeriod = [];
-    $rank = ['csv' => 3, 'zip' => 2, 'txt' => 1];
+    $rank = ['csv' => 3, 'txt' => 2, 'zip' => 1]; // un .zip peut contenir le .txt en positions fixes, que seul le .txt sait lire
     foreach ($resources as $res) {
         $url = (string) ($res['url'] ?? '');
         $name = basename((string) parse_url($url, PHP_URL_PATH));
@@ -60,23 +62,23 @@ function insee_remote_files(PDO $pdo, ?array $resources = null): array
         if (!$p) { continue; }
         $cur = $byPeriod[$p['key']] ?? null;
         if ($cur && $rank[$cur['format']] >= $rank[$ext]) { continue; }
-        $byPeriod[$p['key']] = ['key' => $p['key'], 'year' => $p['year'], 'month' => $p['month'], 'quarter' => $p['quarter'], 'label' => insee_period_label($p),
+        $byPeriod[$p['key']] = ['key' => $p['key'], 'order' => $p['order'], 'year' => $p['year'], 'month' => $p['month'], 'quarter' => $p['quarter'], 'label' => insee_period_label($p),
             'name' => $name, 'url' => $url, 'format' => $ext, 'size' => (int) ($res['filesize'] ?? 0),
             'published' => substr((string) ($res['last_modified'] ?? $res['created_at'] ?? ''), 0, 10)];
     }
     $years = [];
     foreach ($byPeriod as $f) { if (!$f['month'] && !$f['quarter']) { $years[$f['year']] = true; } }
-    $maxImported = '';
+    $maxImported = 0;
     foreach ($byPeriod as &$f) {
         $f['imported_at'] = $imported[strtolower($f['name'])] ?? $imported['#' . $f['key']] ?? '';
         $f['imported'] = $f['imported_at'] !== '';
         $f['superseded'] = ($f['month'] || $f['quarter']) && isset($years[$f['year']]); // le fichier de l'année les contient
-        if ($f['imported'] && $f['key'] > $maxImported) { $maxImported = $f['key']; }
+        if ($f['imported'] && $f['order'] > $maxImported) { $maxImported = $f['order']; }
     }
     unset($f);
-    krsort($byPeriod);
+    uasort($byPeriod, static fn($a, $b) => $b['order'] <=> $a['order']);
     $files = array_values($byPeriod);
-    foreach ($files as &$f) { $f['new'] = !$f['imported'] && !$f['superseded'] && $maxImported !== '' && $f['key'] > $maxImported; }
+    foreach ($files as &$f) { $f['new'] = !$f['imported'] && !$f['superseded'] && $maxImported > 0 && $f['order'] > $maxImported; }
     unset($f);
     return ['files' => $files, 'new_count' => count(array_filter($files, static fn($f) => $f['new'])), 'checked_at' => date('c'), 'source' => 'https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/'];
 }
