@@ -1,7 +1,7 @@
 {
   "name": "carnet-numerique-ancetres",
   "productName": "LCNDA",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Application de généalogie locale (PHP + SQLite) dans une fenêtre de bureau. Pensée et designée par Victor Baissait, codée par Codex (ChatGPT) et Claude.",
   "private": true,
   "main": "electron/main.js",

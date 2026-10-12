@@ -148,7 +148,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.4.1</span>
+                <span class="eyebrow">VERSION BÊTA · 0.4.2</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source et gratuit pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -177,8 +177,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.4.1-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 538 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.4.1-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.4.2-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 538 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.4.2-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -187,7 +187,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.4.1-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.4.2-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 553 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -198,16 +198,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.4.1-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 533 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.4.1-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 508 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.4.2-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 533 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.4.2-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 508 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.4.1-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 535 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.4.1-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 504 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.4.2-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 535 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.4.2-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 504 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.4.1-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.4.2-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -215,17 +215,66 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.4.1, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.4.2, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.4.1.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.4.1.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.4.2.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.4.2.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.4.1<small>Mes listes, fiche d'un village enrichie, reconnaissance d'écriture à installer en un clic, corrections</small></span></summary>
+                <summary><span>Nouveautés de la version 0.4.2<small>Musée de famille en 3D, retouche des photos, widgets à soi, cartes d'électeur, décès INSEE automatiques, 26 calendriers, nombreuses corrections</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>Musée de famille en 3D</h4>
+                    <ul>
+                        <li>Des salles où l'on expose photos, documents et objets, avec un <b>plan de la salle</b> pour placer chaque élément et une <b>taille de pièce sur mesure</b>.</li>
+                        <li><b>Visite guidée</b> avec audioguide (vos enregistrements ou une voix de synthèse dont on règle la vitesse), livre d'or et catalogue.</li>
+                        <li>Partage en site web ou en fichier.</li>
+                    </ul>
+                    <h4>Photos et apparence</h4>
+                    <ul>
+                        <li><b>Retouche</b> (luminosité, contraste, courbe) : l'original est toujours gardé, chaque retouche devient une version.</li>
+                        <li><b>Mises en page enregistrées</b> : tous les réglages de l'Apparence sous un nom, à partager.</li>
+                        <li>Tous les émojis d'Unicode, personnes (avec les couleurs de peau), objets et symboles.</li>
+                    </ul>
+                    <h4>Tableau de bord, listes et recherche</h4>
+                    <ul>
+                        <li><b>Éditeur de widgets</b> : créez les vôtres (chiffres, liste, graphique, texte, raccourcis), avec plusieurs parties dans un même widget, ou partez d'un widget de l'app.</li>
+                        <li>Mes listes dans l'onglet Listes, partagées en fichier, avec filtres et tri par colonne.</li>
+                        <li><b>Poser une question en français</b> : « Jean Dupont a-t-il eu des enfants ? » → « Oui, 2 enfants. », homonymes listés, recherches enregistrées.</li>
+                    </ul>
+                    <h4>Nouveaux blocs et outils</h4>
+                    <ul>
+                        <li>Bloc <b>Cartes d'électeur</b>, et une carte du monde du droit de vote des hommes et des femmes.</li>
+                        <li><b>Décès INSEE</b> : les nouveaux fichiers de data.gouv.fr sont signalés et importés par l'app.</li>
+                        <li>Fiche d'un village : tri par colonne et population tirée de Wikipédia.</li>
+                        <li>Voyages en bateau : des trajets qui ne passent que par la mer.</li>
+                        <li>Fiches en ligne : champs libres, capture d'écran de l'arbre, recherche sur Geneanet, Filae… avec les infos de la fiche.</li>
+                        <li>Événements : case « Date incertaine ».</li>
+                    </ul>
+                    <h4>Calendriers</h4>
+                    <ul>
+                        <li><b>Convertir une date</b> dans 26 calendriers : juif, éthiopien, indien, japonais, coréen, chinois, persan, bengali, thaï, copte, byzantin…</li>
+                        <li>Pour les actes anciens : <b>calendrier romain</b> (calendes, nones, ides), ancien style anglais (avant 1752), style de Pâques (France avant 1567).</li>
+                        <li>Mois républicains avec leurs dates grégoriennes ; tous les calendriers au choix comme calendrier par défaut.</li>
+                    </ul>
+                    <h4>Corrections</h4>
+                    <ul>
+                        <li>Fusion de deux fiches qui garde tout (variantes, témoins, photos, blocs…).</li>
+                        <li>GEDCOM : anciens encodages (ANSEL, MS-DOS, Mac, UTF-16) et dates « vers », « depuis », « jusqu'à », « av. J.-C. » ; exports qui respectent les fiches privées et les vivants.</li>
+                        <li>Reconnaissance d'écriture (HTR) : corrigée quand le dossier des données contient un espace (Mac).</li>
+                        <li>Lieux d'outre-mer (Guadeloupe, Réunion…) bien comptés en France ; et beaucoup d'autres petites corrections.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.4.1 <small>Mes listes, fiche d'un village enrichie, reconnaissance d'écriture à installer en un clic, corrections</small></summary>
+                        <div class="presentation-version-body">
                     <h4>Mes listes (Maintenance)</h4>
                     <ul>
                         <li><b>Créez vos propres listes</b> en combinant des critères : par exemple les divorces entre 1850 et 1920, les mariages sans source, les ancêtres nés dans un département…</li>
@@ -252,12 +301,8 @@
                         <li>Actes à demander : la liste prend toute la largeur et « Préparer la lettre » reste dans le cadre.</li>
                         <li>Une mini FAQ à la fin de « Glossaire / tuto / FAQ ».</li>
                     </ul>
-                </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
-                <div class="presentation-changes-body">
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.4.0 <small>Nouveaux blocs, éditeur de blocs, fiche d'un village, base propre, travail à deux, copie chez un cousin</small></summary>
                         <div class="presentation-version-body">
@@ -571,7 +616,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.4.1 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.4.2 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script>
