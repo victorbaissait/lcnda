@@ -29,6 +29,7 @@
         chart: ['📊', 'Graphique', 'Des barres ou un camembert : par métier, par lieu, par décennie, par siècle…'],
         text: ['📝', 'Texte', 'Un pense-bête, une citation, une consigne, avec des émojis.'],
         links: ['🔗', 'Raccourcis', 'Des boutons vers les écrans, les listes ou des sites que tu utilises souvent.'],
+        journey: ['🧭', 'Parcours jour par jour', 'Des étapes datées (écrites à la main, ou les événements d’une personne) en frise et sur la carte : un voyage, une guerre, une vie.'],
         app: ['🎨', 'Widget de l’app habillé', 'Un widget de l’app tel quel, avec ton titre, ton icône, ta couleur et ton texte.']};
     const WIDTHS = [['3', '¼'], ['4', '⅓'], ['6', '½'], ['8', '⅔'], ['12', 'toute la largeur']];
     const COLORS = ['#0066cc', '#2f8f5b', '#cc4700', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#555555'];
@@ -82,6 +83,10 @@
         return main;
     }
     async function loadOne(d) {
+        if (d.kind === 'journey') { // les événements d'une personne, si le parcours vient d'une fiche
+            if (d.jSource !== 'person' || !Number(d.jPerson)) return [];
+            try { return [{detail: await api('person', {id: Number(d.jPerson)})}]; } catch (error) { return [{error: error.message}]; }
+        }
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
             try {
@@ -228,7 +233,41 @@
             return `<button type="button" class="button small secondary" data-cw-go="${esc(l.target)}">${LINK_ICONS[type] || ''} ${label}</button>`;
         }).join('')}</div>`;
     }
+    /* ── 🧭 Parcours jour par jour ── */
+    const J_TAG_EMOJI = {BIRT: '👶', CHR: '💧', BAPM: '💧', MARR: '💍', DIV: '💔', DEAT: '🕯️', BURI: '⚰️', RESI: '🏠', OCCU: '⚒️', CENS: '📋', EMIG: '🚢', IMMI: '⚓', NATU: '🛂', MILI: '🎖️', EDUC: '🎓', GRAD: '🎓', RETI: '🌿'};
+    const J_LAYOUTS = [['vertical', 'Frise verticale'], ['horizontal', 'Frise horizontale (défile)'], ['cards', 'Cartes en grille'], ['compact', 'Liste compacte']];
+    function journeySteps(d, datas) {
+        let steps;
+        if (d.jSource === 'person') {
+            const det = datas?.[0]?.detail; if (!det) return [];
+            steps = (det.events || []).filter(e => e.date_text || e.year).filter(e => !d.jWithPlace || e.place_name).map(e => ({date: e.date_text || String(e.year || ''), title: [e.type_label, e.title].filter(Boolean).join(' — '), place: e.place_name || '',
+                lat: Number(e.precise_lat ?? e.latitude), lon: Number(e.precise_lon ?? e.longitude), emoji: J_TAG_EMOJI[e.gedcom_tag] || '•', text: e.description || '', color: ''}));
+        } else steps = (d.steps || []).map(x => ({...x, lat: x.lat === '' || x.lat == null ? NaN : Number(x.lat), lon: x.lon === '' || x.lon == null ? NaN : Number(x.lon)}));
+        const key = x => { const p = A().parsedGenealogyDate?.(x.date || ''); return p?.date ? p.date.getTime() : (yearOf(x.date) ?? 99999) * 3.15e10; };
+        if (d.jOrder !== 'manual') steps = steps.map((x, i) => ({x, i, k: key(x)})).sort((a, b) => a.k - b.k || a.i - b.i).map(o => o.x);
+        return steps;
+    }
+    function journeyHtml(d, datas) {
+        if (datas?.[0]?.error) return `<p class="h-offsite-sentence is-warn">${esc(datas[0].error)}</p>`;
+        const steps = journeySteps(d, datas);
+        if (!steps.length) return `<p class="muted">${d.jSource === 'person' ? (Number(d.jPerson) ? 'Aucun événement daté pour cette personne.' : 'Choisis une personne.') : 'Aucune étape : ajoute-en dans l’éditeur.'}</p>`;
+        const accent = color(d.color) || '#0066cc';
+        const exact = x => { const p = A().parsedGenealogyDate?.(x || ''); return p?.exact && p.date ? p.date : null; };
+        const first = steps.map(x => exact(x.date)).find(Boolean);
+        const dayN = x => { const e = exact(x.date); return first && e ? Math.round((e - first) / 864e5) + 1 : null; };
+        const dur = x => { const a = exact(x.date), b = exact(x.date_end); return a && b && b > a ? Math.round((b - a) / 864e5) + 1 : 0; };
+        const meta = x => [d.jDays !== false && dayN(x) ? `Jour ${fmt(dayN(x))}` : '', x.date ? esc(x.date) + (x.date_end ? ' → ' + esc(x.date_end) : '') : '', dur(x) > 1 ? `${fmt(dur(x))} jours` : ''].filter(Boolean).join(' · ');
+        const item = (x, i) => `<li style="--j:${color(x.color) || accent}"><span class="h-jr-dot">${esc(x.emoji || String(i + 1))}</span><div class="h-jr-body"><small>${meta(x)}</small><strong>${esc(x.title || 'Étape')}</strong>${x.place ? `<span class="h-jr-place">📍 ${esc(x.place)}</span>` : ''}${x.text && d.jText !== false ? `<p>${nl(x.text)}</p>` : ''}</div></li>`;
+        const layout = J_LAYOUTS.some(([k]) => k === d.jLayout) ? d.jLayout : 'vertical';
+        let html = `<ol class="h-jr h-jr-${layout}">${steps.map(item).join('')}</ol>`;
+        if (d.jMap !== false && ext.miniMap) {
+            const pts = steps.map((x, i) => ({x, i})).filter(o => Number.isFinite(o.x.lat) && Number.isFinite(o.x.lon));
+            if (pts.length) html += ext.miniMap(pts.map(o => ({lat: o.x.lat, lon: o.x.lon, label: `${o.i + 1}. ${o.x.title || ''}${o.x.place ? ' — ' + o.x.place : ''}`, color: color(o.x.color) || accent, n: o.i + 1})), pts.length > 1 ? [{coords: pts.map(o => [o.x.lat, o.x.lon]), color: accent, width: 2}] : [], {height: Number(d.jMapHeight) || 280});
+        }
+        return html;
+    }
     function bodyHtml(d, datas) {
+        if (d.kind === 'journey') return journeyHtml(d, datas);
         if (d.kind === 'text') return d.text ? `<div class="h-cw-text">${nl(d.text)}</div>` : '<p class="muted">Texte vide.</p>';
         if (d.kind === 'links') return linksHtml(d);
         const err = datas.find(x => x?.error);
@@ -238,7 +277,7 @@
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
         return '';
     }
-    const PART_KINDS = ['numbers', 'list', 'chart', 'text', 'links'];
+    const PART_KINDS = ['numbers', 'list', 'chart', 'text', 'links', 'journey'];
     const captionHtml = d => d.caption ? `<p class="h-cw-caption">${nl(d.caption)}</p>` : '';
     function partsHtml(d, datas) {
         if (d.kind === 'app') return '';
@@ -312,12 +351,12 @@
     ];
     const appCatalog = () => A().orderedDashboardWidgetTypes(true).filter(([k]) => !String(k).startsWith('cw_')).map(([k, , l]) => [k, l]);
     function baseDef(over = {}) {
-        return {id: newId(), name: '', icon: '🧱', color: '', width: '6', note: '', kind: 'numbers', counters: [{label: 'Personnes', src: P()}], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: [], base: '', parts: [], ...JSON.parse(JSON.stringify(over)), id: newId()};
+        return {id: newId(), name: '', icon: '🧱', color: '', width: '6', note: '', kind: 'numbers', counters: [{label: 'Personnes', src: P()}], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: [], base: '', parts: [], steps: [], jSource: 'manual', jPerson: 0, jPersonName: '', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date', jWithPlace: false, ...JSON.parse(JSON.stringify(over)), id: newId()};
     }
 
     /* ─── Écran de l'éditeur ─── */
     let editing = null, meta = null, previewSeq = 0, partIndex = -1; // partIndex : -1 = partie principale, sinon une partie en plus
-    const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : []});
+    const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], steps: [], jSource: 'manual', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date'});
     async function loadMeta() { meta = await api('my_lists'); return meta; }
     ext.maintenance.widget_editor = async token => {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
@@ -424,6 +463,24 @@
                 <div class="span-2"><span class="section-label">Couleur de chaque valeur</span><div class="h-cw-valcolors" data-cw-valcolors><small class="muted">Les valeurs apparaissent ici après le calcul de l’aperçu.</small></div></div>
                 <label>Valeurs les plus fréquentes<input type="number" min="2" max="60" data-cw-limit value="${esc(d.limit || 10)}"></label>
                 <label class="checkbox-line span-2"><input type="checkbox" data-cw-skipempty ${d.skipEmpty !== false ? 'checked' : ''}> ne pas compter les cases vides</label></div>`;
+        }
+        if (d.kind === 'journey') {
+            const row = (x = {}, i) => `<div class="h-jr-row" data-j-row>
+                <input data-j="emoji" value="${esc(x.emoji || '')}" maxlength="16" placeholder="📍" class="h-be-icon" title="Émoji">
+                <input data-j="date" value="${esc(x.date || '')}" placeholder="12 mars 1943">
+                <input data-j="date_end" value="${esc(x.date_end || '')}" placeholder="jusqu’au… (facultatif)">
+                <input data-j="title" value="${esc(x.title || '')}" placeholder="Titre de l’étape">
+                <span class="h-jr-placefield">${ext.placeField ? ext.placeField('jplace' + i + '_' + Math.random().toString(36).slice(2, 6), x.place || '', x.lat ?? '', x.lon ?? '', 'Lieu') : `<input data-j="place" value="${esc(x.place || '')}" placeholder="Lieu">`}</span>
+                <input type="color" data-j="color" value="${esc(color(x.color) || '#0066cc')}" title="Couleur de l’étape">
+                <textarea data-j="text" rows="2" placeholder="Ce qui s’est passé ce jour-là">${esc(x.text || '')}</textarea>
+                <span class="h-jr-rowtools"><button type="button" class="icon-button" data-j-up title="Monter">↑</button><button type="button" class="icon-button" data-j-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-j-del title="Retirer">🗑</button></span></div>`;
+            return `<div class="form-grid"><label>Les étapes viennent<select data-cw-jsource><option value="manual" ${d.jSource !== 'person' ? 'selected' : ''}>de ce que j’écris ici</option><option value="person" ${d.jSource === 'person' ? 'selected' : ''}>des événements d’une personne</option></select></label>
+                <label>Présentation<select data-cw-jlayout>${J_LAYOUTS.map(([k, l]) => `<option value="${k}" ${(d.jLayout || 'vertical') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label>Ordre<select data-cw-jorder><option value="date" ${d.jOrder !== 'manual' ? 'selected' : ''}>par date</option><option value="manual" ${d.jOrder === 'manual' ? 'selected' : ''}>dans l’ordre écrit</option></select></label>
+                <label>Hauteur de la carte<input type="number" min="160" max="600" step="20" data-cw-jmaph value="${esc(d.jMapHeight || 280)}"></label>
+                <div class="span-2 h-checks"><label class="checkbox-line"><input type="checkbox" data-cw-jflag="jMap" ${d.jMap !== false ? 'checked' : ''}> Carte du parcours</label><label class="checkbox-line"><input type="checkbox" data-cw-jflag="jDays" ${d.jDays !== false ? 'checked' : ''}> « Jour 1, Jour 2… »</label><label class="checkbox-line"><input type="checkbox" data-cw-jflag="jText" ${d.jText !== false ? 'checked' : ''}> Textes des étapes</label>${d.jSource === 'person' ? `<label class="checkbox-line"><input type="checkbox" data-cw-jflag="jWithPlace" ${d.jWithPlace ? 'checked' : ''}> Seulement les événements avec un lieu</label>` : ''}</div></div>
+                ${d.jSource === 'person' ? `<label>Personne${A().collectionPersonField('cw_jperson', Number(d.jPerson) ? {id: Number(d.jPerson), first_name: d.jPersonName || '#' + d.jPerson, last_name: ''} : null, 'Nom de la personne')}</label>`
+                : `<div data-j-rows>${(d.steps || []).map(row).join('')}</div><button type="button" class="button small secondary" data-j-add>+ Étape</button><p class="muted">Dates libres (« 12 mars 1943 », « vers 1850 »…) ; avec des dates complètes, l’app compte les jours et les durées. Le lieu choisi dans la liste se place sur la carte.</p>`}`;
         }
         if (d.kind === 'text') return `<label>Texte<textarea rows="6" data-cw-text placeholder="Un pense-bête, une citation… Les émojis marchent 🌳">${esc(d.text || '')}</textarea></label>`;
         if (d.kind === 'links') {
@@ -543,6 +600,37 @@
             if (e.target.closest('[data-cw-linkadd]')) { d.links.push({label: '', target: 'module:personnes'}); return again(); }
             const ld = e.target.closest('[data-cw-linkdel]'); if (ld) { d.links.splice(Number(ld.closest('[data-cw-link]').dataset.cwLink), 1); return again(); }
         });
+        // ── Parcours jour par jour : étapes, personne, réglages ──
+        if (d.kind === 'journey') {
+            A().bindCollectionPersonFields?.(box);
+            const readSteps = () => [...box.querySelectorAll('[data-j-row]')].map(r => {
+                const v = k => r.querySelector(`[data-j="${k}"]`)?.value ?? '';
+                const placeInput = r.querySelector('[data-h-place]'), pname = placeInput?.name || '';
+                return {emoji: v('emoji'), date: v('date'), date_end: v('date_end'), title: v('title'), text: v('text'), color: v('color'),
+                    place: placeInput ? placeInput.value : v('place'), lat: pname ? r.querySelector(`[name="${pname}_lat"]`)?.value ?? '' : '', lon: pname ? r.querySelector(`[name="${pname}_lon"]`)?.value ?? '' : ''};
+            });
+            const syncSteps = () => { if (d.jSource !== 'person') d.steps = readSteps(); };
+            const readPerson = () => { const h = box.querySelector('[name=cw_jperson]'); if (!h) return; const id = Number(h.value) || 0; if (id !== Number(d.jPerson)) { d.jPerson = id; d.jPersonName = h.closest('label')?.querySelector('input:not([type=hidden])')?.value || ''; preview(); } };
+            box.addEventListener('input', e => { if (e.target.closest('[data-j-row]')) { syncSteps(); preview(); } });
+            box.addEventListener('change', e => {
+                if (e.target.closest('[data-j-row]')) { syncSteps(); preview(); return; }
+                if (e.target.matches('[data-cw-jsource]')) { syncSteps(); d.jSource = e.target.value; again(); return; }
+                if (e.target.matches('[data-cw-jlayout]')) { d.jLayout = e.target.value; preview(); }
+                if (e.target.matches('[data-cw-jorder]')) { d.jOrder = e.target.value; preview(); }
+                if (e.target.matches('[data-cw-jmaph]')) { d.jMapHeight = Number(e.target.value) || 280; preview(); }
+                if (e.target.matches('[data-cw-jflag]')) { d[e.target.dataset.cwJflag] = e.target.checked; if (e.target.dataset.cwJflag === 'jWithPlace') return again(); preview(); }
+                readPerson();
+            });
+            box.addEventListener('click', e => {
+                if (e.target.closest('[data-h-place-pick]')) { setTimeout(() => { syncSteps(); preview(); }, 0); return; } // lieu choisi : ses coordonnées vont sur la carte
+                setTimeout(readPerson, 0); // une personne choisie dans la liste
+                const row = e.target.closest('[data-j-row]'), rows = [...box.querySelectorAll('[data-j-row]')], i = rows.indexOf(row);
+                if (e.target.closest('[data-j-add]')) { syncSteps(); d.steps.push({emoji: '', date: '', title: '', place: '', color: color(root.color) || '#0066cc'}); again(); setTimeout(() => { const r = [...A().$('#workspace').querySelectorAll('[data-j-row]')].pop(); r?.querySelector('[data-j="date"]')?.focus(); }, 0); return; }
+                if (row && e.target.closest('[data-j-del]')) { syncSteps(); d.steps.splice(i, 1); return again(); }
+                if (row && e.target.closest('[data-j-up]') && i > 0) { syncSteps(); [d.steps[i - 1], d.steps[i]] = [d.steps[i], d.steps[i - 1]]; return again(); }
+                if (row && e.target.closest('[data-j-down]') && i < rows.length - 1) { syncSteps(); [d.steps[i + 1], d.steps[i]] = [d.steps[i], d.steps[i + 1]]; return again(); }
+            });
+        }
         function readRule(e, src) {
             const row = e.target.closest('[data-lr-i]'); if (!row) return;
             const r = src.definition.rules[Number(row.dataset.lrI)];
@@ -594,6 +682,12 @@
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
         if (kind !== 'app') out.caption = str(d.caption, 400);
+        if (kind === 'journey') {
+            const num = v => { const n = Number(v); return v === '' || v == null || !Number.isFinite(n) ? '' : n; };
+            Object.assign(out, {jSource: d.jSource === 'person' ? 'person' : 'manual', jPerson: Number(d.jPerson) || 0, jPersonName: str(d.jPersonName, 120), jLayout: J_LAYOUTS.some(([k]) => k === d.jLayout) ? d.jLayout : 'vertical',
+                jMap: d.jMap !== false, jDays: d.jDays !== false, jText: d.jText !== false, jOrder: d.jOrder === 'manual' ? 'manual' : 'date', jWithPlace: !!d.jWithPlace, jMapHeight: Math.max(160, Math.min(600, Number(d.jMapHeight) || 280)),
+                steps: (Array.isArray(d.steps) ? d.steps : []).slice(0, 300).map(x => ({date: str(x.date, 60), date_end: str(x.date_end, 60), title: str(x.title, 160), place: str(x.place, 200), lat: num(x.lat), lon: num(x.lon), emoji: str(x.emoji, 16), color: color(x.color), text: str(x.text, 2000)}))});
+        }
         if (kind === 'text') out.text = str(d.text, 5000);
         if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
         return out;
