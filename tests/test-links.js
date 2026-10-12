@@ -32,6 +32,14 @@ $out = [];
 $q = ask_question($pdo, 'Quels ancêtres étaient boulangers à Lille avant 1850 ?');
 $out['q1'] = [array_column($q['people'], 'id'), $q['understood']];
 $out['q2'] = array_column(ask_question($pdo, 'Qui est né le même jour que moi ?')['people'], 'id');
+$pdo->exec("INSERT INTO persons(id,first_name,last_name,gender) VALUES(6,'Adrien Paul','Baissait','male'),(7,'Louis','Baissait','male'),(8,'Jeanne','Baissait','female'),(9,'Pierre','Baissait','male')");
+$pdo->exec("INSERT INTO families(id,partner1_id) VALUES(10,6),(11,7)"); $pdo->exec("INSERT INTO family_children(family_id,child_id) VALUES(10,7),(10,8),(11,9)");
+$pdo->exec("INSERT INTO events(scope,person_id,event_type_id,date_text,year) VALUES('person',7,$birt,'1901',1901),('person',8,$birt,'1899',1899)");
+foreach (['enfants' => 'Est-ce que Adrien Paul Baissait a-t-il eu des enfants ?', 'fils' => 'Adrien Paul Baissait a-t-il eu un fils ?', 'petits' => 'Quels sont les petits-enfants de Adrien Baissait ?', 'filles' => 'Louis Baissait a-t-il eu des filles ?'] as $k => $qq) {
+    $a = ask_question($pdo, $qq); $out['rel_' . $k] = [array_column($a['people'], 'id'), $a['answer'], $a['understood']];
+}
+$sv = save_saved_search($pdo, ['name' => 'Enfants', 'criteria' => ask_question($pdo, 'les enfants de Adrien Paul Baissait')['criteria']]);
+$out['rel_saved'] = [$sv['count'], saved_search_label(saved_searches_data($pdo)['searches'][0]['criteria'])];
 save_person_language($pdo, ['person_id' => 4, 'language' => 'Breton', 'certainty' => 'certain']);
 $out['lang_moi'] = array_column(person_languages_resolved($pdo, 1)['inherited'], 'language');
 set_no_inherited_language($pdo, ['person_id' => 2, 'value' => 1]);
@@ -54,6 +62,11 @@ const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
   ['question : ancêtres boulangers à Lille avant 1850', () => { assert.deepEqual(out.q1[0], [2]); assert.ok(out.q1[1].some(u => u.includes('boulanger'))); }],
   ['question : né le même jour que moi', () => assert.deepEqual(out.q2, [5])],
+  ['question : a-t-il eu des enfants ? → oui, 2 (du plus âgé au plus jeune)', () => { assert.deepEqual(out.rel_enfants[0], [8, 7]); assert.equal(out.rel_enfants[1], 'Oui, 2 enfants.'); assert.ok(out.rel_enfants[2][0].startsWith('enfants de Adrien Paul Baissait')); }],
+  ['question : un fils → seulement les garçons', () => { assert.deepEqual(out.rel_fils[0], [7]); assert.equal(out.rel_fils[1], 'Oui, 1 fils.'); }],
+  ['question : petits-enfants (prénom du milieu omis)', () => assert.deepEqual(out.rel_petits[0], [9])],
+  ['question : pas de fille → non', () => { assert.deepEqual(out.rel_filles[0], []); assert.ok(out.rel_filles[1].startsWith('Non : aucune fille')); }],
+  ['recherche enregistrée sur la parenté', () => { assert.equal(out.rel_saved[0], 2); assert.ok(out.rel_saved[1].startsWith('enfants de Adrien Paul Baissait')); }],
   ['langue héritée d’un arrière-grand-parent', () => assert.deepEqual(out.lang_moi, ['breton'])],
   ['refus explicite de l’héritage', () => assert.deepEqual(out.lang_jean, [])],
   ['carte des langues : locuteurs déclarés et hérités', () => assert.ok(out.overview >= 2)],

@@ -527,3 +527,8 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-rt-curve circle.is-out { fill:#bbb; stroke:#bbb; opacity:.6; }
 .h-rt-curve:focus { outline:2px solid #0066cc; outline-offset:2px; }
 .h-rt-curve-tools { display:flex; gap:6px; }
+.h-question-answer{font-size:1.15em;font-weight:600;margin:.4rem 0}
+.h-question-saved{margin-top:1rem}
+.h-question-saved summary{cursor:pointer;list-style-position:inside}
+.h-question-saved-list{display:grid;gap:.4rem;margin-top:.6rem;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.h-question-saved-list .h-new-badge{width:max-content;align-self:flex-start;justify-self:start}

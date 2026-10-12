@@ -50,8 +50,17 @@ function question_to_criteria(PDO $pdo, string $question): array
         }
         $understood[] = 'personne de référence introuvable (« moi » = la personne de départ de l’arbre)';
     }
-    if (preg_match('/\b(ancetres|aieux|aieules|ascendants|ancetre)\b/', $t)) { $c['ancestors'] = 1; $understood[] = 'parmi les ancêtres de la personne de départ'; }
-    if (preg_match('/\b(femmes|filles|aieules|epouses|meres)\b/', $t)) { $c['gender'] = 'female'; $understood[] = 'femmes'; }
+    // Parenté d'une personne nommée : « Adrien Paul Baissait a-t-il eu des enfants ? », « les petites-filles de Marie Dupont »
+    $rel = question_relation($pdo, $q, $t);
+    if ($rel) {
+        $c['relation'] = $rel['relation']; $c['relation_of'] = $rel['person'];
+        if ($rel['gender']) { $c['gender'] = $rel['gender']; }
+        $understood[] = $rel['label'];
+        $q = $rel['rest']; $t = ' ' . strtolower(ascii_fold($q)) . ' ';
+    }
+    if (!$rel && preg_match('/\b(ancetres|aieux|aieules|ascendants|ancetre)\b/', $t)) { $c['ancestors'] = 1; $understood[] = 'parmi les ancêtres de la personne de départ'; }
+    if ($rel) { /* le sexe vient du mot de parenté (« fils », « petites-filles ») */ }
+    elseif (preg_match('/\b(femmes|filles|aieules|epouses|meres)\b/', $t)) { $c['gender'] = 'female'; $understood[] = 'femmes'; }
     elseif (preg_match('/\b(hommes|garcons|peres|fils)\b/', $t)) { $c['gender'] = 'male'; $understood[] = 'hommes'; }
     if (preg_match('/\b(encore en vie|vivants|vivantes)\b/', $t)) { $c['living'] = 'living'; $understood[] = 'vivants'; }
 
@@ -111,7 +120,78 @@ function question_to_criteria(PDO $pdo, string $question): array
     if (count($understood) === 0) { throw new RuntimeException('Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ».'); }
     $criteria = saved_search_criteria($c);
     if (!empty($c['ancestors'])) { $criteria['ancestors'] = 1; }
-    return ['criteria' => $criteria, 'understood' => $understood];
+    return ['criteria' => $criteria, 'understood' => $understood, 'relation' => $rel];
+}
+
+/** Mots de parenté (sans accents, en minuscules) → lien, sexe éventuel, [singulier, pluriel] à afficher. Les plus longs d'abord. */
+const QUESTION_RELATIONS = [
+    'arriere[- ]petits?[- ]enfants?' => ['great_grandchildren', '', ['arrière-petit-enfant', 'arrière-petits-enfants']],
+    'arriere[- ]petits?[- ]fils' => ['great_grandchildren', 'male', ['arrière-petit-fils', 'arrière-petits-fils']],
+    'arriere[- ]petites?[- ]filles?' => ['great_grandchildren', 'female', ['arrière-petite-fille', 'arrière-petites-filles']],
+    'petits?[- ]enfants?' => ['grandchildren', '', ['petit-enfant', 'petits-enfants']],
+    'petits?[- ]fils' => ['grandchildren', 'male', ['petit-fils', 'petits-fils']],
+    'petites?[- ]filles?' => ['grandchildren', 'female', ['petite-fille', 'petites-filles']],
+    'grands?[- ]parents?' => ['grandparents', '', ['grand-parent', 'grands-parents']],
+    'grands?[- ]peres?' => ['grandparents', 'male', ['grand-père', 'grands-pères']],
+    'grands?[- ]meres?' => ['grandparents', 'female', ['grand-mère', 'grands-mères']],
+    'descendants?|descendance|posterite' => ['descendants', '', ['descendant', 'descendants']],
+    'ancetres?|ascendants?|ascendance|aieux' => ['ancestors_of', '', ['ancêtre', 'ancêtres']],
+    'enfants?|progeniture' => ['children', '', ['enfant', 'enfants']],
+    'fils' => ['children', 'male', ['fils', 'fils']],
+    'filles?' => ['children', 'female', ['fille', 'filles']],
+    'parents' => ['parents', '', ['parent', 'parents']],
+    'peres?' => ['parents', 'male', ['père', 'pères']],
+    'meres?' => ['parents', 'female', ['mère', 'mères']],
+    'freres? et soeurs?|fratrie' => ['siblings', '', ['frère ou sœur', 'frères et sœurs']],
+    'freres?|demi-freres?' => ['siblings', 'male', ['frère', 'frères']],
+    'soeurs?|demi-soeurs?' => ['siblings', 'female', ['sœur', 'sœurs']],
+    'conjoints?|epoux|maris?|epouses?|femme' => ['spouses', '', ['conjoint', 'conjoints']],
+];
+
+/**
+ * Une question sur les proches d'une personne nommée ? On cherche d'abord la personne (les mots en majuscule qui
+ * forment un prénom + un nom de la base), puis un mot de parenté. Rend null si ce n'est pas ce genre de question.
+ */
+function question_relation(PDO $pdo, string $q, string $t): ?array
+{
+    $found = null;
+    foreach (QUESTION_RELATIONS as $re => [$relation, $gender, $labels]) {
+        if (preg_match('/(?<![a-z-])(' . $re . ')(?![a-z-])/', $t, $m)) { $found = [$relation, $gender, $labels]; break; }
+    }
+    if (!$found) { return null; }
+    // Suites de mots en majuscule (« Adrien Paul Baissait », « Marie-Thérèse de La Fontaine »)
+    $stop = ['Est-ce', 'Est', 'Qui', 'Quel', 'Quels', 'Quelle', 'Quelles', 'Combien', 'Les', 'Le', 'La', 'Des', 'Donne', 'Montre', 'Liste', 'Cherche', 'Trouve', 'Y', 'A', 'À', 'Et', 'Ou', 'Il', 'Elle', 'Ils', 'Elles', 'Mes', 'Ses', 'Leurs', 'Tous', 'Toutes'];
+    preg_match_all('/(?:\p{Lu}[\p{L}\'’-]*)(?:\s+(?:(?:de|du|des|d[\'’]|la|le|van|von|di|da)\s+)?\p{Lu}[\p{L}\'’-]*)*/u', $q, $mm);
+    $best = 0; $bestText = '';
+    foreach ($mm[0] as $chunk) {
+        $words = array_values(array_filter(preg_split('/\s+/u', $chunk), static fn($w) => !in_array($w, $stop, true)));
+        if (count($words) < 2) { continue; }
+        // du plus long au plus court : « Adrien Paul Baissait », puis « Adrien Baissait »…
+        for ($drop = 0; $drop <= count($words) - 2 && !$best; $drop++) {
+            $try = $drop ? array_merge(array_slice($words, 0, count($words) - 1 - $drop), [end($words)]) : $words;
+            $id = question_find_person($pdo, implode(' ', $try));
+            if ($id) { $best = $id; $bestText = implode(' ', $words); }
+        }
+        if ($best) { break; }
+    }
+    if (!$best) { return null; }
+    [$relation, $gender, $labels] = $found;
+    $name = question_person_name($pdo, $best);
+    $life = person_life_years($pdo, $best);
+    return ['relation' => $relation, 'person' => $best, 'gender' => $gender, 'labels' => $labels,
+        'label' => $labels[1] . ' de ' . $name . ($life !== '' ? " ({$life})" : ''), 'name' => $name,
+        'yesno' => (bool) preg_match('/\b(a-t-(il|elle)|ont-(ils|elles)|avait-(il|elle)|est-ce qu|y a-t-il|a t il|a t elle)\b|\?\s*$/u', mb_strtolower($q)) && !preg_match('/\b(qui|quels?|quelles?|combien|liste|donne|montre)\b/u', mb_strtolower($q)),
+        'rest' => trim(str_replace($bestText, ' ', $q))];
+}
+
+/** « 1850-1921 » à partir des événements de naissance et de décès (ou vide). */
+function person_life_years(PDO $pdo, int $id): string
+{
+    $s = $pdo->prepare("SELECT (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM')),
+        (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('DEAT','BURI')) FROM persons p WHERE p.id=?");
+    $s->execute([$id]);
+    [$b, $d] = $s->fetch(PDO::FETCH_NUM) ?: [null, null];
+    return ($b || $d) ? ($b ?: '?') . '-' . ($d ?: '') : '';
 }
 
 function question_find_person(PDO $pdo, string $text): int
@@ -154,7 +234,16 @@ function ask_question(PDO $pdo, string $question): array
     $r = question_to_criteria($pdo, $question);
     $ids = !empty($r['criteria']['same_birthday']) ? same_birthday_ids($pdo, (int) $r['criteria']['same_birthday']) : run_saved_search($pdo, $r['criteria']);
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
-    return ['understood' => $r['understood'], 'criteria' => $r['criteria'], 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
+    $answer = '';
+    if ($rel = $r['relation'] ?? null) { // une phrase de réponse : « Oui, 2 enfants. »
+        [$one, $many] = $rel['labels'];
+        $n = count($ids);
+        $what = $n === 1 ? "1 {$one}" : "{$n} {$many}";
+        $none = $rel['gender'] === 'female' ? 'aucune' : 'aucun';
+        if ($rel['yesno']) { $answer = $n ? "Oui, {$what}." : "Non : {$none} {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
+        else { $answer = $n ? "{$rel['name']} : {$what}." : ucfirst($none) . " {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
+    }
+    return ['understood' => $r['understood'], 'answer' => $answer, 'criteria' => $r['criteria'], 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
 }
 
 /* ─── 🗣️ Langues ─────────────────────────────────────────────────────── */

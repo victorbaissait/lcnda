@@ -31,12 +31,23 @@
 
     /* ═══════════════════════ 🔎 POSER UNE QUESTION ═══════════════════════ */
 
-    const examples = ['Quels ancêtres étaient boulangers à Lille avant 1850 ?', 'Qui est né le même jour que moi ?', 'Les Dupont mariés dans le Nord au XVIIIe siècle', 'Quelles femmes sont nées en Bretagne après 1800 ?'];
+    const examples = ['Quels ancêtres étaient boulangers à Lille avant 1850 ?', 'Qui est né le même jour que moi ?', 'Les petits-enfants de Jean Dupont', 'Les Dupont mariés dans le Nord au XVIIIe siècle', 'Quelles femmes sont nées en Bretagne après 1800 ?'];
     function questionPanelHtml(q = '') {
         return `<section class="maintenance-panel h-question"><h3>Poser une question</h3><form id="h-question-form" class="h-question-form"><input name="q" value="${esc(q)}" placeholder="Quels ancêtres étaient boulangers à Lille avant 1850 ?" autocomplete="off"><button class="button" type="submit">Chercher</button></form>
-            <p class="muted">Sans Internet : l’app comprend les formules courantes (métier, lieu, avant / après / entre / siècle, prénom, nom, naissance, mariage, décès, « ancêtres », « le même jour que moi »). Exemples : ${examples.map(e => `<button type="button" class="link-button" data-h-question-example="${esc(e)}">${esc(e)}</button>`).join(' · ')}</p><div id="h-question-out"></div></section>`;
+            <p class="muted">Sans Internet : l’app comprend les formules courantes (métier, lieu, avant / après / entre / siècle, prénom, nom, naissance, mariage, décès, « ancêtres », « le même jour que moi », et la parenté d’une fiche : « Jean Dupont a-t-il eu des enfants ? », « les petites-filles de Marie Durand », parents, frères et sœurs, conjoints, descendants). Exemples : ${examples.map(e => `<button type="button" class="link-button" data-h-question-example="${esc(e)}">${esc(e)}</button>`).join(' · ')}</p><div id="h-question-out"></div></section>`;
     }
-    async function runQuestion(q) {
+    const resultsTable = people => `<table class="data-table"><thead><tr><th>Personne</th><th>Naissance</th><th>Décès</th><th>Métier</th></tr></thead><tbody>${people.map(p => `<tr><td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${esc(p.occupation || '')}</td></tr>`).join('')}</tbody></table>`;
+    // « Enregistrer comme recherche » : nom demandé dans l'app (window.prompt ne marche pas dans l'application de bureau)
+    async function saveQuestion(q, criteria, after) {
+        const name = (await A().askText({title: 'Enregistrer la recherche', message: 'Nom de cette recherche (elle se relance en un clic et signale les nouvelles fiches) :', value: q.trim().replace(/\s*\?$/, ''), okLabel: 'Enregistrer'}))?.trim();
+        if (!name) return;
+        try {
+            const r = await api('save_saved_search', {}, {method: 'POST', body: {name, criteria}});
+            toast(`Recherche « ${name} » enregistrée (${plural(r.result.count, 'fiche', 'fiches')}).`);
+            after?.();
+        } catch (error) { toast(error.message, 'error'); }
+    }
+    async function runQuestion(q, after) {
         const out = document.getElementById('h-question-out');
         if (!out || !q.trim()) return;
         out.innerHTML = '<p class="muted">Recherche…</p>';
@@ -44,26 +55,46 @@
             const r = await api('ask_question', {q});
             S().hQuestion = q;
             out.innerHTML = `<p class="h-understood">J’ai compris : ${r.understood.map(u => `<span class="collection-kind">${esc(u)}</span>`).join(' ')}</p>
-                <h4>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4>${r.people.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Naissance</th><th>Décès</th><th>Métier</th></tr></thead><tbody>${r.people.map(p => `<tr><td>${personLink(p.id, A().personName(p))}</td><td>${esc(p.birth_date || p.birth_year || '')}</td><td>${esc(p.death_date || p.death_year || '')}</td><td>${esc(p.occupation || '')}</td></tr>`).join('')}</tbody></table>` : empty('Aucune fiche ne répond à cette question.')}
+                ${r.answer ? `<p class="h-question-answer">${esc(r.answer)}</p>` : ''}
+                <h4>${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4>${r.people.length ? resultsTable(r.people) : empty('Aucune fiche ne répond à cette question.')}
                 ${r.criteria && !r.criteria.same_birthday ? '<p><button type="button" class="button small secondary" data-h-question-save>Enregistrer comme recherche</button></p>' : ''}`;
-            out.querySelector('[data-h-question-save]')?.addEventListener('click', async () => {
-                const name = prompt('Nom de cette recherche :', q.replace(/\?$/, ''));
-                if (!name) return;
-                await api('save_saved_search', {}, {method: 'POST', body: {name, criteria: r.criteria}});
-                toast('Recherche enregistrée.');
-                if (ext.research) ext.research(++S().workspaceToken);
-            });
+            out.querySelector('[data-h-question-save]')?.addEventListener('click', () => saveQuestion(q, r.criteria, after));
         } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
+    }
+    // Les recherches enregistrées, en bas de l'écran « Poser une question », dans une section qui se déplie
+    async function renderSavedQuestions() {
+        const box = document.getElementById('h-question-saved');
+        if (!box) return;
+        const data = await api('saved_searches').catch(() => ({searches: []}));
+        const list = data.searches || [];
+        if (!document.body.contains(box)) return;
+        box.innerHTML = `<details class="maintenance-panel h-question-saved" ${S().hQuestionSavedOpen !== false ? 'open' : ''}><summary><strong>Recherches enregistrées</strong> <span class="muted">(${list.length})</span></summary>
+            ${list.length ? `<div class="h-question-saved-list">${list.map(s => `<article class="h-saved ${s.new_count ? 'has-new' : ''}"><button type="button" class="link-button" data-hq-run="${s.id}"><strong>${esc(s.name)}</strong></button>${s.new_count ? ` <span class="h-new-badge">${s.new_count} nouvelle${s.new_count > 1 ? 's' : ''}</span>` : ''}<small>${esc(s.description)}</small><small>${plural(s.count, 'fiche', 'fiches')}${s.error ? ' · ' + esc(s.error) : ''}</small>
+                <span class="h-saved-tools">${s.new_count ? `<button type="button" class="link-button" data-hq-seen="${s.id}">marquer comme vues</button>` : ''}<button type="button" class="link-button" data-hq-delete="${s.id}">supprimer</button></span></article>`).join('')}</div>` : '<p class="muted">Aucune recherche enregistrée. Pose une question, puis « Enregistrer comme recherche ».</p>'}</details>`;
+        box.querySelector('details').addEventListener('toggle', event => { S().hQuestionSavedOpen = event.target.open; });
+        box.querySelectorAll('[data-hq-run]').forEach(b => b.addEventListener('click', async () => {
+            const s = list.find(x => Number(x.id) === Number(b.dataset.hqRun)), out = document.getElementById('h-question-out');
+            if (!s || !out) return;
+            out.innerHTML = '<p class="muted">Recherche…</p>';
+            try {
+                const r = await api('saved_search_results', {criteria: JSON.stringify(s.criteria), id: s.id});
+                out.innerHTML = `<h4>${esc(s.name)} — ${plural(r.count, 'fiche trouvée', 'fiches trouvées')}</h4><p class="muted">${esc(r.description)}</p>${r.people.length ? resultsTable(r.people) : empty('Aucune fiche ne répond à cette recherche.')}`;
+                out.scrollIntoView({behavior: 'smooth', block: 'start'});
+            } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
+        }));
+        box.querySelectorAll('[data-hq-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hqSeen}}); renderSavedQuestions(); }));
+        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette recherche enregistrée ?')) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hqDelete}}); toast('Recherche supprimée.'); renderSavedQuestions(); }));
     }
     // Recherche → « Poser une question en français » : un écran à part
     ext.question = async token => {
         if (token !== S().workspaceToken || S().module !== 'recherche') return;
-        A().$('#workspace').innerHTML = `<section class="page">${header('RECHERCHE', 'Poser une question', 'Écris ta question comme tu la dirais : l’app cherche dans toute la base, sans Internet.')}${questionPanelHtml(S().hQuestion || '')}</section>`;
+        A().$('#workspace').innerHTML = `<section class="page">${header('RECHERCHE', 'Poser une question', 'Écris ta question comme tu la dirais : l’app cherche dans toute la base, sans Internet.')}${questionPanelHtml(S().hQuestion || '')}<div id="h-question-saved"></div></section>`;
         const form = A().$('#h-question-form');
-        form.addEventListener('submit', event => { event.preventDefault(); runQuestion(form.q.value); });
-        A().$$('[data-h-question-example]').forEach(b => b.addEventListener('click', () => { form.q.value = b.dataset.hQuestionExample; runQuestion(form.q.value); }));
+        form.addEventListener('submit', event => { event.preventDefault(); runQuestion(form.q.value, renderSavedQuestions); });
+        A().$$('[data-h-question-example]').forEach(b => b.addEventListener('click', () => { form.q.value = b.dataset.hQuestionExample; runQuestion(form.q.value, renderSavedQuestions); }));
         form.q.focus();
-        if (S().hQuestion) runQuestion(S().hQuestion);
+        if (S().hQuestion) runQuestion(S().hQuestion, renderSavedQuestions);
+        renderSavedQuestions();
     };
     // Ajouté en haut de « Recherche → Recherche multicritère / recherches enregistrées »
     const baseResearch = ext.research;
@@ -74,9 +105,10 @@
         if (!page || page.querySelector('.h-question')) return;
         page.querySelector('.page-header')?.insertAdjacentHTML('afterend', questionPanelHtml(S().hQuestion || ''));
         const form = page.querySelector('#h-question-form');
-        form.addEventListener('submit', event => { event.preventDefault(); runQuestion(form.q.value); });
-        page.querySelectorAll('[data-h-question-example]').forEach(b => b.addEventListener('click', () => { form.q.value = b.dataset.hQuestionExample; runQuestion(form.q.value); }));
-        if (S().hQuestion) runQuestion(S().hQuestion);
+        const after = () => ext.research(++S().workspaceToken);
+        form.addEventListener('submit', event => { event.preventDefault(); runQuestion(form.q.value, after); });
+        page.querySelectorAll('[data-h-question-example]').forEach(b => b.addEventListener('click', () => { form.q.value = b.dataset.hQuestionExample; runQuestion(form.q.value, after); }));
+        if (S().hQuestion) runQuestion(S().hQuestion, after);
     };
 
     /* ═══════════════════════ 🗣️ LANGUES ═══════════════════════ */

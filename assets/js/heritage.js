@@ -1193,11 +1193,11 @@
         };
         if (img) {
             const firstLat = ed.control_points.find(p => finite(p.lat));
-            map = slippyMap(ws.querySelector('.h-calib-map'), {lat: firstLat ? +firstLat.lat : 46.6, lon: firstLat ? +firstLat.lon : 2.4, zoom: firstLat ? 15 : 6, onClick: (lat, lon) => {
+            map = slippyMap(ws.querySelector('.h-calib-map'), {lat: firstLat ? +firstLat.lat : 46.6, lon: firstLat ? +firstLat.lon : 2.4, zoom: firstLat ? 15 : 6, onClick: async (lat, lon) => {
                 if (houseMode) return;
                 const p = ed.control_points[active]; if (!p) return;
                 p.lat = Number(lat.toFixed(7)); p.lon = Number(lon.toFixed(7));
-                if (!p.label) p.label = prompt('Nom de ce point (église, carrefour, moulin…) ?', '') || '';
+                if (!p.label) p.label = (await A().askText({title: 'Point de repère', message: 'Nom de ce point (église, carrefour, moulin…) ?', okLabel: 'OK'})) || '';
                 if (finite(p.u)) active = ed.control_points.findIndex(x => !finite(x.u) || !finite(x.lat));
                 if (active < 0) active = ed.control_points.length - 1;
                 refresh();
@@ -1206,12 +1206,12 @@
                 api('heritage_place_search', {q: (ed.title.match(/\b(?:de|d’|d')\s*([A-ZÉÈ][\wÀ-ÿ'’-]+(?:[- ][A-ZÉÈ][\wÀ-ÿ'’-]+)*)/u)?.[1]) || ''}).then(d => { const p = d.places?.[0]; if (p) map.center(p.lat, p.lon, 14); }).catch(() => {});
             }
             img.addEventListener('load', refresh);
-            img.addEventListener('click', event => {
+            img.addEventListener('click', async event => {
                 const r = img.getBoundingClientRect(), k = (img.naturalWidth || 1) / img.clientWidth, u = (event.clientX - r.left) * k, v = (event.clientY - r.top) * k;
                 if (houseMode) {
-                    const label = prompt('Quelle maison ? (ex. « Maison des Dupont, 1820-1880 »)', '');
+                    const label = await A().askText({title: 'Maison', message: 'Quelle maison ? (ex. « Maison des Dupont, 1820-1880 »)', okLabel: 'Continuer'});
                     if (label === null) return;
-                    const personName = prompt('Nom de l’ancêtre (facultatif, pour garder une trace) :', '') || '';
+                    const personName = (await A().askText({title: 'Maison', message: 'Nom de l’ancêtre (facultatif, pour garder une trace) :', okLabel: 'Placer'})) || '';
                     ed.markers.push({u: Math.round(u * 100) / 100, v: Math.round(v * 100) / 100, label: [label, personName].filter(Boolean).join(' — ')});
                     houseMode = false; refresh(); return;
                 }
@@ -1298,6 +1298,8 @@
             <label>à<input type="number" name="year_to" value="${v('year_to')}" placeholder="1800"></label>
             <label>Métier<input name="occupation" value="${v('occupation')}" placeholder="tisserand"></label>
             <label>Statut<select name="living"><option value="">Tous</option><option value="deceased" ${c.living === 'deceased' ? 'selected' : ''}>Décédés</option><option value="living" ${c.living === 'living' ? 'selected' : ''}>Vivants</option><option value="unknown" ${c.living === 'unknown' ? 'selected' : ''}>À vérifier</option></select></label></div>
+            ${c.relation && c.relation_of ? `<input type="hidden" name="relation" value="${v('relation')}"><input type="hidden" name="relation_of" value="${v('relation_of')}">` : ''}${c.ancestors ? '<input type="hidden" name="ancestors" value="1">' : ''}
+            ${c.relation && c.relation_of || c.ancestors ? `<p class="h-understood">Venue d’une question : seulement ${c.relation ? 'les proches de la fiche #' + v('relation_of') : 'les ancêtres de la personne de départ'}. <button type="button" class="link-button" data-h-search-unscope>retirer cette limite</button></p>` : ''}
             <p class="muted">Exemple : nom « Dupont », événement « Naissance ou baptême », lieu « Nord », année « à 1800 » = tous les Dupont nés dans le Nord avant 1800.</p>
             <div class="page-actions"><button class="button" type="submit">Chercher</button><button class="button secondary" type="button" data-h-search-save>Enregistrer cette recherche</button></div></form>`;
     }
@@ -1324,8 +1326,9 @@
             } catch (error) { box.innerHTML = empty(error.message); }
         };
         form.addEventListener('submit', event => { event.preventDefault(); st.hSearch = {criteria: criteriaOf(form), id: 0, name: ''}; run(st.hSearch.criteria); });
+        ws.querySelector('[data-h-search-unscope]')?.addEventListener('click', event => { form.querySelectorAll('input[name="relation"],input[name="relation_of"],input[name="ancestors"]').forEach(i => i.remove()); event.target.closest('p').remove(); });
         ws.querySelector('[data-h-search-save]').addEventListener('click', async () => {
-            const name = prompt('Nom de cette recherche :', st.hSearch.name || '');
+            const name = (await A().askText({title: 'Enregistrer la recherche', message: 'Nom de cette recherche :', value: st.hSearch.name || '', okLabel: 'Enregistrer'}))?.trim();
             if (!name) return;
             try { const r = await api('save_saved_search', {}, {method: 'POST', body: {id: st.hSearch.name === name ? st.hSearch.id : 0, name, criteria: criteriaOf(form)}}); st.hSearch = {criteria: criteriaOf(form), id: r.result.id, name}; toast(`Recherche enregistrée (${plural(r.result.count, 'fiche', 'fiches')}).`); ext.research(++S().workspaceToken); }
             catch (error) { toast(error.message, 'error'); }

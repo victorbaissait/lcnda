@@ -1090,7 +1090,36 @@ function saved_search_criteria(array $c): array
         'living' => in_array($c['living'] ?? '', ['living', 'deceased', 'unknown'], true) ? $c['living'] : '',
         'ancestors' => !empty($c['ancestors']) ? 1 : 0,
         'same_birthday' => safe_int($c['same_birthday'] ?? 0) ?: null,
+        'relation' => array_key_exists((string) ($c['relation'] ?? ''), SEARCH_RELATIONS) ? (string) $c['relation'] : '',
+        'relation_of' => array_key_exists((string) ($c['relation'] ?? ''), SEARCH_RELATIONS) ? (safe_int($c['relation_of'] ?? 0) ?: null) : null,
     ];
+}
+
+/** Liens de parenté qu'une recherche peut viser (« les enfants de… ») : [singulier, pluriel]. */
+const SEARCH_RELATIONS = ['children' => ['enfant', 'enfants'], 'grandchildren' => ['petit-enfant', 'petits-enfants'], 'great_grandchildren' => ['arrière-petit-enfant', 'arrière-petits-enfants'],
+    'descendants' => ['descendant', 'descendants'], 'parents' => ['parent', 'parents'], 'grandparents' => ['grand-parent', 'grands-parents'], 'ancestors_of' => ['ancêtre', 'ancêtres'],
+    'siblings' => ['frère ou sœur', 'frères et sœurs'], 'spouses' => ['conjoint', 'conjoints']];
+
+/** Les proches d'une personne pour un lien de parenté (sans elle-même). */
+function search_relatives(PDO $pdo, string $relation, int $id): array
+{
+    $ids = match ($relation) {
+        'children' => h_children($pdo, [$id]),
+        'grandchildren' => h_children($pdo, h_children($pdo, [$id])),
+        'great_grandchildren' => h_children($pdo, h_children($pdo, h_children($pdo, [$id]))),
+        'descendants' => array_keys(h_descendants($pdo, [$id], 30, false)),
+        'parents' => h_parents($pdo, $id),
+        'grandparents' => array_merge(...array_map(static fn($p) => h_parents($pdo, $p), h_parents($pdo, $id) ?: [0])),
+        'ancestors_of' => array_keys(h_ancestors($pdo, $id, 40)),
+        'siblings' => h_children($pdo, h_parents($pdo, $id)),
+        'spouses' => (static function () use ($pdo, $id) {
+            $s = $pdo->prepare('SELECT CASE WHEN partner1_id=? THEN partner2_id ELSE partner1_id END FROM families WHERE partner1_id=? OR partner2_id=?');
+            $s->execute([$id, $id, $id]);
+            return array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN));
+        })(),
+        default => [],
+    };
+    return array_values(array_unique(array_filter(array_map('intval', $ids), static fn($x) => $x > 0 && $x !== $id)));
 }
 
 /** Identifiants des personnes qui répondent aux critères. */
@@ -1126,8 +1155,19 @@ function run_saved_search(PDO $pdo, array $criteria): array
         $where[] = 'EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ' . implode(' AND ', $cond) . ')';
         array_push($params, ...$sub);
     }
+    $relatives = null;
+    if ($c['relation'] !== '' && $c['relation_of']) {
+        $relatives = search_relatives($pdo, $c['relation'], (int) $c['relation_of']);
+        if (!$relatives) { return []; }
+        $where[] = 'p.id IN (' . implode(',', $relatives) . ')';
+    }
     if (!$where && !$c['ancestors']) { throw new RuntimeException('Indique au moins un critère.'); }
     if (!$where) { $where[] = '1=1'; }
+    if ($relatives !== null) { // les proches : du plus âgé au plus jeune
+        $stmt = $pdo->prepare('SELECT p.id FROM persons p WHERE ' . implode(' AND ', $where) . " ORDER BY (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM')) IS NULL, (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM')), p.first_name COLLATE NOCASE");
+        $stmt->execute($params);
+        return array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
+    }
     $stmt = $pdo->prepare('SELECT p.id FROM persons p WHERE ' . implode(' AND ', $where) . ' ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE LIMIT 5000');
     $stmt->execute($params);
     $ids = array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
@@ -1155,6 +1195,11 @@ function saved_search_label(array $c): string
     if ($c['occupation'] !== '') { $parts[] = 'métier ' . $c['occupation']; }
     if ($c['ancestors']) { $parts[] = 'ancêtres seulement'; }
     if ($c['same_birthday']) { $parts[] = 'né le même jour que la fiche #' . $c['same_birthday']; }
+    if ($c['relation'] !== '' && $c['relation_of']) {
+        $n = '';
+        try { $s = db()->prepare("SELECT trim(first_name||' '||last_name) FROM persons WHERE id=?"); $s->execute([$c['relation_of']]); $n = (string) $s->fetchColumn(); } catch (Throwable $_) {}
+        array_unshift($parts, SEARCH_RELATIONS[$c['relation']][1] . ' de ' . ($n !== '' ? $n : 'la fiche #' . $c['relation_of']));
+    }
     return implode(' · ', $parts);
 }
 

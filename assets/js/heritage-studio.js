@@ -152,8 +152,8 @@
             if (!confirm(`Remplacer « ${p.name} » par les réglages actuels ?`)) return;
             list[i] = {...p, saved: new Date().toISOString(), settings: currentLayout()}; saveProfiles(list); toast('Mise en page mise à jour.'); rerender();
         });
-        at('data-h-layout-rename', (list, i, p) => {
-            const name = (prompt('Nouveau nom :', p.name) || '').trim().slice(0, 60);
+        at('data-h-layout-rename', async (list, i, p) => {
+            const name = ((await A().askText({title: 'Renommer la mise en page', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'})) || '').trim().slice(0, 60);
             if (!name) return;
             list[i] = {...p, name}; saveProfiles(list); toast('Mise en page renommée.'); rerender();
         });

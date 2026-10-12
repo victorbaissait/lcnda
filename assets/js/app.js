@@ -12640,7 +12640,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     window.LCNDA_APP={api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
-        drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,tileLayerCategories:TILE_LAYER_CATEGORIES};
+        drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,tileLayerCategories:TILE_LAYER_CATEGORIES};
 
     init();
 })();
