@@ -4327,7 +4327,7 @@ function research_data(PDO $pdo): never
     }
     $where=$category==='name'?$name:($category==='place'?$place:($category==='year'?$year:($category==='occupation'?$occupation:($category==='employer'?$employer:"($name OR $place OR $year OR $occupation OR $employer)"))));
     $params=[];
-    if($category==='name'||$category==='all')$params=array_merge($params,array_fill(0,6,$like));
+    if($category==='name'||$category==='all')$params=array_merge($params,array_fill(0,7,$like));
     if($category==='place'||$category==='all')$params=array_merge($params,array_fill(0,4,$like));
     if($category==='year'||$category==='all'){$params[]=$q;$params[]=$like;}
     if($category==='occupation'||$category==='all')$params=array_merge($params,array_fill(0,3,$like));
@@ -5593,7 +5593,7 @@ function restore_change(PDO $pdo,array $data): array
 
 function record_exists(PDO $pdo,string $table,int $id): bool
 {
-    $allowed=['persons','families','events','event_types','places','media','notes','sources','census_records','battues','battue_search_items','battue_commune_aliases','saved_views','investigations','investigation_items','investigation_media'];
+    $allowed=['persons','families','events','event_types','places','media','notes','sources','census_records','battues','battue_search_items','battue_commune_aliases','saved_views','investigations','investigation_items','investigation_media','graves'];
     if(!in_array($table,$allowed,true))return false;
     $stmt=$pdo->prepare("SELECT 1 FROM {$table} WHERE id=?");
     $stmt->execute([$id]);
@@ -5615,7 +5615,9 @@ function entity_target_exists(PDO $pdo,string $entityType,int $entityId): bool
         'investigation'=>record_exists($pdo,'investigations',$entityId),
         'investigation_item'=>record_exists($pdo,'investigation_items',$entityId),
         'view'=>record_exists($pdo,'saved_views',$entityId),
-        default=>false,
+        'grave'=>record_exists($pdo,'graves',$entityId),
+        'military'=>record_exists($pdo,'persons',$entityId), // dossier militaire : rangé sous le numéro de la personne
+        default=>true, // rattachement d'une autre sorte : il ne doit pas empêcher de restaurer le média
     };
 }
 
@@ -6403,12 +6405,8 @@ function verify_gedcom(PDO $pdo): never
     $text=file_get_contents($file['tmp_name']);
     if($text===false){json_response(['error'=>'Lecture impossible'],500);}
     // Détection encodage
-    $encoding='UTF-8';
-    if(preg_match('/^1 CHAR (.+)/m',$text,$m))$encoding=trim($m[1]);
-    if(strtolower($encoding)==='ansel'||strtolower($encoding)==='ansi'){
-        $text=mb_convert_encoding($text,'UTF-8','ISO-8859-1');
-    }
-    $lines=preg_split('/\r?\n/',$text);
+    $text=gedcom_text_to_utf8($text); // BOM, ANSEL, MS-DOS, Mac, UTF-16
+    $lines=preg_split('/\r\n|\r|\n/',$text);
     // Version GEDCOM
     $version='inconnue';
     foreach($lines as $l){if(preg_match('/^2 VERS (.+)/',$l,$m)){$version=trim($m[1]);break;}}
@@ -6496,9 +6494,9 @@ function verify_gedcom(PDO $pdo): never
 
 function gedcom_comparison_snapshot(string $text): array
 {
-    if(preg_match('/^1 CHAR (.+)/m',$text,$m)&&in_array(strtolower(trim($m[1])),['ansel','ansi'],true))$text=mb_convert_encoding($text,'UTF-8','ISO-8859-1');
+    $text=gedcom_text_to_utf8($text);
     $people=[];$sources=[];$current=null;$section='';$inBirth=false;$inDeath=false;
-    foreach(preg_split('/\r?\n/',$text) as $line){
+    foreach(preg_split('/\r\n|\r|\n/',$text) as $line){
         $line=rtrim($line);
         if(preg_match('/^0 @([^@]+)@ INDI(?:\s|$)/',$line,$m)){$current=['xref'=>$m[1],'first'=>'','last'=>'','birth'=>'','death'=>''];$section='person';$inBirth=false;$inDeath=false;continue;}
         if(preg_match('/^0 @([^@]+)@ SOUR(?:\s|$)/',$line,$m)){$current=['xref'=>$m[1],'title'=>''];$section='source';continue;}
@@ -6580,7 +6578,7 @@ function import_analyse(PDO $pdo): never
     // ── SQLite .db ──
     if(in_array($ext,['db','sqlite'],true)){
         try{
-            $importPdo=new PDO('sqlite:'.$path,[],[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
+            $importPdo=new PDO('sqlite:'.$path,null,null,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
             $tables=$importPdo->query("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")->fetchAll(PDO::FETCH_COLUMN);
             $counts=[];
             foreach($tables as $t){
@@ -9782,29 +9780,71 @@ function merge_people(PDO $pdo,array $data): array
 {
     $target=safe_int($data['target_id']??0);$source=safe_int($data['source_id']??0);if(!$target||!$source||$target===$source)throw new RuntimeException('Fusion impossible');
     $a=summary_person($pdo,$target);$b=summary_person($pdo,$source);if(!$a||!$b)throw new RuntimeException('Fiche introuvable');
+    assert_person_unlocked($pdo,$target);assert_person_unlocked($pdo,$source);
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
-    $pdo->prepare('UPDATE events SET person_id=? WHERE person_id=?')->execute([$target,$source]);
-    $pdo->prepare("UPDATE notes SET entity_id=? WHERE entity_type='person' AND entity_id=?")->execute([$target,$source]);
-    $pdo->prepare("UPDATE media_links SET entity_id=? WHERE entity_type='person' AND entity_id=?")->execute([$target,$source]);
-    $pdo->prepare("UPDATE source_links SET entity_id=? WHERE entity_type='person' AND entity_id=?")->execute([$target,$source]);
-    foreach(['investigations','hypotheses','evidence_records','research_journal'] as $table)$pdo->prepare("UPDATE {$table} SET person_id=? WHERE person_id=?")->execute([$target,$source]);
-    $pdo->prepare('UPDATE hypotheses SET related_person_id=? WHERE related_person_id=?')->execute([$target,$source]);
-    $pdo->prepare('UPDATE families SET partner1_id=? WHERE partner1_id=?')->execute([$target,$source]);
-    $pdo->prepare('UPDATE families SET partner2_id=? WHERE partner2_id=?')->execute([$target,$source]);
-    $pdo->prepare('UPDATE family_children SET child_id=? WHERE child_id=?')->execute([$target,$source]);
-    $pdo->exec('DELETE FROM family_children WHERE rowid NOT IN (SELECT min(rowid) FROM family_children GROUP BY family_id,child_id)');
-    // Cartes d'électeur et votes (supprimés avec la fiche sinon), avec leurs photos et leurs étiquettes
-    if(function_exists('voter_data')){
-        $pdo->prepare('UPDATE voter_cards SET person_id=? WHERE person_id=?')->execute([$target,$source]);
-        $pdo->prepare('UPDATE voter_votes SET person_id=? WHERE person_id=?')->execute([$target,$source]);
-        $pdo->prepare("UPDATE OR IGNORE family_collection_media SET collection_id=? WHERE collection_type='voter' AND collection_id=?")->execute([$target,$source]);
-        $pdo->prepare("UPDATE OR IGNORE label_links SET entity_id=? WHERE entity_type='voter' AND entity_id=?")->execute([$target,$source]);
-        $pdo->prepare('UPDATE persons SET show_voter_block=1 WHERE id=? AND (SELECT show_voter_block FROM persons WHERE id=?)=1')->execute([$target,$source]);
-    }
+    merge_person_references($pdo,$target,$source);
+    // Cases « bloc à afficher » cochées sur l'une ou l'autre fiche
+    $flags=array_values(array_filter(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(),'name'),static fn($c)=>preg_match('/^show_[a-z_]+_block$/',(string)$c)));
+    foreach($flags as $flag)$pdo->prepare("UPDATE persons SET {$flag}=1 WHERE id=? AND (SELECT {$flag} FROM persons WHERE id=?)=1")->execute([$target,$source]);
+    merge_duplicate_couples($pdo,$target);
     $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$source]);
+    $pdo->prepare('DELETE FROM person_search WHERE person_id=CAST(? AS INTEGER)')->execute([$source]);
     rebuild_search($pdo,$target);
     log_change($pdo,'person',$target,'merge','Fusion de la fiche #'.$source.' dans #'.$target,['target'=>$a,'source'=>$b],summary_person($pdo,$target));
     return ['target_id'=>$target,'source_id'=>$source];
+}
+
+/**
+ * Fusion : tout ce qui désigne la fiche source passe sur la fiche gardée. Les colonnes viennent des clés étrangères
+ * vers persons (toutes les tables, y compris celles ajoutées plus tard) et des colonnes « person_id » sans clé étrangère.
+ * Une ligne qui ferait doublon (même voyage, même branche…) est laissée et part avec la fiche source.
+ */
+function merge_person_references(PDO $pdo,int $target,int $source): void
+{
+    $tables=$pdo->query("SELECT name,sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")->fetchAll();
+    $noFk=['living_contacts'=>['person_id'],'event_witnesses'=>['person_id'],'media_tags'=>['person_id'],'investigation_persons'=>['person_id'],'person_online_sheets'=>['person_id'],'grave_persons'=>['person_id']];
+    foreach($tables as $t){
+        $table=(string)$t['name'];
+        if($table==='persons'||stripos((string)$t['sql'],'VIRTUAL TABLE')!==false||str_starts_with($table,'person_search'))continue;
+        $cols=[];
+        foreach($pdo->query('PRAGMA foreign_key_list("'.str_replace('"','""',$table).'")')->fetchAll() as $fk)if($fk['table']==='persons')$cols[]=(string)$fk['from'];
+        $cols=array_values(array_unique(array_merge($cols,$noFk[$table]??[])));
+        foreach($cols as $col){
+            $q='"'.str_replace('"','""',$table).'"';$c='"'.str_replace('"','""',$col).'"';
+            $pdo->prepare("UPDATE OR IGNORE {$q} SET {$c}=? WHERE {$c}=?")->execute([$target,$source]);
+            if(isset($noFk[$table]))$pdo->prepare("DELETE FROM {$q} WHERE {$c}=?")->execute([$source]); // doublons restés (pas de cascade)
+        }
+    }
+    foreach(['notes','media_links','source_links'] as $table)$pdo->prepare("UPDATE {$table} SET entity_id=? WHERE entity_type='person' AND entity_id=?")->execute([$target,$source]);
+    // Étiquettes et photos des blocs rangés sous le numéro de la personne (fiche, poilu, résistant, cartes d'électeur)
+    $pdo->prepare("UPDATE OR IGNORE label_links SET entity_id=? WHERE entity_type IN ('person','poilu','resistance','voter') AND entity_id=?")->execute([$target,$source]);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type IN ('person','poilu','resistance','voter') AND entity_id=?")->execute([$source]);
+    $pdo->prepare("UPDATE OR IGNORE family_collection_media SET collection_id=? WHERE collection_type IN ('poilu','resistance','voter') AND collection_id=?")->execute([$target,$source]);
+    $pdo->prepare('UPDATE hypotheses SET related_person_id=? WHERE related_person_id=?')->execute([$target,$source]);
+}
+
+/**
+ * Après une fusion, deux familles du même couple (la fiche gardée et le même conjoint) n'en font plus qu'une :
+ * enfants, événements, notes, sources et médias passent sur la plus ancienne. Une personne ne peut pas être son
+ * propre enfant (les deux fiches étaient parent et enfant l'une de l'autre).
+ */
+function merge_duplicate_couples(PDO $pdo,int $personId): void
+{
+    $pdo->prepare('DELETE FROM family_children WHERE child_id=? AND family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?)')->execute([$personId,$personId,$personId]);
+    $fams=$pdo->prepare('SELECT id,partner1_id,partner2_id FROM families WHERE partner1_id=? OR partner2_id=? ORDER BY id');$fams->execute([$personId,$personId]);
+    $keep=[];
+    foreach($fams->fetchAll() as $f){
+        $other=(int)$f['partner1_id']===$personId?(int)$f['partner2_id']:(int)$f['partner1_id'];
+        if(!$other)continue; // famille sans conjoint connu : on ne devine pas
+        if(!isset($keep[$other])){$keep[$other]=(int)$f['id'];continue;}
+        $into=$keep[$other];$from=(int)$f['id'];
+        $pdo->prepare('UPDATE OR IGNORE family_children SET family_id=? WHERE family_id=?')->execute([$into,$from]);
+        $pdo->prepare('DELETE FROM family_children WHERE family_id=?')->execute([$from]);
+        $pdo->prepare('UPDATE events SET family_id=? WHERE family_id=?')->execute([$into,$from]);
+        foreach(['notes','media_links','source_links','label_links'] as $table)$pdo->prepare("UPDATE OR IGNORE {$table} SET entity_id=? WHERE entity_type='family' AND entity_id=?")->execute([$into,$from]);
+        $pdo->prepare('DELETE FROM families WHERE id=?')->execute([$from]);
+    }
+    $pdo->exec('DELETE FROM family_children WHERE rowid NOT IN (SELECT min(rowid) FROM family_children GROUP BY family_id,child_id)');
 }
 
 function convert_deed_to_death(PDO $pdo,array $data): array
@@ -10888,7 +10928,7 @@ function delete_person(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE families SET partner2_id=NULL WHERE partner2_id=?')->execute([$id]);
     $pdo->prepare('UPDATE hypotheses SET related_person_id=NULL WHERE related_person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE branches SET root_person_id=NULL WHERE root_person_id=?')->execute([$id]);
-    $pdo->prepare('DELETE FROM person_search WHERE person_id=?')->execute([$id]);
+    $pdo->prepare('DELETE FROM person_search WHERE person_id=CAST(? AS INTEGER)')->execute([$id]);
     $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$id]);
     log_change($pdo,'person',$id,'delete','Suppression de '.full_name($person),$person+['_restore_kind'=>'person_delete','_snapshot'=>$snapshot],null);
     return ['id'=>$id];
@@ -11765,7 +11805,7 @@ function set_view_order(PDO $pdo,array $data): array
 
 function rebuild_search(PDO $pdo,int $personId): void
 {
-    $pdo->prepare('DELETE FROM person_search WHERE person_id=?')->execute([$personId]);
+    $pdo->prepare('DELETE FROM person_search WHERE person_id=CAST(? AS INTEGER)')->execute([$personId]); // FTS5 : sans CAST, « 1 » (texte) ne trouve pas 1
     $pdo->prepare("INSERT INTO person_search(person_id,first_name,last_name,variants,surname_group) SELECT p.id,p.first_name,p.last_name,COALESCE((SELECT group_concat(trim(coalesce(n.first_name,'')||' '||coalesce(n.last_name,'')),' ') FROM name_variants n WHERE n.person_id=p.id),''),COALESCE(g.name,'') FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id WHERE p.id=?")->execute([$personId]);
 }
 

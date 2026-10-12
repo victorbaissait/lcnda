@@ -67,6 +67,7 @@ function gedcom_date_core(string $text): ?string
     $t = trim(preg_replace('/\s+/u', ' ', $text) ?? '');
     $t = preg_replace('/^(le|du|au)\s+/iu', '', $t) ?? $t;
     $t = preg_replace('/^(\d{1,2})\s*(er|e)\b/iu', '$1', $t) ?? $t;
+    if (preg_match('/^(.+?)\s*(?:av\.?\s*J\.?-?C\.?|avant J\.?-?C\.?|B\.?C\.?)$/iu', $t, $bc)) { $c = gedcom_date_core($bc[1]); return $c !== null ? $c . ' B.C.' : null; }
     $fmt = static fn(?int $d, ?int $m, int $y): ?string => ($m !== null && ($m < 1 || $m > 12)) || ($d !== null && ($d < 1 || $d > 31))
         ? null
         : trim(($d ? $d . ' ' : '') . ($m ? GEDCOM_MONTHS[$m - 1] . ' ' : '') . $y);
@@ -90,12 +91,15 @@ function gedcom_date_from_text(string $text): string
     if (preg_match('/^entre\s+(.+?)\s+et\s+(.+)$/iu', $t, $m) && ($a = gedcom_date_core($m[1])) && ($b = gedcom_date_core($m[2]))) { return "BET $a AND $b"; }
     if (preg_match('/^(?:de|du)\s+(.+?)\s+(?:à|a|au)\s+(.+)$/iu', $t, $m) && ($a = gedcom_date_core($m[1])) && ($b = gedcom_date_core($m[2]))) { return "FROM $a TO $b"; }
     if (preg_match('/^(.+?)\s+(?:à|-)\s+(.+)$/iu', $t, $m) && ($a = gedcom_date_core($m[1])) && ($b = gedcom_date_core($m[2]))) { return "FROM $a TO $b"; }
+    // CAL et EST d'abord : « ca » de « vers » ne doit pas avaler « calculé »
     $qualifiers = [
-        'ABT' => '/^(?:vers|environ|env\.?|circa|ca\.?|c\.|~|autour de|about|abt\.?)\s*/iu',
+        'CAL' => '/^(?:calculée?|calcul[ée]e?|cal\.)\s*/iu',
+        'EST' => '/^(?:estimée?|estime|est\.)\s*/iu',
+        'ABT' => '/^(?:vers|environ|env\.?|circa|ca\.?|c\.|~|autour de|about|abt\.?)(?=[\s\d]|$)\s*/iu',
         'BEF' => '/^(?:avant|av\.?|before|bef\.?)\s+/iu',
         'AFT' => '/^(?:après|apres|ap\.?|after|aft\.?)\s+/iu',
-        'EST' => '/^(?:estimé|estime|est\.)\s*/iu',
-        'CAL' => '/^(?:calculé|calcule|cal\.)\s*/iu',
+        'FROM' => '/^depuis\s+/iu',
+        'TO' => '/^jusqu[’\']?\s*(?:à|a|au|en)\s+/iu',
     ];
     foreach ($qualifiers as $gedcom => $pattern) {
         if (preg_match($pattern, $t)) {
@@ -111,10 +115,10 @@ function gedcom_date_from_text(string $text): string
 function gedcom_date_core_to_text(string $core): string
 {
     $core = trim(preg_replace('/^@#D[^@]*@\s*/', '', $core) ?? $core);
-    if (preg_match('/^(?:(\d{1,2})\s+)?(?:([A-Z]{3,4})\s+)?(-?\d{1,4})(?:\/\d{1,2})?(?:\s+B\.?C\.?)?$/i', $core, $m)) {
+    if (preg_match('/^(?:(\d{1,2})\s+)?(?:([A-Z]{3,4})\s+)?(-?\d{1,4})(?:\/\d{1,2})?(\s+B\.?C\.?)?$/i', $core, $m)) {
         $month = $m[2] !== '' ? array_search(strtoupper($m[2]), GEDCOM_MONTHS, true) : false;
         if ($m[2] !== '' && $month === false) { return $core; }
-        return trim(($m[1] !== '' ? (int) $m[1] . ' ' : '') . ($month !== false ? GEDCOM_FR_MONTHS[$month] . ' ' : '') . $m[3]);
+        return trim(($m[1] !== '' ? (int) $m[1] . ' ' : '') . ($month !== false ? GEDCOM_FR_MONTHS[$month] . ' ' : '') . $m[3] . (!empty($m[4]) ? ' av. J.-C.' : ''));
     }
     return $core;
 }
@@ -625,15 +629,55 @@ function gedcom_event_type_id(PDO $pdo, array &$cache, string $scope, string $ta
     return (int) $id;
 }
 
+/**
+ * Texte d'un fichier GEDCOM → UTF-8, d'après sa ligne « 1 CHAR » : ANSEL (accents écrits avant la lettre),
+ * IBMPC / MSDOS (CP850), MACINTOSH (MacRoman), UTF-16 (CHAR UNICODE) ; sinon, si ce n'est pas de l'UTF-8 valide,
+ * Windows-1252. La marque BOM est retirée.
+ */
+function gedcom_text_to_utf8(string $text): string
+{
+    if (str_starts_with($text, "\xFF\xFE") || str_starts_with($text, "\xFE\xFF") || (strlen($text) > 3 && ($text[0] === "\0" || $text[1] === "\0"))) {
+        $enc = str_starts_with($text, "\xFE\xFF") || $text[0] === "\0" ? 'UTF-16BE' : 'UTF-16LE';
+        $text = (string) @mb_convert_encoding(preg_replace('/^(\xFF\xFE|\xFE\xFF)/', '', $text), 'UTF-8', $enc);
+    }
+    $text = preg_replace('/^\xEF\xBB\xBF/', '', $text) ?? $text;
+    if (mb_check_encoding($text, 'UTF-8')) { return $text; }
+    $char = preg_match('/^1 CHAR (.+)/m', $text, $m) ? strtoupper(trim($m[1])) : '';
+    if ($char === 'ANSEL') { return gedcom_ansel_to_utf8($text); }
+    if (in_array($char, ['IBMPC', 'MSDOS', 'IBM PC', 'CP850', 'DOS'], true)) { $out = @mb_convert_encoding($text, 'UTF-8', 'CP850'); if (is_string($out)) { return $out; } }
+    if (in_array($char, ['MACINTOSH', 'MAC', 'MACROMAN'], true) && function_exists('iconv')) { $out = @iconv('MACINTOSH', 'UTF-8//TRANSLIT', $text); if (is_string($out) && $out !== '') { return $out; } }
+    return (string) @mb_convert_encoding($text, 'UTF-8', 'Windows-1252');
+}
+
+/** ANSEL (Z39.47, avec les ajouts GEDCOM) : les accents sont écrits AVANT la lettre qu'ils portent. */
+function gedcom_ansel_to_utf8(string $text): string
+{
+    static $special = [0xA1 => 'Ł', 0xA2 => 'Ø', 0xA3 => 'Đ', 0xA4 => 'Þ', 0xA5 => 'Æ', 0xA6 => 'Œ', 0xA7 => 'ʹ', 0xA8 => '·', 0xA9 => '♭', 0xAA => '®', 0xAB => '±', 0xAC => 'Ơ', 0xAD => 'Ư', 0xAE => 'ʼ',
+        0xB0 => 'ʻ', 0xB1 => 'ł', 0xB2 => 'ø', 0xB3 => 'đ', 0xB4 => 'þ', 0xB5 => 'æ', 0xB6 => 'œ', 0xB7 => 'ʺ', 0xB8 => 'ı', 0xB9 => '£', 0xBA => 'ð', 0xBC => 'ơ', 0xBD => 'ư', 0xBE => '□', 0xBF => '■',
+        0xC0 => '°', 0xC1 => 'ℓ', 0xC2 => '℗', 0xC3 => '©', 0xC4 => '♯', 0xC5 => '¿', 0xC6 => '¡', 0xC7 => 'ß', 0xC8 => '€', 0xCD => 'e', 0xCE => 'o', 0xCF => 'ß'];
+    static $combining = [0xE0 => 0x0309, 0xE1 => 0x0300, 0xE2 => 0x0301, 0xE3 => 0x0302, 0xE4 => 0x0303, 0xE5 => 0x0304, 0xE6 => 0x0306, 0xE7 => 0x0307, 0xE8 => 0x0308, 0xE9 => 0x030C, 0xEA => 0x030A,
+        0xEB => 0xFE20, 0xEC => 0xFE21, 0xED => 0x0315, 0xEE => 0x030B, 0xEF => 0x0310, 0xF0 => 0x0327, 0xF1 => 0x0328, 0xF2 => 0x0323, 0xF3 => 0x0324, 0xF4 => 0x0325, 0xF5 => 0x0333, 0xF6 => 0x0332,
+        0xF7 => 0x0326, 0xF8 => 0x031C, 0xF9 => 0x032E, 0xFA => 0xFE22, 0xFB => 0xFE23, 0xFE => 0x0313];
+    $out = ''; $pending = '';
+    $n = strlen($text);
+    for ($i = 0; $i < $n; $i++) {
+        $b = ord($text[$i]);
+        if (isset($combining[$b])) { $pending .= mb_chr($combining[$b], 'UTF-8'); continue; }
+        $ch = $b < 0x80 ? $text[$i] : ($special[$b] ?? '');
+        if ($pending !== '' && ($ch === "\n" || $ch === "\r")) { $out .= $pending; $pending = ''; } // accent sans lettre : gardé seul
+        $out .= $ch . $pending;
+        $pending = '';
+    }
+    $out .= $pending;
+    return class_exists('Normalizer') ? (Normalizer::normalize($out, Normalizer::FORM_C) ?: $out) : $out;
+}
+
 /** Importe un fichier GEDCOM (.ged) : voir l'en-tête du fichier. $mediaBaseDir : dossier des médias d'une archive GedZip. */
 function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = null): array
 {
     $content = file_get_contents($path);
     if ($content === false) { throw new RuntimeException('Lecture du fichier GEDCOM impossible'); }
-    $content = preg_replace('/^\xEF\xBB\xBF/', '', $content) ?? $content;
-    if (preg_match('/^1 CHAR (.+)/m', $content, $m) && in_array(strtoupper(trim($m[1])), ['ANSEL', 'ANSI', 'IBMPC', 'MSDOS', 'ASCII'], true) && !mb_check_encoding($content, 'UTF-8')) {
-        $content = @mb_convert_encoding($content, 'UTF-8', 'Windows-1252') ?: $content;
-    }
+    $content = gedcom_text_to_utf8($content);
     $records = gedimport_parse($content);
     $byXref = [];
     foreach ($records as $rec) { if ($rec->xref) { $byXref[$rec->xref] = $rec; } }

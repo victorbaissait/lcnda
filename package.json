@@ -25,7 +25,8 @@
     "test:village": "node tests/test-village.js",
     "test:studio": "node tests/test-studio.js",
     "test:insee": "node tests/test-insee.js",
-    "test:voters": "node tests/test-voters.js"
+    "test:voters": "node tests/test-voters.js",
+    "test:merge": "node tests/test-merge.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",
