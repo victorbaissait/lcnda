@@ -613,3 +613,30 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cw-part-add{display:inline-flex;gap:.3rem;align-items:center;font-size:.9em}
 #online-sheet-search .web-search-news{display:none}
 .archive-visit-tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:0 0 .8rem}
+/* widgets : graphiques, légendes, « tout voir » */
+.h-cw-legend{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;font-size:.92em}
+.h-cw-legend i,.h-cw-dot{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;margin-right:.35rem;vertical-align:-1px}
+.h-cw-pie-disc{position:relative}
+.h-cw-pie-disc.is-donut::after{content:'';position:absolute;inset:26%;border-radius:50%;background:var(--surface,#fff)}
+.h-cw-pie-disc.is-donut span{position:absolute;inset:0;display:grid;place-items:center;z-index:1;font-weight:800;font-size:1.2rem}
+.h-cw-columns{display:flex;align-items:flex-end;gap:.35rem;height:200px;padding-top:1.2rem;overflow-x:auto}
+.h-cw-col{flex:1 0 28px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:28px}
+.h-cw-col i{display:block;width:100%;border-radius:3px 3px 0 0}
+.h-cw-col small{font-size:.75em}
+.h-cw-col span{font-size:.72em;max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:.2rem}
+.h-cw-line{width:100%;height:auto;max-height:240px}
+.h-cw-line text{font-size:11px;fill:currentColor;opacity:.75}
+.h-cw-line .h-cw-axis{stroke:currentColor;opacity:.3}
+.h-cw-tiles{display:flex;flex-wrap:wrap;gap:3px}
+.h-cw-tiles div{min-height:64px;color:#fff;padding:.4rem;border-radius:4px;display:flex;flex-direction:column;justify-content:space-between;text-shadow:0 1px 2px rgba(0,0,0,.45);overflow:hidden}
+.h-cw-tiles span{font-size:.8em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-cw-caption{margin:.5rem 0 0;font-size:.88em;opacity:.8;font-style:italic}
+.h-cw-more{margin:.4rem 0 0;display:flex;gap:.6rem;align-items:center}
+.h-cw-media{display:inline-flex;align-items:center;gap:.4rem;text-align:left}
+.h-cw-thumb{width:42px;height:42px;object-fit:cover;border-radius:4px;flex:none}
+.h-cw-all-dialog{width:min(1100px,95vw)}
+.h-cw-all-body{max-height:70vh;overflow:auto}
+.h-cw-valcolors{display:flex;flex-wrap:wrap;gap:.3rem .9rem;align-items:center;margin-top:.25rem}
+.h-cw-valcolor{display:inline-flex;gap:.3rem;align-items:center;font-size:.9em}
+.h-cw-valcolor input{width:1.9rem;height:1.6rem;padding:0;border:1px solid rgba(128,128,128,.5);background:none}
+.h-cw-caption-field{display:block;margin-top:.6rem}

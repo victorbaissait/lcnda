@@ -122,16 +122,65 @@
         entries.counted = counted; // lignes comptées (une personne à deux étiquettes compte une fois)
         return entries;
     }
+    // Palettes proposées ; une couleur peut aussi être choisie pour chaque valeur (d.valueColors)
+    const PALETTES = {vive: PALETTE, pastel: ['#8ab6e8', '#f2a97f', '#96d1a8', '#c0a8ec', '#ef9a9a', '#e6cf7a', '#86d0d8', '#f0a8c8', '#aab4be', '#c5e1a5', '#ffcc80', '#9fa8da'],
+        terre: ['#8d5524', '#c68642', '#a0522d', '#6b8e23', '#556b2f', '#b8860b', '#7f4f24', '#936639', '#a68a64', '#656d4a', '#414833', '#c2a878'],
+        mer: ['#03045e', '#023e8a', '#0077b6', '#0096c7', '#00b4d8', '#48cae4', '#90e0ef', '#2a9d8f', '#264653', '#457b9d', '#1d3557', '#a8dadc'],
+        sepia: ['#4b3621', '#6f4e37', '#8b6f47', '#a0826d', '#b5967a', '#c8ad8d', '#d9c3a5', '#704214', '#5c4033', '#987654', '#c19a6b', '#e0cda9']};
+    const CHART_STYLES = [['bars', 'Barres (horizontales)'], ['columns', 'Colonnes (verticales)'], ['pie', 'Camembert'], ['donut', 'Anneau'], ['line', 'Courbe'], ['area', 'Aire (courbe remplie)'], ['tiles', 'Mosaïque (carrés proportionnels)'], ['table', 'Tableau des chiffres']];
+    function chartColor(d, value, i) {
+        const own = d.valueColors?.[value];
+        if (color(own)) return own;
+        const pal = PALETTES[d.palette] || (d.palette === 'accent' && color(d.accentColor) ? null : PALETTE);
+        if (!pal) { const base = d.accentColor; return `color-mix(in srgb, ${base} ${Math.max(25, 100 - i * 9)}%, white)`; }
+        return pal[i % pal.length];
+    }
     function chartHtml(data, d) {
         const entries = groupRows(data, d);
         if (!entries.length) return '<p class="muted">Rien à compter.</p>';
-        if (d.style === 'pie') {
-            const total = entries.reduce((n, e) => n + e[1], 0); let at = 0;
-            const stops = entries.map(([, n], i) => { const from = at; at += n / total * 360; return `${PALETTE[i % PALETTE.length]} ${from.toFixed(1)}deg ${at.toFixed(1)}deg`; }).join(',');
-            return `<div class="h-cw-pie"><div class="h-cw-pie-disc" style="background:conic-gradient(${stops})" role="img" aria-label="Camembert"></div><ul>${entries.map(([v, n], i) => `<li><i style="background:${PALETTE[i % PALETTE.length]}"></i>${esc(v)} <strong>${fmt(n)}</strong> <small class="muted">${Math.round(n / total * 100)} %</small></li>`).join('')}</ul></div>`;
+        const total = entries.reduce((n, e) => n + e[1], 0), max = Math.max(...entries.map(e => e[1]));
+        const col = (v, i) => chartColor(d, v, i), pct = n => total ? Math.round(n / total * 100) : 0;
+        const legend = `<ul class="h-cw-legend">${entries.map(([v, n], i) => `<li><i style="background:${col(v, i)}"></i>${esc(v)} <strong>${fmt(n)}</strong> <small class="muted">${pct(n)} %</small></li>`).join('')}</ul>`;
+        if (d.style === 'pie' || d.style === 'donut') {
+            let at = 0;
+            const stops = entries.map(([v, n], i) => { const from = at; at += n / total * 360; return `${col(v, i)} ${from.toFixed(1)}deg ${at.toFixed(1)}deg`; }).join(',');
+            return `<div class="h-cw-pie"><div class="h-cw-pie-disc ${d.style === 'donut' ? 'is-donut' : ''}" style="background:conic-gradient(${stops})" role="img" aria-label="${d.style === 'donut' ? 'Anneau' : 'Camembert'}">${d.style === 'donut' ? `<span>${fmt(total)}</span>` : ''}</div>${legend}</div>`;
         }
-        const max = Math.max(...entries.map(e => e[1]));
-        return `<ul class="h-bars h-cw-bars">${entries.map(([v, n]) => `<li><span class="h-bar-label" title="${esc(v)}">${esc(v)}</span><span class="h-bar"><i style="width:${Math.round(n / max * 100)}%"></i></span><span>${fmt(n)}</span></li>`).join('')}</ul>`;
+        if (d.style === 'columns') {
+            return `<div class="h-cw-columns">${entries.map(([v, n], i) => `<div class="h-cw-col" title="${esc(v)} : ${fmt(n)}"><small>${fmt(n)}</small><i style="height:${Math.max(2, Math.round(n / max * 100))}%;background:${col(v, i)}"></i><span>${esc(v)}</span></div>`).join('')}</div>`;
+        }
+        if (d.style === 'line' || d.style === 'area') {
+            const W = 600, H = 220, pad = 28, step = entries.length > 1 ? (W - pad * 2) / (entries.length - 1) : 0;
+            const pts = entries.map(([, n], i) => [pad + i * step, H - pad - (max ? n / max : 0) * (H - pad * 2)]);
+            const line = pts.map(p => p.map(x => x.toFixed(1)).join(',')).join(' ');
+            const stroke = color(d.valueColors?.__line) || chartColor(d, '', 0);
+            const every = Math.max(1, Math.ceil(entries.length / 12));
+            return `<svg class="h-cw-line" viewBox="0 0 ${W} ${H}" role="img" aria-label="Courbe">
+                <line x1="${pad}" y1="${H - pad}" x2="${W - pad}" y2="${H - pad}" class="h-cw-axis"/>
+                ${d.style === 'area' ? `<polygon points="${pad},${H - pad} ${line} ${pad + (entries.length - 1) * step},${H - pad}" fill="${stroke}" fill-opacity=".25"/>` : ''}
+                <polyline points="${line}" fill="none" stroke="${stroke}" stroke-width="3" stroke-linejoin="round"/>
+                ${pts.map(([x, y], i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="${stroke}"><title>${esc(entries[i][0])} : ${fmt(entries[i][1])}</title></circle>${i % every === 0 ? `<text x="${x.toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(String(entries[i][0]).slice(0, 14))}</text>` : ''}`).join('')}
+                <text x="${pad}" y="16">${fmt(max)}</text></svg>`;
+        }
+        if (d.style === 'tiles') {
+            return `<div class="h-cw-tiles">${entries.map(([v, n], i) => `<div style="flex:${Math.max(1, Math.round(n / max * 100))} 1 ${Math.max(56, Math.round(Math.sqrt(n / max) * 420))}px;min-height:${Math.max(56, Math.round(Math.sqrt(n / max) * 140))}px;background:${col(v, i)}" title="${esc(v)} : ${fmt(n)}"><strong>${fmt(n)}</strong><span>${esc(v)}</span></div>`).join('')}</div>`;
+        }
+        if (d.style === 'table') {
+            return `<table class="data-table h-cw-table"><thead><tr><th>Valeur</th><th>Nombre</th><th>Part</th></tr></thead><tbody>${entries.map(([v, n], i) => `<tr><td><i class="h-cw-dot" style="background:${col(v, i)}"></i>${esc(v)}</td><td>${fmt(n)}</td><td>${pct(n)} %</td></tr>`).join('')}</tbody></table>`;
+        }
+        return `<ul class="h-bars h-cw-bars">${entries.map(([v, n], i) => `<li><span class="h-bar-label" title="${esc(v)}">${esc(v)}</span><span class="h-bar"><i style="width:${Math.round(n / max * 100)}%;background:${col(v, i)}"></i></span><span>${fmt(n)}</span></li>`).join('')}</ul>`;
+    }
+    // « Tout voir » : les données d'une liste affichée, gardées le temps de la page
+    const fullViews = new Map(); let fullSeq = 0;
+    function mediaCell(r, text) {
+        const m = r.media; if (!m) return text;
+        const key = 'm' + (++fullSeq); fullViews.set(key, {media: m});
+        const thumb = m.media_type === 'image' && (m.thumbnail || m.filename) ? `<img class="h-cw-thumb" src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : '';
+        return `<button type="button" class="table-link h-cw-media" data-cw-media="${key}">${thumb}${text || 'Voir le média'}</button>`;
+    }
+    function listTableHtml(data, d, rows, cols, all) {
+        const cell = (r, c, i) => { const html = isPeopleCol(data, c) && r.people?.length ? r.people.map(p => `<button type="button" class="table-link" data-h-person="${Number(p.id)}">${esc(pname(p))}</button>`).join(' et ') : esc(cellText(data, r, c)); return i === 0 && r.media ? mediaCell(r, html) : html; };
+        return `<div class="data-table-wrap"><table class="data-table h-cw-table"><thead><tr>${cols.map(c => `<th>${esc(all.find(x => x[0] === c)?.[1] || c)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map((c, i) => `<td>${cell(r, c, i)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
     }
     function listHtml(data, d) {
         const all = dataColumns(data);
@@ -142,10 +191,31 @@
             rows.sort((a, b) => { const x = cellText(data, a, d.sort.col), y = cellText(data, b, d.sort.col), nx = num(x), ny = num(y); const r = nx !== null && ny !== null ? nx - ny : x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}); return d.sort.dir === 'desc' ? -r : r; });
         }
         const n = Math.max(1, Math.min(100, Number(d.limit) || 8));
-        const cell = (r, c) => isPeopleCol(data, c) && r.people?.length ? r.people.map(p => `<button type="button" class="table-link" data-h-person="${Number(p.id)}">${esc(pname(p))}</button>`).join(' et ') : esc(cellText(data, r, c));
         if (!rows.length) return '<p class="muted">Aucune ligne.</p>';
-        return `<div class="data-table-wrap"><table class="data-table h-cw-table"><thead><tr>${cols.map(c => `<th>${esc(all.find(x => x[0] === c)?.[1] || c)}</th>`).join('')}</tr></thead><tbody>${rows.slice(0, n).map(r => `<tr>${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${rows.length > n ? `<p class="muted"><small>${fmt(n)} sur ${fmt(rows.length)}${data.truncated ? '+' : ''}</small></p>` : ''}`;
+        let more = '';
+        if (rows.length > n) {
+            const key = 'l' + (++fullSeq); fullViews.set(key, {title: d.title || d.name || 'Liste', caption: d.caption || '', html: () => listTableHtml(data, d, rows, cols, all), count: rows.length});
+            more = `<p class="h-cw-more"><small class="muted">${fmt(n)} sur ${fmt(rows.length)}${data.truncated ? '+' : ''}</small> <button type="button" class="link-button" data-cw-all="${key}">Tout voir (${fmt(rows.length)})</button></p>`;
+        }
+        return listTableHtml(data, d, rows.slice(0, n), cols, all) + more;
     }
+    // Clic sur « Tout voir » ou sur un média d'une liste (tableau de bord et aperçu)
+    document.addEventListener('click', event => {
+        const media = event.target.closest?.('[data-cw-media]');
+        if (media) { const v = fullViews.get(media.dataset.cwMedia); if (v?.media) A().openLightbox([v.media], 0, true); return; }
+        const b = event.target.closest?.('[data-cw-all]');
+        if (!b) return;
+        const v = fullViews.get(b.dataset.cwAll); if (!v) return;
+        document.getElementById('h-cw-all-dialog')?.remove();
+        const dlg = document.createElement('dialog');
+        dlg.className = 'modal h-cw-all-dialog'; dlg.id = 'h-cw-all-dialog';
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">WIDGET</span><h2>${esc(v.title)} <small class="muted">(${fmt(v.count)})</small></h2>${v.caption ? `<p class="muted">${nl(v.caption)}</p>` : ''}</div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div><div class="h-cw-all-body">${v.html()}</div>`;
+        document.body.appendChild(dlg);
+        dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+        dlg.addEventListener('close', () => dlg.remove());
+        A().bindTableLinks?.();
+        dlg.showModal();
+    });
     const LINK_ICONS = {module: '➜', list: '📋', maint: '🛠️', url: '↗', person: '👤'};
     function linksHtml(d) {
         const links = (d.links || []).filter(l => l.label || l.target);
@@ -168,14 +238,15 @@
         return '';
     }
     const PART_KINDS = ['numbers', 'list', 'chart', 'text', 'links'];
+    const captionHtml = d => d.caption ? `<p class="h-cw-caption">${nl(d.caption)}</p>` : '';
     function partsHtml(d, datas) {
         if (d.kind === 'app') return '';
-        return (d.parts || []).map((p, i) => `<section class="h-cw-part">${p.title ? `<h4>${esc(p.title)}</h4>` : ''}${bodyHtml(p, datas?.parts?.[i] || [])}</section>`).join('');
+        return (d.parts || []).map((p, i) => `<section class="h-cw-part">${p.title ? `<h4>${esc(p.title)}</h4>` : ''}${bodyHtml(p, datas?.parts?.[i] || [])}${captionHtml(p)}</section>`).join('');
     }
     const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : d.kind === 'chart' && datas[0]?.shown ? groupRows(datas[0], d).counted : '';
     function widgetCard(d, index, span, datas) {
         const parts = partsHtml(d, datas);
-        return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', parts ? '' : countOf(d, datas), bodyHtml(d, datas) + parts, span));
+        return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', parts ? '' : countOf(d, datas), bodyHtml(d, datas) + captionHtml(d) + parts, span));
     }
     /** Titre, icône, couleur et texte à soi, posés sur la carte d'un widget (le sien ou un widget de l'app) */
     ext.dressWidget = (d, html) => {
@@ -330,7 +401,10 @@
     }
     const target = () => partIndex >= 0 && editing.parts?.[partIndex] ? editing.parts[partIndex] : editing;
     const srcAt = path => { const [kind, i] = path.split('.'), t = target(); return kind === 'c' ? t.counters[Number(i)].src : t.src; };
-    function kindHtml() {
+    // Légende : une phrase sous la partie pour dire ce qu'elle montre
+    const captionField = d => d.kind === 'app' ? '' : `<label class="h-cw-caption-field">Légende <small>(ce que montre cette partie, affichée dessous)</small><input data-cw-caption value="${esc(d.caption || '')}" maxlength="400" placeholder="Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent"></label>`;
+    function kindHtml() { return kindHtmlInner() + captionField(target()); }
+    function kindHtmlInner() {
         const d = target();
         if (d.kind === 'numbers') return `${(d.counters || []).map((c, i) => `<fieldset class="h-cw-counter"><legend>Chiffre ${i + 1}</legend><label>Libellé<input data-cw-counter="${i}" value="${esc(c.label || '')}" placeholder="Personnes nées en Bretagne"></label>${sourceHtml(c.src = c.src || P(), 'c.' + i)}${d.counters.length > 1 ? `<button type="button" class="link-button" data-cw-counter-del="${i}">retirer ce chiffre</button>` : ''}</fieldset>`).join('')}
             <button type="button" class="button small secondary" data-cw-counter-add>+ Chiffre</button>`;
@@ -343,7 +417,10 @@
                 <label>Nombre de lignes<input type="number" min="1" max="100" data-cw-limit value="${esc(d.limit || 8)}"></label></div>`;
             return `${common}<div class="form-grid"><label>Compter par <select data-cw-group>${cols.map(([k, l]) => `<option value="${esc(k)}" ${(d.group || cols[0]?.[0]) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Regrouper <select data-cw-groupby>${[['value', 'par valeur'], ['year', 'par année'], ['decade', 'par décennie'], ['century', 'par siècle']].map(([v, l]) => `<option value="${v}" ${d.groupBy === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                <label>Dessin <select data-cw-style><option value="bars" ${d.style !== 'pie' ? 'selected' : ''}>barres</option><option value="pie" ${d.style === 'pie' ? 'selected' : ''}>camembert</option></select></label>
+                <label>Dessin <select data-cw-style>${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <label>Couleurs <select data-cw-palette>${[['vive', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (photos anciennes)'], ['accent', 'Une couleur en dégradé']].map(([k, l]) => `<option value="${k}" ${(d.palette || 'vive') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                ${d.palette === 'accent' ? `<label>Couleur du dégradé<input type="color" data-cw-accent value="${esc(color(d.accentColor) || '#0066cc')}"></label>` : ''}
+                <div class="span-2"><span class="section-label">Couleur de chaque valeur</span><div class="h-cw-valcolors" data-cw-valcolors><small class="muted">Les valeurs apparaissent ici après le calcul de l’aperçu.</small></div></div>
                 <label>Valeurs les plus fréquentes<input type="number" min="2" max="60" data-cw-limit value="${esc(d.limit || 10)}"></label>
                 <label class="checkbox-line span-2"><input type="checkbox" data-cw-skipempty ${d.skipEmpty !== false ? 'checked' : ''}> ne pas compter les cases vides</label></div>`;
         }
@@ -386,8 +463,18 @@
             box.innerHTML = '<p class="muted">Calcul…</p>';
             const seq = ++previewSeq;
             const datas = await loadData(root);
-            if (seq === previewSeq && document.body.contains(box)) { box.innerHTML = widgetCard(root, '01', 'span-12', datas); A().bindTableLinks?.(); }
+            if (seq === previewSeq && document.body.contains(box)) { box.innerHTML = widgetCard(root, '01', 'span-12', datas); A().bindTableLinks?.(); fillValueColors(partIndex >= 0 ? datas.parts?.[partIndex] : datas); }
         }, 350); };
+        // couleurs par valeur : une pastille par valeur du graphique en cours
+        function fillValueColors(tdatas) {
+            const holder = ws.querySelector('[data-cw-valcolors]'); if (!holder || d.kind !== 'chart') return;
+            const data = tdatas?.[0]; if (!data?.shown) return;
+            const entries = groupRows(data, d);
+            const line = ['line', 'area'].includes(d.style);
+            holder.innerHTML = line ? `<label class="h-cw-valcolor"><input type="color" data-cw-valcolor="__line" value="${esc(color(d.valueColors?.__line) || PALETTE[0])}"> la courbe</label>`
+                : entries.map(([v], i) => { const c = chartColor(d, v, i); return `<label class="h-cw-valcolor"><input type="color" data-cw-valcolor="${esc(v)}" value="${esc(color(c) || PALETTE[i % PALETTE.length])}"> ${esc(v)}</label>`; }).join('') || '<small class="muted">Aucune valeur.</small>';
+            if (d.valueColors && Object.keys(d.valueColors).length) holder.insertAdjacentHTML('beforeend', '<button type="button" class="link-button" data-cw-valreset>remettre les couleurs de la palette</button>');
+        }
         preview();
         ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; ext.maintenance.widget_editor(++S().workspaceToken); }));
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
@@ -426,7 +513,10 @@
             if (e.target.matches('[data-cw-sortdir]') && d.sort) d.sort.dir = e.target.value;
             if (e.target.matches('[data-cw-group]')) d.group = e.target.value;
             if (e.target.matches('[data-cw-groupby]')) d.groupBy = e.target.value;
-            if (e.target.matches('[data-cw-style]')) d.style = e.target.value;
+            if (e.target.matches('[data-cw-style]')) { d.style = e.target.value; preview(); return; }
+            if (e.target.matches('[data-cw-palette]')) { d.palette = e.target.value; d.valueColors = {}; return again(); }
+            if (e.target.matches('[data-cw-accent]')) { d.accentColor = e.target.value; d.valueColors = {}; }
+            if (e.target.matches('[data-cw-valcolor]')) { d.valueColors = {...(d.valueColors || {}), [e.target.dataset.cwValcolor]: e.target.value}; }
             if (e.target.matches('[data-cw-skipempty]')) d.skipEmpty = e.target.checked;
             if (e.target.matches('[data-cw-base]')) d.base = e.target.value;
             if (e.target.matches('[data-cw-linktarget]')) { const i = Number(e.target.closest('[data-cw-link]').dataset.cwLink); d.links[i].target = e.target.value; return again(); }
@@ -438,6 +528,7 @@
             if (e.target.matches('[data-cw-counter]')) d.counters[Number(e.target.dataset.cwCounter)].label = e.target.value;
             if (e.target.matches('[data-cw-limit]')) d.limit = Number(e.target.value) || 8;
             if (e.target.matches('[data-cw-text]')) d.text = e.target.value;
+            if (e.target.matches('[data-cw-caption]')) d.caption = e.target.value;
             const row = e.target.closest('[data-cw-link]');
             if (row) { const l = d.links[Number(row.dataset.cwLink)]; if (e.target.matches('[data-cw-linklabel]')) l.label = e.target.value; if (e.target.matches('[data-cw-linkurl]')) l.target = 'url:' + e.target.value.trim(); }
             preview();
@@ -445,6 +536,7 @@
         box.addEventListener('click', e => {
             const srcBox = e.target.closest('[data-cw-src]'), rule = e.target.closest('[data-lr-i]');
             if (srcBox && rule && e.target.closest('[data-lr-del]')) { srcAt(srcBox.dataset.cwSrc).definition.rules.splice(Number(rule.dataset.lrI), 1); return again(); }
+            if (e.target.closest('[data-cw-valreset]')) { d.valueColors = {}; return again(); }
             if (e.target.closest('[data-cw-counter-add]')) { d.counters.push({label: '', src: P()}); return again(); }
             const del = e.target.closest('[data-cw-counter-del]'); if (del) { d.counters.splice(Number(del.dataset.cwCounterDel), 1); return again(); }
             if (e.target.closest('[data-cw-linkadd]')) { d.links.push({label: '', target: 'module:personnes'}); return again(); }
@@ -497,7 +589,10 @@
         if (kind === 'numbers') out.counters = (Array.isArray(d.counters) ? d.counters : []).slice(0, 8).map(c => ({label: str(c.label, 80), src: cleanSrc(c.src)}));
         if (kind === 'list' || kind === 'chart') { out.src = cleanSrc(d.src); out.limit = Math.max(1, Math.min(100, Number(d.limit) || 8)); }
         if (kind === 'list') { out.columns = (Array.isArray(d.columns) ? d.columns : []).map(c => str(c, 40)).slice(0, 12); out.sort = d.sort?.col ? {col: str(d.sort.col, 40), dir: d.sort.dir === 'desc' ? 'desc' : 'asc'} : null; }
-        if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', 'year', 'decade', 'century'].includes(d.groupBy) ? d.groupBy : 'value', style: d.style === 'pie' ? 'pie' : 'bars', skipEmpty: d.skipEmpty !== false});
+        if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', 'year', 'decade', 'century'].includes(d.groupBy) ? d.groupBy : 'value', style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
+            palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
+            valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
+        if (kind !== 'app') out.caption = str(d.caption, 400);
         if (kind === 'text') out.text = str(d.text, 5000);
         if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
         return out;

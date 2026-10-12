@@ -27,7 +27,7 @@ const LIST_TABLE_SOURCES = [
         'sql' => "SELECT pl.id, pl.name, pl.county, pl.state, pl.country, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS events,
             (SELECT count(DISTINCT e.person_id) FROM events e WHERE e.place_id=pl.id) AS people, NULL AS person_id FROM places pl WHERE EXISTS (SELECT 1 FROM events e WHERE e.place_id=pl.id) ORDER BY pl.name COLLATE NOCASE"],
     'media' => ['label' => 'Médias', 'columns' => ['title' => 'Titre', 'kind' => 'Sorte', 'date' => 'Date', 'person' => 'Personne', 'reference' => 'Cote', 'labels' => 'Étiquettes'],
-        'sql' => "SELECT m.id, m.title, m.media_type AS kind, m.date_text AS date, m.document_reference AS reference,
+        'sql' => "SELECT m.id, m.title, m.media_type AS kind, m.date_text AS date, m.document_reference AS reference, m.filename, m.thumbnail,
             (SELECT group_concat(l.name, ', ') FROM label_links ll JOIN labels l ON l.id=ll.label_id WHERE ll.entity_type='media' AND ll.entity_id=m.id) AS labels,
             (SELECT ml.entity_id FROM media_links ml WHERE ml.media_id=m.id AND ml.entity_type='person' ORDER BY ml.position LIMIT 1) AS person_id FROM media m ORDER BY m.id DESC"],
     'occupations' => ['label' => 'Métiers', 'columns' => ['occupation' => 'Métier', 'people' => 'Personnes', 'names' => 'Qui'],
@@ -476,7 +476,10 @@ function my_list_table_rows(PDO $pdo, array $list, array $def): array
         foreach (array_keys($src['columns']) as $c) { $cells[$c] = $c === 'person' ? '' : (string) ($r[$c] ?? ''); }
         $p = $people[(int) ($r['person_id'] ?? 0)] ?? null;
         if (array_key_exists('person', $cells)) { $cells['person'] = $p ? trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')) : (string) ($r['holder_text'] ?? ''); }
-        $out[] = ['key' => $key, 'values' => $manual[$key]['values'] ?? [], 'manual' => false, 'people' => $p ? [$p] : [], 'cells' => $cells];
+        $row = ['key' => $key, 'values' => $manual[$key]['values'] ?? [], 'manual' => false, 'people' => $p ? [$p] : [], 'cells' => $cells];
+        // un média : de quoi l'ouvrir dans la visionneuse (widgets, listes)
+        if ($list['source'] === 'media') { $row['media'] = ['id' => (int) $r['id'], 'title' => (string) $r['title'], 'filename' => (string) $r['filename'], 'thumbnail' => (string) ($r['thumbnail'] ?? ''), 'media_type' => (string) $r['kind']]; }
+        $out[] = $row;
     }
     my_list_link_people($pdo, $out, $def);
     $list['definition'] = $def; unset($list['definition_json']);
