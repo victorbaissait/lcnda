@@ -82,7 +82,7 @@
 
     // Les formulaires des blocs appellent « save_… » : on y ajoute les étiquettes choisies (pending_labels).
     const LABELED = {save_voyage: 'voyage', save_placement: 'placement', save_coat_of_arms: 'coat_of_arms', save_poilu: 'poilu', save_field_trip: 'field_trip', save_family_paper: 'family_paper', save_old_map: 'old_map',
-        save_probate_inventory: 'probate_inventory', save_help_request: 'help_request', save_parish: 'parish', save_cited_name: 'cited_name', save_resistance: 'resistance', save_custom_block_entry: 'custom_block_entry', save_village_profile: 'village'};
+        save_probate_inventory: 'probate_inventory', save_help_request: 'help_request', save_parish: 'parish', save_cited_name: 'cited_name', save_resistance: 'resistance', save_custom_block_entry: 'custom_block_entry', save_village_profile: 'village', save_voter_cards: 'voter'};
     let lastForm = null;
     document.addEventListener('submit', event => { lastForm = event.target; }, true);
     function wrapApi() {

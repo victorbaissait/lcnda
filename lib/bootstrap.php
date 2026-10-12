@@ -14,6 +14,7 @@ require_once __DIR__ . '/heritage_tools.php';
 require_once __DIR__ . '/heritage_links.php'; // question en français, langues, liens @, citations détaillées, entraide // dossier Scans, paroisses, noms cités, voyages impossibles, travail à deux, consultation    // départs, enfants placés, armoiries, poilus, circuits, papiers, cartes anciennes…
 require_once __DIR__ . '/heritage_more.php';
 require_once __DIR__ . '/village.php';
+require_once __DIR__ . '/voters.php';         // cartes d'électeur, dates de vote, droit de vote dans le monde
 require_once __DIR__ . '/insee_remote.php';   // décès INSEE : fichiers de data.gouv.fr téléchargés et importés
 require_once __DIR__ . '/htr_setup.php';
 require_once __DIR__ . '/studio.php';         // retouche des photos (l'original est gardé)

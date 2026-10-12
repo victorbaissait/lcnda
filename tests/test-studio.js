@@ -135,7 +135,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°18)', () => assert.equal(out.version, 18)],
+  ['structure à jour (n°19)', () => assert.equal(out.version, 19)],
   ['musée créé tout seul avec une première salle', () => assert.deepEqual(out.museum, ['Musée de la famille', 1, 0])],
   ['œuvres : photo de la base, objet (photo de l’objet), siège et texte au milieu ou au mur', () => assert.deepEqual(out.items, [['photo', 'left', 'media/portrait.jpg'], ['object', 'center', 'media/portrait.jpg'], ['seat', 'center', ''], ['text', 'back', '']])],
   ['réglages filtrés (taille bornée, modèle connu, position)', () => assert.deepEqual(out.settings, [{scale: 1.4, model: 'piano'}, {model: 'bench', px: 0.5, pz: -0.5}])],

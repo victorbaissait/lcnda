@@ -276,7 +276,7 @@
         return `<div class="person-map-stage h-map map-bg-${esc(bg)}"${mapId ? ` id="${mapId}"` : ''} style="aspect-ratio:${width}/${height}" role="img" aria-label="Carte">${tiles}<svg viewBox="0 0 ${width} ${height}">${lines}${marks}</svg></div>`;
     }
     /* ─── Blocs spéciaux de la fiche : cochés fiche par fiche, ou sur toutes les fiches (Apparence) ─── */
-    const FLAG_BLOCKS = [['show_voyage_block', '🚢 Départs / émigration'], ['show_placement_block', '👶 Enfant placé'], ['show_heraldry_block', '🛡️ Noblesse / blason'], ['show_poilu_block', '🎖️ Poilu 14-18'], ['show_resistance_block', '✊ Résistant'], ['show_language_block', '🗣️ Langues']];
+    const FLAG_BLOCKS = [['show_voyage_block', '🚢 Départs / émigration'], ['show_placement_block', '👶 Enfant placé'], ['show_heraldry_block', '🛡️ Noblesse / blason'], ['show_poilu_block', '🎖️ Poilu 14-18'], ['show_resistance_block', '✊ Résistant'], ['show_voter_block', '🗳️ Cartes d’électeur'], ['show_language_block', '🗣️ Langues']];
     function flagSettings() {
         let v = {};
         try { v = JSON.parse(localStorage.getItem('genealogie-heritage-flags') || '{}') || {}; } catch (_) {}

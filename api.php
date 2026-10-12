@@ -286,6 +286,8 @@ try {
         'heights_data' => json_response(heights_data($pdo)),
         'resistance' => json_response(resistance_data($pdo, safe_int($_GET['person_id'] ?? 0))),
         'resistance_overview' => json_response(['people' => resistance_overview($pdo), 'kinds' => RESISTANCE_KINDS]),
+        'voter' => json_response(voter_data($pdo, safe_int($_GET['person_id'] ?? 0))),
+        'voter_overview' => json_response(['people' => voter_overview($pdo), 'elections' => VOTE_ELECTIONS]),
         'custom_blocks_defs' => json_response(['blocks' => custom_blocks_defs($pdo), 'types' => CUSTOM_FIELD_TYPES]),
         'export_custom_block_def' => export_custom_block_def($pdo, safe_int($_GET['id'] ?? 0)),
         'compare_people' => json_response(compare_people($pdo, safe_int($_GET['a'] ?? 0), safe_int($_GET['b'] ?? 0))),
@@ -8941,6 +8943,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'fix_place' => fix_place($pdo,$data),
             'save_resistance' => save_resistance($pdo,$data),
             'clear_resistance' => clear_resistance($pdo,$data),
+            'save_voter_cards' => save_voter_cards($pdo,$data),
+            'clear_voter_cards' => clear_voter_cards($pdo,$data),
             'save_custom_block_def' => save_custom_block_def($pdo,$data),
             'delete_custom_block_def' => delete_custom_block_def($pdo,$data),
             'import_custom_block_def' => import_custom_block_def($pdo,$data),
@@ -8992,7 +8996,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','voter'];
 }
 
 function normalize_label_color(string $color): string
@@ -10838,7 +10842,7 @@ function save_person(PDO $pdo,array $data): array
     $set[]="artist_events_display=?";$values[]=$artistDisplay;
     $set[]="show_military_block=?";$values[]=(isset($data['show_military_block'])&&$data['show_military_block']?1:0);
     // Blocs à afficher sur demande (cases de la fenêtre Identité) : départs, enfant placé, blason, poilu
-    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block','show_resistance_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
+    foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block','show_resistance_block','show_voter_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
     if(!$set)return $before;
     $values[]=$id;$pdo->prepare('UPDATE persons SET '.implode(',',$set).',updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute($values);
     $stmt->execute([$id]);$after=$stmt->fetch();log_change($pdo,'person',$id,'update','Modification de '.full_name($after),$before,$after);

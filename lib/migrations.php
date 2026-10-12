@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 18;
+const SCHEMA_VERSION = 19;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -39,6 +39,7 @@ function migration_steps(): array
         16 => 'schema_v16',
         17 => 'schema_v17',
         18 => 'schema_v18',
+        19 => 'schema_v19',
     ];
 }
 
@@ -1485,4 +1486,47 @@ function schema_v18(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(village_profiles)')->fetchAll(), 'name');
     if (!in_array('population_source', $cols, true)) { $pdo->exec("ALTER TABLE village_profiles ADD COLUMN population_source TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** n°19 : cartes d'électeur (bloc à cocher sur la fiche) et dates où la personne a voté. */
+function schema_v19(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(), 'name');
+    if (!in_array('show_voter_block', $cols, true)) { $pdo->exec('ALTER TABLE persons ADD COLUMN show_voter_block INTEGER NOT NULL DEFAULT 0'); }
+    $pdo->exec("CREATE TABLE IF NOT EXISTS voter_cards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        commune TEXT NOT NULL DEFAULT '',
+        lat REAL, lon REAL,
+        country TEXT NOT NULL DEFAULT '',
+        issued TEXT NOT NULL DEFAULT '',
+        valid_from TEXT NOT NULL DEFAULT '',
+        valid_to TEXT NOT NULL DEFAULT '',
+        card_number TEXT NOT NULL DEFAULT '',
+        list_number TEXT NOT NULL DEFAULT '',
+        bureau TEXT NOT NULL DEFAULT '',
+        bureau_address TEXT NOT NULL DEFAULT '',
+        address TEXT NOT NULL DEFAULT '',
+        written_name TEXT NOT NULL DEFAULT '',
+        written_birth TEXT NOT NULL DEFAULT '',
+        occupation TEXT NOT NULL DEFAULT '',
+        reason TEXT NOT NULL DEFAULT '',
+        source TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_voter_cards_person ON voter_cards(person_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS voter_votes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        person_id INTEGER NOT NULL REFERENCES persons(id) ON DELETE CASCADE,
+        date_text TEXT NOT NULL DEFAULT '',
+        year INTEGER,
+        election TEXT NOT NULL DEFAULT '',
+        round INTEGER NOT NULL DEFAULT 0,
+        place_text TEXT NOT NULL DEFAULT '',
+        stamp TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_voter_votes_person ON voter_votes(person_id)');
 }

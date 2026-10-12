@@ -535,3 +535,30 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-question-saved-list .h-new-badge{width:max-content;align-self:flex-start;justify-self:start}
 #insee-remote-body{padding:.2rem 1.4rem 0}
 #insee-remote-body .page-actions{margin:.4rem 0}
+/* 🗳️ Cartes d'électeur */
+.h-voter-right{background:rgba(47,143,91,.08);border-left:3px solid #2f8f5b;padding:.35rem .6rem;margin:.3rem 0 .6rem}
+.h-voter-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.6rem;margin-bottom:.6rem}
+.h-voter-card{border:1px solid rgba(128,128,128,.35);border-radius:6px;padding:.5rem .7rem;background:linear-gradient(135deg,rgba(0,85,164,.05),rgba(239,65,53,.05))}
+.h-voter-card header{font-weight:600;margin-bottom:.2rem}
+.h-voter-card .data-list{margin:.3rem 0 0}
+.h-voter-row{border:1px solid rgba(128,128,128,.35);border-radius:6px;margin:0 0 .6rem;padding:.4rem .7rem}
+.h-voter-row legend{font-weight:600;padding:0 .3rem}
+.h-voter-votes{display:grid;gap:.3rem}
+.h-voter-vote{display:grid;grid-template-columns:9rem minmax(8rem,1.3fr) 6rem 1fr 1fr 1fr auto;gap:.3rem;align-items:center}
+@media (max-width:760px){.h-voter-vote{grid-template-columns:1fr 1fr}}
+.h-voter-many{border:1px dashed rgba(128,128,128,.5);padding:.5rem;margin:.3rem 0;display:grid;gap:.4rem}
+.h-suffrage{margin-top:1rem}
+.h-suffrage-controls{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin:.4rem 0 .6rem}
+.h-suffrage-controls input[type=range]{width:min(320px,60vw)}
+.h-suffrage-map{width:100%;height:auto;display:block;background:rgba(80,140,200,.08);border-radius:6px}
+.h-suffrage-map path{stroke:#fff;stroke-width:.5;cursor:pointer}
+.h-suffrage-map path:hover,.h-suffrage-map path.is-selected{stroke:#111;stroke-width:1.2}
+.h-suffrage-legend{display:flex;flex-wrap:wrap;gap:.3rem .9rem;margin:.4rem 0;font-size:.9em;align-items:center}
+.h-suffrage-legend i{display:inline-block;width:.9rem;height:.9rem;border-radius:2px;margin-right:.3rem;vertical-align:-2px}
+.h-suffrage-info{border-top:1px dotted rgba(128,128,128,.4);padding-top:.4rem}
+.h-suffrage-info h4{margin:.2rem 0}
+.h-suffrage-list{margin-top:.8rem}
+.h-suffrage-list summary{cursor:pointer}
+.h-suffrage-group td{font-weight:700;background:rgba(128,128,128,.12)}
+.h-suffrage-subs{margin:.2rem 0 .2rem 1rem;padding:0;columns:2;font-size:.92em}
+@media (max-width:760px){.h-suffrage-subs{columns:1}}
