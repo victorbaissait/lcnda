@@ -1380,21 +1380,95 @@
             if (c.type === 'url') return `<span class="h-lv-url"><input type="url" data-lv="${esc(c.key)}" value="${esc(v)}" placeholder="https://…">${/^https?:\/\//i.test(v) ? `<a href="${esc(v)}" target="_blank" rel="noopener noreferrer" title="Ouvrir">↗</a>` : ''}</span>`;
             if (c.type === 'select') return `<select data-lv="${esc(c.key)}"><option value=""></option>${c.options.map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
             return `<input type="${c.type === 'date' ? 'text' : c.type === 'number' ? 'number' : 'text'}" data-lv="${esc(c.key)}" value="${esc(v)}" ${c.type === 'date' ? 'placeholder="date"' : ''}>`; };
+        // ── Apparence : tableau, fiches, groupes, colonnes à glisser, frise, galerie ──
+        const DMODES = [['table', '▦ Tableau'], ['cards', '🗂 Fiches'], ['grouped', '📚 Par groupe'], ['kanban', '🧩 Colonnes à glisser'], ['timeline', '🕰 Frise'], ['gallery', '🖼 Galerie']];
+        const fresh = x => ({mode: 'table', subtitle: [], colors: [], size: 'm', accent: '#0066cc', chart_style: 'bars', title: '', badge: '', group: '', kanban: '', date: '', chart: '', totals: false, ...(x || {})});
+        let disp = fresh(d.display);
+        const colLabel = c => allCols.find(x => x[0] === c)?.[1] || c;
+        const LV_PAL = ['#0066cc', '#cc4700', '#00a37a', '#7a47db', '#cc0014', '#a07a00', '#008fa3', '#c2408f', '#5b6b7a', '#6b8e23', '#e08a00', '#3949ab'];
+        const rowColor = (r, D) => { for (const k of D.colors || []) { const v = text(r, k.col).trim().toLowerCase(), w = String(k.value || '').trim().toLowerCase();
+            if (k.op === 'eq' ? v === w : k.op === 'contains' ? (w && v.includes(w)) : k.op === 'empty' ? !v : !!v) return k.color; } return ''; };
+        const roCell = (r, c) => { const own = custom.find(x => x.key === c); if (!own) return cell(r, c); if (own.type === 'person') { const p = r.linked?.[c]; return p ? personLink(p.id, pname(p)) : ''; } return esc(text(r, c)); };
+        const removeBtn = r => `<button type="button" class="icon-button" data-lv-remove title="${isFree ? 'Supprimer la ligne' : 'Retirer de la liste (la fiche n’est pas touchée)'}">✕</button>${r.manual && !isFree ? ' <small class="muted" title="ajoutée à la main">✋</small>' : ''}`;
+        const colorAttr = (r, D) => { const c = rowColor(r, D); return c ? ` style="--lv-row:${esc(c)}" data-lv-colored` : ''; };
+        const tableHtml = (rows, D) => `<div class="h-lv-scroll"><table class="data-table h-lv-table"><thead><tr>${cols.map(c => th(c, data.columns[c] || c, false)).join('')}${custom.map(c => th(c.key, c.label, true)).join('')}<th></th></tr></thead><tbody>${rows.map(r => `<tr data-lv-key="${esc(r.key)}"${colorAttr(r, D)}>${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}${custom.map(c => `<td class="h-lv-own">${customCell(r, c)}</td>`).join('')}<td>${removeBtn(r)}</td></tr>`).join('')}</tbody></table></div>`;
+        const img = r => r.media?.media_type === 'image' && (r.media.thumbnail || r.media.filename) ? `<img src="media/${encodeURIComponent(r.media.thumbnail || r.media.filename)}" alt="" loading="lazy">` : '';
+        const cardHtml = (r, D, {drag = false, big = false} = {}) => {
+            const tc = D.title || allCols[0]?.[0] || '';
+            const subs = (D.subtitle?.length ? D.subtitle : allCols.slice(1, 4).map(x => x[0])).filter(c => c !== tc && c !== D.badge && !(D.mode === 'kanban' && c === D.kanban));
+            const own = custom.filter(c => !subs.includes(c.key) && (isFree || c.key !== tc) && c.key !== D.badge && !(D.mode === 'kanban' && c.key === D.kanban));
+            const badge = D.badge ? text(r, D.badge).trim() : '';
+            const pic = img(r) || (big ? `<span class="h-lv-letter">${esc((text(r, tc).trim()[0] || '·').toUpperCase())}</span>` : '');
+            return `<article class="h-lv-card${big ? ' is-big' : ''}" data-lv-key="${esc(r.key)}"${drag ? ' draggable="true"' : ''}${colorAttr(r, D)}>
+                ${pic ? `<button type="button" class="h-lv-card-img" ${r.media ? 'data-lv-media title="Voir le média"' : 'tabindex="-1"'}>${pic}</button>` : ''}
+                <div class="h-lv-card-head"><strong>${(tc && roCell(r, tc)) || '<span class="muted">(sans titre)</span>'}</strong>${badge ? `<span class="h-lv-badge">${esc(badge)}</span>` : ''}</div>
+                ${subs.map(c => { const o = custom.find(x => x.key === c); const v = o ? customCell(r, o) : cell(r, c); return o || text(r, c).trim() ? `<div class="h-lv-card-row"><span>${esc(colLabel(c))}</span> ${v}</div>` : ''; }).join('')}
+                ${own.length ? `<div class="h-lv-card-own">${own.map(c => `<label><span>${esc(c.label)}</span> ${customCell(r, c)}</label>`).join('')}</div>` : ''}
+                <div class="h-lv-card-foot">${removeBtn(r)}</div></article>`;
+        };
+        const sortVals = arr => arr.sort((a, b) => a === '' ? 1 : b === '' ? -1 : a.localeCompare(b, 'fr', {numeric: true, sensitivity: 'base'}));
+        const groupBy = (rows, f) => { const m = new Map(); rows.forEach(r => { const k = f(r); if (!m.has(k)) m.set(k, []); m.get(k).push(r); }); return m; };
+        const hint = t => `<p class="muted h-lv-hint">${t} <button type="button" class="link-button" data-lv-look>🎨 Apparence</button></p>`;
+        const kanbanHtml = (rows, D) => {
+            const kc = D.kanban; if (!kc) return hint('Choisis la colonne qui fait les colonnes du tableau (le mieux : une de tes colonnes « Menu déroulant » ou « Case à cocher », pour pouvoir glisser les fiches de l’une à l’autre).') + cardsHtml(rows, D);
+            const own = custom.find(x => x.key === kc), drag = !!own && ['select', 'checkbox', 'text'].includes(own.type);
+            const laneOf = r => own ? String(r.values?.[kc] ?? '') : text(r, kc).trim();
+            const m = groupBy(rows, laneOf);
+            const lanes = own?.type === 'select' ? ['', ...own.options] : own?.type === 'checkbox' ? ['', '1'] : [];
+            sortVals([...m.keys()]).forEach(k => { if (!lanes.includes(k)) lanes.push(k); });
+            const lab = v => own?.type === 'checkbox' ? (v === '1' ? '✔ ' + own.label : '✗ pas encore') : (v || '(vide)');
+            return `${drag ? '' : hint('Pour pouvoir glisser les fiches, choisis une de tes colonnes à remplir.')}<div class="h-lv-kanban">${lanes.map((v, i) => { const list = m.get(v) || [];
+                const c = (D.colors || []).find(k => k.col === kc && k.op === 'eq' && String(k.value).trim().toLowerCase() === v.toLowerCase())?.color || LV_PAL[i % LV_PAL.length];
+                return `<section class="h-lv-lane" data-lv-lane="${esc(v)}" style="--lv-lane:${esc(c)}"><header>${esc(lab(v))} <small>${fmt(list.length)}</small></header><div class="h-lv-lane-body">${list.map(r => cardHtml(r, D, {drag})).join('') || '<p class="muted h-lv-drop">Glisse une fiche ici</p>'}</div></section>`; }).join('')}</div>`;
+        };
+        const cardsHtml = (rows, D) => `<div class="h-lv-cards">${rows.map(r => cardHtml(r, D)).join('')}</div>`;
+        const groupedHtml = (rows, D) => { const g = D.group || allCols[0]?.[0]; const m = groupBy(rows, r => text(r, g).trim());
+            return (D.group ? '' : hint('Les lignes sont regroupées selon la première colonne ; tu peux en choisir une autre.')) + sortVals([...m.keys()]).map(k => `<details class="h-lv-group" open><summary><b>${esc(k || '(vide)')}</b> <small class="muted">${plural(m.get(k).length, unit[0], unit[1])}</small></summary>${tableHtml(m.get(k), D)}</details>`).join(''); };
+        const dateCol = D => { if (D.date) return D.date; const has = c => data.rows.some(r => yearOf(text(r, c)) !== null);
+            const pref = allCols.filter(([c, l]) => custom.find(x => x.key === c)?.type === 'date' || /date|année|annee|an\b|naiss|décès|deces|mariage|baptême|year/i.test(l)).map(x => x[0]);
+            return pref.find(has) || allCols.map(x => x[0]).find(has) || ''; };
+        const timelineHtml = (rows, D) => { const dc = dateCol(D); if (!dc) return hint('Aucune colonne ne contient de date : choisis la colonne des dates.') + cardsHtml(rows, D);
+            const m = groupBy(rows, r => yearOf(text(r, dc)) ?? ''); const years = [...m.keys()].filter(y => y !== '').sort((a, b) => a - b);
+            return `<ol class="h-lv-timeline">${years.map(y => `<li><span class="h-lv-year">${y}</span><div class="h-lv-tl-items">${m.get(y).map(r => cardHtml(r, D)).join('')}</div></li>`).join('')}${m.has('') ? `<li class="is-nodate"><span class="h-lv-year">Sans date</span><div class="h-lv-tl-items">${m.get('').map(r => cardHtml(r, D)).join('')}</div></li>` : ''}</ol>`; };
+        const galleryHtml = (rows, D) => `<div class="h-lv-gallery">${rows.map(r => cardHtml(r, D, {big: true})).join('')}</div>`;
+        const chartHtml = (rows, D) => { if (!D.chart) return '';
+            const m = new Map(); rows.forEach(r => { const v = text(r, D.chart).trim() || '(vide)'; m.set(v, (m.get(v) || 0) + 1); });
+            let items = [...m.entries()].sort((a, b) => b[1] - a[1]); if (items.length > 12) { const rest = items.slice(11).reduce((t, x) => t + x[1], 0); items = [...items.slice(0, 11), ['autres', rest]]; }
+            const total = rows.length || 1, max = Math.max(1, ...items.map(x => x[1]));
+            const colOf = (v, i) => (D.colors || []).find(k => k.col === D.chart && k.op === 'eq' && String(k.value).trim().toLowerCase() === v.toLowerCase())?.color || LV_PAL[i % LV_PAL.length];
+            const legend = items.map(([v, n], i) => `<li><i style="background:${esc(colOf(v, i))}"></i>${esc(v)} <b>${fmt(n)}</b> <small class="muted">${Math.round(n / total * 100)} %</small></li>`).join('');
+            if (D.chart_style === 'pie') { let acc = 0; const stops = items.map(([v, n], i) => { const a = acc; acc += n / total * 360; return `${colOf(v, i)} ${a}deg ${acc}deg`; }).join(',');
+                return `<figure class="h-lv-chart is-pie"><figcaption>${esc(colLabel(D.chart))}</figcaption><div class="h-lv-pie" style="background:conic-gradient(${esc(stops)})"></div><ul class="h-lv-legend">${legend}</ul></figure>`; }
+            return `<figure class="h-lv-chart"><figcaption>${esc(colLabel(D.chart))}</figcaption>${items.map(([v, n], i) => `<div class="h-lv-bar"><span>${esc(v)}</span><b style="width:${Math.max(2, n / max * 100)}%;background:${esc(colOf(v, i))}"></b><em>${fmt(n)}</em></div>`).join('')}</figure>`; };
+        const numOf = v => { const t = String(v).replace(/\s| /g, '').replace(',', '.'); return t !== '' && /^-?\d+(\.\d+)?$/.test(t) ? Number(t) : null; };
+        const totalsHtml = (rows, D) => { if (!D.totals) return '';
+            const sums = allCols.map(([c, l]) => { const vals = rows.map(r => text(r, c).trim()).filter(Boolean); if (!vals.length || vals.some(v => numOf(v) === null) || /date|année|year/i.test(l) || (yearOf(vals[0]) !== null && !custom.find(x => x.key === c && x.type === 'number'))) return null; return [l, vals.reduce((t, v) => t + numOf(v), 0)]; }).filter(Boolean);
+            const checks = custom.filter(c => c.type === 'checkbox').map(c => [c.label, rows.filter(r => r.values?.[c.key] === '1').length]);
+            return `<div class="h-lv-totals"><span><b>${fmt(rows.length)}</b> ${rows.length > 1 ? unit[1] : unit[0]}</span>${sums.map(([l, t]) => `<span>Total ${esc(l)} : <b>${fmt(Math.round(t * 100) / 100)}</b></span>`).join('')}${checks.map(([l, n]) => `<span>${esc(l)} : <b>${fmt(n)}</b> / ${fmt(rows.length)}</span>`).join('')}</div>`; };
+        const bodyHtml = D => {
+            if (!data.rows.length && !isFree) return empty('Aucune ligne ne répond à ces critères.');
+            const view = {cards: cardsHtml, grouped: groupedHtml, kanban: kanbanHtml, timeline: timelineHtml, gallery: galleryHtml}[D.mode] || tableHtml;
+            return `${totalsHtml(shown, D)}${chartHtml(shown, D)}${!shown.length && D.mode !== 'table' ? empty('Aucune ligne ne répond à ces critères.') : view(shown, D)}`;
+        };
+        const bodyAttrs = D => `class="h-lv-body h-lv-size-${esc(D.size || 'm')}" data-lv-body style="--lv-accent:${esc(D.accent || '#0066cc')}"`;
+        const modesBar = D => `<div class="h-lv-modes"><span class="h-lv-modes-tabs">${DMODES.map(([m, l]) => `<button type="button" class="${D.mode === m ? 'is-on' : ''}" data-lv-mode="${m}">${l}</button>`).join('')}</span>
+            ${D.mode !== 'table' && allCols.length ? `<label class="h-lv-mini">Trier <select data-lv-sortsel><option value="">—</option>${allCols.map(([c, l]) => `<option value="${esc(c)}" ${sort?.col === c ? 'selected' : ''}>${esc(l)}${sort?.col === c ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ''}</option>`).join('')}</select></label><label class="h-lv-mini">Filtrer <select data-lv-filtersel><option value="">choisir…</option>${allCols.map(([c, l]) => `<option value="${esc(c)}">${esc(l)}</option>`).join('')}</select></label>` : ''}
+            <button type="button" class="button small secondary" data-lv-look>🎨 Apparence</button></div>`;
         A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header('MES LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(shown.length, unit[0], unit[1])}</strong>${shown.length !== data.rows.length ? ` affichée(s) sur ${fmt(data.rows.length)}` : ''}${data.truncated ? ' (liste coupée : les premières seulement)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
                 `${inLists ? '' : '<button type="button" class="button secondary" data-lv-back>← Mes listes</button>'}<button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
             ${isFree ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>+ Ajouter une ligne</button></div>' : ''}
             ${isPersons ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
-            ${filterChips}${!isFree && data.rows.length ? '<p class="muted h-lv-help">Clic sur le nom d’une colonne : trier · <b>▾</b> : ne garder que certaines valeurs (des personnes, des villes, une période…)</p>' : ''}
-            ${data.rows.length || isFree ? `<div class="h-lv-scroll"><table class="data-table h-lv-table"><thead><tr>${cols.map(c => th(c, data.columns[c] || c, false)).join('')}${custom.map(c => th(c.key, c.label, true)).join('')}<th></th></tr></thead><tbody>${shown.map(r => `<tr data-lv-key="${esc(r.key)}">${cols.map(c => `<td>${cell(r, c)}</td>`).join('')}${custom.map(c => `<td class="h-lv-own">${customCell(r, c)}</td>`).join('')}<td><button type="button" class="icon-button" data-lv-remove title="Retirer de la liste (la fiche n’est pas touchée)">✕</button>${r.manual && !isFree ? ' <small class="muted" title="ajoutée à la main">✋</small>' : ''}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune ligne ne répond à ces critères.')}</section>`;
+            ${filterChips}${!isFree && data.rows.length && disp.mode === 'table' ? '<p class="muted h-lv-help">Clic sur le nom d’une colonne : trier · <b>▾</b> : ne garder que certaines valeurs (des personnes, des villes, une période…)</p>' : ''}
+            ${modesBar(disp)}<div ${bodyAttrs(disp)}>${bodyHtml(disp)}</div></section>`;
         A().bindTableLinks?.();
         A().bindCollectionPersonFields(A().$('#workspace'));
         const ws = A().$('#workspace');
         const reload = () => renderListView(++S().workspaceToken, id, inLists);
         const saveFilters = async next => { try { await api('save_my_list_filters', {}, {method: 'POST', body: {id, filters: next}}); reload(); } catch (error) { toast(error.message, 'error'); } };
-        ws.querySelectorAll('[data-lv-sort]').forEach(b => b.addEventListener('click', () => { const c = b.dataset.lvSort; S().hListSort = sort?.col === c ? (sort.dir === 'asc' ? {id, col: c, dir: 'desc'} : null) : {id, col: c, dir: 'asc'}; reload(); }));
+        const toggleSort = c => { S().hListSort = sort?.col === c ? (sort.dir === 'asc' ? {id, col: c, dir: 'desc'} : null) : {id, col: c, dir: 'asc'}; reload(); };
         ws.querySelectorAll('[data-lv-unfilter]').forEach(b => b.addEventListener('click', () => { const c = b.dataset.lvUnfilter; const next = c === '*' ? {} : {...filters}; delete next[c]; saveFilters(next); }));
-        ws.querySelectorAll('[data-lv-filter]').forEach(b => b.addEventListener('click', () => {
-            const c = b.dataset.lvFilter, label = allCols.find(x => x[0] === c)?.[1] || c, f = filters[c] || {};
+        const openFilter = c => {
+            const label = allCols.find(x => x[0] === c)?.[1] || c, f = filters[c] || {};
             // Toutes les valeurs de la colonne, avec leur nombre
             const counts = new Map(); data.rows.forEach(r => { const v = text(r, c).trim(); counts.set(v, (counts.get(v) || 0) + 1); });
             const values = [...counts.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr', {numeric: true, sensitivity: 'base'}));
@@ -1423,7 +1497,7 @@
                     await saveFilters(next);
                 },
             });
-        }));
+        };
         ws.querySelector('[data-lv-back]')?.addEventListener('click', () => { S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
         ws.querySelector('[data-lv-edit]').addEventListener('click', goEdit);
         ws.querySelector('[data-lv-del]').addEventListener('click', async () => {
@@ -1439,30 +1513,104 @@
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
         });
         ws.querySelector('[data-lv-newrow]')?.addEventListener('click', async () => {
-            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: 'f:new'}}); await reload(); const last = [...A().$$('.h-lv-table tbody tr')].pop(); last?.querySelector('input,select')?.focus(); }
+            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: 'f:new'}}); await reload(); const last = [...ws.querySelectorAll('[data-lv-body] [data-lv-key]')].pop(); last?.querySelector('input,select')?.focus(); }
             catch (error) { toast(error.message, 'error'); }
         });
-        ws.querySelectorAll('[data-lv-person]').forEach(b => b.addEventListener('click', () => {
+        const pickPerson = b => {
             const key = b.closest('[data-lv-key]').dataset.lvKey, field = b.dataset.lvPerson;
             dialog({eyebrow: 'MES LISTES', title: 'Relier à une fiche', submitLabel: 'Relier',
                 body: `<label class="h-block-label">Personne${A().collectionPersonField('lv_pick', null, 'Tape un nom…')}</label><p class="muted">Laisse vide puis « Relier » pour enlever le lien.</p>`,
                 onSubmit: async form => { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: key, field, value: form.querySelector('[name=lv_pick]').value}}); reload(); }});
-        }));
+        };
         ws.querySelector('[data-lv-addbtn]')?.addEventListener('click', async () => {
             const pid = Number(ws.querySelector('[name=lv_add]').value);
             if (!pid) return toast('Choisis une personne dans les suggestions.', 'error');
             await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: 'p:' + pid, included: 1}}); toast('Ajoutée à la liste.'); reload();
         });
-        ws.querySelector('.h-lv-table')?.addEventListener('change', async e => {
-            const tr = e.target.closest('[data-lv-key]'), f = e.target.dataset.lv; if (!tr || !f) return;
-            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: tr.dataset.lvKey, field: f, value: e.target.type === 'checkbox' ? (e.target.checked ? '1' : '') : e.target.value}}); }
+        const body = ws.querySelector('[data-lv-body]');
+        const rowOf = key => data.rows.find(r => r.key === key);
+        const paint = D => { body.className = `h-lv-body h-lv-size-${D.size || 'm'}`; body.style.setProperty('--lv-accent', D.accent || '#0066cc'); body.innerHTML = bodyHtml(D);
+            ws.querySelectorAll('[data-lv-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.lvMode === D.mode)); A().bindTableLinks?.(); A().bindCollectionPersonFields(body); };
+        const saveDisplay = async D => { const r = await api('save_my_list_display', {}, {method: 'POST', body: {id, display: D}}); disp = fresh(r.result?.display || r.display || D); d.display = disp; return disp; };
+        ws.querySelectorAll('[data-lv-mode]').forEach(b => b.addEventListener('click', async () => {
+            const changed = (disp.mode === 'table') !== (b.dataset.lvMode === 'table'); disp = {...disp, mode: b.dataset.lvMode};
+            try { await saveDisplay(disp); } catch (error) { toast(error.message, 'error'); }
+            if (changed) reload(); else paint(disp);
+        }));
+        ws.querySelector('[data-lv-sortsel]')?.addEventListener('change', e => { const c = e.target.value; S().hListSort = c ? {id, col: c, dir: sort?.col === c && sort.dir === 'asc' ? 'desc' : 'asc'} : null; reload(); });
+        ws.querySelector('[data-lv-filtersel]')?.addEventListener('change', e => { if (e.target.value) openFilter(e.target.value); e.target.value = ''; });
+        ws.querySelector('.h-mylist').addEventListener('click', e => { if (e.target.closest('[data-lv-look]')) openLook(); });
+        body.addEventListener('change', async e => {
+            const el = e.target.closest('[data-lv-key]'), f = e.target.dataset.lv; if (!el || !f) return;
+            const value = e.target.type === 'checkbox' ? (e.target.checked ? '1' : '') : e.target.value;
+            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: el.dataset.lvKey, field: f, value}}); const r = rowOf(el.dataset.lvKey); if (r) r.values = {...(r.values || {}), [f]: value};
+                if (disp.mode !== 'table' && [disp.kanban, disp.group, disp.badge, disp.chart, ...(disp.colors || []).map(k => k.col)].includes(f)) paint(disp); }
             catch (error) { toast(error.message, 'error'); }
         });
-        ws.querySelector('.h-lv-table')?.addEventListener('click', async e => {
-            const b = e.target.closest('[data-lv-remove]'); if (!b) return;
-            const tr = b.closest('[data-lv-key]');
+        body.addEventListener('click', async e => {
+            const t = e.target;
+            if (t.closest('[data-lv-sort]')) return toggleSort(t.closest('[data-lv-sort]').dataset.lvSort);
+            if (t.closest('[data-lv-filter]')) return openFilter(t.closest('[data-lv-filter]').dataset.lvFilter);
+            if (t.closest('[data-lv-person]')) return pickPerson(t.closest('[data-lv-person]'));
+            if (t.closest('[data-lv-media]')) { const r = rowOf(t.closest('[data-lv-key]')?.dataset.lvKey); if (r?.media) A().openLightbox([r.media], 0, true); return; }
+            const b = t.closest('[data-lv-remove]'); if (!b) return;
+            const el = b.closest('[data-lv-key]');
             if (isFree && !confirm('Supprimer cette ligne ?')) return;
-            await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: tr.dataset.lvKey, included: -1}}); tr.remove(); toast(isFree ? 'Ligne supprimée.' : 'Retirée de la liste.');
+            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: el.dataset.lvKey, included: -1}}); }
+            catch (error) { return toast(error.message, 'error'); }
+            data.rows = data.rows.filter(r => r.key !== el.dataset.lvKey); shown = shown.filter(r => r.key !== el.dataset.lvKey); el.remove(); toast(isFree ? 'Ligne supprimée.' : 'Retirée de la liste.');
         });
+        // Glisser une fiche d'une colonne à l'autre (mode « Colonnes à glisser »)
+        let dragKey = '';
+        body.addEventListener('dragstart', e => { const c = e.target.closest?.('.h-lv-card[draggable]'); if (!c) return; dragKey = c.dataset.lvKey; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', dragKey); c.classList.add('is-dragging'); });
+        body.addEventListener('dragend', () => { dragKey = ''; body.querySelectorAll('.is-dragging,.is-over').forEach(x => x.classList.remove('is-dragging', 'is-over')); });
+        body.addEventListener('dragover', e => { const lane = e.target.closest('[data-lv-lane]'); if (!lane || !dragKey) return; e.preventDefault(); body.querySelectorAll('.is-over').forEach(x => x !== lane && x.classList.remove('is-over')); lane.classList.add('is-over'); });
+        body.addEventListener('drop', async e => {
+            const lane = e.target.closest('[data-lv-lane]'); if (!lane || !dragKey) return; e.preventDefault();
+            const r = rowOf(dragKey), kc = disp.kanban, value = lane.dataset.lvLane; dragKey = '';
+            if (!r || String(r.values?.[kc] ?? '') === value) return paint(disp);
+            try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: r.key, field: kc, value}}); r.values = {...(r.values || {}), [kc]: value}; }
+            catch (error) { toast(error.message, 'error'); }
+            paint(disp);
+        });
+        // 🎨 Apparence : choisir comment la liste s'affiche, avec aperçu en direct derrière la fenêtre
+        function openLook() {
+            const D = fresh(disp), opts = (v, none = '— aucune —') => `<option value="">${none}</option>${allCols.map(([c, l]) => `<option value="${esc(c)}" ${v === c ? 'selected' : ''}>${esc(l)}${custom.find(x => x.key === c) ? ' ✎' : ''}</option>`).join('')}`;
+            const OPS = [['eq', 'est'], ['contains', 'contient'], ['notempty', 'est rempli(e)'], ['empty', 'est vide']];
+            const ruleRow = k => `<div class="h-lv-crule" data-lv-crule><select data-k="col">${opts(k.col, 'colonne…')}</select><select data-k="op">${OPS.map(([v, l]) => `<option value="${v}" ${k.op === v ? 'selected' : ''}>${l}</option>`).join('')}</select><input data-k="value" value="${esc(k.value || '')}" placeholder="valeur"><input type="color" data-k="color" value="${esc(k.color || '#ffcc00')}"><button type="button" class="icon-button danger" data-lv-crule-del title="Enlever">🗑</button></div>`;
+            let saved = false;
+            dialog({eyebrow: 'MES LISTES', title: '🎨 Apparence de la liste', submitLabel: 'Enregistrer', wide: true,
+                body: `<p class="muted">Tout se voit tout de suite derrière cette fenêtre. ✎ = une de tes colonnes à remplir.</p>
+                    <div class="h-lv-look">
+                    <fieldset><legend>Affichage</legend><div class="h-lv-look-modes">${DMODES.map(([m, l]) => `<label class="checkbox-line"><input type="radio" name="mode" value="${m}" ${D.mode === m ? 'checked' : ''}> ${l}</label>`).join('')}</div>
+                        <label>Taille des fiches <select name="size">${[['s', 'petites'], ['m', 'moyennes'], ['l', 'grandes']].map(([v, l]) => `<option value="${v}" ${D.size === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                        <label>Couleur principale <input type="color" name="accent" value="${esc(D.accent)}"></label></fieldset>
+                    <fieldset><legend>Fiches</legend><label>Titre de la fiche <select name="title">${opts(D.title, '— première colonne —')}</select></label>
+                        <label>Pastille (en haut à droite) <select name="badge">${opts(D.badge)}</select></label>
+                        <div><span class="section-label">Lignes sous le titre</span><div class="h-lv-look-subs">${allCols.map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" name="subtitle" value="${esc(c)}" ${D.subtitle.includes(c) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div><small class="muted">Rien de coché : les 3 colonnes après le titre.</small></div></fieldset>
+                    <fieldset><legend>Ranger</legend><label>📚 Grouper par <select name="group">${opts(D.group, '— première colonne —')}</select></label>
+                        <label>🧩 Colonnes à glisser selon <select name="kanban">${opts(D.kanban)}</select><small class="muted">Choisis un « Menu déroulant » ✎ : chaque choix devient une colonne, et on y glisse les fiches.</small></label>
+                        <label>🕰 Date de la frise <select name="date">${opts(D.date, '— trouvée toute seule —')}</select></label></fieldset>
+                    <fieldset><legend>Résumé en haut</legend><label>Graphique de <select name="chart">${opts(D.chart, '— pas de graphique —')}</select></label>
+                        <div class="h-tabs"><label class="checkbox-line"><input type="radio" name="chart_style" value="bars" ${D.chart_style !== 'pie' ? 'checked' : ''}> barres</label><label class="checkbox-line"><input type="radio" name="chart_style" value="pie" ${D.chart_style === 'pie' ? 'checked' : ''}> camembert</label></div>
+                        <label class="checkbox-line"><input type="checkbox" name="totals" ${D.totals ? 'checked' : ''}> Totaux (nombre de lignes, sommes des nombres, cases cochées)</label></fieldset>
+                    <fieldset class="h-lv-look-wide"><legend>Couleurs selon une valeur</legend><p class="muted">Ex. : « Statut » est « à faire » → orange. La première règle qui marche donne la couleur de la ligne ou de la fiche, du graphique et des colonnes.</p>
+                        <div data-lv-crules>${D.colors.map(ruleRow).join('')}</div><button type="button" class="button small secondary" data-lv-crule-add>+ Règle de couleur</button></fieldset></div>`,
+                onOpen: dl => {
+                    const form = dl.querySelector('form');
+                    const read = () => fresh({mode: form.mode.value, size: form.size.value, accent: form.accent.value, title: form.title.value, badge: form.badge.value,
+                        subtitle: [...form.querySelectorAll('[name=subtitle]:checked')].map(i => i.value), group: form.group.value, kanban: form.kanban.value, date: form.date.value,
+                        chart: form.chart.value, chart_style: form.chart_style.value, totals: form.totals.checked,
+                        colors: [...form.querySelectorAll('[data-lv-crule]')].map(row => Object.fromEntries([...row.querySelectorAll('[data-k]')].map(el => [el.dataset.k, el.value]))).filter(k => k.col)});
+                    const preview = () => paint(read());
+                    form.addEventListener('input', preview); form.addEventListener('change', preview);
+                    dl.querySelector('[data-lv-crule-add]').addEventListener('click', () => { dl.querySelector('[data-lv-crules]').insertAdjacentHTML('beforeend', ruleRow({op: 'eq', color: ['#ffb000', '#e53935', '#43a047', '#8e24aa', '#00acc1'][dl.querySelectorAll('[data-lv-crule]').length % 5]})); });
+                    dl.querySelector('[data-lv-crules]').addEventListener('click', e => { if (e.target.closest('[data-lv-crule-del]')) { e.target.closest('[data-lv-crule]').remove(); preview(); } });
+                    dl.addEventListener('close', () => { if (!saved) paint(disp); });
+                    dl._read = read;
+                },
+                onSubmit: async form => { const was = disp.mode; await saveDisplay(form.closest('dialog')._read()); saved = true; toast('Apparence enregistrée.'); if ((was === 'table') !== (disp.mode === 'table')) reload(); else paint(disp); },
+            });
+        }
     }
 })();

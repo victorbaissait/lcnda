@@ -107,7 +107,40 @@ function my_list_clean_definition(array $d, string $source): array
     }
     return ['match' => ($d['match'] ?? '') === 'any' ? 'any' : 'all', 'rules' => $rules, 'columns' => $columns, 'custom' => $custom, 'filters' => $filters,
         'sort' => in_array($d['sort'] ?? '', ['date', 'name', 'place'], true) ? $d['sort'] : ($source === 'events' ? 'date' : 'name'),
-        'in_lists' => !empty($d['in_lists'])]; // aussi affichée dans l'onglet Listes
+        'in_lists' => !empty($d['in_lists']), // aussi affichée dans l'onglet Listes
+        'display' => my_list_clean_display(is_array($d['display'] ?? null) ? $d['display'] : [], $filterable)];
+}
+
+const LIST_DISPLAY_MODES = ['table', 'cards', 'grouped', 'kanban', 'timeline', 'gallery'];
+/** Apparence d'une liste : tableau, cartes, groupes, tableau Kanban, frise, galerie ; graphique, totaux, couleurs selon une valeur. */
+function my_list_clean_display(array $x, array $cols): array
+{
+    $col = static fn($v) => in_array((string) $v, $cols, true) ? (string) $v : '';
+    $hex = static fn($v) => preg_match('/^#[0-9a-f]{6}$/i', (string) $v) ? (string) $v : '';
+    $rules = [];
+    foreach (array_slice(is_array($x['colors'] ?? null) ? $x['colors'] : [], 0, 20) as $r) {
+        if (!is_array($r) || $col($r['col'] ?? '') === '' || $hex($r['color'] ?? '') === '' || !in_array($r['op'] ?? '', ['eq', 'contains', 'empty', 'notempty'], true)) { continue; }
+        $rules[] = ['col' => (string) $r['col'], 'op' => (string) $r['op'], 'value' => mb_substr(trim((string) ($r['value'] ?? '')), 0, 200), 'color' => (string) $r['color']];
+    }
+    return ['mode' => in_array($x['mode'] ?? '', LIST_DISPLAY_MODES, true) ? $x['mode'] : 'table',
+        'title' => $col($x['title'] ?? ''), 'subtitle' => array_values(array_slice(array_filter(array_map($col, is_array($x['subtitle'] ?? null) ? $x['subtitle'] : [])), 0, 6)),
+        'badge' => $col($x['badge'] ?? ''), 'group' => $col($x['group'] ?? ''), 'kanban' => $col($x['kanban'] ?? ''), 'date' => $col($x['date'] ?? ''),
+        'chart' => $col($x['chart'] ?? ''), 'chart_style' => ($x['chart_style'] ?? '') === 'pie' ? 'pie' : 'bars', 'totals' => !empty($x['totals']),
+        'size' => in_array($x['size'] ?? '', ['s', 'm', 'l'], true) ? $x['size'] : 'm', 'accent' => $hex($x['accent'] ?? '') ?: '#0066cc', 'colors' => $rules];
+}
+
+/** Enregistre seulement l'apparence d'une liste (depuis la liste elle-même). */
+function save_my_list_display(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT source, definition_json FROM custom_lists WHERE id=?'); $s->execute([$id]);
+    $l = $s->fetch();
+    if (!$l) { throw new RuntimeException('Liste introuvable.'); }
+    $def = json_decode((string) $l['definition_json'], true) ?: [];
+    $def['display'] = is_array($data['display'] ?? null) ? $data['display'] : [];
+    $def = my_list_clean_definition($def, (string) $l['source']);
+    $pdo->prepare('UPDATE custom_lists SET definition_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($def, JSON_UNESCAPED_UNICODE), $id]);
+    return ['display' => $def['display']];
 }
 
 function save_my_list(PDO $pdo, array $data): array

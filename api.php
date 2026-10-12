@@ -8957,6 +8957,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_my_list_row' => save_my_list_row($pdo,$data),
             'import_my_list' => import_my_list($pdo,$data),
             'save_my_list_filters' => save_my_list_filters($pdo,$data),
+            'save_my_list_display' => save_my_list_display($pdo,$data),
             'retouch_show_version' => retouch_show_version($pdo,$data),
             'save_museum' => museum_save($pdo,$data),
             'save_museum_room' => museum_save_room($pdo,$data),
