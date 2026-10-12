@@ -274,7 +274,8 @@
                 <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>
                 <div class="h-rt-curve-head"><strong>Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rt-ch ${k === 'rgb' ? 'is-active' : ''}" data-rt-ch="${k}">${l}</button>`).join('')}</span></div>
                 <svg class="h-rt-curve" viewBox="-6 -6 268 268" data-rt-curve><path class="h-rt-hist" d="${histPath}"/><g class="h-rt-grid">${[64, 128, 192].map(v => `<line x1="${v}" y1="0" x2="${v}" y2="256"/><line x1="0" y1="${v}" x2="256" y2="${v}"/>`).join('')}<line x1="0" y1="256" x2="256" y2="0" class="h-rt-diag"/></g><path class="h-rt-line" data-rt-line/><g data-rt-points></g></svg>
-                <p class="muted h-rt-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · double-clic : l’enlever. Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste.</p>
+                <div class="h-rt-curve-tools"><button type="button" class="button small secondary" data-rt-ptdel disabled>Enlever le point</button></div>
+                <p class="muted h-rt-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou la touche ⌫), ou le glisser hors du cadre. Monter la courbe éclaircit, la creuser assombrit, un « S » donne du contraste.</p>
                 <button type="button" class="link-button" data-rt-reset>Tout remettre à zéro</button></div></div>
             <section class="h-rt-versions" data-rt-versions></section>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
@@ -283,14 +284,17 @@
         dlg.addEventListener('close', () => dlg.remove());
         dlg.querySelectorAll('[data-rt-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
         const canvas = dlg.querySelector('[data-rt-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
-        let raf = 0, showBefore = false;
+        let raf = 0, showBefore = false, selPt = -1, outside = -1;
         const draw = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (showBefore) ctx.putImageData(srcData, 0, 0); else ctx.putImageData(rtApply(srcData, out, st), 0, 0); }); };
         const svg = dlg.querySelector('[data-rt-curve]');
         const drawCurve = () => {
             const lut = curveLut(st.curves[channel]);
             dlg.querySelector('[data-rt-line]').setAttribute('d', 'M' + Array.from(lut, (v, x) => `${x},${256 - v}`).join(' L'));
             dlg.querySelector('[data-rt-line]').dataset.ch = channel;
-            dlg.querySelector('[data-rt-points]').innerHTML = st.curves[channel].map(([x, y], i) => `<circle cx="${x}" cy="${256 - y}" r="5.5" data-rt-pt="${i}"/>`).join('');
+            const pts = st.curves[channel];
+            if (selPt >= pts.length) selPt = -1;
+            dlg.querySelector('[data-rt-points]').innerHTML = pts.map(([x, y], i) => `<circle cx="${x}" cy="${256 - y}" r="${i === selPt ? 7 : 5.5}" data-rt-pt="${i}" class="${i === selPt ? 'is-sel' : ''}${i === outside ? ' is-out' : ''}"/>`).join('');
+            const del = dlg.querySelector('[data-rt-ptdel]'); if (del) del.disabled = !(selPt >= 0 && pts.length > 2);
         };
         const syncControls = () => {
             RT_SLIDERS.forEach(([k]) => { dlg.querySelector(`[data-rt="${k}"]`).value = st[k]; dlg.querySelector(`[data-rt-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; });
@@ -299,7 +303,7 @@
         };
         dlg.addEventListener('input', e => { const k = e.target.dataset.rt; if (k) { st[k] = Number(e.target.value); dlg.querySelector(`[data-rt-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); } });
         dlg.addEventListener('change', e => { const k = e.target.dataset.rtT; if (k) { st[k] = e.target.checked; if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); } });
-        dlg.querySelectorAll('[data-rt-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rtCh; dlg.querySelectorAll('[data-rt-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
+        dlg.querySelectorAll('[data-rt-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rtCh; selPt = -1; dlg.querySelectorAll('[data-rt-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
         dlg.querySelectorAll('[data-rt-preset]').forEach(b => b.addEventListener('click', () => { const keep = {bw: false, sepia: false, invert: false}; Object.assign(st, rtDefault(), keep); RT_PRESETS[Number(b.dataset.rtPreset)][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); } syncControls(); }));
         dlg.querySelector('[data-rt-reset]').addEventListener('click', () => { Object.assign(st, rtDefault()); syncControls(); });
         const before = dlg.querySelector('[data-rt-before]');
@@ -307,22 +311,33 @@
         before.addEventListener('pointerdown', () => setBefore(true));
         ['pointerup', 'pointerleave', 'pointercancel'].forEach(t => before.addEventListener(t, () => showBefore && setBefore(false)));
         // Courbe : ajouter, déplacer, enlever des points
-        const svgPoint = e => { const r = svg.getBoundingClientRect(); return [Math.round(clamp255((e.clientX - r.left) / r.width * 268 - 6)), Math.round(clamp255(256 - ((e.clientY - r.top) / r.height * 268 - 6)))]; };
+        const rawPoint = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * 268 - 6, 256 - ((e.clientY - r.top) / r.height * 268 - 6)]; };
+        const svgPoint = e => rawPoint(e).map(v => Math.round(clamp255(v)));
+        const removePoint = i => { const pts = st.curves[channel]; if (i < 0 || pts.length <= 2) return; pts.splice(i, 1); selPt = -1; drawCurve(); draw(); };
         let dragging = -1;
+        svg.setAttribute('tabindex', '0');
         svg.addEventListener('pointerdown', e => {
             const pts = st.curves[channel], hit = e.target.closest('[data-rt-pt]');
             if (hit) dragging = Number(hit.dataset.rtPt);
             else { const [x, y] = svgPoint(e); if (pts.some(p => Math.abs(p[0] - x) < 6)) return; pts.push([x, y]); pts.sort((a, b) => a[0] - b[0]); dragging = pts.findIndex(p => p[0] === x); }
-            svg.setPointerCapture(e.pointerId); drawCurve(); draw();
+            selPt = dragging; outside = -1; svg.focus(); svg.setPointerCapture(e.pointerId); drawCurve(); draw();
         });
         svg.addEventListener('pointermove', e => {
             if (dragging < 0) return;
-            const pts = st.curves[channel], [x, y] = svgPoint(e);
+            const pts = st.curves[channel], [rx, ry] = rawPoint(e), [x, y] = svgPoint(e);
+            // Glissé bien hors du cadre : le point sera enlevé au lâcher (il devient gris)
+            outside = pts.length > 2 && (rx < -30 || rx > 286 || ry < -30 || ry > 286) ? dragging : -1;
             const lo = dragging > 0 ? pts[dragging - 1][0] + 1 : 0, hi = dragging < pts.length - 1 ? pts[dragging + 1][0] - 1 : 255;
-            pts[dragging] = [Math.min(hi, Math.max(lo, x)), y]; drawCurve(); draw();
+            if (outside < 0) pts[dragging] = [Math.min(hi, Math.max(lo, x)), y];
+            drawCurve(); draw();
         });
-        svg.addEventListener('pointerup', () => { dragging = -1; });
-        svg.addEventListener('dblclick', e => { const hit = e.target.closest('[data-rt-pt]'); const pts = st.curves[channel]; if (hit && pts.length > 2) { pts.splice(Number(hit.dataset.rtPt), 1); drawCurve(); draw(); } });
+        const release = () => { if (dragging >= 0 && outside === dragging) { outside = -1; removePoint(dragging); } dragging = -1; outside = -1; drawCurve(); };
+        svg.addEventListener('pointerup', release); svg.addEventListener('pointercancel', release);
+        // ⌫ / Suppr enlève le point choisi (écouté sur toute la page : un clic sur la courbe ne lui donne pas le clavier)
+        const onKey = e => { if (dlg.open && (e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0 && !e.target.closest?.('input, textarea, select, [contenteditable]')) { e.preventDefault(); removePoint(selPt); } };
+        document.addEventListener('keydown', onKey); dlg.addEventListener('close', () => document.removeEventListener('keydown', onKey));
+        svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rt-pt]'); if (hit) { e.preventDefault(); removePoint(Number(hit.dataset.rtPt)); } });
+        dlg.querySelector('[data-rt-ptdel]').addEventListener('click', () => removePoint(selPt));
         // Tout ce qui montrait l'ancien fichier (fiche, liste des médias…) est redessiné
         const refreshAfter = async () => {
             const state = A().state;

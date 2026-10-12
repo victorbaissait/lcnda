@@ -523,3 +523,7 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-me-rooms li.is-active .icon-button:disabled { opacity:.35; }
 .h-me-thumb { position:relative; }
 .h-me-n { position:absolute; left:2px; top:2px; background:#0066cc; color:#fff; font-size:11px; line-height:1; padding:2px 4px; }
+.h-rt-curve circle.is-sel { fill:#0066cc; stroke:#0066cc; }
+.h-rt-curve circle.is-out { fill:#bbb; stroke:#bbb; opacity:.6; }
+.h-rt-curve:focus { outline:2px solid #0066cc; outline-offset:2px; }
+.h-rt-curve-tools { display:flex; gap:6px; }
