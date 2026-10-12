@@ -41,14 +41,19 @@
     /** « Elle a pu voter à partir de 1945 » : d'après le sexe de la personne et le pays de ses cartes. */
     function rightLine(person, cards, world) {
         if (!world) return '';
+        if (!['female', 'male'].includes(person.gender)) return '';
         const names = [...new Set(cards.map(c => countryOf(c.country)).filter(Boolean))];
-        const country = world.suffrage.countries.find(c => c.name.toLowerCase() === (names[0] || 'france')) || world.byId[FRANCE];
+        const country = names.length ? world.suffrage.countries.find(c => c.name.toLowerCase() === names[0]) : world.byId[FRANCE]; // pays inconnu : rien plutôt qu'une date fausse
+        if (!country) return '';
         const female = person.gender === 'female', year = female ? country.women : country.men;
         if (!year) return '';
-        const born = Number(person.birth_year) || 0;
-        const adult = born ? born + 21 : 0;
+        const born = Number(person.birth_year) || 0, died = Number(person.death_year) || 0;
+        // majorité : 21 ans, puis 18 ans à partir de 1974 (France ; la plupart des pays l'ont abaissée vers 1970)
+        const adult = born ? Math.min(born + 21, Math.max(born + 18, 1974)) : 0;
         const from = Math.max(year, adult);
-        return `<p class="h-voter-right">🗳️ Droit de vote des ${female ? 'femmes' : 'hommes'} (${esc(country.name)}) : <strong>${year}</strong>${born ? ` — ${female ? 'elle' : 'il'} a pu voter à partir de ${from}${adult > year ? ' (à ses 21 ans)' : ''}` : ''}.</p>`;
+        const who = female ? 'elle' : 'il';
+        const after = !born ? '' : died && died < from ? ` — ${female ? 'morte' : 'mort'} en ${died}, ${who} n’a pas pu voter à ce titre` : ` — ${who} a pu voter à partir de ${from}${adult > year ? ` (à ses ${adult - born} ans)` : ''}`;
+        return `<p class="h-voter-right">🗳️ Droit de vote des ${female ? 'femmes' : 'hommes'} (${esc(country.name)}) : <strong>${year}</strong>${after}.</p>`;
     }
 
     function cardHtml(c) {
@@ -62,7 +67,7 @@
         const years = votes.map(v => Number(v.year)).filter(Boolean);
         return `<h5>${plural(votes.length, 'vote noté', 'votes notés')}${years.length ? ` (${Math.min(...years)}${Math.max(...years) !== Math.min(...years) ? '–' + Math.max(...years) : ''})` : ''}</h5>
             <div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr><th><button data-sort-column="0">Date</button></th><th><button data-sort-column="1">Élection</button></th><th>Tour</th><th><button data-sort-column="3">Lieu</button></th><th>Tampon, case</th><th>Remarque</th></tr></thead><tbody>
-            ${votes.map(v => `<tr><td data-sort-value="${esc(v.year || 9999)}${esc(v.date_text)}">${esc(v.date_text || '—')}</td><td data-sort-value="${esc(v.election_label || '')}">${esc(v.election_label || elections[v.election] || '—')}</td><td>${Number(v.round) ? `${v.round}${Number(v.round) === 1 ? 'er' : 'e'} tour` : ''}</td><td data-sort-value="${esc(v.place_text || '')}">${esc(v.place_text || '')}</td><td>${esc(v.stamp || '')}</td><td>${esc(v.note || '')}</td></tr>`).join('')}</tbody></table></div>`;
+            ${votes.map(v => `<tr><td data-sort-value="${esc(v.sort_key || v.year || 9999)}">${esc(v.date_text || '—')}</td><td data-sort-value="${esc(v.election_label || '')}">${esc(v.election_label || elections[v.election] || '—')}</td><td>${Number(v.round) ? `${v.round}${Number(v.round) === 1 ? 'er' : 'e'} tour` : ''}</td><td data-sort-value="${esc(v.place_text || '')}">${esc(v.place_text || '')}</td><td>${esc(v.stamp || '')}</td><td>${esc(v.note || '')}</td></tr>`).join('')}</tbody></table></div>`;
     }
     function voterHtml(d, person, world) {
         const media = d.media || [];
@@ -168,29 +173,29 @@
     const PERIODS = [[0, 1899, '#1d3f72', 'avant 1900'], [1900, 1918, '#2b6cb0', '1900–1918'], [1919, 1944, '#4a90c8', '1919–1944'], [1945, 1959, '#7cb7de', '1945–1959'], [1960, 1979, '#f0b45a', '1960–1979'], [1980, 9999, '#d9534f', '1980 et après']];
     const periodColor = y => (PERIODS.find(([a, b]) => y >= a && y <= b) || [])[2] || '';
     const yearOf = (c, who) => who === 'men' ? c.men : c.women;
-    function mapSvg(world, who, atYear) {
+    function mapSvg(world, who, atYear, selected = '') {
         const {map, byId} = world;
         return `<svg class="h-suffrage-map" viewBox="0 0 ${map.width} ${map.height}" role="img" aria-label="Carte du droit de vote">
             ${map.countries.map(c => {
                 const s = byId[c.id], y = s ? (who === 'gap' ? (s.men && s.women ? s.women - s.men : null) : yearOf(s, who)) : null;
                 let fill = '#d8d8d8';
                 if (y !== null && y !== undefined) {
-                    if (who === 'gap') fill = y <= 0 ? '#4a9d5b' : y <= 10 ? '#9ccf8a' : y <= 30 ? '#f0b45a' : y <= 60 ? '#e07b39' : '#c0392b';
+                    if (who === 'gap') fill = y < 0 ? '#3b8ec4' : y === 0 ? '#4a9d5b' : y <= 10 ? '#9ccf8a' : y <= 30 ? '#f0b45a' : y <= 60 ? '#e07b39' : '#c0392b';
                     else if (atYear) fill = y <= atYear ? '#2f8f5b' : '#e3e3e3';
                     else fill = periodColor(y);
                 }
                 const tip = s ? `${s.name} — hommes : ${s.men || '?'} · femmes : ${s.women || '?'}` : `${c.name} — pas de date dans la liste`;
-                return `<path d="${c.d}" fill="${fill}" data-h-suffrage-country="${esc(c.id)}"><title>${esc(tip)}</title></path>`;
+                return `<path d="${c.d}" fill="${fill}" ${selected && c.id === selected ? 'class="is-selected"' : ''} data-h-suffrage-country="${esc(c.id)}"><title>${esc(tip)}</title></path>`;
             }).join('')}</svg>`;
     }
     function legendHtml(who, atYear) {
-        if (who === 'gap') return `<div class="h-suffrage-legend">${[['#4a9d5b', 'en même temps'], ['#9ccf8a', '1 à 10 ans'], ['#f0b45a', '11 à 30 ans'], ['#e07b39', '31 à 60 ans'], ['#c0392b', 'plus de 60 ans'], ['#d8d8d8', 'pas de date']].map(([c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('')}<small class="muted">Années entre le vote des hommes et celui des femmes.</small></div>`;
+        if (who === 'gap') return `<div class="h-suffrage-legend">${[['#3b8ec4', 'les femmes avant'], ['#4a9d5b', 'en même temps'], ['#9ccf8a', '1 à 10 ans'], ['#f0b45a', '11 à 30 ans'], ['#e07b39', '31 à 60 ans'], ['#c0392b', 'plus de 60 ans'], ['#d8d8d8', 'pas de date']].map(([c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('')}<small class="muted">Années entre le vote des hommes et celui des femmes.</small></div>`;
         if (atYear) return `<div class="h-suffrage-legend"><span><i style="background:#2f8f5b"></i>${who === 'men' ? 'les hommes votent' : 'les femmes votent'} en ${atYear}</span><span><i style="background:#e3e3e3"></i>pas encore</span><span><i style="background:#d8d8d8"></i>pas de date</span></div>`;
         return `<div class="h-suffrage-legend">${PERIODS.map(([, , c, l]) => `<span><i style="background:${c}"></i>${l}</span>`).join('')}<span><i style="background:#d8d8d8"></i>pas de date</span></div>`;
     }
     function countryInfo(s) {
         if (!s) return '';
-        return `<div class="h-suffrage-info"><h4>${esc(s.name)} <small class="muted">${esc(s.region)}</small></h4><p>👨 Hommes : <strong>${s.men || '—'}</strong> · 👩 Femmes : <strong>${s.women || '—'}</strong>${s.men && s.women ? ` <small class="muted">(${s.women - s.men > 0 ? `${s.women - s.men} ans d’écart` : 'en même temps'})</small>` : ''}</p>${s.note ? `<p>${esc(s.note)}</p>` : ''}
+        return `<div class="h-suffrage-info"><h4>${esc(s.name)} <small class="muted">${esc(s.region)}</small></h4><p>👨 Hommes : <strong>${s.men || '—'}</strong> · 👩 Femmes : <strong>${s.women || '—'}</strong>${s.men && s.women ? ` <small class="muted">(${s.women - s.men > 0 ? `${s.women - s.men} ans d’écart` : s.women < s.men ? `les femmes ${s.men - s.women} ans avant les hommes` : 'en même temps'})</small>` : ''}</p>${s.note ? `<p>${esc(s.note)}</p>` : ''}
             ${s.subdivisions ? `<details open><summary>${esc(s.subdivisions_label || 'Régions')}</summary><table class="data-table"><tbody>${[...s.subdivisions].sort((a, b) => a.women - b.women || a.name.localeCompare(b.name, 'fr')).map(x => `<tr><td>${esc(x.name)}</td><td>${x.women}</td><td><small>${esc(x.note || '')}</small></td></tr>`).join('')}</tbody></table></details>` : ''}</div>`;
     }
     const SORTS = {name: ['Pays (A → Z)', (a, b) => a.name.localeCompare(b.name, 'fr')], region: ['Région, puis pays', (a, b) => a.region.localeCompare(b.region, 'fr') || a.name.localeCompare(b.name, 'fr')],
@@ -202,7 +207,7 @@
         return `<div class="data-table-wrap"><table class="data-table h-suffrage-table"><thead><tr><th>Pays</th><th>Région</th><th>Hommes</th><th>Femmes</th><th>Écart</th><th>Précisions</th></tr></thead><tbody>${rows.map(c => {
             const group = sort === 'region' && c.region !== lastRegion ? `<tr class="h-suffrage-group"><td colspan="6">${esc(lastRegion = c.region)}</td></tr>` : '';
             const subs = c.subdivisions ? `<details><summary>${esc(c.subdivisions_label || 'Régions')} (${c.subdivisions.length})</summary><ul class="h-suffrage-subs">${[...c.subdivisions].sort((a, b) => sort === 'name' || sort === 'region' ? a.name.localeCompare(b.name, 'fr') : a.women - b.women).map(x => `<li><strong>${x.women}</strong> ${esc(x.name)}${x.note ? ` <small class="muted">— ${esc(x.note)}</small>` : ''}</li>`).join('')}</ul></details>` : '';
-            return `${group}<tr><td><strong>${esc(c.name)}</strong></td><td>${esc(c.region)}</td><td>${c.men || '—'}</td><td>${c.women || '—'}</td><td>${c.men && c.women ? (c.women - c.men > 0 ? `${c.women - c.men} ans` : '=') : ''}</td><td><small>${esc(c.note || '')}</small>${subs}</td></tr>`;
+            return `${group}<tr><td><strong>${esc(c.name)}</strong></td><td>${esc(c.region)}</td><td>${c.men || '—'}</td><td>${c.women || '—'}</td><td>${c.men && c.women ? (c.women - c.men > 0 ? `${c.women - c.men} ans` : c.women < c.men ? `femmes ${c.men - c.women} ans avant` : '=') : ''}</td><td><small>${esc(c.note || '')}</small>${subs}</td></tr>`;
         }).join('')}</tbody></table></div>`;
     }
 
@@ -224,7 +229,7 @@
             ${world ? `<section class="maintenance-panel h-suffrage"><h3>🌍 Le droit de vote dans le monde</h3>
                 <div class="h-suffrage-controls"><div class="segmented">${[['women', '👩 Femmes'], ['men', '👨 Hommes'], ['gap', '↔ Écart']].map(([k, l]) => `<button type="button" data-h-suffrage-who="${k}" class="${st.hSuffrage.who === k ? 'is-active' : ''}">${l}</button>`).join('')}</div>
                     ${st.hSuffrage.who !== 'gap' ? `<label class="checkbox-line"><input type="checkbox" data-h-suffrage-at ${st.hSuffrage.atYear ? 'checked' : ''}> Voir qui pouvait voter en</label><input type="range" min="1840" max="2025" step="1" value="${st.hSuffrage.atYear || 1920}" data-h-suffrage-year ${st.hSuffrage.atYear ? '' : 'disabled'} aria-label="Année"><strong data-h-suffrage-yearlabel>${st.hSuffrage.atYear || ''}</strong>` : ''}</div>
-                <div data-h-suffrage-map>${mapSvg(world, st.hSuffrage.who, st.hSuffrage.atYear)}</div><div data-h-suffrage-legend>${legendHtml(st.hSuffrage.who, st.hSuffrage.atYear)}</div>
+                <div data-h-suffrage-map>${mapSvg(world, st.hSuffrage.who, st.hSuffrage.atYear, st.hSuffrage.open)}</div><div data-h-suffrage-legend>${legendHtml(st.hSuffrage.who, st.hSuffrage.atYear)}</div>
                 <div data-h-suffrage-info>${countryInfo(world.byId[st.hSuffrage.open]) || '<p class="muted">Clique sur un pays pour voir ses dates (et les cantons suisses, les provinces canadiennes…).</p>'}</div>
                 <details class="h-suffrage-list" ${st.hSuffrage.listOpen ? 'open' : ''}><summary><strong>Tous les pays, dans l’ordre que tu veux</strong> <span class="muted">(${world.suffrage.countries.length})</span></summary>
                     <div class="h-suffrage-controls"><label>Trier par <select data-h-suffrage-sort>${Object.entries(SORTS).map(([k, [l]]) => `<option value="${k}" ${st.hSuffrage.sort === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
@@ -235,7 +240,7 @@
         if (!world) return;
         const ws = A().$('#workspace');
         const redrawMap = () => {
-            ws.querySelector('[data-h-suffrage-map]').innerHTML = mapSvg(world, st.hSuffrage.who, st.hSuffrage.atYear);
+            ws.querySelector('[data-h-suffrage-map]').innerHTML = mapSvg(world, st.hSuffrage.who, st.hSuffrage.atYear, st.hSuffrage.open);
             ws.querySelector('[data-h-suffrage-legend]').innerHTML = legendHtml(st.hSuffrage.who, st.hSuffrage.atYear);
         };
         ws.querySelectorAll('[data-h-suffrage-who]').forEach(b => b.addEventListener('click', () => { st.hSuffrage.who = b.dataset.hSuffrageWho; lsSet('lcnda-suffrage-who', st.hSuffrage.who); if (st.hSuffrage.who === 'gap') st.hSuffrage.atYear = 0; ext.lists.voter_cards(++st.workspaceToken); }));

@@ -23,7 +23,8 @@ function voter_data(PDO $pdo, int $personId): array
 {
     $c = $pdo->prepare('SELECT * FROM voter_cards WHERE person_id=? ORDER BY position, id'); $c->execute([$personId]);
     $v = $pdo->prepare("SELECT * FROM voter_votes WHERE person_id=? ORDER BY year IS NULL, year, position, id"); $v->execute([$personId]);
-    $votes = array_map(static fn($r) => $r + ['election_label' => VOTE_ELECTIONS[$r['election']] ?? ($r['election'] ?: 'Vote')], $v->fetchAll());
+    // sort_key : la date complète quand elle se lit (« 29 avril 1928 » → 1928-04-29), pour trier dans l'année
+    $votes = array_map(static fn($r) => $r + ['election_label' => VOTE_ELECTIONS[$r['election']] ?? ($r['election'] ?: 'Vote'), 'sort_key' => (function_exists('exact_date') ? exact_date((string) $r['date_text']) : '') ?: ($r['year'] ? $r['year'] . '-99' : '9999')], $v->fetchAll());
     $media = $media0 = heritage_media($pdo, 'voter', [$personId])[$personId] ?? [];
     // Médias de la fiche déjà notés « Carte d'électeur » (Nature du média), sans doublon
     $seen = array_fill_keys(array_map(static fn($m) => (int) $m['id'], $media0), true);
@@ -37,8 +38,9 @@ function voter_data(PDO $pdo, int $personId): array
 function save_voter_cards(PDO $pdo, array $data): array
 {
     $personId = safe_int($data['person_id'] ?? 0);
-    $chk = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $chk->execute([$personId]);
-    if (!$chk->fetchColumn()) { throw new RuntimeException('Personne introuvable.'); }
+    h_person_exists($pdo, $personId);
+    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
+    $had = (int) $pdo->query('SELECT (SELECT count(*) FROM voter_cards WHERE person_id=' . $personId . ') + (SELECT count(*) FROM voter_votes WHERE person_id=' . $personId . ')')->fetchColumn();
     $pdo->prepare('DELETE FROM voter_cards WHERE person_id=?')->execute([$personId]);
     $pdo->prepare('DELETE FROM voter_votes WHERE person_id=?')->execute([$personId]);
     $insC = $pdo->prepare('INSERT INTO voter_cards(person_id, lat, lon, position, ' . implode(', ', VOTER_CARD_FIELDS) . ') VALUES(?,?,?,?' . str_repeat(',?', count(VOTER_CARD_FIELDS)) . ')');
@@ -47,7 +49,7 @@ function save_voter_cards(PDO $pdo, array $data): array
         if (!is_array($card)) { continue; }
         $vals = array_map(static fn($f) => mb_substr(trim((string) ($card[$f] ?? '')), 0, $f === 'note' ? 4000 : 300), VOTER_CARD_FIELDS);
         if (!array_filter($vals, static fn($x) => $x !== '')) { continue; }
-        $lat = is_numeric($card['lat'] ?? null) ? (float) $card['lat'] : null; $lon = is_numeric($card['lon'] ?? null) ? (float) $card['lon'] : null;
+        [$lat, $lon] = $vals[0] !== '' ? h_place_coords($pdo, $card, 'commune', 'lat', 'lon') : [null, null]; // commune tapée sans choisir de suggestion : cherchée ici
         $insC->execute([$personId, $lat, $lon, $n++, ...$vals]);
     }
     $insV = $pdo->prepare('INSERT INTO voter_votes(person_id, date_text, year, election, round, place_text, stamp, note, position) VALUES(?,?,?,?,?,?,?,?,?)');
@@ -63,7 +65,7 @@ function save_voter_cards(PDO $pdo, array $data): array
         $round = in_array((int) ($vote['round'] ?? 0), [1, 2], true) ? (int) $vote['round'] : 0;
         $insV->execute([$personId, $date, voter_year($date), $election, $round, $place, $stamp, $note, $k++]);
     }
-    if ($n || $k) { $pdo->prepare('UPDATE persons SET show_voter_block=1 WHERE id=?')->execute([$personId]); }
+    if (!$had && ($n || $k)) { $pdo->prepare('UPDATE persons SET show_voter_block=1 WHERE id=?')->execute([$personId]); } // la première fois seulement : décoché ensuite, il le reste
     log_change($pdo, 'person', $personId, 'update', 'Cartes d’électeur : ' . $n . ' carte(s), ' . $k . ' vote(s)');
     return ['cards' => $n, 'votes' => $k];
 }
@@ -71,8 +73,11 @@ function save_voter_cards(PDO $pdo, array $data): array
 function clear_voter_cards(PDO $pdo, array $data): array
 {
     $personId = safe_int($data['person_id'] ?? 0);
+    h_person_exists($pdo, $personId);
+    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
     $pdo->prepare('DELETE FROM voter_cards WHERE person_id=?')->execute([$personId]);
     $pdo->prepare('DELETE FROM voter_votes WHERE person_id=?')->execute([$personId]);
+    $pdo->prepare('UPDATE persons SET show_voter_block=0 WHERE id=?')->execute([$personId]);
     heritage_delete_media_links($pdo, 'voter', $personId);
     log_change($pdo, 'person', $personId, 'update', 'Cartes d’électeur effacées');
     return ['ok' => true];

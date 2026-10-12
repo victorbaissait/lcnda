@@ -9793,6 +9793,14 @@ function merge_people(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE families SET partner2_id=? WHERE partner2_id=?')->execute([$target,$source]);
     $pdo->prepare('UPDATE family_children SET child_id=? WHERE child_id=?')->execute([$target,$source]);
     $pdo->exec('DELETE FROM family_children WHERE rowid NOT IN (SELECT min(rowid) FROM family_children GROUP BY family_id,child_id)');
+    // Cartes d'électeur et votes (supprimés avec la fiche sinon), avec leurs photos et leurs étiquettes
+    if(function_exists('voter_data')){
+        $pdo->prepare('UPDATE voter_cards SET person_id=? WHERE person_id=?')->execute([$target,$source]);
+        $pdo->prepare('UPDATE voter_votes SET person_id=? WHERE person_id=?')->execute([$target,$source]);
+        $pdo->prepare("UPDATE OR IGNORE family_collection_media SET collection_id=? WHERE collection_type='voter' AND collection_id=?")->execute([$target,$source]);
+        $pdo->prepare("UPDATE OR IGNORE label_links SET entity_id=? WHERE entity_type='voter' AND entity_id=?")->execute([$target,$source]);
+        $pdo->prepare('UPDATE persons SET show_voter_block=1 WHERE id=? AND (SELECT show_voter_block FROM persons WHERE id=?)=1')->execute([$target,$source]);
+    }
     $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$source]);
     rebuild_search($pdo,$target);
     log_change($pdo,'person',$target,'merge','Fusion de la fiche #'.$source.' dans #'.$target,['target'=>$a,'source'=>$b],summary_person($pdo,$target));
@@ -11356,7 +11364,7 @@ function save_media(PDO $pdo,array $data): array
     if (!in_array($dateCalendar, ['gregorian', 'julian', 'republican'], true)) $dateCalendar = 'gregorian';
     $documentReference=safe_text($data['document_reference']??$before['document_reference']);$documentTitle=safe_text($data['document_title']??$before['document_title']);$documentUrl=safe_text($data['document_url']??$before['document_url']);$documentPages=safe_text($data['document_pages']??$before['document_pages']);$isPersonPhoto=array_key_exists('is_person_photo',$data)?((!empty($data['is_person_photo'])&&$data['is_person_photo']!=='0')?1:0):(int)($before['is_person_photo']??0);
     $mediaSubjectType=safe_text($data['media_subject_type']??$before['media_subject_type']??'');
-    if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo'],true))$mediaSubjectType='';
+    if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo','voter_card','id_card','driving_permit'],true))$mediaSubjectType='';
     $transcription=(string)($data['transcription']??$before['transcription']);
     $correspondenceType=safe_text($data['correspondence_type']??$before['correspondence_type']??'');
     if (!in_array($correspondenceType, ['', 'lettre', 'carte_postale', 'telegramme', 'carte_voeux', 'faire_part', 'autre'], true) && !preg_match('/^custom:.{1,80}$/u',$correspondenceType)) $correspondenceType = '';

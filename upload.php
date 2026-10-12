@@ -11,7 +11,7 @@ try {
     $documentReference=safe_text($_POST['document_reference']??'');$documentTitle=safe_text($_POST['document_title']??'');$documentUrl=safe_text($_POST['document_url']??'');$documentPages=safe_text($_POST['document_pages']??'');
 	    $isPersonPhoto=isset($_POST['is_person_photo'])&&$_POST['is_person_photo']!=='0'?1:0;
 	    $mediaSubjectType=safe_text($_POST['media_subject_type']??'');
-	    if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo'],true))$mediaSubjectType='';
+	    if(!in_array($mediaSubjectType,['','grave_photo','war_memorial_photo','voter_card','id_card','driving_permit'],true))$mediaSubjectType='';
     // Photo d'un objet de famille ou d'un souvenir (mémoire familiale) : rattachée à la collection, pas à une personne
     $collectionType=safe_text($_POST['collection_type']??'');$collectionId=safe_int($_POST['collection_id']??0);
     if(!in_array($collectionType,HERITAGE_COLLECTION_TYPES,true)){$collectionType='';$collectionId=0;}$collectionRole=mb_substr(safe_text($_POST['collection_role']??''),0,40);
