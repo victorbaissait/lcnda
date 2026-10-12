@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 21;
+const SCHEMA_VERSION = 22;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -42,6 +42,7 @@ function migration_steps(): array
         19 => 'schema_v19',
         20 => 'schema_v20',
         21 => 'schema_v21',
+        22 => 'schema_v22',
     ];
 }
 
@@ -1548,12 +1549,19 @@ function schema_v20(PDO $pdo): void
     if (!in_array('screenshot_media_id', $cols, true)) { $pdo->exec('ALTER TABLE person_online_sheets ADD COLUMN screenshot_media_id INTEGER'); }
 }
 
-/** n°21 : coffre des cousins rangé par base (identifiant au hasard dans l'en-tête des copies) ; point précis des recensements. */
+/** n°21 : coffre des cousins rangé par base (identifiant au hasard dans l'en-tête des copies), plus par nom. */
 function schema_v21(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(cousin_vault)')->fetchAll(), 'name');
     if ($cols && !in_array('base_uid', $cols, true)) { $pdo->exec("ALTER TABLE cousin_vault ADD COLUMN base_uid TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** n°22 : point précis des recensements ; détails des étapes de circuit (logistique, technique, recherche, liste à cocher). */
+function schema_v22(PDO $pdo): void
+{
     // point précis d'un recensement (la carte du formulaire l'envoyait, mais rien ne le gardait)
     $cols = array_column($pdo->query('PRAGMA table_info(census_records)')->fetchAll(), 'name');
     if ($cols && !in_array('precise_lat', $cols, true)) { $pdo->exec('ALTER TABLE census_records ADD COLUMN precise_lat REAL'); $pdo->exec('ALTER TABLE census_records ADD COLUMN precise_lon REAL'); }
+    $cols = array_column($pdo->query('PRAGMA table_info(field_trip_stops)')->fetchAll(), 'name');
+    if ($cols && !in_array('extra_json', $cols, true)) { $pdo->exec("ALTER TABLE field_trip_stops ADD COLUMN extra_json TEXT NOT NULL DEFAULT '{}'"); }
 }

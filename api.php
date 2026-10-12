@@ -8924,6 +8924,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'generate_field_trip' => generate_field_trip_stops($pdo,safe_int($data['id']??0)),
             'save_field_trip_stop' => save_field_trip_stop($pdo,$data),
             'set_field_trip_stop_done' => set_field_trip_stop_done($pdo,$data),
+            'set_field_trip_stop_check' => set_field_trip_stop_check($pdo,$data),
             'move_field_trip_stop' => move_field_trip_stop($pdo,$data),
             'delete_field_trip_stop' => delete_field_trip_stop($pdo,$data),
             'save_family_paper' => save_family_paper($pdo,$data),

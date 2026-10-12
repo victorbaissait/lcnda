@@ -966,6 +966,7 @@
         const data = await api('field_trips', {status: filter});
         if (!isCurrent(token)) return;
         const editing = view?.edit !== undefined ? (view.edit ? (await api('field_trip', {id: view.edit})).trip : {id: 0, stops_per_day: 6, people: [], people_rows: []}) : null;
+        if (!isCurrent(token)) return; // on a changé d'écran pendant le chargement
         const counts = data.counts || {todo: 0, done: 0};
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Circuits sur le terrain', 'Un circuit « sur les traces de mes ancêtres » : choisis une branche ou quelques ancêtres, et l’app prépare la liste des lieux à voir (églises, maisons, tombes, mairies, archives), le trajet jour par jour à ouvrir dans Plans ou Google Maps, et un carnet de route à imprimer.')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-trip-new>+ Circuit</button><div class="segmented-filter" role="group">${[['todo', `À faire (${counts.todo})`], ['done', `Faits (${counts.done})`], ['all', `Tous (${counts.todo + counts.done})`]].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-trip-filter="${k}" aria-pressed="${filter === k}">${esc(l)}</button>`).join('')}</div></div>
@@ -1009,6 +1010,53 @@
             } catch (error) { toast(error.message, 'error'); }
         });
     }
+    /* Détails d'une étape : logistique, technique, recherche, liste à cocher (autant de lignes qu'on veut) */
+    const PHOTO_RULES = ['', 'Photos autorisées', 'Photos sans flash', 'Photos payantes', 'Photos interdites', 'À demander sur place'];
+    function stopExtraForm(x, peopleMap) {
+        const v = k => esc(x[k] || '');
+        const ck = (c = {text: '', done: 0}) => `<div class="h-ck-row"><input type="checkbox" data-ck-done ${c.done ? 'checked' : ''} title="Fait"><input data-ck-text value="${esc(c.text)}" placeholder="Ex. : prendre la carte de lecteur"><button type="button" class="icon-button" data-ck-del title="Retirer">×</button></div>`;
+        const chip = pid => `<span class="label-chip" data-x-person="${Number(pid)}">${esc(peopleMap[pid] ? A().personName(peopleMap[pid]) : '#' + pid)} <button type="button" class="link-button" data-x-person-del aria-label="Retirer">×</button></span>`;
+        return `<details class="h-stop-sec" open><summary>🚗 Logistique</summary><div class="form-grid">
+                <label>Arrivée<input type="time" name="x_time_from" value="${v('time_from')}"></label><label>Départ<input type="time" name="x_time_to" value="${v('time_to')}"></label>
+                <label>Durée prévue<input name="x_duration" value="${v('duration')}" placeholder="1 h 30"></label><label>Transport<select name="x_transport">${['', 'Voiture', 'À pied', 'Vélo', 'Train', 'Bus / car', 'Bateau', 'Avion'].map(o => `<option ${x.transport === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
+                <label class="span-2">Accès, stationnement<input name="x_access" value="${v('access')}" placeholder="Parking derrière la mairie, entrée par la sacristie…"></label>
+                <label>Contact<input name="x_contact_name" value="${v('contact_name')}" placeholder="Secrétaire de mairie, curé, archiviste…"></label><label>Téléphone<input name="x_contact_phone" value="${v('contact_phone')}"></label>
+                <label>Courriel<input type="email" name="x_contact_email" value="${v('contact_email')}"></label><label>Site<input type="url" name="x_website" value="${v('website')}" placeholder="https://…"></label>
+                <label class="span-2">Rendez-vous, réservation<input name="x_booking" value="${v('booking')}" placeholder="Salle de lecture sur rendez-vous, 3 jours avant"></label><label class="checkbox-line"><input type="checkbox" name="x_booking_done" ${x.booking_done ? 'checked' : ''}> Réservation faite</label>
+                <label>Coût<input name="x_cost" value="${v('cost')}" placeholder="Entrée 5 €, parking 2 €"></label>
+                <label class="span-2">Documents à emporter<input name="x_documents" value="${v('documents')}" placeholder="Pièce d’identité, carte de lecteur, liste des cotes…"></label></div></details>
+            <details class="h-stop-sec" ${x.equipment || x.photo_rules || x.references ? 'open' : ''}><summary>🧰 Technique</summary><div class="form-grid">
+                <label class="span-2">Matériel<textarea name="x_equipment" rows="2" placeholder="Appareil photo, trépied, lampe rasante, papier calque, gants, crayon à papier…">${v('equipment')}</textarea></label>
+                <label>Photographie<select name="x_photo_rules">${PHOTO_RULES.map(o => `<option ${x.photo_rules === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
+                <label class="span-2">Cotes, registres, tombes à voir<textarea name="x_references" rows="2" placeholder="3 E 45/12 (BMS 1702-1730), carré B rang 4…">${v('references')}</textarea></label></div></details>
+            <details class="h-stop-sec" open><summary>🎯 Recherche</summary><div class="form-grid">
+                <label class="span-2">Ce que je cherche<textarea name="x_goals" rows="2" placeholder="Acte de mariage de Jean et Marie (vers 1745), tombe des Dupont…">${v('goals')}</textarea></label>
+                <div class="span-2"><span class="section-label">Personnes recherchées</span><div class="h-x-people" data-x-people>${(x.person_ids || []).map(chip).join('')}</div><span class="h-person-add">${A().collectionPersonField('x_person_pick', null, 'Ajouter une personne (nom)')}<button type="button" class="button small secondary" data-x-person-add>Ajouter</button></span></div>
+                <label>Résultat<select name="x_result">${[['todo', 'À faire'], ['found', 'Trouvé'], ['partial', 'En partie'], ['none', 'Rien trouvé']].map(([k, l]) => `<option value="${k}" ${(x.result || 'todo') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="span-2">Ce que j’ai trouvé (compte rendu après la visite)<textarea name="x_findings" rows="3">${v('findings')}</textarea></label></div></details>
+            <details class="h-stop-sec" open><summary>✅ Liste à cocher</summary><div data-ck-list>${(x.checklist || []).map(ck).join('')}</div><button type="button" class="button small secondary" data-ck-add>+ Ligne</button></details>`;
+    }
+    function bindStopExtraForm(dlg) {
+        const list = dlg.querySelector('[data-ck-list]');
+        dlg.querySelector('[data-ck-add]')?.addEventListener('click', () => { list.insertAdjacentHTML('beforeend', '<div class="h-ck-row"><input type="checkbox" data-ck-done title="Fait"><input data-ck-text placeholder="Ex. : prendre la carte de lecteur"><button type="button" class="icon-button" data-ck-del title="Retirer">×</button></div>'); list.lastElementChild.querySelector('[data-ck-text]').focus(); });
+        list?.addEventListener('click', e => { if (e.target.closest('[data-ck-del]')) e.target.closest('.h-ck-row').remove(); });
+        const people = dlg.querySelector('[data-x-people]');
+        people?.addEventListener('click', e => { if (e.target.closest('[data-x-person-del]')) e.target.closest('[data-x-person]').remove(); });
+        dlg.querySelector('[data-x-person-add]')?.addEventListener('click', e => {
+            const box = e.currentTarget.closest('.h-person-add'), pid = Number(box.querySelector('[name=x_person_pick]')?.value) || 0;
+            if (!pid) return toast('Choisis d’abord la personne dans la liste.', 'error');
+            if (people.querySelector(`[data-x-person="${pid}"]`)) return;
+            const name = box.querySelector('input[type=text], input:not([type=hidden])')?.value || '#' + pid;
+            people.insertAdjacentHTML('beforeend', `<span class="label-chip" data-x-person="${pid}">${esc(name)} <button type="button" class="link-button" data-x-person-del aria-label="Retirer">×</button></span>`);
+        });
+    }
+    function readStopExtra(form) {
+        const x = {};
+        form.querySelectorAll('[name^="x_"]').forEach(el => { if (el.name === 'x_person_pick') return; x[el.name.slice(2)] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : el.value; });
+        x.checklist = [...form.querySelectorAll('.h-ck-row')].map(r => ({text: r.querySelector('[data-ck-text]').value.trim(), done: r.querySelector('[data-ck-done]').checked ? 1 : 0})).filter(c => c.text);
+        x.person_ids = [...form.querySelectorAll('[data-x-person]')].map(c => Number(c.dataset.xPerson));
+        return x;
+    }
     async function renderTrip(token, id) {
         let t;
         try { t = (await api('field_trip', {id})).trip; } catch (error) { S().hTripId = 0; toast(error.message, 'error'); return ext.lists.field_trips(++S().workspaceToken); }
@@ -1025,10 +1073,27 @@
         });
         const dayDate = d => { if (!t.date_start) return ''; const x = new Date(t.date_start + 'T12:00:00'); x.setDate(x.getDate() + d - 1); return x.toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long'}); };
         let k = 0;
+        const maxDay = Math.max(0, ...dayNums);
+        const stopExtraHtml = s => {
+            const x = s.extra || {}, line = (icon, label, v) => v ? `<div class="h-stop-x"><span title="${esc(label)}">${icon}</span> ${nl(v)}</div>` : '';
+            const when = [x.time_from, x.time_to].filter(Boolean).join(' → ') + (x.duration ? ` (${x.duration})` : '');
+            const contact = [x.contact_name, x.contact_phone ? `<a href="tel:${esc(x.contact_phone.replace(/[^\d+]/g, ''))}">${esc(x.contact_phone)}</a>` : '', x.contact_email ? `<a href="mailto:${esc(x.contact_email)}">${esc(x.contact_email)}</a>` : ''].filter(Boolean);
+            const who = (x.person_ids || []).map(pid => t.stop_people?.[pid]).filter(Boolean);
+            const res = {found: '✅ Trouvé', partial: '🟡 En partie', none: '❌ Rien trouvé', todo: ''}[x.result] || '';
+            return `${when ? line('🕘', 'Horaires de passage', when) : ''}${line('🚗', 'Transport et accès', [x.transport, x.access].filter(Boolean).join(' — '))}
+                ${contact.length ? `<div class="h-stop-x"><span title="Contact">☎</span> ${x.contact_name ? esc(x.contact_name) : ''}${contact.slice(x.contact_name ? 1 : 0).length ? ' · ' + contact.slice(x.contact_name ? 1 : 0).join(' · ') : ''}</div>` : ''}
+                ${x.booking ? `<div class="h-stop-x"><span title="Réservation">📅</span> ${nl(x.booking)} ${x.booking_done ? '<span class="collection-kind">réservé</span>' : '<span class="collection-kind is-warn">à réserver</span>'}</div>` : ''}
+                ${line('💶', 'Coût', x.cost)}${line('🪪', 'Documents à emporter', x.documents)}${line('🧰', 'Matériel', x.equipment)}${line('📸', 'Photographie', x.photo_rules)}${line('🗂️', 'Cotes à consulter', x.references)}
+                ${x.website ? `<div class="h-stop-x"><span>🔗</span> <a href="${esc(x.website)}" target="_blank" rel="noopener noreferrer">${esc(x.website.replace(/^https?:\/\//, '').slice(0, 60))}</a></div>` : ''}
+                ${who.length ? `<div class="h-stop-x"><span title="Personnes recherchées">👤</span> ${who.map(p => personLink(p.id, A().personName(p))).join(', ')}</div>` : ''}
+                ${line('🎯', 'Ce que je cherche', x.goals)}
+                ${(x.checklist || []).length ? `<ul class="h-stop-checklist">${x.checklist.map((c, i) => `<li><label class="checkbox-line"><input type="checkbox" data-h-stop-ck="${s.id}" data-i="${i}" ${c.done ? 'checked' : ''}> ${esc(c.text)}</label></li>`).join('')}</ul>` : ''}
+                ${res || x.findings ? `<div class="h-stop-x h-stop-result"><span title="Résultat">📝</span> ${res ? `<strong>${res}</strong> ` : ''}${nl(x.findings || '')}</div>` : ''}`;
+        };
         const stopHtml = s => { k++; return `<li class="h-stop ${Number(s.done) ? 'is-done' : ''}"><label class="h-stop-check"><input type="checkbox" data-h-stop-done="${s.id}" ${Number(s.done) ? 'checked' : ''}><span class="h-stop-n">${k}</span></label>
             <div class="h-stop-body"><strong>${tripIcons[s.kind] || '📍'} ${esc(s.title || tripKinds[s.kind])}</strong> <small class="muted">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}${finite(s.lat) ? '' : ' · ⚠ pas de coordonnées'}</small>
-            ${s.people_text ? `<div class="h-stop-people">${nl(s.people_text)}</div>` : ''}${s.to_photograph ? `<div class="h-stop-photo">📷 ${nl(s.to_photograph)}</div>` : ''}${s.opening_hours ? `<div class="h-stop-hours">🕘 ${nl(s.opening_hours)}</div>` : ''}${s.notes ? `<div class="muted">${nl(s.notes)}</div>` : ''}</div>
-            <div class="h-stop-tools"><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="-1" title="Monter">↑</button><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="1" title="Descendre">↓</button><select data-h-stop-day="${s.id}" title="Jour">${[...new Set([...dayNums, dayNums.length + 1])].map(d => `<option value="${d}" ${d === Number(s.day) ? 'selected' : ''}>Jour ${d}</option>`).join('')}</select>${tools(`data-h-stop-edit="${s.id}"`, `data-h-stop-delete="${s.id}"`, 'cette étape')}</div></li>`; };
+            ${s.people_text ? `<div class="h-stop-people">${nl(s.people_text)}</div>` : ''}${s.to_photograph ? `<div class="h-stop-photo">📷 ${nl(s.to_photograph)}</div>` : ''}${s.opening_hours ? `<div class="h-stop-hours">🕘 ${nl(s.opening_hours)}</div>` : ''}${stopExtraHtml(s)}${s.notes ? `<div class="muted">${nl(s.notes)}</div>` : ''}</div>
+            <div class="h-stop-tools"><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="-1" title="Monter">↑</button><button type="button" class="icon-button" data-h-stop-move="${s.id}" data-dir="1" title="Descendre">↓</button><select data-h-stop-day="${s.id}" title="Jour">${[...dayNums, maxDay + 1].map(d => `<option value="${d}" ${d === Number(s.day) ? 'selected' : ''}>Jour ${d}</option>`).join('')}</select>${tools(`data-h-stop-edit="${s.id}"`, `data-h-stop-delete="${s.id}"`, 'cette étape')}</div></li>`; };
         A().$('#workspace').innerHTML = `<section class="page collection-page h-trip-page">${pageHeader(t.status === 'done' ? 'CIRCUIT FAIT' : 'CIRCUIT', t.title, `${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''} · ${plural(t.stops.length, 'étape', 'étapes')} sur ${plural(dayNums.length, 'jour', 'jours')} · pour ${(t.people_rows || []).map(p => esc(A().personName(p))).join(', ') || '—'}`,
             `<button type="button" class="button secondary" data-h-trip-back>← Tous les circuits</button><button type="button" class="button secondary" data-h-trip-edit>Modifier</button><button type="button" class="button secondary" data-h-trip-regen>Préparer à nouveau</button><button type="button" class="button" data-h-trip-print>Carnet de route à imprimer</button><button type="button" class="button secondary" data-h-trip-done>${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button><button type="button" class="button secondary danger" data-h-trip-delete>Supprimer</button>`)}
             ${t.stops.length ? miniMap(points, paths) : ''}
@@ -1044,6 +1109,7 @@
         ws.querySelector('[data-h-trip-done]').addEventListener('click', async () => { const status = t.status === 'done' ? 'todo' : 'done'; await api('set_field_trip_status', {}, {method: 'POST', body: {id, status}}); toast(status === 'done' ? 'Circuit marqué fait.' : 'Circuit remis à faire.'); reload(); });
         ws.querySelector('[data-h-trip-delete]').addEventListener('click', async () => { if (!confirm(`Supprimer le circuit « ${t.title} » ?`)) return; await api('delete_field_trip', {}, {method: 'POST', body: {id}}); toast('Circuit supprimé.'); ext.lists.field_trips(++S().workspaceToken, {back: true}); });
         ws.querySelectorAll('[data-h-stop-done]').forEach(c => c.addEventListener('change', async () => { await api('set_field_trip_stop_done', {}, {method: 'POST', body: {id: c.dataset.hStopDone, done: c.checked ? 1 : 0}}); c.closest('.h-stop').classList.toggle('is-done', c.checked); }));
+        ws.querySelectorAll('[data-h-stop-ck]').forEach(c => c.addEventListener('change', async () => { try { await api('set_field_trip_stop_check', {}, {method: 'POST', body: {id: c.dataset.hStopCk, index: Number(c.dataset.i), done: c.checked ? 1 : 0}}); const st = t.stops.find(x => Number(x.id) === Number(c.dataset.hStopCk)); if (st?.extra?.checklist?.[c.dataset.i]) st.extra.checklist[c.dataset.i].done = c.checked ? 1 : 0; } catch (error) { c.checked = !c.checked; toast(error.message, 'error'); } }));
         ws.querySelectorAll('[data-h-stop-move]').forEach(b => b.addEventListener('click', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopMove, direction: Number(b.dataset.dir)}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-day]').forEach(sel => sel.addEventListener('change', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: sel.dataset.hStopDay, day: Number(sel.value)}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette étape ?')) return; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopDelete}}); reload(); }));
@@ -1054,11 +1120,23 @@
                 body: `<div class="form-grid"><label>Sorte<select name="kind">${Object.entries(tripKinds).map(([kk, l]) => `<option value="${kk}" ${s.kind === kk ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Jour<input type="number" name="day" min="1" value="${Number(s.day) || 1}"></label>
                     <label class="span-2">Titre<input name="title" value="${esc(s.title || '')}" placeholder="Église Saint-Martin"></label><label>Commune${placeField('place_text', s.place_text, s.lat, s.lon, 'Commune')}</label><label>Adresse<input name="address" value="${esc(s.address || '')}"></label>
                     <label class="span-2">Pourquoi (personnes, actes)<textarea name="people_text" rows="2">${esc(s.people_text || '')}</textarea></label><label class="span-2">À photographier<textarea name="to_photograph" rows="2">${esc(s.to_photograph || '')}</textarea></label>
-                    <label class="span-2">Horaires<input name="opening_hours" value="${esc(s.opening_hours || '')}" placeholder="Mardi-vendredi 9 h – 17 h, sur réservation"></label><label class="span-2">Notes<textarea name="notes" rows="2">${esc(s.notes || '')}</textarea></label></div>`,
-                onSubmit: async form => { const v = values(form); await api('save_field_trip_stop', {}, {method: 'POST', body: {...v, id: s.id, trip_id: id, lat: v.place_text_lat, lon: v.place_text_lon, done: s.done}}); toast('Étape enregistrée.'); reload(); },
+                    <label class="span-2">Horaires d’ouverture<input name="opening_hours" value="${esc(s.opening_hours || '')}" placeholder="Mardi-vendredi 9 h – 17 h, sur réservation"></label></div>
+                    ${stopExtraForm(s.extra || {}, t.stop_people || {})}
+                    <label>Notes<textarea name="notes" rows="2">${esc(s.notes || '')}</textarea></label>`,
+                wide: true,
+                onOpen: dlg => bindStopExtraForm(dlg),
+                onSubmit: async form => { const v = values(form); await api('save_field_trip_stop', {}, {method: 'POST', body: {...v, id: s.id, trip_id: id, lat: v.place_text_lat, lon: v.place_text_lon, done: s.done, extra: readStopExtra(form)}}); toast('Étape enregistrée.'); reload(); },
                 onDelete: s.id ? async () => { if (!confirm('Supprimer cette étape ?')) return false; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: s.id}}); reload(); } : null,
             });
         }));
+    }
+    // détails d'une étape dans le carnet imprimé (cases à cocher à l'encre)
+    function printStopExtra(x) {
+        const p = (label, v) => v ? `<p><b>${label} :</b> ${nl(v)}</p>` : '';
+        return p('Horaires', [x.time_from, x.time_to].filter(Boolean).join(' → ') + (x.duration ? ` (${x.duration})` : '')) + p('Transport, accès', [x.transport, x.access].filter(Boolean).join(' — '))
+            + p('Contact', [x.contact_name, x.contact_phone, x.contact_email].filter(Boolean).join(' · ')) + p('Rendez-vous', x.booking ? x.booking + (x.booking_done ? ' (réservé)' : ' (à réserver)') : '')
+            + p('Coût', x.cost) + p('Documents', x.documents) + p('Matériel', x.equipment) + p('Photographie', x.photo_rules) + p('Cotes', x.references) + p('Je cherche', x.goals)
+            + ((x.checklist || []).length ? `<ul class="ck">${x.checklist.map(c => `<li>${c.done ? '☑' : '☐'} ${esc(c.text)}</li>`).join('')}</ul>` : '');
     }
     function printTrip(t, days, dayNums, dayDate) {
         let k = 0;
@@ -1067,7 +1145,7 @@
         const html = `<main><header><h1>${esc(t.title)}</h1><p>${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</p><p>Sur les traces de : ${(t.people_rows || []).map(p => esc(A().personName(p))).join(', ')}</p></header>
             ${graves.length ? `<h2>Tombes à chercher</h2><ul>${graves.map(s => `<li><b>${esc(s.title)}</b> — ${nl(s.people_text)}</li>`).join('')}</ul>` : ''}
             ${archives.length ? `<h2>Archives : horaires</h2><ul>${archives.map(s => `<li><b>${esc(s.title)}</b>${s.address ? ` — ${esc(s.address)}` : ''}<br>${nl(s.opening_hours || 'Horaires à vérifier')}</li>`).join('')}</ul>` : ''}
-            ${dayNums.map(d => `<section class="day"><h2>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h2>${days[d].map(s => { k++; return `<div class="stop"><span class="box"></span><div><h3>${k}. ${esc(s.title)}</h3><p class="place">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}</p>${s.people_text ? `<p><b>Pourquoi :</b> ${nl(s.people_text)}</p>` : ''}${s.to_photograph ? `<p><b>À photographier :</b> ${nl(s.to_photograph)}</p>` : ''}${s.opening_hours ? `<p><b>Horaires :</b> ${nl(s.opening_hours)}</p>` : ''}${s.notes ? `<p>${nl(s.notes)}</p>` : ''}<div class="lines"><span></span><span></span></div></div></div>`; }).join('')}</section>`).join('')}
+            ${dayNums.map(d => `<section class="day"><h2>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h2>${days[d].map(s => { k++; return `<div class="stop"><span class="box"></span><div><h3>${k}. ${esc(s.title)}</h3><p class="place">${esc(s.place_text)}${s.address ? ' · ' + esc(s.address) : ''}</p>${s.people_text ? `<p><b>Pourquoi :</b> ${nl(s.people_text)}</p>` : ''}${printStopExtra(s.extra || {})}${s.to_photograph ? `<p><b>À photographier :</b> ${nl(s.to_photograph)}</p>` : ''}${s.opening_hours ? `<p><b>Horaires :</b> ${nl(s.opening_hours)}</p>` : ''}${s.notes ? `<p>${nl(s.notes)}</p>` : ''}<div class="lines"><span></span><span></span></div></div></div>`; }).join('')}</section>`).join('')}
             ${t.notes ? `<h2>Notes</h2><p>${nl(t.notes)}</p>` : ''}<h2>Notes de route</h2><div class="lines big">${'<span></span>'.repeat(10)}</div></main>`;
         printWindow('Carnet de route — ' + t.title, 'main{max-width:760px;margin:24px auto;padding:0 24px;line-height:1.4}header{border-bottom:3px solid #111;padding-bottom:10px}h1{margin:0;font-size:28px}h2{font-size:18px;margin:22px 0 8px;border-bottom:1px solid #999}h3{font-size:15px;margin:0}.day{break-before:auto}.stop{display:flex;gap:10px;padding:8px 0;border-bottom:1px dotted #bbb;break-inside:avoid}.box{flex:0 0 16px;height:16px;border:2px solid #111;margin-top:2px}.place{color:#555;margin:2px 0}p{margin:3px 0;font-size:13px}.lines span{display:block;border-bottom:1px solid #ccc;height:22px}.lines.big span{height:28px}', html);
     }

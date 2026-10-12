@@ -624,7 +624,9 @@ function field_trip_detail(PDO $pdo, int $id): array
     $peopleIds = array_map(static fn($p) => (int) (is_array($p) ? ($p['id'] ?? 0) : $p), $trip['people']);
     $trip['people_rows'] = array_values(collection_people($pdo, $peopleIds));
     $stops = $pdo->prepare('SELECT * FROM field_trip_stops WHERE trip_id=? ORDER BY day, position, id'); $stops->execute([$id]);
-    $trip['stops'] = $stops->fetchAll();
+    $trip['stops'] = array_map(static function ($s) { $s['extra'] = field_trip_stop_extra(json_decode((string) ($s['extra_json'] ?? '{}'), true) ?: []); unset($s['extra_json']); return $s; }, $stops->fetchAll());
+    $ids = array_values(array_unique(array_merge(...array_map(static fn($s) => $s['extra']['person_ids'] ?? [], $trip['stops'] ?: [['extra' => []]]))));
+    $trip['stop_people'] = $ids ? collection_people($pdo, $ids) : (object) [];
     $trip['kinds'] = FIELD_TRIP_KINDS;
     $trip['labels'] = collection_labels($pdo, 'field_trip', [$id])[$id] ?? [];
     return $trip;
@@ -678,6 +680,36 @@ function delete_field_trip(PDO $pdo, array $data): array
     return ['deleted' => $id];
 }
 
+/** Détails d'une étape (logistique, technique, recherche, liste à cocher), nettoyés et bornés. */
+const FIELD_TRIP_STOP_TEXT = ['time_from' => 20, 'time_to' => 20, 'duration' => 60, 'transport' => 40, 'access' => 1000, 'contact_name' => 200, 'contact_phone' => 60, 'contact_email' => 200,
+    'website' => 500, 'booking' => 1000, 'cost' => 100, 'documents' => 1000, 'equipment' => 2000, 'photo_rules' => 40, 'references' => 4000, 'goals' => 4000, 'findings' => 6000, 'result' => 20];
+function field_trip_stop_extra(array $x): array
+{
+    $out = [];
+    foreach (FIELD_TRIP_STOP_TEXT as $k => $max) { $v = trim((string) ($x[$k] ?? '')); if ($v !== '') { $out[$k] = mb_substr($v, 0, $max); } }
+    if (isset($out['website']) && !preg_match('#^https?://#i', $out['website'])) { unset($out['website']); }
+    if (isset($out['contact_email']) && !filter_var($out['contact_email'], FILTER_VALIDATE_EMAIL)) { unset($out['contact_email']); }
+    if (!empty($x['booking_done'])) { $out['booking_done'] = 1; }
+    $out['checklist'] = array_values(array_filter(array_map(static fn($c) => is_array($c) ? ['text' => mb_substr(trim((string) ($c['text'] ?? '')), 0, 300), 'done' => !empty($c['done']) ? 1 : 0] : null, array_slice(is_array($x['checklist'] ?? null) ? $x['checklist'] : [], 0, 100)), static fn($c) => $c && $c['text'] !== ''));
+    $out['person_ids'] = array_values(array_unique(array_filter(array_map('intval', array_slice(is_array($x['person_ids'] ?? null) ? $x['person_ids'] : [], 0, 40)))));
+    return $out;
+}
+
+/** Cocher une ligne de la liste d'une étape, depuis le circuit (sans rouvrir la fiche de l'étape). */
+function set_field_trip_stop_check(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT extra_json FROM field_trip_stops WHERE id=?'); $s->execute([$id]);
+    $raw = $s->fetchColumn();
+    if ($raw === false) { throw new RuntimeException('Étape introuvable'); }
+    $x = field_trip_stop_extra(json_decode((string) $raw, true) ?: []);
+    $i = safe_int($data['index'] ?? -1);
+    if (!isset($x['checklist'][$i])) { throw new RuntimeException('Ligne introuvable'); }
+    $x['checklist'][$i]['done'] = !empty($data['done']) ? 1 : 0;
+    $pdo->prepare('UPDATE field_trip_stops SET extra_json=? WHERE id=?')->execute([json_encode($x, JSON_UNESCAPED_UNICODE), $id]);
+    return ['ok' => true];
+}
+
 function save_field_trip_stop(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
@@ -693,6 +725,11 @@ function save_field_trip_stop(PDO $pdo, array $data): array
         $pos = $pdo->prepare('SELECT COALESCE(max(position),0)+1 FROM field_trip_stops WHERE trip_id=? AND day=?'); $pos->execute([$tripId, $fields[0]]);
         $pdo->prepare('INSERT INTO field_trip_stops(trip_id,day,kind,title,place_text,address,lat,lon,to_photograph,opening_hours,people_text,notes,done,position) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)')->execute([$tripId, ...$fields, (int) $pos->fetchColumn()]);
         $id = (int) $pdo->lastInsertId();
+    }
+    if (isset($data['extra']) && is_array($data['extra'])) {
+        $x = field_trip_stop_extra($data['extra']);
+        $x['person_ids'] = $x['person_ids'] ? array_map('intval', $pdo->query('SELECT id FROM persons WHERE id IN (' . implode(',', $x['person_ids']) . ')')->fetchAll(PDO::FETCH_COLUMN)) : [];
+        $pdo->prepare('UPDATE field_trip_stops SET extra_json=? WHERE id=?')->execute([json_encode($x, JSON_UNESCAPED_UNICODE), $id]);
     }
     return ['id' => $id];
 }

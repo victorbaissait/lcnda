@@ -645,3 +645,14 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-census-year>summary{cursor:pointer;font-size:1.05rem;padding:.3rem 0}
 .h-census-house{border:1px solid var(--line,#ddd);border-radius:8px;padding:.6rem .8rem;margin:.5rem 0}
 .h-census-house>header{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-bottom:.4rem}
+/* circuits : détails des étapes */
+.h-stop-x{font-size:.9em;margin:.15rem 0;display:flex;gap:.35rem;align-items:baseline}
+.h-stop-x>span:first-child{flex:none}
+.h-stop-result{background:rgba(128,128,128,.08);padding:.25rem .4rem;border-radius:6px}
+.h-stop-checklist{list-style:none;margin:.3rem 0;padding:0;display:grid;gap:.1rem;font-size:.9em}
+.h-stop-sec{border:1px solid var(--line,#ddd);border-radius:8px;padding:.3rem .7rem;margin:.6rem 0}
+.h-stop-sec>summary{cursor:pointer;font-weight:700;padding:.2rem 0}
+.h-ck-row{display:flex;gap:.4rem;align-items:center;margin:.25rem 0}
+.h-ck-row [data-ck-text]{flex:1}
+.h-x-people{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0}
+.collection-kind.is-warn{background:#fff3cd;color:#7a5200}
