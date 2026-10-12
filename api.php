@@ -168,6 +168,9 @@ try {
     if ($isWrite && $action === 'sync_apply') {
         sync_apply($pdo, $payload);
     }
+    if ($isWrite && $action === 'insee_remote_import') { // décès INSEE : téléchargé sur data.gouv.fr puis importé
+        insee_remote_import($pdo, $payload);
+    }
     if ($isWrite && $action === 'museum_upload') {
         museum_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -372,6 +375,7 @@ try {
         'insee_search' => insee_deces_search($pdo),
         'insee_import' => insee_deces_import($pdo),
         'insee_imports_list' => insee_deces_imports_list($pdo),
+        'insee_remote_files' => json_response(insee_remote_files($pdo)),
         default => json_response(['error' => 'Action inconnue'], 404),
     };
 } catch (Throwable $e) {

@@ -1265,6 +1265,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(initialRoute.maintenanceTab)state.maintenanceTab=initialRoute.maintenanceTab;
             await setModule((urlPersonId ? 'personnes' : (initialRoute.module || 'dashboard')), false);
             if(!urlPersonId)updateBrowserRoute(moduleHash(state.module),false,state.module);
+            setTimeout(checkInseeRemote,8000); // nouveaux fichiers des décès INSEE (une fois par jour)
         } catch (error) {
             $('#workspace').innerHTML = errorState(error.message);
             toast(error.message, 'error');
@@ -5940,7 +5941,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             }
         }
         const viewImportsButton=(stats.imports_count>0)?`<button type="button" class="button small secondary" id="insee-view-imports">Voir les imports</button>`:'';
-        const importButton=`<button type="button" class="button small" id="insee-open-import">Importer</button>`;
+        const importButton=`<button type="button" class="button small" id="insee-open-remote">Fichiers de l’INSEE${state.inseeRemote?.new_count?` <span class="h-new-badge">${state.inseeRemote.new_count} nouveau${state.inseeRemote.new_count>1?'x':''}</span>`:''}</button><button type="button" class="button small secondary" id="insee-open-import">Importer un fichier</button>`;
         return `<section class="page" style="padding-bottom:.5rem"><header class="page-header"><div><span class="eyebrow">DÉCÈS INSEE · BASE LOCALE</span><h2>${count.toLocaleString('fr-FR')} personne${count>1?'s':''} dans la base</h2><p>${upToDate}</p></div><div class="page-actions">${importButton}${viewImportsButton}</div></header></section>`;
     }
 
@@ -6020,6 +6021,83 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function bindInseeStatsBar(){
         $('#insee-view-imports')?.addEventListener('click',()=>openInseeImportsDialog());
         $('#insee-open-import')?.addEventListener('click',()=>openInseeImportDialog());
+        $('#insee-open-remote')?.addEventListener('click',()=>openInseeRemoteDialog());
+    }
+
+    // --- Fichiers des décès publiés par l'INSEE sur data.gouv.fr : téléchargés et importés par l'app ---
+    const inseeAuto=()=>{try{return localStorage.getItem('genealogie-insee-auto')==='1';}catch(_){return false;}};
+    const inseeSize=n=>n?`${(n/1048576).toLocaleString('fr-FR',{maximumFractionDigits:n>10485760?0:1})} Mo`:'';
+    let inseeImporting=false;
+    // Importe les fichiers donnés, un par un (chaque fichier = une requête : le serveur télécharge puis importe)
+    async function inseeImportRemote(files,onProgress=()=>{}){
+        if(inseeImporting){toast('Un import INSEE est déjà en cours.','error');return 0;}
+        inseeImporting=true;let total=0;
+        try{
+            for(const [i,f] of files.entries()){
+                onProgress(`Téléchargement et import de « ${f.label} » (${i+1}/${files.length}${f.size?`, ${inseeSize(f.size)}`:''})… Ça peut prendre quelques minutes.`);
+                try{const r=await api('insee_remote_import',{}, {method:'POST',body:{url:f.url}});total+=Number(r.inserted||0);}
+                catch(error){if(error?.data?.duplicate||/déjà avoir été importé/.test(error.message))continue;toast(`${f.label} : ${error.message}`,'error');}
+            }
+        }finally{inseeImporting=false;}
+        try{state.inseeRemote=await api('insee_remote_files');}catch(_){}
+        return total;
+    }
+    async function openInseeRemoteDialog(){
+        let dialog=$('#insee-remote-dialog');
+        if(!dialog){
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-remote-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE · DATA.GOUV.FR</span><h2>Fichiers publiés par l’INSEE</h2></div><button class="modal-close" data-close-insee-remote aria-label="Fermer">×</button></div><div class="modal-body" id="insee-remote-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-remote>Fermer</button></div></dialog>`);
+            dialog=$('#insee-remote-dialog');
+            $$('[data-close-insee-remote]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
+            dialog.addEventListener('close',()=>{if(state.module==='recherche'&&state.researchKind==='insee')renderInseeSearch();});
+        }
+        const body=$('#insee-remote-body');
+        if(!dialog.open)dialog.showModal();
+        body.innerHTML='<div class="loading-block">Lecture de la liste sur data.gouv.fr…</div>';
+        let data;
+        try{data=state.inseeRemote=await api('insee_remote_files');try{localStorage.setItem('lcnda-insee-checked',new Date().toISOString().slice(0,10));}catch(_){}}
+        catch(error){body.innerHTML=`<p class="h-offsite-sentence is-warn">${escapeHtml(error.message)}</p>`;return;}
+        const files=data.files||[],todo=files.filter(f=>f.new);
+        const status=f=>f.imported?`<span class="collection-kind">importé${f.imported_at?` le ${escapeHtml(new Date(String(f.imported_at).replace(' ','T')).toLocaleDateString('fr-FR'))}`:''}</span>`:f.superseded?'<span class="muted">compris dans le fichier de l’année</span>':f.new?'<span class="h-new-badge">nouveau</span>':'<span class="muted">pas importé</span>';
+        body.innerHTML=`<p>L’INSEE publie un fichier par année (depuis 1970), puis un par mois pour l’année en cours. Quand le fichier de l’année sort, il remplace ceux des mois : l’app retire alors les mois déjà importés pour éviter les doublons. Les fichiers sont gros (60 à 150 Mo par année) : l’import peut prendre quelques minutes.</p>
+            <div class="page-actions">${todo.length?`<button type="button" class="button" data-insee-remote-new>Importer les nouveaux (${todo.length})</button>`:'<span class="muted">Pas de nouveau fichier depuis ton dernier import.</span>'}</div>
+            <label class="checkbox-line"><input type="checkbox" data-insee-auto ${inseeAuto()?'checked':''}> Vérifier chaque jour à l’ouverture de l’app et importer tout seul les nouveaux fichiers</label>
+            <p id="insee-remote-progress" class="muted" aria-live="polite"></p>
+            <div class="data-table-wrap"><table class="data-table"><thead><tr><th>Période</th><th>Fichier</th><th>Publié le</th><th>État</th><th></th></tr></thead><tbody>${files.map((f,i)=>`<tr class="${f.new?'is-new':''}"><td><strong>${escapeHtml(f.label)}</strong></td><td><small>${escapeHtml(f.name)}${f.size?` · ${inseeSize(f.size)}`:''}</small></td><td>${escapeHtml(f.published?new Date(f.published).toLocaleDateString('fr-FR'):'')}</td><td>${status(f)}</td><td>${f.imported||f.superseded?'':`<button type="button" class="button small secondary" data-insee-remote-one="${i}">Télécharger et importer</button>`}</td></tr>`).join('')}</tbody></table></div>
+            <p class="muted">Source : <a href="${escapeHtml(data.source)}" target="_blank" rel="noopener noreferrer">Fichier des personnes décédées, INSEE, sur data.gouv.fr ↗</a></p>`;
+        const progress=$('#insee-remote-progress',body);
+        const run=async list=>{
+            $$('button',body).forEach(b=>{if(b.dataset.inseeRemoteOne!==undefined||b.dataset.inseeRemoteNew!==undefined)b.disabled=true;});
+            const n=await inseeImportRemote(list,text=>{progress.textContent=text;});
+            toast(`${n.toLocaleString('fr-FR')} décès importé${n>1?'s':''}.`);
+            if(dialog.open)openInseeRemoteDialog();
+        };
+        $('[data-insee-remote-new]',body)?.addEventListener('click',()=>run(todo));
+        $$('[data-insee-remote-one]',body).forEach(b=>b.addEventListener('click',()=>run([files[Number(b.dataset.inseeRemoteOne)]])));
+        $('[data-insee-auto]',body).addEventListener('change',e=>{try{localStorage.setItem('genealogie-insee-auto',e.target.checked?'1':'0');}catch(_){}toast(e.target.checked?'Les nouveaux fichiers seront importés tout seuls.':'Import automatique arrêté : l’app te préviendra seulement.');});
+    }
+    // Une fois par jour : y a-t-il de nouveaux fichiers ? (seulement si des décès INSEE ont déjà été importés)
+    async function checkInseeRemote(){
+        let today=new Date().toISOString().slice(0,10),last='',told=[];
+        try{last=localStorage.getItem('lcnda-insee-checked')||'';told=JSON.parse(localStorage.getItem('lcnda-insee-told')||'[]');}catch(_){}
+        if(last===today||navigator.onLine===false)return;
+        try{
+            const stats=await api('insee_stats');
+            if(!Number(stats.imports_count))return;
+            const data=state.inseeRemote=await api('insee_remote_files');
+            try{localStorage.setItem('lcnda-insee-checked',today);}catch(_){}
+            const fresh=(data.files||[]).filter(f=>f.new);
+            if(!fresh.length)return;
+            if(inseeAuto()){
+                toast(`Décès INSEE : ${fresh.length} nouveau${fresh.length>1?'x':''} fichier${fresh.length>1?'s':''}, import en cours…`);
+                const n=await inseeImportRemote(fresh);
+                toast(`Décès INSEE à jour : ${n.toLocaleString('fr-FR')} décès ajouté${n>1?'s':''} (${fresh.map(f=>f.label).join(', ')}).`);
+                return;
+            }
+            const unseen=fresh.filter(f=>!told.includes(f.key));
+            if(!unseen.length)return;
+            toast(`Décès INSEE : ${unseen.length>1?`${unseen.length} nouveaux fichiers`:`nouveau fichier (${unseen[0].label})`} sur data.gouv.fr. Recherche → Décès INSEE → « Fichiers de l’INSEE ».`);
+            try{localStorage.setItem('lcnda-insee-told',JSON.stringify([...told,...unseen.map(f=>f.key)].slice(-60)));}catch(_){}
+        }catch(_){/* hors ligne : on réessaiera au prochain lancement */}
     }
 
     // Fenêtre listant précisément chaque fichier déjà importé (nom, date, lignes lues/insérées,
