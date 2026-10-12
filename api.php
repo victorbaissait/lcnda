@@ -263,6 +263,7 @@ try {
         'languages_overview' => json_response(languages_overview($pdo)),
         'record_languages' => json_response(['languages' => record_languages_for($pdo, ($_GET['type'] ?? '') === 'media' ? 'media' : 'event', [safe_int($_GET['id'] ?? 0)])[safe_int($_GET['id'] ?? 0)] ?? [], 'catalog' => LANGUAGES, 'certainties' => LANGUAGE_CERTAINTY]),
         'villages' => json_response(['villages' => villages_list($pdo, safe_text($_GET['q'] ?? ''))]),
+        'census_households' => json_response(census_households($pdo, ['village' => (string) ($_GET['village'] ?? ''), 'year' => safe_int($_GET['year'] ?? 0), 'q' => safe_text($_GET['q'] ?? '')])),
         'village' => json_response(village_detail($pdo, safe_text($_GET['key'] ?? ''))),
         'village_wiki_population' => json_response(village_wiki_population($pdo, safe_text($_GET['key'] ?? ''), safe_text($_GET['title'] ?? ''))),
         'htr_setup_status' => json_response(htr_setup_status()),
@@ -3267,7 +3268,7 @@ function census_list_rows(PDO $pdo,string $like,int $limit=500,int $offset=0): a
         LEFT JOIN census_members cm ON cm.census_id=cr.id
         LEFT JOIN persons p ON p.id=cm.person_id
         LEFT JOIN media_links ml ON ml.entity_type='census' AND ml.entity_id=cr.id
-        WHERE cr.year LIKE ? OR cr.address LIKE ? OR pl.name LIKE ? OR cm.display_name LIKE ? OR p.first_name LIKE ? OR p.last_name LIKE ?
+        WHERE cr.year LIKE ? OR cr.address LIKE ? OR pl.name LIKE ? OR cr.id IN (SELECT m2.census_id FROM census_members m2 LEFT JOIN persons p2 ON p2.id=m2.person_id WHERE m2.display_name LIKE ? OR p2.first_name LIKE ? OR p2.last_name LIKE ?)
         GROUP BY cr.id
         ORDER BY cr.year,pl.name,cr.address
         LIMIT {$limit} OFFSET {$offset}");
@@ -5094,8 +5095,18 @@ function insee_deces_import(PDO $pdo): never
     try {
         // On crée le journal avant les lignes afin d'associer chaque ligne à
         // cet import précis, même si un CSV de même nom est importé plus tard.
-        $logInsert->execute([$originalName, 0, 0, null, null, $fileHash]);
+        // l'empreinte n'est notée qu'à la fin : un import coupé ne doit pas passer pour « déjà importé »
+        $logInsert->execute([$originalName, 0, 0, null, null, '']);
         $importId = (int)$pdo->lastInsertId();
+        $inseeDone = false;
+        register_shutdown_function(static function () use ($pdo, &$importId, &$inseeDone): void {
+            if ($inseeDone || !$importId) return; // arrêté en route (délai dépassé…) : on retire ce qui a été écrit
+            try {
+                if ($pdo->inTransaction()) $pdo->rollBack();
+                $pdo->prepare('DELETE FROM insee_deces WHERE source_import_id=?')->execute([$importId]);
+                $pdo->prepare('DELETE FROM insee_deces_imports WHERE id=?')->execute([$importId]);
+            } catch (Throwable $_) {}
+        });
         while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
             if ($row === null) continue;
             if (count($row) === 1 && trim((string)($row[0] ?? '')) === '') continue; // ligne vide
@@ -5137,11 +5148,15 @@ function insee_deces_import(PDO $pdo): never
             $inserted++;
             if ($inserted % 2000 === 0) { $pdo->commit(); $pdo->beginTransaction(); }
         }
-        $pdo->prepare("UPDATE insee_deces_imports SET row_count=?, inserted_count=?, max_annee_deces=?, min_annee_deces=? WHERE id=?")
-            ->execute([$rowCount, $inserted, $maxAnneeDeces, $minAnneeDeces, $importId]);
+        $pdo->prepare("UPDATE insee_deces_imports SET row_count=?, inserted_count=?, max_annee_deces=?, min_annee_deces=?, file_hash=? WHERE id=?")
+            ->execute([$rowCount, $inserted, $maxAnneeDeces, $minAnneeDeces, $fileHash, $importId]);
         $pdo->commit();
+        $inseeDone = true;
     } catch (Throwable $e) {
         if ($pdo->inTransaction()) $pdo->rollBack();
+        // les paquets de 2 000 lignes déjà enregistrés sont retirés : rien d'un import à moitié fait
+        if (!empty($importId)) { try { $pdo->prepare('DELETE FROM insee_deces WHERE source_import_id=?')->execute([$importId]); $pdo->prepare('DELETE FROM insee_deces_imports WHERE id=?')->execute([$importId]); } catch (Throwable $_) {} }
+        $inseeDone = true;
         fclose($handle);
         if ($cleanupPath !== '') @unlink($cleanupPath);
         json_response(['error' => 'Import interrompu : ' . $e->getMessage()], 500);
@@ -9551,10 +9566,20 @@ function place_name_facets_data(PDO $pdo): never
     ]);
 }
 
+/** Fiches verrouillées : on ne touche pas au recensement de la personne principale ni d'un membre lié verrouillé. */
+function census_assert_unlocked(PDO $pdo,int $censusId,int $alsoPersonId=0): void
+{
+    $s=$pdo->prepare('SELECT DISTINCT person_id FROM census_members WHERE census_id=? AND is_primary=1 AND person_id IS NOT NULL');$s->execute([$censusId]);
+    foreach($s->fetchAll(PDO::FETCH_COLUMN) as $pid)assert_person_unlocked($pdo,(int)$pid);
+    if($alsoPersonId)assert_person_unlocked($pdo,$alsoPersonId);
+}
+
 function save_census_record(PDO $pdo,array $data): array
 {
     $id=safe_int($data['id']??0);$personId=safe_int($data['person_id']??0);$year=safe_int($data['year']??0);
     if(!$personId||!person_exists($pdo,$personId))throw new RuntimeException('Personne manquante');
+    assert_person_unlocked($pdo,$personId);
+    if($id)census_assert_unlocked($pdo,$id);
     if($year<1700||$year>2100)throw new RuntimeException('Année de recensement invalide');
     $isSpecial=safe_int($data['is_special']??0)?1:0;
     $status=safe_text($data['status']??'todo');
@@ -9568,6 +9593,10 @@ function save_census_record(PDO $pdo,array $data): array
         $pdo->prepare('INSERT INTO census_records(year,date_text,is_special,status,address,place_id,notes) VALUES(?,?,?,?,?,?,?)')->execute($values);
         $id=(int)$pdo->lastInsertId();$old=null;
     }
+    if(array_key_exists('precise_lat',$data)){ // point précis choisi sur la carte (vide = retiré)
+        $lat=h_coord($data['precise_lat']??null,90);$lon=h_coord($data['precise_lon']??null,180);
+        $pdo->prepare('UPDATE census_records SET precise_lat=?,precise_lon=? WHERE id=?')->execute([$lat!==null&&$lon!==null?$lat:null,$lat!==null&&$lon!==null?$lon:null,$id]);
+    }
     $censusFirstName=safe_text($data['census_first_name']??'');
     $displayName=safe_text($data['display_name']??'');
     if($displayName===''&&$censusFirstName===''){
@@ -9577,8 +9606,11 @@ function save_census_record(PDO $pdo,array $data): array
     }
     $link=$pdo->prepare('SELECT id FROM census_members WHERE census_id=? AND person_id=? LIMIT 1');$link->execute([$id,$personId]);$memberId=(int)$link->fetchColumn();
     $memberValues=[$censusFirstName,$displayName,safe_text($data['age_text']??''),safe_text($data['birth_place']??''),safe_text($data['occupation']??''),safe_text($data['employer']??''),safe_text($data['nationality']??''),safe_text($data['household_position']??''),safe_text($data['personal_status']??''),safe_text($data['extra_info']??'')];
-    if($memberId)$pdo->prepare('UPDATE census_members SET first_name=?,display_name=?,age_text=?,birth_place=?,occupation=?,employer=?,nationality=?,household_position=?,personal_status=?,extra_info=?,is_primary=1,updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$memberValues,$memberId]);
-    else $pdo->prepare('INSERT INTO census_members(census_id,person_id,first_name,display_name,age_text,birth_place,occupation,employer,nationality,household_position,personal_status,extra_info,is_primary) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,1)')->execute([$id,$personId,...$memberValues]);
+    // un seul membre principal par foyer : celui qui l'est déjà, sinon la personne qui crée le recensement
+    $prim=$pdo->prepare('SELECT person_id FROM census_members WHERE census_id=? AND is_primary=1 LIMIT 1');$prim->execute([$id]);$primary=$prim->fetchColumn();
+    $isPrimary=$primary===false||(int)$primary===$personId?1:0;
+    if($memberId)$pdo->prepare('UPDATE census_members SET first_name=?,display_name=?,age_text=?,birth_place=?,occupation=?,employer=?,nationality=?,household_position=?,personal_status=?,extra_info=?,is_primary=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$memberValues,$isPrimary,$memberId]);
+    else $pdo->prepare('INSERT INTO census_members(census_id,person_id,first_name,display_name,age_text,birth_place,occupation,employer,nationality,household_position,personal_status,extra_info,is_primary) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)')->execute([$id,$personId,...$memberValues,$isPrimary]);
     $stmt=$pdo->prepare('SELECT * FROM census_records WHERE id=?');$stmt->execute([$id]);$after=$stmt->fetch();
     log_change($pdo,'census',$id,$old?'update':'create',($old?'Modification':'Ajout').' du recensement '.$year.' pour la fiche #'.$personId,$old,$after);
     return ['id'=>$id,'person_id'=>$personId];
@@ -9590,6 +9622,7 @@ function add_census_member(PDO $pdo,array $data): array
     $check=$pdo->prepare('SELECT id,year FROM census_records WHERE id=?');$check->execute([$censusId]);$record=$check->fetch();if(!$record)throw new RuntimeException('Recensement introuvable');
     $personId=safe_int($data['person_id']??0)?:null;
     if($personId&&!person_exists($pdo,$personId))throw new RuntimeException('Personne liée introuvable');
+    census_assert_unlocked($pdo,$censusId,(int)$personId);
     $memberFirstName=safe_text($data['member_first_name']??'');
     $displayName=safe_text($data['display_name']??'');
     if($displayName===''&&$personId){$person=summary_person($pdo,$personId);$displayName=$person?($person['last_name']??''):'';if($memberFirstName===''&&$person)$memberFirstName=$person['first_name']??'';}
@@ -9616,14 +9649,17 @@ function update_census_member(PDO $pdo,array $data): array
     $stmt=$pdo->prepare('SELECT * FROM census_members WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Membre introuvable');
     $personId=(int)$before['is_primary']===1?((int)$before['person_id']?:null):(safe_int($data['person_id']??0)?:null);
     if($personId&&!person_exists($pdo,$personId))throw new RuntimeException('Personne liée introuvable');
+    census_assert_unlocked($pdo,(int)$before['census_id'],(int)$personId);
     $memberFirstName=safe_text($data['member_first_name']??'');
     $displayName=safe_text($data['display_name']??'');
     if($displayName===''&&$personId){$person=summary_person($pdo,$personId);$displayName=$person?($person['last_name']??''):'';if($memberFirstName===''&&$person)$memberFirstName=$person['first_name']??'';}
     if($displayName===''&&$memberFirstName==='')throw new RuntimeException('Nom du membre obligatoire');
     if($personId){
-        $exists=$pdo->prepare('SELECT id FROM census_members WHERE census_id=? AND person_id=? AND id<>?');
-        $exists->execute([(int)$before['census_id'],$personId,$id]);
-        if($duplicate=(int)$exists->fetchColumn())$pdo->prepare('DELETE FROM census_members WHERE id=?')->execute([$duplicate]);
+        $exists=$pdo->prepare('SELECT id,is_primary FROM census_members WHERE census_id=? AND person_id=? AND id<>?');$exists->execute([(int)$before['census_id'],$personId,$id]);
+        if($dup=$exists->fetch()){
+            if((int)$dup['is_primary']===1)throw new RuntimeException('Cette personne est déjà le membre principal de ce foyer : modifie plutôt sa ligne.');
+            $pdo->prepare('DELETE FROM census_members WHERE id=?')->execute([(int)$dup['id']]);
+        }
     }
     $pdo->prepare('UPDATE census_members SET person_id=?,first_name=?,display_name=?,age_text=?,birth_place=?,occupation=?,employer=?,nationality=?,household_position=?,personal_status=?,extra_info=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
         ->execute([$personId,$memberFirstName,$displayName,safe_text($data['age_text']??''),safe_text($data['birth_place']??''),safe_text($data['occupation']??''),safe_text($data['employer']??''),safe_text($data['nationality']??''),safe_text($data['household_position']??''),safe_text($data['personal_status']??''),safe_text($data['extra_info']??''),$id]);
@@ -9636,7 +9672,9 @@ function delete_census_record(PDO $pdo,array $data): array
 {
     $id=safe_int($data['id']??0);if(!$id)throw new RuntimeException('Recensement manquant');
     $stmt=$pdo->prepare('SELECT * FROM census_records WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Recensement introuvable');
+    census_assert_unlocked($pdo,$id);
     $pdo->prepare("DELETE FROM media_links WHERE entity_type='census' AND entity_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='census' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM census_members WHERE census_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM census_records WHERE id=?')->execute([$id]);
     log_change($pdo,'census',$id,'delete','Suppression du recensement '.$before['year'],$before,null);
@@ -9647,6 +9685,7 @@ function delete_census_member(PDO $pdo,array $data): array
 {
     $id=safe_int($data['id']??0);$stmt=$pdo->prepare('SELECT * FROM census_members WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Membre introuvable');
     if((int)$before['is_primary']===1)throw new RuntimeException('Le membre principal se modifie depuis le recensement, il ne se retire pas ici.');
+    census_assert_unlocked($pdo,(int)$before['census_id'],(int)$before['person_id']);
     $pdo->prepare('DELETE FROM census_members WHERE id=?')->execute([$id]);
     log_change($pdo,'census',(int)$before['census_id'],'delete-member','Retrait de '.$before['display_name'].' du foyer recensé',$before,null);
     return ['id'=>$id,'census_id'=>(int)$before['census_id']];
@@ -9714,6 +9753,7 @@ function link_census_media(PDO $pdo,array $data): array
 {
     $censusId=safe_int($data['census_id']??0);$personId=safe_int($data['person_id']??0);
     if(!$censusId||!$personId)throw new RuntimeException('Recensement ou personne manquante');
+    assert_person_unlocked($pdo,$personId);
     $check=$pdo->prepare('SELECT cr.id,cr.year FROM census_records cr JOIN census_members cm ON cm.census_id=cr.id WHERE cr.id=? AND cm.person_id=? LIMIT 1');
     $check->execute([$censusId,$personId]);$record=$check->fetch();
     if(!$record)throw new RuntimeException('Ce recensement n’est pas lié à cette personne');

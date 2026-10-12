@@ -163,7 +163,9 @@ function insee_remote_import(PDO $pdo, array $data): never
             $p = insee_file_period(strtolower(explode(' / ', (string) $old['filename'])[0]));
             if (!$p || $p['year'] !== $period['year'] || (!$p['month'] && !$p['quarter'])) { continue; }
             try {
-                $pdo->prepare('DELETE FROM insee_deces WHERE source_import_id=?')->execute([(int) $old['id']]);
+                $del = $pdo->prepare('DELETE FROM insee_deces WHERE source_import_id=?'); $del->execute([(int) $old['id']]);
+                // imports d'avant le lien source_import_id : leurs lignes sont repérées par le nom du fichier
+                if ($del->rowCount() === 0) { $pdo->prepare('DELETE FROM insee_deces WHERE source_file=? AND source_import_id IS NULL')->execute([(string) $old['filename']]); }
                 $pdo->prepare('DELETE FROM insee_deces_imports WHERE id=?')->execute([(int) $old['id']]);
             } catch (Throwable $e) { error_log('[insee] ' . $old['filename'] . ' non retiré : ' . $e->getMessage()); }
         }

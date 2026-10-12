@@ -640,3 +640,8 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cw-valcolor{display:inline-flex;gap:.3rem;align-items:center;font-size:.9em}
 .h-cw-valcolor input{width:1.9rem;height:1.6rem;padding:0;border:1px solid rgba(128,128,128,.5);background:none}
 .h-cw-caption-field{display:block;margin-top:.6rem}
+.h-census-filters{margin-bottom:.6rem}
+.h-census-year{margin:.8rem 0}
+.h-census-year>summary{cursor:pointer;font-size:1.05rem;padding:.3rem 0}
+.h-census-house{border:1px solid var(--line,#ddd);border-radius:8px;padding:.6rem .8rem;margin:.5rem 0}
+.h-census-house>header{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-bottom:.4rem}

@@ -61,7 +61,7 @@ function save_voter_cards(PDO $pdo, array $data): array
         $place = mb_substr(trim((string) ($vote['place_text'] ?? '')), 0, 200);
         $stamp = mb_substr(trim((string) ($vote['stamp'] ?? '')), 0, 200);
         $note = mb_substr(trim((string) ($vote['note'] ?? '')), 0, 2000);
-        if ($date === '' && $election === '' && $place === '' && $note === '') { continue; }
+        if ($date === '' && $election === '' && $place === '' && $stamp === '' && $note === '') { continue; }
         $round = in_array((int) ($vote['round'] ?? 0), [1, 2], true) ? (int) $vote['round'] : 0;
         $insV->execute([$personId, $date, voter_year($date), $election, $round, $place, $stamp, $note, $k++]);
     }

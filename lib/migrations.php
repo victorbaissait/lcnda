@@ -1548,9 +1548,12 @@ function schema_v20(PDO $pdo): void
     if (!in_array('screenshot_media_id', $cols, true)) { $pdo->exec('ALTER TABLE person_online_sheets ADD COLUMN screenshot_media_id INTEGER'); }
 }
 
-/** n°21 : coffre des cousins rangé par base (identifiant au hasard dans l'en-tête des copies), plus par nom. */
+/** n°21 : coffre des cousins rangé par base (identifiant au hasard dans l'en-tête des copies) ; point précis des recensements. */
 function schema_v21(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(cousin_vault)')->fetchAll(), 'name');
     if ($cols && !in_array('base_uid', $cols, true)) { $pdo->exec("ALTER TABLE cousin_vault ADD COLUMN base_uid TEXT NOT NULL DEFAULT ''"); }
+    // point précis d'un recensement (la carte du formulaire l'envoyait, mais rien ne le gardait)
+    $cols = array_column($pdo->query('PRAGMA table_info(census_records)')->fetchAll(), 'name');
+    if ($cols && !in_array('precise_lat', $cols, true)) { $pdo->exec('ALTER TABLE census_records ADD COLUMN precise_lat REAL'); $pdo->exec('ALTER TABLE census_records ADD COLUMN precise_lon REAL'); }
 }

@@ -84,8 +84,17 @@ function village_profile(PDO $pdo, string $key): array
 function parse_populations(string $text): array
 {
     $out = [];
-    foreach (preg_split('/\R/u', $text) as $line) {
-        if (!preg_match('/\b(1[5-9]\d\d|20\d\d)\b\D+([\d\s  .]+)/u', $line, $m)) { continue; }
+    // Tableau de Wikipédia collé : une ligne d'années, puis une ligne d'habitants (séparés par des tabulations)
+    $lines = array_values(array_filter(array_map('trim', preg_split('/\R/u', $text)), static fn($l) => $l !== '')); $used = [];
+    for ($i = 0; $i + 1 < count($lines); $i++) {
+        $years = preg_split('/\t+/', $lines[$i]); $counts = preg_split('/\t+/', $lines[$i + 1]);
+        if (count($years) < 2 || count($years) !== count($counts) || array_filter($years, static fn($y) => !preg_match('/^(1[5-9]\d\d|20\d\d)$/', trim($y)))) { continue; }
+        foreach ($years as $k => $y) { $n = (int) preg_replace('/\D/', '', $counts[$k]); if ($n > 0 && $n < 40000000) { $out[(int) trim($y)] = $n; } }
+        $used[$i] = $used[$i + 1] = true; $i++;
+    }
+    foreach ($lines as $li => $line) {
+        if (isset($used[$li])) { continue; }
+        if (!preg_match('/\b(1[5-9]\d\d|20\d\d)\b[^\d\t]+([\d \x{00A0}\x{202F}.]+)/u', $line, $m)) { continue; }
         $n = (int) preg_replace('/\D/', '', $m[2]);
         if ($n > 0) { $out[(int) $m[1]] = $n; }
     }
@@ -363,4 +372,47 @@ function save_village_populations(PDO $pdo, array $data): array
         ->execute([$key, safe_text($data['name'] ?? ''), json_encode($pops), $source]);
     log_change($pdo, 'meta', 0, 'update', 'Population du village récupérée : ' . safe_text($data['name'] ?? $key));
     return ['populations' => $pops];
+}
+
+/* ─── 📋 Recensements : tous les foyers ─────────────────────────────── */
+
+/**
+ * Tous les foyers recensés, avec leurs membres, filtrables par commune (clé de village), année et nom.
+ * Rend aussi les communes et années présentes pour les filtres.
+ */
+function census_households(PDO $pdo, array $f): array
+{
+    $where = []; $args = [];
+    $key = trim((string) ($f['village'] ?? ''));
+    if ($key !== '') {
+        $ids = village_place_ids($pdo, $key);
+        $where[] = $ids ? 'c.place_id IN (' . implode(',', array_map('intval', $ids)) . ')' : '0';
+    }
+    if ((int) ($f['year'] ?? 0)) { $where[] = 'c.year=?'; $args[] = (int) $f['year']; }
+    $q = trim((string) ($f['q'] ?? ''));
+    if ($q !== '') {
+        $like = '%' . $q . '%';
+        $where[] = "(c.address LIKE ? OR pl.name LIKE ? OR EXISTS (SELECT 1 FROM census_members m LEFT JOIN persons p ON p.id=m.person_id WHERE m.census_id=c.id AND (m.display_name LIKE ? OR m.occupation LIKE ? OR p.first_name LIKE ? OR p.last_name LIKE ?)))";
+        array_push($args, $like, $like, $like, $like, $like, $like);
+    }
+    $sql = "SELECT c.id, c.year, c.date_text, c.status, c.address, c.notes, c.is_special, c.place_id, pl.name AS place, pl.county,
+            (SELECT count(*) FROM media_links ml WHERE ml.entity_type='census' AND ml.entity_id=c.id) AS media
+        FROM census_records c LEFT JOIN places pl ON pl.id=c.place_id" . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . ' ORDER BY c.year, pl.name COLLATE NOCASE, c.address COLLATE NOCASE LIMIT 2000';
+    $s = $pdo->prepare($sql); $s->execute($args);
+    $records = $s->fetchAll();
+    if ($records) {
+        $in = implode(',', array_map(static fn($r) => (int) $r['id'], $records));
+        $members = [];
+        foreach ($pdo->query("SELECT m.census_id, m.person_id, m.display_name, m.age_text, m.birth_place, m.occupation, m.household_position, m.personal_status, m.is_primary,
+                p.first_name, p.last_name, p.gender FROM census_members m LEFT JOIN persons p ON p.id=m.person_id WHERE m.census_id IN ({$in}) ORDER BY m.is_primary DESC, m.id") as $m) {
+            $members[(int) $m['census_id']][] = $m;
+        }
+        foreach ($records as &$r) { $r['members'] = $members[(int) $r['id']] ?? []; }
+        unset($r);
+    }
+    // filtres : communes (regroupées comme dans la fiche d'un village) et années
+    $villages = [];
+    foreach (villages_list($pdo, '') as $v) { if ((int) ($v['census'] ?? 0) > 0) { $villages[] = ['key' => $v['key'], 'name' => $v['name'], 'county' => $v['county'] ?? '', 'census' => (int) $v['census']]; } }
+    $years = $pdo->query('SELECT year, count(*) AS n FROM census_records WHERE year IS NOT NULL GROUP BY year ORDER BY year')->fetchAll();
+    return ['records' => $records, 'villages' => $villages, 'years' => $years, 'truncated' => count($records) >= 2000];
 }

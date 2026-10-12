@@ -886,6 +886,42 @@
                 return shown.map(p => `<text x="${x(p[0])}" y="${H - pad + 18}" font-size="13" text-anchor="middle" fill="currentColor">${p[0]}</text><text x="${x(p[0])}" y="${yv(p[1]) - 9}" font-size="12" text-anchor="middle" fill="currentColor">${fmt(p[1])}</text>`).join('');
             })()}</svg>`;
     }
+    /* ─── 📋 Recensements : tous les foyers (filtrables par commune, année, nom) ─── */
+    const censusStatus = {todo: 'À chercher', found: 'Trouvé', not_found: 'Non trouvé', not_born: 'Pas encore né', not_in_france: 'Pas encore en France', not_france: 'Pas en France', left_france: 'Plus en France', dead: 'Déjà décédé'};
+    ext.lists.census_households = async token => {
+        const st = S();
+        const f = {village: st.hCensusVillage || '', year: st.hCensusYear || '', q: st.hCensusQ || ''};
+        let data;
+        try { data = await api('census_households', f); } catch (error) { toast(error.message, 'error'); return; }
+        if (token !== st.workspaceToken || st.module !== 'listes' || st.listType !== 'census_households') return;
+        const recs = data.records || [];
+        const byYear = new Map(); recs.forEach(r => { const y = r.year || '?'; if (!byYear.has(y)) byYear.set(y, []); byYear.get(y).push(r); });
+        const people = recs.reduce((n, r) => n + r.members.length, 0);
+        const memberName = m => m.person_id ? personLink(m.person_id, [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name) : esc(m.display_name || '—');
+        const household = r => `<article class="h-census-house"><header><div><strong>${esc(r.place || 'Lieu inconnu')}</strong>${r.address ? ` · ${esc(r.address)}` : ''}${r.date_text ? ` <small class="muted">${esc(r.date_text)}</small>` : ''}</div>
+                <span>${Number(r.is_special) ? '<span class="collection-kind">recensement particulier</span> ' : ''}<span class="collection-kind">${esc(censusStatus[r.status] || r.status || '')}</span>${Number(r.media) ? ` <span class="collection-kind">📎 ${fmt(r.media)}</span>` : ''}</span></header>
+            ${r.members.length ? `<table class="data-table"><thead><tr><th>Nom</th><th>Place dans le foyer</th><th>Âge</th><th>Métier</th><th>Né(e) à</th></tr></thead><tbody>${r.members.map(m => `<tr><td>${memberName(m)}</td><td>${esc(m.household_position || m.personal_status || '')}</td><td>${esc(m.age_text || '')}</td><td>${esc(m.occupation || '')}</td><td>${esc(m.birth_place || '')}</td></tr>`).join('')}</tbody></table>` : '<p class="muted">Aucun membre relevé.</p>'}
+            ${r.notes ? `<p class="muted">${nl(r.notes)}</p>` : ''}</article>`;
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-census-page">${header('LISTES', 'Recensements : tous les foyers', 'Chaque foyer recensé avec ses membres, regroupés par année. Filtre par commune, année ou nom ; clique sur un nom pour ouvrir sa fiche (le recensement se modifie depuis la fiche, bloc Recensements).')}
+            <div class="form-grid h-census-filters"><label>Commune<select data-hc="village"><option value="">Toutes (${fmt(data.villages.reduce((n, v) => n + v.census, 0))})</option>${data.villages.map(v => `<option value="${esc(v.key)}" ${v.key === f.village ? 'selected' : ''}>${esc(v.name)}${v.county ? ` (${esc(v.county)})` : ''} — ${fmt(v.census)}</option>`).join('')}</select></label>
+                <label>Année<select data-hc="year"><option value="">Toutes</option>${data.years.map(y => `<option value="${y.year}" ${String(y.year) === String(f.year) ? 'selected' : ''}>${y.year} (${fmt(y.n)})</option>`).join('')}</select></label>
+                <label class="span-2">Chercher un nom, un métier, une adresse<input type="search" data-hc="q" value="${esc(f.q)}" placeholder="Dupont, cultivateur, rue du Moulin…"></label></div>
+            <p class="muted">${plural(recs.length, 'foyer', 'foyers')} · ${plural(people, 'personne relevée', 'personnes relevées')}${data.truncated ? ' (les 2 000 premiers)' : ''} ${recs.length ? '<button type="button" class="link-button" data-hc-csv>Exporter en CSV</button>' : ''}</p>
+            ${recs.length ? [...byYear.entries()].map(([y, list]) => `<details class="h-census-year" open><summary><strong>${esc(y)}</strong> — ${plural(list.length, 'foyer', 'foyers')}, ${plural(list.reduce((n, r) => n + r.members.length, 0), 'personne', 'personnes')}</summary>${list.map(household).join('')}</details>`).join('') : empty('Aucun recensement ne correspond. Les recensements s’ajoutent depuis la fiche d’une personne (bloc Recensements).')}</section>`;
+        const ws = A().$('#workspace');
+        const rerun = () => ext.lists.census_households(++S().workspaceToken);
+        ws.querySelectorAll('select[data-hc]').forEach(el => el.addEventListener('change', () => { const k = el.dataset.hc; st[k === 'village' ? 'hCensusVillage' : 'hCensusYear'] = el.value; rerun(); }));
+        let t = 0; ws.querySelector('input[data-hc="q"]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.hCensusQ = e.target.value.trim(); rerun().then(() => { const i = A().$('#workspace input[data-hc="q"]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }, 350); });
+        ws.querySelector('[data-hc-csv]')?.addEventListener('click', () => {
+            const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+            const lines = [['Année', 'Date', 'Commune', 'Adresse', 'Nom', 'Place dans le foyer', 'Âge', 'Métier', 'Né(e) à'].map(q).join(';')];
+            recs.forEach(r => (r.members.length ? r.members : [{}]).forEach(m => lines.push([r.year, r.date_text, r.place, r.address, m.person_id ? [m.first_name, m.last_name].filter(Boolean).join(' ') || m.display_name : m.display_name, m.household_position || m.personal_status, m.age_text, m.occupation, m.birth_place].map(q).join(';'))));
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\n')], {type: 'text/csv'})); a.download = 'recensements.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+        });
+        A().bindTableLinks?.();
+    };
+    ext.openCensusHouseholds = (village = '', year = '') => { const st = S(); st.hCensusVillage = village; st.hCensusYear = year ? String(year) : ''; st.hCensusQ = ''; st.listType = 'census_households'; A().setModule('listes'); };
+
     ext.lists.villages = async token => {
         const st = S();
         if (st.hVillage) return renderVillage(token, st.hVillage);
@@ -945,7 +981,7 @@
                 ${v.graves.length ? `<h4>Cimetières</h4><ul>${v.graves.map(g => `<li>${esc(g.cemetery_name || 'Cimetière')} <small>(${plural(g.n, 'sépulture notée', 'sépultures notées')})</small></li>`).join('')}</ul>` : ''}</section>
             <section class="maintenance-panel"><h3>👥 Population au fil des recensements</h3>${pops.length > 1 ? '<p class="muted">La courbe est tout en bas de la fiche.</p>' : '<p class="muted">Les chiffres sont récupérés sur Wikipédia (en bas de la fiche) ; tu peux aussi les saisir à la main (crayon en haut).</p>'}
                 ${pops.length ? `<details><summary>Les chiffres (${pops.length})</summary><table class="data-table"><tbody>${pops.map(p => `<tr><td>${p[0]}</td><td>${fmt(p[1])} habitants</td></tr>`).join('')}</tbody></table></details>` : ''}
-                ${v.census.length ? `<h4>Recensements de la famille ici</h4><table class="data-table"><thead><tr><th>Année</th><th>Foyers</th><th>Personnes relevées</th></tr></thead><tbody>${v.census.map(c => `<tr><td>${c.year}</td><td>${c.households}</td><td>${c.members}</td></tr>`).join('')}</tbody></table>` : ''}
+                ${v.census.length ? `<h4>Recensements de la famille ici</h4><table class="data-table"><thead><tr><th>Année</th><th>Foyers</th><th>Personnes relevées</th></tr></thead><tbody>${v.census.map(c => `<tr><td><button type="button" class="table-link" data-h-census-open="${esc(String(c.year))}" title="Voir les foyers recensés">${c.year}</button></td><td>${c.households}</td><td>${c.members}</td></tr>`).join('')}</tbody></table><p><button type="button" class="button small secondary" data-h-census-open="">📋 Tous les foyers recensés ici</button></p>` : ''}
                 <p class="h-links"><a href="${esc(wiki)}" target="_blank" rel="noopener noreferrer">Wikipédia (évolution démographique) ↗</a> · <a href="http://cassini.ehess.fr/" target="_blank" rel="noopener noreferrer">Des villages de Cassini aux communes d’aujourd’hui (EHESS) ↗</a></p></section>
             <section class="maintenance-panel"><h3>⚒️ Métiers dominants</h3>${v.jobs.length ? `<ul class="h-bars">${v.jobs.map(j => `<li><span class="h-bar-label">${esc(j.name)}</span><span class="h-bar"><i style="width:${Math.round(j.count / topJob * 100)}%"></i></span><span>${j.count}${j.from ? ` <small class="muted">${j.from}${j.to && j.to !== j.from ? '–' + j.to : ''}</small>` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Aucun métier noté pour les personnes de cette commune.</p>'}</section>
             </div>
@@ -961,6 +997,7 @@
         const ws = A().$('#workspace');
         const again = () => renderVillage(++st.workspaceToken, key);
         ws.querySelector('[data-h-village-back]').addEventListener('click', () => { st.hVillage = ''; ext.lists.villages(++st.workspaceToken); });
+        ws.querySelectorAll('[data-h-census-open]').forEach(b => b.addEventListener('click', () => ext.openCensusHouseholds(key, b.dataset.hCensusOpen)));
         ws.querySelector('[data-h-village-mono]').addEventListener('click', () => { st.graphMode = 'place_monograph'; st.graphPlaceMonograph = {...(st.graphPlaceMonograph || {}), id: v.place_id, name: v.name, county: v.county || '', country: v.country || ''}; A().setModule('graphiques'); });
         ws.querySelectorAll('[data-h-village-bg]').forEach(b => b.addEventListener('click', () => { st.hVillageMap = b.dataset.hVillageBg; again(); }));
         ws.querySelector('[data-h-village-bgsel]')?.addEventListener('change', e => { if (e.target.value) { st.hVillageMap = e.target.value; again(); } });

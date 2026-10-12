@@ -210,7 +210,7 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
         $c = null;
         switch ($r['field']) {
             case 'event_type':
-                if (!$r['values']) { break; }
+                if (!$r['values']) { $c = '0'; break; } // aucune valeur choisie (ou type absent de cette base) : ne garde rien, au lieu de toute la base
                 $in = implode(',', $r['values']);
                 $yr = ($r['from'] ? ' AND ee.year >= ' . (int) $r['from'] : '') . ($r['to'] ? ' AND ee.year <= ' . (int) $r['to'] : '');
                 $c = $isEvents ? "(e.event_type_id IN ({$in}))"
@@ -252,7 +252,7 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
                 $c = $personMatch('x.gender = ?'); $params[] = $r['value'];
                 break;
             case 'label':
-                if (!$r['values']) { break; }
+                if (!$r['values']) { $c = '0'; break; } // aucune valeur choisie (ou type absent de cette base) : ne garde rien, au lieu de toute la base
                 $in = implode(',', $r['values']);
                 $c = $isEvents ? "(EXISTS (SELECT 1 FROM label_links ll WHERE ll.label_id IN ({$in}) AND ((ll.entity_type='event' AND ll.entity_id=e.id) OR (ll.entity_type='person' AND ll.entity_id IN (e.person_id, f.partner1_id, f.partner2_id)))))"
                     : "(EXISTS (SELECT 1 FROM label_links ll WHERE ll.label_id IN ({$in}) AND ll.entity_type='person' AND ll.entity_id=p.id))";
