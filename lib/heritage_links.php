@@ -437,7 +437,7 @@ function languages_overview(PDO $pdo): array
 /** Tous les textes qui citent cette fiche par un lien « @[Nom|id] ». */
 function person_mentions(PDO $pdo, int $personId): array
 {
-    $needle = '%|' . $personId . ']%';
+    $needle = '%@[%|' . $personId . ']%'; // un vrai lien « @[Nom|id] », pas n'importe quel « |12] »
     $out = [];
     $snip = static function (string $text) use ($personId): string {
         $pos = strpos($text, '|' . $personId . ']');

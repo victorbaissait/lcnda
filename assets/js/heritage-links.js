@@ -188,12 +188,14 @@
     const baseCited = ext.lists.cited_names;
     if (baseCited) ext.lists.cited_names = async (token, view) => {
         await baseCited(token, view);
+        if (token !== undefined && !isCurrent(token)) return;
         const page = document.querySelector('.h-cite-page');
         const mediaId = Number(S().hCiteMedia) || 0;
         if (!page || !mediaId || page.querySelector('.h-media-langs')) return;
         const box = document.createElement('div'); box.className = 'maintenance-panel h-media-langs';
         page.querySelector('.h-cite-layout aside')?.prepend(box);
         const r = await api('record_languages', {type: 'media', id: mediaId}).catch(() => ({languages: []}));
+        if (!box.isConnected) return; // on a quitté la page entre-temps
         recordLanguagesEditor(box, 'media', mediaId, r.languages || []);
     };
 
@@ -244,7 +246,7 @@
                 if (!b) return;
                 e.preventDefault();
                 const start = ta.selectionStart - q.length - 1;
-                const token = `@[${b.dataset.name}|${b.dataset.id}] `;
+                const token = `@[${b.dataset.name.replace(/[\[\]|]/g, ' ').replace(/\s+/g, ' ').trim()}|${b.dataset.id}] `; // un « ] » ou « | » dans le nom casserait le lien
                 ta.value = ta.value.slice(0, start) + token + ta.value.slice(ta.selectionStart);
                 ta.selectionStart = ta.selectionEnd = start + token.length;
                 ta.dispatchEvent(new Event('input', {bubbles: true}));

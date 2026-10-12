@@ -275,7 +275,9 @@
         clearTimeout(input._t);
         if (input.value.trim().length < 2) { list.hidden = true; return; }
         input._t = setTimeout(async () => {
-            const data = await api('parish_place_search', {q: input.value.trim()}).catch(() => ({places: []}));
+            const q = input.value.trim(), seq = input._seq = (input._seq || 0) + 1;
+            const data = await api('parish_place_search', {q}).catch(() => ({places: []}));
+            if (seq !== input._seq || input.value.trim() !== q) return; // réponse d'une frappe plus ancienne
             list.innerHTML = (data.places || []).map(p => `<button type="button" data-h-pp-pick="${p.id}" data-label="${esc(p.label)}">${esc(p.label)}</button>`).join('') || '<small class="muted">Aucun lieu de ce nom dans la base : le texte sera gardé.</small>';
             list.hidden = false;
         }, 220);

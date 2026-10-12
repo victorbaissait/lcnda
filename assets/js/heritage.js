@@ -156,7 +156,9 @@
         const q = input.value.split(',')[0].trim();
         if (q.length < 2) { list.hidden = true; return; }
         input._hTimer = setTimeout(async () => {
+            const seq = input._hSeq = (input._hSeq || 0) + 1;
             const data = await api('heritage_place_search', {q}).catch(() => ({places: []}));
+            if (seq !== input._hSeq || input.value.split(',')[0].trim() !== q) return; // réponse d'une frappe plus ancienne
             list.innerHTML = (data.places || []).map(p => `<button type="button" data-h-place-pick data-label="${esc(p.label)}" data-lat="${p.lat}" data-lon="${p.lon}">${esc(p.label)}</button>`).join('') || '<small class="muted">Lieu inconnu : il sera cherché à l’enregistrement.</small>';
             list.hidden = false;
         }, 220);
