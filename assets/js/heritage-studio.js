@@ -235,7 +235,7 @@
         let lo = 0, hi = 255, acc = 0;
         while (lo < 254 && (acc += hist[lo]) < n * 0.005) lo++;
         acc = 0; while (hi > lo + 1 && (acc += hist[hi]) < n * 0.005) hi--;
-        Object.assign(st, rtDefault(), {bw: st.bw, sepia: st.sepia, invert: st.invert});
+        Object.assign(st, rtDefault(), {bw: st.bw, sepia: st.sepia, invert: st.invert, strokes: st.strokes || []});
         if (hi - lo < 8) return; // image presque d'une seule teinte : rien à étirer
         st.curves.rgb = [[lo, 0], [Math.round((lo + hi) / 2), 128], [hi, 255]];
     }
@@ -247,6 +247,52 @@
         ['Négatif → positif', st => Object.assign(st, {invert: true, contrast: 15})],
     ];
     const mediaSrc = m => `media/${encodeURIComponent(m.filename)}?v=${m._cacheBust || ''}`;
+
+    /* ── Correcteur de taches et tampon de duplication ──
+       Chaque coup est noté en coordonnées relatives (0 à 1) : on le rejoue sur l'aperçu puis, à l'enregistrement, sur l'image en pleine taille. */
+    /** Copie un disque de (sx,sy) vers (cx,cy), bord adouci ; `offset` corrige la teinte (correcteur). Lit dans `from`, écrit dans `data`. */
+    function rtDab(data, from, W, H, cx, cy, sx, sy, r, offset = null, hard = 0.55) {
+        const r2 = r * r, x0 = Math.max(0, Math.floor(cx - r)), x1 = Math.min(W - 1, Math.ceil(cx + r)), y0 = Math.max(0, Math.floor(cy - r)), y1 = Math.min(H - 1, Math.ceil(cy + r));
+        const dx = Math.round(sx - cx), dy = Math.round(sy - cy);
+        for (let y = y0; y <= y1; y++) {
+            const syy = y + dy; if (syy < 0 || syy >= H) continue;
+            for (let x = x0; x <= x1; x++) {
+                const d2 = (x - cx) * (x - cx) + (y - cy) * (y - cy); if (d2 > r2) continue;
+                const sxx = x + dx; if (sxx < 0 || sxx >= W) continue;
+                const t = Math.sqrt(d2) / r, a = t <= hard ? 1 : 1 - (t - hard) / (1 - hard), w = a * a * (3 - 2 * a);
+                const i = (y * W + x) * 4, j = (syy * W + sxx) * 4;
+                for (let c = 0; c < 3; c++) data[i + c] = data[i + c] * (1 - w) + (from[j + c] + (offset ? offset[c] : 0)) * w;
+            }
+        }
+    }
+    /** Pour une tache en (cx,cy) : la zone voisine dont le pourtour ressemble le plus au pourtour de la tache, et l'écart de teinte à corriger. */
+    function rtHealSource(from, W, H, cx, cy, r) {
+        const ring = []; for (let k = 0; k < 40; k++) { const a = k / 40 * Math.PI * 2; for (const f of [1.15, 1.45]) ring.push([Math.cos(a) * r * f, Math.sin(a) * r * f]); }
+        const px = (x, y) => { x = Math.max(0, Math.min(W - 1, Math.round(x))); y = Math.max(0, Math.min(H - 1, Math.round(y))); return (y * W + x) * 4; };
+        let best = null;
+        for (const dist of [2.4, 3.2, 4.4]) for (let k = 0; k < 16; k++) {
+            const a = k / 16 * Math.PI * 2, sx = cx + Math.cos(a) * r * dist, sy = cy + Math.sin(a) * r * dist;
+            if (sx - r < 0 || sy - r < 0 || sx + r >= W || sy + r >= H) continue;
+            let ssd = 0; for (const [ox, oy] of ring) { const i = px(cx + ox, cy + oy), j = px(sx + ox, sy + oy); for (let c = 0; c < 3; c++) { const d = from[i + c] - from[j + c]; ssd += d * d; } }
+            if (!best || ssd < best.ssd) best = {sx, sy, ssd};
+        }
+        if (!best) return null;
+        const off = [0, 0, 0]; for (const [ox, oy] of ring) { const i = px(cx + ox, cy + oy), j = px(best.sx + ox, best.sy + oy); for (let c = 0; c < 3; c++) off[c] += from[i + c] - from[j + c]; }
+        return {sx: best.sx, sy: best.sy, offset: off.map(v => v / ring.length)};
+    }
+    /** Rejoue les coups (groupes d'un même geste) sur une image : correcteur et tampon. */
+    function rtReplayStrokes(img, strokes) {
+        const W = img.width, H = img.height, data = img.data;
+        for (const g of strokes) {
+            const from = new Uint8ClampedArray(data); // chaque geste copie depuis l'état d'avant lui (pas de trainée qui se recopie)
+            for (const d of g.dabs) {
+                const cx = d.x * W, cy = d.y * H, r = Math.max(1, d.r * W);
+                if (g.tool === 'heal') { const h = rtHealSource(from, W, H, cx, cy, r); if (h) rtDab(data, from, W, H, cx, cy, h.sx, h.sy, r, h.offset, 0.35); }
+                else rtDab(data, from, W, H, cx, cy, cx + d.ox * W, cy + d.oy * H, r);
+            }
+        }
+        return img;
+    }
     /** Retouche d'une photo : on part de la version affichée (ou d'une autre, `source`), le résultat devient une nouvelle version. */
     async function openRetouch(source = '') {
         const st0 = A().state, item = st0.lightboxMedia?.[st0.lightboxIndex];
@@ -268,7 +314,11 @@
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch';
         dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
-            <div class="h-rt-body"><div class="h-rt-stage"><canvas data-rt-canvas width="${pw}" height="${ph}"></canvas><button type="button" class="button small secondary h-rt-before" data-rt-before title="Garder appuyé pour voir l’original">👁 Avant / après</button></div>
+            <div class="h-rt-paint"><span class="h-rt-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}">${l}</button>`).join('')}</span>
+                <label class="h-rt-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rt-size> <output data-rt-size-out>18</output></label>
+                <button type="button" class="button small secondary" data-rt-undo disabled>↶ Annuler la dernière correction</button>
+                <small class="muted" data-rt-paint-help></small></div>
+            <div class="h-rt-body"><div class="h-rt-stage"><canvas data-rt-canvas width="${pw}" height="${ph}"></canvas><span class="h-rt-brush" data-rt-brush hidden></span><span class="h-rt-src" data-rt-src hidden></span><button type="button" class="button small secondary h-rt-before" data-rt-before title="Garder appuyé pour voir l’original">👁 Avant / après</button></div>
             <div class="h-rt-tools"><div class="h-rt-presets">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                 ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
                 <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>
@@ -285,7 +335,58 @@
         dlg.querySelectorAll('[data-rt-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
         const canvas = dlg.querySelector('[data-rt-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
         let raf = 0, showBefore = false, selPt = -1, outside = -1;
-        const draw = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (showBefore) ctx.putImageData(srcData, 0, 0); else ctx.putImageData(rtApply(srcData, out, st), 0, 0); }); };
+        const baseData = new ImageData(new Uint8ClampedArray(srcData.data), pw, ph); // l'image d'origine (avant / après, annuler)
+        const draw = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => { if (showBefore) ctx.putImageData(baseData, 0, 0); else ctx.putImageData(rtApply(srcData, out, st), 0, 0); }); };
+        // ── Correcteur de taches et tampon ──
+        st.strokes = [];
+        let mode = 'adjust', brush = 18, cloneOff = null, painting = null;
+        const brushEl = dlg.querySelector('[data-rt-brush]'), srcEl = dlg.querySelector('[data-rt-src]'), help = dlg.querySelector('[data-rt-paint-help]'), undoBtn = dlg.querySelector('[data-rt-undo]');
+        const HELP = {adjust: '', heal: 'Clique sur une tache, une poussière ou une rayure : elle est remplacée par ce qui l’entoure. Pour une rayure, glisse le long.', clone: 'Alt + clic (⌥ + clic sur Mac) pour choisir l’endroit à recopier, puis peins sur la zone à couvrir.'};
+        // l'image est centrée dans le cadre (marges sur les côtés ou en haut et en bas) : on en tient compte
+        const fit = () => { const r = canvas.getBoundingClientRect(), k = Math.min(r.width / pw, r.height / ph); return {r, k, ox: r.left + (r.width - pw * k) / 2, oy: r.top + (r.height - ph * k) / 2}; };
+        const toCanvas = e => { const f = fit(); return [(e.clientX - f.ox) / f.k, (e.clientY - f.oy) / f.k, f]; };
+        const setMode = m => {
+            mode = m; cloneOff = m === 'clone' ? cloneOff : null;
+            dlg.querySelectorAll('[data-rt-mode]').forEach(b => b.classList.toggle('secondary', b.dataset.rtMode !== m));
+            dlg.querySelector('.h-rt-size').hidden = m === 'adjust'; help.textContent = HELP[m];
+            canvas.classList.toggle('is-painting', m !== 'adjust'); brushEl.hidden = true; srcEl.hidden = true;
+        };
+        dlg.querySelectorAll('[data-rt-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.rtMode)));
+        dlg.querySelector('[data-rt-size]').addEventListener('input', e => { brush = Number(e.target.value); dlg.querySelector('[data-rt-size-out]').textContent = brush; });
+        const showBrush = e => {
+            if (mode === 'adjust') { brushEl.hidden = true; return; }
+            const [x, y, f] = toCanvas(e), k = f.k, stage = canvas.parentElement.getBoundingClientRect();
+            Object.assign(brushEl.style, {width: brush * 2 * k + 'px', height: brush * 2 * k + 'px', left: (f.ox - stage.left + x * k - brush * k) + 'px', top: (f.oy - stage.top + y * k - brush * k) + 'px'}); brushEl.hidden = false;
+            if (mode === 'clone' && cloneOff) { Object.assign(srcEl.style, {left: (f.ox - stage.left + (x + cloneOff[0]) * k) + 'px', top: (f.oy - stage.top + (y + cloneOff[1]) * k) + 'px'}); srcEl.hidden = false; }
+        };
+        const dabAt = (x, y) => {
+            const g = painting, d = g.dabs, last = d[d.length - 1];
+            if (last && Math.hypot(x - last.x * pw, y - last.y * ph) < Math.max(1, brush / 4)) return;
+            const rec = {x: x / pw, y: y / ph, r: brush / pw};
+            if (g.tool === 'heal') { const h = rtHealSource(g.from, pw, ph, x, y, brush); if (!h) return; rtDab(srcData.data, g.from, pw, ph, x, y, h.sx, h.sy, brush, h.offset, 0.35); }
+            else { rec.ox = cloneOff[0] / pw; rec.oy = cloneOff[1] / ph; rtDab(srcData.data, g.from, pw, ph, x, y, x + cloneOff[0], y + cloneOff[1], brush); }
+            d.push(rec); draw();
+        };
+        canvas.addEventListener('pointerdown', e => {
+            if (mode === 'adjust') return;
+            e.preventDefault();
+            const [x, y] = toCanvas(e);
+            if (mode === 'clone') {
+                // Alt + clic : l'endroit à recopier ; le clic suivant fixe le décalage, gardé ensuite comme dans Photoshop
+                if (e.altKey) { cloneOff = null; painting = null; canvas.dataset.cloneFrom = JSON.stringify([x, y]); toast('Endroit à recopier choisi : peins maintenant sur la zone à couvrir.'); return; }
+                if (canvas.dataset.cloneFrom) { const [fx, fy] = JSON.parse(canvas.dataset.cloneFrom); cloneOff = [fx - x, fy - y]; delete canvas.dataset.cloneFrom; }
+                if (!cloneOff) { toast('Choisis d’abord l’endroit à recopier : Alt + clic (⌥ + clic sur Mac).', 'error'); return; }
+            }
+            painting = {tool: mode, dabs: [], from: new Uint8ClampedArray(srcData.data)};
+            canvas.setPointerCapture(e.pointerId); dabAt(x, y);
+        });
+        canvas.addEventListener('pointermove', e => { showBrush(e); if (painting) { const [x, y] = toCanvas(e); dabAt(x, y); } });
+        canvas.addEventListener('pointerleave', () => { brushEl.hidden = true; srcEl.hidden = true; });
+        const endPaint = () => { if (!painting) return; if (painting.dabs.length) { st.strokes.push({tool: painting.tool, dabs: painting.dabs}); undoBtn.disabled = false; } painting = null; };
+        canvas.addEventListener('pointerup', endPaint); canvas.addEventListener('pointercancel', endPaint);
+        undoBtn.addEventListener('click', () => {
+            st.strokes.pop(); srcData.data.set(baseData.data); rtReplayStrokes(srcData, st.strokes); undoBtn.disabled = !st.strokes.length; draw();
+        });
         const svg = dlg.querySelector('[data-rt-curve]');
         const drawCurve = () => {
             const lut = curveLut(st.curves[channel]);
@@ -304,8 +405,8 @@
         dlg.addEventListener('input', e => { const k = e.target.dataset.rt; if (k) { st[k] = Number(e.target.value); dlg.querySelector(`[data-rt-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); } });
         dlg.addEventListener('change', e => { const k = e.target.dataset.rtT; if (k) { st[k] = e.target.checked; if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); } });
         dlg.querySelectorAll('[data-rt-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rtCh; selPt = -1; dlg.querySelectorAll('[data-rt-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
-        dlg.querySelectorAll('[data-rt-preset]').forEach(b => b.addEventListener('click', () => { const keep = {bw: false, sepia: false, invert: false}; Object.assign(st, rtDefault(), keep); RT_PRESETS[Number(b.dataset.rtPreset)][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); } syncControls(); }));
-        dlg.querySelector('[data-rt-reset]').addEventListener('click', () => { Object.assign(st, rtDefault()); syncControls(); });
+        dlg.querySelectorAll('[data-rt-preset]').forEach(b => b.addEventListener('click', () => { const keep = {bw: false, sepia: false, invert: false, strokes: st.strokes}; Object.assign(st, rtDefault(), keep); RT_PRESETS[Number(b.dataset.rtPreset)][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); } syncControls(); }));
+        dlg.querySelector('[data-rt-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); syncControls(); }); // les corrections de taches ont leur propre « Annuler »
         const before = dlg.querySelector('[data-rt-before]');
         const setBefore = v => { showBefore = v; before.classList.toggle('is-active', v); draw(); };
         before.addEventListener('pointerdown', () => setBefore(true));
@@ -375,7 +476,9 @@
                 // L'image en pleine taille, retouchée avec les mêmes réglages que l'aperçu
                 const full = document.createElement('canvas'); full.width = img.naturalWidth; full.height = img.naturalHeight;
                 const fctx = full.getContext('2d', {willReadFrequently: true}); fctx.drawImage(img, 0, 0);
-                const data = fctx.getImageData(0, 0, full.width, full.height); fctx.putImageData(rtApply(data, data, st), 0, 0);
+                const data = fctx.getImageData(0, 0, full.width, full.height);
+                if (st.strokes.length) rtReplayStrokes(data, st.strokes); // taches et tampon, rejoués en pleine taille
+                fctx.putImageData(rtApply(data, data, st), 0, 0);
                 const ext0 = String(from || '').split('.').pop().toLowerCase();
                 const type = ext0 === 'png' ? 'image/png' : ext0 === 'webp' ? 'image/webp' : ext0 === 'gif' ? 'image/png' : 'image/jpeg';
                 const blob = await new Promise(res => full.toBlob(res, type, 0.93));

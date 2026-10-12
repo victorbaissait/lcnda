@@ -656,3 +656,12 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-ck-row [data-ck-text]{flex:1}
 .h-x-people{display:flex;flex-wrap:wrap;gap:.3rem;margin:.3rem 0}
 .collection-kind.is-warn{background:#fff3cd;color:#7a5200}
+/* retouche : correcteur de taches et tampon */
+.h-rt-paint{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin:0 0 .6rem}
+.h-rt-modes{display:flex;gap:.3rem;flex-wrap:wrap}
+.h-rt-size{display:inline-flex;gap:.4rem;align-items:center}
+.h-rt-stage{position:relative}
+.h-rt-stage canvas.is-painting{cursor:none;touch-action:none}
+.h-rt-brush{position:absolute;border:1.5px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.6);pointer-events:none}
+.h-rt-src{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;pointer-events:none;background:linear-gradient(#fff,#fff) center/2px 100% no-repeat,linear-gradient(#fff,#fff) center/100% 2px no-repeat;filter:drop-shadow(0 0 1px #000)}
+.h-rt-paint [data-rt-paint-help]{flex-basis:100%;min-height:1.3em}
