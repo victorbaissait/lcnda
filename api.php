@@ -635,6 +635,7 @@ function dashboard_media_unlinked(PDO $pdo): array
         WHERE NOT EXISTS(SELECT 1 FROM media_links ml WHERE ml.media_id=m.id)
           AND NOT EXISTS(SELECT 1 FROM investigation_media im WHERE im.media_id=m.id)
           AND NOT EXISTS(SELECT 1 FROM family_collection_media cm WHERE cm.media_id=m.id)
+          AND NOT EXISTS(SELECT 1 FROM archive_digest_media adm WHERE adm.media_id=m.id)
         ORDER BY created_at DESC,id DESC LIMIT 60")->fetchAll();
 }
 
@@ -770,7 +771,7 @@ function dashboard_sosa_missing_near(PDO $pdo, int $rootId = 0): array
     $max = min(255, max(array_keys($positions)));
     $rows = [];
     for ($n = 1; $n <= $max && count($rows) < 80; $n++) {
-        if (!isset($positions[$n])) $rows[] = ['sosa'=>$n, 'side'=>($n % 2 === 0 ? 'Paternel' : 'Maternel'), 'generation'=>(int)floor(log($n, 2)) + 1];
+        if (!isset($positions[$n])) $rows[] = ['sosa'=>$n, 'side'=>($n < 2 ? '' : ((($n >> ((int) floor(log($n, 2)) - 1)) & 1) ? 'Maternel' : 'Paternel')), 'generation'=>(int)floor(log($n, 2)) + 1];
     }
     return $rows;
 }
@@ -4817,7 +4818,7 @@ function insee_deces_search(PDO $pdo): never
     // GLOB avec une recherche par préfixe utilise directement l'index existant.
     // Exemple : DUPONT trouve DUPONT, DUPONT-MARTIN, etc.
     $inseePrefix = static function (string $value): string {
-        return mb_strtoupper(trim($value), 'UTF-8') . '*';
+        return strtoupper(ascii_fold(trim($value))) . '*'; // les fichiers de l'INSEE sont en majuscules sans accents
     };
     if ($nom !== '') { $where[] = 'nom GLOB ?'; $params[] = $inseePrefix($nom); }
     if ($prenom !== '') { $where[] = 'prenom GLOB ?'; $params[] = $inseePrefix($prenom); }
@@ -4876,10 +4877,13 @@ function insee_add_date_filter(array &$where, array &$params, string $dateColumn
     $ors = [];
     $variants = [$digits];
     if (strlen($digits) === 8) {
-        // L'utilisateur tape souvent JJ/MM/AAAA, les fichiers INSEE stockent généralement AAAAMMJJ.
-        $variants[] = substr($digits, 4, 4) . substr($digits, 2, 2) . substr($digits, 0, 2);
-        $year = (int)substr($digits, 4, 4);
-        if ($year >= 1700 && $year <= 2200) { $ors[] = "$yearColumn = ?"; $params[] = $year; }
+        // Une date précise : le jour exact, pas toute l'année. L'utilisateur tape souvent JJ/MM/AAAA,
+        // les fichiers INSEE stockent AAAAMMJJ ; l'année (indexée) restreint la recherche.
+        $iso = (int) substr($digits, 0, 4) >= 1700 ? $digits : substr($digits, 4, 4) . substr($digits, 2, 2) . substr($digits, 0, 2);
+        $year = (int) substr($iso, 0, 4);
+        if ($year >= 1700 && $year <= 2200) { $where[] = "$yearColumn = ?"; $params[] = $year; }
+        $where[] = "$dateColumn = ?"; $params[] = $iso;
+        return;
     } elseif (strlen($digits) === 4) {
         $year = (int)$digits;
         if ($year >= 1700 && $year <= 2200) { $ors[] = "$yearColumn = ?"; $params[] = $year; }
@@ -5774,6 +5778,7 @@ function restore_deleted_investigation(PDO $pdo,array $change,array $before): ar
     if(!record_exists($pdo,'persons',safe_int($investigation['person_id']??0)))throw new RuntimeException('La personne principale de l’enquête n’existe plus.');
     insert_snapshot_row($pdo,'investigations',$investigation);
     foreach(($before['persons']??[]) as $row)if(record_exists($pdo,'persons',safe_int($row['person_id']??0)))insert_snapshot_row($pdo,'investigation_persons',$row,true);
+    foreach(($before['linked_battues']??[]) as $row)if(record_exists($pdo,'battues',safe_int($row['battue_id']??0)))insert_snapshot_row($pdo,'investigation_battues',$row,true);
     foreach(($before['folders']??[]) as $row)insert_snapshot_row($pdo,'investigation_media_folders',$row,true);
     foreach(($before['items']??[]) as $row)insert_snapshot_row($pdo,'investigation_items',$row,true);
     foreach(($before['media']??[]) as $row)if(record_exists($pdo,'media',safe_int($row['media_id']??0)))insert_snapshot_row($pdo,'investigation_media',$row,true);
@@ -5869,9 +5874,12 @@ function export_option_enabled(string $key, bool $default = true): bool
 
 function export_person_allowed(array $row): bool
 {
-    if (!export_option_enabled('include_living', true) && ($row['living_status'] ?? '') === 'living') return false;
+    // « Probablement vivant » : statut inconnu, né il y a moins de 100 ans, sans décès connu (comme l'export GEDCOM)
+    $birth = isset($row['birth_year']) && $row['birth_year'] !== null && $row['birth_year'] !== '' ? (int) $row['birth_year'] : null;
+    $probablyLiving = ($row['living_status'] ?? '') === 'living' || (in_array($row['living_status'] ?? '', ['', 'unknown'], true) && $birth && $birth > (int) date('Y') - 100 && empty($row['death_year']));
+    if (!export_option_enabled('include_living', true) && $probablyLiving) return false;
     if (!export_privacy_enabled()) return true;
-    if (($row['living_status'] ?? '') === 'living') return false;
+    if ($probablyLiving || (int) ($row['is_private'] ?? 0) === 1) return false;
     $cutoff = export_death_cutoff_year();
     $deathYear = isset($row['death_year']) && $row['death_year'] !== null && $row['death_year'] !== '' ? (int) $row['death_year'] : null;
     if ($cutoff && $deathYear && $deathYear >= $cutoff) return false;
@@ -5930,8 +5938,11 @@ function export_json(PDO $pdo): never
     $visiblePersonIds=array_fill_keys(array_map(static fn($p)=>(int)$p['id'],$persons), true);
     $families=$pdo->query('SELECT * FROM families ORDER BY id')->fetchAll();
     $families=array_values(array_filter($families,static fn($f)=>isset($visiblePersonIds[(int)($f['partner1_id']??0)])||isset($visiblePersonIds[(int)($f['partner2_id']??0)])));
-    $events=array_values(array_filter($pdo->query("SELECT e.*,t.slug,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY e.id")->fetchAll(),static fn($e)=>!export_privacy_enabled()||($e['scope']??'person')!=='person'||isset($visiblePersonIds[(int)($e['person_id']??0)])));
-    $notes=$pdo->query('SELECT * FROM notes ORDER BY id')->fetchAll();
+    $keptFamilyIds=array_fill_keys(array_map(static fn($f)=>(int)$f['id'],$families),true);
+    $events=array_values(array_filter($pdo->query("SELECT e.*,t.slug,t.gedcom_tag,t.label AS type_label,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY e.id")->fetchAll(),static fn($e)=>(int)($e['person_id']??0)?isset($visiblePersonIds[(int)$e['person_id']]):(!(int)($e['family_id']??0)||isset($keptFamilyIds[(int)$e['family_id']]))));
+    // Notes : seulement celles d'une fiche, d'une famille ou d'un événement exportés (pas celles des vivants exclus)
+    $keptEventIds=array_fill_keys(array_map(static fn($e)=>(int)$e['id'],$events),true);
+    $notes=array_values(array_filter($pdo->query('SELECT * FROM notes ORDER BY id')->fetchAll(),static fn($n)=>match((string)($n['entity_type']??'')){'person'=>isset($visiblePersonIds[(int)$n['entity_id']]),'family'=>isset($keptFamilyIds[(int)$n['entity_id']]),'event'=>isset($keptEventIds[(int)$n['entity_id']]),default=>true}));
     $sources=$pdo->query('SELECT * FROM sources ORDER BY id')->fetchAll();
     // Seulement les lieux cités par la généalogie (toute colonne place_id) : la table contient aussi le répertoire
     // des communes et lieux du monde (dizaines de milliers de lignes), qui faisait manquer de mémoire.
@@ -7599,7 +7610,7 @@ function investigation_event_label(PDO $pdo,int $eventId,string $fallbackPersonL
     $evtStmt->execute([$eventId]);
     $event=$evtStmt->fetch();
     if(!$event)return '';
-    $label=trim((string)$event['type_label'].' — '.(($event['date_text']!=='')?$event['date_text']:(($event['year']!=='')?$event['year']:'date inconnue')));
+    $label=trim((string)$event['type_label'].' — '.((trim((string)($event['date_text']??''))!=='')?$event['date_text']:((($event['year']??null)!==null&&$event['year']!=='')?$event['year']:'date inconnue')));
     $eventPersonLabel=trim((string)($event['person_name']??''));
     if($eventPersonLabel===''){
         $partners=array_filter([trim((string)($event['partner1_name']??'')),trim((string)($event['partner2_name']??''))]);
@@ -9186,12 +9197,16 @@ function add_parent_child(PDO $pdo, int $parentId, int $childId): void
 {
     $already=$pdo->prepare('SELECT 1 FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? AND (f.partner1_id=? OR f.partner2_id=?)');$already->execute([$childId,$parentId,$parentId]);
     if($already->fetchColumn())return;
-    // Réutiliser en priorité une famille où ce parent est déjà partenaire (même couple),
-    // pour que l'enfant nouvellement ajouté partage la même fratrie que les autres enfants de ce parent.
-    $existingFamily=$pdo->prepare('SELECT id FROM families WHERE partner1_id=? OR partner2_id=? ORDER BY CASE WHEN partner1_id IS NOT NULL AND partner2_id IS NOT NULL THEN 0 ELSE 1 END,id');$existingFamily->execute([$parentId,$parentId]);
-    if($familyId=$existingFamily->fetchColumn()){ensure_child_link($pdo,(int)$familyId,$childId);return;}
+    // 1) L'enfant a déjà un seul parent connu : le nouveau parent prend la place libre de cette famille
+    //    (sinon, avec la famille du nouveau parent et d'un autre conjoint, l'enfant aurait trois parents).
     $open=$pdo->prepare('SELECT f.id,f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? AND (f.partner1_id IS NULL OR f.partner2_id IS NULL) ORDER BY f.id LIMIT 1');$open->execute([$childId]);$family=$open->fetch();
     if($family){$slot=$family['partner1_id']===null?'partner1_id':'partner2_id';$pdo->prepare("UPDATE families SET {$slot}=? WHERE id=?")->execute([$parentId,$family['id']]);return;}
+    // 2) L'enfant n'a encore aucun parent : il rejoint une famille de ce parent (même fratrie que ses autres enfants).
+    $hasParents=$pdo->prepare('SELECT 1 FROM family_children WHERE child_id=? LIMIT 1');$hasParents->execute([$childId]);
+    if(!$hasParents->fetchColumn()){
+        $existingFamily=$pdo->prepare('SELECT id FROM families WHERE partner1_id=? OR partner2_id=? ORDER BY CASE WHEN partner1_id IS NOT NULL AND partner2_id IS NOT NULL THEN 0 ELSE 1 END,id');$existingFamily->execute([$parentId,$parentId]);
+        if($familyId=$existingFamily->fetchColumn()){ensure_child_link($pdo,(int)$familyId,$childId);return;}
+    }
     $pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,NULL)')->execute([$parentId]);$familyId=(int)$pdo->lastInsertId();ensure_child_link($pdo,$familyId,$childId);
 }
 
@@ -10745,7 +10760,7 @@ function link_event_to_investigation_item(PDO $pdo,array $data): array
     $evtStmt->execute([$eventId]);
     $event=$evtStmt->fetch();
     if(!$event)throw new RuntimeException('Événement introuvable.');
-    $label=trim((string)$event['type_label'].' — '.(($event['date_text']!=='' )?$event['date_text']:(($event['year']!=='')?$event['year']:'date inconnue')));
+    $label=trim((string)$event['type_label'].' — '.((trim((string)($event['date_text']??''))!=='')?$event['date_text']:((($event['year']??null)!==null&&$event['year']!=='')?$event['year']:'date inconnue')));
     $eventPersonLabel=trim((string)($event['person_name']??''));
     if($eventPersonLabel===''){
         $partners=array_filter([trim((string)($event['partner1_name']??'')),trim((string)($event['partner2_name']??''))]);

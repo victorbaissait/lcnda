@@ -41,7 +41,7 @@ try {
             $censusId=0;
             $investigationId=0;
         }
-        if(!$investigationId&&!$censusId&&!$battueItemId&&($_POST['create_event']??'')==='1'){
+        if(!$investigationId&&!$censusId&&!$battueItemId&&!$archiveDigestId&&!$collectionType&&$personId&&($_POST['create_event']??'')==='1'){
             $typeId=safe_int($_POST['create_event_type_id']??0);
             if(!$typeId)throw new RuntimeException('Choisis le type de l’événement à créer.');
             $date=safe_text($_POST['create_event_date']??'');
@@ -68,7 +68,7 @@ try {
             $isAudioVideo=str_starts_with($mime,'audio/')||str_starts_with($mime,'video/');
             $limitMb=$isAudioVideo?250:25;
             if($size>$limitMb*1024*1024)throw new RuntimeException("{$name} dépasse {$limitMb} Mo");
-            $stored=bin2hex(random_bytes(16)).'.'.$allowed[$mime];$destination=MEDIA_DIR.'/'.$stored;if(!move_uploaded_file($tmp,$destination))throw new RuntimeException("Impossible de copier {$name}");
+            $stored=bin2hex(random_bytes(16)).'.'.$allowed[$mime];$destination=MEDIA_DIR.'/'.$stored;if(!move_uploaded_file($tmp,$destination))throw new RuntimeException("Impossible de copier {$name}");$movedFiles[]=$destination;
             $postcardSide=$isPostcard?($i===0?'recto':'verso'):(($isGroupedUpload&&$count>1)?'image '.($i+1):'');
             $mediaTitle=$title!==''?($count>1?"{$title} — ".($postcardSide?:pathinfo($name,PATHINFO_FILENAME)):$title):pathinfo($name,PATHINFO_FILENAME);if($postcardSide&&stripos($mediaTitle,$postcardSide)===false)$mediaTitle.=' — '.$postcardSide;
 	            $pdo->prepare('INSERT INTO media(title,media_type,filename,thumbnail,document_reference,document_title,document_url,document_pages,postcard_group,postcard_side,is_person_photo,media_subject_type) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')->execute([$mediaTitle,$mediaType,$stored,$mediaType==='image'?$stored:'',$documentReference,$documentTitle,$documentUrl,$documentPages,$postcardGroup,$postcardSide,$isPersonPhoto,$mediaSubjectType]);$mediaId=(int)$pdo->lastInsertId();
@@ -88,5 +88,5 @@ try {
         else if($archiveDigestId)log_change($pdo,'archive_digest',$archiveDigestId,'upload',count($created).' média(s) ajouté(s)');
         else log_change($pdo,'person',$personId,'upload',count($created).' média(s) ajouté(s)');
         $pdo->commit();json_response(['ok'=>true,'media'=>$created]);
-    }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
+    }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();foreach($movedFiles??[] as $f)@unlink($f);throw $e;} // envoi refusé : les fichiers déjà copiés repartent
 }catch(Throwable $e){json_response(['error'=>$e->getMessage()],422);}

@@ -308,7 +308,9 @@ function museum_delete(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0);
     $s = $pdo->prepare('SELECT imported FROM museums WHERE id=?'); $s->execute([$id]);
     if ((string) $s->fetchColumn() !== '1') { throw new RuntimeException('Seul un musée reçu peut être supprimé ; le tien se vide salle par salle.'); }
-    foreach ($pdo->query('SELECT id FROM museum_rooms WHERE museum_id=' . $id)->fetchAll(PDO::FETCH_COLUMN) as $rid) { museum_delete_room($pdo, ['id' => $rid]); }
+    $GLOBALS['museum_importing'] = true; // un musée reçu ne se modifie pas… sauf pour être supprimé
+    try { foreach ($pdo->query('SELECT id FROM museum_rooms WHERE museum_id=' . $id)->fetchAll(PDO::FETCH_COLUMN) as $rid) { museum_delete_room($pdo, ['id' => (int) $rid]); } }
+    finally { $GLOBALS['museum_importing'] = false; }
     $pdo->prepare('DELETE FROM museum_guestbook WHERE museum_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM museums WHERE id=?')->execute([$id]);
     $dir = MEDIA_DIR . '/musee/' . $id;

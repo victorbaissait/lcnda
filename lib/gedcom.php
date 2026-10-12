@@ -410,8 +410,19 @@ function export_gedcom(PDO $pdo): never
     }
     $mediaByTarget = []; $media = [];
     if ($includeMedia) {
+        // Seulement les médias d'une fiche, d'une famille, d'un événement ou d'une source qui part dans le fichier
+        // (pas ceux des vivants exclus, ni ceux d'une autre branche)
+        $keptFam = []; foreach ($families as $f) { if (!isset($hiddenFamily[(int) $f['id']])) { $keptFam[(int) $f['id']] = true; } }
+        $eventOwner = []; foreach ($events as $e) { $eventOwner[(int) $e['id']] = [(int) ($e['person_id'] ?? 0), (int) ($e['family_id'] ?? 0)]; }
+        $exported = static function (string $type, int $id) use ($visible, $keptFam, $eventOwner, $sources, $hidden): bool {
+            if ($type === 'person') { return isset($visible[$id]) && !isset($hidden[$id]); }
+            if ($type === 'family') { return isset($keptFam[$id]); }
+            if ($type === 'event') { [$p, $f] = $eventOwner[$id] ?? [0, 0]; return ($p && isset($visible[$p]) && !isset($hidden[$p])) || ($f && isset($keptFam[$f])); }
+            if ($type === 'source') { return isset($sources[$id]); }
+            return false;
+        };
         foreach ($pdo->query('SELECT ml.entity_type,ml.entity_id,ml.media_id,m.* FROM media_links ml JOIN media m ON m.id=ml.media_id ORDER BY ml.position,ml.id') as $m) {
-            if ($secret((string) $m['entity_type'], (int) $m['entity_id'])) { continue; }
+            if ($secret((string) $m['entity_type'], (int) $m['entity_id']) || !$exported((string) $m['entity_type'], (int) $m['entity_id'])) { continue; }
             $mediaByTarget[$m['entity_type'] . ':' . (int) $m['entity_id']][] = (int) $m['media_id'];
             $media[(int) $m['media_id']] = $m;
         }
