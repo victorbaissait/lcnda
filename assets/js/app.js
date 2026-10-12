@@ -8740,8 +8740,10 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     const calendarTypeOptions=[['gregorian','Grégorien'],['julian','Julien'],['republican','Républicain'],['islamic','Musulman civil'],['hebrew','Juif']];
     const republicanMonths=['Vendémiaire','Brumaire','Frimaire','Nivôse','Pluviôse','Ventôse','Germinal','Floréal','Prairial','Messidor','Thermidor','Fructidor','Jours complémentaires'];
-    function calendarLabel(value){return (calendarTypeOptions.find(([key])=>key===value)||calendarTypeOptions[0])[1];}
-    function defaultCalendarValue(design){return calendarTypeOptions.some(([key])=>key===design?.defaultCalendar)?design.defaultCalendar:'gregorian';}
+    // Tous les calendriers : convertisseur et calendrier par défaut (les dates des fiches se saisissent dans les cinq premiers)
+    const converterCalendarOptions=[...calendarTypeOptions,['ethiopic','Éthiopien'],['indian','Indien (national, ère Saka)'],['japanese','Japonais (ères, depuis 1873)'],['korean','Coréen (année Dangi)'],['korean_lunar','Coréen lunaire (traditionnel)'],['chinese','Chinois (lunaire)'],['bengali','Bengali (Bangladesh)'],['persian','Persan (hégirien solaire)'],['juche','Juche (Corée du Nord)'],['thai','Thaï (ère bouddhiste)'],['burmese','Birman (année)'],['druk','Bhoutanais drukpa (année)']];
+    function calendarLabel(value){return (converterCalendarOptions.find(([key])=>key===value)||calendarTypeOptions[0])[1];}
+    function defaultCalendarValue(design){return converterCalendarOptions.some(([key])=>key===design?.defaultCalendar)?design.defaultCalendar:'gregorian';}
     function gregorianToJdn(year,month,day){const a=Math.floor((14-month)/12),y=year+4800-a,m=month+12*a-3;return day+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;}
     function jdnToGregorian(jdn){const a=jdn+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor(146097*b/4),d=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*d/4),m=Math.floor((5*e+2)/153);return {year:100*b+d-4800+Math.floor(m/10),month:m+3-12*Math.floor(m/10),day:e-Math.floor((153*m+2)/5)+1};}
     function julianToJdn(year,month,day){const a=Math.floor((14-month)/12),y=year+4800-a,m=month+12*a-3;return day+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-32083;}
@@ -8815,9 +8817,35 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function japaneseToJdn(era,year,month,day){const e=japaneseEras.find(x=>x[0]===era);if(!e)return null;const jdn=gregorianToJdn(e[2][0]+year-1,month,day);return jdn>=gregorianToJdn(...e[2])?jdn:null;}
     function jdnToJapanese(jdn){if(jdn<JAPAN_GREGORIAN)return null;let e=japaneseEras[0];japaneseEras.forEach(x=>{if(jdn>=gregorianToJdn(...x[2]))e=x;});const g=jdnToGregorian(jdn),y=g.year-e[2][0]+1;return {era:e,year:y,month:g.month,day:g.day};}
     // Coréen : année Dangi (an grégorien + 2333) ; date lunaire traditionnelle d'après le navigateur (calendrier « dangi »)
-    function koreanLunarParts(jdn){try{const g=jdnToGregorian(jdn),parts=new Intl.DateTimeFormat('en-u-ca-dangi',{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12)));const get=t=>parts.find(p=>p.type===t)?.value||'';const monthText=get('month');return {year:Number(get('relatedYear'))||0,month:parseInt(monthText,10)||0,leap:/bis|leap/i.test(monthText),day:Number(get('day'))||0};}catch(_){return null;}}
-    function koreanLunarToJdn(year,month,day,leap=false){const from=gregorianToJdn(year,1,1),to=gregorianToJdn(year+1,4,1);for(let j=from;j<to;j++){const k=koreanLunarParts(j);if(k&&k.year===year&&k.month===month&&k.day===day&&k.leap===!!leap)return j;}return null;}
+    function koreanLunarParts(jdn,cal='dangi'){try{const g=jdnToGregorian(jdn),parts=new Intl.DateTimeFormat(`en-u-ca-${cal}`,{year:'numeric',month:'numeric',day:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12)));const get=t=>parts.find(p=>p.type===t)?.value||'';const monthText=get('month');return {year:Number(get('relatedYear'))||0,month:parseInt(monthText,10)||0,leap:/bis|leap/i.test(monthText),day:Number(get('day'))||0};}catch(_){return null;}}
+    function koreanLunarToJdn(year,month,day,leap=false,cal='dangi'){const from=gregorianToJdn(year,1,1),to=gregorianToJdn(year+1,4,1);for(let j=from;j<to;j++){const k=koreanLunarParts(j,cal);if(k&&k.year===year&&k.month===month&&k.day===day&&k.leap===!!leap)return j;}return null;}
     function formatKoreanLunar(jdn){const k=koreanLunarParts(jdn);return k&&k.year?`${k.day} du ${k.month}${k.month===1?'er':'e'} mois${k.leap?' intercalaire':''} de l’année lunaire ${k.year} (Dangi ${k.year+2333})`:'Non disponible dans ce navigateur';}
+    // Chinois : même calcul luni-solaire (calendrier « chinese » du navigateur), avec le nom de l'année (tronc céleste et animal)
+    const zodiacAnimals=['Rat','Bœuf','Tigre','Lapin','Dragon','Serpent','Cheval','Chèvre','Singe','Coq','Chien','Cochon'];
+    const zodiacElements=['Bois','Feu','Terre','Métal','Eau'];
+    function sexagenaryName(lunarYear){const k=((lunarYear-4)%60+60)%60;return `${zodiacElements[Math.floor((k%10)/2)]}-${zodiacAnimals[k%12]}`;}
+    function chineseYearHan(jdn){try{const g=jdnToGregorian(jdn);return new Intl.DateTimeFormat('zh-u-ca-chinese',{year:'numeric',timeZone:'UTC'}).formatToParts(new Date(Date.UTC(g.year,g.month-1,g.day,12))).find(p=>p.type==='yearName')?.value||'';}catch(_){return '';}}
+    function formatChineseLunar(jdn){const k=koreanLunarParts(jdn,'chinese');if(!k||!k.year)return 'Non disponible dans ce navigateur';const han=chineseYearHan(jdn);return `${k.day} du ${k.month}${k.month===1?'er':'e'} mois${k.leap?' intercalaire':''} de l’année ${k.year} ${han?`(${han}, `:'('}${sexagenaryName(k.year)})`;}
+    // Bengali (calendrier révisé du Bangladesh, 2019) : l'an commence le 14 avril ; 6 mois de 31 jours, puis 30 ; Falgun 29 jours (30 les années bissextiles)
+    const bengaliMonths=['Boishakh','Joishtho','Asharh','Srabon','Bhadro','Ashwin','Kartik','Ogrohayon','Poush','Magh','Falgun','Choitro'];
+    function bengaliMonthDays(year,month){return month<=6?31:month===11?(gregLeap(year+594)?30:29):30;}
+    function bengaliToJdn(year,month,day){let jdn=gregorianToJdn(year+593,4,14);for(let m=1;m<month;m++)jdn+=bengaliMonthDays(year,m);return jdn+day-1;}
+    function jdnToBengali(jdn){const g=jdnToGregorian(jdn);let year=g.year-593;if(jdn<bengaliToJdn(year,1,1))year--;let rest=jdn-bengaliToJdn(year,1,1),month=1;while(rest>=bengaliMonthDays(year,month)){rest-=bengaliMonthDays(year,month);month++;}return {year,month,day:rest+1};}
+    // Persan (hégirien solaire) : algorithme de Borkowski (années bissextiles réelles, Nouvel An à l'équinoxe de printemps)
+    const persianMonths=['Farvardin','Ordibehesht','Khordad','Tir','Mordad','Shahrivar','Mehr','Aban','Azar','Dey','Bahman','Esfand'];
+    const PERSIAN_BREAKS=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];
+    const idiv=(a,b)=>Math.trunc(a/b),imod=(a,b)=>a-Math.trunc(a/b)*b;
+    function persianCal(jy){let leapJ=-14,jp=PERSIAN_BREAKS[0],jump=0;const gy=jy+621;for(let i=1;i<PERSIAN_BREAKS.length;i++){const jm=PERSIAN_BREAKS[i];jump=jm-jp;if(jy<jm)break;leapJ+=idiv(jump,33)*8+idiv(imod(jump,33),4);jp=jm;}let n=jy-jp;leapJ+=idiv(n,33)*8+idiv(imod(n,33)+3,4);if(imod(jump,33)===4&&jump-n===4)leapJ++;const leapG=idiv(gy,4)-idiv((idiv(gy,100)+1)*3,4)-150,march=20+leapJ-leapG;if(jump-n<6)n=n-jump+idiv(jump+4,33)*33;let leap=imod(imod(n+1,33)-1,4);if(leap===-1)leap=4;return {leap,gy,march};}
+    function persianToJdn(jy,jm,jd){const r=persianCal(jy);return gregorianToJdn(r.gy,3,r.march)+(jm-1)*31-idiv(jm,7)*(jm-7)+jd-1;}
+    function jdnToPersian(jdn){const gy=jdnToGregorian(jdn).year;let jy=gy-621;const r=persianCal(jy);let k=jdn-gregorianToJdn(gy,3,r.march);if(k>=0){if(k<=185)return {year:jy,month:1+idiv(k,31),day:imod(k,31)+1};k-=186;}else{jy--;k+=179;if(r.leap===1)k++;}return {year:jy,month:7+idiv(k,30),day:imod(k,30)+1};}
+    function persianMonthDays(year,month){return month<=6?31:month<=11?30:(persianCal(year).leap===0?30:29);}
+    // Juche (Corée du Nord) : an 1 = 1912, mois et jours grégoriens
+    // Thaï (ère bouddhiste) : an grégorien + 543 ; jusqu'en 1940, l'année commençait le 1er avril
+    const thaiMonths=['Makarakhom','Kumphaphan','Minakhom','Mesayon','Phruetsaphakhom','Mithunayon','Karakadakhom','Singhakhom','Kanyayon','Tulakhom','Phruetsachikayon','Thanwakhom'];
+    function thaiYear(g){return g.year>=1941||g.month>=4?g.year+543:g.year+542;}
+    function thaiToJdn(year,month,day){const greg=year-543;return gregorianToJdn(greg<1941&&month<4?greg+1:greg,month,day);}
+    // Birman et bhoutanais (drukpa) : luni-solaires, on donne l'année
+    function burmeseYear(g){return g.month>4||(g.month===4&&g.day>=17)?g.year-638:g.year-639;}
     function rangeText(startJdn,len){return `du ${shortGregorian(jdnToGregorian(startJdn))} au ${shortGregorian(jdnToGregorian(startJdn+len-1))}`;}
     function shortGregorian(d,withYear=true){return `${d.day}${d.day===1?'er':''} ${shortMonthsFr[d.month-1]}${withYear?' '+d.year:''}`;}
     function readCalendarJdn(form){
@@ -8833,10 +8861,13 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(type==='japanese')return japaneseToJdn(form.elements.era?.value||'',year,month,day);
         if(type==='korean')return gregorianToJdn(year-2333,month,day);
         if(type==='korean_lunar')return koreanLunarToJdn(year,month,day,form.elements.leap_month?.checked);
+        if(type==='chinese')return koreanLunarToJdn(year,month,day,form.elements.leap_month?.checked,'chinese');
+        if(type==='bengali')return month>12||day>bengaliMonthDays(year,month)?null:bengaliToJdn(year,month,day);
+        if(type==='persian')return month>12||day>persianMonthDays(year,month)?null:persianToJdn(year,month,day);
+        if(type==='juche')return year<1?null:gregorianToJdn(year+1911,month,day);
+        if(type==='thai')return thaiToJdn(year,month,day);
         return gregorianToJdn(year,month,day);
     }
-    // Le convertisseur connaît en plus quelques calendriers qui ne servent pas dans les fiches
-    const converterCalendarOptions=[...calendarTypeOptions,['ethiopic','Éthiopien'],['indian','Indien (national, ère Saka)'],['japanese','Japonais (ères, depuis 1873)'],['korean','Coréen (année Dangi)'],['korean_lunar','Coréen lunaire (traditionnel)']];
     function parseNumericCalendarDate(text){
         const value=String(text||'').trim();
         let match=value.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{1,4})$/);
@@ -8868,7 +8899,14 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function calendarDateFromText(text,type){
         if(type==='republican')return parseRepublicanDateText(text)||parseNumericCalendarDate(text);
         if(type==='hebrew')return parseHebrewDateText(text);
-        return parseNumericCalendarDate(text);
+        return parseNumericCalendarDate(text)||parseFrenchDateText(text);
+    }
+    // « 15 juin 1950 », « 1er février 1825 » (sans « vers », « avant »… : une date approximative n'a pas d'équivalent exact)
+    function parseFrenchDateText(text){
+        const v=String(text||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+        const m=v.match(/^(\d{1,2})(?:er)? (janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre) (\d{1,4})$/);
+        if(!m)return null;
+        return {day:Number(m[1]),month:['janvier','fevrier','mars','avril','mai','juin','juillet','aout','septembre','octobre','novembre','decembre'].indexOf(m[2])+1,year:Number(m[3])};
     }
     function jdnFromCalendarDate(parsed,type){
         if(!parsed||!parsed.year||!parsed.month||!parsed.day||type==='gregorian')return '';
@@ -8885,7 +8923,20 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(type==='islamic')return formatCalendarDate(jdnToIslamic(jdn));
         if(type==='republican')return formatRepublicanDate(jdnToRepublican(jdn));
         if(type==='hebrew')return hebrewDateFromJdn(jdn);
-        return formatCalendarDate(jdnToGregorian(jdn));
+        const g=jdnToGregorian(jdn);
+        if(type==='ethiopic'){const e=jdnToEthiopic(jdn);return `${e.day} ${ethiopicMonths[e.month-1]} ${e.year}`;}
+        if(type==='indian'){const i=jdnToIndian(jdn);return `${i.day} ${indianMonths[i.month-1]} ${i.year} (Saka)`;}
+        if(type==='japanese'){const j=jdnToJapanese(jdn);return j?`${String(j.day).padStart(2,'0')}/${String(j.month).padStart(2,'0')}, an ${j.year} de l’ère ${j.era[1]}`:'avant 1873 (calendrier luni-solaire)';}
+        if(type==='korean')return `${formatCalendarDate(g).slice(0,6)}${g.year+2333} (Dangi)`;
+        if(type==='korean_lunar')return formatKoreanLunar(jdn);
+        if(type==='chinese')return formatChineseLunar(jdn);
+        if(type==='bengali'){const b=jdnToBengali(jdn);return `${b.day} ${bengaliMonths[b.month-1]} ${b.year}`;}
+        if(type==='persian'){const pe=jdnToPersian(jdn);return `${pe.day} ${persianMonths[pe.month-1]} ${pe.year}`;}
+        if(type==='juche')return g.year>=1912?`${formatCalendarDate(g).slice(0,6)}Juche ${g.year-1911}`:'avant 1912';
+        if(type==='thai')return `${g.day} ${thaiMonths[g.month-1]} ${thaiYear(g)}`;
+        if(type==='burmese')return `ère birmane ${burmeseYear(g)} (année seulement)`;
+        if(type==='druk'){const k=koreanLunarParts(jdn,'chinese');return k?.year?`année ${sexagenaryName(k.year)} (année seulement)`:'';}
+        return formatCalendarDate(g);
     }
     function defaultCalendarSetting(){
         try{return defaultCalendarValue(readDesignSettings());}catch(_){return 'gregorian';}
@@ -8926,7 +8977,14 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         return card('Éthiopien',`${et.day} ${ethiopicMonths[et.month-1]} ${et.year}`,`${ethiopicMonths[et.month-1]} ${et.year} : ${rangeText(etStart,etLen)}`)
             +card('Indien (Saka)',`${ind.day} ${indianMonths[ind.month-1]} ${ind.year}`,`${indianMonths[ind.month-1]} ${ind.year} : ${rangeText(indStart,indianMonthDays(ind.year,ind.month))}`)
             +card('Japonais',jp?`${jp.day}${jp.day===1?'er':''} ${['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][jp.month-1]} de l’an ${jp.year===1?'1 (gannen)':jp.year} de l’ère ${jp.era[1]}`:'Avant 1873 : calendrier luni-solaire japonais (non calculé)',jp?`Même jour et même mois que le grégorien ; seule l’année change`:'')
-            +card('Coréen',`Dangi ${g.year+2333} (année)`,formatKoreanLunar(jdn));
+            +card('Coréen',`Dangi ${g.year+2333} (année)`,formatKoreanLunar(jdn))
+            +card('Chinois',formatChineseLunar(jdn))
+            +(()=>{const b=jdnToBengali(jdn);return card('Bengali',`${b.day} ${bengaliMonths[b.month-1]} ${b.year}`,`${bengaliMonths[b.month-1]} ${b.year} : ${rangeText(bengaliToJdn(b.year,b.month,1),bengaliMonthDays(b.year,b.month))} (calendrier du Bangladesh)`);})()
+            +(()=>{const pe=jdnToPersian(jdn);return card('Persan (hégirien solaire)',`${pe.day} ${persianMonths[pe.month-1]} ${pe.year}`,`${persianMonths[pe.month-1]} ${pe.year} : ${rangeText(persianToJdn(pe.year,pe.month,1),persianMonthDays(pe.year,pe.month))}`);})()
+            +card('Juche',g.year>=1912?`Juche ${g.year-1911}`:'Avant l’an 1 (1912)',g.year>=1912?'Mois et jours grégoriens':'')
+            +card('Thaï',`${g.day} ${thaiMonths[g.month-1]} ${thaiYear(g)} (ère bouddhiste)`,g.year<1889?'Avant 1889, la Thaïlande suivait un calendrier lunaire (seule l’année est donnée)':g.year<1941?'L’année commençait alors le 1er avril':'')
+            +card('Birman',`Ère birmane ${burmeseYear(g)}`,'Calendrier luni-solaire : seule l’année est donnée ; le Nouvel An tombe vers le 17 avril, après Thingyan')
+            +(()=>{const k=koreanLunarParts(jdn,'chinese');return card('Bhoutanais (drukpa)',k?.year?`Année ${sexagenaryName(k.year)}`:'—','Calendrier luni-solaire : seule l’année est donnée (le Losar tombe près du Nouvel An chinois, parfois un mois plus tard)');})();
     }
     function convertUnitValue(value,from,to){
         const units={toise:{kind:'length',factor:1.949},pied:{kind:'length',factor:.32484},pouce:{kind:'length',factor:.02707},ligne:{kind:'length',factor:.002256},lieue:{kind:'length',factor:3898},arpent_area:{kind:'area',factor:3418.89},livre_weight:{kind:'weight',factor:.4895},once:{kind:'weight',factor:.03059},marc:{kind:'weight',factor:.24475}};
@@ -8991,8 +9049,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const unitOptions=`<optgroup label="Longueurs"><option value="toise">Toise</option><option value="pied">Pied du roi</option><option value="pouce">Pouce</option><option value="ligne">Ligne</option><option value="lieue">Lieue de Paris</option></optgroup><optgroup label="Surfaces"><option value="arpent_area">Arpent carré</option></optgroup><optgroup label="Poids"><option value="livre_weight">Livre poids de marc</option><option value="once">Once</option><option value="marc">Marc</option></optgroup>`;
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">CALENDRIER / MESURES</span><h2>Convertisseurs de recherche</h2><p>Conversions utiles pour les actes anciens, les pays passés tardivement au grégorien et les notes de transcription.</p></div></header>
         <div class="calendar-tools-grid">
-            <section class="maintenance-panel"><h3>Calendrier par défaut</h3><label>Calendrier utilisé par défaut dans les champs de date<select id="default-calendar-select">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><p class="muted">Grégorien reste le plus courant en France. Julien est utile pour certains pays orthodoxes et certaines sources anciennes.</p></section>
-            <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${converterCalendarOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><label data-calendar-era hidden>Ère<select name="era">${japaneseEras.map(([k,l,start])=>`<option value="${k}" ${k==='showa'?'selected':''}>${escapeHtml(l)} (depuis ${start[0]})</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label class="checkbox-line" data-calendar-leap hidden><input type="checkbox" name="leap_month"> Mois intercalaire (lunaire)</label><label>Mois<span data-calendar-month-field></span></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
+            <section class="maintenance-panel"><h3>Calendrier par défaut</h3><label>Calendrier utilisé par défaut dans les champs de date<select id="default-calendar-select">${converterCalendarOptions.map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><p class="muted">Grégorien reste le plus courant en France. Julien est utile pour certains pays orthodoxes et certaines sources anciennes.</p></section>
+            <section class="maintenance-panel"><h3>Convertir une date</h3><form id="calendar-converter-form" class="form-grid" style="padding:0"><label>Calendrier source<select name="calendar_type">${converterCalendarOptions.filter(([k])=>!['burmese','druk'].includes(k)).map(([key,label])=>`<option value="${key}" ${defaultCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label><label data-calendar-era hidden>Ère<select name="era">${japaneseEras.map(([k,l,start])=>`<option value="${k}" ${k==='showa'?'selected':''}>${escapeHtml(l)} (depuis ${start[0]})</option>`).join('')}</select></label><label>Année<input name="year" type="number" placeholder="1793"></label><label class="checkbox-line" data-calendar-leap hidden><input type="checkbox" name="leap_month"> Mois intercalaire (lunaire)</label><label>Mois<span data-calendar-month-field></span></label><label>Jour<input name="day" type="number" min="1" max="31" placeholder="1"></label><button class="button span-2" type="submit">Convertir</button></form><div id="calendar-converter-result">${calendarConversionCards(null)}</div></section>
             <section class="maintenance-panel"><h3>Calendrier républicain</h3><ul class="calendar-info-list">${republicanMonths.map((month,index)=>{const r=republicanMonthRange(2,index+1);return `<li><strong>${escapeHtml(month)}</strong>${index<12?' · 30 jours':' · 5 ou 6 jours'} · ${r.start.month===r.end.month?shortMonthsFr[r.start.month-1]:`${shortMonthsFr[r.start.month-1]} à ${shortMonthsFr[r.end.month-1]}`} <small class="muted">(du ${shortGregorian(r.start,false)} au ${shortGregorian(r.end,false)})</small></li>`;}).join('')}</ul><p class="muted" style="font-size:.85em">Dates de l’an II (1793-1794) : selon l’année, le début et la fin peuvent glisser d’un jour (le convertisseur donne les dates exactes).</p><p>Le calendrier républicain commence le 22 septembre 1792 et cesse officiellement le 1er janvier 1806. Les douze mois font 30 jours. Les 5 jours complémentaires, ou 6 en année sextile, terminent l’année.</p></section>
             <section class="maintenance-panel"><h3>Unités anciennes</h3><form id="unit-converter-form" class="form-grid" style="padding:0"><label>Valeur<input name="value" type="number" step="any" placeholder="3"></label><label>De<select name="from">${unitOptions}</select></label><label>Vers<select name="to">${unitOptions}</select></label><button class="button" type="submit">Convertir</button></form><div id="unit-converter-result" class="unit-result">Entre une valeur et deux unités compatibles.</div></section>
             <section class="maintenance-panel"><h3>Monnaies anciennes</h3><form id="currency-converter-form" class="form-grid" style="padding:0"><label>Livres<input name="livres" type="number" step="1" placeholder="12"></label><label>Sols / sous<input name="sols" type="number" step="1" placeholder="10"></label><label>Deniers<input name="deniers" type="number" step="1" placeholder="6"></label><label>Francs germinal indicatifs<input name="francs" type="number" step="any" placeholder="0"></label><button class="button span-2" type="submit">Convertir</button></form><div id="currency-converter-result" class="unit-result">1 livre = 20 sols = 240 deniers. Le franc indiqué ici est une équivalence pratique, pas une valeur historique absolue.</div></section>
@@ -9020,9 +9078,13 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
                 }else if(type==='indian'){
                     const y=year>0?year:0;
                     holder.innerHTML=`<select name="month"><option value="">—</option>${indianMonths.map((name,i)=>`<option value="${i+1}">${escapeHtml(name)}${y?` (${rangeText(indianToJdn(y,i+1,1),indianMonthDays(y,i+1)).replace(/^du /,'').replace(' au ',' → ')})`:''}</option>`).join('')}</select>`;
-                }else holder.innerHTML=`<input name="month" type="number" min="1" max="${type==='korean_lunar'?12:12}" placeholder="1">`;
+                }else if(['bengali','persian','thai'].includes(type)){
+                    const names={bengali:bengaliMonths,persian:persianMonths,thai:thaiMonths}[type],y=year>0?year:0;
+                    const span=i=>type==='bengali'?rangeText(bengaliToJdn(y,i+1,1),bengaliMonthDays(y,i+1)):type==='persian'?rangeText(persianToJdn(y,i+1,1),persianMonthDays(y,i+1)):'';
+                    holder.innerHTML=`<select name="month"><option value="">—</option>${names.map((name,i)=>{const r=y&&type!=='thai'?span(i):'';return `<option value="${i+1}">${escapeHtml(name)}${type==='thai'?` (${['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][i]})`:''}${r?` (${r.replace(/^du /,'').replace(' au ',' → ')})`:''}</option>`;}).join('')}</select>`;
+                }else holder.innerHTML='<input name="month" type="number" min="1" max="12" placeholder="1">';
                 $('[data-calendar-era]',converterForm).hidden=type!=='japanese';
-                $('[data-calendar-leap]',converterForm).hidden=type!=='korean_lunar';
+                $('[data-calendar-leap]',converterForm).hidden=!['korean_lunar','chinese'].includes(type);
                 const field=converterForm.elements.month;
                 if(previous&&[...(field.options||[])].some(o=>o.value===previous))field.value=previous;else if(!field.options)field.value=previous;
             };
@@ -9030,7 +9092,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             converterForm.elements.year.addEventListener('change',monthField);
             monthField();
             converterForm.elements.year.placeholder=converterForm.elements.calendar_type.value==='hebrew'?'5600':converterForm.elements.calendar_type.value==='republican'?'2':'1793';
-            converterForm.elements.calendar_type.addEventListener('change',()=>{const t=converterForm.elements.calendar_type.value;converterForm.elements.year.placeholder={hebrew:'5600',republican:'2',islamic:'1200',ethiopic:'1900',indian:'1800',japanese:'20',korean:'4280',korean_lunar:'1900'}[t]||'1793';});
+            converterForm.elements.calendar_type.addEventListener('change',()=>{const t=converterForm.elements.calendar_type.value;converterForm.elements.year.placeholder={hebrew:'5600',republican:'2',islamic:'1200',ethiopic:'1900',indian:'1800',japanese:'20',korean:'4280',korean_lunar:'1900',chinese:'1900',bengali:'1300',persian:'1300',juche:'30',thai:'2480'}[t]||'1793';});
         }
         $('#unit-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),result=convertUnitValue(Number(values.value),values.from,values.to);$('#unit-converter-result').textContent=result===null?'Unités incompatibles ou valeur invalide.':`${Number(values.value).toLocaleString('fr-FR')} → ${result.toLocaleString('fr-FR',{maximumFractionDigits:4})}`;});
         $('#currency-converter-form')?.addEventListener('submit',event=>{event.preventDefault();const values=formObject(event.currentTarget),total=oldCurrencyTotalDeniers(values),francs=total/240;$('#currency-converter-result').textContent=`${oldCurrencyBreakdown(total)} · ${total.toLocaleString('fr-FR')} denier(s) · environ ${francs.toLocaleString('fr-FR',{maximumFractionDigits:2})} franc(s) germinal indicatif(s).`;});
@@ -9966,7 +10028,7 @@ ${backupSectionHtml()}
         const languageSelect=$('#design-form select[name="interfaceLanguage"]');
         if(languageSelect&&!$('#design-form select[name="defaultCalendar"]')){
             const selectedCalendar=defaultCalendarValue(design);
-            languageSelect.closest('label')?.insertAdjacentHTML('afterend',`<label>Calendrier par défaut<select name="defaultCalendar">${calendarTypeOptions.map(([key,label])=>`<option value="${key}" ${selectedCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label>`);
+            languageSelect.closest('label')?.insertAdjacentHTML('afterend',`<label>Calendrier par défaut<select name="defaultCalendar">${converterCalendarOptions.map(([key,label])=>`<option value="${key}" ${selectedCalendar===key?'selected':''}>${label}</option>`).join('')}</select></label>`);
         }
     }
     function reorderDesignPrimaryFields(){
@@ -11176,7 +11238,7 @@ ${backupSectionHtml()}
             });
             form.elements.event_scope.dataset.familyBound='1';
         }
-        form.elements.date_text.value=eventItem?.date_text||'';if(form.elements.date_uncertain)form.elements.date_uncertain.checked=Number(eventItem?.date_uncertain||0)===1;if(form.elements.date_calendar)form.elements.date_calendar.value=eventItem?.date_calendar||defaultCalendarSetting();if(form.elements.date_converted)form.elements.date_converted.value=eventItem?.date_converted||automaticEquivalentFromDateText(eventItem?.date_text||'',form.elements.date_calendar?.value||'gregorian');if(form.elements.date_alternative)form.elements.date_alternative.value=eventItem?.date_alternative||'';form.elements.title.value=eventItem?.title||'';form.elements.place_name.value=eventItem?placeDisplay(eventItem):(eventItem?.place_name||'');form.elements.country.value=eventItem?.country||'France';form.elements.description.value=eventItem?.description||'';if(form.elements.fact_confidence)form.elements.fact_confidence.value=eventItem?.fact_confidence||'unknown';if(form.elements.confidence_origin)form.elements.confidence_origin.value=eventItem?.confidence_origin||'';renderEventConfidenceMediaChoices(detail,eventItem?.confidence_media_id||0);setupEventConfidencePickers(detail);
+        form.elements.date_text.value=eventItem?.date_text||'';if(form.elements.date_uncertain)form.elements.date_uncertain.checked=Number(eventItem?.date_uncertain||0)===1;if(form.elements.date_calendar)form.elements.date_calendar.value=eventItem?.date_calendar||(calendarTypeOptions.some(([k])=>k===defaultCalendarSetting())?defaultCalendarSetting():'gregorian');if(form.elements.date_converted)form.elements.date_converted.value=eventItem?.date_converted||automaticEquivalentFromDateText(eventItem?.date_text||'',form.elements.date_calendar?.value||'gregorian');if(form.elements.date_alternative)form.elements.date_alternative.value=eventItem?.date_alternative||'';form.elements.title.value=eventItem?.title||'';form.elements.place_name.value=eventItem?placeDisplay(eventItem):(eventItem?.place_name||'');form.elements.country.value=eventItem?.country||'France';form.elements.description.value=eventItem?.description||'';if(form.elements.fact_confidence)form.elements.fact_confidence.value=eventItem?.fact_confidence||'unknown';if(form.elements.confidence_origin)form.elements.confidence_origin.value=eventItem?.confidence_origin||'';renderEventConfidenceMediaChoices(detail,eventItem?.confidence_media_id||0);setupEventConfidencePickers(detail);
         $('#event-dialog-title').dataset.artisticOnly=artisticOnly?'1':'';
         if(form.elements.first_name)form.elements.first_name.value=eventItem?.first_name||'';
         if(form.elements.last_name)form.elements.last_name.value=eventItem?.last_name||'';
