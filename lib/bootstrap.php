@@ -20,7 +20,8 @@ require_once __DIR__ . '/htr_setup.php';
 require_once __DIR__ . '/studio.php';         // retouche des photos (l'original est gardé)
 require_once __DIR__ . '/museum.php';         // musée de famille en 3D (pièce d'archives), visite guidée, partage
 require_once __DIR__ . '/my_lists.php';        // Mes listes : listes sur mesure (critères, colonnes, colonnes à remplir)       // reconnaissance d'écriture : installation de Kraken et des modèles         // fiche d'un village (familles, métiers, église, population, Cassini)  // actes à demander, contexte historique, coffre cousin, âges, variantes, lieux, tailles, résistants, éditeur de blocs
-require_once __DIR__ . '/media_av.php';        // listes Audios et Vidéos (durée, rattachements)
+require_once __DIR__ . '/media_av.php';
+require_once __DIR__ . '/recueils.php';        // listes Audios et Vidéos (durée, rattachements)
 require_once __DIR__ . '/atelier.php';         // Atelier de recherche : projets, dossiers imbriqués, références, notes, citations…
 require_once __DIR__ . '/offline_map.php';
 require_once __DIR__ . '/merge.php';

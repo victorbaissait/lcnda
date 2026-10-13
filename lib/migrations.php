@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 25;
+const SCHEMA_VERSION = 26;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -46,6 +46,7 @@ function migration_steps(): array
         23 => 'schema_v23',
         24 => 'schema_v24',
         25 => 'schema_v25',
+        26 => 'schema_v26',
     ];
 }
 
@@ -1642,4 +1643,75 @@ function schema_v25(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(media)')->fetchAll(), 'name');
     if ($cols && !in_array('duration_seconds', $cols, true)) { $pdo->exec('ALTER TABLE media ADD COLUMN duration_seconds REAL'); }
+}
+
+/**
+ * 📚 Recueils (lib/recueils.php) : un ensemble de pages photographiées dans l'ordre (registre, liste, cahier…),
+ * avec des versions qui coexistent (photos d'il y a dix ans, nouvelles photos), la transcription de chaque page,
+ * l'image retenue pour chaque page (« la meilleure »), les détails (zooms) et les rattachements (tout ou partie).
+ */
+function schema_v26(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS recueils (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        icon TEXT NOT NULL DEFAULT '📚',
+        description TEXT NOT NULL DEFAULT '',
+        reference TEXT NOT NULL DEFAULT '',
+        place_text TEXT NOT NULL DEFAULT '',
+        date_text TEXT NOT NULL DEFAULT '',
+        summary TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS recueil_versions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        recueil_id INTEGER NOT NULL,
+        name TEXT NOT NULL DEFAULT '',
+        date_text TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        position REAL NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (recueil_id) REFERENCES recueils(id) ON DELETE CASCADE
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS recueil_pages (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        recueil_id INTEGER NOT NULL,
+        position REAL NOT NULL DEFAULT 0,
+        label TEXT NOT NULL DEFAULT '',
+        transcription TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        best_image_id INTEGER,
+        FOREIGN KEY (recueil_id) REFERENCES recueils(id) ON DELETE CASCADE
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS recueil_images (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        recueil_id INTEGER NOT NULL,
+        version_id INTEGER NOT NULL,
+        page_id INTEGER,
+        media_id INTEGER NOT NULL,
+        role TEXT NOT NULL DEFAULT 'page',
+        position REAL NOT NULL DEFAULT 0,
+        note TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (recueil_id) REFERENCES recueils(id) ON DELETE CASCADE,
+        FOREIGN KEY (version_id) REFERENCES recueil_versions(id) ON DELETE CASCADE,
+        FOREIGN KEY (media_id) REFERENCES media(id) ON DELETE CASCADE
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS recueil_links (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        recueil_id INTEGER NOT NULL,
+        entity_type TEXT NOT NULL,
+        entity_key TEXT NOT NULL,
+        page_from INTEGER,
+        page_to INTEGER,
+        label TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (recueil_id) REFERENCES recueils(id) ON DELETE CASCADE
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_pages ON recueil_pages(recueil_id, position)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_images ON recueil_images(recueil_id, version_id, position)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_images_page ON recueil_images(page_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_links ON recueil_links(entity_type, entity_key)');
 }

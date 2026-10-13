@@ -28,7 +28,8 @@
     "test:voters": "node tests/test-voters.js",
     "test:merge": "node tests/test-merge.js",
     "test:atelier": "node tests/test-atelier.js",
-    "test:media-av": "node tests/test-media-av.js"
+    "test:media-av": "node tests/test-media-av.js",
+    "test:recueils": "node tests/test-recueils.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

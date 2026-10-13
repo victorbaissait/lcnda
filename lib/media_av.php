@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 const MEDIA_AV_COLLECTIONS = ['family_object' => 'Objet de famille', 'family_memory' => 'Mémoire familiale', 'voyage' => 'Départ, émigration', 'placement' => 'Enfant placé',
     'coat_of_arms' => 'Armoiries', 'family_paper' => 'Papier de famille', 'old_map' => 'Carte ancienne', 'probate_inventory' => 'Inventaire après décès', 'poilu' => 'Poilu',
-    'resistance' => 'Résistant', 'custom_block_entry' => 'Bloc', 'village' => 'Village', 'voter' => 'Carte d’électeur', 'custom_list_record' => 'Liste', 'atelier_item' => 'Atelier'];
+    'resistance' => 'Résistant', 'custom_block_entry' => 'Bloc', 'village' => 'Village', 'voter' => 'Carte d’électeur', 'custom_list_record' => 'Liste', 'atelier_item' => 'Atelier', 'recueil' => 'Recueil'];
 
 function media_av_name(?array $p): string
 {
@@ -68,6 +68,7 @@ function media_av_list(PDO $pdo, string $kind): array
                 if ($type === 'family_object') { $q = $pdo->prepare('SELECT title FROM family_objects WHERE id=?'); $q->execute([$cid]); $name = (string) $q->fetchColumn(); }
                 if ($type === 'family_memory') { $q = $pdo->prepare('SELECT title FROM family_memories WHERE id=?'); $q->execute([$cid]); $name = (string) $q->fetchColumn(); }
                 if ($type === 'atelier_item') { $q = $pdo->prepare('SELECT i.title, i.project_id, p.title AS project FROM atelier_items i JOIN atelier_projects p ON p.id=i.project_id WHERE i.id=?'); $q->execute([$cid]); $a = $q->fetch(); if ($a) { $name = $a['project'] . ' › ' . $a['title']; $extra = ['atelier_project' => (int) $a['project_id'], 'atelier_item' => $cid]; } }
+                if ($type === 'recueil') { $q = $pdo->prepare('SELECT title FROM recueils WHERE id=?'); $q->execute([$cid]); $name = (string) $q->fetchColumn(); $extra = ['recueil_id' => $cid]; }
                 if ($type === 'custom_list_record') { $q = $pdo->prepare('SELECT l.name, l.id FROM custom_list_records r JOIN custom_lists l ON l.id=r.list_id WHERE r.id=?'); $q->execute([$cid]); $a = $q->fetch(); if ($a) { $name = (string) $a['name']; $extra = ['list_id' => (int) $a['id']]; } }
             } catch (Throwable $_) {}
             $add((int) $r['media_id'], ['type' => 'collection', 'label' => MEDIA_AV_COLLECTIONS[$type] ?? 'Collection', 'name' => $name ?: (MEDIA_AV_COLLECTIONS[$type] ?? 'Collection')] + $extra);
