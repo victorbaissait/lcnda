@@ -1435,3 +1435,45 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-dp-band.is-hh td { position:relative; }
 .h-dp-band.is-hh td > span:first-child { position:sticky; left:30px; }
 .h-dp-hhtools { display:inline-flex; gap:4px; align-items:center; margin-left:14px; font-weight:400; position:sticky; left:240px; }
+
+/* 🗺️ Plan des adresses (heritage-addrmap.js) */
+.h-am-bar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; margin-bottom:8px; font-size:14px; }
+.h-am-bar label { display:flex; align-items:center; gap:6px; margin:0; }
+.h-am-bar.is-ban { padding:8px 10px; border-radius:8px; background:var(--surface-2, #f4f2ec); }
+.h-am-actions { margin-left:auto; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.h-am-op input { width:110px; }
+.h-am-main { display:grid; grid-template-columns:minmax(0, 1fr) 300px; gap:12px; }
+@media (max-width: 1000px) { .h-am-main { grid-template-columns:1fr; } }
+.h-am-map { position:relative; height:min(70vh, 620px); overflow:hidden; border:1px solid var(--line, #ccc); border-radius:8px; background:#e8e4da; cursor:grab; touch-action:none; outline:none; }
+.h-am-map:active { cursor:grabbing; }
+.h-am-map.is-placing { cursor:crosshair; }
+.h-am-tiles { position:absolute; inset:0; pointer-events:none; }
+.h-am-tiles img { position:absolute; width:256px; height:256px; user-select:none; }
+.h-am-svg { position:absolute; inset:0; width:100%; height:100%; }
+.h-am-pt { cursor:pointer; }
+.h-am-pt text { font-size:10px; font-weight:700; fill:#fff; pointer-events:none; }
+.h-am-pt.is-sel circle { stroke:#000; stroke-width:3; }
+.h-am-streetlabel { font-size:12px; font-weight:700; fill:#5b3510; paint-order:stroke; stroke:#fff; stroke-width:3px; text-anchor:middle; }
+.h-am-zoom { position:absolute; right:10px; top:10px; display:flex; flex-direction:column; gap:4px; }
+.h-am-zoom button { width:32px; height:32px; border:1px solid #888; background:#fff; border-radius:6px; font-size:17px; cursor:pointer; }
+.h-am-banner { position:absolute; left:10px; right:56px; top:10px; padding:8px 12px; background:#fff; border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,.2); font-size:13.5px; }
+.h-am-pop { position:absolute; width:280px; max-height:60%; overflow:auto; padding:10px 12px; background:#fff; border-radius:8px; box-shadow:0 3px 14px rgba(0,0,0,.28); font-size:13px; z-index:3; cursor:auto; }
+.h-am-popx { float:right; width:24px; height:24px; min-width:0; padding:0; font-size:11px; }
+.h-am-popy { margin-top:6px; padding-top:6px; border-top:1px solid #eee; }
+.h-am-legend { position:absolute; left:10px; bottom:10px; display:flex; flex-wrap:wrap; gap:4px 10px; padding:4px 8px; background:rgba(255,255,255,.85); border-radius:6px; font-size:12px; }
+.h-am-legend:empty { display:none; }
+.h-am-legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+.h-am-side { max-height:min(70vh, 620px); overflow:auto; font-size:13.5px; }
+.h-am-count { margin:0 0 8px; }
+.h-am-st h4 { margin:10px 0 4px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.h-am-st h4 .icon-button { width:24px; height:24px; min-width:0; padding:0; font-size:11px; }
+.h-am-st ul { list-style:none; margin:0; padding:0; }
+.h-am-st li { display:grid; grid-template-columns:auto 1fr auto auto auto; gap:6px; align-items:center; padding:3px 4px; border-radius:6px; }
+.h-am-st li.is-sel { background:color-mix(in srgb, var(--accent, #2f6f5e) 14%, transparent); }
+.h-am-st li.is-todo { background:color-mix(in srgb, #f1c40f 16%, transparent); }
+.h-am-st li .icon-button { width:24px; height:24px; min-width:0; padding:0; font-size:11px; }
+.h-am-prec { font-weight:700; width:18px; text-align:center; }
+.h-rc-chip.is-gone { background:color-mix(in srgb, #7b4a1e 22%, transparent); }
+.h-am-host > summary { cursor:pointer; display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; }
+.h-am-host > summary h3 { margin:0; display:inline; }
+.h-am-host[open] > summary { margin-bottom:10px; }

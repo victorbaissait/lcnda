@@ -23,6 +23,7 @@ require_once __DIR__ . '/my_lists.php';        // Mes listes : listes sur mesure
 require_once __DIR__ . '/media_av.php';
 require_once __DIR__ . '/recueils.php';
 require_once __DIR__ . '/calendars.php';
+require_once __DIR__ . '/addr_map.php';         // 🗺️ plan des adresses (BAN locale, anciens noms de rues)
 require_once __DIR__ . '/digest_pages.php';     // Listes › Dépouillements : une page à la fois (même source que Recherche)        // listes Audios et Vidéos (durée, rattachements)
 require_once __DIR__ . '/atelier.php';         // Atelier de recherche : projets, dossiers imbriqués, références, notes, citations…
 require_once __DIR__ . '/offline_map.php';

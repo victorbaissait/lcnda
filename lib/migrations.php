@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 30;
+const SCHEMA_VERSION = 31;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -51,6 +51,7 @@ function migration_steps(): array
         28 => 'schema_v28',
         29 => 'schema_v29',
         30 => 'schema_v30',
+        31 => 'schema_v31',
     ];
 }
 
@@ -1751,4 +1752,61 @@ function schema_v30(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(archive_digest_entries)')->fetchAll(), 'name');
     if ($cols && !in_array('doc_pages', $cols, true)) { $pdo->exec('ALTER TABLE archive_digest_entries ADD COLUMN doc_pages INTEGER'); }
+}
+
+/**
+ * 🗺️ Plan des adresses (lib/addr_map.php) : adresses de la BAN gardées pour les communes utiles (lues en local),
+ * points des adresses relevées (placés automatiquement ou à la main), anciens noms de rues et rues disparues.
+ */
+function schema_v31(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS ban_addresses (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        insee TEXT NOT NULL,
+        street TEXT NOT NULL DEFAULT '',
+        street_key TEXT NOT NULL DEFAULT '',
+        house_key TEXT NOT NULL DEFAULT '',
+        number TEXT NOT NULL DEFAULT '',
+        lat REAL NOT NULL,
+        lon REAL NOT NULL,
+        ban_id TEXT NOT NULL DEFAULT '',
+        voie_id TEXT NOT NULL DEFAULT ''
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_ban_addresses ON ban_addresses(insee, street_key, house_key)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS ban_imports (
+        insee TEXT PRIMARY KEY,
+        dept TEXT NOT NULL DEFAULT '',
+        count INTEGER NOT NULL DEFAULT 0,
+        imported_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS addr_points (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        insee TEXT NOT NULL,
+        street_key TEXT NOT NULL DEFAULT '',
+        house_key TEXT NOT NULL DEFAULT '',
+        street TEXT NOT NULL DEFAULT '',
+        house TEXT NOT NULL DEFAULT '',
+        lat REAL NOT NULL,
+        lon REAL NOT NULL,
+        source TEXT NOT NULL DEFAULT 'ban',
+        precision TEXT NOT NULL DEFAULT '',
+        note TEXT NOT NULL DEFAULT '',
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(insee, street_key, house_key)
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS addr_streets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        insee TEXT NOT NULL,
+        old_name TEXT NOT NULL DEFAULT '',
+        old_key TEXT NOT NULL DEFAULT '',
+        current_name TEXT NOT NULL DEFAULT '',
+        status TEXT NOT NULL DEFAULT 'renamed',
+        voie_id TEXT NOT NULL DEFAULT '',
+        path_json TEXT NOT NULL DEFAULT '[]',
+        note TEXT NOT NULL DEFAULT '',
+        year_from TEXT NOT NULL DEFAULT '',
+        year_to TEXT NOT NULL DEFAULT '',
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(insee, old_key)
+    )");
 }

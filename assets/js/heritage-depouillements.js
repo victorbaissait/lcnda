@@ -127,7 +127,7 @@
         const s = st(), r = D.row, pages = pagesOf(r, D.lines), ws = A().$('#workspace');
         if (s.page && !pages.some(p => p.number === s.page)) s.page = '';
         const ppl = r.people || [];
-        const tabs = [['pages', '📄', 'Pages', pages.length], ['people', '👥', 'Personnes et foyers', ppl.length], ['info', '🗂️', 'Fiche du dépouillement', '']];
+        const tabs = [['pages', '📄', 'Pages', pages.length], ['people', '👥', 'Personnes et foyers', ppl.length], ['map', '🗺️', 'Plan', ''], ['info', '🗂️', 'Fiche du dépouillement', '']];
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one h-dp">
             <header class="page-header"><div><button type="button" class="back-link" data-dp-back>← Tous les dépouillements</button><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>📜 ${esc(titleOf(r, D.types))}${r.year_text ? ` <small>${esc(r.year_text)}</small>` : ''}</h2>
                 <p class="muted">${esc([r.archive_service, r.archive_reference, D.statuses[r.status]].filter(Boolean).join(' · ')) || '&nbsp;'}${r.archive_url ? ` · <a href="${esc(A().safeUrl ? A().safeUrl(r.archive_url) : r.archive_url)}" target="_blank" rel="noopener">ouvrir l’archive en ligne ↗</a>` : ''}</p></div>
@@ -153,6 +153,7 @@
         const body = sec.querySelector('.h-rc-body');
         if (s.tab === 'people') return paintPeople(body);
         if (s.tab === 'info') return paintInfo(body);
+        if (s.tab === 'map') { if (ext.addrMap) ext.addrMap(body, {digestId: r.id, year: (String(r.year_text || '').match(/(1[5-9]\d\d|20\d\d)/) || [])[1] || 0}); return; }
         if (s.page) return paintPage(body, pages);
         paintPages(body, pages);
     }
