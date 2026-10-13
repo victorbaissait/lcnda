@@ -248,18 +248,45 @@
     /* ═══════════ Un projet ouvert : dossiers | éléments | détail ═══════════ */
     const SPECIAL_VIEWS = ['overview', 'timeline', 'people', 'map', 'biblio', 'tasks'];
     const reload = async (keepScroll = true) => { const v = st(), pid = v.project; await load(pid); if (S().module !== 'enquetes' || S().enquetesTab !== 'atelier' || st().project !== pid) return; renderProject(S().workspaceToken, keepScroll); };
-    /** Vue à soi (Maintenance → Atelier) : sortes, étiquettes, favoris, lecture, tâches à faire, texte, années, dossier par son nom. */
+    /* Vue à soi (Maintenance → Atelier) : des critères ajoutés un par un, dans l'ordre voulu, chacun inversable (« pas »), ET / OU */
+    const VIEW_RULES = {
+        type: ['🧩', 'Sorte d’élément'], kind: ['📚', 'Sorte de référence'], tags: ['🏷️', 'Étiquettes'], starred: ['⭐', 'En favori'], read: ['📖', 'Lecture'],
+        todo: ['✅', 'Tâche pas encore faite'], late: ['⏰', 'Tâche en retard'], priority: ['🔴', 'Priorité de tâche'], stage: ['✍️', 'Avancement du brouillon'],
+        text: ['🔤', 'Texte contenu'], author: ['✒️', 'Auteur, créateur'], years: ['📅', 'Années'], folder: ['📁', 'Dans un dossier'], unfiled: ['📥', 'Rangé nulle part'],
+        files: ['📎', 'Avec fichiers joints'], notes: ['📝', 'Avec des notes'], related: ['🔗', 'Relié à d’autres éléments'], recent: ['🕘', 'Ajouté ces derniers jours'],
+    };
+    const legacyRules = f => [ // vues faites avant le constructeur de critères
+        f.types?.length && {kind: 'type', values: f.types}, f.tags?.length && {kind: 'tags', values: f.tags, mode: f.tagMode}, f.starred && {kind: 'starred'}, f.read && {kind: 'read', value: f.read},
+        f.todo && {kind: 'todo'}, f.text && {kind: 'text', value: f.text}, (f.from || f.to) && {kind: 'years', from: f.from, to: f.to}, f.folder && {kind: 'folder', value: f.folder}].filter(Boolean);
+    const viewRules = f => Array.isArray(f?.rules) ? f.rules : legacyRules(f || {});
+    function ruleMatch(r, i) {
+        const lower = x => String(x || '').toLowerCase(), d = i.data || {};
+        switch (r.kind) {
+            case 'type': return !(r.values || []).length || r.values.includes(tkey(i));
+            case 'kind': return i.type === 'reference' && (!r.value || d.kind === r.value);
+            case 'tags': { const want = r.values || []; if (!want.length) return (i.tags || []).length > 0; return r.mode === 'any' ? want.some(t => (i.tags || []).includes(t)) : want.every(t => (i.tags || []).includes(t)); }
+            case 'starred': return !!Number(i.starred);
+            case 'read': return i.type === 'reference' && (d.read || '') === (r.value || '');
+            case 'todo': return i.type === 'task' && !Number(d.done);
+            case 'late': return i.type === 'task' && !Number(d.done) && !!d.due && d.due < todayIso();
+            case 'priority': return i.type === 'task' && (d.priority || 'normale') === (r.value || 'haute');
+            case 'stage': return i.type === 'draft' && (d.stage || 'idee') === (r.value || 'idee');
+            case 'text': return !r.value || lower([i.title, JSON.stringify(d), (i.tags || []).join(' ')].join(' ')).includes(lower(r.value));
+            case 'author': return !r.value || lower([...(d.creators || []).map(c => `${c.first} ${c.last}`), d.creator, d.name].join(' ')).includes(lower(r.value));
+            case 'years': { const y = Number(dateKey(i).slice(0, 4)); return !!y && (!r.from || y >= Number(r.from)) && (!r.to || y <= Number(r.to)); }
+            case 'folder': { const want = lower(r.value); if (!want) return i.folders.length > 0; const ok = new Set(P.folders.filter(x => lower(x.name).includes(want)).flatMap(x => descendants(Number(x.id)))); return i.folders.some(x => ok.has(x)); }
+            case 'unfiled': return !i.folders.length;
+            case 'files': return (i.media || []).length > 0;
+            case 'notes': return !!String(d.notes || '').trim();
+            case 'related': return (d.related || []).length > 0;
+            case 'recent': { const days = Number(r.value) || 7; const t = Date.parse(String(i.created_at).replace(' ', 'T') + 'Z'); return !isNaN(t) && Date.now() - t <= days * 864e5; }
+            default: return true;
+        }
+    }
     function viewFilter(f, items) {
-        const lower = x => String(x || '').toLowerCase();
-        if (f.types?.length) items = items.filter(i => f.types.includes(tkey(i)));
-        if (f.tags?.length) items = items.filter(i => f.tagMode === 'any' ? f.tags.some(t => (i.tags || []).includes(t)) : f.tags.every(t => (i.tags || []).includes(t)));
-        if (f.starred) items = items.filter(i => Number(i.starred));
-        if (f.read) items = items.filter(i => i.type === 'reference' && (i.data.read || '') === f.read);
-        if (f.todo) items = items.filter(i => i.type === 'task' && !Number(i.data.done));
-        if (f.text) items = items.filter(i => lower([i.title, JSON.stringify(i.data), (i.tags || []).join(' ')].join(' ')).includes(lower(f.text)));
-        if (f.from || f.to) items = items.filter(i => { const y = Number(dateKey(i).slice(0, 4)); return y && (!f.from || y >= Number(f.from)) && (!f.to || y <= Number(f.to)); });
-        if (f.folder) { const want = lower(f.folder); const ok = new Set(P.folders.filter(x => lower(x.name).includes(want)).flatMap(x => descendants(Number(x.id)))); items = items.filter(i => i.folders.some(x => ok.has(x))); }
-        return items;
+        const rules = viewRules(f).filter(r => VIEW_RULES[r.kind]);
+        if (!rules.length) return items;
+        return items.filter(i => { const res = rules.map(r => ruleMatch(r, i) !== !!r.not); return f.match === 'any' ? res.some(Boolean) : res.every(Boolean); });
     }
     function nodeItems(node) {
         const v = st();
@@ -689,7 +716,7 @@
             if (q('[data-at-toggle]')) { const id = Number(q('[data-at-toggle]').dataset.atToggle); v.closed[id] = !v.closed[id]; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-fadd]')) { e.stopPropagation(); return folderDialog(null, Number(q('[data-at-fadd]').dataset.atFadd)); }
             if (q('[data-at-fedit]')) { e.stopPropagation(); return folderDialog(P.fById.get(Number(q('[data-at-fedit]').dataset.atFedit))); }
-            if (q('[data-at-go]')) { const g = q('[data-at-go]').dataset.atGo; return go(/^\d+$/.test(g) ? Number(g) : g); }
+            if (q('[data-at-go]')) { const g = q('[data-at-go]').dataset.atGo; const sv = navEntry(g)?.filter?.sort; if (sv?.col) v.sort = {col: sv.col, dir: sv.dir === -1 ? -1 : 1}; return go(/^\d+$/.test(g) ? Number(g) : g); }
             if (q('[data-at-typejump]')) { v.type = q('[data-at-typejump]').dataset.atTypejump; return go('all'); }
             if (q('[data-at-tag]')) { const tg = q('[data-at-tag]').dataset.atTag; v.tags = v.tags.includes(tg) ? v.tags.filter(x => x !== tg) : [...v.tags, tg]; if ([...SPECIAL_VIEWS, 'trash'].includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-tagclear]')) { v.tags = []; return renderProject(S().workspaceToken, true); }
@@ -820,7 +847,9 @@
         const r = raw && typeof raw === 'object' ? raw : {};
         const base = x => ({key: x.key, icon: str(x.icon, 16), label: str(x.label), hidden: !!x.hidden});
         const nav = (Array.isArray(r.nav) ? r.nav : []).filter(x => x && okKey(x.key)).slice(0, 200).map(x => x.custom ? {...base(x), custom: true, filter: (f => ({types: (Array.isArray(f.types) ? f.types : []).filter(okKey).slice(0, 50), tags: (Array.isArray(f.tags) ? f.tags : []).map(t => str(t, 60)).filter(Boolean).slice(0, 50), tagMode: f.tagMode === 'any' ? 'any' : 'all',
-            read: Object.keys(READ).includes(f.read) ? f.read : '', text: str(f.text), from: str(String(f.from ?? ''), 6), to: str(String(f.to ?? ''), 6), folder: str(f.folder), starred: !!f.starred, todo: !!f.todo}))(x.filter && typeof x.filter === 'object' ? x.filter : {})} : base(x));
+            read: Object.keys(READ).includes(f.read) ? f.read : '', text: str(f.text), from: str(String(f.from ?? ''), 6), to: str(String(f.to ?? ''), 6), folder: str(f.folder), starred: !!f.starred, todo: !!f.todo,
+            ...(Array.isArray(f.rules) ? {rules: f.rules.filter(r => r && VIEW_RULES[r.kind]).slice(0, 40).map(r => ({kind: r.kind, not: !!r.not, value: str(String(r.value ?? ''), 200), from: str(String(r.from ?? ''), 6), to: str(String(r.to ?? ''), 6), mode: r.mode === 'any' ? 'any' : 'all', values: (Array.isArray(r.values) ? r.values : []).map(v => str(String(v), 60)).filter(Boolean).slice(0, 60)}))} : {}),
+            match: f.match === 'any' ? 'any' : 'all', sort: f.sort && ['title', 'creator', 'year', 'type', 'added'].includes(f.sort.col) ? {col: f.sort.col, dir: f.sort.dir === -1 ? -1 : 1} : null}))(x.filter && typeof x.filter === 'object' ? x.filter : {})} : base(x));
         const types = (Array.isArray(r.types) ? r.types : []).filter(x => x && okKey(x.key)).slice(0, 200).map(x => x.custom ? {...base(x), custom: true, titleLabel: str(x.titleLabel) || 'Titre', help: str(x.help),
             fields: (Array.isArray(x.fields) ? x.fields : []).filter(f => f && okKey(f.key) && FIELD_KINDS.includes(f.type)).slice(0, 80).map(f => ({key: f.key, type: f.type, label: str(f.label) || 'Champ', width: f.width === 'half' ? 'half' : 'full', options: (Array.isArray(f.options) ? f.options : []).map(o => str(o, 80)).filter(Boolean).slice(0, 60), placeholder: str(f.placeholder), help: str(f.help), required: !!f.required}))} : base(x));
         const plans = (Array.isArray(r.plans) ? r.plans : []).filter(x => x && okKey(x.key)).slice(0, 200).map(x => x.custom ? {key: x.key, label: str(x.label) || 'Plan', hidden: !!x.hidden, custom: true, tree: cleanTree(x.tree)} : {key: x.key, label: str(x.label), hidden: !!x.hidden});
@@ -924,21 +953,54 @@
 
         function viewDialog(view) {
             const f = view?.filter || {}, isNew = !view;
+            let rules = JSON.parse(JSON.stringify(viewRules(f)));
+            const SORTS = [['', 'comme dans la liste (titre)'], ['title', 'titre'], ['creator', 'auteur, créateur'], ['year', 'date'], ['added', 'date d’ajout'], ['type', 'sorte d’élément']];
+            const inputs = (r, i) => { const v = esc(r.value || '');
+                switch (r.kind) {
+                    case 'type': return `<span class="h-vr-chips">${CFG.types.map(t => `<label class="checkbox-line"><input type="checkbox" data-vr="values" value="${esc(t.key)}" ${(r.values || []).includes(t.key) ? 'checked' : ''}> ${esc(t.icon)} ${esc(t.label)}</label>`).join('')}</span>`;
+                    case 'kind': return `<select data-vr="value">${Object.entries(REF_KINDS).map(([k, l]) => `<option value="${k}" ${r.value === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+                    case 'tags': return `<input data-vr="tags" value="${esc((r.values || []).join(', '))}" placeholder="optique, gravure (vide : au moins une étiquette)"><select data-vr="mode"><option value="all" ${r.mode !== 'any' ? 'selected' : ''}>toutes</option><option value="any" ${r.mode === 'any' ? 'selected' : ''}>au moins une</option></select>`;
+                    case 'read': return `<select data-vr="value">${Object.entries(READ).filter(([k]) => k).map(([k, l]) => `<option value="${k}" ${r.value === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+                    case 'priority': return `<select data-vr="value">${['haute', 'normale', 'basse'].map(o => `<option ${(r.value || 'haute') === o ? 'selected' : ''}>${o}</option>`).join('')}</select>`;
+                    case 'stage': return `<select data-vr="value">${Object.entries(STAGES).map(([k, l]) => `<option value="${k}" ${r.value === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+                    case 'text': return `<input data-vr="value" value="${v}" placeholder="un mot, un nom…">`;
+                    case 'author': return `<input data-vr="value" value="${v}" placeholder="Le Goff, Basset…">`;
+                    case 'folder': return `<input data-vr="value" value="${v}" placeholder="nom du dossier (avec ses sous-dossiers)">`;
+                    case 'years': return `de <input type="number" data-vr="from" value="${esc(r.from || '')}" placeholder="1700" class="h-lr-year"> à <input type="number" data-vr="to" value="${esc(r.to || '')}" placeholder="1850" class="h-lr-year">`;
+                    case 'recent': return `<input type="number" min="1" data-vr="value" value="${esc(r.value || '7')}" class="h-lr-year"> jours`;
+                    default: return '<small class="muted">rien à régler</small>';
+                } };
+            const rowHtml = (r, i) => `<div class="h-vr-row" data-vr-i="${i}"><span class="h-vr-name">${VIEW_RULES[r.kind][0]} ${esc(VIEW_RULES[r.kind][1])}</span><span class="h-vr-inputs">${inputs(r, i)}</span>
+                <label class="checkbox-line h-vr-not" title="Inverser : tout sauf ça"><input type="checkbox" data-vr="not" ${r.not ? 'checked' : ''}> pas</label>
+                <span class="h-rb-tools"><button type="button" class="icon-button" data-vr-move="-1" title="Monter" ${i === 0 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button" data-vr-move="1" title="Descendre" ${i === rules.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button danger" data-vr-del title="Retirer">🗑</button></span></div>`;
             dialog({eyebrow: 'MA PROPRE VUE', title: isNew ? 'Nouvelle vue' : view.label, wide: true, submitLabel: 'Enregistrer',
-                body: `<div class="form-grid"><label>Nom<input name="label" required value="${esc(view?.label || '')}" placeholder="À lire"></label><label>Émoji${iconInput('name="icon"', view?.icon || '🔎')}</label>
-                    <div class="span-2"><span class="section-label">Sortes d’éléments <small>(aucune cochée : toutes)</small></span><div class="h-village-maps-grid">${CFG.types.map(t => `<label class="checkbox-line"><input type="checkbox" name="types" value="${esc(t.key)}" ${(f.types || []).includes(t.key) ? 'checked' : ''}> ${esc(t.icon)} ${esc(t.label)}</label>`).join('')}</div></div>
-                    <label>Étiquettes <small>(séparées par des virgules)</small><input name="tags" value="${esc((f.tags || []).join(', '))}" placeholder="optique, gravure"></label>
-                    <label>Avec<select name="tagMode"><option value="all" ${f.tagMode !== 'any' ? 'selected' : ''}>toutes ces étiquettes</option><option value="any" ${f.tagMode === 'any' ? 'selected' : ''}>au moins une</option></select></label>
-                    <label>Lecture (références)<select name="read">${Object.entries(READ).map(([k, l]) => `<option value="${k}" ${(f.read || '') === k ? 'selected' : ''}>${k ? esc(l) : 'peu importe'}</option>`).join('')}</select></label>
-                    <label>Texte contenu<input name="text" value="${esc(f.text || '')}" placeholder="un mot, un nom…"></label>
-                    <label>Années de<input type="number" name="from" value="${esc(f.from || '')}" placeholder="1700"></label><label>à<input type="number" name="to" value="${esc(f.to || '')}" placeholder="1850"></label>
-                    <label class="span-2">Dossier dont le nom contient <small>(avec ses sous-dossiers, dans chaque projet)</small><input name="folder" value="${esc(f.folder || '')}" placeholder="Sources"></label>
-                    <label class="checkbox-line"><input type="checkbox" name="starred" ${f.starred ? 'checked' : ''}> Favoris seulement</label><label class="checkbox-line"><input type="checkbox" name="todo" ${f.todo ? 'checked' : ''}> Tâches pas encore faites</label></div>`,
-                onOpen: dl => dl.querySelector('[data-cfg-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]'))),
+                body: `<div class="form-grid"><label>Nom<input name="label" required value="${esc(view?.label || '')}" placeholder="À lire"></label><label>Émoji${iconInput('name="icon"', view?.icon || '🔎')}</label></div>
+                    <h4>Les critères</h4><p class="muted">Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet.</p>
+                    <div class="h-be-palette">${Object.entries(VIEW_RULES).map(([k, [icon, label]]) => `<button type="button" class="button small secondary" data-vr-add="${k}">${icon} ${esc(label)}</button>`).join('')}</div>
+                    <div class="h-tabs h-vr-match"><label class="checkbox-line"><input type="radio" name="match" value="all" ${f.match !== 'any' ? 'checked' : ''}> tous les critères (ET)</label><label class="checkbox-line"><input type="radio" name="match" value="any" ${f.match === 'any' ? 'checked' : ''}> au moins un (OU)</label></div>
+                    <div class="h-vr-list" data-vr-list></div>
+                    <h4>L’ordre d’affichage</h4><div class="form-grid"><label>Trier par<select name="sortcol">${SORTS.map(([k, l]) => `<option value="${k}" ${(f.sort?.col || '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                        <label>Sens<select name="sortdir"><option value="1" ${f.sort?.dir !== -1 ? 'selected' : ''}>croissant (A → Z, ancien → récent)</option><option value="-1" ${f.sort?.dir === -1 ? 'selected' : ''}>décroissant (Z → A, récent → ancien)</option></select></label></div>`,
+                onOpen: dl => {
+                    dl.querySelector('[data-cfg-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]')));
+                    const box = dl.querySelector('[data-vr-list]');
+                    const read = () => { box.querySelectorAll('[data-vr-i]').forEach(row => { const r = rules[Number(row.dataset.vrI)]; if (!r) return;
+                        row.querySelectorAll('[data-vr]').forEach(el => { const k = el.dataset.vr;
+                            if (k === 'values') r.values = [...row.querySelectorAll('[data-vr=values]:checked')].map(x => x.value);
+                            else if (k === 'tags') r.values = el.value.split(',').map(x => x.trim()).filter(Boolean);
+                            else if (k === 'not') r.not = el.checked; else r[k] = el.value; }); }); };
+                    const paint = () => { box.innerHTML = rules.map(rowHtml).join('') || '<p class="muted">Aucun critère : la vue montre tout le projet.</p>'; };
+                    paint();
+                    dl.querySelectorAll('[data-vr-add]').forEach(b => b.addEventListener('click', () => { read(); const k = b.dataset.vrAdd; rules.push({kind: k, value: k === 'recent' ? '7' : k === 'read' ? 'a_lire' : k === 'kind' ? 'livre' : k === 'priority' ? 'haute' : k === 'stage' ? 'premier_jet' : '', values: []}); paint(); box.lastElementChild?.querySelector('input:not([type=checkbox]),select')?.focus(); }));
+                    box.addEventListener('click', e => { const row = e.target.closest('[data-vr-i]'); if (!row) return; const i = Number(row.dataset.vrI);
+                        if (e.target.closest('[data-vr-del]')) { read(); rules.splice(i, 1); paint(); }
+                        const mv = e.target.closest('[data-vr-move]'); if (mv) { read(); const j = i + Number(mv.dataset.vrMove); if (j >= 0 && j < rules.length) { [rules[i], rules[j]] = [rules[j], rules[i]]; paint(); } } });
+                    dl._readRules = () => { read(); return rules; };
+                },
                 onSubmit: form => {
-                    const fd = new FormData(form);
-                    const filter = {types: fd.getAll('types'), tags: String(fd.get('tags') || '').split(',').map(x => x.trim()).filter(Boolean), tagMode: fd.get('tagMode'), read: fd.get('read') || '', text: String(fd.get('text') || '').trim(),
-                        from: fd.get('from') || '', to: fd.get('to') || '', folder: String(fd.get('folder') || '').trim(), starred: !!form.starred.checked, todo: !!form.todo.checked};
+                    const fd = new FormData(form), rl = form.closest('dialog')._readRules();
+                    const filter = {rules: rl.map(r => ({kind: r.kind, not: !!r.not, value: r.value || '', from: r.from || '', to: r.to || '', mode: r.mode === 'any' ? 'any' : 'all', values: r.values || []})), match: fd.get('match') === 'any' ? 'any' : 'all',
+                        sort: fd.get('sortcol') ? {col: fd.get('sortcol'), dir: Number(fd.get('sortdir')) === -1 ? -1 : 1} : null};
                     const entry = {key: view?.key || uid('v_'), icon: String(fd.get('icon') || '🔎').trim() || '🔎', label: String(fd.get('label')).trim(), custom: true, filter, hidden: !!view?.hidden};
                     if (isNew) CFG.nav.splice(Math.max(0, CFG.nav.findIndex(x => x.key === 'trash')), 0, entry); else Object.assign(CFG.nav.find(x => x.key === view.key), entry);
                     saveCfg(); toast('Vue enregistrée.'); again();
