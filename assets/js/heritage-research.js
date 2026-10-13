@@ -1,5 +1,5 @@
 /**
- * 📚 Atelier de recherche (onglet Listes) — pour écrire une thèse, un livre, un article, préparer une exposition :
+ * 📚 Atelier de recherche (Enquêtes → onglet « Atelier ») — pour écrire une thèse, un livre, un article, préparer une exposition :
  * des projets, et dans chacun des dossiers imbriqués sans limite (parties, chapitres, sections…) où l'on range
  * des références (livres, articles, archives, gravures…), notes, citations, images, personnes, lieux, dates, liens,
  * tâches et brouillons. Un élément peut être dans plusieurs dossiers. Vue d'ensemble, chronologie, carte,
@@ -19,7 +19,7 @@
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
-    const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
+    const isCurrent = token => token === S().workspaceToken && S().module === 'enquetes';
     const dialog = opts => ext.openDialog(opts);
     const pname = p => p ? A().personName(p) : '';
     const post = (action, body) => api(action, {}, {method: 'POST', body});
@@ -119,10 +119,10 @@
     const dateKey = i => { const d = i.data || {}; const v = i.type === 'task' ? d.due : i.type === 'reference' ? (d.date || d.year) : d.date; const m = String(v || '').match(/(\d{3,4})(?:-(\d{2})(?:-(\d{2}))?)?/); return m ? m[1].padStart(4, '0') + (m[2] || '00') + (m[3] || '00') : ''; };
 
     /* ═══════════ Les projets ═══════════ */
-    ext.lists.research = async token => {
+    ext.atelier = async token => {
         const v = st();
         if (v.project) {
-            try { await load(v.project); } catch (error) { v.project = 0; toast(error.message, 'error'); return ext.lists.research(token); }
+            try { await load(v.project); } catch (error) { v.project = 0; toast(error.message, 'error'); return ext.atelier(token); }
             if (!isCurrent(token)) return;
             return renderProject(token);
         }
@@ -138,14 +138,17 @@
                 <p class="h-at-project-stats">${plural(Number(p.item_count), 'élément', 'éléments')} · ${plural(Number(p.folder_count), 'dossier', 'dossiers')}${Number(p.open_tasks) ? ` · ${plural(Number(p.open_tasks), 'tâche', 'tâches')} à faire` : ''}</p>
                 ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} mots sur ${fmt(target)}</small></div>` : words ? `<small>${fmt(words)} mots écrits</small>` : ''}
                 ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? `échéance dépassée de ${plural(-days, 'jour', 'jours')}` : `rendu dans ${plural(days, 'jour', 'jours')}`}</small>` : ''}</div></article>`; };
-        ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>+ Projet</button></div></header>`}
+        ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>+ Projet</button></div></header>`}
             ${projects.length ? `<div class="h-at-projects">${projects.map(card).join('')}</div>` : empty('Aucun projet pour l’instant. Clique sur « + Projet » : par exemple « Les montreurs de vues d’optique, XVIIIe-XIXe siècles ».')}</section>`;
         ws.querySelector('[data-at-new]').addEventListener('click', () => projectDialog(null, data.kinds));
+        lastKinds = data.kinds;
         ws.querySelectorAll('[data-at-open]').forEach(c => {
-            const open = () => { Object.assign(st(), {project: Number(c.dataset.atOpen), node: 'overview', sel: [], tags: [], q: '', type: ''}); ext.lists.research(++S().workspaceToken); };
+            const open = () => { Object.assign(st(), {project: Number(c.dataset.atOpen), node: 'overview', sel: [], tags: [], q: '', type: ''}); ext.atelier(++S().workspaceToken); };
             c.addEventListener('click', open); c.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
         });
     };
+    let lastKinds = {these: 'Thèse', livre: 'Livre', article: 'Article', memoire: 'Mémoire', exposition: 'Exposition', enquete: 'Enquête', autre: 'Autre'};
+    ext.atelierNewProject = () => projectDialog(null, P?.kinds || lastKinds);
     function projectDialog(p, kinds) {
         const isNew = !p; p = p || {kind: 'these', icon: '', color: '#0066cc', target_words: 0};
         const planTree = list => `<ul>${list.map(x => `<li>📁 ${esc(x.name)}${x.children.length ? planTree(x.children) : ''}</li>`).join('')}</ul>`;
@@ -168,11 +171,11 @@
                 const r = await post('save_atelier_project', body);
                 Object.assign(st(), {project: r.result.id, node: 'overview', sel: [], tags: [], q: '', type: ''});
                 toast(isNew ? 'Projet créé.' : 'Projet enregistré.');
-                ext.lists.research(++S().workspaceToken);
+                ext.atelier(++S().workspaceToken);
             },
             onDelete: isNew ? null : async () => {
                 if (!confirm(`Supprimer « ${p.title} » avec tous ses dossiers et ses ${plural(P?.items.length || 0, 'élément', 'éléments')} ? C’est définitif.`)) return false;
-                await post('delete_atelier_project', {id: p.id}); st().project = 0; toast('Projet supprimé.'); ext.lists.research(++S().workspaceToken);
+                await post('delete_atelier_project', {id: p.id}); st().project = 0; toast('Projet supprimé.'); ext.atelier(++S().workspaceToken);
             },
         });
     }
@@ -539,7 +542,7 @@
         const v = st();
         const go = node => { v.node = node; v.sel = []; renderProject(S().workspaceToken); ws.querySelector('.h-at-main')?.scrollTo(0, 0); };
         const act = async (action, ids, extra = {}) => { try { const r = await post('atelier_items_action', {project_id: P.project.id, ids, action, ...extra}); await reload(); return r.result; } catch (error) { toast(error.message, 'error'); } };
-        ws.querySelector('[data-at-home]').addEventListener('click', () => { v.project = 0; P = null; ext.lists.research(++S().workspaceToken); });
+        ws.querySelector('[data-at-home]').addEventListener('click', () => { v.project = 0; P = null; ext.atelier(++S().workspaceToken); });
         ws.querySelector('[data-at-pedit]').addEventListener('click', () => projectDialog(P.project, P.kinds));
         ws.querySelector('[data-at-export]').addEventListener('click', exportDialog);
         ws.addEventListener('click', async e => {
