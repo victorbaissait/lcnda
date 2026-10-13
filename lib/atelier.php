@@ -9,7 +9,9 @@ declare(strict_types=1);
  */
 
 const ATELIER_KINDS = ['these' => 'Thèse', 'livre' => 'Livre', 'article' => 'Article', 'memoire' => 'Mémoire', 'exposition' => 'Exposition', 'enquete' => 'Enquête', 'autre' => 'Autre'];
-const ATELIER_TYPES = ['reference', 'note', 'quote', 'media', 'person', 'place', 'event', 'link', 'task', 'draft', 'custom'];
+const ATELIER_TYPES = ['reference', 'note', 'quote', 'media', 'person', 'place', 'event', 'link', 'task', 'draft', 'custom', 'app'];
+/** « Venant du logiciel » : ce que l'élément montre (une fiche, un bloc d'une fiche, la fiche d'un village, une liste, un recueil…). */
+const ATELIER_APP_KINDS = ['person', 'person_block', 'village', 'list', 'recueil', 'investigation', 'battue', 'media', 'atelier_project'];
 const ATELIER_REF_KINDS = ['livre', 'article', 'chapitre', 'these', 'archive', 'image', 'presse', 'web', 'objet', 'autre'];
 const ATELIER_READ = ['', 'a_lire', 'en_cours', 'lu', 'exploite'];
 
@@ -254,6 +256,8 @@ function atelier_clean_data(PDO $pdo, string $type, array $in, int $projectId): 
             }
             $out += ['ctype' => preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($in['ctype'] ?? ''))) ?: 'perso', 'values' => $vals, 'pkeys' => $pkeys];
             break;
+        case 'app': $out += ['kind' => in_array($in['kind'] ?? '', ATELIER_APP_KINDS, true) ? (string) $in['kind'] : 'person', 'key' => $t('key', 200), 'sub' => $t('sub', 200), 'label' => $t('label', 300), 'extra' => $t('extra', 300),
+            'page_from' => max(0, safe_int($in['page_from'] ?? 0)), 'page_to' => max(0, safe_int($in['page_to'] ?? 0))]; break;
         case 'note': default: $out += ['text' => $long('text', 200000)];
     }
     return $out;

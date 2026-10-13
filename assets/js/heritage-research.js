@@ -31,8 +31,9 @@
         person: ['👤', 'Personne', 'De ta base, ou quelqu’un d’autre'], place: ['📍', 'Lieu', 'Placé sur la carte'],
         event: ['📅', 'Date, événement', 'Pour la chronologie'], link: ['🔗', 'Lien internet', 'Un site, une base en ligne'],
         task: ['✅', 'Tâche', 'À faire, avec une échéance'], draft: ['✍️', 'Brouillon', 'Un texte en cours, avec ses mots comptés'],
+        app: ['🔗', 'Venant du logiciel', 'Une fiche, un bloc d’une fiche, la fiche d’un village, une liste, un recueil, une enquête…'],
     };
-    const TYPE_PLURALS = {reference: 'Références', note: 'Notes', quote: 'Citations', media: 'Images et documents', person: 'Personnes', place: 'Lieux', event: 'Dates, événements', link: 'Liens internet', task: 'Tâches', draft: 'Brouillons'};
+    const TYPE_PLURALS = {reference: 'Références', note: 'Notes', quote: 'Citations', media: 'Images et documents', person: 'Personnes', place: 'Lieux', event: 'Dates, événements', link: 'Liens internet', task: 'Tâches', draft: 'Brouillons', app: 'Venant du logiciel'};
     const REF_KINDS = {livre: 'Livre', article: 'Article de revue', chapitre: 'Chapitre d’ouvrage', these: 'Thèse, mémoire', archive: 'Document d’archives', image: 'Image, gravure, estampe', presse: 'Article de presse', web: 'Page internet', objet: 'Objet', autre: 'Autre'};
     const ROLES = {auteur: 'auteur', dir: 'directeur (dir.)', trad: 'traducteur', graveur: 'graveur', editeur: 'éditeur', illustrateur: 'illustrateur', photographe: 'photographe', autre: 'autre'};
     const READ = {'': '—', a_lire: '📕 à lire', en_cours: '📖 en cours de lecture', lu: '📗 lu', exploite: '✅ exploité'};
@@ -477,6 +478,9 @@
             case 'place': body = `<dl class="data-list">${row('Lieu', d.place?.text)}${row('Sorte de lieu', d.kind)}</dl>${d.place?.lat !== null && d.place?.lat !== undefined && ext.miniMap ? ext.miniMap([{lat: +d.place.lat, lon: +d.place.lon, label: i.title}], [], {height: 200}) : ''}`; break;
             case 'event': body = `<dl class="data-list">${row('Date', d.date)}${row('Jusqu’au', d.end)}${row('Lieu', d.place?.text)}${row('Personnes', (d.people || []).map(pid => people[pid] ? `<button type="button" class="table-link" data-h-person="${pid}">${esc(pname(people[pid]))}</button>` : '').join(', '), true)}</dl>`; break;
             case 'link': body = `<dl class="data-list">${row('Adresse', url(d.url), true)}${row('Site', d.site)}${row('Consulté le', d.accessed)}</dl>`; break;
+            case 'app': body = `<div class="h-at-app"><p><b>${esc((APP_KINDS[d.kind] || ['🔗'])[0])} ${esc((APP_KINDS[d.kind] || [, 'Élément'])[1])}</b> — ${esc(d.label)}${d.extra ? ` <small class="muted">${esc(d.extra)}</small>` : ''}</p>
+                <button type="button" class="button small" data-at-appopen="${i.id}">↗ Ouvrir dans le logiciel</button><div class="h-at-apppreview" data-at-apppreview="${i.id}"><p class="muted">Chargement de l’aperçu…</p></div></div>`;
+                setTimeout(() => fillAppPreview(i), 0); break;
             case 'task': body = `<label class="checkbox-line h-at-taskbig"><input type="checkbox" data-at-taskdone="${i.id}" ${Number(d.done) ? 'checked' : ''}> Fait</label><dl class="data-list">${row('Pour le', d.due ? new Date(d.due + 'T12:00:00').toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) : '')}${row('Priorité', d.priority)}</dl>`; break;
             case 'draft': { const w = (String(d.text || '').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length, t = Number(d.target);
                 body = `<p><b>${fmt(w)}</b> mots${t ? ` sur ${fmt(t)}` : ''} · ${esc(STAGES[d.stage] || '')}</p>${t ? `<div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * w / t))}%"></span></div>` : ''}<div class="h-at-draft">${nl(String(d.text || '').slice(0, 3000))}${String(d.text || '').length > 3000 ? '<p class="muted">…</p>' : ''}</div><button type="button" class="button small" data-at-write="${i.id}">✍️ Écrire</button>`; break; }
@@ -541,7 +545,93 @@
             },
         });
     }
+    /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
+    const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
+        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🐾', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier']};
+    async function appSearch(kind, q) {
+        if (['person', 'person_block', 'village', 'investigation', 'battue', 'atelier_project'].includes(kind)) return ((await api('recueil_search', {type: kind === 'person_block' ? 'person' : kind, q})).results || []).filter(r => kind !== 'atelier_project' || Number(r.key) !== Number(P.project.id));
+        if (kind === 'media') return ((await api('list', {type: 'media', q, limit: 40})).rows || []).map(r => ({key: String(r.id), label: r.title || r.filename, extra: r.date_text || r.media_type || '', thumb: r.media_type === 'image' || !r.media_type ? (r.thumbnail || r.filename) : ''}));
+        if (kind === 'recueil') return ((await api('recueils', {q})).recueils || []).map(r => ({key: String(r.id), label: r.title, extra: `${r.pages} p.${r.reference ? ' · ' + r.reference : ''}`, thumb: r.cover?.thumbnail || ''}));
+        if (kind === 'list') { const my = await api('my_lists').catch(() => ({lists: []})); const all = [...(A().defaultListTypes || []).map(([k, , l]) => ({key: k, label: l, extra: 'liste de l’app'})), ...(my.lists || []).map(l => ({key: 'mylist:' + l.id, label: l.name, extra: 'éditeur de listes'}))];
+            const lq = q.toLowerCase(); return all.filter(x => !lq || x.label.toLowerCase().includes(lq)).slice(0, 60); }
+        return [];
+    }
+    function appDialog(item = null) {
+        const v = st(), d = item?.data || {};
+        let chosen = item ? {key: d.key, label: d.label, extra: d.extra} : null, pages = [];
+        const blocks = (A().defaultPersonBlocks || []).filter(([k]) => !['person_exports'].includes(k));
+        dialog({eyebrow: 'VENANT DU LOGICIEL', title: item ? 'Modifier' : 'Ajouter un élément du logiciel', wide: true, submitLabel: item ? 'Enregistrer' : 'Ajouter',
+            body: `<p class="muted">L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène.</p>
+                <div class="form-grid"><label>Quoi ?<select name="kind">${Object.entries(APP_KINDS).map(([k, [ic, l]]) => `<option value="${k}" ${(d.kind || 'person') === k ? 'selected' : ''}>${ic} ${esc(l)}</option>`).join('')}</select></label>
+                <label>Chercher<input type="search" data-app-q value="${esc(item ? d.label : '')}" placeholder="Nom, titre, commune…"></label></div>
+                <div class="h-rc-results h-at-appres" data-app-res></div>
+                <div data-app-more></div>
+                <div class="form-grid"><label class="span-2">Titre dans le projet <small class="muted">(facultatif)</small><input name="title" value="${esc(item?.title || '')}" placeholder="(le nom choisi)"></label>
+                <label class="span-2">Pourquoi ici ? <small class="muted">(note)</small><textarea name="notes" rows="2">${esc(d.notes || '')}</textarea></label></div>`,
+            onOpen: dl => {
+                const kindSel = dl.querySelector('[name=kind]'), q = dl.querySelector('[data-app-q]'), res = dl.querySelector('[data-app-res]'), more = dl.querySelector('[data-app-more]');
+                const drawMore = async () => { const k = kindSel.value;
+                    if (k === 'person_block') more.innerHTML = `<label>Quel bloc ?<select name="sub">${blocks.map(([bk, bl]) => `<option value="${esc(bk)}" ${d.sub === bk ? 'selected' : ''}>${esc(bl)}</option>`).join('')}</select></label>`;
+                    else if (k === 'recueil' && chosen) { const rd = await api('recueil', {id: chosen.key}).catch(() => ({pages: []})); pages = rd.pages || [];
+                        more.innerHTML = pages.length ? `<fieldset class="h-rc-modes"><legend>Quelles pages ?</legend><label class="checkbox-line"><input type="radio" name="scope" value="all" ${d.page_from ? '' : 'checked'}> Tout le recueil</label>
+                            <label class="checkbox-line"><input type="radio" name="scope" value="some" ${d.page_from ? 'checked' : ''}> De la page <select name="page_from">${pages.map(p => `<option value="${p.id}" ${Number(d.page_from) === p.id ? 'selected' : ''}>${p.num}${p.label ? ' — ' + esc(p.label) : ''}</option>`).join('')}</select> à <select name="page_to">${pages.map(p => `<option value="${p.id}" ${Number(d.page_to || d.page_from) === p.id ? 'selected' : ''}>${p.num}${p.label ? ' — ' + esc(p.label) : ''}</option>`).join('')}</select></label></fieldset>` : ''; }
+                    else more.innerHTML = ''; };
+                let timer = 0;
+                const search = async () => { const list = await appSearch(kindSel.value, q.value.trim()).catch(() => []);
+                    res.innerHTML = list.map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" data-extra="${esc(x.extra || '')}" ${chosen?.key === x.key ? 'checked' : ''}>${x.thumb ? `<img src="media/${encodeURIComponent(x.thumb)}" alt="" class="h-at-appthumb">` : ''} ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="muted">Rien trouvé.</p>';
+                    res.querySelectorAll('[name=pick]').forEach(r => r.addEventListener('change', () => { chosen = {key: r.value, label: r.dataset.label, extra: r.dataset.extra}; drawMore(); })); };
+                q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(search, 250); });
+                kindSel.addEventListener('change', () => { chosen = null; q.value = ''; search(); drawMore(); });
+                search(); drawMore();
+            },
+            onSubmit: async form => {
+                if (!chosen) { toast('Choisis dans la liste.', 'error'); return false; }
+                const f = Object.fromEntries(new FormData(form)), kind = f.kind;
+                const blockLabel = kind === 'person_block' ? (blocks.find(b => b[0] === f.sub) || [, f.sub])[1] : '';
+                const some = kind === 'recueil' && f.scope === 'some', pf = pages.find(p => p.id === Number(f.page_from)), pt = pages.find(p => p.id === Number(f.page_to));
+                const label = kind === 'person_block' ? `${blockLabel} — ${chosen.label}` : chosen.label;
+                const data = {kind, key: chosen.key, sub: kind === 'person_block' ? f.sub : '', label, extra: some && pf ? `pages ${Math.min(pf.num, pt?.num || pf.num)} à ${Math.max(pf.num, pt?.num || pf.num)}` : chosen.extra,
+                    page_from: some ? Number(f.page_from) : 0, page_to: some ? Number(f.page_to) : 0, notes: f.notes, related: d.related || []};
+                const saved = await post('save_atelier_item', {id: item?.id || 0, project_id: P.project.id, type: 'app', title: (f.title || '').trim() || label, data, tags: item?.tags || [],
+                    folder_ids: item ? item.folders : (typeof v.node === 'number' ? [v.node] : []), starred: item ? Number(item.starred) : 0});
+                v.sel = [Number(saved.result.id)]; toast(item ? 'Enregistré.' : 'Ajouté.'); await reload();
+            },
+        });
+    }
+    /** Ouvre dans le logiciel ce que montre un élément « Venant du logiciel ». */
+    function openApp(i) {
+        const d = i.data || {}, s = S();
+        if (d.kind === 'person' || d.kind === 'person_block') { s.currentPersonId = Number(d.key); A().setModule('personnes');
+            if (d.kind === 'person_block' && d.sub) { let n = 0; const t = setInterval(() => { const el = document.querySelector(`[data-pblock="${CSS.escape(d.sub)}"]`); if (el || ++n > 40) { clearInterval(t); if (el) { el.scrollIntoView({behavior: 'smooth', block: 'start'}); el.classList.add('h-flash'); setTimeout(() => el.classList.remove('h-flash'), 2500); } } }, 100); } return; }
+        if (d.kind === 'village') { s.listType = 'villages'; s.hVillage = d.key; return A().setModule('listes'); }
+        if (d.kind === 'list') { s.listType = d.key; return A().setModule('listes'); }
+        if (d.kind === 'recueil') return ext.openRecueil?.(d.key, d.page_from || 0);
+        if (d.kind === 'investigation') { s.enquetesTab = 'enquetes'; s.currentBattueId = 0; s.currentInvestigationId = Number(d.key); return A().setModule('enquetes'); }
+        if (d.kind === 'battue') { s.enquetesTab = 'battue'; s.currentInvestigationId = 0; s.currentBattueId = Number(d.key); return A().setModule('enquetes'); }
+        if (d.kind === 'atelier_project') { Object.assign(st(), {project: Number(d.key), node: firstNode(), sel: [], tags: [], q: '', type: ''}); return ext.atelier(++S().workspaceToken); }
+        if (d.kind === 'media') { A().api('list', {type: 'media', q: d.label, limit: 40}).then(r => { const m = (r.rows || []).find(x => String(x.id) === String(d.key)); if (m) A().openLightbox([m], 0, false); else toast('Média introuvable.', 'error'); }); }
+    }
+    /** Aperçu vivant dans le panneau de droite. */
+    async function fillAppPreview(i) {
+        const box = document.querySelector(`[data-at-apppreview="${i.id}"]`); if (!box) return;
+        const d = i.data || {}; let html = '';
+        try {
+            if (d.kind === 'person' || d.kind === 'person_block') { const r = await api('person', {id: d.key}); const p = r.person || {};
+                const ev = (r.events || []).slice(0, 8);
+                html = `<p><b>${esc(A().personName(p))}</b> ${esc(A().years ? A().years(p) : '')}</p>${d.kind === 'person_block' ? `<p class="muted">Bloc montré : <b>${esc((A().defaultPersonBlocks.find(b => b[0] === d.sub) || [, d.sub])[1])}</b> (↗ Ouvrir mène à ce bloc)</p>` : ''}
+                    ${ev.length ? `<ul class="h-at-applist">${ev.map(e => `<li>${esc(e.type_label || 'Événement')} — ${esc(e.date_text || e.year || '')}${e.place_name ? ' · ' + esc(e.place_name) : ''}</li>`).join('')}</ul>` : ''}`; }
+            else if (d.kind === 'village') { const v = await api('village', {key: d.key}); html = `<p><b>${esc(v.name)}</b> ${esc([v.county, v.country].filter(Boolean).join(', '))}</p><p class="muted">${[v.people_count && `${v.people_count} personne(s) de la famille`, (v.baptemes || v.mariages || v.deces) && `${(v.baptemes || 0) + (v.mariages || 0) + (v.deces || 0)} baptême(s), mariage(s), décès`, (v.families || []).length && `familles : ${(v.families || []).slice(0, 6).map(f => f.name || f.surname || f).join(', ')}`].filter(Boolean).join(' · ')}</p>`; }
+            else if (d.kind === 'recueil') { const r = await api('recueil', {id: d.key}); const imgs = new Map(r.images.map(x => [x.id, x]));
+                let pg = r.pages; if (d.page_from) { const a = r.pages.find(p => p.id === Number(d.page_from)), b = r.pages.find(p => p.id === Number(d.page_to)) || a; if (a) pg = r.pages.filter(p => p.num >= Math.min(a.num, b.num) && p.num <= Math.max(a.num, b.num)); }
+                html = `<p><b>${esc(r.recueil.title)}</b> · ${pg.length} page(s)</p><div class="h-rc-for-strip">${pg.slice(0, 12).map(p => { const im = imgs.get(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-open-recueil="${d.key}" data-recueil-page="${p.id}" title="Page ${p.num}">${im ? `<img src="media/${encodeURIComponent(im.thumbnail)}" alt="">` : ''}<small>${p.num}</small></button>`; }).join('')}</div>`; }
+            else if (d.kind === 'media') { const r = await api('list', {type: 'media', q: d.label, limit: 40}); const m = (r.rows || []).find(x => String(x.id) === String(d.key));
+                html = m ? ((m.media_type || 'image') === 'image' ? `<img class="h-at-appimg" src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="">` : `<p>${esc(m.media_type)} · ${esc(m.filename)}</p>`) + (m.transcription ? `<p class="h-at-notetext">${esc(m.transcription.slice(0, 400))}</p>` : '') : '<p class="muted">Média introuvable (supprimé ?).</p>'; }
+            else html = `<p class="muted">${esc(d.extra || '')}</p>`;
+        } catch (e) { html = `<p class="muted">Aperçu impossible : ${esc(e.message)}</p>`; }
+        if (box.isConnected) box.innerHTML = html;
+    }
     function itemDialog(type, item = null, preset = {}) {
+        if (type === 'app') return appDialog(item);
         if (type === 'custom' || !TYPES[type]) return customDialog(item ? item.data?.ctype : type, item);
         const v = st(), d = item?.data || preset.data || {}, isNew = !item;
         const people = P.people || {};
@@ -830,6 +920,7 @@
             if (q('[data-at-sort]')) { const c = q('[data-at-sort]').dataset.atSort; v.sort = v.sort.col === c ? {col: c, dir: -v.sort.dir} : {col: c, dir: 1}; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-star]')) { e.stopPropagation(); const i = P.byId.get(Number(q('[data-at-star]').dataset.atStar)); return act(Number(i.starred) ? 'unstar' : 'star', [Number(i.id)]); }
             if (q('[data-at-pick]')) { const id = Number(q('[data-at-pick]').dataset.atPick), i = P.byId.get(id); if (!i) return; v.sel = [id]; return renderProject(S().workspaceToken, true); }
+            if (q('[data-at-appopen]')) return openApp(P.byId.get(Number(q('[data-at-appopen]').dataset.atAppopen)));
             if (q('[data-at-edit]')) { const i = P.byId.get(Number(q('[data-at-edit]').dataset.atEdit)); return itemDialog(i.type, i); }
             if (q('[data-at-write]')) { const i = P.byId.get(Number(q('[data-at-write]').dataset.atWrite)); return itemDialog(i.type, i); }
             if (q('[data-at-dup]')) { const i = P.byId.get(Number(q('[data-at-dup]').dataset.atDup)); try { const r = await post('save_atelier_item', {project_id: P.project.id, type: i.type, title: i.title + ' (copie)', data: i.data, tags: i.tags, folder_ids: i.folders}); v.sel = [Number(r.result.id)]; toast('Dupliqué (sans les fichiers joints).'); await reload(); } catch (error) { toast(error.message, 'error'); } return; }

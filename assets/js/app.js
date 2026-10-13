@@ -2614,7 +2614,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             try{
                 const block=renderers[key](index);
                 if(block)visualIndex++;
-                return applyBlockWidth(block,settings.widths?.[key]);
+                return applyBlockWidth(block?String(block).replace('<section class="card',`<section data-pblock="${escapeHtml(key)}" class="card`):block,settings.widths?.[key]); // data-pblock : pour ouvrir la fiche sur ce bloc
             }catch(error){
                 console.error(`Erreur dans le bloc personne "${key}"`,error);
                 visualIndex++;
@@ -13092,7 +13092,7 @@ ${backupSectionHtml()}
     }
 
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
-    window.LCNDA_APP={formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 
