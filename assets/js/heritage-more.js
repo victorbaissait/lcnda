@@ -310,6 +310,7 @@
         ['number', '🔢', 'Nombre', 'Une somme, une surface, un nombre d’enfants…'], ['select', '📋', 'Liste de choix', 'Choisir parmi des réponses que tu écris'], ['checkbox', '☑️', 'Case à cocher', 'Oui / non'],
         ['url', '🔗', 'Lien internet', 'Une page d’archives, un article…'], ['person', '👤', 'Personne liée', 'Une autre fiche de la base'], ['place', '📍', 'Lieu', 'Placé tout seul sur la carte'],
         ['media', '🖼️', 'Photos, vidéos, sons', 'Fichiers à ajouter'], ['person_info', 'ℹ️', 'Info tirée d’une fiche', 'Naissance, décès, métier… repris tout seuls'], ['map', '🗺️', 'Carte', 'Les lieux du bloc sur une carte'],
+        ['journey', '🧭', 'Parcours jour par jour', 'Des étapes datées sur une frise et une carte (comme dans Résistants), écrites à la main ou reprises de la fiche'],
     ];
     const typeInfo = t => FIELD_TYPES.find(x => x[0] === t) || FIELD_TYPES[0];
     const INFOS = [['birth', 'Naissance (date et lieu)'], ['death', 'Décès (date et lieu)'], ['age', 'Âge au décès'], ['occupation', 'Métier'], ['parents', 'Parents'], ['spouses', 'Conjoints'], ['children', 'Nombre d’enfants'], ['birthplace', 'Lieu de naissance'], ['residence', 'Lieu de résidence']];
@@ -339,9 +340,11 @@
             case 'media': { const m = (e.media || []).filter(x => (x.role || '') === f.key); return m.length && ext.thumbs ? ext.thumbs(`cb-${e.id}-${f.key}`, m) : ''; }
             case 'number': return v === '' || v === null || v === undefined ? '' : esc(fmt(v, 2));
             case 'map': return '';
+            case 'journey': return ext.journeyHtml ? ext.journeyHtml({jSource: f.jSource, steps: Array.isArray(v) ? v : [], jLayout: f.jLayout, jOrder: f.jOrder, jMap: f.jMap !== false, jDays: f.jDays !== false, jWithPlace: !!f.jWithPlace, jPerson: 1, color: '#0066cc'}, f.jSource === 'person' ? [{detail: blockDetail || {events: []}}] : []) : '';
             default: return esc(v ?? '');
         }
     }
+    let blockDetail = null; // la fiche affichée (pour un parcours repris de ses événements)
     function entryHtml(def, e, editable) {
         const rows = def.fields.filter(f => f.type !== 'map').map(f => { const h = fieldValueHtml(def, f, e); return h ? `<div class="data-row"><dt>${esc(fieldLabel(f, def.fields))}</dt><dd>${h}</dd></div>` : ''; }).join('');
         return `<article class="h-cb-entry"><div class="h-cb-entry-head">${ext.labelChips(e.labels)}${editable ? tools(`data-h-cb-edit="${e.id}" data-h-cb-block="${def.id}"`, `data-h-cb-del="${e.id}"`, 'cette fiche du bloc') : ''}</div><dl class="data-list">${rows || '<p class="muted">Vide.</p>'}</dl></article>`;
@@ -349,6 +352,7 @@
     let currentBlocks = [];
     ext.personBlocks.custom_blocks = (index, detail, {editOnly}) => {
         const p = detail.person, blocks = detail.heritage?.custom_blocks || [];
+        blockDetail = detail;
         currentBlocks = blocks;
         if (!blocks.length) return '';
         const editable = !Number(p.is_locked);
@@ -389,6 +393,8 @@
             case 'place': return `<label>${esc(f.label)}${help}${ext.placeField ? ext.placeField(name, value?.text || '', value?.lat ?? '', value?.lon ?? '', 'Commune, adresse…') : `<input name="${name}" value="${esc(value?.text || '')}">`}</label>`;
             case 'person_info': return `<div class="h-cb-info"><strong>ℹ️ ${esc(infoLabel(f, allFields))}</strong> <small class="muted">(repris tout seul de la fiche${f.from !== 'self' ? ' choisie' : ''})</small>${value ? ` : ${esc(value)}` : ' : <span class="muted">rien de connu pour l’instant</span>'}</div>`;
             case 'map': return `<p class="muted span-2">🗺️ ${esc(f.label)} : la carte montrera les lieux de ce bloc.</p>`;
+            case 'journey': return f.jSource === 'person' ? `<p class="muted span-2">🧭 ${esc(f.label)} : les étapes sont les événements datés de cette fiche, repris tout seuls.</p>`
+                : `<div class="span-2 h-be-journey" data-be-journey="${esc(f.key)}"><span class="section-label">🧭 ${esc(f.label)}</span>${help}<div class="h-jr-rows" data-j-rows>${(Array.isArray(value) ? value : []).map((x, i) => ext.journeyRowHtml?.(x, i) || '').join('')}</div><button type="button" class="button small secondary" data-j-add>+ Étape</button></div>`;
             case 'media': return '';
             default: return `<label>${esc(f.label)}${help}<input name="${name}" value="${esc(value ?? '')}"${req}${f.type === 'date' ? ' placeholder="12 mai 1885"' : ''}></label>`;
         }
@@ -404,9 +410,19 @@
             eyebrow: (def.icon || '🧩') + ' ' + def.name.toUpperCase(), title: entryId ? 'Modifier' : 'Remplir le bloc', wide: def.fields.length > 4, labels: Number(def.labels) ? ['custom_block_entry', entry.labels] : null,
             body: `${def.description ? `<p class="muted">${esc(def.description)}</p>` : ''}<div class="form-grid">${def.fields.map(f => fieldInputHtml(f, f.type === 'person_info' ? (entry.data[f.key] || def.self_info?.[f.key] || '') : entry.data[f.key], entry, def.fields)).join('')}</div>
                 ${mediaFields.length && ext.mediaEditorHtml ? ext.mediaEditorHtml('custom_block_entry', entry.id, entry.media || [], mediaFields.map(f => [f.key, f.label, ACCEPT[f.accept] || ACCEPT.all])) : ''}`,
+            onOpen: dl => dl.querySelectorAll('[data-be-journey]').forEach(box => {
+                const rows = box.querySelector('[data-j-rows]');
+                box.querySelector('[data-j-add]').addEventListener('click', () => { rows.insertAdjacentHTML('beforeend', ext.journeyRowHtml({}, rows.children.length)); rows.lastElementChild.querySelector('[data-j=date]')?.focus(); });
+                rows.addEventListener('click', e => { const r = e.target.closest('[data-j-row]'); if (!r) return;
+                    if (e.target.closest('[data-j-del]')) r.remove();
+                    if (e.target.closest('[data-j-up]') && r.previousElementSibling) rows.insertBefore(r, r.previousElementSibling);
+                    if (e.target.closest('[data-j-down]') && r.nextElementSibling) rows.insertBefore(r.nextElementSibling, r); });
+            }),
             onSubmit: async form => {
                 const data = {};
                 def.fields.forEach(f => {
+                    const jb = f.type === 'journey' ? form.querySelector(`[data-be-journey="${f.key}"]`) : null;
+                    if (jb) { data[f.key] = ext.readJourneyRows ? ext.readJourneyRows(jb) : []; return; }
                     const el = form.querySelector(`[name="f_${f.key}"]`);
                     if (f.type === 'checkbox') data[f.key] = el?.checked ? 1 : 0;
                     else if (f.type === 'place') data[f.key] = {text: el?.value || '', lat: form.querySelector(`[name="f_${f.key}_lat"]`)?.value || null, lon: form.querySelector(`[name="f_${f.key}_lon"]`)?.value || null};
@@ -484,7 +500,7 @@
         {name: 'Mémoire familiale', icon: '📖', description: 'Recettes, expressions, chansons, surnoms.', repeatable: 1, fields: [['select', 'Sorte', ['recette', 'expression', 'chanson', 'surnom', 'tradition', 'anecdote']], ['text', 'Titre'], ['longtext', 'Texte'], ['person', 'Transmis par'], ['media', 'Enregistrement, photo']]},
         {name: 'Recensement', icon: '🏠', description: 'Une ligne de recensement.', repeatable: 1, fields: [['text', 'Année'], ['place', 'Commune'], ['text', 'Adresse, quartier'], ['text', 'Rang dans le ménage'], ['person_info', 'Métier'], ['url', 'Lien vers la page'], ['media', 'Page du recensement']]},
     ];
-    const newField = (type, label, options) => ({key: 'f' + Math.random().toString(36).slice(2, 8), type, label: label || (type === 'person_info' ? INFOS[0][1] : typeInfo(type)[2]), help: '', options: type === 'select' ? (options?.length ? [...options] : ['Choix 1', 'Choix 2']) : [], info: type === 'person_info' ? (INFOS.find(i => i[1] === label || i[1].startsWith(label))?.[0] || {Métier: 'occupation', Parents: 'parents'}[label] || 'birth') : 'birth', from: 'self', accept: 'all', required: false});
+    const newField = (type, label, options) => ({key: 'f' + Math.random().toString(36).slice(2, 8), type, label: label || (type === 'person_info' ? INFOS[0][1] : typeInfo(type)[2]), help: '', options: type === 'select' ? (options?.length ? [...options] : ['Choix 1', 'Choix 2']) : [], info: type === 'person_info' ? (INFOS.find(i => i[1] === label || i[1].startsWith(label))?.[0] || {Métier: 'occupation', Parents: 'parents'}[label] || 'birth') : 'birth', from: 'self', accept: 'all', required: false, ...(type === 'journey' ? {jSource: 'manual', jLayout: 'vertical', jOrder: 'date', jMap: true, jDays: true, jWithPlace: false} : {})});
     let editorDef = null;
     ext.maintenance.block_editor = async token => {
         const data = await api('custom_blocks_defs');
@@ -583,6 +599,11 @@
         let extra = '';
         if (f.type === 'select') extra = `<label class="span-2">Les choix <small>(un par ligne)</small><textarea rows="3" data-be="options">${esc(f.options.join('\n'))}</textarea></label>`;
         if (f.type === 'media') extra = `<label>Fichiers acceptés<select data-be="accept">${[['all', 'Photos, vidéos, sons, PDF'], ['image', 'Photos seulement'], ['video', 'Vidéos seulement'], ['audio', 'Sons seulement']].map(([k, l]) => `<option value="${k}" ${f.accept === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
+        if (f.type === 'journey') extra = `<label>Les étapes viennent<select data-be="jSource"><option value="manual" ${f.jSource !== 'person' ? 'selected' : ''}>de ce que j’écris sur chaque fiche</option><option value="person" ${f.jSource === 'person' ? 'selected' : ''}>des événements datés de la fiche (tout seuls)</option></select></label>
+            <label>Présentation<select data-be="jLayout">${(ext.J_LAYOUTS || [['vertical', 'Frise verticale']]).map(([k, l]) => `<option value="${k}" ${(f.jLayout || 'vertical') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+            <label>Ordre<select data-be="jOrder"><option value="date" ${f.jOrder !== 'manual' ? 'selected' : ''}>par date</option><option value="manual" ${f.jOrder === 'manual' ? 'selected' : ''}>dans l’ordre écrit</option></select></label>
+            <label class="checkbox-line"><input type="checkbox" data-be="jMap" ${f.jMap !== false ? 'checked' : ''}> carte du trajet</label><label class="checkbox-line"><input type="checkbox" data-be="jDays" ${f.jDays !== false ? 'checked' : ''}> « Jour 1, Jour 9… » et durées</label>
+            ${f.jSource === 'person' ? `<label class="checkbox-line"><input type="checkbox" data-be="jWithPlace" ${f.jWithPlace ? 'checked' : ''}> seulement les événements avec un lieu</label>` : ''}`;
         if (f.type === 'person_info') extra = `<p class="muted span-2">ℹ️ Rien à taper : l’info est reprise toute seule de la fiche, et se met à jour quand la fiche change.</p><label>Quelle info ?<select data-be="info">${INFOS.map(([k, l]) => `<option value="${k}" ${f.info === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>De quelle fiche ?<select data-be="from"><option value="self">La fiche où est le bloc</option>${personFields.map(p => `<option value="${esc(p.key)}" ${f.from === p.key ? 'selected' : ''}>La personne du champ « ${esc(p.label)} »</option>`).join('')}</select></label>`;
         const canRequire = ['text', 'longtext', 'date', 'select', 'person'].includes(f.type);
         return `<div class="h-be-field" data-be-i="${i}"><div class="h-be-field-head"><span class="h-be-type" title="${esc(typeName)}">${icon}</span><input data-be="label" value="${esc(f.label)}" placeholder="Nom du champ" aria-label="Nom du champ"><small class="muted">${esc(typeName)}</small>
@@ -633,6 +654,7 @@
             const f = d.fields[Number(row.dataset.beI)], k = e.target.dataset.be;
             if (k === 'options') f.options = e.target.value.split('\n').map(s => s.trim()).filter(Boolean);
             else if (k === 'required') f.required = e.target.checked;
+            else if (k && e.target.type === 'checkbox') f[k] = e.target.checked;
             else if (k) f[k] = e.target.value;
             preview();
         });
@@ -640,6 +662,7 @@
             const row = e.target.closest('[data-be-i]'); if (!row) return;
             const f = d.fields[Number(row.dataset.beI)], k = e.target.dataset.be;
             if (k === 'required') f.required = e.target.checked;
+            else if (k && e.target.type === 'checkbox') f[k] = e.target.checked;
             else if (k && e.target.tagName === 'SELECT') {
                 const auto = f.type === 'person_info' && (!f.label || f.label === INFO_DEFAULT || INFOS.some(i => i[1] === f.label));
                 f[k] = e.target.value;

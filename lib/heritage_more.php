@@ -918,7 +918,7 @@ function resistance_overview(PDO $pdo): array
 
 /* ─── 🧩 Éditeur de blocs ─────────────────────────────────────────────── */
 
-const CUSTOM_FIELD_TYPES = ['text', 'longtext', 'date', 'number', 'select', 'checkbox', 'url', 'person', 'place', 'media', 'person_info', 'map'];
+const CUSTOM_FIELD_TYPES = ['text', 'longtext', 'date', 'number', 'select', 'checkbox', 'url', 'person', 'place', 'media', 'person_info', 'map', 'journey'];
 
 function custom_fields_clean(array $fields): array
 {
@@ -930,7 +930,10 @@ function custom_fields_clean(array $fields): array
             'options' => array_values(array_filter(array_map(static fn($o) => mb_substr(safe_text($o), 0, 80), is_array($f['options'] ?? null) ? $f['options'] : []))),
             'info' => in_array($f['info'] ?? '', ['birth', 'death', 'age', 'occupation', 'parents', 'spouses', 'children', 'birthplace', 'residence', 'sosa'], true) ? $f['info'] : 'birth',
             'from' => preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($f['from'] ?? 'self'))) ?: 'self',
-            'accept' => in_array($f['accept'] ?? '', ['image', 'video', 'audio', 'all'], true) ? $f['accept'] : 'all', 'required' => !empty($f['required'])];
+            'accept' => in_array($f['accept'] ?? '', ['image', 'video', 'audio', 'all'], true) ? $f['accept'] : 'all', 'required' => !empty($f['required'])]
+            // Parcours jour par jour : d'où viennent les étapes, présentation, ordre, carte, « Jour 1, Jour 9… »
+            + ($f['type'] === 'journey' ? ['jSource' => ($f['jSource'] ?? '') === 'person' ? 'person' : 'manual', 'jLayout' => in_array($f['jLayout'] ?? '', ['vertical', 'horizontal', 'cards', 'compact'], true) ? $f['jLayout'] : 'vertical',
+                'jOrder' => ($f['jOrder'] ?? '') === 'manual' ? 'manual' : 'date', 'jMap' => !array_key_exists('jMap', $f) || !empty($f['jMap']), 'jDays' => !array_key_exists('jDays', $f) || !empty($f['jDays']), 'jWithPlace' => !empty($f['jWithPlace'])] : []);
     }
     return $out;
 }
@@ -1069,6 +1072,18 @@ function save_custom_block_entry(PDO $pdo, array $data): array
                 if ($clean[$f['key']]['text'] !== '' && $clean[$f['key']]['lat'] === null) { $g = heritage_geocode($pdo, $clean[$f['key']]['text']); if ($g) { $clean[$f['key']]['lat'] = $g['lat']; $clean[$f['key']]['lon'] = $g['lon']; } }
                 break;
             case 'url': $u = safe_text($v ?? ''); $clean[$f['key']] = preg_match('#^https?://#i', $u) ? $u : ''; break;
+            case 'journey': // étapes écrites à la main (sinon : les événements de la fiche, rien à garder)
+                $steps = [];
+                foreach (array_slice(is_array($v) ? $v : [], 0, 500) as $st) {
+                    if (!is_array($st)) { continue; }
+                    $one = ['emoji' => mb_substr(safe_text($st['emoji'] ?? ''), 0, 16), 'date' => mb_substr(safe_text($st['date'] ?? ''), 0, 60), 'date_end' => mb_substr(safe_text($st['date_end'] ?? ''), 0, 60),
+                        'title' => mb_substr(safe_text($st['title'] ?? ''), 0, 300), 'place' => mb_substr(safe_text($st['place'] ?? ''), 0, 300), 'lat' => h_coord($st['lat'] ?? null, 90), 'lon' => h_coord($st['lon'] ?? null, 180),
+                        'color' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($st['color'] ?? '')) ? (string) $st['color'] : '', 'text' => mb_substr(trim((string) ($st['text'] ?? '')), 0, 8000)];
+                    if ($one['place'] !== '' && $one['lat'] === null) { $g = heritage_geocode($pdo, $one['place']); if ($g) { $one['lat'] = $g['lat']; $one['lon'] = $g['lon']; } }
+                    if ($one['date'] !== '' || $one['title'] !== '' || $one['place'] !== '' || $one['text'] !== '') { $steps[] = $one; }
+                }
+                $clean[$f['key']] = $steps;
+                break;
             case 'media': case 'person_info': case 'map': break;
             case 'longtext': $clean[$f['key']] = mb_substr((string) ($v ?? ''), 0, 40000); break;
             default: $clean[$f['key']] = mb_substr(safe_text($v ?? ''), 0, 2000);

@@ -243,10 +243,36 @@
             steps = (det.events || []).filter(e => e.date_text || e.year).filter(e => !d.jWithPlace || e.place_name).map(e => ({date: e.date_text || String(e.year || ''), title: [e.type_label, e.title].filter(Boolean).join(' — '), place: e.place_name || '',
                 lat: Number(e.precise_lat ?? e.latitude), lon: Number(e.precise_lon ?? e.longitude), emoji: J_TAG_EMOJI[e.gedcom_tag] || '•', text: e.description || '', color: ''}));
         } else steps = (d.steps || []).map(x => ({...x, lat: x.lat === '' || x.lat == null ? NaN : Number(x.lat), lon: x.lon === '' || x.lon == null ? NaN : Number(x.lon)}));
-        const key = x => { const p = A().parsedGenealogyDate?.(x.date || ''); return p?.date ? p.date.getTime() : (yearOf(x.date) ?? 99999) * 3.15e10; };
+        // même échelle pour « 3 juillet 1832 » et « 1790 » (une année seule compte pour le 1er janvier) ; sans date : à la fin
+        const key = x => { const p = A().parsedGenealogyDate?.(x.date || ''); if (p?.date) return p.date.getTime(); const y = yearOf(x.date); return y !== null ? Date.UTC(y, 0, 1) : 8.64e15; };
         if (d.jOrder !== 'manual') steps = steps.map((x, i) => ({x, i, k: key(x)})).sort((a, b) => a.k - b.k || a.i - b.i).map(o => o.x);
         return steps;
     }
+    function journeyRowHtml(x = {}, i = 0) {
+        return `<div class="h-jr-row" data-j-row>
+                <input data-j="emoji" value="${esc(x.emoji || '')}" maxlength="16" placeholder="📍" class="h-be-icon" title="Émoji">
+                <input data-j="date" value="${esc(x.date || '')}" placeholder="12 mars 1943">
+                <input data-j="date_end" value="${esc(x.date_end || '')}" placeholder="jusqu’au… (facultatif)">
+                <input data-j="title" value="${esc(x.title || '')}" placeholder="Titre de l’étape">
+                <span class="h-jr-placefield">${ext.placeField ? ext.placeField('jplace' + i + '_' + Math.random().toString(36).slice(2, 6), x.place || '', x.lat ?? '', x.lon ?? '', 'Lieu') : `<input data-j="place" value="${esc(x.place || '')}" placeholder="Lieu">`}</span>
+                <input type="color" data-j="color" value="${esc(color(x.color) || '#0066cc')}" title="Couleur de l’étape">
+                <textarea data-j="text" rows="2" placeholder="Ce qui s’est passé ce jour-là">${esc(x.text || '')}</textarea>
+                <span class="h-jr-rowtools"><button type="button" class="icon-button" data-j-up title="Monter">↑</button><button type="button" class="icon-button" data-j-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-j-del title="Retirer">🗑</button></span></div>`;
+    }
+    /** Étapes écrites dans un éditeur (widget ou bloc). */
+    function readJourneyRows(box) {
+        return [...box.querySelectorAll('[data-j-row]')].map(r => {
+            const v = k => r.querySelector(`[data-j="${k}"]`)?.value ?? '';
+            const placeInput = r.querySelector('[data-h-place]'), pname = placeInput?.name || '';
+            return {emoji: v('emoji'), date: v('date'), date_end: v('date_end'), title: v('title'), text: v('text'), color: v('color'),
+                place: placeInput ? placeInput.value : v('place'), lat: pname ? r.querySelector(`[name="${pname}_lat"]`)?.value ?? '' : '', lon: pname ? r.querySelector(`[name="${pname}_lon"]`)?.value ?? '' : ''};
+        });
+    }
+    // Pour l'éditeur de blocs (heritage-more.js) : le même parcours dans un bloc de fiche
+    ext.journeyHtml = (d, datas) => journeyHtml(d, datas);
+    ext.journeyRowHtml = (x, i) => journeyRowHtml(x, i);
+    ext.readJourneyRows = box => readJourneyRows(box);
+    ext.J_LAYOUTS = J_LAYOUTS;
     function journeyHtml(d, datas) {
         if (datas?.[0]?.error) return `<p class="h-offsite-sentence is-warn">${esc(datas[0].error)}</p>`;
         const steps = journeySteps(d, datas);
@@ -465,15 +491,7 @@
                 <label class="checkbox-line span-2"><input type="checkbox" data-cw-skipempty ${d.skipEmpty !== false ? 'checked' : ''}> ne pas compter les cases vides</label></div>`;
         }
         if (d.kind === 'journey') {
-            const row = (x = {}, i) => `<div class="h-jr-row" data-j-row>
-                <input data-j="emoji" value="${esc(x.emoji || '')}" maxlength="16" placeholder="📍" class="h-be-icon" title="Émoji">
-                <input data-j="date" value="${esc(x.date || '')}" placeholder="12 mars 1943">
-                <input data-j="date_end" value="${esc(x.date_end || '')}" placeholder="jusqu’au… (facultatif)">
-                <input data-j="title" value="${esc(x.title || '')}" placeholder="Titre de l’étape">
-                <span class="h-jr-placefield">${ext.placeField ? ext.placeField('jplace' + i + '_' + Math.random().toString(36).slice(2, 6), x.place || '', x.lat ?? '', x.lon ?? '', 'Lieu') : `<input data-j="place" value="${esc(x.place || '')}" placeholder="Lieu">`}</span>
-                <input type="color" data-j="color" value="${esc(color(x.color) || '#0066cc')}" title="Couleur de l’étape">
-                <textarea data-j="text" rows="2" placeholder="Ce qui s’est passé ce jour-là">${esc(x.text || '')}</textarea>
-                <span class="h-jr-rowtools"><button type="button" class="icon-button" data-j-up title="Monter">↑</button><button type="button" class="icon-button" data-j-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-j-del title="Retirer">🗑</button></span></div>`;
+            const row = journeyRowHtml;
             return `<div class="form-grid"><label>Les étapes viennent<select data-cw-jsource><option value="manual" ${d.jSource !== 'person' ? 'selected' : ''}>de ce que j’écris ici</option><option value="person" ${d.jSource === 'person' ? 'selected' : ''}>des événements d’une personne</option></select></label>
                 <label>Présentation<select data-cw-jlayout>${J_LAYOUTS.map(([k, l]) => `<option value="${k}" ${(d.jLayout || 'vertical') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label>Ordre<select data-cw-jorder><option value="date" ${d.jOrder !== 'manual' ? 'selected' : ''}>par date</option><option value="manual" ${d.jOrder === 'manual' ? 'selected' : ''}>dans l’ordre écrit</option></select></label>
@@ -603,12 +621,7 @@
         // ── Parcours jour par jour : étapes, personne, réglages ──
         if (d.kind === 'journey') {
             A().bindCollectionPersonFields?.(box);
-            const readSteps = () => [...box.querySelectorAll('[data-j-row]')].map(r => {
-                const v = k => r.querySelector(`[data-j="${k}"]`)?.value ?? '';
-                const placeInput = r.querySelector('[data-h-place]'), pname = placeInput?.name || '';
-                return {emoji: v('emoji'), date: v('date'), date_end: v('date_end'), title: v('title'), text: v('text'), color: v('color'),
-                    place: placeInput ? placeInput.value : v('place'), lat: pname ? r.querySelector(`[name="${pname}_lat"]`)?.value ?? '' : '', lon: pname ? r.querySelector(`[name="${pname}_lon"]`)?.value ?? '' : ''};
-            });
+            const readSteps = () => readJourneyRows(box);
             const syncSteps = () => { if (d.jSource !== 'person') d.steps = readSteps(); };
             const readPerson = () => { const h = box.querySelector('[name=cw_jperson]'); if (!h) return; const id = Number(h.value) || 0; if (id !== Number(d.jPerson)) { d.jPerson = id; d.jPersonName = h.closest('label')?.querySelector('input:not([type=hidden])')?.value || ''; preview(); } };
             box.addEventListener('input', e => { if (e.target.closest('[data-j-row]')) { syncSteps(); preview(); } });

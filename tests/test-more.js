@@ -173,6 +173,13 @@ $out['records'] = ['fields' => array_column($rr['list']['definition']['fields'],
     'row' => [$rr['rows'][0]['data']['qui'], $rr['rows'][0]['data']['prio'], count($rr['rows'][0]['data']['etapes']), $rr['rows'][0]['steps'], $rr['rows'][0]['steps_done']], 'counts' => [$rr['counts'], $rr2['counts']],
     'export' => [count($exp['rows']), isset($exp['rows'][0]['data']['qui'])], 'import' => $imp['rows'], 'left' => (int) $pdo->query('SELECT count(*) FROM custom_list_records WHERE list_id=' . $rl['id'])->fetchColumn()];
 
+// Bloc avec un « Parcours jour par jour » : réglages gardés, étapes nettoyées (lieu placé, étape vide retirée)
+$jd = save_custom_block_def($pdo, ['name' => 'Parcours', 'fields' => [['key' => 'par', 'type' => 'journey', 'label' => 'Parcours', 'jSource' => 'manual', 'jLayout' => 'cards', 'jDays' => false], ['key' => 'vie', 'type' => 'journey', 'label' => 'Sa vie', 'jSource' => 'person', 'jLayout' => 'bidon']]]);
+$jdef = array_values(array_filter(custom_blocks_defs($pdo), fn($b) => $b['id'] === $jd['id']))[0];
+save_custom_block_entry($pdo, ['block_id' => $jd['id'], 'person_id' => 1, 'data' => ['par' => [['date' => '3 mars 1943', 'title' => 'Arrestation', 'place' => 'Lille', 'color' => '#cc0000', 'emoji' => '🚔'], ['date' => '', 'title' => '', 'place' => ''], ['title' => 'Évasion', 'color' => 'red']]]]);
+$je = array_values(array_filter(custom_blocks_for_person($pdo, 1), fn($b) => $b['id'] === $jd['id']))[0]['entries'][0]['data']['par'];
+$out['journey_block'] = [array_map(fn($f) => [$f['jSource'], $f['jLayout'], $f['jDays'], $f['jMap']], $jdef['fields']), count($je), $je[0]['title'], $je[0]['lat'] !== null, $je[1]['color']];
+
 // Comparaison avant fusion
 $cmp = compare_people($pdo, 1, 5);
 $out['compare'] = [$cmp['a']['person']['first_name'], count($cmp['a']['events']) > 0, $cmp['a']['children']];
@@ -182,6 +189,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
+  ['bloc « Parcours jour par jour » : réglages gardés, étapes nettoyées (lieu placé, étape vide retirée, couleur invalide)', () => assert.deepEqual(out.journey_block, [[['manual', 'cards', false, true], ['person', 'vertical', true, true]], 2, 'Arrestation', true, ''])],
   ['éditeur de listes : formulaire nettoyé (sortes inconnues retirées, étapes avec leurs champs)', () => { assert.deepEqual(out.records.fields, ['text', 'heading', 'people', 'select', 'steps']); assert.equal(out.records.steps[4], 2); assert.equal(out.records.new, '+ Circuit'); }],
   ['éditeur de listes : fiche enregistrée (personnes inexistantes et choix inventé retirés, lignes vides ignorées, étapes cochées)', () => assert.deepEqual(out.records.row, [[1, 5], '', 2, 2, 2])],
   ['éditeur de listes : champ obligatoire, à faire / faits, partage sans les personnes, suppression', () => { assert.equal(out.rec_required, 'refusé'); assert.deepEqual(out.records.counts, [{todo: 1, done: 0}, {todo: 0, done: 1}]); assert.deepEqual(out.records.export, [1, false]); assert.equal(out.records.import, 1); assert.equal(out.records.left, 0); }],
