@@ -1342,3 +1342,22 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cal-wcol .h-cal-ev span, .h-cal-wcol .h-cal-ev small, .h-cal-dayitem .h-cal-ev span, .h-cal-list .h-cal-ev span { white-space:normal; overflow-wrap:anywhere; text-overflow:clip; }
 .h-cal-wcol { overflow:hidden; }
 .h-cal-place select { max-width:260px; }
+
+/* Recueils : flèches entre les images d'une page, rattachements, couverture */
+.h-rc-stage { position:relative; }
+.h-rc-imgnav { position:absolute; top:50%; transform:translateY(-50%); z-index:3; width:44px; height:64px; border:0; border-radius:10px; background:rgba(0,0,0,.45); color:#fff; font-size:34px; line-height:1; cursor:pointer; opacity:.75; }
+.h-rc-imgnav:hover, .h-rc-imgnav:focus-visible { opacity:1; background:rgba(0,0,0,.65); }
+.h-rc-imgnav.is-prev { left:8px; } .h-rc-imgnav.is-next { right:8px; }
+.h-rc-imgcount { position:absolute; top:8px; left:50%; transform:translateX(-50%); z-index:3; padding:2px 10px; border-radius:999px; background:rgba(0,0,0,.55); color:#fff; font-size:12.5px; }
+.h-rc-owners { margin:6px 0 0; font-size:12.5px; }
+.h-rc-owners:empty { display:none; }
+.h-rc-chip { display:inline-block; margin:2px 4px 2px 0; padding:1px 8px; border-radius:999px; background:color-mix(in srgb, var(--accent, #2f6f5e) 12%, transparent); font-size:12.5px; }
+.h-rc-pagelinks { margin:8px 0; font-size:13px; }
+.h-rc-covnow { display:flex; gap:14px; align-items:center; margin-bottom:10px; }
+.h-rc-covnow img, .h-rc-covnow .h-rc-cover-empty { width:110px; height:140px; object-fit:cover; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:42px; background:var(--surface-2, #f2f0ea); }
+.h-rc-covgrid { display:grid; grid-template-columns:repeat(auto-fill, minmax(92px, 1fr)); gap:8px; max-height:260px; overflow:auto; margin-bottom:10px; }
+.h-rc-covpick { width:100%; height:110px; }
+.h-rc-covpick img { width:100%; height:100%; object-fit:cover; }
+.h-rc-covpick.is-current { outline:3px solid var(--accent, #2f6f5e); }
+.h-rc-linkthumb { display:flex; align-items:center; gap:10px; }
+.h-rc-linkthumb img { width:70px; height:70px; object-fit:cover; border-radius:6px; }

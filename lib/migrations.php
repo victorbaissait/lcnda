@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 27;
+const SCHEMA_VERSION = 28;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -48,6 +48,7 @@ function migration_steps(): array
         25 => 'schema_v25',
         26 => 'schema_v26',
         27 => 'schema_v27',
+        28 => 'schema_v28',
     ];
 }
 
@@ -1727,4 +1728,11 @@ function schema_v27(PDO $pdo): void
     if (!in_array('trays', $cols('recueils'), true)) { $pdo->exec("ALTER TABLE recueils ADD COLUMN trays TEXT NOT NULL DEFAULT ''"); }
     if (!in_array('tray', $cols('recueil_images'), true)) { $pdo->exec("ALTER TABLE recueil_images ADD COLUMN tray TEXT NOT NULL DEFAULT ''"); }
     if (!in_array('folder_id', $cols('recueil_links'), true)) { $pdo->exec('ALTER TABLE recueil_links ADD COLUMN folder_id INTEGER'); }
+}
+
+/** Recueils : image de couverture choisie (une photo du recueil, une image de Médias ou une image envoyée exprès). */
+function schema_v28(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(recueils)')->fetchAll(), 'name');
+    if ($cols && !in_array('cover_media_id', $cols, true)) { $pdo->exec('ALTER TABLE recueils ADD COLUMN cover_media_id INTEGER'); }
 }

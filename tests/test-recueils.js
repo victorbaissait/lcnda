@@ -90,6 +90,22 @@ $lk = recueils_for_entity($pdo, 'person', '1')[0]['link_id'];
 move_recueil_link($pdo, ['id' => $lk, 'folder_id' => 0]); $f0 = recueils_for_entity($pdo, 'person', '1')[0]['folder_id'];
 move_recueil_link($pdo, ['id' => $lk, 'folder_id' => '']); $f1 = recueils_for_entity($pdo, 'person', '1')[0]['folder_id'];
 $out['folder'] = [$f0, $f1];
+// couverture choisie, puis automatique
+$cov = (int) $pdo->query("SELECT id FROM media WHERE media_type='image' ORDER BY id DESC LIMIT 1")->fetchColumn();
+save_recueil($pdo, ['id' => $rid, 'title' => 'X', 'cover_media_id' => $cov]); $c1 = recueil_detail($pdo, $rid)['recueil']['cover'];
+save_recueil($pdo, ['id' => $rid, 'title' => 'X', 'cover_media_id' => 0]); $c2 = recueil_detail($pdo, $rid)['recueil']['cover'];
+$out['cover'] = [$c1['media_id'] === $cov && !empty($c1['chosen']), empty($c2['chosen'])];
+// juste une image : médias de la fiche, bloc Résistance, Atelier ; deux fois = déjà là
+$tg = array_column(recueil_media_targets($pdo, 'person', '1')['targets'], 'value');
+$r1 = recueil_link_media($pdo, ['media_id' => $cov, 'target' => 'person:1']); $r2 = recueil_link_media($pdo, ['media_id' => $cov, 'target' => 'person:1']);
+recueil_link_media($pdo, ['media_id' => $cov, 'target' => 'collection:resistance:1']);
+$pdo->exec("INSERT INTO atelier_projects(title) VALUES('Thèse')"); $ap = (int) $pdo->lastInsertId();
+recueil_link_media($pdo, ['media_id' => $cov, 'target' => "atelier:$ap:0", 'title' => 'Registre — p. 1']);
+$own = array_column(recueil_media_owners($pdo, $cov)['owners'], 'label');
+try { recueil_link_media($pdo, ['media_id' => $cov, 'target' => 'collection:bidon:1']); $bad = 'accepté'; } catch (Throwable $e) { $bad = 'refusé'; }
+$out['img_link'] = [in_array('person:1', $tg, true), in_array('collection:resistance:1', $tg, true), $r1['already'], $r2['already'],
+    (int) $pdo->query("SELECT COUNT(*) FROM family_collection_media WHERE collection_type='resistance' AND collection_id=1 AND media_id=$cov")->fetchColumn(),
+    (int) $pdo->query("SELECT COUNT(*) FROM atelier_items WHERE project_id=$ap AND type='media'")->fetchColumn(), in_array('Fiche', $own, true), $bad];
 $del = delete_recueil($pdo, ['id' => $rid, 'delete_media' => true]);
 $out['deleted'] = [(int) $pdo->query('SELECT COUNT(*) FROM recueils')->fetchColumn(), (int) $pdo->query('SELECT COUNT(*) FROM recueil_pages')->fetchColumn(), $del['media_deleted']];
 echo json_encode($out);
@@ -99,7 +115,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 let out;
 try { out = JSON.parse(r.stdout.slice(r.stdout.indexOf('{'))); } catch (_) { console.error(r.stdout, r.stderr); process.exit(1); }
 const checks = [
-  ['structure à jour (n°27)', () => assert.equal(out.version, 27)],
+  ['structure à jour (n°28)', () => assert.equal(out.version, 28)],
   ['deux versions ; les nouvelles photos remplissent les pages existantes puis en créent une', () => assert.deepEqual(out.counts, [2, 4, 7, 1])],
   ['par défaut, la page montre la photo la plus récente ; on peut retenir l’ancienne', () => { assert.equal(out.default_shown, true); assert.deepEqual(out.p1, ['f° 1', true]); }],
   ['photo « à ranger », puis posée en détail (zoom) sur une page', () => { assert.equal(out.loose, null); assert.equal(out.p2_shown_not_detail, true); }],
@@ -112,7 +128,9 @@ const checks = [
   ['dossiers de « À ranger » : sans doublon, renommés avec leurs photos, supprimés sans perdre les photos', () => assert.deepEqual(out.trays, [['Liste C', 'Liste B'], 'Liste C', ['Liste B'], ''])],
   ['nouvelle page au début, puis juste après la première', () => assert.deepEqual(out.new_pages, [true, 2, true])],
   ['recueil d’une enquête : dans un dossier (0 = racine) ou partout', () => assert.deepEqual(out.folder, [0, null])],
-  ['recueil supprimé avec ses photos qui ne servent nulle part ailleurs', () => assert.deepEqual(out.deleted, [0, 0, 4])],
+  ['couverture choisie (image de Médias), puis revenue à la première page', () => assert.deepEqual(out.cover, [true, true])],
+  ['juste une image : médias de la fiche, bloc Résistance, projet de l’Atelier ; pas de doublon ; bloc inconnu refusé', () => assert.deepEqual(out.img_link, [true, true, false, true, 1, 1, true, 'refusé'])],
+  ['recueil supprimé avec ses photos qui ne servent nulle part ailleurs (celle rattachée à la fiche est gardée)', () => assert.deepEqual(out.deleted, [0, 0, 3])],
 ];
 let failed = 0;
 for (const [name, fn] of checks) { try { fn(); console.log('  ✓ ' + name); } catch (e) { failed++; console.log('  ✗ ' + name + '\n    ' + e.message); } }

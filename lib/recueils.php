@@ -60,6 +60,11 @@ function recueils_list(PDO $pdo, string $q = ''): array
 /** Vignette : l'image retenue de la première page, sinon la première photo du recueil. */
 function recueil_cover(PDO $pdo, int $id): ?array
 {
+    // Couverture choisie exprès
+    try {
+        $s = $pdo->prepare('SELECT m.id, m.filename, m.thumbnail FROM recueils r JOIN media m ON m.id=r.cover_media_id WHERE r.id=?'); $s->execute([$id]);
+        if ($m = $s->fetch()) { return ['media_id' => (int) $m['id'], 'filename' => (string) $m['filename'], 'thumbnail' => (string) ($m['thumbnail'] ?: $m['filename']), 'chosen' => true]; }
+    } catch (Throwable $_) {}
     $s = $pdo->prepare("SELECT m.id, m.filename, m.thumbnail FROM recueil_pages p JOIN recueil_images i ON i.page_id=p.id JOIN media m ON m.id=i.media_id
         WHERE p.recueil_id=? ORDER BY p.position, p.id, (i.id=p.best_image_id) DESC, i.role='page' DESC, i.version_id DESC LIMIT 1");
     $s->execute([$id]);
@@ -76,6 +81,8 @@ function recueil_detail(PDO $pdo, int $id): array
     $r['summary'] = is_array($summary) ? $summary : null;
     $trays = json_decode((string) ($r['trays'] ?? ''), true);
     $r['trays'] = is_array($trays) ? array_values(array_filter($trays, 'is_string')) : [];
+    $r['cover'] = recueil_cover($pdo, $id);
+    $r['cover_media_id'] = isset($r['cover_media_id']) && $r['cover_media_id'] !== null ? (int) $r['cover_media_id'] : null;
     $s = $pdo->prepare('SELECT * FROM recueil_versions WHERE recueil_id=? ORDER BY position, id'); $s->execute([$id]);
     $versions = array_map(static fn($v) => ['id' => (int) $v['id'], 'name' => $v['name'], 'date_text' => $v['date_text'], 'notes' => $v['notes'], 'position' => (float) $v['position']], $s->fetchAll());
     $s = $pdo->prepare('SELECT * FROM recueil_pages WHERE recueil_id=? ORDER BY position, id'); $s->execute([$id]);
@@ -123,6 +130,11 @@ function save_recueil(PDO $pdo, array $data): array
         $id = (int) $pdo->lastInsertId();
         $name = mb_substr(safe_text($data['first_version'] ?? ''), 0, 120) ?: 'Photos ' . date('Y');
         $pdo->prepare('INSERT INTO recueil_versions(recueil_id, name, position) VALUES(?,?,1)')->execute([$id, $name]);
+    }
+    if (array_key_exists('cover_media_id', $data)) {
+        $cover = safe_int($data['cover_media_id'] ?? 0);
+        if ($cover) { $m = $pdo->prepare("SELECT 1 FROM media WHERE id=? AND media_type='image'"); $m->execute([$cover]); if (!$m->fetchColumn()) { throw new RuntimeException('Choisis une image pour la couverture.'); } }
+        $pdo->prepare('UPDATE recueils SET cover_media_id=? WHERE id=?')->execute([$cover ?: null, $id]);
     }
     if (array_key_exists('summary', $data)) {
         $sum = is_array($data['summary']) ? $data['summary'] : null;
@@ -518,4 +530,138 @@ function save_recueil_trays(PDO $pdo, array $data): array
     else { $pdo->prepare("UPDATE recueil_images SET tray='' WHERE recueil_id=?")->execute([$rid]); }
     recueil_touch($pdo, $rid);
     return ['trays' => $names];
+}
+
+/**
+ * Où rattacher une image d'un recueil (« juste cette image ») : pour une fiche, ses médias ou un de ses blocs
+ * (résistance, carte d'électeur, voyages, placements, armoiries, papiers, inventaires, blocs créés) ; pour une enquête,
+ * la racine ou un dossier ; pour un projet de l'Atelier, la racine ou un dossier ; pour une battue, une de ses recherches.
+ */
+function recueil_media_targets(PDO $pdo, string $type, string $key): array
+{
+    $out = []; $add = static function (string $v, string $l) use (&$out): void { $out[] = ['value' => $v, 'label' => $l]; };
+    $id = (int) $key;
+    $yr = static fn(...$v) => trim(implode(' ', array_filter(array_map(static fn($x) => trim((string) $x), $v))));
+    try {
+        if ($type === 'person') {
+            $add("person:$id", '🖼️ Médias de la fiche');
+            $add("collection:resistance:$id", '🎖️ Bloc « Résistance »');
+            $add("collection:voter:$id", '🗳️ Bloc « Cartes d’électeur »');
+            foreach (voyages_data($pdo, $id) as $v) { $add('collection:voyage:' . $v['id'], '🚢 Voyage : ' . ($yr($v['departure_port'] ? 'de ' . $v['departure_port'] : '', $v['destination'] ? 'vers ' . $v['destination'] : '', $v['departure_year'] ? '(' . $v['departure_year'] . ')' : '') ?: 'n° ' . $v['id'])); }
+            foreach (placements_data($pdo, $id) as $v) { $add('collection:placement:' . $v['id'], '🧒 Placement : ' . ($yr($v['institution'] ?? '', $v['place_text'] ?? '', ($v['start_year'] ?? '') ? '(' . $v['start_year'] . ')' : '') ?: 'n° ' . $v['id'])); }
+            foreach (coats_of_arms_data($pdo, $id) as $v) { $add('collection:coat_of_arms:' . $v['id'], '🛡️ Armoiries : ' . ($v['title'] ?: 'n° ' . $v['id'])); }
+            foreach (family_papers_data($pdo, '', $id) as $v) { $add('collection:family_paper:' . $v['id'], '📜 Papier de famille : ' . ($yr($v['class_number'] ?? '', $v['title'] ?? '') ?: 'n° ' . $v['id'])); }
+            foreach (probate_inventories_data($pdo, $id) as $v) { $add('collection:probate_inventory:' . $v['id'], '⚖️ Inventaire après décès : ' . ($yr($v['date_text'] ?? '', $v['notary'] ? 'chez ' . $v['notary'] : '') ?: 'n° ' . $v['id'])); }
+            if (function_exists('custom_blocks_for_person')) {
+                foreach (custom_blocks_for_person($pdo, $id) as $b) {
+                    foreach ($b['entries'] ?? [] as $k => $e) {
+                        $first = ''; foreach ($e['data'] ?? [] as $val) { if (is_scalar($val) && trim((string) $val) !== '') { $first = mb_substr(trim((string) $val), 0, 60); break; } }
+                        $add('collection:custom_block_entry:' . $e['id'], ($b['icon'] ?? '🧩') . ' Bloc « ' . ($b['name'] ?? 'Bloc') . ' » : ' . ($first ?: 'entrée ' . ($k + 1)));
+                    }
+                }
+            }
+        } elseif ($type === 'investigation') {
+            $add("investigation:$id:0", '📂 Racine de l’enquête');
+            $s = $pdo->prepare('SELECT id, name FROM investigation_media_folders WHERE investigation_id=? ORDER BY name COLLATE NOCASE'); $s->execute([$id]);
+            foreach ($s as $f) { $add("investigation:$id:" . $f['id'], '📁 ' . $f['name']); }
+        } elseif ($type === 'atelier_project') {
+            $add("atelier:$id:0", '📂 Racine du projet');
+            $s = $pdo->prepare('SELECT id, name FROM atelier_folders WHERE project_id=? ORDER BY position, id'); $s->execute([$id]);
+            foreach ($s as $f) { $add("atelier:$id:" . $f['id'], '📁 ' . $f['name']); }
+        } elseif ($type === 'battue') {
+            $s = $pdo->prepare('SELECT i.id, i.record_type, i.period, i.title, c.name FROM battue_search_items i LEFT JOIN commune_contours c ON c.insee_code=i.insee_code WHERE i.battue_id=? ORDER BY c.name COLLATE NOCASE, i.id'); $s->execute([$id]);
+            foreach ($s as $i) { $add('battue_item:' . $i['id'], '🔎 ' . ($yr($i['name'] ?? '', $i['record_type'] ?? '', $i['period'] ?? '', $i['title'] ? '— ' . $i['title'] : '') ?: 'Recherche n° ' . $i['id'])); }
+        } elseif ($type === 'village') {
+            $add('village:' . $key, '🏘️ Photos de la fiche du village');
+        }
+    } catch (Throwable $_) {}
+    return ['targets' => $out];
+}
+
+/** Rattache une image (un média) d'un recueil à une cible de recueil_media_targets. */
+function recueil_link_media(PDO $pdo, array $data): array
+{
+    $mid = safe_int($data['media_id'] ?? 0);
+    $m = $pdo->prepare('SELECT id, title FROM media WHERE id=?'); $m->execute([$mid]); $media = $m->fetch();
+    if (!$media) { throw new RuntimeException('Image introuvable.'); }
+    $parts = explode(':', (string) ($data['target'] ?? ''));
+    $kind = $parts[0] ?? '';
+    $already = false;
+    switch ($kind) {
+        case 'person':
+            $pid = (int) ($parts[1] ?? 0);
+            if (!recueil_entity_label($pdo, 'person', (string) $pid)) { throw new RuntimeException('Fiche introuvable.'); }
+            $e = $pdo->prepare("SELECT 1 FROM media_links WHERE media_id=? AND entity_type='person' AND entity_id=?"); $e->execute([$mid, $pid]);
+            if ($e->fetchColumn()) { $already = true; break; }
+            $pos = $pdo->prepare("SELECT COALESCE(MAX(position),0)+1 FROM media_links WHERE entity_type='person' AND entity_id=?"); $pos->execute([$pid]);
+            $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'person', ?, ?)")->execute([$mid, $pid, (int) $pos->fetchColumn()]);
+            break;
+        case 'collection':
+            $ctype = (string) ($parts[1] ?? ''); $cid = (int) ($parts[2] ?? 0);
+            if (!in_array($ctype, ['resistance', 'voter', 'voyage', 'placement', 'coat_of_arms', 'family_paper', 'probate_inventory', 'custom_block_entry'], true) || !$cid) { throw new RuntimeException('Bloc inconnu.'); }
+            $e = $pdo->prepare('SELECT 1 FROM family_collection_media WHERE collection_type=? AND collection_id=? AND media_id=?'); $e->execute([$ctype, $cid, $mid]);
+            if ($e->fetchColumn()) { $already = true; break; }
+            link_collection_media($pdo, ['collection_type' => $ctype, 'collection_id' => $cid, 'media_id' => $mid]);
+            if (in_array($ctype, ['resistance', 'voter'], true)) { // le bloc de la fiche s'affiche dès qu'il a une photo
+                $flag = $ctype === 'resistance' ? 'show_resistance_block' : 'show_voter_block';
+                try { $pdo->prepare("UPDATE persons SET $flag=1 WHERE id=?")->execute([$cid]); } catch (Throwable $_) {}
+            }
+            break;
+        case 'investigation':
+            $iid = (int) ($parts[1] ?? 0); $fid = (int) ($parts[2] ?? 0);
+            $e = $pdo->prepare('SELECT 1 FROM investigation_media WHERE investigation_id=? AND media_id=?'); $e->execute([$iid, $mid]);
+            if ($e->fetchColumn()) { $already = true; break; }
+            link_investigation_media($pdo, ['investigation_id' => $iid, 'media_ids' => [$mid], 'folder_id' => $fid, 'verdict' => 'interesting', 'reason' => mb_substr(safe_text($data['note'] ?? ''), 0, 500)]);
+            break;
+        case 'battue_item':
+            $bid = (int) ($parts[1] ?? 0);
+            $e = $pdo->prepare('SELECT 1 FROM battue_search_items WHERE id=?'); $e->execute([$bid]); if (!$e->fetchColumn()) { throw new RuntimeException('Recherche de battue introuvable.'); }
+            $e = $pdo->prepare("SELECT 1 FROM media_links WHERE media_id=? AND entity_type='battue_item' AND entity_id=?"); $e->execute([$mid, $bid]);
+            if ($e->fetchColumn()) { $already = true; break; }
+            $pos = $pdo->prepare("SELECT COALESCE(MAX(position),0)+1 FROM media_links WHERE entity_type='battue_item' AND entity_id=?"); $pos->execute([$bid]);
+            $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'battue_item', ?, ?)")->execute([$mid, $bid, (int) $pos->fetchColumn()]);
+            break;
+        case 'atelier':
+            $pid = (int) ($parts[1] ?? 0); $fid = (int) ($parts[2] ?? 0);
+            $item = save_atelier_item($pdo, ['project_id' => $pid, 'type' => 'media', 'title' => mb_substr(safe_text($data['title'] ?? '') ?: ((string) $media['title'] ?: 'Image d’un recueil'), 0, 300),
+                'data' => ['caption' => mb_substr(safe_text($data['note'] ?? ''), 0, 4000)], 'folder_ids' => $fid ? [$fid] : []]);
+            link_collection_media($pdo, ['collection_type' => 'atelier_item', 'collection_id' => (int) $item['id'], 'media_id' => $mid]);
+            break;
+        case 'village':
+            $key = implode(':', array_slice($parts, 1));
+            if (!function_exists('village_profile') || $key === '' || !village_place_ids($pdo, $key)) { throw new RuntimeException('Village introuvable.'); }
+            $vp = (int) village_profile($pdo, $key)['id'];
+            if (!$vp) { $pdo->prepare('INSERT INTO village_profiles(place_key, name, updated_at) VALUES(?,?,CURRENT_TIMESTAMP)')->execute([$key, mb_substr(safe_text($data['label'] ?? ''), 0, 200)]); $vp = (int) $pdo->lastInsertId(); }
+            $e = $pdo->prepare("SELECT 1 FROM family_collection_media WHERE collection_type='village' AND collection_id=? AND media_id=?"); $e->execute([$vp, $mid]);
+            if ($e->fetchColumn()) { $already = true; break; }
+            link_collection_media($pdo, ['collection_type' => 'village', 'collection_id' => $vp, 'media_id' => $mid]);
+            break;
+        default: throw new RuntimeException('Choisis où rattacher l’image.');
+    }
+    if (!$already) { log_change($pdo, 'media', $mid, 'link-media', 'Image d’un recueil rattachée : ' . $kind); }
+    return ['ok' => true, 'already' => $already];
+}
+
+/** Ce à quoi une image est déjà rattachée (pour l'afficher sous l'image dans la page du recueil). */
+function recueil_media_owners(PDO $pdo, int $mediaId): array
+{
+    if (!function_exists('media_av_list')) { return ['owners' => []]; }
+    $out = [];
+    try {
+        $s = $pdo->prepare("SELECT ml.entity_type, ml.entity_id FROM media_links ml WHERE ml.media_id=?"); $s->execute([$mediaId]);
+        foreach ($s as $l) {
+            if ($l['entity_type'] === 'person') { $e = recueil_entity_label($pdo, 'person', (string) $l['entity_id']); if ($e) { $out[] = ['label' => 'Fiche', 'name' => $e['label'], 'person_id' => (int) $l['entity_id']]; } }
+            elseif ($l['entity_type'] === 'battue_item') { $b = $pdo->prepare('SELECT b.title FROM battue_search_items i JOIN battues b ON b.id=i.battue_id WHERE i.id=?'); $b->execute([(int) $l['entity_id']]); $t = $b->fetchColumn(); if ($t !== false) { $out[] = ['label' => 'Battue', 'name' => (string) $t]; } }
+        }
+        $s = $pdo->prepare('SELECT i.id, i.title FROM investigation_media m JOIN investigations i ON i.id=m.investigation_id WHERE m.media_id=?'); $s->execute([$mediaId]);
+        foreach ($s as $r) { $out[] = ['label' => 'Enquête', 'name' => (string) $r['title'], 'investigation_id' => (int) $r['id']]; }
+        $s = $pdo->prepare("SELECT collection_type, collection_id FROM family_collection_media WHERE media_id=? AND collection_type<>'recueil'"); $s->execute([$mediaId]);
+        foreach ($s as $r) {
+            $name = in_array($r['collection_type'], ['resistance', 'voter'], true) ? (recueil_entity_label($pdo, 'person', (string) $r['collection_id'])['label'] ?? '') : '';
+            if ($r['collection_type'] === 'atelier_item') { $a = $pdo->prepare('SELECT p.title FROM atelier_items i JOIN atelier_projects p ON p.id=i.project_id WHERE i.id=?'); $a->execute([(int) $r['collection_id']]); $name = (string) ($a->fetchColumn() ?: ''); }
+            $out[] = ['label' => MEDIA_AV_COLLECTIONS[$r['collection_type']] ?? 'Bloc', 'name' => $name];
+        }
+        $seen = []; $out = array_values(array_filter($out, static function ($o) use (&$seen) { $k = $o['label'] . '|' . $o['name']; if (isset($seen[$k])) { return false; } return $seen[$k] = true; }));
+    } catch (Throwable $_) {}
+    return ['owners' => $out];
 }

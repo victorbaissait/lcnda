@@ -148,13 +148,14 @@
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one">
             <header class="page-header"><div><button type="button" class="back-link" data-rc-back>← Tous les recueils</button><span class="eyebrow">RECUEIL</span><h2>${esc(r.icon || '📚')} ${esc(r.title)}</h2>
                 <p class="muted">${esc([r.reference, r.place_text, r.date_text].filter(Boolean).join(' · ')) || '&nbsp;'}</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-rc-edit>Modifier</button><button type="button" class="button" data-rc-add>+ Ajouter des photos</button></div></header>
+                <div class="page-actions"><button type="button" class="button secondary" data-rc-cover title="Choisir l’image de couverture du recueil">🖼️ Couverture</button><button type="button" class="button secondary" data-rc-edit>Modifier</button><button type="button" class="button" data-rc-add>+ Ajouter des photos</button></div></header>
             <div class="h-rc-tabs segmented">${tabs.map(([k, icon, label, n]) => `<button type="button" class="${s.tab === k ? 'is-active' : ''}" data-rc-tab="${k}">${icon} ${label}${n !== '' ? ` <small>${n}</small>` : ''}</button>`).join('')}
                 <span class="h-rc-tabs-info muted">${plural(D.pages.length, 'page', 'pages')} · ${pct} % transcrit${loose().length ? ` · <button type="button" class="link-button h-rc-warn" data-rc-goloose>${plural(loose().length, 'photo à ranger', 'photos à ranger')}</button>` : ''}</span></div>
             <div class="h-rc-body"></div></section>`;
         const sec = ws.querySelector('.h-rc-one');
         sec.querySelector('[data-rc-back]').addEventListener('click', () => { Object.assign(s, {id: 0, page: 0}); ext.lists.recueils(++S().workspaceToken); });
         sec.querySelector('[data-rc-edit]').addEventListener('click', () => recueilDialog(D.recueil));
+        sec.querySelector('[data-rc-cover]').addEventListener('click', () => coverDialog());
         sec.querySelector('[data-rc-add]').addEventListener('click', () => addPhotosDialog());
         sec.querySelectorAll('[data-rc-tab]').forEach(b => b.addEventListener('click', () => { s.tab = b.dataset.rcTab; s.page = 0; s.compare = 0; paint(); }));
         sec.querySelector('[data-rc-goloose]')?.addEventListener('click', () => { s.tab = 'pages'; s.page = 0; paint(); sec.querySelector('.h-rc-loose')?.scrollIntoView({block: 'center'}); });
@@ -333,15 +334,17 @@
                 <span class="muted">${p.num} / ${D.pages.length}</span></div>
             <div class="h-rc-pageview">
                 <div class="h-rc-stage-wrap">
-                    <div class="h-rc-stage ${cmp ? 'is-compare' : ''}">${cur ? stage(cur) + (cmp ? stage(cmp) : '') : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-rc-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
+                    <div class="h-rc-stage ${cmp ? 'is-compare' : ''}">${imgs.length > 1 && !cmp && cur ? `<button type="button" class="h-rc-imgnav is-prev" data-rc-imgstep="-1" title="Image précédente de cette page (←)">‹</button><button type="button" class="h-rc-imgnav is-next" data-rc-imgstep="1" title="Image suivante de cette page (→)">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}${cur ? stage(cur) + (cmp ? stage(cmp) : '') : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-rc-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
                     ${cur ? `<div class="h-rc-imgactions">
                         ${p.best_image_id === cur.id ? '<span class="h-rc-kept">⭐ Image retenue pour cette page</span>' : `<button type="button" class="button small" data-rc-best="${cur.id}" title="C’est elle qu’on voit dans la mosaïque, le résumé et les fiches">⭐ Garder celle-ci</button>`}
                         <button type="button" class="button small secondary" data-rc-zoom="${cur.id}">🔍 Agrandir, pivoter, retoucher</button>
                         ${ext.openAssembler ? `<button type="button" class="button small secondary" data-rc-assemble title="Mettre ensemble les photos de cette page (morceaux, zoom…) : le résultat devient l’image retenue">🧩 Assembler</button>` : ''}
                         ${imgs.length > 1 ? `<button type="button" class="button small secondary" data-rc-compare="${cmp ? 0 : (imgs.find(i => i.id !== cur.id)?.id || 0)}">${cmp ? '✕ Fin de la comparaison' : '⇄ Comparer côte à côte'}</button>` : ''}
                         <button type="button" class="button small secondary" data-rc-role="${cur.id}">${cur.role === 'detail' ? '📄 C’est la page entière' : '🔍 C’est un détail (zoom)'}</button>
+                        <button type="button" class="button small secondary" data-rc-linkimg title="Rattacher juste cette image à une fiche (ses médias ou un bloc), une enquête, une battue, l’Atelier, un village">🔗 Rattacher cette image…</button>
                         <label class="h-rc-move">Déplacer vers ${pageSelect('data-rc-moveimg', p.id)}</label>
                         <button type="button" class="icon-button danger" data-rc-remove="${cur.id}" title="Retirer cette photo du recueil (elle reste dans Médias)">🗑</button></div>` : ''}
+                    ${cur ? '<p class="h-rc-owners muted" data-rc-owners></p>' : ''}
                     <div class="h-rc-strip">${imgs.map(i => `<button type="button" class="h-rc-thumb ${i.id === cur?.id ? 'is-current' : ''} ${i.id === cmp?.id ? 'is-compare' : ''}" data-rc-pick="${i.id}" title="${esc(versionById(i.version_id)?.name || '')}${i.role === 'detail' ? ' · détail' : ''}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><small>${esc(versionById(i.version_id)?.name || '')}</small>${i.role === 'detail' ? '<em>🔍</em>' : ''}${i.id === p.best_image_id ? '<b>⭐</b>' : ''}</button>`).join('')}
                         <button type="button" class="h-rc-thumb h-rc-addthumb" data-rc-addhere title="Ajouter une photo de cette page (autre version, détail…)">＋</button></div>
                 </div>
@@ -350,7 +353,8 @@
                     <label class="h-rc-trans">Transcription <span class="h-rc-saved muted" data-rc-saved></span><textarea data-rc-field="transcription" rows="16" placeholder="Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)…">${esc(p.transcription)}</textarea></label>
                     ${cur?.media_transcription && !p.transcription.trim() ? `<button type="button" class="link-button" data-rc-usemedia>↧ Reprendre la transcription déjà faite sur cette photo</button>` : ''}
                     <label>Notes<textarea data-rc-field="notes" rows="4" placeholder="Abréviations, mots incertains, ce qu’il reste à vérifier…">${esc(p.notes)}</textarea></label>
-                    <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>+ Page après</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
+                    <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>+ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Rattacher cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Rattacher la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
+                    ${(() => { const ls = D.links.filter(l => l.from_num ? p.num >= l.from_num && p.num <= (l.to_num || l.from_num) : true); const chips = [...new Set(ls.map(l => `<span class="h-rc-chip">${esc(l.type_label)} · ${esc(l.label)}${l.from_num ? '' : ' <small>(tout le recueil)</small>'}</span>`))]; return chips.length ? `<p class="h-rc-pagelinks"><b>🔗 Cette page est rattachée à :</b> ${chips.join(' ')}</p>` : ''; })()}
                     <p class="muted h-rc-hint">Supprimer une page ne supprime pas ses photos : elles passent « à ranger ».</p>
                 </div></div>`;
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
@@ -374,6 +378,12 @@
         body.querySelector('[data-rc-remove]')?.addEventListener('click', () => { if (confirm('Retirer cette photo du recueil ? Elle reste dans Médias.')) { s.image = 0; run('remove_recueil_image', {id: cur.id}, 'Photo retirée du recueil.'); } });
         body.querySelectorAll('[data-rc-addhere]').forEach(b => b.addEventListener('click', () => addPhotosDialog({pageId: p.id})));
         body.querySelectorAll('[data-rc-pagemove]').forEach(b => b.addEventListener('click', () => run('save_recueil_page', {id: p.id, move: Number(b.dataset.rcPagemove)})));
+        const stepImg = d => { if (imgs.length < 2 || !cur) return; const i = imgs.indexOf(cur); s.image = imgs[(i + d + imgs.length) % imgs.length].id; s.compare = 0; paint(); };
+        body.querySelectorAll('[data-rc-imgstep]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); stepImg(Number(b.dataset.rcImgstep)); }));
+        body.querySelector('[data-rc-linkimg]')?.addEventListener('click', () => pageLinkDialog({page: p, image: cur, scope: 'image'}));
+        body.querySelector('[data-rc-linkpage]').addEventListener('click', () => pageLinkDialog({page: p, image: cur, scope: 'page'}));
+        const ownersBox = body.querySelector('[data-rc-owners]');
+        if (ownersBox && cur) get('recueil_media_owners', {media_id: cur.media_id}).then(r => { if (!ownersBox.isConnected) return; const o = r.owners || []; ownersBox.innerHTML = o.length ? `🔗 Cette image est aussi : ${o.map(x => `<span class="h-rc-chip">${esc(x.label)}${x.name ? ' · ' + esc(x.name) : ''}</span>`).join(' ')}` : ''; }).catch(() => {});
         body.querySelector('[data-rc-insert]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id, after: p.id}); if (r) go(r.id); });
         body.querySelector('[data-rc-delpage]').addEventListener('click', async () => { if (!confirm(`Supprimer la ${pageName(p)} ?${imgs.length ? `\n\nSes ${imgs.length} photo(s) passent « à ranger ».` : ''}${p.transcription.trim() ? '\n\nSa transcription sera perdue.' : ''}`)) return; s.page = (next || prev)?.id || 0; await run('delete_recueil_page', {id: p.id}, 'Page supprimée.'); });
         // Enregistrement au fil de la frappe
@@ -384,7 +394,7 @@
         body.querySelectorAll('[data-rc-field]').forEach(el => el.addEventListener('blur', () => { clearTimeout(timer); flush(); }));
         body.querySelector('[data-rc-usemedia]')?.addEventListener('click', () => { const t = body.querySelector('[data-rc-field=transcription]'); t.value = cur.media_transcription; t.dispatchEvent(new Event('input')); });
         // Alt + ← → : page précédente / suivante
-        const keys = e => { if (!body.isConnected) return document.removeEventListener('keydown', keys); if (!e.altKey || e.target.closest('textarea, input, select')) return; if (e.key === 'ArrowLeft' && prev) { e.preventDefault(); flush(); go(prev.id); } if (e.key === 'ArrowRight' && next) { e.preventDefault(); flush(); go(next.id); } };
+        const keys = e => { if (!body.isConnected) return document.removeEventListener('keydown', keys); if (e.target.closest('textarea, input, select, [contenteditable]') || document.querySelector('dialog[open]')) return; if (!e.altKey && !e.metaKey && !e.ctrlKey && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) { if (imgs.length > 1) { e.preventDefault(); flush(); stepImg(e.key === 'ArrowLeft' ? -1 : 1); } return; } if (!e.altKey) return; if (e.key === 'ArrowLeft' && prev) { e.preventDefault(); flush(); go(prev.id); } if (e.key === 'ArrowRight' && next) { e.preventDefault(); flush(); go(next.id); } };
         document.removeEventListener('keydown', ext._rcKeys || (() => {})); ext._rcKeys = keys; document.addEventListener('keydown', keys);
     }
 
@@ -432,6 +442,103 @@
                 await reload();
             },
         });
+    }
+
+    /* ─── Couverture : une photo du recueil, une image de Médias, ou une image envoyée exprès ─── */
+    function coverDialog() {
+        const r = D.recueil, cur = r.cover;
+        const shown = D.pages.map(p => imgById(p.shown_image_id)).filter(Boolean);
+        const others = D.images.filter(i => !shown.includes(i));
+        const tile = (mid, url, title, sel) => `<button type="button" class="h-rc-thumb h-rc-covpick ${sel ? 'is-current' : ''}" data-rc-covmid="${mid}" title="${esc(title)}"><img src="${esc(url)}" alt="" loading="lazy"></button>`;
+        const save = async mid => { await post('save_recueil', {...r, cover_media_id: mid || 0}); toast(mid ? 'Couverture choisie.' : 'La couverture redevient la première page.'); await reload(); };
+        const dl = dialog({eyebrow: 'RECUEIL', title: 'Image de couverture', wide: true,
+            body: `<div class="h-rc-covnow">${cur ? `<img src="${esc(thumbUrl(cur))}" alt="">` : `<span class="h-rc-cover-empty">${esc(r.icon || '📚')}</span>`}
+                    <p>${cur?.chosen ? '<b>Couverture choisie.</b>' : 'Pour l’instant : <b>la première page</b> (automatique).'}<br><small class="muted">Clique sur une image ci-dessous pour en faire la couverture.</small>${cur?.chosen ? '<br><button type="button" class="link-button" data-rc-covreset>↺ Revenir à la première page</button>' : ''}</p></div>
+                <h4>📤 Une image à part, juste pour la couverture</h4>
+                <label class="h-rc-drop"><input type="file" accept="image/*" data-rc-covfile><span>📷 Choisir une image sur l’ordinateur</span></label>
+                <h4>📚 Une photo du recueil</h4>
+                <div class="h-rc-covgrid">${shown.concat(others).map(i => tile(i.media_id, thumbUrl(i), (pageById(i.page_id) ? pageName(pageById(i.page_id)) : 'À ranger') + ' · ' + (versionById(i.version_id)?.name || ''), cur?.chosen && cur.media_id === i.media_id)).join('') || '<p class="muted">Pas encore de photo dans le recueil.</p>'}</div>
+                <h4>🖼️ Une image déjà dans Médias</h4>
+                <input type="search" data-rc-covq placeholder="Chercher par titre, cote… (2 lettres au moins)">
+                <div class="h-rc-covgrid" data-rc-covres></div>`,
+            onOpen: d => {
+                const pick = async mid => { await save(mid); d.close(); };
+                const bindTiles = root => root.querySelectorAll('[data-rc-covmid]').forEach(b => b.addEventListener('click', () => pick(Number(b.dataset.rcCovmid))));
+                bindTiles(d);
+                d.querySelector('[data-rc-covreset]')?.addEventListener('click', () => pick(0));
+                d.querySelector('[data-rc-covfile]').addEventListener('change', async e => {
+                    const f = e.target.files[0]; if (!f) return;
+                    try { const ids = await uploadPhotos(r.id, [f]); if (ids[0]) await pick(ids[0]); } catch (err) { toast(err.message, 'error'); }
+                });
+                let t = 0; const res = d.querySelector('[data-rc-covres]');
+                d.querySelector('[data-rc-covq]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(async () => {
+                    const q = e.target.value.trim(); if (q.length < 2) { res.innerHTML = ''; return; }
+                    const m = ((await get('heritage_media_search', {q}).catch(() => ({media: []}))).media || []).filter(x => (x.media_type || 'image') === 'image');
+                    res.innerHTML = m.map(x => tile(x.id, `media/${encodeURIComponent(x.thumbnail || x.filename)}`, x.title || x.filename, false)).join('') || '<p class="muted">Aucune image trouvée.</p>';
+                    bindTiles(res);
+                }, 250); });
+            }});
+        return dl;
+    }
+
+    /* ─── Rattacher une page (ou juste une image) à une fiche, un bloc, une enquête, une battue, l'Atelier, un village ─── */
+    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🐾 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village']];
+    function pageLinkDialog({page, image, scope = 'page'}) {
+        dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Rattacher',
+            body: `<fieldset class="h-rc-modes"><legend>Quoi ?</legend>
+                    <label class="checkbox-line"><input type="radio" name="scope" value="page" ${scope === 'page' ? 'checked' : ''}> <b>Toute la page</b> <small class="muted">(elle apparaîtra dans « Recueils » de la fiche, du village, de l’enquête…)</small></label>
+                    <label class="checkbox-line"><input type="radio" name="scope" value="image" ${scope === 'image' ? 'checked' : ''} ${image ? '' : 'disabled'}> <b>Juste cette image</b> <small class="muted">(elle s’ajoute aux médias de la fiche, à un bloc, aux pièces de l’enquête…)</small></label></fieldset>
+                ${image ? `<p class="h-rc-linkthumb"><img src="${esc(thumbUrl(image))}" alt=""> <small class="muted">${esc(versionById(image.version_id)?.name || '')}${image.role === 'detail' ? ' · détail' : ''}</small></p>` : ''}
+                <div class="form-grid"><label>À quoi ?<select name="kind">${LINK_KINDS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></label>
+                    <label>Chercher<input type="search" name="q" placeholder="Nom, titre, commune… (2 lettres au moins)" autocomplete="off"></label></div>
+                <label>Résultat<select name="key" size="6" required></select></label>
+                <label data-rc-where hidden><span data-rc-wherelabel>Où exactement ?</span><select name="target"></select></label>
+                <label>Note <small class="muted">(facultatif)</small><input name="note" placeholder="Il est cité à la ligne 12"></label>`,
+            onOpen: d => {
+                const $ = sel => d.querySelector(sel), kind = $('[name=kind]'), q = $('[name=q]'), keySel = $('[name=key]'), where = $('[data-rc-where]'), target = $('[name=target]');
+                const scopeNow = () => d.querySelector('[name=scope]:checked')?.value || 'page';
+                let t = 0, folders = [];
+                const fillWhere = async () => {
+                    const k = kind.value, key = keySel.value, sc = scopeNow();
+                    where.hidden = true; target.innerHTML = ''; target.required = false;
+                    if (!key) return;
+                    if (sc === 'page' && k !== 'investigation') return;
+                    const r = await get('recueil_media_targets', {type: k, key}).catch(() => ({targets: []}));
+                    let opts = r.targets || [];
+                    if (sc === 'page') { folders = opts.slice(1).map(o => ({id: Number(o.value.split(':')[2]), name: o.label.replace(/^📁 /, '')})); target.innerHTML = folderOptions(folders, null); $('[data-rc-wherelabel]').textContent = 'Où la montrer dans l’enquête ?'; where.hidden = false; return; }
+                    if (!opts.length) { target.innerHTML = '<option value="">— rien où la mettre (ex. battue sans recherche) —</option>'; }
+                    else target.innerHTML = opts.map(o => `<option value="${esc(o.value)}">${esc(o.label)}</option>`).join('');
+                    $('[data-rc-wherelabel]').textContent = k === 'person' ? 'Dans les médias de la fiche, ou dans un bloc ?' : k === 'battue' ? 'Quelle recherche de la battue ?' : 'Dans quel dossier ?';
+                    target.required = true; where.hidden = false;
+                };
+                const search = async () => {
+                    const v = q.value.trim();
+                    if (v.length < 2 && kind.value === 'person') { keySel.innerHTML = ''; fillWhere(); return; }
+                    const r = await get('recueil_search', {type: kind.value, q: v}).catch(() => ({results: []}));
+                    keySel.innerHTML = (r.results || []).map(x => `<option value="${esc(x.key)}">${esc(x.label)}${x.extra ? ` (${esc(x.extra)})` : ''}</option>`).join('');
+                    if (keySel.options.length) keySel.selectedIndex = 0;
+                    fillWhere();
+                };
+                q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(search, 250); });
+                kind.addEventListener('change', () => { q.value = ''; search(); q.focus(); });
+                keySel.addEventListener('change', fillWhere);
+                d.querySelectorAll('[name=scope]').forEach(r => r.addEventListener('change', fillWhere));
+                search(); setTimeout(() => q.focus(), 50);
+            },
+            onSubmit: async form => {
+                const f = Object.fromEntries(new FormData(form));
+                if (!f.key) { toast('Choisis dans la liste à quoi rattacher.', 'error'); return false; }
+                if (f.scope === 'image') {
+                    if (!f.target) { toast('Choisis où mettre l’image.', 'error'); return false; }
+                    const label = form.querySelector('[name=key]').selectedOptions[0]?.textContent || '';
+                    const r = await post('recueil_link_media', {media_id: image.media_id, target: f.target, note: f.note, label, title: `${D.recueil.title} — ${pageName(page)}`});
+                    toast((r.result || r).already ? 'Cette image y était déjà rattachée.' : 'Image rattachée.');
+                } else {
+                    await post('save_recueil_link', {recueil_id: D.recueil.id, entity_type: f.kind, entity_key: f.key, page_from: page.id, page_to: page.id, note: f.note, ...(f.kind === 'investigation' ? {folder_id: f.target ?? ''} : {})});
+                    toast('Page rattachée.');
+                }
+                await reload();
+            }});
     }
 
     /* ─── Versions ─── */
@@ -543,7 +650,9 @@
         const done = pages.filter(p => p.transcription.trim());
         let inner = '';
         switch (b.type) {
-            case 'cover': { const p = pages[0], i = p ? imgById(p.shown_image_id) : null; inner = i ? `<button type="button" class="h-rc-coverbig" data-rc-open="${p.id}"><img src="${esc(thumbUrl(i))}" alt=""></button>` : '<p class="muted">Pas encore de photo.</p>'; break; }
+            case 'cover': { const c = D.recueil.cover, p = pages[0], i = p ? imgById(p.shown_image_id) : null;
+                inner = c?.chosen ? `<button type="button" class="h-rc-coverbig" data-rc-coverzoom><img src="${esc(thumbUrl(c))}" alt=""></button>` : i ? `<button type="button" class="h-rc-coverbig" data-rc-open="${p.id}"><img src="${esc(thumbUrl(i))}" alt=""></button>` : '<p class="muted">Pas encore de photo.</p>';
+                inner += `<button type="button" class="link-button" data-rc-cover2>🖼️ ${c?.chosen ? 'Changer la couverture' : 'Choisir une autre couverture'}</button>`; break; }
             case 'figures': inner = `<div class="h-rc-figs"><span><b>${pages.length}</b> pages</span><span><b>${imgs.length}</b> photos</span><span><b>${D.versions.length}</b> versions</span><span><b>${imgs.filter(i => i.role === 'detail').length}</b> détails</span><span><b>${done.length}</b> transcrites</span>${loose().length ? `<span class="h-rc-warn"><b>${loose().length}</b> à ranger</span>` : ''}</div>`; break;
             case 'description': inner = D.recueil.description ? `<p>${nl(D.recueil.description)}</p>` : '<p class="muted">Pas de description : « Modifier » pour en écrire une.</p>'; break;
             case 'progress': { const pct = pages.length ? Math.round(done.length / pages.length * 100) : 0; const todo = pages.filter(p => !p.transcription.trim()).slice(0, b.n);
@@ -567,6 +676,8 @@
             <div class="h-rc-summary">${blocks.map(blockHtml).join('') || A().empty('Résumé vide : « Personnaliser » pour choisir ce qu’on y voit.')}</div>`;
         body.querySelector('[data-rc-custom]').addEventListener('click', summaryDialog);
         body.querySelectorAll('[data-rc-open]').forEach(b => b.addEventListener('click', () => { st().tab = 'pages'; st().page = Number(b.dataset.rcOpen); st().image = 0; paint(); }));
+        body.querySelector('[data-rc-cover2]')?.addEventListener('click', () => coverDialog());
+        body.querySelector('[data-rc-coverzoom]')?.addEventListener('click', () => { const c = D.recueil.cover; openViewer([{id: 0, media_id: c.media_id, filename: c.filename, thumbnail: c.thumbnail, title: 'Couverture'}], 0); });
         bindEntityOpen(body);
         A().bindTableLinks?.();
     }
