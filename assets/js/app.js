@@ -7307,13 +7307,19 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function viewSnapshot(){
         return {module:state.module,currentPersonId:Number(state.currentPersonId)||0,currentBattueId:Number(state.currentBattueId)||0,currentInvestigationId:Number(state.currentInvestigationId)||0,
             investigationFolderId:Number(state.investigationFolderId)||0,enquetesTab:state.enquetesTab||'',maintenanceTab:state.maintenanceTab||'',graphMode:state.graphMode||'',listType:state.listType||'',
-            researchKind:state.researchKind||'',graphPlaceMonograph:state.graphPlaceMonograph||null};
+            researchKind:state.researchKind||'',graphPlaceMonograph:state.graphPlaceMonograph||null,
+            // Atelier de recherche : le projet, le dossier ou la vue, l'élément choisi ; une liste à soi (et sa fiche ouverte)
+            atelier:state.atelier?.project?{project:Number(state.atelier.project)||0,node:state.atelier.node??'overview',sel:Array.isArray(state.atelier.sel)?state.atelier.sel.slice(0,1):[],deep:!!state.atelier.deep}:null,
+            hListOpen:Number(state.hListOpen)||0,hRec:state.hRec?.list?{list:Number(state.hRec.list)||0,open:Number(state.hRec.open)||0,filter:state.hRec.filter||''}:null};
     }
     function applyViewSnapshot(view){
         if(!view||typeof view!=='object')return;
         ['currentPersonId','currentBattueId','currentInvestigationId','investigationFolderId','enquetesTab','maintenanceTab','graphMode','listType','researchKind'].forEach(key=>{if(view[key]!==undefined&&view[key]!==''&&view[key]!==null)state[key]=view[key];});
         if(view.graphPlaceMonograph&&typeof view.graphPlaceMonograph==='object')state.graphPlaceMonograph={...state.graphPlaceMonograph,...view.graphPlaceMonograph};
         if(!view.currentBattueId)state.currentBattueId=0;if(!view.currentInvestigationId)state.currentInvestigationId=0;
+        if(view.atelier&&typeof view.atelier==='object'&&Number(view.atelier.project)>0){const node=view.atelier.node;state.atelier={project:Number(view.atelier.project),node:typeof node==='number'||/^[a-z_0-9]{1,40}$/i.test(String(node))?node:'overview',sel:(Array.isArray(view.atelier.sel)?view.atelier.sel:[]).map(Number).filter(Boolean).slice(0,1),tags:[],q:'',type:'',sort:{col:'title',dir:1},closed:{},deep:!!view.atelier.deep};}
+        if(Number(view.hListOpen)>0)state.hListOpen=Number(view.hListOpen);
+        if(view.hRec&&typeof view.hRec==='object'&&Number(view.hRec.list)>0)state.hRec={list:Number(view.hRec.list),open:Number(view.hRec.open)||0,filter:['todo','done','all'].includes(view.hRec.filter)?view.hRec.filter:'todo',q:'',edit:null};
     }
     window.lcndaViewSnapshot=viewSnapshot; // lu par la fenêtre principale (même origine) pour détacher le panneau
     function viewUrl(view){return `${location.pathname}?view=${encodeURIComponent(JSON.stringify(view))}`;}
