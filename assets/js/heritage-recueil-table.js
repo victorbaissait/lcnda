@@ -176,4 +176,41 @@
         paint();
         return {repaint: () => paint()};
     };
+
+    /* ─── Choisir une fiche (dépouillements, tableau d'un recueil…) : recherche, liste lisible, clavier ─── */
+    /** HTML du sélecteur ; createLabel : proposer « créer la fiche » (texte affiché sous le bouton). */
+    ext.personPickerHtml = ({guess = '', createLabel = ''} = {}) => `<div class="h-pick">
+        <div class="h-pick-search"><span aria-hidden="true">🔍</span><input type="search" data-pick-q value="${esc(guess)}" placeholder="Nom, prénom… (2 lettres au moins)" autocomplete="off" aria-label="Chercher la fiche"></div>
+        <div class="h-pick-list" data-pick-list role="listbox" aria-label="Fiches trouvées"></div>
+        ${createLabel ? `<button type="button" class="h-pick-create" data-pick-create aria-pressed="false"><span class="h-pick-plus">＋</span><span><b>Pas encore de fiche ?</b><small>${createLabel}</small></span></button>` : ''}</div>`;
+    /** Branche le sélecteur dans la fenêtre : rend {selected() → {key, label}|null, create() → bool}. Double-clic ou Entrée : valider. */
+    ext.bindPersonPicker = dl => {
+        const q = dl.querySelector('[data-pick-q]'), list = dl.querySelector('[data-pick-list]'), cr = dl.querySelector('[data-pick-create]'), form = dl.querySelector('form');
+        let items = [], cur = -1, tm = 0, create = false;
+        const paint = msg => {
+            list.innerHTML = items.length ? items.map((o, i) => `<button type="button" class="h-pick-item ${i === cur && !create ? 'is-on' : ''}" role="option" aria-selected="${i === cur && !create}" data-pick-i="${i}"><span class="h-pick-name">${esc(o.label)}</span>${o.extra ? `<small>${esc(o.extra)}</small>` : ''}</button>`).join('') : `<p class="h-pick-empty">${msg}</p>`;
+            list.querySelectorAll('[data-pick-i]').forEach(b => {
+                b.addEventListener('click', () => { cur = Number(b.dataset.pickI); setCreate(false); paint(); });
+                b.addEventListener('dblclick', () => { cur = Number(b.dataset.pickI); setCreate(false); form?.requestSubmit(); });
+            });
+            list.querySelector('.is-on')?.scrollIntoView({block: 'nearest'});
+        };
+        const setCreate = on => { create = on; if (cr) { cr.setAttribute('aria-pressed', String(on)); cr.classList.toggle('is-on', on); } if (on) list.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); };
+        const search = async () => {
+            const v = q.value.trim();
+            if (v.length < 2) { items = []; cur = -1; return paint('Tape au moins deux lettres du nom ou du prénom.'); }
+            const api = term => A().api('recueil_search', {type: 'person', q: term}).then(r => r.results || []).catch(() => []);
+            let r = await api(v);
+            if (!r.length && v.includes(' ')) { const parts = v.split(/\s+/); r = (await api(parts[parts.length - 1])).filter(o => parts.every(w => o.label.toLowerCase().includes(w.toLowerCase()))); if (!r.length) r = await api(parts[parts.length - 1]); }
+            items = r; cur = r.length ? 0 : -1; paint('Aucune fiche trouvée.' + (cr ? ' Tu peux la créer ci-dessous.' : ''));
+        };
+        q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(search, 220); });
+        q.addEventListener('keydown', e => {
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (!items.length) return; setCreate(false); cur = (cur + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length; paint(); }
+            if (e.key === 'Enter') { e.preventDefault(); form?.requestSubmit(); }
+        });
+        cr?.addEventListener('click', () => { setCreate(!create); paint(items.length ? '' : 'Aucune fiche trouvée.'); });
+        search(); setTimeout(() => { q.focus(); q.select(); }, 50);
+        return {selected: () => create || cur < 0 ? null : {key: items[cur].key, label: items[cur].label}, create: () => create};
+    };
 })();

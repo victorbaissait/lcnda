@@ -1504,3 +1504,24 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-dp-lock.is-locked { background:color-mix(in srgb, #c0392b 12%, #fff); }
 .h-dp-table.is-locked td input { cursor:default; color:inherit; }
 .h-dp-table.is-locked td input:focus { box-shadow:none; background:transparent; }
+
+/* Choisir une fiche (ext.personPickerHtml) */
+.h-pick { display:flex; flex-direction:column; gap:10px; min-width:min(520px, 80vw); }
+.h-pick-search { display:flex; align-items:center; gap:8px; padding:0 12px; border:1.5px solid #bdbdbd; border-radius:10px; background:#fff; }
+.h-pick-search:focus-within { border-color:var(--accent, #2f6f5e); box-shadow:0 0 0 3px color-mix(in srgb, var(--accent, #2f6f5e) 18%, transparent); }
+.h-pick-search input { flex:1; border:0 !important; outline:none; box-shadow:none !important; background:transparent; font-size:16px; padding:11px 0; min-width:0; }
+.h-pick-list { display:flex; flex-direction:column; gap:2px; max-height:300px; overflow:auto; padding:4px; border:1px solid #e3e3e3; border-radius:10px; background:#fafafa; min-height:60px; }
+.h-pick-item { display:flex; align-items:baseline; justify-content:space-between; gap:12px; width:100%; text-align:left; padding:9px 12px; border:0; border-radius:7px; background:transparent; cursor:pointer; font:inherit; color:inherit; }
+.h-pick-item:hover { background:color-mix(in srgb, var(--accent, #2f6f5e) 8%, #fff); }
+.h-pick-item.is-on { background:var(--accent, #2f6f5e); color:#fff; }
+.h-pick-item.is-on small { color:rgba(255,255,255,.85); }
+.h-pick-name { font-weight:600; }
+.h-pick-item small { color:#777; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.h-pick-empty { margin:0; padding:14px 12px; color:#888; font-size:14px; }
+.h-pick-create { display:flex; align-items:center; gap:12px; width:100%; text-align:left; padding:10px 12px; border:1.5px dashed #c5c5c5; border-radius:10px; background:#fff; cursor:pointer; font:inherit; color:inherit; }
+.h-pick-create:hover { border-color:var(--accent, #2f6f5e); }
+.h-pick-create.is-on { border-style:solid; border-color:var(--accent, #2f6f5e); background:color-mix(in srgb, var(--accent, #2f6f5e) 10%, #fff); }
+.h-pick-create b { display:block; }
+.h-pick-create small { color:#666; }
+.h-pick-plus { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#f0f0f0; font-weight:700; flex:none; }
+.h-pick-create.is-on .h-pick-plus { background:var(--accent, #2f6f5e); color:#fff; }

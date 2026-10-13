@@ -441,24 +441,15 @@
             return new Promise(resolve => {
                 let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
                 const guess = [x.first_name, x.last_name].filter(Boolean).join(' ');
+                let picker = null;
                 dialog({eyebrow: 'PERSONNE RELEVÉE', title: guess || 'Rattacher à une fiche', submitLabel: 'Rattacher',
-                    body: `<label>Chercher la fiche<input type="search" name="q" value="${esc(guess)}" autocomplete="off" placeholder="Nom, prénom…"></label>
-                        <label>Résultat<select name="key" size="7"></select></label>
-                        <label class="checkbox-line"><input type="checkbox" name="create"> Pas encore de fiche : <b>créer la fiche</b> avec ce nom (à vérifier)</label>`,
-                    onOpen: d => {
-                        d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true});
-                        const q = d.querySelector('[name=q]'), sel = d.querySelector('[name=key]'); let tm = 0;
-                        const search = async () => { const v = q.value.trim(); if (v.length < 2) { sel.innerHTML = ''; return; }
-                            let res = (await get('recueil_search', {type: 'person', q: v}).catch(() => ({results: []}))).results || [];
-                            if (!res.length && v.includes(' ')) res = (await get('recueil_search', {type: 'person', q: v.split(/\s+/).pop()}).catch(() => ({results: []}))).results || [];
-                            sel.innerHTML = res.map(o => `<option value="${esc(o.key)}">${esc(o.label)}${o.extra ? ` (${esc(o.extra)})` : ''}</option>`).join(''); if (sel.options.length) sel.selectedIndex = 0; };
-                        q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(search, 250); }); search(); setTimeout(() => q.focus(), 50);
-                    },
-                    onSubmit: async form => {
-                        if (form.querySelector('[name=create]').checked) { await save(x, {person_mode: 'create'}); x.person_name = [x.first_name, x.last_name].filter(Boolean).join(' '); toast('Fiche créée (à vérifier) et rattachée.'); end(true); return; }
-                        const opt = form.querySelector('[name=key]').selectedOptions[0];
-                        if (!opt) { toast('Choisis la fiche dans la liste, ou coche « créer la fiche ».', 'error'); return false; }
-                        x.person_id = Number(opt.value); x.person_name = opt.textContent.replace(/\s*\(.*\)$/, '');
+                    body: `<p class="muted">Choisis la fiche de cette personne : elle sera rattachée à ce relevé (et au recensement de la fiche).</p>` + ext.personPickerHtml({guess, createLabel: `Créer la fiche « ${esc(guess || 'sans nom')} » (marquée à vérifier)`}),
+                    onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
+                    onSubmit: async () => {
+                        if (picker.create()) { await save(x, {person_mode: 'create'}); x.person_name = guess; toast('Fiche créée (à vérifier) et rattachée.'); end(true); return; }
+                        const o = picker.selected();
+                        if (!o) { toast('Choisis une fiche dans la liste, ou « Pas encore de fiche ».', 'error'); return false; }
+                        x.person_id = Number(o.key); x.person_name = o.label;
                         await save(x, {person_mode: 'existing'}); toast(`Rattachée à ${x.person_name}.`); end(true);
                     },
                 });

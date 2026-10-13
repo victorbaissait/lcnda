@@ -481,25 +481,16 @@
         return new Promise(resolve => {
             let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
             const guess = t.cols.map(c => (row.c[c.id] || '').trim()).filter(v => /\p{L}{2}/u.test(v)).slice(0, 2).join(' ');
+            let picker = null;
             dialog({eyebrow: 'LIGNE ' + (t.rows.indexOf(row) + 1), title: 'Rattacher cette ligne à une fiche', submitLabel: 'Rattacher',
-                body: `<p class="muted">${esc(ext.recueilTableRowText(t, row) || 'Ligne vide')}</p>
-                    <label>Chercher la personne<input type="search" name="q" value="${esc(guess)}" autocomplete="off" placeholder="Nom, prénom…"></label>
-                    <label>Résultat<select name="key" size="7" required></select></label>`,
-                onOpen: d => {
-                    d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true});
-                    const q = d.querySelector('[name=q]'), sel = d.querySelector('[name=key]'); let tm = 0;
-                    const search = async () => { const v = q.value.trim(); if (v.length < 2) { sel.innerHTML = ''; return; }
-                        let r = (await get('recueil_search', {type: 'person', q: v}).catch(() => ({results: []}))).results || [];
-                        if (!r.length && v.includes(' ')) r = (await get('recueil_search', {type: 'person', q: v.split(/\s+/)[0]}).catch(() => ({results: []}))).results || [];
-                        sel.innerHTML = r.map(x => `<option value="${esc(x.key)}">${esc(x.label)}${x.extra ? ` (${esc(x.extra)})` : ''}</option>`).join(''); if (sel.options.length) sel.selectedIndex = 0; };
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(search, 250); }); search(); setTimeout(() => q.focus(), 50);
-                },
-                onSubmit: async form => {
-                    const sel = form.querySelector('[name=key]'), opt = sel.selectedOptions[0];
-                    if (!opt) { toast('Choisis la personne dans la liste.', 'error'); return false; }
+                body: `<p class="muted">${esc(ext.recueilTableRowText(t, row) || 'Ligne vide')}</p>` + ext.personPickerHtml({guess}),
+                onOpen: d => { d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true}); picker = ext.bindPersonPicker(d); },
+                onSubmit: async () => {
+                    const o = picker.selected();
+                    if (!o) { toast('Choisis la personne dans la liste.', 'error'); return false; }
                     const note = `Ligne ${t.rows.indexOf(row) + 1} : ${ext.recueilTableRowText(t, row) || '(vide)'}`;
-                    const res = await post('save_recueil_link', {recueil_id: D.recueil.id, entity_type: 'person', entity_key: opt.value, page_from: p.id, page_to: p.id, note});
-                    row.person = {id: Number(opt.value), name: opt.textContent.replace(/\s*\(.*\)$/, ''), link: (res.result || res).id}; row._note = note;
+                    const res = await post('save_recueil_link', {recueil_id: D.recueil.id, entity_type: 'person', entity_key: o.key, page_from: p.id, page_to: p.id, note});
+                    row.person = {id: Number(o.key), name: o.label, link: (res.result || res).id}; row._note = note;
                     toast(`Ligne rattachée à ${row.person.name} : elle apparaît dans le bloc « Recueils » de sa fiche.`);
                     end(true);
                 },
