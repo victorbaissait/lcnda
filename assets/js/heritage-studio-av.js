@@ -80,7 +80,7 @@
         <fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>
             <label class="checkbox-line"><input type="radio" name="mode" value="show" checked> <b>Nouvelle version, montrée partout</b> <small class="muted">(l’original reste gardé : on peut y revenir)</small></label>
             <label class="checkbox-line"><input type="radio" name="mode" value="version"> Nouvelle version, <b>sans la montrer</b> pour l’instant</label>
-            <label class="checkbox-line"><input type="radio" name="mode" value="copy"> <b>Un ${kindOf(media) === 'video' ? 'autre média' : 'autre son'} à part</b>, rattaché aux mêmes fiches</label></fieldset>
+            <label class="checkbox-line"><input type="radio" name="mode" value="copy"> <b>Une copie à part</b> (${kindOf(media) === 'video' ? 'une autre vidéo' : 'un autre son'}, rattaché${kindOf(media) === 'video' ? 'e' : ''} aux mêmes fiches) <small class="muted">: l’original ne change pas du tout</small></label></fieldset>
         <div class="form-grid"><label>Note de version <small class="muted">(facultatif)</small><input name="note" maxlength="120" placeholder="sans les blancs, voix plus nette…"></label><label data-avx-copytitle hidden>Titre de la copie<input name="title" value="${esc((media.title || '') + ' (montage)')}"></label></div>
         <p class="muted" data-avx-progress></p>`;
 
@@ -308,7 +308,7 @@
                 if (k === 'keep') { setBuf(sliceBuf(buf, i0, i1)); cursor = 0; }
                 if (k === 'silence') await onRange(async p => scale(p, 0));
                 if (k === 'fadein' || k === 'fadeout') await onRange(async p => { const n = sel ? p.length : Math.min(p.length, Math.round(sr * 3)); for (let c = 0; c < ch; c++) { const d = p.getChannelData(c); for (let i = 0; i < n; i++) { const t = i / n; if (k === 'fadein') d[i] *= t * t; else d[p.length - n + i] *= (1 - t) * (1 - t); } } return p; });
-                if (k === 'gain') { const db = prompt('Monter ou baisser le volume de combien de décibels ?\n(ex. 6 = deux fois plus fort, -6 = deux fois moins fort)', '6'); if (db === null || !isFinite(Number(db))) return; await onRange(async p => scale(p, 10 ** (Number(db) / 20))); }
+                if (k === 'gain') { const ans = await A().askText({title: 'Volume', message: `Monter ou baisser le volume${sel ? ' de la sélection' : ''} de combien de décibels ?\n6 = deux fois plus fort · -6 = deux fois moins fort`, value: '6', okLabel: 'Appliquer', inputMode: 'decimal'}); if (ans == null) return; const db = Number(String(ans).replace(',', '.').trim()); if (!String(ans).trim() || !isFinite(db)) { toast('Indique un nombre, par exemple 6 ou -3.', 'error'); return; } await onRange(async p => scale(p, 10 ** (db / 20))); }
                 if (k === 'normalize') await onRange(async p => { const pk = peakOf(p); return pk > 0 ? scale(p, 0.89 / pk) : p; });
                 if (k === 'denoise') {
                     const useSel = sel && confirm('Prendre la sélection comme exemple de souffle (un passage sans voix) ?\n\nOK : oui, c’est du bruit seul · Annuler : je veux nettoyer la sélection');
@@ -320,7 +320,7 @@
                 if (k === 'clarity') await onRange(async p => { const out = await through(p, (oc, s) => { const hp = oc.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 90; const pres = oc.createBiquadFilter(); pres.type = 'peaking'; pres.frequency.value = 3000; pres.Q.value = 0.9; pres.gain.value = 4; const comp = oc.createDynamicsCompressor(); comp.threshold.value = -24; comp.ratio.value = 3; comp.attack.value = 0.01; comp.release.value = 0.2; s.connect(hp).connect(pres).connect(comp); return comp; }); const pk = peakOf(out); return pk > 0 ? scale(out, 0.89 / pk) : out; });
                 if (k === 'hum') { const f = confirm('Courant à 50 Hz (Europe) ?\n\nOK : 50 Hz · Annuler : 60 Hz (Amérique du Nord)') ? 50 : 60; await onRange(async p => through(p, (oc, s) => { let last = s; for (let h = 1; h <= 4; h++) { const n = oc.createBiquadFilter(); n.type = 'notch'; n.frequency.value = f * h; n.Q.value = 30; last.connect(n); last = n; } return last; })); }
                 if (k === 'silences') {
-                    const minS = Number(prompt('Raccourcir les blancs plus longs que combien de secondes ?', '1.5')); if (!isFinite(minS) || minS <= 0) return;
+                    const ans = await A().askText({title: 'Raccourcir les blancs', message: 'Raccourcir les blancs plus longs que combien de secondes ?', value: '1,5', okLabel: 'Raccourcir', inputMode: 'decimal'}); if (ans == null) return; const minS = Number(String(ans).replace(',', '.').trim()); if (!isFinite(minS) || minS <= 0) { toast('Indique un nombre de secondes, par exemple 1,5.', 'error'); return; }
                     const hop = Math.round(sr * 0.02), rms = frameRms(buf, hop), thr = Math.max(1e-4, percentile(rms, 0.1) * 3), keep = Math.round(0.4 * sr);
                     const parts = []; let start = 0, quietFrom = -1;
                     for (let f = 0; f <= rms.length; f++) { const quiet = f < rms.length && rms[f] < thr; if (quiet && quietFrom < 0) quietFrom = f; if (!quiet && quietFrom >= 0) { const a = quietFrom * hop, b = Math.min(buf.length, f * hop); if ((b - a) / sr > minS) { parts.push(sliceBuf(buf, start, a + keep / 2)); start = b - keep / 2; } quietFrom = -1; } }

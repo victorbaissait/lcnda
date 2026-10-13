@@ -256,7 +256,7 @@
             ${none.length || !ts.length ? `<div class="h-rc-tray-none">${ts.length ? '<h4>📂 Sans dossier</h4>' : ''}<div class="h-rc-loose-list" data-rc-tray-drop="">${none.map(looseItem).join('') || '<p class="muted">Toutes les photos sont dans un dossier.</p>'}</div></div>` : ''}</div>`;
     }
     async function askTrayName(title, value = '') {
-        const name = (prompt(title, value) || '').trim();
+        const name = ((await A().askText({title: value ? 'Renommer le dossier' : 'Nouveau dossier', message: title, value, okLabel: value ? 'Renommer' : 'Créer'})) || '').trim().slice(0, 120);
         if (!name) return '';
         if (name !== value && trays().includes(name)) { toast('Ce dossier existe déjà.', 'error'); return ''; }
         return name;

@@ -946,7 +946,7 @@
             if (q('[data-at-unsel]')) { v.sel = []; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-bulk]')) {
                 const a = q('[data-at-bulk]').dataset.atBulk;
-                if (a === 'tag') { const tg = prompt('Étiquette à ajouter :'); if (tg?.trim()) await act('tag', v.sel, {tag: tg.trim()}); return; }
+                if (a === 'tag') { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', v.sel, {tag: tg.trim()}); return; }
                 if (a === 'delete' && !confirm(`Supprimer définitivement ${plural(v.sel.length, 'élément', 'éléments')} ?`)) return;
                 await act(a, v.sel, {folder_id: typeof v.node === 'number' ? v.node : 0}); if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); }
                 return;
@@ -1172,7 +1172,7 @@
             const pi = b => Number(t.closest(`[${b}]`)?.getAttribute(b));
             if (t.closest('[data-cfg-papply]')) { const x = profiles()[pi('data-cfg-papply')]; if (!x || !confirm(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`)) return; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return; }
             if (t.closest('[data-cfg-pupdate]')) { const list = profiles(), i = pi('data-cfg-pupdate'); if (!list[i] || !confirm(`Remplacer « ${list[i].name} » par les réglages actuels ?`)) return; list[i] = {...list[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(list); toast('Mis à jour.'); again(); return; }
-            if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; const n = prompt('Nouveau nom :', list[i].name); if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); return; }
+            if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; A().askText({title: 'Renommer', message: 'Nouveau nom :', value: list[i].name, okLabel: 'Renommer'}).then(n => { if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); }); return; }
             if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); toast('Fichier prêt.'); } return; }
             if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !confirm(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`)) return; list.splice(i, 1); saveProfiles(list); again(); return; }
             if (t.closest('[data-cfg-reset]')) return resetSections(['nav', 'types', 'folders', 'plans']);
