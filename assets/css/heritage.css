@@ -1286,3 +1286,21 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-at-applist { margin:4px 0 0; padding-left:1.2em; font-size:13px; }
 .h-flash { animation:h-flash 2.4s ease-out; }
 @keyframes h-flash { 0%, 40% { box-shadow:0 0 0 4px var(--blue); } 100% { box-shadow:none; } }
+/* 🧩 Atelier : widgets de la vue d'ensemble (heritage-atelier-widgets.js) */
+.h-atw-box { margin-top:18px; }
+.h-atw-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.h-atw-head h4 { margin:0; }
+.h-atw-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap:12px; }
+.h-atw { border:var(--line); background:var(--white); display:flex; flex-direction:column; min-width:0; }
+.h-atw.is-wide { grid-column:1 / -1; }
+.h-atw header { display:flex; justify-content:space-between; align-items:center; gap:6px; padding:6px 8px; border-bottom:1px solid rgba(127,127,127,.3); font-size:13.5px; }
+.h-atw header .icon-button { width:24px; height:24px; min-width:0; padding:0; font-size:11px; }
+.h-atw-body { padding:8px 10px 10px; font-size:13.5px; min-width:0; }
+.h-atw-big { font-size:30px; font-weight:800; font-variant-numeric:tabular-nums; line-height:1.15; }
+.h-atw-big small { font-size:13px; font-weight:500; color:var(--muted); }
+.h-atw-big.is-break { color:#2b8a3e; }
+.h-atw-row { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.h-atw-list { list-style:none; margin:4px 0 0; padding:0; display:flex; flex-direction:column; gap:4px; }
+.h-atw-notes { width:100%; font-family:Georgia, serif; }
+.h-atw-dash .card { box-shadow:none; border:0; }
+.h-atw-dash .card-head { display:none; }

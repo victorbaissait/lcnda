@@ -406,7 +406,8 @@
                 ${drafts.length ? `<section><h4>✍️ Brouillons</h4>${drafts.map(d => { const w = wc(d.data.text), t = Number(d.data.target); return `<button type="button" class="h-at-line" data-at-pick="${d.id}">${esc(d.title)} <small class="muted">${fmt(w)}${t ? ' / ' + fmt(t) : ''} mots · ${esc(STAGES[d.data.stage] || '')}</small></button>`; }).join('')}</section>` : ''}
                 ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < todayIso() ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">Toutes les tâches (${fmt(tasks.length)})</button>` : ''}</section>` : ''}
                 ${recent.length ? `<section><h4>🕘 Derniers changements</h4>${recent.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${ti(i)} ${esc(i.title)}</button>`).join('')}</section>` : ''}</div>
-                <div data-rc-host data-rc-type="atelier_project" data-rc-key="${p.id}" data-rc-hide-empty></div>`;
+                <div data-rc-host data-rc-type="atelier_project" data-rc-key="${p.id}" data-rc-hide-empty></div>
+                <div class="h-atw-box" data-atw-project="${p.id}"></div>${(setTimeout(() => ext.atelierWidgets?.(document.querySelector(`[data-atw-project="${p.id}"]`), {project: P.project, items: live(), openItem: id => { st().sel = [id]; renderProject(S().workspaceToken); }}), 0), '')}`;
         }
         if (node === 'tasks') {
             const tasks = items.filter(i => i.type === 'task').sort((a, b) => Number(a.data.done) - Number(b.data.done) || String(a.data.due || '9').localeCompare(String(b.data.due || '9')));

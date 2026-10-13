@@ -25,7 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=199">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=51">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=53">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -1084,20 +1084,21 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=311" defer></script>
+<script src="assets/js/app.js?v=312" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=12" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
 <script src="assets/js/heritage-more.js?v=25" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
-<script src="assets/js/heritage-research.js?v=12" defer></script>
+<script src="assets/js/heritage-research.js?v=13" defer></script>
 <script src="assets/js/heritage-av.js?v=6" defer></script>
 <script src="assets/js/heritage-recueils.js?v=3" defer></script>
 <script src="assets/js/heritage-studio-av.js?v=2" defer></script>
 <script src="assets/js/heritage-calendars.js?v=4" defer></script>
 <script src="assets/js/heritage-assemble.js?v=1" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
+<script src="assets/js/heritage-atelier-widgets.js?v=1" defer></script>
 <script src="assets/js/heritage-voters.js?v=2" defer></script>
 <script src="assets/js/heritage-widgets.js?v=9" defer></script>
 <script src="assets/js/heritage-studio.js?v=8" defer></script>
