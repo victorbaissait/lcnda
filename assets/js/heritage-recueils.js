@@ -244,15 +244,15 @@
         const ts = trays(), o = openTrays(), groups = new Map(ts.map(t => [t, []])), none = [];
         ls.forEach(i => (groups.get(i.tray) || none).push(i));
         const n = [...picked()].filter(id => ls.some(i => i.id === id)).length;
-        const tray = (name, list) => `<details class="h-rc-tray" data-rc-tray="${esc(name)}" ${o[name] ? 'open' : ''}><summary><span class="h-rc-tray-name">📁 ${esc(name)}</span> <small class="muted">${plural(list.length, 'photo', 'photos')}</small>
-                <span class="h-rc-tray-tools"><button type="button" class="icon-button" data-rc-trayren="${esc(name)}" title="Renommer le dossier">✎</button><button type="button" class="icon-button" data-rc-traydel="${esc(name)}" title="Supprimer le dossier (ses photos restent à ranger)">🗑</button></span></summary>
+        const tray = (name, list, k) => `<details class="h-rc-tray" data-rc-tray="${esc(name)}" ${o[name] ? 'open' : ''}><summary draggable="true" title="Glisser pour changer l’ordre des dossiers"><span class="h-rc-tray-grip" aria-hidden="true">⠿</span><span class="h-rc-tray-name">📁 ${esc(name)}</span> <small class="muted">${plural(list.length, 'photo', 'photos')}</small>
+                <span class="h-rc-tray-tools">${ts.length > 1 ? `<button type="button" class="icon-button" data-rc-traymove="-1" ${k ? '' : 'disabled'} title="Monter le dossier">↑</button><button type="button" class="icon-button" data-rc-traymove="1" ${k < ts.length - 1 ? '' : 'disabled'} title="Descendre le dossier">↓</button>` : ''}<button type="button" class="icon-button" data-rc-trayren="${esc(name)}" title="Renommer le dossier">✎</button><button type="button" class="icon-button" data-rc-traydel="${esc(name)}" title="Supprimer le dossier (ses photos restent à ranger)">🗑</button></span></summary>
                 <div class="h-rc-loose-list">${list.map(looseItem).join('') || '<p class="muted">Vide : glisse des photos ici, ou choisis ce dossier sous une photo.</p>'}</div></details>`;
         return `<div class="h-rc-loose maintenance-panel"><div class="h-rc-loose-head"><h3>🧺 À ranger <small class="muted">${plural(ls.length, 'photo', 'photos')} sans page${ts.length ? ' · trie-les d’abord dans des dossiers, puis choisis leur page' : ' : choisis sa page'}</small></h3>
                 <span class="h-rc-loose-tools"><button type="button" class="button small secondary" data-rc-traynew>+ Dossier</button>${ls.length ? `<button type="button" class="button small secondary" data-rc-pickall>${n ? 'Tout décocher' : 'Tout cocher'}</button>` : ''}</span></div>
             ${n ? `<div class="h-rc-bulk"><strong>${plural(n, 'photo choisie', 'photos choisies')}</strong>
                 <label>Mettre dans <select data-rc-bulktray><option value="">—</option><option value="__none">📂 Sans dossier</option>${ts.map(t => `<option value="${esc(t)}">📁 ${esc(t)}</option>`).join('')}<option value="__new">＋ Nouveau dossier…</option></select></label>
                 <label>Mettre sur ${pageSelect('data-rc-bulkpage', 0, true)}</label><small class="muted">Une nouvelle page = une page par photo, dans l’ordre.</small></div>` : ''}
-            ${ts.map(t => tray(t, groups.get(t))).join('')}
+            ${ts.map((t, k) => tray(t, groups.get(t), k)).join('')}
             ${none.length || !ts.length ? `<div class="h-rc-tray-none">${ts.length ? '<h4>📂 Sans dossier</h4>' : ''}<div class="h-rc-loose-list" data-rc-tray-drop="">${none.map(looseItem).join('') || '<p class="muted">Toutes les photos sont dans un dossier.</p>'}</div></div>` : ''}</div>`;
     }
     async function askTrayName(title, value = '') {
@@ -294,6 +294,9 @@
             openTrays()[to] = openTrays()[from]; await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().map(t => t === from ? to : t), rename: {from, to}}, 'Dossier renommé.'); }));
         box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!confirm(`Supprimer le dossier « ${name} » ?\n\nSes photos restent « à ranger », sans dossier.`)) return;
             await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().filter(t => t !== name)}, 'Dossier supprimé.'); }));
+        const saveOrder = list => run('save_recueil_trays', {recueil_id: D.recueil.id, trays: list});
+        box.querySelectorAll('[data-rc-traymove]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const name = b.closest('[data-rc-tray]').dataset.rcTray, list = [...trays()], i = list.indexOf(name), j = i + Number(b.dataset.rcTraymove);
+            if (i < 0 || j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; saveOrder(list); }));
         box.querySelectorAll('[data-rc-check]').forEach(c => c.addEventListener('change', () => { const id = imgId(c); if (c.checked) picked().add(id); else picked().delete(id); paint(); }));
         box.querySelectorAll('[data-rc-trayset]').forEach(sel => sel.addEventListener('change', async () => { let t = sel.value; if (t === '__new') { t = await addTray(); if (!t) { paint(); return; } } setTray([imgId(sel)], t); }));
         box.querySelectorAll('[data-rc-assign]').forEach(sel => sel.addEventListener('change', async () => { const t = await pageTarget(sel.value); if (!t) { sel.value = ''; return; } place([imgId(sel)], t); }));
@@ -301,12 +304,18 @@
         box.querySelector('[data-rc-bulktray]')?.addEventListener('change', async e => { let t = e.target.value; if (!t) return; if (t === '__new') { t = await addTray(); if (!t) { paint(); return; } } const ids = chosen(); picked().clear(); setTray(ids, t === '__none' ? '' : t); });
         box.querySelector('[data-rc-bulkpage]')?.addEventListener('change', async e => { const t = await pageTarget(e.target.value); if (!t) { e.target.value = ''; return; } place(chosen(), t); });
         // Glisser une photo (ou la sélection) sur un dossier
-        let dragIds = [];
-        box.querySelectorAll('.h-rc-loose-item').forEach(it => it.addEventListener('dragstart', e => { const id = Number(it.dataset.rcImg); dragIds = picked().has(id) ? chosen() : [id]; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'rc-img'); }));
+        let dragIds = [], dragTray = null;
+        box.querySelectorAll('details[data-rc-tray] > summary').forEach(sm => {
+            sm.addEventListener('dragstart', e => { dragTray = sm.parentElement.dataset.rcTray; dragIds = []; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'rc-tray'); sm.parentElement.classList.add('is-dragging'); });
+            sm.addEventListener('dragend', () => { sm.parentElement.classList.remove('is-dragging'); dragTray = null; });
+        });
+        box.querySelectorAll('.h-rc-loose-item').forEach(it => it.addEventListener('dragstart', e => { e.stopPropagation(); dragTray = null; const id = Number(it.dataset.rcImg); dragIds = picked().has(id) ? chosen() : [id]; e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'rc-img'); }));
         box.querySelectorAll('details[data-rc-tray], [data-rc-tray-drop]').forEach(z => {
-            z.addEventListener('dragover', e => { if (dragIds.length) { e.preventDefault(); z.classList.add('is-drop'); } });
-            z.addEventListener('dragleave', () => z.classList.remove('is-drop'));
-            z.addEventListener('drop', e => { e.preventDefault(); z.classList.remove('is-drop'); if (!dragIds.length) return; const ids = dragIds; dragIds = []; ids.forEach(id => picked().delete(id)); setTray(ids, z.dataset.rcTray ?? ''); });
+            z.addEventListener('dragover', e => { if (dragIds.length || (dragTray && z.dataset.rcTray && z.dataset.rcTray !== dragTray)) { e.preventDefault(); z.classList.add(dragTray ? 'is-drop-tray' : 'is-drop'); } });
+            z.addEventListener('dragleave', () => z.classList.remove('is-drop', 'is-drop-tray'));
+            z.addEventListener('drop', e => { e.preventDefault(); z.classList.remove('is-drop', 'is-drop-tray');
+                if (dragTray) { const from = dragTray, to = z.dataset.rcTray; dragTray = null; if (!to || to === from) return; const list = trays().filter(t => t !== from); const i = trays().indexOf(from) < trays().indexOf(to) ? list.indexOf(to) + 1 : list.indexOf(to); list.splice(i, 0, from); saveOrder(list); return; }
+                if (!dragIds.length) return; const ids = dragIds; dragIds = []; ids.forEach(id => picked().delete(id)); setTray(ids, z.dataset.rcTray ?? ''); });
         });
     }
 

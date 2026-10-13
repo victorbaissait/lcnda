@@ -1074,6 +1074,10 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-rc-tray > .h-rc-loose-list { padding:0 10px 10px; }
 .h-rc-tray.is-drop, .h-rc-tray-none .is-drop { background:color-mix(in srgb, var(--accent, #2f6f5e) 12%, transparent); }
 .h-rc-tray-none h4 { margin:6px 0; }
+.h-rc-tray-grip { cursor:grab; color:var(--muted, #888); }
+.h-rc-tray.is-dragging { opacity:.5; }
+.h-rc-tray.is-drop-tray { box-shadow:0 -3px 0 var(--accent, #2f6f5e); }
+.h-rc-tray-tools .icon-button[disabled] { opacity:.35; }
 .h-rc-tray-none .h-rc-loose-list { min-height:40px; border-radius:8px; }
 .h-rc-table td { vertical-align:top; }
 .h-rc-excerpt { max-width:380px; font-size:13px; }
