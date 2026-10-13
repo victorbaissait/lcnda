@@ -754,3 +754,9 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-lv-crule select, .h-lv-crule input:not([type=color]) { flex:1 1 8rem; min-width:0; }
 .h-lv-crule input[type=color] { width:3rem; height:2rem; padding:0; }
 @media print { .h-lv-modes { display:none; } }
+/* Circuits : étapes ajoutées pendant la création */
+.h-trip-drafts { display:grid; gap:6px; margin:6px 0 8px; }
+.h-trip-draft { display:grid; grid-template-columns:auto minmax(0, 1fr) auto; gap:10px; align-items:center; padding:8px 10px; border:1px solid var(--line, #ddd); border-left:4px solid #0066cc; background:var(--panel, #fff); }
+.h-trip-draft-day { font-weight:700; color:#0066cc; white-space:nowrap; }
+.h-trip-draft .muted { font-size:13px; overflow-wrap:anywhere; }
+.h-trip-draft-tools { display:flex; gap:6px; align-items:center; }

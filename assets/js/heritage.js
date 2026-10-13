@@ -990,6 +990,7 @@
             <label>Du<input type="date" name="date_start" value="${esc(t.date_start || '')}"></label><label>Au<input type="date" name="date_end" value="${esc(t.date_end || '')}"></label>
             <label>Étapes par jour, au plus<input type="number" name="stops_per_day" min="1" max="20" value="${Number(t.stops_per_day) || 6}"></label></div>
             <h4>Pour qui ?</h4><div class="h-rows" data-h-rows="trip-people">${(people.length ? people : [{}]).map(row).join('')}</div><button type="button" class="button small secondary" data-h-row-add="trip-people">+ Personne ou branche</button><template data-h-template="trip-people">${row()}</template>
+            ${t.id ? '' : `<h4>Étapes</h4><p class="muted">Ajoute dès maintenant autant d’étapes que tu veux, avec leur logistique, leur matériel, ce que tu vas chercher et une liste à cocher. « Préparer le circuit » ajoutera en plus les lieux de tes ancêtres.</p><div class="h-trip-drafts" data-h-trip-drafts></div><button type="button" class="button small secondary" data-h-draft-add>+ Étape</button>`}
             <label class="h-block-label">Notes (hébergement, rendez-vous, personnes à rencontrer…)<textarea name="notes" rows="2">${esc(t.notes || '')}</textarea></label>
             ${LP('field_trip', t.labels)}<div class="page-actions action-zone"><button class="button" type="submit" name="generate" value="1">Enregistrer et préparer le circuit</button><button class="button secondary" type="submit" name="generate" value="0">Enregistrer seulement</button><button class="button secondary" type="button" data-h-trip-cancel>Annuler</button></div>
             <p class="muted">Préparer à nouveau remplace les étapes non faites ; les étapes cochées « faite » sont gardées.</p></form>`;
@@ -997,7 +998,22 @@
     function bindTripForm(t) {
         const form = A().$('#h-trip-form');
         A().bindCollectionPersonFields(form); form.scrollIntoView({block: 'start'});
-        form.querySelector('[data-h-trip-cancel]').addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, t.id ? {trip: t.id} : {back: true}));
+        form.querySelector('[data-h-trip-cancel]').addEventListener('click', () => { if (drafts.length && !confirm('Abandonner ce circuit et ses étapes ?')) return; ext.lists.field_trips(++S().workspaceToken, t.id ? {trip: t.id} : {back: true}); });
+        // étapes ajoutées pendant la création : gardées ici, enregistrées avec le circuit
+        const drafts = [], draftBox = form.querySelector('[data-h-trip-drafts]');
+        const draftNames = x => Object.fromEntries(Object.entries(x.person_names || {}).map(([pid, n]) => [pid, {id: Number(pid), display_name: n, first_name: n, last_name: ''}]));
+        const paintDrafts = () => { if (!draftBox) return;
+            const sorted = drafts.map((d, i) => [d, i]).sort((a, b) => (Number(a[0].day) || 1) - (Number(b[0].day) || 1));
+            draftBox.innerHTML = sorted.map(([d, i]) => { const x = d.extra || {}, n = (x.checklist || []).length;
+                return `<div class="h-trip-draft"><span class="h-trip-draft-day">Jour ${Number(d.day) || 1}</span><div><strong>${esc(d.title || 'Étape sans titre')}</strong> <small class="muted">${esc(tripKinds[d.kind] || '')}</small><div class="muted">${esc([d.place_text, x.time_from && 'arrivée ' + x.time_from, x.transport, x.goals && 'je cherche : ' + x.goals, n && n + ' ligne' + (n > 1 ? 's' : '') + ' à cocher'].filter(Boolean).join(' · '))}</div></div>
+                    <span class="h-trip-draft-tools"><button type="button" class="button small secondary" data-h-draft-edit="${i}">Modifier</button><button type="button" class="icon-button" data-h-draft-del="${i}" title="Retirer">✕</button></span></div>`; }).join('') || '<p class="muted">Aucune étape pour l’instant.</p>'; };
+        const editDraft = i => { const d = i === null ? {kind: 'autre', day: drafts.length ? Math.max(...drafts.map(x => Number(x.day) || 1)) : 1, _draft: i !== null} : {...drafts[i], _draft: true};
+            openStopDialog(d, draftNames(d.extra || {}), {onSave: async (v, extra) => { const row = {...v, lat: v.place_text_lat, lon: v.place_text_lon, extra}; if (i === null) drafts.push(row); else drafts[i] = row; paintDrafts(); }}); };
+        paintDrafts();
+        form.querySelector('[data-h-draft-add]')?.addEventListener('click', () => editDraft(null));
+        draftBox?.addEventListener('click', e => { const ed = e.target.closest('[data-h-draft-edit]'), del = e.target.closest('[data-h-draft-del]');
+            if (ed) editDraft(Number(ed.dataset.hDraftEdit));
+            if (del && confirm('Retirer cette étape ?')) { drafts.splice(Number(del.dataset.hDraftDel), 1); paintDrafts(); } });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form), generate = event.submitter?.value === '1';
@@ -1005,7 +1021,10 @@
             if (generate && !people.length) return toast('Choisis au moins une personne dans les suggestions.', 'error');
             try {
                 const saved = await api('save_field_trip', {}, {method: 'POST', body: {id: t.id, title: v.title, start_place: v.start_place, date_start: v.date_start, date_end: v.date_end, stops_per_day: v.stops_per_day, notes: v.notes, status: t.status || 'todo', people, generate: generate ? 1 : 0}});
-                toast(generate ? 'Circuit préparé.' : 'Circuit enregistré.');
+                let failed = 0;
+                for (const d of drafts) { try { await api('save_field_trip_stop', {}, {method: 'POST', body: {...d, id: 0, trip_id: saved.result.id, done: 0}}); } catch (_) { failed++; } }
+                if (failed) toast(`${failed} étape(s) non enregistrée(s) : ajoute-les depuis le circuit.`, 'error');
+                else toast(generate ? 'Circuit préparé.' : 'Circuit enregistré.');
                 ext.lists.field_trips(++S().workspaceToken, {trip: saved.result.id});
             } catch (error) { toast(error.message, 'error'); }
         });
@@ -1115,20 +1134,27 @@
         ws.querySelectorAll('[data-h-stop-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette étape ?')) return; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopDelete}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-edit]').forEach(b => b.addEventListener('click', () => {
             const s = t.stops.find(x => Number(x.id) === Number(b.dataset.hStopEdit)) || {id: 0, kind: 'autre', day: dayNums[dayNums.length - 1] || 1};
-            openDialog({
-                eyebrow: 'ÉTAPE', title: s.id ? 'Modifier l’étape' : 'Nouvelle étape',
-                body: `<div class="form-grid"><label>Sorte<select name="kind">${Object.entries(tripKinds).map(([kk, l]) => `<option value="${kk}" ${s.kind === kk ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Jour<input type="number" name="day" min="1" value="${Number(s.day) || 1}"></label>
-                    <label class="span-2">Titre<input name="title" value="${esc(s.title || '')}" placeholder="Église Saint-Martin"></label><label>Commune${placeField('place_text', s.place_text, s.lat, s.lon, 'Commune')}</label><label>Adresse<input name="address" value="${esc(s.address || '')}"></label>
-                    <label class="span-2">Pourquoi (personnes, actes)<textarea name="people_text" rows="2">${esc(s.people_text || '')}</textarea></label><label class="span-2">À photographier<textarea name="to_photograph" rows="2">${esc(s.to_photograph || '')}</textarea></label>
-                    <label class="span-2">Horaires d’ouverture<input name="opening_hours" value="${esc(s.opening_hours || '')}" placeholder="Mardi-vendredi 9 h – 17 h, sur réservation"></label></div>
-                    ${stopExtraForm(s.extra || {}, t.stop_people || {})}
-                    <label>Notes<textarea name="notes" rows="2">${esc(s.notes || '')}</textarea></label>`,
-                wide: true,
-                onOpen: dlg => bindStopExtraForm(dlg),
-                onSubmit: async form => { const v = values(form); await api('save_field_trip_stop', {}, {method: 'POST', body: {...v, id: s.id, trip_id: id, lat: v.place_text_lat, lon: v.place_text_lon, done: s.done, extra: readStopExtra(form)}}); toast('Étape enregistrée.'); reload(); },
+            openStopDialog(s, t.stop_people || {}, {
+                onSave: async (v, extra) => { await api('save_field_trip_stop', {}, {method: 'POST', body: {...v, id: s.id, trip_id: id, lat: v.place_text_lat, lon: v.place_text_lon, done: s.done, extra}}); toast('Étape enregistrée.'); reload(); },
                 onDelete: s.id ? async () => { if (!confirm('Supprimer cette étape ?')) return false; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: s.id}}); reload(); } : null,
             });
         }));
+    }
+    /** Fenêtre d'une étape (dans un circuit, ou pendant la création du circuit). */
+    function openStopDialog(s, peopleMap, {onSave, onDelete = null}) {
+        openDialog({
+            eyebrow: 'ÉTAPE', title: s.id || s._draft ? 'Modifier l’étape' : 'Nouvelle étape',
+            body: `<div class="form-grid"><label>Sorte<select name="kind">${Object.entries(tripKinds).map(([kk, l]) => `<option value="${kk}" ${s.kind === kk ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Jour<input type="number" name="day" min="1" value="${Number(s.day) || 1}"></label>
+                    <label class="span-2">Titre<input name="title" value="${esc(s.title || '')}" placeholder="Église Saint-Martin"></label><label>Commune${placeField('place_text', s.place_text, s.lat, s.lon, 'Commune')}</label><label>Adresse<input name="address" value="${esc(s.address || '')}"></label>
+                    <label class="span-2">Pourquoi (personnes, actes)<textarea name="people_text" rows="2">${esc(s.people_text || '')}</textarea></label><label class="span-2">À photographier<textarea name="to_photograph" rows="2">${esc(s.to_photograph || '')}</textarea></label>
+                    <label class="span-2">Horaires d’ouverture<input name="opening_hours" value="${esc(s.opening_hours || '')}" placeholder="Mardi-vendredi 9 h – 17 h, sur réservation"></label></div>
+                    ${stopExtraForm(s.extra || {}, peopleMap)}
+                    <label>Notes<textarea name="notes" rows="2">${esc(s.notes || '')}</textarea></label>`,
+            wide: true,
+            onOpen: dlg => bindStopExtraForm(dlg),
+            onSubmit: async form => { const extra = readStopExtra(form); extra.person_names = Object.fromEntries([...form.querySelectorAll('[data-x-person]')].map(c => [c.dataset.xPerson, c.firstChild?.textContent.trim() || ''])); await onSave(values(form), extra); },
+            onDelete,
+        });
     }
     // détails d'une étape dans le carnet imprimé (cases à cocher à l'encre)
     function printStopExtra(x) {
