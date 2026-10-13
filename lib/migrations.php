@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 23;
+const SCHEMA_VERSION = 24;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -44,6 +44,7 @@ function migration_steps(): array
         21 => 'schema_v21',
         22 => 'schema_v22',
         23 => 'schema_v23',
+        24 => 'schema_v24',
     ];
 }
 
@@ -1581,4 +1582,56 @@ function schema_v23(PDO $pdo): void
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_custom_list_records_list ON custom_list_records(list_id, status, position)');
+}
+
+/** n°24 : Atelier de recherche — projets (thèse, livre…), dossiers imbriqués sans limite, éléments (références, notes, citations, images…). */
+function schema_v24(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS atelier_projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        subtitle TEXT NOT NULL DEFAULT '',
+        kind TEXT NOT NULL DEFAULT 'livre',
+        icon TEXT NOT NULL DEFAULT '📚',
+        color TEXT NOT NULL DEFAULT '#0066cc',
+        description TEXT NOT NULL DEFAULT '',
+        target_words INTEGER NOT NULL DEFAULT 0,
+        deadline TEXT NOT NULL DEFAULT '',
+        status TEXT NOT NULL DEFAULT 'active',
+        position INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS atelier_folders (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        project_id INTEGER NOT NULL REFERENCES atelier_projects(id) ON DELETE CASCADE,
+        parent_id INTEGER REFERENCES atelier_folders(id) ON DELETE CASCADE,
+        name TEXT NOT NULL DEFAULT '',
+        icon TEXT NOT NULL DEFAULT '',
+        color TEXT NOT NULL DEFAULT '',
+        notes TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS atelier_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        project_id INTEGER NOT NULL REFERENCES atelier_projects(id) ON DELETE CASCADE,
+        type TEXT NOT NULL DEFAULT 'note',
+        title TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        tags_json TEXT NOT NULL DEFAULT '[]',
+        starred INTEGER NOT NULL DEFAULT 0,
+        trashed INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS atelier_item_folders (
+        item_id INTEGER NOT NULL REFERENCES atelier_items(id) ON DELETE CASCADE,
+        folder_id INTEGER NOT NULL REFERENCES atelier_folders(id) ON DELETE CASCADE,
+        position INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (item_id, folder_id)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_atelier_folders_project ON atelier_folders(project_id, parent_id, position)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_atelier_items_project ON atelier_items(project_id, trashed)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_atelier_item_folders_folder ON atelier_item_folders(folder_id)');
 }
