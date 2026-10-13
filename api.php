@@ -272,6 +272,8 @@ try {
         'atelier_projects' => json_response(atelier_projects($pdo)),
         'media_av_list' => json_response(media_av_list($pdo, safe_text($_GET['kind'] ?? 'audio'))),
         'recueils' => json_response(recueils_list($pdo, safe_text($_GET['q'] ?? ''))),
+        'genea_calendar' => json_response(genea_calendar_events($pdo, $_GET)),
+        'my_agenda' => json_response(my_agenda($pdo)),
         'recueil' => json_response(recueil_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'recueils_for' => json_response(['recueils' => recueils_for_entity($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['key'] ?? ''))]),
         'recueil_search' => json_response(recueil_search_entities($pdo, safe_text($_GET['type'] ?? ''), safe_text($_GET['q'] ?? ''))),

@@ -29,7 +29,8 @@
     "test:merge": "node tests/test-merge.js",
     "test:atelier": "node tests/test-atelier.js",
     "test:media-av": "node tests/test-media-av.js",
-    "test:recueils": "node tests/test-recueils.js"
+    "test:recueils": "node tests/test-recueils.js",
+    "test:calendars": "node tests/test-calendars.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",
