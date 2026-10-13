@@ -25,7 +25,7 @@ header('Cache-Control: no-store, private');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=199">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=62">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=64">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -1089,7 +1089,7 @@ header('Cache-Control: no-store, private');
 <script src="assets/js/heritage.js?v=12" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=26" defer></script>
+<script src="assets/js/heritage-more.js?v=27" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=15" defer></script>
 <script src="assets/js/heritage-av.js?v=6" defer></script>

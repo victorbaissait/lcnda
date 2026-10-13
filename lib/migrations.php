@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 31;
+const SCHEMA_VERSION = 32;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -52,6 +52,7 @@ function migration_steps(): array
         29 => 'schema_v29',
         30 => 'schema_v30',
         31 => 'schema_v31',
+        32 => 'schema_v32',
     ];
 }
 
@@ -1809,4 +1810,11 @@ function schema_v31(PDO $pdo): void
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(insee, old_key)
     )");
+}
+
+/** Fiche d'un village : un bloc-notes libre. */
+function schema_v32(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(village_profiles)')->fetchAll(), 'name');
+    if ($cols && !in_array('memo', $cols, true)) { $pdo->exec("ALTER TABLE village_profiles ADD COLUMN memo TEXT NOT NULL DEFAULT ''"); }
 }

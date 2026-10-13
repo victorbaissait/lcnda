@@ -8969,6 +8969,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_help_request' => save_help_request($pdo,$data),
             'save_village_profile' => save_village_profile($pdo,$data),
             'save_village_populations' => save_village_populations($pdo,$data),
+            'save_village_memo' => save_village_memo($pdo,$data),
             'save_my_list' => save_my_list($pdo,$data),
             'delete_my_list' => delete_my_list($pdo,$data),
             'save_my_list_row' => save_my_list_row($pdo,$data),

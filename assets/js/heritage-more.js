@@ -994,6 +994,53 @@
         }
         return `<div class="h-decades">${bars.join('')}</div>`;
     }
+    /* ─── Fiche d'un village : parties rangées, masquées, en demi ou pleine largeur (genealogie-village-layout) ─── */
+    const VILLAGE_SECTIONS = [['stats', '🔢 Les chiffres', 'full'], ['map', '🗺️ La carte', 'half'], ['church', '⛪ Église et paroisse', 'half'], ['population', '👥 Population au fil des recensements', 'half'], ['jobs', '⚒️ Métiers dominants', 'half'],
+        ['addrmap', '🗺️ Plan du recensement (maisons, année par année)', 'full'], ['memo', '🗒️ Bloc-notes', 'half'], ['families', '🏠 Les familles qui y ont vécu', 'full'], ['decades', '📜 Actes par décennie', 'full'], ['notes', '📝 Notes et photos', 'full'],
+        ['recueils', '📚 Recueils', 'full'], ['popchart', '📈 Évolution du nombre d’habitants', 'full']];
+    function villageLayout() {
+        let saved = {};
+        try { saved = JSON.parse(localStorage.getItem('genealogie-village-layout') || '{}') || {}; } catch (_) {}
+        const keys = VILLAGE_SECTIONS.map(x => x[0]);
+        const order = [...(Array.isArray(saved.order) ? saved.order.filter(k => keys.includes(k)) : []), ...keys.filter(k => !(saved.order || []).includes(k))];
+        return {order, hidden: Array.isArray(saved.hidden) ? saved.hidden.filter(k => keys.includes(k)) : [], width: saved.width && typeof saved.width === 'object' ? saved.width : {}};
+    }
+    const villageWidth = (l, k) => l.width[k] || VILLAGE_SECTIONS.find(x => x[0] === k)?.[2] || 'full';
+    function arrangeVillage(ws) {
+        const l = villageLayout(), page = ws.querySelector('.h-village');
+        const flow = document.createElement('div'); flow.className = 'h-village-flow';
+        l.order.forEach(k => { const el = page.querySelector(`[data-vsec="${k}"]`); if (!el) return; el.hidden = l.hidden.includes(k); el.classList.toggle('is-half', villageWidth(l, k) === 'half'); flow.appendChild(el); });
+        const grid = page.querySelector('.h-village-grid');
+        (grid || page.lastElementChild)?.insertAdjacentElement(grid ? 'beforebegin' : 'afterend', flow);
+        grid?.remove();
+    }
+    function villageLayoutDialog(after) {
+        let l = villageLayout();
+        const save = () => { try { localStorage.setItem('genealogie-village-layout', JSON.stringify(l)); } catch (_) {} };
+        const body = () => `<p class="muted">Pour toutes les fiches de village. Les flèches rangent les parties ; décocher en masque une ; « demi » les met deux par ligne.</p>
+            <table class="data-table h-flag-table"><thead><tr><th>Ordre</th><th>Partie</th><th>Montrée</th><th>Largeur</th></tr></thead><tbody>${l.order.map((k, i) => `<tr><td><button type="button" class="icon-button" data-vl-move="${k}" data-dir="-1" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-vl-move="${k}" data-dir="1" ${i < l.order.length - 1 ? '' : 'disabled'}>↓</button></td>
+                <td>${esc(VILLAGE_SECTIONS.find(x => x[0] === k)[1])}</td><td><input type="checkbox" data-vl-show="${k}" ${l.hidden.includes(k) ? '' : 'checked'}></td>
+                <td><select data-vl-width="${k}"><option value="full" ${villageWidth(l, k) === 'full' ? 'selected' : ''}>pleine</option><option value="half" ${villageWidth(l, k) === 'half' ? 'selected' : ''}>demi</option></select></td></tr>`).join('')}</tbody></table>
+            <p><button type="button" class="link-button" data-vl-reset>↺ Revenir à l’ordre d’origine</button></p>`;
+        ext.openDialog({eyebrow: 'FICHE D’UN VILLAGE', title: 'Organiser la fiche', wide: true, submitLabel: 'Fermer', body: body(),
+            onOpen: d => {
+                const box = d.querySelector('.h-dialog-body');
+                const repaint = () => { box.innerHTML = body(); save(); };
+                box.addEventListener('click', e => {
+                    const m = e.target.closest('[data-vl-move]');
+                    if (m) { const i = l.order.indexOf(m.dataset.vlMove), j = i + Number(m.dataset.dir); [l.order[i], l.order[j]] = [l.order[j], l.order[i]]; repaint(); }
+                    if (e.target.closest('[data-vl-reset]')) { l = {order: VILLAGE_SECTIONS.map(x => x[0]), hidden: [], width: {}}; repaint(); }
+                });
+                box.addEventListener('change', e => {
+                    const t = e.target;
+                    if (t.dataset.vlShow) { l.hidden = t.checked ? l.hidden.filter(x => x !== t.dataset.vlShow) : [...new Set([...l.hidden, t.dataset.vlShow])]; save(); }
+                    if (t.dataset.vlWidth) { l.width[t.dataset.vlWidth] = t.value; save(); }
+                });
+                d.addEventListener('close', () => after(), {once: true});
+            },
+            onSubmit: () => true,
+        });
+    }
     async function renderVillage(token, key) {
         const st = S();
         let v;
@@ -1009,39 +1056,48 @@
         const geoportail = v.lat !== null ? `https://www.geoportail.gouv.fr/carte?c=${v.lon},${v.lat}&z=14&l0=BNF-IGNF_GEOGRAPHICALGRIDSYSTEMS.CASSINI::GEOPORTAIL:OGC:WMTS(1)&permalink=yes` : '';
         const topJob = Math.max(1, ...v.jobs.map(j => j.count));
         A().$('#workspace').innerHTML = `<section class="page collection-page h-village">${header('FICHE D’UN VILLAGE', v.name, esc([v.county, v.state !== v.county ? v.state : '', v.country].filter(Boolean).join(' · ')) + (v.insee ? ` · code INSEE ${esc(v.insee)}` : '') + (v.places.length > 1 ? `<br><small>Lieux de la base rattachés : ${esc(v.places.join(', '))}</small>` : ''),
-                `<button type="button" class="button secondary" data-h-village-back>← Toutes les communes</button><button type="button" class="button secondary" data-h-village-mono>Monographie complète</button>${tools('data-h-village-edit', 'data-h-village-clear', 'la fiche du village')}`)}
+                `<button type="button" class="button secondary" data-h-village-back>← Toutes les communes</button><button type="button" class="button secondary" data-h-village-layout title="Ranger les parties de la fiche, en masquer, choisir leur largeur">⚙️ Organiser la fiche</button><button type="button" class="button secondary" data-h-village-mono>Monographie complète</button>${tools('data-h-village-edit', 'data-h-village-clear', 'la fiche du village')}`)}
             ${ext.labelChips(v.labels)}
-            <div class="h-village-stats"><span><strong>${fmt(v.people_count)}</strong> personnes de la famille</span><span>${plural(v.families.length, 'famille', 'familles').replace(/^(\S+)/, '<strong>$1</strong>')}</span><span><strong>${fmt(v.acts.baptemes)}</strong> naissances / baptêmes</span><span><strong>${fmt(v.acts.mariages)}</strong> mariages</span><span><strong>${fmt(v.acts.deces)}</strong> décès / sépultures</span>${v.current_population ? `<span><strong>${fmt(v.current_population)}</strong> habitants aujourd’hui</span>` : ''}</div>
+            <div class="h-village-stats" data-vsec="stats"><span><strong>${fmt(v.people_count)}</strong> personnes de la famille</span><span>${plural(v.families.length, 'famille', 'familles').replace(/^(\S+)/, '<strong>$1</strong>')}</span><span><strong>${fmt(v.acts.baptemes)}</strong> naissances / baptêmes</span><span><strong>${fmt(v.acts.mariages)}</strong> mariages</span><span><strong>${fmt(v.acts.deces)}</strong> décès / sépultures</span>${v.current_population ? `<span><strong>${fmt(v.current_population)}</strong> habitants aujourd’hui</span>` : ''}</div>
             <div class="h-village-grid">
-            <section class="maintenance-panel h-village-mapbox"><h3>🗺️ La carte</h3><div class="h-tabs">${villageMapButtons().map(k => `<button type="button" class="button small ${k === bg ? '' : 'secondary'}" data-h-village-bg="${esc(k)}">${esc(tileLabel(k))}</button>`).join('')}
+            <section class="maintenance-panel h-village-mapbox" data-vsec="map"><h3>🗺️ La carte</h3><div class="h-tabs">${villageMapButtons().map(k => `<button type="button" class="button small ${k === bg ? '' : 'secondary'}" data-h-village-bg="${esc(k)}">${esc(tileLabel(k))}</button>`).join('')}
                     <select data-h-village-bgsel aria-label="Autres fonds de carte"><option value="">Autres fonds…</option>${tileCats().map(c => `<optgroup label="${esc(c.label)}">${c.items.map(([k, l]) => `<option value="${esc(k)}" ${k === bg && !villageMapButtons().includes(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select><span class="spacer"></span><button type="button" class="icon-button" data-h-village-zoom="-1" title="Dézoomer">−</button><button type="button" class="icon-button" data-h-village-zoom="1" title="Zoomer">+</button></div>
                 <div class="h-village-mapwrap">${villageMapHtml(v, bg, zoom)}</div>
                 ${geoportail ? `<p class="h-links"><a href="${esc(geoportail)}" target="_blank" rel="noopener noreferrer">Ouvrir sur le Géoportail ↗</a> · <button type="button" class="link-button" data-h-village-main>Voir sur la carte de l’app</button></p>` : ''}</section>
-            <section class="maintenance-panel"><h3>⛪ Église et paroisse</h3>
+            <section class="maintenance-panel" data-vsec="church"><h3>⛪ Église et paroisse</h3>
                 <dl class="data-list">${pr.church ? `<div class="data-row"><dt>Église</dt><dd>${esc(pr.church)}</dd></div>` : ''}${pr.patron_saint ? `<div class="data-row"><dt>Saint patron</dt><dd>${esc(pr.patron_saint)}</dd></div>` : ''}${pr.diocese ? `<div class="data-row"><dt>Diocèse</dt><dd>${esc(pr.diocese)}</dd></div>` : ''}</dl>
                 ${!pr.church && !pr.patron_saint && !pr.diocese ? '<p class="muted">Église, saint patron et diocèse à noter (crayon en haut).</p>' : ''}
                 ${v.parish.length ? `<h4>Avant la Révolution</h4><ul>${v.parish.map(x => `<li>Dépendait de la paroisse de <strong>${esc(x.parish)}</strong>${x.until ? ` jusqu’en ${x.until}` : ''}${x.from ? ` (depuis ${x.from})` : ''}${x.note ? ` — <small>${esc(x.note)}</small>` : ''}</li>`).join('')}</ul>` : '<p class="muted">Aucun rattachement à une autre paroisse noté (Listes → Paroisses d’Ancien Régime).</p>'}
                 ${v.registers.length ? `<h4>Registres en ligne</h4><ul>${v.registers.map(l => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${esc(l.label)} ↗</a>${l.note ? ` <small class="muted">${esc(l.note)}</small>` : ''}</li>`).join('')}</ul>` : ''}
                 ${v.graves.length ? `<h4>Cimetières</h4><ul>${v.graves.map(g => `<li>${esc(g.cemetery_name || 'Cimetière')} <small>(${plural(g.n, 'sépulture notée', 'sépultures notées')})</small></li>`).join('')}</ul>` : ''}</section>
-            <section class="maintenance-panel"><h3>👥 Population au fil des recensements</h3>${pops.length > 1 ? '<p class="muted">La courbe est tout en bas de la fiche.</p>' : '<p class="muted">Les chiffres sont récupérés sur Wikipédia (en bas de la fiche) ; tu peux aussi les saisir à la main (crayon en haut).</p>'}
+            <section class="maintenance-panel" data-vsec="population"><h3>👥 Population au fil des recensements</h3>${pops.length > 1 ? '<p class="muted">La courbe est tout en bas de la fiche.</p>' : '<p class="muted">Les chiffres sont récupérés sur Wikipédia (en bas de la fiche) ; tu peux aussi les saisir à la main (crayon en haut).</p>'}
                 ${pops.length ? `<details><summary>Les chiffres (${pops.length})</summary><table class="data-table"><tbody>${pops.map(p => `<tr><td>${p[0]}</td><td>${fmt(p[1])} habitants</td></tr>`).join('')}</tbody></table></details>` : ''}
                 ${v.census.length ? `<h4>Recensements de la famille ici</h4><table class="data-table"><thead><tr><th>Année</th><th>Foyers</th><th>Personnes relevées</th></tr></thead><tbody>${v.census.map(c => `<tr><td><button type="button" class="table-link" data-h-census-open="${esc(String(c.year))}" title="Voir les foyers recensés">${c.year}</button></td><td>${c.households}</td><td>${c.members}</td></tr>`).join('')}</tbody></table><p><button type="button" class="button small secondary" data-h-census-open="">📋 Tous les foyers recensés ici</button></p>` : ''}
                 <p class="h-links"><a href="${esc(wiki)}" target="_blank" rel="noopener noreferrer">Wikipédia (évolution démographique) ↗</a> · <a href="http://cassini.ehess.fr/" target="_blank" rel="noopener noreferrer">Des villages de Cassini aux communes d’aujourd’hui (EHESS) ↗</a></p></section>
-            <section class="maintenance-panel"><h3>⚒️ Métiers dominants</h3>${v.jobs.length ? `<ul class="h-bars">${v.jobs.map(j => `<li><span class="h-bar-label">${esc(j.name)}</span><span class="h-bar"><i style="width:${Math.round(j.count / topJob * 100)}%"></i></span><span>${j.count}${j.from ? ` <small class="muted">${j.from}${j.to && j.to !== j.from ? '–' + j.to : ''}</small>` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Aucun métier noté pour les personnes de cette commune.</p>'}</section>
+            <section class="maintenance-panel" data-vsec="jobs"><h3>⚒️ Métiers dominants</h3>${v.jobs.length ? `<ul class="h-bars">${v.jobs.map(j => `<li><span class="h-bar-label">${esc(j.name)}</span><span class="h-bar"><i style="width:${Math.round(j.count / topJob * 100)}%"></i></span><span>${j.count}${j.from ? ` <small class="muted">${j.from}${j.to && j.to !== j.from ? '–' + j.to : ''}</small>` : ''}</span></li>`).join('')}</ul>` : '<p class="muted">Aucun métier noté pour les personnes de cette commune.</p>'}</section>
             </div>
-            <section class="maintenance-panel"><h3>🏠 Les familles qui y ont vécu (${v.families.length})</h3>${v.families.length ? `<div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr>${['Famille', 'Personnes', 'Période', 'Générations'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th>Qui</th></tr></thead><tbody>${v.families.map(f => `<tr><td data-sort-value="${esc(f.name.toLowerCase())}"><strong>${esc(f.name)}</strong>${f.variants.length > 1 ? `<br><small class="muted">${esc(f.variants.join(', '))}</small>` : ''}</td><td data-sort-value="${f.count}">${f.count}</td><td data-sort-value="${f.from || 9999}">${f.from ? esc(f.from + (f.to && f.to !== f.from ? '–' + f.to : '')) : '—'}</td><td data-sort-value="${f.generations}">${f.generations}</td><td>${(() => { const link = p => personLink(p.id, pname(p) + (p.birth_year ? ` (${p.birth_year})` : ''));
+            <section class="maintenance-panel" data-vsec="families"><h3>🏠 Les familles qui y ont vécu (${v.families.length})</h3>${v.families.length ? `<div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr>${['Famille', 'Personnes', 'Période', 'Générations'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th>Qui</th></tr></thead><tbody>${v.families.map(f => `<tr><td data-sort-value="${esc(f.name.toLowerCase())}"><strong>${esc(f.name)}</strong>${f.variants.length > 1 ? `<br><small class="muted">${esc(f.variants.join(', '))}</small>` : ''}</td><td data-sort-value="${f.count}">${f.count}</td><td data-sort-value="${f.from || 9999}">${f.from ? esc(f.from + (f.to && f.to !== f.from ? '–' + f.to : '')) : '—'}</td><td data-sort-value="${f.generations}">${f.generations}</td><td>${(() => { const link = p => personLink(p.id, pname(p) + (p.birth_year ? ` (${p.birth_year})` : ''));
                     return f.people.length > 8 ? `<span>${f.people.slice(0, 8).map(link).join(', ')}</span><span hidden>, ${f.people.slice(8).map(link).join(', ')}</span> <button type="button" class="link-button" data-h-village-more data-n="${f.people.length - 8}">et ${f.people.length - 8} autre${f.people.length - 8 > 1 ? 's' : ''} ▾</button>` : f.people.map(link).join(', '); })()}</td></tr>`).join('')}</tbody></table></div>` : empty('Aucune personne de la famille rattachée à cette commune.')}</section>
-            ${Object.keys(v.decades).length > 1 ? `<section class="maintenance-panel"><div class="h-panel-head"><h3>📜 Actes de la famille par décennie</h3><label class="h-inline">Afficher <select data-h-village-acts><option value="">Tous les actes (${fmt(Object.values(v.decades).reduce((a, b) => a + b, 0))})</option>${(v.decades_by_type || []).map(t => `<option value="${esc(t.label)}" ${t.label === actsType ? 'selected' : ''}>${esc(t.label)} (${fmt(t.total)})</option>`).join('')}</select></label></div><div data-h-village-decades>${decadesHtml(v, actsType)}</div></section>` : ''}
-            ${pr.notes || v.media.length ? `<section class="maintenance-panel"><h3>📝 Notes et photos</h3>${pr.notes ? `<p class="h-transcription">${nl(pr.notes)}</p>` : ''}${ext.thumbs ? ext.thumbs('village-' + pr.id, v.media) : ''}</section>` : ''}
-            <div data-rc-host data-rc-type="village" data-rc-key="${esc(key)}" data-rc-hide-empty></div>
-            ${v.insee && ext.addrMap ? `<details class="maintenance-panel h-am-host" data-addrmap-host data-insee="${esc(v.insee)}"><summary><h3>🗺️ Plan des adresses des recensements</h3> <small class="muted">les maisons des dépouillements, année par année, sur la carte d’aujourd’hui ou une carte ancienne</small></summary><div data-addrmap-box></div></details>` : ''}
-            <section class="maintenance-panel h-village-popchart" id="h-village-pop"><div class="h-panel-head"><h3>📈 Évolution du nombre d’habitants</h3><button type="button" class="button small secondary" data-h-village-wiki>${pr.population_source ? 'Mettre à jour depuis Wikipédia' : 'Récupérer sur Wikipédia'}</button></div>
+            ${Object.keys(v.decades).length > 1 ? `<section class="maintenance-panel" data-vsec="decades"><div class="h-panel-head"><h3>📜 Actes de la famille par décennie</h3><label class="h-inline">Afficher <select data-h-village-acts><option value="">Tous les actes (${fmt(Object.values(v.decades).reduce((a, b) => a + b, 0))})</option>${(v.decades_by_type || []).map(t => `<option value="${esc(t.label)}" ${t.label === actsType ? 'selected' : ''}>${esc(t.label)} (${fmt(t.total)})</option>`).join('')}</select></label></div><div data-h-village-decades>${decadesHtml(v, actsType)}</div></section>` : ''}
+            ${pr.notes || v.media.length ? `<section class="maintenance-panel" data-vsec="notes"><h3>📝 Notes et photos</h3>${pr.notes ? `<p class="h-transcription">${nl(pr.notes)}</p>` : ''}${ext.thumbs ? ext.thumbs('village-' + pr.id, v.media) : ''}</section>` : ''}
+            <div data-vsec="recueils" data-rc-host data-rc-type="village" data-rc-key="${esc(key)}" data-rc-hide-empty></div>
+            ${v.insee && ext.addrMap ? `<section class="maintenance-panel h-am-host" data-vsec="addrmap" data-insee="${esc(v.insee)}"><h3>🗺️ Plan du recensement <small class="muted">les maisons relevées dans les dépouillements, année par année, sur la carte d’aujourd’hui ou une carte ancienne</small></h3><div data-addrmap-box></div></section>` : ''}
+            <section class="maintenance-panel h-village-memo" data-vsec="memo"><div class="h-panel-head"><h3>🗒️ Bloc-notes</h3><small class="muted" data-h-village-memosaved></small></div><textarea data-h-village-memo rows="5" placeholder="Pistes, choses à vérifier, idées… (enregistré au fil de la frappe)">${esc(pr.memo || '')}</textarea></section>
+            <section class="maintenance-panel h-village-popchart" id="h-village-pop" data-vsec="popchart"><div class="h-panel-head"><h3>📈 Évolution du nombre d’habitants</h3><button type="button" class="button small secondary" data-h-village-wiki>${pr.population_source ? 'Mettre à jour depuis Wikipédia' : 'Récupérer sur Wikipédia'}</button></div>
                 ${pops.length > 1 ? populationChart(pops) : '<p class="muted" data-h-village-popmsg>Pas encore assez de chiffres pour tracer la courbe.</p>'}
                 ${pr.population_source ? `<p class="muted">Chiffres : <a href="${esc(pr.population_source)}" target="_blank" rel="noopener noreferrer">${esc(decodeURIComponent(pr.population_source.replace(/^.*\/wiki\//, '')).replace(/_/g, ' '))} — Wikipédia ↗</a> (d’après Cassini/EHESS et l’INSEE).</p>` : ''}</section>
             </section>`;
         A().bindTableLinks();
         const ws = A().$('#workspace');
         const again = () => renderVillage(++st.workspaceToken, key);
+        arrangeVillage(ws);
+        ws.querySelector('[data-h-village-layout]').addEventListener('click', () => villageLayoutDialog(again));
+        const memo = ws.querySelector('[data-h-village-memo]'); let memoT = 0;
+        memo?.addEventListener('input', () => { ws.querySelector('[data-h-village-memosaved]').textContent = '…'; clearTimeout(memoT); memoT = setTimeout(async () => {
+            try { await api('save_village_memo', {}, {method: 'POST', body: {key, name: v.name, memo: memo.value}}); ws.querySelector('[data-h-village-memosaved]').textContent = '✓ enregistré'; } catch (e) { ws.querySelector('[data-h-village-memosaved]').textContent = '⚠ ' + e.message; }
+        }, 600); });
+        const am = ws.querySelector('[data-vsec="addrmap"]');
+        if (am && !am.hidden && ext.addrMap) ext.addrMap(am.querySelector('[data-addrmap-box]'), {insee: am.dataset.insee});
         ws.querySelector('[data-h-village-back]').addEventListener('click', () => { st.hVillage = ''; ext.lists.villages(++st.workspaceToken); });
         ws.querySelectorAll('[data-h-census-open]').forEach(b => b.addEventListener('click', () => ext.openCensusHouseholds(key, b.dataset.hCensusOpen)));
         ws.querySelector('[data-h-village-mono]').addEventListener('click', () => { st.graphMode = 'place_monograph'; st.graphPlaceMonograph = {...(st.graphPlaceMonograph || {}), id: v.place_id, name: v.name, county: v.county || '', country: v.country || ''}; A().setModule('graphiques'); });

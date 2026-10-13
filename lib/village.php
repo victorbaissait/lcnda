@@ -416,3 +416,14 @@ function census_households(PDO $pdo, array $f): array
     $years = $pdo->query('SELECT year, count(*) AS n FROM census_records WHERE year IS NOT NULL GROUP BY year ORDER BY year')->fetchAll();
     return ['records' => $records, 'villages' => $villages, 'years' => $years, 'truncated' => count($records) >= 2000];
 }
+
+/** Bloc-notes de la fiche d'un village (enregistré au fil de la frappe). */
+function save_village_memo(PDO $pdo, array $data): array
+{
+    $key = safe_text($data['key'] ?? '');
+    if ($key === '' || !village_place_ids($pdo, $key)) { throw new RuntimeException('Commune introuvable.'); }
+    $memo = mb_substr(str_replace("\r", '', (string) ($data['memo'] ?? '')), 0, 50000);
+    $pdo->prepare("INSERT INTO village_profiles(place_key, name, memo, updated_at) VALUES(?,?,?,CURRENT_TIMESTAMP)
+        ON CONFLICT(place_key) DO UPDATE SET memo=excluded.memo, updated_at=CURRENT_TIMESTAMP")->execute([$key, safe_text($data['name'] ?? ''), $memo]);
+    return ['ok' => true];
+}
