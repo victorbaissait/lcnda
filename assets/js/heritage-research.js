@@ -173,6 +173,7 @@
             onSubmit: async form => {
                 const file = await pickNamedFile(IMPORT_ACCEPT); if (!file) return false;
                 const title = form.title.value.trim() || '';
+                mergeImportedTypes(file.text);
                 const r = await post('atelier_import', {text: file.text, new_project: {title: title || '', kind: form.kind.value}});
                 toast('Projet importé : ' + importSummary(r.result) + '.');
                 Object.assign(st(), {project: r.result.project_id, node: firstNode(), sel: [], tags: [], q: '', type: ''});
@@ -667,7 +668,11 @@
             <button type="button" class="button secondary" data-x="md">📄 Plan et textes (.md)<small>Les dossiers dans l’ordre, avec leurs notes, brouillons, citations et références : à ouvrir dans un traitement de texte</small></button>
             <button type="button" class="button secondary" data-x="bib">📚 Références (.bib)<small>${plural(refs.length, 'référence', 'références')}, pour un gestionnaire de bibliographie ou LaTeX</small></button>
             <button type="button" class="button secondary" data-x="ris">📚 Références (.ris)<small>Le format accepté par presque tous les logiciels de bibliographie</small></button>
+            <button type="button" class="button secondary" data-x="docx">📝 Plan et textes pour Word (.docx)<small>Avec de vrais titres de chapitres : s’ouvre dans Word, Pages, LibreOffice ; prêt à mettre en page</small></button>
+            <button type="button" class="button secondary" data-x="print">🖨️ Imprimer ou enregistrer en PDF<small>Le plan et les textes, mis en page, avec la bibliographie à la fin</small></button>
+            <button type="button" class="button secondary" data-x="csl">📚 Références (CSL JSON)<small>Pour Zotero, Zettlr, Pandoc : garde les auteurs, dates et pages au mieux</small></button>
             <button type="button" class="button secondary" data-x="csv">📊 Tableau de tous les éléments (.csv)<small>Pour un tableur</small></button>
+            <button type="button" class="button secondary" data-x="full">💾 Projet complet (.json)<small>Sauvegarde ou partage : dossiers, éléments, liens, étiquettes ; se réimporte tel quel avec « Importer… » (sans les fichiers joints)</small></button>
             <button type="button" class="button secondary" data-x="plan">🗂️ Enregistrer ce plan comme plan de départ<small>Les dossiers de ce projet seront proposés à la création d’un nouveau projet</small></button></div>`,
             onOpen: dl => dl.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => {
                 const x = b.dataset.x;
@@ -675,10 +680,103 @@
                 if (x === 'bib') ext.downloadText(slug + '.bib', toBibtex(refs), 'text/plain');
                 if (x === 'ris') ext.downloadText(slug + '.ris', toRis(refs), 'application/x-research-info-systems');
                 if (x === 'md') ext.downloadText(slug + '.md', toMarkdown(), 'text/markdown');
+                if (x === 'csl') ext.downloadText(slug + '.json', JSON.stringify(toCsl(refs), null, 1), 'application/json');
+                if (x === 'full') ext.downloadText(slug + '.lcnda-projet.json', JSON.stringify(fullProject(), null, 1), 'application/json');
+                if (x === 'docx') { const a = document.createElement('a'); a.href = URL.createObjectURL(toDocx()); a.download = slug + '.docx'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
+                if (x === 'print') { printProject(); return; }
                 if (x === 'csv') { const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"'; ext.downloadText(slug + '.csv', '﻿' + [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'].map(q).join(';'), ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''].map(q).join(';'))].join('\n'), 'text/csv'); }
                 toast('Fichier prêt.');
             })),
         });
+    }
+    /* ─── Autres exports : CSL JSON, projet complet, Word (.docx), impression ─── */
+    const CSL_TYPES = {livre: 'book', article: 'article-journal', chapitre: 'chapter', these: 'thesis', archive: 'manuscript', image: 'graphic', presse: 'article-newspaper', web: 'webpage', objet: 'document', autre: 'document'};
+    function toCsl(refs) {
+        return refs.map(i => { const d = i.data || {}, names = roles => creatorsOf(i, roles).map(c => ({family: c.last || '', given: c.first || ''})).filter(n => n.family || n.given);
+            const dm = String(d.date || d.year || '').match(/(\d{3,4})(?:-(\d{2})(?:-(\d{2}))?)?/);
+            const out = {id: 'lcnda-' + i.id, type: CSL_TYPES[d.kind] || 'document', title: i.title, author: names(['auteur', 'graveur', 'photographe', 'illustrateur', 'autre']), editor: names(['dir']), translator: names(['trad']),
+                'container-title': d.container, publisher: d.publisher, 'publisher-place': d.place, volume: d.volume, issue: d.issue, page: d.pages, ISBN: d.isbn, DOI: d.doi, URL: d.url, language: d.language, abstract: d.abstract,
+                archive: d.archive, 'call-number': d.call_number, keyword: (i.tags || []).join(', '), edition: d.edition, issued: dm ? {'date-parts': [[dm[1], dm[2], dm[3]].filter(Boolean).map(Number)]} : undefined};
+            Object.keys(out).forEach(k => { if (out[k] === undefined || out[k] === '' || (Array.isArray(out[k]) && !out[k].length)) delete out[k]; });
+            return out; });
+    }
+    function fullProject() {
+        const items = live(), used = new Set(items.filter(i => i.type === 'custom').map(i => i.data?.ctype));
+        return {type: 'lcnda-atelier-projet', version: 1, exported: new Date().toISOString(),
+            project: (({title, subtitle, kind, icon, color, description, target_words, deadline}) => ({title, subtitle, kind, icon, color, description, target_words, deadline}))(P.project),
+            folders: P.folders.map(f => ({id: Number(f.id), parent_id: f.parent_id ? Number(f.parent_id) : 0, name: f.name, icon: f.icon || '', notes: f.notes || '', position: f.position})),
+            items: items.map(i => ({id: Number(i.id), type: i.type, title: i.title, data: i.data || {}, tags: i.tags || [], starred: !!Number(i.starred), folders: i.folders})),
+            custom_types: CFG.types.filter(t => t.custom && used.has(t.key))};
+    }
+    /** Un projet complet reçu apporte ses sortes d'éléments à soi : on les ajoute aux réglages si elles manquent. */
+    function mergeImportedTypes(text) {
+        if (!String(text).slice(0, 200).includes('lcnda-atelier-projet')) return;
+        try { const doc = JSON.parse(text); let n = 0; (doc.custom_types || []).forEach(t => { if (t?.key && !CFG.types.some(x => x.key === t.key)) { CFG.types.push({...t, custom: true}); n++; } }); if (n) { saveCfg(); toast(`${n} sorte(s) d’élément ajoutée(s) aux réglages de l’Atelier.`); } } catch (_) {}
+    }
+    /** Les blocs du document (titres, paragraphes, citations, références) dans l'ordre du plan. */
+    function projectBlocks() {
+        const B = [{k: 'title', t: P.project.title}];
+        if (P.project.subtitle) B.push({k: 'subtitle', t: P.project.subtitle});
+        if (P.project.description) B.push({k: 'p', t: P.project.description});
+        const refsUsed = new Map();
+        const item = i => { const d = i.data || {};
+            if (i.type === 'draft') String(d.text || '').split(/\n{2,}/).forEach(t => t.trim() && B.push({k: 'p', t}));
+            else if (i.type === 'note') B.push({k: 'note', t: d.text || i.title});
+            else if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; if (s) refsUsed.set(s.id, s); B.push({k: 'quote', t: `« ${d.text || ''} »`, src: s ? `— ${shortCite(s)}${d.page ? ', ' + d.page : ''}` : ''}); }
+            else if (i.type === 'reference') { refsUsed.set(i.id, i); B.push({k: 'li', t: cite(i, false)}); }
+            else B.push({k: 'li', t: `${i.title}${d.notes ? ' — ' + String(d.notes).replace(/\n/g, ' ') : ''}`});
+        };
+        const walk = (parent, depth) => kids(parent).forEach(f => {
+            B.push({k: 'h', lvl: Math.min(6, depth + 1), t: f.name}); if (f.notes) B.push({k: 'p', t: f.notes});
+            live().filter(i => i.folders.includes(Number(f.id))).sort((a, b) => (a.type === 'draft' ? 0 : 1) - (b.type === 'draft' ? 0 : 1) || a.title.localeCompare(b.title, 'fr')).forEach(item);
+            walk(Number(f.id), depth + 1);
+        });
+        walk(0, 0);
+        const unfiled = live().filter(i => !i.folders.length); if (unfiled.length) { B.push({k: 'h', lvl: 1, t: 'Non classés'}); unfiled.forEach(item); }
+        const refs = live().filter(i => i.type === 'reference').sort((a, b) => cite(a, false).localeCompare(cite(b, false), 'fr'));
+        if (refs.length) { B.push({k: 'h', lvl: 1, t: 'Bibliographie'}); refs.forEach(r => B.push({k: 'bib', t: cite(r, false)})); }
+        return B;
+    }
+    const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+    const crc32 = u8 => { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = CRC_T[(c ^ u8[i]) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+    /** Petit fichier zip sans compression (suffit pour un .docx). */
+    function zip(files) {
+        const enc = new TextEncoder(), parts = [], central = []; let off = 0;
+        files.forEach(([name, text]) => { const n = enc.encode(name), d = enc.encode(text), c = crc32(d);
+            const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(8, 0, true); h.setUint32(14, c, true); h.setUint32(18, d.length, true); h.setUint32(22, d.length, true); h.setUint16(26, n.length, true);
+            parts.push(new Uint8Array(h.buffer), n, d);
+            const ch = new DataView(new ArrayBuffer(46)); ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint32(16, c, true); ch.setUint32(20, d.length, true); ch.setUint32(24, d.length, true); ch.setUint16(28, n.length, true); ch.setUint32(42, off, true);
+            central.push(new Uint8Array(ch.buffer), n); off += 30 + n.length + d.length; });
+        const size = central.reduce((s, x) => s + x.length, 0), end = new DataView(new ArrayBuffer(22));
+        end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true); end.setUint32(12, size, true); end.setUint32(16, off, true);
+        return new Blob([...parts, ...central, new Uint8Array(end.buffer)], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    }
+    function toDocx() {
+        const x = t => String(t ?? '').replace(/[&<>]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;'}[c])).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '');
+        const run = (t, rpr = '') => String(t).split('\n').map((line, k) => `${k ? '<w:r><w:br/></w:r>' : ''}<w:r>${rpr}<w:t xml:space="preserve">${x(line)}</w:t></w:r>`).join('');
+        const para = (style, t, rpr = '') => `<w:p><w:pPr><w:pStyle w:val="${style}"/></w:pPr>${run(t, rpr)}</w:p>`;
+        const body = projectBlocks().map(b => b.k === 'title' ? para('Title', b.t) : b.k === 'subtitle' ? para('Subtitle', b.t) : b.k === 'h' ? para('Heading' + b.lvl, b.t)
+            : b.k === 'quote' ? para('Quote', b.t) + (b.src ? para('QuoteSource', b.src) : '') : b.k === 'note' ? para('Note', '📝 ' + b.t) : b.k === 'li' ? para('ListBullet', '• ' + b.t) : b.k === 'bib' ? para('Bibliography', b.t) : para('Normal', b.t)).join('');
+        const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
+        const st = (id, name, rpr, ppr = '', basedOn = 'Normal') => `<w:style w:type="paragraph" w:styleId="${id}"><w:name w:val="${name}"/><w:basedOn w:val="${basedOn}"/><w:qFormat/>${ppr ? `<w:pPr>${ppr}</w:pPr>` : ''}<w:rPr>${rpr}</w:rPr></w:style>`;
+        const heads = [1, 2, 3, 4, 5, 6].map(l => st('Heading' + l, 'heading ' + l, `<w:b/><w:sz w:val="${[36, 30, 26, 24, 22, 22][l - 1]}"/>${l > 3 ? '<w:i/>' : ''}`, `<w:keepNext/><w:spacing w:before="${[480, 360, 280, 240, 200, 200][l - 1]}" w:after="120"/><w:outlineLvl w:val="${l - 1}"/>`)).join('');
+        const styles = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Georgia" w:hAnsi="Georgia" w:cs="Georgia"/><w:sz w:val="24"/><w:lang w:val="fr-FR"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="160" w:line="300" w:lineRule="auto"/><w:jc w:val="both"/></w:pPr></w:pPrDefault></w:docDefaults>
+            <w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/></w:style>${st('Title', 'Title', '<w:b/><w:sz w:val="56"/>', '<w:jc w:val="center"/><w:spacing w:after="240"/>')}${st('Subtitle', 'Subtitle', '<w:i/><w:sz w:val="30"/>', '<w:jc w:val="center"/><w:spacing w:after="480"/>')}${heads}
+            ${st('Quote', 'Quote', '<w:i/>', '<w:ind w:left="720" w:right="720"/>')}${st('QuoteSource', 'Quote Source', '<w:sz w:val="20"/>', '<w:ind w:left="720"/><w:jc w:val="right"/>')}${st('Note', 'Note', '<w:color w:val="555555"/><w:sz w:val="20"/>', '<w:ind w:left="360"/>')}${st('ListBullet', 'List Bullet', '', '<w:ind w:left="360" w:hanging="240"/><w:jc w:val="left"/>')}${st('Bibliography', 'Bibliography', '', '<w:ind w:left="720" w:hanging="720"/><w:jc w:val="left"/>')}</w:styles>`;
+        const doc = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document ${W}><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1418" w:right="1418" w:bottom="1418" w:left="1418" w:header="709" w:footer="709" w:gutter="0"/></w:sectPr></w:body></w:document>`;
+        return zip([
+            ['[Content_Types].xml', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/></Types>'],
+            ['_rels/.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
+            ['word/_rels/document.xml.rels', '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+            ['word/document.xml', doc], ['word/styles.xml', styles],
+        ]);
+    }
+    function printProject() {
+        const html = projectBlocks().map(b => b.k === 'title' ? `<h1 class="t">${esc(b.t)}</h1>` : b.k === 'subtitle' ? `<p class="st">${esc(b.t)}</p>` : b.k === 'h' ? `<h${Math.min(6, b.lvl + 1)}>${esc(b.t)}</h${Math.min(6, b.lvl + 1)}>`
+            : b.k === 'quote' ? `<blockquote>${nl(b.t)}${b.src ? `<cite>${esc(b.src)}</cite>` : ''}</blockquote>` : b.k === 'note' ? `<p class="note">📝 ${nl(b.t)}</p>` : b.k === 'li' ? `<p class="li">• ${esc(b.t)}</p>` : b.k === 'bib' ? `<p class="bib">${esc(b.t)}</p>` : `<p>${nl(b.t)}</p>`).join('');
+        const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
+        fr.srcdoc = `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(P.project.title)}</title><style>@page{size:A4;margin:2.2cm}body{font:12pt/1.55 Georgia,serif;color:#111}h1.t{text-align:center;font-size:26pt;margin:2cm 0 .3cm}.st{text-align:center;font-style:italic;font-size:14pt;margin-bottom:1.5cm}h2{font-size:18pt;margin-top:1.2cm;page-break-after:avoid}h3{font-size:15pt;page-break-after:avoid}h4,h5,h6{font-size:13pt;font-style:italic;page-break-after:avoid}p{text-align:justify;margin:0 0 .35cm}blockquote{font-style:italic;margin:.3cm 1.2cm}cite{display:block;text-align:right;font-style:normal;font-size:10pt}.note{color:#555;font-size:10pt;margin-left:.6cm}.li{text-align:left;margin-left:.6cm}.bib{text-align:left;padding-left:1.2cm;text-indent:-1.2cm}</style></head><body>${html}</body></html>`;
+        fr.onload = () => { setTimeout(() => { try { fr.contentWindow.focus(); fr.contentWindow.print(); } catch (e) { toast('Impression impossible : ' + e.message, 'error'); } setTimeout(() => fr.remove(), 60000); }, 200); };
     }
     function toMarkdown() {
         const out = [`# ${P.project.title}`, P.project.subtitle ? `*${P.project.subtitle}*` : '', P.project.description ? '\n' + P.project.description : ''];
@@ -726,7 +824,7 @@
             if (q('[data-at-add]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return itemDialog(q('[data-at-add]').dataset.atAdd); }
             if (q('[data-at-import]')) {
                 const file = await pickNamedFile(IMPORT_ACCEPT); if (!file) return;
-                try { const r = await post('atelier_import', {project_id: P.project.id, folder_id: typeof v.node === 'number' ? v.node : 0, text: file.text}); toast('Importé : ' + importSummary(r.result) + '.'); await reload(); } catch (error) { toast(error.message, 'error'); }
+                try { mergeImportedTypes(file.text); const r = await post('atelier_import', {project_id: P.project.id, folder_id: typeof v.node === 'number' ? v.node : 0, text: file.text}); toast('Importé : ' + importSummary(r.result) + '.'); await reload(); } catch (error) { toast(error.message, 'error'); }
                 return;
             }
             if (q('[data-at-sort]')) { const c = q('[data-at-sort]').dataset.atSort; v.sort = v.sort.col === c ? {col: c, dir: -v.sort.dir} : {col: c, dir: 1}; return renderProject(S().workspaceToken, true); }

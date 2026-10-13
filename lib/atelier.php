@@ -385,6 +385,7 @@ function atelier_import(PDO $pdo, array $data): array
     $text = (string) ($data['text'] ?? '');
     if (strlen($text) > 50000000) { throw new RuntimeException('Fichier trop gros.'); }
     $text = preg_replace('/^\xEF\xBB\xBF/', '', $text) ?? $text;
+    if (str_contains(substr($text, 0, 200), 'lcnda-atelier-projet')) { $doc = json_decode($text, true); if (is_array($doc) && ($doc['type'] ?? '') === 'lcnda-atelier-projet') { return atelier_import_full($pdo, $doc, $data); } }
     $parsed = atelier_parse_any($text);
     if (!$parsed['refs'] && !$parsed['notes'] && !$parsed['collections']) { throw new RuntimeException('Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris).'); }
     $newProject = is_array($data['new_project'] ?? null) ? $data['new_project'] : null;
@@ -672,4 +673,63 @@ function atelier_parse_ris(string $text): array
         };
     }
     return $out;
+}
+
+/**
+ * Projet complet exporté par l'Atelier (« 💾 Projet complet ») : dossiers imbriqués, éléments, étiquettes, favoris,
+ * liens entre éléments et citations reliées à leur référence (les numéros sont refaits). Les fichiers joints ne
+ * voyagent pas dans ce fichier. Nouveau projet, ou dans un projet existant (dans le dossier choisi).
+ */
+function atelier_import_full(PDO $pdo, array $doc, array $data): array
+{
+    $proj = is_array($doc['project'] ?? null) ? $doc['project'] : [];
+    $folders = array_slice(is_array($doc['folders'] ?? null) ? $doc['folders'] : [], 0, 5000);
+    $items = array_slice(is_array($doc['items'] ?? null) ? $doc['items'] : [], 0, 20000);
+    $newProject = is_array($data['new_project'] ?? null) ? $data['new_project'] : null;
+    $own = !$pdo->inTransaction();
+    if ($own) { $pdo->beginTransaction(); }
+    $projectId = 0;
+    try {
+        if ($newProject) {
+            $projectId = save_atelier_project($pdo, ['title' => ($newProject['title'] ?? '') ?: ($proj['title'] ?? 'Projet importé'), 'subtitle' => $proj['subtitle'] ?? '', 'kind' => $newProject['kind'] ?? ($proj['kind'] ?? 'autre'),
+                'icon' => ($newProject['icon'] ?? '') ?: ($proj['icon'] ?? ''), 'color' => $proj['color'] ?? '', 'description' => ($newProject['description'] ?? '') ?: ($proj['description'] ?? ''),
+                'target_words' => $proj['target_words'] ?? 0, 'deadline' => $proj['deadline'] ?? ''])['id'];
+            $base = 0;
+        } else {
+            $projectId = (int) atelier_project_row($pdo, safe_int($data['project_id'] ?? 0))['id'];
+            $base = safe_int($data['folder_id'] ?? 0);
+            if ($base && (int) atelier_folder_row($pdo, $base)['project_id'] !== $projectId) { $base = 0; }
+        }
+        // dossiers (parents d'abord)
+        $map = []; $pending = []; foreach ($folders as $f) { if (is_array($f) && isset($f['id'])) { $pending[(int) $f['id']] = $f; } }
+        $guard = 0;
+        while ($pending && $guard++ < 60) {
+            foreach ($pending as $old => $f) {
+                $parent = (int) ($f['parent_id'] ?? 0);
+                if ($parent && isset($pending[$parent]) && !isset($map[$parent])) { continue; }
+                $map[$old] = save_atelier_folder($pdo, ['project_id' => $projectId, 'parent_id' => $parent && isset($map[$parent]) ? $map[$parent] : $base, 'name' => mb_substr((string) ($f['name'] ?? 'Dossier'), 0, 200) ?: 'Dossier',
+                    'icon' => $f['icon'] ?? ''])['id'];
+                if (trim((string) ($f['notes'] ?? '')) !== '') { save_atelier_folder($pdo, ['id' => $map[$old], 'notes' => (string) $f['notes']]); }
+                unset($pending[$old]);
+            }
+        }
+        // éléments : d'abord sans liens (les numéros changent), puis les liens refaits
+        $imap = []; $later = [];
+        foreach ($items as $it) {
+            if (!is_array($it) || !in_array($it['type'] ?? '', ATELIER_TYPES, true)) { continue; }
+            $d = is_array($it['data'] ?? null) ? $it['data'] : [];
+            $rel = $d['related'] ?? []; $src = $d['source_id'] ?? null; unset($d['related'], $d['source_id']);
+            $fids = array_values(array_filter(array_map(static fn($f) => $map[(int) $f] ?? null, is_array($it['folders'] ?? null) ? $it['folders'] : []))) ?: ($base ? [$base] : []);
+            $nid = save_atelier_item($pdo, ['project_id' => $projectId, 'type' => $it['type'], 'title' => (string) ($it['title'] ?? ''), 'data' => $d, 'tags' => $it['tags'] ?? [], 'starred' => !empty($it['starred']), 'folder_ids' => $fids])['id'];
+            $imap[(int) ($it['id'] ?? 0)] = $nid;
+            if ($rel || $src) { $later[] = [$nid, $it, $d, $rel, $src]; }
+        }
+        foreach ($later as [$nid, $it, $d, $rel, $src]) {
+            $d['related'] = array_values(array_filter(array_map(static fn($r) => $imap[(int) $r] ?? null, is_array($rel) ? $rel : [])));
+            if ($src) { $d['source_id'] = $imap[(int) $src] ?? null; }
+            save_atelier_item($pdo, ['id' => $nid, 'title' => (string) ($it['title'] ?? ''), 'data' => $d, 'tags' => $it['tags'] ?? [], 'starred' => !empty($it['starred'])]);
+        }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own) { $pdo->rollBack(); } throw $e; }
+    return ['count' => count($imap), 'notes' => 0, 'links' => 0, 'folders' => count($map), 'files_skipped' => 0, 'format' => 'Projet de l’Atelier', 'project_id' => $projectId];
 }

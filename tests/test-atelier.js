@@ -107,6 +107,14 @@ $out['custom'] = [$ci['title'], $ci['data']['ctype'], $ci['data']['values']['par
 delete_atelier_project($pdo, ['id' => $z['project_id']]);
 delete_atelier_project($pdo, ['id' => $pid]);
 $out['gone'] = (int) $pdo->query('SELECT (SELECT count(*) FROM atelier_items)+(SELECT count(*) FROM atelier_folders)+(SELECT count(*) FROM atelier_item_folders)')->fetchColumn();
+// Projet complet (export « 💾 ») réimporté : dossiers imbriqués, citation reliée à sa référence, liens refaits
+$full = ['type' => 'lcnda-atelier-projet', 'version' => 1, 'project' => ['title' => 'Partagé', 'kind' => 'livre'], 'folders' => [['id' => 7, 'parent_id' => 0, 'name' => 'Partie A', 'notes' => 'Plan'], ['id' => 8, 'parent_id' => 7, 'name' => 'Chap. 1']],
+    'items' => [['id' => 50, 'type' => 'reference', 'title' => 'Un livre', 'data' => ['kind' => 'livre', 'year' => '1900'], 'tags' => ['x'], 'starred' => true, 'folders' => [8]],
+        ['id' => 51, 'type' => 'quote', 'title' => '', 'data' => ['text' => 'Une phrase', 'source_id' => 50, 'related' => [50]], 'tags' => [], 'folders' => [8]]]];
+$imp = atelier_import($pdo, ['text' => json_encode($full), 'new_project' => ['title' => '', 'kind' => 'livre']]);
+$pr = atelier_project($pdo, $imp['project_id']); $by = []; foreach ($pr['items'] as $i) { $by[$i['type']] = $i; }
+$fb = array_column($pr['folders'], null, 'name');
+$out['full'] = [$pr['project']['title'], count($pr['folders']), (int) $fb['Chap. 1']['parent_id'] === (int) $fb['Partie A']['id'], $fb['Partie A']['notes'], (int) $by['quote']['data']['source_id'] === (int) $by['reference']['id'], $by['quote']['data']['related'] === [(int) $by['reference']['id']], (int) $by['reference']['starred'], $by['reference']['folders'] === [(int) $fb['Chap. 1']['id']]];
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media') } });
@@ -134,6 +142,7 @@ const checks = [
   ['import CSL JSON et EndNote XML ; fichier abîmé refusé sans laisser de projet', () => { assert.deepEqual(out.csl_endnote, ['CSL JSON', 2, 'EndNote XML', 2, '1998', ['optique', 'spectacle'], '10.9/xyz', 'Mannoni']); assert.equal(out.bad_rdf, 'refusé'); assert.equal(out.bad_rdf_left, 0); }],
   ['sorte d’élément à soi : valeurs, personne inexistante retirée, lieu, titre tiré du premier texte', () => assert.deepEqual(out.custom, ['Lapierre', 'x_plaque', 1, null, 'Lille', 1])],
   ['projet supprimé avec tout son contenu', () => assert.equal(out.gone, 0)],
+  ['projet complet réimporté : dossiers imbriqués et leurs notes, citation reliée, liens, favori', () => assert.deepEqual(out.full, ['Partagé', 2, true, 'Plan', true, true, 1, true])],
 ];
 let failed = 0;
 for (const [name, fn] of checks) { try { fn(); console.log('  ✓ ' + name); } catch (e) { failed++; console.log('  ✗ ' + name + '\n    ' + e.message); } }
