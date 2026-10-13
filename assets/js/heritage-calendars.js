@@ -41,7 +41,10 @@
         agenda: [['fair', '🎪 Salons et événements', '#e67700'], ['archive_visit', '🏛️ Visites d’archives', '#5f3dc4'], ['reminder', '🔔 Rappels', '#c92a2a'], ['courrier', '✉️ Courriers envoyés', '#868e96'],
             ['courrier_relance', '📮 Relances de courrier', '#d9480f'], ['field_trip', '🚗 Circuits sur le terrain', '#2b8a3e'], ['budget', '💶 Renouvellements', '#0b7285'], ['atelier_task', '✅ Tâches de l’Atelier', '#1c7ed6'], ['investigation', '🔍 Rappels d’enquête', '#7048e8']],
     };
-    const colorOf = (k, p, g) => p.colors[g] || (GROUPS[k].find(x => x[0] === g) || [, , '#1c7ed6'])[2];
+    /** Sortes d'événements trouvées dans les fiches (chacune sa ligne dans la légende, au lieu de « Autres »). */
+    const DYN = {genea: [], agenda: []};
+    const groupsOf = k => [...GROUPS[k].filter(g => k !== 'genea' || g[0] !== 'other' || prefs('genea').groupOthers), ...DYN[k]];
+    const colorOf = (k, p, g) => p.colors[g] || ([...GROUPS[k], ...DYN[k]].find(x => x[0] === g) || [, , '#1c7ed6'])[2];
 
     /* ─── Correspondances : la date dans les autres calendriers ─── */
     const altText = (y, m, d, type) => {
@@ -141,7 +144,7 @@
                             <td>${chip(it, true)}</td><td class="h-cal-lalt">${it.d ? p.alt.map(t => { const s = altText(y, it.m, it.d, t); return s ? `<small title="${esc(calName(t))}">${esc(s)}</small>` : ''; }).join('<br>') : ''}</td></tr>`; }).join('')}</tbody></table>` : A().empty('Rien sur cette période.')}`;
                 }
                 const viewBtns = VIEWS.map(([v, l]) => `<button type="button" class="${c.view === v ? 'is-active' : ''}" data-cal-view="${v}">${l}</button>`).join('');
-                const legend = GROUPS[key].map(([g, l]) => `<button type="button" class="h-cal-leg ${(p.hidden || []).includes(g) ? 'is-off' : ''}" data-cal-leg="${g}" style="--c:${colorOf(key, p, g)}" title="Montrer / cacher"><i></i>${esc(l)}</button>`).join('');
+                const legend = groupsOf(key).map(([g, l]) => `<button type="button" class="h-cal-leg ${(p.hidden || []).includes(g) ? 'is-off' : ''}" data-cal-leg="${g}" style="--c:${colorOf(key, p, g)}" title="Montrer / cacher"><i></i>${esc(l)}</button>`).join('');
                 ws.innerHTML = `<section class="page collection-page h-cal h-cal-style-${p.style} h-cal-size-${p.size}">
                     <header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${title}</h2><p>${intro}</p></div><div class="page-actions">${onNew ? '<button type="button" class="button" data-cal-new="">+ Nouveau</button>' : ''}<button type="button" class="button secondary" data-cal-settings>⚙️ Réglages</button></div></header>
                     <div class="h-cal-bar"><span class="h-cal-nav"><button type="button" class="button small secondary" data-cal-step="-1" title="Précédent">‹</button><button type="button" class="button small secondary" data-cal-today>Aujourd’hui</button><button type="button" class="button small secondary" data-cal-step="1" title="Suivant">›</button></span>
@@ -190,17 +193,18 @@
                     <label class="checkbox-line"><input type="checkbox" name="weekNumbers" ${p.weekNumbers ? 'checked' : ''}> Numéros de semaine</label>
                     <label class="checkbox-line"><input type="checkbox" name="weekend" ${p.weekend ? 'checked' : ''}> Week-ends grisés</label>
                     ${key === 'genea' ? `<label class="checkbox-line"><input type="checkbox" name="anniv" ${p.anniv ? 'checked' : ''}> <b>Anniversaires</b> : chaque événement revient tous les ans, au même jour (avec « il y a … ans »)</label>
-                    <label class="checkbox-line"><input type="checkbox" name="approx" ${p.approx !== false ? 'checked' : ''}> Montrer les dates approximatives (« vers 1850 »)</label>` : `<label class="checkbox-line"><input type="checkbox" name="showDone" ${p.showDone !== false ? 'checked' : ''}> Montrer ce qui est fait ou passé</label>`}</fieldset>
+                    <label class="checkbox-line"><input type="checkbox" name="approx" ${p.approx !== false ? 'checked' : ''}> Montrer les dates approximatives (« vers 1850 »)</label>
+                    <label class="checkbox-line"><input type="checkbox" name="groupOthers" ${p.groupOthers ? 'checked' : ''}> Regrouper les autres sortes d’événements (métier, résidence…) sous « 📌 Autres événements »</label>` : `<label class="checkbox-line"><input type="checkbox" name="showDone" ${p.showDone !== false ? 'checked' : ''}> Montrer ce qui est fait ou passé</label>`}</fieldset>
                 <fieldset class="h-rc-modes"><legend>Sous chaque jour, la date dans ces calendriers</legend><div class="h-cal-altpick">${alts.map(([t, n]) => `<label class="checkbox-line"><input type="checkbox" name="alt" value="${t}" ${p.alt.includes(t) ? 'checked' : ''}> ${esc(n)}</label>`).join('')}</div></fieldset>
-                <fieldset class="h-rc-modes"><legend>Couleurs</legend><div class="h-cal-colors">${GROUPS[key].map(([g, l]) => `<label><input type="color" name="color_${g}" value="${colorOf(key, p, g)}"> ${esc(l)}</label>`).join('')}</div></fieldset>
+                <fieldset class="h-rc-modes"><legend>Couleurs</legend><div class="h-cal-colors">${groupsOf(key).map(([g, l]) => `<label><input type="color" name="color_${g}" value="${colorOf(key, p, g)}"> ${esc(l)}</label>`).join('')}</div></fieldset>
                 <button type="button" class="button small secondary" data-cal-reset>↺ Tout remettre comme au départ</button>`,
             onOpen: d => d.querySelector('[data-cal-reset]').addEventListener('click', () => { if (!confirm('Remettre tous les réglages de ce calendrier comme au départ ?')) return; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); savePrefs(key, p); d.close(); after(); }),
             onSubmit: form => {
                 const fd = new FormData(form);
                 Object.assign(p, {weekStart: Number(fd.get('weekStart')), style: fd.get('style'), size: fd.get('size'), view: fd.get('view'), max: Math.max(1, Math.min(20, Number(fd.get('max')) || 3)),
                     weekNumbers: fd.has('weekNumbers'), weekend: fd.has('weekend'), alt: fd.getAll('alt')});
-                if (key === 'genea') Object.assign(p, {anniv: fd.has('anniv'), approx: fd.has('approx')}); else p.showDone = fd.has('showDone');
-                GROUPS[key].forEach(([g, , def]) => { const v = fd.get('color_' + g); if (v && v !== def) p.colors[g] = v; else delete p.colors[g]; });
+                if (key === 'genea') Object.assign(p, {anniv: fd.has('anniv'), approx: fd.has('approx'), groupOthers: fd.has('groupOthers')}); else p.showDone = fd.has('showDone');
+                groupsOf(key).forEach(([g, , def]) => { const v = fd.get('color_' + g); if (v && v !== def) p.colors[g] = v; else delete p.colors[g]; });
                 const st = S().hCal?.[key]; if (st) st.view = p.view;
                 savePrefs(key, p); after();
             },
@@ -208,17 +212,34 @@
     }
 
     /* ─────────── 📜 Calendrier de la famille ─────────── */
-    const genea = () => S().hCalGenea ||= {person: 0, personName: ''};
+    const genea = () => S().hCalGenea ||= {person: 0, personName: '', place: ''};
+    /** Choisir un lieu : une commune, un département, une région ou un pays (ou leurs équivalents ailleurs). */
+    const PLACE_KINDS = {place: 'commune', county: 'département', region: 'région', country: 'pays'};
+    const placeLabel = (k, v, n) => `${v} — ${PLACE_KINDS[k]}${n ? ` (${n})` : ''}`;
+    function placeSelect(data) {
+        const cur = genea().place || '';
+        if (cur) { const [k, v] = cur.split(/:(.*)/s); return `<span class="h-cal-place">📍 <b>${esc(v)}</b> <small class="muted">${esc(PLACE_KINDS[k] || '')}</small> <button type="button" class="icon-button" data-cal-place-clear title="Tous les lieux">✕</button></span>`; }
+        const m = new Map(); data.events.forEach(e => Object.keys(PLACE_KINDS).forEach(k => { if (e[k]) { const key = k + ':' + e[k]; m.set(key, (m.get(key) || 0) + 1); } }));
+        const opts = [...m.entries()].sort((a, b) => b[1] - a[1]).map(([key, n]) => { const [k, v] = key.split(/:(.*)/s); return `<option value="${esc(placeLabel(k, v, n))}" data-key="${esc(key)}">`; }).join('');
+        return `<span class="h-cal-place"><input type="search" data-cal-place placeholder="📍 Un lieu : commune, département, région, pays…" list="h-cal-places"><datalist id="h-cal-places">${opts}</datalist></span>`;
+    }
     ext.lists.genea_calendar = calendarScreen({
         key: 'genea', eyebrow: 'LISTES · CALENDRIERS', title: '📜 Calendrier de la famille',
         intro: 'Naissances, mariages, décès et tous les événements des fiches, au jour près quand la date le dit. Sous chaque jour, sa date dans les autres calendriers (julien, républicain…) : à choisir dans ⚙️ Réglages.',
         load: () => A().api('genea_calendar', genea().person ? {person_id: genea().person} : {}),
         // À l'ouverture : l'année du milieu des événements datés au jour (sinon de tous) ; en mode anniversaires, aujourd'hui
         initialCursor: (data, p) => { if (p.anniv || !data.events.length) return null; const pool = data.events.filter(e => e.d).length ? data.events.filter(e => e.d) : data.events; const ys = pool.map(e => e.y).sort((a, b) => a - b); const e = pool.find(x => x.y === ys[Math.floor(ys.length / 2)]); return [e.y, e.m || 1, e.d || 1]; },
-        toItems: (data, p) => data.events.map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group,
-            title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e})),
-        extraToolbar: (data) => `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : `<input type="search" data-cal-person placeholder="👤 Une seule personne…" list="h-cal-people"><datalist id="h-cal-people"></datalist>`}</span>${data.undated ? `<small class="muted">${data.undated} événement(s) sans date lisible</small>` : ''}`,
-        bindExtra: (sec, data, p, c, {reload}) => {
+        toItems: (data, p) => {
+            const types = new Map(); data.events.filter(e => e.group === 'other').forEach(e => { const k = 'type:' + e.type; if (!types.has(k)) types.set(k, [k, '📌 ' + e.type, e.color || '#1c7ed6']); });
+            DYN.genea = p.groupOthers ? [] : [...types.values()].sort((a, b) => a[1].localeCompare(b[1], 'fr'));
+            const [pk, pv] = (genea().place || '').split(/:(.*)/s);
+            return data.events.filter(e => !pk || String(e[pk] || '') === pv).map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
+            title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e}));
+        },
+        extraToolbar: (data) => placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : `<input type="search" data-cal-person placeholder="👤 Une seule personne…" list="h-cal-people"><datalist id="h-cal-people"></datalist>`}</span>${data.undated ? `<small class="muted">${data.undated} événement(s) sans date lisible</small>` : ''}`,
+        bindExtra: (sec, data, p, c, {reload, draw}) => {
+            sec.querySelector('[data-cal-place-clear]')?.addEventListener('click', () => { genea().place = ''; draw(); });
+            sec.querySelector('[data-cal-place]')?.addEventListener('input', e => { const o = [...sec.querySelectorAll('#h-cal-places option')].find(x => x.value === e.target.value); if (o) { genea().place = o.dataset.key; draw(); } });
             sec.querySelector('[data-cal-person-clear]')?.addEventListener('click', () => { Object.assign(genea(), {person: 0, personName: ''}); reload(); });
             const inp = sec.querySelector('[data-cal-person]'); if (!inp) return;
             let found = [], timer = 0;
