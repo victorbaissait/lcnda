@@ -925,9 +925,7 @@
             if (t.closest('[data-cfg-plan-edit]')) return planDialog(CFG.plans[i]);
             if (t.closest('[data-cfg-plan-copy]')) { const x = CFG.plans[i]; return planDialog({key: '', label: x.label + ' (ma version)', tree: JSON.parse(JSON.stringify(x.tree || [])), custom: true}, true); }
             const rs = t.closest('[data-cfg-reset-sec]');
-            if (rs) { const sec = rs.dataset.cfgResetSec, what = {nav: 'le menu de gauche (tes vues à toi seront supprimées)', types: 'les sortes d’éléments (tes sortes à toi seront supprimées ; les éléments déjà faits gardent leurs valeurs)', folders: 'les émojis des dossiers', plans: 'les plans de départ (tes plans à toi seront supprimés)'}[sec];
-                if (!confirm(`Remettre ${what} comme au départ ?`)) return;
-                const raw = readCfg(); delete raw[sec]; try { localStorage.setItem(CFG_KEY, JSON.stringify(raw)); } catch (_) {} CFG = loadCfg(); toast('Partie remise comme au départ.'); again(); return; }
+            if (rs) return resetSections([rs.dataset.cfgResetSec]);
             const name = () => ws.querySelector('[data-cfg-pname]').value.trim();
             if (t.closest('[data-cfg-psave]')) { const n = name(); if (!n) { toast('Donne un nom à ces réglages.', 'error'); ws.querySelector('[data-cfg-pname]').focus(); return; }
                 const list = profiles(), same = list.findIndex(x => x.name.toLowerCase() === n.toLowerCase());
@@ -948,9 +946,42 @@
             if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; const n = prompt('Nouveau nom :', list[i].name); if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); return; }
             if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); toast('Fichier prêt.'); } return; }
             if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !confirm(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`)) return; list.splice(i, 1); saveProfiles(list); again(); return; }
-            if (t.closest('[data-cfg-reset]')) { if (!confirm('Remettre tous les réglages de l’Atelier comme au départ ? Tes vues, tes sortes d’éléments et tes plans seront supprimés (les éléments des projets ne sont pas touchés).')) return; try { localStorage.removeItem(CFG_KEY); } catch (_) {} CFG = loadCfg(); toast('Réglages remis comme au départ.'); again(); }
+            if (t.closest('[data-cfg-reset]')) return resetSections(['nav', 'types', 'folders', 'plans']);
         }, {signal: ws._cfgCtl.signal});
 
+        /**
+         * Remet une ou plusieurs parties comme au départ (ordre, noms, émojis, masqués de l'app). S'il y a des éléments créés à la main
+         * (vues, sortes, plans), on demande : les garder (mis à la fin, juste avant la Corbeille pour le menu) ou les supprimer.
+         */
+        function resetSections(secs) {
+            const NAMES = {nav: 'le menu de gauche', types: 'les sortes d’éléments', folders: 'les émojis des dossiers', plans: 'les plans de départ'};
+            const KIND = {nav: 'vue', types: 'sorte d’élément', plans: 'plan'};
+            const builtinKeys = {nav: NAV_BUILTIN.map(x => x[0]), types: Object.keys(TYPES), plans: Object.keys(PLANS)};
+            const mine = secs.filter(sec => sec !== 'folders').flatMap(sec => CFG[sec].filter(x => x.custom).map(x => ({sec, x})));
+            const what = secs.length > 1 ? 'tous les réglages de l’Atelier' : NAMES[secs[0]];
+            const doIt = keep => {
+                const raw = readCfg();
+                secs.forEach(sec => {
+                    if (sec === 'folders') { delete raw.folders; return; }
+                    const own = keep ? CFG[sec].filter(x => x.custom) : [];
+                    const base = builtinKeys[sec].map(key => ({key}));
+                    if (sec === 'nav') { const tr = base.findIndex(x => x.key === 'trash'); base.splice(tr, 0, ...own); raw.nav = base; }
+                    else raw[sec] = [...base, ...own];
+                });
+                try { localStorage.setItem(CFG_KEY, JSON.stringify(raw)); } catch (_) {}
+                CFG = loadCfg();
+                toast(keep && mine.length ? `Remis comme au départ ; ${plural(mine.length, 'élément à toi gardé', 'éléments à toi gardés')} à la fin.` : 'Remis comme au départ.');
+                again();
+            };
+            if (!mine.length) { if (confirm(`Remettre ${what} comme au départ ?`)) doIt(false); return; }
+            dialog({eyebrow: 'RÉINITIALISER', title: `Remettre ${what} comme au départ`, submitLabel: 'Garder mes éléments (mis à la fin)',
+                body: `<p>Les réglages de l’app reviennent comme au départ : ordre, noms, émojis, éléments masqués.</p>
+                    <p>Tu as aussi créé toi-même :</p><ul class="h-cfg-mine">${mine.map(({sec, x}) => `<li>${esc(x.icon || '')} <b>${esc(x.label)}</b> <small class="muted">(${KIND[sec]})</small></li>`).join('')}</ul>
+                    <p><b>Garder mes éléments</b> : ils restent, placés à la fin${secs.includes('nav') ? ' (dans le menu, juste avant la Corbeille)' : ''}.<br><b>Supprimer</b> : ils sont supprimés aussi${secs.includes('types') ? ' (les éléments déjà faits dans tes projets gardent leurs valeurs)' : ''}.</p>`,
+                onSubmit: () => doIt(true),
+                onDelete: () => doIt(false),
+            });
+        }
         function viewDialog(view) {
             const f = view?.filter || {}, isNew = !view;
             let rules = JSON.parse(JSON.stringify(viewRules(f)));
