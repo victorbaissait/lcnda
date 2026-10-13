@@ -8986,6 +8986,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'remove_recueil_image' => remove_recueil_image($pdo,$data),
             'save_recueil_link' => save_recueil_link($pdo,$data),
             'delete_recueil_link' => delete_recueil_link($pdo,$data),
+            'move_recueil_link' => move_recueil_link($pdo,$data),
+            'save_recueil_trays' => save_recueil_trays($pdo,$data),
             'delete_atelier_project' => delete_atelier_project($pdo,$data),
             'save_atelier_folder' => save_atelier_folder($pdo,$data),
             'delete_atelier_folder' => delete_atelier_folder($pdo,$data),

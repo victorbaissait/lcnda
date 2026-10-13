@@ -70,6 +70,26 @@ try { delete_recueil_version($pdo, ['id' => $v1]); $out['last_version'] = 'suppr
 $list = recueils_list($pdo)['recueils'][0];
 $out['list'] = [$list['pages'], $list['transcribed'], $list['versions'], $list['links'], $list['cover'] !== null];
 $out['av_owner'] = 'ok';
+// dossiers de « À ranger » : créer, ranger, renommer, supprimer
+$d5 = recueil_detail($pdo, $rid); $im = $d5['images'][0]['id'];
+save_recueil_trays($pdo, ['recueil_id' => $rid, 'trays' => ['Liste A', 'Liste B', 'Liste A', '']]);
+update_recueil_image($pdo, ['id' => $im, 'tray' => 'Liste A']);
+save_recueil_trays($pdo, ['recueil_id' => $rid, 'trays' => ['Liste C', 'Liste B'], 'rename' => ['from' => 'Liste A', 'to' => 'Liste C']]);
+$t1 = recueil_detail($pdo, $rid); $tr1 = array_values(array_filter($t1['images'], fn($i) => $i['id'] === $im))[0]['tray'];
+save_recueil_trays($pdo, ['recueil_id' => $rid, 'trays' => ['Liste B']]);
+$t2 = recueil_detail($pdo, $rid); $tr2 = array_values(array_filter($t2['images'], fn($i) => $i['id'] === $im))[0]['tray'];
+$out['trays'] = [$t1['recueil']['trays'], $tr1, $t2['recueil']['trays'], $tr2];
+// nouvelle page au début, puis juste après la page 1
+$r1 = update_recueil_image($pdo, ['id' => $im, 'page_id' => -2]);
+$t3 = recueil_detail($pdo, $rid);
+$r2 = update_recueil_image($pdo, ['id' => $d5['images'][1]['id'], 'page_id' => -1, 'after_page' => $t3['pages'][0]['id']]);
+$t4 = recueil_detail($pdo, $rid);
+$out['new_pages'] = [$t3['pages'][0]['id'] === $r1['page_id'], count($t4['pages']) - count($d5['pages']), $t4['pages'][1]['id'] === $r2['page_id']];
+// un rattachement rangé dans un dossier d'enquête, puis visible partout
+$lk = recueils_for_entity($pdo, 'person', '1')[0]['link_id'];
+move_recueil_link($pdo, ['id' => $lk, 'folder_id' => 0]); $f0 = recueils_for_entity($pdo, 'person', '1')[0]['folder_id'];
+move_recueil_link($pdo, ['id' => $lk, 'folder_id' => '']); $f1 = recueils_for_entity($pdo, 'person', '1')[0]['folder_id'];
+$out['folder'] = [$f0, $f1];
 $del = delete_recueil($pdo, ['id' => $rid, 'delete_media' => true]);
 $out['deleted'] = [(int) $pdo->query('SELECT COUNT(*) FROM recueils')->fetchColumn(), (int) $pdo->query('SELECT COUNT(*) FROM recueil_pages')->fetchColumn(), $del['media_deleted']];
 echo json_encode($out);
@@ -79,7 +99,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 let out;
 try { out = JSON.parse(r.stdout.slice(r.stdout.indexOf('{'))); } catch (_) { console.error(r.stdout, r.stderr); process.exit(1); }
 const checks = [
-  ['structure à jour (n°26)', () => assert.equal(out.version, 26)],
+  ['structure à jour (n°27)', () => assert.equal(out.version, 27)],
   ['deux versions ; les nouvelles photos remplissent les pages existantes puis en créent une', () => assert.deepEqual(out.counts, [2, 4, 7, 1])],
   ['par défaut, la page montre la photo la plus récente ; on peut retenir l’ancienne', () => { assert.equal(out.default_shown, true); assert.deepEqual(out.p1, ['f° 1', true]); }],
   ['photo « à ranger », puis posée en détail (zoom) sur une page', () => { assert.equal(out.loose, null); assert.equal(out.p2_shown_not_detail, true); }],
@@ -89,6 +109,9 @@ const checks = [
   ['supprimer une page : ses photos passent à ranger', () => assert.deepEqual(out.after_delete, [3, 2])],
   ['supprimer une version : ses photos quittent le recueil mais restent dans Médias ; la dernière version est gardée', () => { assert.deepEqual(out.after_version, [1, 4, 8, 4]); assert.equal(out.last_version, 'gardée'); }],
   ['liste des recueils : chiffres et vignette', () => assert.deepEqual(out.list, [3, 0, 1, 1, true])],
+  ['dossiers de « À ranger » : sans doublon, renommés avec leurs photos, supprimés sans perdre les photos', () => assert.deepEqual(out.trays, [['Liste C', 'Liste B'], 'Liste C', ['Liste B'], ''])],
+  ['nouvelle page au début, puis juste après la première', () => assert.deepEqual(out.new_pages, [true, 2, true])],
+  ['recueil d’une enquête : dans un dossier (0 = racine) ou partout', () => assert.deepEqual(out.folder, [0, null])],
   ['recueil supprimé avec ses photos qui ne servent nulle part ailleurs', () => assert.deepEqual(out.deleted, [0, 0, 4])],
 ];
 let failed = 0;

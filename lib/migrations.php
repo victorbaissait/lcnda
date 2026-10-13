@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 26;
+const SCHEMA_VERSION = 27;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -47,6 +47,7 @@ function migration_steps(): array
         24 => 'schema_v24',
         25 => 'schema_v25',
         26 => 'schema_v26',
+        27 => 'schema_v27',
     ];
 }
 
@@ -1714,4 +1715,16 @@ function schema_v26(PDO $pdo): void
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_images ON recueil_images(recueil_id, version_id, position)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_images_page ON recueil_images(page_id)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_recueil_links ON recueil_links(entity_type, entity_key)');
+}
+
+/**
+ * Recueils : dossiers pour trier les photos « à ranger » (recueils.trays, recueil_images.tray) ;
+ * place d'un recueil rattaché à une enquête : un dossier de l'enquête, ou partout (recueil_links.folder_id NULL).
+ */
+function schema_v27(PDO $pdo): void
+{
+    $cols = static fn(string $t) => array_column($pdo->query("PRAGMA table_info($t)")->fetchAll(), 'name');
+    if (!in_array('trays', $cols('recueils'), true)) { $pdo->exec("ALTER TABLE recueils ADD COLUMN trays TEXT NOT NULL DEFAULT ''"); }
+    if (!in_array('tray', $cols('recueil_images'), true)) { $pdo->exec("ALTER TABLE recueil_images ADD COLUMN tray TEXT NOT NULL DEFAULT ''"); }
+    if (!in_array('folder_id', $cols('recueil_links'), true)) { $pdo->exec('ALTER TABLE recueil_links ADD COLUMN folder_id INTEGER'); }
 }

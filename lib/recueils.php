@@ -74,6 +74,8 @@ function recueil_detail(PDO $pdo, int $id): array
     $r['id'] = (int) $r['id'];
     $summary = json_decode((string) $r['summary'], true);
     $r['summary'] = is_array($summary) ? $summary : null;
+    $trays = json_decode((string) ($r['trays'] ?? ''), true);
+    $r['trays'] = is_array($trays) ? array_values(array_filter($trays, 'is_string')) : [];
     $s = $pdo->prepare('SELECT * FROM recueil_versions WHERE recueil_id=? ORDER BY position, id'); $s->execute([$id]);
     $versions = array_map(static fn($v) => ['id' => (int) $v['id'], 'name' => $v['name'], 'date_text' => $v['date_text'], 'notes' => $v['notes'], 'position' => (float) $v['position']], $s->fetchAll());
     $s = $pdo->prepare('SELECT * FROM recueil_pages WHERE recueil_id=? ORDER BY position, id'); $s->execute([$id]);
@@ -85,7 +87,7 @@ function recueil_detail(PDO $pdo, int $id): array
         FROM recueil_images i JOIN media m ON m.id=i.media_id WHERE i.recueil_id=? ORDER BY i.position, i.id');
     $s->execute([$id]);
     $images = array_map(static fn($i) => ['id' => (int) $i['id'], 'version_id' => (int) $i['version_id'], 'page_id' => $i['page_id'] !== null ? (int) $i['page_id'] : null, 'media_id' => (int) $i['media_id'],
-        'role' => $i['role'], 'position' => (float) $i['position'], 'note' => $i['note'], 'title' => $i['media_title'], 'filename' => $i['filename'], 'thumbnail' => $i['thumbnail'] ?: $i['filename'],
+        'role' => $i['role'], 'position' => (float) $i['position'], 'note' => $i['note'], 'tray' => (string) ($i['tray'] ?? ''), 'title' => $i['media_title'], 'filename' => $i['filename'], 'thumbnail' => $i['thumbnail'] ?: $i['filename'],
         'media_type' => $i['media_type'], 'media_date' => $i['media_date'], 'media_transcription' => $i['media_transcription']], $s->fetchAll());
     // Image retenue pour chaque page : choisie, sinon la vue entière de la version la plus récente, sinon un détail
     $vpos = []; foreach ($versions as $k => $v) { $vpos[$v['id']] = $k; }
@@ -287,7 +289,8 @@ function save_recueil_page(PDO $pdo, array $data): array
     else {
         $rid = safe_int($data['recueil_id'] ?? 0); recueil_row($pdo, $rid);
         $after = safe_int($data['after'] ?? 0);
-        if ($after) { $s = $pdo->prepare('SELECT position FROM recueil_pages WHERE id=? AND recueil_id=?'); $s->execute([$after, $rid]); $p = (float) $s->fetchColumn();
+        if (!empty($data['at_start'])) { $s = $pdo->prepare('SELECT COALESCE(MIN(position),1)-1 FROM recueil_pages WHERE recueil_id=?'); $s->execute([$rid]); $pos = (float) $s->fetchColumn(); }
+        elseif ($after) { $s = $pdo->prepare('SELECT position FROM recueil_pages WHERE id=? AND recueil_id=?'); $s->execute([$after, $rid]); $p = (float) $s->fetchColumn();
             $n = $pdo->prepare('SELECT MIN(position) FROM recueil_pages WHERE recueil_id=? AND position>?'); $n->execute([$rid, $p]); $next = $n->fetchColumn(); $pos = $next !== null && $next !== false ? ($p + (float) $next) / 2 : $p + 1; }
         else { $s = $pdo->prepare('SELECT COALESCE(MAX(position),0)+1 FROM recueil_pages WHERE recueil_id=?'); $s->execute([$rid]); $pos = (float) $s->fetchColumn(); }
         $pdo->prepare('INSERT INTO recueil_pages(recueil_id, position) VALUES(?,?)')->execute([$rid, $pos]);
@@ -340,12 +343,14 @@ function update_recueil_image(PDO $pdo, array $data): array
     $rid = (int) $img['recueil_id'];
     if (array_key_exists('page_id', $data)) {
         $pid = safe_int($data['page_id']);
-        if ($pid === -1) { $pid = save_recueil_page($pdo, ['recueil_id' => $rid, 'after' => safe_int($data['after_page'] ?? 0)])['id']; }
+        // -1 : nouvelle page après after_page (0 : à la fin) ; -2 : nouvelle page au début
+        if ($pid === -1 || $pid === -2) { $pid = save_recueil_page($pdo, $pid === -2 ? ['recueil_id' => $rid, 'at_start' => true] : ['recueil_id' => $rid, 'after' => safe_int($data['after_page'] ?? 0)])['id']; }
         elseif ($pid > 0 && recueil_page_owner($pdo, $pid) !== $rid) { throw new RuntimeException('Cette page est dans un autre recueil.'); }
         $pdo->prepare('UPDATE recueil_pages SET best_image_id=NULL WHERE best_image_id=? AND id IS NOT ?')->execute([$id, $pid ?: null]);
         $pdo->prepare('UPDATE recueil_images SET page_id=? WHERE id=?')->execute([$pid ?: null, $id]);
     }
     if (isset($data['role'])) { $pdo->prepare('UPDATE recueil_images SET role=? WHERE id=?')->execute([in_array($data['role'], RECUEIL_ROLES, true) ? $data['role'] : 'page', $id]); }
+    if (array_key_exists('tray', $data)) { $pdo->prepare('UPDATE recueil_images SET tray=? WHERE id=?')->execute([mb_substr(safe_text($data['tray']), 0, 120), $id]); }
     if (array_key_exists('note', $data)) { $pdo->prepare('UPDATE recueil_images SET note=? WHERE id=?')->execute([mb_substr(safe_text($data['note']), 0, 2000), $id]); }
     if (isset($data['version_id'])) {
         $v = $pdo->prepare('SELECT 1 FROM recueil_versions WHERE id=? AND recueil_id=?'); $v->execute([safe_int($data['version_id']), $rid]);
@@ -358,7 +363,8 @@ function update_recueil_image(PDO $pdo, array $data): array
         if ($i !== false && $j >= 0 && $j < count($ids)) { [$ids[$i], $ids[$j]] = [$ids[$j], $ids[$i]]; $u = $pdo->prepare('UPDATE recueil_images SET position=? WHERE id=?'); foreach ($ids as $k => $x) { $u->execute([$k + 1, $x]); } }
     }
     recueil_touch($pdo, $rid);
-    return ['id' => $id];
+    $s = $pdo->prepare('SELECT page_id FROM recueil_images WHERE id=?'); $s->execute([$id]);
+    return ['id' => $id, 'page_id' => (int) $s->fetchColumn()];
 }
 
 /** Retire une photo du recueil (elle reste dans Médias). */
@@ -400,7 +406,7 @@ function recueil_links_resolved(PDO $pdo, int $rid, array $pages): array
         if ($e === null) { continue; } // fiche, enquête… supprimée depuis
         $out[] = ['id' => (int) $l['id'], 'entity_type' => $l['entity_type'], 'entity_key' => $l['entity_key'], 'type_label' => RECUEIL_LINK_TYPES[$l['entity_type']] ?? $l['entity_type'],
             'label' => $e['label'] ?: $l['label'], 'extra' => $e['extra'], 'note' => $l['note'],
-            'page_from' => $l['page_from'] !== null ? (int) $l['page_from'] : null, 'page_to' => $l['page_to'] !== null ? (int) $l['page_to'] : null,
+            'page_from' => $l['page_from'] !== null ? (int) $l['page_from'] : null, 'page_to' => $l['page_to'] !== null ? (int) $l['page_to'] : null, 'folder_id' => isset($l['folder_id']) && $l['folder_id'] !== null ? (int) $l['folder_id'] : null,
             'from_num' => $l['page_from'] !== null ? ($num[(int) $l['page_from']] ?? null) : null, 'to_num' => $l['page_to'] !== null ? ($num[(int) $l['page_to']] ?? null) : null];
     }
     return $out;
@@ -426,8 +432,10 @@ function save_recueil_link(PDO $pdo, array $data): array
     $label = mb_substr(safe_text($data['label'] ?? ''), 0, 200);
     $note = mb_substr(safe_text($data['note'] ?? ''), 0, 2000);
     $id = safe_int($data['id'] ?? 0);
-    if ($id) { $pdo->prepare('UPDATE recueil_links SET entity_type=?, entity_key=?, page_from=?, page_to=?, label=?, note=? WHERE id=? AND recueil_id=?')->execute([$type, $key, $from ?: null, $to ?: null, $label, $note, $id, $rid]); }
-    else { $pdo->prepare('INSERT INTO recueil_links(recueil_id, entity_type, entity_key, page_from, page_to, label, note) VALUES(?,?,?,?,?,?,?)')->execute([$rid, $type, $key, $from ?: null, $to ?: null, $label, $note]); $id = (int) $pdo->lastInsertId(); }
+    $folder = isset($data['folder_id']) && $data['folder_id'] !== '' && $data['folder_id'] !== null ? safe_int($data['folder_id']) : null; // NULL : partout
+    if ($id) { $pdo->prepare('UPDATE recueil_links SET entity_type=?, entity_key=?, page_from=?, page_to=?, label=?, note=?' . (array_key_exists('folder_id', $data) ? ', folder_id=?' : '') . ' WHERE id=? AND recueil_id=?')
+        ->execute(array_merge([$type, $key, $from ?: null, $to ?: null, $label, $note], array_key_exists('folder_id', $data) ? [$folder] : [], [$id, $rid])); }
+    else { $pdo->prepare('INSERT INTO recueil_links(recueil_id, entity_type, entity_key, page_from, page_to, label, note, folder_id) VALUES(?,?,?,?,?,?,?,?)')->execute([$rid, $type, $key, $from ?: null, $to ?: null, $label, $note, $folder]); $id = (int) $pdo->lastInsertId(); }
     recueil_touch($pdo, $rid);
     return ['id' => $id];
 }
@@ -459,7 +467,7 @@ function recueils_for_entity(PDO $pdo, string $type, string $key): array
         $thumbs = [];
         foreach (array_slice($sel, 0, 8) as $p) { $i = $img[$p['shown_image_id']] ?? null; $thumbs[] = ['page_id' => $p['id'], 'num' => $p['num'], 'label' => $p['label'], 'thumbnail' => $i['thumbnail'] ?? '', 'filename' => $i['filename'] ?? ''] ; }
         $out[] = ['link_id' => (int) $l['id'], 'recueil_id' => $rid, 'title' => $l['title'], 'icon' => $l['icon'], 'reference' => $l['reference'], 'note' => $l['note'],
-            'from_num' => $fromN, 'to_num' => $toN, 'pages' => count($sel), 'total_pages' => count($pages),
+            'from_num' => $fromN, 'to_num' => $toN, 'pages' => count($sel), 'total_pages' => count($pages), 'folder_id' => isset($l['folder_id']) && $l['folder_id'] !== null ? (int) $l['folder_id'] : null,
             'transcribed' => count(array_filter($sel, static fn($p) => trim($p['transcription']) !== '')), 'thumbs' => $thumbs];
     }
     return $out;
@@ -483,4 +491,29 @@ function recueil_search_entities(PDO $pdo, string $type, string $q): array
         }
     } catch (Throwable $_) {}
     return ['results' => $out];
+}
+
+/** Place d'un recueil rattaché à une enquête : un dossier (0 = racine), ou partout (vide). */
+function move_recueil_link(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $folder = isset($data['folder_id']) && $data['folder_id'] !== '' && $data['folder_id'] !== null ? safe_int($data['folder_id']) : null;
+    $pdo->prepare('UPDATE recueil_links SET folder_id=? WHERE id=?')->execute([$folder, $id]);
+    return ['id' => $id, 'folder_id' => $folder];
+}
+
+/** Les dossiers de « À ranger » (premier tri des photos) : noms dans l'ordre. Un dossier retiré rend ses photos « sans dossier ». */
+function save_recueil_trays(PDO $pdo, array $data): array
+{
+    $rid = safe_int($data['recueil_id'] ?? 0); recueil_row($pdo, $rid);
+    $names = [];
+    foreach (array_slice(is_array($data['trays'] ?? null) ? $data['trays'] : [], 0, 200) as $n) { $n = mb_substr(safe_text(is_scalar($n) ? (string) $n : ''), 0, 120); if ($n !== '' && !in_array($n, $names, true)) { $names[] = $n; } }
+    $pdo->prepare('UPDATE recueils SET trays=? WHERE id=?')->execute([json_encode($names, JSON_UNESCAPED_UNICODE), $rid]);
+    if (is_array($data['rename'] ?? null) && isset($data['rename']['from'], $data['rename']['to'])) {
+        $pdo->prepare('UPDATE recueil_images SET tray=? WHERE recueil_id=? AND tray=?')->execute([mb_substr(safe_text($data['rename']['to']), 0, 120), $rid, safe_text($data['rename']['from'])]);
+    }
+    if ($names) { $in = implode(',', array_fill(0, count($names), '?')); $pdo->prepare("UPDATE recueil_images SET tray='' WHERE recueil_id=? AND tray<>'' AND tray NOT IN ($in)")->execute([$rid, ...$names]); }
+    else { $pdo->prepare("UPDATE recueil_images SET tray='' WHERE recueil_id=?")->execute([$rid]); }
+    recueil_touch($pdo, $rid);
+    return ['trays' => $names];
 }
