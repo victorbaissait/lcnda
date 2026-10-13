@@ -961,3 +961,5 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-vr-chips .checkbox-line { margin:0; font-size:13px; }
 .h-vr-not { margin:0; }
 .h-vr-match { margin:6px 0 2px; }
+.h-cfg-explain { background:#eef5fd; border-left:4px solid #0066cc; padding:8px 12px; margin-bottom:10px; font-size:14px; line-height:1.45; }
+.h-cfg-explain .link-button { font-weight:700; }
