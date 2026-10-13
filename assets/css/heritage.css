@@ -948,3 +948,5 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-at-menu-cfg { border-top:1px solid var(--line, #ddd) !important; color:var(--muted, #666); font-size:13px !important; }
 .h-at-howto { font-size:14px; padding-left:1.2rem; }
 .h-at-howto li { margin:3px 0; }
+.h-cfg-head { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
+.h-cfg-head h3 { margin:0; }

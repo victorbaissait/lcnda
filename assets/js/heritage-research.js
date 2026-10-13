@@ -807,6 +807,31 @@
     }
     const treeToOutline = (tree, depth = 0) => (tree || []).map(n => '  '.repeat(depth) + (n.icon ? n.icon + ' ' : '') + n.name + (n.children?.length ? '\n' + treeToOutline(n.children, depth + 1) : '')).join('\n');
     const countTree = t => (t || []).reduce((a, n) => a + 1 + countTree(n.children), 0);
+    // Réglages enregistrés sous un nom (comme les mises en page de l'Apparence), à appliquer, exporter, importer
+    const PROFILES_KEY = 'genealogie-atelier-profiles';
+    const profiles = () => { try { const p = JSON.parse(localStorage.getItem(PROFILES_KEY) || '[]'); return Array.isArray(p) ? p : []; } catch (_) { return []; } };
+    const saveProfiles = list => { try { localStorage.setItem(PROFILES_KEY, JSON.stringify(list)); } catch (_) { toast('Enregistrement impossible (place du navigateur ?).', 'error'); } };
+    const str = (v, max = 200) => typeof v === 'string' ? v.slice(0, max) : '';
+    const okKey = k => typeof k === 'string' && /^[a-z0-9_]{1,40}$/i.test(k);
+    const cleanTree = (t, depth = 0) => Array.isArray(t) && depth < 30 ? t.slice(0, 500).filter(n => n && typeof n.name === 'string' && n.name.trim()).map(n => ({name: str(n.name), icon: str(n.icon, 16), children: cleanTree(n.children, depth + 1)})) : [];
+    const FIELD_KINDS = ['text', 'longtext', 'date', 'number', 'select', 'checkbox', 'url', 'person', 'place'];
+    /** Réglages reçus d'un fichier : seulement ce que cet écran sait produire, avec des valeurs du bon genre. */
+    function cleanCfg(raw) {
+        const r = raw && typeof raw === 'object' ? raw : {};
+        const base = x => ({key: x.key, icon: str(x.icon, 16), label: str(x.label), hidden: !!x.hidden});
+        const nav = (Array.isArray(r.nav) ? r.nav : []).filter(x => x && okKey(x.key)).slice(0, 200).map(x => x.custom ? {...base(x), custom: true, filter: (f => ({types: (Array.isArray(f.types) ? f.types : []).filter(okKey).slice(0, 50), tags: (Array.isArray(f.tags) ? f.tags : []).map(t => str(t, 60)).filter(Boolean).slice(0, 50), tagMode: f.tagMode === 'any' ? 'any' : 'all',
+            read: Object.keys(READ).includes(f.read) ? f.read : '', text: str(f.text), from: str(String(f.from ?? ''), 6), to: str(String(f.to ?? ''), 6), folder: str(f.folder), starred: !!f.starred, todo: !!f.todo}))(x.filter && typeof x.filter === 'object' ? x.filter : {})} : base(x));
+        const types = (Array.isArray(r.types) ? r.types : []).filter(x => x && okKey(x.key)).slice(0, 200).map(x => x.custom ? {...base(x), custom: true, titleLabel: str(x.titleLabel) || 'Titre', help: str(x.help),
+            fields: (Array.isArray(x.fields) ? x.fields : []).filter(f => f && okKey(f.key) && FIELD_KINDS.includes(f.type)).slice(0, 80).map(f => ({key: f.key, type: f.type, label: str(f.label) || 'Champ', width: f.width === 'half' ? 'half' : 'full', options: (Array.isArray(f.options) ? f.options : []).map(o => str(o, 80)).filter(Boolean).slice(0, 60), placeholder: str(f.placeholder), help: str(f.help), required: !!f.required}))} : base(x));
+        const plans = (Array.isArray(r.plans) ? r.plans : []).filter(x => x && okKey(x.key)).slice(0, 200).map(x => x.custom ? {key: x.key, label: str(x.label) || 'Plan', hidden: !!x.hidden, custom: true, tree: cleanTree(x.tree)} : {key: x.key, label: str(x.label), hidden: !!x.hidden});
+        const folders = {closed: str(r.folders?.closed, 16) || '📁', open: str(r.folders?.open, 16) || '📂'};
+        return {nav, types, plans, folders};
+    }
+    const cfgSummary = c => { const n = c || {}; const mine = list => (list || []).filter(x => x.custom).length; const hidden = list => (list || []).filter(x => x.hidden).length;
+        return [`menu : ${mine(n.nav) ? plural(mine(n.nav), 'vue à moi', 'vues à moi') : 'pas de vue à moi'}${hidden(n.nav) ? `, ${fmt(hidden(n.nav))} masqué(s)` : ''}`, `${plural(mine(n.types), 'sorte à moi', 'sortes à moi')}${hidden(n.types) ? `, ${fmt(hidden(n.types))} masquée(s)` : ''}`, `dossiers ${n.folders?.closed || '📁'}${n.folders?.open || '📂'}`, `${plural(mine(n.plans), 'plan à moi', 'plans à moi')}`].join(' · '); };
+    const applyCfg = settings => { try { localStorage.setItem(CFG_KEY, JSON.stringify(cleanCfg(settings))); } catch (_) {} CFG = loadCfg(); };
+    const downloadCfg = (name, settings) => ext.downloadText(`reglages-atelier-${String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 50) || 'lcnda'}.lcnda-atelier.json`,
+        JSON.stringify({type: 'lcnda-atelier-reglages', version: 1, name, exported: new Date().toISOString(), settings: cleanCfg(settings)}, null, 1));
     ext.atelierSavePlanFromProject = () => {
         if (!P) return;
         const walk = parent => kids(parent).map(f => ({name: f.name, icon: f.icon || '', children: walk(Number(f.id))}));
@@ -829,14 +854,18 @@
         const typeExtra = x => x.custom ? `<button type="button" class="button small secondary" data-cfg-type-edit>Champs (${(x.fields || []).length})…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : '';
         const planExtra = x => `<small class="muted">${plural(countTree(x.tree), 'dossier', 'dossiers')}</small>${x.custom ? `<button type="button" class="button small secondary" data-cfg-plan-edit>Modifier…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : `<button type="button" class="button small secondary" data-cfg-plan-copy>Copier pour le modifier</button>`}`;
         ws.innerHTML = `<section class="page collection-page h-cfg">${`<header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📚 Atelier de recherche</h2><p>Les réglages de l’Atelier (Enquêtes → Atelier) : l’ordre et les émojis du menu d’un projet, tes propres vues, les sortes d’éléments (et les tiennes, avec leurs champs), les émojis des dossiers et tes plans de départ. Tout est enregistré tout de suite.</p></div><div class="page-actions"><button type="button" class="button secondary" data-cfg-open>Ouvrir l’Atelier</button></div></header>`}
-            <section class="maintenance-panel"><h3>1. Le menu de gauche d’un projet</h3><p class="muted">Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).</p>
+            <section class="maintenance-panel"><div class="h-cfg-head"><h3>1. Le menu de gauche d’un projet</h3><button type="button" class="button small secondary" data-cfg-reset-sec="nav" title="Remettre cette partie comme au départ">↺ Réinitialiser</button></div><p class="muted">Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).</p>
                 <div class="h-cfg-list">${CFG.nav.map((x, i, l) => row('nav', x, i, l, navExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-view-add>+ Ma propre vue</button></section>
-            <section class="maintenance-panel"><h3>2. Les sortes d’éléments</h3><p class="muted">L’ordre du menu « + Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…).</p>
+            <section class="maintenance-panel"><div class="h-cfg-head"><h3>2. Les sortes d’éléments</h3><button type="button" class="button small secondary" data-cfg-reset-sec="types" title="Remettre cette partie comme au départ">↺ Réinitialiser</button></div><p class="muted">L’ordre du menu « + Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…).</p>
                 <div class="h-cfg-list">${CFG.types.map((x, i, l) => row('types', x, i, l, typeExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-type-add>+ Ma propre sorte d’élément</button></section>
-            <section class="maintenance-panel"><h3>3. Les dossiers</h3><p class="muted">L’émoji des dossiers qui n’en ont pas. Chaque dossier peut aussi avoir le sien : dans un projet, survole le dossier puis ✎.</p>
+            <section class="maintenance-panel"><div class="h-cfg-head"><h3>3. Les dossiers</h3><button type="button" class="button small secondary" data-cfg-reset-sec="folders" title="Remettre cette partie comme au départ">↺ Réinitialiser</button></div><p class="muted">L’émoji des dossiers qui n’en ont pas. Chaque dossier peut aussi avoir le sien : dans un projet, survole le dossier puis ✎.</p>
                 <div class="form-grid"><label>Dossier fermé ${iconInput('data-cfg-folder="closed"', CFG.folders.closed)}</label><label>Dossier ouvert ${iconInput('data-cfg-folder="open"', CFG.folders.open)}</label></div></section>
-            <section class="maintenance-panel"><h3>4. Les plans de départ</h3><p class="muted">Proposés quand on crée un projet. Range-les, masque ceux qui ne te servent pas, crée les tiens (ou copie un plan de l’app pour le changer). Astuce : dans un projet, « Exporter… → Enregistrer ce plan » garde ses dossiers comme plan.</p>
+            <section class="maintenance-panel"><div class="h-cfg-head"><h3>4. Les plans de départ</h3><button type="button" class="button small secondary" data-cfg-reset-sec="plans" title="Remettre cette partie comme au départ">↺ Réinitialiser</button></div><p class="muted">Proposés quand on crée un projet. Range-les, masque ceux qui ne te servent pas, crée les tiens (ou copie un plan de l’app pour le changer). Astuce : dans un projet, « Exporter… → Enregistrer ce plan » garde ses dossiers comme plan.</p>
                 <div class="h-cfg-list">${CFG.plans.map((x, i, l) => row('plans', x, i, l, planExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-plan-add>+ Mon plan</button></section>
+            <section class="maintenance-panel h-layouts"><h3>5. Mes réglages enregistrés</h3><p class="muted">Garde tous ces réglages (menu, sortes d’éléments, dossiers, plans) sous un nom, pour y revenir plus tard, ou les envoyer à quelqu’un : il les importe ici. Les projets et leurs éléments ne sont pas dedans.</p>
+                <div class="h-layouts-save"><input type="text" data-cfg-pname maxlength="60" placeholder="Nom (ex. Thèse montreurs, Réglages simples)"><button type="button" class="button small" data-cfg-psave>Enregistrer les réglages actuels</button><button type="button" class="button small secondary" data-cfg-pexport-now>Exporter les réglages actuels</button><button type="button" class="button small secondary" data-cfg-pimport>Importer un fichier…</button></div>
+                ${profiles().length ? `<ul class="h-layouts-list">${profiles().map((x, i) => `<li><div><strong>${esc(x.name)}</strong><small>${esc(cfgSummary(x.settings))}${x.saved ? ` · ${esc(new Date(x.saved).toLocaleDateString('fr-FR'))}` : ''}${x.from ? ` · reçus de ${esc(x.from)}` : ''}</small></div>
+                    <span class="page-actions"><button type="button" class="button small" data-cfg-papply="${i}">Appliquer</button><button type="button" class="button small secondary" data-cfg-pupdate="${i}" title="Remplacer par les réglages actuels">Mettre à jour</button><button type="button" class="button small secondary" data-cfg-prename="${i}">Renommer</button><button type="button" class="button small secondary" data-cfg-pexport="${i}">Exporter</button><button type="button" class="icon-button danger" data-cfg-pdel="${i}" title="Supprimer">🗑</button></span></li>`).join('')}</ul>` : '<p class="muted">Aucun réglage enregistré pour l’instant.</p>'}</section>
             <div class="page-actions"><button type="button" class="button secondary danger" data-cfg-reset>Tout remettre comme au départ</button></div></section>`;
         const again = () => ext.maintenance.atelier(S().workspaceToken);
         const listOf = sec => CFG[sec];
@@ -853,6 +882,7 @@
             if (sec && t.dataset.cfg === 'hidden') { listOf(sec)[i].hidden = t.checked; saveCfg(); t.closest('.h-cfg-row').classList.toggle('is-hidden', t.checked); }
             if (sec && t.dataset.cfg === 'label' && !t.value.trim()) { saveCfg(); again(); } // nom vidé : celui de l'app revient
         }, {signal: ws._cfgCtl.signal});
+        ws.querySelector('[data-cfg-pname]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ws.querySelector('[data-cfg-psave]').click(); } });
         ws.addEventListener('click', e => {
             const t = e.target, [sec, i] = at(t);
             if (t.closest('[data-cfg-emoji]')) { const input = t.closest('.h-at-iconfield').querySelector('input'); return ext.pickEmoji?.(input); }
@@ -865,6 +895,30 @@
             if (t.closest('[data-cfg-plan-add]')) return planDialog(null);
             if (t.closest('[data-cfg-plan-edit]')) return planDialog(CFG.plans[i]);
             if (t.closest('[data-cfg-plan-copy]')) { const x = CFG.plans[i]; return planDialog({key: '', label: x.label + ' (ma version)', tree: JSON.parse(JSON.stringify(x.tree || [])), custom: true}, true); }
+            const rs = t.closest('[data-cfg-reset-sec]');
+            if (rs) { const sec = rs.dataset.cfgResetSec, what = {nav: 'le menu de gauche (tes vues à toi seront supprimées)', types: 'les sortes d’éléments (tes sortes à toi seront supprimées ; les éléments déjà faits gardent leurs valeurs)', folders: 'les émojis des dossiers', plans: 'les plans de départ (tes plans à toi seront supprimés)'}[sec];
+                if (!confirm(`Remettre ${what} comme au départ ?`)) return;
+                const raw = readCfg(); delete raw[sec]; try { localStorage.setItem(CFG_KEY, JSON.stringify(raw)); } catch (_) {} CFG = loadCfg(); toast('Partie remise comme au départ.'); again(); return; }
+            const name = () => ws.querySelector('[data-cfg-pname]').value.trim();
+            if (t.closest('[data-cfg-psave]')) { const n = name(); if (!n) { toast('Donne un nom à ces réglages.', 'error'); ws.querySelector('[data-cfg-pname]').focus(); return; }
+                const list = profiles(), same = list.findIndex(x => x.name.toLowerCase() === n.toLowerCase());
+                if (same >= 0 && !confirm(`Des réglages « ${list[same].name} » existent déjà. Les remplacer ?`)) return;
+                const entry = {name: n, saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; if (same >= 0) list[same] = entry; else list.push(entry);
+                saveProfiles(list); toast(`Réglages « ${n} » enregistrés.`); again(); return; }
+            if (t.closest('[data-cfg-pexport-now]')) { downloadCfg(name() || 'reglages actuels', readCfg()); toast('Fichier prêt : l’autre personne l’importe dans Maintenance → Atelier de recherche.'); return; }
+            if (t.closest('[data-cfg-pimport]')) { (async () => {
+                const text = await ext.pickFile('.json,application/json'); if (text === null) return;
+                let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages de l’Atelier.', 'error'); }
+                if (data?.type !== 'lcnda-atelier-reglages' || !data.settings || typeof data.settings !== 'object') return toast('Ce fichier n’est pas un fichier de réglages de l’Atelier.', 'error');
+                const list = profiles(); let n = str(data.name, 60) || 'Réglages reçus'; while (list.some(x => x.name === n)) n += ' (2)';
+                list.push({name: n, saved: new Date().toISOString(), from: str(data.author, 60), settings: cleanCfg(data.settings)}); saveProfiles(list);
+                toast(`Réglages « ${n} » importés : clique sur « Appliquer » pour les utiliser.`); again(); })(); return; }
+            const pi = b => Number(t.closest(`[${b}]`)?.getAttribute(b));
+            if (t.closest('[data-cfg-papply]')) { const x = profiles()[pi('data-cfg-papply')]; if (!x || !confirm(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`)) return; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return; }
+            if (t.closest('[data-cfg-pupdate]')) { const list = profiles(), i = pi('data-cfg-pupdate'); if (!list[i] || !confirm(`Remplacer « ${list[i].name} » par les réglages actuels ?`)) return; list[i] = {...list[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(list); toast('Mis à jour.'); again(); return; }
+            if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; const n = prompt('Nouveau nom :', list[i].name); if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); return; }
+            if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); toast('Fichier prêt.'); } return; }
+            if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !confirm(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`)) return; list.splice(i, 1); saveProfiles(list); again(); return; }
             if (t.closest('[data-cfg-reset]')) { if (!confirm('Remettre tous les réglages de l’Atelier comme au départ ? Tes vues, tes sortes d’éléments et tes plans seront supprimés (les éléments des projets ne sont pas touchés).')) return; try { localStorage.removeItem(CFG_KEY); } catch (_) {} CFG = loadCfg(); toast('Réglages remis comme au départ.'); again(); }
         }, {signal: ws._cfgCtl.signal});
 
