@@ -65,7 +65,7 @@
     }
     const pageMedia = (r, n) => (r.media || []).filter(m => String(m.archive_page_number || '').trim() === n);
     const loose = r => (r.media || []).filter(m => !String(m.archive_page_number || '').trim());
-    const households = people => new Set(people.map(p => (p.household_key || '').trim()).filter(Boolean)).size;
+    const households = people => new Set(people.map(p => `${p.page_number}|${p.household_uid || (p.household_key || '').trim()}`).filter(k => !k.endsWith('|'))).size;
 
     /* ─────────── Liste ─────────── */
     ext.lists.depouillements = async token => {
@@ -232,7 +232,7 @@
                 </div></div>
             <section class="maintenance-panel h-dp-people"><header class="h-dp-peoplehead"><h3>👥 Personnes et foyers de la page ${esc(p.number)}</h3>
                 <span>${(() => { const lk = isLocked(r.id, p.number); return `<button type="button" class="icon-button h-dp-lock ${lk ? 'is-locked' : ''}" data-dp-lock title="${lk ? 'Tableau verrouillé : clique pour pouvoir le modifier' : 'Verrouiller le tableau de cette page (évite les modifications par erreur)'}">${lk ? '🔒' : '🔓'}</button><button type="button" class="button small secondary" data-dp-addhh ${lk ? 'disabled' : ''}>+ Foyer</button><button type="button" class="button small" data-dp-addp ${lk ? 'disabled' : ''}>+ Personne</button>`; })()}</span></header>
-                <p class="muted h-dp-hint">Une ligne = une personne relevée, rangées par rue › numéro › foyer dans l’ordre du document. « + Foyer » propose le numéro suivant, tu peux en mettre un autre (12 bis, numéro sauté…). Sur un foyer : ✎ son numéro, 📍 son adresse, 🗑 le supprimer. Coller depuis un tableur remplit les lignes. 👤 : rattacher à une fiche.</p>
+                <p class="muted h-dp-hint">Rangées par rue › n° › foyer, dans l’ordre du document. Un foyer a un numéro et une adresse (n° et rue sur sa ligne), que partagent ses personnes. « + Foyer » propose le numéro suivant ; tu peux en mettre un autre (12 bis, numéro sauté…). Coller depuis un tableur remplit les lignes.</p>
                 <div class="h-dp-tablewrap" data-dp-table></div></section>`;
         const go = n => { if (n === '' || n == null) return; st().page = String(n); st().image = 0; paint(); };
         body.querySelector('[data-dp-allpages]').addEventListener('click', () => { st().page = ''; paint(); });
@@ -303,6 +303,7 @@
     const isLocked = (id, page) => !!locks()[`${id}:${page}`];
     const setLocked = (id, page, on) => { const l = locks(); if (on) l[`${id}:${page}`] = 1; else delete l[`${id}:${page}`]; try { localStorage.setItem('genealogie-dp-locks', JSON.stringify(l)); } catch (_) {} };
     const DRAFTS = {};
+    const newUid = () => 'n:' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
     function peopleTable(box, pageNumber, locked = false) {
         const r = D.row;
         const rows = (r.people || []).filter(x => String(x.page_number || '').trim() === pageNumber);
@@ -311,32 +312,39 @@
         const all = () => [...rows, ...draft];
         const rank = x => x.id ? x.id : 1e12 + (order.get(x) ?? (order.set(x, ++seq), seq));
         const keyOf = x => String(x.household_key || '').trim();
+        // Un foyer = une identité (household_uid), indépendante de son numéro ; ses personnes partagent son numéro et son adresse
+        const uidOf = x => x.household_uid || (x.household_uid = keyOf(x) ? 'k:' + keyOf(x) : 'a:' + String(x.address || '').trim().toLowerCase());
+        const members = uid => all().filter(x => uidOf(x) === uid);
         /** Foyers dans l'ordre où ils apparaissent dans le document (première ligne saisie), personnes dans l'ordre de saisie. */
-        const sorted = () => { const first = new Map(); all().forEach(x => { const k = keyOf(x), v = rank(x); if (!first.has(k) || v < first.get(k)) first.set(k, v); }); return all().slice().sort((a, b) => (first.get(keyOf(a)) - first.get(keyOf(b))) || (rank(a) - rank(b))); };
+        const sorted = () => { const first = new Map(); all().forEach(x => { const k = uidOf(x), v = rank(x); if (!first.has(k) || v < first.get(k)) first.set(k, v); }); return all().slice().sort((a, b) => (first.get(uidOf(a)) - first.get(uidOf(b))) || (rank(a) - rank(b))); };
         const suggestKey = () => { const ks = (r.people || []).concat(draft).map(x => parseInt(x.household_key, 10)).filter(Number.isFinite); const lastOnPage = sorted().map(x => parseInt(x.household_key, 10)).filter(Number.isFinite).pop(); return String(Number.isFinite(lastOnPage) ? lastOnPage + 1 : ks.length ? Math.max(...ks) + 1 : 1); };
-        const COLS2 = [['household_key', 'Foyer', 5], ['house', 'N°', 5], ['street', 'Rue', 13], ['last_name', 'Nom', 11], ['first_name', 'Prénom', 11], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 10], ['occupation', 'Profession', 11], ['birth_place', 'Né(e) à', 10], ['nationality', 'Nationalité', 8], ['notes', 'Notes', 11]];
-        const val = (x, k) => k === 'house' ? parseAddr(x.address).house : k === 'street' ? parseAddr(x.address).street : (x[k] || '');
+        const COLS2 = [['last_name', 'Nom', 13], ['first_name', 'Prénom', 13], ['age_text', 'Âge', 5], ['household_position', 'Place dans le foyer', 12], ['occupation', 'Profession', 13], ['birth_place', 'Né(e) à', 12], ['nationality', 'Nationalité', 9], ['notes', 'Notes', 14]];
+        const streets = () => [...new Set((r.people || []).map(x => parseAddr(x.address).street).filter(Boolean))];
         const render = focus => {
             // garder la case où l'on écrit (le tableau se redessine quand un foyer ou une adresse change)
-            const ae = document.activeElement, keep = !focus && ae && box.contains(ae) && ae.dataset?.dpK ? {x: all()[Number(ae.closest('tr')?.dataset.dpI)], k: ae.dataset.dpK, a: ae.selectionStart, b: ae.selectionEnd} : null;
-            const list = sorted(); let lastStreet = null, lastHouse = null, lastKey = null;
+            const ae = document.activeElement, keep = !focus && ae && box.contains(ae) && (ae.dataset?.dpK || ae.dataset?.dpHa) ? {sel: ae.dataset.dpK ? `tr[data-dp-i="${all().indexOf(all()[Number(ae.closest('tr')?.dataset.dpI)])}"] [data-dp-k="${ae.dataset.dpK}"]` : `tr[data-dp-hh="${CSS.escape(ae.closest('tr').dataset.dpHh)}"] [data-dp-ha="${ae.dataset.dpHa}"]`, a: ae.selectionStart, b: ae.selectionEnd} : null;
+            const list = sorted(); let lastStreet = null, lastHouse = null, lastUid = null;
             const span = COLS2.length + 2;
             const FICHE_AT = COLS2.findIndex(([c]) => c === 'first_name') + 1; // la fiche juste après le prénom : visible sans faire défiler
-            box.innerHTML = `<table class="h-dp-table ${locked ? 'is-locked' : ''}"><thead><tr>${COLS2.map(([k, l, w], j) => `${j === FICHE_AT ? '<th class="h-dp-fiche">Fiche</th>' : ''}<th style="width:${w}%">${esc(l)}</th>`).join('')}<th></th></tr></thead><tbody>${list.map(x => {
-                const i = all().indexOf(x), ad = parseAddr(x.address), k = keyOf(x); let bands = '';
-                if (ad.street.toLowerCase() !== (lastStreet ?? '').toLowerCase() || lastStreet === null) { if (ad.street || lastStreet !== null) bands += `<tr class="h-dp-band is-street"><td colspan="${span}">🛣️ ${ad.street ? esc(ad.street) : '<span class="muted">Rue non précisée</span>'}</td></tr>`; lastStreet = ad.street; lastHouse = null; }
-                if (ad.house !== lastHouse) { if (ad.house) bands += `<tr class="h-dp-band is-house"><td colspan="${span}">🏠 n° ${esc(ad.house)}${ad.street ? ` <small class="muted">${esc(ad.street)}</small>` : ''}</td></tr>`; lastHouse = ad.house; lastKey = null; }
-                if (k !== lastKey) { const n = list.filter(y => keyOf(y) === k).length;
-                    bands += `<tr class="h-dp-band is-hh" data-dp-hh="${esc(k)}"><td colspan="${span}"><span>👪 ${k ? `Foyer ${esc(k)}` : 'Sans n° de foyer'} <small class="muted">${plural(n, 'personne', 'personnes')}</small></span>
-                        <span class="h-dp-hhtools" ${locked ? 'hidden' : ''}><button type="button" class="link-button" data-dp-hhadd>+ personne</button><button type="button" class="icon-button" data-dp-hhren title="Changer le numéro du foyer (toutes ses personnes suivent)">✎</button><button type="button" class="icon-button" data-dp-hhaddr title="Adresse du foyer (n° et rue) pour toutes ses personnes">📍</button><button type="button" class="icon-button danger" data-dp-hhdel title="Supprimer le foyer et ses personnes relevées">🗑</button></span></td></tr>`; lastKey = k; }
-                const fiche = `<td class="h-dp-fiche">${x.person_id ? `<button type="button" class="link-button h-dp-plink" data-open-person="${x.person_id}" title="Ouvrir la fiche de ${esc(x.person_name || '')}">👤 ${esc(x.person_name || 'la fiche')}</button>${locked ? '' : '<button type="button" class="icon-button" data-dp-unp title="Ne plus rattacher à la fiche">✕</button>'}` : locked ? '' : `<button type="button" class="icon-button" data-dp-p title="Rattacher à une fiche existante, ou créer la fiche">👤</button>`}</td>`;
-                return `${bands}<tr data-dp-i="${i}" class="${x.id ? '' : 'is-draft'}">${COLS2.map(([c], j) => `${j === FICHE_AT ? fiche : ''}<td><input data-dp-k="${c}" value="${esc(val(x, c))}" ${locked ? 'readonly tabindex="-1"' : ''}></td>`).join('')}
-                    <td>${locked ? '' : '<button type="button" class="icon-button danger" data-dp-del title="Supprimer cette personne relevée">🗑</button>'}</td></tr>`; }).join('') || `<tr><td colspan="${span}" class="muted">Personne relevée sur cette page : « + Foyer », puis le nom ; ou colle des lignes depuis un tableur.</td></tr>`}</tbody></table>`;
+            box.innerHTML = `<datalist id="h-dp-streets">${streets().map(n => `<option value="${esc(n)}">`).join('')}</datalist><table class="h-dp-table ${locked ? 'is-locked' : ''}"><thead><tr>${COLS2.map(([k, l, w], j) => `${j === FICHE_AT ? '<th class="h-dp-fiche">Fiche</th>' : ''}<th style="width:${w}%">${esc(l)}</th>`).join('')}<th></th></tr></thead><tbody>${list.map(x => {
+                const i = all().indexOf(x), uid = uidOf(x); let bands = '';
+                if (uid !== lastUid) {
+                    const ms = list.filter(y => uidOf(y) === uid), head = ms[0], ad = parseAddr(head.address), k = keyOf(head);
+                    if (ad.street.toLowerCase() !== (lastStreet ?? '').toLowerCase() || lastStreet === null) { if (ad.street || lastStreet !== null) bands += `<tr class="h-dp-band is-street"><td colspan="${span}">🛣️ ${ad.street ? esc(ad.street) : '<span class="muted">Rue non précisée</span>'}</td></tr>`; lastStreet = ad.street; lastHouse = null; }
+                    if (ad.house !== lastHouse) { if (ad.house) bands += `<tr class="h-dp-band is-house"><td colspan="${span}">🏠 n° ${esc(ad.house)}${ad.street ? ` <small class="muted">${esc(ad.street)}</small>` : ''}</td></tr>`; lastHouse = ad.house; }
+                    bands += `<tr class="h-dp-band is-hh" data-dp-hh="${esc(uid)}"><td colspan="${span}"><div class="h-dp-hhrow"><b>👪 ${k ? `Foyer ${esc(k)}` : 'Foyer sans n°'}</b> <small class="muted">${plural(ms.length, 'personne', 'personnes')}</small>
+                        ${locked ? '' : `<span class="h-dp-hhtools"><button type="button" class="h-dp-mini" data-dp-hhadd title="Ajouter une personne à ce foyer">＋ personne</button><button type="button" class="h-dp-mini" data-dp-hhren title="Changer le numéro de CE foyer">✎ n°</button><button type="button" class="h-dp-mini is-danger" data-dp-hhdel title="Supprimer ce foyer et ses personnes relevées">🗑</button></span>`}
+                        <label class="h-dp-hhaddr">n° <input data-dp-ha="house" value="${esc(ad.house)}" placeholder="—" ${locked ? 'readonly' : ''}></label><label class="h-dp-hhaddr is-street">rue <input data-dp-ha="street" list="h-dp-streets" value="${esc(ad.street)}" placeholder="nom de la rue" ${locked ? 'readonly' : ''}></label></div></td></tr>`;
+                    lastUid = uid;
+                }
+                const fiche = `<td class="h-dp-fiche">${x.person_id ? `<button type="button" class="link-button h-dp-plink" data-open-person="${x.person_id}" title="Ouvrir la fiche de ${esc(x.person_name || '')}">👤 ${esc(x.person_name || 'la fiche')}</button>${locked ? '' : '<button type="button" class="h-dp-mini" data-dp-unp title="Ne plus rattacher à la fiche">✕</button>'}` : locked ? '' : `<button type="button" class="h-dp-mini is-faint" data-dp-p title="Rattacher à une fiche existante, ou créer la fiche">＋ fiche</button>`}</td>`;
+                return `${bands}<tr data-dp-i="${i}" class="${x.id ? '' : 'is-draft'}">${COLS2.map(([c], j) => `${j === FICHE_AT ? fiche : ''}<td><input data-dp-k="${c}" value="${esc(x[c] || '')}" ${locked ? 'readonly tabindex="-1"' : ''}></td>`).join('')}
+                    <td>${locked ? '' : '<button type="button" class="h-dp-mini is-danger is-faint" data-dp-del title="Supprimer cette personne relevée">🗑</button>'}</td></tr>`; }).join('') || `<tr><td colspan="${span}" class="muted">Personne relevée sur cette page : « + Foyer », puis les noms ; ou colle des lignes depuis un tableur.</td></tr>`}</tbody></table>`;
             bind();
             if (focus) box.querySelector(focus)?.focus();
-            else if (keep?.x) { const inp = box.querySelector(`tr[data-dp-i="${all().indexOf(keep.x)}"] [data-dp-k="${keep.k}"]`); if (inp) { inp.focus(); try { inp.setSelectionRange(keep.a, keep.b); } catch (_) {} } }
+            else if (keep) { const inp = box.querySelector(keep.sel); if (inp) { inp.focus(); try { inp.setSelectionRange(keep.a, keep.b); } catch (_) {} } }
         };
-        const payload = (x, extra = {}) => ({id: x.id || 0, archive_digest_id: r.id, page_number: pageNumber, person_mode: x.person_id ? 'existing' : 'manual', person_id: x.person_id || '',
+        const payload = (x, extra = {}) => ({id: x.id || 0, archive_digest_id: r.id, page_number: pageNumber, person_mode: x.person_id ? 'existing' : 'manual', person_id: x.person_id || '', household_uid: uidOf(x),
             ...Object.fromEntries(COLS.map(([k]) => [k, x[k] || ''])), employer: x.employer || '', personal_status: x.personal_status || '', extra_info: x.extra_info || '', ...extra});
         const save = (x, extra = {}) => {
             if (!x.id && !(x.first_name || '').trim() && !(x.last_name || '').trim() && !extra.person_mode && !x.person_id) return Promise.resolve(false); // une ligne sans nom attend
@@ -351,20 +359,21 @@
             const p = (x._saving || Promise.resolve()).catch(() => {}).then(run);
             x._saving = p; return p;
         };
+        /** Numéro ou adresse d'un foyer : pour toutes ses personnes (enregistrées et en cours de saisie). */
+        const setHousehold = async (uid, change) => {
+            const ms = members(uid);
+            if (ms.some(x => x.id)) await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_uid: uid, ...change});
+            ms.forEach(x => { if ('new_key' in change) x.household_key = change.new_key; if ('address' in change) x.address = change.address; });
+        };
         const timers = new Map();
-        const members = k => all().filter(x => keyOf(x) === k);
         function bind() {
             if (locked) return; // verrouillé : rien ne se modifie (les liens vers les fiches restent cliquables)
             box.querySelectorAll('tr[data-dp-i]').forEach(tr => {
                 const x = all()[Number(tr.dataset.dpI)];
                 tr.querySelectorAll('[data-dp-k]').forEach(inp => {
                     const k = inp.dataset.dpK;
-                    inp.addEventListener('input', () => {
-                        if (k === 'house' || k === 'street') { const ad = parseAddr(x.address); ad[k] = inp.value; x.address = joinAddr(ad.house, ad.street); } else x[k] = inp.value;
-                        clearTimeout(timers.get(x)); timers.set(x, setTimeout(() => save(x).catch(e => toast(e.message, 'error')), 700));
-                    });
-                    inp.addEventListener('change', () => { if (['household_key', 'house', 'street'].includes(k)) { clearTimeout(timers.get(x)); save(x).then(() => setTimeout(() => render(), 0)).catch(e => toast(e.message, 'error')); } }); // après le changement de case
-                    inp.addEventListener('keydown', e => { if (e.key !== 'Enter') return; e.preventDefault(); let n = tr.nextElementSibling; while (n && !n.matches('tr[data-dp-i]')) n = n.nextElementSibling; const t = n?.querySelector(`[data-dp-k="${k}"]`); if (t && keyOf(all()[Number(n.dataset.dpI)]) === keyOf(x)) t.focus(); else addTo(keyOf(x), k === 'household_key' ? 'last_name' : k); });
+                    inp.addEventListener('input', () => { x[k] = inp.value; clearTimeout(timers.get(x)); timers.set(x, setTimeout(() => save(x).catch(e => toast(e.message, 'error')), 700)); });
+                    inp.addEventListener('keydown', e => { if (e.key !== 'Enter') return; e.preventDefault(); let n = tr.nextElementSibling; while (n && !n.matches('tr[data-dp-i]')) n = n.nextElementSibling; const t = n?.querySelector(`[data-dp-k="${k}"]`); if (t && uidOf(all()[Number(n.dataset.dpI)]) === uidOf(x)) t.focus(); else addTo(uidOf(x), k); });
                     inp.addEventListener('paste', e => {
                         const txt = e.clipboardData?.getData('text/plain') || '';
                         if (!/[\t\n]/.test(txt.replace(/\n$/, ''))) return;
@@ -380,49 +389,49 @@
                 tr.querySelector('[data-dp-unp]')?.addEventListener('click', async () => { if (!confirm('Ne plus rattacher cette personne relevée à la fiche ?')) return; x.person_id = null; x.person_name = ''; await save(x); render(); });
             });
             box.querySelectorAll('tr[data-dp-hh]').forEach(tr => {
-                const k = tr.dataset.dpHh;
-                tr.querySelector('[data-dp-hhadd]').addEventListener('click', () => addTo(k));
+                const uid = tr.dataset.dpHh, head = () => members(uid)[0] || {};
+                tr.querySelector('[data-dp-hhadd]').addEventListener('click', () => addTo(uid));
+                tr.querySelectorAll('[data-dp-ha]').forEach(inp => inp.addEventListener('change', async () => {
+                    const ad = parseAddr(head().address); ad[inp.dataset.dpHa] = inp.value.trim();
+                    try { await setHousehold(uid, {address: joinAddr(ad.house, ad.street)}); setTimeout(() => render(), 0); } catch (e) { toast(e.message, 'error'); }
+                }));
+                tr.querySelectorAll('[data-dp-ha]').forEach(inp => inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); inp.blur(); } }));
                 tr.querySelector('[data-dp-hhren]').addEventListener('click', async () => {
-                    const nk = ((await A().askText({title: 'Numéro du foyer', message: 'Nouveau numéro de ce foyer (tel qu’il est écrit dans le document, même s’il ne suit pas) :', value: k, okLabel: 'Renuméroter'})) ?? '').trim();
-                    if (nk === k || (!nk && !confirm('Laisser ce foyer sans numéro ?'))) return;
-                    try { await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_key: k, new_key: nk}); members(k).forEach(x => { x.household_key = nk; }); render(); toast(`Foyer ${nk || 'sans numéro'}.`); } catch (e) { toast(e.message, 'error'); }
-                });
-                tr.querySelector('[data-dp-hhaddr]').addEventListener('click', async () => {
-                    const cur = members(k).find(x => x.address)?.address || '';
-                    const ad = await A().askText({title: `Adresse du foyer ${k}`, message: 'Numéro et rue, pour toutes les personnes du foyer (ex. « 3 bis rue de la Seine ») :', value: cur, okLabel: 'Appliquer'});
-                    if (ad == null) return;
-                    try { await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_key: k, address: ad.trim()}); members(k).forEach(x => { x.address = ad.trim(); }); render(); } catch (e) { toast(e.message, 'error'); }
+                    const k = keyOf(head());
+                    const nk = ((await A().askText({title: 'Numéro du foyer', message: 'Nouveau numéro de ce foyer seulement (tel qu’il est écrit dans le document, même s’il ne suit pas) :', value: k, okLabel: 'Renuméroter'})) ?? '').trim();
+                    if (nk === k) return;
+                    if (nk && all().some(y => uidOf(y) !== uid && keyOf(y) === nk) && !confirm(`Un autre foyer de cette page porte déjà le n° ${nk}. Les deux garderont ce numéro mais resteront deux foyers distincts. Continuer ?`)) return;
+                    try { await setHousehold(uid, {new_key: nk}); render(); toast(`Foyer n° ${nk || '—'}.`); } catch (e) { toast(e.message, 'error'); }
                 });
                 tr.querySelector('[data-dp-hhdel]').addEventListener('click', async () => {
-                    const ms = members(k), saved = ms.filter(x => x.id);
-                    if (saved.length && !confirm(`Supprimer le foyer ${k || 'sans numéro'} et ses ${plural(saved.length, 'personne relevée', 'personnes relevées')} ?\n\nLes fiches rattachées ne sont pas supprimées.`)) return;
-                    try { if (saved.length) await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_key: k, delete: 1});
-                        ms.forEach(x => { if (x.id) { rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); } else draft.splice(draft.indexOf(x), 1); }); render(); toast('Foyer supprimé.'); } catch (e) { toast(e.message, 'error'); }
+                    const ms = members(uid), saved = ms.filter(x => x.id);
+                    if (saved.length && !confirm(`Supprimer le foyer ${keyOf(head()) || 'sans n°'} et ses ${plural(saved.length, 'personne relevée', 'personnes relevées')} ?\n\nLes fiches rattachées ne sont pas supprimées.`)) return;
+                    try { if (saved.length) await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_uid: uid, delete: 1});
+                        ms.forEach(x => { if (x.id) { rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); } else { x._gone = true; draft.splice(draft.indexOf(x), 1); } }); render(); toast('Foyer supprimé.'); } catch (e) { toast(e.message, 'error'); }
                 });
             });
         }
-        /** Nouvelle ligne dans un foyer (même adresse que lui). */
-        function addTo(k, focusCol = 'last_name') {
-            const ms = members(k), base = ms[ms.length - 1];
-            const x = {household_key: k, address: base?.address || ''}; draft.push(x);
+        /** Nouvelle personne dans un foyer : même numéro, même adresse. */
+        function addTo(uid, focusCol = 'last_name') {
+            const base = members(uid)[0];
+            const x = {household_uid: uid, household_key: base ? keyOf(base) : '', address: base?.address || ''}; draft.push(x);
             render(`tr[data-dp-i="${all().indexOf(x)}"] [data-dp-k="${focusCol}"]`);
         }
-        /** « + Foyer » : on dit son numéro (le suivant est proposé ; le document peut sauter ou répéter des numéros). */
+        /** « + Foyer » : un nouveau foyer, avec le numéro qu'on dit (le suivant est proposé ; le document peut sauter ou répéter des numéros). */
         async function addHousehold() {
-            const k = ((await A().askText({title: 'Nouveau foyer', message: 'Numéro du foyer (tel qu’il est écrit dans le document) :', value: suggestKey(), okLabel: 'Ajouter'})) ?? '').trim();
-            if (k === '' && !confirm('Ajouter un foyer sans numéro ?')) return;
-            if (members(k).length && !confirm(`Le foyer ${k} existe déjà sur cette page : y ajouter une personne ?`)) return;
-            const last = sorted().pop(), street = parseAddr(last?.address).street; // même rue que le foyer d'avant, numéro à dire
-            const x = {household_key: k, address: members(k)[0]?.address || street}; draft.push(x);
-            render(`tr[data-dp-i="${all().indexOf(x)}"] [data-dp-k="${members(k).length > 1 ? 'last_name' : 'house'}"]`);
+            const k = ((await A().askText({title: 'Nouveau foyer', message: 'Numéro du foyer (tel qu’il est écrit dans le document) :', value: suggestKey(), okLabel: 'Ajouter'})) ?? null);
+            if (k === null) return;
+            const last = sorted().pop(), street = parseAddr(last?.address).street; // même rue que le foyer d'avant ; le n° de maison se met sur la ligne du foyer
+            const x = {household_uid: newUid(), household_key: k.trim(), address: street}; draft.push(x);
+            render(`tr[data-dp-hh="${CSS.escape(x.household_uid)}"] [data-dp-ha="house"]`);
         }
         async function pasteRows(x0, c0, txt) {
             const lines = txt.replace(/\r/g, '').replace(/\n$/, '').split('\n').map(l => l.split('\t'));
-            const list = sorted(); let at = list.indexOf(x0);
+            const list = sorted(); const at = list.indexOf(x0);
             for (let i = 0; i < lines.length; i++) {
                 let x = list[at + i];
-                if (!x || keyOf(x) !== keyOf(x0)) { x = {household_key: keyOf(x0), address: x0.address || ''}; draft.push(x); list.splice(at + i, 0, x); }
-                lines[i].forEach((v, j) => { const col = COLS2[c0 + j]; if (!col) return; if (col[0] === 'house' || col[0] === 'street') { const ad = parseAddr(x.address); ad[col[0]] = v.trim(); x.address = joinAddr(ad.house, ad.street); } else x[col[0]] = v.trim(); });
+                if (!x || uidOf(x) !== uidOf(x0)) { x = {household_uid: uidOf(x0), household_key: keyOf(x0), address: x0.address || ''}; draft.push(x); list.splice(at + i, 0, x); }
+                lines[i].forEach((v, j) => { const col = COLS2[c0 + j]; if (col) x[col[0]] = v.trim(); });
                 await save(x).catch(e => toast(e.message, 'error'));
             }
             toast(`${lines.length} ligne(s) collée(s).`); render();
@@ -454,7 +463,7 @@
                 });
             });
         }
-        peopleTable.add = isHh => locked ? null : isHh ? addHousehold() : addTo(keyOf(sorted().pop() || {}));
+        peopleTable.add = isHh => locked ? null : isHh || !all().length ? addHousehold() : addTo(uidOf(sorted().pop()));
         render();
     }
 
@@ -462,11 +471,13 @@
     function paintPeople(body) {
         const r = D.row, ppl = r.people || [];
         const byHh = new Map();
-        ppl.forEach(x => { const k = (x.household_key || '').trim() || '—'; if (!byHh.has(k)) byHh.set(k, []); byHh.get(k).push(x); });
-        const keys = [...byHh.keys()].sort(natural);
-        body.innerHTML = ppl.length ? `<p class="muted">${plural(ppl.length, 'personne relevée', 'personnes relevées')} dans ${plural(households(ppl), 'foyer', 'foyers')}. Clique sur une page pour modifier.</p>
+        // un foyer = son identité (deux foyers peuvent porter le même numéro, ou aucun)
+        ppl.forEach(x => { const k = `${x.page_number}|${x.household_uid || (x.household_key || '').trim() || 'a:' + (x.address || '')}`; if (!byHh.has(k)) byHh.set(k, []); byHh.get(k).push(x); });
+        const keys = [...byHh.keys()].sort((a, b) => natural((byHh.get(a)[0].household_key || '~'), (byHh.get(b)[0].household_key || '~')) || natural(a, b));
+        body.innerHTML = ppl.length ? `<p class="muted">${plural(ppl.length, 'personne relevée', 'personnes relevées')} dans ${plural(byHh.size, 'foyer', 'foyers')}. Clique sur une page pour modifier.</p>
             <div class="h-dp-hhs">${keys.map(k => { const list = byHh.get(k), pages = [...new Set(list.map(x => x.page_number).filter(Boolean))].sort(natural), addr = list.find(x => x.address)?.address;
-                return `<article class="h-dp-hh maintenance-panel"><h4>🏠 ${k === '—' ? 'Sans foyer' : 'Foyer ' + esc(k)}${addr ? ` <small class="muted">${esc(addr)}</small>` : ''}</h4>
+                const num = (list[0].household_key || '').trim();
+                return `<article class="h-dp-hh maintenance-panel"><h4>🏠 ${num ? 'Foyer ' + esc(num) : 'Foyer sans n°'}${addr ? ` <small class="muted">${esc(addr)}</small>` : ''}</h4>
                     <ul>${list.map(x => `<li>${x.person_id ? `<button type="button" class="table-link" data-open-person="${x.person_id}">${esc(x.person_name || [x.first_name, x.last_name].join(' '))}</button>` : `<b>${esc([x.first_name, x.last_name].filter(Boolean).join(' ') || 'Sans nom')}</b>`} <small class="muted">${esc([x.household_position, x.age_text && x.age_text + ' ans', x.occupation].filter(Boolean).join(' · '))}</small></li>`).join('')}</ul>
                     ${pages.length ? `<small>${pages.map(n => `<button type="button" class="link-button" data-dp-gopage="${esc(n)}">page ${esc(n)}</button>`).join(', ')}</small>` : ''}</article>`; }).join('')}</div>`
             : A().empty('Personne relevée pour l’instant : ouvre une page et utilise « + Personne ».');

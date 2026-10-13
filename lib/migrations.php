@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 32;
+const SCHEMA_VERSION = 33;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -53,6 +53,7 @@ function migration_steps(): array
         30 => 'schema_v30',
         31 => 'schema_v31',
         32 => 'schema_v32',
+        33 => 'schema_v33',
     ];
 }
 
@@ -1817,4 +1818,18 @@ function schema_v32(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(village_profiles)')->fetchAll(), 'name');
     if ($cols && !in_array('memo', $cols, true)) { $pdo->exec("ALTER TABLE village_profiles ADD COLUMN memo TEXT NOT NULL DEFAULT ''"); }
+}
+
+/**
+ * Dépouillements : chaque foyer a son identité (household_uid), indépendante de son numéro : renuméroter, changer l'adresse
+ * ou supprimer un foyer ne touche que lui (deux foyers « sans numéro » ne se confondent plus).
+ * Foyers déjà saisis : même numéro sur la même page = même foyer ; sans numéro, même adresse = même foyer.
+ */
+function schema_v33(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(archive_digest_people)')->fetchAll(), 'name');
+    if ($cols && !in_array('household_uid', $cols, true)) {
+        $pdo->exec("ALTER TABLE archive_digest_people ADD COLUMN household_uid TEXT NOT NULL DEFAULT ''");
+        $pdo->exec("UPDATE archive_digest_people SET household_uid = CASE WHEN trim(COALESCE(household_key,''))<>'' THEN 'k:' || trim(household_key) ELSE 'a:' || lower(trim(COALESCE(address,''))) END");
+    }
 }

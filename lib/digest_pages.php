@@ -82,23 +82,34 @@ function save_archive_digest_household(PDO $pdo, array $data): array
 {
     $id = safe_int($data['archive_digest_id'] ?? 0);
     $page = safe_text((string) ($data['page_number'] ?? ''));
-    $old = safe_text((string) ($data['household_key'] ?? ''));
-    $where = 'archive_digest_id=? AND page_number=? AND COALESCE(household_key,\'\')=?';
-    $args = [$id, $page, $old];
+    $uid = mb_substr(safe_text((string) ($data['household_uid'] ?? '')), 0, 80);
+    if ($uid === '') { throw new RuntimeException('Foyer inconnu.'); }
+    // Les personnes du foyer : celles qui portent son identité, et celles qui n'en ont pas encore (import, saisie ancienne)
+    // reconnues comme l'écran : même numéro, ou sans numéro la même adresse. Elles reçoivent l'identité au passage.
+    $q = $pdo->prepare('SELECT id, household_uid, household_key, address FROM archive_digest_people WHERE archive_digest_id=? AND page_number=?'); $q->execute([$id, $page]);
+    $ids = [];
+    foreach ($q->fetchAll() as $row) {
+        $u = (string) $row['household_uid'];
+        if ($u === '') { $k = trim((string) $row['household_key']); $u = $k !== '' ? 'k:' . $k : 'a:' . mb_strtolower(trim((string) $row['address'])); }
+        if ($u === $uid) { $ids[] = (int) $row['id']; }
+    }
+    if (!$ids) { return ['updated' => 0, 'deleted' => 0]; }
+    $in = implode(',', $ids);
+    $pdo->exec("UPDATE archive_digest_people SET household_uid=" . $pdo->quote($uid) . " WHERE id IN ($in) AND household_uid=''");
+    $where = "id IN ($in)";
+    $args = [];
     if (!empty($data['delete'])) {
         // une trace par personne retirée (Historique : on peut retrouver ce qui a été effacé)
         $b = $pdo->prepare("SELECT * FROM archive_digest_people WHERE $where"); $b->execute($args);
-        foreach ($b->fetchAll() as $row) { log_change($pdo, 'archive_digest', $id, 'delete-member', 'Foyer ' . ($old !== '' ? $old : 'sans numéro') . ' supprimé (page ' . $page . ') : ' . trim($row['first_name'] . ' ' . $row['last_name']), $row, null); }
+        foreach ($b->fetchAll() as $row) { log_change($pdo, 'archive_digest', $id, 'delete-member', 'Foyer ' . (trim((string) $row['household_key']) !== '' ? $row['household_key'] : 'sans numéro') . ' supprimé (page ' . $page . ') : ' . trim($row['first_name'] . ' ' . $row['last_name']), $row, null); }
         $s = $pdo->prepare("DELETE FROM archive_digest_people WHERE $where"); $s->execute($args);
         return ['deleted' => $s->rowCount()];
     }
     $n = 0;
-    if (array_key_exists('new_key', $data)) {
-        $s = $pdo->prepare("UPDATE archive_digest_people SET household_key=?, updated_at=CURRENT_TIMESTAMP WHERE $where"); $s->execute([mb_substr(safe_text((string) $data['new_key']), 0, 40), ...$args]); $n = $s->rowCount();
-        $args[2] = mb_substr(safe_text((string) $data['new_key']), 0, 40);
-    }
-    if (array_key_exists('address', $data)) {
-        $s = $pdo->prepare("UPDATE archive_digest_people SET address=?, updated_at=CURRENT_TIMESTAMP WHERE $where"); $s->execute([mb_substr(safe_text((string) $data['address']), 0, 300), ...$args]); $n = max($n, $s->rowCount());
+    // le numéro et l'adresse sont ceux du foyer : toutes ses personnes les partagent
+    foreach (['new_key' => ['household_key', 40], 'address' => ['address', 300]] as $k => [$col, $max]) {
+        if (!array_key_exists($k, $data)) { continue; }
+        $s = $pdo->prepare("UPDATE archive_digest_people SET $col=?, updated_at=CURRENT_TIMESTAMP WHERE $where"); $s->execute([mb_substr(safe_text((string) $data[$k]), 0, $max), ...$args]); $n = max($n, $s->rowCount());
     }
     return ['updated' => $n];
 }

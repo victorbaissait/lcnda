@@ -8789,6 +8789,13 @@ function save_archive_digest_person(PDO $pdo, array $data): array
         $id = (int)$pdo->lastInsertId();
         log_change($pdo, 'archive_digest', $entryId, 'add-member', 'Personne relevée ajoutée dans un dépouillement', null, $values);
     }
+    // Foyer de la personne (identité propre, indépendante du numéro) : donné par l'écran des pages, sinon déduit du numéro ou de l'adresse
+    $uid = array_key_exists('household_uid', $data) ? mb_substr(safe_text((string) $data['household_uid']), 0, 80) : '';
+    if ($uid === '') { $u = $pdo->prepare('SELECT household_uid FROM archive_digest_people WHERE id=?'); $u->execute([$id]); $uid = (string) $u->fetchColumn(); }
+    if ($uid === '' || !array_key_exists('household_uid', $data) && str_starts_with($uid, 'k:') && $uid !== 'k:' . trim($values['household_key'])) {
+        $uid = trim($values['household_key']) !== '' ? 'k:' . trim($values['household_key']) : 'a:' . mb_strtolower(trim($values['address']));
+    }
+    try { $pdo->prepare('UPDATE archive_digest_people SET household_uid=? WHERE id=?')->execute([$uid, $id]); } catch (Throwable $_) {}
     $censusId = sync_archive_digest_person_census($pdo, $entry, $values);
     return ['id' => $id, 'person_id' => $personId, 'census_id' => $censusId, 'created_person' => $mode === 'create'];
 }

@@ -1433,8 +1433,17 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-dp-band.is-house td { background:color-mix(in srgb, var(--accent, #2f6f5e) 11%, transparent); padding-left:18px !important; }
 .h-dp-band.is-hh td { background:color-mix(in srgb, var(--accent, #2f6f5e) 5%, transparent); padding-left:30px !important; }
 .h-dp-band.is-hh td { position:relative; }
-.h-dp-band.is-hh td > span:first-child { position:sticky; left:30px; }
-.h-dp-hhtools { display:inline-flex; gap:4px; align-items:center; margin-left:14px; font-weight:400; position:sticky; left:240px; }
+.h-dp-hhrow { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; position:sticky; left:30px; max-width:620px; }
+.h-dp-hhaddr { display:inline-flex; align-items:center; gap:4px; margin:0; font-size:12.5px; font-weight:400; color:var(--muted, #666); }
+.h-dp-hhaddr input { width:56px; padding:2px 6px; font-size:13px; border:1px solid var(--line, #bbb) !important; border-radius:4px; background:#fff; min-height:0; height:26px; }
+.h-dp-hhaddr input::placeholder { color:#bbb; font-style:italic; }
+.h-dp-hhaddr.is-street input { width:200px; }
+.h-dp-hhtools { display:inline-flex; gap:4px; align-items:center; font-weight:400; }
+.h-dp-mini { border:1px solid var(--line, #ccc); background:#fff; border-radius:999px; padding:1px 9px; font-size:12px; line-height:1.6; cursor:pointer; white-space:nowrap; color:inherit; }
+.h-dp-mini:hover { border-color:var(--accent, #2f6f5e); background:color-mix(in srgb, var(--accent, #2f6f5e) 8%, #fff); }
+.h-dp-mini.is-danger:hover { border-color:#c0392b; background:color-mix(in srgb, #c0392b 8%, #fff); }
+.h-dp-mini.is-faint { opacity:.45; }
+tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 
 /* 🗺️ Plan des adresses (heritage-addrmap.js) */
 .h-am-bar { display:flex; flex-wrap:wrap; align-items:center; gap:8px 16px; margin-bottom:8px; font-size:14px; }

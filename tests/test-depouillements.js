@@ -44,12 +44,13 @@ $c1 = $pdo->query("SELECT page_total, doc_pages FROM archive_digest_entries WHER
 save_archive_digest_counts($pdo, ['archive_digest_id' => $e, 'page_total' => '', 'doc_pages' => '24']);
 $c2 = $pdo->query("SELECT page_total, doc_pages FROM archive_digest_entries WHERE id=$e")->fetch(PDO::FETCH_NUM);
 $out['counts'] = [$c1, $c2];
-// foyers : renuméroter, adresse pour tout le foyer, supprimer
-$pdo->exec("INSERT INTO archive_digest_people(archive_digest_id, first_name, last_name, page_number, household_key) VALUES($e, 'Marie', 'Dupont', '10', '3'), ($e, 'Paul', 'Martin', '10', '4')");
-save_archive_digest_household($pdo, ['archive_digest_id' => $e, 'page_number' => '10', 'household_key' => '3', 'new_key' => '3 bis']);
-save_archive_digest_household($pdo, ['archive_digest_id' => $e, 'page_number' => '10', 'household_key' => '3 bis', 'address' => '5 rue de la Seine']);
-$hh = $pdo->query("SELECT household_key || '@' || COALESCE(address,'') FROM archive_digest_people WHERE archive_digest_id=$e AND page_number='10' ORDER BY id")->fetchAll(PDO::FETCH_COLUMN);
-$del = save_archive_digest_household($pdo, ['archive_digest_id' => $e, 'page_number' => '10', 'household_key' => '4', 'delete' => 1]);
+// foyers : chacun son identité. Deux foyers « sans numéro » ne se confondent pas ; renuméroter, adresse, supprimer : ce foyer seulement
+$pdo->exec("UPDATE archive_digest_people SET household_uid='k:3' WHERE archive_digest_id=$e");
+$pdo->exec("INSERT INTO archive_digest_people(archive_digest_id, first_name, last_name, page_number, household_key, household_uid) VALUES($e, 'Marie', 'Dupont', '10', '3', 'k:3'), ($e, 'Paul', 'Martin', '10', '', 'n:a'), ($e, 'Anne', 'Martin', '10', '', 'n:a'), ($e, 'Luc', 'Petit', '10', '', 'n:b')");
+save_archive_digest_household($pdo, ['archive_digest_id' => $e, 'page_number' => '10', 'household_uid' => 'n:a', 'new_key' => '40']);
+save_archive_digest_household($pdo, ['archive_digest_id' => $e, 'page_number' => '10', 'household_uid' => 'k:3', 'address' => '5 rue de la Seine']);
+$hh = $pdo->query("SELECT first_name || '=' || household_key || '@' || COALESCE(address,'') FROM archive_digest_people WHERE archive_digest_id=$e AND page_number='10' ORDER BY id")->fetchAll(PDO::FETCH_COLUMN);
+$del = save_archive_digest_household($pdo, ['archive_digest_id' => $e, 'page_number' => '10', 'household_uid' => 'n:b', 'delete' => 1]);
 $out['hh'] = [$hh, $del['deleted'], (int) $pdo->query("SELECT COUNT(*) FROM archive_digest_people WHERE archive_digest_id=$e")->fetchColumn()];
 try { save_archive_digest_page($pdo, ['archive_digest_id' => 9999, 'number' => '1']); $out['missing'] = 'accepté'; } catch (Throwable $x) { $out['missing'] = 'refusé'; }
 echo json_encode($out);
@@ -64,7 +65,7 @@ const checks = [
   ['renuméroter : photos, personnes et lignes suivent ; ordre naturel (1, 10) ; champs gardés', () => assert.deepEqual(out.renum, [['1', '10'], '10', '10', '10', '12'])],
   ['supprimer une page : ses photos passent « à ranger », les personnes gardent leur numéro', () => assert.deepEqual(out.delete, [['1'], '', '10'])],
   ['vues du scan et pages du document ; vide = on ne sait pas', () => assert.deepEqual(out.counts, [[12, 24], [null, 24]])],
-  ['foyer : renuméroté (exception « 3 bis »), adresse pour tout le foyer, suppression avec ses personnes', () => assert.deepEqual(out.hh, [['3 bis@5 rue de la Seine', '3 bis@5 rue de la Seine', '4@'], 1, 2])],
+  ['foyers indépendants : renuméroter un foyer « sans n° » ne touche pas l’autre ; adresse pour tout le foyer ; suppression de ce foyer seul', () => assert.deepEqual(out.hh, [['Jean=3@5 rue de la Seine', 'Marie=3@5 rue de la Seine', 'Paul=40@', 'Anne=40@', 'Luc=@'], 1, 4])],
   ['dépouillement inexistant refusé', () => assert.equal(out.missing, 'refusé')],
 ];
 let failed = 0;
