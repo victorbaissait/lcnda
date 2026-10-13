@@ -964,3 +964,35 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cfg-explain { background:#eef5fd; border-left:4px solid #0066cc; padding:8px 12px; margin-bottom:10px; font-size:14px; line-height:1.45; }
 .h-cfg-explain .link-button { font-weight:700; }
 .h-cfg-mine { margin:4px 0 10px; padding-left:1.2rem; }
+/* 🎧 Audios / 🎬 Vidéos (heritage-av.js) */
+.av-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.av-toolbar input[type=search] { flex:1 1 220px; }
+.av-toolbar label { display:flex; gap:6px; align-items:center; font-size:13px; }
+.av-count { margin-left:auto; font-size:13px; }
+.av-page { padding-bottom:0; }
+.av-table .av-play-col { width:44px; text-align:center; }
+.av-play { width:32px; height:32px; border-radius:50%; border:var(--line); background:var(--white); color:var(--ink); cursor:pointer; font-size:12px; line-height:1; }
+.av-play:hover { background:var(--ink); color:var(--white); }
+.av-table tr.is-playing td { background:rgba(0,102,204,.10); }
+.av-table tr.is-playing .av-play { background:var(--blue); border-color:var(--blue); color:#fff; }
+.av-table tr.is-missing td { opacity:.55; }
+.av-table tbody tr { cursor:pointer; }
+.av-desc { display:block; margin-top:2px; }
+.av-dur { white-space:nowrap; font-variant-numeric:tabular-nums; }
+.av-owner { display:inline-block; margin:2px 4px 2px 0; padding:2px 8px; border:1px solid rgba(127,127,127,.35); border-radius:12px; background:transparent; color:inherit; font:inherit; font-size:12.5px; text-align:left; }
+.av-owner em { font-style:normal; opacity:.65; }
+.av-owner.is-link { cursor:pointer; }
+.av-owner.is-link:hover { border-color:var(--blue); color:var(--blue); }
+.av-player { position:sticky; bottom:0; z-index:5; margin-top:14px; padding:10px 14px 12px; background:var(--white); border:var(--line); box-shadow:0 -6px 18px rgba(0,0,0,.12); display:flex; flex-direction:column; gap:8px; }
+.av-now { display:flex; gap:10px; align-items:center; }
+.av-now > div { flex:1; min-width:0; }
+.av-now strong, .av-now small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.av-now-icon { font-size:22px; }
+.av-now-pos { font-size:13px; font-variant-numeric:tabular-nums; }
+.av-player audio { width:100%; }
+.av-player video { width:100%; max-height:32vh; background:#000; }
+.av-player.is-big video { max-height:72vh; }
+.av-controls { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.av-controls label { display:flex; gap:6px; align-items:center; font-size:13px; }
+.av-controls .av-auto { margin-left:auto; }
+@media (max-width: 640px) { .av-controls .av-auto { margin-left:0; } .av-count { margin-left:0; } }

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 24;
+const SCHEMA_VERSION = 25;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -45,6 +45,7 @@ function migration_steps(): array
         22 => 'schema_v22',
         23 => 'schema_v23',
         24 => 'schema_v24',
+        25 => 'schema_v25',
     ];
 }
 
@@ -1634,4 +1635,11 @@ function schema_v24(PDO $pdo): void
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_atelier_folders_project ON atelier_folders(project_id, parent_id, position)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_atelier_items_project ON atelier_items(project_id, trashed)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_atelier_item_folders_folder ON atelier_item_folders(folder_id)');
+}
+
+/** n°25 : durée des sons et des vidéos (mesurée une fois par l'écran, pour trier les listes Audios et Vidéos). */
+function schema_v25(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(media)')->fetchAll(), 'name');
+    if ($cols && !in_array('duration_seconds', $cols, true)) { $pdo->exec('ALTER TABLE media ADD COLUMN duration_seconds REAL'); }
 }
