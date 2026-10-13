@@ -869,6 +869,30 @@
         CFG.plans.push({key: uid('p_'), label: 'Plan de « ' + P.project.title.slice(0, 50) + ' »', tree, custom: true}); saveCfg();
         toast('Plan enregistré : il est proposé à la création d’un projet (Maintenance → Atelier pour le renommer).');
     };
+    /** « Copier pour le modifier » une entrée de l'app : la vue équivalente en critères… */
+    const NAV_AS_FILTER = {
+        overview: {rules: []}, all: {rules: []}, starred: {rules: [{kind: 'starred'}]}, unfiled: {rules: [{kind: 'unfiled'}]},
+        tasks: {rules: [{kind: 'type', values: ['task']}], sort: {col: 'year', dir: 1}}, timeline: {rules: [{kind: 'years', from: '', to: ''}], sort: {col: 'year', dir: 1}},
+        people: {rules: [{kind: 'type', values: ['person']}]}, map: {rules: [{kind: 'type', values: ['place']}]}, biblio: {rules: [{kind: 'type', values: ['reference']}], sort: {col: 'creator', dir: 1}},
+    };
+    /** … et la sorte d'élément équivalente, avec des champs simples qui reprennent ceux du formulaire de l'app. */
+    function builtinTypeAsCustom(t) {
+        const f = (label, type = 'text', more = {}) => ({key: uid('f'), type, label, width: 'full', ...more});
+        const half = (label, type = 'text', more = {}) => f(label, type, {width: 'half', ...more});
+        const FIELDS = {
+            reference: [half('Sorte de référence', 'select', {options: Object.values(REF_KINDS)}), half('Auteur(s)'), half('Date'), half('Éditeur, revue'), half('Lieu d’édition'), half('Pages'), f('Lien internet', 'url'), half('Lecture', 'select', {options: Object.values(READ).filter(x => x !== '—')}), f('Notes', 'longtext')],
+            note: [f('Texte', 'longtext')],
+            quote: [f('Citation', 'longtext', {required: true}), half('Source'), half('Page')],
+            media: [f('Description', 'longtext'), half('Date', 'date'), half('Cote, référence')],
+            person: [f('Personne de la base', 'person'), half('Rôle'), half('Dates'), f('Notes', 'longtext')],
+            place: [f('Lieu', 'place'), f('Notes', 'longtext')],
+            event: [half('Date', 'date'), half('Lieu', 'place'), f('Description', 'longtext')],
+            link: [f('Adresse', 'url', {required: true}), f('Notes', 'longtext')],
+            task: [half('Échéance', 'date'), half('Priorité', 'select', {options: ['haute', 'normale', 'basse']}), half('Fait', 'checkbox'), f('Notes', 'longtext')],
+            draft: [f('Texte', 'longtext'), half('Avancement', 'select', {options: Object.values(STAGES)})],
+        };
+        return {key: t.key, icon: t.icon, label: t.label, titleLabel: 'Titre', help: TYPES[t.key]?.[2] || '', fields: FIELDS[t.key] || [f('Texte', 'longtext')]};
+    }
     ext.maintenance.atelier = async token => {
         CFG = loadCfg();
         if (token !== S().workspaceToken || S().module !== 'maintenance') return;
@@ -879,9 +903,10 @@
             ${sec === 'plans' ? '' : iconInput('data-cfg="icon"', x.icon)}<input data-cfg="label" value="${esc(x.label)}" class="h-cfg-label" aria-label="Nom">
             ${x.key === 'trash' ? '<small class="muted">toujours visible</small>' : `<label class="checkbox-line"><input type="checkbox" data-cfg="hidden" ${x.hidden ? 'checked' : ''}> masquer</label>`}
             ${x.builtin ? '<small class="muted h-cfg-tag">de l’app</small>' : '<small class="h-cfg-tag is-mine">à moi</small>'}${extra}</div>`;
-        const navExtra = x => x.custom ? `<button type="button" class="button small secondary" data-cfg-view-edit>Filtre…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : '';
-        const typeExtra = x => x.custom ? `<button type="button" class="button small secondary" data-cfg-type-edit>Champs (${(x.fields || []).length})…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : '';
-        const planExtra = x => `<small class="muted">${plural(countTree(x.tree), 'dossier', 'dossiers')}</small>${x.custom ? `<button type="button" class="button small secondary" data-cfg-plan-edit>Modifier…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : `<button type="button" class="button small secondary" data-cfg-plan-copy>Copier pour le modifier</button>`}`;
+        const copyBtn = (attr, what) => `<button type="button" class="button small secondary h-cfg-copy" ${attr} title="Faire ${what} à moi à partir de celle-ci, pour la modifier (l’originale ne change pas)"><span aria-hidden="true">⧉</span><span class="h-cfg-copy-text"> Copier pour le modifier</span></button>`;
+        const navExtra = x => `<span class="h-cfg-actions">${x.key === 'trash' ? '' : copyBtn('data-cfg-view-copy', 'une vue')}${x.custom ? `<button type="button" class="button small secondary" data-cfg-view-edit>Filtre…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : ''}</span>`;
+        const typeExtra = x => `<span class="h-cfg-actions">${copyBtn('data-cfg-type-copy', 'une sorte d’élément')}${x.custom ? `<button type="button" class="button small secondary" data-cfg-type-edit>Champs (${(x.fields || []).length})…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : ''}</span>`;
+        const planExtra = x => `<small class="muted">${plural(countTree(x.tree), 'dossier', 'dossiers')}</small><span class="h-cfg-actions">${x.custom ? `<button type="button" class="button small secondary" data-cfg-plan-edit>Modifier…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : copyBtn('data-cfg-plan-copy', 'un plan')}</span>`;
         ws.innerHTML = `<section class="page collection-page h-cfg">${`<header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📚 Atelier de recherche</h2><p>Les réglages de l’Atelier (Enquêtes → Atelier) : l’ordre et les émojis du menu d’un projet, tes propres vues, les sortes d’éléments (et les tiennes, avec leurs champs), les émojis des dossiers et tes plans de départ. Tout est enregistré tout de suite.</p></div><div class="page-actions"><button type="button" class="button secondary" data-cfg-open>Ouvrir l’Atelier</button></div></header>`}
             <section class="maintenance-panel"><div class="h-cfg-head"><h3>1. Le menu de gauche d’un projet <small class="muted">et mes vues (filtres)</small></h3><button type="button" class="button small secondary" data-cfg-reset-sec="nav" title="Remettre cette partie comme au départ">↺ Réinitialiser</button></div><p class="muted">Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).</p>
                 <div class="h-cfg-list">${CFG.nav.map((x, i, l) => row('nav', x, i, l, navExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-view-add>+ Ma propre vue (un filtre)</button></section>
@@ -921,6 +946,8 @@
             if (t.closest('[data-cfg-view-edit]')) return viewDialog(CFG.nav[i]);
             if (t.closest('[data-cfg-type-add]')) return typeDialog(null);
             if (t.closest('[data-cfg-type-edit]')) return typeDialog(CFG.types[i]);
+            if (t.closest('[data-cfg-view-copy]')) { const x = CFG.nav[i]; return viewDialog({key: '', icon: x.icon, label: x.label + ' (ma version)', filter: x.custom ? JSON.parse(JSON.stringify(x.filter || {})) : (NAV_AS_FILTER[x.key] || {rules: []})}, true); }
+            if (t.closest('[data-cfg-type-copy]')) { const x = CFG.types[i]; return typeDialog({...JSON.parse(JSON.stringify(x.custom ? x : builtinTypeAsCustom(x))), key: uid('x_'), label: x.label + ' (ma version)', custom: true, hidden: false, builtin: false}, {}, true); }
             if (t.closest('[data-cfg-plan-add]')) return planDialog(null);
             if (t.closest('[data-cfg-plan-edit]')) return planDialog(CFG.plans[i]);
             if (t.closest('[data-cfg-plan-copy]')) { const x = CFG.plans[i]; return planDialog({key: '', label: x.label + ' (ma version)', tree: JSON.parse(JSON.stringify(x.tree || [])), custom: true}, true); }
@@ -982,8 +1009,8 @@
                 onDelete: () => doIt(false),
             });
         }
-        function viewDialog(view) {
-            const f = view?.filter || {}, isNew = !view;
+        function viewDialog(view, copy = false) {
+            const f = view?.filter || {}, isNew = !view || copy;
             let rules = JSON.parse(JSON.stringify(viewRules(f)));
             const SORTS = [['', 'comme dans la liste (titre)'], ['title', 'titre'], ['creator', 'auteur, créateur'], ['year', 'date'], ['added', 'date d’ajout'], ['type', 'sorte d’élément']];
             const inputs = (r, i) => { const v = esc(r.value || '');
@@ -1004,9 +1031,9 @@
             const rowHtml = (r, i) => `<div class="h-vr-row" data-vr-i="${i}"><span class="h-vr-name">${VIEW_RULES[r.kind][0]} ${esc(VIEW_RULES[r.kind][1])}</span><span class="h-vr-inputs">${inputs(r, i)}</span>
                 <label class="checkbox-line h-vr-not" title="Inverser : tout sauf ça"><input type="checkbox" data-vr="not" ${r.not ? 'checked' : ''}> pas</label>
                 <span class="h-rb-tools"><button type="button" class="icon-button" data-vr-move="-1" title="Monter" ${i === 0 ? 'disabled' : ''}>↑</button><button type="button" class="icon-button" data-vr-move="1" title="Descendre" ${i === rules.length - 1 ? 'disabled' : ''}>↓</button><button type="button" class="icon-button danger" data-vr-del title="Retirer">🗑</button></span></div>`;
-            dialog({eyebrow: 'MA PROPRE VUE', title: isNew ? 'Nouvelle vue' : view.label, wide: true, submitLabel: 'Enregistrer',
+            dialog({eyebrow: 'MA PROPRE VUE', title: copy ? 'Copie à modifier' : isNew ? 'Nouvelle vue' : view.label, wide: true, submitLabel: 'Enregistrer',
                 body: `<div class="h-cfg-explain"><b>Une vue est un filtre</b> : une entrée du menu de gauche qui montre les éléments du projet répondant à tes critères (ex. « 📕 À lire »). Elle n’a pas de champs à remplir.
-                    ${isNew ? '<br>Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ? <button type="button" class="link-button" data-vr-totype>Créer une sorte d’élément à la place →</button>' : ''}</div>
+                    ${isNew && !copy ? '<br>Tu veux plutôt <b>une nouvelle sorte d’élément</b>, avec tes champs à remplir (texte libre, lien internet, date, personne, lieu…) ? <button type="button" class="link-button" data-vr-totype>Créer une sorte d’élément à la place →</button>' : ''}</div>
                     <div class="form-grid"><label>Nom<input name="label" required value="${esc(view?.label || '')}" placeholder="À lire"></label><label>Émoji${iconInput('name="icon"', view?.icon || '🔎')}</label></div>
                     <h4>Les critères</h4><p class="muted">Clique sur un critère pour l’ajouter, puis règle-le. Range-les avec ↑ ↓ ; « pas » garde tout <i>sauf</i> ce critère. Sans critère : tout le projet.</p>
                     <div class="h-be-palette">${Object.entries(VIEW_RULES).map(([k, [icon, label]]) => `<button type="button" class="button small secondary" data-vr-add="${k}">${icon} ${esc(label)}</button>`).join('')}</div>
@@ -1035,20 +1062,20 @@
                     const fd = new FormData(form), rl = form.closest('dialog')._readRules();
                     const filter = {rules: rl.map(r => ({kind: r.kind, not: !!r.not, value: r.value || '', from: r.from || '', to: r.to || '', mode: r.mode === 'any' ? 'any' : 'all', values: r.values || []})), match: fd.get('match') === 'any' ? 'any' : 'all',
                         sort: fd.get('sortcol') ? {col: fd.get('sortcol'), dir: Number(fd.get('sortdir')) === -1 ? -1 : 1} : null};
-                    const entry = {key: view?.key || uid('v_'), icon: String(fd.get('icon') || '🔎').trim() || '🔎', label: String(fd.get('label')).trim(), custom: true, filter, hidden: !!view?.hidden};
+                    const entry = {key: (!copy && view?.key) || uid('v_'), icon: String(fd.get('icon') || '🔎').trim() || '🔎', label: String(fd.get('label')).trim(), custom: true, filter, hidden: !copy && !!view?.hidden};
                     if (isNew) CFG.nav.splice(Math.max(0, CFG.nav.findIndex(x => x.key === 'trash')), 0, entry); else Object.assign(CFG.nav.find(x => x.key === view.key), entry);
                     saveCfg(); toast('Vue enregistrée.'); again();
                 },
             });
         }
-        function typeDialog(type, preset = {}) {
-            const isNew = !type, def = type ? JSON.parse(JSON.stringify(type)) : {key: uid('x_'), icon: preset.icon || '🧩', label: preset.label || '', titleLabel: 'Titre', help: '', fields: [{key: uid('f'), type: 'text', label: '', width: 'full'}], custom: true};
+        function typeDialog(type, preset = {}, copy = false) {
+            const isNew = !type || copy, def = type ? JSON.parse(JSON.stringify(type)) : {key: uid('x_'), icon: preset.icon || '🧩', label: preset.label || '', titleLabel: 'Titre', help: '', fields: [{key: uid('f'), type: 'text', label: '', width: 'full'}], custom: true};
             const fieldRow = (f, i) => `<div class="h-cfg-field" data-cf-i="${i}"><input data-cf="label" value="${esc(f.label)}" placeholder="Nom du champ" required><select data-cf="type">${CUSTOM_FIELD_TYPES.map(([k, l]) => `<option value="${k}" ${f.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
                 <select data-cf="width"><option value="full" ${f.width !== 'half' ? 'selected' : ''}>pleine largeur</option><option value="half" ${f.width === 'half' ? 'selected' : ''}>demi-largeur</option></select>
                 <input data-cf="options" value="${esc((f.options || []).join(', '))}" placeholder="choix séparés par des virgules" ${f.type === 'select' ? '' : 'hidden'}>
                 <input data-cf="placeholder" value="${esc(f.placeholder || '')}" placeholder="exemple grisé (facultatif)"><label class="checkbox-line"><input type="checkbox" data-cf="required" ${f.required ? 'checked' : ''}> obligatoire</label>
                 <span class="h-rb-tools"><button type="button" class="icon-button" data-cf-move="-1">↑</button><button type="button" class="icon-button" data-cf-move="1">↓</button><button type="button" class="icon-button danger" data-cf-del>🗑</button></span></div>`;
-            dialog({eyebrow: 'MA PROPRE SORTE D’ÉLÉMENT', title: isNew ? 'Nouvelle sorte' : type.label, wide: true, submitLabel: 'Enregistrer',
+            dialog({eyebrow: 'MA PROPRE SORTE D’ÉLÉMENT', title: copy ? 'Copie à modifier' : isNew ? 'Nouvelle sorte' : type.label, wide: true, submitLabel: 'Enregistrer',
                 body: `<div class="h-cfg-explain"><b>Une sorte d’élément</b> s’ajoute dans un projet avec « + Ajouter », comme une référence ou une note, avec <b>tes champs</b> : texte court ou long, lien internet, date, nombre, liste de choix, case à cocher, personne de ta base, lieu sur la carte. Elle apparaît aussi dans « Toutes les sortes ».</div>
                     <div class="form-grid"><label>Nom<input name="label" required value="${esc(def.label)}" placeholder="Plaque de lanterne magique"></label><label>Émoji${iconInput('name="icon"', def.icon)}</label>
                     <label>Nom du champ titre<input name="titleLabel" value="${esc(def.titleLabel || 'Titre')}" placeholder="Titre, Sujet, Nom…"></label><label>Aide dans le menu <small>(facultatif)</small><input name="help" value="${esc(def.help || '')}" placeholder="Une plaque vue ou achetée"></label></div>
