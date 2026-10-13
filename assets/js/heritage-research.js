@@ -169,7 +169,7 @@
                 const body = {id: p.id || 0, title: f.title, subtitle: f.subtitle, kind: f.kind, icon: f.icon, color: f.color, description: f.description, target_words: Number(f.target_words) || 0, deadline: f.deadline, status: form.archived?.checked ? 'archived' : 'active'};
                 if (isNew) body.folders = PLANS[f.plan || 'vide'][1];
                 const r = await post('save_atelier_project', body);
-                Object.assign(st(), {project: r.result.id, node: 'overview', sel: [], tags: [], q: '', type: ''});
+                if (isNew) Object.assign(st(), {project: r.result.id, node: 'overview', sel: [], tags: [], q: '', type: ''});
                 toast(isNew ? 'Projet créé.' : 'Projet enregistré.');
                 ext.atelier(++S().workspaceToken);
             },
@@ -193,9 +193,16 @@
         if (v.tags.length) items = items.filter(i => v.tags.every(t => (i.tags || []).includes(t)));
         if (v.q) { const q = v.q.toLowerCase(); items = items.filter(i => [i.title, JSON.stringify(i.data), (i.tags || []).join(' ')].join(' ').toLowerCase().includes(q)); }
         const s = v.sort, key = i => s.col === 'creator' ? firstAuthor(i) || i.data?.creator || '' : s.col === 'year' ? dateKey(i) : s.col === 'type' ? TYPES[i.type][1] : s.col === 'added' ? i.created_at : i.title;
-        return items.sort((a, b) => String(key(a)).localeCompare(String(key(b)), 'fr', {numeric: true, sensitivity: 'base'}) * s.dir);
+        return items.sort((a, b) => { const x = String(key(a) || ''), y = String(key(b) || ''); if (!x !== !y) return x ? -1 : 1; return x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}) * s.dir; });
     }
+    let rendering = false;
     function renderProject(token, keepScroll = false) {
+        // un champ qui perd le focus pendant qu'on redessine (« change » au blur) : on redessine juste après
+        if (rendering) { setTimeout(() => renderProject(S().workspaceToken, true), 0); return; }
+        rendering = true;
+        try { drawProject(keepScroll); } finally { rendering = false; }
+    }
+    function drawProject(keepScroll) {
         const v = st(), p = P.project, ws = A().$('#workspace');
         const scroll = keepScroll ? [...ws.querySelectorAll('[data-at-scroll]')].map(el => el.scrollTop) : [];
         if (typeof v.node === 'number' && !P.fById.has(v.node)) v.node = 'all';
