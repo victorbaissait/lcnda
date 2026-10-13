@@ -53,7 +53,7 @@ const LIST_TABLE_SOURCES = [
     'living' => ['label' => 'Répertoire des vivants', 'columns' => ['name' => 'Nom', 'relationship' => 'Lien de parenté', 'city' => 'Ville', 'email' => 'E-mail', 'phone' => 'Téléphone'],
         'sql' => "SELECT id, trim(COALESCE(first_name,'') || ' ' || COALESCE(last_name,'')) AS name, relationship, city, email, COALESCE(NULLIF(phone_mobile,''), NULLIF(phone,''), phone_landline) AS phone, person_id FROM living_contacts ORDER BY last_name COLLATE NOCASE"],
 ];
-const LIST_SOURCES = ['events', 'persons', 'free', ...['places', 'media', 'occupations', 'census', 'reminders', 'sources', 'family_objects', 'courriers', 'graves', 'budget', 'living']];
+const LIST_SOURCES = ['events', 'persons', 'free', 'records', ...['places', 'media', 'occupations', 'census', 'reminders', 'sources', 'family_objects', 'courriers', 'graves', 'budget', 'living']];
 
 /** Colonnes de chaque sorte de liste (pour l'écran). */
 function my_list_columns(): array
@@ -77,6 +77,7 @@ function my_lists(PDO $pdo): array
 
 function my_list_clean_definition(array $d, string $source): array
 {
+    if ($source === 'records') { return my_list_records_definition($d); }
     $fields = ['event_type', 'year', 'death_year', 'place', 'any_place', 'last_name', 'first_name', 'occupation', 'gender', 'label', 'sosa', 'no_parents', 'no_source', 'text'];
     $rules = [];
     foreach (is_array($d['rules'] ?? null) ? $d['rules'] : [] as $r) {
@@ -151,6 +152,7 @@ function save_my_list(PDO $pdo, array $data): array
     $source = in_array($data['source'] ?? '', LIST_SOURCES, true) ? $data['source'] : 'persons';
     $def = my_list_clean_definition(is_array($data['definition'] ?? null) ? $data['definition'] : [], $source);
     if ($source === 'free' && !$def['custom']) { throw new RuntimeException('Ajoute au moins une colonne à remplir.'); }
+    if ($source === 'records' && !array_filter($def['fields'], static fn($f) => $f['type'] !== 'heading')) { throw new RuntimeException('Ajoute au moins un champ au formulaire.'); }
     $vals = [$name, mb_substr(safe_text($data['icon'] ?? '📋'), 0, 16) ?: '📋', h_long($data, 'description', 2000), $source, json_encode($def, JSON_UNESCAPED_UNICODE)];
     if ($id) { $pdo->prepare('UPDATE custom_lists SET name=?, icon=?, description=?, source=?, definition_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$vals, $id]); }
     else { $pdo->prepare('INSERT INTO custom_lists(name, icon, description, source, definition_json, position) VALUES(?,?,?,?,?,(SELECT COALESCE(max(position),0)+1 FROM custom_lists))')->execute($vals); $id = (int) $pdo->lastInsertId(); }
@@ -161,6 +163,8 @@ function delete_my_list(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
     $pdo->prepare('DELETE FROM custom_list_rows WHERE list_id=?')->execute([$id]);
+    foreach ($pdo->query('SELECT id FROM custom_list_records WHERE list_id=' . $id)->fetchAll(PDO::FETCH_COLUMN) as $rid) { my_list_record_unlink($pdo, (int) $rid); }
+    $pdo->prepare('DELETE FROM custom_list_records WHERE list_id=?')->execute([$id]);
     $pdo->prepare("DELETE FROM label_links WHERE entity_type='custom_list' AND entity_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM custom_lists WHERE id=?')->execute([$id]);
     return ['ok' => true];
@@ -229,6 +233,7 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
     $listId = (int) $list['id'];
     $def = my_list_clean_definition(json_decode((string) $list['definition_json'], true) ?: [], (string) $list['source']);
     if ($list['source'] === 'free') { return my_list_free_rows($pdo, $list, $def); }
+    if ($list['source'] === 'records') { return $countOnly ? ['count' => my_list_record_count($pdo, $listId)] : my_list_record_rows($pdo, $list, $def); }
     if ($countOnly && isset(LIST_TABLE_SOURCES[$list['source']])) { return ['count' => (int) $pdo->query('SELECT count(*) FROM (' . LIST_TABLE_SOURCES[$list['source']]['sql'] . ')')->fetchColumn()]; }
     if (isset(LIST_TABLE_SOURCES[$list['source']])) { return my_list_table_rows($pdo, $list, $def); }
     $isEvents = $list['source'] === 'events';
@@ -439,6 +444,15 @@ function export_my_list(PDO $pdo, int $id): array
         $q = $pdo->prepare("SELECT data_json FROM custom_list_rows WHERE list_id=? AND row_key LIKE 'f:%' ORDER BY CAST(substr(row_key,3) AS INTEGER)"); $q->execute([$id]);
         foreach ($q->fetchAll(PDO::FETCH_COLUMN) as $json) { $rows[] = array_diff_key(json_decode((string) $json, true) ?: [], array_flip($personKeys)); }
     }
+    if ($list['source'] === 'records') { // fiches partagées sans les liens vers les personnes ni les photos (propres à chaque base)
+        $q = $pdo->prepare('SELECT data_json, status FROM custom_list_records WHERE list_id=? ORDER BY position, id'); $q->execute([$id]);
+        $drop = array_column(array_filter($def['fields'], static fn($f) => in_array($f['type'], ['person', 'people', 'media'], true)), 'key');
+        foreach ($q->fetchAll() as $r) {
+            $data = array_diff_key(json_decode((string) $r['data_json'], true) ?: [], array_flip($drop));
+            foreach ($def['fields'] as $f) { if ($f['type'] === 'steps' && is_array($data[$f['key']] ?? null)) { $pk = array_column(array_filter($f['fields'], static fn($x) => $x['type'] === 'person'), 'key'); $data[$f['key']] = array_map(static fn($it) => array_diff_key($it, array_flip($pk)), $data[$f['key']]); } }
+            $rows[] = ['data' => $data, 'status' => $r['status']];
+        }
+    }
     return ['type' => 'lcnda-liste', 'version' => 1, 'name' => $list['name'], 'icon' => $list['icon'], 'description' => $list['description'], 'source' => $list['source'], 'definition' => $def, 'rows' => $rows];
 }
 
@@ -486,6 +500,12 @@ function import_my_list(PDO $pdo, array $data): array
             $values = [];
             foreach ($keys as $k) { if (isset($row[$k]) && is_scalar($row[$k])) { $values[$k] = mb_substr(safe_text((string) $row[$k]), 0, 2000); } }
             $ins->execute([$saved['id'], 'f:' . (++$count), json_encode($values, JSON_UNESCAPED_UNICODE)]);
+        }
+    }
+    if (($pkg['source'] ?? '') === 'records') {
+        foreach (array_slice(is_array($pkg['rows'] ?? null) ? $pkg['rows'] : [], 0, 5000) as $row) {
+            if (!is_array($row) || !is_array($row['data'] ?? null)) { continue; }
+            save_my_list_record($pdo, ['list_id' => $saved['id'], 'data' => $row['data'], 'status' => $row['status'] ?? 'todo', 'no_geocode' => 1]); $count++;
         }
     }
     return ['id' => $saved['id'], 'rows' => $count, 'missing' => array_values(array_unique($missing))];
@@ -544,4 +564,244 @@ function save_my_list_filters(PDO $pdo, array $data): array
     $def = my_list_clean_definition($def, (string) $l['source']);
     $pdo->prepare('UPDATE custom_lists SET definition_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($def, JSON_UNESCAPED_UNICODE), $id]);
     return ['filters' => $def['filters']];
+}
+
+/* ─── 📇 Listes de fiches (Éditeur de listes) : un formulaire à soi, des fiches, des étapes, « à faire / fait » ─── */
+
+const LIST_RECORD_FIELD_TYPES = ['text', 'longtext', 'date', 'time', 'number', 'select', 'checkbox', 'url', 'person', 'people', 'place', 'media', 'steps', 'heading'];
+const LIST_STEP_FIELD_TYPES = ['text', 'longtext', 'date', 'time', 'number', 'select', 'checkbox', 'url', 'place', 'person'];
+
+function my_list_record_fields(array $fields, bool $sub = false): array
+{
+    $out = []; $seen = [];
+    foreach (array_slice($fields, 0, $sub ? 25 : 80) as $f) {
+        if (!is_array($f)) { continue; }
+        $type = (string) ($f['type'] ?? '');
+        if (!in_array($type, $sub ? LIST_STEP_FIELD_TYPES : LIST_RECORD_FIELD_TYPES, true)) { continue; }
+        $key = preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($f['key'] ?? ''))) ?: 'f' . bin2hex(random_bytes(3));
+        while (isset($seen[$key]) || in_array($key, ['done', 'id', 'status'], true)) { $key .= bin2hex(random_bytes(1)); }
+        $seen[$key] = true;
+        $c = ['key' => $key, 'type' => $type, 'label' => mb_substr(safe_text($f['label'] ?? ''), 0, 80) ?: ($type === 'heading' ? 'Section' : 'Champ'),
+            'help' => mb_substr(safe_text($f['help'] ?? ''), 0, 300), 'placeholder' => mb_substr(safe_text($f['placeholder'] ?? ''), 0, 120),
+            'width' => ($f['width'] ?? '') === 'half' ? 'half' : 'full', 'required' => !empty($f['required'])];
+        if ($type === 'select') { $c['options'] = array_values(array_slice(array_filter(array_map(static fn($o) => mb_substr(safe_text($o), 0, 80), is_array($f['options'] ?? null) ? $f['options'] : []), static fn($o) => $o !== ''), 0, 60)); }
+        if ($type === 'media') { $c['accept'] = in_array($f['accept'] ?? '', ['image', 'video', 'audio', 'all'], true) ? $f['accept'] : 'all'; }
+        if ($type === 'steps') {
+            $c['fields'] = my_list_record_fields(is_array($f['fields'] ?? null) ? $f['fields'] : [], true) ?: [['key' => 'titre', 'type' => 'text', 'label' => 'Titre', 'help' => '', 'placeholder' => '', 'width' => 'full', 'required' => false]];
+            $c['item'] = mb_substr(safe_text($f['item'] ?? ''), 0, 40) ?: 'Étape';
+            $c['checkable'] = !array_key_exists('checkable', $f) || !empty($f['checkable']);
+        }
+        $out[] = $c;
+    }
+    return $out;
+}
+
+function my_list_records_definition(array $d): array
+{
+    $fields = my_list_record_fields(is_array($d['fields'] ?? null) ? $d['fields'] : []);
+    $keys = array_column(array_filter($fields, static fn($f) => !in_array($f['type'], ['heading', 'steps', 'media'], true)), 'key');
+    $r = is_array($d['record'] ?? null) ? $d['record'] : [];
+    $txt = static fn($k, $def, $max = 60) => mb_substr(safe_text($r[$k] ?? ''), 0, $max) ?: $def;
+    $title = in_array($r['title'] ?? '', $keys, true) ? (string) $r['title'] : ($keys[0] ?? '');
+    return ['fields' => $fields, 'record' => [
+            'status' => !array_key_exists('status', $r) || !empty($r['status']), 'todo' => $txt('todo', 'À faire'), 'done' => $txt('done', 'Faits'), 'mark' => $txt('mark', 'Marquer fait'),
+            'item' => $txt('item', 'fiche', 40), 'new' => $txt('new', '+ Nouvelle fiche'), 'form' => $txt('form', 'Nouvelle fiche'), 'title' => $title,
+            'meta' => array_values(array_slice(array_intersect(is_array($r['meta'] ?? null) ? $r['meta'] : [], $keys), 0, 6)),
+            'sort' => in_array($r['sort'] ?? '', ['manual', 'title', 'created', 'date'], true) ? $r['sort'] : 'created',
+            'map' => !empty($r['map'])],
+        'columns' => [], 'custom' => [], 'filters' => [], 'rules' => [], 'match' => 'all', 'sort' => 'name', 'in_lists' => !empty($d['in_lists']),
+        'display' => my_list_clean_display(is_array($d['display'] ?? null) ? $d['display'] : [], $keys)];
+}
+
+function my_list_record_list(PDO $pdo, int $listId): array
+{
+    $s = $pdo->prepare("SELECT * FROM custom_lists WHERE id=? AND source='records'"); $s->execute([$listId]);
+    $list = $s->fetch();
+    if (!$list) { throw new RuntimeException('Liste introuvable.'); }
+    $list['definition'] = my_list_records_definition(json_decode((string) $list['definition_json'], true) ?: []);
+    return $list;
+}
+
+function my_list_record_count(PDO $pdo, int $listId): int
+{
+    $s = $pdo->prepare('SELECT count(*) FROM custom_list_records WHERE list_id=?'); $s->execute([$listId]);
+    return (int) $s->fetchColumn();
+}
+
+/** Les personnes qui existent dans la base, dans l'ordre donné. */
+function my_list_existing_people(PDO $pdo, array $ids): array
+{
+    if (!$ids) { return []; }
+    $s = $pdo->prepare('SELECT id FROM persons WHERE id IN (' . implode(',', array_fill(0, count($ids), '?')) . ')'); $s->execute($ids);
+    $ok = array_flip(array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN)));
+    return array_values(array_filter($ids, static fn($i) => isset($ok[$i])));
+}
+
+/** Une valeur d'un champ, nettoyée selon sa sorte. */
+function my_list_record_value(PDO $pdo, array $f, mixed $v, bool $geocode)
+{
+    switch ($f['type']) {
+        case 'checkbox': return !empty($v) && $v !== '0' ? 1 : 0;
+        case 'number': $t = str_replace([',', ' ', "\u{202f}"], ['.', '', ''], (string) ($v ?? '')); return is_numeric($t) ? $t + 0 : '';
+        case 'person': $id = safe_int(is_scalar($v) ? $v : 0); return $id && my_list_existing_people($pdo, [$id]) ? $id : '';
+        case 'people': return my_list_existing_people($pdo, array_values(array_unique(array_filter(array_map('intval', array_slice(is_array($v) ? $v : [], 0, 100))))));
+        case 'url': $u = safe_text(is_scalar($v) ? (string) $v : ''); return preg_match('#^https?://#i', $u) ? $u : '';
+        case 'longtext': return mb_substr(is_scalar($v) ? (string) $v : '', 0, 40000);
+        case 'select': $t = safe_text(is_scalar($v) ? (string) $v : ''); return in_array($t, $f['options'] ?? [], true) ? $t : '';
+        case 'place':
+            $p = is_array($v) ? ['text' => mb_substr(safe_text($v['text'] ?? ''), 0, 300), 'lat' => h_coord($v['lat'] ?? null, 90), 'lon' => h_coord($v['lon'] ?? null, 180)] : ['text' => mb_substr(safe_text(is_scalar($v) ? (string) $v : ''), 0, 300), 'lat' => null, 'lon' => null];
+            if ($p['lat'] === null || $p['lon'] === null) { $p['lat'] = $p['lon'] = null; if ($geocode && $p['text'] !== '' && ($g = heritage_geocode($pdo, $p['text']))) { $p['lat'] = $g['lat']; $p['lon'] = $g['lon']; } }
+            return $p;
+        default: return mb_substr(safe_text(is_scalar($v) ? (string) $v : ''), 0, 2000);
+    }
+}
+
+function my_list_record_clean(PDO $pdo, array $fields, array $in, bool $geocode): array
+{
+    $out = [];
+    foreach ($fields as $f) {
+        if (in_array($f['type'], ['heading', 'media'], true)) { continue; }
+        if ($f['type'] === 'steps') {
+            $items = [];
+            foreach (array_slice(is_array($in[$f['key']] ?? null) ? $in[$f['key']] : [], 0, 500) as $it) {
+                if (!is_array($it)) { continue; }
+                $c = ['done' => !empty($it['done']) ? 1 : 0];
+                foreach ($f['fields'] as $sf) { $c[$sf['key']] = my_list_record_value($pdo, $sf, $it[$sf['key']] ?? null, $geocode); }
+                $empty = !array_filter($f['fields'], static fn($sf) => !in_array($c[$sf['key']], ['', 0, [], null], true) && !($sf['type'] === 'place' && $c[$sf['key']]['text'] === ''));
+                if (!$empty || $c['done']) { $items[] = $c; }
+            }
+            $out[$f['key']] = $items;
+            continue;
+        }
+        $out[$f['key']] = my_list_record_value($pdo, $f, $in[$f['key']] ?? null, $geocode);
+        $v = $out[$f['key']];
+        if ($f['required'] && ($v === '' || $v === [] || ($f['type'] === 'place' && $v['text'] === ''))) { throw new RuntimeException('Le champ « ' . $f['label'] . ' » est à remplir.'); }
+    }
+    return $out;
+}
+
+/** Enregistre une fiche (création ou modification). */
+function save_my_list_record(PDO $pdo, array $data): array
+{
+    $list = my_list_record_list($pdo, safe_int($data['list_id'] ?? 0));
+    $id = safe_int($data['id'] ?? 0);
+    $clean = my_list_record_clean($pdo, $list['definition']['fields'], is_array($data['data'] ?? null) ? $data['data'] : [], empty($data['no_geocode']));
+    $json = json_encode($clean, JSON_UNESCAPED_UNICODE);
+    $status = ($data['status'] ?? '') === 'done' ? 'done' : 'todo';
+    if ($id) {
+        $own = $pdo->prepare('SELECT status FROM custom_list_records WHERE id=? AND list_id=?'); $own->execute([$id, (int) $list['id']]);
+        $was = $own->fetchColumn();
+        if ($was === false) { throw new RuntimeException('Cette fiche n’est pas dans cette liste.'); }
+        if (!isset($data['status'])) { $status = (string) $was; }
+        $pdo->prepare("UPDATE custom_list_records SET data_json=?, status=?, done_at=CASE WHEN ?='done' THEN COALESCE(done_at, CURRENT_TIMESTAMP) ELSE NULL END, updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$json, $status, $status, $id]);
+    } else {
+        $pdo->prepare("INSERT INTO custom_list_records(list_id, data_json, status, done_at, position) VALUES(?,?,?,CASE WHEN ?='done' THEN CURRENT_TIMESTAMP END,(SELECT COALESCE(max(position),0)+1 FROM custom_list_records WHERE list_id=?))")->execute([(int) $list['id'], $json, $status, $status, (int) $list['id']]);
+        $id = (int) $pdo->lastInsertId();
+    }
+    return ['id' => $id];
+}
+
+function my_list_record_owned(PDO $pdo, int $id): array
+{
+    $s = $pdo->prepare('SELECT * FROM custom_list_records WHERE id=?'); $s->execute([$id]);
+    $r = $s->fetch();
+    if (!$r) { throw new RuntimeException('Fiche introuvable.'); }
+    return $r;
+}
+
+function set_my_list_record_status(PDO $pdo, array $data): array
+{
+    $r = my_list_record_owned($pdo, safe_int($data['id'] ?? 0));
+    $status = ($data['status'] ?? '') === 'done' ? 'done' : 'todo';
+    $pdo->prepare("UPDATE custom_list_records SET status=?, done_at=CASE WHEN ?='done' THEN CURRENT_TIMESTAMP ELSE NULL END, updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$status, $status, (int) $r['id']]);
+    return ['status' => $status];
+}
+
+/** Cocher / décocher une ligne d'étapes depuis la liste ou la fiche, sans rouvrir le formulaire. */
+function set_my_list_record_step(PDO $pdo, array $data): array
+{
+    $r = my_list_record_owned($pdo, safe_int($data['id'] ?? 0));
+    $values = json_decode((string) $r['data_json'], true) ?: [];
+    $field = preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($data['field'] ?? '')));
+    $i = safe_int($data['index'] ?? -1, -1);
+    if (!isset($values[$field][$i]) || !is_array($values[$field][$i])) { throw new RuntimeException('Ligne introuvable.'); }
+    $values[$field][$i]['done'] = !empty($data['done']) ? 1 : 0;
+    $pdo->prepare('UPDATE custom_list_records SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($values, JSON_UNESCAPED_UNICODE), (int) $r['id']]);
+    return ['ok' => true];
+}
+
+function move_my_list_record(PDO $pdo, array $data): array
+{
+    $r = my_list_record_owned($pdo, safe_int($data['id'] ?? 0));
+    $ids = array_map('intval', $pdo->query('SELECT id FROM custom_list_records WHERE list_id=' . (int) $r['list_id'] . ' ORDER BY position, id')->fetchAll(PDO::FETCH_COLUMN));
+    $i = array_search((int) $r['id'], $ids, true); $j = $i + ((int) ($data['direction'] ?? 0) < 0 ? -1 : 1);
+    if ($i !== false && $j >= 0 && $j < count($ids)) { [$ids[$i], $ids[$j]] = [$ids[$j], $ids[$i]]; }
+    $upd = $pdo->prepare('UPDATE custom_list_records SET position=? WHERE id=?');
+    foreach ($ids as $p => $rid) { $upd->execute([$p, $rid]); }
+    return ['ok' => true];
+}
+
+function my_list_record_unlink(PDO $pdo, int $id): void
+{
+    heritage_delete_media_links($pdo, 'custom_list_record', $id);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='custom_list_record' AND entity_id=?")->execute([$id]);
+}
+
+function delete_my_list_record(PDO $pdo, array $data): array
+{
+    $r = my_list_record_owned($pdo, safe_int($data['id'] ?? 0));
+    my_list_record_unlink($pdo, (int) $r['id']);
+    $pdo->prepare('DELETE FROM custom_list_records WHERE id=?')->execute([(int) $r['id']]);
+    return ['ok' => true];
+}
+
+/** Texte d'une valeur (colonnes, recherche, export). */
+function my_list_record_text(array $f, mixed $v, array $people): string
+{
+    return match ($f['type']) {
+        'checkbox' => $v ? 'oui' : 'non',
+        'person' => $v && isset($people[(int) $v]) ? trim($people[(int) $v]['first_name'] . ' ' . $people[(int) $v]['last_name']) : '',
+        'people' => implode(', ', array_map(static fn($i) => isset($people[$i]) ? trim($people[$i]['first_name'] . ' ' . $people[$i]['last_name']) : '', is_array($v) ? $v : [])),
+        'place' => is_array($v) ? (string) ($v['text'] ?? '') : '',
+        'steps' => is_array($v) ? count($v) . '' : '',
+        default => is_scalar($v) ? (string) $v : '',
+    };
+}
+
+/** Les fiches d'une liste, avec personnes, photos, étiquettes et avancement des étapes. */
+function my_list_record_rows(PDO $pdo, array $list, array $def): array
+{
+    $s = $pdo->prepare('SELECT * FROM custom_list_records WHERE list_id=? ORDER BY position, id'); $s->execute([(int) $list['id']]);
+    $recs = $s->fetchAll();
+    $ids = array_map(static fn($r) => (int) $r['id'], $recs);
+    $media = heritage_media($pdo, 'custom_list_record', $ids);
+    $labels = $ids ? collection_labels($pdo, 'custom_list_record', $ids) : [];
+    $pids = [];
+    foreach ($recs as &$r) {
+        $r['data'] = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
+        foreach ($def['fields'] as $f) {
+            if ($f['type'] === 'person' && !empty($r['data'][$f['key']])) { $pids[] = (int) $r['data'][$f['key']]; }
+            if ($f['type'] === 'people') { array_push($pids, ...array_map('intval', (array) ($r['data'][$f['key']] ?? []))); }
+            if ($f['type'] === 'steps') { foreach ((array) ($r['data'][$f['key']] ?? []) as $it) { foreach ($f['fields'] as $sf) { if ($sf['type'] === 'person' && !empty($it[$sf['key']])) { $pids[] = (int) $it[$sf['key']]; } } } }
+        }
+    }
+    unset($r);
+    $people = collection_people($pdo, $pids);
+    $cols = [];
+    foreach ($def['fields'] as $f) { if (!in_array($f['type'], ['heading', 'media'], true)) { $cols[$f['key']] = $f['label']; } }
+    $rows = [];
+    foreach ($recs as $r) {
+        $steps = 0; $stepsDone = 0; $cells = [];
+        foreach ($def['fields'] as $f) {
+            if ($f['type'] === 'steps') { $items = (array) ($r['data'][$f['key']] ?? []); if ($f['checkable']) { $steps += count($items); $stepsDone += count(array_filter($items, static fn($x) => !empty($x['done']))); } }
+            if (isset($cols[$f['key']])) { $cells[$f['key']] = my_list_record_text($f, $r['data'][$f['key']] ?? null, $people); }
+        }
+        $cells['status'] = $r['status'] === 'done' ? $def['record']['done'] : $def['record']['todo'];
+        $rows[] = ['key' => 'r:' . $r['id'], 'id' => (int) $r['id'], 'data' => $r['data'], 'status' => $r['status'], 'done_at' => $r['done_at'], 'created_at' => $r['created_at'], 'updated_at' => $r['updated_at'],
+            'steps' => $steps, 'steps_done' => $stepsDone, 'media' => $media[(int) $r['id']] ?? [], 'labels' => $labels[(int) $r['id']] ?? [], 'cells' => $cells, 'values' => [], 'people' => []];
+    }
+    $list['definition'] = $def; unset($list['definition_json']);
+    $list['labels'] = collection_labels($pdo, 'custom_list', [(int) $list['id']])[(int) $list['id']] ?? [];
+    $counts = ['todo' => count(array_filter($rows, static fn($r) => $r['status'] !== 'done')), 'done' => count(array_filter($rows, static fn($r) => $r['status'] === 'done'))];
+    return ['list' => $list, 'rows' => $rows, 'columns' => $cols + ['status' => 'Suivi'], 'people' => (object) $people, 'counts' => $counts, 'truncated' => false];
 }

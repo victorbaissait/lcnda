@@ -157,6 +157,22 @@ $fr = my_list_rows($pdo, $free['id'])['rows'];
 $out['free'] = [count($fr), $fr[0]['values'][$fdef[0]['key']], $fr[0]['linked'][$fdef[1]['key']]['first_name'] ?? null, $k1, $k2];
 try { save_my_list($pdo, ['name' => 'Vide', 'source' => 'free', 'definition' => []]); $out['free_empty'] = 'accepté'; } catch (Throwable $e) { $out['free_empty'] = 'refusé'; }
 
+// Éditeur de listes : liste de fiches (formulaire à soi, étapes à cocher, à faire / faits)
+$rl = save_my_list($pdo, ['name' => 'Circuits', 'source' => 'records', 'definition' => ['fields' => [['type' => 'text', 'label' => 'Nom', 'key' => 'nom', 'required' => true], ['type' => 'heading', 'label' => 'Pour qui ?'], ['type' => 'people', 'label' => 'Personnes', 'key' => 'qui'],
+    ['type' => 'select', 'label' => 'Priorité', 'key' => 'prio', 'options' => ['Haute', 'Basse']], ['type' => 'steps', 'label' => 'Étapes', 'key' => 'etapes', 'item' => 'Étape', 'fields' => [['type' => 'text', 'label' => 'Titre', 'key' => 'titre'], ['type' => 'place', 'label' => 'Lieu', 'key' => 'lieu'], ['type' => 'bidon', 'label' => 'X']]], ['type' => 'script', 'label' => 'pirate']], 'record' => ['new' => '+ Circuit']]]);
+$rec = save_my_list_record($pdo, ['list_id' => $rl['id'], 'data' => ['nom' => 'Nord', 'qui' => [1, 5, 999999, 'x'], 'prio' => 'Inventée', 'etapes' => [['titre' => 'Archives', 'lieu' => ['text' => 'Lille'], 'done' => 1], ['titre' => 'Église'], ['titre' => '', 'lieu' => ['text' => '']]]], 'no_geocode' => 1]);
+set_my_list_record_step($pdo, ['id' => $rec['id'], 'field' => 'etapes', 'index' => 1, 'done' => 1]);
+$rr = my_list_rows($pdo, $rl['id']);
+try { save_my_list_record($pdo, ['list_id' => $rl['id'], 'data' => ['nom' => '']]); $out['rec_required'] = 'accepté'; } catch (Throwable $e) { $out['rec_required'] = 'refusé'; }
+set_my_list_record_status($pdo, ['id' => $rec['id'], 'status' => 'done']);
+$rr2 = my_list_rows($pdo, $rl['id']);
+$exp = export_my_list($pdo, $rl['id']);
+$imp = import_my_list($pdo, ['json' => json_encode($exp)]);
+delete_my_list($pdo, ['id' => $rl['id']]);
+$out['records'] = ['fields' => array_column($rr['list']['definition']['fields'], 'type'), 'steps' => array_map(fn($f) => count($f['fields'] ?? []), $rr['list']['definition']['fields']), 'new' => $rr['list']['definition']['record']['new'],
+    'row' => [$rr['rows'][0]['data']['qui'], $rr['rows'][0]['data']['prio'], count($rr['rows'][0]['data']['etapes']), $rr['rows'][0]['steps'], $rr['rows'][0]['steps_done']], 'counts' => [$rr['counts'], $rr2['counts']],
+    'export' => [count($exp['rows']), isset($exp['rows'][0]['data']['qui'])], 'import' => $imp['rows'], 'left' => (int) $pdo->query('SELECT count(*) FROM custom_list_records WHERE list_id=' . $rl['id'])->fetchColumn()];
+
 // Comparaison avant fusion
 $cmp = compare_people($pdo, 1, 5);
 $out['compare'] = [$cmp['a']['person']['first_name'], count($cmp['a']['events']) > 0, $cmp['a']['children']];
@@ -166,7 +182,10 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°22)', () => assert.equal(out.version, 22)],
+  ['éditeur de listes : formulaire nettoyé (sortes inconnues retirées, étapes avec leurs champs)', () => { assert.deepEqual(out.records.fields, ['text', 'heading', 'people', 'select', 'steps']); assert.equal(out.records.steps[4], 2); assert.equal(out.records.new, '+ Circuit'); }],
+  ['éditeur de listes : fiche enregistrée (personnes inexistantes et choix inventé retirés, lignes vides ignorées, étapes cochées)', () => assert.deepEqual(out.records.row, [[1, 5], '', 2, 2, 2])],
+  ['éditeur de listes : champ obligatoire, à faire / faits, partage sans les personnes, suppression', () => { assert.equal(out.rec_required, 'refusé'); assert.deepEqual(out.records.counts, [{todo: 1, done: 0}, {todo: 0, done: 1}]); assert.deepEqual(out.records.export, [1, false]); assert.equal(out.records.import, 1); assert.equal(out.records.left, 0); }],
+  ['structure à jour (n°23)', () => assert.equal(out.version, 23)],
   ['actes de moins de 100 ans, réservés jusqu’à 75 ans', () => { assert.deepEqual(out.acts.map(a => a[0]), ['naissance']); assert.equal(out.acts[0][1], false); assert.equal(out.acts[0][2], '2065-04-04'); }],
   ['lettre de demande à la mairie', () => assert.deepEqual(out.letter, [true, true, true])],
   ['courrier créé, relié à l’acte, rappel à l’ouverture', () => { assert.deepEqual(out.request, [true, true, 1]); assert.equal(out.acts_after, true); }],

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 22;
+const SCHEMA_VERSION = 23;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -43,6 +43,7 @@ function migration_steps(): array
         20 => 'schema_v20',
         21 => 'schema_v21',
         22 => 'schema_v22',
+        23 => 'schema_v23',
     ];
 }
 
@@ -1564,4 +1565,20 @@ function schema_v22(PDO $pdo): void
     if ($cols && !in_array('precise_lat', $cols, true)) { $pdo->exec('ALTER TABLE census_records ADD COLUMN precise_lat REAL'); $pdo->exec('ALTER TABLE census_records ADD COLUMN precise_lon REAL'); }
     $cols = array_column($pdo->query('PRAGMA table_info(field_trip_stops)')->fetchAll(), 'name');
     if ($cols && !in_array('extra_json', $cols, true)) { $pdo->exec("ALTER TABLE field_trip_stops ADD COLUMN extra_json TEXT NOT NULL DEFAULT '{}'"); }
+}
+
+/** n°23 : Éditeur de listes — listes de fiches que l'on remplit soi-même (comme les circuits), avec étapes et suivi « fait ». */
+function schema_v23(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS custom_list_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        list_id INTEGER NOT NULL REFERENCES custom_lists(id) ON DELETE CASCADE,
+        data_json TEXT NOT NULL DEFAULT '{}',
+        status TEXT NOT NULL DEFAULT 'todo',
+        done_at TEXT,
+        position INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_custom_list_records_list ON custom_list_records(list_id, status, position)');
 }

@@ -8963,6 +8963,11 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'import_my_list' => import_my_list($pdo,$data),
             'save_my_list_filters' => save_my_list_filters($pdo,$data),
             'save_my_list_display' => save_my_list_display($pdo,$data),
+            'save_my_list_record' => save_my_list_record($pdo,$data),
+            'delete_my_list_record' => delete_my_list_record($pdo,$data),
+            'set_my_list_record_status' => set_my_list_record_status($pdo,$data),
+            'set_my_list_record_step' => set_my_list_record_step($pdo,$data),
+            'move_my_list_record' => move_my_list_record($pdo,$data),
             'retouch_show_version' => retouch_show_version($pdo,$data),
             'save_museum' => museum_save($pdo,$data),
             'save_museum_room' => museum_save_room($pdo,$data),
@@ -9034,7 +9039,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','voter'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter'];
 }
 
 function normalize_label_color(string $color): string
