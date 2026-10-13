@@ -556,6 +556,27 @@
         return `<div class="h-emoji-panel" hidden><div class="h-emoji-tabs">${groups.map(([g], i) => `<button type="button" class="link-button ${i ? '' : 'is-active'}" data-emoji-tab="${esc(g)}">${esc(g)}</button>`).join('')}</div>
             ${groups.map(([g, list], i) => `<div class="h-emoji-grid" data-emoji-group="${esc(g)}" ${i ? 'hidden' : ''}>${list.split(' ').filter(Boolean).map(e => `<button type="button" data-be-icon="${e}" title="${e}">${e}</button>`).join('')}</div>`).join('')}</div>`;
     }
+    /** Choisir un émoji pour n'importe quelle case : petite fenêtre près de la case (dans la fenêtre ouverte s'il y en a une). */
+    ext.pickEmoji = (input, onPick) => {
+        document.querySelector('.h-emoji-pop')?.remove();
+        const pop = document.createElement('div');
+        pop.className = 'h-emoji-pop';
+        pop.innerHTML = emojiPanelHtml().replace('<div class="h-emoji-panel" hidden>', '<div class="h-emoji-panel">') + '<button type="button" class="icon-button h-emoji-pop-close" aria-label="Fermer">×</button>';
+        (input.closest('dialog') || document.body).appendChild(pop);
+        const r = input.getBoundingClientRect();
+        pop.style.top = Math.max(8, Math.min(window.innerHeight - 340, r.bottom + 4)) + 'px';
+        pop.style.left = Math.max(8, Math.min(window.innerWidth - 380, r.left)) + 'px';
+        const close = () => { pop.remove(); document.removeEventListener('mousedown', outside, true); };
+        const outside = e => { if (!pop.contains(e.target) && e.target !== input) close(); };
+        setTimeout(() => document.addEventListener('mousedown', outside, true), 0);
+        pop.addEventListener('click', e => {
+            if (e.target.closest('.h-emoji-pop-close')) return close();
+            const tab = e.target.closest('[data-emoji-tab]');
+            if (tab) { pop.querySelectorAll('[data-emoji-tab]').forEach(t => t.classList.toggle('is-active', t === tab)); pop.querySelectorAll('[data-emoji-group]').forEach(g => { g.hidden = g.dataset.emojiGroup !== tab.dataset.emojiTab; }); return; }
+            const pick = e.target.closest('[data-be-icon]');
+            if (pick) { input.value = pick.dataset.beIcon; input.dispatchEvent(new Event('input', {bubbles: true})); input.dispatchEvent(new Event('change', {bubbles: true})); onPick?.(pick.dataset.beIcon); close(); }
+        });
+    };
     function fieldRowHtml(f, i, all) {
         const [, icon, typeName] = typeInfo(f.type);
         const personFields = all.filter(x => x.type === 'person');

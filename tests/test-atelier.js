@@ -85,6 +85,26 @@ $out['deep_move'] = [atelier_project($pdo, $q2['id'])['items'][0]['folders'], (i
 atelier_items_action($pdo, ['project_id' => $q2['id'], 'ids' => [$it['id']], 'action' => 'unfile']);
 $out['unfiled'] = atelier_project($pdo, $q2['id'])['items'][0]['folders'];
 delete_atelier_project($pdo, ['id' => $q2['id']]);
+// import d'un projet Zotero RDF : collections → dossiers (la collection de départ devient le projet), notes, liens ; CSL JSON, EndNote XML
+$z = atelier_import($pdo, ['text' => file_get_contents('tests/fixtures/atelier-zotero.rdf'), 'new_project' => ['title' => '', 'kind' => 'these']]);
+$ZP = atelier_project($pdo, $z['project_id']);
+$zf = array_column($ZP['folders'], null, 'id');
+$out['zotero'] = ['title' => $ZP['project']['title'], 'summary' => [$z['count'], $z['notes'], $z['links'], $z['folders'], $z['files_skipped']],
+    'folders' => array_map(fn($f) => $f['name'] . '<' . ($f['parent_id'] ? $zf[$f['parent_id']]['name'] : '-'), $ZP['folders']),
+    'book' => array_values(array_map(fn($i) => [count($i['folders']), $i['data']['publisher'], $i['data']['place'], $i['data']['isbn'], $i['tags']], array_filter($ZP['items'], fn($i) => $i['title'] === "Les montreurs d'images")))[0],
+    'note_related' => array_values(array_filter($ZP['items'], fn($i) => $i['type'] === 'note' && $i['data']['related']))[0]['data']['text'] ?? '',
+    'article' => array_values(array_map(fn($i) => [$i['data']['container'], $i['data']['pages'], $i['data']['doi']], array_filter($ZP['items'], fn($i) => $i['title'] === 'Images et colporteurs')))[0]];
+$c = atelier_import($pdo, ['text' => file_get_contents('tests/fixtures/atelier-csl.json'), 'project_id' => $z['project_id']]);
+$e = atelier_import($pdo, ['text' => file_get_contents('tests/fixtures/atelier-endnote.xml'), 'project_id' => $z['project_id']]);
+$all = array_column(atelier_project($pdo, $z['project_id'])['items'], null, 'title');
+$out['csl_endnote'] = [$c['format'], $c['count'], $e['format'], $e['count'], $all['Le peep-show']['data']['year'], $all['Le peep-show']['tags'], $all['Peepshow boxes']['data']['doi'], $all["Le grand art de la lumière et de l'ombre"]['data']['creators'][0]['last']];
+try { atelier_import($pdo, ['text' => '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><oops', 'new_project' => ['title' => 'X']]); $out['bad_rdf'] = 'accepté'; } catch (Throwable $ex) { $out['bad_rdf'] = 'refusé'; }
+$out['bad_rdf_left'] = (int) $pdo->query("SELECT count(*) FROM atelier_projects WHERE title='X'")->fetchColumn();
+// sorte d'élément à soi : valeurs gardées, personne vérifiée, lieu, titre tiré du premier texte
+$cu = save_atelier_item($pdo, ['project_id' => $z['project_id'], 'type' => 'custom', 'data' => ['ctype' => 'x_plaque', 'values' => ['fab' => 'Lapierre', 'vu' => 1, 'par' => 1, 'faux' => 999999, 'lieu' => ['text' => 'Lille']], 'pkeys' => ['par', 'faux']]]);
+$ci = array_column(atelier_project($pdo, $z['project_id'])['items'], null, 'id')[$cu['id']];
+$out['custom'] = [$ci['title'], $ci['data']['ctype'], $ci['data']['values']['par'], $ci['data']['values']['faux'], $ci['data']['values']['lieu']['text'], $ci['data']['values']['vu']];
+delete_atelier_project($pdo, ['id' => $z['project_id']]);
 delete_atelier_project($pdo, ['id' => $pid]);
 $out['gone'] = (int) $pdo->query('SELECT (SELECT count(*) FROM atelier_items)+(SELECT count(*) FROM atelier_folders)+(SELECT count(*) FROM atelier_item_folders)')->fetchColumn();
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
@@ -109,6 +129,10 @@ const checks = [
   ['import BibTeX : @string / @comment ignorés sans perdre les références, accents LaTeX, actes de colloque', () => { assert.equal(out.bib2, 2); assert.deepEqual(out.bib2items, [2, 'François', 'chapitre']); }],
   ['renommer un dossier garde sa place', () => assert.deepEqual(out.rename_order, ['A2', 'B', 'C'])],
   ['déplacer depuis un dossier avec ses sous-dossiers ; sortir de tous les dossiers', () => { assert.deepEqual(out.deep_move, [[out.deep_move[1]], out.deep_move[1]]); assert.deepEqual(out.unfiled, []); }],
+  ['import Zotero RDF : la collection de départ devient le projet, sous-collections en dossiers, élément dans deux dossiers', () => { assert.equal(out.zotero.title, 'Thèse optique'); assert.deepEqual(out.zotero.summary, [3, 2, 1, 3, 1]); assert.deepEqual(out.zotero.folders, ['Chapitre 1<-', 'Section 1.1<Chapitre 1', 'Chapitre 2<-']); assert.deepEqual(out.zotero.book, [2, 'Gallimard', 'Paris', '978-2-07-012345-6', ["vues d'optique", 'colportage']]); }],
+  ['import Zotero RDF : note jointe gardée (texte sans HTML), revue reliée, pages, DOI', () => { assert.equal(out.zotero.note_related, 'Très utile pour le chapitre 2.\nVoir p. 45.'); assert.deepEqual(out.zotero.article, ['Annales', '10–25', '10.1234/abc']); }],
+  ['import CSL JSON et EndNote XML ; fichier abîmé refusé sans laisser de projet', () => { assert.deepEqual(out.csl_endnote, ['CSL JSON', 2, 'EndNote XML', 2, '1998', ['optique', 'spectacle'], '10.9/xyz', 'Mannoni']); assert.equal(out.bad_rdf, 'refusé'); assert.equal(out.bad_rdf_left, 0); }],
+  ['sorte d’élément à soi : valeurs, personne inexistante retirée, lieu, titre tiré du premier texte', () => assert.deepEqual(out.custom, ['Lapierre', 'x_plaque', 1, null, 'Lille', 1])],
   ['projet supprimé avec tout son contenu', () => assert.equal(out.gone, 0)],
 ];
 let failed = 0;

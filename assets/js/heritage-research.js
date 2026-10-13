@@ -50,6 +50,40 @@
         vide: ['Vide', []],
     };
 
+    /* ─────────── Réglages (Maintenance → Atelier de recherche) : menu, sortes d'éléments, dossiers, plans ─────────── */
+    const CFG_KEY = 'genealogie-atelier-config'; // copié tout seul dans la base (lib/settings.php)
+    const NAV_BUILTIN = [['overview', '📊', 'Vue d’ensemble'], ['all', '🗂️', 'Tout le projet'], ['starred', '⭐', 'Favoris'], ['unfiled', '📥', 'Non classés'], ['tasks', '✅', 'Tâches'], ['timeline', '🕰️', 'Chronologie'], ['people', '👥', 'Personnes'], ['map', '🗺️', 'Carte'], ['biblio', '📚', 'Bibliographie'], ['trash', '🗑️', 'Corbeille']];
+    const readCfg = () => { try { const c = JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); return c && typeof c === 'object' ? c : {}; } catch (_) { return {}; } };
+    function loadCfg() {
+        const c = readCfg();
+        const merge = (saved, builtins) => { const out = [], seen = new Set();
+            (Array.isArray(saved) ? saved : []).forEach(x => { if (!x || typeof x.key !== 'string' || seen.has(x.key)) return; const b = builtins.find(y => y.key === x.key);
+                if (b) out.push({...b, icon: typeof x.icon === 'string' && x.icon ? x.icon : b.icon, label: typeof x.label === 'string' && x.label.trim() ? x.label : b.label, hidden: !!x.hidden});
+                else if (x.custom) out.push({...x, hidden: !!x.hidden});
+                else return; seen.add(x.key); });
+            builtins.forEach(b => { if (!seen.has(b.key)) out.push({...b}); });
+            return out; };
+        const nav = merge(c.nav, NAV_BUILTIN.map(([key, icon, label]) => ({key, icon, label, builtin: true})));
+        nav.forEach(x => { if (x.key === 'trash') x.hidden = false; });
+        return {nav, types: merge(c.types, Object.entries(TYPES).map(([key, [icon, label, help]]) => ({key, icon, label, help, builtin: true}))),
+            plans: merge(c.plans, Object.entries(PLANS).map(([key, [label, tree]]) => ({key, label, tree, builtin: true}))),
+            folders: {closed: c.folders?.closed || '📁', open: c.folders?.open || '📂'}};
+    }
+    let CFG = loadCfg();
+    function saveCfg(c = CFG) {
+        const slim = (list, keepAll) => list.map(x => x.builtin ? {key: x.key, icon: x.icon, label: x.label, hidden: !!x.hidden} : keepAll(x));
+        try { localStorage.setItem(CFG_KEY, JSON.stringify({nav: slim(c.nav, x => x), types: slim(c.types, x => x), plans: c.plans.map(x => x.builtin ? {key: x.key, label: x.label, hidden: !!x.hidden} : x), folders: c.folders})); } catch (_) {}
+        CFG = loadCfg();
+    }
+    const tkey = x => typeof x === 'string' ? x : (x.type === 'custom' ? x.data?.ctype || 'custom' : x.type);
+    const tentry = x => CFG.types.find(t => t.key === tkey(x));
+    const ti = x => tentry(x)?.icon || TYPES[tkey(x)]?.[0] || '🧩';
+    const tl = x => tentry(x)?.label || TYPES[tkey(x)]?.[1] || 'Élément';
+    const plabel = k => { const e = tentry(k); return e?.builtin && e.label === TYPES[k]?.[1] ? (TYPE_PLURALS[k] || e.label) : tl(k); };
+    const navEntry = k => CFG.nav.find(n => n.key === k);
+    const navTitle = k => { const e = navEntry(k); return e ? `${e.icon} ${e.label}` : ''; };
+    const uid = p => p + Math.random().toString(36).slice(2, 9);
+
     /* ─────────── Citer à la française ─────────── */
     const year = i => String(i.data?.year || i.data?.date || '').match(/\d{3,4}/)?.[0] || '';
     const creatorsOf = (i, roles) => (i.data?.creators || []).filter(c => !roles || roles.includes(c.role));
@@ -123,7 +157,31 @@
     const dateKey = i => { const d = i.data || {}; const v = i.type === 'task' ? d.due : i.type === 'reference' ? (d.date || d.year) : i.type === 'person' ? d.dates : d.date; const m = String(v || '').match(/(\d{3,4})(?:-(\d{2})(?:-(\d{2}))?)?/); return m ? m[1].padStart(4, '0') + (m[2] || '00') + (m[3] || '00') : ''; };
 
     /* ═══════════ Les projets ═══════════ */
+    const firstNode = () => CFG.nav.find(x => !x.hidden)?.key || 'all';
+    /** Choisir un fichier : son nom et son texte (ou null). */
+    const pickNamedFile = accept => new Promise(resolve => { const input = Object.assign(document.createElement('input'), {type: 'file', accept}); input.addEventListener('change', async () => { const f = input.files[0]; resolve(f ? {name: f.name, text: await f.text()} : null); }); input.click(); });
+    const importSummary = r => [plural(r.count, 'référence', 'références'), r.notes ? plural(r.notes, 'note', 'notes') : '', r.links ? plural(r.links, 'lien', 'liens') : '', r.folders ? plural(r.folders, 'dossier', 'dossiers') : ''].filter(Boolean).join(', ') + ` (${r.format})` + (r.files_skipped ? ` — ${plural(r.files_skipped, 'fichier joint', 'fichiers joints')} (PDF…) à rajouter à la main` : '');
+    const IMPORT_ACCEPT = '.rdf,.json,.xml,.bib,.ris,.txt,application/json,text/xml,application/rdf+xml';
+    function importProjectDialog(kinds) {
+        dialog({eyebrow: 'IMPORTER UN PROJET', title: 'Depuis Zotero ou un autre logiciel', wide: true, submitLabel: 'Choisir le fichier et importer',
+            body: `<p>Le projet est créé avec ses dossiers, ses références et ses notes.</p>
+                <ul class="h-at-howto"><li><b>Zotero</b> (avec les collections et sous-collections, qui deviennent des dossiers, et les notes) : clic droit sur une collection → <i>Exporter la collection…</i> → format <b>Zotero RDF</b>.</li>
+                <li><b>Zotero, Mendeley, Zettlr…</b> : export <b>CSL JSON</b> (.json).</li><li><b>EndNote</b> : <i>File → Export</i> → <b>XML</b>.</li><li>Tout logiciel de bibliographie : <b>BibTeX</b> (.bib) ou <b>RIS</b> (.ris).</li></ul>
+                <p class="muted">Les fichiers PDF joints ne voyagent pas dans ces exports : ils sont comptés, et tu pourras les rajouter dans chaque référence.</p>
+                <div class="form-grid"><label>Nom du projet <small>(vide : le nom de la collection)</small><input name="title" placeholder="Les montreurs de vues d’optique"></label>
+                <label>Sorte de projet<select name="kind">${Object.entries(kinds).map(([k, l]) => `<option value="${k}" ${k === 'these' ? 'selected' : ''}>${KIND_ICONS[k] || ''} ${esc(l)}</option>`).join('')}</select></label></div>`,
+            onSubmit: async form => {
+                const file = await pickNamedFile(IMPORT_ACCEPT); if (!file) return false;
+                const title = form.title.value.trim() || '';
+                const r = await post('atelier_import', {text: file.text, new_project: {title: title || '', kind: form.kind.value}});
+                toast('Projet importé : ' + importSummary(r.result) + '.');
+                Object.assign(st(), {project: r.result.project_id, node: firstNode(), sel: [], tags: [], q: '', type: ''});
+                ext.atelier(++S().workspaceToken);
+            },
+        });
+    }
     ext.atelier = async token => {
+        CFG = loadCfg();
         const v = st();
         if (v.project) {
             try { await load(v.project); } catch (error) { v.project = 0; toast(error.message, 'error'); return ext.atelier(token); }
@@ -142,12 +200,14 @@
                 <p class="h-at-project-stats">${plural(Number(p.item_count), 'élément', 'éléments')} · ${plural(Number(p.folder_count), 'dossier', 'dossiers')}${Number(p.open_tasks) ? ` · ${plural(Number(p.open_tasks), 'tâche', 'tâches')} à faire` : ''}</p>
                 ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} mots sur ${fmt(target)}</small></div>` : words ? `<small>${fmt(words)} mots écrits</small>` : ''}
                 ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? `échéance dépassée de ${plural(-days, 'jour', 'jours')}` : `rendu dans ${plural(days, 'jour', 'jours')}`}</small>` : ''}</div></article>`; };
-        ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>+ Projet</button></div></header>`}
+        ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>+ Projet</button><button type="button" class="button secondary" data-at-importproject>⬇ Importer un projet (Zotero…)</button><button type="button" class="button secondary" data-at-settings title="Maintenance → Atelier de recherche">⚙ Réglages</button></div></header>`}
             ${projects.length ? `<div class="h-at-projects">${projects.map(card).join('')}</div>` : empty('Aucun projet pour l’instant. Clique sur « + Projet » : par exemple « Les montreurs de vues d’optique, XVIIIe-XIXe siècles ».')}</section>`;
         ws.querySelector('[data-at-new]').addEventListener('click', () => projectDialog(null, data.kinds));
+        ws.querySelector('[data-at-importproject]').addEventListener('click', () => importProjectDialog(data.kinds));
+        ws.querySelector('[data-at-settings]').addEventListener('click', () => openSettings());
         lastKinds = data.kinds;
         ws.querySelectorAll('[data-at-open]').forEach(c => {
-            const open = () => { Object.assign(st(), {project: Number(c.dataset.atOpen), node: 'overview', sel: [], tags: [], q: '', type: ''}); ext.atelier(++S().workspaceToken); };
+            const open = () => { Object.assign(st(), {project: Number(c.dataset.atOpen), node: firstNode(), sel: [], tags: [], q: '', type: ''}); ext.atelier(++S().workspaceToken); };
             c.addEventListener('click', open); c.addEventListener('keydown', e => { if (e.key === 'Enter') open(); });
         });
     };
@@ -155,7 +215,7 @@
     ext.atelierNewProject = () => projectDialog(null, P?.kinds || lastKinds);
     function projectDialog(p, kinds) {
         const isNew = !p; p = p || {kind: 'these', icon: '', color: '#0066cc', target_words: 0};
-        const planTree = list => `<ul>${list.map(x => `<li>📁 ${esc(x.name)}${x.children.length ? planTree(x.children) : ''}</li>`).join('')}</ul>`;
+        const planTree = list => `<ul>${list.map(x => `<li>${esc(x.icon || CFG.folders.closed)} ${esc(x.name)}${x.children?.length ? planTree(x.children) : ''}</li>`).join('')}</ul>`;
         dialog({eyebrow: 'ATELIER DE RECHERCHE', title: isNew ? 'Nouveau projet' : 'Modifier le projet', wide: true, submitLabel: isNew ? 'Créer le projet' : 'Enregistrer',
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" required value="${esc(p.title || '')}" placeholder="Les montreurs de vues d’optique (XVIIIe-XIXe siècles)"></label>
                 <label class="span-2">Sous-titre<input name="subtitle" value="${esc(p.subtitle || '')}" placeholder="Colporteurs d’images, boîtes d’optique et publics populaires"></label>
@@ -166,14 +226,15 @@
                 <label>Couleur<input type="color" name="color" value="${esc(p.color || '#0066cc')}"></label>
                 ${isNew ? '' : `<label class="checkbox-line"><input type="checkbox" name="archived" ${p.status === 'archived' ? 'checked' : ''}> Archivé (fini ou en pause)</label>`}
                 <label class="span-2">Problématique, présentation<textarea name="description" rows="4" placeholder="Qui étaient les montreurs d’optique ? D’où venaient-ils, quelles images montraient-ils, à quels publics ?">${esc(p.description || '')}</textarea></label></div>
-                ${isNew ? `<h4>Plan de départ</h4><p class="muted">Des dossiers déjà prêts, que tu pourras renommer, déplacer, compléter ou supprimer.</p><div class="h-at-plans">${Object.entries(PLANS).map(([k, [label, tree]]) => `<label class="h-at-plan"><input type="radio" name="plan" value="${k}" ${k === (p.kind in PLANS ? p.kind : 'livre') ? 'checked' : ''}><strong>${esc(label)}</strong>${tree.length ? planTree(tree) : '<p class="muted">Aucun dossier</p>'}</label>`).join('')}</div>` : ''}`,
-            onOpen: dl => { dl.querySelector('[name=kind]').addEventListener('change', e => { const r = dl.querySelector(`[name=plan][value="${e.target.value}"]`); if (r) r.checked = true; }); },
+                ${isNew ? `<h4>Plan de départ</h4><p class="muted">Des dossiers déjà prêts, que tu pourras renommer, déplacer, compléter ou supprimer.</p><div class="h-at-plans">${CFG.plans.filter(x => !x.hidden).map((x, i, arr) => `<label class="h-at-plan"><input type="radio" name="plan" value="${esc(x.key)}" ${i === 0 ? 'checked' : ''}><strong>${esc(x.label)}</strong>${x.tree?.length ? planTree(x.tree) : '<p class="muted">Aucun dossier</p>'}</label>`).join('')}</div><p class="muted"><button type="button" class="link-button" data-at-settings-plans>⚙ Créer mes plans, les ranger, en masquer…</button></p>` : ''}`,
+            onOpen: dl => { dl.querySelector('[name=kind]').addEventListener('change', e => { const r = dl.querySelector(`[name=plan][value="${e.target.value}"]`); if (r) r.checked = true; });
+                dl.querySelector('[data-at-settings-plans]')?.addEventListener('click', () => { dl.close(); openSettings(); }); },
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form));
                 const body = {id: p.id || 0, title: f.title, subtitle: f.subtitle, kind: f.kind, icon: f.icon, color: f.color, description: f.description, target_words: Number(f.target_words) || 0, deadline: f.deadline, status: form.archived?.checked ? 'archived' : 'active'};
-                if (isNew) body.folders = PLANS[f.plan || 'vide'][1];
+                if (isNew) body.folders = CFG.plans.find(x => x.key === f.plan)?.tree || [];
                 const r = await post('save_atelier_project', body);
-                if (isNew) Object.assign(st(), {project: r.result.id, node: 'overview', sel: [], tags: [], q: '', type: ''});
+                if (isNew) Object.assign(st(), {project: r.result.id, node: firstNode(), sel: [], tags: [], q: '', type: ''});
                 toast(isNew ? 'Projet créé.' : 'Projet enregistré.');
                 ext.atelier(++S().workspaceToken);
             },
@@ -185,20 +246,35 @@
     }
 
     /* ═══════════ Un projet ouvert : dossiers | éléments | détail ═══════════ */
-    const SPECIAL = [['overview', '📊', 'Vue d’ensemble'], ['all', '🗂️', 'Tout le projet'], ['starred', '⭐', 'Favoris'], ['unfiled', '📥', 'Non classés'], ['tasks', '✅', 'Tâches'], ['timeline', '🕰️', 'Chronologie'], ['people', '👥', 'Personnes'], ['map', '🗺️', 'Carte'], ['biblio', '📚', 'Bibliographie'], ['trash', '🗑️', 'Corbeille']];
+    const SPECIAL_VIEWS = ['overview', 'timeline', 'people', 'map', 'biblio', 'tasks'];
     const reload = async (keepScroll = true) => { const v = st(), pid = v.project; await load(pid); if (S().module !== 'enquetes' || S().enquetesTab !== 'atelier' || st().project !== pid) return; renderProject(S().workspaceToken, keepScroll); };
+    /** Vue à soi (Maintenance → Atelier) : sortes, étiquettes, favoris, lecture, tâches à faire, texte, années, dossier par son nom. */
+    function viewFilter(f, items) {
+        const lower = x => String(x || '').toLowerCase();
+        if (f.types?.length) items = items.filter(i => f.types.includes(tkey(i)));
+        if (f.tags?.length) items = items.filter(i => f.tagMode === 'any' ? f.tags.some(t => (i.tags || []).includes(t)) : f.tags.every(t => (i.tags || []).includes(t)));
+        if (f.starred) items = items.filter(i => Number(i.starred));
+        if (f.read) items = items.filter(i => i.type === 'reference' && (i.data.read || '') === f.read);
+        if (f.todo) items = items.filter(i => i.type === 'task' && !Number(i.data.done));
+        if (f.text) items = items.filter(i => lower([i.title, JSON.stringify(i.data), (i.tags || []).join(' ')].join(' ')).includes(lower(f.text)));
+        if (f.from || f.to) items = items.filter(i => { const y = Number(dateKey(i).slice(0, 4)); return y && (!f.from || y >= Number(f.from)) && (!f.to || y <= Number(f.to)); });
+        if (f.folder) { const want = lower(f.folder); const ok = new Set(P.folders.filter(x => lower(x.name).includes(want)).flatMap(x => descendants(Number(x.id)))); items = items.filter(i => i.folders.some(x => ok.has(x))); }
+        return items;
+    }
     function nodeItems(node) {
         const v = st();
         let items = node === 'trash' ? P.items.filter(i => Number(i.trashed)) : live();
         if (typeof node === 'number') { const set = new Set(v.deep ? descendants(node) : [node]); items = items.filter(i => i.folders.some(f => set.has(f))); }
         if (node === 'starred') items = items.filter(i => Number(i.starred));
         if (node === 'unfiled') items = items.filter(i => !i.folders.length);
-        if (v.type) items = items.filter(i => i.type === v.type);
+        if (typeof node === 'string' && node.startsWith('v_')) items = viewFilter(navEntry(node)?.filter || {}, items);
+        if (v.type) items = items.filter(i => tkey(i) === v.type);
         if (v.tags.length) items = items.filter(i => v.tags.every(t => (i.tags || []).includes(t)));
         if (v.q) { const q = v.q.toLowerCase(); items = items.filter(i => [i.title, JSON.stringify(i.data), (i.tags || []).join(' ')].join(' ').toLowerCase().includes(q)); }
-        const s = v.sort, key = i => s.col === 'creator' ? firstAuthor(i) || i.data?.creator || '' : s.col === 'year' ? dateKey(i) : s.col === 'type' ? TYPES[i.type][1] : s.col === 'added' ? i.created_at : i.title;
+        const s = v.sort, key = i => s.col === 'creator' ? firstAuthor(i) || i.data?.creator || '' : s.col === 'year' ? dateKey(i) : s.col === 'type' ? tl(i) : s.col === 'added' ? i.created_at : i.title;
         return items.sort((a, b) => { const x = String(key(a) || ''), y = String(key(b) || ''); if (!x !== !y) return x ? -1 : 1; return x.localeCompare(y, 'fr', {numeric: true, sensitivity: 'base'}) * s.dir; });
     }
+    const nodeItemsCount = k => viewFilter(navEntry(k)?.filter || {}, live()).length;
     let rendering = false;
     function renderProject(token, keepScroll = false) {
         // un champ qui perd le focus pendant qu'on redessine (« change » au blur) : on redessine juste après
@@ -210,6 +286,8 @@
         const v = st(), p = P.project, ws = A().$('#workspace');
         const scroll = keepScroll ? [...ws.querySelectorAll('[data-at-scroll]')].map(el => el.scrollTop) : [];
         if (typeof v.node === 'number' && !P.fById.has(v.node)) v.node = 'all';
+        if (typeof v.node === 'string' && !navEntry(v.node)) v.node = 'all';
+        if (v.type && !CFG.types.some(t => t.key === v.type)) v.type = '';
         v.sel = v.sel.filter(id => P.byId.has(id));
         if (typeof v.node === 'number' || ['all', 'starred', 'unfiled', 'trash'].includes(v.node)) { const visible = new Set(nodeItems(v.node).map(i => Number(i.id))); v.sel = v.sel.filter(id => visible.has(id)); }
         const target = Number(p.target_words), words = Number(p.words);
@@ -218,21 +296,21 @@
         const folderNode = f => { const id = Number(f.id), ch = kids(id), open = !v.closed[id];
             return `<li class="h-at-node" data-at-folder="${id}"><div class="h-at-row ${v.node === id ? 'is-on' : ''}" draggable="true" data-at-go="${id}" style="${f.color ? `--at-fc:${esc(f.color)}` : ''}">
                 ${ch.length ? `<button type="button" class="h-at-toggle" data-at-toggle="${id}" aria-label="${open ? 'Replier' : 'Déplier'}">${open ? '▾' : '▸'}</button>` : '<span class="h-at-toggle"></span>'}
-                <span class="h-at-ficon">${esc(f.icon || (open && ch.length ? '📂' : '📁'))}</span><span class="h-at-fname">${esc(f.name)}</span>${counts.get(id) ? `<small class="h-at-count">${fmt(counts.get(id))}</small>` : ''}
+                <span class="h-at-ficon">${esc(f.icon || (open && ch.length ? CFG.folders.open : CFG.folders.closed))}</span><span class="h-at-fname">${esc(f.name)}</span>${counts.get(id) ? `<small class="h-at-count">${fmt(counts.get(id))}</small>` : ''}
                 <span class="h-at-factions"><button type="button" data-at-fadd="${id}" title="Sous-dossier">＋</button><button type="button" data-at-fedit="${id}" title="Renommer, icône, couleur">✎</button></span></div>
                 ${ch.length && open ? `<ul>${ch.map(folderNode).join('')}</ul>` : ''}</li>`; };
         const tagCounts = new Map(); live().forEach(i => (i.tags || []).forEach(t => tagCounts.set(t, (tagCounts.get(t) || 0) + 1)));
         const tags = [...tagCounts.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr'));
-        const special = v.node === 'overview' || v.node === 'timeline' || v.node === 'people' || v.node === 'map' || v.node === 'biblio' || v.node === 'tasks';
+        const special = SPECIAL_VIEWS.includes(v.node);
         ws.innerHTML = `<section class="page collection-page h-at h-at-open" style="--at-color:${esc(p.color)}">
             <header class="h-at-head"><button type="button" class="button secondary small" data-at-home>← Projets</button><span class="h-at-head-icon">${esc(p.icon || KIND_ICONS[p.kind] || '📚')}</span>
                 <div class="h-at-head-title"><h2>${esc(p.title)}</h2>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}</div>
                 ${target ? `<div class="h-at-words" title="Mots des brouillons"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} / ${fmt(target)} mots</small></div>` : ''}
-                <span class="h-at-head-actions"><button type="button" class="button small secondary" data-at-export>Exporter…</button><button type="button" class="button small secondary" data-at-pedit>Projet…</button></span></header>
+                <span class="h-at-head-actions"><button type="button" class="button small secondary" data-at-export>Exporter…</button><button type="button" class="button small secondary" data-at-pedit>Projet…</button><button type="button" class="button small secondary" data-at-settings title="Réglages de l’Atelier (Maintenance)">⚙</button></span></header>
             <div class="h-at-grid">
                 <aside class="h-at-tree" data-at-scroll>
-                    <ul class="h-at-special">${SPECIAL.map(([k, icon, label]) => { const c = k === 'all' ? live().length : k === 'trash' ? P.items.length - live().length : k === 'starred' ? live().filter(i => Number(i.starred)).length : k === 'unfiled' ? live().filter(i => !i.folders.length).length : k === 'tasks' ? live().filter(i => i.type === 'task' && !Number(i.data.done)).length : 0;
-                        return `<li><div class="h-at-row ${v.node === k ? 'is-on' : ''}" data-at-go="${k}" ${k === 'trash' || k === 'all' || k === 'starred' || k === 'unfiled' ? `data-at-drop="${k}"` : ''}><span class="h-at-ficon">${icon}</span><span class="h-at-fname">${label}</span>${c ? `<small class="h-at-count">${fmt(c)}</small>` : ''}</div></li>`; }).join('')}</ul>
+                    <ul class="h-at-special">${CFG.nav.filter(x => !x.hidden || x.key === v.node).map(({key: k, icon, label}) => { const c = k === 'all' ? live().length : k === 'trash' ? P.items.length - live().length : k === 'starred' ? live().filter(i => Number(i.starred)).length : k === 'unfiled' ? live().filter(i => !i.folders.length).length : k === 'tasks' ? live().filter(i => i.type === 'task' && !Number(i.data.done)).length : k.startsWith('v_') ? nodeItemsCount(k) : 0;
+                        return `<li><div class="h-at-row ${v.node === k ? 'is-on' : ''}" data-at-go="${esc(k)}" ${k === 'trash' || k === 'all' || k === 'starred' || k === 'unfiled' ? `data-at-drop="${k}"` : ''}><span class="h-at-ficon">${esc(icon)}</span><span class="h-at-fname">${esc(label)}</span>${c ? `<small class="h-at-count">${fmt(c)}</small>` : ''}</div></li>`; }).join('')}</ul>
                     <div class="h-at-tree-head" data-at-drop="root"><span>Dossiers</span><button type="button" class="icon-button" data-at-fadd="0" title="Nouveau dossier">＋</button></div>
                     <ul class="h-at-folders">${kids(0).map(folderNode).join('') || '<li class="muted h-at-none">Aucun dossier. « ＋ » pour en créer un.</li>'}</ul>
                     ${tags.length ? `<div class="h-at-tags"><input type="search" data-at-tagq placeholder="Filtrer les étiquettes"><div class="h-at-tagcloud">${tags.map(([t, c]) => `<button type="button" class="h-at-tag ${v.tags.includes(t) ? 'is-on' : ''}" data-at-tag="${esc(t)}" title="${fmt(c)}">${esc(t)}</button>`).join('')}</div>${v.tags.length ? '<button type="button" class="link-button" data-at-tagclear>Toutes les étiquettes</button>' : ''}</div>` : ''}
@@ -250,17 +328,17 @@
         const v = st(), node = v.node, items = nodeItems(node);
         const folder = typeof node === 'number' ? P.fById.get(node) : null;
         const sub = folder ? kids(node) : [];
-        const head = folder ? `<nav class="h-at-crumbs">${pathOf(node).map((f, i, arr) => i < arr.length - 1 ? `<button type="button" class="link-button" data-at-go="${f.id}">${esc(f.name)}</button> ›` : '').join(' ')}</nav><h3 class="h-at-ftitle">${esc(folder.icon || '📂')} ${esc(folder.name)}</h3>`
-            : `<h3 class="h-at-ftitle">${SPECIAL.find(s => s[0] === node)?.slice(1).join(' ') || ''}</h3>`;
+        const head = folder ? `<nav class="h-at-crumbs">${pathOf(node).map((f, i, arr) => i < arr.length - 1 ? `<button type="button" class="link-button" data-at-go="${f.id}">${esc(f.name)}</button> ›` : '').join(' ')}</nav><h3 class="h-at-ftitle">${esc(folder.icon || CFG.folders.open)} ${esc(folder.name)}</h3>`
+            : `<h3 class="h-at-ftitle">${esc(navTitle(node))}</h3>`;
         const sortTh = (col, label) => `<th><button type="button" class="h-lv-sort" data-at-sort="${col}">${label}${v.sort.col === col ? (v.sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`;
         const trash = node === 'trash';
         return `${head}
             ${folder ? `<details class="h-at-fnotes" ${folder.notes ? 'open' : ''}><summary>📝 Notes du dossier${folder.notes ? '' : ' <small class="muted">(vides)</small>'}</summary><textarea data-at-fnotes rows="4" placeholder="Ce que ce dossier doit contenir, le plan de la section, les idées…">${esc(folder.notes || '')}</textarea></details>` : ''}
-            ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || '📁')} ${esc(f.name)}</button>`).join('')}</div>` : ''}
-            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>+ Ajouter ▾</button><div class="h-at-menu" hidden>${Object.entries(TYPES).map(([k, [icon, label, help]]) => `<button type="button" data-at-add="${k}" title="${esc(help)}">${icon} ${esc(label)}</button>`).join('')}</div></div>
-                <button type="button" class="button small secondary" data-at-import title="Fichier .bib ou .ris exporté d’un gestionnaire de bibliographie">⬇ Importer .bib / .ris</button>`}
+            ${sub.length ? `<div class="h-at-subs">${sub.map(f => `<button type="button" class="h-at-sub" data-at-go="${f.id}" data-at-folder-drop="${f.id}">${esc(f.icon || CFG.folders.closed)} ${esc(f.name)}</button>`).join('')}</div>` : ''}
+            <div class="h-at-toolbar">${trash ? (items.length ? '<button type="button" class="button small danger" data-at-emptytrash>Vider la corbeille</button>' : '') : `<div class="h-at-addmenu"><button type="button" class="button small" data-at-addmenu>+ Ajouter ▾</button><div class="h-at-menu" hidden>${CFG.types.filter(t => !t.hidden).map(t => `<button type="button" data-at-add="${esc(t.key)}" title="${esc(t.help || '')}">${esc(t.icon)} ${esc(t.label)}</button>`).join('')}<button type="button" class="h-at-menu-cfg" data-at-settings>⚙ Réglages des sortes…</button></div></div>
+                <button type="button" class="button small secondary" data-at-import title="Zotero (.rdf), CSL JSON, EndNote (.xml), BibTeX (.bib), RIS (.ris)">⬇ Importer…</button>`}
                 ${folder && kids(node).length ? `<label class="checkbox-line h-at-deep"><input type="checkbox" data-at-deep ${v.deep ? 'checked' : ''}> avec les sous-dossiers</label>` : ''}
-                <select data-at-type><option value="">Toutes les sortes</option>${Object.entries(TYPES).map(([k, [icon, label]]) => `<option value="${k}" ${v.type === k ? 'selected' : ''}>${icon} ${esc(label)}</option>`).join('')}</select>
+                <select data-at-type><option value="">Toutes les sortes</option>${CFG.types.filter(t => !t.hidden || t.key === v.type).map(t => `<option value="${esc(t.key)}" ${v.type === t.key ? 'selected' : ''}>${esc(t.icon)} ${esc(t.label)}</option>`).join('')}</select>
                 <input type="search" data-at-q value="${esc(v.q)}" placeholder="Chercher (titre, auteur, texte, étiquette…)"></div>
             ${v.sel.length > 1 ? `<div class="h-at-bulk"><strong>${plural(v.sel.length, 'élément choisi', 'éléments choisis')}</strong>
                 ${trash ? '<button type="button" class="button small" data-at-bulk="restore">Restaurer</button><button type="button" class="button small danger" data-at-bulk="delete">Supprimer définitivement</button>'
@@ -269,7 +347,7 @@
             ${items.length ? `<table class="data-table h-at-table"><thead><tr><th class="h-at-c-star"></th>${sortTh('type', '')}${sortTh('title', 'Titre')}${sortTh('creator', 'Auteur, créateur')}${sortTh('year', 'Date')}<th class="h-at-c-att" title="Fichiers joints">📎</th></tr></thead>
                 <tbody>${items.map(i => `<tr data-at-item="${i.id}" class="${v.sel.includes(Number(i.id)) ? 'is-sel' : ''} ${i.type === 'task' && Number(i.data.done) ? 'is-done' : ''}" draggable="true">
                     <td class="h-at-c-star"><button type="button" class="h-at-star ${Number(i.starred) ? 'is-on' : ''}" data-at-star="${i.id}" title="Favori">${Number(i.starred) ? '★' : '☆'}</button></td>
-                    <td class="h-at-c-type" title="${esc(TYPES[i.type][1])}${i.type === 'reference' ? ' — ' + esc(REF_KINDS[i.data.kind] || '') : ''}">${TYPES[i.type][0]}</td>
+                    <td class="h-at-c-type" title="${esc(tl(i))}${i.type === 'reference' ? ' — ' + esc(REF_KINDS[i.data.kind] || '') : ''}">${ti(i)}</td>
                     <td class="h-at-c-title">${esc(i.title)}${(i.tags || []).length ? ` <span class="h-at-rowtags">${i.tags.slice(0, 3).map(t => `<span>${esc(t)}</span>`).join('')}</span>` : ''}${i.type === 'reference' && i.data.read ? ` <small class="muted">${esc(READ[i.data.read])}</small>` : ''}</td>
                     <td>${esc(i.type === 'reference' ? creatorsOf(i).map(c => c.last || c.first).slice(0, 3).join(', ') : i.type === 'media' ? i.data.creator : i.type === 'quote' && i.data.source_id ? firstAuthor(P.byId.get(Number(i.data.source_id)) || {data: {}}) : '')}</td>
                     <td class="h-at-c-year">${esc(i.type === 'task' ? (i.data.due ? new Date(i.data.due + 'T12:00:00').toLocaleDateString('fr-FR') : '') : year(i) || (i.type === 'event' ? i.data.date : ''))}</td>
@@ -283,7 +361,7 @@
     function specialView(node) {
         const items = live(), people = P.people || {};
         if (node === 'overview') {
-            const p = P.project, byType = Object.keys(TYPES).map(k => [k, items.filter(i => i.type === k).length]).filter(([, c]) => c);
+            const p = P.project, byType = CFG.types.map(t => t.key).map(k => [k, items.filter(i => tkey(i) === k).length]).filter(([, c]) => c);
             const refs = items.filter(i => i.type === 'reference'), reads = Object.keys(READ).filter(Boolean).map(k => [k, refs.filter(i => i.data.read === k).length]);
             const tasks = items.filter(i => i.type === 'task' && !Number(i.data.done)).sort((a, b) => String(a.data.due || '9').localeCompare(String(b.data.due || '9')));
             const drafts = items.filter(i => i.type === 'draft');
@@ -292,13 +370,13 @@
             const wc = t => (String(t || '').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length;
             return `<h3 class="h-at-ftitle">📊 Vue d’ensemble</h3>
                 ${p.description ? `<div class="h-at-problem"><span class="section-label">Problématique</span><p>${nl(p.description)}</p></div>` : ''}
-                <div class="h-at-stats">${byType.map(([k, c]) => `<button type="button" class="h-at-stat" data-at-typejump="${k}"><span>${TYPES[k][0]}</span><b>${fmt(c)}</b><small>${esc(c > 1 ? (TYPE_PLURALS[k] || TYPES[k][1]) : TYPES[k][1])}</small></button>`).join('') || '<p class="muted">Le projet est vide : choisis un dossier à gauche, puis « + Ajouter ».</p>'}</div>
+                <div class="h-at-stats">${byType.map(([k, c]) => `<button type="button" class="h-at-stat" data-at-typejump="${k}"><span>${ti(k)}</span><b>${fmt(c)}</b><small>${esc(c > 1 ? plabel(k) : tl(k))}</small></button>`).join('') || '<p class="muted">Le projet est vide : choisis un dossier à gauche, puis « + Ajouter ».</p>'}</div>
                 ${days !== null ? `<p class="${days < 0 ? 'h-at-late' : ''}">📆 ${days < 0 ? `Date de rendu dépassée de ${plural(-days, 'jour', 'jours')}` : `Rendu le ${new Date(p.deadline + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})} : encore ${plural(days, 'jour', 'jours')}`}${Number(p.target_words) && days > 0 ? ` · ${fmt(Math.max(0, Math.ceil((Number(p.target_words) - Number(p.words)) / days)))} mots par jour pour tenir l’objectif` : ''}</p>` : ''}
                 <div class="h-at-cols">
                 ${refs.length ? `<section><h4>📖 Lectures</h4>${reads.map(([k, c]) => `<div class="h-at-bar"><span>${esc(READ[k])}</span><b style="width:${refs.length ? Math.round(100 * c / refs.length) : 0}%"></b><em>${fmt(c)}</em></div>`).join('')}<small class="muted">${plural(refs.length, 'référence', 'références')}</small></section>` : ''}
                 ${drafts.length ? `<section><h4>✍️ Brouillons</h4>${drafts.map(d => { const w = wc(d.data.text), t = Number(d.data.target); return `<button type="button" class="h-at-line" data-at-pick="${d.id}">${esc(d.title)} <small class="muted">${fmt(w)}${t ? ' / ' + fmt(t) : ''} mots · ${esc(STAGES[d.data.stage] || '')}</small></button>`; }).join('')}</section>` : ''}
                 ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < todayIso() ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">Toutes les tâches (${fmt(tasks.length)})</button>` : ''}</section>` : ''}
-                ${recent.length ? `<section><h4>🕘 Derniers changements</h4>${recent.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${TYPES[i.type][0]} ${esc(i.title)}</button>`).join('')}</section>` : ''}</div>`;
+                ${recent.length ? `<section><h4>🕘 Derniers changements</h4>${recent.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${ti(i)} ${esc(i.title)}</button>`).join('')}</section>` : ''}</div>`;
         }
         if (node === 'tasks') {
             const tasks = items.filter(i => i.type === 'task').sort((a, b) => Number(a.data.done) - Number(b.data.done) || String(a.data.due || '9').localeCompare(String(b.data.due || '9')));
@@ -311,7 +389,7 @@
             const dated = items.filter(i => dateKey(i) && ['event', 'reference', 'media', 'task', 'person'].includes(i.type)).sort((a, b) => dateKey(a).localeCompare(dateKey(b)));
             const groups = new Map(); dated.forEach(i => { const y = Number(dateKey(i).slice(0, 4)); const k = y; if (!groups.has(k)) groups.set(k, []); groups.get(k).push(i); });
             return `<h3 class="h-at-ftitle">🕰️ Chronologie</h3><p class="muted">Les dates, événements, documents, images et tâches du projet, dans l’ordre du temps.</p>
-                ${dated.length ? `<ol class="h-lv-timeline h-at-timeline">${[...groups.entries()].map(([y, list]) => `<li><span class="h-lv-year">${y}</span>${list.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${TYPES[i.type][0]} ${esc(i.title)} <small class="muted">${esc(i.type === 'event' ? [i.data.date, i.data.end && '→ ' + i.data.end, i.data.place?.text].filter(Boolean).join(' ') : i.type === 'reference' ? REF_KINDS[i.data.kind] : '')}</small></button>`).join('')}</li>`).join('')}</ol>` : empty('Aucun élément daté : ajoute des « Date, événement », ou des dates aux références et aux images.')}`;
+                ${dated.length ? `<ol class="h-lv-timeline h-at-timeline">${[...groups.entries()].map(([y, list]) => `<li><span class="h-lv-year">${y}</span>${list.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${ti(i)} ${esc(i.title)} <small class="muted">${esc(i.type === 'event' ? [i.data.date, i.data.end && '→ ' + i.data.end, i.data.place?.text].filter(Boolean).join(' ') : i.type === 'reference' ? REF_KINDS[i.data.kind] : '')}</small></button>`).join('')}</li>`).join('')}</ol>` : empty('Aucun élément daté : ajoute des « Date, événement », ou des dates aux références et aux images.')}`;
         }
         if (node === 'people') {
             const rows = items.filter(i => i.type === 'person');
@@ -323,9 +401,9 @@
         }
         if (node === 'map') {
             const pts = [];
-            items.forEach(i => { const pl = i.data?.place; if (pl && typeof pl === 'object' && pl.lat !== null && pl.lat !== undefined) pts.push({lat: +pl.lat, lon: +pl.lon, label: `${TYPES[i.type][0]} ${i.title}${pl.text ? ' — ' + pl.text : ''}`}); });
+            items.forEach(i => { const pl = i.data?.place; if (pl && typeof pl === 'object' && pl.lat !== null && pl.lat !== undefined) pts.push({lat: +pl.lat, lon: +pl.lon, label: `${ti(i)} ${i.title}${pl.text ? ' — ' + pl.text : ''}`}); });
             return `<h3 class="h-at-ftitle">🗺️ Carte</h3><p class="muted">Les lieux et les événements situés du projet.</p>${ext.miniMap ? ext.miniMap(pts, [], {height: 480, emptyText: 'Aucun lieu placé : ajoute un « Lieu » ou un lieu à une date.'}) : ''}
-                ${pts.length ? `<ul class="h-at-maplist">${items.filter(i => i.data?.place?.text).map(i => `<li><button type="button" class="link-button" data-at-pick="${i.id}">${TYPES[i.type][0]} ${esc(i.title)}</button> <small class="muted">${esc(i.data.place.text)}</small></li>`).join('')}</ul>` : ''}`;
+                ${pts.length ? `<ul class="h-at-maplist">${items.filter(i => i.data?.place?.text).map(i => `<li><button type="button" class="link-button" data-at-pick="${i.id}">${ti(i)} ${esc(i.title)}</button> <small class="muted">${esc(i.data.place.text)}</small></li>`).join('')}</ul>` : ''}`;
         }
         if (node === 'biblio') {
             const v = st(), scope = P.fById.has(v.biblioScope) ? v.biblioScope : 0;
@@ -347,7 +425,7 @@
         const v = st();
         if (v.sel.length !== 1) {
             if (typeof v.node === 'number' && v.sel.length === 0) { const f = P.fById.get(v.node); const all = new Set(descendants(v.node)); const n = live().filter(i => i.folders.some(x => all.has(x))).length;
-                return `<div class="h-at-dempty"><p class="h-at-big">${esc(f.icon || '📂')}</p><h3>${esc(f.name)}</h3><p class="muted">${plural(n, 'élément', 'éléments')} avec les sous-dossiers</p><button type="button" class="button small secondary" data-at-fedit="${f.id}">Renommer, icône, couleur…</button></div>`; }
+                return `<div class="h-at-dempty"><p class="h-at-big">${esc(f.icon || CFG.folders.open)}</p><h3>${esc(f.name)}</h3><p class="muted">${plural(n, 'élément', 'éléments')} avec les sous-dossiers</p><button type="button" class="button small secondary" data-at-fedit="${f.id}">Renommer, icône, couleur…</button></div>`; }
             return `<div class="h-at-dempty"><p class="h-at-big">📚</p><p class="muted">${v.sel.length > 1 ? plural(v.sel.length, 'élément choisi', 'éléments choisis') : 'Choisis un élément pour le voir ici.'}</p></div>`;
         }
         const i = P.byId.get(v.sel[0]); if (!i) return '';
@@ -373,11 +451,15 @@
             case 'task': body = `<label class="checkbox-line h-at-taskbig"><input type="checkbox" data-at-taskdone="${i.id}" ${Number(d.done) ? 'checked' : ''}> Fait</label><dl class="data-list">${row('Pour le', d.due ? new Date(d.due + 'T12:00:00').toLocaleDateString('fr-FR', {weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'}) : '')}${row('Priorité', d.priority)}</dl>`; break;
             case 'draft': { const w = (String(d.text || '').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length, t = Number(d.target);
                 body = `<p><b>${fmt(w)}</b> mots${t ? ` sur ${fmt(t)}` : ''} · ${esc(STAGES[d.stage] || '')}</p>${t ? `<div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * w / t))}%"></span></div>` : ''}<div class="h-at-draft">${nl(String(d.text || '').slice(0, 3000))}${String(d.text || '').length > 3000 ? '<p class="muted">…</p>' : ''}</div><button type="button" class="button small" data-at-write="${i.id}">✍️ Écrire</button>`; break; }
+            case 'custom': { const def = tentry(i), vals = d.values || {}, fields = def?.fields || Object.keys(vals).map(k => ({key: k, label: k, type: 'text'}));
+                body = `<dl class="data-list">${fields.map(f => { const v = vals[f.key]; if (v === undefined || v === null || v === '' || (Array.isArray(v) && !v.length)) return '';
+                    const h = f.type === 'checkbox' ? (Number(v) ? '✅ oui' : '') : f.type === 'longtext' ? nl(v) : f.type === 'url' ? url(String(v)) : f.type === 'person' ? (people[v] ? `<button type="button" class="table-link" data-h-person="${Number(v)}">${esc(pname(people[v]))}</button>` : '') : f.type === 'place' ? esc(v?.text || '') : esc(typeof v === 'object' ? JSON.stringify(v) : v);
+                    return h ? row(f.label, h, true) : ''; }).join('')}</dl>${def ? '' : '<p class="muted">Cette sorte d’élément n’existe plus dans les réglages : ses valeurs sont gardées.</p>'}`; break; }
             default: body = d.text ? `<div class="h-at-notetext">${nl(d.text)}</div>` : '';
         }
         const related = (d.related || []).map(id => P.byId.get(Number(id))).filter(Boolean);
         const backlinks = live().filter(x => (x.data?.related || []).map(Number).includes(Number(i.id)) && !related.includes(x));
-        return `<div class="h-at-dhead"><span class="eyebrow">${TYPES[i.type][0]} ${esc(TYPES[i.type][1])}${Number(i.trashed) ? ' · dans la corbeille' : ''}</span><h3>${esc(i.title)}</h3>
+        return `<div class="h-at-dhead"><span class="eyebrow">${ti(i)} ${esc(tl(i))}${Number(i.trashed) ? ' · dans la corbeille' : ''}</span><h3>${esc(i.title)}</h3>
             <div class="h-at-dactions">${Number(i.trashed) ? `<button type="button" class="button small" data-at-restore="${i.id}">Restaurer</button>` : `<button type="button" class="button small" data-at-edit="${i.id}">✎ Modifier</button>${i.type === 'reference' ? `<button type="button" class="button small secondary" data-at-copy="${i.id}" title="Copier la référence">📋 Citer</button>` : ''}<button type="button" class="button small secondary" data-at-dup="${i.id}" title="Dupliquer">⧉</button><button type="button" class="button small secondary danger" data-at-trash="${i.id}" title="Mettre à la corbeille">🗑</button>`}</div></div>
             ${body}
             ${i.media?.length && ext.thumbs ? `<h4>📎 Fichiers</h4>${ext.thumbs('at-' + i.id, i.media)}` : ''}
@@ -385,13 +467,53 @@
             <h4>🏷 Étiquettes</h4><div class="h-at-dtags">${(i.tags || []).map(t => `<span class="h-at-tag is-on">${esc(t)} <button type="button" data-at-untag="${esc(t)}" aria-label="Retirer">×</button></span>`).join('')}<input data-at-addtag placeholder="+ étiquette" list="h-at-taglist"><datalist id="h-at-taglist">${[...new Set(live().flatMap(x => x.tags || []))].map(t => `<option value="${esc(t)}">`).join('')}</datalist></div>
             <h4>📁 Rangé dans</h4><div class="h-at-dfolders">${i.folders.map(f => P.fById.get(f)).filter(Boolean).map(f => `<span class="h-at-chip"><button type="button" class="link-button" data-at-go="${f.id}">${esc(pathOf(Number(f.id)).map(x => x.name).join(' › '))}</button> <button type="button" data-at-unfile="${f.id}" aria-label="Retirer de ce dossier">×</button></span>`).join('') || '<span class="muted">Non classé</span>'}
                 <select data-at-file><option value="">+ ranger aussi dans…</option>${folderOptions()}</select></div>
-            <h4>🔗 Voir aussi</h4><div class="h-at-drel">${[...related.map(x => [x, true]), ...backlinks.map(x => [x, false])].map(([x, own]) => `<span class="h-at-chip"><button type="button" class="link-button" data-at-pick="${x.id}">${TYPES[x.type][0]} ${esc(x.title.slice(0, 60))}</button>${own ? ` <button type="button" data-at-unrel="${x.id}" aria-label="Retirer">×</button>` : ''}</span>`).join('') || '<span class="muted">Rien</span>'}
-                <input data-at-relq placeholder="+ relier à… (tape un titre)" list="h-at-rellist"><datalist id="h-at-rellist">${live().filter(x => x.id !== i.id).slice(0, 2000).map(x => `<option value="${esc(TYPES[x.type][0] + ' ' + x.title + ' #' + x.id)}">`).join('')}</datalist></div>
+            <h4>🔗 Voir aussi</h4><div class="h-at-drel">${[...related.map(x => [x, true]), ...backlinks.map(x => [x, false])].map(([x, own]) => `<span class="h-at-chip"><button type="button" class="link-button" data-at-pick="${x.id}">${ti(x)} ${esc(x.title.slice(0, 60))}</button>${own ? ` <button type="button" data-at-unrel="${x.id}" aria-label="Retirer">×</button>` : ''}</span>`).join('') || '<span class="muted">Rien</span>'}
+                <input data-at-relq placeholder="+ relier à… (tape un titre)" list="h-at-rellist"><datalist id="h-at-rellist">${live().filter(x => x.id !== i.id).slice(0, 2000).map(x => `<option value="${esc(ti(x) + ' ' + x.title + ' #' + x.id)}">`).join('')}</datalist></div>
             <p class="muted h-at-dates">Ajouté le ${esc(new Date(String(i.created_at).replace(' ', 'T') + 'Z').toLocaleDateString('fr-FR'))}${i.updated_at !== i.created_at ? ` · modifié le ${esc(new Date(String(i.updated_at).replace(' ', 'T') + 'Z').toLocaleDateString('fr-FR'))}` : ''}</p>`;
     }
 
     /* ─────────── Formulaires ─────────── */
+    const CUSTOM_FIELD_TYPES = [['text', '📝 Texte court'], ['longtext', '📄 Texte long'], ['date', '📅 Date'], ['number', '🔢 Nombre'], ['select', '📋 Liste de choix'], ['checkbox', '☑️ Case à cocher'], ['url', '🔗 Lien internet'], ['person', '👤 Personne de la base'], ['place', '📍 Lieu']];
+    /** Élément d'une sorte créée dans Maintenance → Atelier : titre + ses champs, puis notes, étiquettes, dossiers et fichiers comme les autres. */
+    function customDialog(key, item = null) {
+        const v = st(), def = CFG.types.find(t => t.key === key) || {key, icon: '🧩', label: 'Élément', fields: []}, d = item?.data || {}, vals = d.values || {}, isNew = !item, people = P.people || {};
+        const fieldHtml = f => { const n = 'cv_' + f.key, val = vals[f.key] ?? '', cls = f.width === 'half' ? '' : ' class="span-2"', help = f.help ? `<small class="muted">${esc(f.help)}</small>` : '', ph = f.placeholder ? ` placeholder="${esc(f.placeholder)}"` : '', req = f.required ? ' required' : '';
+            switch (f.type) {
+                case 'longtext': return `<label class="span-2">${esc(f.label)}<textarea name="${n}" rows="4"${ph}${req}>${esc(val)}</textarea>${help}</label>`;
+                case 'select': return `<label${cls}>${esc(f.label)}<select name="${n}"${req}><option value=""></option>${(f.options || []).map(o => `<option ${o === val ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>${help}</label>`;
+                case 'checkbox': return `<label class="checkbox-line${f.width === 'half' ? '' : ' span-2'}"><input type="checkbox" name="${n}" ${Number(val) ? 'checked' : ''}> ${esc(f.label)}</label>`;
+                case 'person': return `<label${cls}>${esc(f.label)}${A().collectionPersonField(n, val ? people[val] || {id: val, first_name: '#' + val, last_name: ''} : null, 'Tape un nom…')}${help}</label>`;
+                case 'place': return `<label${cls}>${esc(f.label)}${ext.placeField(n, val?.text || '', val?.lat ?? '', val?.lon ?? '', f.placeholder || 'Commune, adresse…')}${help}</label>`;
+                case 'number': return `<label${cls}>${esc(f.label)}<input name="${n}" inputmode="decimal" value="${esc(val)}"${ph}${req}>${help}</label>`;
+                case 'url': return `<label${cls}>${esc(f.label)}<input type="url" name="${n}" value="${esc(val)}" placeholder="${esc(f.placeholder || 'https://…')}"${req}>${help}</label>`;
+                default: return `<label${cls}>${esc(f.label)}<input name="${n}" value="${esc(val)}"${ph}${req}>${help}</label>`;
+            } };
+        const folderIds = item ? item.folders : (typeof v.node === 'number' ? [v.node] : []);
+        let savedId = 0;
+        dialog({eyebrow: (isNew ? 'AJOUTER · ' : 'MODIFIER · ') + def.label.toUpperCase(), title: isNew ? `${def.icon} ${def.label}` : item.title, wide: true, submitLabel: 'Enregistrer',
+            body: `<div class="form-grid"><label class="span-2">${esc(def.titleLabel || 'Titre')}<input name="title" value="${esc(item?.title || '')}" ${def.fields?.some(f => f.type === 'text') ? '' : 'required'}></label>${(def.fields || []).map(fieldHtml).join('')}
+                <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label>
+                <label class="span-2">Étiquettes <small>(séparées par des virgules)</small><input name="tags" value="${esc((item?.tags || []).join(', '))}"></label>
+                <label class="span-2">Rangé dans <small>(⌘/Ctrl-clic pour plusieurs dossiers)</small><select name="folders" multiple size="${Math.min(8, Math.max(3, P.folders.length))}">${folderOptions(folderIds.map(Number))}</select></label></div>
+                ${ext.mediaEditorHtml ? ext.mediaEditorHtml('atelier_item', item?.id || 0, item?.media || [], [['', 'Fichiers joints (PDF, scans, photos)', 'image/*,application/pdf,video/*,audio/*']]) : ''}`,
+            onSubmit: async form => {
+                const values = {}, pkeys = [];
+                (def.fields || []).forEach(f => { const el = form.querySelector(`[name="cv_${f.key}"]`); if (!el) return;
+                    if (f.type === 'checkbox') values[f.key] = el.checked ? 1 : 0;
+                    else if (f.type === 'person') { values[f.key] = Number(el.value) || null; pkeys.push(f.key); }
+                    else if (f.type === 'place') values[f.key] = {text: el.value, lat: form.querySelector(`[name="cv_${f.key}_lat"]`)?.value || null, lon: form.querySelector(`[name="cv_${f.key}_lon"]`)?.value || null};
+                    else values[f.key] = el.value; });
+                const keep = Object.fromEntries(Object.entries(vals).filter(([k]) => !(def.fields || []).some(f => f.key === k))); // valeurs d'anciens champs gardées
+                const saved = await post('save_atelier_item', {id: savedId || item?.id || 0, project_id: P.project.id, type: 'custom', title: form.title.value, data: {ctype: key, values: {...keep, ...values}, pkeys, notes: form.notes.value, related: d.related || []},
+                    tags: form.tags.value.split(',').map(t => t.trim()).filter(Boolean), folder_ids: [...form.folders.selectedOptions].map(o => Number(o.value)), starred: item ? Number(item.starred) : 0});
+                savedId = Number(saved.result.id);
+                if (ext.uploadMediaEditor) { try { await ext.uploadMediaEditor(form, 'atelier_item', savedId); } catch (error) { toast('Enregistré, mais un fichier n’a pas pu être ajouté : ' + error.message, 'error'); } }
+                v.sel = [savedId]; toast(isNew ? 'Ajouté.' : 'Enregistré.'); await reload();
+            },
+        });
+    }
     function itemDialog(type, item = null, preset = {}) {
+        if (type === 'custom' || !TYPES[type]) return customDialog(item ? item.data?.ctype : type, item);
         const v = st(), d = item?.data || preset.data || {}, isNew = !item;
         const people = P.people || {};
         const inp = (name, label, val, attrs = '', cls = '') => `<label${cls ? ` class="${cls}"` : ''}>${label}<input name="${name}" value="${esc(val ?? '')}" ${attrs}></label>`;
@@ -439,7 +561,7 @@
         }
         const folderIds = item ? item.folders : (preset.folders || (typeof v.node === 'number' ? [v.node] : []));
         let savedId = 0; // si l'envoi d'un fichier échoue après l'enregistrement, réessayer ne crée pas de doublon
-        dialog({eyebrow: (isNew ? 'AJOUTER · ' : 'MODIFIER · ') + TYPES[type][1].toUpperCase(), title: isNew ? `${TYPES[type][0]} ${TYPES[type][1]}` : item.title, wide: true, submitLabel: 'Enregistrer',
+        dialog({eyebrow: (isNew ? 'AJOUTER · ' : 'MODIFIER · ') + tl(type).toUpperCase(), title: isNew ? `${ti(type)} ${tl(type)}` : item.title, wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid">${fields}
                 ${type === 'note' ? '' : area('notes', 'Notes', d.notes, 3, 'span-2', 'Ce que j’en pense, comment je vais m’en servir…')}
                 <label class="span-2">Étiquettes <small>(séparées par des virgules)</small><input name="tags" value="${esc((item?.tags || preset.tags || []).join(', '))}" list="h-at-taglist2" placeholder="optique, colportage, foires"><datalist id="h-at-taglist2">${[...new Set(live().flatMap(x => x.tags || []))].map(t => `<option value="${esc(t)}">`).join('')}</datalist></label>
@@ -517,13 +639,15 @@
             <button type="button" class="button secondary" data-x="md">📄 Plan et textes (.md)<small>Les dossiers dans l’ordre, avec leurs notes, brouillons, citations et références : à ouvrir dans un traitement de texte</small></button>
             <button type="button" class="button secondary" data-x="bib">📚 Références (.bib)<small>${plural(refs.length, 'référence', 'références')}, pour un gestionnaire de bibliographie ou LaTeX</small></button>
             <button type="button" class="button secondary" data-x="ris">📚 Références (.ris)<small>Le format accepté par presque tous les logiciels de bibliographie</small></button>
-            <button type="button" class="button secondary" data-x="csv">📊 Tableau de tous les éléments (.csv)<small>Pour un tableur</small></button></div>`,
+            <button type="button" class="button secondary" data-x="csv">📊 Tableau de tous les éléments (.csv)<small>Pour un tableur</small></button>
+            <button type="button" class="button secondary" data-x="plan">🗂️ Enregistrer ce plan comme plan de départ<small>Les dossiers de ce projet seront proposés à la création d’un nouveau projet</small></button></div>`,
             onOpen: dl => dl.querySelectorAll('[data-x]').forEach(b => b.addEventListener('click', () => {
                 const x = b.dataset.x;
+                if (x === 'plan') { ext.atelierSavePlanFromProject(); return; }
                 if (x === 'bib') ext.downloadText(slug + '.bib', toBibtex(refs), 'text/plain');
                 if (x === 'ris') ext.downloadText(slug + '.ris', toRis(refs), 'application/x-research-info-systems');
                 if (x === 'md') ext.downloadText(slug + '.md', toMarkdown(), 'text/markdown');
-                if (x === 'csv') { const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"'; ext.downloadText(slug + '.csv', '﻿' + [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'].map(q).join(';'), ...live().map(i => [TYPES[i.type][1], i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''].map(q).join(';'))].join('\n'), 'text/csv'); }
+                if (x === 'csv') { const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"'; ext.downloadText(slug + '.csv', '﻿' + [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'].map(q).join(';'), ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''].map(q).join(';'))].join('\n'), 'text/csv'); }
                 toast('Fichier prêt.');
             })),
         });
@@ -535,7 +659,7 @@
             if (i.type === 'note') return `\n> 📝 ${String(d.text || '').replace(/\n/g, '\n> ')}\n`;
             if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; return `\n> « ${String(d.text || '').replace(/\n/g, '\n> ')} »${s ? `\n> — ${cite(s, false)}${d.page ? ', ' + d.page : ''}` : ''}\n`; }
             if (i.type === 'reference') return `- ${cite(i, 'md')}`;
-            return `- ${TYPES[i.type][0]} ${i.title}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
+            return `- ${ti(i)} ${i.title}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
         };
         const walk = (parent, depth) => kids(parent).forEach(f => {
             out.push('', `${'#'.repeat(Math.min(6, depth + 2))} ${f.name}`);
@@ -567,13 +691,14 @@
             if (q('[data-at-fedit]')) { e.stopPropagation(); return folderDialog(P.fById.get(Number(q('[data-at-fedit]').dataset.atFedit))); }
             if (q('[data-at-go]')) { const g = q('[data-at-go]').dataset.atGo; return go(/^\d+$/.test(g) ? Number(g) : g); }
             if (q('[data-at-typejump]')) { v.type = q('[data-at-typejump]').dataset.atTypejump; return go('all'); }
-            if (q('[data-at-tag]')) { const tg = q('[data-at-tag]').dataset.atTag; v.tags = v.tags.includes(tg) ? v.tags.filter(x => x !== tg) : [...v.tags, tg]; if (['overview', 'timeline', 'people', 'map', 'biblio', 'tasks', 'trash'].includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
+            if (q('[data-at-tag]')) { const tg = q('[data-at-tag]').dataset.atTag; v.tags = v.tags.includes(tg) ? v.tags.filter(x => x !== tg) : [...v.tags, tg]; if ([...SPECIAL_VIEWS, 'trash'].includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-tagclear]')) { v.tags = []; return renderProject(S().workspaceToken, true); }
+            if (q('[data-at-settings]')) return openSettings();
             if (q('[data-at-addmenu]')) { const m = q('.h-at-addmenu').querySelector('.h-at-menu'); m.hidden = !m.hidden; return; }
             if (q('[data-at-add]')) { ws.querySelector('.h-at-menu')?.setAttribute('hidden', ''); return itemDialog(q('[data-at-add]').dataset.atAdd); }
             if (q('[data-at-import]')) {
-                const text = await ext.pickFile('.bib,.ris,.txt,text/plain'); if (text === null) return;
-                try { const r = await post('atelier_import', {project_id: P.project.id, folder_id: typeof v.node === 'number' ? v.node : 0, text}); toast(`${plural(r.result.count, 'référence importée', 'références importées')}.`); await reload(); } catch (error) { toast(error.message, 'error'); }
+                const file = await pickNamedFile(IMPORT_ACCEPT); if (!file) return;
+                try { const r = await post('atelier_import', {project_id: P.project.id, folder_id: typeof v.node === 'number' ? v.node : 0, text: file.text}); toast('Importé : ' + importSummary(r.result) + '.'); await reload(); } catch (error) { toast(error.message, 'error'); }
                 return;
             }
             if (q('[data-at-sort]')) { const c = q('[data-at-sort]').dataset.atSort; v.sort = v.sort.col === c ? {col: c, dir: -v.sort.dir} : {col: c, dir: 1}; return renderProject(S().workspaceToken, true); }
@@ -616,7 +741,7 @@
             const t = e.target;
             if (t.matches('[data-at-type]')) { v.type = t.value; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-deep]')) { v.deep = t.checked; return renderProject(S().workspaceToken, true); }
-            if (t.matches('[data-at-q]')) { v.q = t.value.trim(); if (['overview', 'timeline', 'people', 'map', 'biblio', 'tasks'].includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
+            if (t.matches('[data-at-q]')) { v.q = t.value.trim(); if (SPECIAL_VIEWS.includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-biblioscope]')) { v.biblioScope = Number(t.value) || 0; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-taskdone]')) { const i = P.byId.get(Number(t.dataset.atTaskdone)); return saveData(i, {done: t.checked ? 1 : 0}); }
             if (t.matches('[data-at-bulkfolder]') && t.value) { if (await act('add', v.sel, {folder_id: Number(t.value)})) toast('Rangé.'); return; }
@@ -660,4 +785,161 @@
         try { await post('save_atelier_item', {id: i.id, project_id: P.project.id, title: i.title, data: {...i.data, ...patch}, tags: i.tags}); await reload(); }
         catch (error) { toast(error.message, 'error'); }
     }
+
+    /* ═══════════ ⚙ Maintenance → Atelier de recherche : tout se règle ici ═══════════ */
+    const openSettings = () => { S().maintenanceTab = 'atelier'; A().setModule('maintenance'); };
+    ext.maintenance = ext.maintenance || {};
+    // Plan écrit en texte : un dossier par ligne, décalé (espaces, tabulation ou tirets) pour les sous-dossiers, émoji au début facultatif
+    const EMOJI_START = /^(\p{Extended_Pictographic}(?:️|‍\p{Extended_Pictographic}|\p{Emoji_Modifier})*)\s+/u;
+    function outlineToTree(text) {
+        const root = [], stack = [{depth: -1, children: root}];
+        String(text || '').split(/\r?\n/).forEach(line => {
+            if (!line.trim()) return;
+            const m = line.match(/^([ \t>•*-]*)(.*)$/); const depth = (m[1].replace(/\t/g, '  ').length);
+            let name = m[2].trim(), icon = '';
+            const e = name.match(EMOJI_START); if (e) { icon = e[1]; name = name.slice(e[0].length).trim(); }
+            if (!name) return;
+            while (stack.length > 1 && stack[stack.length - 1].depth >= depth) stack.pop();
+            const node = {name: name.slice(0, 200), icon, children: []};
+            stack[stack.length - 1].children.push(node); stack.push({depth, children: node.children});
+        });
+        return root;
+    }
+    const treeToOutline = (tree, depth = 0) => (tree || []).map(n => '  '.repeat(depth) + (n.icon ? n.icon + ' ' : '') + n.name + (n.children?.length ? '\n' + treeToOutline(n.children, depth + 1) : '')).join('\n');
+    const countTree = t => (t || []).reduce((a, n) => a + 1 + countTree(n.children), 0);
+    ext.atelierSavePlanFromProject = () => {
+        if (!P) return;
+        const walk = parent => kids(parent).map(f => ({name: f.name, icon: f.icon || '', children: walk(Number(f.id))}));
+        const tree = walk(0);
+        if (!tree.length) return toast('Ce projet n’a pas de dossiers.', 'error');
+        CFG.plans.push({key: uid('p_'), label: 'Plan de « ' + P.project.title.slice(0, 50) + ' »', tree, custom: true}); saveCfg();
+        toast('Plan enregistré : il est proposé à la création d’un projet (Maintenance → Atelier pour le renommer).');
+    };
+    ext.maintenance.atelier = async token => {
+        CFG = loadCfg();
+        if (token !== S().workspaceToken || S().module !== 'maintenance') return;
+        const ws = A().$('#workspace');
+        const iconInput = (attr, value) => `<span class="h-at-iconfield"><input ${attr} value="${esc(value || '')}" maxlength="16" class="h-be-icon" aria-label="Émoji"><button type="button" class="icon-button" data-cfg-emoji title="Choisir un émoji">😀</button></span>`;
+        const moveBtns = (list, i) => `<span class="h-rb-tools"><button type="button" class="icon-button" data-cfg-move="-1" ${i === 0 ? 'disabled' : ''} title="Monter">↑</button><button type="button" class="icon-button" data-cfg-move="1" ${i === list.length - 1 ? 'disabled' : ''} title="Descendre">↓</button></span>`;
+        const row = (sec, x, i, list, extra = '') => `<div class="h-cfg-row ${x.hidden ? 'is-hidden' : ''}" data-cfg-sec="${sec}" data-cfg-i="${i}">${moveBtns(list, i)}
+            ${sec === 'plans' ? '' : iconInput('data-cfg="icon"', x.icon)}<input data-cfg="label" value="${esc(x.label)}" class="h-cfg-label" aria-label="Nom">
+            ${x.key === 'trash' ? '<small class="muted">toujours visible</small>' : `<label class="checkbox-line"><input type="checkbox" data-cfg="hidden" ${x.hidden ? 'checked' : ''}> masquer</label>`}
+            ${x.builtin ? '<small class="muted h-cfg-tag">de l’app</small>' : '<small class="h-cfg-tag is-mine">à moi</small>'}${extra}</div>`;
+        const navExtra = x => x.custom ? `<button type="button" class="button small secondary" data-cfg-view-edit>Filtre…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : '';
+        const typeExtra = x => x.custom ? `<button type="button" class="button small secondary" data-cfg-type-edit>Champs (${(x.fields || []).length})…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : '';
+        const planExtra = x => `<small class="muted">${plural(countTree(x.tree), 'dossier', 'dossiers')}</small>${x.custom ? `<button type="button" class="button small secondary" data-cfg-plan-edit>Modifier…</button><button type="button" class="icon-button danger" data-cfg-del title="Supprimer">🗑</button>` : `<button type="button" class="button small secondary" data-cfg-plan-copy>Copier pour le modifier</button>`}`;
+        ws.innerHTML = `<section class="page collection-page h-cfg">${`<header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>📚 Atelier de recherche</h2><p>Les réglages de l’Atelier (Enquêtes → Atelier) : l’ordre et les émojis du menu d’un projet, tes propres vues, les sortes d’éléments (et les tiennes, avec leurs champs), les émojis des dossiers et tes plans de départ. Tout est enregistré tout de suite.</p></div><div class="page-actions"><button type="button" class="button secondary" data-cfg-open>Ouvrir l’Atelier</button></div></header>`}
+            <section class="maintenance-panel"><h3>1. Le menu de gauche d’un projet</h3><p class="muted">Monte, descends, change l’émoji ou le nom, masque ce dont tu ne te sers pas (la Corbeille reste toujours). Une <b>vue à toi</b> regroupe les éléments selon tes critères (ex. « 📕 À lire » : les références à lire ; « 🖼 Gravures » : les images et références « gravure »).</p>
+                <div class="h-cfg-list">${CFG.nav.map((x, i, l) => row('nav', x, i, l, navExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-view-add>+ Ma propre vue</button></section>
+            <section class="maintenance-panel"><h3>2. Les sortes d’éléments</h3><p class="muted">L’ordre du menu « + Ajouter » et de « Toutes les sortes ». Une sorte masquée ne se propose plus, mais ce qui existe déjà reste visible. <b>Ta propre sorte</b> a les champs que tu veux (ex. « 🎞 Plaque de lanterne » : sujet, fabricant, dimensions, état, lieu de conservation…).</p>
+                <div class="h-cfg-list">${CFG.types.map((x, i, l) => row('types', x, i, l, typeExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-type-add>+ Ma propre sorte d’élément</button></section>
+            <section class="maintenance-panel"><h3>3. Les dossiers</h3><p class="muted">L’émoji des dossiers qui n’en ont pas. Chaque dossier peut aussi avoir le sien : dans un projet, survole le dossier puis ✎.</p>
+                <div class="form-grid"><label>Dossier fermé ${iconInput('data-cfg-folder="closed"', CFG.folders.closed)}</label><label>Dossier ouvert ${iconInput('data-cfg-folder="open"', CFG.folders.open)}</label></div></section>
+            <section class="maintenance-panel"><h3>4. Les plans de départ</h3><p class="muted">Proposés quand on crée un projet. Range-les, masque ceux qui ne te servent pas, crée les tiens (ou copie un plan de l’app pour le changer). Astuce : dans un projet, « Exporter… → Enregistrer ce plan » garde ses dossiers comme plan.</p>
+                <div class="h-cfg-list">${CFG.plans.map((x, i, l) => row('plans', x, i, l, planExtra(x))).join('')}</div><button type="button" class="button small" data-cfg-plan-add>+ Mon plan</button></section>
+            <div class="page-actions"><button type="button" class="button secondary danger" data-cfg-reset>Tout remettre comme au départ</button></div></section>`;
+        const again = () => ext.maintenance.atelier(S().workspaceToken);
+        const listOf = sec => CFG[sec];
+        const at = el => { const r = el.closest('[data-cfg-i]'); return r ? [r.dataset.cfgSec, Number(r.dataset.cfgI)] : [null, -1]; };
+        ws.querySelector('[data-cfg-open]').addEventListener('click', () => { S().enquetesTab = 'atelier'; A().setModule('enquetes'); });
+        ws.addEventListener('input', e => {
+            const t = e.target;
+            if (t.dataset.cfgFolder) { CFG.folders[t.dataset.cfgFolder] = t.value.trim() || (t.dataset.cfgFolder === 'open' ? '📂' : '📁'); saveCfg(); return; }
+            const [sec, i] = at(t); if (!sec || !t.dataset.cfg || t.type === 'checkbox') return;
+            listOf(sec)[i][t.dataset.cfg] = t.value; saveCfg();
+        }, {signal: (ws._cfgCtl = (ws._cfgCtl?.abort(), new AbortController())).signal});
+        ws.addEventListener('change', e => {
+            const t = e.target, [sec, i] = at(t);
+            if (sec && t.dataset.cfg === 'hidden') { listOf(sec)[i].hidden = t.checked; saveCfg(); t.closest('.h-cfg-row').classList.toggle('is-hidden', t.checked); }
+            if (sec && t.dataset.cfg === 'label' && !t.value.trim()) { saveCfg(); again(); } // nom vidé : celui de l'app revient
+        }, {signal: ws._cfgCtl.signal});
+        ws.addEventListener('click', e => {
+            const t = e.target, [sec, i] = at(t);
+            if (t.closest('[data-cfg-emoji]')) { const input = t.closest('.h-at-iconfield').querySelector('input'); return ext.pickEmoji?.(input); }
+            if (t.closest('[data-cfg-move]')) { const l = listOf(sec), j = i + Number(t.closest('[data-cfg-move]').dataset.cfgMove); if (j >= 0 && j < l.length) { [l[i], l[j]] = [l[j], l[i]]; saveCfg(); again(); } return; }
+            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; if (!confirm(`Supprimer « ${x.label} » ?${sec === 'types' ? ' Les éléments déjà faits avec cette sorte gardent leurs valeurs.' : ''}`)) return; listOf(sec).splice(i, 1); saveCfg(); again(); return; }
+            if (t.closest('[data-cfg-view-add]')) return viewDialog(null);
+            if (t.closest('[data-cfg-view-edit]')) return viewDialog(CFG.nav[i]);
+            if (t.closest('[data-cfg-type-add]')) return typeDialog(null);
+            if (t.closest('[data-cfg-type-edit]')) return typeDialog(CFG.types[i]);
+            if (t.closest('[data-cfg-plan-add]')) return planDialog(null);
+            if (t.closest('[data-cfg-plan-edit]')) return planDialog(CFG.plans[i]);
+            if (t.closest('[data-cfg-plan-copy]')) { const x = CFG.plans[i]; return planDialog({key: '', label: x.label + ' (ma version)', tree: JSON.parse(JSON.stringify(x.tree || [])), custom: true}, true); }
+            if (t.closest('[data-cfg-reset]')) { if (!confirm('Remettre tous les réglages de l’Atelier comme au départ ? Tes vues, tes sortes d’éléments et tes plans seront supprimés (les éléments des projets ne sont pas touchés).')) return; try { localStorage.removeItem(CFG_KEY); } catch (_) {} CFG = loadCfg(); toast('Réglages remis comme au départ.'); again(); }
+        }, {signal: ws._cfgCtl.signal});
+
+        function viewDialog(view) {
+            const f = view?.filter || {}, isNew = !view;
+            dialog({eyebrow: 'MA PROPRE VUE', title: isNew ? 'Nouvelle vue' : view.label, wide: true, submitLabel: 'Enregistrer',
+                body: `<div class="form-grid"><label>Nom<input name="label" required value="${esc(view?.label || '')}" placeholder="À lire"></label><label>Émoji${iconInput('name="icon"', view?.icon || '🔎')}</label>
+                    <div class="span-2"><span class="section-label">Sortes d’éléments <small>(aucune cochée : toutes)</small></span><div class="h-village-maps-grid">${CFG.types.map(t => `<label class="checkbox-line"><input type="checkbox" name="types" value="${esc(t.key)}" ${(f.types || []).includes(t.key) ? 'checked' : ''}> ${esc(t.icon)} ${esc(t.label)}</label>`).join('')}</div></div>
+                    <label>Étiquettes <small>(séparées par des virgules)</small><input name="tags" value="${esc((f.tags || []).join(', '))}" placeholder="optique, gravure"></label>
+                    <label>Avec<select name="tagMode"><option value="all" ${f.tagMode !== 'any' ? 'selected' : ''}>toutes ces étiquettes</option><option value="any" ${f.tagMode === 'any' ? 'selected' : ''}>au moins une</option></select></label>
+                    <label>Lecture (références)<select name="read">${Object.entries(READ).map(([k, l]) => `<option value="${k}" ${(f.read || '') === k ? 'selected' : ''}>${k ? esc(l) : 'peu importe'}</option>`).join('')}</select></label>
+                    <label>Texte contenu<input name="text" value="${esc(f.text || '')}" placeholder="un mot, un nom…"></label>
+                    <label>Années de<input type="number" name="from" value="${esc(f.from || '')}" placeholder="1700"></label><label>à<input type="number" name="to" value="${esc(f.to || '')}" placeholder="1850"></label>
+                    <label class="span-2">Dossier dont le nom contient <small>(avec ses sous-dossiers, dans chaque projet)</small><input name="folder" value="${esc(f.folder || '')}" placeholder="Sources"></label>
+                    <label class="checkbox-line"><input type="checkbox" name="starred" ${f.starred ? 'checked' : ''}> Favoris seulement</label><label class="checkbox-line"><input type="checkbox" name="todo" ${f.todo ? 'checked' : ''}> Tâches pas encore faites</label></div>`,
+                onOpen: dl => dl.querySelector('[data-cfg-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]'))),
+                onSubmit: form => {
+                    const fd = new FormData(form);
+                    const filter = {types: fd.getAll('types'), tags: String(fd.get('tags') || '').split(',').map(x => x.trim()).filter(Boolean), tagMode: fd.get('tagMode'), read: fd.get('read') || '', text: String(fd.get('text') || '').trim(),
+                        from: fd.get('from') || '', to: fd.get('to') || '', folder: String(fd.get('folder') || '').trim(), starred: !!form.starred.checked, todo: !!form.todo.checked};
+                    const entry = {key: view?.key || uid('v_'), icon: String(fd.get('icon') || '🔎').trim() || '🔎', label: String(fd.get('label')).trim(), custom: true, filter, hidden: !!view?.hidden};
+                    if (isNew) CFG.nav.splice(Math.max(0, CFG.nav.findIndex(x => x.key === 'trash')), 0, entry); else Object.assign(CFG.nav.find(x => x.key === view.key), entry);
+                    saveCfg(); toast('Vue enregistrée.'); again();
+                },
+            });
+        }
+        function typeDialog(type) {
+            const isNew = !type, def = type ? JSON.parse(JSON.stringify(type)) : {key: uid('x_'), icon: '🧩', label: '', titleLabel: 'Titre', help: '', fields: [{key: uid('f'), type: 'text', label: '', width: 'full'}], custom: true};
+            const fieldRow = (f, i) => `<div class="h-cfg-field" data-cf-i="${i}"><input data-cf="label" value="${esc(f.label)}" placeholder="Nom du champ" required><select data-cf="type">${CUSTOM_FIELD_TYPES.map(([k, l]) => `<option value="${k}" ${f.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
+                <select data-cf="width"><option value="full" ${f.width !== 'half' ? 'selected' : ''}>pleine largeur</option><option value="half" ${f.width === 'half' ? 'selected' : ''}>demi-largeur</option></select>
+                <input data-cf="options" value="${esc((f.options || []).join(', '))}" placeholder="choix séparés par des virgules" ${f.type === 'select' ? '' : 'hidden'}>
+                <input data-cf="placeholder" value="${esc(f.placeholder || '')}" placeholder="exemple grisé (facultatif)"><label class="checkbox-line"><input type="checkbox" data-cf="required" ${f.required ? 'checked' : ''}> obligatoire</label>
+                <span class="h-rb-tools"><button type="button" class="icon-button" data-cf-move="-1">↑</button><button type="button" class="icon-button" data-cf-move="1">↓</button><button type="button" class="icon-button danger" data-cf-del>🗑</button></span></div>`;
+            dialog({eyebrow: 'MA PROPRE SORTE D’ÉLÉMENT', title: isNew ? 'Nouvelle sorte' : type.label, wide: true, submitLabel: 'Enregistrer',
+                body: `<div class="form-grid"><label>Nom<input name="label" required value="${esc(def.label)}" placeholder="Plaque de lanterne magique"></label><label>Émoji${iconInput('name="icon"', def.icon)}</label>
+                    <label>Nom du champ titre<input name="titleLabel" value="${esc(def.titleLabel || 'Titre')}" placeholder="Titre, Sujet, Nom…"></label><label>Aide dans le menu <small>(facultatif)</small><input name="help" value="${esc(def.help || '')}" placeholder="Une plaque vue ou achetée"></label></div>
+                    <h4>Les champs</h4><div data-cf-list>${def.fields.map(fieldRow).join('')}</div><button type="button" class="button small secondary" data-cf-add>+ Champ</button>`,
+                onOpen: dl => {
+                    dl.querySelector('[data-cfg-emoji]').addEventListener('click', () => ext.pickEmoji?.(dl.querySelector('[name=icon]')));
+                    const box = dl.querySelector('[data-cf-list]');
+                    const read = () => { def.fields = [...box.querySelectorAll('[data-cf-i]')].map(r => { const old = def.fields[Number(r.dataset.cfI)] || {}; return {...old, key: old.key || uid('f'), label: r.querySelector('[data-cf=label]').value, type: r.querySelector('[data-cf=type]').value, width: r.querySelector('[data-cf=width]').value,
+                        options: r.querySelector('[data-cf=options]').value.split(',').map(x => x.trim()).filter(Boolean), placeholder: r.querySelector('[data-cf=placeholder]').value, required: r.querySelector('[data-cf=required]').checked}; }); };
+                    const paint = () => { box.innerHTML = def.fields.map(fieldRow).join(''); };
+                    box.addEventListener('change', e => { if (e.target.dataset.cf === 'type') { read(); paint(); } });
+                    box.addEventListener('click', e => { const r = e.target.closest('[data-cf-i]'); if (!r) return; read(); const i = Number(r.dataset.cfI);
+                        if (e.target.closest('[data-cf-del]')) { def.fields.splice(i, 1); paint(); }
+                        const mv = e.target.closest('[data-cf-move]'); if (mv) { const j = i + Number(mv.dataset.cfMove); if (j >= 0 && j < def.fields.length) { [def.fields[i], def.fields[j]] = [def.fields[j], def.fields[i]]; paint(); } } });
+                    dl.querySelector('[data-cf-add]').addEventListener('click', () => { read(); def.fields.push({key: uid('f'), type: 'text', label: '', width: 'full'}); paint(); box.lastElementChild?.querySelector('input')?.focus(); });
+                    dl._readFields = read;
+                },
+                onSubmit: form => {
+                    form.closest('dialog')._readFields();
+                    def.fields = def.fields.filter(f => f.label.trim());
+                    Object.assign(def, {label: form.label.value.trim(), icon: form.icon.value.trim() || '🧩', titleLabel: form.titleLabel.value.trim() || 'Titre', help: form.help.value.trim()});
+                    if (isNew) CFG.types.push(def); else CFG.types[CFG.types.findIndex(x => x.key === def.key)] = def;
+                    saveCfg(); toast('Sorte d’élément enregistrée : elle est dans « + Ajouter ».'); again();
+                },
+            });
+        }
+        function planDialog(plan, copy = false) {
+            const isNew = !plan || copy;
+            dialog({eyebrow: 'PLAN DE DÉPART', title: isNew ? 'Nouveau plan' : plan.label, wide: true, submitLabel: 'Enregistrer',
+                body: `<label>Nom du plan<input name="label" required value="${esc(plan?.label || '')}" placeholder="Ma thèse en trois parties"></label>
+                    <p class="muted">Un dossier par ligne. Décale avec deux espaces (ou une tabulation, ou un tiret) pour faire un sous-dossier, autant de niveaux que tu veux. Un émoji au début de la ligne devient l’icône du dossier.</p>
+                    <div class="h-cfg-plan"><textarea name="outline" rows="16" spellcheck="false" placeholder="Introduction&#10;📁 Partie 1&#10;  Chapitre 1&#10;    Section 1.1&#10;  Chapitre 2&#10;Sources&#10;  🏛 Archives">${esc(treeToOutline(plan?.tree || []))}</textarea><div class="h-at-plan" data-cfg-preview></div></div>`,
+                onOpen: dl => { const ta = dl.querySelector('[name=outline]'), pv = dl.querySelector('[data-cfg-preview]');
+                    const tree = list => `<ul>${list.map(x => `<li>${esc(x.icon || CFG.folders.closed)} ${esc(x.name)}${x.children.length ? tree(x.children) : ''}</li>`).join('')}</ul>`;
+                    const up = () => { const t = outlineToTree(ta.value); pv.innerHTML = `<strong>Aperçu</strong> <small class="muted">${plural(countTree(t), 'dossier', 'dossiers')}</small>${t.length ? tree(t) : '<p class="muted">Vide</p>'}`; };
+                    ta.addEventListener('input', up); ta.addEventListener('keydown', e => { if (e.key === 'Tab') { e.preventDefault(); const a = ta.selectionStart; ta.setRangeText('  ', a, ta.selectionEnd, 'end'); up(); } }); up(); },
+                onSubmit: form => {
+                    const entry = {key: !isNew ? plan.key : uid('p_'), label: form.label.value.trim(), tree: outlineToTree(form.outline.value), custom: true, hidden: !isNew && !!plan.hidden};
+                    if (isNew) CFG.plans.push(entry); else CFG.plans[CFG.plans.findIndex(x => x.key === plan.key)] = entry;
+                    saveCfg(); toast('Plan enregistré.'); again();
+                },
+            });
+        }
+    };
 })();

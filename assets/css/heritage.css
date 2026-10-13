@@ -924,3 +924,27 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-at-caption { font-size:13px; font-style:italic; }
 @media (max-width:1100px) { .h-at-grid { grid-template-columns:minmax(12rem, 15rem) minmax(0, 1fr); height:auto; } .h-at-detail { grid-column:1 / -1; border-left:0; border-top:1px solid var(--line, #ccc); } .h-at-tree, .h-at-main { max-height:70vh; } }
 @media (max-width:700px) { .h-at-grid { grid-template-columns:1fr; } .h-at-tree { max-height:40vh; } }
+.h-emoji-pop { position:fixed; z-index:10000; width:min(370px, calc(100vw - 16px)); background:var(--panel, #fff); border:2px solid #111; box-shadow:6px 6px 0 rgba(0,0,0,.18); padding:6px; }
+.h-emoji-pop .h-emoji-panel { max-height:320px; overflow:auto; }
+.h-emoji-pop-close { position:absolute; top:2px; right:2px; }
+/* Maintenance → Atelier de recherche */
+.h-cfg-list { display:grid; gap:4px; margin:8px 0; }
+.h-cfg-row { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:5px 8px; border:1px solid var(--line, #ddd); background:var(--panel, #fff); }
+.h-cfg-row.is-hidden { opacity:.55; background:#f4f4f4; }
+.h-cfg-row .h-cfg-label { flex:1 1 12rem; min-width:0; }
+.h-cfg-row .checkbox-line { margin:0; }
+.h-cfg-tag { font-size:11px; padding:1px 6px; border-radius:8px; background:#eef0f3; }
+.h-cfg-tag.is-mine { background:#fff2c6; }
+.h-at-iconfield { display:inline-flex; gap:4px; align-items:center; }
+.h-at-iconfield input { width:3.4rem; text-align:center; font-size:18px; padding:2px; }
+.h-cfg-field { display:flex; flex-wrap:wrap; gap:6px; align-items:center; padding:6px; border:1px solid var(--line, #ddd); margin-bottom:6px; }
+.h-cfg-field input[data-cf=label] { flex:1 1 12rem; font-weight:600; }
+.h-cfg-field input[hidden] { display:none; }
+.h-cfg-field select { width:auto; }
+.h-cfg-plan { display:grid; grid-template-columns:minmax(0, 1fr) minmax(12rem, 18rem); gap:10px; }
+.h-cfg-plan textarea { font-family:ui-monospace, Menlo, monospace; font-size:14px; }
+.h-cfg-plan .h-at-plan { cursor:default; max-height:24rem; overflow:auto; }
+@media (max-width:700px) { .h-cfg-plan { grid-template-columns:1fr; } }
+.h-at-menu-cfg { border-top:1px solid var(--line, #ddd) !important; color:var(--muted, #666); font-size:13px !important; }
+.h-at-howto { font-size:14px; padding-left:1.2rem; }
+.h-at-howto li { margin:3px 0; }

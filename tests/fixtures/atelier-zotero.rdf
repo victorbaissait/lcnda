@@ -1,0 +1,57 @@
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns:z="http://www.zotero.org/namespaces/export#"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:vcard="http://nwalsh.com/rdf/vCard#"
+ xmlns:foaf="http://xmlns.com/foaf/0.1/"
+ xmlns:bib="http://purl.org/net/biblio#"
+ xmlns:dcterms="http://purl.org/dc/terms/"
+ xmlns:link="http://purl.org/rss/1.0/modules/link/"
+ xmlns:prism="http://prismstandard.org/namespaces/1.2/basic/">
+    <bib:Book rdf:about="urn:isbn:978-2-07-012345-6">
+        <z:itemType>book</z:itemType>
+        <dc:publisher>
+            <foaf:Organization>
+                <vcard:adr><vcard:Address><vcard:locality>Paris</vcard:locality></vcard:Address></vcard:adr>
+                <foaf:name>Gallimard</foaf:name>
+            </foaf:Organization>
+        </dc:publisher>
+        <bib:authors><rdf:Seq><rdf:li><foaf:Person><foaf:surname>Milano</foaf:surname><foaf:givenName>Alberto</foaf:givenName></foaf:Person></rdf:li></rdf:Seq></bib:authors>
+        <link:link rdf:resource="#item_11"/>
+        <link:link rdf:resource="#item_12"/>
+        <dcterms:isReferencedBy rdf:resource="#item_10"/>
+        <dc:subject>vues d'optique</dc:subject>
+        <dc:subject><z:AutomaticTag><rdf:value>colportage</rdf:value></z:AutomaticTag></dc:subject>
+        <dc:identifier>ISBN 978-2-07-012345-6</dc:identifier>
+        <dc:title>Les montreurs d'images</dc:title>
+        <dc:date>1992</dc:date>
+        <z:numPages>320</z:numPages>
+    </bib:Book>
+    <bib:Memo rdf:about="#item_10"><rdf:value>&lt;p&gt;Très utile pour le &lt;b&gt;chapitre 2&lt;/b&gt;.&lt;/p&gt;&lt;p&gt;Voir p. 45.&lt;/p&gt;</rdf:value></bib:Memo>
+    <z:Attachment rdf:about="#item_11"><z:itemType>attachment</z:itemType><rdf:resource rdf:resource="files/11/milano.pdf"/><dc:title>Full Text PDF</dc:title><link:type>application/pdf</link:type></z:Attachment>
+    <z:Attachment rdf:about="#item_12"><z:itemType>attachment</z:itemType><dc:identifier><dcterms:URI><rdf:value>https://gallica.bnf.fr/ark:/12148/bpt6k</rdf:value></dcterms:URI></dc:identifier><dc:title>Gallica</dc:title></z:Attachment>
+    <bib:Article rdf:about="http://example.org/art1">
+        <z:itemType>journalArticle</z:itemType>
+        <dcterms:isPartOf rdf:resource="urn:issn:0035-2"/>
+        <bib:authors><rdf:Seq><rdf:li><foaf:Person><foaf:surname>Le Goff</foaf:surname><foaf:givenName>Jacques</foaf:givenName></foaf:Person></rdf:li></rdf:Seq></bib:authors>
+        <dc:title>Images et colporteurs</dc:title>
+        <dc:date>1980-05</dc:date>
+        <bib:pages>10-25</bib:pages>
+        <prism:volume>12</prism:volume>
+        <dc:identifier>DOI 10.1234/abc</dc:identifier>
+    </bib:Article>
+    <bib:Journal rdf:about="urn:issn:0035-2"><dc:title>Annales</dc:title><dc:identifier>ISSN 0035-2</dc:identifier></bib:Journal>
+    <bib:BookSection rdf:about="#item_20">
+        <z:itemType>bookSection</z:itemType>
+        <dcterms:isPartOf><bib:Book><dc:title>Histoire des spectacles</dc:title></bib:Book></dcterms:isPartOf>
+        <bib:authors><rdf:Seq><rdf:li><foaf:Person><foaf:surname>Martin</foaf:surname><foaf:givenName>Paul</foaf:givenName></foaf:Person></rdf:li></rdf:Seq></bib:authors>
+        <bib:editors><rdf:Seq><rdf:li><foaf:Person><foaf:surname>Dupont</foaf:surname><foaf:givenName>Marie</foaf:givenName></foaf:Person></rdf:li></rdf:Seq></bib:editors>
+        <dc:title>La boîte d'optique</dc:title>
+        <dc:date>2001</dc:date>
+    </bib:BookSection>
+    <bib:Memo rdf:about="#item_30"><rdf:value>&lt;p&gt;Idée : comparer avec les lanternes magiques&lt;/p&gt;</rdf:value></bib:Memo>
+    <z:Collection rdf:about="#collection_1"><dc:title>Thèse optique</dc:title><dcterms:hasPart rdf:resource="#collection_2"/><dcterms:hasPart rdf:resource="#collection_3"/><dcterms:hasPart rdf:resource="#item_30"/></z:Collection>
+    <z:Collection rdf:about="#collection_2"><dc:title>Chapitre 1</dc:title><dcterms:hasPart rdf:resource="urn:isbn:978-2-07-012345-6"/><dcterms:hasPart rdf:resource="#collection_4"/></z:Collection>
+    <z:Collection rdf:about="#collection_3"><dc:title>Chapitre 2</dc:title><dcterms:hasPart rdf:resource="http://example.org/art1"/><dcterms:hasPart rdf:resource="urn:isbn:978-2-07-012345-6"/></z:Collection>
+    <z:Collection rdf:about="#collection_4"><dc:title>Section 1.1</dc:title><dcterms:hasPart rdf:resource="#item_20"/></z:Collection>
+</rdf:RDF>

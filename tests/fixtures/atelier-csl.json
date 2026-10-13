@@ -1,0 +1,2 @@
+[{"id":"a","type":"article-journal","title":"Le peep-show","author":[{"family":"Balzer","given":"Richard"}],"issued":{"date-parts":[[1998,3]]},"container-title":"Revue","page":"1-9","keyword":"optique, spectacle"},
+ {"id":"b","type":"book","title":"Lanternes","author":[{"literal":"Collectif"}],"publisher":"Seuil","publisher-place":"Paris","issued":{"raw":"1975"}}]

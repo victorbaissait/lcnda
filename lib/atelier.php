@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 const ATELIER_KINDS = ['these' => 'Thèse', 'livre' => 'Livre', 'article' => 'Article', 'memoire' => 'Mémoire', 'exposition' => 'Exposition', 'enquete' => 'Enquête', 'autre' => 'Autre'];
-const ATELIER_TYPES = ['reference', 'note', 'quote', 'media', 'person', 'place', 'event', 'link', 'task', 'draft'];
+const ATELIER_TYPES = ['reference', 'note', 'quote', 'media', 'person', 'place', 'event', 'link', 'task', 'draft', 'custom'];
 const ATELIER_REF_KINDS = ['livre', 'article', 'chapitre', 'these', 'archive', 'image', 'presse', 'web', 'objet', 'autre'];
 const ATELIER_READ = ['', 'a_lire', 'en_cours', 'lu', 'exploite'];
 
@@ -111,6 +111,7 @@ function atelier_project(PDO $pdo, int $id): array
         $r['media'] = $media[(int) $r['id']] ?? [];
         if (!empty($r['data']['person_id'])) { $pids[] = (int) $r['data']['person_id']; }
         foreach ((array) ($r['data']['people'] ?? []) as $pid) { $pids[] = (int) $pid; }
+        foreach ((array) ($r['data']['pkeys'] ?? []) as $k) { foreach ((array) ($r['data']['values'][$k] ?? []) as $pid) { $pids[] = (int) $pid; } }
     }
     unset($r);
     return ['project' => $p, 'folders' => $folders->fetchAll(), 'items' => $rows, 'people' => (object) collection_people($pdo, $pids), 'kinds' => ATELIER_KINDS];
@@ -241,6 +242,18 @@ function atelier_clean_data(PDO $pdo, string $type, array $in, int $projectId): 
         case 'link': $out += ['url' => $url('url'), 'site' => $t('site'), 'accessed' => $date('accessed')]; break;
         case 'task': $out += ['due' => preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($in['due'] ?? '')) ? (string) $in['due'] : '', 'done' => !empty($in['done']) ? 1 : 0, 'priority' => in_array($in['priority'] ?? '', ['haute', 'normale', 'basse'], true) ? $in['priority'] : 'normale']; break;
         case 'draft': $out += ['text' => $long('text', 2000000), 'target' => max(0, min(1000000, safe_int($in['target'] ?? 0))), 'stage' => in_array($in['stage'] ?? '', ['idee', 'plan', 'premier_jet', 'relu', 'fini'], true) ? $in['stage'] : 'idee']; break;
+        case 'custom': // sorte d'élément créée dans Maintenance → Atelier : ses champs sont décrits là, les valeurs arrivent ici
+            $vals = [];
+            $pkeys = array_values(array_filter(array_map(static fn($k) => preg_replace('/[^a-z0-9_]/', '', strtolower((string) $k)), array_slice(is_array($in['pkeys'] ?? null) ? $in['pkeys'] : [], 0, 40))));
+            foreach (array_slice(is_array($in['values'] ?? null) ? $in['values'] : [], 0, 80, true) as $k => $v) {
+                $k = preg_replace('/[^a-z0-9_]/', '', strtolower((string) $k));
+                if ($k === '') { continue; }
+                if (in_array($k, $pkeys, true)) { $vals[$k] = is_array($v) ? array_values(array_filter(array_map($person, array_slice($v, 0, 50)))) : $person($v); continue; }
+                if (is_array($v)) { $vals[$k] = $place($v); continue; }
+                $vals[$k] = is_bool($v) ? ($v ? 1 : 0) : (is_int($v) || is_float($v) ? $v : mb_substr(trim((string) $v), 0, 40000));
+            }
+            $out += ['ctype' => preg_replace('/[^a-z0-9_]/', '', strtolower((string) ($in['ctype'] ?? ''))) ?: 'perso', 'values' => $vals, 'pkeys' => $pkeys];
+            break;
         case 'note': default: $out += ['text' => $long('text', 200000)];
     }
     return $out;
@@ -261,6 +274,7 @@ function save_atelier_item(PDO $pdo, array $data): array
             'person' => (string) $clean['name'],
             'place' => (string) $clean['place']['text'],
             'link' => (string) $clean['url'],
+            'custom' => (string) (array_values(array_filter($clean['values'], static fn($v) => is_string($v) && trim($v) !== ''))[0] ?? ''),
             default => '',
         };
         if ($type === 'person' && $title === '' && $clean['person_id']) { $p = collection_people($pdo, [$clean['person_id']])[$clean['person_id']] ?? null; $title = $p ? trim(($p['first_name'] ?? '') . ' ' . ($p['last_name'] ?? '')) : ''; }
@@ -362,24 +376,216 @@ function atelier_rename_tag(PDO $pdo, array $data): array
 
 /* ─── Import de références (.bib, .ris), depuis n'importe quel gestionnaire de bibliographie ─── */
 
+/**
+ * Import : dans un projet (dans le dossier ouvert), ou comme nouveau projet. Formats : Zotero RDF (avec ses collections
+ * et sous-collections devenues dossiers, ses notes), CSL JSON (Zotero, Mendeley…), EndNote XML, BibTeX (.bib), RIS (.ris).
+ */
 function atelier_import(PDO $pdo, array $data): array
 {
-    $projectId = (int) atelier_project_row($pdo, safe_int($data['project_id'] ?? 0))['id'];
-    $folder = safe_int($data['folder_id'] ?? 0);
     $text = (string) ($data['text'] ?? '');
-    if (strlen($text) > 20000000) { throw new RuntimeException('Fichier trop gros.'); }
+    if (strlen($text) > 50000000) { throw new RuntimeException('Fichier trop gros.'); }
     $text = preg_replace('/^\xEF\xBB\xBF/', '', $text) ?? $text;
-    $refs = preg_match('/^\s*TY\s{2}-/m', $text) ? atelier_parse_ris($text) : atelier_parse_bibtex($text);
-    if (!$refs) { throw new RuntimeException('Aucune référence reconnue : le fichier doit être au format BibTeX (.bib) ou RIS (.ris).'); }
-    $n = 0;
-    foreach (array_slice($refs, 0, 5000) as $r) {
-        $title = $r['title'] ?: 'Sans titre';
-        unset($r['title']);
-        $tags = $r['tags'] ?? []; unset($r['tags']);
-        save_atelier_item($pdo, ['project_id' => $projectId, 'type' => 'reference', 'title' => $title, 'data' => $r, 'tags' => $tags, 'folder_ids' => $folder ? [$folder] : []]);
-        $n++;
+    $parsed = atelier_parse_any($text);
+    if (!$parsed['refs'] && !$parsed['notes'] && !$parsed['collections']) { throw new RuntimeException('Rien de reconnu : le fichier doit être un export Zotero RDF (.rdf), CSL JSON (.json), EndNote XML (.xml), BibTeX (.bib) ou RIS (.ris).'); }
+    $newProject = is_array($data['new_project'] ?? null) ? $data['new_project'] : null;
+    if ($newProject) {
+        $projectId = save_atelier_project($pdo, ['title' => ($newProject['title'] ?? '') ?: ($parsed['title'] ?: 'Projet importé'), 'kind' => $newProject['kind'] ?? 'autre', 'icon' => $newProject['icon'] ?? '', 'description' => $newProject['description'] ?? ''])['id'];
+        $folder = 0;
+        // une seule collection de départ : elle devient le projet, ses sous-collections les dossiers
+        if (!empty($parsed['root'])) {
+            $root = $parsed['root'];
+            foreach ($parsed['collections'] as $k => &$c) { if ($c['parent'] === $root) { $c['parent'] = null; } }
+            unset($c);
+            unset($parsed['collections'][$root]); // ce qui était directement dedans va dans « Non classés »
+        }
+    } else {
+        $projectId = (int) atelier_project_row($pdo, safe_int($data['project_id'] ?? 0))['id'];
+        $folder = safe_int($data['folder_id'] ?? 0);
+        if ($folder && (int) atelier_folder_row($pdo, $folder)['project_id'] !== $projectId) { $folder = 0; }
     }
-    return ['count' => $n];
+    // api.php enregistre tout dans une seule transaction : une erreur annule l'import entier
+    $own = !$pdo->inTransaction();
+    if ($own) { $pdo->beginTransaction(); }
+    try {
+        // collections → dossiers (parents d'abord)
+        $folderOf = []; $pending = $parsed['collections']; $guard = 0;
+        while ($pending && $guard++ < 50) {
+            foreach ($pending as $key => $c) {
+                $parent = $c['parent'] ?? null;
+                if ($parent !== null && !isset($folderOf[$parent]) && isset($parsed['collections'][$parent])) { continue; }
+                $parentId = $parent !== null && isset($folderOf[$parent]) ? $folderOf[$parent] : $folder;
+                $folderOf[$key] = save_atelier_folder($pdo, ['project_id' => $projectId, 'parent_id' => $parentId, 'name' => mb_substr($c['name'] ?: 'Collection', 0, 200)])['id'];
+                unset($pending[$key]);
+            }
+        }
+        $inFolders = [];
+        foreach ($parsed['collections'] as $key => $c) { foreach ($c['items'] as $ik) { $inFolders[$ik][] = $folderOf[$key] ?? null; } }
+        $foldersFor = static fn(?string $k): array => array_values(array_filter($k !== null && isset($inFolders[$k]) ? $inFolders[$k] : [])) ?: ($folder ? [$folder] : []);
+        $n = 0; $notes = 0; $links = 0;
+        foreach (array_slice($parsed['refs'], 0, 20000) as $r) {
+            $key = $r['_key'] ?? null; $attached = $r['_notes'] ?? []; $atts = $r['_links'] ?? [];
+            $title = $r['title'] ?: 'Sans titre';
+            $tags = $r['tags'] ?? [];
+            unset($r['title'], $r['tags'], $r['_key'], $r['_notes'], $r['_links']);
+            $fids = $foldersFor($key);
+            $id = save_atelier_item($pdo, ['project_id' => $projectId, 'type' => 'reference', 'title' => $title, 'data' => $r, 'tags' => $tags, 'folder_ids' => $fids])['id'];
+            $n++;
+            foreach ($attached as $nt) { if (trim($nt) === '') { continue; } save_atelier_item($pdo, ['project_id' => $projectId, 'type' => 'note', 'title' => atelier_note_title($nt), 'data' => ['text' => $nt, 'related' => [$id]], 'tags' => [], 'folder_ids' => $fids]); $notes++; }
+            foreach ($atts as $a) { if (!preg_match('#^https?://#i', $a['url'] ?? '')) { continue; } save_atelier_item($pdo, ['project_id' => $projectId, 'type' => 'link', 'title' => $a['title'] ?: $a['url'], 'data' => ['url' => $a['url'], 'related' => [$id]], 'folder_ids' => $fids]); $links++; }
+        }
+        foreach ($parsed['notes'] as $key => $nt) { // notes seules
+            if (trim($nt) === '') { continue; }
+            save_atelier_item($pdo, ['project_id' => $projectId, 'type' => 'note', 'title' => atelier_note_title($nt), 'data' => ['text' => $nt], 'folder_ids' => $foldersFor((string) $key)]); $notes++;
+        }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own) { $pdo->rollBack(); if ($newProject) { delete_atelier_project($pdo, ['id' => $projectId]); } } throw $e; }
+    return ['count' => $n, 'notes' => $notes, 'links' => $links, 'folders' => count($folderOf), 'files_skipped' => $parsed['files'] ?? 0, 'format' => $parsed['format'], 'project_id' => $projectId];
+}
+
+function atelier_note_title(string $t): string
+{
+    $t = trim(preg_replace('/\s+/u', ' ', $t) ?? '');
+    return mb_strlen($t) > 80 ? mb_substr($t, 0, 80) . '…' : ($t ?: 'Note');
+}
+
+/** HTML d'une note (Zotero) → texte simple avec ses retours à la ligne. */
+function atelier_html_text(string $html): string
+{
+    $html = preg_replace('#<(br|/p|/div|/li|/h\d)[^>]*>#i', "\n", $html) ?? $html;
+    $html = preg_replace('#<li[^>]*>#i', '• ', $html) ?? $html;
+    return trim(preg_replace("/\n{3,}/", "\n\n", html_entity_decode(strip_tags($html), ENT_QUOTES | ENT_HTML5, 'UTF-8')) ?? '');
+}
+
+function atelier_parse_any(string $text): array
+{
+    $t = ltrim($text);
+    $empty = ['refs' => [], 'notes' => [], 'collections' => [], 'title' => '', 'format' => '', 'files' => 0];
+    if (str_starts_with($t, '<') && str_contains($t, 'rdf:RDF')) { return ['format' => 'Zotero RDF'] + atelier_parse_zotero_rdf($text) + $empty; }
+    if (str_starts_with($t, '<') && preg_match('/<records?\b/i', $t)) { return ['format' => 'EndNote XML', 'refs' => atelier_parse_endnote($text)] + $empty; }
+    if (str_starts_with($t, '[') || str_starts_with($t, '{')) { return ['format' => 'CSL JSON', 'refs' => atelier_parse_csl($text)] + $empty; }
+    if (preg_match('/^\s*TY\s{2}-/m', $text)) { return ['format' => 'RIS', 'refs' => atelier_parse_ris($text)] + $empty; }
+    return ['format' => 'BibTeX', 'refs' => atelier_parse_bibtex($text)] + $empty;
+}
+
+const ATELIER_ZOTERO_KINDS = ['book' => 'livre', 'bookSection' => 'chapitre', 'journalArticle' => 'article', 'magazineArticle' => 'article', 'newspaperArticle' => 'presse', 'thesis' => 'these',
+    'manuscript' => 'archive', 'letter' => 'archive', 'document' => 'autre', 'webpage' => 'web', 'blogPost' => 'web', 'forumPost' => 'web', 'artwork' => 'image', 'map' => 'image', 'conferencePaper' => 'chapitre',
+    'encyclopediaArticle' => 'chapitre', 'dictionaryEntry' => 'chapitre', 'report' => 'livre', 'film' => 'objet', 'interview' => 'archive', 'case' => 'archive', 'statute' => 'archive', 'patent' => 'archive'];
+
+function atelier_parse_zotero_rdf(string $xml): array
+{
+    $doc = new DOMDocument();
+    if (!@$doc->loadXML($xml, LIBXML_NONET | LIBXML_COMPACT | LIBXML_PARSEHUGE)) { throw new RuntimeException('Fichier Zotero RDF illisible.'); }
+    $xp = new DOMXPath($doc);
+    foreach (['rdf' => 'http://www.w3.org/1999/02/22-rdf-syntax-ns#', 'z' => 'http://www.zotero.org/namespaces/export#', 'dc' => 'http://purl.org/dc/elements/1.1/', 'dcterms' => 'http://purl.org/dc/terms/',
+        'bib' => 'http://purl.org/net/biblio#', 'foaf' => 'http://xmlns.com/foaf/0.1/', 'vcard' => 'http://nwalsh.com/rdf/vCard#', 'prism' => 'http://prismstandard.org/namespaces/1.2/basic/', 'link' => 'http://purl.org/rss/1.0/modules/link/'] as $p => $u) { $xp->registerNamespace($p, $u); }
+    $RDF = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';
+    $str = static fn(string $q, DOMNode $n): string => trim(preg_replace('/\s+/u', ' ', (string) $xp->evaluate("string($q)", $n)) ?? '');
+    $root = $doc->documentElement;
+    $nodes = []; $memos = []; $atts = []; $collections = []; $containers = []; $referenced = [];
+    foreach ($root->childNodes as $n) {
+        if (!$n instanceof DOMElement) { continue; }
+        $about = $n->getAttributeNS($RDF, 'about');
+        $type = $str('z:itemType', $n);
+        if ($n->localName === 'Collection') {
+            $parts = []; foreach ($xp->query('dcterms:hasPart', $n) as $h) { $parts[] = $h->getAttributeNS($RDF, 'resource'); }
+            $collections[$about] = ['name' => $str('dc:title', $n), 'parts' => $parts];
+        } elseif ($n->localName === 'Memo' || $type === 'note') { $memos[$about] = atelier_html_text((string) $xp->evaluate('string(rdf:value)', $n));
+        } elseif ($n->localName === 'Attachment' || $type === 'attachment') { $atts[$about] = ['title' => $str('dc:title', $n), 'url' => $str('dc:identifier/dcterms:URI/rdf:value', $n), 'file' => $xp->query('rdf:resource', $n)->length > 0];
+        } elseif ($type !== '') { $nodes[$about] = $n;
+        } else { $t = $str('dc:title', $n); if ($t !== '' && $about !== '') { $containers[$about] = $n; } }
+    }
+    $refs = [];
+    foreach ($nodes as $about => $n) {
+        $type = $str('z:itemType', $n);
+        $creators = [];
+        foreach ($n->childNodes as $c) {
+            if (!$c instanceof DOMElement) { continue; }
+            $role = ['authors' => 'auteur', 'editors' => 'dir', 'seriesEditors' => 'dir', 'translators' => 'trad', 'artists' => 'graveur', 'cartographers' => 'auteur', 'contributors' => 'autre', 'bookAuthors' => 'dir', 'interviewers' => 'autre', 'directors' => 'auteur'][$c->localName] ?? null;
+            if (!$role) { continue; }
+            foreach ($xp->query('.//foaf:Person', $c) as $pe) { $last = $str('foaf:surname', $pe); $first = $str('foaf:givenName', $pe); if ($last === '' && $first === '') { $last = $str('foaf:name', $pe); } $creators[] = ['last' => $last, 'first' => $first, 'role' => $role]; }
+        }
+        $part = $xp->query('dcterms:isPartOf/*', $n)->item(0);
+        if (!$part) { $res = $xp->query('dcterms:isPartOf', $n)->item(0); $r = $res instanceof DOMElement ? $res->getAttributeNS($RDF, 'resource') : ''; $part = $r !== '' ? ($containers[$r] ?? null) : null; }
+        $ids = []; foreach ($xp->query('dc:identifier', $n) as $idn) { $ids[] = trim($idn->textContent); }
+        if ($part) { foreach ($xp->query('dc:identifier', $part) as $idn) { $ids[] = trim($idn->textContent); } }
+        $idOf = static function (string $prefix) use ($ids): string { foreach ($ids as $v) { if (stripos($v, $prefix . ' ') === 0) { return trim(substr($v, strlen($prefix))); } } return ''; };
+        $tags = []; foreach ($xp->query('dc:subject', $n) as $sn) { if ($xp->query('dcterms:LCC|dcterms:DDC|dcterms:UDC', $sn)->length) { continue; } $v = trim($sn->textContent); if ($v !== '') { $tags[] = $v; } }
+        $notes = []; foreach ($xp->query('dcterms:isReferencedBy', $n) as $rb) { $k = $rb->getAttributeNS($RDF, 'resource'); if (isset($memos[$k])) { $notes[] = $memos[$k]; $referenced[$k] = true; } }
+        $links = []; $files = 0; foreach ($xp->query('link:link', $n) as $ln) { $a = $atts[$ln->getAttributeNS($RDF, 'resource')] ?? null; if (!$a) { continue; } if ($a['url'] !== '') { $links[] = $a; } elseif ($a['file']) { $files++; } }
+        $extra = $str('dc:description', $n);
+        $refs[] = ['_key' => $about, '_notes' => $notes, '_links' => $links, 'title' => $str('dc:title', $n), 'kind' => ATELIER_ZOTERO_KINDS[$type] ?? 'autre', 'creators' => $creators,
+            'date' => $str('dc:date', $n), 'year' => preg_match('/\d{4}/', $str('dc:date', $n), $ym) ? $ym[0] : '',
+            'container' => $part ? $str('dc:title', $part) : '', 'publisher' => $str('dc:publisher//foaf:name', $n), 'place' => $str('dc:publisher//vcard:locality', $n),
+            'volume' => $str('prism:volume', $n) ?: ($part ? $str('prism:volume', $part) : ''), 'issue' => $str('prism:number', $n) ?: ($part ? $str('prism:number', $part) : ''),
+            'pages' => str_replace('-', '–', $str('bib:pages', $n)) ?: $str('z:numPages', $n), 'edition' => $str('prism:edition', $n), 'isbn' => $idOf('ISBN'), 'doi' => $idOf('DOI'),
+            'url' => $str('dc:identifier/dcterms:URI/rdf:value', $n), 'accessed' => $str('dcterms:dateSubmitted', $n), 'archive' => $str('z:archive', $n), 'call_number' => $str('dc:coverage', $n) ?: $str('dc:subject/dcterms:LCC/rdf:value', $n),
+            'language' => $str('z:language', $n), 'abstract' => $str('dcterms:abstract', $n), 'technique' => $str('z:medium', $n), 'dimensions' => $str('z:artworkSize', $n),
+            'notes' => $extra, 'tags' => array_values(array_unique($tags))];
+        $atts['__files'] = ($atts['__files'] ?? 0) + $files;
+    }
+    // collections : parent = la collection qui la contient ; éléments = ce qui n'est pas une collection
+    $out = []; $parentOf = [];
+    foreach ($collections as $k => $c) { foreach ($c['parts'] as $p) { if (isset($collections[$p])) { $parentOf[$p] = $k; } } }
+    foreach ($collections as $k => $c) { $out[$k] = ['name' => $c['name'], 'parent' => $parentOf[$k] ?? null, 'items' => array_values(array_filter($c['parts'], static fn($p) => !isset($collections[$p])))]; }
+    $loose = array_diff_key($memos, $referenced);
+    $roots = array_keys(array_filter($out, static fn($c) => $c['parent'] === null));
+    return ['refs' => $refs, 'notes' => $loose, 'collections' => $out, 'files' => $atts['__files'] ?? 0, 'title' => count($roots) === 1 ? (string) $out[$roots[0]]['name'] : '', 'root' => count($roots) === 1 ? $roots[0] : null];
+}
+
+const ATELIER_CSL_KINDS = ['book' => 'livre', 'chapter' => 'chapitre', 'article-journal' => 'article', 'article-magazine' => 'article', 'article-newspaper' => 'presse', 'thesis' => 'these', 'manuscript' => 'archive',
+    'webpage' => 'web', 'post-weblog' => 'web', 'post' => 'web', 'graphic' => 'image', 'map' => 'image', 'paper-conference' => 'chapitre', 'entry-encyclopedia' => 'chapitre', 'entry-dictionary' => 'chapitre', 'report' => 'livre', 'article' => 'article', 'personal_communication' => 'archive'];
+
+function atelier_parse_csl(string $text): array
+{
+    $j = json_decode($text, true);
+    if (!is_array($j)) { throw new RuntimeException('Fichier JSON illisible.'); }
+    if (isset($j['items']) && is_array($j['items'])) { $j = $j['items']; }
+    if (!array_is_list($j)) { $j = [$j]; }
+    $refs = [];
+    foreach ($j as $it) {
+        if (!is_array($it) || !isset($it['title'])) { continue; }
+        $s = static fn(string $k): string => is_scalar($it[$k] ?? null) ? trim((string) $it[$k]) : '';
+        $creators = [];
+        foreach (['author' => 'auteur', 'editor' => 'dir', 'container-author' => 'dir', 'translator' => 'trad', 'illustrator' => 'illustrateur'] as $k => $role) {
+            foreach (is_array($it[$k] ?? null) ? $it[$k] : [] as $c) { if (is_array($c)) { $creators[] = ['last' => (string) ($c['family'] ?? $c['literal'] ?? ''), 'first' => (string) ($c['given'] ?? ''), 'role' => $role]; } }
+        }
+        $date = static function ($d): string { if (!is_array($d)) { return ''; } $p = $d['date-parts'][0] ?? null; if (is_array($p) && $p) { return implode('-', array_map(static fn($x) => str_pad((string) $x, 2, '0', STR_PAD_LEFT), $p)); } return (string) ($d['raw'] ?? $d['literal'] ?? ''); };
+        $issued = $date($it['issued'] ?? null);
+        $refs[] = ['title' => $s('title'), 'kind' => ATELIER_CSL_KINDS[$s('type')] ?? 'autre', 'creators' => $creators, 'date' => $issued, 'year' => preg_match('/\d{4}/', $issued, $m) ? $m[0] : '',
+            'container' => $s('container-title'), 'publisher' => $s('publisher'), 'place' => $s('publisher-place'), 'volume' => $s('volume'), 'issue' => $s('issue'), 'pages' => str_replace('-', '–', $s('page')),
+            'edition' => $s('edition'), 'isbn' => $s('ISBN'), 'doi' => $s('DOI'), 'url' => $s('URL'), 'accessed' => $date($it['accessed'] ?? null), 'archive' => $s('archive'), 'call_number' => $s('archive_location') ?: $s('call-number'),
+            'language' => $s('language'), 'abstract' => $s('abstract'), 'notes' => $s('note'), 'technique' => $s('medium'), 'dimensions' => $s('dimensions'),
+            'tags' => $s('keyword') !== '' ? array_map('trim', preg_split('/[,;]/', $s('keyword'))) : []];
+    }
+    return $refs;
+}
+
+const ATELIER_ENDNOTE_KINDS = ['Book' => 'livre', 'Edited Book' => 'livre', 'Book Section' => 'chapitre', 'Journal Article' => 'article', 'Magazine Article' => 'article', 'Newspaper Article' => 'presse', 'Thesis' => 'these',
+    'Manuscript' => 'archive', 'Unpublished Work' => 'archive', 'Web Page' => 'web', 'Artwork' => 'image', 'Map' => 'image', 'Conference Paper' => 'chapitre', 'Conference Proceedings' => 'livre', 'Report' => 'livre'];
+
+function atelier_parse_endnote(string $xml): array
+{
+    $doc = new DOMDocument();
+    if (!@$doc->loadXML($xml, LIBXML_NONET | LIBXML_COMPACT | LIBXML_PARSEHUGE)) { throw new RuntimeException('Fichier EndNote XML illisible.'); }
+    $xp = new DOMXPath($doc);
+    $str = static fn(string $q, DOMNode $n): string => trim(preg_replace('/\s+/u', ' ', (string) $xp->evaluate("string($q)", $n)) ?? '');
+    $refs = [];
+    foreach ($xp->query('//record') as $r) {
+        $creators = [];
+        foreach (['contributors/authors/author' => 'auteur', 'contributors/secondary-authors/author' => 'dir', 'contributors/translated-authors/author' => 'trad', 'contributors/tertiary-authors/author' => 'dir'] as $q => $role) {
+            foreach ($xp->query($q, $r) as $a) { $creators[] = atelier_split_name(trim($a->textContent)) + ['role' => $role]; }
+        }
+        $kw = []; foreach ($xp->query('keywords/keyword', $r) as $k) { $v = trim($k->textContent); if ($v !== '') { $kw[] = $v; } }
+        $type = $xp->query('ref-type', $r)->item(0);
+        $kind = $type instanceof DOMElement ? (ATELIER_ENDNOTE_KINDS[$type->getAttribute('name')] ?? 'autre') : 'autre';
+        $year = $str('dates/year', $r);
+        $refs[] = ['title' => $str('titles/title', $r), 'kind' => $kind, 'creators' => $creators, 'year' => $year, 'date' => $str('dates/pub-dates/date', $r) ?: $year,
+            'container' => $str('titles/secondary-title', $r) ?: $str('periodical/full-title', $r), 'publisher' => $str('publisher', $r), 'place' => $str('pub-location', $r),
+            'volume' => $str('volume', $r), 'issue' => $str('number', $r), 'pages' => str_replace('-', '–', $str('pages', $r)), 'edition' => $str('edition', $r), 'isbn' => $str('isbn', $r),
+            'doi' => $str('electronic-resource-num', $r), 'url' => $str('urls/related-urls/url', $r), 'archive' => $str('archive-location', $r) ?: $str('remote-database-provider', $r), 'call_number' => $str('call-num', $r),
+            'language' => $str('language', $r), 'abstract' => $str('abstract', $r), 'notes' => $str('notes', $r), 'tags' => $kw];
+    }
+    return $refs;
 }
 
 function atelier_split_name(string $n): array
