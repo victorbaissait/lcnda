@@ -53,7 +53,7 @@
 
     /* ─────────── Réglages (Maintenance → Atelier de recherche) : menu, sortes d'éléments, dossiers, plans ─────────── */
     const CFG_KEY = 'genealogie-atelier-config'; // copié tout seul dans la base (lib/settings.php)
-    const NAV_BUILTIN = [['overview', '📊', 'Vue d’ensemble'], ['all', '🗂️', 'Tout le projet'], ['starred', '⭐', 'Favoris'], ['unfiled', '📥', 'Non classés'], ['tasks', '✅', 'Tâches'], ['timeline', '🕰️', 'Chronologie'], ['people', '👥', 'Personnes'], ['map', '🗺️', 'Carte'], ['biblio', '📚', 'Bibliographie'], ['trash', '🗑️', 'Corbeille']];
+    const NAV_BUILTIN = [['overview', '📊', 'Vue d’ensemble'], ['all', '🗂️', 'Tout le projet'], ['starred', '⭐', 'Favoris'], ['unfiled', '📥', 'Non classés'], ['tasks', '✅', 'Tâches'], ['timeline', '🕰️', 'Chronologie'], ['people', '👥', 'Personnes'], ['map', '🗺️', 'Carte'], ['biblio', '📚', 'Bibliographie'], ['widgets', '🧩', 'Widgets'], ['trash', '🗑️', 'Corbeille']];
     const readCfg = () => { try { const c = JSON.parse(localStorage.getItem(CFG_KEY) || '{}'); return c && typeof c === 'object' ? c : {}; } catch (_) { return {}; } };
     function loadCfg() {
         const c = readCfg();
@@ -248,7 +248,12 @@
     }
 
     /* ═══════════ Un projet ouvert : dossiers | éléments | détail ═══════════ */
-    const SPECIAL_VIEWS = ['overview', 'timeline', 'people', 'map', 'biblio', 'tasks'];
+    const SPECIAL_VIEWS = ['overview', 'timeline', 'people', 'map', 'biblio', 'tasks', 'widgets'];
+    /** Les widgets d'un projet : dans leur page « 🧩 Widgets », et (au choix) aussi dans la vue d'ensemble. */
+    const OV_KEY = 'genealogie-atelier-widgets-ov';
+    const widgetsInOverview = pid => { try { return (JSON.parse(localStorage.getItem(OV_KEY) || '{}') || {})[pid] !== false; } catch (_) { return true; } };
+    const setWidgetsInOverview = (pid, on) => { try { const o = JSON.parse(localStorage.getItem(OV_KEY) || '{}') || {}; o[pid] = !!on; localStorage.setItem(OV_KEY, JSON.stringify(o)); } catch (_) {} };
+    const widgetsBox = p => `<div class="h-atw-box" data-atw-project="${p.id}"></div>${(setTimeout(() => ext.atelierWidgets?.(document.querySelector(`[data-atw-project="${p.id}"]`), {project: P.project, items: live(), openItem: id => { st().sel = [id]; renderProject(S().workspaceToken); }}), 0), '')}`;
     const reload = async (keepScroll = true) => { const v = st(), pid = v.project; await load(pid); if (S().module !== 'enquetes' || S().enquetesTab !== 'atelier' || st().project !== pid) return; renderProject(S().workspaceToken, keepScroll); };
     /* Vue à soi (Maintenance → Atelier) : des critères ajoutés un par un, dans l'ordre voulu, chacun inversable (« pas »), ET / OU */
     const VIEW_RULES = {
@@ -336,7 +341,7 @@
                 <div class="h-at-head-title"><h2>${esc(p.title)}</h2>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}</div>
                 ${target ? `<div class="h-at-words" title="Mots des brouillons"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} / ${fmt(target)} mots</small></div>` : ''}
                 <span class="h-at-head-actions"><button type="button" class="button small secondary" data-at-export>Exporter…</button><button type="button" class="button small secondary" data-at-pedit>Projet…</button><button type="button" class="button small secondary" data-at-settings title="Réglages de l’Atelier (Maintenance)">⚙</button></span></header>
-            <div class="h-at-grid">
+            <div class="h-at-grid ${v.node === 'widgets' && !v.sel.length ? 'is-wide' : ''}">
                 <aside class="h-at-tree" data-at-scroll>
                     <ul class="h-at-special">${CFG.nav.filter(x => !x.hidden || x.key === v.node).map(({key: k, icon, label}) => { const c = k === 'all' ? live().length : k === 'trash' ? P.items.length - live().length : k === 'starred' ? live().filter(i => Number(i.starred)).length : k === 'unfiled' ? live().filter(i => !i.folders.length).length : k === 'tasks' ? live().filter(i => i.type === 'task' && !Number(i.data.done)).length : k.startsWith('v_') ? nodeItemsCount(k) : 0;
                         return `<li><div class="h-at-row ${v.node === k ? 'is-on' : ''}" data-at-go="${esc(k)}" ${k === 'trash' || k === 'all' || k === 'starred' || k === 'unfiled' ? `data-at-drop="${k}"` : ''}><span class="h-at-ficon">${esc(icon)}</span><span class="h-at-fname">${esc(label)}</span>${c ? `<small class="h-at-count">${fmt(c)}</small>` : ''}</div></li>`; }).join('')}</ul>
@@ -388,6 +393,11 @@
 
     /* ─────────── Vues spéciales ─────────── */
     function specialView(node) {
+        if (node === 'widgets') {
+            const p = P.project;
+            return `<h3 class="h-at-ftitle">🧩 Widgets</h3><p class="muted">Chronomètre, minuteur, objectif de mots, tâches, rappels, agenda du projet, bloc-notes… « + Widget » pour en ajouter.</p>
+                <label class="checkbox-line"><input type="checkbox" data-at-wov ${widgetsInOverview(p.id) ? 'checked' : ''}> Les montrer aussi dans la vue d’ensemble</label>${widgetsBox(p)}`;
+        }
         const items = live(), people = P.people || {};
         if (node === 'overview') {
             const p = P.project, byType = CFG.types.map(t => t.key).map(k => [k, items.filter(i => tkey(i) === k).length]).filter(([, c]) => c);
@@ -407,7 +417,7 @@
                 ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < todayIso() ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">Toutes les tâches (${fmt(tasks.length)})</button>` : ''}</section>` : ''}
                 ${recent.length ? `<section><h4>🕘 Derniers changements</h4>${recent.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${ti(i)} ${esc(i.title)}</button>`).join('')}</section>` : ''}</div>
                 <div data-rc-host data-rc-type="atelier_project" data-rc-key="${p.id}" data-rc-hide-empty></div>
-                <div class="h-atw-box" data-atw-project="${p.id}"></div>${(setTimeout(() => ext.atelierWidgets?.(document.querySelector(`[data-atw-project="${p.id}"]`), {project: P.project, items: live(), openItem: id => { st().sel = [id]; renderProject(S().workspaceToken); }}), 0), '')}`;
+                ${widgetsInOverview(p.id) ? widgetsBox(p) : ''}`;
         }
         if (node === 'tasks') {
             const tasks = items.filter(i => i.type === 'task').sort((a, b) => Number(a.data.done) - Number(b.data.done) || String(a.data.due || '9').localeCompare(String(b.data.due || '9')));
@@ -921,6 +931,7 @@
             if (q('[data-at-sort]')) { const c = q('[data-at-sort]').dataset.atSort; v.sort = v.sort.col === c ? {col: c, dir: -v.sort.dir} : {col: c, dir: 1}; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-star]')) { e.stopPropagation(); const i = P.byId.get(Number(q('[data-at-star]').dataset.atStar)); return act(Number(i.starred) ? 'unstar' : 'star', [Number(i.id)]); }
             if (q('[data-at-pick]')) { const id = Number(q('[data-at-pick]').dataset.atPick), i = P.byId.get(id); if (!i) return; v.sel = [id]; return renderProject(S().workspaceToken, true); }
+            if (q('[data-at-wov]')) { setWidgetsInOverview(P.project.id, q('[data-at-wov]').checked); return; }
             if (q('[data-at-appopen]')) return openApp(P.byId.get(Number(q('[data-at-appopen]').dataset.atAppopen)));
             if (q('[data-at-edit]')) { const i = P.byId.get(Number(q('[data-at-edit]').dataset.atEdit)); return itemDialog(i.type, i); }
             if (q('[data-at-write]')) { const i = P.byId.get(Number(q('[data-at-write]').dataset.atWrite)); return itemDialog(i.type, i); }

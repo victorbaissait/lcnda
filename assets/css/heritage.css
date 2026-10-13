@@ -1304,3 +1304,7 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-atw-notes { width:100%; font-family:Georgia, serif; }
 .h-atw-dash .card { box-shadow:none; border:0; }
 .h-atw-dash .card-head { display:none; }
+
+.h-at-grid.is-wide { grid-template-columns:minmax(14rem, 17rem) minmax(0, 1fr); }
+.h-at-grid.is-wide .h-at-detail { display:none; }
+@media (max-width:700px) { .h-at-grid.is-wide { grid-template-columns:1fr; } }
