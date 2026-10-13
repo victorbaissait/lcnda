@@ -151,7 +151,7 @@
                     <button type="button" class="button small" data-av="toggle" id="av-toggle" title="Lecture / pause">▶</button>
                     <button type="button" class="button small secondary" data-av="fwd" title="Avancer de ${fmtSkip(skip)} (réglable dans Maintenance › Apparence)">+${fmtSkip(skip)}</button>
                     <button type="button" class="button small secondary" data-av="next" title="${kind === 'audio' ? 'Son' : 'Vidéo'} suivant(e)">⏭</button>
-                    <span class="av-rate">Vitesse <select id="av-rate" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" id="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output id="av-rate-out">${fmtRate(p.rate)}</output></span>
+                    <span class="av-rate">Vitesse <select id="av-rate" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" id="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output id="av-rate-out">${fmtRate(p.rate)}</output><button type="button" class="button small secondary" id="av-rate-reset" title="Remettre la vitesse normale (1×)"${p.rate === 1 ? ' disabled' : ''}>↺ 1×</button></span>
                     <label class="av-auto"><input type="checkbox" id="av-auto"${p.auto ? ' checked' : ''}> Enchaîner ${kind === 'audio' ? 'les sons' : 'les vidéos'}</label>
                     ${kind === 'video' ? '<button type="button" class="button small secondary" data-av="size" title="Agrandir / réduire la vidéo">⤢</button>' : ''}
                     <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">✕</button>
@@ -225,7 +225,9 @@
             if (from !== 'select') $('#av-rate').innerHTML = rateOptions(p.rate);
             if (from !== 'range') $('#av-rate-range').value = p.rate;
             $('#av-rate-out').textContent = fmtRate(p.rate);
+            $('#av-rate-reset').disabled = p.rate === 1;
         };
+        $('#av-rate-reset').addEventListener('click', () => { setRate(1); savePrefs(kind, p); });
         $('#av-rate').addEventListener('change', e => { setRate(e.target.value, 'select'); savePrefs(kind, p); });
         let rateTimer = 0;
         $('#av-rate-range').addEventListener('input', e => { setRate(e.target.value, 'range'); clearTimeout(rateTimer); rateTimer = setTimeout(() => savePrefs(kind, p), 300); });
