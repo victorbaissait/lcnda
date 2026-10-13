@@ -68,6 +68,23 @@ $imp = array_column($all, null, 'title');
 $out['bibitem'] = [$imp['Peepshows: A Visual History']['data']['creators'], $imp['Peepshows: A Visual History']['data']['place'], $imp['Peepshows: A Visual History']['tags'], $imp["Les vues d'optique"]['data']['pages'], $imp["Les vues d'optique"]['data']['kind']];
 $out['risitem'] = [$imp['Le colportage des images']['data']['year'], $imp['Le colportage des images']['data']['pages'], $imp['Le colportage des images']['data']['container'], $imp['Le colportage des images']['data']['creators'][0]['last']];
 try { atelier_import($pdo, ['project_id' => $pid, 'text' => 'rien du tout']); $out['bad_import'] = 'accepté'; } catch (Throwable $e) { $out['bad_import'] = 'refusé'; }
+// relecture : @string / @comment avant les références, accents LaTeX, inproceedings
+$bib2 = "\xEF\xBB\xBF@string{ae=\"Annales\"}\n@book{k1, title={L'{\\'E}cole {\\\x60a} Paris}, author={Fran\\c{c}ois, Jean}, year=1990}\n@comment{rien}\n@inproceedings{k3, title={Trois \\& 50\\%}, booktitle={Actes}}";
+$out['bib2'] = atelier_import($pdo, ['project_id' => $pid, 'text' => $bib2])['count'];
+$t2 = array_column(array_filter(atelier_project($pdo, $pid)['items'], fn($i) => in_array($i['title'], ["L'École à Paris", 'Trois & 50%'], true)), null, 'title');
+$out['bib2items'] = [count($t2), $t2["L'École à Paris"]['data']['creators'][0]['last'] ?? '', $t2['Trois & 50%']['data']['kind'] ?? ''];
+// renommer un dossier garde sa place ; déplacer avec les sous-dossiers ; sortir de tous les dossiers
+$q2 = save_atelier_project($pdo, ['title' => 'Ordre', 'folders' => ['A', 'B', ['name' => 'C', 'children' => ['C1']]]]);
+$fs = array_column(atelier_project($pdo, $q2['id'])['folders'], null, 'name');
+save_atelier_folder($pdo, ['id' => $fs['A']['id'], 'name' => 'A2', 'parent_id' => 0, 'icon' => '', 'color' => '']);
+$rootsAfter = array_values(array_filter(atelier_project($pdo, $q2['id'])['folders'], fn($f) => $f['parent_id'] === null)); usort($rootsAfter, fn($a, $b) => $a['position'] <=> $b['position']);
+$out['rename_order'] = array_column($rootsAfter, 'name');
+$it = save_atelier_item($pdo, ['project_id' => $q2['id'], 'type' => 'note', 'data' => ['text' => 'x'], 'folder_ids' => [$fs['C1']['id']]]);
+atelier_items_action($pdo, ['project_id' => $q2['id'], 'ids' => [$it['id']], 'action' => 'move', 'from' => $fs['C']['id'], 'from_deep' => 1, 'folder_id' => $fs['B']['id']]);
+$out['deep_move'] = [atelier_project($pdo, $q2['id'])['items'][0]['folders'], (int) $fs['B']['id']];
+atelier_items_action($pdo, ['project_id' => $q2['id'], 'ids' => [$it['id']], 'action' => 'unfile']);
+$out['unfiled'] = atelier_project($pdo, $q2['id'])['items'][0]['folders'];
+delete_atelier_project($pdo, ['id' => $q2['id']]);
 delete_atelier_project($pdo, ['id' => $pid]);
 $out['gone'] = (int) $pdo->query('SELECT (SELECT count(*) FROM atelier_items)+(SELECT count(*) FROM atelier_folders)+(SELECT count(*) FROM atelier_item_folders)')->fetchColumn();
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
@@ -89,6 +106,9 @@ const checks = [
   ['dossier supprimé avec ses sous-dossiers, l’élément reste', () => { assert.equal(out.folder_del, 3); assert.equal(out.ref_left.length, 1); }],
   ['import BibTeX : auteurs, lieu, mots-clés, pages, revue', () => { assert.equal(out.bib, 2); assert.deepEqual(out.bibitem[0].map(c => c.last), ['Balzer', 'Fontaine']); assert.equal(out.bibitem[1], 'New York'); assert.deepEqual(out.bibitem[2], ['optique', 'peepshow']); assert.equal(out.bibitem[3], '10–25'); assert.equal(out.bibitem[4], 'article'); }],
   ['import RIS ; fichier inconnu refusé', () => { assert.equal(out.ris, 1); assert.deepEqual(out.risitem, ['2010', '101–120', 'Ethnologie française', 'Dupont']); assert.equal(out.bad_import, 'refusé'); }],
+  ['import BibTeX : @string / @comment ignorés sans perdre les références, accents LaTeX, actes de colloque', () => { assert.equal(out.bib2, 2); assert.deepEqual(out.bib2items, [2, 'François', 'chapitre']); }],
+  ['renommer un dossier garde sa place', () => assert.deepEqual(out.rename_order, ['A2', 'B', 'C'])],
+  ['déplacer depuis un dossier avec ses sous-dossiers ; sortir de tous les dossiers', () => { assert.deepEqual(out.deep_move, [[out.deep_move[1]], out.deep_move[1]]); assert.deepEqual(out.unfiled, []); }],
   ['projet supprimé avec tout son contenu', () => assert.equal(out.gone, 0)],
 ];
 let failed = 0;

@@ -32,6 +32,7 @@
         event: ['📅', 'Date, événement', 'Pour la chronologie'], link: ['🔗', 'Lien internet', 'Un site, une base en ligne'],
         task: ['✅', 'Tâche', 'À faire, avec une échéance'], draft: ['✍️', 'Brouillon', 'Un texte en cours, avec ses mots comptés'],
     };
+    const TYPE_PLURALS = {reference: 'Références', note: 'Notes', quote: 'Citations', media: 'Images et documents', person: 'Personnes', place: 'Lieux', event: 'Dates, événements', link: 'Liens internet', task: 'Tâches', draft: 'Brouillons'};
     const REF_KINDS = {livre: 'Livre', article: 'Article de revue', chapitre: 'Chapitre d’ouvrage', these: 'Thèse, mémoire', archive: 'Document d’archives', image: 'Image, gravure, estampe', presse: 'Article de presse', web: 'Page internet', objet: 'Objet', autre: 'Autre'};
     const ROLES = {auteur: 'auteur', dir: 'directeur (dir.)', trad: 'traducteur', graveur: 'graveur', editeur: 'éditeur', illustrateur: 'illustrateur', photographe: 'photographe', autre: 'autre'};
     const READ = {'': '—', a_lire: '📕 à lire', en_cours: '📖 en cours de lecture', lu: '📗 lu', exploite: '✅ exploité'};
@@ -57,7 +58,8 @@
     const firstAuthor = i => { const c = creatorsOf(i)[0]; return c ? [c.last, c.first].filter(Boolean).join(' ') : ''; };
     /** Référence complète (texte, avec *italique* pour les titres d'ouvrages) */
     function cite(i, html = true) {
-        const d = i.data || {}, it = t => t ? (html ? `<i>${esc(t)}</i>` : t) : '', tx = t => html ? esc(t) : t;
+        const md = html === 'md'; if (md) html = false;
+        const d = i.data || {}, it = t => t ? (html ? `<i>${esc(t)}</i>` : md ? `*${t}*` : t) : '', tx = t => t ? (html ? esc(t) : t) : '';
         const auth = authorsTxt(creatorsOf(i, ['auteur', 'graveur', 'photographe', 'illustrateur', 'autre']));
         const dir = creatorsOf(i, ['dir']);
         const pub = [d.place, d.publisher, d.year || d.date].filter(Boolean).map(tx).join(', ');
@@ -65,18 +67,19 @@
         const title = i.title;
         switch (d.kind) {
             case 'article': case 'presse': parts.push(auth && tx(auth), `« ${tx(title)} »`, it(d.container), d.volume && tx('vol. ' + d.volume), d.issue && tx('n° ' + d.issue), tx(d.date || d.year), d.pages && tx('p. ' + d.pages)); break;
-            case 'chapitre': parts.push(auth && tx(auth), `« ${tx(title)} »`, 'dans ' + [dir.length ? tx(authorsTxt(dir) + ' (dir.)') : '', it(d.container)].filter(Boolean).join(', '), pub, d.pages && tx('p. ' + d.pages)); break;
+            case 'chapitre': { const dans = [dir.length ? tx(authorsTxt(dir) + ' (dir.)') : '', it(d.container)].filter(Boolean).join(', '); parts.push(auth && tx(auth), `« ${tx(title)} »`, dans && 'dans ' + dans, pub, d.pages && tx('p. ' + d.pages)); break; }
             case 'these': parts.push(auth && tx(auth), it(title), tx('thèse'), pub); break;
             case 'archive': parts.push(tx(d.archive), d.call_number && tx(d.call_number), `« ${tx(title)} »`, tx(d.date || d.year)); break;
             case 'image': case 'objet': parts.push(auth && tx(auth), it(title), tx(d.technique), tx(d.date || d.year), tx(d.dimensions), tx(d.archive), d.call_number && tx(d.call_number)); break;
             case 'web': parts.push(auth && tx(auth), `« ${tx(title)} »`, it(d.container), tx(d.date || d.year), d.url && (html ? `<span class="h-at-url">${esc(d.url)}</span>` : d.url), d.accessed && tx(`consulté le ${d.accessed}`)); break;
-            default: parts.push(auth || (dir.length ? tx(authorsTxt(dir) + ' (dir.)') : ''), it(title), d.edition && tx(d.edition), pub, d.pages && tx(d.pages + (/\d$/.test(d.pages) && !/[-–]/.test(d.pages) ? ' p.' : ''))); break;
+            default: parts.push(auth ? tx(auth) : (dir.length ? tx(authorsTxt(dir) + ' (dir.)') : ''), it(title), d.edition && tx(d.edition), pub, d.pages && tx(d.pages + (/\d$/.test(d.pages) && !/[-–]/.test(d.pages) ? ' p.' : ''))); break;
         }
         let out = parts.filter(Boolean).join(', ');
         if (d.doi) out += html ? `, doi : ${esc(d.doi)}` : `, doi : ${d.doi}`;
         return /[.!?…]$/.test(out) ? out : out + '.';
     }
-    const shortCite = i => `${firstAuthor(i).split(' ')[0] || i.title.slice(0, 30)}${year(i) ? ', ' + year(i) : ''}`;
+    const shortCite = i => `${creatorsOf(i)[0]?.last || creatorsOf(i)[0]?.first || i.title.slice(0, 30)}${year(i) ? ', ' + year(i) : ''}`;
+    const todayIso = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
 
     /* ─────────── BibTeX / RIS ─────────── */
     const BIB_TYPES = {livre: 'book', article: 'article', chapitre: 'incollection', these: 'phdthesis', archive: 'unpublished', image: 'misc', presse: 'article', web: 'online', objet: 'misc', autre: 'misc'};
@@ -86,21 +89,22 @@
         return refs.map(i => {
             const d = i.data || {};
             let key = ((creatorsOf(i)[0]?.last || 'ref') + (year(i) || '')).normalize('NFD').replace(/[^A-Za-z0-9]/g, '').toLowerCase() || 'ref';
-            for (let k = 0, base = key; used.has(key); k++) key = base + String.fromCharCode(97 + k);
+            for (let k = 0, base = key; used.has(key); k++) key = base + (k < 26 ? String.fromCharCode(97 + k) : String(k));
             used.add(key);
             const names = roles => creatorsOf(i, roles).map(c => [c.last, c.first].filter(Boolean).join(', ')).join(' and ');
             const f = {author: names(['auteur', 'graveur', 'photographe', 'illustrateur', 'autre']), editor: names(['dir']), translator: names(['trad']), title: i.title,
-                [d.kind === 'article' || d.kind === 'presse' ? 'journal' : 'booktitle']: d.container, publisher: d.publisher, address: d.place, year: year(i), volume: d.volume, number: d.issue,
-                pages: (d.pages || '').replace(/[–-]/, '--'), edition: d.edition, isbn: d.isbn, doi: d.doi, url: d.url, language: d.language, abstract: d.abstract, keywords: (i.tags || []).join(', '),
+                [d.kind === 'article' || d.kind === 'presse' ? 'journal' : 'booktitle']: d.container, [d.kind === 'these' ? 'school' : 'publisher']: d.publisher, address: d.place, year: year(i), volume: d.volume, number: d.issue,
+                pages: (d.pages || '').replace(/\s*[–-]+\s*/, '--'), edition: d.edition, isbn: d.isbn, doi: d.doi, url: d.url, language: d.language, abstract: d.abstract, keywords: (i.tags || []).join(', '),
                 note: [d.archive, d.call_number].filter(Boolean).join(', ')};
-            return `@${BIB_TYPES[d.kind] || 'misc'}{${key},\n${Object.entries(f).filter(([, v]) => v).map(([k, v]) => `  ${k} = {${String(v).replace(/[{}]/g, '')}}`).join(',\n')}\n}`;
+            const texEsc = (k, v) => ['url', 'doi'].includes(k) ? String(v).replace(/[{}]/g, '') : String(v).replace(/[{}]/g, '').replace(/([&%#_$])/g, '\\$1');
+            return `@${BIB_TYPES[d.kind] || 'misc'}{${key},\n${Object.entries(f).filter(([, v]) => v).map(([k, v]) => `  ${k} = {${texEsc(k, v)}}`).join(',\n')}\n}`;
         }).join('\n\n') + '\n';
     }
     function toRis(refs) {
         return refs.map(i => {
             const d = i.data || {}, L = [['TY', RIS_TYPES[d.kind] || 'GEN'], ['TI', i.title]];
-            creatorsOf(i).forEach(c => L.push([c.role === 'dir' ? 'ED' : 'AU', [c.last, c.first].filter(Boolean).join(', ')]));
-            const [sp, ep] = String(d.pages || '').split(/[–-]/);
+            creatorsOf(i).forEach(c => L.push([{dir: 'ED', trad: 'A4', editeur: 'A3'}[c.role] || 'AU', [c.last, c.first].filter(Boolean).join(', ')]));
+            const [sp, ep] = String(d.pages || '').split(/\s*[–-]+\s*/);
             [['PY', year(i)], ['T2', d.container], ['PB', d.publisher], ['CY', d.place], ['VL', d.volume], ['IS', d.issue], ['SP', sp], ['EP', ep], ['SN', d.isbn], ['DO', d.doi], ['UR', d.url], ['LA', d.language], ['AB', d.abstract], ['AV', d.archive], ['CN', d.call_number]].forEach(([k, v]) => { if (v) L.push([k, v]); });
             (i.tags || []).forEach(t => L.push(['KW', t]));
             L.push(['ER', '']);
@@ -116,7 +120,7 @@
     const descendants = id => { const out = [id]; kids(id).forEach(k => out.push(...descendants(Number(k.id)))); return out; };
     const pathOf = id => { const out = []; let f = P.fById.get(id), guard = 0; while (f && guard++ < 200) { out.unshift(f); f = f.parent_id ? P.fById.get(Number(f.parent_id)) : null; } return out; };
     const live = () => P.items.filter(i => !Number(i.trashed));
-    const dateKey = i => { const d = i.data || {}; const v = i.type === 'task' ? d.due : i.type === 'reference' ? (d.date || d.year) : d.date; const m = String(v || '').match(/(\d{3,4})(?:-(\d{2})(?:-(\d{2}))?)?/); return m ? m[1].padStart(4, '0') + (m[2] || '00') + (m[3] || '00') : ''; };
+    const dateKey = i => { const d = i.data || {}; const v = i.type === 'task' ? d.due : i.type === 'reference' ? (d.date || d.year) : i.type === 'person' ? d.dates : d.date; const m = String(v || '').match(/(\d{3,4})(?:-(\d{2})(?:-(\d{2}))?)?/); return m ? m[1].padStart(4, '0') + (m[2] || '00') + (m[3] || '00') : ''; };
 
     /* ═══════════ Les projets ═══════════ */
     ext.atelier = async token => {
@@ -182,7 +186,7 @@
 
     /* ═══════════ Un projet ouvert : dossiers | éléments | détail ═══════════ */
     const SPECIAL = [['overview', '📊', 'Vue d’ensemble'], ['all', '🗂️', 'Tout le projet'], ['starred', '⭐', 'Favoris'], ['unfiled', '📥', 'Non classés'], ['tasks', '✅', 'Tâches'], ['timeline', '🕰️', 'Chronologie'], ['people', '👥', 'Personnes'], ['map', '🗺️', 'Carte'], ['biblio', '📚', 'Bibliographie'], ['trash', '🗑️', 'Corbeille']];
-    const reload = async (keepScroll = true) => { const v = st(); await load(v.project); renderProject(S().workspaceToken, keepScroll); };
+    const reload = async (keepScroll = true) => { const v = st(), pid = v.project; await load(pid); if (S().module !== 'enquetes' || S().enquetesTab !== 'atelier' || st().project !== pid) return; renderProject(S().workspaceToken, keepScroll); };
     function nodeItems(node) {
         const v = st();
         let items = node === 'trash' ? P.items.filter(i => Number(i.trashed)) : live();
@@ -207,6 +211,7 @@
         const scroll = keepScroll ? [...ws.querySelectorAll('[data-at-scroll]')].map(el => el.scrollTop) : [];
         if (typeof v.node === 'number' && !P.fById.has(v.node)) v.node = 'all';
         v.sel = v.sel.filter(id => P.byId.has(id));
+        if (typeof v.node === 'number' || ['all', 'starred', 'unfiled', 'trash'].includes(v.node)) { const visible = new Set(nodeItems(v.node).map(i => Number(i.id))); v.sel = v.sel.filter(id => visible.has(id)); }
         const target = Number(p.target_words), words = Number(p.words);
         // compte des éléments par dossier (directs)
         const counts = new Map(); live().forEach(i => i.folders.forEach(f => counts.set(f, (counts.get(f) || 0) + 1)));
@@ -287,17 +292,17 @@
             const wc = t => (String(t || '').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length;
             return `<h3 class="h-at-ftitle">📊 Vue d’ensemble</h3>
                 ${p.description ? `<div class="h-at-problem"><span class="section-label">Problématique</span><p>${nl(p.description)}</p></div>` : ''}
-                <div class="h-at-stats">${byType.map(([k, c]) => `<button type="button" class="h-at-stat" data-at-typejump="${k}"><span>${TYPES[k][0]}</span><b>${fmt(c)}</b><small>${esc(TYPES[k][1])}${c > 1 && !/s$/.test(TYPES[k][1]) ? 's' : ''}</small></button>`).join('') || '<p class="muted">Le projet est vide : choisis un dossier à gauche, puis « + Ajouter ».</p>'}</div>
+                <div class="h-at-stats">${byType.map(([k, c]) => `<button type="button" class="h-at-stat" data-at-typejump="${k}"><span>${TYPES[k][0]}</span><b>${fmt(c)}</b><small>${esc(c > 1 ? (TYPE_PLURALS[k] || TYPES[k][1]) : TYPES[k][1])}</small></button>`).join('') || '<p class="muted">Le projet est vide : choisis un dossier à gauche, puis « + Ajouter ».</p>'}</div>
                 ${days !== null ? `<p class="${days < 0 ? 'h-at-late' : ''}">📆 ${days < 0 ? `Date de rendu dépassée de ${plural(-days, 'jour', 'jours')}` : `Rendu le ${new Date(p.deadline + 'T12:00:00').toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'})} : encore ${plural(days, 'jour', 'jours')}`}${Number(p.target_words) && days > 0 ? ` · ${fmt(Math.max(0, Math.ceil((Number(p.target_words) - Number(p.words)) / days)))} mots par jour pour tenir l’objectif` : ''}</p>` : ''}
                 <div class="h-at-cols">
                 ${refs.length ? `<section><h4>📖 Lectures</h4>${reads.map(([k, c]) => `<div class="h-at-bar"><span>${esc(READ[k])}</span><b style="width:${refs.length ? Math.round(100 * c / refs.length) : 0}%"></b><em>${fmt(c)}</em></div>`).join('')}<small class="muted">${plural(refs.length, 'référence', 'références')}</small></section>` : ''}
                 ${drafts.length ? `<section><h4>✍️ Brouillons</h4>${drafts.map(d => { const w = wc(d.data.text), t = Number(d.data.target); return `<button type="button" class="h-at-line" data-at-pick="${d.id}">${esc(d.title)} <small class="muted">${fmt(w)}${t ? ' / ' + fmt(t) : ''} mots · ${esc(STAGES[d.data.stage] || '')}</small></button>`; }).join('')}</section>` : ''}
-                ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < new Date().toISOString().slice(0, 10) ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">Toutes les tâches (${fmt(tasks.length)})</button>` : ''}</section>` : ''}
+                ${tasks.length ? `<section><h4>✅ À faire</h4>${tasks.slice(0, 8).map(t => `<label class="checkbox-line h-at-task ${t.data.due && t.data.due < todayIso() ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}"> ${esc(t.title)}${t.data.due ? ` <small>${new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR')}</small>` : ''}</label>`).join('')}${tasks.length > 8 ? `<button type="button" class="link-button" data-at-go="tasks">Toutes les tâches (${fmt(tasks.length)})</button>` : ''}</section>` : ''}
                 ${recent.length ? `<section><h4>🕘 Derniers changements</h4>${recent.map(i => `<button type="button" class="h-at-line" data-at-pick="${i.id}">${TYPES[i.type][0]} ${esc(i.title)}</button>`).join('')}</section>` : ''}</div>`;
         }
         if (node === 'tasks') {
             const tasks = items.filter(i => i.type === 'task').sort((a, b) => Number(a.data.done) - Number(b.data.done) || String(a.data.due || '9').localeCompare(String(b.data.due || '9')));
-            const today = new Date().toISOString().slice(0, 10);
+            const today = todayIso();
             return `<h3 class="h-at-ftitle">✅ Tâches</h3><div class="h-at-toolbar"><button type="button" class="button small" data-at-add="task">+ Tâche</button></div>
                 ${tasks.map(t => `<div class="h-at-taskrow ${Number(t.data.done) ? 'is-done' : ''} ${!Number(t.data.done) && t.data.due && t.data.due < today ? 'h-at-late' : ''}"><input type="checkbox" data-at-taskdone="${t.id}" ${Number(t.data.done) ? 'checked' : ''}><button type="button" class="link-button" data-at-pick="${t.id}">${esc(t.title)}</button>
                     <small class="muted">${[t.data.priority === 'haute' ? '🔴 haute' : t.data.priority === 'basse' ? 'basse' : '', t.data.due ? 'pour le ' + new Date(t.data.due + 'T12:00:00').toLocaleDateString('fr-FR') : '', t.folders.map(f => P.fById.get(f)?.name).filter(Boolean).join(', ')].filter(Boolean).join(' · ')}</small></div>`).join('') || empty('Aucune tâche.')}`;
@@ -323,7 +328,7 @@
                 ${pts.length ? `<ul class="h-at-maplist">${items.filter(i => i.data?.place?.text).map(i => `<li><button type="button" class="link-button" data-at-pick="${i.id}">${TYPES[i.type][0]} ${esc(i.title)}</button> <small class="muted">${esc(i.data.place.text)}</small></li>`).join('')}</ul>` : ''}`;
         }
         if (node === 'biblio') {
-            const v = st(), scope = v.biblioScope || 0;
+            const v = st(), scope = P.fById.has(v.biblioScope) ? v.biblioScope : 0;
             const set = scope ? new Set(descendants(scope)) : null;
             const refs = items.filter(i => i.type === 'reference' && (!set || i.folders.some(f => set.has(f))));
             const sorter = (a, b) => (firstAuthor(a) || a.title).localeCompare(firstAuthor(b) || b.title, 'fr', {sensitivity: 'base'}) || year(a).localeCompare(year(b));
@@ -410,7 +415,7 @@
                     ${inp('language', 'Langue', d.language)}${area('abstract', 'Résumé', d.abstract, 3)}`;
                 break;
             case 'quote': fields = `${area('text', 'Citation', d.text, 5, 'span-2', 'Le texte exact, tel qu’il est écrit')}
-                    <label class="span-2">Tirée de<select name="source_id"><option value="">— aucune référence —</option>${live().filter(x => x.type === 'reference').sort((a, b) => (firstAuthor(a) || a.title).localeCompare(firstAuthor(b) || b.title, 'fr')).map(x => `<option value="${x.id}" ${Number(d.source_id) === Number(x.id) ? 'selected' : ''}>${esc(shortCite(x) + ' — ' + x.title.slice(0, 80))}</option>`).join('')}</select></label>
+                    <label class="span-2">Tirée de<select name="source_id"><option value="">— aucune référence —</option>${P.items.filter(x => x.type === 'reference' && (!Number(x.trashed) || Number(x.id) === Number(d.source_id))).sort((a, b) => (firstAuthor(a) || a.title).localeCompare(firstAuthor(b) || b.title, 'fr')).map(x => `<option value="${x.id}" ${Number(d.source_id) === Number(x.id) ? 'selected' : ''}>${esc(shortCite(x) + ' — ' + x.title.slice(0, 80))}</option>`).join('')}</select></label>
                     ${inp('page', 'Page, folio', d.page, 'placeholder="p. 12, f° 3 v°"')}${inp('lang', 'Langue', d.lang)}${area('translation', 'Traduction', d.translation, 2)}
                     <label class="span-2">Titre <small>(facultatif : sinon le début de la citation)</small><input name="title" value="${esc(title)}"></label>`; break;
             case 'media': fields = `<label class="span-2">Titre<input name="title" required value="${esc(title)}" placeholder="Vue d’optique : la place Saint-Marc à Venise"></label>
@@ -433,6 +438,7 @@
             default: fields = `<label class="span-2">Titre <small>(facultatif)</small><input name="title" value="${esc(title)}"></label>${area('text', 'Note', d.text, 10)}`;
         }
         const folderIds = item ? item.folders : (preset.folders || (typeof v.node === 'number' ? [v.node] : []));
+        let savedId = 0; // si l'envoi d'un fichier échoue après l'enregistrement, réessayer ne crée pas de doublon
         dialog({eyebrow: (isNew ? 'AJOUTER · ' : 'MODIFIER · ') + TYPES[type][1].toUpperCase(), title: isNew ? `${TYPES[type][0]} ${TYPES[type][1]}` : item.title, wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid">${fields}
                 ${type === 'note' ? '' : area('notes', 'Notes', d.notes, 3, 'span-2', 'Ce que j’en pense, comment je vais m’en servir…')}
@@ -465,10 +471,11 @@
                     draft: () => Object.assign(data, {text: val('text'), target: Number(val('target')) || 0, stage: val('stage')}),
                     note: () => Object.assign(data, {text: val('text')}),
                 }[type] || (() => {}))();
-                const saved = await post('save_atelier_item', {id: item?.id || 0, project_id: P.project.id, type, title: val('title'), data, tags: val('tags').split(',').map(t => t.trim()).filter(Boolean),
+                const saved = await post('save_atelier_item', {id: savedId || item?.id || 0, project_id: P.project.id, type, title: val('title'), data, tags: val('tags').split(',').map(t => t.trim()).filter(Boolean),
                     folder_ids: [...(f('folders')?.selectedOptions || [])].map(o => Number(o.value)), starred: item ? Number(item.starred) : 0});
-                if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'atelier_item', saved.result.id);
-                v.sel = [Number(saved.result.id)];
+                savedId = Number(saved.result.id);
+                if (ext.uploadMediaEditor) { try { await ext.uploadMediaEditor(form, 'atelier_item', savedId); } catch (error) { toast('Enregistré, mais un fichier n’a pas pu être ajouté : ' + error.message, 'error'); } }
+                v.sel = [savedId];
                 toast(isNew ? 'Ajouté.' : 'Enregistré.');
                 await reload();
             },
@@ -527,7 +534,7 @@
             if (i.type === 'draft') return `\n${d.text || ''}\n`;
             if (i.type === 'note') return `\n> 📝 ${String(d.text || '').replace(/\n/g, '\n> ')}\n`;
             if (i.type === 'quote') { const s = d.source_id ? P.byId.get(Number(d.source_id)) : null; return `\n> « ${String(d.text || '').replace(/\n/g, '\n> ')} »${s ? `\n> — ${cite(s, false)}${d.page ? ', ' + d.page : ''}` : ''}\n`; }
-            if (i.type === 'reference') return `- ${cite(i, false).replace(/<\/?i>/g, '*')}`;
+            if (i.type === 'reference') return `- ${cite(i, 'md')}`;
             return `- ${TYPES[i.type][0]} ${i.title}${d.notes ? ' — ' + d.notes.replace(/\n/g, ' ') : ''}`;
         };
         const walk = (parent, depth) => kids(parent).forEach(f => {
@@ -612,7 +619,7 @@
             if (t.matches('[data-at-q]')) { v.q = t.value.trim(); if (['overview', 'timeline', 'people', 'map', 'biblio', 'tasks'].includes(v.node)) v.node = 'all'; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-biblioscope]')) { v.biblioScope = Number(t.value) || 0; return renderProject(S().workspaceToken, true); }
             if (t.matches('[data-at-taskdone]')) { const i = P.byId.get(Number(t.dataset.atTaskdone)); return saveData(i, {done: t.checked ? 1 : 0}); }
-            if (t.matches('[data-at-bulkfolder]') && t.value) { await act('add', v.sel, {folder_id: Number(t.value)}); toast('Rangé.'); return; }
+            if (t.matches('[data-at-bulkfolder]') && t.value) { if (await act('add', v.sel, {folder_id: Number(t.value)})) toast('Rangé.'); return; }
             if (t.matches('[data-at-file]') && t.value) return act('add', v.sel, {folder_id: Number(t.value)});
             if (t.matches('[data-at-addtag]') && t.value.trim()) return act('tag', v.sel, {tag: t.value.trim()});
             if (t.matches('[data-at-relq]') && t.value) { const m = t.value.match(/#(\d+)$/); if (!m) return; const i = P.byId.get(v.sel[0]); return saveData(i, {related: [...new Set([...(i.data.related || []), Number(m[1])])]}); }
@@ -642,12 +649,11 @@
             const tg = targetOf(e); if (!tg || !drag) return; e.preventDefault();
             const id = tg.dataset.atFolderDrop || tg.dataset.atGo, d = drag; drag = null;
             if (d.folder) { try { await post('save_atelier_folder', {id: d.folder, parent_id: /^\d+$/.test(id || '') ? Number(id) : 0}); if (/^\d+$/.test(id || '')) delete v.closed[Number(id)]; await reload(); } catch (error) { toast(error.message, 'error'); } return; }
-            if (tg.dataset.atDrop === 'trash') { await act('trash', d.items); v.sel = []; return renderProject(S().workspaceToken, true); }
+            if (tg.dataset.atDrop === 'trash') { if (await act('trash', d.items)) { v.sel = []; renderProject(S().workspaceToken, true); } return; }
             if (tg.dataset.atDrop === 'starred') return act('star', d.items);
-            if (tg.dataset.atDrop === 'unfiled') return;
+            if (tg.dataset.atDrop === 'unfiled') { if (await act('unfile', d.items)) toast('Sorti de tous les dossiers (« Non classés »).'); return; }
             const folder = Number(id), moving = typeof v.node === 'number' && v.node !== folder && !e.altKey;
-            await act(moving ? 'move' : 'add', d.items, {folder_id: folder, from: moving ? v.node : 0});
-            toast(`${moving ? 'Déplacé' : 'Rangé'} dans « ${P.fById.get(folder)?.name} ».`);
+            if (await act(moving ? 'move' : 'add', d.items, {folder_id: folder, from: moving ? v.node : 0, from_deep: moving && v.deep ? 1 : 0})) toast(`${moving ? 'Déplacé' : 'Rangé'} dans « ${P.fById.get(folder)?.name} ».`);
         });
     }
     async function saveData(i, patch) {

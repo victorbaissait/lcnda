@@ -144,12 +144,14 @@ function save_atelier_folder(PDO $pdo, array $data): array
         $f = atelier_folder_row($pdo, $id);
         $name = array_key_exists('name', $data) ? mb_substr(safe_text($data['name']), 0, 200) : (string) $f['name'];
         if ($name === '') { throw new RuntimeException('Donne un nom au dossier.'); }
-        $parent = array_key_exists('parent_id', $data) ? $parent : ($f['parent_id'] !== null ? (int) $f['parent_id'] : null);
+        $oldParent = $f['parent_id'] !== null ? (int) $f['parent_id'] : null;
+        $parent = array_key_exists('parent_id', $data) ? $parent : $oldParent;
         $pdo->prepare('UPDATE atelier_folders SET name=?, parent_id=?, icon=?, color=?, notes=? WHERE id=?')->execute([$name, $parent,
             array_key_exists('icon', $data) ? mb_substr(safe_text($data['icon']), 0, 16) : $f['icon'],
             array_key_exists('color', $data) ? (preg_match('/^#[0-9a-f]{6}$/i', (string) $data['color']) ? (string) $data['color'] : '') : $f['color'],
             array_key_exists('notes', $data) ? h_long($data, 'notes', 40000) : $f['notes'], $id]);
-        if (array_key_exists('parent_id', $data) || isset($data['before'])) { atelier_place_folder($pdo, $id, $projectId, $parent, safe_int($data['before'] ?? 0)); }
+        // rangé de nouveau seulement s'il change de dossier parent ou qu'on le monte / descend (renommer garde sa place)
+        if ($parent !== $oldParent || isset($data['before'])) { atelier_place_folder($pdo, $id, $projectId, $parent, safe_int($data['before'] ?? 0)); }
     } else {
         $name = mb_substr(safe_text($data['name'] ?? ''), 0, 200);
         if ($name === '') { throw new RuntimeException('Donne un nom au dossier.'); }
@@ -303,13 +305,20 @@ function atelier_items_action(PDO $pdo, array $data): array
     if ($folder && (int) atelier_folder_row($pdo, $folder)['project_id'] !== $projectId) { throw new RuntimeException('Ce dossier n’est pas dans ce projet.'); }
     $action = (string) ($data['action'] ?? '');
     switch ($action) {
-        case 'move': $from = safe_int($data['from'] ?? 0); if ($from) { $pdo->prepare("DELETE FROM atelier_item_folders WHERE folder_id=? AND item_id IN ($in)")->execute([$from]); }
+        case 'move': $from = safe_int($data['from'] ?? 0);
+            if ($from && (int) atelier_folder_row($pdo, $from)['project_id'] === $projectId) {
+                $froms = [$from];
+                if (!empty($data['from_deep'])) { for ($level = [$from]; $level; ) { $level = array_map('intval', $pdo->query('SELECT id FROM atelier_folders WHERE parent_id IN (' . implode(',', $level) . ')')->fetchAll(PDO::FETCH_COLUMN)); $froms = array_merge($froms, $level); } }
+                $froms = array_diff($froms, [$folder]);
+                if ($froms) { $pdo->exec('DELETE FROM atelier_item_folders WHERE folder_id IN (' . implode(',', $froms) . ") AND item_id IN ($in)"); }
+            }
             // fallthrough
         case 'add': if (!$folder) { break; }
             $ins = $pdo->prepare('INSERT OR IGNORE INTO atelier_item_folders(item_id, folder_id, position) VALUES(?,?,(SELECT COALESCE(max(position),0)+1 FROM atelier_item_folders WHERE folder_id=?))');
             foreach ($ids as $id) { $ins->execute([$id, $folder, $folder]); }
             $pdo->exec("UPDATE atelier_items SET trashed=0 WHERE id IN ($in)");
             break;
+        case 'unfile': $pdo->exec("DELETE FROM atelier_item_folders WHERE item_id IN ($in)"); break;
         case 'remove': if ($folder) { $pdo->prepare("DELETE FROM atelier_item_folders WHERE folder_id=? AND item_id IN ($in)")->execute([$folder]); } break;
         case 'trash': $pdo->exec("UPDATE atelier_items SET trashed=1, updated_at=CURRENT_TIMESTAMP WHERE id IN ($in)"); break;
         case 'restore': $pdo->exec("UPDATE atelier_items SET trashed=0, updated_at=CURRENT_TIMESTAMP WHERE id IN ($in)"); break;
@@ -359,6 +368,7 @@ function atelier_import(PDO $pdo, array $data): array
     $folder = safe_int($data['folder_id'] ?? 0);
     $text = (string) ($data['text'] ?? '');
     if (strlen($text) > 20000000) { throw new RuntimeException('Fichier trop gros.'); }
+    $text = preg_replace('/^\xEF\xBB\xBF/', '', $text) ?? $text;
     $refs = preg_match('/^\s*TY\s{2}-/m', $text) ? atelier_parse_ris($text) : atelier_parse_bibtex($text);
     if (!$refs) { throw new RuntimeException('Aucune référence reconnue : le fichier doit être au format BibTeX (.bib) ou RIS (.ris).'); }
     $n = 0;
@@ -381,18 +391,33 @@ function atelier_split_name(string $n): array
     return ['last' => (string) $last, 'first' => implode(' ', $parts)];
 }
 
+/** Texte BibTeX → texte normal : accents LaTeX ({\'e}, \`a, \c{c}…), caractères protégés, commandes de mise en forme. */
+function atelier_unlatex(string $v): string
+{
+    $acc = ["'" => "\u{0301}", '`' => "\u{0300}", '^' => "\u{0302}", '"' => "\u{0308}", '~' => "\u{0303}", 'c' => "\u{0327}", '=' => "\u{0304}", '.' => "\u{0307}", 'u' => "\u{0306}", 'v' => "\u{030C}", 'H' => "\u{030B}", 'k' => "\u{0328}", 'r' => "\u{030A}"];
+    $v = preg_replace_callback('/\\\\([\'`^"~=.]|[cuvHkr](?=[\s{]))\s*\{?\s*\\\\?([A-Za-z])\}?/', static fn($m) => class_exists('Normalizer') ? (\Normalizer::normalize($m[2] . $acc[$m[1]], \Normalizer::FORM_C) ?: $m[2]) : $m[2] . $acc[$m[1]], $v) ?? $v;
+    $v = strtr($v, ['\\oe ' => 'œ', '\\OE ' => 'Œ', '\\ae ' => 'æ', '\\oe' => 'œ', '\\OE' => 'Œ', '\\ae' => 'æ', '\\AE' => 'Æ', '\\ss' => 'ß', '\\o ' => 'ø', '\\&' => '&', '\\%' => '%', '\\_' => '_', '\\#' => '#', '\\$' => '$', '---' => '—', '--' => '–', '~' => ' ', '\\,' => ' ']);
+    $v = preg_replace('/\\\\(?:textit|emph|textbf|textsc|textrm|textsuperscript|mkbibquote|enquote)\s*/', '', $v) ?? $v;
+    return trim(preg_replace('/\s+/u', ' ', str_replace(['{', '}'], '', $v)) ?? '');
+}
+
 function atelier_parse_bibtex(string $text): array
 {
     $out = [];
-    $kinds = ['book' => 'livre', 'article' => 'article', 'incollection' => 'chapitre', 'inbook' => 'chapitre', 'phdthesis' => 'these', 'mastersthesis' => 'these', 'thesis' => 'these', 'online' => 'web', 'misc' => 'autre', 'manuscript' => 'archive', 'artwork' => 'image', 'image' => 'image', 'periodical' => 'presse'];
-    if (!preg_match_all('/@(\w+)\s*\{\s*([^,]*),/u', $text, $m, PREG_OFFSET_CAPTURE)) { return []; }
-    foreach ($m[0] as $k => $hit) {
-        $start = $hit[1] + strlen($hit[0]);
-        $depth = 1; $i = $start; $len = strlen($text);
-        while ($i < $len && $depth > 0) { $c = $text[$i]; if ($c === '{') { $depth++; } elseif ($c === '}') { $depth--; } $i++; }
-        $body = substr($text, $start, $i - $start - 1);
-        $type = strtolower($m[1][$k][0]);
+    $kinds = ['book' => 'livre', 'article' => 'article', 'incollection' => 'chapitre', 'inbook' => 'chapitre', 'inproceedings' => 'chapitre', 'conference' => 'chapitre', 'proceedings' => 'livre', 'collection' => 'livre', 'phdthesis' => 'these', 'mastersthesis' => 'these', 'thesis' => 'these', 'online' => 'web', 'misc' => 'autre', 'manuscript' => 'archive', 'artwork' => 'image', 'image' => 'image', 'periodical' => 'presse'];
+    $text = preg_replace('/^\xEF\xBB\xBF/', '', $text);
+    $len = strlen($text); $at = 0;
+    while (preg_match('/@(\w+)\s*[{(]/u', $text, $m, PREG_OFFSET_CAPTURE, $at)) {
+        $open = $m[0][1] + strlen($m[0][0]);
+        $depth = 1; $i = $open;
+        while ($i < $len && $depth > 0) { $c = $text[$i]; if ($c === '{' || $c === '(') { $depth++; } elseif ($c === '}' || $c === ')') { $depth--; } $i++; }
+        $at = $i;
+        $type = strtolower($m[1][0]);
         if (in_array($type, ['comment', 'preamble', 'string'], true)) { continue; }
+        $inner = substr($text, $open, $i - $open - 1);
+        $comma = strpos($inner, ',');
+        if ($comma === false) { continue; }
+        $body = substr($inner, $comma + 1);
         $f = [];
         $pos = 0; $blen = strlen($body);
         while (preg_match('/\G\s*,?\s*([\w-]+)\s*=\s*/u', $body, $fm, 0, $pos)) {
@@ -400,7 +425,7 @@ function atelier_parse_bibtex(string $text): array
             if ($pos < $blen && $body[$pos] === '{') { $d = 0; $j = $pos; do { if ($body[$j] === '{') { $d++; } elseif ($body[$j] === '}') { $d--; } $j++; } while ($j < $blen && $d > 0); $val = substr($body, $pos + 1, $j - $pos - 2); $pos = $j; }
             elseif ($pos < $blen && $body[$pos] === '"') { $j = $pos + 1; while ($j < $blen && ($body[$j] !== '"' || $body[$j - 1] === '\\')) { $j++; } $val = substr($body, $pos + 1, $j - $pos - 1); $pos = $j + 1; }
             else { preg_match('/\G[^,]*/', $body, $vm, 0, $pos); $val = $vm[0]; $pos += strlen($vm[0]); }
-            $f[$name] = trim(preg_replace('/\s+/u', ' ', str_replace(['{', '}', '\\&', '--'], ['', '', '&', '–'], $val)));
+            $f[$name] = atelier_unlatex($val);
         }
         $creators = [];
         foreach (['author' => 'auteur', 'editor' => 'dir', 'translator' => 'trad'] as $key => $role) {
@@ -428,6 +453,8 @@ function atelier_parse_ris(string $text): array
         match ($tag) {
             'TI', 'T1' => $cur['title'] = $val,
             'AU', 'A1' => $cur['creators'][] = atelier_split_name($val) + ['role' => 'auteur'],
+            'A4' => $cur['creators'][] = atelier_split_name($val) + ['role' => 'trad'],
+            'A3' => $cur['creators'][] = atelier_split_name($val) + ['role' => 'editeur'],
             'ED', 'A2' => $cur['creators'][] = atelier_split_name($val) + ['role' => 'dir'],
             'PY', 'Y1', 'DA' => $cur['year'] = ($cur['year'] ?? '') ?: substr($val, 0, 4),
             'T2', 'JO', 'JF', 'BT' => $cur['container'] = ($cur['container'] ?? '') ?: $val,
