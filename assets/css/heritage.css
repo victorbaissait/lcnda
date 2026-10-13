@@ -1486,3 +1486,4 @@ select[data-h-village-bgsel]{max-width:220px}
 @media (max-width: 760px) { .h-village-flow > * { grid-column:1 / -1; } }
 .h-village-memo textarea { width:100%; resize:vertical; min-height:110px; font-size:14px; }
 .h-am-host > h3 small { font-weight:400; font-size:13px; }
+.h-dp-plink { max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; vertical-align:middle; font-weight:600; }
