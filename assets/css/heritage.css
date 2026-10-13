@@ -1392,3 +1392,37 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-rt tr.is-dragging, .h-rt th.is-dragging { opacity:.45; }
 .h-rt tr.is-drop { box-shadow:inset 0 3px 0 var(--accent, #2f6f5e); }
 .h-rt th.is-drop { box-shadow:inset 3px 0 0 var(--accent, #2f6f5e); }
+
+/* Listes › Dépouillements (heritage-depouillements.js) : mêmes pages que Recueils, personnes par foyer */
+.h-dp-city { margin:22px 0 8px; }
+.h-dp-dot { display:inline-block; width:9px; height:9px; border-radius:50%; vertical-align:middle; }
+.h-dp-pageform { gap:8px 12px; }
+.h-dp-acts { display:flex; gap:6px; }
+.h-dp-acts input { width:50%; }
+.h-dp-saved { min-height:1.2em; font-size:12.5px; margin:4px 0 10px; }
+.h-dp-lines { display:flex; flex-direction:column; gap:4px; margin-bottom:12px; max-height:46vh; overflow:auto; }
+.h-dp-line { display:grid; grid-template-columns:28px 1fr auto auto; gap:6px; align-items:start; }
+.h-dp-line > span:first-child { text-align:right; font-size:12px; padding-top:7px; }
+.h-dp-line textarea { resize:vertical; min-height:32px; font-size:14px; }
+.h-dp-line.is-new textarea { border-style:dashed; }
+.h-dp-line .icon-button { width:26px; height:26px; min-width:0; padding:0; font-size:12px; }
+.h-dp-people { margin-top:16px; }
+.h-dp-peoplehead { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:8px; }
+.h-dp-peoplehead h3 { margin:0; }
+.h-dp-peoplehead span { display:flex; gap:6px; }
+.h-dp-hint { font-size:12.5px; }
+.h-dp-tablewrap { overflow:auto; max-height:70vh; border:1px solid var(--line, #ddd); border-radius:6px; }
+.h-dp-table { border-collapse:collapse; width:100%; min-width:1100px; font-size:13.5px; }
+.h-dp-table th { position:sticky; top:0; z-index:1; background:var(--surface-2, #f4f2ec); text-align:left; padding:6px 6px; font-size:12.5px; border-bottom:1px solid var(--line, #ddd); }
+.h-dp-table td { border-bottom:1px solid var(--line, #eee); padding:0; }
+.h-dp-table td input { width:100%; border:0; background:transparent; padding:6px; font-size:13.5px; min-width:0; }
+.h-dp-table td input:focus { outline:none; box-shadow:inset 0 0 0 2px var(--accent, #2f6f5e); background:var(--white, #fff); }
+.h-dp-table tr.is-draft td { background:color-mix(in srgb, var(--accent, #2f6f5e) 5%, transparent); }
+.h-dp-band td { background:color-mix(in srgb, var(--accent, #2f6f5e) 10%, transparent); font-weight:600; padding:5px 8px !important; font-size:12.5px; }
+.h-dp-fiche { white-space:nowrap; width:1%; padding:0 6px !important; }
+.h-dp-table .icon-button { width:26px; height:26px; min-width:0; padding:0; font-size:12px; }
+.h-dp-hhs { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap:12px; }
+.h-dp-hh h4 { margin:0 0 6px; }
+.h-dp-hh ul { margin:0 0 6px; padding-left:18px; }
+.h-dp-info { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap:10px 18px; }
+.h-dp-info dt { font-size:12px; color:var(--muted, #777); } .h-dp-info dd { margin:0; white-space:pre-wrap; }
