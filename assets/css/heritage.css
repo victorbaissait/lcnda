@@ -995,4 +995,7 @@ select[data-h-village-bgsel]{max-width:220px}
 .av-controls { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
 .av-controls label { display:flex; gap:6px; align-items:center; font-size:13px; }
 .av-controls .av-auto { margin-left:auto; }
+.av-rate { display:flex; gap:6px; align-items:center; font-size:13px; }
+.av-rate input[type=range] { width:150px; accent-color:var(--blue); }
+.av-rate output { min-width:48px; font-variant-numeric:tabular-nums; font-weight:700; }
 @media (max-width: 640px) { .av-controls .av-auto { margin-left:0; } .av-count { margin-left:0; } }

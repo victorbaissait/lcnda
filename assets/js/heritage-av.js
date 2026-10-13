@@ -36,6 +36,12 @@
     /** Saut de « −N s / +N s » : réglage d'Apparence (15 s par défaut). */
     const skipSeconds = () => { try { const n = Math.round(Number(JSON.parse(localStorage.getItem('genealogie-design') || '{}')?.avSkipSeconds)); return n >= 1 && n <= 3600 ? n : 15; } catch (_) { return 15; } };
     const fmtSkip = n => n >= 60 && n % 60 === 0 ? `${n / 60} min` : `${n} s`;
+    /** Vitesse : liste de valeurs courantes + curseur libre de 0,10× à 6×. */
+    const RATES = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3, 3.5, 4];
+    const RATE_MIN = 0.1, RATE_MAX = 6;
+    const cleanRate = v => { const n = Math.round(Number(v) * 100) / 100; return n >= RATE_MIN && n <= RATE_MAX ? n : 1; };
+    const fmtRate = r => r.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '×';
+    const rateOptions = r => (RATES.includes(r) ? '' : `<option value="${r}" selected>${fmtRate(r)}</option>`) + RATES.map(v => `<option value="${v}"${v === r ? ' selected' : ''}>${String(v).replace('.', ',')}×</option>`).join('');
     const loadPrefs = () => { try { return JSON.parse(localStorage.getItem(PREFS_KEY) || '{}') || {}; } catch (_) { return {}; } };
     const prefs = kind => ({q: '', sort: 'added_desc', owner: '', auto: true, rate: 1, ...(loadPrefs()[kind] || {})});
     const savePrefs = (kind, p) => { try { const all = loadPrefs(); all[kind] = {sort: p.sort, owner: p.owner, auto: p.auto, rate: p.rate}; localStorage.setItem(PREFS_KEY, JSON.stringify(all)); } catch (_) {} };
@@ -118,6 +124,7 @@
         if (token !== st.workspaceToken || st.module !== 'listes') return;
         const items = data.items || [];
         const p = prefs(kind);
+        p.rate = cleanRate(p.rate);
         const skip = skipSeconds();
         p.q = st.hAvQ?.[kind] || '';
         let view = [];
@@ -144,7 +151,7 @@
                     <button type="button" class="button small" data-av="toggle" id="av-toggle" title="Lecture / pause">▶</button>
                     <button type="button" class="button small secondary" data-av="fwd" title="Avancer de ${fmtSkip(skip)} (réglable dans Maintenance › Apparence)">+${fmtSkip(skip)}</button>
                     <button type="button" class="button small secondary" data-av="next" title="${kind === 'audio' ? 'Son' : 'Vidéo'} suivant(e)">⏭</button>
-                    <label>Vitesse <select id="av-rate">${[0.5, 0.75, 1, 1.25, 1.5, 2].map(r => `<option value="${r}"${Number(p.rate) === r ? ' selected' : ''}>${String(r).replace('.', ',')}×</option>`).join('')}</select></label>
+                    <span class="av-rate">Vitesse <select id="av-rate" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" id="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output id="av-rate-out">${fmtRate(p.rate)}</output></span>
                     <label class="av-auto"><input type="checkbox" id="av-auto"${p.auto ? ' checked' : ''}> Enchaîner ${kind === 'audio' ? 'les sons' : 'les vidéos'}</label>
                     ${kind === 'video' ? '<button type="button" class="button small secondary" data-av="size" title="Agrandir / réduire la vidéo">⤢</button>' : ''}
                     <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">✕</button>
@@ -213,7 +220,16 @@
         $('#av-sort').addEventListener('change', e => { p.sort = e.target.value; savePrefs(kind, p); draw(); });
         $('#av-owner').addEventListener('change', e => { p.owner = e.target.value; savePrefs(kind, p); draw(); });
         $('#av-auto').addEventListener('change', e => { p.auto = e.target.checked; savePrefs(kind, p); });
-        $('#av-rate').addEventListener('change', e => { p.rate = Number(e.target.value) || 1; el.playbackRate = p.rate; savePrefs(kind, p); });
+        const setRate = (v, from) => {
+            p.rate = cleanRate(v); el.playbackRate = p.rate;
+            if (from !== 'select') $('#av-rate').innerHTML = rateOptions(p.rate);
+            if (from !== 'range') $('#av-rate-range').value = p.rate;
+            $('#av-rate-out').textContent = fmtRate(p.rate);
+        };
+        $('#av-rate').addEventListener('change', e => { setRate(e.target.value, 'select'); savePrefs(kind, p); });
+        let rateTimer = 0;
+        $('#av-rate-range').addEventListener('input', e => { setRate(e.target.value, 'range'); clearTimeout(rateTimer); rateTimer = setTimeout(() => savePrefs(kind, p), 300); });
+        $('#av-rate-range').addEventListener('dblclick', () => { setRate(1); savePrefs(kind, p); });
         $('#av-body').addEventListener('click', e => {
             const play = e.target.closest('[data-av-play]');
             if (play) { const id = Number(play.dataset.avPlay); if (id === current) { el.paused ? el.play().catch(() => {}) : el.pause(); } else load(id); return; }
