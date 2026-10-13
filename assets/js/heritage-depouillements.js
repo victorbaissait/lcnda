@@ -231,7 +231,7 @@
                     <div class="h-rc-sideactions"><button type="button" class="button small secondary danger" data-dp-delpage>Supprimer la page</button></div>
                 </div></div>
             <section class="maintenance-panel h-dp-people"><header class="h-dp-peoplehead"><h3>👥 Personnes et foyers de la page ${esc(p.number)}</h3>
-                <span><button type="button" class="button small secondary" data-dp-addhh>+ Foyer</button><button type="button" class="button small" data-dp-addp>+ Personne</button></span></header>
+                <span>${(() => { const lk = isLocked(r.id, p.number); return `<button type="button" class="icon-button h-dp-lock ${lk ? 'is-locked' : ''}" data-dp-lock title="${lk ? 'Tableau verrouillé : clique pour pouvoir le modifier' : 'Verrouiller le tableau de cette page (évite les modifications par erreur)'}">${lk ? '🔒' : '🔓'}</button><button type="button" class="button small secondary" data-dp-addhh ${lk ? 'disabled' : ''}>+ Foyer</button><button type="button" class="button small" data-dp-addp ${lk ? 'disabled' : ''}>+ Personne</button>`; })()}</span></header>
                 <p class="muted h-dp-hint">Une ligne = une personne relevée, rangées par rue › numéro › foyer dans l’ordre du document. « + Foyer » propose le numéro suivant, tu peux en mettre un autre (12 bis, numéro sauté…). Sur un foyer : ✎ son numéro, 📍 son adresse, 🗑 le supprimer. Coller depuis un tableur remplit les lignes. 👤 : rattacher à une fiche.</p>
                 <div class="h-dp-tablewrap" data-dp-table></div></section>`;
         const go = n => { if (n === '' || n == null) return; st().page = String(n); st().image = 0; paint(); };
@@ -279,7 +279,8 @@
             const num = (lines[lines.length - 1]?.line_number || lines.length) + 1;
             try { const res = await post('save_archive_digest_transcription_line', {archive_digest_id: r.id, media_id: cur?.id || '', page_number: p.number, line_number: num, content: v}); D.lines.push({id: (res.result || res).id, page_number: p.number, line_number: num, content: v, media_id: cur?.id || null, zone_json: ''}); paint(); body.isConnected; A().$('[data-dp-lnew]')?.focus(); } catch (err) { toast(err.message, 'error'); }
         });
-        peopleTable(body.querySelector('[data-dp-table]'), p.number);
+        peopleTable(body.querySelector('[data-dp-table]'), p.number, isLocked(r.id, p.number));
+        body.querySelector('[data-dp-lock]').addEventListener('click', () => { setLocked(r.id, p.number, !isLocked(r.id, p.number)); toast(isLocked(r.id, p.number) ? `Tableau de la page ${p.number} verrouillé.` : 'Tableau déverrouillé : tu peux le modifier.'); paint(); });
         body.querySelector('[data-dp-addp]').addEventListener('click', () => peopleTable.add?.(false));
         body.querySelector('[data-dp-addhh]').addEventListener('click', () => peopleTable.add?.(true));
         const keys = e => {
@@ -297,7 +298,11 @@
     /** « 3 bis rue de la Seine » → {house: '3 bis', street: 'rue de la Seine'} ; l'adresse enregistrée reste le texte entier (Recherche la montre telle quelle). */
     const parseAddr = a => { a = String(a || '').trim(); let m = a.match(/^(\d+\s*(?:bis|ter|quater|[a-d])?)(?:\s*,\s*|\s+)(.+)$/i); if (m) return {house: m[1].trim(), street: m[2].trim()}; m = a.match(/^(\d+\s*(?:bis|ter|quater|[a-d])?)$/i); return m ? {house: m[1].trim(), street: ''} : {house: '', street: a}; };
     const joinAddr = (house, street) => [String(house || '').trim(), String(street || '').trim()].filter(Boolean).join(' ');
-    function peopleTable(box, pageNumber) {
+    /** Cadenas du tableau d'une page (retenu pour chaque page de chaque dépouillement). */
+    const locks = () => { try { return JSON.parse(localStorage.getItem('genealogie-dp-locks') || '{}') || {}; } catch (_) { return {}; } };
+    const isLocked = (id, page) => !!locks()[`${id}:${page}`];
+    const setLocked = (id, page, on) => { const l = locks(); if (on) l[`${id}:${page}`] = 1; else delete l[`${id}:${page}`]; try { localStorage.setItem('genealogie-dp-locks', JSON.stringify(l)); } catch (_) {} };
+    function peopleTable(box, pageNumber, locked = false) {
         const r = D.row;
         const rows = (r.people || []).filter(x => String(x.page_number || '').trim() === pageNumber);
         const draft = []; // lignes pas encore enregistrées (sans nom)
@@ -316,16 +321,16 @@
             const list = sorted(); let lastStreet = null, lastHouse = null, lastKey = null;
             const span = COLS2.length + 2;
             const FICHE_AT = COLS2.findIndex(([c]) => c === 'first_name') + 1; // la fiche juste après le prénom : visible sans faire défiler
-            box.innerHTML = `<table class="h-dp-table"><thead><tr>${COLS2.map(([k, l, w], j) => `${j === FICHE_AT ? '<th class="h-dp-fiche">Fiche</th>' : ''}<th style="width:${w}%">${esc(l)}</th>`).join('')}<th></th></tr></thead><tbody>${list.map(x => {
+            box.innerHTML = `<table class="h-dp-table ${locked ? 'is-locked' : ''}"><thead><tr>${COLS2.map(([k, l, w], j) => `${j === FICHE_AT ? '<th class="h-dp-fiche">Fiche</th>' : ''}<th style="width:${w}%">${esc(l)}</th>`).join('')}<th></th></tr></thead><tbody>${list.map(x => {
                 const i = all().indexOf(x), ad = parseAddr(x.address), k = keyOf(x); let bands = '';
                 if (ad.street.toLowerCase() !== (lastStreet ?? '').toLowerCase() || lastStreet === null) { if (ad.street || lastStreet !== null) bands += `<tr class="h-dp-band is-street"><td colspan="${span}">🛣️ ${ad.street ? esc(ad.street) : '<span class="muted">Rue non précisée</span>'}</td></tr>`; lastStreet = ad.street; lastHouse = null; }
                 if (ad.house !== lastHouse) { if (ad.house) bands += `<tr class="h-dp-band is-house"><td colspan="${span}">🏠 n° ${esc(ad.house)}${ad.street ? ` <small class="muted">${esc(ad.street)}</small>` : ''}</td></tr>`; lastHouse = ad.house; lastKey = null; }
                 if (k !== lastKey) { const n = list.filter(y => keyOf(y) === k).length;
                     bands += `<tr class="h-dp-band is-hh" data-dp-hh="${esc(k)}"><td colspan="${span}"><span>👪 ${k ? `Foyer ${esc(k)}` : 'Sans n° de foyer'} <small class="muted">${plural(n, 'personne', 'personnes')}</small></span>
-                        <span class="h-dp-hhtools"><button type="button" class="link-button" data-dp-hhadd>+ personne</button><button type="button" class="icon-button" data-dp-hhren title="Changer le numéro du foyer (toutes ses personnes suivent)">✎</button><button type="button" class="icon-button" data-dp-hhaddr title="Adresse du foyer (n° et rue) pour toutes ses personnes">📍</button><button type="button" class="icon-button danger" data-dp-hhdel title="Supprimer le foyer et ses personnes relevées">🗑</button></span></td></tr>`; lastKey = k; }
-                const fiche = `<td class="h-dp-fiche">${x.person_id ? `<button type="button" class="link-button h-dp-plink" data-open-person="${x.person_id}" title="Ouvrir la fiche de ${esc(x.person_name || '')}">👤 ${esc(x.person_name || 'la fiche')}</button><button type="button" class="icon-button" data-dp-unp title="Ne plus rattacher à la fiche">✕</button>` : `<button type="button" class="icon-button" data-dp-p title="Rattacher à une fiche existante, ou créer la fiche">👤</button>`}</td>`;
-                return `${bands}<tr data-dp-i="${i}" class="${x.id ? '' : 'is-draft'}">${COLS2.map(([c], j) => `${j === FICHE_AT ? fiche : ''}<td><input data-dp-k="${c}" value="${esc(val(x, c))}"></td>`).join('')}
-                    <td><button type="button" class="icon-button danger" data-dp-del title="Supprimer cette personne relevée">🗑</button></td></tr>`; }).join('') || `<tr><td colspan="${span}" class="muted">Personne relevée sur cette page : « + Foyer », puis le nom ; ou colle des lignes depuis un tableur.</td></tr>`}</tbody></table>`;
+                        <span class="h-dp-hhtools" ${locked ? 'hidden' : ''}><button type="button" class="link-button" data-dp-hhadd>+ personne</button><button type="button" class="icon-button" data-dp-hhren title="Changer le numéro du foyer (toutes ses personnes suivent)">✎</button><button type="button" class="icon-button" data-dp-hhaddr title="Adresse du foyer (n° et rue) pour toutes ses personnes">📍</button><button type="button" class="icon-button danger" data-dp-hhdel title="Supprimer le foyer et ses personnes relevées">🗑</button></span></td></tr>`; lastKey = k; }
+                const fiche = `<td class="h-dp-fiche">${x.person_id ? `<button type="button" class="link-button h-dp-plink" data-open-person="${x.person_id}" title="Ouvrir la fiche de ${esc(x.person_name || '')}">👤 ${esc(x.person_name || 'la fiche')}</button>${locked ? '' : '<button type="button" class="icon-button" data-dp-unp title="Ne plus rattacher à la fiche">✕</button>'}` : locked ? '' : `<button type="button" class="icon-button" data-dp-p title="Rattacher à une fiche existante, ou créer la fiche">👤</button>`}</td>`;
+                return `${bands}<tr data-dp-i="${i}" class="${x.id ? '' : 'is-draft'}">${COLS2.map(([c], j) => `${j === FICHE_AT ? fiche : ''}<td><input data-dp-k="${c}" value="${esc(val(x, c))}" ${locked ? 'readonly tabindex="-1"' : ''}></td>`).join('')}
+                    <td>${locked ? '' : '<button type="button" class="icon-button danger" data-dp-del title="Supprimer cette personne relevée">🗑</button>'}</td></tr>`; }).join('') || `<tr><td colspan="${span}" class="muted">Personne relevée sur cette page : « + Foyer », puis le nom ; ou colle des lignes depuis un tableur.</td></tr>`}</tbody></table>`;
             bind();
             if (focus) box.querySelector(focus)?.focus();
             else if (keep?.x) { const inp = box.querySelector(`tr[data-dp-i="${all().indexOf(keep.x)}"] [data-dp-k="${keep.k}"]`); if (inp) { inp.focus(); try { inp.setSelectionRange(keep.a, keep.b); } catch (_) {} } }
@@ -343,6 +348,7 @@
         const timers = new Map();
         const members = k => all().filter(x => keyOf(x) === k);
         function bind() {
+            if (locked) return; // verrouillé : rien ne se modifie (les liens vers les fiches restent cliquables)
             box.querySelectorAll('tr[data-dp-i]').forEach(tr => {
                 const x = all()[Number(tr.dataset.dpI)];
                 tr.querySelectorAll('[data-dp-k]').forEach(inp => {
@@ -442,7 +448,7 @@
                 });
             });
         }
-        peopleTable.add = isHh => isHh ? addHousehold() : addTo(keyOf(sorted().pop() || {}));
+        peopleTable.add = isHh => locked ? null : isHh ? addHousehold() : addTo(keyOf(sorted().pop() || {}));
         render();
     }
 

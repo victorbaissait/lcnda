@@ -55,6 +55,8 @@ function save_archive_digest_page(PDO $pdo, array $data): array
         usort($pages, static fn($a, $b) => strnatcasecmp((string) ($a['number'] ?? ''), (string) ($b['number'] ?? '')));
     }
     $pdo->prepare('UPDATE archive_digest_entries SET pages_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode(array_values($pages), JSON_UNESCAPED_UNICODE), $entryId]);
+    if (!empty($data['delete'])) { log_change($pdo, 'archive_digest', $entryId, 'delete-page', 'Page ' . $old . ' supprimée du dépouillement', ['page' => $old, 'pages_json' => $json], null); }
+    elseif ($old !== '' && $number !== $old) { log_change($pdo, 'archive_digest', $entryId, 'update-page', 'Page ' . $old . ' renumérotée ' . $number, ['page' => $old], ['page' => $number]); }
     return ['pages' => array_values($pages)];
 }
 
@@ -78,6 +80,9 @@ function save_archive_digest_household(PDO $pdo, array $data): array
     $where = 'archive_digest_id=? AND page_number=? AND COALESCE(household_key,\'\')=?';
     $args = [$id, $page, $old];
     if (!empty($data['delete'])) {
+        // une trace par personne retirée (Historique : on peut retrouver ce qui a été effacé)
+        $b = $pdo->prepare("SELECT * FROM archive_digest_people WHERE $where"); $b->execute($args);
+        foreach ($b->fetchAll() as $row) { log_change($pdo, 'archive_digest', $id, 'delete-member', 'Foyer ' . ($old !== '' ? $old : 'sans numéro') . ' supprimé (page ' . $page . ') : ' . trim($row['first_name'] . ' ' . $row['last_name']), $row, null); }
         $s = $pdo->prepare("DELETE FROM archive_digest_people WHERE $where"); $s->execute($args);
         return ['deleted' => $s->rowCount()];
     }

@@ -97,10 +97,21 @@ function addr_digest_insee(PDO $pdo, int $digestId): string
 /** Les dépouillements de la commune (lieu avec ce code INSEE, ou même nom de commune). */
 function addr_commune_digests(PDO $pdo, string $insee, string $name): array
 {
-    $s = $pdo->prepare("SELECT a.id, a.year_text, a.record_type, a.archive_reference FROM archive_digest_entries a LEFT JOIN places p ON p.id=a.place_id
+    // sans code INSEE : même nom de commune ET même département (numéro « 77 », nom « Seine-et-Marne », ou non précisé)
+    $dept = addr_dept($insee);
+    $c = $pdo->prepare("SELECT county FROM places WHERE admin4_code=? AND COALESCE(county,'')<>'' LIMIT 1"); $c->execute([$insee]);
+    $county = addr_street_key((string) $c->fetchColumn());
+    $s = $pdo->prepare("SELECT a.id, a.year_text, a.record_type, a.archive_reference, a.department, p.admin4_code FROM archive_digest_entries a LEFT JOIN places p ON p.id=a.place_id
         WHERE p.admin4_code=? OR (COALESCE(p.admin4_code,'')='' AND ? <> '' AND (lower(a.city_name)=lower(?) OR lower(COALESCE(p.name,''))=lower(?))) ORDER BY a.year_text, a.id");
     $s->execute([$insee, $name, $name, $name]);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'year' => preg_match('/(1[5-9]\d\d|20\d\d)/', (string) $r['year_text'], $m) ? (int) $m[1] : 0, 'year_text' => (string) $r['year_text'], 'record_type' => (string) $r['record_type'], 'reference' => (string) $r['archive_reference']], $s->fetchAll());
+    $rows = array_filter($s->fetchAll(), static function ($r) use ($insee, $dept, $county) {
+        if ((string) $r['admin4_code'] === $insee) { return true; }
+        $d = trim((string) $r['department']);
+        if ($d === '') { return true; }
+        if (preg_match('/\b(\d{2,3}|2A|2B)\b/i', $d, $m)) { return strtoupper($m[1]) === $dept || str_starts_with(strtoupper($m[1]), $dept); }
+        return $county === '' || addr_street_key($d) === $county;
+    });
+    return array_values(array_map(static fn($r) => ['id' => (int) $r['id'], 'year' => preg_match('/(1[5-9]\d\d|20\d\d)/', (string) $r['year_text'], $m) ? (int) $m[1] : 0, 'year_text' => (string) $r['year_text'], 'record_type' => (string) $r['record_type'], 'reference' => (string) $r['archive_reference']], $rows));
 }
 
 /** Toutes les adresses relevées dans la commune : une par (rue, numéro), avec les foyers de chaque année. */
@@ -319,7 +330,11 @@ function save_addr_street(PDO $pdo, array $data): array
     $old = mb_substr(safe_text((string) ($data['old_name'] ?? '')), 0, 200);
     $key = addr_street_key($old);
     if ($insee === '' || $key === '') { throw new RuntimeException('Indique l’ancien nom de la rue.'); }
-    if (!empty($data['delete'])) { $pdo->prepare('DELETE FROM addr_streets WHERE insee=? AND old_key=?')->execute([$insee, $key]); return ['deleted' => true]; }
+    if (!empty($data['delete'])) {
+        $pdo->prepare('DELETE FROM addr_streets WHERE insee=? AND old_key=?')->execute([$insee, $key]);
+        $pdo->prepare("DELETE FROM addr_points WHERE insee=? AND street_key=? AND source='ban'")->execute([$insee, $key]); // placés grâce à ce nom : recalculés
+        return ['deleted' => true] + addr_auto_place($pdo, ['insee' => $insee]);
+    }
     $status = in_array($data['status'] ?? '', ['renamed', 'gone', 'same'], true) ? $data['status'] : 'renamed';
     $path = [];
     foreach (array_slice(is_array($data['path'] ?? null) ? $data['path'] : [], 0, 500) as $pt) { if (is_array($pt) && isset($pt[0], $pt[1]) && is_numeric($pt[0]) && is_numeric($pt[1])) { $path[] = [round((float) $pt[0], 7), round((float) $pt[1], 7)]; } }

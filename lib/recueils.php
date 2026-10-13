@@ -169,8 +169,10 @@ function delete_recueil(PDO $pdo, array $data): array
     $deleted = 0;
     if (!empty($data['delete_media']) && $mediaIds) {
         foreach ($mediaIds as $mid) {
-            $used = $pdo->prepare('SELECT (SELECT COUNT(*) FROM media_links WHERE media_id=?) + (SELECT COUNT(*) FROM family_collection_media WHERE media_id=?) + (SELECT COUNT(*) FROM recueil_images WHERE media_id=?)');
-            $used->execute([$mid, $mid, $mid]);
+            // servie ailleurs : fiche, bloc, autre recueil (photo ou couverture), enquête, dépouillement
+            $used = $pdo->prepare('SELECT (SELECT COUNT(*) FROM media_links WHERE media_id=?) + (SELECT COUNT(*) FROM family_collection_media WHERE media_id=?) + (SELECT COUNT(*) FROM recueil_images WHERE media_id=?)
+                + (SELECT COUNT(*) FROM investigation_media WHERE media_id=?) + (SELECT COUNT(*) FROM archive_digest_media WHERE media_id=?) + (SELECT COUNT(*) FROM recueils WHERE cover_media_id=?)');
+            $used->execute([$mid, $mid, $mid, $mid, $mid, $mid]);
             if ((int) $used->fetchColumn() > 0) { continue; } // la photo sert ailleurs : on la garde
             $f = $pdo->prepare('SELECT filename, thumbnail FROM media WHERE id=?'); $f->execute([$mid]); $m = $f->fetch();
             $pdo->prepare('DELETE FROM media WHERE id=?')->execute([$mid]);
@@ -342,7 +344,7 @@ function delete_recueil_page(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0); $rid = recueil_page_owner($pdo, $id);
     $pdo->prepare('UPDATE recueil_images SET page_id=NULL WHERE page_id=?')->execute([$id]);
-    // Un rattachement « de telle page à telle page » garde sa plage : il se resserre sur la page qui reste
+    // Un rattachement « de telle page à telle page » garde sa plage : il se resserre sur les pages qui restent.
     // Un rattachement qui ne visait que cette page (une page, une ligne de son tableau) n'a plus d'objet
     $pdo->prepare('DELETE FROM recueil_links WHERE page_from=? AND (page_to=? OR page_to IS NULL)')->execute([$id, $id]);
     $pdo->prepare('UPDATE recueil_links SET page_from=page_to, page_to=NULL WHERE page_from=?')->execute([$id]);
