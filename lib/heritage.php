@@ -657,7 +657,10 @@ function save_field_trip(PDO $pdo, array $data): array
         $id = (int) $pdo->lastInsertId();
         log_change($pdo, 'field_trip', $id, 'create', 'Circuit ajouté : ' . $title);
     }
-    if (!empty($data['generate'])) { generate_field_trip_stops($pdo, $id); }
+    if (!empty($data['generate'])) {
+        // le circuit (et les étapes ajoutées à la main) est gardé même si l'app ne trouve aucun lieu à proposer
+        try { generate_field_trip_stops($pdo, $id); } catch (RuntimeException $e) { return ['id' => $id, 'warning' => $e->getMessage()]; }
+    }
     return ['id' => $id];
 }
 
@@ -798,6 +801,13 @@ function generate_field_trip_stops(PDO $pdo, int $tripId): array
     };
     $idList = array_keys($ids);
     $departments = [];
+    // communes où la famille a vécu sans lieu plus précis : une étape « commune » si rien d'autre n'y est prévu
+    $communes = [];
+    $commune = static function (array $base, string $line) use (&$communes): void {
+        $k = mb_strtolower($base['place_text'] . '|' . $base['county']);
+        if (!isset($communes[$k])) { $communes[$k] = ['kind' => 'autre', 'title' => 'Commune de ' . $base['place_text'], 'address' => ''] + $base + ['lines' => [], 'photos' => ['Le village : panneau d’entrée, église, mairie, place, rues et maisons anciennes, monument aux morts']]; }
+        if ($line !== '' && !in_array($line, $communes[$k]['lines'], true) && count($communes[$k]['lines']) < 30) { $communes[$k]['lines'][] = $line; }
+    };
     foreach (array_chunk($idList, 300) as $chunk) {
         $marks = implode(',', array_fill(0, count($chunk), '?'));
         $stmt = $pdo->prepare("SELECT e.*, t.gedcom_tag, t.label AS type_label, pl.name AS place_name, pl.county, pl.state, pl.country, pl.latitude, pl.longitude,
@@ -822,7 +832,7 @@ function generate_field_trip_stops(PDO $pdo, int $tripId): array
             $address = trim((string) ($e['address'] ?? ''));
             $religious = in_array($tag, ['CHR', 'BAPM', 'MRRE', 'CONF', 'FCOM'], true) || (in_array($tag, ['MARR', 'BURI', 'DEAT', 'BIRT'], true) && $year && $year < 1793);
             if (in_array($tag, ['RESI', 'CENS', 'OCCU', 'PROP'], true) || ($address !== '' && !$religious)) {
-                if ($address === '' && $lat === null) { continue; }
+                if ($address === '' && $lat === null) { $commune($base, ucfirst($what)); continue; }
                 $key = 'maison|' . mb_strtolower($place . '|' . ($address !== '' ? $address : round((float) $lat, 4) . ',' . round((float) $lon, 4)));
                 $add($key, ['kind' => 'maison', 'title' => 'Maison' . ($address !== '' ? ' — ' . $address : ''), 'address' => $address] + ['lat' => $lat !== null ? (float) $lat : $plat, 'lon' => $lon !== null ? (float) $lon : $plon] + $base,
                     ucfirst($what), 'La maison' . ($address !== '' ? " ({$address})" : '') . ' : façade, porte, rue, vue d’ensemble');
@@ -841,8 +851,31 @@ function generate_field_trip_stops(PDO $pdo, int $tripId): array
             if (in_array($tag, ['BIRT', 'MARR', 'DEAT', 'MRCI', 'DIV', 'ADOP', 'MARB', 'ENGA'], true)) {
                 $add('mairie|' . mb_strtolower($place), ['kind' => 'mairie', 'title' => 'Mairie de ' . $place, 'address' => ''] + $base,
                     ucfirst($what), 'Mairie : façade (la salle des mariages si possible) ; demander à voir les registres ou une copie intégrale des actes');
+                continue;
             }
+            $commune($base, ucfirst($what)); // tout autre événement situé (métier, service militaire, départ, événement libre…)
         }
+    }
+    // Recensements : la maison (adresse ou point précis), sinon la commune
+    foreach (array_chunk($idList, 300) as $chunk) {
+        $marks = implode(',', array_fill(0, count($chunk), '?'));
+        try {
+            $stmt = $pdo->prepare("SELECT cm.person_id, cr.year, cr.address, cr.precise_lat, cr.precise_lon, pl.name AS place_name, pl.county, pl.state, pl.country, pl.latitude, pl.longitude
+                FROM census_members cm JOIN census_records cr ON cr.id=cm.census_id JOIN places pl ON pl.id=cr.place_id WHERE cm.person_id IN ($marks)");
+            $stmt->execute($chunk);
+            foreach ($stmt->fetchAll() as $c) {
+                $place = (string) $c['place_name']; $p = $people[(int) $c['person_id']] ?? null;
+                if ($place === '' || !$p) { continue; }
+                $base = ['place_text' => $place, 'county' => (string) ($c['county'] ?: $c['state']), 'country' => (string) $c['country'], 'lat' => $c['latitude'] !== null ? (float) $c['latitude'] : null, 'lon' => $c['longitude'] !== null ? (float) $c['longitude'] : null, 'people' => []];
+                if ($c['county'] && in_array(mb_strtolower((string) $c['country']), ['france', ''], true)) { $departments[(string) $c['county']] = true; }
+                $line = 'Recensement' . ($c['year'] ? ' de ' . $c['year'] : '') . ' : ' . $name($p);
+                $address = trim((string) $c['address']);
+                if ($address === '' && $c['precise_lat'] === null) { $commune($base, $line); continue; }
+                $key = 'maison|' . mb_strtolower($place . '|' . ($address !== '' ? $address : round((float) $c['precise_lat'], 4) . ',' . round((float) $c['precise_lon'], 4)));
+                $add($key, ['kind' => 'maison', 'title' => 'Maison' . ($address !== '' ? ' — ' . $address : ''), 'address' => $address] + ['lat' => $c['precise_lat'] !== null ? (float) $c['precise_lat'] : $base['lat'], 'lon' => $c['precise_lon'] !== null ? (float) $c['precise_lon'] : $base['lon']] + $base,
+                    $line, 'La maison' . ($address !== '' ? " ({$address})" : '') . ' : façade, porte, rue, vue d’ensemble');
+            }
+        } catch (Throwable $_) {}
     }
     // Sépultures connues (fiche Cimetière)
     foreach (array_chunk($idList, 300) as $chunk) {
@@ -884,7 +917,15 @@ function generate_field_trip_stops(PDO $pdo, int $tripId): array
             'photos' => ['Les actes trouvés (photo sans flash si c’est autorisé), la cote de chaque document'],
             'opening_hours' => (string) ($known['opening_hours'] ?? '') ?: 'À vérifier sur le site des archives : souvent fermées le week-end et le lundi ; réservation des documents parfois obligatoire.'];
     }
-    if (!$sites) { throw new RuntimeException('Aucun lieu trouvé pour ces personnes : il faut des événements avec un lieu (naissance, mariage, décès, résidence…).'); }
+    // une commune sans église, mairie, tombe ni maison prévue devient une étape à part
+    $planned = [];
+    foreach ($sites as $st) { if ($st['kind'] !== 'archives') { $planned[mb_strtolower($st['place_text'] . '|' . $st['county'])] = true; } }
+    foreach ($communes as $k => $c) { if (!isset($planned[$k])) { $sites['commune|' . $k] = $c; } }
+    if (!$sites) {
+        throw new RuntimeException(count($ids) === 1 && !array_filter($trip['people'], static fn($p) => ($p['mode'] ?? '') !== 'person')
+            ? 'Aucun lieu connu pour cette personne (aucun événement avec un lieu). Choisis « et ses ascendants » ou « et ses descendants », ou ajoute les étapes à la main.'
+            : 'Aucun lieu connu pour ces ' . count($ids) . ' personnes : leurs naissances, mariages, décès ou résidences n’ont pas de lieu. Ajoute un lieu à leurs événements, ou les étapes à la main.');
+    }
 
     // Communes : regroupement puis ordre « au plus proche »
     $towns = [];

@@ -1024,6 +1024,7 @@
                 let failed = 0;
                 for (const d of drafts) { try { await api('save_field_trip_stop', {}, {method: 'POST', body: {...d, id: 0, trip_id: saved.result.id, done: 0}}); } catch (_) { failed++; } }
                 if (failed) toast(`${failed} étape(s) non enregistrée(s) : ajoute-les depuis le circuit.`, 'error');
+                else if (saved.result.warning) toast('Circuit enregistré. ' + saved.result.warning, 'error');
                 else toast(generate ? 'Circuit préparé.' : 'Circuit enregistré.');
                 ext.lists.field_trips(++S().workspaceToken, {trip: saved.result.id});
             } catch (error) { toast(error.message, 'error'); }

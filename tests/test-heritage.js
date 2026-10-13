@@ -39,6 +39,12 @@ $out['coat'] = count(coats_of_arms_data($pdo, 3));
 $out['poilu'] = count(save_poilu($pdo, ['person_id' => 4, 'units' => [['unit_name' => '152e RI', 'date_from' => '1914-08-02']], 'events' => [['event_date' => '1916-03-02', 'kind' => 'blesse']]])['units']);
 $t = save_field_trip($pdo, ['title' => 'Nord', 'people' => [['id' => 4, 'mode' => 'ascendants', 'generations' => 3]], 'generate' => 1]);
 $out['trip'] = array_column(field_trip_detail($pdo, $t['id'])['stops'], 'kind');
+$resi = $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='RESI' LIMIT 1")->fetchColumn();
+$pdo->exec("INSERT INTO events(scope,person_id,event_type_id,date_text,year,place_id) VALUES('person',5,$resi,'1900',1900,2)");
+$t2 = save_field_trip($pdo, ['title' => 'Rose', 'people' => [['id' => 5, 'mode' => 'person']], 'generate' => 1]);
+$out['trip2'] = array_map(static fn($s) => $s['kind'] . ':' . $s['title'], field_trip_detail($pdo, $t2['id'])['stops']);
+$t3 = save_field_trip($pdo, ['title' => 'Vide', 'people' => [['id' => 2, 'mode' => 'person']], 'generate' => 1]);
+$out['trip3'] = [$t3['id'] > 0, $t3['warning'] ?? ''];
 $out['paper'] = [save_family_paper($pdo, ['title' => 'Livret', 'people' => [1]])['class_number'], count(family_papers_data($pdo, '', 1))];
 $out['map'] = save_old_map($pdo, ['title' => 'Plan', 'control_points' => [['u' => 0, 'v' => 0, 'lat' => 50, 'lon' => 3], ['u' => 100, 'v' => 0, 'lat' => 50, 'lon' => 3.1], ['u' => 0, 'v' => 100, 'lat' => 49.9, 'lon' => 3]]])['transform'] !== null;
 $crit = ['last_name' => 'Dupont', 'event' => 'birth', 'place' => 'Nord', 'year_to' => 1900];
@@ -62,6 +68,8 @@ const checks = [
   ['enfant placé : durée calculée', () => assert.equal(out.placement, '2 ans et 3 mois')],
   ['armoiries liées à leurs porteurs', () => assert.equal(out.coat, 1)],
   ['poilu : unités enregistrées', () => assert.equal(out.poilu, 1)],
+  ['circuit : une résidence sans adresse donne la commune (et ses archives)', () => assert.deepEqual([...out.trip2].sort(), ['archives:Archives départementales — Seine-Maritime', 'autre:Commune de Le Havre'])],
+  ['circuit sans aucun lieu : enregistré quand même, avec une explication', () => { assert.equal(out.trip3[0], true); assert.match(out.trip3[1], /ascendants/); }],
   ['circuit : mairie, église et archives préparées', () => assert.deepEqual([...out.trip].sort(), ['archives', 'eglise', 'mairie'])],
   ['papiers : numéro de classement automatique', () => assert.deepEqual(out.paper, ['P-0001', 1])],
   ['carte ancienne calée avec 3 points', () => assert.equal(out.map, true)],
