@@ -325,7 +325,9 @@ function delete_recueil_page(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0); $rid = recueil_page_owner($pdo, $id);
     $pdo->prepare('UPDATE recueil_images SET page_id=NULL WHERE page_id=?')->execute([$id]);
-    $pdo->prepare('UPDATE recueil_links SET page_from=NULL WHERE page_from=?')->execute([$id]);
+    // Un rattachement « de telle page à telle page » garde sa plage : il se resserre sur la page qui reste
+    $pdo->prepare('UPDATE recueil_links SET page_from=NULL, page_to=NULL WHERE page_from=? AND (page_to=? OR page_to IS NULL)')->execute([$id, $id]);
+    $pdo->prepare('UPDATE recueil_links SET page_from=page_to, page_to=NULL WHERE page_from=?')->execute([$id]);
     $pdo->prepare('UPDATE recueil_links SET page_to=NULL WHERE page_to=?')->execute([$id]);
     $pdo->prepare('DELETE FROM recueil_pages WHERE id=?')->execute([$id]);
     recueil_touch($pdo, $rid);
