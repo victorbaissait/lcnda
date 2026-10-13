@@ -31,6 +31,22 @@
         /** Fusions en indices (celles dont l'ancre a disparu sont ignorées). */
         const spans = () => t.merges.map(m => ({m, r: rIdx(m.r), c: cIdx(m.c)})).filter(x => x.r >= 0 && x.c >= 0)
             .map(x => ({...x, r1: Math.min(t.rows.length - 1, x.r + x.m.rs - 1), c1: Math.min(t.cols.length - 1, x.c + x.m.cs - 1)}));
+        /**
+         * Les fusions suivent les lignes et les colonnes : kind 'r' (lignes) ou 'c' (colonnes).
+         * Avant de retirer [i0, i0+n[ : la fusion se resserre sur ce qui reste (et change d'ancre si besoin) ;
+         * après une insertion en `at` : elle s'agrandit si `at` tombe dedans ; un déplacement défait celles qu'il traverse.
+         */
+        const mergesRemove = (kind, i0, n) => {
+            const list = kind === 'r' ? t.rows : t.cols, gone = new Set(list.slice(i0, i0 + n).map(x => x.id));
+            t.merges = spans().map(x => {
+                const a = kind === 'r' ? x.r : x.c, b = kind === 'r' ? x.r1 : x.c1, keep = list.slice(a, b + 1).filter(y => !gone.has(y.id));
+                if (!keep.length) return null;
+                if (kind === 'r') { x.m.r = keep[0].id; x.m.rs = keep.length; } else { x.m.c = keep[0].id; x.m.cs = keep.length; }
+                return x.m.rs > 1 || x.m.cs > 1 ? x.m : null;
+            }).filter(Boolean);
+        };
+        const mergesInsert = (kind, at) => spans().forEach(x => { const a = kind === 'r' ? x.r : x.c, b = kind === 'r' ? x.r1 : x.c1; if (at > a && at <= b) { if (kind === 'r') x.m.rs++; else x.m.cs++; } });
+        const mergesMove = (kind, from, to) => { const before = t.merges.length; t.merges = spans().filter(x => { const a = kind === 'r' ? x.r : x.c, b = kind === 'r' ? x.r1 : x.c1; return !((from >= a && from <= b) || (to >= a && to <= b)); }).map(x => x.m); if (t.merges.length < before) A().toast?.('Fusion défaite : la ligne ou la colonne déplacée la traversait.'); };
         const range = () => sel ? {r0: Math.min(sel.r0, sel.r1), r1: Math.max(sel.r0, sel.r1), c0: Math.min(sel.c0, sel.c1), c1: Math.max(sel.c0, sel.c1)} : null;
 
         function paint(focus) {
@@ -62,20 +78,20 @@
         function bind() {
             const q = s => box.querySelector(s), qa = s => box.querySelectorAll(s);
             q('[data-rt-lock]').addEventListener('click', () => { t.locked = !t.locked; changed(); paint(); });
-            q('[data-rt-addrow]').addEventListener('click', () => { const g = range(), at = g ? g.r1 + 1 : t.rows.length; t.rows.splice(at, 0, {id: uid('r'), c: {}}); sel = null; changed(); paint(`${at}:0`); });
-            q('[data-rt-addcol]').addEventListener('click', () => { const g = range(), at = g ? g.c1 + 1 : t.cols.length; t.cols.splice(at, 0, {id: uid('c'), name: ''}); sel = null; changed(); paint(); box.querySelector(`[data-rt-colname="${at}"]`)?.focus(); });
+            q('[data-rt-addrow]').addEventListener('click', () => { const g = range(), at = g ? g.r1 + 1 : t.rows.length; mergesInsert('r', at); t.rows.splice(at, 0, {id: uid('r'), c: {}}); sel = null; changed(); paint(`${at}:0`); });
+            q('[data-rt-addcol]').addEventListener('click', () => { const g = range(), at = g ? g.c1 + 1 : t.cols.length; mergesInsert('c', at); t.cols.splice(at, 0, {id: uid('c'), name: ''}); sel = null; changed(); paint(); box.querySelector(`[data-rt-colname="${at}"]`)?.focus(); });
             q('[data-rt-merge]').addEventListener('click', merge);
             q('[data-rt-unmerge]').addEventListener('click', () => { const g = range(); const drop = new Set(spans().filter(x => x.r >= g.r0 && x.r <= g.r1 && x.c >= g.c0 && x.c <= g.c1).map(x => x.m)); t.merges = t.merges.filter(m => !drop.has(m)); changed(); paint(); });
             q('[data-rt-delrow]').addEventListener('click', async () => {
                 const g = range(); const gone = t.rows.slice(g.r0, g.r1 + 1);
                 if (gone.some(r => Object.values(r.c).some(v => String(v).trim()) || r.person) && !confirm(`Supprimer ${gone.length > 1 ? `ces ${gone.length} lignes` : 'cette ligne'} ?${gone.some(r => r.person) ? '\n\nLe rattachement à la fiche sera retiré.' : ''}`)) return;
                 for (const r of gone) if (r.person) await onPerson?.(r, null);
-                t.rows.splice(g.r0, gone.length); sel = null; changed(); paint();
+                mergesRemove('r', g.r0, gone.length); t.rows.splice(g.r0, gone.length); sel = null; changed(); paint();
             });
             q('[data-rt-delcol]').addEventListener('click', () => {
                 const g = range(); const gone = t.cols.slice(g.c0, g.c1 + 1);
                 if (gone.some(c => t.rows.some(r => String(r.c[c.id] || '').trim())) && !confirm(`Supprimer ${gone.length > 1 ? `ces ${gone.length} colonnes` : `la colonne « ${gone[0].name || g.c0 + 1} »`} et leur contenu ?`)) return;
-                gone.forEach(c => t.rows.forEach(r => delete r.c[c.id])); t.cols.splice(g.c0, gone.length); sel = null; changed(); paint();
+                gone.forEach(c => t.rows.forEach(r => delete r.c[c.id])); mergesRemove('c', g.c0, gone.length); t.cols.splice(g.c0, gone.length); sel = null; changed(); paint();
             });
             q('[data-rt-csv]').addEventListener('click', csv);
             qa('[data-rt-colname]').forEach(inp => inp.addEventListener('input', () => { t.cols[Number(inp.dataset.rtColname)].name = inp.value; changed(); }));
@@ -146,7 +162,7 @@
                 grip?.addEventListener('dragend', () => th.classList.remove('is-dragging'));
                 th.addEventListener('dragover', e => { if (drag?.kind === 'col') { e.preventDefault(); th.classList.add('is-drop'); } });
                 th.addEventListener('dragleave', () => th.classList.remove('is-drop'));
-                th.addEventListener('drop', e => { e.preventDefault(); th.classList.remove('is-drop'); if (drag?.kind !== 'col') return; const to = Number(th.dataset.rtCol); if (to !== drag.i) { move(t.cols, drag.i, to); sel = null; changed(); paint(); } drag = null; });
+                th.addEventListener('drop', e => { e.preventDefault(); th.classList.remove('is-drop'); if (drag?.kind !== 'col') return; const to = Number(th.dataset.rtCol); if (to !== drag.i) { mergesMove("c", drag.i, to); move(t.cols, drag.i, to); sel = null; changed(); paint(); } drag = null; });
             });
             box.querySelectorAll('tr[data-rt-row]').forEach(tr => {
                 const head = tr.querySelector('.h-rt-num');
@@ -154,7 +170,7 @@
                 head.addEventListener('dragend', () => tr.classList.remove('is-dragging'));
                 tr.addEventListener('dragover', e => { if (drag?.kind === 'row') { e.preventDefault(); tr.classList.add('is-drop'); } });
                 tr.addEventListener('dragleave', () => tr.classList.remove('is-drop'));
-                tr.addEventListener('drop', e => { e.preventDefault(); tr.classList.remove('is-drop'); if (drag?.kind !== 'row') return; const to = Number(tr.dataset.rtRow); if (to !== drag.i) { move(t.rows, drag.i, to); sel = null; changed(); paint(); } drag = null; });
+                tr.addEventListener('drop', e => { e.preventDefault(); tr.classList.remove('is-drop'); if (drag?.kind !== 'row') return; const to = Number(tr.dataset.rtRow); if (to !== drag.i) { mergesMove("r", drag.i, to); move(t.rows, drag.i, to); sel = null; changed(); paint(); } drag = null; });
             });
         }
         paint();

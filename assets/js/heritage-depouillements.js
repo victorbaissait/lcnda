@@ -130,7 +130,7 @@
         const tabs = [['pages', '📄', 'Pages', pages.length], ['people', '👥', 'Personnes et foyers', ppl.length], ['map', '🗺️', 'Plan', ''], ['info', '🗂️', 'Fiche du dépouillement', '']];
         ws.innerHTML = `<section class="page collection-page h-rc h-rc-one h-dp">
             <header class="page-header"><div><button type="button" class="back-link" data-dp-back>← Tous les dépouillements</button><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>📜 ${esc(titleOf(r, D.types))}${r.year_text ? ` <small>${esc(r.year_text)}</small>` : ''}</h2>
-                <p class="muted">${esc([r.archive_service, r.archive_reference, D.statuses[r.status]].filter(Boolean).join(' · ')) || '&nbsp;'}${r.archive_url ? ` · <a href="${esc(A().safeUrl ? A().safeUrl(r.archive_url) : r.archive_url)}" target="_blank" rel="noopener">ouvrir l’archive en ligne ↗</a>` : ''}</p></div>
+                <p class="muted">${esc([r.archive_service, r.archive_reference, D.statuses[r.status]].filter(Boolean).join(' · ')) || '&nbsp;'}${/^https?:\/\//i.test(String(r.archive_url || '').trim()) ? ` · <a href="${esc(String(r.archive_url).trim())}" target="_blank" rel="noopener">ouvrir l’archive en ligne ↗</a>` : ''}</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-dp-inresearch title="La même fiche, dans Recherche › Dépouillement d’archive">🔎 Dans Recherche</button><button type="button" class="button secondary" data-dp-edit>Modifier la fiche</button><button type="button" class="button" data-dp-addphotos>+ Ajouter des photos</button></div></header>
             <div class="h-dp-counts"><label title="Le nombre de vues (images) du registre sur le site des archives">📷 Le scan en ligne fait <input type="number" min="0" data-dp-count="page_total" value="${esc(r.page_total ?? '')}" placeholder="?"> vues</label>
                 <label title="Le nombre de pages du document lui-même (un scan peut avoir des vues de couverture, de mire, ou deux pages par vue)">📄 Le document fait <input type="number" min="0" data-dp-count="doc_pages" value="${esc(r.doc_pages ?? '')}" placeholder="?"> pages</label>
@@ -261,9 +261,9 @@
             if (el.dataset.dpPf === 'number') el.addEventListener('blur', () => { if (saved.textContent === '…') { clearTimeout(timer); savePage(); } });
         });
         body.querySelector('[data-dp-delpage]').addEventListener('click', async () => {
-            const nPeople = (r.people || []).filter(x => String(x.page_number || '').trim() === p.number).length;
-            if (!confirm(`Supprimer la page ${p.number} ?${ms.length ? `\n\nSes ${ms.length} photo(s) passent « à ranger ».` : ''}${nPeople ? `\nSes ${nPeople} personne(s) relevée(s) restent dans le dépouillement (avec ce numéro de page).` : ''}`)) return;
-            await post('save_archive_digest_page', {archive_digest_id: r.id, old_number: p.number, delete: 1}); s.page = (next || prev)?.number || ''; toast('Page supprimée.'); reload();
+            const nPeople = (r.people || []).filter(x => String(x.page_number || '').trim() === p.number).length, nLines = lines.length;
+            if (!confirm(`Supprimer la page ${p.number} ?${ms.length ? `\n\nSes ${ms.length} photo(s) passent « à ranger ».` : ''}${nPeople || nLines ? `\n${[nPeople && `Ses ${nPeople} personne(s) relevée(s)`, nLines && `ses ${nLines} ligne(s) de transcription`].filter(Boolean).join(' et ')} seront supprimées aussi (gardées dans l’Historique).` : ''}`)) return;
+            await post('save_archive_digest_page', {archive_digest_id: r.id, old_number: p.number, delete: 1, delete_content: 1}); delete DRAFTS[`${r.id}:${p.number}`]; s.page = (next || prev)?.number || ''; toast('Page supprimée.'); reload();
         });
         // transcription : chaque ligne s'enregistre ; Entrée dans la dernière en crée une nouvelle
         const lineSave = async (el, l) => { const v = el.value.trim(); if (v === l.content) return; if (!v) return; try { await post('save_archive_digest_transcription_line', {id: l.id, archive_digest_id: r.id, media_id: l.media_id || '', page_number: p.number, line_number: l.line_number, content: v, zone_json: l.zone_json || ''}); l.content = v; } catch (e) { toast(e.message, 'error'); } };
@@ -302,10 +302,11 @@
     const locks = () => { try { return JSON.parse(localStorage.getItem('genealogie-dp-locks') || '{}') || {}; } catch (_) { return {}; } };
     const isLocked = (id, page) => !!locks()[`${id}:${page}`];
     const setLocked = (id, page, on) => { const l = locks(); if (on) l[`${id}:${page}`] = 1; else delete l[`${id}:${page}`]; try { localStorage.setItem('genealogie-dp-locks', JSON.stringify(l)); } catch (_) {} };
+    const DRAFTS = {};
     function peopleTable(box, pageNumber, locked = false) {
         const r = D.row;
         const rows = (r.people || []).filter(x => String(x.page_number || '').trim() === pageNumber);
-        const draft = []; // lignes pas encore enregistrées (sans nom)
+        const draft = (DRAFTS[`${r.id}:${pageNumber}`] ||= []); // lignes pas encore enregistrées (sans nom) : gardées si la page se redessine
         let seq = 0; const order = new WeakMap(); // ordre d'arrivée des lignes pas encore enregistrées
         const all = () => [...rows, ...draft];
         const rank = x => x.id ? x.id : 1e12 + (order.get(x) ?? (order.set(x, ++seq), seq));
@@ -337,13 +338,18 @@
         };
         const payload = (x, extra = {}) => ({id: x.id || 0, archive_digest_id: r.id, page_number: pageNumber, person_mode: x.person_id ? 'existing' : 'manual', person_id: x.person_id || '',
             ...Object.fromEntries(COLS.map(([k]) => [k, x[k] || ''])), employer: x.employer || '', personal_status: x.personal_status || '', extra_info: x.extra_info || '', ...extra});
-        const save = async (x, extra = {}) => {
-            if (!x.id && !(x.first_name || '').trim() && !(x.last_name || '').trim() && !extra.person_mode) return false; // une ligne sans nom attend
-            const res = await post('save_archive_digest_person', payload(x, extra)); const out = res.result || res;
-            x.page_number = pageNumber;
-            if (!x.id) { x.id = out.id; draft.splice(draft.indexOf(x), 1); rows.push(x); (r.people ||= []).push(x); }
-            if (out.person_id) x.person_id = out.person_id;
-            return true;
+        const save = (x, extra = {}) => {
+            if (!x.id && !(x.first_name || '').trim() && !(x.last_name || '').trim() && !extra.person_mode && !x.person_id) return Promise.resolve(false); // une ligne sans nom attend
+            // un enregistrement à la fois par ligne : sinon deux créations partiraient pour la même personne
+            const run = async () => {
+                const res = await post('save_archive_digest_person', payload(x, extra)); const out = res.result || res;
+                x.page_number = pageNumber;
+                if (!x.id) { x.id = out.id; const k = draft.indexOf(x); if (k >= 0) draft.splice(k, 1); if (!x._gone) { rows.push(x); (r.people ||= []).push(x); } }
+                if (out.person_id) x.person_id = out.person_id;
+                return true;
+            };
+            const p = (x._saving || Promise.resolve()).catch(() => {}).then(run);
+            x._saving = p; return p;
         };
         const timers = new Map();
         const members = k => all().filter(x => keyOf(x) === k);
@@ -367,7 +373,7 @@
                 });
                 tr.querySelector('[data-dp-del]').addEventListener('click', async () => {
                     if (x.id) { if (!confirm(`Supprimer ${[x.first_name, x.last_name].filter(Boolean).join(' ') || 'cette personne'} du relevé ?`)) return; await post('delete_archive_digest_person', {id: x.id}); rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); }
-                    else draft.splice(draft.indexOf(x), 1);
+                    else { x._gone = true; const k = draft.indexOf(x); if (k >= 0) draft.splice(k, 1); }
                     render();
                 });
                 tr.querySelector('[data-dp-p]')?.addEventListener('click', () => pickPerson(x).then(ok => { if (ok) render(); }));
@@ -443,7 +449,7 @@
                         const opt = form.querySelector('[name=key]').selectedOptions[0];
                         if (!opt) { toast('Choisis la fiche dans la liste, ou coche « créer la fiche ».', 'error'); return false; }
                         x.person_id = Number(opt.value); x.person_name = opt.textContent.replace(/\s*\(.*\)$/, '');
-                        await save(x); toast(`Rattachée à ${x.person_name}.`); end(true);
+                        await save(x, {person_mode: 'existing'}); toast(`Rattachée à ${x.person_name}.`); end(true);
                     },
                 });
             });

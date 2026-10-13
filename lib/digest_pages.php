@@ -33,6 +33,12 @@ function save_archive_digest_page(PDO $pdo, array $data): array
         // ses photos passent « à ranger » ; les personnes et les lignes gardent leur numéro de page, sauf si on le demande
         $pdo->prepare("UPDATE archive_digest_media SET page_number='' WHERE archive_digest_id=? AND page_number=?")->execute([$entryId, $old]);
         if (!empty($data['clear_people'])) { $moveLinks($old, ''); }
+        if (!empty($data['delete_content'])) { // la page part avec ses personnes relevées et ses lignes (une trace de chaque personne dans l'Historique)
+            $b = $pdo->prepare('SELECT * FROM archive_digest_people WHERE archive_digest_id=? AND page_number=?'); $b->execute([$entryId, $old]);
+            foreach ($b->fetchAll() as $row) { log_change($pdo, 'archive_digest', $entryId, 'delete-member', 'Page ' . $old . ' supprimée : ' . trim($row['first_name'] . ' ' . $row['last_name']), $row, null); }
+            $pdo->prepare('DELETE FROM archive_digest_people WHERE archive_digest_id=? AND page_number=?')->execute([$entryId, $old]);
+            $pdo->prepare('DELETE FROM archive_digest_transcription_lines WHERE archive_digest_id=? AND page_number=?')->execute([$entryId, $old]);
+        }
     } else {
         if ($number === '') { throw new RuntimeException('Indique le numéro de la page (ou de la vue).'); }
         if ($number !== $old) {

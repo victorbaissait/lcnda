@@ -128,7 +128,7 @@
                         ${s.street ? `<button type="button" class="icon-button" data-am-alias="${esc(s.street)}" title="Ancien nom, nom d’aujourd’hui, rue disparue…">✎</button>` : ''}</h4>
                         <ul>${as.sort((a, b) => (parseInt(a.house, 10) || 0) - (parseInt(b.house, 10) || 0)).map(a => { const p = a.point, pr = p ? PREC[p.precision] || PREC.exact : null, ys = Object.keys(a.years);
                             return `<li class="${st.sel === a.key ? 'is-sel' : ''} ${p ? '' : 'is-todo'}" data-am-li="${esc(a.key)}"><button type="button" class="link-button" data-am-go="${esc(a.key)}">${a.house ? `n° ${esc(a.house)}` : 'sans n°'}</button>
-                                <small class="muted">${ys.map(y => `<b style="color:${yearColor(y)}">${y}</b> ${a.years[y].length}🏠`).join(' · ')}</small>
+                                <small class="muted">${ys.map(y => `<b style="color:${yearColor(y)}">${esc(y)}</b> ${a.years[y].length}🏠`).join(' · ')}</small>
                                 <span class="h-am-prec" title="${esc(pr?.[1] || 'Pas encore placée')}">${pr ? pr[0] : '⚠'}</span>
                                 <button type="button" class="icon-button" data-am-hand="${esc(a.key)}" title="Placer à la main : clique ensuite sur la carte">✋</button>${p ? `<button type="button" class="icon-button" data-am-unplace="${esc(a.key)}" title="Retirer le point">✕</button>` : ''}</li>`; }).join('')}</ul></section>`; }).join('')}`;
             box.querySelectorAll('[data-am-go]').forEach(b => b.addEventListener('click', () => { const a = byKey(b.dataset.amGo); st.sel = a.key; if (a.point) { st.lat = a.point.lat; st.lon = a.point.lon; st.zoom = Math.max(st.zoom, 17); draw(); popup(a); } else startHand(a); side(); }));
@@ -145,7 +145,7 @@
             const ys = Object.keys(a.years).filter(y => !st.year || Number(y) === st.year);
             pop.innerHTML = `<button type="button" class="icon-button h-am-popx" data-am-popx>✕</button><b>${esc([a.house, a.street].filter(Boolean).join(' '))}</b>${a.street_status === 'renamed' && a.current_name ? `<br><small class="muted">aujourd’hui : ${esc(a.current_name)}</small>` : ''}
                 <br><small class="muted">${esc(PREC[a.point.precision]?.[1] || '')}</small>
-                ${ys.map(y => `<div class="h-am-popy"><b style="color:${yearColor(y)}">${y}</b>${a.years[y].map(hh => `<div><button type="button" class="link-button" data-open-depouillement="${hh.digest_id}" data-depouillement-page="${esc(hh.page)}">Foyer ${esc(hh.household || '?')} · p. ${esc(hh.page || '?')}</button> : ${hh.people.map(p => p.person_id ? `<a href="#" data-am-person="${p.person_id}">${esc(p.name)}</a>` : esc(p.name)).join(', ')}</div>`).join('')}</div>`).join('')}
+                ${ys.map(y => `<div class="h-am-popy"><b style="color:${yearColor(y)}">${esc(y)}</b>${a.years[y].map(hh => `<div><button type="button" class="link-button" data-open-depouillement="${hh.digest_id}" data-depouillement-page="${esc(hh.page)}">Foyer ${esc(hh.household || '?')} · p. ${esc(hh.page || '?')}</button> : ${hh.people.map(p => p.person_id ? `<a href="#" data-am-person="${p.person_id}">${esc(p.name)}</a>` : esc(p.name)).join(', ')}</div>`).join('')}</div>`).join('')}
                 <small class="muted">Glisse le point pour le déplacer.</small>`;
             pop.style.left = Math.min(w - 290, Math.max(6, x + 14)) + 'px'; pop.style.top = Math.min(h - 40, Math.max(6, y - 20)) + 'px'; pop.hidden = false;
             pop.querySelector('[data-am-popx]').addEventListener('click', () => { pop.hidden = true; st.sel = null; draw(); side(); });
@@ -166,7 +166,8 @@
             map.addEventListener('pointerdown', e => {
                 if (e.button !== 0 || e.target.closest('.h-am-zoom, .h-am-pop, .h-am-banner')) return;
                 const g = e.target.closest('[data-am-key]');
-                drag = {x0: e.clientX, y0: e.clientY, lat0: st.lat, lon0: st.lon, point: g ? byKey(g.dataset.amKey) : null, moved: false};
+                const pt = g && !st.mode && !st.draw ? byKey(g.dataset.amKey) : null; // en traçant ou en plaçant, glisser déplace la carte
+                drag = {x0: e.clientX, y0: e.clientY, lat0: st.lat, lon0: st.lon, point: pt, orig: pt?.point ? {...pt.point} : null, moved: false};
                 map.setPointerCapture(e.pointerId);
             });
             map.addEventListener('pointermove', e => {
@@ -179,7 +180,7 @@
             });
             map.addEventListener('pointerup', async e => {
                 const d = drag; drag = null; if (!d) return;
-                if (d.moved && d.point && !st.mode) { const p = at(e); try { await placeAt(d.point, p.lat, p.lon); toast('Point déplacé (placé à la main).'); } catch (err) { toast(err.message, 'error'); } draw(); side(); popup(d.point); return; }
+                if (d.moved && d.point && !st.mode) { const p = at(e); try { await placeAt(d.point, p.lat, p.lon); toast('Point déplacé (placé à la main).'); } catch (err) { d.point.point = d.orig; toast(err.message, 'error'); } draw(); side(); popup(d.point); return; }
                 if (d.moved) return;
                 const p = at(e);
                 if (st.mode?.hand) { const a = st.mode.hand; st.mode = null; map.classList.remove('is-placing'); banner(''); try { await placeAt(a, p.lat, p.lon); toast('Adresse placée.'); } catch (err) { toast(err.message, 'error'); } draw(); side(); popup(a); return; }
@@ -285,9 +286,9 @@
         async function finishDraw() {
             const d = st.draw; if (!d) return;
             if (d.path.length < 2) { toast('Mets au moins deux points.', 'error'); return; }
-            st.draw = null; banner('');
-            await post('save_addr_street', {insee: D.insee, old_name: d.street.old_name, status: d.street.status, current_name: d.street.current_name, note: d.street.note, year_from: d.street.year_from, year_to: d.street.year_to, path: d.path});
-            toast('Rue tracée.'); reload();
+            try { await post('save_addr_street', {insee: D.insee, old_name: d.street.old_name, status: d.street.status, current_name: d.street.current_name, note: d.street.note, year_from: d.street.year_from, year_to: d.street.year_to, path: d.path}); }
+            catch (e) { toast(e.message, 'error'); return; } // le tracé reste : on peut réessayer
+            st.draw = null; banner(''); toast('Rue tracée.'); reload();
         }
 
         // Ouverture : placement automatique (en local) des nouvelles adresses, puis la carte
