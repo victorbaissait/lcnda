@@ -1479,10 +1479,10 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-am-host[open] > summary { margin-bottom:10px; }
 
 /* Fiche d'un village : parties rangées au choix (⚙️ Organiser la fiche) */
-.h-village-flow { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; align-items:start; margin-top:16px; }
-.h-village-flow > * { grid-column:1 / -1; margin:0 !important; max-width:none !important; width:auto !important; }
-.h-village-flow > .is-half { grid-column:auto; }
+.h-village-flow { display:grid; grid-template-columns:repeat(12, minmax(0, 1fr)); gap:16px; align-items:start; margin-top:16px; }
+.h-village-flow > * { grid-column:span var(--vspan, 12); margin:0 !important; max-width:none !important; width:auto !important; min-width:0; }
 .h-village-flow > [hidden] { display:none !important; }
-@media (max-width: 900px) { .h-village-flow > .is-half { grid-column:1 / -1; } }
+@media (max-width: 1100px) { .h-village-flow > * { grid-column:span max(6, var(--vspan, 12)); } }
+@media (max-width: 760px) { .h-village-flow > * { grid-column:1 / -1; } }
 .h-village-memo textarea { width:100%; resize:vertical; min-height:110px; font-size:14px; }
 .h-am-host > h3 small { font-weight:400; font-size:13px; }

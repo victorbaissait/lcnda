@@ -1005,11 +1005,12 @@
         const order = [...(Array.isArray(saved.order) ? saved.order.filter(k => keys.includes(k)) : []), ...keys.filter(k => !(saved.order || []).includes(k))];
         return {order, hidden: Array.isArray(saved.hidden) ? saved.hidden.filter(k => keys.includes(k)) : [], width: saved.width && typeof saved.width === 'object' ? saved.width : {}};
     }
-    const villageWidth = (l, k) => l.width[k] || VILLAGE_SECTIONS.find(x => x[0] === k)?.[2] || 'full';
+    const VILLAGE_WIDTHS = [['full', 'pleine', 12], ['w9', '3/4', 9], ['w8', '2/3', 8], ['half', '1/2', 6], ['w4', '1/3', 4], ['w3', '1/4', 3]];
+    const villageWidth = (l, k) => { const w = l.width[k] || VILLAGE_SECTIONS.find(x => x[0] === k)?.[2] || 'full'; return VILLAGE_WIDTHS.some(x => x[0] === w) ? w : 'full'; };
     function arrangeVillage(ws) {
         const l = villageLayout(), page = ws.querySelector('.h-village');
         const flow = document.createElement('div'); flow.className = 'h-village-flow';
-        l.order.forEach(k => { const el = page.querySelector(`[data-vsec="${k}"]`); if (!el) return; el.hidden = l.hidden.includes(k); el.classList.toggle('is-half', villageWidth(l, k) === 'half'); flow.appendChild(el); });
+        l.order.forEach(k => { const el = page.querySelector(`[data-vsec="${k}"]`); if (!el) return; el.hidden = l.hidden.includes(k); el.style.setProperty('--vspan', VILLAGE_WIDTHS.find(x => x[0] === villageWidth(l, k))[2]); flow.appendChild(el); });
         const grid = page.querySelector('.h-village-grid');
         (grid || page.lastElementChild)?.insertAdjacentElement(grid ? 'beforebegin' : 'afterend', flow);
         grid?.remove();
@@ -1017,10 +1018,10 @@
     function villageLayoutDialog(after) {
         let l = villageLayout();
         const save = () => { try { localStorage.setItem('genealogie-village-layout', JSON.stringify(l)); } catch (_) {} };
-        const body = () => `<p class="muted">Pour toutes les fiches de village. Les flèches rangent les parties ; décocher en masque une ; « demi » les met deux par ligne.</p>
+        const body = () => `<p class="muted">Pour toutes les fiches de village. Les flèches rangent les parties ; décocher en masque une ; la largeur (1/4, 1/3, 1/2, 2/3, 3/4 ou pleine) en met plusieurs sur une ligne.</p>
             <table class="data-table h-flag-table"><thead><tr><th>Ordre</th><th>Partie</th><th>Montrée</th><th>Largeur</th></tr></thead><tbody>${l.order.map((k, i) => `<tr><td><button type="button" class="icon-button" data-vl-move="${k}" data-dir="-1" ${i ? '' : 'disabled'}>↑</button><button type="button" class="icon-button" data-vl-move="${k}" data-dir="1" ${i < l.order.length - 1 ? '' : 'disabled'}>↓</button></td>
                 <td>${esc(VILLAGE_SECTIONS.find(x => x[0] === k)[1])}</td><td><input type="checkbox" data-vl-show="${k}" ${l.hidden.includes(k) ? '' : 'checked'}></td>
-                <td><select data-vl-width="${k}"><option value="full" ${villageWidth(l, k) === 'full' ? 'selected' : ''}>pleine</option><option value="half" ${villageWidth(l, k) === 'half' ? 'selected' : ''}>demi</option></select></td></tr>`).join('')}</tbody></table>
+                <td><select data-vl-width="${k}">${VILLAGE_WIDTHS.map(([w, lab]) => `<option value="${w}" ${villageWidth(l, k) === w ? 'selected' : ''}>${lab}</option>`).join('')}</select></td></tr>`).join('')}</tbody></table>
             <p><button type="button" class="link-button" data-vl-reset>↺ Revenir à l’ordre d’origine</button></p>`;
         ext.openDialog({eyebrow: 'FICHE D’UN VILLAGE', title: 'Organiser la fiche', wide: true, submitLabel: 'Fermer', body: body(),
             onOpen: d => {

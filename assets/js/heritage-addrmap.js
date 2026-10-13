@@ -20,8 +20,16 @@
     const plural = (n, one, many) => `${Number(n || 0).toLocaleString('fr-FR')} ${n > 1 ? many : one}`;
     const pref = (k, d) => { try { const v = JSON.parse(localStorage.getItem('genealogie-addrmap') || '{}'); return v[k] ?? d; } catch (_) { return d; } };
     const setPref = (k, v) => { try { const o = JSON.parse(localStorage.getItem('genealogie-addrmap') || '{}'); o[k] = v; localStorage.setItem('genealogie-addrmap', JSON.stringify(o)); } catch (_) {} };
-    const OLD = [['etatmajor', 'État-major (1820-1866)'], ['cassini', 'Cassini (XVIIIᵉ)'], ['ign_scan50_1950', 'Carte IGN de 1950'], ['ign_ortho_1950', 'Photos aériennes 1950-1965'], ['ohm', 'OpenHistoricalMap'], ['', 'Aucune']];
-    const NOW = [['osmfr', 'Plan d’aujourd’hui (OSM)'], ['ign_planv2', 'Plan IGN'], ['ign_hr_ortho', 'Photo aérienne actuelle'], ['offline', 'Hors ligne (sans Internet)']];
+    // Fonds proposés en premier (réglables dans Apparence) ; tous les autres fonds de l'application suivent, par catégorie
+    const OLD_DEFAULT = ['etatmajor', 'cassini', 'cassini_royal', 'ign_scan50_1950', 'ign_ortho_1950', 'ohm'];
+    const NOW_DEFAULT = ['osmfr', 'ign_planv2', 'ign_hr_ortho', 'satellite', 'offline'];
+    const SHORT = {etatmajor: 'État-major (1820-1866)', cassini: 'Cassini (XVIIIᵉ)', cassini_royal: 'Cassini, exemplaire du roi', ign_scan50_1950: 'Carte IGN de 1950', ign_ortho_1950: 'Photos aériennes 1950-1965', ohm: 'OpenHistoricalMap', osmfr: 'Plan d’aujourd’hui (OSM)', ign_planv2: 'Plan IGN', ign_hr_ortho: 'Photo aérienne actuelle (IGN)', satellite: 'Satellite (Esri)', offline: 'Hors ligne (sans Internet)'};
+    const cats = () => A().tileLayerCategories || [];
+    const label = k => SHORT[k] || cats().flatMap(c => c.items).find(i => i[0] === k)?.[1] || k;
+    const favs = which => { try { const v = JSON.parse(localStorage.getItem(`genealogie-addrmap-${which}`) || 'null'); if (Array.isArray(v) && v.length) return v; } catch (_) {} return which === 'old' ? OLD_DEFAULT : NOW_DEFAULT; };
+    const mapOptions = (which, cur) => { const f = favs(which); const opt = (k, l) => `<option value="${esc(k)}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`;
+        return (which === 'old' ? opt('', 'Aucune') : '') + f.map(k => opt(k, label(k))).join('') + (f.includes(cur) || !cur ? '' : opt(cur, label(cur)))
+            + cats().map(c => { const items = c.items.filter(([k]) => !f.includes(k) && k !== cur); return items.length ? `<optgroup label="${esc(c.label)}">${items.map(([k, l]) => opt(k, l)).join('')}</optgroup>` : ''; }).join(''); };
     const PREC = {exact: ['✓', 'Adresse retrouvée telle quelle'], approx: ['≈', 'Numéro disparu : numéro voisin du même côté'], street: ['~', 'Sans numéro : milieu de la rue'], fuzzy: ['?', 'Nom de rue proche : à vérifier'], manual: ['📌', 'Placée à la main'], online: ['🌐', 'Trouvée en ligne']};
     const YEAR_COLORS = ['#c0392b', '#2471a3', '#1e8449', '#b9770e', '#7d3c98', '#117a65', '#a04000', '#2e4053'];
     // Web Mercator, tuiles de 256 px (comme le reste de l'application)
@@ -41,7 +49,7 @@
         let D;
         try { D = await get('addr_map', {insee, digest_id: digestId || ''}); } catch (e) { box.innerHTML = `<p class="error">${esc(e.message)}</p>`; return; }
         if (!D.insee) { box.innerHTML = `<div class="maintenance-panel"><p>${esc(D.error || 'Commune inconnue.')}</p></div>`; return; }
-        const st = {year: Number(year) || 0, old: pref('old', 'etatmajor'), now: pref('now', 'osmfr'), opacity: pref('opacity', 70), auto: pref('auto', true), zoom: 16, lat: D.commune.lat ?? 46.6, lon: D.commune.lon ?? 2.4, mode: null, sel: null, draw: null};
+        const st = {year: Number(year) || 0, old: pref('old', favs('old')[0]), now: pref('now', favs('now')[0]), opacity: pref('opacity', 70), auto: pref('auto', true), zoom: 16, lat: D.commune.lat ?? 46.6, lon: D.commune.lon ?? 2.4, mode: null, sel: null, draw: null};
         if (st.year && !D.years.includes(st.year)) st.year = 0;
         const yearColor = y => YEAR_COLORS[Math.max(0, D.years.indexOf(Number(y))) % YEAR_COLORS.length];
         const visible = () => D.addresses.filter(a => !st.year || a.years[st.year]);
@@ -66,9 +74,9 @@
             box.innerHTML = `<div class="h-am">
                 <div class="h-am-bar">
                     <label>Année <select data-am-year><option value="0">Toutes (${D.years.length})</option>${D.years.map(y => `<option value="${y}" ${st.year === y ? 'selected' : ''}>${y}</option>`).join('')}</select></label>
-                    <label>Carte ancienne <select data-am-old>${OLD.map(([k, l]) => `<option value="${k}" ${st.old === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                    <label>Carte ancienne <select data-am-old>${mapOptions('old', st.old)}</select></label>
                     <label class="h-am-op" title="0 : la carte d’aujourd’hui ; 100 : la carte ancienne">Ancienne <input type="range" min="0" max="100" value="${st.opacity}" data-am-op> Aujourd’hui</label>
-                    <label>Aujourd’hui <select data-am-now>${NOW.map(([k, l]) => `<option value="${k}" ${st.now === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                    <label>Aujourd’hui <select data-am-now>${mapOptions('now', st.now)}</select></label>
                 </div>
                 <div class="h-am-bar is-ban">${banLine}
                     <span class="h-am-actions"><label class="checkbox-line" title="Placer tout seul les nouvelles adresses à l’ouverture du plan"><input type="checkbox" data-am-auto ${st.auto ? 'checked' : ''}> placement automatique</label>
@@ -288,4 +296,28 @@
         }
         shell(); fit(); draw(); side();
     };
+
+    /* ─── Apparence : fonds proposés en premier dans le plan du recensement ─── */
+    ext.designPanels = ext.designPanels || [];
+    ext.afterDesign = ext.afterDesign || [];
+    ext.designPanels.push(() => {
+        const part = (which, title, help) => { const on = favs(which);
+            return `<h4>${title}</h4><p class="muted">${help}</p>${cats().map(c => `<details ${c.items.some(([k]) => on.includes(k)) ? 'open' : ''}><summary>${esc(c.label)}</summary><div class="h-village-maps-grid">${c.items.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-am-fav="${which}" value="${esc(k)}" ${on.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div></details>`).join('')}`; };
+        return `<section class="person-block-config" id="h-addrmap-config"><header><span class="eyebrow">PLAN DU RECENSEMENT</span><h3>Fonds de carte du plan des adresses</h3><p>Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie.</p></header>
+            ${part('old', '🕰️ Carte ancienne (par-dessus)', 'Cassini, État-major, cartes et photos de 1950…')}${part('now', '🗺️ Aujourd’hui (dessous)', 'Plan, photo aérienne, carte hors ligne…')}
+            <p><button type="button" class="link-button" data-am-favreset>Revenir aux fonds proposés au départ</button></p></section>`;
+    });
+    ext.afterDesign.push(() => {
+        const box = document.getElementById('h-addrmap-config');
+        if (!box) return;
+        const save = (which, list) => { try { localStorage.setItem(`genealogie-addrmap-${which}`, JSON.stringify(list)); } catch (_) {} };
+        box.addEventListener('change', e => {
+            const which = e.target.dataset.amFav; if (!which) return;
+            const list = favs(which).filter(k => k !== e.target.value);
+            if (e.target.checked) list.push(e.target.value);
+            if (!list.length) { e.target.checked = true; toast('Garde au moins un fond.', 'error'); return; }
+            save(which, list); toast('Fonds du plan des adresses enregistrés.');
+        });
+        box.querySelector('[data-am-favreset]').addEventListener('click', () => { save('old', OLD_DEFAULT); save('now', NOW_DEFAULT); box.querySelectorAll('[data-am-fav]').forEach(i => { i.checked = (i.dataset.amFav === 'old' ? OLD_DEFAULT : NOW_DEFAULT).includes(i.value); }); toast('Fonds de départ remis.'); });
+    });
 })();
