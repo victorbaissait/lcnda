@@ -1253,3 +1253,26 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-agw li.is-late .h-agw-when { color:#c92a2a; }
 .h-cal-wcfg { border:1px solid rgba(127,127,127,.35); padding:6px 10px; display:flex; flex-direction:column; gap:4px; }
 .h-cal-wsrc { display:grid; grid-template-columns:1fr 1fr; gap:0 10px; font-size:12.5px; }
+/* 🧩 Assembler des photos (heritage-assemble.js) */
+.h-as { width:min(1500px, 97vw); }
+.h-as-body { display:grid; grid-template-columns:minmax(0, 1fr) 320px; gap:14px; padding:12px 18px 18px; height:min(78vh, 900px); }
+@media (max-width: 900px) { .h-as-body { grid-template-columns:1fr; height:auto; } .h-as-stagewrap { height:55vh; } }
+.h-as-stagewrap { position:relative; display:flex; flex-direction:column; min-height:0; }
+.h-as-stagewrap canvas { flex:1; width:100%; min-height:0; cursor:move; touch-action:none; border:var(--line); }
+.h-as-hint { font-size:12px; margin-top:4px; }
+.h-as-side { display:flex; flex-direction:column; gap:10px; overflow:auto; }
+.h-as-tools { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.h-as-layers { display:flex; flex-direction:column; gap:4px; }
+.h-as-layer { display:flex; gap:6px; align-items:center; padding:4px 6px; border:1px solid rgba(127,127,127,.35); cursor:pointer; }
+.h-as-layer.is-sel { border-color:var(--blue); background:rgba(0,102,204,.08); }
+.h-as-layer .icon-button { width:26px; height:26px; min-width:0; padding:0; font-size:12px; }
+.h-as-lname { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }
+.h-as-props h4 { margin:4px 0; }
+.h-as-num { width:68px; }
+.h-as-out { border-top:1px solid rgba(127,127,127,.3); padding-top:8px; display:flex; flex-direction:column; gap:6px; }
+.h-as-out label { display:flex; gap:6px; align-items:center; font-size:13px; }
+.h-as-pick { display:grid; grid-template-columns:repeat(auto-fill, minmax(110px, 1fr)); gap:8px; max-height:46vh; overflow:auto; margin-top:6px; }
+.h-as-pick label { display:flex; flex-direction:column; gap:2px; font-size:11.5px; cursor:pointer; position:relative; }
+.h-as-pick input { position:absolute; top:4px; left:4px; }
+.h-as-pick img { width:100%; aspect-ratio:1; object-fit:cover; background:#eee; }
+.h-as-pick small { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }

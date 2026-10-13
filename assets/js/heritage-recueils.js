@@ -226,6 +226,7 @@
                     ${cur ? `<div class="h-rc-imgactions">
                         ${p.best_image_id === cur.id ? '<span class="h-rc-kept">⭐ Image retenue pour cette page</span>' : `<button type="button" class="button small" data-rc-best="${cur.id}" title="C’est elle qu’on voit dans la mosaïque, le résumé et les fiches">⭐ Garder celle-ci</button>`}
                         <button type="button" class="button small secondary" data-rc-zoom="${cur.id}">🔍 Agrandir, pivoter, retoucher</button>
+                        ${ext.openAssembler ? `<button type="button" class="button small secondary" data-rc-assemble title="Mettre ensemble les photos de cette page (morceaux, zoom…) : le résultat devient l’image retenue">🧩 Assembler</button>` : ''}
                         ${imgs.length > 1 ? `<button type="button" class="button small secondary" data-rc-compare="${cmp ? 0 : (imgs.find(i => i.id !== cur.id)?.id || 0)}">${cmp ? '✕ Fin de la comparaison' : '⇄ Comparer côte à côte'}</button>` : ''}
                         <button type="button" class="button small secondary" data-rc-role="${cur.id}">${cur.role === 'detail' ? '📄 C’est la page entière' : '🔍 C’est un détail (zoom)'}</button>
                         <label class="h-rc-move">Déplacer vers ${pageSelect('data-rc-moveimg', p.id)}</label>
@@ -249,6 +250,14 @@
         body.querySelectorAll('[data-rc-zoom]').forEach(b => b.addEventListener('click', () => { const list = imgs.length ? imgs : [imgById(b.dataset.rcZoom)]; openViewer(list, Math.max(0, list.findIndex(i => i.id === Number(b.dataset.rcZoom)))); }));
         body.querySelector('[data-rc-best]')?.addEventListener('click', e => run('save_recueil_page', {id: p.id, best_image_id: Number(e.currentTarget.dataset.rcBest)}, 'Image retenue pour cette page.'));
         body.querySelector('[data-rc-compare]')?.addEventListener('click', e => { s.image = cur.id; s.compare = Number(e.currentTarget.dataset.rcCompare); paint(); });
+        body.querySelector('[data-rc-assemble]')?.addEventListener('click', () => ext.openAssembler(imgs.map(i => ({id: i.media_id, filename: i.filename, title: i.title})), {onSaved: async mediaId => {
+            const vid = cur.version_id;
+            await post('recueil_add_images', {recueil_id: D.recueil.id, version_id: vid, media_ids: [mediaId], mode: 'loose'});
+            await load(D.recueil.id);
+            const img = D.images.find(i => i.media_id === mediaId && !i.page_id);
+            if (img) { await post('update_recueil_image', {id: img.id, page_id: p.id}); await post('save_recueil_page', {id: p.id, best_image_id: img.id}); s.image = img.id; }
+            bust = Date.now(); await reload(); toast('Assemblage posé sur la page et retenu (⭐).');
+        }}));
         body.querySelector('[data-rc-role]')?.addEventListener('click', () => run('update_recueil_image', {id: cur.id, role: cur.role === 'detail' ? 'page' : 'detail'}));
         body.querySelector('[data-rc-moveimg]')?.addEventListener('change', async e => { const v = Number(e.target.value); if (v === p.id) return; const r = await run('update_recueil_image', {id: cur.id, page_id: v, after_page: p.id}, v === 0 ? 'Photo mise « à ranger ».' : 'Photo déplacée.'); if (r) { s.image = 0; paint(); } });
         body.querySelector('[data-rc-remove]')?.addEventListener('click', () => { if (confirm('Retirer cette photo du recueil ? Elle reste dans Médias.')) { s.image = 0; run('remove_recueil_image', {id: cur.id}, 'Photo retirée du recueil.'); } });
