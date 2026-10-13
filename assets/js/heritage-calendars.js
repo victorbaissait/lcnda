@@ -295,13 +295,55 @@
         load: () => A().api('my_agenda'),
         toItems: data => data.items.map(it => { const [y, m, d] = it.start.split('-').map(Number); return {uid: it.src + it.id, y, m, d, end: it.end || '', group: it.src, title: it.title, sub: it.sub, done: it.done, raw: it}; }),
         onNew: (date, after) => A().api('my_agenda').then(d => newDialog(date, d.atelier_projects || [], after)),
-        onOpen: it => {
-            const r = it.raw, st = S();
+        onOpen: it => ext.lists.my_calendar_open(it.raw),
+    });
+    ext.lists.my_calendar_open = r => {
+            const st = S();
             if (r.src === 'fair') { st.listType = 'fairs'; A().setModule('listes'); setTimeout(() => A().renderFairsList?.(++S().workspaceToken, r.id), 50); return; }
             if (r.src === 'atelier_task') { st.atelier = {...(st.atelier || {}), project: r.ref, node: 'tasks', sel: [r.id]}; st.enquetesTab = 'atelier'; st.currentBattueId = 0; st.currentInvestigationId = 0; return A().setModule('enquetes'); }
             if (r.src === 'investigation') { st.enquetesTab = 'enquetes'; st.currentBattueId = 0; st.currentInvestigationId = r.ref; return A().setModule('enquetes'); }
             if (r.src === 'field_trip') { st.listType = 'field_trips'; st.hEdit = {list: 'field_trips', id: r.id}; return A().setModule('listes'); }
             st.listType = SRC_LIST[r.src] || 'reminders'; A().setModule('listes');
+    };
+
+    /* ─────────── Tableau de bord : « Mon agenda : à venir » ─────────── */
+    ext.dashboard = ext.dashboard || {};
+    ext.dashboardConfig = ext.dashboardConfig || {};
+    const AGENDA_SRC = GROUPS.agenda.map(g => g[0]);
+    const wcfg = w => ({days: 7, srcs: AGENDA_SRC, late: true, anniv: true, ...(w?.config || {})});
+    ext.dashboardConfig.agenda_widget = {
+        html: w => { const c = wcfg(w);
+            return `<fieldset class="h-cal-wcfg"><legend>Mon agenda</legend><label>Sur combien de jours ?<select data-agw="days">${[[1, 'aujourd’hui'], [3, '3 jours'], [7, '7 jours'], [14, '2 semaines'], [31, 'un mois'], [92, '3 mois'], [365, 'un an']].map(([v, l]) => `<option value="${v}" ${Number(c.days) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-agw="late" ${c.late ? 'checked' : ''}> Ce qui est en retard (pas encore fait)</label>
+                <label class="checkbox-line"><input type="checkbox" data-agw="anniv" ${c.anniv ? 'checked' : ''}> Les anniversaires de la famille (naissances, mariages, décès)</label>
+                <div class="h-cal-wsrc">${GROUPS.agenda.map(([g, l]) => `<label class="checkbox-line"><input type="checkbox" data-agw-src value="${g}" ${c.srcs.includes(g) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div></fieldset>`; },
+        read: ed => ({days: Number(ed.querySelector('[data-agw=days]')?.value) || 7, late: !!ed.querySelector('[data-agw=late]')?.checked, anniv: !!ed.querySelector('[data-agw=anniv]')?.checked,
+            srcs: [...ed.querySelectorAll('[data-agw-src]:checked')].map(x => x.value)}),
+    };
+    ext.dashboard.agenda_widget = {
+        load: async () => { const [a, g] = await Promise.all([A().api('my_agenda'), A().api('genea_calendar').catch(() => ({events: []}))]); return {agenda: a, genea: g}; },
+        render: (index, widget, span, data) => {
+            const c = wcfg(widget), limit = Number(widget.limit) || 10, [ty, tm, td] = todayArr(), today = iso(ty, tm, td), endDay = iso(...addDays(ty, tm, td, Math.max(0, c.days - 1)));
+            const rows = [];
+            (data?.agenda?.items || []).filter(it => c.srcs.includes(it.src)).forEach(it => {
+                const last = it.end || it.start;
+                if (it.start <= endDay && last >= today) rows.push({when: it.start < today ? today : it.start, it, kind: 'agenda'});
+                else if (c.late && !it.done && last < today && ['reminder', 'courrier_relance', 'atelier_task', 'investigation', 'budget'].includes(it.src)) rows.push({when: it.start, it, kind: 'late'});
+            });
+            if (c.anniv) (data?.genea?.events || []).filter(e => e.d && !e.approx).forEach(e => { for (let k = 0; k < Math.min(c.days, 366); k++) { const [y, m, d] = addDays(ty, tm, td, k); if (m === e.m && d === e.d) { rows.push({when: iso(y, m, d), e, years: y - e.y, kind: 'anniv'}); break; } } });
+            rows.sort((a, b) => (a.kind === 'late' ? 0 : 1) - (b.kind === 'late' ? 0 : 1) || a.when.localeCompare(b.when));
+            const p = prefs('agenda'), pg = prefs('genea');
+            const dayLabel = w => { if (w === today) return 'aujourd’hui'; const [y, m, d] = w.split('-').map(Number); if (w === iso(...addDays(ty, tm, td, 1))) return 'demain'; return `${DAYS[dow(y, m, d)].slice(0, 3)}. ${d} ${MONTHS_S[m - 1]}`; };
+            const li = r => r.kind === 'anniv'
+                ? `<li style="--c:${colorOf('genea', pg, r.e.group)}"><span class="h-agw-when">${dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-person="${r.e.who[0]?.id || 0}">🎂 ${esc(r.e.type)} — ${esc(r.e.who.map(w => w.name).join(' et '))}</button> <small class="muted">il y a ${r.years} ans (${r.e.y})</small></li>`
+                : `<li class="${r.kind === 'late' ? 'is-late' : ''}" style="--c:${colorOf('agenda', p, r.it.src)}"><span class="h-agw-when">${r.kind === 'late' ? '⏰ en retard' : dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-item="${esc(r.it.src + ':' + r.it.id)}">${esc(r.it.title)}</button>${r.it.sub ? ` <small class="muted">${esc(r.it.sub)}</small>` : ''}${r.it.end ? ` <small class="muted">→ ${esc(r.it.end.split('-').reverse().slice(0, 2).join('/'))}</small>` : ''}</li>`;
+            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} autre(s).</p>` : ''}` : `<p class="muted">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</p>`;
+            setTimeout(() => document.querySelectorAll('[data-agw-item]:not([data-b]), [data-agw-person]:not([data-b])').forEach(b => { b.dataset.b = '1'; b.addEventListener('click', () => {
+                if (b.dataset.agwPerson) { S().currentPersonId = Number(b.dataset.agwPerson); return A().setModule('personnes'); }
+                const [src, id] = b.dataset.agwItem.split(':'), it = (data.agenda.items || []).find(x => x.src === src && String(x.id) === id);
+                if (it) ext.lists.my_calendar_open?.(it);
+            }); }), 0);
+            return A().card(index, `Mon agenda : ${c.days === 1 ? 'aujourd’hui' : c.days === 7 ? '7 jours' : c.days === 31 ? 'le mois' : `${c.days} jours`}`, rows.length || '', html + `<p><button type="button" class="link-button" data-h-open-list="my_calendar">🗓️ Ouvrir mon agenda</button></p>`, span);
         },
-    });
+    };
 })();

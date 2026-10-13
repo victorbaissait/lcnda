@@ -1246,3 +1246,10 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cal-colors label { display:flex; gap:8px; align-items:center; font-size:13px; }
 .h-cal .segmented.h-cal-views, .h-cal-listhead .segmented { display:inline-flex; flex-wrap:wrap; grid-template-columns:none; width:auto; }
 .h-cal .segmented.h-cal-views button, .h-cal-listhead .segmented button { flex:none; width:auto; padding-left:12px; padding-right:12px; }
+.h-agw { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.h-agw li { border-left:4px solid var(--c); padding:2px 8px; display:flex; flex-wrap:wrap; gap:4px 8px; align-items:baseline; }
+.h-agw li.is-late { background:rgba(201,42,42,.07); }
+.h-agw-when { font-weight:700; font-size:12.5px; min-width:84px; text-transform:capitalize; }
+.h-agw li.is-late .h-agw-when { color:#c92a2a; }
+.h-cal-wcfg { border:1px solid rgba(127,127,127,.35); padding:6px 10px; display:flex; flex-direction:column; gap:4px; }
+.h-cal-wsrc { display:grid; grid-template-columns:1fr 1fr; gap:0 10px; font-size:12.5px; }
