@@ -9058,6 +9058,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'unlink_archive_digest_media' => unlink_archive_digest_media($pdo,$data),
             'save_archive_digest_person' => save_archive_digest_person($pdo,$data),
             'save_archive_digest_page' => save_archive_digest_page($pdo,$data),
+            'save_archive_digest_counts' => save_archive_digest_counts($pdo,$data),
+            'save_archive_digest_household' => save_archive_digest_household($pdo,$data),
             'delete_archive_digest_person' => delete_archive_digest_person($pdo,$data),
             'rotate_media_image' => rotate_media_image($pdo,$data),
             default => throw new RuntimeException('Action d’écriture inconnue'),

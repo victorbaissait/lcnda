@@ -1426,3 +1426,12 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-dp-hh ul { margin:0 0 6px; padding-left:18px; }
 .h-dp-info { display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap:10px 18px; }
 .h-dp-info dt { font-size:12px; color:var(--muted, #777); } .h-dp-info dd { margin:0; white-space:pre-wrap; }
+.h-dp-counts { display:flex; flex-wrap:wrap; gap:8px 18px; align-items:center; margin:-6px 0 14px; font-size:14px; }
+.h-dp-counts label { display:flex; align-items:center; gap:6px; margin:0; }
+.h-dp-counts input { width:80px; }
+.h-dp-band.is-street td { background:color-mix(in srgb, var(--accent, #2f6f5e) 18%, transparent); font-size:13.5px; }
+.h-dp-band.is-house td { background:color-mix(in srgb, var(--accent, #2f6f5e) 11%, transparent); padding-left:18px !important; }
+.h-dp-band.is-hh td { background:color-mix(in srgb, var(--accent, #2f6f5e) 5%, transparent); padding-left:30px !important; }
+.h-dp-band.is-hh td { position:relative; }
+.h-dp-band.is-hh td > span:first-child { position:sticky; left:30px; }
+.h-dp-hhtools { display:inline-flex; gap:4px; align-items:center; margin-left:14px; font-weight:400; position:sticky; left:240px; }

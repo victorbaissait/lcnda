@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 29;
+const SCHEMA_VERSION = 30;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -50,6 +50,7 @@ function migration_steps(): array
         27 => 'schema_v27',
         28 => 'schema_v28',
         29 => 'schema_v29',
+        30 => 'schema_v30',
     ];
 }
 
@@ -1743,4 +1744,11 @@ function schema_v29(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(recueil_pages)')->fetchAll(), 'name');
     if ($cols && !in_array('table_json', $cols, true)) { $pdo->exec("ALTER TABLE recueil_pages ADD COLUMN table_json TEXT NOT NULL DEFAULT ''"); }
+}
+
+/** Dépouillements : nombre de pages du document lui-même (page_total reste le nombre de vues du scan en ligne). */
+function schema_v30(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(archive_digest_entries)')->fetchAll(), 'name');
+    if ($cols && !in_array('doc_pages', $cols, true)) { $pdo->exec('ALTER TABLE archive_digest_entries ADD COLUMN doc_pages INTEGER'); }
 }
