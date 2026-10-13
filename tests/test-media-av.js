@@ -41,6 +41,15 @@ $out['video'] = array_column(media_av_list($pdo, 'video')['items'], 'title');
 $out['saved'] = save_media_durations($pdo, ['durations' => [$a1 => 125.456, $a2 => -3, $v1 => 999999, $i1 => 12]])['saved'];
 $out['durations'] = array_column(media_av_list($pdo, 'audio')['items'], 'duration', 'title');
 $out['image_dur'] = $pdo->query("SELECT duration_seconds FROM media WHERE id=$i1")->fetchColumn();
+// Son modifié : l'original est gardé (media_versions), la version montrée change de fichier et la durée est remise à mesurer
+file_put_contents(MEDIA_DIR . '/son2.wav', 'y'); $pdo->prepare("INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?, 'son.mp3', 'Original', 1), (?, 'son2.wav', 'Montage 1', 0)")->execute([$a1, $a1]);
+retouch_av_show($pdo, $a1, 'son2.wav', 42.5);
+$it = array_values(array_filter(media_av_list($pdo, 'audio')['items'], fn($r) => $r['id'] === $a1))[0];
+$out['edited'] = [$it['filename'], $it['format'], $it['original'], $it['original_format'], $it['versions'], $it['duration']];
+$vid = (int) $pdo->query("SELECT id FROM media_versions WHERE media_id=$a1 AND is_original=1")->fetchColumn();
+retouch_show_version($pdo, ['media_id' => $a1, 'version_id' => $vid]);
+$it = array_values(array_filter(media_av_list($pdo, 'audio')['items'], fn($r) => $r['id'] === $a1))[0];
+$out['back'] = [$it['filename'], $it['original'], $it['duration'], $pdo->query("SELECT thumbnail FROM media WHERE id=$a1")->fetchColumn()];
 echo json_encode($out);
 `;
 const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: appRoot, encoding: 'utf8', env: { ...process.env, GENEALOGY_DATA_DIR: dir, GENEALOGY_MEDIA_DIR: path.join(dir, 'media') } });
@@ -54,6 +63,8 @@ const checks = [
   ['rattachements : fiche, couple, enquête', () => assert.deepEqual(out.audio[0][3], ['person:Jean Dupont:1', 'family:Jean Dupont et Marie Martin:1', 'investigation:Qui est Jean ?:1'])],
   ['rattachement à un objet de famille', () => assert.deepEqual(out.audio[1][3], ['collection:Phonographe:'])],
   ['liste des vidéos à part', () => assert.deepEqual(out.video, ['Mariage'])],
+  ['son modifié : format, original gardé et proposé, durée de la version', () => assert.deepEqual(out.edited, ['son2.wav', 'WAV', 'son.mp3', 'MP3', 2, 42.5])],
+  ['revenir à l’original : plus de bouton « original », durée à remesurer, pas de vignette d’image', () => assert.deepEqual(out.back, ['son.mp3', '', null, ''])],
   ['durées : seule une valeur sensée sur un son ou une vidéo est gardée', () => { assert.equal(out.saved, 1); assert.equal(out.durations.Interview, 125.46); assert.equal(out.durations.Perdu, null); assert.equal(out.image_dur, null); }],
 ];
 let failed = 0;

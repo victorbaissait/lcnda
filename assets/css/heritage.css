@@ -1122,3 +1122,37 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-rc-more { display:flex; align-items:center; justify-content:center; font-weight:700; }
 .h-rc-section { margin-top:16px; }
 :root[data-theme="dark"] .h-rc-cover, :root[data-theme="dark"] .h-rc-thumb { background:#333; }
+/* ✂️ Atelier son et vidéo (heritage-studio-av.js) */
+.h-avx { width:min(1280px, 96vw); max-width:96vw; }
+.h-avx .h-avx-body { padding:14px 22px 6px; display:flex; flex-direction:column; gap:10px; }
+.h-avx-top { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+.h-avx-time { font-variant-numeric:tabular-nums; font-size:15px; }
+.h-avx-sel { font-size:13px; font-variant-numeric:tabular-nums; }
+.h-avx-zoom { margin-left:auto; display:flex; gap:6px; }
+.h-avx-wave { border:var(--line); background:var(--white); height:190px; }
+.h-avx-wave canvas { width:100%; height:100%; display:block; cursor:text; touch-action:none; }
+.h-avx-scroll { width:100%; }
+.h-avx-transport, .h-avx-ops { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.h-avx-tip { font-size:12px; margin-left:auto; }
+.h-avx-help { font-size:13px; margin:0; }
+.h-avx-versions { border:1px solid rgba(127,127,127,.35); padding:8px 12px; }
+.h-avx-versions summary { cursor:pointer; font-weight:700; }
+.h-avx-versions ul { list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:6px; }
+.h-avx-versions li { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.h-avx-versions li.is-shown span { font-weight:700; }
+.h-avx-versions audio { width:100%; margin-top:8px; }
+.h-avx-vgrid { display:grid; grid-template-columns:minmax(0, 2fr) minmax(240px, 1fr); gap:16px; }
+@media (max-width: 900px) { .h-avx-vgrid { grid-template-columns:1fr; } }
+.h-avx-vstage { background:#000; display:flex; align-items:center; justify-content:center; min-height:300px; max-height:52vh; overflow:hidden; }
+.h-avx-vstage video { max-width:100%; max-height:52vh; }
+.h-avx-vside { display:flex; flex-direction:column; gap:6px; }
+.h-avx-vside h4 { margin:6px 0 0; }
+.h-avx-row { display:flex; gap:8px; align-items:center; font-size:13px; }
+.h-avx-row input[type=range] { flex:1; accent-color:var(--blue); }
+.h-avx-tl { display:flex; gap:3px; height:54px; }
+.h-avx-seg { position:relative; min-width:26px; display:flex; flex-direction:column; justify-content:center; padding:2px 6px; border:2px solid rgba(127,127,127,.5); background:var(--blue-soft, #eaf2ff); color:inherit; font:inherit; font-size:12px; text-align:left; overflow:hidden; cursor:pointer; }
+.h-avx-seg span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:700; }
+.h-avx-seg.is-current { border-color:var(--blue); background:var(--white); }
+.h-avx-seg i { position:absolute; top:0; bottom:0; width:2px; background:#d33; }
+.av-edit-col { white-space:nowrap; text-align:right; }
+.av-edit-col .icon-button { width:30px; height:30px; min-width:0; padding:0; font-size:14px; }

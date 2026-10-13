@@ -240,7 +240,7 @@
                 <label>Rattaché à <select id="av-owner"><option value="">Tout</option>${presentGroups.map(g => `<option value="${g[0]}"${p.owner === g[0] ? ' selected' : ''}>${esc(g[1])}</option>`).join('')}${unlinked ? `<option value="none"${p.owner === 'none' ? ' selected' : ''}>Rattaché à rien</option>` : ''}</select></label>
                 <span class="av-count muted" id="av-count"></span>
             </div>
-            <div class="data-table-wrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th></tr></thead><tbody id="av-body"></tbody></table></div>
+            <div class="data-table-wrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
             <div id="av-player-host"></div>` : A().empty(`Aucun${kind === 'video' ? 'e vidéo' : ' son'} : ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`)}
         </section>`;
         if (!items.length) return;
@@ -265,11 +265,13 @@
                 <td>${esc(it.date_text || '')}</td>
                 <td>${esc(fmtAdded(it.created_at))}</td>
                 <td class="muted">${esc(fmtSize(it.size))}</td>
+                <td class="muted">${esc(it.format || '')}${it.original ? ` <small title="Version modifiée ; l’original (${esc(it.original_format)}) est gardé">✂️</small>` : ''}</td>
+                <td class="av-edit-col">${it.original ? `<button type="button" class="icon-button" data-av-original="${it.id}" title="${kind === 'video' ? 'Voir' : 'Écouter'} l’original (avant modification)">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}</td>
             </tr>`;
         };
         const draw = () => {
             view = sorted(filtered(items, p), p.sort);
-            $('#av-body').innerHTML = view.length ? view.map(rowHtml).join('') : `<tr><td colspan="7" class="muted">Rien ne correspond.</td></tr>`;
+            $('#av-body').innerHTML = view.length ? view.map(rowHtml).join('') : `<tr><td colspan="9" class="muted">Rien ne correspond.</td></tr>`;
             const dur = view.reduce((s, it) => s + (it.duration || 0), 0);
             $('#av-count').textContent = `${view.length} ${view.length > 1 ? K.many : K.one}${view.length !== items.length ? ` sur ${items.length}` : ''}${dur ? ` · ${fmtDur(dur)} en tout` : ''}`;
             player.updatePos();
@@ -291,6 +293,10 @@
         $('#av-body').addEventListener('click', e => {
             const pb = e.target.closest('[data-av-play]');
             if (pb) return play(Number(pb.dataset.avPlay));
+            const ed = e.target.closest('[data-av-edit]');
+            if (ed) { const it = items.find(x => x.id === Number(ed.dataset.avEdit)); player.close(); return ext.openAvEditor?.({...it, media_type: kind}, {onDone: () => renderAv(++S().workspaceToken, kind)}); }
+            const og = e.target.closest('[data-av-original]');
+            if (og) { const it = items.find(x => x.id === Number(og.dataset.avOriginal)); return player.load({...it, id: -it.id, filename: it.original, title: nameOf(it) + ' — original', owners: it.owners}); }
             const own = e.target.closest('[data-av-owner]');
             if (own) { const [mid, i] = own.dataset.avOwner.split(':').map(Number); const o = items.find(x => x.id === mid)?.owners[i]; if (o) goOwner(o); return; }
             const tr = e.target.closest('[data-av-row]');

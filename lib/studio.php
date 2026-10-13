@@ -11,15 +11,22 @@ declare(strict_types=1);
  */
 
 const RETOUCH_TYPES = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+/** 🎚️ Sons et vidéos montés dans l'atelier son / vidéo (heritage-studio-av.js) : mêmes versions que les photos. */
+const RETOUCH_AV_TYPES = ['audio/wav' => 'wav', 'audio/x-wav' => 'wav', 'audio/vnd.wave' => 'wav', 'audio/wave' => 'wav', 'audio/ogg' => 'ogg', 'application/ogg' => 'ogg',
+    'audio/webm' => 'webm', 'video/webm' => 'webm', 'video/mp4' => 'mp4', 'audio/mp4' => 'm4a', 'audio/x-m4a' => 'm4a', 'audio/mpeg' => 'mp3', 'video/quicktime' => 'mov'];
 
-/** Range le fichier reçu dans media/ sous un nouveau nom ; rend ce nom. */
-function retouch_store_upload(?array $file): string
+/** Range le fichier reçu dans media/ sous un nouveau nom ; rend ce nom. $kind : image, audio ou video. */
+function retouch_store_upload(?array $file, string $kind = 'image'): string
 {
-    if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { throw new RuntimeException('Image retouchée non reçue.'); }
-    if ((int) $file['size'] > 60 * 1024 * 1024) { throw new RuntimeException('Image trop grande (plus de 60 Mo).'); }
+    $av = $kind === 'audio' || $kind === 'video';
+    if (!$file || (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) { throw new RuntimeException($av ? 'Fichier monté non reçu.' : 'Image retouchée non reçue.'); }
+    if ((int) $file['size'] > ($av ? 4096 : 60) * 1024 * 1024) { throw new RuntimeException($av ? 'Fichier trop grand (plus de 4 Go).' : 'Image trop grande (plus de 60 Mo).'); }
     $mime = (new finfo(FILEINFO_MIME_TYPE))->file((string) $file['tmp_name']);
-    if (!isset(RETOUCH_TYPES[$mime])) { throw new RuntimeException('Format d’image non pris en charge.'); }
-    $name = bin2hex(random_bytes(16)) . '.' . RETOUCH_TYPES[$mime];
+    $types = $av ? RETOUCH_AV_TYPES : RETOUCH_TYPES;
+    if (!isset($types[$mime])) { throw new RuntimeException($av ? 'Format de son ou de vidéo non pris en charge (' . $mime . ').' : 'Format d’image non pris en charge.'); }
+    $ext = $types[$mime];
+    if ($kind === 'audio' && $ext === 'mp4') { $ext = 'm4a'; } // un son AAC est souvent vu comme « video/mp4 »
+    $name = bin2hex(random_bytes(16)) . '.' . $ext;
     if (!@move_uploaded_file((string) $file['tmp_name'], MEDIA_DIR . '/' . $name) && !@copy((string) $file['tmp_name'], MEDIA_DIR . '/' . $name)) {
         throw new RuntimeException('Impossible d’enregistrer l’image retouchée.');
     }
@@ -53,9 +60,12 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
     $s = $pdo->prepare('SELECT * FROM media WHERE id=?'); $s->execute([$id]);
     $media = $s->fetch();
     if (!$media) { json_response(['error' => 'Média introuvable.'], 404); }
-    if (strtolower((string) $media['media_type']) !== 'image') { json_response(['error' => 'Seules les images se retouchent.'], 422); }
+    $kind = strtolower((string) $media['media_type']);
+    if (!in_array($kind, ['image', 'audio', 'video'], true)) { json_response(['error' => 'Seuls les images, les sons et les vidéos se modifient.'], 422); }
+    $av = $kind !== 'image';
+    $duration = isset($post['duration']) && is_numeric($post['duration']) && (float) $post['duration'] > 0 ? round((float) $post['duration'], 2) : null;
     try {
-        $name = retouch_store_upload($file);
+        $name = retouch_store_upload($file, $kind);
     } catch (RuntimeException $e) {
         json_response(['error' => $e->getMessage()], 422);
     }
@@ -65,8 +75,10 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
         if ($mode === 'copy') {
             $row = $media;
             unset($row['id'], $row['source_id']);
-            $row['filename'] = $name; $row['thumbnail'] = $name;
-            $row['title'] = trim((string) $media['title']) !== '' ? $media['title'] . ' (retouchée)' : 'Photo retouchée';
+            $row['filename'] = $name; $row['thumbnail'] = $av ? '' : $name;
+            $copyTitle = safe_text($post['title'] ?? '');
+            $row['title'] = $copyTitle !== '' ? mb_substr($copyTitle, 0, 300) : (trim((string) $media['title']) !== '' ? $media['title'] . ($av ? ' (montage)' : ' (retouchée)') : ($av ? 'Montage' : 'Photo retouchée'));
+            if (array_key_exists('duration_seconds', $row)) { $row['duration_seconds'] = $duration; }
             // La copie n'est ni un côté de carte postale, ni une lettre de la correspondance, ni le portrait
             foreach (['postcard_group' => '', 'postcard_side' => '', 'is_person_photo' => 0, 'correspondence_reply_to_media_id' => 0] as $col => $val) { if (array_key_exists($col, $row)) { $row[$col] = $val; } }
             if (array_key_exists('created_at', $row)) { $row['created_at'] = date('Y-m-d H:i:s'); }
@@ -85,11 +97,16 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
             if (!(int) $has->fetchColumn()) {
                 $pdo->prepare('INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?,?,?,1)')->execute([$id, $current, 'Original']);
             }
-            $n = $pdo->prepare("SELECT COALESCE(max(CAST(substr(label, 10, instr(substr(label, 10), ' ')) AS INTEGER)), 0) FROM media_versions WHERE media_id=? AND label LIKE 'Retouche %'"); $n->execute([$id]);
-            $label = 'Retouche ' . ((int) $n->fetchColumn() + 1) . ' — ' . date('d/m/Y'); // jamais deux fois le même numéro, même après une suppression
+            $word = $av ? 'Montage' : 'Retouche';
+            $n = $pdo->prepare("SELECT COALESCE(max(CAST(substr(label, ?, instr(substr(label, ?), ' ')) AS INTEGER)), 0) FROM media_versions WHERE media_id=? AND label LIKE ?");
+            $n->execute([mb_strlen($word) + 2, mb_strlen($word) + 2, $id, $word . ' %']);
+            $label = $word . ' ' . ((int) $n->fetchColumn() + 1) . ' — ' . date('d/m/Y'); // jamais deux fois le même numéro, même après une suppression
+            $note = mb_substr(safe_text($post['note'] ?? ''), 0, 120);
+            if ($note !== '') { $label .= ' — ' . $note; }
             $pdo->prepare('INSERT INTO media_versions(media_id, filename, label, is_original) VALUES(?,?,?,0)')->execute([$id, $name, $label]);
             if ($show) {
-                $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]);
+                if ($av) { retouch_av_show($pdo, $id, $name, $duration); }
+                else { $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$name, $name, $id]); }
             }
             log_change($pdo, 'media', $id, 'update', 'Nouvelle version retouchée de « ' . ($media['title'] ?: $current) . ' »' . ($show ? ' (affichée)' : ''), ['filename' => $current], ['filename' => $show ? $name : $current]);
             $result = ['mode' => 'version', 'media_id' => $id, 'filename' => $show ? $name : $current, 'versions' => retouch_versions($pdo, $id)];
@@ -103,6 +120,13 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
     json_response(['ok' => true, 'result' => $result]);
 }
 
+/** Son ou vidéo : la version montrée change de fichier ; sa durée sera remesurée par l'écran si on ne la connaît pas. */
+function retouch_av_show(PDO $pdo, int $id, string $file, ?float $duration = null): void
+{
+    $pdo->prepare('UPDATE media SET filename=? WHERE id=?')->execute([$file, $id]);
+    try { $pdo->prepare('UPDATE media SET duration_seconds=? WHERE id=?')->execute([$duration, $id]); } catch (Throwable $_) {}
+}
+
 /** Choisir la version affichée par défaut (l'original ou une retouche). */
 function retouch_show_version(PDO $pdo, array $data): array
 {
@@ -111,7 +135,9 @@ function retouch_show_version(PDO $pdo, array $data): array
     $file = $s->fetchColumn();
     if ($file === false) { throw new RuntimeException('Version introuvable.'); }
     if (!is_file(MEDIA_DIR . '/' . basename((string) $file))) { throw new RuntimeException('Le fichier de cette version n’est plus dans le dossier des médias.'); }
-    $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$file, $file, $id]);
+    $t = $pdo->prepare('SELECT media_type FROM media WHERE id=?'); $t->execute([$id]);
+    if (in_array((string) $t->fetchColumn(), ['audio', 'video'], true)) { retouch_av_show($pdo, $id, (string) $file); }
+    else { $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$file, $file, $id]); }
     log_change($pdo, 'media', $id, 'update', 'Version affichée changée');
     return ['filename' => $file, 'versions' => retouch_versions($pdo, $id)];
 }
@@ -132,7 +158,9 @@ function retouch_delete_version(PDO $pdo, array $data): never
             $o = $pdo->prepare('SELECT filename FROM media_versions WHERE media_id=? AND is_original=1'); $o->execute([$id]);
             $orig = (string) $o->fetchColumn();
             if ($orig === '' || !is_file(MEDIA_DIR . '/' . basename($orig))) { throw new RuntimeException('L’original n’est plus dans le dossier des médias : affiche d’abord une autre version.'); }
-            $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$orig, $orig, $id]);
+            $t = $pdo->prepare('SELECT media_type FROM media WHERE id=?'); $t->execute([$id]);
+            if (in_array((string) $t->fetchColumn(), ['audio', 'video'], true)) { retouch_av_show($pdo, $id, $orig); }
+            else { $pdo->prepare('UPDATE media SET filename=?, thumbnail=? WHERE id=?')->execute([$orig, $orig, $id]); }
         }
         $pdo->prepare('DELETE FROM media_versions WHERE id=?')->execute([$vid]);
         log_change($pdo, 'media', $id, 'update', 'Version retouchée supprimée');

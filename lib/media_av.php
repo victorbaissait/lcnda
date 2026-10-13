@@ -74,6 +74,8 @@ function media_av_list(PDO $pdo, string $kind): array
             $add((int) $r['media_id'], ['type' => 'collection', 'label' => MEDIA_AV_COLLECTIONS[$type] ?? 'Collection', 'name' => $name ?: (MEDIA_AV_COLLECTIONS[$type] ?? 'Collection')] + $extra);
         }
     });
+    $versions = [];
+    $safe(function () use ($pdo, $in, &$versions) { foreach ($pdo->query("SELECT media_id, COUNT(*) AS n, MAX(CASE WHEN is_original=1 THEN filename ELSE '' END) AS original FROM media_versions WHERE media_id IN ($in) GROUP BY media_id") as $v) { $versions[(int) $v['media_id']] = ['n' => (int) $v['n'], 'original' => (string) $v['original']]; } });
     foreach ($items as &$r) {
         $r['id'] = (int) $r['id'];
         $r['duration'] = $r['duration_seconds'] !== null ? (float) $r['duration_seconds'] : null; unset($r['duration_seconds']);
@@ -81,6 +83,11 @@ function media_av_list(PDO $pdo, string $kind): array
         $r['exists'] = $r['filename'] !== '' && is_file($path);
         $r['size'] = $r['exists'] ? (int) filesize($path) : 0;
         $r['owners'] = $owners[$r['id']] ?? [];
+        $r['format'] = strtoupper(pathinfo((string) $r['filename'], PATHINFO_EXTENSION));
+        $v = $versions[$r['id']] ?? null; // l'original, quand c'est une version modifiée qui est montrée
+        $r['versions'] = $v ? $v['n'] : 0;
+        $r['original'] = $v && $v['original'] !== '' && $v['original'] !== $r['filename'] && is_file(MEDIA_DIR . '/' . basename($v['original'])) ? $v['original'] : '';
+        $r['original_format'] = $r['original'] !== '' ? strtoupper(pathinfo($r['original'], PATHINFO_EXTENSION)) : '';
     }
     unset($r);
     return ['kind' => $kind, 'items' => $items];

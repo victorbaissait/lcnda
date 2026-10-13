@@ -12563,7 +12563,7 @@ ${backupSectionHtml()}
         const rotateLeft=$('#rotate-media-left'),rotateRight=$('#rotate-media-right');
         if(rotateLeft)rotateLeft.hidden=!canTag||state.lightboxReadOnly;
         if(rotateRight)rotateRight.hidden=!canTag||state.lightboxReadOnly;
-        const retouchButton=$('#retouch-media');if(retouchButton)retouchButton.hidden=!canTag||state.lightboxReadOnly;
+        const retouchButton=$('#retouch-media');if(retouchButton)retouchButton.hidden=!canTag||state.lightboxReadOnly;const avEditButton=$('#edit-av-media');if(avEditButton)avEditButton.hidden=!['audio','video'].includes(kind)||state.lightboxReadOnly||!window.LCNDA_EXT?.openAvEditor;
         $('#set-portrait').hidden=!hasPersonContext||!canTag||isCurrentPortrait;
         let removePortraitButton=$('#remove-portrait');
         if(!removePortraitButton){removePortraitButton=document.createElement('button');removePortraitButton.type='button';removePortraitButton.id='remove-portrait';removePortraitButton.className='button small secondary';removePortraitButton.textContent='Retirer comme portrait';removePortraitButton.addEventListener('click',removeCurrentPortrait);$('#set-portrait').insertAdjacentElement('afterend',removePortraitButton);}
