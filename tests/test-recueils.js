@@ -90,6 +90,15 @@ $lk = recueils_for_entity($pdo, 'person', '1')[0]['link_id'];
 move_recueil_link($pdo, ['id' => $lk, 'folder_id' => 0]); $f0 = recueils_for_entity($pdo, 'person', '1')[0]['folder_id'];
 move_recueil_link($pdo, ['id' => $lk, 'folder_id' => '']); $f1 = recueils_for_entity($pdo, 'person', '1')[0]['folder_id'];
 $out['folder'] = [$f0, $f1];
+// tableau d'une page : nettoyé (identifiants, cellules de colonnes inconnues, fusions invalides), relu
+$pg = recueil_detail($pdo, $rid)['pages'][0]['id'];
+save_recueil_page($pdo, ['id' => $pg, 'table' => ['locked' => false, 'cols' => [['id' => 'c1', 'name' => 'Nom'], ['id' => 'c2', 'name' => 'Âge'], ['id' => 'c1', 'name' => 'doublon']],
+    'rows' => [['id' => 'r1', 'c' => ['c1' => 'DUPONT Jean', 'c2' => '23', 'zz' => 'perdu'], 'person' => ['id' => 1, 'name' => 'Jean Dupont', 'link' => 9]], ['id' => 'r2', 'c' => ['c1' => 'x<script>']]],
+    'merges' => [['r' => 'r1', 'c' => 'c1', 'rs' => 2, 'cs' => 1], ['r' => 'r9', 'c' => 'c1', 'rs' => 2, 'cs' => 1], ['r' => 'r2', 'c' => 'c2', 'rs' => 1, 'cs' => 1]]]]);
+$tb = array_values(array_filter(recueil_detail($pdo, $rid)['pages'], fn($x) => $x['id'] === $pg))[0]['table'];
+$out['table'] = [count($tb['cols']), $tb['rows'][0]['c'], $tb['rows'][0]['person']['id'], count($tb['merges']), $tb['locked']];
+save_recueil_page($pdo, ['id' => $pg, 'table' => null]);
+$out['table_cleared'] = array_values(array_filter(recueil_detail($pdo, $rid)['pages'], fn($x) => $x['id'] === $pg))[0]['table'];
 // couverture choisie, puis automatique
 $cov = (int) $pdo->query("SELECT id FROM media WHERE media_type='image' ORDER BY id DESC LIMIT 1")->fetchColumn();
 save_recueil($pdo, ['id' => $rid, 'title' => 'X', 'cover_media_id' => $cov]); $c1 = recueil_detail($pdo, $rid)['recueil']['cover'];
@@ -115,7 +124,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 let out;
 try { out = JSON.parse(r.stdout.slice(r.stdout.indexOf('{'))); } catch (_) { console.error(r.stdout, r.stderr); process.exit(1); }
 const checks = [
-  ['structure à jour (n°28)', () => assert.equal(out.version, 28)],
+  ['structure à jour (n°29)', () => assert.equal(out.version, 29)],
   ['deux versions ; les nouvelles photos remplissent les pages existantes puis en créent une', () => assert.deepEqual(out.counts, [2, 4, 7, 1])],
   ['par défaut, la page montre la photo la plus récente ; on peut retenir l’ancienne', () => { assert.equal(out.default_shown, true); assert.deepEqual(out.p1, ['f° 1', true]); }],
   ['photo « à ranger », puis posée en détail (zoom) sur une page', () => { assert.equal(out.loose, null); assert.equal(out.p2_shown_not_detail, true); }],
@@ -128,6 +137,7 @@ const checks = [
   ['dossiers de « À ranger » : sans doublon, renommés avec leurs photos, supprimés sans perdre les photos', () => assert.deepEqual(out.trays, [['Liste C', 'Liste B'], 'Liste C', ['Liste B'], ''])],
   ['nouvelle page au début, puis juste après la première', () => assert.deepEqual(out.new_pages, [true, 2, true])],
   ['recueil d’une enquête : dans un dossier (0 = racine) ou partout', () => assert.deepEqual(out.folder, [0, null])],
+  ['tableau d’une page : colonnes uniques, cellules inconnues retirées, ligne rattachée gardée, fusion invalide retirée ; effaçable', () => { assert.deepEqual(out.table, [2, {c1: 'DUPONT Jean', c2: '23'}, 1, 1, false]); assert.equal(out.table_cleared, null); }],
   ['couverture choisie (image de Médias), puis revenue à la première page', () => assert.deepEqual(out.cover, [true, true])],
   ['juste une image : médias de la fiche, bloc Résistance, projet de l’Atelier ; pas de doublon ; bloc inconnu refusé', () => assert.deepEqual(out.img_link, [true, true, false, true, 1, 1, true, 'refusé'])],
   ['recueil supprimé avec ses photos qui ne servent nulle part ailleurs (celle rattachée à la fiche est gardée)', () => assert.deepEqual(out.deleted, [0, 0, 3])],

@@ -88,7 +88,8 @@ function recueil_detail(PDO $pdo, int $id): array
     $s = $pdo->prepare('SELECT * FROM recueil_pages WHERE recueil_id=? ORDER BY position, id'); $s->execute([$id]);
     $pages = [];
     foreach ($s->fetchAll() as $n => $p) {
-        $pages[] = ['id' => (int) $p['id'], 'num' => $n + 1, 'label' => $p['label'], 'transcription' => $p['transcription'], 'notes' => $p['notes'], 'best_image_id' => $p['best_image_id'] !== null ? (int) $p['best_image_id'] : null, 'position' => (float) $p['position']];
+        $pages[] = ['id' => (int) $p['id'], 'num' => $n + 1, 'label' => $p['label'], 'transcription' => $p['transcription'], 'notes' => $p['notes'], 'best_image_id' => $p['best_image_id'] !== null ? (int) $p['best_image_id'] : null, 'position' => (float) $p['position'],
+            'table' => ($t = json_decode((string) ($p['table_json'] ?? ''), true)) && is_array($t) ? $t : null];
     }
     $s = $pdo->prepare('SELECT i.*, m.title AS media_title, m.filename, m.thumbnail, m.media_type, m.date_text AS media_date, m.transcription AS media_transcription
         FROM recueil_images i JOIN media m ON m.id=i.media_id WHERE i.recueil_id=? ORDER BY i.position, i.id');
@@ -311,6 +312,10 @@ function save_recueil_page(PDO $pdo, array $data): array
     foreach (['label' => 200, 'transcription' => 200000, 'notes' => 20000] as $k => $max) {
         if (array_key_exists($k, $data)) { $pdo->prepare("UPDATE recueil_pages SET $k=? WHERE id=?")->execute([mb_substr((string) ($data[$k] ?? ''), 0, $max), $id]); }
     }
+    if (array_key_exists('table', $data)) {
+        $t = is_array($data['table']) ? recueil_clean_table($data['table']) : null;
+        $pdo->prepare('UPDATE recueil_pages SET table_json=? WHERE id=?')->execute([$t ? json_encode($t, JSON_UNESCAPED_UNICODE) : '', $id]);
+    }
     if (array_key_exists('best_image_id', $data)) {
         $best = safe_int($data['best_image_id']);
         if ($best) { $s = $pdo->prepare('SELECT 1 FROM recueil_images WHERE id=? AND page_id=?'); $s->execute([$best, $id]); if (!$s->fetchColumn()) { throw new RuntimeException('Cette photo n’est pas sur cette page.'); } }
@@ -338,7 +343,8 @@ function delete_recueil_page(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0); $rid = recueil_page_owner($pdo, $id);
     $pdo->prepare('UPDATE recueil_images SET page_id=NULL WHERE page_id=?')->execute([$id]);
     // Un rattachement « de telle page à telle page » garde sa plage : il se resserre sur la page qui reste
-    $pdo->prepare('UPDATE recueil_links SET page_from=NULL, page_to=NULL WHERE page_from=? AND (page_to=? OR page_to IS NULL)')->execute([$id, $id]);
+    // Un rattachement qui ne visait que cette page (une page, une ligne de son tableau) n'a plus d'objet
+    $pdo->prepare('DELETE FROM recueil_links WHERE page_from=? AND (page_to=? OR page_to IS NULL)')->execute([$id, $id]);
     $pdo->prepare('UPDATE recueil_links SET page_from=page_to, page_to=NULL WHERE page_from=?')->execute([$id]);
     $pdo->prepare('UPDATE recueil_links SET page_to=NULL WHERE page_to=?')->execute([$id]);
     $pdo->prepare('DELETE FROM recueil_pages WHERE id=?')->execute([$id]);
@@ -664,4 +670,36 @@ function recueil_media_owners(PDO $pdo, int $mediaId): array
         $seen = []; $out = array_values(array_filter($out, static function ($o) use (&$seen) { $k = $o['label'] . '|' . $o['name']; if (isset($seen[$k])) { return false; } return $seen[$k] = true; }));
     } catch (Throwable $_) {}
     return ['owners' => $out];
+}
+
+/**
+ * Tableur d'une page : {locked, cols:[{id, name}], rows:[{id, c:{colId: texte}, person:{id, name, link}}], merges:[{r, c, rs, cs}]}.
+ * Les identifiants de lignes et de colonnes restent les mêmes quand on les déplace ; une fusion part d'une cellule (r, c) sur rs lignes et cs colonnes.
+ */
+function recueil_clean_table(array $t): ?array
+{
+    $id = static fn($v) => mb_substr(preg_replace('/[^A-Za-z0-9_-]/', '', (string) $v), 0, 24);
+    $cols = []; $colIds = [];
+    foreach (array_slice(is_array($t['cols'] ?? null) ? $t['cols'] : [], 0, 80) as $c) {
+        if (!is_array($c) || ($cid = $id($c['id'] ?? '')) === '' || isset($colIds[$cid])) { continue; }
+        $colIds[$cid] = true; $cols[] = ['id' => $cid, 'name' => mb_substr(safe_text((string) ($c['name'] ?? '')), 0, 200)];
+    }
+    if (!$cols) { return null; }
+    $rows = []; $rowIds = [];
+    foreach (array_slice(is_array($t['rows'] ?? null) ? $t['rows'] : [], 0, 5000) as $r) {
+        if (!is_array($r) || ($rid = $id($r['id'] ?? '')) === '' || isset($rowIds[$rid])) { continue; }
+        $rowIds[$rid] = true;
+        $cells = [];
+        foreach (is_array($r['c'] ?? null) ? $r['c'] : [] as $k => $v) { if (isset($colIds[$k]) && is_scalar($v) && (string) $v !== '') { $cells[$k] = mb_substr(str_replace("\r", '', (string) $v), 0, 4000); } }
+        $row = ['id' => $rid, 'c' => (object) $cells];
+        if (is_array($r['person'] ?? null) && safe_int($r['person']['id'] ?? 0)) { $row['person'] = ['id' => safe_int($r['person']['id']), 'name' => mb_substr(safe_text((string) ($r['person']['name'] ?? '')), 0, 200), 'link' => safe_int($r['person']['link'] ?? 0)]; }
+        $rows[] = $row;
+    }
+    $merges = [];
+    foreach (array_slice(is_array($t['merges'] ?? null) ? $t['merges'] : [], 0, 2000) as $m) {
+        if (!is_array($m)) { continue; }
+        $r = $id($m['r'] ?? ''); $c = $id($m['c'] ?? ''); $rs = max(1, min(5000, safe_int($m['rs'] ?? 1, 1))); $cs = max(1, min(80, safe_int($m['cs'] ?? 1, 1)));
+        if (isset($rowIds[$r], $colIds[$c]) && ($rs > 1 || $cs > 1)) { $merges[] = ['r' => $r, 'c' => $c, 'rs' => $rs, 'cs' => $cs]; }
+    }
+    return ['v' => 1, 'locked' => !empty($t['locked']), 'cols' => $cols, 'rows' => $rows, 'merges' => $merges];
 }

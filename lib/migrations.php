@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 28;
+const SCHEMA_VERSION = 29;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -49,6 +49,7 @@ function migration_steps(): array
         26 => 'schema_v26',
         27 => 'schema_v27',
         28 => 'schema_v28',
+        29 => 'schema_v29',
     ];
 }
 
@@ -1735,4 +1736,11 @@ function schema_v28(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(recueils)')->fetchAll(), 'name');
     if ($cols && !in_array('cover_media_id', $cols, true)) { $pdo->exec('ALTER TABLE recueils ADD COLUMN cover_media_id INTEGER'); }
+}
+
+/** Recueils : un tableur par page (listes à transposer : colonnes, lignes, cellules fusionnées, ligne rattachée à une fiche). */
+function schema_v29(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(recueil_pages)')->fetchAll(), 'name');
+    if ($cols && !in_array('table_json', $cols, true)) { $pdo->exec("ALTER TABLE recueil_pages ADD COLUMN table_json TEXT NOT NULL DEFAULT ''"); }
 }

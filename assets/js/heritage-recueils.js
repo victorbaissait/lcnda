@@ -175,7 +175,8 @@
     }
     function paintPages(body) {
         const s = st(), q = (s.q || '').toLowerCase();
-        const pages = q ? D.pages.filter(p => (p.label + ' ' + p.transcription + ' ' + p.notes).toLowerCase().includes(q)) : D.pages;
+        const tableText = p => p.table ? p.table.rows.map(r => Object.values(r.c || {}).join(' ')).join(' ') : '';
+        const pages = q ? D.pages.filter(p => (p.label + ' ' + p.transcription + ' ' + p.notes + ' ' + tableText(p)).toLowerCase().includes(q)) : D.pages;
         const ls = loose();
         body.innerHTML = `<div class="collection-toolbar h-rc-toolbar"><input type="search" data-rc-q2 value="${esc(s.q || '')}" placeholder="Chercher dans les transcriptions, les noms de page…">
                 <span class="segmented"><button type="button" class="${s.view !== 'table' ? 'is-active' : ''}" data-rc-view="grid">▦ Mosaïque</button><button type="button" class="${s.view === 'table' ? 'is-active' : ''}" data-rc-view="table">☰ Tableau</button></span>
@@ -352,12 +353,17 @@
                     <label>Nom de la page <small class="muted">(facultatif)</small><input data-rc-field="label" value="${esc(p.label)}" placeholder="f° 12 r°, page 3, lettre B…"></label>
                     <label class="h-rc-trans">Transcription <span class="h-rc-saved muted" data-rc-saved></span><textarea data-rc-field="transcription" rows="16" placeholder="Recopie ici ce qui est écrit sur la page (une ligne par ligne du document)…">${esc(p.transcription)}</textarea></label>
                     ${cur?.media_transcription && !p.transcription.trim() ? `<button type="button" class="link-button" data-rc-usemedia>↧ Reprendre la transcription déjà faite sur cette photo</button>` : ''}
+                    <button type="button" class="link-button h-rc-totable" data-rc-totable>📊 ${p.table ? 'Voir le tableau de la page' : 'Une liste à transposer ? Faire un tableau'} ↓</button>
                     <label>Notes<textarea data-rc-field="notes" rows="4" placeholder="Abréviations, mots incertains, ce qu’il reste à vérifier…">${esc(p.notes)}</textarea></label>
                     <div class="h-rc-sideactions"><button type="button" class="button small secondary" data-rc-pagemove="-1" ${idx ? '' : 'disabled'}>↑ Avancer la page</button><button type="button" class="button small secondary" data-rc-pagemove="1" ${next ? '' : 'disabled'}>↓ Reculer la page</button><button type="button" class="button small secondary" data-rc-insert>+ Page après</button><button type="button" class="button small secondary" data-rc-linkpage title="Rattacher cette page à une fiche, un village, une enquête, un projet de l’Atelier, une battue">🔗 Rattacher la page…</button><button type="button" class="button small secondary danger" data-rc-delpage>Supprimer la page</button></div>
                     ${(() => { const ls = D.links.filter(l => l.from_num ? p.num >= l.from_num && p.num <= (l.to_num || l.from_num) : true); const chips = [...new Set(ls.map(l => `<span class="h-rc-chip">${esc(l.type_label)} · ${esc(l.label)}${l.from_num ? '' : ' <small>(tout le recueil)</small>'}</span>`))]; return chips.length ? `<p class="h-rc-pagelinks"><b>🔗 Cette page est rattachée à :</b> ${chips.join(' ')}</p>` : ''; })()}
                     <p class="muted h-rc-hint">Supprimer une page ne supprime pas ses photos : elles passent « à ranger ».</p>
-                </div></div>`;
+                </div></div>
+            <details class="h-rc-tablebox maintenance-panel" data-rc-tablebox ${p.table || s.tableOpen ? 'open' : ''}><summary><b>📊 Tableau de la page</b> <small class="muted">${p.table ? plural(p.table.rows?.length || 0, 'ligne', 'lignes') + ' · ' + plural(p.table.cols?.length || 0, 'colonne', 'colonnes') : 'pour transposer une liste (noms, âges, lieux…) ligne par ligne'}</small> <span class="h-rc-saved muted" data-rc-tsaved></span></summary>
+                <div data-rc-table>${p.table ? '' : '<p class="muted">Pas encore de tableau sur cette page.</p><button type="button" class="button small" data-rc-tnew>📊 Créer le tableau</button>'}</div></details>`;
         const go = id => { if (!id) return; s.page = Number(id); s.image = 0; s.compare = 0; paint(); };
+        bindPageTable(body, p);
+        body.querySelector('[data-rc-totable]')?.addEventListener('click', () => { const tb = body.querySelector('[data-rc-tablebox]'); tb.open = true; tb.scrollIntoView({behavior: 'smooth', block: 'start'}); });
         body.querySelector('[data-rc-allpages]').addEventListener('click', () => { s.page = 0; paint(); });
         body.querySelectorAll('[data-rc-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.rcGo)));
         body.querySelector('[data-rc-jump]').addEventListener('change', e => go(e.target.value));
@@ -441,6 +447,63 @@
                 if (!p && st().tab !== 'versions') { st().tab = 'pages'; st().page = 0; }
                 await reload();
             },
+        });
+    }
+
+    /* ─── Tableau d'une page (heritage-recueil-table.js) : enregistré au fil de la frappe ; une ligne peut aller dans une fiche ─── */
+    function bindPageTable(body, p) {
+        const tb = body.querySelector('[data-rc-tablebox]'), host = body.querySelector('[data-rc-table]'), saved = body.querySelector('[data-rc-tsaved]');
+        if (!tb || !ext.recueilTable) return;
+        tb.addEventListener('toggle', () => { st().tableOpen = tb.open; });
+        let timer = 0;
+        const rowNote = (t, r) => `Ligne ${t.rows.indexOf(r) + 1} : ${ext.recueilTableRowText(t, r) || '(vide)'}`;
+        const flush = async t => {
+            try {
+                await post('save_recueil_page', {id: p.id, table: t}); p.table = t; saved.textContent = '✓ enregistré';
+                // la note du rattachement suit le texte de la ligne
+                for (const r of t.rows) if (r.person?.link) { const note = rowNote(t, r); if (r._note !== note) { r._note = note; await post('save_recueil_link', {id: r.person.link, recueil_id: D.recueil.id, entity_type: 'person', entity_key: String(r.person.id), page_from: p.id, page_to: p.id, note}).catch(() => {}); } }
+            } catch (e) { saved.textContent = '⚠ ' + e.message; }
+        };
+        const start = t => {
+            t.rows.forEach(r => { if (r.person) r._note = rowNote(t, r); });
+            host.innerHTML = '';
+            ext.recueilTable(host, t, {
+                onChange: tt => { saved.textContent = '…'; clearTimeout(timer); timer = setTimeout(() => flush(tt), 700); },
+                onPerson: (row, mode) => mode === 'pick' ? pickRowPerson(t, row, p) : row.person?.link ? post('delete_recueil_link', {id: row.person.link}).then(() => { delete row.person; toast('Ligne détachée de la fiche.'); }).catch(e => toast(e.message, 'error')) : Promise.resolve(),
+                onOpenPerson: per => { clearTimeout(timer); flush(t); S().currentPersonId = per.id; A().setModule('personnes'); },
+            });
+        };
+        if (p.table) start(p.table);
+        host.querySelector('[data-rc-tnew]')?.addEventListener('click', () => { const t = ext.recueilTableNew(); start(t); flush(t); });
+    }
+    /** Rattacher une ligne du tableau à une fiche : elle apparaît dans le bloc « Recueils » de la personne. */
+    function pickRowPerson(t, row, p) {
+        return new Promise(resolve => {
+            let done = false; const end = v => { if (!done) { done = true; resolve(v); } };
+            const guess = t.cols.map(c => (row.c[c.id] || '').trim()).filter(v => /\p{L}{2}/u.test(v)).slice(0, 2).join(' ');
+            dialog({eyebrow: 'LIGNE ' + (t.rows.indexOf(row) + 1), title: 'Rattacher cette ligne à une fiche', submitLabel: 'Rattacher',
+                body: `<p class="muted">${esc(ext.recueilTableRowText(t, row) || 'Ligne vide')}</p>
+                    <label>Chercher la personne<input type="search" name="q" value="${esc(guess)}" autocomplete="off" placeholder="Nom, prénom…"></label>
+                    <label>Résultat<select name="key" size="7" required></select></label>`,
+                onOpen: d => {
+                    d.addEventListener('close', () => setTimeout(() => end(false), 0), {once: true});
+                    const q = d.querySelector('[name=q]'), sel = d.querySelector('[name=key]'); let tm = 0;
+                    const search = async () => { const v = q.value.trim(); if (v.length < 2) { sel.innerHTML = ''; return; }
+                        let r = (await get('recueil_search', {type: 'person', q: v}).catch(() => ({results: []}))).results || [];
+                        if (!r.length && v.includes(' ')) r = (await get('recueil_search', {type: 'person', q: v.split(/\s+/)[0]}).catch(() => ({results: []}))).results || [];
+                        sel.innerHTML = r.map(x => `<option value="${esc(x.key)}">${esc(x.label)}${x.extra ? ` (${esc(x.extra)})` : ''}</option>`).join(''); if (sel.options.length) sel.selectedIndex = 0; };
+                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(search, 250); }); search(); setTimeout(() => q.focus(), 50);
+                },
+                onSubmit: async form => {
+                    const sel = form.querySelector('[name=key]'), opt = sel.selectedOptions[0];
+                    if (!opt) { toast('Choisis la personne dans la liste.', 'error'); return false; }
+                    const note = `Ligne ${t.rows.indexOf(row) + 1} : ${ext.recueilTableRowText(t, row) || '(vide)'}`;
+                    const res = await post('save_recueil_link', {recueil_id: D.recueil.id, entity_type: 'person', entity_key: opt.value, page_from: p.id, page_to: p.id, note});
+                    row.person = {id: Number(opt.value), name: opt.textContent.replace(/\s*\(.*\)$/, ''), link: (res.result || res).id}; row._note = note;
+                    toast(`Ligne rattachée à ${row.person.name} : elle apparaît dans le bloc « Recueils » de sa fiche.`);
+                    end(true);
+                },
+            });
         });
     }
 
