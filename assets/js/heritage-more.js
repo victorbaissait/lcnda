@@ -1245,8 +1245,60 @@
             ['Comment exporter seulement une branche ?', 'Maintenance → Export propre : choisis la personne de départ et les ascendants ou descendants à exporter.'],
         ]],
     ];
-    ext.faqHtml = () => `<section class="maintenance-panel full-width help-intro h-faq"><h3>Questions fréquentes</h3><p>Comment faire ceci ou cela dans LCNDA.</p>
-        ${FAQ.map(([group, items]) => `<h4>${esc(group)}</h4>${items.map(([q, a]) => `<details class="h-faq-item"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}`).join('')}</section>`;
+    // Recherche dans la FAQ : on tape sa question comme on la dirait (« comment je fais un livre en pdf ? ») ;
+    // sans accents ni majuscules, sans les petits mots, avec quelques synonymes ; les meilleures réponses d'abord.
+    const FAQ_STOP = new Set('a ai as au aux avec ce ces cet cette comment dans de des du elle en est et etre faire fais fait faut il ils je j la le les leur leurs lui ma me mes moi mon ne nous on ou par pas peut peux plus pour pourquoi puis qu que quel quelle quels qui quoi sa se ses si son sur ta te tes toi ton tu un une vos votre vous y lcnda app logiciel veux voudrais aimerais aimer dois doit savoir besoin possible moyen base genealogie truc chose'.split(' '));
+    const FAQ_SYN = {photo: 'image media scan document', image: 'photo media', media: 'photo image document', scan: 'photo document numeriser', pdf: 'imprimer livre exporter', imprimer: 'pdf livre', livre: 'livret pdf imprimer',
+        supprimer: 'effacer enlever retirer', effacer: 'supprimer', ancetre: 'sosa lignee aieul', sosa: 'ancetre lignee cujus', cujus: 'sosa depart', arbre: 'genealogie diagramme ascendant', carte: 'lieu plan',
+        graphique: 'statistique stat diagramme', statistique: 'graphique stat chiffre', stat: 'statistique graphique', onglet: 'menu page', widget: 'tableau bord', sauvegarde: 'copie backup sauvegarder', sauvegarder: 'sauvegarde copie',
+        importer: 'import gedcom heredis', exporter: 'export pdf csv', liste: 'listes tableau', critere: 'condition filtre', filtre: 'critere condition', condition: 'critere filtre', village: 'commune paroisse', commune: 'village lieu',
+        recensement: 'foyer adresse', acte: 'registre archive', registre: 'acte recueil', cousin: 'partager copie', partager: 'partage envoyer fichier', erreur: 'incoherence verifier age', age: 'ages ecart', date: 'calendrier convertir',
+        prenom: 'saint prenoms', saint: 'prenom fete', nom: 'patronyme', son: 'audio enregistrement', video: 'film', mariage: 'union marie',
+        enlever: 'supprimer retirer effacer', retirer: 'supprimer enlever', manquant: 'trou suggestion chercher manque', manque: 'trou suggestion chercher', trou: 'manquant suggestion', chercher: 'recherche trouver', trouver: 'chercher recherche',
+        retoucher: 'eclaircir photo', vieux: 'ancien', ancien: 'vieux', vivant: 'vivants', montrer: 'afficher consultation', proche: 'famille cousin', email: 'mail courrier', lettre: 'courrier'};
+    // les synonymes vont dans les deux sens, et se retrouvent aussi au pluriel ou sous une autre forme du mot
+    Object.entries({...FAQ_SYN}).forEach(([k, v]) => v.split(' ').forEach(x => { FAQ_SYN[x] = [...new Set(`${FAQ_SYN[x] || ''} ${k}`.trim().split(' '))].join(' '); }));
+    const faqSyn = w => FAQ_SYN[w] || FAQ_SYN[w.replace(/s$/, '')] || FAQ_SYN[w.replace(/(es|s|x)$/, 'e')] || FAQ_SYN[w.replace(/er$/, 'e')] || '';
+    const faqFold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
+    const faqStem = w => w.length > 4 ? w.replace(/(ements|ement|ations|ation|ees|es|s|x|e)$/, '') : w.replace(/s$/, '');
+    const faqWords = t => faqFold(t).split(/[^a-z0-9]+/).filter(w => w.length > 1 && !FAQ_STOP.has(w));
+    function faqSearch(query) {
+        const words = faqWords(query);
+        if (!words.length) return null;
+        const wanted = words.map(w => [faqStem(w), ...faqSyn(w).split(' ').filter(Boolean).map(faqStem)]);
+        const hits = [];
+        FAQ.forEach(([group, items]) => items.forEach(([q, a]) => {
+            const qs = faqWords(q + ' ' + group).map(faqStem), as = faqWords(a).map(faqStem);
+            const has = (list, w) => list.some(x => x === w || (w.length >= 4 && (x.startsWith(w) || w.startsWith(x)) && x.length >= 4));
+            let score = 0, found = 0;
+            wanted.forEach(([w, ...syn]) => {
+                let best = has(qs, w) ? 4 : has(as, w) ? 1.5 : 0;
+                if (!best && syn.some(x => has(qs, x))) best = 2;
+                if (!best && syn.some(x => has(as, x))) best = .7;
+                if (best) { found++; score += best; }
+            });
+            if (found) hits.push({group, q, a, score: score * (found / wanted.length) ** 1.5});
+        }));
+        hits.sort((x, y) => y.score - x.score);
+        return hits.filter(h => h.score >= hits[0].score * .35).slice(0, 6); // les réponses loin derrière la meilleure ne servent à rien
+    }
+    const faqItem = (q, a, open = false) => `<details class="h-faq-item"${open ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`;
+    ext.faqHtml = () => `<section class="maintenance-panel full-width help-intro h-faq"><h3>Questions fréquentes</h3>
+        <label class="h-faq-search"><span aria-hidden="true">🔎</span><input type="search" data-faq-q placeholder="Pose ta question : comment faire un livre de famille en PDF ?" autocomplete="off"></label>
+        <div data-faq-results hidden></div>
+        <div data-faq-all><p>Comment faire ceci ou cela dans LCNDA.</p>
+        ${FAQ.map(([group, items]) => `<h4>${esc(group)}</h4>${items.map(([q, a]) => faqItem(q, a)).join('')}`).join('')}</div></section>`;
+    document.addEventListener('input', event => {
+        const input = event.target.closest?.('[data-faq-q]'); if (!input) return;
+        const box = input.closest('.h-faq'), results = box.querySelector('[data-faq-results]'), all = box.querySelector('[data-faq-all]');
+        const hits = faqSearch(input.value);
+        results.hidden = !hits; all.hidden = !!hits;
+        if (!hits) return;
+        results.innerHTML = hits.length
+            ? `<p class="muted">${hits.length === 1 ? 'La réponse la plus proche' : 'Les réponses les plus proches'} :</p>${hits.map((h, i) => `<small class="h-faq-group">${esc(h.group)}</small>${faqItem(h.q, h.a, i === 0)}`).join('')}`
+            : '<p class="muted">Pas de réponse avec ces mots : essaie d’autres mots (« photo », « sauvegarde », « arbre »…). Pour une question sur ta généalogie elle-même (« Qui était boulanger à Lille ? »), va dans Recherche → « Poser une question en français ».</p>';
+    });
+    ext.faqSearch = faqSearch; // pour les tests
     /* ═══════════════════════ ✍️ RECONNAISSANCE D'ÉCRITURE (HTR) : installation ═══════════════════════ */
 
     let htrTimer = 0;

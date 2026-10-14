@@ -1572,3 +1572,8 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-cw-col .h-cw-bar-wrap{height:170px;flex:0 0 auto;display:flex;flex-direction:column;justify-content:flex-end;width:100%}
 .h-cw-col span{max-width:none;white-space:nowrap}
 .h-cw-columns.is-dense .h-cw-col span{writing-mode:vertical-rl;transform:rotate(180deg);text-overflow:clip;max-height:90px;overflow:hidden;font-size:.7em}
+/* ── FAQ : chercher sa question ── */
+.h-faq-search{display:flex;align-items:center;gap:.5rem;margin:.6rem 0 .8rem;border:2px solid var(--ink);background:#fff;padding:.2rem .7rem;max-width:720px}
+.h-faq-search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:1.05em;padding:.55rem 0;min-width:0}
+.h-faq-search:focus-within{box-shadow:var(--shadow-small)}
+.h-faq-group{display:block;margin-top:.6rem;font-size:.72em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
