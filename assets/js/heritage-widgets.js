@@ -173,7 +173,7 @@
         }
         if (!data.shown) return Object.assign([], {counted: 0});
         const col = d.group || dataColumns(data)[0]?.[0] || 'name';
-        const counts = new Map();
+        const counts = new Map(), members = new Map(); // members : les personnes derrière chaque valeur (clic sur une barre)
         let counted = 0;
         for (const r of data.shown) {
             let any = false;
@@ -191,6 +191,7 @@
                 }
                 if (v === '' && d.skipEmpty !== false) continue;
                 counts.set(v || '(vide)', (counts.get(v || '(vide)') || 0) + 1);
+                const who = members.get(v || '(vide)') || new Map(); for (const p of r.people || []) if (p?.id) who.set(Number(p.id), p); members.set(v || '(vide)', who);
                 any = true;
             }
             if (any) counted++;
@@ -200,8 +201,14 @@
         const when = v => { if (d.groupBy === 'month') { const i = MONTHS.indexOf(v); return i >= 0 ? i : Infinity; } const k = yearOf(v) ?? Number.parseInt(v, 10); return Number.isFinite(k) ? k : Infinity; }; // « (vide) » en dernier
         entries.sort((a, b) => timeline ? when(a[0]) - when(b[0]) : b[1] - a[1] || a[0].localeCompare(b[0], 'fr'));
         const top = Math.max(1, Math.min(60, Number(d.limit) || 10));
-        if (!timeline && entries.length > top) { const rest = entries.slice(top).reduce((n, e) => n + e[1], 0); entries = entries.slice(0, top); if (rest) entries.push(['autres', rest]); }
+        let restOf = [];
+        if (!timeline && entries.length > top) { restOf = entries.slice(top); const rest = restOf.reduce((n, e) => n + e[1], 0); entries = entries.slice(0, top); if (rest) entries.push(['autres', rest]); }
         entries.counted = counted; // lignes comptées (une personne à deux étiquettes compte une fois)
+        entries.members = entries.map(([v], i) => {
+            if (v !== 'autres' || i < entries.length - 1 || !restOf.length) return [...(members.get(v)?.values() || [])];
+            const all = new Map(); restOf.forEach(([k]) => members.get(k)?.forEach((p, id) => all.set(id, p))); return [...all.values()];
+        });
+        entries.restValues = restOf;
         return entries;
     }
     // Palettes proposées ; une couleur peut aussi être choisie pour chaque valeur (d.valueColors)
@@ -218,11 +225,20 @@
         return pal[i % pal.length];
     }
     function chartHtml(data, d) {
-        const entries = groupRows(data, d);
+        let entries = groupRows(data, d);
         if (!entries.length) return '<p class="muted">Rien à compter.</p>';
-        const total = entries.reduce((n, e) => n + e[1], 0), max = Math.max(...entries.map(e => e[1]));
+        const total = entries.reduce((n, e) => n + e[1], 0);
+        // « autres » (le reste mis ensemble) ne donne pas l'échelle : sinon il écrase les vraies valeurs, qui n'ont plus de couleur visible
+        const isRest = (v, i) => v === 'autres' && i === entries.length - 1 && entries.length > 1;
+        const scaled = entries.filter(([v], i) => !isRest(v, i)).map(e => e[1]);
+        const max = Math.max(1, ...(scaled.length ? scaled : entries.map(e => e[1])));
+        const w = (v, n, i) => Math.max(n > 0 ? 3 : 0, Math.min(100, Math.round(n / max * 100)));
+        const over = (v, n, i) => isRest(v, i) && n > max;
         const col = (v, i) => chartColor(d, v, i), pct = n => total ? Math.round(n / total * 100) : 0;
-        const legend = `<ul class="h-cw-legend">${entries.map(([v, n], i) => `<li><i style="background:${col(v, i)}"></i>${esc(v)} <strong>${fmt(n)}</strong> <small class="muted">${pct(n)} %</small></li>`).join('')}</ul>`;
+        // chaque valeur se clique : la liste des personnes comptées
+        const key = 'd' + (++fullSeq); keepView(key, {detail: {d, entries, data}});
+        const hit = i => ` data-cw-detail="${key}" data-cw-i="${i}" tabindex="0" role="button"`;
+        const legend = `<ul class="h-cw-legend">${entries.map(([v, n], i) => `<li${hit(i)}><i style="background:${col(v, i)}"></i>${esc(v)} <strong>${fmt(n)}</strong> <small class="muted">${pct(n)} %</small></li>`).join('')}</ul>`;
         if (d.style === 'pie' || d.style === 'donut') {
             let at = 0;
             const stops = entries.map(([v, n], i) => { const from = at; at += n / total * 360; return `${col(v, i)} ${from.toFixed(1)}deg ${at.toFixed(1)}deg`; }).join(',');
@@ -232,9 +248,10 @@
             // étiquettes courtes (« 1780 » pour « 1780–1789 ») et inclinées quand il y en a beaucoup
             const short = v => /^\d{3,4}–\d{3,4}$/.test(String(v)) ? String(v).split('–')[0] : String(v);
             const dense = entries.length > 8 || entries.some(([v]) => short(v).length > 6);
-            return `<div class="h-cw-columns${dense ? ' is-dense' : ''}">${entries.map(([v, n], i) => `<div class="h-cw-col" title="${esc(v)} : ${fmt(n)}"><div class="h-cw-bar-wrap"><small>${fmt(n)}</small><i style="height:${Math.max(2, Math.round(n / max * 100))}%;background:${col(v, i)}"></i></div><span>${esc(short(v))}</span></div>`).join('')}</div>`;
+            return `<div class="h-cw-columns${dense ? ' is-dense' : ''}">${entries.map(([v, n], i) => `<div class="h-cw-col${over(v, n, i) ? ' is-over' : ''}" title="${esc(v)} : ${fmt(n)} — cliquer pour voir qui"${hit(i)}><div class="h-cw-bar-wrap"><small>${fmt(n)}</small><i style="height:${w(v, n, i)}%;background:${col(v, i)}"></i></div><span>${esc(short(v))}</span></div>`).join('')}</div>`;
         }
         if (d.style === 'line' || d.style === 'area') {
+            entries = entries.filter(([v], i) => !isRest(v, i)); // une courbe : le reste mis ensemble n'a pas de sens
             const W = 600, H = 220, pad = 28, step = entries.length > 1 ? (W - pad * 2) / (entries.length - 1) : 0;
             const pts = entries.map(([, n], i) => [pad + i * step, H - pad - (max ? n / max : 0) * (H - pad * 2)]);
             const line = pts.map(p => p.map(x => x.toFixed(1)).join(',')).join(' ');
@@ -244,16 +261,16 @@
                 <line x1="${pad}" y1="${H - pad}" x2="${W - pad}" y2="${H - pad}" class="h-cw-axis"/>
                 ${d.style === 'area' ? `<polygon points="${pad},${H - pad} ${line} ${pad + (entries.length - 1) * step},${H - pad}" fill="${stroke}" fill-opacity=".25"/>` : ''}
                 <polyline points="${line}" fill="none" stroke="${stroke}" stroke-width="3" stroke-linejoin="round"/>
-                ${pts.map(([x, y], i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" fill="${stroke}"><title>${esc(entries[i][0])} : ${fmt(entries[i][1])}</title></circle>${i % every === 0 ? `<text x="${x.toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(String(entries[i][0]).slice(0, 14))}</text>` : ''}`).join('')}
+                ${pts.map(([x, y], i) => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${stroke}"${hit(i)}><title>${esc(entries[i][0])} : ${fmt(entries[i][1])}</title></circle>${i % every === 0 ? `<text x="${x.toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(String(entries[i][0]).slice(0, 14))}</text>` : ''}`).join('')}
                 <text x="${pad}" y="16">${fmt(max)}</text></svg>`;
         }
         if (d.style === 'tiles') {
-            return `<div class="h-cw-tiles">${entries.map(([v, n], i) => `<div style="flex:${Math.max(1, Math.round(n / max * 100))} 1 ${Math.max(56, Math.round(Math.sqrt(n / max) * 420))}px;min-height:${Math.max(56, Math.round(Math.sqrt(n / max) * 140))}px;background:${col(v, i)}" title="${esc(v)} : ${fmt(n)}"><strong>${fmt(n)}</strong><span>${esc(v)}</span></div>`).join('')}</div>`;
+            return `<div class="h-cw-tiles">${entries.map(([v, n], i) => `<div style="flex:${Math.max(1, Math.round(Math.min(n, max * 1.5) / max * 100))} 1 ${Math.max(56, Math.round(Math.sqrt(Math.min(n, max * 1.5) / max) * 420))}px;min-height:${Math.max(56, Math.round(Math.sqrt(Math.min(n, max * 1.5) / max) * 140))}px;background:${col(v, i)}" title="${esc(v)} : ${fmt(n)}"${hit(i)}><strong>${fmt(n)}</strong><span>${esc(v)}</span></div>`).join('')}</div>`;
         }
         if (d.style === 'table') {
-            return `<table class="data-table h-cw-table"><thead><tr><th>Valeur</th><th>Nombre</th><th>Part</th></tr></thead><tbody>${entries.map(([v, n], i) => `<tr><td><i class="h-cw-dot" style="background:${col(v, i)}"></i>${esc(v)}</td><td>${fmt(n)}</td><td>${pct(n)} %</td></tr>`).join('')}</tbody></table>`;
+            return `<table class="data-table h-cw-table"><thead><tr><th>Valeur</th><th>Nombre</th><th>Part</th></tr></thead><tbody>${entries.map(([v, n], i) => `<tr${hit(i)}><td><i class="h-cw-dot" style="background:${col(v, i)}"></i>${esc(v)}</td><td>${fmt(n)}</td><td>${pct(n)} %</td></tr>`).join('')}</tbody></table>`;
         }
-        return `<ul class="h-bars h-cw-bars">${entries.map(([v, n], i) => `<li><span class="h-bar-label" title="${esc(v)}">${esc(v)}</span><span class="h-bar"><i style="width:${Math.round(n / max * 100)}%;background:${col(v, i)}"></i></span><span>${fmt(n)}</span></li>`).join('')}</ul>`;
+        return `<ul class="h-bars h-cw-bars">${entries.map(([v, n], i) => `<li${hit(i)} title="${esc(v)} : ${fmt(n)} — cliquer pour voir qui"${over(v, n, i) ? ' class="is-over"' : ''}><span class="h-bar-label">${esc(v)}</span><span class="h-bar"><i style="width:${w(v, n, i)}%;background:${col(v, i)}"></i></span><span>${fmt(n)}</span></li>`).join('')}</ul>`;
     }
     // « Tout voir » : les données d'une liste affichée, gardées le temps de la page
     const fullViews = new Map(); let fullSeq = 0;
@@ -302,6 +319,59 @@
         A().bindTableLinks?.();
         dlg.showModal();
     });
+    /* ─── Qui est derrière une valeur ? (clic sur une barre, une colonne, une part, une ligne de légende) ─── */
+    async function membersOf(v, i) {
+        const {d, entries, data} = v;
+        if (!data.appstat) return {people: entries.members?.[i] || [], truncated: !!data.truncated};
+        // statistique de l'app : on la refait en graphique sur les personnes pour savoir qui est compté
+        const c = appStatToChart(d); if (!c) return null;
+        const rows = await api('widget_rows', {q: JSON.stringify(srcQuery(c.src))});
+        const mine = groupRows({...rows, shown: applyListFilters(rows)}, {...c, limit: 60});
+        const norm = x => String(x).toLowerCase().replace(/[–—-]/g, '-').replace(/\s+/g, ' ').trim();
+        const label = entries[i][0];
+        if (label === 'autres' && i === entries.length - 1) { const shown = new Set(entries.slice(0, -1).map(e => norm(e[0]))); const all = new Map(); mine.forEach(([k], j) => { if (!shown.has(norm(k))) (mine.members[j] || []).forEach(p => all.set(Number(p.id), p)); }); return {people: [...all.values()], truncated: !!rows.truncated}; }
+        const j = mine.findIndex(([k]) => norm(k) === norm(label));
+        return j >= 0 ? {people: mine.members[j] || [], truncated: !!rows.truncated} : null;
+    }
+    const lifeOf = p => { const b = p.birth_year || yearOf(p.birth_date || p.bapt_date || ''), dd = p.death_year || yearOf(p.death_date || p.buri_date || ''); return b && dd ? `${b} – ${dd}` : b ? `° ${b}` : dd ? `† ${dd}` : ''; };
+    function peopleGridHtml(people, sort, q) {
+        const qq = String(q || '').toLowerCase().trim();
+        let list = people.filter(p => !qq || pname(p).toLowerCase().includes(qq) || String(p.occupation || '').toLowerCase().includes(qq));
+        const by = p => Number(p.birth_year || yearOf(p.birth_date || p.bapt_date || '') || 99999);
+        list.sort(sort === 'birth' ? (a, b) => by(a) - by(b) : sort === 'birth_desc' ? (a, b) => (by(b) % 99999) - (by(a) % 99999) : (a, b) => String(a.last_name || '').localeCompare(String(b.last_name || ''), 'fr') || String(a.first_name || '').localeCompare(String(b.first_name || ''), 'fr'));
+        if (!list.length) return '<p class="muted">Personne ne correspond.</p>';
+        return `<ul class="h-cw-who">${list.map(p => { const g = p.gender === 'female' ? 'is-f' : p.gender === 'male' ? 'is-m' : ''; const ini = (String(p.first_name || '').trim()[0] || '') + (String(p.last_name || '').trim()[0] || ''); return `<li><button type="button" class="h-cw-who-card" data-h-person="${Number(p.id)}"><span class="h-cw-who-ini ${g}" aria-hidden="true">${esc(ini.toUpperCase() || '?')}</span><span><strong>${esc(pname(p))}</strong><small>${esc([lifeOf(p), p.occupation].filter(Boolean).join(' · '))}</small></span></button></li>`; }).join('')}</ul>`;
+    }
+    async function openDetail(el) {
+        const v = fullViews.get(el.dataset.cwDetail)?.detail; if (!v) return;
+        const i = Number(el.dataset.cwI), [label, n] = v.entries[i] || [];
+        if (label === undefined) return;
+        let res; try { res = await membersOf(v, i); } catch (error) { toast(error.message, 'error'); return; }
+        document.getElementById('h-cw-who-dialog')?.remove();
+        const dlg = document.createElement('dialog');
+        dlg.className = 'modal h-modal h-cw-all-dialog h-cw-who-dialog'; dlg.id = 'h-cw-who-dialog';
+        const people = res?.people || [], total = v.entries.reduce((k, e) => k + e[1], 0);
+        const sub = label === 'autres' && v.entries.restValues?.length ? `<p class="h-cw-who-rest">${v.entries.restValues.slice(0, 80).map(([k, c]) => `<span>${esc(k)} <b>${fmt(c)}</b></span>`).join('')}${v.entries.restValues.length > 80 ? `<span>… et ${fmt(v.entries.restValues.length - 80)} autres valeurs</span>` : ''}</p>` : '';
+        const note = !res ? '<p class="muted">Le détail de cette valeur n’est pas disponible pour cette statistique : transforme-la en graphique (« ➕ Ajouter d’autres conditions ») pour voir qui est compté.</p>'
+            : people.length < n ? `<p class="muted">${fmt(people.length)} personne${people.length > 1 ? 's' : ''} différente${people.length > 1 ? 's' : ''} pour ${fmt(n)} compté${n > 1 ? 's' : ''}${res.truncated ? ' (les 3 000 premières lignes seulement)' : ' : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…)'}.</p>` : '';
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(v.d.name || 'STATISTIQUE')}</span><h2><i class="h-cw-dot" style="background:${chartColor(v.d, label, i)}"></i>${esc(label)} <small class="muted">${fmt(n)} · ${total ? Math.round(n / total * 100) : 0} %</small></h2></div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div>
+            <div class="h-cw-all-body">${sub}${note}${people.length ? `<div class="h-cw-who-tools"><input type="search" placeholder="Chercher un nom, un métier…" data-who-q aria-label="Chercher"><select data-who-sort aria-label="Trier"><option value="name">par nom</option><option value="birth">par naissance (anciens d’abord)</option><option value="birth_desc">par naissance (récents d’abord)</option></select><button type="button" class="button small secondary" data-who-csv>⬇︎ CSV</button></div><div data-who-list>${peopleGridHtml(people, 'name', '')}</div>` : ''}</div>`;
+        document.body.appendChild(dlg);
+        const redraw = () => { dlg.querySelector('[data-who-list]').innerHTML = peopleGridHtml(people, dlg.querySelector('[data-who-sort]').value, dlg.querySelector('[data-who-q]').value); };
+        dlg.querySelector('[data-who-q]')?.addEventListener('input', redraw);
+        dlg.querySelector('[data-who-sort]')?.addEventListener('change', redraw);
+        dlg.querySelector('[data-who-csv]')?.addEventListener('click', () => {
+            const q = x => `"${String(x ?? '').replace(/"/g, '""')}"`;
+            const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(`${v.d.name || 'statistique'} - ${label}`) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+        });
+        dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
+        dlg.addEventListener('close', () => dlg.remove());
+        A().bindTableLinks?.();
+        dlg.showModal();
+    }
+    document.addEventListener('click', event => { const el = event.target.closest?.('[data-cw-detail]'); if (el) { event.preventDefault(); openDetail(el); } });
+    document.addEventListener('keydown', event => { if ((event.key === 'Enter' || event.key === ' ') && event.target.matches?.('[data-cw-detail]')) { event.preventDefault(); openDetail(event.target); } });
     const LINK_ICONS = {module: '➜', list: '📋', maint: '🛠️', url: '↗', person: '👤'};
     function linksHtml(d) {
         const links = (d.links || []).filter(l => l.label || l.target);
@@ -983,7 +1053,7 @@
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
         if (!d) { ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', 'Statistique introuvable', 'Elle a peut-être été supprimée.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="png" title="Une image à poster sur un forum">🖼️ Image PNG</button><button type="button" class="button small secondary" data-cs-export="csv" title="Les chiffres, pour un tableur">📄 CSV</button><button type="button" class="button small secondary" data-cs-export="print" title="Imprimer, ou « Enregistrer en PDF »">🖨️ Imprimer / PDF</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="png" title="Une image à poster sur un forum">🖼️ Image PNG</button><button type="button" class="button small secondary" data-cs-export="jpg" title="Une image plus légère, pour un courriel ou un réseau social">🖼️ Image JPG</button><button type="button" class="button small secondary" data-cs-export="csv" title="Les chiffres, pour un tableur">📄 CSV</button><button type="button" class="button small secondary" data-cs-export="print" title="Imprimer, ou « Enregistrer en PDF »">🖨️ Imprimer / PDF</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
@@ -1041,7 +1111,8 @@
         // Image : dessinée directement sur un canevas (une page HTML copiée dans une image est refusée par le navigateur)
         try {
             const canvas = drawStatImage(d, datas, title);
-            const a = document.createElement('a'); a.download = statFileName(d) + '.png'; a.href = canvas.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
+            const jpg = kind === 'jpg';
+            const a = document.createElement('a'); a.download = statFileName(d) + (jpg ? '.jpg' : '.png'); a.href = jpg ? canvas.toDataURL('image/jpeg', 0.92) : canvas.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
         } catch (_) { toast('Image impossible à fabriquer : utilise « Imprimer / PDF ».', 'error'); }
     }
     /** Le graphique (barres, colonnes, camembert, anneau ; les autres dessins en barres), des chiffres ou les premières lignes d'une liste */
@@ -1068,7 +1139,8 @@
         for (const b of blocks) {
             if (b.sub) { ctx.font = `700 20px ${font}`; ctx.fillStyle = '#111'; ctx.fillText(b.sub, pad, y); y += 34; }
             if (b.entries) {
-                const total = b.entries.reduce((n, e) => n + e[1], 0) || 1, max = Math.max(1, ...b.entries.map(e => e[1]));
+                const total = b.entries.reduce((n, e) => n + e[1], 0) || 1, last = b.entries.length - 1;
+                const max = Math.max(1, ...b.entries.filter(([v], i) => !(v === 'autres' && i === last && last > 0)).map(e => e[1])); // « autres » ne donne pas l'échelle
                 if (['pie', 'donut'].includes(b.part.style)) {
                     const r = 160, cx = pad + r, cy = y + r + 10; let at = -Math.PI / 2;
                     b.entries.forEach(([v, n], i) => { const da = n / total * Math.PI * 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, at, at + da); ctx.closePath(); ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fill(); at += da; });
@@ -1077,7 +1149,7 @@
                     b.entries.forEach(([v, n], i) => { const ly = y + 10 + i * 30; ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fillRect(cx + r + 40, ly + 2, 18, 18); ctx.fillStyle = '#111'; ctx.fillText(fit(`${v} : ${fmt(n)} (${Math.round(n / total * 100)} %)`, W - (cx + r + 70) - pad), cx + r + 68, ly + 2); });
                 } else {
                     const lw = 300, bw = W - pad * 2 - lw - 90; ctx.font = `16px ${font}`;
-                    b.entries.forEach(([v, n], i) => { const ly = y + i * 34; ctx.fillStyle = '#111'; ctx.fillText(fit(v, lw - 10), pad, ly + 6); ctx.fillStyle = '#eee'; ctx.fillRect(pad + lw, ly + 4, bw, 22); ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fillRect(pad + lw, ly + 4, Math.max(2, bw * n / max), 22); ctx.fillStyle = '#111'; ctx.fillText(fmt(n), pad + lw + bw + 12, ly + 6); });
+                    b.entries.forEach(([v, n], i) => { const ly = y + i * 34; ctx.fillStyle = '#111'; ctx.fillText(fit(v, lw - 10), pad, ly + 6); ctx.fillStyle = '#eee'; ctx.fillRect(pad + lw, ly + 4, bw, 22); ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fillRect(pad + lw, ly + 4, Math.max(2, bw * Math.min(1, n / max)), 22); ctx.fillStyle = '#111'; ctx.fillText(fmt(n), pad + lw + bw + 12, ly + 6); });
                 }
             } else if (b.numbers) {
                 const w = (W - pad * 2) / Math.max(1, b.numbers.length);

@@ -1613,3 +1613,26 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .dashboard-reorder-dialog .dash-pages-editor{margin-top:.8rem}
 .h-cw-fromscreen{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
 .h-cw-fromscreen select{min-height:34px;max-width:100%}
+
+/* Statistiques : chaque valeur se clique → qui est compté */
+[data-cw-detail]{cursor:pointer}
+.h-cw-bars li[data-cw-detail]:hover .h-bar-label,.h-cw-legend li[data-cw-detail]:hover{text-decoration:underline}
+.h-cw-bars li[data-cw-detail]:hover .h-bar i,.h-cw-col[data-cw-detail]:hover i{filter:brightness(1.12)}
+[data-cw-detail]:focus-visible{outline:2px solid var(--blue,#0066cc);outline-offset:2px}
+.h-cw-bars li.is-over .h-bar i,.h-cw-col.is-over i{background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px)!important}
+.h-cw-bars li.is-over .h-bar{position:relative}
+.h-cw-bars li.is-over .h-bar::after{content:'≫';position:absolute;right:-.15rem;top:50%;transform:translateY(-50%);font-size:.7rem;color:#fff;font-weight:700}
+.h-cw-who-dialog h2 .h-cw-dot{width:.8em;height:.8em;margin-right:.4em;vertical-align:baseline}
+.h-cw-who-tools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.2rem 0 .9rem}
+.h-cw-who-tools input[type=search]{flex:1 1 220px}
+.h-cw-who{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.5rem}
+.h-cw-who-card{display:flex;gap:.65rem;align-items:center;width:100%;text-align:left;padding:.55rem .7rem;background:var(--paper,#fff);border:1px solid var(--line-color,#d7d7d7);cursor:pointer;font:inherit;color:inherit}
+.h-cw-who-card:hover{border-color:var(--blue,#0066cc);box-shadow:3px 3px 0 rgba(0,102,204,.15)}
+.h-cw-who-card strong{display:block;line-height:1.2}
+.h-cw-who-card small{display:block;color:var(--muted,#666);font-size:.8rem;margin-top:.15rem}
+.h-cw-who-ini{flex:0 0 2.2rem;height:2.2rem;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;background:#e3e7ec;color:#334}
+.h-cw-who-ini.is-m{background:#dceafb;color:#0b4f9c}
+.h-cw-who-ini.is-f{background:#fbe1ec;color:#9c1b55}
+.h-cw-who-rest{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
+.h-cw-who-rest span{padding:.15rem .5rem;border:1px solid var(--line-color,#ddd);font-size:.82rem}
+.h-cw-who-dialog .h-cw-all-body{padding:1rem 1.25rem 1.25rem}
