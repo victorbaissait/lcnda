@@ -121,7 +121,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°37)', () => assert.equal(out.version, 37)],
+  ['structure à jour (n°38)', () => assert.equal(out.version, 38)],
   ['plan de départ : dossiers et sous-sous-dossiers', () => assert.deepEqual(out.tree, [5, true, null])],
   ['un dossier ne va pas dans un de ses sous-dossiers', () => assert.equal(out.loop, 'refusé')],
   ['déplacer un dossier à la racine, avant un autre', () => assert.deepEqual(out.roots, ['Partie 1', 'Chapitre 2', 'Sources'])],

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 37;
+const SCHEMA_VERSION = 38;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -58,6 +58,7 @@ function migration_steps(): array
         35 => 'schema_v35',
         36 => 'schema_v36',
         37 => 'schema_v37',
+        38 => 'schema_v38',
     ];
 }
 
@@ -1898,4 +1899,19 @@ function schema_v37(PDO $pdo): void
 {
     $cols = array_column($pdo->query('PRAGMA table_info(boards)')->fetchAll(), 'name');
     if ($cols && !in_array('status', $cols, true)) { $pdo->exec("ALTER TABLE boards ADD COLUMN status TEXT NOT NULL DEFAULT 'open'"); }
+}
+
+/** Instantanés des tableaux : une copie figée du contenu, qu'on peut revoir, restaurer ou transformer en nouveau tableau */
+function schema_v38(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS board_snapshots (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        board_id INTEGER NOT NULL,
+        label TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        thumb TEXT NOT NULL DEFAULT '',
+        item_count INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_board_snapshots_board ON board_snapshots(board_id)');
 }

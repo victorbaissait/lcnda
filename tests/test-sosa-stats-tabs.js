@@ -94,7 +94,20 @@ $out['bd'] = [count($d['data']['items']), $d['data']['items'][0]['text'], $d['da
 $out['bd_sub'] = [board_detail($pdo, $sub['id'])['owner_type'], board_detail($pdo, $sub['id'])['path'][0]['title']];
 $out['bd_list'] = array_map(fn($r) => [$r['title'], $r['sub_count']], boards_list($pdo, ['owner_type' => 'investigation', 'owner_id' => 1]));
 $out['bd_inv'] = array_map(fn($r) => [$r['title'], $r['boards']], research_lists_overview($pdo, 'investigations'));
+// tableur, associations, instantanés, copie
+save_board($pdo, ['id' => $bd['id'], 'title' => 'Mur', 'owner_type' => 'investigation', 'owner_id' => 1, 'data' => ['items' => [['id' => 't', 'type' => 'table', 'cells' => [['<i>a</i>', '=SOMME(A2:A3)'], [str_repeat('x', 900), ['pirate']]], 'colw' => [10, 5000], 'cfill' => ['0:1' => '#ff0000', 'bad' => '#000', '1:0' => 'url(x)']]],
+    'links' => [['kind' => 'person', 'id' => 1, 'label' => 'Jean', 'part' => 'piste 2'], ['kind' => 'person', 'id' => 1, 'label' => 'Jean', 'part' => 'piste 2'], ['kind' => 'pirate', 'id' => 3]]]]);
+$t = board_detail($pdo, $bd['id'])['data'];
+$out['bd_table'] = [$t['items'][0]['cells'][0][0], mb_strlen($t['items'][0]['cells'][1][0]), $t['items'][0]['cells'][1][1], $t['items'][0]['colw'], array_keys((array) $t['items'][0]['cfill']), count($t['links'])];
+$out['bd_linked'] = array_map(fn($r) => [$r['title'], $r['parts']], boards_linked($pdo, 'person', 1));
+$snap = save_board_snapshot($pdo, ['board_id' => $bd['id'], 'label' => 'avant']);
+save_board($pdo, ['id' => $bd['id'], 'title' => 'Mur', 'owner_type' => 'investigation', 'owner_id' => 1, 'data' => ['items' => []]]);
+restore_board_snapshot($pdo, ['id' => $snap['id']]);
+$cp = copy_board($pdo, ['id' => $bd['id'], 'snapshot_id' => $snap['id'], 'keep_owner' => false]);
+$out['bd_snap'] = [count(board_detail($pdo, $bd['id'])['data']['items']), count(board_snapshots($pdo, $bd['id'])), board_detail($pdo, $cp['id'])['owner_type'], count(board_detail($pdo, $cp['id'])['data']['links']), $cp['title']];
+delete_board($pdo, ['id' => $cp['id']]);
 $out['bd_del'] = delete_board($pdo, ['id' => $bd['id']])['deleted'];
+$out['bd_snapleft'] = (int) $pdo->query('SELECT count(*) FROM board_snapshots')->fetchColumn();
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -164,6 +177,10 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.deepEqual(out.bd_list, [['Mur', 1]]);
     assert.deepEqual(out.bd_inv, [['Le père', 1]]);
     assert.equal(out.bd_del, 2);
+    assert.deepEqual(out.bd_table, ['<i>a</i>', 500, '', [30, 800], ['0:1'], 1]);
+    assert.deepEqual(out.bd_linked, [['Mur', ['piste 2']]]);
+    assert.deepEqual(out.bd_snap, [1, 2, '', 0, 'Mur (copie)']);
+    assert.equal(out.bd_snapleft, 0);
 });
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */

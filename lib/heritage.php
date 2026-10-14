@@ -509,6 +509,7 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'resistance' => function_exists('resistance_data') ? resistance_data($pdo, $personId) : null,
         'voter' => function_exists('voter_data') ? voter_data($pdo, $personId) : null,
         'booklets' => function_exists('booklet_person_mentions') ? booklet_person_mentions($pdo, $personId) : [],
+        'boards' => function_exists('boards_linked') ? boards_linked($pdo, 'person', $personId) : [],
         'custom_blocks' => function_exists('custom_blocks_for_person') ? custom_blocks_for_person($pdo, $personId) : [],
         'recueils' => function_exists('recueils_for_entity') ? recueils_for_entity($pdo, 'person', (string) $personId) : [],
     ];
