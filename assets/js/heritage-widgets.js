@@ -107,12 +107,14 @@
         }));
     }
     /** Données du widget, et celles de chaque partie en plus (datas.parts) */
-    async function loadData(d) {
-        const [main, ...parts] = await Promise.all([loadOne(d), ...(d.kind === 'app' ? [] : (d.parts || []).map(loadOne))]);
+    /** ctx.personId : la personne de la fiche où le widget est posé (critère « par rapport à la personne de la fiche ») */
+    async function loadData(d, ctx = {}) {
+        const [main, ...parts] = await Promise.all([loadOne(d, ctx), ...(d.kind === 'app' ? [] : (d.parts || []).map(p => loadOne(p, ctx)))]);
         main.parts = parts;
         return main;
     }
-    async function loadOne(d) {
+    async function loadOne(d, ctx = {}) {
+        const pid = Number(ctx.personId) || undefined;
         if (d.kind === 'journey') { // les événements d'une personne, si le parcours vient d'une fiche
             if (d.jSource !== 'person' || !Number(d.jPerson)) return [];
             try { return [{detail: await api('person', {id: Number(d.jPerson)})}]; } catch (error) { return [{error: error.message}]; }
@@ -123,14 +125,14 @@
             const fromIso = isoDate(d.statFrom), toIso = isoDate(d.statTo);
             if (fromIso || toIso) { q.date_from = fromIso || (yearOf(d.statFrom) ? `${yearOf(d.statFrom)}-01-01` : undefined); q.date_to = toIso || (yearOf(d.statTo) ? `${yearOf(d.statTo)}-12-31` : undefined); }
             else { q.year_from = yearOf(d.statFrom) || undefined; q.year_to = yearOf(d.statTo) || undefined; }
-            if (d.statLineage) { const root = Number(localStorage.getItem('genealogie-sosa-root')) || 0; if (root) q.sosa_root_id = root; }
+            if (d.statLineage) { const root = pid || Number(localStorage.getItem('genealogie-sosa-root')) || 0; if (root) q.sosa_root_id = root; }
             try { return [{appstat: await api('graph_stats', q)}]; } catch (error) { return [{error: error.message}]; }
         }
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
             try {
-                if (d.kind === 'numbers' && !src.list_id) { const r = await api('widget_rows', {q: JSON.stringify({...srcQuery(src), count: 1})}); return {count: Number(r.count) || 0, rows: [], shown: []}; }
-                const data = await api('widget_rows', {q: JSON.stringify(srcQuery(src))}); return {...data, shown: applyListFilters(data)};
+                if (d.kind === 'numbers' && !src.list_id) { const r = await api('widget_rows', {q: JSON.stringify({...srcQuery(src), count: 1, person_id: pid})}); return {count: Number(r.count) || 0, rows: [], shown: []}; }
+                const data = await api('widget_rows', {q: JSON.stringify({...srcQuery(src), person_id: pid})}); return {...data, shown: applyListFilters(data)};
             }
             catch (error) { return {error: error.message, rows: [], shown: []}; }
         }));
@@ -525,6 +527,8 @@
         ext.openDialog({
             eyebrow: 'NOUVEAU WIDGET', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
             body: `<h4>Partir de rien</h4><div class="h-templates">${Object.entries(KINDS).map(([k, [i, n, sub]]) => tile(i, n, sub, `data-cw-kind="${k}"`)).join('')}</div>
+                ${ext.appScreen ? `<h4>Partir d’un élément de l’app</h4><p class="muted">N’importe quel écran devient un widget : une liste (fiche d’un village, recensements, rappels…), un diagramme, une statistique, une de tes listes, la fiche d’une personne, la carte, un outil de Maintenance.</p>
+                <div class="h-cw-fromscreen">${ext.appScreen.select('list:villages', 'data-cw-fromscreen-sel')}<button type="button" class="button small" data-cw-fromscreen>Créer ce widget</button></div>` : ''}
                 <h4>Partir d’un widget de l’app</h4><p class="muted">« Copie modifiable » : un widget à toi qui fait la même chose, avec tes critères. « Habiller » : le widget de l’app tel quel, avec ton titre, ton icône, ta couleur et ton texte.</p>
                 <div class="h-cw-applist">${appCatalog().map(([k, l]) => `<div class="h-cw-approw"><span>${esc(l)}</span><span>${FROM_APP[k] ? `<button type="button" class="button small secondary" data-cw-copy="${esc(k)}">Copie modifiable</button>` : ''}<button type="button" class="button small secondary" data-cw-dress="${esc(k)}">Habiller</button></span></div>`).join('')}</div>
                 ${mine.length ? `<h4>Partir d’un de mes widgets</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cw-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
@@ -533,6 +537,10 @@
                 const go = d => { editing = d; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
                 const label = k => appCatalog().find(x => x[0] === k)?.[1] || k;
                 dlg.querySelectorAll('[data-cw-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.cwKind; go(baseDef({kind: k, icon: KINDS[k][0], name: k === 'app' ? '' : KINDS[k][1], base: k === 'app' ? appCatalog()[0]?.[0] || 'stats' : '', links: k === 'links' ? [{label: 'Carte', target: 'module:carte'}] : []})); }));
+                dlg.querySelector('[data-cw-fromscreen]')?.addEventListener('click', () => {
+                    const t = dlg.querySelector('[data-cw-fromscreen-sel]').value || 'module:carte';
+                    go(baseDef({kind: 'screen', icon: '📺', name: t === 'person:' ? 'Fiche d’une personne' : ext.appScreen.label(t), target: t === 'person:' ? 'person:' : t, height: 560, sidebar: false, width: '12'}));
+                });
                 dlg.querySelectorAll('[data-cw-copy]').forEach(b => b.addEventListener('click', () => go(baseDef({name: label(b.dataset.cwCopy), ...FROM_APP[b.dataset.cwCopy](meta || {})}))));
                 dlg.querySelectorAll('[data-cw-dress]').forEach(b => b.addEventListener('click', () => go(baseDef({kind: 'app', base: b.dataset.cwDress, icon: '', name: label(b.dataset.cwDress), width: '6'}))));
                 dlg.querySelectorAll('[data-cw-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.cwMine); go(baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'})); }));
@@ -607,6 +615,7 @@
                 case 'children_count': return `${not}${range(r.from, r.to)} enfant${(r.to ?? r.from) > 1 ? 's' : ''}`;
                 case 'unions_count': return `${not}${range(r.from, r.to)} union${(r.to ?? r.from) > 1 ? 's' : ''}`;
                 case 'event_count': return `${not}${range(r.from, r.to)} × ${types(r.values) || 'événement'}`;
+                case 'of_person': return not + ({ancestors: 'ses ancêtres', descendants: 'ses descendants', branch: 'ses ancêtres et ses descendants', family: 'sa famille proche', surname: 'les personnes de même nom'}[r.value || 'ancestors'] || '');
                 case 'living': return not + ({living: 'vivants', deceased: 'décédés', unknown: 'statut à vérifier'}[r.value] || '');
                 case 'bookmarked': case 'has_media': return not + label.toLowerCase();
                 case 'sosa_generation': return `${not}génération Sosa ${range(r.from, r.to)}`;
@@ -741,7 +750,7 @@
             if (d.valueColors && Object.keys(d.valueColors).length) holder.insertAdjacentHTML('beforeend', '<button type="button" class="link-button" data-cw-valreset>remettre les couleurs de la palette</button>');
         }
         preview();
-        ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; backToList(); }));
+        ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; if (ext.blockStatReturn) { ext.blockStatReturn = null; S().maintenanceTab = 'block_editor'; A().setModule('maintenance'); return; } backToList(); }));
         ws.querySelector('[data-cw-instats]')?.addEventListener('change', e => { root.inStats = e.target.checked; again(); });
         ws.querySelector('[data-cw-ondash]')?.addEventListener('change', e => { root._onDash = e.target.checked; });
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
@@ -770,7 +779,7 @@
                     if (srcBox.dataset.cwSrc === 's') { d.columns = []; d.sort = null; d.group = ''; }
                     return again();
                 }
-                if (e.target.matches('[data-cw-addrule]') && e.target.value) { src.definition.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : e.target.value === 'living' ? 'deceased' : '', values: []}); return again(); }
+                if (e.target.matches('[data-cw-addrule]') && e.target.value) { src.definition.rules.push({field: e.target.value, value: {gender: 'female', living: 'deceased', of_person: 'ancestors'}[e.target.value] || '', values: []}); return again(); }
                 if (e.target.matches('[data-cw-match]')) { src.definition.match = e.target.value; return preview(); }
                 readRule(e, src);
                 return;
@@ -876,6 +885,7 @@
             else toast(clean.inStats ? 'Enregistré : il est dans Graphiques → Statistiques, rubrique « Mes statistiques ».' : 'Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
             editing = null;
             if (root._onDash !== undefined) setOnDashboard(clean.id, !!root._onDash);
+            if (ext.blockStatReturn && ext.attachStatToBlock?.(clean.id)) return; // venue d'un bloc de fiche : on y retourne
             if (andGraph) ext.openCustomStat(clean.id); else if (andAdd) A().setModule('dashboard'); else backToList();
         };
         ws.querySelector('[data-cw-save]').addEventListener('click', () => save(false));
@@ -954,12 +964,15 @@
         return cleanDef({...w, id: newId(), name: w.name || 'Widget importé'});
     }
     ext.cleanWidgetDef = d => cleanDef(d); // pour les tests
+    // Ouverts depuis l'Éditeur de blocs (champ « Statistique ») : nouvelle statistique, ou réglage d'une existante
+    ext.newStatFor = async () => { mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); chooseStart(S().workspaceToken); };
+    ext.editStatFor = async id => { mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); try { await loadMeta(); } catch (_) {} const cur = defs().find(x => x.id === id); if (!cur) return; editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken); };
     /** Un de mes widgets dessiné dans une boîte (champ « Widget » d'un bloc de fiche) */
-    ext.renderCustomWidgetInto = async (el, id) => {
+    ext.renderCustomWidgetInto = async (el, id, ctx = {}) => {
         const d = defs().find(x => x.id === id);
         if (!d) { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; return; }
         el.innerHTML = '<p class="muted">Calcul…</p>';
-        try { const datas = await loadData(d); el.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
+        try { const datas = await loadData(d, ctx); el.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
         catch (error) { el.innerHTML = `<p class="muted">${esc(error.message)}</p>`; }
     };
 

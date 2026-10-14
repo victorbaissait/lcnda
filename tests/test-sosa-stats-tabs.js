@@ -59,6 +59,9 @@ $out['county'] = $rows([['field' => 'county', 'value' => 'finist']]);
 $out['spouse'] = $rows([['field' => 'spouse_name', 'value' => 'Le Gall']]);
 $out['nokids'] = count($rows([['field' => 'children_count', 'from' => 0, 'to' => 0]]));
 $out['kids1'] = $rows([['field' => 'children_count', 'from' => 1, 'to' => 1]]);
+$out['anc'] = $rows([['field' => 'of_person', 'value' => 'ancestors']]); // de cujus : Jean (1)
+$out['anc6'] = array_map(fn($r) => trim(($r['people'][0]['first_name'] ?? '') . ' ' . ($r['people'][0]['last_name'] ?? '')), widget_rows($pdo, ['source' => 'persons', 'person_id' => 6, 'definition' => ['match' => 'all', 'rules' => [['field' => 'of_person', 'value' => 'ancestors']]]])['rows']);
+$out['fam6'] = count(widget_rows($pdo, ['source' => 'persons', 'person_id' => 6, 'definition' => ['match' => 'all', 'rules' => [['field' => 'of_person', 'value' => 'family']]]])['rows']);
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -96,6 +99,12 @@ step('critères : département, conjoint, nombre d’enfants (0 = aucun ; exacte
     assert.deepEqual(out.spouse, ['Pierre Martin']);
     assert.deepEqual(out.kids1.sort(), ['Anne Le Gall', 'Paul Martin', 'Pierre Martin']);
     assert.equal(out.nokids, 5); // Jean, Marie, Jacques, Paul Durand, Louis : aucun enfant
+});
+
+step('critère « par rapport à la personne de la fiche » : ancêtres du de cujus, d’une fiche, famille proche', () => {
+    assert.deepEqual(out.anc.sort(), ['Anne Le Gall', 'Paul Martin', 'Pierre Martin']);
+    assert.deepEqual(out.anc6, ['Paul Martin']);
+    assert.equal(out.fam6, 4); // Pierre, sa femme Anne, son fils Jean, son père Paul
 });
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */

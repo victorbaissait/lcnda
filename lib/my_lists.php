@@ -80,7 +80,7 @@ function my_list_clean_definition(array $d, string $source): array
 {
     if ($source === 'records') { return my_list_records_definition($d); }
     $fields = ['event_type', 'year', 'death_year', 'date_range', 'place', 'any_place', 'near_place', 'last_name', 'first_name', 'occupation', 'gender', 'age_at', 'lifespan', 'children_count', 'unions_count', 'event_count', 'label', 'sosa', 'no_parents', 'no_source', 'text',
-        'death_place', 'county', 'spouse_name', 'parent_name', 'has_media', 'living', 'bookmarked', 'sosa_generation', 'birth_month', 'death_cause', 'source_count', 'note'];
+        'death_place', 'county', 'spouse_name', 'parent_name', 'has_media', 'living', 'bookmarked', 'sosa_generation', 'birth_month', 'death_cause', 'source_count', 'note', 'of_person'];
     $isoDate = static function ($v): string { $v = trim((string) $v); if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $v, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { return $v; } return function_exists('exact_date') ? (string) (exact_date($v) ?? '') : ''; };
     $rules = [];
     foreach (is_array($d['rules'] ?? null) ? $d['rules'] : [] as $r) {
@@ -226,6 +226,8 @@ function my_list_rows(PDO $pdo, int $listId): array
  */
 function widget_rows(PDO $pdo, array $q): array
 {
+    // La personne de la fiche où le widget est posé (bloc d'une fiche) : pour le critère « par rapport à la personne »
+    $GLOBALS['LCNDA_LIST_CONTEXT_PERSON'] = safe_int($q['person_id'] ?? 0);
     if (safe_int($q['list_id'] ?? 0)) { return my_list_rows($pdo, safe_int($q['list_id'])); }
     $source = in_array($q['source'] ?? '', LIST_SOURCES, true) && ($q['source'] ?? '') !== 'free' ? (string) $q['source'] : 'persons';
     $def = is_array($q['definition'] ?? null) ? $q['definition'] : [];
@@ -372,6 +374,11 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
                     : "(EXISTS (SELECT 1 FROM notes nn WHERE nn.entity_type='person' AND nn.entity_id=p.id AND (nn.body LIKE ? OR nn.title LIKE ?)))";
                 array_push($params, $like, $like);
                 break;
+            case 'of_person': // par rapport à la personne de la fiche (ou au de cujus) : ses ancêtres, ses descendants, sa famille…
+                $ids = my_list_relatives($pdo, (int) ($GLOBALS['LCNDA_LIST_CONTEXT_PERSON'] ?? 0), $r['value'] ?: 'ancestors');
+                $in = implode(',', $ids ?: [0]);
+                $c = $isEvents ? "(e.person_id IN ({$in}) OR f.partner1_id IN ({$in}) OR f.partner2_id IN ({$in}))" : "(p.id IN ({$in}))";
+                break;
             case 'death_year':
                 if ($isEvents) { break; }
                 $col = "(SELECT min(ee.year) FROM events ee JOIN event_types tt ON tt.id=ee.event_type_id WHERE ee.person_id=p.id AND tt.gedcom_tag IN ('DEAT','BURI'))";
@@ -498,6 +505,33 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
 }
 
 /** Naissance, décès, parents, sources et étiquettes d'un lot de personnes (pour les colonnes). */
+/** Les proches d'une personne (0 = le de cujus) : ancêtres, descendants, les deux, famille proche, même nom */
+function my_list_relatives(PDO $pdo, int $pid, string $what): array
+{
+    if (!$pid) { $pid = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn(); }
+    if (!$pid) { return []; }
+    $ids = [];
+    if (in_array($what, ['ancestors', 'branch', 'self_ancestors'], true) && function_exists('sosa_positions')) { $ids = array_merge($ids, array_values(sosa_positions($pdo, $pid, 60000)['positions'] ?? [])); }
+    if (in_array($what, ['descendants', 'branch'], true) && function_exists('daboville_positions')) { $ids = array_merge($ids, array_values(daboville_positions($pdo, $pid, 60000)['positions'] ?? [])); }
+    if ($what === 'family') {
+        $st = $pdo->prepare("SELECT x FROM (
+            SELECT CASE WHEN f.partner1_id=:p THEN f.partner2_id ELSE f.partner1_id END AS x FROM families f WHERE f.partner1_id=:p OR f.partner2_id=:p
+            UNION SELECT fc.child_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE f.partner1_id=:p OR f.partner2_id=:p
+            UNION SELECT f.partner1_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=:p
+            UNION SELECT f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=:p
+            UNION SELECT s.child_id FROM family_children fc JOIN family_children s ON s.family_id=fc.family_id WHERE fc.child_id=:p) WHERE x IS NOT NULL");
+        $st->execute([':p' => $pid]);
+        $ids = array_merge([$pid], array_map('intval', $st->fetchAll(PDO::FETCH_COLUMN)));
+    }
+    if ($what === 'surname') {
+        $st = $pdo->prepare("SELECT p.id FROM persons p, persons me WHERE me.id=? AND trim(me.last_name)<>'' AND lower(trim(p.last_name))=lower(trim(me.last_name))");
+        $st->execute([$pid]); $ids = array_map('intval', $st->fetchAll(PDO::FETCH_COLUMN));
+    }
+    $ids = array_values(array_unique(array_map('intval', $ids)));
+    if (in_array($what, ['ancestors', 'descendants'], true)) { $ids = array_values(array_filter($ids, static fn($id) => $id !== $pid)); }
+    return $ids;
+}
+
 /** « entre from et to » sur un nombre (l'un des deux peut manquer ; « exactement » = from et to égaux) */
 function my_list_count_range(string $n, array $r): string
 {

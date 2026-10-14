@@ -1611,3 +1611,5 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .dash-group-icon{margin:0 4px}
 .dashboard-reorder-dialog .dash-reorder-tools,.dashboard-reorder-dialog .dash-pages-editor{margin-left:1rem;margin-right:1rem}
 .dashboard-reorder-dialog .dash-pages-editor{margin-top:.8rem}
+.h-cw-fromscreen{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.h-cw-fromscreen select{min-height:34px;max-width:100%}

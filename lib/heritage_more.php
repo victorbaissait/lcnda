@@ -964,7 +964,7 @@ function resistance_overview(PDO $pdo): array
 
 /* ─── 🧩 Éditeur de blocs ─────────────────────────────────────────────── */
 
-const CUSTOM_FIELD_TYPES = ['text', 'longtext', 'date', 'number', 'select', 'checkbox', 'url', 'person', 'place', 'media', 'person_info', 'map', 'journey', 'widget'];
+const CUSTOM_FIELD_TYPES = ['text', 'longtext', 'date', 'number', 'select', 'checkbox', 'url', 'person', 'place', 'media', 'person_info', 'map', 'journey', 'widget', 'stat'];
 
 function custom_fields_clean(array $fields): array
 {
@@ -981,7 +981,7 @@ function custom_fields_clean(array $fields): array
             + ($f['type'] === 'journey' ? ['jSource' => ($f['jSource'] ?? '') === 'person' ? 'person' : 'manual', 'jLayout' => in_array($f['jLayout'] ?? '', ['vertical', 'horizontal', 'cards', 'compact'], true) ? $f['jLayout'] : 'vertical',
                 'jOrder' => ($f['jOrder'] ?? '') === 'manual' ? 'manual' : 'date', 'jMap' => !array_key_exists('jMap', $f) || !empty($f['jMap']), 'jDays' => !array_key_exists('jDays', $f) || !empty($f['jDays']), 'jWithPlace' => !empty($f['jWithPlace'])] : [])
             // Widget : un des widgets à soi (cw_…) ou un écran de l'app (screen:list:villages, screen:person:self…)
-            + ($f['type'] === 'widget' ? ['widget' => preg_match('/^(cw_[a-z0-9]{4,24}|screen:[a-z_]{2,12}:[a-z0-9_]{1,40})$/i', (string) ($f['widget'] ?? '')) ? (string) $f['widget'] : '',
+            + (in_array($f['type'], ['widget', 'stat'], true) ? ['widget' => preg_match('/^(cw_[a-z0-9]{4,24}|screen:[a-z_]{2,12}:[a-z0-9_]{1,40})$/i', (string) ($f['widget'] ?? '')) ? (string) $f['widget'] : '',
                 'height' => max(240, min(2000, safe_int($f['height'] ?? 560) ?: 560))] : []);
     }
     return $out;

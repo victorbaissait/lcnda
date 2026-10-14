@@ -37,7 +37,9 @@
             row.dataset.dndRow = '1';
             const grip = document.createElement('span');
             grip.className = 'dnd-grip'; grip.title = 'Glisser pour déplacer'; grip.setAttribute('aria-hidden', 'true'); grip.textContent = '⠿';
-            const host = row.tagName === 'TR' ? row.cells[0] : row;
+            // la poignée va au début de la ligne qui porte les flèches (l'en-tête d'un champ, d'une pièce…), pas seule au-dessus
+            let host = row.tagName === 'TR' ? row.cells[0] : row;
+            if (row.tagName !== 'TR') { let el = up; while (el.parentElement && el.parentElement !== row) el = el.parentElement; if (el !== up && el.parentElement === row && el.children.length > 1 && !el.matches('[class*="tools"],[class*="actions"],[class*="moves"]')) host = el; }
             host.insertBefore(grip, host.firstChild);
         }
     }

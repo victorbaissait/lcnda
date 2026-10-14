@@ -311,6 +311,7 @@
         ['url', '🔗', 'Lien internet', 'Une page d’archives, un article…'], ['person', '👤', 'Personne liée', 'Une autre fiche de la base'], ['place', '📍', 'Lieu', 'Placé tout seul sur la carte'],
         ['media', '🖼️', 'Photos, vidéos, sons', 'Fichiers à ajouter'], ['person_info', 'ℹ️', 'Info tirée d’une fiche', 'Naissance, décès, métier… repris tout seuls'], ['map', '🗺️', 'Carte', 'Les lieux du bloc sur une carte'],
         ['journey', '🧭', 'Parcours jour par jour', 'Des étapes datées sur une frise et une carte (comme dans Résistants), écrites à la main ou reprises de la fiche'],
+        ['stat', '📊', 'Statistique', 'Un graphique, des chiffres ou une liste réglés à fond comme dans l’Éditeur de statistiques ; ils peuvent dépendre de la personne de la fiche (ses ancêtres, sa famille…)'],
         ['widget', '🧱', 'Widget', 'Un de tes widgets (chiffres, liste, graphique, texte…) ou un écran de l’app (la fiche de la personne, une liste, un diagramme…) dans le bloc'],
     ];
     /** Champ « Widget » : l'écran ou le widget dessiné sur la fiche ; « person:self » = la personne de la fiche */
@@ -323,9 +324,26 @@
             if (ext.appScreen.nested) return ext.appScreen.nestedLink(target, f.label);
             return `<iframe class="h-ct-frame" src="${esc(ext.appScreen.url({target}))}" title="${esc(f.label)}" loading="lazy" style="height:${h}px"></iframe><button type="button" class="link-button" data-ct-open-screen="${esc(target)}">↗ Ouvrir en grand</button>`;
         }
-        if (/^cw_/.test(w)) { setTimeout(() => document.querySelectorAll('[data-be-widget]:not([data-filled])').forEach(el => { el.dataset.filled = '1'; ext.renderCustomWidgetInto?.(el, el.dataset.beWidget); }), 0); return `<div class="card-grid h-be-widget" data-be-widget="${esc(w)}"></div>`; }
+        if (/^cw_/.test(w)) { setTimeout(() => document.querySelectorAll('[data-be-widget]:not([data-filled])').forEach(el => { el.dataset.filled = '1'; ext.renderCustomWidgetInto?.(el, el.dataset.beWidget, {personId: Number(el.dataset.bePerson) || 0}); }), 0); return `<div class="card-grid h-be-widget" data-be-widget="${esc(w)}" data-be-person="${Number(blockDetail?.person?.id) || 0}"></div>`; }
         return '<p class="muted">Choisis le widget dans l’Éditeur de blocs.</p>';
     }
+    /** Champ « Statistique » : choisir une de ses statistiques, en créer une, ou la régler dans l'Éditeur de statistiques */
+    function statChoiceHtml(f) {
+        const stats = Object.values(ext.customWidgetDefs?.() || {}).filter(d => ['chart', 'appstat', 'numbers', 'list'].includes(d.kind));
+        return `<label class="span-2">Quelle statistique ? <select data-be="widget"><option value="">choisir…</option>${stats.map(d => `<option value="${esc(d.id)}" ${f.widget === d.id ? 'selected' : ''}>${esc(`${d.icon || '📊'} ${d.name || 'Ma statistique'}`)}</option>`).join('')}</select></label>
+            <p class="span-2 h-be-stat-actions"><button type="button" class="button small" data-be-stat-new="${esc(f.key)}">📊 Nouvelle statistique…</button>${f.widget ? `<button type="button" class="button small secondary" data-be-stat-edit="${esc(f.key)}">✎ Régler cette statistique…</button>` : ''}
+            <small class="muted">L’Éditeur de statistiques s’ouvre avec tous ses réglages (données, critères, dessin, couleurs, légende) ; une fois enregistrée, tu reviens ici. Le critère « Par rapport à la personne de la fiche » la fait dépendre de chaque fiche.</small></p>`;
+    }
+    // Retour de l'Éditeur de statistiques : la statistique enregistrée va dans le champ du bloc en cours
+    ext.blockStatReturn = null;
+    ext.attachStatToBlock = id => {
+        const ret = ext.blockStatReturn; ext.blockStatReturn = null;
+        if (!ret || !editorDef) return false;
+        const f = editorDef.fields.find(x => x.key === ret.key); if (f) f.widget = id;
+        S().maintenanceTab = 'block_editor'; A().setModule('maintenance');
+        toast('Statistique posée dans le bloc : enregistre le bloc pour la garder.');
+        return true;
+    };
     function widgetChoiceHtml(f) {
         const mine = Object.values(ext.customWidgetDefs?.() || {});
         const screens = ext.appScreen ? ext.appScreen.targets() : [];
@@ -365,7 +383,7 @@
             case 'media': { const m = (e.media || []).filter(x => (x.role || '') === f.key); return m.length && ext.thumbs ? ext.thumbs(`cb-${e.id}-${f.key}`, m) : ''; }
             case 'number': return v === '' || v === null || v === undefined ? '' : esc(fmt(v, 2));
             case 'map': return '';
-            case 'widget': return widgetFieldHtml(f);
+            case 'widget': case 'stat': return widgetFieldHtml(f);
             case 'journey': return ext.journeyHtml ? ext.journeyHtml({jSource: f.jSource, steps: Array.isArray(v) ? v : [], jLayout: f.jLayout, jOrder: f.jOrder, jMap: f.jMap !== false, jDays: f.jDays !== false, jWithPlace: !!f.jWithPlace, jPerson: 1, color: '#0066cc'}, f.jSource === 'person' ? [{detail: blockDetail || {events: []}}] : []) : '';
             default: return esc(v ?? '');
         }
@@ -391,8 +409,8 @@
             const pts = hasMap ? blockPoints(b, b.entries) : [];
             const selfInfos = b.fields.filter(f => f.type === 'person_info' && f.from === 'self' && b.self_info?.[f.key]).map(f => `<span class="collection-kind">${esc(infoLabel(f, b.fields))} : ${esc(b.self_info[f.key])}</span>`).join(' ');
             // champs « Widget » : affichés sur la fiche, même quand rien n'est encore rempli dans le bloc
-            const widgetFields = b.entries.length ? '' : b.fields.filter(f => f.type === 'widget' && f.widget).map(f => `<div class="h-cb-widget"><span class="section-label">${esc(f.label)}</span>${widgetFieldHtml(f)}</div>`).join('');
-            const onlyWidgets = b.fields.length && b.fields.every(f => ['widget', 'map', 'person_info'].includes(f.type));
+            const widgetFields = b.entries.length ? '' : b.fields.filter(f => ['widget', 'stat'].includes(f.type) && f.widget).map(f => `<div class="h-cb-widget"><span class="section-label">${esc(f.label)}</span>${widgetFieldHtml(f)}</div>`).join('');
+            const onlyWidgets = b.fields.length && b.fields.every(f => ['widget', 'stat', 'map', 'person_info'].includes(f.type));
             const body = `${b.description ? `<p class="muted">${esc(b.description)}</p>` : ''}${widgetFields}${b.entries.length ? '' : selfInfos ? `<p>${selfInfos}</p>` : ''}
                 ${b.entries.length ? `<div class="${pts.length ? 'h-voyage-layout' : ''}"><div class="h-cb-entries">${b.entries.map(e => entryHtml(b, e, editable)).join('')}</div>${pts.length && ext.miniMap ? `<div>${ext.miniMap(pts, pts.length > 1 ? [{coords: pts.map(x => [x.lat, x.lon]), color: '#555', dashed: true}] : [], {height: 300})}</div>` : ''}</div>` : onlyWidgets && widgetFields ? '' : empty('Rien de rempli pour l’instant.')}`;
             cards.push(card(index, `${b.icon || '🧩'} ${b.name}`, b.entries.length || '', body, 'span-12', editOnly(canAdd ? `<button type="button" class="button small secondary" data-h-cb-edit="0" data-h-cb-block="${b.id}">+ Remplir</button>` : '')));
@@ -422,7 +440,7 @@
             case 'place': return `<label>${esc(f.label)}${help}${ext.placeField ? ext.placeField(name, value?.text || '', value?.lat ?? '', value?.lon ?? '', 'Commune, adresse…') : `<input name="${name}" value="${esc(value?.text || '')}">`}</label>`;
             case 'person_info': return `<div class="h-cb-info"><strong>ℹ️ ${esc(infoLabel(f, allFields))}</strong> <small class="muted">(repris tout seul de la fiche${f.from !== 'self' ? ' choisie' : ''})</small>${value ? ` : ${esc(value)}` : ' : <span class="muted">rien de connu pour l’instant</span>'}</div>`;
             case 'map': return `<p class="muted span-2">🗺️ ${esc(f.label)} : la carte montrera les lieux de ce bloc.</p>`;
-            case 'widget': return `<p class="muted span-2">🧱 ${esc(f.label)} : le widget s’affiche tout seul sur la fiche.</p>`;
+            case 'widget': case 'stat': return `<p class="muted span-2">${f.type === 'stat' ? '📊' : '🧱'} ${esc(f.label)} : ${f.type === 'stat' ? 'la statistique' : 'le widget'} s’affiche tout seul sur la fiche.</p>`;
             case 'journey': return f.jSource === 'person' ? `<p class="muted span-2">🧭 ${esc(f.label)} : les étapes sont les événements datés de cette fiche, repris tout seuls.</p>`
                 : `<div class="span-2 h-be-journey" data-be-journey="${esc(f.key)}"><span class="section-label">🧭 ${esc(f.label)}</span>${help}<div class="h-jr-rows" data-j-rows>${(Array.isArray(value) ? value : []).map((x, i) => ext.journeyRowHtml?.(x, i) || '').join('')}</div><button type="button" class="button small secondary" data-j-add>+ Étape</button></div>`;
             case 'media': return '';
@@ -635,11 +653,12 @@
             <label class="checkbox-line"><input type="checkbox" data-be="jMap" ${f.jMap !== false ? 'checked' : ''}> carte du trajet</label><label class="checkbox-line"><input type="checkbox" data-be="jDays" ${f.jDays !== false ? 'checked' : ''}> « Jour 1, Jour 9… » et durées</label>
             ${f.jSource === 'person' ? `<label class="checkbox-line"><input type="checkbox" data-be="jWithPlace" ${f.jWithPlace ? 'checked' : ''}> seulement les événements avec un lieu</label>` : ''}`;
         if (f.type === 'widget') extra = widgetChoiceHtml(f);
+        if (f.type === 'stat') extra = statChoiceHtml(f);
         if (f.type === 'person_info') extra = `<p class="muted span-2">ℹ️ Rien à taper : l’info est reprise toute seule de la fiche, et se met à jour quand la fiche change.</p><label>Quelle info ?<select data-be="info">${INFOS.map(([k, l]) => `<option value="${k}" ${f.info === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>De quelle fiche ?<select data-be="from"><option value="self">La fiche où est le bloc</option>${personFields.map(p => `<option value="${esc(p.key)}" ${f.from === p.key ? 'selected' : ''}>La personne du champ « ${esc(p.label)} »</option>`).join('')}</select></label>`;
         const canRequire = ['text', 'longtext', 'date', 'select', 'person'].includes(f.type);
         return `<div class="h-be-field" data-be-i="${i}"><div class="h-be-field-head"><span class="h-be-type" title="${esc(typeName)}">${icon}</span><input data-be="label" value="${esc(f.label)}" placeholder="Nom du champ" aria-label="Nom du champ"><small class="muted">${esc(typeName)}</small>
             <span class="h-row-actions"><button type="button" class="icon-button" data-be-up title="Monter">↑</button><button type="button" class="icon-button" data-be-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-be-del title="Retirer ce champ">🗑</button></span></div>
-            <div class="form-grid">${extra}${['map', 'person_info', 'widget'].includes(f.type) ? '' : `<label>Aide <small>(facultatif)</small><input data-be="help" value="${esc(f.help)}" placeholder="Exemple de ce qu’il faut écrire"></label>`}${canRequire ? `<label class="checkbox-line"><input type="checkbox" data-be="required" ${f.required ? 'checked' : ''}> Obligatoire</label>` : ''}</div></div>`;
+            <div class="form-grid">${extra}${['map', 'person_info', 'widget', 'stat'].includes(f.type) ? '' : `<label>Aide <small>(facultatif)</small><input data-be="help" value="${esc(f.help)}" placeholder="Exemple de ce qu’il faut écrire"></label>`}${canRequire ? `<label class="checkbox-line"><input type="checkbox" data-be="required" ${f.required ? 'checked' : ''}> Obligatoire</label>` : ''}</div></div>`;
     }
     function previewHtml(d) {
         const fake = {id: 0, data: {}, media: [], people: {}};
@@ -680,6 +699,10 @@
         });
         ws.querySelectorAll('[data-be-add]').forEach(b => b.addEventListener('click', () => { d.fields.push(newField(b.dataset.beAdd)); again(); setTimeout(() => { const rows = A().$$('.h-be-field'); rows[rows.length - 1]?.querySelector('[data-be=label]')?.select(); }, 0); }));
         const box = ws.querySelector('[data-be-fields]');
+        box.addEventListener('click', e => {
+            const sn = e.target.closest('[data-be-stat-new]'), se = e.target.closest('[data-be-stat-edit]');
+            if (sn || se) { const key = (sn || se).dataset[sn ? 'beStatNew' : 'beStatEdit']; const f = d.fields.find(x => x.key === key); ext.blockStatReturn = {key}; if (se && f?.widget) ext.editStatFor?.(f.widget); else ext.newStatFor?.(); }
+        });
         box.addEventListener('click', e => { if (e.target.closest('[data-be-newwidget]')) { if (!confirm('Ouvrir l’Éditeur de widgets ? Enregistre d’abord ce bloc si tu ne veux pas perdre tes changements.')) return; S().maintenanceTab = 'widget_editor'; A().setModule('maintenance'); } });
         box.addEventListener('input', e => {
             const row = e.target.closest('[data-be-i]'); if (!row) return;
@@ -1215,10 +1238,10 @@
         ['Fiches', [
             ['Comment ajouter un enfant, un parent ou un conjoint ?', 'Ouvre la fiche, puis dans les blocs Parents, Conjoints ou Enfants clique sur « + ». Tu peux choisir une personne qui existe déjà ou en créer une nouvelle.'],
             ['Comment afficher un bloc (Départs, Poilu, Résistant…) sur une fiche ?', 'Fiche → Identité (crayon) → « Blocs à afficher sur la fiche » : coche le bloc. Pour l’avoir sur toutes les fiches : Maintenance → Apparence → « Blocs à afficher sur demande ».'],
-            ['Comment créer mon propre widget du tableau de bord ?', 'Maintenance → Éditeur de widgets (ou « + Créer un widget » en bas de la colonne du tableau de bord) → « + Nouveau widget ». Pars de rien (chiffres, liste, graphique, texte, raccourcis), d’un widget de l’app (copie modifiable, ou le même widget habillé de ton titre, ton icône, ta couleur), d’un de tes widgets ou d’un exemple. L’aperçu se met à jour pendant que tu règles. Il apparaît ensuite dans la colonne de gauche du tableau de bord ; « Partager » en fait un fichier pour un proche.'],
+            ['Comment créer mon propre widget du tableau de bord ?', 'Maintenance → Éditeur de widgets (ou « + Créer un widget » en bas de la colonne du tableau de bord) → « + Nouveau widget ». Pars de rien (chiffres, liste, graphique, statistique, écran de l’app, texte, raccourcis), de n’importe quel élément de l’app (une liste, un diagramme, une statistique, une fiche, la carte, un outil), d’un widget de l’app (copie modifiable, ou le même widget habillé de ton titre, ton icône, ta couleur), d’un de tes widgets ou d’un exemple. L’aperçu se met à jour pendant que tu règles. Il apparaît ensuite dans la colonne de gauche du tableau de bord ; « Partager » en fait un fichier pour un proche.'],
             ['Comment ranger le tableau de bord en pages et en ensembles ?', 'Tableau de bord → « Réordonner les widgets ». « + Nouvelle page » ajoute une page (Liste, Fiches, Recherche…) : ses boutons s’affichent en haut, sous le titre ; coche celle qui s’ouvre par défaut, et « Ranger ses widgets » pour l’organiser (les widgets ajoutés depuis la colonne de gauche vont sur la page affichée). « 📁 + Ensemble » crée un cadre avec un titre qui regroupe les widgets qui le suivent ; ▶ en fait un sous-ensemble, autant de niveaux que tu veux. Le bouton ▾ à gauche du cadre replie ou ouvre l’ensemble.'],
             ['Comment déplacer une ligne à la souris ?', 'Partout où il y a des flèches ↑ ↓, la poignée ⠿ (ou ↕) devant la ligne se tire à la place voulue.'],
-            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, d’un bloc de l’app (Départs, Poilu, Résistant, Sépulture…) ou d’un de tes blocs, ajoute ou enlève des champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ». Le champ « 🧱 Widget » y pose un de tes widgets (chiffres, liste, graphique, statistique…) ou un écran de l’app (la fiche de la personne, une liste, un diagramme…).'],
+            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, d’un bloc de l’app (Départs, Poilu, Résistant, Sépulture…) ou d’un de tes blocs, ajoute ou enlève des champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ». Le champ « 📊 Statistique » y pose une statistique réglée à fond dans l’Éditeur de statistiques (« Nouvelle statistique… », puis retour au bloc) ; avec le critère « Par rapport à la personne de la fiche », elle compte ses ancêtres, ses descendants, sa famille… Le champ « 🧱 Widget » y pose un de tes widgets (chiffres, liste, graphique, statistique…) ou un écran de l’app (la fiche de la personne, une liste, un diagramme…).'],
             ['Comment mettre une étiquette ?', 'Dans presque tous les formulaires, la ligne « 🏷️ Étiquettes » : clique sur « + », tape le début du nom ou crée une nouvelle étiquette. La liste de toutes les étiquettes est dans Listes → Étiquettes.'],
             ['Comment repérer une erreur de génération (père confondu avec son fils homonyme) ?', 'Maintenance → Âges et écarts : en plus des âges au mariage et des parents trop jeunes ou trop vieux, une fratrie étalée sur deux générations, un ancêtre Sosa trop jeune ou trop vieux pour sa place dans la lignée, un décès avant la naissance ou un mariage après le décès.'],
             ['Comment protéger une fiche contre les modifications ?', 'Le cadenas en haut de la fiche la verrouille : plus rien ne peut y être changé, même par le travail à deux.'],
@@ -1407,6 +1430,7 @@
         no_parents: {ev: 'Parents inconnus', pe: 'Parents inconnus', ui: 'none', g: 'Vie et famille'},
         death_cause: {ev: 'Cause de décès contient', pe: 'Cause de décès contient', ui: 'text', g: 'Vie et famille'},
         sosa: {ev: 'Seulement mes ancêtres (Sosa)', pe: 'Seulement mes ancêtres (Sosa)', ui: 'none', g: 'Lignée'},
+        of_person: {ev: 'Par rapport à la personne de la fiche', pe: 'Par rapport à la personne de la fiche (ses ancêtres, sa famille…)', ui: 'relative', g: 'Lignée'},
         sosa_generation: {ev: 'Génération Sosa entre', pe: 'Génération Sosa entre', ui: 'range', g: 'Lignée'},
         no_source: {ev: 'Sans source', pe: 'Sans source', ui: 'none', g: 'Recherche'},
         source_count: {ev: 'Nombre de sources entre', pe: 'Nombre de sources entre', ui: 'count', g: 'Recherche'},
@@ -1523,6 +1547,7 @@
         if (meta.ui === 'age') input = `<input type="number" data-lr="from" value="${esc(r.from || '')}" placeholder="de" class="h-lr-year"> et <input type="number" data-lr="to" value="${esc(r.to || '')}" placeholder="à" class="h-lr-year"> ans${source === 'persons' ? ', à l’événement' : ''} <select data-lr="values" multiple size="4" title="Aucun choisi : n’importe quel événement">${listMeta.event_types.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select><small class="muted">aucun choisi : n’importe quel événement ; ⌘-clic (Ctrl-clic) pour en choisir plusieurs</small>`;
         if (meta.ui === 'years_old') input = `<input type="number" min="0" data-lr="from" value="${esc(r.from ?? '')}" placeholder="de" class="h-lr-year"> et <input type="number" min="0" data-lr="to" value="${esc(r.to ?? '')}" placeholder="à" class="h-lr-year"> ans <small class="muted">d’après la naissance et le décès</small>`;
         if (meta.ui === 'count' || meta.ui === 'count_types') input = `<input type="number" min="0" data-lr="from" value="${esc(r.from ?? '')}" placeholder="de" class="h-lr-year"> et <input type="number" min="0" data-lr="to" value="${esc(r.to ?? '')}" placeholder="à" class="h-lr-year">${meta.ui === 'count_types' ? ` <select data-lr="values" multiple size="4">${listMeta.event_types.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select>` : ''}<small class="muted">« 2 et 2 » : exactement 2 ; « 0 et 0 » : aucun ; une case vide : pas de limite</small>`;
+        if (meta.ui === 'relative') input = `<select data-lr="value">${[['ancestors', 'ses ancêtres'], ['descendants', 'ses descendants'], ['branch', 'ses ancêtres, ses descendants et elle'], ['family', 'sa famille proche (parents, frères et sœurs, conjoints, enfants)'], ['surname', 'les personnes de même nom']].map(([v, l]) => `<option value="${v}" ${(r.value || 'ancestors') === v ? 'selected' : ''}>${l}</option>`).join('')}</select><small class="muted">dans un bloc de fiche : la personne de la fiche ; ailleurs (tableau de bord, Graphiques) : le de cujus</small>`;
         if (meta.ui === 'living') input = `<select data-lr="value">${[['deceased', 'décédé(e)'], ['living', 'vivant(e)'], ['unknown', 'à vérifier']].map(([v, l]) => `<option value="${v}" ${r.value === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
         if (meta.ui === 'months') input = `<select data-lr="values" multiple size="4">${RULE_MONTHS.map((m, i) => `<option value="${i + 1}" ${(r.values || []).map(Number).includes(i + 1) ? 'selected' : ''}>${m}</option>`).join('')}</select><small class="muted">dates complètes seulement ; ⌘-clic (Ctrl-clic) pour en choisir plusieurs</small>`;
         if (meta.ui === 'gender') input = `<select data-lr="value">${[['female', 'Femme'], ['male', 'Homme'], ['unknown', 'Inconnu']].map(([v, l]) => `<option value="${v}" ${r.value === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
@@ -1562,7 +1587,7 @@
             if (L.source === 'records' && !(d.fields || []).length) { const t = ext.recordTemplates().find(x => x.name === 'Liste de fiches vide'); d.fields = t.definition.fields; d.record = t.definition.record; } d.columns = Object.keys(listMeta.columns[L.source] || {}).slice(0, 4); if (L.source === 'free' && !d.custom.length) d.custom.push({label: '', type: 'text', options: []}); keepLabels(); again(); }));
         ws.querySelectorAll('[name=le-match]').forEach(el => el.addEventListener('change', () => { d.match = el.value; }));
         ws.querySelector('[data-le-inlists]').addEventListener('change', e => { d.in_lists = e.target.checked; });
-        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : e.target.value === 'living' ? 'deceased' : '', values: []}); again(); } });
+        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: {gender: 'female', living: 'deceased', of_person: 'ancestors'}[e.target.value] || '', values: []}); again(); } });
         const rulesBox = ws.querySelector('[data-le-rules]') || document.createElement('div');
         const readRule = row => { const r = d.rules[Number(row.dataset.lrI)]; row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (el.value === '' ? null : Number(el.value)) : el.value; }); };
         rulesBox.addEventListener('input', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });
