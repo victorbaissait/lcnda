@@ -26,8 +26,13 @@
         };
         const schedule=()=>{if(!timer)timer=setTimeout(()=>flush(false),1000);};
         const base=Array.isArray(fromBase)?{}:fromBase;
-        for(const [key,value] of Object.entries(base)){if(synced(key)&&typeof value==='string'){try{originalSet.call(store,key,value);}catch(_){}}}
-        for(let i=0;i<store.length;i++){const key=store.key(i);if(synced(key)&&!(key in base)){pending.set[key]=store.getItem(key);}}
+        // Deuxième écran ou écran posé dans un onglet (?view=…) : la fenêtre principale tient déjà les réglages à jour.
+        // Les recopier depuis la base effacerait ce qu'elle vient d'enregistrer et que la base n'a pas encore reçu.
+        const secondary=(()=>{try{return new URLSearchParams(location.search).has('view');}catch(_){return false;}})();
+        if(!secondary){
+            for(const [key,value] of Object.entries(base)){if(synced(key)&&typeof value==='string'){try{originalSet.call(store,key,value);}catch(_){}}}
+            for(let i=0;i<store.length;i++){const key=store.key(i);if(synced(key)&&!(key in base)){pending.set[key]=store.getItem(key);}}
+        }
         if(Object.keys(pending.set).length)schedule();
         proto.setItem=function(key,value){originalSet.call(this,key,value);if(this===store&&synced(String(key))){pending.remove.delete(String(key));pending.set[String(key)]=String(value);schedule();}};
         proto.removeItem=function(key){originalRemove.call(this,key);if(this===store&&synced(String(key))){delete pending.set[String(key)];pending.remove.add(String(key));schedule();}};
@@ -350,7 +355,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     defaultDashboardBlocks.push(['achievements','Accomplissements']);
     defaultDashboardBlockSpans.achievements='6';
     // Fiches « patrimoine » (assets/js/heritage.js)
-    defaultDashboardBlocks.push(['research_suggestions','Suggestions de recherche'],['agenda_widget','Mon agenda : à venir'],['voyages_widget','Départs et émigration'],['placements_widget','Enfants placés'],['heraldry_widget','Armoiries'],['poilus_widget','Poilus 14-18'],['saved_searches_widget','Recherches enregistrées'],['field_trips_widget','Circuits sur le terrain'],['offsite_backup_widget','Copie hors de l’ordinateur'],['scan_inbox_widget','Dossier Scans'],['journeys_widget','Voyages impossibles'],['cited_names_widget','Le cercle des ancêtres'],['help_requests_widget','Demandes d’entraide']);
+    defaultDashboardBlocks.push(['research_suggestions','Suggestions de recherche'],['app_screen','Écran de l’app (une liste, un diagramme, une fiche…)'],['tab_note','Texte libre (titre, note, consigne)'],['agenda_widget','Mon agenda : à venir'],['voyages_widget','Départs et émigration'],['placements_widget','Enfants placés'],['heraldry_widget','Armoiries'],['poilus_widget','Poilus 14-18'],['saved_searches_widget','Recherches enregistrées'],['field_trips_widget','Circuits sur le terrain'],['offsite_backup_widget','Copie hors de l’ordinateur'],['scan_inbox_widget','Dossier Scans'],['journeys_widget','Voyages impossibles'],['cited_names_widget','Le cercle des ancêtres'],['help_requests_widget','Demandes d’entraide']);
     // Widgets créés dans Maintenance → Éditeur de widgets (assets/js/heritage-widgets.js) : un type « cw_… » chacun
     function syncCustomDashboardWidgets(){
         let defs=[];try{defs=JSON.parse(localStorage.getItem('genealogie-custom-widgets')||'[]');}catch(_){defs=[];}
@@ -358,8 +363,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         (Array.isArray(defs)?defs:[]).forEach(d=>{if(d&&/^cw_[a-z0-9]{4,24}$/.test(String(d.id))){defaultDashboardBlocks.push([d.id,`${d.icon?d.icon+' ':''}${d.name||'Mon widget'}`]);defaultDashboardBlockSpans[d.id]=String(d.width||'6');}});
     }
     syncCustomDashboardWidgets();
-    Object.assign(defaultDashboardBlockSpans,{research_suggestions:'6',agenda_widget:'6',voyages_widget:'12',placements_widget:'12',heraldry_widget:'6',poilus_widget:'6',saved_searches_widget:'6',field_trips_widget:'6',offsite_backup_widget:'6',scan_inbox_widget:'6',journeys_widget:'6',cited_names_widget:'6',help_requests_widget:'6'});
+    Object.assign(defaultDashboardBlockSpans,{research_suggestions:'6',app_screen:'12',tab_note:'6',agenda_widget:'6',voyages_widget:'12',placements_widget:'12',heraldry_widget:'6',poilus_widget:'6',saved_searches_widget:'6',field_trips_widget:'6',offsite_backup_widget:'6',scan_inbox_widget:'6',journeys_widget:'6',cited_names_widget:'6',help_requests_widget:'6'});
     const dashboardWidgetInfo={
+        app_screen:'N’importe quel écran de l’app dans la page : une liste, un diagramme, une statistique, une fiche, la carte, un outil… Choisis-le avec le crayon ✎.',
+        tab_note:'Un titre, une note, une consigne ou un pense-bête, avec des émojis.',
         research_suggestions:'Les trous de ta lignée Sosa, avec où et quand chercher : « Ton Sosa 18 n’a pas de décès : regarde les décès et sépultures de Lille entre 1820 et 1840 ». Les générations les plus proches d’abord.',
         stats:'Résumé chiffré de la base.',
         upcoming:'Dates familiales qui reviennent dans les prochains jours.',
@@ -1072,6 +1079,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(type==='maint'){state.maintenanceTab=value;return setModule('maintenance');}
         if(type==='graph'){state.graphMode=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
         if(type==='stat'){state.graphMode='stats';state.graphStatsType=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
+        if(type==='mylist'&&Number(value)){state.maintenanceTab='my_lists';state.hListOpen=Number(value);return setModule('maintenance');}
+        if(type==='person'&&Number(value)){state.currentPersonId=Number(value);return setModule('personnes');}
         toast('Cet écran n’existe plus : modifie l’onglet dans Maintenance → Éditeur d’onglets.','error');
     }
 
@@ -1322,6 +1331,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             state.currentPersonId = urlPersonId || Number(state.currentPersonId) || state.bootstrap.startPersonId;
             $('#app').classList.toggle('sidebar-collapsed',Boolean(persisted.sidebarCollapsed));
             if(IS_SECONDARY){applyViewSnapshot(SECONDARY_VIEW);document.documentElement.classList.toggle('is-embedded',IS_EMBEDDED);
+                // Écran de l'app posé dans un de ses onglets : sans la barre du haut ni la colonne de gauche
+                if(SECONDARY_VIEW.screen){document.documentElement.classList.add('is-screen-embed');if(SECONDARY_VIEW.sidebar)document.documentElement.classList.add('is-screen-embed-sidebar');await openCustomScreen(SECONDARY_VIEW.screen);return;}
                 await setModule(SECONDARY_VIEW.module||'personnes',false);bindSidePanelButton();return;}
             bindSidePanelButton();
             $('#database-status').textContent = personCountLabel(state.bootstrap.stats.personnes);

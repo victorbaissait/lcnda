@@ -226,7 +226,10 @@
             return `<div class="h-cw-pie"><div class="h-cw-pie-disc ${d.style === 'donut' ? 'is-donut' : ''}" style="background:conic-gradient(${stops})" role="img" aria-label="${d.style === 'donut' ? 'Anneau' : 'Camembert'}">${d.style === 'donut' ? `<span>${fmt(total)}</span>` : ''}</div>${legend}</div>`;
         }
         if (d.style === 'columns') {
-            return `<div class="h-cw-columns">${entries.map(([v, n], i) => `<div class="h-cw-col" title="${esc(v)} : ${fmt(n)}"><small>${fmt(n)}</small><i style="height:${Math.max(2, Math.round(n / max * 100))}%;background:${col(v, i)}"></i><span>${esc(v)}</span></div>`).join('')}</div>`;
+            // étiquettes courtes (« 1780 » pour « 1780–1789 ») et inclinées quand il y en a beaucoup
+            const short = v => /^\d{3,4}–\d{3,4}$/.test(String(v)) ? String(v).split('–')[0] : String(v);
+            const dense = entries.length > 8 || entries.some(([v]) => short(v).length > 6);
+            return `<div class="h-cw-columns${dense ? ' is-dense' : ''}">${entries.map(([v, n], i) => `<div class="h-cw-col" title="${esc(v)} : ${fmt(n)}"><div class="h-cw-bar-wrap"><small>${fmt(n)}</small><i style="height:${Math.max(2, Math.round(n / max * 100))}%;background:${col(v, i)}"></i></div><span>${esc(short(v))}</span></div>`).join('')}</div>`;
         }
         if (d.style === 'line' || d.style === 'area') {
             const W = 600, H = 220, pad = 28, step = entries.length > 1 ? (W - pad * 2) / (entries.length - 1) : 0;
@@ -471,7 +474,7 @@
             ? header('MAINTENANCE', 'Éditeur de statistiques', 'Crée tes propres graphiques et statistiques, sans rien programmer : de zéro (personnes, événements, une de tes listes…), à partir d’une statistique de l’app redessinée à ta façon, d’un de tes widgets ou d’un exemple. Ils apparaissent dans Graphiques → Statistiques, rubrique « Mes statistiques », et peuvent aussi aller sur le tableau de bord.', '<button type="button" class="button" data-cw-new>+ Nouvelle statistique</button>')
             : header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique ou une statistique en grand dans l’onglet Graphiques : Éditeur de statistiques.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
             <section class="maintenance-panel"><h3>Importer un widget reçu</h3><p class="muted">Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données.</p><input type="file" accept=".json,application/json" data-cw-import></section>
-            ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record" style="--cw-accent:${color(d.color) || 'transparent'}"><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}${d.inStats ? ' <span class="collection-kind">dans Graphiques</span>' : ''}</div>
+            ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record${color(d.color) ? ' has-accent' : ''}"${color(d.color) ? ` style="--cw-accent:${color(d.color)}"` : ''}><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}${d.inStats ? ' <span class="collection-kind">dans Graphiques</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-cw-edit="${esc(d.id)}">modifier</button><button type="button" class="link-button" data-cw-dup="${esc(d.id)}">dupliquer</button><button type="button" class="link-button" data-cw-del="${esc(d.id)}">supprimer</button></span></header>
                     ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions">${d.inStats ? `<button type="button" class="button small" data-cw-opengraph="${esc(d.id)}">📊 Ouvrir dans Graphiques</button>` : ''}<button type="button" class="button small ${d.inStats ? 'secondary' : ''}" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().empty('Aucun widget à toi pour l’instant : clique sur « + Nouveau widget ».')}</section>`;
         const ws = A().$('#workspace');
@@ -574,7 +577,7 @@
                 ${lists.length ? `<optgroup label="Mes listes (avec leurs critères et leurs filtres)">${lists.map(l => `<option value="list:${l.id}" ${val === 'list:' + l.id ? 'selected' : ''}>${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}</select></label>
             ${isRules ? `<div class="h-tabs"><label class="checkbox-line"><input type="radio" name="m-${esc(path)}" data-cw-match value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions</label><label class="checkbox-line"><input type="radio" name="m-${esc(path)}" data-cw-match value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une</label></div>
                 <div data-cw-rules>${d.rules.map((r, i) => ext.listRuleRowHtml ? ext.listRuleRowHtml(r, i, src.source || 'persons', meta) : '').join('') || '<p class="muted">Aucun critère : toute la base.</p>'}</div>
-                <label>+ Critère <select data-cw-addrule><option value="">choisir…</option>${Object.entries(ext.listRules ? ext.listRules() : {}).filter(([, m]) => m[k]).map(([f, m]) => `<option value="${f}">${esc(m[k])}</option>`).join('')}</select></label>`
+                <label>+ Critère <select data-cw-addrule><option value="">choisir…</option>${ext.ruleOptionsHtml ? ext.ruleOptionsHtml(k) : ''}</select></label>`
             : src.list_id ? '<p class="muted">La liste est reprise telle qu’elle est enregistrée (critères, lignes ajoutées à la main, filtres de colonnes).</p>' : '<p class="muted">Toutes les lignes de cette liste de l’app.</p>'}</div>`;
     }
     const target = () => partIndex >= 0 && editing.parts?.[partIndex] ? editing.parts[partIndex] : editing;
@@ -602,6 +605,11 @@
                 case 'children_count': return `${not}${range(r.from, r.to)} enfant${(r.to ?? r.from) > 1 ? 's' : ''}`;
                 case 'unions_count': return `${not}${range(r.from, r.to)} union${(r.to ?? r.from) > 1 ? 's' : ''}`;
                 case 'event_count': return `${not}${range(r.from, r.to)} × ${types(r.values) || 'événement'}`;
+                case 'living': return not + ({living: 'vivants', deceased: 'décédés', unknown: 'statut à vérifier'}[r.value] || '');
+                case 'bookmarked': case 'has_media': return not + label.toLowerCase();
+                case 'sosa_generation': return `${not}génération Sosa ${range(r.from, r.to)}`;
+                case 'birth_month': return `${not}né(e) en ${(r.values || []).map(m => MONTHS[Number(m) - 1]).filter(Boolean).join(' ou ')}`;
+                case 'source_count': return `${not}${range(r.from, r.to)} source${(r.to ?? r.from) > 1 ? 's' : ''}`;
                 case 'label': return `${not}étiquette : ${(meta?.labels || []).filter(t => (r.values || []).map(Number).includes(Number(t.id))).map(t => t.name).join(' ou ')}`;
                 case 'year': case 'death_year': return `${not}${label.toLowerCase()} ${range(r.from, r.to)}`.replace(' entre de ', ' de ');
                 default: return r.value ? `${not}${label.toLowerCase()} « ${r.value} »` : '';
@@ -695,8 +703,8 @@
                 <div class="span-2"><span class="section-label">Couleur</span><div class="h-cw-colors"><button type="button" class="h-cw-swatch ${!color(root.color) ? 'is-on' : ''}" data-cw-color="" title="Aucune">∅</button>${COLORS.map(c => `<button type="button" class="h-cw-swatch ${root.color === c ? 'is-on' : ''}" data-cw-color="${c}" style="background:${c}" title="${c}"></button>`).join('')}<input type="color" data-cw-colorpick value="${esc(color(root.color) || '#0066cc')}" title="Autre couleur"></div></div>
                 <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(root.note || '')}</textarea></label>
                 <fieldset class="span-2 h-be-display"><legend>Où l’afficher</legend>
-                    ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> 📊 en grand dans <b>Graphiques</b> → « Mes statistiques » (graphique, chiffres ou liste)</label>`}
-                    <label class="checkbox-line"><input type="checkbox" data-cw-ondash ${root._onDash ?? onDashboard(root.id) ? 'checked' : ''}> 🧱 en widget sur le <b>tableau de bord</b></label>
+                    ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> <span>📊 en grand dans Graphiques → « Mes statistiques » (graphique, chiffres ou liste)</span></label>`}
+                    <label class="checkbox-line"><input type="checkbox" data-cw-ondash ${root._onDash ?? onDashboard(root.id) ? 'checked' : ''}> <span>🧱 en widget sur le tableau de bord</span></label>
                     <small class="muted">Et dans un de tes onglets : Maintenance → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small></fieldset></div></section>
             <section class="maintenance-panel"><h3>2. ${partIndex >= 0 ? `Partie ${partIndex + 2} : ` : ''}${esc(KINDS[d.kind]?.[1] || '')}</h3>${partTabs}${partHead}<p class="muted">${esc(KINDS[d.kind]?.[2] || '')}${root.kind !== 'app' && partIndex < 0 && !(root.parts || []).length ? ' Pour mettre plusieurs choses dans le même widget (plusieurs textes, des chiffres et des raccourcis…), « + Ajouter une partie ».' : ''}</p><div data-cw-kind-box>${kindHtml()}</div></section>
             <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root.inStats ? '<button type="button" class="button secondary" data-cw-savegraph>Enregistrer et ouvrir dans Graphiques</button>' : ''}${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
@@ -752,7 +760,7 @@
                     if (srcBox.dataset.cwSrc === 's') { d.columns = []; d.sort = null; d.group = ''; }
                     return again();
                 }
-                if (e.target.matches('[data-cw-addrule]') && e.target.value) { src.definition.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : '', values: []}); return again(); }
+                if (e.target.matches('[data-cw-addrule]') && e.target.value) { src.definition.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : e.target.value === 'living' ? 'deceased' : '', values: []}); return again(); }
                 if (e.target.matches('[data-cw-match]')) { src.definition.match = e.target.value; return preview(); }
                 readRule(e, src);
                 return;

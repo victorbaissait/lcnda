@@ -54,6 +54,11 @@ $rows = fn($rules, $src = 'persons') => array_map(fn($r) => trim(($r['people'][0
 $out['near'] = $rows([['field' => 'near_place', 'value' => 'Brest', 'km' => 80]]);
 $out['dates'] = $rows([['field' => 'date_range', 'date_from' => '1802-06-01', 'date_to' => '1802-06-30']]);
 $out['age'] = $rows([['field' => 'age_at', 'from' => 25, 'to' => 30, 'values' => [$t('RESI')]]]);
+$pdo->exec("UPDATE places SET county='Finistère' WHERE name IN ('Brest','Quimper')");
+$out['county'] = $rows([['field' => 'county', 'value' => 'finist']]);
+$out['spouse'] = $rows([['field' => 'spouse_name', 'value' => 'Le Gall']]);
+$out['nokids'] = count($rows([['field' => 'children_count', 'from' => 0, 'to' => 0]]));
+$out['kids1'] = $rows([['field' => 'children_count', 'from' => 1, 'to' => 1]]);
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -85,6 +90,13 @@ step('erreur de génération : un ancêtre Sosa trop vieux pour sa place (géné
 step('critères : à moins de N km d’une ville (personnes nées ou passées par là)', () => { assert.ok(out.near.includes('Jean Martin')); assert.ok(out.near.includes('Anne Le Gall')); assert.ok(!out.near.includes('Paul Durand')); });
 step('critères : entre deux dates précises (24 juin 1802 oui, 24 juillet 1801 non)', () => assert.deepEqual(out.dates, ['Jean Martin']));
 step('critères : âge à un événement (résidence à 28 ans)', () => assert.deepEqual(out.age, ['Jean Martin']));
+
+step('critères : département, conjoint, nombre d’enfants (0 = aucun ; exactement 1)', () => {
+    assert.deepEqual(out.county.sort(), ['Anne Le Gall', 'Jean Martin']);
+    assert.deepEqual(out.spouse, ['Pierre Martin']);
+    assert.deepEqual(out.kids1.sort(), ['Anne Le Gall', 'Paul Martin', 'Pierre Martin']);
+    assert.equal(out.nokids, 5); // Jean, Marie, Jacques, Paul Durand, Louis : aucun enfant
+});
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */
 const store = {};

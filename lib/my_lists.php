@@ -79,12 +79,13 @@ function my_lists(PDO $pdo): array
 function my_list_clean_definition(array $d, string $source): array
 {
     if ($source === 'records') { return my_list_records_definition($d); }
-    $fields = ['event_type', 'year', 'death_year', 'date_range', 'place', 'any_place', 'near_place', 'last_name', 'first_name', 'occupation', 'gender', 'age_at', 'lifespan', 'children_count', 'unions_count', 'event_count', 'label', 'sosa', 'no_parents', 'no_source', 'text'];
+    $fields = ['event_type', 'year', 'death_year', 'date_range', 'place', 'any_place', 'near_place', 'last_name', 'first_name', 'occupation', 'gender', 'age_at', 'lifespan', 'children_count', 'unions_count', 'event_count', 'label', 'sosa', 'no_parents', 'no_source', 'text',
+        'death_place', 'county', 'spouse_name', 'parent_name', 'has_media', 'living', 'bookmarked', 'sosa_generation', 'birth_month', 'death_cause', 'source_count', 'note'];
     $isoDate = static function ($v): string { $v = trim((string) $v); if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $v, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { return $v; } return function_exists('exact_date') ? (string) (exact_date($v) ?? '') : ''; };
     $rules = [];
     foreach (is_array($d['rules'] ?? null) ? $d['rules'] : [] as $r) {
         if (!is_array($r) || !in_array($r['field'] ?? '', $fields, true)) { continue; }
-        $counting = in_array($r['field'], ['children_count', 'unions_count', 'event_count'], true); // 0 est une vraie valeur (« aucun enfant »)
+        $counting = in_array($r['field'], ['children_count', 'unions_count', 'event_count', 'source_count'], true); // 0 est une vraie valeur (« aucun enfant »)
         $num = static fn($v) => $counting ? (is_numeric($v) ? max(0, (int) $v) : null) : (safe_int($v ?? 0) ?: null);
         $rules[] = ['field' => $r['field'], 'value' => mb_substr(safe_text($r['value'] ?? ''), 0, 200), 'from' => $num($r['from'] ?? null), 'to' => $num($r['to'] ?? null),
             'values' => array_values(array_filter(array_map('intval', is_array($r['values'] ?? null) ? $r['values'] : []))), 'not' => !empty($r['not']),
@@ -306,6 +307,70 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
                 if (!$r['values'] || ($r['from'] === null && $r['to'] === null && $r['value'] === '')) { break; }
                 $n = '(SELECT count(*) FROM events ec LEFT JOIN families fe ON fe.id=ec.family_id WHERE ec.event_type_id IN (' . implode(',', $r['values']) . ') AND (ec.person_id=x.id OR fe.partner1_id=x.id OR fe.partner2_id=x.id))';
                 $c = $personMatch(my_list_count_range($n, $r));
+                break;
+            case 'death_place': // mort(e) ou inhumé(e) à (lieu contient)
+                if ($r['value'] === '') { break; }
+                $c = $personMatch("EXISTS (SELECT 1 FROM events ee JOIN event_types tt ON tt.id=ee.event_type_id JOIN places pp ON pp.id=ee.place_id WHERE ee.person_id=x.id AND tt.gedcom_tag IN ('DEAT','BURI') AND (pp.name LIKE ? OR pp.county LIKE ? OR pp.state LIKE ? OR pp.country LIKE ?))");
+                array_push($params, $like, $like, $like, $like);
+                break;
+            case 'county': // un événement dans le département, la région ou le pays (contient)
+                if ($r['value'] === '') { break; }
+                $c = $isEvents ? '(pl.county LIKE ? OR pl.state LIKE ? OR pl.country LIKE ?)'
+                    : "(EXISTS (SELECT 1 FROM events ee LEFT JOIN families ff ON ff.id=ee.family_id JOIN places pp ON pp.id=ee.place_id WHERE (ee.person_id=p.id OR ff.partner1_id=p.id OR ff.partner2_id=p.id) AND (pp.county LIKE ? OR pp.state LIKE ? OR pp.country LIKE ?)))";
+                array_push($params, $like, $like, $like);
+                break;
+            case 'spouse_name': // un conjoint dont le nom ou le prénom contient…
+                if ($r['value'] === '') { break; }
+                $c = $personMatch("EXISTS (SELECT 1 FROM families fs JOIN persons sp ON sp.id = CASE WHEN fs.partner1_id=x.id THEN fs.partner2_id ELSE fs.partner1_id END WHERE (fs.partner1_id=x.id OR fs.partner2_id=x.id) AND (sp.last_name LIKE ? OR sp.first_name LIKE ? OR (sp.first_name || ' ' || sp.last_name) LIKE ?))");
+                array_push($params, $like, $like, $like);
+                break;
+            case 'parent_name': // un parent dont le nom ou le prénom contient…
+                if ($r['value'] === '') { break; }
+                $c = $personMatch("EXISTS (SELECT 1 FROM family_children fp JOIN families fq ON fq.id=fp.family_id JOIN persons pa ON pa.id IN (fq.partner1_id, fq.partner2_id) WHERE fp.child_id=x.id AND (pa.last_name LIKE ? OR pa.first_name LIKE ? OR (pa.first_name || ' ' || pa.last_name) LIKE ?))");
+                array_push($params, $like, $like, $like);
+                break;
+            case 'has_media': // a au moins une photo ou un document
+                $c = $isEvents ? "(EXISTS (SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id=e.id))" : "(EXISTS (SELECT 1 FROM media_links ml WHERE (ml.entity_type='person' AND ml.entity_id=p.id) OR (ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id))))";
+                break;
+            case 'living':
+                if (!in_array($r['value'], ['living', 'deceased', 'unknown'], true)) { break; }
+                $c = $personMatch('x.living_status = ?'); $params[] = $r['value'];
+                break;
+            case 'bookmarked':
+                $c = $personMatch('x.is_bookmarked = 1');
+                break;
+            case 'sosa_generation': // génération dans la lignée Sosa (1 = le de cujus, 2 = ses parents…)
+                if (!$r['from'] && !$r['to']) { break; }
+                $ids = [];
+                foreach ($sosaAll ??= my_list_sosas($pdo) as $pid => $nums) { $g = (int) floor(log((float) min((array) $nums), 2)) + 1; if ((!$r['from'] || $g >= $r['from']) && (!$r['to'] || $g <= $r['to'])) { $ids[] = (int) $pid; } }
+                $in = implode(',', $ids ?: [0]);
+                $c = $isEvents ? "(e.person_id IN ({$in}) OR f.partner1_id IN ({$in}) OR f.partner2_id IN ({$in}))" : "(p.id IN ({$in}))";
+                break;
+            case 'birth_month': // né(e) en janvier, en juin… (dates complètes seulement)
+                if (!$r['values']) { break; }
+                $months = array_values(array_filter($r['values'], static fn($m) => $m >= 1 && $m <= 12));
+                $ids = [];
+                $bt = $pdo->query("SELECT e.id, e.person_id, e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('BIRT','CHR','BAPM') AND e.date_text<>''");
+                foreach ($bt as $b) { $d = function_exists('exact_date') ? exact_date((string) $b['date_text']) : null; if ($d && in_array((int) substr($d, 5, 2), $months, true)) { $ids[] = (int) $b['person_id']; } }
+                $in = implode(',', array_unique($ids) ?: [0]);
+                $c = $isEvents ? "(e.person_id IN ({$in}))" : "(p.id IN ({$in}))";
+                break;
+            case 'death_cause':
+                if ($r['value'] === '') { break; }
+                $c = $isEvents ? '(e.cause LIKE ?)' : "(EXISTS (SELECT 1 FROM events ee JOIN event_types tt ON tt.id=ee.event_type_id WHERE ee.person_id=p.id AND tt.gedcom_tag IN ('DEAT','BURI') AND (ee.cause LIKE ? OR ee.description LIKE ?)))";
+                $params[] = $like; if (!$isEvents) { $params[] = $like; }
+                break;
+            case 'source_count':
+                if ($r['from'] === null && $r['to'] === null) { break; }
+                $n = $isEvents ? "(SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id)"
+                    : "(SELECT count(*) FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id)))";
+                $c = '(' . my_list_count_range($n, $r) . ')';
+                break;
+            case 'note': // une note (de la fiche ou de l'événement) contient…
+                if ($r['value'] === '') { break; }
+                $c = $isEvents ? "(EXISTS (SELECT 1 FROM notes nn WHERE nn.entity_type='event' AND nn.entity_id=e.id AND (nn.body LIKE ? OR nn.title LIKE ?)))"
+                    : "(EXISTS (SELECT 1 FROM notes nn WHERE nn.entity_type='person' AND nn.entity_id=p.id AND (nn.body LIKE ? OR nn.title LIKE ?)))";
+                array_push($params, $like, $like);
                 break;
             case 'death_year':
                 if ($isEvents) { break; }

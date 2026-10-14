@@ -3815,3 +3815,11 @@ tr.is-key-row td{background:color-mix(in srgb,var(--blue) 8%,transparent)}
 .enquetes-tab-toggle .enquetes-tab-btn { display: grid; justify-items: center; align-content: center; gap: 2px; min-height: 54px; padding: 6px 4px; }
 .enquetes-tab-icon { font-size: 18px; line-height: 1; }
 .enquetes-tab-help { font-size: 13px; color: var(--muted, #666); margin: 0 0 12px; }
+
+/* Écran de l'app posé dans un onglet à soi (Éditeur d'onglets) : seulement l'écran, sans barre du haut ni colonne */
+html.is-screen-embed .topbar,html.is-screen-embed .sidebar,html.is-screen-embed .sidebar-reopen,html.is-screen-embed #sidebar-reopen{display:none!important}
+html.is-screen-embed .app-shell{grid-template:1fr / 1fr}
+html.is-screen-embed .workspace{grid-row:1;grid-column:1}
+html.is-screen-embed.is-screen-embed-sidebar .sidebar{display:flex!important;grid-row:1}
+html.is-screen-embed.is-screen-embed-sidebar .app-shell{grid-template:1fr / var(--sidebar) 1fr}
+html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}

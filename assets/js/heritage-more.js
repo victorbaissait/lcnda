@@ -1189,7 +1189,7 @@
             ['Comment repérer une erreur de génération (père confondu avec son fils homonyme) ?', 'Maintenance → Âges et écarts : en plus des âges au mariage et des parents trop jeunes ou trop vieux, une fratrie étalée sur deux générations, un ancêtre Sosa trop jeune ou trop vieux pour sa place dans la lignée, un décès avant la naissance ou un mariage après le décès.'],
             ['Comment protéger une fiche contre les modifications ?', 'Le cadenas en haut de la fiche la verrouille : plus rien ne peut y être changé, même par le travail à deux.'],
             ['Qui est le de cujus, et pourquoi porte-t-il le n° SOSA 1 ?', 'Le de cujus est la personne de départ de l’arbre : c’est elle le Sosa n°1, son père le 2, sa mère le 3, etc. Menu Aller → « De cujus » (⌘⇧H ou Ctrl+Maj+H) ouvre sa fiche. Pour en changer : Maintenance → Apparence → Numérotation Sosa, cherche la personne puis « Recalculer » ; le choix est enregistré dans la base, il suit donc la sauvegarde et un autre ordinateur.'],
-            ['Comment créer mon propre onglet dans la barre du haut ?', 'Maintenance → Éditeur d’onglets → « + Nouvel onglet ». Pars d’une page vide, d’une copie du tableau de bord, d’un de tes onglets ou d’un modèle (Ma recherche du jour, Ma lignée, Mes photos, Qualité de la base…). Une page d’onglet se remplit comme le tableau de bord : widgets de l’app, tes widgets, tes listes et tes statistiques, ajoutés depuis sa colonne de gauche. Un onglet peut aussi être un simple raccourci vers un écran (une liste, un diagramme, une statistique, un outil). Choisis son nom et son icône ; range-le ou masque-le dans Maintenance → Apparence → « Ordre du menu principal », avec les autres onglets ; « Partager » en fait un fichier.'],
+            ['Comment créer mon propre onglet dans la barre du haut ?', 'Maintenance → Éditeur d’onglets → « + Nouvel onglet ». Pars d’une page composée vide, d’un écran de l’app, d’une copie du tableau de bord, d’un de tes onglets ou d’un modèle (Mon bureau de recherche, Mon village, Arbre et carte…). Dans la page, pose ce que tu veux : n’importe quel écran de l’app (une liste, un diagramme, une statistique, la fiche d’une personne, la carte, une de tes listes, un outil de Maintenance), avec sa hauteur et ses menus si tu veux, des widgets, tes statistiques, des textes libres. « ↗ En grand » ouvre l’écran. Un onglet peut aussi être un simple raccourci vers un écran. Choisis son nom et son icône ; range-le ou masque-le dans Maintenance → Apparence → « Ordre du menu principal », avec les autres onglets ; « Partager » en fait un fichier.'],
         ]],
         ['Graphiques et statistiques', [
             ['Comment créer mon propre graphique ou ma propre statistique ?', 'Maintenance → Éditeur de statistiques → « + Nouvelle statistique » (ou « + Créer une statistique » en bas de Graphiques). Pars de rien (compter des personnes, des événements, une de tes listes… par métier, par lieu, par décennie, par siècle), d’une statistique de l’app (Noms, Prénoms, Lieux, Années de naissance…) redessinée à ta façon, d’un de tes widgets ou d’un exemple. Huit dessins : barres, colonnes, camembert, anneau, courbe, aire, mosaïque, tableau. Elle apparaît dans Graphiques → « Mes statistiques », et peut aussi aller sur le tableau de bord ou dans un de tes onglets.'],
@@ -1292,29 +1292,45 @@
     };
     /* ═══════════════════════ 📋 MES LISTES (Maintenance) ═══════════════════════ */
 
+    // Critères des listes, widgets et graphiques ; « g » range le menu « + Critère » par thème
     const RULES = {
-        event_type: {ev: 'Type d’événement', pe: 'A eu un événement', ui: 'types'},
-        year: {ev: 'Année entre', pe: 'Né(e) entre', ui: 'range'},
-        death_year: {pe: 'Mort(e) entre', ui: 'range'},
-        date_range: {ev: 'Date précise entre', pe: 'Né(e) entre deux dates précises', ui: 'dates'},
-        near_place: {ev: 'Lieu à moins de … km de', pe: 'A un événement à moins de … km de', ui: 'near'},
-        age_at: {ev: 'Âge à l’événement entre', pe: 'Âge à un événement entre', ui: 'age'},
-        lifespan: {ev: 'A vécu entre … ans', pe: 'A vécu entre … ans', ui: 'years_old'},
-        children_count: {ev: 'Nombre d’enfants entre', pe: 'Nombre d’enfants entre', ui: 'count'},
-        unions_count: {ev: 'Nombre d’unions (mariages) entre', pe: 'Nombre d’unions (mariages) entre', ui: 'count'},
-        event_count: {ev: 'Nombre d’événements d’un type entre', pe: 'Nombre d’événements d’un type entre', ui: 'count_types'},
-        place: {ev: 'Lieu contient', pe: 'Né(e) à (lieu contient)', ui: 'text'},
-        any_place: {pe: 'A un événement à (lieu contient)', ui: 'text'},
-        last_name: {ev: 'Nom contient', pe: 'Nom contient', ui: 'text'},
-        first_name: {ev: 'Prénom contient', pe: 'Prénom contient', ui: 'text'},
-        occupation: {ev: 'Métier contient', pe: 'Métier contient', ui: 'text'},
-        gender: {ev: 'Sexe', pe: 'Sexe', ui: 'gender'},
-        label: {ev: 'Étiquette', pe: 'Étiquette', ui: 'labels'},
-        sosa: {ev: 'Seulement mes ancêtres (Sosa)', pe: 'Seulement mes ancêtres (Sosa)', ui: 'none'},
-        no_parents: {ev: 'Parents inconnus', pe: 'Parents inconnus', ui: 'none'},
-        no_source: {ev: 'Sans source', pe: 'Sans source', ui: 'none'},
-        text: {ev: 'Description contient', pe: 'Description contient', ui: 'text'},
+        last_name: {ev: 'Nom contient', pe: 'Nom contient', ui: 'text', g: 'Identité'},
+        first_name: {ev: 'Prénom contient', pe: 'Prénom contient', ui: 'text', g: 'Identité'},
+        gender: {ev: 'Sexe', pe: 'Sexe', ui: 'gender', g: 'Identité'},
+        living: {ev: 'Statut (vivant, décédé)', pe: 'Statut (vivant, décédé)', ui: 'living', g: 'Identité'},
+        occupation: {ev: 'Métier contient', pe: 'Métier contient', ui: 'text', g: 'Identité'},
+        label: {ev: 'Étiquette', pe: 'Étiquette', ui: 'labels', g: 'Identité'},
+        bookmarked: {ev: 'Dans mes favoris', pe: 'Dans mes favoris', ui: 'none', g: 'Identité'},
+        year: {ev: 'Année entre', pe: 'Né(e) entre (années)', ui: 'range', g: 'Dates et âges'},
+        date_range: {ev: 'Date précise entre', pe: 'Né(e) entre deux dates précises', ui: 'dates', g: 'Dates et âges'},
+        birth_month: {ev: 'Personne née en (mois)', pe: 'Né(e) en (mois)', ui: 'months', g: 'Dates et âges'},
+        death_year: {pe: 'Mort(e) entre (années)', ui: 'range', g: 'Dates et âges'},
+        age_at: {ev: 'Âge à l’événement entre', pe: 'Âge à un événement entre', ui: 'age', g: 'Dates et âges'},
+        lifespan: {ev: 'A vécu entre … ans', pe: 'A vécu entre … ans', ui: 'years_old', g: 'Dates et âges'},
+        place: {ev: 'Lieu contient', pe: 'Né(e) à (lieu contient)', ui: 'text', g: 'Lieux'},
+        death_place: {ev: 'Personne morte à (lieu contient)', pe: 'Mort(e) ou inhumé(e) à (lieu contient)', ui: 'text', g: 'Lieux'},
+        any_place: {pe: 'A un événement à (lieu contient)', ui: 'text', g: 'Lieux'},
+        county: {ev: 'Département, région ou pays contient', pe: 'A un événement dans le département, la région ou le pays', ui: 'text', g: 'Lieux'},
+        near_place: {ev: 'Lieu à moins de … km de', pe: 'A un événement à moins de … km de', ui: 'near', g: 'Lieux'},
+        event_type: {ev: 'Type d’événement', pe: 'A eu un événement (mariage, divorce, voyage…)', ui: 'types', g: 'Vie et famille'},
+        event_count: {ev: 'Nombre d’événements d’un type entre', pe: 'Nombre d’événements d’un type entre', ui: 'count_types', g: 'Vie et famille'},
+        unions_count: {ev: 'Nombre d’unions (mariages) entre', pe: 'Nombre d’unions (mariages) entre', ui: 'count', g: 'Vie et famille'},
+        children_count: {ev: 'Nombre d’enfants entre', pe: 'Nombre d’enfants entre', ui: 'count', g: 'Vie et famille'},
+        spouse_name: {ev: 'Conjoint : nom ou prénom contient', pe: 'Conjoint : nom ou prénom contient', ui: 'text', g: 'Vie et famille'},
+        parent_name: {ev: 'Parent : nom ou prénom contient', pe: 'Parent : nom ou prénom contient', ui: 'text', g: 'Vie et famille'},
+        no_parents: {ev: 'Parents inconnus', pe: 'Parents inconnus', ui: 'none', g: 'Vie et famille'},
+        death_cause: {ev: 'Cause de décès contient', pe: 'Cause de décès contient', ui: 'text', g: 'Vie et famille'},
+        sosa: {ev: 'Seulement mes ancêtres (Sosa)', pe: 'Seulement mes ancêtres (Sosa)', ui: 'none', g: 'Lignée'},
+        sosa_generation: {ev: 'Génération Sosa entre', pe: 'Génération Sosa entre', ui: 'range', g: 'Lignée'},
+        no_source: {ev: 'Sans source', pe: 'Sans source', ui: 'none', g: 'Recherche'},
+        source_count: {ev: 'Nombre de sources entre', pe: 'Nombre de sources entre', ui: 'count', g: 'Recherche'},
+        has_media: {ev: 'A une photo ou un document', pe: 'A une photo ou un document', ui: 'none', g: 'Recherche'},
+        note: {ev: 'Note contient', pe: 'Note contient', ui: 'text', g: 'Recherche'},
+        text: {ev: 'Description contient', pe: 'Description contient', ui: 'text', g: 'Recherche'},
     };
+    const RULE_MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    /** Les options du menu « + Critère », rangées par thème */
+    ext.ruleOptionsHtml = k => { const groups = {}; Object.entries(RULES).filter(([, m]) => m[k]).forEach(([f, m]) => { (groups[m.g || 'Autres'] ||= []).push(`<option value="${f}">${esc(m[k])}</option>`); }); return Object.entries(groups).map(([g, o]) => `<optgroup label="${esc(g)}">${o.join('')}</optgroup>`).join(''); };
     const LIST_TEMPLATES = (types) => {
         const tag = t => types.filter(x => x.gedcom_tag === t).map(x => Number(x.id));
         return [
@@ -1421,6 +1437,8 @@
         if (meta.ui === 'age') input = `<input type="number" data-lr="from" value="${esc(r.from || '')}" placeholder="de" class="h-lr-year"> et <input type="number" data-lr="to" value="${esc(r.to || '')}" placeholder="à" class="h-lr-year"> ans${source === 'persons' ? ', à l’événement' : ''} <select data-lr="values" multiple size="4" title="Aucun choisi : n’importe quel événement">${listMeta.event_types.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select><small class="muted">aucun choisi : n’importe quel événement ; ⌘-clic (Ctrl-clic) pour en choisir plusieurs</small>`;
         if (meta.ui === 'years_old') input = `<input type="number" min="0" data-lr="from" value="${esc(r.from ?? '')}" placeholder="de" class="h-lr-year"> et <input type="number" min="0" data-lr="to" value="${esc(r.to ?? '')}" placeholder="à" class="h-lr-year"> ans <small class="muted">d’après la naissance et le décès</small>`;
         if (meta.ui === 'count' || meta.ui === 'count_types') input = `<input type="number" min="0" data-lr="from" value="${esc(r.from ?? '')}" placeholder="de" class="h-lr-year"> et <input type="number" min="0" data-lr="to" value="${esc(r.to ?? '')}" placeholder="à" class="h-lr-year">${meta.ui === 'count_types' ? ` <select data-lr="values" multiple size="4">${listMeta.event_types.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select>` : ''}<small class="muted">« 2 et 2 » : exactement 2 ; « 0 et 0 » : aucun ; une case vide : pas de limite</small>`;
+        if (meta.ui === 'living') input = `<select data-lr="value">${[['deceased', 'décédé(e)'], ['living', 'vivant(e)'], ['unknown', 'à vérifier']].map(([v, l]) => `<option value="${v}" ${r.value === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+        if (meta.ui === 'months') input = `<select data-lr="values" multiple size="4">${RULE_MONTHS.map((m, i) => `<option value="${i + 1}" ${(r.values || []).map(Number).includes(i + 1) ? 'selected' : ''}>${m}</option>`).join('')}</select><small class="muted">dates complètes seulement ; ⌘-clic (Ctrl-clic) pour en choisir plusieurs</small>`;
         if (meta.ui === 'gender') input = `<select data-lr="value">${[['female', 'Femme'], ['male', 'Homme'], ['unknown', 'Inconnu']].map(([v, l]) => `<option value="${v}" ${r.value === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
         if (meta.ui === 'types') input = `<select data-lr="values" multiple size="4">${listMeta.event_types.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select>${source === 'persons' ? ` entre <input type="number" data-lr="from" value="${esc(r.from || '')}" placeholder="de" class="h-lr-year"> et <input type="number" data-lr="to" value="${esc(r.to || '')}" placeholder="à" class="h-lr-year">` : ''}`;
         if (meta.ui === 'labels') input = `<select data-lr="values" multiple size="3">${listMeta.labels.map(t => `<option value="${t.id}" ${(r.values || []).map(Number).includes(Number(t.id)) ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select>`;
@@ -1442,7 +1460,7 @@
             ${L.source === 'records' ? ext.recordsBuilderHtml(L) : L.source === 'free' ? '' : listMeta.sources?.[L.source] ? `<section class="maintenance-panel"><h3>2. Ce que tu gardes</h3><p class="muted">La liste reprend toutes les lignes de « ${esc(listMeta.sources[L.source])} ». Une fois enregistrée, clique sur <b>▾</b> en haut d’une colonne pour ne garder que les valeurs que tu veux (certaines villes, certaines personnes, une période…), et sur le nom d’une colonne pour trier.</p></section>` : `<section class="maintenance-panel"><h3>2. Les critères</h3><p class="muted">Ajoute autant de critères que tu veux. « pas » inverse un critère (ex. « pas » + « Sans source » = seulement ce qui a une source).</p>
                 <div class="h-tabs"><label class="checkbox-line"><input type="radio" name="le-match" value="all" ${d.match !== 'any' ? 'checked' : ''}> toutes les conditions (ET)</label><label class="checkbox-line"><input type="radio" name="le-match" value="any" ${d.match === 'any' ? 'checked' : ''}> au moins une (OU)</label></div>
                 <div data-le-rules>${d.rules.map((r, i) => ruleRowHtml(r, i, L.source)).join('') || '<p class="muted">Aucun critère : toute la base.</p>'}</div>
-                <label>+ Ajouter un critère <select data-le-addrule><option value="">choisir…</option>${Object.entries(RULES).filter(([, m]) => m[k]).map(([f, m]) => `<option value="${f}">${esc(m[k])}</option>`).join('')}</select></label></section>`}
+                <label>+ Ajouter un critère <select data-le-addrule><option value="">choisir…</option>${ext.ruleOptionsHtml(k)}</select></label></section>`}
             ${L.source === 'records' ? '' : `<section class="maintenance-panel"><h3>${L.source === 'free' ? '2' : '3'}. Les colonnes</h3>${L.source === 'free' ? '' : '<p class="muted">Coche les colonnes à afficher. Pour ne garder que certaines valeurs d’une colonne (des personnes, des villes, des dates…), utilise <b>▾</b> en haut de la colonne, dans la liste.</p>'}${L.source === 'free' ? '<p class="muted">Crée les colonnes de ta liste ; tu ajouteras ensuite les lignes une par une.</p>' : `<div class="h-village-maps-grid">${Object.entries(cols).map(([c, l]) => `<label class="checkbox-line"><input type="checkbox" data-le-col="${c}" ${d.columns.includes(c) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div>
                 ${['events', 'persons'].includes(L.source) ? `<label>Trier par <select data-le="sort">${[['date', 'date'], ['name', 'nom'], ['place', 'lieu']].map(([v, l]) => `<option value="${v}" ${(d.sort || (L.source === 'events' ? 'date' : 'name')) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}`}
                 <h4>Mes colonnes à remplir</h4><div data-le-custom>${d.custom.map((c, i) => `<div class="h-lr-row" data-lc-i="${i}"><input data-lc="label" value="${esc(c.label)}" placeholder="Nom de la colonne"><select data-lc="type">${[['text', 'Texte libre'], ['select', 'Menu déroulant'], ['checkbox', 'Case à cocher'], ['date', 'Date'], ['number', 'Nombre'], ['url', 'Lien internet'], ['person', 'Personne de la base']].map(([v, l]) => `<option value="${v}" ${c.type === v ? 'selected' : ''}>${l}</option>`).join('')}</select>${c.type === 'select' ? `<input data-lc="options" value="${esc((c.options || []).join(', '))}" placeholder="choix séparés par des virgules">` : ''}<button type="button" class="icon-button danger" data-lc-del>🗑</button></div>`).join('')}</div>
@@ -1458,7 +1476,7 @@
             if (L.source === 'records' && !(d.fields || []).length) { const t = ext.recordTemplates().find(x => x.name === 'Liste de fiches vide'); d.fields = t.definition.fields; d.record = t.definition.record; } d.columns = Object.keys(listMeta.columns[L.source] || {}).slice(0, 4); if (L.source === 'free' && !d.custom.length) d.custom.push({label: '', type: 'text', options: []}); keepLabels(); again(); }));
         ws.querySelectorAll('[name=le-match]').forEach(el => el.addEventListener('change', () => { d.match = el.value; }));
         ws.querySelector('[data-le-inlists]').addEventListener('change', e => { d.in_lists = e.target.checked; });
-        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : '', values: []}); again(); } });
+        ws.querySelector('[data-le-addrule]')?.addEventListener('change', e => { if (e.target.value) { d.rules.push({field: e.target.value, value: e.target.value === 'gender' ? 'female' : e.target.value === 'living' ? 'deceased' : '', values: []}); again(); } });
         const rulesBox = ws.querySelector('[data-le-rules]') || document.createElement('div');
         const readRule = row => { const r = d.rules[Number(row.dataset.lrI)]; row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (el.value === '' ? null : Number(el.value)) : el.value; }); };
         rulesBox.addEventListener('input', e => { const row = e.target.closest('[data-lr-i]'); if (row) readRule(row); });

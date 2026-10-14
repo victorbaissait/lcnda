@@ -373,8 +373,12 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-htr-log{max-height:280px;overflow:auto;font-size:.78em;white-space:pre-wrap;background:rgba(128,128,128,.08);padding:.6rem}
 .h-htr-up{cursor:pointer}
 /* Mes listes */
-.h-lr-row{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;padding:.45rem 0;border-bottom:1px dotted rgba(128,128,128,.35)}
-.h-lr-row select[multiple]{min-width:220px}
+.h-lr-row{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem .6rem;padding:.6rem .7rem;margin:.45rem 0;border:1px solid var(--line-color);background:var(--card-bg,#fff)}
+.h-lr-row>strong{flex:0 0 auto;font-size:.95em}
+.h-lr-row>.icon-button{margin-left:auto}
+.h-lr-row input:not([type=checkbox]):not([type=radio]),.h-lr-row select{min-height:34px;padding:4px 8px;border:1px solid #bbb;background:#fff;font:inherit}
+.h-lr-row select[multiple]{flex:1 1 100%;min-width:220px;max-width:100%;height:auto;min-height:7.5em;padding:2px}
+.h-lr-row small.muted{flex:1 1 100%;font-size:.78em}
 .h-lr-year{width:6rem}
 .h-lr-not{font-size:.85em;opacity:.8}
 .h-lv-scroll{overflow-x:auto}
@@ -596,7 +600,7 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-cw-applist{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:.25rem .8rem;max-height:40vh;overflow:auto;border:1px solid rgba(128,128,128,.3);padding:.4rem}
 .h-cw-approw{display:flex;justify-content:space-between;align-items:center;gap:.4rem;padding:.15rem 0;border-bottom:1px dotted rgba(128,128,128,.3)}
 .h-cw-approw > span:last-child{display:flex;gap:.25rem;flex:none}
-.h-cw-record{border-left:4px solid var(--cw-accent,transparent)}
+.h-cw-record.has-accent{border-left:6px solid var(--cw-accent)}
 .h-cw-colors input[type=color]{width:2.2rem;height:1.9rem;padding:0;border:1px solid rgba(128,128,128,.5);background:none;cursor:pointer}
 .event-date-uncertain{display:block;color:var(--orange,#b35c00);font-weight:600}
 .online-sheet-check-row.is-custom .online-sheet-check-row-label{display:flex;gap:.3rem;align-items:center}
@@ -1532,9 +1536,19 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .saint-people-tools input[type=search]{min-width:220px}
 .saint-people-scope{font-size:.9em}
 /* ── Éditeur d'onglets ── */
-.h-ct-widgets{display:grid;gap:6px;padding-left:1.4rem;margin:.6rem 0}
-.h-ct-widgets li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;border:1px solid #ddd;padding:6px 10px}
+.h-ct-widgets{display:grid;gap:8px;padding-left:1.6rem;margin:.6rem 0}
+.h-ct-widgets li{border:1px solid var(--line-color);background:var(--card-bg,#fff);padding:8px 10px}
+.h-ct-widgets li>header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center}
+.h-ct-widgets .h-saved-tools{display:flex;gap:6px;align-items:center}
+.h-ct-widgets .h-saved-tools .link-button{border:2px solid var(--ink);background:#fff;min-height:28px;padding:2px 9px;font-size:11px;font-weight:700;text-decoration:none;cursor:pointer}
+.h-ct-widgets .h-saved-tools .link-button:disabled{opacity:.35}
 .h-ct-widgets select{width:auto}
+.h-ct-kind{display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--blue);margin-right:4px}
+.h-ct-piece-set{margin-top:8px}
+.h-ct-add{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-top:.8rem}
+.h-ct-create{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-ct-frame{display:block;width:100%;border:1px solid var(--line-color);background:#fff}
+.h-ct-wcfg{display:grid;gap:.5rem;border:1px solid var(--line-color);padding:.6rem}
 .nav-custom-tab{font-style:normal}
 /* ── Suggestions de recherche ── */
 .h-sugg{list-style:none;margin:0;padding:0;display:grid;gap:8px}
@@ -1543,3 +1557,18 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-sugg p{margin:0 0 2px}
 .h-sugg-icon{font-size:20px;line-height:1.2}
 .h-cs-export{display:flex;flex-wrap:wrap;gap:6px}
+
+/* ── Éditeurs (widgets, statistiques, listes, blocs, onglets) : actions en boutons sur une ligne, cadres espacés ── */
+.collection-page>.h-records,.maintenance-panel+.h-records{margin-top:1rem}
+.h-record>header{flex-wrap:wrap}
+.h-record .h-saved-tools,.h-record .h-list-actions{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;font-size:inherit;white-space:nowrap}
+.h-record .h-saved-tools .link-button,.h-record .h-list-actions .link-button{border:2px solid var(--ink);background:#fff;color:var(--ink);min-height:30px;padding:4px 10px;font-size:11px;font-weight:700;text-decoration:none;box-shadow:3px 3px 0 rgba(5,93,255,.25);cursor:pointer;transition:.15s ease}
+.h-record .h-saved-tools .link-button:hover,.h-record .h-list-actions .link-button:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.h-record .h-saved-tools .link-button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.h-record .h-saved-tools [data-cw-del],.h-record .h-saved-tools [data-ct-del],.h-record .h-saved-tools [data-h-be-del],.h-record .h-saved-tools [data-h-list-del]{color:#b00020}
+/* ── Graphique en colonnes : étiquettes lisibles (inclinées quand elles sont nombreuses) ── */
+.h-cw-columns{height:auto;min-height:230px;align-items:stretch}
+.h-cw-col{height:auto;justify-content:flex-end}
+.h-cw-col .h-cw-bar-wrap{height:170px;flex:0 0 auto;display:flex;flex-direction:column;justify-content:flex-end;width:100%}
+.h-cw-col span{max-width:none;white-space:nowrap}
+.h-cw-columns.is-dense .h-cw-col span{writing-mode:vertical-rl;transform:rotate(180deg);text-overflow:clip;max-height:90px;overflow:hidden;font-size:.7em}
