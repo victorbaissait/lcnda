@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=201">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=91">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=93">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -1088,14 +1088,14 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=324" defer></script>
+<script src="assets/js/app.js?v=325" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=40" defer></script>
+<script src="assets/js/heritage-more.js?v=41" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
-<script src="assets/js/heritage-research.js?v=15" defer></script>
+<script src="assets/js/heritage-research.js?v=16" defer></script>
 <script src="assets/js/heritage-av.js?v=6" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=3" defer></script>
 <script src="assets/js/heritage-recueils.js?v=12" defer></script>
@@ -1112,10 +1112,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=1" defer></script>
 <script src="assets/js/heritage-book.js?v=1" defer></script>
-<script src="assets/js/heritage-livrets.js?v=1" defer></script>
-<script src="assets/js/heritage-boards.js?v=2" defer></script>
+<script src="assets/js/heritage-livrets.js?v=3" defer></script>
+<script src="assets/js/heritage-boards.js?v=3" defer></script>
 <script src="assets/js/heritage-dnd.js?v=2" defer></script>
-<script src="assets/js/heritage-studio.js?v=10" defer></script>
+<script src="assets/js/heritage-studio.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>
 <script src="assets/js/heritage-museum.js?v=7" defer></script>
 <script>

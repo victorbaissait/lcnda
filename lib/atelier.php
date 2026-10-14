@@ -30,7 +30,7 @@ function atelier_projects(PDO $pdo): array
             (SELECT count(*) FROM atelier_folders f WHERE f.project_id=p.id) AS folder_count,
             (SELECT count(*) FROM atelier_items i WHERE i.project_id=p.id AND i.trashed=0 AND i.type='task' AND json_extract(i.data_json,'$.done')<>1) AS open_tasks,
             (SELECT max(i.updated_at) FROM atelier_items i WHERE i.project_id=p.id) AS last_item
-        FROM atelier_projects p ORDER BY p.status='archived', p.position, p.id")->fetchAll();
+        FROM atelier_projects p ORDER BY p.status IN ('archived','done'), p.status='paused', p.position, p.id")->fetchAll();
     foreach ($rows as &$r) { $r['words'] = atelier_words($pdo, (int) $r['id']); }
     unset($r);
     return ['projects' => $rows, 'kinds' => ATELIER_KINDS];
@@ -58,7 +58,7 @@ function save_atelier_project(PDO $pdo, array $data): array
     $vals = [$title, mb_substr(safe_text($data['subtitle'] ?? ''), 0, 300), array_key_exists((string) ($data['kind'] ?? ''), ATELIER_KINDS) ? (string) $data['kind'] : 'autre',
         mb_substr(safe_text($data['icon'] ?? ''), 0, 16), preg_match('/^#[0-9a-f]{6}$/i', (string) ($data['color'] ?? '')) ? (string) $data['color'] : '#0066cc',
         h_long($data, 'description', 20000), max(0, min(10000000, safe_int($data['target_words'] ?? 0))), preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) ($data['deadline'] ?? '')) ? (string) $data['deadline'] : '',
-        ($data['status'] ?? '') === 'archived' ? 'archived' : 'active'];
+        in_array($data['status'] ?? '', ['active', 'paused', 'done'], true) ? (string) $data['status'] : (($data['status'] ?? '') === 'archived' ? 'done' : 'active')];
     if ($id) {
         atelier_project_row($pdo, $id);
         $pdo->prepare('UPDATE atelier_projects SET title=?, subtitle=?, kind=?, icon=?, color=?, description=?, target_words=?, deadline=?, status=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([...$vals, $id]);

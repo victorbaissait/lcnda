@@ -653,7 +653,7 @@
         const typing = e => e.target.closest?.('input:not([type=range]):not([type=checkbox]):not([type=color]), textarea, select, [contenteditable]');
         const onKey = e => {
             if (!dlg.open || typing(e)) return;
-            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
+            if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.stopImmediatePropagation(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (e.key === '[') { setSize(brush * 0.85 - 1); return; } if (e.key === ']') { setSize(brush * 1.18 + 1); return; }
             if (e.key === '+' || e.key === '=') { setZoom(zoom * 1.5); return; } if (e.key === '-') { setZoom(zoom / 1.5); return; }
             if (e.key === '0') { setZoom(1); return; } if (e.key === '1') { setZoom(scale / fitScale()); return; }
@@ -661,13 +661,13 @@
             if ((e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0) { e.preventDefault(); removePoint(selPt); }
         };
         const onKeyUp = e => { if (e.key === ' ') { spaceDown = false; stage.classList.toggle('is-hand', mode === 'hand'); } };
-        document.addEventListener('keydown', onKey); document.addEventListener('keyup', onKeyUp);
+        window.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp); // avant les raccourcis de l'app
         // fermer : on demande s'il y a du travail non enregistré
         let saved = false;
         const askClose = () => { if (!saved && hpos > 0 && !confirm('Fermer sans enregistrer ? Les retouches en cours seront perdues.')) return; saved = true; dlg.close(); };
         $$('[data-rt-close]').forEach(b => b.addEventListener('click', askClose));
         dlg.addEventListener('cancel', e => { if (!saved && hpos > 0) { e.preventDefault(); askClose(); } });
-        dlg.addEventListener('close', () => { document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); dlg.remove(); });
+        dlg.addEventListener('close', () => { window.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); dlg.remove(); });
         const refreshAfter = async () => {
             const state = A().state;
             try {

@@ -35,6 +35,24 @@ function booklet_clean(array $d): array
         static fn($c) => $c && ($c['written_name'] !== '' || $c['person_id'] || $c['birth_date'] !== '')));
     $out['others'] = array_values(array_filter(array_map(static fn($c) => is_array($c) ? booklet_clean_slot($c) : null, array_slice(is_array($d['others'] ?? null) ? $d['others'] : [], 0, 40)),
         static fn($c) => $c && ($c['written_name'] !== '' || $c['person_id'])));
+    $out['design'] = booklet_clean_design(is_array($d['design'] ?? null) ? $d['design'] : []);
+    return $out;
+}
+
+/** L'apparence d'un livret (couleurs, polices, disposition, parties) : seulement des valeurs sûres pour le CSS */
+function booklet_clean_design(array $g): array
+{
+    $out = [];
+    foreach (['cover', 'cover_ink', 'page', 'ink', 'rule', 'title', 'accent'] as $k) { if (preg_match('/^#[0-9a-f]{6}$/i', (string) ($g[$k] ?? ''))) { $out[$k] = strtolower((string) $g[$k]); } }
+    foreach (['font', 'title_font'] as $k) { $f = trim((string) ($g[$k] ?? '')); if ($f !== '' && preg_match('/^[\p{L}\p{N} ,\'"\-_.]{1,160}$/u', $f)) { $out[$k] = $f; } }
+    if (is_numeric($g['size'] ?? null)) { $out['size'] = max(11, min(24, (int) $g['size'])); }
+    if (is_numeric($g['title_size'] ?? null)) { $out['title_size'] = max(12, min(40, (int) $g['title_size'])); }
+    foreach (['layout' => ['2', '1'], 'frame' => ['double', 'single', 'none', 'thick'], 'corners' => ['square', 'round'], 'shadow' => ['yes', 'no'], 'preset' => ['bleu', 'vert', 'bordeaux', 'ancien', 'sobre', 'mine']] as $k => $allowed) {
+        if (in_array((string) ($g[$k] ?? ''), $allowed, true)) { $out[$k] = (string) $g[$k]; }
+    }
+    $secs = ['cover', 'marriage', 'couple', 'children', 'others', 'mentions', 'transcription', 'notes', 'pages'];
+    if (is_array($g['order'] ?? null)) { $out['order'] = array_values(array_unique(array_filter($g['order'], static fn($x) => in_array($x, $secs, true)))); }
+    if (is_array($g['hidden'] ?? null)) { $out['hidden'] = array_values(array_unique(array_filter($g['hidden'], static fn($x) => in_array($x, $secs, true)))); }
     return $out;
 }
 
@@ -222,4 +240,17 @@ function apply_booklet(PDO $pdo, array $data): array
     }
     if ($done) { log_change($pdo, 'meta', 0, 'update', "Livret de famille reporté sur les fiches ({$done})"); }
     return ['done' => $done];
+}
+
+/** Enregistre seulement l'apparence d'un livret (fenêtre « 🎨 Apparence ») */
+function save_booklet_design(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $s = $pdo->prepare('SELECT data_json FROM family_booklets WHERE id=?'); $s->execute([$id]);
+    $j = $s->fetchColumn();
+    if ($j === false) { throw new RuntimeException('Livret introuvable.'); }
+    $d = json_decode((string) $j, true) ?: [];
+    $d['design'] = booklet_clean_design(is_array($data['design'] ?? null) ? $data['design'] : []);
+    $pdo->prepare('UPDATE family_booklets SET data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE), $id]);
+    return ['id' => $id, 'design' => $d['design']];
 }

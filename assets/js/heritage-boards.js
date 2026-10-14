@@ -71,11 +71,12 @@
             <header class="h-board-head">
                 <div class="h-board-title">${b.path?.length ? `<nav class="h-board-path"><button type="button" class="link-button" data-bd-open="${b.path[0].id}">${esc(b.path[0].title)}</button>${b.path.slice(1).map(p => ` › <button type="button" class="link-button" data-bd-open="${p.id}">${esc(p.title)}</button>`).join('')} › </nav>` : ''}
                     <input class="h-board-name" value="${esc(b.title)}" data-bd-title aria-label="Titre du tableau">
-                    <span class="h-board-owner">${OWNER_ICONS[b.owner_type] || '🧩'} ${esc(b.owner_type ? `${OWNERS[b.owner_type]} : ${b.owner_label || '?'}` : 'Tableau libre')}${b.part ? ` · ${esc(b.part)}` : ''} <button type="button" class="link-button" data-bd-place>changer</button></span></div>
+                    <span class="h-board-owner">${OWNER_ICONS[b.owner_type] || '🧩'} ${esc(b.owner_type ? `${OWNERS[b.owner_type]} : ${b.owner_label || '?'}` : 'Tableau libre')}${b.part ? ` · ${esc(b.part)}` : ''} <button type="button" class="link-button" data-bd-place>changer</button></span>
+                    <select class="h-board-state" data-bd-state title="État du tableau">${Object.entries({open: '● En cours', paused: '⏸ En pause', closed: '✓ Terminé'}).map(([k, l]) => `<option value="${k}" ${(b.status || 'open') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
                 <span class="h-board-status" data-bd-status>Enregistré</span>
                 <span class="h-board-headtools"><button type="button" class="button small secondary" data-bd-undo title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-bd-redo title="Rétablir (⇧⌘Z)">↷</button>
                     <select data-bd-bg title="Fond">${[['dots', 'Fond à points'], ['grid', 'Quadrillé'], ['lines', 'Lignes'], ['plain', 'Uni'], ['paper', 'Papier'], ['cork', 'Liège'], ['dark', 'Sombre']].map(([k, l]) => `<option value="${k}" ${bg === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                    <button type="button" class="button small secondary" data-bd-png title="Image du tableau">🖼 PNG</button><button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button><button type="button" class="button small secondary" data-bd-close title="Revenir aux tableaux">✕</button></span>
+                    <button type="button" class="button small secondary" data-bd-png title="Image du tableau">🖼 PNG</button><button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button><button type="button" class="button small secondary danger" data-bd-delete title="Supprimer ce tableau (et ses dossiers)">🗑</button><button type="button" class="button small secondary" data-bd-close title="Revenir aux tableaux">✕</button></span>
             </header>
             <div class="h-board-toolbar" role="toolbar">
                 ${[['select', '↖', 'Choisir, déplacer (V)'], ['hand', '✋', 'Se déplacer (H ou espace)'], ['text', 'T', 'Texte (T)'], ['note', '🗒', 'Note (N)'], ['shape', '⬠', 'Forme (S)'], ['line', '╱', 'Trait (L)'], ['arrow', '➝', 'Flèche (A)'], ['pen', '✍︎', 'Dessin à main levée (P)'], ['eraser', '⌫', 'Gomme à dessins (E)']].map(([k, i, l]) => `<button type="button" class="h-bt" data-bd-tool="${k}" title="${esc(l)}"><span>${i}</span></button>`).join('')}
@@ -205,7 +206,7 @@
         }
         async function save() {
             const title = root.querySelector('[data-bd-title]').value.trim() || 'Tableau sans titre';
-            const body = {id: b.id, title, icon: b.icon, color: b.color, ...ownerData, data: {items, view, bg}};
+            const body = {id: b.id, title, icon: b.icon, color: b.color, status: root.querySelector('[data-bd-state]').value, ...ownerData, data: {items, view, bg}};
             clearTimeout(thumbT);
             if (Date.now() - (save.lastThumb || 0) > 8000) { try { body.thumb = await thumbnail(320, 200); save.lastThumb = Date.now(); } catch (_) {} }
             try { await api('save_board', {}, {method: 'POST', body}); dirty = false; status('Enregistré ✓'); } catch (error) { status('⚠ ' + error.message); }
@@ -465,9 +466,12 @@
             all: () => { sel = new Set(items.map(i => i.id)); render(); },
         };
         const onKey = e => {
-            if (!root.isConnected) return;
+            if (!root.isConnected || document.querySelector('dialog[open]')) return;
             if (typing(e) || !root.contains(document.activeElement) && document.activeElement !== document.body) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
+            // nos raccourcis passent avant ceux de l'app (⌘Z annule ici, pas la dernière modification d'une fiche)
+            const ours = mod ? ['z', 'y', 'd', 'g', 'l', 'a', ...(sel.size ? ['c'] : [])].includes(k) : ['delete', 'backspace', 'escape', ' ', ']', '[', 'v', 'h', 't', 'n', 's', 'l', 'a', 'p', 'e', '+', '=', '-', '0'].includes(k) || (k.startsWith('arrow') && sel.size);
+            if (ours) e.stopImmediatePropagation();
             if (mod && k === 'z') { e.preventDefault(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (mod && k === 'y') { e.preventDefault(); restore(hpos + 1); return; }
             if (mod && k === 'd') { e.preventDefault(); actions.duplicate(); return; }
@@ -485,7 +489,7 @@
             if (k === '+' || k === '=') zoomAt(view.k * 1.25); if (k === '-') zoomAt(view.k * 0.8); if (k === '0') { fitAll(); }
         };
         const onKeyUp = e => { if (e.key === ' ') { spaceDown = false; stage.dataset.tool = tool; } };
-        document.addEventListener('keydown', onKey); document.addEventListener('keyup', onKeyUp);
+        window.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp);
         // ── propriétés de la sélection ──
         function renderInspector() {
             const l = selItems();
@@ -568,6 +572,8 @@
         }
         // ── en-tête ──
         root.querySelector('[data-bd-title]').addEventListener('input', () => queueSave(true));
+        root.querySelector('[data-bd-state]').addEventListener('change', () => { save(); toast('État du tableau changé.'); });
+        root.querySelector('[data-bd-delete]').addEventListener('click', () => deleteBoard(b.id, root.querySelector('[data-bd-title]').value, async () => { dirty = false; go(b.parent_id || 0); }));
         root.querySelector('[data-bd-bg]').addEventListener('change', e => { bg = e.target.value; stage.dataset.bg = bg; queueSave(true); });
         root.querySelector('[data-bd-undo]').addEventListener('click', () => restore(hpos - 1));
         root.querySelector('[data-bd-redo]').addEventListener('click', () => restore(hpos + 1));
@@ -577,7 +583,7 @@
         root.querySelectorAll('[data-bd-open]').forEach(x => x.addEventListener('click', async () => { if (dirty) await save(); go(Number(x.dataset.bdOpen)); }));
         root.querySelector('[data-bd-place]').addEventListener('click', () => placeDialog(ownerData, async () => { await save(); go(b.id); }));
         // quitter : on enregistre ; on enlève les écoutes du document
-        const obs = new MutationObserver(() => { if (!root.isConnected) { obs.disconnect(); document.removeEventListener('keydown', onKey); document.removeEventListener('keyup', onKeyUp); document.removeEventListener('paste', onPaste); if (dirty) save(); } });
+        const obs = new MutationObserver(() => { if (!root.isConnected) { obs.disconnect(); window.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp); document.removeEventListener('paste', onPaste); if (dirty) save(); } });
         obs.observe(document.getElementById('workspace') || document.body, {childList: true});
         window.addEventListener('beforeunload', () => { if (dirty) save(); });
         setTool('select'); applyView(); render(); history = [snap()]; hpos = 0;
@@ -585,6 +591,18 @@
         root.focus();
         return {save};
     }
+
+    /* ═════════ Supprimer un tableau (et ses dossiers) ═════════ */
+    async function deleteBoard(id, title, done) {
+        if (!confirm(`Supprimer le tableau « ${title || 'sans titre'} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app.`)) return;
+        try { const r = await api('delete_board', {}, {method: 'POST', body: {id}}); toast(Number(r.result?.deleted || r.deleted) > 1 ? 'Tableau et dossiers supprimés.' : 'Tableau supprimé.'); done?.(); }
+        catch (error) { toast(error.message, 'error'); }
+    }
+    document.addEventListener('click', e => {
+        const d = e.target.closest?.('[data-bd-del]'); if (!d) return;
+        e.preventDefault(); e.stopPropagation();
+        deleteBoard(Number(d.dataset.bdDel), d.dataset.title, () => { const host = d.closest('[data-board-host]'); if (host) { host.removeAttribute('data-bd-filled'); host.innerHTML = ''; } else if (S().module === 'listes') A().setModule('listes'); else ext.boards(++S().workspaceToken); });
+    }, true);
 
     /* ═════════ Rangement d'un tableau : libre, enquête, battue, atelier, et sa partie ═════════ */
     async function placeDialog(o, done) {
@@ -632,8 +650,9 @@
         ext.boards(++st.workspaceToken);
     }
     ext.openBoardById = go;
-    const cardHtml = r => `<button type="button" class="h-bd-card" data-bd-go="${r.id}"><span class="h-bd-thumb">${r.thumb ? `<img src="${r.thumb}" alt="">` : `<span>${esc(r.icon || '🧩')}</span>`}</span>
-        <span class="h-bd-cardinfo"><strong>${esc(r.title)}</strong><small>${OWNER_ICONS[r.owner_type] || '🧩'} ${esc(r.owner_type ? (r.owner_label || OWNERS[r.owner_type]) : 'Libre')}${r.part ? ` · ${esc(r.part)}` : ''}</small><small class="muted">${fmt(r.item_count)} élément${r.item_count > 1 ? 's' : ''}${Number(r.sub_count) ? ` · ${fmt(r.sub_count)} dossier${r.sub_count > 1 ? 's' : ''}` : ''}</small></span></button>`;
+    const STATES = {open: 'En cours', paused: 'En pause', closed: 'Terminé'};
+    const cardHtml = r => `<div class="h-bd-cardwrap"><button type="button" class="h-bd-del" data-bd-del="${r.id}" data-title="${esc(r.title)}" title="Supprimer ce tableau">🗑</button><button type="button" class="h-bd-card ${r.status && r.status !== 'open' ? 'is-' + r.status : ''}" data-bd-go="${r.id}"><span class="h-bd-thumb">${r.thumb ? `<img src="${r.thumb}" alt="">` : `<span>${esc(r.icon || '🧩')}</span>`}</span>
+        <span class="h-bd-cardinfo"><strong>${esc(r.title)}</strong><small>${OWNER_ICONS[r.owner_type] || '🧩'} ${esc(r.owner_type ? (r.owner_label || OWNERS[r.owner_type]) : 'Libre')}${r.part ? ` · ${esc(r.part)}` : ''}</small><small class="muted">${r.status && r.status !== 'open' ? `<span class="h-bd-state is-${r.status}">${STATES[r.status]}</span> · ` : ''}${fmt(r.item_count)} élément${r.item_count > 1 ? 's' : ''}${Number(r.sub_count) ? ` · ${fmt(r.sub_count)} dossier${r.sub_count > 1 ? 's' : ''}` : ''}</small></span></button></div>`;
     ext.boards = async token => {
         const st = S(), ws = A().$('#workspace');
         if (st.currentBoardId) {
@@ -641,7 +660,7 @@
             await openBoard(st.currentBoardId, ws.querySelector('.h-board-host'));
             return;
         }
-        let data; try { data = await api('boards', {owner_type: st.boardsFilter || 'all', q: st.boardsQ || ''}); } catch (error) { toast(error.message, 'error'); return; }
+        let data; try { data = await api('boards', {owner_type: st.boardsFilter || 'all', q: st.boardsQ || '', status: st.boardsStatus && st.boardsStatus !== 'all' ? st.boardsStatus : undefined}); } catch (error) { toast(error.message, 'error'); return; }
         if (token !== st.workspaceToken || st.module !== 'enquetes') return;
         const rows = data.boards || [];
         ws.innerHTML = `<section class="page h-boards"><header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>Tableaux</h2><p>Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier.</p></div><div class="page-actions"><button type="button" class="button" data-bd-new>🧩 + Nouveau tableau</button></div></header>
@@ -653,9 +672,11 @@
         const st = S();
         content.innerHTML = `${tabs}<p class="enquetes-tab-help">Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches…</p>
             <div class="search-box"><label for="boards-search">Rechercher un tableau</label><div class="search-row"><input id="boards-search" value="${esc(st.boardsQ || '')}" placeholder="Titre, partie…"><button type="button">⌕</button></div></div>
-            <div class="side-menu">${[['all', '01', 'Tous'], ['free', '02', 'Libres'], ['investigation', '03', 'Dans une enquête'], ['battue', '04', 'Dans une battue'], ['atelier_project', '05', 'Dans l’Atelier']].map(([v, i, l]) => `<button class="side-menu-item ${(st.boardsFilter || 'all') === v ? 'is-active' : ''}" data-bd-filter="${v}"><span class="side-number">${i}</span>${l}</button>`).join('')}</div>`;
+            <div class="side-menu">${[['all', '01', 'Tous'], ['free', '02', 'Libres'], ['investigation', '03', 'Dans une enquête'], ['battue', '04', 'Dans une battue'], ['atelier_project', '05', 'Dans l’Atelier']].map(([v, i, l]) => `<button class="side-menu-item ${(st.boardsFilter || 'all') === v ? 'is-active' : ''}" data-bd-filter="${v}"><span class="side-number">${i}</span>${l}</button>`).join('')}</div>
+            <div class="side-menu h-bd-statusmenu">${[['all', 'É1', 'Toutes les états'.replace('Toutes les états', 'Tous les états')], ['open', 'É2', 'En cours'], ['paused', 'É3', 'En pause'], ['closed', 'É4', 'Terminés']].map(([v, i, l]) => `<button class="side-menu-item ${(st.boardsStatus || 'all') === v ? 'is-active' : ''}" data-bd-status="${v}"><span class="side-number">${i}</span>${l}</button>`).join('')}</div>`;
         footer.innerHTML = '<button class="button small" id="new-board">+ Nouveau tableau</button>';
         footer.querySelector('#new-board').addEventListener('click', () => newBoard());
+        content.addEventListener('click', e => { const s0 = e.target.closest('[data-bd-status]'); if (s0) { st.boardsStatus = s0.dataset.bdStatus; st.currentBoardId = 0; content.querySelectorAll('[data-bd-status]').forEach(x => x.classList.toggle('is-active', x === s0)); ext.boards(++st.workspaceToken); return; } }, {signal});
         content.addEventListener('click', e => { const f = e.target.closest('[data-bd-filter]'); if (f) { st.boardsFilter = f.dataset.bdFilter; st.currentBoardId = 0; content.querySelectorAll('[data-bd-filter]').forEach(x => x.classList.toggle('is-active', x === f)); ext.boards(++st.workspaceToken); } }, {signal});
         let t = 0; content.querySelector('#boards-search').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.boardsQ = e.target.value; st.currentBoardId = 0; ext.boards(++st.workspaceToken); }, 300); });
     };

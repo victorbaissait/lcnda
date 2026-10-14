@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 36;
+const SCHEMA_VERSION = 37;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -57,6 +57,7 @@ function migration_steps(): array
         34 => 'schema_v34',
         35 => 'schema_v35',
         36 => 'schema_v36',
+        37 => 'schema_v37',
     ];
 }
 
@@ -1890,4 +1891,11 @@ function schema_v36(PDO $pdo): void
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_boards_owner ON boards(owner_type, owner_id)');
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_boards_parent ON boards(parent_id)');
+}
+
+/** Tableaux : un état (en cours, en pause, terminé), comme les enquêtes et les battues. */
+function schema_v37(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(boards)')->fetchAll(), 'name');
+    if ($cols && !in_array('status', $cols, true)) { $pdo->exec("ALTER TABLE boards ADD COLUMN status TEXT NOT NULL DEFAULT 'open'"); }
 }

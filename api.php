@@ -8938,6 +8938,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_village_profile' => save_village_profile($pdo,$data),
             'save_employer_record' => save_employer_record($pdo,$data),
             'save_booklet' => save_booklet($pdo,$data),
+            'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'delete_board' => delete_board($pdo,$data),
             'delete_booklet' => delete_booklet($pdo,$data),

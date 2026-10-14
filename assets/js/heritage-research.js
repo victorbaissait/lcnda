@@ -193,12 +193,14 @@
         let data;
         try { data = await api('atelier_projects'); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
-        const projects = data.projects || [];
+        // filtre de la colonne de gauche : tous, en cours, en pause, terminés (« archivé » d'avant = terminé)
+        const stOf = p => p.status === 'archived' ? 'done' : (p.status || 'active');
+        const projects = (data.projects || []).filter(p => !S().atelierStatus || S().atelierStatus === 'all' || stOf(p) === S().atelierStatus);
         const ws = A().$('#workspace');
         const card = p => { const words = Number(p.words), target = Number(p.target_words);
             const days = p.deadline ? Math.ceil((new Date(p.deadline + 'T12:00:00') - new Date()) / 864e5) : null;
-            return `<article class="h-at-project ${p.status === 'archived' ? 'is-archived' : ''}" style="--at-color:${esc(p.color)}" data-at-open="${p.id}" tabindex="0">
-                <div class="h-at-project-icon">${esc(p.icon || KIND_ICONS[p.kind] || '📚')}</div><div class="h-at-project-body"><span class="eyebrow">${esc(data.kinds[p.kind] || '')}${p.status === 'archived' ? ' · archivé' : ''}</span><h3>${esc(p.title)}</h3>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}
+            return `<article class="h-at-project ${['archived', 'done'].includes(p.status) ? 'is-archived' : p.status === 'paused' ? 'is-paused' : ''}" style="--at-color:${esc(p.color)}" data-at-open="${p.id}" tabindex="0">
+                <div class="h-at-project-icon">${esc(p.icon || KIND_ICONS[p.kind] || '📚')}</div><div class="h-at-project-body"><span class="eyebrow">${esc(data.kinds[p.kind] || '')}${['archived', 'done'].includes(p.status) ? ' · terminé' : p.status === 'paused' ? ' · en pause' : ''}</span><h3>${esc(p.title)}</h3>${p.subtitle ? `<p class="muted">${esc(p.subtitle)}</p>` : ''}
                 <p class="h-at-project-stats">${plural(Number(p.item_count), 'élément', 'éléments')} · ${plural(Number(p.folder_count), 'dossier', 'dossiers')}${Number(p.open_tasks) ? ` · ${plural(Number(p.open_tasks), 'tâche', 'tâches')} à faire` : ''}</p>
                 ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} mots sur ${fmt(target)}</small></div>` : words ? `<small>${fmt(words)} mots écrits</small>` : ''}
                 ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? `échéance dépassée de ${plural(-days, 'jour', 'jours')}` : `rendu dans ${plural(days, 'jour', 'jours')}`}</small>` : ''}</div></article>`; };
@@ -226,14 +228,14 @@
                 <label>Objectif de mots <small>(facultatif)</small><input type="number" name="target_words" min="0" step="1000" value="${Number(p.target_words) || ''}" placeholder="100000"></label>
                 <label>Date de rendu <small>(facultatif)</small><input type="date" name="deadline" value="${esc(p.deadline || '')}"></label>
                 <label>Couleur<input type="color" name="color" value="${esc(p.color || '#0066cc')}"></label>
-                ${isNew ? '' : `<label class="checkbox-line"><input type="checkbox" name="archived" ${p.status === 'archived' ? 'checked' : ''}> Archivé (fini ou en pause)</label>`}
+<label>État<select name="status">${[['active', 'En cours'], ['paused', 'En pause'], ['done', 'Terminé']].map(([k, l]) => `<option value="${k}" ${(p.status === 'archived' ? 'done' : p.status || 'active') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="span-2">Problématique, présentation<textarea name="description" rows="4" placeholder="Qui étaient les montreurs d’optique ? D’où venaient-ils, quelles images montraient-ils, à quels publics ?">${esc(p.description || '')}</textarea></label></div>
                 ${isNew ? `<h4>Plan de départ</h4><p class="muted">Des dossiers déjà prêts, que tu pourras renommer, déplacer, compléter ou supprimer.</p><div class="h-at-plans">${CFG.plans.filter(x => !x.hidden).map((x, i, arr) => `<label class="h-at-plan"><input type="radio" name="plan" value="${esc(x.key)}" ${i === 0 ? 'checked' : ''}><strong>${esc(x.label)}</strong>${x.tree?.length ? planTree(x.tree) : '<p class="muted">Aucun dossier</p>'}</label>`).join('')}</div><p class="muted"><button type="button" class="link-button" data-at-settings-plans>⚙ Créer mes plans, les ranger, en masquer…</button></p>` : ''}`,
             onOpen: dl => { dl.querySelector('[name=kind]').addEventListener('change', e => { const r = dl.querySelector(`[name=plan][value="${e.target.value}"]`); if (r) r.checked = true; });
                 dl.querySelector('[data-at-settings-plans]')?.addEventListener('click', () => { dl.close(); openSettings(); }); },
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form));
-                const body = {id: p.id || 0, title: f.title, subtitle: f.subtitle, kind: f.kind, icon: f.icon, color: f.color, description: f.description, target_words: Number(f.target_words) || 0, deadline: f.deadline, status: form.archived?.checked ? 'archived' : 'active'};
+                const body = {id: p.id || 0, title: f.title, subtitle: f.subtitle, kind: f.kind, icon: f.icon, color: f.color, description: f.description, target_words: Number(f.target_words) || 0, deadline: f.deadline, status: f.status || 'active'};
                 if (isNew) body.folders = CFG.plans.find(x => x.key === f.plan)?.tree || [];
                 const r = await post('save_atelier_project', body);
                 if (isNew) Object.assign(st(), {project: r.result.id, node: firstNode(), sel: [], tags: [], q: '', type: ''});

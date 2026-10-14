@@ -26,8 +26,9 @@ function boards_list(PDO $pdo, array $q): array
     $owner = (string) ($q['owner_type'] ?? 'all');
     if ($owner === 'free') { $where[] = "owner_type=''"; }
     elseif (isset(BOARD_OWNERS[$owner]) && $owner !== '') { $where[] = 'owner_type=?'; $params[] = $owner; if (safe_int($q['owner_id'] ?? 0)) { $where[] = 'owner_id=?'; $params[] = safe_int($q['owner_id']); } }
+    if (in_array($q['status'] ?? '', ['open', 'paused', 'closed'], true)) { $where[] = 'status=?'; $params[] = (string) $q['status']; }
     if (trim((string) ($q['q'] ?? '')) !== '') { $where[] = '(title LIKE ? OR part LIKE ?)'; $params[] = '%' . trim((string) $q['q']) . '%'; $params[] = '%' . trim((string) $q['q']) . '%'; }
-    $s = $pdo->prepare('SELECT id, title, icon, color, owner_type, owner_id, part, thumb, item_count, created_at, updated_at,
+    $s = $pdo->prepare('SELECT id, title, icon, color, owner_type, owner_id, part, status, thumb, item_count, created_at, updated_at,
         (SELECT count(*) FROM boards c WHERE c.parent_id=boards.id) AS sub_count FROM boards WHERE ' . implode(' AND ', $where) . ' ORDER BY updated_at DESC, id DESC');
     $s->execute($params);
     $rows = $s->fetchAll();
@@ -57,7 +58,7 @@ function board_detail(PDO $pdo, int $id): array
         if ($cur) { array_unshift($path, ['id' => (int) $cur['id'], 'title' => (string) $cur['title']]); }
     }
     return ['id' => (int) $b['id'], 'title' => (string) $b['title'], 'icon' => (string) $b['icon'], 'color' => (string) $b['color'], 'owner_type' => (string) $b['owner_type'],
-        'owner_id' => (int) $b['owner_id'], 'owner_label' => board_owner_label($pdo, (string) $b['owner_type'], (int) $b['owner_id']), 'part' => (string) $b['part'],
+        'owner_id' => (int) $b['owner_id'], 'owner_label' => board_owner_label($pdo, (string) $b['owner_type'], (int) $b['owner_id']), 'part' => (string) $b['part'], 'status' => (string) ($b['status'] ?? 'open'),
         'parent_id' => $b['parent_id'] !== null ? (int) $b['parent_id'] : null, 'path' => $path, 'data' => $data, 'media' => $media, 'updated_at' => $b['updated_at']];
 }
 
@@ -102,6 +103,7 @@ function save_board(PDO $pdo, array $data): array
     $thumb = (string) ($data['thumb'] ?? '');
     if ($thumb !== '' && (!preg_match('~^data:image/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$~', $thumb) || strlen($thumb) > 400000)) { $thumb = ''; }
     $fields = ['title' => $title, 'icon' => $icon, 'color' => $color, 'owner_type' => $owner, 'owner_id' => $ownerId, 'part' => $part];
+    if (in_array($data['status'] ?? '', ['open', 'paused', 'closed'], true)) { $fields['status'] = (string) $data['status']; }
     if (array_key_exists('data', $data)) {
         $raw = is_array($data['data']) ? $data['data'] : (json_decode((string) $data['data'], true) ?: []);
         $items = array_values(array_filter(array_map(static fn($it) => is_array($it) ? board_clean_item($it) : null, array_slice($raw['items'] ?? [], 0, 3000))));

@@ -1969,3 +1969,40 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bd-results{display:grid;gap:3px;max-height:160px;overflow:auto}
 .h-bd-results button{text-align:left;border:1px solid #e3e3e3;background:#fff;padding:5px 8px;cursor:pointer;font:inherit;font-size:13px}
 @media (max-width:900px){.h-board-main{grid-template-columns:1fr}.h-board-inspector{display:none}}
+.h-at-project.is-paused { opacity:.8; border-style:dashed; }
+
+/* 📘 Apparence d'un livret (🎨) */
+.h-booklet.has-design .h-bk-page{background:var(--bk-page);color:var(--bk-ink);font-family:var(--bk-font);font-size:var(--bk-size);box-shadow:inset 0 0 0 6px var(--bk-page),inset 0 0 0 7px var(--bk-rule);border-color:var(--bk-rule)}
+.h-booklet.has-design .h-bk-page h3,.h-booklet.has-design .h-bk-slot h4{font-family:var(--bk-title-font);color:var(--bk-title)}
+.h-booklet.has-design .h-bk-page h3{font-size:var(--bk-title-size)}
+.h-booklet.has-design .h-bk-slot{border-left-color:var(--bk-rule)}
+.h-booklet.has-design .h-bk-dl dd{font-family:var(--bk-font)}
+.h-booklet.has-design .h-bk-pagecover{background:var(--bk-cover);color:var(--bk-cover-ink);box-shadow:inset 0 0 0 6px var(--bk-cover),inset 0 0 0 7px var(--bk-rule)}
+.h-booklet.has-design .h-bk-pagecover strong{font-family:var(--bk-title-font)}
+.h-booklet.has-design .h-bk-pagecover dt{color:var(--bk-rule)}
+.h-booklet.frame-single .h-bk-page{box-shadow:none;border:1px solid var(--bk-rule)}
+.h-booklet.frame-thick .h-bk-page{box-shadow:inset 0 0 0 4px var(--bk-rule);border:0}
+.h-booklet.frame-none .h-bk-page{box-shadow:none;border:0}
+.h-booklet.frame-single .h-bk-pagecover,.h-booklet.frame-none .h-bk-pagecover{box-shadow:none}
+.h-booklet.corners-round .h-bk-page{border-radius:14px}
+.h-booklet:not(.no-shadow) .h-bk-book{filter:drop-shadow(0 4px 10px rgba(0,0,0,.08))}
+.h-booklet.layout-1 .h-bk-book,.h-booklet.layout-1 .h-bk-couple{grid-template-columns:1fr}
+.h-bk-presets{display:flex;flex-wrap:wrap;gap:8px}
+.h-bk-preset{display:grid;gap:4px;justify-items:center;width:120px;padding:10px 6px;border:1px solid #ccc;background:var(--p);cursor:pointer;font-size:12px}
+.h-bk-preset span{display:grid;place-items:center;width:46px;height:62px;background:var(--c);color:var(--i);font-size:8px;font-weight:900;letter-spacing:.1em}
+.h-bk-preset:hover{border-color:#0066cc}
+.h-bk-colors input[type=color]{width:100%;height:32px}
+/* Tableaux : état, poubelle */
+.h-bd-statusmenu{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-color,#ddd)}
+.h-bd-cardwrap{position:relative}
+.h-bd-cardwrap .h-bd-card{width:100%}
+.h-bd-del{position:absolute;top:6px;right:6px;z-index:2;border:1px solid #ccc;background:#fff;border-radius:6px;width:30px;height:30px;cursor:pointer;opacity:0;transition:opacity .15s}
+.h-bd-cardwrap:hover .h-bd-del,.h-bd-del:focus{opacity:1}
+.h-bd-card.is-paused{opacity:.85}
+.h-bd-card.is-closed .h-bd-thumb{filter:grayscale(.7)}
+.h-bd-state{font-weight:700}
+.h-bd-state.is-paused{color:#a07a00}
+.h-bd-state.is-closed{color:#2f8f5b}
+.h-board-state{font-size:12px;padding:2px 6px;height:auto}
+@media (hover:none){.h-bd-del{opacity:1}}
+.h-booklet.has-design .h-bk-slot .eyebrow{color:var(--bk-title);opacity:.8}
