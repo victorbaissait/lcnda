@@ -180,25 +180,40 @@ function saint_of_day_data(PDO $pdo, int $month, int $day): array
         'named_after' => count(array_filter($people, static fn($p) => $p['named_after']))];
 }
 
-/** Statistiques : part des enfants prénommés d'après le saint de leur naissance ou baptême, par époque et par famille. */
+/** Statistiques : part des enfants prénommés d'après le saint de leur naissance ou baptême, par époque et par famille,
+ * et la liste des personnes concernées (date, saint, jour retenu) pour les voir et les trier. */
 function saint_stats_data(PDO $pdo): array
 {
-    $rows = $pdo->query("SELECT p.id, p.first_name, COALESCE(p.middle_name,'') AS middle_name, COALESCE(p.last_name,'') AS last_name, e.date_text, e.year, t.gedcom_tag
+    $rows = $pdo->query("SELECT p.id, p.first_name, COALESCE(p.middle_name,'') AS middle_name, COALESCE(p.last_name,'') AS last_name, COALESCE(p.gender,'') AS gender,
+            e.date_text, e.year, t.gedcom_tag
         FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id
         WHERE t.gedcom_tag IN ('BIRT','CHR','BAPM') AND e.date_text<>'' AND COALESCE(p.first_name,'')<>'' ORDER BY p.id, e.year")->fetchAll();
     $byPerson = [];
     foreach ($rows as $r) {
         $md = dashboard_month_day((string) $r['date_text']);
-        if (!$md || $md[0] < 1 || $md[0] > 12) { continue; }
+        if (!$md || $md[0] < 1 || $md[0] > 12 || $md[1] < 1 || $md[1] > 31) { continue; }
         $id = (int) $r['id'];
-        $byPerson[$id] ??= ['first' => trim($r['first_name'] . ' ' . $r['middle_name']), 'last' => $r['last_name'], 'year' => (int) $r['year'], 'days' => []];
-        $byPerson[$id]['days'][] = $md;
-        if ($r['gedcom_tag'] === 'BIRT' && $md[1] <= 28) { $byPerson[$id]['days'][] = [$md[0], $md[1] + 1]; }
+        $byPerson[$id] ??= ['first' => trim($r['first_name'] . ' ' . $r['middle_name']), 'first_name' => (string) $r['first_name'], 'last' => $r['last_name'],
+            'gender' => $r['gender'], 'year' => (int) $r['year'], 'days' => []];
+        if (!$byPerson[$id]['year'] && (int) $r['year']) { $byPerson[$id]['year'] = (int) $r['year']; }
+        $kind = $r['gedcom_tag'] === 'BIRT' ? 'birth' : 'baptism';
+        $byPerson[$id]['days'][] = [$md[0], $md[1], $kind, (string) $r['date_text'], (int) $r['year']];
+        if ($kind === 'birth') {
+            // lendemain de la naissance (baptême du lendemain non saisi), y compris en fin de mois
+            $next = (new DateTimeImmutable(sprintf('2000-%02d-01', $md[0])))->modify('+' . $md[1] . ' day');
+            $byPerson[$id]['days'][] = [(int) $next->format('n'), (int) $next->format('j'), 'next', (string) $r['date_text'], (int) $r['year']];
+        }
     }
-    $periods = []; $families = [];
-    foreach ($byPerson as $p) {
-        $match = false;
-        foreach ($p['days'] as [$m, $d]) { if (saint_matching($p['first'], $m, $d)) { $match = true; break; } }
+    $periods = []; $families = []; $people = []; $matched = 0;
+    foreach ($byPerson as $id => $p) {
+        $match = null;
+        foreach ($p['days'] as [$m, $d, $kind, $dateText, $year]) {
+            $saint = saint_matching($p['first'], $m, $d);
+            if ($saint) { $match = ['saint' => $saint, 'kind' => $kind, 'day' => sprintf('%02d-%02d', $m, $d), 'date_text' => $dateText, 'year' => $year]; break; }
+        }
+        $first = $p['days'][0];
+        $matched += $match ? 1 : 0;
+        $period = null;
         if ($p['year'] > 0) {
             $period = (int) (floor($p['year'] / 25) * 25);
             $periods[$period]['total'] = ($periods[$period]['total'] ?? 0) + 1;
@@ -209,13 +224,19 @@ function saint_stats_data(PDO $pdo): array
             $families[$fam]['total'] = ($families[$fam]['total'] ?? 0) + 1;
             $families[$fam]['matched'] = ($families[$fam]['matched'] ?? 0) + ($match ? 1 : 0);
         }
+        $people[] = ['id' => $id, 'first_name' => $p['first'], 'last_name' => $p['last'], 'gender' => $p['gender'], 'family' => $fam,
+            'period' => $period === null ? '' : $period . '–' . ($period + 24),
+            'date_text' => $match['date_text'] ?? $first[3], 'year' => $match['year'] ?? $first[4] ?: $p['year'],
+            'day' => $match['day'] ?? sprintf('%02d-%02d', $first[0], $first[1]),
+            'day_label' => saint_day_label($match['day'] ?? sprintf('%02d-%02d', $first[0], $first[1])),
+            'kind' => $match['kind'] ?? $first[2], 'saint' => $match['saint'] ?? null,
+            'saint_label' => $match ? 'saint' . (saint_is_female_name($match['saint']) ? 'e' : '') . ' ' . $match['saint'] : null];
     }
     ksort($periods);
-    $fmt = static fn($k, $v) => ['label' => $k, 'total' => $v['total'], 'matched' => $v['matched'], 'percent' => $v['total'] ? round(100 * $v['matched'] / $v['total'], 1) : 0];
+    $fmt = static fn($k, $v) => ['label' => (string) $k, 'total' => $v['total'], 'matched' => $v['matched'], 'percent' => $v['total'] ? round(100 * $v['matched'] / $v['total'], 1) : 0];
     $periodRows = []; foreach ($periods as $k => $v) { $periodRows[] = $fmt($k . '–' . ($k + 24), $v); }
     $familyRows = []; foreach ($families as $k => $v) { if ($v['total'] >= 8) { $familyRows[] = $fmt($k, $v); } }
     usort($familyRows, static fn($a, $b) => $b['total'] <=> $a['total']);
-    $total = count($byPerson);
-    $matched = 0; foreach ($periods as $v) { $matched += $v['matched']; }
-    return ['total' => $total, 'matched' => $matched, 'periods' => $periodRows, 'families' => array_slice($familyRows, 0, 40)];
+    usort($people, static fn($a, $b) => [(int) $a['year'] ?: 9999, $a['day'], $a['id']] <=> [(int) $b['year'] ?: 9999, $b['day'], $b['id']]); // sans année : à la fin
+    return ['total' => count($byPerson), 'matched' => $matched, 'periods' => $periodRows, 'families' => array_slice($familyRows, 0, 40), 'people' => $people];
 }

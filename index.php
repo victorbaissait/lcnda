@@ -16,6 +16,10 @@ if ($ready) {
 }
 $installCsrf = csrf_token();
 header('Cache-Control: no-store, private');
+// Pas d'affichage dans le cadre d'un autre site (le « deuxième écran » de l'app reste possible : même origine)
+header('X-Frame-Options: SAMEORIGIN');
+header("Content-Security-Policy: frame-ancestors 'self'");
+header('X-Content-Type-Options: nosniff');
 ?>
 <!doctype html>
 <html lang="fr">
@@ -24,8 +28,8 @@ header('Cache-Control: no-store, private');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=199">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=73">
+    <link rel="stylesheet" href="assets/css/app.css?v=200">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=74">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -657,12 +661,12 @@ header('Cache-Control: no-store, private');
             <?php for($i=0;$i<40;$i++): ?>
             <label style="display:flex;align-items:center;gap:5px;font-size:.8em">
                 <span style="width:18px;text-align:right;color:var(--muted);flex-shrink:0"><?= $i+1 ?></span>
-                <input type="color" name="color_<?= $i ?>" value="#0066cc" style="width:38px;height:30px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer;flex-shrink:0">
+                <input type="color" name="color_<?= $i ?>" value="#0066cc" style="width:38px;height:30px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer;flex-shrink:0">
             </label>
             <?php endfor; ?>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--line);margin:1.5rem 0 1.25rem">
+        <hr style="border:none;border-top:1px solid var(--line-color);margin:1.5rem 0 1.25rem">
 
         <div style="margin-bottom:1.5rem">
             <span class="eyebrow">ARBRE GÉNÉALOGIQUE</span>
@@ -676,23 +680,23 @@ header('Cache-Control: no-store, private');
                 </div>
                 <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
                     <strong style="font-size:.85em">Hommes</strong>
-                    <input type="color" name="gender_male_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
-                    <input type="color" name="gender_male_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
+                    <input type="color" name="gender_male_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
+                    <input type="color" name="gender_male_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                 </div>
                 <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
                     <strong style="font-size:.85em">Femmes</strong>
-                    <input type="color" name="gender_female_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
-                    <input type="color" name="gender_female_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
+                    <input type="color" name="gender_female_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
+                    <input type="color" name="gender_female_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                 </div>
                 <div style="display:grid;grid-template-columns:120px 1fr 1fr;gap:10px;align-items:center">
                     <strong style="font-size:.85em">Sexe inconnu</strong>
-                    <input type="color" name="gender_unknown_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
-                    <input type="color" name="gender_unknown_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
+                    <input type="color" name="gender_unknown_bg" value="#ffffff" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
+                    <input type="color" name="gender_unknown_text" value="#000000" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
                 </div>
             </div>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--line);margin:1.5rem 0 1.25rem">
+        <hr style="border:none;border-top:1px solid var(--line-color);margin:1.5rem 0 1.25rem">
 
         <div style="margin-bottom:1.5rem">
             <span class="eyebrow">ARBRE GÉNÉALOGIQUE</span>
@@ -734,7 +738,7 @@ header('Cache-Control: no-store, private');
             </div>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--line);margin:1.5rem 0 1.25rem">
+        <hr style="border:none;border-top:1px solid var(--line-color);margin:1.5rem 0 1.25rem">
 
         <div style="margin-bottom:1.5rem">
             <span class="eyebrow">IDENTITÉ</span>
@@ -756,13 +760,13 @@ header('Cache-Control: no-store, private');
             </div>
         </div>
 
-        <hr style="border:none;border-top:1px solid var(--line);margin:0 0 1.25rem">
+        <hr style="border:none;border-top:1px solid var(--line-color);margin:0 0 1.25rem">
 
-        <div style="background:var(--blue-soft);border:2px solid var(--line);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1rem">
+        <div style="background:var(--blue-soft);border:2px solid var(--line-color);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1rem">
             <strong style="font-size:.88em;display:block;margin-bottom:.75rem">Designs enregistrés</strong>
             <div id="stats-colors-presets-list"></div>
             <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
-                <input id="stats-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line);border-radius:4px;font-size:.85em">
+                <input id="stats-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
                 <button type="button" class="button small" id="stats-colors-save-preset">Sauvegarder</button>
             </div>
         </div>
@@ -782,15 +786,15 @@ header('Cache-Control: no-store, private');
             <?php for($i=0;$i<=10;$i++): ?>
             <label style="display:flex;align-items:center;gap:8px;font-size:.9em">
                 <span style="width:72px;color:var(--muted);font-weight:800">Niveau <?= $i ?></span>
-                <input type="color" name="battue_level_<?= $i ?>" value="#0066cc" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer">
+                <input type="color" name="battue_level_<?= $i ?>" value="#0066cc" style="width:100%;height:34px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer">
             </label>
             <?php endfor; ?>
         </div>
-        <div style="background:var(--blue-soft);border:2px solid var(--line);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1rem">
+        <div style="background:var(--blue-soft);border:2px solid var(--line-color);border-radius:6px;padding:1rem 1.25rem;margin-bottom:1rem">
             <strong style="font-size:.88em;display:block;margin-bottom:.75rem">Palettes enregistrées</strong>
             <div id="battue-level-colors-presets-list"></div>
             <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
-                <input id="battue-level-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line);border-radius:4px;font-size:.85em">
+                <input id="battue-level-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
                 <button type="button" class="button small" id="battue-level-colors-save-preset">Sauvegarder</button>
             </div>
         </div>
@@ -1084,12 +1088,12 @@ header('Cache-Control: no-store, private');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=314" defer></script>
+<script src="assets/js/app.js?v=315" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=12" defer></script>
+<script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=28" defer></script>
+<script src="assets/js/heritage-more.js?v=29" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=15" defer></script>
 <script src="assets/js/heritage-av.js?v=6" defer></script>
@@ -1103,7 +1107,8 @@ header('Cache-Control: no-store, private');
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=1" defer></script>
 <script src="assets/js/heritage-voters.js?v=2" defer></script>
-<script src="assets/js/heritage-widgets.js?v=9" defer></script>
+<script src="assets/js/heritage-widgets.js?v=10" defer></script>
+<script src="assets/js/heritage-tabs.js?v=1" defer></script>
 <script src="assets/js/heritage-studio.js?v=8" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>
 <script src="assets/js/heritage-museum.js?v=7" defer></script>

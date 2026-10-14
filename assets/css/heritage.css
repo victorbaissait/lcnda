@@ -1525,3 +1525,14 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-pick-create small { color:#666; }
 .h-pick-plus { display:grid; place-items:center; width:30px; height:30px; border-radius:50%; background:#f0f0f0; font-weight:700; flex:none; }
 .h-pick-create.is-on .h-pick-plus { background:var(--accent, #2f6f5e); color:#fff; }
+
+/* ── Prénom et saint du jour : les personnes concernées ── */
+.saint-people-panel{margin-top:1rem}
+.saint-people-tools{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-bottom:.6rem}
+.saint-people-tools input[type=search]{min-width:220px}
+.saint-people-scope{font-size:.9em}
+/* ── Éditeur d'onglets ── */
+.h-ct-widgets{display:grid;gap:6px;padding-left:1.4rem;margin:.6rem 0}
+.h-ct-widgets li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;border:1px solid #ddd;padding:6px 10px}
+.h-ct-widgets select{width:auto}
+.nav-custom-tab{font-style:normal}

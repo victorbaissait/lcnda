@@ -485,6 +485,7 @@ function bootstrap_data(PDO $pdo): never
         'csrf' => csrf_token(),
         'stats' => $stats,
         'startPersonId' => (int) $start,
+        'startPersonFlagged' => (bool) $pdo->query('SELECT 1 FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn(),
         'eventTypes' => $types,
         'savedViews' => $views,
         'importedAt' => $pdo->query("SELECT value FROM meta WHERE key='imported_at'")->fetchColumn(),
@@ -1681,7 +1682,9 @@ function sosa_map_data(PDO $pdo, int $rootId): never
     // Ancêtres présents plusieurs fois (implexe) : tous leurs numéros, pour la pastille « Sosa 42 & 46 »
     $multi = [];
     foreach (implexe_data($pdo, $rootId)['repeated'] as $row) { $multi[$row['id']] = $row['sosas']; }
-    json_response(['root_id' => $rootId, 'map' => $map, 'multi' => $multi]);
+    $name = $pdo->prepare("SELECT TRIM(COALESCE(first_name,'')||' '||COALESCE(last_name,'')) FROM persons WHERE id=?");
+    $name->execute([$rootId]);
+    json_response(['root_id' => $rootId, 'root_name' => (string) $name->fetchColumn(), 'map' => $map, 'multi' => $multi]);
 }
 
 // ─── Numérotation d'Aboville (descendants) ────────────────────────────────
@@ -8818,6 +8821,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_person' => save_person($pdo,$data),
             'set_person_lock' => set_person_lock($pdo,$data),
             'set_person_bookmark' => set_person_bookmark($pdo,$data),
+            'set_start_person' => set_start_person($pdo,$data),
             'undo_change' => undo_change($pdo,$data),
             'bulk_lock_people' => bulk_lock_people($pdo,$data),
             'delete_person' => delete_person($pdo,$data),

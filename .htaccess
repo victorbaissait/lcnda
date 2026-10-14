@@ -1,5 +1,30 @@
 Options -Indexes
 
-<FilesMatch "\.(sqlite|sql)$">
+# Installation sous Apache (MAMP, XAMPP, WampServer…) : mêmes interdictions que router.php pour le serveur
+# intégré de PHP. Les bases, les sauvegardes complètes (data/backups), le coffre des cousins, le travail à deux,
+# le code et les scripts ne doivent jamais être lisibles ou exécutables depuis le web.
+
+<FilesMatch "\.(sqlite|sqlite3|sqlite-wal|sqlite-shm|sqlite-journal|db|db-wal|db-shm|db-journal|sql|log|bak|env)$">
     Require all denied
 </FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Dossiers sensibles (seuls media/ et assets/ servent des fichiers)
+    RewriteRule ^(data|lib|config|scripts|models|tests|vendor|node_modules|backups|electron|build|dist|release-notes)(/|$) - [R=404,L,NC]
+    # Fichiers et dossiers cachés (.git, .env, .DS_Store…)
+    RewriteRule (^|/)\. - [R=404,L]
+    # Seuls les scripts PHP à la racine sont des pages (index.php, api.php, upload.php…)
+    RewriteRule ^.+/.+\.(php|phtml|phar)$ - [R=404,L,NC]
+</IfModule>
+<IfModule !mod_rewrite.c>
+    # Sans mod_rewrite : au moins les fichiers cachés et les scripts PHP rangés dans des sous-dossiers
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+    RedirectMatch 404 "^(?!.*/assets/).*/(data|lib|config|scripts|tests|electron|backups)/"
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+</IfModule>

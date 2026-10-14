@@ -27,6 +27,7 @@
     const KINDS = {numbers: ['🔢', 'Chiffres', 'Un ou plusieurs nombres : combien de personnes, d’événements, de lieux… répondent à tes critères.'],
         list: ['📋', 'Liste', 'Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux.'],
         chart: ['📊', 'Graphique', 'Des barres ou un camembert : par métier, par lieu, par décennie, par siècle…'],
+        appstat: ['📈', 'Statistique de l’app', 'Une statistique de Graphiques → Statistiques (noms, prénoms, lieux, années…) redessinée à ta façon : barres, camembert, courbe, mosaïque, avec tes filtres.'],
         text: ['📝', 'Texte', 'Un pense-bête, une citation, une consigne, avec des émojis.'],
         links: ['🔗', 'Raccourcis', 'Des boutons vers les écrans, les listes ou des sites que tu utilises souvent.'],
         journey: ['🧭', 'Parcours jour par jour', 'Des étapes datées (écrites à la main, ou les événements d’une personne) en frise et sur la carte : un voyage, une guerre, une vie.'],
@@ -35,6 +36,14 @@
     const COLORS = ['#0066cc', '#2f8f5b', '#cc4700', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#555555'];
     const color = c => /^#[0-9a-f]{6}$/i.test(String(c || '')) ? c : '';
     const newId = () => 'cw_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    // Statistiques de l'app qui donnent des chiffres par valeur (api graph_stats, sortes « bar » et « histogram ») : on peut les redessiner
+    const APP_STATS = [['surnames', 'Noms'], ['firstnames', 'Prénoms'], ['birth_places', 'Lieux de naissance'], ['marriage_places', 'Lieux de mariage'], ['death_places', 'Lieux de décès'],
+        ['birth_countries', 'Pays de naissance'], ['death_countries', 'Pays de décès'], ['sex_distribution', 'Sexes'], ['birth_years', 'Années de naissance (par décennie)'], ['death_years', 'Années de décès (par décennie)'],
+        ['age_at_death', 'Âge au décès'], ['death_causes', 'Causes de décès'], ['children_per_family', 'Enfants par famille'], ['farthest_from_origin', 'Lieux les plus éloignés de la commune d’origine']];
+    const appStatLabel = k => APP_STATS.find(x => x[0] === k)?.[1] || k;
+    // Éditeur ouvert depuis Maintenance → Éditeur de widgets (mode « widgets ») ou → Éditeur de statistiques (mode « stats »)
+    let mode = 'widgets';
+    const backToList = () => ext.maintenance[mode === 'stats' ? 'stats_editor' : 'widget_editor'](++S().workspaceToken);
 
     /* ─── Rangement ─── */
     function defs() {
@@ -87,6 +96,11 @@
             if (d.jSource !== 'person' || !Number(d.jPerson)) return [];
             try { return [{detail: await api('person', {id: Number(d.jPerson)})}]; } catch (error) { return [{error: error.message}]; }
         }
+        if (d.kind === 'appstat') {
+            const q = {type: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', year_from: d.statFrom || undefined, year_to: d.statTo || undefined, gender: d.statGender || undefined};
+            if (d.statLineage) { const root = Number(localStorage.getItem('genealogie-sosa-root')) || 0; if (root) q.sosa_root_id = root; }
+            try { return [{appstat: await api('graph_stats', q)}]; } catch (error) { return [{error: error.message}]; }
+        }
         const sources = d.kind === 'numbers' ? (d.counters || []).map(c => c.src || {}) : ['list', 'chart'].includes(d.kind) ? [d.src || {}] : [];
         return Promise.all(sources.map(async src => {
             try {
@@ -100,6 +114,16 @@
     /* ─── Affichage ─── */
     const PALETTE = ['#0066cc', '#cc4700', '#2f8f5b', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#d4588f', '#5d6d7e', '#8bc34a', '#ff9800', '#3f51b5'];
     function groupRows(data, d) {
+        if (data.appstat) { // chiffres déjà comptés par l'app
+            const timeline = data.appstat.kind === 'histogram';
+            let entries = (data.appstat.rows || []).map(r => [String(r.label ?? ''), Number(r.value) || 0]).filter(([v, n]) => n > 0 && (v !== '' || d.skipEmpty === false));
+            if (!timeline) entries.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr'));
+            const top = Math.max(1, Math.min(60, Number(d.limit) || 10));
+            if (!timeline && entries.length > top) { const rest = entries.slice(top).reduce((n, e) => n + e[1], 0); entries = entries.slice(0, top); if (rest) entries.push(['autres', rest]); }
+            entries.counted = Number(data.appstat.total) || entries.reduce((n, e) => n + e[1], 0);
+            return entries;
+        }
+        if (!data.shown) return Object.assign([], {counted: 0});
         const col = d.group || dataColumns(data)[0]?.[0] || 'name';
         const counts = new Map();
         let counted = 0;
@@ -301,15 +325,16 @@
         if (d.kind === 'numbers') return `<div class="h-cw-numbers">${(d.counters || []).map((c, i) => { const x = datas[i] || {shown: []}; return `<div class="h-cw-number"><strong>${fmt(x.count ?? x.shown.length)}${x.count === undefined && x.truncated ? '+' : ''}</strong><span>${esc(c.label || 'Nombre')}</span></div>`; }).join('')}</div>`;
         if (d.kind === 'list') return listHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
+        if (d.kind === 'appstat') return datas[0]?.appstat ? chartHtml(datas[0], d) : '<p class="muted">Calcul…</p>';
         return '';
     }
-    const PART_KINDS = ['numbers', 'list', 'chart', 'text', 'links', 'journey'];
+    const PART_KINDS = ['numbers', 'list', 'chart', 'appstat', 'text', 'links', 'journey'];
     const captionHtml = d => d.caption ? `<p class="h-cw-caption">${nl(d.caption)}</p>` : '';
     function partsHtml(d, datas) {
         if (d.kind === 'app') return '';
         return (d.parts || []).map((p, i) => `<section class="h-cw-part">${p.title ? `<h4>${esc(p.title)}</h4>` : ''}${bodyHtml(p, datas?.parts?.[i] || [])}${captionHtml(p)}</section>`).join('');
     }
-    const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : d.kind === 'chart' && datas[0]?.shown ? groupRows(datas[0], d).counted : '';
+    const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : (d.kind === 'chart' && datas[0]?.shown) || (d.kind === 'appstat' && datas[0]?.appstat) ? groupRows(datas[0], d).counted : '';
     function widgetCard(d, index, span, datas) {
         const parts = partsHtml(d, datas);
         return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', parts ? '' : countOf(d, datas), bodyHtml(d, datas) + captionHtml(d) + parts, span));
@@ -384,36 +409,42 @@
     let editing = null, meta = null, previewSeq = 0, partIndex = -1; // partIndex : -1 = partie principale, sinon une partie en plus
     const newPart = kind => ({kind, title: '', counters: kind === 'numbers' ? [{label: 'Personnes', src: P()}] : [], src: P(), columns: [], sort: null, limit: 8, group: '', groupBy: 'value', style: 'bars', text: '', links: kind === 'links' ? [{label: 'Carte', target: 'module:carte'}] : [], steps: [], jSource: 'manual', jLayout: 'vertical', jMap: true, jDays: true, jText: true, jOrder: 'date'});
     async function loadMeta() { meta = await api('my_lists'); return meta; }
-    ext.maintenance.widget_editor = async token => {
+    ext.maintenance.widget_editor = token => { mode = 'widgets'; return defsPage(token); };
+    /** Maintenance → Éditeur de statistiques : les mêmes widgets, montrés en grand dans Graphiques → Statistiques */
+    ext.maintenance.stats_editor = token => { mode = 'stats'; return defsPage(token); };
+    async function defsPage(token) {
         try { await loadMeta(); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
         editing = null; // revenir sur l'onglet : la liste (un brouillon abandonné ne revient pas)
-        const list = defs(), onBoard = new Set(A().dashboardBlockSettings().widgets.map(w => w.type));
-        A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
+        const all = defs(), list = mode === 'stats' ? all.filter(d => d.inStats) : all, onBoard = new Set(A().dashboardBlockSettings().widgets.map(w => w.type));
+        A().$('#workspace').innerHTML = `<section class="page collection-page">${mode === 'stats'
+            ? header('MAINTENANCE', 'Éditeur de statistiques', 'Crée tes propres graphiques et statistiques, sans rien programmer : de zéro (personnes, événements, une de tes listes…), à partir d’une statistique de l’app redessinée à ta façon, d’un de tes widgets ou d’un exemple. Ils apparaissent dans Graphiques → Statistiques, rubrique « Mes statistiques », et peuvent aussi aller sur le tableau de bord.', '<button type="button" class="button" data-cw-new>+ Nouvelle statistique</button>')
+            : header('MAINTENANCE', 'Éditeur de widgets', 'Crée tes propres widgets pour le tableau de bord, sans rien programmer : de zéro, à partir d’un widget de l’app, d’un des tiens ou d’un exemple. Ils apparaissent ensuite dans la colonne de gauche du tableau de bord. Pour un graphique ou une statistique en grand dans l’onglet Graphiques : Éditeur de statistiques.', '<button type="button" class="button" data-cw-new>+ Nouveau widget</button>')}
             <section class="maintenance-panel"><h3>Importer un widget reçu</h3><p class="muted">Un fichier « .lcnda-widget.json » envoyé par un proche : seul le modèle du widget est partagé, jamais les données.</p><input type="file" accept=".json,application/json" data-cw-import></section>
-            ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record" style="--cw-accent:${color(d.color) || 'transparent'}"><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}</div>
+            ${list.length ? `<div class="h-records">${list.map(d => `<article class="h-record h-cw-record" style="--cw-accent:${color(d.color) || 'transparent'}"><header><div><strong>${esc(d.icon || '🧱')} ${esc(d.name || 'Mon widget')}</strong> <small>${esc(KINDS[d.kind]?.[1] || '')}${d.kind === 'app' ? ' : ' + esc(appCatalog().find(x => x[0] === d.base)?.[1] || d.base) : ''}</small>${onBoard.has(d.id) ? ' <span class="collection-kind">sur le tableau de bord</span>' : ''}${d.inStats ? ' <span class="collection-kind">dans Graphiques</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-cw-edit="${esc(d.id)}">modifier</button><button type="button" class="link-button" data-cw-dup="${esc(d.id)}">dupliquer</button><button type="button" class="link-button" data-cw-del="${esc(d.id)}">supprimer</button></span></header>
-                    ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions"><button type="button" class="button small" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().empty('Aucun widget à toi pour l’instant : clique sur « + Nouveau widget ».')}</section>`;
+                    ${d.note ? `<p>${nl(d.note)}</p>` : ''}<div class="page-actions">${d.inStats ? `<button type="button" class="button small" data-cw-opengraph="${esc(d.id)}">📊 Ouvrir dans Graphiques</button>` : ''}<button type="button" class="button small ${d.inStats ? 'secondary' : ''}" data-cw-add="${esc(d.id)}">+ Ajouter au tableau de bord</button><button type="button" class="button small secondary" data-cw-share="${esc(d.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>` : A().empty('Aucun widget à toi pour l’instant : clique sur « + Nouveau widget ».')}</section>`;
         const ws = A().$('#workspace');
         const find = id => list.find(d => d.id === id);
         ws.querySelector('[data-cw-new]').addEventListener('click', () => chooseStart(token));
         ws.querySelectorAll('[data-cw-edit]').forEach(b => b.addEventListener('click', () => { const cur = find(b.dataset.cwEdit); editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-cw-dup]').forEach(b => b.addEventListener('click', () => { const d = find(b.dataset.cwDup); editing = baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'}); partIndex = -1; renderEditor(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-cw-add]').forEach(b => b.addEventListener('click', () => { addToDashboard(b.dataset.cwAdd); ext.maintenance.widget_editor(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-cw-add]').forEach(b => b.addEventListener('click', () => { addToDashboard(b.dataset.cwAdd); backToList(); }));
+        ws.querySelectorAll('[data-cw-opengraph]').forEach(b => b.addEventListener('click', () => ext.openCustomStat(b.dataset.cwOpengraph)));
         ws.querySelectorAll('[data-cw-share]').forEach(b => b.addEventListener('click', () => shareDef(find(b.dataset.cwShare))));
         ws.querySelectorAll('[data-cw-del]').forEach(b => b.addEventListener('click', () => {
             const d = find(b.dataset.cwDel);
             if (!confirm(`Supprimer le widget « ${d.name || 'Mon widget'} » ? Il disparaît aussi du tableau de bord.`)) return;
-            saveDefs(list.filter(x => x.id !== d.id));
+            saveDefs(all.filter(x => x.id !== d.id));
             const settings = A().dashboardBlockSettings(); A().saveDashboardBlockSettings(settings); // les exemplaires posés partent (type inconnu)
-            toast('Widget supprimé.'); ext.maintenance.widget_editor(++S().workspaceToken);
+            toast('Widget supprimé.'); backToList();
         }));
         ws.querySelector('[data-cw-import]').addEventListener('change', async e => {
             const file = e.target.files[0]; if (!file) return;
-            try { const d = importDef(JSON.parse(await file.text())); saveDefs([...defs(), d]); toast(`Widget « ${d.name} » importé : ajoute-le au tableau de bord.`); ext.maintenance.widget_editor(++S().workspaceToken); }
+            try { const d = importDef(JSON.parse(await file.text())); if (mode === 'stats') d.inStats = true; saveDefs([...defs(), d]); toast(mode === 'stats' ? `« ${d.name} » importé : il est dans Graphiques → Statistiques.` : `Widget « ${d.name} » importé : ajoute-le au tableau de bord.`); backToList(); }
             catch (error) { toast('Fichier de widget illisible : ' + error.message, 'error'); }
         });
-    };
+    }
     function addToDashboard(id) {
         A().syncCustomDashboardWidgets();
         const d = defs().find(x => x.id === id);
@@ -424,6 +455,7 @@
     }
     function chooseStart(token) {
         const tile = (icon, name, sub, attr) => `<button type="button" class="h-template" ${attr}><span>${esc(icon)}</span><strong>${esc(name)}</strong><small>${esc(sub)}</small></button>`;
+        if (mode === 'stats') return chooseStatStart(tile);
         const mine = defs(), ex = EXAMPLES(meta || {});
         ext.openDialog({
             eyebrow: 'NOUVEAU WIDGET', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
@@ -440,6 +472,26 @@
                 dlg.querySelectorAll('[data-cw-dress]').forEach(b => b.addEventListener('click', () => go(baseDef({kind: 'app', base: b.dataset.cwDress, icon: '', name: label(b.dataset.cwDress), width: '6'}))));
                 dlg.querySelectorAll('[data-cw-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.cwMine); go(baseDef({...d, name: (d.name || 'Mon widget') + ' (copie)'})); }));
                 dlg.querySelectorAll('[data-cw-ex]').forEach(b => b.addEventListener('click', () => go(baseDef(ex[Number(b.dataset.cwEx)]))));
+            },
+        });
+    }
+
+    /** Nouvelle statistique : de zéro, d'une statistique de l'app, d'un de mes widgets, d'un exemple */
+    function chooseStatStart(tile) {
+        const mine = defs().filter(d => ['chart', 'appstat', 'numbers', 'list'].includes(d.kind)), ex = EXAMPLES(meta || {}).filter(d => ['chart', 'numbers', 'list'].includes(d.kind));
+        ext.openDialog({
+            eyebrow: 'NOUVELLE STATISTIQUE', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
+            body: `<h4>Partir de rien</h4><div class="h-templates">${['chart', 'numbers', 'list'].map(k => tile(KINDS[k][0], KINDS[k][1], KINDS[k][2], `data-cs-kind="${k}"`)).join('')}</div>
+                <h4>Partir d’une statistique de l’app</h4><p class="muted">Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs et tes filtres (années, sexe, seulement tes ancêtres).</p>
+                <div class="h-templates">${APP_STATS.map(([k, l]) => tile('📈', l, 'Statistique de l’app', `data-cs-app="${k}"`)).join('')}</div>
+                ${mine.length ? `<h4>Partir d’un de mes widgets ou de mes statistiques</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cs-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
+                <h4>Exemples</h4><div class="h-templates">${ex.map((d, i) => tile(d.icon, d.name, KINDS[d.kind][1], `data-cs-ex="${i}"`)).join('')}</div>`,
+            onOpen: dlg => {
+                const go = d => { editing = {...d, inStats: true, width: '12'}; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
+                dlg.querySelectorAll('[data-cs-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csKind; go(baseDef({kind: k, icon: KINDS[k][0], name: '', style: 'bars'})); }));
+                dlg.querySelectorAll('[data-cs-app]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csApp; go(baseDef({kind: 'appstat', icon: '📈', name: appStatLabel(k), statType: k, style: ['birth_years', 'death_years', 'age_at_death'].includes(k) ? 'columns' : 'bars', limit: 15})); }));
+                dlg.querySelectorAll('[data-cs-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.csMine); go(baseDef({...d, id: newId(), name: (d.name || 'Ma statistique') + ' (copie)'})); }));
+                dlg.querySelectorAll('[data-cs-ex]').forEach(b => b.addEventListener('click', () => go(baseDef(ex[Number(b.dataset.csEx)]))));
             },
         });
     }
@@ -470,8 +522,26 @@
     // Légende : une phrase sous la partie pour dire ce qu'elle montre
     const captionField = d => d.kind === 'app' ? '' : `<label class="h-cw-caption-field">Légende <small>(ce que montre cette partie, affichée dessous)</small><input data-cw-caption value="${esc(d.caption || '')}" maxlength="400" placeholder="Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent"></label>`;
     function kindHtml() { return kindHtmlInner() + captionField(target()); }
+    /** Dessin, couleurs et nombre de valeurs : communs au graphique et à la statistique de l'app */
+    function drawHtml(d) {
+        return `<label>Dessin <select data-cw-style>${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <label>Couleurs <select data-cw-palette>${[['vive', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (photos anciennes)'], ['accent', 'Une couleur en dégradé']].map(([k, l]) => `<option value="${k}" ${(d.palette || 'vive') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                ${d.palette === 'accent' ? `<label>Couleur du dégradé<input type="color" data-cw-accent value="${esc(color(d.accentColor) || '#0066cc')}"></label>` : ''}
+                <div class="span-2"><span class="section-label">Couleur de chaque valeur</span><div class="h-cw-valcolors" data-cw-valcolors><small class="muted">Les valeurs apparaissent ici après le calcul de l’aperçu.</small></div></div>
+                <label>Valeurs les plus fréquentes<input type="number" min="2" max="60" data-cw-limit value="${esc(d.limit || 10)}"></label>`;
+    }
     function kindHtmlInner() {
         const d = target();
+        if (d.kind === 'appstat') {
+            const y = v => Number(v) || '';
+            return `<div class="form-grid"><label class="span-2">Statistique <select data-cw-stat>${APP_STATS.map(([k, l]) => `<option value="${k}" ${(d.statType || 'surnames') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <label>Nés à partir de <small>(année, facultatif)</small><input type="number" min="1" max="2200" data-cw-statnum="statFrom" value="${y(d.statFrom)}" placeholder="1700"></label>
+                <label>jusqu’à<input type="number" min="1" max="2200" data-cw-statnum="statTo" value="${y(d.statTo)}" placeholder="1900"></label>
+                <label>Sexe <select data-cw-statgender>${[['', 'tous'], ['female', 'femmes'], ['male', 'hommes'], ['unknown', 'non renseigné']].map(([k, l]) => `<option value="${k}" ${(d.statGender || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-cw-statlineage ${d.statLineage ? 'checked' : ''}> seulement mes ancêtres (lignée Sosa)</label>
+                ${drawHtml(d)}
+                <label class="checkbox-line span-2"><input type="checkbox" data-cw-skipempty ${d.skipEmpty !== false ? 'checked' : ''}> ne pas montrer les valeurs vides</label></div>`;
+        }
         if (d.kind === 'numbers') return `${(d.counters || []).map((c, i) => `<fieldset class="h-cw-counter"><legend>Chiffre ${i + 1}</legend><label>Libellé<input data-cw-counter="${i}" value="${esc(c.label || '')}" placeholder="Personnes nées en Bretagne"></label>${sourceHtml(c.src = c.src || P(), 'c.' + i)}${d.counters.length > 1 ? `<button type="button" class="link-button" data-cw-counter-del="${i}">retirer ce chiffre</button>` : ''}</fieldset>`).join('')}
             <button type="button" class="button small secondary" data-cw-counter-add>+ Chiffre</button>`;
         if (d.kind === 'list' || d.kind === 'chart') {
@@ -483,11 +553,7 @@
                 <label>Nombre de lignes<input type="number" min="1" max="100" data-cw-limit value="${esc(d.limit || 8)}"></label></div>`;
             return `${common}<div class="form-grid"><label>Compter par <select data-cw-group>${cols.map(([k, l]) => `<option value="${esc(k)}" ${(d.group || cols[0]?.[0]) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Regrouper <select data-cw-groupby>${[['value', 'par valeur'], ['year', 'par année'], ['decade', 'par décennie'], ['century', 'par siècle']].map(([v, l]) => `<option value="${v}" ${d.groupBy === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                <label>Dessin <select data-cw-style>${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>Couleurs <select data-cw-palette>${[['vive', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (photos anciennes)'], ['accent', 'Une couleur en dégradé']].map(([k, l]) => `<option value="${k}" ${(d.palette || 'vive') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                ${d.palette === 'accent' ? `<label>Couleur du dégradé<input type="color" data-cw-accent value="${esc(color(d.accentColor) || '#0066cc')}"></label>` : ''}
-                <div class="span-2"><span class="section-label">Couleur de chaque valeur</span><div class="h-cw-valcolors" data-cw-valcolors><small class="muted">Les valeurs apparaissent ici après le calcul de l’aperçu.</small></div></div>
-                <label>Valeurs les plus fréquentes<input type="number" min="2" max="60" data-cw-limit value="${esc(d.limit || 10)}"></label>
+                ${drawHtml(d)}
                 <label class="checkbox-line span-2"><input type="checkbox" data-cw-skipempty ${d.skipEmpty !== false ? 'checked' : ''}> ne pas compter les cases vides</label></div>`;
         }
         if (d.kind === 'journey') {
@@ -519,16 +585,17 @@
         const partHead = partIndex >= 0 ? `<div class="form-grid"><label>Sous-titre de cette partie<input data-cw-parttitle value="${esc(d.title || '')}" placeholder="Ex. : À faire, Mes chiffres, Liens utiles"></label>
             <label>Sorte <select data-cw-partkind>${PART_KINDS.map(k => `<option value="${k}" ${d.kind === k ? 'selected' : ''}>${KINDS[k][0]} ${esc(KINDS[k][1])}</option>`).join('')}</select></label>
             <p class="span-2"><button type="button" class="button small secondary" data-cw-partup ${partIndex ? '' : 'disabled'}>↑ Monter</button> <button type="button" class="button small secondary" data-cw-partdown ${partIndex < root.parts.length - 1 ? '' : 'disabled'}>↓ Descendre</button> <button type="button" class="button small secondary danger" data-cw-partdel>Retirer cette partie</button></p></div>` : '';
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header('ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-be h-cw-editor">${header(mode === 'stats' ? 'ÉDITEUR DE STATISTIQUES' : 'ÉDITEUR DE WIDGETS', root._existing ? `Modifier « ${root.name || 'Mon widget'} »` : mode === 'stats' ? 'Nouvelle statistique' : 'Nouveau widget', 'Règle ton widget à gauche ; l’aperçu se met à jour à droite.', '<button type="button" class="button secondary" data-cw-cancel>← Retour</button>')}
             <div class="h-cw-layout"><div>
             <section class="maintenance-panel"><h3>1. Le widget</h3><div class="form-grid">
                 <label>Titre<input data-cw="name" value="${esc(root.name || '')}" placeholder="Mes ancêtres bretons"></label><label>Icône<input data-cw="icon" value="${esc(root.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🧱"></label>
                 <label>Sorte <select data-cw-kindsel>${Object.entries(KINDS).map(([k, [i, l]]) => `<option value="${k}" ${root.kind === k ? 'selected' : ''}>${i} ${esc(l)}</option>`).join('')}</select></label>
                 <label>Largeur <select data-cw="width">${WIDTHS.map(([v, l]) => `<option value="${v}" ${String(root.width) === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <div class="span-2"><span class="section-label">Couleur</span><div class="h-cw-colors"><button type="button" class="h-cw-swatch ${!color(root.color) ? 'is-on' : ''}" data-cw-color="" title="Aucune">∅</button>${COLORS.map(c => `<button type="button" class="h-cw-swatch ${root.color === c ? 'is-on' : ''}" data-cw-color="${c}" style="background:${c}" title="${c}"></button>`).join('')}<input type="color" data-cw-colorpick value="${esc(color(root.color) || '#0066cc')}" title="Autre couleur"></div></div>
-                <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(root.note || '')}</textarea></label></div></section>
+                <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(root.note || '')}</textarea></label>
+                ${root.kind === 'app' ? '' : `<label class="checkbox-line span-2"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> 📊 Afficher aussi en grand dans Graphiques → Statistiques (rubrique « Mes statistiques »)</label>`}</div></section>
             <section class="maintenance-panel"><h3>2. ${partIndex >= 0 ? `Partie ${partIndex + 2} : ` : ''}${esc(KINDS[d.kind]?.[1] || '')}</h3>${partTabs}${partHead}<p class="muted">${esc(KINDS[d.kind]?.[2] || '')}${root.kind !== 'app' && partIndex < 0 && !(root.parts || []).length ? ' Pour mettre plusieurs choses dans le même widget (plusieurs textes, des chiffres et des raccourcis…), « + Ajouter une partie ».' : ''}</p><div data-cw-kind-box>${kindHtml()}</div></section>
-            <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
+            <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root.inStats ? '<button type="button" class="button secondary" data-cw-savegraph>Enregistrer et ouvrir dans Graphiques</button>' : ''}${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
             </div><aside class="h-cw-preview"><h3>Aperçu <button type="button" class="link-button" data-cw-refresh>actualiser</button></h3><div class="card-grid" data-cw-preview></div></aside></div></section>`;
         const ws = A().$('#workspace');
         const again = () => renderEditor(token);
@@ -543,8 +610,8 @@
         }, 350); };
         // couleurs par valeur : une pastille par valeur du graphique en cours
         function fillValueColors(tdatas) {
-            const holder = ws.querySelector('[data-cw-valcolors]'); if (!holder || d.kind !== 'chart') return;
-            const data = tdatas?.[0]; if (!data?.shown) return;
+            const holder = ws.querySelector('[data-cw-valcolors]'); if (!holder || !['chart', 'appstat'].includes(d.kind)) return;
+            const data = tdatas?.[0]; if (!data?.shown && !data?.appstat) return;
             const entries = groupRows(data, d);
             const line = ['line', 'area'].includes(d.style);
             holder.innerHTML = line ? `<label class="h-cw-valcolor"><input type="color" data-cw-valcolor="__line" value="${esc(color(d.valueColors?.__line) || PALETTE[0])}"> la courbe</label>`
@@ -552,7 +619,8 @@
             if (d.valueColors && Object.keys(d.valueColors).length) holder.insertAdjacentHTML('beforeend', '<button type="button" class="link-button" data-cw-valreset>remettre les couleurs de la palette</button>');
         }
         preview();
-        ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; ext.maintenance.widget_editor(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; backToList(); }));
+        ws.querySelector('[data-cw-instats]')?.addEventListener('change', e => { root.inStats = e.target.checked; again(); });
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
         ws.querySelectorAll('[data-cw]').forEach(el => el.addEventListener('input', () => { root[el.dataset.cw] = el.value; preview(); }));
         ws.querySelector('[data-cw-kindsel]').addEventListener('change', e => { const k = e.target.value; root.kind = k; if (k === 'app' && !root.base) root.base = appCatalog()[0]?.[0]; if (k === 'numbers' && !root.counters?.length) root.counters = [{label: 'Personnes', src: P()}]; partIndex = -1; again(); });
@@ -595,6 +663,10 @@
             if (e.target.matches('[data-cw-valcolor]')) { d.valueColors = {...(d.valueColors || {}), [e.target.dataset.cwValcolor]: e.target.value}; }
             if (e.target.matches('[data-cw-skipempty]')) d.skipEmpty = e.target.checked;
             if (e.target.matches('[data-cw-base]')) d.base = e.target.value;
+            if (e.target.matches('[data-cw-stat]')) { d.statType = e.target.value; d.valueColors = {}; if (!String(root.name || '').trim() || APP_STATS.some(([, l]) => l === root.name)) { root.name = appStatLabel(d.statType); const n = ws.querySelector('[data-cw="name"]'); if (n && partIndex < 0) n.value = root.name; } }
+            if (e.target.matches('[data-cw-statnum]')) d[e.target.dataset.cwStatnum] = Number(e.target.value) || '';
+            if (e.target.matches('[data-cw-statgender]')) d.statGender = e.target.value;
+            if (e.target.matches('[data-cw-statlineage]')) d.statLineage = e.target.checked;
             if (e.target.matches('[data-cw-linktarget]')) { const i = Number(e.target.closest('[data-cw-link]').dataset.cwLink); d.links[i].target = e.target.value; return again(); }
             preview();
         });
@@ -650,7 +722,7 @@
             row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (Number(el.value) || null) : el.value; });
             preview();
         }
-        const save = andAdd => {
+        const save = (andAdd, andGraph = false) => {
             if (!String(root.name || '').trim()) { toast('Donne un titre au widget.', 'error'); ws.querySelector('[data-cw="name"]').focus(); return; }
             const clean = cleanDef(root), list = defs(), i = list.findIndex(x => x.id === clean.id), before = i >= 0 ? list[i] : null;
             if (i >= 0) list[i] = clean; else list.push(clean);
@@ -661,11 +733,12 @@
                 if (before && String(before.width) !== String(clean.width)) { placed.forEach(w => { w.width = clean.width; }); A().saveDashboardBlockSettings(settings); }
                 toast('Widget enregistré : le tableau de bord est à jour.');
             } else if (andAdd) addToDashboard(clean.id);
-            else toast('Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
+            else toast(clean.inStats ? 'Enregistré : il est dans Graphiques → Statistiques, rubrique « Mes statistiques ».' : 'Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
             editing = null;
-            if (andAdd) A().setModule('dashboard'); else ext.maintenance.widget_editor(++S().workspaceToken);
+            if (andGraph) ext.openCustomStat(clean.id); else if (andAdd) A().setModule('dashboard'); else backToList();
         };
         ws.querySelector('[data-cw-save]').addEventListener('click', () => save(false));
+        ws.querySelector('[data-cw-savegraph]')?.addEventListener('click', () => save(false, true));
         ws.querySelector('[data-cw-saveadd]')?.addEventListener('click', () => save(true));
     }
 
@@ -680,7 +753,7 @@
     }
     function cleanDef(d) {
         const kind = KINDS[d.kind] ? d.kind : 'text';
-        const out = {id: /^cw_[a-z0-9]{4,24}$/.test(String(d.id)) ? d.id : newId(), name: str(d.name, 80).trim(), icon: str(d.icon, 16), color: color(d.color), width: WIDTHS.some(w => w[0] === String(d.width)) ? String(d.width) : '6', note: str(d.note, 1000), kind};
+        const out = {id: /^cw_[a-z0-9]{4,24}$/.test(String(d.id)) ? d.id : newId(), name: str(d.name, 80).trim(), icon: str(d.icon, 16), color: color(d.color), width: WIDTHS.some(w => w[0] === String(d.width)) ? String(d.width) : '6', note: str(d.note, 1000), kind, inStats: !!d.inStats && kind !== 'app'};
         Object.assign(out, kindFields(d, kind));
         out.parts = kind === 'app' ? [] : (Array.isArray(d.parts) ? d.parts : []).slice(0, 8).filter(p => p && PART_KINDS.includes(p.kind)).map(p => ({kind: p.kind, title: str(p.title, 80).trim(), ...kindFields(p, p.kind)}));
         if (kind === 'app') out.base = appCatalog().some(([k]) => k === d.base) ? d.base : 'stats'; // un widget de l'app qui n'existe pas ici
@@ -692,6 +765,10 @@
         if (kind === 'list' || kind === 'chart') { out.src = cleanSrc(d.src); out.limit = Math.max(1, Math.min(100, Number(d.limit) || 8)); }
         if (kind === 'list') { out.columns = (Array.isArray(d.columns) ? d.columns : []).map(c => str(c, 40)).slice(0, 12); out.sort = d.sort?.col ? {col: str(d.sort.col, 40), dir: d.sort.dir === 'desc' ? 'desc' : 'asc'} : null; }
         if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', 'year', 'decade', 'century'].includes(d.groupBy) ? d.groupBy : 'value', style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
+            palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
+            valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
+        if (kind === 'appstat') Object.assign(out, {statType: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', statFrom: Math.max(0, Math.min(2200, Number(d.statFrom) || 0)) || '', statTo: Math.max(0, Math.min(2200, Number(d.statTo) || 0)) || '',
+            statGender: ['male', 'female', 'unknown'].includes(d.statGender) ? d.statGender : '', statLineage: !!d.statLineage, limit: Math.max(1, Math.min(60, Number(d.limit) || 10)), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
         if (kind !== 'app') out.caption = str(d.caption, 400);
@@ -734,4 +811,26 @@
         return cleanDef({...w, id: newId(), name: w.name || 'Widget importé'});
     }
     ext.cleanWidgetDef = d => cleanDef(d); // pour les tests
+
+    /* ─── 📊 Mes statistiques dans Graphiques → Statistiques ─── */
+    ext.customStatItems = () => defs().filter(d => d.inStats && d.kind !== 'app').map(d => [d.id, `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`]);
+    ext.openCustomStat = id => { const st = S(); st.graphMode = 'stats'; st.graphStatsType = id; A().setModule('graphiques'); };
+    ext.renderCustomStat = async (token, id) => {
+        const d = defs().find(x => x.id === id);
+        const ws = A().$('#workspace');
+        if (!d) { ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', 'Statistique introuvable', 'Elle a peut-être été supprimée.')}</section>`; return; }
+        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        const datas = await loadData(d);
+        if (token !== S().workspaceToken || S().module !== 'graphiques') return;
+        // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
+        ws.querySelector('.card-grid').innerHTML = widgetCard({...d, name: '', note: ''}, '01', 'span-12', datas).replace(/<h3>\s*Mon widget/, '<h3>Résultat');
+        A().bindTableLinks?.();
+        ws.querySelector('[data-cs-edit]').addEventListener('click', async () => {
+            mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance');
+            try { await loadMeta(); } catch (_) {}
+            const cur = defs().find(x => x.id === id); if (!cur) return;
+            editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken);
+        });
+        ws.querySelector('[data-cs-dash]').addEventListener('click', () => addToDashboard(id));
+    };
 })();

@@ -464,7 +464,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function listHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-list-hidden')||'[]');}catch(_){return[];}}
     function orderedListTypes(includeHidden=false){const order=savedOrder('genealogie-list-order',defaultListTypes.map(item=>item[0]));const hidden=listHiddenKeys();let visibleIndex=0;return order.filter(value=>includeHidden||!hidden.includes(value)).map((value,index)=>{const item=defaultListTypes.find(row=>row[0]===value);return [item[0],String(includeHidden?index+1:++visibleIndex).padStart(2,'0'),item[2]];});}
     function dynamicMapTypes(){const tags=(state.bootstrap?.mapEventTags||[]);const extra=tags.map(t=>[t.gedcom_tag,t.label]);const all=[['all','Tous les événements'],...extra];return all;}function orderedMapTypes(includeHidden=false){const dynamic=dynamicMapTypes();const keys=dynamic.map(i=>i[0]);const order=savedOrder('genealogie-map-order',keys);const hidden=mapHiddenKeys();return order.filter(value=>includeHidden||value==='all'||!hidden.includes(value)).map((value,index)=>{const item=dynamic.find(r=>r[0]===value)||[value,value];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
-    const defaultMaintenanceTabs=[['design','01','Apparence'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire / tuto / FAQ'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre'],['raccourcis','17','Raccourcis clavier'],['journeys','18','Voyages impossibles'],['scan_inbox','19','Dossier « Scans » surveillé'],['sync','20','Travail à deux'],['ages','21','Âges et écarts'],['harmonize','22','Harmoniser les variantes'],['misplaced','23','Lieux mal placés'],['cousin_vault','24','Copie chez un cousin'],['block_editor','25','Éditeur de blocs'],['widget_editor','25b','Éditeur de widgets'],['htr','26','Reconnaissance d’écriture (HTR)'],['my_lists','27','Éditeur de listes'],['atelier','28','Atelier de recherche']];
+    const defaultMaintenanceTabs=[['design','01','Apparence'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire / tuto / FAQ'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre'],['raccourcis','17','Raccourcis clavier'],['journeys','18','Voyages impossibles'],['scan_inbox','19','Dossier « Scans » surveillé'],['sync','20','Travail à deux'],['ages','21','Âges et écarts'],['harmonize','22','Harmoniser les variantes'],['misplaced','23','Lieux mal placés'],['cousin_vault','24','Copie chez un cousin'],['block_editor','25','Éditeur de blocs'],['widget_editor','25b','Éditeur de widgets'],['stats_editor','25c','Éditeur de statistiques'],['tabs_editor','25d','Éditeur d’onglets'],['htr','26','Reconnaissance d’écriture (HTR)'],['my_lists','27','Éditeur de listes'],['atelier','28','Atelier de recherche']];
     function orderedMaintenanceTabs(){const order=savedOrder('genealogie-maintenance-order',defaultMaintenanceTabs.map(item=>item[0]));return order.map((value,index)=>{const item=defaultMaintenanceTabs.find(row=>row[0]===value);return [item[0],String(index+1).padStart(2,'0'),item[2]];});}
     function mapBackgroundValue(value){return ['offline','color','grid','dark','osmfr','light','minimal','roads','relief','cyclosm','wikimedia','satellite','ohm','esri_topo','esri_street','voyager','osmde','cassini','cassini_royal','etatmajor','nls_6inch','nls_natgrid','cartoweb','swisstopo','swisstopo_dufour','swisstopo_siegfried','ferraris','vandermaelen','popp','frickx','buurtwegen','ign_ortho_1950','ign_scan50_1950','ign_hr_ortho','ign_planv2','nls_25inch','nls_1inch','gsgs3906','london_1940s','usgs_topo','usgs_imagery','ign_es_mtn50','ign_es_pnoa','esri_ocean','esri_natgeo','esri_physical','esri_relief','nasa_modis','nasa_landsat_weld'].includes(value)?value:'bw';}
     function mapBackgroundSelectHtml(mapBg){
@@ -751,7 +751,14 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(!widget||!defaults.includes(widget.type))return null;
         return dashboardNewWidget(widget.type,widget);
     }
+    // ── Onglets à soi (Maintenance → Éditeur d'onglets) : une page de widgets comme le tableau de bord, ou un raccourci vers un écran ──
+    const CUSTOM_TAB_ID=/^ct_[a-z0-9]{4,24}$/;
+    function customTabs(){try{const v=JSON.parse(localStorage.getItem('genealogie-custom-tabs')||'[]');return Array.isArray(v)?v.filter(t=>t&&CUSTOM_TAB_ID.test(String(t.id))):[];}catch(_){return [];}}
+    function saveCustomTabs(list){try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(list));}catch(_){toast('Réglage impossible à enregistrer dans ce navigateur.','error');}applyMenuOrder();}
+    function currentCustomTab(){const id=state.dashboardBoard||'';return id?customTabs().find(t=>t.id===id&&t.kind!=='screen')||null:null;}
     function dashboardBlockSettings(){
+        const tab=currentCustomTab();
+        if(tab)return {widgets:(Array.isArray(tab.widgets)?tab.widgets:[]).map(dashboardNormalizeWidget).filter(Boolean)};
         const defaults=defaultDashboardBlocks.map(item=>item[0]);
         let stored={};
         try{stored=JSON.parse(localStorage.getItem('genealogie-dashboard-blocks')||'{}')||{};}catch(_){stored={};}
@@ -767,7 +774,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const widgets=legacyOrder.filter(key=>!hidden.includes(key)).map(key=>dashboardNewWidget(key,{id:`${key}-defaut`,width:stored.widths?.[key],limit:stored.limits?.[key]}));
         return {widgets};
     }
-    function saveDashboardBlockSettings(settings){localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))}));}
+    function saveDashboardBlockSettings(settings){
+        const tab=currentCustomTab();
+        if(tab){const list=customTabs();const i=list.findIndex(t=>t.id===tab.id);if(i>=0){list[i]={...list[i],widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))};saveCustomTabs(list);}return;}
+        localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))}));}
     function eventsFilterSettings(personId=0){const defaults={hiddenTypeIds:[],showCensus:false};let settings={...defaults};try{settings={...settings,...JSON.parse(localStorage.getItem('genealogie-events-filter')||'{}')};}catch(_){}if(personId){try{const ps=JSON.parse(localStorage.getItem(`genealogie-events-filter-${personId}`)||'{}');if(Object.keys(ps).length)settings={...settings,...ps};}catch(_){}}settings.hiddenTypeIds=(settings.hiddenTypeIds||[]).map(Number).filter(n=>n>0);settings.showCensus=!!settings.showCensus;return settings;}
     function saveEventsFilterSettings(settings,personId=0){const key=personId?`genealogie-events-filter-${personId}`:'genealogie-events-filter';localStorage.setItem(key,JSON.stringify({hiddenTypeIds:(settings.hiddenTypeIds||[]).map(Number).filter(n=>n>0),showCensus:!!settings.showCensus}));}
     // ── Chercher sur internet (bloc de fiche + widget) : chaque bouton ouvre la recherche du site dans le navigateur ──
@@ -1036,7 +1046,25 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         return includeHidden?cats:cats.filter(c=>!hidden.includes(c.id));
     }
 
-    function applyMenuOrder(){const nav=$('.main-nav');if(!nav)return;let visibleIndex=0;const hidden=menuHiddenKeys();orderedMenuKeys().forEach(key=>{const button=nav.querySelector(`[data-module="${key}"]`);if(!button)return;const isHidden=key!=='maintenance'&&hidden.includes(key);button.style.display=isHidden?'none':'';if(!isHidden){button.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');}nav.append(button);});}
+    function applyMenuOrder(){const nav=$('.main-nav');if(!nav)return;let visibleIndex=0;const hidden=menuHiddenKeys();
+        $$('.nav-custom-tab',nav).forEach(button=>button.remove());
+        // Onglets à soi : rangés juste après l'onglet choisi (« after »), sinon avant Maintenance
+        const tabs=customTabs().filter(t=>!t.hidden);const placed=new Set();
+        const customButton=t=>{const b=document.createElement('button');b.type='button';b.className='nav-item nav-custom-tab';b.dataset.module='dashboard';b.dataset.board=t.id;if(t.kind==='screen'){b.dataset.customScreen=String(t.target||'');delete b.dataset.module;}b.title=t.intro||t.name||'';b.innerHTML=`<span></span>${escapeHtml(`${t.icon?t.icon+' ':''}${t.name||'Mon onglet'}`)}`;b.classList.toggle('is-active',state.module==='dashboard'&&state.dashboardBoard===t.id);return b;};
+        const appendTabsAfter=key=>tabs.filter(t=>(t.after||'')===key&&!placed.has(t.id)).forEach(t=>{placed.add(t.id);const b=customButton(t);b.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');nav.append(b);});
+        orderedMenuKeys().forEach(key=>{const button=nav.querySelector(`[data-module="${key}"]:not(.nav-custom-tab)`);if(!button)return;if(key==='maintenance')appendTabsAfter('');const isHidden=key!=='maintenance'&&hidden.includes(key);button.style.display=isHidden?'none':'';if(!isHidden){button.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');}nav.append(button);if(!isHidden)appendTabsAfter(key);});
+        tabs.filter(t=>!placed.has(t.id)).forEach(t=>{const b=customButton(t);b.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');nav.insertBefore(b,nav.querySelector('[data-module="maintenance"]:not(.nav-custom-tab)'));});
+    }
+    /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
+    function openCustomScreen(target){
+        const [type,...rest]=String(target||'').split(':'),value=rest.join(':');
+        if(type==='module'&&modules[value]&&value!=='jeu')return setModule(value);
+        if(type==='list'){state.listType=value;return setModule('listes');}
+        if(type==='maint'){state.maintenanceTab=value;return setModule('maintenance');}
+        if(type==='graph'){state.graphMode=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
+        if(type==='stat'){state.graphMode='stats';state.graphStatsType=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
+        toast('Cet écran n’existe plus : modifie l’onglet dans Maintenance → Éditeur d’onglets.','error');
+    }
 
     async function api(action, params = {}, options = {}) {
         const url = new URL('api.php', location.href);
@@ -1472,14 +1500,19 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     function bindGlobalEvents() {
         $('.main-nav').addEventListener('click', event => {
+            const screen = event.target.closest('[data-custom-screen]');
+            if (screen) { openCustomScreen(screen.dataset.customScreen); return; }
             const button = event.target.closest('[data-module]');
-            if (button) setModule(button.dataset.module);
+            if (!button) return;
+            if (button.dataset.module === 'dashboard') state.dashboardBoard = button.dataset.board || '';
+            setModule(button.dataset.module);
         });
         $('#sidebar-toggle').addEventListener('click', () => { $('#app').classList.add('sidebar-collapsed'); persistUiState(); });
         $('#sidebar-reopen').addEventListener('click', () => { $('#app').classList.remove('sidebar-collapsed'); persistUiState(); });
         window.addEventListener('hashchange', () => {
             const route=routeFromHash(location.hash);
             if(route?.maintenanceTab)state.maintenanceTab=route.maintenanceTab;
+        if(route?.module==='dashboard')state.dashboardBoard=route.board||'';
             setModule(route?.module || state.module || 'dashboard', false);
         });
         $('#workspace').addEventListener('scroll',debounce(saveScrollPosition,120));
@@ -1507,6 +1540,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(state.module==='carte'&&module!=='carte'){hideMapTooltip();const surnameBox=document.getElementById('map-surname-suggestions');if(surnameBox)surnameBox.hidden=true;}
         if(state.hasRendered)saveScrollPosition();
         if (!modules[module]) module = 'personnes';
+        if(module!=='dashboard'||(state.dashboardBoard&&!currentCustomTab()))state.dashboardBoard='';
         if(module!=='listes')listController?.abort();
         state.module = module;
         const renderToken=++state.workspaceToken;
@@ -1514,9 +1548,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const hash=moduleHash(module);
         saveLastRoute(hash);
         updateBrowserRoute(hash,pushHash,module);
-        $$('.nav-item').forEach(button => button.classList.toggle('is-active', button.dataset.module === module));
-        $('#sidebar-index').textContent = modules[module][0];
-        $('#sidebar-title').textContent = modules[module][1];
+        $$('.nav-item').forEach(button => button.classList.toggle('is-active', button.dataset.module === module && (module !== 'dashboard' || (button.dataset.board || '') === (state.dashboardBoard || ''))));
+        const ownTab = module === 'dashboard' ? currentCustomTab() : null;
+        $('#sidebar-index').textContent = ownTab ? 'MON ONGLET' : modules[module][0];
+        $('#sidebar-title').textContent = ownTab ? `${ownTab.icon ? ownTab.icon + ' ' : ''}${ownTab.name || 'Mon onglet'}` : modules[module][1];
         $('#workspace').innerHTML = '<section class="loading-screen"><div class="loading-mark">VB</div><p>Préparation de la vue…</p></section>';
         renderSidebar();
         try {
@@ -1559,11 +1594,12 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const parts=raw.split('/').map(part=>part.trim()).filter(Boolean);
         const module=parts[0]||'';
         if(!modules[module])return null;
-        return {module,maintenanceTab:module==='maintenance'&&parts[1]?parts[1]:''};
+        return {module,maintenanceTab:module==='maintenance'&&parts[1]?parts[1]:'',board:module==='dashboard'&&CUSTOM_TAB_ID.test(parts[1]||'')?parts[1]:''};
     }
 
     function moduleHash(module=state.module){
         if(module==='maintenance')return `#maintenance/${encodeURIComponent(state.maintenanceTab||'issues')}`;
+        if(module==='dashboard'&&state.dashboardBoard)return `#dashboard/${encodeURIComponent(state.dashboardBoard)}`;
         return `#${module}`;
     }
 
@@ -1781,8 +1817,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         Object.keys(extDashboard).forEach(type=>{blockRenderers[type]=widget=>extDashboard[type].render(String(index++).padStart(2,'0'),widget,span(widget),extData[type]);});
         const dress=(widget,html)=>widget.cwDef&&window.LCNDA_EXT?.dressWidget?window.LCNDA_EXT.dressWidget(customDefs[widget.cwDef],html):html;
         const blocks=settings.widgets.map(widget=>blockRenderers[widget.type]?dashboardWidgetChrome(widget,dress(widget,blockRenderers[widget.type](widget))): '').join('');
-        $('#workspace').innerHTML=`<section class="page dashboard-page"><header class="page-header"><div><span class="eyebrow">TABLEAU DE BORD</span><h2>Vue d’ensemble</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p></div></header>
-        <div class="card-grid dashboard-grid">${blocks||empty('Aucun widget affiché. Ajoute-en depuis la colonne de gauche.')}</div></section>`;
+        const ownTab=currentCustomTab();
+        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}"><header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">⚙️ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>Vue d’ensemble</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p></div>`}</header>
+        <div class="card-grid dashboard-grid">${blocks||empty(ownTab?'Onglet vide : ajoute des widgets, tes widgets, tes listes ou tes statistiques depuis la colonne de gauche.':'Aucun widget affiché. Ajoute-en depuis la colonne de gauche.')}</div></section>`;
+        $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
         $$('[data-reroll-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const current=dashboardBlockSettings();const widget=current.widgets.find(item=>item.id===button.dataset.rerollDashboardWidget);if(widget){widget.config={...(widget.config||{}),randomSeed:Date.now()};saveDashboardBlockSettings(current);}await renderDashboard();}));
         $$('[data-edit-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();state.dashboardEditingWidget=state.dashboardEditingWidget===button.dataset.editDashboardWidget?'':button.dataset.editDashboardWidget;await renderDashboard();}));
         $$('[data-delete-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const id=button.dataset.deleteDashboardWidget;button.closest('.dashboard-widget')?.remove();const current=dashboardBlockSettings();current.widgets=current.widgets.filter(widget=>widget.id!==id);saveDashboardBlockSettings(current);state.dashboardEditingWidget='';toast('Widget supprimé du tableau de bord.');await renderDashboard();}));
@@ -3531,10 +3569,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         content.innerHTML = `<div class="segmented"><button data-graph-tab="types" class="${state.graphTab==='types'?'is-active':''}">Diagrammes</button><button data-graph-tab="saved" class="${state.graphTab==='saved'?'is-active':''}">Enregistrés</button></div>
             ${state.graphTab === 'types' ? `<div class="side-menu">
                 ${orderedGraphDiagramItems().map(([key,num,label])=>sideButton(key,num,label,state.graphMode)).join('')}
-            </div>${state.graphMode==='kinship'?kinshipSearchPanel():''}<div class="section-label">Statistiques</div><div class="side-menu">${orderedGraphStatsItems().map(([key,num,label],index)=>statsSideButton([key,label],index)).join('')}</div>` : `<div class="saved-list">${views.map(view => savedView(view)).join('') || empty('Aucune vue enregistrée.')}</div>`}`;
+            </div>${state.graphMode==='kinship'?kinshipSearchPanel():''}<div class="section-label">Statistiques</div><div class="side-menu">${orderedGraphStatsItems().map(([key,num,label],index)=>statsSideButton([key,label],index)).join('')}</div>${customStatsSideHtml()}` : `<div class="saved-list">${views.map(view => savedView(view)).join('') || empty('Aucune vue enregistrée.')}</div>`}`;
         footer.innerHTML = '<div style="display:flex;flex-direction:column;gap:8px"><button class="button small" id="save-current-graph">+ Enregistrer la vue</button><button class="button small secondary" id="open-stats-colors">🎨 Couleurs des stats</button></div>';
         content.addEventListener('click', async event => {
             const tab=event.target.closest('[data-graph-tab]');if(tab){state.graphTab=tab.dataset.graphTab;renderSidebar();return;}
+            if(event.target.closest('[data-open-stats-editor]')){state.maintenanceTab='stats_editor';setModule('maintenance');return;}
             const mode=event.target.closest('[data-side-value]');if(mode){const value=mode.dataset.sideValue;if(value.startsWith('stats:')){state.graphMode='stats';state.graphStatsType=value.slice(6);state.graphStatsFrozenColors=null;}else{state.graphMode=value;state.graphStatsFrozenColors=null;}await renderGraph();renderSidebar();return;}
             const saved=event.target.closest('[data-view-id]');if(saved&&!event.target.closest('.saved-delete')&&!event.target.closest('.saved-grip')&&!event.target.closest('.saved-edit')){const view=views.find(v=>Number(v.id)===Number(saved.dataset.viewId));if(view){state.graphMode=view.config.mode||'ancestors';state.graphDepth=Number(view.config.depth||4);state.graphStatsType=view.config.statsType||state.graphStatsType;state.graphStatsYearFrom=view.config.graphStatsYearFrom??'';state.graphStatsYearTo=view.config.graphStatsYearTo??'';if(view.config.kinship)state.graphKinship={...state.graphKinship,...view.config.kinship};// Restore frozen colors if saved with this view
             state.graphStatsFrozenColors=Array.isArray(view.config.statsColors)&&view.config.statsColors.length?view.config.statsColors:null;state.graphStatsLimit=view.config.graphStatsLimit??'';state.graphStatsGender=view.config.graphStatsGender??'';if(view.config.placeMonograph)state.graphPlaceMonograph={...state.graphPlaceMonograph,...view.config.placeMonograph};if(view.config.personId)state.currentPersonId=Number(view.config.personId);
@@ -3600,7 +3639,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     function sideButton(value,index,label,current){return `<button class="side-menu-item ${value===current?'is-active':''}" data-side-value="${value}"><span class="side-number">${index}</span>${label}</button>`;}
     function graphStatsOptions(){return defaultGraphStatsItems;}
-    function statsSideButton([type,label],index){return `<button class="side-menu-item ${state.graphMode==='stats'&&state.graphStatsType===type?'is-active':''}" data-side-value="stats:${type}"><span class="side-number">S${index+1}</span>${label}</button>`;}
+    /** Graphiques → « Mes statistiques » : celles faites dans Maintenance → Éditeur de statistiques */
+function customStatsSideHtml(){const items=window.LCNDA_EXT?.customStatItems?.()||[];return `<div class="section-label">Mes statistiques</div><div class="side-menu">${items.map(([key,label],index)=>`<button class="side-menu-item ${state.graphMode==='stats'&&state.graphStatsType===key?'is-active':''}" data-side-value="stats:${escapeHtml(key)}"><span class="side-number">M${index+1}</span>${escapeHtml(label)}</button>`).join('')}<button class="side-menu-item" type="button" data-open-stats-editor><span class="side-number">+</span>Créer une statistique</button></div>`;}
+function statsSideButton([type,label],index){return `<button class="side-menu-item ${state.graphMode==='stats'&&state.graphStatsType===type?'is-active':''}" data-side-value="stats:${type}"><span class="side-number">S${index+1}</span>${label}</button>`;}
     const STATS_MODES = new Set(['stats','distribution']);
     const DIAGRAM_MODES = new Set(['ancestors','descendants','hourglass','fan','kinship','social','occupations','migrations','household','square','circular','symmetric','fractal','genogram']);
     function savedViewPersonLabel(view){
@@ -3945,6 +3986,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     async function renderGraphStats(token=++state.workspaceToken) {
         if(state.graphStatsType==='saint_names')return renderSaintStats(token);
+        if(String(state.graphStatsType).startsWith('cw_')&&window.LCNDA_EXT?.renderCustomStat)return window.LCNDA_EXT.renderCustomStat(token,state.graphStatsType);
         if(window.LCNDA_EXT?.graphStats?.[state.graphStatsType])return window.LCNDA_EXT.graphStats[state.graphStatsType](token);
         const activeId=document.activeElement&&['stats-year-from','stats-year-to','stats-limit'].includes(document.activeElement.id)?document.activeElement.id:null;
         const activeSelStart=activeId?document.activeElement.selectionStart:null;
@@ -6784,7 +6826,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         paint();input.focus();
     }
     // Numéros Sosa recalculés une fois par lancement (l'arbre a pu changer ; ajoute les numéros multiples)
-    setTimeout(()=>{const rootId=sosaRootId();if(rootId)recalculateSosaMap(rootId).catch(()=>{});},4000);
+    setTimeout(()=>{syncSosaWithStartPerson().catch(()=>{});},sosaRootId()===Number(state.bootstrap?.startPersonId)?4000:300);
     // Boutons « Gérer les objets », « Tout voir »… : ouvrent la liste correspondante
     document.addEventListener('click',event=>{const b=event.target.closest?.('[data-open-list]');if(!b)return;state.listType=b.dataset.openList;state.precisePlaceKey='';setModule('listes');});
     // Commandes du menu de l'application de bureau (Fichier → Recherche rapide ; clic sur une notification de rappel)
@@ -7308,7 +7350,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     setTimeout(publishShortcutsToMenu,1500);
     /** Ce qu'il faut pour rouvrir le même écran ailleurs (panneau à côté, fenêtre détachée). */
     function viewSnapshot(){
-        return {module:state.module,currentPersonId:Number(state.currentPersonId)||0,currentBattueId:Number(state.currentBattueId)||0,currentInvestigationId:Number(state.currentInvestigationId)||0,
+        return {module:state.module,dashboardBoard:state.dashboardBoard||'',currentPersonId:Number(state.currentPersonId)||0,currentBattueId:Number(state.currentBattueId)||0,currentInvestigationId:Number(state.currentInvestigationId)||0,
             investigationFolderId:Number(state.investigationFolderId)||0,enquetesTab:state.enquetesTab||'',maintenanceTab:state.maintenanceTab||'',graphMode:state.graphMode||'',listType:state.listType||'',
             researchKind:state.researchKind||'',graphPlaceMonograph:state.graphPlaceMonograph||null,
             // Atelier de recherche : le projet, le dossier ou la vue, l'élément choisi ; une liste à soi (et sa fiche ouverte)
@@ -7317,6 +7359,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     }
     function applyViewSnapshot(view){
         if(!view||typeof view!=='object')return;
+        state.dashboardBoard=view.module==='dashboard'&&CUSTOM_TAB_ID.test(String(view.dashboardBoard||''))?view.dashboardBoard:'';
         ['currentPersonId','currentBattueId','currentInvestigationId','investigationFolderId','enquetesTab','maintenanceTab','graphMode','listType','researchKind'].forEach(key=>{if(view[key]!==undefined&&view[key]!==''&&view[key]!==null)state[key]=view[key];});
         if(view.graphPlaceMonograph&&typeof view.graphPlaceMonograph==='object')state.graphPlaceMonograph={...state.graphPlaceMonograph,...view.graphPlaceMonograph};
         if(!view.currentBattueId)state.currentBattueId=0;if(!view.currentInvestigationId)state.currentInvestigationId=0;
@@ -7548,9 +7591,41 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     async function renderSaintStats(token){
         const data=await api('saint_stats');if(token!==state.workspaceToken||state.module!=='graphiques')return;
         const bar=v=>`<span class="saint-bar"><span style="width:${Math.min(100,v.percent*3)}%"></span></span>`;
-        const table=(rows,first)=>`<table class="data-table"><thead><tr><th>${first}</th><th>Naissances datées</th><th>Prénom du saint du jour</th><th>%</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td>${escapeHtml(r.label)}</td><td>${r.total}</td><td>${r.matched}</td><td>${String(r.percent).replace('.',',')} %</td><td>${bar(r)}</td></tr>`).join('')}</tbody></table>`;
+        const table=(rows,first,key)=>`<table class="data-table saint-stats-table"><thead><tr><th>${first}</th><th>Naissances datées</th><th>Prénom du saint du jour</th><th>%</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td><button type="button" class="link-button" data-saint-filter="${key}" data-saint-value="${escapeHtml(r.label)}" title="Voir les personnes">${escapeHtml(r.label)}</button></td><td>${r.total}</td><td>${r.matched}</td><td>${String(r.percent).replace('.',',')} %</td><td>${bar(r)}</td></tr>`).join('')}</tbody></table>`;
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">STATISTIQUES</span><h2>Prénom et saint du jour</h2><p>Part des personnes qui portent le prénom du saint fêté le jour de leur naissance, de leur baptême, ou le lendemain de leur naissance. ${data.matched} sur ${data.total} personnes dont le jour de naissance ou de baptême est connu (${data.total?String(Math.round(1000*data.matched/data.total)/10).replace('.',','):0} %). Calendrier des almanachs français : il a varié selon les époques et les diocèses.</p></div></header>
-            <div class="saint-stats-grid"><section class="maintenance-panel"><h3>Par époque</h3>${table(data.periods,'Époque')}</section><section class="maintenance-panel"><h3>Par famille (au moins 8 naissances datées)</h3>${data.families.length?table(data.families,'Famille'):empty('Pas assez de naissances datées par famille.')}</section></div></section>`;
+            <div class="saint-stats-grid"><section class="maintenance-panel"><h3>Par époque</h3>${table(data.periods,'Époque','period')}</section><section class="maintenance-panel"><h3>Par famille (au moins 8 naissances datées)</h3>${data.families.length?table(data.families,'Famille','family'):empty('Pas assez de naissances datées par famille.')}</section></div>
+            <section class="maintenance-panel saint-people-panel"><h3>Les personnes concernées</h3>
+                <div class="saint-people-tools"><label>Montrer <select data-saint-show><option value="matched">qui portent le prénom du saint</option><option value="other">qui ne le portent pas</option><option value="all">toutes</option></select></label>
+                <label>Trier <select data-saint-sort><option value="date_asc">par date (la plus ancienne d’abord)</option><option value="date_desc">par date (la plus récente d’abord)</option><option value="day">par jour de l’année (1er janvier → 31 décembre)</option><option value="name">par nom</option><option value="saint">par saint</option></select></label>
+                <input type="search" data-saint-q placeholder="Filtrer : prénom, nom, saint…"><span class="saint-people-scope" data-saint-scope hidden></span></div>
+                <div data-saint-people></div></section></section>`;
+        const people=data.people||[];
+        const ui={show:'matched',sort:'date_asc',q:'',scope:null,limit:200};
+        const kindLabel=(r)=>{const f=r.gender==='female';return r.kind==='baptism'?(f?'baptisée':'baptisé'):r.kind==='next'?(f?'née la veille':'né la veille'):(f?'née':'né');};
+        const fold=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+        const paint=()=>{
+            const q=fold(ui.q);
+            let rows=people.filter(r=>ui.show==='all'||(ui.show==='matched'?!!r.saint:!r.saint));
+            if(ui.scope)rows=rows.filter(r=>String(r[ui.scope.key]||'')===ui.scope.value);
+            if(q)rows=rows.filter(r=>fold(`${r.first_name} ${r.last_name} ${r.saint||''} ${r.date_text}`).includes(q));
+            const cmp={date_asc:(a,b)=>(a.year||9999)-(b.year||9999)||a.day.localeCompare(b.day),date_desc:(a,b)=>(b.year||0)-(a.year||0)||b.day.localeCompare(a.day),day:(a,b)=>a.day.localeCompare(b.day)||(a.year||0)-(b.year||0),
+                name:(a,b)=>`${a.last_name} ${a.first_name}`.localeCompare(`${b.last_name} ${b.first_name}`,'fr',{sensitivity:'base'}),saint:(a,b)=>String(a.saint||'~').localeCompare(String(b.saint||'~'),'fr')||a.day.localeCompare(b.day)}[ui.sort];
+            rows=[...rows].sort(cmp);
+            const scopeBox=$('[data-saint-scope]');scopeBox.hidden=!ui.scope;
+            scopeBox.innerHTML=ui.scope?`${ui.scope.key==='period'?'Époque':'Famille'} : <strong>${escapeHtml(ui.scope.value)}</strong> <button type="button" class="link-button" data-saint-unscope>retirer</button>`:'';
+            $('[data-saint-people]').innerHTML=rows.length?`<p class="muted">${rows.length.toLocaleString('fr-FR')} personne${rows.length>1?'s':''}</p><table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Jour</th><th>Événement</th><th>Saint du jour</th></tr></thead><tbody>${rows.slice(0,ui.limit).map(r=>`<tr><td><button type="button" class="link-button" data-open-person="${Number(r.id)}">${escapeHtml(`${r.first_name} ${r.last_name}`.trim())}</button></td><td>${escapeHtml(r.date_text||'')}</td><td>${escapeHtml(r.day_label||'')}</td><td>${escapeHtml(kindLabel(r))}</td><td>${r.saint?escapeHtml(r.saint_label||r.saint):'<span class="muted">—</span>'}</td></tr>`).join('')}</tbody></table>${rows.length>ui.limit?`<button type="button" class="button small secondary" data-saint-more>Afficher ${Math.min(200,rows.length-ui.limit)} de plus (${rows.length-ui.limit} restantes)</button>`:''}`:empty('Aucune personne pour ce choix.');
+            bindTableLinks();
+        };
+        $('[data-saint-show]').addEventListener('change',e=>{ui.show=e.target.value;ui.limit=200;paint();});
+        $('[data-saint-sort]').addEventListener('change',e=>{ui.sort=e.target.value;paint();});
+        $('[data-saint-q]').addEventListener('input',debounce(e=>{ui.q=e.target.value;ui.limit=200;paint();},150));
+        $('#workspace > section').addEventListener('click',e=>{
+            const f=e.target.closest('[data-saint-filter]');
+            if(f){ui.scope={key:f.dataset.saintFilter,value:f.dataset.saintValue};ui.limit=200;paint();$('.saint-people-panel')?.scrollIntoView({behavior:'smooth',block:'start'});return;}
+            if(e.target.closest('[data-saint-unscope]')){ui.scope=null;paint();return;}
+            if(e.target.closest('[data-saint-more]')){ui.limit+=200;paint();}
+        });
+        paint();
     }
     /** Maintenance → Entretien : vérifier les liens web enregistrés */
     async function renderUpkeep(token=++state.workspaceToken){
@@ -10093,17 +10168,37 @@ ${backupSectionHtml()}
         if(!rootId){localStorage.removeItem('genealogie-sosa-root');localStorage.removeItem('genealogie-sosa-map');localStorage.removeItem('genealogie-sosa-multi');return {root_id:0,count:0};}
         const data=await api('sosa_map',{root_id:rootId});
         if(!data.root_id){localStorage.removeItem('genealogie-sosa-root');localStorage.removeItem('genealogie-sosa-map');return {root_id:0,count:0};}
-        localStorage.setItem('genealogie-sosa-root',String(data.root_id));
+        localStorage.setItem('genealogie-sosa-root',String(data.root_id));localStorage.removeItem('genealogie-sosa-off');
         localStorage.setItem('genealogie-sosa-map',JSON.stringify(data.map||{}));
         localStorage.setItem('genealogie-sosa-multi',JSON.stringify(data.multi||{}));
+        if(data.root_name)localStorage.setItem('genealogie-sosa-root-name',data.root_name);
         return {root_id:data.root_id,count:Object.keys(data.map||{}).length};
+    }
+    /** Le Sosa n°1 et le de cujus (personne de départ de la base) sont la même personne : on enregistre le choix dans la base. */
+    async function saveStartPerson(personId){
+        personId=Number(personId)||0;if(!personId||document.body.classList.contains('is-kiosk'))return;
+        try{await api('set_start_person',{}, {method:'POST',body:{person_id:personId}});if(state.bootstrap){state.bootstrap.startPersonId=personId;state.bootstrap.startPersonFlagged=true;}}catch(_){}
+    }
+    /** Au lancement (et après un changement de base) : les numéros Sosa gardés dans le navigateur doivent partir du de cujus de la base ouverte. */
+    async function syncSosaWithStartPerson(){
+        const boot=state.bootstrap||{},start=Number(boot.startPersonId)||0,root=sosaRootId();
+        if(!start||localStorage.getItem('genealogie-sosa-off')==='1')return;
+        // Racine venue des réglages de CETTE base (et non d'une autre base ouverte avant dans ce navigateur)
+        const rootFromThisBase=Number(window.LCNDA_SETTINGS?.['genealogie-sosa-root'])===root;
+        if(!boot.startPersonFlagged&&root&&root!==start&&rootFromThisBase){
+            // Ancienne installation : la racine choisie dans les réglages devient le de cujus de la base
+            const result=await recalculateSosaMap(root);
+            if(result.root_id){await saveStartPerson(result.root_id);return;}
+        }
+        const result=await recalculateSosaMap(start);
+        if(result.root_id&&root!==result.root_id&&state.module==='personnes'&&Number(state.currentPersonId)===result.root_id)selectPerson(result.root_id,false);
     }
     function sosaInlineControlsHtml(){
         const rootId=sosaRootId();
         const map=sosaMap();
         const count=Object.keys(map).length;
         const rootName=rootId?(localStorage.getItem('genealogie-sosa-root-name')||`Personne #${rootId}`):'';
-        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation Sosa</strong><span>${rootId?`Sosa n°1 : ${escapeHtml(rootName)} · ${count} personne(s) numérotée(s)`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box"><input type="text" id="sosa-root-search" placeholder="Rechercher une personne…" value="${escapeHtml(rootId?rootName:'')}" autocomplete="off"><input type="hidden" id="sosa-root-input" value="${rootId||''}"><div class="relation-results sosa-results" id="sosa-root-results" hidden></div></div><button class="button small" type="button" id="sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="sosa-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="sosa-clear">Retirer</button>':''}</div></div>`;
+        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation Sosa</strong><span>${rootId?`Sosa n°1 (de cujus) : ${escapeHtml(rootName)} · ${count} personne(s) numérotée(s)`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box"><input type="text" id="sosa-root-search" placeholder="Rechercher une personne…" value="${escapeHtml(rootId?rootName:'')}" autocomplete="off"><input type="hidden" id="sosa-root-input" value="${rootId||''}"><div class="relation-results sosa-results" id="sosa-root-results" hidden></div></div><button class="button small" type="button" id="sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="sosa-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="sosa-clear">Retirer</button>':''}</div></div>`;
     }
     function dabovilleRootId(){return Number(localStorage.getItem('genealogie-daboville-root'))||0;}
     function dabovilleMap(){try{return JSON.parse(localStorage.getItem('genealogie-daboville-map')||'{}');}catch(_){return {};}}
@@ -10265,7 +10360,7 @@ ${backupSectionHtml()}
             if(sosaPendingId&&sosaPendingId!==sosaRootId()){
                 try{
                     const result=await recalculateSosaMap(sosaPendingId);
-                    if(result.root_id){localStorage.setItem('genealogie-sosa-root-name',$('#sosa-root-search')?.value||`Personne #${sosaPendingId}`);}
+                    if(result.root_id){await saveStartPerson(result.root_id);}
                 }catch(error){toast(error.message,'error');}
             }
             const dabovilleInput=$('#daboville-root-input');
@@ -10484,7 +10579,7 @@ ${backupSectionHtml()}
             try{
                 const result=await recalculateSosaMap(rootId);
                 if(!result.root_id){toast('Personne introuvable.','error');return;}
-                localStorage.setItem('genealogie-sosa-root-name',$('#sosa-root-search')?.value||`Personne #${rootId}`);
+                await saveStartPerson(result.root_id);
                 toast(`Numérotation Sosa recalculée : ${result.count} personne(s).`);
                 renderDesignTools();
                 if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);
@@ -10492,7 +10587,7 @@ ${backupSectionHtml()}
         });
         $('#sosa-clear')?.addEventListener('click',async()=>{
             await recalculateSosaMap(0);
-            localStorage.removeItem('genealogie-sosa-root-name');
+            localStorage.removeItem('genealogie-sosa-root-name');localStorage.setItem('genealogie-sosa-off','1');
             toast('Numérotation Sosa retirée.');
             renderDesignTools();
             if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);
@@ -12974,11 +13069,11 @@ ${backupSectionHtml()}
             const isStats=config.mode==='stats'||config.mode==='distribution';
             if(isStats){
                 const current=Array.isArray(config.statsColors)&&config.statsColors.length?config.statsColors:getStatsColors();
-                colorsEl.innerHTML=`<hr style="border:none;border-top:1px solid var(--line);margin:1rem 20px 0"><div style="padding:0 20px 4px"><span class="eyebrow">PALETTE DES STATISTIQUES</span><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 10px;margin-top:10px">${Array.from({length:40},(_,i)=>`<label style="display:flex;align-items:center;gap:4px;font-size:.78em"><span style="width:16px;text-align:right;color:var(--muted);flex-shrink:0">${i+1}</span><input type="color" name="vc_stats_${i}" value="${escapeHtml(current[i]||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length])}" style="width:32px;height:26px;padding:1px 2px;border:2px solid var(--line);border-radius:3px;cursor:pointer;flex-shrink:0"></label>`).join('')}</div></div>`;
+                colorsEl.innerHTML=`<hr style="border:none;border-top:1px solid var(--line-color);margin:1rem 20px 0"><div style="padding:0 20px 4px"><span class="eyebrow">PALETTE DES STATISTIQUES</span><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px 10px;margin-top:10px">${Array.from({length:40},(_,i)=>`<label style="display:flex;align-items:center;gap:4px;font-size:.78em"><span style="width:16px;text-align:right;color:var(--muted);flex-shrink:0">${i+1}</span><input type="color" name="vc_stats_${i}" value="${escapeHtml(current[i]||DEFAULT_STATS_COLORS[i%DEFAULT_STATS_COLORS.length])}" style="width:32px;height:26px;padding:1px 2px;border:2px solid var(--line-color);border-radius:3px;cursor:pointer;flex-shrink:0"></label>`).join('')}</div></div>`;
                 dialog.classList.add('has-colors');
             }else{
                 const gc=config.genderColors||getGenderColors();
-                colorsEl.innerHTML=`<hr style="border:none;border-top:1px solid var(--line);margin:1rem 20px 0"><div style="padding:0 20px 4px"><span class="eyebrow">COULEURS DES FICHES</span><div style="display:grid;gap:8px;margin-top:10px"><div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:8px;align-items:center"><span></span><span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Fond</span><span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Texte</span></div>${['male','female','unknown'].map((key,i)=>{const label=['Hommes','Femmes','Sexe inconnu'][i];return `<div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:8px;align-items:center"><strong style="font-size:.84em">${label}</strong><input type="color" name="vc_gender_${key}_bg" value="${escapeHtml(gc[key]?.bg||DEFAULT_GENDER_COLORS[key].bg)}" style="width:100%;height:30px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer"><input type="color" name="vc_gender_${key}_text" value="${escapeHtml(gc[key]?.text||DEFAULT_GENDER_COLORS[key].text)}" style="width:100%;height:30px;padding:1px 2px;border:2px solid var(--line);border-radius:4px;cursor:pointer"></div>`;}).join('')}</div></div>`;
+                colorsEl.innerHTML=`<hr style="border:none;border-top:1px solid var(--line-color);margin:1rem 20px 0"><div style="padding:0 20px 4px"><span class="eyebrow">COULEURS DES FICHES</span><div style="display:grid;gap:8px;margin-top:10px"><div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:8px;align-items:center"><span></span><span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Fond</span><span style="font-size:.78em;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Texte</span></div>${['male','female','unknown'].map((key,i)=>{const label=['Hommes','Femmes','Sexe inconnu'][i];return `<div style="display:grid;grid-template-columns:110px 1fr 1fr;gap:8px;align-items:center"><strong style="font-size:.84em">${label}</strong><input type="color" name="vc_gender_${key}_bg" value="${escapeHtml(gc[key]?.bg||DEFAULT_GENDER_COLORS[key].bg)}" style="width:100%;height:30px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer"><input type="color" name="vc_gender_${key}_text" value="${escapeHtml(gc[key]?.text||DEFAULT_GENDER_COLORS[key].text)}" style="width:100%;height:30px;padding:1px 2px;border:2px solid var(--line-color);border-radius:4px;cursor:pointer"></div>`;}).join('')}</div></div>`;
                 dialog.classList.add('has-colors');
             }
         }else{
@@ -13092,7 +13187,7 @@ ${backupSectionHtml()}
     }
 
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
-    window.LCNDA_APP={dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

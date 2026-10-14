@@ -18,6 +18,15 @@ function set_person_bookmark(PDO $pdo, array $data): array
     return ['id' => $id, 'is_bookmarked' => $on];
 }
 
+/** Personne de départ (de cujus) = Sosa n°1 : une seule à la fois, enregistrée dans la base (et non plus seulement dans le navigateur). */
+function set_start_person(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['person_id'] ?? $data['id'] ?? 0);
+    if (!$id || !record_exists($pdo, 'persons', $id)) { throw new RuntimeException('Personne introuvable'); }
+    $pdo->prepare('UPDATE persons SET is_start=CASE WHEN id=? THEN 1 ELSE 0 END WHERE is_start=1 OR id=?')->execute([$id, $id]);
+    return ['id' => $id, 'is_start' => 1];
+}
+
 /** Colonnes d'une ligne qui comptent pour savoir si elle a changé (les dates de mise à jour n'en font pas partie). */
 function undo_comparable(array $row): array
 {

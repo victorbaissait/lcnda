@@ -28,7 +28,7 @@ if ($zip->open($zipPath, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
 }
 
 $root = realpath(__DIR__);
-$excludedDirectories = ['.git', '.agents', '.codex', '.openai', 'data', 'media', 'node_modules'];
+$excludedDirectories = ['.git', '.agents', '.codex', '.openai', 'media', 'node_modules', 'dist', 'backups'];
 $excludedFiles = ['.DS_Store', '.env', '.env.local'];
 $iterator = new RecursiveIteratorIterator(
     new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS),
@@ -41,6 +41,12 @@ foreach ($iterator as $file) {
     $relative = ltrim(str_replace('\\', '/', substr($path, strlen($root))), '/');
     $parts = explode('/', $relative);
     if (array_intersect($parts, $excludedDirectories) || in_array(basename($relative), $excludedFiles, true)) continue;
+    // data/ : seulement la structure de la base et les communes françaises (les autres pays se téléchargent à la demande),
+    // jamais les bases ni les sauvegardes
+    if ($parts[0] === 'data' && $relative !== 'data/schema.sql' && !preg_match('#^data/reference/(catalogue\.json|geo-(fr|frontieres)\.sqlite\.gz)$#', $relative)) continue;
+    // Dossiers et fichiers cachés (.env.production, .idea…) : jamais dans l'archive, sauf .htaccess qui protège l'installation Apache
+    $hidden = array_filter($parts, static fn($p) => str_starts_with($p, '.'));
+    if ($hidden && $relative !== '.htaccess') continue;
     $zip->addFile($path, 'LCNDA/' . $relative);
 }
 
