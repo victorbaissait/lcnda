@@ -1586,17 +1586,18 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 /* ── Tableau de bord : pages (en haut) et ensembles de widgets ── */
 .dash-pages{display:inline-grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(130px,auto);margin:.9rem 0 0;max-width:100%;overflow-x:auto}
 .dash-pages button{min-width:120px;white-space:nowrap}
-.dash-group{grid-column:1/-1;border-left:2px solid var(--ink);padding:0 0 .2rem .9rem;margin:.2rem 0 .4rem}
-.dash-group.depth-1{border-left-color:var(--blue)}
-.dash-group.depth-2,.dash-group.depth-3{border-left:1px solid var(--line-color)}
-.dash-group-head{display:flex;align-items:center;gap:.45rem;margin:0 0 .7rem}
+.dash-group{grid-column:1/-1;position:relative;border:2px solid var(--ink);padding:.8rem 1rem 1rem;margin:.3rem 0 .5rem 2.4rem;background:rgba(255,255,255,.55)}
+.dash-group .dash-group{margin-left:2.4rem;border-width:1px;border-color:#555}
+.dash-group .dash-group .dash-group{border-color:var(--line-color)}
+.dash-group-head{display:flex;align-items:center;gap:.45rem;min-height:30px;margin:0 0 .8rem}
 .dash-group-head h3{margin:0;font-size:1.25rem;letter-spacing:-.01em}
-.dash-group.depth-1 .dash-group-head h3{font-size:1.1rem}
-.dash-group.depth-2 .dash-group-head h3,.dash-group.depth-3 .dash-group-head h3{font-size:1rem}
-.dash-group-toggle{border:2px solid var(--ink);background:#fff;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;line-height:1;padding:0}
+.dash-group .dash-group .dash-group-head h3{font-size:1.08rem}
+.dash-group .dash-group .dash-group .dash-group-head h3{font-size:1rem}
+/* le bouton ouvrir / fermer : dehors, à gauche du cadre, à la hauteur du titre */
+.dash-group-toggle{position:absolute;left:calc(-2.4rem - 2px);top:.8rem;border:2px solid var(--ink);background:#fff;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;line-height:1;padding:0}
 .dash-group-toggle:hover{background:var(--blue);color:#fff}
-.dash-group.is-collapsed{padding-bottom:0}
-.dash-group.is-collapsed .dash-group-head{margin-bottom:.2rem}
+.dash-group.is-collapsed{padding-bottom:.8rem}
+.dash-group.is-collapsed .dash-group-head{margin-bottom:0}
 .dash-pages-editor{border:1px solid var(--line-color);padding:.7rem .9rem;margin:0 0 .8rem}
 .dash-pages-editor:empty{display:none}
 .dash-pages-editor h3{margin:0 0 .2rem;font-size:1rem}

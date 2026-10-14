@@ -49,6 +49,9 @@
     };
     const validTarget = t => /^(person|mylist):\d{1,9}$/.test(String(t || '')) || screenTargets().some(([, items]) => items.some(([v]) => v === t));
     const HEIGHTS = [['360', 'petit'], ['560', 'moyen'], ['800', 'grand'], ['1100', 'très grand']];
+    // Dans un écran déjà intégré (iframe), pas d'écran dedans : sinon une fiche qui contient sa propre fiche se répète sans fin
+    const NESTED = (() => { try { return window.self !== window.top; } catch (_) { return true; } })();
+    const nestedLink = (target, title) => `<p class="muted">📺 ${esc(title)} <button type="button" class="link-button" data-ct-open-screen="${esc(target)}">↗ Ouvrir en grand</button></p>`;
     const screenUrl = c => `index.php?view=${encodeURIComponent(JSON.stringify({module: 'dashboard', screen: c.target, sidebar: !!c.sidebar}))}`;
 
     /* ─── Les pièces propres aux onglets : un écran de l'app, un texte libre (aussi au tableau de bord) ─── */
@@ -57,7 +60,7 @@
     ext.dashboard.app_screen = {render: (index, widget, span) => {
         const c = {target: 'module:carte', height: 560, ...(widget.config || {})};
         const title = c.title || (String(c.target).startsWith('person:') ? (c.personName || 'Fiche d’une personne') : targetLabel(c.target));
-        const body = validTarget(c.target) ? `<iframe class="h-ct-frame" src="${esc(screenUrl(c))}" title="${esc(title)}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(c.height) || 560))}px"></iframe>` : A().empty('Écran introuvable : choisis-le avec le crayon ✎.');
+        const body = NESTED && validTarget(c.target) ? nestedLink(c.target, title) : validTarget(c.target) ? `<iframe class="h-ct-frame" src="${esc(screenUrl(c))}" title="${esc(title)}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(c.height) || 560))}px"></iframe>` : A().empty('Écran introuvable : choisis-le avec le crayon ✎.');
         return A().card(index, title, '', body, span, `<button type="button" class="button small secondary" data-ct-open-screen="${esc(c.target)}" title="Ouvrir cet écran en grand">↗ En grand</button>`);
     }};
     const screenSelect = (cur, attr) => `<select ${attr}>${screenTargets().map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([v, l]) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}${myLists.length ? `<optgroup label="Mes listes">${myLists.map(l => `<option value="mylist:${Number(l.id)}" ${cur === 'mylist:' + l.id ? 'selected' : ''}>${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}<optgroup label="Une personne"><option value="person:" ${String(cur).startsWith('person:') ? 'selected' : ''}>Fiche d’une personne…</option></optgroup></select>`;
@@ -82,13 +85,15 @@
         read: ed => ({title: str(ed.querySelector('[data-ctn="title"]')?.value, 120), text: str(ed.querySelector('[data-ctn="text"]')?.value, 8000)}),
     };
     document.addEventListener('click', event => { const b = event.target.closest?.('[data-ct-open-screen]'); if (b) A().openCustomScreen(b.dataset.ctOpenScreen); });
+    // pour l'Éditeur de widgets (sorte « Écran de l'app ») et les blocs de fiche
+    ext.appScreen = {nested: NESTED, nestedLink, targets: () => screenTargets(), select: (cur, attr) => screenSelect(cur, attr), url: screenUrl, label: targetLabel, valid: validTarget, heights: HEIGHTS, loadLists: loadMyLists};
 
     /* ─── Modèles ─── */
     const sc = (target, width = 12, height = 560, extra = {}) => ({type: 'app_screen', width: String(width), config: {target, height, ...extra}});
     const note = (title, text, width = 6) => ({type: 'tab_note', width: String(width), config: {title, text}});
     const TEMPLATES = [
-        {name: 'Mon bureau de recherche', icon: '🗂️', intro: 'Les actes à chercher, mes rappels et mes enquêtes, sans changer d’onglet.', widgets: [w('research_suggestions', 6), w('reminders', 6), sc('module:enquetes', 12, 800, {sidebar: true}), sc('list:courriers', 12, 560)]},
-        {name: 'Mon village', icon: '🏘️', intro: 'La fiche du village, ses recensements et la carte.', widgets: [note('Le village', 'Ce que je sais, ce que je cherche, les archives à voir.', 12), sc('list:villages', 12, 1100, {sidebar: true}), sc('list:census_households', 12, 800)]},
+        {name: 'Mon bureau de recherche', icon: '🗂️', intro: 'Les actes à chercher, mes rappels et mes enquêtes, sans changer d’onglet.', widgets: [w('research_suggestions', 6), w('reminders', 6), sc('module:enquetes', 12, 800), sc('list:courriers', 12, 560)]},
+        {name: 'Mon village', icon: '🏘️', intro: 'La fiche du village, ses recensements et la carte.', widgets: [note('Le village', 'Ce que je sais, ce que je cherche, les archives à voir.', 12), sc('list:villages', 12, 1100), sc('list:census_households', 12, 800)]},
         {name: 'Arbre et carte', icon: '🌳', intro: 'L’arbre des ascendants et la carte côte à côte.', widgets: [sc('graph:ancestors', 6, 800), sc('module:carte', 6, 800)]},
         {name: 'Ma recherche du jour', icon: '🔎', intro: 'Ce qu’il reste à faire, ce qu’il faut relire, les ancêtres qui manquent.', widgets: [w('daily_research', 6), w('reminders', 6), w('sosa_missing_near', 6), w('reread_items', 6), w('sources_to_check', 6), w('session_goal', 6)]},
         {name: 'Ma lignée', icon: '🌳', intro: 'L’avancement de mon arbre Sosa et la carte de mes ancêtres.', widgets: [w('sosa_progress', 6), w('sosa_missing_near', 6), w('lineage_widget', 12), w('map_overview', 12)]},
@@ -161,7 +166,7 @@
             onOpen: dlg => {
                 const go = t => { dlg.close(); editTab({id: newId(), icon: '🗂️', intro: '', after: '', kind: 'page', widgets: [], ...JSON.parse(JSON.stringify(t))}, false); };
                 dlg.querySelector('[data-ct-blank]').addEventListener('click', () => go({name: '', widgets: []}));
-                dlg.querySelectorAll('[data-ct-fromscreen]').forEach(b => b.addEventListener('click', () => go({name: targetLabel(b.dataset.ctFromscreen), icon: '📺', widgets: [sc(b.dataset.ctFromscreen, 12, 800, {sidebar: true})]})));
+                dlg.querySelectorAll('[data-ct-fromscreen]').forEach(b => b.addEventListener('click', () => go({name: targetLabel(b.dataset.ctFromscreen), icon: '📺', widgets: [sc(b.dataset.ctFromscreen, 12, 800)]})));
                 dlg.querySelector('[data-ct-screen]').addEventListener('click', () => go({name: '', kind: 'screen', icon: '🔗', target: 'list:villages'}));
                 dlg.querySelector('[data-ct-dashboard]').addEventListener('click', () => go({name: 'Mon tableau de bord', icon: '📊', widgets: board().widgets.map(x => ({type: x.type, width: x.width, limit: x.limit, config: x.config}))}));
                 dlg.querySelectorAll('[data-ct-mine]').forEach(b => b.addEventListener('click', () => { const t = mine.find(x => x.id === b.dataset.ctMine); go({...t, id: newId(), hidden: false, name: (t.name || 'Mon onglet') + ' (copie)'}); }));
@@ -226,7 +231,7 @@
             ws.querySelector('[data-ct-wadd]')?.addEventListener('change', e => {
                 const v = e.target.value; if (!v) return;
                 if (v === 'note') t.widgets.push(note('', '', 6));
-                else if (v.startsWith('screen|')) { const target = v.slice(7); t.widgets.push(sc(target, 12, 560, {sidebar: /^(module:enquetes|list:villages|module:carte)$/.test(target)})); }
+                else if (v.startsWith('screen|')) { const target = v.slice(7); t.widgets.push(sc(target, 12, 560, {sidebar: false})); }
                 else t.widgets.push(w(v, ext.customWidgetDefs?.()?.[v]?.width || '6'));
                 paint();
                 setTimeout(() => { const last = [...ws.querySelectorAll('.h-ct-widgets > li')].pop(); last?.scrollIntoView({block: 'center'}); last?.querySelector('input:not([type=hidden]),textarea')?.focus(); }, 0);

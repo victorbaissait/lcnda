@@ -311,7 +311,32 @@
         ['url', '🔗', 'Lien internet', 'Une page d’archives, un article…'], ['person', '👤', 'Personne liée', 'Une autre fiche de la base'], ['place', '📍', 'Lieu', 'Placé tout seul sur la carte'],
         ['media', '🖼️', 'Photos, vidéos, sons', 'Fichiers à ajouter'], ['person_info', 'ℹ️', 'Info tirée d’une fiche', 'Naissance, décès, métier… repris tout seuls'], ['map', '🗺️', 'Carte', 'Les lieux du bloc sur une carte'],
         ['journey', '🧭', 'Parcours jour par jour', 'Des étapes datées sur une frise et une carte (comme dans Résistants), écrites à la main ou reprises de la fiche'],
+        ['widget', '🧱', 'Widget', 'Un de tes widgets (chiffres, liste, graphique, texte…) ou un écran de l’app (la fiche de la personne, une liste, un diagramme…) dans le bloc'],
     ];
+    /** Champ « Widget » : l'écran ou le widget dessiné sur la fiche ; « person:self » = la personne de la fiche */
+    function widgetFieldHtml(f) {
+        const w = String(f.widget || ''), h = Math.max(240, Math.min(2000, Number(f.height) || 560));
+        if (w.startsWith('screen:') && ext.appScreen) {
+            let target = w.slice(7);
+            if (target === 'person:self') target = blockDetail?.person?.id ? 'person:' + blockDetail.person.id : '';
+            if (!target || !ext.appScreen.valid(target)) return '<p class="muted">Écran introuvable.</p>';
+            if (ext.appScreen.nested) return ext.appScreen.nestedLink(target, f.label);
+            return `<iframe class="h-ct-frame" src="${esc(ext.appScreen.url({target}))}" title="${esc(f.label)}" loading="lazy" style="height:${h}px"></iframe><button type="button" class="link-button" data-ct-open-screen="${esc(target)}">↗ Ouvrir en grand</button>`;
+        }
+        if (/^cw_/.test(w)) { setTimeout(() => document.querySelectorAll('[data-be-widget]:not([data-filled])').forEach(el => { el.dataset.filled = '1'; ext.renderCustomWidgetInto?.(el, el.dataset.beWidget); }), 0); return `<div class="card-grid h-be-widget" data-be-widget="${esc(w)}"></div>`; }
+        return '<p class="muted">Choisis le widget dans l’Éditeur de blocs.</p>';
+    }
+    function widgetChoiceHtml(f) {
+        const mine = Object.values(ext.customWidgetDefs?.() || {});
+        const screens = ext.appScreen ? ext.appScreen.targets() : [];
+        const opt = (v, l) => `<option value="${esc(v)}" ${f.widget === v ? 'selected' : ''}>${esc(l)}</option>`;
+        return `<label class="span-2">Quel widget ? <select data-be="widget"><option value="">choisir…</option>
+                <optgroup label="👤 Cette fiche">${opt('screen:person:self', 'La fiche de la personne (en petit)')}</optgroup>
+                ${mine.length ? `<optgroup label="✨ Mes widgets">${mine.map(d => opt(d.id, `${d.icon || '🧱'} ${d.name || 'Mon widget'}`)).join('')}</optgroup>` : ''}
+                ${screens.map(([g, items]) => `<optgroup label="📺 ${esc(g)}">${items.map(([v, l]) => opt('screen:' + v, l)).join('')}</optgroup>`).join('')}</select></label>
+            <label>Hauteur <small>(écran)</small><select data-be="height">${[['360', 'petit'], ['560', 'moyen'], ['800', 'grand'], ['1100', 'très grand']].map(([v, l]) => `<option value="${v}" ${String(f.height || 560) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+            <p class="span-2"><button type="button" class="button small secondary" data-be-newwidget>🧱 Créer un widget…</button> <small class="muted">avec tout ce que propose l’Éditeur de widgets (chiffres, liste, graphique, statistique, écran, texte, raccourcis, parcours) ; il apparaît ensuite dans ce menu.</small></p>`;
+    }
     const typeInfo = t => FIELD_TYPES.find(x => x[0] === t) || FIELD_TYPES[0];
     const INFOS = [['birth', 'Naissance (date et lieu)'], ['death', 'Décès (date et lieu)'], ['age', 'Âge au décès'], ['occupation', 'Métier'], ['parents', 'Parents'], ['spouses', 'Conjoints'], ['children', 'Nombre d’enfants'], ['birthplace', 'Lieu de naissance'], ['residence', 'Lieu de résidence']];
     const INFO_DEFAULT = 'Info tirée d’une fiche';
@@ -340,6 +365,7 @@
             case 'media': { const m = (e.media || []).filter(x => (x.role || '') === f.key); return m.length && ext.thumbs ? ext.thumbs(`cb-${e.id}-${f.key}`, m) : ''; }
             case 'number': return v === '' || v === null || v === undefined ? '' : esc(fmt(v, 2));
             case 'map': return '';
+            case 'widget': return widgetFieldHtml(f);
             case 'journey': return ext.journeyHtml ? ext.journeyHtml({jSource: f.jSource, steps: Array.isArray(v) ? v : [], jLayout: f.jLayout, jOrder: f.jOrder, jMap: f.jMap !== false, jDays: f.jDays !== false, jWithPlace: !!f.jWithPlace, jPerson: 1, color: '#0066cc'}, f.jSource === 'person' ? [{detail: blockDetail || {events: []}}] : []) : '';
             default: return esc(v ?? '');
         }
@@ -364,8 +390,11 @@
             const hasMap = b.fields.some(f => f.type === 'map');
             const pts = hasMap ? blockPoints(b, b.entries) : [];
             const selfInfos = b.fields.filter(f => f.type === 'person_info' && f.from === 'self' && b.self_info?.[f.key]).map(f => `<span class="collection-kind">${esc(infoLabel(f, b.fields))} : ${esc(b.self_info[f.key])}</span>`).join(' ');
-            const body = `${b.description ? `<p class="muted">${esc(b.description)}</p>` : ''}${b.entries.length ? '' : selfInfos ? `<p>${selfInfos}</p>` : ''}
-                ${b.entries.length ? `<div class="${pts.length ? 'h-voyage-layout' : ''}"><div class="h-cb-entries">${b.entries.map(e => entryHtml(b, e, editable)).join('')}</div>${pts.length && ext.miniMap ? `<div>${ext.miniMap(pts, pts.length > 1 ? [{coords: pts.map(x => [x.lat, x.lon]), color: '#555', dashed: true}] : [], {height: 300})}</div>` : ''}</div>` : empty('Rien de rempli pour l’instant.')}`;
+            // champs « Widget » : affichés sur la fiche, même quand rien n'est encore rempli dans le bloc
+            const widgetFields = b.entries.length ? '' : b.fields.filter(f => f.type === 'widget' && f.widget).map(f => `<div class="h-cb-widget"><span class="section-label">${esc(f.label)}</span>${widgetFieldHtml(f)}</div>`).join('');
+            const onlyWidgets = b.fields.length && b.fields.every(f => ['widget', 'map', 'person_info'].includes(f.type));
+            const body = `${b.description ? `<p class="muted">${esc(b.description)}</p>` : ''}${widgetFields}${b.entries.length ? '' : selfInfos ? `<p>${selfInfos}</p>` : ''}
+                ${b.entries.length ? `<div class="${pts.length ? 'h-voyage-layout' : ''}"><div class="h-cb-entries">${b.entries.map(e => entryHtml(b, e, editable)).join('')}</div>${pts.length && ext.miniMap ? `<div>${ext.miniMap(pts, pts.length > 1 ? [{coords: pts.map(x => [x.lat, x.lon]), color: '#555', dashed: true}] : [], {height: 300})}</div>` : ''}</div>` : onlyWidgets && widgetFields ? '' : empty('Rien de rempli pour l’instant.')}`;
             cards.push(card(index, `${b.icon || '🧩'} ${b.name}`, b.entries.length || '', body, 'span-12', editOnly(canAdd ? `<button type="button" class="button small secondary" data-h-cb-edit="0" data-h-cb-block="${b.id}">+ Remplir</button>` : '')));
         });
         if (waiting.length && editable) cards.push(editOnly(card(index, 'Mes blocs', '', `<p class="muted">Blocs créés dans Maintenance → Éditeur de blocs, affichés seulement une fois remplis :</p><div class="page-actions">${waiting.map(b => `<button type="button" class="button small secondary" data-h-cb-edit="0" data-h-cb-block="${b.id}">${esc(b.icon || '🧩')} ${esc(b.name)}</button>`).join('')}</div>`, 'span-6')));
@@ -393,6 +422,7 @@
             case 'place': return `<label>${esc(f.label)}${help}${ext.placeField ? ext.placeField(name, value?.text || '', value?.lat ?? '', value?.lon ?? '', 'Commune, adresse…') : `<input name="${name}" value="${esc(value?.text || '')}">`}</label>`;
             case 'person_info': return `<div class="h-cb-info"><strong>ℹ️ ${esc(infoLabel(f, allFields))}</strong> <small class="muted">(repris tout seul de la fiche${f.from !== 'self' ? ' choisie' : ''})</small>${value ? ` : ${esc(value)}` : ' : <span class="muted">rien de connu pour l’instant</span>'}</div>`;
             case 'map': return `<p class="muted span-2">🗺️ ${esc(f.label)} : la carte montrera les lieux de ce bloc.</p>`;
+            case 'widget': return `<p class="muted span-2">🧱 ${esc(f.label)} : le widget s’affiche tout seul sur la fiche.</p>`;
             case 'journey': return f.jSource === 'person' ? `<p class="muted span-2">🧭 ${esc(f.label)} : les étapes sont les événements datés de cette fiche, repris tout seuls.</p>`
                 : `<div class="span-2 h-be-journey" data-be-journey="${esc(f.key)}"><span class="section-label">🧭 ${esc(f.label)}</span>${help}<div class="h-jr-rows" data-j-rows>${(Array.isArray(value) ? value : []).map((x, i) => ext.journeyRowHtml?.(x, i) || '').join('')}</div><button type="button" class="button small secondary" data-j-add>+ Étape</button></div>`;
             case 'media': return '';
@@ -604,11 +634,12 @@
             <label>Ordre<select data-be="jOrder"><option value="date" ${f.jOrder !== 'manual' ? 'selected' : ''}>par date</option><option value="manual" ${f.jOrder === 'manual' ? 'selected' : ''}>dans l’ordre écrit</option></select></label>
             <label class="checkbox-line"><input type="checkbox" data-be="jMap" ${f.jMap !== false ? 'checked' : ''}> carte du trajet</label><label class="checkbox-line"><input type="checkbox" data-be="jDays" ${f.jDays !== false ? 'checked' : ''}> « Jour 1, Jour 9… » et durées</label>
             ${f.jSource === 'person' ? `<label class="checkbox-line"><input type="checkbox" data-be="jWithPlace" ${f.jWithPlace ? 'checked' : ''}> seulement les événements avec un lieu</label>` : ''}`;
+        if (f.type === 'widget') extra = widgetChoiceHtml(f);
         if (f.type === 'person_info') extra = `<p class="muted span-2">ℹ️ Rien à taper : l’info est reprise toute seule de la fiche, et se met à jour quand la fiche change.</p><label>Quelle info ?<select data-be="info">${INFOS.map(([k, l]) => `<option value="${k}" ${f.info === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>De quelle fiche ?<select data-be="from"><option value="self">La fiche où est le bloc</option>${personFields.map(p => `<option value="${esc(p.key)}" ${f.from === p.key ? 'selected' : ''}>La personne du champ « ${esc(p.label)} »</option>`).join('')}</select></label>`;
         const canRequire = ['text', 'longtext', 'date', 'select', 'person'].includes(f.type);
         return `<div class="h-be-field" data-be-i="${i}"><div class="h-be-field-head"><span class="h-be-type" title="${esc(typeName)}">${icon}</span><input data-be="label" value="${esc(f.label)}" placeholder="Nom du champ" aria-label="Nom du champ"><small class="muted">${esc(typeName)}</small>
             <span class="h-row-actions"><button type="button" class="icon-button" data-be-up title="Monter">↑</button><button type="button" class="icon-button" data-be-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-be-del title="Retirer ce champ">🗑</button></span></div>
-            <div class="form-grid">${extra}${['map', 'person_info'].includes(f.type) ? '' : `<label>Aide <small>(facultatif)</small><input data-be="help" value="${esc(f.help)}" placeholder="Exemple de ce qu’il faut écrire"></label>`}${canRequire ? `<label class="checkbox-line"><input type="checkbox" data-be="required" ${f.required ? 'checked' : ''}> Obligatoire</label>` : ''}</div></div>`;
+            <div class="form-grid">${extra}${['map', 'person_info', 'widget'].includes(f.type) ? '' : `<label>Aide <small>(facultatif)</small><input data-be="help" value="${esc(f.help)}" placeholder="Exemple de ce qu’il faut écrire"></label>`}${canRequire ? `<label class="checkbox-line"><input type="checkbox" data-be="required" ${f.required ? 'checked' : ''}> Obligatoire</label>` : ''}</div></div>`;
     }
     function previewHtml(d) {
         const fake = {id: 0, data: {}, media: [], people: {}};
@@ -649,6 +680,7 @@
         });
         ws.querySelectorAll('[data-be-add]').forEach(b => b.addEventListener('click', () => { d.fields.push(newField(b.dataset.beAdd)); again(); setTimeout(() => { const rows = A().$$('.h-be-field'); rows[rows.length - 1]?.querySelector('[data-be=label]')?.select(); }, 0); }));
         const box = ws.querySelector('[data-be-fields]');
+        box.addEventListener('click', e => { if (e.target.closest('[data-be-newwidget]')) { if (!confirm('Ouvrir l’Éditeur de widgets ? Enregistre d’abord ce bloc si tu ne veux pas perdre tes changements.')) return; S().maintenanceTab = 'widget_editor'; A().setModule('maintenance'); } });
         box.addEventListener('input', e => {
             const row = e.target.closest('[data-be-i]'); if (!row) return;
             const f = d.fields[Number(row.dataset.beI)], k = e.target.dataset.be;
@@ -1184,9 +1216,9 @@
             ['Comment ajouter un enfant, un parent ou un conjoint ?', 'Ouvre la fiche, puis dans les blocs Parents, Conjoints ou Enfants clique sur « + ». Tu peux choisir une personne qui existe déjà ou en créer une nouvelle.'],
             ['Comment afficher un bloc (Départs, Poilu, Résistant…) sur une fiche ?', 'Fiche → Identité (crayon) → « Blocs à afficher sur la fiche » : coche le bloc. Pour l’avoir sur toutes les fiches : Maintenance → Apparence → « Blocs à afficher sur demande ».'],
             ['Comment créer mon propre widget du tableau de bord ?', 'Maintenance → Éditeur de widgets (ou « + Créer un widget » en bas de la colonne du tableau de bord) → « + Nouveau widget ». Pars de rien (chiffres, liste, graphique, texte, raccourcis), d’un widget de l’app (copie modifiable, ou le même widget habillé de ton titre, ton icône, ta couleur), d’un de tes widgets ou d’un exemple. L’aperçu se met à jour pendant que tu règles. Il apparaît ensuite dans la colonne de gauche du tableau de bord ; « Partager » en fait un fichier pour un proche.'],
-            ['Comment ranger le tableau de bord en pages et en ensembles ?', 'Tableau de bord → « Réordonner les widgets ». « + Nouvelle page » ajoute une page (Liste, Fiches, Recherche…) : ses boutons s’affichent en haut, sous le titre ; coche celle qui s’ouvre par défaut, et « Ranger ses widgets » pour l’organiser (les widgets ajoutés depuis la colonne de gauche vont sur la page affichée). « 📁 + Ensemble » crée un cadre avec un titre qui regroupe les widgets qui le suivent ; ▶ en fait un sous-ensemble (jusqu’à 4 niveaux). La flèche ▾ à côté du titre replie ou ouvre l’ensemble.'],
+            ['Comment ranger le tableau de bord en pages et en ensembles ?', 'Tableau de bord → « Réordonner les widgets ». « + Nouvelle page » ajoute une page (Liste, Fiches, Recherche…) : ses boutons s’affichent en haut, sous le titre ; coche celle qui s’ouvre par défaut, et « Ranger ses widgets » pour l’organiser (les widgets ajoutés depuis la colonne de gauche vont sur la page affichée). « 📁 + Ensemble » crée un cadre avec un titre qui regroupe les widgets qui le suivent ; ▶ en fait un sous-ensemble, autant de niveaux que tu veux. Le bouton ▾ à gauche du cadre replie ou ouvre l’ensemble.'],
             ['Comment déplacer une ligne à la souris ?', 'Partout où il y a des flèches ↑ ↓, la poignée ⠿ (ou ↕) devant la ligne se tire à la place voulue.'],
-            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, d’un bloc de l’app (Départs, Poilu, Résistant, Sépulture…) ou d’un de tes blocs, ajoute ou enlève des champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ».'],
+            ['Comment créer mon propre bloc ?', 'Maintenance → Éditeur de blocs → « + Nouveau bloc ». Pars d’un modèle, d’un bloc de l’app (Départs, Poilu, Résistant, Sépulture…) ou d’un de tes blocs, ajoute ou enlève des champs en cliquant sur les boutons, puis enregistre. Il apparaît ensuite dans Identité → « Blocs à afficher sur la fiche ». Le champ « 🧱 Widget » y pose un de tes widgets (chiffres, liste, graphique, statistique…) ou un écran de l’app (la fiche de la personne, une liste, un diagramme…).'],
             ['Comment mettre une étiquette ?', 'Dans presque tous les formulaires, la ligne « 🏷️ Étiquettes » : clique sur « + », tape le début du nom ou crée une nouvelle étiquette. La liste de toutes les étiquettes est dans Listes → Étiquettes.'],
             ['Comment repérer une erreur de génération (père confondu avec son fils homonyme) ?', 'Maintenance → Âges et écarts : en plus des âges au mariage et des parents trop jeunes ou trop vieux, une fratrie étalée sur deux générations, un ancêtre Sosa trop jeune ou trop vieux pour sa place dans la lignée, un décès avant la naissance ou un mariage après le décès.'],
             ['Comment protéger une fiche contre les modifications ?', 'Le cadenas en haut de la fiche la verrouille : plus rien ne peut y être changé, même par le travail à deux.'],

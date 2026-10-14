@@ -28,6 +28,7 @@
         list: ['📋', 'Liste', 'Les premières lignes d’une liste, avec les colonnes et l’ordre que tu veux.'],
         chart: ['📊', 'Graphique', 'Des barres ou un camembert : par métier, par lieu, par décennie, par siècle…'],
         appstat: ['📈', 'Statistique de l’app', 'Une statistique de Graphiques → Statistiques (noms, prénoms, lieux, années…) redessinée à ta façon : barres, camembert, courbe, mosaïque, avec tes filtres.'],
+        screen: ['📺', 'Écran de l’app', 'Une liste, un diagramme, une statistique, la fiche d’une personne ou d’un village, la carte, une de tes listes… directement dans le widget.'],
         text: ['📝', 'Texte', 'Un pense-bête, une citation, une consigne, avec des émojis.'],
         links: ['🔗', 'Raccourcis', 'Des boutons vers les écrans, les listes ou des sites que tu utilises souvent.'],
         journey: ['🧭', 'Parcours jour par jour', 'Des étapes datées (écrites à la main, ou les événements d’une personne) en frise et sur la carte : un voyage, une guerre, une vie.'],
@@ -379,9 +380,10 @@
         if (d.kind === 'list') return listHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'appstat') return datas[0]?.appstat ? chartHtml(datas[0], d) : '<p class="muted">Calcul…</p>';
+        if (d.kind === 'screen') { const sc = ext.appScreen; const c = {target: d.target || 'module:carte', sidebar: !!d.sidebar}; if (sc?.nested && sc.valid(c.target)) return sc.nestedLink(c.target, sc.label(c.target)); return sc && sc.valid(c.target) ? `<iframe class="h-ct-frame" src="${esc(sc.url(c))}" title="${esc(sc.label(c.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(d.height) || 560))}px"></iframe><p class="h-cw-more"><button type="button" class="link-button" data-ct-open-screen="${esc(c.target)}">↗ Ouvrir en grand</button></p>` : '<p class="muted">Choisis l’écran dans l’Éditeur de widgets.</p>'; }
         return '';
     }
-    const PART_KINDS = ['numbers', 'list', 'chart', 'appstat', 'text', 'links', 'journey'];
+    const PART_KINDS = ['numbers', 'list', 'chart', 'appstat', 'screen', 'text', 'links', 'journey'];
     const captionHtml = d => d.caption ? `<p class="h-cw-caption">${nl(d.caption)}</p>` : '';
     function partsHtml(d, datas) {
         if (d.kind === 'app') return '';
@@ -637,6 +639,14 @@
     }
     function kindHtmlInner() {
         const d = target();
+        if (d.kind === 'screen') {
+            const sc = ext.appScreen; if (!sc) return '<p class="muted">Écrans indisponibles.</p>';
+            const isPerson = String(d.target || '').startsWith('person:');
+            return `<div class="form-grid"><label class="span-2">Écran ${sc.select(isPerson ? 'person:' : (d.target || 'module:carte'), 'data-cw-screen')}</label>
+                ${isPerson ? `<label>Personne${A().collectionPersonField('cw_screenperson', Number(String(d.target).slice(7)) ? {id: Number(String(d.target).slice(7)), first_name: d.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>` : ''}
+                <label>Hauteur <select data-cw-screenh>${sc.heights.map(([v, l]) => `<option value="${v}" ${String(d.height || 560) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-cw-screensb ${d.sidebar ? 'checked' : ''}> <span>avec sa colonne de gauche (ses menus)</span></label></div>`;
+        }
         if (d.kind === 'appstat') {
             const y = v => Number(v) || '';
             return `<div class="form-grid"><label class="span-2">Statistique <select data-cw-stat>${APP_STATS.map(([k, l]) => `<option value="${k}" ${(d.statType || 'surnames') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
@@ -776,6 +786,9 @@
             if (e.target.matches('[data-cw-valcolor]')) { d.valueColors = {...(d.valueColors || {}), [e.target.dataset.cwValcolor]: e.target.value}; }
             if (e.target.matches('[data-cw-skipempty]')) d.skipEmpty = e.target.checked;
             if (e.target.matches('[data-cw-base]')) d.base = e.target.value;
+            if (e.target.matches('[data-cw-screen]')) { d.target = e.target.value === 'person:' ? 'person:' + (Number(d.personId) || '') : e.target.value; return again(); }
+            if (e.target.matches('[data-cw-screenh]')) d.height = Number(e.target.value) || 560;
+            if (e.target.matches('[data-cw-screensb]')) d.sidebar = e.target.checked;
             if (e.target.matches('[data-cw-stat]')) { d.statType = e.target.value; d.valueColors = {}; if (!String(root.name || '').trim() || APP_STATS.some(([, l]) => l === root.name)) { root.name = appStatLabel(d.statType); const n = ws.querySelector('[data-cw="name"]'); if (n && partIndex < 0) n.value = root.name; } }
             if (e.target.matches('[data-cw-statnum]')) d[e.target.dataset.cwStatnum] = e.target.value.trim();
             if (e.target.matches('[data-cw-statgender]')) d.statGender = e.target.value;
@@ -807,6 +820,14 @@
             if (e.target.closest('[data-cw-linkadd]')) { d.links.push({label: '', target: 'module:personnes'}); return again(); }
             const ld = e.target.closest('[data-cw-linkdel]'); if (ld) { d.links.splice(Number(ld.closest('[data-cw-link]').dataset.cwLink), 1); return again(); }
         });
+        // ── Écran de l'app : la personne choisie pour « Fiche d'une personne » ──
+        if (d.kind === 'screen') {
+            A().bindCollectionPersonFields?.(box);
+            box.addEventListener('click', () => setTimeout(() => {
+                const h = box.querySelector('[name=cw_screenperson]'); const id = Number(h?.value) || 0;
+                if (id && d.target !== 'person:' + id) { d.target = 'person:' + id; d.personId = id; d.personName = box.querySelector('[data-cp-input="cw_screenperson"]')?.value || ''; preview(); }
+            }, 0));
+        }
         // ── Parcours jour par jour : étapes, personne, réglages ──
         if (d.kind === 'journey') {
             A().bindCollectionPersonFields?.(box);
@@ -888,6 +909,7 @@
         if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', ...TIME_GROUPS].includes(d.groupBy) ? d.groupBy : 'value', groupStep: Math.max(1, Math.min(500, Number(d.groupStep) || 25)), rangeFrom: str(d.rangeFrom, 40), rangeTo: str(d.rangeTo, 40), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
+        if (kind === 'screen') { const ok = ext.appScreen?.valid(d.target); Object.assign(out, {target: ok ? String(d.target) : 'module:carte', personName: str(d.personName, 120), personId: Number(d.personId) || 0, height: Math.max(240, Math.min(2000, Number(d.height) || 560)), sidebar: !!d.sidebar}); }
         if (kind === 'appstat') Object.assign(out, {statType: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', statFrom: str(d.statFrom, 40).trim(), statTo: str(d.statTo, 40).trim(),
             statGender: ['male', 'female', 'unknown'].includes(d.statGender) ? d.statGender : '', statLineage: !!d.statLineage, limit: Math.max(1, Math.min(60, Number(d.limit) || 10)), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
@@ -932,6 +954,14 @@
         return cleanDef({...w, id: newId(), name: w.name || 'Widget importé'});
     }
     ext.cleanWidgetDef = d => cleanDef(d); // pour les tests
+    /** Un de mes widgets dessiné dans une boîte (champ « Widget » d'un bloc de fiche) */
+    ext.renderCustomWidgetInto = async (el, id) => {
+        const d = defs().find(x => x.id === id);
+        if (!d) { el.innerHTML = '<p class="muted">Ce widget n’existe plus.</p>'; return; }
+        el.innerHTML = '<p class="muted">Calcul…</p>';
+        try { const datas = await loadData(d); el.innerHTML = widgetCard(d, '01', 'span-12', datas); A().bindTableLinks?.(); }
+        catch (error) { el.innerHTML = `<p class="muted">${esc(error.message)}</p>`; }
+    };
 
     /* ─── 📊 Mes statistiques dans Graphiques → Statistiques ─── */
     ext.customStatItems = () => defs().filter(d => d.inStats && d.kind !== 'app').map(d => [d.id, `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`]);
