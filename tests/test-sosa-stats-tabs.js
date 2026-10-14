@@ -62,6 +62,17 @@ $out['kids1'] = $rows([['field' => 'children_count', 'from' => 1, 'to' => 1]]);
 $out['anc'] = $rows([['field' => 'of_person', 'value' => 'ancestors']]); // de cujus : Jean (1)
 $out['anc6'] = array_map(fn($r) => trim(($r['people'][0]['first_name'] ?? '') . ' ' . ($r['people'][0]['last_name'] ?? '')), widget_rows($pdo, ['source' => 'persons', 'person_id' => 6, 'definition' => ['match' => 'all', 'rules' => [['field' => 'of_person', 'value' => 'ancestors']]]])['rows']);
 $out['fam6'] = count(widget_rows($pdo, ['source' => 'persons', 'person_id' => 6, 'definition' => ['match' => 'all', 'rules' => [['field' => 'of_person', 'value' => 'family']]]])['rows']);
+// Employeurs : recensement + fiche (même employeur malgré majuscules et espaces), renommage
+$pdo->exec("INSERT INTO census_records(year) VALUES(1906)");
+$pdo->exec("INSERT INTO census_members(census_id,person_id,occupation,employer) VALUES(1,1,'fileur','Filature  LEMAIRE'),(1,NULL,'fileuse','Filature Lemaire')");
+$pdo->exec("UPDATE census_members SET display_name='Rose Inconnue' WHERE person_id IS NULL");
+save_employer_record($pdo, ['name' => 'Filature Lemaire', 'siren' => '552 100 554', 'website' => 'lemaire.fr', 'logo_url' => 'javascript:alert(1)', 'directors' => [['name' => 'Auguste Lemaire', 'role' => 'Fondateur'], ['name' => '']]]);
+save_employer_record($pdo, ['name' => 'Garage Martin']);
+$out['emp_list'] = array_map(fn($r) => [$r['name'], $r['person_count'], $r['has_record']], employer_list_all($pdo, '%'));
+$d = employer_record_detail($pdo, 'filature lemaire');
+$out['emp'] = [$d['data']['siren'], $d['data']['website'], $d['data']['logo_url'], count($d['data']['directors']), array_map(fn($p) => $p['first_name'], $d['people']), $d['span']];
+save_employer_record($pdo, ['name' => 'Filatures Lemaire et fils', 'old_name' => 'Filature Lemaire', 'rename_mentions' => 1]);
+$out['emp_renamed'] = $pdo->query("SELECT DISTINCT employer FROM census_members")->fetchAll(PDO::FETCH_COLUMN);
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -106,6 +117,14 @@ step('critère « par rapport à la personne de la fiche » : ancêtres du de cu
     assert.deepEqual(out.anc6, ['Paul Martin']);
     assert.equal(out.fam6, 4); // Pierre, sa femme Anne, son fils Jean, son père Paul
 });
+
+step('employeurs : une fiche par nom (majuscules et espaces ignorés), avec les personnes des recensements', () => {
+    assert.deepEqual(out.emp_list, [['Filature Lemaire', 2, 1], ['Garage Martin', 0, 1]]);
+    const [sirenV, site, logo, dirs, people, span] = out.emp;
+    assert.equal(sirenV, '552100554'); assert.equal(site, 'https://lemaire.fr'); assert.equal(logo, ''); assert.equal(dirs, 1);
+    assert.deepEqual(people.sort(), ['Jean', 'Rose Inconnue']); assert.deepEqual(span, [1906, 1906]);
+});
+step('employeurs : renommer la fiche renomme aussi l’employeur dans les recensements', () => assert.deepEqual(out.emp_renamed, ['Filatures Lemaire et fils']));
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */
 const store = {};

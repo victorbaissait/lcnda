@@ -8,6 +8,7 @@ require_once __DIR__ . '/reference.php';
 require_once __DIR__ . '/registers.php';
 require_once __DIR__ . '/research.php';
 require_once __DIR__ . '/saints.php';     // prénom et saint du jour
+require_once __DIR__ . '/employers.php'; // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/collections.php';
 require_once __DIR__ . '/heritage.php';

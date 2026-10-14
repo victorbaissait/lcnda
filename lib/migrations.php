@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 33;
+const SCHEMA_VERSION = 34;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -54,6 +54,7 @@ function migration_steps(): array
         31 => 'schema_v31',
         32 => 'schema_v32',
         33 => 'schema_v33',
+        34 => 'schema_v34',
     ];
 }
 
@@ -1832,4 +1833,17 @@ function schema_v33(PDO $pdo): void
         $pdo->exec("ALTER TABLE archive_digest_people ADD COLUMN household_uid TEXT NOT NULL DEFAULT ''");
         $pdo->exec("UPDATE archive_digest_people SET household_uid = CASE WHEN trim(COALESCE(household_key,''))<>'' THEN 'k:' || trim(household_key) ELSE 'a:' || lower(trim(COALESCE(address,''))) END");
     }
+}
+
+/** 🏢 Fiches d'employeurs (Listes → Employeurs) : une par nom d'employeur, le détail dans data_json. */
+function schema_v34(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS employer_records (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        key TEXT NOT NULL UNIQUE,
+        name TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
 }

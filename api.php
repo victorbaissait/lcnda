@@ -314,6 +314,8 @@ try {
         'link_inventory' => json_response(['links' => link_inventory($pdo)]),
         'saint_of_day' => json_response(saint_of_day_data($pdo, max(1, min(12, safe_int($_GET['month'] ?? 0) ?: (int) date('n'))), max(1, min(31, safe_int($_GET['day'] ?? 0) ?: (int) date('j'))))),
         'saint_stats' => json_response(saint_stats_data($pdo)),
+        'employer_lookup' => json_response(employer_lookup(safe_text($_GET['q'] ?? ''))),
+        'employer_record' => json_response(employer_record_detail($pdo, safe_text($_GET['name'] ?? ''))),
         'research_suggestions' => json_response(research_suggestions_data($pdo, max(1, min(200, safe_int($_GET['limit'] ?? 40))))),
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
@@ -2618,7 +2620,7 @@ function list_data(PDO $pdo): never
         'census' => census_list_rows($pdo,$like,$fetchLimit,$offset),
         'changes' => $pdo->query("SELECT * FROM change_log ORDER BY created_at DESC,id DESC LIMIT {$fetchLimit} OFFSET {$offset}")->fetchAll(),
         'occupations' => occupation_list_rows($pdo, $like, $fetchLimit, $offset),
-        'employers' => employer_list_rows($pdo, $like, $fetchLimit, $offset),
+        'employers' => employer_list_all($pdo, $like, $fetchLimit, $offset),
         'reminders' => reminder_list_rows($pdo, $like, $fetchLimit, $offset, $reminderMode, $reminderCategory),
         'research_budget' => research_budget_rows($pdo, $like, $fetchLimit, $offset),
         'courriers' => courrier_rows($pdo, $like, $fetchLimit, $offset, $courrierFilter),
@@ -2633,7 +2635,7 @@ function list_data(PDO $pdo): never
     if ($hasMore) $data = array_slice($data, 0, $limit);
     if ($type === 'labels') $data = labels_attach_linked($pdo, $data);
     if ($type === 'occupations') $data = occupation_attach_people($pdo, $data, 'occupation');
-    if ($type === 'employers') $data = occupation_attach_people($pdo, $data, 'employer');
+    if ($type === 'employers') { $mentions = employer_block_mentions($pdo); foreach ($data as &$er) { $er['people'] = employer_people($pdo, (string) $er['id'], $mentions); $er['person_count'] = count($er['people']); } unset($er); }
     $remainingCount = $hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0;
     $extra = $type === 'reminders' ? ['reminder_summary' => reminder_summary($pdo, $like, $reminderMode, $reminderCategory), 'reminder_categories' => standalone_reminder_categories()] : ($type === 'research_budget' ? ['research_budget_summary' => research_budget_summary($pdo, $like)] : ($type === 'courriers' ? ['courrier_summary' => courrier_summary($pdo, $like), 'courrier_organismes' => courrier_organismes(), 'courrier_statuts' => courrier_statuts()] : []));
     json_response(array_merge(['type' => $type, 'rows' => $data, 'offset'=>$offset, 'limit'=>$limit, 'hasMore'=>$hasMore, 'remainingCount'=>$remainingCount, 'gender'=>$gender, 'reminder_mode'=>$reminderMode, 'reminder_category'=>$reminderCategory, 'city'=>$mediaCity, 'date_from'=>$mediaDateFrom, 'date_to'=>$mediaDateTo, 'sosa_root_id'=>$sosaRootId, 'sosa_sort'=>$sosaSort, 'sosa_missing'=>$sosaMissing ? 1 : 0, 'sosa_impossible'=>$sosaImpossible ? 1 : 0, 'daboville_sort'=>$dabovilleSort, 'courrier_filter'=>$courrierFilter], $extra));
@@ -2657,7 +2659,7 @@ function count_list_remaining(PDO $pdo,string $type,string $like,int $loaded,str
             $s=$pdo->prepare('SELECT count(*) FROM media WHERE title LIKE ? OR transcription LIKE ? OR filename LIKE ? OR document_reference LIKE ? OR document_title LIKE ? OR document_url LIKE ? OR document_pages LIKE ?');$s->execute([$like,$like,$like,$like,$like,$like,$like]);return (int)$s->fetchColumn();
         })(),
         'occupations'=>(function()use($pdo,$like){$s=$pdo->prepare("SELECT count(DISTINCT LOWER(TRIM(COALESCE(p.occupation,'')))) FROM persons p WHERE p.occupation!='' AND p.occupation LIKE ?");$s->execute([$like]);return (int)$s->fetchColumn();})(),
-        'employers'=>(function()use($pdo,$like){$s=$pdo->prepare("SELECT count(DISTINCT LOWER(TRIM(COALESCE(cm.employer,'')))) FROM census_members cm WHERE cm.employer!='' AND cm.employer LIKE ?");$s->execute([$like]);return (int)$s->fetchColumn();})(),
+        'employers'=>count(employer_list_all($pdo,$like,100000)),
         'reminders'=>reminder_list_count($pdo,$like,$reminderMode,$reminderCategory),
         'research_budget'=>research_budget_count($pdo,$like),
         'courriers'=>courrier_count($pdo,$like,$courrierFilter),
@@ -9100,6 +9102,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_record_languages' => save_record_languages($pdo,$data),
             'save_help_request' => save_help_request($pdo,$data),
             'save_village_profile' => save_village_profile($pdo,$data),
+            'save_employer_record' => save_employer_record($pdo,$data),
+            'delete_employer_record' => delete_employer_record($pdo,$data),
             'save_village_populations' => save_village_populations($pdo,$data),
             'save_village_memo' => save_village_memo($pdo,$data),
             'save_my_list' => save_my_list($pdo,$data),
