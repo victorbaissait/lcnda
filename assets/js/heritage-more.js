@@ -1053,9 +1053,12 @@
     const VILLAGE_SECTIONS = [['stats', '🔢 Les chiffres', 'full'], ['map', '🗺️ La carte', 'half'], ['church', '⛪ Église et paroisse', 'half'], ['population', '👥 Population au fil des recensements', 'half'], ['jobs', '⚒️ Métiers dominants', 'half'],
         ['addrmap', '🗺️ Plan du recensement (maisons, année par année)', 'full'], ['memo', '🗒️ Bloc-notes', 'half'], ['families', '🏠 Les familles qui y ont vécu', 'full'], ['decades', '📜 Actes par décennie', 'full'], ['notes', '📝 Notes et photos', 'full'],
         ['recueils', '📚 Recueils', 'full'], ['popchart', '📈 Évolution du nombre d’habitants', 'full']];
+    ext.villageSections = () => VILLAGE_SECTIONS;
+    ext.villageWidths = () => VILLAGE_WIDTHS;
     function villageLayout() {
         let saved = {};
         try { saved = JSON.parse(localStorage.getItem('genealogie-village-layout') || '{}') || {}; } catch (_) {}
+        if (window.LCNDA_SCREEN_LAYOUT?.kind === 'village') saved = window.LCNDA_SCREEN_LAYOUT; // organisation propre au widget ou à l'onglet
         const keys = VILLAGE_SECTIONS.map(x => x[0]);
         const order = [...(Array.isArray(saved.order) ? saved.order.filter(k => keys.includes(k)) : []), ...keys.filter(k => !(saved.order || []).includes(k))];
         return {order, hidden: Array.isArray(saved.hidden) ? saved.hidden.filter(k => keys.includes(k)) : [], width: saved.width && typeof saved.width === 'object' ? saved.width : {}};

@@ -452,7 +452,7 @@
         if (d.kind === 'list') return listHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'chart') return chartHtml(datas[0] || {rows: [], shown: []}, d);
         if (d.kind === 'appstat') return datas[0]?.appstat ? chartHtml(datas[0], d) : '<p class="muted">Calcul…</p>';
-        if (d.kind === 'screen') { const sc = ext.appScreen; const c = {target: d.target || 'module:carte', sidebar: !!d.sidebar}; if (sc?.nested && sc.valid(c.target)) return sc.nestedLink(c.target, sc.label(c.target)); return sc && sc.valid(c.target) ? `<iframe class="h-ct-frame" src="${esc(sc.url(c))}" title="${esc(sc.label(c.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(d.height) || 560))}px"></iframe><p class="h-cw-more"><button type="button" class="link-button" data-ct-open-screen="${esc(c.target)}">↗ Ouvrir en grand</button></p>` : '<p class="muted">Choisis l’écran dans l’Éditeur de widgets.</p>'; }
+        if (d.kind === 'screen') { const sc = ext.appScreen; const c = {target: d.target || 'module:carte', sidebar: !!d.sidebar, layout: d.layout}; if (sc?.nested && sc.valid(c.target)) return sc.nestedLink(c.target, sc.label(c.target)); return sc && sc.valid(c.target) ? `<iframe class="h-ct-frame" src="${esc(sc.url(c))}" title="${esc(sc.label(c.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(d.height) || 560))}px"></iframe><p class="h-cw-more"><button type="button" class="link-button" data-ct-open-screen="${esc(c.target)}">↗ Ouvrir en grand</button></p>` : '<p class="muted">Choisis l’écran dans l’Éditeur de widgets.</p>'; }
         return '';
     }
     const PART_KINDS = ['numbers', 'list', 'chart', 'appstat', 'screen', 'text', 'links', 'journey'];
@@ -721,7 +721,7 @@
         if (d.kind === 'screen') {
             const sc = ext.appScreen; if (!sc) return '<p class="muted">Écrans indisponibles.</p>';
             const isPerson = String(d.target || '').startsWith('person:');
-            return `<div class="form-grid"><label class="span-2">Écran ${sc.select(isPerson ? 'person:' : (d.target || 'module:carte'), 'data-cw-screen')}</label>
+            return `<div class="form-grid"><label class="span-2">Écran ${sc.select(isPerson ? 'person:' : (d.target || 'module:carte'), 'data-cw-screen')}</label>${sc.place?.kind(d.target) ? sc.place.html(d) : ''}
                 ${isPerson ? `<label>Personne${A().collectionPersonField('cw_screenperson', Number(String(d.target).slice(7)) ? {id: Number(String(d.target).slice(7)), first_name: d.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>` : ''}
                 <label>Hauteur <select data-cw-screenh>${sc.heights.map(([v, l]) => `<option value="${v}" ${String(d.height || 560) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-cw-screensb ${d.sidebar ? 'checked' : ''}> <span>avec sa colonne de gauche (ses menus)</span></label></div>`;
@@ -902,6 +902,15 @@
         // ── Écran de l'app : la personne choisie pour « Fiche d'une personne » ──
         if (d.kind === 'screen') {
             A().bindCollectionPersonFields?.(box);
+            if (ext.appScreen?.place?.kind(d.target)) {
+                ext.appScreen.place.bind(box, d, () => {
+                    // nom du widget : celui de la commune, tant qu'il n'a pas été changé à la main
+                    const auto = d === root && ( !root.name || /^(Fiche d’un village|Monographie de commune|Monographie — |🏘️ )/.test(root.name) || root.name === root._autoName);
+                    if (auto && d.placeName) { root.name = root._autoName = (ext.appScreen.place.kind(d.target) === 'village' ? '🏘️ ' : 'Monographie — ') + d.placeName; const n = ws.querySelector('[data-cw="name"]'); if (n) n.value = root.name; }
+                    preview();
+                });
+                if (!ext.appScreen._villagesLoaded) { ext.appScreen._villagesLoaded = true; ext.appScreen.loadLists().then(() => again()); } // la liste des communes
+            }
             box.addEventListener('click', () => setTimeout(() => {
                 const h = box.querySelector('[name=cw_screenperson]'); const id = Number(h?.value) || 0;
                 if (id && d.target !== 'person:' + id) { d.target = 'person:' + id; d.personId = id; d.personName = box.querySelector('[data-cp-input="cw_screenperson"]')?.value || ''; preview(); }
@@ -989,7 +998,7 @@
         if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', ...TIME_GROUPS].includes(d.groupBy) ? d.groupBy : 'value', groupStep: Math.max(1, Math.min(500, Number(d.groupStep) || 25)), rangeFrom: str(d.rangeFrom, 40), rangeTo: str(d.rangeTo, 40), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
-        if (kind === 'screen') { const ok = ext.appScreen?.valid(d.target); Object.assign(out, {target: ok ? String(d.target) : 'module:carte', personName: str(d.personName, 120), personId: Number(d.personId) || 0, height: Math.max(240, Math.min(2000, Number(d.height) || 560)), sidebar: !!d.sidebar}); }
+        if (kind === 'screen') { const ok = ext.appScreen?.valid(d.target); Object.assign(out, ok ? (ext.appScreen.place?.clean(d) || {}) : {}, {target: ok ? String(d.target) : 'module:carte', personName: str(d.personName, 120), personId: Number(d.personId) || 0, height: Math.max(240, Math.min(2000, Number(d.height) || 560)), sidebar: !!d.sidebar}); }
         if (kind === 'appstat') Object.assign(out, {statType: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', statFrom: str(d.statFrom, 40).trim(), statTo: str(d.statTo, 40).trim(),
             statGender: ['male', 'female', 'unknown'].includes(d.statGender) ? d.statGender : '', statLineage: !!d.statLineage, limit: Math.max(1, Math.min(60, Number(d.limit) || 10)), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',

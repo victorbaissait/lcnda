@@ -1093,7 +1093,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         });
     }
     /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
-    function openCustomScreen(target){
+    async function openCustomScreen(target){
         const [type,...rest]=String(target||'').split(':'),value=rest.join(':');
         if(type==='module'&&modules[value]&&value!=='jeu')return setModule(value);
         if(type==='list'){state.listType=value;return setModule('listes');}
@@ -1102,6 +1102,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(type==='stat'){state.graphMode='stats';state.graphStatsType=value;state.graphStatsFrozenColors=null;return setModule('graphiques');}
         if(type==='mylist'&&Number(value)){state.maintenanceTab='my_lists';state.hListOpen=Number(value);return setModule('maintenance');}
         if(type==='person'&&Number(value)){state.currentPersonId=Number(value);return setModule('personnes');}
+        // une commune choisie : sa fiche de village, ou sa monographie (lieu principal de la commune)
+        if(type==='village'&&value){state.listType='villages';state.hVillage=value;return setModule('listes');}
+        if(type==='monograph'&&value){let v=null;try{v=await api('village',{key:value});}catch(_){}
+            if(!v){toast('Commune introuvable.','error');return;}
+            state.graphMode='place_monograph';state.graphPlaceMonograph={...(state.graphPlaceMonograph||{}),id:v.place_id,name:v.name,county:v.county||'',country:v.country||'',showEvents:true,showDigests:true,showBattues:true,showCemetery:true};return setModule('graphiques');}
         toast('Cet écran n’existe plus : modifie l’onglet dans Maintenance → Éditeur d’onglets.','error');
     }
 
@@ -1353,7 +1358,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             $('#app').classList.toggle('sidebar-collapsed',Boolean(persisted.sidebarCollapsed));
             if(IS_SECONDARY){applyViewSnapshot(SECONDARY_VIEW);document.documentElement.classList.toggle('is-embedded',IS_EMBEDDED);
                 // Écran de l'app posé dans un de ses onglets : sans la barre du haut ni la colonne de gauche
-                if(SECONDARY_VIEW.screen){document.documentElement.classList.add('is-screen-embed');if(SECONDARY_VIEW.sidebar)document.documentElement.classList.add('is-screen-embed-sidebar');await openCustomScreen(SECONDARY_VIEW.screen);return;}
+                if(SECONDARY_VIEW.screen){document.documentElement.classList.add('is-screen-embed');if(SECONDARY_VIEW.layout&&typeof SECONDARY_VIEW.layout==='object')window.LCNDA_SCREEN_LAYOUT=SECONDARY_VIEW.layout;if(SECONDARY_VIEW.sidebar)document.documentElement.classList.add('is-screen-embed-sidebar');await openCustomScreen(SECONDARY_VIEW.screen);return;}
                 await setModule(SECONDARY_VIEW.module||'personnes',false);bindSidePanelButton();return;}
             bindSidePanelButton();
             $('#database-status').textContent = personCountLabel(state.bootstrap.stats.personnes);
@@ -3842,6 +3847,14 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
                 </div>`;
         }
         $('#workspace').innerHTML=`<section class="graph-layout place-monograph-layout"><div class="tool-strip"><span class="eyebrow">GRAPHIQUES · LIEUX</span><span class="spacer"></span>${graphExportToolbarHtml()}</div><main class="place-monograph-stage"><div class="place-monograph-shell"><header class="place-monograph-head"><span class="eyebrow">SYNTHÈSE LOCALE</span><h1>Monographie de commune</h1><p>Regroupe les sources et recherches déjà rattachées à un même lieu.</p></header>${activeFilters}${body}</div></main></section>`;
+        // Organisation propre à un widget ou un onglet (écran intégré) : ordre et parties montrées
+        const own=window.LCNDA_SCREEN_LAYOUT;
+        if(own?.kind==='monograph'&&Array.isArray(own.order)){
+            const hide=new Set(own.hidden||[]),box=$('.place-monograph-sections');
+            if(hide.has('filters'))$('.place-monograph-filter')?.setAttribute('hidden','');
+            if(hide.has('metrics'))$('.place-monograph-metrics')?.setAttribute('hidden','');
+            if(box)own.order.forEach(k=>{const el=box.querySelector(`.place-monograph-section.is-${k==='cemetery'?'cemetery':k}`);if(el){if(hide.has(k))el.hidden=true;box.appendChild(el);}});
+        }
         const saveFilters=()=>{cfg.yearFrom=$('#place-monograph-from').value.trim();cfg.yearTo=$('#place-monograph-to').value.trim();cfg.eventTypeId=Number($('#place-monograph-type').value||0);cfg.showEvents=$('#place-monograph-events').checked;cfg.showDigests=$('#place-monograph-digests').checked;cfg.showBattues=$('#place-monograph-battues').checked;cfg.showCemetery=$('#place-monograph-cemetery').checked;persistUiState();};
         $('#place-monograph-refresh').addEventListener('click',async()=>{saveFilters();await renderPlaceMonograph();});
         let placeController=null;

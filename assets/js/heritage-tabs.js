@@ -38,21 +38,65 @@
             ['Maintenance', app.defaultMaintenanceTabs.map(([k, , l]) => ['maint:' + k, l])],
         ];
     }
+    /* ─── Une commune choisie : sa fiche de village ou sa monographie, avec une organisation propre à cet endroit ─── */
+    const PLACE_KINDS = {village: '🏘️ Fiche d’un village…', monograph: '📜 Monographie de commune…'};
+    const MONO_SECTIONS = [['filters', '🔎 Les filtres (commune, années, sorte d’acte)'], ['metrics', '🔢 Les chiffres'], ['events', '📜 Actes rattachés'], ['census', '🏠 Recensements'], ['digests', '📑 Dépouillements'], ['battues', '🧭 Battues'], ['cemetery', '⚰️ Cimetière']];
+    let villages = [];
+    const loadVillages = async () => { try { villages = (await A().api('villages')).villages || []; } catch (_) { villages = []; } return villages; };
+    const placeKind = t => { const m = String(t || '').match(/^(village|monograph):/); return m ? m[1] : ''; };
+    const placeKey = t => String(t || '').replace(/^(village|monograph):/, '');
+    const placeSections = kind => kind === 'village' ? (ext.villageSections?.() || []).map(([k, l]) => [k, l]) : MONO_SECTIONS;
+    function placeLayout(layout, kind) {
+        const secs = placeSections(kind).map(x => x[0]), l = layout && typeof layout === 'object' ? layout : {};
+        const order = [...new Set((Array.isArray(l.order) ? l.order : []).filter(k => secs.includes(k)))];
+        secs.forEach(k => { if (!order.includes(k)) order.push(k); });
+        const widths = (ext.villageWidths?.() || []).map(x => x[0]);
+        return {kind, order, hidden: (Array.isArray(l.hidden) ? l.hidden : []).filter(k => secs.includes(k)),
+            width: Object.fromEntries(Object.entries(l.width && typeof l.width === 'object' ? l.width : {}).filter(([k, v]) => secs.includes(k) && widths.includes(v)))};
+    }
+    function placeHtml(c) {
+        const kind = placeKind(c.target), key = placeKey(c.target), l = placeLayout(c.layout, kind), secs = placeSections(kind), widths = ext.villageWidths?.() || [];
+        const known = villages.some(v => v.key === key);
+        return `<div class="h-place-cfg span-2" data-place-cfg>
+            <label>Commune <select data-place-key><option value="">choisir une commune…</option>${!known && key ? `<option value="${esc(key)}" selected>${esc(c.placeName || key)}</option>` : ''}${villages.map(v => `<option value="${esc(v.key)}" ${v.key === key ? 'selected' : ''}>${esc(v.name)}${v.county ? ` (${esc(v.county)})` : ''}</option>`).join('')}</select></label>
+            <p class="muted">Organisation propre à cet endroit (la fiche du village dans Listes garde la sienne) : coche ce qui est montré, range avec ⠿ ou ↑ ↓${kind === 'village' ? ', choisis la largeur' : ''}.</p>
+            <ol class="h-book-order" data-place-order>${l.order.map(k => { const s = secs.find(x => x[0] === k); const off = l.hidden.includes(k);
+                return `<li data-k="${esc(k)}" class="${off ? 'is-off' : ''}"><label class="checkbox-line"><input type="checkbox" data-place-show ${off ? '' : 'checked'}> <span>${esc(s[1])}</span></label>${kind === 'village' ? `<select data-place-width aria-label="Largeur"><option value="">largeur habituelle</option>${widths.map(([w, lab]) => `<option value="${w}" ${l.width[k] === w ? 'selected' : ''}>${esc(lab)}</option>`).join('')}</select>` : ''}<span class="h-book-moves"><button type="button" class="icon-button small" data-place-move="-1" aria-label="Monter">↑</button><button type="button" class="icon-button small" data-place-move="1" aria-label="Descendre">↓</button></span></li>`; }).join('')}</ol></div>`;
+    }
+    /** Lit le cadre « commune » dans c (target, placeName, layout) à chaque changement */
+    function bindPlace(box, c, changed = () => {}) {
+        const cfg = box.querySelector('[data-place-cfg]'); if (!cfg || cfg.dataset.bound) return; cfg.dataset.bound = '1';
+        const kind = placeKind(c.target);
+        const read = () => {
+            const sel = cfg.querySelector('[data-place-key]');
+            c.target = kind + ':' + sel.value; c.placeName = sel.value ? sel.selectedOptions[0].textContent.replace(/\s*\(.*\)$/, '') : '';
+            const lis = [...cfg.querySelectorAll('[data-place-order] li')];
+            c.layout = {kind, order: lis.map(li => li.dataset.k), hidden: lis.filter(li => !li.querySelector('[data-place-show]').checked).map(li => li.dataset.k),
+                width: Object.fromEntries(lis.map(li => [li.dataset.k, li.querySelector('[data-place-width]')?.value || '']).filter(([, v]) => v))};
+            lis.forEach(li => li.classList.toggle('is-off', !li.querySelector('[data-place-show]').checked));
+            changed();
+        };
+        cfg.addEventListener('change', read);
+        cfg.addEventListener('click', e => { const mv = e.target.closest('[data-place-move]'); if (!mv) return; e.preventDefault(); const li = mv.closest('li');
+            if (mv.dataset.placeMove === '-1' && li.previousElementSibling) li.parentElement.insertBefore(li, li.previousElementSibling); else if (mv.dataset.placeMove === '1' && li.nextElementSibling) li.parentElement.insertBefore(li.nextElementSibling, li); read(); });
+    }
+    const cleanPlace = c => placeKind(c.target) ? {placeName: str(c.placeName, 160), layout: placeLayout(c.layout, placeKind(c.target))} : {};
     let myLists = []; // « Mes listes » (Éditeur de listes), chargées à l'ouverture de l'éditeur
     const loadMyLists = async () => { try { myLists = (await A().api('my_lists')).lists || []; } catch (_) { myLists = []; } return myLists; };
     const targetLabel = t => {
         const [type, value] = String(t || '').split(':');
         if (type === 'person') return 'Fiche d’une personne';
+        if (type === 'village' || type === 'monograph') { const v = villages.find(x => x.key === placeKey(t)); return (type === 'village' ? '🏘️ ' : '📜 Monographie : ') + (v?.name || 'une commune'); }
         if (type === 'mylist') { const l = myLists.find(x => Number(x.id) === Number(value)); return l ? `${l.icon || '📋'} ${l.name}` : 'Une de mes listes'; }
         for (const [, items] of screenTargets()) { const f = items.find(([v]) => v === t); if (f) return f[1]; }
         return t || '—';
     };
-    const validTarget = t => /^(person|mylist):\d{1,9}$/.test(String(t || '')) || screenTargets().some(([, items]) => items.some(([v]) => v === t));
+    const validTarget = t => /^(person|mylist):\d{1,9}$/.test(String(t || '')) || /^(village|monograph):[^<>"]{1,300}$/.test(String(t || '')) || screenTargets().some(([, items]) => items.some(([v]) => v === t));
     const HEIGHTS = [['360', 'petit'], ['560', 'moyen'], ['800', 'grand'], ['1100', 'très grand']];
     // Dans un écran déjà intégré (iframe), pas d'écran dedans : sinon une fiche qui contient sa propre fiche se répète sans fin
     const NESTED = (() => { try { return window.self !== window.top; } catch (_) { return true; } })();
     const nestedLink = (target, title) => `<p class="muted">📺 ${esc(title)} <button type="button" class="link-button" data-ct-open-screen="${esc(target)}">↗ Ouvrir en grand</button></p>`;
-    const screenUrl = c => `index.php?view=${encodeURIComponent(JSON.stringify({module: 'dashboard', screen: c.target, sidebar: !!c.sidebar}))}`;
+    const screenUrl = c => `index.php?view=${encodeURIComponent(JSON.stringify({module: 'dashboard', screen: c.target, sidebar: !!c.sidebar, ...(placeKind(c.target) && c.layout ? {layout: placeLayout(c.layout, placeKind(c.target))} : {})}))}`;
 
     /* ─── Les pièces propres aux onglets : un écran de l'app, un texte libre (aussi au tableau de bord) ─── */
     ext.dashboard = ext.dashboard || {};
@@ -63,16 +107,30 @@
         const body = NESTED && validTarget(c.target) ? nestedLink(c.target, title) : validTarget(c.target) ? `<iframe class="h-ct-frame" src="${esc(screenUrl(c))}" title="${esc(title)}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(c.height) || 560))}px"></iframe>` : A().empty('Écran introuvable : choisis-le avec le crayon ✎.');
         return A().card(index, title, '', body, span, `<button type="button" class="button small secondary" data-ct-open-screen="${esc(c.target)}" title="Ouvrir cet écran en grand">↗ En grand</button>`);
     }};
-    const screenSelect = (cur, attr) => `<select ${attr}>${screenTargets().map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([v, l]) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}${myLists.length ? `<optgroup label="Mes listes">${myLists.map(l => `<option value="mylist:${Number(l.id)}" ${cur === 'mylist:' + l.id ? 'selected' : ''}>${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}<optgroup label="Une personne"><option value="person:" ${String(cur).startsWith('person:') ? 'selected' : ''}>Fiche d’une personne…</option></optgroup></select>`;
+    const screenSelect = (cur, attr) => `<select ${attr}>${screenTargets().map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([v, l]) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}${myLists.length ? `<optgroup label="Mes listes">${myLists.map(l => `<option value="mylist:${Number(l.id)}" ${cur === 'mylist:' + l.id ? 'selected' : ''}>${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}<optgroup label="Une personne"><option value="person:" ${String(cur).startsWith('person:') ? 'selected' : ''}>Fiche d’une personne…</option></optgroup><optgroup label="Une commune">${Object.entries(PLACE_KINDS).map(([k, l]) => `<option value="${k}:" ${placeKind(cur) === k ? 'selected' : ''}>${l}</option>`).join('')}</optgroup></select>`;
     ext.dashboardConfig.app_screen = {
         html: wd => { const c = {target: 'module:carte', height: 560, ...(wd.config || {})}; setTimeout(() => A().bindCollectionPersonFields?.(document.getElementById('workspace')), 0);
-            return `<fieldset class="h-ct-wcfg"><legend>Écran de l’app</legend><label>Écran ${screenSelect(c.target, 'data-ctw="target"')}</label>
+            ext.dashboardConfig.app_screen._place = c;
+            setTimeout(() => {
+                const sel = document.querySelector('.h-ct-wcfg [data-ctw="target"]'), ed = sel?.closest('.h-ct-wcfg'); if (!ed) return;
+                if (placeKind(c.target)) { if (villages.length) bindPlace(ed, c); else loadVillages().then(() => { const old = ed.querySelector('[data-place-cfg]'); if (old) { old.outerHTML = placeHtml(c); bindPlace(ed, c); } }); }
+                sel.addEventListener('change', async () => { // une commune : le cadre apparaît sous le choix de l'écran
+                    ed.querySelector('[data-place-cfg]')?.remove();
+                    if (!placeKind(sel.value)) return;
+                    if (!villages.length) await loadVillages();
+                    const nc = {target: sel.value}; ext.dashboardConfig.app_screen._place = nc;
+                    sel.closest('label').insertAdjacentHTML('afterend', placeHtml(nc)); bindPlace(ed, nc);
+                });
+            }, 0);
+            return `<fieldset class="h-ct-wcfg"><legend>Écran de l’app</legend><label>Écran ${screenSelect(c.target, 'data-ctw="target"')}</label>${placeKind(c.target) ? placeHtml(c) : ''}
                 <label>Personne <small>(pour « Fiche d’une personne »)</small>${A().collectionPersonField('ctw_person', String(c.target).startsWith('person:') ? {id: Number(c.target.slice(7)), first_name: c.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>
                 <label>Titre <small>(facultatif)</small><input data-ctw="title" value="${esc(c.title || '')}"></label>
                 <label>Hauteur <select data-ctw="height">${HEIGHTS.map(([v, l]) => `<option value="${v}" ${String(c.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-ctw="sidebar" ${c.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label></fieldset>`; },
         read: ed => { let target = ed.querySelector('[data-ctw="target"]')?.value || 'module:carte'; const pid = Number(ed.querySelector('[name=ctw_person]')?.value) || 0, pname = ed.querySelector('[data-cp-input="ctw_person"]')?.value || '';
             if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes';
+            const pl = ext.dashboardConfig.app_screen._place;
+            if (placeKind(target)) { if (pl && placeKind(pl.target) === placeKind(target) && placeKey(pl.target)) return {target: pl.target, ...cleanPlace(pl), title: ed.querySelector('[data-ctw="title"]')?.value || '', height: Number(ed.querySelector('[data-ctw="height"]')?.value) || 560, sidebar: false}; target = placeKind(target) === 'village' ? 'list:villages' : 'graph:place_monograph'; }
             return {target, personName: pname, title: ed.querySelector('[data-ctw="title"]')?.value || '', height: Number(ed.querySelector('[data-ctw="height"]')?.value) || 560, sidebar: !!ed.querySelector('[data-ctw="sidebar"]')?.checked}; },
     };
     ext.dashboard.tab_note = {render: (index, widget, span) => {
@@ -86,7 +144,8 @@
     };
     document.addEventListener('click', event => { const b = event.target.closest?.('[data-ct-open-screen]'); if (b) A().openCustomScreen(b.dataset.ctOpenScreen); });
     // pour l'Éditeur de widgets (sorte « Écran de l'app ») et les blocs de fiche
-    ext.appScreen = {nested: NESTED, nestedLink, targets: () => screenTargets(), select: (cur, attr) => screenSelect(cur, attr), url: screenUrl, label: targetLabel, valid: validTarget, heights: HEIGHTS, loadLists: loadMyLists};
+    ext.appScreen = {nested: NESTED, nestedLink, targets: () => screenTargets(), select: (cur, attr) => screenSelect(cur, attr), url: screenUrl, label: targetLabel, valid: validTarget, heights: HEIGHTS, loadLists: async () => { await Promise.all([loadMyLists(), loadVillages()]); return myLists; },
+        place: {kind: placeKind, html: placeHtml, bind: bindPlace, clean: cleanPlace, layout: placeLayout}};
 
     /* ─── Modèles ─── */
     const sc = (target, width = 12, height = 560, extra = {}) => ({type: 'app_screen', width: String(width), config: {target, height, ...extra}});
@@ -184,6 +243,7 @@
         if (x.type === 'app_screen') {
             kind = '📺 Écran'; label = String(c.target || '').startsWith('person:') ? (c.personName || 'Fiche d’une personne') : targetLabel(c.target);
             settings = `<div class="form-grid h-ct-piece-set"><label>Écran ${screenSelect(String(c.target || '').startsWith('person:') ? 'person:' : c.target, 'data-ct-p="target"')}</label>
+                ${placeKind(c.target) ? placeHtml(c) : ''}
                 ${String(c.target || '').startsWith('person:') ? `<label>Personne ${A().collectionPersonField('ctp_person' + i, Number(String(c.target).slice(7)) ? {id: Number(String(c.target).slice(7)), first_name: c.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>` : ''}
                 <label>Titre <small>(facultatif)</small><input data-ct-p="title" value="${esc(c.title || '')}" placeholder="${esc(label)}"></label>
                 <label>Hauteur <select data-ct-p="height">${HEIGHTS.map(([v, l]) => `<option value="${v}" ${String(c.height || 560) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -198,7 +258,7 @@
     /* ─── Réglages d'un onglet ─── */
     async function editTab(t, existing) {
         const token = ++S().workspaceToken;
-        await loadMyLists(); if (token !== S().workspaceToken) return;
+        await Promise.all([loadMyLists(), loadVillages()]); if (token !== S().workspaceToken) return;
         t.widgets = Array.isArray(t.widgets) ? t.widgets : [];
         const app = A();
         const afterOptions = [['', 'à la fin (avant Maintenance)'], ...Object.entries(app.appModules).filter(([k]) => !['jeu', 'maintenance'].includes(k)).map(([k, v]) => [k, 'après « ' + v[1] + ' »'])];
@@ -245,6 +305,7 @@
                 c[k] = el.type === 'checkbox' ? el.checked : k === 'height' ? Number(el.value) || 560 : el.value;
                 if (k === 'target') { if (el.value.startsWith('person:')) c.target = 'person:' + (Number(c.personId) || ''); paint(); }
             }));
+            ws.querySelectorAll('[data-ct-i]').forEach(li => { const x = t.widgets[Number(li.dataset.ctI)]; if (x?.type === 'app_screen' && placeKind(x.config?.target)) bindPlace(li, cfgOf(Number(li.dataset.ctI))); });
             app.bindCollectionPersonFields?.(ws);
             ws.querySelectorAll('[data-ct-i]').forEach(li => li.addEventListener('click', () => setTimeout(() => {
                 const h = li.querySelector('input[type=hidden][name^=ctp_person]'); if (!h) return;
@@ -276,7 +337,7 @@
         const types = new Set(catalog().map(([k]) => k));
         const cleanConfig = x => {
             const c = x.config && typeof x.config === 'object' ? x.config : {};
-            if (x.type === 'app_screen') return {target: validTarget(c.target) ? c.target : 'module:carte', title: str(c.title, 120), personName: str(c.personName, 120), personId: Number(c.personId) || 0, height: Math.max(240, Math.min(2000, Number(c.height) || 560)), sidebar: !!c.sidebar};
+            if (x.type === 'app_screen') return {target: validTarget(c.target) ? c.target : 'module:carte', title: str(c.title, 120), personName: str(c.personName, 120), personId: Number(c.personId) || 0, height: Math.max(240, Math.min(2000, Number(c.height) || 560)), sidebar: !!c.sidebar, ...(validTarget(c.target) ? cleanPlace(c) : {})};
             if (x.type === 'tab_note') return {title: str(c.title, 120), text: str(c.text, 8000)};
             return c;
         };

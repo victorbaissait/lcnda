@@ -124,7 +124,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 let out;
 try { out = JSON.parse(r.stdout.slice(r.stdout.indexOf('{'))); } catch (_) { console.error(r.stdout, r.stderr); process.exit(1); }
 const checks = [
-  ['structure à jour (n°33)', () => assert.equal(out.version, 33)],
+  ['structure à jour (n°34)', () => assert.equal(out.version, 34)],
   ['deux versions ; les nouvelles photos remplissent les pages existantes puis en créent une', () => assert.deepEqual(out.counts, [2, 4, 7, 1])],
   ['par défaut, la page montre la photo la plus récente ; on peut retenir l’ancienne', () => { assert.equal(out.default_shown, true); assert.deepEqual(out.p1, ['f° 1', true]); }],
   ['photo « à ranger », puis posée en détail (zoom) sur une page', () => { assert.equal(out.loose, null); assert.equal(out.p2_shown_not_detail, true); }],

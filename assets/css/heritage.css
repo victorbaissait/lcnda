@@ -1737,3 +1737,7 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-book-note{margin:.6rem 0 0}
 @media (max-width:900px){.h-book-cols{grid-template-columns:1fr}}
 .h-book-order small{display:block;font-size:12px}
+html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-layout]{display:none}
+.h-place-cfg{display:grid;gap:8px}
+.h-place-cfg .h-book-order select{max-width:150px}
+.h-place-cfg .h-book-order select{font-size:13px;padding:3px 6px;height:auto}

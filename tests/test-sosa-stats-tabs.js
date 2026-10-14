@@ -130,14 +130,14 @@ step('employeurs : renommer la fiche renomme aussi l’employeur dans les recens
 const store = {};
 const storage = { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; } };
 const appModules = { dashboard: ['01', 'Tableau de bord'], personnes: ['02', 'Personnes'], listes: ['05', 'Listes'], maintenance: ['10', 'Maintenance'], jeu: ['JEU', 'Jeu'] };
-const appTypes = [['stats', '01', 'Chiffres clés'], ['reminders', '02', 'Rappels']];
+const appTypes = [['stats', '01', 'Chiffres clés'], ['reminders', '02', 'Rappels'], ['app_screen', '03', 'Écran de l’app']];
 const sandbox = { window: {}, localStorage: storage, document: { addEventListener() {}, createElement: () => ({}) }, console, setTimeout, clearTimeout };
 sandbox.window.LCNDA_APP = {
     escapeHtml: v => String(v), state: {}, appModules,
     defaultListTypes: [['villages', '36', 'Fiche d’un village']], defaultMaintenanceTabs: [['design', '01', 'Apparence']],
     orderedGraphDiagramItems: () => [['ancestors', '01', 'Arbre des ascendants']], orderedGraphStatsItems: () => [['surnames', '01', 'Noms']],
     orderedDashboardWidgetTypes: () => appTypes, dashboardWidgetLabel: k => k,
-    dashboardNewWidget: (type, src = {}) => ({ id: src.id || type + '-x', type, width: String(src.width || '6'), limit: 0, config: {} }),
+    dashboardNewWidget: (type, src = {}) => ({ id: src.id || type + '-x', type, width: String(src.width || '6'), limit: 0, config: src.config || {} }),
     syncCustomDashboardWidgets() {}, dashboardBlockSettings: () => ({ widgets: [] }), customTabs: () => [], saveCustomTabs() {},
 };
 vm.createContext(sandbox);
@@ -153,6 +153,13 @@ step('statistique : une statistique inconnue de l’app devient « Noms »', () 
 step('onglet page : widgets inconnus retirés, place dans la barre vérifiée', () => {
     const t = ext.cleanCustomTab({ id: 'ct_abcd1234', name: '  Ma lignée  ', icon: '🌳', kind: 'page', after: 'jeu', widgets: [{ type: 'stats', width: '12' }, { type: 'inconnu' }] });
     assert.equal(t.name, 'Ma lignée'); assert.equal(t.after, ''); assert.deepEqual(t.widgets.map(w => [w.type, w.width]), [['stats', '12']]);
+});
+step('onglet : une commune choisie (monographie) garde sa propre organisation, nettoyée', () => {
+    const t = ext.cleanCustomTab({ kind: 'page', name: 'Mon village', widgets: [{ type: 'app_screen', width: '12', config: { target: 'monograph:n:pernay|indre-et-loire', placeName: 'Pernay', layout: { order: ['events', 'pirate', 'filters'], hidden: ['filters', 'x'] } } }] });
+    const c = t.widgets[0].config;
+    assert.equal(c.target, 'monograph:n:pernay|indre-et-loire'); assert.equal(c.placeName, 'Pernay');
+    assert.equal(JSON.stringify(c.layout.order.slice(0, 2)), '["events","filters"]'); assert.equal(c.layout.order.length, 7); assert.equal(JSON.stringify(c.layout.hidden), '["filters"]');
+    assert.equal(ext.cleanCustomTab({ kind: 'page', name: 'x', widgets: [{ type: 'app_screen', config: { target: 'village:<script>' } }] }).widgets[0].config.target, 'module:carte');
 });
 step('onglet raccourci : seulement un écran qui existe', () => {
     assert.equal(ext.cleanCustomTab({ kind: 'screen', target: 'list:villages', after: 'personnes' }).target, 'list:villages');
