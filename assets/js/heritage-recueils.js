@@ -536,7 +536,7 @@
     }
 
     /* ─── Rattacher une page (ou juste une image) à une fiche, un bloc, une enquête, une battue, l'Atelier, un village ─── */
-    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🐾 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village']];
+    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🐾 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille']];
     function pageLinkDialog({page, image, scope = 'page'}) {
         dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Rattacher',
             body: `<fieldset class="h-rc-modes"><legend>Quoi ?</legend>
@@ -655,6 +655,7 @@
         root.querySelectorAll('[data-rc-entity]').forEach(b => b.addEventListener('click', () => {
             const [type, ...rest] = b.dataset.rcEntity.split(':'), key = rest.join(':'), s = S();
             if (type === 'village') { s.listType = 'villages'; s.hVillage = key; A().setModule('listes'); }
+            if (type === 'family_booklet') { s.listType = 'family_booklets'; s.hBooklet = Number(key); A().setModule('listes'); }
             if (type === 'battue') { s.enquetesTab = 'battue'; s.currentInvestigationId = 0; s.currentBattueId = Number(key); A().setModule('enquetes'); }
             if (type === 'atelier_project') { s.atelier = {...(s.atelier || {}), project: Number(key), sel: []}; s.enquetesTab = 'atelier'; s.currentBattueId = 0; s.currentInvestigationId = 0; A().setModule('enquetes'); }
         }));

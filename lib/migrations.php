@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 34;
+const SCHEMA_VERSION = 35;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -55,6 +55,7 @@ function migration_steps(): array
         32 => 'schema_v32',
         33 => 'schema_v33',
         34 => 'schema_v34',
+        35 => 'schema_v35',
     ];
 }
 
@@ -1846,4 +1847,24 @@ function schema_v34(PDO $pdo): void
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
+}
+
+/** 📘 Livrets de famille (Listes → Livrets de famille) : la transcription dans data_json, l'index des personnes à côté. */
+function schema_v35(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_booklets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS family_booklet_people (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        booklet_id INTEGER NOT NULL REFERENCES family_booklets(id) ON DELETE CASCADE,
+        role TEXT NOT NULL DEFAULT '',
+        position INTEGER NOT NULL DEFAULT 0,
+        person_id INTEGER REFERENCES persons(id) ON DELETE SET NULL,
+        written_name TEXT NOT NULL DEFAULT ''
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_family_booklet_people ON family_booklet_people(person_id)');
 }

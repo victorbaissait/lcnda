@@ -1803,3 +1803,54 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 @media (max-width:900px){.h-rt2{height:auto;overflow:auto}.h-rt-main{grid-template-columns:1fr}.h-rt-side{border-left:0;padding-left:0}.h-rt2 .h-rt-stage{min-height:50vh}}
 .h-rt-opts [hidden]{display:none!important}
 .h-rt-versions summary{cursor:pointer;list-style:none}.h-rt-versions summary h3{display:inline}.h-rt-versions summary::before{content:"▸ ";}.h-rt-versions details[open] summary::before{content:"▾ ";}
+
+/* 📘 Livrets de famille */
+.h-bk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.h-bk-card{display:flex;gap:12px;text-align:left;border:2px solid var(--ink,#111);background:#fff;padding:10px;cursor:pointer;font:inherit;box-shadow:4px 4px 0 rgba(0,102,204,.15)}
+.h-bk-card:hover{border-color:var(--blue,#0066cc)}
+.h-bk-cover{flex:0 0 74px;height:100px;overflow:hidden;display:block}
+.h-bk-cover img{width:100%;height:100%;object-fit:cover}
+.h-bk-coverart{display:grid;place-items:center;width:74px;height:100px;background:#1d3f7a;color:#e9d9a6;font-size:9px;font-weight:900;letter-spacing:.12em;text-align:center;line-height:1.5;border:2px solid #10264d}
+.h-bk-coverart.small{width:46px;height:62px;font-size:7px}
+.h-bk-info{display:grid;gap:4px;align-content:start}
+.h-bk-info small{color:var(--muted,#666)}
+.h-bk-book{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.h-bk-page{background:#fffdf6;border:1px solid #d9cfb4;box-shadow:inset 0 0 0 6px #fffdf6,inset 0 0 0 7px #e8dcbc;padding:20px 22px;min-width:0}
+.h-bk-page h3{margin:0 0 10px;font-family:Georgia,serif;font-size:18px}
+.h-bk-wide,.h-bk-couple{grid-column:1/-1}
+.h-bk-pagecover{background:#1d3f7a;color:#f1e4b8;box-shadow:inset 0 0 0 6px #1d3f7a,inset 0 0 0 7px #c9b46b;text-align:center}
+.h-bk-pagecover strong{display:block;font-family:Georgia,serif;font-size:24px;letter-spacing:.12em;margin:4px 0 14px}
+.h-bk-rf{font-size:11px;letter-spacing:.2em}
+.h-bk-pagecover .h-bk-dl{text-align:left}
+.h-bk-pagecover dt{color:#c9b46b}
+.h-bk-dl{display:grid;gap:4px;margin:0}
+.h-bk-dl>div{display:grid;grid-template-columns:130px 1fr;gap:8px}
+.h-bk-dl dt{font-size:12px;color:var(--muted,#776);font-weight:700}
+.h-bk-dl dd{margin:0}
+.h-bk-couple{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.h-bk-slot{border-left:3px solid #c9b46b;padding:6px 0 6px 12px;margin-bottom:10px}
+.h-bk-slot.is-empty{opacity:.55}
+.h-bk-slot h4{margin:2px 0 4px;font-family:Georgia,serif;font-size:17px}
+.h-bk-linked{margin:0 0 6px;font-size:13px}
+.h-bk-unlinked{margin:0 0 6px;font-size:12px;font-style:italic}
+.h-bk-parents{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-left:12px}
+.h-bk-parents .h-bk-slot h4{font-size:14px}
+.h-bk-children{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:4px 18px}
+.h-bk-editor{display:grid;gap:18px}
+.h-bk-nav{position:sticky;top:-2px;z-index:2;display:flex;flex-wrap:wrap;gap:6px;background:#fff;padding:6px 0;border-bottom:1px solid #e5e5e5}
+.h-bk-nav a{font-size:12px;font-weight:700;padding:3px 8px;border:1px solid #ccc;text-decoration:none;color:inherit}
+.h-bk-editor h3{margin:0 0 8px}
+.h-bk-slotedit{border:1px solid #ddd;padding:10px 12px 12px;margin:0 0 10px;position:relative}
+.h-bk-slotedit legend{font-weight:800;padding:0 6px}
+.h-bk-slottools{position:absolute;right:8px;top:-12px;display:flex;gap:3px;background:#fff}
+.h-bk-slottools .icon-button{width:26px;height:26px;font-size:12px}
+.h-bk-parentsedit{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.h-bk-apply{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.h-bk-mentions{display:grid;gap:10px}
+.h-bk-mention{display:flex;gap:12px;align-items:flex-start}
+.h-bk-mention img{width:46px;height:62px;object-fit:cover}
+.h-bk-mention p{margin:2px 0}
+.h-bk-role{background:#1d3f7a;color:#f1e4b8;font-size:11px;font-weight:800;padding:1px 7px}
+@media (max-width:900px){.h-bk-book,.h-bk-couple,.h-bk-parentsedit,.h-bk-parents{grid-template-columns:1fr}}
+@media print{.h-booklet .page-actions{display:none}}
+.h-booklet .page-header h2{font-size:34px;line-height:1.1}

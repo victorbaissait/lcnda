@@ -1202,7 +1202,7 @@ function with_labels(PDO $pdo, string $type, array $rows, string $idKey = 'id'):
 /** Formulaires de blocs : les étiquettes choisies (« pending_labels ») sont posées après l'enregistrement, même à la création. */
 const LABELED_SAVE_ACTIONS = ['save_voyage' => 'voyage', 'save_placement' => 'placement', 'save_coat_of_arms' => 'coat_of_arms', 'save_poilu' => 'poilu', 'save_field_trip' => 'field_trip',
     'save_family_paper' => 'family_paper', 'save_old_map' => 'old_map', 'save_probate_inventory' => 'probate_inventory', 'save_help_request' => 'help_request', 'save_parish' => 'parish',
-    'save_cited_name' => 'cited_name', 'save_resistance' => 'resistance', 'save_custom_block_entry' => 'custom_block_entry', 'save_village_profile' => 'village', 'save_my_list' => 'custom_list', 'save_my_list_record' => 'custom_list_record', 'save_voter_cards' => 'voter'];
+    'save_cited_name' => 'cited_name', 'save_resistance' => 'resistance', 'save_custom_block_entry' => 'custom_block_entry', 'save_village_profile' => 'village', 'save_my_list' => 'custom_list', 'save_my_list_record' => 'custom_list_record', 'save_voter_cards' => 'voter', 'save_booklet' => 'family_booklet'];
 
 function apply_pending_labels(PDO $pdo, string $action, array $data, $result): void
 {

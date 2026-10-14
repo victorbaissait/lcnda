@@ -314,6 +314,9 @@ try {
         'link_inventory' => json_response(['links' => link_inventory($pdo)]),
         'saint_of_day' => json_response(saint_of_day_data($pdo, max(1, min(12, safe_int($_GET['month'] ?? 0) ?: (int) date('n'))), max(1, min(31, safe_int($_GET['day'] ?? 0) ?: (int) date('j'))))),
         'saint_stats' => json_response(saint_stats_data($pdo)),
+        'booklets' => json_response(['booklets' => booklets_list($pdo, safe_text($_GET['q'] ?? ''))]),
+        'booklet' => json_response(booklet_detail($pdo, safe_int($_GET['id'] ?? 0))),
+        'booklet_proposals' => json_response(booklet_proposals($pdo, safe_int($_GET['id'] ?? 0))),
         'employer_lookup' => json_response(employer_lookup(safe_text($_GET['q'] ?? ''))),
         'employer_record' => json_response(employer_record_detail($pdo, safe_text($_GET['name'] ?? ''))),
         'research_suggestions' => json_response(research_suggestions_data($pdo, max(1, min(200, safe_int($_GET['limit'] ?? 40))))),
@@ -8930,6 +8933,9 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_help_request' => save_help_request($pdo,$data),
             'save_village_profile' => save_village_profile($pdo,$data),
             'save_employer_record' => save_employer_record($pdo,$data),
+            'save_booklet' => save_booklet($pdo,$data),
+            'delete_booklet' => delete_booklet($pdo,$data),
+            'apply_booklet' => apply_booklet($pdo,$data),
             'delete_employer_record' => delete_employer_record($pdo,$data),
             'save_village_populations' => save_village_populations($pdo,$data),
             'save_village_memo' => save_village_memo($pdo,$data),
@@ -9046,7 +9052,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet'];
 }
 
 function normalize_label_color(string $color): string

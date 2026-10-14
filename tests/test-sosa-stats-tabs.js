@@ -73,6 +73,16 @@ $d = employer_record_detail($pdo, 'filature lemaire');
 $out['emp'] = [$d['data']['siren'], $d['data']['website'], $d['data']['logo_url'], count($d['data']['directors']), array_map(fn($p) => $p['first_name'], $d['people']), $d['span']];
 save_employer_record($pdo, ['name' => 'Filatures Lemaire et fils', 'old_name' => 'Filature Lemaire', 'rename_mentions' => 1]);
 $out['emp_renamed'] = $pdo->query("SELECT DISTINCT employer FROM census_members")->fetchAll(PDO::FETCH_COLUMN);
+// Livret de famille : époux relié (Jean, 1), enfant relié (Louis, 5) ; report de ce qui manque
+$bk = save_booklet($pdo, ['data' => ['commune' => 'Pernay', 'marriage_date' => '15 mai 1912', 'marriage_place' => 'Pernay',
+    'husband' => ['written_name' => 'MARTIN Jean', 'person_id' => 1, 'death_date' => '3 mars 1950', 'death_place' => 'Tours'], 'wife' => ['written_name' => 'DURAND Marie', 'person_id' => 2],
+    'children' => [['written_name' => 'MARTIN Louis', 'person_id' => 5, 'birth_date' => '25 août 1888'], ['written_name' => '']]]]);
+$out['bk_title'] = $bk['title'];
+$out['bk_children'] = count(booklet_detail($pdo, $bk['id'])['data']['children']);
+$out['bk_mention'] = array_map(fn($m) => $m['role'], booklet_person_mentions($pdo, 5));
+$out['bk_props'] = array_column(booklet_proposals($pdo, $bk['id'])['items'], 'key');
+$out['bk_done'] = apply_booklet($pdo, ['id' => $bk['id'], 'keys' => ['husband:death', 'marriage', 'child:0:parents', 'pirate']])['done'];
+$out['bk_props_after'] = array_column(booklet_proposals($pdo, $bk['id'])['items'], 'key');
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -125,6 +135,16 @@ step('employeurs : une fiche par nom (majuscules et espaces ignorés), avec les 
     assert.deepEqual(people.sort(), ['Jean', 'Rose Inconnue']); assert.deepEqual(span, [1906, 1906]);
 });
 step('employeurs : renommer la fiche renomme aussi l’employeur dans les recensements', () => assert.deepEqual(out.emp_renamed, ['Filatures Lemaire et fils']));
+
+step('livret de famille : transcription, fiche reliée, report sur les fiches de ce qui manque seulement', () => {
+    assert.equal(out.bk_title, 'Livret de MARTIN Jean et DURAND Marie');
+    assert.equal(out.bk_children, 1); // l'enfant vide est ignoré
+    assert.deepEqual(out.bk_mention, ['child']);
+    assert.ok(out.bk_props.includes('husband:death') && out.bk_props.includes('marriage') && out.bk_props.includes('child:0:parents'), JSON.stringify(out.bk_props));
+    assert.ok(!out.bk_props.includes('child:0:birth'), 'Louis a déjà son baptême');
+    assert.equal(out.bk_done, 3);
+    assert.deepEqual(out.bk_props_after, []);
+});
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */
 const store = {};

@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 const MEDIA_AV_COLLECTIONS = ['family_object' => 'Objet de famille', 'family_memory' => 'Mémoire familiale', 'voyage' => 'Départ, émigration', 'placement' => 'Enfant placé',
     'coat_of_arms' => 'Armoiries', 'family_paper' => 'Papier de famille', 'old_map' => 'Carte ancienne', 'probate_inventory' => 'Inventaire après décès', 'poilu' => 'Poilu',
-    'resistance' => 'Résistant', 'custom_block_entry' => 'Bloc', 'village' => 'Village', 'voter' => 'Carte d’électeur', 'custom_list_record' => 'Liste', 'atelier_item' => 'Atelier', 'recueil' => 'Recueil'];
+    'resistance' => 'Résistant', 'custom_block_entry' => 'Bloc', 'village' => 'Village', 'voter' => 'Carte d’électeur', 'custom_list_record' => 'Liste', 'atelier_item' => 'Atelier', 'recueil' => 'Recueil', 'family_booklet' => 'Livret de famille'];
 
 function media_av_name(?array $p): string
 {
