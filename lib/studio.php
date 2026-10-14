@@ -13,7 +13,7 @@ declare(strict_types=1);
 const RETOUCH_TYPES = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
 /** 🎚️ Sons et vidéos montés dans l'atelier son / vidéo (heritage-studio-av.js) : mêmes versions que les photos. */
 const RETOUCH_AV_TYPES = ['audio/wav' => 'wav', 'audio/x-wav' => 'wav', 'audio/vnd.wave' => 'wav', 'audio/wave' => 'wav', 'audio/ogg' => 'ogg', 'application/ogg' => 'ogg',
-    'audio/webm' => 'webm', 'video/webm' => 'webm', 'video/mp4' => 'mp4', 'audio/mp4' => 'm4a', 'audio/x-m4a' => 'm4a', 'audio/mpeg' => 'mp3', 'video/quicktime' => 'mov'];
+    'audio/webm' => 'webm', 'video/webm' => 'webm', 'video/mp4' => 'mp4', 'audio/mp4' => 'm4a', 'audio/x-m4a' => 'm4a', 'audio/mpeg' => 'mp3', 'audio/flac' => 'flac', 'audio/x-flac' => 'flac', 'video/quicktime' => 'mov'];
 
 /** Range le fichier reçu dans media/ sous un nouveau nom ; rend ce nom. $kind : image, audio ou video. */
 function retouch_store_upload(?array $file, string $kind = 'image'): string

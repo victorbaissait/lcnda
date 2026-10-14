@@ -2,7 +2,7 @@
  * ✂️ Atelier son et vidéo (visionneuse → « ✂️ Modifier », listes Audios / Vidéos → ✏️) : simple mais complet.
  *  - Son : forme d'onde, sélection à la souris, couper / garder / silence, fondus, volume, normaliser, réduire le souffle,
  *    voix plus nette, raccourcir les longs silences, mono, ajouter un autre son (assembler), annuler / rétablir ;
- *    enregistré en WAV (sans perte) ou Ogg Opus (léger) — on choisit à chaque fois.
+ *    enregistré en MP3, WAV, FLAC, Ogg Opus ou AIFF (qualité, mono, fréquence au choix), ou seulement téléchargé.
  *  - Vidéo : des morceaux (couper ici, supprimer, garder du début à la fin), d'autres vidéos ajoutées à la suite,
  *    le son (volume, voix plus nette, souffle, muet) et l'image (rotation, luminosité, contraste) ; enregistrée en MP4
  *    ou WebM, en temps réel (le navigateur rejoue le montage).
@@ -156,6 +156,108 @@
         for (let i = 0; i < len; i++) for (let c = 0; c < ch; c++) { const v = Math.max(-1, Math.min(1, chs[c][i])); out.setInt16(o, v < 0 ? v * 0x8000 : v * 0x7fff, true); o += 2; }
         return new Blob([out.buffer], {type: 'audio/wav'});
     }
+    /** AIFF 16 bits (Mac : GarageBand, Logic, QuickTime) : comme le WAV, mais octets dans l'autre sens. */
+    function encodeAiff(b) {
+        const ch = b.numberOfChannels, len = b.length, size = len * ch * 2, out = new DataView(new ArrayBuffer(54 + size));
+        const w = (o, s) => [...s].forEach((c, i) => out.setUint8(o + i, c.charCodeAt(0)));
+        w(0, 'FORM'); out.setUint32(4, 46 + size); w(8, 'AIFF'); w(12, 'COMM'); out.setUint32(16, 18); out.setUint16(20, ch); out.setUint32(22, len); out.setUint16(26, 16);
+        // fréquence en nombre flottant de 80 bits (IEEE 754 étendu)
+        let rate = b.sampleRate, e = 16383 + 31; while (rate < 0x80000000) { rate *= 2; e--; }
+        out.setUint16(28, e); out.setUint32(30, rate >>> 0); out.setUint32(34, 0);
+        w(38, 'SSND'); out.setUint32(42, 8 + size); out.setUint32(46, 0); out.setUint32(50, 0);
+        const chs = [...Array(ch).keys()].map(c => b.getChannelData(c)); let o = 54;
+        for (let i = 0; i < len; i++) for (let c = 0; c < ch; c++) { const v = Math.max(-1, Math.min(1, chs[c][i])); out.setInt16(o, v < 0 ? v * 0x8000 : v * 0x7fff); o += 2; }
+        return new Blob([out.buffer], {type: 'audio/aiff'});
+    }
+    /** FLAC 16 bits (sans perte, environ moitié moins lourd que le WAV) : prédiction fixe et codes de Rice, tout dans le navigateur. */
+    async function encodeFlac(b, onStep) {
+        const ch = b.numberOfChannels, len = b.length, rate = b.sampleRate, BS = 4096;
+        let buf = new Uint8Array(1 << 20), pos = 0, acc = 0, nbits = 0;
+        const grow = () => { if (pos + 64 > buf.length) { const n = new Uint8Array(buf.length * 2); n.set(buf); buf = n; } };
+        const put = (v, n) => { // n ≤ 24 bits
+            acc = (acc * (1 << n)) + (v & ((1 << n) - 1)); nbits += n;
+            while (nbits >= 8) { nbits -= 8; grow(); buf[pos++] = Math.floor(acc / (1 << nbits)) & 255; acc = acc % (1 << nbits); }
+        };
+        const putN = (v, n) => { if (n > 24) { put(Math.floor(v / (1 << 24)), n - 24); put(v % (1 << 24), 24); } else put(v, n); };
+        const align = () => { if (nbits) put(0, 8 - nbits); };
+        const crc8 = (a, z) => { let c = 0; for (let i = a; i < z; i++) { c ^= buf[i]; for (let k = 0; k < 8; k++) c = c & 0x80 ? ((c << 1) ^ 0x07) & 255 : (c << 1) & 255; } return c; };
+        const crc16 = (a, z) => { let c = 0; for (let i = a; i < z; i++) { c ^= buf[i] << 8; for (let k = 0; k < 8; k++) c = c & 0x8000 ? ((c << 1) ^ 0x8005) & 0xffff : (c << 1) & 0xffff; } return c; };
+        // en-tête : « fLaC » + STREAMINFO
+        [0x66, 0x4c, 0x61, 0x43].forEach(x => put(x, 8));
+        put(0x80, 8); put(0, 8); put(0, 8); put(34, 8); // dernier bloc de métadonnées, STREAMINFO, 34 octets
+        put(BS, 16); put(BS, 16); put(0, 24); put(0, 24); put(rate, 20); put(ch - 1, 3); put(15, 5); putN(len, 36);
+        for (let i = 0; i < 16; i++) put(0, 8); // empreinte MD5 inconnue (permis)
+        const chs = [...Array(ch).keys()].map(c => b.getChannelData(c));
+        const toInt = x => { const v = Math.max(-1, Math.min(1, x)); return Math.round(v < 0 ? v * 0x8000 : v * 0x7fff); };
+        const res = new Int32Array(BS), smp = new Int32Array(BS);
+        for (let start = 0, frame = 0; start < len; start += BS, frame++) {
+            const n = Math.min(BS, len - start), f0 = pos;
+            put(0x3ffe, 14); put(0, 1); put(0, 1); put(7, 4); put(0, 4); put(ch - 1, 4); put(4, 3); put(0, 1);
+            // numéro de trame en « UTF-8 »
+            if (frame < 0x80) put(frame, 8);
+            else if (frame < 0x800) { put(0xc0 | (frame >> 6), 8); put(0x80 | (frame & 63), 8); }
+            else if (frame < 0x10000) { put(0xe0 | (frame >> 12), 8); put(0x80 | ((frame >> 6) & 63), 8); put(0x80 | (frame & 63), 8); }
+            else { put(0xf0 | (frame >> 18), 8); put(0x80 | ((frame >> 12) & 63), 8); put(0x80 | ((frame >> 6) & 63), 8); put(0x80 | (frame & 63), 8); }
+            put(n - 1, 16);
+            put(crc8(f0, pos), 8);
+            for (let c = 0; c < ch; c++) {
+                const d = chs[c];
+                for (let i = 0; i < n; i++) smp[i] = toInt(d[start + i]);
+                // meilleur prédicteur fixe (ordre 0 à 4) : la plus petite somme des écarts
+                let best = 0, bestSum = Infinity;
+                for (let o = 0; o <= Math.min(4, n - 1); o++) {
+                    let sum = 0;
+                    for (let i = o; i < n; i++) {
+                        const x = smp[i], r = o === 0 ? x : o === 1 ? x - smp[i - 1] : o === 2 ? x - 2 * smp[i - 1] + smp[i - 2] : o === 3 ? x - 3 * smp[i - 1] + 3 * smp[i - 2] - smp[i - 3] : x - 4 * smp[i - 1] + 6 * smp[i - 2] - 4 * smp[i - 3] + smp[i - 4];
+                        sum += r < 0 ? -r : r;
+                    }
+                    if (sum < bestSum) { bestSum = sum; best = o; }
+                }
+                const o = best;
+                for (let i = o; i < n; i++) { const x = smp[i]; res[i] = o === 0 ? x : o === 1 ? x - smp[i - 1] : o === 2 ? x - 2 * smp[i - 1] + smp[i - 2] : o === 3 ? x - 3 * smp[i - 1] + 3 * smp[i - 2] - smp[i - 3] : x - 4 * smp[i - 1] + 6 * smp[i - 2] - 4 * smp[i - 3] + smp[i - 4]; }
+                const mean = bestSum / Math.max(1, n - o);
+                let k = mean > 1 ? Math.min(14, Math.max(0, Math.floor(Math.log2(mean * Math.LN2)))) : 0;
+                put(0, 1); put(8 | o, 6); put(0, 1); // sous-trame FIXED d'ordre o
+                for (let i = 0; i < o; i++) put(smp[i] & 0xffff, 16);
+                put(0, 2); put(0, 4); put(k, 4); // Rice, une seule partition
+                for (let i = o; i < n; i++) {
+                    const r = res[i], u = r >= 0 ? r * 2 : -r * 2 - 1;
+                    let q = Math.floor(u / (1 << k));
+                    while (q >= 24) { put(0, 24); q -= 24; }
+                    put(1, q + 1);
+                    if (k) put(u & ((1 << k) - 1), k);
+                }
+            }
+            align();
+            const c16 = crc16(f0, pos); put(c16 >> 8, 8); put(c16 & 255, 8);
+            if (frame % 40 === 0) { onStep?.(start / len); await new Promise(r => setTimeout(r, 0)); }
+        }
+        return new Blob([buf.slice(0, pos)], {type: 'audio/flac'});
+    }
+    /** MP3 (lu absolument partout) : encodeur LAME (assets/vendor/lamejs), chargé seulement à ce moment-là. */
+    const loadLame = () => window.lamejs ? Promise.resolve() : new Promise((ok, ko) => { const sc = document.createElement('script'); sc.src = 'assets/vendor/lamejs/lame.min.js'; sc.onload = () => ok(); sc.onerror = () => ko(new Error('Encodeur MP3 introuvable.')); document.head.appendChild(sc); });
+    async function encodeMp3(b, kbps, onStep) {
+        await loadLame();
+        if (b.sampleRate > 48000) b = await resampleBuffer(b, 44100, b.numberOfChannels);
+        const ch = Math.min(2, b.numberOfChannels), enc = new window.lamejs.Mp3Encoder(ch, b.sampleRate, kbps), parts = [];
+        const toI16 = d => { const o = new Int16Array(d.length); for (let i = 0; i < d.length; i++) { const v = Math.max(-1, Math.min(1, d[i])); o[i] = v < 0 ? v * 0x8000 : v * 0x7fff; } return o; };
+        const L = toI16(b.getChannelData(0)), R = ch > 1 ? toI16(b.getChannelData(1)) : null, step = 1152 * 20;
+        for (let i = 0; i < L.length; i += step) {
+            const out = ch > 1 ? enc.encodeBuffer(L.subarray(i, i + step), R.subarray(i, i + step)) : enc.encodeBuffer(L.subarray(i, i + step));
+            if (out.length) parts.push(new Uint8Array(out));
+            if ((i / step) % 20 === 0) { onStep?.(i / L.length); await new Promise(r => setTimeout(r, 0)); }
+        }
+        const end = enc.flush(); if (end.length) parts.push(new Uint8Array(end));
+        return new Blob(parts, {type: 'audio/mpeg'});
+    }
+    /** Changer la fréquence ou passer en mono (le navigateur fait le calcul). */
+    async function resampleBuffer(b, rate, channels) {
+        const Off = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+        const ctx = new Off(channels, Math.max(1, Math.ceil(b.duration * rate)), rate);
+        const src = ctx.createBufferSource(); src.buffer = b; src.connect(ctx.destination); src.start();
+        return ctx.startRendering();
+    }
+    ext.audioEncoders = {wav: b => encodeWav(b), aiff: b => encodeAiff(b), flac: (b, f) => encodeFlac(b, f), mp3: (b, k, f) => encodeMp3(b, k, f), resample: (b, r, c) => resampleBuffer(b, r, c)}; // pour les essais
     /** Ogg Opus (léger) : encodeur du navigateur (WebCodecs) + petite mise en pages Ogg. */
     const opusSupported = async () => { try { return !!window.AudioEncoder && (await AudioEncoder.isConfigSupported({codec: 'opus', sampleRate: 48000, numberOfChannels: 1, bitrate: 64000})).supported; } catch (_) { return false; } };
     const CRC = (() => { const t = new Uint32Array(256); for (let i = 0; i < 256; i++) { let r = i << 24; for (let k = 0; k < 8; k++) r = r & 0x80000000 ? (r << 1) ^ 0x04c11db7 : r << 1; t[i] = r >>> 0; } return t; })();
@@ -344,16 +446,52 @@
         // enregistrer
         $('[data-avx-save]').addEventListener('click', async () => {
             stop();
-            const formats = [{key: 'wav', label: 'WAV', help: `sans perte, lu partout (Mac, Windows, Audacity) · environ ${Math.max(1, Math.round(buf.length * buf.numberOfChannels * 2 / 1048576))} Mo`}];
-            if (await opusSupported()) formats.push({key: 'ogg', label: 'Ogg Opus', help: `très léger · environ ${Math.max(1, Math.round(buf.duration * (buf.numberOfChannels > 1 ? 16000 : 9000) / 1048576))} Mo · QuickTime ne le lit pas`});
-            ext.openDialog({eyebrow: 'ENREGISTRER LE SON', title: media.title || 'Son', wide: true, submitLabel: 'Enregistrer', body: saveOptionsHtml(media, formats),
-                onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { d.querySelector('[data-avx-copytitle]').hidden = d.querySelector('[name=mode]:checked').value !== 'copy'; })),
+            const mb = bytesPerSec => Math.max(1, Math.round(buf.duration * bytesPerSec / 1048576));
+            const pcm = buf.sampleRate * buf.numberOfChannels * 2;
+            const formats = [
+                {key: 'mp3', label: 'MP3', help: `lu absolument partout (téléphones, voitures, Mac, Windows) · environ ${mb(16000)} Mo en 128 kbit/s`},
+                {key: 'wav', label: 'WAV', help: `sans perte, lu partout (Mac, Windows, Audacity) · environ ${mb(pcm)} Mo`},
+                {key: 'flac', label: 'FLAC', help: `sans perte et environ deux fois plus léger que le WAV · environ ${mb(pcm * 0.55)} Mo · lu par les navigateurs, VLC, Windows ; pas par QuickTime`},
+            ];
+            if (await opusSupported()) formats.push({key: 'ogg', label: 'Ogg Opus', help: `le plus léger pour la voix · environ ${mb(buf.numberOfChannels > 1 ? 16000 : 9000)} Mo · QuickTime ne le lit pas`});
+            formats.push({key: 'aiff', label: 'AIFF', help: `sans perte, pour GarageBand, Logic, QuickTime · environ ${mb(pcm)} Mo · à télécharger seulement (l’app ne le lit pas)`});
+            const quality = `<fieldset class="h-rc-modes"><legend>Réglages</legend><div class="form-grid">
+                <label data-avx-kbps>Qualité MP3 <select name="kbps"><option value="96">96 kbit/s (voix, léger)</option><option value="128" selected>128 kbit/s (bon)</option><option value="192">192 kbit/s (très bon)</option><option value="256">256 kbit/s</option><option value="320">320 kbit/s (le meilleur)</option></select></label>
+                <label>Canaux <select name="channels"><option value="keep">comme l’original (${buf.numberOfChannels > 1 ? 'stéréo' : 'mono'})</option>${buf.numberOfChannels > 1 ? '<option value="1">mono (moitié moins lourd)</option>' : ''}</select></label>
+                <label>Fréquence <select name="rate"><option value="keep">comme l’original (${(buf.sampleRate / 1000).toLocaleString('fr-FR')} kHz)</option>${[48000, 44100, 32000, 22050, 16000].filter(r => r !== buf.sampleRate).map(r => `<option value="${r}">${(r / 1000).toLocaleString('fr-FR')} kHz${r <= 22050 ? ' (voix, plus léger)' : ''}</option>`).join('')}</select></label>
+                <label>Nom du fichier téléchargé <input name="filename" value="${esc((media.title || 'son').replace(/[\\/:*?"<>|]+/g, ' ').trim().slice(0, 80) || 'son')}"></label></div></fieldset>`;
+            const body = saveOptionsHtml(media, formats).replace('<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>', quality + '<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>')
+                .replace('<label class="checkbox-line"><input type="radio" name="mode" value="copy">', '<label class="checkbox-line"><input type="radio" name="mode" value="download"> <b>Seulement télécharger le fichier</b> sur l’ordinateur <small class="muted">(rien ne change dans la base)</small></label><label class="checkbox-line"><input type="radio" name="mode" value="copy">');
+            ext.openDialog({eyebrow: 'ENREGISTRER LE SON', title: media.title || 'Son', wide: true, submitLabel: 'Enregistrer', body,
+                onOpen: d => {
+                    const sync = () => {
+                        const fmtV = d.querySelector('[name=fmt]:checked')?.value, modeV = d.querySelector('[name=mode]:checked')?.value;
+                        d.querySelector('[data-avx-copytitle]').hidden = modeV !== 'copy';
+                        d.querySelector('[data-avx-kbps]').hidden = fmtV !== 'mp3';
+                        // AIFF : seulement à télécharger
+                        d.querySelectorAll('[name=mode]').forEach(r => { if (r.value !== 'download') r.disabled = fmtV === 'aiff'; });
+                        if (fmtV === 'aiff' && modeV !== 'download') d.querySelector('[name=mode][value=download]').checked = true;
+                        d.querySelector('.h-dialog-actions button[type=submit], button[type=submit]')?.replaceChildren(document.createTextNode(d.querySelector('[name=mode]:checked')?.value === 'download' ? 'Télécharger' : 'Enregistrer'));
+                    };
+                    d.querySelectorAll('[name=mode], [name=fmt]').forEach(r => r.addEventListener('change', sync)); sync();
+                },
                 onSubmit: async form => {
                     const f = Object.fromEntries(new FormData(form)), prog = form.querySelector('[data-avx-progress]');
                     prog.textContent = 'Préparation du fichier…';
-                    const blob = f.fmt === 'ogg' ? await encodeOpus(buf, x => { prog.textContent = `Compression… ${Math.round(x * 100)} %`; }) : encodeWav(buf);
+                    let b = buf;
+                    const rate = f.rate === 'keep' ? b.sampleRate : Number(f.rate), chans = f.channels === '1' ? 1 : b.numberOfChannels;
+                    if (rate !== b.sampleRate || chans !== b.numberOfChannels) { prog.textContent = 'Conversion (fréquence, canaux)…'; b = await resampleBuffer(b, rate, chans); }
+                    const step = x => { prog.textContent = `Compression… ${Math.round(x * 100)} %`; };
+                    const blob = f.fmt === 'ogg' ? await encodeOpus(b, step) : f.fmt === 'mp3' ? await encodeMp3(b, Number(f.kbps) || 128, step) : f.fmt === 'flac' ? await encodeFlac(b, step) : f.fmt === 'aiff' ? encodeAiff(b) : encodeWav(b);
+                    const extn = {ogg: 'ogg', mp3: 'mp3', flac: 'flac', aiff: 'aiff', wav: 'wav'}[f.fmt] || 'wav';
+                    if (f.mode === 'download') {
+                        const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${(f.filename || 'son').trim() || 'son'}.${extn}`; document.body.appendChild(a); a.click(); a.remove();
+                        setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+                        toast(`Fichier ${extn.toUpperCase()} téléchargé (${(blob.size / 1048576).toFixed(1)} Mo). Rien n’a changé dans la base.`);
+                        return; // la fenêtre de montage reste ouverte
+                    }
                     prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
-                    await uploadResult(media, blob, f.fmt === 'ogg' ? 'ogg' : 'wav', {mode: f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: buf.duration, note: f.note, title: f.title});
+                    await uploadResult(media, blob, extn, {mode: f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: b.duration, note: f.note, title: f.title});
                     toast(f.mode === 'copy' ? 'Nouveau son enregistré, rattaché aux mêmes fiches.' : f.mode === 'show' ? 'Nouvelle version montrée partout. L’original est gardé.' : 'Version enregistrée (l’ancienne reste montrée).');
                     dirty = false; dl.close(); onDone?.();
                 },
