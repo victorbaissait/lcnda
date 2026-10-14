@@ -346,11 +346,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const defaultMenuOrder = Object.keys(modules).filter(key=>key!=='jeu');
     const defaultDashboardBlocks = [['stats','Chiffres clés'],['research_progress','Bilan de recherche'],['upcoming','Cette semaine dans l’histoire familiale'],['today','Anniversaires du jour'],['saint_day','Prénom et saint du jour'],['reminders','Rappels'],['recent_changes','Dernières modifications'],['recent_deletions','Dernières suppressions'],['locked_people','Personnes verrouillées récemment'],['recent_people','Dernières fiches consultées'],['random_person','Personne au hasard'],['chosen_person','Personne choisie'],['person_quiz','Quiz personne'],['person_block','Bloc de fiche personne'],['web_search','Chercher sur internet'],['family_objects_widget','Objets de famille'],['family_memories_widget','Mémoire familiale'],['lineage_widget','Ascendants / descendants'],['random_media','Image au hasard'],['favorite_image','Image favorite'],['kinship_widget','Lien entre deux personnes'],['favorites','Personnes favorites'],['work','Travail à suivre'],['completion','Personnes à compléter'],['persons_without_sources','Personnes sans source'],['events_without_sources','Événements sans source'],['events_without_media','Événements sans média'],['recent_media','Derniers médias ajoutés'],['media_unlinked','Médias non rattachés'],['media_to_transcribe','Médias à transcrire'],['media_to_identify','Médias à identifier'],['signatures_to_compare','Signatures à comparer'],['places_to_complete','Communes à compléter'],['branches_less_documented','Branches les moins documentées'],['couples_without_marriage','Couples sans mariage'],['children_missing_parents','Enfants sans parents complets'],['consistency_issues','Incohérences et conflits'],['baptisms_without_sponsors','Baptêmes sans parrain/marraine'],['sosa_missing_near','SOSA manquants proches'],['battue_towns','Communes à explorer'],['battues_priority','Battues prioritaires'],['sources_to_check','Sources à vérifier'],['archive_favorites','Archives favorites'],['daily_research','Liste de travail quotidienne'],['reread_items','À relire'],['sosa_progress','Progression SOSA'],['duplicates','Doublons probables'],['labels','Étiquettes'],['map_overview','Carte globale'],['branch_map','Carte d’une branche'],['random_person_map','Carte d’une personne'],['person_timeline','Timeline d’une personne'],['quick_stat','Stat rapide'],['session_goal','Objectif de session'],['coverage','Couverture de la base'],['places','Lieux les plus présents']];
     const defaultDashboardBlockSpans={lineage_widget:'6',research_progress:'6',saint_day:'6',family_objects_widget:'6',family_memories_widget:'6',web_search:'6',stats:'12',upcoming:'12',today:'6',reminders:'6',recent_changes:'6',recent_deletions:'6',locked_people:'6',recent_people:'6',random_person:'6',chosen_person:'6',person_quiz:'6',person_block:'6',random_media:'6',favorite_image:'6',kinship_widget:'6',favorites:'6',work:'6',completion:'6',persons_without_sources:'6',events_without_sources:'6',events_without_media:'6',recent_media:'6',media_unlinked:'6',media_to_transcribe:'6',media_to_identify:'6',signatures_to_compare:'6',places_to_complete:'6',branches_less_documented:'6',couples_without_marriage:'6',children_missing_parents:'6',consistency_issues:'6',baptisms_without_sponsors:'6',sosa_missing_near:'6',battue_towns:'6',battues_priority:'6',sources_to_check:'6',archive_favorites:'6',daily_research:'6',reread_items:'6',sosa_progress:'6',duplicates:'6',labels:'6',map_overview:'12',branch_map:'12',random_person_map:'12',person_timeline:'6',quick_stat:'6',session_goal:'6',coverage:'6',places:'6'};
-    const defaultDashboardBlockLimits={agenda_widget:10,upcoming:8,today:8,reminders:6,recent_changes:6,recent_deletions:6,locked_people:6,recent_people:6,person_quiz:4,favorites:6,completion:6,persons_without_sources:6,events_without_sources:6,events_without_media:6,recent_media:6,media_unlinked:6,media_to_transcribe:6,media_to_identify:6,signatures_to_compare:6,places_to_complete:6,branches_less_documented:6,couples_without_marriage:6,children_missing_parents:6,consistency_issues:6,baptisms_without_sponsors:6,sosa_missing_near:8,battue_towns:6,battues_priority:6,sources_to_check:6,archive_favorites:6,daily_research:5,reread_items:6,duplicates:6,labels:10,places:8,map_overview:80,branch_map:80,random_person_map:40,person_timeline:10};
+    const defaultDashboardBlockLimits={research_suggestions:8,agenda_widget:10,upcoming:8,today:8,reminders:6,recent_changes:6,recent_deletions:6,locked_people:6,recent_people:6,person_quiz:4,favorites:6,completion:6,persons_without_sources:6,events_without_sources:6,events_without_media:6,recent_media:6,media_unlinked:6,media_to_transcribe:6,media_to_identify:6,signatures_to_compare:6,places_to_complete:6,branches_less_documented:6,couples_without_marriage:6,children_missing_parents:6,consistency_issues:6,baptisms_without_sponsors:6,sosa_missing_near:8,battue_towns:6,battues_priority:6,sources_to_check:6,archive_favorites:6,daily_research:5,reread_items:6,duplicates:6,labels:10,places:8,map_overview:80,branch_map:80,random_person_map:40,person_timeline:10};
     defaultDashboardBlocks.push(['achievements','Accomplissements']);
     defaultDashboardBlockSpans.achievements='6';
     // Fiches « patrimoine » (assets/js/heritage.js)
-    defaultDashboardBlocks.push(['agenda_widget','Mon agenda : à venir'],['voyages_widget','Départs et émigration'],['placements_widget','Enfants placés'],['heraldry_widget','Armoiries'],['poilus_widget','Poilus 14-18'],['saved_searches_widget','Recherches enregistrées'],['field_trips_widget','Circuits sur le terrain'],['offsite_backup_widget','Copie hors de l’ordinateur'],['scan_inbox_widget','Dossier Scans'],['journeys_widget','Voyages impossibles'],['cited_names_widget','Le cercle des ancêtres'],['help_requests_widget','Demandes d’entraide']);
+    defaultDashboardBlocks.push(['research_suggestions','Suggestions de recherche'],['agenda_widget','Mon agenda : à venir'],['voyages_widget','Départs et émigration'],['placements_widget','Enfants placés'],['heraldry_widget','Armoiries'],['poilus_widget','Poilus 14-18'],['saved_searches_widget','Recherches enregistrées'],['field_trips_widget','Circuits sur le terrain'],['offsite_backup_widget','Copie hors de l’ordinateur'],['scan_inbox_widget','Dossier Scans'],['journeys_widget','Voyages impossibles'],['cited_names_widget','Le cercle des ancêtres'],['help_requests_widget','Demandes d’entraide']);
     // Widgets créés dans Maintenance → Éditeur de widgets (assets/js/heritage-widgets.js) : un type « cw_… » chacun
     function syncCustomDashboardWidgets(){
         let defs=[];try{defs=JSON.parse(localStorage.getItem('genealogie-custom-widgets')||'[]');}catch(_){defs=[];}
@@ -358,8 +358,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         (Array.isArray(defs)?defs:[]).forEach(d=>{if(d&&/^cw_[a-z0-9]{4,24}$/.test(String(d.id))){defaultDashboardBlocks.push([d.id,`${d.icon?d.icon+' ':''}${d.name||'Mon widget'}`]);defaultDashboardBlockSpans[d.id]=String(d.width||'6');}});
     }
     syncCustomDashboardWidgets();
-    Object.assign(defaultDashboardBlockSpans,{agenda_widget:'6',voyages_widget:'12',placements_widget:'12',heraldry_widget:'6',poilus_widget:'6',saved_searches_widget:'6',field_trips_widget:'6',offsite_backup_widget:'6',scan_inbox_widget:'6',journeys_widget:'6',cited_names_widget:'6',help_requests_widget:'6'});
+    Object.assign(defaultDashboardBlockSpans,{research_suggestions:'6',agenda_widget:'6',voyages_widget:'12',placements_widget:'12',heraldry_widget:'6',poilus_widget:'6',saved_searches_widget:'6',field_trips_widget:'6',offsite_backup_widget:'6',scan_inbox_widget:'6',journeys_widget:'6',cited_names_widget:'6',help_requests_widget:'6'});
     const dashboardWidgetInfo={
+        research_suggestions:'Les trous de ta lignée Sosa, avec où et quand chercher : « Ton Sosa 18 n’a pas de décès : regarde les décès et sépultures de Lille entre 1820 et 1840 ». Les générations les plus proches d’abord.',
         stats:'Résumé chiffré de la base.',
         upcoming:'Dates familiales qui reviennent dans les prochains jours.',
         today:'Anniversaires de naissance, mariage ou décès du jour.',
@@ -458,7 +459,12 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const defaultPersonBlockSpans={recueils:'12',voter:'12',ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',languages:'6',resistance:'12',custom_blocks:'12',mentions:'6',person_exports:'6'};
     const personBlockWidthChoices=[['12','1'],['6','1/2'],['4','1/3'],['3','1/4'],['8','2/3'],['9','3/4']];
     function savedOrder(key,defaults){try{const stored=JSON.parse(localStorage.getItem(key)||'[]');const order=stored.filter(item=>defaults.includes(item));defaults.forEach((item,index)=>{if(order.includes(item))return;const previous=defaults.slice(0,index).reverse().find(value=>order.includes(value));const next=defaults.slice(index+1).find(value=>order.includes(value));if(previous)order.splice(order.indexOf(previous)+1,0,item);else if(next)order.splice(order.indexOf(next),0,item);else order.push(item);});return order;}catch(_){return defaults;}}
-    function orderedMenuKeys(){return savedOrder('genealogie-menu-order',defaultMenuOrder);}
+    /** Ordre du menu principal : les onglets de l'app et ses onglets à soi (Éditeur d'onglets), rangés ensemble */
+    function orderedMenuKeys(){
+        const defaults=[...defaultMenuOrder];
+        customTabs().forEach(t=>{const at=t.after&&defaults.includes(t.after)?defaults.indexOf(t.after)+1:defaults.indexOf('maintenance');defaults.splice(at<0?defaults.length:at,0,t.id);});
+        return savedOrder('genealogie-menu-order',defaults);
+    }
     function dashboardWidgetCatalogHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-dashboard-widget-catalog-hidden')||'[]');}catch(_){return[];}}
     function orderedDashboardWidgetTypes(includeHidden=false){const keys=defaultDashboardBlocks.map(item=>item[0]);const order=savedOrder('genealogie-dashboard-widget-catalog-order',keys);const hidden=dashboardWidgetCatalogHiddenKeys();return order.filter(type=>includeHidden||!hidden.includes(type)).map((type,index)=>{const item=defaultDashboardBlocks.find(row=>row[0]===type)||[type,type];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
     function listHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-list-hidden')||'[]');}catch(_){return[];}}
@@ -1048,12 +1054,15 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     function applyMenuOrder(){const nav=$('.main-nav');if(!nav)return;let visibleIndex=0;const hidden=menuHiddenKeys();
         $$('.nav-custom-tab',nav).forEach(button=>button.remove());
-        // Onglets à soi : rangés juste après l'onglet choisi (« after »), sinon avant Maintenance
-        const tabs=customTabs().filter(t=>!t.hidden);const placed=new Set();
+        // Onglets à soi : un bouton chacun, à sa place dans « Ordre du menu principal » (Apparence)
+        const tabs=Object.fromEntries(customTabs().map(t=>[t.id,t]));
         const customButton=t=>{const b=document.createElement('button');b.type='button';b.className='nav-item nav-custom-tab';b.dataset.module='dashboard';b.dataset.board=t.id;if(t.kind==='screen'){b.dataset.customScreen=String(t.target||'');delete b.dataset.module;}b.title=t.intro||t.name||'';b.innerHTML=`<span></span>${escapeHtml(`${t.icon?t.icon+' ':''}${t.name||'Mon onglet'}`)}`;b.classList.toggle('is-active',state.module==='dashboard'&&state.dashboardBoard===t.id);return b;};
-        const appendTabsAfter=key=>tabs.filter(t=>(t.after||'')===key&&!placed.has(t.id)).forEach(t=>{placed.add(t.id);const b=customButton(t);b.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');nav.append(b);});
-        orderedMenuKeys().forEach(key=>{const button=nav.querySelector(`[data-module="${key}"]:not(.nav-custom-tab)`);if(!button)return;if(key==='maintenance')appendTabsAfter('');const isHidden=key!=='maintenance'&&hidden.includes(key);button.style.display=isHidden?'none':'';if(!isHidden){button.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');}nav.append(button);if(!isHidden)appendTabsAfter(key);});
-        tabs.filter(t=>!placed.has(t.id)).forEach(t=>{const b=customButton(t);b.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');nav.insertBefore(b,nav.querySelector('[data-module="maintenance"]:not(.nav-custom-tab)'));});
+        orderedMenuKeys().forEach(key=>{
+            const tab=tabs[key];
+            const button=tab?customButton(tab):nav.querySelector(`[data-module="${key}"]:not(.nav-custom-tab)`);if(!button)return;
+            const isHidden=key!=='maintenance'&&(hidden.includes(key)||!!tab?.hidden);
+            button.style.display=isHidden?'none':'';if(!isHidden){button.querySelector('span').textContent=String(++visibleIndex).padStart(2,'0');}nav.append(button);
+        });
     }
     /** Onglet raccourci : ouvre un écran de l'app (mêmes cibles que les raccourcis des widgets : module:, list:, maint:, graph:, stat:) */
     function openCustomScreen(target){
@@ -9763,13 +9772,24 @@ ${(window.LCNDA_EXT?.exportPanels||[]).map(fn=>{try{return fn();}catch(error){co
 <section class="maintenance-panel">
   <h3>Livre de famille — livret narratif</h3>
   <p>Génération de livret PDF façon "livre de famille" avec mise en page soignée : biographie automatique, repères familiaux, événements principaux et photos disponibles. Le fichier s’ouvre en HTML imprimable, puis s’enregistre en PDF depuis le navigateur.</p>
-  <div class="page-actions"><a class="button secondary" href="${exportUrl('export_family_book')}" download>Générer le livret</a></div>
+  <form class="form-grid" id="family-book-form">
+    <label>Une branche <select name="scope"><option value="all">toute la base</option><option value="ancestors" selected>les ancêtres de…</option><option value="descendants">les descendants de…</option><option value="both">ancêtres et descendants de…</option></select></label>
+    <label>Personne de départ ${collectionPersonField('book_root',state.bootstrap?.startPersonId?{id:state.bootstrap.startPersonId,first_name:localStorage.getItem('genealogie-sosa-root-name')||('Personne #'+state.bootstrap.startPersonId),last_name:''}:null,'Le de cujus par défaut')}</label>
+    <label>Générations <input type="number" name="generations" min="1" max="30" value="6"></label>
+    <div class="span-2 h-checks"><label class="checkbox-line"><input type="checkbox" name="tree" checked> l’arbre (génération par génération)</label><label class="checkbox-line"><input type="checkbox" name="bio" checked> biographies</label><label class="checkbox-line"><input type="checkbox" name="photos" checked> photos</label><label class="checkbox-line"><input type="checkbox" name="chronology" checked> chronologie de la branche</label></div>
+  </form>
+  <div class="page-actions"><button type="button" class="button" id="family-book-open">📖 Ouvrir pour imprimer ou enregistrer en PDF</button><button type="button" class="button secondary" id="family-book-download">Télécharger le livret (HTML)</button></div>
 </section>
 
 ${backupSectionHtml()}
 
 </section>`;
         // Sauvegarde protégée : envoi dans un cadre caché (le fichier se télécharge ; une erreur s'y affiche en JSON)
+        // Livre de famille : une branche, les parties choisies ; ouvert dans une fenêtre (photos visibles, ⌘P → PDF) ou téléchargé
+        const bookParams=()=>{const f=$('#family-book-form');if(!f)return {};const p={scope:f.elements.scope.value,generations:String(Math.max(1,Math.min(30,Number(f.elements.generations.value)||6))),root_id:f.elements.book_root?.value||String(state.bootstrap?.startPersonId||'')};['tree','bio','photos','chronology'].forEach(k=>{p[k]=f.elements[k].checked?'1':'0';});return p;};
+        if($('#family-book-form'))bindCollectionPersonFields($('#family-book-form'));
+        $('#family-book-open')?.addEventListener('click',()=>{const p=bookParams();if(p.scope!=='all'&&!Number(p.root_id))return toast('Choisis la personne de départ de la branche.','error');const w=window.open(exportUrl('export_family_book',{...p,inline:'1'}),'_blank');if(!w)toast('Fenêtre bloquée : autorise les fenêtres pour cette page.','error');else toast('Le livre s’ouvre : bouton « Imprimer / enregistrer en PDF » en haut.');});
+        $('#family-book-download')?.addEventListener('click',()=>{const p=bookParams();if(p.scope!=='all'&&!Number(p.root_id))return toast('Choisis la personne de départ de la branche.','error');const a=document.createElement('a');a.href=exportUrl('export_family_book',p);a.download='';document.body.appendChild(a);a.click();a.remove();});
         $('#protected-backup-form')?.addEventListener('submit',event=>{const form=event.currentTarget;
             if(form.elements.password.value!==form.elements.password_confirm.value){event.preventDefault();toast('Les deux mots de passe ne sont pas identiques.','error');return;}
             form.elements.csrf.value=state.csrf;toast('Préparation de la sauvegarde protégée… (le téléchargement va commencer)');
@@ -10310,7 +10330,7 @@ ${backupSectionHtml()}
         if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='design')return;
         const design=readDesignSettings();
         const menuHidden=menuHiddenKeys();
-        const menuItems=orderedMenuKeys().map(key=>[key,modules[key]?.[1]||key,key!=='maintenance',key==='maintenance'||!menuHidden.includes(key)]);
+        const ownTabs=Object.fromEntries(customTabs().map(t=>[t.id,t]));const menuItems=orderedMenuKeys().map(key=>[key,modules[key]?.[1]||(ownTabs[key]?`${ownTabs[key].icon?ownTabs[key].icon+' ':''}${ownTabs[key].name||'Mon onglet'} (mon onglet)`:key),key!=='maintenance',key==='maintenance'||(!menuHidden.includes(key)&&!ownTabs[key]?.hidden)]);
         const listItems=orderedListTypes(true).map(([key,,label])=>[key,label]);
         const listHidden=listHiddenKeys();
         const mapItems=orderedMapTypes(true).map(([key,,label])=>[key,label]);const mapHidden=mapHiddenKeys();
@@ -10659,7 +10679,8 @@ ${backupSectionHtml()}
             }
             const list=$(`#${button.dataset.orderSave}`);if(!list)return;
             const rows=$$('.order-row',list),keys=rows.map(row=>row.dataset.orderKey);
-            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));applyMenuOrder();renderDesignTools();toast('Ordre du menu enregistré.');return;}
+            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));
+                const own=customTabs();if(own.some(t=>!!t.hidden!==hidden.includes(t.id))){own.forEach(t=>{t.hidden=hidden.includes(t.id);});try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(own));}catch(_){}}applyMenuOrder();renderDesignTools();toast('Ordre du menu enregistré.');return;}
             if(button.dataset.orderSave==='list-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-list-order',JSON.stringify(keys));localStorage.setItem('genealogie-list-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Ordre des listes enregistré.');return;}
             if(button.dataset.orderSave==='dashboard-widget-catalog-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-dashboard-widget-catalog-order',JSON.stringify(keys));localStorage.setItem('genealogie-dashboard-widget-catalog-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Bibliothèque de widgets enregistrée.');return;}
             if(button.dataset.orderSave==='map-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-map-order',JSON.stringify(keys));localStorage.setItem('genealogie-map-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Ordre des cartes enregistré.');return;}
@@ -13187,7 +13208,7 @@ ${backupSectionHtml()}
     }
 
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
-    window.LCNDA_APP={customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

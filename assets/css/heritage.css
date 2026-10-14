@@ -1536,3 +1536,10 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-ct-widgets li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:center;border:1px solid #ddd;padding:6px 10px}
 .h-ct-widgets select{width:auto}
 .nav-custom-tab{font-style:normal}
+/* ── Suggestions de recherche ── */
+.h-sugg{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.h-sugg li{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start;border-bottom:1px solid #e3e3e3;padding-bottom:8px}
+.h-sugg li:last-child{border-bottom:0}
+.h-sugg p{margin:0 0 2px}
+.h-sugg-icon{font-size:20px;line-height:1.2}
+.h-cs-export{display:flex;flex-wrap:wrap;gap:6px}

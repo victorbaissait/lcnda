@@ -549,6 +549,52 @@ function age_checks(PDO $pdo): array
             if ($marr && $b['ts'] < $marr['ts'] - 86400 * 365 * 15) { $alerts[] = ['level' => 'low', 'person_id' => $ch['id'], 'family_id' => $fid, 'text' => 'Né(e) bien avant le mariage des parents', 'detail' => 'Naissance ' . $b['text'] . ' ; mariage ' . $marr['text']]; }
         }
     }
+    // ── Une vie impossible : décès avant la naissance, très grand âge, mariage après le décès ──
+    foreach ($ev['p'] ?? [] as $pid => $e) {
+        if (!isset($e['birth'], $e['death'])) { continue; }
+        $life = $years($e['birth'], $e['death']);
+        $tolerance = $e['birth']['exact'] && $e['death']['exact'] ? 0 : 1;
+        if ($life < -$tolerance) { $alerts[] = ['level' => 'high', 'person_id' => $pid, 'text' => 'Décès avant la naissance', 'detail' => 'Naissance ' . $e['birth']['text'] . ' ; décès ' . $e['death']['text']]; }
+        elseif ($life > 105) { $alerts[] = ['level' => $life > 115 ? 'high' : 'mid', 'person_id' => $pid, 'text' => 'Mort(e) à ' . floor($life) . ' ans', 'detail' => 'Naissance ' . $e['birth']['text'] . ' ; décès ' . $e['death']['text'] . ' (homonyme, ou naissance d’un parent ?)']; }
+    }
+    foreach ($families as $f) {
+        $marr = $ev['f'][(int) $f['id']] ?? null; if (!$marr) { continue; }
+        foreach (array_filter([(int) $f['partner1_id'], (int) $f['partner2_id']]) as $p) {
+            $d = $ev['p'][$p]['death'] ?? null; if (!$d) { continue; }
+            if ($marr['ts'] - $d['ts'] > ($marr['exact'] && $d['exact'] ? 86400 : 366 * 86400)) { $alerts[] = ['level' => 'high', 'person_id' => $p, 'family_id' => (int) $f['id'], 'text' => 'Marié(e) après son décès', 'detail' => 'Mariage ' . $marr['text'] . ' ; décès ' . $d['text']]; }
+        }
+    }
+    // ── Erreurs de génération ──
+    // Fratrie étalée sur plus de 25 ans (même mère) ou 30 ans : deux générations mélangées (père et fils homonymes ?)
+    foreach ($families as $f) {
+        $births = [];
+        foreach ($kids[(int) $f['id']] ?? [] as $c) { if (isset($ev['p'][$c]['birth'])) { $births[$c] = $ev['p'][$c]['birth']; } }
+        if (count($births) < 2) { continue; }
+        uasort($births, static fn($a, $b) => $a['ts'] <=> $b['ts']);
+        $first = array_key_first($births); $last = array_key_last($births);
+        $span = $years($births[$first], $births[$last]);
+        $hasMother = (bool) array_filter([(int) $f['partner1_id'], (int) $f['partner2_id']], static fn($p) => ($gender[$p] ?? '') === 'female');
+        if ($span > ($hasMother ? 25 : 30)) { $alerts[] = ['level' => $span > 35 ? 'high' : 'mid', 'person_id' => $last, 'other_id' => $first, 'family_id' => (int) $f['id'], 'text' => 'Fratrie étalée sur ' . floor($span) . ' ans', 'detail' => 'Aîné(e) né(e) ' . $births[$first]['text'] . ', cadet(te) ' . $births[$last]['text'] . ' : deux générations mélangées (père et fils homonymes) ?']; }
+    }
+    // Lignée Sosa : un ancêtre trop jeune ou trop vieux par rapport au premier descendant daté de la lignée
+    // (des générations sans dates entre les deux) → une génération en trop ou oubliée
+    $root = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn();
+    $generationAlerts = 0;
+    if ($root && function_exists('sosa_positions')) {
+        $positions = sosa_positions($pdo, $root, 60000)['positions'] ?? [];
+        foreach ($positions as $sosa => $pid) {
+            $b = $ev['p'][$pid]['birth'] ?? null; if (!$b || $sosa < 4) { continue; }
+            $k = 0; $n = (int) $sosa; $desc = null;
+            while ($n > 1) { $n = intdiv($n, 2); $k++; $did = $positions[$n] ?? null; if ($did && isset($ev['p'][$did]['birth'])) { $desc = [$n, $did, $ev['p'][$did]['birth']]; break; } }
+            if (!$desc || $k < 2) { continue; } // une seule génération d'écart : déjà vu avec l'âge des parents
+            $gap = $years($b, $desc[2]);
+            if ($gap < 15 * $k || $gap > 55 * $k) {
+                $alerts[] = ['level' => $gap < 12 * $k || $gap > 65 * $k ? 'high' : 'mid', 'person_id' => $pid, 'other_id' => $desc[1],
+                    'text' => 'Sosa ' . $sosa . ' : ' . floor($gap) . ' ans pour ' . $k . ' générations', 'detail' => 'Né(e) ' . $b['text'] . ', son descendant Sosa ' . $desc[0] . ' ' . $desc[2]['text'] . ' : ' . ($gap < 15 * $k ? 'une génération en trop (homonyme pris pour son père) ?' : 'une génération oubliée ?')];
+                if (++$generationAlerts >= 200) { break; }
+            }
+        }
+    }
     $people = collection_people($pdo, array_merge(array_column($alerts, 'person_id'), array_filter(array_column($alerts, 'other_id'))));
     foreach ($alerts as &$a) { $a['person'] = $people[$a['person_id']] ?? null; $a['other'] = isset($a['other_id']) ? ($people[$a['other_id']] ?? null) : null; }
     unset($a);

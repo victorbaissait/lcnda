@@ -61,7 +61,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur d’onglets', 'Crée tes propres onglets dans la barre du haut, sans rien programmer : une page de widgets comme le tableau de bord (widgets de l’app, tes widgets, tes listes, tes statistiques), ou un raccourci vers un écran de l’app. Pars de rien, d’un onglet existant ou d’un modèle.', '<button type="button" class="button" data-ct-new>+ Nouvel onglet</button>')}
             <section class="maintenance-panel"><h3>Importer un onglet reçu</h3><p class="muted">Un fichier « .lcnda-onglet.json » envoyé par un proche : seule la mise en page est partagée, jamais les données.</p><input type="file" accept=".json,application/json" data-ct-import></section>
             ${list.length ? `<div class="h-records">${list.map((t, i) => `<article class="h-record"><header><div><strong>${esc(t.icon || '🗂️')} ${esc(t.name || 'Mon onglet')}</strong> <small>${kindText(t)}</small>${t.hidden ? ' <span class="collection-kind">masqué</span>' : ''}</div>
-                    <span class="h-saved-tools"><button type="button" class="link-button" data-ct-up="${i}" ${i ? '' : 'disabled'} title="Plus tôt dans la barre">↑</button><button type="button" class="link-button" data-ct-down="${i}" ${i < list.length - 1 ? '' : 'disabled'} title="Plus tard dans la barre">↓</button><button type="button" class="link-button" data-ct-edit="${esc(t.id)}">modifier</button><button type="button" class="link-button" data-ct-dup="${esc(t.id)}">dupliquer</button><button type="button" class="link-button" data-ct-hide="${esc(t.id)}">${t.hidden ? 'afficher' : 'masquer'}</button><button type="button" class="link-button" data-ct-del="${esc(t.id)}">supprimer</button></span></header>
+                    <span class="h-saved-tools"><button type="button" class="link-button" data-ct-edit="${esc(t.id)}">modifier</button><button type="button" class="link-button" data-ct-dup="${esc(t.id)}">dupliquer</button><button type="button" class="link-button" data-ct-hide="${esc(t.id)}">${t.hidden ? 'afficher' : 'masquer'}</button><button type="button" class="link-button" data-ct-del="${esc(t.id)}">supprimer</button></span></header>
                     ${t.intro ? `<p>${esc(t.intro)}</p>` : ''}<div class="page-actions"><button type="button" class="button small" data-ct-open="${esc(t.id)}">Ouvrir l’onglet</button><button type="button" class="button small secondary" data-ct-share="${esc(t.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>`
                 : A().empty('Aucun onglet à toi pour le moment : « + Nouvel onglet ».')}</section>`;
         const ws = A().$('#workspace'), find = id => list.find(t => t.id === id);
@@ -70,10 +70,7 @@
         ws.querySelectorAll('[data-ct-dup]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctDup); editTab({...JSON.parse(JSON.stringify(t)), id: newId(), name: (t.name || 'Mon onglet') + ' (copie)'}, false); }));
         ws.querySelectorAll('[data-ct-open]').forEach(b => b.addEventListener('click', () => openTab(find(b.dataset.ctOpen))));
         ws.querySelectorAll('[data-ct-share]').forEach(b => b.addEventListener('click', () => shareTab(find(b.dataset.ctShare))));
-        ws.querySelectorAll('[data-ct-hide]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctHide); t.hidden = !t.hidden; save(list); refresh(); }));
-        const move = (i, j) => { [list[i], list[j]] = [list[j], list[i]]; save(list); refresh(); };
-        ws.querySelectorAll('[data-ct-up]').forEach(b => b.addEventListener('click', () => move(Number(b.dataset.ctUp), Number(b.dataset.ctUp) - 1)));
-        ws.querySelectorAll('[data-ct-down]').forEach(b => b.addEventListener('click', () => move(Number(b.dataset.ctDown), Number(b.dataset.ctDown) + 1)));
+        ws.querySelectorAll('[data-ct-hide]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctHide); t.hidden = !t.hidden; menuHidden(t.id, t.hidden); save(list); refresh(); }));
         ws.querySelectorAll('[data-ct-del]').forEach(b => b.addEventListener('click', () => {
             const t = find(b.dataset.ctDel);
             if (!confirm(`Supprimer l’onglet « ${t.name || 'Mon onglet'} » ? Les widgets, listes et statistiques qu’il montrait ne sont pas supprimés.`)) return;
@@ -85,6 +82,17 @@
             catch (error) { toast('Fichier d’onglet illisible : ' + error.message, 'error'); }
         });
     };
+    // Même réglage que la case de Maintenance → Apparence → « Ordre du menu principal »
+    function menuHidden(id, hide) {
+        let hidden = []; try { hidden = JSON.parse(localStorage.getItem('genealogie-menu-hidden') || '[]'); } catch (_) {}
+        hidden = (Array.isArray(hidden) ? hidden : []).filter(k => k !== id); if (hide) hidden.push(id);
+        try { localStorage.setItem('genealogie-menu-hidden', JSON.stringify(hidden)); } catch (_) {}
+    }
+    /** Nouvelle place choisie dans l'onglet : on l'enlève de l'ordre enregistré, il se range alors « après … » */
+    function forgetMenuPlace(id) {
+        let order = []; try { order = JSON.parse(localStorage.getItem('genealogie-menu-order') || '[]'); } catch (_) {}
+        if (Array.isArray(order) && order.includes(id)) { try { localStorage.setItem('genealogie-menu-order', JSON.stringify(order.filter(k => k !== id))); } catch (_) {} }
+    }
     const refresh = () => ext.maintenance.tabs_editor(++S().workspaceToken);
     function openTab(t) {
         if (!t) return;
@@ -121,7 +129,7 @@
         const afterOptions = [['', 'à la fin (avant Maintenance)'], ...Object.entries(app.appModules).filter(([k]) => !['jeu', 'maintenance'].includes(k)).map(([k, v]) => [k, 'après « ' + v[1] + ' »'])];
         const paint = () => {
             const known = new Map(catalog());
-            app.$('#workspace').innerHTML = `<section class="page collection-page h-ct-editor">${header('ÉDITEUR D’ONGLETS', existing ? `Modifier « ${t.name || 'Mon onglet'} »` : 'Nouvel onglet', 'Le nom et l’icône apparaissent dans la barre du haut.', '<button type="button" class="button secondary" data-ct-back>← Retour</button>')}
+            app.$('#workspace').innerHTML = `<section class="page collection-page h-ct-editor">${header('ÉDITEUR D’ONGLETS', existing ? `Modifier « ${t.name || 'Mon onglet'} »` : 'Nouvel onglet', 'Le nom et l’icône apparaissent dans la barre du haut. Pour le ranger ou le masquer parmi les autres onglets : Maintenance → Apparence → « Ordre du menu principal ».', '<button type="button" class="button secondary" data-ct-back>← Retour</button>')}
                 <section class="maintenance-panel"><h3>1. L’onglet</h3><div class="form-grid">
                     <label>Nom<input data-ct="name" value="${esc(t.name || '')}" maxlength="40" placeholder="Ma Bretagne"></label>
                     <label>Icône<input data-ct="icon" value="${esc(t.icon || '')}" maxlength="16" class="h-be-icon" placeholder="🗂️"></label>
@@ -148,6 +156,7 @@
             const doSave = andOpen => {
                 if (!String(t.name || '').trim()) { toast('Donne un nom à l’onglet.', 'error'); ws.querySelector('[data-ct="name"]').focus(); return; }
                 const clean = cleanTab(t), list = tabs(), i = list.findIndex(x => x.id === clean.id);
+                if (i < 0 || (list[i].after || '') !== clean.after) forgetMenuPlace(clean.id);
                 if (i >= 0) list[i] = clean; else list.push(clean);
                 save(list);
                 toast('Onglet enregistré : il est dans la barre du haut.');

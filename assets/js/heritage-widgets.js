@@ -39,8 +39,28 @@
     // Statistiques de l'app qui donnent des chiffres par valeur (api graph_stats, sortes « bar » et « histogram ») : on peut les redessiner
     const APP_STATS = [['surnames', 'Noms'], ['firstnames', 'Prénoms'], ['birth_places', 'Lieux de naissance'], ['marriage_places', 'Lieux de mariage'], ['death_places', 'Lieux de décès'],
         ['birth_countries', 'Pays de naissance'], ['death_countries', 'Pays de décès'], ['sex_distribution', 'Sexes'], ['birth_years', 'Années de naissance (par décennie)'], ['death_years', 'Années de décès (par décennie)'],
-        ['age_at_death', 'Âge au décès'], ['death_causes', 'Causes de décès'], ['children_per_family', 'Enfants par famille'], ['farthest_from_origin', 'Lieux les plus éloignés de la commune d’origine']];
+        ['age_at_death', 'Âge au décès'], ['death_causes', 'Causes de décès'], ['children_per_family', 'Enfants par famille']];
     const appStatLabel = k => APP_STATS.find(x => x[0] === k)?.[1] || k;
+    /** Statistiques de l'app refaites en « Graphique » sur les personnes (ou les événements) : on peut alors y ajouter tous les critères */
+    const APP_STAT_AS_CHART = {
+        surnames: {group: 'last_name', groupBy: 'value', limit: 15}, firstnames: {group: 'first_name', groupBy: 'value', limit: 15},
+        birth_places: {group: 'birthplace', groupBy: 'value', limit: 12}, death_places: {group: 'deathplace', groupBy: 'value', limit: 12},
+        birth_countries: {group: 'birth_country', groupBy: 'value', limit: 12}, death_countries: null, sex_distribution: {group: 'gender', groupBy: 'value', style: 'pie'},
+        birth_years: {group: 'birth', groupBy: 'decade', style: 'columns'}, death_years: {group: 'death', groupBy: 'decade', style: 'columns'},
+        age_at_death: {group: 'age', groupBy: 'step', groupStep: 10, style: 'columns'},
+        marriage_places: {events: 'MARR', group: 'place', groupBy: 'value', limit: 12},
+    };
+    function appStatToChart(d) {
+        const m = APP_STAT_AS_CHART[d.statType]; if (!m) return null;
+        const rules = [];
+        if (d.statGender) rules.push({field: 'gender', value: d.statGender, values: []});
+        if (d.statLineage) rules.push({field: 'sosa', values: []});
+        const fromIso = isoDate(d.statFrom), toIso = isoDate(d.statTo);
+        if (fromIso || toIso) rules.push({field: 'date_range', date_from: fromIso || (yearOf(d.statFrom) ? `${yearOf(d.statFrom)}-01-01` : ''), date_to: toIso || (yearOf(d.statTo) ? `${yearOf(d.statTo)}-12-31` : ''), values: []});
+        else if (yearOf(d.statFrom) || yearOf(d.statTo)) rules.push({field: 'year', from: yearOf(d.statFrom), to: yearOf(d.statTo), values: []});
+        const src = m.events ? {source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tagIds(meta || {}, m.events)}, ...rules]}} : {source: 'persons', definition: {match: 'all', rules}};
+        return {...d, kind: 'chart', src, group: m.group, groupBy: m.groupBy, groupStep: m.groupStep || 25, style: d.style && d.style !== 'bars' ? d.style : (m.style || 'bars'), limit: m.limit || d.limit || 10, valueColors: {}};
+    }
     // Éditeur ouvert depuis Maintenance → Éditeur de widgets (mode « widgets ») ou → Éditeur de statistiques (mode « stats »)
     let mode = 'widgets';
     const backToList = () => ext.maintenance[mode === 'stats' ? 'stats_editor' : 'widget_editor'](++S().workspaceToken);
@@ -97,7 +117,11 @@
             try { return [{detail: await api('person', {id: Number(d.jPerson)})}]; } catch (error) { return [{error: error.message}]; }
         }
         if (d.kind === 'appstat') {
-            const q = {type: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', year_from: d.statFrom || undefined, year_to: d.statTo || undefined, gender: d.statGender || undefined};
+            const q = {type: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', gender: d.statGender || undefined};
+            // date précise (« 12 mars 1750 », « 12/03/1750 ») ou année seule
+            const fromIso = isoDate(d.statFrom), toIso = isoDate(d.statTo);
+            if (fromIso || toIso) { q.date_from = fromIso || (yearOf(d.statFrom) ? `${yearOf(d.statFrom)}-01-01` : undefined); q.date_to = toIso || (yearOf(d.statTo) ? `${yearOf(d.statTo)}-12-31` : undefined); }
+            else { q.year_from = yearOf(d.statFrom) || undefined; q.year_to = yearOf(d.statTo) || undefined; }
             if (d.statLineage) { const root = Number(localStorage.getItem('genealogie-sosa-root')) || 0; if (root) q.sosa_root_id = root; }
             try { return [{appstat: await api('graph_stats', q)}]; } catch (error) { return [{error: error.message}]; }
         }
@@ -113,6 +137,27 @@
 
     /* ─── Affichage ─── */
     const PALETTE = ['#0066cc', '#cc4700', '#2f8f5b', '#7a47db', '#c0392b', '#a07a00', '#00838f', '#d4588f', '#5d6d7e', '#8bc34a', '#ff9800', '#3f51b5'];
+    const TIME_GROUPS = ['decade', 'century', 'year', 'step', 'month'];
+    const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+    const monthOf = v => { const p = A().parsedGenealogyDate?.(String(v || '')); if (p?.exact && p.date) return p.date.getUTCMonth() + 1; const m = String(v).toLowerCase().match(/(?:^|\s|\/|-)(\d{1,2})[\/.-](\d{1,2})[\/.-]\d{4}/); if (m) return Number(m[2]); const i = MONTHS.findIndex(x => String(v).toLowerCase().includes(x)); return i >= 0 ? i + 1 : null; };
+    /** Clé triable d'une date (« 12 mars 1750 », « 1750-03-12 », « 1750 ») ; une année seule va du 1er janvier (début) au 31 décembre (fin) */
+    function dateKey(v, end = false) {
+        const s = String(v || '').trim();
+        let m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/); if (m) return Number(m[1]) * 10000 + Number(m[2]) * 100 + Number(m[3]);
+        m = s.match(/(\d{1,2})[\/.](\d{1,2})[\/.](\d{4})/); if (m) return Number(m[3]) * 10000 + Number(m[2]) * 100 + Number(m[1]);
+        const y = yearOf(s); if (y === null) return null;
+        const mo = MONTHS.findIndex(x => s.toLowerCase().includes(x)) + 1, day = Number((s.match(/^(?:le\s+)?(\d{1,2})(?:er)?\s/i) || [])[1]) || 0;
+        if (mo) return y * 10000 + mo * 100 + (day || (end ? 31 : 1));
+        return y * 10000 + (end ? 1231 : 101);
+    }
+    /** « 12 mars 1750 », « 12/03/1750 », « 1750-03-12 » → 1750-03-12 ; une année seule → '' */
+    function isoDate(v) {
+        const s = String(v || '').trim(); if (!/\d{4}/.test(s) || /^\d{4}$/.test(s)) return '';
+        const k = dateKey(s); if (k === null || k % 100 === 0) return '';
+        const y = Math.floor(k / 10000), m = Math.floor(k / 100) % 100, d = k % 100;
+        if (!/\d{1,2}[\/.-]\d{1,2}|\d{4}-\d{1,2}-\d{1,2}/.test(s) && !/^(?:le\s+)?\d{1,2}(?:er)?\s/i.test(s)) return ''; // « mars 1750 » : pas assez précis
+        return `${String(y).padStart(4, '0')}-${String(m).padStart(2, '0')}-${String(Math.min(d, 31)).padStart(2, '0')}`;
+    }
     function groupRows(data, d) {
         if (data.appstat) { // chiffres déjà comptés par l'app
             const timeline = data.appstat.kind === 'histogram';
@@ -132,9 +177,14 @@
             let vals = [cellText(data, r, col).trim()];
             if (col === 'labels' || col === 'names') vals = vals[0].split(/\s*,\s*/);
             for (let v of vals) {
-                if (d.groupBy === 'decade' || d.groupBy === 'century' || d.groupBy === 'year') {
-                    const y = yearOf(v);
-                    if (y === null) { v = ''; } else if (d.groupBy === 'decade') { v = `${Math.floor(y / 10) * 10}–${Math.floor(y / 10) * 10 + 9}`; } else if (d.groupBy === 'century') { const c = Math.floor((y - 1) / 100) + 1; v = `${c}${c === 1 ? 'er' : 'e'} siècle`; } else { v = String(y); }
+                // période choisie (dates précises ou années) : les valeurs hors période ne comptent pas
+                if (d.rangeFrom || d.rangeTo) { const k = dateKey(v); if (k === null || (d.rangeFrom && k < dateKey(d.rangeFrom, false)) || (d.rangeTo && k > dateKey(d.rangeTo, true))) continue; }
+                if (TIME_GROUPS.includes(d.groupBy)) {
+                    const step = Math.max(1, Math.min(500, Number(d.groupStep) || 25));
+                    const y = yearOf(v) ?? (d.groupBy === 'step' && /\d/.test(String(v)) ? Number(String(v).match(/\d+/)[0]) : null); // « 45 ans » → 45
+                    if (d.groupBy === 'month') { const m = monthOf(v); v = m ? MONTHS[m - 1] : ''; }
+                    else if (y === null) { v = ''; } else if (d.groupBy === 'decade') { v = `${Math.floor(y / 10) * 10}–${Math.floor(y / 10) * 10 + 9}`; } else if (d.groupBy === 'century') { const c = Math.floor((y - 1) / 100) + 1; v = `${c}${c === 1 ? 'er' : 'e'} siècle`; }
+                    else if (d.groupBy === 'step') { const a = Math.floor(y / step) * step; v = step === 1 ? String(a) : `${a}–${a + step - 1}`; } else { v = String(y); }
                 }
                 if (v === '' && d.skipEmpty !== false) continue;
                 counts.set(v || '(vide)', (counts.get(v || '(vide)') || 0) + 1);
@@ -143,8 +193,8 @@
             if (any) counted++;
         }
         let entries = [...counts.entries()];
-        const timeline = ['decade', 'century', 'year'].includes(d.groupBy);
-        const when = v => { const k = yearOf(v) ?? Number.parseInt(v, 10); return Number.isFinite(k) ? k : Infinity; }; // « (vide) » en dernier
+        const timeline = TIME_GROUPS.includes(d.groupBy);
+        const when = v => { if (d.groupBy === 'month') { const i = MONTHS.indexOf(v); return i >= 0 ? i : Infinity; } const k = yearOf(v) ?? Number.parseInt(v, 10); return Number.isFinite(k) ? k : Infinity; }; // « (vide) » en dernier
         entries.sort((a, b) => timeline ? when(a[0]) - when(b[0]) : b[1] - a[1] || a[0].localeCompare(b[0], 'fr'));
         const top = Math.max(1, Math.min(60, Number(d.limit) || 10));
         if (!timeline && entries.length > top) { const rest = entries.slice(top).reduce((n, e) => n + e[1], 0); entries = entries.slice(0, top); if (rest) entries.push(['autres', rest]); }
@@ -334,7 +384,7 @@
         if (d.kind === 'app') return '';
         return (d.parts || []).map((p, i) => `<section class="h-cw-part">${p.title ? `<h4>${esc(p.title)}</h4>` : ''}${bodyHtml(p, datas?.parts?.[i] || [])}${captionHtml(p)}</section>`).join('');
     }
-    const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : (d.kind === 'chart' && datas[0]?.shown) || (d.kind === 'appstat' && datas[0]?.appstat) ? groupRows(datas[0], d).counted : '';
+    const countOf = (d, datas) => d.kind === 'list' ? (datas[0]?.shown?.length ?? '') : (d.kind === 'chart' && datas[0]?.shown) || (d.kind === 'appstat' && datas[0]?.appstat) ? fmt(Math.round(groupRows(datas[0], d).counted)) : '';
     function widgetCard(d, index, span, datas) {
         const parts = partsHtml(d, datas);
         return ext.dressWidget(d, A().card(index, d.name || 'Mon widget', parts ? '' : countOf(d, datas), bodyHtml(d, datas) + captionHtml(d) + parts, span));
@@ -445,6 +495,16 @@
             catch (error) { toast('Fichier de widget illisible : ' + error.message, 'error'); }
         });
     }
+    /** Le widget est-il posé sur le tableau de bord principal (pas dans un onglet à soi) ? */
+    function onDashboard(id) { const st = S(), board = st.dashboardBoard; st.dashboardBoard = ''; try { return A().dashboardBlockSettings().widgets.some(w => w.type === id); } finally { st.dashboardBoard = board; } }
+    function setOnDashboard(id, on) {
+        const st = S(), board = st.dashboardBoard; st.dashboardBoard = '';
+        try {
+            const settings = A().dashboardBlockSettings(), has = settings.widgets.some(w => w.type === id);
+            if (on && !has) { A().syncCustomDashboardWidgets(); settings.widgets.push(A().dashboardNewWidget(id, {width: defs().find(x => x.id === id)?.width || '6'})); A().saveDashboardBlockSettings(settings); }
+            if (!on && has) { settings.widgets = settings.widgets.filter(w => w.type !== id); A().saveDashboardBlockSettings(settings); }
+        } finally { st.dashboardBoard = board; }
+    }
     function addToDashboard(id) {
         A().syncCustomDashboardWidgets();
         const d = defs().find(x => x.id === id);
@@ -482,14 +542,14 @@
         ext.openDialog({
             eyebrow: 'NOUVELLE STATISTIQUE', title: 'Par quoi commencer ?', wide: true, submitLabel: '',
             body: `<h4>Partir de rien</h4><div class="h-templates">${['chart', 'numbers', 'list'].map(k => tile(KINDS[k][0], KINDS[k][1], KINDS[k][2], `data-cs-kind="${k}"`)).join('')}</div>
-                <h4>Partir d’une statistique de l’app</h4><p class="muted">Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs et tes filtres (années, sexe, seulement tes ancêtres).</p>
+                <h4>Partir d’une statistique de l’app</h4><p class="muted">Les mêmes chiffres que dans Graphiques → Statistiques, avec ton dessin (barres, camembert, courbe, mosaïque…), tes couleurs, et autant de critères que tu veux : métier, lieu et rayon en km, dates précises, mariage, nombre d’enfants, durée de vie, divorce, voyage…</p>
                 <div class="h-templates">${APP_STATS.map(([k, l]) => tile('📈', l, 'Statistique de l’app', `data-cs-app="${k}"`)).join('')}</div>
                 ${mine.length ? `<h4>Partir d’un de mes widgets ou de mes statistiques</h4><div class="h-templates">${mine.map(d => tile(d.icon || '🧱', d.name || 'Mon widget', KINDS[d.kind]?.[1] || '', `data-cs-mine="${esc(d.id)}"`)).join('')}</div>` : ''}
                 <h4>Exemples</h4><div class="h-templates">${ex.map((d, i) => tile(d.icon, d.name, KINDS[d.kind][1], `data-cs-ex="${i}"`)).join('')}</div>`,
             onOpen: dlg => {
                 const go = d => { editing = {...d, inStats: true, width: '12'}; partIndex = -1; dlg.close(); renderEditor(++S().workspaceToken); };
                 dlg.querySelectorAll('[data-cs-kind]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csKind; go(baseDef({kind: k, icon: KINDS[k][0], name: '', style: 'bars'})); }));
-                dlg.querySelectorAll('[data-cs-app]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csApp; go(baseDef({kind: 'appstat', icon: '📈', name: appStatLabel(k), statType: k, style: ['birth_years', 'death_years', 'age_at_death'].includes(k) ? 'columns' : 'bars', limit: 15})); }));
+                dlg.querySelectorAll('[data-cs-app]').forEach(b => b.addEventListener('click', () => { const k = b.dataset.csApp; const st = baseDef({kind: 'appstat', icon: '📈', name: appStatLabel(k), statType: k, style: ['birth_years', 'death_years', 'age_at_death'].includes(k) ? 'columns' : 'bars', limit: 15}); go(appStatToChart(st) || st); }));
                 dlg.querySelectorAll('[data-cs-mine]').forEach(b => b.addEventListener('click', () => { const d = mine.find(x => x.id === b.dataset.csMine); go(baseDef({...d, id: newId(), name: (d.name || 'Ma statistique') + ' (copie)'})); }));
                 dlg.querySelectorAll('[data-cs-ex]').forEach(b => b.addEventListener('click', () => go(baseDef(ex[Number(b.dataset.csEx)]))));
             },
@@ -520,7 +580,44 @@
     const target = () => partIndex >= 0 && editing.parts?.[partIndex] ? editing.parts[partIndex] : editing;
     const srcAt = path => { const [kind, i] = path.split('.'), t = target(); return kind === 'c' ? t.counters[Number(i)].src : t.src; };
     // Légende : une phrase sous la partie pour dire ce qu'elle montre
-    const captionField = d => d.kind === 'app' ? '' : `<label class="h-cw-caption-field">Légende <small>(ce que montre cette partie, affichée dessous)</small><input data-cw-caption value="${esc(d.caption || '')}" maxlength="400" placeholder="Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent"></label>`;
+    const captionField = d => d.kind === 'app' ? '' : `<label class="h-cw-caption-field">Légende <small>(ce que montre cette partie, affichée dessous)</small><input data-cw-caption value="${esc(d.caption || '')}" maxlength="400" placeholder="${esc(['chart', 'list', 'numbers'].includes(d.kind) ? proposeCaption(d) : 'Ex. : Les baptêmes de la paroisse, du plus ancien au plus récent')}"></label>${['chart', 'list', 'numbers', 'appstat'].includes(d.kind) ? '<button type="button" class="link-button" data-cw-propose>✨ Proposer une légende d’après les critères</button>' : ''}`;
+    /** Une phrase qui dit ce que montre la partie : « Personnes — métier contient « bûcheron », à moins de 4 km de Pernay… ; comptées par nom de famille. » */
+    function proposeCaption(d) {
+        const rules = ext.listRules ? ext.listRules() : {};
+        const types = ids => (meta?.event_types || []).filter(t => (ids || []).map(Number).includes(Number(t.id))).map(t => t.label.toLowerCase()).join(' ou ');
+        const range = (a, b, unit = '') => a != null && b != null ? (a === b ? `exactement ${a}${unit}` : `de ${a} à ${b}${unit}`) : a != null ? `au moins ${a}${unit}` : b != null ? `au plus ${b}${unit}` : '';
+        const fr = iso => { const m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})$/); return m ? `${Number(m[3])} ${MONTHS[Number(m[2]) - 1]} ${m[1]}` : ''; };
+        const one = r => {
+            const label = (rules[r.field]?.[d.src?.source === 'events' ? 'ev' : 'pe'] || r.field).replace(/\s*\(lieu contient\)/, '').replace(' … km de', '').replace(' entre … ans', '');
+            const not = r.not ? 'pas : ' : '';
+            switch (r.field) {
+                case 'event_type': return `${not}${d.src?.source === 'events' ? 'événements' : 'a eu'} : ${types(r.values) || '?'}${r.from || r.to ? ' (' + range(r.from, r.to) + ')' : ''}`;
+                case 'gender': return not + ({female: 'femmes', male: 'hommes', unknown: 'sexe inconnu'}[r.value] || '');
+                case 'sosa': return not + 'mes ancêtres';
+                case 'no_parents': case 'no_source': return not + label.toLowerCase();
+                case 'near_place': return `${not}à moins de ${r.km || '?'} km de ${r.value || '?'}`;
+                case 'date_range': return `${not}${label.toLowerCase()} ${[fr(r.date_from) && 'le ' + fr(r.date_from), fr(r.date_to) && 'le ' + fr(r.date_to)].filter(Boolean).join(' et ')}`;
+                case 'age_at': return `${not}âge ${range(r.from, r.to, ' ans')}${r.values?.length ? ' à : ' + types(r.values) : ''}`;
+                case 'lifespan': return `${not}a vécu ${range(r.from, r.to, ' ans')}`;
+                case 'children_count': return `${not}${range(r.from, r.to)} enfant${(r.to ?? r.from) > 1 ? 's' : ''}`;
+                case 'unions_count': return `${not}${range(r.from, r.to)} union${(r.to ?? r.from) > 1 ? 's' : ''}`;
+                case 'event_count': return `${not}${range(r.from, r.to)} × ${types(r.values) || 'événement'}`;
+                case 'label': return `${not}étiquette : ${(meta?.labels || []).filter(t => (r.values || []).map(Number).includes(Number(t.id))).map(t => t.name).join(' ou ')}`;
+                case 'year': case 'death_year': return `${not}${label.toLowerCase()} ${range(r.from, r.to)}`.replace(' entre de ', ' de ');
+                default: return r.value ? `${not}${label.toLowerCase()} « ${r.value} »` : '';
+            }
+        };
+        if (d.kind === 'appstat') return `${appStatLabel(d.statType)}${d.statGender ? ', ' + ({female: 'femmes', male: 'hommes', unknown: 'sexe inconnu'}[d.statGender]) : ''}${d.statFrom || d.statTo ? `, nés ${d.statFrom ? 'à partir du ' + d.statFrom : ''}${d.statFrom && d.statTo ? ' ' : ''}${d.statTo ? 'jusqu’au ' + d.statTo : ''}` : ''}${d.statLineage ? ', mes ancêtres' : ''}.`;
+        const src = d.kind === 'numbers' ? null : d.src || {};
+        if (d.kind === 'numbers') return (d.counters || []).map(c => c.label).filter(Boolean).join(' · ');
+        if (src.list_id) { const l = (meta?.lists || []).find(x => Number(x.id) === Number(src.list_id)); return `D’après ma liste « ${l?.name || '?'} »${d.kind === 'chart' && d.group ? ', comptée par ' + (columnsOf(src).find(c => c[0] === d.group)?.[1] || d.group).toLowerCase() : ''}.`; }
+        const what = {persons: 'Personnes', events: 'Événements'}[src.source || 'persons'] || (meta?.sources?.[src.source] || 'Lignes');
+        const crit = (src.definition?.rules || []).map(one).filter(Boolean);
+        const join = src.definition?.match === 'any' ? ' ou ' : ', ';
+        const by = d.kind === 'chart' && d.group ? ` ; comptées par ${(columnsOf(src).find(c => c[0] === d.group)?.[1] || d.group).toLowerCase()}${d.groupBy === 'decade' ? ' (par décennie)' : d.groupBy === 'century' ? ' (par siècle)' : d.groupBy === 'year' ? ' (par année)' : d.groupBy === 'month' ? ' (par mois)' : d.groupBy === 'step' ? ` (par tranche de ${d.groupStep || 25})` : ''}` : '';
+        const period = d.kind === 'chart' && (d.rangeFrom || d.rangeTo) ? `, du ${d.rangeFrom || '…'} au ${d.rangeTo || '…'}` : '';
+        return `${what}${crit.length ? ' — ' + crit.join(join) : ' — toute la base'}${period}${by}.`;
+    }
     function kindHtml() { return kindHtmlInner() + captionField(target()); }
     /** Dessin, couleurs et nombre de valeurs : communs au graphique et à la statistique de l'app */
     function drawHtml(d) {
@@ -535,8 +632,9 @@
         if (d.kind === 'appstat') {
             const y = v => Number(v) || '';
             return `<div class="form-grid"><label class="span-2">Statistique <select data-cw-stat>${APP_STATS.map(([k, l]) => `<option value="${k}" ${(d.statType || 'surnames') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>Nés à partir de <small>(année, facultatif)</small><input type="number" min="1" max="2200" data-cw-statnum="statFrom" value="${y(d.statFrom)}" placeholder="1700"></label>
-                <label>jusqu’à<input type="number" min="1" max="2200" data-cw-statnum="statTo" value="${y(d.statTo)}" placeholder="1900"></label>
+                <label>Nés à partir du <small>(date précise ou année, facultatif)</small><input data-cw-statnum="statFrom" value="${esc(d.statFrom || '')}" placeholder="12 mars 1750 ou 1700"></label>
+                <label>jusqu’au<input data-cw-statnum="statTo" value="${esc(d.statTo || '')}" placeholder="31/12/1850 ou 1900"></label>
+                ${APP_STAT_AS_CHART[d.statType] ? `<p class="span-2"><button type="button" class="button small" data-cw-tochart>➕ Ajouter d’autres conditions (métier, lieu et km, mariage, nombre d’enfants, durée de vie, divorce, voyage…)</button></p>` : '<p class="span-2 muted">Cette statistique garde ses seuls filtres (années, sexe, lignée).</p>'}
                 <label>Sexe <select data-cw-statgender>${[['', 'tous'], ['female', 'femmes'], ['male', 'hommes'], ['unknown', 'non renseigné']].map(([k, l]) => `<option value="${k}" ${(d.statGender || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-cw-statlineage ${d.statLineage ? 'checked' : ''}> seulement mes ancêtres (lignée Sosa)</label>
                 ${drawHtml(d)}
@@ -552,7 +650,10 @@
                 <label>Sens <select data-cw-sortdir><option value="asc" ${d.sort?.dir !== 'desc' ? 'selected' : ''}>croissant (A → Z, 1 → 9)</option><option value="desc" ${d.sort?.dir === 'desc' ? 'selected' : ''}>décroissant</option></select></label>
                 <label>Nombre de lignes<input type="number" min="1" max="100" data-cw-limit value="${esc(d.limit || 8)}"></label></div>`;
             return `${common}<div class="form-grid"><label>Compter par <select data-cw-group>${cols.map(([k, l]) => `<option value="${esc(k)}" ${(d.group || cols[0]?.[0]) === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>Regrouper <select data-cw-groupby>${[['value', 'par valeur'], ['year', 'par année'], ['decade', 'par décennie'], ['century', 'par siècle']].map(([v, l]) => `<option value="${v}" ${d.groupBy === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label>Regrouper <select data-cw-groupby>${[['value', 'par valeur'], ['year', 'par année'], ['decade', 'par décennie'], ['step', 'par tranche (de … ans, ou de … pour un nombre)'], ['century', 'par siècle'], ['month', 'par mois de l’année']].map(([v, l]) => `<option value="${v}" ${d.groupBy === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                ${d.groupBy === 'step' ? `<label>Tranche de<input type="number" min="1" max="500" data-cw-groupstep value="${esc(d.groupStep || 25)}"> ans</label>` : ''}
+                <label>Seulement du <small>(date précise ou année, facultatif)</small><input data-cw-range="rangeFrom" value="${esc(d.rangeFrom || '')}" placeholder="12 mars 1750 ou 1750"></label>
+                <label>au<input data-cw-range="rangeTo" value="${esc(d.rangeTo || '')}" placeholder="31/12/1800 ou 1800"></label>
                 ${drawHtml(d)}
                 <label class="checkbox-line span-2"><input type="checkbox" data-cw-skipempty ${d.skipEmpty !== false ? 'checked' : ''}> ne pas compter les cases vides</label></div>`;
         }
@@ -593,7 +694,10 @@
                 <label>Largeur <select data-cw="width">${WIDTHS.map(([v, l]) => `<option value="${v}" ${String(root.width) === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <div class="span-2"><span class="section-label">Couleur</span><div class="h-cw-colors"><button type="button" class="h-cw-swatch ${!color(root.color) ? 'is-on' : ''}" data-cw-color="" title="Aucune">∅</button>${COLORS.map(c => `<button type="button" class="h-cw-swatch ${root.color === c ? 'is-on' : ''}" data-cw-color="${c}" style="background:${c}" title="${c}"></button>`).join('')}<input type="color" data-cw-colorpick value="${esc(color(root.color) || '#0066cc')}" title="Autre couleur"></div></div>
                 <label class="span-2">Texte en haut du widget <small>(facultatif)</small><textarea rows="2" data-cw="note" placeholder="Une phrase pour expliquer ce widget">${esc(root.note || '')}</textarea></label>
-                ${root.kind === 'app' ? '' : `<label class="checkbox-line span-2"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> 📊 Afficher aussi en grand dans Graphiques → Statistiques (rubrique « Mes statistiques »)</label>`}</div></section>
+                <fieldset class="span-2 h-be-display"><legend>Où l’afficher</legend>
+                    ${root.kind === 'app' ? '' : `<label class="checkbox-line"><input type="checkbox" data-cw-instats ${root.inStats ? 'checked' : ''}> 📊 en grand dans <b>Graphiques</b> → « Mes statistiques » (graphique, chiffres ou liste)</label>`}
+                    <label class="checkbox-line"><input type="checkbox" data-cw-ondash ${root._onDash ?? onDashboard(root.id) ? 'checked' : ''}> 🧱 en widget sur le <b>tableau de bord</b></label>
+                    <small class="muted">Et dans un de tes onglets : Maintenance → Éditeur d’onglets, ou la colonne de gauche de l’onglet.</small></fieldset></div></section>
             <section class="maintenance-panel"><h3>2. ${partIndex >= 0 ? `Partie ${partIndex + 2} : ` : ''}${esc(KINDS[d.kind]?.[1] || '')}</h3>${partTabs}${partHead}<p class="muted">${esc(KINDS[d.kind]?.[2] || '')}${root.kind !== 'app' && partIndex < 0 && !(root.parts || []).length ? ' Pour mettre plusieurs choses dans le même widget (plusieurs textes, des chiffres et des raccourcis…), « + Ajouter une partie ».' : ''}</p><div data-cw-kind-box>${kindHtml()}</div></section>
             <div class="page-actions"><button type="button" class="button" data-cw-save>Enregistrer</button>${root.inStats ? '<button type="button" class="button secondary" data-cw-savegraph>Enregistrer et ouvrir dans Graphiques</button>' : ''}${root._existing ? '' : '<button type="button" class="button secondary" data-cw-saveadd>Enregistrer et ajouter au tableau de bord</button>'}<button type="button" class="button secondary" data-cw-cancel>Annuler</button></div>
             </div><aside class="h-cw-preview"><h3>Aperçu <button type="button" class="link-button" data-cw-refresh>actualiser</button></h3><div class="card-grid" data-cw-preview></div></aside></div></section>`;
@@ -621,6 +725,7 @@
         preview();
         ws.querySelectorAll('[data-cw-cancel]').forEach(b => b.addEventListener('click', () => { editing = null; backToList(); }));
         ws.querySelector('[data-cw-instats]')?.addEventListener('change', e => { root.inStats = e.target.checked; again(); });
+        ws.querySelector('[data-cw-ondash]')?.addEventListener('change', e => { root._onDash = e.target.checked; });
         ws.querySelector('[data-cw-refresh]').addEventListener('click', preview);
         ws.querySelectorAll('[data-cw]').forEach(el => el.addEventListener('input', () => { root[el.dataset.cw] = el.value; preview(); }));
         ws.querySelector('[data-cw-kindsel]').addEventListener('change', e => { const k = e.target.value; root.kind = k; if (k === 'app' && !root.base) root.base = appCatalog()[0]?.[0]; if (k === 'numbers' && !root.counters?.length) root.counters = [{label: 'Personnes', src: P()}]; partIndex = -1; again(); });
@@ -656,7 +761,7 @@
             if (e.target.matches('[data-cw-sortcol]')) d.sort = e.target.value ? {col: e.target.value, dir: box.querySelector('[data-cw-sortdir]').value} : null;
             if (e.target.matches('[data-cw-sortdir]') && d.sort) d.sort.dir = e.target.value;
             if (e.target.matches('[data-cw-group]')) d.group = e.target.value;
-            if (e.target.matches('[data-cw-groupby]')) d.groupBy = e.target.value;
+            if (e.target.matches('[data-cw-groupby]')) { d.groupBy = e.target.value; d.valueColors = {}; return again(); }
             if (e.target.matches('[data-cw-style]')) { d.style = e.target.value; preview(); return; }
             if (e.target.matches('[data-cw-palette]')) { d.palette = e.target.value; d.valueColors = {}; return again(); }
             if (e.target.matches('[data-cw-accent]')) { d.accentColor = e.target.value; d.valueColors = {}; }
@@ -664,7 +769,7 @@
             if (e.target.matches('[data-cw-skipempty]')) d.skipEmpty = e.target.checked;
             if (e.target.matches('[data-cw-base]')) d.base = e.target.value;
             if (e.target.matches('[data-cw-stat]')) { d.statType = e.target.value; d.valueColors = {}; if (!String(root.name || '').trim() || APP_STATS.some(([, l]) => l === root.name)) { root.name = appStatLabel(d.statType); const n = ws.querySelector('[data-cw="name"]'); if (n && partIndex < 0) n.value = root.name; } }
-            if (e.target.matches('[data-cw-statnum]')) d[e.target.dataset.cwStatnum] = Number(e.target.value) || '';
+            if (e.target.matches('[data-cw-statnum]')) d[e.target.dataset.cwStatnum] = e.target.value.trim();
             if (e.target.matches('[data-cw-statgender]')) d.statGender = e.target.value;
             if (e.target.matches('[data-cw-statlineage]')) d.statLineage = e.target.checked;
             if (e.target.matches('[data-cw-linktarget]')) { const i = Number(e.target.closest('[data-cw-link]').dataset.cwLink); d.links[i].target = e.target.value; return again(); }
@@ -675,6 +780,8 @@
             if (srcBox && e.target.closest('[data-lr-i]')) { readRule(e, srcAt(srcBox.dataset.cwSrc)); return; }
             if (e.target.matches('[data-cw-counter]')) d.counters[Number(e.target.dataset.cwCounter)].label = e.target.value;
             if (e.target.matches('[data-cw-limit]')) d.limit = Number(e.target.value) || 8;
+            if (e.target.matches('[data-cw-groupstep]')) d.groupStep = Number(e.target.value) || 25;
+            if (e.target.matches('[data-cw-range]')) d[e.target.dataset.cwRange] = e.target.value.trim();
             if (e.target.matches('[data-cw-text]')) d.text = e.target.value;
             if (e.target.matches('[data-cw-caption]')) d.caption = e.target.value;
             const row = e.target.closest('[data-cw-link]');
@@ -687,6 +794,8 @@
             if (e.target.closest('[data-cw-valreset]')) { d.valueColors = {}; return again(); }
             if (e.target.closest('[data-cw-counter-add]')) { d.counters.push({label: '', src: P()}); return again(); }
             const del = e.target.closest('[data-cw-counter-del]'); if (del) { d.counters.splice(Number(del.dataset.cwCounterDel), 1); return again(); }
+            if (e.target.closest('[data-cw-tochart]')) { const c = appStatToChart(d); if (c) { Object.keys(d).forEach(k => delete d[k]); Object.assign(d, c); toast('C’est maintenant un graphique : ajoute tes conditions avec « + Critère ».'); return again(); } }
+            if (e.target.closest('[data-cw-propose]')) { d.caption = proposeCaption(d); return again(); }
             if (e.target.closest('[data-cw-linkadd]')) { d.links.push({label: '', target: 'module:personnes'}); return again(); }
             const ld = e.target.closest('[data-cw-linkdel]'); if (ld) { d.links.splice(Number(ld.closest('[data-cw-link]').dataset.cwLink), 1); return again(); }
         });
@@ -719,11 +828,13 @@
         function readRule(e, src) {
             const row = e.target.closest('[data-lr-i]'); if (!row) return;
             const r = src.definition.rules[Number(row.dataset.lrI)];
-            row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (Number(el.value) || null) : el.value; });
+            row.querySelectorAll('[data-lr]').forEach(el => { const f = el.dataset.lr; r[f] = f === 'not' ? el.checked : f === 'values' ? [...el.selectedOptions].map(o => Number(o.value)) : (f === 'from' || f === 'to') ? (el.value === '' ? null : Number(el.value)) : el.value; });
             preview();
         }
         const save = (andAdd, andGraph = false) => {
             if (!String(root.name || '').trim()) { toast('Donne un titre au widget.', 'error'); ws.querySelector('[data-cw="name"]').focus(); return; }
+            // Légende vide d'un graphique ou d'une liste avec des critères : on garde la légende proposée
+            [root, ...(root.parts || [])].forEach(p => { if (!String(p.caption || '').trim() && ['chart', 'list'].includes(p.kind) && (p.src?.definition?.rules || []).length) p.caption = proposeCaption(p); });
             const clean = cleanDef(root), list = defs(), i = list.findIndex(x => x.id === clean.id), before = i >= 0 ? list[i] : null;
             if (i >= 0) list[i] = clean; else list.push(clean);
             saveDefs(list);
@@ -735,6 +846,7 @@
             } else if (andAdd) addToDashboard(clean.id);
             else toast(clean.inStats ? 'Enregistré : il est dans Graphiques → Statistiques, rubrique « Mes statistiques ».' : 'Widget enregistré : ajoute-le depuis la colonne de gauche du tableau de bord.');
             editing = null;
+            if (root._onDash !== undefined) setOnDashboard(clean.id, !!root._onDash);
             if (andGraph) ext.openCustomStat(clean.id); else if (andAdd) A().setModule('dashboard'); else backToList();
         };
         ws.querySelector('[data-cw-save]').addEventListener('click', () => save(false));
@@ -748,7 +860,8 @@
         src = src && typeof src === 'object' ? src : {};
         if (Number(src.list_id) > 0) return {list_id: Number(src.list_id)};
         const source = ['persons', 'events', ...Object.keys(meta?.sources || {places: 1, media: 1, occupations: 1, census: 1, reminders: 1, sources: 1, family_objects: 1, courriers: 1, graves: 1, budget: 1, living: 1})].includes(src.source) ? src.source : 'persons';
-        const rules = (Array.isArray(src.definition?.rules) ? src.definition.rules : []).slice(0, 30).map(r => ({field: str(r.field, 30), value: str(r.value, 200), from: Number(r.from) || null, to: Number(r.to) || null, values: (Array.isArray(r.values) ? r.values : []).map(Number).filter(Boolean).slice(0, 200), not: !!r.not}));
+        const rules = (Array.isArray(src.definition?.rules) ? src.definition.rules : []).slice(0, 30).map(r => ({field: str(r.field, 30), value: str(r.value, 200), from: r.from === '' || r.from == null || !Number.isFinite(Number(r.from)) ? null : Number(r.from), to: r.to === '' || r.to == null || !Number.isFinite(Number(r.to)) ? null : Number(r.to), values: (Array.isArray(r.values) ? r.values : []).map(Number).filter(Boolean).slice(0, 200), not: !!r.not,
+            date_from: /^\d{4}-\d{2}-\d{2}$/.test(String(r.date_from || '')) ? r.date_from : '', date_to: /^\d{4}-\d{2}-\d{2}$/.test(String(r.date_to || '')) ? r.date_to : '', km: Math.max(0, Math.min(1000, Number(r.km) || 0))}));
         return {source, definition: {match: src.definition?.match === 'any' ? 'any' : 'all', rules}};
     }
     function cleanDef(d) {
@@ -764,10 +877,10 @@
         if (kind === 'numbers') out.counters = (Array.isArray(d.counters) ? d.counters : []).slice(0, 8).map(c => ({label: str(c.label, 80), src: cleanSrc(c.src)}));
         if (kind === 'list' || kind === 'chart') { out.src = cleanSrc(d.src); out.limit = Math.max(1, Math.min(100, Number(d.limit) || 8)); }
         if (kind === 'list') { out.columns = (Array.isArray(d.columns) ? d.columns : []).map(c => str(c, 40)).slice(0, 12); out.sort = d.sort?.col ? {col: str(d.sort.col, 40), dir: d.sort.dir === 'desc' ? 'desc' : 'asc'} : null; }
-        if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', 'year', 'decade', 'century'].includes(d.groupBy) ? d.groupBy : 'value', style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
+        if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', ...TIME_GROUPS].includes(d.groupBy) ? d.groupBy : 'value', groupStep: Math.max(1, Math.min(500, Number(d.groupStep) || 25)), rangeFrom: str(d.rangeFrom, 40), rangeTo: str(d.rangeTo, 40), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
-        if (kind === 'appstat') Object.assign(out, {statType: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', statFrom: Math.max(0, Math.min(2200, Number(d.statFrom) || 0)) || '', statTo: Math.max(0, Math.min(2200, Number(d.statTo) || 0)) || '',
+        if (kind === 'appstat') Object.assign(out, {statType: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', statFrom: str(d.statFrom, 40).trim(), statTo: str(d.statTo, 40).trim(),
             statGender: ['male', 'female', 'unknown'].includes(d.statGender) ? d.statGender : '', statLineage: !!d.statLineage, limit: Math.max(1, Math.min(60, Number(d.limit) || 10)), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
@@ -819,7 +932,7 @@
         const d = defs().find(x => x.id === id);
         const ws = A().$('#workspace');
         if (!d) { ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', 'Statistique introuvable', 'Elle a peut-être été supprimée.')}</section>`; return; }
-        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
+        ws.innerHTML = `<section class="page">${header('MES STATISTIQUES', `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`, d.note ? nl(d.note) : '', '<span class="h-cs-export"><button type="button" class="button small secondary" data-cs-export="png" title="Une image à poster sur un forum">🖼️ Image PNG</button><button type="button" class="button small secondary" data-cs-export="csv" title="Les chiffres, pour un tableur">📄 CSV</button><button type="button" class="button small secondary" data-cs-export="print" title="Imprimer, ou « Enregistrer en PDF »">🖨️ Imprimer / PDF</button></span><button type="button" class="button secondary" data-cs-edit>✎ Modifier</button><button type="button" class="button secondary" data-cs-dash>+ Tableau de bord</button>')}<div class="card-grid"><p class="muted">Calcul…</p></div></section>`;
         const datas = await loadData(d);
         if (token !== S().workspaceToken || S().module !== 'graphiques') return;
         // le titre et le texte sont déjà en haut de la page : la carte ne les répète pas
@@ -832,5 +945,109 @@
             editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken);
         });
         ws.querySelector('[data-cs-dash]').addEventListener('click', () => addToDashboard(id));
+        ws.querySelectorAll('[data-cs-export]').forEach(b => b.addEventListener('click', () => exportStat(b.dataset.csExport, d, datas, ws.querySelector('.card-grid .card'))));
     };
+    /* ── Export d'une de « Mes statistiques » : image PNG, tableau CSV, impression (et PDF) ── */
+    const statFileName = d => (A().safeExportFilename ? A().safeExportFilename(d.name || 'statistique', 'statistique') : 'statistique');
+    function statCsv(d, datas) {
+        const q = v => { const t = String(v ?? ''); return /[;"\n]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+        const lines = [];
+        const one = (part, data, title) => {
+            if (title) lines.push(q(title));
+            if (!data) return;
+            if (part.kind === 'chart' || part.kind === 'appstat') {
+                const entries = groupRows(data[0] || {rows: [], shown: []}, part), total = entries.reduce((n, e) => n + e[1], 0);
+                lines.push('Valeur;Nombre;Part (%)');
+                entries.forEach(([v, n]) => lines.push([q(v), n, total ? String(Math.round(n / total * 1000) / 10).replace('.', ',') : ''].join(';')));
+            } else if (part.kind === 'numbers') {
+                lines.push('Chiffre;Nombre');
+                (part.counters || []).forEach((c, i) => { const x = data[i] || {shown: []}; lines.push([q(c.label || 'Nombre'), x.count ?? x.shown?.length ?? 0].join(';')); });
+            } else if (part.kind === 'list') {
+                const x = data[0] || {shown: []}, all = dataColumns(x), cols = (part.columns?.length ? part.columns : all.slice(0, 3).map(c => c[0])).filter(c => all.some(a => a[0] === c));
+                lines.push(cols.map(c => q(all.find(a => a[0] === c)?.[1] || c)).join(';'));
+                (x.shown || []).forEach(r => lines.push(cols.map(c => q(cellText(x, r, c))).join(';')));
+            } else if (part.kind === 'text') lines.push(q(part.text || ''));
+            lines.push('');
+        };
+        one(d, datas, d.name || '');
+        (d.parts || []).forEach((p, i) => one(p, datas.parts?.[i], p.title || `Partie ${i + 2}`));
+        return '\ufeff' + lines.join('\r\n'); // BOM : Excel lit les accents
+    }
+    async function exportStat(kind, d, datas, cardEl) {
+        if (kind === 'csv') { if (ext.downloadText) ext.downloadText(statFileName(d) + '.csv', statCsv(d, datas), 'text/csv;charset=utf-8'); return; }
+        if (!cardEl) return;
+        const css = A().graphExportCss ? A().graphExportCss() : '';
+        const title = `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`;
+        const html = `<div class="h-cs-sheet" style="background:#fff;padding:24px;font-family:inherit"><h2 style="margin:0 0 6px">${esc(title)}</h2>${d.note ? `<p style="margin:0 0 12px">${nl(d.note)}</p>` : ''}${cardEl.outerHTML}<p style="margin:10px 0 0;font-size:12px;color:#666">LCNDA · ${esc(new Date().toLocaleDateString('fr-FR'))}</p></div>`;
+        if (kind === 'print') {
+            const w = window.open('', '_blank', 'width=1000,height=800');
+            if (!w) { toast('Fenêtre d’impression bloquée.', 'error'); return; }
+            w.document.write(`<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${css}@page{margin:12mm}body{background:#fff}</style></head><body>${html}<script>window.onload=()=>setTimeout(()=>window.print(),200);<\/script></body></html>`);
+            w.document.close();
+            toast('Dans la fenêtre d’impression, choisis « Enregistrer en PDF » pour un fichier PDF.');
+            return;
+        }
+        // Image : dessinée directement sur un canevas (une page HTML copiée dans une image est refusée par le navigateur)
+        try {
+            const canvas = drawStatImage(d, datas, title);
+            const a = document.createElement('a'); a.download = statFileName(d) + '.png'; a.href = canvas.toDataURL('image/png'); document.body.appendChild(a); a.click(); a.remove();
+        } catch (_) { toast('Image impossible à fabriquer : utilise « Imprimer / PDF ».', 'error'); }
+    }
+    /** Le graphique (barres, colonnes, camembert, anneau ; les autres dessins en barres), des chiffres ou les premières lignes d'une liste */
+    function drawStatImage(d, datas, title) {
+        const W = 1200, pad = 40, font = '"Inter", "Helvetica Neue", Arial, sans-serif';
+        const blocks = [];
+        const add = (part, data, sub) => {
+            if (part.kind === 'chart' || part.kind === 'appstat') blocks.push({sub, part, entries: groupRows(data?.[0] || {rows: [], shown: []}, part)});
+            else if (part.kind === 'numbers') blocks.push({sub, numbers: (part.counters || []).map((c, i) => [c.label || 'Nombre', data?.[i]?.count ?? data?.[i]?.shown?.length ?? 0])});
+            else if (part.kind === 'list') { const x = data?.[0] || {shown: []}, all = dataColumns(x), cols = (part.columns?.length ? part.columns : all.slice(0, 3).map(c => c[0])).filter(c => all.some(q => q[0] === c)); blocks.push({sub, table: [cols.map(c => all.find(q => q[0] === c)?.[1] || c), ...(x.shown || []).slice(0, Math.min(25, Number(part.limit) || 8)).map(r => cols.map(c => cellText(x, r, c)))]}); }
+            else if (part.kind === 'text' && part.text) blocks.push({sub, text: part.text});
+        };
+        add(d, datas, ''); (d.parts || []).forEach((p, i) => add(p, datas.parts?.[i], p.title || ''));
+        const heightOf = b => (b.sub ? 34 : 0) + (b.entries ? (['pie', 'donut'].includes(b.part.style) ? Math.max(360, b.entries.length * 30 + 20) : b.entries.length * 34 + 10) : b.numbers ? 110 : b.table ? b.table.length * 28 + 10 : 80) + 24;
+        const captionLines = [d.caption, ...(d.parts || []).map(p => p.caption)].filter(Boolean);
+        const H = pad * 2 + 60 + (d.note ? 30 : 0) + blocks.reduce((n, b) => n + heightOf(b), 0) + captionLines.length * 24 + 30;
+        const canvas = document.createElement('canvas'); canvas.width = W * 2; canvas.height = H * 2;
+        const ctx = canvas.getContext('2d'); ctx.scale(2, 2);
+        ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+        ctx.fillStyle = '#111'; ctx.font = `700 30px ${font}`; ctx.textBaseline = 'top'; ctx.fillText(title, pad, pad);
+        let y = pad + 50;
+        if (d.note) { ctx.font = `16px ${font}`; ctx.fillStyle = '#444'; ctx.fillText(String(d.note).split('\n')[0].slice(0, 140), pad, y); y += 30; }
+        const fit = (t, w) => { t = String(t); while (t.length > 1 && ctx.measureText(t).width > w) t = t.slice(0, -2) + '…'; return t; };
+        for (const b of blocks) {
+            if (b.sub) { ctx.font = `700 20px ${font}`; ctx.fillStyle = '#111'; ctx.fillText(b.sub, pad, y); y += 34; }
+            if (b.entries) {
+                const total = b.entries.reduce((n, e) => n + e[1], 0) || 1, max = Math.max(1, ...b.entries.map(e => e[1]));
+                if (['pie', 'donut'].includes(b.part.style)) {
+                    const r = 160, cx = pad + r, cy = y + r + 10; let at = -Math.PI / 2;
+                    b.entries.forEach(([v, n], i) => { const da = n / total * Math.PI * 2; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.arc(cx, cy, r, at, at + da); ctx.closePath(); ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fill(); at += da; });
+                    if (b.part.style === 'donut') { ctx.beginPath(); ctx.arc(cx, cy, r * .55, 0, Math.PI * 2); ctx.fillStyle = '#fff'; ctx.fill(); }
+                    ctx.font = `16px ${font}`;
+                    b.entries.forEach(([v, n], i) => { const ly = y + 10 + i * 30; ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fillRect(cx + r + 40, ly + 2, 18, 18); ctx.fillStyle = '#111'; ctx.fillText(fit(`${v} : ${fmt(n)} (${Math.round(n / total * 100)} %)`, W - (cx + r + 70) - pad), cx + r + 68, ly + 2); });
+                } else {
+                    const lw = 300, bw = W - pad * 2 - lw - 90; ctx.font = `16px ${font}`;
+                    b.entries.forEach(([v, n], i) => { const ly = y + i * 34; ctx.fillStyle = '#111'; ctx.fillText(fit(v, lw - 10), pad, ly + 6); ctx.fillStyle = '#eee'; ctx.fillRect(pad + lw, ly + 4, bw, 22); ctx.fillStyle = canvasColor(chartColor(b.part, v, i)); ctx.fillRect(pad + lw, ly + 4, Math.max(2, bw * n / max), 22); ctx.fillStyle = '#111'; ctx.fillText(fmt(n), pad + lw + bw + 12, ly + 6); });
+                }
+            } else if (b.numbers) {
+                const w = (W - pad * 2) / Math.max(1, b.numbers.length);
+                b.numbers.forEach(([l, n], i) => { ctx.fillStyle = '#0066cc'; ctx.font = `700 44px ${font}`; ctx.fillText(fmt(n), pad + i * w, y); ctx.fillStyle = '#333'; ctx.font = `16px ${font}`; ctx.fillText(fit(l, w - 16), pad + i * w, y + 58); });
+            } else if (b.table) {
+                const cw = (W - pad * 2) / Math.max(1, b.table[0].length);
+                b.table.forEach((row, ri) => { ctx.font = `${ri ? '' : '700 '}15px ${font}`; ctx.fillStyle = '#111'; row.forEach((c, ci) => ctx.fillText(fit(c, cw - 12), pad + ci * cw, y + ri * 28)); ctx.fillStyle = '#ddd'; ctx.fillRect(pad, y + ri * 28 + 23, W - pad * 2, 1); });
+            } else if (b.text) { ctx.font = `16px ${font}`; ctx.fillStyle = '#111'; String(b.text).split('\n').slice(0, 3).forEach((t, i) => ctx.fillText(fit(t, W - pad * 2), pad, y + i * 24)); }
+            y += heightOf(b) - (b.sub ? 34 : 0);
+        }
+        ctx.font = `italic 15px ${font}`; ctx.fillStyle = '#444';
+        captionLines.forEach(t => { ctx.fillText(fit(t, W - pad * 2), pad, y); y += 24; });
+        ctx.font = `13px ${font}`; ctx.fillStyle = '#888'; ctx.fillText(`LCNDA · ${new Date().toLocaleDateString('fr-FR')}`, pad, H - pad + 6);
+        return canvas;
+    }
+    /** Couleur utilisable sur un canevas (le dégradé « color-mix » de l'écran n'y est pas compris) */
+    function canvasColor(c) {
+        const m = String(c).match(/color-mix\(in srgb, (#[0-9a-f]{6}) (\d+)%, white\)/i);
+        if (!m) return c;
+        const k = Number(m[2]) / 100, n = parseInt(m[1].slice(1), 16), ch = sh => Math.round(((n >> sh) & 255) * k + 255 * (1 - k));
+        return `rgb(${ch(16)},${ch(8)},${ch(0)})`;
+    }
+    ext.customStatCsv = statCsv; // pour les tests
 })();

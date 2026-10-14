@@ -314,6 +314,7 @@ try {
         'link_inventory' => json_response(['links' => link_inventory($pdo)]),
         'saint_of_day' => json_response(saint_of_day_data($pdo, max(1, min(12, safe_int($_GET['month'] ?? 0) ?: (int) date('n'))), max(1, min(31, safe_int($_GET['day'] ?? 0) ?: (int) date('j'))))),
         'saint_stats' => json_response(saint_stats_data($pdo)),
+        'research_suggestions' => json_response(research_suggestions_data($pdo, max(1, min(200, safe_int($_GET['limit'] ?? 40))))),
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -3853,6 +3854,17 @@ function graph_stats_data(PDO $pdo): never
     if ($yearFrom !== null) { $birthYearCond .= " AND bfe.year>=?"; $birthYearParams[] = $yearFrom; }
     if ($yearTo !== null)   { $birthYearCond .= " AND bfe.year<=?"; $birthYearParams[] = $yearTo; }
     $birthYearCond .= ")";
+    // Dates précises (AAAA-MM-JJ, Éditeur de statistiques) : elles remplacent les années pour la naissance et les événements
+    $iso = static fn($v) => preg_match('/^\d{4}-\d{2}-\d{2}$/', (string) $v) ? (string) $v : '';
+    $dateFrom = $iso($_GET['date_from'] ?? ''); $dateTo = $iso($_GET['date_to'] ?? '');
+    $preciseEventIds = null;
+    if ($dateFrom !== '' || $dateTo !== '') {
+        $birthIds = implode(',', my_list_events_between($pdo, $dateFrom, $dateTo, ['BIRT', 'CHR', 'BAPM']) ?: [0]);
+        $birthYearCond = "EXISTS(SELECT 1 FROM events bfe WHERE bfe.person_id=p.id AND bfe.id IN ($birthIds))";
+        $birthYearParams = [];
+        $hasYearFilter = true;
+        $preciseEventIds = implode(',', my_list_events_between($pdo, $dateFrom, $dateTo) ?: [0]);
+    }
 
     // Condition combinée année + sexe pour les statistiques basées sur "persons p"
     // (utilisée en clause WHERE). $personFilterParams suit le même ordre que les
@@ -3863,8 +3875,11 @@ function graph_stats_data(PDO $pdo): never
 
     $yearCond = '';
     $yearCondParams = [];
-    if ($yearFrom !== null) { $yearCond .= " AND e.year>=?"; $yearCondParams[] = $yearFrom; }
-    if ($yearTo !== null)   { $yearCond .= " AND e.year<=?"; $yearCondParams[] = $yearTo; }
+    if ($preciseEventIds !== null) { $yearCond .= " AND e.id IN ($preciseEventIds)"; }
+    else {
+        if ($yearFrom !== null) { $yearCond .= " AND e.year>=?"; $yearCondParams[] = $yearFrom; }
+        if ($yearTo !== null)   { $yearCond .= " AND e.year<=?"; $yearCondParams[] = $yearTo; }
+    }
     $yearCond .= $genderCond;
     $yearCondParams = array_merge($yearCondParams, $genderParams);
 
@@ -6095,7 +6110,51 @@ function family_book_media_src(?string $filename): string
 {
     $filename = trim((string)$filename);
     if ($filename === '') return '';
+    // Livret téléchargé (fichier ouvert hors de l'app) : les petites images sont rangées dans le fichier lui-même,
+    // sinon « media/… » ne mène nulle part. Livret ouvert dans l'app (inline=1) : l'adresse de l'app suffit.
+    if (($_GET['inline'] ?? '') !== '1') {
+        $root = realpath(MEDIA_DIR);
+        $path = $root !== false ? realpath($root . '/' . $filename) : false;
+        if ($path && str_starts_with($path, $root . DIRECTORY_SEPARATOR) && is_file($path) && filesize($path) <= 700 * 1024) {
+            $mime = ['jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg', 'png' => 'image/png', 'webp' => 'image/webp', 'gif' => 'image/gif'][strtolower(pathinfo($path, PATHINFO_EXTENSION))] ?? '';
+            if ($mime !== '') return 'data:' . $mime . ';base64,' . base64_encode((string) file_get_contents($path));
+        }
+    }
     return 'media/' . rawurlencode($filename);
+}
+
+/**
+ * Livre d'une branche : les ancêtres (Sosa) et/ou les descendants (d'Aboville) d'une personne, sur N générations.
+ * Renvoie [personnes gardées dans l'ordre du livre, numéros affichés par personne, titre].
+ */
+function family_book_branch(PDO $pdo, array $people, int $rootId, string $scope, int $generations): array
+{
+    $byId = [];
+    foreach ($people as $person) $byId[(int)$person['id']] = $person;
+    if (!$rootId || $scope === 'all' || !isset($byId[$rootId])) return [$people, [], ''];
+    $order = []; $numbers = [];
+    if ($scope === 'ancestors' || $scope === 'both') {
+        $positions = sosa_positions($pdo, $rootId, 200000)['positions'] ?? [];
+        ksort($positions);
+        foreach ($positions as $sosa => $pid) {
+            if ((int) floor(log((float) $sosa, 2)) + 1 > $generations) break;
+            $numbers[$pid]['sosa'][] = $sosa;
+            $order[$pid] ??= count($order);
+        }
+    }
+    if ($scope === 'descendants' || $scope === 'both') {
+        $positions = daboville_positions($pdo, $rootId, 200000)['positions'] ?? [];
+        uksort($positions, 'strnatcmp');
+        foreach ($positions as $num => $pid) {
+            if (substr_count((string) $num, '.') + 1 > $generations) continue;
+            $numbers[$pid]['daboville'][] = (string) $num;
+            $order[$pid] ??= count($order);
+        }
+    }
+    $kept = array_values(array_filter(array_map(static fn($pid) => $byId[$pid] ?? null, array_keys($order))));
+    $name = full_name($byId[$rootId]);
+    $title = ['ancestors' => 'Ascendance de ', 'descendants' => 'Descendance de ', 'both' => 'Ascendance et descendance de '][$scope] . $name;
+    return [$kept, $numbers, $title];
 }
 
 function family_book_life_label(string $status): string
@@ -6111,12 +6170,25 @@ function export_family_book(PDO $pdo): never
 {
     $filename = 'livret-famille-' . date('Ymd-His') . '.html';
     header('Content-Type: text/html; charset=utf-8');
-    header('Content-Disposition: attachment; filename="'.$filename.'"');
+    if (($_GET['inline'] ?? '') !== '1') header('Content-Disposition: attachment; filename="'.$filename.'"');
+    header('X-Content-Type-Options: nosniff');
     $esc = static fn($value) => htmlspecialchars((string)$value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     $people = array_values(array_filter($pdo->query(person_select() . " ORDER BY COALESCE(birth_year,9999),p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE,p.id")->fetchAll(), 'export_person_allowed'));
+    // Une branche seulement (ancêtres, descendants, les deux) et les parties choisies
+    $scope = in_array($_GET['scope'] ?? 'all', ['all', 'ancestors', 'descendants', 'both'], true) ? (string) ($_GET['scope'] ?? 'all') : 'all';
+    $allowed = $people; // les parents, conjoints et enfants hors de la branche sont nommés quand même
+    [$people, $numbers, $bookTitle] = family_book_branch($pdo, $people, safe_int($_GET['root_id'] ?? 0), $scope, max(1, min(30, safe_int($_GET['generations'] ?? 8) ?: 8)));
+    $withPhotos = export_option_enabled('photos'); $withTree = export_option_enabled('tree'); $withChronology = export_option_enabled('chronology'); $withBio = export_option_enabled('bio');
+    $numberLabel = static function (int $id) use ($numbers): string {
+        $parts = [];
+        if (!empty($numbers[$id]['sosa'])) $parts[] = 'Sosa ' . implode(', ', $numbers[$id]['sosa']);
+        if (!empty($numbers[$id]['daboville'])) $parts[] = 'd’Aboville ' . implode(', ', $numbers[$id]['daboville']);
+        return implode(' · ', $parts);
+    };
     $visible = family_book_person_set($people);
+    $related = family_book_person_set($allowed);
     $peopleById = [];
-    foreach ($people as $person) $peopleById[(int)$person['id']] = $person;
+    foreach ($allowed as $person) $peopleById[(int)$person['id']] = $person;
 
     $eventsByPerson = [];
     $events = $pdo->query("SELECT e.*,t.label AS type_label,t.gedcom_tag,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,f.partner1_id,f.partner2_id
@@ -6141,19 +6213,19 @@ function export_family_book(PDO $pdo): never
         $childId = (int)$row['child_id'];
         $parents = array_values(array_filter([(int)($row['partner1_id'] ?? 0), (int)($row['partner2_id'] ?? 0)]));
         foreach ($parents as $parentId) {
-            if (isset($visible[$childId], $visible[$parentId])) {
+            if (isset($related[$childId], $related[$parentId])) {
                 $parentsByChild[$childId][$parentId] = $parentId;
                 $childrenByParent[$parentId][$childId] = $childId;
             }
         }
-        if (count($parents) === 2 && isset($visible[$parents[0]], $visible[$parents[1]])) {
+        if (count($parents) === 2 && isset($related[$parents[0]], $related[$parents[1]])) {
             $partnersByPerson[$parents[0]][$parents[1]] = $parents[1];
             $partnersByPerson[$parents[1]][$parents[0]] = $parents[0];
         }
     }
     foreach ($pdo->query('SELECT partner1_id,partner2_id FROM families WHERE partner1_id IS NOT NULL AND partner2_id IS NOT NULL')->fetchAll() as $row) {
         $a = (int)$row['partner1_id']; $b = (int)$row['partner2_id'];
-        if (isset($visible[$a], $visible[$b])) {
+        if (isset($related[$a], $related[$b])) {
             $partnersByPerson[$a][$b] = $b;
             $partnersByPerson[$b][$a] = $a;
         }
@@ -6167,7 +6239,7 @@ function export_family_book(PDO $pdo): never
         ORDER BY ml.position,m.id")->fetchAll();
     foreach ($mediaRows as $media) {
         $personId = (int)$media['person_id'];
-        if (isset($visible[$personId]) && count($mediaByPerson[$personId] ?? []) < 3) $mediaByPerson[$personId][] = $media;
+        if ($withPhotos && isset($visible[$personId]) && count($mediaByPerson[$personId] ?? []) < 3) $mediaByPerson[$personId][] = $media;
     }
 
     echo '<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Livre de famille</title><style>
@@ -6185,11 +6257,42 @@ function export_family_book(PDO $pdo): never
         .events{display:grid;gap:6px}.event{display:grid;grid-template-columns:82px 1fr;gap:8px;border-bottom:1px solid #ddd;padding:5px 0}.event span{font-weight:900}
         .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.photos figure{margin:0;border:2px solid var(--ink);padding:6px;break-inside:avoid}.photos img{width:100%;height:120px;object-fit:cover;display:block}.photos figcaption{font-size:11px;color:var(--muted);margin-top:4px}
         .actions{position:sticky;top:0;background:#fff;border-bottom:2px solid var(--ink);padding:10px 14px;text-align:right;z-index:2}.actions button{border:2px solid var(--ink);background:var(--blue);color:#fff;font-weight:900;padding:9px 14px;cursor:pointer}
+        .overview{break-before:page;background:white;padding:18mm;border-bottom:2px solid var(--ink)}.overview h2{margin-bottom:12px}.gen{break-inside:avoid;margin:0 0 14px}.gen h3{border-bottom:2px solid var(--ink);padding-bottom:4px}
+        .gen ol{list-style:none;margin:0;padding:0;columns:2;column-gap:24px}.gen li{break-inside:avoid;padding:3px 0;border-bottom:1px solid #eee}.gen li b{display:inline-block;min-width:64px;color:var(--blue)}
+        .desc{list-style:none;margin:0;padding:0}.desc li{padding:3px 0;border-bottom:1px solid #eee;break-inside:avoid}.desc li b{color:var(--blue);margin-right:6px}
+        .chrono{width:100%;border-collapse:collapse;font-size:13px}.chrono td{border-bottom:1px solid #ddd;padding:4px 6px;vertical-align:top}.chrono td:first-child{font-weight:900;white-space:nowrap}
         @media print{body{background:white}.actions{display:none}.person{padding:14mm}.cover{padding:22mm}.box,.photos figure{break-inside:avoid}a{color:inherit;text-decoration:none}}
         @media(max-width:800px){.person-head,.grid{grid-template-columns:1fr}.cover,.person{padding:24px}}
     </style></head><body>';
     echo '<div class="actions"><button onclick="window.print()">Imprimer / enregistrer en PDF</button></div>';
-    echo '<section class="cover"><span class="eyebrow">Livre de famille</span><h1>Généalogie familiale</h1><p class="meta">'.$esc(count($people)).' personne(s) · généré le '.$esc(date('d/m/Y H:i')).'</p><p>Livret narratif généré à partir des biographies automatiques, des liens familiaux, des événements et des photos disponibles dans la base.</p></section>';
+    echo '<section class="cover"><span class="eyebrow">Livre de famille</span><h1>'.$esc($bookTitle !== '' ? $bookTitle : 'Généalogie familiale').'</h1><p class="meta">'.$esc(count($people)).' personne(s) · généré le '.$esc(date('d/m/Y H:i')).'</p><p>Livret narratif généré à partir des biographies automatiques, des liens familiaux, des événements et des photos disponibles dans la base.</p></section>';
+    $lifeSpan = static fn(array $p) => '(' . (($p['birth_date'] ?? '') ?: ($p['birth_year'] ?? '') ?: '?') . ' – ' . (($p['living_status'] ?? '') === 'living' ? '' : ((($p['death_date'] ?? '') ?: ($p['death_year'] ?? '')) ?: '?')) . ')';
+    // L'arbre : ancêtres génération par génération (Sosa), descendants dans l'ordre d'Aboville
+    if ($withTree && $numbers) {
+        $sosaRows = []; $dabRows = [];
+        foreach ($people as $p) {
+            foreach ($numbers[(int)$p['id']]['sosa'] ?? [] as $n) $sosaRows[$n] = $p;
+            foreach ($numbers[(int)$p['id']]['daboville'] ?? [] as $n) $dabRows[$n] = $p;
+        }
+        ksort($sosaRows); uksort($dabRows, 'strnatcmp');
+        echo '<section class="overview"><span class="eyebrow">L’arbre</span>';
+        if ($sosaRows) {
+            echo '<h2>Les ancêtres</h2>';
+            $byGen = [];
+            foreach ($sosaRows as $n => $p) $byGen[(int) floor(log((float) $n, 2)) + 1][$n] = $p;
+            foreach ($byGen as $g => $rows) {
+                echo '<div class="gen"><h3>' . ($g === 1 ? 'Génération 1 : la personne de départ' : 'Génération ' . $g . ' (' . count($rows) . ' sur ' . (2 ** ($g - 1)) . ')') . '</h3><ol>';
+                foreach ($rows as $n => $p) echo '<li><b>' . $esc($n) . '</b>' . $esc(full_name($p)) . ' <small>' . $esc($lifeSpan($p)) . '</small></li>';
+                echo '</ol></div>';
+            }
+        }
+        if ($dabRows) {
+            echo '<h2' . ($sosaRows ? ' style="margin-top:18px"' : '') . '>Les descendants</h2><ul class="desc">';
+            foreach ($dabRows as $n => $p) echo '<li style="padding-left:' . (substr_count((string) $n, '.') * 18) . 'px"><b>' . $esc($n) . '</b>' . $esc(full_name($p)) . ' <small>' . $esc($lifeSpan($p)) . '</small></li>';
+            echo '</ul>';
+        }
+        echo '</section>';
+    }
     foreach ($people as $person) {
         $id = (int)$person['id'];
         $parents = array_values(array_filter(array_map(fn($pid) => $peopleById[$pid] ?? null, array_values($parentsByChild[$id] ?? []))));
@@ -6199,8 +6302,8 @@ function export_family_book(PDO $pdo): never
         $bio = automatic_biography($person, $eventsForPerson, $parents, $partners, $children);
         $portrait = family_book_media_src($person['portrait'] ?? '');
         $initials = mb_substr((string)($person['first_name'] ?? ''), 0, 1) . mb_substr((string)($person['last_name'] ?? ''), 0, 1);
-        echo '<article class="person"><header class="person-head"><div class="portrait">'.($portrait ? '<img src="'.$esc($portrait).'" alt="">' : $esc(mb_strtoupper($initials ?: '?'))).'</div><div><span class="eyebrow">Fiche #'.$id.'</span><h2>'.$esc(full_name($person)).'</h2><p class="meta">'.$esc(($person['birth_date'] ?: $person['birth_year'] ?: '?').' — '.(($person['living_status'] ?? '') === 'living' ? 'aujourd’hui' : ($person['death_date'] ?: $person['death_year'] ?: '?'))).'</p><div class="chips"><span class="chip">'.$esc(family_book_life_label($person['living_status'] ?? 'unknown')).'</span>'.(($person['surname_group'] ?? '') !== '' ? '<span class="chip">'.$esc($person['surname_group']).'</span>' : '').'</div></div></header>';
-        echo '<div class="grid"><section class="box"><h3>Biographie automatique</h3><div class="bio">'.$esc($bio).'</div></section><section class="box"><h3>Arbre familial</h3><div class="tree-line"><div><strong>Parents</strong>'.$esc($parents ? implode(' · ', array_map('full_name', $parents)) : 'Non renseigné').'</div><div><strong>Conjoint(s)</strong>'.$esc($partners ? implode(' · ', array_map('full_name', $partners)) : 'Non renseigné').'</div><div><strong>Enfant(s)</strong>'.$esc($children ? implode(' · ', array_map('full_name', $children)) : 'Non renseigné').'</div></div></section></div>';
+        echo '<article class="person"><header class="person-head"><div class="portrait">'.($portrait && $withPhotos ? '<img src="'.$esc($portrait).'" alt="">' : $esc(mb_strtoupper($initials ?: '?'))).'</div><div><span class="eyebrow">'.$esc($numberLabel($id) ?: 'Fiche #'.$id).'</span><h2>'.$esc(full_name($person)).'</h2><p class="meta">'.$esc(($person['birth_date'] ?: $person['birth_year'] ?: '?').' — '.(($person['living_status'] ?? '') === 'living' ? 'aujourd’hui' : ($person['death_date'] ?: $person['death_year'] ?: '?'))).'</p><div class="chips"><span class="chip">'.$esc(family_book_life_label($person['living_status'] ?? 'unknown')).'</span>'.(($person['surname_group'] ?? '') !== '' ? '<span class="chip">'.$esc($person['surname_group']).'</span>' : '').'</div></div></header>';
+        echo '<div class="grid">'.($withBio ? '<section class="box"><h3>Biographie automatique</h3><div class="bio">'.$esc($bio).'</div></section>' : '').'<section class="box"><h3>Arbre familial</h3><div class="tree-line"><div><strong>Parents</strong>'.$esc($parents ? implode(' · ', array_map('full_name', $parents)) : 'Non renseigné').'</div><div><strong>Conjoint(s)</strong>'.$esc($partners ? implode(' · ', array_map('full_name', $partners)) : 'Non renseigné').'</div><div><strong>Enfant(s)</strong>'.$esc($children ? implode(' · ', array_map('full_name', $children)) : 'Non renseigné').'</div></div></section></div>';
         echo '<section class="box" style="margin-top:14px"><h3>Repères chronologiques</h3><div class="events">';
         foreach (array_slice($eventsForPerson, 0, 12) as $event) {
             $place = trim(implode(', ', array_filter([$event['place_name'] ?? '', $event['country'] ?? ''])));
@@ -6219,6 +6322,24 @@ function export_family_book(PDO $pdo): never
             echo '</div>';
         }
         echo '</section></article>';
+    }
+    // La chronologie de toute la branche, à la fin du livre (un événement de couple n'apparaît qu'une fois)
+    if ($withChronology) {
+        $rows = []; $seenEvents = [];
+        foreach ($people as $person) {
+            foreach ($eventsByPerson[(int)$person['id']] ?? [] as $event) {
+                if (isset($seenEvents[(int)$event['id']])) continue;
+                $seenEvents[(int)$event['id']] = true;
+                $who = ($event['scope'] ?? '') === 'family' ? implode(' et ', array_map('full_name', array_values(array_filter([$peopleById[(int)($event['partner1_id'] ?? 0)] ?? null, $peopleById[(int)($event['partner2_id'] ?? 0)] ?? null])))) : full_name($person);
+                $rows[] = [(int)($event['year'] ?? 0) ?: 9999, (($event['date_text'] ?? '') ?: ($event['year'] ?? '')) ?: '?', $event['type_label'] ?? 'Événement', $who, trim(implode(', ', array_filter([$event['place_name'] ?? '', $event['country'] ?? ''])))];
+            }
+        }
+        usort($rows, static fn($x, $y) => $x[0] <=> $y[0]);
+        if ($rows) {
+            echo '<section class="overview"><span class="eyebrow">Chronologie</span><h2>Les grandes dates de la famille</h2><table class="chrono"><tbody>';
+            foreach ($rows as [, $date, $type, $who, $place]) echo '<tr><td>'.$esc($date).'</td><td><strong>'.$esc($type).'</strong> — '.$esc($who).($place !== '' ? '<br><small>'.$esc($place).'</small>' : '').'</td></tr>';
+            echo '</tbody></table></section>';
+        }
     }
     echo '</body></html>';
     exit;

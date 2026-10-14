@@ -22,7 +22,7 @@ require 'lib/paths.php';
 require 'lib/bootstrap.php';
 $pdo = db();
 $src = file_get_contents('api.php');
-foreach (['function record_exists', 'function dashboard_month_day'] as $fn) { $a = strpos($src, $fn); $b = strpos($src, "\n}\n", $a); if (!function_exists(substr($fn, 9))) eval(substr($src, $a, $b - $a + 3)); }
+foreach (['function record_exists', 'function dashboard_month_day', 'function sosa_parent_ids', 'function sosa_positions', 'function person_select'] as $fn) { $a = strpos($src, $fn); $b = strpos($src, "\n}\n", $a); if (!function_exists(substr($fn, 9))) eval(substr($src, $a, $b - $a + 3)); }
 $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='$tag' LIMIT 1")->fetchColumn();
 $pdo->exec("INSERT INTO persons(first_name,last_name,gender,is_start) VALUES('Jean','Martin','male',1),('Marie','Martin','female',0),('Jacques','Durand','male',0),('Paul','Durand','male',0),('Louis','Petit','male',0)");
 $pdo->exec("INSERT INTO events(scope,person_id,event_type_id,date_text,year) VALUES
@@ -38,6 +38,22 @@ try { set_start_person($pdo, ['person_id' => 999]); $out['missing'] = 'accepté'
 $s = saint_stats_data($pdo);
 $out['total'] = $s['total']; $out['matched'] = $s['matched'];
 $out['people'] = array_map(fn($p) => [$p['first_name'], $p['date_text'], $p['kind'], $p['saint_label']], $s['people']);
+// Lignée : 1 Jean (1802) ← 2 Pierre (sans dates, mort ?) et 3 Anne ; 4 Paul né en 1680 : 122 ans pour 2 générations
+$pdo->exec("INSERT INTO persons(first_name,last_name,gender) VALUES('Pierre','Martin','male'),('Anne','Le Gall','female'),('Paul','Martin','male')"); // 6, 7, 8
+$pdo->exec("INSERT INTO families(partner1_id,partner2_id) VALUES(6,7),(8,NULL)");
+$pdo->exec("INSERT INTO family_children(family_id,child_id) VALUES(1,1),(2,6)");
+$pdo->exec("INSERT INTO places(name,latitude,longitude) VALUES('Brest',48.39,-4.49),('Quimper',47.99,-4.10),('Lille',50.63,3.06)");
+$pdo->exec("INSERT INTO events(scope,person_id,event_type_id,date_text,year,place_id) VALUES('person',8,{$t('BIRT')},'1680',1680,NULL),('person',7,{$t('BIRT')},'2 mai 1775',1775,2),('person',1,{$t('RESI')},'1830',1830,3)");
+$pdo->exec("UPDATE events SET place_id=1 WHERE person_id=1 AND event_type_id={$t('BIRT')}");
+set_start_person($pdo, ['person_id' => 1]);
+$sg = research_suggestions_data($pdo, 50);
+$out['sugg'] = array_map(fn($i) => [$i['sosa'], $i['kind'], $i['from'], $i['to'], $i['place']], $sg['items']);
+$ac = age_checks($pdo);
+$out['gen'] = array_values(array_map(fn($a) => $a['text'], array_filter($ac['alerts'], fn($a) => str_starts_with($a['text'], 'Sosa '))));
+$rows = fn($rules, $src = 'persons') => array_map(fn($r) => trim(($r['people'][0]['first_name'] ?? '') . ' ' . ($r['people'][0]['last_name'] ?? '')), widget_rows($pdo, ['source' => $src, 'definition' => ['match' => 'all', 'rules' => $rules]])['rows']);
+$out['near'] = $rows([['field' => 'near_place', 'value' => 'Brest', 'km' => 80]]);
+$out['dates'] = $rows([['field' => 'date_range', 'date_from' => '1802-06-01', 'date_to' => '1802-06-30']]);
+$out['age'] = $rows([['field' => 'age_at', 'from' => 25, 'to' => 30, 'values' => [$t('RESI')]]]);
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -58,6 +74,18 @@ step('saint du jour : les personnes, par date (sans année à la fin), le jour r
     ['Marie', '15 août', 'birth', 'sainte Marie'],
 ]));
 
+step('suggestions : la mère sans décès, le mariage du couple, la génération des grands-parents ; lieux et années voisins', () => {
+    const s = out.sugg;
+    assert.ok(s.some(([n, k, f, t, p]) => n === 3 && k === 'death' && f === 1802 && p === 'Quimper'), JSON.stringify(s));
+    assert.ok(s.some(([n, k, f, t, p]) => n === 2 && k === 'marriage' && f === 1790 && t === 1803 && p === 'Quimper'), JSON.stringify(s));
+    assert.ok(s.some(([n, k]) => n === 2 && k === 'birth'), 'naissance du père d’après l’enfant');
+    assert.ok(!s.some(([n, k]) => n === 1 && k === 'birth'), 'le de cujus a sa naissance');
+});
+step('erreur de génération : un ancêtre Sosa trop vieux pour sa place (génération oubliée ?)', () => { assert.equal(out.gen.length, 1); assert.match(out.gen[0], /^Sosa 4 : 12[12] ans pour 2 générations$/); });
+step('critères : à moins de N km d’une ville (personnes nées ou passées par là)', () => { assert.ok(out.near.includes('Jean Martin')); assert.ok(out.near.includes('Anne Le Gall')); assert.ok(!out.near.includes('Paul Durand')); });
+step('critères : entre deux dates précises (24 juin 1802 oui, 24 juillet 1801 non)', () => assert.deepEqual(out.dates, ['Jean Martin']));
+step('critères : âge à un événement (résidence à 28 ans)', () => assert.deepEqual(out.age, ['Jean Martin']));
+
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */
 const store = {};
 const storage = { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); }, removeItem: k => { delete store[k]; } };
@@ -77,8 +105,8 @@ for (const f of ['heritage-widgets.js', 'heritage-tabs.js']) vm.runInContext(fs.
 const ext = sandbox.window.LCNDA_EXT;
 
 step('statistique de l’app redessinée : réglages gardés, valeurs hors limites ramenées', () => {
-    const d = ext.cleanWidgetDef({ id: 'cw_abcd1234', name: 'Prénoms', kind: 'appstat', statType: 'firstnames', statFrom: '1700', statTo: 99999, statGender: 'female', statLineage: 1, style: 'pie', limit: 500, inStats: true });
-    assert.equal(d.kind, 'appstat'); assert.equal(d.statType, 'firstnames'); assert.equal(d.statFrom, 1700); assert.equal(d.statTo, 2200);
+    const d = ext.cleanWidgetDef({ id: 'cw_abcd1234', name: 'Prénoms', kind: 'appstat', statType: 'firstnames', statFrom: ' 12 mars 1750 ', statTo: 1900, statGender: 'female', statLineage: 1, style: 'pie', limit: 500, inStats: true });
+    assert.equal(d.kind, 'appstat'); assert.equal(d.statType, 'firstnames'); assert.equal(d.statFrom, '12 mars 1750'); assert.equal(d.statTo, '1900');
     assert.equal(d.statGender, 'female'); assert.equal(d.statLineage, true); assert.equal(d.style, 'pie'); assert.equal(d.limit, 60); assert.equal(d.inStats, true);
 });
 step('statistique : une statistique inconnue de l’app devient « Noms »', () => assert.equal(ext.cleanWidgetDef({ kind: 'appstat', statType: 'requete_sql' }).statType, 'surnames'));

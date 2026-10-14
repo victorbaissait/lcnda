@@ -15,7 +15,8 @@ declare(strict_types=1);
  */
 
 const LIST_EVENT_COLUMNS = ['date' => 'Date', 'type' => 'Événement', 'who' => 'Personne(s)', 'place' => 'Lieu', 'description' => 'Description', 'age' => 'Âge', 'sources' => 'Sources'];
-const LIST_PERSON_COLUMNS = ['name' => 'Personne', 'birth' => 'Naissance', 'birthplace' => 'Lieu de naissance', 'death' => 'Décès', 'deathplace' => 'Lieu de décès', 'age' => 'Âge au décès', 'occupation' => 'Métier', 'gender' => 'Sexe', 'parents' => 'Parents', 'sosa' => 'Sosa', 'sources' => 'Sources', 'labels' => 'Étiquettes'];
+const LIST_PERSON_COLUMNS = ['name' => 'Personne', 'birth' => 'Naissance', 'birthplace' => 'Lieu de naissance', 'death' => 'Décès', 'deathplace' => 'Lieu de décès', 'age' => 'Âge au décès', 'occupation' => 'Métier', 'gender' => 'Sexe', 'parents' => 'Parents', 'sosa' => 'Sosa', 'sources' => 'Sources', 'labels' => 'Étiquettes',
+    'last_name' => 'Nom de famille', 'first_name' => 'Prénom (le premier)', 'children' => 'Nombre d’enfants', 'marriages' => 'Nombre d’unions', 'birth_country' => 'Pays de naissance'];
 const LIST_CUSTOM_TYPES = ['text', 'select', 'checkbox', 'date', 'number', 'url', 'person'];
 
 /**
@@ -78,12 +79,16 @@ function my_lists(PDO $pdo): array
 function my_list_clean_definition(array $d, string $source): array
 {
     if ($source === 'records') { return my_list_records_definition($d); }
-    $fields = ['event_type', 'year', 'death_year', 'place', 'any_place', 'last_name', 'first_name', 'occupation', 'gender', 'label', 'sosa', 'no_parents', 'no_source', 'text'];
+    $fields = ['event_type', 'year', 'death_year', 'date_range', 'place', 'any_place', 'near_place', 'last_name', 'first_name', 'occupation', 'gender', 'age_at', 'lifespan', 'children_count', 'unions_count', 'event_count', 'label', 'sosa', 'no_parents', 'no_source', 'text'];
+    $isoDate = static function ($v): string { $v = trim((string) $v); if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $v, $m) && checkdate((int) $m[2], (int) $m[3], (int) $m[1])) { return $v; } return function_exists('exact_date') ? (string) (exact_date($v) ?? '') : ''; };
     $rules = [];
     foreach (is_array($d['rules'] ?? null) ? $d['rules'] : [] as $r) {
         if (!is_array($r) || !in_array($r['field'] ?? '', $fields, true)) { continue; }
-        $rules[] = ['field' => $r['field'], 'value' => mb_substr(safe_text($r['value'] ?? ''), 0, 200), 'from' => safe_int($r['from'] ?? 0) ?: null, 'to' => safe_int($r['to'] ?? 0) ?: null,
-            'values' => array_values(array_filter(array_map('intval', is_array($r['values'] ?? null) ? $r['values'] : []))), 'not' => !empty($r['not'])];
+        $counting = in_array($r['field'], ['children_count', 'unions_count', 'event_count'], true); // 0 est une vraie valeur (« aucun enfant »)
+        $num = static fn($v) => $counting ? (is_numeric($v) ? max(0, (int) $v) : null) : (safe_int($v ?? 0) ?: null);
+        $rules[] = ['field' => $r['field'], 'value' => mb_substr(safe_text($r['value'] ?? ''), 0, 200), 'from' => $num($r['from'] ?? null), 'to' => $num($r['to'] ?? null),
+            'values' => array_values(array_filter(array_map('intval', is_array($r['values'] ?? null) ? $r['values'] : []))), 'not' => !empty($r['not']),
+            'date_from' => $isoDate($r['date_from'] ?? ''), 'date_to' => $isoDate($r['date_to'] ?? ''), 'km' => max(0, min(1000, safe_int($r['km'] ?? 0)))];
     }
     if ($source !== 'events' && $source !== 'persons') { $rules = []; } // listes écrites à la main ou reprises de l'onglet Listes : on trie avec les filtres de colonnes
     $allowed = $source === 'free' ? [] : array_keys(my_list_columns()[$source] ?? LIST_PERSON_COLUMNS);
@@ -261,6 +266,47 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
                 if ($r['to']) { $parts[] = "{$col} <= " . (int) $r['to']; }
                 if ($parts) { $c = '(' . implode(' AND ', $parts) . ')'; }
                 break;
+            case 'date_range': // entre deux dates précises (12 mars 1750 → 3 juin 1752) ; une année seule compte si elle est dans la période
+                if ($r['date_from'] === '' && $r['date_to'] === '') { break; }
+                $ids = my_list_events_between($pdo, $r['date_from'], $r['date_to'], $isEvents ? null : ['BIRT', 'CHR', 'BAPM']);
+                $in = implode(',', $ids ?: [0]);
+                $c = $isEvents ? "(e.id IN ({$in}))" : "(EXISTS (SELECT 1 FROM events ee WHERE ee.person_id=p.id AND ee.id IN ({$in})))";
+                break;
+            case 'near_place': // à moins de N km d'une ville (lieux qui ont des coordonnées)
+                if ($r['value'] === '' || !$r['km']) { break; }
+                $in = implode(',', my_list_places_near($pdo, $r['value'], $r['km']) ?: [0]);
+                $c = $isEvents ? "(e.place_id IN ({$in}))"
+                    : "(EXISTS (SELECT 1 FROM events ee LEFT JOIN families ff ON ff.id=ee.family_id WHERE (ee.person_id=p.id OR ff.partner1_id=p.id OR ff.partner2_id=p.id) AND ee.place_id IN ({$in})))";
+                break;
+            case 'age_at': // âge à un événement (ou à n'importe lequel si aucun n'est choisi), d'après l'année de naissance
+                if (!$r['from'] && !$r['to']) { break; }
+                $birth = "(SELECT min(bb.year) FROM events bb JOIN event_types bt ON bt.id=bb.event_type_id WHERE bb.person_id=%s AND bt.gedcom_tag IN ('BIRT','CHR','BAPM'))";
+                $range = static fn(string $age) => ($r['from'] ? " AND {$age} >= " . (int) $r['from'] : '') . ($r['to'] ? " AND {$age} <= " . (int) $r['to'] : '');
+                $types = $r['values'] ? ' AND ee.event_type_id IN (' . implode(',', $r['values']) . ')' : '';
+                $c = $isEvents
+                    ? '(e.year IS NOT NULL' . ($r['values'] ? ' AND e.event_type_id IN (' . implode(',', $r['values']) . ')' : '') . $range('(e.year - ' . sprintf($birth, 'COALESCE(e.person_id, f.partner1_id)') . ')') . ')'
+                    : '(EXISTS (SELECT 1 FROM events ee LEFT JOIN families ff ON ff.id=ee.family_id WHERE (ee.person_id=p.id OR ff.partner1_id=p.id OR ff.partner2_id=p.id) AND ee.year IS NOT NULL' . $types . $range('(ee.year - ' . sprintf($birth, 'p.id') . ')') . '))';
+                break;
+            case 'lifespan': // a vécu entre X et Y ans (années de naissance et de décès)
+                if (!$r['from'] && !$r['to']) { break; }
+                $span = "((SELECT min(dd.year) FROM events dd JOIN event_types dt ON dt.id=dd.event_type_id WHERE dd.person_id=x.id AND dt.gedcom_tag IN ('DEAT','BURI')) - (SELECT min(bb.year) FROM events bb JOIN event_types bt ON bt.id=bb.event_type_id WHERE bb.person_id=x.id AND bt.gedcom_tag IN ('BIRT','CHR','BAPM')))";
+                $c = $personMatch("{$span} IS NOT NULL" . ($r['from'] ? " AND {$span} >= " . (int) $r['from'] : '') . ($r['to'] ? " AND {$span} <= " . (int) $r['to'] : ''));
+                break;
+            case 'children_count': // nombre d'enfants (toutes unions) : « 2 et 2 » = exactement deux
+                if ($r['from'] === null && $r['to'] === null && $r['value'] === '') { break; }
+                $n = '(SELECT count(DISTINCT fc.child_id) FROM family_children fc JOIN families fz ON fz.id=fc.family_id WHERE fz.partner1_id=x.id OR fz.partner2_id=x.id)';
+                $c = $personMatch(my_list_count_range($n, $r));
+                break;
+            case 'unions_count': // nombre d'unions (familles avec un conjoint)
+                if ($r['from'] === null && $r['to'] === null && $r['value'] === '') { break; }
+                $n = '(SELECT count(*) FROM families fz WHERE (fz.partner1_id=x.id AND fz.partner2_id IS NOT NULL) OR (fz.partner2_id=x.id AND fz.partner1_id IS NOT NULL))';
+                $c = $personMatch(my_list_count_range($n, $r));
+                break;
+            case 'event_count': // nombre d'événements d'un type (ex. au moins 3 résidences, aucun voyage…)
+                if (!$r['values'] || ($r['from'] === null && $r['to'] === null && $r['value'] === '')) { break; }
+                $n = '(SELECT count(*) FROM events ec LEFT JOIN families fe ON fe.id=ec.family_id WHERE ec.event_type_id IN (' . implode(',', $r['values']) . ') AND (ec.person_id=x.id OR fe.partner1_id=x.id OR fe.partner2_id=x.id))';
+                $c = $personMatch(my_list_count_range($n, $r));
+                break;
             case 'death_year':
                 if ($isEvents) { break; }
                 $col = "(SELECT min(ee.year) FROM events ee JOIN event_types tt ON tt.id=ee.event_type_id WHERE ee.person_id=p.id AND tt.gedcom_tag IN ('DEAT','BURI'))";
@@ -340,6 +386,16 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
     foreach ($raw as $r) { foreach ($isEvents ? [$r['person_id'], $r['partner1_id'], $r['partner2_id']] : [$r['id']] as $x) { if ($x) { $pids[] = (int) $x; } } }
     $people = collection_people($pdo, $pids);
     $life = my_list_life($pdo, array_keys($people));
+    // Colonnes « Nombre d'enfants », « Nombre d'unions », « Pays de naissance » : calculées seulement si on les montre
+    $counts = [];
+    if (!$isEvents && $people && array_intersect(['children', 'marriages', 'birth_country'], $def['columns'])) {
+        $in = implode(',', array_map('intval', array_keys($people)));
+        foreach ($pdo->query("SELECT p.id,
+                (SELECT count(DISTINCT fc.child_id) FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE f.partner1_id=p.id OR f.partner2_id=p.id) AS children,
+                (SELECT count(*) FROM families f WHERE (f.partner1_id=p.id AND f.partner2_id IS NOT NULL) OR (f.partner2_id=p.id AND f.partner1_id IS NOT NULL)) AS marriages,
+                (SELECT pl.country FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('BIRT','CHR','BAPM') ORDER BY t.gedcom_tag='BIRT' DESC LIMIT 1) AS country
+            FROM persons p WHERE p.id IN ({$in})") as $c) { $counts[(int) $c['id']] = $c; }
+    }
     $out = [];
     foreach ($raw as $r) {
         $key = ($isEvents ? 'e:' : 'p:') . $r['id'];
@@ -360,7 +416,10 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
             $row['cells'] = ['birth' => $l['birth'] ?? '', 'birthplace' => $l['birthplace'] ?? '', 'death' => $l['death'] ?? '', 'deathplace' => $l['deathplace'] ?? '',
                 'age' => !empty($l['by']) && !empty($l['dy']) ? ($l['dy'] - $l['by']) . ' ans' : '', 'occupation' => (string) ($p['occupation'] ?? ''),
                 'gender' => ['male' => 'Homme', 'female' => 'Femme'][$p['gender'] ?? ''] ?? '', 'parents' => $l['parents'] ?? '', 'sosa' => isset($sosas[(int) $p['id']]) ? implode(', ', (array) $sosas[(int) $p['id']]) : '',
-                'sources' => (int) ($l['sources'] ?? 0), 'labels' => $l['labels'] ?? ''];
+                'sources' => (int) ($l['sources'] ?? 0), 'labels' => $l['labels'] ?? '',
+                'last_name' => trim((string) ($p['last_name'] ?? '')), 'first_name' => (string) (preg_split('/[\s,]+/u', trim((string) ($p['first_name'] ?? '')))[0] ?? ''),
+                'children' => isset($counts[(int) $p['id']]) ? (string) $counts[(int) $p['id']]['children'] : '', 'marriages' => isset($counts[(int) $p['id']]) ? (string) $counts[(int) $p['id']]['marriages'] : '',
+                'birth_country' => (string) ($counts[(int) $p['id']]['country'] ?? '')];
             $row['year'] = $l['by'] ?? null;
         }
         $out[] = $row;
@@ -374,6 +433,50 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
 }
 
 /** Naissance, décès, parents, sources et étiquettes d'un lot de personnes (pour les colonnes). */
+/** « entre from et to » sur un nombre (l'un des deux peut manquer ; « exactement » = from et to égaux) */
+function my_list_count_range(string $n, array $r): string
+{
+    $parts = [];
+    if ($r['from'] !== null) { $parts[] = "{$n} >= " . (int) $r['from']; }
+    if ($r['to'] !== null) { $parts[] = "{$n} <= " . (int) $r['to']; }
+    return $parts ? implode(' AND ', $parts) : '1';
+}
+
+/** Événements datés entre deux dates précises (AAAA-MM-JJ, l'une peut manquer) ; seulement de ces sortes si $tags. */
+function my_list_events_between(PDO $pdo, string $from, string $to, ?array $tags = null): array
+{
+    $fy = $from !== '' ? (int) substr($from, 0, 4) : null; $ty = $to !== '' ? (int) substr($to, 0, 4) : null;
+    $sql = 'SELECT e.id, e.date_text, e.year FROM events e' . ($tags ? ' JOIN event_types t ON t.id=e.event_type_id' : '') . ' WHERE e.year IS NOT NULL'
+        . ($fy ? ' AND e.year >= ' . $fy : '') . ($ty ? ' AND e.year <= ' . $ty : '') . ($tags ? " AND t.gedcom_tag IN ('" . implode("','", array_map(static fn($t) => preg_replace('/[^A-Z_]/', '', $t), $tags)) . "')" : '');
+    $ids = [];
+    foreach ($pdo->query($sql) as $e) {
+        $d = function_exists('exact_date') ? exact_date((string) $e['date_text']) : null;
+        if ($d) { if (($from === '' || $d >= $from) && ($to === '' || $d <= $to)) { $ids[] = (int) $e['id']; } continue; }
+        // année seule (ou date incomplète) : gardée si toute l'année est dans la période
+        $y = (int) $e['year'];
+        if (($from === '' || sprintf('%04d-01-01', $y) >= $from) && ($to === '' || sprintf('%04d-12-31', $y) <= $to)) { $ids[] = (int) $e['id']; }
+    }
+    return $ids;
+}
+
+/** Lieux à moins de $km kilomètres du lieu nommé (le plus utilisé de ce nom qui a des coordonnées). */
+function my_list_places_near(PDO $pdo, string $name, int $km): array
+{
+    $c = $pdo->prepare("SELECT pl.latitude, pl.longitude FROM places pl WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL AND (pl.name = ? COLLATE NOCASE OR pl.name LIKE ?)
+        ORDER BY pl.name = ? COLLATE NOCASE DESC, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) DESC LIMIT 1");
+    $c->execute([trim($name), trim($name) . '%', trim($name)]);
+    $center = $c->fetch();
+    if (!$center) { return []; }
+    [$lat0, $lon0] = [deg2rad((float) $center['latitude']), deg2rad((float) $center['longitude'])];
+    $ids = [];
+    foreach ($pdo->query('SELECT id, latitude, longitude FROM places WHERE latitude IS NOT NULL AND longitude IS NOT NULL AND id IN (SELECT place_id FROM events WHERE place_id IS NOT NULL)') as $p) {
+        $lat = deg2rad((float) $p['latitude']); $lon = deg2rad((float) $p['longitude']);
+        $a = sin(($lat - $lat0) / 2) ** 2 + cos($lat0) * cos($lat) * sin(($lon - $lon0) / 2) ** 2;
+        if (6371 * 2 * asin(min(1, sqrt($a))) <= $km) { $ids[] = (int) $p['id']; }
+    }
+    return $ids;
+}
+
 function my_list_life(PDO $pdo, array $ids): array
 {
     $out = [];
