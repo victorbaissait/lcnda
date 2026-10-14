@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 35;
+const SCHEMA_VERSION = 36;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -56,6 +56,7 @@ function migration_steps(): array
         33 => 'schema_v33',
         34 => 'schema_v34',
         35 => 'schema_v35',
+        36 => 'schema_v36',
     ];
 }
 
@@ -1867,4 +1868,26 @@ function schema_v35(PDO $pdo): void
         written_name TEXT NOT NULL DEFAULT ''
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_family_booklet_people ON family_booklet_people(person_id)');
+}
+
+/** 🧩 Tableaux (Enquêtes → Tableaux) : toile libre ; libre, ou dans une enquête, une battue, un projet ; parent_id pour les dossiers. */
+function schema_v36(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS boards (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        parent_id INTEGER REFERENCES boards(id) ON DELETE CASCADE,
+        title TEXT NOT NULL DEFAULT '',
+        icon TEXT NOT NULL DEFAULT '🧩',
+        color TEXT NOT NULL DEFAULT '#0066cc',
+        owner_type TEXT NOT NULL DEFAULT '',
+        owner_id INTEGER NOT NULL DEFAULT 0,
+        part TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        thumb TEXT NOT NULL DEFAULT '',
+        item_count INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_boards_owner ON boards(owner_type, owner_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_boards_parent ON boards(parent_id)');
 }

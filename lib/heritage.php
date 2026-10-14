@@ -10,7 +10,7 @@ declare(strict_types=1);
  * Les photos de ces fiches passent par family_collection_media (upload.php, collection_type + role).
  */
 
-const HERITAGE_COLLECTION_TYPES = ['family_object', 'family_memory', 'voyage', 'placement', 'coat_of_arms', 'family_paper', 'old_map', 'probate_inventory', 'poilu', 'resistance', 'custom_block_entry', 'village', 'voter', 'custom_list_record', 'atelier_item', 'recueil', 'family_booklet'];
+const HERITAGE_COLLECTION_TYPES = ['family_object', 'family_memory', 'voyage', 'placement', 'coat_of_arms', 'family_paper', 'old_map', 'probate_inventory', 'poilu', 'resistance', 'custom_block_entry', 'village', 'voter', 'custom_list_record', 'atelier_item', 'recueil', 'family_booklet', 'board'];
 const PLACEMENT_KINDS = ['nourrice' => 'Mis en nourrice', 'abandon' => 'Abandonné', 'hospice' => 'Recueilli par l’hospice', 'assistance' => 'Pupille de l’Assistance publique', 'orphelinat' => 'Orphelinat', 'recueilli' => 'Recueilli par une famille', 'autre' => 'Autre placement'];
 const POILU_EVENT_KINDS = ['incorpore' => 'Incorporé', 'blesse' => 'Blessé', 'malade' => 'Malade / évacué', 'gaze' => 'Gazé', 'prisonnier' => 'Fait prisonnier', 'disparu' => 'Disparu', 'tue' => 'Tué', 'cite' => 'Cité / décoré', 'permission' => 'Permission', 'mutation' => 'Changement d’unité', 'autre' => 'Autre'];
 const PROBATE_CATEGORIES = ['meubles' => 'Meubles', 'betail' => 'Bétail', 'outils' => 'Outils', 'linge' => 'Linge', 'vetements' => 'Vêtements', 'vaisselle' => 'Vaisselle, cuisine', 'grains' => 'Grains, récoltes, provisions', 'argent' => 'Argent, créances', 'immeubles' => 'Maisons, terres', 'livres' => 'Livres, papiers', 'bijoux' => 'Bijoux', 'dettes' => 'Dettes (à déduire)', 'autre' => 'Autre'];

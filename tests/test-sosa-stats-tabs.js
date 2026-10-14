@@ -83,6 +83,18 @@ $out['bk_mention'] = array_map(fn($m) => $m['role'], booklet_person_mentions($pd
 $out['bk_props'] = array_column(booklet_proposals($pdo, $bk['id'])['items'], 'key');
 $out['bk_done'] = apply_booklet($pdo, ['id' => $bk['id'], 'keys' => ['husband:death', 'marriage', 'child:0:parents', 'pirate']])['done'];
 $out['bk_props_after'] = array_column(booklet_proposals($pdo, $bk['id'])['items'], 'key');
+// Tableaux : nettoyage des éléments, dossier (sous-tableau) rangé comme son parent, suppression en cascade, listes
+$pdo->exec("INSERT INTO investigations(person_id,title) VALUES(1,'Le père')");
+$bd = save_board($pdo, ['title' => 'Mur', 'owner_type' => 'investigation', 'owner_id' => 1, 'part' => 'Piste 1', 'data' => ['bg' => 'cork', 'items' => [
+    ['id' => 'a', 'type' => 'note', 'text' => '<b>x</b>', 'x' => 10, 'y' => 20, 'w' => 100, 'h' => 80, 'fill' => 'javascript:alert(1)'],
+    ['id' => 'b', 'type' => 'weblink', 'url' => 'javascript:alert(1)'], ['type' => 'pirate'], ['id' => 'c', 'type' => 'line', 'from' => 'a', 'to' => 'zz', 'points' => [[0, 0], [5, 5]]]]]]);
+$sub = save_board($pdo, ['title' => 'Dossier', 'parent_id' => $bd['id']]);
+$d = board_detail($pdo, $bd['id']);
+$out['bd'] = [count($d['data']['items']), $d['data']['items'][0]['text'], $d['data']['items'][0]['fill'], $d['data']['items'][1]['url'], $d['data']['bg'], $d['owner_label'], $d['part']];
+$out['bd_sub'] = [board_detail($pdo, $sub['id'])['owner_type'], board_detail($pdo, $sub['id'])['path'][0]['title']];
+$out['bd_list'] = array_map(fn($r) => [$r['title'], $r['sub_count']], boards_list($pdo, ['owner_type' => 'investigation', 'owner_id' => 1]));
+$out['bd_inv'] = array_map(fn($r) => [$r['title'], $r['boards']], research_lists_overview($pdo, 'investigations'));
+$out['bd_del'] = delete_board($pdo, ['id' => $bd['id']])['deleted'];
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -144,6 +156,14 @@ step('livret de famille : transcription, fiche reliée, report sur les fiches de
     assert.ok(!out.bk_props.includes('child:0:birth'), 'Louis a déjà son baptême');
     assert.equal(out.bk_done, 3);
     assert.deepEqual(out.bk_props_after, []);
+});
+
+step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rangé comme son tableau, listes, suppression en cascade', () => {
+    assert.deepEqual(out.bd, [3, '<b>x</b>', '', '', 'cork', 'Le père', 'Piste 1']); // le texte reste du texte (échappé à l'affichage)
+    assert.deepEqual(out.bd_sub, ['investigation', 'Mur']);
+    assert.deepEqual(out.bd_list, [['Mur', 1]]);
+    assert.deepEqual(out.bd_inv, [['Le père', 1]]);
+    assert.equal(out.bd_del, 2);
 });
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */
