@@ -750,7 +750,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         settings.hideEmptyIdentity=!!settings.hideEmptyIdentity;settings.widths=Object.fromEntries(Object.entries(settings.widths||{}).filter(([key,value])=>defaults.includes(key)&&personBlockWidthChoices.some(choice=>choice[0]===String(value))));defaults.forEach(key=>{if(!settings.widths[key])settings.widths[key]=defaultPersonBlockSpans[key]||'12';});return settings;}
     function savePersonBlockSettings(settings,personId=0){const key=personId?`genealogie-person-blocks-${personId}`:'genealogie-person-blocks';localStorage.setItem(key,JSON.stringify({order:settings.order,hidden:settings.hidden||[],widths:settings.widths||{},hideEmptyIdentity:!!settings.hideEmptyIdentity}));}
     function dashboardWidgetId(type){return `${type}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;}
-    function dashboardWidgetLabel(type){return (defaultDashboardBlocks.find(item=>item[0]===type)||[,type])[1];}
+    function dashboardWidgetLabel(type){if(type==='__group')return '📁 Ensemble (titre)';return (defaultDashboardBlocks.find(item=>item[0]===type)||[,type])[1];}
     /** Un widget à soi qui habille un widget de l'app (Éditeur de widgets) se règle comme ce widget-là. */
     function dashboardBaseType(type){const d=String(type).startsWith('cw_')?window.LCNDA_EXT?.customWidgetDefs?.()?.[type]:null;return d&&d.kind==='app'&&d.base?d.base:type;}
     function dashboardNewWidget(type,source={}){
@@ -759,7 +759,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const limit=defaultDashboardBlockLimits[lt]?Math.max(1,Math.min(80,Number(source.limit||defaultDashboardBlockLimits[lt])||defaultDashboardBlockLimits[lt])):0;
         return {id:source.id||dashboardWidgetId(type),type,width:personBlockWidthChoices.some(choice=>choice[0]===width)?width:(defaultDashboardBlockSpans[type]||'6'),limit,config:{...(source.config||{})}};
     }
+    /** Un ensemble de widgets (titre, niveau 0 à 3, replié ou non) : une ligne-titre dans la liste ; les widgets qui
+     *  suivent lui appartiennent jusqu'au prochain ensemble de même niveau ou plus haut. */
+    function dashboardGroupItem(source={}){const c=source.config||{};return {id:/^grp_[a-z0-9]{4,24}$/.test(String(source.id))?source.id:'grp_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),type:'__group',width:'12',limit:0,config:{title:String(c.title||'Ensemble').slice(0,80),depth:Math.max(0,Math.min(3,Number(c.depth)||0)),collapsed:!!c.collapsed}};}
     function dashboardNormalizeWidget(widget){
+        if(widget?.type==='__group')return dashboardGroupItem(widget);
         const defaults=defaultDashboardBlocks.map(item=>item[0]);
         if(!widget||!defaults.includes(widget.type))return null;
         return dashboardNewWidget(widget.type,widget);
@@ -769,12 +773,26 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function customTabs(){try{const v=JSON.parse(localStorage.getItem('genealogie-custom-tabs')||'[]');return Array.isArray(v)?v.filter(t=>t&&CUSTOM_TAB_ID.test(String(t.id))):[];}catch(_){return [];}}
     function saveCustomTabs(list){try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(list));}catch(_){toast('Réglage impossible à enregistrer dans ce navigateur.','error');}applyMenuOrder();}
     function currentCustomTab(){const id=state.dashboardBoard||'';return id?customTabs().find(t=>t.id===id&&t.kind!=='screen')||null:null;}
+    // ── Pages du tableau de bord : plusieurs pages de widgets nommées, choisies en haut ; l'une est affichée d'office ──
+    function dashboardStored(){try{const v=JSON.parse(localStorage.getItem('genealogie-dashboard-blocks')||'{}');return v&&typeof v==='object'?v:{};}catch(_){return {};}}
+    function dashboardPages(){
+        const stored=dashboardStored();
+        const pages=(Array.isArray(stored.pages)?stored.pages:[]).filter(p=>p&&/^pg_[a-z0-9]{2,24}$/.test(String(p.id)));
+        if(pages.length)return {pages,defaultPage:pages.some(p=>p.id===stored.defaultPage)?stored.defaultPage:pages[0].id};
+        return {pages:[{id:'pg_main',name:'Vue d’ensemble',widgets:null}],defaultPage:'pg_main'}; // widgets null : ceux d'avant les pages
+    }
+    function currentDashboardPage(){const {pages,defaultPage}=dashboardPages();return pages.find(p=>p.id===state.dashboardPage)||pages.find(p=>p.id===defaultPage)||pages[0];}
+    function saveDashboardPages(pages,defaultPage){
+        const stored=dashboardStored();const first=pages[0];
+        localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({...stored,pages,defaultPage:pages.some(p=>p.id===defaultPage)?defaultPage:first.id,widgets:Array.isArray(first.widgets)?first.widgets:(Array.isArray(stored.widgets)?stored.widgets:undefined)}));
+    }
     function dashboardBlockSettings(){
         const tab=currentCustomTab();
         if(tab)return {widgets:(Array.isArray(tab.widgets)?tab.widgets:[]).map(dashboardNormalizeWidget).filter(Boolean)};
+        const page=currentDashboardPage();
+        if(Array.isArray(page.widgets))return {widgets:page.widgets.map(dashboardNormalizeWidget).filter(Boolean)};
         const defaults=defaultDashboardBlocks.map(item=>item[0]);
-        let stored={};
-        try{stored=JSON.parse(localStorage.getItem('genealogie-dashboard-blocks')||'{}')||{};}catch(_){stored={};}
+        const stored=dashboardStored();
         if(Array.isArray(stored.widgets)){
             const widgets=stored.widgets.map(dashboardNormalizeWidget).filter(Boolean);
             return {widgets};
@@ -789,8 +807,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     function saveDashboardBlockSettings(settings){
         const tab=currentCustomTab();
-        if(tab){const list=customTabs();const i=list.findIndex(t=>t.id===tab.id);if(i>=0){list[i]={...list[i],widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))};saveCustomTabs(list);}return;}
-        localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({widgets:(settings.widgets||[]).map(widget=>dashboardNewWidget(widget.type,widget))}));}
+        if(tab){const list=customTabs();const i=list.findIndex(t=>t.id===tab.id);if(i>=0){list[i]={...list[i],widgets:(settings.widgets||[]).map(widget=>widget.type==='__group'?dashboardGroupItem(widget):dashboardNewWidget(widget.type,widget))};saveCustomTabs(list);}return;}
+        const widgets=(settings.widgets||[]).map(widget=>widget.type==='__group'?dashboardGroupItem(widget):dashboardNewWidget(widget.type,widget));
+        const {pages,defaultPage}=dashboardPages();const page=currentDashboardPage();
+        if(pages.length===1&&page.id==='pg_main'&&!Array.isArray(dashboardStored().pages)){localStorage.setItem('genealogie-dashboard-blocks',JSON.stringify({...dashboardStored(),widgets}));return;}
+        saveDashboardPages(pages.map(p=>p.id===page.id?{...p,widgets}:p),defaultPage);}
     function eventsFilterSettings(personId=0){const defaults={hiddenTypeIds:[],showCensus:false};let settings={...defaults};try{settings={...settings,...JSON.parse(localStorage.getItem('genealogie-events-filter')||'{}')};}catch(_){}if(personId){try{const ps=JSON.parse(localStorage.getItem(`genealogie-events-filter-${personId}`)||'{}');if(Object.keys(ps).length)settings={...settings,...ps};}catch(_){}}settings.hiddenTypeIds=(settings.hiddenTypeIds||[]).map(Number).filter(n=>n>0);settings.showCensus=!!settings.showCensus;return settings;}
     function saveEventsFilterSettings(settings,personId=0){const key=personId?`genealogie-events-filter-${personId}`:'genealogie-events-filter';localStorage.setItem(key,JSON.stringify({hiddenTypeIds:(settings.hiddenTypeIds||[]).map(Number).filter(n=>n>0),showCensus:!!settings.showCensus}));}
     // ── Chercher sur internet (bloc de fiche + widget) : chaque bouton ouvre la recherche du site dans le navigateur ──
@@ -1836,10 +1857,28 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(token!==state.workspaceToken||state.module!=='dashboard')return;
         Object.keys(extDashboard).forEach(type=>{blockRenderers[type]=widget=>extDashboard[type].render(String(index++).padStart(2,'0'),widget,span(widget),extData[type]);});
         const dress=(widget,html)=>widget.cwDef&&window.LCNDA_EXT?.dressWidget?window.LCNDA_EXT.dressWidget(customDefs[widget.cwDef],html):html;
-        const blocks=settings.widgets.map(widget=>blockRenderers[widget.type]?dashboardWidgetChrome(widget,dress(widget,blockRenderers[widget.type](widget))): '').join('');
+        // Ensembles : un cadre fin, son titre (qui reste quand on le replie) et ses widgets ; les sous-ensembles dedans
+        let blocks='';const open=[];let hiddenFrom=null;
+        const closeTo=depth=>{while(open.length&&open[open.length-1]>=depth){open.pop();blocks+='</div></section>';}if(hiddenFrom!==null&&open.length<=hiddenFrom)hiddenFrom=null;};
+        settings.widgets.forEach(widget=>{
+            if(widget.type==='__group'){
+                const c=widget.config||{};closeTo(c.depth);
+                if(hiddenFrom!==null){open.push(c.depth);blocks+='<section hidden><div>';return;} // dans un ensemble replié
+                blocks+=`<section class="dash-group span-12 depth-${c.depth}${c.collapsed?' is-collapsed':''}" data-dash-group="${escapeHtml(widget.id)}"><header class="dash-group-head"><button type="button" class="dash-group-toggle" data-dash-group-toggle="${escapeHtml(widget.id)}" aria-expanded="${c.collapsed?'false':'true'}" title="${c.collapsed?'Ouvrir':'Fermer'}">${c.collapsed?'▸':'▾'}</button><h3>${escapeHtml(c.title||'Ensemble')}</h3></header><div class="card-grid dashboard-grid dash-group-body"${c.collapsed?' hidden':''}>`;
+                open.push(c.depth);if(c.collapsed)hiddenFrom=open.length-1;
+                return;
+            }
+            if(hiddenFrom!==null)return;
+            if(blockRenderers[widget.type])blocks+=dashboardWidgetChrome(widget,dress(widget,blockRenderers[widget.type](widget)));
+        });
+        closeTo(-1);
         const ownTab=currentCustomTab();
-        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}"><header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">⚙️ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>Vue d’ensemble</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p></div>`}</header>
+        const {pages:dashPagesList}=dashboardPages(),dashPage=currentDashboardPage();
+        const dashPagesBar=dashPagesList.length>1?`<div class="segmented dash-pages" role="tablist">${dashPagesList.map(p=>`<button type="button" role="tab" data-dash-page="${escapeHtml(p.id)}" class="${p.id===dashPage.id?'is-active':''}" aria-selected="${p.id===dashPage.id}">${escapeHtml(p.name||'Page')}</button>`).join('')}</div>`:'';
+        $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}"><header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">⚙️ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>
         <div class="card-grid dashboard-grid">${blocks||empty(ownTab?'Onglet vide : ajoute des widgets, tes widgets, tes listes ou tes statistiques depuis la colonne de gauche.':'Aucun widget affiché. Ajoute-en depuis la colonne de gauche.')}</div></section>`;
+        $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{state.dashboardPage=b.dataset.dashPage;renderDashboard();renderSidebar();}));
+        $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard();}));
         $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
         $$('[data-reroll-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const current=dashboardBlockSettings();const widget=current.widgets.find(item=>item.id===button.dataset.rerollDashboardWidget);if(widget){widget.config={...(widget.config||{}),randomSeed:Date.now()};saveDashboardBlockSettings(current);}await renderDashboard();}));
         $$('[data-edit-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();state.dashboardEditingWidget=state.dashboardEditingWidget===button.dataset.editDashboardWidget?'':button.dataset.editDashboardWidget;await renderDashboard();}));
@@ -2023,23 +2062,66 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     /** Tableau de bord → « Réordonner les widgets » : glisser une ligne, ou ses flèches ↑ ↓, puis Enregistrer. */
     function openDashboardReorderDialog(){
-        const settings=dashboardBlockSettings();let widgets=[...settings.widgets];
-        if(!widgets.length)return toast('Aucun widget sur le tableau de bord.');
+        const ownTab=currentCustomTab();
+        const current=dashboardBlockSettings();
+        // Copie de travail des pages (le tableau de bord principal) ; un onglet à soi n'a qu'une page
+        const meta=dashboardPages();
+        let pagesWork=ownTab?[{id:'pg_tab',name:ownTab.name,widgets:current.widgets}]:meta.pages.map(p=>({...p,widgets:Array.isArray(p.widgets)?p.widgets.map(dashboardNormalizeWidget).filter(Boolean):(p.id===currentDashboardPage().id?current.widgets:[])}));
+        let defaultWork=ownTab?'pg_tab':meta.defaultPage,editing=ownTab?'pg_tab':currentDashboardPage().id;
+        const page=()=>pagesWork.find(p=>p.id===editing)||pagesWork[0];
         const subtitle=w=>w.config?.personMode==='specific'&&w.config?.personName?w.config.personName:(w.type==='person_block'?(defaultPersonBlocks.find(r=>r[0]===(w.config?.personBlockKey||'identity'))||[,''])[1]:'');
         const widthText=w=>(personBlockWidthChoices.find(([v])=>String(v)===String(w.width))||[,''])[1];
         const dialog=document.createElement('dialog');dialog.className='modal dashboard-reorder-dialog';
-        const draw=()=>{$('.dashboard-reorder-list',dialog).innerHTML=widgets.map((w,i)=>`<li class="dashboard-reorder-row" draggable="true" data-index="${i}"><span class="order-grip" aria-hidden="true">↕</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><b>${escapeHtml(dashboardWidgetLabel(w.type))}${subtitle(w)?` <small>${escapeHtml(subtitle(w))}</small>`:''}</b><small class="cell-muted">${escapeHtml(widthText(w))}</small><span class="dashboard-reorder-moves"><button type="button" class="icon-button" data-move="-1" ${i===0?'disabled':''} aria-label="Monter">↑</button><button type="button" class="icon-button" data-move="1" ${i===widgets.length-1?'disabled':''} aria-label="Descendre">↓</button></span></li>`).join('');};
-        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">TABLEAU DE BORD</span><h2>Réordonner les widgets</h2><p>Glisse une ligne, ou utilise ses flèches. Le premier widget est en haut à gauche de la vue générale.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div><ol class="dashboard-reorder-list"></ol><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer l’ordre</button></div>`;
+        const newPageId=()=>'pg_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+        const draw=()=>{
+            const widgets=page().widgets;let depth=-1;
+            $('.dash-pages-editor',dialog).innerHTML=ownTab?'':`<h3>Pages du tableau de bord</h3><p class="muted">Chaque page a ses widgets ; les boutons des pages sont en haut du tableau de bord. La page cochée s’affiche à l’ouverture.</p>
+                <div class="dash-pages-rows">${pagesWork.map(p=>`<div class="dash-page-row${p.id===editing?' is-editing':''}" data-page-row="${escapeHtml(p.id)}"><label class="checkbox-line" title="Page affichée à l’ouverture"><input type="radio" name="dash-default" value="${escapeHtml(p.id)}" ${p.id===defaultWork?'checked':''}> par défaut</label><input data-page-name value="${escapeHtml(p.name||'')}" maxlength="40" placeholder="Nom de la page"><button type="button" class="button small ${p.id===editing?'':'secondary'}" data-page-edit>${p.id===editing?'✎ en cours':'Ranger ses widgets'}</button>${pagesWork.length>1?'<button type="button" class="icon-button danger" data-page-del title="Supprimer cette page">🗑</button>':''}</div>`).join('')}</div>
+                <button type="button" class="button small secondary" data-page-add>+ Nouvelle page</button>`;
+            $('.dashboard-reorder-list',dialog).innerHTML=widgets.length?widgets.map((w,i)=>{
+                if(w.type==='__group'){depth=w.config.depth;return `<li class="dashboard-reorder-row is-group" draggable="true" data-index="${i}" style="margin-left:${w.config.depth*22}px"><span class="order-grip" aria-hidden="true">↕</span><span class="dash-group-icon" aria-hidden="true">📁</span><input class="dash-group-title" data-group-title value="${escapeHtml(w.config.title||'')}" maxlength="80" placeholder="Titre de l’ensemble"><span class="dashboard-reorder-moves"><button type="button" class="icon-button" data-depth="-1" ${w.config.depth?'':'disabled'} title="Un niveau plus haut">◀</button><button type="button" class="icon-button" data-depth="1" ${w.config.depth>=3?'disabled':''} title="Sous-ensemble (un niveau plus bas)">▶</button><button type="button" class="icon-button" data-move="-1" ${i===0?'disabled':''} aria-label="Monter">↑</button><button type="button" class="icon-button" data-move="1" ${i===widgets.length-1?'disabled':''} aria-label="Descendre">↓</button><button type="button" class="icon-button danger" data-group-del title="Retirer l’ensemble (ses widgets restent)">×</button></span></li>`;}
+                return `<li class="dashboard-reorder-row" draggable="true" data-index="${i}" style="margin-left:${(depth+1)*22}px"><span class="order-grip" aria-hidden="true">↕</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><b>${escapeHtml(dashboardWidgetLabel(w.type))}${subtitle(w)?` <small>${escapeHtml(subtitle(w))}</small>`:''}</b><small class="cell-muted">${escapeHtml(widthText(w))}</small><span class="dashboard-reorder-moves"><button type="button" class="icon-button" data-move="-1" ${i===0?'disabled':''} aria-label="Monter">↑</button><button type="button" class="icon-button" data-move="1" ${i===widgets.length-1?'disabled':''} aria-label="Descendre">↓</button></span></li>`;
+            }).join(''):`<li class="muted">Aucun widget sur cette page : ajoute-en depuis la colonne de gauche du tableau de bord.</li>`;
+        };
+        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">${ownTab?'MON ONGLET':'TABLEAU DE BORD'}</span><h2>Réordonner les widgets</h2><p>Glisse une ligne, ou utilise ses flèches. Un ensemble regroupe les widgets qui le suivent, dans un cadre avec son titre ; ▶ en fait un sous-ensemble.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
+            <section class="dash-pages-editor"></section>
+            <div class="dash-reorder-tools"><button type="button" class="button small secondary" data-group-add>📁 + Ensemble</button><span class="muted">Le nouvel ensemble arrive en haut : glisse-le au-dessus de ses widgets.</span></div>
+            <ol class="dashboard-reorder-list" data-dnd-off></ol><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer</button></div>`;
         document.body.append(dialog);draw();
         const list=$('.dashboard-reorder-list',dialog);let dragFrom=-1;
-        list.addEventListener('click',e=>{const b=e.target.closest('[data-move]');if(!b)return;const i=Number(b.closest('[data-index]').dataset.index),j=i+Number(b.dataset.move);if(j<0||j>=widgets.length)return;[widgets[i],widgets[j]]=[widgets[j],widgets[i]];dialog.dataset.dirty='1';draw();list.querySelector(`[data-index="${j}"] [data-move="${b.dataset.move}"]`)?.focus();});
-        list.addEventListener('dragstart',e=>{const row=e.target.closest('[data-index]');if(!row)return;dragFrom=Number(row.dataset.index);row.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';});
+        const widgets=()=>page().widgets;
+        list.addEventListener('click',e=>{
+            const row=e.target.closest('[data-index]');if(!row)return;const i=Number(row.dataset.index),ws=widgets();
+            const mv=e.target.closest('[data-move]');if(mv){const j=i+Number(mv.dataset.move);if(j<0||j>=ws.length)return;[ws[i],ws[j]]=[ws[j],ws[i]];draw();list.querySelector(`[data-index="${j}"] [data-move="${mv.dataset.move}"]`)?.focus();return;}
+            const dp=e.target.closest('[data-depth]');if(dp){const g=ws[i];g.config={...g.config,depth:Math.max(0,Math.min(3,(g.config.depth||0)+Number(dp.dataset.depth)))};draw();return;}
+            if(e.target.closest('[data-group-del]')){ws.splice(i,1);draw();}
+        });
+        list.addEventListener('input',e=>{const t=e.target.closest('[data-group-title]');if(!t)return;widgets()[Number(t.closest('[data-index]').dataset.index)].config.title=t.value;});
+        list.addEventListener('dragstart',e=>{if(e.target.closest('input'))return;const row=e.target.closest('[data-index]');if(!row)return;dragFrom=Number(row.dataset.index);row.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain','w');}catch(_){}});
         list.addEventListener('dragover',e=>{if(dragFrom<0)return;e.preventDefault();$$('.is-drop-target',list).forEach(r=>r.classList.remove('is-drop-target'));e.target.closest('[data-index]')?.classList.add('is-drop-target');});
-        list.addEventListener('drop',e=>{e.preventDefault();const row=e.target.closest('[data-index]');if(!row||dragFrom<0)return;const to=Number(row.dataset.index);const [moved]=widgets.splice(dragFrom,1);widgets.splice(to,0,moved);dragFrom=-1;dialog.dataset.dirty='1';draw();});
+        list.addEventListener('drop',e=>{e.preventDefault();const row=e.target.closest('[data-index]');if(!row||dragFrom<0)return;const to=Number(row.dataset.index),ws=widgets();const [moved]=ws.splice(dragFrom,1);ws.splice(to,0,moved);dragFrom=-1;draw();});
         list.addEventListener('dragend',()=>{dragFrom=-1;$$('.is-dragging,.is-drop-target',list).forEach(r=>r.classList.remove('is-dragging','is-drop-target'));});
+        $('[data-group-add]',dialog).addEventListener('click',()=>{widgets().unshift(dashboardGroupItem({config:{title:'Nouvel ensemble',depth:0}}));draw();setTimeout(()=>{const t=$('[data-group-title]',list);t?.focus();t?.select();},0);});
+        const pagesBox=$('.dash-pages-editor',dialog);
+        pagesBox.addEventListener('click',e=>{
+            if(e.target.closest('[data-page-add]')){const id=newPageId();pagesWork.push({id,name:`Page ${pagesWork.length+1}`,widgets:[]});editing=id;draw();setTimeout(()=>{const inp=pagesBox.querySelector(`[data-page-row="${id}"] [data-page-name]`);inp?.focus();inp?.select();},0);return;}
+            const row=e.target.closest('[data-page-row]');if(!row)return;const id=row.dataset.pageRow;
+            if(e.target.closest('[data-page-edit]')){editing=id;draw();return;}
+            if(e.target.closest('[data-page-del]')){const p=pagesWork.find(x=>x.id===id);if(p.widgets.length&&!confirm(`Supprimer la page « ${p.name||'Page'} » et ses ${p.widgets.length} widget(s) ?`))return;pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(defaultWork===id)defaultWork=pagesWork[0].id;draw();}
+        });
+        pagesBox.addEventListener('input',e=>{const inp=e.target.closest('[data-page-name]');if(inp)pagesWork.find(x=>x.id===inp.closest('[data-page-row]').dataset.pageRow).name=inp.value;});
+        pagesBox.addEventListener('change',e=>{if(e.target.name==='dash-default')defaultWork=e.target.value;});
         const close=()=>{dialog.close();dialog.remove();};
         $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',close));
-        $('[data-save]',dialog).addEventListener('click',async()=>{saveDashboardBlockSettings({widgets});dialog.dataset.dirty='';close();toast('Ordre des widgets enregistré.');if(state.module==='dashboard')await renderDashboard();});
+        $('[data-save]',dialog).addEventListener('click',async()=>{
+            if(ownTab)saveDashboardBlockSettings({widgets:page().widgets});
+            else{
+                const clean=pagesWork.map(p=>({id:p.id,name:String(p.name||'').trim().slice(0,40)||'Page',widgets:p.widgets.map(w=>w.type==='__group'?dashboardGroupItem(w):dashboardNewWidget(w.type,w))}));
+                saveDashboardPages(clean,defaultWork);
+                if(!clean.some(p=>p.id===state.dashboardPage))state.dashboardPage=defaultWork;
+            }
+            close();toast('Tableau de bord enregistré.');if(state.module==='dashboard')await renderDashboard();
+        });
         dialog.addEventListener('close',()=>dialog.remove());
         dialog.showModal();
     }

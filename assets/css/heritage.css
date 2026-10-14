@@ -1577,3 +1577,36 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-faq-search input{flex:1;border:0;outline:0;background:transparent;font:inherit;font-size:1.05em;padding:.55rem 0;min-width:0}
 .h-faq-search:focus-within{box-shadow:var(--shadow-small)}
 .h-faq-group{display:block;margin-top:.6rem;font-size:.72em;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+/* ── Glisser-déposer (heritage-dnd.js) et poignées plus faciles à attraper ── */
+.dnd-grip{display:inline-flex;align-items:center;justify-content:center;width:22px;min-height:26px;margin-right:6px;cursor:grab;color:#888;font-size:16px;user-select:none;touch-action:none;flex:0 0 auto}
+.dnd-grip:hover{color:var(--blue)}
+.is-dnd-dragging{opacity:.55;outline:2px dashed var(--blue)}
+.dnd-marker{position:absolute;height:4px;background:var(--blue);z-index:9999;pointer-events:none;border-radius:2px}
+.order-row .order-grip,.order-grip{display:inline-flex;align-items:center;justify-content:center;min-width:26px;min-height:30px;padding:0 4px;user-select:none}
+/* ── Tableau de bord : pages (en haut) et ensembles de widgets ── */
+.dash-pages{display:inline-grid;grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:minmax(130px,auto);margin:.9rem 0 0;max-width:100%;overflow-x:auto}
+.dash-pages button{min-width:120px;white-space:nowrap}
+.dash-group{grid-column:1/-1;border-left:2px solid var(--ink);padding:0 0 .2rem .9rem;margin:.2rem 0 .4rem}
+.dash-group.depth-1{border-left-color:var(--blue)}
+.dash-group.depth-2,.dash-group.depth-3{border-left:1px solid var(--line-color)}
+.dash-group-head{display:flex;align-items:center;gap:.45rem;margin:0 0 .7rem}
+.dash-group-head h3{margin:0;font-size:1.25rem;letter-spacing:-.01em}
+.dash-group.depth-1 .dash-group-head h3{font-size:1.1rem}
+.dash-group.depth-2 .dash-group-head h3,.dash-group.depth-3 .dash-group-head h3{font-size:1rem}
+.dash-group-toggle{border:2px solid var(--ink);background:#fff;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;line-height:1;padding:0}
+.dash-group-toggle:hover{background:var(--blue);color:#fff}
+.dash-group.is-collapsed{padding-bottom:0}
+.dash-group.is-collapsed .dash-group-head{margin-bottom:.2rem}
+.dash-pages-editor{border:1px solid var(--line-color);padding:.7rem .9rem;margin:0 0 .8rem}
+.dash-pages-editor:empty{display:none}
+.dash-pages-editor h3{margin:0 0 .2rem;font-size:1rem}
+.dash-pages-rows{display:grid;gap:6px;margin:.5rem 0}
+.dash-page-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.dash-page-row input[data-page-name]{flex:1 1 200px;min-height:32px;padding:4px 8px;border:1px solid #bbb;font:inherit}
+.dash-page-row.is-editing input[data-page-name]{border:2px solid var(--blue)}
+.dash-reorder-tools{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin:0 0 .5rem}
+.dashboard-reorder-row.is-group{background:#f4f7fb;border-left:3px solid var(--ink)}
+.dashboard-reorder-row.is-group .dash-group-title{flex:1;min-height:30px;padding:3px 8px;border:1px solid #bbb;font:inherit;font-weight:700}
+.dash-group-icon{margin:0 4px}
+.dashboard-reorder-dialog .dash-reorder-tools,.dashboard-reorder-dialog .dash-pages-editor{margin-left:1rem;margin-right:1rem}
+.dashboard-reorder-dialog .dash-pages-editor{margin-top:.8rem}
