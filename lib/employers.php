@@ -64,7 +64,7 @@ function employer_list_all(PDO $pdo, string $like, int $limit = 500, int $offset
     foreach ($pdo->query("SELECT TRIM(employer) AS name, COUNT(*) AS n FROM census_members WHERE TRIM(COALESCE(employer,''))<>'' GROUP BY LOWER(TRIM(employer))") as $r) { $add((string) $r['name'], (int) $r['n']); }
     foreach (employer_block_mentions($pdo) as $list) { $ids = array_unique(array_column($list, 'person_id')); $add($list[0]['name'], count($ids)); }
     try {
-        foreach ($pdo->query('SELECT key, name FROM employer_records') as $r) { $add((string) $r['name'], 0); if (isset($rows[$r['key']])) { $rows[$r['key']]['has_record'] = 1; $rows[$r['key']]['name'] = (string) $r['name']; } // le nom de la fiche l'emporte }
+        foreach ($pdo->query('SELECT key, name FROM employer_records') as $r) { $add((string) $r['name'], 0); if (isset($rows[$r['key']])) { $rows[$r['key']]['has_record'] = 1; $rows[$r['key']]['name'] = (string) $r['name']; /* le nom de la fiche l'emporte */ } }
     } catch (Throwable) {}
     uasort($rows, static fn($a, $b) => strcoll(mb_strtolower($a['name']), mb_strtolower($b['name'])));
     return array_slice(array_values($rows), $offset, $limit);
