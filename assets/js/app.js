@@ -9867,27 +9867,14 @@ ${(window.LCNDA_EXT?.exportPanels||[]).map(fn=>{try{return fn();}catch(error){co
   <div class="page-actions"><a class="button secondary" href="${exportUrl('export_research_report')}" download>Télécharger le rapport HTML</a></div>
 </section>
 
-<section class="maintenance-panel">
-  <h3>Livre de famille — livret narratif</h3>
-  <p>Génération de livret PDF façon "livre de famille" avec mise en page soignée : biographie automatique, repères familiaux, événements principaux et photos disponibles. Le fichier s’ouvre en HTML imprimable, puis s’enregistre en PDF depuis le navigateur.</p>
-  <form class="form-grid" id="family-book-form">
-    <label>Une branche <select name="scope"><option value="all">toute la base</option><option value="ancestors" selected>les ancêtres de…</option><option value="descendants">les descendants de…</option><option value="both">ancêtres et descendants de…</option></select></label>
-    <label>Personne de départ ${collectionPersonField('book_root',state.bootstrap?.startPersonId?{id:state.bootstrap.startPersonId,first_name:localStorage.getItem('genealogie-sosa-root-name')||('Personne #'+state.bootstrap.startPersonId),last_name:''}:null,'Le de cujus par défaut')}</label>
-    <label>Générations <input type="number" name="generations" min="1" max="30" value="6"></label>
-    <div class="span-2 h-checks"><label class="checkbox-line"><input type="checkbox" name="tree" checked> l’arbre (génération par génération)</label><label class="checkbox-line"><input type="checkbox" name="bio" checked> biographies</label><label class="checkbox-line"><input type="checkbox" name="photos" checked> photos</label><label class="checkbox-line"><input type="checkbox" name="chronology" checked> chronologie de la branche</label></div>
-  </form>
-  <div class="page-actions"><button type="button" class="button" id="family-book-open">📖 Ouvrir pour imprimer ou enregistrer en PDF</button><button type="button" class="button secondary" id="family-book-download">Télécharger le livret (HTML)</button></div>
-</section>
+${window.LCNDA_EXT?.familyBookPanelHtml?.()||''}
 
 ${backupSectionHtml()}
 
 </section>`;
         // Sauvegarde protégée : envoi dans un cadre caché (le fichier se télécharge ; une erreur s'y affiche en JSON)
         // Livre de famille : une branche, les parties choisies ; ouvert dans une fenêtre (photos visibles, ⌘P → PDF) ou téléchargé
-        const bookParams=()=>{const f=$('#family-book-form');if(!f)return {};const p={scope:f.elements.scope.value,generations:String(Math.max(1,Math.min(30,Number(f.elements.generations.value)||6))),root_id:f.elements.book_root?.value||String(state.bootstrap?.startPersonId||'')};['tree','bio','photos','chronology'].forEach(k=>{p[k]=f.elements[k].checked?'1':'0';});return p;};
-        if($('#family-book-form'))bindCollectionPersonFields($('#family-book-form'));
-        $('#family-book-open')?.addEventListener('click',()=>{const p=bookParams();if(p.scope!=='all'&&!Number(p.root_id))return toast('Choisis la personne de départ de la branche.','error');const w=window.open(exportUrl('export_family_book',{...p,inline:'1'}),'_blank');if(!w)toast('Fenêtre bloquée : autorise les fenêtres pour cette page.','error');else toast('Le livre s’ouvre : bouton « Imprimer / enregistrer en PDF » en haut.');});
-        $('#family-book-download')?.addEventListener('click',()=>{const p=bookParams();if(p.scope!=='all'&&!Number(p.root_id))return toast('Choisis la personne de départ de la branche.','error');const a=document.createElement('a');a.href=exportUrl('export_family_book',p);a.download='';document.body.appendChild(a);a.click();a.remove();});
+        window.LCNDA_EXT?.bindFamilyBook?.(exportUrl);
         $('#protected-backup-form')?.addEventListener('submit',event=>{const form=event.currentTarget;
             if(form.elements.password.value!==form.elements.password_confirm.value){event.preventDefault();toast('Les deux mots de passe ne sont pas identiques.','error');return;}
             form.elements.csrf.value=state.csrf;toast('Préparation de la sauvegarde protégée… (le téléchargement va commencer)');

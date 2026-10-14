@@ -1719,3 +1719,21 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 .h-emp-hits small{color:var(--muted,#666)}
 .h-emp-field-link{display:inline-block;margin-top:4px;font-size:12px}
 @media (max-width:800px){.h-emp-grid,.h-emp-form{grid-template-columns:1fr}.h-emp-body{padding:18px}}
+
+/* 📖 Livre de famille */
+.h-book-form{display:grid;gap:14px}
+.h-book-form fieldset{border:1px solid var(--line-color,#d7d7d7);padding:12px 16px 14px;margin:0;background:var(--card-bg,#fff);min-width:0}
+.h-book-form legend{font-weight:800;padding:0 6px}
+.h-book-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.h-book-order{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:6px}
+.h-book-order li{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line-color,#ddd);background:#fff}
+.h-book-order li.is-off{opacity:.6;background:#fafafa}
+.h-book-order li label{flex:1;margin:0}
+.h-book-order small{color:var(--muted,#666);font-weight:400}
+.h-book-moves{display:flex;gap:4px}
+.h-book-moves .icon-button{width:28px;height:28px;font-size:13px}
+.h-book-formats{display:flex;flex-wrap:wrap;gap:8px}
+.h-book-color{display:flex;gap:8px;align-items:center}
+.h-book-note{margin:.6rem 0 0}
+@media (max-width:900px){.h-book-cols{grid-template-columns:1fr}}
+.h-book-order small{display:block;font-size:12px}
