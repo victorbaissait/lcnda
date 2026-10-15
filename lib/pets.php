@@ -33,7 +33,8 @@ function pet_clean(array $d): array
 {
     $out = [];
     foreach (PET_TEXT_FIELDS as $f => $n) { $out[$f] = mb_substr(trim((string) (is_scalar($d[$f] ?? null) ? $d[$f] : '')), 0, $n); }
-    $out['species'] = isset(PET_SPECIES[$out['species']]) ? $out['species'] : ($out['species'] === '' ? 'chien' : 'autre');
+    // espèces de l'app, ou une espèce à soi (Réglages des animaux : « my_… »)
+    $out['species'] = isset(PET_SPECIES[$out['species']]) || preg_match('/^my_[a-z0-9_-]{1,30}$/', $out['species']) ? $out['species'] : ($out['species'] === '' ? 'chien' : 'autre');
     $out['sex'] = in_array($out['sex'], ['M', 'F'], true) ? $out['sex'] : '';
     $out['neutered'] = !empty($d['neutered']);
     $out['deceased'] = !empty($d['deceased']) || $out['death_date'] !== '';

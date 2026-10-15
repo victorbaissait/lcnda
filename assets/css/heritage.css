@@ -2440,3 +2440,12 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bk-width{font-size:12px;padding:2px 4px;margin-left:auto}
 .block-editor-off{position:relative;opacity:.42;filter:grayscale(1);pointer-events:none;user-select:none}
 .block-editor-off .block-editor-offnote{position:sticky;top:0;z-index:2;margin:0 0 8px;padding:8px 10px;background:#fff;border:1px dashed #888;font-size:13px;font-weight:600;color:#333}
+.h-pp-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:16px;align-items:start}
+@media (max-width:900px){.h-pp-cols{grid-template-columns:1fr}}
+.h-pp-cols .h-pet-lrow{margin-bottom:4px}
+.h-pp-cols .h-pet-lrow input[data-sp-label]{flex:1;min-width:0}
+.h-pp-icon{width:3.2em;text-align:center}
+.h-pp-add{display:flex;gap:6px;margin-top:10px}
+.h-pp-add input[data-sp-newlabel]{flex:1;min-width:0}
+.h-pp-sec{margin-bottom:8px}
+.h-pp-fields{display:flex;flex-wrap:wrap;gap:2px 14px;padding:4px 10px 6px 34px;font-size:13px}
