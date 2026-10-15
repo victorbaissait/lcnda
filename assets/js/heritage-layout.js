@@ -545,7 +545,7 @@
     }
     /* ═════════════ L'éditeur ═════════════ */
     const TOOLS = [['select', '➤', 'Sélection (V)', 'v'], ['text', 'T', 'Texte (T)', 't'], ['frame', '⊠', 'Cadre d’image (F)', 'f'], ['rect', '▭', 'Rectangle (M)', 'm'], ['ellipse', '◯', 'Ellipse (L)', 'l'], ['polygon', '⬡', 'Polygone (Y)', 'y'], ['star', '☆', 'Étoile (E)', 'e'], ['line', '╲', 'Ligne (\\)', '\\'], ['pen', '✒︎', 'Plume (P) : clic = point, double-clic ou Entrée = fini', 'p'], ['hand', '✋', 'Main (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — Alt pour reculer', 'z']];
-    const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['doc', '⚙️', 'Document']];
+    const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['history', '🕘', 'Historique'], ['doc', '⚙️', 'Document']];
     let localFonts = null;
     const fontList = () => { let mine = []; try { mine = JSON.parse(localStorage.getItem(FONTS_KEY) || '[]'); } catch (_) {} return [...new Set([...(Array.isArray(mine) ? mine : []).map(fontOk).filter(Boolean), ...(localFonts || []), ...BASE_FONTS])]; };
     /* Choix d'une police : un champ et une liste à nous (celle du système ne défile pas dans l'app de bureau) — on tape pour filtrer, chaque police est montrée dans son dessin */
@@ -582,7 +582,7 @@
     async function openEditor({id = 0, name = 'Sans titre', doc, isDesign = false, onSaved}) {
         let D = cleanDoc(doc), docId = id, docName = name, design = !!isDesign, dirty = false;
         let cur = 0, editMaster = null, sel = [], editingId = null, tool = 'select', zoom = 0.75, fillTarget = 'fill', guides = true, snapOn = true, preview = false, panel = 'pages', clip = null, savedRange = null;
-        const hist = [], fut = [];
+        let act = ''; // ce qu'on vient de faire, pour l'historique
         const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
@@ -591,7 +591,7 @@
                 ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image…']])}
                 ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}
-                <span class="ly-spacer"></span><span class="ly-state" data-ly-state></span><button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
+                <span class="ly-hbtns"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span><button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
             <div class="ly-main"><div class="ly-tools">${TOOLS.map(([k, ic, l]) => `<button type="button" data-ly-tool="${k}" title="${esc(l)}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi (clic : lequel le nuancier change)"><button type="button" data-ly-target="fill" class="ly-fs-fill"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke"></button></div></div>
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
                 <aside class="ly-panels"><div class="ly-ptabs">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
@@ -604,12 +604,23 @@
         function menu(label, items) { return `<details class="ly-menu"><summary>${label}</summary><div class="ly-menu-list">${items.map(([k, l, sc]) => k === '-' ? '<hr>' : `<button type="button" data-ly-cmd="${k}"><span>${l}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`; }
         const msg = t => { $('[data-ly-msg]').textContent = t || ''; };
         const setDirty = (v = true) => { dirty = v; $('[data-ly-state]').textContent = dirty ? '● modifié' : (docId ? '✓ enregistré' : 'pas encore enregistré'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };
+        /* Historique : chaque modification est une étape nommée ; ↶ ↷ (⌘Z, ⇧⌘Z) ou un clic sur une étape y revient */
         const snapshot = () => JSON.stringify({D, cur});
-        const commit = () => { hist.push(lastSnap); if (hist.length > 80) hist.shift(); fut.length = 0; lastSnap = snapshot(); setDirty(); };
-        let lastSnap = snapshot();
-        const restore = snap => { const o = JSON.parse(snap); D = o.D; cur = Math.min(o.cur, D.pages.length - 1); sel = []; editingId = null; lastSnap = snap; setDirty(); render(); };
-        const undo = () => { if (editingId) stopEditing(); if (!hist.length) return msg('Rien à annuler.'); fut.push(snapshot()); restore(hist.pop()); };
-        const redo = () => { if (!fut.length) return msg('Rien à rétablir.'); hist.push(snapshot()); restore(fut.pop()); };
+        let timeline = [{snap: snapshot(), label: 'Ouverture du document', at: new Date()}], pos = 0;
+        const commit = (label = '') => {
+            const snap = snapshot(); if (snap === timeline[pos].snap) { act = ''; return; }
+            timeline = timeline.slice(0, pos + 1); timeline.push({snap, label: label || act || 'Modification', at: new Date()}); act = '';
+            if (timeline.length > 150) timeline.shift(); pos = timeline.length - 1; setDirty(); syncHistory();
+        };
+        const goTo = i => { if (i < 0 || i >= timeline.length) return; if (editingId) stopEditing(); const o = JSON.parse(timeline[i].snap); D = o.D; cur = Math.min(o.cur, D.pages.length - 1); sel = []; editingId = null; pos = i; setDirty(); render(); };
+        const undo = () => { if (editingId) stopEditing(); if (pos <= 0) return msg('Rien à annuler.'); msg(`Annulé : ${timeline[pos].label}`); goTo(pos - 1); };
+        const redo = () => { if (pos >= timeline.length - 1) return msg('Rien à rétablir.'); goTo(pos + 1); msg(`Rétabli : ${timeline[pos].label}`); };
+        function syncHistory() {
+            const u = dl.querySelector('[data-ly-cmd="undo"].ly-hbtn'), r = dl.querySelector('[data-ly-cmd="redo"].ly-hbtn');
+            if (u) { u.disabled = pos <= 0; u.title = pos > 0 ? `Annuler : ${timeline[pos].label} (⌘Z)` : 'Rien à annuler'; }
+            if (r) { r.disabled = pos >= timeline.length - 1; r.title = pos < timeline.length - 1 ? `Rétablir : ${timeline[pos + 1].label} (⇧⌘Z)` : 'Rien à rétablir'; }
+            if (panel === 'history') renderPanel();
+        }
 
         /* — où sont les objets : la page courante, ou le gabarit modifié — */
         const curList = () => editMaster ? (D.masters.find(m => m.id === editMaster)?.items || []) : (D.pages[cur]?.items || []);
@@ -671,7 +682,7 @@
         function stopEditing() {
             if (!editingId) return; const f = findItem(editingId), t = board.querySelector(`.ly-item[data-id="${CSS.escape(editingId)}"] .ly-txt`);
             if (f && t) f.it.html = sanitizeHtml(readEditing(t)) || '<p data-ps="ps-body"><br></p>';
-            editingId = null; savedRange = null; commit(); render();
+            editingId = null; savedRange = null; commit('Texte modifié'); render();
         }
         document.addEventListener('selectionchange', () => { if (!editingId || !dl.isConnected) return; const s = getSelection(); if (!s.rangeCount) return; const r = s.getRangeAt(0), t = board.querySelector('.ly-txt[contenteditable="true"]'); if (t && t.contains(r.commonAncestorContainer)) savedRange = r.cloneRange(); });
         const editEl = () => board.querySelector('.ly-txt[contenteditable="true"]');
@@ -766,7 +777,7 @@
                 start.forEach(s => { s.it.x = r1(s.x + dx); s.it.y = r1(s.y + dy); const el = board.querySelector(`.ly-item[data-id="${CSS.escape(s.it.id)}"]`); if (el) { el.style.left = px(s.it.x) + 'px'; el.style.top = px(s.it.y) + 'px'; } });
                 drawSel(); showSnap(sn.gx, sn.gy);
             };
-            const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); if (moved) { commit(); render(); } else { drawSel(); renderPanel(); } };
+            const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); if (moved) { commit(dup ? 'Copie déplacée' : `Déplacement (${start.length} objet${start.length > 1 ? 's' : ''})`); render(); } else { drawSel(); renderPanel(); } };
             addEventListener('pointermove', mv); addEventListener('pointerup', up); drawSel(); renderPanel();
         }
         function transformDrag(it, h, P0, e) {
@@ -786,7 +797,7 @@
                 const el = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"]`); if (el) el.outerHTML = itemHtml(D, it, {pageNo: cur + 1, pages: D.pages.length, title: D.title, others: curList()});
                 drawSel();
             };
-            const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); commit(); render(); };
+            const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); commit(h === 'rot' ? 'Rotation' : 'Taille changée'); render(); };
             addEventListener('pointermove', mv); addEventListener('pointerup', up);
         }
         function marquee(P0, e) {
@@ -808,7 +819,7 @@
                 else if (tool === 'frame') it = shapeItem('frame', {x, y, w, h, layer, fit: 'fill'});
                 else if (tool === 'line') { it = shapeItem('line', {x, y, w, h: small ? 0 : h, layer}); if (P1.x < P0.x !== P1.y < P0.y) it.flipLine = true; }
                 else it = shapeItem(tool, {x, y, w, h, layer, ...(tool === 'polygon' ? {sides: 6} : tool === 'star' ? {sides: 5, inner: 45} : {})});
-                curList().push(it); sel = [it.id]; commit();
+                curList().push(it); sel = [it.id]; commit(`Nouveau : ${({text: 'bloc de texte', frame: 'cadre d’image', rect: 'rectangle', ellipse: 'ellipse', polygon: 'polygone', star: 'étoile', line: 'ligne'})[tool] || tool}`);
                 if (tool === 'text') { tool = 'select'; startEditing(it); return; }
                 tool = 'select'; render();
                 if (it.type === 'frame') msg('Cadre d’image : double-clic pour y placer une image.');
@@ -833,7 +844,7 @@
             if (uniq.length < 2) { render(); return; }
             const xs = uniq.map(p => p[0]), ys = uniq.map(p => p[1]), x = Math.min(...xs), y = Math.min(...ys), w = Math.max(0.5, Math.max(...xs) - x), h = Math.max(0.5, Math.max(...ys) - y);
             const it = shapeItem('path', {x, y, w, h, layer: activeLayer(), closed, fill: closed ? 'sw-light' : 'none', points: uniq.map(([px0, py0]) => [r1((px0 - x) / w * 1000) / 1000, r1((py0 - y) / h * 1000) / 1000])});
-            curList().push(it); sel = [it.id]; tool = 'select'; commit(); render();
+            curList().push(it); sel = [it.id]; tool = 'select'; commit('Tracé à la plume'); render();
         }
         const bounds = items => { if (!items.length) return {x: 0, y: 0, w: 0, h: 0}; const x = Math.min(...items.map(i => i.x)), y = Math.min(...items.map(i => i.y)); return {x, y, w: Math.max(...items.map(i => i.x + i.w)) - x, h: Math.max(...items.map(i => i.y + i.h)) - y}; };
 
@@ -863,7 +874,9 @@
             if (!it) { const b = box(D, cur); const im = await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = res.src; }); const ratio = im ? im.naturalHeight / im.naturalWidth : 0.75, w = Math.min(b.w, 100); it = shapeItem('frame', {x: b.x, y: b.y, w, h: r1(w * ratio), layer: activeLayer(), fit: 'fill'}); curList().push(it); }
             it.src = res.src; it.srcName = res.name; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; commit(); render();
         }
+        const CMD_LABELS = {cut: 'Couper', paste: 'Coller', dup: 'Dupliquer', del: 'Supprimer', front: 'Premier plan', fwd: 'Avancer', back: 'Reculer', bottom: 'Arrière-plan', lock: 'Verrouiller / déverrouiller', hide: 'Masquer', showall: 'Tout afficher', fitframe: 'Ajuster le cadre', place: 'Placer une image', addend: 'Page ajoutée à la fin', insert: 'Pages insérées', duppage: 'Page dupliquée', delpage: 'Page supprimée'};
         async function exec(cmd) {
+            if (CMD_LABELS[cmd]) act = CMD_LABELS[cmd];
             dl.querySelectorAll('details.ly-menu[open]').forEach(d => d.removeAttribute('open'));
             const C = {
                 save: () => save(), saveas: () => save({copy: true}), savedesign: () => save({design: true}), pdf: () => exportPrint(), pdfbleed: () => exportPrint(true), html: () => exportHtml(), json: () => exportJson(), close: () => close(),
@@ -902,7 +915,7 @@
             if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); del(); return; }
             if (e.key === 'Escape') { sel = []; drawSel(); renderPanel(); return; }
             if (e.key === 'PageDown') { e.preventDefault(); goPage(cur + 1); return; } if (e.key === 'PageUp') { e.preventDefault(); goPage(cur - 1); return; }
-            if (e.key.startsWith('Arrow') && sel.length) { e.preventDefault(); const d = e.shiftKey ? 5 : 1, dx = e.key === 'ArrowLeft' ? -d : e.key === 'ArrowRight' ? d : 0, dy = e.key === 'ArrowUp' ? -d : e.key === 'ArrowDown' ? d : 0; selected().filter(x => !locked(x)).forEach(x => { x.x = r1(x.x + dx); x.y = r1(x.y + dy); }); commit(); render(); return; }
+            if (e.key.startsWith('Arrow') && sel.length) { e.preventDefault(); const d = e.shiftKey ? 5 : 1, dx = e.key === 'ArrowLeft' ? -d : e.key === 'ArrowRight' ? d : 0, dy = e.key === 'ArrowUp' ? -d : e.key === 'ArrowDown' ? d : 0; selected().filter(x => !locked(x)).forEach(x => { x.x = r1(x.x + dx); x.y = r1(x.y + dy); }); commit('Déplacement au clavier'); render(); return; }
             if (k === 'w') { preview = !preview; render(); return; }
             const t = TOOLS.find(x => x[3] === k); if (t && !mod) { tool = t[0]; pen = null; syncChrome(); msg(t[2]); }
         }, {signal: keyAc.signal});
@@ -936,7 +949,8 @@
         function renderPanel() {
             if (!pbody.isConnected) return;
             const keepScroll = pbody.scrollTop;
-            pbody.innerHTML = ({pages: panelPages, layers: panelLayers, obj: panelObj, text: panelText, color: panelColor, links: panelLinks, doc: panelDoc}[panel] || panelPages)();
+            pbody.innerHTML = ({pages: panelPages, layers: panelLayers, obj: panelObj, text: panelText, color: panelColor, links: panelLinks, history: panelHistory, doc: panelDoc}[panel] || panelPages)();
+            if (panel === 'history') pbody.querySelector('.is-current')?.scrollIntoView({block: 'nearest'});
             pbody.scrollTop = keepScroll;
             pbody.querySelectorAll('.ly-thumb .ly-page').forEach(p => { p.style.zoom = String(120 / px(D.page.w)); });
         }
@@ -1008,6 +1022,12 @@
             const rows = []; D.pages.forEach((p, i) => p.items.forEach(it => { if (it.src !== undefined && it.type === 'frame') rows.push({i, it}); })); D.masters.forEach(m => m.items.forEach(it => { if (it.type === 'frame') rows.push({i: -1, m, it}); }));
             return sec(`Liens — images placées (${rows.filter(r => r.it.src).length})`, rows.length ? `<div class="ly-links">${rows.map(({i, m, it}) => `<div class="ly-linkrow">${it.src ? `<img src="${esc(it.src)}" alt="">` : '<span class="ly-noimg">vide</span>'}<span><b>${esc(it.srcName || (it.src?.startsWith('data:') ? 'Image intégrée' : it.src?.replace('media/', '') || 'Cadre vide'))}</b><small>${m ? esc(m.name) : `page ${i + (D.page.start || 1)}`} · ${it.src?.startsWith('data:') ? 'intégrée au document' : it.src ? 'photo de la base' : '—'}</small></span>${m ? '' : `<button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button><button type="button" class="button small secondary" data-ly-linkrep="${i}:${esc(it.id)}">Remplacer</button>`}</div>`).join('')}</div>` : '<p class="ly-help">Aucun cadre d’image : outil ⊠ ou Objet → Placer une image.</p>');
         }
+        function panelHistory() {
+            const t = d => d.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+            return sec(`Historique (${timeline.length} étape${timeline.length > 1 ? 's' : ''})`, `<div class="ly-row"><button type="button" class="button small secondary" data-ly-cmd="undo" ${pos <= 0 ? 'disabled' : ''}>↶ Annuler</button><button type="button" class="button small secondary" data-ly-cmd="redo" ${pos >= timeline.length - 1 ? 'disabled' : ''}>↷ Rétablir</button></div>
+                <p class="ly-help">Clique sur une étape pour revenir à ce moment-là. Les étapes d’après restent (en gris) tant que tu ne modifies rien d’autre.</p>
+                <ol class="ly-history">${timeline.map((h, i) => `<li class="${i === pos ? 'is-current' : i > pos ? 'is-future' : ''}"><button type="button" data-ly-hist="${i}"><span>${esc(h.label)}</span><small>${t(h.at)}</small></button></li>`).join('')}</ol>`);
+        }
         function panelDoc() {
             const P = D.page, M = P.margin;
             return sec('Format du document', `<label class="ly-f"><span>Titre du livre ({titre})</span><input type="text" data-ly-doc="title" value="${esc(D.title || '')}"></label>
@@ -1019,8 +1039,9 @@
 
         /* — panneaux : ce qu'on change — */
         const setPath = (o, k, v) => { const ks = k.split('.'); let t = o; ks.slice(0, -1).forEach(x => { t[x] = t[x] && typeof t[x] === 'object' ? t[x] : {}; t = t[x]; }); t[ks.at(-1)] = v; };
+        const labelOfField = el => (el.closest('label')?.querySelector('span')?.textContent || el.closest('label')?.firstChild?.textContent || '').trim();
         pbody.addEventListener('change', async e => {
-            const el = e.target;
+            const el = e.target; act = labelOfField(el) ? `${labelOfField(el)} changé` : '';
             if (el.matches('[data-ly-set]')) {
                 const k = el.dataset.lySet, v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value;
                 const its = selected().filter(x => !locked(x)); if (!its.length) return;
@@ -1062,6 +1083,8 @@
         pbody.addEventListener('mousedown', e => { if (e.target.closest('[data-ly-exec],[data-ly-palign],[data-ly-ins],[data-ly-pstyle],[data-ly-cstyle],[data-ly-link]')) e.preventDefault(); }); // garder la sélection du texte
         pbody.addEventListener('click', async e => {
             const b = e.target.closest('button, [data-ly-lpick]'); if (!b) return; const d = b.dataset;
+            act = (b.title || b.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 50);
+            if (d.lyHist !== undefined) return goTo(Number(d.lyHist));
             if (d.lyPage !== undefined) return goPage(Number(d.lyPage));
             if (d.lyExec) { if (!editEl()) { if (one()?.type === 'text') { startEditing(one()); msg('Choisis du texte, puis le bouton.'); } return; } restoreRange(); document.execCommand('styleWithCSS', false, true); document.execCommand(d.lyExec, false, null); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); setDirty(); return; }
             if (d.lyLink !== undefined) { if (!editEl()) return msg('Choisis du texte dans un bloc.'); const u = prompt('Adresse du lien (https://…) :', 'https://'); if (!u || !/^(https?:\/\/|mailto:)/i.test(u)) return; restoreRange(); document.execCommand('createLink', false, u); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); setDirty(); return; }
@@ -1158,7 +1181,7 @@
                 }});
         }
 
-        setDirty(!id); render(); requestAnimationFrame(() => zoomFit());
+        setDirty(!id); render(); syncHistory(); requestAnimationFrame(() => zoomFit());
         dl.showModal(); canvas.focus({preventScroll: true}); // les raccourcis (V, T, M…) marchent tout de suite
         return dl;
     }

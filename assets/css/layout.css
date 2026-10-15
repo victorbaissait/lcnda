@@ -101,3 +101,6 @@
 .ly-f.ly-f-font{grid-template-columns:auto 1fr}
 .h-modal .ly-fontpick input{width:100%}
 .ly-listtable .ly-listcover{width:56px}.ly-listtable .ly-cover{width:46px}.ly-listact{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}.ly-listpage h3{margin:22px 0 10px}
+.ly-ptabs{grid-template-columns:repeat(8,1fr)}
+.ly-hbtns{display:flex;gap:2px;margin-left:8px}.ly-hbtn{width:30px;height:28px;border:1px solid var(--ly-line);border-radius:5px;background:var(--ly-panel);color:inherit;font-size:15px;cursor:pointer}.ly-hbtn:disabled{opacity:.35;cursor:default}
+.ly-history{list-style:none;margin:0;padding:0;display:grid;gap:2px}.ly-history button{width:100%;display:flex;justify-content:space-between;gap:8px;text-align:left;border:1px solid transparent;background:none;color:inherit;padding:5px 8px;border-radius:4px;font-size:12.5px;cursor:pointer}.ly-history button:hover{border-color:var(--ly-line)}.ly-history .is-current button{background:var(--ly-acc);color:#fff}.ly-history .is-future button{opacity:.45}.ly-history small{opacity:.7;font-variant-numeric:tabular-nums}
