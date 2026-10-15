@@ -316,7 +316,8 @@
 
     /* ═════════ Bloc « Caractéristiques de l'animal » de sa fiche complète ═════════ */
     ext.personBlocks.animal = (index, detail) => {
-        const a = detail.heritage?.animal; if (!a || detail.person?.kind !== 'animal') return '';
+        const a = detail.heritage?.animal; if (detail.person?.kind !== 'animal') return '';
+        if (!a) return A().card(index, '🐾 Caractéristiques de l’animal', '', '<p class="muted">Pas encore de fiche d’animal (race, puce, éleveur, pedigree…).</p>', 'span-12', `<button type="button" class="button small" data-pet-createfor="${Number(detail.person.id)}">＋ Ses caractéristiques</button>`);
         const d = a.data || {}, anc = a.ancestors || {}, f = coi(a.id, anc), sire = d.sire_id && anc[d.sire_id], dam = d.dam_id && anc[d.dam_id];
         const dlA = rows => rows.filter(([, v]) => v).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
         const body = `<div class="h-pet-animalblock">${a.media?.[0] ? photoHtml(a.media[0], 'is-mini') : `<span class="h-pet-hero-ic">${iconOf(d.species)}</span>`}
@@ -327,6 +328,8 @@
             `<button type="button" class="button small" data-pet-editfor="${a.id}">✎ Caractéristiques</button><button type="button" class="button small secondary" data-pet-pedfor="${a.id}">🌳 Pedigree</button><button type="button" class="button small secondary" data-pet-goto="${a.id}">🐾 Fiche d’animal</button>`);
     };
     document.addEventListener('click', async e => {
+        const cf = e.target.closest?.('[data-pet-createfor]');
+        if (cf) { e.preventDefault(); try { const r = await api('pet_for_person', {}, {method: 'POST', body: {person_id: Number(cf.dataset.petCreatefor)}}); const pet = await api('pet', {id: Number(r.result?.id || r.id)}); openEditor(pet, () => A().setModule('personnes')); } catch (error) { toast(error.message, 'error'); } return; }
         const ed = e.target.closest?.('[data-pet-editfor]'), pd = e.target.closest?.('[data-pet-pedfor]');
         if (pd) { e.preventDefault(); openPet(Number(pd.dataset.petPedfor), 'pedigree'); return; }
         if (!ed) return; e.preventDefault();

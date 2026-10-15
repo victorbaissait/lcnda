@@ -1542,10 +1542,19 @@ function dashboard_next_anniversary(int $month,int $day,DateTimeImmutable $today
 /** Les statistiques portent sur les personnes (ou sur les animaux d'une base d'élevage), jamais les deux mêlés */
 function graph_scope_kind(string $sql, string $kind): string
 {
-    $cond = $kind === 'animal' ? "kind='animal'" : "kind<>'animal'";
-    $stop = 'WHERE|ON|JOIN|LEFT|RIGHT|INNER|CROSS|GROUP|ORDER|LIMIT|UNION|USING|NATURAL';
-    return (string) preg_replace_callback('/\b(FROM|JOIN)\s+persons\b(?:\s+(?:AS\s+)?(?!(?:' . $stop . ')\b)([A-Za-z_]\w*))?/i',
-        static fn($m) => $m[1] . " (SELECT * FROM persons WHERE $cond) " . (($m[2] ?? '') !== '' ? $m[2] : 'persons'), $sql);
+    $an = "(SELECT id FROM persons WHERE kind='animal')"; $anFam = "(SELECT id FROM families WHERE partner1_id IN $an OR partner2_id IN $an)";
+    $animal = $kind === 'animal';
+    // chaque table de fiches, d'événements ou de familles est remplacée par sa partie « personnes » (ou « animaux »)
+    $conds = [
+        'persons' => $animal ? "kind='animal'" : "kind<>'animal'",
+        'events' => $animal ? "(person_id IN $an OR family_id IN $anFam)" : "((person_id IS NULL OR person_id NOT IN $an) AND (family_id IS NULL OR family_id NOT IN $anFam))",
+        'families' => $animal ? "(partner1_id IN $an OR partner2_id IN $an)" : "(partner1_id IS NULL OR partner1_id NOT IN $an) AND (partner2_id IS NULL OR partner2_id NOT IN $an)",
+        'family_children' => $animal ? "child_id IN $an" : "child_id NOT IN $an",
+        'census_members' => $animal ? "person_id IN $an" : "(person_id IS NULL OR person_id NOT IN $an)",
+    ];
+    $stop = 'WHERE|ON|JOIN|LEFT|RIGHT|INNER|CROSS|GROUP|ORDER|LIMIT|UNION|USING|NATURAL|AS';
+    return (string) preg_replace_callback('/\b(FROM|JOIN)\s+(persons|events|families|family_children|census_members)\b(?:\s+(?:AS\s+)?(?!(?:' . $stop . ')\b)([A-Za-z_]\w*))?/i',
+        static fn($m) => $m[1] . " (SELECT * FROM {$m[2]} WHERE {$conds[strtolower($m[2])]}) " . (($m[3] ?? '') !== '' ? $m[3] : $m[2]), $sql);
 }
 
 function people_list(PDO $pdo): never
@@ -8971,6 +8980,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_pet' => save_pet($pdo,$data),
             'delete_pet' => delete_pet($pdo,$data),
             'pet_make_person' => pet_make_person($pdo,$data),
+            'pet_for_person' => (function() use ($pdo,$data){$pid=safe_int($data['person_id']??0);if(!person_exists($pdo,$pid))throw new RuntimeException('Fiche introuvable.');$pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$pid]);return ['id'=>pet_of_person($pdo,$pid,true)];})(),
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
@@ -9085,6 +9095,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             default => throw new RuntimeException('Action d’écriture inconnue'),
         };
         apply_pending_labels($pdo, $action, $data, $result);
+        // les parents changés sur une fiche d'animal passent dans son pedigree (dans la même écriture, jamais à la lecture)
+        if (in_array($action, ['add_relation', 'remove_relation', 'merge_people', 'delete_person', 'restore_person'], true) && function_exists('pets_sync_parents')) { pets_sync_parents($pdo); }
         $pdo->commit();
         json_response(['ok'=>true,'result'=>$result]);
     } catch(Throwable $e){
@@ -11055,7 +11067,7 @@ function delete_person(PDO $pdo,array $data): array
     foreach(['media_links','source_links','notes'] as $table){
         $pdo->prepare("DELETE FROM {$table} WHERE entity_type='person' AND entity_id=?")->execute([$id]);
     }
-    try{$pdo->prepare('UPDATE pets SET person_id=NULL WHERE person_id=?')->execute([$id]);}catch(Throwable $_){} // la fiche d'animal (la liste) reste
+    if(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // la fiche d'animal (la liste) reste, avec son nom, ses dates
     $pdo->prepare('UPDATE census_members SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE archive_digest_people SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE families SET partner1_id=NULL WHERE partner1_id=?')->execute([$id]);

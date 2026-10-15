@@ -85,13 +85,47 @@ function pet_overlay(array $d, ?array $f): array
     return $d;
 }
 
-/** Les parents donnés sur les fiches complètes (familles) passent dans le pedigree, quand ils ont eux aussi une fiche d'animal */
+/**
+ * Les parents donnés sur les fiches complètes (familles) passent dans le pedigree (appelé seulement pendant une écriture).
+ * Un parent qui a une fiche complète suit la famille (ajouté, changé ou retiré) ; un parent qui n'a que sa fiche d'animal reste.
+ */
 function pets_sync_parents(PDO $pdo): void
 {
-    static $done = false; if ($done) { return; } $done = true;
+    try { $pdo->query('SELECT person_id FROM pets LIMIT 1'); } catch (Throwable) { return; }
     foreach (['sire_id' => 'male', 'dam_id' => 'female'] as $col => $g) {
         $pdo->exec("UPDATE pets SET $col = COALESCE((SELECT pp.id FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN persons par ON par.id IN (f.partner1_id, f.partner2_id) JOIN pets pp ON pp.person_id=par.id
-            WHERE fc.child_id=pets.person_id AND par.gender='$g' AND pp.id<>pets.id ORDER BY fc.id LIMIT 1), $col) WHERE person_id IS NOT NULL");
+            WHERE fc.child_id=pets.person_id AND par.gender='$g' AND pp.id<>pets.id ORDER BY fc.id LIMIT 1),
+            CASE WHEN (SELECT s.person_id FROM pets s WHERE s.id=pets.$col) IS NOT NULL THEN NULL ELSE $col END) WHERE person_id IS NOT NULL");
+    }
+}
+
+/** Les parents (fiches complètes) d'un animal : il quitte ses familles et rejoint celle de son père et de sa mère (ses frères et sœurs ne bougent pas) */
+function pet_set_parents(PDO $pdo, int $child, int $sire, int $dam): void
+{
+    $s = $pdo->prepare('SELECT f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=?'); $s->execute([$child]);
+    $cur = []; foreach ($s->fetchAll() as $f) { foreach ([$f['partner1_id'], $f['partner2_id']] as $x) { if ((int) $x) { $cur[] = (int) $x; } } }
+    $want = array_values(array_filter([$sire, $dam])); $a = array_unique($cur); sort($a); $b = $want; sort($b);
+    if ($a === $b) { return; }
+    $old = $pdo->prepare('SELECT family_id FROM family_children WHERE child_id=?'); $old->execute([$child]); $oldFams = array_map('intval', $old->fetchAll(PDO::FETCH_COLUMN));
+    $pdo->prepare('DELETE FROM family_children WHERE child_id=?')->execute([$child]);
+    // une famille sans enfant et sans couple complet ne sert plus
+    foreach ($oldFams as $fid) { $pdo->prepare('DELETE FROM families WHERE id=? AND (partner1_id IS NULL OR partner2_id IS NULL) AND NOT EXISTS (SELECT 1 FROM family_children WHERE family_id=?)')->execute([$fid, $fid]); }
+    if (!$want) { return; }
+    $f = $pdo->prepare('SELECT id FROM families WHERE (partner1_id IS ? AND partner2_id IS ?) OR (partner1_id IS ? AND partner2_id IS ?) ORDER BY id LIMIT 1');
+    $f->execute([$sire ?: null, $dam ?: null, $dam ?: null, $sire ?: null]);
+    $fid = (int) $f->fetchColumn();
+    if (!$fid) { $pdo->prepare('INSERT INTO families(partner1_id, partner2_id) VALUES(?, ?)')->execute([$sire ?: null, $dam ?: null]); $fid = (int) $pdo->lastInsertId(); }
+    $pdo->prepare("INSERT INTO family_children(family_id, child_id, relation_to_partner1, relation_to_partner2, position) VALUES(?, ?, 'biological', 'biological', (SELECT COALESCE(max(position), 0) + 1 FROM family_children WHERE family_id=?))")->execute([$fid, $child, $fid]);
+}
+
+/** La fiche complète d'un animal est supprimée : sa fiche d'animal garde son nom, son sexe, ses dates */
+function pet_detach_person(PDO $pdo, int $personId): void
+{
+    try { $s = $pdo->prepare('SELECT id, data_json FROM pets WHERE person_id=?'); $s->execute([$personId]); } catch (Throwable) { return; }
+    $facts = pet_facts($pdo, [$personId]);
+    foreach ($s->fetchAll() as $r) {
+        $d = pet_overlay(json_decode((string) $r['data_json'], true) ?: [], $facts[$personId] ?? null);
+        $pdo->prepare('UPDATE pets SET person_id=NULL, data_json=? WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE), (int) $r['id']]);
     }
 }
 
@@ -131,17 +165,9 @@ function pet_sync_person(PDO $pdo, int $petId, array $d, bool $create = false): 
             $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, date_text, year, place_id) VALUES('person', ?, ?, ?, ?, ?)")->execute([$pid, $tid, $date, $year, $placeId]);
         }
     }
-    // parents qui ont une fiche complète : reliés dans l'arbre (le père à la place du père, la mère à la place de la mère)
-    foreach (['sire_id' => 'male', 'dam_id' => 'female'] as $col => $g) {
-        $parentPet = (int) ($d[$col] ?? 0); if (!$parentPet) { continue; }
-        $q = $pdo->prepare('SELECT person_id FROM pets WHERE id=?'); $q->execute([$parentPet]); $parentPerson = (int) $q->fetchColumn();
-        if (!$parentPerson || !person_exists($pdo, $parentPerson)) { continue; }
-        $cur = $pdo->prepare("SELECT par.id FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN persons par ON par.id IN (f.partner1_id, f.partner2_id) WHERE fc.child_id=? AND par.gender=?"); $cur->execute([$pid, $g]);
-        $old = array_map('intval', $cur->fetchAll(PDO::FETCH_COLUMN));
-        if (in_array($parentPerson, $old, true)) { continue; }
-        foreach ($old as $o) { detach_parent_child($pdo, $o, $pid); }
-        add_parent_child($pdo, $parentPerson, $pid);
-    }
+    // parents qui ont une fiche complète : la famille de l'animal (un parent sans fiche complète reste seulement dans le pedigree)
+    $pp = static function (int $petId) use ($pdo): int { if (!$petId) { return 0; } $q = $pdo->prepare('SELECT person_id FROM pets WHERE id=?'); $q->execute([$petId]); $x = (int) $q->fetchColumn(); return $x && person_exists($pdo, $x) ? $x : 0; };
+    pet_set_parents($pdo, $pid, $pp((int) ($d['sire_id'] ?? 0)), $pp((int) ($d['dam_id'] ?? 0)));
     return $pid;
 }
 
@@ -176,7 +202,6 @@ function pet_title(array $d): string
 /** Les animaux, pour la liste et les choix (père, mère) */
 function pets_list(PDO $pdo, array $q = []): array
 {
-    pets_sync_parents($pdo);
     $rows = $pdo->query('SELECT id, sire_id, dam_id, data_json, updated_at, person_id FROM pets ORDER BY updated_at DESC, id DESC')->fetchAll();
     $facts = pet_facts($pdo, array_column($rows, 'person_id'));
     $media = heritage_media($pdo, 'pet', array_column($rows, 'id'));
@@ -205,7 +230,6 @@ function pets_list(PDO $pdo, array $q = []): array
 
 function pet_row(PDO $pdo, int $id): ?array
 {
-    pets_sync_parents($pdo);
     $s = $pdo->prepare('SELECT id, sire_id, dam_id, data_json, person_id FROM pets WHERE id=?'); $s->execute([$id]);
     $r = $s->fetch();
     if (!$r) { return null; }

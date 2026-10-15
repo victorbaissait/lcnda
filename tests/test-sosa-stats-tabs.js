@@ -144,6 +144,15 @@ $exp = [(int) $fa['person_id'], (int) $mk['person_id']]; sort($exp);
 $out['animals'] = [$pdo->query('SELECT kind FROM persons WHERE id=' . $kp)->fetchColumn(), $parents === $exp, $ev->fetchColumn(), pet_detail($pdo, $fk['id'])['title'], pet_detail($pdo, $fk['id'])['person_id'] === $kp,
     $pdo->query('SELECT kind FROM persons WHERE id=' . (int) $np['id'])->fetchColumn(), pet_of_person($pdo, (int) $np['id']) > 0,
     graph_scope_kind('SELECT 1 FROM persons p LEFT JOIN persons c ON c.id=p.id WHERE (SELECT count(*) FROM persons)>0', 'animal')];
+// changer de père : deux parents, pas trois ; puis l'enlever : il ne revient pas
+$f2 = save_pet($pdo, ['data' => ['name' => 'Papa2', 'sex' => 'M', 'species' => 'chat'], 'make_person' => 1]);
+$cd = pet_detail($pdo, $fk['id'])['data'];
+save_pet($pdo, ['id' => $fk['id'], 'data' => array_merge($cd, ['sire_id' => $f2['id']])]);
+$p2 = h_parents($pdo, $kp); sort($p2); $e2 = [(int) $f2['person_id'], (int) $mk['person_id']]; sort($e2);
+pets_sync_parents($pdo);
+$sireAfter = (int) pet_detail($pdo, $fk['id'])['data']['sire_id'];
+save_pet($pdo, ['id' => $fk['id'], 'data' => array_merge($cd, ['sire_id' => 0])]); pets_sync_parents($pdo);
+$out['animals_sire'] = [$p2 === $e2, $sireAfter === (int) $f2['id'], (int) pet_detail($pdo, $fk['id'])['data']['sire_id'], count(h_parents($pdo, $kp))];
 delete_pet($pdo, ['id' => $fk['id'], 'with_person' => 1]);
 $out['animals'][] = (int) $pdo->query('SELECT count(*) FROM persons WHERE id=' . $kp)->fetchColumn();
 $lb = save_board($pdo, ['title' => 'Liens', 'data' => ['items' => [], 'links' => [['kind' => 'person', 'id' => 1, 'label' => 'faux nom'], ['kind' => 'pet', 'id' => $pk['id'], 'label' => '']]]]);
@@ -240,6 +249,7 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.equal(out.bd_snapleft, 0);
     assert.deepEqual(out.pets, [['err', 'err', 'err'], 'autre', 1, 3, 1, 1, '<b>Kid</b>']);
     assert.deepEqual(out.pets_del, [0, 'Atlas']);
+    assert.deepEqual(out.animals_sire, [true, true, 0, 1]);
     assert.deepEqual(out.animals, ['animal', true, '12/04/2019', 'Minette', true, 'animal', true,
         "SELECT 1 FROM (SELECT * FROM persons WHERE kind='animal') p LEFT JOIN (SELECT * FROM persons WHERE kind='animal') c ON c.id=p.id WHERE (SELECT count(*) FROM (SELECT * FROM persons WHERE kind='animal') persons)>0", 0]);
     assert.equal(out.links[1], 2); assert.equal(out.links[2], 0); assert.equal(out.links[0][1], '<b>Kid</b>');

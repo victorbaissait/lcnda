@@ -150,7 +150,7 @@ function save_board(PDO $pdo, array $data): array
         $bgPattern = in_array($raw['bgPattern'] ?? '', ['', 'dots', 'grid', 'lines'], true) ? (string) ($raw['bgPattern'] ?? '') : '';
         // calques, étapes de la présentation, grille magnétique
         $layers = array_values(array_filter(array_map(static fn($l) => is_array($l) && ($id0 = preg_replace('/[^a-z0-9_-]/i', '', (string) ($l['id'] ?? ''))) !== '' ? ['id' => $id0, 'name' => mb_substr(safe_text($l['name'] ?? 'Calque'), 0, 60) ?: 'Calque', 'hidden' => !empty($l['hidden']), 'locked' => !empty($l['locked'])] : null, array_slice(is_array($raw['layers'] ?? null) ? $raw['layers'] : [], 0, 30))));
-        $steps = array_values(array_filter(array_map(static fn($st) => is_array($st) && is_numeric($st['w'] ?? null) ? ['id' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($st['id'] ?? '')) ?: bin2hex(random_bytes(4)), 'name' => mb_substr(safe_text($st['name'] ?? ''), 0, 80), 'x' => (float) ($st['x'] ?? 0), 'y' => (float) ($st['y'] ?? 0), 'w' => max(10, (float) $st['w']), 'h' => max(10, (float) ($st['h'] ?? 10))] : null, array_slice(is_array($raw['steps'] ?? null) ? $raw['steps'] : [], 0, 100))));
+        $steps = array_values(array_filter(array_map(static fn($st) => is_array($st) && is_numeric($st['w'] ?? null) ? ['id' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($st['id'] ?? '')) ?: bin2hex(random_bytes(4)), 'name' => mb_substr(safe_text($st['name'] ?? ''), 0, 80), 'x' => max(-1e6, min(1e6, (float) ($st['x'] ?? 0))), 'y' => max(-1e6, min(1e6, (float) ($st['y'] ?? 0))), 'w' => max(10, min(1e6, (float) $st['w'])), 'h' => max(10, min(1e6, (float) ($st['h'] ?? 10)))] : null, array_slice(is_array($raw['steps'] ?? null) ? $raw['steps'] : [], 0, 100))));
         $json = json_encode(['items' => $items, 'layers' => $layers, 'steps' => $steps, 'snap' => !empty($raw['snap']), 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => array_map(static function ($l) use ($pdo) { $lab = board_link_label($pdo, $l['kind'], $l['id']); if ($lab !== '') { $l['label'] = mb_substr($lab, 0, 200); } return $l; }, board_clean_links($raw['links'] ?? [])), 'bgColor' => $bgColor, 'bgPattern' => $bgPattern], JSON_UNESCAPED_UNICODE);
         if (strlen($json) > 20 * 1024 * 1024) { throw new RuntimeException('Tableau trop lourd : retire quelques dessins.'); }
         $fields['data_json'] = $json; $fields['item_count'] = count($items);
@@ -280,7 +280,8 @@ function save_board_snapshot(PDO $pdo, array $data): array
     $id = safe_int($data['board_id'] ?? 0);
     $s = $pdo->prepare('SELECT data_json, thumb, item_count FROM boards WHERE id=?'); $s->execute([$id]); $b = $s->fetch();
     if (!$b) { throw new RuntimeException('Tableau introuvable.'); }
-    $label = mb_substr(safe_text($data['label'] ?? ''), 0, 160) ?: 'Instantané du ' . date('d/m/Y H:i');
+    // « ⏱ » est réservé aux versions automatiques (elles seules sont élaguées)
+    $label = mb_substr((string) preg_replace('/^[\x{23F1}\x{FE0F}\s]+/u', '', safe_text($data['label'] ?? '')), 0, 160) ?: 'Instantané du ' . date('d/m/Y H:i');
     $pdo->prepare('INSERT INTO board_snapshots(board_id, label, data_json, thumb, item_count) VALUES(?,?,?,?,?)')->execute([$id, $label, (string) $b['data_json'], (string) $b['thumb'], (int) $b['item_count']]);
     return ['id' => (int) $pdo->lastInsertId(), 'label' => $label];
 }
