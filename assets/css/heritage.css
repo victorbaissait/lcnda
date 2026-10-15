@@ -2262,3 +2262,12 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 @media (max-width:700px){.h-pet-parents{grid-template-columns:1fr}.h-pet-hero{flex-direction:column;align-items:flex-start}.h-pet-body{grid-template-columns:1fr}}
 :root[data-theme="dark"] .h-pet-card,:root[data-theme="dark"] .h-pet-sec,:root[data-theme="dark"] .h-pet-mini,:root[data-theme="dark"] .h-pet-wcard,:root[data-theme="dark"] .h-ped-wrap,:root[data-theme="dark"] .h-pet-chips button{background:#24272c;border-color:#3a3f46}
 :root[data-theme="dark"] .h-ped-cell{background:#2d3138;border-color:#3a3f46}
+.h-bp-sets{display:inline-flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-bp-sets select{max-width:220px}
+.h-bd-expopt{display:grid;gap:10px}
+.h-bd-expchoice{display:flex;gap:10px;align-items:flex-start;border:1px solid #d6dbe1;border-radius:10px;padding:10px 12px;cursor:pointer}
+.h-bd-expchoice:has(input:checked){border-color:#0a84ff;background:#f0f6ff}
+.h-bd-expchoice span{display:grid;gap:4px}
+.h-bd-expchoice small{line-height:1.5;color:#555}
+:root[data-theme="dark"] .h-bd-expchoice:has(input:checked){background:#1f2c40}
+:root[data-theme="dark"] .h-bd-expchoice small{color:#bbb}

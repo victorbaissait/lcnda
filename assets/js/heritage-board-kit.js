@@ -163,6 +163,10 @@
         return p;
     };
     let cache = null;
+    // des ensembles de réglages gardés sous un nom (comme les designs d'Apparence)
+    const SETS_KEY = 'genealogie-board-prefs-sets';
+    const sets = () => { try { const l = JSON.parse(localStorage.getItem(SETS_KEY) || '[]'); return Array.isArray(l) ? l.filter(x => x && typeof x.name === 'string' && x.prefs && typeof x.prefs === 'object').slice(0, 50) : []; } catch (_) { return []; } };
+    const saveSets = l => { try { localStorage.setItem(SETS_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Trop lourd pour être gardé (retire des formes faites d’une image).', 'error'); return false; } };
     const prefs = () => { if (cache) return cache; let raw = null; try { raw = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) {} try { cache = clean(raw); } catch (_) { cache = clean(null); } return cache; };
     // réglages changés ailleurs (autre fenêtre, réglages du site) : on relit
     window.addEventListener('storage', e => { if (e.key === KEY) cache = null; });
@@ -239,7 +243,7 @@
                     <section class="h-bp-sec"><h4>Menu « ＋ Ajouter »</h4>${orderList('add', ADD, p.addOrder, p.addHidden)}</section></div>`,
             }[tab]();
             ws.innerHTML = `<section class="page h-bp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Réglages des tableaux</h2><p>Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus.</p></div>
-                <div class="page-actions"><button type="button" class="button secondary" data-bp-reset>Revenir aux réglages d’origine</button><button type="button" class="button" data-bp-save>Enregistrer</button></div></header>
+                <div class="page-actions"><span class="h-bp-sets"><select data-bp-set aria-label="Mes réglages enregistrés"><option value="">Mes réglages enregistrés…</option>${sets().map((x, n) => `<option value="${n}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button secondary" data-bp-setapply title="Reprendre ces réglages">Appliquer</button><button type="button" class="button secondary danger" data-bp-setdel title="Supprimer ces réglages enregistrés">🗑</button><button type="button" class="button secondary" data-bp-setsave title="Garder tous les réglages actuels sous un nom">💾 Enregistrer sous un nom…</button></span><button type="button" class="button secondary" data-bp-reset>Revenir aux réglages d’origine</button><button type="button" class="button" data-bp-save>Enregistrer</button></div></header>
                 <nav class="h-bp-tabs">${TABS.map(([k, l]) => `<button type="button" class="${tab === k ? 'is-active' : ''}" data-bp-tab="${k}">${l}</button>`).join('')}</nav><div class="h-bp-body">${body}</div></section>`;
             bindOrder(ws);
         };
@@ -265,6 +269,37 @@
             if (token !== st.workspaceToken) return;
             const t = e.target.closest('[data-bp-tab]'); if (t) { collect(); tab = t.dataset.bpTab; draw(); return; }
             if (e.target.closest('[data-bp-save]')) { collect(); savePrefs(p); toast('Réglages des tableaux enregistrés : ils servent dès le prochain tableau ouvert.'); return; }
+            if (e.target.closest('[data-bp-setsave]')) {
+                collect();
+                const l0 = sets(), cur = l0[Number(ws.querySelector('[data-bp-set]').value)]?.name || '';
+                ext.openDialog({eyebrow: 'RÉGLAGES DES TABLEAUX', title: 'Enregistrer sous un nom', submitLabel: 'Enregistrer',
+                    body: `<div class="form-grid"><label class="span-2">Nom de ces réglages<input name="name" maxlength="60" required value="${esc(cur || 'Mes réglages')}" list="h-bp-setnames"><datalist id="h-bp-setnames">${l0.map(x => `<option value="${esc(x.name)}">`).join('')}</datalist></label>
+                        <p class="muted span-2">Tout ce qui est réglé ici est gardé : couleurs et palettes, pointes, formes (et tes formes), polices, tailles et arrondi, tableur, pinceaux, ordre des menus. Un nom déjà pris remplace ses réglages.</p></div>`,
+                    onSubmit: form => {
+                        const name = form.elements.name.value.trim().slice(0, 60); if (!name) return false;
+                        const l = sets(), at = l.findIndex(x => x.name === name);
+                        if (at >= 0 && !confirm(`Remplacer les réglages « ${name} » déjà enregistrés ?`)) return false;
+                        const item = {name, prefs: clean(p), saved_at: new Date().toISOString()};
+                        if (at >= 0) l[at] = item; else l.push(item);
+                        if (!saveSets(l)) return false;
+                        savePrefs(p); draw(); ws.querySelector('[data-bp-set]').value = String(at >= 0 ? at : l.length - 1); toast(`Réglages enregistrés sous « ${name} » (et utilisés dès maintenant).`);
+                    }});
+                return;
+            }
+            if (e.target.closest('[data-bp-setapply]')) {
+                const n = ws.querySelector('[data-bp-set]').value, it = sets()[Number(n)];
+                if (n === '' || !it) { toast('Choisis d’abord des réglages enregistrés.', 'error'); return; }
+                if (!confirm(`Reprendre les réglages « ${it.name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).`)) return;
+                p = clean(it.prefs); savePrefs(p); draw(); toast(`Réglages « ${it.name} » appliqués.`);
+                return;
+            }
+            if (e.target.closest('[data-bp-setdel]')) {
+                const n = ws.querySelector('[data-bp-set]').value, l = sets(), it = l[Number(n)];
+                if (n === '' || !it) { toast('Choisis d’abord les réglages à supprimer.', 'error'); return; }
+                if (!confirm(`Supprimer les réglages enregistrés « ${it.name} » ? (les réglages en cours ne changent pas)`)) return;
+                l.splice(Number(n), 1); if (saveSets(l)) { collect(); draw(); toast(`« ${it.name} » supprimé.`); }
+                return;
+            }
             if (e.target.closest('[data-bp-reset]')) { if (!confirm('Revenir aux réglages d’origine des tableaux ? Tes palettes, formes, listes de polices et pinceaux à toi seront retirés.')) return; p = DEFAULTS(); savePrefs(p); draw(); toast('Réglages d’origine remis.'); return; }
             // couleurs
             const box = e.target.closest('[data-bp-colors]');

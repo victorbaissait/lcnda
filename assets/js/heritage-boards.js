@@ -1126,14 +1126,16 @@
             status('Import : vérification des fiches et médias…');
             const asNote = (it, txt) => ({id: it.id, type: 'note', text: txt, x: it.x, y: it.y, w: Math.max(180, it.w), h: Math.max(90, Math.min(it.h, 200)), z: it.z, fill: '#f1f1f1', fs: 16, group: it.group || ''});
             let lost = 0;
-            const out = [];
+            const out = [], toUpload = [];
             for (const it of j.data.items) {
                 if (!it || typeof it !== 'object') continue;
                 try {
                     if (it.type === 'media') {
                         const m0 = j.media?.[it.media_id], fname = m0?.filename || '';
                         const hit = fname ? ((await api('heritage_media_search', {q: m0.title || fname})).media || []).find(m => m.filename === fname) : null;
-                        if (hit) { out.push({...it, media_id: Number(hit.id)}); media[hit.id] = hit; } else { lost++; out.push(asNote(it, `🖼 Média absent ici : ${m0?.title || fname || '#' + it.media_id}`)); }
+                        if (hit) { out.push({...it, media_id: Number(hit.id)}); media[hit.id] = hit; }
+                        else if (j.files?.[it.media_id]) { const n = {...it}; out.push(n); toUpload.push([n, it.media_id]); } // le fichier est dedans : ajouté à la base après
+                        else { lost++; out.push(asNote(it, `🖼 Média absent ici : ${m0?.title || fname || '#' + it.media_id}`)); }
                     } else if (it.type === 'person') {
                         const name = j.people?.[it.person_id]; let ok = false;
                         if (name) { try { const d = await api('person', {id: it.person_id}); ok = A().personName(d.person) === name; } catch (_) {} }
@@ -1152,6 +1154,30 @@
                 const r = await api('save_board', {}, {method: 'POST', body: {title: (j.title || 'Tableau importé') + ' (importé)', owner_type: '', data: {...j.data, items: out, links: keptLinks, locked: false}}});
                 const linkMsg = !want ? '' : keptLinks.length === want ? ' Associations reprises.' : keptLinks.length ? ` ${keptLinks.length} association${keptLinks.length > 1 ? 's' : ''} sur ${want} reprise${keptLinks.length > 1 ? 's' : ''} (les autres visent une autre base).` : ' Les associations visent une autre base : non reprises.';
                 const nid = Number(r.result?.id || r.id);
+                // les photos contenues dans le fichier : ajoutées à la base (rangées avec ce tableau), une fois chacune
+                if (toUpload.length) {
+                    const done = new Map(); let n = 0;
+                    for (const [item, oldId] of toUpload) {
+                        status(`Import des photos : ${++n} / ${toUpload.length}…`);
+                        if (!done.has(oldId)) {
+                            let newId = 0;
+                            try {
+                                const url = j.files[oldId], mime = (/^data:([^;,]+)/.exec(url) || [])[1] || 'application/octet-stream', bin = atob(url.split(',')[1] || ''), u8 = new Uint8Array(bin.length);
+                                for (let k = 0; k < bin.length; k++) u8[k] = bin.charCodeAt(k);
+                                const m0 = j.media?.[oldId] || {}, fd = new FormData();
+                                fd.append('collection_type', 'board'); fd.append('collection_id', nid); fd.append('collection_role', ''); fd.append('csrf', S().csrf);
+                                fd.append('files[]', new File([u8], String(m0.filename || 'photo').split('/').pop(), {type: mime}));
+                                const res = await fetch('upload.php', {method: 'POST', body: fd}), jj = await res.json();
+                                if (res.ok && !jj.error) newId = Number((jj.media || [])[0]) || 0;
+                            } catch (_) {}
+                            done.set(oldId, newId);
+                        }
+                        const nm = done.get(oldId);
+                        if (nm) item.media_id = nm; else { lost++; Object.assign(item, asNote(item, `🖼 Média non importé : ${j.media?.[oldId]?.title || '#' + oldId}`)); delete item.media_id; }
+                    }
+                    const nb = await api('board', {id: nid});
+                    await api('save_board', {}, {method: 'POST', body: {id: nid, title: nb.title, status: nb.status, data: {...nb.data, items: out}}});
+                }
                 toast((lost ? `Tableau importé. ${lost} élément${lost > 1 ? 's' : ''} (fiche, média, recueil ou dossier) absent${lost > 1 ? 's' : ''} ici devenu${lost > 1 ? 's' : ''} des notes.` : 'Tableau importé.') + linkMsg);
                 go(nid);
             } catch (error) { toast(error.message, 'error'); status('⚠ ' + error.message); }
@@ -1321,14 +1347,40 @@
             m.addEventListener('click', ev => { const bt = ev.target.closest('[data-k]'); if (!bt) return; m.remove(); onPick(bt.dataset.k); });
             setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0);
         }
+        // le fichier du tableau : léger (sans les photos) ou complet (photos, sons, PDF dedans)
+        function exportFile() {
+            const used = [...new Set(items.filter(i => i.type === 'media' && media[i.media_id]).map(i => Number(i.media_id)))];
+            ext.openDialog({eyebrow: 'TABLEAU', title: '💾 Fichier du tableau', submitLabel: 'Enregistrer le fichier',
+                body: `<div class="h-bd-expopt">
+                    <label class="h-bd-expchoice"><input type="radio" name="with" value="0" checked><span><strong>Léger, sans les photos</strong>
+                        <small>✓ petit fichier, vite fait, facile à envoyer par courriel.<br>✓ parfait pour garder une copie ou le rouvrir dans <em>cette</em> base : les photos y sont déjà.<br>✗ dans une autre base (un cousin, un autre ordinateur), les photos qui n’y sont pas deviennent des notes « média absent ».</small></span></label>
+                    <label class="h-bd-expchoice"><input type="radio" name="with" value="1"><span><strong>Complet, avec les photos${used.length ? ` (${used.length} fichier${used.length > 1 ? 's' : ''})` : ''}</strong>
+                        <small>✓ le tableau est complet partout : à l’import, les photos, sons et PDF absents sont ajoutés à la base.<br>✗ fichier bien plus lourd (le poids de toutes les photos), plus long à faire et à envoyer.<br>✗ les photos sont copiées : dans la même base, celles déjà présentes ne sont pas recopiées, mais le fichier les contient quand même.</small></span></label>
+                    ${used.length ? '' : '<p class="muted">Ce tableau n’a pas de photo de l’app : les deux fichiers seront pareils.</p>'}</div>`,
+                onSubmit: async form => {
+                    const withFiles = form.querySelector('[name=with]:checked')?.value === '1';
+                    const people = {}; for (const it of items.filter(i => i.type === 'person')) people[it.person_id] = (await personBrief(it.person_id)).name;
+                    const data = {format: 'lcnda-board', version: 3, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links}, people,
+                        media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
+                    if (withFiles && used.length) {
+                        data.files = {}; let n = 0, failed = 0;
+                        for (const mid of used) {
+                            status(`Photos : ${++n} / ${used.length}…`);
+                            try { const r = await fetch(mediaUrl(media[mid])); if (!r.ok) throw new Error(); const blob = await r.blob();
+                                data.files[mid] = await new Promise((res, rej) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = rej; fr.readAsDataURL(blob); }); }
+                            catch (_) { failed++; }
+                        }
+                        status(dirty ? 'Modifié…' : 'Enregistré ✓');
+                        if (failed) toast(`${failed} fichier${failed > 1 ? 's' : ''} n’${failed > 1 ? 'ont' : 'a'} pas pu être mis dedans (introuvable${failed > 1 ? 's' : ''} sur le disque).`, 'error');
+                    }
+                    const blob = new Blob([JSON.stringify(data)], {type: 'application/json'});
+                    download(URL.createObjectURL(blob), fileBase() + (withFiles && used.length ? ' (avec photos)' : '') + '.lcnda-tableau.json');
+                    toast(`Fichier du tableau enregistré (${blob.size > 1048576 ? (blob.size / 1048576).toFixed(1).replace('.', ',') + ' Mo' : Math.max(1, Math.round(blob.size / 1024)) + ' ko'}) : « ＋ Ajouter → Importer un tableau » le rouvre.`);
+                }});
+        }
         async function exportMenu(btn) {
             popMenu(btn, [['png', '🖼 Image PNG'], ['jpg', '🖼 Image JPG'], ['pdf', '📄 PDF'], ['print', '🖨 Imprimer…'], '-', ['selpng', '✂ La sélection en PNG', !sel.size], '-', ['file', '💾 Fichier du tableau (pour le garder ou le donner)']], async k => {
-                if (k === 'file') {
-                    // de quoi retrouver les fiches, recueils et médias dans une autre base : leurs noms et fichiers
-                    const people = {}; for (const it of items.filter(i => i.type === 'person')) people[it.person_id] = (await personBrief(it.person_id)).name;
-                    const data = {format: 'lcnda-board', version: 2, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links}, people,
-                        media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
-                    download(URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], {type: 'application/json'})), fileBase() + '.lcnda-tableau.json'); toast('Fichier du tableau enregistré : « ＋ Ajouter → Importer un tableau » le rouvre.'); return; }
+                if (k === 'file') return exportFile();
                 status('Préparation…');
                 // l'échelle est réduite pour un grand tableau (un navigateur ne fait pas d'image de plus de ~16 millions de points)
                 const bb0 = bbox(k === 'selpng' && sel.size ? selItems() : items) || {w: 800, h: 600}, scale = Math.max(0.1, Math.min(2, Math.sqrt(16e6 / Math.max(1, (bb0.w + 80) * (bb0.h + 80))), 16000 / (bb0.w + 80), 16000 / (bb0.h + 80)));
