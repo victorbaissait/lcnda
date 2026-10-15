@@ -3834,3 +3834,9 @@ html.is-screen-embed .workspace{grid-row:1;grid-column:1}
 html.is-screen-embed.is-screen-embed-sidebar .sidebar{display:flex!important;grid-row:1}
 html.is-screen-embed.is-screen-embed-sidebar .app-shell{grid-template:1fr / var(--sidebar) 1fr}
 html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
+
+/* Bloc Identité : cacher / montrer les lignes vides */
+.identity-empty-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line, #d8d8d8);font-size:.78rem;color:var(--muted, #666)}
+.identity-empty-bar span{flex:1 1 100%;font-weight:700}
+.identity-empty-bar .button.small{padding:3px 8px;font-size:.74rem}
+@media print{.identity-empty-bar{display:none}}
