@@ -27,6 +27,44 @@
     const DEF_KEY = 'genealogie-layout-defaults', FONTS_KEY = 'genealogie-layout-fonts';
     const SIZES = [['A4', 'A4 (21 × 29,7 cm)', 210, 297], ['A5', 'A5 (14,8 × 21 cm)', 148, 210], ['B5', 'B5 (17,6 × 25 cm)', 176, 250], ['royal', 'Livre (15,6 × 23,4 cm)', 156, 234],
         ['us6x9', 'Livre US (6 × 9 in)', 152.4, 228.6], ['letter', 'Lettre US', 215.9, 279.4], ['square', 'Carré (21 × 21 cm)', 210, 210], ['A4L', 'A4 à l’italienne', 297, 210], ['album', 'Album photo (28 × 21,6 cm)', 280, 216]];
+    /* Formats à soi (« Enregistrer ce format » dans Nouveau document), proposés partout avec ceux de l'app */
+    const FORMATS_KEY = 'genealogie-layout-formats';
+    const myFormats = () => { let v = []; try { v = JSON.parse(localStorage.getItem(FORMATS_KEY) || '[]'); } catch (_) {} return (Array.isArray(v) ? v : []).filter(f => f && /^my_[a-z0-9]{1,24}$/.test(String(f.k)) && Number(f.w) >= 30 && Number(f.h) >= 30).slice(0, 60).map(f => ({k: f.k, name: String(f.name || 'Mon format').replace(/[<>"`]/g, '').slice(0, 60), w: clamp(f.w, 30, 1500), h: clamp(f.h, 30, 1500)})); };
+    const allSizes = () => [...SIZES, ...myFormats().map(f => [f.k, `★ ${f.name} (${String(r1(f.w / 10)).replace('.', ',')} × ${String(r1(f.h / 10)).replace('.', ',')} cm)`, f.w, f.h])];
+    const UNITS = [['mm', 'mm', 1], ['cm', 'cm', 10], ['in', 'pouces', 25.4], ['pt', 'points', 25.4 / 72]];
+    /** Le choix du format : ceux de l'app, les miens, ou à mes mesures (unité, portrait / paysage), et l'enregistrer pour la prochaine fois */
+    function formatFieldsHtml(w, h, {designOwn = false} = {}) {
+        const match = allSizes().find(x => Math.abs(x[2] - w) < 0.2 && Math.abs(x[3] - h) < 0.2);
+        return `<fieldset class="span-2 ly-format"><legend>Format de la page</legend><div class="ly-formatrow">
+            <label>Format <select name="size">${designOwn ? '<option value="design" selected>Celui du design</option>' : ''}${allSizes().map(([k, l]) => `<option value="${esc(k)}" ${!designOwn && match?.[0] === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}<option value="custom" ${!designOwn && !match ? 'selected' : ''}>✏️ Personnalisé (à mes mesures)</option></select></label>
+            <label>Largeur <input type="number" step="any" min="0" name="fw" value="${r1(w)}"></label><label>Hauteur <input type="number" step="any" min="0" name="fh" value="${r1(h)}"></label>
+            <label>Unité <select name="unit">${UNITS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></label>
+            <div class="ly-orient"><button type="button" class="button small secondary" data-orient="portrait" title="Portrait (plus haut que large)">▯ Portrait</button><button type="button" class="button small secondary" data-orient="landscape" title="Paysage (plus large que haut)">▭ Paysage</button></div>
+            <div class="ly-orient"><button type="button" class="button small secondary" data-fmt-save>＋ Enregistrer ce format</button><button type="button" class="button small secondary" data-fmt-del title="Supprimer ce format à moi" hidden>🗑</button></div></div>
+            <p class="muted" data-fmt-info></p></fieldset>`;
+    }
+    function bindFormatFields(dg) {
+        const sel = dg.querySelector('[name=size]'), fw = dg.querySelector('[name=fw]'), fh = dg.querySelector('[name=fh]'), unit = dg.querySelector('[name=unit]'), info = dg.querySelector('[data-fmt-info]'), del = dg.querySelector('[data-fmt-del]');
+        if (!sel || !fw) return;
+        let u = 1; // mm par unité affichée
+        const mmW = () => (Number(fw.value) || 0) * u, mmH = () => (Number(fh.value) || 0) * u;
+        const show = (w, h) => { fw.value = Math.round(w / u * 100) / 100; fh.value = Math.round(h / u * 100) / 100; };
+        const note = () => { const w = mmW(), h = mmH(); info.textContent = sel.value === 'design' ? 'La page garde le format du design.' : w >= 30 && h >= 30 && w <= 1500 && h <= 1500 ? `${String(r1(w)).replace('.', ',')} × ${String(r1(h)).replace('.', ',')} mm — ${w > h ? 'paysage' : w < h ? 'portrait' : 'carré'}` : '⚠️ Entre 3 cm et 1,5 m de côté.'; del.hidden = !String(sel.value).startsWith('my_'); fw.disabled = fh.disabled = sel.value === 'design'; };
+        sel.addEventListener('change', () => { const s0 = allSizes().find(x => x[0] === sel.value); if (s0) show(s0[2], s0[3]); note(); });
+        [fw, fh].forEach(el => el.addEventListener('input', () => { const m = allSizes().find(x => Math.abs(x[2] - mmW()) < 0.2 && Math.abs(x[3] - mmH()) < 0.2); sel.value = m ? m[0] : 'custom'; note(); }));
+        unit.addEventListener('change', () => { const w = mmW(), h = mmH(); u = (UNITS.find(x => x[0] === unit.value) || UNITS[0])[2]; show(w, h); note(); });
+        dg.querySelectorAll('[data-orient]').forEach(b => b.addEventListener('click', () => { const w = mmW(), h = mmH(), land = b.dataset.orient === 'landscape'; if ((land && h > w) || (!land && w > h)) { show(h, w); fw.dispatchEvent(new Event('input')); } }));
+        dg.querySelector('[data-fmt-save]').addEventListener('click', () => {
+            const w = mmW(), h = mmH(); if (!(w >= 30 && h >= 30 && w <= 1500 && h <= 1500)) return toast('Format entre 3 cm et 1,5 m de côté.', 'error');
+            const name = (prompt('Nom de ce format (ex. Mon carnet 17 × 24) :', `${String(r1(w / 10)).replace('.', ',')} × ${String(r1(h / 10)).replace('.', ',')} cm`) || '').replace(/[<>"`]/g, '').trim().slice(0, 60); if (!name) return;
+            const list = myFormats(), k = 'my_' + Date.now().toString(36); list.push({k, name, w: r1(w), h: r1(h)});
+            try { localStorage.setItem(FORMATS_KEY, JSON.stringify(list)); } catch (_) {}
+            sel.insertBefore(new Option(allSizes().find(x => x[0] === k)[1], k), sel.querySelector('option[value="custom"]')); sel.value = k; note(); toast(`Format « ${name} » enregistré : il est proposé pour les prochains documents.`);
+        });
+        del.addEventListener('click', () => { const k = sel.value, f = myFormats().find(x => x.k === k); if (!f || !confirm(`Supprimer le format « ${f.name} » ?`)) return; try { localStorage.setItem(FORMATS_KEY, JSON.stringify(myFormats().filter(x => x.k !== k))); } catch (_) {} sel.querySelector(`option[value="${k}"]`)?.remove(); sel.value = 'custom'; note(); });
+        dg._formatMm = () => sel.value === 'design' ? null : {w: clamp(mmW(), 30, 1500), h: clamp(mmH(), 30, 1500)};
+        note();
+    }
     const BASE_FONTS = ['Georgia', 'Garamond', 'EB Garamond', 'Palatino', 'Book Antiqua', 'Baskerville', 'Times New Roman', 'Didot', 'Bodoni 72', 'Cochin', 'Hoefler Text', 'Big Caslon', 'Constantia', 'Cambria',
         'Helvetica Neue', 'Helvetica', 'Arial', 'Avenir', 'Avenir Next', 'Futura', 'Gill Sans', 'Optima', 'Verdana', 'Trebuchet MS', 'Segoe UI', 'Calibri', 'Candara', 'Franklin Gothic Medium', 'Courier New', 'American Typewriter',
         'Copperplate', 'Brush Script MT', 'Snell Roundhand', 'Savoye LET', 'Zapfino', 'Apple Chancery', 'Lucida Handwriting', 'Papyrus', 'Impact', 'Rockwell', 'serif', 'sans-serif', 'monospace', 'cursive'];
@@ -942,7 +980,7 @@
         function panelDoc() {
             const P = D.page, M = P.margin;
             return sec('Format du document', `<label class="ly-f"><span>Titre du livre ({titre})</span><input type="text" data-ly-doc="title" value="${esc(D.title || '')}"></label>
-                <label class="ly-f"><span>Format</span><select data-ly-doc="size"><option value="">Personnalisé</option>${SIZES.map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(P.w - w) < 0.2 && Math.abs(P.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                <label class="ly-f"><span>Format</span><select data-ly-doc="size"><option value="">Personnalisé</option>${allSizes().map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(P.w - w) < 0.2 && Math.abs(P.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <div class="ly-grid2">${num('w', 'Largeur', P.w, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('h', 'Hauteur', P.h, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('m.t', 'Haut', M.t, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.b', 'Bas', M.b, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.i', P.facing ? 'Petit fond' : 'Gauche', M.i, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.o', P.facing ? 'Grand fond' : 'Droite', M.o, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('columns', 'Colonnes', P.columns, {min: 1, max: 12, step: 1, unit: '', attr: 'data-ly-doc'})}${num('gutter', 'Gouttière', P.gutter, {min: 0, max: 60, attr: 'data-ly-doc'})}${num('bleed', 'Fond perdu', P.bleed, {min: 0, max: 30, attr: 'data-ly-doc'})}${num('slug', 'Ligne-bloc', P.slug || 0, {min: 0, max: 80, attr: 'data-ly-doc'})}${num('start', '1re page n°', P.start || 1, {min: 1, max: 9999, step: 1, unit: '', attr: 'data-ly-doc'})}</div>
                 <label class="ly-f ly-check"><input type="checkbox" data-ly-doc="facing" ${P.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>${paintSel('paper', 'Papier', P.paper).replace('data-ly-set="paper"', 'data-ly-doc="paper"')}
                 <p class="ly-help">Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>.</p>`);
@@ -967,7 +1005,7 @@
             }
             if (el.matches('[data-ly-doc]')) {
                 const k = el.dataset.lyDoc, v = el.type === 'checkbox' ? el.checked : el.type === 'number' ? Number(el.value) : el.value;
-                if (k === 'size') { const s0 = SIZES.find(x => x[0] === v); if (s0) { D.page.w = s0[2]; D.page.h = s0[3]; } }
+                if (k === 'size') { const s0 = allSizes().find(x => x[0] === v); if (s0) { D.page.w = s0[2]; D.page.h = s0[3]; } }
                 else if (k === 'title') D.title = String(v).slice(0, 200);
                 else if (k.startsWith('m.')) D.page.margin[k.slice(2)] = clamp(v, 0, 300);
                 else D.page[k] = k === 'facing' ? !!v : k === 'paper' ? v : clamp(v, k === 'columns' || k === 'start' ? 1 : 0, 1500);
@@ -1145,7 +1183,7 @@
     function defaultsDialog(onDone) {
         const d = defaults(), fonts = fontList();
         ext.openDialog({eyebrow: 'MISE EN PAGE', title: 'Réglages par défaut des nouveaux documents', wide: true, submitLabel: 'Enregistrer',
-            body: `<div class="form-grid"><label>Format <select name="size">${SIZES.map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(d.w - w) < 0.2 && Math.abs(d.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}<option value="custom" ${SIZES.some(x => Math.abs(d.w - x[2]) < 0.2 && Math.abs(d.h - x[3]) < 0.2) ? '' : 'selected'}>Personnalisé</option></select></label>
+            body: `<div class="form-grid"><label>Format <select name="size">${allSizes().map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(d.w - w) < 0.2 && Math.abs(d.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}<option value="custom" ${allSizes().some(x => Math.abs(d.w - x[2]) < 0.2 && Math.abs(d.h - x[3]) < 0.2) ? '' : 'selected'}>Personnalisé</option></select></label>
                 <label>Largeur (mm) <input type="number" name="w" value="${d.w}" step="0.1"></label><label>Hauteur (mm) <input type="number" name="h" value="${d.h}" step="0.1"></label>
                 <label class="checkbox-line"><input type="checkbox" name="facing" ${d.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>
                 <label>Marge haut (mm) <input type="number" name="mt" value="${d.mt}"></label><label>Marge bas (mm) <input type="number" name="mb" value="${d.mb}"></label><label>Petit fond / intérieur (mm) <input type="number" name="mi" value="${d.mi}"></label><label>Grand fond / extérieur (mm) <input type="number" name="mo" value="${d.mo}"></label>
@@ -1156,7 +1194,7 @@
                 <label>Couleur du livre <input type="color" name="accent" value="${d.accent}"></label><label>Papier <input type="color" name="paper" value="${d.paper}"></label>
                 <label>Numéro de la 1re page <input type="number" name="startPage" min="1" value="${d.startPage}"></label><label class="checkbox-line"><input type="checkbox" name="folio" ${d.folio ? 'checked' : ''}> Folio et titre courant sur le gabarit</label></div>
                 <p><button type="button" class="link-button" data-reset>Revenir aux réglages de départ</button></p>`,
-            onOpen: dg => { dg.querySelector('[name=size]').addEventListener('change', e => { const s0 = SIZES.find(x => x[0] === e.target.value); if (s0) { dg.querySelector('[name=w]').value = s0[2]; dg.querySelector('[name=h]').value = s0[3]; } }); dg.querySelector('[data-reset]').addEventListener('click', () => { try { localStorage.removeItem(DEF_KEY); } catch (_) {} toast('Réglages de départ remis.'); dg.close(); onDone?.(); }); },
+            onOpen: dg => { dg.querySelector('[name=size]').addEventListener('change', e => { const s0 = allSizes().find(x => x[0] === e.target.value); if (s0) { dg.querySelector('[name=w]').value = s0[2]; dg.querySelector('[name=h]').value = s0[3]; } }); dg.querySelector('[data-reset]').addEventListener('click', () => { try { localStorage.removeItem(DEF_KEY); } catch (_) {} toast('Réglages de départ remis.'); dg.close(); onDone?.(); }); },
             onSubmit: f => { const v = Object.fromEntries(new FormData(f)); const o = {}; ['w', 'h', 'mt', 'mb', 'mi', 'mo', 'columns', 'gutter', 'bleed', 'slug', 'bodySize', 'lead', 'startPage'].forEach(k => { o[k] = Number(v[k]); }); o.facing = !!v.facing; o.folio = !!v.folio; o.titleFont = fontOk(v.titleFont); o.bodyFont = fontOk(v.bodyFont); o.accent = v.accent; o.paper = v.paper; o.size = v.size; try { localStorage.setItem(DEF_KEY, JSON.stringify(o)); } catch (_) {} toast('Réglages par défaut enregistrés : ils servent aux nouveaux documents.'); onDone?.(); }});
     }
 
@@ -1215,10 +1253,10 @@
         ext.openDialog({eyebrow: 'NOUVEAU DOCUMENT', title: mode === 'family' ? '👪 Un livre d’après la famille' : mode === 'design' ? '🎨 Depuis un design' : '📄 Page blanche', wide: true, submitLabel: mode === 'family' ? 'Faire le livre' : 'Créer',
             body: `<div class="form-grid"><label>Nom du document <input name="name" value="${mode === 'family' ? 'Livre de famille' : 'Mon livre'}" maxlength="160"></label>
                 ${mode !== 'blank' ? `<label>Design <select name="design">${designOpts.map(([k, l]) => `<option value="${k}" ${k === chosen ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>` : ''}
-                <label>Format <select name="size"><option value="">Réglages par défaut (${r1(d.w)} × ${r1(d.h)} mm)</option>${SIZES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
+                ${formatFieldsHtml(d.w, d.h, {designOwn: mode === 'design'})}
                 ${mode === 'blank' ? `<label>Nombre de pages <input type="number" name="pages" min="1" max="500" value="1"></label>` : ''}
                 ${mode !== 'design' ? `<fieldset class="span-2 ly-newpage"><legend>Pages, marges et colonnes</legend><div class="ly-newgrid">
-                    <label class="checkbox-line"><input type="checkbox" name="facing" ${d.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label><label>Largeur (mm) <input type="number" step="0.1" name="pw" value="${d.w}"></label><label>Hauteur (mm) <input type="number" step="0.1" name="ph" value="${d.h}"></label>
+                    <label class="checkbox-line"><input type="checkbox" name="facing" ${d.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>
                     <label>Marge haut <input type="number" step="0.5" min="0" name="mt" value="${d.mt}"></label><label>Marge bas <input type="number" step="0.5" min="0" name="mb" value="${d.mb}"></label><label data-in>Petit fond (intérieur) <input type="number" step="0.5" min="0" name="mi" value="${d.mi}"></label><label data-out>Grand fond (extérieur) <input type="number" step="0.5" min="0" name="mo" value="${d.mo}"></label>
                     <label>Colonnes <input type="number" min="1" max="12" name="columns" value="${d.columns}"></label><label>Gouttière (mm) <input type="number" step="0.5" min="0" name="gutter" value="${d.gutter}"></label>
                     <label>Fond perdu (mm) <input type="number" step="0.5" min="0" max="20" name="bleed" value="${d.bleed}"></label><label>Ligne-bloc (mm) <input type="number" step="0.5" min="0" max="60" name="slug" value="${d.slug}"></label></div>
@@ -1230,23 +1268,24 @@
                 <label class="span-2">Préface <textarea name="preface" rows="3" maxlength="8000"></textarea></label><label class="span-2">Mot de la fin <textarea name="epilogue" rows="2" maxlength="8000"></textarea></label>
                 <fieldset class="span-2"><legend>Les parties du livre</legend>${SECS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="sec_${k}" ${['cover', 'preface', 'stats', 'people', 'chronology', 'index'].includes(k) ? 'checked' : ''}> ${l}</label>`).join('')}</fieldset>` : ''}</div>
                 ${mode === 'design' ? '<p class="muted">Le design est copié : couverture, pages d’exemple, gabarits, styles et couleurs — tout se modifie.</p>' : mode === 'family' ? '<p class="muted">Le livre est fait page par page (les textes trop longs continuent sur la page suivante) ; tout se modifie ensuite. Les personnes cachées à l’export restent cachées.</p>' : ''}`,
-            onOpen: dg => { const sizeSel = dg.querySelector('[name=size]'), fc = dg.querySelector('[name=facing]'); sizeSel?.addEventListener('change', () => { const s0 = SIZES.find(x => x[0] === sizeSel.value); if (s0 && dg.querySelector('[name=pw]')) { dg.querySelector('[name=pw]').value = s0[2]; dg.querySelector('[name=ph]').value = s0[3]; } }); const lab = () => { const on = fc?.checked; const a = dg.querySelector('[data-in]'), b = dg.querySelector('[data-out]'); if (a) a.firstChild.textContent = on ? 'Petit fond (intérieur) ' : 'Marge gauche '; if (b) b.firstChild.textContent = on ? 'Grand fond (extérieur) ' : 'Marge droite '; }; fc?.addEventListener('change', lab); lab(); },
+            onOpen: dg => { bindFormatFields(dg); const fc = dg.querySelector('[name=facing]'); const lab = () => { const on = fc?.checked; const a = dg.querySelector('[data-in]'), b = dg.querySelector('[data-out]'); if (a) a.firstChild.textContent = on ? 'Petit fond (intérieur) ' : 'Marge gauche '; if (b) b.firstChild.textContent = on ? 'Grand fond (extérieur) ' : 'Marge droite '; }; fc?.addEventListener('change', lab); lab(); },
             onSubmit: async f => {
                 const v = Object.fromEntries(new FormData(f));
-                const pageOpts = v.pw ? {w: clamp(v.pw, 30, 1500), h: clamp(v.ph, 30, 1500), facing: !!v.facing, mt: clamp(v.mt, 0, 300), mb: clamp(v.mb, 0, 300), mi: clamp(v.mi, 0, 300), mo: clamp(v.mo, 0, 300), columns: clamp(v.columns, 1, 12), gutter: clamp(v.gutter, 0, 60), bleed: clamp(v.bleed, 0, 30), slug: clamp(v.slug, 0, 80)} : null;
-                const sz = pageOpts ? null : SIZES.find(x => x[0] === v.size);
+                const fm = f.closest('dialog')._formatMm?.();
+                if (fm && (fm.w < 30 || fm.h < 30)) { toast('Format entre 3 cm et 1,5 m de côté.', 'error'); return false; }
+                const pageOpts = mode !== 'design' ? {w: fm.w, h: fm.h, facing: !!v.facing, mt: clamp(v.mt, 0, 300), mb: clamp(v.mb, 0, 300), mi: clamp(v.mi, 0, 300), mo: clamp(v.mo, 0, 300), columns: clamp(v.columns, 1, 12), gutter: clamp(v.gutter, 0, 60), bleed: clamp(v.bleed, 0, 30), slug: clamp(v.slug, 0, 80)} : null;
                 let doc, th = THEMES[0], designDoc = null;
                 if (v.design?.startsWith('m:')) { const r = await api('layout_doc', {id: Number(v.design.slice(2))}); designDoc = r.doc; th = THEMES.find(t => t.titleFont === designDoc.paraStyles?.find(s => s.id === 'ps-title')?.font) || THEMES[0]; }
                 else if (v.design?.startsWith('b:')) th = THEMES.find(t => t.id === v.design.slice(2)) || THEMES[0];
                 if (mode === 'blank') { doc = newDoc(pageOpts || {}); for (let i = 1; i < clamp(v.pages, 1, 500); i++) doc.pages.push({id: nid('p'), master: 'A', items: []}); }
-                else if (mode === 'design') { doc = designDoc ? cleanDoc(designDoc) : builtinDesign(th, v.size || d.size || 'A4'); if (sz && designDoc) { doc.page.w = sz[2]; doc.page.h = sz[3]; } }
+                else if (mode === 'design') { doc = designDoc ? cleanDoc(designDoc) : builtinDesign(th, 'A4'); if (fm) { doc.page.w = r1(fm.w); doc.page.h = r1(fm.h); } }
                 else {
                     const root = f.elements.book_root?.value || String(start || '');
                     if (v.scope !== 'all' && !Number(root)) { toast('Choisis la personne de départ.', 'error'); return false; }
                     toast('Le livre se prépare…');
                     const data = await api('layout_family_data', {scope: v.scope, root_id: root, generations: String(clamp(v.generations, 1, 30)), order: v.order, photo_count: String(clamp(v.photo_count, 0, 8)), event_count: '20', sections: 'cover,tree,people,chronology,places,index,stats', parts: 'bio,family,events,photos,notes', title: v.title || '', subtitle: v.subtitle || '', author: v.author || ''});
                     const sections = SECS.map(x => x[0]).filter(k => v['sec_' + k]);
-                    doc = familyDoc(data, th, {size: pageOpts ? '' : (v.size || ''), pageOpts: pageOpts || {}, sections, title: v.title || data.title, subtitle: v.subtitle, author: v.author, preface: v.preface, epilogue: v.epilogue, designDoc});
+                    doc = familyDoc(data, th, {size: '', pageOpts, sections, title: v.title || data.title, subtitle: v.subtitle, author: v.author, preface: v.preface, epilogue: v.epilogue, designDoc});
                 }
                 openEditor({id: 0, name: (v.name || 'Mon livre').slice(0, 160), doc, onSaved});
             }});

@@ -87,3 +87,8 @@
 .ly-editor .button.small{padding:4px 8px;font-size:11.5px;box-shadow:none}
 .ly-mrow b{flex:1 1 100%}
 .ly-grid2 .ly-f{grid-template-columns:minmax(0,max-content) minmax(46px,1fr) auto}.ly-grid2 .ly-f>span{overflow:hidden;text-overflow:ellipsis}
+.ly-format .ly-formatrow{display:grid;grid-template-columns:minmax(220px,2fr) repeat(3,minmax(90px,1fr));gap:10px 12px;align-items:end}
+.ly-format .ly-formatrow label{display:grid;gap:4px;font-size:12px;font-weight:700}
+.ly-format .ly-orient{display:flex;gap:6px;flex-wrap:wrap;grid-column:span 2}
+.ly-format [data-fmt-info]{margin:8px 0 0;font-weight:600}
+@media(max-width:800px){.ly-format .ly-formatrow{grid-template-columns:1fr 1fr}}
