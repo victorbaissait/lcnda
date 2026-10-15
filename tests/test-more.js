@@ -193,7 +193,7 @@ const checks = [
   ['éditeur de listes : formulaire nettoyé (sortes inconnues retirées, étapes avec leurs champs)', () => { assert.deepEqual(out.records.fields, ['text', 'heading', 'people', 'select', 'steps']); assert.equal(out.records.steps[4], 2); assert.equal(out.records.new, '+ Circuit'); }],
   ['éditeur de listes : fiche enregistrée (personnes inexistantes et choix inventé retirés, lignes vides ignorées, étapes cochées)', () => assert.deepEqual(out.records.row, [[1, 5], '', 2, 2, 2])],
   ['éditeur de listes : champ obligatoire, à faire / faits, partage sans les personnes, suppression', () => { assert.equal(out.rec_required, 'refusé'); assert.deepEqual(out.records.counts, [{todo: 1, done: 0}, {todo: 0, done: 1}]); assert.deepEqual(out.records.export, [1, false]); assert.equal(out.records.import, 1); assert.equal(out.records.left, 0); }],
-  ['structure à jour (n°42)', () => assert.equal(out.version, 42)],
+  ['structure à jour (n°43)', () => assert.equal(out.version, 43)],
   ['actes de moins de 100 ans, réservés jusqu’à 75 ans', () => { assert.deepEqual(out.acts.map(a => a[0]), ['naissance']); assert.equal(out.acts[0][1], false); assert.equal(out.acts[0][2], '2065-04-04'); }],
   ['lettre de demande à la mairie', () => assert.deepEqual(out.letter, [true, true, true])],
   ['courrier créé, relié à l’acte, rappel à l’ouverture', () => { assert.deepEqual(out.request, [true, true, 1]); assert.equal(out.acts_after, true); }],
