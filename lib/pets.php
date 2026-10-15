@@ -50,6 +50,46 @@ function pet_clean(array $d): array
         }
         $out[$list] = $rows;
     }
+    // champs à soi (Réglages des animaux → « ＋ Champ ») : cf_… → texte
+    $custom = [];
+    foreach (is_array($d['custom'] ?? null) ? $d['custom'] : [] as $k => $v) {
+        if (count($custom) >= 200) { break; }
+        if (preg_match('/^cf_[a-z0-9_-]{1,30}$/', (string) $k) && is_scalar($v) && trim((string) $v) !== '') { $custom[(string) $k] = mb_substr(trim((string) $v), 0, 4000); }
+    }
+    $out['custom'] = $custom;
+    return $out;
+}
+
+/** Un animal qui a une fiche complète : ses photos et documents vont dans les médias de la fiche, ses notes et sources dans ses notes */
+function pet_move_to_person(PDO $pdo, int $petId): void
+{
+    $s = $pdo->prepare('SELECT person_id, data_json FROM pets WHERE id=?'); $s->execute([$petId]); $r = $s->fetch();
+    $pid = (int) ($r['person_id'] ?? 0); if (!$pid) { return; }
+    $m = $pdo->prepare("SELECT media_id FROM family_collection_media WHERE collection_type='pet' AND collection_id=? ORDER BY position, id"); $m->execute([$petId]);
+    $has = $pdo->prepare("SELECT 1 FROM media_links WHERE media_id=? AND entity_type='person' AND entity_id=?");
+    $ins = $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?, 'person', ?, (SELECT COALESCE(max(position), 0) + 1 FROM media_links WHERE entity_type='person' AND entity_id=?))");
+    foreach ($m->fetchAll(PDO::FETCH_COLUMN) as $mid) { $has->execute([(int) $mid, $pid]); if (!$has->fetchColumn()) { $ins->execute([(int) $mid, $pid, $pid]); } }
+    $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='pet' AND collection_id=?")->execute([$petId]);
+    $d = json_decode((string) $r['data_json'], true) ?: []; $changed = false;
+    foreach (['notes' => 'Notes', 'sources' => 'Sources'] as $k => $title) {
+        $txt = trim((string) ($d[$k] ?? '')); if ($txt === '') { continue; }
+        $pdo->prepare("INSERT INTO notes(entity_type, entity_id, title, body, created_at, updated_at) VALUES('person', ?, ?, ?, datetime('now'), datetime('now'))")->execute([$pid, $title, $txt]);
+        $d[$k] = ''; $changed = true;
+    }
+    if ($changed) { $pdo->prepare('UPDATE pets SET data_json=? WHERE id=?')->execute([json_encode($d, JSON_UNESCAPED_UNICODE), $petId]); }
+}
+
+/** Les photos d'animaux : les leurs, plus les médias de leur fiche complète */
+function pet_media(PDO $pdo, array $ids): array
+{
+    $out = heritage_media($pdo, 'pet', $ids);
+    $ids = array_values(array_filter(array_map('intval', $ids))); if (!$ids) { return $out; }
+    try {
+        $s = $pdo->prepare("SELECT p.id AS collection_id, '' AS role, m.id, m.title, m.filename, m.thumbnail, m.media_type FROM pets p JOIN media_links ml ON ml.entity_type='person' AND ml.entity_id=p.person_id JOIN media m ON m.id=ml.media_id
+            WHERE p.person_id IS NOT NULL AND p.id IN (" . implode(',', array_fill(0, count($ids), '?')) . ') ORDER BY ml.position, ml.id');
+        $s->execute($ids);
+    } catch (Throwable) { return $out; }
+    foreach ($s->fetchAll() as $row) { $out[(int) $row['collection_id']][] = $row; }
     return $out;
 }
 
@@ -205,7 +245,7 @@ function pets_list(PDO $pdo, array $q = []): array
 {
     $rows = $pdo->query('SELECT id, sire_id, dam_id, data_json, updated_at, person_id FROM pets ORDER BY updated_at DESC, id DESC')->fetchAll();
     $facts = pet_facts($pdo, array_column($rows, 'person_id'));
-    $media = heritage_media($pdo, 'pet', array_column($rows, 'id'));
+    $media = pet_media($pdo, array_column($rows, 'id'));
     $needle = mb_strtolower(trim((string) ($q['q'] ?? '')));
     $species = (string) ($q['species'] ?? '');
     $owner = safe_int($q['person_id'] ?? 0);
@@ -264,7 +304,7 @@ function pet_ancestors(PDO $pdo, int $id, int $gens): array
         }
         $front = $next;
     }
-    $media = heritage_media($pdo, 'pet', array_keys($all));
+    $media = pet_media($pdo, array_keys($all));
     return array_map(static fn($r) => pet_brief($r, $media), $all);
 }
 
@@ -284,7 +324,7 @@ function pet_detail(PDO $pdo, int $id): array
     $others = [];
     foreach ($kids as $k) { foreach (['sire_id', 'dam_id'] as $p) { if ($k[$p] && $k[$p] !== $id) { $others[$k[$p]] = true; } } }
     $otherRows = array_filter(array_map(static fn($oid) => pet_row($pdo, (int) $oid), array_keys($others)));
-    $media = heritage_media($pdo, 'pet', array_merge([$id], array_column($kids, 'id'), array_column($sibs, 'id'), array_keys($others)));
+    $media = pet_media($pdo, array_merge([$id], array_column($kids, 'id'), array_column($sibs, 'id'), array_keys($others)));
     $ownerIds = array_values(array_unique(array_filter(array_column($d['owners'], 'person_id'))));
     $people = $ownerIds ? collection_people($pdo, $ownerIds) : [];
     return ['id' => $id, 'title' => pet_title($d), 'data' => $d, 'person_id' => $r['person_id'], 'species' => PET_SPECIES, 'ancestors' => pet_ancestors($pdo, $id, 5),
@@ -325,6 +365,7 @@ function save_pet(PDO $pdo, array $data): array
         $id = (int) $pdo->lastInsertId();
     }
     pet_sync_person($pdo, $id, $d, !empty($data['make_person']));
+    pet_move_to_person($pdo, $id);
     $pdo->prepare('DELETE FROM pet_people WHERE pet_id=?')->execute([$id]);
     $ins = $pdo->prepare('INSERT OR IGNORE INTO pet_people(pet_id, person_id, role) VALUES(?,?,?)');
     foreach ($d['owners'] as $o) { if ($o['person_id']) { $ins->execute([$id, $o['person_id'], $o['role'] ?: 'propriétaire']); } }
@@ -380,7 +421,7 @@ function pets_for_person(PDO $pdo, int $personId): array
     try { $s = $pdo->prepare('SELECT pp.role, p.id, p.sire_id, p.dam_id, p.data_json FROM pet_people pp JOIN pets p ON p.id=pp.pet_id WHERE pp.person_id=? ORDER BY p.id'); $s->execute([$personId]); }
     catch (Throwable) { return []; }
     $rows = $s->fetchAll();
-    $media = heritage_media($pdo, 'pet', array_map(static fn($r) => (int) $r['id'], $rows));
+    $media = pet_media($pdo, array_map(static fn($r) => (int) $r['id'], $rows));
     $out = [];
     foreach ($rows as $r) {
         $d = json_decode((string) $r['data_json'], true) ?: [];

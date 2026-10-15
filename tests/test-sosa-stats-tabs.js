@@ -153,6 +153,15 @@ pets_sync_parents($pdo);
 $sireAfter = (int) pet_detail($pdo, $fk['id'])['data']['sire_id'];
 save_pet($pdo, ['id' => $fk['id'], 'data' => array_merge($cd, ['sire_id' => 0])]); pets_sync_parents($pdo);
 $out['animals_sire'] = [$p2 === $e2, $sireAfter === (int) $f2['id'], (int) pet_detail($pdo, $fk['id'])['data']['sire_id'], count(h_parents($pdo, $kp))];
+// fiche complète : photos → médias de la fiche, notes et sources → ses notes ; champs à soi gardés (clés sûres)
+$pdo->exec("INSERT INTO media(title, media_type) VALUES('Photo du chat', 'image')"); $mid = (int) $pdo->lastInsertId();
+$pdo->prepare("INSERT INTO family_collection_media(collection_type, collection_id, media_id) VALUES('pet', ?, ?)")->execute([$f2['id'], $mid]);
+$cd2 = pet_detail($pdo, $f2['id'])['data'];
+save_pet($pdo, ['id' => $f2['id'], 'data' => array_merge($cd2, ['notes' => 'Très doux', 'sources' => 'Carnet', 'custom' => ['cf_abc' => 'A+', 'bad key' => 'x', 'cf_vide' => ' ']])]);
+$p2id = (int) $f2['person_id'];
+$dd = pet_detail($pdo, $f2['id']);
+$out['animals_move'] = [(int) $pdo->query("SELECT count(*) FROM media_links WHERE entity_type='person' AND entity_id=$p2id AND media_id=$mid")->fetchColumn(), (int) $pdo->query("SELECT count(*) FROM family_collection_media WHERE collection_type='pet' AND collection_id=" . (int) $f2['id'])->fetchColumn(),
+    $pdo->query("SELECT group_concat(title || ':' || body, '|') FROM notes WHERE entity_type='person' AND entity_id=$p2id")->fetchColumn(), $dd['data']['notes'], count($dd['media']), $dd['data']['custom']];
 delete_pet($pdo, ['id' => $fk['id'], 'with_person' => 1]);
 $out['animals'][] = (int) $pdo->query('SELECT count(*) FROM persons WHERE id=' . $kp)->fetchColumn();
 $lb = save_board($pdo, ['title' => 'Liens', 'data' => ['items' => [], 'links' => [['kind' => 'person', 'id' => 1, 'label' => 'faux nom'], ['kind' => 'pet', 'id' => $pk['id'], 'label' => '']]]]);
@@ -250,6 +259,7 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.deepEqual(out.pets, [['err', 'err', 'err'], 'autre', 1, 3, 1, 1, '<b>Kid</b>']);
     assert.deepEqual(out.pets_del, [0, 'Atlas']);
     assert.deepEqual(out.animals_sire, [true, true, 0, 1]);
+    assert.deepEqual(out.animals_move, [1, 0, 'Notes:Très doux|Sources:Carnet', '', 1, {cf_abc: 'A+'}]);
     assert.deepEqual(out.animals, ['animal', true, '12/04/2019', 'Minette', true, 'animal', true,
         "SELECT 1 FROM (SELECT * FROM persons WHERE kind='animal') p LEFT JOIN (SELECT * FROM persons WHERE kind='animal') c ON c.id=p.id WHERE (SELECT count(*) FROM (SELECT * FROM persons WHERE kind='animal') persons)>0", 0]);
     assert.equal(out.links[1], 2); assert.equal(out.links[2], 0); assert.equal(out.links[0][1], '<b>Kid</b>');

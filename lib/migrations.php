@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 40;
+const SCHEMA_VERSION = 41;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -61,6 +61,7 @@ function migration_steps(): array
         38 => 'schema_v38',
         39 => 'schema_v39',
         40 => 'schema_v40',
+        41 => 'schema_v41',
     ];
 }
 
@@ -1952,4 +1953,12 @@ function schema_v40(PDO $pdo): void
     $pcols = array_column($pdo->query('PRAGMA table_info(pets)')->fetchAll(), 'name');
     if ($pcols && !in_array('person_id', $pcols, true)) { $pdo->exec('ALTER TABLE pets ADD COLUMN person_id INTEGER'); }
     if ($pcols) { $pdo->exec('CREATE INDEX IF NOT EXISTS idx_pets_person ON pets(person_id)'); }
+}
+
+/** Animaux qui ont une fiche complète : leurs photos et documents rejoignent les médias de la fiche, leurs notes et sources ses notes */
+function schema_v41(PDO $pdo): void
+{
+    try { $ids = $pdo->query('SELECT id FROM pets WHERE person_id IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN); } catch (Throwable) { return; }
+    if (!function_exists('pet_move_to_person')) { require_once __DIR__ . '/pets.php'; }
+    foreach ($ids as $id) { pet_move_to_person($pdo, (int) $id); }
 }

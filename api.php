@@ -8981,7 +8981,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_pet' => save_pet($pdo,$data),
             'delete_pet' => delete_pet($pdo,$data),
             'pet_make_person' => pet_make_person($pdo,$data),
-            'pet_for_person' => (function() use ($pdo,$data){$pid=safe_int($data['person_id']??0);if(!person_exists($pdo,$pid))throw new RuntimeException('Fiche introuvable.');$pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$pid]);return ['id'=>pet_of_person($pdo,$pid,true)];})(),
+            'pet_for_person' => (function() use ($pdo,$data){$pid=safe_int($data['person_id']??0);if(!person_exists($pdo,$pid))throw new RuntimeException('Fiche introuvable.');$pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$pid]);$petId=pet_of_person($pdo,$pid,true);pet_move_to_person($pdo,$petId);return ['id'=>$petId];})(),
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
