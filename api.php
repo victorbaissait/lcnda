@@ -1540,7 +1540,7 @@ function dashboard_next_anniversary(int $month,int $day,DateTimeImmutable $today
 }
 
 /** Les statistiques portent sur les personnes (ou sur les animaux d'une base d'élevage), jamais les deux mêlés */
-function graph_scope_kind(string $sql, string $kind): string
+function graph_scope_kind(string $sql, string $kind, bool $onlyIds = false): string
 {
     $an = "(SELECT id FROM persons WHERE kind='animal')"; $anFam = "(SELECT id FROM families WHERE partner1_id IN $an OR partner2_id IN $an)";
     $animal = $kind === 'animal';
@@ -1552,6 +1552,13 @@ function graph_scope_kind(string $sql, string $kind): string
         'family_children' => $animal ? "child_id IN $an" : "child_id NOT IN $an",
         'census_members' => $animal ? "person_id IN $an" : "(person_id IS NULL OR person_id NOT IN $an)",
     ];
+    // critères d'une distribution : seulement les fiches retenues (table temporaire gs_ids), et ce qui les concerne
+    if ($onlyIds) {
+        $gs = '(SELECT id FROM temp.gs_ids)';
+        $more = ['persons' => "id IN $gs", 'events' => "(person_id IN $gs OR family_id IN (SELECT id FROM families WHERE partner1_id IN $gs OR partner2_id IN $gs))",
+            'families' => "(partner1_id IN $gs OR partner2_id IN $gs)", 'family_children' => "child_id IN $gs", 'census_members' => "person_id IN $gs"];
+        foreach ($more as $t => $c) { $conds[$t] = '(' . $conds[$t] . ") AND $c"; }
+    }
     $stop = 'WHERE|ON|JOIN|LEFT|RIGHT|INNER|CROSS|GROUP|ORDER|LIMIT|UNION|USING|NATURAL|AS';
     return (string) preg_replace_callback('/\b(FROM|JOIN)\s+(persons|events|families|family_children|census_members)\b(?:\s+(?:AS\s+)?(?!(?:' . $stop . ')\b)([A-Za-z_]\w*))?/i',
         static fn($m) => $m[1] . " (SELECT * FROM {$m[2]} WHERE {$conds[strtolower($m[2])]}) " . (($m[3] ?? '') !== '' ? $m[3] : $m[2]), $sql);
@@ -4327,7 +4334,24 @@ function graph_stats_data(PDO $pdo): never
     ];
     if (!isset($definitions[$type])) $type = 'surnames';
     [$title,$description,$kind,$sql,$params] = $definitions[$type];
-    $sql = graph_scope_kind($sql, ($_GET['kind'] ?? '') === 'animal' ? 'animal' : 'human');
+    // Critères en plus (« + Critère », comme dans Mes listes) : la statistique ne compte que les fiches retenues.
+    // Une statistique qui ne sait pas filtrer par années ou par sexe le fait ainsi elle aussi.
+    $gdef = json_decode((string) ($_GET['def'] ?? ''), true);
+    $grules = is_array($gdef['rules'] ?? null) ? array_values(array_filter($gdef['rules'], 'is_array')) : [];
+    if (!$params && !str_contains($sql, '?') && ($hasYearFilter || $hasGenderFilter)) {
+        if ($dateFrom !== '' || $dateTo !== '') { $grules[] = ['field' => 'date_range', 'date_from' => $dateFrom, 'date_to' => $dateTo]; }
+        elseif ($hasYearFilter) { $grules[] = ['field' => 'year', 'from' => $yearFrom, 'to' => $yearTo]; }
+        if ($hasGenderFilter) { $grules[] = ['field' => 'gender', 'value' => $gender]; }
+    }
+    $onlyIds = false;
+    if ($grules) {
+        $GLOBALS['LCNDA_LIST_CONTEXT_PERSON'] = $sosaRootId; // « par rapport à la personne de la fiche »
+        $ids = my_list_rows_for($pdo, ['id' => 0, 'source' => 'persons', 'definition_json' => json_encode(['match' => 'all', 'rules' => array_slice($grules, 0, 40)]), 'ids_only' => true])['ids'] ?? [];
+        $pdo->exec('CREATE TEMP TABLE IF NOT EXISTS gs_ids(id INTEGER PRIMARY KEY)'); $pdo->exec('DELETE FROM temp.gs_ids');
+        $pdo->prepare('INSERT OR IGNORE INTO temp.gs_ids(id) SELECT value FROM json_each(?)')->execute([json_encode($ids)]);
+        $onlyIds = true;
+    }
+    $sql = graph_scope_kind($sql, ($_GET['kind'] ?? '') === 'animal' ? 'animal' : 'human', $onlyIds);
     $stmt = $pdo->prepare($sql);
     foreach (array_values($params) as $index => $value) {
         $stmt->bindValue($index + 1, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
@@ -4348,7 +4372,7 @@ function graph_stats_data(PDO $pdo): never
     }
     json_response([
         'type'=>$type,'title'=>$title,'description'=>$description,'kind'=>$kind,'total'=>$total,'rows'=>$rows,
-        'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'gender'=>$gender,
+        'yearFrom'=>$yearFrom,'yearTo'=>$yearTo,'gender'=>$gender,'filtered'=>$onlyIds,
     ]);
 }
 

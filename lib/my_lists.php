@@ -448,6 +448,11 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
     } else {
         $sql = "SELECT p.id FROM persons p WHERE {$where} ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE LIMIT 3000";
     }
+    // seulement les fiches qui répondent aux critères, sans limite (critères des distributions de Graphiques)
+    if (!empty($list['ids_only']) && !$isEvents) {
+        $st = $pdo->prepare("SELECT p.id FROM persons p WHERE {$where}"); $st->execute($params);
+        return ['ids' => array_map('intval', $st->fetchAll(PDO::FETCH_COLUMN))];
+    }
     if ($countOnly) { // liste jamais enregistrée : pas de lignes ajoutées ou retirées à la main
         $c = $pdo->prepare('SELECT count(*) FROM (' . preg_replace('/ ORDER BY .*$/s', '', $sql) . ')'); $c->execute($params);
         return ['count' => (int) $c->fetchColumn()];

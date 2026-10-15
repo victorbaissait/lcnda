@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=201">
+    <link rel="stylesheet" href="assets/css/app.css?v=202">
     <link rel="stylesheet" href="assets/css/heritage.css?v=116">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1090,12 +1090,12 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=340" defer></script>
+<script src="assets/js/app.js?v=342" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=58" defer></script>
+<script src="assets/js/heritage-more.js?v=59" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=17" defer></script>
 <script src="assets/js/heritage-av.js?v=7" defer></script>
@@ -1109,7 +1109,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=1" defer></script>
 <script src="assets/js/heritage-voters.js?v=2" defer></script>
-<script src="assets/js/heritage-widgets.js?v=18" defer></script>
+<script src="assets/js/heritage-widgets.js?v=23" defer></script>
 <script src="assets/js/heritage-tabs.js?v=5" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=1" defer></script>

@@ -846,6 +846,17 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .stats-title { margin: 0 auto 28px; max-width: 980px; }
 .stats-year-filter { display: flex; align-items: center; gap: 8px; margin: 14px 0 4px; }
 .stats-year-filter input { width: 92px; }
+/* Distributions : critères en plus, réglages par défaut, barres cliquables */
+.stats-rules { display: flex; flex-direction: column; gap: 6px; margin: 10px 0 4px; max-width: 980px; }
+.stats-rules .h-lr-row { flex-wrap: wrap; }
+.stats-addrule { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.stats-addrule select { max-width: 360px; }
+.stats-defaults { margin: 10px 0 0; max-width: 980px; }
+.stats-defaults summary { cursor: pointer; font-size: 13px; font-weight: 700; color: var(--muted, #666); }
+.stats-defaults p { margin: 6px 0; }
+.stats-chart-row.is-who, .histogram-column.is-who { cursor: pointer; }
+.stats-chart-row.is-who:hover .stats-chart-bar, .histogram-column.is-who:hover .histogram-bar { filter: brightness(1.12); outline: 2px solid var(--ink, #111); outline-offset: 1px; }
+.stats-chart-row.is-who:hover .stats-chart-label { text-decoration: underline; }
 .list-gender-filter { display: flex; align-items: center; gap: 8px; margin: 0 0 16px; font-weight: 700; font-size: 12px; }
 .list-gender-filter select { font-weight: 400; }
 .media-list-filters { flex-wrap: wrap; gap: 18px; }

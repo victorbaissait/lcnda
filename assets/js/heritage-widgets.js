@@ -200,7 +200,7 @@
         const timeline = TIME_GROUPS.includes(d.groupBy);
         const when = v => { if (d.groupBy === 'month') { const i = MONTHS.indexOf(v); return i >= 0 ? i : Infinity; } const k = yearOf(v) ?? Number.parseInt(v, 10); return Number.isFinite(k) ? k : Infinity; }; // « (vide) » en dernier
         entries.sort((a, b) => timeline ? when(a[0]) - when(b[0]) : b[1] - a[1] || a[0].localeCompare(b[0], 'fr'));
-        const top = Math.max(1, Math.min(60, Number(d.limit) || 10));
+        const top = d.noTop ? Infinity : Math.max(1, Math.min(60, Number(d.limit) || 10)); // noTop : toutes les valeurs (qui est derrière une barre)
         let restOf = [];
         if (!timeline && entries.length > top) { restOf = entries.slice(top); const rest = restOf.reduce((n, e) => n + e[1], 0); entries = entries.slice(0, top); if (rest) entries.push(['autres', rest]); }
         entries.counted = counted; // lignes comptées (une personne à deux étiquettes compte une fois)
@@ -347,14 +347,19 @@
         const i = Number(el.dataset.cwI), [label, n] = v.entries[i] || [];
         if (label === undefined) return;
         let res; try { res = await membersOf(v, i); } catch (error) { toast(error.message, 'error'); return; }
+        const total = v.entries.reduce((k, e) => k + e[1], 0);
+        const sub = label === 'autres' && v.entries.restValues?.length ? `<p class="h-cw-who-rest">${v.entries.restValues.slice(0, 80).map(([k, c]) => `<span>${esc(k)} <b>${fmt(c)}</b></span>`).join('')}${v.entries.restValues.length > 80 ? `<span>… et ${fmt(v.entries.restValues.length - 80)} autres valeurs</span>` : ''}</p>` : '';
+        whoDialog({eyebrow: v.d.name || 'STATISTIQUE', label, n, total, color: chartColor(v.d, label, i), res, sub, csvName: `${v.d.name || 'statistique'} - ${label}`});
+    }
+    /** La fenêtre « qui est compté » : les personnes derrière une valeur (statistiques à soi, distributions de Graphiques) */
+    function whoDialog({eyebrow, label, n, total, color, res, sub = '', csvName, unavailable}) {
         document.getElementById('h-cw-who-dialog')?.remove();
         const dlg = document.createElement('dialog');
         dlg.className = 'modal h-modal h-cw-all-dialog h-cw-who-dialog'; dlg.id = 'h-cw-who-dialog';
-        const people = res?.people || [], total = v.entries.reduce((k, e) => k + e[1], 0);
-        const sub = label === 'autres' && v.entries.restValues?.length ? `<p class="h-cw-who-rest">${v.entries.restValues.slice(0, 80).map(([k, c]) => `<span>${esc(k)} <b>${fmt(c)}</b></span>`).join('')}${v.entries.restValues.length > 80 ? `<span>… et ${fmt(v.entries.restValues.length - 80)} autres valeurs</span>` : ''}</p>` : '';
-        const note = !res ? '<p class="muted">Le détail de cette valeur n’est pas disponible pour cette statistique : transforme-la en graphique (« ➕ Ajouter d’autres conditions ») pour voir qui est compté.</p>'
+        const people = res?.people || [];
+        const note = !res ? `<p class="muted">${unavailable || 'Le détail de cette valeur n’est pas disponible pour cette statistique : transforme-la en graphique (« ➕ Ajouter d’autres conditions ») pour voir qui est compté.'}</p>`
             : people.length < n ? `<p class="muted">${fmt(people.length)} personne${people.length > 1 ? 's' : ''} différente${people.length > 1 ? 's' : ''} pour ${fmt(n)} compté${n > 1 ? 's' : ''}${res.truncated ? ' (les 3 000 premières lignes seulement)' : ' : une même personne peut compter plusieurs fois (deux événements, deux étiquettes…)'}.</p>` : '';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(v.d.name || 'STATISTIQUE')}</span><h2><i class="h-cw-dot" style="background:${chartColor(v.d, label, i)}"></i>${esc(label)} <small class="muted">${fmt(n)} · ${total ? Math.round(n / total * 100) : 0} %</small></h2></div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2><i class="h-cw-dot" style="background:${esc(color || '#0066cc')}"></i>${esc(label)} <small class="muted">${fmt(n)} · ${total ? Math.round(n / total * 100) : 0} %</small></h2></div><button type="button" class="icon-button" data-close aria-label="Fermer">×</button></div>
             <div class="h-cw-all-body">${sub}${note}${people.length ? `<div class="h-cw-who-tools"><input type="search" placeholder="Chercher un nom, un métier…" data-who-q aria-label="Chercher"><select data-who-sort aria-label="Trier"><option value="name">par nom</option><option value="birth">par naissance (anciens d’abord)</option><option value="birth_desc">par naissance (récents d’abord)</option></select><button type="button" class="button small secondary" data-who-csv>⬇︎ CSV</button></div><div data-who-list>${peopleGridHtml(people, 'name', '')}</div>` : ''}</div>`;
         document.body.appendChild(dlg);
         const redraw = () => { dlg.querySelector('[data-who-list]').innerHTML = peopleGridHtml(people, dlg.querySelector('[data-who-sort]').value, dlg.querySelector('[data-who-q]').value); };
@@ -363,13 +368,49 @@
         dlg.querySelector('[data-who-csv]')?.addEventListener('click', () => {
             const q = x => `"${String(x ?? '').replace(/"/g, '""')}"`;
             const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
-            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(`${v.d.name || 'statistique'} - ${label}`) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+            const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(csvName) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
         });
         dlg.querySelector('[data-close]').addEventListener('click', () => dlg.close());
         dlg.addEventListener('close', () => dlg.remove());
         A().bindTableLinks?.();
         dlg.showModal();
     }
+    /**
+     * Distributions de Graphiques → Statistiques : qui est derrière une barre. La statistique est refaite sur les
+     * personnes (avec ses filtres et ses critères) ; null si elle ne se refait pas ainsi.
+     */
+    ext.statWhoSupported = type => !!APP_STAT_AS_CHART[type];
+    ext.statWho = async ({statType, statFrom, statTo, statGender, statLineage, rules = [], kind = 'human'}, label, n, total, color, title) => {
+        let res = null;
+        try {
+            if (!meta) meta = await api('my_lists'); // les types d'événements (mariage…) avant de refaire la statistique
+            const c = appStatToChart({statType, statFrom, statTo, statGender, statLineage});
+            if (c) {
+                c.src.definition.rules.push(...rules);
+                const rows = await api('widget_rows', {q: JSON.stringify(srcQuery(c.src))});
+                // tranches de la statistique (« 65–69 ») : les mêmes pour le regroupement
+                const span = String(label).match(/^(\d+)\s*[–—-]\s*(\d+)$/); if (span && c.groupBy === 'step') c.groupStep = Number(span[2]) - Number(span[1]) + 1;
+                const mine = groupRows({...rows, shown: applyListFilters(rows)}, {...c, noTop: true, skipEmpty: false});
+                const norm = x => String(x).toLowerCase().replace(/[–—-]/g, '-').replace(/\s+/g, ' ').trim();
+                // « Pernay » (statistique) = « Pernay (Indre-et-Loire) » (fiche) ; « Lieu non renseigné », « Naissance sans lieu »… = vide
+                const missing = /^(lieu non renseign|naissance sans|décès sans|aucun|aucune|pays non|sans |non renseign)/i.test(String(label).trim());
+                const SAME = {masculin: ['homme', 'male', 'masculin'], 'féminin': ['femme', 'female', 'féminin'], 'non renseigné': ['(vide)', '', 'inconnu', 'unknown', 'non renseigné']};
+                const L = norm(label), alias = statType === 'sex_distribution' ? SAME[L] : null;
+                const hit = k => { const K = norm(k); return alias ? alias.includes(K) : missing ? (K === '(vide)' || K === '') : (K === L || K.startsWith(L + ' (') || K.startsWith(L + ',')); };
+                // la valeur exacte d'abord (« Martin » et « MARTIN » sont deux barres), sinon les variantes (« Pernay (Indre-et-Loire) »)
+                const exact = mine.some(([k]) => String(k).trim() === String(label).trim()), take = k => exact ? String(k).trim() === String(label).trim() : hit(k);
+                const who = new Map(); mine.forEach(([k], j) => { if (take(k)) (mine.members[j] || []).forEach(p => who.set(Number(p.id), p)); });
+                // comme la statistique : les personnes, ou les animaux en mode Élevage
+                let people = [...who.values()].filter(p => (p.kind === 'animal') === (kind === 'animal'));
+                // « Aucune naissance renseignée » / « Naissance sans lieu » (et pour le décès) : séparés d'après la date
+                const born = p => !!(p.birth_date || p.birth_year || p.bapt_date || p.bapt_year), died = p => !!(p.death_date || p.death_year || p.buri_date || p.buri_year);
+                if (/^aucune naissance/i.test(label)) people = people.filter(p => !born(p)); else if (/^(naissance sans lieu|pays non renseign)/i.test(label)) people = people.filter(born);
+                if (/^aucun décès/i.test(label)) people = people.filter(p => !died(p)); else if (/^décès sans lieu/i.test(label)) people = people.filter(died);
+                res = {people, truncated: !!rows.truncated};
+            }
+        } catch (error) { toast(error.message, 'error'); return; }
+        whoDialog({eyebrow: title || 'DISTRIBUTION', label, n, total, color, res, csvName: `${title || 'statistique'} - ${label}`, unavailable: 'Le détail de cette valeur n’est pas disponible pour cette statistique. Les noms, prénoms, lieux, pays, sexes, années et âges au décès l’ont ; pour les autres, fais-en une statistique à toi (Maintenance → Éditeur de statistiques).'});
+    };
     document.addEventListener('click', event => { const el = event.target.closest?.('[data-cw-detail]'); if (el) { event.preventDefault(); openDetail(el); } });
     document.addEventListener('keydown', event => { if ((event.key === 'Enter' || event.key === ' ') && event.target.matches?.('[data-cw-detail]')) { event.preventDefault(); openDetail(event.target); } });
     const LINK_ICONS = {module: '➜', list: '📋', maint: '🛠️', url: '↗', person: '👤'};
