@@ -100,10 +100,20 @@ save_board($pdo, ['id' => $bd['id'], 'title' => 'Mur', 'owner_type' => 'investig
 $t = board_detail($pdo, $bd['id'])['data'];
 $out['bd_table'] = [$t['items'][0]['cells'][0][0], mb_strlen($t['items'][0]['cells'][1][0]), $t['items'][0]['cells'][1][1], $t['items'][0]['colw'], array_keys((array) $t['items'][0]['cfill']), count($t['links'])];
 $out['bd_linked'] = array_map(fn($r) => [$r['title'], $r['parts']], boards_linked($pdo, 'person', 1));
+$nb = save_board($pdo, ['title' => 'Nouveautés', 'data' => ['items' => [
+    ['id' => 'n', 'type' => 'note', 'hyp' => 'pirate', 'pshow' => 'photo,<b>,dates', 'cmt' => [['w' => 'À vérifier', 't' => str_repeat('y', 3000), 'done' => 1], ['t' => '', 'w' => '']], 'layer' => 'l1"<x>'],
+    ['id' => 'm', 'type' => 'map', 'mapSrc' => 'person:12', 'pins' => [['lat' => 95, 'lon' => 2, 'label' => 'Nord', 'color' => 'url(x)'], ['lat' => 'x']], 'mapPath' => 1],
+    ['id' => 'm2', 'type' => 'map', 'mapSrc' => 'person:1;drop'], ['id' => 'l', 'type' => 'line', 'bends' => [[1, 2], 'x', [3, 4]]], ['id' => 'f', 'type' => 'frame', 'collapsed' => 1, 'fh' => 300], ['id' => 'tl', 'type' => 'timeline', 'tlMode' => 'bad']],
+    'layers' => [['id' => 'l1', 'name' => '<b>Calque</b>', 'hidden' => 1], ['id' => '!!']], 'steps' => [['name' => 'Début', 'x' => 1, 'y' => 2, 'w' => 3, 'h' => 400]], 'snap' => 1]]);
+$ni = board_detail($pdo, $nb['id'])['data'];
+$out['bd_genea'] = [$ni['items'][0]['hyp'], $ni['items'][0]['pshow'], count($ni['items'][0]['cmt']), mb_strlen($ni['items'][0]['cmt'][0]['t']), $ni['items'][0]['cmt'][0]['done'], $ni['items'][0]['layer'],
+    $ni['items'][1]['pins'], $ni['items'][1]['mapPath'], $ni['items'][2]['mapSrc'], $ni['items'][3]['bends'], [$ni['items'][4]['collapsed'], $ni['items'][4]['fh']], $ni['items'][5]['tlMode'],
+    array_map(static fn($l) => [$l['id'], $l['name'], $l['hidden']], $ni['layers']), [$ni['steps'][0]['name'], $ni['steps'][0]['w'], $ni['steps'][0]['h']], $ni['snap']];
 $snap = save_board_snapshot($pdo, ['board_id' => $bd['id'], 'label' => 'avant']);
 save_board($pdo, ['id' => $bd['id'], 'title' => 'Mur', 'owner_type' => 'investigation', 'owner_id' => 1, 'data' => ['items' => []]]);
 restore_board_snapshot($pdo, ['id' => $snap['id']]);
 $cp = copy_board($pdo, ['id' => $bd['id'], 'snapshot_id' => $snap['id'], 'keep_owner' => false]);
+$out['bd_auto'] = array_values(array_map(static fn($s) => mb_substr($s['label'], 0, 21), array_filter(board_snapshots($pdo, $bd['id']), static fn($s) => str_starts_with($s['label'], '⏱'))));
 $out['bd_snap'] = [count(board_detail($pdo, $bd['id'])['data']['items']), count(board_snapshots($pdo, $bd['id'])), board_detail($pdo, $cp['id'])['owner_type'], count(board_detail($pdo, $cp['id'])['data']['links']), $cp['title']];
 delete_board($pdo, ['id' => $cp['id']]);
 $out['bd_del'] = delete_board($pdo, ['id' => $bd['id']])['deleted'];
@@ -204,7 +214,12 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.equal(out.bd_del, 2);
     assert.deepEqual(out.bd_table, ['<i>a</i>', 500, '', [30, 800], ['0:1'], 1]);
     assert.deepEqual(out.bd_linked, [['Mur', ['piste 2']]]);
-    assert.deepEqual(out.bd_snap, [1, 2, '', 0, 'Mur (copie)']);
+    // l'instantané « avant », celui gardé au retour en arrière, et une version automatique (une par jour au plus)
+    assert.deepEqual(out.bd_snap, [1, 3, '', 0, 'Mur (copie)']);
+    assert.deepEqual(out.bd_auto, ['⏱ Version automatique']);
+    // arbre, frise, carte, cadres, pistes, commentaires, coudes, calques, étapes : nettoyés
+    assert.deepEqual(out.bd_genea, ['', 'photo,dates', 1, 2000, true, 'l1x', [{lat: 90, lon: 2, label: 'Nord', color: '#d0021b'}], true, '', [[1, 2], [3, 4]], [true, 300], 'person',
+        [['l1', '<b>Calque</b>', true]], ['Début', 10, 400], true]);
     assert.equal(out.bd_snapleft, 0);
     assert.deepEqual(out.pets, [['err', 'err', 'err'], 'autre', 1, 3, 1, 1, '<b>Kid</b>']);
     assert.deepEqual(out.pets_del, [0, 'Atlas']);

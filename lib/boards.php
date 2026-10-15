@@ -65,7 +65,7 @@ function board_detail(PDO $pdo, int $id): array
 /** Garde ce qui est sûr dans un élément du tableau (les textes restent des textes, les adresses web sont vérifiées) */
 function board_clean_item(array $it): ?array
 {
-    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table'];
+    $types = ['shape', 'text', 'note', 'draw', 'line', 'media', 'webimage', 'link', 'tag', 'folder', 'recueil', 'widget', 'screen', 'person', 'weblink', 'table', 'timeline', 'map', 'frame'];
     if (!in_array($it['type'] ?? '', $types, true)) { return null; }
     $num = static fn($v, $min = -1e6, $max = 1e6) => is_numeric($v) ? max($min, min($max, (float) $v)) : 0.0;
     $str = static fn($v, $n = 300) => mb_substr((string) ($v ?? ''), 0, $n);
@@ -75,10 +75,19 @@ function board_clean_item(array $it): ?array
         'x' => $num($it['x'] ?? 0), 'y' => $num($it['y'] ?? 0), 'w' => $num($it['w'] ?? 120, 4, 20000), 'h' => $num($it['h'] ?? 80, 4, 20000), 'rot' => $num($it['rot'] ?? 0, -360, 360),
         'z' => (int) $num($it['z'] ?? 0, -1e6, 1e6), 'locked' => !empty($it['locked']), 'group' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($it['group'] ?? ''))];
     foreach (['fill', 'stroke', 'color', 'bg', 'headColor', 'lbColor', 'lbBg', 'lbBorder'] as $k) { if (isset($it[$k])) { $out[$k] = $color($it[$k]); } }
-    foreach (['sw' => [0, 500], 'fs' => [4, 500], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200], 'hard' => [0, 100], 'bw' => [0, 200], 'lbSize' => [2, 500], 'lbBw' => [0, 20], 'lbPad' => [0, 40], 'lbRadius' => [0, 40], 'lbPos' => [0, 100], 'lbOffset' => [0, 200]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
-    foreach (['shape' => 40, 'text' => 20000, 'title' => 300, 'font' => 80, 'align' => 10, 'brush' => 20, 'dash' => 20, 'target' => 400, 'label' => 200, 'kind' => 40, 'part' => 120, 'note' => 2000, 'headStart' => 12, 'headEnd' => 12, 'path' => 12, 'list' => 10, 'lbFont' => 80, 'lbSide' => 6] as $k => $n) { if (isset($it[$k])) { $out[$k] = $str($it[$k], $n); } }
+    foreach (['sw' => [0, 500], 'fs' => [4, 500], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200], 'hard' => [0, 100], 'bw' => [0, 200], 'lbSize' => [2, 500], 'lbBw' => [0, 20], 'lbPad' => [0, 40], 'lbRadius' => [0, 40], 'lbPos' => [0, 100], 'lbOffset' => [0, 200], 'fh' => [4, 20000], 'gens' => [1, 10]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
+    foreach (['shape' => 40, 'text' => 20000, 'title' => 300, 'font' => 80, 'align' => 10, 'brush' => 20, 'dash' => 20, 'target' => 400, 'label' => 200, 'kind' => 40, 'part' => 120, 'note' => 2000, 'headStart' => 12, 'headEnd' => 12, 'path' => 12, 'list' => 10, 'lbFont' => 80, 'lbSide' => 6, 'pshow' => 80, 'hyp' => 6, 'tlMode' => 10, 'mapSrc' => 40, 'layer' => 30] as $k => $n) { if (isset($it[$k])) { $out[$k] = $str($it[$k], $n); } }
     // sûrs pour le style : alignement connu, police sans caractères spéciaux, pointes connues
     if (isset($out['align']) && !in_array($out['align'], ['left', 'center', 'right', 'justify'], true)) { $out['align'] = 'left'; }
+    if (isset($out['hyp']) && !in_array($out['hyp'], ['', 'todo', 'ok', 'no'], true)) { $out['hyp'] = ''; }
+    if (isset($out['tlMode']) && !in_array($out['tlMode'], ['person', 'family'], true)) { $out['tlMode'] = 'person'; }
+    if (isset($out['mapSrc']) && !preg_match('/^((person|family|investigation):\d{1,10})?$/', $out['mapSrc'])) { $out['mapSrc'] = ''; }
+    if (isset($out['pshow'])) { $out['pshow'] = implode(',', array_intersect(explode(',', $out['pshow']), ['photo', 'dates', 'years', 'places', 'job', 'age', 'parents'])); }
+    if (isset($out['layer'])) { $out['layer'] = (string) preg_replace('/[^a-z0-9_-]/i', '', $out['layer']); }
+    // repères d'une carte, coudes d'un trait, commentaires
+    if (isset($it['pins']) && is_array($it['pins'])) { $out['pins'] = array_values(array_filter(array_map(static fn($p) => is_array($p) && is_numeric($p['lat'] ?? null) && is_numeric($p['lon'] ?? null) ? ['lat' => max(-90, min(90, (float) $p['lat'])), 'lon' => max(-180, min(180, (float) $p['lon'])), 'label' => mb_substr((string) ($p['label'] ?? ''), 0, 120), 'color' => $color($p['color'] ?? '') ?: '#d0021b'] : null, array_slice($it['pins'], 0, 100)))); }
+    if (isset($it['bends']) && is_array($it['bends'])) { $out['bends'] = array_values(array_map(static fn($p) => [round($num($p[0] ?? 0), 1), round($num($p[1] ?? 0), 1)], array_slice(array_filter($it['bends'], 'is_array'), 0, 50))); }
+    if (isset($it['cmt']) && is_array($it['cmt'])) { $out['cmt'] = array_values(array_filter(array_map(static fn($c) => is_array($c) && trim((string) ($c['t'] ?? '')) . trim((string) ($c['w'] ?? '')) !== '' ? ['id' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($c['id'] ?? '')) ?: bin2hex(random_bytes(4)), 'w' => mb_substr((string) ($c['w'] ?? ''), 0, 30), 't' => mb_substr((string) ($c['t'] ?? ''), 0, 2000), 'done' => !empty($c['done']), 'at' => mb_substr((string) ($c['at'] ?? ''), 0, 30)] : null, array_slice($it['cmt'], 0, 50)))); }
     if (isset($out['lbSide']) && !in_array($out['lbSide'], ['on', 'above', 'below'], true)) { $out['lbSide'] = 'on'; }
     if (isset($out['lbFont'])) { $out['lbFont'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['lbFont'])); }
     if (isset($out['font'])) { $out['font'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['font'])); }
@@ -100,7 +109,7 @@ function board_clean_item(array $it): ?array
         if (isset($it['hfill'])) { $out['hfill'] = $color($it['hfill']); }
         if (isset($it['cfill']) && is_array($it['cfill'])) { $cf = []; foreach (array_slice($it['cfill'], 0, 400, true) as $k => $v) { if (preg_match('/^\d{1,3}:\d{1,2}$/', (string) $k) && ($c = $color($v)) !== '') { $cf[(string) $k] = $c; } } $out['cfill'] = (object) $cf; }
     }
-    foreach (['underline', 'strike', 'eo', 'lbBold', 'lbItalic', 'lbRotate'] as $k) { if (isset($it[$k])) { $out[$k] = !empty($it[$k]); } }
+    foreach (['underline', 'strike', 'eo', 'lbBold', 'lbItalic', 'lbRotate', 'mapPath'] as $k) { if (isset($it[$k])) { $out[$k] = !empty($it[$k]); } }
     if (isset($out['list']) && !in_array($out['list'], ['', 'bullet', 'num', 'roman', 'alpha', 'ALPHA', 'dash', 'check'], true)) { $out['list'] = ''; }
     // forme à soi : un chemin SVG (boîte 100 × 100) ou une image servant de masque
     if (isset($it['svgpath']) && preg_match('/^[MLHVCSQTAZmlhvcsqtazEe0-9.,\s+-]{1,30000}$/', (string) $it['svgpath'])) { $out['svgpath'] = (string) $it['svgpath']; }
@@ -139,11 +148,15 @@ function save_board(PDO $pdo, array $data): array
         $bg = in_array($raw['bg'] ?? '', ['dots', 'grid', 'lines', 'plain', 'paper', 'dark', 'cork', 'custom'], true) ? $raw['bg'] : 'dots';
         $bgColor = preg_match('/^#[0-9a-f]{6}$/i', (string) ($raw['bgColor'] ?? '')) ? (string) $raw['bgColor'] : '';
         $bgPattern = in_array($raw['bgPattern'] ?? '', ['', 'dots', 'grid', 'lines'], true) ? (string) ($raw['bgPattern'] ?? '') : '';
-        $json = json_encode(['items' => $items, 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => array_map(static function ($l) use ($pdo) { $lab = board_link_label($pdo, $l['kind'], $l['id']); if ($lab !== '') { $l['label'] = mb_substr($lab, 0, 200); } return $l; }, board_clean_links($raw['links'] ?? [])), 'bgColor' => $bgColor, 'bgPattern' => $bgPattern], JSON_UNESCAPED_UNICODE);
+        // calques, étapes de la présentation, grille magnétique
+        $layers = array_values(array_filter(array_map(static fn($l) => is_array($l) && ($id0 = preg_replace('/[^a-z0-9_-]/i', '', (string) ($l['id'] ?? ''))) !== '' ? ['id' => $id0, 'name' => mb_substr(safe_text($l['name'] ?? 'Calque'), 0, 60) ?: 'Calque', 'hidden' => !empty($l['hidden']), 'locked' => !empty($l['locked'])] : null, array_slice(is_array($raw['layers'] ?? null) ? $raw['layers'] : [], 0, 30))));
+        $steps = array_values(array_filter(array_map(static fn($st) => is_array($st) && is_numeric($st['w'] ?? null) ? ['id' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($st['id'] ?? '')) ?: bin2hex(random_bytes(4)), 'name' => mb_substr(safe_text($st['name'] ?? ''), 0, 80), 'x' => (float) ($st['x'] ?? 0), 'y' => (float) ($st['y'] ?? 0), 'w' => max(10, (float) $st['w']), 'h' => max(10, (float) ($st['h'] ?? 10))] : null, array_slice(is_array($raw['steps'] ?? null) ? $raw['steps'] : [], 0, 100))));
+        $json = json_encode(['items' => $items, 'layers' => $layers, 'steps' => $steps, 'snap' => !empty($raw['snap']), 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => array_map(static function ($l) use ($pdo) { $lab = board_link_label($pdo, $l['kind'], $l['id']); if ($lab !== '') { $l['label'] = mb_substr($lab, 0, 200); } return $l; }, board_clean_links($raw['links'] ?? [])), 'bgColor' => $bgColor, 'bgPattern' => $bgPattern], JSON_UNESCAPED_UNICODE);
         if (strlen($json) > 20 * 1024 * 1024) { throw new RuntimeException('Tableau trop lourd : retire quelques dessins.'); }
         $fields['data_json'] = $json; $fields['item_count'] = count($items);
         if ($thumb !== '') { $fields['thumb'] = $thumb; }
     }
+    if ($id && isset($fields['data_json'])) { board_auto_version($pdo, $id, $fields['data_json']); }
     if ($id) {
         $set = implode(', ', array_map(static fn($k) => "$k=?", array_keys($fields)));
         $s = $pdo->prepare("UPDATE boards SET $set, updated_at=CURRENT_TIMESTAMP WHERE id=?"); $s->execute([...array_values($fields), $id]);
@@ -306,6 +319,24 @@ function copy_board(PDO $pdo, array $data): array
     return ['id' => $id, 'title' => $title, 'links' => isset($json) ? (json_decode($json, true)['links'] ?? []) : null];
 }
 
+/**
+ * Versions automatiques (dans les Instantanés) : au plus une par jour, prise sur l'état d'avant la modification,
+ * seulement si le contenu change vraiment ; on n'en garde que les 30 dernières (marquées « ⏱ »).
+ */
+function board_auto_version(PDO $pdo, int $id, string $newJson): void
+{
+    try {
+        $s = $pdo->prepare('SELECT data_json, thumb, item_count FROM boards WHERE id=?'); $s->execute([$id]); $old = $s->fetch();
+        if (!$old) { return; }
+        $strip = static function (string $j): string { $d = json_decode($j, true) ?: []; unset($d['view']); return json_encode($d); }; // se déplacer ou zoomer n'est pas une modification
+        if ($strip((string) $old['data_json']) === $strip($newJson) || (json_decode((string) $old['data_json'], true)['items'] ?? []) === []) { return; }
+        $q = $pdo->prepare("SELECT created_at FROM board_snapshots WHERE board_id=? AND label LIKE '⏱%' ORDER BY id DESC LIMIT 1"); $q->execute([$id]); $last = $q->fetchColumn();
+        if ($last && strtotime((string) $last . ' UTC') > time() - 86400) { return; }
+        $pdo->prepare('INSERT INTO board_snapshots(board_id, label, data_json, thumb, item_count) VALUES(?,?,?,?,?)')->execute([$id, '⏱ Version automatique du ' . date('d/m/Y à H:i'), (string) $old['data_json'], (string) $old['thumb'], (int) $old['item_count']]);
+        $pdo->prepare("DELETE FROM board_snapshots WHERE board_id=? AND label LIKE '⏱%' AND id NOT IN (SELECT id FROM board_snapshots WHERE board_id=? AND label LIKE '⏱%' ORDER BY id DESC LIMIT 30)")->execute([$id, $id]);
+    } catch (Throwable) {}
+}
+
 function delete_board(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
@@ -362,4 +393,89 @@ function media_brief(PDO $pdo, string $ids): array
     $out = [];
     foreach ($pdo->query('SELECT id, title, filename, thumbnail, media_type FROM media WHERE id IN (' . implode(',', $list) . ')') as $m) { $out[(int) $m['id']] = $m; }
     return ['media' => $out];
+}
+
+/**
+ * Les personnes posées sur un tableau, d'un coup : nom, sexe, métier, portrait, naissance et décès (date, lieu),
+ * parents, conjoints, enfants — et, si on le demande, leurs événements avec les coordonnées des lieux
+ * (arbre automatique, frise, carte, fiches qui se mettent à jour).
+ */
+function board_people(PDO $pdo, array $ids, bool $withEvents = false): array
+{
+    $ids = array_values(array_unique(array_filter(array_map('intval', $ids), static fn($i) => $i > 0)));
+    $ids = array_slice($ids, 0, 400);
+    if (!$ids) { return []; }
+    $in = implode(',', $ids);
+    $out = [];
+    foreach ($pdo->query("SELECT p.id, p.first_name, p.middle_name, p.last_name, p.gender, COALESCE(p.occupation,'') AS occupation, p.living_status, m.filename AS portrait, m.thumbnail AS portrait_thumb
+        FROM persons p LEFT JOIN media m ON m.id=p.portrait_media_id WHERE p.id IN ($in)") as $r) {
+        $out[(int) $r['id']] = ['id' => (int) $r['id'], 'name' => trim(preg_replace('/\s+/', ' ', $r['first_name'] . ' ' . $r['middle_name'] . ' ' . $r['last_name'])), 'first_name' => (string) $r['first_name'], 'last_name' => (string) $r['last_name'],
+            'gender' => (string) $r['gender'], 'occupation' => (string) $r['occupation'], 'living' => (string) $r['living_status'], 'portrait' => (string) ($r['portrait'] ?: ''),
+            'birth' => null, 'death' => null, 'parents' => [], 'partners' => [], 'children' => [], 'events' => []];
+    }
+    if (!$out) { return []; }
+    $in = implode(',', array_keys($out));
+    // naissance (ou baptême) et décès (ou sépulture)
+    $ev = $pdo->query("SELECT e.id, e.person_id, e.family_id, e.date_text, e.year, t.gedcom_tag, t.label, t.color, pl.name AS place, pl.latitude AS lat, pl.longitude AS lon
+        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.person_id IN ($in) ORDER BY COALESCE(e.year, 99999), e.id")->fetchAll();
+    $rank = ['BIRT' => 1, 'BAPM' => 2, 'CHR' => 2, 'DEAT' => 1, 'BURI' => 2, 'CREM' => 2];
+    foreach ($ev as $e) {
+        $pid = (int) $e['person_id']; $tag = (string) $e['gedcom_tag'];
+        $brief = ['date' => (string) $e['date_text'], 'year' => $e['year'] !== null ? (int) $e['year'] : null, 'place' => (string) ($e['place'] ?? ''), 'kind' => (string) $e['label']];
+        foreach ([['birth', ['BIRT', 'BAPM', 'CHR']], ['death', ['DEAT', 'BURI', 'CREM']]] as [$k, $tags]) {
+            if (in_array($tag, $tags, true) && (!$out[$pid][$k] || $rank[$tag] < ($out[$pid][$k]['rank'] ?? 9))) { $out[$pid][$k] = $brief + ['rank' => $rank[$tag]]; }
+        }
+    }
+    // parents, conjoints, enfants
+    foreach ($pdo->query("SELECT fc.child_id, f.id AS fid, f.partner1_id, f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id IN ($in)") as $r) {
+        foreach (['partner1_id', 'partner2_id'] as $k) { if ($r[$k]) { $out[(int) $r['child_id']]['parents'][] = (int) $r[$k]; } }
+    }
+    $fams = $pdo->query("SELECT id, partner1_id, partner2_id FROM families WHERE partner1_id IN ($in) OR partner2_id IN ($in)")->fetchAll();
+    $famIds = array_map(static fn($f) => (int) $f['id'], $fams);
+    $kids = [];
+    if ($famIds) { foreach ($pdo->query('SELECT family_id, child_id FROM family_children WHERE family_id IN (' . implode(',', $famIds) . ') ORDER BY position, id') as $r) { $kids[(int) $r['family_id']][] = (int) $r['child_id']; } }
+    $famEvents = [];
+    if ($famIds) {
+        foreach ($pdo->query("SELECT e.id, e.family_id, e.date_text, e.year, t.gedcom_tag, t.label, t.color, pl.name AS place, pl.latitude AS lat, pl.longitude AS lon FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.family_id IN (" . implode(',', $famIds) . ') ORDER BY COALESCE(e.year, 99999), e.id') as $e) { $famEvents[(int) $e['family_id']][] = $e; }
+    }
+    foreach ($fams as $f) {
+        foreach ([['partner1_id', 'partner2_id'], ['partner2_id', 'partner1_id']] as [$me, $other]) {
+            $pid = (int) $f[$me]; if (!$pid || !isset($out[$pid])) { continue; }
+            $marr = array_values(array_filter($famEvents[(int) $f['id']] ?? [], static fn($e) => $e['gedcom_tag'] === 'MARR'))[0] ?? null;
+            $out[$pid]['partners'][] = ['id' => (int) $f[$other], 'family_id' => (int) $f['id'], 'marriage' => $marr ? trim($marr['date_text'] . ($marr['place'] ? ' à ' . $marr['place'] : '')) : ''];
+            foreach ($kids[(int) $f['id']] ?? [] as $c) { $out[$pid]['children'][] = $c; }
+            if ($withEvents) { foreach ($famEvents[(int) $f['id']] ?? [] as $e) { $out[$pid]['events'][] = board_event_row($e, 'family'); } }
+        }
+    }
+    foreach ($out as &$p) { $p['parents'] = array_values(array_unique($p['parents'])); $p['children'] = array_values(array_unique($p['children'])); unset($p['birth']['rank'], $p['death']['rank']); }
+    unset($p);
+    if ($withEvents) { foreach ($ev as $e) { $out[(int) $e['person_id']]['events'][] = board_event_row($e, 'person'); } }
+    foreach ($out as &$p) { usort($p['events'], static fn($a, $b) => ($a['year'] ?? 99999) <=> ($b['year'] ?? 99999)); }
+    unset($p);
+    return $out;
+}
+function board_event_row(array $e, string $scope): array
+{
+    return ['id' => (int) $e['id'], 'scope' => $scope, 'kind' => (string) $e['label'], 'tag' => (string) $e['gedcom_tag'], 'color' => (string) ($e['color'] ?? ''), 'date' => (string) $e['date_text'], 'year' => $e['year'] !== null ? (int) $e['year'] : null,
+        'place' => (string) ($e['place'] ?? ''), 'lat' => $e['lat'] !== null ? (float) $e['lat'] : null, 'lon' => $e['lon'] !== null ? (float) $e['lon'] : null];
+}
+/** Un lieu de la base avec ses coordonnées (repères posés sur une carte de tableau) */
+function board_place_search(PDO $pdo, string $q): array
+{
+    $q = trim($q); if (mb_strlen($q) < 2) { return []; }
+    $s = $pdo->prepare("SELECT id, name, county, country, latitude AS lat, longitude AS lon FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, name LIMIT 15");
+    $s->execute(['%' . $q . '%', $q . '%']);
+    $rows = array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'detail' => trim(implode(', ', array_filter([$r['county'], $r['country']]))), 'lat' => (float) $r['lat'], 'lon' => (float) $r['lon']], $s->fetchAll());
+    // et les communes de France livrées avec l'app (sans être dans la base)
+    if (count($rows) < 8 && function_exists('heritage_place_search')) {
+        $seen = array_flip(array_map(static fn($r) => mb_strtolower($r['name']) . '|' . round($r['lat'], 2), $rows));
+        foreach (heritage_place_search($pdo, $q) as $r) {
+            if (count($rows) >= 15) { break; }
+            $lat = (float) ($r['lat'] ?? 0); $lon = (float) ($r['lon'] ?? 0); $name = (string) ($r['name'] ?? '');
+            if ($name === '' || (!$lat && !$lon) || isset($seen[mb_strtolower($name) . '|' . round($lat, 2)])) { continue; }
+            $seen[mb_strtolower($name) . '|' . round($lat, 2)] = 1;
+            $rows[] = ['id' => 0, 'name' => $name, 'detail' => trim(implode(', ', array_filter([(string) ($r['sub'] ?? ''), (string) ($r['country'] ?? '')]))), 'lat' => $lat, 'lon' => $lon];
+        }
+    }
+    return $rows;
 }

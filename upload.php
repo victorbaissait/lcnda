@@ -22,7 +22,7 @@ try {
         'image/jpeg'=>'jpg','image/png'=>'png','image/webp'=>'webp','image/gif'=>'gif','application/pdf'=>'pdf',
         'audio/mpeg'=>'mp3','audio/mp4'=>'m4a','audio/x-m4a'=>'m4a','audio/wav'=>'wav','audio/x-wav'=>'wav','audio/ogg'=>'ogg',
         'audio/aiff'=>'aif','audio/x-aiff'=>'aif','audio/aifc'=>'aifc','audio/x-aifc'=>'aifc',
-        'video/mp4'=>'mp4','video/quicktime'=>'mov','video/webm'=>'webm'
+        'video/mp4'=>'mp4','video/quicktime'=>'mov','video/webm'=>'webm','audio/webm'=>'webm'
     ];$pdo=db();$isPostcard=isset($_POST['postcard_pair'])&&$_POST['postcard_pair']!=='0';$isGroupedUpload=isset($_POST['group_upload'])&&$_POST['group_upload']!=='0';if($isPostcard&&$count!==2)throw new RuntimeException('Une carte postale recto/verso doit contenir exactement deux images : recto puis verso.');$postcardGroup=($isPostcard||($isGroupedUpload&&$count>1))?bin2hex(random_bytes(8)):'';$investigationFolderId=safe_int($_POST['investigation_folder_id']??0)?:null;if($investigationFolderId){$folderCheck=$pdo->prepare('SELECT 1 FROM investigation_media_folders WHERE id=? AND investigation_id=?');$folderCheck->execute([$investigationFolderId,$investigationId]);if(!$folderCheck->fetchColumn())throw new RuntimeException('Dossier d’enquête introuvable.');}$pdo->beginTransaction();$created=[];
     try{
         if($battueItemId){
@@ -64,6 +64,7 @@ try {
             if($error!==UPLOAD_ERR_OK)throw new RuntimeException("Échec de l’import de {$name}");
             $mime=(new finfo(FILEINFO_MIME_TYPE))->file($tmp);$ext=strtolower(pathinfo((string)$name,PATHINFO_EXTENSION));if(!isset($allowed[$mime])&&in_array($ext,['aif','aiff','aifc'],true))$mime=$ext==='aifc'?'audio/x-aifc':'audio/x-aiff';if(!isset($allowed[$mime]))throw new RuntimeException("Format non accepté : {$name}");
             $mediaType=$mime==='application/pdf'?'pdf':(str_starts_with($mime,'audio/')?'audio':(str_starts_with($mime,'video/')?'video':'image'));
+            if($mediaType==='video'&&($_POST['audio_only']??'')==='1')$mediaType='audio'; // un mémo vocal enregistré (WebM sans image)
             if($isPostcard&&$mediaType!=='image')throw new RuntimeException('Une carte postale recto/verso doit contenir uniquement deux images.');
             $isAudioVideo=str_starts_with($mime,'audio/')||str_starts_with($mime,'video/');
             $limitMb=$isAudioVideo?250:25;

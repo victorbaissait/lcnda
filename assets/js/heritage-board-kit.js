@@ -141,9 +141,9 @@
         'Contraste fort': {fill: ['transparent', '#000000', '#ffffff', '#ff0000', '#ffff00', '#00a000', '#0000ff'], stroke: ['transparent', '#000000', '#ffffff', '#ff0000', '#0000ff'], text: ['#000000', '#ffffff', '#ff0000', '#0000ff'], pen: ['#000000', '#ff0000', '#0000ff', '#00a000'], note: ['#ffff00', '#ffffff', '#00ffff'], bg: ['#ffffff', '#000000']},
     };
     const TOOLS = [['select', 'Choisir'], ['hand', 'Se déplacer'], ['text', 'Texte'], ['note', 'Note'], ['shape', 'Formes'], ['line', 'Trait'], ['arrow', 'Flèche'], ['pen', 'Dessin'], ['eraser', 'Gomme'], ['table', 'Tableur']];
-    const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⬇ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']];
-    const INSPECTOR = [['fill', 'Fond'], ['stroke', 'Bord / contour'], ['color', 'Couleur du texte ou du trait'], ['sw', 'Épaisseur et style du trait'], ['shape', 'Forme'], ['radius', 'Arrondi'], ['text', 'Taille et style du texte'], ['list', 'Puces et numéros'], ['font', 'Police'], ['heads', 'Pointes des flèches'], ['linepath', 'Forme du trait et légende'], ['table', 'Tableur'], ['brush', 'Pinceau'], ['title', 'Titre, étiquette, adresse'], ['preview', 'Aperçu vivant'], ['opacity', 'Opacité'], ['actions', 'Boutons (dupliquer, verrouiller…)']];
-    const ADD = [['files', 'Des fichiers'], ['media', 'Un média de l’app'], ['web', 'D’ailleurs (web)'], ['person', 'Une fiche'], ['screen', 'Un écran de l’app'], ['widget', 'Un de mes widgets'], ['recueil', 'Un recueil'], ['tag', 'Une étiquette'], ['table', 'Un tableur'], ['folder', 'Un dossier'], ['import', 'Importer un tableau']];
+    const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⬇ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['hyp', '❓ Pistes à vérifier (compteur)'], ['search', '🔍 Chercher dans le tableau'], ['layers', '🗂 Calques'], ['snapgrid', '🧲 Grille aimantée'], ['minimap', '🗺 Mini-carte'], ['present', '▶ Présenter'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']];
+    const INSPECTOR = [['fill', 'Fond'], ['stroke', 'Bord / contour'], ['color', 'Couleur du texte ou du trait'], ['sw', 'Épaisseur et style du trait'], ['shape', 'Forme'], ['radius', 'Arrondi'], ['text', 'Taille et style du texte'], ['list', 'Puces et numéros'], ['font', 'Police'], ['heads', 'Pointes des flèches'], ['linepath', 'Forme du trait et légende'], ['table', 'Tableur'], ['brush', 'Pinceau'], ['title', 'Titre, étiquette, adresse'], ['preview', 'Aperçu vivant'], ['pshow', 'Fiche : ce qu’elle montre'], ['hyp', 'Piste : à vérifier, confirmée, fausse'], ['tl', 'Frise vivante'], ['map', 'Carte et repères'], ['connector', 'Liens tout prêts (frère de…)'], ['align', 'Aligner et répartir'], ['layer', 'Calque'], ['comments', 'Commentaires'], ['opacity', 'Opacité'], ['actions', 'Boutons (dupliquer, verrouiller…)']];
+    const ADD = [['files', 'Des fichiers'], ['media', 'Un média de l’app'], ['web', 'D’ailleurs (web)'], ['person', 'Une fiche'], ['screen', 'Un écran de l’app'], ['widget', 'Un de mes widgets'], ['recueil', 'Un recueil'], ['tag', 'Une étiquette'], ['table', 'Un tableur'], ['folder', 'Un dossier'], ['tree', 'Un arbre automatique'], ['timeline', 'Une frise vivante'], ['map', 'Une carte'], ['frame', 'Un cadre (section)'], ['memo', 'Un mémo vocal'], ['import', 'Importer un tableau']];
     const HEADS = ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail'];
     const DEFAULTS = () => ({
         palettes: [{id: 'p0', name: 'Couleurs de l’app', colors: JSON.parse(JSON.stringify(PALETTE0))}], palette: 'p0',
@@ -153,7 +153,7 @@
         fontLists: [{name: 'Pour tous les jours', fonts: ['system-ui', 'Georgia', 'Helvetica Neue', 'Times New Roman', 'Courier New']}, {name: 'Écritures anciennes', fonts: ['Garamond', 'Baskerville', 'Didot', 'Palatino', 'Apple Chancery', 'Snell Roundhand']}],
         strokeMin: 0.5, strokeMax: 60, textMin: 6, textMax: 200, radius: 14,
         table: {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: 'Nom;Année;Lieu'},
-        brushes: [],
+        brushes: [], cmtWords: ['À vérifier', 'Question', 'Idée', 'Source ?', 'Important'],
         toolsOrder: TOOLS.map(t => t[0]), toolsHidden: [], headerOrder: HEADER.map(t => t[0]), headerHidden: [],
         inspectorOrder: INSPECTOR.map(t => t[0]), inspectorHidden: [], addOrder: ADD.map(t => t[0]), addHidden: [],
     });
@@ -169,6 +169,7 @@
         if (!p.palettes.length) p.palettes = d.palettes;
         if (!p.palettes.some(x => x.id === p.palette)) p.palette = p.palettes[0].id;
         for (const k of ['heads', 'headsHidden', 'shapeCats', 'shapesHidden', 'quickShapes', 'toolsOrder', 'toolsHidden', 'headerOrder', 'headerHidden', 'inspectorOrder', 'inspectorHidden', 'addOrder', 'addHidden']) p[k] = (Array.isArray(p[k]) ? p[k] : d[k]).map(String).slice(0, 400);
+        p.cmtWords = (Array.isArray(p.cmtWords) ? p.cmtWords : d.cmtWords).map(w => String(w).trim().slice(0, 30)).filter(Boolean).slice(0, 30); if (!p.cmtWords.length) p.cmtWords = d.cmtWords;
         p.heads = sortBy(HEADS, p.heads);
         p.shapeCats = sortBy(CATS.map(c => c[0]), p.shapeCats);
         p.toolsOrder = sortBy(TOOLS.map(t => t[0]), p.toolsOrder); p.headerOrder = sortBy(HEADER.map(t => t[0]), p.headerOrder);
