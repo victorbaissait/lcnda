@@ -17,7 +17,9 @@
     const star = (n, r1 = 48, r2 = 20, rot = -90) => 'M' + Array.from({length: n * 2}, (_, i) => { const r = i % 2 ? r2 : r1, t = (rot + i * 180 / n) * Math.PI / 180; return `${(50 + Math.cos(t) * r).toFixed(1)} ${(50 + Math.sin(t) * r).toFixed(1)}`; }).join(' L') + 'Z';
     const CLOUD = 'M25 85 C2 85 0 50 20 45 C15 15 50 5 55 30 C65 10 95 20 85 50 C100 55 100 85 78 85Z';
     const CATS = [['elem', 'Élémentaire', '◻️'], ['geo', 'Géométrie', '🔷'], ['arrows', 'Flèches', '➡️'], ['bubbles', 'Bulles', '💬'], ['stars', 'Étoiles et badges', '⭐'], ['symbols', 'Symboles', '❤️'],
-        ['genea', 'Généalogie', '🌳'], ['people', 'Personnes', '👪'], ['places', 'Lieux et bâtiments', '⛪'], ['objects', 'Objets', '🔑'], ['nature', 'Nature', '🍃'], ['mine', 'Mes formes', '✏️']];
+        ['genea', 'Généalogie', '🌳'], ['people', 'Personnes', '👪'], ['faith', 'Croyances et mémoire', '🕯️'], ['docs', 'Écrits et documents', '📜'], ['places', 'Lieux et bâtiments', '⛪'], ['house', 'Maison et objets', '🏠'],
+        ['clothes', 'Vêtements et parures', '👔'], ['jobs', 'Métiers et outils', '🔨'], ['transport', 'Transports et voyages', '🚂'], ['animals', 'Animaux', '🐾'], ['nature', 'Nature', '🍃'], ['weather', 'Météo et ciel', '🌦️'],
+        ['food', 'Cuisine et repas', '🍞'], ['leisure', 'Musique, jeux et sport', '🎻'], ['health', 'Santé et corps', '🩺'], ['objects', 'Objets', '🔑'], ['mine', 'Mes formes', '✏️']];
     // [clé, nom, catégorie, chemin, evenodd?, mots pour la recherche]
     const RAW = [
         ['rect', 'Rectangle', 'elem', 'M0 0H100V100H0Z'], ['round', 'Rectangle arrondi', 'elem', 'M18 0H82A18 18 0 0 1 100 18V82A18 18 0 0 1 82 100H18A18 18 0 0 1 0 82V18A18 18 0 0 1 18 0Z'], ['ellipse', 'Ovale', 'elem', circ(50, 50, 50), 0, 'rond cercle'],
@@ -98,7 +100,28 @@
         ['snow', 'Flocon', 'nature', star(6, 50, 10) + star(6, 34, 8, -60)], ['apple', 'Pomme', 'nature', 'M50 28C40 20 22 20 14 34C4 54 18 92 34 94C42 96 46 90 50 90S58 96 66 94C82 92 96 54 86 34C78 20 60 20 50 28Z M50 26C50 14 56 6 66 4C66 16 60 24 50 26Z'],
         ['mushroom', 'Champignon', 'nature', 'M4 50C4 22 26 4 50 4S96 22 96 50Z M36 50H64L68 96H32Z'], ['paw', 'Patte', 'nature', 'M50 50C66 50 80 66 80 80C80 92 66 94 50 90C34 94 20 92 20 80C20 66 34 50 50 50Z' + circ(22, 40, 10) + circ(40, 22, 10) + circ(60, 22, 10) + circ(78, 40, 10), 0, 'animal'],
     ];
-    const SHAPES = RAW.map(([k, n, c, d, eo, tags]) => ({k, n, c, d, eo: !!eo, tags: tags || ''}));
+    // formes géométriques calculées : polygones, étoiles, anneaux, parts de disque, croissants, cadres
+    const sector = (deg, r0 = 0) => { const a1 = -90 * Math.PI / 180, a2 = (deg - 90) * Math.PI / 180, big = deg > 180 ? 1 : 0, P = (a, r) => `${(50 + Math.cos(a) * r).toFixed(1)} ${(50 + Math.sin(a) * r).toFixed(1)}`;
+        return r0 ? `M${P(a1, 48)} A48 48 0 ${big} 1 ${P(a2, 48)} L${P(a2, r0)} A${r0} ${r0} 0 ${big} 0 ${P(a1, r0)}Z` : `M50 50 L${P(a1, 48)} A48 48 0 ${big} 1 ${P(a2, 48)}Z`; };
+    const GEN = [
+        ...[3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(n => [`poly_${n}`, `Polygone à ${n} côtés`, 'geo', poly(n, 50, n === 4 ? -45 : -90), 0, 'polygone']),
+        ...[3, 4, 5, 6, 7, 8, 10, 12, 16, 20].flatMap(n => [[`starf_${n}`, `Étoile fine à ${n} branches`, 'stars', star(n, 50, n > 10 ? 38 : 18), 0, 'étoile'], [`starr_${n}`, `Étoile ronde à ${n} branches`, 'stars', star(n, 50, n > 10 ? 44 : 32), 0, 'étoile']]),
+        ...[[90, 'Quart de disque'], [120, 'Tiers de disque'], [180, 'Demi-disque'], [240, 'Deux tiers de disque'], [270, 'Trois quarts de disque'], [300, 'Camembert']].map(([d, n]) => [`sector_${d}`, n, 'geo', sector(d), 0, 'part secteur']),
+        ...[[90, 'Quart d’anneau'], [180, 'Demi-anneau'], [270, 'Trois quarts d’anneau']].map(([d, n]) => [`arc_${d}`, n, 'geo', sector(d, 28), 0, 'arc anneau']),
+        ['ring_thin', 'Anneau fin', 'geo', circ(50, 50, 48) + circ(50, 50, 40), 1, 'cercle'], ['ring_thick', 'Anneau épais', 'geo', circ(50, 50, 48) + circ(50, 50, 16), 1, 'cercle'], ['rings2', 'Deux anneaux', 'geo', circ(36, 50, 30) + circ(36, 50, 22) + circ(64, 50, 30) + circ(64, 50, 22), 1, ''],
+        ['frame_thin', 'Cadre fin', 'geo', 'M0 0H100V100H0Z M6 6V94H94V6Z', 1, ''], ['frame_round', 'Cadre arrondi', 'geo', 'M14 0H86A14 14 0 0 1 100 14V86A14 14 0 0 1 86 100H14A14 14 0 0 1 0 86V14A14 14 0 0 1 14 0Z M16 12A4 4 0 0 0 12 16V84A4 4 0 0 0 16 88H84A4 4 0 0 0 88 84V16A4 4 0 0 0 84 12Z', 1, ''],
+        ['frame_oval', 'Médaillon', 'geo', 'M50 0A40 50 0 1 0 50.01 0Z M50 8A32 42 0 1 1 49.99 8Z', 1, 'portrait cadre'], ['oval_v', 'Ovale vertical', 'geo', 'M50 0A34 50 0 1 0 50.01 0Z', 0, ''], ['oval_h', 'Ovale horizontal', 'geo', 'M0 50A50 34 0 1 0 0 50.01Z', 0, ''],
+        ['crescent_thin', 'Croissant fin', 'symbols', 'M66 4A46 46 0 1 0 98 80A40 40 0 1 1 66 4Z', 0, 'lune'], ['drop_inv', 'Goutte inversée', 'symbols', 'M50 98C50 98 14 54 14 34A36 36 0 0 1 86 34C86 54 50 98 50 98Z', 0, ''],
+        ['heart_double', 'Deux cœurs', 'symbols', 'M34 70C14 56 2 46 2 32C2 20 11 12 21 12C28 12 32 16 34 21C36 16 40 12 47 12C57 12 66 20 66 32C66 46 54 56 34 70Z M66 88C50 77 40 69 40 58C40 49 47 43 55 43C60 43 64 46 66 50C68 46 72 43 77 43C85 43 92 49 92 58C92 69 82 77 66 88Z', 0, 'amour couple'],
+        ['cross_greek', 'Croix grecque', 'faith', 'M38 0H62V38H100V62H62V100H38V62H0V38H38Z', 0, 'croix'], ['cross_maltese', 'Croix de Malte', 'faith', 'M50 50L30 0H70Z M50 50L100 30V70Z M50 50L70 100H30Z M50 50L0 70V30Z', 0, 'croix ordre'],
+        ['cross_lorraine', 'Croix de Lorraine', 'faith', 'M44 0H56V18H76V28H56V42H84V52H56V100H44V52H16V42H44V28H24V18H44Z', 0, 'croix résistance'], ['cross_ortho', 'Croix orthodoxe', 'faith', 'M45 0H55V14H70V22H55V36H80V46H55V100H45V70L30 64L32 58L45 62V46H20V36H45V22H30V14H45Z', 0, 'croix'],
+        ['banner_wave', 'Bannière ondulée', 'stars', 'M0 20C20 10 30 30 50 20S80 10 100 20V80C80 70 70 90 50 80S20 70 0 80Z', 0, 'ruban'], ['scroll_wide', 'Phylactère', 'stars', 'M12 30H88V20L100 32L88 44V70H12V80L0 68L12 56Z', 0, 'ruban banderole'],
+        ['label_round', 'Étiquette ronde', 'elem', 'M20 20H100V80H20L0 50Z' + circ(18, 50, 5), 1, 'étiquette'], ['speech_oval', 'Bulle ovale', 'bubbles', 'M50 4C78 4 98 18 98 38S78 72 50 72C46 72 42 72 38 71L18 92L24 66C10 59 2 49 2 38C2 18 22 4 50 4Z', 0, 'bulle'],
+        ['speech_round_r', 'Bulle (droite)', 'bubbles', 'M50 6C76 6 96 22 96 42C96 53 91 63 81 70L88 96L67 76C61 77 56 78 50 78C24 78 4 62 4 42S24 6 50 6Z', 0, 'bulle'], ['thought_small', 'Petite pensée', 'bubbles', circ(50, 40, 34) + circ(24, 82, 8) + circ(12, 94, 4), 0, 'pensée'],
+    ];
+    const SHAPES = [...RAW, ...GEN].map(([k, n, c, d, eo, tags]) => ({k, n, c, d, eo: !!eo, tags: tags || '', s: 100}));
+    // pictogrammes ajoutés (heritage-board-shapes.js) : boîte 24 × 24
+    for (const [c, rows] of Object.entries(ext.boardShapesExtra || {})) for (const [k, n, d, tags] of rows) SHAPES.push({k, n, c, d, eo: false, tags: tags || '', s: 24});
     const SHAPE_MAP = Object.fromEntries(SHAPES.map(s => [s.k, s]));
 
     /* ═════════ Préférences ═════════ */
@@ -153,7 +176,7 @@
         if (!HEADS.includes(p.headStart)) p.headStart = 'none'; if (!HEADS.includes(p.headEnd)) p.headEnd = 'triangle';
         p.shapeOrder = Object.fromEntries(Object.entries(p.shapeOrder && typeof p.shapeOrder === 'object' && !Array.isArray(p.shapeOrder) ? p.shapeOrder : {}).filter(([, v]) => Array.isArray(v)).map(([k, v]) => [k, v.map(String).slice(0, 500)]));
         p.customShapes = (Array.isArray(p.customShapes) ? p.customShapes : []).filter(s => s && typeof s === 'object' && (s.d || s.mask)).slice(0, 200).map(s => ({k: 'my_' + String(s.k || '').replace(/^my_/, '').replace(/[^\w-]/g, '').slice(0, 30), n: String(s.n || 'Ma forme').slice(0, 60), c: 'mine',
-            d: /^[MLHVCSQTAZmlhvcsqtaz0-9.,\s-]{0,30000}$/.test(String(s.d || '')) ? String(s.d || '') : '', eo: !!s.eo, mask: /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(String(s.mask || '')) ? String(s.mask).slice(0, 400000) : '', tags: ''}));
+            d: /^[MLHVCSQTAZmlhvcsqtazEe0-9.,\s+-]{0,30000}$/.test(String(s.d || '')) ? String(s.d || '') : '', eo: !!s.eo, mask: /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(String(s.mask || '')) ? String(s.mask).slice(0, 400000) : '', tags: ''}));
         p.fontLists = (Array.isArray(p.fontLists) ? p.fontLists : d.fontLists).filter(l => l && typeof l === 'object').slice(0, 30).map(l => ({name: String(l?.name || 'Ma liste').slice(0, 60), fonts: (Array.isArray(l?.fonts) ? l.fonts : []).map(f => String(f).replace(/[^\w\s,'\-À-ÿ.]/g, '').trim()).filter(Boolean).slice(0, 200)}));
         const t = p.table && typeof p.table === 'object' ? p.table : {};
         p.table = {rows: num(t.rows, 1, 100, 4), cols: num(t.cols, 1, 30, 3), header: t.header !== false, hcol: !!t.hcol, stripes: t.stripes !== false, hfill: isColor(t.hfill) ? t.hfill : '#e8eef7', fs: num(t.fs, 6, 80, 14), headers: String(t.headers ?? d.table.headers).slice(0, 600)};
@@ -175,8 +198,135 @@
     const allShapes = (p = prefs()) => [...SHAPES, ...p.customShapes];
     const shapesOf = (cat, p = prefs()) => { const l = allShapes(p).filter(s => s.c === cat); return sortBy(l.map(s => s.k), p.shapeOrder[cat] || []).map(k => l.find(s => s.k === k)); };
     const shapeByKey = (k, p = prefs()) => SHAPE_MAP[k] || p.customShapes.find(s => s.k === k);
-    const shapeSvg = (s, size = 28) => s?.mask ? `<span class="h-bk-shmask" style="width:${size}px;height:${size}px;-webkit-mask-image:url(${s.mask});mask-image:url(${s.mask})"></span>` : `<svg viewBox="-4 -4 108 108" width="${size}" height="${size}"><path d="${s?.d || ''}" ${s?.eo ? 'fill-rule="evenodd"' : ''} fill="currentColor" stroke="currentColor" stroke-width="2" stroke-opacity=".5"/></svg>`;
+    const shapeSvg = (s, size = 28) => s?.mask ? `<span class="h-bk-shmask" style="width:${size}px;height:${size}px;-webkit-mask-image:url(${s.mask});mask-image:url(${s.mask})"></span>` : `<svg viewBox="${-(s?.s || 100) * .04} ${-(s?.s || 100) * .04} ${(s?.s || 100) * 1.08} ${(s?.s || 100) * 1.08}" width="${size}" height="${size}"><path d="${s?.d || ''}" ${s?.eo ? 'fill-rule="evenodd"' : ''} fill="currentColor" stroke="currentColor" stroke-width="${(s?.s || 100) / 50}" stroke-opacity=".5"/></svg>`;
     ext.boardKit = {CATS, SHAPES, SHAPE_MAP, COLOR_CATS, PALETTE0, TOOLS, HEADER, INSPECTOR, ADD, HEADS, prefs, savePrefs, palette, allShapes, shapesOf, shapeByKey, shapeSvg, sortBy, clean, circ};
+
+    /* ═════════ Chemins : lire un tracé SVG, le transformer (tourner, retourner, étirer), le recadrer ═════════ */
+    // Tout est ramené à des segments absolus M / L / C / Z (les arcs deviennent des courbes) : une transformation est alors exacte.
+    function parsePath(d) {
+        const out = []; let i = 0; const str = String(d || ''), len = str.length;
+        const num = () => { const m = /^[\s,]*([+-]?(?:\d*\.\d+|\d+\.?)(?:[eE][+-]?\d+)?)/.exec(str.slice(i)); if (!m) return null; i += m[0].length; return parseFloat(m[1]); };
+        const flag = () => { const m = /^[\s,]*([01])/.exec(str.slice(i)); if (!m) return null; i += m[0].length; return +m[1]; };
+        const COUNT = {M: 2, L: 2, H: 1, V: 1, C: 6, S: 4, Q: 4, T: 2, A: 7, Z: 0};
+        while (i < len) {
+            const m = /^[\s,]*([MLHVCSQTAZmlhvcsqtaz])/.exec(str.slice(i)); if (!m) break; i += m[0].length;
+            const cmd = m[1], n = COUNT[cmd.toUpperCase()];
+            if (!n) { out.push([cmd]); continue; }
+            let first = true;
+            for (;;) {
+                const args = [];
+                for (let k = 0; k < n; k++) { const v = cmd.toUpperCase() === 'A' && (k === 3 || k === 4) ? flag() : num(); if (v === null) break; args.push(v); }
+                if (args.length < n) break;
+                out.push([first || !'Mm'.includes(cmd) ? cmd : (cmd === 'M' ? 'L' : 'l'), ...args]); first = false;
+            }
+        }
+        return out;
+    }
+    function arcToCubics(x1, y1, rx, ry, phi, fa, fs, x2, y2) {
+        if (!rx || !ry) return [[x1, y1, x2, y2, x2, y2]];
+        const r = phi * Math.PI / 180, cos = Math.cos(r), sin = Math.sin(r);
+        const dx = (x1 - x2) / 2, dy = (y1 - y2) / 2, x1p = cos * dx + sin * dy, y1p = -sin * dx + cos * dy;
+        rx = Math.abs(rx); ry = Math.abs(ry); const lam = x1p * x1p / (rx * rx) + y1p * y1p / (ry * ry); if (lam > 1) { rx *= Math.sqrt(lam); ry *= Math.sqrt(lam); }
+        const sign = fa === fs ? -1 : 1, num0 = rx * rx * ry * ry - rx * rx * y1p * y1p - ry * ry * x1p * x1p, co = sign * Math.sqrt(Math.max(0, num0 / (rx * rx * y1p * y1p + ry * ry * x1p * x1p)));
+        const cxp = co * rx * y1p / ry, cyp = -co * ry * x1p / rx, cx = cos * cxp - sin * cyp + (x1 + x2) / 2, cy = sin * cxp + cos * cyp + (y1 + y2) / 2;
+        const ang = (ux, uy, vx, vy) => { const a = Math.atan2(ux * vy - uy * vx, ux * vx + uy * vy); return a; };
+        let t1 = ang(1, 0, (x1p - cxp) / rx, (y1p - cyp) / ry), dt = ang((x1p - cxp) / rx, (y1p - cyp) / ry, (-x1p - cxp) / rx, (-y1p - cyp) / ry);
+        if (!fs && dt > 0) dt -= 2 * Math.PI; if (fs && dt < 0) dt += 2 * Math.PI;
+        const segs = Math.max(1, Math.ceil(Math.abs(dt) / (Math.PI / 2))), d = dt / segs, k = 4 / 3 * Math.tan(d / 4), out = [];
+        const pt = (t) => [cx + rx * Math.cos(t) * cos - ry * Math.sin(t) * sin, cy + rx * Math.cos(t) * sin + ry * Math.sin(t) * cos];
+        const dpt = (t) => [-rx * Math.sin(t) * cos - ry * Math.cos(t) * sin, -rx * Math.sin(t) * sin + ry * Math.cos(t) * cos];
+        for (let s0 = 0; s0 < segs; s0++) { const a = t1 + s0 * d, b = a + d, p0 = pt(a), p3 = pt(b), d0 = dpt(a), d3 = dpt(b); out.push([p0[0] + k * d0[0], p0[1] + k * d0[1], p3[0] - k * d3[0], p3[1] - k * d3[1], p3[0], p3[1]]); }
+        return out;
+    }
+    /** → [['M',x,y],['L',x,y],['C',x1,y1,x2,y2,x,y],['Z']] en absolu */
+    function absPath(d) {
+        const out = []; let x = 0, y = 0, sx = 0, sy = 0, lc = null, lq = null;
+        for (const [cmd, ...a] of parsePath(d)) {
+            const rel = cmd === cmd.toLowerCase(), C = cmd.toUpperCase(), ox = rel ? x : 0, oy = rel ? y : 0;
+            if (C === 'M') { x = a[0] + ox; y = a[1] + oy; sx = x; sy = y; out.push(['M', x, y]); lc = lq = null; }
+            else if (C === 'L') { x = a[0] + ox; y = a[1] + oy; out.push(['L', x, y]); lc = lq = null; }
+            else if (C === 'H') { x = a[0] + (rel ? x : 0); out.push(['L', x, y]); lc = lq = null; }
+            else if (C === 'V') { y = a[0] + (rel ? y : 0); out.push(['L', x, y]); lc = lq = null; }
+            else if (C === 'C') { const c = [a[0] + ox, a[1] + oy, a[2] + ox, a[3] + oy, a[4] + ox, a[5] + oy]; out.push(['C', ...c]); lc = [c[2], c[3]]; lq = null; x = c[4]; y = c[5]; }
+            else if (C === 'S') { const r1 = lc ? [2 * x - lc[0], 2 * y - lc[1]] : [x, y], c = [...r1, a[0] + ox, a[1] + oy, a[2] + ox, a[3] + oy]; out.push(['C', ...c]); lc = [c[2], c[3]]; lq = null; x = c[4]; y = c[5]; }
+            else if (C === 'Q' || C === 'T') { const q = C === 'Q' ? [a[0] + ox, a[1] + oy] : (lq ? [2 * x - lq[0], 2 * y - lq[1]] : [x, y]), e = C === 'Q' ? [a[2] + ox, a[3] + oy] : [a[0] + ox, a[1] + oy];
+                out.push(['C', x + 2 / 3 * (q[0] - x), y + 2 / 3 * (q[1] - y), e[0] + 2 / 3 * (q[0] - e[0]), e[1] + 2 / 3 * (q[1] - e[1]), e[0], e[1]]); lq = q; lc = null; x = e[0]; y = e[1]; }
+            else if (C === 'A') { const ex = a[5] + ox, ey = a[6] + oy; for (const c of arcToCubics(x, y, a[0], a[1], a[2], a[3], a[4], ex, ey)) out.push(['C', ...c]); x = ex; y = ey; lc = lq = null; }
+            else if (C === 'Z') { out.push(['Z']); x = sx; y = sy; lc = lq = null; }
+        }
+        return out;
+    }
+    const mapPath = (segs, f) => segs.map(([c, ...a]) => { const o = [c]; for (let k = 0; k < a.length; k += 2) o.push(...f(a[k], a[k + 1])); return o; });
+    const pathBox = segs => { let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity; for (const [, ...a] of segs) for (let k = 0; k < a.length; k += 2) { x0 = Math.min(x0, a[k]); x1 = Math.max(x1, a[k]); y0 = Math.min(y0, a[k + 1]); y1 = Math.max(y1, a[k + 1]); } return isFinite(x0) ? {x0, y0, x1, y1, w: x1 - x0, h: y1 - y0} : null; };
+    const pathStr = segs => segs.map(([c, ...a]) => c + a.map(v => +v.toFixed(2)).join(' ')).join('');
+    /** Une forme ramenée dans la boîte 100 × 100, puis transformée : retournée, tournée (degrés), étirée, déplacée et mise à l'échelle */
+    function shapeSegs(sh, {flipH = false, flipV = false, rot = 0, sx = 1, sy = 1, cx = 50, cy = 50, size = 1} = {}) {
+        const k = 100 / (sh.s || 100), r = rot * Math.PI / 180, cos = Math.cos(r), sin = Math.sin(r);
+        return mapPath(absPath(sh.d), (x, y) => { let X = x * k - 50, Y = y * k - 50; if (flipH) X = -X; if (flipV) Y = -Y; X *= sx; Y *= sy; const rx = X * cos - Y * sin, ry = X * sin + Y * cos; return [cx + rx * size, cy + ry * size]; });
+    }
+    /** Recadre un ensemble de segments dans 0..100 (proportions gardées, centré) */
+    function fitSegs(segs) { const b = pathBox(segs); if (!b || !b.w || !b.h) return segs; const k = 100 / Math.max(b.w, b.h), ox = (100 - b.w * k) / 2, oy = (100 - b.h * k) / 2; return mapPath(segs, (x, y) => [ox + (x - b.x0) * k, oy + (y - b.y0) * k]); }
+
+    /** Créer une forme à partir d'une autre : la retourner, la tourner, l'étirer, lui ajouter d'autres formes ou y percer des trous */
+    function openComposer({base = 'heart', onSave} = {}) {
+        const st = {base, flipH: false, flipV: false, rot: 0, sw: 100, sh: 100, pieces: []};
+        const byKey = k => shapeByKey(k, prefs());
+        const usable = () => allShapes(prefs()).filter(sh => sh.d && !sh.mask);
+        const compute = () => {
+            const b0 = byKey(st.base); if (!b0?.d) return {d: '', eo: false};
+            let segs = shapeSegs(b0, {flipH: st.flipH, flipV: st.flipV, rot: st.rot, sx: st.sw / 100, sy: st.sh / 100});
+            let eo = false;
+            for (const pc of st.pieces) { const sh = byKey(pc.k); if (!sh?.d) continue; segs = segs.concat(shapeSegs(sh, {rot: pc.rot, cx: pc.x, cy: pc.y, size: pc.size / 100, flipH: pc.flipH})); if (pc.op === 'hole') eo = true; }
+            return {d: pathStr(fitSegs(segs)), eo};
+        };
+        const picker = (attr, cur) => `<div class="h-cmp-pick" ${attr}><input type="search" placeholder="Chercher une forme (cœur, maison, chien…)" data-cmp-q><div class="h-cmp-res" data-cmp-res>${resHtml('', cur)}</div></div>`;
+        const resHtml = (q, cur) => { const n = q.toLowerCase(); let l = usable().filter(sh => !n || (sh.n + ' ' + sh.tags).toLowerCase().includes(n)).slice(0, n ? 60 : 36); const curSh = cur && byKey(cur); if (curSh && !l.includes(curSh)) l = [curSh, ...l]; return l.map(sh => `<button type="button" class="h-bd-shcell ${sh.k === cur ? 'is-on' : ''}" data-cmp-k="${esc(sh.k)}" title="${esc(sh.n)}">${shapeSvg(sh, 28)}</button>`).join('') || '<p class="muted">Rien trouvé.</p>'; };
+        const pieceRow = (pc, i) => `<div class="h-cmp-piece" data-pc="${i}"><span class="h-cmp-pshape">${shapeSvg(byKey(pc.k), 26)}</span><label>${esc(byKey(pc.k)?.n || '')}<select data-pcf="op"><option value="add" ${pc.op === 'add' ? 'selected' : ''}>➕ ajouter (réunir)</option><option value="hole" ${pc.op === 'hole' ? 'selected' : ''}>⭕ percer (trou)</option></select></label>
+            <label>Gauche → droite<input type="range" min="-20" max="120" value="${pc.x}" data-pcf="x"></label><label>Haut → bas<input type="range" min="-20" max="120" value="${pc.y}" data-pcf="y"></label><label>Taille<input type="range" min="5" max="150" value="${pc.size}" data-pcf="size"></label><label>Rotation<input type="range" min="-180" max="180" value="${pc.rot}" data-pcf="rot"></label>
+            <label class="checkbox-line"><input type="checkbox" data-pcf="flipH" ${pc.flipH ? 'checked' : ''}> <span>miroir</span></label><button type="button" class="h-pet-x" data-pc-del title="Retirer" aria-label="Retirer">×</button></div>`;
+        ext.openDialog({eyebrow: 'FORMES', title: 'Créer une forme à partir d’une autre', wide: true, submitLabel: 'Enregistrer la forme',
+            body: `<div class="h-cmp"><div class="h-cmp-left">
+                <h4>1. La forme de départ</h4>${picker('data-cmp-base', st.base)}
+                <h4>2. La transformer</h4><div class="h-cmp-row"><button type="button" class="h-bt" data-cmp-flip="flipH" title="Retourner (miroir gauche-droite)">⇋ Miroir</button><button type="button" class="h-bt" data-cmp-flip="flipV" title="Retourner (haut-bas)">⇵ Haut-bas</button><button type="button" class="h-bt" data-cmp-rot="-90">↺ 90°</button><button type="button" class="h-bt" data-cmp-rot="90">↻ 90°</button></div>
+                <label>Rotation <input type="range" min="-180" max="180" value="0" data-cmp-n="rot"> <output data-cmp-o="rot">0°</output></label>
+                <label>Largeur <input type="range" min="20" max="300" value="100" data-cmp-n="sw"> <output data-cmp-o="sw">100 %</output></label><label>Hauteur <input type="range" min="20" max="300" value="100" data-cmp-n="sh"> <output data-cmp-o="sh">100 %</output></label>
+                <h4>3. Lui ajouter d’autres formes, ou y percer un trou <small class="muted">(facultatif)</small></h4><div data-cmp-pieces></div>
+                <details class="h-cmp-add"><summary class="button small secondary">＋ Ajouter une forme</summary>${picker('data-cmp-addpick', '')}</details></div>
+                <div class="h-cmp-right"><div class="h-cmp-prev" data-cmp-prev></div><label>Nom de la nouvelle forme<input data-cmp-name maxlength="60" value=""></label><p class="muted">Elle ira dans « Mes formes », et dans l’accès rapide.</p></div></div>`,
+            onOpen: d => {
+                const prev = () => { const r = compute(); d.querySelector('[data-cmp-prev]').innerHTML = `<svg viewBox="-4 -4 108 108" width="220" height="220"><path d="${r.d}" ${r.eo ? 'fill-rule="evenodd"' : ''} fill="#2a7de1" stroke="#1d3557" stroke-width="1"/></svg>`; };
+                const drawPieces = () => { d.querySelector('[data-cmp-pieces]').innerHTML = st.pieces.map(pieceRow).join(''); prev(); };
+                const nameIn = d.querySelector('[data-cmp-name]'); nameIn.value = (byKey(st.base)?.n || 'Forme') + ' (à moi)';
+                d.addEventListener('input', e => {
+                    const q = e.target.closest('[data-cmp-q]'); if (q) { const box = q.closest('.h-cmp-pick'); box.querySelector('[data-cmp-res]').innerHTML = resHtml(q.value.trim(), box.matches('[data-cmp-base]') ? st.base : ''); return; }
+                    const n = e.target.closest('[data-cmp-n]'); if (n) { st[n.dataset.cmpN] = Number(n.value); d.querySelector(`[data-cmp-o="${n.dataset.cmpN}"]`).textContent = n.value + (n.dataset.cmpN === 'rot' ? '°' : ' %'); prev(); return; }
+                    const f = e.target.closest('[data-pcf]'); if (f) { const pc = st.pieces[Number(f.closest('[data-pc]').dataset.pc)]; pc[f.dataset.pcf] = f.type === 'checkbox' ? f.checked : f.tagName === 'SELECT' ? f.value : Number(f.value); prev(); }
+                });
+                d.addEventListener('change', e => { const f = e.target.closest('[data-pcf]'); if (f && (f.type === 'checkbox' || f.tagName === 'SELECT')) { const pc = st.pieces[Number(f.closest('[data-pc]').dataset.pc)]; pc[f.dataset.pcf] = f.type === 'checkbox' ? f.checked : f.value; prev(); } });
+                d.addEventListener('click', e => {
+                    const c = e.target.closest('[data-cmp-k]');
+                    if (c && c.closest('[data-cmp-base]')) { st.base = c.dataset.cmpK; c.closest('[data-cmp-res]').querySelectorAll('.is-on').forEach(x => x.classList.remove('is-on')); c.classList.add('is-on'); if (!nameIn.dataset.touched) nameIn.value = (byKey(st.base)?.n || 'Forme') + ' (à moi)'; prev(); return; }
+                    if (c && c.closest('[data-cmp-addpick]')) { st.pieces.push({k: c.dataset.cmpK, op: 'add', x: 75, y: 25, size: 40, rot: 0, flipH: false}); c.closest('details').open = false; drawPieces(); return; }
+                    const fl = e.target.closest('[data-cmp-flip]'); if (fl) { st[fl.dataset.cmpFlip] = !st[fl.dataset.cmpFlip]; fl.classList.toggle('is-on', st[fl.dataset.cmpFlip]); prev(); return; }
+                    const rt = e.target.closest('[data-cmp-rot]'); if (rt) { st.rot = ((st.rot + Number(rt.dataset.cmpRot) + 540) % 360) - 180; d.querySelector('[data-cmp-n="rot"]').value = st.rot; d.querySelector('[data-cmp-o="rot"]').textContent = st.rot + '°'; prev(); return; }
+                    if (e.target.closest('[data-pc-del]')) { st.pieces.splice(Number(e.target.closest('[data-pc]').dataset.pc), 1); drawPieces(); }
+                });
+                nameIn.addEventListener('input', () => { nameIn.dataset.touched = '1'; });
+                prev();
+            },
+            onSubmit: () => {
+                const r = compute(); if (!r.d) { toast('Choisis une forme de départ.', 'error'); return false; }
+                if (r.d.length > 29000) { toast('Forme trop détaillée : retire des formes ajoutées.', 'error'); return false; }
+                const name = (document.querySelector('dialog[open] [data-cmp-name]')?.value || '').trim().slice(0, 60) || 'Ma forme';
+                const p = JSON.parse(JSON.stringify(prefs())), k = 'my_' + Date.now().toString(36);
+                p.customShapes.push({k, n: name, c: 'mine', d: r.d, eo: r.eo, mask: ''});
+                if (!p.quickShapes.includes(k)) p.quickShapes.push(k);
+                savePrefs(p);
+                toast(`Forme « ${name} » créée : elle est dans « Mes formes ».`);
+                onSave?.(k);
+            }});
+    }
+    Object.assign(ext.boardKit, {parsePath, absPath, pathStr, shapeSegs, fitSegs, openComposer});
 
     /* ═════════ Maintenance → Réglages des tableaux ═════════ */
     let tab = 'colors';
@@ -214,9 +364,9 @@
                     <div class="h-bp-two"><label>Pointe au début, par défaut <select data-bp-hs>${HEADS.map(h => `<option value="${h}" ${p.headStart === h ? 'selected' : ''}>${HEAD_NAMES[h]}</option>`).join('')}</select></label><label>Pointe à la fin, par défaut (outil Flèche) <select data-bp-he>${HEADS.map(h => `<option value="${h}" ${p.headEnd === h ? 'selected' : ''}>${HEAD_NAMES[h]}</option>`).join('')}</select></label></div>
                     ${orderList('heads', HEADS.map(h => [h, HEAD_NAMES[h]]), p.heads, p.headsHidden)}`,
                 shapes: () => `<p class="muted">Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes.</p>
-                    <section class="h-bp-sec"><h4>Accès rapide</h4><div class="h-bp-quick" data-bp-quick>${p.quickShapes.map(k => shapeByKey(k, p)).filter(Boolean).map(s => `<span class="h-bp-shape is-quick" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<button type="button" class="h-bp-x" data-bp-unquick title="Retirer">×</button></span>`).join('')}</div><small class="muted">Clique ⚡ sur une forme ci-dessous pour l’ajouter ici.</small></section>
+                    <section class="h-bp-sec"><h4>Accès rapide <small class="muted">${p.quickShapes.length}</small></h4><div class="h-bp-quick" data-bp-quick>${p.quickShapes.map(k => shapeByKey(k, p)).filter(Boolean).map(s => `<span class="h-bp-shape is-quick" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<button type="button" class="h-bp-x" data-bp-unquick title="Retirer">×</button><span class="h-bp-qmv"><button type="button" data-bp-qleft title="Avant">‹</button><button type="button" data-bp-qright title="Après">›</button></span></span>`).join('')}</div><small class="muted">Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle.</small></section>
                     <section class="h-bp-sec"><h4>Catégories</h4>${orderList('cats', CATS.map(c => [c[0], c[1], c[2] + ' ']), p.shapeCats, p.shapesHidden.filter(k => k.startsWith('cat:')).map(k => k.slice(4)))}</section>
-                    ${p.shapeCats.map(c => { const cat = CATS.find(x => x[0] === c); const l = shapesOf(c, p); return `<section class="h-bp-sec"><h4>${cat[2]} ${esc(cat[1])} <small class="muted">${l.length}</small></h4><div class="h-bp-shapes" data-bp-shapes="${c}">${l.map(s => `<span class="h-bp-shape ${p.shapesHidden.includes(s.k) ? 'is-off' : ''}" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<small>${esc(s.n)}</small><span class="h-bp-shtools"><button type="button" data-bp-shtoggle title="Montrer / cacher">${p.shapesHidden.includes(s.k) ? '🙈' : '👁'}</button><button type="button" data-bp-shquick title="Accès rapide">⚡</button>${s.c === 'mine' ? '<button type="button" data-bp-shdel title="Supprimer cette forme">🗑</button>' : ''}</span></span>`).join('') || '<p class="muted">Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ».</p>'}</div></section>`; }).join('')}`,
+                    ${p.shapeCats.map(c => { const cat = CATS.find(x => x[0] === c); const l = shapesOf(c, p); return `<section class="h-bp-sec"><h4>${cat[2]} ${esc(cat[1])} <small class="muted">${l.length}</small></h4><div class="h-bp-shapes" data-bp-shapes="${c}">${l.map(s => `<span class="h-bp-shape ${p.shapesHidden.includes(s.k) ? 'is-off' : ''}" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<small>${esc(s.n)}</small><span class="h-bp-shtools"><button type="button" data-bp-shtoggle title="Montrer / cacher">${p.shapesHidden.includes(s.k) ? '🙈' : '👁'}</button><button type="button" data-bp-shquick title="Accès rapide">⚡</button>${s.d && !s.mask ? '<button type="button" data-bp-shfrom title="Créer une forme à partir de celle-ci">✏️</button>' : ''}${s.c === 'mine' ? '<button type="button" data-bp-shdel title="Supprimer cette forme">🗑</button>' : ''}</span></span>`).join('') || '<p class="muted">Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ».</p>'}</div></section>`; }).join('')}`,
                 fonts: () => `<p class="muted">Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Polices de l’ordinateur » lit celles installées (Chrome, Edge, l’app sur Mac ; le navigateur te le demande la première fois).</p>
                     <div class="h-bp-fontbar"><button type="button" class="button small secondary" data-bp-local>🖥 Voir les polices de l’ordinateur</button><button type="button" class="button small secondary" data-bp-flnew>+ Nouvelle liste</button></div><div class="h-bp-localfonts" data-bp-localbox hidden></div>
                     ${p.fontLists.map((l, i) => `<section class="h-bp-sec h-bp-fontlist" data-fl="${i}"><div class="h-bp-flhead"><input value="${esc(l.name)}" data-bp-flname maxlength="60"><button type="button" class="button small secondary danger" data-bp-fldel>Supprimer la liste</button></div>
@@ -317,6 +467,8 @@
             const sh = e.target.closest('.h-bp-shape');
             if (sh && e.target.closest('[data-bp-shtoggle]')) { collect(); const k = sh.dataset.k; p.shapesHidden = p.shapesHidden.includes(k) ? p.shapesHidden.filter(x => x !== k) : [...p.shapesHidden, k]; draw(); return; }
             if (sh && e.target.closest('[data-bp-shquick]')) { collect(); if (!p.quickShapes.includes(sh.dataset.k)) p.quickShapes.push(sh.dataset.k); draw(); return; }
+            if (sh && e.target.closest('[data-bp-qleft], [data-bp-qright]')) { const sib = e.target.closest('[data-bp-qleft]') ? sh.previousElementSibling : sh.nextElementSibling; if (sib) sh.parentNode.insertBefore(...(e.target.closest('[data-bp-qleft]') ? [sh, sib] : [sib, sh])); return; }
+            if (sh && e.target.closest('[data-bp-shfrom]')) { collect(); openComposer({base: sh.dataset.k, onSave: k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); }}); return; }
             if (sh && e.target.closest('[data-bp-unquick]')) { collect(); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
             if (sh && e.target.closest('[data-bp-shdel]')) { if (!confirm('Supprimer cette forme ? (les tableaux qui l’utilisent la gardent)')) return; collect(); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
             // polices

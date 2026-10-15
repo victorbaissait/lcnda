@@ -101,7 +101,7 @@ function board_clean_item(array $it): ?array
     foreach (['underline', 'strike', 'eo'] as $k) { if (isset($it[$k])) { $out[$k] = !empty($it[$k]); } }
     if (isset($out['list']) && !in_array($out['list'], ['', 'bullet', 'num', 'roman', 'alpha', 'ALPHA', 'dash', 'check'], true)) { $out['list'] = ''; }
     // forme à soi : un chemin SVG (boîte 100 × 100) ou une image servant de masque
-    if (isset($it['svgpath']) && preg_match('/^[MLHVCSQTAZmlhvcsqtaz0-9.,\s-]{1,30000}$/', (string) $it['svgpath'])) { $out['svgpath'] = (string) $it['svgpath']; }
+    if (isset($it['svgpath']) && preg_match('/^[MLHVCSQTAZmlhvcsqtazEe0-9.,\s+-]{1,30000}$/', (string) $it['svgpath'])) { $out['svgpath'] = (string) $it['svgpath']; }
     if (isset($it['mask']) && is_string($it['mask']) && strlen($it['mask']) <= 400000 && preg_match('~^data:image/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$~', $it['mask'])) { $out['mask'] = $it['mask']; }
     foreach (['bold', 'italic', 'arrowStart', 'arrowEnd', 'curved', 'preview', 'collapsed'] as $k) { if (isset($it[$k])) { $out[$k] = !empty($it[$k]); } }
     foreach (['media_id', 'board_id', 'recueil_id', 'label_id', 'person_id'] as $k) { if (isset($it[$k])) { $out[$k] = max(0, (int) $it[$k]); } }

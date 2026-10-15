@@ -220,7 +220,7 @@
         if (s === 'rect' && r) return `<rect x="0" y="0" width="${w}" height="${h}" rx="${r}"/>`;
         if (s === 'round') return `<rect x="0" y="0" width="${w}" height="${h}" rx="${r ?? Math.min(w, h) * .18}"/>`;
         const lib = it.svgpath ? {d: it.svgpath, eo: it.eo} : (['rect', 'ellipse', 'triangle', 'diamond', 'hexagon', 'star', 'bubble', 'cloud'].includes(s) ? null : KIT().shapeByKey?.(s));
-        if (lib?.d) return `<path d="${lib.d}" transform="scale(${w / 100} ${h / 100})" ${lib.eo ? 'fill-rule="evenodd"' : ''} vector-effect="non-scaling-stroke"/>`;
+        if (lib?.d) { const bx = lib.s || 100; return `<path d="${lib.d}" transform="scale(${w / bx} ${h / bx})" ${lib.eo ? 'fill-rule="evenodd"' : ''} vector-effect="non-scaling-stroke"/>`; }
         switch (s) {
             case 'ellipse': return `<ellipse cx="${w / 2}" cy="${h / 2}" rx="${w / 2}" ry="${h / 2}"/>`;
             case 'triangle': return `<path d="${pts([[w / 2, 0], [w, h], [0, h]])}"/>`;
@@ -482,9 +482,9 @@
                     if (it.type === 'shape' && it.shape === 'ellipse') { x.beginPath(); x.ellipse(it.x + it.w / 2, it.y + it.h / 2, it.w / 2, it.h / 2, 0, 0, Math.PI * 2); x.fill(); x.stroke(); }
                     else if (it.type === 'shape' && it.mask) { const im = await loadImg(it.mask); if (im) { const c2 = document.createElement('canvas'); c2.width = Math.max(1, Math.round(it.w)); c2.height = Math.max(1, Math.round(it.h)); const x2 = c2.getContext('2d'); x2.drawImage(im, 0, 0, c2.width, c2.height); x2.globalCompositeOperation = 'source-in'; x2.fillStyle = it.fill || '#bde0fe'; x2.fillRect(0, 0, c2.width, c2.height); x.drawImage(c2, it.x, it.y); } }
                     else if (it.type === 'shape' && (it.svgpath || (KIT().shapeByKey?.(it.shape)?.d && !['rect', 'round'].includes(it.shape)))) {
-                        const d0 = it.svgpath || KIT().shapeByKey(it.shape).d, eo = it.svgpath ? it.eo : KIT().shapeByKey(it.shape).eo;
-                        x.save(); x.translate(it.x, it.y); x.scale(it.w / 100, it.h / 100); const p2 = new Path2D(d0); x.fill(p2, eo ? 'evenodd' : 'nonzero'); x.restore();
-                        x.save(); x.translate(it.x, it.y); x.scale(it.w / 100, it.h / 100); x.lineWidth = (it.sw ?? 2) * 100 / Math.max(1, Math.min(it.w, it.h)); if ((it.sw ?? 2) > 0 && it.stroke !== 'transparent') x.stroke(p2); x.restore();
+                        const d0 = it.svgpath || KIT().shapeByKey(it.shape).d, eo = it.svgpath ? it.eo : KIT().shapeByKey(it.shape).eo, bx = it.svgpath ? 100 : (KIT().shapeByKey(it.shape).s || 100);
+                        x.save(); x.translate(it.x, it.y); x.scale(it.w / bx, it.h / bx); const p2 = new Path2D(d0); x.fill(p2, eo ? 'evenodd' : 'nonzero'); x.restore();
+                        x.save(); x.translate(it.x, it.y); x.scale(it.w / bx, it.h / bx); x.lineWidth = (it.sw ?? 2) * bx / Math.max(1, Math.min(it.w, it.h)); if ((it.sw ?? 2) > 0 && it.stroke !== 'transparent') x.stroke(p2); x.restore();
                     }
                     else if (it.radius || (it.type === 'shape' && it.shape === 'round')) { const r0 = Math.min(it.radius ?? Math.min(it.w, it.h) * .18, it.w / 2, it.h / 2); x.beginPath(); x.roundRect(it.x, it.y, it.w, it.h, r0); x.fill(); x.stroke(); }
                     else { x.fillRect(it.x, it.y, it.w, it.h); x.strokeRect(it.x, it.y, it.w, it.h); }
@@ -961,7 +961,7 @@
                     : any('media', 'webimage') ? `<label>Contour</label>${swatches('stroke', pal('stroke'))}${numField('bw', 'Épaisseur du contour', 0, Math.min(sMax, 60), 0.5, one?.bw || 0, 'px', 0, 200)}` : '',
                 color: () => any('text', 'note', 'shape', 'line', 'draw', 'tag', 'table') ? `<label>${t === 'line' || t === 'draw' ? 'Couleur' : 'Texte'}</label>${swatches('color', t === 'draw' ? pal('pen') : pal('text'))}` : '',
                 sw: () => any('shape', 'line', 'draw') ? `${numField('sw', 'Épaisseur', sMin, sMax, 0.5, one?.sw ?? 2, 'px', 0, 500)}<label>Trait <select data-bd-sel="dash">${LINE_DASHES.map(([k, lb]) => `<option value="${k}" ${(one?.dash || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : '',
-                shape: () => t === 'shape' ? `<label>Forme</label><div class="h-bd-row h-bd-shrow">${quickShapes().map(sh => `<button type="button" class="h-bt ${one.shape === sh.k ? 'is-on' : ''}" data-bd-setshape="${esc(sh.k)}" title="${esc(sh.n)}">${KIT().shapeSvg ? KIT().shapeSvg(sh, 18) : esc(sh.n)}</button>`).join('')}<button type="button" class="h-bt" data-bd-shapelib title="Toutes les formes">⋯</button></div>` : '',
+                shape: () => t === 'shape' ? `<label>Forme</label><div class="h-bd-row h-bd-shrow">${quickShapes().map(sh => `<button type="button" class="h-bt ${one.shape === sh.k ? 'is-on' : ''}" data-bd-setshape="${esc(sh.k)}" title="${esc(sh.n)}">${KIT().shapeSvg ? KIT().shapeSvg(sh, 18) : esc(sh.n)}</button>`).join('')}<button type="button" class="h-bt" data-bd-shapelib title="Toutes les formes">⋯</button>${!one.mask ? '<button type="button" class="h-bt" data-bd-shapefrom title="Créer une forme à partir de celle-ci">✏️</button>' : ''}</div>` : '',
                 radius: () => (one && ((t === 'shape' && ['rect', 'round'].includes(one.shape)) || ['note', 'media', 'webimage', 'table', 'tag', 'folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget'].includes(t))) ? numField('radius', 'Arrondi des coins', 0, 120, 1, one.radius ?? (t === 'shape' && one.shape === 'round' ? Math.round(Math.min(one.w, one.h) * .18) : 0), 'px', 0, 400) : '',
                 text: () => any(...textTypes) ? `${numField('fs', 'Taille du texte', tMin, tMax, 1, one?.fs || 18, 'px', 2, 500)}<div class="h-bd-row">${[['bold', '<b>G</b>', 'Gras'], ['italic', '<i>I</i>', 'Italique'], ['underline', '<u>S</u>', 'Souligné'], ['strike', '<s>B</s>', 'Barré']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one?.[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}<span class="h-bt-sep"></span>${[['left', '⇤', 'Aligner à gauche'], ['center', '↔', 'Centrer'], ['right', '⇥', 'Aligner à droite'], ['justify', '☰', 'Justifier']].map(([a, h, lb]) => `<button type="button" class="h-bt ${(one?.align || (t === 'shape' ? 'center' : 'left')) === a ? 'is-on' : ''}" data-bd-set="align" data-v="${a}" title="${lb}">${h}</button>`).join('')}</div>` : '',
                 list: () => any('text', 'note', 'shape') ? `<label>Puces et numéros <select data-bd-sel="list">${[['', 'Aucune'], ['bullet', '• Puce'], ['num', '1. Nombres'], ['roman', 'I. Chiffres romains'], ['alpha', 'a. Lettres'], ['ALPHA', 'A. Lettres capitales'], ['dash', '– Tiret'], ['check', '☐ Cases à cocher']].map(([k, lb]) => `<option value="${k}" ${(one?.list || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : '',
@@ -1004,6 +1004,7 @@
             const ss = e.target.closest('[data-bd-setshape]'); if (ss) { applyShape(ss.dataset.bdSetshape); return; }
             if (e.target.closest('[data-bd-shapelib]')) { shapeLibrary(e.target.closest('[data-bd-shapelib]'), k => applyShape(k)); return; }
             if (e.target.closest('[data-bd-localfonts]')) { loadLocalFonts(); return; }
+            if (e.target.closest('[data-bd-shapefrom]')) { const one = selItems()[0]; if (!one) return; KIT().openComposer?.({base: one.shape, onSave: k => applyShape(k)}); return; }
             const tb = e.target.closest('[data-bd-tbl]'); if (tb) { const it = selItems()[0]; if (it?.type !== 'table') return; if (tb.dataset.bdTbl === 'csv') return tableCsv(it); tableOp(it, tb.dataset.bdTbl); return; }
             const cf = e.target.closest('[data-bd-cellfill]'); if (cf && cellSel && !ro()) { const it = byId(cellSel.id); if (!it) return; it.cfill = {...(it.cfill || {})}; const k = cellSel.r + ':' + cellSel.c; setCellFill(it, cf.dataset.bdCellfill); return; }
             const a = e.target.closest('[data-bd-act]'); if (a) { if (a.dataset.bdAct === 'open') return openItem(selItems()[0]); actions[a.dataset.bdAct]?.(); }
@@ -1057,7 +1058,7 @@
                 if (q) { const n = q.toLowerCase(); const l = K.allShapes().filter(sh => !(p.shapesHidden || []).includes(sh.k) && (sh.n + ' ' + sh.tags).toLowerCase().includes(n)); return `<div class="h-bd-shgrid">${grid(l)}</div>`; }
                 return cats.filter(c => cur === 'all' || c[0] === cur).map(c => `<h5>${c[2]} ${esc(c[1])}</h5><div class="h-bd-shgrid">${grid(visible(c[0]))}${c[0] === 'mine' ? '<button type="button" class="h-bd-shcell h-bd-shnew" data-shnew title="Créer une forme">＋</button>' : ''}</div>`).join('');
             };
-            m.innerHTML = `<div class="h-bd-shhead"><input type="search" placeholder="Rechercher une forme" data-shq><button type="button" class="button small" data-shnew>＋ Créer une forme</button></div>
+            m.innerHTML = `<div class="h-bd-shhead"><input type="search" placeholder="Rechercher une forme" data-shq><button type="button" class="button small" data-shnew>＋ Créer une forme</button><button type="button" class="button small secondary" data-shfrom title="Créer une forme à partir d’une autre (retourner, tourner, étirer, ajouter, percer)">🧩 À partir d’une forme</button></div>
                 <div class="h-bd-shcats"><button type="button" class="is-on" data-shc="all">Toutes</button>${cats.map(c => `<button type="button" data-shc="${c[0]}">${c[2]} ${esc(c[1])}</button>`).join('')}</div><div class="h-bd-shbody">${body('')}</div>`;
             (anchor.closest('.h-bd-menuwrap, .h-bd-isec, .h-bt-opts') || root).appendChild(m);
             const bodyEl = m.querySelector('.h-bd-shbody');
@@ -1065,6 +1066,7 @@
             m.addEventListener('click', e => {
                 const c = e.target.closest('[data-shc]'); if (c) { cur = c.dataset.shc; m.querySelectorAll('[data-shc]').forEach(x => x.classList.toggle('is-on', x === c)); m.querySelector('[data-shq]').value = ''; bodyEl.innerHTML = body(''); return; }
                 if (e.target.closest('[data-shnew]')) { m.remove(); shapeMaker(onPick); return; }
+                if (e.target.closest('[data-shfrom]')) { m.remove(); KIT().openComposer?.({base: shapeKind, onSave: onPick}); return; }
                 const sh = e.target.closest('[data-shk]'); if (sh) { m.remove(); onPick(sh.dataset.shk); }
             });
             setTimeout(() => { m.querySelector('[data-shq]').focus(); document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target) && !anchor.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true); }, 0);
@@ -1078,7 +1080,7 @@
             const tracePath = () => pts.length < 3 ? '' : (curves ? smooth([...pts, pts[0]]) : 'M' + pts.map(q => q.join(' ')).join(' L')) + ' Z';
             const preview = () => { const d = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : ''; return mode === 'image' ? (imgMask ? `<span class="h-bk-shmask" style="width:200px;height:200px;-webkit-mask-image:url(${imgMask});mask-image:url(${imgMask})"></span>` : '<p class="muted">Choisis une image.</p>') : `<svg viewBox="0 0 100 100" width="200" height="200"><path d="${d}" fill="#2a7de1" fill-opacity=".8" stroke="#1d3557" stroke-width="1"/></svg>`; };
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Créer une forme', wide: true, submitLabel: 'Enregistrer la forme',
-                body: `<div class="h-bd-maker"><div class="h-bd-makertabs">${[['trace', '✏️ En traçant'], ['draw', '✍︎ À partir de mon dessin'], ['image', '🖼 À partir d’une image']].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-on' : ''}" data-mk="${k}">${l}</button>`).join('')}</div>
+                body: `<div class="h-bd-maker"><div class="h-bd-makertabs">${[['trace', '✏️ En traçant'], ['draw', '✍︎ À partir de mon dessin'], ['image', '🖼 À partir d’une image']].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-on' : ''}" data-mk="${k}">${l}</button>`).join('')}<button type="button" data-mkfrom>🧩 À partir d’une forme</button></div>
                     <div class="h-bd-makerbody"><div class="h-bd-makerpane" data-mkpane="trace"><p class="muted">Clique pour poser les points de la forme ; elle se ferme toute seule.</p><svg class="h-bd-tracer" viewBox="0 0 100 100" data-tracer><rect width="100" height="100" fill="#f6f8fa"/><path data-trp fill="#2a7de1" fill-opacity=".35" stroke="#1d3557" stroke-width=".8"/><g data-trdots></g></svg>
                         <div class="h-bd-row"><label class="checkbox-line"><input type="checkbox" data-mkcurves> <span>arrondir en courbes</span></label><button type="button" class="h-bt" data-mkundo>↶ dernier point</button><button type="button" class="h-bt" data-mkclear>Effacer</button></div></div>
                     <div class="h-bd-makerpane" data-mkpane="draw" hidden><p class="muted">${draws.length ? `${draws.length} dessin${draws.length > 1 ? 's' : ''} choisi${draws.length > 1 ? 's' : ''} sur le tableau : chaque trait devient une partie remplie de la forme.` : 'Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici.'}</p></div>
@@ -1087,7 +1089,7 @@
                 onOpen: d => {
                     const prev = () => { d.querySelector('[data-mkprev]').innerHTML = preview(); const tp = d.querySelector('[data-trp]'); tp.setAttribute('d', tracePath() || (pts.length ? 'M' + pts.map(q => q.join(' ')).join(' L') : '')); d.querySelector('[data-trdots]').innerHTML = pts.map(q => `<circle cx="${q[0]}" cy="${q[1]}" r="1.4" fill="#d0021b"/>`).join(''); };
                     const show = () => { d.querySelectorAll('[data-mk]').forEach(x => x.classList.toggle('is-on', x.dataset.mk === mode)); d.querySelectorAll('[data-mkpane]').forEach(x => { x.hidden = x.dataset.mkpane !== mode; }); prev(); };
-                    d.querySelector('.h-bd-makertabs').addEventListener('click', e => { const k = e.target.closest('[data-mk]'); if (k) { mode = k.dataset.mk; show(); } });
+                    d.querySelector('.h-bd-makertabs').addEventListener('click', e => { if (e.target.closest('[data-mkfrom]')) { d.close(); KIT().openComposer?.({base: shapeKind, onSave: onDone}); return; } const k = e.target.closest('[data-mk]'); if (k) { mode = k.dataset.mk; show(); } });
                     const tr = d.querySelector('[data-tracer]');
                     tr.addEventListener('click', e => { const r = tr.getBoundingClientRect(); pts.push([+((e.clientX - r.left) / r.width * 100).toFixed(1), +((e.clientY - r.top) / r.height * 100).toFixed(1)]); prev(); });
                     d.querySelector('[data-mkcurves]').addEventListener('change', e => { curves = e.target.checked; prev(); });
