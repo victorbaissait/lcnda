@@ -426,7 +426,7 @@ function pets_for_person(PDO $pdo, int $personId): array
     foreach ($rows as $r) {
         $d = json_decode((string) $r['data_json'], true) ?: [];
         $own = array_values(array_filter($d['owners'] ?? [], static fn($o) => (int) ($o['person_id'] ?? 0) === $personId))[0] ?? [];
-        $out[] = ['id' => (int) $r['id'], 'title' => pet_title($d), 'species' => PET_SPECIES[$d['species'] ?? ''] ?? '', 'breed' => $d['breed'] ?? '', 'sex' => $d['sex'] ?? '', 'birth_date' => $d['birth_date'] ?? '',
+        $out[] = ['id' => (int) $r['id'], 'title' => pet_title($d), 'species' => PET_SPECIES[$d['species'] ?? ''] ?? '', 'species_key' => $d['species'] ?? '', 'breed' => $d['breed'] ?? '', 'sex' => $d['sex'] ?? '', 'birth_date' => $d['birth_date'] ?? '',
             'death_date' => $d['death_date'] ?? '', 'role' => (string) $r['role'], 'from' => $own['from'] ?? '', 'to' => $own['to'] ?? '', 'photo' => $media[(int) $r['id']][0] ?? null];
     }
     return $out;
