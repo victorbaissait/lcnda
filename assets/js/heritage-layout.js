@@ -594,13 +594,24 @@
                 <span class="ly-hbtns"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span><button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
             <div class="ly-main"><div class="ly-tools">${TOOLS.map(([k, ic, l]) => `<button type="button" data-ly-tool="${k}" title="${esc(l)}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi (clic : lequel le nuancier change)"><button type="button" data-ly-target="fill" class="ly-fs-fill"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke"></button></div></div>
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
-                <aside class="ly-panels"><div class="ly-ptabs">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
+                <aside class="ly-panels"><span class="ly-resize" data-ly-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span><div class="ly-ptabs">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
             <div class="ly-status"><button type="button" data-ly-cmd="first" title="Première page">⏮</button><button type="button" data-ly-cmd="prev" title="Page précédente">‹</button><span>Page <input type="number" min="1" data-ly-goto> / <b data-ly-total></b></span><button type="button" data-ly-cmd="next" title="Page suivante">›</button><button type="button" data-ly-cmd="last" title="Dernière page">⏭</button>
                 <select data-ly-zoom aria-label="Zoom">${[25, 33, 50, 66, 75, 100, 125, 150, 200, 300, 400].map(z => `<option value="${z / 100}">${z} %</option>`).join('')}<option value="fit">Page entière</option></select><span class="ly-pos" data-ly-pos></span><span class="ly-msg" data-ly-msg></span></div>
             <style data-ly-css></style>`;
         document.body.appendChild(dl);
         const $ = q => dl.querySelector(q), board = $('[data-ly-board]'), canvas = $('[data-ly-canvas]'), pbody = $('[data-ly-pbody]');
         bindFontPick(pbody);
+        // le panneau de droite s'élargit ou se rétrécit en tirant sa bordure (gardé pour la prochaine fois)
+        const PW_KEY = 'genealogie-layout-panel-w', main = $('.ly-main');
+        const setPanelW = w => { w = Math.round(clamp(w, 260, Math.max(320, window.innerWidth - 420))); main.style.gridTemplateColumns = `46px minmax(0,1fr) ${w}px`; return w; };
+        try { const w0 = Number(localStorage.getItem(PW_KEY)); if (w0) setPanelW(w0); } catch (_) {}
+        $('[data-ly-resize]').addEventListener('pointerdown', e => {
+            e.preventDefault(); const x0 = e.clientX, w0 = $('.ly-panels').getBoundingClientRect().width; let w = w0;
+            const mv = ev => { w = setPanelW(w0 + (x0 - ev.clientX)); };
+            const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); try { localStorage.setItem(PW_KEY, String(w)); } catch (_) {} };
+            addEventListener('pointermove', mv); addEventListener('pointerup', up);
+        });
+        $('[data-ly-resize]').addEventListener('dblclick', () => { main.style.gridTemplateColumns = ''; try { localStorage.removeItem(PW_KEY); } catch (_) {} });
         function menu(label, items) { return `<details class="ly-menu"><summary>${label}</summary><div class="ly-menu-list">${items.map(([k, l, sc]) => k === '-' ? '<hr>' : `<button type="button" data-ly-cmd="${k}"><span>${l}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`; }
         const msg = t => { $('[data-ly-msg]').textContent = t || ''; };
         const setDirty = (v = true) => { dirty = v; $('[data-ly-state]').textContent = dirty ? '● modifié' : (docId ? '✓ enregistré' : 'pas encore enregistré'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };

@@ -104,3 +104,8 @@
 .ly-ptabs{grid-template-columns:repeat(8,1fr)}
 .ly-hbtns{display:flex;gap:2px;margin-left:8px}.ly-hbtn{width:30px;height:28px;border:1px solid var(--ly-line);border-radius:5px;background:var(--ly-panel);color:inherit;font-size:15px;cursor:pointer}.ly-hbtn:disabled{opacity:.35;cursor:default}
 .ly-history{list-style:none;margin:0;padding:0;display:grid;gap:2px}.ly-history button{width:100%;display:flex;justify-content:space-between;gap:8px;text-align:left;border:1px solid transparent;background:none;color:inherit;padding:5px 8px;border-radius:4px;font-size:12.5px;cursor:pointer}.ly-history button:hover{border-color:var(--ly-line)}.ly-history .is-current button{background:var(--ly-acc);color:#fff}.ly-history .is-future button{opacity:.45}.ly-history small{opacity:.7;font-variant-numeric:tabular-nums}
+.ly-panels{position:relative}
+.ly-resize{position:absolute;left:-4px;top:0;bottom:0;width:8px;cursor:ew-resize;z-index:30}
+.ly-resize:hover,.ly-resize:active{background:linear-gradient(90deg,transparent 3px,var(--ly-acc) 3px,var(--ly-acc) 5px,transparent 5px)}
+.ly-ptabs{grid-template-columns:repeat(auto-fit,minmax(48px,1fr))}
+.ly-ptabs button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
