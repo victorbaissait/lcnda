@@ -108,6 +108,16 @@ $out['bd_snap'] = [count(board_detail($pdo, $bd['id'])['data']['items']), count(
 delete_board($pdo, ['id' => $cp['id']]);
 $out['bd_del'] = delete_board($pdo, ['id' => $bd['id']])['deleted'];
 $out['bd_snapleft'] = (int) $pdo->query('SELECT count(*) FROM board_snapshots')->fetchColumn();
+// nouveaux réglages : texte, listes, formes à soi, fusion, police et alignement sûrs, fond à soi
+$nb = save_board($pdo, ['title' => 'Formes', 'data' => ['bg' => 'custom', 'bgColor' => '#eef6ee', 'bgPattern' => 'grid', 'items' => [
+    ['id' => 'x', 'type' => 'text', 'text' => 'a', 'underline' => 1, 'strike' => 1, 'list' => 'roman', 'font' => 'x"><img src=x>', 'align' => 'center;color:red', 'radius' => 12],
+    ['id' => 'y', 'type' => 'shape', 'shape' => 'my_1', 'svgpath' => 'M0 0L10 10Z', 'mask' => 'javascript:alert(1)', 'headEnd' => '<b>'],
+    ['id' => 'z', 'type' => 'shape', 'shape' => 'my_2', 'svgpath' => 'M0 0"/><script>', 'list' => 'evil'],
+    ['id' => 't', 'type' => 'table', 'cells' => [['a', 'b'], ['c', 'd']], 'merges' => [['r' => 0, 'c' => 0, 'rs' => 1, 'cs' => 2], ['r' => 1, 'c' => 1, 'rs' => 1, 'cs' => 1]]],
+    ['id' => 'm', 'type' => 'media', 'media_id' => 3, 'bw' => 900, 'stroke' => '#ff0000', 'hard' => 50]]]]);
+$d2 = board_detail($pdo, $nb['id'])['data']; $it = array_column($d2['items'], null, 'id');
+$out['bd_new'] = [$d2['bgColor'], $d2['bgPattern'], $it['x']['underline'], $it['x']['list'], $it['x']['font'], $it['x']['align'], $it['y']['svgpath'], isset($it['y']['mask']), $it['y']['headEnd'], isset($it['z']['svgpath']), $it['z']['list'], count($it['t']['merges']), $it['m']['bw'], $it['m']['hard']];
+delete_board($pdo, ['id' => $nb['id']]);
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -181,6 +191,7 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.deepEqual(out.bd_linked, [['Mur', ['piste 2']]]);
     assert.deepEqual(out.bd_snap, [1, 2, '', 0, 'Mur (copie)']);
     assert.equal(out.bd_snapleft, 0);
+    assert.deepEqual(out.bd_new, ['#eef6ee', 'grid', true, 'roman', 'ximg srcx', 'left', 'M0 0L10 10Z', false, 'triangle', false, '', 1, 200, 50]);
 });
 
 /* ── Côté navigateur : nettoyage des statistiques et des onglets (heritage-widgets.js, heritage-tabs.js) ── */

@@ -317,6 +317,7 @@ try {
         'boards' => json_response(['boards' => boards_list($pdo, $_GET)]),
         'media_brief' => json_response(media_brief($pdo, (string) ($_GET['ids'] ?? ''))),
         'board' => json_response(board_detail($pdo, safe_int($_GET['id'] ?? 0))),
+        'board_place_key' => json_response((function () use ($pdo) { $s = $pdo->prepare('SELECT id, name, county, admin4_code FROM places WHERE id=?'); $s->execute([safe_int($_GET['id'] ?? 0)]); $r = $s->fetch(); return ['key' => $r && function_exists('village_key') ? village_key($r) : '']; })()),
         'board_snapshots' => json_response(['snapshots' => board_snapshots($pdo, safe_int($_GET['board_id'] ?? 0))]),
         'board_snapshot' => json_response(board_snapshot_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'boards_linked' => json_response(['boards' => boards_linked($pdo, (string) ($_GET['kind'] ?? ''), safe_int($_GET['id'] ?? 0))]),
@@ -543,6 +544,7 @@ function site_defaults_allowed_keys(): array
         'genealogie-battue-level-color-presets',
         'genealogie-person-badge-colors',
         'genealogie-person-badge-color-presets',
+        'genealogie-board-prefs',
     ];
 }
 

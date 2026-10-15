@@ -30,6 +30,28 @@
         ['calligraphy', 'Calame', '🪶', 10], ['brushstroke', 'Pinceau', '🖌', 12], ['watercolor', 'Aquarelle', '💧', 16], ['fill', 'Remplissage', '🪣', 3], ['highlight', 'Surligneur', '🟨', 18], ['chalk', 'Craie', '🧱', 10],
         ['neon', 'Néon', '💡', 5], ['spray', 'Aérographe', '💨', 10], ['dotted', 'Pointillé', '┈', 4]];
     const WIDTHS = [1, 3, 6, 12, 24];
+    /** Une police sûre pour le style (lettres, chiffres, espaces, virgules, tirets, apostrophes) */
+    const cssFont = f => { const v = String(f || '').replace(/[^\w\s,'\-À-ÿ.]/g, '').trim(); return v ? (v.includes(',') || /^(serif|sans-serif|monospace|cursive|system-ui|inherit)$/.test(v) ? v : `'${v.replace(/'/g, '')}', sans-serif`) : 'inherit'; };
+    /** Un PDF d'une page avec une image JPEG (taille A4 ou A4 paysage, image ajustée) */
+    function jpegPdf(dataUrl, w, h, title) {
+        const bin = atob(dataUrl.split(',')[1]), land = w > h, PW = land ? 842 : 595, PH = land ? 595 : 842, m = 28, k = Math.min((PW - 2 * m) / w, (PH - 2 * m) / h), dw = w * k, dh = h * k, dx = (PW - dw) / 2, dy = (PH - dh) / 2;
+        const enc = new TextEncoder(), parts = [], offs = [];
+        let len = 0; const push = x => { const u = typeof x === 'string' ? enc.encode(x) : x; parts.push(u); len += u.length; };
+        const img = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) img[i] = bin.charCodeAt(i);
+        const content = `q ${dw.toFixed(2)} 0 0 ${dh.toFixed(2)} ${dx.toFixed(2)} ${dy.toFixed(2)} cm /Im0 Do Q`;
+        const safeTitle = String(title || 'Tableau').replace(/[^\x20-\x7e]/g, '_').replace(/[()\\]/g, '');
+        push('%PDF-1.4\n%\xe2\xe3\xcf\xd3\n');
+        const obj = (n, body) => { offs[n] = len; push(`${n} 0 obj\n`); body(); push('\nendobj\n'); };
+        obj(1, () => push('<< /Type /Catalog /Pages 2 0 R >>'));
+        obj(2, () => push('<< /Type /Pages /Kids [3 0 R] /Count 1 >>'));
+        obj(3, () => push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PW} ${PH}] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>`));
+        obj(4, () => { push(`<< /Type /XObject /Subtype /Image /Width ${w} /Height ${h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${img.length} >>\nstream\n`); push(img); push('\nendstream'); });
+        obj(5, () => push(`<< /Length ${content.length} >>\nstream\n${content}\nendstream`));
+        obj(6, () => push(`<< /Title (${safeTitle}) /Producer (LCNDA) >>`));
+        const xref = len;
+        push(`xref\n0 7\n0000000000 65535 f \n${[1, 2, 3, 4, 5, 6].map(n => String(offs[n]).padStart(10, '0') + ' 00000 n \n').join('')}trailer\n<< /Size 7 /Root 1 0 R /Info 6 0 R >>\nstartxref\n${xref}\n%%EOF`);
+        return new Blob(parts, {type: 'application/pdf'});
+    }
     /* ═════════ Tableur : cellules et formules (=SOMME(B2:B5), =A1*2…) ═════════ */
     const colName = c => { let s = ''; c++; while (c > 0) { const m = (c - 1) % 26; s = String.fromCharCode(65 + m) + s; c = Math.floor((c - 1) / 26); } return s; };
     const cellRef = s => { const m = /^([A-Z]{1,2})(\d{1,3})$/.exec(String(s).toUpperCase()); if (!m) return null; let c = 0; for (const ch of m[1]) c = c * 26 + ch.charCodeAt(0) - 64; return [Number(m[2]) - 1, c - 1]; };
@@ -50,7 +72,8 @@
         };
         function formula(src) {
             const toks = src.match(/\s*([A-Za-z]{1,2}\d{1,3}:[A-Za-z]{1,2}\d{1,3}|[A-Za-zÀ-ÿ]+(?=\s*\()|[A-Za-z]{1,2}\d{1,3}|\d+(?:[.,]\d+)?%?|[-+*/^();]|"[^"]*")/g)?.map(t => t.trim()) || [];
-            if (toks.join('').replace(/\s/g, '') !== src.replace(/\s/g, '')) throw new Error('syntaxe');
+            const noSp = t => t.replace(/"[^"]*"|\s+/g, m => m.startsWith('"') ? m : '');
+            if (noSp(toks.join('')) !== noSp(src)) throw new Error('syntaxe');
             let i = 0;
             const peek = () => toks[i], next = () => toks[i++];
             const range = t => { const [a, b] = t.split(':').map(cellRef); const out = []; for (let r = Math.min(a[0], b[0]); r <= Math.max(a[0], b[0]); r++) for (let c = Math.min(a[1], b[1]); c <= Math.max(a[1], b[1]); c++) { const v = toNum(val(r, c)); if (v !== null) out.push(v); } return out; };
@@ -77,6 +100,16 @@
         }
         return cells.map((row, r) => row.map((_, c) => { try { const v = val(r, c); return typeof v === 'number' ? (Number.isFinite(v) ? v : '#DIV/0') : v; } catch (_) { return '#ERREUR'; } }));
     }
+    /** La grille d'un tableur, avec les cellules fusionnées (rowspan / colspan) */
+    function tableHtml(it) {
+        const cells = it.cells?.length ? it.cells : [['']], vals = tableValues(cells), nrow = cells.length, ncol = Math.max(...cells.map(r => r.length)), cw = Array.from({length: ncol}, (_, c) => it.colw?.[c] || 100), tot = cw.reduce((s0, x) => s0 + x, 0);
+        const cover = new Map(); // "r:c" → la fusion qui commence ici, ou true si la cellule est couverte
+        for (const m of it.merges || []) { if (m.r >= nrow || m.c >= ncol) continue; const rs = Math.min(m.rs, nrow - m.r), cs = Math.min(m.cs, ncol - m.c); for (let r = m.r; r < m.r + rs; r++) for (let c = m.c; c < m.c + cs; c++) cover.set(r + ':' + c, r === m.r && c === m.c ? {rs, cs} : true); }
+        return `<div class="h-bi-table${it.stripes ? ' is-striped' : ''}" style="font-size:${it.fs || 14}px;color:${it.color || '#111'};font-family:${esc(cssFont(it.font))};font-weight:${it.bold ? 700 : 400};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};${['left', 'center', 'right', 'justify'].includes(it.align) ? `--ta:${it.align};` : ''}--hf:${it.hfill || '#e8eef7'}"><table><colgroup>${cw.map(w => `<col style="width:${(w / tot * 100).toFixed(2)}%">`).join('')}</colgroup><tbody>${cells.map((row, r) => `<tr style="height:${(100 / nrow).toFixed(3)}%">${Array.from({length: ncol}, (_, c) => {
+            const cv = cover.get(r + ':' + c); if (cv === true) return '';
+            const v = vals[r][c], isHead = (it.header && r === 0) || (it.hcol && c === 0), raw = String(row[c] ?? ''), shown = raw.startsWith('=') ? showVal(v) : raw;
+            return `<td data-r="${r}" data-c="${c}"${cv ? ` rowspan="${cv.rs}" colspan="${cv.cs}"` : ''} class="${isHead ? 'is-head' : ''}${typeof v === 'number' ? ' is-num' : ''}${raw.startsWith('=') ? ' is-formula' : ''}${String(v).startsWith('#') && raw.startsWith('=') ? ' is-err' : ''}${cv ? ' is-merged' : ''}"${it.cfill?.[r + ':' + c] ? ` style="background:${it.cfill[r + ':' + c]}"` : ''}>${esc(shown)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
+    }
     const showVal = v => typeof v === 'number' ? v.toLocaleString('fr-FR', {maximumFractionDigits: 6, useGrouping: Math.abs(v) >= 10000}) : String(v ?? ''); // 1905 reste 1905 (une année)
     /** Le contour d'un trait à largeur variable (stylo-plume, calame, pinceau) */
     function ribbon(pts, sw, kind) {
@@ -101,8 +134,11 @@
     const seeded = seed => { let s = 0; for (const c of String(seed)) s = (s * 31 + c.charCodeAt(0)) % 2147483647; s = s || 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; };
     /** Le dessin d'un trait à main levée, selon son pinceau */
     function drawSvg(it) {
+        const hard = it.hard ?? 100;
+        if (hard < 100 && (it.sw || 3) > 0) { const sd = ((it.sw || 3) * (100 - hard) / 220).toFixed(2), fid = 'bdh-' + String(it.id || 'x').replace(/[^\w-]/g, ''); return `<defs><filter id="${fid}" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="${sd}"/></filter></defs><g filter="url(#${fid})">${drawSvg({...it, hard: 100})}</g>`; }
         const pts = it.points || [], c = it.color || '#111', sw = it.sw || 3, b = it.brush || 'pen';
-        const stroke = (d, extra = '', cap = 'round') => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="${cap}" stroke-linejoin="round" ${extra}/>`;
+        const da = it.dash ? `stroke-dasharray="${dashArray(it.dash, sw)}"` : '';
+        const stroke = (d, extra = '', cap = 'round') => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="${cap}" stroke-linejoin="round" ${da} ${extra}/>`;
         switch (b) {
             case 'mono': return stroke('M' + pts.map(p => p.join(',')).join(' L') + (pts.length === 1 ? ' l0.1,0' : ''));
             case 'marker': return stroke(smooth(pts), 'style="opacity:.9"', 'square');
@@ -128,7 +164,7 @@
     </defs></svg>`;
 
     /* ═════════ Pointes des traits : forme et taille de chaque bout ═════════ */
-    const headOf = (l, side) => { const v = side === 'start' ? l.headStart : l.headEnd; if (v) return v; return (side === 'start' ? l.arrowStart : l.arrowEnd) ? 'triangle' : 'none'; };
+    const headOf = (l, side) => { const v = side === 'start' ? l.headStart : l.headEnd; if (v) return HEAD_SVG[v] || v === 'none' ? v : 'triangle'; return (side === 'start' ? l.arrowStart : l.arrowEnd) ? 'triangle' : 'none'; };
     const headSize = l => Math.max(10, (l.sw || 2) * 3);
     const HEAD_REF = {triangle: 8, open: 8, stealth: 8, double: 8, half: 8, circle: 5, ring: 5, dot: 5, square: 5, square_o: 5, diamond: 5, diamond_o: 5, bar: 5, fork: 9, tail: 3};
     const HEAD_SVG = {
@@ -174,8 +210,17 @@
     }
 
     /* ═════════ Dessin d'un élément ═════════ */
-    const shapePath = (s, w, h) => {
+    const KIT = () => ext.boardKit || {prefs: () => ({}), palette: () => [], shapeByKey: () => null};
+    const pal = cat => { const l = KIT().palette?.(cat) || []; return l.length ? l : ({note: NOTE_COLORS, fill: ['transparent', ...COLORS.slice(2), '#bde0fe', '#fff3a3', '#caffbf'], stroke: ['transparent', ...COLORS]}[cat] || COLORS); };
+    const P = () => KIT().prefs();
+    /** Le dessin d'une forme dans sa boîte w × h : formes de la bibliothèque (chemins 100 × 100), formes à soi, arrondi réglable */
+    const shapePath = (s, w, h, it = {}) => {
         const pts = arr => 'M' + arr.map(p => p.join(',')).join(' L') + ' Z';
+        const r = it.radius !== undefined ? Math.min(Number(it.radius) || 0, w / 2, h / 2) : null;
+        if (s === 'rect' && r) return `<rect x="0" y="0" width="${w}" height="${h}" rx="${r}"/>`;
+        if (s === 'round') return `<rect x="0" y="0" width="${w}" height="${h}" rx="${r ?? Math.min(w, h) * .18}"/>`;
+        const lib = it.svgpath ? {d: it.svgpath, eo: it.eo} : (['rect', 'ellipse', 'triangle', 'diamond', 'hexagon', 'star', 'bubble', 'cloud'].includes(s) ? null : KIT().shapeByKey?.(s));
+        if (lib?.d) return `<path d="${lib.d}" transform="scale(${w / 100} ${h / 100})" ${lib.eo ? 'fill-rule="evenodd"' : ''} vector-effect="non-scaling-stroke"/>`;
         switch (s) {
             case 'ellipse': return `<ellipse cx="${w / 2}" cy="${h / 2}" rx="${w / 2}" ry="${h / 2}"/>`;
             case 'triangle': return `<path d="${pts([[w / 2, 0], [w, h], [0, h]])}"/>`;
@@ -213,9 +258,27 @@
         let bg = b.data?.bg || 'dots', boardLocked = !!b.data?.locked;
         // tableau verrouillé : on regarde, on se déplace, on ouvre ; on ne change rien
         const ro = () => { if (!boardLocked) return false; toast('Tableau verrouillé : 🔒 en haut pour le déverrouiller.'); return true; };
-        let tool = 'select', shapeKind = 'rect', brush = 'pen', penColor = '#111111', penWidth = 3, noteColor = NOTE_COLORS[0], eraserMode = 'pixel', eraserSize = 16;
+        let tool = 'select', shapeKind = 'rect', brush = 'pen', penColor = '#111111', penWidth = 3, noteColor = NOTE_COLORS[0], eraserMode = 'pixel', eraserSize = 16, penHard = 100, brushPreset = null;
         let links = Array.isArray(b.data?.links) ? b.data.links.map(l => ({...l})) : [], cellSel = null;
         let sel = new Set(), clipboard = null, editing = null, history = [], hpos = -1, dirty = false, saveT = 0, thumbT = 0;
+        let bgColor = b.data?.bgColor || '#ffffff', bgPattern = b.data?.bgPattern || '';
+        const boardExtra = () => ({bgColor, bgPattern});
+        // barre d'outils et en-tête : dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
+        const TOOL_DEFS = {select: ['↖', 'Choisir, déplacer (V)'], hand: ['✋', 'Se déplacer (H ou espace)'], text: ['T', 'Texte (T)'], note: ['🗒', 'Note (N)'], shape: ['⬠', 'Formes (S)'], line: ['╱', 'Trait (L)'], arrow: ['➝', 'Flèche (A)'], pen: ['✍︎', 'Dessin à main levée (P)'], eraser: ['⌫', 'Gomme (E)'], table: ['▦', 'Tableur (G)']};
+        const ordered = (order, hidden, all) => [...(order || []).filter(k => all.includes(k)), ...all.filter(k => !(order || []).includes(k))].filter(k => !(hidden || []).includes(k));
+        const toolButtons = () => { const p = P(); return ordered(p.toolsOrder, (p.toolsHidden || []).filter(k => k !== 'select'), Object.keys(TOOL_DEFS)).map(k => `<button type="button" class="h-bt" data-bd-tool="${k}" title="${esc(TOOL_DEFS[k][1])}"><span>${TOOL_DEFS[k][0]}</span></button>`).join(''); };
+        const BG_LIST = [['dots', 'Fond à points'], ['grid', 'Quadrillé'], ['lines', 'Lignes'], ['plain', 'Uni'], ['paper', 'Papier'], ['cork', 'Liège'], ['dark', 'Sombre'], ['custom', 'Couleur à choisir…']];
+        const HEAD_DEFS = {
+            undo: () => '<button type="button" class="button small secondary" data-bd-undo title="Annuler (⌘Z)">↶</button>', redo: () => '<button type="button" class="button small secondary" data-bd-redo title="Rétablir (⇧⌘Z)">↷</button>',
+            bg: () => `<span class="h-bd-bgpick"><select data-bd-bg title="Fond">${BG_LIST.map(([k, l]) => `<option value="${k}" ${bg === k ? 'selected' : ''}>${l}</option>`).join('')}</select><input type="color" data-bd-bgcolor value="${esc(bgColor)}" title="Couleur du fond" ${bg === 'custom' ? '' : 'hidden'}><select data-bd-bgpattern title="Motif sur la couleur" ${bg === 'custom' ? '' : 'hidden'}>${[['', 'sans motif'], ['dots', 'points'], ['grid', 'quadrillé'], ['lines', 'lignes']].map(([k, l]) => `<option value="${k}" ${bgPattern === k ? 'selected' : ''}>${l}</option>`).join('')}</select></span>`,
+            snaps: () => '<button type="button" class="button small secondary" data-bd-snaps title="Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau">📸 Instantanés</button>',
+            copy: () => '<button type="button" class="button small secondary" data-bd-copy title="Créer un nouveau tableau à partir de celui-ci">⧉ Copie</button>',
+            export: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-export title="Image PNG ou JPG, PDF, impression, fichier du tableau">⬇ Exporter</button></span>',
+            full: () => '<button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button>', lockall: () => '<button type="button" class="button small secondary" data-bd-lockall title="Verrouiller ou déverrouiller tout le tableau">🔓</button>',
+            delete: () => '<button type="button" class="button small secondary danger" data-bd-delete title="Supprimer ce tableau (et ses dossiers)">🗑</button>', close: () => '<button type="button" class="button small secondary" data-bd-close title="Revenir aux tableaux">✕</button>',
+        };
+        // les boutons dont le tableau a besoin (fermer, verrou…) restent dans la page même cachés : on les cache seulement
+        const headTools = () => { const p = P(), shown = ordered(p.headerOrder, p.headerHidden, Object.keys(HEAD_DEFS)); return [...shown.map(k => HEAD_DEFS[k]()), ...Object.keys(HEAD_DEFS).filter(k => !shown.includes(k)).map(k => HEAD_DEFS[k]().replace(/^<(\w+)/, '<$1 hidden'))].join(''); };
         host.innerHTML = `<section class="h-board" tabindex="-1">
             <header class="h-board-head">
                 <div class="h-board-title">${b.path?.length ? `<nav class="h-board-path"><button type="button" class="link-button" data-bd-open="${b.path[0].id}">${esc(b.path[0].title)}</button>${b.path.slice(1).map(p => ` › <button type="button" class="link-button" data-bd-open="${p.id}">${esc(p.title)}</button>`).join('')} › </nav>` : ''}
@@ -224,21 +287,19 @@
                     <span class="h-board-links" data-bd-links></span>
                     <select class="h-board-state" data-bd-state title="État du tableau">${Object.entries({open: '● En cours', paused: '⏸ En pause', closed: '✓ Terminé'}).map(([k, l]) => `<option value="${k}" ${(b.status || 'open') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
                 <span class="h-board-status" data-bd-status>Enregistré</span>
-                <span class="h-board-headtools"><button type="button" class="button small secondary" data-bd-undo title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-bd-redo title="Rétablir (⇧⌘Z)">↷</button>
-                    <select data-bd-bg title="Fond">${[['dots', 'Fond à points'], ['grid', 'Quadrillé'], ['lines', 'Lignes'], ['plain', 'Uni'], ['paper', 'Papier'], ['cork', 'Liège'], ['dark', 'Sombre']].map(([k, l]) => `<option value="${k}" ${bg === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
-                    <button type="button" class="button small secondary" data-bd-snaps title="Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau">📸 Instantanés</button><button type="button" class="button small secondary" data-bd-copy title="Créer un nouveau tableau à partir de celui-ci">⧉ Copie</button><button type="button" class="button small secondary" data-bd-png title="Image du tableau">🖼 PNG</button><button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button><button type="button" class="button small secondary" data-bd-lockall title="Verrouiller ou déverrouiller tout le tableau">🔓</button><button type="button" class="button small secondary danger" data-bd-delete title="Supprimer ce tableau (et ses dossiers)">🗑</button><button type="button" class="button small secondary" data-bd-close title="Revenir aux tableaux">✕</button></span>
+                <span class="h-board-headtools">${headTools()}</span>
             </header>
             <div class="h-board-toolbar" role="toolbar">
-                ${[['select', '↖', 'Choisir, déplacer (V)'], ['hand', '✋', 'Se déplacer (H ou espace)'], ['text', 'T', 'Texte (T)'], ['note', '🗒', 'Note (N)'], ['shape', '⬠', 'Forme (S)'], ['line', '╱', 'Trait (L)'], ['arrow', '➝', 'Flèche (A)'], ['pen', '✍︎', 'Dessin à main levée (P)'], ['eraser', '⌫', 'Gomme à dessins (E)'], ['table', '▦', 'Tableur (G)']].map(([k, i, l]) => `<button type="button" class="h-bt" data-bd-tool="${k}" title="${esc(l)}"><span>${i}</span></button>`).join('')}
+                ${toolButtons()}
                 <span class="h-bt-sep"></span>
                 <button type="button" class="h-bt h-bt-add" data-bd-add title="Ajouter un fichier, un média, une fiche, un écran de l’app…"><span>＋</span> Ajouter</button>
                 <span class="h-bt-sep"></span>
                 <span class="h-bt-opts" data-bd-opts></span>
                 <span class="spacer"></span>
-                <span class="h-bt-zoom"><button type="button" class="h-bt" data-bd-zoom="-1" title="Dézoomer">−</button><output data-bd-zoomout>100 %</output><button type="button" class="h-bt" data-bd-zoom="1" title="Zoomer">+</button><button type="button" class="h-bt" data-bd-fit title="Tout voir">⤢</button><button type="button" class="h-bt" data-bd-groups title="Montrer ce qui est groupé">⧉</button></span>
+                <span class="h-bt-zoom"><button type="button" class="h-bt" data-bd-zoom="-1" title="Dézoomer">−</button><span class="h-bd-menuwrap"><button type="button" class="h-bt h-bd-zoomout" data-bd-zoomout title="Zoom : ajuster à la sélection, adapter à la fenêtre…">100 %</button></span><button type="button" class="h-bt" data-bd-zoom="1" title="Zoomer">+</button><button type="button" class="h-bt" data-bd-fit title="Tout voir">⤢</button><button type="button" class="h-bt" data-bd-groups title="Montrer ce qui est groupé">⧉</button></span>
             </div>
             <div class="h-board-main">
-                <div class="h-board-stage" data-bd-stage data-bg="${bg}">${BOARD_FILTERS}<div class="h-board-world" data-bd-world></div><div class="h-board-marquee" data-bd-marquee hidden></div>
+                <div class="h-board-stage" data-bd-stage data-bg="${bg}" data-pattern="${esc(bgPattern)}" style="--bgc:${esc(bgColor)}">${BOARD_FILTERS}<div class="h-board-world" data-bd-world></div><div class="h-board-marquee" data-bd-marquee hidden></div>
                     <div class="h-board-drop" data-bd-drop hidden>Lâche ici : images, sons, vidéos, PDF…</div>
                     ${items.length ? '' : '<div class="h-board-empty" data-bd-empty><strong>Un tableau vide.</strong><span>Choisis un outil en haut, ou glisse ici des photos, des sons, des PDF… « ＋ Ajouter » pose une fiche, un écran de l’app, un widget, un recueil, une étiquette ou un dossier. Double-clic pour écrire.</span></div>'}</div>
                 <aside class="h-board-inspector" data-bd-inspector></aside>
@@ -254,6 +315,8 @@
         const applyView = () => { world.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.k})`; stage.style.setProperty('--bk', view.k); stage.style.backgroundPosition = `${view.x}px ${view.y}px`; stage.style.backgroundSize = `${24 * view.k}px ${24 * view.k}px`; root.querySelector('[data-bd-zoomout]').textContent = Math.round(view.k * 100) + ' %'; };
         const zoomAt = (k, cx, cy) => { const r = stage.getBoundingClientRect(); cx ??= r.left + r.width / 2; cy ??= r.top + r.height / 2; const [wx, wy] = toWorld(cx, cy); view.k = Math.max(0.1, Math.min(6, k)); view.x = cx - r.left - wx * view.k; view.y = cy - r.top - wy * view.k; applyView(); queueSave(false); };
         const bbox = list => { if (!list.length) return null; let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity; for (const i of list) { x0 = Math.min(x0, i.x); y0 = Math.min(y0, i.y); x1 = Math.max(x1, i.x + i.w); y1 = Math.max(y1, i.y + i.h); } return {x: x0, y: y0, w: x1 - x0, h: y1 - y0}; };
+        const items0 = () => items;
+        const fitTo = list => { const bb = bbox(list); if (!bb) return; const r = stage.getBoundingClientRect(); const k = Math.max(0.1, Math.min(4, Math.min((r.width - 80) / Math.max(bb.w, 1), (r.height - 80) / Math.max(bb.h, 1)))); view.k = k; view.x = (r.width - bb.w * k) / 2 - bb.x * k; view.y = (r.height - bb.h * k) / 2 - bb.y * k; applyView(); };
         const fitAll = () => { const bb = bbox(items); const r = stage.getBoundingClientRect(); if (!bb) { view.x = 40; view.y = 40; view.k = 1; return applyView(); } const k = Math.max(0.1, Math.min(2, Math.min((r.width - 80) / bb.w, (r.height - 80) / bb.h))); view.k = k; view.x = (r.width - bb.w * k) / 2 - bb.x * k; view.y = (r.height - bb.h * k) / 2 - bb.y * k; applyView(); };
         // ── traits et flèches : bouts accrochés aux éléments ──
         const centerOf = it => [it.x + it.w / 2, it.y + it.h / 2];
@@ -269,17 +332,16 @@
         const els = new Map(), sigs = new Map();
         const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; return it.type === 'line' ? JSON.stringify(it) : JSON.stringify(rest) + (['shape', 'media', 'webimage'].includes(it.type) ? '' : ''); };
         function itemInner(it) {
-            const txt = v => esc(v || '').replace(/\n/g, '<br>');
-            const textStyle = `font-size:${it.fs || 18}px;color:${it.color || '#111'};font-weight:${it.bold ? 700 : 400};font-style:${it.italic ? 'italic' : 'normal'};text-align:${it.align || 'left'};font-family:${it.font || 'inherit'}`;
+            const LIST_CSS = {bullet: 'disc', num: 'decimal', roman: 'upper-roman', alpha: 'lower-alpha', ALPHA: 'upper-alpha', dash: '"– "', check: '"☐ "'};
+            const txt = v => { if (!it.list || !LIST_CSS[it.list] || !v) return esc(v || '').replace(/\n/g, '<br>'); const tag = ['num', 'roman', 'alpha', 'ALPHA'].includes(it.list) ? 'ol' : 'ul'; return `<${tag} class="h-bi-list" style="list-style-type:${LIST_CSS[it.list]}">${String(v).split('\n').map(li => `<li>${esc(li) || '&nbsp;'}</li>`).join('')}</${tag}>`; };
+            const textStyle = `font-size:${it.fs || 18}px;color:${it.color || '#111'};font-weight:${it.bold ? 700 : 400};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};text-align:${['left', 'center', 'right', 'justify'].includes(it.align) ? it.align : 'left'};font-family:${esc(cssFont(it.font))}`;
             switch (it.type) {
-                case 'shape': return `<svg class="h-bi-svg" viewBox="0 0 ${it.w} ${it.h}" preserveAspectRatio="none" style="overflow:visible"><g fill="${it.fill || '#bde0fe'}" stroke="${it.stroke || '#1d3557'}" stroke-width="${it.sw ?? 2}" ${it.dash ? `stroke-dasharray="${dashArray(it.dash, it.sw ?? 2)}" stroke-linecap="round"` : ''} vector-effect="non-scaling-stroke" style="opacity:${it.opacity ?? 1}">${shapePath(it.shape, it.w, it.h)}</g></svg><div class="h-bi-text is-center" data-bd-text style="${textStyle};text-align:${it.align || 'center'}">${txt(it.text)}</div>`;
+                case 'shape': if (it.mask) return `<div class="h-bi-mask" style="background:${it.fill || '#bde0fe'};-webkit-mask-image:url(${it.mask});mask-image:url(${it.mask})"></div><div class="h-bi-text is-center" data-bd-text style="${textStyle};text-align:${it.align || 'center'}">${txt(it.text)}</div>`;
+                    return `<svg class="h-bi-svg" viewBox="0 0 ${it.w} ${it.h}" preserveAspectRatio="none" style="overflow:visible"><g fill="${it.fill || '#bde0fe'}" stroke="${it.stroke || '#1d3557'}" stroke-width="${it.sw ?? 2}" ${it.dash ? `stroke-dasharray="${dashArray(it.dash, it.sw ?? 2)}" stroke-linecap="round"` : ''} vector-effect="non-scaling-stroke">${shapePath(it.shape, it.w, it.h, it)}</g></svg><div class="h-bi-text is-center" data-bd-text style="${textStyle};text-align:${it.align || 'center'}">${txt(it.text)}</div>`;
                 case 'note': return `<div class="h-bi-note" style="background:${it.fill || NOTE_COLORS[0]}"><div class="h-bi-text" data-bd-text style="${textStyle}">${txt(it.text)}</div></div>`;
                 case 'text': return `<div class="h-bi-text" data-bd-text style="${textStyle}">${txt(it.text) || '<span class="muted">Texte</span>'}</div>`;
                 case 'draw': return `<svg class="h-bi-svg" viewBox="0 0 ${it.vw || it.w} ${it.vh || it.h}" preserveAspectRatio="none" style="overflow:visible">${drawSvg(it)}</svg>`;
-                case 'table': {
-                    const cells = it.cells?.length ? it.cells : [['']], vals = tableValues(cells), ncol = Math.max(...cells.map(r => r.length)), cw = Array.from({length: ncol}, (_, c) => it.colw?.[c] || 100), tot = cw.reduce((s, x) => s + x, 0);
-                    return `<div class="h-bi-table${it.stripes ? ' is-striped' : ''}" style="font-size:${it.fs || 14}px;color:${it.color || '#111'};font-family:${it.font || 'inherit'};--hf:${it.hfill || '#e8eef7'}"><table><colgroup>${cw.map(w => `<col style="width:${(w / tot * 100).toFixed(2)}%">`).join('')}</colgroup><tbody>${cells.map((row, r) => `<tr style="height:${(100 / cells.length).toFixed(3)}%">${Array.from({length: ncol}, (_, c) => { const v = vals[r][c], isHead = (it.header && r === 0) || (it.hcol && c === 0), raw = String(row[c] ?? ''), shown = raw.startsWith('=') ? showVal(v) : raw; return `<td data-r="${r}" data-c="${c}" class="${isHead ? 'is-head' : ''}${typeof v === 'number' ? ' is-num' : ''}${raw.startsWith('=') ? ' is-formula' : ''}${String(v).startsWith('#') && raw.startsWith('=') ? ' is-err' : ''}"${it.cfill?.[r + ':' + c] ? ` style="background:${it.cfill[r + ':' + c]}"` : ''}>${esc(shown)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
-                }
+                case 'table': return tableHtml(it);
                 case 'line': {
                     const [p, q] = lineEnds(it), pad = 30, x0 = Math.min(p[0], q[0]) - pad, y0 = Math.min(p[1], q[1]) - pad;
                     const P = [p[0] - x0, p[1] - y0], Q = [q[0] - x0, q[1] - y0], w = Math.abs(q[0] - p[0]) + pad * 2, h = Math.abs(q[1] - p[1]) + pad * 2;
@@ -323,8 +385,11 @@
                 if (sigs.get(it.id) !== sig) { el.innerHTML = itemInner(it); sigs.set(it.id, sig); hydrate(el, it); }
                 el.className = `h-bi is-type-${it.type}${sel.has(it.id) ? ' is-sel' : ''}${it.locked ? ' is-locked' : ''}${it.group ? ' is-grouped' : ''}`;
                 Object.assign(el.style, {left: it.x + 'px', top: it.y + 'px', width: it.w + 'px', height: it.h + 'px', zIndex: String(10 + i), transform: it.rot ? `rotate(${it.rot}deg)` : '', opacity: it.opacity !== undefined && it.opacity < 1 ? String(it.opacity) : ''});
+                // arrondi (notes, médias, tableurs, étiquettes) et contour des médias
+                if (it.radius !== undefined && it.type !== 'shape') el.style.setProperty('--r', it.radius + 'px'); else el.style.removeProperty('--r');
+                if ((it.bw || 0) > 0 && ['media', 'webimage'].includes(it.type)) { el.style.setProperty('--bw', it.bw + 'px'); el.style.setProperty('--bc', it.stroke || '#111111'); } else { el.style.removeProperty('--bw'); el.style.removeProperty('--bc'); }
                 el.querySelectorAll('td.is-cell').forEach(td => td.classList.remove('is-cell'));
-                if (cellSel?.id === it.id && sel.has(it.id)) el.querySelector(`td[data-r="${cellSel.r}"][data-c="${cellSel.c}"]`)?.classList.add('is-cell');
+                if (cellSel?.id === it.id && sel.has(it.id)) { const r0 = Math.min(cellSel.r, cellSel.r2 ?? cellSel.r), r1 = Math.max(cellSel.r, cellSel.r2 ?? cellSel.r), c0 = Math.min(cellSel.c, cellSel.c2 ?? cellSel.c), c1 = Math.max(cellSel.c, cellSel.c2 ?? cellSel.c); el.querySelectorAll('td[data-r]').forEach(td => { const r = Number(td.dataset.r), c = Number(td.dataset.c); if (r >= r0 && r <= r1 && c >= c0 && c <= c1) td.classList.add('is-cell'); }); }
             });
             for (const [k, el] of els) if (!seen.has(k)) { el.remove(); els.delete(k); sigs.delete(k); }
             drawGroups();
@@ -341,9 +406,9 @@
         const grpLayer = document.createElement('div'); grpLayer.className = 'h-board-groups'; world.prepend(grpLayer);
         let showGroups = (() => { try { return localStorage.getItem('genealogie-board-groups') !== '0'; } catch (_) { return true; } })();
         const GROUP_COLORS = ['#7b2cbf', '#0a9396', '#e85d04', '#2b8a3e', '#c9184a', '#1d4ed8'];
-        const groupNames = () => { const order = []; items.forEach(i => { if (i.group && !order.includes(i.group)) order.push(i.group); }); return order; };
+        const groupNames = () => { const order = []; items.forEach(i => { if (i.group && !order.includes(i.group)) order.push(i.group); }); return order.filter(g => items.filter(i => i.group === g).length > 1); };
         function drawGroups() {
-            const names = groupNames().filter(g => items.filter(i => i.group === g).length > 1);
+            const names = groupNames();
             grpLayer.hidden = !showGroups || !names.length;
             root.querySelector('[data-bd-groups]')?.classList.toggle('is-on', showGroups);
             if (grpLayer.hidden) { grpLayer.innerHTML = ''; return; }
@@ -368,26 +433,33 @@
         // ── historique et enregistrement ──
         const snap = () => JSON.stringify(items);
         const commit = () => { const s = snap(); if (hpos >= 0 && history[hpos] === s) return; history = history.slice(0, hpos + 1); history.push(s); if (history.length > 150) history.shift(); hpos = history.length - 1; queueSave(true); };
-        const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; items = JSON.parse(history[i]); sel = new Set([...sel].filter(byId)); render(); queueSave(true); };
+        const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; items = JSON.parse(history[i]); sel = new Set([...sel].filter(byId)); if (cellSel) { const t0 = byId(cellSel.id); if (!t0?.cells?.[cellSel.r] || cellSel.c >= (t0.cells[cellSel.r].length || 0)) cellSel = null; } render(); queueSave(true); };
         const ownerData = {owner_type: b.owner_type, owner_id: b.owner_id, part: b.part};
         function queueSave(changed) {
-            if (changed) { dirty = true; status('Modifié…'); }
+            if (changed) { dirty = true; changes++; status('Modifié…'); }
             clearTimeout(saveT); saveT = setTimeout(save, changed ? 900 : 2500);
         }
-        async function save() {
-            const title = root.querySelector('[data-bd-title]').value.trim() || 'Tableau sans titre';
-            const body = {id: b.id, title, icon: b.icon, color: b.color, status: root.querySelector('[data-bd-state]').value, ...ownerData, data: {items, view, bg, locked: boardLocked, links}};
+        // les enregistrements passent l'un après l'autre (un ancien ne peut pas écraser un plus récent)
+        let saveChain = Promise.resolve(), changes = 0;
+        function save() { saveChain = saveChain.then(save1, save1); return saveChain; }
+        async function save1() {
             clearTimeout(thumbT);
-            if (Date.now() - (save.lastThumb || 0) > 8000) { try { body.thumb = await thumbnail(320, 200); save.lastThumb = Date.now(); } catch (_) {} }
-            try { await api('save_board', {}, {method: 'POST', body}); dirty = false; status('Enregistré ✓'); } catch (error) { status('⚠ ' + error.message); }
+            let thumb = '';
+            if (Date.now() - (save.lastThumb || 0) > 8000) { try { thumb = await thumbnail(320, 200); save.lastThumb = Date.now(); } catch (_) {} }
+            const at = changes;
+            const title = root.querySelector('[data-bd-title]').value.trim() || 'Tableau sans titre';
+            const body = {id: b.id, title, icon: b.icon, color: b.color, status: root.querySelector('[data-bd-state]').value, ...ownerData, data: {items, view, bg, locked: boardLocked, links, ...boardExtra()}};
+            if (thumb) body.thumb = thumb;
+            try { await api('save_board', {}, {method: 'POST', body}); if (at === changes) { dirty = false; status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); } } catch (error) { status('⚠ ' + error.message); }
         }
         // ── miniature (et image PNG) : les éléments redessinés sur un canevas ──
-        async function thumbnail(W, H, scale0 = 0) {
+        async function thumbnail(W, H, scale0 = 0, type = 'image/png', onlySel = false) {
+            const items = onlySel && sel.size ? items0().filter(i => sel.has(i.id)) : items0();
             const bb = bbox(items) || {x: 0, y: 0, w: W, h: H};
             const k = scale0 || Math.min(W / (bb.w + 40), H / (bb.h + 40));
             const cw = scale0 ? Math.ceil((bb.w + 80) * k) : W, ch = scale0 ? Math.ceil((bb.h + 80) * k) : H;
             const c = document.createElement('canvas'); c.width = cw; c.height = ch; const x = c.getContext('2d');
-            x.fillStyle = bg === 'dark' ? '#1e2227' : bg === 'cork' ? '#c9a46b' : bg === 'paper' ? '#fbf6ea' : '#ffffff'; x.fillRect(0, 0, cw, ch);
+            x.fillStyle = bg === 'custom' ? bgColor : bg === 'dark' ? '#1e2227' : bg === 'cork' ? '#c9a46b' : bg === 'paper' ? '#fbf6ea' : '#ffffff'; x.fillRect(0, 0, cw, ch);
             const ox = scale0 ? (40 - bb.x) * k : (cw - bb.w * k) / 2 - bb.x * k, oy = scale0 ? (40 - bb.y) * k : (ch - bb.h * k) / 2 - bb.y * k;
             x.translate(ox, oy); x.scale(k, k);
             const loadImg = src => new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = src; });
@@ -405,6 +477,13 @@
                     x.fillStyle = it.type === 'note' ? (it.fill || NOTE_COLORS[0]) : it.type === 'shape' ? (it.fill || '#bde0fe') : it.type === 'tag' ? (it.fill || '#0066cc') : it.type === 'folder' ? (it.fill || '#f5c542') : '#f3f5f8';
                     x.strokeStyle = it.type === 'shape' ? (it.stroke || '#1d3557') : '#c9ced6'; x.lineWidth = it.type === 'shape' ? (it.sw ?? 2) : 1;
                     if (it.type === 'shape' && it.shape === 'ellipse') { x.beginPath(); x.ellipse(it.x + it.w / 2, it.y + it.h / 2, it.w / 2, it.h / 2, 0, 0, Math.PI * 2); x.fill(); x.stroke(); }
+                    else if (it.type === 'shape' && it.mask) { const im = await loadImg(it.mask); if (im) { const c2 = document.createElement('canvas'); c2.width = Math.max(1, Math.round(it.w)); c2.height = Math.max(1, Math.round(it.h)); const x2 = c2.getContext('2d'); x2.drawImage(im, 0, 0, c2.width, c2.height); x2.globalCompositeOperation = 'source-in'; x2.fillStyle = it.fill || '#bde0fe'; x2.fillRect(0, 0, c2.width, c2.height); x.drawImage(c2, it.x, it.y); } }
+                    else if (it.type === 'shape' && (it.svgpath || (KIT().shapeByKey?.(it.shape)?.d && !['rect', 'round'].includes(it.shape)))) {
+                        const d0 = it.svgpath || KIT().shapeByKey(it.shape).d, eo = it.svgpath ? it.eo : KIT().shapeByKey(it.shape).eo;
+                        x.save(); x.translate(it.x, it.y); x.scale(it.w / 100, it.h / 100); const p2 = new Path2D(d0); x.fill(p2, eo ? 'evenodd' : 'nonzero'); x.restore();
+                        x.save(); x.translate(it.x, it.y); x.scale(it.w / 100, it.h / 100); x.lineWidth = (it.sw ?? 2) * 100 / Math.max(1, Math.min(it.w, it.h)); if ((it.sw ?? 2) > 0 && it.stroke !== 'transparent') x.stroke(p2); x.restore();
+                    }
+                    else if (it.radius || (it.type === 'shape' && it.shape === 'round')) { const r0 = Math.min(it.radius ?? Math.min(it.w, it.h) * .18, it.w / 2, it.h / 2); x.beginPath(); x.roundRect(it.x, it.y, it.w, it.h, r0); x.fill(); x.stroke(); }
                     else { x.fillRect(it.x, it.y, it.w, it.h); x.strokeRect(it.x, it.y, it.w, it.h); }
                     const label = it.text || it.title || ({folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', link: 'Écran', screen: 'Écran'}[it.type] || '');
                     if (label) { x.fillStyle = it.type === 'tag' ? '#fff' : (it.color || '#111'); x.font = `${it.bold ? 'bold ' : ''}${Math.min(it.fs || 18, it.h * .5)}px sans-serif`; x.textBaseline = 'top'; String(label).split('\n').slice(0, 6).forEach((l, n) => x.fillText(l.slice(0, 60), it.x + 8, it.y + 8 + n * (it.fs || 18) * 1.2, it.w - 16)); }
@@ -427,14 +506,14 @@
                 }
                 x.restore();
             }
-            try { return c.toDataURL(scale0 ? 'image/png' : 'image/jpeg', .8); } catch (_) { return ''; } // une image d'un autre site peut l'empêcher
+            try { return c.toDataURL(scale0 ? type : 'image/jpeg', scale0 ? .92 : .8); } catch (_) { return ''; } // une image d'un autre site peut l'empêcher
         }
         // ── ajouter des éléments ──
-        const place = (it, at) => { if (ro()) return null; const r = stage.getBoundingClientRect(); const [cx, cy] = at || toWorld(r.left + r.width / 2, r.top + r.height / 2); const n = {id: uid(), x: cx - (it.w || 160) / 2, y: cy - (it.h || 100) / 2, w: 160, h: 100, z: topZ() + 1, ...it};
+        const place = (it, at, quiet = false) => { if (ro()) return null; const r = stage.getBoundingClientRect(); const [cx, cy] = at || toWorld(r.left + r.width / 2, r.top + r.height / 2); const n = {id: uid(), x: cx - (it.w || 160) / 2, y: cy - (it.h || 100) / 2, w: 160, h: 100, z: topZ() + 1, ...it};
             // posé au centre : on le décale tant qu'il couvre déjà quelque chose
             const covers = () => items.some(o => o.type !== 'line' && n.x < o.x + o.w && n.x + n.w > o.x && n.y < o.y + o.h && n.y + n.h > o.y);
             if (!at) { const x0 = n.x; for (let k = 1; k < 24 && covers(); k++) { n.x = x0 + (k % 5) * (n.w + 24); if (k % 5 === 0) n.y += n.h + 24; } }
-            items.push(n); sel = new Set([n.id]); render(); commit(); return n; };
+            items.push(n); sel = new Set([n.id]); render(); if (!quiet) commit(); return n; }; // quiet : un texte vide n'entre dans l'historique qu'une fois écrit
         async function uploadAndPlace(files, at) {
             if (ro()) return;
             const list = [...files].filter(f => f.size > 0); if (!list.length) return;
@@ -457,14 +536,14 @@
         }
         // ── outils et options ──
         const OPTS = {
-            pen: () => `<span class="h-bd-brushpick"><button type="button" class="h-bt is-on" data-bd-brushmenu title="Choisir le pinceau">${BRUSHES.find(x => x[0] === brush)?.[2] || '🖊'} ${esc(BRUSHES.find(x => x[0] === brush)?.[1] || 'Stylo')} ▾</button></span>
+            pen: () => `<span class="h-bd-brushpick"><button type="button" class="h-bt is-on" data-bd-brushmenu title="Choisir le pinceau">${brushPreset ? esc(brushPreset.icon + ' ' + brushPreset.name) : `${BRUSHES.find(x => x[0] === brush)?.[2] || '🖊'} ${esc(BRUSHES.find(x => x[0] === brush)?.[1] || 'Stylo')}`} ▾</button></span>
                 <span class="h-bd-widths">${WIDTHS.map(w => `<button type="button" class="h-bt ${penWidth === w ? 'is-on' : ''}" data-bd-penwidth="${w}" title="${w} px"><i style="height:${Math.max(1.5, Math.min(14, w / 1.6))}px"></i></button>`).join('')}</span>
-                <label class="h-bt-label"><input type="range" min="1" max="60" value="${Math.min(60, penWidth)}" data-bd-penw><input type="number" class="h-bd-numbox" min="0.5" max="200" step="0.5" value="${penWidth}" data-bd-penw> px</label>
-                ${COLORS.map(c => `<button type="button" class="h-sw ${penColor === c ? 'is-on' : ''}" style="background:${c}" data-bd-pencolor="${c}" aria-label="${c}"></button>`).join('')}<input type="color" class="h-bd-pencolor" value="${/^#[0-9a-f]{6}$/i.test(penColor) ? penColor : '#111111'}" data-bd-pencustom title="Autre couleur">`,
+                <label class="h-bt-label"><input type="range" min="${P().strokeMin ?? 0.5}" max="${P().strokeMax ?? 60}" step="0.5" value="${Math.min(P().strokeMax ?? 60, penWidth)}" data-bd-penw><input type="number" class="h-bd-numbox" min="0.5" max="500" step="0.5" value="${penWidth}" data-bd-penw> px</label>
+                ${pal('pen').map(c => `<button type="button" class="h-sw ${penColor === c ? 'is-on' : ''}" style="background:${c}" data-bd-pencolor="${c}" aria-label="${c}"></button>`).join('')}<label class="h-bt-label" title="Dureté du bord : 100 % net, moins = flou">Dureté <input type="range" min="0" max="100" value="${penHard}" data-bd-penhard><output>${penHard} %</output></label><input type="color" class="h-bd-pencolor" value="${/^#[0-9a-f]{6}$/i.test(penColor) ? penColor : '#111111'}" data-bd-pencustom title="Autre couleur">`,
             eraser: () => `${[['pixel', '🩹 Gomme fine', 'efface seulement ce que tu touches'], ['stroke', '🧽 Gomme à traits', 'enlève le trait entier']].map(([k, l, h]) => `<button type="button" class="h-bt ${eraserMode === k ? 'is-on' : ''}" data-bd-erasemode="${k}" title="${h}">${l}</button>`).join('')}
                 <label class="h-bt-label">Taille <input type="range" min="2" max="120" value="${eraserSize}" data-bd-erasesize><input type="number" class="h-bd-numbox" min="2" max="400" value="${eraserSize}" data-bd-erasesize> px</label><small class="muted">Les gommes n’effacent que les dessins à main levée.</small>`,
-            shape: () => SHAPES.map(([k, l]) => `<button type="button" class="h-bt ${shapeKind === k ? 'is-on' : ''}" data-bd-shapekind="${k}">${l}</button>`).join(''),
-            note: () => NOTE_COLORS.map(c => `<button type="button" class="h-sw ${noteColor === c ? 'is-on' : ''}" style="background:${c}" data-bd-notecolor="${c}"></button>`).join(''),
+            shape: () => `<span class="h-bd-shquick">${quickShapes().map(sh => `<button type="button" class="h-bt ${shapeKind === sh.k ? 'is-on' : ''}" data-bd-shapekind="${esc(sh.k)}" title="${esc(sh.n)}">${KIT().shapeSvg ? KIT().shapeSvg(sh, 18) : esc(sh.n)}</button>`).join('')}</span><button type="button" class="h-bt" data-bd-shapeall title="Toutes les formes, et créer la sienne">Toutes les formes ▾</button>`,
+            note: () => pal('note').map(c => `<button type="button" class="h-sw ${noteColor === c ? 'is-on' : ''}" style="background:${c}" data-bd-notecolor="${c}"></button>`).join(''),
         };
         const setTool = t => { if (boardLocked && !['select', 'hand'].includes(t)) { ro(); t = 'select'; }
             tool = t; root.querySelectorAll('[data-bd-tool]').forEach(x => x.classList.toggle('is-on', x.dataset.bdTool === t));
@@ -474,12 +553,14 @@
         };
         root.querySelector('.h-board-toolbar').addEventListener('click', e => {
             const t = e.target.closest('[data-bd-tool]'); if (t) return setTool(t.dataset.bdTool);
-            const br = e.target.closest('[data-bd-brush]'); if (br) { brush = br.dataset.bdBrush; penWidth = BRUSHES.find(x => x[0] === brush)?.[3] || penWidth; root.querySelector('.h-bd-brushmenu')?.remove(); setTool('pen'); return; }
+            const br = e.target.closest('[data-bd-brush]'); if (br) { brush = br.dataset.bdBrush; brushPreset = null; penHard = 100; penWidth = BRUSHES.find(x => x[0] === brush)?.[3] || penWidth; root.querySelector('.h-bd-brushmenu')?.remove(); setTool('pen'); return; }
+            const cb = e.target.closest('[data-bd-cbrush]'); if (cb) { const b0 = (P().brushes || []).find(x => x.id === cb.dataset.bdCbrush); if (b0) { brushPreset = b0; brush = b0.base; penWidth = b0.sw; penHard = b0.hardness; if (b0.color) penColor = b0.color; } root.querySelector('.h-bd-brushmenu')?.remove(); setTool('pen'); return; }
             if (e.target.closest('[data-bd-brushmenu]')) { brushMenu(e.target.closest('[data-bd-brushmenu]')); return; }
             const pw = e.target.closest('[data-bd-penwidth]'); if (pw) { penWidth = Number(pw.dataset.bdPenwidth); setTool('pen'); return; }
             const em = e.target.closest('[data-bd-erasemode]'); if (em) { eraserMode = em.dataset.bdErasemode; setTool('eraser'); return; }
             const pc = e.target.closest('[data-bd-pencolor]'); if (pc) { penColor = pc.dataset.bdPencolor; setTool('pen'); return; }
             const sk = e.target.closest('[data-bd-shapekind]'); if (sk) { shapeKind = sk.dataset.bdShapekind; setTool('shape'); return; }
+            if (e.target.closest('[data-bd-shapeall]')) { shapeLibrary(e.target.closest('[data-bd-shapeall]'), k => { shapeKind = k; setTool('shape'); }); return; }
             const nc = e.target.closest('[data-bd-notecolor]'); if (nc) { noteColor = nc.dataset.bdNotecolor; setTool('note'); return; }
             const z = e.target.closest('[data-bd-zoom]'); if (z) return zoomAt(view.k * (z.dataset.bdZoom === '1' ? 1.25 : 0.8));
             if (e.target.closest('[data-bd-fit]')) { fitAll(); queueSave(false); return; }
@@ -489,6 +570,7 @@
         root.querySelector('.h-board-toolbar').addEventListener('input', e => {
             const sync = sel0 => root.querySelectorAll(sel0).forEach(x => { if (x !== e.target) x.value = e.target.value; });
             if (e.target.matches('[data-bd-penw]') && e.target.value !== '') { penWidth = Number(e.target.value); sync('[data-bd-penw]'); root.querySelectorAll('[data-bd-penwidth]').forEach(x => x.classList.toggle('is-on', Number(x.dataset.bdPenwidth) === penWidth)); }
+            if (e.target.matches('[data-bd-penhard]')) { penHard = Number(e.target.value); e.target.nextElementSibling.textContent = penHard + ' %'; }
             if (e.target.matches('[data-bd-erasesize]') && e.target.value !== '') { eraserSize = Number(e.target.value); sync('[data-bd-erasesize]'); }
             if (e.target.matches('[data-bd-pencustom]')) { penColor = e.target.value; root.querySelectorAll('[data-bd-pencolor]').forEach(x => x.classList.remove('is-on')); }
         });
@@ -497,7 +579,8 @@
             const old = root.querySelector('.h-bd-brushmenu'); if (old) { old.remove(); return; }
             const m = document.createElement('div'); m.className = 'h-bd-brushmenu';
             m.innerHTML = `<div class="h-bd-brushwidths">${WIDTHS.map(w => `<button type="button" class="${penWidth === w ? 'is-on' : ''}" data-bd-penwidth="${w}" title="${w} px"><svg viewBox="0 0 40 24"><path d="M4,18 C10,4 18,4 20,12 S30,20 36,6" fill="none" stroke="currentColor" stroke-width="${Math.max(1, w / 2)}" stroke-linecap="round"/></svg></button>`).join('')}</div>
-                ${BRUSHES.map(([k, l, i]) => `<button type="button" class="h-bd-brushrow ${brush === k ? 'is-on' : ''}" data-bd-brush="${k}"><span class="h-bd-check">${brush === k ? '✓' : ''}</span><span class="h-bd-bicon">${i}</span>${esc(l)}<svg class="h-bd-bsample" viewBox="0 0 60 20">${drawSvg({id: 'm' + k, brush: k, color: '#222', sw: Math.min(6, (BRUSHES.find(x => x[0] === k)[3]) / 2 + 1), points: [[4, 14], [14, 5], [24, 9], [34, 15], [44, 10], [56, 5]]})}</svg></button>`).join('')}
+                ${(P().brushes || []).map(b0 => `<button type="button" class="h-bd-brushrow ${brushPreset?.id === b0.id ? 'is-on' : ''}" data-bd-cbrush="${esc(b0.id)}"><span class="h-bd-check">${brushPreset?.id === b0.id ? '✓' : ''}</span><span class="h-bd-bicon">${esc(b0.icon)}</span>${esc(b0.name)}<svg class="h-bd-bsample" viewBox="0 0 60 20">${drawSvg({id: 'mc' + b0.id, brush: b0.base, color: b0.color || '#222', sw: Math.min(6, b0.sw / 2 + 1), hard: b0.hardness, dash: b0.dash, points: [[4, 14], [14, 5], [24, 9], [34, 15], [44, 10], [56, 5]]})}</svg></button>`).join('')}${(P().brushes || []).length ? '<hr>' : ''}
+                ${BRUSHES.map(([k, l, i]) => `<button type="button" class="h-bd-brushrow ${brush === k && !brushPreset ? 'is-on' : ''}" data-bd-brush="${k}"><span class="h-bd-check">${brush === k && !brushPreset ? '✓' : ''}</span><span class="h-bd-bicon">${i}</span>${esc(l)}<svg class="h-bd-bsample" viewBox="0 0 60 20">${drawSvg({id: 'm' + k, brush: k, color: '#222', sw: Math.min(6, (BRUSHES.find(x => x[0] === k)[3]) / 2 + 1), points: [[4, 14], [14, 5], [24, 9], [34, 15], [44, 10], [56, 5]]})}</svg></button>`).join('')}
                 <button type="button" class="h-bd-brushrow" data-bd-tool="eraser"><span class="h-bd-check"></span><span class="h-bd-bicon">🧽</span>Gomme</button>`;
             btn.closest('.h-bd-brushpick').appendChild(m);
             setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target) && !btn.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0);
@@ -506,6 +589,8 @@
         let drag = null, spaceDown = false;
         stage.addEventListener('pointerdown', e => {
             if (e.target.closest('.h-bi-text[contenteditable="true"], audio, video, iframe, input, select, textarea, [data-bd-openlink]')) return;
+            // un clic sur la toile quitte le champ du panneau où l'on écrivait (sinon les raccourcis du tableau ne marchent plus)
+            const ae = document.activeElement; if (ae && ae !== document.body && root.contains(ae) && !stage.contains(ae) && ae.matches('input, select, textarea')) ae.blur();
             const [wx, wy] = toWorld(e.clientX, e.clientY);
             if (tool === 'hand' || spaceDown || e.button === 1) { drag = {kind: 'pan', sx: e.clientX, sy: e.clientY, vx: view.x, vy: view.y}; stage.setPointerCapture(e.pointerId); return; }
             if (boardLocked) { if (tool !== 'select' && ro()) return; const hit0 = e.target.closest('[data-bi]'); sel = hit0 ? new Set([hit0.dataset.bi]) : new Set(); render(); drag = {kind: 'pan', sx: e.clientX, sy: e.clientY, vx: view.x, vy: view.y}; stage.setPointerCapture(e.pointerId); return; }
@@ -515,12 +600,12 @@
             const hitEl = e.target.closest('[data-bi]'), hit = hitEl && byId(hitEl.dataset.bi);
             const gt = e.target.closest('[data-bd-grp]');
             if (gt && tool === 'select') { sel = new Set(items.filter(i => i.group === gt.dataset.bdGrp).map(i => i.id)); render(); const mv = [...sel].map(byId).filter(i => i && !i.locked); drag = {kind: 'move', wx, wy, start: mv.map(i => ({id: i.id, x: i.x, y: i.y, pts: i.type === 'line' ? clone(i.points) : null})), moved: false}; stage.setPointerCapture(e.pointerId); return; }
-            if (hit?.type === 'table' && tool === 'select') { const td = e.target.closest('td[data-r]'); cellSel = td ? {id: hit.id, r: Number(td.dataset.r), c: Number(td.dataset.c)} : null; }
+            if (hit?.type === 'table' && tool === 'select') { const td = e.target.closest('td[data-r]'); if (td && e.shiftKey && cellSel?.id === hit.id && sel.has(hit.id)) { cellSel = {...cellSel, r2: Number(td.dataset.r), c2: Number(td.dataset.c)}; render(); return; } cellSel = td ? {id: hit.id, r: Number(td.dataset.r), c: Number(td.dataset.c)} : null; }
             if (tool === 'eraser') { drag = {kind: 'erase'}; eraseAt(e); stage.setPointerCapture(e.pointerId); return; }
-            if (tool === 'pen') { const d = {id: uid(), type: 'draw', brush, color: penColor, sw: penWidth, points: [[wx, wy]], x: wx, y: wy, w: 1, h: 1, z: topZ() + 1}; drag = {kind: 'draw', d, raw: [[wx, wy]]}; items.push(d); stage.setPointerCapture(e.pointerId); return; }
-            if (tool === 'line' || tool === 'arrow') { const l = {id: uid(), type: 'line', points: [[wx, wy], [wx, wy]], color: penColor === '#ffffff' ? '#111111' : penColor, sw: 2.5, arrowEnd: tool === 'arrow', headEnd: tool === 'arrow' ? 'triangle' : 'none', from: hit && hit.type !== 'line' ? hit.id : '', x: wx, y: wy, w: 4, h: 4, z: topZ() + 1}; items.push(l); drag = {kind: 'end', line: l, i: 1, fresh: true}; stage.setPointerCapture(e.pointerId); return; }
-            if (tool === 'text') { const t = place({type: 'text', text: '', w: 260, h: 40, fs: 20, color: '#111111'}, [wx + 130, wy + 20]); setTool('select'); setTimeout(() => editText(t), 0); return; }
-            if (tool === 'note') { const n = place({type: 'note', text: '', w: 180, h: 160, fill: noteColor, fs: 18}, [wx, wy]); setTool('select'); setTimeout(() => editText(n), 0); return; }
+            if (tool === 'pen') { const d = {id: uid(), type: 'draw', brush, color: penColor, sw: penWidth, ...(penHard < 100 ? {hard: penHard} : {}), ...(brushPreset ? {opacity: brushPreset.opacity < 1 ? brushPreset.opacity : undefined, dash: brushPreset.dash || undefined} : {}), points: [[wx, wy]], x: wx, y: wy, w: 1, h: 1, z: topZ() + 1}; drag = {kind: 'draw', d, raw: [[wx, wy]]}; items.push(d); stage.setPointerCapture(e.pointerId); return; }
+            if (tool === 'line' || tool === 'arrow') { const l = {id: uid(), type: 'line', points: [[wx, wy], [wx, wy]], color: penColor === '#ffffff' ? '#111111' : penColor, sw: 2.5, arrowEnd: tool === 'arrow', headEnd: tool === 'arrow' ? (P().headEnd && P().headEnd !== 'none' ? P().headEnd : 'triangle') : 'none', headStart: tool === 'arrow' ? (P().headStart || 'none') : 'none', from: hit && hit.type !== 'line' ? hit.id : '', x: wx, y: wy, w: 4, h: 4, z: topZ() + 1}; items.push(l); drag = {kind: 'end', line: l, i: 1, fresh: true}; stage.setPointerCapture(e.pointerId); return; }
+            if (tool === 'text') { const t = place({type: 'text', text: '', w: 260, h: 40, fs: 20, color: '#111111'}, [wx + 130, wy + 20], true); setTool('select'); setTimeout(() => editText(t), 0); return; }
+            if (tool === 'note') { const n = place({type: 'note', text: '', w: 180, h: 160, fill: noteColor, fs: 18}, [wx, wy], true); setTool('select'); setTimeout(() => editText(n), 0); return; }
             if (tool === 'table') { const t = place(newTable(), [wx + 180, wy + 70]); setTool('select'); sel = new Set([t.id]); cellSel = {id: t.id, r: 0, c: 0}; render(); return; }
             if (tool === 'shape') { drag = {kind: 'newshape', sx: wx, sy: wy, it: null}; stage.setPointerCapture(e.pointerId); return; }
             // choisir / déplacer
@@ -557,7 +642,7 @@
                 render(); return;
             }
             if (drag.kind === 'end') {
-                const l = drag.line, el = document.elementFromPoint(e.clientX, e.clientY)?.closest('[data-bi]'), target = el && byId(el.dataset.bi);
+                const l = drag.line, el = document.elementsFromPoint(e.clientX, e.clientY).map(x => x.closest?.('[data-bi]')).find(x => x && x.dataset.bi !== l.id), target = el && byId(el.dataset.bi);
                 const key = drag.i === 0 ? 'from' : 'to';
                 l[key] = target && target.type !== 'line' && target.id !== l.id ? target.id : '';
                 l.points[drag.i] = [wx, wy]; render(); return;
@@ -566,7 +651,7 @@
             if (drag.kind === 'erase') { eraseAt(e); moveEraser(e); return; }
             if (drag.kind === 'newshape') {
                 const x0 = Math.min(wx, drag.sx), y0 = Math.min(wy, drag.sy), w = Math.abs(wx - drag.sx), h = Math.abs(wy - drag.sy);
-                if (!drag.it && w + h > 6) { drag.it = {id: uid(), type: 'shape', shape: shapeKind, fill: '#bde0fe', stroke: '#1d3557', sw: 2, text: '', fs: 18, color: '#111111', z: topZ() + 1}; items.push(drag.it); }
+                if (!drag.it && w + h > 6) { drag.it = {id: uid(), ...newShape(), z: topZ() + 1}; items.push(drag.it); }
                 if (drag.it) { Object.assign(drag.it, {x: x0, y: y0, w: Math.max(10, w), h: Math.max(10, e.shiftKey ? w : h)}); render(); }
                 return;
             }
@@ -585,7 +670,7 @@
             if (d.kind === 'pan') { queueSave(false); return; }
             if (d.kind === 'draw') { if (d.raw.length < 2) { const p = d.d; p.points = [[p.sw, p.sw]]; p.w = p.h = p.vw = p.vh = p.sw * 2; } render(); commit(); return; }
             if (d.kind === 'end') { const l = d.line; if (d.fresh && Math.hypot(l.points[1][0] - l.points[0][0], l.points[1][1] - l.points[0][1]) < 6 && !l.to) { items = items.filter(i => i !== l); render(); return; } sel = new Set([l.id]); render(); commit(); if (d.fresh) setTool('select'); return; }
-            if (d.kind === 'newshape') { if (!d.it) { place({type: 'shape', shape: shapeKind, fill: '#bde0fe', stroke: '#1d3557', sw: 2, text: '', fs: 18, color: '#111111', w: 160, h: 110}, [d.sx, d.sy]); } else { sel = new Set([d.it.id]); render(); commit(); } setTool('select'); return; }
+            if (d.kind === 'newshape') { if (!d.it) { place(newShape({w: 160, h: 110}), [d.sx, d.sy]); } else { sel = new Set([d.it.id]); render(); commit(); } setTool('select'); return; }
             if (d.kind === 'move' && !d.moved) return;
             if (['move', 'resize', 'erase'].includes(d.kind)) commit();
         };
@@ -652,14 +737,21 @@
             // la capture du pointeur renvoie le double-clic sur la toile : on cherche l'élément sous la souris
             const under = document.elementFromPoint(e.clientX, e.clientY), el = under?.closest('[data-bi]'), it = el && byId(el.dataset.bi);
             if (under?.closest('.h-board-sel') && sel.size === 1) { const one = byId([...sel][0]); if (one) { if (['text', 'note', 'shape'].includes(one.type)) return editText(one); if (one.type === 'table') { const td = document.elementsFromPoint(e.clientX, e.clientY).find(x => x.matches?.('td[data-r]')); return editCell(one, td ? Number(td.dataset.r) : cellSel?.r || 0, td ? Number(td.dataset.c) : cellSel?.c || 0); } return openItem(one); } }
-            if (!it) { if (tool === 'select' && !boardLocked) { const [wx, wy] = toWorld(e.clientX, e.clientY); const t = place({type: 'text', text: '', w: 260, h: 40, fs: 20, color: '#111111'}, [wx + 130, wy + 20]); setTimeout(() => editText(t), 0); } return; }
+            if (!it) { if (tool === 'select' && !boardLocked) { const [wx, wy] = toWorld(e.clientX, e.clientY); const t = place({type: 'text', text: '', w: 260, h: 40, fs: 20, color: '#111111'}, [wx + 130, wy + 20], true); setTimeout(() => editText(t), 0); } return; }
             if (['text', 'note', 'shape'].includes(it.type)) return editText(it);
             if (it.type === 'table') { const td = under.closest('td[data-r]'); return editCell(it, td ? Number(td.dataset.r) : 0, td ? Number(td.dataset.c) : 0); }
             openItem(it);
         });
         stage.addEventListener('click', e => { const o = e.target.closest('[data-bd-openlink]'); if (o) { const it = byId(o.closest('[data-bi]').dataset.bi); openItem(it); } });
         // ── tableur : écrire dans une cellule (Tab, Entrée pour passer à la suivante ; coller un bout de tableur) ──
-        function newTable() { return {type: 'table', cells: [['Nom', 'Année', 'Lieu'], ['', '', ''], ['', '', ''], ['', '', '']], colw: [140, 90, 130], header: true, stripes: true, fs: 14, color: '#111111', hfill: '#e8eef7', w: 360, h: 140}; }
+        function newTable() { // comme réglé dans Maintenance → Réglages des tableaux → Tableur
+            const t0 = {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: 'Nom;Année;Lieu', ...(P().table || {})};
+            const heads = String(t0.headers || '').split(';').map(x => x.trim()), cols = Math.max(1, Math.min(30, t0.cols)), rows = Math.max(1, Math.min(100, t0.rows));
+            const cells = Array.from({length: rows}, (_, r) => Array.from({length: cols}, (_, c) => r === 0 && t0.header ? heads[c] || '' : ''));
+            const rh = t0.fs * 2.2;
+            return {type: 'table', cells, colw: Array(cols).fill(120), header: !!t0.header, hcol: !!t0.hcol, stripes: !!t0.stripes, fs: t0.fs, color: '#111111', hfill: t0.hfill, w: Math.min(1400, cols * 120), h: Math.min(2400, rows * rh), ...(P().radius ? {} : {})};
+        }
+        function newShape(extra = {}) { const p = P(), o = shapeItem(shapeKind); Object.keys(o).forEach(k => o[k] === undefined && delete o[k]); return {type: 'shape', fill: '#bde0fe', stroke: '#1d3557', sw: 2, text: '', fs: 18, color: '#111111', ...(shapeKind === 'round' ? {radius: p.radius ?? 14} : {}), ...o, ...extra}; }
         function editCell(it, r, c) {
             if (!it || it.locked || ro()) return;
             const td = els.get(it.id)?.querySelector(`td[data-r="${r}"][data-c="${c}"]`); if (!td) return;
@@ -692,9 +784,12 @@
             });
         }
         const normTable = it => { const cols = Math.min(30, Math.max(1, ...it.cells.map(r => r.length))); it.cells = it.cells.map(r => Array.from({length: cols}, (_, c) => r[c] ?? '')); it.colw = Array.from({length: cols}, (_, c) => it.colw?.[c] || 100); };
-        function tableOp(it, op, r = cellSel?.r ?? it.cells.length - 1, c = cellSel?.c ?? 0, quiet = false) {
+        function tableOp(it, op, r, c, quiet = false) {
             if (!it || ro()) return;
             normTable(it);
+            const mine = cellSel?.id === it.id;
+            r = Math.max(0, Math.min(it.cells.length - 1, r ?? (mine ? cellSel.r : it.cells.length - 1)));
+            c = Math.max(0, Math.min(it.cells[0].length - 1, c ?? (mine ? cellSel.c : 0)));
             const rows = it.cells.length, cols = it.cells[0].length, rh = it.h / rows;
             const shiftFill = (fn) => { const nf = {}; Object.entries(it.cfill || {}).forEach(([k, v]) => { const [a, b2] = k.split(':').map(Number); const n = fn(a, b2); if (n) nf[n.join(':')] = v; }); it.cfill = nf; };
             if (op === 'row+' && rows < 100) { it.cells.splice(r + 1, 0, Array(cols).fill('')); it.h += rh; shiftFill((a, b2) => [a > r ? a + 1 : a, b2]); }
@@ -703,6 +798,24 @@
             if (op === 'col-' && cols > 1) { it.cells.forEach(row => row.splice(c, 1)); const w0 = it.colw.splice(c, 1)[0]; it.w = Math.max(40, it.w - it.w * w0 / (it.colw.reduce((s, x) => s + x, 0) + w0)); shiftFill((a, b2) => b2 === c ? null : [a, b2 > c ? b2 - 1 : b2]); if (cellSel) cellSel.c = Math.min(cellSel.c, cols - 2); }
             if (op === 'wider' || op === 'narrower') { it.colw[c] = Math.max(30, Math.min(800, (it.colw[c] || 100) * (op === 'wider' ? 1.25 : 0.8))); }
             if (op === 'clear') { it.cells[r][c] = ''; }
+            if (op === 'merge' && mine && cellSel.r2 !== undefined) {
+                const r0 = Math.min(cellSel.r, cellSel.r2), c0 = Math.min(cellSel.c, cellSel.c2), rs = Math.abs(cellSel.r2 - cellSel.r) + 1, cs = Math.abs(cellSel.c2 - cellSel.c) + 1;
+                // on retire les fusions qui chevauchent, on garde les textes en les mettant bout à bout dans la première cellule
+                it.merges = (it.merges || []).filter(m => m.r + m.rs <= r0 || m.r >= r0 + rs || m.c + m.cs <= c0 || m.c >= c0 + cs);
+                const texts = []; for (let rr = r0; rr < r0 + rs; rr++) for (let cc = c0; cc < c0 + cs; cc++) { const v = String(it.cells[rr]?.[cc] ?? '').trim(); if (v) texts.push(v); if (rr !== r0 || cc !== c0) it.cells[rr][cc] = ''; }
+                it.cells[r0][c0] = texts.join(' ');
+                it.merges.push({r: r0, c: c0, rs, cs}); cellSel = {id: it.id, r: r0, c: c0};
+            }
+            if (op === 'unmerge') it.merges = (it.merges || []).filter(m => !(r >= m.r && r < m.r + m.rs && c >= m.c && c < m.c + m.cs));
+            // lignes et colonnes ajoutées ou enlevées : les fusions suivent
+            if (['row+', 'row-', 'col+', 'col-'].includes(op) && it.merges?.length) it.merges = it.merges.map(m => {
+                const n = {...m};
+                if (op === 'row+') { if (m.r > r) n.r++; else if (m.r + m.rs - 1 > r) n.rs++; }
+                if (op === 'row-') { if (m.r > r) n.r--; else if (m.r + m.rs - 1 >= r) n.rs--; }
+                if (op === 'col+') { if (m.c > c) n.c++; else if (m.c + m.cs - 1 > c) n.cs++; }
+                if (op === 'col-') { if (m.c > c) n.c--; else if (m.c + m.cs - 1 >= c) n.cs--; }
+                return n;
+            }).filter(m => m.rs >= 1 && m.cs >= 1 && m.rs * m.cs > 1);
             sigs.delete(it.id); render(); if (!quiet) commit();
         }
         function tableCsv(it) {
@@ -733,11 +846,20 @@
             const files = [...(e.clipboardData?.files || [])];
             if (files.length) { e.preventDefault(); uploadAndPlace(files); return; }
             const text = e.clipboardData?.getData('text/plain') || '';
-            if (clipboard && text === '') { e.preventDefault(); pasteInternal(); return; }
+            if (clipboard && (text === '' || text === clipMark)) { e.preventDefault(); pasteInternal(); return; }
+            if (ro()) { e.preventDefault(); return; }
             if (/^https?:\/\/\S+$/.test(text.trim())) { e.preventDefault(); addUrl(text.trim()); return; }
             if (text.trim()) { e.preventDefault(); place({type: 'text', text, w: 320, h: Math.min(600, 28 + text.split('\n').length * 26), fs: 18, color: '#111111'}); }
         };
         document.addEventListener('paste', onPaste);
+        // ⌘C sur le tableau : on marque le presse-papiers du système, pour que ⌘V recolle nos éléments (et pas un vieux texte)
+        let clipMark = '';
+        const onCopy = e => {
+            if (!root.isConnected || editing || !sel.size || e.target.closest?.('input, textarea, [contenteditable="true"]') || !(root.contains(document.activeElement) || document.activeElement === document.body)) return;
+            clipboard = selItems().map(clone); clipMark = '⟦LCNDA-tableau ' + uid() + '⟧';
+            e.clipboardData?.setData('text/plain', clipMark); e.preventDefault();
+        };
+        document.addEventListener('copy', onCopy);
         function addUrl(url, at) {
             if (/\.(png|jpe?g|gif|webp|svg|avif)(\?|$)/i.test(url)) place({type: 'webimage', url, w: 320, h: 220}, at);
             else place({type: 'weblink', url, title: '', w: 240, h: 120}, at);
@@ -746,9 +868,10 @@
         const typing = e => e.target.closest?.('input, textarea, select, [contenteditable="true"]');
         const selItems = () => [...sel].map(byId).filter(Boolean);
         function pasteInternal() {
-            if (!clipboard?.length) return;
+            if (!clipboard?.length || ro()) return;
+            const z0 = Math.min(...clipboard.map(i => i.z || 0)), zTop = topZ() + 1;
             const map = new Map(), group = new Map();
-            const copies = clipboard.map(i => { const n = {...clone(i), id: uid(), x: i.x + 30, y: i.y + 30, z: topZ() + 1}; map.set(i.id, n.id); if (i.group) { if (!group.has(i.group)) group.set(i.group, uid()); n.group = group.get(i.group); } if (n.points && n.type === 'line') n.points = n.points.map(p => [p[0] + 30, p[1] + 30]); return n; });
+            const copies = clipboard.map(i => { const n = {...clone(i), id: uid(), x: i.x + 30, y: i.y + 30, z: zTop + (i.z || 0) - z0}; map.set(i.id, n.id); if (i.group) { if (!group.has(i.group)) group.set(i.group, uid()); n.group = group.get(i.group); } if (n.points && n.type === 'line') n.points = n.points.map(p => [p[0] + 30, p[1] + 30]); return n; });
             copies.forEach(n => { if (n.from) n.from = map.get(n.from) || ''; if (n.to) n.to = map.get(n.to) || ''; });
             items.push(...copies); sel = new Set(copies.map(c => c.id)); clipboard = copies.map(clone); render(); commit();
         }
@@ -756,6 +879,7 @@
             delete: () => { const ids = new Set(selItems().filter(i => !i.locked).map(i => i.id)); if (!ids.size) return; items = items.filter(i => !ids.has(i.id)); items.forEach(i => { if (ids.has(i.from)) i.from = ''; if (ids.has(i.to)) i.to = ''; }); sel.clear(); render(); commit(); },
             duplicate: () => { clipboard = selItems().map(clone); pasteInternal(); },
             copy: () => { clipboard = selItems().map(clone); toast(`${clipboard.length} élément${clipboard.length > 1 ? 's' : ''} copié${clipboard.length > 1 ? 's' : ''}.`); },
+            toshape: () => shapeMaker(null, selItems().filter(i => i.type === 'draw')),
             group: () => { const l = selItems(); if (l.length < 2) return; const g = uid(); l.forEach(i => { i.group = g; }); render(); commit(); },
             ungroup: () => { selItems().forEach(i => { i.group = ''; }); render(); commit(); },
             lock: () => { const l = selItems(); const v = !l.every(i => i.locked); l.forEach(i => { i.locked = v; }); render(); commit(); },
@@ -793,53 +917,76 @@
         window.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp);
         // ── propriétés de la sélection ──
         function renderInspector() {
-            const l = selItems();
-            if (!l.length) { inspector.innerHTML = `<h4>Tableau</h4><p class="muted">${fmt(items.length)} élément${items.length > 1 ? 's' : ''}. Choisis un élément pour le régler.</p>
-                <p class="muted h-bd-keys">⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web.</p>`; return; }
-            const one = l.length === 1 ? l[0] : null, t = one?.type, has = k => l.some(i => i[k] !== undefined || ({fill: ['shape', 'note', 'tag', 'folder'], stroke: ['shape'], color: ['text', 'note', 'shape', 'line', 'draw', 'tag', 'table'], fs: ['text', 'note', 'shape', 'table']}[k] || []).includes(i.type));
-            const numField = (k, label, min, max, step, val, unit = 'px', boxMax = max) => `<label>${label}<span class="h-bd-num"><input type="range" min="${min}" max="${max}" step="${step}" value="${Math.min(max, val)}" data-bd-num="${k}"><input type="number" class="h-bd-numbox" min="${min}" max="${boxMax}" step="${step}" value="${val}" data-bd-num="${k}"><small>${unit}</small></span></label>`;
-            const headSel = (k, cur) => `<select data-bd-sel="${k}">${HEADS_LIST.map(([v, l]) => `<option value="${v}" ${cur === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
-            const swatches = (k, list) => `<div class="h-bd-sws">${list.map(c => `<button type="button" class="h-sw" style="background:${c}" data-bd-set="${k}" data-v="${c}"></button>`).join('')}<input type="color" data-bd-setc="${k}" value="${/^#[0-9a-f]{6}$/i.test(one?.[k] || '') ? one[k] : '#111111'}"></div>`;
+            const p = P(), l = selItems();
+            if (!l.length) {
+                inspector.innerHTML = `<h4>Tableau</h4><p class="muted">${fmt(items.length)} élément${items.length > 1 ? 's' : ''}. Choisis un élément pour le régler.</p>
+                    <label>Fond du tableau</label><div class="h-bd-sws">${pal('bg').map(c => `<button type="button" class="h-sw" style="background:${c}" data-bd-bgset="${c}" title="${c}"></button>`).join('')}<input type="color" data-bd-bgset2 value="${esc(bgColor)}" title="Autre couleur"></div>
+                    <p class="muted h-bd-keys">⌘Z annuler · ⌘D dupliquer · ⌘G grouper (⇧ pour dégrouper) · ⌘L verrouiller · ] [ devant / derrière · flèches pour pousser · espace pour se déplacer · ⌘ + molette pour zoomer · coller une image ou une adresse web.</p>
+                    <p class="muted"><small>Couleurs, formes, polices, tailles, ordre des menus : Maintenance → Réglages des tableaux.</small></p>`;
+                return;
+            }
+            const one = l.length === 1 ? l[0] : null, t = one?.type, types = new Set(l.map(i => i.type)), any = (...ts) => ts.some(x => types.has(x));
+            const numField = (k, label, min, max, step, val, unit = 'px', boxMin = min, boxMax = max) => `<label>${label}<span class="h-bd-num"><input type="range" min="${min}" max="${max}" step="${step}" value="${Math.max(min, Math.min(max, val))}" data-bd-num="${k}"><input type="number" class="h-bd-numbox" min="${boxMin}" max="${boxMax}" step="${step}" value="${+Number(val).toFixed(2)}" data-bd-num="${k}"><small>${unit}</small></span></label>`;
+            const heads = (p.heads || HEADS_LIST.map(h => h[0])).filter(h => !(p.headsHidden || []).includes(h) || h === headOf(one || {}, 'start') || h === headOf(one || {}, 'end'));
+            const headSel = (k, cur) => `<select data-bd-sel="${k}">${[...new Set([...heads, cur])].map(v => `<option value="${v}" ${cur === v ? 'selected' : ''}>${HEADS_LIST.find(h => h[0] === v)?.[1] || v}</option>`).join('')}</select>`;
+            const swatches = (k, list) => `<div class="h-bd-sws">${list.map(c => `<button type="button" class="h-sw ${one?.[k] === c ? 'is-on' : ''}" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-set="${k}" data-v="${c}" title="${c}"></button>`).join('')}<input type="color" data-bd-setc="${k}" value="${/^#[0-9a-f]{6}$/i.test(one?.[k] || '') ? one[k] : '#111111'}" title="Autre couleur"></div>`;
             const grp = !one && l[0].group && l.every(i => i.group === l[0].group) && items.filter(i => i.group === l[0].group).length === l.length ? groupNames().indexOf(l[0].group) + 1 : 0;
             const cs = one && t === 'table' && cellSel?.id === one.id ? cellSel : null;
-            inspector.innerHTML = `<h4>${grp ? `⧉ Groupe ${grp} · ${l.length} éléments` : one ? ({table: 'Tableur', shape: 'Forme', note: 'Note', text: 'Texte', draw: 'Dessin', line: headOf(one, 'end') !== 'none' || headOf(one, 'start') !== 'none' ? 'Flèche' : 'Trait', media: 'Média', webimage: 'Image du web', weblink: 'Lien web', tag: 'Étiquette', folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', widget: 'Widget', link: 'Écran de l’app', screen: 'Écran de l’app'}[t] || 'Élément') : `${l.length} éléments`}</h4>
-                ${has('fill') ? `<label>Fond</label>${swatches('fill', t === 'note' ? NOTE_COLORS : ['transparent', ...COLORS.slice(2), '#bde0fe', '#fff3a3', '#caffbf'])}` : ''}
-                ${has('stroke') ? `<label>Bord</label>${swatches('stroke', ['transparent', ...COLORS])}` : ''}
-                ${has('color') ? `<label>${t === 'line' || t === 'draw' ? 'Couleur' : 'Texte'}</label>${swatches('color', COLORS)}` : ''}
-                ${l.some(i => ['shape', 'line', 'draw'].includes(i.type)) ? `${numField('sw', 'Épaisseur', 0, 30, 0.5, one?.sw ?? 2, 'px', 60)}<label>Trait <select data-bd-sel="dash">${LINE_DASHES.map(([k, lb]) => `<option value="${k}" ${(one?.dash || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : ''}
-                ${t === 'shape' ? `<label>Forme</label><div class="h-bd-row">${SHAPES.map(([k, lb]) => `<button type="button" class="h-bt ${one.shape === k ? 'is-on' : ''}" data-bd-set="shape" data-v="${k}" title="${esc(lb)}">${lb.split(' ')[0]}</button>`).join('')}</div>` : ''}
-                ${has('fs') ? `${numField('fs', 'Taille du texte', 8, 120, 1, one?.fs || 18, 'px', 400)}<div class="h-bd-row"><button type="button" class="h-bt ${one?.bold ? 'is-on' : ''}" data-bd-toggle="bold"><b>G</b></button><button type="button" class="h-bt ${one?.italic ? 'is-on' : ''}" data-bd-toggle="italic"><i>I</i></button>${['left', 'center', 'right'].map(a => `<button type="button" class="h-bt" data-bd-set="align" data-v="${a}">${{left: '⟸', center: '≡', right: '⟹'}[a]}</button>`).join('')}</div>` : ''}
-                ${t === 'line' ? `<div class="h-bd-heads"><label>Pointe au début ${headSel('headStart', headOf(one, 'start'))}</label><label>Pointe à la fin ${headSel('headEnd', headOf(one, 'end'))}</label></div>
-                    ${numField('hs', 'Taille des pointes', 4, 80, 1, one.hs || headSize(one), 'px', 200)}
-                    <label>Forme du trait <select data-bd-sel="path">${LINE_PATHS.map(([k, lb]) => `<option value="${k}" ${(one.path || (one.curved ? 'curve' : 'straight')) === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label><label>Légende <input data-bd-str="text" value="${esc(one.text || '')}" placeholder="frère de, a écrit à…"></label>` : ''}
-                ${['folder', 'recueil', 'person', 'link', 'screen', 'weblink'].includes(t) ? `<label>Titre <input data-bd-str="title" value="${esc(one.title || '')}"></label>` : ''}
-                ${t === 'table' ? `<div class="h-bd-tbl"><p class="muted">${cs ? `Cellule <strong>${colName(cs.c)}${cs.r + 1}</strong>${String(one.cells?.[cs.r]?.[cs.c] ?? '').startsWith('=') ? ` : <code>${esc(one.cells[cs.r][cs.c])}</code>` : ''}` : 'Clique une cellule pour la choisir'} · double-clic pour écrire</p>
+            const sMin = p.strokeMin ?? 0.5, sMax = p.strokeMax ?? 60, tMin = p.textMin ?? 6, tMax = p.textMax ?? 200;
+            const textTypes = ['text', 'note', 'shape', 'table', 'tag'];
+            const fontOpts = () => { const lists = p.fontLists || [], cur = one?.font || ''; const inLists = lists.some(L => L.fonts.includes(cur)); return `<option value="">Police du thème</option>${lists.map(L => `<optgroup label="${esc(L.name)}">${L.fonts.map(f => `<option value="${esc(f)}" ${cur === f ? 'selected' : ''} style="font-family:'${esc(f)}'">${esc(f)}</option>`).join('')}</optgroup>`).join('')}${cur && !inLists ? `<option value="${esc(cur)}" selected>${esc(cur)}</option>` : ''}`; };
+            const merged = cs ? (one.merges || []).find(m => cs.r >= m.r && cs.r < m.r + m.rs && cs.c >= m.c && cs.c < m.c + m.cs) : null;
+            const range = cs && (cs.r2 !== undefined) ? {r: Math.min(cs.r, cs.r2), c: Math.min(cs.c, cs.c2), rs: Math.abs(cs.r2 - cs.r) + 1, cs: Math.abs(cs.c2 - cs.c) + 1} : null;
+            const SECTIONS = {
+                fill: () => any('shape', 'note', 'tag', 'folder') ? `<label>Fond</label>${swatches('fill', t === 'note' ? pal('note') : pal('fill'))}` : '',
+                stroke: () => any('shape') ? `<label>Bord</label>${swatches('stroke', pal('stroke'))}`
+                    : any('media', 'webimage') ? `<label>Contour</label>${swatches('stroke', pal('stroke'))}${numField('bw', 'Épaisseur du contour', 0, Math.min(sMax, 60), 0.5, one?.bw || 0, 'px', 0, 200)}` : '',
+                color: () => any('text', 'note', 'shape', 'line', 'draw', 'tag', 'table') ? `<label>${t === 'line' || t === 'draw' ? 'Couleur' : 'Texte'}</label>${swatches('color', t === 'draw' ? pal('pen') : pal('text'))}` : '',
+                sw: () => any('shape', 'line', 'draw') ? `${numField('sw', 'Épaisseur', sMin, sMax, 0.5, one?.sw ?? 2, 'px', 0, 500)}<label>Trait <select data-bd-sel="dash">${LINE_DASHES.map(([k, lb]) => `<option value="${k}" ${(one?.dash || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : '',
+                shape: () => t === 'shape' ? `<label>Forme</label><div class="h-bd-row h-bd-shrow">${quickShapes().map(sh => `<button type="button" class="h-bt ${one.shape === sh.k ? 'is-on' : ''}" data-bd-setshape="${esc(sh.k)}" title="${esc(sh.n)}">${KIT().shapeSvg ? KIT().shapeSvg(sh, 18) : esc(sh.n)}</button>`).join('')}<button type="button" class="h-bt" data-bd-shapelib title="Toutes les formes">⋯</button></div>` : '',
+                radius: () => (one && ((t === 'shape' && ['rect', 'round'].includes(one.shape)) || ['note', 'media', 'webimage', 'table', 'tag', 'folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget'].includes(t))) ? numField('radius', 'Arrondi des coins', 0, 120, 1, one.radius ?? (t === 'shape' && one.shape === 'round' ? Math.round(Math.min(one.w, one.h) * .18) : 0), 'px', 0, 400) : '',
+                text: () => any(...textTypes) ? `${numField('fs', 'Taille du texte', tMin, tMax, 1, one?.fs || 18, 'px', 2, 500)}<div class="h-bd-row">${[['bold', '<b>G</b>', 'Gras'], ['italic', '<i>I</i>', 'Italique'], ['underline', '<u>S</u>', 'Souligné'], ['strike', '<s>B</s>', 'Barré']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one?.[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}<span class="h-bt-sep"></span>${[['left', '⇤', 'Aligner à gauche'], ['center', '↔', 'Centrer'], ['right', '⇥', 'Aligner à droite'], ['justify', '☰', 'Justifier']].map(([a, h, lb]) => `<button type="button" class="h-bt ${(one?.align || (t === 'shape' ? 'center' : 'left')) === a ? 'is-on' : ''}" data-bd-set="align" data-v="${a}" title="${lb}">${h}</button>`).join('')}</div>` : '',
+                list: () => any('text', 'note', 'shape') ? `<label>Puces et numéros <select data-bd-sel="list">${[['', 'Aucune'], ['bullet', '• Puce'], ['num', '1. Nombres'], ['roman', 'I. Chiffres romains'], ['alpha', 'a. Lettres'], ['ALPHA', 'A. Lettres capitales'], ['dash', '– Tiret'], ['check', '☐ Cases à cocher']].map(([k, lb]) => `<option value="${k}" ${(one?.list || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : '',
+                font: () => any(...textTypes) ? `<label>Police <select data-bd-sel="font">${fontOpts()}</select></label><div class="h-bd-fontfree"><input list="bd-fonts-${b.id}" placeholder="ou tape un nom de police…" data-bd-fontfree value=""><button type="button" class="h-bt" data-bd-localfonts title="Les polices de l’ordinateur">🖥</button><datalist id="bd-fonts-${b.id}">${(localFonts || []).map(f => `<option value="${esc(f)}">`).join('')}</datalist></div>` : '',
+                heads: () => t === 'line' ? `<div class="h-bd-heads"><label>Pointe au début ${headSel('headStart', headOf(one, 'start'))}</label><label>Pointe à la fin ${headSel('headEnd', headOf(one, 'end'))}</label></div>${numField('hs', 'Taille des pointes', 4, 80, 1, one.hs || headSize(one), 'px', 2, 200)}` : '',
+                linepath: () => t === 'line' ? `<label>Forme du trait <select data-bd-sel="path">${LINE_PATHS.map(([k, lb]) => `<option value="${k}" ${(one.path || (one.curved ? 'curve' : 'straight')) === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label><label>Légende <input data-bd-str="text" value="${esc(one.text || '')}" placeholder="frère de, a écrit à…"></label>` : '',
+                table: () => t === 'table' ? `<div class="h-bd-tbl"><p class="muted">${cs ? `Cellule <strong>${colName(cs.c)}${cs.r + 1}</strong>${range && range.rs * range.cs > 1 ? ` à <strong>${colName(range.c + range.cs - 1)}${range.r + range.rs}</strong>` : ''}${String(one.cells?.[cs.r]?.[cs.c] ?? '').startsWith('=') ? ` : <code>${esc(one.cells[cs.r][cs.c])}</code>` : ''}` : 'Clique une cellule pour la choisir'} · ⇧ + clic : plusieurs · double-clic : écrire</p>
                     <div class="h-bd-row"><button type="button" class="h-bt" data-bd-tbl="row+" title="Ajouter une ligne dessous">＋ ligne</button><button type="button" class="h-bt" data-bd-tbl="row-" title="Enlever la ligne">− ligne</button><button type="button" class="h-bt" data-bd-tbl="col+" title="Ajouter une colonne à droite">＋ colonne</button><button type="button" class="h-bt" data-bd-tbl="col-" title="Enlever la colonne">− colonne</button></div>
-                    <div class="h-bd-row"><button type="button" class="h-bt" data-bd-tbl="narrower" title="Colonne plus étroite">⇤⇥ −</button><button type="button" class="h-bt" data-bd-tbl="wider" title="Colonne plus large">⇤⇥ ＋</button>${cs ? '<button type="button" class="h-bt" data-bd-tbl="clear" title="Vider la cellule">⌫ vider</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="csv" title="Télécharger en CSV (Excel, Numbers…)">⬇ CSV</button></div>
+                    <div class="h-bd-row">${range && range.rs * range.cs > 1 ? '<button type="button" class="h-bt" data-bd-tbl="merge" title="Fusionner les cellules choisies">⊞ Fusionner</button>' : ''}${merged ? '<button type="button" class="h-bt" data-bd-tbl="unmerge" title="Séparer les cellules">⊟ Séparer</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="narrower" title="Colonne plus étroite">⇤⇥ −</button><button type="button" class="h-bt" data-bd-tbl="wider" title="Colonne plus large">⇤⇥ ＋</button>${cs ? '<button type="button" class="h-bt" data-bd-tbl="clear" title="Vider la cellule">⌫ vider</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="csv" title="Télécharger en CSV (Excel, Numbers…)">⬇ CSV</button></div>
                     <label class="checkbox-line"><input type="checkbox" data-bd-check="header" ${one.header ? 'checked' : ''}> <span>première ligne en titre</span></label><label class="checkbox-line"><input type="checkbox" data-bd-check="hcol" ${one.hcol ? 'checked' : ''}> <span>première colonne en titre</span></label><label class="checkbox-line"><input type="checkbox" data-bd-check="stripes" ${one.stripes ? 'checked' : ''}> <span>une ligne sur deux teintée</span></label>
-                    <label>Fond des titres</label>${swatches('hfill', ['#e8eef7', '#fff3a3', '#caffbf', '#ffd6e0', '#e9d8fd', '#f1f3f5', 'transparent'])}
-                    ${cs ? `<label>Fond de la cellule</label><div class="h-bd-sws">${['transparent', '#fff3a3', '#caffbf', '#bde0fe', '#ffd6e0', '#ffadad', '#e9d8fd', '#dee2e6'].map(c => `<button type="button" class="h-sw" style="background:${c}" data-bd-cellfill="${c}"></button>`).join('')}</div>` : ''}
-                    <details class="h-bd-help"><summary>Formules</summary><p class="muted">Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge). Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille.</p></details></div>` : ''}
-                ${t === 'draw' ? `<label>Pinceau <select data-bd-sel="brush">${BRUSHES.map(([k, lb, ic]) => `<option value="${k}" ${(one.brush || 'pen') === k ? 'selected' : ''}>${ic} ${esc(lb)}</option>`).join('')}</select></label>` : ''}
-                ${t === 'tag' ? `<label>Étiquette <input data-bd-str="text" value="${esc(one.text || '')}"></label>` : ''}
-                ${t === 'media' && kindOfMedia(media[one.media_id]) === 'image' ? `<label>Légende <input data-bd-str="text" value="${esc(one.text || '')}"></label>` : ''}
-                ${(t === 'link' || t === 'screen' || (t === 'media' && kindOfMedia(media[one.media_id]) === 'pdf')) ? `<label class="checkbox-line"><input type="checkbox" data-bd-check="preview" ${one.preview ? 'checked' : ''}> <span>aperçu vivant dans le tableau</span></label>` : ''}
-                ${t === 'weblink' ? `<label>Adresse <input data-bd-str="url" value="${esc(one.url || '')}"></label>` : ''}
-                <label>Opacité <input type="range" min="10" max="100" value="${Math.round((one?.opacity ?? 1) * 100)}" data-bd-num="opacity"></label>
-                <div class="h-bd-actions">
+                    <label>Fond des titres</label>${swatches('hfill', ['#e8eef7', ...pal('fill').filter(c => c !== '#e8eef7')])}
+                    ${cs ? `<label>Fond de la cellule${range && range.rs * range.cs > 1 ? ' (les cellules choisies)' : ''}</label><div class="h-bd-sws">${pal('fill').map(c => `<button type="button" class="h-sw" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-cellfill="${c}"></button>`).join('')}<input type="color" data-bd-cellfill2 value="#fff3a3" title="Autre couleur"></div>` : ''}
+                    <details class="h-bd-help"><summary>Formules</summary><p class="muted">Commence par <code>=</code> : <code>=B2+B3</code>, <code>=SOMME(B2:B9)</code>, <code>=MOYENNE(B2:B9)</code>, <code>=MIN(…)</code>, <code>=MAX(…)</code>, <code>=NB(…)</code>, <code>=PRODUIT(…)</code>, <code>=ARRONDI(B2;1)</code>, <code>=2026-B2</code> (âge), <code>="texte"</code>. Colle un bout de tableur (Excel, Numbers) dans une cellule : il se range dans la grille.</p></details></div>` : '',
+                brush: () => t === 'draw' ? `<label>Pinceau <select data-bd-sel="brush">${BRUSHES.map(([k, lb, ic]) => `<option value="${k}" ${(one.brush || 'pen') === k ? 'selected' : ''}>${ic} ${esc(lb)}</option>`).join('')}</select></label>${numField('hard', 'Dureté', 0, 100, 1, one.hard ?? 100, '%')}` : '',
+                title: () => [['folder', 'recueil', 'person', 'link', 'screen', 'weblink'].includes(t) ? `<label>Titre <input data-bd-str="title" value="${esc(one.title || '')}"></label>` : '',
+                    t === 'tag' ? `<label>Étiquette <input data-bd-str="text" value="${esc(one.text || '')}"></label>` : '',
+                    t === 'media' && kindOfMedia(media[one.media_id]) === 'image' ? `<label>Légende <input data-bd-str="text" value="${esc(one.text || '')}"></label>` : '',
+                    t === 'weblink' ? `<label>Adresse <input data-bd-str="url" value="${esc(one.url || '')}"></label>` : ''].join(''),
+                preview: () => (t === 'link' || t === 'screen' || (t === 'media' && kindOfMedia(media[one.media_id]) === 'pdf')) ? `<label class="checkbox-line"><input type="checkbox" data-bd-check="preview" ${one.preview ? 'checked' : ''}> <span>aperçu vivant dans le tableau</span></label>` : '',
+                opacity: () => numField('opacity', 'Opacité', 5, 100, 1, Math.round((one?.opacity ?? 1) * 100), '%', 5, 100),
+                actions: () => `<div class="h-bd-actions">
                     ${['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'media'].includes(t) ? '<button type="button" class="button small" data-bd-act="open">↗ Ouvrir</button>' : ''}
                     <button type="button" class="button small secondary" data-bd-act="duplicate">Dupliquer</button>
                     <button type="button" class="button small secondary" data-bd-act="lock">${l.every(i => i.locked) ? '🔓 Déverrouiller' : '🔒 Verrouiller'}</button>
                     ${l.length > 1 ? '<button type="button" class="button small secondary" data-bd-act="group">⧉ Grouper</button>' : ''}${l.some(i => i.group) ? '<button type="button" class="button small secondary" data-bd-act="ungroup">Dégrouper</button>' : ''}
+                    ${l.some(i => i.type === 'draw') ? '<button type="button" class="button small secondary" data-bd-act="toshape" title="Faire de ce dessin une forme à toi (réutilisable)">✏️ En faire une forme</button>' : ''}
                     <button type="button" class="button small secondary" data-bd-act="front">Devant</button><button type="button" class="button small secondary" data-bd-act="back">Derrière</button>
-                    <button type="button" class="button small secondary danger" data-bd-act="delete">Supprimer</button></div>`;
+                    <button type="button" class="button small secondary danger" data-bd-act="delete">Supprimer</button></div>`,
+            };
+            const order = ordered(p.inspectorOrder, p.inspectorHidden, Object.keys(SECTIONS));
+            inspector.innerHTML = `<h4>${grp ? `⧉ Groupe ${grp} · ${l.length} éléments` : one ? ({table: 'Tableur', shape: 'Forme', note: 'Note', text: 'Texte', draw: 'Dessin', line: headOf(one, 'end') !== 'none' || headOf(one, 'start') !== 'none' ? 'Flèche' : 'Trait', media: 'Média', webimage: 'Image du web', weblink: 'Lien web', tag: 'Étiquette', folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', widget: 'Widget', link: 'Écran de l’app', screen: 'Écran de l’app'}[t] || 'Élément') : `${l.length} éléments`}</h4>
+                ${order.map(k => { const h = SECTIONS[k](); return h ? `<div class="h-bd-isec" data-isec="${k}">${h}</div>` : ''; }).join('')}`;
         }
-        const setOnSel = (k, v, keep = false) => { if (ro()) return; selItems().forEach(i => { if (k === 'fill' && !['shape', 'note', 'tag', 'folder'].includes(i.type)) return; if (k === 'stroke' && i.type !== 'shape') return; i[k] = v; sigs.delete(i.id); }); render(keep); };
+        const setOnSel = (k, v, keep = false) => { if (ro()) return; selItems().forEach(i => { if (k === 'fill' && !['shape', 'note', 'tag', 'folder'].includes(i.type)) return; if (k === 'stroke' && !['shape', 'media', 'webimage'].includes(i.type)) return; if (k === 'shape' && i.type !== 'shape') return; i[k] = v; sigs.delete(i.id); }); render(keep); };
         inspector.addEventListener('click', e => {
             const s = e.target.closest('[data-bd-set]'); if (s) { setOnSel(s.dataset.bdSet, s.dataset.v); commit(); return; }
             const tg = e.target.closest('[data-bd-toggle]'); if (tg) { const k = tg.dataset.bdToggle, v = !selItems()[0]?.[k]; setOnSel(k, v); commit(); return; }
+            const bs = e.target.closest('[data-bd-bgset]'); if (bs) { setBg(bs.dataset.bdBgset); return; }
+            const ss = e.target.closest('[data-bd-setshape]'); if (ss) { applyShape(ss.dataset.bdSetshape); return; }
+            if (e.target.closest('[data-bd-shapelib]')) { shapeLibrary(e.target.closest('[data-bd-shapelib]'), k => applyShape(k)); return; }
+            if (e.target.closest('[data-bd-localfonts]')) { loadLocalFonts(); return; }
             const tb = e.target.closest('[data-bd-tbl]'); if (tb) { const it = selItems()[0]; if (it?.type !== 'table') return; if (tb.dataset.bdTbl === 'csv') return tableCsv(it); tableOp(it, tb.dataset.bdTbl); return; }
-            const cf = e.target.closest('[data-bd-cellfill]'); if (cf && cellSel && !ro()) { const it = byId(cellSel.id); if (!it) return; it.cfill = {...(it.cfill || {})}; const k = cellSel.r + ':' + cellSel.c; if (cf.dataset.bdCellfill === 'transparent') delete it.cfill[k]; else it.cfill[k] = cf.dataset.bdCellfill; sigs.delete(it.id); render(true); commit(); return; }
+            const cf = e.target.closest('[data-bd-cellfill]'); if (cf && cellSel && !ro()) { const it = byId(cellSel.id); if (!it) return; it.cfill = {...(it.cfill || {})}; const k = cellSel.r + ':' + cellSel.c; setCellFill(it, cf.dataset.bdCellfill); return; }
             const a = e.target.closest('[data-bd-act]'); if (a) { if (a.dataset.bdAct === 'open') return openItem(selItems()[0]); actions[a.dataset.bdAct]?.(); }
         });
         inspector.addEventListener('input', e => {
@@ -851,27 +998,149 @@
             if (e.target.matches('[data-bd-str]')) { setOnSel(e.target.dataset.bdStr, e.target.value, true); }
             if (e.target.matches('[data-bd-setc]')) { setOnSel(e.target.dataset.bdSetc, e.target.value, true); }
             if (e.target.matches('[data-bd-sel]')) { setOnSel(e.target.dataset.bdSel, e.target.value, true); }
+            if (e.target.matches('[data-bd-bgset2]')) { setBg(e.target.value, true); }
+            if (e.target.matches('[data-bd-cellfill2]') && cellSel) { const it = byId(cellSel.id); if (it) setCellFill(it, e.target.value, true); }
         });
-        inspector.addEventListener('change', e => { if (e.target.matches('[data-bd-check]')) setOnSel(e.target.dataset.bdCheck, e.target.checked, true); if (e.target.matches('[data-bd-sel]')) setOnSel(e.target.dataset.bdSel, e.target.value, true); if (e.target.matches('input, select')) commit(); });
+        inspector.addEventListener('change', e => { if (e.target.matches('[data-bd-fontfree]') && e.target.value.trim()) { setOnSel('font', e.target.value.trim()); commit(); renderInspector(); return; } if (e.target.matches('[data-bd-check]')) setOnSel(e.target.dataset.bdCheck, e.target.checked, true); if (e.target.matches('[data-bd-sel]')) setOnSel(e.target.dataset.bdSel, e.target.value, true); if (e.target.matches('input, select')) commit(); });
+        // fond du tableau choisi depuis le panneau (couleur de la palette ou autre)
+        function setBg(c, keep = false) {
+            const sel0 = root.querySelector('[data-bd-bg]'); bg = 'custom'; bgColor = /^#[0-9a-f]{6}$/i.test(c) ? c : '#ffffff';
+            stage.dataset.bg = 'custom'; stage.style.setProperty('--bgc', bgColor); sel0.value = 'custom';
+            const ci = root.querySelector('[data-bd-bgcolor]'); ci.hidden = false; ci.value = bgColor; root.querySelector('[data-bd-bgpattern]').hidden = false;
+            if (!keep) renderInspector(); queueSave(true);
+        }
+        function setCellFill(it, c, keep = false) {
+            if (ro() || !cellSel || cellSel.id !== it.id) return;
+            it.cfill = {...(it.cfill || {})};
+            const r0 = Math.min(cellSel.r, cellSel.r2 ?? cellSel.r), r1 = Math.max(cellSel.r, cellSel.r2 ?? cellSel.r), c0 = Math.min(cellSel.c, cellSel.c2 ?? cellSel.c), c1 = Math.max(cellSel.c, cellSel.c2 ?? cellSel.c);
+            for (let r = r0; r <= r1; r++) for (let c2 = c0; c2 <= c1; c2++) { const k = r + ':' + c2; if (c === 'transparent') delete it.cfill[k]; else it.cfill[k] = c; }
+            sigs.delete(it.id); render(true); if (!keep) commit(); else queueSave(true);
+        }
+        // ── formes : accès rapide, bibliothèque, formes à soi ──
+        const quickShapes = () => { const p = P(), K = KIT(); const list = (p.quickShapes || []).map(k => K.shapeByKey?.(k)).filter(Boolean).filter(sh => !(p.shapesHidden || []).includes(sh.k)); return list.length ? list : SHAPES.map(([k, n]) => ({k, n, d: K.shapeByKey?.(k)?.d || ''})); };
+        const shapeItem = k => { const sh = KIT().shapeByKey?.(k); const o = {shape: k}; if (k.startsWith('my_') && sh) { if (sh.mask) { o.mask = sh.mask; o.svgpath = undefined; } else { o.svgpath = sh.d; o.eo = !!sh.eo; o.mask = undefined; } } else { o.svgpath = undefined; o.mask = undefined; } return o; };
+        function applyShape(k) {
+            if (ro()) return;
+            const o = shapeItem(k);
+            selItems().filter(i => i.type === 'shape').forEach(i => { Object.entries(o).forEach(([kk, v]) => { if (v === undefined) delete i[kk]; else i[kk] = v; }); sigs.delete(i.id); });
+            shapeKind = k; render(); commit();
+        }
+        function shapeLibrary(anchor, onPick) {
+            root.querySelector('.h-bd-shapelib')?.remove();
+            const K = KIT(), p = P(), cats = (K.CATS || []).filter(c => (p.shapeCats || []).includes(c[0]) && !(p.shapesHidden || []).includes('cat:' + c[0]));
+            const ord = c => [...(p.shapeCats || [])].indexOf(c);
+            cats.sort((a, b2) => ord(a[0]) - ord(b2[0]));
+            const m = document.createElement('div'); m.className = 'h-bd-shapelib';
+            const grid = (list) => list.length ? list.map(sh => `<button type="button" class="h-bd-shcell ${shapeKind === sh.k ? 'is-on' : ''}" data-shk="${esc(sh.k)}" title="${esc(sh.n)}">${K.shapeSvg(sh, 40)}</button>`).join('') : '<p class="muted">Aucune forme.</p>';
+            const visible = c => K.shapesOf(c).filter(sh => !(p.shapesHidden || []).includes(sh.k));
+            let cur = 'all';
+            const body = q => {
+                if (q) { const n = q.toLowerCase(); const l = K.allShapes().filter(sh => !(p.shapesHidden || []).includes(sh.k) && (sh.n + ' ' + sh.tags).toLowerCase().includes(n)); return `<div class="h-bd-shgrid">${grid(l)}</div>`; }
+                return cats.filter(c => cur === 'all' || c[0] === cur).map(c => `<h5>${c[2]} ${esc(c[1])}</h5><div class="h-bd-shgrid">${grid(visible(c[0]))}${c[0] === 'mine' ? '<button type="button" class="h-bd-shcell h-bd-shnew" data-shnew title="Créer une forme">＋</button>' : ''}</div>`).join('');
+            };
+            m.innerHTML = `<div class="h-bd-shhead"><input type="search" placeholder="Rechercher une forme" data-shq><button type="button" class="button small" data-shnew>＋ Créer une forme</button></div>
+                <div class="h-bd-shcats"><button type="button" class="is-on" data-shc="all">Toutes</button>${cats.map(c => `<button type="button" data-shc="${c[0]}">${c[2]} ${esc(c[1])}</button>`).join('')}</div><div class="h-bd-shbody">${body('')}</div>`;
+            (anchor.closest('.h-bd-menuwrap, .h-bd-isec, .h-bt-opts') || root).appendChild(m);
+            const bodyEl = m.querySelector('.h-bd-shbody');
+            m.addEventListener('input', e => { if (e.target.matches('[data-shq]')) bodyEl.innerHTML = body(e.target.value.trim()); });
+            m.addEventListener('click', e => {
+                const c = e.target.closest('[data-shc]'); if (c) { cur = c.dataset.shc; m.querySelectorAll('[data-shc]').forEach(x => x.classList.toggle('is-on', x === c)); m.querySelector('[data-shq]').value = ''; bodyEl.innerHTML = body(''); return; }
+                if (e.target.closest('[data-shnew]')) { m.remove(); shapeMaker(onPick); return; }
+                const sh = e.target.closest('[data-shk]'); if (sh) { m.remove(); onPick(sh.dataset.shk); }
+            });
+            setTimeout(() => { m.querySelector('[data-shq]').focus(); document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target) && !anchor.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true); }, 0);
+        }
+        /** Créer sa forme : en traçant (traits et courbes), à partir d'un dessin du tableau, ou à partir d'une image */
+        function shapeMaker(onDone, fromDraw = null) {
+            const draws = fromDraw || selItems().filter(i => i.type === 'draw');
+            let pts = [], curves = false, imgMask = '', mode = draws.length ? 'draw' : 'trace';
+            const drawPath = () => { const bb = bbox(draws); if (!bb) return ''; const s0 = 100 / Math.max(bb.w, bb.h, 1), ox = (100 - bb.w * s0) / 2, oy = (100 - bb.h * s0) / 2;
+                return draws.map(d => { const sx = d.w / (d.vw || d.w), sy = d.h / (d.vh || d.h); const P0 = (d.points || []).map(q => [+(ox + (d.x + q[0] * sx - bb.x) * s0).toFixed(1), +(oy + (d.y + q[1] * sy - bb.y) * s0).toFixed(1)]); return P0.length > 2 ? smooth(P0) + ' Z' : ''; }).join(' '); };
+            const tracePath = () => pts.length < 3 ? '' : (curves ? smooth([...pts, pts[0]]) : 'M' + pts.map(q => q.join(' ')).join(' L')) + ' Z';
+            const preview = () => { const d = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : ''; return mode === 'image' ? (imgMask ? `<span class="h-bk-shmask" style="width:200px;height:200px;-webkit-mask-image:url(${imgMask});mask-image:url(${imgMask})"></span>` : '<p class="muted">Choisis une image.</p>') : `<svg viewBox="0 0 100 100" width="200" height="200"><path d="${d}" fill="#2a7de1" fill-opacity=".8" stroke="#1d3557" stroke-width="1"/></svg>`; };
+            ext.openDialog({eyebrow: 'TABLEAU', title: 'Créer une forme', wide: true, submitLabel: 'Enregistrer la forme',
+                body: `<div class="h-bd-maker"><div class="h-bd-makertabs">${[['trace', '✏️ En traçant'], ['draw', '✍︎ À partir de mon dessin'], ['image', '🖼 À partir d’une image']].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-on' : ''}" data-mk="${k}">${l}</button>`).join('')}</div>
+                    <div class="h-bd-makerbody"><div class="h-bd-makerpane" data-mkpane="trace"><p class="muted">Clique pour poser les points de la forme ; elle se ferme toute seule.</p><svg class="h-bd-tracer" viewBox="0 0 100 100" data-tracer><rect width="100" height="100" fill="#f6f8fa"/><path data-trp fill="#2a7de1" fill-opacity=".35" stroke="#1d3557" stroke-width=".8"/><g data-trdots></g></svg>
+                        <div class="h-bd-row"><label class="checkbox-line"><input type="checkbox" data-mkcurves> <span>arrondir en courbes</span></label><button type="button" class="h-bt" data-mkundo>↶ dernier point</button><button type="button" class="h-bt" data-mkclear>Effacer</button></div></div>
+                    <div class="h-bd-makerpane" data-mkpane="draw" hidden><p class="muted">${draws.length ? `${draws.length} dessin${draws.length > 1 ? 's' : ''} choisi${draws.length > 1 ? 's' : ''} sur le tableau : chaque trait devient une partie remplie de la forme.` : 'Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici.'}</p></div>
+                    <div class="h-bd-makerpane" data-mkpane="image" hidden><p class="muted">Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme.</p><input type="file" accept="image/*" data-mkfile><label class="checkbox-line"><input type="checkbox" data-mkdark checked> <span>le sombre devient la forme (images sans transparence)</span></label></div>
+                    <div class="h-bd-makerprev"><div data-mkprev>${preview()}</div><label>Nom de la forme<input data-mkname value="Ma forme" maxlength="60"></label></div></div></div>`,
+                onOpen: d => {
+                    const prev = () => { d.querySelector('[data-mkprev]').innerHTML = preview(); const tp = d.querySelector('[data-trp]'); tp.setAttribute('d', tracePath() || (pts.length ? 'M' + pts.map(q => q.join(' ')).join(' L') : '')); d.querySelector('[data-trdots]').innerHTML = pts.map(q => `<circle cx="${q[0]}" cy="${q[1]}" r="1.4" fill="#d0021b"/>`).join(''); };
+                    const show = () => { d.querySelectorAll('[data-mk]').forEach(x => x.classList.toggle('is-on', x.dataset.mk === mode)); d.querySelectorAll('[data-mkpane]').forEach(x => { x.hidden = x.dataset.mkpane !== mode; }); prev(); };
+                    d.querySelector('.h-bd-makertabs').addEventListener('click', e => { const k = e.target.closest('[data-mk]'); if (k) { mode = k.dataset.mk; show(); } });
+                    const tr = d.querySelector('[data-tracer]');
+                    tr.addEventListener('click', e => { const r = tr.getBoundingClientRect(); pts.push([+((e.clientX - r.left) / r.width * 100).toFixed(1), +((e.clientY - r.top) / r.height * 100).toFixed(1)]); prev(); });
+                    d.querySelector('[data-mkcurves]').addEventListener('change', e => { curves = e.target.checked; prev(); });
+                    d.querySelector('[data-mkundo]').addEventListener('click', () => { pts.pop(); prev(); });
+                    d.querySelector('[data-mkclear]').addEventListener('click', () => { pts = []; prev(); });
+                    const readImg = async () => {
+                        const f = d.querySelector('[data-mkfile]').files[0]; if (!f) return;
+                        const url = URL.createObjectURL(f), im = await new Promise((res, rej) => { const i0 = new Image(); i0.onload = () => res(i0); i0.onerror = rej; i0.src = url; });
+                        const S0 = 256, k = S0 / Math.max(im.width, im.height), c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+                        const x = c.getContext('2d'); x.drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
+                        const id0 = x.getImageData(0, 0, c.width, c.height), px = id0.data;
+                        let transparent = false; for (let i = 3; i < px.length; i += 4) if (px[i] < 250) { transparent = true; break; }
+                        if (!transparent || d.querySelector('[data-mkdark]').checked && !transparent) for (let i = 0; i < px.length; i += 4) { const lum = .299 * px[i] + .587 * px[i + 1] + .114 * px[i + 2]; px[i + 3] = Math.max(0, Math.min(255, (230 - lum) * 1.6)); px[i] = px[i + 1] = px[i + 2] = 0; }
+                        x.putImageData(id0, 0, 0); imgMask = c.toDataURL('image/png'); prev();
+                    };
+                    d.querySelector('[data-mkfile]').addEventListener('change', readImg); d.querySelector('[data-mkdark]').addEventListener('change', readImg);
+                    show();
+                },
+                onSubmit: form => {
+                    const name = form.querySelector('[data-mkname]').value.trim() || 'Ma forme';
+                    const dpath = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : '';
+                    if (mode !== 'image' && !dpath) { toast(mode === 'draw' ? 'Choisis d’abord un dessin sur le tableau.' : 'Pose au moins trois points.', 'error'); return false; }
+                    if (mode === 'image' && !imgMask) { toast('Choisis une image.', 'error'); return false; }
+                    const p = JSON.parse(JSON.stringify(P())), k = 'my_' + Date.now().toString(36);
+                    p.customShapes.push({k, n: name, c: 'mine', d: dpath, eo: false, mask: mode === 'image' ? imgMask : ''});
+                    if (!p.quickShapes.includes(k)) p.quickShapes.push(k);
+                    KIT().savePrefs?.(p);
+                    toast(`Forme « ${name} » créée : elle est dans « Mes formes ».`);
+                    shapeKind = k; onDone?.(k); if (tool === 'shape') setTool('shape');
+                }});
+        }
+        let localFonts = null;
+        async function loadLocalFonts() {
+            if (!window.queryLocalFonts) { toast('Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Maintenance → Réglages des tableaux).', 'error'); return; }
+            try { localFonts = [...new Set((await window.queryLocalFonts()).map(f => f.family))].sort((a, b2) => a.localeCompare(b2, 'fr')); renderInspector(); inspector.querySelector('[data-bd-fontfree]')?.focus(); toast(`${localFonts.length} polices de l’ordinateur : tape le début du nom.`); }
+            catch (error) { toast('Lecture des polices refusée : ' + error.message, 'error'); }
+        }
+        // ── importer un tableau exporté (fichier .lcnda-tableau.json) : un nouveau tableau ──
+        async function importBoard(f) {
+            let j; try { j = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas un tableau exporté.', 'error'); return; }
+            if (j?.format !== 'lcnda-board' || !j.data || !Array.isArray(j.data.items)) { toast('Ce fichier n’est pas un tableau exporté de l’app.', 'error'); return; }
+            const missing = Object.keys(j.media || {}).filter(id0 => !media[id0]).length;
+            try {
+                const r = await api('save_board', {}, {method: 'POST', body: {title: (j.title || 'Tableau importé') + ' (importé)', owner_type: '', data: {...j.data, locked: false}}});
+                const nid = Number(r.result?.id || r.id);
+                toast(missing ? `Tableau importé. Les médias viennent de l’app d’où il a été exporté : s’ils n’existent pas ici, leur place reste vide.` : 'Tableau importé.');
+                go(nid);
+            } catch (error) { toast(error.message, 'error'); }
+        }
         // ── « Ajouter » : tout ce qu'on peut poser ──
         function addMenu() {
             const sc = ext.appScreen;
             const own = Object.entries(ext.customWidgetDefs?.() || {});
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Ajouter au tableau', wide: true, submitLabel: 'Fermer',
                 body: `<div class="h-bd-add">
-                    <section><h4>📎 Des fichiers</h4><p class="muted">Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image).</p><input type="file" multiple accept="image/*,audio/*,video/*,application/pdf,.aif,.aiff" data-bd-files></section>
-                    <section><h4>🖼 Un média de l’app</h4><input type="search" placeholder="Titre, cote…" data-bd-msearch><div class="h-bd-results" data-bd-mres></div></section>
-                    <section><h4>🌐 D’ailleurs</h4><label>Adresse d’une image ou d’un site<input data-bd-url placeholder="https://…"></label><button type="button" class="button small" data-bd-addurl>Poser</button></section>
-                    <section><h4>👤 Une fiche</h4>${A().collectionPersonField('bd_person', null, 'Nom de la personne')}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
-                    <section><h4>📺 Un écran de l’app</h4><p class="muted">Une liste, un diagramme, une statistique, la carte, un village, une de tes listes…</p>${sc ? sc.select('list:villages', 'data-bd-screen') : ''}<label class="checkbox-line"><input type="checkbox" data-bd-screenprev checked> <span>avec l’aperçu vivant</span></label><button type="button" class="button small" data-bd-addscreen>Poser l’écran</button></section>
-                    <section><h4>✨ Un de mes widgets</h4>${own.length ? `<select data-bd-widgetsel>${own.map(([k, d]) => `<option value="${esc(k)}">${esc((d.icon || '🧱') + ' ' + (d.name || 'Mon widget'))}</option>`).join('')}</select><button type="button" class="button small" data-bd-addwidget>Poser le widget</button>` : '<p class="muted">Crée d’abord un widget (Maintenance → Éditeur de widgets).</p>'}</section>
-                    <section><h4>📚 Un recueil</h4><input type="search" placeholder="Titre du recueil" data-bd-rsearch><div class="h-bd-results" data-bd-rres></div></section>
-                    <section><h4>🏷 Une étiquette</h4><input type="search" placeholder="Étiquette de l’app, ou un mot à toi" data-bd-tsearch><div class="h-bd-results" data-bd-tres></div><button type="button" class="button small" data-bd-addtag>Poser ce mot</button></section>
-                    <section><h4>▦ Un tableur</h4><p class="muted">Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers.</p><button type="button" class="button small" data-bd-addtable>Poser un tableur</button></section>
-                    <section><h4>📁 Un dossier</h4><p class="muted">Un tableau dans le tableau : double-clic pour y entrer.</p><input data-bd-foldername placeholder="Nom du dossier"><button type="button" class="button small" data-bd-addfolder>Créer le dossier</button></section>
+                    <section data-k="files"><h4>📎 Des fichiers</h4><p class="muted">Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image).</p><input type="file" multiple accept="image/*,audio/*,video/*,application/pdf,.aif,.aiff" data-bd-files></section>
+                    <section data-k="media"><h4>🖼 Un média de l’app</h4><input type="search" placeholder="Titre, cote…" data-bd-msearch><div class="h-bd-results" data-bd-mres></div></section>
+                    <section data-k="web"><h4>🌐 D’ailleurs</h4><label>Adresse d’une image ou d’un site<input data-bd-url placeholder="https://…"></label><button type="button" class="button small" data-bd-addurl>Poser</button></section>
+                    <section data-k="person"><h4>👤 Une fiche</h4>${A().collectionPersonField('bd_person', null, 'Nom de la personne')}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
+                    <section data-k="screen"><h4>📺 Un écran de l’app</h4><p class="muted">Une liste, un diagramme, une statistique, la carte, un village, une de tes listes…</p>${sc ? sc.select('list:villages', 'data-bd-screen') : ''}<label class="checkbox-line"><input type="checkbox" data-bd-screenprev checked> <span>avec l’aperçu vivant</span></label><button type="button" class="button small" data-bd-addscreen>Poser l’écran</button></section>
+                    <section data-k="widget"><h4>✨ Un de mes widgets</h4>${own.length ? `<select data-bd-widgetsel>${own.map(([k, d]) => `<option value="${esc(k)}">${esc((d.icon || '🧱') + ' ' + (d.name || 'Mon widget'))}</option>`).join('')}</select><button type="button" class="button small" data-bd-addwidget>Poser le widget</button>` : '<p class="muted">Crée d’abord un widget (Maintenance → Éditeur de widgets).</p>'}</section>
+                    <section data-k="recueil"><h4>📚 Un recueil</h4><input type="search" placeholder="Titre du recueil" data-bd-rsearch><div class="h-bd-results" data-bd-rres></div></section>
+                    <section data-k="tag"><h4>🏷 Une étiquette</h4><input type="search" placeholder="Étiquette de l’app, ou un mot à toi" data-bd-tsearch><div class="h-bd-results" data-bd-tres></div><button type="button" class="button small" data-bd-addtag>Poser ce mot</button></section>
+                    <section data-k="table"><h4>▦ Un tableur</h4><p class="muted">Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers.</p><button type="button" class="button small" data-bd-addtable>Poser un tableur</button></section>
+                    <section data-k="folder"><h4>📁 Un dossier</h4><p class="muted">Un tableau dans le tableau : double-clic pour y entrer.</p><input data-bd-foldername placeholder="Nom du dossier"><button type="button" class="button small" data-bd-addfolder>Créer le dossier</button></section>
+                    <section data-k="import"><h4>💾 Importer un tableau</h4><p class="muted">Un fichier « .lcnda-tableau.json » (⬇ Exporter → Fichier du tableau) : il devient un nouveau tableau.</p><input type="file" accept=".json,application/json" data-bd-import></section>
                 </div>`,
                 onOpen: dlg => {
                     const close = () => dlg.close();
+                    // dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
+                    { const p = P(), box = dlg.querySelector('.h-bd-add'), secs = [...box.querySelectorAll(':scope > section[data-k]')]; ordered(p.addOrder, [], secs.map(x => x.dataset.k)).forEach(k => box.appendChild(secs.find(x => x.dataset.k === k))); secs.forEach(x => { x.hidden = (p.addHidden || []).includes(x.dataset.k); }); }
+                    dlg.querySelector('[data-bd-import]').addEventListener('change', async e => { const f = e.target.files[0]; if (!f) return; close(); importBoard(f); });
                     dlg.querySelector('[data-bd-files]').addEventListener('change', e => { uploadAndPlace(e.target.files); close(); });
                     const live = (input, box, fn, pick) => { let t = 0; input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const q = input.value.trim(); if (q.length < 1) { box.innerHTML = ''; return; } const rows = await fn(q).catch(() => []); box.innerHTML = rows.slice(0, 12).map((r, i) => `<button type="button" data-i="${i}">${r.html}</button>`).join('') || '<small class="muted">Rien trouvé.</small>'; box.querySelectorAll('[data-i]').forEach(bt => bt.addEventListener('click', () => { pick(rows[Number(bt.dataset.i)]); close(); })); }, 250); }); };
                     live(dlg.querySelector('[data-bd-msearch]'), dlg.querySelector('[data-bd-mres]'), async q => ((await api('heritage_media_search', {q})).media || []).map(m => ({m, html: `${esc(m.title || m.filename)} <small class="muted">${esc(m.media_type || '')}</small>`})),
@@ -899,7 +1168,9 @@
         const showLock = () => { const bt = root.querySelector('[data-bd-lockall]'); bt.textContent = boardLocked ? '🔒' : '🔓'; bt.classList.toggle('is-on', boardLocked); bt.title = boardLocked ? 'Tableau verrouillé : clic pour le déverrouiller' : 'Verrouiller tout le tableau'; root.classList.toggle('is-locked', boardLocked); status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); if (boardLocked) setTool('select'); };
         root.querySelector('[data-bd-lockall]').addEventListener('click', () => { boardLocked = !boardLocked; showLock(); save(); toast(boardLocked ? 'Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge.' : 'Tableau déverrouillé.'); });
         // ── associé à… (une fiche, une enquête, une partie d'enquête, une battue, un projet, un recueil, un autre tableau) ──
-        const LINK_KINDS = {person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🧭', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], board: ['🧩', 'Un autre tableau']};
+        const LINK_KINDS = {person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🧭', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], place: ['📍', 'Un lieu (sa commune)'], media: ['🖼', 'Un média (photo, acte, son…)'], label: ['🏷', 'Une étiquette'], board: ['🧩', 'Un autre tableau']};
+        const SEARCH_KINDS = {place: async q => ((await api('quick_search', {q})).places || []).map(r => ({id: r.id, title: r.name + (r.county ? ` (${r.county})` : ''), key: 'n:' + String(r.name || '').toLowerCase().trim() + '|' + String(r.county || '').toLowerCase().trim()})),
+            media: async q => ((await api('heritage_media_search', {q})).media || []).map(m => ({id: m.id, title: m.title || m.filename}))};
         function renderLinks() {
             root.querySelector('[data-bd-links]').innerHTML = links.map((l, i) => `<span class="h-bd-link"><button type="button" class="link-button" data-bd-linkgo="${i}" title="Ouvrir">${LINK_KINDS[l.kind]?.[0] || '🔗'} ${esc(l.label || '#' + l.id)}${l.part ? ` · ${esc(l.part)}` : ''}</button><button type="button" class="h-bd-unlink" data-bd-unlink="${i}" title="Ne plus associer" aria-label="Ne plus associer">×</button></span>`).join('')
                 + `<button type="button" class="link-button h-bd-linkadd" data-bd-linkadd title="Associer ce tableau à une personne, une enquête (ou une de ses parties), une battue…">🔗 Associer…</button>`;
@@ -919,29 +1190,37 @@
             if (l.kind === 'atelier_project') { st.atelier = {...(st.atelier || {}), project: Number(l.id), sel: []}; Object.assign(st, {enquetesTab: 'atelier', currentInvestigationId: 0, currentBattueId: 0}); return A().setModule('enquetes'); }
             if (l.kind === 'recueil') return ext.openRecueil?.(l.id);
             if (l.kind === 'board') return go(l.id);
+            if (l.kind === 'place') { let key = l.key || ''; try { key = (await api('board_place_key', {id: l.id})).key || key; } catch (_) {} st.listType = 'villages'; st.hVillage = key; return A().setModule('listes'); }
+            if (l.kind === 'label') { st.listType = 'labels'; return A().setModule('listes'); }
+            if (l.kind === 'media') { try { const m = (await api('media_brief', {ids: String(l.id)})).media?.[l.id]; if (m) A().openLightbox?.([{...m, id: Number(l.id)}], 0, true); else toast('Média introuvable.', 'error'); } catch (error) { toast(error.message, 'error'); } }
         }
         async function linkDialog() {
-            const [inv, bat, ate, rec, brd] = await Promise.all([api('research_lists', {kind: 'investigations'}), api('research_lists', {kind: 'battues'}), api('research_lists', {kind: 'atelier'}), api('recueils', {q: ''}), api('boards', {owner_type: 'all'})].map(p => p.catch(() => ({}))));
-            const opts = {investigation: inv.rows || [], battue: bat.rows || [], atelier_project: ate.rows || [], recueil: (rec.recueils || []).map(r => ({id: r.id, title: (r.icon || '📚') + ' ' + r.title})), board: (brd.boards || []).filter(r => Number(r.id) !== Number(b.id))};
+            const [inv, bat, ate, rec, brd, lab] = await Promise.all([api('research_lists', {kind: 'investigations'}), api('research_lists', {kind: 'battues'}), api('research_lists', {kind: 'atelier'}), api('recueils', {q: ''}), api('boards', {owner_type: 'all'}), api('my_lists')].map(p => p.catch(() => ({}))));
+            const opts = {investigation: inv.rows || [], battue: bat.rows || [], atelier_project: ate.rows || [], recueil: (rec.recueils || []).map(r => ({id: r.id, title: (r.icon || '📚') + ' ' + r.title})), board: (brd.boards || []).filter(r => Number(r.id) !== Number(b.id)), label: (lab.labels || []).map(l0 => ({id: l0.id, title: l0.name}))};
+            let found = null;
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Associer ce tableau', submitLabel: 'Associer',
                 body: `<div class="form-grid"><label class="span-2">À quoi <select name="kind">${Object.entries(LINK_KINDS).map(([k, [i, lb]]) => `<option value="${k}">${i} ${lb}</option>`).join('')}</select></label>
                     <div class="span-2" data-bd-lperson>${A().collectionPersonField('bd_lperson', null, 'Nom de la personne')}</div>
                     <label class="span-2" data-bd-lother hidden>Laquelle <select name="target"></select></label>
+                    <div class="span-2" data-bd-lsearch hidden><input type="search" placeholder="Chercher…" data-bd-lq><div class="h-bd-results" data-bd-lres></div><small class="muted" data-bd-lpicked></small></div>
                     <label class="span-2">Partie <small class="muted">(facultatif : piste 1, les témoins, la branche paternelle…)</small><input name="part" maxlength="120"></label>
                     <p class="muted span-2">Le tableau garde son rangement (${esc(b.owner_type ? OWNERS[b.owner_type] : 'libre')}) ; il apparaît en plus là où tu l’associes (sur la fiche de la personne, dans l’enquête…).</p></div>`,
                 onOpen: d => {
                     const k = d.querySelector('[name=kind]'), s = d.querySelector('[name=target]');
-                    const fill = () => { const isP = k.value === 'person'; d.querySelector('[data-bd-lperson]').hidden = !isP; d.querySelector('[data-bd-lother]').hidden = isP; if (!isP) s.innerHTML = (opts[k.value] || []).map(r => `<option value="${r.id}">${esc(r.title || '#' + r.id)}</option>`).join('') || '<option value="">(aucun pour l’instant)</option>'; };
+                    let t0 = 0; const q = d.querySelector('[data-bd-lq]'), res = d.querySelector('[data-bd-lres]');
+                    q.addEventListener('input', () => { clearTimeout(t0); t0 = setTimeout(async () => { const fn = SEARCH_KINDS[k.value]; if (!fn || q.value.trim().length < 2) { res.innerHTML = ''; return; } const rows = await fn(q.value.trim()).catch(() => []); res.innerHTML = rows.slice(0, 12).map((r, i) => `<button type="button" data-i="${i}">${esc(r.title)}</button>`).join('') || '<small class="muted">Rien trouvé.</small>'; res.querySelectorAll('[data-i]').forEach(bt => bt.addEventListener('click', () => { found = rows[Number(bt.dataset.i)]; d.querySelector('[data-bd-lpicked]').textContent = '✓ ' + found.title; res.innerHTML = ''; })); }, 250); });
+                    const fill = () => { const isP = k.value === 'person', isS = !!SEARCH_KINDS[k.value]; found = null; d.querySelector('[data-bd-lpicked]').textContent = ''; d.querySelector('[data-bd-lsearch]').hidden = !isS; d.querySelector('[data-bd-lperson]').hidden = !isP; d.querySelector('[data-bd-lother]').hidden = isP || isS; if (!isP && !isS) s.innerHTML = (opts[k.value] || []).map(r => `<option value="${r.id}">${esc(r.title || '#' + r.id)}</option>`).join('') || '<option value="">(aucun pour l’instant)</option>'; };
                     k.addEventListener('change', fill); fill();
                 },
                 onSubmit: async form => {
                     const kind = form.elements.kind.value, part = form.elements.part.value.trim();
                     let id0 = 0, label = '';
                     if (kind === 'person') { id0 = Number(form.elements.bd_lperson?.value) || 0; if (id0) label = (await personBrief(id0)).name; }
+                    else if (SEARCH_KINDS[kind]) { id0 = Number(found?.id) || 0; label = found?.title || ''; }
                     else { id0 = Number(form.elements.target.value) || 0; label = (opts[kind] || []).find(r => Number(r.id) === id0)?.title || ''; }
                     if (!id0) { toast('Choisis à quoi associer le tableau.', 'error'); return false; }
                     if (links.some(l => l.kind === kind && Number(l.id) === id0 && (l.part || '') === part)) { toast('Déjà associé.'); return; }
-                    links.push({kind, id: id0, label, part}); renderLinks(); await save(); toast('Tableau associé.');
+                    links.push({kind, id: id0, label, part, ...(found?.key ? {key: found.key} : {})}); renderLinks(); await save(); toast('Tableau associé.');
                 }});
         }
         // ── instantanés : figer l'état, y revenir, en faire un nouveau tableau ──
@@ -986,18 +1265,56 @@
         root.querySelector('[data-bd-copy]').addEventListener('click', () => copyDialog());
         root.querySelector('[data-bd-state]').addEventListener('change', () => { save(); toast('État du tableau changé.'); });
         root.querySelector('[data-bd-delete]').addEventListener('click', () => deleteBoard(b.id, root.querySelector('[data-bd-title]').value, async () => { dirty = false; go(b.parent_id || 0); }));
-        root.querySelector('[data-bd-bg]').addEventListener('change', e => { bg = e.target.value; stage.dataset.bg = bg; queueSave(true); });
+        root.querySelector('[data-bd-bg]').addEventListener('change', e => { bg = e.target.value; stage.dataset.bg = bg; root.querySelector('[data-bd-bgcolor]').hidden = root.querySelector('[data-bd-bgpattern]').hidden = bg !== 'custom'; queueSave(true); });
+        root.querySelector('[data-bd-bgcolor]').addEventListener('input', e => { bgColor = e.target.value; stage.style.setProperty('--bgc', bgColor); queueSave(true); });
+        root.querySelector('[data-bd-bgpattern]').addEventListener('change', e => { bgPattern = e.target.value; stage.dataset.pattern = bgPattern; queueSave(true); });
+        // ── exporter : images, PDF, impression, fichier du tableau ──
+        const fileBase = () => (root.querySelector('[data-bd-title]').value.trim() || 'tableau').replace(/[\\/:*?"<>|]+/g, '-');
+        const download = (href, name) => { const a = document.createElement('a'); a.href = href; a.download = name; document.body.appendChild(a); a.click(); a.remove(); };
+        function popMenu(anchor, rows, onPick) {
+            root.querySelector('.h-bd-pop')?.remove();
+            const m = document.createElement('div'); m.className = 'h-bd-pop'; m.setAttribute('role', 'menu');
+            m.innerHTML = rows.map(r => r === '-' ? '<hr>' : `<button type="button" role="menuitem" data-k="${r[0]}" ${r[2] ? 'disabled' : ''}>${r[1]}</button>`).join('');
+            (anchor.closest('.h-bd-menuwrap') || anchor.parentElement).appendChild(m);
+            m.addEventListener('click', ev => { const bt = ev.target.closest('[data-k]'); if (!bt) return; m.remove(); onPick(bt.dataset.k); });
+            setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0);
+        }
+        async function exportMenu(btn) {
+            popMenu(btn, [['png', '🖼 Image PNG'], ['jpg', '🖼 Image JPG'], ['pdf', '📄 PDF'], ['print', '🖨 Imprimer…'], '-', ['selpng', '✂ La sélection en PNG', !sel.size], '-', ['file', '💾 Fichier du tableau (pour le garder ou le donner)']], async k => {
+                if (k === 'file') { const data = {format: 'lcnda-board', version: 1, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links}, media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
+                    download(URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], {type: 'application/json'})), fileBase() + '.lcnda-tableau.json'); toast('Fichier du tableau enregistré : « ＋ Ajouter → Importer un tableau » le rouvre.'); return; }
+                status('Préparation…');
+                const url = await thumbnail(0, 0, k === 'print' || k === 'pdf' ? 2 : 2, k === 'jpg' || k === 'pdf' || k === 'print' ? 'image/jpeg' : 'image/png', k === 'selpng');
+                status(dirty ? 'Modifié…' : 'Enregistré ✓');
+                if (!url) { toast('Image impossible (une image d’un autre site l’empêche).', 'error'); return; }
+                if (k === 'png' || k === 'selpng') return download(url, fileBase() + (k === 'selpng' ? ' (sélection)' : '') + '.png');
+                if (k === 'jpg') return download(url, fileBase() + '.jpg');
+                const img = await new Promise(res => { const im = new Image(); im.onload = () => res(im); im.src = url; });
+                if (k === 'pdf') return download(URL.createObjectURL(jpegPdf(url, img.width, img.height, fileBase())), fileBase() + '.pdf');
+                // imprimer : une page avec l'image, ajustée à la feuille
+                const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);
+                fr.contentDocument.write(`<!doctype html><title>${esc(fileBase())}</title><style>@page{size:${img.width > img.height ? 'landscape' : 'portrait'};margin:10mm}html,body{margin:0}img{max-width:100%;max-height:100vh;display:block;margin:auto}</style><img src="${url}">`); fr.contentDocument.close();
+                setTimeout(() => { fr.contentWindow.focus(); fr.contentWindow.print(); setTimeout(() => fr.remove(), 60000); }, 300);
+            });
+        }
+        // le menu du zoom (comme Freeform) : ajuster à la sélection, adapter le contenu à la fenêtre…
+        root.querySelector('[data-bd-zoomout]').addEventListener('click', e => popMenu(e.currentTarget, [['sel', 'Ajuster à la sélection', !sel.size], ['fit', 'Adapter le contenu à la fenêtre'], '-', ['50', '50 %'], ['100', '100 %'], ['200', '200 %']], k => {
+            if (k === 'fit') { fitAll(); queueSave(false); return; }
+            if (k === 'sel') { fitTo(selItems()); queueSave(false); return; }
+            zoomAt(Number(k) / 100);
+        }));
         root.querySelector('[data-bd-undo]').addEventListener('click', () => restore(hpos - 1));
         root.querySelector('[data-bd-redo]').addEventListener('click', () => restore(hpos + 1));
         root.querySelector('[data-bd-full]').addEventListener('click', () => { root.classList.toggle('is-full'); setTimeout(applyView, 50); });
-        root.querySelector('[data-bd-png]').addEventListener('click', async () => { const url = await thumbnail(0, 0, 2); if (!url) { toast('Image impossible (une image d’un autre site l’empêche).', 'error'); return; } const a = document.createElement('a'); a.href = url; a.download = (root.querySelector('[data-bd-title]').value || 'tableau') + '.png'; document.body.appendChild(a); a.click(); a.remove(); });
+        root.querySelector('[data-bd-export]').addEventListener('click', e => exportMenu(e.currentTarget));
         root.querySelector('[data-bd-close]').addEventListener('click', async () => { if (dirty) await save(); go(0); });
         root.querySelectorAll('[data-bd-open]').forEach(x => x.addEventListener('click', async () => { if (dirty) await save(); go(Number(x.dataset.bdOpen)); }));
         root.querySelector('[data-bd-place]').addEventListener('click', () => placeDialog(ownerData, async () => { await save(); go(b.id); }));
         // quitter : on enregistre ; on enlève les écoutes du document
-        const obs = new MutationObserver(() => { if (!root.isConnected) { obs.disconnect(); window.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp); document.removeEventListener('paste', onPaste); if (dirty) save(); } });
+        const obs = new MutationObserver(() => { if (!root.isConnected) { obs.disconnect(); window.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp); document.removeEventListener('paste', onPaste); document.removeEventListener('copy', onCopy); window.removeEventListener('beforeunload', onUnload); if (dirty) save(); } });
         obs.observe(document.getElementById('workspace') || document.body, {childList: true});
-        window.addEventListener('beforeunload', () => { if (dirty) save(); });
+        const onUnload = () => { if (dirty) save(); };
+        window.addEventListener('beforeunload', onUnload);
         setTool('select'); applyView(); render(); history = [snap()]; hpos = 0; showLock();
         if (!b.data?.view && items.length) fitAll();
         root.focus();

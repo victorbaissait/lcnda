@@ -75,8 +75,12 @@ function board_clean_item(array $it): ?array
         'x' => $num($it['x'] ?? 0), 'y' => $num($it['y'] ?? 0), 'w' => $num($it['w'] ?? 120, 4, 20000), 'h' => $num($it['h'] ?? 80, 4, 20000), 'rot' => $num($it['rot'] ?? 0, -360, 360),
         'z' => (int) $num($it['z'] ?? 0, -1e6, 1e6), 'locked' => !empty($it['locked']), 'group' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($it['group'] ?? ''))];
     foreach (['fill', 'stroke', 'color', 'bg'] as $k) { if (isset($it[$k])) { $out[$k] = $color($it[$k]); } }
-    foreach (['sw' => [0, 60], 'fs' => [6, 400], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
-    foreach (['shape' => 40, 'text' => 20000, 'title' => 300, 'font' => 80, 'align' => 10, 'brush' => 20, 'dash' => 20, 'target' => 400, 'label' => 200, 'kind' => 40, 'part' => 120, 'note' => 2000, 'headStart' => 12, 'headEnd' => 12, 'path' => 12] as $k => $n) { if (isset($it[$k])) { $out[$k] = $str($it[$k], $n); } }
+    foreach (['sw' => [0, 500], 'fs' => [4, 500], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200], 'hard' => [0, 100], 'bw' => [0, 200]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
+    foreach (['shape' => 40, 'text' => 20000, 'title' => 300, 'font' => 80, 'align' => 10, 'brush' => 20, 'dash' => 20, 'target' => 400, 'label' => 200, 'kind' => 40, 'part' => 120, 'note' => 2000, 'headStart' => 12, 'headEnd' => 12, 'path' => 12, 'list' => 10] as $k => $n) { if (isset($it[$k])) { $out[$k] = $str($it[$k], $n); } }
+    // sûrs pour le style : alignement connu, police sans caractères spéciaux, pointes connues
+    if (isset($out['align']) && !in_array($out['align'], ['left', 'center', 'right', 'justify'], true)) { $out['align'] = 'left'; }
+    if (isset($out['font'])) { $out['font'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['font'])); }
+    foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !preg_match('/^[a-z_]{1,12}$/', $out[$k])) { $out[$k] = 'triangle'; } }
     if (isset($it['layout'])) { $out['layout'] = $str($it['layout'], 40); }
     // tableur : une grille de textes (100 lignes × 30 colonnes au plus), largeurs des colonnes
     if (($it['type'] ?? '') === 'table') {
@@ -84,17 +88,28 @@ function board_clean_item(array $it): ?array
         $out['cells'] = array_values(array_map(static fn($row) => array_values(array_map(static fn($c) => mb_substr(is_scalar($c) ? (string) $c : '', 0, 500), array_slice(is_array($row) ? $row : [], 0, 30))), array_slice($cells, 0, 100)));
         if (!$out['cells']) { $out['cells'] = [['']]; }
         $out['colw'] = array_values(array_map(static fn($w) => $num($w, 30, 800), array_slice(is_array($it['colw'] ?? null) ? $it['colw'] : [], 0, 30)));
+        $out['merges'] = [];
+        foreach (array_slice(is_array($it['merges'] ?? null) ? $it['merges'] : [], 0, 300) as $m) {
+            if (!is_array($m)) { continue; }
+            $mr = max(0, (int) ($m['r'] ?? 0)); $mc = max(0, (int) ($m['c'] ?? 0)); $rs = max(1, min(100, (int) ($m['rs'] ?? 1))); $cs = max(1, min(30, (int) ($m['cs'] ?? 1)));
+            if ($rs * $cs > 1) { $out['merges'][] = ['r' => $mr, 'c' => $mc, 'rs' => $rs, 'cs' => $cs]; }
+        }
         $out['header'] = !empty($it['header']); $out['hcol'] = !empty($it['hcol']); $out['stripes'] = !empty($it['stripes']);
         if (isset($it['hfill'])) { $out['hfill'] = $color($it['hfill']); }
         if (isset($it['cfill']) && is_array($it['cfill'])) { $cf = []; foreach (array_slice($it['cfill'], 0, 400, true) as $k => $v) { if (preg_match('/^\d{1,3}:\d{1,2}$/', (string) $k) && ($c = $color($v)) !== '') { $cf[(string) $k] = $c; } } $out['cfill'] = (object) $cf; }
     }
+    foreach (['underline', 'strike', 'eo'] as $k) { if (isset($it[$k])) { $out[$k] = !empty($it[$k]); } }
+    if (isset($out['list']) && !in_array($out['list'], ['', 'bullet', 'num', 'roman', 'alpha', 'ALPHA', 'dash', 'check'], true)) { $out['list'] = ''; }
+    // forme à soi : un chemin SVG (boîte 100 × 100) ou une image servant de masque
+    if (isset($it['svgpath']) && preg_match('/^[MLHVCSQTAZmlhvcsqtaz0-9.,\s-]{1,30000}$/', (string) $it['svgpath'])) { $out['svgpath'] = (string) $it['svgpath']; }
+    if (isset($it['mask']) && is_string($it['mask']) && strlen($it['mask']) <= 400000 && preg_match('~^data:image/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$~', $it['mask'])) { $out['mask'] = $it['mask']; }
     foreach (['bold', 'italic', 'arrowStart', 'arrowEnd', 'curved', 'preview', 'collapsed'] as $k) { if (isset($it[$k])) { $out[$k] = !empty($it[$k]); } }
     foreach (['media_id', 'board_id', 'recueil_id', 'label_id', 'person_id'] as $k) { if (isset($it[$k])) { $out[$k] = max(0, (int) $it[$k]); } }
     if (isset($it['url'])) { $out['url'] = $url($it['url']); }
     if (isset($it['from'])) { $out['from'] = preg_replace('/[^a-z0-9_-]/i', '', (string) $it['from']); }
     if (isset($it['to'])) { $out['to'] = preg_replace('/[^a-z0-9_-]/i', '', (string) $it['to']); }
     if (isset($it['points']) && is_array($it['points'])) {
-        $out['points'] = array_values(array_map(static fn($p) => [round($num($p[0] ?? 0), 1), round($num($p[1] ?? 0), 1)], array_slice(array_filter($it['points'], 'is_array'), 0, 5000)));
+        $out['points'] = array_values(array_map(static fn($p) => [round($num($p[0] ?? 0), 1), round($num($p[1] ?? 0), 1)], array_slice(array_filter($it['points'], 'is_array'), 0, 20000)));
     }
     return $out;
 }
@@ -119,8 +134,10 @@ function save_board(PDO $pdo, array $data): array
         $raw = is_array($data['data']) ? $data['data'] : (json_decode((string) $data['data'], true) ?: []);
         $items = array_values(array_filter(array_map(static fn($it) => is_array($it) ? board_clean_item($it) : null, array_slice($raw['items'] ?? [], 0, 3000))));
         $view = is_array($raw['view'] ?? null) ? ['x' => (float) ($raw['view']['x'] ?? 0), 'y' => (float) ($raw['view']['y'] ?? 0), 'k' => max(0.05, min(8, (float) ($raw['view']['k'] ?? 1)))] : ['x' => 0, 'y' => 0, 'k' => 1];
-        $bg = in_array($raw['bg'] ?? '', ['dots', 'grid', 'lines', 'plain', 'paper', 'dark', 'cork'], true) ? $raw['bg'] : 'dots';
-        $json = json_encode(['items' => $items, 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => board_clean_links($raw['links'] ?? [])], JSON_UNESCAPED_UNICODE);
+        $bg = in_array($raw['bg'] ?? '', ['dots', 'grid', 'lines', 'plain', 'paper', 'dark', 'cork', 'custom'], true) ? $raw['bg'] : 'dots';
+        $bgColor = preg_match('/^#[0-9a-f]{6}$/i', (string) ($raw['bgColor'] ?? '')) ? (string) $raw['bgColor'] : '';
+        $bgPattern = in_array($raw['bgPattern'] ?? '', ['', 'dots', 'grid', 'lines'], true) ? (string) ($raw['bgPattern'] ?? '') : '';
+        $json = json_encode(['items' => $items, 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => board_clean_links($raw['links'] ?? []), 'bgColor' => $bgColor, 'bgPattern' => $bgPattern], JSON_UNESCAPED_UNICODE);
         if (strlen($json) > 20 * 1024 * 1024) { throw new RuntimeException('Tableau trop lourd : retire quelques dessins.'); }
         $fields['data_json'] = $json; $fields['item_count'] = count($items);
         if ($thumb !== '') { $fields['thumb'] = $thumb; }
@@ -144,7 +161,7 @@ function save_board(PDO $pdo, array $data): array
 }
 
 /** Ce à quoi un tableau est associé, en plus de son rangement : des fiches, des enquêtes, des battues, des projets, des recueils… */
-const BOARD_LINK_KINDS = ['person' => 'Personne', 'investigation' => 'Enquête', 'battue' => 'Battue', 'atelier_project' => 'Atelier', 'recueil' => 'Recueil', 'place' => 'Lieu', 'family' => 'Famille', 'board' => 'Tableau'];
+const BOARD_LINK_KINDS = ['person' => 'Personne', 'investigation' => 'Enquête', 'battue' => 'Battue', 'atelier_project' => 'Atelier', 'recueil' => 'Recueil', 'place' => 'Lieu', 'family' => 'Famille', 'board' => 'Tableau', 'media' => 'Média', 'label' => 'Étiquette'];
 function board_clean_links($links): array
 {
     $out = []; $seen = [];
@@ -153,7 +170,7 @@ function board_clean_links($links): array
         $key = $l['kind'] . ':' . safe_int($l['id']) . ':' . mb_substr(trim((string) ($l['part'] ?? '')), 0, 120);
         if (isset($seen[$key])) { continue; }
         $seen[$key] = true;
-        $out[] = ['kind' => (string) $l['kind'], 'id' => safe_int($l['id']), 'label' => mb_substr(safe_text($l['label'] ?? ''), 0, 200), 'part' => mb_substr(safe_text($l['part'] ?? ''), 0, 120)];
+        $out[] = ['kind' => (string) $l['kind'], 'id' => safe_int($l['id']), 'label' => mb_substr(safe_text($l['label'] ?? ''), 0, 200), 'part' => mb_substr(safe_text($l['part'] ?? ''), 0, 120), 'key' => mb_substr(safe_text($l['key'] ?? ''), 0, 160)];
     }
     return $out;
 }
