@@ -2607,3 +2607,18 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rt-pick-item span { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .h-rt-pick > :not(.modal-head) { margin-left: 20px; margin-right: 20px; }
 .h-rt-pick > .h-rt-pick-grid { margin-bottom: 20px; }
+
+/* Maintenance → Montage, retouche et son : mêmes champs qu'Apparence (titre au-dessus, grande liste) */
+.h-mtp-stack { display:grid; gap:16px; }
+.h-mtp .maintenance-panel > h3:first-child { margin-top:0; }
+.h-mtp .h-mtp-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:18px 20px; padding:6px 0 12px; }
+.h-mtp .h-mtp-grid label { gap:8px; align-content:start; font-size:12px; }
+.h-mtp .h-mtp-grid select { min-height:50px; padding:12px; font-size:14px; font-weight:600; }
+.h-mtp-range { display:flex; align-items:center; gap:10px; min-height:50px; border:2px solid var(--ink); padding:0 12px; background:#fff; }
+.h-mtp-range input[type=range] { flex:1; min-height:0 !important; border:0 !important; padding:0 !important; }
+.h-mtp-range output { min-width:52px; text-align:right; font-weight:700; font-size:14px; }
+.h-mtp-color { display:flex; align-items:center; gap:8px; }
+.h-mtp-color input[type=color] { width:50px !important; height:36px; }
+.h-mtp-colors .h-mtp-swatch { padding:9px 12px; font-size:13px; }
+.h-mtp-presets { margin:4px 0 16px; padding:12px; border:2px solid var(--ink); }
+@media (max-width: 1200px) { .h-mtp .h-mtp-grid { grid-template-columns:1fr; } }

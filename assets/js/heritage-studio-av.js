@@ -543,6 +543,9 @@
     const inkOn = hex => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '#111'; const n = parseInt(m[1], 16), l = 0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255); return l > 150 ? '#111' : '#fff'; };
     function montagePrefs() {
         let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {}
+        return montagePrefsFrom(v);
+    }
+    function montagePrefsFrom(v) {
         const pick = (x, list, d) => list.includes(x) ? x : d, num = (x, a, b, d) => Number.isFinite(Number(x)) ? Math.min(b, Math.max(a, Number(x))) : d;
         return {side: pick(v.side, ['right', 'left'], 'right'), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), help: v.help !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
             height: pick(Number(v.height), MT_SIZES.map(x => x[0]), 0), quality: pick(Number(v.quality), MT_QUALITY.map(x => x[0]), 5), fps: pick(Number(v.fps), MT_FPS, 30), abr: pick(Number(v.abr), [96, 128, 192, 256], 128),
@@ -1001,9 +1004,25 @@
     /* ═════════ Maintenance → Montage, retouche et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
     const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son']];
+    /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
+    const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
+    const LAYOUT_FIELDS = ['side', 'stage', 'lane', 'help', ...MT_COLORS.map(c => c[0])];
+    const cleanLayout = v => { const all = montagePrefsFrom(v || {}); return Object.fromEntries(LAYOUT_FIELDS.map(k => [k, all[k]])); };
+    const KEY_RX = /^[\w.-]{1,60}$/;
+    const cleanToolbar = v => { const out = {order: {}, hidden: {}}; ['order', 'hidden'].forEach(f => Object.entries(v?.[f] || {}).slice(0, 40).forEach(([g, list]) => { if (KEY_RX.test(g) && Array.isArray(list)) out[f][g] = list.filter(k => typeof k === 'string' && KEY_RX.test(k)).slice(0, 120); })); return out; };
+    const cleanName = n => String(n ?? '').replace(/[<>"`]/g, '').trim().slice(0, 80);
+    const cleanSets = (list, clean) => (Array.isArray(list) ? list : []).filter(x => x && cleanName(x.name)).slice(0, 60).map(x => ({name: cleanName(x.name), date: String(x.date || '').slice(0, 20), v: clean(x.v)}));
+    const readJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
+    const writeJson = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { toast('Plus de place pour enregistrer ce réglage : supprime un ensemble.', 'error'); return false; } };
+    const layoutSets = () => cleanSets(readJson(LAYOUT_SETS, []), cleanLayout);
+    const toolbarSets = which => cleanSets(readJson(TB_SETS, {})[which], cleanToolbar);
+    const saveToolbarSets = (which, list) => { const all = readJson(TB_SETS, {}); all[which] = list; return writeJson(TB_SETS, all); };
+    const downloadJson = (name, obj) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {type: 'application/json'})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
+    const presetBar = (id, sets, what) => `<div class="h-pp-presets h-mtp-presets" data-set="${id}"><strong>💾 Ensembles de réglages</strong>${sets.length ? `<select data-set-pick aria-label="Ensemble">${sets.map((x, i) => `<option value="${i}">${esc(x.name)}${x.date ? ' — ' + esc(x.date) : ''}</option>`).join('')}</select><button type="button" class="button small" data-set-apply>Appliquer</button><button type="button" class="button small secondary" data-set-del title="Supprimer cet ensemble">🗑</button>` : `<span class="muted">Aucun ensemble pour l’instant.</span>`}
+        <button type="button" class="button small secondary" data-set-save>＋ Enregistrer ${esc(what)} comme ensemble…</button><span class="h-pp-sep"></span><button type="button" class="button small secondary" data-set-export title="Un fichier .json avec ${esc(what)} et les ensembles">⬇️ Exporter</button><label class="button small secondary">⬆️ Importer<input type="file" accept=".json,application/json" data-set-import hidden></label></div>`;
     ext.maintenance.montage_prefs = async token => {
         const st = S(), ws = A().$('#workspace');
-        const lsJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
+        const lsJson = readJson;
         let which = st.montagePrefsEditor || 'video';
         ext.maintenance.montage_prefs.ac?.abort(); const ac = ext.maintenance.montage_prefs.ac = new AbortController();
         const draw = () => {
@@ -1012,46 +1031,87 @@
             const opt = (list, v) => list.map(([k, l]) => `<option value="${k}" ${String(k) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('');
             const groups = (defs?.groups || []).map(g => { const order = cfg.order?.[g.key] || [], hidden = cfg.hidden?.[g.key] || []; const items = [...order.map(k => g.items.find(i => i[0] === k)).filter(Boolean), ...g.items.filter(i => !order.includes(i[0]))];
                 return `<section><h4>${esc(g.label)}</h4><ol class="h-pet-layout" data-g="${esc(g.key)}">${items.map(([k, l]) => `<li class="h-pet-lrow" data-k="${esc(k)}"><input type="checkbox" ${hidden.includes(k) ? '' : 'checked'} title="Montrer"><span>${esc(l)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol></section>`; }).join('');
+            const edName = (EDITORS.find(e => e[0] === which) || EDITORS[0])[1];
             ws.innerHTML = `<section class="page h-mtp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Montage, retouche et son</h2><p>La disposition du montage vidéo, l’enregistrement des vidéos par défaut, les boutons et options de chaque éditeur (montrés, cachés, rangés) et le plein écran.</p></div>
                 <div class="page-actions"><button type="button" class="button" data-mtp-save>Enregistrer</button></div></header>
                 <div class="h-mtp-cols">
+                <div class="h-mtp-stack">
                 <section class="maintenance-panel"><h3>🎬 Disposition du montage</h3>
-                    <label class="h-avx-row">Panneau des réglages <select data-mtp="side">${opt([['right', 'à droite de l’image'], ['left', 'à gauche de l’image']], p.side)}</select></label>
-                    <label class="h-avx-row">Hauteur de l’image <input type="range" min="25" max="80" value="${p.stage}" data-mtp="stage"><output>${p.stage} %</output></label>
-                    <label class="h-avx-row">Hauteur des pistes <input type="range" min="28" max="70" value="${p.lane}" data-mtp="lane"><output>${p.lane} px</output></label>
-                    <label class="checkbox-line"><input type="checkbox" data-mtp="help" ${p.help ? 'checked' : ''}> montrer l’aide sous la frise</label>
-                    <h4>🎨 Couleur des blocs sur la frise</h4><div class="h-mtp-colors">${MT_COLORS.map(([k, l]) => `<label class="h-avx-row"><input type="color" data-mtp="${k}" value="${esc(p[k])}"> <span class="h-mtp-swatch" data-mtp-sw="${k}" style="background:${esc(p[k])};color:${inkOn(p[k])}">${esc(l)}</span></label>`).join('')}</div>
+                    ${presetBar('layout', layoutSets(), 'cette disposition')}
+                    <div class="form-grid h-mtp-grid">
+                    <label>Panneau des réglages<select data-mtp="side">${opt([['right', 'À droite de l’image'], ['left', 'À gauche de l’image']], p.side)}</select></label>
+                    <label>Aide sous la frise<select data-mtp="help">${opt([['1', 'Montrée'], ['0', 'Cachée']], p.help ? '1' : '0')}</select></label>
+                    <label>Hauteur de l’image<span class="h-mtp-range"><input type="range" min="25" max="80" value="${p.stage}" data-mtp="stage"><output>${p.stage} %</output></span></label>
+                    <label>Hauteur des pistes<span class="h-mtp-range"><input type="range" min="28" max="70" value="${p.lane}" data-mtp="lane"><output>${p.lane} px</output></span></label>
+                    </div>
+                    <h4>🎨 Couleur des blocs sur la frise</h4><div class="h-mtp-colors">${MT_COLORS.map(([k, l]) => `<label class="h-mtp-color"><input type="color" data-mtp="${k}" value="${esc(p[k])}"> <span class="h-mtp-swatch" data-mtp-sw="${k}" style="background:${esc(p[k])};color:${inkOn(p[k])}">${esc(l)}</span></label>`).join('')}</div>
                     <button type="button" class="button small secondary" data-mtp-colreset>Couleurs de départ</button>
-                    <h3>📤 Enregistrement des vidéos (par défaut)</h3>
-                    <label class="h-avx-row">Format <select data-mtp="fmt">${opt([['mp4', 'MP4 (H.264) — lu partout'], ['webm', 'WebM — léger']], p.fmt)}</select></label>
-                    <label class="h-avx-row">Taille <select data-mtp="height">${opt(MT_SIZES, p.height)}</select></label>
-                    <label class="h-avx-row">Qualité <select data-mtp="quality">${opt(MT_QUALITY, p.quality)}</select></label>
-                    <label class="h-avx-row">Images par seconde <select data-mtp="fps">${opt(MT_FPS.map(f => [f, f + ' images/s']), p.fps)}</select></label>
-                    <label class="h-avx-row">Son <select data-mtp="abr">${opt([[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], p.abr)}</select></label>
-                    <p class="muted">On peut toujours les changer au moment d’enregistrer. MP4 seulement si l’ordinateur sait le faire, sinon WebM.</p>
-                    <h3>⛶ Plein écran à l’ouverture</h3>${EDITORS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-mtp-full="${k}" ${full[k] ? 'checked' : ''}> ${esc(l)}</label>`).join('')}
                 </section>
+                <section class="maintenance-panel"><h3>📤 Enregistrement des vidéos (par défaut)</h3>
+                    <div class="form-grid h-mtp-grid">
+                    <label>Format<select data-mtp="fmt">${opt([['mp4', 'MP4 (H.264) — lu partout'], ['webm', 'WebM — léger']], p.fmt)}</select></label>
+                    <label>Taille<select data-mtp="height">${opt(MT_SIZES, p.height)}</select></label>
+                    <label>Qualité<select data-mtp="quality">${opt(MT_QUALITY, p.quality)}</select></label>
+                    <label>Images par seconde<select data-mtp="fps">${opt(MT_FPS.map(f => [f, f + ' images/s']), p.fps)}</select></label>
+                    <label>Son<select data-mtp="abr">${opt([[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], p.abr)}</select></label>
+                    </div>
+                    <p class="muted">On peut toujours les changer au moment d’enregistrer. MP4 seulement si l’ordinateur sait le faire, sinon WebM.</p>
+                </section>
+                <section class="maintenance-panel"><h3>⛶ Plein écran à l’ouverture</h3>
+                    <div class="form-grid h-mtp-grid">${EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], full[k] ? '1' : '0')}</select></label>`).join('')}</div>
+                </section>
+                </div>
                 <section class="maintenance-panel"><h3>🧰 Boutons et options</h3>
-                    <label class="h-avx-row">Éditeur <select data-mtp-which>${opt(EDITORS, which)}</select></label>
-                    <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ».</p>
+                    <div class="form-grid h-mtp-grid"><label>Éditeur<select data-mtp-which>${opt(EDITORS, which)}</select></label></div>
+                    ${presetBar('toolbar', toolbarSets(which), 'ces boutons')}
+                    <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
                     ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
                 </section></div></section>`;
         };
         draw();
+        // ce qui est à l'écran (pas encore enregistré) : disposition, boutons de l'éditeur choisi
+        const layoutNow = () => { const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.dataset.mtp === 'help' ? el.value === '1' : el.value; }); return cleanLayout(v); };
+        const toolbarNow = () => { const box = ws.querySelector('[data-mtp-groups]'); if (!box) return cleanToolbar(lsJson('genealogie-toolbars', {})[which] || {}); const cfg = {order: {}, hidden: {}}; box.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; cfg.order[ol.dataset.g] = lis.map(l => l.dataset.k); cfg.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); return cfg; };
+        const applyLayout = v => { const cur = readJson(MT_KEY, {}); writeJson(MT_KEY, {...cur, ...cleanLayout(v)}); };
+        const applyToolbar = v => { const all = lsJson('genealogie-toolbars', {}); all[which] = cleanToolbar(v); writeJson('genealogie-toolbars', all); };
+        const setOps = {
+            layout: {list: layoutSets, save: list => writeJson(LAYOUT_SETS, list), now: layoutNow, apply: applyLayout, clean: cleanLayout, type: 'lcnda-montage-disposition', file: 'disposition-montage'},
+            toolbar: {list: () => toolbarSets(which), save: list => saveToolbarSets(which, list), now: toolbarNow, apply: applyToolbar, clean: cleanToolbar, type: 'lcnda-boutons-editeur', file: () => `boutons-${which}`},
+        };
         ws.addEventListener('input', e => { const el = e.target.closest('[data-mtp]'); if (el?.type === 'color') { const sw = ws.querySelector(`[data-mtp-sw="${el.dataset.mtp}"]`); if (sw) { sw.style.background = el.value; sw.style.color = inkOn(el.value); } return; } if (el?.type === 'range') el.nextElementSibling.textContent = el.value + (el.dataset.mtp === 'stage' ? ' %' : ' px'); }, {signal: ac.signal});
-        ws.addEventListener('change', e => { if (e.target.matches('[data-mtp-which]')) { which = st.montagePrefsEditor = e.target.value; draw(); } }, {signal: ac.signal});
+        ws.addEventListener('change', async e => {
+            if (e.target.matches('[data-mtp-which]')) { which = st.montagePrefsEditor = e.target.value; draw(); return; }
+            const inp = e.target.closest('[data-set-import]'); if (!inp) return;
+            const op = setOps[inp.closest('[data-set]').dataset.set], file = inp.files?.[0]; inp.value = ''; if (!file) return;
+            if (file.size > 2e6) return toast('Fichier trop gros pour des réglages.', 'error');
+            let data; try { data = JSON.parse(await file.text()); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); }
+            if (data?.type !== op.type) return toast(op === setOps.layout ? 'Ce fichier n’est pas une disposition du montage.' : 'Ce fichier n’est pas un réglage de boutons.', 'error');
+            if (op === setOps.toolbar && data.editor && data.editor !== which) { which = st.montagePrefsEditor = EDITORS.some(x => x[0] === data.editor) ? data.editor : which; }
+            const list = op.list(), add = cleanSets(data.sets, op.clean); let n = 0;
+            add.forEach(x => { let name = x.name; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({...x, name}); n++; });
+            if (data.current && typeof data.current === 'object') { let name = cleanName(data.name) || 'Importé'; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.current)}); n++; }
+            if (op.save(list.slice(-60))) { draw(); toast(`${n} ensemble(s) importé(s) : choisis-en un puis « Appliquer ».`); }
+        }, {signal: ac.signal});
         ws.addEventListener('click', e => {
             const li = e.target.closest('li');
             if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
+            const bar = e.target.closest('[data-set]');
+            if (bar) {
+                const op = setOps[bar.dataset.set], pick = () => op.list()[Number(bar.querySelector('[data-set-pick]')?.value)];
+                if (e.target.closest('[data-set-save]')) { const name = cleanName(prompt(bar.dataset.set === 'layout' ? 'Nom de cette disposition (ex. Grand écran) :' : 'Nom de ces boutons (ex. L’essentiel) :') || ''); if (!name) return; const list = op.list().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.now()}); if (op.save(list)) { draw(); toast(`Ensemble « ${name} » enregistré.`); } return; }
+                if (e.target.closest('[data-set-apply]')) { const x = pick(); if (!x || !confirm(`Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`)) return; op.apply(x.v); draw(); toast(`Ensemble « ${x.name} » appliqué.`); return; }
+                if (e.target.closest('[data-set-del]')) { const x = pick(); if (!x || !confirm(`Supprimer l’ensemble « ${x.name} » ?`)) return; op.save(op.list().filter(y => y !== x && y.name !== x.name)); draw(); return; }
+                if (e.target.closest('[data-set-export]')) { const f = typeof op.file === 'function' ? op.file() : op.file; downloadJson(`${f}-${new Date().toISOString().slice(0, 10)}.json`, {type: op.type, version: 1, editor: bar.dataset.set === 'toolbar' ? which : undefined, name: bar.dataset.set === 'layout' ? 'Disposition exportée' : 'Boutons exportés', current: op.now(), sets: op.list()}); return; }
+                return;
+            }
             if (e.target.closest('[data-mtp-colreset]')) { MT_COLORS.forEach(([k, , d]) => { const el = ws.querySelector(`[data-mtp="${k}"]`); if (el) { el.value = d; el.dispatchEvent(new Event('input', {bubbles: true})); } }); toast('Couleurs de départ remises (n’oublie pas « Enregistrer »).'); return; }
-            if (e.target.closest('[data-mtp-reset]')) { const all = lsJson('genealogie-toolbars', {}); delete all[which]; try { localStorage.setItem('genealogie-toolbars', JSON.stringify(all)); } catch (_) {} toast('Boutons remis comme au départ.'); draw(); }
+            if (e.target.closest('[data-mtp-reset]')) { const all = lsJson('genealogie-toolbars', {}); delete all[which]; writeJson('genealogie-toolbars', all); toast('Boutons remis comme au départ.'); draw(); }
             if (e.target.closest('[data-mtp-save]')) {
-                const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.type === 'checkbox' ? el.checked : el.value; });
-                try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {}
-                const full = lsJson('genealogie-editor-full', {}); ws.querySelectorAll('[data-mtp-full]').forEach(el => { full[el.dataset.mtpFull] = el.checked; }); try { localStorage.setItem('genealogie-editor-full', JSON.stringify(full)); } catch (_) {}
-                const box = ws.querySelector('[data-mtp-groups]');
-                if (box) { const all = lsJson('genealogie-toolbars', {}), cfg = {order: {}, hidden: {}}; box.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; cfg.order[ol.dataset.g] = lis.map(l => l.dataset.k); cfg.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); all[which] = cfg; try { localStorage.setItem('genealogie-toolbars', JSON.stringify(all)); } catch (_) {} }
+                const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.dataset.mtp === 'help' ? el.value === '1' : el.value; });
+                writeJson(MT_KEY, v);
+                const full = lsJson('genealogie-editor-full', {}); ws.querySelectorAll('[data-mtp-full]').forEach(el => { full[el.dataset.mtpFull] = el.value === '1'; }); writeJson('genealogie-editor-full', full);
+                if (ws.querySelector('[data-mtp-groups]')) applyToolbar(toolbarNow());
                 toast('Réglages du montage, de la retouche et du son enregistrés.'); draw();
             }
         }, {signal: ac.signal});
