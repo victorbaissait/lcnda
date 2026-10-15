@@ -1213,7 +1213,10 @@ dialog.h-avx[open] { display:flex; }
 .h-mt-lane.is-hidden > .h-mt-clip { opacity:.35; }
 .h-mt-addtracks { position:sticky; left:0; display:flex; gap:6px; padding:6px; width:max-content; }
 .h-mt-clip { position:absolute; top:5px; height:30px; padding:0 6px; border:2px solid rgba(0,0,0,.25); border-radius:4px; font-size:12px; font-weight:700; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:grab; color:#111; }
-.h-mt-clip.is-v1 { background:#cfe0ff; cursor:pointer; } .h-mt-clip.is-v2 { background:#e3d4ff; } .h-mt-clip.is-text { background:#ffe7a8; } .h-mt-clip.is-audio { background:#c9f0d4; }
+.h-mt-clip.is-v1 { background:var(--mt-c-v1, #cfe0ff); color:var(--mt-i-v1, #111); cursor:pointer; } .h-mt-clip.is-v2 { background:var(--mt-c-v2, #e3d4ff); color:var(--mt-i-v2, #111); } .h-mt-clip.is-text { background:var(--mt-c-t, #ffe7a8); color:var(--mt-i-t, #111); } .h-mt-clip.is-audio { background:var(--mt-c-a, #c9f0d4); color:var(--mt-i-a, #111); }
+.h-mtp-colors { display:flex; flex-direction:column; gap:4px; margin-bottom:6px; }
+.h-mtp-colors input[type=color] { width:42px; height:28px; padding:0; border:1px solid rgba(127,127,127,.5); }
+.h-mtp-swatch { flex:1; padding:5px 8px; border-radius:4px; font-weight:700; font-size:12px; }
 .h-mt-clip.is-sel { border-color:var(--blue); box-shadow:0 0 0 2px var(--blue); }
 .h-mt-ph { position:absolute; top:0; bottom:0; width:2px; background:#d33; pointer-events:none; z-index:3; }
 .h-avx-top { display:flex; flex-wrap:wrap; gap:12px; align-items:center; }

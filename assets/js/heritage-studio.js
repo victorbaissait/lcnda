@@ -297,6 +297,26 @@
         b.title = on ? 'Quitter le plein écran' : 'Plein écran (⛶)';
         setTimeout(() => window.dispatchEvent(new Event('resize')), 30); // les images et les ondes se redessinent à la nouvelle taille
     });
+    /* ⌘ + / ⌘ − / ⌘ 0 (Ctrl sur PC et Linux) dans un éditeur ouvert : la frise du montage, l'onde du son, la photo retouchée.
+     * Renvoie true si un éditeur a zoomé (sinon l'app zoome toute la page). */
+    ext.editorZoom = dir => {
+        const open = [...document.querySelectorAll('dialog[open]')].pop(); if (!open) return false;
+        const click = sel => { const b = open.querySelector(sel); if (!b) return false; b.click(); return true; };
+        if (open.classList.contains('h-avx-montage')) {
+            const z = open.querySelector('[data-mt-zoom]'); if (!z) return false;
+            z.value = String(dir === 0 ? 40 : Math.max(Number(z.min), Math.min(Number(z.max), Math.round(Number(z.value) * (dir > 0 ? 1.4 : 1 / 1.4)))));
+            z.dispatchEvent(new Event('input', {bubbles: true})); return true;
+        }
+        if (open.querySelector('[data-avx-zoom]')) return click(dir === 0 ? '[data-avx-zoom="fit"]' : dir > 0 ? '[data-avx-zoom="in"]' : '[data-avx-zoom="out"]');
+        if (open.querySelector('[data-rt-zoom]')) return click(dir === 0 ? '[data-rt-zoomfit]' : `[data-rt-zoom="${dir > 0 ? 1 : -1}"]`);
+        return false;
+    };
+    // dans un navigateur (l'app Electron passe par son menu Affichage)
+    if (!/Electron/i.test(navigator.userAgent)) document.addEventListener('keydown', e => {
+        if (!(e.metaKey || e.ctrlKey) || e.altKey) return;
+        const dir = ['+', '='].includes(e.key) ? 1 : e.key === '-' ? -1 : e.key === '0' ? 0 : null; if (dir === null) return;
+        if (ext.editorZoom(dir)) e.preventDefault();
+    }, true);
     ext.tbButton = id => `<button type="button" class="button small secondary" data-tb-config="${esc(id)}" title="Ranger, montrer ou cacher les boutons et les options">⚙️ Personnaliser</button>`;
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-tb-config]'); if (!b) return;

@@ -148,7 +148,14 @@ function buildMenu(p) {
       submenu: [
         sk('split', 'Diviser l’écran en deux'), sk('split_orientation', 'Écran divisé : côte à côte / haut et bas'), sk('switch_half', 'Passer à l’autre moitié de l’écran'), { type: 'separator' },
         { role: 'reload', label: 'Recharger' }, { role: 'forceReload', label: 'Forcer le rechargement' }, { type: 'separator' },
-        { role: 'resetZoom', label: 'Taille réelle' }, { role: 'zoomIn', label: 'Zoom avant' }, { role: 'zoomOut', label: 'Zoom arrière' }, { type: 'separator' },
+        // ⌘ + / ⌘ − / ⌘ 0 (Ctrl sur PC et Linux) : la frise du montage, l'onde du son ou la photo retouchée si l'une est ouverte, sinon toute la page
+        ...[['Taille réelle', 'CommandOrControl+0', 0, true], ['Zoom avant', 'CommandOrControl+=', 1, true], ['Zoom avant', 'CommandOrControl+Plus', 1, false], ['Zoom avant', 'CommandOrControl+numadd', 1, false],
+          ['Zoom arrière', 'CommandOrControl+-', -1, true], ['Zoom arrière', 'CommandOrControl+numsub', -1, false]].map(([label, accelerator, dir, visible]) => ({label, accelerator, visible, acceleratorWorksWhenHidden: true,
+          click: async (_item, w) => {
+            const wc = (w || win)?.webContents; if (!wc) return;
+            let done = false; try { done = await wc.executeJavaScript(`!!(window.LCNDA_EXT && window.LCNDA_EXT.editorZoom && window.LCNDA_EXT.editorZoom(${dir}))`); } catch (_) {}
+            if (!done) wc.setZoomLevel(dir === 0 ? 0 : Math.max(-3, Math.min(4, wc.getZoomLevel() + dir * 0.5)));
+          }})), { type: 'separator' },
         { role: 'togglefullscreen', label: 'Plein écran' },
         ...(app.isPackaged ? [] : [{ type: 'separator' }, { role: 'toggleDevTools', label: 'Outils de développement' }]),
       ],
