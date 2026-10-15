@@ -246,6 +246,60 @@
         at('data-h-allset-export', (list, i, p) => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, p.settings)); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); });
         at('data-h-allset-delete', (list, i, p) => { if (!confirm(`Supprimer l’ensemble « ${p.name} » ? (les réglages actuels ne changent pas)`)) return; list.splice(i, 1); if (saveAllProfiles(list)) { toast('Ensemble supprimé.'); rerender(); } });
     });
+    /* ═══════════ ⚙️ BARRES D'OUTILS À SOI (Retouche, Modifier le son, Montage vidéo) ═══════════
+     * Un éditeur marque ses rangées d'outils data-tbg="clé" data-tbg-label="nom" ; « ⚙️ Personnaliser » range, montre
+     * ou cache leurs boutons et options. Réglages : genealogie-toolbars = {éditeur: {order: {rangée: [clés]}, hidden: {rangée: [clés]}}}.
+     */
+    const TB_KEY = 'genealogie-toolbars';
+    const tbAll = () => { try { const v = JSON.parse(localStorage.getItem(TB_KEY) || '{}'); return v && typeof v === 'object' ? v : {}; } catch (_) { return {}; } };
+    const tbSkip = el => el.matches('[data-tb-config], .dnd-grip, script, template');
+    /** Une clé stable pour un bouton : son premier attribut data-… (ou celui de ce qu'il contient) */
+    function tbKeyOf(el) {
+        if (el.dataset.tb) return el.dataset.tb;
+        const attr = n => [...n.attributes].find(a => a.name.startsWith('data-') && !/^data-(tb|dnd|need)/.test(a.name));
+        let a = attr(el); if (!a) for (const d of el.querySelectorAll('*')) { a = attr(d); if (a) break; }
+        return a ? `${a.name.slice(5)}=${a.value}` : `${el.tagName.toLowerCase()}:${(el.textContent || '').trim().slice(0, 24)}`;
+    }
+    const tbLabel = el => el.dataset.tbLabel || (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60) || el.title || el.getAttribute('aria-label') || '(sans nom)';
+    const tbKids = g => [...g.children].filter(c => !tbSkip(c));
+    ext.tbApply = (root, id) => {
+        const cfg = tbAll()[id] || {};
+        root.querySelectorAll('[data-tbg]').forEach(g => {
+            const k = g.dataset.tbg, kids = tbKids(g), order = cfg.order?.[k] || [], hidden = cfg.hidden?.[k] || [];
+            const byKey = new Map(kids.map(el => [tbKeyOf(el), el]));
+            [...order.map(x => byKey.get(x)).filter(Boolean), ...kids.filter(el => !order.includes(tbKeyOf(el)))].forEach(el => g.appendChild(el));
+            g.querySelectorAll(':scope > [data-tb-config]').forEach(b => g.appendChild(b)); // le bouton ⚙️ reste au bout
+            kids.forEach(el => el.classList.toggle('is-tb-off', hidden.includes(tbKeyOf(el))));
+        });
+    };
+    ext.tbButton = id => `<button type="button" class="button small secondary" data-tb-config="${esc(id)}" title="Ranger, montrer ou cacher les boutons et les options">⚙️ Personnaliser</button>`;
+    document.addEventListener('click', e => {
+        const b = e.target.closest?.('[data-tb-config]'); if (!b) return;
+        e.preventDefault();
+        const id = b.dataset.tbConfig, root = b.closest('dialog') || document;
+        const groups = [...root.querySelectorAll('[data-tbg]')].filter(g => tbKids(g).length);
+        const rows = g => tbKids(g).map(el => `<li class="h-pet-lrow" data-k="${esc(tbKeyOf(el))}"><input type="checkbox" ${el.classList.contains('is-tb-off') ? '' : 'checked'} title="Montrer"><span>${esc(tbLabel(el))}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('');
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-tbcfg';
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ Boutons et options</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            <div class="h-tbcfg-body"><p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois.</p>${groups.map(g => `<section><h4>${esc(g.dataset.tbgLabel || g.dataset.tbg)}</h4><ol class="h-pet-layout" data-g="${esc(g.dataset.tbg)}">${rows(g)}</ol></section>`).join('')}</div>
+            <div class="modal-actions"><button type="button" class="button secondary" data-reset>Tout remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="button" class="button" data-ok>Enregistrer</button></div>`;
+        (b.closest('dialog') || document.body).appendChild(dlg);
+        dlg.addEventListener('click', ev => {
+            const li = ev.target.closest('li');
+            if (ev.target.closest('[data-up]') && li.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
+            if (ev.target.closest('[data-down]') && li.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
+            if (ev.target.closest('[data-x]')) dlg.close();
+            if (ev.target.closest('[data-reset]')) { const all = tbAll(); delete all[id]; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} toast('Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ).'); root.querySelectorAll('.is-tb-off').forEach(x => x.classList.remove('is-tb-off')); dlg.close(); }
+            if (ev.target.closest('[data-ok]')) {
+                const cfg = {order: {}, hidden: {}};
+                dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; cfg.order[ol.dataset.g] = lis.map(l => l.dataset.k); cfg.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); });
+                const all = tbAll(); all[id] = cfg; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {}
+                ext.tbApply(root, id); toast('Boutons rangés.'); dlg.close();
+            }
+        });
+        dlg.addEventListener('close', () => dlg.remove());
+        dlg.showModal();
+    });
     /* ═══════════════════════ 🎚️ RETOUCHE DES PHOTOS (visionneuse → « Retoucher ») ═══════════════════════ */
 
     const RT_SLIDERS = [
@@ -436,13 +490,13 @@
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
         const TOOLS = [['adjust', '🎚', 'Réglages'], ['heal', '🩹', 'Correcteur de taches'], ['clone', '🧬', 'Tampon'], ['brush', '🖌', 'Pinceau'], ['text', '🔤', 'Texte'], ['hand', '✋', 'Déplacer la vue']];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2';
-        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
-            <div class="h-rt-bar">
-                <span class="h-rt-modes" role="toolbar">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}">${i} ${esc(l)}</button>`).join('')}</span>
+        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><span class="spacer"></span>${ext.tbButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
+            <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
+                <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}">${i} ${esc(l)}</button>`).join('')}</span>
                 <span class="h-rt-hist-btns"><button type="button" class="button small secondary" data-rt-undo disabled title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-rt-redo disabled title="Rétablir (⇧⌘Z)">↷</button></span>
                 <span class="h-rt-zoom"><button type="button" class="button small secondary" data-rt-zoom="-1" title="Dézoomer (−)">−</button><output data-rt-zoomout>100 %</output><button type="button" class="button small secondary" data-rt-zoom="1" title="Zoomer (+)">+</button><button type="button" class="button small secondary" data-rt-zoomfit title="Toute l’image (0)">Ajuster</button><button type="button" class="button small secondary" data-rt-zoom100 title="Taille réelle (1)">1:1</button></span>
             </div>
-            <div class="h-rt-opts" data-rt-opts hidden>
+            <div class="h-rt-opts" data-rt-opts hidden data-tbg="rt-opts" data-tbg-label="Options des outils (pinceau, texte…)">
                 <label data-o="size">Taille <input type="range" min="1" max="200" value="18" data-rt-size> <output data-rt-size-out>18</output> <small class="muted">[ ]</small></label>
                 <label data-o="hard">Dureté <input type="range" min="0" max="100" value="55" data-rt-hard> <output data-rt-hard-out>55 %</output></label>
                 <label data-o="opacity">Opacité <input type="range" min="5" max="100" value="100" data-rt-opac> <output data-rt-opac-out>100 %</output></label>
@@ -462,7 +516,7 @@
                 </div>
                 <aside class="h-rt-side">
                     <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button></div>
-                    <div class="h-rt-tools" data-rt-pane="adjust"><div class="h-rt-presets">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
+                    <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
                         <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>
                         <div class="h-rt-curve-head"><strong>Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rt-ch ${k === 'rgb' ? 'is-active' : ''}" data-rt-ch="${k}">${l}</button>`).join('')}</span></div>
@@ -477,6 +531,7 @@
             <div class="modal-actions"><label class="checkbox-line h-rt-merge" data-rt-mergebox hidden><input type="checkbox" data-rt-merge checked> <span>avec les annotations (calques visibles)</span></label><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
             <p class="muted h-rt-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
+        ext.tbApply(dlg, 'retouch'); // boutons rangés à sa façon (⚙️ Personnaliser)
         const $ = q => dlg.querySelector(q), $$ = q => [...dlg.querySelectorAll(q)];
         const canvas = $('[data-rt-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
         const stage = $('[data-rt-stage]'), wrap = $('[data-rt-wrap]');

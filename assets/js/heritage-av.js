@@ -233,7 +233,7 @@
 
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page av-page" data-av-kind="${kind}">
-            <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${K.icon} ${esc(K.title)}</h2><p>${esc(K.intro)}</p></div></header>
+            <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${K.icon} ${esc(K.title)}</h2><p>${esc(K.intro)}</p></div><div class="page-actions"><button type="button" class="button" data-av-montage="${kind}" title="${kind === 'video' ? 'Monter des vidéos : morceaux, titres, fondus, incrustations, musiques' : 'Assembler et retoucher des sons'}">🎬 Montage</button></div></header>
             ${items.length ? `<div class="collection-toolbar av-toolbar">
                 <input type="search" id="av-q" value="${esc(p.q)}" placeholder="Chercher un titre, une fiche, une battue…">
                 <label>Trier <select id="av-sort">${SORTS.map(([v, l]) => `<option value="${v}"${p.sort === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
@@ -243,6 +243,7 @@
             <div class="data-table-wrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
             <div id="av-player-host"></div>` : A().empty(`Aucun${kind === 'video' ? 'e vidéo' : ' son'} : ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`)}
         </section>`;
+        ws.querySelector('[data-av-montage]')?.addEventListener('click', () => ext.openMontage?.(kind, () => { if (st.module === 'listes') ext.lists?.[kind === 'video' ? 'videos' : 'audios']?.(++st.workspaceToken); }));
         if (!items.length) return;
         const section = ws.querySelector('.av-page');
         const $ = sel => section.querySelector(sel);

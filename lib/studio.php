@@ -55,6 +55,20 @@ function retouch_versions(PDO $pdo, int $id): array
 function retouch_media(PDO $pdo, ?array $file, array $post): never
 {
     $id = safe_int($post['media_id'] ?? 0);
+    // Un montage fait de zéro (Listes → Vidéos / Audios → « 🎬 Montage ») : un nouveau média, seul
+    if (!$id && in_array($post['kind'] ?? '', ['audio', 'video'], true)) {
+        $kind = (string) $post['kind'];
+        try { $name = retouch_store_upload($file, $kind); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); }
+        $duration = isset($post['duration']) && is_numeric($post['duration']) && (float) $post['duration'] > 0 ? round((float) $post['duration'], 2) : null;
+        $title = mb_substr(safe_text($post['title'] ?? ''), 0, 300) ?: ($kind === 'video' ? 'Montage vidéo' : 'Montage son') . ' du ' . date('d/m/Y');
+        try {
+            $pdo->prepare("INSERT INTO media(title, media_type, filename, thumbnail) VALUES(?, ?, ?, '')")->execute([$title, $kind, $name]);
+            $newId = (int) $pdo->lastInsertId();
+            try { $pdo->prepare('UPDATE media SET duration_seconds=? WHERE id=?')->execute([$duration, $newId]); } catch (Throwable $_) {}
+            log_change($pdo, 'media', $newId, 'create', 'Nouveau montage « ' . $title . ' »');
+        } catch (Throwable $e) { @unlink(MEDIA_DIR . '/' . $name); json_response(['error' => $e->getMessage()], 500); }
+        json_response(['ok' => true, 'result' => ['mode' => 'new', 'media_id' => $newId, 'filename' => $name]]);
+    }
     $mode = ($post['mode'] ?? '') === 'copy' ? 'copy' : 'version';
     $show = !empty($post['show']) && $post['show'] !== '0';
     $s = $pdo->prepare('SELECT * FROM media WHERE id=?'); $s->execute([$id]);

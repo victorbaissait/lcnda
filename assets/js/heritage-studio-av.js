@@ -67,7 +67,8 @@
     /** Envoi du résultat : nouvelle version (montrée ou non) ou copie à part. L'original reste toujours. */
     async function uploadResult(media, blob, ext0, {mode, show, duration, note, title}) {
         const fd = new FormData();
-        fd.append('file', blob, 'montage.' + ext0); fd.append('media_id', media.id); fd.append('mode', mode); fd.append('show', show ? '1' : '0');
+        fd.append('file', blob, 'montage.' + ext0); fd.append('media_id', media.id || 0); fd.append('mode', mode);
+        if (!media.id) fd.append('kind', kindOf(media)); // montage fait de zéro : un nouveau média fd.append('show', show ? '1' : '0');
         if (duration) fd.append('duration', String(duration));
         if (note) fd.append('note', note);
         if (title) fd.append('title', title);
@@ -77,17 +78,17 @@
         return j.result;
     }
     const saveOptionsHtml = (media, formats) => `<fieldset class="h-rc-modes"><legend>Format</legend>${formats.map((f, i) => `<label class="checkbox-line"><input type="radio" name="fmt" value="${f.key}" ${i ? '' : 'checked'}> <b>${esc(f.label)}</b> <small class="muted">${esc(f.help)}</small></label>`).join('')}</fieldset>
-        <fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>
+        ${!media.id ? `<input type="hidden" name="mode" value="new"><div class="form-grid"><label>Titre ${kindOf(media) === 'video' ? 'de la vidéo' : 'du son'}<input name="title" value="${esc(media.title || '')}" maxlength="200"></label><label>Note <small class="muted">(facultatif)</small><input name="note" maxlength="120"></label></div><p class="muted" data-avx-progress></p>` : `<fieldset class="h-rc-modes"><legend>Comment le garder ?</legend>
             <label class="checkbox-line"><input type="radio" name="mode" value="show" checked> <b>Nouvelle version, montrée partout</b> <small class="muted">(l’original reste gardé : on peut y revenir)</small></label>
             <label class="checkbox-line"><input type="radio" name="mode" value="version"> Nouvelle version, <b>sans la montrer</b> pour l’instant</label>
             <label class="checkbox-line"><input type="radio" name="mode" value="copy"> <b>Une copie à part</b> (${kindOf(media) === 'video' ? 'une autre vidéo' : 'un autre son'}, rattaché${kindOf(media) === 'video' ? 'e' : ''} aux mêmes fiches) <small class="muted">: l’original ne change pas du tout</small></label></fieldset>
         <div class="form-grid"><label>Note de version <small class="muted">(facultatif)</small><input name="note" maxlength="120" placeholder="sans les blancs, voix plus nette…"></label><label data-avx-copytitle hidden>Titre de la copie<input name="title" value="${esc((media.title || '') + ' (montage)')}"></label></div>
-        <p class="muted" data-avx-progress></p>`;
+        <p class="muted" data-avx-progress></p>`}`;
 
     /** Versions d'un son / d'une vidéo : écouter, montrer, supprimer (jamais l'original). */
     async function versionsHtml(media) {
         let v = [];
-        try { v = (await A().api('media_versions', {id: media.id})).versions || []; } catch (_) {}
+        if (media.id) try { v = (await A().api('media_versions', {id: media.id})).versions || []; } catch (_) {}
         if (v.length < 2) return {html: '', versions: v};
         return {versions: v, html: `<details class="h-avx-versions"><summary>🗂️ Versions (${v.length}) — l’original est toujours gardé</summary><ul>${v.map(x => `<li class="${x.shown ? 'is-shown' : ''}"><button type="button" class="button small secondary" data-avx-vplay="${esc(x.filename)}">▶</button>
             <span>${x.is_original ? '🕰️ ' : ''}${esc(x.label)}${x.shown ? ' <b>· montrée</b>' : ''}</span>
@@ -304,7 +305,7 @@
         const ctx = audioCtx();
         let buf;
         const loading = toast('Ouverture du son…');
-        try { const res = await fetch(url(media.filename)); if (!res.ok) throw new Error('Fichier introuvable.'); buf = await ctx.decodeAudioData(await res.arrayBuffer()); }
+        try { const res = await fetch(media.src || url(media.filename)); if (!res.ok) throw new Error('Fichier introuvable.'); buf = await ctx.decodeAudioData(await res.arrayBuffer()); }
         catch (e) { toast('Impossible de lire ce son : ' + e.message, 'error'); return; }
         void loading;
         const history = [], future = [];
@@ -318,16 +319,17 @@
         ];
         const dl = bigDialog({eyebrow: 'MODIFIER LE SON', title: media.title || media.filename, onClose: () => { stop(); return !dirty || confirm('Fermer sans enregistrer les modifications ?'); },
             body: `<div class="h-avx-top"><span class="h-avx-time"><b data-avx-cur>0:00.0</b> / <span data-avx-total></span></span><span class="h-avx-sel muted" data-avx-seltxt></span>
-                    <span class="h-avx-zoom"><button type="button" class="button small secondary" data-avx-zoom="fit" title="Tout voir">⤢ Tout</button><button type="button" class="button small secondary" data-avx-zoom="sel" title="Zoomer sur la sélection">🔍 Sélection</button><button type="button" class="button small secondary" data-avx-zoom="out">−</button><button type="button" class="button small secondary" data-avx-zoom="in">+</button></span></div>
+                    <span class="h-avx-zoom" data-tbg="au-zoom" data-tbg-label="Zoom"><button type="button" class="button small secondary" data-avx-zoom="fit" title="Tout voir">⤢ Tout</button><button type="button" class="button small secondary" data-avx-zoom="sel" title="Zoomer sur la sélection">🔍 Sélection</button><button type="button" class="button small secondary" data-avx-zoom="out">−</button><button type="button" class="button small secondary" data-avx-zoom="in">+</button></span></div>
                 <div class="h-avx-wave"><canvas data-avx-canvas></canvas></div>
                 <input type="range" class="h-avx-scroll" data-avx-scroll min="0" max="1000" value="0" aria-label="Défiler">
-                <div class="h-avx-transport"><button type="button" class="button" data-avx-play>▶ Écouter</button><button type="button" class="button small secondary" data-avx-home title="Au début">⏮</button>
+                <div class="h-avx-transport" data-tbg="au-transport" data-tbg-label="Lecture"><button type="button" class="button" data-avx-play>▶ Écouter</button><button type="button" class="button small secondary" data-avx-home title="Au début">⏮</button>
                     <button type="button" class="button small secondary" data-avx-undo disabled>↶ Annuler</button><button type="button" class="button small secondary" data-avx-redo disabled>↷ Rétablir</button>
-                    <span class="muted h-avx-tip">Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom</span></div>
-                <div class="h-avx-ops">${OPS.map(([k, label, need]) => `<button type="button" class="button small secondary" data-avx-op="${k}" data-need="${need}">${label}</button>`).join('')}</div>
+                    <span class="muted h-avx-tip" data-tb-label="Aide (glisser, Espace, molette)">Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom</span>${ext.tbButton ? ext.tbButton('audio') : ''}</div>
+                <div class="h-avx-ops" data-tbg="au-ops" data-tbg-label="Outils du son">${OPS.map(([k, label, need]) => `<button type="button" class="button small secondary" data-avx-op="${k}" data-need="${need}">${label}</button>`).join('')}</div>
                 <p class="muted h-avx-help" data-avx-help>Les réglages s’appliquent à la sélection ; sans sélection, à tout le son.</p>
                 ${ver.html}
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div>`});
+        ext.tbApply?.(dl, 'audio');
         const $ = s => dl.querySelector(s), cv = $('[data-avx-canvas]'), g = cv.getContext('2d');
         bindVersions(dl, media, 'audio', () => { dirty = false; dl.close(); onDone?.(); });
         $('[data-avx-cancel]').addEventListener('click', () => dl.querySelector('[data-avx-close]').click());
@@ -510,137 +512,374 @@
     };
     const loadMeta = src => new Promise((res, rej) => { const v = document.createElement('video'); v.preload = 'metadata'; v.muted = true; v.onloadedmetadata = () => res({dur: v.duration, w: v.videoWidth, h: v.videoHeight}); v.onerror = () => rej(new Error('Vidéo illisible')); v.src = src; });
 
-    async function openVideo(media, onDone) {
-        let meta;
-        try { meta = await loadMeta(url(media.filename)); } catch (e) { toast(e.message, 'error'); return; }
-        const sources = [{src: url(media.filename), title: media.title || 'Vidéo', ...meta}];
-        let segs = [{s: 0, from: 0, to: meta.dur}], cur = 0, dirty = false, playingAll = false;
-        const fx = {volume: 1, clarity: false, noise: false, mute: false, rotate: 0, bright: 1, contrast: 1};
-        const ver = await versionsHtml(media);
-        const total = () => segs.reduce((t, x) => t + (x.to - x.from), 0);
-        const dl = bigDialog({eyebrow: 'MODIFIER LA VIDÉO', title: media.title || media.filename, onClose: () => { vid.pause(); return !dirty || confirm('Fermer sans enregistrer les modifications ?'); },
-            body: `<div class="h-avx-vgrid"><div class="h-avx-vstage"><video data-avx-video playsinline preload="auto"></video></div>
-                <div class="h-avx-vside">
-                    <h4>🔊 Le son</h4><label class="h-avx-row">Volume <input type="range" min="0" max="3" step="0.05" value="1" data-fx="volume"><output data-fx-out="volume">100 %</output></label>
-                    <label class="checkbox-line"><input type="checkbox" data-fx="clarity"> 🗣️ Voix plus nette</label><label class="checkbox-line"><input type="checkbox" data-fx="noise"> 🧹 Moins de souffle et de grondement</label><label class="checkbox-line"><input type="checkbox" data-fx="mute"> 🔇 Sans le son</label>
-                    <h4>🖼️ L’image</h4><label class="h-avx-row">Luminosité <input type="range" min="0.5" max="1.8" step="0.05" value="1" data-fx="bright"></label><label class="h-avx-row">Contraste <input type="range" min="0.5" max="1.8" step="0.05" value="1" data-fx="contrast"></label>
-                    <div class="h-avx-row"><button type="button" class="button small secondary" data-avx-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-avx-rot="90">⟳ 90°</button><small class="muted" data-avx-rotout></small></div>
-                    <p class="muted">Le son et l’image s’entendent et se voient tout de suite ; ils sont appliqués à l’enregistrement.</p>
-                </div></div>
-                <div class="h-avx-top"><span class="h-avx-time"><b data-avx-cur>0:00.0</b> · montage <b data-avx-total></b></span>
-                    <span class="h-avx-zoom"><button type="button" class="button small" data-avx-vplay>▶ Lire le morceau</button><button type="button" class="button small secondary" data-avx-vall>▶▶ Tout le montage</button></span></div>
-                <div class="h-avx-tl" data-avx-tl></div>
-                <div class="h-avx-ops"><button type="button" class="button small secondary" data-avx-v="split">✂️ Couper ici</button><button type="button" class="button small secondary" data-avx-v="start">⟦ Le morceau commence ici</button><button type="button" class="button small secondary" data-avx-v="end">⟧ Le morceau finit ici</button>
-                    <button type="button" class="button small secondary" data-avx-v="del">🗑 Enlever ce morceau</button><button type="button" class="button small secondary" data-avx-v="left">← Avancer</button><button type="button" class="button small secondary" data-avx-v="right">Reculer →</button><button type="button" class="button small secondary" data-avx-v="add">➕ Ajouter une vidéo…</button></div>
-                <p class="muted h-avx-help">Pour enlever un passage : place-toi au début, « ✂️ Couper ici », puis à la fin, « ✂️ Couper ici », sélectionne le morceau du milieu et « 🗑 Enlever ».</p>
-                ${ver.html}
-                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div>`});
-        const $ = s => dl.querySelector(s), vid = $('[data-avx-video]');
-        bindVersions(dl, media, 'video', () => { dirty = false; dl.close(); onDone?.(); });
-        $('[data-avx-cancel]').addEventListener('click', () => dl.querySelector('[data-avx-close]').click());
-        // aperçu du son à travers les mêmes filtres que l'enregistrement
-        const ctx = audioCtx(), node = ctx.createMediaElementSource(vid);
-        const chain = (c, input) => { const gain = c.createGain(); let last = input;
-            if (fx.noise) { const hp = c.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 100; const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 9000; last.connect(hp).connect(lp); last = lp; }
-            if (fx.clarity) { const pr = c.createBiquadFilter(); pr.type = 'peaking'; pr.frequency.value = 3000; pr.Q.value = 0.9; pr.gain.value = 4; const cp = c.createDynamicsCompressor(); cp.threshold.value = -24; cp.ratio.value = 3; last.connect(pr).connect(cp); last = cp; }
-            gain.gain.value = fx.mute ? 0 : fx.volume; last.connect(gain); return gain; };
-        let out = null;
-        const rewire = () => { try { node.disconnect(); out?.disconnect(); } catch (_) {} out = chain(ctx, node); out.connect(ctx.destination); };
-        rewire();
-        const applyLook = () => { vid.style.filter = `brightness(${fx.bright}) contrast(${fx.contrast})`; vid.style.transform = fx.rotate ? `rotate(${fx.rotate}deg)${fx.rotate % 180 ? ' scale(.75)' : ''}` : ''; $('[data-avx-rotout]').textContent = fx.rotate ? `tournée de ${fx.rotate}°` : ''; };
-        dl.querySelectorAll('[data-fx]').forEach(el => el.addEventListener('input', () => { const k = el.dataset.fx; fx[k] = el.type === 'checkbox' ? el.checked : Number(el.value); const o = dl.querySelector(`[data-fx-out="${k}"]`); if (o) o.textContent = Math.round(fx[k] * 100) + ' %'; dirty = true; rewire(); applyLook(); }));
-        dl.querySelectorAll('[data-avx-rot]').forEach(b => b.addEventListener('click', () => { fx.rotate = (fx.rotate + Number(b.dataset.avxRot) + 360) % 360; dirty = true; applyLook(); }));
-        // morceaux
-        const load = (k, at = null) => { cur = Math.max(0, Math.min(segs.length - 1, k)); const sg = segs[cur], so = sources[sg.s]; if (!vid.src.endsWith(so.src)) vid.src = so.src; vid.currentTime = at ?? sg.from; drawTl(); };
-        function drawTl() {
-            const T = total(), tl = $('[data-avx-tl]');
-            tl.innerHTML = segs.map((sg, k) => `<button type="button" class="h-avx-seg ${k === cur ? 'is-current' : ''}" style="flex:${Math.max(0.02, (sg.to - sg.from) / T)}" data-seg="${k}" title="${esc(sources[sg.s].title)} : ${fmt(sg.from)} → ${fmt(sg.to)}"><span>${k + 1}. ${esc(sources[sg.s].title)}</span><small>${fmt(sg.to - sg.from, false)}</small>${k === cur ? `<i style="left:${Math.min(100, Math.max(0, (vid.currentTime - sg.from) / (sg.to - sg.from) * 100))}%"></i>` : ''}</button>`).join('');
-            tl.querySelectorAll('[data-seg]').forEach(b => b.addEventListener('click', e => { const k = Number(b.dataset.seg), sg = segs[k], r = b.getBoundingClientRect(); playingAll = false; load(k, sg.from + (e.clientX - r.left) / r.width * (sg.to - sg.from)); }));
-            $('[data-avx-total]').textContent = fmt(T);
+    /* ═════════════════════════ 🎬 MONTAGE VIDÉO ═════════════════════════
+     * Pistes : Vidéo 1 (les morceaux à la suite, avec leurs transitions), Vidéo 2 (incrustations posées à un moment),
+     * Textes (titres fixes ou animés), Son 1 et Son 2 (musiques, voix, son détaché d'une vidéo).
+     * Le même moteur dessine l'aperçu et l'enregistrement : une image (canvas) et un mélange de sons (Web Audio).
+     */
+    const TRANS = [['none', 'Coupe franche'], ['cross', 'Fondu enchaîné'], ['black', 'Fondu au noir'], ['white', 'Fondu au blanc']];
+    const ANIMS = [['none', 'Fixe'], ['fade', 'Apparaît en fondu'], ['slide', 'Glisse depuis la gauche'], ['rise', 'Monte depuis le bas'], ['zoom', 'Grandit'], ['scroll', 'Défile (générique)'], ['type', 'Machine à écrire']];
+    const LOOKS = [['Aucun', {}], ['Couleurs vives', {sat: 1.35, contrast: 1.08}], ['Plus chaud', {warm: 0.35}], ['Plus froid', {warm: -0.35}], ['Ancien film', {sat: 0.55, warm: 0.45, contrast: 0.92}],
+        ['Noir et blanc', {sat: 0}], ['Contrasté', {contrast: 1.3, bright: 0.97}], ['Doux', {contrast: 0.88, bright: 1.05, sat: 0.9}]];
+    const LOOK0 = {bright: 1, contrast: 1, sat: 1, hue: 0, warm: 0};
+    const FONTS_V = [['Georgia, serif', 'Georgia'], ['Helvetica, Arial, sans-serif', 'Helvetica'], ['"Times New Roman", serif', 'Times'], ['"Courier New", monospace', 'Courier'], ['"Brush Script MT", cursive', 'Manuscrite'], ['Impact, sans-serif', 'Impact']];
+    let uid = 0; const nid = p => p + (++uid) + Date.now().toString(36).slice(-3);
+
+    function montageModel(sources) {
+        return {sources, v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0}};
+    }
+    /** Moments de chaque morceau de la piste 1 (un fondu enchaîné fait se chevaucher deux morceaux) */
+    function layoutV1(P) {
+        let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, c.to - c.from), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, (P.v1[k - 1].to - P.v1[k - 1].from) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
+    }
+    const montageEnd = P => Math.max(0.1, layoutV1(P).at(-1)?.end || 0, ...P.v2.map(c => c.at + c.to - c.from), ...P.texts.map(x => x.at + x.dur), ...P.audio.map(a => a.at + a.to - a.from));
+    const lookFilter = (a, b = LOOK0) => `brightness(${(a.bright ?? 1) * (b.bright ?? 1)}) contrast(${(a.contrast ?? 1) * (b.contrast ?? 1)}) saturate(${(a.sat ?? 1) * (b.sat ?? 1)}) hue-rotate(${(a.hue || 0) + (b.hue || 0)}deg)`;
+
+    /**
+     * Le moteur : des <video>/<audio> cachés (un par morceau), une image et un mélange. play()/pause()/seek(t) ;
+     * out : 'preview' (haut-parleurs) ou 'record' (flux pour l'enregistrement).
+     */
+    function montageEngine(P, canvas, {out = 'preview', onTime} = {}) {
+        const g = canvas.getContext('2d');
+        const ctx = out === 'record' ? new AudioContext() : audioCtx();
+        const master = ctx.createGain(); let tail = master;
+        const fx = P.fx;
+        if (fx.noise) { const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 100; const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 9000; tail.connect(hp).connect(lp); tail = lp; }
+        if (fx.clarity) { const pr = ctx.createBiquadFilter(); pr.type = 'peaking'; pr.frequency.value = 3000; pr.Q.value = 0.9; pr.gain.value = 4; const cp = ctx.createDynamicsCompressor(); cp.threshold.value = -24; cp.ratio.value = 3; tail.connect(pr).connect(cp); tail = cp; }
+        const outGain = ctx.createGain(); outGain.gain.value = fx.mute ? 0 : fx.volume; tail.connect(outGain);
+        const dest = out === 'record' ? ctx.createMediaStreamDestination() : null; outGain.connect(dest || ctx.destination);
+        const els = new Map(); // id du morceau → {el, gain}
+        const elFor = (id, src, isAudio) => {
+            let e = els.get(id); if (e && e.src === src) return e;
+            if (e) { e.el.pause(); e.el.removeAttribute('src'); }
+            const el = document.createElement(isAudio ? 'audio' : 'video'); el.preload = 'auto'; el.playsInline = true; el.crossOrigin = 'anonymous'; el.src = src; el.muted = false;
+            const node = ctx.createMediaElementSource(el), gain = ctx.createGain(); gain.gain.value = 0; node.connect(gain).connect(master);
+            e = {el, gain, src}; els.set(id, e); return e;
+        };
+        let t = 0, playing = false, t0 = 0, p0 = 0, raf = 0, W = canvas.width, H = canvas.height;
+        // ce qui joue au moment t
+        function active(tt) {
+            const L = layoutV1(P), list = [];
+            L.forEach((x, k) => { if (tt >= x.at && tt < x.end) list.push({kind: 'v1', x, k, local: x.c.from + tt - x.at}); });
+            P.v2.forEach(c => { if (tt >= c.at && tt < c.at + c.to - c.from) list.push({kind: 'v2', c, local: c.from + tt - c.at}); });
+            P.audio.forEach(a => { if (tt >= a.at && tt < a.at + a.to - a.from) list.push({kind: 'a', c: a, local: a.from + tt - a.at}); });
+            return {L, list};
         }
-        vid.addEventListener('timeupdate', () => {
-            const sg = segs[cur]; if (!sg) return;
-            $('[data-avx-cur]').textContent = fmt(segs.slice(0, cur).reduce((t, x) => t + x.to - x.from, 0) + Math.max(0, vid.currentTime - sg.from));
-            const i = $('.h-avx-seg.is-current i'); if (i) i.style.left = Math.min(100, Math.max(0, (vid.currentTime - sg.from) / (sg.to - sg.from) * 100)) + '%';
-            if (vid.currentTime >= sg.to - 0.03 && !vid.paused) { if (playingAll && cur < segs.length - 1) { load(cur + 1); vid.play(); } else { vid.pause(); playingAll = false; } }
+        function sync(tt, hard = false) {
+            const {list} = active(tt), keep = new Set();
+            for (const it of list) {
+                const c = it.kind === 'v1' ? it.x.c : it.c, so = P.sources[c.s]; if (!so) continue;
+                const e = elFor(c.id, so.src, it.kind === 'a'); keep.add(c.id);
+                if (hard || Math.abs(e.el.currentTime - it.local) > 0.35) { try { e.el.currentTime = it.local; } catch (_) {} }
+                // volume (fondus du son, morceau muet ou son détaché)
+                let v = it.kind === 'a' ? (c.vol ?? 1) : (c.mute ? 0 : (c.vol ?? 1));
+                if (it.kind === 'a') { const len = c.to - c.from, x = tt - c.at; if (c.fadeIn && x < c.fadeIn) v *= x / c.fadeIn; if (c.fadeOut && len - x < c.fadeOut) v *= Math.max(0, (len - x) / c.fadeOut); }
+                if (it.kind === 'v1' && it.x.cross && tt < it.x.at + it.x.cross) v *= (tt - it.x.at) / it.x.cross; // le son suit le fondu enchaîné
+                e.gain.gain.value = Math.max(0, v);
+                if (playing && e.el.paused) e.el.play().catch(() => {}); if (!playing && !e.el.paused) e.el.pause();
+            }
+            els.forEach((e, id) => { if (!keep.has(id)) { e.gain.gain.value = 0; if (!e.el.paused) e.el.pause(); } });
+        }
+        function drawVideo(el, alpha, look) {
+            const vw = el.videoWidth, vh = el.videoHeight; if (!vw || alpha <= 0) return;
+            const turn = fx.rotate % 180 !== 0;
+            g.save(); g.globalAlpha = alpha; g.filter = lookFilter(look || {}, P.look); g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
+            const bw = turn ? H : W, bh = turn ? W : H, k = Math.min(bw / vw, bh / vh); g.drawImage(el, -vw * k / 2, -vh * k / 2, vw * k, vh * k); g.restore();
+        }
+        function warmth(look) {
+            const w = (look?.warm || 0) + (P.look.warm || 0); if (!w) return;
+            g.save(); g.globalCompositeOperation = 'soft-light'; g.globalAlpha = Math.min(0.8, Math.abs(w)); g.fillStyle = w > 0 ? '#ff9a3c' : '#3c8bff'; g.fillRect(0, 0, W, H); g.restore();
+        }
+        function drawText(x, tt) {
+            const local = tt - x.at, d = x.dur, size = Math.round((x.size || 6) / 100 * H), lines = String(x.text || '').split('\n');
+            let alpha = 1, dx = 0, dy = 0, scale = 1, shown = lines.join('\n'); const inT = Math.min(0.8, d / 3);
+            if (x.fade !== false) { if (local < 0.4) alpha = local / 0.4; if (d - local < 0.4) alpha = Math.min(alpha, (d - local) / 0.4); }
+            if (x.anim === 'fade') { alpha = Math.min(alpha, local < inT ? local / inT : 1); }
+            if (x.anim === 'slide' && local < inT) dx = -((1 - local / inT) ** 2) * W * 0.6;
+            if (x.anim === 'rise' && local < inT) dy = (1 - local / inT) ** 2 * H * 0.4;
+            if (x.anim === 'zoom') scale = 0.6 + 0.4 * Math.min(1, local / inT);
+            if (x.anim === 'scroll') dy = H * 0.55 - (local / d) * (H * 1.1 + lines.length * size * 1.3);
+            if (x.anim === 'type') { const n = Math.floor(shown.length * Math.min(1, local / Math.max(0.5, d * 0.6))); shown = shown.slice(0, n); }
+            g.save(); g.globalAlpha = Math.max(0, Math.min(1, alpha)); g.font = `${x.bold ? '700 ' : ''}${size}px ${x.font || 'Georgia, serif'}`; g.textAlign = x.align || 'center'; g.textBaseline = 'middle';
+            const cx = (x.x ?? 50) / 100 * W + dx, cy = (x.y ?? 80) / 100 * H + dy;
+            g.translate(cx, cy); g.scale(scale, scale);
+            const sl = shown.split('\n'), lh = size * 1.25, top = -(sl.length - 1) * lh / 2;
+            if (x.bg) { const w = Math.max(...sl.map(l => g.measureText(l).width)) + size, h = sl.length * lh + size * 0.4, x0 = x.align === 'left' ? -size / 2 : x.align === 'right' ? -w + size / 2 : -w / 2; g.fillStyle = x.bg; g.globalAlpha *= 0.75; g.fillRect(x0, top - lh / 2 - size * 0.2, w, h); g.globalAlpha /= 0.75; }
+            sl.forEach((l, i) => { if (x.shadow !== false) { g.shadowColor = 'rgba(0,0,0,.65)'; g.shadowBlur = size / 6; g.shadowOffsetY = size / 14; } g.fillStyle = x.color || '#ffffff'; g.fillText(l, 0, top + i * lh); });
+            g.restore();
+        }
+        function paint(tt) {
+            W = canvas.width; H = canvas.height;
+            g.save(); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore();
+            const {L, list} = active(tt);
+            // piste 1, avec ses transitions
+            list.filter(i => i.kind === 'v1').sort((a, b) => a.k - b.k).forEach(it => {
+                const e = els.get(it.x.c.id); if (!e) return;
+                let a = 1; if (it.x.cross && tt < it.x.at + it.x.cross) a = (tt - it.x.at) / it.x.cross;
+                drawVideo(e.el, a, it.x.c.look); warmth(it.x.c.look);
+            });
+            // fondus au noir ou au blanc : fin du morceau d'avant, puis début du suivant
+            L.forEach((x, k) => {
+                const tr = x.c.tr; if (!k || !tr || !['black', 'white'].includes(tr.type)) return; const h = Math.min(tr.d || 1, 4) / 2;
+                const prevEnd = L[k - 1].end; let a = 0;
+                if (tt >= prevEnd - h && tt < prevEnd) a = 1 - (prevEnd - tt) / h; else if (tt >= x.at && tt < x.at + h) a = 1 - (tt - x.at) / h;
+                if (a > 0) { g.save(); g.globalAlpha = a; g.fillStyle = tr.type === 'white' ? '#fff' : '#000'; g.fillRect(0, 0, W, H); g.restore(); }
+            });
+            // fondu d'ouverture et de fin du film
+            const T = montageEnd(P);
+            if (P.fadeStart && tt < 1) { g.save(); g.globalAlpha = 1 - tt; g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
+            if (P.fadeEnd && T - tt < 1) { g.save(); g.globalAlpha = 1 - (T - tt); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
+            // piste 2 : incrustations
+            list.filter(i => i.kind === 'v2').forEach(it => {
+                const e = els.get(it.c.id); if (!e?.el.videoWidth) return; const c = it.c, vw = e.el.videoWidth, vh = e.el.videoHeight;
+                const w = (c.w || 35) / 100 * W, h = w * vh / vw, x0 = (c.x ?? 62) / 100 * W, y0 = (c.y ?? 6) / 100 * H, local = tt - c.at, len = c.to - c.from;
+                let a = (c.opacity ?? 100) / 100; if (c.fade !== false) { if (local < 0.5) a *= local / 0.5; if (len - local < 0.5) a *= (len - local) / 0.5; }
+                g.save(); g.globalAlpha = Math.max(0, a); g.filter = lookFilter(c.look || {}, P.look); g.drawImage(e.el, x0, y0, w, h); g.restore();
+                if (c.border !== false) { g.save(); g.globalAlpha = Math.max(0, a); g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, W / 400); g.strokeRect(x0, y0, w, h); g.restore(); }
+            });
+            P.texts.filter(x => tt >= x.at && tt < x.at + x.dur).forEach(x => drawText(x, tt));
+        }
+        const loop = () => {
+            if (!playing) return;
+            t = t0 + (performance.now() - p0) / 1000;
+            const T = montageEnd(P);
+            if (t >= T) { t = T; paint(t); api.pause(); onTime?.(t, true); return; }
+            sync(t); paint(t); onTime?.(t); raf = requestAnimationFrame(loop);
+        };
+        const ready = () => Promise.all([...els.values()].map(e => e.el.readyState >= 2 ? 0 : new Promise(r => { const f = () => { e.el.removeEventListener('loadeddata', f); r(); }; e.el.addEventListener('loadeddata', f); setTimeout(r, 4000); })));
+        const seeked = () => Promise.all([...els.values()].map(e => e.el.seeking ? new Promise(r => { e.el.addEventListener('seeked', r, {once: true}); setTimeout(r, 2500); }) : 0));
+        const api = {
+            get t() { return t; }, get playing() { return playing; }, ctx, stream: dest?.stream,
+            async seek(tt) { t = Math.max(0, Math.min(montageEnd(P), tt)); const was = playing; if (was) api.pause(); sync(t, true); await ready(); await seeked(); paint(t); onTime?.(t); if (was) api.play(); },
+            async play() { if (playing) return; if (ctx.state === 'suspended') await ctx.resume(); if (t >= montageEnd(P) - 0.05) t = 0; sync(t, true); await ready(); await seeked(); playing = true; t0 = t; p0 = performance.now(); sync(t); raf = requestAnimationFrame(loop); },
+            pause() { playing = false; cancelAnimationFrame(raf); els.forEach(e => e.el.pause()); },
+            redraw() { paint(t); },
+            async refresh() { sync(t); await ready(); paint(t); },
+            destroy() { api.pause(); els.forEach(e => { e.el.removeAttribute('src'); try { e.el.load(); } catch (_) {} }); els.clear(); if (out === 'record') ctx.close(); else { try { master.disconnect(); outGain.disconnect(); } catch (_) {} } },
+        };
+        return api;
+    }
+
+    /** Enregistre le montage (en temps réel) : l'image du moteur et son mélange de sons. */
+    async function recordMontage(P, mime, onStep) {
+        const first = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s] || {w: 1280, h: 720}, turn = P.fx.rotate % 180 !== 0;
+        const W0 = first.w || 1280, H0 = first.h || 720, sc = Math.min(1, 1920 / Math.max(W0, H0));
+        const cv = document.createElement('canvas'); cv.width = Math.round((turn ? H0 : W0) * sc) & ~1; cv.height = Math.round((turn ? W0 : H0) * sc) & ~1;
+        const T = montageEnd(P);
+        let finished; const done = new Promise(r => { finished = r; });
+        const eng = montageEngine(P, cv, {out: 'record', onTime: (t, end) => { onStep?.(t / T); if (end) finished(); }});
+        const stream = new MediaStream([...cv.captureStream(30).getVideoTracks(), ...eng.stream.getAudioTracks()]);
+        const rec = new MediaRecorder(stream, {mimeType: mime, videoBitsPerSecond: Math.min(8e6, Math.max(2.5e6, cv.width * cv.height * 4)), audioBitsPerSecond: 128000});
+        const chunks = []; rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+        await eng.seek(0);
+        rec.start(1000); await eng.play();
+        await done;
+        const blob = await new Promise(r => { rec.onstop = () => r(new Blob(chunks, {type: mime.split(';')[0]})); rec.stop(); });
+        eng.destroy();
+        return blob;
+    }
+
+    async function openVideo(media, onDone, start = null) {
+        const sources = [];
+        if (media.id || media.src) {
+            let meta; try { meta = await loadMeta(media.src || url(media.filename)); } catch (e) { toast(e.message, 'error'); return; }
+            sources.push({src: media.src || url(media.filename), title: media.title || 'Vidéo', kind: 'video', ...meta});
+        }
+        const P = montageModel(sources);
+        if (sources.length) P.v1.push({id: nid('v'), s: 0, from: 0, to: sources[0].dur, tr: {type: 'none', d: 1}, look: {}, vol: 1});
+        let sel = P.v1[0] ? {track: 'v1', id: P.v1[0].id} : null, dirty = false, pxs = 40; // pixels par seconde sur la frise
+        const ver = await versionsHtml(media);
+        const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', title: media.title || media.filename || 'Nouveau montage', onClose: () => { eng?.pause(); return !dirty || confirm('Fermer sans enregistrer le montage ?'); },
+            body: `<div class="h-mt">
+                <div class="h-mt-top">
+                    <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Ajoute une vidéo avec « ➕ Vidéo à la suite ».</p></div>
+                    <aside class="h-mt-side">
+                        <div class="h-rt-tabs" data-tbg="mt-tabs" data-tbg-label="Onglets de droite"><button type="button" class="is-active" data-mt-tab="item">🎯 Élément</button><button type="button" data-mt-tab="color">🎨 Couleurs</button><button type="button" data-mt-tab="sound">🔊 Son</button><button type="button" data-mt-tab="film">🎞️ Film</button></div>
+                        <div data-mt-pane="item"></div>
+                        <div data-mt-pane="color" hidden></div>
+                        <div data-mt-pane="sound" hidden></div>
+                        <div data-mt-pane="film" hidden></div>
+                    </aside>
+                </div>
+                <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play>▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
+                    <label class="h-mt-zoomr">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label>${ext.tbButton ? ext.tbButton('video') : ''}</div>
+                <div class="h-mt-ops" data-tbg="mt-ops" data-tbg-label="Outils du montage">
+                    <button type="button" class="button small secondary" data-mt-op="split" title="Coupe le morceau choisi à la tête de lecture">✂️ Couper ici</button>
+                    <button type="button" class="button small secondary" data-mt-op="start" title="Le morceau choisi commence à la tête de lecture">⟦ Commence ici</button>
+                    <button type="button" class="button small secondary" data-mt-op="end" title="Le morceau choisi finit à la tête de lecture">⟧ Finit ici</button>
+                    <button type="button" class="button small secondary" data-mt-op="left" title="Avancer le morceau dans la piste 1">← Avancer</button>
+                    <button type="button" class="button small secondary" data-mt-op="right" title="Reculer le morceau dans la piste 1">Reculer →</button>
+                    <button type="button" class="button small secondary" data-mt-op="detach" title="Le son du morceau passe sur une piste son, à part">🔊 Détacher le son</button>
+                    <button type="button" class="button small secondary" data-mt-op="del" title="Enlever l'élément choisi">🗑 Enlever</button>
+                    <button type="button" class="button small" data-mt-op="addv1">➕ Vidéo à la suite</button>
+                    <button type="button" class="button small secondary" data-mt-op="addv2" title="Une vidéo dans un coin de l'image, à la tête de lecture">➕ Incrustation</button>
+                    <button type="button" class="button small secondary" data-mt-op="addtext">➕ Titre / texte</button>
+                    <button type="button" class="button small secondary" data-mt-op="adda">➕ Son / musique</button>
+                </div>
+                <div class="h-mt-tl" data-mt-tl></div>
+                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse les incrustations, les textes et les sons pour les déplacer dans le temps. Espace = lire / pause.</p>
+                ${ver.html}
+                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div></div>`});
+        dl.classList.add('h-avx-montage');
+        const $ = s => dl.querySelector(s), cv = $('[data-mt-canvas]');
+        if (media.id) bindVersions(dl, media, 'video', () => { dirty = false; dl.close(); onDone?.(); });
+        $('[data-avx-cancel]').addEventListener('click', () => dl.querySelector('[data-avx-close]').click());
+        const sizeFor = () => { const so = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s]; const turn = P.fx.rotate % 180 !== 0; const w = so?.w || 1280, h = so?.h || 720, k = Math.min(1, 1280 / Math.max(w, h)); return [Math.round((turn ? h : w) * k), Math.round((turn ? w : h) * k)]; };
+        const fitCanvas = () => { [cv.width, cv.height] = sizeFor(); }; // l'image prend le format de la première vidéo
+        let eng = null;
+        const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); await eng.seek(t); };
+        // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
+        const touch = async (lvl = 1, pane = true) => { dirty = true; const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) lvl = 2; if (lvl === 2) { await rebuild(); drawTl(pane); return; } drawTl(pane); if (lvl === 1) eng?.seek(eng.t); else eng?.refresh(); };
+        const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + 90) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; };
+        const all = () => [...P.v1.map(c => ['v1', c]), ...P.v2.map(c => ['v2', c]), ...P.texts.map(c => ['texts', c]), ...P.audio.map(c => ['audio', c])];
+        const selected = () => { const f = all().find(([tr, c]) => sel && tr === sel.track && c.id === sel.id); return f ? f[1] : null; };
+        // frise : une ligne par piste
+        function drawTl(pane = true) {
+            const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
+            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${90 + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${esc(label)}</button>`;
+            const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
+            const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${90 + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
+            const audioLane = n => lane('a' + n, `🎵 Son ${n}`, P.audio.filter(a => (a.track || 1) === n).map(a => block('audio', a, a.at, a.to - a.from, (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join(''));
+            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px"><div class="h-mt-ruler" data-mt-ruler>${ruler}</div>
+                ${lane('v2', '🖼️ Vidéo 2', P.v2.map(c => block('v2', c, c.at, c.to - c.from, P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join(''))}
+                ${lane('v1', '🎬 Vidéo 1', L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join(''))}
+                ${lane('t', '🔤 Textes', P.texts.map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join(''))}
+                ${audioLane(1)}${audioLane(2)}
+                <i class="h-mt-ph" data-mt-ph style="left:${90 + (eng?.t || 0) * pxs}px"></i></div>`;
+            $('[data-mt-total]').textContent = fmt(T);
+            $('[data-mt-empty]').hidden = P.v1.length > 0;
+            if (pane) drawPane();
+        }
+        // panneau de droite : réglages de l'élément choisi
+        const rng = (k, label, min, max, step, v, unit = '') => `<label class="h-avx-row">${label} <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-k="${k}"><output data-u="${unit}">${unit === '%' ? Math.round(v * 100) + ' %' : v + unit}</output></label>`;
+        const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
+            ${rng(scope + '.bright', 'Luminosité', 0.4, 1.8, 0.02, L.bright ?? 1, '%')}${rng(scope + '.contrast', 'Contraste', 0.4, 1.8, 0.02, L.contrast ?? 1, '%')}${rng(scope + '.sat', 'Saturation', 0, 2, 0.02, L.sat ?? 1, '%')}${rng(scope + '.warm', 'Température (froid ↔ chaud)', -0.8, 0.8, 0.02, L.warm ?? 0)}${rng(scope + '.hue', 'Teinte', -60, 60, 1, L.hue ?? 0, '°')}`;
+        function drawPane() {
+            const c = selected(), item = $('[data-mt-pane="item"]');
+            if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
+            else if (sel.track === 'v1') item.innerHTML = `<h4>🎬 Morceau de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>
+                <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${rng('tr.d', 'Durée du fondu', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}
+                ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>
+                <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
+            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}${rng('opacity', 'Opacité', 10, 100, 1, c.opacity ?? 100, ' %')}
+                ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>`;
+            else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4><label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
+                <label class="h-avx-row">Mouvement <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${c.anim === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                ${rng('dur', 'Durée', 0.5, 30, 0.1, c.dur, ' s')}${rng('size', 'Taille', 2, 20, 0.5, c.size ?? 6, ' %')}
+                <label class="h-avx-row">Police <select data-mt-k="font">${FONTS_V.map(([k, l]) => `<option value="${esc(k)}" ${c.font === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="h-avx-row">Couleur <input type="color" value="${esc(c.color || '#ffffff')}" data-mt-k="color"> Fond <input type="color" value="${esc(c.bg || '#000000')}" data-mt-k="bg" ${c.bg ? '' : 'disabled'}><label class="checkbox-line"><input type="checkbox" data-mt-k="hasbg" ${c.bg ? 'checked' : ''}> bandeau</label></label>
+                ${rng('x', 'Position horizontale', 0, 100, 1, c.x ?? 50, ' %')}${rng('y', 'Position verticale', 0, 100, 1, c.y ?? 80, ' %')}
+                <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}> gras</label><label class="checkbox-line"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}> ombre</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> entre et sort en fondu</label>`;
+            else item.innerHTML = `<h4>🎵 Son</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
+                <label class="h-avx-row">Piste <select data-mt-k="track"><option value="1" ${(c.track || 1) === 1 ? 'selected' : ''}>Son 1</option><option value="2" ${c.track === 2 ? 'selected' : ''}>Son 2</option></select></label>`;
+            $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}`;
+            $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="fx.clarity" ${P.fx.clarity ? 'checked' : ''}> 🗣️ Voix plus nette</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fx.noise" ${P.fx.noise ? 'checked' : ''}> 🧹 Moins de souffle et de grondement</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fx.mute" ${P.fx.mute ? 'checked' : ''}> 🔇 Sans le son</label>`;
+            $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? `tourné de ${P.fx.rotate}°` : ''}</small></div>
+                <label class="checkbox-line"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}> commence par un fondu depuis le noir</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}> finit par un fondu au noir</label>
+                <p class="muted">Durée du film : <b>${fmt(montageEnd(P))}</b></p>`;
+        }
+        // réglages → modèle
+        const setK = (obj, k, v) => { const ks = k.split('.'); let o = obj; ks.slice(0, -1).forEach(x => { o[x] = o[x] || {}; o = o[x]; }); o[ks.at(-1)] = v; };
+        const audioFx = k => /^fx\.(clarity|noise|mute|volume)$/.test(k);
+        dl.querySelector('.h-mt-side').addEventListener('input', e => {
+            const el = e.target.closest('[data-mt-k]'); if (!el) return;
+            let k = el.dataset.mtK, v = el.type === 'checkbox' ? el.checked : el.type === 'range' ? Number(el.value) : el.value;
+            const o = el.parentElement.querySelector('output'); if (o && el.type === 'range') o.textContent = o.dataset.u === '%' ? Math.round(v * 100) + ' %' : v + o.dataset.u;
+            const film = k.startsWith('film.'), c = selected();
+            if (film) setK(P.look, k.slice(5), v);
+            else if (k.startsWith('fx.') || k === 'fadeStart' || k === 'fadeEnd') setK(P, k, v);
+            else if (c) {
+                if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
+                else if (k === 'track') c.track = Number(v);
+                else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; }
+                else setK(c, k, v);
+            }
+            touch(audioFx(k) ? 2 : 0, false);
         });
-        $('[data-avx-vplay]').addEventListener('click', () => { if (ctx.state === 'suspended') ctx.resume(); playingAll = false; if (vid.paused) { const sg = segs[cur]; if (vid.currentTime >= sg.to - 0.05 || vid.currentTime < sg.from) vid.currentTime = sg.from; vid.play(); } else vid.pause(); });
-        $('[data-avx-vall]').addEventListener('click', () => { if (ctx.state === 'suspended') ctx.resume(); playingAll = true; load(0); vid.play(); });
-        vid.addEventListener('play', () => { $('[data-avx-vplay]').textContent = '⏸ Pause'; }); vid.addEventListener('pause', () => { $('[data-avx-vplay]').textContent = '▶ Lire le morceau'; });
-        dl.querySelectorAll('[data-avx-v]').forEach(b => b.addEventListener('click', async () => {
-            const a = b.dataset.avxV, sg = segs[cur], t = vid.currentTime;
-            if (a === 'split') { if (t <= sg.from + 0.1 || t >= sg.to - 0.1) return toast('Place-toi à l’intérieur du morceau (avec la barre de la vidéo).', 'error'); segs.splice(cur, 1, {...sg, to: t}, {...sg, from: t}); load(cur + 1, t); }
-            if (a === 'start') { if (t >= sg.to - 0.1) return; sg.from = Math.max(0, t); drawTl(); }
-            if (a === 'end') { if (t <= sg.from + 0.1) return; sg.to = Math.min(sources[sg.s].dur, t); drawTl(); }
-            if (a === 'del') { if (segs.length === 1) return toast('Il faut garder au moins un morceau.', 'error'); segs.splice(cur, 1); load(Math.min(cur, segs.length - 1)); }
-            if (a === 'left' && cur > 0) { [segs[cur - 1], segs[cur]] = [segs[cur], segs[cur - 1]]; load(cur - 1); }
-            if (a === 'right' && cur < segs.length - 1) { [segs[cur + 1], segs[cur]] = [segs[cur], segs[cur + 1]]; load(cur + 1); }
-            if (a === 'add') { const o = await pickOther('video'); if (!o) return; try { const m = await loadMeta(o.src); sources.push({src: o.src, title: o.title, ...m}); segs.push({s: sources.length - 1, from: 0, to: m.dur}); load(segs.length - 1); toast('Vidéo ajoutée à la fin du montage.'); } catch (e) { toast(e.message, 'error'); } }
-            dirty = true;
-        }));
-        load(0);
-        // enregistrer (en temps réel : le navigateur rejoue le montage dans une image cachée)
+        dl.querySelector('.h-mt-side').addEventListener('click', e => {
+            const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
+            const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
+            const rot = e.target.closest('[data-mt-rot]'); if (rot) { P.fx.rotate = (P.fx.rotate + Number(rot.dataset.mtRot) + 360) % 360; touch(2); }
+        });
+        // frise : choisir, se placer, déplacer
+        const tl = $('[data-mt-tl]');
+        tl.addEventListener('pointerdown', e => {
+            const clip = e.target.closest('[data-mt-clip]'), x0 = e.clientX, inner = tl.querySelector('.h-mt-tlin'), r = inner.getBoundingClientRect();
+            if (!clip) { if (e.target.closest('.h-mt-lname')) return; eng.seek((e.clientX - r.left - 90) / pxs); return; }
+            const [track, id] = clip.dataset.mtClip.split(':'); sel = {track, id};
+            const c = selected(); drawTl();
+            if (track === 'v1' || !c) { eng.seek((e.clientX - r.left - 90) / pxs); return; }
+            const at0 = c.at, el = tl.querySelector(`[data-mt-clip="${track}:${id}"]`); let moved = false;
+            const mv = ev => { const d = (ev.clientX - x0) / pxs; if (Math.abs(ev.clientX - x0) > 3) moved = true; c.at = Math.max(0, Math.round((at0 + d) * 10) / 10); if (el) el.style.left = (90 + c.at * pxs) + 'px'; };
+            const up = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); if (moved) touch(1); else eng.seek((ev.clientX - r.left - 90) / pxs); };
+            document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
+        });
+        $('[data-mt-zoom]').addEventListener('input', e => { pxs = Number(e.target.value); drawTl(); });
+        // lecture
+        const play = async () => { if (eng.playing) { eng.pause(); $('[data-mt-play]').textContent = '▶ Lire'; } else { await eng.play(); $('[data-mt-play]').textContent = '⏸ Pause'; } };
+        $('[data-mt-play]').addEventListener('click', play);
+        $('[data-mt-home]').addEventListener('click', () => eng.seek(0));
+        dl.addEventListener('keydown', e => { if (e.key === ' ' && !e.target.closest('input, textarea, select')) { e.preventDefault(); play(); } });
+        // outils
+        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; try { const m = kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => res({dur: a.duration}); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; }); P.sources.push({src: o.src, title: o.title, kind, ...m}); return P.sources.length - 1; } catch (e) { toast(e.message, 'error'); return null; } };
+        dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
+            const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
+            if (op === 'addv1') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: P.sources[s].dur, tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
+            if (op === 'addv2') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: P.sources[s].dur, at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
+            if (op === 'adda') { const s = await addSource('audio'); if (s === null) return; const k = {id: nid('a'), s, from: 0, to: P.sources[s].dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1, track: P.audio.some(a => (a.track || 1) === 1) ? 2 : 1}; P.audio.push(k); sel = {track: 'audio', id: k.id}; return touch(1); }
+            if (op === 'addtext') { const k = {id: nid('t'), at: t, dur: 4, text: 'Mon titre', size: 7, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: P.texts.length ? 82 : 50, anim: 'fade', align: 'center'}; P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
+            if (!c) return toast('Choisis d’abord un élément sur la frise.', 'error');
+            const list = sel.track === 'v1' ? P.v1 : sel.track === 'v2' ? P.v2 : sel.track === 'texts' ? P.texts : P.audio, i = list.indexOf(c);
+            const startOf = () => sel.track === 'v1' ? layoutV1(P)[i].at : c.at;
+            if (op === 'del') { list.splice(i, 1); sel = null; return touch(1); }
+            if (op === 'left' || op === 'right') { if (sel.track !== 'v1') return toast('Pour les incrustations, textes et sons : fais-les glisser sur la frise.', 'error'); const j = i + (op === 'left' ? -1 : 1); if (j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; return touch(1); }
+            if (op === 'detach') { if (sel.track !== 'v1' && sel.track !== 'v2') return toast('Choisis un morceau de vidéo.', 'error'); if (c.detached) return toast('Le son de ce morceau est déjà détaché.', 'error'); const at = startOf(), busy = n => P.audio.some(a => (a.track || 1) === n && a.at < at + c.to - c.from && at < a.at + a.to - a.from);
+                const k = {id: nid('a'), s: c.s, from: c.from, to: c.to, at, vol: c.vol ?? 1, fadeIn: 0, fadeOut: 0, track: busy(1) && !busy(2) ? 2 : 1, detached: true}; P.audio.push(k); c.mute = true; c.detached = k.id; sel = {track: 'audio', id: k.id}; toast(`Son détaché : il est sur la piste « Son ${k.track} », tu peux le déplacer, le baisser ou l’enlever.`); return touch(1); }
+            if (sel.track === 'texts') { if (op === 'start') { const e2 = c.at + c.dur; c.at = Math.min(t, e2 - 0.3); c.dur = e2 - c.at; } if (op === 'end') c.dur = Math.max(0.3, t - c.at); if (op === 'split') return toast('Un texte ne se coupe pas : change sa durée.', 'error'); return touch(0); }
+            const s0 = startOf(), local = c.from + (t - s0);
+            if (local <= c.from + 0.1 || local >= c.to - 0.1) return toast('Place la tête de lecture à l’intérieur de l’élément choisi.', 'error');
+            if (op === 'split') { const b2 = {...JSON.parse(JSON.stringify(c)), id: nid(sel.track[0]), from: local, tr: {type: 'none', d: 1}}; if (sel.track !== 'v1') b2.at = t; c.to = local; list.splice(i + 1, 0, b2); }
+            if (op === 'start') { if (sel.track !== 'v1') c.at = t; c.from = local; }
+            if (op === 'end') c.to = local;
+            touch(1);
+        });
+        // enregistrer
         $('[data-avx-save]').addEventListener('click', () => {
-            vid.pause();
-            const types = recordTypes();
-            if (!types.length) return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
-            const T = total();
-            ext.openDialog({eyebrow: 'ENREGISTRER LA VIDÉO', title: media.title || 'Vidéo', wide: true, submitLabel: 'Enregistrer',
-                body: `<p class="h-cfg-explain">La vidéo est rejouée pour être enregistrée : cela prend <b>${fmt(T, false)}</b> (la durée du montage). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e, label, help]) => ({key: t, label, help}))),
-                onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { d.querySelector('[data-avx-copytitle]').hidden = d.querySelector('[name=mode]:checked').value !== 'copy'; })),
+            eng.pause();
+            if (!P.v1.length && !P.v2.length) return toast('Le montage est vide : ajoute une vidéo.', 'error');
+            const types = recordTypes(); if (!types.length) return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
+            const T = montageEnd(P);
+            ext.openDialog({eyebrow: 'ENREGISTRER LA VIDÉO', title: media.title || 'Montage', wide: true, submitLabel: 'Enregistrer',
+                body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))),
+                onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
                 onSubmit: async form => {
                     const f = Object.fromEntries(new FormData(form)), prog = form.querySelector('[data-avx-progress]'), type = types.find(x => x[0] === f.fmt) || types[0];
-                    const blob = await recordMontage(sources, segs, fx, type[0], p => { prog.textContent = `Enregistrement… ${Math.round(p * 100)} %`; });
-                    prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
-                    await uploadResult(media, blob, type[1], {mode: f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: T, note: f.note, title: f.title});
-                    toast(f.mode === 'copy' ? 'Nouvelle vidéo enregistrée, rattachée aux mêmes fiches.' : f.mode === 'show' ? 'Nouvelle version montrée partout. L’original est gardé.' : 'Version enregistrée (l’ancienne reste montrée).');
+                    eng.destroy(); eng = null;
+                    try {
+                        const blob = await recordMontage(P, type[0], p => { prog.textContent = `Enregistrement… ${Math.round(p * 100)} %`; });
+                        prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
+                        await uploadResult(media, blob, type[1], {mode: f.mode === 'new' ? 'new' : f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: T, note: f.note, title: f.title});
+                    } catch (err) { await rebuild(); throw err; }
+                    toast(f.mode === 'new' ? 'Montage enregistré : il est dans Listes → Vidéos.' : f.mode === 'copy' ? 'Nouvelle vidéo enregistrée, rattachée aux mêmes fiches.' : f.mode === 'show' ? 'Nouvelle version montrée partout. L’original est gardé.' : 'Version enregistrée (l’ancienne reste montrée).');
                     dirty = false; dl.close(); onDone?.();
                 },
             });
         });
-        dl.addEventListener('close', () => { vid.pause(); vid.removeAttribute('src'); try { node.disconnect(); out?.disconnect(); } catch (_) {} });
-    }
-
-    /** Rejoue les morceaux dans une image cachée et les enregistre (MediaRecorder), avec le son filtré. */
-    async function recordMontage(sources, segs, fx, mime, onStep) {
-        const v = document.createElement('video'); v.playsInline = true; v.preload = 'auto'; v.crossOrigin = 'anonymous';
-        const first = sources[segs[0].s], turn = fx.rotate % 180 !== 0;
-        const W0 = first.w || 1280, H0 = first.h || 720, W = (turn ? H0 : W0) & ~1, H = (turn ? W0 : H0) & ~1;
-        const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d');
-        const ctx = new AudioContext(), srcNode = ctx.createMediaElementSource(v), dest = ctx.createMediaStreamDestination();
-        const gain = ctx.createGain(); gain.gain.value = fx.mute ? 0 : fx.volume; let last = srcNode;
-        if (fx.noise) { const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 100; const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 9000; last.connect(hp).connect(lp); last = lp; }
-        if (fx.clarity) { const pr = ctx.createBiquadFilter(); pr.type = 'peaking'; pr.frequency.value = 3000; pr.Q.value = 0.9; pr.gain.value = 4; const cp = ctx.createDynamicsCompressor(); cp.threshold.value = -24; cp.ratio.value = 3; last.connect(pr).connect(cp); last = cp; }
-        last.connect(gain).connect(dest);
-        const stream = new MediaStream([...cv.captureStream(30).getVideoTracks(), ...dest.stream.getAudioTracks()]);
-        const rec = new MediaRecorder(stream, {mimeType: mime, videoBitsPerSecond: Math.min(8e6, Math.max(2.5e6, W * H * 4)), audioBitsPerSecond: 128000});
-        const chunks = []; rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
-        const T = segs.reduce((t, x) => t + x.to - x.from, 0); let doneT = 0, raf = 0;
-        const paint = () => {
-            g.save(); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.filter = `brightness(${fx.bright}) contrast(${fx.contrast})`;
-            g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
-            const vw = v.videoWidth || W0, vh = v.videoHeight || H0, bw = turn ? H : W, bh = turn ? W : H, k = Math.min(bw / vw, bh / vh);
-            g.drawImage(v, -vw * k / 2, -vh * k / 2, vw * k, vh * k); g.restore();
-        };
-        const loop = () => { paint(); raf = requestAnimationFrame(loop); };
-        rec.start(1000); rec.pause();
-        try {
-            for (const sg of segs) {
-                const so = sources[sg.s];
-                if (!v.src.endsWith(so.src)) { v.src = so.src; await new Promise((r, j) => { v.onloadeddata = r; v.onerror = () => j(new Error('Vidéo illisible : ' + so.title)); }); }
-                v.currentTime = sg.from; await new Promise(r => { v.onseeked = r; });
-                paint(); if (ctx.state === 'suspended') await ctx.resume();
-                rec.resume(); loop(); await v.play();
-                await new Promise(r => { const chk = () => { onStep?.((doneT + Math.max(0, v.currentTime - sg.from)) / T); if (v.currentTime >= sg.to || v.ended) { r(); return; } setTimeout(chk, 40); }; chk(); });
-                v.pause(); rec.pause(); cancelAnimationFrame(raf); doneT += sg.to - sg.from;
-            }
-        } finally { cancelAnimationFrame(raf); }
-        const blob = await new Promise(r => { rec.onstop = () => r(new Blob(chunks, {type: mime.split(';')[0]})); rec.stop(); });
-        v.removeAttribute('src'); ctx.close();
-        return blob;
+        dl.addEventListener('close', () => { eng?.destroy(); });
+        if (ext.tbApply) ext.tbApply(dl, 'video');
+        await rebuild();
+        drawTl();
+        if (start === 'add') $('[data-mt-op="addv1"]').click();
     }
 
     /** Point d'entrée : un média {id, filename, title, media_type}. */
+    // Listes → Vidéos / Audios → « 🎬 Montage » : un montage fait de zéro, enregistré comme un nouveau média
+    ext.openMontage = async (kind, onDone) => {
+        if (kind === 'video') return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add');
+        const o = await pickOther('audio'); if (!o) return;
+        return openAudio({id: 0, title: (o.title || 'Son') + ' (montage)', media_type: 'audio', src: o.src}, onDone);
+    };
     ext.openAvEditor = (media, {onDone} = {}) => kindOf(media) === 'video' ? openVideo(media, onDone) : openAudio(media, onDone);
     // Visionneuse : « ✂️ Modifier »
     document.addEventListener('click', e => {
