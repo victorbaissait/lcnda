@@ -43,7 +43,7 @@ function research_suggestions_data(PDO $pdo, int $limit = 40): array
     // Mariages des couples de la lignée
     $marriages = [];
     $stmt = $pdo->prepare("SELECT f.partner1_id, f.partner2_id, e.year, e.date_text, COALESCE(pl.name,'') AS place
-        FROM families f LEFT JOIN events e ON e.family_id=f.id AND e.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='MARR')
+        FROM families f LEFT JOIN events e ON e.family_id=f.id AND e.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag IN ('MARR','MRCI','MRRE'))
         LEFT JOIN places pl ON pl.id=e.place_id WHERE f.partner1_id IN ($marks) OR f.partner2_id IN ($marks)");
     $stmt->execute(array_merge($ids, $ids));
     foreach ($stmt->fetchAll() as $m) {

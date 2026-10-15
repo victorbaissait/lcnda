@@ -55,19 +55,19 @@ function research_relatives(PDO $pdo, int $id): array
     $childrenSql = "SELECT fc.child_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE f.partner1_id=? OR f.partner2_id=?";
     $siblingsSql = "SELECT fc2.child_id FROM family_children fc1 JOIN family_children fc2 ON fc2.family_id=fc1.family_id WHERE fc1.child_id=? AND fc2.child_id<>?";
     $parentsMarriage = $pdo->prepare("SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id
-        WHERE t.gedcom_tag='MARR' AND e.year>0 AND e.family_id IN (SELECT family_id FROM family_children WHERE child_id=?)");
+        WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE') AND e.year>0 AND e.family_id IN (SELECT family_id FROM family_children WHERE child_id=?)");
     $parentsMarriage->execute([$id]);
     $pm = $parentsMarriage->fetchColumn();
     $parentsMarriage->closeCursor();
     // Remariage d'un conjoint : la personne était sans doute morte (ou séparée) avant
     $spouseRemarriage = $pdo->prepare("SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id
         JOIN families f2 ON f2.id=e.family_id
-        WHERE t.gedcom_tag='MARR' AND e.year>0
+        WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE') AND e.year>0
           AND f2.id NOT IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?)
           AND (f2.partner1_id IN (SELECT CASE WHEN partner1_id=? THEN partner2_id ELSE partner1_id END FROM families WHERE partner1_id=? OR partner2_id=?)
             OR f2.partner2_id IN (SELECT CASE WHEN partner1_id=? THEN partner2_id ELSE partner1_id END FROM families WHERE partner1_id=? OR partner2_id=?))
           AND e.year > COALESCE((SELECT max(e2.year) FROM events e2 JOIN event_types t2 ON t2.id=e2.event_type_id
-                WHERE t2.gedcom_tag='MARR' AND e2.family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?)), 0)");
+                WHERE t2.gedcom_tag IN ('MARR','MRCI','MRRE') AND e2.family_id IN (SELECT id FROM families WHERE partner1_id=? OR partner2_id=?)), 0)");
     $spouseRemarriage->execute([$id, $id, $id, $id, $id, $id, $id, $id, $id, $id]);
     $sr = $spouseRemarriage->fetchColumn();
     $spouseRemarriage->closeCursor();

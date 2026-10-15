@@ -49,7 +49,7 @@
         birth_countries: {group: 'birth_country', groupBy: 'value', limit: 12}, death_countries: null, sex_distribution: {group: 'gender', groupBy: 'value', style: 'pie'},
         birth_years: {group: 'birth', groupBy: 'decade', style: 'columns'}, death_years: {group: 'death', groupBy: 'decade', style: 'columns'},
         age_at_death: {group: 'age', groupBy: 'step', groupStep: 10, style: 'columns'},
-        marriage_places: {events: 'MARR', group: 'place', groupBy: 'value', limit: 12},
+        marriage_places: {events: ['MARR', 'MRCI', 'MRRE'], group: 'place', groupBy: 'value', limit: 12},
     };
     function appStatToChart(d) {
         const m = APP_STAT_AS_CHART[d.statType]; if (!m) return null;
@@ -59,7 +59,7 @@
         const fromIso = isoDate(d.statFrom), toIso = isoDate(d.statTo);
         if (fromIso || toIso) rules.push({field: 'date_range', date_from: fromIso || (yearOf(d.statFrom) ? `${yearOf(d.statFrom)}-01-01` : ''), date_to: toIso || (yearOf(d.statTo) ? `${yearOf(d.statTo)}-12-31` : ''), values: []});
         else if (yearOf(d.statFrom) || yearOf(d.statTo)) rules.push({field: 'year', from: yearOf(d.statFrom), to: yearOf(d.statTo), values: []});
-        const src = m.events ? {source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tagIds(meta || {}, m.events)}, ...rules]}} : {source: 'persons', definition: {match: 'all', rules}};
+        const src = m.events ? {source: 'events', definition: {match: 'all', rules: [{field: 'event_type', values: tagIds(meta || {}, ...[].concat(m.events))}, ...rules]}} : {source: 'persons', definition: {match: 'all', rules}};
         return {...d, kind: 'chart', src, group: m.group, groupBy: m.groupBy, groupStep: m.groupStep || 25, style: d.style && d.style !== 'bars' ? d.style : (m.style || 'bars'), limit: m.limit || d.limit || 10, valueColors: {}};
     }
     // Éditeur ouvert depuis Maintenance → Éditeur de widgets (mode « widgets ») ou → Éditeur de statistiques (mode « stats »)

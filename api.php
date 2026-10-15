@@ -603,8 +603,8 @@ function person_select(): string
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
         (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_date,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year,
-        (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND t.gedcom_tag='MARR' ORDER BY e.id LIMIT 1) AS marr_date,
-        (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND t.gedcom_tag='MARR' ORDER BY e.id LIMIT 1) AS marr_year,
+        (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.id LIMIT 1) AS marr_date,
+        (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.id LIMIT 1) AS marr_year,
         (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BURI' ORDER BY e.id LIMIT 1) AS buri_date,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BURI' ORDER BY e.id LIMIT 1) AS buri_year,
         (SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag IN ('CHR','BAPM') ORDER BY e.id LIMIT 1) AS bapt_date,
@@ -626,13 +626,13 @@ function dashboard_people_to_complete(PDO $pdo): array
         EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT') AS has_birth,
         EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT') AS has_death,
         EXISTS(SELECT 1 FROM family_children fc WHERE fc.child_id=p.id) AS has_parents,
-        EXISTS(SELECT 1 FROM media_links ml WHERE (ml.entity_type='person' AND ml.entity_id=p.id) OR (ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id))) AS has_media,
-        EXISTS(SELECT 1 FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id))) AS has_source
+        EXISTS(SELECT 1 FROM media_links ml WHERE (ml.entity_type='person' AND ml.entity_id=p.id) OR (ml.entity_type='event' AND ml.entity_id IN (SELECT id FROM events WHERE person_id=p.id OR family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id)))) AS has_media,
+        EXISTS(SELECT 1 FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id OR family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id)))) AS has_source
         FROM persons p
         WHERE NOT EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT')
            OR NOT EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT')
            OR NOT EXISTS(SELECT 1 FROM family_children fc WHERE fc.child_id=p.id)
-           OR NOT EXISTS(SELECT 1 FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id)))
+           OR NOT EXISTS(SELECT 1 FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id OR family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id))))
         ORDER BY p.updated_at DESC,p.id DESC
         LIMIT 60";
     $rows = $pdo->query($sql)->fetchAll();
@@ -652,10 +652,11 @@ function dashboard_people_to_complete(PDO $pdo): array
 
 function dashboard_events_without_sources(PDO $pdo): array
 {
-    return $pdo->query("SELECT e.id,e.person_id,e.date_text,e.year,t.label AS type_label,pl.name AS place_name," . dashboard_person_name_expr('p') . " AS person_name
+    return $pdo->query("SELECT e.id,COALESCE(e.person_id,f.partner1_id,f.partner2_id) AS person_id,e.date_text,e.year,t.label AS type_label,pl.name AS place_name,CASE WHEN p.id IS NULL AND (p1.id IS NOT NULL OR p2.id IS NOT NULL) THEN trim(COALESCE(" . dashboard_person_name_expr('p1') . ",'')||CASE WHEN p1.id IS NOT NULL AND p2.id IS NOT NULL THEN ' & ' ELSE '' END||COALESCE(" . dashboard_person_name_expr('p2') . ",'')) ELSE " . dashboard_person_name_expr('p') . " END AS person_name
         FROM events e
         JOIN event_types t ON t.id=e.event_type_id
         LEFT JOIN persons p ON p.id=e.person_id
+        LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
         LEFT JOIN places pl ON pl.id=e.place_id
         WHERE NOT EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id)
         ORDER BY COALESCE(e.updated_at,e.created_at) DESC,e.id DESC
@@ -682,16 +683,17 @@ function dashboard_media_unlinked(PDO $pdo): array
 function dashboard_persons_without_sources(PDO $pdo): array
 {
     return $pdo->query(person_select() . " WHERE NOT EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id)
-        AND NOT EXISTS(SELECT 1 FROM source_links sl JOIN events e ON sl.entity_type='event' AND sl.entity_id=e.id WHERE e.person_id=p.id)
+        AND NOT EXISTS(SELECT 1 FROM source_links sl JOIN events e ON sl.entity_type='event' AND sl.entity_id=e.id WHERE e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id))
         ORDER BY p.updated_at DESC,p.id DESC LIMIT 80")->fetchAll();
 }
 
 function dashboard_events_without_media(PDO $pdo): array
 {
-    return $pdo->query("SELECT e.id,e.person_id,e.date_text,e.year,t.label AS type_label,pl.name AS place_name," . dashboard_person_name_expr('p') . " AS person_name
+    return $pdo->query("SELECT e.id,COALESCE(e.person_id,f.partner1_id,f.partner2_id) AS person_id,e.date_text,e.year,t.label AS type_label,pl.name AS place_name,CASE WHEN p.id IS NULL AND (p1.id IS NOT NULL OR p2.id IS NOT NULL) THEN trim(COALESCE(" . dashboard_person_name_expr('p1') . ",'')||CASE WHEN p1.id IS NOT NULL AND p2.id IS NOT NULL THEN ' & ' ELSE '' END||COALESCE(" . dashboard_person_name_expr('p2') . ",'')) ELSE " . dashboard_person_name_expr('p') . " END AS person_name
         FROM events e
         JOIN event_types t ON t.id=e.event_type_id
         LEFT JOIN persons p ON p.id=e.person_id
+        LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id
         LEFT JOIN places pl ON pl.id=e.place_id
         WHERE NOT EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='event' AND ml.entity_id=e.id)
         ORDER BY COALESCE(e.updated_at,e.created_at) DESC,e.id DESC
@@ -742,8 +744,8 @@ function dashboard_branches_less_documented(PDO $pdo): array
             count(DISTINCT ml.id) AS media_count
         FROM persons p
         LEFT JOIN surname_groups g ON g.id=p.surname_group_id
-        LEFT JOIN source_links sl ON (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT e.id FROM events e WHERE e.person_id=p.id))
-        LEFT JOIN media_links ml ON (ml.entity_type='person' AND ml.entity_id=p.id) OR (ml.entity_type='event' AND ml.entity_id IN (SELECT e.id FROM events e WHERE e.person_id=p.id))
+        LEFT JOIN source_links sl ON (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT e.id FROM events e WHERE e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id)))
+        LEFT JOIN media_links ml ON (ml.entity_type='person' AND ml.entity_id=p.id) OR (ml.entity_type='event' AND ml.entity_id IN (SELECT e.id FROM events e WHERE e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id)))
         GROUP BY branch
         HAVING person_count>0
         ORDER BY (source_count + media_count) * 1.0 / person_count ASC, person_count DESC
@@ -758,7 +760,7 @@ function dashboard_couples_without_marriage(PDO $pdo): array
         LEFT JOIN persons p1 ON p1.id=f.partner1_id
         LEFT JOIN persons p2 ON p2.id=f.partner2_id
         LEFT JOIN family_children fc ON fc.family_id=f.id
-        WHERE NOT EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR')
+        WHERE NOT EXISTS(SELECT 1 FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag IN ('MARR','MRCI','MRRE'))
           AND (f.partner1_id IS NOT NULL OR f.partner2_id IS NOT NULL)
         GROUP BY f.id
         ORDER BY child_count DESC,f.id DESC LIMIT 80")->fetchAll();
@@ -893,9 +895,9 @@ function dashboard_branch_map(PDO $pdo, string $branch = ''): array
         $branch = (string)$pdo->query("SELECT g.name FROM persons p JOIN surname_groups g ON g.id=p.surname_group_id WHERE trim(COALESCE(g.name,''))<>'' GROUP BY g.name ORDER BY count(*) DESC,g.name COLLATE NOCASE LIMIT 1")->fetchColumn();
     }
     if ($branch === '') return ['branch'=>'', 'points'=>[], 'total'=>0];
-    $stmt = $pdo->prepare("SELECT pl.id,pl.name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,count(e.id) AS count
+    $stmt = $pdo->prepare("SELECT pl.id,pl.name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,count(DISTINCT e.id) AS count
         FROM persons p
-        JOIN events e ON e.person_id=p.id
+        JOIN events e ON (e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id))
         JOIN places pl ON pl.id=e.place_id
         JOIN surname_groups g ON g.id=p.surname_group_id
         WHERE g.name=? AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL AND NOT (pl.latitude=0 AND pl.longitude=0)
@@ -1223,16 +1225,16 @@ function dashboard_person_map_by_id(PDO $pdo, int $personId): array
             (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
             (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year
         FROM persons p
-        WHERE p.id=? AND EXISTS(SELECT 1 FROM events e JOIN places pl ON pl.id=e.place_id WHERE e.person_id=p.id AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL AND NOT (pl.latitude=0 AND pl.longitude=0))
+        WHERE p.id=? AND EXISTS(SELECT 1 FROM events e JOIN places pl ON pl.id=e.place_id WHERE (e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id)) AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL AND NOT (pl.latitude=0 AND pl.longitude=0))
         LIMIT 1");
     $stmt->execute([$personId]);
     $person = $stmt->fetch();
     if (!$person) return ['person'=>null, 'points'=>[]];
     $points = $pdo->prepare("SELECT e.id,e.year,e.date_text,t.label AS type_label,pl.name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,1 AS count
         FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id
-        WHERE e.person_id=? AND e.year IS NOT NULL AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL AND NOT (pl.latitude=0 AND pl.longitude=0)
+        WHERE (e.person_id=:pid OR e.family_id IN (SELECT id FROM families WHERE partner1_id=:pid OR partner2_id=:pid)) AND e.year IS NOT NULL AND pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL AND NOT (pl.latitude=0 AND pl.longitude=0)
         ORDER BY e.year,e.id LIMIT 120");
-    $points->execute([(int)$person['id']]);
+    $points->execute([':pid'=>(int)$person['id']]); // ses événements et ceux de ses couples (mariage…)
     $person['years'] = trim((string)($person['birth_year'] ?: '?') . ' — ' . (string)($person['death_year'] ?: '?'));
     return ['person'=>$person, 'points'=>$points->fetchAll()];
 }
@@ -1429,8 +1431,8 @@ function dashboard_data(PDO $pdo): never
             'total' => $stats['persons'],
             'birth' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='BIRT'")),
             'death' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p JOIN events e ON e.person_id=p.id JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag='DEAT'")),
-            'media' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml JOIN events e ON ml.entity_type='event' AND ml.entity_id=e.id WHERE e.person_id=p.id)")),
-            'sources' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl JOIN events e ON sl.entity_type='event' AND sl.entity_id=e.id WHERE e.person_id=p.id)")),
+            'media' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM media_links ml WHERE ml.entity_type='person' AND ml.entity_id=p.id) OR EXISTS(SELECT 1 FROM media_links ml JOIN events e ON ml.entity_type='event' AND ml.entity_id=e.id WHERE e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id))")),
+            'sources' => $coverageRow($coverageCount("SELECT count(DISTINCT p.id) FROM persons p WHERE EXISTS(SELECT 1 FROM source_links sl WHERE sl.entity_type='person' AND sl.entity_id=p.id) OR EXISTS(SELECT 1 FROM source_links sl JOIN events e ON sl.entity_type='event' AND sl.entity_id=e.id WHERE e.person_id=p.id OR e.family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id))")),
         ],
         'top_places' => $topPlaces,
     ]);
@@ -1484,7 +1486,7 @@ function dashboard_issue_preview(PDO $pdo): array
 
 function dashboard_upcoming_dates(PDO $pdo): array
 {
-    $stmt=$pdo->query("SELECT e.id,e.date_text,e.year,t.label AS type_label,t.gedcom_tag,p.id AS person_id,trim(replace(replace(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''),'  ',' '),'  ',' ')) AS person_name,trim(replace(replace(COALESCE(p1.first_name,'')||' '||COALESCE(p1.middle_name,'')||' '||COALESCE(p1.last_name,''),'  ',' '),'  ',' ')) AS partner1_name,trim(replace(replace(COALESCE(p2.first_name,'')||' '||COALESCE(p2.middle_name,'')||' '||COALESCE(p2.last_name,''),'  ',' '),'  ',' ')) AS partner2_name FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE e.date_text<>'' AND t.gedcom_tag IN ('BIRT','DEAT','MARR','CHR','BAPM') ORDER BY e.id DESC LIMIT 5000");
+    $stmt=$pdo->query("SELECT e.id,e.date_text,e.year,t.label AS type_label,t.gedcom_tag,COALESCE(p.id,p1.id,p2.id) AS person_id,trim(replace(replace(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''),'  ',' '),'  ',' ')) AS person_name,trim(replace(replace(COALESCE(p1.first_name,'')||' '||COALESCE(p1.middle_name,'')||' '||COALESCE(p1.last_name,''),'  ',' '),'  ',' ')) AS partner1_name,trim(replace(replace(COALESCE(p2.first_name,'')||' '||COALESCE(p2.middle_name,'')||' '||COALESCE(p2.last_name,''),'  ',' '),'  ',' ')) AS partner2_name FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id WHERE e.date_text<>'' AND t.gedcom_tag IN ('BIRT','DEAT','MARR','MRCI','MRRE','CHR','BAPM') ORDER BY e.id DESC LIMIT 5000");
     $today=new DateTimeImmutable('today');
     $items=[];
     foreach($stmt->fetchAll() as $row){
@@ -1749,7 +1751,7 @@ function sosa_map_data(PDO $pdo, int $rootId): never
 function daboville_children_ordered(PDO $pdo, int $personId): array
 {
     $stmt = $pdo->prepare("SELECT fc.child_id AS child_id, fc.position AS position,
-            (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' ORDER BY e.year LIMIT 1) AS marriage_year,
+            (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag IN ('MARR','MRCI','MRRE') ORDER BY e.year LIMIT 1) AS marriage_year,
             f.id AS family_id
         FROM family_children fc JOIN families f ON f.id=fc.family_id
         WHERE f.partner1_id=? OR f.partner2_id=?
@@ -2064,7 +2066,7 @@ function person_detail(PDO $pdo, int $id): never
     $families = $pdo->prepare("SELECT f.id,
             CASE WHEN f.partner1_id=? THEN f.partner2_id ELSE f.partner1_id END AS other_partner_id,
             (SELECT trim(p2.first_name||' '||p2.last_name) FROM persons p2 WHERE p2.id = CASE WHEN f.partner1_id=? THEN f.partner2_id ELSE f.partner1_id END) AS other_partner_name,
-            (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR' AND e.year IS NOT NULL ORDER BY e.year LIMIT 1) AS marriage_year
+            (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag IN ('MARR','MRCI','MRRE') AND e.year IS NOT NULL ORDER BY e.year LIMIT 1) AS marriage_year
         FROM families f WHERE f.partner1_id=? OR f.partner2_id=?
         ORDER BY marriage_year IS NULL, marriage_year, f.id");
     $families->execute([$id, $id, $id, $id]);
@@ -2374,15 +2376,15 @@ function map_data(PDO $pdo): never
     }
     $where = $tag !== 'all' ? ' AND t.gedcom_tag=:tag' : '';
     if($yearFrom)$where.=' AND e.year>=:year_from';if($yearTo)$where.=' AND e.year<=:year_to';
-    if($gender==='unknown')$where.=" AND (p.gender IS NULL OR p.gender NOT IN ('male','female'))";
-    elseif($gender!=='')$where.=' AND p.gender=:gender';
-    if($surname!==''&&$surnameByGroup)$where.=' AND g.name LIKE :surname COLLATE NOCASE';
-    elseif($surname!=='')$where.=' AND p.last_name LIKE :surname COLLATE NOCASE';
+    // la personne de l'événement, ou l'un des deux conjoints d'un événement de couple (mariage…)
+    $anyone=static fn(string $cond)=>" AND EXISTS(SELECT 1 FROM persons x LEFT JOIN surname_groups gx ON gx.id=x.surname_group_id WHERE x.id IN (e.person_id,f.partner1_id,f.partner2_id) AND {$cond})";
+    if($gender==='unknown')$where.=$anyone("(x.gender IS NULL OR x.gender NOT IN ('male','female'))");
+    elseif($gender!=='')$where.=$anyone('x.gender=:gender');
+    if($surname!==''&&$surnameByGroup)$where.=$anyone('gx.name LIKE :surname COLLATE NOCASE');
+    elseif($surname!=='')$where.=$anyone('x.last_name LIKE :surname COLLATE NOCASE');
     if($ageFrom||$ageTo){
-        $bsub="(SELECT e2.year FROM events e2 JOIN event_types t2 ON t2.id=e2.event_type_id WHERE e2.person_id=p.id AND t2.gedcom_tag='BIRT' ORDER BY e2.id LIMIT 1)";
-        $where.=" AND {$bsub} IS NOT NULL";
-        if($ageFrom)$where.=" AND (e.year - {$bsub})>=:age_from";
-        if($ageTo)$where.=" AND (e.year - {$bsub})<=:age_to";
+        $bsub="(SELECT e2.year FROM events e2 JOIN event_types t2 ON t2.id=e2.event_type_id WHERE e2.person_id=x.id AND t2.gedcom_tag='BIRT' ORDER BY e2.id LIMIT 1)";
+        $where.=$anyone("{$bsub} IS NOT NULL".($ageFrom?" AND (e.year - {$bsub})>=:age_from":'').($ageTo?" AND (e.year - {$bsub})<=:age_to":''));
     }
     $locationMode=safe_text($_GET['location_mode']??'city'); // 'city', 'combined' ou 'precise'
     if($locationMode==='precise'){
@@ -2435,7 +2437,7 @@ function map_data(PDO $pdo): never
     $stmt->execute();
     if($locationMode==='precise'){
         $countSql="SELECT COUNT(*) FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id
-            LEFT JOIN persons p ON p.id=e.person_id
+            LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id
             LEFT JOIN surname_groups g ON g.id=p.surname_group_id
             WHERE e.precise_lat IS NOT NULL AND e.precise_lon IS NOT NULL
             AND NOT (e.precise_lat=0 AND e.precise_lon=0)
@@ -2443,7 +2445,7 @@ function map_data(PDO $pdo): never
             {$where}";
     } else {
         $countSql="SELECT COUNT(*) FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id
-            LEFT JOIN persons p ON p.id=e.person_id
+            LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id
             LEFT JOIN surname_groups g ON g.id=p.surname_group_id
             WHERE pl.latitude IS NOT NULL AND pl.longitude IS NOT NULL
             AND pl.name IS NOT NULL AND trim(pl.name)<>''
@@ -4079,7 +4081,7 @@ function graph_stats_data(PDO $pdo): never
             "WITH base AS (
                 SELECT p.id,p.gender,
                        (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT') AS birth_year,
-                       (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND t.gedcom_tag='MARR') AS marriage_year,
+                       (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND t.gedcom_tag IN ('MARR','MRCI','MRRE')) AS marriage_year,
                        (SELECT min(be.year) FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN events be ON be.person_id=fc.child_id JOIN event_types bt ON bt.id=be.event_type_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND bt.gedcom_tag='BIRT') AS first_child_year,
                        (SELECT max(be.year) FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN events be ON be.person_id=fc.child_id JOIN event_types bt ON bt.id=be.event_type_id WHERE (f.partner1_id=p.id OR f.partner2_id=p.id) AND bt.gedcom_tag='BIRT') AS last_child_year
                 FROM persons p
@@ -4236,7 +4238,7 @@ function graph_stats_data(PDO $pdo): never
             ),
             couples AS (
                 SELECT f.id,f.partner1_id,f.partner2_id,
-                       (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag='MARR') AS marriage_year
+                       (SELECT min(e.year) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=f.id AND t.gedcom_tag IN ('MARR','MRCI','MRRE')) AS marriage_year
                 FROM families f WHERE f.partner1_id IS NOT NULL AND f.partner2_id IS NOT NULL
             ),
             filtered_couples AS (
@@ -4266,9 +4268,10 @@ function graph_stats_data(PDO $pdo): never
             UNION ALL SELECT 'Lien le plus proche',COALESCE(closest_path,0),'générations cumulées' FROM totals",
             $hasYearFilter ? $birthYearParams : []],
         'marriage_places' => ['Lieux de mariage','Répartition des lieux renseignés sur les événements de mariage.','bar',
-            "SELECT COALESCE(NULLIF(trim(pl.name),''),'Lieu non renseigné') AS label,count(*) AS value
-             FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-             WHERE t.gedcom_tag='MARR' GROUP BY 1 ORDER BY value DESC,label LIMIT 80", []],
+            // un mariage par couple (civil, religieux… : celui qui a un lieu, le mariage d'abord)
+            "WITH m AS (SELECT e.place_id,row_number() OVER(PARTITION BY COALESCE(e.family_id,-e.id) ORDER BY (e.place_id IS NULL),CASE t.gedcom_tag WHEN 'MARR' THEN 0 WHEN 'MRCI' THEN 1 ELSE 2 END,e.id) AS rn
+                FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('MARR','MRCI','MRRE'))
+             SELECT COALESCE(NULLIF(trim(pl.name),''),'Lieu non renseigné') AS label,count(*) AS value FROM m LEFT JOIN places pl ON pl.id=m.place_id WHERE m.rn=1 GROUP BY 1 ORDER BY value DESC,label LIMIT 80", []],
         'sibling_birth_interval' => ['Intervalle entre les naissances d’une fratrie','Intervalle moyen, en années, entre deux naissances successives dans une même famille.','metric_grid',
             "WITH births AS (
                 SELECT fc.family_id,e.year AS birth_year FROM family_children fc
@@ -4635,7 +4638,7 @@ function date_search_data(PDO $pdo): never
     $placeId=safe_int($_GET['place_id']??0);
     if($placeId){$dateWhere.=' AND e.place_id=?';$params[]=$placeId;}
     $occupationFilter=safe_text($_GET['occupation']??'');
-    if($occupationFilter!==''){$occLike='%'.$occupationFilter.'%';$dateWhere.=" AND (EXISTS(SELECT 1 FROM persons pp WHERE pp.id=e.person_id AND pp.occupation LIKE ? COLLATE NOCASE) OR EXISTS(SELECT 1 FROM events eo JOIN event_types to2 ON to2.id=eo.event_type_id WHERE eo.person_id=e.person_id AND to2.gedcom_tag='OCCU' AND (eo.title LIKE ? COLLATE NOCASE OR eo.description LIKE ? COLLATE NOCASE)) OR EXISTS(SELECT 1 FROM census_members cm WHERE cm.person_id=e.person_id AND cm.occupation LIKE ? COLLATE NOCASE))";$params=array_merge($params,[$occLike,$occLike,$occLike,$occLike]);}
+    if($occupationFilter!==''){$occLike='%'.$occupationFilter.'%';$dateWhere.=" AND (EXISTS(SELECT 1 FROM persons pp WHERE pp.id IN (e.person_id,f.partner1_id,f.partner2_id) AND pp.occupation LIKE ? COLLATE NOCASE) OR EXISTS(SELECT 1 FROM events eo JOIN event_types to2 ON to2.id=eo.event_type_id WHERE eo.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND to2.gedcom_tag='OCCU' AND (eo.title LIKE ? COLLATE NOCASE OR eo.description LIKE ? COLLATE NOCASE)) OR EXISTS(SELECT 1 FROM census_members cm WHERE cm.person_id IN (e.person_id,f.partner1_id,f.partner2_id) AND cm.occupation LIKE ? COLLATE NOCASE))";$params=array_merge($params,[$occLike,$occLike,$occLike,$occLike]);}
     if($query!=='')
 {$like='%'.$query.'%';$dateWhere.=' AND (t.label LIKE ? COLLATE NOCASE OR pl.name LIKE ? COLLATE NOCASE OR pl.subdivision LIKE ? COLLATE NOCASE OR pl.country LIKE ? COLLATE NOCASE OR p.first_name LIKE ? COLLATE NOCASE OR p.last_name LIKE ? COLLATE NOCASE OR p1.first_name LIKE ? COLLATE NOCASE OR p1.last_name LIKE ? COLLATE NOCASE OR p2.first_name LIKE ? COLLATE NOCASE OR p2.last_name LIKE ? COLLATE NOCASE)';$params=array_merge($params,array_fill(0,10,$like));}
     $sql="SELECT e.id,e.date_text,e.year,e.person_id,e.family_id,t.label AS type,t.gedcom_tag,t.icon,t.color,pl.name AS place,pl.subdivision,pl.country,
@@ -5311,8 +5314,12 @@ function timeline_data(PDO $pdo, int $id): never
     $ids = related_ids($pdo,$id,min(10,max(0,safe_int($_GET['up']??2))),min(10,max(0,safe_int($_GET['down']??2))),($_GET['partners']??'1')==='1');
     if (!$ids) json_response(['events'=>[]]);
     $marks=implode(',',array_fill(0,count($ids),'?'));
-    $sql="SELECT e.id,e.date_text,e.year,t.label AS type,t.color,p.id AS person_id,p.first_name,p.last_name,pl.name AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.person_id IN ($marks) AND e.year IS NOT NULL ORDER BY e.year,e.id";
-    $stmt=$pdo->prepare($sql);$stmt->execute($ids);
+    // les événements de couple (mariage, divorce…) comptent aussi, une seule fois même si les deux conjoints sont là
+    $couple="trim(COALESCE(p1.first_name,'')||' '||COALESCE(p1.last_name,''))||CASE WHEN p2.id IS NOT NULL THEN ' & '||trim(COALESCE(p2.first_name,'')||' '||COALESCE(p2.last_name,'')) ELSE '' END";
+    $sql="SELECT e.id,e.date_text,e.year,t.label AS type,t.color,COALESCE(p.id,CASE WHEN f.partner1_id IN ($marks) THEN f.partner1_id ELSE f.partner2_id END) AS person_id,CASE WHEN p.id IS NULL THEN $couple ELSE p.first_name END AS first_name,CASE WHEN p.id IS NULL THEN '' ELSE p.last_name END AS last_name,pl.name AS place
+        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN persons p1 ON p1.id=f.partner1_id LEFT JOIN persons p2 ON p2.id=f.partner2_id LEFT JOIN places pl ON pl.id=e.place_id
+        WHERE (e.person_id IN ($marks) OR f.partner1_id IN ($marks) OR f.partner2_id IN ($marks)) AND e.year IS NOT NULL ORDER BY e.year,e.id";
+    $stmt=$pdo->prepare($sql);$stmt->execute([...$ids,...$ids,...$ids,...$ids]);
     json_response(['events'=>$stmt->fetchAll(),'peopleCount'=>count($ids)]);
 }
 
@@ -5371,7 +5378,7 @@ function compute_issues(PDO $pdo): array
     $marriageAfterDeath=$pdo->query("SELECT e.id event_id,e.year marriage_year,p.id person_id,trim(p.first_name||' '||p.last_name) person_name,d.year death_year
       FROM events e JOIN families f ON f.id=e.family_id JOIN persons p ON p.id=f.partner1_id OR p.id=f.partner2_id
       JOIN events d ON d.person_id=p.id AND d.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='DEAT')
-      WHERE e.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag='MARR') AND e.year IS NOT NULL AND d.year IS NOT NULL AND e.year>d.year LIMIT 500")->fetchAll();
+      WHERE e.event_type_id IN (SELECT id FROM event_types WHERE gedcom_tag IN ('MARR','MRCI','MRRE')) AND e.year IS NOT NULL AND d.year IS NOT NULL AND e.year>d.year LIMIT 500")->fetchAll();
     foreach($marriageAfterDeath as $r)$issues[]=['key'=>"marriage-after-death:{$r['person_id']}:{$r['event_id']}",'severity'=>'error','person_id'=>(int)$r['person_id'],'title'=>'Mariage après décès','detail'=>"{$r['person_name']} a un mariage en {$r['marriage_year']} après un décès en {$r['death_year']}."];
     $closeChildren=$pdo->query("SELECT f.id family_id,c1.id child1_id,c2.id child2_id,trim(c1.first_name||' '||c1.last_name) child1,trim(c2.first_name||' '||c2.last_name) child2,b1.year y1,b2.year y2
       FROM family_children fc1 JOIN family_children fc2 ON fc1.family_id=fc2.family_id AND fc1.child_id<fc2.child_id
@@ -5966,8 +5973,7 @@ function export_csv(PDO $pdo): never
     fwrite($out, "\xEF\xBB\xBF");
     if($type==='events'){
         csv_row($out,['id','type','date','annee','personne','lieu','pays']);
-        $rows=$pdo->query("SELECT e.id,t.label,e.date_text,e.year,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) person,pl.name,pl.country,p.living_status,(SELECT de.year FROM events de JOIN event_types dt ON dt.id=de.event_type_id WHERE de.person_id=p.id AND dt.gedcom_tag='DEAT' ORDER BY de.id LIMIT 1) AS death_year FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY COALESCE(e.year,9999),e.id");
-        foreach($rows as $row){if(!export_person_allowed($row))continue;csv_row($out,[$row['id'],$row['label'],$row['date_text'],$row['year'],$row['person'],$row['name'],$row['country']]);}
+        foreach(export_event_rows($pdo) as $row)csv_row($out,$row);
     } elseif($type==='media'){
         csv_row($out,['id','titre','date','fichier','rattachement','reference_document','registre_livre','lien_web','pages','transcription']);
         foreach(media_list_rows($pdo,'%%',100000,0) as $row)csv_row($out,[$row['id'],$row['title'],$row['date_text'],$row['filename'],$row['attachment_label'],$row['document_reference'],$row['document_title'],$row['document_url'],$row['document_pages'],$row['transcription']]);
@@ -5999,6 +6005,25 @@ function export_option_enabled(string $key, bool $default = true): bool
 {
     if (!isset($_GET[$key])) return $default;
     return !in_array(strtolower((string)$_GET[$key]), ['0','false','off','no'], true);
+}
+
+/**
+ * Les événements à exporter (CSV) : ceux d'une personne, et ceux d'un couple (mariage, divorce…) avec les deux noms.
+ * Un événement n'est exporté que si chaque personne concernée peut l'être (vivants, fiches privées, délai après décès).
+ */
+function export_event_rows(PDO $pdo): array
+{
+    $people = [];
+    foreach ($pdo->query("SELECT p.id,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS name,p.living_status,p.is_private,
+            (SELECT min(be.year) FROM events be JOIN event_types bt ON bt.id=be.event_type_id WHERE be.person_id=p.id AND bt.gedcom_tag IN ('BIRT','CHR','BAPM')) AS birth_year,
+            (SELECT min(de.year) FROM events de JOIN event_types dt ON dt.id=de.event_type_id WHERE de.person_id=p.id AND dt.gedcom_tag IN ('DEAT','BURI')) AS death_year FROM persons p") as $p) { $people[(int) $p['id']] = $p; }
+    $out = [];
+    foreach ($pdo->query("SELECT e.id,t.label,e.date_text,e.year,e.person_id,f.partner1_id,f.partner2_id,pl.name AS place,pl.country FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY COALESCE(e.year,9999),e.id") as $e) {
+        $who = array_values(array_filter(array_map('intval', $e['person_id'] ? [$e['person_id']] : [$e['partner1_id'], $e['partner2_id']])));
+        foreach ($who as $pid) { if (isset($people[$pid]) && !export_person_allowed($people[$pid])) { continue 2; } }
+        $out[] = [$e['id'], $e['label'], $e['date_text'], $e['year'], implode(' & ', array_map(static fn($pid) => $people[$pid]['name'] ?? '', $who)), $e['place'], $e['country']];
+    }
+    return $out;
 }
 
 function export_person_allowed(array $row): bool
@@ -6035,8 +6060,7 @@ function export_csv_global(PDO $pdo): never
     // Section événements
     csv_row($out,['## EVENEMENTS']);
     csv_row($out,['id','type','date','annee','personne','lieu','pays']);
-    $rows=$pdo->query("SELECT e.id,t.label,e.date_text,e.year,trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) person,pl.name,pl.country,p.living_status,(SELECT de.year FROM events de JOIN event_types dt ON dt.id=de.event_type_id WHERE de.person_id=p.id AND dt.gedcom_tag='DEAT' ORDER BY de.id LIMIT 1) AS death_year FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN places pl ON pl.id=e.place_id ORDER BY COALESCE(e.year,9999),e.id");
-    foreach($rows as $row){if(!export_person_allowed($row))continue;csv_row($out,[$row['id'],$row['label'],$row['date_text'],$row['year'],$row['person'],$row['name'],$row['country']]);}
+    foreach(export_event_rows($pdo) as $row)csv_row($out,$row);
     csv_row($out,[]);
 
     // Section médias

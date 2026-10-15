@@ -365,7 +365,7 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
             case 'source_count':
                 if ($r['from'] === null && $r['to'] === null) { break; }
                 $n = $isEvents ? "(SELECT count(*) FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id)"
-                    : "(SELECT count(*) FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id)))";
+                    : "(SELECT count(*) FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id OR family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id))))";
                 $c = '(' . my_list_count_range($n, $r) . ')';
                 break;
             case 'note': // une note (de la fiche ou de l'événement) contient…
@@ -422,7 +422,7 @@ function my_list_rows_for(PDO $pdo, array $list, bool $countOnly = false): array
                 break;
             case 'no_source':
                 $c = $isEvents ? "(NOT EXISTS (SELECT 1 FROM source_links sl WHERE sl.entity_type='event' AND sl.entity_id=e.id))"
-                    : "(NOT EXISTS (SELECT 1 FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id))))";
+                    : "(NOT EXISTS (SELECT 1 FROM source_links sl WHERE (sl.entity_type='person' AND sl.entity_id=p.id) OR (sl.entity_type='event' AND sl.entity_id IN (SELECT id FROM events WHERE person_id=p.id OR family_id IN (SELECT id FROM families WHERE partner1_id=p.id OR partner2_id=p.id)))))";
                 break;
             case 'text':
                 if ($r['value'] === '') { break; }
