@@ -343,16 +343,18 @@
             return [p, q];
         };
         // les points du milieu d'un trait : ses coudes, ou le chemin qui contourne les éléments
-        const routeCache = new Map();
+        const routeCache = new Map(), lastRoute = new Map();
         function avoidRoute(l, p, q) {
             const pad = 14, obs = items.filter(o => o.id !== l.from && o.id !== l.to && !['line', 'draw', 'frame'].includes(o.type) && !hiddenIds.has(o.id)).map(o => [o.x - pad, o.y - pad, o.x + o.w + pad, o.y + o.h + pad]);
             const segHits = (a, b2) => obs.some(([x0, y0, x1, y1]) => { // le segment coupe-t-il ce rectangle ?
                 let t0 = 0, t1 = 1; const dx = b2[0] - a[0], dy = b2[1] - a[1];
                 for (const [pp, qq] of [[-dx, a[0] - x0], [dx, x1 - a[0]], [-dy, a[1] - y0], [dy, y1 - a[1]]]) { if (pp === 0) { if (qq < 0) return false; } else { const r = qq / pp; if (pp < 0) { if (r > t1) return false; if (r > t0) t0 = r; } else { if (r < t0) return false; if (r < t1) t1 = r; } } }
                 return t0 < t1; });
-            if (!segHits(p, q)) return [];
-            const key = JSON.stringify([p.map(Math.round), q.map(Math.round), obs.map(r => r.map(Math.round))]);
-            if (routeCache.has(key)) return routeCache.get(key);
+            if (!segHits(p, q)) { lastRoute.set(l.id, []); return []; }
+            if (drag && ['move', 'resize', 'end', 'bend'].includes(drag.kind) && lastRoute.has(l.id) && !drag.start?.some(s0 => s0.id === l.id)) return lastRoute.get(l.id); // recalculé au lâcher
+            const near = obs.filter(r => r[2] > Math.min(p[0], q[0]) - 400 && r[0] < Math.max(p[0], q[0]) + 400 && r[3] > Math.min(p[1], q[1]) - 400 && r[1] < Math.max(p[1], q[1]) + 400);
+            const key = JSON.stringify([p.map(Math.round), q.map(Math.round), near.map(r => r.map(Math.round))]);
+            if (routeCache.has(key)) { lastRoute.set(l.id, routeCache.get(key)); return routeCache.get(key); }
             const X0 = Math.min(p[0], q[0], ...obs.map(r => r[0])) - 60, Y0 = Math.min(p[1], q[1], ...obs.map(r => r[1])) - 60, X1 = Math.max(p[0], q[0], ...obs.map(r => r[2])) + 60, Y1 = Math.max(p[1], q[1], ...obs.map(r => r[3])) + 60;
             const cell = Math.max(16, Math.ceil(Math.max(X1 - X0, Y1 - Y0) / 140)), C = Math.ceil((X1 - X0) / cell) + 1, R = Math.ceil((Y1 - Y0) / cell) + 1;
             const blocked = new Uint8Array(C * R);
@@ -379,7 +381,7 @@
                 // le premier et le dernier coude alignés sur les bouts (traits bien droits)
                 if (out.length) { const d1 = cells[1] & 3; if (d1 < 2) out[0][1] = p[1]; else out[0][0] = p[0]; const dn = cells[cells.length - 1] & 3, L = out[out.length - 1]; if (dn < 2) L[1] = q[1]; else L[0] = q[0]; }
             }
-            if (routeCache.size > 300) routeCache.clear(); routeCache.set(key, out);
+            if (routeCache.size > 300) routeCache.clear(); routeCache.set(key, out); lastRoute.set(l.id, out);
             return out;
         }
         const routePts = l => { const [p, q] = lineEnds(l); const mid = l.bends?.length ? l.bends : l.path === 'avoid' ? avoidRoute(l, p, q) : []; return [p, ...mid, q]; };
@@ -387,7 +389,8 @@
         // ── rendu ──
         const els = new Map(), sigs = new Map();
         let hiddenIds = new Set(), lockedIds = new Set(); // calques cachés ou verrouillés, cadres repliés
-        const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; return it.type === 'line' || it.type === 'timeline' || it.type === 'map' || it.type === 'frame' ? JSON.stringify(it) : JSON.stringify(rest) + (['shape', 'media', 'webimage'].includes(it.type) ? '' : ''); };
+        // ce qui change le dessin d'un élément (pas sa place) ; un trait qui contourne change aussi quand un obstacle bouge
+        const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; if (it.type === 'line') return JSON.stringify(it) + (it.path === 'avoid' && !it.bends?.length ? JSON.stringify(routePts(it)) : ''); return ['timeline', 'map', 'frame'].includes(it.type) ? JSON.stringify({...rest, w, h}) : JSON.stringify(rest); };
         function itemInner(it) {
             const LIST_CSS = {bullet: 'disc', num: 'decimal', roman: 'upper-roman', alpha: 'lower-alpha', ALPHA: 'upper-alpha', dash: '"– "', check: '"☐ "'};
             const txt = v => { if (!it.list || !LIST_CSS[it.list] || !v) return esc(v || '').replace(/\n/g, '<br>'); const tag = ['num', 'roman', 'alpha', 'ALPHA'].includes(it.list) ? 'ol' : 'ul'; return `<${tag} class="h-bi-list" style="list-style-type:${LIST_CSS[it.list]}">${String(v).split('\n').map(li => `<li>${esc(li) || '&nbsp;'}</li>`).join('')}</${tag}>`; };
@@ -454,7 +457,7 @@
             hiddenIds = new Set(items.filter(i => i.layer && hiddenL.has(i.layer)).map(i => i.id)); lockedIds = new Set(items.filter(i => i.layer && lockedL.has(i.layer)).map(i => i.id));
             items.filter(f => f.type === 'frame' && f.collapsed).forEach(f => framed(f).forEach(i => hiddenIds.add(i.id)));
             items.forEach(i => { if (i.type === 'line' && (hiddenIds.has(i.from) || hiddenIds.has(i.to))) hiddenIds.add(i.id); });
-            if (hiddenIds.size) sel = new Set([...sel].filter(k => !hiddenIds.has(k)));
+            if (hiddenIds.size || lockedIds.size) sel = new Set([...sel].filter(k => !hiddenIds.has(k) && !lockedIds.has(k))); // caché ou verrouillé par son calque : ni choisi, ni bougé, ni supprimé
             items.forEach(it => { if (it.type === 'line') fixLine(it); });
             const seen = new Set();
             [...items].sort((a, b) => (a.z || 0) - (b.z || 0)).forEach((it, i) => {
@@ -493,7 +496,7 @@
                 show.includes('job') ? p.occupation : '', show.includes('age') && age ? `${p.death?.year ? 'mort à ' : ''}${age}` : '',
             ].filter(Boolean);
             c.querySelector('small').innerHTML = lines.map(esc).join('<br>');
-            if (show.includes('parents') && p.parents?.length) Promise.all(p.parents.map(personBrief)).then(ps => { c.querySelector('small').insertAdjacentHTML('beforeend', `<br><em>${ps.map(x => esc(x.name)).join(' et ')}</em>`); });
+            if (show.includes('parents') && p.parents?.length) { const slot = document.createElement('em'); slot.className = 'h-bi-pparents'; c.querySelector('small').append(slot); Promise.all(p.parents.map(personBrief)).then(ps => { slot.innerHTML = `<br>${ps.map(x => esc(x.name)).join(' et ')}`; }); }
         }
         // ── frise vivante : les événements d'une personne (ou de sa famille) sur une ligne du temps ──
         async function fillTimeline(el, it) {
@@ -524,11 +527,14 @@
             box.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><line x1="${pad / 2}" y1="${y0}" x2="${W - pad / 2}" y2="${y0}" stroke="#333" stroke-width="2"/>${ticks}${marks}</svg>`;
         }
         // ── carte : les lieux d'une personne, de sa famille ou d'une enquête, et des repères posés à la main ──
+        // la liste des enquêtes : lue une fois par tableau ouvert
+        let invP = null;
+        const invList = () => (invP ||= api('research_lists', {kind: 'investigations'}).then(r => r.rows || []).catch(() => { invP = null; return []; }));
         async function mapPoints(it) {
             let pid = 0, family = false;
             const [kind, val] = String(it.mapSrc || '').split(':');
             if (kind === 'person' || kind === 'family') { pid = Number(val); family = kind === 'family'; }
-            if (kind === 'investigation') { try { const r = (await api('research_lists', {kind: 'investigations'})).rows || []; pid = Number(r.find(x => Number(x.id) === Number(val))?.person_id) || 0; } catch (_) {} }
+            if (kind === 'investigation') { try { const r = await invList(); pid = Number(r.find(x => Number(x.id) === Number(val))?.person_id) || 0; } catch (_) {} }
             const pts = [], paths = [];
             if (pid) {
                 const me = await personData(pid, true), ppl = [me];
@@ -590,9 +596,9 @@
             if (!keepInspector) renderInspector(); // pas pendant qu'on glisse un curseur ou qu'on choisit une couleur
         }
         // ── historique et enregistrement ──
-        const snap = () => JSON.stringify(items);
+        const snap = () => JSON.stringify({items, layers, steps});
         const commit = () => { const s = snap(); if (hpos >= 0 && history[hpos] === s) return; history = history.slice(0, hpos + 1); history.push(s); if (history.length > 150) history.shift(); hpos = history.length - 1; queueSave(true); };
-        const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; items = JSON.parse(history[i]); sel = new Set([...sel].filter(byId)); clampCell(); render(); queueSave(true); };
+        const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; { const h0 = JSON.parse(history[i]); if (Array.isArray(h0)) items = h0; else { items = h0.items || []; layers = h0.layers || []; steps = h0.steps || []; } } sel = new Set([...sel].filter(byId)); clampCell(); render(); queueSave(true); };
         const ownerData = {owner_type: b.owner_type, owner_id: b.owner_id, part: b.part};
         function queueSave(changed) {
             if (changed) { dirty = true; changes++; status('Modifié…'); }
@@ -790,7 +796,7 @@
                 // ⌥ / Alt + glisser : on emporte une copie (comme dans Photoshop), l'original reste en place
                 let dupOrig = null;
                 if (e.altKey && !e.shiftKey && !boardLocked) {
-                    const base = selItems().filter(i => !i.locked), src = [...new Set([...base, ...base.filter(i => i.type === 'frame').flatMap(f => framed(f))])]; // un cadre emporte la copie de ce qu'il contient
+                    const base = selItems().filter(i => !i.locked), src = [...new Set([...base, ...base.filter(i => i.type === 'frame').flatMap(f => framed(f).filter(i => !i.locked && !lockedIds.has(i.id)))])]; // un cadre emporte la copie de ce qu'il contient
                     if (src.length) { dupOrig = [...sel]; const copies = duplicateInPlace(src); sel = new Set(copies.map(c => c.id)); }
                 }
                 drawSelection(); render();
@@ -868,7 +874,7 @@
             // gomme fine : les points touchés disparaissent, le trait est coupé en morceaux
             const [wx, wy] = toWorld(e.clientX, e.clientY), r = eraserSize / 2 / view.k;
             let changed = false;
-            for (const it of items.filter(i => i.type === 'draw' && !i.locked && wx > i.x - r && wx < i.x + i.w + r && wy > i.y - r && wy < i.y + i.h + r)) {
+            for (const it of items.filter(i => i.type === 'draw' && !i.locked && !hiddenIds.has(i.id) && !lockedIds.has(i.id) && wx > i.x - r && wx < i.x + i.w + r && wy > i.y - r && wy < i.y + i.h + r)) {
                 const sx = (it.vw || it.w) / it.w, sy = (it.vh || it.h) / it.h, lx = (wx - it.x) * sx, ly = (wy - it.y) * sy, rr = r * Math.max(sx, sy) + (it.sw || 3) / 2;
                 // la gomme coupe aussi entre deux points éloignés (trait tiré vite) : on ajoute des points là où elle passe
                 const segD = (a, b2) => { const dx = b2[0] - a[0], dy = b2[1] - a[1], L = dx * dx + dy * dy || 1, t = Math.max(0, Math.min(1, ((lx - a[0]) * dx + (ly - a[1]) * dy) / L)); return Math.hypot(a[0] + dx * t - lx, a[1] + dy * t - ly); };
@@ -1068,7 +1074,8 @@
         function duplicateInPlace(list) {
             const zTop = topZ() + 1, z0 = Math.min(...list.map(i => i.z || 0)), map = new Map(), group = new Map();
             const copies = list.map(i => { const n = {...clone(i), id: uid(), z: zTop + (i.z || 0) - z0}; map.set(i.id, n.id); if (i.group) { if (!group.has(i.group)) group.set(i.group, uid()); n.group = group.get(i.group); } delete n.cmt; return n; });
-            copies.forEach(n => { if (n.from && map.has(n.from)) n.from = map.get(n.from); if (n.to && map.has(n.to)) n.to = map.get(n.to); });
+            // un trait copié seul garde sa forme mais ne reste pas accroché aux originaux (sinon il retomberait dessus)
+            copies.forEach(n => { if (n.type !== 'line') return; if (n.from) n.from = map.get(n.from) || ''; if (n.to) n.to = map.get(n.to) || ''; });
             items.push(...copies); return copies;
         }
         function pasteInternal() {
@@ -1112,7 +1119,7 @@
             if (k === 'escape') { sel.clear(); setTool('select'); render(); return; }
             if (k === ' ') { spaceDown = true; stage.dataset.tool = 'hand'; e.preventDefault(); return; }
             if (k === ']') { actions.front(); return; } if (k === '[') { actions.back(); return; }
-            if (k.startsWith('arrow') && sel.size) { e.preventDefault(); const st = e.shiftKey ? 10 : 1; selItems().filter(i => !i.locked).forEach(i => { if (k === 'arrowleft') i.x -= st; if (k === 'arrowright') i.x += st; if (k === 'arrowup') i.y -= st; if (k === 'arrowdown') i.y += st; const ddx = k === 'arrowleft' ? -st : k === 'arrowright' ? st : 0, ddy = k === 'arrowup' ? -st : k === 'arrowdown' ? st : 0; if (i.type === 'line') { i.points = i.points.map(p => [p[0] + ddx, p[1] + ddy]); if (i.bends) i.bends = i.bends.map(p => [p[0] + ddx, p[1] + ddy]); } }); render(); commit(); return; }
+            if (k.startsWith('arrow') && sel.size) { e.preventDefault(); const st = e.shiftKey ? 10 : 1; moveStart(selItems().filter(i => !i.locked)).map(s0 => byId(s0.id)).forEach(i => { if (k === 'arrowleft') i.x -= st; if (k === 'arrowright') i.x += st; if (k === 'arrowup') i.y -= st; if (k === 'arrowdown') i.y += st; const ddx = k === 'arrowleft' ? -st : k === 'arrowright' ? st : 0, ddy = k === 'arrowup' ? -st : k === 'arrowdown' ? st : 0; if (i.type === 'line') { i.points = i.points.map(p => [p[0] + ddx, p[1] + ddy]); if (i.bends) i.bends = i.bends.map(p => [p[0] + ddx, p[1] + ddy]); } }); render(); commit(); return; }
             if (mod) return;
             const tk = {v: 'select', h: 'hand', t: 'text', n: 'note', s: 'shape', l: 'line', a: 'arrow', p: 'pen', e: 'eraser', g: 'table'}[k]; if (tk) setTool(tk);
             if (k === '+' || k === '=') zoomAt(view.k * 1.25); if (k === '-') zoomAt(view.k * 0.8); if (k === '0') { fitAll(); }
@@ -1154,7 +1161,7 @@
             const one = l.length === 1 ? l[0] : null, t = one?.type, types = new Set(l.map(i => i.type)), any = (...ts) => ts.some(x => types.has(x));
             const numField = (k, label, min, max, step, val, unit = 'px', boxMin = min, boxMax = max) => `<label>${label}<span class="h-bd-num"><input type="range" min="${min}" max="${max}" step="${step}" value="${Math.max(min, Math.min(max, val))}" data-bd-num="${k}"><input type="number" class="h-bd-numbox" min="${boxMin}" max="${boxMax}" step="${step}" value="${+Number(val).toFixed(2)}" data-bd-num="${k}"><small>${unit}</small></span></label>`;
             const heads = (p.heads || HEADS_LIST.map(h => h[0])).filter(h => !(p.headsHidden || []).includes(h) || h === headOf(one || {}, 'start') || h === headOf(one || {}, 'end'));
-            const headSel = (k, cur) => `<select data-bd-sel="${k}">${[...new Set([...heads, cur])].map(v => `<option value="${v}" ${cur === v ? 'selected' : ''}>${HEADS_LIST.find(h => h[0] === v)?.[1] || v}</option>`).join('')}</select>`;
+            const headSel = (k, cur) => `<select data-bd-sel="${k}">${[...new Set([...heads, cur])].map(v => `<option value="${v}" ${cur === v ? 'selected' : ''}>${esc(HEADS_LIST.find(h => h[0] === v)?.[1] || v)}</option>`).join('')}</select>`;
             const swatches = (k, list) => `<div class="h-bd-sws">${list.map(c => `<button type="button" class="h-sw ${one?.[k] === c ? 'is-on' : ''}" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-set="${k}" data-v="${c}" title="${c}"></button>`).join('')}<input type="color" data-bd-setc="${k}" value="${/^#[0-9a-f]{6}$/i.test(one?.[k] || '') ? one[k] : '#111111'}" title="Autre couleur"></div>`;
             const grp = !one && l[0].group && l.every(i => i.group === l[0].group) && items.filter(i => i.group === l[0].group).length === l.length ? groupNames().indexOf(l[0].group) + 1 : 0;
             const cs = one && t === 'table' && cellSel?.id === one.id ? cellSel : null;
@@ -1822,7 +1829,7 @@
         }
         async function loadInv() {
             const s0 = inspector.querySelector('[data-bd-mapinv]'); if (!s0) return;
-            const rows = ((await api('research_lists', {kind: 'investigations'}).catch(() => ({}))).rows || []).filter(r => r.person_id);
+            const rows = (await invList()).filter(r => r.person_id);
             const cur = String(selItems()[0]?.mapSrc || '').split(':')[1];
             s0.innerHTML = '<option value="">…</option>' + rows.map(r => `<option value="${r.id}" ${String(r.id) === cur ? 'selected' : ''}>${esc(r.title)}${r.person ? ' — ' + esc(r.person) : ''}</option>`).join('') + (rows.length ? '' : '<option value="" disabled>(aucune enquête sur une personne)</option>');
         }
@@ -1832,7 +1839,7 @@
             pinT = setTimeout(async () => { if (q.length < 2) { box.innerHTML = ''; return; } const rows = ((await api('board_place_search', {q}).catch(() => ({}))).places || []); box.innerHTML = rows.map(r => `<button type="button" data-bd-pinadd="${esc(JSON.stringify({name: r.name, lat: r.lat, lon: r.lon}))}">📍 ${esc(r.name)} <small class="muted">${esc(r.detail || '')}</small></button>`).join('') || '<small class="muted">Aucun lieu avec ses coordonnées.</small>'; }, 250);
         }
         const inspObs = new MutationObserver(async () => {
-            if (inspector.querySelector('[data-bd-mapinvbox]:not([hidden])')) loadInv();
+            if (inspector.querySelector('[data-bd-mapinvbox]:not([hidden])') && (inspector.querySelector('[data-bd-mapinv]')?.options.length || 0) <= 1) loadInv();
             const lb = inspector.querySelector('[data-bd-mapsrclabel]'), one = selItems()[0]; if (!lb || !one?.mapSrc) return;
             const [k, v] = one.mapSrc.split(':'); if (k !== 'investigation') { const p = await personBrief(v); lb.textContent = (k === 'family' ? 'Famille de ' : '') + p.name; }
             else lb.textContent = 'Enquête n° ' + v;

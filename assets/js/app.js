@@ -1161,7 +1161,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 const {count, animals} = await api('person_count');
                 const before = JSON.stringify(state.bootstrap?.stats ? peopleTabs() : []);
                 if (state.bootstrap?.stats) { state.bootstrap.stats.personnes = Number(count) || 0; state.bootstrap.stats.animaux = Number(animals) || 0; }
-                if (state.module === 'personnes' && state.bootstrap?.stats && JSON.stringify(peopleTabs()) !== before) { const seg = $('#sidebar-content .segmented'); if (seg) seg.innerHTML = peopleTabs().map(([k, l]) => `<button class="${state.personTab === k ? 'is-active':''}" data-person-tab="${k}">${l}</button>`).join(''); }
+                const tabBefore = state.personTab;
+                if (state.module === 'personnes' && state.bootstrap?.stats && (JSON.stringify(peopleTabs()) !== before || state.personTab !== tabBefore)) { const seg = $('#sidebar-content .segmented'); if (seg) seg.innerHTML = peopleTabs().map(([k, l]) => `<button class="${state.personTab === k ? 'is-active':''}" data-person-tab="${k}">${l}</button>`).join(''); loadPeople(); }
                 const label = personCountLabel(count, animals);
                 const status = $('#database-status');
                 if (status) status.textContent = label;
@@ -1570,6 +1571,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             const button = event.target.closest('[data-module]');
             if (!button) return;
             if (button.dataset.module === 'dashboard') state.dashboardBoard = button.dataset.board || '';
+            if (button.dataset.module === 'personnes' || button.dataset.module === 'animaux') state.scopeSwitch = true; // l'onglet cliqué : sa dernière fiche
             setModule(button.dataset.module);
         });
         $('#sidebar-toggle').addEventListener('click', () => { $('#app').classList.add('sidebar-collapsed'); persistUiState(); });
@@ -2525,9 +2527,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     async function loadPeopleAndPerson() {
         await loadPeople();
         // onglets « Personnes » et « Animaux » à part : on rouvre la dernière fiche de cet onglet
-        if (animalsTabOn() && state.currentPersonKind && (state.currentPersonKind === 'animal') !== (state.peopleScope === 'animals')) {
+        const switched = state.scopeSwitch; state.scopeSwitch = false;
+        if (switched && animalsTabOn() && state.currentPersonKind && (state.currentPersonKind === 'animal') !== (state.peopleScope === 'animals')) {
             const alt = state.peopleScope === 'animals' ? state.lastAnimalId : state.lastHumanId;
-            if (state.peopleScope === 'animals' && !alt && !state.people.length) { $('#workspace').innerHTML = `<section class="page">${empty('Aucun animal pour l’instant. « + Nouvel animal » en bas de la colonne de gauche, ou Listes → Animaux de compagnie.')}</section>`; return; }
+            if (state.peopleScope === 'animals' && !alt && !state.people.length && !state.peopleQuery && state.personTab !== 'bookmarked') { $('#workspace').innerHTML = `<section class="page">${empty('Aucun animal pour l’instant. « + Nouvel animal » en bas de la colonne de gauche, ou Listes → Animaux de compagnie.')}</section>`; return; }
             state.currentPersonId = Number(alt) || Number(state.people[0]?.id) || state.currentPersonId;
         }
         await selectPerson(state.currentPersonId, false);
@@ -7546,7 +7549,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(!view.currentBattueId)state.currentBattueId=0;if(!view.currentInvestigationId)state.currentInvestigationId=0;
         if(view.atelier&&typeof view.atelier==='object'&&Number(view.atelier.project)>0){const node=view.atelier.node;state.atelier={project:Number(view.atelier.project),node:typeof node==='number'||/^[a-z_0-9]{1,40}$/i.test(String(node))?node:'overview',sel:(Array.isArray(view.atelier.sel)?view.atelier.sel:[]).map(Number).filter(Boolean).slice(0,1),tags:[],q:'',type:'',sort:{col:'title',dir:1},closed:{},deep:!!view.atelier.deep};}
         if(Number(view.hListOpen)>0)state.hListOpen=Number(view.hListOpen);
-        if(view.hState&&typeof view.hState==='object')Object.entries(view.hState).forEach(([k,v])=>{if(/^h[A-Z]\w{1,40}$/.test(k)&&!['hListOpen','hRec','hEdit'].includes(k)&&(typeof v==='number'||typeof v==='boolean'||(typeof v==='string'&&v.length<=300)))state[k]=v;});
+        if(view.hState&&typeof view.hState==='object')Object.entries(view.hState).forEach(([k,v])=>{if(/^h[A-Z]\w{1,40}$/.test(k)&&!['hListOpen','hRec','hEdit'].includes(k)&&(state[k]===undefined||state[k]===null||typeof state[k]===typeof v)&&(typeof v==='number'||typeof v==='boolean'||(typeof v==='string'&&v.length<=300)))state[k]=v;});
         if(view.hRec&&typeof view.hRec==='object'&&Number(view.hRec.list)>0)state.hRec={list:Number(view.hRec.list),open:Number(view.hRec.open)||0,filter:['todo','done','all'].includes(view.hRec.filter)?view.hRec.filter:'todo',q:'',edit:null};
     }
     window.lcndaViewSnapshot=viewSnapshot; // lu par la fenêtre principale (même origine) pour détacher le panneau

@@ -1565,7 +1565,7 @@ function people_list(PDO $pdo): never
     $offset = max(0, safe_int($_GET['offset'] ?? 0));
     $limit = min(250, max(20, safe_int($_GET['limit'] ?? 120)));
     if ($phonetic && $search !== '') {
-        json_response(['people' => phonetic_people($pdo, $search, $group, $offset, $limit), 'offset' => $offset, 'limit' => $limit, 'phonetic' => true]);
+        json_response(['people' => phonetic_people($pdo, $search, $group, $offset, $limit, (string) ($_GET['kind'] ?? '')), 'offset' => $offset, 'limit' => $limit, 'phonetic' => true]);
     }
     $where = [];
     $params = [];
@@ -1637,12 +1637,13 @@ function soundex_fr(string $value): string
     return str_pad(substr($result, 0, 4), 4, '0');
 }
 
-function phonetic_people(PDO $pdo, string $search, int $group, int $offset, int $limit): array
+function phonetic_people(PDO $pdo, string $search, int $group, int $offset, int $limit, string $kind = ''): array
 {
     $tokens = array_values(array_filter(array_map('phonetic_key', preg_split('/\s+/u', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [])));
     if (!$tokens) return [];
     $tokenSoundex = array_map('soundex_fr', $tokens);
-    $sql = person_select() . ($group ? ' WHERE p.surname_group_id=:group' : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE";
+    $kc = $kind === 'animal' ? "p.kind='animal'" : ($kind === 'human' ? "p.kind<>'animal'" : '');
+    $sql = person_select() . ($group || $kc ? ' WHERE ' . implode(' AND ', array_filter([$group ? 'p.surname_group_id=:group' : '', $kc])) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE";
     $stmt = $pdo->prepare($sql);
     if ($group) $stmt->bindValue(':group', $group, PDO::PARAM_INT);
     $stmt->execute();
