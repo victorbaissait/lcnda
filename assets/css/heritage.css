@@ -2401,3 +2401,20 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bi-note[class*="is-hyp-"] .h-bi-text{padding-top:22px}
 .h-board.is-present .h-board-main{grid-template-columns:1fr;height:100%}
 .h-board.is-present .h-board-stage{height:100%}
+
+/* ── Animaux : fiche complète, arbre, liste ── */
+.tree-pets{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:6px;padding-top:6px;border-top:2px dashed #b08968}
+.tree-pet-card{border:1.5px dashed #b08968;background:#fff8f0;border-radius:14px;padding:2px 9px;font:inherit;font-size:12px;cursor:pointer;color:#5c4033}
+.animal-mark{font-size:12px;margin-right:2px}
+.person-kind-choice{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:10px 12px;margin:0 0 12px;border:1px solid #e3d5c5;background:#fffaf3;border-radius:10px}
+.person-kind-choice label{display:flex;gap:6px;align-items:center;font-weight:700;cursor:pointer}
+.person-kind-choice small{flex-basis:100%}
+.h-pet-animalblock{display:flex;gap:14px;align-items:flex-start}
+.h-pet-animalblock .h-pet-dl{flex:1}
+.h-pet-full{font-size:12px}
+.h-pet-mode{display:inline-flex;align-items:center;gap:6px;font-size:13px;margin-right:8px}
+.h-pet-mkp{margin:0 0 10px}
+.h-pet-layout{list-style:none;padding:0;margin:8px 0;display:grid;gap:4px}
+.h-pet-lrow{display:flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid #e3e6ea;border-radius:8px}
+.h-pet-lrow span{flex:1}
+.segmented:has(> button:nth-child(3)){grid-template-columns:repeat(3,1fr)}

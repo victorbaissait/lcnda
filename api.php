@@ -371,7 +371,7 @@ try {
         'media_duplicates' => media_duplicates_data($pdo),
         'deed_preview' => deed_preview($pdo),
         'issues' => issues_data($pdo),
-        'person_count' => json_response(['count' => (int) $pdo->query('SELECT count(*) FROM persons')->fetchColumn()]),
+        'person_count' => json_response(['count' => (int) $pdo->query("SELECT count(*) FROM persons WHERE kind<>'animal'")->fetchColumn(), 'animals' => (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn()]),
         'ghost_families' => ghost_families_data($pdo),
         'reference_countries' => json_response(['available' => reference_countries_available(), 'details' => reference_countries_details(), 'active' => reference_countries_active($pdo)]),
         'bulk_preview' => bulk_preview($pdo),
@@ -434,8 +434,9 @@ function bootstrap_data(PDO $pdo): never
 {
     $stats = [];
     foreach (['persons' => 'personnes', 'families' => 'familles', 'events' => 'événements', 'media' => 'médias'] as $table => $label) {
-        $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}")->fetchColumn();
+        $stats[$label] = (int) $pdo->query("SELECT count(*) FROM {$table}" . ($table === 'persons' ? " WHERE kind<>'animal'" : ''))->fetchColumn();
     }
+    $stats['animaux'] = (int) $pdo->query("SELECT count(*) FROM persons WHERE kind='animal'")->fetchColumn();
     $start = $pdo->query("SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1")->fetchColumn();
     $types = $pdo->query('SELECT t.id,t.scope,t.slug,t.label,t.gedcom_tag,t.icon,t.color,t.is_custom,t.is_artistic,t.custom_fields,count(e.id) AS usage_count FROM event_types t LEFT JOIN events e ON e.event_type_id=t.id WHERE t.is_active=1 GROUP BY t.id ORDER BY t.label COLLATE NOCASE,t.scope')->fetchAll();
     $views = $pdo->query('SELECT * FROM saved_views ORDER BY module,sort_order,id')->fetchAll();
@@ -1538,6 +1539,15 @@ function dashboard_next_anniversary(int $month,int $day,DateTimeImmutable $today
     return null;
 }
 
+/** Les statistiques portent sur les personnes (ou sur les animaux d'une base d'élevage), jamais les deux mêlés */
+function graph_scope_kind(string $sql, string $kind): string
+{
+    $cond = $kind === 'animal' ? "kind='animal'" : "kind<>'animal'";
+    $stop = 'WHERE|ON|JOIN|LEFT|RIGHT|INNER|CROSS|GROUP|ORDER|LIMIT|UNION|USING|NATURAL';
+    return (string) preg_replace_callback('/\b(FROM|JOIN)\s+persons\b(?:\s+(?:AS\s+)?(?!(?:' . $stop . ')\b)([A-Za-z_]\w*))?/i',
+        static fn($m) => $m[1] . " (SELECT * FROM persons WHERE $cond) " . (($m[2] ?? '') !== '' ? $m[2] : 'persons'), $sql);
+}
+
 function people_list(PDO $pdo): never
 {
     $search = safe_text($_GET['q'] ?? '');
@@ -1562,6 +1572,8 @@ function people_list(PDO $pdo): never
         $where[] = 'p.surname_group_id=:group';
         $params[':group'] = $group;
     }
+    $kind = (string) ($_GET['kind'] ?? '');
+    if ($kind === 'animal') { $where[] = "p.kind='animal'"; } elseif ($kind === 'human') { $where[] = "p.kind<>'animal'"; }
     $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE LIMIT :limit OFFSET :offset";
     $stmt = $pdo->prepare($sql);
     foreach ($params as $key => $value) $stmt->bindValue($key, $value);
@@ -2255,6 +2267,8 @@ function tree_data(PDO $pdo, int $id): never
     if($ids){
         if($mode==='descendants'){$marks=implode(',',array_fill(0,count($ids),'?'));$partnerStmt=$pdo->prepare("SELECT partner1_id,partner2_id FROM families WHERE partner1_id IN ($marks) OR partner2_id IN ($marks)");$partnerStmt->execute(array_merge($ids,$ids));foreach($partnerStmt->fetchAll() as $family){$a=(int)($family['partner1_id']??0);$b=(int)($family['partner2_id']??0);if($a&&$b){if(isset($reachable[$a]))$partners[$a][$b]=$b;if(isset($reachable[$b]))$partners[$b][$a]=$a;$allIds[]=$a;$allIds[]=$b;}}}
         $allIds=array_values(array_unique(array_filter($allIds)));$allMarks=implode(',',array_fill(0,count($allIds),'?'));$stmt=$pdo->prepare(person_select()." WHERE p.id IN ($allMarks)");$stmt->execute($allIds);foreach($stmt->fetchAll() as $person)$people[(int)$person['id']]=$person;
+        // en option : les animaux de chacun, posés à côté de leur maître
+        if(($_GET['pets']??'')==='1'&&function_exists('pets_by_owner'))foreach(pets_by_owner($pdo,array_keys($people)) as $ownerId=>$list)$people[$ownerId]['pets']=$list;
     }
     $seen=[];$tree=tree_node_from_maps($id,$depth,$people,$relations,$seen);
     if($mode==='descendants')attach_tree_partners($tree,$partners,$people);
@@ -4303,6 +4317,7 @@ function graph_stats_data(PDO $pdo): never
     ];
     if (!isset($definitions[$type])) $type = 'surnames';
     [$title,$description,$kind,$sql,$params] = $definitions[$type];
+    $sql = graph_scope_kind($sql, ($_GET['kind'] ?? '') === 'animal' ? 'animal' : 'human');
     $stmt = $pdo->prepare($sql);
     foreach (array_values($params) as $index => $value) {
         $stmt->bindValue($index + 1, $value, is_int($value) ? PDO::PARAM_INT : PDO::PARAM_STR);
@@ -8955,6 +8970,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_booklet' => save_booklet($pdo,$data),
             'save_pet' => save_pet($pdo,$data),
             'delete_pet' => delete_pet($pdo,$data),
+            'pet_make_person' => pet_make_person($pdo,$data),
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
@@ -10990,7 +11006,10 @@ function save_person(PDO $pdo,array $data): array
         $stmt=$pdo->prepare('INSERT INTO persons(first_name,middle_name,last_name,prefix,suffix,gender,living_status,reference_number,surname_group_id,occupation,height_text,physical_description,eye_color,skin_color,nationality,ethnicity,verify_status,outside_genealogy,is_artist,artist_discipline,artist_events_display,show_military_block) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
         $validDisplaysI=['events','block','both'];$artistDisplayI=in_array($data['artist_events_display']??'',$validDisplaysI,true)?$data['artist_events_display']:'events';
         $stmt->execute([$first,safe_text($data['middle_name']??''),$last,safe_text($data['prefix']??''),safe_text($data['suffix']??''),safe_text($data['gender']??'unknown'),safe_text($data['living_status']??'unknown'),safe_text($data['reference_number']??''),safe_int($data['surname_group_id']??0)?:null,safe_text($data['occupation']??''),safe_text($data['height_text']??''),safe_text($data['physical_description']??''),safe_text($data['eye_color']??''),safe_text($data['skin_color']??''),safe_text($data['nationality']??''),safe_text($data['ethnicity']??''),in_array(($data['verify_status']??'normal'),['normal','verify'],true)?($data['verify_status']??'normal'):'normal',(isset($data['outside_genealogy'])&&$data['outside_genealogy']?1:0),(isset($data['is_artist'])&&$data['is_artist']?1:0),safe_text($data['artist_discipline']??''),$artistDisplayI,(isset($data['show_military_block'])&&$data['show_military_block']?1:0)]);
-        $id=(int)$pdo->lastInsertId();if(array_key_exists('mort_pour_la_france',$data)){$pdo->prepare('UPDATE persons SET mort_pour_la_france=? WHERE id=?')->execute([safe_text($data['mort_pour_la_france'])?:'unknown',$id]);}$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
+        $id=(int)$pdo->lastInsertId();
+        // un animal : une fiche comme une personne, avec sa fiche d'animal (caractéristiques, pedigree)
+        if(($data['kind']??'')==='animal'){$pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$id]);pet_of_person($pdo,$id,true);}
+        if(array_key_exists('mort_pour_la_france',$data)){$pdo->prepare('UPDATE persons SET mort_pour_la_france=? WHERE id=?')->execute([safe_text($data['mort_pour_la_france'])?:'unknown',$id]);}$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
     }
     $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Personne introuvable');
@@ -11036,6 +11055,7 @@ function delete_person(PDO $pdo,array $data): array
     foreach(['media_links','source_links','notes'] as $table){
         $pdo->prepare("DELETE FROM {$table} WHERE entity_type='person' AND entity_id=?")->execute([$id]);
     }
+    try{$pdo->prepare('UPDATE pets SET person_id=NULL WHERE person_id=?')->execute([$id]);}catch(Throwable $_){} // la fiche d'animal (la liste) reste
     $pdo->prepare('UPDATE census_members SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE archive_digest_people SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE families SET partner1_id=NULL WHERE partner1_id=?')->execute([$id]);

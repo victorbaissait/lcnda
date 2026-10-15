@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 39;
+const SCHEMA_VERSION = 40;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -60,6 +60,7 @@ function migration_steps(): array
         37 => 'schema_v37',
         38 => 'schema_v38',
         39 => 'schema_v39',
+        40 => 'schema_v40',
     ];
 }
 
@@ -1937,4 +1938,18 @@ function schema_v39(PDO $pdo): void
         PRIMARY KEY (pet_id, person_id)
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_pet_people_person ON pet_people(person_id)');
+}
+
+/**
+ * Animaux : en plus de leur fiche d'animal (la liste), ceux qu'on veut reçoivent une vraie fiche, comme une personne
+ * (persons.kind = 'animal'), reliée par pets.person_id. Rien n'est converti d'office : on le choisit animal par animal.
+ */
+function schema_v40(PDO $pdo): void
+{
+    $cols = array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(), 'name');
+    if (!in_array('kind', $cols, true)) { $pdo->exec("ALTER TABLE persons ADD COLUMN kind TEXT NOT NULL DEFAULT 'human'"); }
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_persons_kind ON persons(kind)');
+    $pcols = array_column($pdo->query('PRAGMA table_info(pets)')->fetchAll(), 'name');
+    if ($pcols && !in_array('person_id', $pcols, true)) { $pdo->exec('ALTER TABLE pets ADD COLUMN person_id INTEGER'); }
+    if ($pcols) { $pdo->exec('CREATE INDEX IF NOT EXISTS idx_pets_person ON pets(person_id)'); }
 }

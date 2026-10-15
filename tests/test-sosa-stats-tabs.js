@@ -21,6 +21,7 @@ require 'lib/paths.php';
 (new PDO('sqlite:'.DATA_DIR.'/genealogy.sqlite'))->exec(file_get_contents(APP_ROOT.'/data/schema.sql'));
 require 'lib/bootstrap.php';
 $pdo = db();
+require 'tests/api_functions.php'; // les fiches d'animaux utilisent les fonctions des fiches (parents, lieux, suppression)
 $src = file_get_contents('api.php');
 foreach (['function record_exists', 'function dashboard_month_day', 'function sosa_parent_ids', 'function sosa_positions', 'function person_select'] as $fn) { $a = strpos($src, $fn); $b = strpos($src, "\n}\n", $a); if (!function_exists(substr($fn, 9))) eval(substr($src, $a, $b - $a + 3)); }
 $t = fn($tag) => (int) $pdo->query("SELECT id FROM event_types WHERE gedcom_tag='$tag' LIMIT 1")->fetchColumn();
@@ -129,6 +130,22 @@ $out['pets'] = [$errs, $kd['data']['species'], count($kd['data']['owners']), cou
 delete_pet($pdo, ['id' => $pa['id']]);
 $kd2 = pet_detail($pdo, $pk['id'])['data'];
 $out['pets_del'] = [$kd2['sire_id'], $kd2['sire_name']];
+// fiches complètes d'animaux : parents en familles, naissance en événement, la fiche fait foi
+$fa = save_pet($pdo, ['data' => ['name' => 'Papa', 'sex' => 'M', 'species' => 'chat', 'birth_date' => '2010'], 'make_person' => 1]);
+$fb = save_pet($pdo, ['data' => ['name' => 'Maman', 'sex' => 'F', 'species' => 'chat']]);
+$fk = save_pet($pdo, ['data' => ['name' => 'Chaton', 'sex' => 'F', 'species' => 'chat', 'birth_date' => '12/04/2019', 'birth_place' => 'Tours', 'sire_id' => $fa['id'], 'dam_id' => $fb['id']], 'make_person' => 1]);
+$mk = pet_make_person($pdo, ['id' => $fb['id']]);
+$kp = (int) $fk['person_id'];
+$pdo->prepare("UPDATE persons SET first_name='Minette' WHERE id=?")->execute([$kp]);
+$ev = $pdo->prepare("SELECT e.date_text FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND t.gedcom_tag='BIRT'"); $ev->execute([$kp]);
+$np = save_person($pdo, ['first_name' => 'Pompon', 'kind' => 'animal', 'gender' => 'female']);
+$parents = h_parents($pdo, $kp); sort($parents);
+$exp = [(int) $fa['person_id'], (int) $mk['person_id']]; sort($exp);
+$out['animals'] = [$pdo->query('SELECT kind FROM persons WHERE id=' . $kp)->fetchColumn(), $parents === $exp, $ev->fetchColumn(), pet_detail($pdo, $fk['id'])['title'], pet_detail($pdo, $fk['id'])['person_id'] === $kp,
+    $pdo->query('SELECT kind FROM persons WHERE id=' . (int) $np['id'])->fetchColumn(), pet_of_person($pdo, (int) $np['id']) > 0,
+    graph_scope_kind('SELECT 1 FROM persons p LEFT JOIN persons c ON c.id=p.id WHERE (SELECT count(*) FROM persons)>0', 'animal')];
+delete_pet($pdo, ['id' => $fk['id'], 'with_person' => 1]);
+$out['animals'][] = (int) $pdo->query('SELECT count(*) FROM persons WHERE id=' . $kp)->fetchColumn();
 $lb = save_board($pdo, ['title' => 'Liens', 'data' => ['items' => [], 'links' => [['kind' => 'person', 'id' => 1, 'label' => 'faux nom'], ['kind' => 'pet', 'id' => $pk['id'], 'label' => '']]]]);
 $ll = board_detail($pdo, $lb['id'])['data']['links'];
 $out['links'] = [array_column($ll, 'label'), count(board_links_check($pdo, ['links' => $ll])['links']), count(board_links_check($pdo, ['links' => [['kind' => 'person', 'id' => 1, 'label' => 'Quelqu’un d’autre']]])['links'])];
@@ -223,6 +240,8 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.equal(out.bd_snapleft, 0);
     assert.deepEqual(out.pets, [['err', 'err', 'err'], 'autre', 1, 3, 1, 1, '<b>Kid</b>']);
     assert.deepEqual(out.pets_del, [0, 'Atlas']);
+    assert.deepEqual(out.animals, ['animal', true, '12/04/2019', 'Minette', true, 'animal', true,
+        "SELECT 1 FROM (SELECT * FROM persons WHERE kind='animal') p LEFT JOIN (SELECT * FROM persons WHERE kind='animal') c ON c.id=p.id WHERE (SELECT count(*) FROM (SELECT * FROM persons WHERE kind='animal') persons)>0", 0]);
     assert.equal(out.links[1], 2); assert.equal(out.links[2], 0); assert.equal(out.links[0][1], '<b>Kid</b>');
     assert.deepEqual(out.bd_new, ['#eef6ee', 'grid', true, 'roman', 'ximg srcx', 'left', 'M0 0L10 10Z', false, 'triangle', false, '', 1, 200, 50]);
 });

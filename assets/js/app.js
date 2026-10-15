@@ -322,7 +322,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     let persisted = {};
     try { persisted = JSON.parse(localStorage.getItem(PERSIST_KEY) || '{}'); } catch (_) { persisted = {}; }
-    ['module','currentPersonId','peopleQuery','peoplePhonetic','personTab','graphTab','graphMode','graphDepth','graphZoom','graphStatsType','graphStatsYearFrom','graphStatsYearTo','graphStatsLimit','graphStatsGender','mapTag','mapDisplay','mapMode','mapLocationMode','mapZoom','mapYearFrom','mapYearTo','mapGender','mapSurname','mapSurnameMode','mapAgeFrom','mapAgeTo','mapTimelineYear','mapRouteArrows','mapRouteStep','mapRoutePeople','mapOverlayBg','mapOverlayOpacity','distributionNameMode','listType','listGender','listReminderMode','listReminderCategory','listDisplay','listMediaCity','listMediaDateFrom','listMediaDateTo','listMediaKind','listSosaSort','listSosaMissing','listSosaImpossible','listSosaRootId','listSosaRootName','listDabovilleSort','listDabovilleRootId','listDabovilleRootName','listCourrierFilter','externalLinksSort','externalLinksCountry','externalLinksQuery','researchKind','researchDisplay','placeNameSearch','archiveDigestSearch','inseeSearch','investigationStatus','investigationDisplay','investigationQuery','currentInvestigationId','currentBattueId','enquetesTab','maintenanceTab','eventDisplayMode'].forEach(key => {
+    ['module','currentPersonId','peopleQuery','peoplePhonetic','personTab','peopleScope','graphTab','graphMode','graphDepth','graphZoom','graphStatsType','graphStatsYearFrom','graphStatsYearTo','graphStatsLimit','graphStatsGender','mapTag','mapDisplay','mapMode','mapLocationMode','mapZoom','mapYearFrom','mapYearTo','mapGender','mapSurname','mapSurnameMode','mapAgeFrom','mapAgeTo','mapTimelineYear','mapRouteArrows','mapRouteStep','mapRoutePeople','mapOverlayBg','mapOverlayOpacity','distributionNameMode','listType','listGender','listReminderMode','listReminderCategory','listDisplay','listMediaCity','listMediaDateFrom','listMediaDateTo','listMediaKind','listSosaSort','listSosaMissing','listSosaImpossible','listSosaRootId','listSosaRootName','listDabovilleSort','listDabovilleRootId','listDabovilleRootName','listCourrierFilter','externalLinksSort','externalLinksCountry','externalLinksQuery','researchKind','researchDisplay','placeNameSearch','archiveDigestSearch','inseeSearch','investigationStatus','investigationDisplay','investigationQuery','currentInvestigationId','currentBattueId','enquetesTab','maintenanceTab','eventDisplayMode'].forEach(key => {
         if (persisted[key] !== undefined) state[key] = persisted[key];
     });
     if (persisted.mapCenter) state.mapCenter = persisted.mapCenter;
@@ -343,7 +343,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const modules = {
         jeu: ['JEU', 'Jeu de l’oie / Serpents et échelles / Petits chevaux'],
         dashboard: ['01 — PILOTER', 'Tableau de bord'],
-        personnes: ['02 — EXPLORER', 'Personnes'], graphiques: ['03 — VISUALISER', 'Graphiques'],
+        personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], graphiques: ['03 — VISUALISER', 'Graphiques'],
         carte: ['04 — LOCALISER', 'Carte'], listes: ['05 — INVENTORIER', 'Listes'],
         chronologie: ['06 — RACONTER', 'Chronologie'], recherche: ['07 — RECHERCHER', 'Recherche'],
         enquetes: ['08 — ENQUÊTER', 'Enquêtes'], comparaison: ['09 — COMPARER', 'Comparaison'], maintenance: ['10 — VÉRIFIER', 'Maintenance'],
@@ -462,9 +462,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const courrierFilters = [['','En cours'],['fait_utilise','Faits — utilisés'],['fait_non_utilise','Faits — non utilisés'],['fait_tous','Tous les faits'],['tous','Tout (en cours + faits)']];
     const defaultMapTypes = [['all','Tous les événements'],['BIRT','Naissances'],['DEAT','Décès'],['MARR','Mariages'],['BURI','Inhumations']];
     const defaultPersonBlocks = [
-        ['identity','Identité'],['web_search','Chercher sur internet'],['family_objects','Objets de famille'],['family_memories','Mémoire familiale'],['events','Événements'],['ascendants','Ascendants'],['descendants','Descendants'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['voyages','Départs / émigration'],['placements','Enfant placé'],['heraldry','Blason / noblesse'],['poilu','Poilu 14-18'],['probate','Inventaire après décès'],['family_papers_block','Papiers de famille (originaux)'],['languages','Langues'],['resistance','Résistant'],['voter','Cartes d’électeur'],['booklets','Livrets de famille'],['boards','Tableaux'],['pets','Animaux de compagnie'],['custom_blocks','Mes blocs (éditeur de blocs)'],['mentions','Cité dans'],['recueils','Recueils'],['person_exports','Exports fiche']
+        ['identity','Identité'],['animal','🐾 Caractéristiques de l’animal (fiche d’un animal)'],['web_search','Chercher sur internet'],['family_objects','Objets de famille'],['family_memories','Mémoire familiale'],['events','Événements'],['ascendants','Ascendants'],['descendants','Descendants'],['media','Médias'],['correspondance','Correspondance'],['memories','Témoignages / souvenirs'],['notes','Notes'],['census','Recensements'],['sources','Sources & citations'],['refs','Références externes'],['maternity','Repères de maternité'],['investigations','Enquêtes'],['signatures','Signatures'],['event_map','Carte des événements'],['completion','Score de complétude'],['bio','Biographie automatique'],['military','Militaire'],['cemetery','Cimetière'],['artistic_works','Œuvres artistiques'],['voyages','Départs / émigration'],['placements','Enfant placé'],['heraldry','Blason / noblesse'],['poilu','Poilu 14-18'],['probate','Inventaire après décès'],['family_papers_block','Papiers de famille (originaux)'],['languages','Langues'],['resistance','Résistant'],['voter','Cartes d’électeur'],['booklets','Livrets de famille'],['boards','Tableaux'],['pets','Animaux de compagnie'],['custom_blocks','Mes blocs (éditeur de blocs)'],['mentions','Cité dans'],['recueils','Recueils'],['person_exports','Exports fiche']
     ];
-    const defaultPersonBlockSpans={recueils:'12',voter:'12',booklets:'12',boards:'12',pets:'12',ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',languages:'6',resistance:'12',custom_blocks:'12',mentions:'6',person_exports:'6'};
+    const defaultPersonBlockSpans={recueils:'12',voter:'12',booklets:'12',boards:'12',pets:'12',animal:'12',ascendants:'6',descendants:'6',family_objects:'12',family_memories:'12',web_search:'12',identity:'4',events:'8',media:'12',correspondance:'12',memories:'12',notes:'4',census:'12',sources:'4',refs:'4',maternity:'12',investigations:'12',signatures:'12',event_map:'6',completion:'6',bio:'12',military:'12',cemetery:'12',artistic_works:'12',voyages:'12',placements:'12',heraldry:'6',poilu:'12',probate:'12',family_papers_block:'6',languages:'6',resistance:'12',custom_blocks:'12',mentions:'6',person_exports:'6'};
     const personBlockWidthChoices=[['12','1'],['6','1/2'],['4','1/3'],['3','1/4'],['8','2/3'],['9','3/4']];
     function savedOrder(key,defaults){try{const stored=JSON.parse(localStorage.getItem(key)||'[]');const order=stored.filter(item=>defaults.includes(item));defaults.forEach((item,index)=>{if(order.includes(item))return;const previous=defaults.slice(0,index).reverse().find(value=>order.includes(value));const next=defaults.slice(index+1).find(value=>order.includes(value));if(previous)order.splice(order.indexOf(previous)+1,0,item);else if(next)order.splice(order.indexOf(next),0,item);else order.push(item);});return order;}catch(_){return defaults;}}
     /** Ordre du menu principal : les onglets de l'app et ses onglets à soi (Éditeur d'onglets), rangés ensemble */
@@ -748,6 +748,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         // Blocs ajoutés le 2026-10-08 : masqués tant qu'ils n'ont jamais été réglés dans Apparence
         let savedBlockOrder=[];try{savedBlockOrder=[...(JSON.parse(localStorage.getItem('genealogie-person-blocks')||'{}').order||[]),...(personId?(JSON.parse(localStorage.getItem(`genealogie-person-blocks-${personId}`)||'{}').order||[]):[])];}catch(_){}
         ['family_objects','family_memories'].forEach(key=>{if(!savedBlockOrder.includes(key)&&!settings.hidden.includes(key))settings.hidden.push(key);});
+        // bloc des animaux (2026-10-15) : sous l'identité, même si l'ordre a déjà été réglé
+        if(!savedBlockOrder.includes('animal')){settings.order=settings.order.filter(k=>k!=='animal');const at=settings.order.indexOf('identity');settings.order.splice(at+1,0,'animal');}
         settings.hideEmptyIdentity=!!settings.hideEmptyIdentity;settings.widths=Object.fromEntries(Object.entries(settings.widths||{}).filter(([key,value])=>defaults.includes(key)&&personBlockWidthChoices.some(choice=>choice[0]===String(value))));defaults.forEach(key=>{if(!settings.widths[key])settings.widths[key]=defaultPersonBlockSpans[key]||'12';});return settings;}
     function savePersonBlockSettings(settings,personId=0){const key=personId?`genealogie-person-blocks-${personId}`:'genealogie-person-blocks';localStorage.setItem(key,JSON.stringify({order:settings.order,hidden:settings.hidden||[],widths:settings.widths||{},hideEmptyIdentity:!!settings.hideEmptyIdentity}));}
     function dashboardWidgetId(type){return `${type}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`;}
@@ -1032,7 +1034,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $$('.web-search-editor .order-list',root).forEach(list=>{if(!list.dataset.dragBound){list.dataset.dragBound='1';setupDragOrder(list);}});
         $$('[data-ws-all],[data-ws-none]',root).forEach(button=>button.addEventListener('click',()=>{const list=document.getElementById(button.dataset.wsAll||button.dataset.wsNone);$$('input[type="checkbox"]',list).forEach(input=>{input.checked=!!button.dataset.wsAll;});}));
     }
-    function menuHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');}catch(_){return[];}}
+    // l'onglet « Animaux » est caché tant qu'on ne l'a pas montré (Apparence → Ordre du menu principal)
+    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');}catch(_){l=['animaux'];}return l;}
+    // onglet « Animaux » montré : « Personnes » ne liste que les personnes, « Animaux » que les animaux (la même fiche, à part)
+    const animalsTabOn=()=>!menuHiddenKeys().includes('animaux');
     function mapHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');}catch(_){return[];}}
     function graphDiagramHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-diagram-hidden')||'[]');}catch(_){return[];}}
     function graphStatsHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-graph-stats-hidden')||'[]');}catch(_){return[];}}
@@ -1129,7 +1134,14 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         return data;
     }
 
-    function personCountLabel(count) { const n = Number(count) || 0; return `${n.toLocaleString('fr-FR')} personne${n > 1 ? 's' : ''}`; }
+    // type de base : famille (par défaut), élevage (que des animaux) ou les deux
+    const baseMode = () => { try { return ['family', 'breeding', 'both'].includes(localStorage.getItem('genealogie-base-mode')) ? localStorage.getItem('genealogie-base-mode') : 'family'; } catch (_) { return 'family'; } };
+    function personCountLabel(count, animals = state.bootstrap?.stats?.animaux) {
+        const n = Number(count) || 0, a = Number(animals) || 0, mode = baseMode();
+        const ppl = `${n.toLocaleString('fr-FR')} personne${n > 1 ? 's' : ''}`, ani = `${a.toLocaleString('fr-FR')} anima${a > 1 ? 'ux' : 'l'}`;
+        if (mode === 'breeding') return n ? `${ani} · ${ppl}` : ani;
+        return a ? `${ppl} · ${ani}` : ppl;
+    }
     let personCountTimer = null;
     // Barre de menus du haut plus large que la fenêtre : la molette d'une souris (défilement vertical) la fait défiler
     // de côté. Sans trackpad, les derniers menus étaient sinon inaccessibles.
@@ -1146,9 +1158,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             try{window.lcnda?.refreshReminders?.();}catch(_){} // chiffre des rappels sur l'icône de l'application
             clearLineageCache();
             try {
-                const {count} = await api('person_count');
-                if (state.bootstrap?.stats) state.bootstrap.stats.personnes = Number(count) || 0;
-                const label = personCountLabel(count);
+                const {count, animals} = await api('person_count');
+                const before = JSON.stringify(state.bootstrap?.stats ? peopleTabs() : []);
+                if (state.bootstrap?.stats) { state.bootstrap.stats.personnes = Number(count) || 0; state.bootstrap.stats.animaux = Number(animals) || 0; }
+                if (state.module === 'personnes' && state.bootstrap?.stats && JSON.stringify(peopleTabs()) !== before) { const seg = $('#sidebar-content .segmented'); if (seg) seg.innerHTML = peopleTabs().map(([k, l]) => `<button class="${state.personTab === k ? 'is-active':''}" data-person-tab="${k}">${l}</button>`).join(''); }
+                const label = personCountLabel(count, animals);
                 const status = $('#database-status');
                 if (status) status.textContent = label;
                 const footerCount = $('[data-person-count]');
@@ -1591,6 +1605,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(state.module==='carte'&&module!=='carte'){hideMapTooltip();const surnameBox=document.getElementById('map-surname-suggestions');if(surnameBox)surnameBox.hidden=true;}
         if(state.hasRendered)saveScrollPosition();
         if (!modules[module]) module = 'personnes';
+        if (module === 'animaux') { state.peopleScope = 'animals'; module = 'personnes'; } else if (module === 'personnes' && !setModuleReal.keepScope) state.peopleScope = '';
+        setModuleReal.keepScope = false;
+        if (!animalsTabOn()) state.peopleScope = '';
         if(module!=='dashboard'||(state.dashboardBoard&&!currentCustomTab()))state.dashboardBoard='';
         if(module!=='listes')listController?.abort();
         state.module = module;
@@ -1599,10 +1616,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const hash=moduleHash(module);
         saveLastRoute(hash);
         updateBrowserRoute(hash,pushHash,module);
-        $$('.nav-item').forEach(button => button.classList.toggle('is-active', button.dataset.module === module && (module !== 'dashboard' || (button.dataset.board || '') === (state.dashboardBoard || ''))));
+        markNavActive();
         const ownTab = module === 'dashboard' ? currentCustomTab() : null;
         $('#sidebar-index').textContent = ownTab ? 'MON ONGLET' : modules[module][0];
-        $('#sidebar-title').textContent = ownTab ? `${ownTab.icon ? ownTab.icon + ' ' : ''}${ownTab.name || 'Mon onglet'}` : modules[module][1];
+        $('#sidebar-title').textContent = ownTab ? `${ownTab.icon ? ownTab.icon + ' ' : ''}${ownTab.name || 'Mon onglet'}` : module === 'personnes' && state.peopleScope === 'animals' ? 'Animaux' : modules[module][1];
         $('#workspace').innerHTML = '<section class="loading-screen"><div class="loading-mark">VB</div><p>Préparation de la vue…</p></section>';
         renderSidebar();
         try {
@@ -1648,6 +1665,15 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         return {module,maintenanceTab:module==='maintenance'&&parts[1]?parts[1]:'',board:module==='dashboard'&&CUSTOM_TAB_ID.test(parts[1]||'')?parts[1]:''};
     }
 
+    function markNavActive(){const module=state.module,shown=module==='personnes'&&state.peopleScope==='animals'?'animaux':module;$$('.nav-item').forEach(button => button.classList.toggle('is-active', button.dataset.module === shown && (module !== 'dashboard' || (button.dataset.board || '') === (state.dashboardBoard || ''))));}
+    // une fiche d'animal ouverte depuis « Personnes » passe dans « Animaux » (et l'inverse), si l'onglet est montré
+    function syncPeopleScope(person){
+        if(!animalsTabOn()||state.module!=='personnes'||!person)return;
+        const want=person.kind==='animal'?'animals':'';
+        if((state.peopleScope||'')===want)return;
+        state.peopleScope=want;state.personTab=want?'animals':'all';markNavActive();
+        $('#sidebar-title').textContent=want?'Animaux':'Personnes';renderSidebar();loadPeople();
+    }
     function moduleHash(module=state.module){
         if(module==='maintenance')return `#maintenance/${encodeURIComponent(state.maintenanceTab||'issues')}`;
         if(module==='dashboard'&&state.dashboardBoard)return `#dashboard/${encodeURIComponent(state.dashboardBoard)}`;
@@ -1702,7 +1728,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function persistUiState() {
         if(IS_SECONDARY)return;
         const data = {
-            module:state.module,currentPersonId:state.currentPersonId,peopleQuery:state.peopleQuery,peoplePhonetic:state.peoplePhonetic,personTab:state.personTab,
+            module:state.module,currentPersonId:state.currentPersonId,peopleQuery:state.peopleQuery,peoplePhonetic:state.peoplePhonetic,personTab:state.personTab,peopleScope:state.peopleScope||'',
             graphTab:state.graphTab,graphMode:state.graphMode,graphDepth:state.graphDepth,graphStatsType:state.graphStatsType,graphStatsYearFrom:state.graphStatsYearFrom,graphStatsYearTo:state.graphStatsYearTo,graphStatsLimit:state.graphStatsLimit,graphStatsGender:state.graphStatsGender,graphKinship:state.graphKinship,graphCompare:state.graphCompare,graphPlaceMonograph:state.graphPlaceMonograph,mapTag:state.mapTag,mapDisplay:state.mapDisplay,mapMode:state.mapMode,mapZoom:state.mapZoom,mapYearFrom:state.mapYearFrom,mapYearTo:state.mapYearTo,mapGender:state.mapGender,mapSurname:state.mapSurname,mapSurnameMode:state.mapSurnameMode,mapAgeFrom:state.mapAgeFrom,mapAgeTo:state.mapAgeTo,mapTimelineYear:state.mapTimelineYear,mapRouteArrows:state.mapRouteArrows,mapRouteStep:state.mapRouteStep,mapRoutePeople:state.mapRoutePeople,mapOverlayBg:state.mapOverlayBg,mapOverlayOpacity:state.mapOverlayOpacity,
             mapCenter:state.mapCenter,listType:state.listType,listGender:state.listGender,listReminderMode:state.listReminderMode,listReminderCategory:state.listReminderCategory,listDisplay:state.listDisplay,listMediaCity:state.listMediaCity,listMediaDateFrom:state.listMediaDateFrom,listMediaDateTo:state.listMediaDateTo,listMediaKind:state.listMediaKind,listSosaSort:state.listSosaSort,listSosaMissing:state.listSosaMissing,listSosaImpossible:state.listSosaImpossible,listSosaRootId:state.listSosaRootId,listSosaRootName:state.listSosaRootName,listDabovilleSort:state.listDabovilleSort,listDabovilleRootId:state.listDabovilleRootId,listDabovilleRootName:state.listDabovilleRootName,listCourrierFilter:state.listCourrierFilter,externalLinksSort:state.externalLinksSort,externalLinksCountry:state.externalLinksCountry,externalLinksQuery:state.externalLinksQuery,researchKind:state.researchKind,researchDisplay:state.researchDisplay,research:state.research,placeNameSearch:state.placeNameSearch,dateSearch:state.dateSearch,proximitySearch:state.proximitySearch,transcriptionSearch:state.transcriptionSearch,inseeSearch:state.inseeSearch,investigationStatus:state.investigationStatus,investigationDisplay:state.investigationDisplay,investigationQuery:state.investigationQuery,currentInvestigationId:state.currentInvestigationId,currentBattueId:state.currentBattueId,enquetesTab:state.enquetesTab,comparison:state.comparison,comparisonMode:state.comparisonMode,maintenanceTab:state.maintenanceTab,timeline:state.timeline,investigationSort:state.investigationSort,battueSort:state.battueSort,
             sidebarCollapsed:$('#app')?.classList.contains('sidebar-collapsed') || false,scrollPositions:state.scrollPositions,
@@ -2476,10 +2502,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     function renderPeopleSidebar(content, footer) {
         content.innerHTML = `
-            <div class="segmented"><button class="${state.personTab === 'all' ? 'is-active':''}" data-person-tab="all">Personnes</button><button class="${state.personTab === 'bookmarked' ? 'is-active':''}" data-person-tab="bookmarked">Signets</button></div>
+            <div class="segmented">${peopleTabs().map(([k, l]) => `<button class="${state.personTab === k ? 'is-active':''}" data-person-tab="${k}">${l}</button>`).join('')}</div>
             <div class="search-box"><label for="person-search">Prénom, nom (de naissance ou mariage) ou variante</label><div class="search-row"><input id="person-search" value="${escapeHtml(state.peopleQuery)}" placeholder="Dupont, Dupond…"><button id="person-search-button" aria-label="Rechercher">⌕</button></div><label class="check-line" title="Tolère les variantes orthographiques d'époque et rattrape les erreurs de transcription via un Soundex français combiné"><input type="checkbox" id="person-phonetic" ${state.peoplePhonetic?'checked':''}> Recherche phonétique</label></div>
             <div class="person-list" id="person-list"><div class="loading-block">Chargement…</div></div>`;
-        footer.innerHTML = `<button class="button small" id="new-person">+ Nouvelle personne</button><span style="display:block;margin-top:9px" data-person-count>${personCountLabel(state.bootstrap.stats.personnes)} dans la base</span>`;
+        footer.innerHTML = `<button class="button small" id="new-person">${baseMode() === 'breeding' || state.peopleScope === 'animals' ? '+ Nouvel animal' : animalsTabOn() ? '+ Nouvelle personne' : '+ Nouvelle fiche'}</button><span style="display:block;margin-top:9px" data-person-count>${personCountLabel(state.bootstrap.stats.personnes)} dans la base</span>`;
         content.addEventListener('click', event => {
             const tab = event.target.closest('[data-person-tab]');
             if (tab) { state.personTab = tab.dataset.personTab; renderSidebar(); loadPeople(); }
@@ -2498,20 +2524,37 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
 
     async function loadPeopleAndPerson() {
         await loadPeople();
+        // onglets « Personnes » et « Animaux » à part : on rouvre la dernière fiche de cet onglet
+        if (animalsTabOn() && state.currentPersonKind && (state.currentPersonKind === 'animal') !== (state.peopleScope === 'animals')) {
+            const alt = state.peopleScope === 'animals' ? state.lastAnimalId : state.lastHumanId;
+            if (state.peopleScope === 'animals' && !alt && !state.people.length) { $('#workspace').innerHTML = `<section class="page">${empty('Aucun animal pour l’instant. « + Nouvel animal » en bas de la colonne de gauche, ou Listes → Animaux de compagnie.')}</section>`; return; }
+            state.currentPersonId = Number(alt) || Number(state.people[0]?.id) || state.currentPersonId;
+        }
         await selectPerson(state.currentPersonId, false);
     }
 
+    // onglets de la liste : « Animaux » seulement s'il y a des animaux, « Personnes » seulement s'il y a des personnes
+    function peopleTabs(){
+        const h=Number(state.bootstrap?.stats?.personnes)||0,an=Number(state.bootstrap?.stats?.animaux)||0;
+        if(animalsTabOn()){const tabs=state.peopleScope==='animals'?[['animals','🐾 Animaux'],['bookmarked','Signets']]:[['all','Personnes'],['bookmarked','Signets']];if(!tabs.some(t=>t[0]===state.personTab))state.personTab=tabs[0][0];return tabs;}
+        const tabs=[...(h||!an?[['all',baseMode()==='both'&&an?'Tous':'Personnes']]:[]),...(an?[['animals','🐾 Animaux']]:[]),['bookmarked','Signets']];
+        if(!tabs.some(t=>t[0]===state.personTab))state.personTab=tabs[0][0];
+        return tabs;
+    }
     let peopleSeq=0;
     async function loadPeople() {
         const seq=++peopleSeq; // une réponse lente d'une recherche plus ancienne ne remplace pas la liste
-        const data = await api('people', {q:state.peopleQuery, limit:180, phonetic:state.peoplePhonetic?1:0});
+        // « Personnes » sans les animaux (sauf base « les deux » : tout), « Animaux » seulement eux ; base d'élevage : les animaux d'abord
+        if (!animalsTabOn() && baseMode() === 'breeding' && state.personTab === 'all' && !loadPeople.modeSet && Number(state.bootstrap?.stats?.animaux)) { state.personTab = 'animals'; loadPeople.modeSet = true; }
+        const kind = animalsTabOn() ? (state.peopleScope === 'animals' ? 'animal' : 'human') : state.personTab === 'animals' ? 'animal' : state.personTab === 'all' && baseMode() === 'family' && Number(state.bootstrap?.stats?.animaux) ? 'human' : '';
+        const data = await api('people', {q:state.peopleQuery, limit:180, phonetic:state.peoplePhonetic?1:0, kind});
         if(seq!==peopleSeq)return;
         state.people = state.personTab === 'bookmarked' ? data.people.filter(person => Number(person.is_bookmarked)) : data.people;
         const list = $('#person-list');
         if (!list) return;
         list.innerHTML = state.people.length ? state.people.map(person => `
             <button class="person-list-item ${person.portrait?'has-thumb':''} ${Number(person.id) === state.currentPersonId ? 'is-active':''}" data-person-id="${person.id}">
-                ${Number(person.outside_genealogy)?'<span class="outside-genealogy-mark" title="Hors généalogie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>':''}<span class="life-dot ${person.living_status}"></span>${person.portrait?`<img class="person-thumb" src="media/${encodeURIComponent(person.portrait)}" alt="">`:''}<span class="person-list-copy"><strong>${Number(person.is_bookmarked)?'<span class="bookmark-mark" title="En signet" aria-label="En signet"></span>':''}${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></span>
+                ${Number(person.outside_genealogy)?'<span class="outside-genealogy-mark" title="Hors généalogie"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>':''}${person.kind==='animal'?'<span class="animal-mark" title="Animal">🐾</span>':''}<span class="life-dot ${person.living_status}"></span>${person.portrait?`<img class="person-thumb" src="media/${encodeURIComponent(person.portrait)}" alt="">`:''}<span class="person-list-copy"><strong>${Number(person.is_bookmarked)?'<span class="bookmark-mark" title="En signet" aria-label="En signet"></span>':''}${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></span>
             </button>`).join('') : '<div class="empty-card">Aucune personne ne correspond à cette recherche.</div>';
     }
 
@@ -2776,6 +2819,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function applyBlockWidth(html,width){return width?html.replace(/\bspan-(3|4|5|6|7|8|9|12)\b/,`span-${width}`):html;}
 
     function renderPerson(detail) {
+        state.currentPersonKind = detail?.person?.kind === 'animal' ? 'animal' : 'human';
+        if (detail?.person?.id) { if (state.currentPersonKind === 'animal') state.lastAnimalId = Number(detail.person.id); else state.lastHumanId = Number(detail.person.id); }
+        syncPeopleScope(detail?.person);
         const {person, estimates={}, saint=null, family_objects:personObjects=[], family_memories:personMemories=[], events, parents, partners, families=[], children, siblings=[], variants, labels=[], notes, media, signatures=[], sources, investigations=[], battues=[], hypotheses=[], evidence=[], census={}, completion={score:0,items:[]}, biography='', onlineSheets=[]} = detail;
         const birthEvent=events.find(event=>event.gedcom_tag==='BIRT');
         const isLocked=Number(person.is_locked)===1;
@@ -2790,7 +2836,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const eventSourcesHtml=event=>{const rows=eventSources(event.id);return rows.length?`<div class="event-source-list">${rows.map(source=>sourceItemHtml(source,events,isLocked)).join('')}</div>`:'';};
         const blockSettings=personBlockSettings(person.id);
         const evtFilter=eventsFilterSettings(person.id);
-        const identityRows=[
+        const identityRows=person.kind==='animal'?[ // un animal : ses mots à lui (le reste est dans « Caractéristiques de l'animal »)
+            ['Nom',person.first_name],['Autres noms',person.middle_name],['Affixe',person.last_name],['Sexe',person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'],['Statut',{living:'En vie',deceased:'Mort(e)'}[person.living_status]||'À vérifier'],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Rôle / travail',person.occupation],['Taille',person.height_text],['Description',person.physical_description],['Yeux',person.eye_color],['Référence',person.reference_number]
+        ].filter(([,v],i)=>v||i<5) : [
             ['Prénom',person.first_name],['Autres prénoms',person.middle_name],['Nom inscrit',person.last_name],['Titre / préfixe',[person.prefix,person.suffix].filter(Boolean).join(' ')],['Genre',genderText(person.gender)],['Statut',lifeText(person.living_status)],['Mode vérification',person.verify_status==='verify'?'À vérifier':'Normal'],['Métier / activité',person.occupation],['Taille',person.height_text],['Description physique',person.physical_description],['Yeux',person.eye_color],['Peau',person.skin_color],['Nationalité',person.nationality],['Origine / mention',person.ethnicity],...( person.mort_pour_la_france==='yes'?[['Mort Pour La France','Oui']]:[] ),['Référence',person.reference_number]
         ].map(([label,value])=>identityDataRow(label,value,blockSettings)).join('');
         const personBlockRenderers={
@@ -2956,7 +3004,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const dabovilleNumber=dabovilleNumberFor(person.id);
         $('#workspace').innerHTML = `<article class="page person-page">
             <div class="person-hero">
-                ${portrait}<div><span class="eyebrow">FICHE INDIVIDUELLE · #${person.id}</span><h2>${escapeHtml(personName(person))}</h2><div class="person-meta"><span>${escapeHtml(years(person))}</span><span>Genre : <strong>${genderText(person.gender)}</strong></span>${person.surname_group ? `<span>Groupe : <strong>${escapeHtml(person.surname_group)}</strong></span>`:''}</div></div>
+                ${portrait}<div><span class="eyebrow">${person.kind==='animal'?`🐾 FICHE ANIMAL${detail.heritage?.animal?.data?.species?' · '+escapeHtml((detail.heritage.animal.species||{})[detail.heritage.animal.data.species]||''):''}${detail.heritage?.animal?.data?.breed?' · '+escapeHtml(detail.heritage.animal.data.breed):''}`:'FICHE INDIVIDUELLE'} · #${person.id}</span><h2>${escapeHtml(personName(person))}</h2><div class="person-meta"><span>${escapeHtml(years(person))}</span><span>${person.kind==='animal'?`Sexe : <strong>${person.gender==='male'?'♂ mâle':person.gender==='female'?'♀ femelle':'?'}</strong>`:`Genre : <strong>${genderText(person.gender)}</strong>`}</span>${person.surname_group ? `<span>Groupe : <strong>${escapeHtml(person.surname_group)}</strong></span>`:''}</div></div>
                 <div class="person-hero-tools"><div class="person-hero-status">${sosaNumber?`<span class="sosa-star" title="${sosaNumber.includes('&')?'Numéros Sosa (ancêtre présent plusieurs fois dans l’arbre)':'Numéro Sosa'} ${escapeHtml(sosaNumber)}"><span>★</span> SOSA : ${escapeHtml(String(sosaNumber))}</span>`:''}${dabovilleNumber?`<span class="daboville-tag" title="Numéro d'Aboville ${escapeHtml(dabovilleNumber)}"><span>◆</span> Aboville : ${escapeHtml(dabovilleNumber)}</span>`:''}<span class="status-badge ${person.living_status}">${lifeText(person.living_status)}</span>${person.outside_genealogy?'<span class="outside-genealogy-badge">Hors généalogie</span>':''}${Number(person.is_artist)?`<span class="artist-badge" title="${escapeHtml({'photographe':'Photographe','peintre':'Peintre','ecrivain':'Écrivain','cineaste':'Cinéaste','sculpteur':'Sculpteur','dramaturge':'Dramaturge','poete':'Poète','videaste':'Vidéaste','plasticien':'Plasticien','danseur':'Danseur','acteur':'Acteur'}[person.artist_discipline||'']||'Artiste')}">🎨 Artiste</span>`:''}</div><div class="person-hero-actions">${actionButton(Number(person.is_bookmarked)?'bookmark-on':'bookmark',bookmarkButtonLabel(person),`data-toggle-bookmark="${person.id}"`)}${editOnly(actionButton('delete','Supprimer cette fiche',`data-delete-person="${person.id}"`))}${actionButton(isLocked?'lock':'unlock',isLocked?'Déverrouiller la fiche':'Verrouiller la fiche',`data-toggle-person-lock="${person.id}" data-lock-value="${isLocked?0:1}"`)}${actionButton('history','Historique de la fiche',`data-person-history="${person.id}"`)}</div></div>
             </div>
             <div class="relations-strip">${relationChips('Parents','parent',parents,'unknown',isLocked)}${relationChips('Conjoints','spouse',partners,person.spouse_status,isLocked)}${relationChips('Enfants','child',children,person.children_status,isLocked)}${siblingChips('Frères & sœurs',siblings)}</div>
@@ -3921,14 +3969,14 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
             const data=await api('tree',{id:state.currentPersonId,mode:'ancestors',depth:state.graphDepth});if(token!==state.workspaceToken||state.module!=='graphiques')return;stageHtml=renderSpecialDiagram(data.tree,state.graphMode);
         } else if (state.graphMode === 'hourglass') {
             const [ancestors, descendants] = await Promise.all([
-                api('tree',{id:state.currentPersonId,mode:'ancestors',depth:state.graphDepth}),
-                api('tree',{id:state.currentPersonId,mode:'descendants',depth:state.graphDepth}),
+                api('tree',{id:state.currentPersonId,mode:'ancestors',depth:state.graphDepth,pets:treePets()?1:undefined}),
+                api('tree',{id:state.currentPersonId,mode:'descendants',depth:state.graphDepth,pets:treePets()?1:undefined}),
             ]);
             if(token!==state.workspaceToken||state.module!=='graphiques')return;
             stageHtml = `<div class="hourglass-grid"><section><span class="section-label">ASCENDANTS</span><div class="tree"><ul><li>${treeHtml(ancestors.tree)}</li></ul></div></section><section><span class="section-label">DESCENDANTS</span><div class="tree"><ul><li>${treeHtml(descendants.tree)}</li></ul></div></section></div>`;
         } else {
             const apiMode = state.graphMode === 'descendants' ? 'descendants' : 'ancestors';
-            const data = await api('tree',{id:state.currentPersonId,mode:apiMode,depth:state.graphDepth});
+            const data = await api('tree',{id:state.currentPersonId,mode:apiMode,depth:state.graphDepth,pets:treePets()?1:undefined});
             if(token!==state.workspaceToken||state.module!=='graphiques')return;
             if (state.graphMode === 'fan') {
                 stageHtml = renderFanChart(data.tree);
@@ -3950,9 +3998,9 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
             stageHtml=`<div class="graph-compare-layout is-${escapeHtml(state.graphCompare.orientation||'vertical')}"><section class="graph-compare-tree"><h3>${escapeHtml(leftName)}</h3>${renderTree(left.tree)}</section><section class="graph-compare-tree"><h3>${escapeHtml(rightName)}</h3>${renderTree(right.tree)}</section></div>`;
         }
         const compareButton=compareAvailable?`<button class="button small secondary" id="graph-compare-toggle">${state.graphCompare.enabled?'Masquer comparaison':'Comparer deux arbres'}</button>`:'';
-        $('#workspace').innerHTML = `<section class="graph-layout"><div class="tool-strip"><span class="eyebrow">${escapeHtml(personName(current))}</span><label>Générations <select id="graph-depth">${Array.from({length:19},(_,i)=>i+2).map(n=>`<option ${n===state.graphDepth?'selected':''}>${n}</option>`).join('')}</select></label><div class="graph-zoom-buttons"><button class="icon-button" id="graph-zoom-out" aria-label="Dézoomer" title="Dézoomer">−</button><label class="graph-zoom-control">Zoom <input id="graph-zoom" type="range" min="0.3" max="1.8" step="0.05" value="${state.graphZoom}"><output id="graph-zoom-value">${Math.round(state.graphZoom*100)} %</output></label><button class="icon-button" id="graph-zoom-in" aria-label="Zoomer" title="Zoomer">+</button></div><button class="button small secondary" id="graph-reset-zoom">100 %</button>${state.graphMode==='distribution'?`<label>Afficher <select id="distribution-name-mode"><option value="last_name" ${state.distributionNameMode==='group'?'':'selected'}>Nom inscrit</option><option value="group" ${state.distributionNameMode==='group'?'selected':''}>Famille / groupe</option></select></label>`:''}<span class="spacer"></span><span class="wheel-hint">Molette : zoomer · Maj + molette ou glisser : déplacer</span>${graphExportToolbarHtml()}<button class="button small" id="graph-person">Choisir dans Personnes</button>${compareButton}</div>
+        $('#workspace').innerHTML = `<section class="graph-layout"><div class="tool-strip"><span class="eyebrow">${escapeHtml(personName(current))}</span><label>Générations <select id="graph-depth">${Array.from({length:19},(_,i)=>i+2).map(n=>`<option ${n===state.graphDepth?'selected':''}>${n}</option>`).join('')}</select></label>${['ancestors','descendants','hourglass'].includes(state.graphMode)?`<label class="check-line" title="Montrer les animaux de chacun à côté de leur maître (trait pointillé)"><input type="checkbox" id="graph-pets" ${treePets()?'checked':''}> 🐾 avec les animaux</label>`:''}<div class="graph-zoom-buttons"><button class="icon-button" id="graph-zoom-out" aria-label="Dézoomer" title="Dézoomer">−</button><label class="graph-zoom-control">Zoom <input id="graph-zoom" type="range" min="0.3" max="1.8" step="0.05" value="${state.graphZoom}"><output id="graph-zoom-value">${Math.round(state.graphZoom*100)} %</output></label><button class="icon-button" id="graph-zoom-in" aria-label="Zoomer" title="Zoomer">+</button></div><button class="button small secondary" id="graph-reset-zoom">100 %</button>${state.graphMode==='distribution'?`<label>Afficher <select id="distribution-name-mode"><option value="last_name" ${state.distributionNameMode==='group'?'':'selected'}>Nom inscrit</option><option value="group" ${state.distributionNameMode==='group'?'selected':''}>Famille / groupe</option></select></label>`:''}<span class="spacer"></span><span class="wheel-hint">Molette : zoomer · Maj + molette ou glisser : déplacer</span>${graphExportToolbarHtml()}<button class="button small" id="graph-person">Choisir dans Personnes</button>${compareButton}</div>
             ${compareAvailable?graphComparePanelHtml():''}<div class="tree-stage"><div class="tree-zoom-layer"><div class="tree-scale-content">${stageHtml}</div></div></div></section>`;
-        $('#graph-depth').addEventListener('change',async event=>{state.graphDepth=Number(event.target.value);await renderGraph();});const distNameMode=$('#distribution-name-mode');if(distNameMode)distNameMode.addEventListener('change',async event=>{state.distributionNameMode=event.target.value;persistUiState();await renderGraph();});
+        $('#graph-depth').addEventListener('change',async event=>{state.graphDepth=Number(event.target.value);await renderGraph();});$('#graph-pets')?.addEventListener('change',async event=>{try{localStorage.setItem('genealogie-tree-pets',event.target.checked?'1':'0');}catch(_){}await renderGraph();});const distNameMode=$('#distribution-name-mode');if(distNameMode)distNameMode.addEventListener('change',async event=>{state.distributionNameMode=event.target.value;persistUiState();await renderGraph();});
         $('#graph-person').addEventListener('click',()=>setModule('personnes'));
         bindGraphCompareControls();
         bindGraphExportControls();
@@ -4093,6 +4141,9 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         if(tFields.id) parts.push(`<small class="tree-card-extra tree-card-id"># ${p.id}</small>`);
         return parts.length ? `<span class="tree-card-extras">${parts.join('')}</span>` : '';
     }
+    // en option (Graphiques → « 🐾 avec les animaux ») : les animaux de chacun, à côté de leur maître
+    const treePets=()=>{try{return localStorage.getItem('genealogie-tree-pets')==='1';}catch(_){return false;}};
+    const treePetsHtml=p=>(p.pets||[]).length?`<div class="tree-pets">${p.pets.map(a=>`<button type="button" class="tree-pet-card" ${a.person_id?`data-tree-person="${a.person_id}"`:`data-pet-goto="${a.id}"`} title="${escapeHtml(a.role||'')}">🐾 ${escapeHtml(a.title)}</button>`).join('')}</div>`:'';
     function treeHtml(node) {
         const p=node.person;
         const tFields=getTreeCardFields();
@@ -4101,7 +4152,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
             const pExtrasHtml=treeCardExtras(partner,tFields);
             return `<div class="tree-partner-link"><span aria-hidden="true">\u221e</span><button class="tree-card tree-partner-card gender-${partner.gender||'unknown'}" data-tree-person="${partner.id}"><strong>${escapeHtml(personName(partner))}</strong><small>${escapeHtml(years(partner))}</small>${pExtrasHtml}</button></div>`;
         }).join('');
-        return `<div class="tree-node-shell"><div class="tree-person-unit"><button class="tree-card gender-${p.gender||'unknown'}" data-tree-person="${p.id}"><strong>${escapeHtml(personName(p))}</strong><small>${escapeHtml(years(p))}</small>${extrasHtml}</button>${partners?`<div class="tree-partners">${partners}</div>`:''}</div>${node.has_more?'<span class="tree-continuation" title="D\u2019autres g\u00e9n\u00e9rations existent" aria-label="D\u2019autres g\u00e9n\u00e9rations existent"></span>':''}</div>${node.children?.length?`<ul>${node.children.map(child=>`<li>${treeHtml(child)}</li>`).join('')}</ul>`:''}`;
+        return `<div class="tree-node-shell"><div class="tree-person-unit"><button class="tree-card gender-${p.gender||'unknown'}" data-tree-person="${p.id}"><strong>${escapeHtml(personName(p))}</strong><small>${escapeHtml(years(p))}</small>${extrasHtml}</button>${partners?`<div class="tree-partners">${partners}</div>`:''}${treePetsHtml(p)}</div>${node.has_more?'<span class="tree-continuation" title="D\u2019autres g\u00e9n\u00e9rations existent" aria-label="D\u2019autres g\u00e9n\u00e9rations existent"></span>':''}</div>${node.children?.length?`<ul>${node.children.map(child=>`<li>${treeHtml(child)}</li>`).join('')}</ul>`:''}`;
     }
 
     async function renderGraphStats(token=++state.workspaceToken) {
@@ -4116,7 +4167,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         // "Enfants par famille" (basée sur les familles, pas un individu).
         const supportsGender = !['sex_distribution','children_per_family'].includes(state.graphStatsType);
         const genderParam = supportsGender ? (state.graphStatsGender||undefined) : undefined;
-        const data = await api('graph_stats',{type:state.graphStatsType,year_from:state.graphStatsYearFrom||undefined,year_to:state.graphStatsYearTo||undefined,gender:genderParam,sosa_root_id:state.currentPersonId||undefined});
+        const data = await api('graph_stats',{type:state.graphStatsType,year_from:state.graphStatsYearFrom||undefined,year_to:state.graphStatsYearTo||undefined,gender:genderParam,sosa_root_id:state.currentPersonId||undefined,kind:baseMode()==='breeding'?'animal':undefined});
         if(token!==state.workspaceToken||state.module!=='graphiques'||state.graphMode!=='stats')return;
         // Use frozen colors from a saved view if present, otherwise use global palette
         const colors = state.graphStatsFrozenColors || getStatsColors();
@@ -7483,7 +7534,9 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
             researchKind:state.researchKind||'',graphPlaceMonograph:state.graphPlaceMonograph||null,
             // Atelier de recherche : le projet, le dossier ou la vue, l'élément choisi ; une liste à soi (et sa fiche ouverte)
             atelier:state.atelier?.project?{project:Number(state.atelier.project)||0,node:state.atelier.node??'overview',sel:Array.isArray(state.atelier.sel)?state.atelier.sel.slice(0,1):[],deep:!!state.atelier.deep}:null,
-            hListOpen:Number(state.hListOpen)||0,hRec:state.hRec?.list?{list:Number(state.hRec.list)||0,open:Number(state.hRec.open)||0,filter:state.hRec.filter||''}:null};
+            hListOpen:Number(state.hListOpen)||0,hRec:state.hRec?.list?{list:Number(state.hRec.list)||0,open:Number(state.hRec.open)||0,filter:state.hRec.filter||''}:null,
+            // et tout ce qui dit quelle fiche est ouverte dans une liste (un animal, un village, un livret, une recherche…) : la fenêtre s'ouvre au même endroit
+            hState:Object.fromEntries(Object.entries(state).filter(([k,v])=>/^h[A-Z]\w{1,40}$/.test(k)&&!['hListOpen','hRec','hEdit'].includes(k)&&(typeof v==='number'||typeof v==='boolean'||(typeof v==='string'&&v.length<=300))))};
     }
     function applyViewSnapshot(view){
         if(!view||typeof view!=='object')return;
@@ -7493,6 +7546,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(!view.currentBattueId)state.currentBattueId=0;if(!view.currentInvestigationId)state.currentInvestigationId=0;
         if(view.atelier&&typeof view.atelier==='object'&&Number(view.atelier.project)>0){const node=view.atelier.node;state.atelier={project:Number(view.atelier.project),node:typeof node==='number'||/^[a-z_0-9]{1,40}$/i.test(String(node))?node:'overview',sel:(Array.isArray(view.atelier.sel)?view.atelier.sel:[]).map(Number).filter(Boolean).slice(0,1),tags:[],q:'',type:'',sort:{col:'title',dir:1},closed:{},deep:!!view.atelier.deep};}
         if(Number(view.hListOpen)>0)state.hListOpen=Number(view.hListOpen);
+        if(view.hState&&typeof view.hState==='object')Object.entries(view.hState).forEach(([k,v])=>{if(/^h[A-Z]\w{1,40}$/.test(k)&&!['hListOpen','hRec','hEdit'].includes(k)&&(typeof v==='number'||typeof v==='boolean'||(typeof v==='string'&&v.length<=300)))state[k]=v;});
         if(view.hRec&&typeof view.hRec==='object'&&Number(view.hRec.list)>0)state.hRec={list:Number(view.hRec.list),open:Number(view.hRec.open)||0,filter:['todo','done','all'].includes(view.hRec.filter)?view.hRec.filter:'todo',q:'',edit:null};
     }
     window.lcndaViewSnapshot=viewSnapshot; // lu par la fenêtre principale (même origine) pour détacher le panneau
@@ -10821,7 +10875,7 @@ ${backupSectionHtml()}
             }
             const list=$(`#${button.dataset.orderSave}`);if(!list)return;
             const rows=$$('.order-row',list),keys=rows.map(row=>row.dataset.orderKey);
-            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));
+            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));localStorage.setItem('genealogie-menu-animaux','1');
                 const own=customTabs();if(own.some(t=>!!t.hidden!==hidden.includes(t.id))){own.forEach(t=>{t.hidden=hidden.includes(t.id);});try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(own));}catch(_){}}applyMenuOrder();renderDesignTools();toast('Ordre du menu enregistré.');return;}
             if(button.dataset.orderSave==='list-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-list-order',JSON.stringify(keys));localStorage.setItem('genealogie-list-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Ordre des listes enregistré.');return;}
             if(button.dataset.orderSave==='dashboard-widget-catalog-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-dashboard-widget-catalog-order',JSON.stringify(keys));localStorage.setItem('genealogie-dashboard-widget-catalog-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Bibliothèque de widgets enregistrée.');return;}
@@ -11144,7 +11198,11 @@ ${backupSectionHtml()}
         document.addEventListener('keydown',event=>{if(!$('#lightbox').open||event.target.matches('textarea,input,select'))return;if(event.key==='Escape'&&![...document.querySelectorAll('dialog[open]')].some(d=>d!==$('#lightbox')&&$('#lightbox').compareDocumentPosition(d)&Node.DOCUMENT_POSITION_FOLLOWING))$('#lightbox').close();});// Échap dans une fenêtre ouverte par-dessus (retouche…) ne ferme pas aussi la visionneuse
     }
 
-    function openPersonDialog(detail){const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));try{const d=readDesignSettings();if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);
+    // un animal : « mâle / femelle », « en vie / mort » ; une personne : comme d'habitude
+    function personKindLabels(form,kind){kind=kind||form.querySelector('[name=kind]:checked')?.value||'human';const an=kind==='animal';const g=form.elements.gender;if(g){const t=an?{unknown:'?',male:'♂ Mâle',female:'♀ Femelle',nonbinary:'Autre'}:{unknown:'Non renseigné',male:'Masculin',female:'Féminin',nonbinary:'Autre / non binaire'};[...g.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const s=form.elements.living_status;if(s){const t=an?{unknown:'À vérifier',living:'En vie',deceased:'Mort(e)'}:{unknown:'À vérifier',living:'Vivante',deceased:'Décédée'};[...s.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const f=form.elements.first_name?.closest('label');if(f&&f.firstChild)f.firstChild.textContent=an?'Nom':'Prénom';const l=form.elements.last_name?.closest('label');if(l&&l.firstChild)l.firstChild.textContent=an?'Affixe (nom de l’élevage)':'Nom inscrit';$('#person-dialog-title').textContent=form.elements.id.value?(an?'Modifier l’animal':'Modifier la personne'):(an?'Nouvel animal':'Nouvelle personne');}
+    document.addEventListener('change',e=>{if(e.target.matches?.('#person-form [name=kind]'))personKindLabels(e.target.form);});
+    function openPersonDialog(detail){const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';{const kc=form.querySelector('[data-kind-choice]');if(kc)kc.hidden=true;}['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));try{const d=readDesignSettings();if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);
+        personKindLabels(form,p.kind==='animal'?'animal':'human');
         // Artiste
         const isArtistCb=form.elements.is_artist;if(isArtistCb){isArtistCb.checked=!!(Number(p.is_artist)||0);}
         ['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block','show_resistance_block','show_voter_block'].forEach(key=>{if(form.elements[key])form.elements[key].checked=!!Number(p[key]||0);});
@@ -11183,7 +11241,7 @@ ${backupSectionHtml()}
         genderSel._militaryHandler=updateMilitaryToggle;
         genderSel.addEventListener('change',updateMilitaryToggle);
         $('#person-dialog').showModal();}
-    function openNewPersonDialog(){const form=$('#person-form');form.reset();form.elements.id.value='';$('#person-dialog-title').textContent='Nouvelle personne';const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
+    function openNewPersonDialog(){const form=$('#person-form');form.reset();form.elements.id.value='';$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
 
     function openMilitaryDialog(detail){
         const form=$('#military-form');
@@ -13350,7 +13408,9 @@ ${backupSectionHtml()}
     }
 
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
-    window.LCNDA_APP={graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    // type de base changé (Listes → Animaux) : compteur, liste de gauche
+    function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';const st=$('#database-status');if(st)st.textContent=personCountLabel(state.bootstrap.stats.personnes);if(state.module==='personnes'){renderSidebar();loadPeople();}}
+    window.LCNDA_APP={refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

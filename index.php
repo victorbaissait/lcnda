@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=201">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=107">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=109">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -42,6 +42,7 @@ header('X-Content-Type-Options: nosniff');
         <nav class="main-nav" aria-label="Navigation principale">
             <button class="nav-item is-active" data-module="dashboard"><span>01</span>Tableau de bord</button>
             <button class="nav-item" data-module="personnes"><span>02</span>Personnes</button>
+            <button class="nav-item" data-module="animaux"><span>02</span>🐾 Animaux</button>
             <button class="nav-item" data-module="graphiques"><span>03</span>Graphiques</button>
             <button class="nav-item" data-module="carte"><span>04</span>Carte</button>
             <button class="nav-item" data-module="listes"><span>05</span>Listes</button>
@@ -123,6 +124,7 @@ header('X-Content-Type-Options: nosniff');
     <form method="dialog" id="person-form">
         <div class="modal-head"><div><span class="eyebrow">IDENTITÉ</span><h2 id="person-dialog-title">Modifier la personne</h2></div><button class="icon-button" value="cancel" aria-label="Fermer">×</button></div>
         <input type="hidden" name="id">
+        <div class="person-kind-choice" data-kind-choice hidden><label><input type="radio" name="kind" value="human" checked> 👤 Une personne</label><label><input type="radio" name="kind" value="animal"> 🐾 Un animal</label><small class="muted">Un animal a une fiche comme une personne (arbre, événements, photos, sources), avec en plus ses caractéristiques d’animal (espèce, race, puce, pedigree…).</small></div>
         <div class="form-grid">
             <label>Prénom<input name="first_name" autocomplete="off"></label>
             <label>Autres prénoms<input name="middle_name" autocomplete="off"></label>
@@ -1088,12 +1090,12 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=331" defer></script>
+<script src="assets/js/app.js?v=333" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=51" defer></script>
+<script src="assets/js/heritage-more.js?v=52" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=16" defer></script>
 <script src="assets/js/heritage-av.js?v=6" defer></script>
@@ -1113,7 +1115,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-employers.js?v=1" defer></script>
 <script src="assets/js/heritage-book.js?v=1" defer></script>
 <script src="assets/js/heritage-livrets.js?v=3" defer></script>
-<script src="assets/js/heritage-pets.js?v=2" defer></script>
+<script src="assets/js/heritage-pets.js?v=4" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=1" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=8" defer></script>
 <script src="assets/js/heritage-boards.js?v=18" defer></script>

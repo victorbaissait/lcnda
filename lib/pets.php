@@ -8,6 +8,9 @@ declare(strict_types=1);
  * animal de race, sa descendance, ses frères et sœurs, et son taux de consanguinité.
  * Le détail est dans pets.data_json ; sire_id et dam_id (les parents dans la base) servent au pedigree ;
  * pet_people dit quelles fiches sont liées à quel animal (propriétaires, éleveur) pour le bloc de la fiche.
+ * Un animal peut avoir en plus une vraie fiche, comme une personne (persons.kind = 'animal', pets.person_id) :
+ * son nom, son sexe, sa naissance, son décès et ses parents viennent alors de cette fiche (c'est elle qui fait foi),
+ * et l'animal entre dans l'arbre, les événements, les photos, les sources… comme n'importe quelle fiche.
  */
 
 const PET_SPECIES = ['chien' => 'Chien', 'chat' => 'Chat', 'cheval' => 'Cheval, poney, âne', 'lapin' => 'Lapin', 'rongeur' => 'Rongeur (cochon d’Inde, hamster…)', 'oiseau' => 'Oiseau',
@@ -49,6 +52,121 @@ function pet_clean(array $d): array
     return $out;
 }
 
+/** Les faits tirés de la fiche complète (nom, sexe, naissance, décès), pour les animaux qui en ont une */
+function pet_facts(PDO $pdo, array $personIds): array
+{
+    $ids = array_values(array_unique(array_filter(array_map('intval', $personIds))));
+    if (!$ids) { return []; }
+    $in = implode(',', array_fill(0, count($ids), '?'));
+    $s = $pdo->prepare("SELECT id, first_name, middle_name, last_name, gender, living_status FROM persons WHERE id IN ($in)"); $s->execute($ids);
+    $out = [];
+    foreach ($s->fetchAll() as $r) {
+        $out[(int) $r['id']] = ['name' => trim(implode(' ', array_filter([$r['first_name'], $r['middle_name'], $r['last_name']], static fn($v) => trim((string) $v) !== ''))), 'first_name' => (string) $r['first_name'],
+            'sex' => $r['gender'] === 'male' ? 'M' : ($r['gender'] === 'female' ? 'F' : ''), 'deceased' => $r['living_status'] === 'deceased'];
+    }
+    $e = $pdo->prepare("SELECT e.person_id, upper(t.gedcom_tag) AS tag, e.date_text, COALESCE(pl.name, '') AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
+        WHERE e.scope='person' AND e.person_id IN ($in) AND upper(t.gedcom_tag) IN ('BIRT', 'DEAT') ORDER BY e.id"); $e->execute($ids);
+    foreach ($e->fetchAll() as $r) {
+        $k = $r['tag'] === 'BIRT' ? 'birth' : 'death'; $pid = (int) $r['person_id'];
+        if (!isset($out[$pid]) || isset($out[$pid][$k . '_date'])) { continue; }
+        $out[$pid][$k . '_date'] = (string) $r['date_text']; $out[$pid][$k . '_place'] = (string) $r['place'];
+    }
+    return $out;
+}
+
+/** La fiche d'animal, avec ce que dit sa fiche complète (qui fait foi) */
+function pet_overlay(array $d, ?array $f): array
+{
+    if (!$f) { return $d; }
+    if ($f['name'] !== '') { $d['name'] = $f['name']; }
+    if ($f['sex'] !== '') { $d['sex'] = $f['sex']; }
+    foreach (['birth_date', 'birth_place', 'death_date', 'death_place'] as $k) { if (($f[$k] ?? '') !== '') { $d[$k] = $f[$k]; } }
+    $d['deceased'] = !empty($d['deceased']) || $f['deceased'] || ($d['death_date'] ?? '') !== '';
+    return $d;
+}
+
+/** Les parents donnés sur les fiches complètes (familles) passent dans le pedigree, quand ils ont eux aussi une fiche d'animal */
+function pets_sync_parents(PDO $pdo): void
+{
+    static $done = false; if ($done) { return; } $done = true;
+    foreach (['sire_id' => 'male', 'dam_id' => 'female'] as $col => $g) {
+        $pdo->exec("UPDATE pets SET $col = COALESCE((SELECT pp.id FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN persons par ON par.id IN (f.partner1_id, f.partner2_id) JOIN pets pp ON pp.person_id=par.id
+            WHERE fc.child_id=pets.person_id AND par.gender='$g' AND pp.id<>pets.id ORDER BY fc.id LIMIT 1), $col) WHERE person_id IS NOT NULL");
+    }
+}
+
+/** Faire (ou mettre à jour) la fiche complète d'un animal : nom, sexe, vie, naissance, décès, parents qui ont une fiche */
+function pet_sync_person(PDO $pdo, int $petId, array $d, bool $create = false): int
+{
+    $s = $pdo->prepare('SELECT person_id FROM pets WHERE id=?'); $s->execute([$petId]);
+    $pid = (int) $s->fetchColumn();
+    if ($pid && !person_exists($pdo, $pid)) { $pid = 0; }
+    if (!$pid && !$create) { return 0; }
+    $name = trim((string) ($d['name'] ?? '')) ?: trim((string) ($d['call_name'] ?? '')) ?: trim((string) ($d['registered_name'] ?? '')) ?: 'Animal sans nom';
+    $gender = ($d['sex'] ?? '') === 'M' ? 'male' : (($d['sex'] ?? '') === 'F' ? 'female' : 'unknown');
+    if (!$pid) {
+        $pdo->prepare("INSERT INTO persons(first_name, last_name, gender, living_status, kind) VALUES(?, '', ?, ?, 'animal')")->execute([$name, $gender, !empty($d['deceased']) ? 'deceased' : 'unknown']);
+        $pid = (int) $pdo->lastInsertId();
+        $pdo->prepare('UPDATE pets SET person_id=? WHERE id=?')->execute([$pid, $petId]);
+        log_change($pdo, 'person', $pid, 'create', 'Fiche complète de l’animal : ' . $name);
+    } else {
+        // le nom écrit dans la fiche d'animal est le nom complet : on garde le nom de famille (l'affixe) de la fiche
+        $p = $pdo->prepare('SELECT first_name, middle_name, last_name FROM persons WHERE id=?'); $p->execute([$pid]); $cur = $p->fetch() ?: [];
+        $tail = trim(implode(' ', array_filter([$cur['middle_name'] ?? '', $cur['last_name'] ?? ''], static fn($v) => trim((string) $v) !== '')));
+        $first = $tail !== '' && str_ends_with($name, ' ' . $tail) ? trim(mb_substr($name, 0, mb_strlen($name) - mb_strlen($tail) - 1)) : $name;
+        $pdo->prepare("UPDATE persons SET first_name=?, gender=?, living_status=CASE WHEN ? THEN 'deceased' ELSE living_status END, kind='animal', updated_at=CURRENT_TIMESTAMP WHERE id=?")->execute([$first ?: $name, $gender, !empty($d['deceased']) ? 1 : 0, $pid]);
+    }
+    // naissance et décès : un événement de la fiche (créé, ou mis à jour s'il change)
+    foreach (['BIRT' => 'birth', 'DEAT' => 'death'] as $tag => $k) {
+        $date = trim((string) ($d[$k . '_date'] ?? '')); $place = trim((string) ($d[$k . '_place'] ?? ''));
+        if ($date === '' && $place === '') { continue; }
+        $t = $pdo->prepare("SELECT id FROM event_types WHERE scope='person' AND upper(gedcom_tag)=? ORDER BY is_custom, id LIMIT 1"); $t->execute([$tag]); $tid = (int) $t->fetchColumn();
+        if (!$tid) { continue; }
+        preg_match('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/', $date, $m); $year = isset($m[1]) ? (int) $m[1] : null;
+        $placeId = $place !== '' ? find_or_create_place($pdo, $place) : null;
+        $e = $pdo->prepare("SELECT e.id, e.date_text, e.place_id FROM events e WHERE e.scope='person' AND e.person_id=? AND e.event_type_id IN (SELECT id FROM event_types WHERE scope='person' AND upper(gedcom_tag)=?) ORDER BY e.id LIMIT 1"); $e->execute([$pid, $tag]);
+        if ($ev = $e->fetch()) {
+            if ((string) $ev['date_text'] !== $date || ((int) $ev['place_id'] !== (int) $placeId && $placeId)) { $pdo->prepare('UPDATE events SET date_text=?, year=?, place_id=COALESCE(?, place_id), updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$date, $year, $placeId, (int) $ev['id']]); }
+        } else {
+            $pdo->prepare("INSERT INTO events(scope, person_id, event_type_id, date_text, year, place_id) VALUES('person', ?, ?, ?, ?, ?)")->execute([$pid, $tid, $date, $year, $placeId]);
+        }
+    }
+    // parents qui ont une fiche complète : reliés dans l'arbre (le père à la place du père, la mère à la place de la mère)
+    foreach (['sire_id' => 'male', 'dam_id' => 'female'] as $col => $g) {
+        $parentPet = (int) ($d[$col] ?? 0); if (!$parentPet) { continue; }
+        $q = $pdo->prepare('SELECT person_id FROM pets WHERE id=?'); $q->execute([$parentPet]); $parentPerson = (int) $q->fetchColumn();
+        if (!$parentPerson || !person_exists($pdo, $parentPerson)) { continue; }
+        $cur = $pdo->prepare("SELECT par.id FROM family_children fc JOIN families f ON f.id=fc.family_id JOIN persons par ON par.id IN (f.partner1_id, f.partner2_id) WHERE fc.child_id=? AND par.gender=?"); $cur->execute([$pid, $g]);
+        $old = array_map('intval', $cur->fetchAll(PDO::FETCH_COLUMN));
+        if (in_array($parentPerson, $old, true)) { continue; }
+        foreach ($old as $o) { detach_parent_child($pdo, $o, $pid); }
+        add_parent_child($pdo, $parentPerson, $pid);
+    }
+    return $pid;
+}
+
+/** « Faire aussi une fiche complète » : l'animal devient une fiche comme une personne ; ses petits et parents qui en ont une y sont reliés */
+function pet_make_person(PDO $pdo, array $data): array
+{
+    $id = safe_int($data['id'] ?? 0);
+    $r = pet_row($pdo, $id); if (!$r) { throw new RuntimeException('Animal introuvable.'); }
+    $pid = pet_sync_person($pdo, $id, ['sire_id' => $r['sire_id'], 'dam_id' => $r['dam_id']] + $r['d'], true);
+    // ses petits qui ont déjà une fiche complète : reliés à lui
+    $k = $pdo->prepare('SELECT id, sire_id, dam_id, data_json FROM pets WHERE (sire_id=? OR dam_id=?) AND person_id IS NOT NULL'); $k->execute([$id, $id]);
+    foreach ($k->fetchAll() as $kid) { pet_sync_person($pdo, (int) $kid['id'], ['sire_id' => (int) $kid['sire_id'], 'dam_id' => (int) $kid['dam_id']] + (json_decode((string) $kid['data_json'], true) ?: [])); }
+    return ['person_id' => $pid];
+}
+
+/** La fiche d'animal d'une fiche complète (créée si besoin, pour un animal fait depuis « Nouvelle personne ») */
+function pet_of_person(PDO $pdo, int $personId, bool $create = false): int
+{
+    try { $s = $pdo->prepare('SELECT id FROM pets WHERE person_id=? ORDER BY id LIMIT 1'); $s->execute([$personId]); } catch (Throwable) { return 0; }
+    $id = (int) $s->fetchColumn();
+    if ($id || !$create) { return $id; }
+    $pdo->prepare('INSERT INTO pets(data_json, person_id) VALUES(?, ?)')->execute([json_encode(pet_clean([]), JSON_UNESCAPED_UNICODE), $personId]);
+    return (int) $pdo->lastInsertId();
+}
+
 function pet_title(array $d): string
 {
     $n = trim((string) ($d['name'] ?? '')) ?: trim((string) ($d['call_name'] ?? '')) ?: trim((string) ($d['registered_name'] ?? ''));
@@ -58,7 +176,9 @@ function pet_title(array $d): string
 /** Les animaux, pour la liste et les choix (père, mère) */
 function pets_list(PDO $pdo, array $q = []): array
 {
-    $rows = $pdo->query('SELECT id, sire_id, dam_id, data_json, updated_at FROM pets ORDER BY updated_at DESC, id DESC')->fetchAll();
+    pets_sync_parents($pdo);
+    $rows = $pdo->query('SELECT id, sire_id, dam_id, data_json, updated_at, person_id FROM pets ORDER BY updated_at DESC, id DESC')->fetchAll();
+    $facts = pet_facts($pdo, array_column($rows, 'person_id'));
     $media = heritage_media($pdo, 'pet', array_column($rows, 'id'));
     $needle = mb_strtolower(trim((string) ($q['q'] ?? '')));
     $species = (string) ($q['species'] ?? '');
@@ -69,7 +189,7 @@ function pets_list(PDO $pdo, array $q = []): array
     foreach ($rows as $r) { foreach (['sire_id', 'dam_id'] as $k) { if ((int) $r[$k]) { $kids[(int) $r[$k]] = ($kids[(int) $r[$k]] ?? 0) + 1; } } }
     $out = [];
     foreach ($rows as $r) {
-        $d = json_decode((string) $r['data_json'], true) ?: [];
+        $d = pet_overlay(json_decode((string) $r['data_json'], true) ?: [], $facts[(int) $r['person_id']] ?? null);
         if ($species !== '' && ($d['species'] ?? '') !== $species) { continue; }
         if ($owner && !in_array($owner, $people[(int) $r['id']] ?? [], true)) { continue; }
         $hay = mb_strtolower(implode(' ', [pet_title($d), $d['registered_name'] ?? '', $d['breed'] ?? '', $d['color'] ?? '', $d['microchip'] ?? '', $d['registration'] ?? '', $d['breeder'] ?? '', $d['affix'] ?? '', implode(' ', array_column($d['owners'] ?? [], 'name'))]));
@@ -78,18 +198,21 @@ function pets_list(PDO $pdo, array $q = []): array
         $out[] = ['id' => $id, 'title' => pet_title($d), 'registered_name' => $d['registered_name'] ?? '', 'species' => $d['species'] ?? '', 'species_label' => PET_SPECIES[$d['species'] ?? ''] ?? '',
             'breed' => $d['breed'] ?? '', 'sex' => $d['sex'] ?? '', 'color' => $d['color'] ?? '', 'birth_date' => $d['birth_date'] ?? '', 'death_date' => $d['death_date'] ?? '', 'deceased' => !empty($d['deceased']),
             'owners' => array_values(array_filter(array_map(static fn($o) => $o['name'] ?? '', $d['owners'] ?? []))), 'sire_id' => (int) $r['sire_id'], 'dam_id' => (int) $r['dam_id'],
-            'offspring' => $kids[$id] ?? 0, 'titles' => count($d['titles'] ?? []), 'media' => array_slice($media[$id] ?? [], 0, 1), 'media_count' => count($media[$id] ?? []), 'updated_at' => $r['updated_at']];
+            'offspring' => $kids[$id] ?? 0, 'titles' => count($d['titles'] ?? []), 'person_id' => isset($facts[(int) $r['person_id']]) ? (int) $r['person_id'] : 0, 'media' => array_slice($media[$id] ?? [], 0, 1), 'media_count' => count($media[$id] ?? []), 'updated_at' => $r['updated_at']];
     }
     return $out;
 }
 
 function pet_row(PDO $pdo, int $id): ?array
 {
-    $s = $pdo->prepare('SELECT id, sire_id, dam_id, data_json FROM pets WHERE id=?'); $s->execute([$id]);
+    pets_sync_parents($pdo);
+    $s = $pdo->prepare('SELECT id, sire_id, dam_id, data_json, person_id FROM pets WHERE id=?'); $s->execute([$id]);
     $r = $s->fetch();
     if (!$r) { return null; }
-    $d = json_decode((string) $r['data_json'], true) ?: [];
-    return ['id' => (int) $r['id'], 'sire_id' => (int) $r['sire_id'], 'dam_id' => (int) $r['dam_id'], 'd' => $d];
+    $pid = (int) $r['person_id'];
+    $f = $pid ? (pet_facts($pdo, [$pid])[$pid] ?? null) : null;
+    $d = pet_overlay(json_decode((string) $r['data_json'], true) ?: [], $f);
+    return ['id' => (int) $r['id'], 'sire_id' => (int) $r['sire_id'], 'dam_id' => (int) $r['dam_id'], 'd' => $d, 'person_id' => $f ? $pid : 0];
 }
 
 /** Un animal en bref (pour le pedigree, les parents, les petits) */
@@ -99,7 +222,7 @@ function pet_brief(?array $r, array $media = []): ?array
     $d = $r['d'];
     return ['id' => $r['id'], 'title' => pet_title($d), 'registered_name' => $d['registered_name'] ?? '', 'sex' => $d['sex'] ?? '', 'breed' => $d['breed'] ?? '', 'color' => $d['color'] ?? '',
         'birth_date' => $d['birth_date'] ?? '', 'death_date' => $d['death_date'] ?? '', 'registration' => $d['registration'] ?? '', 'titles' => array_values(array_filter(array_map(static fn($t) => $t['title'] ?? '', $d['titles'] ?? []))),
-        'sire_id' => $r['sire_id'], 'dam_id' => $r['dam_id'], 'sire_name' => $d['sire_name'] ?? '', 'dam_name' => $d['dam_name'] ?? '', 'photo' => $media[$r['id']][0] ?? null];
+        'sire_id' => $r['sire_id'], 'dam_id' => $r['dam_id'], 'person_id' => $r['person_id'] ?? 0, 'sire_name' => $d['sire_name'] ?? '', 'dam_name' => $d['dam_name'] ?? '', 'photo' => $media[$r['id']][0] ?? null];
 }
 
 /** Les ancêtres d'un animal sur n générations : id → bref (pour le pedigree et la consanguinité) */
@@ -126,13 +249,12 @@ function pet_detail(PDO $pdo, int $id): array
     if (!$r) { throw new RuntimeException('Animal introuvable.'); }
     $d = pet_clean($r['d']);
     // petits (et l'autre parent de chaque portée), frères et sœurs
-    $kids = [];
-    $s = $pdo->prepare('SELECT id, sire_id, dam_id, data_json FROM pets WHERE sire_id=? OR dam_id=? ORDER BY id'); $s->execute([$id, $id]);
-    foreach ($s->fetchAll() as $k) { $kids[] = ['id' => (int) $k['id'], 'sire_id' => (int) $k['sire_id'], 'dam_id' => (int) $k['dam_id'], 'd' => json_decode((string) $k['data_json'], true) ?: []]; }
+    $s = $pdo->prepare('SELECT id FROM pets WHERE sire_id=? OR dam_id=? ORDER BY id'); $s->execute([$id, $id]);
+    $kids = array_values(array_filter(array_map(static fn($k) => pet_row($pdo, (int) $k), $s->fetchAll(PDO::FETCH_COLUMN))));
     $sibs = [];
     if ($r['sire_id'] || $r['dam_id']) {
-        $s = $pdo->prepare('SELECT id, sire_id, dam_id, data_json FROM pets WHERE id<>? AND ((sire_id>0 AND sire_id=?) OR (dam_id>0 AND dam_id=?)) ORDER BY id'); $s->execute([$id, $r['sire_id'], $r['dam_id']]);
-        foreach ($s->fetchAll() as $k) { $sibs[] = ['id' => (int) $k['id'], 'sire_id' => (int) $k['sire_id'], 'dam_id' => (int) $k['dam_id'], 'd' => json_decode((string) $k['data_json'], true) ?: []]; }
+        $s = $pdo->prepare('SELECT id FROM pets WHERE id<>? AND ((sire_id>0 AND sire_id=?) OR (dam_id>0 AND dam_id=?)) ORDER BY id'); $s->execute([$id, $r['sire_id'], $r['dam_id']]);
+        $sibs = array_values(array_filter(array_map(static fn($k) => pet_row($pdo, (int) $k), $s->fetchAll(PDO::FETCH_COLUMN))));
     }
     $others = [];
     foreach ($kids as $k) { foreach (['sire_id', 'dam_id'] as $p) { if ($k[$p] && $k[$p] !== $id) { $others[$k[$p]] = true; } } }
@@ -140,7 +262,7 @@ function pet_detail(PDO $pdo, int $id): array
     $media = heritage_media($pdo, 'pet', array_merge([$id], array_column($kids, 'id'), array_column($sibs, 'id'), array_keys($others)));
     $ownerIds = array_values(array_unique(array_filter(array_column($d['owners'], 'person_id'))));
     $people = $ownerIds ? collection_people($pdo, $ownerIds) : [];
-    return ['id' => $id, 'title' => pet_title($d), 'data' => $d, 'species' => PET_SPECIES, 'ancestors' => pet_ancestors($pdo, $id, 5),
+    return ['id' => $id, 'title' => pet_title($d), 'data' => $d, 'person_id' => $r['person_id'], 'species' => PET_SPECIES, 'ancestors' => pet_ancestors($pdo, $id, 5),
         'offspring' => array_map(static fn($k) => pet_brief($k, $media), $kids), 'siblings' => array_map(static fn($k) => pet_brief($k, $media), $sibs),
         'mates' => array_values(array_map(static fn($o) => pet_brief($o, $media), $otherRows)),
         'people' => array_map(static fn($p) => ['id' => (int) $p['id'], 'name' => full_name($p)], $people), 'media' => $media[$id] ?? [],
@@ -177,11 +299,13 @@ function save_pet(PDO $pdo, array $data): array
         $pdo->prepare('INSERT INTO pets(data_json, sire_id, dam_id) VALUES(?,?,?)')->execute([$json, $d['sire_id'] ?: null, $d['dam_id'] ?: null]);
         $id = (int) $pdo->lastInsertId();
     }
+    pet_sync_person($pdo, $id, $d, !empty($data['make_person']));
     $pdo->prepare('DELETE FROM pet_people WHERE pet_id=?')->execute([$id]);
     $ins = $pdo->prepare('INSERT OR IGNORE INTO pet_people(pet_id, person_id, role) VALUES(?,?,?)');
     foreach ($d['owners'] as $o) { if ($o['person_id']) { $ins->execute([$id, $o['person_id'], $o['role'] ?: 'propriétaire']); } }
     log_change($pdo, 'meta', 0, ($data['id'] ?? 0) ? 'update' : 'create', 'Animal enregistré : ' . pet_title($d));
-    return ['id' => $id, 'title' => pet_title($d)];
+    $q = $pdo->prepare('SELECT person_id FROM pets WHERE id=?'); $q->execute([$id]);
+    return ['id' => $id, 'title' => pet_title($d), 'person_id' => (int) $q->fetchColumn()];
 }
 
 function delete_pet(PDO $pdo, array $data): array
@@ -201,9 +325,27 @@ function delete_pet(PDO $pdo, array $data): array
     }
     heritage_delete_media_links($pdo, 'pet', $id);
     $pdo->prepare('DELETE FROM pet_people WHERE pet_id=?')->execute([$id]);
+    // sa fiche complète aussi, si on le demande (sinon elle reste, comme une fiche sans fiche d'animal)
+    $pid = (int) ($r['person_id'] ?? 0);
     $pdo->prepare('DELETE FROM pets WHERE id=?')->execute([$id]);
+    if ($pid && !empty($data['with_person']) && person_exists($pdo, $pid)) { delete_person($pdo, ['id' => $pid]); }
     log_change($pdo, 'meta', 0, 'delete', 'Animal supprimé (n°' . $id . ')');
     return ['ok' => true];
+}
+
+/** Pour l'arbre (en option) : les animaux de chaque maître */
+function pets_by_owner(PDO $pdo, array $personIds): array
+{
+    $ids = array_values(array_filter(array_map('intval', $personIds)));
+    if (!$ids) { return []; }
+    try { $s = $pdo->prepare('SELECT pp.person_id AS owner, pp.role, p.id, p.data_json, p.person_id FROM pet_people pp JOIN pets p ON p.id=pp.pet_id WHERE pp.person_id IN (' . implode(',', array_fill(0, count($ids), '?')) . ') ORDER BY p.id'); $s->execute($ids); }
+    catch (Throwable) { return []; }
+    $rows = $s->fetchAll(); $facts = pet_facts($pdo, array_column($rows, 'person_id')); $out = [];
+    foreach ($rows as $r) {
+        $d = pet_overlay(json_decode((string) $r['data_json'], true) ?: [], $facts[(int) $r['person_id']] ?? null);
+        $out[(int) $r['owner']][] = ['id' => (int) $r['id'], 'title' => pet_title($d), 'species' => $d['species'] ?? '', 'role' => (string) $r['role'], 'person_id' => isset($facts[(int) $r['person_id']]) ? (int) $r['person_id'] : 0];
+    }
+    return $out;
 }
 
 /** Pour la fiche d'une personne : ses animaux (propriétaire, éleveur…) */
