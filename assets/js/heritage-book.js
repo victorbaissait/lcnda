@@ -41,7 +41,8 @@
         const sel = (name, opts) => `<select name="${name}">${opts.map(([v, l]) => `<option value="${v}" ${String(c[name]) === v ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
         return `<section class="maintenance-panel h-book">
   <h3>Livre de famille — livret narratif</h3>
-  <p>Choisis la branche, les parties du livre et leur ordre (coche, glisse ⠿ ou ↑ ↓), ce que montre chaque fiche, l’allure, puis le format. Tes réglages sont gardés pour la prochaine fois.</p>
+  <div class="h-book-studio"><div><b>📐 Mise en page, façon InDesign</b><span>Pages, gabarits, calques, textes, formes, images, nuancier, dégradés, habillage, Pathfinder… À partir de la famille, d’un design ou d’une page blanche ; enregistré, exporté en PDF.</span></div><button type="button" class="button" data-open-layout-studio>Ouvrir l’atelier de mise en page</button></div>
+  <p>Ou, plus simple : choisis la branche, les parties du livre et leur ordre (coche, glisse ⠿ ou ↑ ↓), ce que montre chaque fiche, l’allure, puis le format. Tes réglages sont gardés pour la prochaine fois.</p>
   <form id="family-book-form" class="h-book-form" novalidate>
     <fieldset><legend>1. La branche</legend><div class="form-grid">
       <label>Qui <select name="scope"><option value="all" ${c.scope === 'all' ? 'selected' : ''}>toute la base</option><option value="ancestors" ${c.scope === 'ancestors' ? 'selected' : ''}>les ancêtres de…</option><option value="descendants" ${c.scope === 'descendants' ? 'selected' : ''}>les descendants de…</option><option value="both" ${c.scope === 'both' ? 'selected' : ''}>ancêtres et descendants de…</option></select></label>

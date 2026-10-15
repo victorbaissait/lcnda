@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 42;
+const SCHEMA_VERSION = 43;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -63,6 +63,7 @@ function migration_steps(): array
         40 => 'schema_v40',
         41 => 'schema_v41',
         42 => 'schema_v42',
+        43 => 'schema_v43',
     ];
 }
 
@@ -1973,6 +1974,19 @@ function schema_v42(PDO $pdo): void
         subtitle TEXT NOT NULL DEFAULT '',
         icon TEXT NOT NULL DEFAULT '📒',
         color TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+}
+
+/** 📐 Atelier de mise en page : documents (livres) et designs (modèles) faits de pages, gabarits, calques… */
+function schema_v43(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS layout_documents (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
+        is_design INTEGER NOT NULL DEFAULT 0,
         data_json TEXT NOT NULL DEFAULT '{}',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
