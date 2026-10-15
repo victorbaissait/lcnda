@@ -229,6 +229,10 @@ function world_reference(): ?PDO
  * au même format que geo-world. Refabriqué seulement si la liste des fichiers change. Pendant la fabrication
  * (~1 min au premier lancement), les autres requêtes ne l'attendent pas : pas de suggestions mondiales en attendant.
  */
+/** Fichiers de pays livrés qui ne sont pas un pays à eux seuls : leur vrai pays, et la région à écrire par défaut */
+const WORLD_PACK_COUNTRY = ['QC' => 'CA', 'QO' => 'OM'];
+const WORLD_PACK_STATE = ['QC' => 'Québec'];
+
 function world_reference_from_countries(): ?string
 {
     if (getenv('GENEALOGY_SKIP_REFERENCE') === '1') { return null; } // tests rapides
@@ -239,7 +243,8 @@ function world_reference_from_countries(): ?string
     ksort($byCc);
     $dir = DATA_DIR . '/cache';
     if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { return null; }
-    $sig = substr(sha1(implode('|', array_map(static fn($f) => basename($f) . ':' . filesize($f), $byCc))), 0, 12);
+    // « v2| » : le Québec et Oman rangés sous leur vrai pays (Canada, Oman) — un ancien secours est refait
+    $sig = substr(sha1('v2|' . implode('|', array_map(static fn($f) => basename($f) . ':' . filesize($f), $byCc))), 0, 12);
     $target = $dir . '/reference-world-pays-' . $sig . '.sqlite';
     if (is_file($target)) { return $target; }
     $lock = fopen($target . '.lock', 'c');
@@ -265,13 +270,17 @@ function world_reference_from_countries(): ?string
                 if (!reference_gunzip($gz, $tmp)) { @unlink($tmp); continue; }
                 $src = new PDO('sqlite:' . $tmp, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
                 if (!$src->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='geo_places'")->fetchColumn()) { $src = null; continue; }
-                $name = (string) ($catalogue[$cc]['name'] ?? $src->query("SELECT country FROM geo_places WHERE country<>'' LIMIT 1")->fetchColumn() ?: $cc);
-                $country->execute([$cc, $name]);
+                // certains fichiers ne sont pas un pays : le Québec (QC) est une province du Canada, QO est Oman (OM)
+                $iso = WORLD_PACK_COUNTRY[$cc] ?? $cc;
+                $name = (string) ($catalogue[$iso]['name'] ?? $catalogue[$cc]['name'] ?? $src->query("SELECT country FROM geo_places WHERE country<>'' LIMIT 1")->fetchColumn() ?: $cc);
+                $name = trim((string) preg_replace('/\s*\(hors [^)]*\)/u', '', $name)); // « Canada (hors Québec) » → « Canada »
+                $country->execute([$iso, $name]);
+                $defaultState = WORLD_PACK_STATE[$cc] ?? '';
                 $db->beginTransaction();
                 foreach ($src->query('SELECT geoname_id, name, state, latitude, longitude, population, feature_code FROM geo_places WHERE latitude IS NOT NULL AND longitude IS NOT NULL') as $r) {
                     $key = world_search_key((string) $r['name']);
                     if ($key === '') { continue; }
-                    $insert->execute([$r['geoname_id'] ?: $fake--, $r['name'], $key, (string) $r['state'], $cc, $r['latitude'], $r['longitude'], (int) $r['population'], (string) $r['feature_code']]);
+                    $insert->execute([$r['geoname_id'] ?: $fake--, $r['name'], $key, (string) $r['state'] ?: $defaultState, $iso, $r['latitude'], $r['longitude'], (int) $r['population'], (string) $r['feature_code']]);
                 }
                 $db->commit();
                 $src = null;

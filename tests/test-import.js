@@ -257,6 +257,9 @@ async function download(s, base, action) {
 
   await step('villes du monde : suggestion, saisie à la main, village inconnu', async () => {
     const dir = path.join(tmp, 'G');
+    // les villes du monde viennent des fichiers des pays livrés (ou du répertoire mondial s'il est téléchargé) : pas en mode rapide
+    process.env.GENEALOGY_SKIP_REFERENCE = '0';
+    try {
     await withServer(dir, async (s, base) => {
       await upload(s, base, fs.readFileSync(ged), 'complet.ged');
       const h = { 'x-carnet-secret': s.secret };
@@ -275,6 +278,7 @@ async function download(s, base, action) {
       await add({ date_text: '1901', place_id: '', place_name: 'Wabag', country: 'Papouasie-Nouvelle-Guinée' });
       await add({ date_text: '1902', place_id: '', place_name: 'Yibab', country: 'Papouasie-Nouvelle-Guinée' });
     });
+    } finally { process.env.GENEALOGY_SKIP_REFERENCE = '1'; }
     const got = rows(path.join(dir, 'data', 'genealogy.sqlite'), "SELECT e.date_text d, p.name, p.country, p.latitude IS NOT NULL gps FROM events e JOIN places p ON p.id=e.place_id WHERE e.date_text IN ('1900','1901','1902') ORDER BY e.date_text");
     assert.deepEqual(got.map((r) => [r.d, r.name, r.country, r.gps]), [
       ['1900', 'Montréal', 'Canada', 1], ['1901', 'Wabag', 'Papouasie-Nouvelle-Guinée', 1], ['1902', 'Yibab', 'Papouasie-Nouvelle-Guinée', 0]]);
