@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 41;
+const SCHEMA_VERSION = 42;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -62,6 +62,7 @@ function migration_steps(): array
         39 => 'schema_v39',
         40 => 'schema_v40',
         41 => 'schema_v41',
+        42 => 'schema_v42',
     ];
 }
 
@@ -1961,4 +1962,19 @@ function schema_v41(PDO $pdo): void
     try { $ids = $pdo->query('SELECT id FROM pets WHERE person_id IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN); } catch (Throwable) { return; }
     if (!function_exists('pet_move_to_person')) { require_once __DIR__ . '/pets.php'; }
     foreach ($ids as $id) { pet_move_to_person($pdo, (int) $id); }
+}
+
+/** 📒 Fiches sur un sujet (onglet « Fiches ») : des pages faites de blocs */
+function schema_v42(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS topic_sheets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL DEFAULT '',
+        subtitle TEXT NOT NULL DEFAULT '',
+        icon TEXT NOT NULL DEFAULT '📒',
+        color TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
 }

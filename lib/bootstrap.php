@@ -12,6 +12,7 @@ require_once __DIR__ . '/employers.php';
 require_once __DIR__ . '/family_booklets.php';
 require_once __DIR__ . '/pets.php';
 require_once __DIR__ . '/boards.php'; // tableaux (façon Freeform) // livrets de famille
+require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/collections.php';

@@ -178,6 +178,12 @@ $nb = save_board($pdo, ['title' => 'Formes', 'data' => ['bg' => 'custom', 'bgCol
 $d2 = board_detail($pdo, $nb['id'])['data']; $it = array_column($d2['items'], null, 'id');
 $out['bd_new'] = [$d2['bgColor'], $d2['bgPattern'], $it['x']['underline'], $it['x']['list'], $it['x']['font'], $it['x']['align'], $it['y']['svgpath'], isset($it['y']['mask']), $it['y']['headEnd'], isset($it['z']['svgpath']), $it['z']['list'], count($it['t']['merges']), $it['m']['bw'], $it['m']['hard']];
 delete_board($pdo, ['id' => $nb['id']]);
+// fiches sur un sujet : blocs nettoyés, liens « javascript: » refusés, sorte inconnue ignorée
+$ts = save_topic_sheet($pdo, ['title' => 'Pologne', 'icon' => '🇵🇱', 'blocks' => [['type' => 'text', 'text' => '**gras**', 'width' => '7'], ['type' => 'links', 'rows' => [['label' => 'ok', 'url' => 'https://a.fr'], ['label' => 'mal', 'url' => 'javascript:alert(1)']]], ['type' => 'evil'], ['type' => 'screen', 'target' => 'x"><script>'], ['type' => 'people', 'ids' => [1, 1, 'a']]]]);
+$td = topic_sheet_detail($pdo, $ts['id']);
+$out['topic'] = [count($td['blocks']), $td['blocks'][0]['width'], count($td['blocks'][1]['rows']), $td['blocks'][2]['target'], $td['blocks'][3]['ids'], isset($td['people'][1]), count(topic_sheets_list($pdo))];
+delete_topic_sheet($pdo, ['id' => $ts['id']]);
+$out['topic'][] = count(topic_sheets_list($pdo));
 echo json_encode($out, JSON_UNESCAPED_UNICODE);
 `;
 
@@ -259,6 +265,7 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.deepEqual(out.pets, [['err', 'err', 'err'], 'autre', 1, 3, 1, 1, '<b>Kid</b>']);
     assert.deepEqual(out.pets_del, [0, 'Atlas']);
     assert.deepEqual(out.animals_sire, [true, true, 0, 1]);
+    assert.deepEqual(out.topic, [4, '12', 1, 'module:carte', [1], true, 1, 0]);
     assert.deepEqual(out.animals_move, [1, 0, 'Notes:Très doux|Sources:Carnet', '', 1, {cf_abc: 'A+'}]);
     assert.deepEqual(out.animals, ['animal', true, '12/04/2019', 'Minette', true, 'animal', true,
         "SELECT 1 FROM (SELECT * FROM persons WHERE kind='animal') p LEFT JOIN (SELECT * FROM persons WHERE kind='animal') c ON c.id=p.id WHERE (SELECT count(*) FROM (SELECT * FROM persons WHERE kind='animal') persons)>0", 0]);

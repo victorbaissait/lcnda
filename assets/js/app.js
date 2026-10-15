@@ -346,7 +346,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], graphiques: ['03 — VISUALISER', 'Graphiques'],
         carte: ['04 — LOCALISER', 'Carte'], listes: ['05 — INVENTORIER', 'Listes'],
         chronologie: ['06 — RACONTER', 'Chronologie'], recherche: ['07 — RECHERCHER', 'Recherche'],
-        enquetes: ['08 — ENQUÊTER', 'Enquêtes'], comparaison: ['09 — COMPARER', 'Comparaison'], maintenance: ['10 — VÉRIFIER', 'Maintenance'],
+        enquetes: ['08 — ENQUÊTER', 'Enquêtes'], fiches: ['08 — DOCUMENTER', 'Fiches'], comparaison: ['09 — COMPARER', 'Comparaison'], maintenance: ['10 — VÉRIFIER', 'Maintenance'],
     };
     const defaultMenuOrder = Object.keys(modules).filter(key=>key!=='jeu');
     const defaultDashboardBlocks = [['stats','Chiffres clés'],['research_progress','Bilan de recherche'],['upcoming','Cette semaine dans l’histoire familiale'],['today','Anniversaires du jour'],['saint_day','Prénom et saint du jour'],['reminders','Rappels'],['recent_changes','Dernières modifications'],['recent_deletions','Dernières suppressions'],['locked_people','Personnes verrouillées récemment'],['recent_people','Dernières fiches consultées'],['random_person','Personne au hasard'],['chosen_person','Personne choisie'],['person_quiz','Quiz personne'],['person_block','Bloc de fiche personne'],['web_search','Chercher sur internet'],['family_objects_widget','Objets de famille'],['family_memories_widget','Mémoire familiale'],['lineage_widget','Ascendants / descendants'],['random_media','Image au hasard'],['favorite_image','Image favorite'],['kinship_widget','Lien entre deux personnes'],['favorites','Personnes favorites'],['work','Travail à suivre'],['completion','Personnes à compléter'],['persons_without_sources','Personnes sans source'],['events_without_sources','Événements sans source'],['events_without_media','Événements sans média'],['recent_media','Derniers médias ajoutés'],['media_unlinked','Médias non rattachés'],['media_to_transcribe','Médias à transcrire'],['media_to_identify','Médias à identifier'],['signatures_to_compare','Signatures à comparer'],['places_to_complete','Communes à compléter'],['branches_less_documented','Branches les moins documentées'],['couples_without_marriage','Couples sans mariage'],['children_missing_parents','Enfants sans parents complets'],['consistency_issues','Incohérences et conflits'],['baptisms_without_sponsors','Baptêmes sans parrain/marraine'],['sosa_missing_near','SOSA manquants proches'],['battue_towns','Communes à explorer'],['battues_priority','Battues prioritaires'],['sources_to_check','Sources à vérifier'],['archive_favorites','Archives favorites'],['daily_research','Liste de travail quotidienne'],['reread_items','À relire'],['sosa_progress','Progression SOSA'],['duplicates','Doublons probables'],['labels','Étiquettes'],['map_overview','Carte globale'],['branch_map','Carte d’une branche'],['random_person_map','Carte d’une personne'],['person_timeline','Timeline d’une personne'],['quick_stat','Stat rapide'],['session_goal','Objectif de session'],['coverage','Couverture de la base'],['places','Lieux les plus présents']];
@@ -1043,7 +1043,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $$('[data-ws-all],[data-ws-none]',root).forEach(button=>button.addEventListener('click',()=>{const list=document.getElementById(button.dataset.wsAll||button.dataset.wsNone);$$('input[type="checkbox"]',list).forEach(input=>{input.checked=!!button.dataset.wsAll;});}));
     }
     // l'onglet « Animaux » est caché tant qu'on ne l'a pas montré (Apparence → Ordre du menu principal)
-    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');}catch(_){l=['animaux'];}return l;}
+    // « Animaux » et « Fiches » sont cachés tant que l'ordre du menu n'a pas été réglé une fois
+    function menuHiddenKeys(){let l=[];try{l=JSON.parse(localStorage.getItem('genealogie-menu-hidden')||'[]');if(!localStorage.getItem('genealogie-menu-animaux')&&!l.includes('animaux'))l.push('animaux');if(!localStorage.getItem('genealogie-menu-fiches')&&!l.includes('fiches'))l.push('fiches');}catch(_){l=['animaux','fiches'];}return l;}
     // onglet « Animaux » montré : « Personnes » ne liste que les personnes, « Animaux » que les animaux (la même fiche, à part)
     const animalsTabOn=()=>!menuHiddenKeys().includes('animaux');
     function mapHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-map-hidden')||'[]');}catch(_){return[];}}
@@ -1642,6 +1643,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if (module === 'chronologie') await renderTimeline(renderToken);
             if (module === 'recherche') await renderResearch(renderToken);
             if (module === 'enquetes') await renderInvestigations(renderToken);
+            if (module === 'fiches') await window.LCNDA_EXT?.fiches?.render?.(renderToken);
             if (module === 'comparaison') await renderComparison(renderToken);
             if (module === 'maintenance') await renderMaintenance(renderToken);
             if(renderToken!==state.workspaceToken)return;
@@ -1771,6 +1773,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if (state.module === 'chronologie') renderTimelineSidebar(content, footer);
         if (state.module === 'recherche') renderResearchSidebar(content, footer);
         if (state.module === 'enquetes') renderInvestigationsSidebar(content, footer);
+        if (state.module === 'fiches') window.LCNDA_EXT?.fiches?.sidebar?.(content, footer);
         if (state.module === 'comparaison') renderComparisonSidebar(content, footer);
         if (state.module === 'maintenance') renderMaintenanceSidebar(content, footer);
     }
@@ -10925,7 +10928,7 @@ ${backupSectionHtml()}
             }
             const list=$(`#${button.dataset.orderSave}`);if(!list)return;
             const rows=$$('.order-row',list),keys=rows.map(row=>row.dataset.orderKey);
-            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));localStorage.setItem('genealogie-menu-animaux','1');
+            if(button.dataset.orderSave==='menu-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-menu-order',JSON.stringify(keys));localStorage.setItem('genealogie-menu-hidden',JSON.stringify(hidden));localStorage.setItem('genealogie-menu-animaux','1');localStorage.setItem('genealogie-menu-fiches','1');
                 const own=customTabs();if(own.some(t=>!!t.hidden!==hidden.includes(t.id))){own.forEach(t=>{t.hidden=hidden.includes(t.id);});try{localStorage.setItem('genealogie-custom-tabs',JSON.stringify(own));}catch(_){}}applyMenuOrder();renderDesignTools();toast('Ordre du menu enregistré.');return;}
             if(button.dataset.orderSave==='list-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-list-order',JSON.stringify(keys));localStorage.setItem('genealogie-list-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Ordre des listes enregistré.');return;}
             if(button.dataset.orderSave==='dashboard-widget-catalog-order'){const hidden=rows.filter(row=>!$('.order-visible input',row)?.checked).map(row=>row.dataset.orderKey);localStorage.setItem('genealogie-dashboard-widget-catalog-order',JSON.stringify(keys));localStorage.setItem('genealogie-dashboard-widget-catalog-hidden',JSON.stringify(hidden));renderSidebar();renderDesignTools();toast('Bibliothèque de widgets enregistrée.');return;}

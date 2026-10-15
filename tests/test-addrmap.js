@@ -64,7 +64,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 let out;
 try { out = JSON.parse(r.stdout.slice(r.stdout.indexOf('{'))); } catch (_) { console.error(r.stdout, r.stderr); process.exit(1); }
 const checks = [
-  ['structure à jour (n°41)', () => assert.equal(out.version, 41)],
+  ['structure à jour (n°42)', () => assert.equal(out.version, 42)],
   ['noms de rues et numéros comparables (« R. de la Seine » = « rue de la Seine », « 3 bis » = « 3B »)', () => assert.deepEqual(out.keys, ['rue seine', 'rue seine', '3b', '3b', ['12 bis', 'rue Haute']])],
   ['commune trouvée par son code INSEE, années des dépouillements, adresses rassemblées', () => assert.deepEqual(out.data, ['77533', [1906, 1921], 5, 0, true])],
   ['BAN du département lue en local : seulement la commune ; placement automatique', () => assert.deepEqual(out.import, [5, 3, 2])],
