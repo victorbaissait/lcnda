@@ -326,7 +326,63 @@
                 onSave?.(k);
             }});
     }
-    Object.assign(ext.boardKit, {parsePath, absPath, pathStr, shapeSegs, fitSegs, openComposer});
+    /* ═════════ La plume (comme dans Photoshop) : tracer une forme avec des points et des courbes de Bézier ═════════
+     * clic : point d'angle · cliquer-glisser : point arrondi (poignées symétriques) · clic sur le premier point : forme fermée
+     * glisser un point : le déplacer · glisser une poignée : la courbe (⌥ / Alt : poignées indépendantes)
+     * ⌥ / Alt + clic sur un point : angle ↔ arrondi · double-clic sur un point : le supprimer · un nouveau tracé dans la forme : un trou */
+    function penEditor(svg, onChange = () => {}) {
+        let paths = [{nodes: [], closed: false}], drag = null, sel = null; // sel = [indice du tracé, indice du point]
+        const cur = () => paths[paths.length - 1];
+        const pt = e => { const r = svg.getBoundingClientRect(); return [Math.round((e.clientX - r.left) / r.width * 1000) / 10, Math.round((e.clientY - r.top) / r.height * 1000) / 10]; };
+        const segD = (a, b) => (!a.h2 && !b.h1) ? ` L${b.x} ${b.y}` : ` C${+(a.x + (a.h2?.[0] || 0)).toFixed(1)} ${+(a.y + (a.h2?.[1] || 0)).toFixed(1)} ${+(b.x + (b.h1?.[0] || 0)).toFixed(1)} ${+(b.y + (b.h1?.[1] || 0)).toFixed(1)} ${b.x} ${b.y}`;
+        const pathD = P => { const n = P.nodes; if (!n.length) return ''; let d = `M${n[0].x} ${n[0].y}`; for (let i = 1; i < n.length; i++) d += segD(n[i - 1], n[i]); if (P.closed && n.length > 2) d += segD(n[n.length - 1], n[0]) + ' Z'; return d; };
+        const result = () => paths.filter(P => P.closed && P.nodes.length > 2).map(pathD).join(' ');
+        function draw() {
+            const live = paths.map(pathD).join(' ');
+            const nodes = paths.flatMap((P, pi) => P.nodes.map((n, ni) => ({n, pi, ni, first: ni === 0 && !P.closed && pi === paths.length - 1 && P.nodes.length > 2})));
+            const handles = nodes.filter(({pi, ni}) => sel && sel[0] === pi && Math.abs(sel[1] - ni) <= 1 || (pi === paths.length - 1 && !cur().closed && ni === cur().nodes.length - 1)).flatMap(({n, pi, ni}) => ['h1', 'h2'].filter(h => n[h]).map(h => ({n, pi, ni, h})));
+            svg.innerHTML = `<defs><pattern id="pen-grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M10 0H0V10" fill="none" stroke="#dfe3e8" stroke-width=".3"/></pattern></defs><rect width="100" height="100" fill="url(#pen-grid)"/>
+                <path d="${live}" fill="#2a7de1" fill-opacity=".25" fill-rule="evenodd" stroke="#1d3557" stroke-width=".6"/>
+                ${handles.map(({n, h}) => `<line x1="${n.x}" y1="${n.y}" x2="${n.x + n[h][0]}" y2="${n.y + n[h][1]}" stroke="#888" stroke-width=".35"/>`).join('')}
+                ${handles.map(({n, pi, ni, h}) => `<circle cx="${n.x + n[h][0]}" cy="${n.y + n[h][1]}" r="1.4" fill="#fff" stroke="#d0021b" stroke-width=".4" data-ph="${pi}:${ni}:${h}" style="cursor:move"/>`).join('')}
+                ${nodes.map(({n, pi, ni, first}) => `<rect x="${n.x - 1.4}" y="${n.y - 1.4}" width="2.8" height="2.8" fill="${sel && sel[0] === pi && sel[1] === ni ? '#1d3557' : first ? '#ffd166' : '#fff'}" stroke="#1d3557" stroke-width=".4" data-pn="${pi}:${ni}" style="cursor:${first ? 'pointer' : 'move'}"><title>${first ? 'Fermer la forme' : 'Point'}</title></rect>`).join('')}`;
+            onChange();
+        }
+        svg.addEventListener('pointerdown', e => {
+            e.preventDefault(); svg.setPointerCapture(e.pointerId);
+            const [x, y] = pt(e), hd = e.target.closest?.('[data-ph]'), nd = e.target.closest?.('[data-pn]');
+            if (hd) { const [pi, ni, h] = hd.dataset.ph.split(':'); drag = {kind: 'handle', n: paths[+pi].nodes[+ni], h, free: e.altKey}; sel = [+pi, +ni]; return; }
+            if (nd) {
+                const [pi, ni] = nd.dataset.pn.split(':').map(Number), P = paths[pi], n = P.nodes[ni];
+                if (pi === paths.length - 1 && !P.closed && ni === 0 && P.nodes.length > 2) { P.closed = true; sel = null; draw(); return; } // fermer
+                if (e.altKey) { if (n.h1 || n.h2) { n.h1 = n.h2 = null; draw(); return; } drag = {kind: 'newhandle', n}; sel = [pi, ni]; return; } // angle ↔ arrondi
+                drag = {kind: 'move', n, x0: x, y0: y, nx: n.x, ny: n.y}; sel = [pi, ni]; draw(); return;
+            }
+            if (cur().closed) paths.push({nodes: [], closed: false}); // la forme est fermée : un nouveau tracé (un trou s'il est dedans)
+            const n = {x, y, h1: null, h2: null}; cur().nodes.push(n); sel = [paths.length - 1, cur().nodes.length - 1];
+            drag = {kind: 'newhandle', n}; draw();
+        });
+        svg.addEventListener('pointermove', e => {
+            if (!drag) return; const [x, y] = pt(e);
+            if (drag.kind === 'move') { drag.n.x = +(drag.nx + x - drag.x0).toFixed(1); drag.n.y = +(drag.ny + y - drag.y0).toFixed(1); }
+            if (drag.kind === 'newhandle') { const dx = +(x - drag.n.x).toFixed(1), dy = +(y - drag.n.y).toFixed(1); if (Math.hypot(dx, dy) < 1) return; drag.n.h2 = [dx, dy]; drag.n.h1 = [-dx, -dy]; }
+            if (drag.kind === 'handle') { const dx = +(x - drag.n.x).toFixed(1), dy = +(y - drag.n.y).toFixed(1); drag.n[drag.h] = [dx, dy]; const o = drag.h === 'h1' ? 'h2' : 'h1'; if (!drag.free && !e.altKey && drag.n[o]) { const L = Math.hypot(...drag.n[o]); const k = L / (Math.hypot(dx, dy) || 1); drag.n[o] = [+(-dx * k).toFixed(1), +(-dy * k).toFixed(1)]; } }
+            draw();
+        });
+        const end = () => { drag = null; };
+        svg.addEventListener('pointerup', end); svg.addEventListener('pointercancel', end);
+        svg.addEventListener('dblclick', e => { const nd = e.target.closest?.('[data-pn]'); if (!nd) return; const [pi, ni] = nd.dataset.pn.split(':').map(Number); paths[pi].nodes.splice(ni, 1); if (paths[pi].nodes.length < 3) paths[pi].closed = false; if (!paths[pi].nodes.length && paths.length > 1) paths.splice(pi, 1); sel = null; draw(); });
+        draw();
+        return {
+            path: result, count: () => paths.filter(P => P.closed && P.nodes.length > 2).length, open: () => !cur().closed && cur().nodes.length > 0,
+            close: () => { if (cur().nodes.length > 2) { cur().closed = true; sel = null; draw(); } },
+            newPath: () => { if (cur().nodes.length) { if (cur().nodes.length > 2) cur().closed = true; paths.push({nodes: [], closed: false}); sel = null; draw(); } },
+            undo: () => { const P = cur(); if (P.closed) P.closed = false; else if (P.nodes.length) P.nodes.pop(); else if (paths.length > 1) { paths.pop(); } sel = null; draw(); },
+            clear: () => { paths = [{nodes: [], closed: false}]; sel = null; draw(); },
+            delSel: () => { if (!sel) return; const [pi, ni] = sel; paths[pi]?.nodes.splice(ni, 1); if ((paths[pi]?.nodes.length || 0) < 3 && paths[pi]) paths[pi].closed = false; sel = null; draw(); },
+        };
+    }
+    Object.assign(ext.boardKit, {parsePath, absPath, pathStr, shapeSegs, fitSegs, openComposer, penEditor});
 
     /* ═════════ Maintenance → Réglages des tableaux ═════════ */
     let tab = 'colors';

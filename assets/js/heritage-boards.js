@@ -1074,27 +1074,25 @@
         /** Créer sa forme : en traçant (traits et courbes), à partir d'un dessin du tableau, ou à partir d'une image */
         function shapeMaker(onDone, fromDraw = null) {
             const draws = fromDraw || selItems().filter(i => i.type === 'draw');
-            let pts = [], curves = false, imgMask = '', mode = draws.length ? 'draw' : 'trace';
+            let pen = null, imgMask = '', mode = draws.length ? 'draw' : 'trace';
             const drawPath = () => { const bb = bbox(draws); if (!bb) return ''; const s0 = 100 / Math.max(bb.w, bb.h, 1), ox = (100 - bb.w * s0) / 2, oy = (100 - bb.h * s0) / 2;
                 return draws.map(d => { const sx = d.w / (d.vw || d.w), sy = d.h / (d.vh || d.h); const P0 = (d.points || []).map(q => [+(ox + (d.x + q[0] * sx - bb.x) * s0).toFixed(1), +(oy + (d.y + q[1] * sy - bb.y) * s0).toFixed(1)]); return P0.length > 2 ? smooth(P0) + ' Z' : ''; }).join(' '); };
-            const tracePath = () => pts.length < 3 ? '' : (curves ? smooth([...pts, pts[0]]) : 'M' + pts.map(q => q.join(' ')).join(' L')) + ' Z';
-            const preview = () => { const d = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : ''; return mode === 'image' ? (imgMask ? `<span class="h-bk-shmask" style="width:200px;height:200px;-webkit-mask-image:url(${imgMask});mask-image:url(${imgMask})"></span>` : '<p class="muted">Choisis une image.</p>') : `<svg viewBox="0 0 100 100" width="200" height="200"><path d="${d}" fill="#2a7de1" fill-opacity=".8" stroke="#1d3557" stroke-width="1"/></svg>`; };
+            const tracePath = () => pen?.path() || '';
+            const preview = () => { const d = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : ''; return mode === 'image' ? (imgMask ? `<span class="h-bk-shmask" style="width:200px;height:200px;-webkit-mask-image:url(${imgMask});mask-image:url(${imgMask})"></span>` : '<p class="muted">Choisis une image.</p>') : `<svg viewBox="0 0 100 100" width="200" height="200"><path d="${d}" fill="#2a7de1" fill-opacity=".8" ${mode === 'trace' ? 'fill-rule="evenodd"' : ''} stroke="#1d3557" stroke-width="1"/></svg>`; };
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Créer une forme', wide: true, submitLabel: 'Enregistrer la forme',
-                body: `<div class="h-bd-maker"><div class="h-bd-makertabs">${[['trace', '✏️ En traçant'], ['draw', '✍︎ À partir de mon dessin'], ['image', '🖼 À partir d’une image']].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-on' : ''}" data-mk="${k}">${l}</button>`).join('')}<button type="button" data-mkfrom>🧩 À partir d’une forme</button></div>
-                    <div class="h-bd-makerbody"><div class="h-bd-makerpane" data-mkpane="trace"><p class="muted">Clique pour poser les points de la forme ; elle se ferme toute seule.</p><svg class="h-bd-tracer" viewBox="0 0 100 100" data-tracer><rect width="100" height="100" fill="#f6f8fa"/><path data-trp fill="#2a7de1" fill-opacity=".35" stroke="#1d3557" stroke-width=".8"/><g data-trdots></g></svg>
-                        <div class="h-bd-row"><label class="checkbox-line"><input type="checkbox" data-mkcurves> <span>arrondir en courbes</span></label><button type="button" class="h-bt" data-mkundo>↶ dernier point</button><button type="button" class="h-bt" data-mkclear>Effacer</button></div></div>
+                body: `<div class="h-bd-maker"><div class="h-bd-makertabs">${[['trace', '✒️ Plume (tracé)'], ['draw', '✍︎ À partir de mon dessin'], ['image', '🖼 À partir d’une image']].map(([k, l]) => `<button type="button" class="${mode === k ? 'is-on' : ''}" data-mk="${k}">${l}</button>`).join('')}<button type="button" data-mkfrom>🧩 À partir d’une forme</button></div>
+                    <div class="h-bd-makerbody"><div class="h-bd-makerpane" data-mkpane="trace"><details class="h-bd-penhelp" open><summary>Comment tracer avec la plume</summary><ul class="muted"><li><strong>Clic</strong> : un point d’angle (trait droit).</li><li><strong>Cliquer-glisser</strong> : un point arrondi ; tire pour régler la courbe.</li><li><strong>Clic sur le premier point</strong> (jaune) : la forme se ferme.</li><li>Glisser un point pour le <strong>déplacer</strong> ; glisser une poignée (rond rouge) pour <strong>courber</strong> ; avec <kbd>⌥</kbd> / <kbd>Alt</kbd>, les deux poignées deviennent indépendantes.</li><li><kbd>⌥</kbd> / <kbd>Alt</kbd> + clic sur un point : angle ↔ arrondi ; <strong>double-clic</strong> : le supprimer.</li><li>Une forme fermée, puis un nouveau tracé à l’intérieur : un <strong>trou</strong>.</li></ul></details>
+                        <svg class="h-bd-tracer" viewBox="0 0 100 100" data-tracer></svg>
+                        <div class="h-bd-row"><button type="button" class="h-bt" data-pen="close" title="Fermer le tracé en cours">◯ Fermer</button><button type="button" class="h-bt" data-pen="newPath" title="Commencer un autre tracé (un trou s’il est dans la forme)">＋ Nouveau tracé</button><button type="button" class="h-bt" data-pen="delSel" title="Supprimer le point choisi">✕ Point</button><button type="button" class="h-bt" data-pen="undo" title="Annuler le dernier point">↶ Annuler</button><button type="button" class="h-bt" data-pen="clear">Tout effacer</button></div></div>
                     <div class="h-bd-makerpane" data-mkpane="draw" hidden><p class="muted">${draws.length ? `${draws.length} dessin${draws.length > 1 ? 's' : ''} choisi${draws.length > 1 ? 's' : ''} sur le tableau : chaque trait devient une partie remplie de la forme.` : 'Choisis d’abord un ou plusieurs dessins à main levée sur le tableau (outil ✍︎), puis reviens ici.'}</p></div>
                     <div class="h-bd-makerpane" data-mkpane="image" hidden><p class="muted">Une image PNG avec un fond transparent donne sa silhouette. Sinon, coche : ce qui est sombre devient la forme.</p><input type="file" accept="image/*" data-mkfile><label class="checkbox-line"><input type="checkbox" data-mkdark checked> <span>le sombre devient la forme (images sans transparence)</span></label></div>
                     <div class="h-bd-makerprev"><div data-mkprev>${preview()}</div><label>Nom de la forme<input data-mkname value="Ma forme" maxlength="60"></label></div></div></div>`,
                 onOpen: d => {
-                    const prev = () => { d.querySelector('[data-mkprev]').innerHTML = preview(); const tp = d.querySelector('[data-trp]'); tp.setAttribute('d', tracePath() || (pts.length ? 'M' + pts.map(q => q.join(' ')).join(' L') : '')); d.querySelector('[data-trdots]').innerHTML = pts.map(q => `<circle cx="${q[0]}" cy="${q[1]}" r="1.4" fill="#d0021b"/>`).join(''); };
+                    const prev = () => { d.querySelector('[data-mkprev]').innerHTML = preview(); };
                     const show = () => { d.querySelectorAll('[data-mk]').forEach(x => x.classList.toggle('is-on', x.dataset.mk === mode)); d.querySelectorAll('[data-mkpane]').forEach(x => { x.hidden = x.dataset.mkpane !== mode; }); prev(); };
                     d.querySelector('.h-bd-makertabs').addEventListener('click', e => { if (e.target.closest('[data-mkfrom]')) { d.close(); KIT().openComposer?.({base: shapeKind, onSave: onDone}); return; } const k = e.target.closest('[data-mk]'); if (k) { mode = k.dataset.mk; show(); } });
-                    const tr = d.querySelector('[data-tracer]');
-                    tr.addEventListener('click', e => { const r = tr.getBoundingClientRect(); pts.push([+((e.clientX - r.left) / r.width * 100).toFixed(1), +((e.clientY - r.top) / r.height * 100).toFixed(1)]); prev(); });
-                    d.querySelector('[data-mkcurves]').addEventListener('change', e => { curves = e.target.checked; prev(); });
-                    d.querySelector('[data-mkundo]').addEventListener('click', () => { pts.pop(); prev(); });
-                    d.querySelector('[data-mkclear]').addEventListener('click', () => { pts = []; prev(); });
+                    pen = KIT().penEditor?.(d.querySelector('[data-tracer]'), () => { if (d.querySelector('[data-mkprev]')) prev(); });
+                    d.querySelectorAll('[data-pen]').forEach(bt => bt.addEventListener('click', () => pen?.[bt.dataset.pen]?.()));
                     const readImg = async () => {
                         const f = d.querySelector('[data-mkfile]').files[0]; if (!f) return;
                         const url = URL.createObjectURL(f), im = await new Promise((res, rej) => { const i0 = new Image(); i0.onload = () => res(i0); i0.onerror = rej; i0.src = url; });
@@ -1114,10 +1112,10 @@
                     // un chemin trop long (grand dessin) : moins de décimales, puis on refuse
                     if (dpath.length > 29000) dpath = dpath.replace(/-?\d+\.\d+/g, m => String(Math.round(Number(m))));
                     if (dpath.length > 29000) { toast('Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits).', 'error'); return false; }
-                    if (mode !== 'image' && !dpath) { toast(mode === 'draw' ? 'Choisis d’abord un dessin sur le tableau.' : 'Pose au moins trois points.', 'error'); return false; }
+                    if (mode !== 'image' && !dpath) { toast(mode === 'draw' ? 'Choisis d’abord un dessin sur le tableau.' : 'Ferme la forme : au moins trois points, puis clic sur le premier (ou « ◯ Fermer »).', 'error'); return false; }
                     if (mode === 'image' && !imgMask) { toast('Choisis une image.', 'error'); return false; }
                     const p = JSON.parse(JSON.stringify(P())), k = 'my_' + Date.now().toString(36);
-                    p.customShapes.push({k, n: name, c: 'mine', d: dpath, eo: false, mask: mode === 'image' ? imgMask : ''});
+                    p.customShapes.push({k, n: name, c: 'mine', d: dpath, eo: mode === 'trace' && (pen?.count() || 0) > 1, mask: mode === 'image' ? imgMask : ''});
                     if (!p.quickShapes.includes(k)) p.quickShapes.push(k);
                     KIT().savePrefs?.(p);
                     toast(`Forme « ${name} » créée : elle est dans « Mes formes ».`);
