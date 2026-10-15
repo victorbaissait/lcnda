@@ -415,7 +415,8 @@
         ext.personBlocks[key] = (index, detail) => {
             const a = detail.heritage?.animal; if (detail.person?.kind !== 'animal' || !a) return '';
             const s0 = secsOf(a).find(x => x.k === sk);
-            return A().card(index, s0?.title || title, '', s0?.body || '<p class="muted">Rien pour l’instant.</p>', '', `<button type="button" class="button small secondary" data-pet-editfor="${a.id}" data-pet-jump="${pe}" title="Modifier">✎</button>`);
+            // le titre peut contenir du HTML déjà échappé (« consanguinité : 0 % ») ; span-12 : largeur réglable comme tout bloc
+            return A().card(index, '\u0001', '', s0?.body || '<p class="muted">Rien pour l’instant.</p>', 'span-12', `<button type="button" class="button small secondary" data-pet-editfor="${a.id}" data-pet-jump="${pe}" title="Modifier">✎</button>`).replace('\u0001', s0?.title || esc(title));
         };
     });
     // l'identité d'un animal sur sa fiche complète : celle de sa fiche d'animal
