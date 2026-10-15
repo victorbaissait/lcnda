@@ -166,6 +166,86 @@
             list.splice(i, 1); saveProfiles(list); toast('Mise en page supprimée.'); rerender();
         });
     });
+    /* ═══════════════ 🗃️ TOUS MES RÉGLAGES (Maintenance → Apparence, après les mises en page) ═══════════════ */
+    // Tous les réglages de l'app (« genealogie-… ») : apparence, mais aussi listes, statistiques, onglets, widgets,
+    // tableaux, animaux, raccourcis… Pas ce qui est propre à cet ordinateur ni ce qui vise une fiche précise de la base.
+    const ALL_PROFILES_KEY = 'genealogie-settings-profiles';
+    const ALL_SKIP = ['genealogie-auto-backup-lock', 'genealogie-baissait-ui-v2', 'genealogie-last-route', PROFILES_KEY, ALL_PROFILES_KEY, 'genealogie-site-defaults-applied',
+        'genealogie-dashboard-recent-people', 'genealogie-sosa-root', 'genealogie-sosa-root-name', 'genealogie-sosa-map', 'genealogie-daboville-root', 'genealogie-daboville-root-name', 'genealogie-daboville-map', 'genealogie-atelier-timers'];
+    const isAllKey = key => /^genealogie-[a-z0-9-]{1,80}$/.test(key) && !ALL_SKIP.includes(key) && !/-\d+$/.test(key);
+    function currentAll() {
+        const settings = {};
+        for (let i = 0; i < localStorage.length; i++) { const key = localStorage.key(i); if (key && isAllKey(key)) settings[key] = localStorage.getItem(key); }
+        return settings;
+    }
+    const allProfiles = () => { try { const p = JSON.parse(ls(ALL_PROFILES_KEY, '[]')); return Array.isArray(p) ? p.filter(validProfile) : []; } catch (_) { return []; } };
+    const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast('Trop de réglages enregistrés pour la place disponible : supprimes-en un.', 'error'); return false; } };
+    const allSummary = s => { const n = Object.keys(s).length; return `${n} réglage${n > 1 ? 's' : ''}`; };
+    /** Remet un ensemble : ses réglages remplacent tous les réglages actuels (les autres reviennent à ceux de départ). */
+    async function applyAll(settings) {
+        const removed = [];
+        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && isAllKey(key) && !(key in settings)) { removed.push(key); lsDel(key); } }
+        const set = {};
+        Object.entries(settings).forEach(([key, value]) => { if (isAllKey(key) && typeof value === 'string') { set[key] = value; lsSet(key, value); } });
+        try {
+            const csrf = window.INSTALL_CSRF || S().csrf || '';
+            const r = await fetch('api.php?action=save_settings', {method: 'POST', headers: {'Content-Type': 'application/json', 'X-CSRF-Token': csrf}, body: JSON.stringify({set, remove: removed, csrf})});
+            if (!r.ok) throw new Error();
+        } catch (_) { toast('La base n’a pas pu enregistrer ces réglages : réessaie.', 'error'); return; }
+        location.reload();
+    }
+    // un fichier reçu : les mêmes précautions que pour une mise en page
+    const cleanAll = settings => Object.fromEntries(Object.entries(settings || {}).filter(([k, v]) => isAllKey(k) && safeLayoutValue(k, v)));
+    ext.designPanelsEnd.push(() => {
+        const list = allProfiles();
+        return `<section class="person-block-config h-layouts" id="h-allsets"><header><span class="eyebrow">TOUS LES RÉGLAGES</span><h3>Mes ensembles de réglages</h3><p>Garde <b>l’intégralité</b> des réglages de l’app sous un nom : l’Apparence, mais aussi les listes et leurs colonnes, les statistiques et onglets à soi, les widgets, les tableaux, les animaux, les livrets, les raccourcis, la recherche sur internet… Tu peux y revenir en un clic, ou les passer à un autre ordinateur avec un fichier. Ne sont pas gardés : tes données, ce qui vise une fiche précise (de cujus, exceptions d’une fiche) et ce qui est propre à cet ordinateur.</p></header>
+            <div class="h-layouts-save"><input type="text" id="h-allset-name" maxlength="60" placeholder="Nom de l’ensemble (ex. Mon app complète, Version élevage)"><button type="button" class="button small" data-h-allset-save>Enregistrer tous les réglages actuels</button><button type="button" class="button small secondary" data-h-allset-export-now>Exporter les réglages actuels</button><button type="button" class="button small secondary" data-h-allset-import>Importer un fichier…</button></div>
+            ${list.length ? `<ul class="h-layouts-list">${list.map((p, i) => `<li><div><strong>${esc(p.name)}</strong><small>${esc(allSummary(p.settings))}${p.saved ? ` · ${esc(new Date(p.saved).toLocaleDateString('fr-FR'))}` : ''}${p.from ? ` · reçu de ${esc(p.from)}` : ''}</small></div>
+                <span class="page-actions"><button type="button" class="button small" data-h-allset-apply="${i}">Appliquer</button><button type="button" class="button small secondary" data-h-allset-update="${i}" title="Remplacer par les réglages actuels">Mettre à jour</button><button type="button" class="button small secondary" data-h-allset-rename="${i}">Renommer</button><button type="button" class="button small secondary" data-h-allset-export="${i}">Exporter (fichier)</button><button type="button" class="button small secondary danger" data-h-allset-delete="${i}">Supprimer</button></span></li>`).join('')}</ul>` : '<p class="cell-muted">Aucun ensemble de réglages enregistré.</p>'}</section>`;
+    });
+    ext.afterDesign.push(() => {
+        const box = document.getElementById('h-allsets');
+        if (!box) return;
+        const rerender = () => A().renderMaintenance?.();
+        const nameInput = box.querySelector('#h-allset-name');
+        const fileOf = (name, saved, settings) => JSON.stringify({type: 'lcnda-reglages', version: 1, name, saved, settings}, null, 1);
+        const save = () => {
+            const name = nameInput.value.trim();
+            if (!name) { toast('Donne un nom à cet ensemble de réglages.', 'error'); nameInput.focus(); return; }
+            const list = allProfiles(), same = list.findIndex(p => p.name.toLowerCase() === name.toLowerCase());
+            if (same >= 0 && !confirm(`Un ensemble « ${list[same].name} » existe déjà. Le remplacer ?`)) return;
+            const entry = {name, saved: new Date().toISOString(), settings: currentAll()};
+            if (same >= 0) list[same] = entry; else list.push(entry);
+            if (saveAllProfiles(list)) { toast(`Ensemble « ${name} » enregistré.`); rerender(); }
+        };
+        box.querySelector('[data-h-allset-save]').addEventListener('click', save);
+        nameInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); save(); } });
+        box.querySelector('[data-h-allset-export-now]').addEventListener('click', () => { downloadText(`reglages-lcnda-${new Date().toISOString().slice(0, 10)}.lcnda-reglages.json`, fileOf('Mes réglages', new Date().toISOString(), currentAll())); toast('Fichier prêt : il s’importe ici, sur un autre ordinateur.'); });
+        box.querySelector('[data-h-allset-import]').addEventListener('click', async () => {
+            const text = await pickFile('.json,application/json');
+            if (text === null) return;
+            let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); }
+            // une mise en page (Apparence) s'importe aussi ici
+            if (!['lcnda-reglages', 'lcnda-mise-en-page'].includes(data?.type) || !validProfile(data)) return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error');
+            const settings = cleanAll(data.settings), ignored = Object.keys(data.settings).length - Object.keys(settings).length;
+            const list = allProfiles(); let name = String(data.name).slice(0, 60) || 'Réglages importés';
+            while (list.some(p => p.name === name)) name = `${name} (2)`;
+            list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings});
+            if (saveAllProfiles(list)) { toast(`Ensemble « ${name} » importé : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored} réglage(s) illisible(s) laissé(s) de côté)` : ''}`); rerender(); }
+        });
+        const at = (attr, fn) => box.querySelectorAll(`[${attr}]`).forEach(b => b.addEventListener('click', () => { const list = allProfiles(), i = Number(b.getAttribute(attr)); if (list[i]) fn(list, i, list[i]); }));
+        at('data-h-allset-apply', (list, i, p) => {
+            if (!confirm(`Appliquer l’ensemble « ${p.name} » ?\n\nTous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.`)) return;
+            toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings);
+        });
+        at('data-h-allset-update', (list, i, p) => { if (!confirm(`Remplacer « ${p.name} » par les réglages actuels ?`)) return; list[i] = {...p, saved: new Date().toISOString(), settings: currentAll()}; if (saveAllProfiles(list)) { toast('Ensemble mis à jour.'); rerender(); } });
+        at('data-h-allset-rename', async (list, i, p) => {
+            const name = ((await A().askText({title: 'Renommer l’ensemble', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'})) || '').trim().slice(0, 60);
+            if (!name) return; list[i] = {...p, name}; if (saveAllProfiles(list)) { toast('Ensemble renommé.'); rerender(); }
+        });
+        at('data-h-allset-export', (list, i, p) => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, p.settings)); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); });
+        at('data-h-allset-delete', (list, i, p) => { if (!confirm(`Supprimer l’ensemble « ${p.name} » ? (les réglages actuels ne changent pas)`)) return; list.splice(i, 1); if (saveAllProfiles(list)) { toast('Ensemble supprimé.'); rerender(); } });
+    });
     /* ═══════════════════════ 🎚️ RETOUCHE DES PHOTOS (visionneuse → « Retoucher ») ═══════════════════════ */
 
     const RT_SLIDERS = [

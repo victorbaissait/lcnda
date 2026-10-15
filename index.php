@@ -1095,7 +1095,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=57" defer></script>
+<script src="assets/js/heritage-more.js?v=58" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=17" defer></script>
 <script src="assets/js/heritage-av.js?v=7" defer></script>
@@ -1120,7 +1120,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=9" defer></script>
 <script src="assets/js/heritage-boards.js?v=21" defer></script>
 <script src="assets/js/heritage-dnd.js?v=5" defer></script>
-<script src="assets/js/heritage-studio.js?v=11" defer></script>
+<script src="assets/js/heritage-studio.js?v=12" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>
 <script src="assets/js/heritage-museum.js?v=7" defer></script>
 <script>
