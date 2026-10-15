@@ -235,6 +235,7 @@ try {
         'genealogy_fairs' => json_response(['fairs' => genealogy_fairs_data($pdo)]),
         'heritage_overview' => json_response(heritage_overview($pdo)),
         'heritage_place_search' => json_response(['places' => heritage_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
+        'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
         'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'placements' => json_response(['placements' => placements_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'kinds' => PLACEMENT_KINDS]),

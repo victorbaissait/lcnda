@@ -921,4 +921,40 @@
     ext.retouchDrawOp = rtDrawOp; // pour les essais
     document.addEventListener('click', e => { if (e.target.closest('#retouch-media')) openRetouch(); });
     ext.openRetouch = openRetouch;
+
+    /** Listes → Médias → « 🎚️ Retoucher » : une photo de l'app (les plus récentes, ou filtrées) ou une photo importée, puis la Retouche */
+    function pickRetouch() {
+        const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch(); };
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>Quelle photo retoucher ?</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
+            <p class="muted small">Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.</p>
+            <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
+        document.body.append(dlg);
+        dlg.addEventListener('close', () => dlg.remove());
+        dlg.querySelector('[data-x]').addEventListener('click', () => dlg.close());
+        let items = [], timer = 0, seq = 0;
+        const load = async () => {
+            const n = ++seq, grid = dlg.querySelector('[data-grid]');
+            try { items = (await api('image_pick', {q: dlg.querySelector('[data-q]').value.trim()})).media || []; } catch (e) { if (n === seq) grid.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; }
+            if (n !== seq) return;
+            grid.innerHTML = items.length ? items.map((m, i) => `<button type="button" class="h-rt-pick-item" data-i="${i}" title="${esc(m.title || m.filename)}"><img loading="lazy" alt="" src="media/${encodeURIComponent(m.thumbnail || m.filename)}"><span>${esc(m.title || m.filename)}</span></button>`).join('') : '<p class="muted">Aucune photo ne correspond. Importe-en une avec « 📥 Importer une photo ».</p>';
+        };
+        dlg.querySelector('[data-q]').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
+        dlg.querySelector('[data-grid]').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const m = items[+b.dataset.i]; dlg.close(); open(m); });
+        dlg.querySelector('[data-file]').addEventListener('change', async e => {
+            const f = e.target.files?.[0]; if (!f) return;
+            const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[a-z0-9]+$/i, '').slice(0, 300));
+            try {
+                const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
+                const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+                if (!r.ok || j.error) throw new Error(j.error || 'Import impossible.');
+                dlg.close(); toast('Photo importée dans les Médias.');
+                if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
+                open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image'});
+            } catch (err) { toast(err.message, 'error'); }
+        });
+        dlg.showModal(); load();
+    }
+    ext.pickRetouch = pickRetouch;
 })();

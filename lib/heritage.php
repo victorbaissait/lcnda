@@ -96,6 +96,15 @@ function heritage_media_search(PDO $pdo, string $q): array
     return $stmt->fetchAll();
 }
 
+/** Les photos à retoucher (Listes → Médias → « 🎚️ Retoucher ») : les plus récentes, ou celles qui répondent au filtre */
+function heritage_image_pick(PDO $pdo, string $q): array
+{
+    $stmt = $pdo->prepare("SELECT id, title, filename, thumbnail, media_type FROM media WHERE lower(media_type)='image' AND filename<>''
+        AND (?='' OR title LIKE ? COLLATE NOCASE OR document_reference LIKE ? COLLATE NOCASE OR filename LIKE ? COLLATE NOCASE) ORDER BY id DESC LIMIT 120");
+    $stmt->execute([$q, "%{$q}%", "%{$q}%", "%{$q}%"]);
+    return $stmt->fetchAll();
+}
+
 /**
  * Coordonnées d'un lieu écrit à la main (« Le Havre », « Québec, Canada », « Buenos Aires (Argentine) ») : lieu de la base
  * d'abord, puis villes du monde livrées avec l'application. Null si rien de sûr.

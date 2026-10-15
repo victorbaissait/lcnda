@@ -2595,3 +2595,15 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-fi-grid > .h-fi-divider { grid-column:1 / -1; }
 .h-fi-text a, .h-fi-links a { color:var(--blue, #0066cc); text-decoration:underline; }
 .h-fi-head h2 { font-size:clamp(28px, 4vw, 52px); }
+
+/* Listes → Médias → « 🎚️ Retoucher » : choisir la photo */
+.h-rt-pick { width: min(980px, 94vw); }
+.h-rt-pick-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.h-rt-pick-bar input[type=search] { flex: 1; min-width: 220px; }
+.h-rt-pick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; max-height: 60vh; overflow: auto; margin-top: 8px; }
+.h-rt-pick-item { display: flex; flex-direction: column; gap: 4px; padding: 6px; border: 1px solid var(--line, #ddd); border-radius: 8px; background: var(--surface, #fff); cursor: pointer; text-align: left; }
+.h-rt-pick-item:hover { border-color: var(--accent, #8a5a2b); }
+.h-rt-pick-item img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 5px; background: #0001; }
+.h-rt-pick-item span { font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.h-rt-pick > :not(.modal-head) { margin-left: 20px; margin-right: 20px; }
+.h-rt-pick > .h-rt-pick-grid { margin-bottom: 20px; }

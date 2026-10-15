@@ -274,5 +274,18 @@
         w.document.write(`<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(c.title)}</title><style>body{font-family:Georgia,serif;margin:28px;color:#111}h1{margin:0}main{display:flex;flex-wrap:wrap;gap:2%}section{break-inside:avoid;margin-bottom:14px}h2{width:100%;border-bottom:2px solid #111;margin:18px 0 8px}h3{font-size:15px;margin:6px 0}img{max-width:100%;max-height:340px;margin:4px 4px 0 0}blockquote{margin:0;padding-left:12px;border-left:3px solid #999;font-style:italic}ol,ul{padding-left:18px}.p{margin:2px 0}.p small{color:#666;margin-left:6px}</style></head><body><h1>${esc(c.icon || '')} ${esc(c.title)}</h1>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}<main>${body}</main><script>window.onload=()=>setTimeout(()=>print(),300)<\/script></body></html>`);
         w.document.close();
     }
+    /* ─── Listes → 📒 Fiches ─── */
+    ext.lists = ext.lists || {};
+    ext.lists.topic_sheets_list = async token => {
+        await loadList();
+        if (token !== S().workspaceToken || S().module !== 'listes') return;
+        const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
+        A().$('#workspace').innerHTML = `<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📒 Fiches</h2><p>Les fiches sur un sujet (onglet « Fiches ») : clique sur une fiche pour l’ouvrir.</p></div>
+                <div class="page-actions"><button type="button" class="button" data-fi-listnew>＋ Nouvelle fiche</button></div></header>
+            ${sheets.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée le</th></tr></thead><tbody>${sheets.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${esc(fmtDate(s.updated_at))}</td></tr>`).join('')}</tbody></table></div>` : A().empty('Aucune fiche pour l’instant : « ＋ Nouvelle fiche ».')}</section>`;
+        const ws = A().$('#workspace');
+        ws.querySelectorAll('[data-fi-listopen]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiListopen); A().setModule('fiches'); }));
+        ws.querySelector('[data-fi-listnew]').addEventListener('click', newSheet);
+    };
     ext.fichesInternals = {md}; // pour les essais
 })();

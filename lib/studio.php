@@ -56,16 +56,17 @@ function retouch_media(PDO $pdo, ?array $file, array $post): never
 {
     $id = safe_int($post['media_id'] ?? 0);
     // Un montage fait de zéro (Listes → Vidéos / Audios → « 🎬 Montage ») : un nouveau média, seul
-    if (!$id && in_array($post['kind'] ?? '', ['audio', 'video'], true)) {
+    // ou une photo importée pour être retouchée (Listes → Médias → « 🎚️ Retoucher »)
+    if (!$id && in_array($post['kind'] ?? '', ['audio', 'video', 'image'], true)) {
         $kind = (string) $post['kind'];
         try { $name = retouch_store_upload($file, $kind); } catch (RuntimeException $e) { json_response(['error' => $e->getMessage()], 422); }
         $duration = isset($post['duration']) && is_numeric($post['duration']) && (float) $post['duration'] > 0 ? round((float) $post['duration'], 2) : null;
-        $title = mb_substr(safe_text($post['title'] ?? ''), 0, 300) ?: ($kind === 'video' ? 'Montage vidéo' : 'Montage son') . ' du ' . date('d/m/Y');
+        $title = mb_substr(safe_text($post['title'] ?? ''), 0, 300) ?: ($kind === 'video' ? 'Montage vidéo' : ($kind === 'audio' ? 'Montage son' : 'Photo importée')) . ' du ' . date('d/m/Y');
         try {
-            $pdo->prepare("INSERT INTO media(title, media_type, filename, thumbnail) VALUES(?, ?, ?, '')")->execute([$title, $kind, $name]);
+            $pdo->prepare('INSERT INTO media(title, media_type, filename, thumbnail) VALUES(?, ?, ?, ?)')->execute([$title, $kind, $name, $kind === 'image' ? $name : '']);
             $newId = (int) $pdo->lastInsertId();
             try { $pdo->prepare('UPDATE media SET duration_seconds=? WHERE id=?')->execute([$duration, $newId]); } catch (Throwable $_) {}
-            log_change($pdo, 'media', $newId, 'create', 'Nouveau montage « ' . $title . ' »');
+            log_change($pdo, 'media', $newId, 'create', ($kind === 'image' ? 'Photo importée « ' : 'Nouveau montage « ') . $title . ' »');
         } catch (Throwable $e) { @unlink(MEDIA_DIR . '/' . $name); json_response(['error' => $e->getMessage()], 500); }
         json_response(['ok' => true, 'result' => ['mode' => 'new', 'media_id' => $newId, 'filename' => $name]]);
     }
