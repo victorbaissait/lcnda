@@ -45,14 +45,19 @@ function booklet_clean_design(array $g): array
     $out = [];
     foreach (['cover', 'cover_ink', 'page', 'ink', 'rule', 'title', 'accent'] as $k) { if (preg_match('/^#[0-9a-f]{6}$/i', (string) ($g[$k] ?? ''))) { $out[$k] = strtolower((string) $g[$k]); } }
     foreach (['font', 'title_font'] as $k) { $f = trim((string) ($g[$k] ?? '')); if ($f !== '' && preg_match('/^[\p{L}\p{N} ,\'"\-_.]{1,160}$/u', $f)) { $out[$k] = $f; } }
-    if (is_numeric($g['size'] ?? null)) { $out['size'] = max(11, min(24, (int) $g['size'])); }
-    if (is_numeric($g['title_size'] ?? null)) { $out['title_size'] = max(12, min(40, (int) $g['title_size'])); }
+    if (is_numeric($g['size'] ?? null)) { $out['size'] = max(8, min(60, (int) $g['size'])); }
+    if (is_numeric($g['title_size'] ?? null)) { $out['title_size'] = max(8, min(120, (int) $g['title_size'])); }
+    // image de couverture (une photo du livret) : en vignette ou en fond de la couverture
+    if (is_numeric($g['cover_media'] ?? null) && (int) $g['cover_media'] > 0) { $out['cover_media'] = (int) $g['cover_media']; }
+    if (in_array((string) ($g['cover_mode'] ?? ''), ['photo', 'bg'], true)) { $out['cover_mode'] = (string) $g['cover_mode']; }
     foreach (['layout' => ['2', '1'], 'frame' => ['double', 'single', 'none', 'thick'], 'corners' => ['square', 'round'], 'shadow' => ['yes', 'no'], 'preset' => ['bleu', 'vert', 'bordeaux', 'ancien', 'sobre', 'mine']] as $k => $allowed) {
         if (in_array((string) ($g[$k] ?? ''), $allowed, true)) { $out[$k] = (string) $g[$k]; }
     }
     $secs = ['cover', 'marriage', 'couple', 'children', 'others', 'mentions', 'transcription', 'notes', 'pages'];
     if (is_array($g['order'] ?? null)) { $out['order'] = array_values(array_unique(array_filter($g['order'], static fn($x) => in_array($x, $secs, true)))); }
     if (is_array($g['hidden'] ?? null)) { $out['hidden'] = array_values(array_unique(array_filter($g['hidden'], static fn($x) => in_array($x, $secs, true)))); }
+    // largeur de chaque partie (comme les widgets) : 1, 1/2, 1/3, 2/3, 1/4, 3/4
+    if (is_array($g['widths'] ?? null)) { $w = []; foreach ($g['widths'] as $k => $v) { if (in_array($k, $secs, true) && in_array((string) $v, ['12', '6', '4', '8', '3', '9'], true)) { $w[$k] = (string) $v; } } if ($w) { $out['widths'] = $w; } }
     return $out;
 }
 
@@ -74,6 +79,14 @@ function booklet_title(array $d): string
     return $couple !== '' ? 'Livret de ' . $couple : 'Livret de famille';
 }
 
+/** L'image de couverture choisie (sinon la première photo) */
+function booklet_cover(array $d, array $media): ?array
+{
+    $want = (int) ($d['design']['cover_media'] ?? 0);
+    foreach ($media as $m) { if ($want && (int) $m['id'] === $want) { return $m; } }
+    return $media[0] ?? null;
+}
+
 function booklets_list(PDO $pdo, string $q = ''): array
 {
     $rows = $pdo->query('SELECT * FROM family_booklets ORDER BY updated_at DESC, id DESC')->fetchAll();
@@ -87,7 +100,7 @@ function booklets_list(PDO $pdo, string $q = ''): array
         if ($needle !== '' && !str_contains($hay, $needle)) { continue; }
         $out[] = ['id' => (int) $r['id'], 'title' => $title, 'commune' => $d['commune'] ?? '', 'issued' => $d['issued'] ?? '', 'marriage_date' => $d['marriage_date'] ?? '',
             'children' => count($d['children'] ?? []), 'linked' => count(array_filter(booklet_slots($d), static fn($s) => ($s[2]['person_id'] ?? 0) > 0)),
-            'people' => count(booklet_slots($d)), 'media' => array_slice($media[(int) $r['id']] ?? [], 0, 3), 'media_count' => count($media[(int) $r['id']] ?? []), 'updated_at' => $r['updated_at']];
+            'people' => count(booklet_slots($d)), 'cover' => booklet_cover($d, $media[(int) $r['id']] ?? []), 'media' => array_slice($media[(int) $r['id']] ?? [], 0, 3), 'media_count' => count($media[(int) $r['id']] ?? []), 'updated_at' => $r['updated_at']];
     }
     return $out;
 }

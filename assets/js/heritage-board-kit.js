@@ -133,8 +133,11 @@
         pen: ['#111111', '#555555', '#d0021b', '#f5a623', '#f8e71c', '#7ed321', '#2a7de1', '#9013fe', '#ff6fb5', '#ffffff'],
         note: ['#fff3a3', '#ffd6a5', '#caffbf', '#bde0fe', '#e4c1f9', '#ffc6d9', '#f1f1f1'],
         bg: ['#ffffff', '#fbf6ea', '#f3f5f8', '#eef6ee', '#fdf0f4', '#1e2227', '#c9a46b'],
+        label: ['#111111', '#555555', '#d0021b', '#2a7de1', '#2b8a3e', '#c2185b', '#7b2cbf', '#ffffff'],
+        labelbg: ['transparent', '#ffffff', '#fff3a3', '#e8f0ff', '#eef6ee', '#fdf0f4', '#111111'],
+        labelborder: ['#111111', '#555555', '#d0021b', '#2a7de1', '#2b8a3e', '#c2185b'],
     };
-    const COLOR_CATS = [['fill', 'Fond des formes, étiquettes, dossiers'], ['stroke', 'Bord des formes et contour des médias'], ['text', 'Couleur du texte, des traits et flèches'], ['pen', 'Dessin à main levée'], ['note', 'Notes'], ['bg', 'Fond du tableau']];
+    const COLOR_CATS = [['fill', 'Fond des formes, étiquettes, dossiers'], ['stroke', 'Bord des formes et contour des médias'], ['text', 'Couleur du texte, des traits et flèches'], ['pen', 'Dessin à main levée'], ['note', 'Notes'], ['bg', 'Fond du tableau'], ['label', 'Légendes des traits : texte'], ['labelbg', 'Légendes des traits : fond du cadre'], ['labelborder', 'Légendes des traits : bord du cadre']];
     const PALETTE_PRESETS = {
         'Archives': {fill: ['transparent', '#f4ecd8', '#e9dcc0', '#d8c3a5', '#b08968', '#7f5539', '#9c6644', '#e6ccb2', '#ffffff'], stroke: ['transparent', '#3b2f2f', '#7f5539', '#b08968', '#9c6644', '#d8c3a5'], text: ['#2b2118', '#5c4033', '#7f5539', '#9c6644', '#8b0000', '#1f3a5f'], pen: ['#2b2118', '#5c4033', '#8b0000', '#1f3a5f', '#556b2f'], note: ['#f4ecd8', '#e9dcc0', '#efe3c8', '#e6ccb2'], bg: ['#fbf6ea', '#f4ecd8', '#efe6d2']},
         'Pastel': {fill: ['transparent', '#ffd6e0', '#ffefcf', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff', '#ffc6ff', '#ffffff'], stroke: ['transparent', '#6c757d', '#ffadad', '#ffd6a5', '#9bf6ff', '#a0c4ff', '#bdb2ff'], text: ['#343a40', '#6c757d', '#e5989b', '#6d6875', '#457b9d'], pen: ['#343a40', '#e5989b', '#457b9d', '#6d6875', '#b5838d'], note: ['#ffd6e0', '#ffefcf', '#fdffb6', '#caffbf', '#bdb2ff'], bg: ['#ffffff', '#fdf0f4', '#f1f7ff']},
@@ -144,7 +147,54 @@
     const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⬇ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['hyp', '❓ Pistes à vérifier (compteur)'], ['search', '🔍 Chercher dans le tableau'], ['layers', '🗂 Calques'], ['snapgrid', '🧲 Grille aimantée'], ['minimap', '🗺 Mini-carte'], ['present', '▶ Présenter'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']];
     const INSPECTOR = [['fill', 'Fond'], ['stroke', 'Bord / contour'], ['color', 'Couleur du texte ou du trait'], ['sw', 'Épaisseur et style du trait'], ['shape', 'Forme'], ['radius', 'Arrondi'], ['text', 'Taille et style du texte'], ['list', 'Puces et numéros'], ['font', 'Police'], ['heads', 'Pointes des flèches'], ['linepath', 'Forme du trait et légende'], ['table', 'Tableur'], ['brush', 'Pinceau'], ['title', 'Titre, étiquette, adresse'], ['preview', 'Aperçu vivant'], ['pshow', 'Fiche : ce qu’elle montre'], ['hyp', 'Piste : à vérifier, confirmée, fausse'], ['tl', 'Frise vivante'], ['map', 'Carte et repères'], ['connector', 'Liens tout prêts (frère de…)'], ['align', 'Aligner et répartir'], ['layer', 'Calque'], ['comments', 'Commentaires'], ['opacity', 'Opacité'], ['actions', 'Boutons (dupliquer, verrouiller…)']];
     const ADD = [['files', 'Des fichiers'], ['media', 'Un média de l’app'], ['web', 'D’ailleurs (web)'], ['person', 'Une fiche'], ['screen', 'Un écran de l’app'], ['widget', 'Un de mes widgets'], ['recueil', 'Un recueil'], ['tag', 'Une étiquette'], ['table', 'Un tableur'], ['folder', 'Un dossier'], ['tree', 'Un arbre automatique'], ['timeline', 'Une frise vivante'], ['map', 'Une carte'], ['frame', 'Un cadre (section)'], ['memo', 'Un mémo vocal'], ['import', 'Importer un tableau']];
-    const HEADS = ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail'];
+    // les réglages d'une légende de trait (panneau de droite), dans l'ordre voulu
+    const LEGEND = [['lbSize', 'Taille du texte'], ['lbFont', 'Police'], ['lbStyle', 'Gras, italique'], ['lbColor', 'Couleur du texte'], ['lbBg', 'Fond du cadre'], ['lbBorder', 'Bord du cadre'], ['lbBw', 'Épaisseur du bord'], ['lbPad', 'Marge dans le cadre'], ['lbRadius', 'Arrondi du cadre'], ['lbPos', 'Position le long du trait'], ['lbSide', 'Côté'], ['lbOffset', 'Écart avec le trait'], ['lbRotate', 'Suivre l’angle du trait']];
+    const HEADS = ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail',
+        'triangle_o', 'line_arrow', 'chevron2', 'cross', 'plus', 'star', 'heart', 'one', 'many', 'semicircle'];
+    /* Les pointes des traits : dessin (boîte 10 × 10, pointe vers la droite), point d'accroche, nom ; et les pointes à soi (réglages) */
+    const HEAD_NAMES = {none: 'aucune', triangle: '▶ triangle', stealth: '➤ flèche fine', open: '› ouverte', double: '⏩ double', half: '◣ demi-flèche', circle: '● rond', ring: '○ rond vide', dot: '• point', square: '■ carré', square_o: '□ carré vide', diamond: '◆ losange', diamond_o: '◇ losange vide', bar: '| barre', fork: '⋔ patte d’oie', tail: '» plumes',
+        triangle_o: '▷ triangle vide', line_arrow: '⟶ flèche longue', chevron2: '» double chevron', cross: '✕ croix', plus: '＋ plus', star: '★ étoile', heart: '♥ cœur', one: '‖ un (deux barres)', many: '⋲ plusieurs (pied de corbeau)', semicircle: '◗ demi-rond'};
+    const HEAD_REF = {triangle: 8, open: 8, stealth: 8, double: 8, half: 8, circle: 5, ring: 5, dot: 5, square: 5, square_o: 5, diamond: 5, diamond_o: 5, bar: 5, fork: 9, tail: 3,
+        triangle_o: 8, line_arrow: 9, chevron2: 8, cross: 5, plus: 5, star: 5, heart: 5, one: 7, many: 9, semicircle: 3};
+    const HEAD_SVG = {
+        triangle: c => `<path d="M0,0 L10,5 L0,10 z" fill="${c}"/>`,
+        open: c => `<path d="M1,1 L9,5 L1,9" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+        circle: c => `<circle cx="5" cy="5" r="4.2" fill="${c}"/>`,
+        square: c => `<rect x="1" y="1" width="8" height="8" fill="${c}"/>`,
+        diamond: c => `<path d="M0,5 L5,0 L10,5 L5,10 z" fill="${c}"/>`,
+        bar: c => `<rect x="4" y="0" width="2" height="10" fill="${c}"/>`,
+        stealth: c => `<path d="M0,0 L10,5 L0,10 L3,5 z" fill="${c}"/>`,
+        double: c => `<path d="M0,0 L5,5 L0,10 z M5,0 L10,5 L5,10 z" fill="${c}"/>`,
+        half: c => `<path d="M0,0 L10,5 L0,5 z" fill="${c}"/>`,
+        ring: c => `<circle cx="5" cy="5" r="3.6" fill="#fff" stroke="${c}" stroke-width="1.6"/>`,
+        dot: c => `<circle cx="5" cy="5" r="2.4" fill="${c}"/>`,
+        square_o: c => `<rect x="1.6" y="1.6" width="6.8" height="6.8" fill="#fff" stroke="${c}" stroke-width="1.6"/>`,
+        diamond_o: c => `<path d="M1,5 L5,1 L9,5 L5,9 z" fill="#fff" stroke="${c}" stroke-width="1.6"/>`,
+        fork: c => `<path d="M10,5 L1,0 M10,5 L1,5 M10,5 L1,10" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/>`,
+        tail: c => `<path d="M0,0 L4,5 L0,10 M3,0 L7,5 L3,10" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/>`,
+        triangle_o: c => `<path d="M1,1 L9,5 L1,9 z" fill="#fff" stroke="${c}" stroke-width="1.5" stroke-linejoin="round"/>`,
+        line_arrow: c => `<path d="M0,2.5 L10,5 L0,7.5 z" fill="${c}"/>`,
+        chevron2: c => `<path d="M0,1 L4,5 L0,9 M5,1 L9,5 L5,9" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
+        cross: c => `<path d="M2,2 L8,8 M8,2 L2,8" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round"/>`,
+        plus: c => `<path d="M5,1 V9 M1,5 H9" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round"/>`,
+        star: c => `<path d="M5,0 L6.2,3.4 L9.8,3.5 L7,5.7 L8,9.2 L5,7.2 L2,9.2 L3,5.7 L0.2,3.5 L3.8,3.4 z" fill="${c}"/>`,
+        heart: c => `<path d="M5,9 C1,6 0,4 1,2.2 C2.2,0.4 4.3,1 5,2.6 C5.7,1 7.8,0.4 9,2.2 C10,4 9,6 5,9 z" fill="${c}" transform="rotate(-90 5 5)"/>`,
+        one: c => `<path d="M5,0 V10 M8,0 V10" fill="none" stroke="${c}" stroke-width="1.5"/>`,
+        many: c => `<path d="M10,0 L1,5 L10,10 M1,5 H10 M3,0 V10" fill="none" stroke="${c}" stroke-width="1.4"/>`,
+        semicircle: c => `<path d="M3,0 A5,5 0 0 1 3,10 z" fill="${c}"/>`,
+    };
+    const customHead = (k, p) => ((p || prefs()).customHeads || []).find(h => h.k === k);
+    const headSvg = (k, c, p) => {
+        if (HEAD_SVG[k]) return HEAD_SVG[k](c);
+        const h = customHead(k, p); if (!h) return HEAD_SVG.triangle(c);
+        const s = 10 / (h.box || 100);
+        return `<g transform="rotate(${h.rot || 0} 5 5) scale(${s})"><path d="${h.d}" ${h.fill === false ? `fill="none" stroke="${c}" stroke-width="${(1.6 / s).toFixed(2)}" stroke-linejoin="round" stroke-linecap="round"` : `fill="${c}"`} ${h.eo ? 'fill-rule="evenodd"' : ''}/></g>`;
+    };
+    const headRef = (k, p) => HEAD_REF[k] ?? (customHead(k, p)?.ref ?? 8);
+    const headName = (k, p) => HEAD_NAMES[k] || (customHead(k, p) ? '✏️ ' + customHead(k, p).n : k);
+    const headExists = (k, p) => k === 'none' || !!HEAD_SVG[k] || !!customHead(k, p);
+    const allHeads = p => [...HEADS, ...((p || prefs()).customHeads || []).map(h => h.k)];
+    const headPreview = (k, p, c = '#333') => k === 'none' ? '<svg viewBox="0 0 44 12" width="44" height="12"><line x1="2" y1="6" x2="40" y2="6" stroke="#333" stroke-width="2"/></svg>' : `<svg viewBox="0 0 44 12" width="44" height="12" style="overflow:visible"><line x1="2" y1="6" x2="${34 - (10 - headRef(k, p))}" y2="6" stroke="${c}" stroke-width="2"/><g transform="translate(30,1)">${headSvg(k, c, p)}</g></svg>`;
     const DEFAULTS = () => ({
         palettes: [{id: 'p0', name: 'Couleurs de l’app', colors: JSON.parse(JSON.stringify(PALETTE0))}], palette: 'p0',
         heads: HEADS.slice(), headsHidden: [], headStart: 'none', headEnd: 'triangle',
@@ -155,7 +205,7 @@
         table: {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: 'Nom;Année;Lieu'},
         brushes: [], cmtWords: ['À vérifier', 'Question', 'Idée', 'Source ?', 'Important'],
         toolsOrder: TOOLS.map(t => t[0]), toolsHidden: [], headerOrder: HEADER.map(t => t[0]), headerHidden: [],
-        inspectorOrder: INSPECTOR.map(t => t[0]), inspectorHidden: [], addOrder: ADD.map(t => t[0]), addHidden: [],
+        inspectorOrder: INSPECTOR.map(t => t[0]), inspectorHidden: [], addOrder: ADD.map(t => t[0]), addHidden: [], legendOrder: LEGEND.map(t => t[0]), legendHidden: [],
     });
     const sortBy = (list, order) => [...list].sort((a, b) => { const i = order.indexOf(a), j = order.indexOf(b); return (i < 0 ? 1e3 : i) - (j < 0 ? 1e3 : j); });
     const clean = raw => {
@@ -168,13 +218,15 @@
             colors: Object.fromEntries(COLOR_CATS.map(([k]) => [k, (Array.isArray(x.colors[k]) ? x.colors[k] : PALETTE0[k]).filter(isColor).slice(0, 40)]))}));
         if (!p.palettes.length) p.palettes = d.palettes;
         if (!p.palettes.some(x => x.id === p.palette)) p.palette = p.palettes[0].id;
-        for (const k of ['heads', 'headsHidden', 'shapeCats', 'shapesHidden', 'quickShapes', 'toolsOrder', 'toolsHidden', 'headerOrder', 'headerHidden', 'inspectorOrder', 'inspectorHidden', 'addOrder', 'addHidden']) p[k] = (Array.isArray(p[k]) ? p[k] : d[k]).map(String).slice(0, 400);
+        for (const k of ['heads', 'headsHidden', 'shapeCats', 'shapesHidden', 'quickShapes', 'toolsOrder', 'toolsHidden', 'headerOrder', 'headerHidden', 'inspectorOrder', 'inspectorHidden', 'addOrder', 'addHidden', 'legendOrder', 'legendHidden']) p[k] = (Array.isArray(p[k]) ? p[k] : d[k]).map(String).slice(0, 400);
         p.cmtWords = (Array.isArray(p.cmtWords) ? p.cmtWords : d.cmtWords).map(w => String(w).trim().slice(0, 30)).filter(Boolean).slice(0, 30); if (!p.cmtWords.length) p.cmtWords = d.cmtWords;
-        p.heads = sortBy(HEADS, p.heads);
+        p.customHeads = (Array.isArray(p.customHeads) ? p.customHeads : []).filter(h => h && typeof h === 'object' && /^[MLHVCSQTAZmlhvcsqtazEe0-9.,\s+-]{1,30000}$/.test(String(h.d || ''))).slice(0, 100).map(h => ({k: 'myh_' + String(h.k || '').replace(/^myh_/, '').replace(/[^\w-]/g, '').slice(0, 30), n: String(h.n || 'Ma pointe').slice(0, 60),
+            d: String(h.d), box: Math.max(1, Math.min(1000, Number(h.box) || 100)), rot: [0, 90, 180, 270].includes(Number(h.rot)) ? Number(h.rot) : 0, fill: h.fill !== false, eo: !!h.eo, ref: Math.max(0, Math.min(10, Number(h.ref ?? 8)))})).filter(h => h.k !== 'myh_');
+        p.heads = sortBy(allHeads(p), p.heads);
         p.shapeCats = sortBy(CATS.map(c => c[0]), p.shapeCats);
         p.toolsOrder = sortBy(TOOLS.map(t => t[0]), p.toolsOrder); p.headerOrder = sortBy(HEADER.map(t => t[0]), p.headerOrder);
-        p.inspectorOrder = sortBy(INSPECTOR.map(t => t[0]), p.inspectorOrder); p.addOrder = sortBy(ADD.map(t => t[0]), p.addOrder);
-        if (!HEADS.includes(p.headStart)) p.headStart = 'none'; if (!HEADS.includes(p.headEnd)) p.headEnd = 'triangle';
+        p.inspectorOrder = sortBy(INSPECTOR.map(t => t[0]), p.inspectorOrder); p.addOrder = sortBy(ADD.map(t => t[0]), p.addOrder); p.legendOrder = sortBy(LEGEND.map(t => t[0]), p.legendOrder);
+        if (!allHeads(p).includes(p.headStart)) p.headStart = 'none'; if (!allHeads(p).includes(p.headEnd)) p.headEnd = 'triangle';
         p.shapeOrder = Object.fromEntries(Object.entries(p.shapeOrder && typeof p.shapeOrder === 'object' && !Array.isArray(p.shapeOrder) ? p.shapeOrder : {}).filter(([, v]) => Array.isArray(v)).map(([k, v]) => [k, v.map(String).slice(0, 500)]));
         p.customShapes = (Array.isArray(p.customShapes) ? p.customShapes : []).filter(s => s && typeof s === 'object' && (s.d || s.mask)).slice(0, 200).map(s => ({k: 'my_' + String(s.k || '').replace(/^my_/, '').replace(/[^\w-]/g, '').slice(0, 30), n: String(s.n || 'Ma forme').slice(0, 60), c: 'mine',
             d: /^[MLHVCSQTAZmlhvcsqtazEe0-9.,\s+-]{0,30000}$/.test(String(s.d || '')) ? String(s.d || '') : '', eo: !!s.eo, mask: /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(String(s.mask || '')) ? String(s.mask).slice(0, 400000) : '', tags: ''}));
@@ -200,7 +252,7 @@
     const shapesOf = (cat, p = prefs()) => { const l = allShapes(p).filter(s => s.c === cat); return sortBy(l.map(s => s.k), p.shapeOrder[cat] || []).map(k => l.find(s => s.k === k)); };
     const shapeByKey = (k, p = prefs()) => SHAPE_MAP[k] || p.customShapes.find(s => s.k === k);
     const shapeSvg = (s, size = 28) => s?.mask ? `<span class="h-bk-shmask" style="width:${size}px;height:${size}px;-webkit-mask-image:url(${s.mask});mask-image:url(${s.mask})"></span>` : `<svg viewBox="${-(s?.s || 100) * .04} ${-(s?.s || 100) * .04} ${(s?.s || 100) * 1.08} ${(s?.s || 100) * 1.08}" width="${size}" height="${size}"><path d="${s?.d || ''}" ${s?.eo ? 'fill-rule="evenodd"' : ''} fill="currentColor" stroke="currentColor" stroke-width="${(s?.s || 100) / 50}" stroke-opacity=".5"/></svg>`;
-    ext.boardKit = {CATS, SHAPES, SHAPE_MAP, COLOR_CATS, PALETTE0, TOOLS, HEADER, INSPECTOR, ADD, HEADS, prefs, savePrefs, palette, allShapes, shapesOf, shapeByKey, shapeSvg, sortBy, clean, circ};
+    ext.boardKit = {CATS, SHAPES, SHAPE_MAP, COLOR_CATS, PALETTE0, TOOLS, HEADER, INSPECTOR, ADD, LEGEND, HEADS, HEAD_NAMES, headSvg, headRef, headName, headExists, allHeads, headPreview, prefs, savePrefs, palette, allShapes, shapesOf, shapeByKey, shapeSvg, sortBy, clean, circ};
 
     /* ═════════ Chemins : lire un tracé SVG, le transformer (tourner, retourner, étirer), le recadrer ═════════ */
     // Tout est ramené à des segments absolus M / L / C / Z (les arcs deviennent des courbes) : une transformation est alors exacte.
@@ -383,7 +435,43 @@
             delSel: () => { if (!sel) return; const [pi, ni] = sel; paths[pi]?.nodes.splice(ni, 1); if ((paths[pi]?.nodes.length || 0) < 3 && paths[pi]) paths[pi].closed = false; sel = null; draw(); },
         };
     }
-    Object.assign(ext.boardKit, {parsePath, absPath, pathStr, shapeSegs, fitSegs, openComposer, penEditor});
+    /** Créer une pointe : à partir d'une forme, ou tracée à la plume ; tournée, pleine ou en contour, accrochée au bout ou au milieu */
+    function headMaker(p, onSave) {
+        let mode = 'shape', picked = null, pen = null;
+        const cur = () => {
+            const rot = Number(document.querySelector('[data-hm-rot]:checked')?.value || 0), fill = document.querySelector('[data-hm-fill]')?.value !== 'line', ref = Number(document.querySelector('[data-hm-ref]')?.value ?? 8);
+            if (mode === 'pen') { const d = pen?.path() || ''; return d ? {d, box: 100, rot, fill, eo: (pen?.count() || 0) > 1, ref} : null; }
+            if (!picked?.d) return null; return {d: picked.d, box: picked.s || 100, rot, fill, eo: !!picked.eo, ref};
+        };
+        const prev = () => { const h = cur(), box = document.querySelector('[data-hm-prev]'); if (!box) return; if (!h) { box.innerHTML = '<p class="muted">Choisis une forme ou trace la pointe.</p>'; return; } const pp = {...p, customHeads: [{...h, k: 'myh_prev', n: ''}]}; box.innerHTML = `<svg viewBox="0 0 120 40" width="240" height="80" style="overflow:visible"><line x1="6" y1="20" x2="${96 - (10 - h.ref) * 2.4}" y2="20" stroke="#1d3557" stroke-width="3"/><g transform="translate(84,8) scale(2.4)">${headSvg('myh_prev', '#1d3557', pp)}</g></svg>`; };
+        const shapes = allShapes(p).filter(s => s.d && !s.mask);
+        const grid = q => shapes.filter(s => !q || (s.n + ' ' + (s.tags || '')).toLowerCase().includes(q.toLowerCase())).slice(0, 240).map(s => `<button type="button" class="h-bd-shcell ${picked?.k === s.k ? 'is-on' : ''}" data-hm-shape="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}</button>`).join('');
+        ext.openDialog({eyebrow: 'RÉGLAGES DES TABLEAUX', title: 'Créer une pointe', wide: true, submitLabel: 'Créer la pointe',
+            body: `<div class="h-hm"><div class="h-bd-makertabs"><button type="button" class="is-on" data-hm-mode="shape">⬠ À partir d’une forme</button><button type="button" data-hm-mode="pen">✒️ Tracée à la plume</button></div>
+                <div data-hm-pane="shape"><input type="search" placeholder="Chercher une forme (flèche, cœur, étoile…)" data-hm-q><div class="h-bd-shgrid h-hm-grid" data-hm-grid>${grid('')}</div></div>
+                <div data-hm-pane="pen" hidden><p class="muted">Trace la pointe tournée vers la droite (→) : clic pour un angle, cliquer-glisser pour un arrondi, clic sur le premier point pour fermer.</p><svg class="h-bd-tracer" viewBox="0 0 100 100" data-hm-tracer></svg><div class="h-bd-row"><button type="button" class="h-bt" data-pen="close">◯ Fermer</button><button type="button" class="h-bt" data-pen="undo">↶ Annuler</button><button type="button" class="h-bt" data-pen="clear">Tout effacer</button></div></div>
+                <div class="h-hm-opts"><span>Tourner</span>${[0, 90, 180, 270].map((r, i) => `<label class="checkbox-line"><input type="radio" name="hmrot" data-hm-rot value="${r}" ${i ? '' : 'checked'}> ${r}°</label>`).join('')}
+                    <label>Dessin <select data-hm-fill><option value="fill">plein</option><option value="line">contour</option></select></label>
+                    <label>Accrochée <select data-hm-ref><option value="9">par la pointe (au bout du trait)</option><option value="8" selected>presque au bout</option><option value="5">par le milieu</option><option value="1">par l’arrière</option></select></label>
+                    <label>Nom <input data-hm-name value="Ma pointe" maxlength="60"></label></div>
+                <div class="h-hm-prev" data-hm-prev></div></div>`,
+            onOpen: d => {
+                pen = penEditor(d.querySelector('[data-hm-tracer]'), prev);
+                d.querySelectorAll('[data-pen]').forEach(bt => bt.addEventListener('click', () => pen?.[bt.dataset.pen]?.()));
+                d.addEventListener('click', e => {
+                    const m = e.target.closest('[data-hm-mode]'); if (m) { mode = m.dataset.hmMode; d.querySelectorAll('[data-hm-mode]').forEach(x => x.classList.toggle('is-on', x === m)); d.querySelectorAll('[data-hm-pane]').forEach(x => { x.hidden = x.dataset.hmPane !== mode; }); prev(); return; }
+                    const s = e.target.closest('[data-hm-shape]'); if (s) { picked = shapes.find(x => x.k === s.dataset.hmShape); d.querySelectorAll('[data-hm-shape]').forEach(x => x.classList.toggle('is-on', x === s)); const nm = d.querySelector('[data-hm-name]'); if (nm.value === 'Ma pointe' || nm.dataset.auto) { nm.value = picked.n; nm.dataset.auto = '1'; } prev(); }
+                });
+                d.addEventListener('input', e => { if (e.target.matches('[data-hm-q]')) d.querySelector('[data-hm-grid]').innerHTML = grid(e.target.value.trim()); });
+                d.addEventListener('change', prev); prev();
+            },
+            onSubmit: form => {
+                const h = cur(); if (!h) { toast(mode === 'pen' ? 'Trace la pointe (au moins trois points, puis ferme-la).' : 'Choisis une forme.', 'error'); return false; }
+                if (h.d.length > 29000) { toast('Cette forme est trop détaillée pour une pointe.', 'error'); return false; }
+                onSave({k: 'myh_' + Date.now().toString(36), n: form.querySelector('[data-hm-name]').value.trim() || 'Ma pointe', ...h});
+            }});
+    }
+    Object.assign(ext.boardKit, {parsePath, absPath, pathStr, shapeSegs, fitSegs, openComposer, penEditor, headMaker});
 
     /* ═════════ Maintenance → Réglages des tableaux ═════════ */
     let tab = 'colors';
@@ -410,20 +498,21 @@
         const TABS = [['colors', '🎨 Couleurs'], ['heads', '➤ Pointes'], ['shapes', '⬠ Formes'], ['fonts', '🔤 Polices'], ['sizes', '📏 Tailles et arrondi'], ['table', '▦ Tableur'], ['brushes', '🖌 Pinceaux'], ['menus', '☰ Menus et options']];
         const draw = () => {
             if (token !== st.workspaceToken) return;
-            const HEAD_NAMES = {none: 'aucune', triangle: '▶ triangle', stealth: '➤ flèche fine', open: '› ouverte', double: '⏩ double', half: '◣ demi-flèche', circle: '● rond', ring: '○ rond vide', dot: '• point', square: '■ carré', square_o: '□ carré vide', diamond: '◆ losange', diamond_o: '◇ losange vide', bar: '| barre', fork: '⋔ patte d’oie', tail: '» plumes'};
+            // (les noms des pointes : headName)
             const body = {
                 colors: () => `<p class="muted">Les couleurs proposées dans les tableaux, catégorie par catégorie, dans l’ordre voulu (glisse une pastille, ou ‹ ›). Le sélecteur « autre couleur » reste toujours là. Tu peux avoir plusieurs palettes et choisir celle des tableaux.</p>
                     <div class="h-bp-palbar"><label>Palette utilisée <select data-bp-pal>${p.palettes.map(x => `<option value="${esc(x.id)}" ${x.id === p.palette ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></label>
                     <input data-bp-palname value="${esc(pal().name)}" aria-label="Nom de la palette" maxlength="60"><button type="button" class="button small secondary" data-bp-palnew>+ Nouvelle palette</button><button type="button" class="button small secondary" data-bp-paldup>Dupliquer</button>
                     <select data-bp-preset><option value="">Partir d’un modèle…</option>${Object.keys(PALETTE_PRESETS).map(k => `<option>${esc(k)}</option>`).join('')}<option value="__app">Couleurs de l’app</option></select>${p.palettes.length > 1 ? '<button type="button" class="button small secondary danger" data-bp-paldel>Supprimer la palette</button>' : ''}</div>
                     ${COLOR_CATS.map(([k, l]) => `<section class="h-bp-sec"><h4>${esc(l)}</h4>${swatchEditor(k, pal().colors[k] || [])}</section>`).join('')}`,
-                heads: () => `<p class="muted">Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir.</p>
-                    <div class="h-bp-two"><label>Pointe au début, par défaut <select data-bp-hs>${HEADS.map(h => `<option value="${h}" ${p.headStart === h ? 'selected' : ''}>${HEAD_NAMES[h]}</option>`).join('')}</select></label><label>Pointe à la fin, par défaut (outil Flèche) <select data-bp-he>${HEADS.map(h => `<option value="${h}" ${p.headEnd === h ? 'selected' : ''}>${HEAD_NAMES[h]}</option>`).join('')}</select></label></div>
-                    ${orderList('heads', HEADS.map(h => [h, HEAD_NAMES[h]]), p.heads, p.headsHidden)}`,
+                heads: () => `<p class="muted">Les pointes proposées pour les traits et les flèches, dans l’ordre voulu ; décoche celles que tu ne veux pas voir. « ＋ Créer une pointe » : à partir d’une forme (n’importe laquelle des formes, ou une des tiennes) ou tracée à la plume.</p>
+                    <div class="h-bp-two"><label>Pointe au début, par défaut <select data-bp-hs>${allHeads(p).map(h => `<option value="${h}" ${p.headStart === h ? 'selected' : ''}>${esc(headName(h, p))}</option>`).join('')}</select></label><label>Pointe à la fin, par défaut (outil Flèche) <select data-bp-he>${allHeads(p).map(h => `<option value="${h}" ${p.headEnd === h ? 'selected' : ''}>${esc(headName(h, p))}</option>`).join('')}</select></label></div>
+                    <p><button type="button" class="button small" data-bp-hnew>＋ Créer une pointe</button></p>
+                    ${orderList('heads', allHeads(p).map(h => [h, headName(h, p), `<span class="h-bp-headprev">${headPreview(h, p)}</span> `]), p.heads, p.headsHidden, h => h.startsWith('myh_') ? `<button type="button" class="h-bt" data-bp-hdel="${esc(h)}" title="Supprimer cette pointe">🗑</button>` : '')}`,
                 shapes: () => `<p class="muted">Les catégories de formes et leurs formes, dans l’ordre voulu ; décoche ce que tu ne veux pas voir. « Accès rapide » : les formes proposées directement dans la barre de l’outil Formes.</p>
                     <section class="h-bp-sec"><h4>Accès rapide <small class="muted">${p.quickShapes.length}</small></h4><div class="h-bp-quick" data-bp-quick>${p.quickShapes.map(k => shapeByKey(k, p)).filter(Boolean).map(s => `<span class="h-bp-shape is-quick" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<button type="button" class="h-bp-x" data-bp-unquick title="Retirer">×</button><span class="h-bp-qmv"><button type="button" data-bp-qleft title="Avant">‹</button><button type="button" data-bp-qright title="Après">›</button></span></span>`).join('')}</div><small class="muted">Glisse une forme (ou ‹ ›) pour changer l’ordre ; ⚡ sur une forme ci-dessous l’ajoute ici ; ✏️ crée une forme à partir d’elle.</small></section>
                     <section class="h-bp-sec"><h4>Catégories</h4>${orderList('cats', CATS.map(c => [c[0], c[1], c[2] + ' ']), p.shapeCats, p.shapesHidden.filter(k => k.startsWith('cat:')).map(k => k.slice(4)))}</section>
-                    ${p.shapeCats.map(c => { const cat = CATS.find(x => x[0] === c); const l = shapesOf(c, p); return `<section class="h-bp-sec"><h4>${cat[2]} ${esc(cat[1])} <small class="muted">${l.length}</small></h4><div class="h-bp-shapes" data-bp-shapes="${c}">${l.map(s => `<span class="h-bp-shape ${p.shapesHidden.includes(s.k) ? 'is-off' : ''}" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<small>${esc(s.n)}</small><span class="h-bp-shtools"><button type="button" data-bp-shtoggle title="Montrer / cacher">${p.shapesHidden.includes(s.k) ? '🙈' : '👁'}</button><button type="button" data-bp-shquick title="Accès rapide">⚡</button>${s.d && !s.mask ? '<button type="button" data-bp-shfrom title="Créer une forme à partir de celle-ci">✏️</button>' : ''}${s.c === 'mine' ? '<button type="button" data-bp-shdel title="Supprimer cette forme">🗑</button>' : ''}</span></span>`).join('') || '<p class="muted">Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ».</p>'}</div></section>`; }).join('')}`,
+                    ${p.shapeCats.map(c => { const cat = CATS.find(x => x[0] === c); const l = shapesOf(c, p); return `<section class="h-bp-sec"><h4>${cat[2]} ${esc(cat[1])} <small class="muted">${l.length}</small></h4><div class="h-bp-shapes" data-bp-shapes="${c}">${l.map(s => `<span class="h-bp-shape ${p.shapesHidden.includes(s.k) ? 'is-off' : ''}" draggable="true" data-k="${esc(s.k)}" title="${esc(s.n)}">${shapeSvg(s, 30)}<small>${esc(s.n)}</small><span class="h-bp-shtools"><button type="button" data-bp-shtoggle title="Montrer / cacher">${p.shapesHidden.includes(s.k) ? '🙈' : '👁'}</button><button type="button" data-bp-shquick class="${p.quickShapes.includes(s.k) ? 'is-on' : ''}" title="${p.quickShapes.includes(s.k) ? 'Déjà dans l’accès rapide' : 'Ajouter à l’accès rapide'}">⚡</button>${s.d && !s.mask ? '<button type="button" data-bp-shfrom title="Créer une forme à partir de celle-ci">✏️</button>' : ''}${s.c === 'mine' ? '<button type="button" data-bp-shdel title="Supprimer cette forme">🗑</button>' : ''}</span></span>`).join('') || '<p class="muted">Aucune pour l’instant : dans un tableau, outil Formes → « ＋ Créer une forme ».</p>'}</div></section>`; }).join('')}`,
                 fonts: () => `<p class="muted">Des listes de polices à toi, proposées dans le choix de la police d’un texte. « Polices de l’ordinateur » lit celles installées (Chrome, Edge, l’app sur Mac ; le navigateur te le demande la première fois).</p>
                     <div class="h-bp-fontbar"><button type="button" class="button small secondary" data-bp-local>🖥 Voir les polices de l’ordinateur</button><button type="button" class="button small secondary" data-bp-flnew>+ Nouvelle liste</button></div><div class="h-bp-localfonts" data-bp-localbox hidden></div>
                     ${p.fontLists.map((l, i) => `<section class="h-bp-sec h-bp-fontlist" data-fl="${i}"><div class="h-bp-flhead"><input value="${esc(l.name)}" data-bp-flname maxlength="60"><button type="button" class="button small secondary danger" data-bp-fldel>Supprimer la liste</button></div>
@@ -447,7 +536,8 @@
                     <div class="h-bp-cols"><section class="h-bp-sec"><h4>Outils (barre du haut)</h4>${orderList('tools', TOOLS, p.toolsOrder, p.toolsHidden)}</section>
                     <section class="h-bp-sec"><h4>Boutons de l’en-tête</h4>${orderList('header', HEADER, p.headerOrder, p.headerHidden)}</section>
                     <section class="h-bp-sec"><h4>Réglages à droite (texte, forme, trait…)</h4>${orderList('inspector', INSPECTOR, p.inspectorOrder, p.inspectorHidden)}</section>
-                    <section class="h-bp-sec"><h4>Menu « ＋ Ajouter »</h4>${orderList('add', ADD, p.addOrder, p.addHidden)}</section></div>`,
+                    <section class="h-bp-sec"><h4>Menu « ＋ Ajouter »</h4>${orderList('add', ADD, p.addOrder, p.addHidden)}</section>
+                    <section class="h-bp-sec"><h4>Réglages d’une légende de trait</h4><p class="muted">Dans « Réglages de la légende » (choisis un trait). Les couleurs proposées : onglet 🎨 Couleurs.</p>${orderList('legend', LEGEND, p.legendOrder, p.legendHidden)}</section></div>`,
             }[tab]();
             ws.innerHTML = `<section class="page h-bp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Réglages des tableaux</h2><p>Ce que proposent les tableaux (Enquêtes → Tableaux) : couleurs, pointes, formes, polices, tailles, tableur, pinceaux, et l’ordre des menus.</p></div>
                 <div class="page-actions"><span class="h-bp-sets"><select data-bp-set aria-label="Mes réglages enregistrés"><option value="">Mes réglages enregistrés…</option>${sets().map((x, n) => `<option value="${n}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button secondary" data-bp-setapply title="Reprendre ces réglages">Appliquer</button><button type="button" class="button secondary danger" data-bp-setdel title="Supprimer ces réglages enregistrés">🗑</button><button type="button" class="button secondary" data-bp-setsave title="Garder tous les réglages actuels sous un nom">💾 Enregistrer sous un nom…</button></span><button type="button" class="button secondary" data-bp-reset>Revenir aux réglages d’origine</button><button type="button" class="button" data-bp-save>Enregistrer</button></div></header>
@@ -468,7 +558,7 @@
             if (tab === 'sizes') ws.querySelectorAll('[data-bp-n]').forEach(x => { p[x.dataset.bpN] = Number(x.value); });
             if (tab === 'table') { ws.querySelectorAll('[data-bp-t]').forEach(x => { p.table[x.dataset.bpT] = x.type === 'number' ? Number(x.value) : x.value; }); ws.querySelectorAll('[data-bp-tc]').forEach(x => { p.table[x.dataset.bpTc] = x.checked; }); }
             if (tab === 'brushes') ws.querySelectorAll('[data-bi]').forEach(row => { const b0 = p.brushes[Number(row.dataset.bi)]; if (!b0) return; row.querySelectorAll('[data-bp-b]').forEach(x => { const k = x.dataset.bpB; b0[k] = ['sw', 'hardness'].includes(k) ? Number(x.value) : k === 'opacity' ? Number(x.value) / 100 : x.value; }); if (!row.querySelector('[data-bp-bc]').checked) b0.color = ''; });
-            if (tab === 'menus') for (const [id, ok, hk] of [['tools', 'toolsOrder', 'toolsHidden'], ['header', 'headerOrder', 'headerHidden'], ['inspector', 'inspectorOrder', 'inspectorHidden'], ['add', 'addOrder', 'addHidden']]) { const o = readOrder(q(`[data-bp-order="${id}"]`)); p[ok] = o.order; p[hk] = o.hidden.filter(k => !(id === 'tools' && k === 'select')); }
+            if (tab === 'menus') for (const [id, ok, hk] of [['tools', 'toolsOrder', 'toolsHidden'], ['header', 'headerOrder', 'headerHidden'], ['inspector', 'inspectorOrder', 'inspectorHidden'], ['add', 'addOrder', 'addHidden'], ['legend', 'legendOrder', 'legendHidden']]) { const o = readOrder(q(`[data-bp-order="${id}"]`)); p[ok] = o.order; p[hk] = o.hidden.filter(k => !(id === 'tools' && k === 'select')); }
             p = clean(p);
         };
         draw();
@@ -523,7 +613,9 @@
             // formes
             const sh = e.target.closest('.h-bp-shape');
             if (sh && e.target.closest('[data-bp-shtoggle]')) { collect(); const k = sh.dataset.k; p.shapesHidden = p.shapesHidden.includes(k) ? p.shapesHidden.filter(x => x !== k) : [...p.shapesHidden, k]; draw(); return; }
-            if (sh && e.target.closest('[data-bp-shquick]')) { collect(); if (!p.quickShapes.includes(sh.dataset.k)) p.quickShapes.push(sh.dataset.k); draw(); return; }
+            if (e.target.closest('[data-bp-hnew]')) { collect(); headMaker(p, h => { p.customHeads.push(h); p.heads.push(h.k); draw(); toast(`Pointe « ${h.n} » créée : elle est dans la liste (n’oublie pas « Enregistrer »).`); }); return; }
+            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { if (!confirm('Supprimer cette pointe ? (les traits qui l’utilisent prennent un triangle)')) return; collect(); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
+            if (sh && e.target.closest('[data-bp-shquick]')) { collect(); const nm = shapeByKey(sh.dataset.k, p)?.n || 'La forme'; if (p.quickShapes.includes(sh.dataset.k)) { toast(`⚡ « ${nm} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer).`); return; } p.quickShapes.push(sh.dataset.k); draw(); toast(`⚡ « ${nm} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ».`); return; }
             if (sh && e.target.closest('[data-bp-qleft], [data-bp-qright]')) { const sib = e.target.closest('[data-bp-qleft]') ? sh.previousElementSibling : sh.nextElementSibling; if (sib) sh.parentNode.insertBefore(...(e.target.closest('[data-bp-qleft]') ? [sh, sib] : [sib, sh])); return; }
             if (sh && e.target.closest('[data-bp-shfrom]')) { collect(); openComposer({base: sh.dataset.k, onSave: k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); }}); return; }
             if (sh && e.target.closest('[data-bp-unquick]')) { collect(); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }

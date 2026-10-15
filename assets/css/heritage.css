@@ -2418,3 +2418,23 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-pet-lrow{display:flex;align-items:center;gap:8px;padding:5px 8px;border:1px solid #e3e6ea;border-radius:8px}
 .h-pet-lrow span{flex:1}
 .segmented:has(> button:nth-child(3)){grid-template-columns:repeat(3,1fr)}
+.h-bp-shtools button.is-on{background:#ffe066;border-radius:4px}
+.h-bp-headprev{display:inline-flex;width:48px;vertical-align:middle}
+.h-hm{display:grid;gap:12px}.h-hm-grid{max-height:260px;overflow:auto}.h-hm-opts{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}.h-hm-prev{min-height:80px;display:grid;place-items:center;border:1px dashed #cfd6df;border-radius:10px;padding:8px}
+/* livret : couverture en image, largeur des parties, mes apparences */
+.h-bk-book{grid-template-columns:repeat(12,minmax(0,1fr))}
+.h-bk-book>.h-bk-page{grid-column:span 6}
+.h-bk-book>.h-bk-wide,.h-bk-book>.h-bk-couple{grid-column:1/-1}
+.h-booklet.layout-1 .h-bk-book>.h-bk-page{grid-column:1/-1!important}
+@media (max-width:900px){.h-bk-book>.h-bk-page{grid-column:1/-1!important}}
+.h-bk-pagecover{position:relative;overflow:hidden}
+.h-bk-coverphoto{display:block;max-width:70%;max-height:220px;margin:0 auto 12px;border:3px solid var(--bk-cover-ink,#f1e4b8);box-shadow:0 2px 8px rgba(0,0,0,.3);object-fit:cover}
+.h-bk-coverbg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.35;pointer-events:none}
+.h-bk-pagecover>*:not(.h-bk-coverbg){position:relative}
+.h-bk-coverpick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.h-bk-coverchoice{display:grid;justify-items:center;gap:2px;cursor:pointer;width:78px}
+.h-bk-coverchoice img,.h-bk-coverchoice .h-bk-coverart{width:72px;height:72px;object-fit:cover;border-radius:6px}
+.h-bk-coverchoice:has(input:checked) img,.h-bk-coverchoice:has(input:checked) .h-bk-coverart{outline:3px solid #2a7de1}
+.h-bk-mine{position:relative;display:inline-flex}
+.h-bk-mydel{position:absolute;top:-6px;right:-6px;border:0;border-radius:50%;width:20px;height:20px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer;line-height:1}
+.h-bk-width{font-size:12px;padding:2px 4px;margin-left:auto}

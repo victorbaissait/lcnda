@@ -105,7 +105,7 @@
         const cells = it.cells?.length ? it.cells : [['']], vals = tableValues(cells), nrow = cells.length, ncol = Math.max(...cells.map(r => r.length)), cw = Array.from({length: ncol}, (_, c) => it.colw?.[c] || 100), tot = cw.reduce((s0, x) => s0 + x, 0);
         const cover = new Map(); // "r:c" → la fusion qui commence ici, ou true si la cellule est couverte
         for (const m of it.merges || []) { if (m.r >= nrow || m.c >= ncol) continue; const rs = Math.min(m.rs, nrow - m.r), cs = Math.min(m.cs, ncol - m.c); for (let r = m.r; r < m.r + rs; r++) for (let c = m.c; c < m.c + cs; c++) cover.set(r + ':' + c, r === m.r && c === m.c ? {rs, cs} : true); }
-        return `<div class="h-bi-table${it.stripes ? ' is-striped' : ''}" style="font-size:${it.fs || 14}px;color:${it.color || '#111'};font-family:${esc(cssFont(it.font))};font-weight:${it.bold ? 700 : 400};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};${['left', 'center', 'right', 'justify'].includes(it.align) ? `--ta:${it.align};` : ''}--hf:${it.hfill || '#e8eef7'}"><table><colgroup>${cw.map(w => `<col style="width:${(w / tot * 100).toFixed(2)}%">`).join('')}</colgroup><tbody>${cells.map((row, r) => `<tr style="height:${(100 / nrow).toFixed(3)}%">${Array.from({length: ncol}, (_, c) => {
+        return `<div class="h-bi-table${it.stripes ? ' is-striped' : ''}" style="font-size:${it.fs || 14}px;color:${it.color || '#111'};font-family:${esc(cssFont(it.font))};font-weight:${it.weight || (it.bold ? 700 : 400)};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};${['left', 'center', 'right', 'justify'].includes(it.align) ? `--ta:${it.align};` : ''}--hf:${it.hfill || '#e8eef7'}"><table><colgroup>${cw.map(w => `<col style="width:${(w / tot * 100).toFixed(2)}%">`).join('')}</colgroup><tbody>${cells.map((row, r) => `<tr style="height:${(100 / nrow).toFixed(3)}%">${Array.from({length: ncol}, (_, c) => {
             const cv = cover.get(r + ':' + c); if (cv === true) return '';
             const v = vals[r][c], isHead = (it.header && r === 0) || (it.hcol && c === 0), raw = String(row[c] ?? ''), shown = raw.startsWith('=') ? showVal(v) : raw;
             return `<td data-r="${r}" data-c="${c}"${cv ? ` rowspan="${cv.rs}" colspan="${cv.cs}"` : ''} class="${isHead ? 'is-head' : ''}${typeof v === 'number' ? ' is-num' : ''}${raw.startsWith('=') ? ' is-formula' : ''}${String(v).startsWith('#') && raw.startsWith('=') ? ' is-err' : ''}${cv ? ' is-merged' : ''}"${it.cfill?.[r + ':' + c] ? ` style="background:${it.cfill[r + ':' + c]}"` : ''}>${esc(shown)}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div>`;
@@ -164,30 +164,14 @@
     </defs></svg>`;
 
     /* ═════════ Pointes des traits : forme et taille de chaque bout ═════════ */
-    const headOf = (l, side) => { const v = side === 'start' ? l.headStart : l.headEnd; if (v) return Object.hasOwn(HEAD_SVG, v) || v === 'none' ? v : 'triangle'; return (side === 'start' ? l.arrowStart : l.arrowEnd) ? 'triangle' : 'none'; };
+    const headOf = (l, side) => { const v = side === 'start' ? l.headStart : l.headEnd; if (v) return (KIT().headExists ? KIT().headExists(v) : v === 'none' || v === 'triangle') ? v : 'triangle'; return (side === 'start' ? l.arrowStart : l.arrowEnd) ? 'triangle' : 'none'; };
     const headSize = l => Math.max(10, (l.sw || 2) * 3);
-    const HEAD_REF = {triangle: 8, open: 8, stealth: 8, double: 8, half: 8, circle: 5, ring: 5, dot: 5, square: 5, square_o: 5, diamond: 5, diamond_o: 5, bar: 5, fork: 9, tail: 3};
-    const HEAD_SVG = {
-        triangle: c => `<path d="M0,0 L10,5 L0,10 z" fill="${c}"/>`,
-        open: c => `<path d="M1,1 L9,5 L1,9" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>`,
-        circle: c => `<circle cx="5" cy="5" r="4.2" fill="${c}"/>`,
-        square: c => `<rect x="1" y="1" width="8" height="8" fill="${c}"/>`,
-        diamond: c => `<path d="M0,5 L5,0 L10,5 L5,10 z" fill="${c}"/>`,
-        bar: c => `<rect x="4" y="0" width="2" height="10" fill="${c}"/>`,
-        stealth: c => `<path d="M0,0 L10,5 L0,10 L3,5 z" fill="${c}"/>`,
-        double: c => `<path d="M0,0 L5,5 L0,10 z M5,0 L10,5 L5,10 z" fill="${c}"/>`,
-        half: c => `<path d="M0,0 L10,5 L0,5 z" fill="${c}"/>`,
-        ring: c => `<circle cx="5" cy="5" r="3.6" fill="#fff" stroke="${c}" stroke-width="1.6"/>`,
-        dot: c => `<circle cx="5" cy="5" r="2.4" fill="${c}"/>`,
-        square_o: c => `<rect x="1.6" y="1.6" width="6.8" height="6.8" fill="#fff" stroke="${c}" stroke-width="1.6"/>`,
-        diamond_o: c => `<path d="M1,5 L5,1 L9,5 L5,9 z" fill="#fff" stroke="${c}" stroke-width="1.6"/>`,
-        fork: c => `<path d="M10,5 L1,0 M10,5 L1,5 M10,5 L1,10" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/>`,
-        tail: c => `<path d="M0,0 L4,5 L0,10 M3,0 L7,5 L3,10" fill="none" stroke="${c}" stroke-width="1.6" stroke-linecap="round"/>`,
-    };
+    // les pointes viennent des réglages des tableaux (heritage-board-kit.js) : celles de l'app et celles qu'on a créées
+    const HEAD_SVG = new Proxy({}, {get: (_, k) => c => KIT().headSvg ? KIT().headSvg(String(k), c) : `<path d="M0,0 L10,5 L0,10 z" fill="${c}"/>`});
+    const HEAD_REF = new Proxy({}, {get: (_, k) => KIT().headRef ? KIT().headRef(String(k)) : 8});
     // pistes d'enquête : une note à vérifier, confirmée ou fausse
     const HYP = {todo: ['❓', 'À vérifier', '#ffe8a3', '#e0a100'], ok: ['✅', 'Confirmée', '#c7f0c2', '#2b8a3e'], no: ['❌', 'Fausse', '#f6c3c3', '#c92a2a']};
-    const HEADS_LIST = [['none', 'aucune'], ['triangle', '▶ triangle'], ['stealth', '➤ flèche fine'], ['open', '› ouverte'], ['double', '⏩ double'], ['half', '◣ demi-flèche'], ['circle', '● rond'], ['ring', '○ rond vide'], ['dot', '• point'],
-        ['square', '■ carré'], ['square_o', '□ carré vide'], ['diamond', '◆ losange'], ['diamond_o', '◇ losange vide'], ['bar', '| barre'], ['fork', '⋔ patte d’oie'], ['tail', '» plumes']];
+    const HEADS_LIST = new Proxy([], {get: (t, k) => { const l = (KIT().allHeads?.() || ['none', 'triangle']).map(h => [h, KIT().headName?.(h) || h]); const v = l[k]; return typeof v === 'function' ? v.bind(l) : v; }});
     const LINE_PATHS = [['straight', '— droit'], ['curve', '⌒ courbe'], ['elbow', '⌐ coudé'], ['wave', '∿ vague'], ['zigzag', '⩘ zigzag'], ['avoid', '⤳ contourne les éléments']];
     const LINE_DASHES = [['', '──── plein'], ['dash', '- - - tirets'], ['long', '— — — longs tirets'], ['dot', '· · · points'], ['dashdot', '-·-· tiret-point']];
     const dashArray = (dash, sw) => ({dash: `${3 * sw + 4} ${2 * sw + 4}`, long: `${7 * sw + 10} ${3 * sw + 5}`, dot: `0.1 ${2 * sw + 4}`, dashdot: `${4 * sw + 6} ${2 * sw + 4} 0.1 ${2 * sw + 4}`}[dash] || '');
@@ -407,7 +391,7 @@
         function itemInner(it) {
             const LIST_CSS = {bullet: 'disc', num: 'decimal', roman: 'upper-roman', alpha: 'lower-alpha', ALPHA: 'upper-alpha', dash: '"– "', check: '"☐ "'};
             const txt = v => { if (!it.list || !LIST_CSS[it.list] || !v) return esc(v || '').replace(/\n/g, '<br>'); const tag = ['num', 'roman', 'alpha', 'ALPHA'].includes(it.list) ? 'ol' : 'ul'; return `<${tag} class="h-bi-list" style="list-style-type:${LIST_CSS[it.list]}">${String(v).split('\n').map(li => `<li>${esc(li) || '&nbsp;'}</li>`).join('')}</${tag}>`; };
-            const textStyle = `font-size:${it.fs || 18}px;color:${it.color || '#111'};font-weight:${it.bold ? 700 : 400};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};text-align:${['left', 'center', 'right', 'justify'].includes(it.align) ? it.align : 'left'};font-family:${esc(cssFont(it.font))}`;
+            const textStyle = `font-size:${it.fs || 18}px;color:${it.color || '#111'};font-weight:${it.weight || (it.bold ? 700 : 400)};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};text-align:${['left', 'center', 'right', 'justify'].includes(it.align) ? it.align : 'left'};font-family:${esc(cssFont(it.font))}`;
             switch (it.type) {
                 case 'shape': if (it.mask) return `<div class="h-bi-mask" style="background:${it.fill || '#bde0fe'};-webkit-mask-image:url(${it.mask});mask-image:url(${it.mask})"></div><div class="h-bi-text is-center" data-bd-text style="${textStyle};text-align:${it.align || 'center'}">${txt(it.text)}</div>`;
                     return `<svg class="h-bi-svg" viewBox="0 0 ${it.w} ${it.h}" preserveAspectRatio="none" style="overflow:visible"><g fill="${it.fill || '#bde0fe'}" stroke="${it.stroke || '#1d3557'}" stroke-width="${it.sw ?? 2}" ${it.dash ? `stroke-dasharray="${dashArray(it.dash, it.sw ?? 2)}" stroke-linecap="round"` : ''} vector-effect="non-scaling-stroke">${shapePath(it.shape, it.w, it.h, it)}</g></svg><div class="h-bi-text is-center" data-bd-text style="${textStyle};text-align:${it.align || 'center'}">${txt(it.text)}</div>`;
@@ -726,7 +710,7 @@
         };
         const setTool = t => { if (boardLocked && !['select', 'hand'].includes(t)) { ro(); t = 'select'; }
             tool = t; root.querySelectorAll('[data-bd-tool]').forEach(x => x.classList.toggle('is-on', x.dataset.bdTool === t));
-            const HINTS = {text: 'Clique où écrire.', line: 'Tire un trait ; posé sur un élément, il s’y accroche.', arrow: 'Tire une flèche d’un élément à un autre : elle les suit quand on les déplace.', table: 'Clique où poser le tableur.', hand: 'Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer.', select: 'Clic : choisir · ⇧ + clic : en ajouter · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir.'};
+            const HINTS = {text: 'Clique où écrire.', line: 'Tire un trait ; posé sur un élément, il s’y accroche.', arrow: 'Tire une flèche d’un élément à un autre : elle les suit quand on les déplace.', table: 'Clique où poser le tableur.', hand: 'Glisse pour te déplacer ; molette ou deux doigts aussi ; ⌘ + molette pour zoomer.', select: 'Clic : choisir · ⇧ + clic : en ajouter · ⌥ / Alt + glisser : dupliquer · glisser dans le vide : en choisir plusieurs · double-clic : écrire ou ouvrir.'};
             root.querySelector('[data-bd-opts]').innerHTML = OPTS[t]?.() || (HINTS[t] ? `<small class="muted">${HINTS[t]}</small>` : '');
             stage.dataset.tool = t;
         };
@@ -803,9 +787,15 @@
                 const grp = groupOf(hit).map(i => i.id);
                 if (e.shiftKey) { const has = sel.has(hit.id); grp.forEach(id0 => has ? sel.delete(id0) : sel.add(id0)); }
                 else if (!sel.has(hit.id)) sel = new Set(grp);
+                // ⌥ / Alt + glisser : on emporte une copie (comme dans Photoshop), l'original reste en place
+                let dupOrig = null;
+                if (e.altKey && !e.shiftKey && !boardLocked) {
+                    const base = selItems().filter(i => !i.locked), src = [...new Set([...base, ...base.filter(i => i.type === 'frame').flatMap(f => framed(f))])]; // un cadre emporte la copie de ce qu'il contient
+                    if (src.length) { dupOrig = [...sel]; const copies = duplicateInPlace(src); sel = new Set(copies.map(c => c.id)); }
+                }
                 drawSelection(); render();
                 const movable = [...sel].map(byId).filter(i => i && !i.locked);
-                if (movable.length) drag = {kind: 'move', wx, wy, start: moveStart(movable), moved: false};
+                if (movable.length) drag = {kind: 'move', wx, wy, start: dupOrig ? movable.map(i => ({id: i.id, x: i.x, y: i.y, pts: i.type === 'line' ? clone(i.points) : null})) : moveStart(movable), moved: false, dupOrig};
                 stage.setPointerCapture(e.pointerId); return;
             }
             if (!e.shiftKey) sel.clear();
@@ -865,7 +855,7 @@
             if (d.kind === 'draw') { if (d.raw.length < 2) { const p = d.d; p.points = [[p.sw, p.sw]]; p.w = p.h = p.vw = p.vh = p.sw * 2; } render(); commit(); return; }
             if (d.kind === 'end') { const l = d.line; if (d.fresh && Math.hypot(l.points[1][0] - l.points[0][0], l.points[1][1] - l.points[0][1]) < 6 && !l.to) { items = items.filter(i => i !== l); render(); return; } sel = new Set([l.id]); render(); commit(); if (d.fresh) setTool('select'); return; }
             if (d.kind === 'newshape') { if (!d.it) { place(newShape({w: 160, h: 110}), [d.sx, d.sy]); } else { sel = new Set([d.it.id]); render(); commit(); } setTool('select'); return; }
-            if (d.kind === 'move' && !d.moved) return;
+            if (d.kind === 'move' && !d.moved) { if (d.dupOrig) { const ids = new Set(d.start.map(s0 => s0.id)); items = items.filter(i => !ids.has(i.id)); sel = new Set(d.dupOrig); render(); } return; } // ⌥ + clic sans glisser : pas de copie
             if (['move', 'resize', 'erase'].includes(d.kind)) commit();
         };
         stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
@@ -1074,6 +1064,13 @@
         // ── clavier ──
         const typing = e => e.target.closest?.('input, textarea, select, [contenteditable="true"]');
         const selItems = () => [...sel].map(byId).filter(Boolean);
+        // des copies posées au même endroit (traits entre copies raccrochés, groupes recréés)
+        function duplicateInPlace(list) {
+            const zTop = topZ() + 1, z0 = Math.min(...list.map(i => i.z || 0)), map = new Map(), group = new Map();
+            const copies = list.map(i => { const n = {...clone(i), id: uid(), z: zTop + (i.z || 0) - z0}; map.set(i.id, n.id); if (i.group) { if (!group.has(i.group)) group.set(i.group, uid()); n.group = group.get(i.group); } delete n.cmt; return n; });
+            copies.forEach(n => { if (n.from && map.has(n.from)) n.from = map.get(n.from); if (n.to && map.has(n.to)) n.to = map.get(n.to); });
+            items.push(...copies); return copies;
+        }
         function pasteInternal() {
             if (!clipboard?.length || ro()) return;
             const z0 = Math.min(...clipboard.map(i => i.z || 0)), zTop = topZ() + 1;
@@ -1123,6 +1120,28 @@
         const onKeyUp = e => { if (e.key === ' ') { spaceDown = false; stage.dataset.tool = tool; } };
         window.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp);
         // ── propriétés de la sélection ──
+        // les réglages d'une légende, dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
+        function legendParts(one) {
+            const p = P(), tMin = p.textMin ?? 6, tMax = p.textMax ?? 200;
+            const numField = (k, label, min, max, step, val, unit = 'px', boxMin = min, boxMax = max) => `<label>${label}<span class="h-bd-num"><input type="range" min="${min}" max="${max}" step="${step}" value="${Math.max(min, Math.min(max, val))}" data-bd-num="${k}"><input type="number" class="h-bd-numbox" min="${boxMin}" max="${boxMax}" step="${step}" value="${+Number(val).toFixed(2)}" data-bd-num="${k}"><small>${unit}</small></span></label>`;
+            const sw = (k, list) => `<div class="h-bd-sws">${list.map(c => `<button type="button" class="h-sw ${one[k] === c ? 'is-on' : ''}" style="background:${c === 'transparent' ? 'repeating-conic-gradient(#ccc 0 25%,#fff 0 50%) 0/8px 8px' : c}" data-bd-set="${k}" data-v="${c}" title="${c}"></button>`).join('')}<input type="color" data-bd-setc="${k}" value="${/^#[0-9a-f]{6}$/i.test(one[k] || '') ? one[k] : '#111111'}" title="Autre couleur"></div>`;
+            const parts = {
+                lbSize: () => numField('lbSize', 'Taille du texte', tMin, Math.min(tMax, 120), 1, one.lbSize || 13, 'px', 2, 500),
+                lbFont: () => `<label>Police <select data-bd-sel="lbFont"><option value="">Police du thème</option>${(p.fontLists || []).map(L => `<optgroup label="${esc(L.name)}">${L.fonts.map(f => `<option value="${esc(f)}" ${one.lbFont === f ? 'selected' : ''}>${esc(f)}</option>`).join('')}</optgroup>`).join('')}${one.lbFont && !(p.fontLists || []).some(L => L.fonts.includes(one.lbFont)) ? `<option selected value="${esc(one.lbFont)}">${esc(one.lbFont)}</option>` : ''}</select></label>`,
+                lbStyle: () => `<div class="h-bd-row">${[['lbBold', '<b>G</b>', 'Gras'], ['lbItalic', '<i>I</i>', 'Italique']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}</div>`,
+                lbColor: () => `<label>Couleur du texte</label>${sw('lbColor', pal('label'))}`,
+                lbBg: () => `<label>Fond du cadre</label>${sw('lbBg', pal('labelbg'))}`,
+                lbBorder: () => `<label>Bord du cadre</label>${sw('lbBorder', pal('labelborder').filter(c => c !== 'transparent'))}`,
+                lbBw: () => numField('lbBw', 'Épaisseur du bord', 0, 10, 0.5, one.lbBw ?? 0, 'px', 0, 20),
+                lbPad: () => numField('lbPad', 'Marge dans le cadre', 0, 30, 1, one.lbPad ?? 4, 'px', 0, 40),
+                lbRadius: () => numField('lbRadius', 'Arrondi du cadre', 0, 30, 1, one.lbRadius ?? 4, 'px', 0, 40),
+                lbPos: () => numField('lbPos', 'Position le long du trait', 0, 100, 1, one.lbPos ?? 50, '%', 0, 100),
+                lbSide: () => `<label>Côté <select data-bd-sel="lbSide">${[['on', 'sur le trait'], ['above', 'au-dessus'], ['below', 'en dessous']].map(([k, l]) => `<option value="${k}" ${(one.lbSide || 'on') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`,
+                lbOffset: () => numField('lbOffset', 'Écart avec le trait', 0, 80, 1, one.lbOffset ?? 14, 'px', 0, 200),
+                lbRotate: () => `<label class="checkbox-line"><input type="checkbox" data-bd-check="lbRotate" ${one.lbRotate ? 'checked' : ''}> <span>suivre l’angle du trait</span></label>`,
+            };
+            return ordered(p.legendOrder, p.legendHidden, Object.keys(parts)).map(k => parts[k]()).join('');
+        }
         function renderInspector() {
             const p = P(), l = selItems();
             if (!l.length) {
@@ -1154,21 +1173,10 @@
                 radius: () => (one && ((t === 'shape' && ['rect', 'round'].includes(one.shape)) || ['note', 'media', 'webimage', 'table', 'tag', 'folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'widget'].includes(t))) ? numField('radius', 'Arrondi des coins', 0, 120, 1, one.radius ?? (t === 'shape' && one.shape === 'round' ? Math.round(Math.min(one.w, one.h) * .18) : 0), 'px', 0, 400) : '',
                 text: () => any(...textTypes) ? `${numField('fs', 'Taille du texte', tMin, tMax, 1, one?.fs || 18, 'px', 2, 500)}<div class="h-bd-row">${[['bold', '<b>G</b>', 'Gras'], ['italic', '<i>I</i>', 'Italique'], ['underline', '<u>S</u>', 'Souligné'], ['strike', '<s>B</s>', 'Barré']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one?.[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}<span class="h-bt-sep"></span>${[['left', '⇤', 'Aligner à gauche'], ['center', '↔', 'Centrer'], ['right', '⇥', 'Aligner à droite'], ['justify', '☰', 'Justifier']].map(([a, h, lb]) => `<button type="button" class="h-bt ${(one?.align || (t === 'shape' ? 'center' : 'left')) === a ? 'is-on' : ''}" data-bd-set="align" data-v="${a}" title="${lb}">${h}</button>`).join('')}</div>` : '',
                 list: () => any('text', 'note', 'shape') ? `<label>Puces et numéros <select data-bd-sel="list">${[['', 'Aucune'], ['bullet', '• Puce'], ['num', '1. Nombres'], ['roman', 'I. Chiffres romains'], ['alpha', 'a. Lettres'], ['ALPHA', 'A. Lettres capitales'], ['dash', '– Tiret'], ['check', '☐ Cases à cocher']].map(([k, lb]) => `<option value="${k}" ${(one?.list || '') === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label>` : '',
-                font: () => any(...textTypes) ? `<label>Police <select data-bd-sel="font">${fontOpts()}</select></label><div class="h-bd-fontfree"><input list="bd-fonts-${b.id}" placeholder="ou tape un nom de police…" data-bd-fontfree value=""><button type="button" class="h-bt" data-bd-localfonts title="Les polices de l’ordinateur">🖥</button><datalist id="bd-fonts-${b.id}">${(localFonts || []).map(f => `<option value="${esc(f)}">`).join('')}</datalist></div>` : '',
+                font: () => any(...textTypes) ? `<label>Police <select data-bd-sel="font">${fontOpts()}</select></label>${(() => { const own = fontWeights(one?.font), cur = Number(one?.weight || (one?.bold ? 700 : 400)), list = own ? own.map(([w, s]) => [w, `${s} (${w})`]) : WEIGHTS; return `<label>Graisse <select data-bd-weight>${list.map(([w, l]) => `<option value="${w}" ${cur === w ? 'selected' : ''}>${esc(l)}</option>`).join('')}${list.some(x => x[0] === cur) ? '' : `<option value="${cur}" selected>${cur}</option>`}</select></label>${own ? '' : '<small class="muted">Les graisses exactes de la police : 🖥 ci-dessous (polices de l’ordinateur).</small>'}`; })()}<div class="h-bd-fontfree"><input list="bd-fonts-${b.id}" placeholder="ou tape un nom de police…" data-bd-fontfree value=""><button type="button" class="h-bt" data-bd-localfonts title="Les polices de l’ordinateur">🖥</button><datalist id="bd-fonts-${b.id}">${(localFonts || []).map(f => `<option value="${esc(f)}">`).join('')}</datalist></div>` : '',
                 heads: () => t === 'line' ? `<label>Couleur des pointes ${one.headColor ? '<button type="button" class="link-button" data-bd-headsame>même couleur que le trait</button>' : '<small class="muted">(comme le trait)</small>'}</label>${swatches('headColor', pal('text'))}<div class="h-bd-heads"><label>Pointe au début ${headSel('headStart', headOf(one, 'start'))}</label><label>Pointe à la fin ${headSel('headEnd', headOf(one, 'end'))}</label></div>${numField('hs', 'Taille des pointes', 4, 80, 1, one.hs || headSize(one), 'px', 2, 200)}` : '',
                 linepath: () => t === 'line' ? `<label>Forme du trait <select data-bd-sel="path">${LINE_PATHS.map(([k, lb]) => `<option value="${k}" ${(one.path || (one.curved ? 'curve' : 'straight')) === k ? 'selected' : ''}>${lb}</option>`).join('')}</select></label><label>Légende <input data-bd-str="text" value="${esc(one.text || '')}" placeholder="frère de, a écrit à…"></label>
-                    <details class="h-bd-lbopts" ${one.text ? 'open' : ''}><summary>Réglages de la légende</summary>
-                    ${numField('lbSize', 'Taille du texte', tMin, Math.min(tMax, 120), 1, one.lbSize || 13, 'px', 2, 500)}
-                    <label>Police <select data-bd-sel="lbFont"><option value="">Police du thème</option>${(p.fontLists || []).map(L => `<optgroup label="${esc(L.name)}">${L.fonts.map(f => `<option value="${esc(f)}" ${one.lbFont === f ? 'selected' : ''}>${esc(f)}</option>`).join('')}</optgroup>`).join('')}${one.lbFont && !(p.fontLists || []).some(L => L.fonts.includes(one.lbFont)) ? `<option selected value="${esc(one.lbFont)}">${esc(one.lbFont)}</option>` : ''}</select></label>
-                    <div class="h-bd-row">${[['lbBold', '<b>G</b>', 'Gras'], ['lbItalic', '<i>I</i>', 'Italique']].map(([k, h, lb]) => `<button type="button" class="h-bt ${one[k] ? 'is-on' : ''}" data-bd-toggle="${k}" title="${lb}">${h}</button>`).join('')}</div>
-                    <label>Couleur du texte</label>${swatches('lbColor', pal('text'))}
-                    <label>Fond du cadre</label>${swatches('lbBg', ['transparent', ...pal('fill').filter(c => c !== 'transparent')])}
-                    <label>Bord du cadre</label>${swatches('lbBorder', pal('stroke').filter(c => c !== 'transparent'))}
-                    ${numField('lbBw', 'Épaisseur du bord', 0, 10, 0.5, one.lbBw ?? 0, 'px', 0, 20)}${numField('lbPad', 'Marge dans le cadre', 0, 30, 1, one.lbPad ?? 4, 'px', 0, 40)}${numField('lbRadius', 'Arrondi du cadre', 0, 30, 1, one.lbRadius ?? 4, 'px', 0, 40)}
-                    ${numField('lbPos', 'Position le long du trait', 0, 100, 1, one.lbPos ?? 50, '%', 0, 100)}
-                    <label>Côté <select data-bd-sel="lbSide">${[['on', 'sur le trait'], ['above', 'au-dessus'], ['below', 'en dessous']].map(([k, l]) => `<option value="${k}" ${(one.lbSide || 'on') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                    ${numField('lbOffset', 'Écart avec le trait', 0, 80, 1, one.lbOffset ?? 14, 'px', 0, 200)}
-                    <label class="checkbox-line"><input type="checkbox" data-bd-check="lbRotate" ${one.lbRotate ? 'checked' : ''}> <span>suivre l’angle du trait</span></label></details>` : '',
+                    <details class="h-bd-lbopts" ${one.text ? 'open' : ''}><summary>Réglages de la légende</summary>${legendParts(one)}</details>` : '',
                 table: () => t === 'table' ? `<div class="h-bd-tbl"><p class="muted">${cs ? `Cellule <strong>${colName(cs.c)}${cs.r + 1}</strong>${range && range.rs * range.cs > 1 ? ` à <strong>${colName(range.c + range.cs - 1)}${range.r + range.rs}</strong>` : ''}${String(one.cells?.[cs.r]?.[cs.c] ?? '').startsWith('=') ? ` : <code>${esc(one.cells[cs.r][cs.c])}</code>` : ''}` : 'Clique une cellule pour la choisir'} · ⇧ + clic : plusieurs · double-clic : écrire</p>
                     <div class="h-bd-row"><button type="button" class="h-bt" data-bd-tbl="row+" title="Ajouter une ligne dessous">＋ ligne</button><button type="button" class="h-bt" data-bd-tbl="row-" title="Enlever la ligne">− ligne</button><button type="button" class="h-bt" data-bd-tbl="col+" title="Ajouter une colonne à droite">＋ colonne</button><button type="button" class="h-bt" data-bd-tbl="col-" title="Enlever la colonne">− colonne</button></div>
                     <div class="h-bd-row">${range && range.rs * range.cs > 1 ? '<button type="button" class="h-bt" data-bd-tbl="merge" title="Fusionner les cellules choisies">⊞ Fusionner</button>' : ''}${merged ? '<button type="button" class="h-bt" data-bd-tbl="unmerge" title="Séparer les cellules">⊟ Séparer</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="narrower" title="Colonne plus étroite">⇤⇥ −</button><button type="button" class="h-bt" data-bd-tbl="wider" title="Colonne plus large">⇤⇥ ＋</button>${cs ? '<button type="button" class="h-bt" data-bd-tbl="clear" title="Vider la cellule">⌫ vider</button>' : ''}<button type="button" class="h-bt" data-bd-tbl="csv" title="Télécharger en CSV (Excel, Numbers…)">⬇ CSV</button></div>
@@ -1213,7 +1221,7 @@
         const setOnSel = (k, v, keep = false) => { if (ro()) return; selItems().forEach(i => { if (k === 'fill' && !['shape', 'note', 'tag', 'folder', 'frame'].includes(i.type)) return; if (k === 'stroke' && !['shape', 'media', 'webimage', 'frame'].includes(i.type)) return; if (k === 'shape' && i.type !== 'shape') return; i[k] = v; sigs.delete(i.id); }); render(keep); };
         inspector.addEventListener('click', e => {
             const s = e.target.closest('[data-bd-set]'); if (s) { setOnSel(s.dataset.bdSet, s.dataset.v); commit(); return; }
-            const tg = e.target.closest('[data-bd-toggle]'); if (tg) { const k = tg.dataset.bdToggle, v = !selItems()[0]?.[k]; setOnSel(k, v); commit(); return; }
+            const tg = e.target.closest('[data-bd-toggle]'); if (tg) { const k = tg.dataset.bdToggle, v = !selItems()[0]?.[k]; if (k === 'bold') selItems().forEach(i => { delete i.weight; }); setOnSel(k, v); commit(); return; }
             const bs = e.target.closest('[data-bd-bgset]'); if (bs) { setBg(bs.dataset.bdBgset); return; }
             if (e.target.closest('[data-bd-headsame]')) { if (ro()) return; selItems().forEach(i => { delete i.headColor; sigs.delete(i.id); }); render(); commit(); return; }
             const ss = e.target.closest('[data-bd-setshape]'); if (ss) { applyShape(ss.dataset.bdSetshape); return; }
@@ -1339,10 +1347,14 @@
                     shapeKind = k; onDone?.(k); if (tool === 'shape') setTool('shape');
                 }});
         }
-        let localFonts = null;
+        let localFonts = null, fontStyles = null;
+        // les graisses : celles que la police a vraiment (lues sur l'ordinateur), sinon les neuf graisses habituelles
+        const WEIGHTS = [[100, 'Thin (100)'], [200, 'ExtraLight (200)'], [300, 'Light (300)'], [400, 'Regular (400)'], [500, 'Medium (500)'], [600, 'SemiBold (600)'], [700, 'Bold (700)'], [800, 'ExtraBold (800)'], [900, 'Black (900)']];
+        const styleWeight = s => { const t = String(s).toLowerCase().replace(/[\s_-]/g, ''); return /hairline|thin/.test(t) ? 100 : /extralight|ultralight/.test(t) ? 200 : /light/.test(t) ? 300 : /semibold|demibold|demi/.test(t) ? 600 : /extrabold|ultrabold/.test(t) ? 800 : /black|heavy/.test(t) ? 900 : /bold/.test(t) ? 700 : /medium/.test(t) ? 500 : 400; };
+        const fontWeights = fam => { const st = fam && fontStyles?.get(fam); if (!st) return null; const m = new Map(); [...st].forEach(s => { const w = styleWeight(s); if (!m.has(w) || !/italic|oblique/i.test(s)) m.set(w, s.replace(/\b(italic|oblique)\b/ig, '').trim() || s); }); return [...m.entries()].sort((x, y) => x[0] - y[0]); };
         async function loadLocalFonts() {
             if (!window.queryLocalFonts) { toast('Ce navigateur ne lit pas les polices de l’ordinateur : tape le nom de la police (ou fais des listes dans Maintenance → Réglages des tableaux).', 'error'); return; }
-            try { localFonts = [...new Set((await window.queryLocalFonts()).map(f => f.family))].sort((a, b2) => a.localeCompare(b2, 'fr')); renderInspector(); inspector.querySelector('[data-bd-fontfree]')?.focus(); toast(`${localFonts.length} polices de l’ordinateur : tape le début du nom.`); }
+            try { const all = await window.queryLocalFonts(); localFonts = [...new Set(all.map(f => f.family))].sort((a, b2) => a.localeCompare(b2, 'fr')); fontStyles = new Map(); all.forEach(f => { if (!fontStyles.has(f.family)) fontStyles.set(f.family, new Set()); fontStyles.get(f.family).add(f.style); }); renderInspector(); inspector.querySelector('[data-bd-fontfree]')?.focus(); toast(`${localFonts.length} polices de l’ordinateur : tape le début du nom.`); }
             catch (error) { toast('Lecture des polices refusée : ' + error.message, 'error'); }
         }
         // ── importer un tableau exporté (fichier .lcnda-tableau.json) : un nouveau tableau ──
@@ -1792,6 +1804,7 @@
         }
         function inspectorChange(e) {
             const one = selItems()[0];
+            if (e.target.matches('[data-bd-weight]')) { if (ro()) return true; const w = Number(e.target.value) || 400; selItems().forEach(i => { i.weight = w; i.bold = w >= 600; sigs.delete(i.id); }); render(true); commit(); return true; }
             if (e.target.matches('[data-bd-pshow]')) { if (ro()) return true; const ks = [...inspector.querySelectorAll('[data-bd-pshow]:checked')].map(x => x.dataset.bdPshow).join(','); selItems().filter(i => i.type === 'person').forEach(i => { i.pshow = ks; sigs.delete(i.id); }); render(true); commit(); return true; }
             if (e.target.matches('[data-bd-conn]')) { if (ro() || !e.target.value) return true; const pr = connectorProps(e.target.value); selItems().filter(i => i.type === 'line').forEach(i => { Object.assign(i, pr); sigs.delete(i.id); }); render(); commit(); return true; }
             if (e.target.matches('[data-bd-layersel]')) { if (ro()) return true; selItems().forEach(i => { if (e.target.value) i.layer = e.target.value; else delete i.layer; }); render(); commit(); return true; }

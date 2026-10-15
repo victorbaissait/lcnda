@@ -75,7 +75,7 @@ function board_clean_item(array $it): ?array
         'x' => $num($it['x'] ?? 0), 'y' => $num($it['y'] ?? 0), 'w' => $num($it['w'] ?? 120, 4, 20000), 'h' => $num($it['h'] ?? 80, 4, 20000), 'rot' => $num($it['rot'] ?? 0, -360, 360),
         'z' => (int) $num($it['z'] ?? 0, -1e6, 1e6), 'locked' => !empty($it['locked']), 'group' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($it['group'] ?? ''))];
     foreach (['fill', 'stroke', 'color', 'bg', 'headColor', 'lbColor', 'lbBg', 'lbBorder'] as $k) { if (isset($it[$k])) { $out[$k] = $color($it[$k]); } }
-    foreach (['sw' => [0, 500], 'fs' => [4, 500], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200], 'hard' => [0, 100], 'bw' => [0, 200], 'lbSize' => [2, 500], 'lbBw' => [0, 20], 'lbPad' => [0, 40], 'lbRadius' => [0, 40], 'lbPos' => [0, 100], 'lbOffset' => [0, 200], 'fh' => [4, 20000], 'gens' => [1, 10]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
+    foreach (['sw' => [0, 500], 'fs' => [4, 500], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200], 'hard' => [0, 100], 'bw' => [0, 200], 'lbSize' => [2, 500], 'lbBw' => [0, 20], 'lbPad' => [0, 40], 'lbRadius' => [0, 40], 'lbPos' => [0, 100], 'lbOffset' => [0, 200], 'fh' => [4, 20000], 'gens' => [1, 10], 'weight' => [100, 900]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
     foreach (['shape' => 40, 'text' => 20000, 'title' => 300, 'font' => 80, 'align' => 10, 'brush' => 20, 'dash' => 20, 'target' => 400, 'label' => 200, 'kind' => 40, 'part' => 120, 'note' => 2000, 'headStart' => 12, 'headEnd' => 12, 'path' => 12, 'list' => 10, 'lbFont' => 80, 'lbSide' => 6, 'pshow' => 80, 'hyp' => 6, 'tlMode' => 10, 'mapSrc' => 40, 'layer' => 30] as $k => $n) { if (isset($it[$k])) { $out[$k] = $str($it[$k], $n); } }
     // sûrs pour le style : alignement connu, police sans caractères spéciaux, pointes connues
     if (isset($out['align']) && !in_array($out['align'], ['left', 'center', 'right', 'justify'], true)) { $out['align'] = 'left'; }
@@ -91,7 +91,7 @@ function board_clean_item(array $it): ?array
     if (isset($out['lbSide']) && !in_array($out['lbSide'], ['on', 'above', 'below'], true)) { $out['lbSide'] = 'on'; }
     if (isset($out['lbFont'])) { $out['lbFont'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['lbFont'])); }
     if (isset($out['font'])) { $out['font'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['font'])); }
-    foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !in_array($out[$k], ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail'], true)) { $out[$k] = 'triangle'; } }
+    foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !in_array($out[$k], ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail', 'triangle_o', 'line_arrow', 'chevron2', 'cross', 'plus', 'star', 'heart', 'one', 'many', 'semicircle'], true) && !preg_match('/^myh_[\w-]{1,30}$/', $out[$k])) { $out[$k] = 'triangle'; } }
     if (isset($it['layout'])) { $out['layout'] = $str($it['layout'], 40); }
     // tableur : une grille de textes (100 lignes × 30 colonnes au plus), largeurs des colonnes
     if (($it['type'] ?? '') === 'table') {
