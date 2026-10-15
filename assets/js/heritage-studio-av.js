@@ -43,21 +43,25 @@
     }
 
     /** Choisir un autre son ou une autre vidéo : de la base, ou un fichier de l'ordinateur. */
+    /** Choisir un son, une vidéo ou (kind 'visual') une vidéo ou une photo : un fichier de l'ordinateur ou un média de la base */
     function pickOther(kind) {
         return new Promise(async resolve => {
             let rows = [];
-            try { rows = (await A().api('media_av_list', {kind})).items.filter(i => i.exists); } catch (_) {}
+            const kinds = kind === 'visual' ? ['video', 'image'] : [kind];
+            for (const k of kinds) { try { rows.push(...(await A().api('media_av_list', {kind: k})).items.filter(i => i.exists).map(i => ({...i, kind: k}))); } catch (_) {} }
             let done = false;
-            const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son', wide: true, submitLabel: 'Ajouter',
-                body: `<label class="h-rc-drop"><input type="file" name="file" accept="${kind}/*"><span>📁 Un fichier de l’ordinateur…</span></label>
-                    <p class="muted">… ou ${kind === 'video' ? 'une vidéo' : 'un son'} déjà dans la base :</p>
+            const what = kind === 'visual' ? 'une vidéo ou une photo' : kind === 'video' ? 'une vidéo' : 'un son';
+            const icon = r => r.kind === 'image' ? `<img class="h-avx-pickthumb" src="${url(r.filename)}" alt="" loading="lazy">` : r.kind === 'video' ? '🎬' : '🎵';
+            const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son', wide: true, submitLabel: 'Ajouter',
+                body: `<label class="h-rc-drop"><input type="file" name="file" accept="${kind === 'visual' ? 'video/*,image/*' : kind + '/*'}"><span>📁 Un fichier de l’ordinateur…</span></label>
+                    <p class="muted">… ou ${what} déjà dans la base :</p>
                     <input type="search" data-avx-q placeholder="Chercher…">
-                    <div class="h-rc-results" data-avx-list>${rows.map(r => `<label class="checkbox-line"><input type="radio" name="pick" value="${r.id}"> ${esc(r.title || r.filename)} <small class="muted">${r.duration ? fmt(r.duration, false) : ''}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
+                    <div class="h-rc-results" data-avx-list>${rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}"> ${icon(r)} ${esc(r.title || r.filename)} <small class="muted">${r.duration ? fmt(r.duration, false) : r.kind === 'image' ? 'photo' : ''}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
                 onOpen: d => d.querySelector('[data-avx-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-avx-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
                 onSubmit: form => {
                     const f = form.querySelector('[name=file]').files[0], pick = form.querySelector('[name=pick]:checked');
-                    if (f) { done = true; resolve({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}); return; }
-                    if (pick) { const r = rows.find(x => x.id === Number(pick.value)); done = true; resolve({src: url(r.filename), title: r.title || r.filename, media: r}); return; }
+                    if (f) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : kind === 'visual' ? '' : kind; if (!k) { toast('Ce fichier n’est ni une vidéo ni une photo.', 'error'); return false; } done = true; resolve({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f, kind: k}); return; }
+                    if (pick) { const r = rows[Number(pick.value)]; if (!r) return false; done = true; resolve({src: url(r.filename), title: r.title || r.filename, media: r, kind: r.kind}); return; }
                     toast('Choisis un fichier ou un élément de la liste.', 'error'); return false;
                 },
             });
@@ -518,6 +522,8 @@
         const tm = setTimeout(() => { el.removeEventListener('durationchange', done); rej(new Error('Durée illisible')); }, 8000);
         el.addEventListener('durationchange', done); el.currentTime = 1e9;
     });
+    const IMG_DUR = 5, IMG_MAX = 3600; // une photo : 5 s au départ, autant qu'on veut ensuite
+    const loadImageMeta = src => new Promise((res, rej) => { const im = new Image(); im.onload = () => res({dur: IMG_MAX, w: im.naturalWidth, h: im.naturalHeight}); im.onerror = () => rej(new Error('Photo illisible')); im.src = src; });
     const loadMeta = src => new Promise((res, rej) => { const v = document.createElement('video'); v.preload = 'metadata'; v.muted = true; v.onloadedmetadata = () => realDuration(v).then(dur => res({dur, w: v.videoWidth, h: v.videoHeight}), () => rej(new Error('Vidéo illisible (durée inconnue)'))); v.onerror = () => rej(new Error('Vidéo illisible')); v.src = src; });
 
     /* ═════════════════════════ 🎬 MONTAGE VIDÉO ═════════════════════════
@@ -530,6 +536,23 @@
     const LOOKS = [['Aucun', {}], ['Couleurs vives', {sat: 1.35, contrast: 1.08}], ['Plus chaud', {warm: 0.35}], ['Plus froid', {warm: -0.35}], ['Ancien film', {sat: 0.55, warm: 0.45, contrast: 0.92}],
         ['Noir et blanc', {sat: 0}], ['Contrasté', {contrast: 1.3, bright: 0.97}], ['Doux', {contrast: 0.88, bright: 1.05, sat: 0.9}]];
     const LOOK0 = {bright: 1, contrast: 1, sat: 1, hue: 0, warm: 0};
+    /* Transformer, recadrer, déformer (comme l'inspecteur de Final Cut) : valeurs fixes (c.tf) ou images clés (c.kf, temps de la source) */
+    const TF0 = {px: 0, py: 0, rot: 0, scale: 100, sx: 100, sy: 100, ax: 0, ay: 0, opacity: 100, cl: 0, cr: 0, ct: 0, cb: 0, kx: 0, ky: 0};
+    const TF_SECTION = {px: 'tfOn', py: 'tfOn', rot: 'tfOn', scale: 'tfOn', sx: 'tfOn', sy: 'tfOn', ax: 'tfOn', ay: 'tfOn', cl: 'cropOn', cr: 'cropOn', ct: 'cropOn', cb: 'cropOn', kx: 'distOn', ky: 'distOn'};
+    const BLENDS = [['source-over', 'Normal'], ['multiply', 'Produit'], ['screen', 'Superposition claire (écran)'], ['overlay', 'Incrustation'], ['darken', 'Obscurcir'], ['lighten', 'Éclaircir'], ['difference', 'Différence'], ['luminosity', 'Luminosité']];
+    const FITS = [['fit', 'Adapter (toute l’image, bandes noires)'], ['fill', 'Remplir (recadre pour remplir)'], ['none', 'Aucune (taille d’origine)']];
+    /** Valeur d'un réglage à un moment (temps de la source) : entre deux images clés, de l'une à l'autre (douce ou régulière) */
+    function tfAt(c, k, local) {
+        if (TF_SECTION[k] && c[TF_SECTION[k]] === false) return TF0[k];
+        const list = c.kf?.[k];
+        if (list?.length) {
+            if (local <= list[0].t) return list[0].v;
+            if (local >= list.at(-1).t) return list.at(-1).v;
+            for (let i = 1; i < list.length; i++) { const a = list[i - 1], b = list[i]; if (local <= b.t) { const u = (local - a.t) / Math.max(1e-6, b.t - a.t), e = c.ease === 'linear' ? u : u * u * (3 - 2 * u); return a.v + (b.v - a.v) * e; } }
+        }
+        const v = Number(c.tf?.[k]); return Number.isFinite(v) ? v : TF0[k];
+    }
+    const dimsOf = el => ({vw: el?.videoWidth || el?.naturalWidth || 0, vh: el?.videoHeight || el?.naturalHeight || 0});
     const FONTS_V = [['Georgia, serif', 'Georgia'], ['Helvetica, Arial, sans-serif', 'Helvetica'], ['"Times New Roman", serif', 'Times'], ['"Courier New", monospace', 'Courier'], ['"Brush Script MT", cursive', 'Manuscrite'], ['Impact, sans-serif', 'Impact']];
     let uid = 0; const nid = p => p + (++uid) + Date.now().toString(36).slice(-3);
     /* Réglages du montage (Maintenance → Montage, retouche et son) : disposition et enregistrement par défaut */
@@ -585,9 +608,10 @@
         const outGain = ctx.createGain(); outGain.gain.value = fx.mute ? 0 : fx.volume; tail.connect(outGain);
         const dest = out === 'record' ? ctx.createMediaStreamDestination() : null; outGain.connect(dest || ctx.destination);
         const els = new Map(); // id du morceau → {el, gain}
-        const elFor = (id, src, isAudio) => {
+        const elFor = (id, src, isAudio, isImage = false) => {
             let e = els.get(id); if (e && e.src === src) return e;
-            if (e) { e.el.pause(); e.el.removeAttribute('src'); }
+            if (e) { if (!e.img) e.el.pause(); e.el.removeAttribute('src'); }
+            if (isImage) { const im = new Image(); im.crossOrigin = 'anonymous'; im.decoding = 'async'; im.src = src; e = {el: im, gain: null, src, img: true}; els.set(id, e); return e; }
             const el = document.createElement(isAudio ? 'audio' : 'video'); el.preload = 'auto'; el.playsInline = true; el.crossOrigin = 'anonymous'; el.src = src; el.muted = false;
             const node = ctx.createMediaElementSource(el), gain = ctx.createGain(); gain.gain.value = 0; node.connect(gain).connect(master);
             e = {el, gain, src}; els.set(id, e); return e;
@@ -605,7 +629,8 @@
             const {list} = active(tt), keep = new Set();
             for (const it of list) {
                 const c = it.kind === 'v1' ? it.x.c : it.c, so = P.sources[c.s]; if (!so) continue;
-                const e = elFor(c.id, so.src, it.kind === 'a'); keep.add(c.id);
+                const e = elFor(c.id, so.src, it.kind === 'a', so.kind === 'image'); keep.add(c.id);
+                if (e.img) continue; // une image : rien à caler ni à jouer
                 if (hard || Math.abs(e.el.currentTime - it.local) > 0.35) { try { e.el.currentTime = it.local; } catch (_) {} }
                 // volume (fondus du son, morceau muet ou son détaché)
                 let v = it.kind === 'a' ? (c.vol ?? 1) : (c.mute ? 0 : (c.vol ?? 1));
@@ -614,13 +639,33 @@
                 e.gain.gain.value = Math.max(0, v);
                 if (playing && e.el.paused) e.el.play().catch(() => {}); if (!playing && !e.el.paused) e.el.pause();
             }
-            els.forEach((e, id) => { if (!keep.has(id)) { e.gain.gain.value = 0; if (!e.el.paused) e.el.pause(); } });
+            els.forEach((e, id) => { if (!keep.has(id) && !e.img) { e.gain.gain.value = 0; if (!e.el.paused) e.el.pause(); } });
         }
-        function drawVideo(el, alpha, look) {
-            const vw = el.videoWidth, vh = el.videoHeight; if (!vw || alpha <= 0) return;
-            const turn = fx.rotate % 180 !== 0;
-            g.save(); g.globalAlpha = alpha; g.filter = lookFilter(look || {}, P.look); g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
-            const bw = turn ? H : W, bh = turn ? W : H, k = Math.min(bw / vw, bh / vh); g.drawImage(el, -vw * k / 2, -vh * k / 2, vw * k, vh * k); g.restore();
+        /** Une vidéo ou une image : dans tout l'écran (piste principale) ou dans sa case (incrustation), transformée, recadrée, déformée */
+        function drawClip(el, c, local, alpha, main) {
+            const {vw, vh} = dimsOf(el); if (!vw || alpha <= 0) return;
+            const v = k => tfAt(c, k, local), op = v('opacity') / 100; if (op <= 0) return;
+            g.save(); g.globalAlpha = Math.max(0, Math.min(1, alpha * op)); g.filter = lookFilter(c.look || {}, P.look); g.globalCompositeOperation = BLENDS.some(b => b[0] === c.blend) ? c.blend : 'source-over';
+            let w, h;
+            if (main) {
+                const turn = fx.rotate % 180 !== 0, bw = turn ? H : W, bh = turn ? W : H;
+                const ref = P.sources[P.v1[0]?.s], k = c.fit === 'fill' ? Math.max(bw / vw, bh / vh) : c.fit === 'none' ? Math.min(bw / (ref?.w || vw), bh / (ref?.h || vh)) : Math.min(bw / vw, bh / vh);
+                w = vw * k; h = vh * k; g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
+            } else {
+                w = (c.w || 35) / 100 * W; h = w * vh / vw; g.translate((c.x ?? 62) / 100 * W + w / 2, (c.y ?? 6) / 100 * H + h / 2);
+            }
+            const ax = v('ax') / 100 * W, ay = v('ay') / 100 * H, sc = v('scale') / 100;
+            g.translate(v('px') / 100 * W + ax, v('py') / 100 * H + ay); g.rotate(v('rot') * Math.PI / 180); g.scale(sc * v('sx') / 100, sc * v('sy') / 100);
+            const kx = v('kx'), ky = v('ky'); if (kx || ky) g.transform(1, Math.tan(ky * Math.PI / 180), Math.tan(kx * Math.PI / 180), 1, 0, 0);
+            g.translate(-ax, -ay);
+            const cl = Math.max(0, Math.min(95, v('cl'))) / 100, cr = Math.max(0, Math.min(95, v('cr'))) / 100, ct = Math.max(0, Math.min(95, v('ct'))) / 100, cb = Math.max(0, Math.min(95, v('cb'))) / 100;
+            const fw = 1 - cl - cr, fh = 1 - ct - cb;
+            if (fw > 0.01 && fh > 0.01) {
+                const dx = -w / 2 + w * cl, dy = -h / 2 + h * ct;
+                g.drawImage(el, vw * cl, vh * ct, vw * fw, vh * fh, dx, dy, w * fw, h * fh);
+                if (!main && c.border !== false) { g.filter = 'none'; g.globalCompositeOperation = 'source-over'; g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, W / 400) / Math.max(0.1, Math.abs(sc)); g.strokeRect(dx, dy, w * fw, h * fh); }
+            }
+            g.restore();
         }
         function warmth(look) {
             const w = (look?.warm || 0) + (P.look.warm || 0); if (!w) return;
@@ -652,7 +697,7 @@
             list.filter(i => i.kind === 'v1').sort((a, b) => a.k - b.k).forEach(it => {
                 const e = els.get(it.x.c.id); if (!e) return;
                 let a = 1; if (it.x.cross && tt < it.x.at + it.x.cross) a = (tt - it.x.at) / it.x.cross;
-                drawVideo(e.el, a, it.x.c.look); warmth(it.x.c.look);
+                drawClip(e.el, it.x.c, it.local, a, true); warmth(it.x.c.look);
             });
             // fondus au noir ou au blanc : fin du morceau d'avant, puis début du suivant
             L.forEach((x, k) => {
@@ -667,11 +712,9 @@
             if (P.fadeEnd && T - tt < 1) { g.save(); g.globalAlpha = 1 - (T - tt); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
             // pistes d'incrustation : celle du bas d'abord, celle du haut devant
             list.filter(i => i.kind === 'v2').sort((a, b) => trackIdx(P, trackOf(P, b.c, 'v2')) - trackIdx(P, trackOf(P, a.c, 'v2'))).forEach(it => {
-                const e = els.get(it.c.id); if (!e?.el.videoWidth) return; const c = it.c, vw = e.el.videoWidth, vh = e.el.videoHeight;
-                const w = (c.w || 35) / 100 * W, h = w * vh / vw, x0 = (c.x ?? 62) / 100 * W, y0 = (c.y ?? 6) / 100 * H, local = tt - c.at, len = c.to - c.from;
+                const e = els.get(it.c.id); if (!dimsOf(e?.el).vw) return; const c = it.c, local = tt - c.at, len = c.to - c.from;
                 let a = (c.opacity ?? 100) / 100; if (c.fade !== false) { if (local < 0.5) a *= local / 0.5; if (len - local < 0.5) a *= (len - local) / 0.5; }
-                g.save(); g.globalAlpha = Math.max(0, a); g.filter = lookFilter(c.look || {}, P.look); g.drawImage(e.el, x0, y0, w, h); g.restore();
-                if (c.border !== false) { g.save(); g.globalAlpha = Math.max(0, a); g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, W / 400); g.strokeRect(x0, y0, w, h); g.restore(); }
+                drawClip(e.el, c, it.local, Math.max(0, a), false);
             });
             P.texts.filter(x => tt >= x.at && tt < x.at + x.dur && !trackHidden(P, trackOf(P, x, 'texts'))).sort((a, b) => trackIdx(P, trackOf(P, b, 'texts')) - trackIdx(P, trackOf(P, a, 'texts'))).forEach(x => drawText(x, tt));
             if (out === 'preview' && api.decorate) { g.save(); api.decorate(g, W, H, tt); g.restore(); } // cadre de l'élément choisi (aperçu seulement)
@@ -683,18 +726,18 @@
             if (t >= T) { t = T; paint(t); api.pause(); onTime?.(t, true); return; }
             sync(t); paint(t); onTime?.(t); raf = requestAnimationFrame(loop);
         };
-        const ready = () => Promise.all([...els.values()].map(e => e.el.readyState >= 2 ? 0 : new Promise(r => { const f = () => { e.el.removeEventListener('loadeddata', f); r(); }; e.el.addEventListener('loadeddata', f); setTimeout(r, 4000); })));
+        const ready = () => Promise.all([...els.values()].map(e => e.img ? (e.el.complete ? 0 : new Promise(r => { e.el.addEventListener('load', r, {once: true}); e.el.addEventListener('error', r, {once: true}); setTimeout(r, 4000); })) : e.el.readyState >= 2 ? 0 : new Promise(r => { const f = () => { e.el.removeEventListener('loadeddata', f); r(); }; e.el.addEventListener('loadeddata', f); setTimeout(r, 4000); })));
         const seeked = () => Promise.all([...els.values()].map(e => e.el.seeking ? new Promise(r => { e.el.addEventListener('seeked', r, {once: true}); setTimeout(r, 2500); }) : 0));
         const api = {
             get t() { return t; }, get playing() { return playing; }, ctx, stream: dest?.stream,
             async seek(tt) { t = Math.max(0, Math.min(montageEnd(P), tt)); const was = playing; if (was) api.pause(); sync(t, true); await ready(); await seeked(); paint(t); onTime?.(t); if (was) api.play(); },
             async play() { if (playing) return; if (ctx.state === 'suspended') await ctx.resume(); if (t >= montageEnd(P) - 0.05) t = 0; sync(t, true); await ready(); await seeked(); playing = true; t0 = t; p0 = performance.now(); sync(t); raf = requestAnimationFrame(loop); },
-            pause() { playing = false; cancelAnimationFrame(raf); els.forEach(e => e.el.pause()); },
+            pause() { playing = false; cancelAnimationFrame(raf); els.forEach(e => { if (!e.img) e.el.pause(); }); },
             redraw() { paint(t); },
             decorate: null,
-            videoSize(id) { const e = els.get(id); return e?.el.videoWidth ? {vw: e.el.videoWidth, vh: e.el.videoHeight} : null; },
+            videoSize(id) { const d = dimsOf(els.get(id)?.el); return d.vw ? d : null; },
             async refresh() { sync(t); await ready(); paint(t); },
-            destroy() { api.pause(); els.forEach(e => { e.el.removeAttribute('src'); try { e.el.load(); } catch (_) {} }); els.clear(); if (out === 'record') ctx.close(); else { try { master.disconnect(); outGain.disconnect(); } catch (_) {} } },
+            destroy() { api.pause(); els.forEach(e => { e.el.removeAttribute('src'); if (!e.img) { try { e.el.load(); } catch (_) {} } }); els.clear(); if (out === 'record') ctx.close(); else { try { master.disconnect(); outGain.disconnect(); } catch (_) {} } },
         };
         return api;
     }
@@ -735,6 +778,8 @@
         // une piste libre de ce genre à ce moment-là, sinon une nouvelle
         const LISTS = {v: P.v2, t: P.texts, a: P.audio}, LISTNAME = {v: 'v2', t: 'texts', a: 'audio'};
         const lenOf = c => c.dur ?? (c.to - c.from);
+        const isImg = c => P.sources[c?.s]?.kind === 'image';
+        const srcLen = s => P.sources[s]?.kind === 'image' ? IMG_DUR : P.sources[s].dur;
         function addTrack(kind, at = null) {
             const n = Math.max(0, ...P.tracks.filter(t => t.kind === kind).map(t => Number(String(t.id).slice(1)) || 0)) + 1, base = {v: 'V', t: 'T', a: 'A'}[kind];
             let id = base + n; while (P.tracks.some(t => t.id === id)) id = base + (++uid);
@@ -770,13 +815,15 @@
                     <button type="button" class="button small secondary" data-mt-op="right" title="Reculer le morceau dans la piste 1">Reculer →</button>
                     <button type="button" class="button small secondary" data-mt-op="detach" title="Le son du morceau passe sur une piste son, à part">🔊 Détacher le son</button>
                     <button type="button" class="button small secondary" data-mt-op="del" title="Enlever l'élément choisi">🗑 Enlever</button>
-                    <button type="button" class="button small" data-mt-op="addv1">➕ Vidéo à la suite</button>
-                    <button type="button" class="button small secondary" data-mt-op="addv2" title="Une vidéo dans un coin de l'image, à la tête de lecture">➕ Incrustation</button>
+                    <button type="button" class="button small" data-mt-op="addv1" title="Une vidéo ou une photo, à la suite dans la piste Vidéo 1">➕ Vidéo / photo à la suite</button>
+                    <button type="button" class="button small secondary" data-mt-op="addv2" title="Une vidéo ou une photo dans un coin de l'image, à la tête de lecture">➕ Incrustation</button>
+                    <button type="button" class="button small secondary" data-mt-op="kfprev" title="Aller à l'image clé précédente de l'élément choisi">◀ ◆</button>
+                    <button type="button" class="button small secondary" data-mt-op="kfnext" title="Aller à l'image clé suivante de l'élément choisi">◆ ▶</button>
                     <button type="button" class="button small secondary" data-mt-op="addtext">➕ Titre / texte</button>
                     <button type="button" class="button small secondary" data-mt-op="adda">➕ Son / musique</button>
                 </div>
                 <div class="h-mt-tl" data-mt-tl></div>
-                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse les incrustations, les textes et les sons pour les déplacer dans le temps. Espace = lire / pause.</p>
+                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéo et photo ↔ vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
                 ${ver.html}
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
@@ -791,13 +838,14 @@
         const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); eng.decorate = decorate; await eng.seek(t); };
         // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
         const touch = async (lvl = 1, pane = true) => { dirty = true; const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) lvl = 2; if (lvl === 2) { await rebuild(); drawTl(pane); return; } drawTl(pane); if (lvl === 1) eng?.seek(eng.t); else eng?.refresh(); };
-        const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + OFF) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; };
+        const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + OFF) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; if (!eng?.playing || end) syncInspector(); };
         const all = () => [...P.v1.map(c => ['v1', c]), ...P.v2.map(c => ['v2', c]), ...P.texts.map(c => ['texts', c]), ...P.audio.map(c => ['audio', c])];
         const selected = () => { const f = all().find(([tr, c]) => sel && tr === sel.track && c.id === sel.id); return f ? f[1] : null; };
         // frise : une ligne par piste
         function drawTl(pane = true) {
             const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
-            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${esc(label)}</button>`;
+            const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) * pxs}px" title="Image clé ${fmt(t - (c.from || 0))}"></i>`).join(''); };
+            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}</button>`;
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
             const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${OFF + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
             const clipsOf = tr => tr.kind === 'main' ? L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join('')
@@ -819,15 +867,56 @@
         const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
             ${rng(scope + '.bright', 'Luminosité', 0.4, 1.8, 0.02, L.bright ?? 1, '%')}${rng(scope + '.contrast', 'Contraste', 0.4, 1.8, 0.02, L.contrast ?? 1, '%')}${rng(scope + '.sat', 'Saturation', 0, 2, 0.02, L.sat ?? 1, '%')}${rng(scope + '.warm', 'Température (froid ↔ chaud)', -0.8, 0.8, 0.02, L.warm ?? 0)}${rng(scope + '.hue', 'Teinte', -60, 60, 1, L.hue ?? 0, '°')}`;
         const trackSel = (list, c) => { const cur = trackOf(P, c, list); return `<label class="h-avx-row">Piste <select data-mt-k="track">${P.tracks.filter(t => t.kind === KIND_OF_LIST[list]).map(t => `<option value="${t.id}" ${t.id === cur ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label>`; };
+        /* Inspecteur (façon Final Cut) : Composition, Transformer, Recadrer, Distorsion, Adaptation ; ◇ = image clé au moment de la tête de lecture */
+        const localOf = c => { const t = eng?.t || 0; if (sel?.track === 'v1') { const x = layoutV1(P).find(y => y.c === c); if (!x) return c.from; return Math.max(c.from, Math.min(c.to, c.from + t - x.at)); } return Math.max(c.from, Math.min(c.to, c.from + t - (c.at || 0))); };
+        const KF_EPS = 1 / 30;
+        const kfAt = (c, k, local) => (c.kf?.[k] || []).findIndex(x => Math.abs(x.t - local) < KF_EPS);
+        const fmtTf = (k, v) => ['rot', 'kx', 'ky'].includes(k) ? `${Math.round(v * 10) / 10}°` : `${Math.round(v * 10) / 10} %`;
+        const IROWS = {
+            comp: [['opacity', 'Opacité', 0, 100, 1]],
+            tf: [['px', 'Position X', -100, 100, 0.5], ['py', 'Position Y', -100, 100, 0.5], ['rot', 'Rotation', -360, 360, 1], ['scale', 'Échelle (tout)', 5, 400, 1], ['sx', 'Échelle X', 5, 400, 1], ['sy', 'Échelle Y', 5, 400, 1], ['ax', 'Ancrage X', -50, 50, 0.5], ['ay', 'Ancrage Y', -50, 50, 0.5]],
+            crop: [['cl', 'Gauche', 0, 95, 0.5], ['cr', 'Droite', 0, 95, 0.5], ['ct', 'Haut', 0, 95, 0.5], ['cb', 'Bas', 0, 95, 0.5]],
+            dist: [['kx', 'Inclinaison horizontale', -60, 60, 0.5], ['ky', 'Inclinaison verticale', -60, 60, 0.5]],
+        };
+        const irow = (c, local, [k, label, min, max, step]) => { const v = tfAt(c, k, local), has = (c.kf?.[k] || []).length, on = kfAt(c, k, local) >= 0;
+            return `<div class="h-mt-irow"><span>${label}</span><input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-tf="${k}"><output data-mt-tfo="${k}">${fmtTf(k, v)}</output><button type="button" class="h-mt-kf ${has ? 'has' : ''} ${on ? 'on' : ''}" data-mt-kf="${k}" title="${on ? 'Enlever cette image clé' : 'Ajouter une image clé ici (la valeur pourra changer au fil du temps)'}">${on ? '◆' : '◇'}</button></div>`; };
+        const isec = (c, key, flag, title, icon, body, open = true) => `<details class="h-mt-isec" ${open ? 'open' : ''}><summary>${flag ? `<input type="checkbox" data-mt-k="${flag}" ${c[flag] !== false ? 'checked' : ''} title="Activer / couper">` : ''}<b>${title}</b><span class="h-mt-iico">${icon}</span><button type="button" class="h-mt-ireset" data-mt-ireset="${key}" title="Remettre à zéro">↺</button></summary><div class="h-mt-ibody">${body}</div></details>`;
+        function inspectorHtml(c, main) {
+            const local = localOf(c), rows = key => IROWS[key].map(r => irow(c, local, r)).join('');
+            return `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><b>🎛️ Réglages de l’image</b><span class="muted">◇ image clé à ${fmt(local - c.from)}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select></label></div>
+                ${isec(c, 'comp', '', 'Composition', '◐', rows('comp') + `<div class="h-mt-irow"><span>Mode de fusion</span><select data-mt-k="blend">${BLENDS.map(([k, l]) => `<option value="${k}" ${(c.blend || 'source-over') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`)}
+                ${isec(c, 'tf', 'tfOn', 'Transformer', '⬚', rows('tf'))}
+                ${isec(c, 'crop', 'cropOn', 'Recadrer', '⌗', rows('crop'), false)}
+                ${isec(c, 'dist', 'distOn', 'Distorsion', '▱', rows('dist'), false)}
+                ${main ? isec(c, 'fit', '', 'Adaptation spatiale', '⤢', `<div class="h-mt-irow"><span>Type</span><select data-mt-k="fit">${FITS.map(([k, l]) => `<option value="${k}" ${(c.fit || 'fit') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`, false) : ''}</div>`;
+        }
+        /** Met les curseurs de l'inspecteur à la valeur du moment (images clés) sans tout redessiner */
+        function syncInspector() {
+            const box = dl.querySelector('[data-mt-insp]'), c = selected(); if (!box || !c) return;
+            const local = localOf(c);
+            box.querySelectorAll('[data-mt-tf]').forEach(el => { const k = el.dataset.mtTf, v = tfAt(c, k, local); if (document.activeElement !== el) el.value = v; const o = box.querySelector(`[data-mt-tfo="${k}"]`); if (o) o.textContent = fmtTf(k, v); const b = box.querySelector(`[data-mt-kf="${k}"]`); if (b) { const on = kfAt(c, k, local) >= 0; b.classList.toggle('on', on); b.classList.toggle('has', !!(c.kf?.[k] || []).length); b.textContent = on ? '◆' : '◇'; } });
+            const hd = box.querySelector('.h-mt-ihead .muted'); if (hd) hd.textContent = `◇ image clé à ${fmt(local - c.from)}`;
+        }
+        /** Aller à l'image clé précédente / suivante de l'élément choisi */
+        function jumpKf(dir) {
+            const c = selected(); if (!c || !['v1', 'v2'].includes(sel.track)) return toast('Choisis une vidéo ou une photo sur la frise.', 'error');
+            const local = localOf(c), ts = [...new Set(Object.values(c.kf || {}).flat().map(k => k.t))].sort((a, b) => a - b);
+            const t = dir > 0 ? ts.find(x => x > local + KF_EPS) : ts.reverse().find(x => x < local - KF_EPS);
+            if (t === undefined) return toast(dir > 0 ? 'Pas d’image clé après.' : 'Pas d’image clé avant.');
+            const start = sel.track === 'v1' ? layoutV1(P).find(y => y.c === c)?.at || 0 : c.at; eng.seek(start + t - c.from).then(syncInspector);
+        }
         function drawPane() {
             const c = selected(), item = $('[data-mt-pane="item"]');
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
-            else if (sel.track === 'v1') item.innerHTML = `<h4>🎬 Morceau de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>
+            else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
+                ${isImg(c) ? rng('imgdur', 'Durée à l’écran', 0.5, 60, 0.1, Math.round((c.to - c.from) * 10) / 10, ' s') : ''}
                 <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${rng('tr.d', 'Durée du fondu', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}
                 ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>
+                ${inspectorHtml(c, true)}
                 <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
-            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}${rng('opacity', 'Opacité', 10, 100, 1, c.opacity ?? 100, ' %')}
-                ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%')}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>`;
+            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${isImg(c) ? rng('imgdur', 'Durée à l’écran', 0.5, 60, 0.1, Math.round((c.to - c.from) * 10) / 10, ' s') : ''}${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}
+                ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%')}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
+                ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <label class="h-avx-row">Mouvement <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${c.anim === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${rng('dur', 'Durée', 0.5, 30, 0.1, c.dur, ' s')}${rng('size', 'Taille', 2, 20, 0.5, c.size ?? 6, ' %')}
@@ -848,6 +937,14 @@
         const setK = (obj, k, v) => { const ks = k.split('.'); let o = obj; ks.slice(0, -1).forEach(x => { o[x] = o[x] || {}; o = o[x]; }); o[ks.at(-1)] = v; };
         const audioFx = k => /^fx\.(clarity|noise|mute|volume)$/.test(k);
         dl.querySelector('.h-mt-side').addEventListener('input', e => {
+            const tfEl = e.target.closest('[data-mt-tf]');
+            if (tfEl) { // un réglage de l'inspecteur : la valeur fixe, ou l'image clé du moment s'il y en a
+                const c = selected(); if (!c) return; const k = tfEl.dataset.mtTf, v = Number(tfEl.value), local = localOf(c);
+                if ((c.kf?.[k] || []).length) { const i = kfAt(c, k, local); if (i >= 0) c.kf[k][i].v = v; else { c.kf[k].push({t: local, v}); c.kf[k].sort((a, b) => a.t - b.t); drawTl(false); } }
+                else { c.tf = c.tf || {}; c.tf[k] = v; }
+                const o = dl.querySelector(`[data-mt-tfo="${k}"]`); if (o) o.textContent = fmtTf(k, v);
+                dirty = true; syncInspector(); eng?.redraw(); return;
+            }
             const el = e.target.closest('[data-mt-k]'); if (!el) return;
             let k = el.dataset.mtK, v = el.type === 'checkbox' ? el.checked : el.type === 'range' ? Number(el.value) : el.value;
             const o = el.parentElement.querySelector('output'); if (o && el.type === 'range') o.textContent = o.dataset.u === '%' ? Math.round(v * 100) + ' %' : v + o.dataset.u;
@@ -857,6 +954,7 @@
             else if (c) {
                 if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
                 else if (k === 'track') { c.track = v; touch(1); return; }
+                else if (k === 'imgdur') { c.to = c.from + Math.max(0.5, Number(v)); }
                 else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; }
                 else setK(c, k, v);
             }
@@ -866,6 +964,16 @@
             const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
             const rot = e.target.closest('[data-mt-rot]'); if (rot) { P.fx.rotate = (P.fx.rotate + Number(rot.dataset.mtRot) + 360) % 360; touch(2); }
+            const kb = e.target.closest('[data-mt-kf]');
+            if (kb) { const c = selected(); if (!c) return; const k = kb.dataset.mtKf, local = localOf(c); c.kf = c.kf || {}; const list = c.kf[k] = c.kf[k] || [], i = kfAt(c, k, local);
+                if (i >= 0) { list.splice(i, 1); if (!list.length) { c.tf = c.tf || {}; c.tf[k] = tfAt(c, k, local); delete c.kf[k]; } }
+                else { list.push({t: local, v: tfAt(c, k, local)}); list.sort((a, b) => a.t - b.t); }
+                dirty = true; drawTl(false); syncInspector(); eng?.redraw(); return; }
+            const rs = e.target.closest('[data-mt-ireset]');
+            if (rs) { e.preventDefault(); const c = selected(); if (!c) return; const key = rs.dataset.mtIreset;
+                if (key === 'fit') delete c.fit; else if (key === 'comp') { delete c.blend; if (c.tf) delete c.tf.opacity; if (c.kf) delete c.kf.opacity; }
+                else IROWS[key].forEach(([k]) => { if (c.tf) delete c.tf[k]; if (c.kf) delete c.kf[k]; });
+                touch(0); return; }
         });
         // sur l'image : glisser une incrustation ou un texte pour le déplacer, tirer son coin pour changer sa taille
         const measure = document.createElement('canvas').getContext('2d');
@@ -911,13 +1019,33 @@
             if (!clip) { if (e.target.closest('.h-mt-lname, .h-mt-addtracks')) return; eng.seek((e.clientX - r.left - OFF) / pxs); return; }
             const [track, id] = clip.dataset.mtClip.split(':'); sel = {track, id};
             const c = selected(); drawTl();
-            if (track === 'v1' || !c) { eng.seek((e.clientX - r.left - OFF) / pxs); return; }
-            const at0 = c.at, el = tl.querySelector(`[data-mt-clip="${track}:${id}"]`); let moved = false;
-            const mv = ev => { const d = (ev.clientX - x0) / pxs; if (Math.abs(ev.clientX - x0) > 3) moved = true; c.at = Math.max(0, Math.round((at0 + d) * 10) / 10); if (el) el.style.left = (OFF + c.at * pxs) + 'px'; };
+            if (!c) { eng.seek((e.clientX - r.left - OFF) / pxs); return; }
+            const L0 = layoutV1(P), at0 = track === 'v1' ? (L0.find(x => x.c === c)?.at || 0) : c.at, el = tl.querySelector(`[data-mt-clip="${track}:${id}"]`); let moved = false, y0 = e.clientY;
+            const mv = ev => { const d = (ev.clientX - x0) / pxs; if (Math.abs(ev.clientX - x0) > 3 || Math.abs(ev.clientY - y0) > 6) moved = true; const at = Math.max(0, Math.round((at0 + d) * 10) / 10); if (track !== 'v1') c.at = at; if (el) { el.style.left = (OFF + at * pxs) + 'px'; el.style.pointerEvents = 'none'; if (track === 'v1') el.style.transform = `translateY(${ev.clientY - y0}px)`; } };
             const up = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up);
-                const ln = document.elementFromPoint(ev.clientX, ev.clientY)?.closest('[data-mt-lane]'); // posé sur une autre piste du même genre
-                if (ln && ln.dataset.kind === KIND_OF_LIST[track] && ln.dataset.mtLane !== trackOf(P, c, track)) { c.track = ln.dataset.mtLane; moved = true; }
-                if (moved) touch(1); else eng.seek((ev.clientX - r.left - OFF) / pxs); };
+                if (!moved) return eng.seek((ev.clientX - r.left - OFF) / pxs);
+                const drop = Math.max(0, at0 + (ev.clientX - x0) / pxs);
+                const ln = document.elementFromPoint(ev.clientX, ev.clientY)?.closest('[data-mt-lane]'), kind = ln?.dataset.kind;
+                if (track === 'v1') {
+                    if (kind === 'v') { // la piste principale → une piste d'incrustation (vidéo ou photo)
+                        P.v1.splice(P.v1.indexOf(c), 1); const k = {...c, id: nid('i'), at: Math.round(drop * 10) / 10, w: 35, x: 62, y: 6, opacity: 100, track: ln.dataset.mtLane}; delete k.tr;
+                        if (P.v1[0]?.tr) P.v1[0].tr = {type: 'none', d: 1};
+                        P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1);
+                    }
+                    if (kind === 'main') { // ranger dans la piste principale : d'après le moment où on le lâche
+                        const rest = P.v1.filter(x => x !== c), Lr = layoutV1({...P, v1: rest}); let j = Lr.findIndex(x => drop < (x.at + x.end) / 2); if (j < 0) j = rest.length;
+                        rest.splice(j, 0, c); P.v1.splice(0, P.v1.length, ...rest); if (P.v1[0]?.tr) P.v1[0].tr = {...P.v1[0].tr, type: 'none'}; return touch(1);
+                    }
+                    if (kind) toast('Une vidéo ou une photo ne va que sur une piste vidéo.', 'error');
+                    return drawTl(false);
+                }
+                if (track === 'v2' && kind === 'main') { // une incrustation → à la suite dans la piste principale, à l'endroit lâché
+                    P.v2.splice(P.v2.indexOf(c), 1); const k = {id: nid('v'), s: c.s, from: c.from, to: c.to, look: c.look || {}, vol: c.vol ?? 1, mute: c.mute, tf: c.tf, kf: c.kf, blend: c.blend, tfOn: c.tfOn, cropOn: c.cropOn, distOn: c.distOn, ease: c.ease, tr: {type: 'none', d: 1}};
+                    const L = layoutV1(P); let j = L.findIndex(x => drop < (x.at + x.end) / 2); if (j < 0) j = P.v1.length; P.v1.splice(j, 0, k); sel = {track: 'v1', id: k.id}; return touch(1);
+                }
+                if (ln && kind === KIND_OF_LIST[track] && ln.dataset.mtLane !== trackOf(P, c, track)) c.track = ln.dataset.mtLane; // posé sur une autre piste du même genre
+                else if (ln && kind && kind !== KIND_OF_LIST[track]) toast('Pas sur cette piste : il faut une piste du même genre.', 'error');
+                touch(1); };
             document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
         });
         $('[data-mt-zoom]').addEventListener('input', e => { pxs = Number(e.target.value); drawTl(); });
@@ -941,19 +1069,29 @@
         const play = async () => { if (eng.playing) { eng.pause(); $('[data-mt-play]').textContent = '▶ Lire'; } else { await eng.play(); $('[data-mt-play]').textContent = '⏸ Pause'; } };
         $('[data-mt-play]').addEventListener('click', play);
         $('[data-mt-home]').addEventListener('click', () => eng.seek(0));
-        dl.addEventListener('keydown', e => { if (e.key === ' ' && !e.target.closest('input, textarea, select')) { e.preventDefault(); play(); } });
+        // au niveau de la page : après un clic sur la frise (redessinée), le focus peut ne plus être dans la fenêtre
+        const keyAc = new AbortController(); dl.addEventListener('close', () => keyAc.abort());
+        document.addEventListener('keydown', e => {
+            if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; // une autre fenêtre par-dessus
+            if (e.target.closest?.('input, textarea, select, [contenteditable]') || e.metaKey || e.ctrlKey || e.altKey) return;
+            if (e.key === ' ') { e.preventDefault(); play(); return; }
+            // ⌫ (Retour arrière) ou Suppr : enlever l'élément choisi ; B : couper à la tête de lecture
+            if ((e.key === 'Backspace' || e.key === 'Delete') && selected()) { e.preventDefault(); dl.querySelector('[data-mt-op="del"]')?.click(); return; }
+            if (e.key === 'b' || e.key === 'B') { e.preventDefault(); dl.querySelector('[data-mt-op="split"]')?.click(); }
+        }, {signal: keyAc.signal});
         // outils
-        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; try { const m = kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => realDuration(a).then(dur => res({dur}), () => rej(new Error('Son illisible (durée inconnue)'))); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; }); P.sources.push({src: o.src, title: o.title, kind, ...m}); return P.sources.length - 1; } catch (e) { toast(e.message, 'error'); return null; } };
+        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; if (kind === 'visual') kind = o.kind === 'image' ? 'image' : 'video'; try { const m = kind === 'image' ? await loadImageMeta(o.src) : kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => realDuration(a).then(dur => res({dur}), () => rej(new Error('Son illisible (durée inconnue)'))); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; }); P.sources.push({src: o.src, title: o.title, kind, ...m}); return P.sources.length - 1; } catch (e) { toast(e.message, 'error'); return null; } };
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
-            if (op === 'addv1') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: P.sources[s].dur, tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
-            if (op === 'addv2') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: P.sources[s].dur, at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
+            if (op === 'addv1') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
+            if (op === 'addv2') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
             if (op === 'adda') { const s = await addSource('audio'); if (s === null) return; const k = {id: nid('a'), s, from: 0, to: P.sources[s].dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; return touch(1); }
             if (op === 'addtext') { const k = {id: nid('t'), at: t, dur: 4, text: 'Mon titre', size: 7, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: P.texts.length ? 82 : 50, anim: 'fade', align: 'center'}; k.track = freeTrack('t', t, 4); P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
             if (!c) return toast('Choisis d’abord un élément sur la frise.', 'error');
             const list = sel.track === 'v1' ? P.v1 : sel.track === 'v2' ? P.v2 : sel.track === 'texts' ? P.texts : P.audio, i = list.indexOf(c);
             const startOf = () => sel.track === 'v1' ? layoutV1(P)[i].at : c.at;
             if (op === 'del') { if (sel.track === 'audio') undetach(c); list.splice(i, 1); sel = null; return touch(1); }
+            if (op === 'kfprev' || op === 'kfnext') return jumpKf(op === 'kfnext' ? 1 : -1);
             if (op === 'left' || op === 'right') { if (sel.track !== 'v1') return toast('Pour les incrustations, textes et sons : fais-les glisser sur la frise.', 'error'); const j = i + (op === 'left' ? -1 : 1); if (j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; return touch(1); }
             if (op === 'detach') { if (sel.track !== 'v1' && sel.track !== 'v2') return toast('Choisis un morceau de vidéo.', 'error'); if (c.detached) return toast('Le son de ce morceau est déjà détaché.', 'error'); const at = startOf();
                 const k = {id: nid('a'), s: c.s, from: c.from, to: c.to, at, vol: c.vol ?? 1, fadeIn: 0, fadeOut: 0, track: freeTrack('a', at, c.to - c.from), detached: true}; P.audio.push(k); c.mute = true; c.detached = k.id; sel = {track: 'audio', id: k.id}; toast(`Son détaché : il est sur la piste « ${P.tracks.find(x => x.id === k.track)?.name} », tu peux le déplacer, le baisser ou l’enlever.`); return touch(1); }

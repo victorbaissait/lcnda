@@ -19,7 +19,7 @@ function media_av_name(?array $p): string
 
 function media_av_list(PDO $pdo, string $kind): array
 {
-    $kind = $kind === 'video' ? 'video' : 'audio';
+    $kind = in_array($kind, ['video', 'image'], true) ? $kind : 'audio'; // image : pour le montage (une photo dans une piste vidéo)
     $s = $pdo->prepare('SELECT id, title, description, filename, date_text, created_at, duration_seconds FROM media WHERE media_type=? ORDER BY id DESC');
     $s->execute([$kind]);
     $items = $s->fetchAll();

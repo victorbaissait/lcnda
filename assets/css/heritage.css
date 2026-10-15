@@ -2622,3 +2622,49 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-mtp-colors .h-mtp-swatch { padding:9px 12px; font-size:13px; }
 .h-mtp-presets { margin:4px 0 16px; padding:12px; border:2px solid var(--ink); }
 @media (max-width: 1200px) { .h-mtp .h-mtp-grid { grid-template-columns:1fr; } }
+
+/* Montage : bandeau du haut compact (le titre sur une ligne, petit) */
+.h-avx-montage > .modal-head { padding:6px 14px; min-height:0; align-items:center; }
+.h-avx-montage > .modal-head .eyebrow { display:inline; margin:0 10px 0 0; font-size:10px; }
+.h-avx-montage > .modal-head h2 { display:inline; font-size:16px; line-height:1.2; margin:0; }
+.h-avx-montage > .modal-head > div:first-child { display:flex; align-items:baseline; flex-wrap:wrap; min-width:0; }
+.h-avx-montage > .modal-head .icon-button, .h-avx-montage > .modal-head button { width:30px; height:30px; min-height:30px; padding:0; font-size:14px; }
+/* Montage : photos sur la frise, images clés, inspecteur */
+.h-mt-clip { position:absolute; }
+.h-mt-clip.is-img { background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.35) 0 6px, transparent 6px 12px); }
+.h-mt-kfm { position:absolute; bottom:2px; width:8px; height:8px; margin-left:-4px; background:#ffcc00; border:1px solid #333; transform:rotate(45deg); pointer-events:none; }
+.h-avx-pickthumb { width:34px; height:26px; object-fit:cover; border-radius:3px; vertical-align:middle; }
+.h-mt-insp { margin:10px 0; border:1px solid #d6d6dc; border-radius:8px; background:#fff; color:#1d1d1f; font-size:13px; overflow:hidden; }
+.h-mt-ihead { display:flex; flex-wrap:wrap; align-items:center; gap:4px 10px; padding:8px 10px; border-bottom:1px solid #e4e4e8; }
+.h-mt-ihead .muted { color:#6e6e73; font-size:12px; }
+.h-mt-ease { display:flex; align-items:center; gap:6px; font-size:12px; color:#3a3a3c; }
+.h-mt-insp select { background:#fff; color:#1d1d1f; border:1px solid #c8c8ce; border-radius:4px; padding:2px 4px; min-height:0; }
+.h-mt-isec { border-bottom:1px solid #ececf0; }
+.h-mt-isec > summary { display:flex; align-items:center; gap:8px; padding:7px 10px; cursor:pointer; list-style:none; font-size:14px; }
+.h-mt-isec > summary::-webkit-details-marker { display:none; }
+.h-mt-isec > summary input { accent-color:#6b6cf6; width:16px; height:16px; }
+.h-mt-isec > summary b { flex:1; font-weight:600; }
+.h-mt-iico { opacity:.7; }
+.h-mt-ireset { background:none; border:0; color:#8e8e93; cursor:pointer; font-size:14px; padding:0 4px; }
+.h-mt-ireset:hover { color:#000; }
+.h-mt-ibody { background:#f5f5f7; margin:0 6px 6px; border-radius:6px; }
+.h-mt-irow { display:grid; grid-template-columns:minmax(90px, 1.1fr) minmax(70px, 1.3fr) 58px 22px; align-items:center; gap:6px; padding:4px 10px; border-bottom:1px solid #e8e8ec; }
+.h-mt-irow:last-child { border-bottom:0; }
+.h-mt-irow > span { color:#3a3a3c; }
+.h-mt-irow input[type=range] { width:100%; accent-color:#6e6e73; }
+.h-mt-irow output { text-align:right; font-variant-numeric:tabular-nums; }
+.h-mt-irow select { grid-column:2 / span 3; }
+.h-mt-kf { background:none; border:0; color:#8a8a92; cursor:pointer; font-size:14px; padding:0; line-height:1; }
+.h-mt-kf.has { color:#d9a400; }
+.h-mt-kf.on { color:#d9a400; }
+/* mode sombre : l'inspecteur en sombre */
+[data-theme="dark"] .h-mt-insp { background:#26272b; color:#e8e8ea; border-color:rgba(255,255,255,.18); }
+[data-theme="dark"] .h-mt-ihead { border-color:rgba(255,255,255,.12); }
+[data-theme="dark"] .h-mt-ihead .muted, [data-theme="dark"] .h-mt-ireset { color:#a8a8ae; }
+[data-theme="dark"] .h-mt-ease, [data-theme="dark"] .h-mt-irow > span { color:#c8c8cc; }
+[data-theme="dark"] .h-mt-insp select { background:#1b1c1f; color:#e8e8ea; border-color:rgba(255,255,255,.2); }
+[data-theme="dark"] .h-mt-isec { border-color:rgba(255,255,255,.08); }
+[data-theme="dark"] .h-mt-ireset:hover { color:#fff; }
+[data-theme="dark"] .h-mt-ibody { background:#303136; }
+[data-theme="dark"] .h-mt-irow { border-color:rgba(255,255,255,.06); }
+[data-theme="dark"] .h-mt-kf.has, [data-theme="dark"] .h-mt-kf.on { color:#ffcc00; }
