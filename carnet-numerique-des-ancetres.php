@@ -148,7 +148,7 @@
     <main id="haut">
         <section class="presentation-hero">
             <div class="presentation-hero-copy">
-                <span class="eyebrow">VERSION BÊTA · 0.5.0</span>
+                <span class="eyebrow">VERSION BÊTA · 0.6.0</span>
                 <p class="presentation-acronym" aria-hidden="true">LCNDA</p>
                 <h1>Le Carnet numérique<br>des ancêtres</h1>
                 <p class="presentation-lead">Un logiciel de généalogie local, open source et gratuit pour travailler avec son histoire familiale. Pensé et designé par Victor Baissait, codé par Codex (ChatGPT) &amp; Claude.</p>
@@ -177,8 +177,8 @@
                     <h3>macOS</h3>
                     <p class="presentation-os-req">macOS 13 Ventura ou plus récent</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.5.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 538 Mo</small></span><span aria-hidden="true">↓</span></a>
-                        <a class="button secondary" href="download/LCNDA-0.5.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.6.0-mac-arm64.dmg"><span>Mac Apple Silicon<small>M1, M2, M3, M4… · 538 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button secondary" href="download/LCNDA-0.6.0-mac-x64.dmg"><span>Mac Intel<small>Modèles 2017 et après · 544 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Votre Mac : menu Pomme → À propos de ce Mac → « Puce » (Apple Silicon) ou « Processeur » (Intel). Ouvrez le fichier .dmg et glissez LCNDA dans Applications.</p>
                 </article>
@@ -187,7 +187,7 @@
                     <h3>Windows</h3>
                     <p class="presentation-os-req">Windows 10 / 11 (64 bits) — PC Intel ou AMD, et Windows 11 sur processeur ARM</p>
                     <div class="presentation-os-group">
-                        <a class="button" href="download/LCNDA-0.5.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
+                        <a class="button" href="download/LCNDA-0.6.0-windows-x64.exe"><span>Windows 10 / 11<small>64 bits · 554 Mo</small></span><span aria-hidden="true">↓</span></a>
                     </div>
                     <p class="presentation-os-help">Lancez le fichier et suivez l'installation. Le composant Microsoft Visual C++ nécessaire est installé automatiquement s'il manque.</p>
                 </article>
@@ -198,16 +198,16 @@
                     <div class="presentation-os-groups">
                         <div class="presentation-os-group">
                             <strong>PC Intel ou AMD</strong>
-                            <a class="button" href="download/LCNDA-0.5.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 533 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.5.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 508 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.6.0-linux-x86_64.AppImage"><span>AppImage<small>Toutes distributions · 533 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.6.0-linux-amd64.deb"><span>Paquet .deb<small>Ubuntu, Debian, Mint · 508 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                         <div class="presentation-os-group">
                             <strong>Processeur ARM (Raspberry Pi…)</strong>
-                            <a class="button" href="download/LCNDA-0.5.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 535 Mo</small></span><span aria-hidden="true">↓</span></a>
-                            <a class="button secondary" href="download/LCNDA-0.5.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 504 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button" href="download/LCNDA-0.6.0-linux-arm64.AppImage"><span>AppImage ARM<small>Toutes distributions · 535 Mo</small></span><span aria-hidden="true">↓</span></a>
+                            <a class="button secondary" href="download/LCNDA-0.6.0-linux-arm64.deb"><span>Paquet .deb ARM<small>Raspberry Pi OS, Ubuntu, Debian · 504 Mo</small></span><span aria-hidden="true">↓</span></a>
                         </div>
                     </div>
-                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.5.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
+                    <p class="presentation-os-help">Le .deb sous Ubuntu ou Debian (<code>sudo apt install ./LCNDA-0.6.0-linux-amd64.deb</code>), sinon l'AppImage : rendez-la exécutable (clic droit → Propriétés → Autoriser l'exécution) puis double-cliquez.</p>
                 </article>
             </div>
 
@@ -215,17 +215,75 @@
                 <div>
                     <h3>Code source</h3>
                     <p class="presentation-os-req">Pour les développeurs : LCNDA est un logiciel libre (licence AGPL-3.0)</p>
-                    <p class="presentation-os-help">Le code complet de la version 0.5.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
+                    <p class="presentation-os-help">Le code complet de la version 0.6.0, avec les communes des 226 pays des battues (d'où sa taille). Le répertoire mondial des lieux n'y est pas inclus, car il est trop volumineux : il se fabrique tout seul au premier lancement (ou avec <code>npm run fetch:geo</code>).</p>
                 </div>
                 <div class="presentation-os-group">
-                    <a class="button" href="download/lcnda-0.5.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
-                    <a class="button secondary" href="download/lcnda-0.5.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button" href="download/lcnda-0.6.0.zip"><span>Archive .zip<small>Windows, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
+                    <a class="button secondary" href="download/lcnda-0.6.0.tar.gz"><span>Archive .tar.gz<small>Linux, macOS · 258 Mo</small></span><span aria-hidden="true">↓</span></a>
                 </div>
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.5.0<small>Recueils, dépouillements page par page, plan des adresses d'un recensement, fiche d'un village à organiser, atelier de recherche, sons et vidéos, calendriers</small></span></summary>
+                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page façon InDesign, petit montage vidéo, tableaux façon Freeform, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
                 <div class="presentation-changes-body">
+                    <h4>📐 Atelier de mise en page, façon InDesign</h4>
+                    <ul>
+                        <li>Faire <b>le livre de sa généalogie</b> comme dans un logiciel de mise en page : pages simples ou <b>en vis-à-vis</b>, <b>gabarits</b> (numéro de page, titre courant), <b>calques</b> (cacher, verrouiller, ranger).</li>
+                        <li>Au départ : <b>une page blanche</b>, <b>les données de la famille</b> (couverture, préface, chiffres, arbre, une page par personne avec sa photo, chronologie, lieux, index — un texte trop long continue tout seul sur la page suivante) ou <b>un design</b>. Format, <b>marges</b>, <b>colonnes et gouttière</b>, <b>fond perdu</b> et <b>ligne-bloc</b> choisis à la création, avec des <b>réglages par défaut</b> modifiables.</li>
+                        <li>Six designs fournis (Classique, Moderne, Élégant, Sépia, Album photo, Sobre) et <b>vos propres designs</b>, tous modifiables ; la liste montre <b>la couverture</b> de chaque livre et de chaque design.</li>
+                        <li><b>Texte</b> : toutes les polices de l'ordinateur, corps, interlignage, approche, crénage, ligne de base, capitales, exposant ; alignements, retraits, espacements, <b>lettrine</b>, césure, listes, colonnes ; <b>styles de paragraphe et de caractère</b> (on change un style, tout le livre suit) ; numéro de page et titre automatiques.</li>
+                        <li><b>Formes</b> (rectangle, ellipse, polygone, étoile, ligne, <b>plume</b>), <b>cadres d'images</b> (photos de la base ou de l'ordinateur, remplir, ajuster, recadrer), <b>nuancier</b> et <b>dégradés</b>, <b>contours</b> (épaisseur, tirets, pointillés, angles), <b>effets</b> (opacité, modes de fusion, ombre portée, contour progressif, angles arrondis).</li>
+                        <li><b>Habillage du texte</b> autour d'une photo ou d'une forme, <b>Pathfinder</b> (ajouter, soustraire, intersection, exclure), aligner et répartir, repères aimantés, <b>liens</b> (images placées, adresses web cliquables).</li>
+                        <li><b>Ajouter ou insérer des pages</b> (autant qu'on veut, à l'endroit voulu), dupliquer, déplacer, <b>aller à une page</b> ; annuler / rétablir ; raccourcis comme dans InDesign.</li>
+                        <li>Enregistrer, reprendre plus tard, exporter en <b>PDF</b> (aussi <b>avec fond perdu et traits de coupe</b> pour un imprimeur), en page HTML ou en fichier à partager.</li>
+                    </ul>
+                    <h4>🎬 Petit montage vidéo</h4>
+                    <ul>
+                        <li>Un montage complet : <b>autant de pistes vidéo, texte et son qu'on veut</b> (cacher, ranger, renommer), titres animés, fondus et transitions, son détaché, couleurs, plein écran.</li>
+                        <li><b>Des photos dans les pistes vidéo</b>, à la suite ou incrustées ; <b>glisser un élément d'une piste à une autre</b> du même genre ; ⌫ pour enlever, B pour couper.</li>
+                        <li>Un inspecteur façon Final Cut : <b>Transformer</b> (position, rotation, échelle, ancrage), <b>Recadrer</b>, <b>Distorsion</b>, <b>Adaptation spatiale</b>, opacité et modes de fusion, avec des <b>images clés</b> pour tout animer.</li>
+                        <li>Disposition, couleurs des blocs, boutons et enregistrement réglables (MP4 ou WebM, taille, qualité), avec des <b>ensembles de réglages</b> nommés, exportés et importés.</li>
+                        <li>Retouche des photos : historique, zoom, pinceaux, texte sur des calques, source du tampon ; son : enregistrement en MP3, FLAC, AIFF, WAV ou Ogg.</li>
+                    </ul>
+                    <h4>🧩 Tableaux façon Freeform</h4>
+                    <ul>
+                        <li>Dans Enquêtes : des tableaux libres avec <b>près de 800 formes</b>, notes, textes, flèches accrochées, dessin à main levée, plume, photos et documents, fiches, écrans de l'app, widgets.</li>
+                        <li>Arbre automatique, frise et carte vivantes, calques, groupes, instantanés, présentation, commentaires, mémo vocal ; tableaux rattachés à une enquête, une battue, une famille, un événement ou un animal.</li>
+                    </ul>
+                    <h4>🐾 Animaux</h4>
+                    <ul>
+                        <li>Un onglet Animaux : fiche discrète ou <b>fiche complète comme une personne</b> (arbre, pedigree, consanguinité, photos, notes, sources), base d'élevage, espèces, catégories et champs à soi.</li>
+                    </ul>
+                    <h4>📒 Fiches sur un sujet</h4>
+                    <ul>
+                        <li>Un onglet « Fiches » (caché au départ) : une page sur un sujet — un pays, un métier, une coutume — faite de blocs (texte, images, personnes, frise de dates, citation, liens, écrans de l'app, widgets).</li>
+                    </ul>
+                    <h4>📖 Livre de famille, livrets et employeurs</h4>
+                    <ul>
+                        <li>Livre de famille par branche : parties à cocher et ranger, textes, styles, polices, format ; PDF, HTML, Word, OpenDocument, ePub, Markdown, texte, CSV.</li>
+                        <li>Livrets de famille transcrits en entier, personnes reliées aux fiches ; fiches d'employeurs façon fiche d'entreprise.</li>
+                    </ul>
+                    <h4>📊 Statistiques, widgets et onglets à soi</h4>
+                    <ul>
+                        <li>Éditeur de statistiques et de widgets, onglets à soi avec n'importe quel écran de l'app ; tableau de bord en pages et en ensembles repliables.</li>
+                        <li>Distributions : <b>« + Critère »</b> autant qu'on veut, filtres par défaut, et <b>un clic sur une barre</b> (pyramides des âges comprises) montre les personnes comptées.</li>
+                        <li>Fiche d'un village et monographie de commune en widget, saint du jour détaillé, suggestions de recherche.</li>
+                    </ul>
+                    <h4>⚙️ Réglages et confort</h4>
+                    <ul>
+                        <li><b>Mes ensembles de réglages</b> : tous les réglages de l'app enregistrés sous un nom, appliqués, exportés, importés.</li>
+                        <li>Menu en bas et colonne latérale à droite au choix ; glisser-déposer partout ; <b>listes à cacher</b> d'un clic ; <b>lignes vides du bloc Identité masquées</b> sur une fiche ou sur toutes.</li>
+                        <li>FAQ cherchable en français (sans accents, synonymes), de nombreuses corrections (mariages, lieux de mariage, durée des vidéos…) et une relecture de sécurité.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="presentation-changes presentation-changes-old">
+                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
+                <div class="presentation-changes-body">
+                    <details class="presentation-version">
+                        <summary>Version 0.5.0 <small>Recueils, dépouillements page par page, plan des adresses d'un recensement, fiche d'un village à organiser, atelier de recherche, sons et vidéos, calendriers</small></summary>
+                        <div class="presentation-version-body">
                     <h4>📚 Recueils</h4>
                     <ul>
                         <li>Les pages d'un registre ou d'un carnet <b>photographiées dans l'ordre</b>, avec transcription et versions qui coexistent.</li>
@@ -267,12 +325,8 @@
                         <li>⚙️ Colonnes de toutes les listes ; éditeur de listes avec son propre formulaire ; 8 dessins de graphique pour les widgets.</li>
                         <li>Copie chez un cousin mieux chiffrée, décès INSEE en .zip, fenêtres de saisie qui s'ouvrent dans l'application de bureau, et beaucoup d'autres corrections.</li>
                     </ul>
-                </div>
-            </details>
-
-            <details class="presentation-changes presentation-changes-old">
-                <summary><span>Nouveautés des anciennes versions<small>Ce qu'ont apporté les versions précédentes</small></span></summary>
-                <div class="presentation-changes-body">
+                        </div>
+                    </details>
                     <details class="presentation-version">
                         <summary>Version 0.4.2 <small>Musée de famille en 3D, retouche des photos, widgets à soi, cartes d'électeur, décès INSEE automatiques, 26 calendriers, nombreuses corrections</small></summary>
                         <div class="presentation-version-body">
@@ -610,12 +664,12 @@
                 <span class="eyebrow">04 — EN DÉTAIL</span>
                 <h2>Chaque généalogie est unique, votre logiciel aussi.</h2>
             </header>
-            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
+            <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, statistiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
 
             <div class="presentation-about-grid">
                 <article class="presentation-about about-key">
                     <h3>Un logiciel qui s’adapte à votre famille</h3>
-                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements, avec leurs champs, et vous réglez couleurs, polices et affichage. Vos réglages sont enregistrés avec votre généalogie et la suivent d’un ordinateur à l’autre.</p>
+                    <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements, blocs, widgets, statistiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Un carnet de recherche, pas seulement un arbre</h3>
@@ -638,6 +692,10 @@
                     <h3>Voir sa famille autrement</h3>
                     <p>Cartes des naissances, des mariages et des migrations, chronologies, statistiques sur les prénoms, les métiers, les âges au décès… pour repérer d’un coup d’œil ce que les listes ne montrent pas.</p>
                 </article>
+                <article class="presentation-about about-key">
+                    <h3>Raconter et transmettre</h3>
+                    <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page, façon InDesign, fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> façon Freeform posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
+                </article>
                 <article class="presentation-about">
                     <h3>Une base propre et vérifiée</h3>
                     <p>Un assistant repère les incohérences : enfant né après la mort d’un parent, mariage après un décès, longévité improbable. Il signale aussi les doublons possibles et les familles incomplètes. Un journal garde la trace de chaque modification, et une suppression peut être annulée.</p>
@@ -655,6 +713,7 @@
                 <div><strong>Fonctionne hors ligne</strong><span>Communes de 226 pays, lieux du monde et fond de carte compris.</span></div>
                 <div><strong>Mac, Windows et Linux</strong><span>La même application partout.</span></div>
                 <div><strong>Pensé pour la recherche</strong><span>Pas seulement pour la saisie.</span></div>
+                <div><strong>De l’arbre au livre</strong><span>Mise en page, montage vidéo et tableaux pour transmettre ce que vous avez trouvé.</span></div>
                 <div><strong>Arrivée facile</strong><span>Depuis Hérédis, MacFamilyTree ou n’importe quel logiciel compatible GEDCOM.</span></div>
             </div>
             <p class="presentation-beta-note">LCNDA est en version bêta : faites des sauvegardes régulières, ce que l’application facilite. Il n’est pas encore signé par Apple ni Microsoft, d’où un avertissement au premier lancement.</p>
@@ -662,7 +721,7 @@
     </main>
 
     <footer class="presentation-footer">
-        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.5.0 · LICENCE AGPL-3.0</span>
+        <span>LCNDA — LE CARNET NUMÉRIQUE DES ANCÊTRES · VERSION BÊTA · 0.6.0 · LICENCE AGPL-3.0</span>
         <a href="#haut">Retour en haut ↑</a>
     </footer>
     <script>
