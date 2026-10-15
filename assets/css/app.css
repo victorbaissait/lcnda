@@ -3840,3 +3840,5 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .identity-empty-bar span{flex:1 1 100%;font-weight:700}
 .identity-empty-bar .button.small{padding:3px 8px;font-size:.74rem}
 @media print{.identity-empty-bar{display:none}}
+.dashboard-reorder-row.is-hidden-row b,.dashboard-reorder-row.is-hidden-row .order-number{opacity:.45;text-decoration:line-through}
+.dashboard-reorder-row .reorder-eye{min-width:96px}
