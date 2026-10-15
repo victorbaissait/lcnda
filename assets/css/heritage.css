@@ -2445,7 +2445,8 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 @media (max-width:900px){.h-pp-cols{grid-template-columns:1fr}}
 .h-pp-cols .h-pet-lrow{margin-bottom:4px}
 .h-pp-cols .h-pet-lrow input[data-sp-label]{flex:1;min-width:0}
-.h-pp-icon{width:3.2em;text-align:center}
+.h-pp-icon{width:3.2em;text-align:center;cursor:pointer;caret-color:transparent}
+.h-pp-icon:hover{border-color:var(--blue,#0066cc)}
 .h-pp-presets{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:16px}
 .h-pp-presets select{max-width:320px}
 .h-pp-sep{flex:1}
