@@ -14,7 +14,7 @@ declare(strict_types=1);
  * Écran : assets/js/heritage-recueils.js.
  */
 
-const RECUEIL_LINK_TYPES = ['person' => 'Fiche', 'village' => 'Village', 'investigation' => 'Enquête', 'atelier_project' => 'Projet de l’Atelier', 'battue' => 'Battue', 'family_booklet' => 'Livret de famille'];
+const RECUEIL_LINK_TYPES = ['person' => 'Fiche', 'village' => 'Village', 'investigation' => 'Enquête', 'atelier_project' => 'Projet de l’Atelier', 'battue' => 'Battue', 'family_booklet' => 'Livret de famille', 'pet' => 'Animal'];
 const RECUEIL_ROLES = ['page', 'detail'];
 const RECUEIL_PERSON_YEARS = "(SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year,
     (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) AS death_year";
@@ -413,6 +413,7 @@ function recueil_entity_label(PDO $pdo, string $type, string $key): ?array
             case 'atelier_project': $s = $pdo->prepare('SELECT title FROM atelier_projects WHERE id=?'); $s->execute([(int) $key]); $t = $s->fetchColumn(); return $t !== false ? ['label' => (string) $t, 'extra' => ''] : null;
             case 'battue': $s = $pdo->prepare('SELECT title FROM battues WHERE id=?'); $s->execute([(int) $key]); $t = $s->fetchColumn(); return $t !== false ? ['label' => (string) $t, 'extra' => ''] : null;
             case 'village': return ['label' => '', 'extra' => ''];
+            case 'pet': $s = $pdo->prepare('SELECT data_json FROM pets WHERE id=?'); $s->execute([(int) $key]); $j = $s->fetchColumn(); return $j !== false ? ['label' => pet_title(json_decode((string) $j, true) ?: []), 'extra' => ''] : null;
             case 'family_booklet': $s = $pdo->prepare('SELECT data_json FROM family_booklets WHERE id=?'); $s->execute([(int) $key]); $j = $s->fetchColumn(); return $j !== false ? ['label' => booklet_title(json_decode((string) $j, true) ?: []), 'extra' => ''] : null;
         }
     } catch (Throwable $_) {}
@@ -509,6 +510,8 @@ function recueil_search_entities(PDO $pdo, string $type, string $q): array
             $table = ['investigation' => 'investigations', 'atelier_project' => 'atelier_projects', 'battue' => 'battues'][$type];
             $s = $pdo->prepare("SELECT id, title FROM $table WHERE title LIKE ? ORDER BY title COLLATE NOCASE LIMIT 30"); $s->execute([$like]);
             foreach ($s as $r) { $out[] = ['key' => (string) $r['id'], 'label' => (string) $r['title'], 'extra' => '']; }
+        } elseif ($type === 'pet' && function_exists('pets_list')) {
+            foreach (array_slice(pets_list($pdo, ['q' => $q]), 0, 30) as $b) { $out[] = ['key' => (string) $b['id'], 'label' => (string) $b['title'], 'extra' => trim($b['species_label'] . ' ' . $b['breed'])]; }
         } elseif ($type === 'family_booklet' && function_exists('booklets_list')) {
             foreach (array_slice(booklets_list($pdo, $q), 0, 30) as $b) { $out[] = ['key' => (string) $b['id'], 'label' => (string) $b['title'], 'extra' => (string) $b['commune']]; }
         } elseif ($type === 'village' && function_exists('villages_list')) {

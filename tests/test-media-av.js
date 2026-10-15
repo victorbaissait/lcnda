@@ -57,7 +57,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 let out;
 try { out = JSON.parse(r.stdout.slice(r.stdout.indexOf('{'))); } catch (_) { console.error(r.stdout, r.stderr); process.exit(1); }
 const checks = [
-  ['structure à jour (n°38)', () => assert.equal(out.version, 38)],
+  ['structure à jour (n°39)', () => assert.equal(out.version, 39)],
   ['seulement les sons', () => { assert.deepEqual(out.audio.map(a => a[0]), ['Interview', 'Perdu']); assert.equal(out.inv_err, undefined); assert.equal(out.obj_err, undefined); }],
   ['fichier présent mesuré, fichier absent signalé', () => { assert.deepEqual(out.audio[0].slice(1, 3), [true, 2048]); assert.deepEqual(out.audio[1].slice(1, 3), [false, 0]); }],
   ['rattachements : fiche, couple, enquête', () => assert.deepEqual(out.audio[0][3], ['person:Jean Dupont:1', 'family:Jean Dupont et Marie Martin:1', 'investigation:Qui est Jean ?:1'])],

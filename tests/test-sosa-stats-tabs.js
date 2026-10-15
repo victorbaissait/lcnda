@@ -108,6 +108,21 @@ $out['bd_snap'] = [count(board_detail($pdo, $bd['id'])['data']['items']), count(
 delete_board($pdo, ['id' => $cp['id']]);
 $out['bd_del'] = delete_board($pdo, ['id' => $bd['id']])['deleted'];
 $out['bd_snapleft'] = (int) $pdo->query('SELECT count(*) FROM board_snapshots')->fetchColumn();
+// animaux : sexe des parents, boucle refusée, propriétaires, suppression d'un parent (son nom reste), associations d'un tableau
+$pa = save_pet($pdo, ['data' => ['name' => 'Atlas', 'sex' => 'M', 'species' => 'chien']]);
+$pb = save_pet($pdo, ['data' => ['name' => 'Bella', 'sex' => 'F']]);
+$pk = save_pet($pdo, ['data' => ['name' => '<b>Kid</b>', 'sex' => 'F', 'sire_id' => $pa['id'], 'dam_id' => $pb['id'], 'species' => 'licorne', 'owners' => [['person_id' => 1, 'name' => 'Jean', 'role' => 'propriétaire'], ['name' => ''], 'x']]]);
+$errs = [];
+foreach ([['id' => $pa['id'], 'data' => ['name' => 'Atlas', 'sex' => 'M', 'sire_id' => $pk['id']]], ['data' => ['name' => 'Y', 'sire_id' => $pb['id']]], ['data' => ['name' => 'Z', 'sire_id' => $pa['id'], 'dam_id' => $pa['id']]]] as $bad) { try { save_pet($pdo, $bad); $errs[] = 'ok'; } catch (Throwable $e) { $errs[] = 'err'; } }
+$kd = pet_detail($pdo, $pk['id']);
+$out['pets'] = [$errs, $kd['data']['species'], count($kd['data']['owners']), count($kd['ancestors']), count(pets_for_person($pdo, 1)), count(pet_detail($pdo, $pa['id'])['offspring']), $kd['title']];
+delete_pet($pdo, ['id' => $pa['id']]);
+$kd2 = pet_detail($pdo, $pk['id'])['data'];
+$out['pets_del'] = [$kd2['sire_id'], $kd2['sire_name']];
+$lb = save_board($pdo, ['title' => 'Liens', 'data' => ['items' => [], 'links' => [['kind' => 'person', 'id' => 1, 'label' => 'faux nom'], ['kind' => 'pet', 'id' => $pk['id'], 'label' => '']]]]);
+$ll = board_detail($pdo, $lb['id'])['data']['links'];
+$out['links'] = [array_column($ll, 'label'), count(board_links_check($pdo, ['links' => $ll])['links']), count(board_links_check($pdo, ['links' => [['kind' => 'person', 'id' => 1, 'label' => 'Quelqu’un d’autre']]])['links'])];
+delete_board($pdo, ['id' => $lb['id']]); delete_pet($pdo, ['id' => $pb['id']]); delete_pet($pdo, ['id' => $pk['id']]);
 // nouveaux réglages : texte, listes, formes à soi, fusion, police et alignement sûrs, fond à soi
 $nb = save_board($pdo, ['title' => 'Formes', 'data' => ['bg' => 'custom', 'bgColor' => '#eef6ee', 'bgPattern' => 'grid', 'items' => [
     ['id' => 'x', 'type' => 'text', 'text' => 'a', 'underline' => 1, 'strike' => 1, 'list' => 'roman', 'font' => 'x"><img src=x>', 'align' => 'center;color:red', 'radius' => 12],
@@ -191,6 +206,9 @@ step('tableaux : éléments nettoyés (types, couleurs, adresses), dossier rang�
     assert.deepEqual(out.bd_linked, [['Mur', ['piste 2']]]);
     assert.deepEqual(out.bd_snap, [1, 2, '', 0, 'Mur (copie)']);
     assert.equal(out.bd_snapleft, 0);
+    assert.deepEqual(out.pets, [['err', 'err', 'err'], 'autre', 1, 3, 1, 1, '<b>Kid</b>']);
+    assert.deepEqual(out.pets_del, [0, 'Atlas']);
+    assert.equal(out.links[1], 2); assert.equal(out.links[2], 0); assert.equal(out.links[0][1], '<b>Kid</b>');
     assert.deepEqual(out.bd_new, ['#eef6ee', 'grid', true, 'roman', 'ximg srcx', 'left', 'M0 0L10 10Z', false, 'triangle', false, '', 1, 200, 50]);
 });
 

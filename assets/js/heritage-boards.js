@@ -450,7 +450,7 @@
             const title = root.querySelector('[data-bd-title]').value.trim() || 'Tableau sans titre';
             const body = {id: b.id, title, icon: b.icon, color: b.color, status: root.querySelector('[data-bd-state]').value, ...ownerData, data: {items, view, bg, locked: boardLocked, links, ...boardExtra()}};
             if (thumb) body.thumb = thumb;
-            try { await api('save_board', {}, {method: 'POST', body}); if (at === changes) { dirty = false; status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); } } catch (error) { status('⚠ ' + error.message); }
+            try { const res = await api('save_board', {}, {method: 'POST', body}); const sl = (res.result || res).links; if (Array.isArray(sl) && sl.length === links.length) { links = sl; renderLinks(); } if (at === changes) { dirty = false; status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); } } catch (error) { status('⚠ ' + error.message); }
         }
         // ── miniature (et image PNG) : les éléments redessinés sur un canevas ──
         async function thumbnail(W, H, scale0 = 0, type = 'image/png', onlySel = false) {
@@ -1146,9 +1146,13 @@
                 } catch (_) { out.push(it); }
             }
             try {
-                const r = await api('save_board', {}, {method: 'POST', body: {title: (j.title || 'Tableau importé') + ' (importé)', owner_type: '', data: {...j.data, items: out, links: [], locked: false}}});
+                // associations : gardées quand elles visent la même chose ici (même numéro et même nom, donc la même base)
+                let keptLinks = []; const want = (j.data.links || []).length;
+                if (want) { try { keptLinks = (await api('board_links_check', {links: JSON.stringify(j.data.links)})).links || []; } catch (_) {} }
+                const r = await api('save_board', {}, {method: 'POST', body: {title: (j.title || 'Tableau importé') + ' (importé)', owner_type: '', data: {...j.data, items: out, links: keptLinks, locked: false}}});
+                const linkMsg = !want ? '' : keptLinks.length === want ? ' Associations reprises.' : keptLinks.length ? ` ${keptLinks.length} association${keptLinks.length > 1 ? 's' : ''} sur ${want} reprise${keptLinks.length > 1 ? 's' : ''} (les autres visent une autre base).` : ' Les associations visent une autre base : non reprises.';
                 const nid = Number(r.result?.id || r.id);
-                toast(lost ? `Tableau importé. ${lost} élément${lost > 1 ? 's' : ''} (fiche, média, recueil ou dossier) absent${lost > 1 ? 's' : ''} ici devenu${lost > 1 ? 's' : ''} des notes. Les associations ne sont pas reprises.` : 'Tableau importé (les associations ne sont pas reprises).');
+                toast((lost ? `Tableau importé. ${lost} élément${lost > 1 ? 's' : ''} (fiche, média, recueil ou dossier) absent${lost > 1 ? 's' : ''} ici devenu${lost > 1 ? 's' : ''} des notes.` : 'Tableau importé.') + linkMsg);
                 go(nid);
             } catch (error) { toast(error.message, 'error'); status('⚠ ' + error.message); }
         }
@@ -1202,9 +1206,11 @@
         const showLock = () => { const bt = root.querySelector('[data-bd-lockall]'); bt.textContent = boardLocked ? '🔒' : '🔓'; bt.classList.toggle('is-on', boardLocked); bt.title = boardLocked ? 'Tableau verrouillé : clic pour le déverrouiller' : 'Verrouiller tout le tableau'; root.classList.toggle('is-locked', boardLocked); status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); if (boardLocked) setTool('select'); };
         root.querySelector('[data-bd-lockall]').addEventListener('click', () => { boardLocked = !boardLocked; showLock(); save(); toast(boardLocked ? 'Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge.' : 'Tableau déverrouillé.'); });
         // ── associé à… (une fiche, une enquête, une partie d'enquête, une battue, un projet, un recueil, un autre tableau) ──
-        const LINK_KINDS = {person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🧭', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], place: ['📍', 'Un lieu (sa commune)'], media: ['🖼', 'Un média (photo, acte, son…)'], label: ['🏷', 'Une étiquette'], board: ['🧩', 'Un autre tableau']};
+        const LINK_KINDS = {person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🧭', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], place: ['📍', 'Un lieu (sa commune)'], media: ['🖼', 'Un média (photo, acte, son…)'], label: ['🏷', 'Une étiquette'], family: ['💑', 'Une famille (un couple)'], event: ['📅', 'Un événement'], pet: ['🐾', 'Un animal'], board: ['🧩', 'Un autre tableau']};
         const SEARCH_KINDS = {place: async q => ((await api('quick_search', {q})).places || []).map(r => ({id: r.id, title: r.name + (r.county ? ` (${r.county})` : ''), key: 'n:' + String(r.name || '').toLowerCase().trim() + '|' + String(r.county || '').toLowerCase().trim()})),
-            media: async q => ((await api('heritage_media_search', {q})).media || []).map(m => ({id: m.id, title: m.title || m.filename}))};
+            media: async q => ((await api('heritage_media_search', {q})).media || []).map(m => ({id: m.id, title: m.title || m.filename})),
+            family: async q => (await api('board_family_search', {q})).families || [],
+            event: async q => ((await api('list', {type: 'events', q})).rows || []).slice(0, 15).map(e => ({id: e.id, title: [e.type, e.date_text || e.year, e.person && '— ' + e.person, e.place && '(' + e.place + ')'].filter(Boolean).join(' ')}))};
         function renderLinks() {
             root.querySelector('[data-bd-links]').innerHTML = links.map((l, i) => `<span class="h-bd-link"><button type="button" class="link-button" data-bd-linkgo="${i}" title="Ouvrir">${LINK_KINDS[l.kind]?.[0] || '🔗'} ${esc(l.label || '#' + l.id)}${l.part ? ` · ${esc(l.part)}` : ''}</button><button type="button" class="h-bd-unlink" data-bd-unlink="${i}" title="Ne plus associer" aria-label="Ne plus associer">×</button></span>`).join('')
                 + `<button type="button" class="link-button h-bd-linkadd" data-bd-linkadd title="Associer ce tableau à une personne, une enquête (ou une de ses parties), une battue…">🔗 Associer…</button>`;
@@ -1226,11 +1232,13 @@
             if (l.kind === 'board') return go(l.id);
             if (l.kind === 'place') { let key = l.key || ''; try { key = (await api('board_place_key', {id: l.id})).key || key; } catch (_) {} st.listType = 'villages'; st.hVillage = key; return A().setModule('listes'); }
             if (l.kind === 'label') { st.listType = 'labels'; return A().setModule('listes'); }
+            if (l.kind === 'pet') return ext.openPet ? ext.openPet(Number(l.id)) : null;
+            if (l.kind === 'family' || l.kind === 'event') { try { const pid = (await api('board_link_person', {kind: l.kind, id: l.id})).person_id; if (pid) { st.currentPersonId = Number(pid); return A().setModule('personnes'); } } catch (_) {} toast('Introuvable.', 'error'); return; }
             if (l.kind === 'media') { try { const m = (await api('media_brief', {ids: String(l.id)})).media?.[l.id]; if (m) A().openLightbox?.([{...m, id: Number(l.id)}], 0, true); else toast('Média introuvable.', 'error'); } catch (error) { toast(error.message, 'error'); } }
         }
         async function linkDialog() {
-            const [inv, bat, ate, rec, brd, lab] = await Promise.all([api('research_lists', {kind: 'investigations'}), api('research_lists', {kind: 'battues'}), api('research_lists', {kind: 'atelier'}), api('recueils', {q: ''}), api('boards', {owner_type: 'all'}), api('my_lists')].map(p => p.catch(() => ({}))));
-            const opts = {investigation: inv.rows || [], battue: bat.rows || [], atelier_project: ate.rows || [], recueil: (rec.recueils || []).map(r => ({id: r.id, title: (r.icon || '📚') + ' ' + r.title})), board: (brd.boards || []).filter(r => Number(r.id) !== Number(b.id)), label: (lab.labels || []).map(l0 => ({id: l0.id, title: l0.name}))};
+            const [inv, bat, ate, rec, brd, lab, pts] = await Promise.all([api('research_lists', {kind: 'investigations'}), api('research_lists', {kind: 'battues'}), api('research_lists', {kind: 'atelier'}), api('recueils', {q: ''}), api('boards', {owner_type: 'all'}), api('my_lists'), api('pets', {})].map(p => p.catch(() => ({}))));
+            const opts = {investigation: inv.rows || [], battue: bat.rows || [], atelier_project: ate.rows || [], recueil: (rec.recueils || []).map(r => ({id: r.id, title: (r.icon || '📚') + ' ' + r.title})), board: (brd.boards || []).filter(r => Number(r.id) !== Number(b.id)), label: (lab.labels || []).map(l0 => ({id: l0.id, title: l0.name})), pet: (pts.pets || []).map(x => ({id: x.id, title: x.title + (x.breed ? ' (' + x.breed + ')' : '')}))};
             let found = null;
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Associer ce tableau', submitLabel: 'Associer',
                 body: `<div class="form-grid"><label class="span-2">À quoi <select name="kind">${Object.entries(LINK_KINDS).map(([k, [i, lb]]) => `<option value="${k}">${i} ${lb}</option>`).join('')}</select></label>
@@ -1513,6 +1521,7 @@
         return A().card(index, '🧩 Tableaux', list.length, `<div class="h-bd-grid is-small h-bd-personblock">${list.map(r => cardHtml({...r, part: [r.part, ...(r.parts || [])].filter((v, i, a) => v && a.indexOf(v) === i).join(' · ')}).replace('class="h-bd-del"', 'class="h-bd-del" hidden')).join('')}</div>`, 'span-12');
     };
     document.addEventListener('click', e => {
+        const g2 = e.target.closest?.('[data-bd-goto-board]'); if (g2) { go(Number(g2.dataset.bdGotoBoard)); return; }
         const g = e.target.closest?.('.h-bd-personblock [data-bd-go]'); if (!g) return;
         go(Number(g.dataset.bdGo));
     });

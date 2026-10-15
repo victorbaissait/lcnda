@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 38;
+const SCHEMA_VERSION = 39;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -59,6 +59,7 @@ function migration_steps(): array
         36 => 'schema_v36',
         37 => 'schema_v37',
         38 => 'schema_v38',
+        39 => 'schema_v39',
     ];
 }
 
@@ -1914,4 +1915,26 @@ function schema_v38(PDO $pdo): void
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
     $pdo->exec('CREATE INDEX IF NOT EXISTS idx_board_snapshots_board ON board_snapshots(board_id)');
+}
+
+/** Animaux de compagnie : une fiche par animal (détail en JSON), ses parents dans la base (pedigree), les fiches liées */
+function schema_v39(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS pets (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        data_json TEXT NOT NULL DEFAULT '{}',
+        sire_id INTEGER,
+        dam_id INTEGER,
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_pets_sire ON pets(sire_id)');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_pets_dam ON pets(dam_id)');
+    $pdo->exec("CREATE TABLE IF NOT EXISTS pet_people (
+        pet_id INTEGER NOT NULL REFERENCES pets(id) ON DELETE CASCADE,
+        person_id INTEGER NOT NULL,
+        role TEXT NOT NULL DEFAULT 'propriétaire',
+        PRIMARY KEY (pet_id, person_id)
+    )");
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_pet_people_person ON pet_people(person_id)');
 }

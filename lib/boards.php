@@ -137,7 +137,7 @@ function save_board(PDO $pdo, array $data): array
         $bg = in_array($raw['bg'] ?? '', ['dots', 'grid', 'lines', 'plain', 'paper', 'dark', 'cork', 'custom'], true) ? $raw['bg'] : 'dots';
         $bgColor = preg_match('/^#[0-9a-f]{6}$/i', (string) ($raw['bgColor'] ?? '')) ? (string) $raw['bgColor'] : '';
         $bgPattern = in_array($raw['bgPattern'] ?? '', ['', 'dots', 'grid', 'lines'], true) ? (string) ($raw['bgPattern'] ?? '') : '';
-        $json = json_encode(['items' => $items, 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => board_clean_links($raw['links'] ?? []), 'bgColor' => $bgColor, 'bgPattern' => $bgPattern], JSON_UNESCAPED_UNICODE);
+        $json = json_encode(['items' => $items, 'view' => $view, 'bg' => $bg, 'locked' => !empty($raw['locked']), 'links' => array_map(static function ($l) use ($pdo) { $lab = board_link_label($pdo, $l['kind'], $l['id']); if ($lab !== '') { $l['label'] = mb_substr($lab, 0, 200); } return $l; }, board_clean_links($raw['links'] ?? [])), 'bgColor' => $bgColor, 'bgPattern' => $bgPattern], JSON_UNESCAPED_UNICODE);
         if (strlen($json) > 20 * 1024 * 1024) { throw new RuntimeException('Tableau trop lourd : retire quelques dessins.'); }
         $fields['data_json'] = $json; $fields['item_count'] = count($items);
         if ($thumb !== '') { $fields['thumb'] = $thumb; }
@@ -161,7 +161,56 @@ function save_board(PDO $pdo, array $data): array
 }
 
 /** Ce à quoi un tableau est associé, en plus de son rangement : des fiches, des enquêtes, des battues, des projets, des recueils… */
-const BOARD_LINK_KINDS = ['person' => 'Personne', 'investigation' => 'Enquête', 'battue' => 'Battue', 'atelier_project' => 'Atelier', 'recueil' => 'Recueil', 'place' => 'Lieu', 'family' => 'Famille', 'board' => 'Tableau', 'media' => 'Média', 'label' => 'Étiquette'];
+const BOARD_LINK_KINDS = ['person' => 'Personne', 'investigation' => 'Enquête', 'battue' => 'Battue', 'atelier_project' => 'Atelier', 'recueil' => 'Recueil', 'place' => 'Lieu', 'family' => 'Famille', 'board' => 'Tableau', 'media' => 'Média', 'label' => 'Étiquette', 'event' => 'Événement', 'pet' => 'Animal'];
+
+/** Le nom d'une chose associée, lu dans la base (le même partout : sert aussi à reconnaître la même base à l'import) */
+function board_link_label(PDO $pdo, string $kind, int $id): string
+{
+    $one = static function (string $sql) use ($pdo, $id): string { try { $s = $pdo->prepare($sql); $s->execute([$id]); return trim((string) ($s->fetchColumn() ?: '')); } catch (Throwable) { return ''; } };
+    $name = static fn(string $a) => "trim(replace(COALESCE($a.first_name,'')||' '||COALESCE($a.last_name,''),'  ',' '))";
+    switch ($kind) {
+        case 'person': return $one('SELECT ' . $name('p') . ' FROM persons p WHERE p.id=?');
+        case 'investigation': case 'battue': case 'atelier_project': return board_owner_label($pdo, $kind, $id);
+        case 'recueil': return $one('SELECT title FROM recueils WHERE id=?');
+        case 'place': return $one("SELECT name || CASE WHEN COALESCE(county,'')<>'' THEN ' (' || county || ')' ELSE '' END FROM places WHERE id=?");
+        case 'media': return $one("SELECT COALESCE(NULLIF(title,''), filename) FROM media WHERE id=?");
+        case 'label': return $one('SELECT name FROM labels WHERE id=?');
+        case 'board': return $one('SELECT title FROM boards WHERE id=?');
+        case 'family': return $one('SELECT trim(COALESCE(' . $name('a') . ",'?') || ' et ' || COALESCE(" . $name('b') . ",'?')) FROM families f LEFT JOIN persons a ON a.id=f.partner1_id LEFT JOIN persons b ON b.id=f.partner2_id WHERE f.id=?");
+        case 'event': return $one("SELECT trim(t.label || ' ' || COALESCE(e.date_text, e.year, '') || ' — ' || COALESCE(" . $name('p') . ",'')) FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id WHERE e.id=?");
+        case 'pet': { $j = $one('SELECT data_json FROM pets WHERE id=?'); return $j !== '' ? pet_title(json_decode($j, true) ?: []) : ''; }
+    }
+    return '';
+}
+
+/** Associations d'un tableau importé : on garde celles qui visent la même chose ici (même numéro, même nom) */
+function board_links_check(PDO $pdo, array $data): array
+{
+    $keep = [];
+    foreach (board_clean_links($data['links'] ?? []) as $l) { $lab = board_link_label($pdo, $l['kind'], $l['id']); if ($lab !== '' && $lab === $l['label']) { $keep[] = $l; } }
+    return ['links' => $keep];
+}
+
+/** Recherche de couples (familles) pour les associer à un tableau */
+function board_family_search(PDO $pdo, string $q): array
+{
+    $q = trim($q); if (mb_strlen($q) < 2) { return []; }
+    $name = static fn(string $a) => "trim(replace(COALESCE($a.first_name,'')||' '||COALESCE($a.last_name,''),'  ',' '))";
+    $s = $pdo->prepare('SELECT f.id, ' . $name('a') . ' AS a, ' . $name('b') . ' AS b, (SELECT COALESCE(e.date_text, e.year) FROM events e WHERE e.family_id=f.id ORDER BY e.year LIMIT 1) AS d FROM families f LEFT JOIN persons a ON a.id=f.partner1_id LEFT JOIN persons b ON b.id=f.partner2_id
+        WHERE ' . $name('a') . ' LIKE ? COLLATE NOCASE OR ' . $name('b') . ' LIKE ? COLLATE NOCASE ORDER BY a LIMIT 15');
+    $s->execute(['%' . $q . '%', '%' . $q . '%']);
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'title' => trim(($r['a'] ?: '?') . ' et ' . ($r['b'] ?: '?')) . ($r['d'] ? ' (' . $r['d'] . ')' : '')], $s->fetchAll());
+}
+
+/** Où ouvrir une famille ou un événement : la fiche de la personne */
+function board_link_person(PDO $pdo, string $kind, int $id): int
+{
+    try {
+        if ($kind === 'family') { $s = $pdo->prepare('SELECT COALESCE(partner1_id, partner2_id) FROM families WHERE id=?'); $s->execute([$id]); return (int) $s->fetchColumn(); }
+        if ($kind === 'event') { $s = $pdo->prepare('SELECT COALESCE(e.person_id, f.partner1_id, f.partner2_id) FROM events e LEFT JOIN families f ON f.id=e.family_id WHERE e.id=?'); $s->execute([$id]); return (int) $s->fetchColumn(); }
+    } catch (Throwable) {}
+    return 0;
+}
 function board_clean_links($links): array
 {
     $out = []; $seen = [];
@@ -252,7 +301,7 @@ function copy_board(PDO $pdo, array $data): array
         ->execute([$title, (string) $b['icon'], (string) $b['color'], $keep ? (string) $b['owner_type'] : '', $keep ? (int) $b['owner_id'] : 0, $keep ? (string) $b['part'] : '', 'open', $json, $thumb, $count]);
     $id = (int) $pdo->lastInsertId();
     log_change($pdo, 'meta', 0, 'create', 'Tableau copié : ' . $title);
-    return ['id' => $id, 'title' => $title];
+    return ['id' => $id, 'title' => $title, 'links' => isset($json) ? (json_decode($json, true)['links'] ?? []) : null];
 }
 
 function delete_board(PDO $pdo, array $data): array

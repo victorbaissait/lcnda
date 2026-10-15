@@ -318,10 +318,16 @@ try {
         'media_brief' => json_response(media_brief($pdo, (string) ($_GET['ids'] ?? ''))),
         'board' => json_response(board_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'board_place_key' => json_response((function () use ($pdo) { $s = $pdo->prepare('SELECT id, name, county, admin4_code FROM places WHERE id=?'); $s->execute([safe_int($_GET['id'] ?? 0)]); $r = $s->fetch(); return ['key' => $r && function_exists('village_key') ? village_key($r) : '']; })()),
+        'board_family_search' => json_response(['families' => board_family_search($pdo, safe_text($_GET['q'] ?? ''))]),
+        'board_link_person' => json_response(['person_id' => board_link_person($pdo, safe_text($_GET['kind'] ?? ''), safe_int($_GET['id'] ?? 0))]),
+        'board_links_check' => json_response(board_links_check($pdo, ['links' => json_decode((string) ($_GET['links'] ?? '[]'), true) ?: []])),
         'board_snapshots' => json_response(['snapshots' => board_snapshots($pdo, safe_int($_GET['board_id'] ?? 0))]),
         'board_snapshot' => json_response(board_snapshot_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'boards_linked' => json_response(['boards' => boards_linked($pdo, (string) ($_GET['kind'] ?? ''), safe_int($_GET['id'] ?? 0))]),
         'research_lists' => json_response(['rows' => research_lists_overview($pdo, safe_text($_GET['kind'] ?? ''))]),
+        'pets' => json_response(['pets' => pets_list($pdo, $_GET), 'species' => PET_SPECIES]),
+        'pet' => json_response(pet_detail($pdo, safe_int($_GET['id'] ?? 0))),
+        'pet_pedigree' => json_response(['ancestors' => pet_ancestors($pdo, safe_int($_GET['id'] ?? 0), max(1, min(10, safe_int($_GET['gens'] ?? 5))))]),
         'booklets' => json_response(['booklets' => booklets_list($pdo, safe_text($_GET['q'] ?? ''))]),
         'booklet' => json_response(booklet_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'booklet_proposals' => json_response(booklet_proposals($pdo, safe_int($_GET['id'] ?? 0))),
@@ -8944,6 +8950,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_village_profile' => save_village_profile($pdo,$data),
             'save_employer_record' => save_employer_record($pdo,$data),
             'save_booklet' => save_booklet($pdo,$data),
+            'save_pet' => save_pet($pdo,$data),
+            'delete_pet' => delete_pet($pdo,$data),
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
@@ -9069,7 +9077,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet'];
 }
 
 function normalize_label_color(string $color): string
