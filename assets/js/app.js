@@ -1798,7 +1798,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $('#dashboard-create-widget')?.addEventListener('click',()=>{state.maintenanceTab='widget_editor';setModule('maintenance');},{signal:sidebarController.signal});
     }
 
-    async function renderDashboard(token=++state.workspaceToken){
+    /** Dernières données du tableau de bord : ouvrir ou fermer les réglages d'un widget (✎) les reprend au lieu de tout redemander */
+    let dashboardCache=null;
+    async function renderDashboard(token=++state.workspaceToken,{reuse=false}={}){
         const settings=dashboardBlockSettings();
         // Widget à soi qui « habille » un widget de l'app : il en reprend les données et l'affichage (titre, icône, couleur, texte à soi)
         const customDefs=window.LCNDA_EXT?.customWidgetDefs?.()||{};
@@ -1808,11 +1810,14 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const mediaSeedPairs=settings.widgets.filter(widget=>widget.type==='random_media'&&!Number(widget.config?.mediaId)).map(widget=>`${encodeURIComponent(widget.id)}:${randomSeedOf(widget)}`).join(',');
         const selectedPeople=[...new Set(settings.widgets.filter(widget=>['chosen_person','random_person','random_person_map','person_block','person_timeline','kinship_widget','session_goal'].includes(widget.type)&&Number(widget.config?.personId)>0).map(widget=>Number(widget.config.personId)).concat(settings.widgets.filter(widget=>widget.type==='kinship_widget'&&Number(widget.config?.personId2)>0).map(widget=>Number(widget.config.personId2))))];
         const branchName=(settings.widgets.find(widget=>widget.type==='branch_map'&&widget.config?.branchName)?.config?.branchName||'').trim();
-        const data=await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),people:selectedPeople.join(','),branch:branchName||undefined,sosa_root_id:sosaRootId()||undefined,person_seeds:seedPairs(['random_person','person_block','person_timeline'])||undefined,media_seeds:mediaSeedPairs||undefined,person_map_seeds:seedPairs(['random_person_map'])||undefined});
+        const dashParams={people:selectedPeople.join(','),branch:branchName||undefined,sosa_root_id:sosaRootId()||undefined,person_seeds:seedPairs(['random_person','person_block','person_timeline'])||undefined,media_seeds:mediaSeedPairs||undefined,person_map_seeds:seedPairs(['random_person_map'])||undefined};
+        const cacheKey=JSON.stringify([dashParams,settings.widgets.filter(w=>w.type==='person_quiz').map(w=>[w.id,w.config,w.limit])]);
+        const cached=reuse&&dashboardCache?.key===cacheKey?dashboardCache:null;
+        const data=cached?cached.data:await api('dashboard',{seed:state.dashboardRandomSeed||Date.now(),...dashParams});
         if(token!==state.workspaceToken||state.module!=='dashboard')return;
-        const quizData={};
+        const quizData=cached?cached.quizData:{};
         const sosaIds=Object.keys(sosaMap()).filter(id=>Number(id)>0&&Number(sosaNumberFor(id))>0).join(',');
-        await Promise.all(settings.widgets.filter(widget=>widget.type==='person_quiz').map(async widget=>{
+        if(!cached)await Promise.all(settings.widgets.filter(widget=>widget.type==='person_quiz').map(async widget=>{
             const config=widget.config||{};
             const personMode=config.personMode==='specific'?'specific':'random';
             const eventTypeIds=(Array.isArray(config.quizEventTypeIds)?config.quizEventTypeIds:[]).map(Number).filter(Boolean).join(',');
@@ -1829,6 +1834,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             }catch(_){quizData[widget.id]=null;}
         }));
         if(token!==state.workspaceToken||state.module!=='dashboard')return;
+        dashboardCache={key:cacheKey,data,quizData};
         const personBlockIds=[...new Set(settings.widgets.filter(widget=>['person_block','person_timeline'].includes(widget.type)).map(widget=>widget.config?.personMode==='specific'?Number(widget.config.personId):Number(data.widget_people?.[widget.id]?.id||data.random_person?.id)).filter(Boolean))];
         const personBlockDetails={};
         // « Chercher sur internet » : la personne choisie, ou la dernière fiche consultée
@@ -1930,12 +1936,12 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}"><header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">⚙️ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>
         <div class="card-grid dashboard-grid">${blocks||empty(ownTab?'Onglet vide : ajoute des widgets, tes widgets, tes listes ou tes statistiques depuis la colonne de gauche.':'Aucun widget affiché. Ajoute-en depuis la colonne de gauche.')}</div></section>`;
         $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{state.dashboardPage=b.dataset.dashPage;renderDashboard();renderSidebar();}));
-        $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard();}));
+        $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard(undefined,{reuse:true});}));
         $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
         $$('[data-reroll-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const current=dashboardBlockSettings();const widget=current.widgets.find(item=>item.id===button.dataset.rerollDashboardWidget);if(widget){widget.config={...(widget.config||{}),randomSeed:Date.now()};saveDashboardBlockSettings(current);}await renderDashboard();}));
-        $$('[data-edit-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();state.dashboardEditingWidget=state.dashboardEditingWidget===button.dataset.editDashboardWidget?'':button.dataset.editDashboardWidget;await renderDashboard();}));
+        $$('[data-edit-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();state.dashboardEditingWidget=state.dashboardEditingWidget===button.dataset.editDashboardWidget?'':button.dataset.editDashboardWidget;await renderDashboard(undefined,{reuse:true});}));
         $$('[data-delete-dashboard-widget]').forEach(button=>button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();const id=button.dataset.deleteDashboardWidget;button.closest('.dashboard-widget')?.remove();const current=dashboardBlockSettings();current.widgets=current.widgets.filter(widget=>widget.id!==id);saveDashboardBlockSettings(current);state.dashboardEditingWidget='';toast('Widget supprimé du tableau de bord.');await renderDashboard();}));
-        $$('[data-cancel-dashboard-widget]').forEach(button=>button.addEventListener('click',async()=>{state.dashboardEditingWidget='';await renderDashboard();}));
+        $$('[data-cancel-dashboard-widget]').forEach(button=>button.addEventListener('click',async()=>{state.dashboardEditingWidget='';await renderDashboard(undefined,{reuse:true});}));
         $$('[data-save-dashboard-widget]').forEach(button=>button.addEventListener('click',async()=>{saveDashboardWidgetFromEditor(button.dataset.saveDashboardWidget);state.dashboardEditingWidget='';toast('Widget modifié.');await renderDashboard();}));
         $$('.dashboard-widget-back [data-block-width]').forEach(button=>button.addEventListener('click',()=>{const group=button.closest('.block-widths');$$('[data-block-width]',group).forEach(item=>item.setAttribute('aria-pressed',String(item===button)));}));
         $$('[data-dashboard-quiz-all]').forEach(input=>input.addEventListener('change',()=>{
