@@ -543,7 +543,7 @@
             eraser: () => `${[['pixel', '🩹 Gomme fine', 'efface seulement ce que tu touches'], ['stroke', '🧽 Gomme à traits', 'enlève le trait entier']].map(([k, l, h]) => `<button type="button" class="h-bt ${eraserMode === k ? 'is-on' : ''}" data-bd-erasemode="${k}" title="${h}">${l}</button>`).join('')}
                 <label class="h-bt-label">Taille <input type="range" min="2" max="120" value="${eraserSize}" data-bd-erasesize><input type="number" class="h-bd-numbox" min="2" max="400" value="${eraserSize}" data-bd-erasesize> px</label><small class="muted">Les gommes n’effacent que les dessins à main levée.</small>`,
             shape: () => `<span class="h-bd-shquick">${quickShapes().map(sh => `<button type="button" class="h-bt ${shapeKind === sh.k ? 'is-on' : ''}" data-bd-shapekind="${esc(sh.k)}" title="${esc(sh.n)}">${KIT().shapeSvg ? KIT().shapeSvg(sh, 18) : esc(sh.n)}</button>`).join('')}</span><button type="button" class="h-bt" data-bd-shapeall title="Toutes les formes, et créer la sienne">Toutes les formes ▾</button>`,
-            note: () => pal('note').map(c => `<button type="button" class="h-sw ${noteColor === c ? 'is-on' : ''}" style="background:${c}" data-bd-notecolor="${c}"></button>`).join(''),
+            note: () => pal('note').map(c => `<button type="button" class="h-sw ${noteColor === c ? 'is-on' : ''}" style="background:${c}" data-bd-notecolor="${c}"></button>`).join('') + `<input type="color" class="h-bd-pencolor" value="${/^#[0-9a-f]{6}$/i.test(noteColor) ? noteColor : '#fff3a3'}" data-bd-notecustom title="Autre couleur pour les notes">`,
         };
         const setTool = t => { if (boardLocked && !['select', 'hand'].includes(t)) { ro(); t = 'select'; }
             tool = t; root.querySelectorAll('[data-bd-tool]').forEach(x => x.classList.toggle('is-on', x.dataset.bdTool === t));
@@ -572,6 +572,7 @@
             if (e.target.matches('[data-bd-penw]') && e.target.value !== '') { penWidth = Number(e.target.value); sync('[data-bd-penw]'); root.querySelectorAll('[data-bd-penwidth]').forEach(x => x.classList.toggle('is-on', Number(x.dataset.bdPenwidth) === penWidth)); }
             if (e.target.matches('[data-bd-penhard]')) { penHard = Number(e.target.value); e.target.nextElementSibling.textContent = penHard + ' %'; }
             if (e.target.matches('[data-bd-erasesize]') && e.target.value !== '') { eraserSize = Number(e.target.value); sync('[data-bd-erasesize]'); }
+            if (e.target.matches('[data-bd-notecustom]')) { noteColor = e.target.value; root.querySelectorAll('[data-bd-notecolor]').forEach(x => x.classList.remove('is-on')); }
             if (e.target.matches('[data-bd-pencustom]')) { penColor = e.target.value; root.querySelectorAll('[data-bd-pencolor]').forEach(x => x.classList.remove('is-on')); }
         });
         // la liste des pinceaux, comme dans Freeform
