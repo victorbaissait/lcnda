@@ -539,9 +539,17 @@
     }
     ext.montagePrefs = montagePrefs; ext.montagePrefsDefaults = {MT_KEY, MT_SIZES, MT_QUALITY, MT_FPS, MT_DEF};
 
+    // les pistes, de haut en bas : vidéos incrustées (au-dessus = devant), la vidéo principale, les textes, les sons
+    const TRACK_KINDS = {v: ['🖼️', 'Vidéo'], main: ['🎬', 'Vidéo 1'], t: ['🔤', 'Textes'], a: ['🎵', 'Son']};
     function montageModel(sources) {
-        return {sources, v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0}};
+        return {sources, v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0},
+            tracks: [{id: 'V2', kind: 'v', name: 'Vidéo 2'}, {id: 'V1', kind: 'main', name: 'Vidéo 1'}, {id: 'T1', kind: 't', name: 'Textes 1'}, {id: 'A1', kind: 'a', name: 'Son 1'}, {id: 'A2', kind: 'a', name: 'Son 2'}]};
     }
+    const KIND_OF_LIST = {v2: 'v', texts: 't', audio: 'a'};
+    /** La piste d'un élément (une ancienne piste « 1 / 2 » des sons devient A1 / A2) */
+    const trackOf = (P, c, list) => { const k = KIND_OF_LIST[list]; if (typeof c.track === 'number') c.track = 'A' + c.track; if (c.track && P.tracks.some(t => t.id === c.track && t.kind === k)) return c.track; return P.tracks.find(t => t.kind === k)?.id || ''; };
+    const trackIdx = (P, id) => P.tracks.findIndex(t => t.id === id);
+    const trackHidden = (P, id) => !!P.tracks.find(t => t.id === id)?.hidden;
     /** Moments de chaque morceau de la piste 1 (un fondu enchaîné fait se chevaucher deux morceaux) */
     function layoutV1(P) {
         let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, c.to - c.from), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, (P.v1[k - 1].to - P.v1[k - 1].from) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
@@ -575,8 +583,8 @@
         function active(tt) {
             const L = layoutV1(P), list = [];
             L.forEach((x, k) => { if (tt >= x.at && tt < x.end) list.push({kind: 'v1', x, k, local: x.c.from + tt - x.at}); });
-            P.v2.forEach(c => { if (tt >= c.at && tt < c.at + c.to - c.from) list.push({kind: 'v2', c, local: c.from + tt - c.at}); });
-            P.audio.forEach(a => { if (tt >= a.at && tt < a.at + a.to - a.from) list.push({kind: 'a', c: a, local: a.from + tt - a.at}); });
+            P.v2.forEach(c => { if (tt >= c.at && tt < c.at + c.to - c.from && !trackHidden(P, trackOf(P, c, 'v2'))) list.push({kind: 'v2', c, local: c.from + tt - c.at}); });
+            P.audio.forEach(a => { if (tt >= a.at && tt < a.at + a.to - a.from && !trackHidden(P, trackOf(P, a, 'audio'))) list.push({kind: 'a', c: a, local: a.from + tt - a.at}); });
             return {L, list};
         }
         function sync(tt, hard = false) {
@@ -643,15 +651,15 @@
             const T = montageEnd(P);
             if (P.fadeStart && tt < 1) { g.save(); g.globalAlpha = 1 - tt; g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
             if (P.fadeEnd && T - tt < 1) { g.save(); g.globalAlpha = 1 - (T - tt); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
-            // piste 2 : incrustations
-            list.filter(i => i.kind === 'v2').forEach(it => {
+            // pistes d'incrustation : celle du bas d'abord, celle du haut devant
+            list.filter(i => i.kind === 'v2').sort((a, b) => trackIdx(P, trackOf(P, b.c, 'v2')) - trackIdx(P, trackOf(P, a.c, 'v2'))).forEach(it => {
                 const e = els.get(it.c.id); if (!e?.el.videoWidth) return; const c = it.c, vw = e.el.videoWidth, vh = e.el.videoHeight;
                 const w = (c.w || 35) / 100 * W, h = w * vh / vw, x0 = (c.x ?? 62) / 100 * W, y0 = (c.y ?? 6) / 100 * H, local = tt - c.at, len = c.to - c.from;
                 let a = (c.opacity ?? 100) / 100; if (c.fade !== false) { if (local < 0.5) a *= local / 0.5; if (len - local < 0.5) a *= (len - local) / 0.5; }
                 g.save(); g.globalAlpha = Math.max(0, a); g.filter = lookFilter(c.look || {}, P.look); g.drawImage(e.el, x0, y0, w, h); g.restore();
                 if (c.border !== false) { g.save(); g.globalAlpha = Math.max(0, a); g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, W / 400); g.strokeRect(x0, y0, w, h); g.restore(); }
             });
-            P.texts.filter(x => tt >= x.at && tt < x.at + x.dur).forEach(x => drawText(x, tt));
+            P.texts.filter(x => tt >= x.at && tt < x.at + x.dur && !trackHidden(P, trackOf(P, x, 'texts'))).sort((a, b) => trackIdx(P, trackOf(P, b, 'texts')) - trackIdx(P, trackOf(P, a, 'texts'))).forEach(x => drawText(x, tt));
             if (out === 'preview' && api.decorate) { g.save(); api.decorate(g, W, H, tt); g.restore(); } // cadre de l'élément choisi (aperçu seulement)
         }
         const loop = () => {
@@ -709,6 +717,21 @@
         const P = montageModel(sources);
         if (sources.length) P.v1.push({id: nid('v'), s: 0, from: 0, to: sources[0].dur, tr: {type: 'none', d: 1}, look: {}, vol: 1});
         let sel = P.v1[0] ? {track: 'v1', id: P.v1[0].id} : null, dirty = false, pxs = 40; // pixels par seconde sur la frise
+        const OFF = 150; // largeur des noms de pistes, à gauche de la frise
+        // une piste libre de ce genre à ce moment-là, sinon une nouvelle
+        const LISTS = {v: P.v2, t: P.texts, a: P.audio}, LISTNAME = {v: 'v2', t: 'texts', a: 'audio'};
+        const lenOf = c => c.dur ?? (c.to - c.from);
+        function addTrack(kind, at = null) {
+            const n = Math.max(0, ...P.tracks.filter(t => t.kind === kind).map(t => Number(String(t.id).slice(1)) || 0)) + 1, base = {v: 'V', t: 'T', a: 'A'}[kind];
+            let id = base + n; while (P.tracks.some(t => t.id === id)) id = base + (++uid);
+            const tr = {id, kind, name: kind === 'v' ? `Vidéo ${n + 1}` : kind === 't' ? `Textes ${n}` : `Son ${n}`};
+            // vidéo : au-dessus des autres (devant) ; texte et son : sous ceux de leur genre
+            const same = P.tracks.map((t, i) => t.kind === kind ? i : -1).filter(i => i >= 0);
+            const pos = at ?? (kind === 'v' ? 0 : same.length ? same.at(-1) + 1 : kind === 't' ? trackIdx(P, 'V1') + 1 : P.tracks.length);
+            P.tracks.splice(pos, 0, tr); return tr.id;
+        }
+        const freeTrack = (kind, at, len) => P.tracks.filter(t => t.kind === kind && !t.hidden).find(t => !LISTS[kind].some(c => trackOf(P, c, LISTNAME[kind]) === t.id && c.at < at + len && at < c.at + lenOf(c)))?.id || addTrack(kind);
+        const undetach = a => { if (!a?.detached) return; [...P.v1, ...P.v2].forEach(v => { if (v.detached === a.id) { v.mute = false; delete v.detached; } }); };
         const ver = await versionsHtml(media);
         const MP = montagePrefs();
         const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', id: 'video', title: media.title || media.filename || 'Nouveau montage', onClose: () => { eng?.pause(); return !dirty || confirm('Fermer sans enregistrer le montage ?'); },
@@ -753,22 +776,24 @@
         const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); eng.decorate = decorate; await eng.seek(t); };
         // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
         const touch = async (lvl = 1, pane = true) => { dirty = true; const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) lvl = 2; if (lvl === 2) { await rebuild(); drawTl(pane); return; } drawTl(pane); if (lvl === 1) eng?.seek(eng.t); else eng?.refresh(); };
-        const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + 90) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; };
+        const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + OFF) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; };
         const all = () => [...P.v1.map(c => ['v1', c]), ...P.v2.map(c => ['v2', c]), ...P.texts.map(c => ['texts', c]), ...P.audio.map(c => ['audio', c])];
         const selected = () => { const f = all().find(([tr, c]) => sel && tr === sel.track && c.id === sel.id); return f ? f[1] : null; };
         // frise : une ligne par piste
         function drawTl(pane = true) {
             const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
-            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${90 + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${esc(label)}</button>`;
+            const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${esc(label)}</button>`;
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
-            const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${90 + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
-            const audioLane = n => lane('a' + n, `🎵 Son ${n}`, P.audio.filter(a => (a.track || 1) === n).map(a => block('audio', a, a.at, a.to - a.from, (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join(''));
-            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px"><div class="h-mt-ruler" data-mt-ruler>${ruler}</div><div data-tbg="mt-lanes" data-tbg-label="Pistes de la frise">
-                ${lane('v2', '🖼️ Vidéo 2', P.v2.map(c => block('v2', c, c.at, c.to - c.from, P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join(''))}
-                ${lane('v1', '🎬 Vidéo 1', L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join(''))}
-                ${lane('t', '🔤 Textes', P.texts.map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join(''))}
-                ${audioLane(1)}${audioLane(2)}</div>
-                <i class="h-mt-ph" data-mt-ph style="left:${90 + (eng?.t || 0) * pxs}px"></i></div>`;
+            const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${OFF + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
+            const clipsOf = tr => tr.kind === 'main' ? L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join('')
+                : tr.kind === 'v' ? P.v2.filter(c => trackOf(P, c, 'v2') === tr.id).map(c => block('v2', c, c.at, c.to - c.from, P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join('')
+                : tr.kind === 't' ? P.texts.filter(x => trackOf(P, x, 'texts') === tr.id).map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join('')
+                : P.audio.filter(a => trackOf(P, a, 'audio') === tr.id).map(a => block('audio', a, a.at, a.to - a.from, (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join('');
+            const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${tr.kind === 'main' ? '' : `<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button>${tr.kind === 'main' ? '' : `<button type="button" data-mt-tdel="${tr.id}" title="Supprimer cette piste">🗑</button>`}</span></span>${clipsOf(tr)}</div>`;
+            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px" data-dnd-off><div class="h-mt-ruler" data-mt-ruler>${ruler}</div><div>
+                ${P.tracks.map(laneOf).join('')}</div>
+                <div class="h-mt-addtracks"><button type="button" class="button small secondary" data-mt-addtrack="v">＋ Piste vidéo</button><button type="button" class="button small secondary" data-mt-addtrack="t">＋ Piste texte</button><button type="button" class="button small secondary" data-mt-addtrack="a">＋ Piste son</button></div>
+                <i class="h-mt-ph" data-mt-ph style="left:${OFF + (eng?.t || 0) * pxs}px"></i></div>`;
             ext.tbApply?.(dl, 'video'); // pistes rangées ou cachées à sa façon
             $('[data-mt-total]').textContent = fmt(T);
             $('[data-mt-empty]').hidden = P.v1.length > 0;
@@ -778,6 +803,7 @@
         const rng = (k, label, min, max, step, v, unit = '') => `<label class="h-avx-row">${label} <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-k="${k}"><output data-u="${unit}">${unit === '%' ? Math.round(v * 100) + ' %' : v + unit}</output></label>`;
         const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
             ${rng(scope + '.bright', 'Luminosité', 0.4, 1.8, 0.02, L.bright ?? 1, '%')}${rng(scope + '.contrast', 'Contraste', 0.4, 1.8, 0.02, L.contrast ?? 1, '%')}${rng(scope + '.sat', 'Saturation', 0, 2, 0.02, L.sat ?? 1, '%')}${rng(scope + '.warm', 'Température (froid ↔ chaud)', -0.8, 0.8, 0.02, L.warm ?? 0)}${rng(scope + '.hue', 'Teinte', -60, 60, 1, L.hue ?? 0, '°')}`;
+        const trackSel = (list, c) => { const cur = trackOf(P, c, list); return `<label class="h-avx-row">Piste <select data-mt-k="track">${P.tracks.filter(t => t.kind === KIND_OF_LIST[list]).map(t => `<option value="${t.id}" ${t.id === cur ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label>`; };
         function drawPane() {
             const c = selected(), item = $('[data-mt-pane="item"]');
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
@@ -786,8 +812,8 @@
                 ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>
                 <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
             else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}${rng('opacity', 'Opacité', 10, 100, 1, c.opacity ?? 100, ' %')}
-                ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>`;
-            else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4><label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
+                ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%')}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>`;
+            else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <label class="h-avx-row">Mouvement <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${c.anim === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${rng('dur', 'Durée', 0.5, 30, 0.1, c.dur, ' s')}${rng('size', 'Taille', 2, 20, 0.5, c.size ?? 6, ' %')}
                 <label class="h-avx-row">Police <select data-mt-k="font">${FONTS_V.map(([k, l]) => `<option value="${esc(k)}" ${c.font === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -796,7 +822,7 @@
                 <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}> gras</label><label class="checkbox-line"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}> ombre</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> entre et sort en fondu</label>`;
             else item.innerHTML = `<h4>🎵 Son</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
-                <label class="h-avx-row">Piste <select data-mt-k="track"><option value="1" ${(c.track || 1) === 1 ? 'selected' : ''}>Son 1</option><option value="2" ${c.track === 2 ? 'selected' : ''}>Son 2</option></select></label>`;
+                ${trackSel('audio', c)}`;
             $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}`;
             $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="fx.clarity" ${P.fx.clarity ? 'checked' : ''}> 🗣️ Voix plus nette</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fx.noise" ${P.fx.noise ? 'checked' : ''}> 🧹 Moins de souffle et de grondement</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fx.mute" ${P.fx.mute ? 'checked' : ''}> 🔇 Sans le son</label>`;
             $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? `tourné de ${P.fx.rotate}°` : ''}</small></div>
@@ -815,7 +841,7 @@
             else if (k.startsWith('fx.') || k === 'fadeStart' || k === 'fadeEnd') setK(P, k, v);
             else if (c) {
                 if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
-                else if (k === 'track') c.track = Number(v);
+                else if (k === 'track') { c.track = v; touch(1); return; }
                 else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; }
                 else setK(c, k, v);
             }
@@ -867,16 +893,35 @@
         const tl = $('[data-mt-tl]');
         tl.addEventListener('pointerdown', e => {
             const clip = e.target.closest('[data-mt-clip]'), x0 = e.clientX, inner = tl.querySelector('.h-mt-tlin'), r = inner.getBoundingClientRect();
-            if (!clip) { if (e.target.closest('.h-mt-lname')) return; eng.seek((e.clientX - r.left - 90) / pxs); return; }
+            if (!clip) { if (e.target.closest('.h-mt-lname, .h-mt-addtracks')) return; eng.seek((e.clientX - r.left - OFF) / pxs); return; }
             const [track, id] = clip.dataset.mtClip.split(':'); sel = {track, id};
             const c = selected(); drawTl();
-            if (track === 'v1' || !c) { eng.seek((e.clientX - r.left - 90) / pxs); return; }
+            if (track === 'v1' || !c) { eng.seek((e.clientX - r.left - OFF) / pxs); return; }
             const at0 = c.at, el = tl.querySelector(`[data-mt-clip="${track}:${id}"]`); let moved = false;
-            const mv = ev => { const d = (ev.clientX - x0) / pxs; if (Math.abs(ev.clientX - x0) > 3) moved = true; c.at = Math.max(0, Math.round((at0 + d) * 10) / 10); if (el) el.style.left = (90 + c.at * pxs) + 'px'; };
-            const up = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up); if (moved) touch(1); else eng.seek((ev.clientX - r.left - 90) / pxs); };
+            const mv = ev => { const d = (ev.clientX - x0) / pxs; if (Math.abs(ev.clientX - x0) > 3) moved = true; c.at = Math.max(0, Math.round((at0 + d) * 10) / 10); if (el) el.style.left = (OFF + c.at * pxs) + 'px'; };
+            const up = ev => { document.removeEventListener('pointermove', mv); document.removeEventListener('pointerup', up);
+                const ln = document.elementFromPoint(ev.clientX, ev.clientY)?.closest('[data-mt-lane]'); // posé sur une autre piste du même genre
+                if (ln && ln.dataset.kind === KIND_OF_LIST[track] && ln.dataset.mtLane !== trackOf(P, c, track)) { c.track = ln.dataset.mtLane; moved = true; }
+                if (moved) touch(1); else eng.seek((ev.clientX - r.left - OFF) / pxs); };
             document.addEventListener('pointermove', mv); document.addEventListener('pointerup', up);
         });
         $('[data-mt-zoom]').addEventListener('input', e => { pxs = Number(e.target.value); drawTl(); });
+        // pistes : ajouter, cacher, monter, descendre, supprimer, renommer
+        tl.addEventListener('click', e => {
+            const b = e.target.closest('[data-mt-addtrack],[data-mt-tvis],[data-mt-tup],[data-mt-tdown],[data-mt-tdel]'); if (!b) return;
+            e.stopPropagation(); const d = b.dataset;
+            if (d.mtAddtrack) { const id = addTrack(d.mtAddtrack); toast(`Piste « ${P.tracks.find(t => t.id === id).name} » ajoutée.`); return touch(0); }
+            const id = d.mtTvis || d.mtTup || d.mtTdown || d.mtTdel, i = trackIdx(P, id), tr = P.tracks[i]; if (!tr) return;
+            if (d.mtTvis) { tr.hidden = !tr.hidden; return touch(1); }
+            if (d.mtTup || d.mtTdown) { const j = i + (d.mtTup ? -1 : 1); if (j < 0 || j >= P.tracks.length) return; [P.tracks[i], P.tracks[j]] = [P.tracks[j], P.tracks[i]]; return touch(0); }
+            if (d.mtTdel) {
+                const list = LISTS[tr.kind], mine = list.filter(c => trackOf(P, c, LISTNAME[tr.kind]) === id);
+                if (mine.length && !confirm(`Supprimer la piste « ${tr.name} » et ${mine.length > 1 ? `ses ${mine.length} éléments` : 'son élément'} ?`)) return;
+                mine.forEach(c => { if (tr.kind === 'a') undetach(c); list.splice(list.indexOf(c), 1); });
+                P.tracks.splice(i, 1); if (sel && mine.some(c => c.id === sel.id)) sel = null; toast(`Piste « ${tr.name} » supprimée.`); return touch(1);
+            }
+        });
+        tl.addEventListener('dblclick', e => { const n = e.target.closest('[data-mt-tname]'); if (!n) return; const tr = P.tracks.find(t => t.id === n.dataset.mtTname); const name = (prompt('Nom de la piste :', tr.name) || '').trim().slice(0, 40); if (name) { tr.name = name; touch(0); } });
         // lecture
         const play = async () => { if (eng.playing) { eng.pause(); $('[data-mt-play]').textContent = '▶ Lire'; } else { await eng.play(); $('[data-mt-play]').textContent = '⏸ Pause'; } };
         $('[data-mt-play]').addEventListener('click', play);
@@ -887,16 +932,16 @@
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
             if (op === 'addv1') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: P.sources[s].dur, tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
-            if (op === 'addv2') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: P.sources[s].dur, at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
-            if (op === 'adda') { const s = await addSource('audio'); if (s === null) return; const k = {id: nid('a'), s, from: 0, to: P.sources[s].dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1, track: P.audio.some(a => (a.track || 1) === 1) ? 2 : 1}; P.audio.push(k); sel = {track: 'audio', id: k.id}; return touch(1); }
-            if (op === 'addtext') { const k = {id: nid('t'), at: t, dur: 4, text: 'Mon titre', size: 7, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: P.texts.length ? 82 : 50, anim: 'fade', align: 'center'}; P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
+            if (op === 'addv2') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: P.sources[s].dur, at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
+            if (op === 'adda') { const s = await addSource('audio'); if (s === null) return; const k = {id: nid('a'), s, from: 0, to: P.sources[s].dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; return touch(1); }
+            if (op === 'addtext') { const k = {id: nid('t'), at: t, dur: 4, text: 'Mon titre', size: 7, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: P.texts.length ? 82 : 50, anim: 'fade', align: 'center'}; k.track = freeTrack('t', t, 4); P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
             if (!c) return toast('Choisis d’abord un élément sur la frise.', 'error');
             const list = sel.track === 'v1' ? P.v1 : sel.track === 'v2' ? P.v2 : sel.track === 'texts' ? P.texts : P.audio, i = list.indexOf(c);
             const startOf = () => sel.track === 'v1' ? layoutV1(P)[i].at : c.at;
-            if (op === 'del') { list.splice(i, 1); sel = null; return touch(1); }
+            if (op === 'del') { if (sel.track === 'audio') undetach(c); list.splice(i, 1); sel = null; return touch(1); }
             if (op === 'left' || op === 'right') { if (sel.track !== 'v1') return toast('Pour les incrustations, textes et sons : fais-les glisser sur la frise.', 'error'); const j = i + (op === 'left' ? -1 : 1); if (j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; return touch(1); }
-            if (op === 'detach') { if (sel.track !== 'v1' && sel.track !== 'v2') return toast('Choisis un morceau de vidéo.', 'error'); if (c.detached) return toast('Le son de ce morceau est déjà détaché.', 'error'); const at = startOf(), busy = n => P.audio.some(a => (a.track || 1) === n && a.at < at + c.to - c.from && at < a.at + a.to - a.from);
-                const k = {id: nid('a'), s: c.s, from: c.from, to: c.to, at, vol: c.vol ?? 1, fadeIn: 0, fadeOut: 0, track: busy(1) && !busy(2) ? 2 : 1, detached: true}; P.audio.push(k); c.mute = true; c.detached = k.id; sel = {track: 'audio', id: k.id}; toast(`Son détaché : il est sur la piste « Son ${k.track} », tu peux le déplacer, le baisser ou l’enlever.`); return touch(1); }
+            if (op === 'detach') { if (sel.track !== 'v1' && sel.track !== 'v2') return toast('Choisis un morceau de vidéo.', 'error'); if (c.detached) return toast('Le son de ce morceau est déjà détaché.', 'error'); const at = startOf();
+                const k = {id: nid('a'), s: c.s, from: c.from, to: c.to, at, vol: c.vol ?? 1, fadeIn: 0, fadeOut: 0, track: freeTrack('a', at, c.to - c.from), detached: true}; P.audio.push(k); c.mute = true; c.detached = k.id; sel = {track: 'audio', id: k.id}; toast(`Son détaché : il est sur la piste « ${P.tracks.find(x => x.id === k.track)?.name} », tu peux le déplacer, le baisser ou l’enlever.`); return touch(1); }
             if (sel.track === 'texts') { if (op === 'start') { const e2 = c.at + c.dur; c.at = Math.min(t, e2 - 0.3); c.dur = e2 - c.at; } if (op === 'end') c.dur = Math.max(0.3, t - c.at); if (op === 'split') return toast('Un texte ne se coupe pas : change sa durée.', 'error'); return touch(0); }
             const s0 = startOf(), local = c.from + (t - s0);
             if (local <= c.from + 0.1 || local >= c.to - 0.1) return toast('Place la tête de lecture à l’intérieur de l’élément choisi.', 'error');

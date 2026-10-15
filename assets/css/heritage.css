@@ -1205,7 +1205,13 @@ dialog.h-avx[open] { display:flex; }
 .h-mt-ruler { position:relative; height:22px; border-bottom:1px solid rgba(127,127,127,.35); cursor:pointer; }
 .h-mt-ruler span { position:absolute; top:3px; font-size:11px; color:var(--muted, #666); transform:translateX(-50%); font-variant-numeric:tabular-nums; }
 .h-mt-lane { position:relative; height:40px; border-bottom:1px solid rgba(127,127,127,.2); cursor:pointer; }
-.h-mt-lname { position:sticky; left:0; z-index:2; display:flex; align-items:center; width:86px; height:100%; padding-left:6px; font-size:12px; font-weight:700; background:var(--white); border-right:1px solid rgba(127,127,127,.3); }
+.h-mt-lname { position:sticky; left:0; z-index:2; display:flex; flex-direction:column; justify-content:center; gap:1px; width:146px; height:100%; padding:0 4px 0 6px; font-size:12px; background:var(--white); border-right:1px solid rgba(127,127,127,.3); overflow:hidden; }
+.h-mt-lname b { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:text; }
+.h-mt-tbtns { display:flex; gap:2px; }
+.h-mt-tbtns button { border:1px solid rgba(127,127,127,.4); background:var(--white); font-size:11px; line-height:1; padding:1px 4px; cursor:pointer; }
+.h-mt-tbtns button:hover { border-color:var(--blue); }
+.h-mt-lane.is-hidden > .h-mt-clip { opacity:.35; }
+.h-mt-addtracks { position:sticky; left:0; display:flex; gap:6px; padding:6px; width:max-content; }
 .h-mt-clip { position:absolute; top:5px; height:30px; padding:0 6px; border:2px solid rgba(0,0,0,.25); border-radius:4px; font-size:12px; font-weight:700; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:grab; color:#111; }
 .h-mt-clip.is-v1 { background:#cfe0ff; cursor:pointer; } .h-mt-clip.is-v2 { background:#e3d4ff; } .h-mt-clip.is-text { background:#ffe7a8; } .h-mt-clip.is-audio { background:#c9f0d4; }
 .h-mt-clip.is-sel { border-color:var(--blue); box-shadow:0 0 0 2px var(--blue); }

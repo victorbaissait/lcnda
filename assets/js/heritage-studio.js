@@ -270,8 +270,7 @@
         const all = tbDefs(), old = all[id]?.groups || [];
         // on garde l'ordre de départ déjà noté ; les nouvelles rangées et les nouveaux boutons s'ajoutent
         const merged = groups.map(g => { const o = old.find(x => x.key === g.key); if (!o) return g; const keys = o.items.map(i => i[0]); return {...g, items: [...o.items.filter(i => g.items.some(n => n[0] === i[0])).map(i => g.items.find(n => n[0] === i[0])), ...g.items.filter(n => !keys.includes(n[0]))]}; });
-        const keep = old.filter(o => !merged.some(g => g.key === o.key));
-        const next = {groups: [...merged, ...keep]};
+        const next = {groups: merged}; // les rangées qui n'existent plus disparaissent de la liste
         if (JSON.stringify(all[id]) !== JSON.stringify(next)) { all[id] = next; try { localStorage.setItem(TB_DEFS, JSON.stringify(all)); } catch (_) {} }
     }
     ext.tbApply = (root, id) => {
