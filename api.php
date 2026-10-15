@@ -4261,7 +4261,7 @@ function graph_stats_data(PDO $pdo): never
         'marriage_places' => ['Lieux de mariage','Répartition des lieux renseignés sur les événements de mariage.','bar',
             "SELECT COALESCE(NULLIF(trim(pl.name),''),'Lieu non renseigné') AS label,count(*) AS value
              FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id
-             WHERE t.gedcom_tag='MARR' GROUP BY label ORDER BY value DESC,label LIMIT 80", []],
+             WHERE t.gedcom_tag='MARR' GROUP BY 1 ORDER BY value DESC,label LIMIT 80", []],
         'sibling_birth_interval' => ['Intervalle entre les naissances d’une fratrie','Intervalle moyen, en années, entre deux naissances successives dans une même famille.','metric_grid',
             "WITH births AS (
                 SELECT fc.family_id,e.year AS birth_year FROM family_children fc
