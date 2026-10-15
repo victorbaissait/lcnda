@@ -48,10 +48,12 @@
 
     const wait = ms => new Promise(r => setTimeout(r, ms));
     /** Presse le bouton, puis attend que l'écran se soit redessiné (ou qu'il ait juste déplacé la ligne) */
-    async function press(button) {
+    async function press(button, sig, k) {
+        const row = rowOf(button);
         button.click();
-        for (let t = 0; t < 40 && button.isConnected; t++) await wait(25);
-        await wait(30);
+        // fini dès que la ligne a bougé sur place, ou que l'écran a été redessiné
+        for (let t = 0; t < 40 && button.isConnected && rowsLike(sig).indexOf(row) === k; t++) await wait(25);
+        await wait(button.isConnected ? 0 : 30);
     }
     async function moveBy(sig, from, delta) {
         let k = from;
@@ -59,7 +61,7 @@
             const rows = rowsLike(sig), row = rows[k]; if (!row) return;
             const b = delta < 0 ? upOf(row) : downOf(row);
             if (!b || b.disabled) return;
-            await press(b);
+            await press(b, sig, k);
             k += delta < 0 ? -1 : 1;
         }
     }
@@ -74,16 +76,19 @@
         const marker = document.createElement('div'); marker.className = 'dnd-marker'; document.body.appendChild(marker);
         row.classList.add('is-dnd-dragging');
         let target = from;
-        const place = y => {
-            // ins : nombre de lignes dont le milieu est au-dessus de la souris → la ligne ira juste avant rows[ins]
-            let ins = rows.filter(r => { const b = r.getBoundingClientRect(); return b.top + b.height / 2 < y; }).length;
+        // en grille (plusieurs colonnes) : on lit dans l'ordre de lecture, ligne par ligne, et le trait devient vertical
+        const multi = new Set(rows.map(r => Math.round(r.getBoundingClientRect().left))).size > 1;
+        const place = (x, y) => {
+            // ins : nombre de lignes placées avant la souris → la ligne ira juste avant rows[ins]
+            const before = r => { const b = r.getBoundingClientRect(); if (!multi) return b.top + b.height / 2 < y; return b.bottom < y || (b.top <= y && b.left + b.width / 2 < x); };
+            let ins = 0; while (ins < rows.length && before(rows[ins])) ins++;
             target = ins > from ? ins - 1 : ins;
             const ref = (rows[ins] || rows[rows.length - 1]).getBoundingClientRect();
-            const top = rows[ins] ? ref.top : ref.bottom;
-            Object.assign(marker.style, {top: `${top - 2 + window.scrollY}px`, left: `${ref.left + window.scrollX}px`, width: `${ref.width}px`});
+            if (multi) Object.assign(marker.style, {top: `${ref.top + window.scrollY}px`, left: `${(rows[ins] ? ref.left - 4 : ref.right) + window.scrollX}px`, width: '4px', height: `${ref.height}px`});
+            else Object.assign(marker.style, {top: `${(rows[ins] ? ref.top : ref.bottom) - 2 + window.scrollY}px`, left: `${ref.left + window.scrollX}px`, width: `${ref.width}px`, height: '4px'});
         };
-        place(event.clientY);
-        const onMove = e => { place(e.clientY); const ws = document.getElementById('workspace'); if (ws) { if (e.clientY < 80) ws.scrollTop -= 14; if (e.clientY > window.innerHeight - 60) ws.scrollTop += 14; } };
+        place(event.clientX, event.clientY);
+        const onMove = e => { place(e.clientX, e.clientY); const ws = document.getElementById('workspace'); if (ws) { if (e.clientY < 80) ws.scrollTop -= 14; if (e.clientY > window.innerHeight - 60) ws.scrollTop += 14; } };
         const onUp = async () => {
             document.removeEventListener('pointermove', onMove); document.removeEventListener('pointerup', onUp);
             marker.remove(); row.classList.remove('is-dnd-dragging');
