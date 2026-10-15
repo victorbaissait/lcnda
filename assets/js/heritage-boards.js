@@ -164,7 +164,7 @@
     </defs></svg>`;
 
     /* ═════════ Pointes des traits : forme et taille de chaque bout ═════════ */
-    const headOf = (l, side) => { const v = side === 'start' ? l.headStart : l.headEnd; if (v) return HEAD_SVG[v] || v === 'none' ? v : 'triangle'; return (side === 'start' ? l.arrowStart : l.arrowEnd) ? 'triangle' : 'none'; };
+    const headOf = (l, side) => { const v = side === 'start' ? l.headStart : l.headEnd; if (v) return Object.hasOwn(HEAD_SVG, v) || v === 'none' ? v : 'triangle'; return (side === 'start' ? l.arrowStart : l.arrowEnd) ? 'triangle' : 'none'; };
     const headSize = l => Math.max(10, (l.sw || 2) * 3);
     const HEAD_REF = {triangle: 8, open: 8, stealth: 8, double: 8, half: 8, circle: 5, ring: 5, dot: 5, square: 5, square_o: 5, diamond: 5, diamond_o: 5, bar: 5, fork: 9, tail: 3};
     const HEAD_SVG = {
@@ -433,7 +433,7 @@
         // ── historique et enregistrement ──
         const snap = () => JSON.stringify(items);
         const commit = () => { const s = snap(); if (hpos >= 0 && history[hpos] === s) return; history = history.slice(0, hpos + 1); history.push(s); if (history.length > 150) history.shift(); hpos = history.length - 1; queueSave(true); };
-        const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; items = JSON.parse(history[i]); sel = new Set([...sel].filter(byId)); if (cellSel) { const t0 = byId(cellSel.id); if (!t0?.cells?.[cellSel.r] || cellSel.c >= (t0.cells[cellSel.r].length || 0)) cellSel = null; } render(); queueSave(true); };
+        const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; items = JSON.parse(history[i]); sel = new Set([...sel].filter(byId)); clampCell(); render(); queueSave(true); };
         const ownerData = {owner_type: b.owner_type, owner_id: b.owner_id, part: b.part};
         function queueSave(changed) {
             if (changed) { dirty = true; changes++; status('Modifié…'); }
@@ -791,14 +791,16 @@
             r = Math.max(0, Math.min(it.cells.length - 1, r ?? (mine ? cellSel.r : it.cells.length - 1)));
             c = Math.max(0, Math.min(it.cells[0].length - 1, c ?? (mine ? cellSel.c : 0)));
             const rows = it.cells.length, cols = it.cells[0].length, rh = it.h / rows;
+            let changed = false;
             const shiftFill = (fn) => { const nf = {}; Object.entries(it.cfill || {}).forEach(([k, v]) => { const [a, b2] = k.split(':').map(Number); const n = fn(a, b2); if (n) nf[n.join(':')] = v; }); it.cfill = nf; };
-            if (op === 'row+' && rows < 100) { it.cells.splice(r + 1, 0, Array(cols).fill('')); it.h += rh; shiftFill((a, b2) => [a > r ? a + 1 : a, b2]); }
-            if (op === 'row-' && rows > 1) { it.cells.splice(r, 1); it.h = Math.max(30, it.h - rh); shiftFill((a, b2) => a === r ? null : [a > r ? a - 1 : a, b2]); if (cellSel) cellSel.r = Math.min(cellSel.r, rows - 2); }
-            if (op === 'col+' && cols < 30) { it.cells.forEach(row => row.splice(c + 1, 0, '')); it.colw.splice(c + 1, 0, 100); it.w += it.w / cols; shiftFill((a, b2) => [a, b2 > c ? b2 + 1 : b2]); }
-            if (op === 'col-' && cols > 1) { it.cells.forEach(row => row.splice(c, 1)); const w0 = it.colw.splice(c, 1)[0]; it.w = Math.max(40, it.w - it.w * w0 / (it.colw.reduce((s, x) => s + x, 0) + w0)); shiftFill((a, b2) => b2 === c ? null : [a, b2 > c ? b2 - 1 : b2]); if (cellSel) cellSel.c = Math.min(cellSel.c, cols - 2); }
+            if (op === 'row+' && rows < 100) { changed = true; it.cells.splice(r + 1, 0, Array(cols).fill('')); it.h += rh; shiftFill((a, b2) => [a > r ? a + 1 : a, b2]); }
+            if (op === 'row-' && rows > 1) { changed = true; it.cells.splice(r, 1); it.h = Math.max(30, it.h - rh); shiftFill((a, b2) => a === r ? null : [a > r ? a - 1 : a, b2]); if (cellSel) cellSel.r = Math.min(cellSel.r, rows - 2); }
+            if (op === 'col+' && cols < 30) { changed = true; it.cells.forEach(row => row.splice(c + 1, 0, '')); it.colw.splice(c + 1, 0, 100); it.w += it.w / cols; shiftFill((a, b2) => [a, b2 > c ? b2 + 1 : b2]); }
+            if (op === 'col-' && cols > 1) { changed = true; it.cells.forEach(row => row.splice(c, 1)); const w0 = it.colw.splice(c, 1)[0]; it.w = Math.max(40, it.w - it.w * w0 / (it.colw.reduce((s, x) => s + x, 0) + w0)); shiftFill((a, b2) => b2 === c ? null : [a, b2 > c ? b2 - 1 : b2]); if (cellSel) cellSel.c = Math.min(cellSel.c, cols - 2); }
             if (op === 'wider' || op === 'narrower') { it.colw[c] = Math.max(30, Math.min(800, (it.colw[c] || 100) * (op === 'wider' ? 1.25 : 0.8))); }
             if (op === 'clear') { it.cells[r][c] = ''; }
             if (op === 'merge' && mine && cellSel.r2 !== undefined) {
+                cellSel.r2 = Math.min(cellSel.r2, it.cells.length - 1); cellSel.c2 = Math.min(cellSel.c2, it.cells[0].length - 1);
                 const r0 = Math.min(cellSel.r, cellSel.r2), c0 = Math.min(cellSel.c, cellSel.c2), rs = Math.abs(cellSel.r2 - cellSel.r) + 1, cs = Math.abs(cellSel.c2 - cellSel.c) + 1;
                 // on retire les fusions qui chevauchent, on garde les textes en les mettant bout à bout dans la première cellule
                 it.merges = (it.merges || []).filter(m => m.r + m.rs <= r0 || m.r >= r0 + rs || m.c + m.cs <= c0 || m.c >= c0 + cs);
@@ -808,7 +810,7 @@
             }
             if (op === 'unmerge') it.merges = (it.merges || []).filter(m => !(r >= m.r && r < m.r + m.rs && c >= m.c && c < m.c + m.cs));
             // lignes et colonnes ajoutées ou enlevées : les fusions suivent
-            if (['row+', 'row-', 'col+', 'col-'].includes(op) && it.merges?.length) it.merges = it.merges.map(m => {
+            if (changed && it.merges?.length) it.merges = it.merges.map(m => {
                 const n = {...m};
                 if (op === 'row+') { if (m.r > r) n.r++; else if (m.r + m.rs - 1 > r) n.rs++; }
                 if (op === 'row-') { if (m.r > r) n.r--; else if (m.r + m.rs - 1 >= r) n.rs--; }
@@ -816,7 +818,14 @@
                 if (op === 'col-') { if (m.c > c) n.c--; else if (m.c + m.cs - 1 >= c) n.cs--; }
                 return n;
             }).filter(m => m.rs >= 1 && m.cs >= 1 && m.rs * m.cs > 1);
+            clampCell();
             sigs.delete(it.id); render(); if (!quiet) commit();
+        }
+        // la cellule (ou la plage) choisie reste dans la grille après une ligne/colonne enlevée ou un retour en arrière
+        function clampCell() {
+            if (!cellSel) return; const t0 = byId(cellSel.id); if (!t0?.cells?.length) { cellSel = null; return; }
+            const R = t0.cells.length - 1, C = Math.max(0, ...t0.cells.map(x => x.length)) - 1, cl = (v, m) => Math.max(0, Math.min(m, v));
+            cellSel = {...cellSel, r: cl(cellSel.r, R), c: cl(cellSel.c, C), ...(cellSel.r2 !== undefined ? {r2: cl(cellSel.r2, R), c2: cl(cellSel.c2, C)} : {})};
         }
         function tableCsv(it) {
             const vals = tableValues(it.cells), q = v => /[";\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
@@ -1081,7 +1090,7 @@
                         const x = c.getContext('2d'); x.drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url);
                         const id0 = x.getImageData(0, 0, c.width, c.height), px = id0.data;
                         let transparent = false; for (let i = 3; i < px.length; i += 4) if (px[i] < 250) { transparent = true; break; }
-                        if (!transparent || d.querySelector('[data-mkdark]').checked && !transparent) for (let i = 0; i < px.length; i += 4) { const lum = .299 * px[i] + .587 * px[i + 1] + .114 * px[i + 2]; px[i + 3] = Math.max(0, Math.min(255, (230 - lum) * 1.6)); px[i] = px[i + 1] = px[i + 2] = 0; }
+                        if (!transparent && d.querySelector('[data-mkdark]').checked) for (let i = 0; i < px.length; i += 4) { const lum = .299 * px[i] + .587 * px[i + 1] + .114 * px[i + 2]; px[i + 3] = Math.max(0, Math.min(255, (230 - lum) * 1.6)); px[i] = px[i + 1] = px[i + 2] = 0; }
                         x.putImageData(id0, 0, 0); imgMask = c.toDataURL('image/png'); prev();
                     };
                     d.querySelector('[data-mkfile]').addEventListener('change', readImg); d.querySelector('[data-mkdark]').addEventListener('change', readImg);
@@ -1089,7 +1098,10 @@
                 },
                 onSubmit: form => {
                     const name = form.querySelector('[data-mkname]').value.trim() || 'Ma forme';
-                    const dpath = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : '';
+                    let dpath = mode === 'draw' ? drawPath() : mode === 'trace' ? tracePath() : '';
+                    // un chemin trop long (grand dessin) : moins de décimales, puis on refuse
+                    if (dpath.length > 29000) dpath = dpath.replace(/-?\d+\.\d+/g, m => String(Math.round(Number(m))));
+                    if (dpath.length > 29000) { toast('Ce dessin est trop détaillé pour devenir une forme : prends un dessin plus simple (ou moins de traits).', 'error'); return false; }
                     if (mode !== 'image' && !dpath) { toast(mode === 'draw' ? 'Choisis d’abord un dessin sur le tableau.' : 'Pose au moins trois points.', 'error'); return false; }
                     if (mode === 'image' && !imgMask) { toast('Choisis une image.', 'error'); return false; }
                     const p = JSON.parse(JSON.stringify(P())), k = 'my_' + Date.now().toString(36);
@@ -1110,13 +1122,35 @@
         async function importBoard(f) {
             let j; try { j = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas un tableau exporté.', 'error'); return; }
             if (j?.format !== 'lcnda-board' || !j.data || !Array.isArray(j.data.items)) { toast('Ce fichier n’est pas un tableau exporté de l’app.', 'error'); return; }
-            const missing = Object.keys(j.media || {}).filter(id0 => !media[id0]).length;
+            // les numéros (fiches, médias, recueils, dossiers) viennent peut-être d'une autre base : on les vérifie, sinon l'élément devient une note
+            status('Import : vérification des fiches et médias…');
+            const asNote = (it, txt) => ({id: it.id, type: 'note', text: txt, x: it.x, y: it.y, w: Math.max(180, it.w), h: Math.max(90, Math.min(it.h, 200)), z: it.z, fill: '#f1f1f1', fs: 16, group: it.group || ''});
+            let lost = 0;
+            const out = [];
+            for (const it of j.data.items) {
+                if (!it || typeof it !== 'object') continue;
+                try {
+                    if (it.type === 'media') {
+                        const m0 = j.media?.[it.media_id], fname = m0?.filename || '';
+                        const hit = fname ? ((await api('heritage_media_search', {q: m0.title || fname})).media || []).find(m => m.filename === fname) : null;
+                        if (hit) { out.push({...it, media_id: Number(hit.id)}); media[hit.id] = hit; } else { lost++; out.push(asNote(it, `🖼 Média absent ici : ${m0?.title || fname || '#' + it.media_id}`)); }
+                    } else if (it.type === 'person') {
+                        const name = j.people?.[it.person_id]; let ok = false;
+                        if (name) { try { const d = await api('person', {id: it.person_id}); ok = A().personName(d.person) === name; } catch (_) {} }
+                        if (ok) out.push(it); else { lost++; out.push(asNote(it, `👤 ${name || it.title || 'Fiche'} (fiche absente ici)`)); }
+                    } else if (it.type === 'recueil') {
+                        const hit = ((await api('recueils', {q: it.title || ''})).recueils || []).find(r => r.title === it.title);
+                        if (hit) out.push({...it, recueil_id: Number(hit.id)}); else { lost++; out.push(asNote(it, `📚 ${it.title || 'Recueil'} (absent ici)`)); }
+                    } else if (it.type === 'folder') { lost++; out.push(asNote(it, `📁 ${it.title || 'Dossier'} (dossier non importé)`)); }
+                    else out.push(it);
+                } catch (_) { out.push(it); }
+            }
             try {
-                const r = await api('save_board', {}, {method: 'POST', body: {title: (j.title || 'Tableau importé') + ' (importé)', owner_type: '', data: {...j.data, locked: false}}});
+                const r = await api('save_board', {}, {method: 'POST', body: {title: (j.title || 'Tableau importé') + ' (importé)', owner_type: '', data: {...j.data, items: out, links: [], locked: false}}});
                 const nid = Number(r.result?.id || r.id);
-                toast(missing ? `Tableau importé. Les médias viennent de l’app d’où il a été exporté : s’ils n’existent pas ici, leur place reste vide.` : 'Tableau importé.');
+                toast(lost ? `Tableau importé. ${lost} élément${lost > 1 ? 's' : ''} (fiche, média, recueil ou dossier) absent${lost > 1 ? 's' : ''} ici devenu${lost > 1 ? 's' : ''} des notes. Les associations ne sont pas reprises.` : 'Tableau importé (les associations ne sont pas reprises).');
                 go(nid);
-            } catch (error) { toast(error.message, 'error'); }
+            } catch (error) { toast(error.message, 'error'); status('⚠ ' + error.message); }
         }
         // ── « Ajouter » : tout ce qu'on peut poser ──
         function addMenu() {
@@ -1281,15 +1315,22 @@
         }
         async function exportMenu(btn) {
             popMenu(btn, [['png', '🖼 Image PNG'], ['jpg', '🖼 Image JPG'], ['pdf', '📄 PDF'], ['print', '🖨 Imprimer…'], '-', ['selpng', '✂ La sélection en PNG', !sel.size], '-', ['file', '💾 Fichier du tableau (pour le garder ou le donner)']], async k => {
-                if (k === 'file') { const data = {format: 'lcnda-board', version: 1, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links}, media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
+                if (k === 'file') {
+                    // de quoi retrouver les fiches, recueils et médias dans une autre base : leurs noms et fichiers
+                    const people = {}; for (const it of items.filter(i => i.type === 'person')) people[it.person_id] = (await personBrief(it.person_id)).name;
+                    const data = {format: 'lcnda-board', version: 2, title: root.querySelector('[data-bd-title]').value.trim(), exported_at: new Date().toISOString(), data: {items, view, bg, bgColor, bgPattern, links}, people,
+                        media: Object.fromEntries(Object.entries(media).map(([id0, m]) => [id0, {title: m.title, filename: m.filename, media_type: m.media_type}]))};
                     download(URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], {type: 'application/json'})), fileBase() + '.lcnda-tableau.json'); toast('Fichier du tableau enregistré : « ＋ Ajouter → Importer un tableau » le rouvre.'); return; }
                 status('Préparation…');
-                const url = await thumbnail(0, 0, k === 'print' || k === 'pdf' ? 2 : 2, k === 'jpg' || k === 'pdf' || k === 'print' ? 'image/jpeg' : 'image/png', k === 'selpng');
+                // l'échelle est réduite pour un grand tableau (un navigateur ne fait pas d'image de plus de ~16 millions de points)
+                const bb0 = bbox(k === 'selpng' && sel.size ? selItems() : items) || {w: 800, h: 600}, scale = Math.max(0.1, Math.min(2, Math.sqrt(16e6 / Math.max(1, (bb0.w + 80) * (bb0.h + 80))), 16000 / (bb0.w + 80), 16000 / (bb0.h + 80)));
+                const url = await thumbnail(0, 0, scale, k === 'jpg' || k === 'pdf' || k === 'print' ? 'image/jpeg' : 'image/png', k === 'selpng');
                 status(dirty ? 'Modifié…' : 'Enregistré ✓');
-                if (!url) { toast('Image impossible (une image d’un autre site l’empêche).', 'error'); return; }
+                if (!url || url.length < 40) { toast('Image impossible (une image d’un autre site l’empêche, ou le tableau est trop grand).', 'error'); return; }
                 if (k === 'png' || k === 'selpng') return download(url, fileBase() + (k === 'selpng' ? ' (sélection)' : '') + '.png');
                 if (k === 'jpg') return download(url, fileBase() + '.jpg');
-                const img = await new Promise(res => { const im = new Image(); im.onload = () => res(im); im.src = url; });
+                const img = await new Promise(res => { const im = new Image(); im.onload = () => res(im); im.onerror = () => res(null); im.src = url; });
+                if (!img) { toast('Image impossible.', 'error'); return; }
                 if (k === 'pdf') return download(URL.createObjectURL(jpegPdf(url, img.width, img.height, fileBase())), fileBase() + '.pdf');
                 // imprimer : une page avec l'image, ajustée à la feuille
                 const fr = document.createElement('iframe'); fr.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(fr);

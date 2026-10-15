@@ -574,7 +574,8 @@ function save_site_defaults(PDO $pdo,array $data): array
         if(!in_array($key,$allowed,true)&&!str_starts_with($key,'genealogie-tile-items-'))continue;
         if(!is_string($value))$value=json_encode($value,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         $value=(string)$value;
-        if(strlen($value)>200000)throw new RuntimeException('Un réglage est trop volumineux.');
+        // les réglages des tableaux peuvent contenir des formes faites d'une image : plus de place pour eux
+        if(strlen($value)>($key==='genealogie-board-prefs'?4000000:200000))throw new RuntimeException('Un réglage est trop volumineux.');
         $settings[$key]=$value;
     }
     if(!is_dir(dirname(SITE_DEFAULTS_PATH))&&!mkdir(dirname(SITE_DEFAULTS_PATH),0775,true)&&!is_dir(dirname(SITE_DEFAULTS_PATH)))throw new RuntimeException('Impossible de créer le dossier de configuration.');

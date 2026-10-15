@@ -80,7 +80,7 @@ function board_clean_item(array $it): ?array
     // sûrs pour le style : alignement connu, police sans caractères spéciaux, pointes connues
     if (isset($out['align']) && !in_array($out['align'], ['left', 'center', 'right', 'justify'], true)) { $out['align'] = 'left'; }
     if (isset($out['font'])) { $out['font'] = trim((string) preg_replace("/[^\\w\\s,'\\-.\\x{C0}-\\x{FF}]/u", '', $out['font'])); }
-    foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !preg_match('/^[a-z_]{1,12}$/', $out[$k])) { $out[$k] = 'triangle'; } }
+    foreach (['headStart', 'headEnd'] as $k) { if (isset($out[$k]) && !in_array($out[$k], ['none', 'triangle', 'stealth', 'open', 'double', 'half', 'circle', 'ring', 'dot', 'square', 'square_o', 'diamond', 'diamond_o', 'bar', 'fork', 'tail'], true)) { $out[$k] = 'triangle'; } }
     if (isset($it['layout'])) { $out['layout'] = $str($it['layout'], 40); }
     // tableur : une grille de textes (100 lignes × 30 colonnes au plus), largeurs des colonnes
     if (($it['type'] ?? '') === 'table') {

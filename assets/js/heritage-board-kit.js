@@ -141,7 +141,7 @@
         p.strokeMin = num(p.strokeMin, 0.5, 500, d.strokeMin); p.strokeMax = num(p.strokeMax, p.strokeMin, 500, d.strokeMax);
         p.textMin = num(p.textMin, 2, 500, d.textMin); p.textMax = num(p.textMax, p.textMin, 500, d.textMax); p.radius = num(p.radius, 0, 200, d.radius);
         const isColor = c => /^(#[0-9a-f]{3,8}|transparent)$/i.test(String(c));
-        p.palettes = (Array.isArray(p.palettes) ? p.palettes : []).filter(x => x && x.colors).slice(0, 30).map((x, i) => ({id: String(x.id || 'p' + i).replace(/[^\w-]/g, '') || 'p' + i, name: String(x.name || 'Palette').slice(0, 60),
+        p.palettes = (Array.isArray(p.palettes) ? p.palettes : []).filter(x => x && typeof x === 'object' && x.colors && typeof x.colors === 'object').slice(0, 30).map((x, i) => ({id: String(x.id || 'p' + i).replace(/[^\w-]/g, '') || 'p' + i, name: String(x.name || 'Palette').slice(0, 60),
             colors: Object.fromEntries(COLOR_CATS.map(([k]) => [k, (Array.isArray(x.colors[k]) ? x.colors[k] : PALETTE0[k]).filter(isColor).slice(0, 40)]))}));
         if (!p.palettes.length) p.palettes = d.palettes;
         if (!p.palettes.some(x => x.id === p.palette)) p.palette = p.palettes[0].id;
@@ -151,19 +151,21 @@
         p.toolsOrder = sortBy(TOOLS.map(t => t[0]), p.toolsOrder); p.headerOrder = sortBy(HEADER.map(t => t[0]), p.headerOrder);
         p.inspectorOrder = sortBy(INSPECTOR.map(t => t[0]), p.inspectorOrder); p.addOrder = sortBy(ADD.map(t => t[0]), p.addOrder);
         if (!HEADS.includes(p.headStart)) p.headStart = 'none'; if (!HEADS.includes(p.headEnd)) p.headEnd = 'triangle';
-        p.shapeOrder = p.shapeOrder && typeof p.shapeOrder === 'object' ? p.shapeOrder : {};
-        p.customShapes = (Array.isArray(p.customShapes) ? p.customShapes : []).filter(s => s && (s.d || s.mask)).slice(0, 200).map(s => ({k: 'my_' + String(s.k || '').replace(/^my_/, '').replace(/[^\w-]/g, '').slice(0, 30), n: String(s.n || 'Ma forme').slice(0, 60), c: 'mine',
-            d: /^[MLHVCSQTAZmlhvcsqtaz0-9.,\s-]*$/.test(String(s.d || '')) ? String(s.d || '').slice(0, 30000) : '', eo: !!s.eo, mask: /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(String(s.mask || '')) ? String(s.mask).slice(0, 400000) : '', tags: ''}));
-        p.fontLists = (Array.isArray(p.fontLists) ? p.fontLists : d.fontLists).slice(0, 30).map(l => ({name: String(l?.name || 'Ma liste').slice(0, 60), fonts: (Array.isArray(l?.fonts) ? l.fonts : []).map(f => String(f).replace(/[^\w\s,'\-À-ÿ.]/g, '').trim()).filter(Boolean).slice(0, 200)}));
+        p.shapeOrder = Object.fromEntries(Object.entries(p.shapeOrder && typeof p.shapeOrder === 'object' && !Array.isArray(p.shapeOrder) ? p.shapeOrder : {}).filter(([, v]) => Array.isArray(v)).map(([k, v]) => [k, v.map(String).slice(0, 500)]));
+        p.customShapes = (Array.isArray(p.customShapes) ? p.customShapes : []).filter(s => s && typeof s === 'object' && (s.d || s.mask)).slice(0, 200).map(s => ({k: 'my_' + String(s.k || '').replace(/^my_/, '').replace(/[^\w-]/g, '').slice(0, 30), n: String(s.n || 'Ma forme').slice(0, 60), c: 'mine',
+            d: /^[MLHVCSQTAZmlhvcsqtaz0-9.,\s-]{0,30000}$/.test(String(s.d || '')) ? String(s.d || '') : '', eo: !!s.eo, mask: /^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(String(s.mask || '')) ? String(s.mask).slice(0, 400000) : '', tags: ''}));
+        p.fontLists = (Array.isArray(p.fontLists) ? p.fontLists : d.fontLists).filter(l => l && typeof l === 'object').slice(0, 30).map(l => ({name: String(l?.name || 'Ma liste').slice(0, 60), fonts: (Array.isArray(l?.fonts) ? l.fonts : []).map(f => String(f).replace(/[^\w\s,'\-À-ÿ.]/g, '').trim()).filter(Boolean).slice(0, 200)}));
         const t = p.table && typeof p.table === 'object' ? p.table : {};
         p.table = {rows: num(t.rows, 1, 100, 4), cols: num(t.cols, 1, 30, 3), header: t.header !== false, hcol: !!t.hcol, stripes: t.stripes !== false, hfill: isColor(t.hfill) ? t.hfill : '#e8eef7', fs: num(t.fs, 6, 80, 14), headers: String(t.headers ?? d.table.headers).slice(0, 600)};
-        p.brushes = (Array.isArray(p.brushes) ? p.brushes : []).slice(0, 60).map(b0 => ({id: 'b_' + String(b0.id || '').replace(/^b_/, '').replace(/[^\w-]/g, '').slice(0, 30), name: String(b0.name || 'Mon pinceau').slice(0, 40), icon: String(b0.icon || '🖌').slice(0, 4),
+        p.brushes = (Array.isArray(p.brushes) ? p.brushes : []).filter(b0 => b0 && typeof b0 === 'object').slice(0, 60).map(b0 => ({id: 'b_' + String(b0.id || '').replace(/^b_/, '').replace(/[^\w-]/g, '').slice(0, 30), name: String(b0.name || 'Mon pinceau').slice(0, 40), icon: String(b0.icon || '🖌').slice(0, 4),
             base: ['pen', 'mono', 'marker', 'pencil', 'pastel', 'fountain', 'calligraphy', 'brushstroke', 'watercolor', 'fill', 'highlight', 'chalk', 'neon', 'spray', 'dotted'].includes(b0.base) ? b0.base : 'pen',
             sw: num(b0.sw, 0.5, 500, 4), opacity: num(b0.opacity, 0.05, 1, 1), hardness: num(b0.hardness, 0, 100, 100), color: isColor(b0.color) ? b0.color : '', dash: ['', 'dash', 'long', 'dot', 'dashdot'].includes(b0.dash) ? b0.dash : ''}));
         return p;
     };
     let cache = null;
-    const prefs = () => { if (cache) return cache; let raw = null; try { raw = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) {} cache = clean(raw); return cache; };
+    const prefs = () => { if (cache) return cache; let raw = null; try { raw = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (_) {} try { cache = clean(raw); } catch (_) { cache = clean(null); } return cache; };
+    // réglages changés ailleurs (autre fenêtre, réglages du site) : on relit
+    window.addEventListener('storage', e => { if (e.key === KEY) cache = null; });
     const savePrefs = p => { cache = clean(p); try { localStorage.setItem(KEY, JSON.stringify(cache)); } catch (e) { toast('Réglages trop lourds pour être gardés (retire des formes faites d’une image).', 'error'); } return cache; };
     const palette = (cat, p = prefs()) => (p.palettes.find(x => x.id === p.palette) || p.palettes[0]).colors[cat] || PALETTE0[cat];
     const allShapes = (p = prefs()) => [...SHAPES, ...p.customShapes];
@@ -180,7 +182,7 @@
         root.querySelectorAll('[data-bp-order]').forEach(box => {
             box.addEventListener('click', e => { const r = e.target.closest('.h-bp-row'); if (!r) return; if (e.target.closest('[data-bp-up]') && r.previousElementSibling) r.parentNode.insertBefore(r, r.previousElementSibling); if (e.target.closest('[data-bp-down]') && r.nextElementSibling) r.parentNode.insertBefore(r.nextElementSibling, r); });
             let dragged = null;
-            box.addEventListener('dragstart', e => { dragged = e.target.closest('.h-bp-row'); dragged?.classList.add('is-drag'); });
+            box.addEventListener('dragstart', e => { dragged = e.target.closest('.h-bp-row'); dragged?.classList.add('is-drag'); e.dataTransfer?.setData('text/plain', ''); });
             box.addEventListener('dragend', () => { dragged?.classList.remove('is-drag'); dragged = null; });
             box.addEventListener('dragover', e => { if (!dragged) return; e.preventDefault(); const r = e.target.closest('.h-bp-row'); if (!r || r === dragged || r.parentNode !== box) return; const bb = r.getBoundingClientRect(); box.insertBefore(dragged, e.clientY < bb.top + bb.height / 2 ? r : r.nextSibling); });
         });
@@ -192,6 +194,7 @@
         const st = A().state;
         let p = JSON.parse(JSON.stringify(prefs()));
         const ws = A().$('#workspace');
+        ext.maintenance.board_prefs.ac?.abort(); const ac = ext.maintenance.board_prefs.ac = new AbortController(), signal = ac.signal;
         const pal = () => p.palettes.find(x => x.id === p.palette) || p.palettes[0];
         const TABS = [['colors', '🎨 Couleurs'], ['heads', '➤ Pointes'], ['shapes', '⬠ Formes'], ['fonts', '🔤 Polices'], ['sizes', '📏 Tailles et arrondi'], ['table', '▦ Tableur'], ['brushes', '🖌 Pinceaux'], ['menus', '☰ Menus et options']];
         const draw = () => {
@@ -300,16 +303,16 @@
             // pinceaux
             if (e.target.closest('[data-bp-bnew]')) { collect(); p.brushes.push({id: 'b_' + Date.now().toString(36), name: 'Mon pinceau', icon: '🖌', base: 'pen', sw: 6, opacity: 1, hardness: 60, color: '', dash: ''}); draw(); return; }
             const br = e.target.closest('[data-bi]'); if (br && e.target.closest('[data-bp-bdel]')) { collect(); p.brushes.splice(Number(br.dataset.bi), 1); draw(); }
-        });
-        ws.addEventListener('input', e => { const o = e.target.closest('[data-bp-b="hardness"]'); if (o) o.nextElementSibling.textContent = o.value + ' %'; });
+        }, {signal});
+        ws.addEventListener('input', e => { const o = e.target.closest('[data-bp-b="hardness"]'); if (o) o.nextElementSibling.textContent = o.value + ' %'; }, {signal});
         ws.addEventListener('change', e => {
             if (e.target.matches('[data-bp-pal]')) { collect(); p.palette = e.target.value; draw(); }
             if (e.target.matches('[data-bp-preset]') && e.target.value) { collect(); const v = e.target.value; pal().colors = JSON.parse(JSON.stringify(v === '__app' ? PALETTE0 : {...PALETTE0, ...PALETTE_PRESETS[v]})); if (v !== '__app' && pal().name.startsWith('Ma palette')) pal().name = v; draw(); }
-        });
+        }, {signal});
         // glisser les pastilles et les formes
         let dragEl = null;
-        ws.addEventListener('dragstart', e => { dragEl = e.target.closest?.('.h-bp-color, .h-bp-shape'); });
-        ws.addEventListener('dragover', e => { if (!dragEl) return; const over = e.target.closest?.(dragEl.classList.contains('h-bp-color') ? '.h-bp-color' : '.h-bp-shape'); if (!over || over === dragEl || over.parentNode !== dragEl.parentNode) return; e.preventDefault(); const bb = over.getBoundingClientRect(); over.parentNode.insertBefore(dragEl, e.clientX < bb.left + bb.width / 2 ? over : over.nextSibling); });
-        ws.addEventListener('dragend', () => { dragEl = null; });
+        ws.addEventListener('dragstart', e => { dragEl = e.target.closest?.('.h-bp-color, .h-bp-shape'); if (dragEl) e.dataTransfer?.setData('text/plain', ''); }, {signal});
+        ws.addEventListener('dragover', e => { if (token !== st.workspaceToken || !dragEl) return; const over = e.target.closest?.(dragEl.classList.contains('h-bp-color') ? '.h-bp-color' : '.h-bp-shape'); if (!over || over === dragEl || over.parentNode !== dragEl.parentNode) return; e.preventDefault(); const bb = over.getBoundingClientRect(); over.parentNode.insertBefore(dragEl, e.clientX < bb.left + bb.width / 2 ? over : over.nextSibling); }, {signal});
+        ws.addEventListener('dragend', () => { dragEl = null; }, {signal});
     };
 })();
