@@ -204,7 +204,7 @@
     const SITE_DEFAULTS_APPLIED_KEY = 'genealogie-site-defaults-applied';
     const SITE_DEFAULT_KEYS = [
         'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden',
-        'genealogie-list-order','genealogie-list-hidden','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order',
+        'genealogie-list-order','genealogie-list-hidden','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order','genealogie-board-prefs','genealogie-board-prefs-sets',
         'genealogie-graph-diagram-order','genealogie-graph-diagram-hidden','genealogie-graph-stats-order','genealogie-graph-stats-hidden',
         'genealogie-tile-cat-order','genealogie-tile-hidden-cats','genealogie-tile-hidden','genealogie-tile-custom-cats',
         'genealogie-person-blocks','genealogie-dashboard-blocks','genealogie-dashboard-widget-catalog-order','genealogie-dashboard-widget-catalog-hidden','genealogie-events-filter','genealogie-stats-colors','genealogie-stats-colors-presets',
@@ -8329,8 +8329,35 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function renderMaintenanceSidebar(content,footer){
         content.innerHTML=`<div class="side-menu">${orderedMaintenanceTabs().map(([key,index,label])=>sideButton(key,index,label,state.maintenanceTab)).join('')}</div>`;footer.textContent='Les exceptions restent mémorisées.';
         content.addEventListener('click',async event=>{const item=event.target.closest('[data-side-value]');if(item){state.maintenanceTab=item.dataset.sideValue;persistUiState();const hash=moduleHash('maintenance');saveLastRoute(hash);updateBrowserRoute(hash,true,'maintenance');renderSidebar();await renderMaintenance();}},{signal:sidebarController.signal});
-        footer.innerHTML=`<button class="button small secondary" type="button" id="open-archive-room">Pièce d’archives</button><span style="display:block;margin-top:9px">Les exceptions restent mémorisées.</span>`;
+        footer.innerHTML=`<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="open-archive-room">Pièce d’archives</button><button class="button small secondary" type="button" id="maintenance-reorder" title="Changer l’ordre des pages de Maintenance">Réordonner</button></div><span style="display:block;margin-top:9px">Les exceptions restent mémorisées.</span>`;
         $('#open-archive-room')?.addEventListener('click',openArchiveRoom,{signal:sidebarController.signal});
+        $('#maintenance-reorder')?.addEventListener('click',openMaintenanceReorderDialog,{signal:sidebarController.signal});
+    }
+    /** Maintenance → « Réordonner » : l'ordre des pages (glisser une ligne, ou ses flèches ↑ ↓), comme les widgets du tableau de bord. */
+    function openMaintenanceReorderDialog(){
+        let rows=orderedMaintenanceTabs().map(([key,,label])=>({key,label}));
+        const dialog=document.createElement('dialog');dialog.className='modal dashboard-reorder-dialog';
+        dialog.innerHTML=`<div class="modal-head"><div><span class="eyebrow">MAINTENANCE</span><h2>Réordonner les pages</h2><p>Glisse une ligne, ou utilise ses flèches, puis Enregistrer.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
+            <div class="dash-reorder-tools"><button type="button" class="button small secondary" data-reset>Ordre d’origine</button></div>
+            <ol class="dashboard-reorder-list" data-dnd-off></ol><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close>Annuler</button><button class="button" type="button" data-save>Enregistrer</button></div>`;
+        const list=$('.dashboard-reorder-list',dialog);
+        const draw=()=>{list.innerHTML=rows.map((r,i)=>`<li class="dashboard-reorder-row" draggable="true" data-index="${i}"><span class="order-grip" aria-hidden="true">↕</span><span class="order-number">${String(i+1).padStart(2,'0')}</span><b style="flex:1">${escapeHtml(r.label)}</b><span class="order-actions"><button type="button" class="button small secondary" data-move="-1" aria-label="Monter" ${i?'':'disabled'}>↑</button><button type="button" class="button small secondary" data-move="1" aria-label="Descendre" ${i<rows.length-1?'':'disabled'}>↓</button></span></li>`).join('');};
+        document.body.append(dialog);draw();
+        let dragFrom=-1;
+        list.addEventListener('click',e=>{const row=e.target.closest('[data-index]');if(!row)return;const i=Number(row.dataset.index);const mv=e.target.closest('[data-move]');if(mv){const j=i+Number(mv.dataset.move);if(j<0||j>=rows.length)return;[rows[i],rows[j]]=[rows[j],rows[i]];draw();list.querySelector(`[data-index="${j}"] [data-move="${mv.dataset.move}"]`)?.focus();}});
+        list.addEventListener('dragstart',e=>{if(e.target.closest('button'))return;const row=e.target.closest('[data-index]');if(!row)return;dragFrom=Number(row.dataset.index);row.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain','m');}catch(_){}});
+        list.addEventListener('dragover',e=>{if(dragFrom<0)return;e.preventDefault();$$('.is-drop-target',list).forEach(r=>r.classList.remove('is-drop-target'));e.target.closest('[data-index]')?.classList.add('is-drop-target');});
+        list.addEventListener('drop',e=>{e.preventDefault();const row=e.target.closest('[data-index]');if(!row||dragFrom<0)return;const to=Number(row.dataset.index);const [moved]=rows.splice(dragFrom,1);rows.splice(to,0,moved);dragFrom=-1;draw();});
+        list.addEventListener('dragend',()=>{dragFrom=-1;$$('.is-dragging,.is-drop-target',list).forEach(r=>r.classList.remove('is-dragging','is-drop-target'));});
+        $('[data-reset]',dialog).addEventListener('click',()=>{rows=defaultMaintenanceTabs.map(([key,,label])=>({key,label}));draw();});
+        const close=()=>{dialog.close();dialog.remove();};
+        $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',close));
+        $('[data-save]',dialog).addEventListener('click',()=>{
+            localStorage.setItem('genealogie-maintenance-order',JSON.stringify(rows.map(r=>r.key)));
+            close();renderSidebar();toast('Pages de Maintenance enregistrées.');
+        });
+        dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
+        dialog.showModal();
     }
 
     function archiveRoomSettings(){
