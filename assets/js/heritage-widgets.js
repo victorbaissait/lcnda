@@ -49,6 +49,7 @@
         birth_countries: {group: 'birth_country', groupBy: 'value', limit: 12}, death_countries: null, sex_distribution: {group: 'gender', groupBy: 'value', style: 'pie'},
         birth_years: {group: 'birth', groupBy: 'decade', style: 'columns'}, death_years: {group: 'death', groupBy: 'decade', style: 'columns'},
         age_at_death: {group: 'age', groupBy: 'step', groupStep: 10, style: 'columns'},
+        genealogy_age_pyramid: {group: 'age', groupBy: 'step', groupStep: 10, style: 'columns'}, death_age_by_generation: {group: 'age', groupBy: 'step', groupStep: 10, style: 'columns'},
         marriage_places: {events: ['MARR', 'MRCI', 'MRRE'], group: 'place', groupBy: 'value', limit: 12},
     };
     function appStatToChart(d) {
@@ -380,13 +381,16 @@
      * personnes (avec ses filtres et ses critères) ; null si elle ne se refait pas ainsi.
      */
     ext.statWhoSupported = type => !!APP_STAT_AS_CHART[type];
-    ext.statWho = async ({statType, statFrom, statTo, statGender, statLineage, rules = [], kind = 'human'}, label, n, total, color, title) => {
+    ext.statWho = async ({statType, statFrom, statTo, statGender, statLineage, rules = [], kind = 'human', generation = ''}, label, n, total, color, title) => {
         let res = null;
         try {
             if (!meta) meta = await api('my_lists'); // les types d'événements (mariage…) avant de refaire la statistique
             const c = appStatToChart({statType, statFrom, statTo, statGender, statLineage});
             if (c) {
                 c.src.definition.rules.push(...rules);
+                // pyramide par génération : seulement les personnes nées dans cette génération (« 1700–1724 »)
+                const gen = statType === 'death_age_by_generation' && String(generation).match(/^(\d+)\s*[–—-]\s*(\d+)$/);
+                if (gen) c.src.definition.rules.push({field: 'year', from: Number(gen[1]), to: Number(gen[2]), values: []});
                 const rows = await api('widget_rows', {q: JSON.stringify(srcQuery(c.src))});
                 // tranches de la statistique (« 65–69 ») : les mêmes pour le regroupement
                 const span = String(label).match(/^(\d+)\s*[–—-]\s*(\d+)$/); if (span && c.groupBy === 'step') c.groupStep = Number(span[2]) - Number(span[1]) + 1;

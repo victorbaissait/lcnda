@@ -4219,7 +4219,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
                     <div class="stats-year-filter"><label>De <input id="stats-year-from" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" value="${escapeHtml(state.graphStatsYearFrom)}" placeholder="Année"></label><label>à <input id="stats-year-to" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" value="${escapeHtml(state.graphStatsYearTo)}" placeholder="Année"></label>${limitField}${genderField}${resetBtn}</div>
                     ${rulesHtml}
                     <p>${escapeHtml(data.description)}${limit&&data.rows.length>rows.length?` · Affichage limité aux ${rows.length} premiers sur ${data.rows.length}.`:''}${whoOk?' · Clique sur une barre pour voir les personnes.':''}</p>${defaultsHtml}</header>
-                ${rows.length ? (data.kind==='histogram'?histogramHtml(rows,max,colors,whoOk):(data.kind==='bar'?`<div class="stats-chart">${rows.map((row,index)=>chartRow(row,max,index,data.type,colors,whoOk)).join('')}</div>`:customStatsHtml(data,rows,colors))) : empty('Aucune donnée disponible pour cette statistique.')}
+                ${rows.length ? (data.kind==='histogram'?histogramHtml(rows,max,colors,whoOk):(data.kind==='bar'?`<div class="stats-chart">${rows.map((row,index)=>chartRow(row,max,index,data.type,colors,whoOk)).join('')}</div>`:customStatsHtml(data,rows,colors,whoOk))) : empty('Aucune donnée disponible pour cette statistique.')}
             </div></section>`;
         $('#graph-person').addEventListener('click',()=>{state.graphMode='ancestors';renderSidebar();renderGraph();});
         bindGraphExportControls();
@@ -4242,17 +4242,17 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         $('#stats-defaults-apply')?.addEventListener('click',()=>{applyStatsDefaults();persistUiState();renderGraphStats();});
         $('#stats-defaults-clear')?.addEventListener('click',()=>{try{localStorage.removeItem('genealogie-stats-defaults');}catch(_){}toast('Plus de filtres par défaut : les distributions partent de toutes les données.');renderGraphStats();});
         // qui est derrière une barre : la même fenêtre que pour une statistique à soi
-        if(whoOk)$$('[data-stat-who]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.statWho),row=rows[i];if(!row)return;ext.statWho({statType:data.type,statFrom:state.graphStatsYearFrom,statTo:state.graphStatsYearTo,statGender:supportsGender?state.graphStatsGender:'',rules:statRules,kind:baseMode()==='breeding'?'animal':'human'},String(row.label??''),Number(row.value)||0,total,colors[i%colors.length],data.title);}));
+        if(whoOk)$$('[data-stat-who]').forEach(el=>el.addEventListener('click',()=>{const i=Number(el.dataset.statWho),row=rows[i];if(!row)return;ext.statWho({statType:data.type,statFrom:state.graphStatsYearFrom,statTo:state.graphStatsYearTo,statGender:supportsGender?state.graphStatsGender:'',rules:statRules,kind:baseMode()==='breeding'?'animal':'human',generation:row.generation||''},String(row.label??''),Number(row.value)||0,total,colors[i%colors.length],data.title);}));
         if(activeId){const input=$('#'+activeId);if(input){input.focus();try{input.setSelectionRange(activeSelStart,activeSelEnd);}catch(e){}}}
     }
 
-    function chartRow(row,max,index,type,colors,who=false){
+    function chartRow(row,max,index,type,colors,who=false,whoIndex=index){
         const value=Number(row.value)||0,percent=Math.max(2,Math.round(value/max*100));
         const palette=colors||getStatsColors();
         const placeStat=['birth_places','marriage_places','death_places','birth_countries','death_countries'].includes(type),nameStat=['surnames','firstnames'].includes(type);
         const missing=/^(Aucun|Aucune|Naissance sans|Décès sans|Pays non)/.test(row.label||'');
         const label=(placeStat||nameStat)&&!missing?`<button class="stats-chart-label stats-chart-link" data-stat-search="${escapeHtml(row.label)}" data-stat-category="${placeStat?'place':'name'}" title="Voir les personnes liées à ${escapeHtml(row.label)}">${escapeHtml(row.label||'—')}</button>`:`<span class="stats-chart-label" title="${escapeHtml(row.label||'—')}">${escapeHtml(row.label||'—')}</span>`;
-        if(who)return `<div class="stats-chart-row is-who" data-stat-who="${index}" role="button" tabindex="0" title="Voir les personnes : ${escapeHtml(row.label||'—')}"><span class="stats-chart-label">${escapeHtml(row.label||'—')}</span><span class="stats-chart-track"><span class="stats-chart-bar" style="width:${percent}%;background:${palette[index%palette.length]}"></span></span><strong class="stats-chart-value">${value.toLocaleString('fr-FR')}</strong></div>`;
+        if(who)return `<div class="stats-chart-row is-who" data-stat-who="${whoIndex}" role="button" tabindex="0" title="Voir les personnes : ${escapeHtml(row.label||'—')}"><span class="stats-chart-label">${escapeHtml(row.label||'—')}</span><span class="stats-chart-track"><span class="stats-chart-bar" style="width:${percent}%;background:${palette[index%palette.length]}"></span></span><strong class="stats-chart-value">${value.toLocaleString('fr-FR')}</strong></div>`;
         return `<div class="stats-chart-row">${label}<span class="stats-chart-track"><span class="stats-chart-bar" style="width:${percent}%;background:${palette[index%palette.length]}"></span></span><strong class="stats-chart-value">${value.toLocaleString('fr-FR')}</strong></div>`;
     }
 
@@ -4260,12 +4260,12 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         const palette=colors||getStatsColors();
         return `<div class="stats-histogram" role="img" aria-label="Histogramme"><div class="histogram-columns">${rows.map((row,index)=>{const value=Number(row.value)||0,height=Math.max(1,Math.round(value/max*100));return `<div class="histogram-column${who?' is-who':''}" title="${escapeHtml(row.label)} : ${value}${who?' — voir les personnes':''}" ${who?`data-stat-who="${index}" role="button" tabindex="0"`:''}><strong>${value}</strong><div class="histogram-bar" style="height:${height}%;background:${palette[index%palette.length]}"></div><span>${escapeHtml(row.label)}</span></div>`;}).join('')}</div></div>`;
     }
-    function customStatsHtml(data,rows,colors){
+    function customStatsHtml(data,rows,colors,who=false){
         const palette=colors||getStatsColors();
         const groups=[...new Set(rows.map(row=>row.generation||'—'))];
         const max=Math.max(1,...rows.map(row=>Number(row.value)||0));
         if(data.kind==='age_pyramid'){
-        return `<div class="stats-custom-grid">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3><div class="stats-chart compact">${groupRows.map((row,index)=>chartRow(row,max,index+gIndex,'',palette)).join('')}</div></section>`;}).join('')}</div>`;
+        return `<div class="stats-custom-grid">${groups.map((group,gIndex)=>{const groupRows=rows.filter(row=>(row.generation||'—')===group);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3><div class="stats-chart compact">${groupRows.map((row,index)=>chartRow(row,max,index+gIndex,'',palette,who,rows.indexOf(row))).join('')}</div></section>`;}).join('')}</div>`;
         }
         if(data.kind==='metric_grid'){
             return `<div class="stats-custom-grid">${groups.map(group=>{const groupRows=rows.filter(row=>(row.generation||'—')===group).slice(0,14);return `<section class="stats-custom-panel"><h3>${escapeHtml(group)}</h3>${groupRows.map((row,index)=>{const unit=row.unit||'ans';const countUnit=unit==='évènements'?'evt.':'pers.';return `<div class="stats-metric-row"><span>${escapeHtml(row.label)}</span><strong style="color:${palette[index%palette.length]}">${Number(row.value||0).toLocaleString('fr-FR')} ${escapeHtml(unit)}</strong><small>${Number(row.count||0).toLocaleString('fr-FR')} ${countUnit}</small></div>`;}).join('')}</section>`;}).join('')}</div>`;
