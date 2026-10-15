@@ -2295,3 +2295,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bd-penhelp summary{cursor:pointer;font-size:13px}
 .h-bd-penhelp ul{margin:4px 0 6px;padding-left:18px;font-size:12.5px;line-height:1.5}
 .h-bd-penhelp kbd{font-size:11px;border:1px solid #ccc;border-radius:3px;padding:0 3px}
+.h-bd-lbopts{display:grid;gap:6px;border:1px solid #e6e8eb;border-radius:8px;padding:6px 8px}
+.h-bd-lbopts[open]{padding-bottom:10px}
+.h-bd-lbopts summary{cursor:pointer;font-size:13px;font-weight:600}
+.h-bi-linelabel{line-height:1.25;transform-origin:center}
