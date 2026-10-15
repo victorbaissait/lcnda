@@ -74,7 +74,7 @@ function board_clean_item(array $it): ?array
     $out = ['id' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($it['id'] ?? '')) ?: bin2hex(random_bytes(5)), 'type' => $it['type'],
         'x' => $num($it['x'] ?? 0), 'y' => $num($it['y'] ?? 0), 'w' => $num($it['w'] ?? 120, 4, 20000), 'h' => $num($it['h'] ?? 80, 4, 20000), 'rot' => $num($it['rot'] ?? 0, -360, 360),
         'z' => (int) $num($it['z'] ?? 0, -1e6, 1e6), 'locked' => !empty($it['locked']), 'group' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($it['group'] ?? ''))];
-    foreach (['fill', 'stroke', 'color', 'bg'] as $k) { if (isset($it[$k])) { $out[$k] = $color($it[$k]); } }
+    foreach (['fill', 'stroke', 'color', 'bg', 'headColor'] as $k) { if (isset($it[$k])) { $out[$k] = $color($it[$k]); } }
     foreach (['sw' => [0, 500], 'fs' => [4, 500], 'opacity' => [0, 1], 'radius' => [0, 400], 'vw' => [0.1, 1e6], 'vh' => [0.1, 1e6], 'hs' => [2, 200], 'hard' => [0, 100], 'bw' => [0, 200]] as $k => [$a, $z]) { if (isset($it[$k])) { $out[$k] = $num($it[$k], $a, $z); } }
     foreach (['shape' => 40, 'text' => 20000, 'title' => 300, 'font' => 80, 'align' => 10, 'brush' => 20, 'dash' => 20, 'target' => 400, 'label' => 200, 'kind' => 40, 'part' => 120, 'note' => 2000, 'headStart' => 12, 'headEnd' => 12, 'path' => 12, 'list' => 10] as $k => $n) { if (isset($it[$k])) { $out[$k] = $str($it[$k], $n); } }
     // sûrs pour le style : alignement connu, police sans caractères spéciaux, pointes connues
