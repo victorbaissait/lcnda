@@ -548,12 +548,42 @@
     const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['doc', '⚙️', 'Document']];
     let localFonts = null;
     const fontList = () => { let mine = []; try { mine = JSON.parse(localStorage.getItem(FONTS_KEY) || '[]'); } catch (_) {} return [...new Set([...(Array.isArray(mine) ? mine : []).map(fontOk).filter(Boolean), ...(localFonts || []), ...BASE_FONTS])]; };
+    /* Choix d'une police : un champ et une liste à nous (celle du système ne défile pas dans l'app de bureau) — on tape pour filtrer, chaque police est montrée dans son dessin */
+    const fontPickHtml = (attrs, value = '', placeholder = 'Georgia…') => `<span class="ly-fontpick"><input ${attrs} value="${esc(value)}" placeholder="${esc(placeholder)}" autocomplete="off" spellcheck="false" data-fontpick><button type="button" class="ly-fontpick-open" tabindex="-1" aria-label="Toutes les polices" data-fontpick-open>▾</button><div class="ly-fontlist" hidden role="listbox"></div></span>`;
+    function bindFontPick(root) {
+        if (root.dataset.fontpickBound) return; root.dataset.fontpickBound = '1';
+        const listOf = inp => inp.closest('.ly-fontpick')?.querySelector('.ly-fontlist');
+        const fill = (inp, all = false) => {
+            const box = listOf(inp); if (!box) return;
+            const q = all ? '' : inp.value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+            const fonts = fontList().filter(f => !q || f.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').includes(q));
+            box.innerHTML = fonts.length ? fonts.map(f => `<button type="button" role="option" data-fp="${esc(f)}" style="font-family:'${fontOk(f)}',sans-serif">${esc(f)}</button>`).join('') : '<p class="ly-help">Aucune police de ce nom. « 🖥 Polices de l’ordinateur » pour toutes les voir, ou tape son nom exact puis Entrée.</p>';
+            box.hidden = false; box.scrollTop = 0;
+        };
+        const close = () => root.querySelectorAll('.ly-fontlist').forEach(b => { b.hidden = true; });
+        const pick = (inp, f) => { inp.value = f; close(); inp.dispatchEvent(new Event('change', {bubbles: true})); };
+        root.addEventListener('focusin', e => { if (e.target.matches?.('[data-fontpick]')) fill(e.target, true); });
+        root.addEventListener('input', e => { if (e.target.matches?.('[data-fontpick]')) fill(e.target); });
+        root.addEventListener('mousedown', e => { if (e.target.closest('.ly-fontlist, [data-fontpick-open]')) e.preventDefault(); }); // le texte choisi reste choisi
+        root.addEventListener('click', e => {
+            const o = e.target.closest('[data-fontpick-open]'); if (o) { const inp = o.parentElement.querySelector('[data-fontpick]'); const box = listOf(inp); if (box.hidden) fill(inp, true); else close(); return; }
+            const b = e.target.closest('[data-fp]'); if (b) { e.stopPropagation(); pick(b.closest('.ly-fontpick').querySelector('[data-fontpick]'), b.dataset.fp); return; }
+            if (!e.target.closest('.ly-fontpick')) close();
+        });
+        root.addEventListener('keydown', e => {
+            const inp = e.target.closest?.('[data-fontpick]'); if (!inp) return; const box = listOf(inp), items = [...box.querySelectorAll('[data-fp]')];
+            if (e.key === 'Escape') { if (!box.hidden) { e.preventDefault(); e.stopPropagation(); close(); } return; }
+            if (e.key === 'Enter') { e.preventDefault(); const cur = box.querySelector('.is-cur') || (box.hidden ? null : items[0]); if (cur && !box.hidden) pick(inp, cur.dataset.fp); else if (inp.value.trim()) pick(inp, fontOk(inp.value.trim())); return; }
+            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (box.hidden) fill(inp, true); const its = [...box.querySelectorAll('[data-fp]')]; let k = its.findIndex(x => x.classList.contains('is-cur')); its[k]?.classList.remove('is-cur'); k = Math.max(0, Math.min(its.length - 1, k + (e.key === 'ArrowDown' ? 1 : -1))); its[k]?.classList.add('is-cur'); its[k]?.scrollIntoView({block: 'nearest'}); }
+        });
+        root.addEventListener('focusout', e => { if (e.target.matches?.('[data-fontpick]')) setTimeout(() => { if (!root.contains(document.activeElement) || !document.activeElement.closest('.ly-fontpick')) close(); }, 150); });
+    }
 
     async function openEditor({id = 0, name = 'Sans titre', doc, isDesign = false, onSaved}) {
         let D = cleanDoc(doc), docId = id, docName = name, design = !!isDesign, dirty = false;
         let cur = 0, editMaster = null, sel = [], editingId = null, tool = 'select', zoom = 0.75, fillTarget = 'fill', guides = true, snapOn = true, preview = false, panel = 'pages', clip = null, savedRange = null;
         const hist = [], fut = [];
-        const dl = document.createElement('dialog'); dl.className = 'modal ly-editor';
+        const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
                 ${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['pdf', '📄 Exporter en PDF (imprimer)…'], ['pdfbleed', '📄 PDF avec fond perdu et traits de coupe…'], ['html', '🌐 Exporter en page HTML'], ['json', '⬇️ Exporter le fichier du document (.json)'], ['-'], ['close', 'Fermer']])}
@@ -570,6 +600,7 @@
             <style data-ly-css></style>`;
         document.body.appendChild(dl);
         const $ = q => dl.querySelector(q), board = $('[data-ly-board]'), canvas = $('[data-ly-canvas]'), pbody = $('[data-ly-pbody]');
+        bindFontPick(pbody);
         function menu(label, items) { return `<details class="ly-menu"><summary>${label}</summary><div class="ly-menu-list">${items.map(([k, l, sc]) => k === '-' ? '<hr>' : `<button type="button" data-ly-cmd="${k}"><span>${l}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`; }
         const msg = t => { $('[data-ly-msg]').textContent = t || ''; };
         const setDirty = (v = true) => { dirty = v; $('[data-ly-state]').textContent = dirty ? '● modifié' : (docId ? '✓ enregistré' : 'pas encore enregistré'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };
@@ -950,7 +981,7 @@
         }
         function panelText() {
             const it = one(), ed = !!editingId, fonts = fontList();
-            const fontPick = `<label class="ly-f"><span>Police</span><input list="ly-fonts" data-ly-char="font-family" placeholder="Georgia…"><datalist id="ly-fonts">${fonts.map(f => `<option value="${esc(f)}">`).join('')}</datalist></label><div class="ly-row"><button type="button" class="button small secondary" data-ly-localfonts>🖥 Polices de l’ordinateur</button></div>`;
+            const fontPick = `<label class="ly-f ly-f-font"><span>Police</span>${fontPickHtml('data-ly-char="font-family"')}</label><div class="ly-row"><button type="button" class="button small secondary" data-ly-localfonts>🖥 Polices de l’ordinateur</button></div>`;
             const charSec = sec('Caractère', `${fontPick}<div class="ly-grid2">${sel2('font-weight', 'Graisse', [['', '—'], ['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'Semibold'], ['700', 'Bold'], ['900', 'Black']], '', 'data-ly-char')}${sel2('font-style', 'Style', [['', '—'], ['normal', 'Romain'], ['italic', 'Italique']], '', 'data-ly-char')}${num('font-size', 'Corps', '', {min: 3, max: 400, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${num('line-height', 'Interlignage', '', {min: 3, max: 400, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${num('letter-spacing', 'Approche', '', {min: -200, max: 1000, step: 5, unit: '‰', attr: 'data-ly-char'})}${num('top', 'Ligne de base', '', {min: -100, max: 100, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${sel2('caps', 'Capitales', [['', '—'], ['none', 'Normales'], ['small', 'Petites capitales'], ['all', 'Toutes capitales']], '', 'data-ly-char')}${sel2('font-kerning', 'Crénage', [['', '—'], ['auto', 'Automatique'], ['none', 'Aucun']], '', 'data-ly-char')}</div>
                 <div class="ly-row ly-tbtns"><button type="button" data-ly-exec="bold" title="Gras"><b>G</b></button><button type="button" data-ly-exec="italic" title="Italique"><i>I</i></button><button type="button" data-ly-exec="underline" title="Souligné"><u>S</u></button><button type="button" data-ly-exec="strikeThrough" title="Barré"><s>B</s></button><button type="button" data-ly-exec="superscript" title="Exposant">x²</button><button type="button" data-ly-exec="subscript" title="Indice">x₂</button><button type="button" data-ly-exec="removeFormat" title="Enlever la mise en forme">⌫</button></div>
                 <label class="ly-f"><span>Couleur</span><select data-ly-char="color"><option value="">—</option>${D.swatches.filter(s => s.type !== 'grad').map(s => `<option value="${esc(s.c)}">■ ${esc(s.name)}</option>`).join('')}</select><input type="color" data-ly-char="color" value="#111111"></label>`);
@@ -1108,8 +1139,8 @@
         function editStyle(kind, sid) {
             const list = kind === 'para' ? D.paraStyles : D.charStyles, s0 = list.find(x => x.id === sid) || {id: nid(kind === 'para' ? 'ps-' : 'cs-'), name: kind === 'para' ? 'Nouveau style' : 'Nouveau style de caractère'};
             const fonts = fontList();
-            ext.openDialog({eyebrow: kind === 'para' ? 'STYLE DE PARAGRAPHE' : 'STYLE DE CARACTÈRE', title: s0.name, wide: true, submitLabel: 'Enregistrer le style', onDelete: sid && !STYLE_IDS.includes(sid) ? () => { const i = list.indexOf(s0); if (i >= 0) list.splice(i, 1); commit(); render(); } : undefined,
-                body: `<div class="form-grid"><label>Nom <input name="name" value="${esc(s0.name)}" maxlength="60"></label><label>Police <input name="font" list="ly-fonts2" value="${esc(s0.font || '')}"><datalist id="ly-fonts2">${fonts.map(f => `<option value="${esc(f)}">`).join('')}</datalist></label>
+            ext.openDialog({eyebrow: kind === 'para' ? 'STYLE DE PARAGRAPHE' : 'STYLE DE CARACTÈRE', title: s0.name, wide: true, submitLabel: 'Enregistrer le style', onOpen: bindFontPick, onDelete: sid && !STYLE_IDS.includes(sid) ? () => { const i = list.indexOf(s0); if (i >= 0) list.splice(i, 1); commit(); render(); } : undefined,
+                body: `<div class="form-grid"><label>Nom <input name="name" value="${esc(s0.name)}" maxlength="60"></label><label>Police ${fontPickHtml('name="font"', s0.font || '')}</label>
                     <label>Corps (pt) <input type="number" step="0.5" name="size" value="${s0.size ?? ''}"></label><label>Interlignage (pt) <input type="number" step="0.5" name="lead" value="${s0.lead ?? ''}"></label>
                     <label>Graisse <select name="weight"><option value="">—</option>${[300, 400, 500, 600, 700, 900].map(w => `<option ${Number(s0.weight) === w ? 'selected' : ''}>${w}</option>`).join('')}</select></label><label>Couleur <select name="color"><option value="">—</option>${D.swatches.filter(x => x.type !== 'grad').map(x => `<option value="${esc(x.id)}" ${s0.color === x.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</select></label>
                     <label>Approche (‰) <input type="number" step="5" name="track" value="${s0.track ?? ''}"></label><label>Capitales <select name="caps"><option value="">—</option><option value="small" ${s0.caps === 'small' ? 'selected' : ''}>Petites capitales</option><option value="all" ${s0.caps === 'all' ? 'selected' : ''}>Toutes capitales</option></select></label>
@@ -1189,12 +1220,12 @@
                 <label>Marge haut (mm) <input type="number" name="mt" value="${d.mt}"></label><label>Marge bas (mm) <input type="number" name="mb" value="${d.mb}"></label><label>Petit fond / intérieur (mm) <input type="number" name="mi" value="${d.mi}"></label><label>Grand fond / extérieur (mm) <input type="number" name="mo" value="${d.mo}"></label>
                 <label>Colonnes <input type="number" name="columns" min="1" max="12" value="${d.columns}"></label><label>Gouttière (mm) <input type="number" name="gutter" value="${d.gutter}"></label>
                 <label>Fond perdu (mm) <input type="number" name="bleed" min="0" max="20" step="0.5" value="${d.bleed}"></label><label>Ligne-bloc (mm) <input type="number" name="slug" min="0" max="60" step="0.5" value="${d.slug}"></label>
-                <label>Police des titres <input name="titleFont" list="ly-dfonts" value="${esc(d.titleFont)}"></label><label>Police du texte <input name="bodyFont" list="ly-dfonts" value="${esc(d.bodyFont)}"></label><datalist id="ly-dfonts">${fonts.map(f => `<option value="${esc(f)}">`).join('')}</datalist>
+                <label>Police des titres ${fontPickHtml('name="titleFont"', d.titleFont)}</label><label>Police du texte ${fontPickHtml('name="bodyFont"', d.bodyFont)}</label>
                 <label>Corps du texte (pt) <input type="number" step="0.5" name="bodySize" value="${d.bodySize}"></label><label>Interlignage (pt) <input type="number" step="0.5" name="lead" value="${d.lead}"></label>
                 <label>Couleur du livre <input type="color" name="accent" value="${d.accent}"></label><label>Papier <input type="color" name="paper" value="${d.paper}"></label>
                 <label>Numéro de la 1re page <input type="number" name="startPage" min="1" value="${d.startPage}"></label><label class="checkbox-line"><input type="checkbox" name="folio" ${d.folio ? 'checked' : ''}> Folio et titre courant sur le gabarit</label></div>
                 <p><button type="button" class="link-button" data-reset>Revenir aux réglages de départ</button></p>`,
-            onOpen: dg => { dg.querySelector('[name=size]').addEventListener('change', e => { const s0 = allSizes().find(x => x[0] === e.target.value); if (s0) { dg.querySelector('[name=w]').value = s0[2]; dg.querySelector('[name=h]').value = s0[3]; } }); dg.querySelector('[data-reset]').addEventListener('click', () => { try { localStorage.removeItem(DEF_KEY); } catch (_) {} toast('Réglages de départ remis.'); dg.close(); onDone?.(); }); },
+            onOpen: dg => { bindFontPick(dg); dg.querySelector('[name=size]').addEventListener('change', e => { const s0 = allSizes().find(x => x[0] === e.target.value); if (s0) { dg.querySelector('[name=w]').value = s0[2]; dg.querySelector('[name=h]').value = s0[3]; } }); dg.querySelector('[data-reset]').addEventListener('click', () => { try { localStorage.removeItem(DEF_KEY); } catch (_) {} toast('Réglages de départ remis.'); dg.close(); onDone?.(); }); },
             onSubmit: f => { const v = Object.fromEntries(new FormData(f)); const o = {}; ['w', 'h', 'mt', 'mb', 'mi', 'mo', 'columns', 'gutter', 'bleed', 'slug', 'bodySize', 'lead', 'startPage'].forEach(k => { o[k] = Number(v[k]); }); o.facing = !!v.facing; o.folio = !!v.folio; o.titleFont = fontOk(v.titleFont); o.bodyFont = fontOk(v.bodyFont); o.accent = v.accent; o.paper = v.paper; o.size = v.size; try { localStorage.setItem(DEF_KEY, JSON.stringify(o)); } catch (_) {} toast('Réglages par défaut enregistrés : ils servent aux nouveaux documents.'); onDone?.(); }});
     }
 
@@ -1203,7 +1234,7 @@
     let builtinCache = null;
     const builtins = () => builtinCache || (builtinCache = THEMES.map(th => ({th, doc: builtinDesign(th, 'A4')})));
     async function openLibrary() {
-        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-modal-wide ly-lib';
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-modal-wide ly-lib'; dlg.dataset.dndOff = '';
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
         const draw = async () => {
