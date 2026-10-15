@@ -100,3 +100,4 @@
 .ly-fontlist button:hover,.ly-fontlist button.is-cur{background:var(--ly-acc,#2f6bff);color:#fff}
 .ly-f.ly-f-font{grid-template-columns:auto 1fr}
 .h-modal .ly-fontpick input{width:100%}
+.ly-listtable .ly-listcover{width:56px}.ly-listtable .ly-cover{width:46px}.ly-listact{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}.ly-listpage h3{margin:22px 0 10px}

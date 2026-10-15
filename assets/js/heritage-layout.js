@@ -1322,6 +1322,40 @@
             }});
     }
     ext.openLayoutStudio = openLibrary;
+    /* Listes → 📐 Livres de famille : ce qu'on a fait dans l'atelier (livres et designs), pour les ouvrir, en créer, régler */
+    ext.lists = ext.lists || {};
+    ext.lists.layout_books = async token => {
+        const S = A().state, ws = A().$('#workspace');
+        const draw = async () => {
+            let docs = []; try { docs = (await api('layout_docs')).docs; } catch (err) { toast(err.message, 'error'); }
+            if (token !== S.workspaceToken || S.module !== 'listes') return;
+            const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
+            const row = x => `<tr><td class="ly-listcover">${coverHtml(x.cover, 46)}</td><td><button type="button" class="table-link" data-lyl-open="${x.id}">${esc(x.name)}</button></td><td>${x.is_design ? '🎨 Design' : '📖 Livre'}</td><td>${x.pages}</td><td>${esc(fmtDate(x.updated_at))}</td>
+                <td><div class="ly-listact"><button type="button" class="button small" data-lyl-open="${x.id}">${x.is_design ? 'Modifier' : 'Ouvrir'}</button>${x.is_design ? `<button type="button" class="button small secondary" data-lyl-use="${x.id}">Utiliser</button>` : ''}<button type="button" class="button small secondary" data-lyl-dup="${x.id}">Dupliquer</button><button type="button" class="button small secondary" data-lyl-ren="${x.id}">Renommer</button><button type="button" class="button small secondary" data-lyl-exp="${x.id}">Exporter</button><button type="button" class="button small secondary danger" data-lyl-del="${x.id}">🗑</button></div></td></tr>`;
+            const books = docs.filter(x => !x.is_design), designs = docs.filter(x => x.is_design);
+            const table = (list, empty) => list.length ? `<div class="data-table-wrap"><table class="data-table ly-listtable"><thead><tr><th></th><th>Nom</th><th>Sorte</th><th>Pages</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>` : A().empty(empty);
+            ws.innerHTML = `<section class="page collection-page ly-listpage" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📐 Livres de famille</h2><p>Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut.</p></div>
+                <div class="page-actions"><button type="button" class="button" data-lyl-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-lyl-new="design">🎨 Depuis un design</button><button type="button" class="button secondary" data-lyl-new="blank">📄 Page blanche</button><button type="button" class="button secondary" data-lyl-defaults>⚙️ Réglages par défaut</button><button type="button" class="button secondary" data-lyl-studio>📐 Ouvrir l’atelier</button></div></header>
+                <h3>📖 Livres (${books.length})</h3>${table(books, 'Aucun livre pour l’instant : « 👪 Nouveau livre d’après la famille ».')}
+                <h3>🎨 Mes designs (${designs.length})</h3>${table(designs, 'Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « 📐 Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ».')}</section>`;
+        };
+        await draw();
+        const again = () => { if (S.module === 'listes' && S.listType === 'layout_books') draw(); };
+        ws.onclick = async e => {
+            const b = e.target.closest('button'); if (!b || !ws.querySelector('.ly-listpage')) return; const d = b.dataset;
+            try {
+                if (d.lylNew) return newDocWizard(d.lylNew, again);
+                if (d.lylDefaults !== undefined) return defaultsDialog();
+                if (d.lylStudio !== undefined) return openLibrary();
+                if (d.lylOpen) { const r = await api('layout_doc', {id: Number(d.lylOpen)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: again}); }
+                if (d.lylUse) return newDocWizard('design', again, {designId: Number(d.lylUse)});
+                if (d.lylDup) { const r = await api('layout_doc', {id: Number(d.lylDup)}); await post('save_layout_doc', {name: `${r.name} (copie)`.slice(0, 160), is_design: r.is_design, doc: r.doc}); toast('Copie faite.'); return draw(); }
+                if (d.lylRen) { const r = await api('layout_doc', {id: Number(d.lylRen)}), n = prompt('Nouveau nom :', r.name); if (!n) return; await post('save_layout_doc', {id: r.id, name: n, is_design: r.is_design, doc: r.doc}); return draw(); }
+                if (d.lylExp) { const r = await api('layout_doc', {id: Number(d.lylExp)}); return download(`${slug(r.name)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: r.name, is_design: r.is_design, doc: r.doc})], {type: 'application/json'})); }
+                if (d.lylDel) { if (!confirm('Supprimer ce document ? (Exporte-le d’abord si tu veux le garder.)')) return; await post('delete_layout_doc', {id: Number(d.lylDel)}); toast('Document supprimé.'); return draw(); }
+            } catch (err) { toast(err.message, 'error'); }
+        };
+    };
     // le bouton dans Export propre → Livre de famille
     document.addEventListener('click', e => { if (e.target.closest('[data-open-layout-studio]')) { e.preventDefault(); openLibrary(); } });
 })();
