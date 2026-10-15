@@ -15,6 +15,8 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const esc = v => A().escapeHtml(v ?? '');
     const toast = (...a) => A().toast(...a);
+    // Electron ne fournit pas window.prompt() : fenêtre de saisie de l’application
+    const ask = async (message, value = '') => { const v = await A().askText({message, value: value ?? ''}); return v === null ? null : String(v); };
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
 
@@ -54,9 +56,9 @@
         [fw, fh].forEach(el => el.addEventListener('input', () => { const m = allSizes().find(x => Math.abs(x[2] - mmW()) < 0.2 && Math.abs(x[3] - mmH()) < 0.2); sel.value = m ? m[0] : 'custom'; note(); }));
         unit.addEventListener('change', () => { const w = mmW(), h = mmH(); u = (UNITS.find(x => x[0] === unit.value) || UNITS[0])[2]; show(w, h); note(); });
         dg.querySelectorAll('[data-orient]').forEach(b => b.addEventListener('click', () => { const w = mmW(), h = mmH(), land = b.dataset.orient === 'landscape'; if ((land && h > w) || (!land && w > h)) { show(h, w); fw.dispatchEvent(new Event('input')); } }));
-        dg.querySelector('[data-fmt-save]').addEventListener('click', () => {
+        dg.querySelector('[data-fmt-save]').addEventListener('click', async () => {
             const w = mmW(), h = mmH(); if (!(w >= 30 && h >= 30 && w <= 1500 && h <= 1500)) return toast('Format entre 3 cm et 1,5 m de côté.', 'error');
-            const name = (prompt('Nom de ce format (ex. Mon carnet 17 × 24) :', `${String(r1(w / 10)).replace('.', ',')} × ${String(r1(h / 10)).replace('.', ',')} cm`) || '').replace(/[<>"`]/g, '').trim().slice(0, 60); if (!name) return;
+            const name = (await ask('Nom de ce format (ex. Mon carnet 17 × 24) :', `${String(r1(w / 10)).replace('.', ',')} × ${String(r1(h / 10)).replace('.', ',')} cm`) || '').replace(/[<>"`]/g, '').trim().slice(0, 60); if (!name) return;
             const list = myFormats(), k = 'my_' + Date.now().toString(36); list.push({k, name, w: r1(w), h: r1(h)});
             try { localStorage.setItem(FORMATS_KEY, JSON.stringify(list)); } catch (_) {}
             sel.insertBefore(new Option(allSizes().find(x => x[0] === k)[1], k), sel.querySelector('option[value="custom"]')); sel.value = k; note(); toast(`Format « ${name} » enregistré : il est proposé pour les prochains documents.`);
@@ -581,7 +583,7 @@
 
     async function openEditor({id = 0, name = 'Sans titre', doc, isDesign = false, onSaved}) {
         let D = cleanDoc(doc), docId = id, docName = name, design = !!isDesign, dirty = false;
-        let cur = 0, editMaster = null, sel = [], editingId = null, tool = 'select', zoom = 0.75, fillTarget = 'fill', guides = true, snapOn = true, preview = false, panel = 'pages', clip = null, savedRange = null;
+        let cur = 0, editMaster = null, sel = [], editingId = null, tool = 'select', zoom = 0.75, fillTarget = 'fill', guides = true, snapOn = true, preview = false, panel = 'pages', clip = null, savedRange = null, lastTextColor = '#111111';
         let act = ''; // ce qu'on vient de faire, pour l'historique
         const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
@@ -592,7 +594,7 @@
                 ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}
                 <span class="ly-hbtns"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span><button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
-            <div class="ly-main"><div class="ly-tools">${TOOLS.map(([k, ic, l]) => `<button type="button" data-ly-tool="${k}" title="${esc(l)}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi (clic : lequel le nuancier change)"><button type="button" data-ly-target="fill" class="ly-fs-fill"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke"></button></div></div>
+            <div class="ly-main"><div class="ly-tools">${TOOLS.map(([k, ic, l]) => `<button type="button" data-ly-tool="${k}" title="${esc(l)}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi : clic = choisir la couleur"><button type="button" data-ly-target="fill" class="ly-fs-fill" title="Fond : clic pour choisir la couleur"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke" title="Contour : clic pour choisir la couleur"></button><button type="button" class="ly-fs-swap" data-ly-fsswap title="Intervertir fond et contour (⇧X)">⇄</button><button type="button" class="ly-fs-none" data-ly-fsnone title="Aucune couleur pour le fond ou le contour choisi (/)">⧄</button><input type="color" data-ly-fspick tabindex="-1" aria-hidden="true"></div></div>
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
                 <aside class="ly-panels"><span class="ly-resize" data-ly-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span><div class="ly-ptabs">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
             <div class="ly-status"><button type="button" data-ly-cmd="first" title="Première page">⏮</button><button type="button" data-ly-cmd="prev" title="Page précédente">‹</button><span>Page <input type="number" min="1" data-ly-goto> / <b data-ly-total></b></span><button type="button" data-ly-cmd="next" title="Page suivante">›</button><button type="button" data-ly-cmd="last" title="Dernière page">⏭</button>
@@ -874,7 +876,7 @@
                     <label>Gabarit <select name="master">${D.masters.map(m => `<option value="${esc(m.id)}" ${m.id === (D.pages[cur]?.master || 'A') ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}<option value="">Aucun</option></select></label></div>`,
                 onSubmit: f => { const n = Number(f.n.value) || 1, p = clamp(Number(f.page.value) || 1, 1, D.pages.length) - 1, w = f.where.value; addPages(n, w === 'start' ? 0 : w === 'end' ? D.pages.length : w === 'before' ? p : p + 1, f.master.value); }});
         }
-        function gotoDialog() { const v = prompt(`Aller à la page (1 à ${D.pages.length}) :`, String(cur + 1)); if (v) goPage(Number(v) - 1); }
+        async function gotoDialog() { const v = await ask(`Aller à la page (1 à ${D.pages.length}) :`, String(cur + 1)); if (v) goPage(Number(v) - 1); }
         function delPage() { if (D.pages.length < 2) return msg('Il faut garder au moins une page.'); if (D.pages[cur].items.length && !confirm(`Supprimer la page ${cur + 1} et ce qu’elle contient ?`)) return; D.pages.splice(cur, 1); cur = Math.min(cur, D.pages.length - 1); sel = []; commit(); render(); }
         function dupPage() { const p = JSON.parse(JSON.stringify(D.pages[cur])); p.id = nid('p'); p.items.forEach(it => { it.id = nid('c'); }); D.pages.splice(cur + 1, 0, p); commit(); goPage(cur + 1); }
         function lockToggle() { const its = selected(); if (!its.length) return; const v = !its.every(x => x.locked); its.forEach(x => { x.locked = v; }); commit(); render(); }
@@ -903,6 +905,9 @@
             const c = e.target.closest('[data-ly-cmd]'); if (c) { e.preventDefault(); exec(c.dataset.lyCmd); return; }
             const t = e.target.closest('[data-ly-tool]'); if (t) { if (editingId) stopEditing(); tool = t.dataset.lyTool; pen = null; syncChrome(); msg(TOOLS.find(x => x[0] === tool)?.[2] || ''); return; }
             const pt = e.target.closest('[data-ly-panel]'); if (pt) { panel = pt.dataset.lyPanel; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b === pt)); renderPanel(); return; }
+            if (e.target.closest('[data-ly-fsswap]')) { swapPaint(); return; }
+            if (e.target.closest('[data-ly-fsnone]')) { if (!selected().length) return msg('Choisis un objet.'); applyPaint('none'); return; }
+            const tg0 = e.target.closest('[data-ly-target]'); if (tg0) { const it = one(), pk = dl.querySelector('[data-ly-fspick]'), c0 = it ? colorOf(D, tg0.dataset.lyTarget === 'fill' ? it.fill : it.stroke?.c, '') : ''; pk.value = hexOk(c0) ? c0 : (tg0.dataset.lyTarget === 'fill' ? '#ffffff' : '#111111'); pk.dataset.for = tg0.dataset.lyTarget; if (selected().length) setTimeout(() => { try { pk.showPicker ? pk.showPicker() : pk.click(); } catch { pk.click(); } }, 0); }
             const tg = e.target.closest('[data-ly-target]'); if (tg) { fillTarget = tg.dataset.lyTarget; panel = 'color'; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b.dataset.lyPanel === 'color')); syncChrome(); renderPanel(); }
             if (!e.target.closest('details.ly-menu')) dl.querySelectorAll('details.ly-menu[open]').forEach(d => d.removeAttribute('open'));
         });
@@ -928,6 +933,9 @@
             if (e.key === 'PageDown') { e.preventDefault(); goPage(cur + 1); return; } if (e.key === 'PageUp') { e.preventDefault(); goPage(cur - 1); return; }
             if (e.key.startsWith('Arrow') && sel.length) { e.preventDefault(); const d = e.shiftKey ? 5 : 1, dx = e.key === 'ArrowLeft' ? -d : e.key === 'ArrowRight' ? d : 0, dy = e.key === 'ArrowUp' ? -d : e.key === 'ArrowDown' ? d : 0; selected().filter(x => !locked(x)).forEach(x => { x.x = r1(x.x + dx); x.y = r1(x.y + dy); }); commit('Déplacement au clavier'); render(); return; }
             if (k === 'w') { preview = !preview; render(); return; }
+            if (k === 'x' && !mod && e.shiftKey) { swapPaint(); return; }
+            if (k === 'x' && !mod) { fillTarget = fillTarget === 'fill' ? 'stroke' : 'fill'; syncChrome(); if (panel === 'color') renderPanel(); return; }
+            if (e.key === '/' && !mod) { if (selected().length) applyPaint('none'); return; }
             const t = TOOLS.find(x => x[3] === k); if (t && !mod) { tool = t[0]; pen = null; syncChrome(); msg(t[2]); }
         }, {signal: keyAc.signal});
 
@@ -935,7 +943,7 @@
         async function save({copy: asCopy = false, design: asDesign = false} = {}) {
             if (editingId) stopEditing();
             let name = String(docName || '').trim() || 'Sans titre';
-            if (asCopy || asDesign) { const n = prompt(asDesign ? 'Nom du design (il sera proposé pour les prochains livres) :' : 'Nom de la copie :', asDesign ? `${name} (design)` : `${name} (copie)`); if (!n) return; name = n.trim().slice(0, 160); }
+            if (asCopy || asDesign) { const n = await ask(asDesign ? 'Nom du design (il sera proposé pour les prochains livres) :' : 'Nom de la copie :', asDesign ? `${name} (design)` : `${name} (copie)`); if (!n) return; name = n.trim().slice(0, 160); }
             try {
                 const res = (await post('save_layout_doc', {id: asCopy || asDesign ? 0 : docId, name, is_design: asDesign ? 1 : (asCopy ? 0 : (design ? 1 : 0)), doc: D})).result;
                 if (!asCopy && !asDesign) { docId = res.id; docName = res.name; setDirty(false); toast(`« ${res.name} » enregistré.`); }
@@ -1009,7 +1017,8 @@
             const fontPick = `<label class="ly-f ly-f-font"><span>Police</span>${fontPickHtml('data-ly-char="font-family"')}</label><div class="ly-row"><button type="button" class="button small secondary" data-ly-localfonts>🖥 Polices de l’ordinateur</button></div>`;
             const charSec = sec('Caractère', `${fontPick}<div class="ly-grid2">${sel2('font-weight', 'Graisse', [['', '—'], ['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'Semibold'], ['700', 'Bold'], ['900', 'Black']], '', 'data-ly-char')}${sel2('font-style', 'Style', [['', '—'], ['normal', 'Romain'], ['italic', 'Italique']], '', 'data-ly-char')}${num('font-size', 'Corps', '', {min: 3, max: 400, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${num('line-height', 'Interlignage', '', {min: 3, max: 400, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${num('letter-spacing', 'Approche', '', {min: -200, max: 1000, step: 5, unit: '‰', attr: 'data-ly-char'})}${num('top', 'Ligne de base', '', {min: -100, max: 100, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${sel2('caps', 'Capitales', [['', '—'], ['none', 'Normales'], ['small', 'Petites capitales'], ['all', 'Toutes capitales']], '', 'data-ly-char')}${sel2('font-kerning', 'Crénage', [['', '—'], ['auto', 'Automatique'], ['none', 'Aucun']], '', 'data-ly-char')}</div>
                 <div class="ly-row ly-tbtns"><button type="button" data-ly-exec="bold" title="Gras"><b>G</b></button><button type="button" data-ly-exec="italic" title="Italique"><i>I</i></button><button type="button" data-ly-exec="underline" title="Souligné"><u>S</u></button><button type="button" data-ly-exec="strikeThrough" title="Barré"><s>B</s></button><button type="button" data-ly-exec="superscript" title="Exposant">x²</button><button type="button" data-ly-exec="subscript" title="Indice">x₂</button><button type="button" data-ly-exec="removeFormat" title="Enlever la mise en forme">⌫</button></div>
-                <label class="ly-f"><span>Couleur</span><select data-ly-char="color"><option value="">—</option>${D.swatches.filter(s => s.type !== 'grad').map(s => `<option value="${esc(s.c)}">■ ${esc(s.name)}</option>`).join('')}</select><input type="color" data-ly-char="color" value="#111111"></label>`);
+                <label class="ly-f"><span>Couleur</span><select data-ly-char="color"><option value="">Nuancier…</option>${D.swatches.filter(s => s.type !== 'grad').map(s => `<option value="${esc(s.c)}">■ ${esc(s.name)}</option>`).join('')}</select></label>
+                <div class="ly-colorfree"><span>Couleur libre</span><input type="color" data-ly-char="color" value="${esc(lastTextColor)}" title="Choisir n’importe quelle couleur"><input type="text" data-ly-hex value="${esc(lastTextColor)}" maxlength="7" spellcheck="false" title="Code couleur, ex. #7a2e2e"><div class="ly-swmini">${D.swatches.filter(s => s.type !== 'grad').map(s => `<button type="button" data-ly-tcol="${esc(s.c)}" title="${esc(s.name)}" style="background:${esc(s.c)}"></button>`).join('')}</div></div>`);
             const paraSec = sec('Paragraphe', `<div class="ly-row ly-tbtns">${[['left', '⯇', 'À gauche'], ['center', '≡', 'Centré'], ['right', '⯈', 'À droite'], ['justify', '☰', 'Justifié'], ['justify-all', '▤', 'Justifié, dernière ligne aussi']].map(([k, ic, t]) => `<button type="button" data-ly-palign="${k}" title="${t}">${ic}</button>`).join('')}</div>
                 <div class="ly-grid2">${num('margin-left', 'Retrait gauche', '', {attr: 'data-ly-para'})}${num('margin-right', 'Retrait droit', '', {attr: 'data-ly-para'})}${num('text-indent', '1re ligne', '', {attr: 'data-ly-para'})}${num('margin-top', 'Espace avant', '', {attr: 'data-ly-para'})}${num('margin-bottom', 'Espace après', '', {attr: 'data-ly-para'})}${sel2('hyphens', 'Césure', [['', '—'], ['auto', 'Oui'], ['manual', 'Non']], '', 'data-ly-para')}</div>
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-exec="insertUnorderedList">• Liste</button><button type="button" class="button small secondary" data-ly-exec="insertOrderedList">1. Liste</button><button type="button" class="button small secondary" data-ly-link>🔗 Lien</button></div>
@@ -1079,9 +1088,11 @@
                 const map = {'font-family': `"${fontOk(v)}"`, 'font-size': `${r1(Number(v) * PT)}px`, 'line-height': `${r1(Number(v) * PT)}px`, 'letter-spacing': `${Number(v) / 1000}em`, top: `${r1(-Number(v) * PT)}px`};
                 if (k === 'caps') return applyChar(v === 'small' ? {'font-variant-caps': 'small-caps', 'text-transform': 'none'} : v === 'all' ? {'text-transform': 'uppercase', 'font-variant-caps': 'normal'} : {'text-transform': 'none', 'font-variant-caps': 'normal'});
                 if (k === 'top') return applyChar({position: 'relative', top: map.top});
+                if (k === 'color') { if (!hexOk(v)) return; lastTextColor = v; pbody.querySelectorAll('[data-ly-hex]').forEach(x => { x.value = v; }); pbody.querySelectorAll('input[type=color][data-ly-char=color]').forEach(x => { x.value = v; }); }
                 if (k === 'font-family') { try { const mine = JSON.parse(localStorage.getItem(FONTS_KEY) || '[]'); if (!fontList().includes(v)) localStorage.setItem(FONTS_KEY, JSON.stringify([...new Set([fontOk(v), ...mine])].slice(0, 60))); } catch (_) {} }
                 return applyChar({[k]: map[k] || v});
             }
+            if (el.matches('[data-ly-hex]')) { let v = el.value.trim(); if (!v.startsWith('#')) v = '#' + v; if (/^#[0-9a-f]{3}$/i.test(v)) v = '#' + [...v.slice(1)].map(c => c + c).join(''); if (!hexOk(v)) return msg('Code couleur : # suivi de 6 chiffres ou lettres (ex. #7a2e2e).'); v = v.toLowerCase(); lastTextColor = v; el.value = v; const c = pbody.querySelector('input[type=color][data-ly-char=color]'); if (c) c.value = v; return applyChar({color: v}); }
             if (el.matches('[data-ly-para]')) { const k = el.dataset.lyPara, v = el.value; if (v === '') return; applyPara(b => paraCss(b, k, k === 'hyphens' ? v : `${px(Number(v))}px`)); return; }
             if (el.matches('[data-ly-gset]')) { const g = D.swatches.find(s => s.id === dl.dataset.grad); if (!g) return; g[el.dataset.lyGset] = el.type === 'number' ? Number(el.value) : el.value; commit(); render(); return; }
             if (el.matches('[data-ly-gstop]')) { const g = D.swatches.find(s => s.id === dl.dataset.grad); if (!g) return; const st = g.stops[Number(el.dataset.lyGstop)]; if (!st) return; st[el.dataset.k] = el.dataset.k === 'p' ? Number(el.value) : el.value; g.stops.sort((a, b) => a.p - b.p); commit(); render(); return; }
@@ -1091,14 +1102,15 @@
             if (el.matches('[data-ly-alignto]')) { dl.dataset.alignTo = el.value; return; }
             if (el.matches('[data-ly-goto2]')) { goPage(Number(el.value) - 1); }
         });
-        pbody.addEventListener('mousedown', e => { if (e.target.closest('[data-ly-exec],[data-ly-palign],[data-ly-ins],[data-ly-pstyle],[data-ly-cstyle],[data-ly-link]')) e.preventDefault(); }); // garder la sélection du texte
+        pbody.addEventListener('mousedown', e => { if (e.target.closest('[data-ly-exec],[data-ly-palign],[data-ly-ins],[data-ly-pstyle],[data-ly-cstyle],[data-ly-link],[data-ly-tcol]')) e.preventDefault(); }); // garder la sélection du texte
         pbody.addEventListener('click', async e => {
             const b = e.target.closest('button, [data-ly-lpick]'); if (!b) return; const d = b.dataset;
             act = (b.title || b.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 50);
             if (d.lyHist !== undefined) return goTo(Number(d.lyHist));
             if (d.lyPage !== undefined) return goPage(Number(d.lyPage));
             if (d.lyExec) { if (!editEl()) { if (one()?.type === 'text') { startEditing(one()); msg('Choisis du texte, puis le bouton.'); } return; } restoreRange(); document.execCommand('styleWithCSS', false, true); document.execCommand(d.lyExec, false, null); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); setDirty(); return; }
-            if (d.lyLink !== undefined) { if (!editEl()) return msg('Choisis du texte dans un bloc.'); const u = prompt('Adresse du lien (https://…) :', 'https://'); if (!u || !/^(https?:\/\/|mailto:)/i.test(u)) return; restoreRange(); document.execCommand('createLink', false, u); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); setDirty(); return; }
+            if (d.lyTcol) { lastTextColor = d.lyTcol; pbody.querySelectorAll('[data-ly-hex], input[type=color][data-ly-char=color]').forEach(x => { x.value = d.lyTcol; }); return applyChar({color: d.lyTcol}); }
+            if (d.lyLink !== undefined) { if (!editEl()) return msg('Choisis du texte dans un bloc.'); const u = await ask('Adresse du lien (https://…) :', 'https://'); if (!u || !/^(https?:\/\/|mailto:)/i.test(u)) return; restoreRange(); document.execCommand('createLink', false, u); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); setDirty(); return; }
             if (d.lyIns !== undefined) { if (!editEl()) return msg('Double-clic dans un bloc de texte d’abord.'); restoreRange(); document.execCommand('insertText', false, d.lyIns); return; }
             if (d.lyPalign) return applyPara(bk => { paraCss(bk, 'text-align', d.lyPalign === 'justify-all' ? 'justify' : d.lyPalign); if (d.lyPalign === 'justify-all') paraCss(bk, 'text-align-last', 'justify'); else bk.style.removeProperty('text-align-last'); });
             if (d.lyPstyle) return applyPara(bk => { bk.setAttribute('data-ps', d.lyPstyle); });
@@ -1107,12 +1119,12 @@
             if (d.lyCstedit || d.lyCsnew !== undefined) return editStyle('char', d.lyCstedit);
             if (d.lyLocalfonts !== undefined) { if (typeof window.queryLocalFonts !== 'function') return toast('Ce navigateur ne sait pas lister les polices de l’ordinateur : tape le nom de la police.', 'error'); try { localFonts = [...new Set((await window.queryLocalFonts()).map(f => f.family))].sort((a, c) => a.localeCompare(c, 'fr')); toast(`${localFonts.length} polices de l’ordinateur ajoutées à la liste.`); renderPanel(); } catch (_) { toast('Accès aux polices refusé.', 'error'); } return; }
             if (d.lySw) return applyPaint(d.lySw);
-            if (d.lySwnew !== undefined) { const c = pbody.querySelector('[data-ly-newc]').value, n = prompt('Nom de la couleur :', c); if (n === null) return; D.swatches.push({id: nid('sw-'), name: n.slice(0, 60) || c, type: 'color', c}); commit(); renderPanel(); return; }
+            if (d.lySwnew !== undefined) { const c = pbody.querySelector('[data-ly-newc]').value, n = await ask('Nom de la couleur :', c); if (n === null) return; D.swatches.push({id: nid('sw-'), name: n.slice(0, 60) || c, type: 'color', c}); commit(); renderPanel(); return; }
             if (d.lyGrnew !== undefined) { const g = {id: nid('gr-'), name: 'Dégradé', type: 'grad', kind: 'linear', angle: 90, stops: [{c: '#ffffff', p: 0}, {c: colorOf(D, 'sw-accent', '#7a2e2e'), p: 100}]}; D.swatches.push(g); dl.dataset.grad = g.id; commit(); renderPanel(); return; }
             if (d.lyGedit) { dl.dataset.grad = d.lyGedit; renderPanel(); return; }
             if (d.lyGadd !== undefined) { const g = D.swatches.find(s => s.id === dl.dataset.grad); if (g && g.stops.length < 8) { g.stops.push({c: '#888888', p: 50}); g.stops.sort((a, c) => a.p - c.p); commit(); render(); } return; }
             if (d.lyGdel !== undefined) { const g = D.swatches.find(s => s.id === dl.dataset.grad); if (g && g.stops.length > 2) { g.stops.splice(Number(d.lyGdel), 1); commit(); render(); } return; }
-            if (d.lySwren) { const s0 = swatch(D, d.lySwren), n = prompt('Nom :', s0?.name); if (s0 && n) { s0.name = n.slice(0, 60); commit(); renderPanel(); } return; }
+            if (d.lySwren) { const s0 = swatch(D, d.lySwren), n = await ask('Nom :', s0?.name); if (s0 && n) { s0.name = n.slice(0, 60); commit(); renderPanel(); } return; }
             if (d.lySwdel) { const used = JSON.stringify(D).split(`"${d.lySwdel}"`).length - 2; if (!confirm(used > 0 ? `Cette nuance sert ${used} fois : ces objets passeront en noir. Supprimer ?` : 'Supprimer cette nuance ?')) return; D.swatches = D.swatches.filter(s => s.id !== d.lySwdel); const txt = JSON.stringify(D).split(`"${d.lySwdel}"`).join('"sw-black"'); D = JSON.parse(txt); commit(); render(); return; }
             if (d.lyFlip) { selected().forEach(it => { it[d.lyFlip] = !it[d.lyFlip]; }); commit(); render(); return; }
             if (d.lyConvert) { selected().forEach(it => { if (it.type === 'frame') it.shape = d.lyConvert; else it.type = d.lyConvert; }); commit(); render(); return; }
@@ -1124,8 +1136,8 @@
             if (d.lyMedit) { if (editingId) stopEditing(); editMaster = d.lyMedit; sel = []; render(); return; }
             if (d.lyMapply) { D.pages[cur].master = d.lyMapply; commit(); render(); return; }
             if (d.lyMnone !== undefined) { D.pages[cur].master = ''; commit(); render(); return; }
-            if (d.lyMnew !== undefined) { const ids = D.masters.map(m => m.id); let c = 'C'; while (ids.includes(c)) c = String.fromCharCode(c.charCodeAt(0) + 1); const n = prompt('Nom du gabarit :', `${c}-Gabarit`); if (!n) return; D.masters.push({id: ids.includes(c) ? nid('M') : c, name: n.slice(0, 60), items: []}); commit(); renderPanel(); return; }
-            if (d.lyMren) { const m = D.masters.find(x => x.id === d.lyMren), n = prompt('Nom du gabarit :', m?.name); if (m && n) { m.name = n.slice(0, 60); commit(); render(); } return; }
+            if (d.lyMnew !== undefined) { const ids = D.masters.map(m => m.id); let c = 'C'; while (ids.includes(c)) c = String.fromCharCode(c.charCodeAt(0) + 1); const n = await ask('Nom du gabarit :', `${c}-Gabarit`); if (!n) return; D.masters.push({id: ids.includes(c) ? nid('M') : c, name: n.slice(0, 60), items: []}); commit(); renderPanel(); return; }
+            if (d.lyMren) { const m = D.masters.find(x => x.id === d.lyMren), n = await ask('Nom du gabarit :', m?.name); if (m && n) { m.name = n.slice(0, 60); commit(); render(); } return; }
             if (d.lyMdel) { const m = D.masters.find(x => x.id === d.lyMdel); if (!m || !confirm(`Supprimer le gabarit « ${m.name} » ? Ses pages n’auront plus de gabarit.`)) return; D.masters = D.masters.filter(x => x !== m); D.pages.forEach(p => { if (p.master === m.id) p.master = ''; }); commit(); render(); return; }
             if (d.lyMdetach !== undefined) { const m = D.masters.find(x => x.id === D.pages[cur].master); if (!m) return msg('Cette page n’a pas de gabarit.'); D.pages[cur].items.unshift(...JSON.parse(JSON.stringify(m.items)).map(it => ({...it, id: nid('c')}))); D.pages[cur].master = ''; commit(); render(); msg('Éléments du gabarit détachés : modifiables sur cette page.'); return; }
             const lrow = e.target.closest('[data-ly-layer]');
@@ -1136,13 +1148,20 @@
                 if (d.lyLdown !== undefined && i < D.layers.length - 1) { [D.layers[i + 1], D.layers[i]] = [D.layers[i], D.layers[i + 1]]; commit(); render(); return; }
                 if (d.lyLdel !== undefined) { if (D.layers.length < 2) return msg('Il faut au moins un calque.'); if (!confirm(`Supprimer le calque « ${l.name} » et ses objets ?`)) return; D.layers.splice(i, 1); [...D.pages.map(p => p.items), ...D.masters.map(m => m.items)].forEach(list => { for (let k = list.length - 1; k >= 0; k--) if (list[k].layer === l.id) list.splice(k, 1); }); commit(); render(); return; }
                 dl.dataset.layer = l.id; renderPanel(); return; }
-            if (d.lyLnew !== undefined) { const n = prompt('Nom du calque :', `Calque ${D.layers.length + 1}`); if (!n) return; const colors = ['#4a7dff', '#ff4a6e', '#2bb673', '#f5a623', '#9b59b6', '#00b3c7']; const l = {id: nid('L'), name: n.slice(0, 60), visible: true, locked: false, color: colors[D.layers.length % colors.length]}; D.layers.unshift(l); dl.dataset.layer = l.id; commit(); renderPanel(); return; }
+            if (d.lyLnew !== undefined) { const n = await ask('Nom du calque :', `Calque ${D.layers.length + 1}`); if (!n) return; const colors = ['#4a7dff', '#ff4a6e', '#2bb673', '#f5a623', '#9b59b6', '#00b3c7']; const l = {id: nid('L'), name: n.slice(0, 60), visible: true, locked: false, color: colors[D.layers.length % colors.length]}; D.layers.unshift(l); dl.dataset.layer = l.id; commit(); renderPanel(); return; }
             if (d.lyPickobj) { sel = [d.lyPickobj]; drawSel(); renderPanel(); return; }
             if (d.lyLinkgo || d.lyLinkrep) { const [i, idv] = (d.lyLinkgo || d.lyLinkrep).split(':'); goPage(Number(i)); sel = [idv]; drawSel(); if (d.lyLinkrep) { const it = curList().find(x => x.id === idv); if (it) await placeImage(it); } return; }
             if (d.lyDefaults !== undefined) return defaultsDialog();
         });
-        pbody.addEventListener('dblclick', e => { const n = e.target.closest('[data-ly-lpick]'); if (!n) return; const l = D.layers.find(x => x.id === n.closest('[data-ly-layer]').dataset.lyLayer), v = prompt('Nom du calque :', l?.name); if (l && v) { l.name = v.slice(0, 60); commit(); renderPanel(); } });
+        pbody.addEventListener('dblclick', async e => { const n = e.target.closest('[data-ly-lpick]'); if (!n) return; const l = D.layers.find(x => x.id === n.closest('[data-ly-layer]').dataset.lyLayer), v = await ask('Nom du calque :', l?.name); if (l && v) { l.name = v.slice(0, 60); commit(); renderPanel(); } });
         pbody.addEventListener('input', e => { if (e.target.matches('[data-ly-gstop][type=range]')) e.target.nextElementSibling.textContent = e.target.value + ' %'; });
+        // ⇄ : le fond devient le contour et inversement (comme InDesign)
+        { const pk = dl.querySelector('[data-ly-fspick]'); pk.addEventListener('change', () => { const keep = fillTarget; fillTarget = pk.dataset.for || fillTarget; applyPaint(pk.value); fillTarget = keep === 'text' ? keep : fillTarget; syncChrome(); }); }
+        function swapPaint() {
+            const its = selected().filter(x => !locked(x)); if (!its.length) return msg('Choisis un objet pour intervertir son fond et son contour.');
+            its.forEach(it => { const f = it.fill || 'none', s0 = it.stroke?.c || 'none'; it.fill = s0; it.stroke = it.stroke || {}; it.stroke.c = swatch(D, f)?.type === 'grad' ? colorOf(D, f, 'none') : f; if (it.stroke.c !== 'none' && !(it.stroke.w > 0)) it.stroke.w = 1; });
+            commit(); render();
+        }
         function applyPaint(v) {
             if (fillTarget === 'text') { const c = colorOf(D, v, ''); if (!c || c === 'none') return; return applyChar({color: c}); }
             const its = selected().filter(x => !locked(x)); if (!its.length) return msg('Choisis un objet.');
@@ -1294,7 +1313,7 @@
                 if (d.builtin) return newDocWizard('design', reopen, {builtin: d.builtin});
                 if (d.editbuiltin) { const x = builtins().find(y => y.th.id === d.editbuiltin); return openEditor({id: 0, name: `Design ${x.th.name}`, doc: JSON.parse(JSON.stringify(x.doc)), isDesign: true, onSaved: reopen}); }
                 if (d.dup) { const r = await api('layout_doc', {id: Number(d.dup)}); await post('save_layout_doc', {name: `${r.name} (copie)`.slice(0, 160), is_design: r.is_design, doc: r.doc}); toast('Copie faite.'); return draw(); }
-                if (d.ren) { const r = await api('layout_doc', {id: Number(d.ren)}), n = prompt('Nouveau nom :', r.name); if (!n) return; await post('save_layout_doc', {id: r.id, name: n, is_design: r.is_design, doc: r.doc}); return draw(); }
+                if (d.ren) { const r = await api('layout_doc', {id: Number(d.ren)}), n = await ask('Nouveau nom :', r.name); if (!n) return; await post('save_layout_doc', {id: r.id, name: n, is_design: r.is_design, doc: r.doc}); return draw(); }
                 if (d.exp) { const r = await api('layout_doc', {id: Number(d.exp)}); return download(`${slug(r.name)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: r.name, is_design: r.is_design, doc: r.doc})], {type: 'application/json'})); }
                 if (d.del) { if (!confirm('Supprimer ce document ? (Exporte-le d’abord si tu veux le garder.)')) return; await post('delete_layout_doc', {id: Number(d.del)}); toast('Document supprimé.'); return draw(); }
             } catch (err) { toast(err.message, 'error'); }
@@ -1384,7 +1403,7 @@
                 if (d.lylOpen) { const r = await api('layout_doc', {id: Number(d.lylOpen)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: again}); }
                 if (d.lylUse) return newDocWizard('design', again, {designId: Number(d.lylUse)});
                 if (d.lylDup) { const r = await api('layout_doc', {id: Number(d.lylDup)}); await post('save_layout_doc', {name: `${r.name} (copie)`.slice(0, 160), is_design: r.is_design, doc: r.doc}); toast('Copie faite.'); return draw(); }
-                if (d.lylRen) { const r = await api('layout_doc', {id: Number(d.lylRen)}), n = prompt('Nouveau nom :', r.name); if (!n) return; await post('save_layout_doc', {id: r.id, name: n, is_design: r.is_design, doc: r.doc}); return draw(); }
+                if (d.lylRen) { const r = await api('layout_doc', {id: Number(d.lylRen)}), n = await ask('Nouveau nom :', r.name); if (!n) return; await post('save_layout_doc', {id: r.id, name: n, is_design: r.is_design, doc: r.doc}); return draw(); }
                 if (d.lylExp) { const r = await api('layout_doc', {id: Number(d.lylExp)}); return download(`${slug(r.name)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: r.name, is_design: r.is_design, doc: r.doc})], {type: 'application/json'})); }
                 if (d.lylDel) { if (!confirm('Supprimer ce document ? (Exporte-le d’abord si tu veux le garder.)')) return; await post('delete_layout_doc', {id: Number(d.lylDel)}); toast('Document supprimé.'); return draw(); }
             } catch (err) { toast(err.message, 'error'); }

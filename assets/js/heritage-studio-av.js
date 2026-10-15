@@ -1064,7 +1064,7 @@
                 P.tracks.splice(i, 1); if (sel && mine.some(c => c.id === sel.id)) sel = null; toast(`Piste « ${tr.name} » supprimée.`); return touch(1);
             }
         });
-        tl.addEventListener('dblclick', e => { const n = e.target.closest('[data-mt-tname]'); if (!n) return; const tr = P.tracks.find(t => t.id === n.dataset.mtTname); const name = (prompt('Nom de la piste :', tr.name) || '').trim().slice(0, 40); if (name) { tr.name = name; touch(0); } });
+        tl.addEventListener('dblclick', async e => { const n = e.target.closest('[data-mt-tname]'); if (!n) return; const tr = P.tracks.find(t => t.id === n.dataset.mtTname); const name = ((await window.LCNDA_APP.askText({message: 'Nom de la piste :', value: tr.name})) || '').trim().slice(0, 40); if (name) { tr.name = name; touch(0); } });
         // lecture
         const play = async () => { if (eng.playing) { eng.pause(); $('[data-mt-play]').textContent = '▶ Lire'; } else { await eng.play(); $('[data-mt-play]').textContent = '⏸ Pause'; } };
         $('[data-mt-play]').addEventListener('click', play);
@@ -1230,14 +1230,14 @@
             if (data.current && typeof data.current === 'object') { let name = cleanName(data.name) || 'Importé'; while (list.some(y => y.name === name)) name = `${name} (2)`.slice(0, 80); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.current)}); n++; }
             if (op.save(list.slice(-60))) { draw(); toast(`${n} ensemble(s) importé(s) : choisis-en un puis « Appliquer ».`); }
         }, {signal: ac.signal});
-        ws.addEventListener('click', e => {
+        ws.addEventListener('click', async e => {
             const li = e.target.closest('li');
             if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
             const bar = e.target.closest('[data-set]');
             if (bar) {
                 const op = setOps[bar.dataset.set], pick = () => op.list()[Number(bar.querySelector('[data-set-pick]')?.value)];
-                if (e.target.closest('[data-set-save]')) { const name = cleanName(prompt(bar.dataset.set === 'layout' ? 'Nom de cette disposition (ex. Grand écran) :' : 'Nom de ces boutons (ex. L’essentiel) :') || ''); if (!name) return; const list = op.list().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.now()}); if (op.save(list)) { draw(); toast(`Ensemble « ${name} » enregistré.`); } return; }
+                if (e.target.closest('[data-set-save]')) { const name = cleanName((await window.LCNDA_APP.askText({message: bar.dataset.set === 'layout' ? 'Nom de cette disposition (ex. Grand écran) :' : 'Nom de ces boutons (ex. L’essentiel) :'})) || ''); if (!name) return; const list = op.list().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.now()}); if (op.save(list)) { draw(); toast(`Ensemble « ${name} » enregistré.`); } return; }
                 if (e.target.closest('[data-set-apply]')) { const x = pick(); if (!x || !confirm(`Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`)) return; op.apply(x.v); draw(); toast(`Ensemble « ${x.name} » appliqué.`); return; }
                 if (e.target.closest('[data-set-del]')) { const x = pick(); if (!x || !confirm(`Supprimer l’ensemble « ${x.name} » ?`)) return; op.save(op.list().filter(y => y !== x && y.name !== x.name)); draw(); return; }
                 if (e.target.closest('[data-set-export]')) { const f = typeof op.file === 'function' ? op.file() : op.file; downloadJson(`${f}-${new Date().toISOString().slice(0, 10)}.json`, {type: op.type, version: 1, editor: bar.dataset.set === 'toolbar' ? which : undefined, name: bar.dataset.set === 'layout' ? 'Disposition exportée' : 'Boutons exportés', current: op.now(), sets: op.list()}); return; }

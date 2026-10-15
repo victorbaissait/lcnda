@@ -109,3 +109,17 @@
 .ly-resize:hover,.ly-resize:active{background:linear-gradient(90deg,transparent 3px,var(--ly-acc) 3px,var(--ly-acc) 5px,transparent 5px)}
 .ly-ptabs{grid-template-columns:repeat(auto-fit,minmax(48px,1fr))}
 .ly-ptabs button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+/* couleur libre du texte : grand carré, code, petits nuanciers */
+.ly-colorfree{display:grid;grid-template-columns:auto 44px minmax(70px,96px);gap:6px 8px;align-items:center;margin:6px 0}
+.ly-colorfree>span{font-size:12.5px;color:var(--ly-muted,#666)}
+.ly-colorfree input[type=color]{width:44px;height:30px;padding:2px;border:1px solid var(--ly-line,#ccc);border-radius:6px;background:transparent;cursor:pointer}
+.ly-colorfree input[type=text]{font:12px ui-monospace,Menlo,monospace;padding:5px 6px;min-width:0}
+.ly-swmini{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px}
+.ly-swmini button{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.25);padding:0;cursor:pointer}
+.ly-swmini button:hover{transform:scale(1.15)}
+/* fond / contour : intervertir, aucune couleur, choisir directement */
+.ly-fs{width:40px;height:44px}
+.ly-fs-swap,.ly-fs-none{border:0!important;background:transparent!important;width:14px!important;height:14px!important;font-size:12px;line-height:14px;color:var(--ly-text,#333);opacity:.75}
+.ly-fs-swap{right:0;top:0}.ly-fs-none{left:0;bottom:0}
+.ly-fs-swap:hover,.ly-fs-none:hover{opacity:1;color:var(--ly-acc)}
+.ly-fs input[data-ly-fspick]{position:absolute;left:0;top:0;width:20px;height:20px;opacity:0;pointer-events:none;border:0;padding:0}

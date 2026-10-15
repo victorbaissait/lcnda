@@ -453,10 +453,10 @@
         };
         draw();
         const download = (name, obj) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {type: 'application/json'})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
-        ws.addEventListener('click', e => {
+        ws.addEventListener('click', async e => {
             // une icône : on clique et on choisit (les animaux d'abord pour une espèce)
             const ic = e.target.closest('.h-pp-icon'); if (ic && ext.pickEmoji) { ext.pickEmoji(ic, null, {first: ic.matches('[data-sp-icon],[data-sp-newicon]') ? 'Animaux' : ''}); return; }
-            if (e.target.closest('[data-ps-save]')) { collect(); const name = (prompt('Nom de cet ensemble de réglages (ex. Élevage de chevaux) :') || '').trim().slice(0, 80); if (!name) return; const list = presets().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), prefs: JSON.parse(JSON.stringify(pr))}); savePresets(list); draw(); toast(`Ensemble « ${name} » enregistré.`); return; }
+            if (e.target.closest('[data-ps-save]')) { collect(); const name = ((await window.LCNDA_APP.askText({message: 'Nom de cet ensemble de réglages (ex. Élevage de chevaux) :'})) || '').trim().slice(0, 80); if (!name) return; const list = presets().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), prefs: JSON.parse(JSON.stringify(pr))}); savePresets(list); draw(); toast(`Ensemble « ${name} » enregistré.`); return; }
             if (e.target.closest('[data-ps-apply]')) { const x = presets()[Number(ws.querySelector('[data-ps-pick]').value)]; if (!x || !confirm(`Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`)) return; savePetPrefs(x.prefs); pr = petPrefs(); savePetPrefs(pr); scope = '*'; draw(); toast(`Ensemble « ${x.name} » appliqué.`); return; }
             if (e.target.closest('[data-ps-del]')) { const i = Number(ws.querySelector('[data-ps-pick]').value), x = presets()[i]; if (!x || !confirm(`Supprimer l’ensemble « ${x.name} » ?`)) return; savePresets(presets().filter((_, j) => j !== i)); draw(); return; }
             if (e.target.closest('[data-ps-export]')) { collect(); download(`reglages-animaux-${new Date().toISOString().slice(0, 10)}.json`, {type: 'lcnda-pet-prefs', version: 1, prefs: pr, presets: presets()}); return; }
