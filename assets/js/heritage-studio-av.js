@@ -28,10 +28,11 @@
     const audioCtx = () => (AC && AC.state !== 'closed') ? AC : (AC = new (window.AudioContext || window.webkitAudioContext)());
 
     /** Grande fenêtre de travail (fermée par ✕ ou Échap, avec une question s'il reste des changements). */
-    function bigDialog({eyebrow, title, body, onClose}) {
+    function bigDialog({eyebrow, title, body, onClose, id = ''}) {
         const dl = document.createElement('dialog');
         dl.className = 'modal h-modal h-modal-wide h-avx';
-        dl.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-avx-close aria-label="Fermer">×</button></div><div class="h-avx-body">${body}</div>`;
+        dl.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><span class="h-avx-headbtns">${id && ext.fullButton ? ext.fullButton(id) : ''}<button type="button" class="icon-button" data-avx-close aria-label="Fermer">×</button></span></div><div class="h-avx-body">${body}</div>`;
+        if (id) ext.fullInit?.(dl, id);
         document.body.appendChild(dl);
         const close = () => { if (onClose?.() === false) return; dl.close(); };
         dl.querySelector('[data-avx-close]').addEventListener('click', close);
@@ -317,7 +318,7 @@
             ['denoise', '🧹 Réduire le souffle', 'any'], ['clarity', '🗣️ Voix plus nette', 'any'], ['hum', '〰️ Enlever le bourdonnement', 'any'], ['silences', '⏩ Raccourcir les longs blancs', 'all'], ['mono', '🎧 Mono', 'all'],
             ['insert', '➕ Ajouter un son…', 'all'],
         ];
-        const dl = bigDialog({eyebrow: 'MODIFIER LE SON', title: media.title || media.filename, onClose: () => { stop(); return !dirty || confirm('Fermer sans enregistrer les modifications ?'); },
+        const dl = bigDialog({eyebrow: 'MODIFIER LE SON', id: 'audio', title: media.title || media.filename, onClose: () => { stop(); return !dirty || confirm('Fermer sans enregistrer les modifications ?'); },
             body: `<div class="h-avx-top"><span class="h-avx-time"><b data-avx-cur>0:00.0</b> / <span data-avx-total></span></span><span class="h-avx-sel muted" data-avx-seltxt></span>
                     <span class="h-avx-zoom" data-tbg="au-zoom" data-tbg-label="Zoom"><button type="button" class="button small secondary" data-avx-zoom="fit" title="Tout voir">⤢ Tout</button><button type="button" class="button small secondary" data-avx-zoom="sel" title="Zoomer sur la sélection">🔍 Sélection</button><button type="button" class="button small secondary" data-avx-zoom="out">−</button><button type="button" class="button small secondary" data-avx-zoom="in">+</button></span></div>
                 <div class="h-avx-wave"><canvas data-avx-canvas></canvas></div>
@@ -524,6 +525,19 @@
     const LOOK0 = {bright: 1, contrast: 1, sat: 1, hue: 0, warm: 0};
     const FONTS_V = [['Georgia, serif', 'Georgia'], ['Helvetica, Arial, sans-serif', 'Helvetica'], ['"Times New Roman", serif', 'Times'], ['"Courier New", monospace', 'Courier'], ['"Brush Script MT", cursive', 'Manuscrite'], ['Impact, sans-serif', 'Impact']];
     let uid = 0; const nid = p => p + (++uid) + Date.now().toString(36).slice(-3);
+    /* Réglages du montage (Maintenance → Montage, retouche et son) : disposition et enregistrement par défaut */
+    const MT_KEY = 'genealogie-montage-prefs';
+    const MT_SIZES = [[0, 'Comme la vidéo'], [2160, '4K (2160 p)'], [1080, 'Full HD (1080 p)'], [720, 'HD (720 p)'], [480, '480 p'], [360, '360 p (léger)']];
+    const MT_QUALITY = [[2, 'Légère (petit fichier)'], [5, 'Normale'], [8, 'Haute'], [14, 'Très haute (gros fichier)']];
+    const MT_FPS = [24, 25, 30, 50, 60];
+    const MT_DEF = {side: 'right', stage: 50, lane: 40, help: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128};
+    function montagePrefs() {
+        let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {}
+        const pick = (x, list, d) => list.includes(x) ? x : d, num = (x, a, b, d) => Number.isFinite(Number(x)) ? Math.min(b, Math.max(a, Number(x))) : d;
+        return {side: pick(v.side, ['right', 'left'], 'right'), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), help: v.help !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
+            height: pick(Number(v.height), MT_SIZES.map(x => x[0]), 0), quality: pick(Number(v.quality), MT_QUALITY.map(x => x[0]), 5), fps: pick(Number(v.fps), MT_FPS, 30), abr: pick(Number(v.abr), [96, 128, 192, 256], 128)};
+    }
+    ext.montagePrefs = montagePrefs; ext.montagePrefsDefaults = {MT_KEY, MT_SIZES, MT_QUALITY, MT_FPS, MT_DEF};
 
     function montageModel(sources) {
         return {sources, v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0}};
@@ -638,6 +652,7 @@
                 if (c.border !== false) { g.save(); g.globalAlpha = Math.max(0, a); g.strokeStyle = '#fff'; g.lineWidth = Math.max(2, W / 400); g.strokeRect(x0, y0, w, h); g.restore(); }
             });
             P.texts.filter(x => tt >= x.at && tt < x.at + x.dur).forEach(x => drawText(x, tt));
+            if (out === 'preview' && api.decorate) { g.save(); api.decorate(g, W, H, tt); g.restore(); } // cadre de l'élément choisi (aperçu seulement)
         }
         const loop = () => {
             if (!playing) return;
@@ -654,6 +669,8 @@
             async play() { if (playing) return; if (ctx.state === 'suspended') await ctx.resume(); if (t >= montageEnd(P) - 0.05) t = 0; sync(t, true); await ready(); await seeked(); playing = true; t0 = t; p0 = performance.now(); sync(t); raf = requestAnimationFrame(loop); },
             pause() { playing = false; cancelAnimationFrame(raf); els.forEach(e => e.el.pause()); },
             redraw() { paint(t); },
+            decorate: null,
+            videoSize(id) { const e = els.get(id); return e?.el.videoWidth ? {vw: e.el.videoWidth, vh: e.el.videoHeight} : null; },
             async refresh() { sync(t); await ready(); paint(t); },
             destroy() { api.pause(); els.forEach(e => { e.el.removeAttribute('src'); try { e.el.load(); } catch (_) {} }); els.clear(); if (out === 'record') ctx.close(); else { try { master.disconnect(); outGain.disconnect(); } catch (_) {} } },
         };
@@ -661,15 +678,19 @@
     }
 
     /** Enregistre le montage (en temps réel) : l'image du moteur et son mélange de sons. */
-    async function recordMontage(P, mime, onStep) {
+    async function recordMontage(P, mime, onStep, {height = 0, quality = 5, fps = 30, abr = 128} = {}) {
         const first = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s] || {w: 1280, h: 720}, turn = P.fx.rotate % 180 !== 0;
-        const W0 = first.w || 1280, H0 = first.h || 720, sc = Math.min(1, 1920 / Math.max(W0, H0));
-        const cv = document.createElement('canvas'); cv.width = Math.round((turn ? H0 : W0) * sc) & ~1; cv.height = Math.round((turn ? W0 : H0) * sc) & ~1;
+        const W0 = first.w || 1280, H0 = first.h || 720, Wn = turn ? H0 : W0, Hn = turn ? W0 : H0;
+        // taille choisie (hauteur en lignes : 1080 p, 720 p…) ou celle de la vidéo (2 000 px au plus)
+        const sc = height ? height / Hn : Math.min(1, 2000 / Math.max(Wn, Hn));
+        const cv = document.createElement('canvas'); cv.width = Math.max(2, Math.round(Wn * sc) & ~1); cv.height = Math.max(2, Math.round(Hn * sc) & ~1);
         const T = montageEnd(P);
         let finished; const done = new Promise(r => { finished = r; });
         const eng = montageEngine(P, cv, {out: 'record', onTime: (t, end) => { onStep?.(t / T); if (end) finished(); }});
-        const stream = new MediaStream([...cv.captureStream(30).getVideoTracks(), ...eng.stream.getAudioTracks()]);
-        const rec = new MediaRecorder(stream, {mimeType: mime, videoBitsPerSecond: Math.min(8e6, Math.max(2.5e6, cv.width * cv.height * 4)), audioBitsPerSecond: 128000});
+        const stream = new MediaStream([...cv.captureStream(fps).getVideoTracks(), ...eng.stream.getAudioTracks()]);
+        // qualité : en Mb/s pour une image Full HD, ajustée à la taille choisie
+        const vbr = Math.round(quality * 1e6 * Math.max(0.2, cv.width * cv.height / (1920 * 1080)));
+        const rec = new MediaRecorder(stream, {mimeType: mime, videoBitsPerSecond: vbr, audioBitsPerSecond: abr * 1000});
         const chunks = []; rec.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
         await eng.seek(0);
         rec.start(1000); await eng.play();
@@ -689,7 +710,8 @@
         if (sources.length) P.v1.push({id: nid('v'), s: 0, from: 0, to: sources[0].dur, tr: {type: 'none', d: 1}, look: {}, vol: 1});
         let sel = P.v1[0] ? {track: 'v1', id: P.v1[0].id} : null, dirty = false, pxs = 40; // pixels par seconde sur la frise
         const ver = await versionsHtml(media);
-        const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', title: media.title || media.filename || 'Nouveau montage', onClose: () => { eng?.pause(); return !dirty || confirm('Fermer sans enregistrer le montage ?'); },
+        const MP = montagePrefs();
+        const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', id: 'video', title: media.title || media.filename || 'Nouveau montage', onClose: () => { eng?.pause(); return !dirty || confirm('Fermer sans enregistrer le montage ?'); },
             body: `<div class="h-mt">
                 <div class="h-mt-top">
                     <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Ajoute une vidéo avec « ➕ Vidéo à la suite ».</p></div>
@@ -701,8 +723,8 @@
                         <div data-mt-pane="film" hidden></div>
                     </aside>
                 </div>
-                <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play>▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
-                    <label class="h-mt-zoomr">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label>${ext.tbButton ? ext.tbButton('video') : ''}</div>
+                <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play>▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time" data-tb-label="Temps (où on en est / durée)"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
+                    <label class="h-mt-zoomr" data-tb-label="Zoom de la frise">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label>${ext.tbButton ? ext.tbButton('video') : ''}</div>
                 <div class="h-mt-ops" data-tbg="mt-ops" data-tbg-label="Outils du montage">
                     <button type="button" class="button small secondary" data-mt-op="split" title="Coupe le morceau choisi à la tête de lecture">✂️ Couper ici</button>
                     <button type="button" class="button small secondary" data-mt-op="start" title="Le morceau choisi commence à la tête de lecture">⟦ Commence ici</button>
@@ -720,14 +742,15 @@
                 <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse les incrustations, les textes et les sons pour les déplacer dans le temps. Espace = lire / pause.</p>
                 ${ver.html}
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div></div>`});
-        dl.classList.add('h-avx-montage');
+        dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
+        dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px');
         const $ = s => dl.querySelector(s), cv = $('[data-mt-canvas]');
         if (media.id) bindVersions(dl, media, 'video', () => { dirty = false; dl.close(); onDone?.(); });
         $('[data-avx-cancel]').addEventListener('click', () => dl.querySelector('[data-avx-close]').click());
         const sizeFor = () => { const so = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s]; const turn = P.fx.rotate % 180 !== 0; const w = so?.w || 1280, h = so?.h || 720, k = Math.min(1, 1280 / Math.max(w, h)); return [Math.round((turn ? h : w) * k), Math.round((turn ? w : h) * k)]; };
         const fitCanvas = () => { [cv.width, cv.height] = sizeFor(); }; // l'image prend le format de la première vidéo
         let eng = null;
-        const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); await eng.seek(t); };
+        const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); eng.decorate = decorate; await eng.seek(t); };
         // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
         const touch = async (lvl = 1, pane = true) => { dirty = true; const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) lvl = 2; if (lvl === 2) { await rebuild(); drawTl(pane); return; } drawTl(pane); if (lvl === 1) eng?.seek(eng.t); else eng?.refresh(); };
         const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + 90) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; };
@@ -740,12 +763,13 @@
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
             const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${90 + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
             const audioLane = n => lane('a' + n, `🎵 Son ${n}`, P.audio.filter(a => (a.track || 1) === n).map(a => block('audio', a, a.at, a.to - a.from, (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join(''));
-            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px"><div class="h-mt-ruler" data-mt-ruler>${ruler}</div>
+            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px"><div class="h-mt-ruler" data-mt-ruler>${ruler}</div><div data-tbg="mt-lanes" data-tbg-label="Pistes de la frise">
                 ${lane('v2', '🖼️ Vidéo 2', P.v2.map(c => block('v2', c, c.at, c.to - c.from, P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join(''))}
                 ${lane('v1', '🎬 Vidéo 1', L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join(''))}
                 ${lane('t', '🔤 Textes', P.texts.map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join(''))}
-                ${audioLane(1)}${audioLane(2)}
+                ${audioLane(1)}${audioLane(2)}</div>
                 <i class="h-mt-ph" data-mt-ph style="left:${90 + (eng?.t || 0) * pxs}px"></i></div>`;
+            ext.tbApply?.(dl, 'video'); // pistes rangées ou cachées à sa façon
             $('[data-mt-total]').textContent = fmt(T);
             $('[data-mt-empty]').hidden = P.v1.length > 0;
             if (pane) drawPane();
@@ -802,6 +826,43 @@
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
             const rot = e.target.closest('[data-mt-rot]'); if (rot) { P.fx.rotate = (P.fx.rotate + Number(rot.dataset.mtRot) + 360) % 360; touch(2); }
         });
+        // sur l'image : glisser une incrustation ou un texte pour le déplacer, tirer son coin pour changer sa taille
+        const measure = document.createElement('canvas').getContext('2d');
+        const boxOf = (track, c) => {
+            const W = cv.width, H = cv.height, t = eng?.t || 0;
+            if (track === 'v2') { if (t < c.at || t >= c.at + c.to - c.from) return null; const s = eng.videoSize(c.id) || {vw: 16, vh: 9}, w = (c.w || 35) / 100 * W; return {x: (c.x ?? 62) / 100 * W, y: (c.y ?? 6) / 100 * H, w, h: w * s.vh / s.vw}; }
+            if (track === 'texts') { if (t < c.at || t >= c.at + c.dur) return null; const size = (c.size || 6) / 100 * H, lines = String(c.text || ' ').split('\n'); measure.font = `${c.bold ? '700 ' : ''}${size}px ${c.font || 'Georgia, serif'}`;
+                const w = Math.max(...lines.map(l => measure.measureText(l).width)) + size, h = lines.length * size * 1.25 + size * 0.3, cx = (c.x ?? 50) / 100 * W, cy = (c.y ?? 80) / 100 * H;
+                return {x: c.align === 'left' ? cx - size / 2 : c.align === 'right' ? cx - w + size / 2 : cx - w / 2, y: cy - h / 2, w, h}; }
+            return null;
+        };
+        const HANDLE = () => Math.max(10, cv.width / 60);
+        const decorate = (g2) => {
+            const c = selected(); if (!c || !['v2', 'texts'].includes(sel.track)) return; const b = boxOf(sel.track, c); if (!b) return;
+            const hs = HANDLE(); g2.lineWidth = Math.max(2, cv.width / 500); g2.setLineDash([8, 6]); g2.strokeStyle = '#2f80ff'; g2.strokeRect(b.x, b.y, b.w, b.h);
+            g2.setLineDash([]); g2.fillStyle = '#fff'; g2.fillRect(b.x + b.w - hs / 2, b.y + b.h - hs / 2, hs, hs); g2.strokeRect(b.x + b.w - hs / 2, b.y + b.h - hs / 2, hs, hs);
+        };
+        cv.addEventListener('pointerdown', e => {
+            if (!eng) return; const r = cv.getBoundingClientRect(), k = cv.width / r.width, px = (e.clientX - r.left) * k, py = (e.clientY - r.top) * k;
+            const inside = (b, pad = 0) => b && px >= b.x - pad && px <= b.x + b.w + pad && py >= b.y - pad && py <= b.y + b.h + pad;
+            const cands = [...(sel && ['v2', 'texts'].includes(sel.track) && selected() ? [[sel.track, selected()]] : []), ...P.texts.slice().reverse().map(x => ['texts', x]), ...P.v2.slice().reverse().map(x => ['v2', x])];
+            const hit = cands.find(([tr, c]) => inside(boxOf(tr, c), HANDLE() / 2)); if (!hit) return;
+            e.preventDefault(); cv.setPointerCapture(e.pointerId);
+            const [track, c] = hit, b0 = boxOf(track, c), hs = HANDLE(), resize = px >= b0.x + b0.w - hs && py >= b0.y + b0.h - hs;
+            sel = {track, id: c.id}; drawTl(); eng.redraw();
+            const s0 = {x: c.x, y: c.y, w: c.w, size: c.size};
+            const mv = ev => {
+                const dx = ((ev.clientX - r.left) * k - px), dy = ((ev.clientY - r.top) * k - py);
+                if (resize) { if (track === 'v2') c.w = Math.max(8, Math.min(100, Math.round(((s0.w || 35) / 100 * cv.width + dx) / cv.width * 1000) / 10)); else c.size = Math.max(1.5, Math.min(30, Math.round(((s0.size || 6) * (1 + dy / Math.max(20, b0.h))) * 10) / 10)); }
+                else { c.x = Math.max(-20, Math.min(110, Math.round(((s0.x ?? (track === 'v2' ? 62 : 50)) + dx / cv.width * 100) * 10) / 10)); c.y = Math.max(-20, Math.min(110, Math.round(((s0.y ?? (track === 'v2' ? 6 : 80)) + dy / cv.height * 100) * 10) / 10)); }
+                dirty = true; eng.redraw();
+            };
+            const up = () => { cv.removeEventListener('pointermove', mv); cv.removeEventListener('pointerup', up); cv.removeEventListener('pointercancel', up); touch(0); };
+            cv.addEventListener('pointermove', mv); cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+        });
+        cv.addEventListener('pointermove', e => { if (e.buttons || !eng) return; const r = cv.getBoundingClientRect(), k = cv.width / r.width, px = (e.clientX - r.left) * k, py = (e.clientY - r.top) * k, c = selected();
+            const b = c && ['v2', 'texts'].includes(sel?.track) ? boxOf(sel.track, c) : null, hs = HANDLE();
+            cv.style.cursor = b && px >= b.x + b.w - hs && px <= b.x + b.w + hs && py >= b.y + b.h - hs && py <= b.y + b.h + hs ? 'nwse-resize' : [...P.texts.map(x => ['texts', x]), ...P.v2.map(x => ['v2', x])].some(([tr, x]) => { const bb = boxOf(tr, x); return bb && px >= bb.x && px <= bb.x + bb.w && py >= bb.y && py <= bb.y + bb.h; }) ? 'move' : ''; });
         // frise : choisir, se placer, déplacer
         const tl = $('[data-mt-tl]');
         tl.addEventListener('pointerdown', e => {
@@ -848,16 +909,22 @@
         $('[data-avx-save]').addEventListener('click', () => {
             eng.pause();
             if (!P.v1.length && !P.v2.length) return toast('Le montage est vide : ajoute une vidéo.', 'error');
-            const types = recordTypes(); if (!types.length) return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
-            const T = montageEnd(P);
+            const MP2 = montagePrefs(), types = recordTypes().sort((a, b) => (b[1] === MP2.fmt) - (a[1] === MP2.fmt)); if (!types.length) return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
+            const T = montageEnd(P), [sw, sh] = sizeFor();
+            const sel2 = (name, list, v) => `<select name="${name}">${list.map(([k, l]) => `<option value="${k}" ${Number(k) === Number(v) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+            const exportHtml = `<fieldset class="h-rc-modes"><legend>Image et son</legend><div class="form-grid">
+                <label>Taille ${sel2('height', MT_SIZES.map(([k, l]) => [k, k ? l : `${l} (${(P.sources[P.v1[0]?.s]?.w || sw)} × ${(P.sources[P.v1[0]?.s]?.h || sh)})`]), MP2.height)}</label>
+                <label>Qualité ${sel2('quality', MT_QUALITY, MP2.quality)}</label><label>Images par seconde ${sel2('fps', MT_FPS.map(f => [f, f + ' images/s']), MP2.fps)}</label>
+                <label>Son ${sel2('abr', [[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], MP2.abr)}</label></div>
+                <p class="muted">Réglages de départ : Maintenance → Montage, retouche et son.</p></fieldset>`;
             ext.openDialog({eyebrow: 'ENREGISTRER LA VIDÉO', title: media.title || 'Montage', wide: true, submitLabel: 'Enregistrer',
-                body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))),
+                body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
                 onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
                 onSubmit: async form => {
                     const f = Object.fromEntries(new FormData(form)), prog = form.querySelector('[data-avx-progress]'), type = types.find(x => x[0] === f.fmt) || types[0];
                     eng.destroy(); eng = null;
                     try {
-                        const blob = await recordMontage(P, type[0], p => { prog.textContent = `Enregistrement… ${Math.round(p * 100)} %`; });
+                        const blob = await recordMontage(P, type[0], p => { prog.textContent = `Enregistrement… ${Math.round(p * 100)} %`; }, {height: Number(f.height) || 0, quality: Number(f.quality) || 5, fps: Number(f.fps) || 30, abr: Number(f.abr) || 128});
                         prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
                         await uploadResult(media, blob, type[1], {mode: f.mode === 'new' ? 'new' : f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: T, note: f.note, title: f.title});
                     } catch (err) { await rebuild(); throw err; }
@@ -874,6 +941,61 @@
     }
 
     /** Point d'entrée : un média {id, filename, title, media_type}. */
+    /* ═════════ Maintenance → Montage, retouche et son : disposition, enregistrement, boutons, plein écran ═════════ */
+    ext.maintenance = ext.maintenance || {};
+    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son']];
+    ext.maintenance.montage_prefs = async token => {
+        const st = S(), ws = A().$('#workspace');
+        const lsJson = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
+        let which = st.montagePrefsEditor || 'video';
+        ext.maintenance.montage_prefs.ac?.abort(); const ac = ext.maintenance.montage_prefs.ac = new AbortController();
+        const draw = () => {
+            if (token !== st.workspaceToken) return;
+            const p = montagePrefs(), full = lsJson('genealogie-editor-full', {}), defs = (ext.tbDefs?.() || {})[which], cfg = lsJson('genealogie-toolbars', {})[which] || {};
+            const opt = (list, v) => list.map(([k, l]) => `<option value="${k}" ${String(k) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('');
+            const groups = (defs?.groups || []).map(g => { const order = cfg.order?.[g.key] || [], hidden = cfg.hidden?.[g.key] || []; const items = [...order.map(k => g.items.find(i => i[0] === k)).filter(Boolean), ...g.items.filter(i => !order.includes(i[0]))];
+                return `<section><h4>${esc(g.label)}</h4><ol class="h-pet-layout" data-g="${esc(g.key)}">${items.map(([k, l]) => `<li class="h-pet-lrow" data-k="${esc(k)}"><input type="checkbox" ${hidden.includes(k) ? '' : 'checked'} title="Montrer"><span>${esc(l)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol></section>`; }).join('');
+            ws.innerHTML = `<section class="page h-mtp"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>Montage, retouche et son</h2><p>La disposition du montage vidéo, l’enregistrement des vidéos par défaut, les boutons et options de chaque éditeur (montrés, cachés, rangés) et le plein écran.</p></div>
+                <div class="page-actions"><button type="button" class="button" data-mtp-save>Enregistrer</button></div></header>
+                <div class="h-mtp-cols">
+                <section class="maintenance-panel"><h3>🎬 Disposition du montage</h3>
+                    <label class="h-avx-row">Panneau des réglages <select data-mtp="side">${opt([['right', 'à droite de l’image'], ['left', 'à gauche de l’image']], p.side)}</select></label>
+                    <label class="h-avx-row">Hauteur de l’image <input type="range" min="25" max="80" value="${p.stage}" data-mtp="stage"><output>${p.stage} %</output></label>
+                    <label class="h-avx-row">Hauteur des pistes <input type="range" min="28" max="70" value="${p.lane}" data-mtp="lane"><output>${p.lane} px</output></label>
+                    <label class="checkbox-line"><input type="checkbox" data-mtp="help" ${p.help ? 'checked' : ''}> montrer l’aide sous la frise</label>
+                    <h3>📤 Enregistrement des vidéos (par défaut)</h3>
+                    <label class="h-avx-row">Format <select data-mtp="fmt">${opt([['mp4', 'MP4 (H.264) — lu partout'], ['webm', 'WebM — léger']], p.fmt)}</select></label>
+                    <label class="h-avx-row">Taille <select data-mtp="height">${opt(MT_SIZES, p.height)}</select></label>
+                    <label class="h-avx-row">Qualité <select data-mtp="quality">${opt(MT_QUALITY, p.quality)}</select></label>
+                    <label class="h-avx-row">Images par seconde <select data-mtp="fps">${opt(MT_FPS.map(f => [f, f + ' images/s']), p.fps)}</select></label>
+                    <label class="h-avx-row">Son <select data-mtp="abr">${opt([[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], p.abr)}</select></label>
+                    <p class="muted">On peut toujours les changer au moment d’enregistrer. MP4 seulement si l’ordinateur sait le faire, sinon WebM.</p>
+                    <h3>⛶ Plein écran à l’ouverture</h3>${EDITORS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-mtp-full="${k}" ${full[k] ? 'checked' : ''}> ${esc(l)}</label>`).join('')}
+                </section>
+                <section class="maintenance-panel"><h3>🧰 Boutons et options</h3>
+                    <label class="h-avx-row">Éditeur <select data-mtp-which>${opt(EDITORS, which)}</select></label>
+                    <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ».</p>
+                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
+                </section></div></section>`;
+        };
+        draw();
+        ws.addEventListener('input', e => { const el = e.target.closest('[data-mtp]'); if (el?.type === 'range') el.nextElementSibling.textContent = el.value + (el.dataset.mtp === 'stage' ? ' %' : ' px'); }, {signal: ac.signal});
+        ws.addEventListener('change', e => { if (e.target.matches('[data-mtp-which]')) { which = st.montagePrefsEditor = e.target.value; draw(); } }, {signal: ac.signal});
+        ws.addEventListener('click', e => {
+            const li = e.target.closest('li');
+            if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
+            if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
+            if (e.target.closest('[data-mtp-reset]')) { const all = lsJson('genealogie-toolbars', {}); delete all[which]; try { localStorage.setItem('genealogie-toolbars', JSON.stringify(all)); } catch (_) {} toast('Boutons remis comme au départ.'); draw(); }
+            if (e.target.closest('[data-mtp-save]')) {
+                const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.type === 'checkbox' ? el.checked : el.value; });
+                try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {}
+                const full = lsJson('genealogie-editor-full', {}); ws.querySelectorAll('[data-mtp-full]').forEach(el => { full[el.dataset.mtpFull] = el.checked; }); try { localStorage.setItem('genealogie-editor-full', JSON.stringify(full)); } catch (_) {}
+                const box = ws.querySelector('[data-mtp-groups]');
+                if (box) { const all = lsJson('genealogie-toolbars', {}), cfg = {order: {}, hidden: {}}; box.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; cfg.order[ol.dataset.g] = lis.map(l => l.dataset.k); cfg.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); all[which] = cfg; try { localStorage.setItem('genealogie-toolbars', JSON.stringify(all)); } catch (_) {} }
+                toast('Réglages du montage, de la retouche et du son enregistrés.'); draw();
+            }
+        }, {signal: ac.signal});
+    };
     // Listes → Vidéos / Audios → « 🎬 Montage » : un montage fait de zéro, enregistré comme un nouveau média
     ext.openMontage = async (kind, onDone) => {
         if (kind === 'video') return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add');

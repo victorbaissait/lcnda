@@ -1157,6 +1157,24 @@ select[data-h-village-bgsel]{max-width:220px}
 :root[data-theme="dark"] .h-rc-cover, :root[data-theme="dark"] .h-rc-thumb { background:#333; }
 /* ✂️ Atelier son et vidéo (heritage-studio-av.js) */
 .is-tb-off { display:none !important; }
+/* plein écran des éditeurs (⛶) */
+dialog.modal.is-full { width:100vw !important; height:100vh !important; max-width:none !important; max-height:none !important; margin:0; inset:0; border:0; box-shadow:none; }
+.h-avx-headbtns { display:flex; gap:6px; align-items:center; }
+.h-avx .modal-head { display:flex; justify-content:space-between; align-items:flex-start; }
+/* montage : disposition réglable */
+.h-avx-montage .h-mt-stage { height:var(--mt-stage, 50vh); }
+.h-avx-montage .h-mt-side { max-height:var(--mt-stage, 50vh); }
+.h-avx-montage.is-full .h-mt-stage, .h-avx-montage.is-full .h-mt-side { height:calc(var(--mt-stage, 50vh) + 6vh); max-height:calc(var(--mt-stage, 50vh) + 6vh); }
+.h-avx-montage.mt-left .h-mt-top { grid-template-columns:340px minmax(0, 1fr); }
+.h-avx-montage.mt-left .h-mt-side { order:-1; }
+.h-avx-montage.mt-nohelp .h-avx-help { display:none; }
+.h-avx-montage .h-mt-lane { height:var(--mt-lane, 40px); }
+.h-avx-montage .h-mt-clip { height:calc(var(--mt-lane, 40px) - 10px); }
+.h-mt-stage canvas { touch-action:none; }
+.h-mtp-cols { display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 1.2fr); gap:16px; align-items:start; }
+@media (max-width: 900px) { .h-mtp-cols { grid-template-columns:1fr; } }
+.h-mtp .maintenance-panel h3 { margin-top:14px; }
+.h-mtp .h-avx-row select { flex:1; }
 .h-tbcfg { width:min(640px, 94vw); }
 .h-tbcfg-body { padding:12px 20px; max-height:70vh; overflow:auto; }
 .h-tbcfg-body h4 { margin:12px 0 4px; }

@@ -260,9 +260,22 @@
         let a = attr(el); if (!a) for (const d of el.querySelectorAll('*')) { a = attr(d); if (a) break; }
         return a ? `${a.name.slice(5)}=${a.value}` : `${el.tagName.toLowerCase()}:${(el.textContent || '').trim().slice(0, 24)}`;
     }
-    const tbLabel = el => el.dataset.tbLabel || (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60) || el.title || el.getAttribute('aria-label') || '(sans nom)';
+    const tbLabel = el => { if (el.dataset.tbLabel) return el.dataset.tbLabel; const tx = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60), ti = el.title || el.getAttribute('aria-label') || el.querySelector('[title]')?.title || ''; return tx.length <= 3 && ti ? `${tx} ${ti}`.trim() : tx || ti || '(sans nom)'; };
     const tbKids = g => [...g.children].filter(c => !tbSkip(c));
+    const TB_DEFS = 'genealogie-toolbar-defs'; // les boutons de chaque éditeur, notés à son ouverture (pour Maintenance → Montage, retouche et son)
+    const tbDefs = () => { try { const v = JSON.parse(localStorage.getItem(TB_DEFS) || '{}'); return v && typeof v === 'object' ? v : {}; } catch (_) { return {}; } };
+    ext.tbDefs = tbDefs;
+    function tbRemember(root, id) {
+        const groups = [...root.querySelectorAll('[data-tbg]')].map(g => ({key: g.dataset.tbg, label: g.dataset.tbgLabel || g.dataset.tbg, items: tbKids(g).map(el => [tbKeyOf(el), tbLabel(el)])})).filter(g => g.items.length);
+        const all = tbDefs(), old = all[id]?.groups || [];
+        // on garde l'ordre de départ déjà noté ; les nouvelles rangées et les nouveaux boutons s'ajoutent
+        const merged = groups.map(g => { const o = old.find(x => x.key === g.key); if (!o) return g; const keys = o.items.map(i => i[0]); return {...g, items: [...o.items.filter(i => g.items.some(n => n[0] === i[0])).map(i => g.items.find(n => n[0] === i[0])), ...g.items.filter(n => !keys.includes(n[0]))]}; });
+        const keep = old.filter(o => !merged.some(g => g.key === o.key));
+        const next = {groups: [...merged, ...keep]};
+        if (JSON.stringify(all[id]) !== JSON.stringify(next)) { all[id] = next; try { localStorage.setItem(TB_DEFS, JSON.stringify(all)); } catch (_) {} }
+    }
     ext.tbApply = (root, id) => {
+        tbRemember(root, id);
         const cfg = tbAll()[id] || {};
         root.querySelectorAll('[data-tbg]').forEach(g => {
             const k = g.dataset.tbg, kids = tbKids(g), order = cfg.order?.[k] || [], hidden = cfg.hidden?.[k] || [];
@@ -272,6 +285,19 @@
             kids.forEach(el => el.classList.toggle('is-tb-off', hidden.includes(tbKeyOf(el))));
         });
     };
+    /* Plein écran d'un éditeur (comme les tableaux) : ⛶, gardé pour la prochaine fois */
+    const FULL_KEY = 'genealogie-editor-full';
+    const fullAll = () => { try { return JSON.parse(localStorage.getItem(FULL_KEY) || '{}') || {}; } catch (_) { return {}; } };
+    ext.fullButton = id => `<button type="button" class="icon-button h-full-btn" data-full-toggle="${esc(id)}" title="Plein écran (⛶)" aria-label="Plein écran">⛶</button>`;
+    ext.fullInit = (dlg, id) => { if (fullAll()[id]) dlg.classList.add('is-full'); };
+    document.addEventListener('click', e => {
+        const b = e.target.closest?.('[data-full-toggle]'); if (!b) return;
+        const dlg = b.closest('dialog'); if (!dlg) return;
+        const on = dlg.classList.toggle('is-full'), all = fullAll(); all[b.dataset.fullToggle] = on;
+        try { localStorage.setItem(FULL_KEY, JSON.stringify(all)); } catch (_) {}
+        b.title = on ? 'Quitter le plein écran' : 'Plein écran (⛶)';
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 30); // les images et les ondes se redessinent à la nouvelle taille
+    });
     ext.tbButton = id => `<button type="button" class="button small secondary" data-tb-config="${esc(id)}" title="Ranger, montrer ou cacher les boutons et les options">⚙️ Personnaliser</button>`;
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-tb-config]'); if (!b) return;
@@ -490,7 +516,7 @@
         const histPath = 'M0,256 ' + hist.map((h, x) => `L${x},${256 - Math.min(256, h / hmax * 230)}`).join(' ') + ' L255,256 Z';
         const TOOLS = [['adjust', '🎚', 'Réglages'], ['heal', '🩹', 'Correcteur de taches'], ['clone', '🧬', 'Tampon'], ['brush', '🖌', 'Pinceau'], ['text', '🔤', 'Texte'], ['hand', '✋', 'Déplacer la vue']];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2';
-        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><span class="spacer"></span>${ext.tbButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><span class="spacer"></span>${ext.tbButton('retouch')}${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}">${i} ${esc(l)}</button>`).join('')}</span>
                 <span class="h-rt-hist-btns"><button type="button" class="button small secondary" data-rt-undo disabled title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-rt-redo disabled title="Rétablir (⇧⌘Z)">↷</button></span>
@@ -532,6 +558,7 @@
             <p class="muted h-rt-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
         ext.tbApply(dlg, 'retouch'); // boutons rangés à sa façon (⚙️ Personnaliser)
+        ext.fullInit(dlg, 'retouch');
         const $ = q => dlg.querySelector(q), $$ = q => [...dlg.querySelectorAll(q)];
         const canvas = $('[data-rt-canvas]'), ctx = canvas.getContext('2d'), out = ctx.createImageData(pw, ph);
         const stage = $('[data-rt-stage]'), wrap = $('[data-rt-wrap]');
