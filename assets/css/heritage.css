@@ -2438,3 +2438,5 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-bk-mine{position:relative;display:inline-flex}
 .h-bk-mydel{position:absolute;top:-6px;right:-6px;border:0;border-radius:50%;width:20px;height:20px;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer;line-height:1}
 .h-bk-width{font-size:12px;padding:2px 4px;margin-left:auto}
+.block-editor-off{position:relative;opacity:.42;filter:grayscale(1);pointer-events:none;user-select:none}
+.block-editor-off .block-editor-offnote{position:sticky;top:0;z-index:2;margin:0 0 8px;padding:8px 10px;background:#fff;border:1px dashed #888;font-size:13px;font-weight:600;color:#333}
