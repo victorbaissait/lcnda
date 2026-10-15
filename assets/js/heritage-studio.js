@@ -182,9 +182,10 @@
     const saveAllProfiles = list => { try { localStorage.setItem(ALL_PROFILES_KEY, JSON.stringify(list)); return true; } catch (_) { toast('Trop de réglages enregistrés pour la place disponible : supprimes-en un.', 'error'); return false; } };
     const allSummary = s => { const n = Object.keys(s).length; return `${n} réglage${n > 1 ? 's' : ''}`; };
     /** Remet un ensemble : ses réglages remplacent tous les réglages actuels (les autres reviennent à ceux de départ). */
-    async function applyAll(settings) {
+    async function applyAll(settings, {layoutOnly = false, keep = []} = {}) {
+        // un fichier reçu : ce qui a été laissé de côté à l'import (illisible) n'efface rien ; une mise en page ne touche qu'à l'Apparence
         const removed = [];
-        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && isAllKey(key) && !(key in settings)) { removed.push(key); lsDel(key); } }
+        for (let i = localStorage.length - 1; i >= 0; i--) { const key = localStorage.key(i); if (key && isAllKey(key) && !(key in settings) && !keep.includes(key) && (!layoutOnly || isLayoutKey(key))) { removed.push(key); lsDel(key); } }
         const set = {};
         Object.entries(settings).forEach(([key, value]) => { if (isAllKey(key) && typeof value === 'string') { set[key] = value; lsSet(key, value); } });
         try {
@@ -227,16 +228,16 @@
             let data; try { data = JSON.parse(text); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); }
             // une mise en page (Apparence) s'importe aussi ici
             if (!['lcnda-reglages', 'lcnda-mise-en-page'].includes(data?.type) || !validProfile(data)) return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error');
-            const settings = cleanAll(data.settings), ignored = Object.keys(data.settings).length - Object.keys(settings).length;
+            const settings = cleanAll(data.settings), dropped = Object.keys(data.settings).filter(k => !(k in settings)).slice(0, 500), ignored = dropped.length;
             const list = allProfiles(); let name = String(data.name).slice(0, 60) || 'Réglages importés';
             while (list.some(p => p.name === name)) name = `${name} (2)`;
-            list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings});
+            list.push({name, saved: new Date().toISOString(), from: String(data.author || '').slice(0, 60), settings, keep: dropped.filter(k => typeof k === 'string'), layoutOnly: data.type === 'lcnda-mise-en-page'});
             if (saveAllProfiles(list)) { toast(`Ensemble « ${name} » importé : clique sur « Appliquer » pour l’utiliser.${ignored > 0 ? ` (${ignored} réglage(s) illisible(s) laissé(s) de côté)` : ''}`); rerender(); }
         });
         const at = (attr, fn) => box.querySelectorAll(`[${attr}]`).forEach(b => b.addEventListener('click', () => { const list = allProfiles(), i = Number(b.getAttribute(attr)); if (list[i]) fn(list, i, list[i]); }));
         at('data-h-allset-apply', (list, i, p) => {
             if (!confirm(`Appliquer l’ensemble « ${p.name} » ?\n\nTous les réglages de l’app seront remplacés (pense à enregistrer les réglages actuels si tu veux les garder). Tes données ne bougent pas. L’écran va se recharger.`)) return;
-            toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings);
+            toast(`Ensemble « ${p.name} » appliqué.`); applyAll(p.settings, {layoutOnly: !!p.layoutOnly, keep: Array.isArray(p.keep) ? p.keep : []});
         });
         at('data-h-allset-update', (list, i, p) => { if (!confirm(`Remplacer « ${p.name} » par les réglages actuels ?`)) return; list[i] = {...p, saved: new Date().toISOString(), settings: currentAll()}; if (saveAllProfiles(list)) { toast('Ensemble mis à jour.'); rerender(); } });
         at('data-h-allset-rename', async (list, i, p) => {

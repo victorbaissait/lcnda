@@ -44,7 +44,7 @@
     function petPrefs() {
         let v = null; try { v = JSON.parse(localStorage.getItem(PREFS_KEY) || 'null'); } catch (_) {}
         const d = prefsDefault(); if (!v || typeof v !== 'object') v = d;
-        const str = (x, n, def) => String(x ?? def).slice(0, n);
+        const str = (x, n, def) => String(x ?? def).replace(/[<>"`]/g, '').slice(0, n); // ni balise ni guillemet : ces noms sont écrits tels quels dans la page
         const species = (Array.isArray(v.species) ? v.species : []).filter(x => x && /^my_[a-z0-9_-]{1,30}$/.test(String(x.k))).map(x => ({k: String(x.k), label: str(x.label, 60, 'Espèce'), icon: str(x.icon || '🐾', 4)})).slice(0, 60);
         const customSecs = (Array.isArray(v.customSecs) ? v.customSecs : []).filter(x => x && /^cs_[a-z0-9]{1,30}$/.test(String(x.k))).map(x => ({k: String(x.k), label: str(x.label, 60, 'Catégorie'), icon: str(x.icon || '🗂️', 4)})).slice(0, 30);
         const secKeys = [...EDITOR_SECS.map(x => x[0]), ...customSecs.map(x => x.k)];
@@ -352,7 +352,7 @@
         const listBox = list => `<div data-pet-list="${list}">${(d[list] || []).map(r => rowHtml(list, r)).join('')}</div><button type="button" class="button small secondary" data-pet-add="${list}">+ ${esc(LISTS[list].label)}</button>`;
         ext.openDialog({eyebrow: 'ANIMAL', title: p ? p.title : 'Nouvel animal', wide: true, labels: ['pet', p?.labels || []],
             body: `<div class="h-pet-editor">
-                <nav class="h-bk-nav">${allSecs(pr).map(([k, l]) => `<a href="#${k}" data-pet-jump="${k}">${l}</a>`).join('')}</nav>
+                <nav class="h-bk-nav">${allSecs(pr).map(([k, l]) => `<a href="#${esc(k)}" data-pet-jump="${esc(k)}">${esc(l)}</a>`).join('')}</nav>
                 <section id="pe1"><h3>🪪 Identité</h3>${p?.person_id ? '<p class="muted">Il a une fiche complète : le nom, le sexe, la naissance, le décès et les parents écrits ici y sont repris (et ce qui est corrigé sur la fiche complète revient ici).</p>' : opts.fromFiche ? '<input type="hidden" name="make_person" value="1"><p class="muted">Une fiche complète (comme une personne) est faite en même temps : elle s’ouvre après l’enregistrement.</p>' : `<label class="checkbox-line h-pet-mkp"><input type="checkbox" name="make_person" ${baseMode() !== 'family' && !p ? 'checked' : ''}> <span>👤 Lui faire aussi une fiche complète, comme une personne (arbre, événements, photos, sources…)</span></label>`}<div class="form-grid">${f('name', 'Nom', 'Médor')}${f('registered_name', 'Nom d’affixe / nom officiel (LOF, LOOF…)', 'Médor du Val de Loire')}${f('call_name', 'Appelé', 'Mémé')}
                     <label data-pf="species">Espèce <select name="species">${visibleSpecies(d.species).map(([k, l]) => `<option value="${k}" ${(SPECIES[d.species] ? d.species : 'autre') === k ? 'selected' : ''}>${iconOf(k)} ${esc(l)}</option>`).join('')}</select></label>${f('breed', 'Race', 'Berger allemand')}${f('variety', 'Variété', 'poil long')}
                     <label data-pf="sex">Sexe <select name="sex"><option value="">?</option><option value="M" ${d.sex === 'M' ? 'selected' : ''}>♂ mâle</option><option value="F" ${d.sex === 'F' ? 'selected' : ''}>♀ femelle</option></select></label>

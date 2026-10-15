@@ -69,7 +69,8 @@
     async function uploadResult(media, blob, ext0, {mode, show, duration, note, title}) {
         const fd = new FormData();
         fd.append('file', blob, 'montage.' + ext0); fd.append('media_id', media.id || 0); fd.append('mode', mode);
-        if (!media.id) fd.append('kind', kindOf(media)); // montage fait de zéro : un nouveau média fd.append('show', show ? '1' : '0');
+        if (!media.id) fd.append('kind', kindOf(media)); // montage fait de zéro : un nouveau média
+        fd.append('show', show ? '1' : '0');
         if (duration) fd.append('duration', String(duration));
         if (note) fd.append('note', note);
         if (title) fd.append('title', title);
@@ -511,7 +512,13 @@
         const webm = ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'].find(ok);
         return [h264 && [h264, 'mp4', 'MP4 (H.264)', 'lu partout : Mac (QuickTime, Photos), Windows, téléphones'], webm && [webm, 'webm', 'WebM', 'léger, lu par les navigateurs et VLC, mais pas par QuickTime']].filter(Boolean);
     };
-    const loadMeta = src => new Promise((res, rej) => { const v = document.createElement('video'); v.preload = 'metadata'; v.muted = true; v.onloadedmetadata = () => res({dur: v.duration, w: v.videoWidth, h: v.videoHeight}); v.onerror = () => rej(new Error('Vidéo illisible')); v.src = src; });
+    /** Durée vraie d'un son ou d'une vidéo : un WebM enregistré par le navigateur annonce « Infinity » tant qu'on n'est pas allé au bout */
+    const realDuration = el => Number.isFinite(el.duration) && el.duration > 0 ? Promise.resolve(el.duration) : new Promise((res, rej) => {
+        const done = () => { if (Number.isFinite(el.duration) && el.duration > 0) { clearTimeout(tm); el.removeEventListener('durationchange', done); el.currentTime = 0; res(el.duration); } };
+        const tm = setTimeout(() => { el.removeEventListener('durationchange', done); rej(new Error('Durée illisible')); }, 8000);
+        el.addEventListener('durationchange', done); el.currentTime = 1e9;
+    });
+    const loadMeta = src => new Promise((res, rej) => { const v = document.createElement('video'); v.preload = 'metadata'; v.muted = true; v.onloadedmetadata = () => realDuration(v).then(dur => res({dur, w: v.videoWidth, h: v.videoHeight}), () => rej(new Error('Vidéo illisible (durée inconnue)'))); v.onerror = () => rej(new Error('Vidéo illisible')); v.src = src; });
 
     /* ═════════════════════════ 🎬 MONTAGE VIDÉO ═════════════════════════
      * Pistes : Vidéo 1 (les morceaux à la suite, avec leurs transitions), Vidéo 2 (incrustations posées à un moment),
@@ -933,7 +940,7 @@
         $('[data-mt-home]').addEventListener('click', () => eng.seek(0));
         dl.addEventListener('keydown', e => { if (e.key === ' ' && !e.target.closest('input, textarea, select')) { e.preventDefault(); play(); } });
         // outils
-        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; try { const m = kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => res({dur: a.duration}); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; }); P.sources.push({src: o.src, title: o.title, kind, ...m}); return P.sources.length - 1; } catch (e) { toast(e.message, 'error'); return null; } };
+        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; try { const m = kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => realDuration(a).then(dur => res({dur}), () => rej(new Error('Son illisible (durée inconnue)'))); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; }); P.sources.push({src: o.src, title: o.title, kind, ...m}); return P.sources.length - 1; } catch (e) { toast(e.message, 'error'); return null; } };
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
             if (op === 'addv1') { const s = await addSource('video'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: P.sources[s].dur, tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
