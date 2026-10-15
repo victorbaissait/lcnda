@@ -28,7 +28,7 @@
         ['widget', '📊', 'Widget ou statistique à soi', 'Ceux de l’Éditeur de widgets / de statistiques'],
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
-    const WIDTHS = [['12', 'toute la largeur'], ['8', '⅔'], ['6', '½'], ['4', '⅓'], ['3', '¼']];
+    const WIDTHS = [['12', 'toute la largeur'], ['9', '¾'], ['8', '⅔'], ['6', '½'], ['4', '⅓'], ['3', '¼']];
     const TEMPLATES = [
         {name: 'Sujet d’histoire', icon: '🏛️', subtitle: 'Le contexte historique d’une époque ou d’un pays', blocks: [
             {type: 'text', title: 'En bref', width: '8', text: 'Ce qu’il faut savoir en quelques lignes.'}, {type: 'dates', title: 'Les dates clés', width: '4', rows: []},
@@ -149,7 +149,7 @@
     function renderSheet(token) {
         const c = cur;
         const blocks = c.blocks.map((b, i) => {
-            const tools = editing ? `<span class="h-fi-tools"><select data-fi-width="${i}" title="Largeur">${WIDTHS.map(([v, l]) => `<option value="${v}" ${b.width === v ? 'selected' : ''}>${l}</option>`).join('')}</select><button type="button" class="h-bt" data-fi-up="${i}" title="Avant">↑</button><button type="button" class="h-bt" data-fi-down="${i}" title="Après">↓</button><button type="button" class="h-bt" data-fi-edit="${i}" title="Modifier">✎</button><button type="button" class="h-bt" data-fi-dup="${i}" title="Dupliquer">⧉</button><button type="button" class="h-bt" data-fi-del="${i}" title="Supprimer">🗑</button></span>`
+            const tools = editing ? `<span class="h-fi-tools"><button type="button" class="h-bt h-fi-arrow" data-fi-up="${i}" title="Avant">↑</button><button type="button" class="h-bt h-fi-arrow" data-fi-down="${i}" title="Après">↓</button><button type="button" class="h-bt" data-fi-edit="${i}" title="Modifier">✎</button><button type="button" class="h-bt" data-fi-dup="${i}" title="Dupliquer">⧉</button><button type="button" class="h-bt" data-fi-del="${i}" title="Supprimer">🗑</button></span>`
                 : (['screen'].includes(b.type) ? `<button type="button" class="button small secondary" data-ct-open-screen="${esc(b.target)}" title="Ouvrir en grand">↗</button>` : '') + `<button type="button" class="h-bt h-fi-quickedit" data-fi-edit="${i}" title="Modifier">✎</button>`;
             if (b.type === 'divider') return `<div class="span-12 h-fi-divider" data-fi-block="${i}" style="${b.color ? `--fi-c:${esc(b.color)}` : ''}"><h3>${esc(b.title || 'Intertitre')}</h3>${tools}</div>`;
             const html = A().card(i + 1, '\u0001', '', blockBody(b), 'span-' + (b.width || '12'), tools).replace('\u0001', `${kindOf(b.type)[1]} ${esc(titleOf(b))}`);
@@ -177,9 +177,8 @@
             if (d.fiDown !== undefined && i < c.blocks.length - 1) { [c.blocks[i + 1], c.blocks[i]] = [c.blocks[i], c.blocks[i + 1]]; await save(); return renderSheet(token); }
             if (d.fiDup !== undefined) { const b = JSON.parse(JSON.stringify(c.blocks[i])); b.id = uid(); c.blocks.splice(i + 1, 0, b); await save(); return renderSheet(token); }
             if (d.fiDel !== undefined) { const b = c.blocks[i]; if (!confirm(`Supprimer le bloc « ${titleOf(b)} » ?`)) return; c.blocks.splice(i, 1); await save(); return refresh(); }
-            if (d.fiEdit !== undefined) return editBlock(i);
+            if (d.fiEdit !== undefined) return editBlock(i, null, t.closest('[data-fi-block]'));
         });
-        ws.querySelectorAll('[data-fi-width]').forEach(s => s.addEventListener('change', async () => { c.blocks[Number(s.dataset.fiWidth)].width = s.value; await save(); renderSheet(token); }));
     }
     const refresh = () => A().setModule('fiches');
 
@@ -195,7 +194,8 @@
     }
 
     /* ─── Modifier un bloc (ou en créer un : i = -1) ─── */
-    function editBlock(i, fresh = null) {
+    /** ✎ : comme les widgets du tableau de bord, le bloc se retourne et montre ses réglages sur place (un nouveau bloc s'ouvre dans une fenêtre) */
+    function editBlock(i, fresh = null, host = null) {
         const b = fresh || JSON.parse(JSON.stringify(cur.blocks[i])), [, ic, label] = kindOf(b.type);
         const common = `<div class="form-grid"><label class="span-2">Titre du bloc <small>(facultatif)</small><input name="title" value="${esc(b.title || '')}" maxlength="200"></label>
             ${b.type === 'divider' ? '' : `<label>Largeur<select name="width">${WIDTHS.map(([v, l]) => `<option value="${v}" ${b.width === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`}
@@ -214,8 +214,7 @@
             <label>Hauteur<select name="height">${ext.appScreen.heights.map(([v, l]) => `<option value="${v}" ${String(b.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="sidebar" ${b.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label>
             <p class="muted">Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour.</p>` : '<p class="muted">Écrans indisponibles.</p>';
         if (b.type === 'widget') { const defs = Object.values(ext.customWidgetDefs?.() || {}); body = defs.length ? `<label>Widget ou statistique<select name="widget">${defs.map(w => `<option value="${esc(w.id)}" ${b.widget === w.id ? 'selected' : ''}>${esc((w.icon || '🧱') + ' ' + (w.name || w.id))}</option>`).join('')}</select></label><p class="muted">Pour en créer un : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>` : '<p class="muted">Aucun widget ni statistique à toi pour l’instant : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>'; }
-        ext.openDialog({eyebrow: 'FICHE', title: `${ic} ${fresh ? 'Nouveau bloc' : 'Modifier le bloc'} — ${label}`, wide: true, submitLabel: fresh ? 'Ajouter' : 'Enregistrer', body: common + body,
-            onOpen: dlg => {
+        const onOpen = dlg => {
                 const root = dlg.querySelector('.h-dialog-body') || dlg;
                 ext.bindMediaEditor?.(root); A().bindCollectionPersonFields?.(root);
                 root.addEventListener('click', e => {
@@ -230,8 +229,8 @@
                     if (q.length < 2) { out.innerHTML = ''; return; }
                     timer = setTimeout(async () => { try { const r = await api('people', {q, limit: 20}); out.innerHTML = (r.people || []).map(p => `<button type="button" class="button small secondary" data-fi-padd="${p.id}" data-name="${esc(A().personName(p))}">＋ ${esc(A().personName(p))} <small class="muted">${esc(A().years?.(p) || '')}</small></button>`).join('') || '<p class="muted">Personne trouvée.</p>'; } catch (_) {} }, 250);
                 });
-            },
-            onSubmit: async form => {
+            };
+        const onSubmit = async form => {
                 const f = Object.fromEntries(new FormData(form));
                 b.title = (f.title || '').trim(); if (f.width) b.width = f.width; b.color = form.elements.hascolor?.checked ? f.color : '';
                 if (['text', 'quote'].includes(b.type)) b.text = f.text || '';
@@ -246,7 +245,19 @@
                 await save();
                 if (b.type === 'images' && ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id);
                 refresh();
-            }});
+            };
+        const target = host && !fresh ? (host.querySelector(':scope > .card-body') || host) : null;
+        if (target) { // sur place, comme le verso d'un widget
+            host.classList.add('is-back');
+            target.innerHTML = `<form class="h-fi-back" novalidate><div class="h-fi-back-title"><strong>Réglages du bloc</strong><span>${ic} ${esc(label)}</span></div>${common}${body}<div class="h-fi-back-actions"><button type="button" class="button secondary" data-fi-cancel>Annuler</button><button type="submit" class="button">Enregistrer</button></div></form>`;
+            const form = target.querySelector('form');
+            A().bindCollectionPersonFields?.(form); onOpen(form);
+            form.querySelector('[data-fi-cancel]').addEventListener('click', () => refresh());
+            form.addEventListener('submit', async e => { e.preventDefault(); const btn = form.querySelector('[type=submit]'); btn.disabled = true; try { if (await onSubmit(form) === false) btn.disabled = false; } catch (err) { toast(err.message, 'error'); btn.disabled = false; } });
+            form.querySelector('input[name=title]')?.focus();
+            return;
+        }
+        ext.openDialog({eyebrow: 'FICHE', title: `${ic} ${fresh ? 'Nouveau bloc' : 'Modifier le bloc'} — ${label}`, wide: true, submitLabel: fresh ? 'Ajouter' : 'Enregistrer', body: common + body, onOpen, onSubmit});
     }
 
     /* ─── Titre, icône, sous-titre, couleur de la fiche ─── */

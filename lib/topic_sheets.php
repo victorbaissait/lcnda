@@ -10,7 +10,7 @@ declare(strict_types=1);
  */
 
 const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget'];
-const TOPIC_WIDTHS = ['3', '4', '6', '8', '12'];
+const TOPIC_WIDTHS = ['3', '4', '6', '8', '9', '12'];
 
 function topic_text($v, int $max): string
 {

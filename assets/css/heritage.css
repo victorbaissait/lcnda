@@ -2668,3 +2668,15 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 [data-theme="dark"] .h-mt-ibody { background:#303136; }
 [data-theme="dark"] .h-mt-irow { border-color:rgba(255,255,255,.06); }
 [data-theme="dark"] .h-mt-kf.has, [data-theme="dark"] .h-mt-kf.on { color:#ffcc00; }
+/* Fiches : en-tête des blocs comme les widgets (⠿ ✎ ⧉ 🗑), réglages au verso du bloc */
+.h-fi .h-fi-arrow { display:none !important; }
+.h-fi-block.is-back { outline:3px solid var(--blue, #0066cc); outline-offset:2px; }
+.h-fi-back { display:grid; gap:12px; }
+.h-fi-back-title { display:flex; justify-content:space-between; align-items:baseline; gap:10px; padding-bottom:8px; border-bottom:1px solid var(--line, #d8d8d8); }
+.h-fi-back-title span { color:var(--muted, #666); font-size:13px; }
+.h-fi-back .form-grid { padding:0; }
+.h-fi-back-actions { display:flex; justify-content:flex-end; gap:8px; padding-top:6px; }
+.h-fi-divider.is-back { display:block; padding:14px; border:2px solid var(--ink, #111); background:var(--panel, #fff); }
+/* Retouche : la courbe garde sa hauteur dans la colonne (le texte passait par-dessus) */
+.h-rt-tools { grid-auto-rows:max-content; }
+.h-rt-curve { flex:none; min-height:200px; height:auto; }
