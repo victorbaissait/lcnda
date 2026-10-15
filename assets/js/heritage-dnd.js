@@ -77,7 +77,7 @@
         row.classList.add('is-dnd-dragging');
         let target = from;
         // en grille (plusieurs colonnes) : on lit dans l'ordre de lecture, ligne par ligne, et le trait devient vertical
-        const multi = new Set(rows.map(r => Math.round(r.getBoundingClientRect().left))).size > 1;
+        const multi = new Set(rows.filter(r => r.parentElement === row.parentElement).map(r => Math.round(r.getBoundingClientRect().left))).size > 1; // seulement les voisines de la ligne tirée
         const place = (x, y) => {
             // ins : nombre de lignes placées avant la souris → la ligne ira juste avant rows[ins]
             const before = r => { const b = r.getBoundingClientRect(); if (!multi) return b.top + b.height / 2 < y; return b.bottom < y || (b.top <= y && b.left + b.width / 2 < x); };
