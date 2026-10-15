@@ -27,7 +27,7 @@
     let bust = Date.now();
     const thumbUrl = i => i ? `media/${encodeURIComponent(i.thumbnail || i.filename)}?v=${bust}` : '';
     const fullUrl = i => i ? `media/${encodeURIComponent(i.filename)}?v=${bust}` : '';
-    const LINK_TYPES = {person: ['👤', 'Fiche'], village: ['🏘️', 'Village'], investigation: ['🔍', 'Enquête'], atelier_project: ['📚', 'Projet de l’Atelier'], battue: ['🐾', 'Battue']};
+    const LINK_TYPES = {person: ['👤', 'Fiche'], village: ['🏘️', 'Village'], investigation: ['🔍', 'Enquête'], atelier_project: ['📚', 'Projet de l’Atelier'], battue: ['🧭', 'Battue']};
     const pageName = p => p ? (p.label ? `p. ${p.num} — ${p.label}` : `Page ${p.num}`) : '';
     const excerpt = (t, n = 140) => { const s = String(t || '').replace(/\s+/g, ' ').trim(); return s.length > n ? s.slice(0, n - 1) + '…' : s; };
 
@@ -536,7 +536,7 @@
     }
 
     /* ─── Rattacher une page (ou juste une image) à une fiche, un bloc, une enquête, une battue, l'Atelier, un village ─── */
-    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🐾 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille'], ['pet', '🐾 Un animal']];
+    const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🧭 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille'], ['pet', '🐾 Un animal']];
     function pageLinkDialog({page, image, scope = 'page'}) {
         dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Rattacher',
             body: `<fieldset class="h-rc-modes"><legend>Quoi ?</legend>

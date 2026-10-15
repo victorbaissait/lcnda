@@ -6535,7 +6535,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     function renderInvestigationsSidebar(content,footer){
         const isBattue=state.enquetesTab==='battue',isAtelier=state.enquetesTab==='atelier';
-        const tabs=`<div class="segmented enquetes-tab-toggle">${[['enquetes','🔍','Enquêtes'],['battue','🐾','Battue'],['atelier','📚','Atelier'],['tableaux','🧩','Tableaux']].map(([k,icon,label])=>`<button class="${state.enquetesTab===k||(k==='enquetes'&&!['battue','atelier','tableaux'].includes(state.enquetesTab))?'is-active ':''}enquetes-tab-btn" data-enquetes-tab="${k}"><span class="enquetes-tab-icon" aria-hidden="true">${icon}</span><span>${label}</span></button>`).join('')}</div>`;
+        const tabs=`<div class="segmented enquetes-tab-toggle">${[['enquetes','🔍','Enquêtes'],['battue','🧭','Battue'],['atelier','📚','Atelier'],['tableaux','🧩','Tableaux']].map(([k,icon,label])=>`<button class="${state.enquetesTab===k||(k==='enquetes'&&!['battue','atelier','tableaux'].includes(state.enquetesTab))?'is-active ':''}enquetes-tab-btn" data-enquetes-tab="${k}"><span class="enquetes-tab-icon" aria-hidden="true">${icon}</span><span>${label}</span></button>`).join('')}</div>`;
         if(state.enquetesTab==='tableaux'&&window.LCNDA_EXT?.boardsSidebar){
             window.LCNDA_EXT.boardsSidebar(content,footer,tabs,sidebarController.signal);
             content.addEventListener('click',event=>{const tab=event.target.closest('[data-enquetes-tab]');if(tab){state.enquetesTab=tab.dataset.enquetesTab;state.currentInvestigationId=0;state.currentBattueId=0;state.currentBoardId=0;persistUiState();renderSidebar();renderInvestigations();}},{signal:sidebarController.signal});

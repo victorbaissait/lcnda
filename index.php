@@ -1090,17 +1090,17 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=336" defer></script>
+<script src="assets/js/app.js?v=337" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
 <script src="assets/js/heritage-more.js?v=55" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
-<script src="assets/js/heritage-research.js?v=16" defer></script>
-<script src="assets/js/heritage-av.js?v=6" defer></script>
+<script src="assets/js/heritage-research.js?v=17" defer></script>
+<script src="assets/js/heritage-av.js?v=7" defer></script>
 <script src="assets/js/heritage-recueil-table.js?v=3" defer></script>
-<script src="assets/js/heritage-recueils.js?v=13" defer></script>
+<script src="assets/js/heritage-recueils.js?v=14" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=13" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=4" defer></script>
 <script src="assets/js/heritage-studio-av.js?v=4" defer></script>
@@ -1118,7 +1118,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-pets.js?v=7" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=1" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=9" defer></script>
-<script src="assets/js/heritage-boards.js?v=20" defer></script>
+<script src="assets/js/heritage-boards.js?v=21" defer></script>
 <script src="assets/js/heritage-dnd.js?v=2" defer></script>
 <script src="assets/js/heritage-studio.js?v=11" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>

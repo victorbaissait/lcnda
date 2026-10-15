@@ -560,7 +560,7 @@
     }
     /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
     const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
-        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🐾', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier']};
+        recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier']};
     async function appSearch(kind, q) {
         if (['person', 'person_block', 'village', 'investigation', 'battue', 'atelier_project'].includes(kind)) return ((await api('recueil_search', {type: kind === 'person_block' ? 'person' : kind, q})).results || []).filter(r => kind !== 'atelier_project' || Number(r.key) !== Number(P.project.id));
         if (kind === 'media') return ((await api('list', {type: 'media', q, limit: 40})).rows || []).map(r => ({key: String(r.id), label: r.title || r.filename, extra: r.date_text || r.media_type || '', thumb: r.media_type === 'image' || !r.media_type ? (r.thumbnail || r.filename) : ''}));

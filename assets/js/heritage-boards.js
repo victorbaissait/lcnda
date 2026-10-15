@@ -21,7 +21,7 @@
     const uid = () => Math.random().toString(36).slice(2, 10);
     const clone = v => JSON.parse(JSON.stringify(v));
     const OWNERS = {'': 'Libre', investigation: 'Enquête', battue: 'Battue', atelier_project: 'Atelier'};
-    const OWNER_ICONS = {'': '🧩', investigation: '🔍', battue: '🐾', atelier_project: '📚'};
+    const OWNER_ICONS = {'': '🧩', investigation: '🔍', battue: '🧭', atelier_project: '📚'};
     const COLORS = ['#111111', '#555555', '#d0021b', '#f5a623', '#f8e71c', '#7ed321', '#2a7de1', '#9013fe', '#ff6fb5', '#ffffff'];
     const NOTE_COLORS = ['#fff3a3', '#ffd6a5', '#caffbf', '#bde0fe', '#e4c1f9', '#ffc6d9', '#f1f1f1'];
     const SHAPES = [['rect', '▭ Rectangle'], ['round', '▢ Arrondi'], ['ellipse', '◯ Ovale'], ['triangle', '△ Triangle'], ['diamond', '◇ Losange'], ['star', '☆ Étoile'], ['hexagon', '⬡ Hexagone'], ['bubble', '💬 Bulle'], ['cloud', '☁ Nuage']];

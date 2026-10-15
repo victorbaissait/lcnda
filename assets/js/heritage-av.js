@@ -31,7 +31,7 @@
         ['source', 'Sources', ['source']], ['census', 'Recensements', ['census']], ['military', 'Service militaire', ['military']],
         ['digest', 'Dépouillements', ['digest']], ['collection', 'Collections, listes, atelier', ['collection']],
     ];
-    const OWNER_ICONS = {person: '👤', family: '💍', event: '📅', source: '📜', census: '🏠', military: '🎖️', battue: '🐾', investigation: '🔍', digest: '📚', collection: '🗂️'};
+    const OWNER_ICONS = {person: '👤', family: '💍', event: '📅', source: '📜', census: '🏠', military: '🎖️', battue: '🧭', investigation: '🔍', digest: '📚', collection: '🗂️'};
 
     /** Saut de « −N s / +N s » : réglage d'Apparence (15 s par défaut). */
     const skipSeconds = () => { try { const n = Math.round(Number(JSON.parse(localStorage.getItem('genealogie-design') || '{}')?.avSkipSeconds)); return n >= 1 && n <= 3600 ? n : 15; } catch (_) { return 15; } };
