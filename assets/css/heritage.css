@@ -2680,3 +2680,20 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 /* Retouche : la courbe garde sa hauteur dans la colonne (le texte passait par-dessus) */
 .h-rt-tools { grid-auto-rows:max-content; }
 .h-rt-curve { flex:none; min-height:200px; height:auto; }
+/* Tableaux : disposition réglable (Maintenance → Réglages des tableaux → Menus et options) */
+.h-board.tb-left,.h-board.tb-right{display:grid;grid-template-rows:auto minmax(0,1fr)}
+.h-board.tb-left{grid-template-columns:auto minmax(0,1fr)}.h-board.tb-right{grid-template-columns:minmax(0,1fr) auto}
+.h-board.tb-left>.h-board-head,.h-board.tb-right>.h-board-head{grid-column:1/-1}
+.h-board.tb-left>.h-board-toolbar,.h-board.tb-right>.h-board-toolbar{flex-direction:column;flex-wrap:nowrap;align-items:stretch;overflow:auto;border-bottom:0;padding:6px 4px;max-width:150px}
+.h-board.tb-left>.h-board-toolbar{border-right:1px solid #e3e3e3}.h-board.tb-right>.h-board-toolbar{grid-column:2;grid-row:2;border-left:1px solid #e3e3e3}
+.h-board.tb-right>.h-board-main{grid-column:1;grid-row:2}
+.h-board.tb-left .h-board-toolbar .spacer,.h-board.tb-right .h-board-toolbar .spacer{flex:0 0 6px}
+.h-board.tb-left .h-board-toolbar .h-bt-sep,.h-board.tb-right .h-board-toolbar .h-bt-sep{width:auto;height:1px;margin:4px 0}
+.h-board.tb-left .h-bt-opts,.h-board.tb-right .h-bt-opts,.h-board.tb-left .h-bt-zoom,.h-board.tb-right .h-bt-zoom{display:flex;flex-direction:column;align-items:stretch;gap:4px}
+.h-board.tb-bottom>.h-board-toolbar{order:3;border-bottom:0;border-top:1px solid #e3e3e3}.h-board.tb-bottom>.h-board-main{order:2}
+.h-board.insp-left .h-board-main{grid-template-columns:250px minmax(0,1fr)}.h-board.insp-left .h-board-inspector{order:-1;border-left:0;border-right:1px solid #e3e3e3}
+.h-board.insp-hidden .h-board-main{grid-template-columns:minmax(0,1fr)}.h-board.insp-hidden .h-board-inspector{display:none}
+.h-board.btn-s .h-board-toolbar .h-bt{min-width:26px;height:26px;padding:2px 5px;font-size:12px}
+.h-board.btn-l .h-board-toolbar .h-bt{min-width:44px;height:44px;padding:6px 10px;font-size:20px}
+.h-board.head-compact .h-board-head{padding:4px 10px;gap:8px}.h-board.head-compact .h-board-owner,.h-board.head-compact .h-board-links,.h-board.head-compact .h-board-path{display:none}
+.h-bp-layout{margin-bottom:14px}

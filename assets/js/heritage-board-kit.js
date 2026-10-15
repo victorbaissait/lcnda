@@ -144,7 +144,7 @@
         'Contraste fort': {fill: ['transparent', '#000000', '#ffffff', '#ff0000', '#ffff00', '#00a000', '#0000ff'], stroke: ['transparent', '#000000', '#ffffff', '#ff0000', '#0000ff'], text: ['#000000', '#ffffff', '#ff0000', '#0000ff'], pen: ['#000000', '#ff0000', '#0000ff', '#00a000'], note: ['#ffff00', '#ffffff', '#00ffff'], bg: ['#ffffff', '#000000']},
     };
     const TOOLS = [['select', 'Choisir'], ['hand', 'Se déplacer'], ['text', 'Texte'], ['note', 'Note'], ['shape', 'Formes'], ['line', 'Trait'], ['arrow', 'Flèche'], ['pen', 'Dessin'], ['eraser', 'Gomme'], ['table', 'Tableur']];
-    const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⬇ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['hyp', '❓ Pistes à vérifier (compteur)'], ['search', '🔍 Chercher dans le tableau'], ['layers', '🗂 Calques'], ['snapgrid', '🧲 Grille aimantée'], ['minimap', '🗺 Mini-carte'], ['present', '▶ Présenter'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']];
+    const HEADER = [['undo', '↶ Annuler'], ['redo', '↷ Rétablir'], ['bg', 'Fond'], ['snaps', '📸 Instantanés'], ['copy', '⧉ Copie'], ['export', '⬇ Exporter / imprimer'], ['full', '⛶ Plein écran'], ['lockall', '🔒 Verrouiller'], ['hyp', '❓ Pistes à vérifier (compteur)'], ['search', '🔍 Chercher dans le tableau'], ['layers', '🗂 Calques'], ['snapgrid', '🧲 Grille aimantée'], ['minimap', '🗺 Mini-carte'], ['present', '▶ Présenter'], ['prefs', '⚙️ Réglages des tableaux'], ['delete', '🗑 Supprimer'], ['close', '✕ Fermer']];
     const INSPECTOR = [['fill', 'Fond'], ['stroke', 'Bord / contour'], ['color', 'Couleur du texte ou du trait'], ['sw', 'Épaisseur et style du trait'], ['shape', 'Forme'], ['radius', 'Arrondi'], ['text', 'Taille et style du texte'], ['list', 'Puces et numéros'], ['font', 'Police'], ['heads', 'Pointes des flèches'], ['linepath', 'Forme du trait et légende'], ['table', 'Tableur'], ['brush', 'Pinceau'], ['title', 'Titre, étiquette, adresse'], ['preview', 'Aperçu vivant'], ['pshow', 'Fiche : ce qu’elle montre'], ['hyp', 'Piste : à vérifier, confirmée, fausse'], ['tl', 'Frise vivante'], ['map', 'Carte et repères'], ['connector', 'Liens tout prêts (frère de…)'], ['align', 'Aligner et répartir'], ['layer', 'Calque'], ['comments', 'Commentaires'], ['opacity', 'Opacité'], ['actions', 'Boutons (dupliquer, verrouiller…)']];
     const ADD = [['files', 'Des fichiers'], ['media', 'Un média de l’app'], ['web', 'D’ailleurs (web)'], ['person', 'Une fiche'], ['screen', 'Un écran de l’app'], ['widget', 'Un de mes widgets'], ['recueil', 'Un recueil'], ['tag', 'Une étiquette'], ['table', 'Un tableur'], ['folder', 'Un dossier'], ['tree', 'Un arbre automatique'], ['timeline', 'Une frise vivante'], ['map', 'Une carte'], ['frame', 'Un cadre (section)'], ['memo', 'Un mémo vocal'], ['import', 'Importer un tableau']];
     // les réglages d'une légende de trait (panneau de droite), dans l'ordre voulu
@@ -205,6 +205,7 @@
         table: {rows: 4, cols: 3, header: true, hcol: false, stripes: true, hfill: '#e8eef7', fs: 14, headers: 'Nom;Année;Lieu'},
         brushes: [], cmtWords: ['À vérifier', 'Question', 'Idée', 'Source ?', 'Important'],
         toolsOrder: TOOLS.map(t => t[0]), toolsHidden: [], headerOrder: HEADER.map(t => t[0]), headerHidden: [],
+        layout: {toolbar: 'top', inspector: 'right', size: 'm', title: 'show'},
         inspectorOrder: INSPECTOR.map(t => t[0]), inspectorHidden: [], addOrder: ADD.map(t => t[0]), addHidden: [], legendOrder: LEGEND.map(t => t[0]), legendHidden: [],
     });
     const sortBy = (list, order) => [...list].sort((a, b) => { const i = order.indexOf(a), j = order.indexOf(b); return (i < 0 ? 1e3 : i) - (j < 0 ? 1e3 : j); });
@@ -219,6 +220,7 @@
         if (!p.palettes.length) p.palettes = d.palettes;
         if (!p.palettes.some(x => x.id === p.palette)) p.palette = p.palettes[0].id;
         for (const k of ['heads', 'headsHidden', 'shapeCats', 'shapesHidden', 'quickShapes', 'toolsOrder', 'toolsHidden', 'headerOrder', 'headerHidden', 'inspectorOrder', 'inspectorHidden', 'addOrder', 'addHidden', 'legendOrder', 'legendHidden']) p[k] = (Array.isArray(p[k]) ? p[k] : d[k]).map(String).slice(0, 400);
+        { const L = p.layout && typeof p.layout === 'object' ? p.layout : {}; p.layout = {toolbar: ['top', 'left', 'right', 'bottom'].includes(L.toolbar) ? L.toolbar : 'top', inspector: ['right', 'left', 'hidden'].includes(L.inspector) ? L.inspector : 'right', size: ['s', 'm', 'l'].includes(L.size) ? L.size : 'm', title: ['show', 'compact'].includes(L.title) ? L.title : 'show'}; }
         p.cmtWords = (Array.isArray(p.cmtWords) ? p.cmtWords : d.cmtWords).map(w => String(w).trim().slice(0, 30)).filter(Boolean).slice(0, 30); if (!p.cmtWords.length) p.cmtWords = d.cmtWords;
         p.customHeads = (Array.isArray(p.customHeads) ? p.customHeads : []).filter(h => h && typeof h === 'object' && /^[MLHVCSQTAZmlhvcsqtazEe0-9.,\s+-]{1,30000}$/.test(String(h.d || ''))).slice(0, 100).map(h => ({k: 'myh_' + String(h.k || '').replace(/^myh_/, '').replace(/[^\w-]/g, '').slice(0, 30), n: String(h.n || 'Ma pointe').slice(0, 60),
             d: String(h.d), box: Math.max(1, Math.min(1000, Number(h.box) || 100)), rot: [0, 90, 180, 270].includes(Number(h.rot)) ? Number(h.rot) : 0, fill: h.fill !== false, eo: !!h.eo, ref: Math.max(0, Math.min(10, Number(h.ref ?? 8)))})).filter(h => h.k !== 'myh_');
@@ -490,6 +492,7 @@
         <span class="h-bp-addc"><input type="color" value="#2a7de1" data-bp-pick><button type="button" class="button small secondary" data-bp-addc>+ cette couleur</button><button type="button" class="button small secondary" data-bp-addt title="Sans couleur">+ transparent</button></span></div>`;
 
     ext.maintenance.board_prefs = async token => {
+        try { const t0 = sessionStorage.getItem('lcnda-bp-tab'); if (t0) { tab = t0; sessionStorage.removeItem('lcnda-bp-tab'); } } catch (_) {} // ⚙️ d'un tableau : directement « Menus et options »
         const st = A().state;
         let p = JSON.parse(JSON.stringify(prefs()));
         const ws = A().$('#workspace');
@@ -532,7 +535,12 @@
                         <label>Épaisseur <input type="number" min="0.5" max="500" step="0.5" value="${b0.sw}" data-bp-b="sw"> px</label><label>Opacité <input type="number" min="5" max="100" value="${Math.round(b0.opacity * 100)}" data-bp-b="opacity"> %</label><label>Dureté <input type="range" min="0" max="100" value="${b0.hardness}" data-bp-b="hardness"><output>${b0.hardness} %</output></label>
                         <label>Couleur <input type="checkbox" data-bp-bc ${b0.color ? 'checked' : ''} title="Imposer une couleur"><input type="color" value="${b0.color || '#111111'}" data-bp-b="color"></label><label>Trait <select data-bp-b="dash">${[['', 'plein'], ['dash', 'tirets'], ['long', 'longs tirets'], ['dot', 'points'], ['dashdot', 'tiret-point']].map(([k, l]) => `<option value="${k}" ${b0.dash === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                         <button type="button" class="button small secondary danger" data-bp-bdel>Supprimer</button></div>`).join('') || '<p class="muted">Pas encore de pinceau à toi.</p>'}</div><button type="button" class="button small secondary" data-bp-bnew>+ Nouveau pinceau</button>`,
-                menus: () => `<p class="muted">L’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓.</p>
+                menus: () => `<p class="muted">La place de chaque partie, puis l’ordre de tout ce qu’on voit dans un tableau ; décoche pour cacher. Glisse les lignes, ou ↑ ↓.</p>
+                    <section class="h-bp-sec h-bp-layout"><h4>🧭 Disposition du tableau</h4><div class="h-bp-grid">
+                        <label>Barre d’outils<select data-bp-layout="toolbar">${[['top', 'en haut'], ['left', 'à gauche (en colonne)'], ['right', 'à droite (en colonne)'], ['bottom', 'en bas']].map(([k, l]) => `<option value="${k}" ${p.layout.toolbar === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                        <label>Réglages (texte, forme, trait…)<select data-bp-layout="inspector">${[['right', 'à droite'], ['left', 'à gauche'], ['hidden', 'cachés (plus de place)']].map(([k, l]) => `<option value="${k}" ${p.layout.inspector === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                        <label>Taille des boutons<select data-bp-layout="size">${[['s', 'petits'], ['m', 'normaux'], ['l', 'grands']].map(([k, l]) => `<option value="${k}" ${p.layout.size === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                        <label>En-tête (titre, propriétaire, état)<select data-bp-layout="title">${[['show', 'complet'], ['compact', 'compact (une ligne)']].map(([k, l]) => `<option value="${k}" ${p.layout.title === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div></section>
                     <div class="h-bp-cols"><section class="h-bp-sec"><h4>Outils (barre du haut)</h4>${orderList('tools', TOOLS, p.toolsOrder, p.toolsHidden)}</section>
                     <section class="h-bp-sec"><h4>Boutons de l’en-tête</h4>${orderList('header', HEADER, p.headerOrder, p.headerHidden)}</section>
                     <section class="h-bp-sec"><h4>Réglages à droite (texte, forme, trait…)</h4>${orderList('inspector', INSPECTOR, p.inspectorOrder, p.inspectorHidden)}</section>
@@ -558,6 +566,7 @@
             if (tab === 'sizes') ws.querySelectorAll('[data-bp-n]').forEach(x => { p[x.dataset.bpN] = Number(x.value); });
             if (tab === 'table') { ws.querySelectorAll('[data-bp-t]').forEach(x => { p.table[x.dataset.bpT] = x.type === 'number' ? Number(x.value) : x.value; }); ws.querySelectorAll('[data-bp-tc]').forEach(x => { p.table[x.dataset.bpTc] = x.checked; }); }
             if (tab === 'brushes') ws.querySelectorAll('[data-bi]').forEach(row => { const b0 = p.brushes[Number(row.dataset.bi)]; if (!b0) return; row.querySelectorAll('[data-bp-b]').forEach(x => { const k = x.dataset.bpB; b0[k] = ['sw', 'hardness'].includes(k) ? Number(x.value) : k === 'opacity' ? Number(x.value) / 100 : x.value; }); if (!row.querySelector('[data-bp-bc]').checked) b0.color = ''; });
+            if (tab === 'menus') ws.querySelectorAll('[data-bp-layout]').forEach(x => { p.layout[x.dataset.bpLayout] = x.value; });
             if (tab === 'menus') for (const [id, ok, hk] of [['tools', 'toolsOrder', 'toolsHidden'], ['header', 'headerOrder', 'headerHidden'], ['inspector', 'inspectorOrder', 'inspectorHidden'], ['add', 'addOrder', 'addHidden'], ['legend', 'legendOrder', 'legendHidden']]) { const o = readOrder(q(`[data-bp-order="${id}"]`)); p[ok] = o.order; p[hk] = o.hidden.filter(k => !(id === 'tools' && k === 'select')); }
             p = clean(p);
         };

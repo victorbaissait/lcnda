@@ -289,12 +289,14 @@
             snapgrid: () => `<button type="button" class="button small secondary ${snapOn ? 'is-on' : ''}" data-bd-snapgrid title="Grille aimantée et guides d’alignement">🧲</button>`,
             minimap: () => '<button type="button" class="button small secondary" data-bd-minimap title="Mini-carte du tableau (montrer ou cacher)">🗺</button>',
             present: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-present title="Présenter : un parcours d’étapes">▶ Présenter</button></span>',
+            prefs: () => '<button type="button" class="button small secondary" data-bd-prefs title="Réglages des tableaux : disposition, ordre des outils, boutons montrés ou cachés">⚙️</button>',
             full: () => '<button type="button" class="button small secondary" data-bd-full title="Plein écran">⛶</button>', lockall: () => '<button type="button" class="button small secondary" data-bd-lockall title="Verrouiller ou déverrouiller tout le tableau">🔓</button>',
             delete: () => '<button type="button" class="button small secondary danger" data-bd-delete title="Supprimer ce tableau (et ses dossiers)">🗑</button>', close: () => '<button type="button" class="button small secondary" data-bd-close title="Revenir aux tableaux">✕</button>',
         };
         // les boutons dont le tableau a besoin (fermer, verrou…) restent dans la page même cachés : on les cache seulement
         const headTools = () => { const p = P(), shown = ordered(p.headerOrder, p.headerHidden, Object.keys(HEAD_DEFS)); return [...shown.map(k => HEAD_DEFS[k]()), ...Object.keys(HEAD_DEFS).filter(k => !shown.includes(k)).map(k => HEAD_DEFS[k]().replace(/^<(\w+)/, '<$1 hidden'))].join(''); };
-        host.innerHTML = `<section class="h-board" tabindex="-1">
+        const LY = P().layout || {};
+        host.innerHTML = `<section class="h-board tb-${esc(LY.toolbar || 'top')} insp-${esc(LY.inspector || 'right')} btn-${esc(LY.size || 'm')} head-${esc(LY.title || 'show')}" tabindex="-1">
             <header class="h-board-head">
                 <div class="h-board-title">${b.path?.length ? `<nav class="h-board-path"><button type="button" class="link-button" data-bd-open="${b.path[0].id}">${esc(b.path[0].title)}</button>${b.path.slice(1).map(p => ` › <button type="button" class="link-button" data-bd-open="${p.id}">${esc(p.title)}</button>`).join('')} › </nav>` : ''}
                     <input class="h-board-name" value="${esc(b.title)}" data-bd-title aria-label="Titre du tableau">
@@ -1664,6 +1666,7 @@
         root.querySelector('[data-bd-undo]').addEventListener('click', () => restore(hpos - 1));
         root.querySelector('[data-bd-redo]').addEventListener('click', () => restore(hpos + 1));
         root.querySelector('[data-bd-full]').addEventListener('click', () => { root.classList.toggle('is-full'); setTimeout(applyView, 50); });
+        root.querySelector('[data-bd-prefs]')?.addEventListener('click', () => { const st = A().state; st.maintenanceTab = 'board_prefs'; try { sessionStorage.setItem('lcnda-bp-tab', 'menus'); } catch (_) {} A().setModule('maintenance'); });
         root.querySelector('[data-bd-export]').addEventListener('click', e => exportMenu(e.currentTarget));
         root.querySelector('[data-bd-close]').addEventListener('click', async () => { if (dirty) await save(); go(0); });
         root.querySelectorAll('[data-bd-open]').forEach(x => x.addEventListener('click', async () => { if (dirty) await save(); go(Number(x.dataset.bdOpen)); }));

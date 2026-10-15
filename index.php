@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=203">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=130">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=131">
     <link rel="stylesheet" href="assets/css/layout.css?v=6">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1120,8 +1120,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-livrets.js?v=5" defer></script>
 <script src="assets/js/heritage-pets.js?v=13" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=1" defer></script>
-<script src="assets/js/heritage-board-kit.js?v=9" defer></script>
-<script src="assets/js/heritage-boards.js?v=21" defer></script>
+<script src="assets/js/heritage-board-kit.js?v=10" defer></script>
+<script src="assets/js/heritage-boards.js?v=22" defer></script>
 <script src="assets/js/heritage-dnd.js?v=5" defer></script>
 <script src="assets/js/heritage-studio.js?v=19" defer></script>
 <script src="assets/js/heritage-fiches.js?v=3" defer></script>
