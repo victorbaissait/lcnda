@@ -959,11 +959,11 @@
             else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
                 ${isImg(c) ? imgDur(c) : speedHtml(c)}
                 <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${rng('tr.d', 'Durée du fondu', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}
-                ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>${clipSound(c)}`}
+                ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>${c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep title="Le son passe sur une piste son : on le déplace, le coupe ou le règle à part de l’image">🔊 Séparer le son de l’image</button>'}${clipSound(c)}`}
                 ${inspectorHtml(c, true)}
                 <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
             else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${isImg(c) ? imgDur(c) : speedHtml(c)}${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}
-                ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + clipSound(c)}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
+                ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>') + clipSound(c)}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
                 ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <label class="h-avx-row">Mouvement <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${c.anim === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -1011,6 +1011,7 @@
         dl.querySelector('.h-mt-side').addEventListener('click', e => {
             const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
+            if (e.target.closest('[data-mt-sep]')) { dl.querySelector('[data-mt-op="detach"]')?.click(); return; }
             const sp = e.target.closest('[data-mt-speed]'); if (sp) { const c = selected(); if (c) { c.speed = Number(sp.dataset.mtSpeed); touch(1); } return; }
             const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }
             if (e.target.closest('[data-mt-afxall]')) { const c = selected(); if (!c) return; const f = {...(c.afx || {})}; [...P.v1, ...P.v2, ...P.audio].forEach(x => { if (!isImg(x)) x.afx = {...f}; }); toast('Réglages du son mis sur tous les sons du projet.'); touch(2); return; }
@@ -1149,9 +1150,11 @@
         // poser un rush sur la frise : à la suite (Vidéo 1), en incrustation ou en son, au moment voulu
         const placeRush = (s, how, at = null) => {
             const so = P.sources[s]; if (!so) return; const t = at ?? eng?.t ?? 0;
-            if (so.kind === 'audio' || how === 'a') { if (so.kind !== 'audio') return toast('Seul un son va sur une piste son.', 'error'); const k = {id: nid('a'), s, from: 0, to: so.dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = how?.startsWith?.('A') ? how : freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; }
-            else if (how === 'v1') { const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; }
-            else { const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = how?.startsWith?.('V') && how !== 'V1' ? how : freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; }
+            if (so.kind === 'audio' || how === 'a' || how === 'asound' || /^A\d/.test(how || '')) { if (so.kind === 'image') return toast('Une photo n’a pas de son.', 'error'); const k = {id: nid('a'), s, from: 0, to: so.dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = how?.startsWith?.('A') ? how : freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; }
+            else if (how === 'v1') { const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1};
+                // posé à un endroit précis de la frise : il se range entre les morceaux, sinon à la fin
+                const L = layoutV1(P), idx = at === null ? -1 : L.findIndex(x => (x.at + x.end) / 2 > at); if (idx < 0) P.v1.push(k); else { P.v1.splice(idx, 0, k); if (idx === 0) { k.tr = {type: 'none', d: 1}; if (P.v1[1]) P.v1[1].tr = {type: 'cross', d: 1}; } } sel = {track: 'v1', id: k.id}; }
+            else { const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: so.kind === 'video' ? 1 : 0}; /* une vidéo garde son son */ k.track = how?.startsWith?.('V') && how !== 'V1' ? how : freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; }
             touch(1); drawRush();
         };
         const usesOf = s => [...P.v1, ...P.v2, ...P.audio].filter(c => c.s === s).length;
@@ -1165,7 +1168,7 @@
                 ${P.sources.length ? `<div class="h-mt-rgrid">${P.sources.map((x, i) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
                     <div class="h-mt-rthumb is-${x.kind}">${thumb(x, i)}${n ? `<b class="h-mt-ruse" title="Sur la frise">${n}×</b>` : ''}</div>
                     <figcaption>${esc(x.title || 'Sans titre')}</figcaption>
-                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>`}<button type="button" data-mt-rren title="Renommer ce rush">✎</button>${n ? '' : `<button type="button" data-mt-rdel title="Retirer ce rush du projet">✕</button>`}</div></figure>`; }).join('')}</div>`
+                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rren title="Renommer ce rush">✎</button>${n ? '' : `<button type="button" data-mt-rdel title="Retirer ce rush du projet">✕</button>`}</div></figure>`; }).join('')}</div>`
                 : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
         }
         $('[data-mt-pane="rush"]').addEventListener('change', async e => {
@@ -1184,15 +1187,18 @@
         // glisser un rush sur une piste de la frise
         $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copy'; });
         const tlEl = $('[data-mt-tl]');
-        tlEl.addEventListener('dragover', e => { if (![...e.dataTransfer.types].includes('text/x-lcnda-rush')) return; e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); e.target.closest('[data-mt-lane]')?.classList.add('is-drop'); });
+        // la piste visée : celle qui est à la hauteur de la souris (même au-dessus d'un morceau, de la tête de lecture ou du nom de la piste)
+        const laneAt = (y, target) => [...tlEl.querySelectorAll('[data-mt-lane]')].find(l => { const r = l.getBoundingClientRect(); return y >= r.top && y < r.bottom; }) || target?.closest?.('[data-mt-lane]');
+        tlEl.addEventListener('dragover', e => { if (![...e.dataTransfer.types].includes('text/x-lcnda-rush')) return; e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); laneAt(e.clientY, e.target)?.classList.add('is-drop'); });
         tlEl.addEventListener('dragleave', e => { if (!tlEl.contains(e.relatedTarget)) tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); });
         tlEl.addEventListener('drop', e => {
             const v = e.dataTransfer.getData('text/x-lcnda-rush'); if (v === '') return; e.preventDefault(); tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop'));
-            const lane = e.target.closest('[data-mt-lane]'), s = Number(v), so = P.sources[s]; if (!so) return;
+            const lane = laneAt(e.clientY, e.target), s = Number(v), so = P.sources[s]; if (!so) return;
             const r = tlEl.querySelector('.h-mt-tlin').getBoundingClientRect(), at = Math.max(0, (e.clientX - r.left - OFF) / pxs);
             const kind = lane?.dataset.kind || (so.kind === 'audio' ? 'a' : 'main');
             if (so.kind === 'audio' && kind !== 'a') return toast('Un son se pose sur une piste son.', 'error');
-            if (so.kind !== 'audio' && kind === 'a') return toast('Une vidéo ou une photo se pose sur une piste vidéo.', 'error');
+            if (so.kind === 'image' && kind === 'a') return toast('Une photo se pose sur une piste vidéo.', 'error');
+            if (so.kind === 'video' && kind === 'a') return placeRush(s, lane.dataset.mtLane, at); // une vidéo sur une piste son : seulement son son
             if (kind === 't') return toast('Une piste texte reçoit des titres (« ➕ Titre / texte »).', 'error');
             placeRush(s, kind === 'main' ? 'v1' : kind === 'a' ? lane.dataset.mtLane : lane?.dataset.mtLane || 'v2', at);
         });
