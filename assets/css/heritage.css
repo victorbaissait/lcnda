@@ -2835,3 +2835,16 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rt-tree li>.h-rt-lmore,.h-rt-tree li>.h-rt-adjrow,.h-rt-tree li>small,.h-rt-tree li>.h-rt-mops,.h-rt-tree li>.link-button{flex-basis:100%}
 .h-rt-tree li.is-photo>strong{flex:1}
 .h-rt2 [data-rt-pane="layers"]{overflow-x:hidden}
+/* Retouche : où va la colonne d'outils et le panneau (Maintenance → Montage, retouche et son) */
+.h-rt2.rt-tools-left .h-rt-vtools{order:-1}
+.h-rt2.rt-tools-left .h-rt-main{grid-template-columns:44px minmax(0,1fr) var(--rt-side,330px)}
+.h-rt2.rt-tools-right .h-rt-vtools{order:3}
+.h-rt2.rt-tools-right .h-rt-main{grid-template-columns:minmax(0,1fr) var(--rt-side,330px) 44px}
+.h-rt2.rt-side-left .h-rt-side{order:-2;border-left:0;padding-left:0;border-right:1px solid #e5e5e5;padding-right:12px}
+.h-rt2.rt-side-left .h-rt-main{grid-template-columns:var(--rt-side,330px) 44px minmax(0,1fr)}
+.h-rt2.rt-side-left:not(.rt-tools-right) .h-rt-vtools{order:-1}
+.h-rt2.rt-side-left.rt-tools-left .h-rt-main{grid-template-columns:44px var(--rt-side,330px) minmax(0,1fr)}
+.h-rt2.rt-side-left.rt-tools-left .h-rt-vtools{order:-3}
+.h-rt2.rt-side-left.rt-tools-right .h-rt-main{grid-template-columns:var(--rt-side,330px) minmax(0,1fr) 44px}
+.h-rt2.rt-side-left .h-rt-resize{left:auto;right:-7px}
+.ly-menus{display:contents}

@@ -1246,12 +1246,13 @@
     /** Point d'entrée : un média {id, filename, title, media_type}. */
     /* ═════════ Maintenance → Montage, retouche et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
-    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son']];
+    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)']];
+    const FULL_EDITORS = EDITORS.filter(e => e[0] !== 'layout'); // l'atelier de mise en page occupe déjà tout l'écran
     /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
     const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
     const LAYOUT_FIELDS = ['side', 'stage', 'lane', 'help', ...MT_COLORS.map(c => c[0])];
     const cleanLayout = v => { const all = montagePrefsFrom(v || {}); return Object.fromEntries(LAYOUT_FIELDS.map(k => [k, all[k]])); };
-    const KEY_RX = /^[\w.-]{1,60}$/;
+    const KEY_RX = /^[^<>"`\\\u0000-\u001f]{1,100}$/; // une clé de bouton (ex. « rt-mode=heal », « menu-Édition ») : tout sauf le balisage
     const cleanToolbar = v => { const out = {order: {}, hidden: {}}; ['order', 'hidden'].forEach(f => Object.entries(v?.[f] || {}).slice(0, 40).forEach(([g, list]) => { if (KEY_RX.test(g) && Array.isArray(list)) out[f][g] = list.filter(k => typeof k === 'string' && KEY_RX.test(k)).slice(0, 120); })); return out; };
     const cleanName = n => String(n ?? '').replace(/[<>"`]/g, '').trim().slice(0, 80);
     const cleanSets = (list, clean) => (Array.isArray(list) ? list : []).filter(x => x && cleanName(x.name)).slice(0, 60).map(x => ({name: cleanName(x.name), date: String(x.date || '').slice(0, 20), v: clean(x.v)}));
@@ -1300,15 +1301,20 @@
                     </div>
                     <p class="muted">On peut toujours les changer au moment d’enregistrer. MP4 seulement si l’ordinateur sait le faire, sinon WebM.</p>
                 </section>
+                <section class="maintenance-panel"><h3>🎚️ Retouche des photos</h3>
+                    <div class="form-grid h-mtp-grid"><label>Colonne d’outils (➤ ⬚ ◯ 🪄 ⌗ 🖌 T…)<select data-mtp-rttools>${opt([['side', 'À côté de l’image (entre l’image et le panneau)'], ['left', 'Tout à gauche'], ['right', 'Tout à droite (après le panneau)']], lsJson('genealogie-retouch-layout', {}).tools || 'side')}</select></label>
+                    <label>Panneau (Réglages, Calques…)<select data-mtp-rtside>${opt([['right', 'À droite'], ['left', 'À gauche']], lsJson('genealogie-retouch-layout', {}).side || 'right')}</select></label></div>
+                    <p class="muted">Aussi : la largeur du panneau se règle en tirant son bord dans la Retouche.</p>
+                </section>
                 <section class="maintenance-panel"><h3>⛶ Plein écran à l’ouverture</h3>
-                    <div class="form-grid h-mtp-grid">${EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], full[k] ? '1' : '0')}</select></label>`).join('')}</div>
+                    <div class="form-grid h-mtp-grid">${FULL_EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], full[k] ? '1' : '0')}</select></label>`).join('')}</div>
                 </section>
                 </div>
                 <section class="maintenance-panel"><h3>🧰 Boutons et options</h3>
                     <div class="form-grid h-mtp-grid"><label>Éditeur<select data-mtp-which>${opt(EDITORS, which)}</select></label></div>
                     ${presetBar('toolbar', toolbarSets(which), 'ces boutons')}
                     <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
-                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
+                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
                 </section></div></section>`;
         };
         draw();
@@ -1354,6 +1360,7 @@
                 const v = {}; ws.querySelectorAll('[data-mtp]').forEach(el => { v[el.dataset.mtp] = el.dataset.mtp === 'help' ? el.value === '1' : el.value; });
                 writeJson(MT_KEY, v);
                 const full = lsJson('genealogie-editor-full', {}); ws.querySelectorAll('[data-mtp-full]').forEach(el => { full[el.dataset.mtpFull] = el.value === '1'; }); writeJson('genealogie-editor-full', full);
+                writeJson('genealogie-retouch-layout', {tools: ws.querySelector('[data-mtp-rttools]')?.value || 'side', side: ws.querySelector('[data-mtp-rtside]')?.value || 'right'});
                 if (ws.querySelector('[data-mtp-groups]')) applyToolbar(toolbarNow());
                 toast('Réglages du montage, de la retouche et du son enregistrés.'); draw();
             }
