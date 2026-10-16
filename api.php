@@ -320,6 +320,7 @@ try {
         'saint_stats' => json_response(saint_stats_data($pdo)),
         'boards' => json_response(['boards' => boards_list($pdo, $_GET)]),
         'topic_sheets' => json_response(['sheets' => topic_sheets_list($pdo)]),
+        'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
         'layout_docs' => json_response(['docs' => layout_docs_list($pdo)]),
         'layout_doc' => json_response(layout_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_projects' => json_response(['projects' => montage_projects_list($pdo)]),

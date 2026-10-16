@@ -2906,3 +2906,10 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-et-cover{display:block;width:44px}
 .h-et-act{display:flex;gap:4px;justify-content:flex-end}
 .segmented.enquetes-tab-toggle.h-et-tabs{grid-template-columns:repeat(4,1fr);max-width:900px}
+/* Fiches : ⭐ Mes modèles (✎ et 🗑 dans le coin de la carte) */
+.h-fi-tplact { display:flex; gap:4px; font-size:13px !important; grid-column:3 !important; grid-row:auto !important; margin-top:4px; }
+.h-fi-tplact .h-bt { padding:2px 5px; }
+.h-fi-nomodel { margin:4px 0 0; }
+.h-fi-modhead { margin:26px 0 10px; }
+.h-fi-modhead small { font-size:13px; font-weight:400; }
+.h-fi-cards.is-models .h-fi-cover { height:70px; font-size:32px; }

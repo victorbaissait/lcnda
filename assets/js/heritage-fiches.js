@@ -92,33 +92,88 @@
         await loadList();
         if (!isCurrent(token)) return;
         const id = Number(S().ficheId) || 0;
-        if (!id || !sheets.some(s => s.id === id)) { S().ficheId = 0; cur = null; return renderIndex(token); }
+        if (!id) { cur = null; let tpls = []; try { tpls = (await api('topic_sheet_templates')).templates || []; } catch (_) {} if (!isCurrent(token)) return; return renderIndex(token, tpls); }
         try { cur = await api('topic_sheet', {id}); } catch (e) { toast(e.message, 'error'); S().ficheId = 0; return renderIndex(token); }
         if (!isCurrent(token)) return;
         renderSheet(token);
         A().renderSidebar?.();
     };
-    function renderIndex(token) {
+    function renderIndex(token, tpls = []) {
         A().$('#workspace').innerHTML = `<section class="page h-fi">
             <header class="page-header"><div><span class="eyebrow">FICHES</span><h2>📒 Mes fiches</h2><p>Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et statistiques à toi).</p></div>
                 <div class="page-actions"><button type="button" class="button" data-fi-new>＋ Nouvelle fiche</button></div></header>
             ${sheets.length ? `<div class="h-fi-cards">${sheets.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}">${s.cover ? `<span class="h-fi-cover">${A().mediaThumbHtml(s.cover)}</span>` : `<span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span>`}<strong>${esc(s.icon || '')} ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks} bloc${s.blocks > 1 ? 's' : ''}</small></button>`).join('')}</div>` : A().empty('Aucune fiche pour l’instant : « ＋ Nouvelle fiche ».')}
+            ${tpls.length ? `<h3 class="h-fi-modhead">⭐ Mes modèles <small class="muted">— des fiches toutes prêtes à remplir, proposées dans « Nouvelle fiche »</small></h3><div class="h-fi-cards is-models">${tpls.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}"><span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span><strong>⭐ ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks.length} bloc${s.blocks.length > 1 ? 's' : ''}</small></button>`).join('')}</div>` : ''}
         </section>`;
         const ws = A().$('#workspace');
         ws.querySelector('[data-fi-new]').addEventListener('click', newSheet);
         ws.querySelectorAll('[data-fi-open]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiOpen); A().setModule('fiches'); }));
     }
-    function newSheet() {
+    /** Les blocs vidés de leur contenu : même ordre, mêmes titres, largeurs, couleurs et réglages (écran, widget, disposition des images) */
+    const emptyBlocks = (blocks, keepContent = false) => JSON.parse(JSON.stringify(blocks)).map(b => {
+        const o = {...b, id: uid()};
+        if (!keepContent) { if ('text' in o) o.text = ''; if (o.source !== undefined) o.source = ''; if (o.caption !== undefined) o.caption = ''; if (o.note !== undefined) o.note = ''; if (Array.isArray(o.rows)) o.rows = []; if (Array.isArray(o.ids)) o.ids = []; }
+        return o;
+    });
+    async function newSheet() {
+        let mine = [];
+        try { mine = (await api('topic_sheet_templates')).templates || []; } catch (_) {}
+        const tplCard = (v, t, i, extra = '') => `<label class="h-fi-tpl"><input type="radio" name="tpl" value="${v}" ${i === 0 ? 'checked' : ''} data-icon="${esc(t.icon || '📒')}"><span>${esc(t.icon || '📒')}</span><strong>${esc(t.name || t.title)}</strong><small>${esc(t.subtitle || (t.blocks.length ? `${t.blocks.length} bloc${t.blocks.length > 1 ? 's' : ''}` : 'Rien : tu ajoutes les blocs toi-même'))}</small>${extra}</label>`;
+        const mineHtml = () => mine.length ? `<div class="h-fi-tpls">${mine.map(t => tplCard('u' + t.id, t, -1, `<span class="h-fi-tplact"><button type="button" class="h-bt" data-fi-tpledit="${t.id}" title="Modifier le modèle">✎</button><button type="button" class="h-bt" data-fi-tpldel="${t.id}" title="Supprimer le modèle">🗑</button></span>`)).join('')}</div>`
+            : '<p class="muted h-fi-nomodel">Aucun modèle pour l’instant : dans une fiche, « ⧉ Dupliquer » → « ⭐ En faire un modèle ».</p>';
         ext.openDialog({eyebrow: 'FICHES', title: 'Nouvelle fiche', wide: true, submitLabel: 'Créer',
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" required maxlength="200" placeholder="La Pologne avant les guerres napoléoniennes"></label>
-                <label>Icône<input name="icon" value="📒" maxlength="8" class="h-fi-iconin" readonly title="Choisir une icône"></label><label>Sous-titre <small>(facultatif)</small><input name="subtitle" maxlength="600"></label></div>
-                <h4>Partir de</h4><div class="h-fi-tpls">${TEMPLATES.map((t, i) => `<label class="h-fi-tpl"><input type="radio" name="tpl" value="${i}" ${i === 0 ? 'checked' : ''}><span>${t.icon}</span><strong>${esc(t.name)}</strong><small>${esc(t.subtitle || 'Rien : tu ajoutes les blocs toi-même')}</small></label>`).join('')}</div>`,
-            onOpen: d => d.querySelector('.h-fi-iconin').addEventListener('click', e => ext.pickEmoji?.(e.target)),
+                <label>Icône<input name="icon" value="${esc(TEMPLATES[0].icon)}" maxlength="8" class="h-fi-iconin" readonly title="Choisir une icône"></label><label>Sous-titre <small>(facultatif)</small><input name="subtitle" maxlength="600"></label></div>
+                <h4>Partir de</h4><div class="h-fi-tpls">${TEMPLATES.map((t, i) => tplCard(i, t, i)).join('')}</div>
+                <h4>⭐ Mes modèles</h4><div data-fi-mine>${mineHtml()}</div>`,
+            onOpen: d => {
+                const ic = d.querySelector('.h-fi-iconin');
+                ic.addEventListener('click', e => ext.pickEmoji?.(e.target));
+                d.addEventListener('change', e => { if (e.target.name === 'tpl') ic.value = e.target.dataset.icon || '📒'; });
+                d.addEventListener('click', async e => {
+                    const b = e.target.closest('[data-fi-tpledit],[data-fi-tpldel]'); if (!b) return;
+                    e.preventDefault(); e.stopPropagation();
+                    const id = Number(b.dataset.fiTpledit || b.dataset.fiTpldel), t = mine.find(x => x.id === id);
+                    if (b.dataset.fiTpledit) { d.close(); S().ficheId = id; editing = true; return A().setModule('fiches'); }
+                    if (!confirm(`Supprimer le modèle « ${t?.title} » ? (les fiches déjà créées avec lui ne changent pas)`)) return;
+                    try { await post('delete_topic_sheet', {id}); mine = mine.filter(x => x.id !== id); const wasMine = d.querySelector('input[name="tpl"]:checked')?.value === 'u' + id; d.querySelector('[data-fi-mine]').innerHTML = mineHtml(); if (wasMine) d.querySelector('input[name="tpl"]').checked = true; toast('Modèle supprimé.'); } catch (err) { toast(err.message, 'error'); }
+                });
+            },
             onSubmit: async form => {
-                const f = Object.fromEntries(new FormData(form)), t = TEMPLATES[Number(f.tpl)] || TEMPLATES.at(-1);
-                const blocks = JSON.parse(JSON.stringify(t.blocks)).map(b => ({...b, id: uid()}));
-                const r = await post('save_topic_sheet', {title: f.title, icon: f.icon || t.icon, subtitle: f.subtitle || '', blocks});
+                const f = Object.fromEntries(new FormData(form)), v = String(f.tpl || '');
+                const t = v.startsWith('u') ? mine.find(x => 'u' + x.id === v) : TEMPLATES[Number(v)];
+                const src = t || TEMPLATES.at(-1);
+                const blocks = emptyBlocks(src.blocks, true);
+                const r = await post('save_topic_sheet', {title: f.title, icon: f.icon || src.icon, subtitle: f.subtitle || '', color: src.color || '', blocks});
                 S().ficheId = Number(r.result?.id || r.id); editing = true; A().setModule('fiches');
+            }});
+    }
+    /** ⧉ Dupliquer : copie complète, même ordre de blocs mais vide, ou modèle pour les prochaines fiches */
+    function duplicateSheet() {
+        const c = cur, isTpl = !!c.template;
+        const opt = (v, ic, l, h, on) => `<label class="h-fi-tpl"><input type="radio" name="how" value="${v}" ${on ? 'checked' : ''}><span>${ic}</span><strong>${l}</strong><small>${h}</small></label>`;
+        ext.openDialog({eyebrow: isTpl ? 'MODÈLE' : 'FICHE', title: '⧉ Dupliquer', wide: true, submitLabel: 'Dupliquer',
+            body: `<div class="h-fi-tpls">${isTpl ? opt('model', '⭐', 'Une copie du modèle', 'Pour faire une variante du modèle', true) + opt('structure', '▦', 'Une fiche avec ce modèle', 'Une nouvelle fiche, blocs dans le même ordre', false)
+                : opt('full', '⧉', 'Une copie complète', 'Tout le contenu (les images restent sur l’original)', true) + opt('structure', '▦', 'Le même ordre de blocs', 'Une nouvelle fiche avec les mêmes blocs, mais vides', false) + opt('model', '⭐', 'En faire un modèle', 'Proposé dans « Nouvelle fiche » → « Mes modèles »', false)}</div>
+                <div class="form-grid"><label class="span-2">Nom<input name="title" required maxlength="200" value="${esc(c.title + ' (copie)')}"></label>
+                <label class="span-2 checkbox-line" data-fi-keep hidden><input type="checkbox" name="keep"> garder aussi les textes, citations, dates, liens et personnes (les images ne vont pas dans un modèle)</label></div>`,
+            onOpen: d => {
+                const name = d.querySelector('[name="title"]'), keep = d.querySelector('[data-fi-keep]');
+                d.addEventListener('change', e => {
+                    if (e.target.name !== 'how') return; const v = e.target.value;
+                    keep.hidden = v !== 'model' || isTpl; keep.style.display = keep.hidden ? 'none' : '';
+                    name.value = v === 'model' && !isTpl ? c.title : v === 'structure' ? (isTpl ? 'Nouvelle fiche' : c.title + ' (nouvelle)') : c.title + ' (copie)';
+                });
+                keep.style.display = 'none';
+            },
+            onSubmit: async form => {
+                const f = Object.fromEntries(new FormData(form)), title = String(f.title || '').trim() || c.title;
+                const base = {title, subtitle: c.subtitle, icon: c.icon, color: c.color};
+                let r;
+                if (f.how === 'full') { r = await post('save_topic_sheet', {...base, blocks: c.blocks.map(b => ({...b, id: b.type === 'images' ? b.id : uid()}))}); toast('Fiche dupliquée (les images restent sur l’original).'); }
+                else if (f.how === 'structure') { r = await post('save_topic_sheet', {...base, blocks: emptyBlocks(c.blocks, isTpl)}); toast('Nouvelle fiche avec le même ordre de blocs.'); }
+                else { r = await post('save_topic_sheet', {...base, template: 1, blocks: emptyBlocks(c.blocks, isTpl || !!form.elements.keep.checked)}); toast(isTpl ? 'Modèle dupliqué.' : '⭐ Modèle créé : tu le retrouves dans « Nouvelle fiche » → « Mes modèles ».'); if (!isTpl) return; }
+                S().ficheId = Number(r.result?.id || r.id); A().setModule('fiches');
             }});
     }
     const save = async (quiet = true) => {
@@ -156,8 +211,8 @@
             return html.replace('<section class="card', `<section data-fi-block="${i}" style="${b.color ? `--fi-c:${esc(b.color)}` : ''}" class="h-fi-block ${b.color ? 'has-color' : ''} card`);
         }).join('');
         A().$('#workspace').innerHTML = `<section class="page h-fi ${editing ? 'is-editing' : ''}" style="${c.color ? `--fi-c:${esc(c.color)}` : ''}">
-            <header class="page-header h-fi-head"><div><span class="eyebrow">FICHE</span><h2>${esc(c.icon || '📒')} ${esc(c.title)}</h2>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}</div>
-                <div class="page-actions"><button type="button" class="button ${editing ? '' : 'secondary'}" data-fi-mode>${editing ? '✓ Terminé' : '✏️ Organiser'}</button><button type="button" class="button secondary" data-fi-add>＋ Bloc</button><button type="button" class="button secondary" data-fi-props>⚙️ Titre, icône, couleur</button><button type="button" class="button secondary" data-fi-print>🖨️ Imprimer</button><button type="button" class="button secondary" data-fi-copy>⧉ Dupliquer</button><button type="button" class="button secondary danger" data-fi-delete>Supprimer</button></div></header>
+            <header class="page-header h-fi-head"><div><span class="eyebrow">${c.template ? '⭐ MODÈLE DE FICHE' : 'FICHE'}</span><h2>${esc(c.icon || '📒')} ${esc(c.title)}</h2>${c.subtitle ? `<p>${esc(c.subtitle)}</p>` : ''}</div>
+                <div class="page-actions"><button type="button" class="button ${editing ? '' : 'secondary'}" data-fi-mode>${editing ? '✓ Terminé' : '✏️ Organiser'}</button><button type="button" class="button secondary" data-fi-add>＋ Bloc</button><button type="button" class="button secondary" data-fi-props>⚙️ Titre, icône, couleur</button><button type="button" class="button secondary" data-fi-print>🖨️ Imprimer</button>${c.template ? '<button type="button" class="button" data-fi-use>＋ Créer une fiche avec ce modèle</button>' : ''}<button type="button" class="button secondary" data-fi-copy title="Copie complète, même ordre de blocs, ou modèle">⧉ Dupliquer</button><button type="button" class="button secondary danger" data-fi-delete>Supprimer</button></div></header>
             <div class="card-grid h-fi-grid">${blocks || A().empty('Fiche vide : « ＋ Bloc » pour ajouter du texte, des images, des personnes, une carte, une liste…')}</div>
             ${editing ? '<div class="h-fi-addrow"><button type="button" class="button" data-fi-add>＋ Ajouter un bloc</button></div>' : ''}
         </section>`;
@@ -171,8 +226,9 @@
             if (d.fiAdd !== undefined) return addBlock();
             if (d.fiProps !== undefined) return editProps();
             if (d.fiPrint !== undefined) return printSheet();
-            if (d.fiCopy !== undefined) { const r = await post('save_topic_sheet', {title: c.title + ' (copie)', subtitle: c.subtitle, icon: c.icon, color: c.color, blocks: c.blocks.map(b => ({...b, id: b.type === 'images' ? b.id : uid()}))}); toast('Fiche dupliquée (les images restent sur l’original).'); S().ficheId = Number(r.result?.id || r.id); return A().setModule('fiches'); }
-            if (d.fiDelete !== undefined) { if (!confirm(`Supprimer la fiche « ${c.title} » ? (les images restent dans les médias de l’app)`)) return; await post('delete_topic_sheet', {id: c.id}); toast('Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
+            if (d.fiCopy !== undefined) return duplicateSheet();
+            if (d.fiUse !== undefined) { const r = await post('save_topic_sheet', {title: 'Nouvelle fiche', subtitle: '', icon: c.icon, color: c.color, blocks: emptyBlocks(c.blocks, true)}); toast('Fiche créée avec ce modèle : change son titre dans « ⚙️ Titre, icône, couleur ».'); S().ficheId = Number(r.result?.id || r.id); editing = true; return A().setModule('fiches'); }
+            if (d.fiDelete !== undefined) { if (!confirm(c.template ? `Supprimer le modèle « ${c.title} » ? (les fiches déjà créées avec lui ne changent pas)` : `Supprimer la fiche « ${c.title} » ? (les images restent dans les médias de l’app)`)) return; await post('delete_topic_sheet', {id: c.id}); toast(c.template ? 'Modèle supprimé.' : 'Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
             if (d.fiUp !== undefined && i > 0) { [c.blocks[i - 1], c.blocks[i]] = [c.blocks[i], c.blocks[i - 1]]; await save(); return renderSheet(token); }
             if (d.fiDown !== undefined && i < c.blocks.length - 1) { [c.blocks[i + 1], c.blocks[i]] = [c.blocks[i], c.blocks[i + 1]]; await save(); return renderSheet(token); }
             if (d.fiDup !== undefined) { const b = JSON.parse(JSON.stringify(c.blocks[i])); b.id = uid(); c.blocks.splice(i + 1, 0, b); await save(); return renderSheet(token); }

@@ -69,13 +69,27 @@ function topic_clean_block($b): ?array
 
 function topic_sheets_list(PDO $pdo): array
 {
-    $rows = $pdo->query('SELECT id, title, subtitle, icon, color, data_json, updated_at FROM topic_sheets ORDER BY title COLLATE NOCASE, id')->fetchAll();
+    $rows = array_values(array_filter($pdo->query('SELECT id, title, subtitle, icon, color, data_json, updated_at FROM topic_sheets ORDER BY title COLLATE NOCASE, id')->fetchAll(),
+        static fn($r) => empty((json_decode((string) $r['data_json'], true) ?: [])['template'])));
     $media = heritage_media($pdo, 'topic_sheet', array_column($rows, 'id'));
     return array_map(static function ($r) use ($media) {
         $d = json_decode((string) $r['data_json'], true) ?: [];
         return ['id' => (int) $r['id'], 'title' => $r['title'], 'subtitle' => $r['subtitle'], 'icon' => $r['icon'], 'color' => $r['color'],
             'blocks' => count($d['blocks'] ?? []), 'cover' => $media[(int) $r['id']][0] ?? null, 'updated_at' => $r['updated_at']];
     }, $rows);
+}
+
+/** ⭐ Les modèles de fiche (des fiches marquées « template », rangées à part) : leurs blocs servent à créer des fiches construites pareil */
+function topic_sheet_templates(PDO $pdo): array
+{
+    $out = [];
+    foreach ($pdo->query('SELECT id, title, subtitle, icon, color, data_json, updated_at FROM topic_sheets ORDER BY title COLLATE NOCASE, id') as $r) {
+        $d = json_decode((string) $r['data_json'], true) ?: [];
+        if (empty($d['template'])) { continue; }
+        $out[] = ['id' => (int) $r['id'], 'title' => $r['title'], 'subtitle' => $r['subtitle'], 'icon' => $r['icon'], 'color' => $r['color'],
+            'blocks' => array_values(array_filter(array_map('topic_clean_block', is_array($d['blocks'] ?? null) ? $d['blocks'] : []))), 'updated_at' => $r['updated_at']];
+    }
+    return $out;
 }
 
 function topic_sheet_detail(PDO $pdo, int $id): array
@@ -97,7 +111,7 @@ function topic_sheet_detail(PDO $pdo, int $id): array
             FROM persons p WHERE p.id IN ($in)") as $p) { $people[(int) $p['id']] = $p; }
     }
     return ['id' => (int) $r['id'], 'title' => $r['title'], 'subtitle' => $r['subtitle'], 'icon' => $r['icon'], 'color' => $r['color'],
-        'blocks' => $blocks, 'people' => $people, 'media' => heritage_media($pdo, 'topic_sheet', [$id])[$id] ?? [], 'created_at' => $r['created_at'], 'updated_at' => $r['updated_at']];
+        'template' => !empty($d['template']), 'blocks' => $blocks, 'people' => $people, 'media' => heritage_media($pdo, 'topic_sheet', [$id])[$id] ?? [], 'created_at' => $r['created_at'], 'updated_at' => $r['updated_at']];
 }
 
 function save_topic_sheet(PDO $pdo, array $data): array
@@ -108,7 +122,12 @@ function save_topic_sheet(PDO $pdo, array $data): array
     $icon = topic_text($data['icon'] ?? '📒', 16) ?: '📒';
     $color = preg_match('/^#[0-9a-f]{6}$/i', (string) ($data['color'] ?? '')) ? (string) $data['color'] : '';
     $blocks = array_values(array_filter(array_map('topic_clean_block', array_slice(is_array($data['blocks'] ?? null) ? $data['blocks'] : [], 0, 300))));
-    $json = json_encode(['blocks' => $blocks], JSON_UNESCAPED_UNICODE);
+    $template = !empty($data['template']);
+    if ($id) { // une fiche garde ce qu'elle est (fiche ou modèle)
+        $s = $pdo->prepare('SELECT data_json FROM topic_sheets WHERE id=?'); $s->execute([$id]);
+        $template = !empty((json_decode((string) $s->fetchColumn(), true) ?: [])['template']);
+    }
+    $json = json_encode(['blocks' => $blocks] + ($template ? ['template' => true] : []), JSON_UNESCAPED_UNICODE);
     $subtitle = topic_text($data['subtitle'] ?? '', 600);
     if ($id) {
         $s = $pdo->prepare('UPDATE topic_sheets SET title=?, subtitle=?, icon=?, color=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?');
@@ -122,7 +141,7 @@ function save_topic_sheet(PDO $pdo, array $data): array
     $keep = array_column(array_filter($blocks, static fn($b) => $b['type'] === 'images'), 'id');
     $del = $pdo->prepare("DELETE FROM family_collection_media WHERE collection_type='topic_sheet' AND collection_id=? AND role<>'' AND role LIKE 'b\\_%' ESCAPE '\\'" . ($keep ? ' AND role NOT IN (' . implode(',', array_fill(0, count($keep), '?')) . ')' : ''));
     $del->execute([$id, ...$keep]);
-    log_change($pdo, 'meta', 0, ($data['id'] ?? 0) ? 'update' : 'create', 'Fiche enregistrée : ' . $title);
+    log_change($pdo, 'meta', 0, ($data['id'] ?? 0) ? 'update' : 'create', ($template ? 'Modèle de fiche enregistré : ' : 'Fiche enregistrée : ') . $title);
     return ['id' => $id, 'title' => $title];
 }
 
