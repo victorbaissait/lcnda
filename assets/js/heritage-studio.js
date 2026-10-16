@@ -597,7 +597,7 @@
 
     /** Retouche d'une photo : on part de la version affichée (ou d'une autre, `source`), le résultat devient une nouvelle version.
      *  Outils : réglages, correcteur de taches, tampon (source choisie), pinceau (6 sortes), texte ; calques d'annotation ; historique ; zoom. */
-    async function openRetouch(source = '') {
+    async function openRetouch(source = '', project = null) {
         const st0 = A().state, item = st0.lightboxMedia?.[st0.lightboxIndex];
         if (!item) return;
         let versions = [];
@@ -621,7 +621,7 @@
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
             ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main (H, ou espace)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['cropclear', 'Annuler le recadrage'], ['-'], ['reset', 'Remettre les réglages à zéro']]],
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:sel', 'Masque d’après la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
@@ -678,7 +678,7 @@
                     <div class="h-rt-tools" data-rt-pane="history" hidden></div>
                 </aside>
             </div>
-            <div class="modal-actions"><label class="checkbox-line h-rt-merge" data-rt-mergebox hidden><input type="checkbox" data-rt-merge checked> <span>avec les annotations (calques visibles)</span></label><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
+            <div class="modal-actions"><button type="button" class="button small secondary" data-rt-projopen title="Rouvrir un travail de retouche enregistré">📂 Projets…</button><button type="button" class="button small secondary" data-rt-projsave title="Garde tout le travail (calques, groupes, masques, réglages…) pour le rouvrir et continuer (⌘S)">💾 Enregistrer le projet</button><span class="h-rt-projname" data-rt-projname></span><label class="checkbox-line h-rt-merge" data-rt-mergebox hidden><input type="checkbox" data-rt-merge checked> <span>avec les annotations (calques visibles)</span></label><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
             <p class="muted h-rt-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
         ext.tbApply(dlg, 'retouch'); // boutons rangés à sa façon (⚙️ Personnaliser)
@@ -1223,6 +1223,9 @@
             if (a === 'tab') return showTab(b);
             if (a === 'mode') return setMode(b);
             if (a === 'save') return dlg.querySelector(`[data-rt-save="${b}"]`)?.click();
+            if (k === 'proj:save') return saveProject();
+            if (k === 'proj:saveas') return saveProject(true);
+            if (k === 'proj:open') return openProjects();
             if (a === 'download') return downloadFull(b === 'png' ? 'image/png' : 'image/jpeg');
             if (k === 'close') return askClose();
             if (k === 'undo') return restore(hpos - 1);
@@ -1329,6 +1332,7 @@
             if (!dlg.open || typing(e) || document.querySelector('dialog[open].ask-text-dialog')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
             if (mod && k === 'z') { e.preventDefault(); e.stopImmediatePropagation(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
+            if (mod && k === 's') { e.preventDefault(); e.stopImmediatePropagation(); saveProject(e.shiftKey); return; }
             if (mod && ['a', 'd', 'i', 'j', 'g'].includes(k)) { if (k === 'i' && !e.shiftKey) return; e.preventDefault(); e.stopImmediatePropagation(); cmd({a: 'sel:all', d: 'sel:none', i: 'sel:invert', j: 'sel:copy', g: 'gwrap'}[k]); return; }
             if (mod) return;
             if (e.key === 'Escape' && dlg.querySelector('details.h-rt-menu[open]')) { e.preventDefault(); e.stopImmediatePropagation(); dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open')); return; }
@@ -1354,9 +1358,36 @@
         window.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp); // avant les raccourcis de l'app
         // fermer : on demande s'il y a du travail non enregistré
         let saved = false;
-        const askClose = () => { if (!saved && hpos > 0 && !confirm('Fermer sans enregistrer ? Les retouches en cours seront perdues.')) return; saved = true; dlg.close(); };
+        // 💾 Projet : tout le travail (corrections, réglages, calques, groupes, masques, sélection, recadrage) gardé pour continuer plus tard
+        let projId = project?.id || 0, projName = project?.name || '', projKey = '';
+        const curKey = () => JSON.stringify(snapshot());
+        const showProj = () => { const el = $('[data-rt-projname]'); if (el) el.textContent = projId ? `🎚️ ${projName}${projKey && projKey !== curKey() ? ' · modifié' : ''}` : ''; };
+        async function projectData() {
+            const snap = snapshot(), ids = [...new Set((JSON.stringify(snap).match(/"k\d+"/g) || []).map(x => x.slice(1, -1)))], m = {};
+            ids.forEach(id => { const c = masks.get(id); if (c) m[id] = c.toDataURL('image/png'); });
+            return {...snap, masks: m, pw, ph, v: 1};
+        }
+        let projBusy = false;
+        async function saveProject(asNew = false) {
+            if (projBusy) return;
+            let name = projName;
+            if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet de retouche', message: 'Nom du projet (pour le retrouver dans « 📂 Projets… ») :', value: projName || item.title || 'Ma retouche', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
+            projBusy = true; const btn = $('[data-rt-projsave]'), l0 = btn.textContent; btn.disabled = true; btn.textContent = 'Enregistrement…';
+            try {
+                const t = document.createElement('canvas'), k = Math.min(1, 320 / Math.max(pw, ph)); t.width = Math.max(1, Math.round(pw * k)); t.height = Math.max(1, Math.round(ph * k)); const tg = t.getContext('2d'); tg.fillStyle = '#fff'; tg.fillRect(0, 0, t.width, t.height); tg.drawImage(canvas, 0, 0, t.width, t.height);
+                const r = await A().api('save_retouch_project', {}, {method: 'POST', body: {id: asNew ? 0 : projId, name, media_id: item.id || 0, source: from, thumb: t.toDataURL('image/jpeg', 0.8), project: await projectData()}});
+                projId = r.result.id; projName = r.result.name; projKey = curKey(); showProj();
+                toast(`Projet « ${projName} » enregistré : « 📂 Projets… » pour le rouvrir.`);
+            } catch (err) { toast(err.message, 'error'); }
+            finally { projBusy = false; btn.disabled = false; btn.textContent = l0; }
+        }
+        $('[data-rt-projsave]').addEventListener('click', () => saveProject());
+        const openProjects = () => retouchProjectsDialog({current: projId, onOpen: async pr => { if (hpos > 0 && curKey() !== projKey && !confirm('Ouvrir un autre projet sans enregistrer ce travail ?')) return false; saved = true; dlg.close(); await ext.openRetouchProject(pr.id); }});
+        $('[data-rt-projopen]').addEventListener('click', openProjects);
+        dlg.addEventListener('input', () => setTimeout(showProj, 0)); dlg.addEventListener('pointerup', () => setTimeout(showProj, 0));
+        const askClose = () => { if (!saved && hpos > 0 && !(projId && curKey() === projKey) && !confirm('Fermer sans enregistrer ? Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard).')) return; saved = true; dlg.close(); };
         $$('[data-rt-close]').forEach(b => b.addEventListener('click', askClose));
-        dlg.addEventListener('cancel', e => { if (mode === 'crop' || poly) { e.preventDefault(); return; } if (!saved && hpos > 0) { e.preventDefault(); askClose(); } });
+        dlg.addEventListener('cancel', e => { if (mode === 'crop' || poly) { e.preventDefault(); return; } if (!saved && hpos > 0 && !(projId && curKey() === projKey)) { e.preventDefault(); askClose(); } });
         dlg.addEventListener('close', () => { window.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); dlg.remove(); });
         const refreshAfter = async () => {
             const state = A().state;
@@ -1432,10 +1463,46 @@
         dlg.showModal();
         photo(); setMode('adjust');
         commit('Ouverture de la photo');
+        if (project?.project) { // un projet rouvert : ses masques (images), puis tout son état, comme une étape de l'historique
+            const d = project.project;
+            try {
+                for (const [id, src] of Object.entries(d.masks || {})) { if (!/^k\d+$/.test(id) || !/^data:image\/png;base64,/.test(src)) continue; const im = new Image(); im.src = src; await im.decode(); const c = blankMask(); c.getContext('2d').drawImage(im, 0, 0, pw, ph); masks.set(id, c); maskSeq = Math.max(maskSeq, Number(id.slice(1)) || 0); }
+                const snap = {st: {...rtDefault(), ...(d.st || {}), strokes: undefined}, strokes: Array.isArray(d.strokes) ? d.strokes : [], layers: Array.isArray(d.layers) ? d.layers : [], activeLayer: String(d.activeLayer || ''), photoL: {visible: true, opacity: 1, mask: null, ...(d.photoL || {})}, selId: d.selId && masks.has(d.selId) ? d.selId : null};
+                history.push({label: `Projet « ${project.name} » rouvert`, at: new Date(), snap: rtClone(snap)}); restore(history.length - 1);
+                projKey = curKey();
+                if (d.pw && (d.pw !== pw || d.ph !== ph)) toast('La photo de départ n’a plus la même taille : vérifie les calques.', 'error');
+            } catch (err) { toast('Projet en partie illisible : ' + err.message, 'error'); }
+        }
+        showProj();
         refreshLayers();
         syncControls();
         requestAnimationFrame(() => setZoom(1));
     }
+    /** 📂 Les projets de retouche enregistrés : ouvrir, renommer, supprimer */
+    async function retouchProjectsDialog({current = 0, onOpen} = {}) {
+        let list = []; try { list = (await api('retouch_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
+        const when = d => { const x = new Date(String(d || '').replace(' ', 'T') + 'Z'); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-projdlg';
+        const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎚️ RETOUCHE</span><h2>Projets de retouche</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            ${list.length ? `<div class="h-rt-plist">${list.map(p => `<div class="h-rt-prow${p.id === current ? ' is-cur' : ''}${p.exists ? '' : ' is-missing'}"><button type="button" class="h-rt-popen" data-open="${p.id}" ${p.exists ? '' : 'disabled'}>${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-rt-pico">🎚️</span>'}<span><b>${esc(p.name)}</b><small>${esc(p.media_title || p.source)} · ${esc(when(p.updated_at))}${p.exists ? '' : ' · photo de départ introuvable'}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les photos et leurs versions restent)">🗑</button></div>`).join('')}</div>`
+                : '<p class="muted h-rt-pempty">Aucun projet pour l’instant : dans la Retouche, « 💾 Enregistrer le projet ».</p>'}`; };
+        draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
+        dlg.addEventListener('click', async e => {
+            const b = e.target.closest('button'); if (!b) return;
+            if (b.dataset.x !== undefined) return dlg.close();
+            try {
+                if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
+                if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const r = await api('rename_retouch_project', {}, {method: 'POST', body: {id: p.id, name: n}}); p.name = r.result.name; return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!confirm(`Supprimer le projet « ${p.name} » ? La photo et ses versions restent.`)) return; await api('delete_retouch_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+            } catch (err) { toast(err.message, 'error'); }
+        });
+    }
+    ext.openRetouchProject = async id => {
+        let pr; try { pr = await api('retouch_project', {id}); } catch (e) { return toast(e.message, 'error'); }
+        const st = A().state; st.lightboxMedia = [{id: pr.media_id, filename: pr.source, thumbnail: pr.source, title: pr.media_title || pr.name, media_type: 'image'}]; st.lightboxIndex = 0;
+        return openRetouch(pr.source, pr);
+    };
+    ext.openRetouchProjects = () => retouchProjectsDialog({onOpen: p => ext.openRetouchProject(p.id)});
     ext.retouchDrawOp = rtDrawOp; // pour les essais
     document.addEventListener('click', e => { if (e.target.closest('#retouch-media')) openRetouch(); });
     ext.openRetouch = openRetouch;
@@ -1445,7 +1512,7 @@
         const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch(); };
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>Quelle photo retoucher ?</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><button type="button" class="button small secondary" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
+            <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><button type="button" class="button small secondary" data-projects title="Rouvrir un travail de retouche enregistré">📂 Projets</button><button type="button" class="button small secondary" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
             <p class="muted small">Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.</p>
             <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
         document.body.append(dlg);
@@ -1461,6 +1528,7 @@
         dlg.querySelector('[data-q]').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
         dlg.querySelector('[data-grid]').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const m = items[+b.dataset.i]; dlg.close(); open(m); });
         // ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias puis ouverte
+        dlg.querySelector('[data-projects]').addEventListener('click', () => retouchProjectsDialog({onOpen: async p => { dlg.close(); await ext.openRetouchProject(p.id); }}));
         dlg.querySelector('[data-blank]').addEventListener('click', () => {
             const SIZES = [['1920x1080', 'Écran 16:9 — 1920 × 1080'], ['1080x1080', 'Carré — 1080 × 1080'], ['1240x1754', 'A4 portrait (150 dpi) — 1240 × 1754'], ['1754x1240', 'A4 paysage (150 dpi) — 1754 × 1240'], ['2480x3508', 'A4 portrait (300 dpi) — 2480 × 3508'], ['1500x2100', 'Carte postale — 1500 × 2100'], ['custom', 'Autre taille…']];
             ext.openDialog({eyebrow: 'RETOUCHE', title: '⬜ Partir d’un canevas vide', submitLabel: 'Créer et ouvrir',

@@ -15,6 +15,7 @@ require_once __DIR__ . '/boards.php'; // tableaux (façon Freeform) // livrets d
 require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
 require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page
 require_once __DIR__ . '/montage_projects.php'; // 🎬 Projets de montage vidéo
+require_once __DIR__ . '/retouch_projects.php'; // 🎚️ Projets de retouche
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/collections.php';

@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 44;
+const SCHEMA_VERSION = 45;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -65,6 +65,7 @@ function migration_steps(): array
         42 => 'schema_v42',
         43 => 'schema_v43',
         44 => 'schema_v44',
+        45 => 'schema_v45',
     ];
 }
 
@@ -2000,6 +2001,21 @@ function schema_v44(PDO $pdo): void
     $pdo->exec("CREATE TABLE IF NOT EXISTS montage_projects (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL DEFAULT '',
+        data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+}
+
+/** 🎚️ Projets de retouche enregistrés (calques, groupes, masques, réglages) pour reprendre le travail */
+function schema_v45(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS retouch_projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
+        media_id INTEGER NOT NULL DEFAULT 0,
+        source TEXT NOT NULL DEFAULT '',
+        thumb TEXT NOT NULL DEFAULT '',
         data_json TEXT NOT NULL DEFAULT '{}',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
