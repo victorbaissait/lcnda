@@ -59,7 +59,7 @@ const r = spawnSync(phpPath, [...phpRuntimeArgs(phpPath), '-r', code], { cwd: ap
 if (r.status !== 0) { console.error(r.stderr || r.stdout); process.exit(1); }
 const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
-  ['structure à jour (n°45)', () => assert.equal(out.version, 45)],
+  ['structure à jour (n°46)', () => assert.equal(out.version, 46)],
   ['Wikipédia (fr) : années puis habitants, notes et espaces enlevés, la pyramide des âges ignorée', () => assert.deepEqual(out.wiki_fr, [[1793, 4520], [1800, 4612], [2016, 20953], [2021, 21002], [2022, 21104]])],
   ['Wikipedia (en) : année | habitants', () => assert.deepEqual(out.wiki_en, [[1850, 1204], [1900, 2310]])],
   ['pas de section démographie → rien', () => assert.deepEqual(out.wiki_none, [])],

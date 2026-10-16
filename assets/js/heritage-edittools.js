@@ -1,6 +1,6 @@
 /**
  * 🛠️ Listes → Outils de modification : les projets des éditeurs de l'app, un onglet par outil
- * (🎬 montage vidéo, 🎚️ retouche des photos, 📐 mise en page des livres) : chercher, trier, ouvrir, renommer,
+ * (🎬 montage vidéo, 🎧 son, 🎚️ retouche des photos, 📐 mise en page des livres) : chercher, trier, ouvrir, renommer,
  * supprimer, ou en commencer un nouveau. Chargé après heritage-studio.js, heritage-studio-av.js et heritage-layout.js.
  */
 (() => {
@@ -23,6 +23,12 @@
             create: again => ext.newMontage?.(again),
             rename: async (id, name) => { const r = await api('montage_project', {id}); await post('save_montage_project', {id, name, project: r.project}); },
             remove: id => post('delete_montage_project', {id}), createLabel: '＋ Nouveau montage'},
+        {key: 'audio', icon: '🎧', label: 'Son', what: 'son',
+            load: async () => ((await api('audio_projects')).projects || []).map(p => ({id: p.id, name: p.name, date: p.updated_at, thumb: '<span class="h-et-ico">🎧</span>', info: [p.media_title || 'son importé', fmtDur(p.duration), p.exists ? '' : '⚠ fichier de travail introuvable'].filter(Boolean).join(' · '), disabled: !p.exists})),
+            open: (id, again) => ext.openAudioProject?.(id, again),
+            create: again => ext.newAudioProject?.(again),
+            rename: (id, name) => post('rename_audio_project', {id, name}),
+            remove: id => post('delete_audio_project', {id}), createLabel: '＋ Nouveau projet son'},
         {key: 'retouch', icon: '🎚️', label: 'Retouche des photos', what: 'retouche',
             load: async () => ((await api('retouch_projects')).projects || []).map(p => ({id: p.id, name: p.name, date: p.updated_at, thumb: p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-et-ico">🎚️</span>', info: [p.media_title || p.source, p.exists ? '' : '⚠ photo de départ introuvable'].filter(Boolean).join(' · '), disabled: !p.exists})),
             open: id => ext.openRetouchProject?.(id),

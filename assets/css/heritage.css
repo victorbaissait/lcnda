@@ -2905,3 +2905,4 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-et-thumb img,.h-et-ico{width:64px;height:42px;object-fit:cover;border-radius:5px;display:grid;place-items:center;background:#111;font-size:20px}
 .h-et-cover{display:block;width:44px}
 .h-et-act{display:flex;gap:4px;justify-content:flex-end}
+.segmented.enquetes-tab-toggle.h-et-tabs{grid-template-columns:repeat(4,1fr);max-width:900px}

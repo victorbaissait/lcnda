@@ -180,6 +180,9 @@ try {
     if ($isWrite && $action === 'retouch_delete_version') {
         retouch_delete_version($pdo, $payload);
     }
+    if ($isWrite && $action === 'save_audio_project') {
+        save_audio_project($pdo, $_FILES['file'] ?? null, $_POST);
+    }
     if ($isWrite && $action === 'retouch_media') {
         retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -321,6 +324,8 @@ try {
         'layout_doc' => json_response(layout_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_projects' => json_response(['projects' => montage_projects_list($pdo)]),
         'retouch_projects' => json_response(['projects' => retouch_projects_list($pdo)]),
+        'audio_projects' => json_response(['projects' => audio_projects_list($pdo)]),
+        'audio_project' => json_response(audio_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'retouch_project' => json_response(retouch_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_project' => json_response(montage_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'layout_family_data' => json_response(layout_family_data($pdo, $_GET)),
@@ -9050,6 +9055,8 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_retouch_project' => save_retouch_project($pdo,$data),
             'rename_retouch_project' => rename_retouch_project($pdo,$data),
             'delete_retouch_project' => delete_retouch_project($pdo,$data),
+            'rename_audio_project' => rename_audio_project($pdo,$data),
+            'delete_audio_project' => delete_audio_project($pdo,$data),
             'delete_topic_sheet' => delete_topic_sheet($pdo,$data),
             'save_board_snapshot' => save_board_snapshot($pdo,$data),
             'restore_board_snapshot' => restore_board_snapshot($pdo,$data),

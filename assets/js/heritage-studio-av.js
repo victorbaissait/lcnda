@@ -307,8 +307,9 @@
         return new Blob(pages, {type: 'audio/ogg'});
     }
 
-    async function openAudio(media, onDone) {
+    async function openAudio(media, onDone, proj = null) {
         const ctx = audioCtx();
+        let projId = proj?.id || 0, projName = proj?.name || '';
         let buf;
         const loading = toast('Ouverture du son…');
         try { const res = await fetch(media.src || url(media.filename)); if (!res.ok) throw new Error('Fichier introuvable.'); buf = await ctx.decodeAudioData(await res.arrayBuffer()); }
@@ -334,10 +335,31 @@
                 <div class="h-avx-ops" data-tbg="au-ops" data-tbg-label="Outils du son">${OPS.map(([k, label, need]) => `<button type="button" class="button small secondary" data-avx-op="${k}" data-need="${need}">${label}</button>`).join('')}</div>
                 <p class="muted h-avx-help" data-avx-help>Les réglages s’appliquent à la sélection ; sans sélection, à tout le son.</p>
                 ${ver.html}
-                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div>`});
+                <div class="modal-actions"><button type="button" class="button small secondary" data-au-projects title="Rouvrir un son en cours de travail">📂 Projets…</button><button type="button" class="button small secondary" data-au-saveproj title="Garde le son en cours de travail pour y revenir plus tard (⌘S)">💾 Enregistrer le projet</button><span class="h-mt-projname" data-au-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Le son fini : nouvelle version, copie, nouveau son ou fichier téléchargé">💾 Enregistrer…</button></div>`});
         ext.tbApply?.(dl, 'audio');
         const $ = s => dl.querySelector(s), cv = $('[data-avx-canvas]'), g = cv.getContext('2d');
         bindVersions(dl, media, 'audio', () => { dirty = false; dl.close(); onDone?.(); });
+        // 💾 Projet audio : le son en cours (FLAC, sans perte) gardé à part pour y revenir ; « Enregistrer… » reste pour le son fini
+        const showProj = () => { const el = $('[data-au-projname]'); if (el) el.textContent = projId ? `🎧 ${projName}${dirty ? ' · modifié' : ''}` : ''; };
+        let projBusy = false;
+        async function saveProject(asNew = false) {
+            if (projBusy) return; stop();
+            let name = projName;
+            if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet son', message: 'Nom du projet (pour le retrouver dans « 📂 Projets… » ou Listes → Outils de modification) :', value: projName || media.title || 'Mon son', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
+            projBusy = true; const btn = $('[data-au-saveproj]'), l0 = btn.textContent; btn.disabled = true;
+            try {
+                const blob = await encodeFlac(buf, x => { btn.textContent = `Préparation… ${Math.round(x * 100)} %`; }); btn.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
+                const fd = new FormData(); fd.append('file', blob, 'projet.flac'); fd.append('id', String(asNew ? 0 : projId)); fd.append('name', name); fd.append('media_id', String(media.id || 0)); fd.append('source', proj?.source || media.filename || ''); fd.append('duration', String(buf.duration)); fd.append('csrf', S().csrf);
+                const r = await fetch('api.php?action=save_audio_project', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+                if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
+                projId = j.result.id; projName = j.result.name; dirty = false; showProj(); toast(`Projet « ${projName} » enregistré : tu peux y revenir quand tu veux.`);
+            } catch (err) { toast(err.message, 'error'); }
+            finally { projBusy = false; btn.disabled = false; btn.textContent = l0; }
+        }
+        $('[data-au-saveproj]').addEventListener('click', () => saveProject());
+        $('[data-au-projects]').addEventListener('click', () => audioProjectsDialog({current: projId, onOpen: async p => { if (dirty && !confirm('Ouvrir un autre projet sans enregistrer ce son ?')) return false; dirty = false; dl.close(); await ext.openAudioProject(p.id, onDone); }}));
+        dl.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } });
+        setTimeout(showProj, 0);
         $('[data-avx-cancel]').addEventListener('click', () => dl.querySelector('[data-avx-close]').click());
         const buildPeaks = () => { const step = 256, n = Math.ceil(buf.length / step), mn = new Float32Array(n), mx = new Float32Array(n), chs = [...Array(buf.numberOfChannels).keys()].map(c => buf.getChannelData(c));
             for (let k = 0; k < n; k++) { let lo = 1, hi = -1; const i1 = Math.min(buf.length, (k + 1) * step); for (let i = k * step; i < i1; i++) { let v = 0; for (const d of chs) v += d[i]; v /= chs.length; if (v < lo) lo = v; if (v > hi) hi = v; } mn[k] = lo; mx[k] = hi; }
@@ -371,7 +393,7 @@
             $('[data-avx-undo]').disabled = !history.length; $('[data-avx-redo]').disabled = !future.length;
         }
         const clampView = () => { view.dur = Math.max(0.05, Math.min(buf.duration, view.dur)); view.start = Math.max(0, Math.min(buf.duration - view.dur, view.start)); };
-        const setBuf = (nb, keepSel = false) => { history.push({buf, sel, cursor}); if (history.length > 15) history.shift(); future.length = 0; buf = nb; dirty = true; if (!keepSel) sel = null; cursor = Math.min(cursor, buf.duration); if (view.dur > buf.duration || view.start + view.dur > buf.duration) { view.start = 0; view.dur = buf.duration; } clampView(); buildPeaks(); draw(); };
+        const setBuf = (nb, keepSel = false) => { history.push({buf, sel, cursor}); if (history.length > 15) history.shift(); future.length = 0; buf = nb; dirty = true; if (!keepSel) sel = null; cursor = Math.min(cursor, buf.duration); if (view.dur > buf.duration || view.start + view.dur > buf.duration) { view.start = 0; view.dur = buf.duration; } clampView(); buildPeaks(); draw(); showProj(); };
         buildPeaks(); requestAnimationFrame(() => draw());
         // souris
         const tAt = e => { const r = cv.getBoundingClientRect(); return Math.max(0, Math.min(buf.duration, view.start + (e.clientX - r.left) / r.width * view.dur)); };
@@ -1473,6 +1495,34 @@
         let pr; try { pr = await A().api('montage_project', {id}); } catch (e) { return toast(e.message, 'error'); }
         return openVideo({id: 0, title: pr.name, media_type: 'video'}, onDone, null, pr);
     }
+    /** 📂 Les projets audio enregistrés */
+    async function audioProjectsDialog({current = 0, onOpen, onNew = null} = {}) {
+        let list = []; try { list = (await A().api('audio_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
+        const when = d => { const x = new Date(String(d || '').replace(' ', 'T') + 'Z'); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-mt-projdlg';
+        const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎧 SON</span><h2>Projets son</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            ${onNew ? '<div class="h-mt-pnew"><button type="button" class="button" data-new>＋ Nouveau projet son</button></div>' : ''}
+            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}" ${p.exists ? '' : 'disabled'}><span class="h-mt-pico">🎧</span><span><b>${esc(p.name)}</b><small>${esc(p.media_title || 'son de départ importé')} · ${fmt(p.duration, false)} · ${esc(when(p.updated_at))}${p.exists ? '' : ' · fichier de travail introuvable'}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (le son de départ reste dans les Médias)">🗑</button></div>`).join('')}</div>`
+                : '<p class="muted h-mt-pempty">Aucun projet son pour l’instant : dans « Modifier le son », « 💾 Enregistrer le projet ».</p>'}`; };
+        draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
+        dlg.addEventListener('click', async e => {
+            const b = e.target.closest('button'); if (!b) return;
+            if (b.dataset.x !== undefined) return dlg.close();
+            if (b.dataset.new !== undefined) { dlg.close(); return onNew?.(); }
+            try {
+                if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
+                if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const r = await A().api('rename_audio_project', {}, {method: 'POST', body: {id: p.id, name: n}}); p.name = r.result.name; return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!confirm(`Supprimer le projet « ${p.name} » ? Le son de départ reste dans les Médias.`)) return; await A().api('delete_audio_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+            } catch (err) { toast(err.message, 'error'); }
+        });
+    }
+    ext.openAudioProject = async (id, onDone) => {
+        let pr; try { pr = await A().api('audio_project', {id}); } catch (e) { return toast(e.message, 'error'); }
+        return openAudio({id: pr.media_id, filename: pr.source, title: pr.media_title || pr.name, media_type: 'audio', src: url(pr.work_file)}, onDone, pr);
+    };
+    // un nouveau projet son : un son de la base ou de l'ordinateur, ouvert dans « Modifier le son »
+    ext.newAudioProject = async onDone => { const o = await pickOther('audio'); if (!o) return; return openAudio(o.media ? {...o.media, media_type: 'audio'} : {id: 0, title: o.title || 'Son', media_type: 'audio', src: o.src}, onDone); };
+    ext.openAudioProjects = onDone => audioProjectsDialog({onOpen: p => ext.openAudioProject(p.id, onDone), onNew: () => ext.newAudioProject(onDone)});
     ext.openMontageProject = (id, onDone) => openProject(id, onDone);
     ext.newMontage = onDone => openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add');
     ext.openMontageProjects = onDone => projectsDialog({onOpen: p => openProject(p.id, onDone), onNew: () => openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add')});
