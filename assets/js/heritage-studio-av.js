@@ -1473,6 +1473,8 @@
         let pr; try { pr = await A().api('montage_project', {id}); } catch (e) { return toast(e.message, 'error'); }
         return openVideo({id: 0, title: pr.name, media_type: 'video'}, onDone, null, pr);
     }
+    ext.openMontageProject = (id, onDone) => openProject(id, onDone);
+    ext.newMontage = onDone => openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add');
     ext.openMontageProjects = onDone => projectsDialog({onOpen: p => openProject(p.id, onDone), onNew: () => openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add')});
     ext.openMontage = async (kind, onDone) => {
         if (kind === 'video') { let has = false; try { has = ((await A().api('montage_projects')).projects || []).length > 0; } catch (_) {} if (has) return ext.openMontageProjects(onDone); return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add'); }

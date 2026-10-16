@@ -264,7 +264,9 @@
     const tbLabel = el => { if (el.dataset.tbLabel) return el.dataset.tbLabel; const tx = (el.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 60), ti = el.title || el.getAttribute('aria-label') || el.querySelector('[title]')?.title || ''; return tx.length <= 3 && ti ? `${tx} ${ti}`.trim() : tx || ti || '(sans nom)'; };
     const tbKids = g => [...g.children].filter(c => !tbSkip(c));
     const TB_DEFS = 'genealogie-toolbar-defs'; // les boutons de chaque éditeur, notés à son ouverture (pour Maintenance → Montage, retouche et son)
-    const tbDefs = () => { try { const v = JSON.parse(localStorage.getItem(TB_DEFS) || '{}'); return v && typeof v === 'object' ? v : {}; } catch (_) { return {}; } };
+    // les boutons de départ de chaque éditeur : Maintenance → Montage, retouche et son les montre avant même la première ouverture
+    const TB_DEFAULT_DEFS = {"retouch": {"groups": [{"key": "rt-bar", "label": "Barre du haut (groupes)", "items": [["modes", "Les outils"], ["rt-undo=", "↶↷ Annuler (⌘Z)"], ["rt-zoom=-1", "−100 %+Ajuster1:1"]]}, {"key": "rt-modes", "label": "Outils", "items": [["rt-mode=adjust", "🎚 Réglages"], ["rt-mode=heal", "🩹 Correcteur de taches"], ["rt-mode=clone", "🧬 Tampon"], ["rt-mode=brush", "🖌 Pinceau"], ["rt-mode=text", "🔤 Texte"], ["rt-mode=hand", "✋ Déplacer la vue"]]}, {"key": "rt-opts", "label": "Options des outils (pinceau, texte…)", "items": [["o=size", "Taille 18 [ ]"], ["o=hard", "Dureté 55 %"], ["o=opacity", "Opacité 100 %"], ["o=brush", "Sorte de pinceau"], ["o=color", "Couleur"], ["o=swatches", "Couleurs rapides"], ["o=font", "Police"], ["o=font", "Contour blanc du texte"], ["o=clone", "Tampon : endroit à recopier, aligné"], ["o=textstyle", "Texte gras"], ["o=textstyle", "Texte italique"], ["o=textstyle", "Polices de l’ordi"], ["o=shape", "Forme (rectangle, ellipse, flèche…)"], ["o=shape", "Forme remplie"], ["o=shape", "Couleur de fond des formes"], ["o=wand", "Baguette : tolérance"], ["o=wand", "Baguette : contiguë"], ["o=sel", "Actions de la sélection"], ["o=crop", "Recadrage : proportions, redresser"], ["o=maskmode", "Masque : cacher / montrer"], ["rt-paint-help=", "Aide de l’outil"]]}, {"key": "rt-vtools", "label": "Colonne d’outils", "items": [["rt-mode=move", "Déplacer un élément d’un calque (V)"], ["rt-mode=marquee", "Sélection rectangle (M)"], ["rt-mode=ellipsesel", "Sélection ellipse (⇧M)"], ["rt-mode=lasso", "Lasso : entourer à main levée (L)"], ["rt-mode=polysel", "Plume : sélection point par point (P) — double-clic ou Entrée pour fermer"], ["rt-mode=wand", "Sélection automatique (baguette magique) (W)"], ["rt-mode=crop", "Recadrer et redresser (C)"], ["rt-mode=heal", "Correcteur de taches (J)"], ["rt-mode=clone", "Tampon : un endroit, ou une zone sélectionnée (S)"], ["rt-mode=brush", "Pinceau (B)"], ["rt-mode=shape", "Formes : rectangle, ellipse, ligne, flèche (U)"], ["rt-mode=text", "Texte (T)"], ["rt-mode=hand", "Main (H, ou espace)"], ["rt-mode=zoom", "Zoom (Z) — ⌥ pour reculer"], ["rt-color2=", "Couleur"]]}, {"key": "rt-adjust", "label": "Panneau Réglages", "items": [["rt-target=", "(sans nom)"], ["rt-preset=0", "Préréglages"], ["rt-out=exposure", "Exposition 0"], ["rt-out=brightness", "Luminosité 0"], ["rt-out=contrast", "Contraste 0"], ["rt-out=shadows", "Ombres 0"], ["rt-out=highlights", "Hautes lumières 0"], ["rt-out=saturation", "Saturation 0"], ["rt-out=warmth", "Chaleur 0"], ["rt-t=bw", "Noir et blanc Sépia Négatif"], ["rt-ch=rgb", "CourbeRVBRougeVertBleu"], ["rt-curve=", "(sans nom)"], ["rt-ptdel=", "Enlever le point"], ["p:Clic sur la courbe : ajo", "Clic sur la courbe : ajouter un point · glisser : le déplace"], ["rt-reset=", "Remettre les réglages à zéro"]]}]}, "video": {"groups": [{"key": "mt-tabs", "label": "Onglets de droite", "items": [["mt-tab=rush", "🎞️ Rush"], ["mt-tab=item", "🎯 Élément"], ["mt-tab=color", "🎨 Couleurs"], ["mt-tab=sound", "🔊 Son"], ["mt-tab=film", "🎞️ Film"]]}, {"key": "mt-transport", "label": "Lecture", "items": [["mt-play=", "▶ Lire"], ["mt-home=", "⏮ Au début"], ["mt-cur=", "Temps (où on en est / durée)"], ["mt-zoom=", "Zoom de la frise"]]}, {"key": "mt-ops", "label": "Outils du montage", "items": [["mt-op=undo", "↶ Annuler (⌘Z)"], ["mt-op=redo", "↷ Rétablir (⇧⌘Z)"], ["mt-op=split", "✂️ Couper ici"], ["mt-op=start", "⟦ Commence ici"], ["mt-op=end", "⟧ Finit ici"], ["mt-op=left", "← Avancer"], ["mt-op=right", "Reculer →"], ["mt-op=detach", "🔊 Détacher le son"], ["mt-op=del", "🗑 Enlever"], ["mt-op=addv1", "➕ Vidéo / photo à la suite"], ["mt-op=addv2", "➕ Incrustation"], ["mt-op=kfprev", "◀ ◆ Aller à l'image clé précédente de l'élément choisi"], ["mt-op=kfnext", "◆ ▶ Aller à l'image clé suivante de l'élément choisi"], ["mt-op=addtext", "➕ Titre / texte"], ["mt-op=adda", "➕ Son / musique"]]}]}, "layout": {"groups": [{"key": "ly-menus", "label": "Menus du haut", "items": [["menu-Fichier", "Menu Fichier"], ["menu-Édition", "Menu Édition"], ["menu-Objet", "Menu Objet"], ["menu-Page", "Menu Page"], ["menu-Affichage", "Menu Affichage"]]}, {"key": "ly-hist", "label": "Annuler / rétablir (en haut)", "items": [["ly-cmd=undo", "↶ Annuler (⌘Z)"], ["ly-cmd=redo", "↷ Rétablir (⇧⌘Z)"]]}, {"key": "ly-tools", "label": "Outils (colonne de gauche)", "items": [["ly-tool=select", "➤ Sélection (V)"], ["ly-tool=text", "T Texte (T)"], ["ly-tool=frame", "⊠ Cadre d’image (F)"], ["ly-tool=rect", "▭ Rectangle (M)"], ["ly-tool=ellipse", "◯ Ellipse (L)"], ["ly-tool=polygon", "⬡ Polygone (Y)"], ["ly-tool=star", "☆ Étoile (E)"], ["ly-tool=line", "╲ Ligne (\\)"], ["ly-tool=pen", "✒︎ Plume (P) : clic = point, double-clic ou Entrée = fini"], ["ly-tool=hand", "✋ Main (H)"], ["ly-tool=zoom", "🔍 Zoom (Z) — Alt pour reculer"], ["ly-target=fill", "⇄⧄ Fond et contour de l’objet choisi : clic = choisir la couleur"]]}, {"key": "ly-tabs", "label": "Onglets du panneau de droite", "items": [["ly-panel=pages", "📄Pages"], ["ly-panel=layers", "🗂Calques"], ["ly-panel=obj", "🔧Objet"], ["ly-panel=text", "🅰Texte"], ["ly-panel=color", "🎨Couleur"], ["ly-panel=links", "🔗Liens"], ["ly-panel=history", "🕘Historique"], ["ly-panel=doc", "⚙️Document"]]}, {"key": "ly-status", "label": "Barre du bas", "items": [["ly-cmd=first", "⏮ Première page"], ["ly-cmd=prev", "‹ Page précédente"], ["page", "Numéro de la page"], ["ly-cmd=next", "› Page suivante"], ["ly-cmd=last", "⏭ Dernière page"], ["ly-zoom=", "Zoom"], ["ly-pos=", "Position du pointeur (mm)"], ["ly-msg=", "Messages"]]}]}};
+    const tbDefs = () => { let v = {}; try { v = JSON.parse(localStorage.getItem(TB_DEFS) || '{}'); if (!v || typeof v !== 'object') v = {}; } catch (_) { v = {}; } return {...TB_DEFAULT_DEFS, ...v}; };
     ext.tbDefs = tbDefs;
     function tbRemember(root, id) {
         const groups = [...root.querySelectorAll('[data-tbg]')].map(g => ({key: g.dataset.tbg, label: g.dataset.tbgLabel || g.dataset.tbg, items: tbKids(g).map(el => [tbKeyOf(el), tbLabel(el)])})).filter(g => g.items.length);
@@ -681,6 +683,15 @@
             <p class="muted h-rt-note">L’original n’est jamais modifié : chaque retouche est une version de la photo, et tu choisis celle qui s’affiche partout.</p>`;
         document.body.appendChild(dlg);
         ext.tbApply(dlg, 'retouch'); // boutons rangés à sa façon (⚙️ Personnaliser)
+        // une image partie de zéro (canevas vide) ou importée : pas de « version » d'une photo de la base, juste l'image à enregistrer
+        const fresh = !!(item.fresh || project?.project?.fresh);
+        if (fresh) {
+            dlg.querySelectorAll('[data-rt-save="copy"], [data-rt-save="keep"], [data-rt-cmd="save:copy"], [data-rt-cmd="save:keep"]').forEach(b => { b.style.display = 'none'; });
+            const sh = dlg.querySelector('.modal-actions [data-rt-save="show"]'); if (sh) { sh.textContent = '🖼 Enregistrer l’image dans les Médias'; sh.title = 'L’image (calques compris) remplace celle du média ; le projet, lui, garde tous les calques pour continuer'; }
+            const ms = dlg.querySelector('[data-rt-cmd="save:show"] span'); if (ms) ms.textContent = '🖼 Enregistrer l’image dans les Médias';
+            sh?.insertAdjacentHTML('beforebegin', '<button type="button" class="button secondary" data-rt-cmd="download:png" title="L’image sur l’ordinateur (PNG)">⬇ Télécharger</button>');
+            dlg.querySelector('.h-rt-note')?.remove();
+        }
         try { const rl = JSON.parse(localStorage.getItem('genealogie-retouch-layout') || '{}') || {}; if (['left', 'right'].includes(rl.tools)) dlg.classList.add('rt-tools-' + rl.tools); if (rl.side === 'left') dlg.classList.add('rt-side-left'); } catch (_) {} // Maintenance → Montage, retouche et son
         ext.fullInit(dlg, 'retouch');
         const $ = q => dlg.querySelector(q), $$ = q => [...dlg.querySelectorAll(q)];
@@ -1404,7 +1415,7 @@
         async function projectData() {
             const snap = snapshot(), ids = [...new Set((JSON.stringify(snap).match(/"k\d+"/g) || []).map(x => x.slice(1, -1)))], m = {};
             ids.forEach(id => { const c = masks.get(id); if (c) m[id] = c.toDataURL('image/png'); });
-            return {...snap, masks: m, pw, ph, v: 1};
+            return {...snap, masks: m, pw, ph, v: 1, fresh};
         }
         let projBusy = false;
         async function saveProject(asNew = false) {
@@ -1588,7 +1599,7 @@
                     const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                     if (!r.ok || j.error) { toast(j.error || 'Création impossible.', 'error'); return false; }
                     dlg.close(); if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
-                    open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image'});
+                    open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image', fresh: true});
                 },
             });
         });
@@ -1601,7 +1612,7 @@
                 if (!r.ok || j.error) throw new Error(j.error || 'Import impossible.');
                 dlg.close(); toast('Photo importée dans les Médias.');
                 if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
-                open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image'});
+                open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image', fresh: true});
             } catch (err) { toast(err.message, 'error'); }
         });
         dlg.showModal(); load();

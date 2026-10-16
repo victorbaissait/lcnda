@@ -1387,6 +1387,10 @@
     ext.openLayoutStudio = openLibrary;
     /* Listes → 📐 Livres de famille : ce qu'on a fait dans l'atelier (livres et designs), pour les ouvrir, en créer, régler */
     ext.lists = ext.lists || {};
+    // pour Listes → 🛠️ Outils de modification
+    ext.openLayoutDoc = async (id, onSaved) => { const r = await api('layout_doc', {id}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved}); };
+    ext.newLayoutDoc = (mode, onSaved) => newDocWizard(mode, onSaved);
+    ext.layoutCoverHtml = (cover, w) => coverHtml(cover, w);
     ext.lists.layout_books = async token => {
         const S = A().state, ws = A().$('#workspace');
         const draw = async () => {

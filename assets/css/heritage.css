@@ -2896,3 +2896,12 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-mt-menubar .h-rt-menulist button{display:flex!important;width:100%!important;height:auto!important;min-height:0!important;white-space:nowrap;line-height:1.35;padding:6px 10px!important;border:0!important;box-shadow:none!important;background:none;font-weight:500;font-size:13px;text-align:left;justify-content:space-between;gap:20px}
 .h-mt-menubar .h-rt-menulist button:hover{background:#2a7de1;color:#fff}
 .h-mt-menubar summary{font-size:13.5px}
+/* Listes → 🛠️ Outils de modification */
+.h-et-tabs{max-width:720px}
+.h-et-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:4px 0 14px}
+.h-et-bar input[type=search]{flex:1 1 260px;max-width:420px}
+.h-et-sort{display:flex;gap:6px;align-items:center;margin:0}
+.h-et-thumb{width:72px}
+.h-et-thumb img,.h-et-ico{width:64px;height:42px;object-fit:cover;border-radius:5px;display:grid;place-items:center;background:#111;font-size:20px}
+.h-et-cover{display:block;width:44px}
+.h-et-act{display:flex;gap:4px;justify-content:flex-end}
