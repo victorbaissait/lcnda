@@ -224,7 +224,7 @@
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux façon Freeform, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
+                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux libres, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
                 <div class="presentation-changes-body">
                     <h4>📐 Atelier de mise en page</h4>
                     <ul>
@@ -241,7 +241,7 @@
                     <ul>
                         <li>Un montage complet : <b>autant de pistes vidéo, texte et son qu'on veut</b> (cacher, ranger, renommer), titres animés, fondus et transitions, son détaché, couleurs, plein écran.</li>
                         <li><b>Des photos dans les pistes vidéo</b>, à la suite ou incrustées ; <b>glisser un élément d'une piste à une autre</b> du même genre ; ⌫ pour enlever, B pour couper.</li>
-                        <li>Un inspecteur façon Final Cut : <b>Transformer</b> (position, rotation, échelle, ancrage), <b>Recadrer</b>, <b>Distorsion</b>, <b>Adaptation spatiale</b>, opacité et modes de fusion, avec des <b>images clés</b> pour tout animer.</li>
+                        <li>Un inspecteur pour chaque élément : <b>Transformer</b> (position, rotation, échelle, ancrage), <b>Recadrer</b>, <b>Distorsion</b>, <b>Adaptation spatiale</b>, opacité et modes de fusion, avec des <b>images clés</b> pour tout animer.</li>
                         <li>Disposition, couleurs des blocs, boutons et enregistrement réglables (MP4 ou WebM, taille, qualité), avec des <b>ensembles de réglages</b> nommés, exportés et importés.</li>
                         <li><b>Projets de montage</b> enregistrés à part de la vidéo exportée, onglet <b>Rush</b> (vidéos, photos et sons du projet, renommables), vidéo importée avec son son, <b>son séparé de l'image</b>, <b>vitesse</b> de chaque morceau, durée d'une photo au choix, réglages du son morceau par morceau ou pour tout le film, menu en haut, lecture et pause immédiates.</li>
                     </ul>
@@ -260,7 +260,7 @@
                         <li>Une liste <b>Outils de modification</b> : tous les projets de montage, de son, de retouche et de mise en page, à chercher, trier, ouvrir, renommer ou commencer.</li>
                         <li><b>Boutons et options</b> de chaque outil montrés, cachés et rangés, et <b>des raccourcis clavier à soi</b> dans chaque outil, refusés s'ils sont déjà pris par macOS, Windows, Linux ou l'application.</li>
                     </ul>
-                    <h4>🧩 Tableaux façon Freeform</h4>
+                    <h4>🧩 Tableaux libres</h4>
                     <ul>
                         <li>Dans Enquêtes : des tableaux libres avec <b>près de 800 formes</b>, notes, textes, flèches accrochées, dessin à main levée, plume, photos et documents, fiches, écrans de l'app, widgets.</li>
                         <li>Arbre automatique, frise et carte vivantes, calques, groupes, instantanés, présentation, commentaires, mémo vocal ; tableaux rattachés à une enquête, une battue, une famille, un événement ou un animal.</li>
@@ -719,7 +719,7 @@
                 </article>
                 <article class="presentation-about">
                     <h3>Raconter et transmettre</h3>
-                    <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> façon Freeform posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
+                    <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> libres posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Une base propre et vérifiée</h3>
