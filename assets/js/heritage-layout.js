@@ -914,7 +914,7 @@
             const pt = e.target.closest('[data-ly-panel]'); if (pt) { panel = pt.dataset.lyPanel; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b === pt)); renderPanel(); return; }
             if (e.target.closest('[data-ly-fsswap]')) { swapPaint(); return; }
             if (e.target.closest('[data-ly-fsnone]')) { if (!selected().length) return msg('Choisis un objet.'); applyPaint('none'); return; }
-            const tg0 = e.target.closest('[data-ly-target]'); if (tg0) { const it = one(), pk = dl.querySelector('[data-ly-fspick]'), c0 = it ? colorOf(D, tg0.dataset.lyTarget === 'fill' ? it.fill : it.stroke?.c, '') : ''; pk.value = hexOk(c0) ? c0 : (tg0.dataset.lyTarget === 'fill' ? '#ffffff' : '#111111'); pk.dataset.for = tg0.dataset.lyTarget; if (selected().length) setTimeout(() => { try { pk.showPicker ? pk.showPicker() : pk.click(); } catch { pk.click(); } }, 0); }
+            const tg0 = e.target.closest('.ly-fs [data-ly-target]'); if (tg0) { const it = one(), pk = dl.querySelector('[data-ly-fspick]'), c0 = it ? colorOf(D, tg0.dataset.lyTarget === 'fill' ? it.fill : it.stroke?.c, '') : ''; pk.value = hexOk(c0) ? c0 : (tg0.dataset.lyTarget === 'fill' ? '#ffffff' : '#111111'); pk.dataset.for = tg0.dataset.lyTarget; if (selected().length) setTimeout(() => { try { pk.showPicker ? pk.showPicker() : pk.click(); } catch { pk.click(); } }, 0); }
             const tg = e.target.closest('[data-ly-target]'); if (tg) { fillTarget = tg.dataset.lyTarget; panel = 'color'; dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b.dataset.lyPanel === 'color')); syncChrome(); renderPanel(); }
             if (!e.target.closest('details.ly-menu')) dl.querySelectorAll('details.ly-menu[open]').forEach(d => d.removeAttribute('open'));
         });
@@ -959,7 +959,7 @@
             } catch (err) { toast(err.message, 'error'); }
         }
         function close() { if (editingId) stopEditing(); if (dirty && !confirm('Fermer sans enregistrer les dernières modifications ?')) return; keyAc.abort(); dl.close(); }
-        dl.addEventListener('cancel', e => { e.preventDefault(); if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
+        dl.addEventListener('cancel', e => { e.preventDefault(); const om = dl.querySelectorAll('details.ly-menu[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
         dl.addEventListener('close', () => { keyAc.abort(); dl.remove(); onSaved?.(); });
         const docForExport = () => { if (editingId) stopEditing(); return D; };
         function exportPrint(bleed = false) { if (bleed && !D.page.bleed) toast('Le document n’a pas de fond perdu (Document → Fond perdu) : seuls les traits de coupe sont ajoutés.'); const html = printHtml(docForExport(), docName, true, {bleed}); const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée : autorise les fenêtres pour cette page.', 'error'); w.document.open(); w.document.write(html); w.document.close(); toast('Le livre s’ouvre : « Imprimer », puis « Enregistrer en PDF ».'); }
@@ -1113,6 +1113,8 @@
         pbody.addEventListener('mousedown', e => { if (e.target.closest('[data-ly-exec],[data-ly-palign],[data-ly-ins],[data-ly-pstyle],[data-ly-cstyle],[data-ly-link],[data-ly-tcol]')) e.preventDefault(); }); // garder la sélection du texte
         pbody.addEventListener('click', async e => {
             const b = e.target.closest('button, [data-ly-lpick]'); if (!b) return; const d = b.dataset;
+            // double-clic sur le nom d'un calque : le renommer (le premier clic redessine la liste, le dblclick natif se perd)
+            if (d.lyLpick !== undefined && e.detail === 2) { const l = D.layers.find(x => x.id === b.closest('[data-ly-layer]')?.dataset.lyLayer), v = await ask('Nom du calque :', l?.name); if (l && v) { l.name = v.slice(0, 60); commit(); renderPanel(); } return; }
             act = (b.title || b.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 50);
             if (d.lyHist !== undefined) return goTo(Number(d.lyHist));
             if (d.lyPage !== undefined) return goPage(Number(d.lyPage));
@@ -1161,7 +1163,6 @@
             if (d.lyLinkgo || d.lyLinkrep) { const [i, idv] = (d.lyLinkgo || d.lyLinkrep).split(':'); goPage(Number(i)); sel = [idv]; drawSel(); if (d.lyLinkrep) { const it = curList().find(x => x.id === idv); if (it) await placeImage(it); } return; }
             if (d.lyDefaults !== undefined) return defaultsDialog();
         });
-        pbody.addEventListener('dblclick', async e => { const n = e.target.closest('[data-ly-lpick]'); if (!n) return; const l = D.layers.find(x => x.id === n.closest('[data-ly-layer]').dataset.lyLayer), v = await ask('Nom du calque :', l?.name); if (l && v) { l.name = v.slice(0, 60); commit(); renderPanel(); } });
         pbody.addEventListener('input', e => { if (e.target.matches('[data-ly-gstop][type=range]')) e.target.nextElementSibling.textContent = e.target.value + ' %'; });
         // ⇄ : le fond devient le contour et inversement (comme InDesign)
         { const pk = dl.querySelector('[data-ly-fspick]'); pk.addEventListener('change', () => { const keep = fillTarget; fillTarget = pk.dataset.for || fillTarget; applyPaint(pk.value); fillTarget = keep === 'text' ? keep : fillTarget; syncChrome(); }); }
