@@ -627,11 +627,10 @@
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:sel', 'Masque d’après la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['tab:filters', '✨ Filtres : flou, netteté, grain, vignette…'], ['filters:reset', 'Enlever les filtres']]],
-            ['Affichage', [['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
+            ['Affichage', [['side:toggle', 'Replier / ouvrir le panneau de droite', 'Tab'], ['-'], ['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
         ];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2'; dlg.dataset.ownClose = '1'; // il demande lui-même avant de fermer
-        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><span class="spacer"></span>${ext.tbButton('retouch')}${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
-            <nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav>
+        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="spacer"></span>${ext.tbButton('retouch')}${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}">${i} ${esc(l)}</button>`).join('')}</span>
                 <span class="h-rt-hist-btns"><button type="button" class="button small secondary" data-rt-undo disabled title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-rt-redo disabled title="Rétablir (⇧⌘Z)">↷</button></span>
@@ -663,7 +662,7 @@
                     <section class="h-rt-versions" data-rt-versions></section>
                 </div>
                 <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l]) => `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(l)}" data-tb-label="${esc(l)}">${i}</button>`).join('')}<span class="h-rt-fg" title="Couleur (pinceau, texte, formes, remplir)" data-tb-label="Couleur"><input type="color" value="#d0021b" data-rt-color2></span></nav>
-                <aside class="h-rt-side"><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
+                <aside class="h-rt-side"><button type="button" class="h-rt-sidetog" data-rt-sidetog title="Replier le panneau (plus de place pour la photo) — Tab">⇥</button><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
                     <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
@@ -939,6 +938,15 @@
         $$('[data-rt-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.rtTab)));
         // ── Le panneau de droite s'élargit en glissant son bord (comme dans l'atelier de mise en page) ──
         const SIDE_KEY = 'genealogie-retouch-panel-w', mainEl = $('.h-rt-main');
+        // replier / ouvrir le panneau de droite (Réglages, Filtres, Calques, Historique) : gardé pour la prochaine fois
+        const setSideClosed = closed => {
+            dlg.classList.toggle('rt-side-closed', closed); const tg = $('[data-rt-sidetog]');
+            if (tg) { tg.textContent = closed ? '⇤' : '⇥'; tg.title = closed ? 'Ouvrir le panneau (Réglages, Calques…) — Tab' : 'Replier le panneau (plus de place pour la photo) — Tab'; }
+            if (closed) mainEl.style.setProperty('--rt-side', '34px'); else { mainEl.style.removeProperty('--rt-side'); try { const w0 = Number(localStorage.getItem(SIDE_KEY)); if (w0) mainEl.style.setProperty('--rt-side', w0 + 'px'); } catch (_) {} }
+            try { localStorage.setItem('genealogie-retouch-side-closed', closed ? '1' : ''); } catch (_) {}
+            requestAnimationFrame(() => setZoom(zoom));
+        };
+        $('[data-rt-sidetog]').addEventListener('click', () => setSideClosed(!dlg.classList.contains('rt-side-closed')));
         const setSide = w => { const v = Math.max(260, Math.min(Math.round(window.innerWidth * 0.6), Math.round(w))); mainEl.style.setProperty('--rt-side', v + 'px'); return v; };
         try { const w0 = Number(localStorage.getItem(SIDE_KEY)); if (w0) setSide(w0); } catch (_) {}
         $('[data-rt-resize]').addEventListener('pointerdown', e => {
@@ -1252,6 +1260,7 @@
             if (a === 'tab') return showTab(b);
             if (a === 'mode') return setMode(b);
             if (a === 'save') return dlg.querySelector(`[data-rt-save="${b}"]`)?.click();
+            if (k === 'side:toggle') return setSideClosed(!dlg.classList.contains('rt-side-closed'));
             if (k === 'proj:save') return saveProject();
             if (k === 'proj:saveas') return saveProject(true);
             if (k === 'proj:open') return openProjects();
@@ -1366,6 +1375,7 @@
             if (mod) return;
             if (e.key === 'Escape' && dlg.querySelector('details.h-rt-menu[open]')) { e.preventDefault(); e.stopImmediatePropagation(); dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open')); return; }
             if (e.key === 'Escape' && (poly || mode === 'crop' || moveSel)) { e.preventDefault(); e.stopImmediatePropagation(); if (poly) { poly = null; polyHover = null; draw(); } else if (mode === 'crop') { crop = null; setMode('adjust'); } else { moveSel = null; draw(); } return; }
+            if (e.key === 'Tab' && !e.shiftKey && !e.target.closest?.('input, select, textarea, button')) { e.preventDefault(); setSideClosed(!dlg.classList.contains('rt-side-closed')); return; }
             if (e.key === 'Enter' && poly) { e.preventDefault(); finishPoly(); return; }
             if (e.key === 'Enter' && mode === 'crop') { e.preventDefault(); cmd('cropok'); return; }
             if (e.key === '[') { setSize(brush * 0.85 - 1); return; } if (e.key === ']') { setSize(brush * 1.18 + 1); return; }
@@ -1491,6 +1501,7 @@
         }));
         dlg.showModal();
         photo(); setMode('adjust');
+        try { if (localStorage.getItem('genealogie-retouch-side-closed') === '1') setSideClosed(true); } catch (_) {}
         commit('Ouverture de la photo');
         if (project?.project) { // un projet rouvert : ses masques (images), puis tout son état, comme une étape de l'historique
             const d = project.project;

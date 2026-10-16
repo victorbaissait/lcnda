@@ -55,10 +55,12 @@
         for (let t = 0; t < 40 && button.isConnected && rowsLike(sig).indexOf(row) === k; t++) await wait(25);
         await wait(button.isConnected ? 0 : 30);
     }
-    async function moveBy(sig, from, delta) {
+    // les lignes d'une même liste (une fenêtre peut avoir plusieurs listes aux mêmes boutons ↑ ↓, comme « Personnaliser »)
+    const sameList = (sig, group) => { const all = rowsLike(sig); if (!group?.isConnected) return all; const mine = all.filter(r => r.parentElement === group); return mine.length ? mine : all; };
+    async function moveBy(sig, from, delta, group) {
         let k = from;
         for (let n = 0; n < Math.abs(delta); n++) {
-            const rows = rowsLike(sig), row = rows[k]; if (!row) return;
+            const rows = sameList(sig, group), row = rows[k]; if (!row) return;
             const b = delta < 0 ? upOf(row) : downOf(row);
             if (!b || b.disabled) return;
             await press(b, sig, k);
@@ -72,8 +74,9 @@
         const row = grip.closest('[data-dnd-row]'); if (!row) return;
         const up = upOf(row); if (!up) return;
         event.preventDefault();
-        const sig = signature(up), rows = rowsLike(sig), from = rows.indexOf(row); if (from < 0) return;
-        const marker = document.createElement('div'); marker.className = 'dnd-marker'; document.body.appendChild(marker);
+        const sig = signature(up), group = row.parentElement, rows = sameList(sig, group), from = rows.indexOf(row); if (from < 0) return;
+        // le trait se pose dans la fenêtre ouverte (sinon il serait derrière elle) et suit l'écran, pas la page
+        const marker = document.createElement('div'); marker.className = 'dnd-marker'; marker.style.position = 'fixed'; marker.style.zIndex = '100000'; (row.closest('dialog') || document.body).appendChild(marker);
         row.classList.add('is-dnd-dragging');
         let target = from;
         // en grille (plusieurs colonnes) : on lit dans l'ordre de lecture, ligne par ligne, et le trait devient vertical
@@ -84,15 +87,16 @@
             let ins = 0; while (ins < rows.length && before(rows[ins])) ins++;
             target = ins > from ? ins - 1 : ins;
             const ref = (rows[ins] || rows[rows.length - 1]).getBoundingClientRect();
-            if (multi) Object.assign(marker.style, {top: `${ref.top + window.scrollY}px`, left: `${(rows[ins] ? ref.left - 4 : ref.right) + window.scrollX}px`, width: '4px', height: `${ref.height}px`});
-            else Object.assign(marker.style, {top: `${(rows[ins] ? ref.top : ref.bottom) - 2 + window.scrollY}px`, left: `${ref.left + window.scrollX}px`, width: `${ref.width}px`, height: '4px'});
+            if (multi) Object.assign(marker.style, {top: `${ref.top}px`, left: `${rows[ins] ? ref.left - 4 : ref.right}px`, width: '4px', height: `${ref.height}px`});
+            else Object.assign(marker.style, {top: `${(rows[ins] ? ref.top : ref.bottom) - 2}px`, left: `${ref.left}px`, width: `${ref.width}px`, height: '4px'});
         };
         place(event.clientX, event.clientY);
-        const onMove = e => { place(e.clientX, e.clientY); const ws = document.getElementById('workspace'); if (ws) { if (e.clientY < 80) ws.scrollTop -= 14; if (e.clientY > window.innerHeight - 60) ws.scrollTop += 14; } };
+        const scroller = (() => { let el = row.parentElement; while (el && el !== document.body) { const o = getComputedStyle(el).overflowY; if ((o === 'auto' || o === 'scroll') && el.scrollHeight > el.clientHeight) return el; el = el.parentElement; } return document.getElementById('workspace'); })();
+        const onMove = e => { place(e.clientX, e.clientY); const ws = scroller; if (ws) { const r = ws.getBoundingClientRect(); if (e.clientY < Math.max(80, r.top + 30)) ws.scrollTop -= 14; if (e.clientY > Math.min(window.innerHeight - 60, r.bottom - 30)) ws.scrollTop += 14; } };
         const onUp = async () => {
             document.removeEventListener('pointermove', onMove); document.removeEventListener('pointerup', onUp);
             marker.remove(); row.classList.remove('is-dnd-dragging');
-            if (target !== from) await moveBy(sig, from, target - from);
+            if (target !== from) await moveBy(sig, from, target - from, group);
         };
         document.addEventListener('pointermove', onMove); document.addEventListener('pointerup', onUp);
     });

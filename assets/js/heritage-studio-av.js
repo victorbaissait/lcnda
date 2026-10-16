@@ -1255,6 +1255,37 @@
         $('[data-mt-saveproj]').addEventListener('click', () => saveProject());
         $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !confirm('Ouvrir un autre projet sans enregistrer celui-ci ?')) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
+        // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
+        const MT_MENUS = [
+            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '📤 Exporter la vidéo (MP4 / WebM)…'], ['-'], ['close', 'Fermer']]],
+            ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
+            ['Ajouter', [['import', '📥 Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique']]],
+            ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
+            ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante']]],
+            ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],
+        ];
+        const head = dl.querySelector('.modal-head');
+        head?.querySelector(':scope > div')?.insertAdjacentHTML('afterend', `<nav class="h-rt-menubar h-mt-menubar">${MT_MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-mt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav>`);
+        const closeMenus = () => dl.querySelectorAll('.h-mt-menubar details[open]').forEach(d => d.removeAttribute('open'));
+        dl.querySelectorAll('.h-mt-menubar details').forEach(d => {
+            d.addEventListener('toggle', () => { if (d.open) dl.querySelectorAll('.h-mt-menubar details').forEach(o => { if (o !== d) o.removeAttribute('open'); }); });
+            d.querySelector('summary').addEventListener('mouseenter', () => { if ([...dl.querySelectorAll('.h-mt-menubar details')].some(o => o.open && o !== d)) d.setAttribute('open', ''); });
+        });
+        dl.addEventListener('click', e => {
+            const b = e.target.closest('[data-mt-cmd]'); if (!b) { if (!e.target.closest('.h-mt-menubar')) closeMenus(); return; }
+            closeMenus(); const k = b.dataset.mtCmd, [a, v] = k.split(':'), q = sel0 => dl.querySelector(sel0)?.click();
+            if (k === 'proj') return saveProject(); if (k === 'projas') return saveProject(true);
+            if (k === 'projects') return q('[data-mt-projects]'); if (k === 'export') return q('[data-avx-save]'); if (k === 'close') return q('[data-avx-close]');
+            if (k === 'undo') return undoTo(hpos - 1); if (k === 'redo') return undoTo(hpos + 1);
+            if (a === 'op') return q(`[data-mt-op="${v}"]`);
+            if (k === 'import') return q('[data-mt-rimport]'); if (k === 'base') { q('[data-mt-tab="rush"]'); return q('[data-mt-rbase]'); }
+            if (a === 'track') return q(`[data-mt-addtrack="${v}"]`);
+            if (k === 'play') return q('[data-mt-play]'); if (k === 'home') return q('[data-mt-home]');
+            if (a === 'tab') return q(`[data-mt-tab="${v}"]`);
+            if (a === 'zoom') return ext.editorZoom?.(v === 'in' ? 1 : v === 'out' ? -1 : 0);
+            if (k === 'full') return q('[data-full-toggle]');
+        });
+        dl.addEventListener('keydown', e => { if (e.key === 'Escape' && dl.querySelector('.h-mt-menubar details[open]')) { e.preventDefault(); e.stopPropagation(); closeMenus(); } }, true);
         const markDirty = () => showProjName(); dl.addEventListener('input', markDirty); dl.addEventListener('click', () => setTimeout(markDirty, 0));
         // 📤 Exporter la vidéo : un fichier MP4 / WebM (le projet, lui, reste ouvert)
         $('[data-avx-save]').addEventListener('click', () => {
