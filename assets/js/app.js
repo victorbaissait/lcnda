@@ -7505,7 +7505,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     const nativeShowModal=HTMLDialogElement.prototype.showModal;
     HTMLDialogElement.prototype.showModal=function(...args){this.dataset.dirty='';return nativeShowModal.apply(this,args);};
     document.addEventListener('submit',event=>{const d=event.target.closest?.('dialog');if(d)d.dataset.dirty='';},true);
-    document.addEventListener('cancel',event=>{const d=event.target;if(!(d instanceof HTMLDialogElement)||d.id==='lightbox'||d.dataset.dirty!=='1')return;if(!confirm('Fermer sans enregistrer ce que tu as tapé ?'))event.preventDefault();else d.dataset.dirty='';},true);
+    document.addEventListener('cancel',event=>{const d=event.target;if(!(d instanceof HTMLDialogElement)||d.id==='lightbox'||d.dataset.dirty!=='1'||d.dataset.ownClose)return;if(!confirm('Fermer sans enregistrer ce que tu as tapé ?'))event.preventDefault();else d.dataset.dirty='';},true);
 
     // Champs de date : « v », « av », « ap », « en » au début → proposer « vers », « avant », « après », « entre … et »
     const DATE_FIELD_SELECTOR='input[name="date_text"],input[name="create_event_date"],input[name="date_alternative"]';

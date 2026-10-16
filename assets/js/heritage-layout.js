@@ -585,7 +585,7 @@
         let D = cleanDoc(doc), docId = id, docName = name, design = !!isDesign, dirty = false;
         let cur = 0, editMaster = null, sel = [], editingId = null, tool = 'select', zoom = 0.75, fillTarget = 'fill', guides = true, snapOn = true, preview = false, panel = 'pages', clip = null, savedRange = null, lastTextColor = '#111111';
         let act = ''; // ce qu'on vient de faire, pour l'historique
-        const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
+        const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; dl.dataset.ownClose = '1'; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
                 ${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['pdf', '📄 Exporter en PDF (imprimer)…'], ['pdfbleed', '📄 PDF avec fond perdu et traits de coupe…'], ['html', '🌐 Exporter en page HTML'], ['json', '⬇️ Exporter le fichier du document (.json)'], ['-'], ['close', 'Fermer']])}
