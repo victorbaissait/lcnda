@@ -2913,3 +2913,13 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-fi-modhead { margin:26px 0 10px; }
 .h-fi-modhead small { font-size:13px; font-weight:400; }
 .h-fi-cards.is-models .h-fi-cover { height:70px; font-size:32px; }
+/* ⌨️ Raccourcis à soi des outils de modification */
+.h-ek-tabs{margin:6px 0 10px}
+.h-ek-tabs small{font-weight:400;opacity:.75}
+.h-ek-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.h-ek-bar input[type=search]{flex:1 1 220px;max-width:380px}
+.h-ek-act{display:flex;gap:4px;justify-content:flex-end;white-space:nowrap}
+.h-ek-table td:first-child{min-width:220px}
+.h-ek-builtin{margin-top:10px;font-size:13px}
+.h-ek-builtin p{line-height:2}
+.h-ek-panel{grid-column:1/-1}

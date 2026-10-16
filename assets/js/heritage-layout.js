@@ -603,7 +603,8 @@
                 <select data-ly-zoom aria-label="Zoom" data-tb-label="Zoom">${[25, 33, 50, 66, 75, 100, 125, 150, 200, 300, 400].map(z => `<option value="${z / 100}">${z} %</option>`).join('')}<option value="fit">Page entière</option></select><span class="ly-pos" data-ly-pos data-tb-label="Position du pointeur (mm)"></span><span class="ly-msg" data-ly-msg data-tb-label="Messages"></span></div>
             <style data-ly-css></style>`;
         document.body.appendChild(dl);
-        ext.tbApply?.(dl, 'layout'); // menus, outils, onglets et barre du bas rangés ou cachés à sa façon (⚙️ Personnaliser, ou Maintenance)
+        ext.tbApply?.(dl, 'layout');
+        ext.editorKeysAttach?.(dl, 'layout'); // ⌨️ raccourcis à soi // menus, outils, onglets et barre du bas rangés ou cachés à sa façon (⚙️ Personnaliser, ou Maintenance)
         const $ = q => dl.querySelector(q), board = $('[data-ly-board]'), canvas = $('[data-ly-canvas]'), pbody = $('[data-ly-pbody]');
         bindFontPick(pbody);
         // le panneau de droite s'élargit ou se rétrécit en tirant sa bordure (gardé pour la prochaine fois)
