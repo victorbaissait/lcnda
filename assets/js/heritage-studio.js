@@ -828,6 +828,7 @@
             const loc = locate(n.id), parentId = loc?.parent?.id || '';
             const into = `<label class="h-rt-lpar" title="Ranger dans un groupe">📁 <select data-rt-lpar><option value="">(hors groupe)</option>${groupsList(n).map(([g, d]) => `<option value="${g.id}" ${g.id === parentId ? 'selected' : ''}>${'  '.repeat(d)}${esc(g.name)}</option>`).join('')}</select></label>`;
             const head = `<li class="h-rt-node is-${t}${n.id === activeLayer ? ' is-active' : ''}${n.visible ? '' : ' is-off'}" data-rt-l="${n.id}" style="--d:${depth}">
+                <span class="h-rt-grip" draggable="true" data-rt-grip title="Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe)">⠿</span>
                 ${t === 'group' ? `<button type="button" class="h-rt-gtog" data-rt-gopen title="${n.open !== false ? 'Replier' : 'Déplier'}">${n.open !== false ? '▾' : '▸'}</button>` : '<span class="h-rt-gtog"></span>'}
                 <button type="button" class="h-rt-eye" data-rt-lvis title="${n.visible ? 'Masquer' : 'Montrer'}">${n.visible ? '👁' : '◌'}</button>
                 <span class="h-rt-lico" title="${{layer: 'Calque', group: 'Groupe', adjust: 'Calque de réglage'}[t]}">${ICON[t]}</span>
@@ -839,7 +840,7 @@
                 ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>`
                 : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
                 ${mops}</li>`;
-            return head + (t === 'group' && n.open !== false ? (n.children.length ? [...n.children].reverse().map(c => rowHtml(c, depth + 1)).join('') : `<li class="h-rt-gempty" style="--d:${depth + 1}">groupe vide : range-y des calques (📁)</li>`) : '');
+            return head + (t === 'group' && n.open !== false ? (n.children.length ? [...n.children].reverse().map(c => rowHtml(c, depth + 1)).join('') : `<li class="h-rt-gempty" data-rt-gin="${n.id}" style="--d:${depth + 1}">groupe vide : glisse un calque ici (⠿), ou range-le avec 📁</li>`) : '');
         }
         function refreshLayers() {
             const pane = $('[data-rt-pane="layers"]');
@@ -897,6 +898,33 @@
                 loc.arr.splice(loc.arr.indexOf(l), 1); (g ? g.children : layers).push(l); if (g) g.open = true;
                 refreshLayers(); draw(); commit(g ? `« ${l.name} » rangé dans « ${g.name} »` : `« ${l.name} » sorti du groupe`);
             }
+        });
+        // ⠿ Glisser-déposer dans l'arbre : au-dessus ou en dessous d'un élément, dans un groupe (milieu de sa ligne, ou sa ligne « groupe vide »)
+        let dragId = '';
+        const isInside = (n, maybeChild) => { let hit = false; if (typeOf(n) === 'group') walk(n.children, x => { if (x === maybeChild) hit = true; }); return hit; };
+        const zoneOf = (li, e) => { if (li.dataset.rtGin) return 'into'; if (li.dataset.rtL === 'photo') return 'bottom'; const r = li.getBoundingClientRect(), y = (e.clientY - r.top) / r.height, grp = li.classList.contains('is-group'); return grp && y > 0.3 && y < 0.75 ? 'into' : y < 0.5 ? 'above' : 'below'; };
+        const clearDrop = () => paneLayers.querySelectorAll('.drop-above,.drop-below,.drop-into').forEach(x => x.classList.remove('drop-above', 'drop-below', 'drop-into'));
+        paneLayers.addEventListener('dragstart', e => { const g = e.target.closest('[data-rt-grip]'); if (!g) return; dragId = g.closest('[data-rt-l]').dataset.rtL; e.dataTransfer.setData('text/x-lcnda-layer', dragId); e.dataTransfer.effectAllowed = 'move'; g.closest('li').classList.add('is-dragging'); });
+        paneLayers.addEventListener('dragend', () => { dragId = ''; clearDrop(); paneLayers.querySelectorAll('.is-dragging').forEach(x => x.classList.remove('is-dragging')); });
+        paneLayers.addEventListener('dragover', e => {
+            if (!dragId) return; const li = e.target.closest('li[data-rt-l], li[data-rt-gin]'); if (!li) return;
+            const tid = li.dataset.rtGin || li.dataset.rtL, n = nodeById(dragId), tn = tid === 'photo' ? null : nodeById(tid);
+            if (tid === dragId || (tn && isInside(n, tn))) { clearDrop(); return; } // pas dans lui-même
+            e.preventDefault(); e.dataTransfer.dropEffect = 'move'; clearDrop();
+            const z = zoneOf(li, e); li.classList.add(z === 'into' ? 'drop-into' : z === 'bottom' ? 'drop-above' : 'drop-' + z);
+        });
+        paneLayers.addEventListener('dragleave', e => { if (!paneLayers.contains(e.relatedTarget)) clearDrop(); });
+        paneLayers.addEventListener('drop', e => {
+            if (!dragId) return; const li = e.target.closest('li[data-rt-l], li[data-rt-gin]'); clearDrop(); if (!li) return; e.preventDefault();
+            const n = nodeById(dragId), from = locate(dragId); if (!n || !from) return;
+            const tid = li.dataset.rtGin || li.dataset.rtL, z = zoneOf(li, e), tn = tid === 'photo' ? null : nodeById(tid);
+            if (tn === n || (tn && isInside(n, tn))) return;
+            from.arr.splice(from.arr.indexOf(n), 1);
+            let where = '';
+            if (z === 'bottom' || !tn) { layers.unshift(n); where = 'tout en bas, sur la photo'; }
+            else if (z === 'into') { tn.children.push(n); tn.open = true; where = `dans « ${tn.name} »`; }
+            else { const to = locate(tn.id), i = to.arr.indexOf(tn); to.arr.splice(z === 'above' ? i + 1 : i, 0, n); where = `${z === 'above' ? 'au-dessus de' : 'sous'} « ${tn.name} »`; }
+            activeLayer = n.id; dragId = ''; refreshLayers(); draw(); commit(`« ${n.name} » rangé ${where}`);
         });
         // le haut des onglets Réglages et Filtres dit ce qu'ils règlent : la photo, ou un calque de réglage
         function syncTarget() {
@@ -967,6 +995,7 @@
             marquee: ['sel'], ellipsesel: ['sel'], lasso: ['sel'], polysel: ['sel'], wand: ['wand', 'sel'], crop: ['crop'], shape: ['shape', 'size', 'opacity', 'color', 'swatches'], mask: ['size', 'hard', 'opacity', 'maskmode']};
         const optsFor = m => m === 'brush' && maskEdit ? 'mask' : m;
         const setMode = m => {
+            const changed = m !== mode; // le même outil redemandé (rafraîchir) ne change pas d'onglet
             if (m === 'crop' && mode !== 'crop') startCrop();
             if (m !== 'crop' && mode === 'crop') endCrop(true); // changer d'outil garde le cadre (Échap l'abandonne)
             mode = m; picking = false; poly = null; drag = null;
@@ -978,8 +1007,8 @@
             canvas.classList.toggle('is-painting', ['heal', 'clone', 'brush'].includes(m) && !(m === 'clone' && selId)); canvas.classList.toggle('is-text', m === 'text'); stage.classList.toggle('is-hand', m === 'hand');
             canvas.dataset.tool = m;
             brushEl.hidden = true; srcEl.hidden = true;
-            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } showTab('layers'); }
-            if (m === 'adjust') showTab('adjust');
+            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } if (changed) showTab('layers'); }
+            if (m === 'adjust' && changed) showTab('adjust');
             draw();
         };
         $$('[data-rt-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.rtMode)));

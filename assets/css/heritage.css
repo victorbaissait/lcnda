@@ -2870,3 +2870,11 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-mt-num{width:84px;padding:3px 6px}
 .h-mt-sfx{margin:8px 0}
 :root[data-theme="dark"] .h-mt-quick button{background:#2d3138;border-color:#3a3f46}
+/* Retouche : glisser-déposer des calques et des groupes */
+.h-rt-grip{cursor:grab;color:#9aa1ab;font-size:14px;padding:0 2px;user-select:none}
+.h-rt-grip:active{cursor:grabbing}
+.h-rt-tree li.is-dragging{opacity:.45}
+.h-rt-tree li.drop-above{box-shadow:inset 0 3px 0 #2a7de1}
+.h-rt-tree li.drop-below{box-shadow:inset 0 -3px 0 #2a7de1}
+.h-rt-tree li.drop-into{outline:2px dashed #2a7de1;outline-offset:-2px;background:#eaf2ff!important}
+:root[data-theme="dark"] .h-rt-tree li.drop-into{background:#1d2a3b!important}
