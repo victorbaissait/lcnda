@@ -624,7 +624,7 @@
             ['Fichier', [['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['cropclear', 'Annuler le recadrage'], ['-'], ['reset', 'Remettre les réglages à zéro']]],
-            ['Calque', [['ladd', '＋ Nouveau calque'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:sel', 'Masque d’après la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
+            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:sel', 'Masque d’après la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['tab:filters', '✨ Filtres : flou, netteté, grain, vignette…'], ['filters:reset', 'Enlever les filtres']]],
             ['Affichage', [['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
@@ -665,7 +665,7 @@
                 <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l]) => `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(l)}" data-tb-label="${esc(l)}">${i}</button>`).join('')}<span class="h-rt-fg" title="Couleur (pinceau, texte, formes, remplir)"><input type="color" value="#d0021b" data-rt-color2></span></nav>
                 <aside class="h-rt-side"><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
                     <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button></div>
-                    <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
+                    <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
                         <div class="h-rt-toggles"><label class="checkbox-line"><input type="checkbox" data-rt-t="bw"> Noir et blanc</label><label class="checkbox-line"><input type="checkbox" data-rt-t="sepia"> Sépia</label><label class="checkbox-line"><input type="checkbox" data-rt-t="invert"> Négatif</label></div>
                         <div class="h-rt-curve-head"><strong>Courbe</strong><span>${RT_CHANNELS.map(([k, l]) => `<button type="button" class="h-rt-ch ${k === 'rgb' ? 'is-active' : ''}" data-rt-ch="${k}">${l}</button>`).join('')}</span></div>
@@ -673,7 +673,7 @@
                         <div class="h-rt-curve-tools"><button type="button" class="button small secondary" data-rt-ptdel disabled>Enlever le point</button></div>
                         <p class="muted h-rt-help">Clic sur la courbe : ajouter un point · glisser : le déplacer · pour l’enlever : le choisir puis « Enlever le point » (ou ⌫), ou le glisser hors du cadre.</p>
                         <button type="button" class="link-button" data-rt-reset>Remettre les réglages à zéro</button></div>
-                    <div class="h-rt-tools" data-rt-pane="filters" hidden><p class="muted">Après les réglages, sur toute la photo (les calques restent nets). Les mêmes sur l’image enregistrée en pleine taille.</p>${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button></div>
+                    <div class="h-rt-tools" data-rt-pane="filters" hidden><div class="h-rt-target" data-rt-target></div><p class="muted">Après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille.</p>${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button></div>
                     <div class="h-rt-tools" data-rt-pane="layers" hidden></div>
                     <div class="h-rt-tools" data-rt-pane="history" hidden></div>
                 </aside>
@@ -694,34 +694,78 @@
         const addMask = c => { const id = 'k' + (++maskSeq); masks.set(id, c); return id; };
         const blankMask = () => { const c = document.createElement('canvas'); c.width = pw; c.height = ph; return c; };
         let selId = null; // la sélection en cours (ou aucune)
-        // ── Calques : la photo (réglages, taches, tampon) tout en bas, puis les calques d'annotation ──
+        // ── Calques : la photo (réglages, taches, tampon) tout en bas, puis un arbre (du bas vers le haut) de calques,
+        //    de groupes (qui peuvent contenir d'autres groupes) et de calques de réglage (réglages et filtres) ──
         st.strokes = [];
         let layers = [], activeLayer = '', layerSeq = 0, maskEdit = ''; // maskEdit : le calque (ou 'photo') dont on peint le masque
+        const nid = p => p + (++layerSeq) + Date.now().toString(36);
+        const typeOf = n => n?.type || 'layer';
+        const walk = (arr, fn, parent = null) => arr.forEach(n => { fn(n, arr, parent); if (typeOf(n) === 'group') walk(n.children, fn, n); });
+        const nodeById = id => { let r = null; if (id) walk(layers, n => { if (n.id === id) r = n; }); return r; };
+        const locate = id => { let r = null; walk(layers, (n, arr, parent) => { if (n.id === id) r = {n, arr, parent}; }); return r; };
+        const drawLayers = () => { const out = []; walk(layers, n => { if (typeOf(n) === 'layer') out.push(n); }); return out; };
+        // les calques qu'on peut toucher (visibles et non verrouillés, groupes compris), du haut vers le bas
+        const hitList = () => { const out = []; const rec = (arr, vis, lk) => arr.forEach(n => { const v = vis && n.visible, l2 = lk || n.locked; if (typeOf(n) === 'group') rec(n.children, v, l2); else if (typeOf(n) === 'layer' && v && !l2) out.push(n); }); rec(layers, true, false); return out.reverse(); };
+        const lockedDeep = n => { if (!n) return false; if (n.locked) return true; let p = locate(n.id)?.parent; while (p) { if (p.locked) return true; p = locate(p.id)?.parent; } return false; }; // verrouillé, lui ou un de ses groupes
         const layerCanvases = new Map();
         const layerCanvas = l => { let c = layerCanvases.get(l.id); if (!c) { c = document.createElement('canvas'); c.width = pw; c.height = ph; layerCanvases.set(l.id, c); } return c; };
-        const newLayer = name => { const l = {id: 'l' + (++layerSeq) + Date.now().toString(36), name: name || `Calque ${layers.length + 1}`, visible: true, opacity: 1, locked: false, ops: [], mask: null}; layers.push(l); activeLayer = l.id; return l; };
+        // un nouvel élément se range au-dessus du calque choisi (ou dans le groupe choisi)
+        const insertNode = n => {
+            const a = locate(activeLayer);
+            if (a && typeOf(a.n) === 'group' && a.n.open !== false) a.n.children.push(n);
+            else if (a) a.arr.splice(a.arr.indexOf(a.n) + 1, 0, n);
+            else layers.push(n);
+            activeLayer = n.id; return n;
+        };
+        const newLayer = name => insertNode({id: nid('l'), type: 'layer', name: name || `Calque ${drawLayers().length + 1}`, visible: true, opacity: 1, locked: false, ops: [], mask: null});
+        const newGroup = name => insertNode({id: nid('g'), type: 'group', name: name || `Groupe ${(() => { let k = 0; walk(layers, n => { if (typeOf(n) === 'group') k++; }); return k + 1; })()}`, visible: true, opacity: 1, locked: false, mask: null, open: true, children: []});
+        const adjDefault = () => { const d = rtDefault(); delete d.crop; return d; };
+        const newAdjust = name => insertNode({id: nid('a'), type: 'adjust', name: name || 'Réglages', visible: true, opacity: 1, mask: null, clip: false, st: adjDefault()});
         let photoL = {visible: true, opacity: 1, mask: null}; // la photo est un calque comme les autres (visibilité, opacité, masque)
         const photoCanvas = document.createElement('canvas'); photoCanvas.width = pw; photoCanvas.height = ph; const pctx = photoCanvas.getContext('2d');
         const env = () => ({masks, photo: photoCanvas});
         let strokeVer = 0, photoKey = '';
-        const hasPixels = l => l.ops.some(o => o.type === 'pixels');
-        const renderLayer = l => rtDrawLayer(layerCanvas(l), l, env());
+        const hasPixels = l => (l.ops || []).some(o => o.type === 'pixels');
+        const renderLayer = l => { if (typeOf(l) === 'layer') rtDrawLayer(layerCanvas(l), l, env()); };
         // la photo n'est recalculée que si ses réglages ou ses corrections ont changé
-        const photo = () => { const k = strokeVer + '|' + JSON.stringify({...st, strokes: 0}); if (k !== photoKey) { photoKey = k; pctx.putImageData(rtApply(srcData, out, st), 0, 0); layers.forEach(l => { if (hasPixels(l)) renderLayer(l); }); } return photoCanvas; };
+        const photo = () => { const k = strokeVer + '|' + JSON.stringify({...st, strokes: 0}); if (k !== photoKey) { photoKey = k; pctx.putImageData(rtApply(srcData, out, st), 0, 0); drawLayers().forEach(l => { if (hasPixels(l)) renderLayer(l); }); } return photoCanvas; };
+        // les réglages (et filtres) que montrent les onglets Réglages et Filtres : ceux du calque de réglage choisi, sinon ceux de la photo
+        const adjNode = () => { const n = nodeById(activeLayer); return typeOf(n) === 'adjust' ? n : null; };
+        const T = () => adjNode()?.st || st;
+        const blank = (W, H) => { const c = document.createElement('canvas'); c.width = W; c.height = H; return c; };
+        /** Un calque de réglage appliqué à une image (son masque et son opacité dosent l'effet ; la transparence est gardée) */
+        function applyAdjust(src, n, W, H) {
+            const g0 = src.getContext('2d'), id = g0.getImageData(0, 0, W, H), o = new ImageData(W, H); rtApply(id, o, n.st);
+            const adj = blank(W, H); adj.getContext('2d').putImageData(o, 0, 0);
+            const res = blank(W, H), g = res.getContext('2d'); g.drawImage(src, 0, 0); g.globalCompositeOperation = 'source-atop'; g.globalAlpha = n.opacity ?? 1; g.drawImage(rtMasked(adj, n.mask, masks), 0, 0); return res;
+        }
+        /** Une pile (du bas vers le haut) : calques, groupes (rendus à part, puis posés) et réglages. Un réglage « juste dessous »
+            (clip) ne touche que l'élément qui est sous lui ; sinon il touche tout ce qui est dessous dans la même pile. */
+        function renderStack(arr, base, R) {
+            let acc = base || blank(R.W, R.H), i = 0;
+            while (i < arr.length) {
+                const n = arr[i];
+                if (!n.visible) { i++; continue; }
+                if (typeOf(n) === 'adjust') { acc = applyAdjust(acc, n, R.W, R.H); i++; continue; }
+                let own = typeOf(n) === 'group' ? renderStack(n.children, null, R) : R.layer(n), j = i + 1;
+                while (j < arr.length && typeOf(arr[j]) === 'adjust' && arr[j].clip) { if (arr[j].visible) own = applyAdjust(own, arr[j], R.W, R.H); j++; }
+                own = rtMasked(own, R.mask(n), masks);
+                const g = acc.getContext('2d'); g.globalAlpha = n.opacity ?? 1; g.drawImage(own, 0, 0); g.globalAlpha = 1;
+                i = j;
+            }
+            return acc;
+        }
+        const photoBase = (pc, W, H, maskOps) => { const b = blank(W, H); if (photoL.visible) { const g = b.getContext('2d'); g.globalAlpha = photoL.opacity; g.drawImage(rtMasked(pc, maskOps, masks), 0, 0); g.globalAlpha = 1; } return b; };
         const draw = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => {
             if (showBefore) { ctx.putImageData(baseData, 0, 0); return; }
             ctx.clearRect(0, 0, pw, ph);
             const pc = photo();
-            if (photoL.visible) { ctx.globalAlpha = photoL.opacity; ctx.drawImage(rtMasked(pc, photoL.mask, masks), 0, 0); ctx.globalAlpha = 1; }
-            for (const l of layers) if (l.visible) {
-                const live = painting?.preview && painting.layer === l && !painting.mask;
-                let src = layerCanvas(l);
-                if (live) { const t = document.createElement('canvas'); t.width = pw; t.height = ph; const g = t.getContext('2d'); g.drawImage(src, 0, 0); rtDrawOp(g, painting.preview, pw, ph, env()); src = t; }
-                const mops = painting?.mask && painting.layer === l ? [...(l.mask || []), painting.preview] : l.mask;
-                ctx.globalAlpha = l.opacity; ctx.drawImage(rtMasked(src, mops, masks), 0, 0); ctx.globalAlpha = 1;
-            }
-            if (painting?.mask && painting.layer === 'photo') { ctx.clearRect(0, 0, pw, ph); ctx.globalAlpha = photoL.opacity; ctx.drawImage(rtMasked(pc, [...(photoL.mask || []), painting.preview], masks), 0, 0); ctx.globalAlpha = 1; for (const l of layers) if (l.visible) { ctx.globalAlpha = l.opacity; ctx.drawImage(rtMasked(layerCanvas(l), l.mask, masks), 0, 0); ctx.globalAlpha = 1; } }
-            if (painting?.patch) { ctx.save(); ctx.drawImage((() => { const t = document.createElement('canvas'); t.width = pw; t.height = ph; const g = t.getContext('2d'); g.drawImage(pc, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(masks.get(painting.patch.mask), 0, 0); return t; })(), painting.patch.dx * pw, painting.patch.dy * ph); ctx.restore(); }
+            const R = {W: pw, H: ph,
+                layer: l => { const src = layerCanvas(l); if (!(painting?.preview && painting.layer === l && !painting.mask)) return src; const t = blank(pw, ph), g = t.getContext('2d'); g.drawImage(src, 0, 0); rtDrawOp(g, painting.preview, pw, ph, env()); return t; },
+                mask: n => painting?.mask && painting.layer === n ? [...(n.mask || []), painting.preview] : n.mask};
+            const pm = painting?.mask && painting.layer === 'photo' ? [...(photoL.mask || []), painting.preview] : photoL.mask;
+            ctx.drawImage(renderStack(layers, photoBase(pc, pw, ph, pm), R), 0, 0);
+            if (painting?.patch) { ctx.save(); ctx.drawImage((() => { const t = blank(pw, ph), g = t.getContext('2d'); g.drawImage(pc, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(masks.get(painting.patch.mask), 0, 0); return t; })(), painting.patch.dx * pw, painting.patch.dy * ph); ctx.restore(); }
             drawOverlay();
         }); };
         // ── Ce qui se dessine par-dessus : la sélection (le reste assombri), le recadrage, l'élément choisi, le tracé en cours ──
@@ -742,7 +786,7 @@
             }
             if (drag?.sel) { const d = drag; octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 600); octx.setLineDash([6, 4]); octx.beginPath(); selPath(octx, d.sel); octx.stroke(); octx.restore(); }
             if (poly?.length) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.fillStyle = '#fff'; octx.lineWidth = Math.max(1, pw / 600); octx.beginPath(); poly.forEach(([x, y], i) => i ? octx.lineTo(x, y) : octx.moveTo(x, y)); if (polyHover) octx.lineTo(...polyHover); octx.stroke(); poly.forEach(([x, y]) => { octx.fillRect(x - 3, y - 3, 6, 6); octx.strokeRect(x - 3, y - 3, 6, 6); }); octx.restore(); }
-            if (moveSel && mode === 'move') { const l = layers.find(x => x.id === moveSel.layer), op = l?.ops[moveSel.i], bb = op && opBox(op); if (bb) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 700); octx.setLineDash([5, 4]); octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8); octx.restore(); } }
+            if (moveSel && mode === 'move') { const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i], bb = op && opBox(op); if (bb) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 700); octx.setLineDash([5, 4]); octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8); octx.restore(); } }
         }
         // ── Historique : chaque geste ou réglage est une étape ; un clic sur une étape y revient ──
         let history = [], hpos = -1;
@@ -759,8 +803,8 @@
             st.strokes = rtClone(s.strokes);
             srcData.data.set(baseData.data); if (st.strokes.length) rtReplayStrokes(srcData, st.strokes, masks); strokeVer++;
             layers = rtClone(s.layers); activeLayer = s.activeLayer; photoL = rtClone(s.photoL); selId = s.selId; moveSel = null;
-            if (maskEdit && maskEdit !== 'photo' && !layers.some(l => l.id === maskEdit && l.mask)) maskEdit = ''; if (maskEdit === 'photo' && !photoL.mask) maskEdit = '';
-            photoKey = ''; photo(); layerCanvases.clear(); layers.forEach(renderLayer);
+            if (maskEdit && maskEdit !== 'photo' && !nodeById(maskEdit)?.mask) maskEdit = ''; if (maskEdit === 'photo' && !photoL.mask) maskEdit = '';
+            photoKey = ''; photo(); layerCanvases.clear(); drawLayers().forEach(renderLayer);
             hpos = i; syncControls(); refreshLayers(); refreshHistory(); syncCrop();
         };
         const undoBtn = $('[data-rt-undo]'), redoBtn = $('[data-rt-redo]');
@@ -773,51 +817,95 @@
         $('[data-rt-pane="history"]').addEventListener('click', e => { const b = e.target.closest('[data-rt-hist]'); if (b) restore(Number(b.dataset.rtHist)); });
         undoBtn.addEventListener('click', () => restore(hpos - 1));
         redoBtn.addEventListener('click', () => restore(hpos + 1));
-        // ── Calques : liste, ajout, ordre, visibilité, opacité, verrou, nom, masque ──
+        // ── Calques : un arbre (calques, groupes de groupes, réglages), visibilité, opacité, verrou, nom, masque ──
         const thumbOf = (c, maskOps) => { const t = document.createElement('canvas'); t.width = 44; t.height = Math.max(1, Math.round(44 * ph / pw)); const g = t.getContext('2d'); if (maskOps) { g.fillStyle = '#fff'; g.fillRect(0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-out'; g.drawImage(rtRenderMask(maskOps, pw, ph, masks), 0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-over'; g.fillStyle = '#111'; g.fillRect(0, 0, t.width, t.height); } else g.drawImage(c, 0, 0, t.width, t.height); return t.toDataURL(); };
         const maskBtns = (id, m) => m ? `<button type="button" class="h-rt-mthumb${maskEdit === id ? ' is-on' : ''}" data-rt-medit title="${maskEdit === id ? 'Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque' : 'Masque : clic pour le peindre au pinceau'}"><img src="${thumbOf(null, m)}" alt="masque"></button>` : `<button type="button" class="icon-button small" data-rt-madd title="Ajouter un masque (cacher une partie sans l’effacer)">🎭</button>`;
+        const groupsList = (except = null) => { const out = []; const rec = (arr, depth, banned) => arr.forEach(n => { if (typeOf(n) !== 'group') return; const ban = banned || n === except; if (!ban) out.push([n, depth]); rec(n.children, depth + 1, ban); }); rec(layers, 0, false); return out; };
+        const ICON = {layer: '🖌', group: '📁', adjust: '🎚'};
+        function rowHtml(n, depth) {
+            const t = typeOf(n), mops = n.mask ? `<span class="h-rt-mops"><button type="button" class="link-button" data-rt-minv>inverser le masque</button><button type="button" class="link-button" data-rt-mdel>retirer le masque</button></span>` : '';
+            const loc = locate(n.id), parentId = loc?.parent?.id || '';
+            const into = `<label class="h-rt-lpar" title="Ranger dans un groupe">📁 <select data-rt-lpar><option value="">(hors groupe)</option>${groupsList(n).map(([g, d]) => `<option value="${g.id}" ${g.id === parentId ? 'selected' : ''}>${'  '.repeat(d)}${esc(g.name)}</option>`).join('')}</select></label>`;
+            const head = `<li class="h-rt-node is-${t}${n.id === activeLayer ? ' is-active' : ''}${n.visible ? '' : ' is-off'}" data-rt-l="${n.id}" style="--d:${depth}">
+                ${t === 'group' ? `<button type="button" class="h-rt-gtog" data-rt-gopen title="${n.open !== false ? 'Replier' : 'Déplier'}">${n.open !== false ? '▾' : '▸'}</button>` : '<span class="h-rt-gtog"></span>'}
+                <button type="button" class="h-rt-eye" data-rt-lvis title="${n.visible ? 'Masquer' : 'Montrer'}">${n.visible ? '👁' : '◌'}</button>
+                <span class="h-rt-lico" title="${{layer: 'Calque', group: 'Groupe', adjust: 'Calque de réglage'}[t]}">${ICON[t]}</span>
+                <input value="${esc(n.name)}" data-rt-lname aria-label="Nom">
+                ${maskBtns(n.id, n.mask)}
+                ${t !== 'adjust' ? `<button type="button" class="h-rt-eye" data-rt-llock title="${n.locked ? 'Déverrouiller' : 'Verrouiller'}">${n.locked ? '🔒' : '🔓'}</button>` : ''}
+                <span class="h-rt-lmoves"><button type="button" class="icon-button small" data-rt-lmove="1" title="Monter">↑</button><button type="button" class="icon-button small" data-rt-lmove="-1" title="Descendre">↓</button>${t !== 'group' ? '<button type="button" class="icon-button small" data-rt-ldup title="Dupliquer">⧉</button>' : ''}<button type="button" class="icon-button small" data-rt-ldel title="${t === 'group' ? 'Supprimer le groupe (ce qu’il contient reste)' : 'Supprimer'}">✕</button></span>
+                <div class="h-rt-lmore"><label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${into}</div>
+                ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>`
+                : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
+                ${mops}</li>`;
+            return head + (t === 'group' && n.open !== false ? (n.children.length ? [...n.children].reverse().map(c => rowHtml(c, depth + 1)).join('') : `<li class="h-rt-gempty" style="--d:${depth + 1}">groupe vide : range-y des calques (📁)</li>`) : '');
+        }
         function refreshLayers() {
             const pane = $('[data-rt-pane="layers"]');
-            pane.innerHTML = `<p class="muted">Le pinceau, les formes et le texte vont sur le calque choisi (en bleu) ; la photo reste dessous. 🎭 : un masque cache une partie du calque sans rien effacer.</p>
-                <div class="h-rt-lbar"><button type="button" class="button small" data-rt-ladd>＋ Nouveau calque</button>${selId ? '<button type="button" class="button small secondary" data-rt-cmd="sel:copy">Sélection → calque</button>' : ''}</div>
-                <ol class="h-rt-layers">${[...layers].reverse().map(l => `<li class="${l.id === activeLayer ? 'is-active' : ''}" data-rt-l="${l.id}">
-                    <button type="button" class="h-rt-eye" data-rt-lvis title="${l.visible ? 'Masquer' : 'Montrer'}">${l.visible ? '👁' : '◌'}</button>
-                    <input value="${esc(l.name)}" data-rt-lname aria-label="Nom du calque">
-                    ${maskBtns(l.id, l.mask)}
-                    <button type="button" class="h-rt-eye" data-rt-llock title="${l.locked ? 'Déverrouiller' : 'Verrouiller'}">${l.locked ? '🔒' : '🔓'}</button>
-                    <span class="h-rt-lmoves"><button type="button" class="icon-button small" data-rt-lmove="1" title="Monter">↑</button><button type="button" class="icon-button small" data-rt-lmove="-1" title="Descendre">↓</button><button type="button" class="icon-button small" data-rt-ldup title="Dupliquer">⧉</button><button type="button" class="icon-button small" data-rt-ldel title="Supprimer">✕</button></span>
-                    <label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round(l.opacity * 100)}" data-rt-lopac></label>
-                    <small class="muted">${l.ops.length} élément${l.ops.length > 1 ? 's' : ''}</small>
-                    ${l.ops.length ? `<button type="button" class="link-button" data-rt-lclear>vider</button>` : ''}${l.mask ? `<span class="h-rt-mops"><button type="button" class="link-button" data-rt-minv>inverser le masque</button><button type="button" class="link-button" data-rt-mdel>retirer le masque</button></span>` : ''}</li>`).join('')}
-                    <li class="is-photo${activeLayer === 'photo' ? ' is-active' : ''}" data-rt-l="photo"><button type="button" class="h-rt-eye" data-rt-lvis title="${photoL.visible ? 'Masquer la photo' : 'Montrer la photo'}">${photoL.visible ? '👁' : '◌'}</button><img class="h-rt-pthumb" src="${thumbOf(photoCanvas)}" alt=""><strong>🖼 Photo</strong>${maskBtns('photo', photoL.mask)}
-                    <label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round(photoL.opacity * 100)}" data-rt-lopac></label>
+            pane.dataset.dndOff = '';
+            pane.innerHTML = `<p class="muted">Le pinceau, les formes et le texte vont sur le calque choisi (en bleu). 📁 un groupe peut contenir des calques et d’autres groupes ; 🎚 un calque de réglage applique réglages et filtres à ce qui est dessous (ou seulement à l’élément juste dessous). 🎭 un masque cache sans effacer.</p>
+                <div class="h-rt-lbar"><button type="button" class="button small" data-rt-ladd>＋ Calque</button><button type="button" class="button small secondary" data-rt-gadd title="Un groupe vide au-dessus du calque choisi">＋ Groupe</button><button type="button" class="button small secondary" data-rt-aadd title="Réglages et filtres dans un calque">＋ Réglage</button>${nodeById(activeLayer) ? '<button type="button" class="button small secondary" data-rt-gwrap title="Met le calque choisi dans un nouveau groupe (⌘G)">Grouper</button>' : ''}${selId ? '<button type="button" class="button small secondary" data-rt-cmd="sel:copy">Sélection → calque</button>' : ''}</div>
+                <ol class="h-rt-layers h-rt-tree">${[...layers].reverse().map(n => rowHtml(n, 0)).join('')}
+                    <li class="is-photo${activeLayer === 'photo' ? ' is-active' : ''}" data-rt-l="photo"><span class="h-rt-gtog"></span><button type="button" class="h-rt-eye" data-rt-lvis title="${photoL.visible ? 'Masquer la photo' : 'Montrer la photo'}">${photoL.visible ? '👁' : '◌'}</button><img class="h-rt-pthumb" src="${thumbOf(photoCanvas)}" alt=""><strong>🖼 Photo</strong>${maskBtns('photo', photoL.mask)}
+                    <div class="h-rt-lmore"><label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round(photoL.opacity * 100)}" data-rt-lopac></label></div>
                     <small class="muted">réglages, ${st.strokes.length} correction${st.strokes.length > 1 ? 's' : ''}</small>${photoL.mask ? `<span class="h-rt-mops"><button type="button" class="link-button" data-rt-minv>inverser le masque</button><button type="button" class="link-button" data-rt-mdel>retirer le masque</button></span>` : ''}</li></ol>`;
-            $('[data-rt-mergebox]').hidden = !layers.some(l => l.ops.length);
+            $('[data-rt-mergebox]').hidden = !drawLayers().some(l => l.ops.length) && !layers.some(n => typeOf(n) !== 'layer');
+            syncTarget();
         }
-        const target = id => id === 'photo' ? photoL : layers.find(x => x.id === id);
+        const target = id => id === 'photo' ? photoL : nodeById(id);
         const addMaskTo = (id, ops) => { const t = target(id); if (!t) return; t.mask = ops; maskEdit = id; if (id !== 'photo') renderLayer(t); refreshLayers(); draw(); };
+        const groupWrap = () => { const a = locate(activeLayer); if (!a) return toast('Choisis d’abord un calque.', 'error'); const g = {id: nid('g'), type: 'group', name: `Groupe ${groupsList().length + 1}`, visible: true, opacity: 1, locked: false, mask: null, open: true, children: [a.n]}; a.arr.splice(a.arr.indexOf(a.n), 1, g); activeLayer = g.id; refreshLayers(); draw(); commit(`« ${a.n.name} » mis dans un groupe`); };
         const paneLayers = $('[data-rt-pane="layers"]');
         paneLayers.addEventListener('click', e => {
             if (e.target.closest('[data-rt-ladd]')) { newLayer(); maskEdit = ''; refreshLayers(); commit('Nouveau calque'); return; }
+            if (e.target.closest('[data-rt-gadd]')) { newGroup(); maskEdit = ''; refreshLayers(); commit('Nouveau groupe'); return; }
+            if (e.target.closest('[data-rt-aadd]')) { newAdjust(); maskEdit = ''; refreshLayers(); draw(); syncControls(); commit('Nouveau calque de réglage'); showTab('adjust'); return; }
+            if (e.target.closest('[data-rt-gwrap]')) return groupWrap();
             const li = e.target.closest('[data-rt-l]'); if (!li) return;
             const id = li.dataset.rtL, l = target(id), name = id === 'photo' ? 'Photo' : l?.name; if (!l) return;
             if (e.target.closest('[data-rt-lvis]')) { l.visible = !l.visible; refreshLayers(); draw(); commit(`${name} ${l.visible ? 'montré' : 'masqué'}`); return; }
+            if (e.target.closest('[data-rt-gopen]')) { l.open = l.open === false; refreshLayers(); return; }
             if (e.target.closest('[data-rt-madd]')) { addMaskTo(id, []); setMode('brush'); commit(`Masque ajouté à ${name}`); toast('Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer.'); return; }
             if (e.target.closest('[data-rt-medit]')) { maskEdit = maskEdit === id ? '' : id; activeLayer = id === 'photo' ? activeLayer : id; if (maskEdit) setMode('brush'); else setMode(mode); refreshLayers(); return; }
             if (e.target.closest('[data-rt-minv]')) { l.mask = [...l.mask, {type: 'invert'}]; refreshLayers(); draw(); commit(`Masque de ${name} inversé`); return; }
             if (e.target.closest('[data-rt-mdel]')) { l.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); refreshLayers(); draw(); commit(`Masque de ${name} retiré`); return; }
-            if (id === 'photo') { if (!e.target.closest('input,button')) { maskEdit = ''; setMode(mode); refreshLayers(); } return; }
+            if (id === 'photo') { if (!e.target.closest('input,button')) { maskEdit = ''; activeLayer = ''; setMode(mode); refreshLayers(); syncControls(); } return; }
+            const loc = locate(id);
+            if (e.target.closest('[data-rt-ladj]')) { activeLayer = id; refreshLayers(); syncControls(); showTab('adjust'); return; }
             if (e.target.closest('[data-rt-llock]')) { l.locked = !l.locked; refreshLayers(); commit(`${l.name} ${l.locked ? 'verrouillé' : 'déverrouillé'}`); return; }
-            if (e.target.closest('[data-rt-ldel]')) { if (l.ops.length && !confirm(`Supprimer « ${l.name} » et ce qui est dessus ?`)) return; layers = layers.filter(x => x !== l); layerCanvases.delete(l.id); if (maskEdit === l.id) maskEdit = ''; activeLayer = layers[layers.length - 1]?.id || ''; moveSel = null; refreshLayers(); draw(); commit(`${l.name} supprimé`); return; }
-            if (e.target.closest('[data-rt-ldup]')) { const c = {...rtClone(l), id: 'l' + (++layerSeq) + Date.now().toString(36), name: l.name + ' (copie)'}; layers.splice(layers.indexOf(l) + 1, 0, c); activeLayer = c.id; renderLayer(c); refreshLayers(); draw(); commit(`${l.name} dupliqué`); return; }
+            if (e.target.closest('[data-rt-ldel]')) {
+                if (typeOf(l) === 'group') { loc.arr.splice(loc.arr.indexOf(l), 1, ...l.children); activeLayer = l.children.at(-1)?.id || ''; refreshLayers(); draw(); commit(`Groupe « ${l.name} » supprimé (son contenu reste)`); return; }
+                if (l.ops?.length && !confirm(`Supprimer « ${l.name} » et ce qui est dessus ?`)) return;
+                loc.arr.splice(loc.arr.indexOf(l), 1); layerCanvases.delete(l.id); if (maskEdit === l.id) maskEdit = ''; activeLayer = (loc.arr.at(-1) || loc.parent)?.id || ''; moveSel = null; refreshLayers(); draw(); syncControls(); commit(`${l.name} supprimé`); return;
+            }
+            if (e.target.closest('[data-rt-ldup]')) { const c = {...rtClone(l), id: nid(typeOf(l)[0]), name: l.name + ' (copie)'}; loc.arr.splice(loc.arr.indexOf(l) + 1, 0, c); activeLayer = c.id; renderLayer(c); refreshLayers(); draw(); commit(`${l.name} dupliqué`); return; }
             if (e.target.closest('[data-rt-lclear]')) { l.ops = []; moveSel = null; renderLayer(l); refreshLayers(); draw(); commit(`${l.name} vidé`); return; }
             const mv = e.target.closest('[data-rt-lmove]');
-            if (mv) { const i = layers.indexOf(l), j = i + Number(mv.dataset.rtLmove); if (j < 0 || j >= layers.length) return; [layers[i], layers[j]] = [layers[j], layers[i]]; refreshLayers(); draw(); commit(`${l.name} déplacé`); return; }
-            if (!e.target.closest('input,button')) { activeLayer = l.id; if (maskEdit && maskEdit !== l.id) { maskEdit = ''; setMode(mode); } refreshLayers(); }
+            if (mv) { const i = loc.arr.indexOf(l), j = i + Number(mv.dataset.rtLmove); if (j < 0 || j >= loc.arr.length) return; [loc.arr[i], loc.arr[j]] = [loc.arr[j], loc.arr[i]]; refreshLayers(); draw(); commit(`${l.name} déplacé`); return; }
+            if (!e.target.closest('input,button,select,label')) { activeLayer = l.id; if (maskEdit && maskEdit !== l.id) { maskEdit = ''; setMode(mode); } refreshLayers(); syncControls(); }
         });
-        paneLayers.addEventListener('focusin', e => { const li = e.target.closest('[data-rt-l]'); if (li && li.dataset.rtL !== 'photo' && activeLayer !== li.dataset.rtL) { activeLayer = li.dataset.rtL; paneLayers.querySelectorAll('[data-rt-l]').forEach(x => x.classList.toggle('is-active', x === li)); } });
-        paneLayers.addEventListener('input', e => { const l = target(e.target.closest('[data-rt-l]')?.dataset.rtL); if (!l) return; if (e.target.matches('[data-rt-lopac]')) { l.opacity = Number(e.target.value) / 100; draw(); } if (e.target.matches('[data-rt-lname]')) l.name = e.target.value.slice(0, 60) || 'Calque'; });
-        paneLayers.addEventListener('change', e => { const id = e.target.closest('[data-rt-l]')?.dataset.rtL, l = target(id); if (!l) return; if (e.target.matches('[data-rt-lopac]')) commit(`Opacité de ${id === 'photo' ? 'la photo' : l.name} : ${Math.round(l.opacity * 100)} %`); if (e.target.matches('[data-rt-lname]')) commit(`Calque renommé « ${l.name} »`); });
+        paneLayers.addEventListener('focusin', e => { const li = e.target.closest('[data-rt-l]'); if (li && li.dataset.rtL !== 'photo' && activeLayer !== li.dataset.rtL && e.target.matches('[data-rt-lname]')) { activeLayer = li.dataset.rtL; paneLayers.querySelectorAll('[data-rt-l]').forEach(x => x.classList.toggle('is-active', x === li)); syncControls(); } });
+        paneLayers.addEventListener('input', e => { const l = target(e.target.closest('[data-rt-l]')?.dataset.rtL); if (!l) return; if (e.target.matches('[data-rt-lopac]')) { l.opacity = Number(e.target.value) / 100; draw(); } if (e.target.matches('[data-rt-lname]')) { l.name = e.target.value.slice(0, 60) || 'Calque'; syncTarget(); } });
+        paneLayers.addEventListener('change', e => {
+            const id = e.target.closest('[data-rt-l]')?.dataset.rtL, l = target(id); if (!l) return;
+            if (e.target.matches('[data-rt-lopac]')) commit(`Opacité de ${id === 'photo' ? 'la photo' : l.name} : ${Math.round(l.opacity * 100)} %`);
+            if (e.target.matches('[data-rt-lname]')) { refreshLayers(); commit(`Renommé « ${l.name} »`); }
+            if (e.target.matches('[data-rt-lclip]')) { l.clip = e.target.checked; refreshLayers(); draw(); commit(`« ${l.name} » ${l.clip ? 'seulement sur l’élément dessous' : 'sur tout ce qui est dessous'}`); }
+            if (e.target.matches('[data-rt-lpar]')) {
+                const loc = locate(id), g = nodeById(e.target.value); if (!loc) return;
+                loc.arr.splice(loc.arr.indexOf(l), 1); (g ? g.children : layers).push(l); if (g) g.open = true;
+                refreshLayers(); draw(); commit(g ? `« ${l.name} » rangé dans « ${g.name} »` : `« ${l.name} » sorti du groupe`);
+            }
+        });
+        // le haut des onglets Réglages et Filtres dit ce qu'ils règlent : la photo, ou un calque de réglage
+        function syncTarget() {
+            const n = adjNode();
+            $$('[data-rt-target]').forEach(el => { el.innerHTML = n ? `<span>🎚 Calque de réglage <b>${esc(n.name)}</b> <small>${n.clip ? '(seulement l’élément dessous)' : '(tout ce qui est dessous)'}</small></span><button type="button" class="link-button" data-rt-tophoto>régler la photo</button>` : `<span>🖼 Réglages de <b>la photo</b></span><button type="button" class="link-button" data-rt-toadj title="Réglages et filtres dans un calque à part, qu’on peut masquer, doser ou limiter à un calque">＋ dans un calque de réglage</button>`; el.classList.toggle('is-adj', !!n); });
+        }
+        dlg.addEventListener('click', e => {
+            if (e.target.closest('[data-rt-tophoto]')) { activeLayer = ''; refreshLayers(); syncControls(); }
+            if (e.target.closest('[data-rt-toadj]')) { newAdjust(); refreshLayers(); syncControls(); draw(); commit('Nouveau calque de réglage'); }
+        });
         const showTab = k => { $$('[data-rt-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.rtTab === k)); $$('[data-rt-pane]').forEach(p => { p.hidden = p.dataset.rtPane !== k; }); };
         $$('[data-rt-tab]').forEach(b => b.addEventListener('click', () => showTab(b.dataset.rtTab)));
         // ── Le panneau de droite s'élargit en glissant son bord (comme dans l'atelier de mise en page) ──
@@ -889,7 +977,7 @@
             canvas.classList.toggle('is-painting', ['heal', 'clone', 'brush'].includes(m) && !(m === 'clone' && selId)); canvas.classList.toggle('is-text', m === 'text'); stage.classList.toggle('is-hand', m === 'hand');
             canvas.dataset.tool = m;
             brushEl.hidden = true; srcEl.hidden = true;
-            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!layers.length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!layers.some(l => l.id === activeLayer)) activeLayer = layers[layers.length - 1].id; showTab('layers'); }
+            if (['brush', 'text', 'shape'].includes(m) && !maskEdit) { if (!drawLayers().length) { newLayer('Annotations'); refreshLayers(); commit('Calque « Annotations » créé'); } if (!nodeById(activeLayer)) { activeLayer = drawLayers().at(-1).id; refreshLayers(); } showTab('layers'); }
             if (m === 'adjust') showTab('adjust');
             draw();
         };
@@ -941,9 +1029,10 @@
             else { rec.ox = cloneOff[0] / pw; rec.oy = cloneOff[1] / ph; rec.h = hard / 100; rtDab(srcData.data, g.from, pw, ph, x, y, x + cloneOff[0], y + cloneOff[1], brush, null, hard / 100); }
             d.push(rec); strokeVer++; draw();
         };
-        const activeL = () => layers.find(z => z.id === activeLayer);
+        // le calque où l'on dessine : celui qui est choisi ; si c'est un groupe ou un réglage, un nouveau calque à cet endroit
+        const activeL = () => { const n = nodeById(activeLayer); if (typeOf(n) === 'layer') return n; const l = newLayer(); refreshLayers(); return l; };
         const placeText = (x, y, edit = null) => {
-            const l = edit ? layers.find(z => z.id === edit.layer) : activeL(); if (!l || l.locked) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
+            const l = edit ? nodeById(edit.layer) : activeL(); if (!l || lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
             const op0 = edit ? l.ops[edit.i] : null;
             const r = canvas.getBoundingClientRect(), wr = wrap.getBoundingClientRect(), k = r.width / pw, sz = op0 ? op0.size * pw : brush;
             const ta = document.createElement('textarea'); ta.className = 'h-rt-textinput'; ta.rows = 1; ta.value = op0?.text || '';
@@ -986,7 +1075,7 @@
             return null;
         }
         const hitOp = (x, y) => { const rx = x / pw, ry = y / ph, tolx = 6 / pw * (pw / canvas.getBoundingClientRect().width), toly = tolx * pw / ph;
-            for (const l of [...layers].reverse()) { if (!l.visible || l.locked) continue; for (let i = l.ops.length - 1; i >= 0; i--) { const b = opBox(l.ops[i]); if (b && rx >= b.x - tolx && rx <= b.x + b.w + tolx && ry >= b.y - toly && ry <= b.y + b.h + toly) return {layer: l.id, i}; } }
+            for (const l of hitList()) { for (let i = l.ops.length - 1; i >= 0; i--) { const b = opBox(l.ops[i]); if (b && rx >= b.x - tolx && rx <= b.x + b.w + tolx && ry >= b.y - toly && ry <= b.y + b.h + toly) return {layer: l.id, i}; } }
             return null; };
         const moveOp = (op, dx, dy) => {
             if (op.type === 'shape') { op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; }
@@ -994,15 +1083,15 @@
             else if (op.type === 'pixels' || op.type === 'fillmask') { op.dx = (op.dx || 0) + dx; op.dy = (op.dy || 0) + dy; }
             else if (op.points) op.points = op.points.map(([px, py]) => [px + dx, py + dy]);
         };
-        const delMoveSel = () => { const l = moveSel && layers.find(x => x.id === moveSel.layer); if (!l || l.locked) return false; l.ops.splice(moveSel.i, 1); moveSel = null; renderLayer(l); draw(); refreshLayers(); commit(`Élément supprimé de « ${l.name} »`); return true; };
-        canvas.addEventListener('dblclick', e => { if (mode === 'polysel') { finishPoly(); return; } if (mode !== 'move') return; const [x, y] = toCanvas(e), h = hitOp(x, y); if (!h) return; const op = layers.find(l => l.id === h.layer).ops[h.i]; if (op.type === 'text') { e.preventDefault(); placeText(op.x * pw, op.y * ph, h); } });
+        const delMoveSel = () => { const l = moveSel && nodeById(moveSel.layer); if (!l || lockedDeep(l)) return false; l.ops.splice(moveSel.i, 1); moveSel = null; renderLayer(l); draw(); refreshLayers(); commit(`Élément supprimé de « ${l.name} »`); return true; };
+        canvas.addEventListener('dblclick', e => { if (mode === 'polysel') { finishPoly(); return; } if (mode !== 'move') return; const [x, y] = toCanvas(e), h = hitOp(x, y); if (!h) return; const op = nodeById(h.layer).ops[h.i]; if (op.type === 'text') { e.preventDefault(); placeText(op.x * pw, op.y * ph, h); } });
         canvas.addEventListener('pointerdown', e => {
             if (mode === 'hand' || spaceDown || e.button === 1) { panning = {x: e.clientX, y: e.clientY, l: stage.scrollLeft, t: stage.scrollTop}; canvas.setPointerCapture(e.pointerId); e.preventDefault(); return; }
             if (mode === 'adjust' || mode === 'crop') return;
             e.preventDefault();
             const [x, y] = toCanvas(e);
             if (mode === 'zoom') { drag = {zoom: true, x0: e.clientX, y0: e.clientY, alt: e.altKey}; canvas.setPointerCapture(e.pointerId); return; }
-            if (mode === 'text') { if (e.detail > 1) return; const h = hitOp(x, y), op = h && layers.find(l => l.id === h.layer).ops[h.i]; if (op?.type === 'text') return placeText(op.x * pw, op.y * ph, h); return placeText(x, y); }
+            if (mode === 'text') { if (e.detail > 1) return; const h = hitOp(x, y), op = h && nodeById(h.layer).ops[h.i]; if (op?.type === 'text') return placeText(op.x * pw, op.y * ph, h); return placeText(x, y); }
             if (mode === 'move') {
                 moveSel = hitOp(x, y); if (moveSel) { activeLayer = moveSel.layer; refreshLayers(); drag = {move: true, x, y, moved: false}; canvas.setPointerCapture(e.pointerId); }
                 draw(); return;
@@ -1017,7 +1106,7 @@
             }
             if (mode === 'wand') { const c = rtWand(pctx.getImageData(0, 0, pw, ph), x, y, tol, contig); combine(c, howOf(e), howOf(e) === 'new' ? 'Sélection automatique' : ''); return; }
             if (mode === 'shape') {
-                const l = activeL(); if (!l) return; if (l.locked) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
+                const l = activeL(); if (!l) return; if (lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
                 painting = {tool: 'shape', layer: l, x0: x, y0: y, preview: {type: 'shape', kind: shapeKind, x1: x / pw, y1: y / ph, x2: x / pw, y2: y / ph, color, fill: shapeFill ? fillColor : '', size: Math.max(1, brush / 6) / pw, opacity: opac / 100}};
                 canvas.setPointerCapture(e.pointerId); return;
             }
@@ -1034,7 +1123,7 @@
             }
             if (mode === 'brush') {
                 const l = activeL(); if (!l) return;
-                if (l.locked) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
+                if (lockedDeep(l)) return toast('Ce calque est verrouillé : choisis-en un autre dans Calques.', 'error');
                 painting = {tool: 'brush', layer: l, preview: {type: 'brush', brush: brushType, color, size: (brushType === 'pencil' ? Math.min(brush, 4) : brush) * 2 / pw, opacity: opac / 100, points: [[x / pw, y / ph]]}};
                 canvas.setPointerCapture(e.pointerId); draw(); return;
             }
@@ -1047,7 +1136,7 @@
             const [x, y] = toCanvas(e);
             if (poly && !drag) { polyHover = [x, y]; draw(); return; }
             if (drag?.sel) { const d = drag.sel; if (d.kind === 'poly') d.pts.push([x, y]); else { let nx = x, ny = y; if (e.shiftKey && drag.how === 'new') { const s0 = Math.max(Math.abs(x - d.x0), Math.abs(y - d.y0)); nx = d.x0 + Math.sign(x - d.x0 || 1) * s0; ny = d.y0 + Math.sign(y - d.y0 || 1) * s0; } d.x1 = nx; d.y1 = ny; } draw(); return; }
-            if (drag?.move && moveSel) { const l = layers.find(z => z.id === moveSel.layer), op = l?.ops[moveSel.i]; if (!op) return; moveOp(op, (x - drag.x) / pw, (y - drag.y) / ph); drag.x = x; drag.y = y; drag.moved = true; renderLayer(l); draw(); return; }
+            if (drag?.move && moveSel) { const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i]; if (!op) return; moveOp(op, (x - drag.x) / pw, (y - drag.y) / ph); drag.x = x; drag.y = y; drag.moved = true; renderLayer(l); draw(); return; }
             if (!painting) return;
             if (painting.tool === 'shape') { const p = painting.preview; let ex = x, ey = y; if (e.shiftKey) { if (['line', 'arrow'].includes(p.kind)) { const a = Math.round(Math.atan2(y - painting.y0, x - painting.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x - painting.x0, y - painting.y0); ex = painting.x0 + Math.cos(a) * L; ey = painting.y0 + Math.sin(a) * L; } else { const s0 = Math.max(Math.abs(x - painting.x0), Math.abs(y - painting.y0)); ex = painting.x0 + Math.sign(x - painting.x0 || 1) * s0; ey = painting.y0 + Math.sign(y - painting.y0 || 1) * s0; } } p.x2 = ex / pw; p.y2 = ey / ph; draw(); return; }
             if (painting.tool === 'patch') { painting.patch.dx = (x - painting.x0) / pw; painting.patch.dy = (y - painting.y0) / ph; draw(); return; }
@@ -1066,7 +1155,7 @@
                 if (s.kind !== 'poly' && (Math.abs(s.x1 - s.x0) < 2 || Math.abs(s.y1 - s.y0) < 2)) { if (d.how === 'new' && selId) { selId = null; refreshLayers(); setMode(mode); draw(); commit('Désélectionner'); } else draw(); return; }
                 if (s.kind === 'poly' && s.pts.length < 3) { draw(); return; }
                 combine(shapeMask(s), d.how); return; }
-            if (drag?.move) { const d = drag; drag = null; if (d.moved) { const l = layers.find(z => z.id === moveSel?.layer); refreshLayers(); commit(`Élément déplacé sur « ${l?.name || ''} »`); } return; }
+            if (drag?.move) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(`Élément déplacé sur « ${l?.name || ''} »`); } return; }
             if (!painting) return;
             const g = painting; painting = null;
             if (g.tool === 'shape') { const p = g.preview; if (Math.abs(p.x2 - p.x1) * pw < 2 && Math.abs(p.y2 - p.y1) * ph < 2) { draw(); return; } g.layer.ops.push(p); renderLayer(g.layer); draw(); refreshLayers(); commit(`${SHAPES[p.kind]} sur « ${g.layer.name} »`); return; }
@@ -1142,12 +1231,15 @@
             if (k === 'cropok') { endCrop(true); return setMode('adjust'); }
             if (k === 'cropclear') { if (mode === 'crop') { crop = {x: 0, y: 0, w: 1, h: 1, a: 0}; angleIn.value = 0; $('[data-rt-angle-out]').textContent = '0°'; syncCrop(); } if (st.crop) { st.crop = null; draw(); commit('Recadrage enlevé'); } return; }
             if (k === 'ladd') { newLayer(); refreshLayers(); showTab('layers'); return commit('Nouveau calque'); }
+            if (k === 'gadd') { newGroup(); refreshLayers(); showTab('layers'); return commit('Nouveau groupe'); }
+            if (k === 'gwrap') { showTab('layers'); return groupWrap(); }
+            if (k === 'aadd') { newAdjust(); refreshLayers(); syncControls(); draw(); showTab('adjust'); return commit('Nouveau calque de réglage'); }
             if (a === 'zoom') return ({in: () => setZoom(zoom * 1.5), out: () => setZoom(zoom / 1.5), fit: () => setZoom(1), 100: () => setZoom(scale / fitScale())})[b]?.();
-            if (k === 'filters:reset') { st.filters = {}; syncControls(); return commit('Filtres enlevés'); }
+            if (k === 'filters:reset') { T().filters = {}; syncControls(); return commit('Filtres enlevés'); }
             if (k === 'sel:all') return combine(full(), 'new', 'Tout sélectionner');
             if (k === 'sel:none') { if (!selId) return; selId = null; refreshLayers(); setMode(mode); draw(); return commit('Désélectionner'); }
-            if (k === 'mask:add') { const id = activeLayer && layers.some(l => l.id === activeLayer) ? activeLayer : 'photo', t = target(id); if (t.mask) return toast('Ce calque a déjà un masque.'); addMaskTo(id, []); showTab('layers'); setMode('brush'); return commit('Masque ajouté'); }
-            if (k === 'mask:invert' || k === 'mask:del') { const id = maskEdit || (activeLayer && layers.some(l => l.id === activeLayer) ? activeLayer : 'photo'), t = target(id); if (!t?.mask) return toast('Ce calque n’a pas de masque (Calque → Ajouter un masque).', 'error'); if (k === 'mask:invert') t.mask = [...t.mask, {type: 'invert'}]; else { t.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); } refreshLayers(); draw(); return commit(k === 'mask:invert' ? 'Masque inversé' : 'Masque retiré'); }
+            if (k === 'mask:add') { const id = activeLayer && nodeById(activeLayer) ? activeLayer : 'photo', t = target(id); if (t.mask) return toast('Ce calque a déjà un masque.'); addMaskTo(id, []); showTab('layers'); setMode('brush'); return commit('Masque ajouté'); }
+            if (k === 'mask:invert' || k === 'mask:del') { const id = maskEdit || (activeLayer && nodeById(activeLayer) ? activeLayer : 'photo'), t = target(id); if (!t?.mask) return toast('Ce calque n’a pas de masque (Calque → Ajouter un masque).', 'error'); if (k === 'mask:invert') t.mask = [...t.mask, {type: 'invert'}]; else { t.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); } refreshLayers(); draw(); return commit(k === 'mask:invert' ? 'Masque inversé' : 'Masque retiré'); }
             if (!a.startsWith('sel') && k !== 'mask:sel') return;
             if (!needSel()) return;
             const m = masks.get(selId);
@@ -1158,9 +1250,9 @@
                 return combine(k === 'sel:feather' ? blurMask(r) : blurMask(r / 2, k === 'sel:grow' ? 8 : 247), 'new', `${{['sel:feather']: 'Contour progressif', ['sel:grow']: 'Sélection agrandie', ['sel:shrink']: 'Sélection réduite'}[k]} (${r})`);
             }
             if (k === 'sel:copy') { const l = newLayer('Copie de la sélection'); l.ops.push({type: 'pixels', mask: selId, dx: 0, dy: 0, opacity: 1}); renderLayer(l); refreshLayers(); draw(); showTab('layers'); return commit('Sélection copiée sur un calque'); }
-            if (k === 'sel:fill') { let l = activeL(); if (!l || l.locked) { l = newLayer('Remplissage'); } l.ops.push({type: 'fillmask', mask: selId, color, opacity: opac / 100}); renderLayer(l); refreshLayers(); draw(); return commit(`Sélection remplie (${color})`); }
+            if (k === 'sel:fill') { let l = activeL(); if (!l || lockedDeep(l)) { l = newLayer('Remplissage'); } l.ops.push({type: 'fillmask', mask: selId, color, opacity: opac / 100}); renderLayer(l); refreshLayers(); draw(); return commit(`Sélection remplie (${color})`); }
             if (k === 'sel:clear') { st.strokes.push({tool: 'clear', mask: selId}); rtReplayStrokes(srcData, [st.strokes[st.strokes.length - 1]], masks); strokeVer++; draw(); refreshLayers(); toast('Zone effacée de la photo : elle sera transparente (image enregistrée en PNG).'); return commit('Sélection effacée'); }
-            if (k === 'mask:sel') { const id = activeLayer && layers.some(l => l.id === activeLayer) ? activeLayer : 'photo'; addMaskTo(id, [{type: 'sel', mask: selId}]); showTab('layers'); return commit(`Masque d’après la sélection (${id === 'photo' ? 'photo' : target(id).name})`); }
+            if (k === 'mask:sel') { const id = activeLayer && nodeById(activeLayer) ? activeLayer : 'photo'; addMaskTo(id, [{type: 'sel', mask: selId}]); showTab('layers'); return commit(`Masque d’après la sélection (${id === 'photo' ? 'photo' : target(id).name})`); }
             if (k === 'sel:crop') { const bx = maskBox(m); if (!bx) return; st.crop = {x: bx.x / pw, y: bx.y / ph, w: bx.w / pw, h: bx.h / ph, a: 0}; selId = null; refreshLayers(); draw(); return commit('Recadré sur la sélection'); }
         }
         dlg.addEventListener('click', e => {
@@ -1175,52 +1267,52 @@
         // ── Courbe et réglages ──
         const svg = $('[data-rt-curve]');
         const drawCurve = () => {
-            const lut = curveLut(st.curves[channel]);
+            const lut = curveLut(T().curves[channel]);
             $('[data-rt-line]').setAttribute('d', 'M' + Array.from(lut, (v, x) => `${x},${256 - v}`).join(' L'));
             $('[data-rt-line]').dataset.ch = channel;
-            const pts = st.curves[channel];
+            const pts = T().curves[channel];
             if (selPt >= pts.length) selPt = -1;
             $('[data-rt-points]').innerHTML = pts.map(([x, y], i) => `<circle cx="${x}" cy="${256 - y}" r="${i === selPt ? 7 : 5.5}" data-rt-pt="${i}" class="${i === selPt ? 'is-sel' : ''}${i === outside ? ' is-out' : ''}"/>`).join('');
             const del = $('[data-rt-ptdel]'); if (del) del.disabled = !(selPt >= 0 && pts.length > 2);
         };
         function syncControls() {
-            RT_SLIDERS.forEach(([k]) => { $(`[data-rt="${k}"]`).value = st[k]; $(`[data-rt-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; });
-            ['bw', 'sepia', 'invert'].forEach(k => { $(`[data-rt-t="${k}"]`).checked = !!st[k]; });
-            RT_FILTERS.forEach(([k]) => { const v = st.filters?.[k] || 0; $(`[data-rt-f="${k}"]`).value = v; $(`[data-rt-fout="${k}"]`).textContent = v; });
-            drawCurve(); draw();
+            RT_SLIDERS.forEach(([k]) => { $(`[data-rt="${k}"]`).value = T()[k]; $(`[data-rt-out="${k}"]`).textContent = T()[k] > 0 ? '+' + T()[k] : T()[k]; });
+            ['bw', 'sepia', 'invert'].forEach(k => { $(`[data-rt-t="${k}"]`).checked = !!T()[k]; });
+            RT_FILTERS.forEach(([k]) => { const v = T().filters?.[k] || 0; $(`[data-rt-f="${k}"]`).value = v; $(`[data-rt-fout="${k}"]`).textContent = v; });
+            drawCurve(); draw(); syncTarget();
         }
         const label = k => RT_SLIDERS.find(x => x[0] === k)?.[1] || k;
         const flabel = k => RT_FILTERS.find(x => x[0] === k)?.[1] || k;
         dlg.addEventListener('input', e => {
-            const k = e.target.dataset.rt; if (k) { st[k] = Number(e.target.value); $(`[data-rt-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); }
-            const f = e.target.dataset.rtF; if (f) { st.filters = {...(st.filters || {}), [f]: Number(e.target.value)}; $(`[data-rt-fout="${f}"]`).textContent = st.filters[f]; draw(); }
+            const k = e.target.dataset.rt; if (k) { T()[k] = Number(e.target.value); $(`[data-rt-out="${k}"]`).textContent = T()[k] > 0 ? '+' + T()[k] : T()[k]; draw(); }
+            const f = e.target.dataset.rtF; if (f) { T().filters = {...(T().filters || {}), [f]: Number(e.target.value)}; $(`[data-rt-fout="${f}"]`).textContent = T().filters[f]; draw(); }
         });
         dlg.addEventListener('change', e => {
-            const k = e.target.dataset.rt; if (k) commit(`${label(k)} : ${st[k] > 0 ? '+' : ''}${st[k]}`);
-            const f = e.target.dataset.rtF; if (f) commit(`${flabel(f)} : ${st.filters[f]}`);
-            const t = e.target.dataset.rtT; if (t) { st[t] = e.target.checked; if (t === 'bw' && st.bw) st.sepia = false; if (t === 'sepia' && st.sepia) st.bw = false; syncControls(); commit(`${{bw: 'Noir et blanc', sepia: 'Sépia', invert: 'Négatif'}[t]} ${st[t] ? 'oui' : 'non'}`); }
+            const k = e.target.dataset.rt; if (k) commit(`${label(k)} : ${T()[k] > 0 ? '+' : ''}${T()[k]}`);
+            const f = e.target.dataset.rtF; if (f) commit(`${flabel(f)} : ${T().filters[f]}`);
+            const t = e.target.dataset.rtT; if (t) { T()[t] = e.target.checked; if (t === 'bw' && T().bw) T().sepia = false; if (t === 'sepia' && T().sepia) T().bw = false; syncControls(); commit(`${{bw: 'Noir et blanc', sepia: 'Sépia', invert: 'Négatif'}[t]} ${T()[t] ? 'oui' : 'non'}`); }
         });
         $$('[data-rt-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rtCh; selPt = -1; $$('[data-rt-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
-        $$('[data-rt-preset]').forEach(b => b.addEventListener('click', () => { const keep = {bw: false, sepia: false, invert: false, strokes: st.strokes, filters: st.filters, crop: st.crop}; Object.assign(st, rtDefault(), keep); RT_PRESETS[Number(b.dataset.rtPreset)][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); } syncControls(); commit(`Préréglage « ${RT_PRESETS[Number(b.dataset.rtPreset)][0]} »`); }));
-        $('[data-rt-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes, filters: st.filters, crop: st.crop}); syncControls(); commit('Réglages remis à zéro'); });
+        $$('[data-rt-preset]').forEach(b => b.addEventListener('click', () => { const tg = T(), keep = tg === st ? {bw: false, sepia: false, invert: false, strokes: st.strokes, filters: st.filters, crop: st.crop} : {bw: false, sepia: false, invert: false, filters: tg.filters}; Object.assign(tg, rtDefault(), keep); if (tg !== st) delete tg.crop; RT_PRESETS[Number(b.dataset.rtPreset)][1](tg); if (tg._auto) { delete tg._auto; rtAuto(srcData, tg); if (tg !== st) { delete tg.strokes; delete tg.crop; } } syncControls(); commit(`Préréglage « ${RT_PRESETS[Number(b.dataset.rtPreset)][0]} »`); }));
+        $('[data-rt-reset]').addEventListener('click', () => { const tg = T(); Object.assign(tg, rtDefault(), tg === st ? {strokes: st.strokes, filters: st.filters, crop: st.crop} : {filters: tg.filters}); if (tg !== st) delete tg.crop; syncControls(); commit('Réglages remis à zéro'); });
         const before = $('[data-rt-before]');
         const setBefore = v => { showBefore = v; before.classList.toggle('is-active', v); draw(); };
         before.addEventListener('pointerdown', () => setBefore(true));
         ['pointerup', 'pointerleave', 'pointercancel'].forEach(t => before.addEventListener(t, () => showBefore && setBefore(false)));
         const rawPoint = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * 268 - 6, 256 - ((e.clientY - r.top) / r.height * 268 - 6)]; };
         const svgPoint = e => rawPoint(e).map(v => Math.round(clamp255(v)));
-        const removePoint = i => { const pts = st.curves[channel]; if (i < 0 || pts.length <= 2) return; pts.splice(i, 1); selPt = -1; drawCurve(); draw(); commit('Point de courbe enlevé'); };
+        const removePoint = i => { const pts = T().curves[channel]; if (i < 0 || pts.length <= 2) return; pts.splice(i, 1); selPt = -1; drawCurve(); draw(); commit('Point de courbe enlevé'); };
         let dragging = -1;
         svg.setAttribute('tabindex', '0');
         svg.addEventListener('pointerdown', e => {
-            const pts = st.curves[channel], hit = e.target.closest('[data-rt-pt]');
+            const pts = T().curves[channel], hit = e.target.closest('[data-rt-pt]');
             if (hit) dragging = Number(hit.dataset.rtPt);
             else { const [x, y] = svgPoint(e); if (pts.some(p => Math.abs(p[0] - x) < 6)) return; pts.push([x, y]); pts.sort((a, b) => a[0] - b[0]); dragging = pts.findIndex(p => p[0] === x); }
             selPt = dragging; outside = -1; svg.focus(); svg.setPointerCapture(e.pointerId); drawCurve(); draw();
         });
         svg.addEventListener('pointermove', e => {
             if (dragging < 0) return;
-            const pts = st.curves[channel], [rx, ry] = rawPoint(e), [x, y] = svgPoint(e);
+            const pts = T().curves[channel], [rx, ry] = rawPoint(e), [x, y] = svgPoint(e);
             outside = pts.length > 2 && (rx < -30 || rx > 286 || ry < -30 || ry > 286) ? dragging : -1;
             const lo = dragging > 0 ? pts[dragging - 1][0] + 1 : 0, hi = dragging < pts.length - 1 ? pts[dragging + 1][0] - 1 : 255;
             if (outside < 0) pts[dragging] = [Math.min(hi, Math.max(lo, x)), y];
@@ -1236,7 +1328,7 @@
             if (!dlg.open || typing(e) || document.querySelector('dialog[open].ask-text-dialog')) return;
             const mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
             if (mod && k === 'z') { e.preventDefault(); e.stopImmediatePropagation(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
-            if (mod && ['a', 'd', 'i', 'j'].includes(k)) { if (k === 'i' && !e.shiftKey) return; e.preventDefault(); e.stopImmediatePropagation(); cmd({a: 'sel:all', d: 'sel:none', i: 'sel:invert', j: 'sel:copy'}[k]); return; }
+            if (mod && ['a', 'd', 'i', 'j', 'g'].includes(k)) { if (k === 'i' && !e.shiftKey) return; e.preventDefault(); e.stopImmediatePropagation(); cmd({a: 'sel:all', d: 'sel:none', i: 'sel:invert', j: 'sel:copy', g: 'gwrap'}[k]); return; }
             if (mod) return;
             if (e.key === 'Escape' && dlg.querySelector('details.h-rt-menu[open]')) { e.preventDefault(); e.stopImmediatePropagation(); dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open')); return; }
             if (e.key === 'Escape' && (poly || mode === 'crop' || moveSel)) { e.preventDefault(); e.stopImmediatePropagation(); if (poly) { poly = null; polyHover = null; draw(); } else if (mode === 'crop') { crop = null; setMode('adjust'); } else { moveSel = null; draw(); } return; }
@@ -1301,11 +1393,8 @@
             if (st.strokes.length) rtReplayStrokes(data, st.strokes, masks);
             fctx.putImageData(rtApply(data, data, st), 0, 0);
             const comp = document.createElement('canvas'); comp.width = W; comp.height = H; const cg = comp.getContext('2d');
-            if (photoL.visible) { cg.globalAlpha = photoL.opacity; cg.drawImage(rtMasked(pc, photoL.mask, masks), 0, 0); cg.globalAlpha = 1; }
-            if ($('[data-rt-merge]').checked) for (const l of layers) if (l.visible && l.ops.length) {
-                const lc = document.createElement('canvas'); lc.width = W; lc.height = H; rtDrawLayer(lc, l, {masks, photo: pc});
-                cg.globalAlpha = l.opacity; cg.drawImage(rtMasked(lc, l.mask, masks), 0, 0); cg.globalAlpha = 1;
-            }
+            const base = photoBase(pc, W, H, photoL.mask);
+            cg.drawImage($('[data-rt-merge]').checked ? renderStack(layers, base, {W, H, layer: l => { const lc = blank(W, H); rtDrawLayer(lc, l, {masks, photo: pc}); return lc; }, mask: n => n.mask}) : base, 0, 0);
             if (!st.crop) return comp;
             const c = st.crop, oc = document.createElement('canvas'); oc.width = Math.max(1, Math.round(c.w * W)); oc.height = Math.max(1, Math.round(c.h * H));
             const og = oc.getContext('2d'); if (!hasAlpha()) { og.fillStyle = '#fff'; og.fillRect(0, 0, oc.width, oc.height); }
@@ -1355,7 +1444,7 @@
         const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch(); };
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>Quelle photo retoucher ?</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
+            <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><button type="button" class="button small secondary" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
             <p class="muted small">Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.</p>
             <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
         document.body.append(dlg);
@@ -1370,6 +1459,30 @@
         };
         dlg.querySelector('[data-q]').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
         dlg.querySelector('[data-grid]').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const m = items[+b.dataset.i]; dlg.close(); open(m); });
+        // ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias puis ouverte
+        dlg.querySelector('[data-blank]').addEventListener('click', () => {
+            const SIZES = [['1920x1080', 'Écran 16:9 — 1920 × 1080'], ['1080x1080', 'Carré — 1080 × 1080'], ['1240x1754', 'A4 portrait (150 dpi) — 1240 × 1754'], ['1754x1240', 'A4 paysage (150 dpi) — 1754 × 1240'], ['2480x3508', 'A4 portrait (300 dpi) — 2480 × 3508'], ['1500x2100', 'Carte postale — 1500 × 2100'], ['custom', 'Autre taille…']];
+            ext.openDialog({eyebrow: 'RETOUCHE', title: '⬜ Partir d’un canevas vide', submitLabel: 'Créer et ouvrir',
+                body: `<div class="form-grid"><label class="span-2">Format<select name="size">${SIZES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
+                    <label>Largeur (pixels)<input type="number" name="w" value="1920" min="16" max="8000"></label><label>Hauteur (pixels)<input type="number" name="h" value="1080" min="16" max="8000"></label>
+                    <label>Fond<select name="bg"><option value="white">Blanc</option><option value="transparent">Transparent</option><option value="color">Une couleur…</option></select></label><label>Couleur du fond<input type="color" name="color" value="#f3ece4"></label>
+                    <label class="span-2">Nom<input name="title" value="Canevas" maxlength="200"></label></div><p class="muted">Le canevas est ajouté aux Médias ; on y met ensuite des calques, des groupes, du texte, des formes, des photos (Sélection → calque)…</p>`,
+                onOpen: d => { const sz = d.querySelector('[name=size]'), w = d.querySelector('[name=w]'), h = d.querySelector('[name=h]'); sz.addEventListener('change', () => { if (sz.value !== 'custom') { const [a, b] = sz.value.split('x'); w.value = a; h.value = b; } }); [w, h].forEach(x => x.addEventListener('input', () => { sz.value = SIZES.find(([k]) => k === `${w.value}x${h.value}`)?.[0] || 'custom'; })); },
+                onSubmit: async form => {
+                    const f = Object.fromEntries(new FormData(form)), W = Math.round(Number(f.w)), H = Math.round(Number(f.h));
+                    if (!(W >= 16 && H >= 16 && W <= 8000 && H <= 8000)) { toast('Taille entre 16 et 8 000 pixels de côté.', 'error'); return false; }
+                    const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
+                    if (f.bg !== 'transparent') { g.fillStyle = f.bg === 'color' ? f.color : '#ffffff'; g.fillRect(0, 0, W, H); }
+                    const blob = await new Promise(r => c.toBlob(r, 'image/png')); if (!blob) { toast('Canevas trop grand pour le navigateur.', 'error'); return false; }
+                    const fd = new FormData(); fd.append('file', blob, 'canevas.png'); fd.append('kind', 'image'); fd.append('title', (f.title || 'Canevas').trim().slice(0, 300));
+                    const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
+                    const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+                    if (!r.ok || j.error) { toast(j.error || 'Création impossible.', 'error'); return false; }
+                    dlg.close(); if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
+                    open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image'});
+                },
+            });
+        });
         dlg.querySelector('[data-file]').addEventListener('change', async e => {
             const f = e.target.files?.[0]; if (!f) return;
             const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[a-z0-9]+$/i, '').slice(0, 300));
