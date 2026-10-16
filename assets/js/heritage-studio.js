@@ -1387,7 +1387,7 @@
         dlg.addEventListener('input', () => setTimeout(showProj, 0)); dlg.addEventListener('pointerup', () => setTimeout(showProj, 0));
         const askClose = () => { if (!saved && hpos > 0 && !(projId && curKey() === projKey) && !confirm('Fermer sans enregistrer ? Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard).')) return; saved = true; dlg.close(); };
         $$('[data-rt-close]').forEach(b => b.addEventListener('click', askClose));
-        dlg.addEventListener('cancel', e => { if (mode === 'crop' || poly) { e.preventDefault(); return; } if (!saved && hpos > 0 && !(projId && curKey() === projKey)) { e.preventDefault(); askClose(); } });
+        dlg.addEventListener('cancel', e => { if (e.target !== dlg) return; if (mode === 'crop' || poly) { e.preventDefault(); return; } if (!saved && hpos > 0 && !(projId && curKey() === projKey)) { e.preventDefault(); askClose(); } });
         dlg.addEventListener('close', () => { window.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp); ro.disconnect(); dlg.remove(); });
         const refreshAfter = async () => {
             const state = A().state;

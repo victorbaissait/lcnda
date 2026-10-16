@@ -960,7 +960,7 @@
             } catch (err) { toast(err.message, 'error'); }
         }
         function close() { if (editingId) stopEditing(); if (dirty && !confirm('Fermer sans enregistrer les dernières modifications ?')) return; keyAc.abort(); dl.close(); }
-        dl.addEventListener('cancel', e => { e.preventDefault(); const om = dl.querySelectorAll('details.ly-menu[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
+        dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); const om = dl.querySelectorAll('details.ly-menu[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
         dl.addEventListener('close', () => { keyAc.abort(); dl.remove(); onSaved?.(); });
         const docForExport = () => { if (editingId) stopEditing(); return D; };
         function exportPrint(bleed = false) { if (bleed && !D.page.bleed) toast('Le document n’a pas de fond perdu (Document → Fond perdu) : seuls les traits de coupe sont ajoutés.'); const html = printHtml(docForExport(), docName, true, {bleed}); const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée : autorise les fenêtres pour cette page.', 'error'); w.document.open(); w.document.write(html); w.document.close(); toast('Le livre s’ouvre : « Imprimer », puis « Enregistrer en PDF ».'); }

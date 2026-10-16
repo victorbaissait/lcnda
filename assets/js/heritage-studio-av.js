@@ -36,7 +36,7 @@
         document.body.appendChild(dl);
         const close = () => { if (onClose?.() === false) return; dl.close(); };
         dl.querySelector('[data-avx-close]').addEventListener('click', close);
-        dl.addEventListener('cancel', e => { e.preventDefault(); close(); });
+        dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); close(); }); // « Annuler » du choix d'un fichier envoie aussi « cancel » : on l'ignore
         dl.addEventListener('close', () => dl.remove());
         dl.showModal();
         return dl;
@@ -602,9 +602,12 @@
     const trackHidden = (P, id) => !!P.tracks.find(t => t.id === id)?.hidden;
     /** Moments de chaque morceau de la piste 1 (un fondu enchaîné fait se chevaucher deux morceaux) */
     function layoutV1(P) {
-        let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, c.to - c.from), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, (P.v1[k - 1].to - P.v1[k - 1].from) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
+        let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, clen(c)), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, clen(P.v1[k - 1]) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
     }
-    const montageEnd = P => Math.max(0.1, layoutV1(P).at(-1)?.end || 0, ...P.v2.map(c => c.at + c.to - c.from), ...P.texts.map(x => x.at + x.dur), ...P.audio.map(a => a.at + a.to - a.from));
+    /** Vitesse d'un morceau (0,1 × à 8 ×) et sa durée sur la frise : un morceau accéléré dure moins longtemps */
+    const spd = c => Math.max(0.1, Math.min(8, Number(c?.speed) || 1));
+    const clen = c => (c.to - c.from) / spd(c);
+    const montageEnd = P => Math.max(0.1, layoutV1(P).at(-1)?.end || 0, ...P.v2.map(c => c.at + clen(c)), ...P.texts.map(x => x.at + x.dur), ...P.audio.map(a => a.at + clen(a)));
     const lookFilter = (a, b = LOOK0) => `brightness(${(a.bright ?? 1) * (b.bright ?? 1)}) contrast(${(a.contrast ?? 1) * (b.contrast ?? 1)}) saturate(${(a.sat ?? 1) * (b.sat ?? 1)}) hue-rotate(${(a.hue || 0) + (b.hue || 0)}deg)`;
 
     /**
@@ -614,40 +617,51 @@
     function montageEngine(P, canvas, {out = 'preview', onTime} = {}) {
         const g = canvas.getContext('2d');
         const ctx = out === 'record' ? new AudioContext() : audioCtx();
-        const master = ctx.createGain(); let tail = master;
+        const master = ctx.createGain();
         const fx = P.fx;
-        if (fx.noise) { const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 100; const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 9000; tail.connect(hp).connect(lp); tail = lp; }
-        if (fx.clarity) { const pr = ctx.createBiquadFilter(); pr.type = 'peaking'; pr.frequency.value = 3000; pr.Q.value = 0.9; pr.gain.value = 4; const cp = ctx.createDynamicsCompressor(); cp.threshold.value = -24; cp.ratio.value = 3; tail.connect(pr).connect(cp); tail = cp; }
+        /** Les traitements du son (comme dans « Modifier le son ») : souffle, voix, graves, aigus, mono ; pour tout le film ou un morceau */
+        const chain = (from, f) => {
+            let tail = from; if (!f) return tail;
+            const biq = (type, freq, gain = 0, q = 0.9) => { const b = ctx.createBiquadFilter(); b.type = type; b.frequency.value = freq; b.gain.value = gain; b.Q.value = q; return b; };
+            if (f.noise) { const hp = biq('highpass', 100), lp = biq('lowpass', 9000); tail.connect(hp).connect(lp); tail = lp; }
+            if (f.clarity) { const pr = biq('peaking', 3000, 4), cp = ctx.createDynamicsCompressor(); cp.threshold.value = -24; cp.ratio.value = 3; tail.connect(pr).connect(cp); tail = cp; }
+            if (f.bass) { const b = biq('lowshelf', 200, Math.max(-15, Math.min(15, Number(f.bass)))); tail.connect(b); tail = b; }
+            if (f.treble) { const b = biq('highshelf', 4000, Math.max(-15, Math.min(15, Number(f.treble)))); tail.connect(b); tail = b; }
+            if (f.mono) { const m = ctx.createGain(); m.channelCount = 1; m.channelCountMode = 'explicit'; m.channelInterpretation = 'speakers'; tail.connect(m); tail = m; }
+            return tail;
+        };
+        const tail = chain(master, fx);
         const outGain = ctx.createGain(); outGain.gain.value = fx.mute ? 0 : fx.volume; tail.connect(outGain);
         const dest = out === 'record' ? ctx.createMediaStreamDestination() : null; outGain.connect(dest || ctx.destination);
         const els = new Map(); // id du morceau → {el, gain}
-        const elFor = (id, src, isAudio, isImage = false) => {
+        const elFor = (id, src, isAudio, isImage = false, afx = null) => {
             let e = els.get(id); if (e && e.src === src) return e;
             if (e) { if (!e.img) e.el.pause(); e.el.removeAttribute('src'); }
             if (isImage) { const im = new Image(); im.crossOrigin = 'anonymous'; im.decoding = 'async'; im.src = src; e = {el: im, gain: null, src, img: true}; els.set(id, e); return e; }
             const el = document.createElement(isAudio ? 'audio' : 'video'); el.preload = 'auto'; el.playsInline = true; el.crossOrigin = 'anonymous'; el.src = src; el.muted = false;
-            const node = ctx.createMediaElementSource(el), gain = ctx.createGain(); gain.gain.value = 0; node.connect(gain).connect(master);
+            const node = ctx.createMediaElementSource(el), gain = ctx.createGain(); gain.gain.value = 0; chain(node, afx).connect(gain).connect(master);
             e = {el, gain, src}; els.set(id, e); return e;
         };
         let t = 0, playing = false, t0 = 0, p0 = 0, raf = 0, W = canvas.width, H = canvas.height;
         // ce qui joue au moment t
         function active(tt) {
             const L = layoutV1(P), list = [];
-            L.forEach((x, k) => { if (tt >= x.at && tt < x.end) list.push({kind: 'v1', x, k, local: x.c.from + tt - x.at}); });
-            P.v2.forEach(c => { if (tt >= c.at && tt < c.at + c.to - c.from && !trackHidden(P, trackOf(P, c, 'v2'))) list.push({kind: 'v2', c, local: c.from + tt - c.at}); });
-            P.audio.forEach(a => { if (tt >= a.at && tt < a.at + a.to - a.from && !trackHidden(P, trackOf(P, a, 'audio'))) list.push({kind: 'a', c: a, local: a.from + tt - a.at}); });
+            L.forEach((x, k) => { if (tt >= x.at && tt < x.end) list.push({kind: 'v1', x, k, local: x.c.from + (tt - x.at) * spd(x.c)}); });
+            P.v2.forEach(c => { if (tt >= c.at && tt < c.at + clen(c) && !trackHidden(P, trackOf(P, c, 'v2'))) list.push({kind: 'v2', c, local: c.from + (tt - c.at) * spd(c)}); });
+            P.audio.forEach(a => { if (tt >= a.at && tt < a.at + clen(a) && !trackHidden(P, trackOf(P, a, 'audio'))) list.push({kind: 'a', c: a, local: a.from + (tt - a.at) * spd(a)}); });
             return {L, list};
         }
         function sync(tt, hard = false) {
             const {list} = active(tt), keep = new Set();
             for (const it of list) {
                 const c = it.kind === 'v1' ? it.x.c : it.c, so = P.sources[c.s]; if (!so) continue;
-                const e = elFor(c.id, so.src, it.kind === 'a', so.kind === 'image'); keep.add(c.id);
+                const e = elFor(c.id, so.src, it.kind === 'a', so.kind === 'image', c.afx); keep.add(c.id);
                 if (e.img) continue; // une image : rien à caler ni à jouer
+                const rate = spd(c); if (e.el.playbackRate !== rate) e.el.playbackRate = rate; if (e.el.preservesPitch !== (c.pitch !== false)) e.el.preservesPitch = c.pitch !== false;
                 if (hard || Math.abs(e.el.currentTime - it.local) > 0.35) { try { e.el.currentTime = it.local; } catch (_) {} }
                 // volume (fondus du son, morceau muet ou son détaché)
                 let v = it.kind === 'a' ? (c.vol ?? 1) : (c.mute ? 0 : (c.vol ?? 1));
-                if (it.kind === 'a') { const len = c.to - c.from, x = tt - c.at; if (c.fadeIn && x < c.fadeIn) v *= x / c.fadeIn; if (c.fadeOut && len - x < c.fadeOut) v *= Math.max(0, (len - x) / c.fadeOut); }
+                if (it.kind === 'a') { const len = clen(c), x = tt - c.at; if (c.fadeIn && x < c.fadeIn) v *= x / c.fadeIn; if (c.fadeOut && len - x < c.fadeOut) v *= Math.max(0, (len - x) / c.fadeOut); }
                 if (it.kind === 'v1' && it.x.cross && tt < it.x.at + it.x.cross) v *= (tt - it.x.at) / it.x.cross; // le son suit le fondu enchaîné
                 e.gain.gain.value = Math.max(0, v);
                 if (playing && e.el.paused) e.el.play().catch(() => {}); if (!playing && !e.el.paused) e.el.pause();
@@ -725,7 +739,7 @@
             if (P.fadeEnd && T - tt < 1) { g.save(); g.globalAlpha = 1 - (T - tt); g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.restore(); }
             // pistes d'incrustation : celle du bas d'abord, celle du haut devant
             list.filter(i => i.kind === 'v2').sort((a, b) => trackIdx(P, trackOf(P, b.c, 'v2')) - trackIdx(P, trackOf(P, a.c, 'v2'))).forEach(it => {
-                const e = els.get(it.c.id); if (!dimsOf(e?.el).vw) return; const c = it.c, local = tt - c.at, len = c.to - c.from;
+                const e = els.get(it.c.id); if (!dimsOf(e?.el).vw) return; const c = it.c, local = tt - c.at, len = clen(c);
                 let a = (c.opacity ?? 100) / 100; if (c.fade !== false) { if (local < 0.5) a *= local / 0.5; if (len - local < 0.5) a *= (len - local) / 0.5; }
                 drawClip(e.el, c, it.local, Math.max(0, a), false);
             });
@@ -791,7 +805,7 @@
         const OFF = 150; // largeur des noms de pistes, à gauche de la frise
         // une piste libre de ce genre à ce moment-là, sinon une nouvelle
         const LISTS = {v: P.v2, t: P.texts, a: P.audio}, LISTNAME = {v: 'v2', t: 'texts', a: 'audio'};
-        const lenOf = c => c.dur ?? (c.to - c.from);
+        const lenOf = c => c.dur ?? clen(c);
         const isImg = c => P.sources[c?.s]?.kind === 'image';
         const srcLen = s => P.sources[s]?.kind === 'image' ? IMG_DUR : P.sources[s].dur;
         function addTrack(kind, at = null) {
@@ -823,6 +837,7 @@
                 <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play>▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time" data-tb-label="Temps (où on en est / durée)"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
                     <label class="h-mt-zoomr" data-tb-label="Zoom de la frise" title="Aussi ⌘ + / ⌘ − (Ctrl + / Ctrl − sur PC et Linux), ⌘ 0 pour revenir">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label>${ext.tbButton ? ext.tbButton('video') : ''}</div>
                 <div class="h-mt-ops" data-tbg="mt-ops" data-tbg-label="Outils du montage">
+                    <button type="button" class="button small secondary" data-mt-op="undo" title="Annuler (⌘Z)" disabled>↶</button><button type="button" class="button small secondary" data-mt-op="redo" title="Rétablir (⇧⌘Z)" disabled>↷</button>
                     <button type="button" class="button small secondary" data-mt-op="split" title="Coupe le morceau choisi à la tête de lecture">✂️ Couper ici</button>
                     <button type="button" class="button small secondary" data-mt-op="start" title="Le morceau choisi commence à la tête de lecture">⟦ Commence ici</button>
                     <button type="button" class="button small secondary" data-mt-op="end" title="Le morceau choisi finit à la tête de lecture">⟧ Finit ici</button>
@@ -852,21 +867,33 @@
         let eng = null;
         const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); eng.decorate = decorate; await eng.seek(t); };
         // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
-        const touch = async (lvl = 1, pane = true) => { dirty = true; const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) lvl = 2; if (lvl === 2) { await rebuild(); drawTl(pane); return; } drawTl(pane); if (lvl === 1) eng?.seek(eng.t); else eng?.refresh(); };
+        // ↶ ↷ : chaque changement du montage (couper, déplacer, régler…) est une étape ; les rushes, eux, restent
+        let hist = [], hpos = -1, histTimer = 0;
+        const snapP = () => JSON.stringify({v1: P.v1, v2: P.v2, texts: P.texts, audio: P.audio, tracks: P.tracks, look: P.look, fx: P.fx, fadeStart: !!P.fadeStart, fadeEnd: !!P.fadeEnd});
+        const record = () => { clearTimeout(histTimer); histTimer = 0; const v = snapP(); if (hist[hpos] === v) return; hist = hist.slice(0, hpos + 1); hist.push(v); if (hist.length > 300) hist.shift(); hpos = hist.length - 1; syncUndo(); };
+        const schedHist = () => { clearTimeout(histTimer); histTimer = setTimeout(record, 350); };
+        const syncUndo = () => { const u = dl.querySelector('[data-mt-op="undo"]'), r = dl.querySelector('[data-mt-op="redo"]'); if (u) u.disabled = hpos <= 0; if (r) r.disabled = hpos >= hist.length - 1; };
+        const undoTo = async i => {
+            if (histTimer) record();
+            if (i < 0 || i >= hist.length) return toast(i < 0 ? 'Rien à annuler.' : 'Rien à rétablir.');
+            hpos = i; Object.assign(P, JSON.parse(hist[i])); if (sel && !all().some(([tr, c]) => tr === sel.track && c.id === sel.id)) sel = null;
+            dirty = true; const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) await rebuild(); drawTl(); drawRush(true); eng?.seek(eng.t); syncUndo();
+        };
+        const touch = async (lvl = 1, pane = true) => { dirty = true; schedHist(); const [w, h] = sizeFor(); if (w !== cv.width || h !== cv.height) lvl = 2; if (lvl === 2) { await rebuild(); drawTl(pane); return; } drawTl(pane); if (lvl === 1) eng?.seek(eng.t); else eng?.refresh(); };
         const onTime = (t, end) => { $('[data-mt-cur]').textContent = fmt(t); const ph = $('[data-mt-ph]'); if (ph) ph.style.left = (t * pxs + OFF) + 'px'; if (end) $('[data-mt-play]').textContent = '▶ Lire'; if (!eng?.playing || end) syncInspector(); };
         const all = () => [...P.v1.map(c => ['v1', c]), ...P.v2.map(c => ['v2', c]), ...P.texts.map(c => ['texts', c]), ...P.audio.map(c => ['audio', c])];
         const selected = () => { const f = all().find(([tr, c]) => sel && tr === sel.track && c.id === sel.id); return f ? f[1] : null; };
         // frise : une ligne par piste
         function drawTl(pane = true) {
             const L = layoutV1(P), T = montageEnd(P), W = Math.max(600, T * pxs + 160);
-            const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) * pxs}px" title="Image clé ${fmt(t - (c.from || 0))}"></i>`).join(''); };
+            const kfMarks = c => { const ts = [...new Set(Object.values(c.kf || {}).flat().map(k => Math.round(k.t * 100) / 100))]; return ts.map(t => `<i class="h-mt-kfm" style="left:${(t - (c.from || 0)) / spd(c) * pxs}px" title="Image clé ${fmt(t - (c.from || 0))}"></i>`).join(''); };
             const block = (tr, c, at, len, label, cls = '') => `<button type="button" class="h-mt-clip ${cls} ${isImg(c) ? 'is-img' : ''} ${sel && sel.track === tr && sel.id === c.id ? 'is-sel' : ''}" style="left:${OFF + at * pxs}px;width:${Math.max(6, len * pxs)}px" data-mt-clip="${tr}:${c.id}" title="${esc(label)} · ${fmt(at)} → ${fmt(at + len)}">${isImg(c) ? '🖼️ ' : ''}${esc(label)}${kfMarks(c)}</button>`;
             const lane = (key, name, inner) => `<div class="h-mt-lane" data-mt-lane="${key}"><span class="h-mt-lname">${name}</span>${inner}</div>`;
             const ruler = Array.from({length: Math.ceil(T) + 1}, (_, s) => s % Math.max(1, Math.round(60 / pxs * 2)) === 0 ? `<span style="left:${OFF + s * pxs}px">${fmt(s, false)}</span>` : '').join('');
             const clipsOf = tr => tr.kind === 'main' ? L.map(x => block('v1', x.c, x.at, x.end - x.at, (x.c.tr?.type && x.c.tr.type !== 'none' ? '◇ ' : '') + (P.sources[x.c.s]?.title || 'Vidéo') + (x.c.mute ? ' 🔇' : ''), 'is-v1')).join('')
-                : tr.kind === 'v' ? P.v2.filter(c => trackOf(P, c, 'v2') === tr.id).map(c => block('v2', c, c.at, c.to - c.from, P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join('')
+                : tr.kind === 'v' ? P.v2.filter(c => trackOf(P, c, 'v2') === tr.id).map(c => block('v2', c, c.at, clen(c), P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join('')
                 : tr.kind === 't' ? P.texts.filter(x => trackOf(P, x, 'texts') === tr.id).map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join('')
-                : P.audio.filter(a => trackOf(P, a, 'audio') === tr.id).map(a => block('audio', a, a.at, a.to - a.from, (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join('');
+                : P.audio.filter(a => trackOf(P, a, 'audio') === tr.id).map(a => block('audio', a, a.at, clen(a), (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join('');
             const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${tr.kind === 'main' ? '' : `<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button>${tr.kind === 'main' ? '' : `<button type="button" data-mt-tdel="${tr.id}" title="Supprimer cette piste">🗑</button>`}</span></span>${clipsOf(tr)}</div>`;
             $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px" data-dnd-off><div class="h-mt-ruler" data-mt-ruler>${ruler}</div><div>
                 ${P.tracks.map(laneOf).join('')}</div>
@@ -878,12 +905,18 @@
             if (pane) drawPane();
         }
         // panneau de droite : réglages de l'élément choisi
+        const chk = (k, label, on) => `<label class="checkbox-line"><input type="checkbox" data-mt-k="${k}" ${on ? 'checked' : ''}> ${label}</label>`;
+        // les réglages du son : pour un morceau (afx) ou pour tout le film (fx)
+        const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
+        const speedHtml = c => `${rng('speed', 'Vitesse', 0.25, 4, 0.05, spd(c), ' ×')}<div class="h-mt-quick">${[0.5, 1, 1.5, 2].map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}</div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
+        const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>Remettre à zéro</button></div><p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
+        const imgDur = c => `<label class="h-avx-row">Durée à l’écran <input type="number" class="h-mt-num" min="0.1" max="3600" step="0.1" value="${Math.round(clen(c) * 10) / 10}" data-mt-k="imgdur"> s</label><div class="h-mt-quick">${[2, 3, 5, 8, 10, 15].map(v => `<button type="button" data-mt-imgdur="${v}">${v} s</button>`).join('')}</div>`;
         const rng = (k, label, min, max, step, v, unit = '') => `<label class="h-avx-row">${label} <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-k="${k}"><output data-u="${unit}">${unit === '%' ? Math.round(v * 100) + ' %' : v + unit}</output></label>`;
         const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
             ${rng(scope + '.bright', 'Luminosité', 0.4, 1.8, 0.02, L.bright ?? 1, '%')}${rng(scope + '.contrast', 'Contraste', 0.4, 1.8, 0.02, L.contrast ?? 1, '%')}${rng(scope + '.sat', 'Saturation', 0, 2, 0.02, L.sat ?? 1, '%')}${rng(scope + '.warm', 'Température (froid ↔ chaud)', -0.8, 0.8, 0.02, L.warm ?? 0)}${rng(scope + '.hue', 'Teinte', -60, 60, 1, L.hue ?? 0, '°')}`;
         const trackSel = (list, c) => { const cur = trackOf(P, c, list); return `<label class="h-avx-row">Piste <select data-mt-k="track">${P.tracks.filter(t => t.kind === KIND_OF_LIST[list]).map(t => `<option value="${t.id}" ${t.id === cur ? 'selected' : ''}>${esc(t.name)}</option>`).join('')}</select></label>`; };
         /* Inspecteur (façon Final Cut) : Composition, Transformer, Recadrer, Distorsion, Adaptation ; ◇ = image clé au moment de la tête de lecture */
-        const localOf = c => { const t = eng?.t || 0; if (sel?.track === 'v1') { const x = layoutV1(P).find(y => y.c === c); if (!x) return c.from; return Math.max(c.from, Math.min(c.to, c.from + t - x.at)); } return Math.max(c.from, Math.min(c.to, c.from + t - (c.at || 0))); };
+        const localOf = c => { const t = eng?.t || 0; if (sel?.track === 'v1') { const x = layoutV1(P).find(y => y.c === c); if (!x) return c.from; return Math.max(c.from, Math.min(c.to, c.from + (t - x.at) * spd(c))); } return Math.max(c.from, Math.min(c.to, c.from + (t - (c.at || 0)) * spd(c))); };
         const KF_EPS = 1 / 30;
         const kfAt = (c, k, local) => (c.kf?.[k] || []).findIndex(x => Math.abs(x.t - local) < KF_EPS);
         const fmtTf = (k, v) => ['rot', 'kx', 'ky'].includes(k) ? `${Math.round(v * 10) / 10}°` : `${Math.round(v * 10) / 10} %`;
@@ -918,19 +951,19 @@
             const local = localOf(c), ts = [...new Set(Object.values(c.kf || {}).flat().map(k => k.t))].sort((a, b) => a - b);
             const t = dir > 0 ? ts.find(x => x > local + KF_EPS) : ts.reverse().find(x => x < local - KF_EPS);
             if (t === undefined) return toast(dir > 0 ? 'Pas d’image clé après.' : 'Pas d’image clé avant.');
-            const start = sel.track === 'v1' ? layoutV1(P).find(y => y.c === c)?.at || 0 : c.at; eng.seek(start + t - c.from).then(syncInspector);
+            const start = sel.track === 'v1' ? layoutV1(P).find(y => y.c === c)?.at || 0 : c.at; eng.seek(start + (t - c.from) / spd(c)).then(syncInspector);
         }
         function drawPane() {
             const c = selected(), item = $('[data-mt-pane="item"]');
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
             else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
-                ${isImg(c) ? rng('imgdur', 'Durée à l’écran', 0.5, 60, 0.1, Math.round((c.to - c.from) * 10) / 10, ' s') : ''}
+                ${isImg(c) ? imgDur(c) : speedHtml(c)}
                 <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${rng('tr.d', 'Durée du fondu', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}
-                ${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>
+                ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>${clipSound(c)}`}
                 ${inspectorHtml(c, true)}
                 <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
-            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${isImg(c) ? rng('imgdur', 'Durée à l’écran', 0.5, 60, 0.1, Math.round((c.to - c.from) * 10) / 10, ' s') : ''}${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}
-                ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%')}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
+            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${isImg(c) ? imgDur(c) : speedHtml(c)}${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}
+                ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + clipSound(c)}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
                 ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <label class="h-avx-row">Mouvement <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${c.anim === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -941,16 +974,16 @@
                 <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}> gras</label><label class="checkbox-line"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}> ombre</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> entre et sort en fondu</label>`;
             else item.innerHTML = `<h4>🎵 Son</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
-                ${trackSel('audio', c)}`;
+                ${speedHtml(c)}${trackSel('audio', c)}${clipSound(c)}`;
             $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}`;
-            $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="fx.clarity" ${P.fx.clarity ? 'checked' : ''}> 🗣️ Voix plus nette</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fx.noise" ${P.fx.noise ? 'checked' : ''}> 🧹 Moins de souffle et de grondement</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fx.mute" ${P.fx.mute ? 'checked' : ''}> 🔇 Sans le son</label>`;
+            $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}${soundFx('fx', P.fx)}${chk('fx.mute', '🔇 Sans le son', P.fx.mute)}<p class="muted">S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »).</p>`;
             $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? `tourné de ${P.fx.rotate}°` : ''}</small></div>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}> commence par un fondu depuis le noir</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}> finit par un fondu au noir</label>
                 <p class="muted">Durée du film : <b>${fmt(montageEnd(P))}</b></p>`;
         }
         // réglages → modèle
         const setK = (obj, k, v) => { const ks = k.split('.'); let o = obj; ks.slice(0, -1).forEach(x => { o[x] = o[x] || {}; o = o[x]; }); o[ks.at(-1)] = v; };
-        const audioFx = k => /^fx\.(clarity|noise|mute|volume)$/.test(k);
+        const audioFx = k => /^(fx\.(clarity|noise|mute|volume|bass|treble|mono)$|afx\.)/.test(k);
         dl.querySelector('.h-mt-side').addEventListener('input', e => {
             const tfEl = e.target.closest('[data-mt-tf]');
             if (tfEl) { // un réglage de l'inspecteur : la valeur fixe, ou l'image clé du moment s'il y en a
@@ -969,15 +1002,19 @@
             else if (c) {
                 if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
                 else if (k === 'track') { c.track = v; touch(1); return; }
-                else if (k === 'imgdur') { c.to = c.from + Math.max(0.5, Number(v)); }
+                else if (k === 'imgdur') { const d = Number(String(v).replace(',', '.')); if (!(d > 0)) return; c.to = c.from + Math.max(0.1, Math.min(IMG_MAX, d)); }
                 else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; }
                 else setK(c, k, v);
             }
-            touch(audioFx(k) ? 2 : 0, false);
+            touch(audioFx(k) ? 2 : (k === 'speed' || k === 'pitch') ? 1 : 0, false);
         });
         dl.querySelector('.h-mt-side').addEventListener('click', e => {
             const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
+            const sp = e.target.closest('[data-mt-speed]'); if (sp) { const c = selected(); if (c) { c.speed = Number(sp.dataset.mtSpeed); touch(1); } return; }
+            const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }
+            if (e.target.closest('[data-mt-afxall]')) { const c = selected(); if (!c) return; const f = {...(c.afx || {})}; [...P.v1, ...P.v2, ...P.audio].forEach(x => { if (!isImg(x)) x.afx = {...f}; }); toast('Réglages du son mis sur tous les sons du projet.'); touch(2); return; }
+            if (e.target.closest('[data-mt-afxreset]')) { const c = selected(); if (c) { delete c.afx; touch(2); } return; }
             const rot = e.target.closest('[data-mt-rot]'); if (rot) { P.fx.rotate = (P.fx.rotate + Number(rot.dataset.mtRot) + 360) % 360; touch(2); }
             const kb = e.target.closest('[data-mt-kf]');
             if (kb) { const c = selected(); if (!c) return; const k = kb.dataset.mtKf, local = localOf(c); c.kf = c.kf || {}; const list = c.kf[k] = c.kf[k] || [], i = kfAt(c, k, local);
@@ -994,7 +1031,7 @@
         const measure = document.createElement('canvas').getContext('2d');
         const boxOf = (track, c) => {
             const W = cv.width, H = cv.height, t = eng?.t || 0;
-            if (track === 'v2') { if (t < c.at || t >= c.at + c.to - c.from) return null; const s = eng.videoSize(c.id) || {vw: 16, vh: 9}, w = (c.w || 35) / 100 * W; return {x: (c.x ?? 62) / 100 * W, y: (c.y ?? 6) / 100 * H, w, h: w * s.vh / s.vw}; }
+            if (track === 'v2') { if (t < c.at || t >= c.at + clen(c)) return null; const s = eng.videoSize(c.id) || {vw: 16, vh: 9}, w = (c.w || 35) / 100 * W; return {x: (c.x ?? 62) / 100 * W, y: (c.y ?? 6) / 100 * H, w, h: w * s.vh / s.vw}; }
             if (track === 'texts') { if (t < c.at || t >= c.at + c.dur) return null; const size = (c.size || 6) / 100 * H, lines = String(c.text || ' ').split('\n'); measure.font = `${c.bold ? '700 ' : ''}${size}px ${c.font || 'Georgia, serif'}`;
                 const w = Math.max(...lines.map(l => measure.measureText(l).width)) + size, h = lines.length * size * 1.25 + size * 0.3, cx = (c.x ?? 50) / 100 * W, cy = (c.y ?? 80) / 100 * H;
                 return {x: c.align === 'left' ? cx - size / 2 : c.align === 'right' ? cx - w + size / 2 : cx - w / 2, y: cy - h / 2, w, h}; }
@@ -1088,7 +1125,10 @@
         const keyAc = new AbortController(); dl.addEventListener('close', () => keyAc.abort());
         document.addEventListener('keydown', e => {
             if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; // une autre fenêtre par-dessus
-            if (e.target.closest?.('input, textarea, select, [contenteditable]') || e.metaKey || e.ctrlKey || e.altKey) return;
+            if (e.target.closest?.('input, textarea, select, [contenteditable]')) return;
+            if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === 'z') { e.preventDefault(); e.stopPropagation(); undoTo(e.shiftKey ? hpos + 1 : hpos - 1); return; }
+            if ((e.metaKey || e.ctrlKey) && !e.altKey && e.key.toLowerCase() === 'y') { e.preventDefault(); undoTo(hpos + 1); return; }
+            if (e.metaKey || e.ctrlKey || e.altKey) return;
             if (e.key === ' ') { e.preventDefault(); play(); return; }
             // ⌫ (Retour arrière) ou Suppr : enlever l'élément choisi ; B : couper à la tête de lecture
             if ((e.key === 'Backspace' || e.key === 'Delete') && selected()) { e.preventDefault(); dl.querySelector('[data-mt-op="del"]')?.click(); return; }
@@ -1125,7 +1165,7 @@
                 ${P.sources.length ? `<div class="h-mt-rgrid">${P.sources.map((x, i) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
                     <div class="h-mt-rthumb is-${x.kind}">${thumb(x, i)}${n ? `<b class="h-mt-ruse" title="Sur la frise">${n}×</b>` : ''}</div>
                     <figcaption>${esc(x.title || 'Sans titre')}</figcaption>
-                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>`}${n ? '' : `<button type="button" data-mt-rdel title="Retirer ce rush du projet">✕</button>`}</div></figure>`; }).join('')}</div>`
+                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>`}<button type="button" data-mt-rren title="Renommer ce rush">✎</button>${n ? '' : `<button type="button" data-mt-rdel title="Retirer ce rush du projet">✕</button>`}</div></figure>`; }).join('')}</div>`
                 : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
         }
         $('[data-mt-pane="rush"]').addEventListener('change', async e => {
@@ -1138,6 +1178,7 @@
             if (e.target.closest('[data-mt-rbase]')) { const o = await pickOther('any'); if (o) await pushSource(o, o.kind); return; }
             const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; const i = Number(fig.dataset.mtRush);
             const pl = e.target.closest('[data-mt-rplace]'); if (pl) return placeRush(i, pl.dataset.mtRplace);
+            if (e.target.closest('[data-mt-rren]')) { const so = P.sources[i], n = await A().askText({title: 'Renommer le rush', message: 'Nouveau nom :', value: so.title || '', okLabel: 'Renommer'}); if (n === null || !n.trim()) return; so.title = n.trim().slice(0, 200); dirty = true; drawRush(true); drawTl(); return; }
             if (e.target.closest('[data-mt-rdel]')) { if (usesOf(i)) return; P.sources.splice(i, 1); [...P.v1, ...P.v2, ...P.audio].forEach(c => { if (c.s > i) c.s--; }); dirty = true; drawRush(); }
         });
         // glisser un rush sur une piste de la frise
@@ -1157,6 +1198,8 @@
         });
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
+            if (op === 'undo') return undoTo(hpos - 1);
+            if (op === 'redo') return undoTo(hpos + 1);
             if (op === 'addv1') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
             if (op === 'addv2') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
             if (op === 'adda') { const s = await addSource('audio'); if (s === null) return; const k = {id: nid('a'), s, from: 0, to: P.sources[s].dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; return touch(1); }
@@ -1168,9 +1211,9 @@
             if (op === 'kfprev' || op === 'kfnext') return jumpKf(op === 'kfnext' ? 1 : -1);
             if (op === 'left' || op === 'right') { if (sel.track !== 'v1') return toast('Pour les incrustations, textes et sons : fais-les glisser sur la frise.', 'error'); const j = i + (op === 'left' ? -1 : 1); if (j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; return touch(1); }
             if (op === 'detach') { if (sel.track !== 'v1' && sel.track !== 'v2') return toast('Choisis un morceau de vidéo.', 'error'); if (c.detached) return toast('Le son de ce morceau est déjà détaché.', 'error'); const at = startOf();
-                const k = {id: nid('a'), s: c.s, from: c.from, to: c.to, at, vol: c.vol ?? 1, fadeIn: 0, fadeOut: 0, track: freeTrack('a', at, c.to - c.from), detached: true}; P.audio.push(k); c.mute = true; c.detached = k.id; sel = {track: 'audio', id: k.id}; toast(`Son détaché : il est sur la piste « ${P.tracks.find(x => x.id === k.track)?.name} », tu peux le déplacer, le baisser ou l’enlever.`); return touch(1); }
+                const k = {id: nid('a'), s: c.s, from: c.from, to: c.to, at, vol: c.vol ?? 1, fadeIn: 0, fadeOut: 0, track: freeTrack('a', at, clen(c)), detached: true, ...(c.speed && c.speed !== 1 ? {speed: c.speed} : {})}; P.audio.push(k); c.mute = true; c.detached = k.id; sel = {track: 'audio', id: k.id}; toast(`Son détaché : il est sur la piste « ${P.tracks.find(x => x.id === k.track)?.name} », tu peux le déplacer, le baisser ou l’enlever.`); return touch(1); }
             if (sel.track === 'texts') { if (op === 'start') { const e2 = c.at + c.dur; c.at = Math.min(t, e2 - 0.3); c.dur = e2 - c.at; } if (op === 'end') c.dur = Math.max(0.3, t - c.at); if (op === 'split') return toast('Un texte ne se coupe pas : change sa durée.', 'error'); return touch(0); }
-            const s0 = startOf(), local = c.from + (t - s0);
+            const s0 = startOf(), local = c.from + (t - s0) * spd(c);
             if (local <= c.from + 0.1 || local >= c.to - 0.1) return toast('Place la tête de lecture à l’intérieur de l’élément choisi.', 'error');
             if (op === 'split') { const b2 = {...JSON.parse(JSON.stringify(c)), id: nid(sel.track[0]), from: local, tr: {type: 'none', d: 1}}; if (sel.track !== 'v1') b2.at = t; c.to = local; list.splice(i + 1, 0, b2); }
             if (op === 'start') { if (sel.track !== 'v1') c.at = t; c.from = local; }
@@ -1239,7 +1282,8 @@
         dl.addEventListener('close', () => { eng?.destroy(); });
         if (ext.tbApply) ext.tbApply(dl, 'video');
         await rebuild();
-        drawTl(); drawRush(true); showProjName();
+        drawTl(); drawRush(true); showProjName(); record(); // première étape de ↶
+        dl.addEventListener('change', schedHist); dl.addEventListener('pointerup', schedHist); // images clés, glisser sur la frise…
         if (start === 'add' || (proj && !P.v1.length)) $('[data-mt-tab="rush"]')?.click(); // un nouveau montage commence par ses rushes
     }
 

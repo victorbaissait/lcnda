@@ -41,7 +41,7 @@
         dlg.className = 'h-museum-dialog'; dlg.id = 'h-museum-dialog';
         dlg.innerHTML = '<div class="h-museum-stage" tabindex="0"></div>';
         document.body.appendChild(dlg);
-        dlg.addEventListener('cancel', e => { if (dlg.querySelector('.lm-overlay:not([hidden])')) e.preventDefault(); });
+        dlg.addEventListener('cancel', e => { if (e.target !== dlg) return; if (dlg.querySelector('.lm-overlay:not([hidden])')) e.preventDefault(); });
         let viewer = null; // propre à cette fenêtre : en fermer une ancienne ne détruit jamais la nouvelle
         dlg.addEventListener('close', () => { viewer?.destroy(); viewer = null; dlg.remove(); });
         dlg.showModal();

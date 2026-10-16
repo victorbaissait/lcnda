@@ -7257,7 +7257,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     // Commandes du menu de l'application de bureau (« shortcut:<id> »), avec les mêmes règles que les touches
     function runShortcutCommand(id){
         if(id==='customize_shortcuts'){state.maintenanceTab='raccourcis';setModule('maintenance');return;}
-        if(id==='edit_undo'||id==='edit_redo'){if(isTypingTarget(document.activeElement)){document.execCommand(id==='edit_undo'?'undo':'redo');return;}if(id==='edit_redo')return;id='undo';}const def=SHORTCUT_DEFS.find(d=>d.id===id);if(!def)return;if(def.noTyping&&isTypingTarget(document.activeElement))return;if(!shortcutContextActive(def.ctx))return toast(def.ctx==='person'?'Ouvre d’abord une fiche personne.':'Ce raccourci ne sert pas sur cet écran.');runShortcut(def,'menu');}
+        if(id==='edit_undo'||id==='edit_redo'){if(isTypingTarget(document.activeElement)){document.execCommand(id==='edit_undo'?'undo':'redo');return;}const top=[...document.querySelectorAll('dialog[open]')].pop();if(top){/* un éditeur ouvert (montage, retouche, mise en page) : le ⌘Z / ⇧⌘Z du menu lui revient, comme une touche */const target=top.contains(document.activeElement)?document.activeElement:top;target.dispatchEvent(new KeyboardEvent('keydown',{key:'z',code:'KeyZ',metaKey:true,shiftKey:id==='edit_redo',bubbles:true,cancelable:true}));return;}if(id==='edit_redo')return;id='undo';}const def=SHORTCUT_DEFS.find(d=>d.id===id);if(!def)return;if(def.noTyping&&isTypingTarget(document.activeElement))return;if(!shortcutContextActive(def.ctx))return toast(def.ctx==='person'?'Ouvre d’abord une fiche personne.':'Ce raccourci ne sert pas sur cet écran.');runShortcut(def,'menu');}
     /** Envoie les raccourcis au menu de l'application (Mac, Windows, Linux) pour qu'il les affiche. */
     function publishShortcutsToMenu(){
         if(IS_EMBEDDED||!window.lcnda?.setShortcuts)return;
@@ -8478,7 +8478,7 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         const close=()=>{dialog.close();dialog.remove();};
         $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',close));
         $('[data-save]',dialog).addEventListener('click',()=>{if(save(rows)===false)return;close();renderSidebar();if(state.module==='maintenance'&&state.maintenanceTab==='design')renderDesignTools();});
-        dialog.addEventListener('cancel',e=>{e.preventDefault();close();});
+        dialog.addEventListener('cancel',e=>{if(e.target!==dialog)return;e.preventDefault();close();});
         dialog.showModal();
     }
 
