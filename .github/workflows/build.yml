@@ -3,6 +3,8 @@
 # - Lancement manuel : onglet « Actions » → « Installateurs » → « Run workflow » (fichiers dans « Artifacts »).
 # - Nouvelle version : pousser une étiquette, ex. « git tag v0.0.3 && git push origin v0.0.3 » → les installateurs
 #   sont envoyés directement dans un BROUILLON de version (onglet « Releases »), publié à la main.
+# - Ou sans étiquette : « Run workflow » avec « version » (ex. v0.6.0) → même brouillon, l'étiquette est créée sur ce
+#   commit ; avec « publier » coché, la version est publiée toute seule quand les trois systèmes ont réussi.
 #
 # Versions des systèmes fixées exprès (pas de « -latest ») : un changement chez GitHub ne doit pas modifier les
 # installateurs sans prévenir. Linux est fabriqué sur Ubuntu 22.04 pour rester compatible avec plus de distributions.
@@ -14,6 +16,15 @@ name: Installateurs
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version à publier (ex. v0.6.0) ; vide = installateurs seulement, dans « Artifacts »'
+        required: false
+        default: ''
+      publier:
+        description: 'Publier la version quand tout a réussi (sinon : brouillon)'
+        type: boolean
+        default: false
   push:
     tags: ['v*']
 
@@ -25,7 +36,7 @@ jobs:
   # (une Release n'occupe pas l'espace de stockage des « Artifacts », limité et déjà saturé une fois).
   prepare:
     name: Brouillon de version
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || startsWith(inputs.version, 'v')
     runs-on: ubuntu-24.04
     timeout-minutes: 60  # jamais plus d'une heure (un blocage a duré 6 h le 2026-10-08)
     permissions:
@@ -39,15 +50,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           R: ${{ github.repository }}
-          T: ${{ github.ref_name }}
+          T: ${{ inputs.version || github.ref_name }}
+          SHA: ${{ github.sha }}
         run: |
+          case "$T" in v[0-9]*) ;; *) echo "Version invalide : $T"; exit 1 ;; esac
           notes="release-notes/$T.md"
           if [ ! -f "$notes" ]; then printf 'Installateurs de LCNDA %s — vérifie les empreintes dans SHA256SUMS.txt.\n' "$T" > /tmp/notes.md; notes=/tmp/notes.md; fi
           if gh release list --repo "$R" --limit 100 --json tagName -q '.[].tagName' | grep -qx "$T"; then
             echo "Brouillon $T déjà présent : description remise à jour"
             gh release edit "$T" --repo "$R" --notes-file "$notes"
           else
-            gh release create "$T" --draft --repo "$R" --title "LCNDA $T" --notes-file "$notes"
+            gh release create "$T" --draft --repo "$R" --target "$SHA" --title "LCNDA $T" --notes-file "$notes"
           fi
 
   build:
@@ -116,7 +129,7 @@ jobs:
         run: npx electron-builder ${{ matrix.dist }} --publish never
 
       - name: Envoi dans le brouillon de version
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v') || startsWith(inputs.version, 'v')
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -127,10 +140,10 @@ jobs:
           test ${#files[@]} -gt 0
           if command -v sha256sum >/dev/null; then sum="sha256sum"; else sum="shasum -a 256"; fi
           $sum "${files[@]}" > "SHA256SUMS-${{ runner.os }}.txt" && cat "SHA256SUMS-${{ runner.os }}.txt"
-          gh release upload "${{ github.ref_name }}" "${files[@]}" "SHA256SUMS-${{ runner.os }}.txt" --clobber --repo "${{ github.repository }}"
+          gh release upload "${{ inputs.version || github.ref_name }}" "${files[@]}" "SHA256SUMS-${{ runner.os }}.txt" --clobber --repo "${{ github.repository }}"
 
       - uses: actions/upload-artifact@v7
-        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') && !startsWith(inputs.version, 'v') }}
         with:
           name: LCNDA-${{ runner.os }}
           if-no-files-found: error
@@ -144,7 +157,7 @@ jobs:
 
   sums:
     name: Empreintes sha256
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || startsWith(inputs.version, 'v')
     needs: build
     runs-on: ubuntu-24.04
     timeout-minutes: 60  # jamais plus d'une heure (un blocage a duré 6 h le 2026-10-08)
@@ -155,9 +168,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           R: ${{ github.repository }}
-          T: ${{ github.ref_name }}
+          T: ${{ inputs.version || github.ref_name }}
+          PUBLISH: ${{ inputs.publier && 'oui' || '' }}
         run: |
           gh release download "$T" --repo "$R" --pattern 'SHA256SUMS-*.txt'
           cat SHA256SUMS-*.txt | sort -k2 > SHA256SUMS.txt && cat SHA256SUMS.txt
           gh release upload "$T" SHA256SUMS.txt --clobber --repo "$R"
           for f in SHA256SUMS-*.txt; do gh release delete-asset "$T" "$f" --yes --repo "$R"; done
+          # « publier » coché : les trois systèmes ont réussi (sinon ce job ne tourne pas), la version sort du brouillon
+          if [ -n "$PUBLISH" ]; then gh release edit "$T" --draft=false --latest --repo "$R" && echo "Version $T publiée"; fi
