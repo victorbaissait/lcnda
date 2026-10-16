@@ -83,7 +83,9 @@
     const TAGS = new Set(['P', 'DIV', 'SPAN', 'BR', 'B', 'STRONG', 'I', 'EM', 'U', 'S', 'STRIKE', 'SUB', 'SUP', 'A', 'UL', 'OL', 'LI', 'H1', 'H2', 'H3', 'H4', 'BLOCKQUOTE', 'SMALL']);
     const CSS_PROPS = new Set(['font-family', 'font-size', 'font-weight', 'font-style', 'font-variant', 'font-variant-caps', 'font-stretch', 'font-kerning', 'line-height', 'letter-spacing', 'word-spacing', 'color', 'background-color', 'text-decoration', 'text-decoration-line', 'text-transform', 'text-align', 'text-align-last', 'text-indent', 'margin-top', 'margin-bottom', 'margin-left', 'margin-right', 'padding-left', 'vertical-align', 'position', 'top', 'hyphens', 'white-space']);
     function cleanStyle(st) {
-        return String(st || '').split(';').map(d => { const i = d.indexOf(':'); if (i < 0) return ''; const k = d.slice(0, i).trim().toLowerCase(), v = d.slice(i + 1).trim(); if (!CSS_PROPS.has(k)) return ''; if (/url\s*\(|expression|javascript:|@import|[<>\\]/i.test(v) || v.length > 200) return ''; if (k === 'position' && v !== 'relative') return ''; return `${k}:${v}`; }).filter(Boolean).join(';');
+        const out = new Map(); // une propriété n'apparaît qu'une fois : la dernière gagne
+        String(st || '').split(';').forEach(d => { const i = d.indexOf(':'); if (i < 0) return; const k = d.slice(0, i).trim().toLowerCase(), v = d.slice(i + 1).trim(); if (!CSS_PROPS.has(k) || !v) return; if (/url\s*\(|expression|javascript:|@import|[<>\\]/i.test(v) || v.length > 200) return; if (k === 'position' && v !== 'relative') return; out.delete(k); out.set(k, v); });
+        return [...out].map(([k, v]) => `${k}:${v}`).join(';');
     }
     function sanitizeHtml(html) {
         const doc = new DOMParser().parseFromString(`<div>${String(html || '').slice(0, 400000)}</div>`, 'text/html'), root = doc.body.firstElementChild;
@@ -702,6 +704,8 @@
         const restoreRange = () => { const t = editEl(); if (!t || !savedRange) return null; const s = getSelection(); s.removeAllRanges(); s.addRange(savedRange); return savedRange; };
         const blocksOf = (t, r) => { const all = [...t.children].filter(c => !c.classList.contains('ly-wrapf')); if (!r || r.collapsed && false) return all; return all.filter(b => r.intersectsNode(b)); };
         /** Mise en forme des caractères : la sélection dans le texte, sinon tout le cadre */
+        // enlève les attributs style vides et les <span> devenus inutiles
+        const tidySpans = root => { root.querySelectorAll?.('[style=""]').forEach(e => e.removeAttribute('style')); root.querySelectorAll?.('span:not([style]):not([data-cs])').forEach(e => e.replaceWith(...e.childNodes)); };
         function applyChar(props) {
             const t = editEl(), css = Object.entries(props).filter(([, v]) => v !== undefined).map(([k, v]) => `${k}:${v}`).join(';');
             const clean = el => Object.keys(props).forEach(k => el.style?.removeProperty(k));
@@ -709,14 +713,17 @@
                 const r = restoreRange();
                 if (r && !r.collapsed) {
                     const blocks = blocksOf(t, r);
-                    blocks.forEach(b => { const rr = document.createRange(); rr.selectNodeContents(b); if (b.contains(r.startContainer) || b === r.startContainer) rr.setStart(r.startContainer, r.startOffset); if (b.contains(r.endContainer) || b === r.endContainer) rr.setEnd(r.endContainer, r.endOffset); if (rr.collapsed) return; const frag = rr.extractContents(); frag.querySelectorAll('[style]').forEach(clean); const sp = document.createElement('span'); sp.setAttribute('style', cleanStyle(css)); sp.appendChild(frag); rr.insertNode(sp); });
+                    const spans = [];
+                    blocks.forEach(b => { const rr = document.createRange(); rr.selectNodeContents(b); if (b.contains(r.startContainer) || b === r.startContainer) rr.setStart(r.startContainer, r.startOffset); if (b.contains(r.endContainer) || b === r.endContainer) rr.setEnd(r.endContainer, r.endOffset); if (rr.collapsed) return; const frag = rr.extractContents(); frag.querySelectorAll('[style]').forEach(clean); tidySpans(frag); const sp = document.createElement('span'); sp.setAttribute('style', cleanStyle(css)); sp.appendChild(frag); rr.insertNode(sp); spans.push(sp); });
+                    // les mots restent choisis : on peut enchaîner couleur, gras, taille…
+                    if (spans.length) { const nr = document.createRange(); nr.setStartBefore(spans[0]); nr.setEndAfter(spans[spans.length - 1]); savedRange = nr; const sl = getSelection(); sl.removeAllRanges(); sl.addRange(nr); }
                     const f = findItem(editingId); if (f) f.it.html = readEditing(t); setDirty(); markOverflow(); return;
                 }
-                blocksOf(t, null).forEach(b => { b.querySelectorAll('[style]').forEach(clean); b.setAttribute('style', cleanStyle([b.getAttribute('style') || '', css].join(';'))); });
+                blocksOf(t, null).forEach(b => { b.querySelectorAll('[style]').forEach(clean); tidySpans(b); b.setAttribute('style', cleanStyle([b.getAttribute('style') || '', css].join(';'))); });
                 const f = findItem(editingId); if (f) f.it.html = readEditing(t); setDirty(); markOverflow(); return;
             }
             const items = selected().filter(x => x.type === 'text'); if (!items.length) return msg('Choisis un bloc de texte (ou du texte dedans).');
-            items.forEach(it => { const box0 = document.createElement('div'); box0.innerHTML = it.html; [...box0.children].forEach(b => { b.querySelectorAll('[style]').forEach(clean); b.setAttribute('style', cleanStyle([b.getAttribute('style') || '', css].join(';'))); }); it.html = sanitizeHtml(box0.innerHTML); });
+            items.forEach(it => { const box0 = document.createElement('div'); box0.innerHTML = it.html; [...box0.children].forEach(b => { b.querySelectorAll('[style]').forEach(clean); tidySpans(b); b.setAttribute('style', cleanStyle([b.getAttribute('style') || '', css].join(';'))); }); it.html = sanitizeHtml(box0.innerHTML); });
             commit(); render();
         }
         /** Mise en forme des paragraphes (ceux de la sélection, ou tous ceux du cadre) */
@@ -864,7 +871,7 @@
         /* — commandes — */
         function arrange(kind) { const list = curList(), its = selected(); if (!its.length) return; its.forEach(it => { const i = list.indexOf(it); list.splice(i, 1); const n = list.length; const j = kind === 'front' ? n : kind === 'bottom' ? 0 : kind === 'fwd' ? Math.min(n, i + 1) : Math.max(0, i - 1); list.splice(j, 0, it); }); commit(); render(); }
         function del() { if (!sel.length) return; const list = curList(); sel.forEach(i => { const k = list.findIndex(x => x.id === i); if (k >= 0 && !locked(list[k])) list.splice(k, 1); }); sel = []; commit(); render(); }
-        function copy(cut = false) { if (!sel.length) return; clip = JSON.stringify(selected()); try { navigator.clipboard?.writeText?.(''); } catch (_) {} if (cut) del(); msg(`${JSON.parse(clip).length} objet(s) copié(s).`); }
+        function copy(cut = false) { if (!sel.length) return; clip = JSON.stringify(selected()); try { navigator.clipboard?.writeText?.('')?.catch?.(() => {}); } catch (_) {} if (cut) del(); msg(`${JSON.parse(clip).length} objet(s) copié(s).`); }
         function paste(inPlace = false) { if (!clip) return msg('Rien à coller.'); const its = JSON.parse(clip).map(it => ({...it, id: nid('c'), x: it.x + (inPlace ? 0 : 5), y: it.y + (inPlace ? 0 : 5)})); curList().push(...its); sel = its.map(i => i.id); commit(); render(); }
         function dup() { copy(); paste(); }
         const addPages = (n, at, master) => { const pages = Array.from({length: clamp(n, 1, 500)}, () => ({id: nid('p'), master: master ?? (D.pages[cur]?.master || 'A'), items: []})); D.pages.splice(clamp(at, 0, D.pages.length), 0, ...pages); commit(); goPage(at); msg(`${pages.length} page(s) ajoutée(s).`); };
@@ -967,6 +974,7 @@
         const sec = (title, body, open = true) => `<details class="ly-sec" ${open ? 'open' : ''}><summary>${title}</summary><div class="ly-secb">${body}</div></details>`;
         function renderPanel() {
             if (!pbody.isConnected) return;
+            dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b.dataset.lyPanel === panel)); // l'onglet suit toujours le panneau montré
             const keepScroll = pbody.scrollTop;
             pbody.innerHTML = ({pages: panelPages, layers: panelLayers, obj: panelObj, text: panelText, color: panelColor, links: panelLinks, history: panelHistory, doc: panelDoc}[panel] || panelPages)();
             if (panel === 'history') pbody.querySelector('.is-current')?.scrollIntoView({block: 'nearest'});
