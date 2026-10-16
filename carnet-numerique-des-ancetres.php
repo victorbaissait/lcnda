@@ -224,7 +224,7 @@
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page façon InDesign, petit montage vidéo, tableaux façon Freeform, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
+                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page façon InDesign, retouche façon Photoshop, petit montage vidéo, projets de son, tableaux façon Freeform, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
                 <div class="presentation-changes-body">
                     <h4>📐 Atelier de mise en page, façon InDesign</h4>
                     <ul>
@@ -234,7 +234,7 @@
                         <li><b>Texte</b> : toutes les polices de l'ordinateur, corps, interlignage, approche, crénage, ligne de base, capitales, exposant ; alignements, retraits, espacements, <b>lettrine</b>, césure, listes, colonnes ; <b>styles de paragraphe et de caractère</b> (on change un style, tout le livre suit) ; numéro de page et titre automatiques.</li>
                         <li><b>Formes</b> (rectangle, ellipse, polygone, étoile, ligne, <b>plume</b>), <b>cadres d'images</b> (photos de la base ou de l'ordinateur, remplir, ajuster, recadrer), <b>nuancier</b> et <b>dégradés</b>, <b>contours</b> (épaisseur, tirets, pointillés, angles), <b>effets</b> (opacité, modes de fusion, ombre portée, contour progressif, angles arrondis).</li>
                         <li><b>Habillage du texte</b> autour d'une photo ou d'une forme, <b>Pathfinder</b> (ajouter, soustraire, intersection, exclure), aligner et répartir, repères aimantés, <b>liens</b> (images placées, adresses web cliquables).</li>
-                        <li><b>Ajouter ou insérer des pages</b> (autant qu'on veut, à l'endroit voulu), dupliquer, déplacer, <b>aller à une page</b> ; annuler / rétablir ; raccourcis comme dans InDesign.</li>
+                        <li><b>Ajouter ou insérer des pages</b> (autant qu'on veut, à l'endroit voulu), dupliquer, déplacer, <b>aller à une page</b> ; <b>mettre, enlever ou remplacer un gabarit</b> sur une page ou sur plusieurs ; annuler / rétablir avec l'historique ; raccourcis comme dans InDesign.</li>
                         <li>Enregistrer, reprendre plus tard, exporter en <b>PDF</b> (aussi <b>avec fond perdu et traits de coupe</b> pour un imprimeur), en page HTML ou en fichier à partager.</li>
                     </ul>
                     <h4>🎬 Petit montage vidéo</h4>
@@ -243,7 +243,22 @@
                         <li><b>Des photos dans les pistes vidéo</b>, à la suite ou incrustées ; <b>glisser un élément d'une piste à une autre</b> du même genre ; ⌫ pour enlever, B pour couper.</li>
                         <li>Un inspecteur façon Final Cut : <b>Transformer</b> (position, rotation, échelle, ancrage), <b>Recadrer</b>, <b>Distorsion</b>, <b>Adaptation spatiale</b>, opacité et modes de fusion, avec des <b>images clés</b> pour tout animer.</li>
                         <li>Disposition, couleurs des blocs, boutons et enregistrement réglables (MP4 ou WebM, taille, qualité), avec des <b>ensembles de réglages</b> nommés, exportés et importés.</li>
-                        <li>Retouche des photos : historique, zoom, pinceaux, texte sur des calques, source du tampon ; son : enregistrement en MP3, FLAC, AIFF, WAV ou Ogg.</li>
+                        <li><b>Projets de montage</b> enregistrés à part de la vidéo exportée, onglet <b>Rush</b> (vidéos, photos et sons du projet, renommables), vidéo importée avec son son, <b>son séparé de l'image</b>, <b>vitesse</b> de chaque morceau, durée d'une photo au choix, réglages du son morceau par morceau ou pour tout le film, menu en haut, lecture et pause immédiates.</li>
+                    </ul>
+                    <h4>🎚️ Retouche des photos, façon Photoshop</h4>
+                    <ul>
+                        <li>Partir d'une photo de la base, d'une image de l'ordinateur ou d'<b>un canevas vide</b> ; menus Fichier, Édition, Image, Calque, Sélection, Filtre, Affichage.</li>
+                        <li><b>Calques</b>, <b>groupes de calques</b> (et groupes de groupes) rangés par glisser-déposer, <b>calques de réglage</b> (réglages et filtres, sur tout ce qui est dessous ou seulement sur l'élément dessous), <b>masques</b>, la photo elle-même étant un calque comme les autres.</li>
+                        <li>Sélections (rectangle, ellipse, lasso, plume, baguette magique), correcteur de taches, tampon, pinceaux, formes, texte, courbes, historique ; <b>projets de retouche</b> enregistrés pour reprendre le travail plus tard.</li>
+                    </ul>
+                    <h4>🎧 Son</h4>
+                    <ul>
+                        <li><b>Projets son</b> : garder un son en cours de travail (sans perte) et y revenir ; « Nouveau projet son » dans la liste des audios ; enregistrement en MP3, FLAC, AIFF, WAV ou Ogg.</li>
+                    </ul>
+                    <h4>🛠️ Outils de modification</h4>
+                    <ul>
+                        <li>Une liste <b>Outils de modification</b> : tous les projets de montage, de son, de retouche et de mise en page, à chercher, trier, ouvrir, renommer ou commencer.</li>
+                        <li><b>Boutons et options</b> de chaque outil montrés, cachés et rangés, et <b>des raccourcis clavier à soi</b> dans chaque outil, refusés s'ils sont déjà pris par macOS, Windows, Linux ou l'application.</li>
                     </ul>
                     <h4>🧩 Tableaux façon Freeform</h4>
                     <ul>
@@ -256,7 +271,8 @@
                     </ul>
                     <h4>📒 Fiches sur un sujet</h4>
                     <ul>
-                        <li>Un onglet « Fiches » (caché au départ) : une page sur un sujet — un pays, un métier, une coutume — faite de blocs (texte, images, personnes, frise de dates, citation, liens, écrans de l'app, widgets).</li>
+                        <li>Un onglet « Fiches » (caché au départ) : une page sur un sujet — un pays, un métier, une coutume — faite de blocs (texte, images, personnes, frise de dates, citation, liens, écrans de l'app, widgets), modifiés sur place comme les widgets.</li>
+                        <li>Reprendre <b>le même ordre de blocs</b> pour une nouvelle fiche, ou en faire <b>un modèle</b> proposé à la création des fiches suivantes.</li>
                     </ul>
                     <h4>📖 Livre de famille, livrets et employeurs</h4>
                     <ul>
