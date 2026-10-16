@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 43;
+const SCHEMA_VERSION = 44;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -64,6 +64,7 @@ function migration_steps(): array
         41 => 'schema_v41',
         42 => 'schema_v42',
         43 => 'schema_v43',
+        44 => 'schema_v44',
     ];
 }
 
@@ -1987,6 +1988,18 @@ function schema_v43(PDO $pdo): void
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL DEFAULT '',
         is_design INTEGER NOT NULL DEFAULT 0,
+        data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )");
+}
+
+/** 🎬 Projets de montage vidéo enregistrés (pour les rouvrir et continuer) */
+function schema_v44(PDO $pdo): void
+{
+    $pdo->exec("CREATE TABLE IF NOT EXISTS montage_projects (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL DEFAULT '',
         data_json TEXT NOT NULL DEFAULT '{}',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP

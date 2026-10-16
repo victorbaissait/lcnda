@@ -197,12 +197,14 @@
     /** ✎ : comme les widgets du tableau de bord, le bloc se retourne et montre ses réglages sur place (un nouveau bloc s'ouvre dans une fenêtre) */
     function editBlock(i, fresh = null, host = null) {
         const b = fresh || JSON.parse(JSON.stringify(cur.blocks[i])), [, ic, label] = kindOf(b.type);
-        const common = `<div class="form-grid"><label class="span-2">Titre du bloc <small>(facultatif)</small><input name="title" value="${esc(b.title || '')}" maxlength="200"></label>
-            ${b.type === 'divider' ? '' : `<label>Largeur<select name="width">${WIDTHS.map(([v, l]) => `<option value="${v}" ${b.width === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`}
-            <label>Couleur <small>(facultatif)</small><span class="h-fi-colrow"><input type="color" name="color" value="${esc(b.color || '#0066cc')}"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${b.color ? 'checked' : ''}> utiliser</label></span></label></div>`;
+        // comme le verso d'un widget : titre, largeur en boutons (1, 1/2, 1/3…), couleur sur une ligne
+        const W_CHOICES = [['12', '1'], ['6', '1/2'], ['4', '1/3'], ['3', '1/4'], ['8', '2/3'], ['9', '3/4']];
+        const common = `<label>Titre du bloc <small>(facultatif)</small><input name="title" value="${esc(b.title || '')}" maxlength="200" placeholder="${esc(label)}"></label>
+            ${b.type === 'divider' ? '' : `<div class="h-fi-wrow"><span>Largeur</span><input type="hidden" name="width" value="${esc(b.width || '12')}"><div class="block-widths dashboard-widget-widths">${W_CHOICES.map(([v, l]) => `<button type="button" data-fi-w="${v}" aria-pressed="${String(b.width || '12') === v ? 'true' : 'false'}" title="Largeur ${l}">${l}</button>`).join('')}</div></div>`}
+            <div class="h-fi-wrow"><span>Couleur</span><span class="h-fi-colrow"><input type="color" name="color" value="${esc(b.color || '#0066cc')}"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${b.color ? 'checked' : ''}> utiliser</label></span></div>`;
         let body = '';
         const rowsEditor = (rows, cols) => `<div class="h-fi-rows" data-fi-rows>${(rows.length ? rows : [{}]).map(r => `<div class="h-fi-row">${cols.map(([k, l, w]) => `<input data-k="${k}" placeholder="${esc(l)}" value="${esc(r[k] || '')}" style="flex:${w}">`).join('')}<button type="button" class="h-bt" data-fi-rowdel title="Retirer">×</button></div>`).join('')}</div><button type="button" class="button small secondary" data-fi-rowadd>＋ Une ligne</button>`;
-        if (b.type === 'text') body = `<label class="h-fi-big">Texte<textarea name="text" rows="16">${esc(b.text || '')}</textarea></label><p class="muted h-fi-help"># Titre · ## Sous-titre · - liste · 1. liste numérotée · **gras** · *italique* · __souligné__ · [texte du lien](https://…) · > citation · --- trait</p>`;
+        if (b.type === 'text') body = `<label class="h-fi-big">Texte<textarea name="text" rows="8">${esc(b.text || '')}</textarea></label><p class="muted h-fi-help"># Titre · ## Sous-titre · - liste · 1. liste numérotée · **gras** · *italique* · __souligné__ · [texte du lien](https://…) · > citation · --- trait</p>`;
         if (b.type === 'quote') body = `<label class="h-fi-big">Citation<textarea name="text" rows="6">${esc(b.text || '')}</textarea></label><label>Source<input name="source" value="${esc(b.source || '')}" maxlength="400" placeholder="Mémoires de…, p. 12"></label>`;
         if (b.type === 'images') body = `<label>Présentation<select name="layout">${[['grid', 'mosaïque'], ['large', 'une grande image'], ['strip', 'bandeau qui défile']].map(([v, l]) => `<option value="${v}" ${b.layout === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>Légende <small>(facultatif)</small><input name="caption" value="${esc(b.caption || '')}" maxlength="1000"></label>`
             + (ext.mediaEditorHtml ? ext.mediaEditorHtml('topic_sheet', cur.id, mediaOf(b), [[b.id, 'Images et documents', 'image/*,application/pdf']]) : '');
@@ -246,13 +248,20 @@
                 if (b.type === 'images' && ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id);
                 refresh();
             };
-        const target = host && !fresh ? (host.querySelector(':scope > .card-body') || host) : null;
+        // un nouveau bloc s'ouvre lui aussi sur place : une carte vide en bas de la fiche, retournée sur ses réglages
+        if (fresh && !host) {
+            const grid = A().$('#workspace .h-fi-grid');
+            if (grid) { grid.querySelector(':scope > .empty-state, :scope > .empty')?.remove(); grid.insertAdjacentHTML('beforeend', A().card(cur.blocks.length + 1, `${ic} Nouveau bloc`, '', '', 'span-' + (b.type === 'divider' ? '12' : (b.width || '12'))).replace('<section class="card', '<section data-fi-new class="h-fi-block card')); host = grid.lastElementChild; host.scrollIntoView({block: 'center', behavior: 'smooth'}); }
+        }
+        const target = host ? (host.querySelector(':scope > .card-body') || host) : null;
         if (target) { // sur place, comme le verso d'un widget
             host.classList.add('is-back');
-            target.innerHTML = `<form class="h-fi-back" novalidate><div class="h-fi-back-title"><strong>Réglages du bloc</strong><span>${ic} ${esc(label)}</span></div>${common}${body}<div class="h-fi-back-actions"><button type="button" class="button secondary" data-fi-cancel>Annuler</button><button type="submit" class="button">Enregistrer</button></div></form>`;
+            target.innerHTML = `<form class="h-fi-back dashboard-widget-back" novalidate><div class="dashboard-widget-back-title"><strong>${fresh ? 'Nouveau bloc' : 'Réglages du bloc'}</strong><span>${ic} ${esc(label)}</span></div>${common}${body}<div class="page-actions compact h-fi-back-actions"><button type="submit" class="button small">${fresh ? 'Ajouter' : 'Enregistrer'}</button><button type="button" class="button small secondary" data-fi-cancel>Annuler</button></div></form>`;
             const form = target.querySelector('form');
             A().bindCollectionPersonFields?.(form); onOpen(form);
             form.querySelector('[data-fi-cancel]').addEventListener('click', () => refresh());
+            // la largeur se voit tout de suite, comme pour un widget
+            form.addEventListener('click', e => { const w = e.target.closest('[data-fi-w]'); if (!w) return; form.elements.width.value = w.dataset.fiW; form.querySelectorAll('[data-fi-w]').forEach(x => x.setAttribute('aria-pressed', String(x === w))); host.className = host.className.replace(/\bspan-\d+\b/, 'span-' + w.dataset.fiW); });
             form.addEventListener('submit', async e => { e.preventDefault(); const btn = form.querySelector('[type=submit]'); btn.disabled = true; try { if (await onSubmit(form) === false) btn.disabled = false; } catch (err) { toast(err.message, 'error'); btn.disabled = false; } });
             form.querySelector('input[name=title]')?.focus();
             return;

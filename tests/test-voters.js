@@ -46,7 +46,7 @@ const suffrage = JSON.parse(fs.readFileSync(path.join(appRoot, 'assets/data/suff
 const world = JSON.parse(fs.readFileSync(path.join(appRoot, 'assets/data/world-110m.json'), 'utf8'));
 const byId = Object.fromEntries(suffrage.countries.map(c => [c.id, c]));
 const checks = [
-  ['structure à jour (n°43)', () => assert.equal(out.version, 43)],
+  ['structure à jour (n°44)', () => assert.equal(out.version, 44)],
   ['cartes et votes enregistrés, lignes vides ignorées', () => assert.deepEqual(out.saved, { cards: 1, votes: 3 })],
   ['carte : commune, numéro, coordonnées', () => assert.deepEqual(out.card, ['Halluin', '1234', 50.78])],
   ['votes : année tirée de la date, élection inconnue refusée', () => assert.deepEqual(out.votes, [[1945, 'municipales', 'Municipales', 1], [1945, 'referendum', 'Référendum', 0], [1950, '', 'Vote', 0]])],

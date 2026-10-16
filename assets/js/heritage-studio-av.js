@@ -47,20 +47,20 @@
     function pickOther(kind) {
         return new Promise(async resolve => {
             let rows = [];
-            const kinds = kind === 'visual' ? ['video', 'image'] : [kind];
+            const kinds = kind === 'any' ? ['video', 'image', 'audio'] : kind === 'visual' ? ['video', 'image'] : [kind];
             for (const k of kinds) { try { rows.push(...(await A().api('media_av_list', {kind: k})).items.filter(i => i.exists).map(i => ({...i, kind: k}))); } catch (_) {} }
             let done = false;
-            const what = kind === 'visual' ? 'une vidéo ou une photo' : kind === 'video' ? 'une vidéo' : 'un son';
+            const what = kind === 'any' ? 'une vidéo, une photo ou un son' : kind === 'visual' ? 'une vidéo ou une photo' : kind === 'video' ? 'une vidéo' : 'un son';
             const icon = r => r.kind === 'image' ? `<img class="h-avx-pickthumb" src="${url(r.filename)}" alt="" loading="lazy">` : r.kind === 'video' ? '🎬' : '🎵';
-            const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son', wide: true, submitLabel: 'Ajouter',
-                body: `<label class="h-rc-drop"><input type="file" name="file" accept="${kind === 'visual' ? 'video/*,image/*' : kind + '/*'}"><span>📁 Un fichier de l’ordinateur…</span></label>
+            const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: kind === 'any' ? 'Ajouter un rush' : kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son', wide: true, submitLabel: 'Ajouter',
+                body: `<label class="h-rc-drop"><input type="file" name="file" accept="${kind === 'any' ? 'video/*,image/*,audio/*' : kind === 'visual' ? 'video/*,image/*' : kind + '/*'}"><span>📁 Un fichier de l’ordinateur…</span></label>
                     <p class="muted">… ou ${what} déjà dans la base :</p>
                     <input type="search" data-avx-q placeholder="Chercher…">
                     <div class="h-rc-results" data-avx-list>${rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}"> ${icon(r)} ${esc(r.title || r.filename)} <small class="muted">${r.duration ? fmt(r.duration, false) : r.kind === 'image' ? 'photo' : ''}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
                 onOpen: d => d.querySelector('[data-avx-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-avx-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
                 onSubmit: form => {
                     const f = form.querySelector('[name=file]').files[0], pick = form.querySelector('[name=pick]:checked');
-                    if (f) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : kind === 'visual' ? '' : kind; if (!k) { toast('Ce fichier n’est ni une vidéo ni une photo.', 'error'); return false; } done = true; resolve({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f, kind: k}); return; }
+                    if (f) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : kind === 'any' ? (/^audio\//.test(f.type) ? 'audio' : '') : kind === 'visual' ? '' : kind; if (!k) { toast(kind === 'any' ? 'Ce fichier n’est ni une vidéo, ni une photo, ni un son.' : 'Ce fichier n’est ni une vidéo ni une photo.', 'error'); return false; } done = true; resolve({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f, kind: k}); return; }
                     if (pick) { const r = rows[Number(pick.value)]; if (!r) return false; done = true; resolve({src: url(r.filename), title: r.title || r.filename, media: r, kind: r.kind}); return; }
                     toast('Choisis un fichier ou un élément de la liste.', 'error'); return false;
                 },
@@ -582,6 +582,19 @@
         return {sources, v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0},
             tracks: [{id: 'V2', kind: 'v', name: 'Vidéo 2'}, {id: 'V1', kind: 'main', name: 'Vidéo 1'}, {id: 'T1', kind: 't', name: 'Textes 1'}, {id: 'A1', kind: 'a', name: 'Son 1'}, {id: 'A2', kind: 'a', name: 'Son 2'}]};
     }
+    /** Un projet enregistré, remis en état (ce qui manque reprend sa valeur de départ ; les rushes doivent être des médias de la base) */
+    function projectModel(d) {
+        const P = montageModel([]), arr = v => Array.isArray(v) ? v : [];
+        P.sources = arr(d?.sources).filter(x => x && /^media\//.test(String(x.src || '')) && ['video', 'image', 'audio'].includes(x.kind)).map(x => ({src: String(x.src), title: String(x.title || '').slice(0, 200), kind: x.kind, dur: Number(x.dur) || (x.kind === 'image' ? IMG_MAX : 1), w: Number(x.w) || 0, h: Number(x.h) || 0, ...(x.mediaId ? {mediaId: Number(x.mediaId)} : {})}));
+        const okS = c => c && Number.isInteger(c.s) && c.s >= 0 && c.s < P.sources.length;
+        P.v1 = arr(d?.v1).filter(okS); P.v2 = arr(d?.v2).filter(okS); P.audio = arr(d?.audio).filter(okS); P.texts = arr(d?.texts).filter(x => x && typeof x.text === 'string');
+        if (arr(d?.tracks).length) P.tracks = arr(d.tracks).filter(t => t && typeof t.id === 'string' && ['v', 'main', 't', 'a'].includes(t.kind)).map(t => ({id: t.id.slice(0, 12), kind: t.kind, name: String(t.name || '').slice(0, 60), ...(t.hidden ? {hidden: true} : {})}));
+        if (!P.tracks.some(t => t.kind === 'main')) P.tracks.splice(1, 0, {id: 'V1', kind: 'main', name: 'Vidéo 1'});
+        if (d?.look && typeof d.look === 'object') P.look = {...P.look, ...d.look};
+        if (d?.fx && typeof d.fx === 'object') P.fx = {...P.fx, ...d.fx};
+        P.fadeStart = !!d?.fadeStart; P.fadeEnd = !!d?.fadeEnd;
+        return P;
+    }
     const KIND_OF_LIST = {v2: 'v', texts: 't', audio: 'a'};
     /** La piste d'un élément (une ancienne piste « 1 / 2 » des sons devient A1 / A2) */
     const trackOf = (P, c, list) => { const k = KIND_OF_LIST[list]; if (typeof c.track === 'number') c.track = 'A' + c.track; if (c.track && P.tracks.some(t => t.id === c.track && t.kind === k)) return c.track; return P.tracks.find(t => t.kind === k)?.id || ''; };
@@ -765,14 +778,15 @@
         return blob;
     }
 
-    async function openVideo(media, onDone, start = null) {
+    async function openVideo(media, onDone, start = null, proj = null) {
         const sources = [];
-        if (media.id || media.src) {
+        if (!proj && (media.id || media.src)) {
             let meta; try { meta = await loadMeta(media.src || url(media.filename)); } catch (e) { toast(e.message, 'error'); return; }
             sources.push({src: media.src || url(media.filename), title: media.title || 'Vidéo', kind: 'video', ...meta});
         }
-        const P = montageModel(sources);
-        if (sources.length) P.v1.push({id: nid('v'), s: 0, from: 0, to: sources[0].dur, tr: {type: 'none', d: 1}, look: {}, vol: 1});
+        const P = proj ? projectModel(proj.project) : montageModel(sources);
+        let projId = proj?.id || 0, projName = proj?.name || '';
+        if (!proj && sources.length) P.v1.push({id: nid('v'), s: 0, from: 0, to: sources[0].dur, tr: {type: 'none', d: 1}, look: {}, vol: 1});
         let sel = P.v1[0] ? {track: 'v1', id: P.v1[0].id} : null, dirty = false, pxs = 40; // pixels par seconde sur la frise
         const OFF = 150; // largeur des noms de pistes, à gauche de la frise
         // une piste libre de ce genre à ce moment-là, sinon une nouvelle
@@ -793,12 +807,13 @@
         const undetach = a => { if (!a?.detached) return; [...P.v1, ...P.v2].forEach(v => { if (v.detached === a.id) { v.mute = false; delete v.detached; } }); };
         const ver = await versionsHtml(media);
         const MP = montagePrefs();
-        const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', id: 'video', title: media.title || media.filename || 'Nouveau montage', onClose: () => { eng?.pause(); return !dirty || confirm('Fermer sans enregistrer le montage ?'); },
+        const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', id: 'video', title: media.title || media.filename || 'Nouveau montage', onClose: () => { eng?.pause(); return !dirty || confirm('Fermer sans enregistrer le projet ? (💾 Enregistrer le projet le garde pour plus tard)'); },
             body: `<div class="h-mt">
                 <div class="h-mt-top">
-                    <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Ajoute une vidéo avec « ➕ Vidéo à la suite ».</p></div>
+                    <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ➕ Vidéo / photo à la suite »).</p></div>
                     <aside class="h-mt-side">
-                        <div class="h-rt-tabs" data-tbg="mt-tabs" data-tbg-label="Onglets de droite"><button type="button" class="is-active" data-mt-tab="item">🎯 Élément</button><button type="button" data-mt-tab="color">🎨 Couleurs</button><button type="button" data-mt-tab="sound">🔊 Son</button><button type="button" data-mt-tab="film">🎞️ Film</button></div>
+                        <div class="h-rt-tabs" data-tbg="mt-tabs" data-tbg-label="Onglets de droite"><button type="button" data-mt-tab="rush" title="Les vidéos, photos et sons du projet">🎞️ Rush</button><button type="button" class="is-active" data-mt-tab="item">🎯 Élément</button><button type="button" data-mt-tab="color">🎨 Couleurs</button><button type="button" data-mt-tab="sound">🔊 Son</button><button type="button" data-mt-tab="film">🎞️ Film</button></div>
+                        <div data-mt-pane="rush" hidden></div>
                         <div data-mt-pane="item"></div>
                         <div data-mt-pane="color" hidden></div>
                         <div data-mt-pane="sound" hidden></div>
@@ -825,7 +840,7 @@
                 <div class="h-mt-tl" data-mt-tl></div>
                 <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéo et photo ↔ vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
                 ${ver.html}
-                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save>💾 Enregistrer…</button></div></div>`});
+                <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button secondary" data-mt-saveproj title="Garde le montage pour le rouvrir et continuer plus tard (⌘S)">💾 Enregistrer le projet</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM)">📤 Exporter la vidéo…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
         dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px');
         [['colV1', 'v1'], ['colV2', 'v2'], ['colT', 't'], ['colA', 'a']].forEach(([k, v]) => { dl.style.setProperty(`--mt-c-${v}`, MP[k]); dl.style.setProperty(`--mt-i-${v}`, inkOn(MP[k])); });
@@ -1080,7 +1095,66 @@
             if (e.key === 'b' || e.key === 'B') { e.preventDefault(); dl.querySelector('[data-mt-op="split"]')?.click(); }
         }, {signal: keyAc.signal});
         // outils
-        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; if (kind === 'visual') kind = o.kind === 'image' ? 'image' : 'video'; try { const m = kind === 'image' ? await loadImageMeta(o.src) : kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => realDuration(a).then(dur => res({dur}), () => rej(new Error('Son illisible (durée inconnue)'))); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; }); P.sources.push({src: o.src, title: o.title, kind, ...m}); return P.sources.length - 1; } catch (e) { toast(e.message, 'error'); return null; } };
+        // un rush (vidéo, photo, son) entre dans le projet : il apparaît dans l'onglet 🎞️ Rush ; le fichier d'un rush importé
+        // de l'ordinateur est gardé à part (pas dans le JSON) pour être envoyé dans les Médias quand on enregistre le projet
+        const pushSource = async (o, kind) => {
+            try {
+                const m = kind === 'image' ? await loadImageMeta(o.src) : kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => realDuration(a).then(dur => res({dur}), () => rej(new Error('Son illisible (durée inconnue)'))); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; });
+                const src = {src: o.src, title: o.title, kind, ...m, ...(o.media?.id ? {mediaId: o.media.id} : {})};
+                if (o.file) Object.defineProperty(src, '_file', {value: o.file, enumerable: false});
+                P.sources.push(src); dirty = true; drawRush(); return P.sources.length - 1;
+            } catch (e) { toast(`${o.title || 'Fichier'} : ${e.message}`, 'error'); return null; }
+        };
+        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; if (kind === 'visual') kind = o.kind === 'image' ? 'image' : 'video'; return pushSource(o, kind); };
+        // poser un rush sur la frise : à la suite (Vidéo 1), en incrustation ou en son, au moment voulu
+        const placeRush = (s, how, at = null) => {
+            const so = P.sources[s]; if (!so) return; const t = at ?? eng?.t ?? 0;
+            if (so.kind === 'audio' || how === 'a') { if (so.kind !== 'audio') return toast('Seul un son va sur une piste son.', 'error'); const k = {id: nid('a'), s, from: 0, to: so.dur, at: t, vol: 1, fadeIn: 0, fadeOut: 1}; k.track = how?.startsWith?.('A') ? how : freeTrack('a', t, k.to); P.audio.push(k); sel = {track: 'audio', id: k.id}; }
+            else if (how === 'v1') { const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; }
+            else { const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = how?.startsWith?.('V') && how !== 'V1' ? how : freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; }
+            touch(1); drawRush();
+        };
+        const usesOf = s => [...P.v1, ...P.v2, ...P.audio].filter(c => c.s === s).length;
+        let rushKey = '';
+        function drawRush(force = false) {
+            const pane = $('[data-mt-pane="rush"]'); if (!pane) return;
+            const key = P.sources.map((x, i) => x.src + ':' + usesOf(i)).join('|'); if (!force && key === rushKey) return; rushKey = key;
+            const thumb = (x, i) => x.kind === 'image' ? `<img src="${esc(x.src)}" alt="" loading="lazy">` : x.kind === 'video' ? `<video src="${esc(x.src)}#t=0.5" muted preload="metadata" playsinline></video><i class="h-mt-rdur">${fmt(x.dur, false)}</i>` : `<span class="h-mt-raudio">🎵</span><i class="h-mt-rdur">${fmt(x.dur, false)}</i>`;
+            pane.innerHTML = `<div class="h-mt-rhead"><h4>🎞️ Rushes</h4><span class="muted">${P.sources.length || 'aucun'}</span></div>
+                <div class="h-mt-rbar"><label class="button small" title="Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois)">📥 Importer<input type="file" multiple accept="video/*,image/*,audio/*" data-mt-rimport hidden></label><button type="button" class="button small secondary" data-mt-rbase>🗂 De la base</button></div>
+                ${P.sources.length ? `<div class="h-mt-rgrid">${P.sources.map((x, i) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
+                    <div class="h-mt-rthumb is-${x.kind}">${thumb(x, i)}${n ? `<b class="h-mt-ruse" title="Sur la frise">${n}×</b>` : ''}</div>
+                    <figcaption>${esc(x.title || 'Sans titre')}</figcaption>
+                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>`}${n ? '' : `<button type="button" data-mt-rdel title="Retirer ce rush du projet">✕</button>`}</div></figure>`; }).join('')}</div>`
+                : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
+        }
+        $('[data-mt-pane="rush"]').addEventListener('change', async e => {
+            const inp = e.target.closest('[data-mt-rimport]'); if (!inp) return;
+            const files = [...inp.files]; inp.value = ''; let n = 0;
+            for (const f of files) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : ''; if (!k) { toast(`${f.name} : ni vidéo, ni photo, ni son.`, 'error'); continue; } if (await pushSource({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}, k) !== null) n++; }
+            if (n) toast(`${n} rush${n > 1 ? 'es' : ''} ajouté${n > 1 ? 's' : ''} : glisse-les sur la frise.`);
+        });
+        $('[data-mt-pane="rush"]').addEventListener('click', async e => {
+            if (e.target.closest('[data-mt-rbase]')) { const o = await pickOther('any'); if (o) await pushSource(o, o.kind); return; }
+            const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; const i = Number(fig.dataset.mtRush);
+            const pl = e.target.closest('[data-mt-rplace]'); if (pl) return placeRush(i, pl.dataset.mtRplace);
+            if (e.target.closest('[data-mt-rdel]')) { if (usesOf(i)) return; P.sources.splice(i, 1); [...P.v1, ...P.v2, ...P.audio].forEach(c => { if (c.s > i) c.s--; }); dirty = true; drawRush(); }
+        });
+        // glisser un rush sur une piste de la frise
+        $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copy'; });
+        const tlEl = $('[data-mt-tl]');
+        tlEl.addEventListener('dragover', e => { if (![...e.dataTransfer.types].includes('text/x-lcnda-rush')) return; e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); e.target.closest('[data-mt-lane]')?.classList.add('is-drop'); });
+        tlEl.addEventListener('dragleave', e => { if (!tlEl.contains(e.relatedTarget)) tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); });
+        tlEl.addEventListener('drop', e => {
+            const v = e.dataTransfer.getData('text/x-lcnda-rush'); if (v === '') return; e.preventDefault(); tlEl.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop'));
+            const lane = e.target.closest('[data-mt-lane]'), s = Number(v), so = P.sources[s]; if (!so) return;
+            const r = tlEl.querySelector('.h-mt-tlin').getBoundingClientRect(), at = Math.max(0, (e.clientX - r.left - OFF) / pxs);
+            const kind = lane?.dataset.kind || (so.kind === 'audio' ? 'a' : 'main');
+            if (so.kind === 'audio' && kind !== 'a') return toast('Un son se pose sur une piste son.', 'error');
+            if (so.kind !== 'audio' && kind === 'a') return toast('Une vidéo ou une photo se pose sur une piste vidéo.', 'error');
+            if (kind === 't') return toast('Une piste texte reçoit des titres (« ➕ Titre / texte »).', 'error');
+            placeRush(s, kind === 'main' ? 'v1' : kind === 'a' ? lane.dataset.mtLane : lane?.dataset.mtLane || 'v2', at);
+        });
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
             if (op === 'addv1') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
@@ -1103,7 +1177,37 @@
             if (op === 'end') c.to = local;
             touch(1);
         });
-        // enregistrer
+        // 💾 Enregistrer le projet : le montage est gardé (Listes → Vidéos → 🎬 Montage, ou 📂 Projets…) ; les rushes importés
+        // de l'ordinateur sont d'abord envoyés dans les Médias (un projet ne garde que des médias de la base)
+        const showProjName = () => { const el = $('[data-mt-projname]'); if (el) el.textContent = projId ? `🎬 ${projName}${dirty ? ' · modifié' : ''}` : ''; };
+        let savingProj = false;
+        async function saveProject(asNew = false) {
+            if (savingProj) return; eng?.pause();
+            let name = projName;
+            if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet', message: 'Nom du projet de montage :', value: projName || (media.id ? media.title : '') || 'Mon montage', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
+            savingProj = true; const btn = $('[data-mt-saveproj]'), l0 = btn.textContent; btn.disabled = true;
+            try {
+                const local = P.sources.filter(x => !/^media\//.test(x.src));
+                for (const [k, x] of local.entries()) {
+                    if (!x._file) throw new Error(`Le rush « ${x.title} » n’a plus son fichier : retire-le et importe-le de nouveau.`);
+                    btn.textContent = `Envoi des rushes ${k + 1}/${local.length}…`;
+                    const fd = new FormData(); fd.append('file', x._file, x._file.name || 'rush'); fd.append('kind', x.kind); fd.append('title', x.title || 'Rush'); fd.append('csrf', S().csrf);
+                    const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+                    if (!r.ok || j.error) throw new Error(`${x.title} : ${j.error || 'envoi impossible'}`);
+                    x.src = url(j.result.filename); x.mediaId = j.result.media_id; // le moteur garde son fichier en cours ; la prochaine fois, celui de la base
+                }
+                btn.textContent = 'Enregistrement…';
+                const res = await A().api('save_montage_project', {}, {method: 'POST', body: {id: asNew ? 0 : projId, name, project: {...JSON.parse(JSON.stringify(P)), duration: montageEnd(P)}}});
+                projId = res.result.id; projName = res.result.name; dirty = false; showProjName();
+                toast(local.length ? `Projet « ${projName} » enregistré (les ${local.length} fichier(s) importé(s) sont maintenant dans les Médias).` : `Projet « ${projName} » enregistré.`);
+            } catch (err) { toast(err.message, 'error'); }
+            finally { savingProj = false; btn.disabled = false; btn.textContent = l0; drawRush(true); }
+        }
+        $('[data-mt-saveproj]').addEventListener('click', () => saveProject());
+        $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !confirm('Ouvrir un autre projet sans enregistrer celui-ci ?')) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
+        document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
+        const markDirty = () => showProjName(); dl.addEventListener('input', markDirty); dl.addEventListener('click', () => setTimeout(markDirty, 0));
+        // 📤 Exporter la vidéo : un fichier MP4 / WebM (le projet, lui, reste ouvert)
         $('[data-avx-save]').addEventListener('click', () => {
             eng.pause();
             if (!P.v1.length && !P.v2.length) return toast('Le montage est vide : ajoute une vidéo.', 'error');
@@ -1115,7 +1219,7 @@
                 <label>Qualité ${sel2('quality', MT_QUALITY, MP2.quality)}</label><label>Images par seconde ${sel2('fps', MT_FPS.map(f => [f, f + ' images/s']), MP2.fps)}</label>
                 <label>Son ${sel2('abr', [[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], MP2.abr)}</label></div>
                 <p class="muted">Réglages de départ : Maintenance → Montage, retouche et son.</p></fieldset>`;
-            ext.openDialog({eyebrow: 'ENREGISTRER LA VIDÉO', title: media.title || 'Montage', wide: true, submitLabel: 'Enregistrer',
+            ext.openDialog({eyebrow: 'EXPORTER LA VIDÉO', title: projName || media.title || 'Montage', wide: true, submitLabel: '📤 Exporter',
                 body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
                 onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
                 onSubmit: async form => {
@@ -1126,16 +1230,17 @@
                         prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
                         await uploadResult(media, blob, type[1], {mode: f.mode === 'new' ? 'new' : f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: T, note: f.note, title: f.title});
                     } catch (err) { await rebuild(); throw err; }
+                    await rebuild(); drawTl();
                     toast(f.mode === 'new' ? 'Montage enregistré : il est dans Listes → Vidéos.' : f.mode === 'copy' ? 'Nouvelle vidéo enregistrée, rattachée aux mêmes fiches.' : f.mode === 'show' ? 'Nouvelle version montrée partout. L’original est gardé.' : 'Version enregistrée (l’ancienne reste montrée).');
-                    dirty = false; dl.close(); onDone?.();
+                    onDone?.(); // le montage reste ouvert : on peut continuer, ou 💾 enregistrer le projet
                 },
             });
         });
         dl.addEventListener('close', () => { eng?.destroy(); });
         if (ext.tbApply) ext.tbApply(dl, 'video');
         await rebuild();
-        drawTl();
-        if (start === 'add') $('[data-mt-op="addv1"]').click();
+        drawTl(); drawRush(true); showProjName();
+        if (start === 'add' || (proj && !P.v1.length)) $('[data-mt-tab="rush"]')?.click(); // un nouveau montage commence par ses rushes
     }
 
     /** Point d'entrée : un média {id, filename, title, media_type}. */
@@ -1255,8 +1360,34 @@
         }, {signal: ac.signal});
     };
     // Listes → Vidéos / Audios → « 🎬 Montage » : un montage fait de zéro, enregistré comme un nouveau média
+    /** 📂 Les projets de montage enregistrés : ouvrir, renommer, supprimer (ou en commencer un nouveau) */
+    async function projectsDialog({current = 0, onOpen, onNew = null} = {}) {
+        let list = []; try { list = (await A().api('montage_projects')).projects || []; } catch (e) { return toast(e.message, 'error'); }
+        const when = d => { const x = new Date(String(d || '').replace(' ', 'T') + 'Z'); return isNaN(x) ? '' : x.toLocaleString('fr-FR', {dateStyle: 'short', timeStyle: 'short'}); };
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-mt-projdlg';
+        const draw = () => { dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">🎬 MONTAGE</span><h2>Projets de montage</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+            ${onNew ? '<div class="h-mt-pnew"><button type="button" class="button" data-new>＋ Nouveau montage</button></div>' : ''}
+            ${list.length ? `<div class="h-mt-plist">${list.map(p => `<div class="h-mt-prow${p.id === current ? ' is-cur' : ''}"><button type="button" class="h-mt-popen" data-open="${p.id}">${p.thumb ? `<img src="${esc(p.thumb)}" alt="">` : '<span class="h-mt-pico">🎬</span>'}<span><b>${esc(p.name)}</b><small>${p.clips} morceau${p.clips > 1 ? 'x' : ''} · ${p.sources} rush${p.sources > 1 ? 'es' : ''}${p.duration ? ' · ' + fmt(p.duration, false) : ''} · ${esc(when(p.updated_at))}</small></span></button><button type="button" class="icon-button small" data-ren="${p.id}" title="Renommer">✎</button><button type="button" class="icon-button small" data-del="${p.id}" title="Supprimer le projet (les vidéos et photos restent dans les Médias)">🗑</button></div>`).join('')}</div>`
+                : '<p class="muted h-mt-pempty">Aucun projet enregistré pour l’instant : dans le montage, « 💾 Enregistrer le projet ».</p>'}`; };
+        draw(); document.body.appendChild(dlg); dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
+        dlg.addEventListener('click', async e => {
+            const b = e.target.closest('button'); if (!b) return;
+            if (b.dataset.x !== undefined) return dlg.close();
+            if (b.dataset.new !== undefined) { dlg.close(); return onNew?.(); }
+            try {
+                if (b.dataset.open) { const p = list.find(x => x.id === Number(b.dataset.open)); if (await onOpen?.(p) === false) return; dlg.close(); return; }
+                if (b.dataset.ren) { const p = list.find(x => x.id === Number(b.dataset.ren)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: p.name, okLabel: 'Renommer'}); if (!n?.trim()) return; const full = await A().api('montage_project', {id: p.id}); await A().api('save_montage_project', {}, {method: 'POST', body: {id: p.id, name: n.trim(), project: full.project}}); p.name = n.trim().slice(0, 160); return draw(); }
+                if (b.dataset.del) { const p = list.find(x => x.id === Number(b.dataset.del)); if (!confirm(`Supprimer le projet « ${p.name} » ? Les vidéos, photos et sons restent dans les Médias.`)) return; await A().api('delete_montage_project', {}, {method: 'POST', body: {id: p.id}}); list = list.filter(x => x !== p); return draw(); }
+            } catch (err) { toast(err.message, 'error'); }
+        });
+    }
+    async function openProject(id, onDone) {
+        let pr; try { pr = await A().api('montage_project', {id}); } catch (e) { return toast(e.message, 'error'); }
+        return openVideo({id: 0, title: pr.name, media_type: 'video'}, onDone, null, pr);
+    }
+    ext.openMontageProjects = onDone => projectsDialog({onOpen: p => openProject(p.id, onDone), onNew: () => openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add')});
     ext.openMontage = async (kind, onDone) => {
-        if (kind === 'video') return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add');
+        if (kind === 'video') { let has = false; try { has = ((await A().api('montage_projects')).projects || []).length > 0; } catch (_) {} if (has) return ext.openMontageProjects(onDone); return openVideo({id: 0, title: 'Nouveau montage', media_type: 'video'}, onDone, 'add'); }
         const o = await pickOther('audio'); if (!o) return;
         return openAudio({id: 0, title: (o.title || 'Son') + ' (montage)', media_type: 'audio', src: o.src}, onDone);
     };
