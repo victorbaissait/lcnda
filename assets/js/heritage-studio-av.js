@@ -680,7 +680,9 @@
                 const e = elFor(c.id, so.src, it.kind === 'a', so.kind === 'image', c.afx); keep.add(c.id);
                 if (e.img) continue; // une image : rien à caler ni à jouer
                 const rate = spd(c); if (e.el.playbackRate !== rate) e.el.playbackRate = rate; if (e.el.preservesPitch !== (c.pitch !== false)) e.el.preservesPitch = c.pitch !== false;
-                if (hard || Math.abs(e.el.currentTime - it.local) > 0.35) { try { e.el.currentTime = it.local; } catch (_) {} }
+                // hard : caler exactement (mais sans relancer une recherche si on y est déjà : c'est ce qui rendait ▶ lent)
+                const drift = Math.abs(e.el.currentTime - it.local);
+                if ((hard && drift > 0.04) || drift > 0.35) { try { e.el.currentTime = it.local; } catch (_) {} }
                 // volume (fondus du son, morceau muet ou son détaché)
                 let v = it.kind === 'a' ? (c.vol ?? 1) : (c.mute ? 0 : (c.vol ?? 1));
                 if (it.kind === 'a') { const len = clen(c), x = tt - c.at; if (c.fadeIn && x < c.fadeIn) v *= x / c.fadeIn; if (c.fadeOut && len - x < c.fadeOut) v *= Math.max(0, (len - x) / c.fadeOut); }
@@ -689,6 +691,7 @@
                 if (playing && e.el.paused) e.el.play().catch(() => {}); if (!playing && !e.el.paused) e.el.pause();
             }
             els.forEach((e, id) => { if (!keep.has(id) && !e.img) { e.gain.gain.value = 0; if (!e.el.paused) e.el.pause(); } });
+            return keep;
         }
         /** Une vidéo ou une image : dans tout l'écran (piste principale) ou dans sa case (incrustation), transformée, recadrée, déformée */
         function drawClip(el, c, local, alpha, main) {
@@ -775,13 +778,26 @@
             if (t >= T) { t = T; paint(t); api.pause(); onTime?.(t, true); return; }
             sync(t); paint(t); onTime?.(t); raf = requestAnimationFrame(loop);
         };
-        const ready = () => Promise.all([...els.values()].map(e => e.img ? (e.el.complete ? 0 : new Promise(r => { e.el.addEventListener('load', r, {once: true}); e.el.addEventListener('error', r, {once: true}); setTimeout(r, 4000); })) : e.el.readyState >= 2 ? 0 : new Promise(r => { const f = () => { e.el.removeEventListener('loadeddata', f); r(); }; e.el.addEventListener('loadeddata', f); setTimeout(r, 4000); })));
-        const seeked = () => Promise.all([...els.values()].map(e => e.el.seeking ? new Promise(r => { e.el.addEventListener('seeked', r, {once: true}); setTimeout(r, 2500); }) : 0));
+        // n'attendre que les morceaux qui jouent à cet instant (pas tous ceux du montage)
+        const only = ids => ids ? [...els].filter(([id]) => ids.has(id)).map(([, e]) => e) : [...els.values()];
+        // « loadeddata » ne vient qu'une fois : après un déplacement, on attend « canplay » ou « seeked » (sinon on attendait 4 s pour rien)
+        const ready = ids => Promise.all(only(ids).map(e => e.img ? (e.el.complete ? 0 : new Promise(r => { e.el.addEventListener('load', r, {once: true}); e.el.addEventListener('error', r, {once: true}); setTimeout(r, 4000); }))
+            : e.el.readyState >= 2 ? 0 : new Promise(r => { const ev = ['loadeddata', 'canplay', 'seeked', 'error'], f = () => { ev.forEach(k => e.el.removeEventListener(k, f)); r(); }; ev.forEach(k => e.el.addEventListener(k, f)); setTimeout(f, 3000); })));
+        const seeked = ids => Promise.all(only(ids).map(e => e.el.seeking ? new Promise(r => { e.el.addEventListener('seeked', r, {once: true}); setTimeout(r, 2500); }) : 0));
+        let startTok = 0;
         const api = {
             get t() { return t; }, get playing() { return playing; }, ctx, stream: dest?.stream,
             async seek(tt) { t = Math.max(0, Math.min(montageEnd(P), tt)); const was = playing; if (was) api.pause(); sync(t, true); await ready(); await seeked(); paint(t); onTime?.(t); if (was) api.play(); },
-            async play() { if (playing) return; if (ctx.state === 'suspended') await ctx.resume(); if (t >= montageEnd(P) - 0.05) t = 0; sync(t, true); await ready(); await seeked(); playing = true; t0 = t; p0 = performance.now(); sync(t); raf = requestAnimationFrame(loop); },
-            pause() { playing = false; cancelAnimationFrame(raf); els.forEach(e => { if (!e.img) e.el.pause(); }); },
+            get starting() { return !!startTok; },
+            async play() {
+                if (playing || startTok) return; const tok = startTok = Date.now();
+                if (ctx.state === 'suspended') { if (out === 'record') await ctx.resume(); else ctx.resume().catch(() => {}); } // à l'aperçu, sans attendre : le son suit dès que le navigateur l'a rouvert
+                if (t >= montageEnd(P) - 0.05) t = 0;
+                const ids = sync(t, true); await ready(ids); await seeked(ids);
+                if (startTok !== tok) return; startTok = 0; // ⏸ pendant le démarrage
+                playing = true; t0 = t; p0 = performance.now(); sync(t); raf = requestAnimationFrame(loop);
+            },
+            pause() { startTok = 0; playing = false; cancelAnimationFrame(raf); els.forEach(e => { if (!e.img) e.el.pause(); }); },
             redraw() { paint(t); },
             decorate: null,
             videoSize(id) { const d = dimsOf(els.get(id)?.el); return d.vw ? d : null; },
@@ -1141,7 +1157,8 @@
         });
         tl.addEventListener('dblclick', async e => { const n = e.target.closest('[data-mt-tname]'); if (!n) return; const tr = P.tracks.find(t => t.id === n.dataset.mtTname); const name = ((await window.LCNDA_APP.askText({message: 'Nom de la piste :', value: tr.name})) || '').trim().slice(0, 40); if (name) { tr.name = name; touch(0); } });
         // lecture
-        const play = async () => { if (eng.playing) { eng.pause(); $('[data-mt-play]').textContent = '▶ Lire'; } else { await eng.play(); $('[data-mt-play]').textContent = '⏸ Pause'; } };
+        // le bouton change tout de suite ; la lecture démarre dès que les morceaux du moment sont prêts
+        const play = () => { const b = $('[data-mt-play]'); if (eng.playing || eng.starting) { eng.pause(); b.textContent = '▶ Lire'; } else { b.textContent = '⏸ Pause'; eng.play().catch(() => { b.textContent = '▶ Lire'; }); } };
         $('[data-mt-play]').addEventListener('click', play);
         $('[data-mt-home]').addEventListener('click', () => eng.seek(0));
         // au niveau de la page : après un clic sur la frise (redessinée), le focus peut ne plus être dans la fenêtre
