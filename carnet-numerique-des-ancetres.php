@@ -91,7 +91,7 @@
         .presentation-intro strong { color:var(--presentation-blue); }
         .presentation-about-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; margin-top:48px; }
         .presentation-about { padding:24px; border:2px solid var(--presentation-ink); background:#fff; box-shadow:6px 6px 0 rgba(5,93,255,.21); }
-        .presentation-about.about-key { grid-column:1 / -1; background:#dbeaff; }
+        .presentation-about.about-intro { grid-column:1 / -1; }
         .presentation-about h3 { margin:0 0 12px; font-size:24px; line-height:1.05; letter-spacing:-.04em; }
         .presentation-about p { margin:0; color:#3f3f3f; font-weight:600; line-height:1.5; }
         .presentation-about p + p, .presentation-about p + ul, .presentation-about ul + p { margin-top:10px; }
@@ -224,9 +224,9 @@
             </article>
 
             <details class="presentation-changes">
-                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page façon InDesign, retouche façon Photoshop, petit montage vidéo, projets de son, tableaux façon Freeform, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
+                <summary><span>Nouveautés de la version 0.6.0<small>Atelier de mise en page, retouche des photos avec calques, petit montage vidéo, projets de son, tableaux façon Freeform, animaux, fiches sur un sujet, livre de famille et livrets, statistiques et réglages à soi</small></span></summary>
                 <div class="presentation-changes-body">
-                    <h4>📐 Atelier de mise en page, façon InDesign</h4>
+                    <h4>📐 Atelier de mise en page</h4>
                     <ul>
                         <li>Faire <b>le livre de sa généalogie</b> comme dans un logiciel de mise en page : pages simples ou <b>en vis-à-vis</b>, <b>gabarits</b> (numéro de page, titre courant), <b>calques</b> (cacher, verrouiller, ranger).</li>
                         <li>Au départ : <b>une page blanche</b>, <b>les données de la famille</b> (couverture, préface, chiffres, arbre, une page par personne avec sa photo, chronologie, lieux, index — un texte trop long continue tout seul sur la page suivante) ou <b>un design</b>. Format, <b>marges</b>, <b>colonnes et gouttière</b>, <b>fond perdu</b> et <b>ligne-bloc</b> choisis à la création, avec des <b>réglages par défaut</b> modifiables.</li>
@@ -234,7 +234,7 @@
                         <li><b>Texte</b> : toutes les polices de l'ordinateur, corps, interlignage, approche, crénage, ligne de base, capitales, exposant ; alignements, retraits, espacements, <b>lettrine</b>, césure, listes, colonnes ; <b>styles de paragraphe et de caractère</b> (on change un style, tout le livre suit) ; numéro de page et titre automatiques.</li>
                         <li><b>Formes</b> (rectangle, ellipse, polygone, étoile, ligne, <b>plume</b>), <b>cadres d'images</b> (photos de la base ou de l'ordinateur, remplir, ajuster, recadrer), <b>nuancier</b> et <b>dégradés</b>, <b>contours</b> (épaisseur, tirets, pointillés, angles), <b>effets</b> (opacité, modes de fusion, ombre portée, contour progressif, angles arrondis).</li>
                         <li><b>Habillage du texte</b> autour d'une photo ou d'une forme, <b>Pathfinder</b> (ajouter, soustraire, intersection, exclure), aligner et répartir, repères aimantés, <b>liens</b> (images placées, adresses web cliquables).</li>
-                        <li><b>Ajouter ou insérer des pages</b> (autant qu'on veut, à l'endroit voulu), dupliquer, déplacer, <b>aller à une page</b> ; <b>mettre, enlever ou remplacer un gabarit</b> sur une page ou sur plusieurs ; annuler / rétablir avec l'historique ; raccourcis comme dans InDesign.</li>
+                        <li><b>Ajouter ou insérer des pages</b> (autant qu'on veut, à l'endroit voulu), dupliquer, déplacer, <b>aller à une page</b> ; <b>mettre, enlever ou remplacer un gabarit</b> sur une page ou sur plusieurs ; annuler / rétablir avec l'historique ; raccourcis clavier des logiciels de mise en page.</li>
                         <li>Enregistrer, reprendre plus tard, exporter en <b>PDF</b> (aussi <b>avec fond perdu et traits de coupe</b> pour un imprimeur), en page HTML ou en fichier à partager.</li>
                     </ul>
                     <h4>🎬 Petit montage vidéo</h4>
@@ -245,7 +245,7 @@
                         <li>Disposition, couleurs des blocs, boutons et enregistrement réglables (MP4 ou WebM, taille, qualité), avec des <b>ensembles de réglages</b> nommés, exportés et importés.</li>
                         <li><b>Projets de montage</b> enregistrés à part de la vidéo exportée, onglet <b>Rush</b> (vidéos, photos et sons du projet, renommables), vidéo importée avec son son, <b>son séparé de l'image</b>, <b>vitesse</b> de chaque morceau, durée d'une photo au choix, réglages du son morceau par morceau ou pour tout le film, menu en haut, lecture et pause immédiates.</li>
                     </ul>
-                    <h4>🎚️ Retouche des photos, façon Photoshop</h4>
+                    <h4>🎚️ Retouche des photos, avec calques</h4>
                     <ul>
                         <li>Partir d'une photo de la base, d'une image de l'ordinateur ou d'<b>un canevas vide</b> ; menus Fichier, Édition, Image, Calque, Sélection, Filtre, Affichage.</li>
                         <li><b>Calques</b>, <b>groupes de calques</b> (et groupes de groupes) rangés par glisser-déposer, <b>calques de réglage</b> (réglages et filtres, sur tout ce qui est dessous ou seulement sur l'élément dessous), <b>masques</b>, la photo elle-même étant un calque comme les autres.</li>
@@ -289,7 +289,16 @@
                     <ul>
                         <li><b>Mes ensembles de réglages</b> : tous les réglages de l'app enregistrés sous un nom, appliqués, exportés, importés.</li>
                         <li>Menu en bas et colonne latérale à droite au choix ; glisser-déposer partout ; <b>listes à cacher</b> d'un clic ; <b>lignes vides du bloc Identité masquées</b> sur une fiche ou sur toutes.</li>
-                        <li>FAQ cherchable en français (sans accents, synonymes), de nombreuses corrections (mariages, lieux de mariage, durée des vidéos…) et une relecture de sécurité.</li>
+                        <li>FAQ cherchable en français (sans accents, synonymes) et une relecture de sécurité.</li>
+                    </ul>
+                    <h4>🐞 Bugs corrigés</h4>
+                    <ul>
+                        <li><b>Mariages</b> rattachés à deux personnes et <b>lieux de mariage</b> qui ne s'affichaient pas dans les distributions ; durée des vidéos enregistrées ; crayon d'un widget du tableau de bord trop lent.</li>
+                        <li><b>Montage</b> : « Annuler » au moment d'importer fermait le projet ; une vidéo déposée sur la piste 1 était refusée ; lecture et pause lentes à réagir ; ⌘Z ne pouvait pas annuler une coupe faite avec B.</li>
+                        <li><b>Application Mac</b> : ⌘Z et ⇧⌘Z n'arrivaient pas au montage, à la retouche ni à la mise en page ; Échap demandait deux fois de confirmer ; « Annuler » dans le choix d'un fichier fermait la fenêtre ouverte.</li>
+                        <li><b>Retouche</b> : le panneau des calques débordait ; la photo de départ ne se glissait ni ne se supprimait comme un calque ; des boutons censés être cachés restaient visibles ; « Versions de la photo » apparaissait sur un canevas vide.</li>
+                        <li><b>Mise en page</b> : des boutons des gabarits ne faisaient rien ; la couleur du texte perdait la sélection ; « Dupliquer » pouvait planter ; renommer un calque d'un double-clic ne tenait pas.</li>
+                        <li><b>Glisser-déposer</b> : une ligne pouvait passer dans une autre liste, et le repère de dépôt était caché derrière les fenêtres ; dans Maintenance, les boutons rangés ou cachés n'étaient jamais enregistrés.</li>
                     </ul>
                 </div>
             </details>
@@ -683,7 +692,7 @@
             <p class="presentation-intro"><strong>LCNDA est un logiciel de généalogie modulable et personnalisable, parce que chaque généalogie est unique.</strong> Menus, fiches, tableau de bord, onglets, widgets, statistiques, types d’événements, couleurs : vous l’organisez selon votre famille et votre façon de chercher, pas l’inverse, et vous gardez vos réglages sous un nom pour les retrouver ou les passer à un proche. Disponible sur Mac, Windows et Linux, il rassemble au même endroit vos ancêtres, leurs actes, leurs photos, vos sources et vos recherches en cours. Il fonctionne sans internet et sans compte : votre généalogie reste sur votre ordinateur, dans un fichier qui vous appartient. Gratuit et open source, il importe directement vos données Hérédis, MacFamilyTree ou GEDCOM.</p>
 
             <div class="presentation-about-grid">
-                <article class="presentation-about about-key">
+                <article class="presentation-about about-intro">
                     <h3>Un logiciel qui s’adapte à votre famille</h3>
                     <p>Une famille d’artistes, de marins ou de paysans, une lignée suivie sur trois siècles ou une enquête sur un seul ancêtre ne se racontent pas de la même façon. Vous choisissez l’ordre des menus, les blocs affichés sur chaque fiche et leur largeur, les rubriques du tableau de bord, les listes, les cartes et les graphiques utiles. Vous créez vos propres types d’événements, blocs, widgets, statistiques et onglets, et vous réglez couleurs, polices et affichage. Vos ensembles de réglages s’enregistrent sous un nom, s’exportent et s’importent d’un ordinateur à l’autre.</p>
                 </article>
@@ -708,15 +717,15 @@
                     <h3>Voir sa famille autrement</h3>
                     <p>Cartes des naissances, des mariages et des migrations, chronologies, statistiques sur les prénoms, les métiers, les âges au décès… pour repérer d’un coup d’œil ce que les listes ne montrent pas.</p>
                 </article>
-                <article class="presentation-about about-key">
+                <article class="presentation-about">
                     <h3>Raconter et transmettre</h3>
-                    <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page, façon InDesign, fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> façon Freeform posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
+                    <p>Une fois l’histoire trouvée, il reste à la partager. Un atelier de mise en page fait <b>le livre de votre famille</b> à partir de vos fiches : gabarits, styles, photos habillées par le texte, couverture, export PDF prêt pour l’imprimeur. Un petit <b>montage vidéo</b> assemble films de famille, photos animées, titres et musique ; des <b>tableaux</b> façon Freeform posent l’enquête à plat ; des <b>fiches</b> racontent un pays, un métier, une coutume. Et les animaux de la famille ont aussi leur place.</p>
                 </article>
                 <article class="presentation-about">
                     <h3>Une base propre et vérifiée</h3>
                     <p>Un assistant repère les incohérences : enfant né après la mort d’un parent, mariage après un décès, longévité improbable. Il signale aussi les doublons possibles et les familles incomplètes. Un journal garde la trace de chaque modification, et une suppression peut être annulée.</p>
                 </article>
-                <article class="presentation-about about-key">
+                <article class="presentation-about">
                     <h3>Arrivez avec vos données, repartez quand vous voulez</h3>
                     <ul><li>Import direct des fichiers Hérédis et MacFamilyTree, sans passer par un export : photos, sources et tâches comprises.</li><li>Import et export GEDCOM (5.5.1 et 7), le format d’échange commun à tous les logiciels de généalogie.</li><li>Sauvegarde complète en un seul fichier, avec la base et tous les médias, à garder en lieu sûr ou à ouvrir sur un autre ordinateur.</li></ul>
                 </article>
