@@ -570,7 +570,7 @@
                 <label>Origine, sources<textarea name="origin_text" rows="2" placeholder="Armorial général de 1696, généralité de Limoges">${f('origin_text')}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="2">${f('notes')}</textarea></label></div>
                 <h4>Personnes qui l’ont porté</h4><div class="h-rows" data-h-rows="people">${(c.people?.length ? c.people : [{}]).map(personRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="people">+ Personne</button><template data-h-template="people">${personRow()}</template>
-                <h4>Image du blason</h4>${mediaEditorHtml('coat_of_arms', c.id, c.media, [['', 'Blason (image), sceau, ex-libris, armorial']])}`,
+                <h4>Image du blason</h4>${ext.openVectorEditor ? `<p class="h-coat-vec"><button type="button" class="button small" data-h-coat-vector>✒️ ${c.media?.length ? 'Refaire / retoucher le blason en vectoriel' : 'Dessiner le blason (écu, partitions, émaux, meubles)'}</button> <small class="muted">${c.id ? 'Le dessin vient s’ajouter ici en image, et le blasonnement se remplit s’il est vide.' : 'Enregistre d’abord les armoiries.'}</small></p>` : ''}${mediaEditorHtml('coat_of_arms', c.id, c.media, [['', 'Blason (image), sceau, ex-libris, armorial']])}`,
             onSubmit: async form => {
                 const val = values(form);
                 const people = [...form.querySelectorAll('[data-h-rows=people] .transfer-row')].map(r => ({person_id: r.querySelector('[name=person_id]').value, note: r.querySelector('[name=note]').value})).filter(p => Number(p.person_id));
@@ -581,6 +581,14 @@
             onDelete: c.id ? async () => { if (!confirm(`Supprimer « ${c.title} » ?`)) return false; await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: c.id}}); toast('Supprimé.'); await refreshView(); } : null,
             onOpen: dialog => {
                 dialog.addEventListener('click', event => {
+                    if (event.target.closest('[data-h-coat-vector]')) {
+                        if (!c.id) { toast('Enregistre d’abord les armoiries, puis rouvre-les pour dessiner le blason.', 'error'); return; }
+                        const first = (c.media || []).find(m => /\.(png|jpe?g|webp|gif)$/i.test(m.filename || ''));
+                        ext.openVectorEditor({coat: {id: c.id, title: dialog.querySelector('[name=title]')?.value || c.title}, imageSrc: first ? 'media/' + encodeURIComponent(first.filename) : '',
+                            onBlazon: text => { const ta = dialog.querySelector('[name=blazon]'); if (ta && !ta.value.trim()) ta.value = text; },
+                            onCoatSaved: () => toast('Image du blason ajoutée : elle apparaît à la réouverture des armoiries.')});
+                        return;
+                    }
                     const w = event.target.closest('[data-h-blazon-word]');
                     if (!w) return;
                     const ta = dialog.querySelector('[name=blazon]'), pos = ta.selectionStart ?? ta.value.length, before = ta.value.slice(0, pos), word = w.dataset.hBlazonWord;

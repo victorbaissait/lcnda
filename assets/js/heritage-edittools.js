@@ -1,6 +1,6 @@
 /**
  * 🛠️ Listes → Outils de modification : les projets des éditeurs de l'app, un onglet par outil
- * (🎬 montage vidéo, 🎧 son, 🎚️ retouche des photos, 📐 mise en page des livres) : chercher, trier, ouvrir, renommer,
+ * (🎬 montage vidéo, 🎧 son, 🎚️ retouche des photos, ✒️ dessin vectoriel, 📐 mise en page des livres) : chercher, trier, ouvrir, renommer,
  * supprimer, ou en commencer un nouveau. Chargé après heritage-studio.js, heritage-studio-av.js et heritage-layout.js.
  */
 (() => {
@@ -35,6 +35,12 @@
             create: () => ext.pickRetouch?.(),
             rename: (id, name) => post('rename_retouch_project', {id, name}),
             remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche'},
+        {key: 'vector', icon: '✒️', label: 'Dessin vectoriel', what: 'dessin',
+            load: async () => ((await api('vector_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">✒️</span>', info: `${d.objects} objet${d.objects > 1 ? 's' : ''}`})),
+            open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
+            create: again => ext.openVectorEditor?.({onSaved: again, onClose: again}),
+            rename: (id, name) => post('rename_vector_doc', {id, name}),
+            remove: id => post('delete_vector_doc', {id}), createLabel: '＋ Nouveau dessin', extra: '<button type="button" class="button secondary" data-et-vxblason>🛡️ Nouveau blason</button>'},
         {key: 'layout', icon: '📐', label: 'Mise en page (livres)', what: 'livre',
             load: async () => ((await api('layout_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: `<span class="h-et-cover">${ext.layoutCoverHtml?.(d.cover, 44) || '📐'}</span>`, info: [d.is_design ? '🎨 Design' : '📖 Livre', `${d.pages} page${d.pages > 1 ? 's' : ''}`].join(' · ')})),
             open: (id, again) => ext.openLayoutDoc?.(id, again),
@@ -87,6 +93,7 @@
                 if (d.etNew !== undefined) return t.create(again);
                 if (d.etBlank !== undefined) return ext.newLayoutDoc?.('blank', again);
                 if (d.etStudio !== undefined) return ext.openLayoutStudio?.();
+                if (d.etVxblason !== undefined) return ext.openVectorEditor?.({coat: {title: 'Blason'}, onSaved: again, onClose: again});
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
                 if (d.etRen) { const r = rows.find(x => x.id === Number(d.etRen)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: r?.name || '', okLabel: 'Renommer'}); if (!n?.trim()) return; await t.rename(r.id, n.trim().slice(0, 160)); toast('Projet renommé.'); return load(); }
                 if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!confirm(`Supprimer le projet « ${r?.name} » ? (les photos, vidéos et sons restent dans les Médias)`)) return; await t.remove(r.id); toast('Projet supprimé.'); return load(); }
