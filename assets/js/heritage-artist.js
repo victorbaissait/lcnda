@@ -109,7 +109,7 @@
         const close = () => { dlg.close(); dlg.remove(); if (changed) ext.refreshView?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (view) { view = null; paint(); } else close(); });
         const current = () => items.filter(i => i.kind === tab);
-        const paintTabs = () => { dlg.querySelector('[data-ar-tabs]').innerHTML = Object.entries(KINDS).map(([k, [ic, l]]) => `<button type="button" class="${k === tab ? 'is-active' : ''}" data-ar-tab="${k}">${ic} ${esc(l)} <small>${items.filter(i => i.kind === k).length || ''}</small></button>`).join(''); };
+        const paintTabs = () => { dlg.querySelector('[data-ar-tabs]').innerHTML = Object.entries(KINDS).map(([k, [ic, l]]) => `<button type="button" class="${k === tab ? 'is-active' : ''}" data-ar-tab="${k}" title="${esc(l)}">${ic} ${esc({book: 'Bibliographie', work: 'Œuvres', release: 'Discographie', film: 'Filmographie'}[k] || l)} <small>${items.filter(i => i.kind === k).length || ''}</small></button>`).join(''); };
         function paint() {
             paintTabs();
             if (view?.mode === 'edit') return paintEditor();

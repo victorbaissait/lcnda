@@ -120,7 +120,7 @@
         ext.openDialog({eyebrow: 'FAIRE-PART ET AFFICHES', title: '📰 Un faire-part, une affiche', submitLabel: 'Créer et ouvrir',
             body: `<div class="h-fp-form"><div class="h-fp-kinds">${Object.entries(KINDS).map(([k, v]) => `<label class="h-fp-kind"><input type="radio" name="kind" value="${k}" ${k === kind0 ? 'checked' : ''}><span>${esc(v.label)}</span></label>`).join('')}</div>
                 <div class="form-grid"><label>Style<select name="style">${Object.entries(STYLES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Format<select name="format">${FORMATS.map(f => `<option value="${f[0]}">${esc(f[1])}</option>`).join('')}</select></label><label>Sens<select name="orient"><option value="port">Portrait</option><option value="land">Paysage</option></select></label>
-                    <label>Remplir depuis une fiche<span class="h-fp-who"><input type="search" data-fp-q placeholder="Nom, prénom…" autocomplete="off"><button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></label></div><div data-fp-res class="vx-pres"></div>
+                    <label>Remplir depuis une fiche<span class="h-fp-who">${A().collectionPersonField('fp_person', null, 'Nom, prénom…')}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></label></div>
                 <div class="form-grid" data-fp-fields>${fieldsHtml(kind0)}</div>
                 <label class="checkbox-line"><input type="checkbox" name="usephoto"> Avec une photo <small class="muted" data-fp-photo>(celle de la fiche, ou à choisir)</small></label><input type="file" name="photofile" accept="image/*" hidden>
                 <p class="muted">Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis Fichier → Imprimer / PDF ou Exporter.</p></div>`,
@@ -129,10 +129,8 @@
                 setKind(kind0);
                 dg.addEventListener('change', e => { if (e.target.name === 'kind') setKind(e.target.value); if (e.target.name === 'usephoto' && e.target.checked && !photoFile) dg.querySelector('[name=photofile]').click(); if (e.target.name === 'photofile' && e.target.files?.[0]) { const f = e.target.files[0], r = new FileReader(); r.onload = () => { photoFile = {data: r.result}; dg.querySelector('[data-fp-photo]').textContent = `(${f.name})`; }; r.readAsDataURL(f); } });
                 const fill = async pid => { const kind = dg.querySelector('[name=kind]:checked').value; try { const r = await fillFrom(kind, pid); Object.entries(r.values).forEach(([k, v]) => { const el = dg.querySelector(`[data-fp-fields] [name=${k}]`); if (el && v) el.value = v; }); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(`Rempli depuis la fiche de ${r.label} : relis et complète.`); } catch (e) { toast(e.message, 'error'); } };
-                dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-fp-q]').focus(); });
-                const q = dg.querySelector('[data-fp-q]'), res = dg.querySelector('[data-fp-res]'); let tm = 0;
-                q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 8}).catch(() => ({data: []}))).data || []; res.innerHTML = rows.map(p => `<button type="button" class="link-button" data-fp-pick="${Number(p.id)}">${esc(A().personName(p))}</button>`).join(''); }, 220); });
-                res.addEventListener('click', e => { const b = e.target.closest('[data-fp-pick]'); if (!b) return; personId = Number(b.dataset.fpPick); res.innerHTML = ''; q.value = b.textContent; fill(personId); });
+                dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-cp-input]').focus(); });
+                dg.querySelector('[data-cp-input="fp_person"]').parentElement.addEventListener('cp-pick', e => { personId = e.detail.id; fill(personId); });
                 void form;
             },
             onSubmit: async f => {

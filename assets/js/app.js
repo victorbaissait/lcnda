@@ -208,7 +208,7 @@
     const PERSON_BADGE_COLOR_PRESETS_KEY = 'genealogie-person-badge-color-presets';
     const SITE_DEFAULTS_APPLIED_KEY = 'genealogie-site-defaults-applied';
     const SITE_DEFAULT_KEYS = [
-        'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap',
+        'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','lcnda-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles',
         'genealogie-list-order','genealogie-list-hidden','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order','genealogie-board-prefs','genealogie-board-prefs-sets',
         'genealogie-graph-diagram-order','genealogie-graph-diagram-hidden','genealogie-graph-stats-order','genealogie-graph-stats-hidden',
         'genealogie-tile-cat-order','genealogie-tile-hidden-cats','genealogie-tile-hidden','genealogie-tile-custom-cats',
@@ -4211,7 +4211,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             input.addEventListener('input',()=>{hidden.value='';clearTimeout(timer);const q=input.value.trim();if(q.length<2){list.hidden=true;return;}
                 timer=setTimeout(async()=>{let data={data:[]};try{data=await api('search',{type:'persons',q,limit:8});}catch(_){}
                     list.innerHTML=(data.data||[]).map(p=>`<button type="button" data-cp-id="${p.id}" data-cp-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))} <small>${escapeHtml(years(p))}</small></button>`).join('')||'<small class="muted">Aucune fiche : le texte sera gardé tel quel</small>';list.hidden=false;},200);});
-            list.addEventListener('click',event=>{const b=event.target.closest('[data-cp-id]');if(!b)return;hidden.value=b.dataset.cpId;input.value=b.dataset.cpName;list.hidden=true;});
+            const pick=b=>{hidden.value=b.dataset.cpId;input.value=b.dataset.cpName;list.hidden=true;input.parentElement.dispatchEvent(new CustomEvent('cp-pick',{bubbles:true,detail:{id:Number(b.dataset.cpId),name:b.dataset.cpName,field:hidden.name}}));};
+            list.addEventListener('mousedown',event=>event.preventDefault());list.addEventListener('click',event=>{const b=event.target.closest('[data-cp-id]');if(b)pick(b);});
+            input.addEventListener('keydown',event=>{const items=[...list.querySelectorAll('[data-cp-id]')];if(list.hidden||!items.length)return;const cur=items.indexOf(list.querySelector('.is-cp-active'));
+                if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();const n=items[(cur+(event.key==='ArrowDown'?1:-1)+items.length)%items.length];items.forEach(x=>x.classList.toggle('is-cp-active',x===n));n.scrollIntoView({block:'nearest'});}
+                else if(event.key==='Enter'){event.preventDefault();pick(items[Math.max(0,cur)]);}else if(event.key==='Escape'){event.preventDefault();event.stopPropagation();list.hidden=true;}});
             input.addEventListener('blur',()=>setTimeout(()=>{list.hidden=true;},200));
         });
     }

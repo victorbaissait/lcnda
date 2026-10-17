@@ -258,13 +258,11 @@
         }
         const keep = (f, personId = 0) => { if (t.data.people.some(p => p.s === f.s && p.e === f.e)) { if (personId) t.data.people.find(p => p.s === f.s && p.e === f.e).person_id = personId; } else t.data.people.push({name: f.label, role: f.role || '', person_id: personId, s: f.s, e: f.e}); touch(); paintPeople(); };
         function linkPerson(i) {
-            const p = t.data.people[i]; let chosen = 0;
+            const p = t.data.people[i];
             ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `Relier « ${p.name} » à une fiche`, submitLabel: 'Relier',
-                body: `<label>Personne<input type="search" data-q value="${esc(p.name)}" autocomplete="off"></label><div data-res class="vx-pres"></div>`,
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let tm = 0;
-                    const go = async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || []; res.innerHTML = rows.map(r => `<label class="checkbox-line"><input type="radio" name="pick" value="${Number(r.id)}"> ${esc(A().personName(r))} <small class="muted">${esc(A().years?.(r) || '')}</small></label>`).join('') || '<p class="muted">Personne trouvée.</p>'; res.querySelectorAll('[name=pick]').forEach(x => x.addEventListener('change', () => { chosen = Number(x.value); })); };
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 220); }); go(); },
-                onSubmit: () => { if (!chosen) { toast('Choisis une fiche.', 'error'); return false; } p.person_id = chosen; touch(); paintPeople(); }});
+                body: `<label>Personne${A().collectionPersonField('tx_pick', null, 'Nom, prénom…')}</label>`,
+                onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input')); }, 30); }, // les fiches du nom lu s’affichent tout de suite
+                onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) { toast('Choisis une fiche.', 'error'); return false; } p.person_id = chosen; touch(); paintPeople(); }});
         }
         $('[data-tx-found]').addEventListener('click', e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;

@@ -396,15 +396,19 @@
         }
         /* les fenêtres */
         async function linkDialog(o, what) {
-            ext.openDialog({eyebrow: 'PLAN', title: what === 'person' ? 'Lier à une personne' : 'Lier à un lieu', submitLabel: 'Lier',
-                body: `<label>${what === 'person' ? 'Personne' : 'Lieu'}<input type="search" data-q placeholder="${what === 'person' ? 'Nom, prénom…' : 'Commune, lieu…'}" autocomplete="off"></label><div data-res class="vx-pres"></div>`,
+            if (what === 'person') return ext.openDialog({eyebrow: 'PLAN', title: 'Lier à une personne', submitLabel: 'Lier', // même champ « personne » que partout ailleurs
+                body: `<label>Personne${A().collectionPersonField('vm_pick', o.map?.link?.type === 'person' && o.map.link.id ? {id: o.map.link.id, first_name: o.map.link.label, last_name: ''} : null, 'Nom, prénom…')}</label>`,
+                onOpen: dg => setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30),
+                onSubmit: f => { const id = Number(f.elements.vm_pick?.value) || 0; if (!id) { toast('Choisis dans la liste.', 'error'); return false; }
+                    o.map = o.map || {}; o.map.link = {type: 'person', id, label: String(f.querySelector('[data-cp-input]').value).slice(0, 120)}; ed.commit('Lien ajouté'); }});
+            ext.openDialog({eyebrow: 'PLAN', title: 'Lier à un lieu', submitLabel: 'Lier',
+                body: `<label>Lieu<input type="search" data-q placeholder="Commune, lieu…" autocomplete="off"></label><div data-res class="vx-pres"></div>`,
                 onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let t = 0; q.focus();
                     q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => {
-                        const rows = what === 'person' ? ((await api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || []).map(p => ({id: Number(p.id), label: A().personName(p)}))
-                            : ((await api('board_place_search', {q: q.value.trim()}).catch(() => ({places: []}))).places || []).map(p => ({id: Number(p.id) || 0, label: p.name + (p.detail ? ` (${p.detail})` : ''), lat: p.lat, lon: p.lon}));
+                        const rows = ((await api('board_place_search', {q: q.value.trim()}).catch(() => ({places: []}))).places || []).map(p => ({id: Number(p.id) || 0, label: p.name + (p.detail ? ` (${p.detail})` : ''), lat: p.lat, lon: p.lon}));
                         res.innerHTML = rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}"> ${esc(r.label)}</label>`).join('') || '<p class="muted">Rien trouvé.</p>'; res._rows = rows; }, 220); }); },
                 onSubmit: f => { const i = f.querySelector('[name=pick]:checked')?.value, r = f.querySelector('[data-res]')._rows?.[Number(i)]; if (!r) { toast('Choisis dans la liste.', 'error'); return false; }
-                    o.map = o.map || {}; o.map.link = {type: what, id: r.id, label: String(r.label).slice(0, 120), ...(r.lat ? {lat: r.lat, lon: r.lon} : {})}; if (!o.map.name && what === 'place' && o.type !== 'text') o.map.name = String(r.label).replace(/ \(.*\)$/, ''); ed.commit('Lien ajouté'); }});
+                    o.map = o.map || {}; o.map.link = {type: what, id: r.id, label: String(r.label).slice(0, 120), ...(r.lat ? {lat: r.lat, lon: r.lon} : {})}; if (!o.map.name && o.type !== 'text') o.map.name = String(r.label).replace(/ \(.*\)$/, ''); ed.commit('Lien ajouté'); }});
         }
         function openLink(m) { if (!m?.link) return; if (m.link.type === 'person' && m.link.id) { ed.close?.(); A().openPersonById?.(m.link.id); } else toast(`${m.link.label}${m.link.lat ? ` (${num(m.link.lat).toFixed(4)}, ${num(m.link.lon).toFixed(4)})` : ''}`); }
         function linksDialog() {

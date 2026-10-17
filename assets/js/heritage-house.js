@@ -443,10 +443,10 @@
         }
         /* ─── les commandes ─── */
         const placeItem = (base) => { const f = F(), r = stage.getBoundingClientRect(), x = (r.width / 2 - panX) / zoom, y = (r.height / 2 - panY) / zoom, g = H.grid || 10; const it = {id: uid('i'), x: Math.round(x / g) * g, y: Math.round(y / g) * g, rot: 0, ...base}; f.items.push(it); sel = {type: 'item', id: it.id}; setTool('select'); tab = 'props'; commit(`${it.name || libOf(it.kind)?.[1] || 'Objet'} posé`); };
-        const pickPerson = title => new Promise(res => { let chosen = null, done = false;
-            ext.openDialog({eyebrow: 'MAISON', title, submitLabel: 'Ajouter', body: '<label>Personne<input type="search" data-q placeholder="Nom, prénom…" autocomplete="off"></label><div data-res class="vx-pres"></div>',
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), box = dg.querySelector('[data-res]'); let tm = 0; q.focus(); q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || []; box.innerHTML = rows.map(p => `<label class="checkbox-line"><input type="radio" name="pick" value="${Number(p.id)}" data-l="${esc(A().personName(p))}"> ${esc(A().personName(p))}</label>`).join('') || '<p class="muted">Personne trouvée.</p>'; box.querySelectorAll('[name=pick]').forEach(x => x.addEventListener('change', () => { chosen = {id: Number(x.value), label: x.dataset.l}; })); }, 220); }); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
-                onSubmit: () => { if (!chosen) { toast('Choisis une personne.', 'error'); return false; } done = true; res(chosen); }}); });
+        const pickPerson = title => new Promise(res => { let done = false;
+            ext.openDialog({eyebrow: 'MAISON', title, submitLabel: 'Ajouter', body: `<label>Personne${A().collectionPersonField('hs_pick', null, 'Nom, prénom…')}</label>`,
+                onOpen: dg => { setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
+                onSubmit: f => { const id = Number(f.elements.hs_pick?.value) || 0; if (!id) { toast('Choisis une personne.', 'error'); return false; } done = true; res({id, label: f.querySelector('[data-cp-input]').value}); }}); });
         async function import3d() {
             const inp = Object.assign(document.createElement('input'), {type: 'file', accept: '.obj,.stl,.glb,.gltf,.mtl', multiple: true});
             inp.onchange = async () => {
@@ -623,7 +623,7 @@
     ext.openHouse = open;
     ext.houseInternals = {sym2d, area, LIB};
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'house', icon: '🏠', label: 'Plan de maison', what: 'maison',
+    ext.editToolsExtra.push({key: 'house', icon: '🏠', label: 'Maison (plan et 3D)', what: 'maison',
         load: async () => ((await api('houses')).items || []).map(h => ({id: h.id, name: h.name, date: h.updated_at, thumb: h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span class="h-et-ico">🏠</span>', info: [h.place, h.period, `${h.rooms} pièce${h.rooms > 1 ? 's' : ''}`].filter(Boolean).join(' · ')})),
         open: (id, again) => open({id, onSaved: again, onClose: again}), create: again => open({onSaved: again, onClose: again}),
         rename: (id, name) => post('rename_house', {id, name}), remove: id => post('delete_house', {id}), createLabel: '＋ Nouvelle maison'});

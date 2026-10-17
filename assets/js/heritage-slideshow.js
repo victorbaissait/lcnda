@@ -233,14 +233,14 @@
             return {r, p, route};
         }
         function askPerson(title) {
-            return new Promise(res => { let chosen = 0, done = false;
+            const cp = Number(A().state.currentPersonId) || 0;
+            return new Promise(res => { let done = false;
                 ext.openDialog({eyebrow: 'DIAPORAMA', title, submitLabel: 'Choisir',
-                    body: '<label>Personne<input type="search" data-q placeholder="Nom, prénom…" autocomplete="off"></label><div data-res class="vx-pres"></div>',
-                    onOpen: dg => { const q = dg.querySelector('[data-q]'), box = dg.querySelector('[data-res]'); let tm = 0; q.focus();
-                        const go = async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim() || 'a', limit: 12}).catch(() => ({data: []}))).data || []; box.innerHTML = rows.map(p => `<label class="checkbox-line"><input type="radio" name="pick" value="${Number(p.id)}"> ${esc(A().personName(p))}</label>`).join('') || '<p class="muted">Personne trouvée.</p>'; box.querySelectorAll('[name=pick]').forEach(x => x.addEventListener('change', () => { chosen = Number(x.value); })); };
-                        q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 220); }); const cp = Number(A().state.currentPersonId) || 0; if (cp) { chosen = cp; box.innerHTML = '<p class="muted">La personne affichée en ce moment, ou cherche-en une autre.</p>'; } else go();
+                    body: `<label>Personne${A().collectionPersonField('ss_pick', cp ? {id: cp, first_name: 'La personne affichée', last_name: ''} : null, 'Nom, prénom…')}</label>${cp ? '<p class="muted">La personne affichée en ce moment, ou cherche-en une autre.</p>' : ''}`,
+                    onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); setTimeout(() => { q.focus(); q.select(); }, 30);
+                        if (cp) api('person', {id: cp}).then(r => { if (r.person && dg.querySelector('[name=ss_pick]').value == cp) q.value = A().personName(r.person); }).catch(() => {});
                         dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
-                    onSubmit: () => { if (!chosen) { toast('Choisis une personne.', 'error'); return false; } done = true; res(chosen); }}); });
+                    onSubmit: f => { const chosen = Number(f.elements.ss_pick?.value) || 0; if (!chosen) { toast('Choisis une personne.', 'error'); return false; } done = true; res(chosen); }}); });
         }
         async function story() {
             const pid = await askPerson('✨ Le récit de quelle personne ?'); if (!pid) return;

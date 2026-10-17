@@ -1162,14 +1162,10 @@
             if (!res.ok || j.error) throw new Error(j.error || 'Envoi impossible'); return j;
         }
         function pickPerson(title, onPick) {
-            let chosen = 0;
             ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title, submitLabel: 'Envoyer',
-                body: `<label>Personne<input type="search" data-q placeholder="Nom, prénom…" autocomplete="off"></label><div data-res class="vx-pres"></div><p class="muted">L’image (PNG, nette, fond ${doc.bg === 'transparent' ? 'transparent' : 'compris'}) y est ajoutée.</p>`,
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let t = 0; q.focus();
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || [];
-                        res.innerHTML = rows.map(p => `<label class="checkbox-line"><input type="radio" name="pick" value="${Number(p.id)}"> ${esc(A().personName(p))}</label>`).join('') || '<p class="muted">Personne trouvée.</p>';
-                        res.querySelectorAll('[name=pick]').forEach(r => r.addEventListener('change', () => { chosen = Number(r.value); })); }, 220); }); },
-                onSubmit: async () => { if (!chosen) { toast('Choisis une personne.', 'error'); return false; } try { await onPick(chosen); } catch (e) { toast(e.message, 'error'); return false; } }});
+                body: `<label>Personne${A().collectionPersonField('vx_pick', null, 'Nom, prénom…')}</label><p class="muted">L’image (PNG, nette, fond ${doc.bg === 'transparent' ? 'transparent' : 'compris'}) y est ajoutée.</p>`,
+                onOpen: dg => { setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30); },
+                onSubmit: async f => { const chosen = Number(f.elements.vx_pick?.value) || 0; if (!chosen) { toast('Choisis une personne.', 'error'); return false; } try { await onPick(chosen); } catch (e) { toast(e.message, 'error'); return false; } }});
         }
         function saveToMedia() { pickPerson('Enregistrer dans les médias d’une fiche', async pid => { status('Envoi…'); await upload({person_id: pid}, await pngFile()); status('✓ Envoyé'); toast('Image ajoutée aux médias de la fiche.'); }); }
         async function saveToCoat() {

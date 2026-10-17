@@ -3633,3 +3633,21 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 :root[data-theme="dark"] .h-ar-lyrics{background:#2b2924}:root[data-theme="dark"] .h-ar-notes{background:#1f2933}:root[data-theme="dark"] .h-ar-card,:root[data-theme="dark"] .h-ar-bar{background:#24272c}
 .h-ar-top .spacer{flex:1}.h-ar-tabs button{white-space:nowrap}.h-ar-table td:has(>.h-ar-mini){width:52px}
 .h-hs-acts{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+/* 🌳 Arbre décoratif : la fenêtre */
+.h-dt-form{display:flex;flex-direction:column;gap:12px}
+.h-dt-person{display:flex;flex-direction:column;gap:4px;max-width:520px}.h-dt-person .collection-person-field{width:100%}
+.h-dt-shapes-box,.h-dt-checks{border:1px solid var(--line,#ddd);border-radius:10px;padding:8px 12px 12px;margin:0}.h-dt-shapes-box legend,.h-dt-checks legend{font-weight:600;font-size:.88rem;padding:0 4px}
+.h-dt-shapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+.h-dt-shape{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 6px;border:2px solid var(--line,#ddd);border-radius:10px;background:var(--panel,#fff);cursor:pointer;font:inherit;color:inherit;text-align:center}
+.h-dt-shape svg{width:44px;height:44px;color:#5a4a3a}.h-dt-shape small{font-size:.76rem;line-height:1.2}.h-dt-shape:hover{border-color:#8fb4e8}.h-dt-shape.is-on{border-color:#2a7de1;background:#2a7de10f;box-shadow:0 0 0 2px #2a7de133}.h-dt-shape.is-on svg{color:#2a7de1}
+.h-dt-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 14px}
+.h-dt-withbtn{display:flex;gap:6px;align-items:stretch}.h-dt-withbtn>span{flex:1;min-width:0}.h-dt-withbtn select{width:100%}
+.h-dt-tools{display:flex;gap:6px;flex-wrap:wrap}
+.h-dt-mlist{max-height:55vh;overflow:auto}.h-dt-mrow{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.h-dt-theme{display:grid;grid-template-columns:1fr 260px;gap:16px}.h-dt-theme>div:first-child{display:flex;flex-direction:column;gap:8px}
+.h-dt-colors{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:4px 12px}.h-dt-colors label{display:flex;align-items:center;gap:6px;font-size:.85rem}.h-dt-colors input{width:34px;height:26px;padding:0;border:1px solid #bbb}
+.h-dt-pv{border:1px solid #ccc;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:10px;align-self:start;text-align:center}.h-dt-pv b{font-size:1.3rem}
+.h-dt-pvrow{display:flex;gap:6px;justify-content:center}.h-dt-pvrow span{padding:8px 6px;border-radius:6px;font-size:.8rem;min-width:44px}.h-dt-pvrow i{width:26px;height:26px;border-radius:50%;display:inline-block}
+@media (max-width:700px){.h-dt-theme{grid-template-columns:1fr}}
+.h-ar-tabs{flex-wrap:nowrap!important;overflow-x:auto;max-width:100%;flex:0 1 auto}.h-ar-tabs button{flex:0 0 auto}
+.h-dt-person .collection-person-field{flex:0 0 auto;width:100%}

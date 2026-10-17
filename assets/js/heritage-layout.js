@@ -1068,13 +1068,10 @@
             let chosen = it?.dyn?.id || 0;
             ext.openDialog({eyebrow: 'OBJET DYNAMIQUE', title: it ? 'Texte lié à une fiche' : 'Insérer le texte d’une fiche', submitLabel: it ? 'Mettre à jour' : 'Insérer',
                 body: `<p class="muted">Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait.</p>
-                    <label>Personne <input type="search" data-q placeholder="Nom, prénom…" autocomplete="off"></label><div class="ly-dynres" data-res>${chosen ? '<p class="muted">Fiche déjà choisie (cherche pour en changer).</p>' : ''}</div>
+                    <label>Personne ${A().collectionPersonField('ly_dyn', chosen ? {id: chosen, first_name: `Fiche n°${chosen}`, last_name: ''} : null, 'Nom, prénom…')}</label>
                     <fieldset><legend>Ce qu’il faut montrer</legend>${DYN_FIELDS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="f_${k}" ${f0.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</fieldset>`,
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let t = 0;
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || [];
-                        res.innerHTML = rows.map(p => `<label class="checkbox-line"><input type="radio" name="pick" value="${p.id}"> ${esc(A().personName ? A().personName(p) : `${p.first_name || ''} ${p.last_name || ''}`)}</label>`).join('') || '<p class="muted">Personne trouvée.</p>';
-                        res.querySelectorAll('[name=pick]').forEach(r => r.addEventListener('change', () => { chosen = Number(r.value); })); }, 220); }); },
-                onSubmit: async f => {
+                onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); if (chosen) api('person', {id: chosen}).then(r => { if (r.person && dg.querySelector('[name=ly_dyn]').value == chosen) q.value = A().personName(r.person); }).catch(() => {}); },
+                onSubmit: async f => { chosen = Number(f.elements.ly_dyn?.value) || 0;
                     if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
                     const fields = DYN_FIELDS.map(([k]) => k).filter(k => f.elements['f_' + k]?.checked); if (!fields.length) { toast('Coche au moins une chose à montrer.', 'error'); return false; }
                     const html = await personDynHtml(chosen, fields);

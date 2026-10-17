@@ -20,12 +20,48 @@
         botanique: {label: 'Botanique (vert)', paper: '#f7f5ec', ink: '#2f3b26', font: 'Garamond', pat: ['#cfe3c0', '#bad6a5'], mat: ['#e8eec8', '#d8e3b1'], center: '#f1e6b8', empty: '#f3f3ea', trunk: '#5c4127', leaf: ['#5f8a3a', '#78a24c', '#4c7430', '#9bbb5e'], title: '#2f4a1c', frame: false},
         heraldique: {label: 'Héraldique (azur, gueules et or)', paper: '#f8f1dc', ink: '#1c2a4a', font: 'Times New Roman', pat: ['#2c4f8f', '#3a62a8'], mat: ['#a83232', '#bf4646'], center: '#e3bb4a', empty: '#ece4cc', trunk: '#5a4630', leaf: ['#3f6b3a', '#56844e'], title: '#1c2a4a', frame: true},
         moderne: {label: 'Moderne (pastel)', paper: '#ffffff', ink: '#222222', font: 'Helvetica', pat: ['#a9cdee', '#c4ddf3'], mat: ['#f4b2c2', '#f8cad5'], center: '#ffd57a', empty: '#f4f4f4', trunk: '#8a8a8a', leaf: ['#8bc34a', '#a5d16a'], title: '#222222', frame: false},
+        sepia: {label: 'Encre sépia', paper: '#f4ead8', ink: '#3b2a1a', font: 'Baskerville', pat: ['#e6d3b3', '#d9c29b'], mat: ['#eedcc0', '#e2cba6'], center: '#d8b98a', empty: '#f6efe2', trunk: '#5b3f26', leaf: ['#8a7a4e', '#a08f5c'], title: '#3b2a1a', frame: true},
+        artdeco: {label: 'Art déco (noir et or)', paper: '#14161b', ink: '#e9d9a6', font: 'Didot', pat: ['#2a2d35', '#343844'], mat: ['#3a3226', '#463c2d'], center: '#c9a24a', empty: '#1d2027', trunk: '#c9a24a', leaf: ['#b8933f', '#d9b864'], title: '#e3c26b', frame: true},
+        nuit: {label: 'Nuit étoilée (bleu nuit)', paper: '#0f1f3a', ink: '#eef3ff', font: 'Georgia', pat: ['#284a7e', '#30589a'], mat: ['#4a3a78', '#584791'], center: '#f2c94c', empty: '#16294a', trunk: '#9fb3d1', leaf: ['#5f84b8', '#7aa0d4'], title: '#f2c94c', frame: true},
+        aquarelle: {label: 'Aquarelle (doux)', paper: '#fdfbf6', ink: '#3d3d46', font: 'Garamond', pat: ['#bfdcea', '#d3e7f0'], mat: ['#f6cfd5', '#f9dfe3'], center: '#fbe3a7', empty: '#f7f5f0', trunk: '#8b6f55', leaf: ['#9cc7a4', '#b5d6a0', '#e8c0c8'], title: '#5b4b6a', frame: false},
+        provence: {label: 'Provence (lavande et olive)', paper: '#faf6ec', ink: '#3e3a2f', font: 'Palatino Linotype', pat: ['#c9c0e3', '#b8addb'], mat: ['#dfe3b8', '#cfd59e'], center: '#f2c75c', empty: '#f5f1e6', trunk: '#7a6243', leaf: ['#8a9a5b', '#a3b26c', '#9c8fc9'], title: '#5b4a8a', frame: true},
+        breton: {label: 'Marine (bleu et blanc)', paper: '#ffffff', ink: '#13315c', font: 'Georgia', pat: ['#d6e4f5', '#c2d6ef'], mat: ['#e9eef6', '#dbe4f1'], center: '#13315c', empty: '#f7f9fc', trunk: '#13315c', leaf: ['#4b79b3', '#7aa0cf'], title: '#13315c', frame: true},
         nb: {label: 'Noir et blanc (à imprimer)', paper: '#ffffff', ink: '#111111', font: 'Georgia', pat: ['#ffffff', '#f1f1f1'], mat: ['#ffffff', '#f1f1f1'], center: '#ffffff', empty: '#ffffff', trunk: '#333333', leaf: ['#9a9a9a', '#bdbdbd'], title: '#111111', frame: true},
     };
     // formats en pixels (96 points par pouce), en portrait
-    const FORMATS = [['a4', 'A4 (21 × 29,7 cm)', 794, 1123], ['a3', 'A3 (29,7 × 42 cm)', 1123, 1587], ['a2', 'A2 (42 × 59,4 cm)', 1587, 2245], ['a1', 'A1 (59,4 × 84,1 cm)', 2245, 3179], ['a0', 'A0 (84,1 × 118,9 cm)', 3179, 4494],
-        ['p50', 'Affiche 50 × 70 cm', 1890, 2646], ['p70', 'Affiche 70 × 100 cm', 2646, 3780], ['sq', 'Carré 60 × 60 cm', 2268, 2268]];
-    const SHAPES = [['fan180', 'Éventail (demi-cercle)', 'land'], ['fan240', 'Éventail ouvert (240°)', 'land'], ['wheel', 'Roue (cercle complet)', 'port'], ['tree', 'Arbre dessiné (tronc et branches)', 'port']];
+    const px = cm => Math.round(cm / 2.54 * 96), fcm = v => String(Math.round(v * 10) / 10).replace('.', ',');
+    const FMT0 = [['a5', 'A5', 14.8, 21], ['a4', 'A4', 21, 29.7], ['a3', 'A3', 29.7, 42], ['a2', 'A2', 42, 59.4], ['a1', 'A1', 59.4, 84.1], ['a0', 'A0', 84.1, 118.9], ['letter', 'Lettre US', 21.6, 27.9], ['tabloid', 'Tabloïd US', 27.9, 43.2],
+        ['c3040', 'Cadre 30 × 40', 30, 40], ['c4050', 'Cadre 40 × 50', 40, 50], ['p50', 'Affiche 50 × 70', 50, 70], ['p60', 'Affiche 60 × 80', 60, 80], ['p70', 'Affiche 70 × 100', 70, 100], ['p100', 'Grande affiche 100 × 140', 100, 140],
+        ['sq30', 'Carré 30 × 30', 30, 30], ['sq', 'Carré 60 × 60', 60, 60], ['sq100', 'Carré 100 × 100', 100, 100], ['ban', 'Bannière 150 × 50', 50, 150], ['rouleau', 'Rouleau 90 × 200', 90, 200]];
+    const FKEY = 'genealogie-decor-tree-formats', SKEY = 'genealogie-decor-tree-styles';
+    const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
+    const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
+    const ordered = (keys, pref) => [...(pref.order || []).filter(k => keys.includes(k)), ...keys.filter(k => !(pref.order || []).includes(k))];
+    /** tous les formats (de base et à soi) : [clé, nom affiché, largeur px, hauteur px, à soi ?] ; « visible » : sans les cachés, dans l'ordre choisi */
+    function formats(visible = false) {
+        const pref = readJ(FKEY, {}), mine = (Array.isArray(pref.custom) ? pref.custom : []).filter(f => f && /^my_[a-z0-9]{3,20}$/.test(f.id) && f.w > 0 && f.h > 0);
+        const all = [...FMT0.map(([k, l, w, h]) => [k, `${l} (${fcm(w)} × ${fcm(h)} cm)`, px(w), px(h), false]), ...mine.map(f => [f.id, `${String(f.label || 'Mon format').slice(0, 60)} (${fcm(f.w)} × ${fcm(f.h)} cm)`, px(Math.min(500, f.w)), px(Math.min(500, f.h)), true])];
+        const keys = ordered(all.map(f => f[0]), pref), list = keys.map(k => all.find(f => f[0] === k));
+        return visible ? list.filter(f => !(pref.hidden || []).includes(f[0])) : list;
+    }
+    const FORMATS = formats();
+    /** tous les styles (de base et à soi) */
+    function themes(visible = false) {
+        const pref = readJ(SKEY, {}), mine = Object.entries(pref.custom || {}).filter(([k, t]) => /^my_[a-z0-9]{3,20}$/.test(k) && t && typeof t === 'object').map(([k, t]) => [k, cleanTheme(t), true]);
+        const all = [...Object.entries(THEMES).map(([k, t]) => [k, t, false]), ...mine], keys = ordered(all.map(x => x[0]), pref), list = keys.map(k => all.find(x => x[0] === k));
+        return visible ? list.filter(x => !(pref.hidden || []).includes(x[0])) : list;
+    }
+    const HEX = /^#[0-9a-f]{6}$/i, hx = (v, d) => HEX.test(v || '') ? v : d;
+    function cleanTheme(t) { const b = THEMES.classique; return {label: String(t.label || 'Mon style').replace(/[<>]/g, '').slice(0, 60), paper: hx(t.paper, b.paper), ink: hx(t.ink, b.ink), font: String(t.font || b.font).replace(/[^\p{L}\p{N} \-]/gu, '').slice(0, 60) || b.font,
+        pat: [hx(t.pat?.[0], b.pat[0]), hx(t.pat?.[1], b.pat[1])], mat: [hx(t.mat?.[0], b.mat[0]), hx(t.mat?.[1], b.mat[1])], center: hx(t.center, b.center), empty: hx(t.empty, b.empty), trunk: hx(t.trunk, b.trunk), leaf: (() => { const l = (Array.isArray(t.leaf) ? t.leaf : []).filter(c => HEX.test(c)).slice(0, 5); return l.length ? l : b.leaf; })(), title: hx(t.title, b.title), frame: t.frame !== false}; }
+    const themeOf = k => (themes().find(x => x[0] === k) || themes()[0])[1];
+    const SHAPES = [['fan180', 'Éventail (demi-cercle)', 'land', 12], ['fan240', 'Éventail ouvert (240°)', 'land', 12], ['fan270', 'Éventail trois-quarts (270°)', 'land', 12], ['wheel', 'Roue (cercle complet)', 'port', 12],
+        ['tree', 'Arbre dessiné (tronc et branches)', 'port', 8], ['boxesV', 'Arbre en cases (de bas en haut)', 'land', 7], ['boxesH', 'Tableau d’ascendance (de gauche à droite)', 'land', 7]];
+    // la petite image de chaque forme (dans le choix)
+    const SHAPE_ICON = {fan180: '<path d="M4 30a20 20 0 0 1 40 0Z M14 30a10 10 0 0 1 20 0" fill="none" stroke="currentColor" stroke-width="2"/>', fan240: '<path d="M7.7 34A20 20 0 1 1 40.3 34L24 24Z M24 24L14.3 9.4M24 24l9.7-14.6" fill="none" stroke="currentColor" stroke-width="2"/>',
+        fan270: '<path d="M9.9 38.1A20 20 0 1 1 38.1 38.1L24 24Z M24 24V4M24 24H4M24 24h20" fill="none" stroke="currentColor" stroke-width="2"/>', wheel: '<circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 4v12M24 32v12M4 24h12M32 24h12" stroke="currentColor" stroke-width="2"/>',
+        tree: '<path d="M24 44V26M24 30l-9-9M24 28l9-10" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="24" cy="15" r="11" fill="currentColor" opacity=".35"/>', boxesV: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="38" width="12" height="7"/><rect x="7" y="22" width="12" height="7"/><rect x="29" y="22" width="12" height="7"/><rect x="2" y="6" width="9" height="6"/><rect x="13" y="6" width="9" height="6"/><rect x="26" y="6" width="9" height="6"/><rect x="37" y="6" width="9" height="6"/><path d="M24 38v-5H13v-4M24 33h11v-4"/></g>',
+        boxesH: '<g fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="20" width="12" height="8"/><rect x="18" y="9" width="12" height="7"/><rect x="18" y="32" width="12" height="7"/><rect x="34" y="3" width="12" height="6"/><rect x="34" y="14" width="12" height="6"/><rect x="34" y="28" width="12" height="6"/><rect x="34" y="39" width="12" height="6"/><path d="M14 24h2v-11h2M16 24v11h2"/></g>'};
 
     /* mesure des textes (pour qu'ils tiennent dans leur case) */
     let mctx = null;
@@ -69,7 +105,7 @@
     /** les ancêtres numérotés (sosa) à partir de l'arbre renvoyé par l'API (père d'abord) */
     function bySosa(root) {
         const map = new Map();
-        const walk = (node, s) => { if (!node || s > 4096) return; map.set(s, node.person); const kids = [...(node.children || [])].sort((a, b) => (a.person?.gender === 'female') - (b.person?.gender === 'female')); kids.forEach(k => walk(k, k.person?.gender === 'female' ? 2 * s + 1 : 2 * s)); };
+        const walk = (node, s) => { if (!node || s > 16383) return; map.set(s, node.person); const kids = [...(node.children || [])].sort((a, b) => (a.person?.gender === 'female') - (b.person?.gender === 'female')); kids.forEach(k => walk(k, k.person?.gender === 'female' ? 2 * s + 1 : 2 * s)); };
         walk(root, 1); return map;
     }
     const genOf = s => Math.floor(Math.log2(s));
@@ -87,14 +123,14 @@
 
     /* ═════════ Éventails et roue ═════════ */
     function buildFan(people, o, T, W, H, band) {
-        const G = o.gens, span = o.shape === 'fan180' ? 180 : o.shape === 'fan240' ? 240 : 360, m = Math.min(W, H) * .045;
+        const G = o.gens, span = o.shape === 'fan180' ? 180 : o.shape === 'fan240' ? 240 : o.shape === 'fan270' ? 270 : 360, m = Math.min(W, H) * .045, low = 1 + Math.cos((360 - span) / 2 * Math.PI / 180); // hauteur de l'éventail ouvert, en rayons
         const top = o.titlePos === 'top' ? band : 0, bottom = o.titlePos === 'bottom' ? band : 0;
         // le rayon le plus grand qui tient dans la page
         const usableH = H - 2 * m - top - bottom, usableW = W - 2 * m;
-        const R = span === 180 ? Math.min(usableW / 2, usableH * .97) : span === 240 ? Math.min(usableW / 2, usableH / 1.5) : Math.min(usableW, usableH) / 2;
-        const cx = W / 2, cy = span === 180 ? H - m - bottom - R * .03 : span === 240 ? m + top + R : m + top + usableH / 2;
+        const R = span === 180 ? Math.min(usableW / 2, usableH * .97) : span < 360 ? Math.min(usableW / 2, usableH / low) : Math.min(usableW, usableH) / 2;
+        const cx = W / 2, cy = span === 180 ? H - m - bottom - R * .03 : span < 360 ? m + top + R + (usableH - R * low) / 2 : m + top + usableH / 2;
         // anneaux : plus larges pour les générations lointaines (le texte y est écrit dans le sens du rayon)
-        const weights = Array.from({length: G}, (_, i) => i < 3 ? 1 : 1 + (i - 2) * .22), r0 = R * (G <= 4 ? .2 : G <= 6 ? .14 : .1), tot = weights.reduce((a, b) => a + b, 0);
+        const weights = Array.from({length: G}, (_, i) => i < 3 ? 1 : 1 + (i - 2) * (G > 8 ? .32 : .22)), r0 = R * (G <= 4 ? .2 : G <= 6 ? .14 : G <= 9 ? .1 : .07), tot = weights.reduce((a, b) => a + b, 0);
         const radii = [r0]; weights.forEach(w => radii.push(radii.at(-1) + (R - r0) * w / tot));
         const start = -span / 2, groups = [], unit = Math.min(W, H) / 1000;
         for (let g = 0; g <= G; g++) {
@@ -120,13 +156,13 @@
         }
         // les numéros de génération le long du bord, pour s'y retrouver
         const labels = [];
-        if (o.genLabels && span !== 360) for (let g = 1; g <= G; g++) { const rm = (radii[g - 1] + radii[g]) / 2, a = (start - 3 - 90) * Math.PI / 180, x = cx + rm * Math.cos(a), y = cy + rm * Math.sin(a); labels.push({id: uid(), type: 'text', name: `Génération ${g + 1}`, text: g === 1 ? 'Parents' : g === 2 ? 'Grands-parents' : `${g + 1}ᵉ gén.`, x: n2(x), y: n2(y), size: n2(11 * unit * 1.4), font: T.font, align: 'middle', fill: T.ink, sw: 0, italic: true, op: .75, rot: n2(start + 90)}); } // le long du bord gauche, lisible
+        if (o.genLabels && span !== 360) for (let g = 1; g <= G; g++) { const rm = (radii[g - 1] + radii[g]) / 2, a = (start - 3 - 90) * Math.PI / 180, x = cx + rm * Math.cos(a), y = cy + rm * Math.sin(a); labels.push({id: uid(), type: 'text', name: `Génération ${g + 1}`, text: g === 1 ? 'Parents' : g === 2 ? 'Grands-parents' : `${g + 1}ᵉ gén.`, x: n2(x), y: n2(y), size: n2(Math.min(11 * unit * 1.4, (radii[g] - radii[g - 1]) * .9 / Math.max(1, measure(g === 1 ? 'Parents' : g === 2 ? 'Grands-parents' : `${g + 1}ᵉ gén.`, T.font, false, true)))), font: T.font, align: 'middle', fill: T.ink, sw: 0, italic: true, op: .75, rot: n2(start + 90)}); } // le nom tient dans la largeur de l'anneau // le long du bord gauche, lisible
         return {groups, labels, box: {cx, cy, R}};
     }
 
     /* ═════════ Arbre dessiné : tronc, branches, médaillons, feuillage ═════════ */
     function buildTree(people, o, T, W, H, band) {
-        const G = Math.min(o.gens, 7), m = Math.min(W, H) * .05, unit = Math.min(W, H) / 1000, top = o.titlePos === 'top' ? band : 0, bottom = o.titlePos === 'bottom' ? band : 0;
+        const G = Math.min(o.gens, 8), m = Math.min(W, H) * .05, unit = Math.min(W, H) / 1000, top = o.titlePos === 'top' ? band : 0, bottom = o.titlePos === 'bottom' ? band : 0;
         // la couronne : des arcs de cercle concentriques au-dessus d'un tronc court ; le pied (la personne) en bas
         const usableW = W - 2 * m, availH = H - 2 * m - top - bottom, rootH = Math.min(availH * .1, usableW * .12);
         // couronne ovale : aussi large que la page, aussi haute que la place le permet
@@ -177,6 +213,30 @@
         return {groups, branches, leaves, labels: [], box: {cx: ccx, cy: ccy, R: crownR}};
     }
 
+    /* ═════════ Arbre en cases : de bas en haut, ou tableau d'ascendance de gauche à droite ═════════ */
+    function buildBoxes(people, o, T, W, H, band, vertical) {
+        const G = Math.min(o.gens, 7), m = Math.min(W, H) * .05, unit = Math.min(W, H) / 1000, top = o.titlePos === 'top' ? band : 0, bottom = o.titlePos === 'bottom' ? band : 0;
+        const x0 = m, y0 = m + top, w = W - 2 * m, h = H - 2 * m - top - bottom, cols = G + 1, lab = o.genLabels ? (vertical ? w * .07 : h * .04) : 0;
+        const box = s => { const g = genOf(s), n = 2 ** g, i = s - n;
+            if (!vertical) { const cw = w / cols, slot = (h - lab) / n, bw = cw * .8, bh = Math.min(slot * .84, cw * .62); return {x: x0 + g * cw, y: y0 + lab + slot * (i + .5) - bh / 2, w: bw, h: bh}; }
+            const rh = h / cols, slot = (w - lab) / n, bh = rh * .66, bw = Math.min(slot * .9, rh * 2.2); return {x: x0 + lab + slot * (i + .5) - bw / 2, y: y0 + h - (g + 1) * rh + (rh - bh) / 2, w: bw, h: bh}; };
+        const groups = [], links = [], labels = [], sw = n2(Math.max(.6, 1.4 * unit));
+        for (let s = 1; s < 2 ** (G + 1); s++) {
+            const p = people.get(s); if (!p && !o.empty) continue;
+            const b = box(s), fill = fillOf(s, p, o, T, G), kids = [{id: uid(), type: 'rect', name: 'Case', x: n2(b.x), y: n2(b.y), w: n2(b.w), h: n2(b.h), r: n2(Math.min(b.w, b.h) * .12), fill, stroke: T.ink, sw}];
+            const turn = vertical && b.w < b.h * .8, lines = p ? linesOf(p, o, s) : ['?'];
+            const {lines: L, size} = fitLines(lines, (turn ? b.h : b.w) * .88, (turn ? b.w : b.h) * .8, T, (s === 1 ? 34 : 24) * unit * 1.5, 4 * unit);
+            if (L.length) kids.push(textObj(L, b.x + b.w / 2, b.y + b.h / 2, size, turn ? 270 : 0, p ? ink(fill, T) : T.ink, T));
+            groups.push({id: uid(), type: 'group', name: p ? `${s}. ${`${p.first_name || ''} ${p.last_name || ''}`.trim() || 'Sans nom'}` : `${s}. (à trouver)`, children: kids});
+            if (s > 1) { const c = box(s >> 1), d = vertical ? (() => { const x1 = c.x + c.w / 2, y1 = c.y, x2 = b.x + b.w / 2, y2 = b.y + b.h, ym = (y1 + y2) / 2; return `M${n2(x1)} ${n2(y1)}V${n2(ym)}H${n2(x2)}V${n2(y2)}`; })()
+                : (() => { const x1 = c.x + c.w, y1 = c.y + c.h / 2, x2 = b.x, y2 = b.y + b.h / 2, xm = (x1 + x2) / 2; return `M${n2(x1)} ${n2(y1)}H${n2(xm)}V${n2(y2)}H${n2(x2)}`; })();
+                links.push({id: uid(), type: 'svgpath', name: `Lien ${s}`, d, fill: 'none', stroke: T.trunk, sw: n2(Math.max(.8, 2 * unit * .85 ** genOf(s))), join: 'round'}); }
+        }
+        if (o.genLabels) for (let g = 0; g <= G; g++) { const name = g === 0 ? '' : g === 1 ? 'Parents' : g === 2 ? 'Grands-parents' : g === 3 ? 'Arrière-grands-parents' : `${g + 1}ᵉ génération`; if (!name) continue;
+            const b = box(2 ** g); labels.push({id: uid(), type: 'text', name, text: name, x: n2(vertical ? x0 + lab / 2 : b.x + b.w / 2), y: n2(vertical ? b.y + b.h / 2 : y0 + lab * .7), size: n2(Math.min(14 * unit * 1.4, vertical ? lab * .3 : lab * .6)), font: T.font, align: 'middle', fill: T.ink, sw: 0, italic: true, op: .75, rot: vertical ? 270 : 0}); }
+        return {groups, branches: links, leaves: [], labels, box: {cx: W / 2, cy: H / 2, R: Math.min(w, h) / 2}};
+    }
+
     /* ═════════ Habillage : cadre, titre ═════════ */
     function decor(o, T, W, H, band) {
         const out = [], unit = Math.min(W, H) / 1000, m = Math.min(W, H) * .02;
@@ -201,56 +261,129 @@
 
     /** fabrique le dessin complet */
     async function build(o) {
-        const T = THEMES[o.theme] || THEMES.classique, fmt = FORMATS.find(f => f[0] === o.format) || FORMATS[1], land = o.orient === 'land' || (o.orient === 'auto' && SHAPES.find(s => s[0] === o.shape)?.[2] === 'land');
+        const T = themeOf(o.theme), fmt = formats().find(f => f[0] === o.format) || formats().find(f => f[0] === 'a3'), land = o.orient === 'land' || (o.orient === 'auto' && SHAPES.find(s => s[0] === o.shape)?.[2] === 'land');
         const W = land ? fmt[3] : fmt[2], H = land ? fmt[2] : fmt[3], band = (o.title || o.subtitle) ? Math.min(W, H) * .11 : 0;
-        const r = await api('tree', {id: o.person, mode: 'ancestors', depth: Math.min(o.gens, o.shape === 'tree' ? 7 : 10), places: 1});
+        const r = await api('tree', {id: o.person, mode: 'ancestors', depth: Math.min(o.gens, SHAPES.find(x => x[0] === o.shape)?.[3] || 10), places: 1});
         if (!r.tree) throw new Error('Aucune ascendance pour cette personne.');
         const people = bySosa(r.tree);
         if (o.photos) { let n = 0; for (const [s, p] of people) { if (n >= 40 || genOf(s) > 4) continue; if (p?.portrait) { p.portraitData = await portraitData(p.portrait); n++; } } }
-        const built = o.shape === 'tree' ? buildTree(people, o, T, W, H, band) : buildFan(people, o, T, W, H, band), d = decor(o, T, W, H, band);
+        const built = o.shape === 'tree' ? buildTree(people, o, T, W, H, band) : o.shape === 'boxesV' || o.shape === 'boxesH' ? buildBoxes(people, o, T, W, H, band, o.shape === 'boxesV') : buildFan(people, o, T, W, H, band), d = decor(o, T, W, H, band);
         const layer = (name, children) => ({id: uid(), type: 'group', layer: true, name, children});
         const objs = [layer('Cadre et ornements', d.frame), ...(built.branches ? [layer('Tronc et branches', built.branches)] : []), ...(built.leaves?.length ? [layer('Feuillage', built.leaves)] : []), layer('Ancêtres', built.groups), ...(built.labels.length ? [layer('Générations', built.labels)] : []), layer('Titre', d.titles)];
         return {w: W, h: H, bg: T.paper, grid: 0, snap: false, kind: 'tree', objs, count: [...people.values()].filter(Boolean).length};
     }
 
     const PREF = 'lcnda-decor-tree';
+    const rid = () => 'my_' + Math.random().toString(36).slice(2, 10);
+    /** ⚙️ Les listes réglables (formats, styles) : ranger ↑ ↓, montrer / cacher, et les siens (＋, ✎, 🗑) */
+    function manageList({key, title, intro, all, addLabel, onAdd, onEdit, onDelete, onDone}) {
+        const rowsHtml = () => { const pref = readJ(key, {}), hidden = pref.hidden || []; return all().map(([k, l, mine]) => `<li class="h-pet-lrow" data-k="${esc(k)}"><input type="checkbox" ${hidden.includes(k) ? '' : 'checked'} title="Montrer dans la liste"><span>${esc(l)}${mine ? ' <small class="muted">· à moi</small>' : ''}</span>${mine ? `<button type="button" class="h-bt" data-ed title="Modifier">✎</button><button type="button" class="h-bt" data-del title="Supprimer">🗑</button>` : ''}<button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join(''); };
+        const save = dg => { const pref = readJ(key, {}), li = [...dg.querySelectorAll('[data-k]')]; pref.order = li.map(x => x.dataset.k); pref.hidden = li.filter(x => !x.querySelector('input').checked).map(x => x.dataset.k); if (pref.hidden.length >= li.length) { toast('Garde-en au moins un.', 'error'); return false; } writeJ(key, pref); };
+        ext.openDialog({eyebrow: 'ARBRE DÉCORATIF', title, submitLabel: 'Enregistrer', body: `<p class="muted">${intro}</p><ol class="h-pet-layout h-dt-mlist" data-list>${rowsHtml()}</ol><div class="h-dt-mrow"><button type="button" class="button small" data-add>${esc(addLabel)}</button><button type="button" class="button small secondary" data-reset>Tout remettre comme au départ</button></div>`,
+            onOpen: dg => dg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const li = b.closest('[data-k]'), list = dg.querySelector('[data-list]');
+                if (b.hasAttribute('data-up')) li.previousElementSibling?.before(li); else if (b.hasAttribute('data-down')) li.nextElementSibling?.after(li);
+                else if (b.hasAttribute('data-add') || b.hasAttribute('data-ed')) { save(dg); const ok = await (b.hasAttribute('data-add') ? onAdd() : onEdit(li.dataset.k)); if (ok) list.innerHTML = rowsHtml(); }
+                else if (b.hasAttribute('data-del')) { if (!confirm('Supprimer ?')) return; onDelete(li.dataset.k); li.remove(); }
+                else if (b.hasAttribute('data-reset')) { const pref = readJ(key, {}); delete pref.order; delete pref.hidden; writeJ(key, pref); list.innerHTML = rowsHtml(); } }),
+            onSubmit: dg => { if (save(dg) === false) return false; onDone?.(); }});
+    }
+    function editFormat(id) {
+        return new Promise(res => { const pref = readJ(FKEY, {}), f = (pref.custom || []).find(x => x.id === id) || {label: '', w: 50, h: 70};
+            ext.openDialog({eyebrow: 'FORMATS', title: id ? 'Modifier le format' : '＋ Un format à moi', submitLabel: 'Enregistrer', body: `<div class="form-grid"><label>Nom<input name="label" maxlength="60" value="${esc(f.label)}" placeholder="Cadre du salon, toile 80 × 120…" required></label><label>Largeur (cm)<input name="w" type="number" min="5" max="500" step="0.1" value="${f.w}" required></label><label>Hauteur (cm)<input name="h" type="number" min="5" max="500" step="0.1" value="${f.h}" required></label></div><p class="muted">De 5 à 500 cm. Le sens (portrait ou paysage) se choisit ensuite à part.</p>`,
+                onSubmit: dg => { const label = dg.querySelector('[name=label]').value.trim(), w = Number(dg.querySelector('[name=w]').value), h = Number(dg.querySelector('[name=h]').value); if (!label || !(w >= 5 && w <= 500 && h >= 5 && h <= 500)) { toast('Un nom, et des mesures de 5 à 500 cm.', 'error'); return false; }
+                    const p2 = readJ(FKEY, {}), list = Array.isArray(p2.custom) ? p2.custom : [], i = list.findIndex(x => x.id === id), item = {id: id || rid(), label: label.slice(0, 60), w, h}; if (i >= 0) list[i] = item; else list.push(item); p2.custom = list.slice(0, 60); writeJ(FKEY, p2); res(item.id); } }).addEventListener('close', () => res(null)); });
+    }
+    const THEME_FIELDS = [['paper', 'Papier (fond)'], ['ink', 'Encre (textes, traits)'], ['title', 'Titre'], ['center', 'Case de la personne'], ['pat0', 'Côté paternel'], ['pat1', 'Côté paternel (2e teinte)'], ['mat0', 'Côté maternel'], ['mat1', 'Côté maternel (2e teinte)'], ['empty', 'Cases vides'], ['trunk', 'Tronc, branches, liens'], ['leaf0', 'Feuilles'], ['leaf1', 'Feuilles (2e teinte)'], ['leaf2', 'Feuilles (3e teinte)']];
+    function editTheme(id, fromKey) {
+        return new Promise(res => { const base = id ? themeOf(id) : themeOf(fromKey || 'parchemin'), get = k => /\d$/.test(k) ? (base[k.slice(0, -1)] || [])[Number(k.slice(-1))] || (base[k.slice(0, -1)] || [])[0] : base[k];
+            const fonts = ['Palatino Linotype', 'Georgia', 'Garamond', 'Baskerville', 'Times New Roman', 'Didot', 'Book Antiqua', 'Cochin', 'Helvetica', 'Avenir', 'Futura', 'Gill Sans', 'Optima', 'Trebuchet MS', 'Verdana', 'Brush Script MT', 'Apple Chancery', 'Zapfino', 'Snell Roundhand', 'Lucida Calligraphy'];
+            const preview = dg => { const v = k => dg.querySelector(`[name=${k}]`).value, box = dg.querySelector('[data-pv]'); box.style.background = v('paper'); box.style.color = v('ink'); box.style.fontFamily = `"${v('font')}", serif`;
+                box.innerHTML = `<b style="color:${v('title')}">Famille Martin</b><div class="h-dt-pvrow"><span style="background:${v('pat0')}">Père</span><span style="background:${v('center')}">Moi</span><span style="background:${v('mat0')}">Mère</span><span style="background:${v('empty')};border:1px dashed ${v('ink')}">?</span></div><div class="h-dt-pvrow"><i style="background:${v('trunk')}"></i><i style="background:${v('leaf0')}"></i><i style="background:${v('leaf1')}"></i><i style="background:${v('leaf2')}"></i></div>`; };
+            ext.openDialog({eyebrow: 'STYLES', title: id ? 'Modifier mon style' : '＋ Créer un style', submitLabel: 'Enregistrer', wide: true,
+                body: `<div class="h-dt-theme"><div><label>Nom<input name="label" maxlength="60" value="${esc(id ? base.label : '')}" placeholder="Mon style" required></label>${id ? '' : `<label>Partir de<select name="from">${themes().map(([k, t]) => `<option value="${esc(k)}" ${k === (fromKey || 'parchemin') ? 'selected' : ''}>${esc(t.label)}</option>`).join('')}</select></label>`}
+                    <label>Police<input name="font" list="h-dt-fonts" value="${esc(base.font)}"><datalist id="h-dt-fonts">${fonts.map(f => `<option value="${esc(f)}">`).join('')}</datalist></label>
+                    <div class="h-dt-colors">${THEME_FIELDS.map(([k, l]) => `<label><input type="color" name="${k}" value="${esc(get(k) || '#888888')}"> ${esc(l)}</label>`).join('')}</div>
+                    <label class="checkbox-line"><input type="checkbox" name="frame" ${base.frame ? 'checked' : ''}> Cadre et ornements possibles</label></div><div class="h-dt-pv" data-pv></div></div>`,
+                onOpen: dg => { preview(dg); dg.addEventListener('input', () => preview(dg)); dg.querySelector('[name=from]')?.addEventListener('change', e => { const t = themeOf(e.target.value); THEME_FIELDS.forEach(([k]) => { const v = /\d$/.test(k) ? (t[k.slice(0, -1)] || [])[Number(k.slice(-1))] || (t[k.slice(0, -1)] || [])[0] : t[k]; if (v) dg.querySelector(`[name=${k}]`).value = v; }); dg.querySelector('[name=font]').value = t.font; dg.querySelector('[name=frame]').checked = !!t.frame; preview(dg); }); },
+                onSubmit: dg => { const v = k => dg.querySelector(`[name=${k}]`).value, label = v('label').trim(); if (!label) { toast('Donne un nom au style.', 'error'); return false; }
+                    const t = cleanTheme({label, paper: v('paper'), ink: v('ink'), title: v('title'), center: v('center'), empty: v('empty'), trunk: v('trunk'), font: v('font'), pat: [v('pat0'), v('pat1')], mat: [v('mat0'), v('mat1')], leaf: [v('leaf0'), v('leaf1'), v('leaf2')], frame: dg.querySelector('[name=frame]').checked});
+                    const p2 = readJ(SKEY, {}), key = id || rid(); p2.custom = {...(p2.custom || {}), [key]: t}; if (Object.keys(p2.custom).length > 60) { toast('60 styles au plus.', 'error'); return false; } writeJ(SKEY, p2); res(key); } }).addEventListener('close', () => res(null)); });
+    }
     function openMaker(onDone) {
         const S = A().state, cur = Number(S.currentPersonId) || Number(S.bootstrap?.startPersonId) || 0;
-        let saved = {}; try { saved = JSON.parse(localStorage.getItem(PREF) || '{}') || {}; } catch (_) {}
-        const v = (k, d) => saved[k] ?? d, sel = (name, list, cur2) => `<select name="${name}">${list.map(([k, l]) => `<option value="${k}" ${String(cur2) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
+        const saved = readJ(PREF, {});
+        const v = (k, d) => saved[k] ?? d, sel = (name, list, cur2) => `<select name="${name}">${list.map(([k, l]) => `<option value="${esc(k)}" ${String(cur2) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
         const chk = (name, label, on) => `<label class="checkbox-line"><input type="checkbox" name="${name}" ${on ? 'checked' : ''}> ${label}</label>`;
-        let chosen = cur, chosenName = '';
-        ext.openDialog({eyebrow: 'ARBRE DÉCORATIF', title: '🌳 Un arbre à imprimer en grand', submitLabel: 'Fabriquer l’arbre',
+        const gensOpts = shape => { const max = SHAPES.find(x => x[0] === shape)?.[3] || 10; return Array.from({length: max - 1}, (_, i) => i + 2).map(n => [n, `${n} générations${n >= 9 ? ` (${2 ** (n + 1) - 1} cases)` : ''}`]); };
+        const fmtOpts = cur2 => { const vis = formats(true), list = vis.some(f => f[0] === cur2) ? vis : [...vis, ...formats().filter(f => f[0] === cur2)]; return list.map(f => [f[0], f[1]]); };
+        const themeSel = cur2 => { const vis = themes(true), list = vis.some(x => x[0] === cur2) ? vis : [...vis, ...themes().filter(x => x[0] === cur2)], base = list.filter(x => !x[2]), mine = list.filter(x => x[2]);
+            const o = l => l.map(([k, t]) => `<option value="${esc(k)}" ${k === cur2 ? 'selected' : ''}>${esc(t.label)}</option>`).join(''); return `<select name="theme">${o(base)}${mine.length ? `<optgroup label="Mes styles">${o(mine)}</optgroup>` : ''}</select>`; };
+        const shape0 = SHAPES.some(x => x[0] === v('shape')) ? v('shape') : 'fan180';
+        let chosenName = '';
+        ext.openDialog({eyebrow: 'ARBRE DÉCORATIF', title: '🌳 Un arbre à imprimer en grand', submitLabel: 'Fabriquer l’arbre', wide: true,
             body: `<div class="h-dt-form"><p class="muted">L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue.</p>
-                <label>Personne au centre (ou au pied de l’arbre)<input type="search" data-dt-q placeholder="Nom, prénom…" autocomplete="off"></label><div data-dt-res class="h-dt-res"></div><p class="h-dt-who" data-dt-who>${cur ? 'La personne affichée en ce moment' : 'Choisis une personne'}</p>
-                <div class="h-dt-shapes">${SHAPES.map(([k, l]) => `<label class="h-dt-shape"><input type="radio" name="shape" value="${k}" ${v('shape', 'fan180') === k ? 'checked' : ''}><span>${{fan180: '◠', fan240: '◔', wheel: '◉', tree: '🌳'}[k]}</span><small>${esc(l)}</small></label>`).join('')}</div>
-                <div class="form-grid"><label>Générations${sel('gens', [2, 3, 4, 5, 6, 7, 8, 9, 10].map(n => [n, `${n} générations${n > 7 ? ' (éventail, roue)' : ''}`]), v('gens', 5))}</label>
-                    <label>Format${sel('format', FORMATS.map(f => [f[0], f[1]]), v('format', 'a3'))}</label>
+                <label class="h-dt-person">Personne au centre (ou au pied de l’arbre)${A().collectionPersonField('person', null, 'Tape un nom…')}</label>
+                <fieldset class="h-dt-shapes-box"><legend>Forme</legend><input type="hidden" name="shape" value="${shape0}"><div class="h-dt-shapes" data-tbg="dt-shapes" data-tbg-label="Formes de l’arbre">${SHAPES.map(([k, l]) => `<button type="button" class="h-dt-shape${shape0 === k ? ' is-on' : ''}" data-dt-shape="${k}" data-tb-label="${esc(l)}" aria-pressed="${shape0 === k}"><svg viewBox="0 0 48 48" aria-hidden="true">${SHAPE_ICON[k]}</svg><small>${esc(l)}</small></button>`).join('')}</div></fieldset>
+                <div class="h-dt-tools" data-tbg="dt-tools" data-tbg-label="Boutons de la fenêtre"><button type="button" class="button small secondary" data-dt-cmd="fmts">⚙️ Mes formats</button><button type="button" class="button small secondary" data-dt-cmd="themes">🎨 Mes styles</button><button type="button" class="button small secondary" data-dt-cmd="newtheme">＋ Créer un style</button><button type="button" class="button small secondary" data-dt-cmd="reset">↺ Réglages par défaut</button>${ext.tbButton ? ext.tbButton('decortree') : ''}</div>
+                <div class="form-grid"><label>Générations<select name="gens">${gensOpts(shape0).map(([k, l]) => `<option value="${k}" ${Number(v('gens', 5)) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <label>Format<span class="h-dt-withbtn"><span data-fmtbox>${sel('format', fmtOpts(v('format', 'a3')), v('format', 'a3'))}</span><button type="button" class="button small secondary" data-dt-cmd="fmts" title="Mes formats ; ranger, montrer ou cacher">⚙️</button></span></label>
                     <label>Sens${sel('orient', [['auto', 'Selon la forme'], ['land', 'Paysage'], ['port', 'Portrait']], v('orient', 'auto'))}</label>
-                    <label>Style${sel('theme', Object.entries(THEMES).map(([k, t]) => [k, t.label]), v('theme', 'parchemin'))}</label>
+                    <label>Style<span class="h-dt-withbtn"><span data-themebox>${themeSel(v('theme', 'parchemin'))}</span><button type="button" class="button small secondary" data-dt-cmd="newtheme" title="Créer un style (à partir de celui choisi)">＋</button><button type="button" class="button small secondary" data-dt-cmd="themes" title="Mes styles ; ranger, montrer ou cacher">⚙️</button></span></label>
                     <label>Couleurs${sel('colors', [['branch', 'Côté paternel / maternel'], ['gender', 'Hommes / femmes'], ['generation', 'Dégradé par génération'], ['none', 'Une seule couleur']], v('colors', 'branch'))}</label>
                     <label>Noms${sel('layoutNames', [['two', 'Prénom, puis NOM dessous'], ['one', 'Prénom NOM sur une ligne']], v('layoutNames', 'two'))}</label></div>
-                <div class="h-dt-checks">${chk('dates', 'Années', v('dates', true))}${chk('fullDates', 'Dates complètes', v('fullDates', false))}${chk('places', 'Lieu de naissance', v('places', false))}${chk('jobs', 'Métier', v('jobs', false))}${chk('sosa', 'Numéro Sosa', v('sosa', false))}${chk('empty', 'Cases vides (ancêtres à trouver)', v('empty', true))}${chk('photos', 'Portraits (arbre dessiné)', v('photos', false))}${chk('leaves', 'Feuillage (arbre dessiné)', v('leaves', true))}${chk('frame', 'Cadre et ornements', v('frame', true))}${chk('genLabels', 'Noms des générations (éventail)', v('genLabels', true))}</div>
+                <fieldset class="h-dt-checks"><legend>Dans les cases</legend>${chk('dates', 'Années', v('dates', true))}${chk('fullDates', 'Dates complètes', v('fullDates', false))}${chk('places', 'Lieu de naissance', v('places', false))}${chk('jobs', 'Métier', v('jobs', false))}${chk('sosa', 'Numéro Sosa', v('sosa', false))}${chk('empty', 'Cases vides (ancêtres à trouver)', v('empty', true))}</fieldset>
+                <fieldset class="h-dt-checks"><legend>Habillage</legend>${chk('photos', 'Portraits (arbre dessiné)', v('photos', false))}${chk('leaves', 'Feuillage (arbre dessiné)', v('leaves', true))}${chk('frame', 'Cadre et ornements', v('frame', true))}${chk('genLabels', 'Noms des générations', v('genLabels', true))}</fieldset>
                 <div class="form-grid"><label>Titre<input name="title" maxlength="120" value="${esc(v('title', ''))}" placeholder="Arbre de la famille …"></label><label>Sous-titre<input name="subtitle" maxlength="160" value="${esc(v('subtitle', ''))}" placeholder="Établi par … en ${new Date().getFullYear()}"></label>
                     <label>Place du titre${sel('titlePos', [['bottom', 'En bas'], ['top', 'En haut']], v('titlePos', 'bottom'))}</label></div></div>`,
-            onOpen: dg => { const q = dg.querySelector('[data-dt-q]'), res = dg.querySelector('[data-dt-res]'); let t = 0;
-                q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 10}).catch(() => ({data: []}))).data || [];
-                    res.innerHTML = rows.map(p => `<button type="button" class="link-button" data-dt-pick="${Number(p.id)}">${esc(A().personName(p))}</button>`).join('') || '<small class="muted">Personne trouvée.</small>'; }, 220); });
-                res.addEventListener('click', e => { const b = e.target.closest('[data-dt-pick]'); if (!b) return; chosen = Number(b.dataset.dtPick); chosenName = b.textContent; dg.querySelector('[data-dt-who]').textContent = `✓ ${chosenName}`; res.innerHTML = ''; q.value = ''; });
-                if (cur) api('person', {id: cur}).then(r => { const p = r.person || r; const n = A().personName(p); if (n) { chosenName = n; dg.querySelector('[data-dt-who]').textContent = `✓ ${n}`; const tt = dg.querySelector('[name=title]'); if (!tt.value && p.last_name) tt.placeholder = `Arbre de la famille ${p.last_name}`; } }).catch(() => {}); },
+            onOpen: dg => {
+                const hid = dg.querySelector('input[type=hidden][name=person]'), inp = dg.querySelector('[data-cp-input="person"]');
+                dg.addEventListener('cp-pick', e => { chosenName = e.detail.name; });
+                if (cur) { hid.value = cur; api('person', {id: cur}).then(r => { const p = r.person || r, n = A().personName(p); if (n && !inp.value) { inp.value = n; chosenName = n; } const tt = dg.querySelector('[name=title]'); if (!tt.value && p.last_name) tt.placeholder = `Arbre de la famille ${p.last_name}`; }).catch(() => {}); }
+                // le nombre de générations suit la forme choisie
+                const setShape = k => { dg.querySelector('input[name=shape]').value = k; dg.querySelectorAll('[data-dt-shape]').forEach(b => { b.classList.toggle('is-on', b.dataset.dtShape === k); b.setAttribute('aria-pressed', b.dataset.dtShape === k); });
+                    const g = dg.querySelector('[name=gens]'), cur2 = Number(g.value), opts = gensOpts(k); g.innerHTML = opts.map(([n, l]) => `<option value="${n}" ${Math.min(cur2, opts.at(-1)[0]) === n ? 'selected' : ''}>${l}</option>`).join(''); };
+                dg.querySelector('[type=submit]')?.setAttribute('data-dt-cmd', 'make');
+                ext.tbApply?.(dg, 'decortree'); ext.editorKeysAttach?.(dg, 'decortree'); // formes et boutons rangés à sa façon, raccourcis à soi
+                const refill = () => { const f = dg.querySelector('[name=format]').value, t = dg.querySelector('[name=theme]').value; dg.querySelector('[data-fmtbox]').innerHTML = sel('format', fmtOpts(f), f); dg.querySelector('[data-themebox]').innerHTML = themeSel(t); };
+                dg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const c = b.dataset.dtCmd;
+                    if (b.dataset.dtShape) return setShape(b.dataset.dtShape);
+                    if (c === 'reset') { if (!confirm('Revenir aux réglages de départ de l’arbre (forme, format, style, cases…) ?')) return; try { localStorage.removeItem(PREF); } catch (_) {} dg.close(); setTimeout(() => openMaker(onDone), 50); return; }
+                    if (c === 'fmts') manageList({key: FKEY, title: '⚙️ Les formats', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓, et crée les tiens (en cm).', all: () => formats().map(f => [f[0], f[1], f[4]]), addLabel: '＋ Un format à moi',
+                        onAdd: () => editFormat(null), onEdit: id => editFormat(id), onDelete: id => { const p2 = readJ(FKEY, {}); p2.custom = (p2.custom || []).filter(x => x.id !== id); writeJ(FKEY, p2); }, onDone: refill});
+                    if (c === 'themes') manageList({key: SKEY, title: '🎨 Les styles', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓ ; crée les tiens (couleurs, police, cadre), modifie-les ou supprime-les.', all: () => themes().map(([k, t, mine]) => [k, t.label, mine]), addLabel: '＋ Créer un style',
+                        onAdd: () => editTheme(null, dg.querySelector('[name=theme]').value), onEdit: id => editTheme(id), onDelete: id => { const p2 = readJ(SKEY, {}); delete (p2.custom || {})[id]; writeJ(SKEY, p2); }, onDone: refill});
+                    if (c === 'newtheme') { const k = await editTheme(null, dg.querySelector('[name=theme]').value); if (k) { refill(); dg.querySelector('[name=theme]').value = k; } }
+                });
+            },
             onSubmit: async f => {
-                if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
-                const o = {person: chosen}; ['shape', 'gens', 'format', 'orient', 'theme', 'colors', 'layoutNames', 'title', 'subtitle', 'titlePos'].forEach(k => { const el = f.querySelector(`[name=${k}]:checked`) || f.querySelector(`[name=${k}]`); o[k] = el?.value ?? ''; });
-                o.gens = clamp(Number(o.gens) || 5, 2, 10); ['dates', 'fullDates', 'places', 'jobs', 'sosa', 'empty', 'photos', 'leaves', 'frame', 'genLabels'].forEach(k => { o[k] = !!f.querySelector(`[name=${k}]`)?.checked; });
-                try { localStorage.setItem(PREF, JSON.stringify({...o, person: undefined})); } catch (_) {}
+                const chosen = Number(f.querySelector('input[type=hidden][name=person]')?.value) || 0;
+                if (!chosen) { toast('Choisis une personne dans la liste.', 'error'); return false; }
+                const o = {person: chosen}; ['gens', 'format', 'orient', 'theme', 'colors', 'layoutNames', 'title', 'subtitle', 'titlePos'].forEach(k => { const el = f.querySelector(`[name=${k}]:checked`) || f.querySelector(`[name=${k}]`); o[k] = el?.value ?? ''; });
+                o.shape = f.querySelector('input[name=shape]').value; o.gens = clamp(Number(o.gens) || 5, 2, SHAPES.find(x => x[0] === o.shape)?.[3] || 10); ['dates', 'fullDates', 'places', 'jobs', 'sosa', 'empty', 'photos', 'leaves', 'frame', 'genLabels'].forEach(k => { o[k] = !!f.querySelector(`[name=${k}]`)?.checked; });
+                writeJ(PREF, {...o, person: undefined});
                 toast('Fabrication de l’arbre…');
                 try { const doc = await build(o); if (!doc.count) { toast('Aucun ancêtre trouvé.', 'error'); return false; } delete doc.count;
-                    ext.openVectorEditor({doc, name: o.title || `Arbre — ${chosenName || 'famille'}`, onSaved: onDone, onClose: onDone}); }
+                    ext.openVectorEditor({doc, name: o.title || `Arbre — ${chosenName || f.querySelector('[data-cp-input="person"]')?.value || 'famille'}`, onSaved: onDone, onClose: onDone}); }
                 catch (e) { toast(e.message, 'error'); return false; }
             }});
     }
     ext.openDecorTree = openMaker;
-    ext.decorTreeInternals = {build, bySosa, THEMES, FORMATS, SHAPES};
+    ext.decorTreeInternals = {build, bySosa, THEMES, FORMATS, SHAPES, formats, themes};
+    /* Maintenance → Montage, retouche, mise en page et son : les réglages de l'arbre décoratif */
+    ext.decorTreePrefs = {
+        html: () => { const sv = readJ(PREF, {}), o = (list, cur2) => list.map(([k, l]) => `<option value="${esc(k)}" ${String(cur2) === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('');
+            return `<div class="form-grid h-mtp-grid"><label>Forme au départ<select data-dtp="shape">${o(SHAPES.map(x => [x[0], x[1]]), sv.shape || 'fan180')}</select></label><label>Générations<select data-dtp="gens">${o(Array.from({length: 11}, (_, i) => [i + 2, `${i + 2} générations`]), sv.gens || 5)}</select></label>
+                <label>Format<select data-dtp="format">${o(formats(true).map(f => [f[0], f[1]]), sv.format || 'a3')}</select></label><label>Style<select data-dtp="theme">${o(themes(true).map(([k, t]) => [k, t.label]), sv.theme || 'parchemin')}</select></label>
+                <label>Couleurs<select data-dtp="colors">${o([['branch', 'Côté paternel / maternel'], ['gender', 'Hommes / femmes'], ['generation', 'Dégradé par génération'], ['none', 'Une seule couleur']], sv.colors || 'branch')}</select></label><label>Place du titre<select data-dtp="titlePos">${o([['bottom', 'En bas'], ['top', 'En haut']], sv.titlePos || 'bottom')}</select></label></div>
+                <div class="h-mtp-row"><button type="button" class="button small secondary" data-dtp-cmd="fmts">⚙️ Les formats (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="themes">🎨 Les styles (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="reset">↺ Réglages de départ</button></div>`; },
+        bind: (box, redraw) => {
+            box.addEventListener('change', e => { const k = e.target.dataset.dtp; if (!k) return; const sv = readJ(PREF, {}); sv[k] = k === 'gens' ? Number(e.target.value) : e.target.value; if (k === 'shape') sv.gens = Math.min(sv.gens || 5, SHAPES.find(x => x[0] === sv.shape)?.[3] || 10); writeJ(PREF, sv); toast('Enregistré.'); });
+            box.addEventListener('click', e => { const c = e.target.closest('[data-dtp-cmd]')?.dataset.dtpCmd; if (!c) return;
+                if (c === 'reset') { try { localStorage.removeItem(PREF); } catch (_) {} redraw(); toast('Réglages de départ.'); }
+                if (c === 'fmts') manageList({key: FKEY, title: '⚙️ Les formats', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓, et crée les tiens (en cm).', all: () => formats().map(f => [f[0], f[1], f[4]]), addLabel: '＋ Un format à moi', onAdd: () => editFormat(null), onEdit: id => editFormat(id), onDelete: id => { const p2 = readJ(FKEY, {}); p2.custom = (p2.custom || []).filter(x => x.id !== id); writeJ(FKEY, p2); }, onDone: redraw});
+                if (c === 'themes') manageList({key: SKEY, title: '🎨 Les styles', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓ ; crée les tiens, modifie-les ou supprime-les.', all: () => themes().map(([k, t, mine]) => [k, t.label, mine]), addLabel: '＋ Créer un style', onAdd: () => editTheme(null, 'parchemin'), onEdit: id => editTheme(id), onDelete: id => { const p2 = readJ(SKEY, {}); delete (p2.custom || {})[id]; writeJ(SKEY, p2); }, onDone: redraw}); });
+        },
+    };
 
     // Listes → Outils de modification : l'onglet des arbres décoratifs (des dessins vectoriels marqués « tree »)
     ext.editToolsExtra = ext.editToolsExtra || [];

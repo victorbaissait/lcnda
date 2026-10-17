@@ -196,7 +196,7 @@
     /* ═════════ La fenêtre ═════════ */
     function open(onDone, opts = {}) {
         let mode = opts.mode || 'sign', img = null, imgName = '', crop = null, f = null, person = null, autoThr = 140;
-        const pickPersonHtml = `<span class="h-fp-who"><input type="search" data-sl-q placeholder="Nom, prénom…" autocomplete="off"><button type="button" class="button small secondary" data-sl-cur>Fiche affichée</button></span><div data-sl-res class="vx-pres"></div>`;
+        const pickPersonHtml = pre => `<span class="h-fp-who">${A().collectionPersonField(pre + '_person', null, 'Nom, prénom…')}<button type="button" class="button small secondary" data-${pre}-cur>Fiche affichée</button></span>`;
         ext.openDialog({eyebrow: 'CALLIGRAPHIE ET SCEAUX', title: '🔤 Signatures et sceaux', wide: true, submitLabel: 'Créer et ouvrir dans le dessin',
             body: `<div class="h-sl">
                 <div class="h-sl-tabs" role="tablist"><button type="button" data-sl-mode="sign">✍️ La signature d’un acte</button><button type="button" data-sl-mode="seal">🔏 Monogramme, cachet, tampon</button></div>
@@ -210,13 +210,13 @@
                             <label>Épaisseur du trait<select name="grow"><option value="-1">Plus fin</option><option value="0" selected>Comme l’original</option><option value="1">Plus épais</option><option value="2">Bien plus épais</option></select></label>
                             <label class="checkbox-line"><input type="checkbox" name="lines"> Effacer les lignes du registre</label>
                             <label>Couleur<select name="ink">${INKS.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label>
-                            <label>De qui est cette signature ?${pickPersonHtml}</label>
+                            <label>De qui est cette signature ?${pickPersonHtml('sl')}</label>
                             <label>Légende sous la signature (facultatif)<input name="caption" placeholder="ex. Jean Martin, 1832 — acte de mariage"></label>
                             <label class="checkbox-line"><input type="checkbox" name="tomedia" checked> Ranger aussi l’image (fond transparent) dans les médias de la personne</label></div></div>
                 </section>
                 <section data-sl-pane="seal" hidden>
                     <div class="h-sl-work"><div class="h-sl-sealprev" data-sl-sprev></div>
-                        <div class="h-sl-side"><label>D’après une personne ${pickPersonHtml.replace(/data-sl-/g, 'data-sl2-')}</label>
+                        <div class="h-sl-side"><label>D’après une personne ${pickPersonHtml('sl2')}</label>
                             <div class="form-grid"><label>Initiales<input name="initials" value="JM" maxlength="6"></label><label>Lettres<select name="letters">${Object.entries(LETTERS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label>
                                 <label>Forme<select name="shape">${Object.entries(SHAPES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Couleur<select name="color">${Object.entries(COLORS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label>
                                 <label class="span-2">Légende du haut<input name="top" placeholder="ex. FAMILLE MARTIN"></label><label class="span-2">Légende du bas<input name="bottom" placeholder="ex. TULLE · 1832"></label></div>
@@ -228,10 +228,10 @@
                 const setMode = m => { mode = m; dg.querySelectorAll('[data-sl-mode]').forEach(b => b.classList.toggle('active', b.dataset.slMode === m)); dg.querySelectorAll('[data-sl-pane]').forEach(p => { p.hidden = p.dataset.slPane !== m; }); if (m === 'seal') sealPrev(); };
                 dg.querySelectorAll('[data-sl-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.slMode)));
                 /* — la personne (les deux volets) — */
-                const bindWho = (pre, onPick) => { const q = $(`[data-${pre}-q]`), res = $(`[data-${pre}-res]`); let tm = 0;
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 8}).catch(() => ({data: []}))).data || []; res.innerHTML = rows.map(p => `<button type="button" class="link-button" data-pick="${Number(p.id)}" data-first="${esc(p.first_name || '')}" data-last="${esc(p.last_name || '')}" data-y="${Number(p.birth_year) || ''}">${esc(A().personName(p))}</button>`).join(''); }, 220); });
-                    res.addEventListener('click', e => { const b = e.target.closest('[data-pick]'); if (!b) return; res.innerHTML = ''; q.value = b.textContent; onPick({id: Number(b.dataset.pick), first: b.dataset.first, last: b.dataset.last, name: b.textContent, year: b.dataset.y}); });
-                    $(`[data-${pre}-cur]`).addEventListener('click', async () => { const id = Number(A().state.currentPersonId) || 0; if (!id) { toast('Aucune fiche affichée : cherche la personne.', 'error'); q.focus(); return; } const r = await api('person', {id}).catch(() => null); const p = r?.person; if (!p) return; q.value = A().personName(p); onPick({id, first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}); }); };
+                const bindWho = (pre, onPick) => { const box = $(`[data-cp-input="${pre}_person"]`).parentElement, q = box.querySelector('[data-cp-input]'), hid = box.querySelector('input[type=hidden]');
+                    const use = (id, p) => { q.value = A().personName(p); hid.value = id; onPick({id, first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}); };
+                    box.addEventListener('cp-pick', async e => { const {id, name} = e.detail, p = (await api('person', {id}).catch(() => null))?.person; if (p) use(id, p); else onPick({id, first: '', last: name, name, year: ''}); });
+                    $(`[data-${pre}-cur]`).addEventListener('click', async () => { const id = Number(A().state.currentPersonId) || 0; if (!id) { toast('Aucune fiche affichée : cherche la personne.', 'error'); q.focus(); return; } const p = (await api('person', {id}).catch(() => null))?.person; if (p) use(id, p); }); };
                 bindWho('sl', p => { person = p; const cap = form.elements.caption; if (!cap.value) cap.value = p.name; });
                 bindWho('sl2', p => { form.elements.initials.value = initialsOf(p.first, p.last).toLocaleUpperCase('fr-FR'); form.elements.top.value = `Famille ${p.last || ''}`.trim().toLocaleUpperCase('fr-FR'); sealPrev(); });
                 /* — la signature — */

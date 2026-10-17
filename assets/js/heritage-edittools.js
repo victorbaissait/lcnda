@@ -51,7 +51,7 @@
 
     // d'autres fichiers ajoutent leur outil (arbre décoratif, transcription, diaporama, plan de maison…) : ext.editToolsExtra.push({key, icon, label, …})
     ext.editToolsExtra = ext.editToolsExtra || [];
-    const allTools = () => [...TOOLS, ...ext.editToolsExtra];
+    const allTools = () => [...TOOLS, ...ext.editToolsExtra.filter(t => t.key !== 'house'), ...ext.editToolsExtra.filter(t => t.key === 'house')]; // la maison (plan et 3D) à la fin
     ext.lists = ext.lists || {};
     ext.lists.edit_tools = async token => {
         const S = A().state, ws = A().$('#workspace');
