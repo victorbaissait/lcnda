@@ -416,5 +416,5 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
     Object.assign(window.LCNDA_PARTS, {renderGraph, renderGraphSidebar});
-    if (state.module === 'graphiques') renderSidebar(); // la colonne de gauche attendait ce fichier
+    if (state.module === 'graphiques' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

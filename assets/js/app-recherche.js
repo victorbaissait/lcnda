@@ -1176,5 +1176,5 @@
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
     Object.assign(window.LCNDA_PARTS, {renderResearch, renderResearchSidebar});
-    if (state.module === 'recherche') renderSidebar(); // la colonne de gauche attendait ce fichier
+    if (state.module === 'recherche' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

@@ -836,5 +836,5 @@
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
     Object.assign(window.LCNDA_PARTS, {renderMaintenance, renderMaintenanceSidebar});
-    if (state.module === 'maintenance') renderSidebar(); // la colonne de gauche attendait ce fichier
+    if (state.module === 'maintenance' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

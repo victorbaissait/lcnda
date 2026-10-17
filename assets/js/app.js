@@ -6480,8 +6480,6 @@ ${backupSectionHtml()}
         $('#precise-map-confirm').addEventListener('click',()=>{if(!markerSet)return;form.elements.precise_lat.value=pLat.toFixed(7);form.elements.precise_lon.value=pLon.toFixed(7);renderFn(form,{precise_lat:pLat,precise_lon:pLon});dlg.close();dlg.remove();});
     }
 
-    function xToLng(x, zoom) { const scale=Math.pow(2,zoom); return x/scale/256*360-180; }
-    function yToLat(y, zoom) { const scale=Math.pow(2,zoom); const n=Math.PI-2*Math.PI*y/(scale*256); return 180/Math.PI*Math.atan(0.5*(Math.exp(n)-Math.exp(-n))); }
     function renderTileGrid(container, lat, lon, zoom, w, h) {
         const tileSize=256; const scale=Math.pow(2,zoom);
         const cx=lngToX(lon,zoom), cy=latToY(lat,zoom);

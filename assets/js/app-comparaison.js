@@ -177,5 +177,5 @@
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
     Object.assign(window.LCNDA_PARTS, {renderComparison, renderComparisonSidebar, setupComparisonImageZoom});
-    if (state.module === 'comparaison') renderSidebar(); // la colonne de gauche attendait ce fichier
+    if (state.module === 'comparaison' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

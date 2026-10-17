@@ -228,5 +228,5 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
     Object.assign(window.LCNDA_PARTS, {renderMap, renderMapSidebar, drawMap, hideMapTooltip});
-    if (state.module === 'carte') renderSidebar(); // la colonne de gauche attendait ce fichier
+    if (state.module === 'carte' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();

@@ -173,5 +173,5 @@
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};
     Object.assign(window.LCNDA_PARTS, {renderGooseGame, renderGooseGameSidebar});
-    if (state.module === 'jeu') renderSidebar(); // la colonne de gauche attendait ce fichier
+    if (state.module === 'jeu' && state.bootstrap) renderSidebar(); // la colonne de gauche attendait ce fichier (sinon le démarrage s'en charge)
 })();
