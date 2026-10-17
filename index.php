@@ -28,8 +28,8 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=204">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=150">
+    <link rel="stylesheet" href="assets/css/app.css?v=205">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=151">
     <link rel="stylesheet" href="assets/css/layout.css?v=9">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1093,7 +1093,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=354" defer></script>
+<script src="assets/js/app.js?v=355" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
@@ -1106,7 +1106,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueils.js?v=14" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=13" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=4" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=24" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=25" defer></script>
 <script src="assets/js/heritage-calendars.js?v=6" defer></script>
 <script src="assets/js/heritage-assemble.js?v=2" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
@@ -1130,7 +1130,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-retouch-simple.js?v=1" defer></script>
 <script src="assets/js/heritage-fiches.js?v=7" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>
-<script src="assets/js/heritage-museum.js?v=8" defer></script>
+<script src="assets/js/heritage-museum.js?v=9" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

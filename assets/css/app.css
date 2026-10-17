@@ -3844,3 +3844,5 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 @media print{.identity-empty-bar{display:none}}
 .dashboard-reorder-row.is-hidden-row b,.dashboard-reorder-row.is-hidden-row .order-number{opacity:.45;text-decoration:line-through}
 .dashboard-reorder-row .reorder-eye{min-width:96px}
+.event-date-check{border:2px solid #cc4700;background:#fff6ef;color:#7a2a00;padding:8px 12px;font-size:13px}.event-date-check[hidden]{display:none}.event-date-check ul{margin:4px 0 4px 18px;padding:0}.event-date-check small{color:#7a5a40}
+:root[data-theme="dark"] .event-date-check{background:#3a2414;color:#ffcfa8}

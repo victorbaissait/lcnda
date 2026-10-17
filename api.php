@@ -5425,7 +5425,69 @@ function compute_issues(PDO $pdo): array
             count(DISTINCT fc.family_id) AS family_count
         FROM family_children fc JOIN persons c ON c.id=fc.child_id
         GROUP BY c.id HAVING count(DISTINCT fc.family_id)>1 LIMIT 300")->fetchAll();
+    foreach(date_check_issues($pdo) as $issue)$issues[]=$issue;
     foreach($multipleParents as $r)$issues[]=['key'=>"multiple-parent-families:{$r['id']}",'severity'=>'warning','person_id'=>(int)$r['id'],'title'=>'Filiations multiples à vérifier','detail'=>trim((string)$r['person_name']).' est rattaché(e) à '.(int)$r['family_count'].' familles. Cela peut être voulu (adoption, recomposition) ou contradictoire.'];
+    return $issues;
+}
+
+/** Jour, mois et année d'une date écrite (12/03/1850, 1850-03-12, 12 mars 1850) ; null si ce n'est pas une date complète */
+function date_text_parts(string $text): ?array
+{
+    $v = mb_strtolower(trim($text));
+    if (preg_match('/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{3,4})$/', $v, $m)) { return [(int) $m[1], (int) $m[2], (int) $m[3]]; }
+    if (preg_match('/^(\d{3,4})-(\d{1,2})-(\d{1,2})$/', $v, $m)) { return [(int) $m[3], (int) $m[2], (int) $m[1]]; }
+    $months = ['janvier' => 1, 'février' => 2, 'fevrier' => 2, 'mars' => 3, 'avril' => 4, 'mai' => 5, 'juin' => 6, 'juillet' => 7, 'août' => 8, 'aout' => 8, 'septembre' => 9, 'octobre' => 10, 'novembre' => 11, 'décembre' => 12, 'decembre' => 12];
+    if (preg_match('/^(\d{1,2})(?:er)?\s+([a-zéû]+)\s+(\d{3,4})$/u', $v, $m) && isset($months[$m[2]])) { return [(int) $m[1], $months[$m[2]], (int) $m[3]]; }
+    return null;
+}
+
+/** Vérification des dates : jours qui n'existent pas, événements avant la naissance ou après le décès, mariage trop jeune, parent trop âgé */
+function date_check_issues(PDO $pdo): array
+{
+    $issues = [];
+    // une seule lecture : nom, sexe, année de naissance et de décès de chacun (la liste sert aussi au tableau de bord : il faut que ce soit rapide)
+    $who = [];
+    foreach ($pdo->query("SELECT id,gender,trim(COALESCE(first_name,'')||' '||COALESCE(last_name,'')) AS n FROM persons") as $r) { $who[(int) $r['id']] = ['n' => $r['n'] !== '' ? $r['n'] : 'Personne sans nom', 'g' => (string) $r['gender'], 'b' => null, 'd' => null]; }
+    foreach ($pdo->query("SELECT e.person_id,t.gedcom_tag,min(e.year) AS y FROM events e JOIN event_types t ON t.id=e.event_type_id
+        WHERE e.person_id IS NOT NULL AND e.year IS NOT NULL AND t.gedcom_tag IN ('BIRT','DEAT') GROUP BY e.person_id,t.gedcom_tag") as $r) {
+        $id = (int) $r['person_id']; if (isset($who[$id])) { $who[$id][$r['gedcom_tag'] === 'BIRT' ? 'b' : 'd'] = (int) $r['y']; }
+    }
+    $nm = static fn(int $id) => $who[$id]['n'] ?? 'Personne sans nom';
+    // 1. une date qui n'existe pas (31 février, 31 avril, mois 13…) dans le calendrier grégorien ou julien
+    foreach ($pdo->query("SELECT e.id,e.date_text,e.date_calendar,t.label,COALESCE(e.person_id,f.partner1_id,f.partner2_id) AS pid
+        FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN families f ON f.id=e.family_id
+        WHERE e.date_text GLOB '*[0-9]*' AND COALESCE(e.date_calendar,'gregorian') IN ('','gregorian','julian')") as $r) {
+        $d = date_text_parts((string) $r['date_text']); if (!$d) { continue; }
+        [$day, $month, $year] = $d;
+        $julian = $r['date_calendar'] === 'julian';
+        $ok = $month >= 1 && $month <= 12 && $day >= 1 && ($julian ? $day <= [31, ($year % 4 === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][$month - 1] : checkdate($month, $day, max(1, $year)));
+        if (!$ok) { $issues[] = ['key' => "impossible-date:{$r['id']}", 'severity' => 'error', 'person_id' => (int) $r['pid'], 'title' => 'Date qui n’existe pas', 'detail' => $nm((int) $r['pid']) . ' : ' . $r['label'] . ' le « ' . $r['date_text'] . ' » (ce jour n’existe pas dans le calendrier ' . ($julian ? 'julien' : 'grégorien') . ').']; }
+    }
+    // 2. un événement de la vie avant la naissance ou après le décès (les obsèques, la succession… viennent après, c'est normal)
+    foreach ($pdo->query("SELECT e.id,e.year,e.person_id,t.label FROM events e JOIN event_types t ON t.id=e.event_type_id
+        WHERE e.person_id IS NOT NULL AND e.year IS NOT NULL AND t.gedcom_tag IN ('CHR','BAPM','CONF','FCOM','BARM','BASM','BLES','ADOP','GRAD','EDUC','OCCU','RETI','EMIG','IMMI','NATU','CENS','RESI','ORDN')") as $r) {
+        $id = (int) $r['person_id']; $y = (int) $r['year']; $p = $who[$id] ?? null; if (!$p) { continue; }
+        if ($p['b'] !== null && $y < $p['b']) { $issues[] = ['key' => "event-before-birth:{$r['id']}", 'severity' => 'error', 'person_id' => $id, 'title' => 'Événement avant la naissance', 'detail' => "{$p['n']} : {$r['label']} en {$y}, naissance en {$p['b']}."]; }
+        if ($p['d'] !== null && $y > $p['d']) { $issues[] = ['key' => "event-after-death:{$r['id']}", 'severity' => 'error', 'person_id' => $id, 'title' => 'Événement après le décès', 'detail' => "{$p['n']} : {$r['label']} en {$y}, décès en {$p['d']}."]; }
+    }
+    // 3. un mariage avant 12 ans (ou avant la naissance)
+    foreach ($pdo->query("SELECT e.id,e.year,f.partner1_id,f.partner2_id FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN families f ON f.id=e.family_id
+        WHERE e.year IS NOT NULL AND t.gedcom_tag IN ('MARR','MRCI','MRRE','ENGA')") as $r) {
+        foreach ([(int) $r['partner1_id'], (int) $r['partner2_id']] as $id) {
+            $p = $who[$id] ?? null; if (!$p || $p['b'] === null) { continue; }
+            $age = (int) $r['year'] - $p['b'];
+            if ($age < 12) { $issues[] = ['key' => "young-marriage:{$id}:{$r['id']}", 'severity' => $age < 0 ? 'error' : 'warning', 'person_id' => $id, 'title' => $age < 0 ? 'Mariage avant la naissance' : 'Mariage avant 12 ans', 'detail' => "{$p['n']} : mariage en {$r['year']}, naissance en {$p['b']}" . ($age >= 0 ? " ({$age} an" . ($age > 1 ? 's' : '') . ')' : '') . '.']; }
+        }
+    }
+    // 4. une mère de plus de 55 ans, un père de plus de 85 ans à la naissance d'un enfant
+    foreach ($pdo->query("SELECT fc.child_id,f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id") as $r) {
+        $c = $who[(int) $r['child_id']] ?? null; if (!$c || $c['b'] === null) { continue; }
+        foreach ([(int) $r['partner1_id'], (int) $r['partner2_id']] as $id) {
+            $p = $who[$id] ?? null; if (!$p || $p['b'] === null) { continue; }
+            $age = $c['b'] - $p['b']; $max = $p['g'] === 'female' ? 55 : ($p['g'] === 'male' ? 85 : 0);
+            if ($max && $age > $max) { $issues[] = ['key' => "old-parent:{$id}:{$r['child_id']}", 'severity' => 'warning', 'person_id' => $id, 'title' => $p['g'] === 'female' ? 'Mère de plus de 55 ans' : 'Père de plus de 85 ans', 'detail' => "{$p['n']} aurait {$age} ans à la naissance de {$c['n']} ({$c['b']})."]; }
+        }
+    }
     return $issues;
 }
 

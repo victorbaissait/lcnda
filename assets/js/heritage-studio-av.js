@@ -1208,7 +1208,7 @@
                 ${P.sources.length ? `<div class="h-mt-rgrid">${P.sources.map((x, i) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
                     <div class="h-mt-rthumb is-${x.kind}">${thumb(x, i)}${n ? `<b class="h-mt-ruse" title="Sur la frise">${n}×</b>` : ''}</div>
                     <figcaption>${esc(x.title || 'Sans titre')}</figcaption>
-                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rren title="Renommer ce rush">✎</button>${n ? '' : `<button type="button" data-mt-rdel title="Retirer ce rush du projet">✕</button>`}</div></figure>`; }).join('')}</div>`
+                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rren title="Renommer ce rush">✎</button><button type="button" data-mt-rdel title="${n ? `Supprimer ce rush du projet (et ses ${n} passage${n > 1 ? 's' : ''} sur la frise)` : 'Supprimer ce rush du projet'}">🗑</button></div></figure>`; }).join('')}</div>`
                 : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
         }
         $('[data-mt-pane="rush"]').addEventListener('change', async e => {
@@ -1222,7 +1222,17 @@
             const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; const i = Number(fig.dataset.mtRush);
             const pl = e.target.closest('[data-mt-rplace]'); if (pl) return placeRush(i, pl.dataset.mtRplace);
             if (e.target.closest('[data-mt-rren]')) { const so = P.sources[i], n = await A().askText({title: 'Renommer le rush', message: 'Nouveau nom :', value: so.title || '', okLabel: 'Renommer'}); if (n === null || !n.trim()) return; so.title = n.trim().slice(0, 200); dirty = true; drawRush(true); drawTl(); return; }
-            if (e.target.closest('[data-mt-rdel]')) { if (usesOf(i)) return; P.sources.splice(i, 1); [...P.v1, ...P.v2, ...P.audio].forEach(c => { if (c.s > i) c.s--; }); dirty = true; drawRush(); }
+            if (e.target.closest('[data-mt-rdel]')) {
+                const so = P.sources[i], n = usesOf(i);
+                if (!confirm(n ? `Supprimer « ${so.title || 'ce rush'} » du projet ? Il est utilisé ${n} fois sur la frise : ces passages seront retirés aussi. (Le fichier reste dans les Médias s’il y est.)` : `Supprimer « ${so.title || 'ce rush'} » du projet ? (Le fichier reste dans les Médias s’il y est.)`)) return;
+                // les passages de ce rush quittent la frise, les numéros des rushes suivants reculent d'un cran, aussi dans les étapes ↶ ↷
+                const drop = o => { ['v1', 'v2', 'audio'].forEach(k => { o[k] = (o[k] || []).filter(c => c.s !== i); o[k].forEach(c => { if (c.s > i) c.s--; }); }); return o; };
+                drop(P); hist = hist.map(h => JSON.stringify(drop(JSON.parse(h))));
+                if (sel && !all().some(([tr, c]) => tr === sel.track && c.id === sel.id)) sel = null;
+                P.sources.splice(i, 1); dirty = true; drawRush(true);
+                if (n) { await touch(2); record(); syncInspector?.(); }
+                toast(n ? `Rush supprimé, avec ses ${n} passage${n > 1 ? 's' : ''} sur la frise.` : 'Rush supprimé.');
+            }
         });
         // glisser un rush sur une piste de la frise
         $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copy'; });
@@ -1368,7 +1378,7 @@
     /* ═════════ Maintenance → Montage, retouche, mise en page et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
     const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)']];
-    const FULL_EDITORS = EDITORS, FULL_DEFAULT = {layout: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
+    const FULL_EDITORS = [...EDITORS, ['museum', '🏛️ Musée de famille (Aménager)']], FULL_DEFAULT = {layout: true, museum: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
     /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
     const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
     const LAYOUT_FIELDS = ['side', 'stage', 'lane', 'help', ...MT_COLORS.map(c => c[0])];

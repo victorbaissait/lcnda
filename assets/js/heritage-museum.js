@@ -67,7 +67,7 @@
         dlg.className = 'modal h-modal h-modal-wide h-museum-editor'; dlg.id = 'h-museum-editor';
         const readOnly = Number(data.imported) === 1;
         const thumb = it => it.image ? `<img src="${esc(it.image)}" alt="" loading="lazy">` : `<span>${esc((KINDS[it.kind] || '').split(' ')[0] || '•')}</span>`;
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">MUSÉE DE FAMILLE</span><h2>${readOnly ? 'Musée reçu : ' : 'Aménager : '}${esc(data.title)}</h2></div><button class="icon-button" type="button" data-me-close aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">MUSÉE DE FAMILLE</span><h2>${readOnly ? 'Musée reçu : ' : 'Aménager : '}${esc(data.title)}</h2></div><span class="h-avx-headbtns">${ext.fullButton ? ext.fullButton('museum') : ''}<button class="icon-button" type="button" data-me-close aria-label="Fermer">×</button></span></div>
             <div class="h-me-grid">
             <aside class="h-me-side">
                 <section><h3>Le musée</h3>${readOnly ? `<p>${esc(data.subtitle || '')}</p><p class="muted">Reçu${data.author ? ' de ' + esc(data.author) : ''}. Un musée reçu se visite ; il ne se modifie pas.</p>` : `<form data-me-museum class="h-me-form">
@@ -101,6 +101,7 @@
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-me-close>Fermer</button><button type="button" class="button" data-me-visit>🏛️ Visiter${room ? ' cette salle' : ''}</button></div>`;
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
+        ext.fullInit?.(dlg, 'museum', true); // en plein écran par défaut ; ⛶ pour revenir en fenêtre (retenu)
         dlg.showModal();
         const again = (ri = data.rooms.indexOf(room)) => { dlg.close(); openEditor(data.id, Math.max(0, ri)); };
         const guard = fn => async (...args) => { try { await fn(...args); } catch (error) { toast(error.message, 'error'); } };

@@ -11802,7 +11802,58 @@ ${backupSectionHtml()}
             eventMediaBtn.onclick=null;
             eventMediaList.innerHTML='<p class="form-help">Enregistre l’événement avant d’ajouter des documents.</p>';
         }
+        bindEventDateCheck(detail,eventItem);
         $('#event-dialog').showModal();}
+    /** Pendant la saisie d'un événement : la date est-elle possible ? (jour qui existe, pas dans le futur, cohérente avec la naissance,
+        le décès, les parents, les enfants, un mariage pas avant 12 ans). Ce n'est qu'un avertissement : on peut enregistrer quand même.
+        Tout l'arbre : Maintenance → Incohérences avancées. */
+    function eventDateWarnings(detail,form,eventItem){
+        const text=String(form.elements.date_text?.value||'').trim();if(!text)return [];
+        const cal=form.elements.date_calendar?.value||'gregorian',out=[],now=new Date().getFullYear();
+        const type=(state.bootstrap?.eventTypes||[]).find(t=>Number(t.id)===Number(form.elements.event_type_id?.value))||{},tag=type.gedcom_tag||'',label=type.label||'Cet événement';
+        // jour, mois et année : dans le calendrier choisi, puis en grégorien pour comparer aux autres dates
+        let year=null;
+        if(cal==='gregorian'||cal==='julian'){
+            const d=parseNumericCalendarDate(text)||parseFrenchDateText(text);
+            if(d){
+                const leap=cal==='julian'?d.year%4===0:(d.year%4===0&&(d.year%100!==0||d.year%400===0));
+                const max=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31][d.month-1];
+                if(d.month<1||d.month>12)out.push(`Le mois ${d.month} n’existe pas (de 1 à 12).`);
+                else if(d.day<1||d.day>max)out.push(`Le ${d.day} ${['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][d.month-1]} ${d.year} n’existe pas (${max} jours ce mois-là).`);
+                year=d.year;
+            }
+        }
+        if(cal!=='gregorian'){const eq=automaticEquivalentFromDateText(text,cal,'gregorian').match(/(\d{3,4})\s*$/);if(eq)year=Number(eq[1]);}
+        if(year===null){const m=text.match(/(?:^|\D)(\d{3,4})(?!\d)/g);if(m&&cal==='gregorian')year=Number(m[m.length-1].replace(/\D/g,''));}
+        if(!year)return out;
+        if(year>now)out.push(`${year} est dans le futur.`);
+        const own=(detail.events||[]).filter(e=>!eventItem||Number(e.id)!==Number(eventItem.id));
+        const yearOf=tags=>{const ys=own.filter(e=>tags.includes(e.gedcom_tag)&&Number(e.year)).map(e=>Number(e.year));return ys.length?Math.min(...ys):null;};
+        const birth=tag==='BIRT'?null:(yearOf(['BIRT'])??(Number(detail.person?.birth_year||0)||null)),death=tag==='DEAT'?null:(yearOf(['DEAT'])??(Number(detail.person?.death_year||0)||null));
+        const after=['DEAT','BURI','CREM','PROB','WILL'].includes(tag)||/inhum|obs[eè]qu|succession|testament|s[ée]pult|fun[ée]r/i.test(label);
+        if(birth&&year<birth&&tag!=='BIRT')out.push(`${label} en ${year}, avant la naissance (${birth}).`);
+        if(death&&year>death&&!after)out.push(`${label} en ${year}, après le décès (${death}).`);
+        if(['MARR','MRCI','MRRE','ENGA'].includes(tag)&&birth&&year>=birth&&year-birth<12)out.push(`Mariage à ${year-birth} an${year-birth>1?'s':''} (naissance en ${birth}).`);
+        if(tag==='DEAT'&&birth&&year-birth>115)out.push(`Décès à ${year-birth} ans : c’est beaucoup.`);
+        if(tag==='BIRT'){
+            (detail.parents||[]).forEach(p=>{const pb=Number(p.birth_year)||0,pd=Number(p.death_year)||0,n=personName(p);
+                if(pb&&year<=pb)out.push(`Naissance en ${year}, mais son parent ${n} est né en ${pb}.`);
+                else if(pb&&year-pb<12)out.push(`Son parent ${n} n’aurait que ${year-pb} ans.`);
+                else if(pb&&p.gender==='female'&&year-pb>55)out.push(`Sa mère ${n} aurait ${year-pb} ans.`);
+                if(pd&&year>pd+(p.gender==='female'?0:1))out.push(`Naissance en ${year}, après le décès de son parent ${n} (${pd}).`);});
+            (detail.children||[]).forEach(c=>{const cb=Number(c.birth_year)||0;if(cb&&cb<=year)out.push(`Naissance en ${year}, mais son enfant ${personName(c)} est né en ${cb}.`);});
+        }
+        if(tag==='DEAT'){(detail.children||[]).forEach(c=>{const cb=Number(c.birth_year)||0;if(cb&&cb>year+1&&detail.person?.gender!=='female')out.push(`Décès en ${year}, mais son enfant ${personName(c)} naît en ${cb}.`);else if(cb&&cb>year&&detail.person?.gender==='female')out.push(`Décès en ${year}, mais son enfant ${personName(c)} naît en ${cb}.`);});}
+        return out;
+    }
+    function bindEventDateCheck(detail,eventItem){
+        const form=$('#event-form');if(!form)return;
+        let box=$('#event-date-check');
+        if(!box){box=document.createElement('div');box.id='event-date-check';box.className='span-2 event-date-check';box.setAttribute('role','status');(form.elements.date_calendar?.closest('label')||form.elements.date_text.closest('label')).after(box);}
+        form._dateCheck=()=>{const w=eventDateWarnings(detail,form,eventItem);box.hidden=!w.length;box.innerHTML=w.length?`<strong>⚠️ À vérifier</strong><ul>${w.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul><small>Tu peux enregistrer quand même. Tout l’arbre : Maintenance → Incohérences avancées.</small>`:'';};
+        if(!form.dataset.dateCheckBound){form.dataset.dateCheckBound='1';['input','change'].forEach(ev=>form.addEventListener(ev,e=>{if(e.target.matches('[name="date_text"],[name="date_calendar"],[name="event_type_id"],.date-picker-hidden'))setTimeout(()=>form._dateCheck?.(),0);}));}
+        form._dateCheck();
+    }
     function openRelationDialog(personId,type){const form=$('#relation-form');form.reset();form.elements.person_id.value=personId;form.elements.relation_type.value=type;form.elements.related_id.value='';[...form.elements.entry_mode.options].forEach(option=>option.hidden=type==='parent'&&['none','none_suspected'].includes(option.value));$('#relation-existing-fields').hidden=false;$('#relation-new-fields').hidden=true;$('#relation-results').innerHTML='<p>Saisis au moins deux caractères.</p>';$('#relation-dialog-title').textContent=`Ajouter ${type==='parent'?'un parent':type==='child'?'un enfant':'un conjoint'}`;$('#relation-dialog').showModal();setTimeout(()=>$('#relation-search').focus(),30);}
     function openInvestigationDialog(personId,item=null){
         const form=$('#investigation-form');form.reset();

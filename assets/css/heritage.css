@@ -432,6 +432,9 @@ select[data-h-village-bgsel]{max-width:220px}
 .h-museum-dialog::backdrop { background:#fff; }
 .h-museum-stage { position:absolute; inset:0; }
 .h-museum-editor { width:min(1320px, calc(100vw - 24px)); }
+.h-museum-editor .modal-head { display:flex; justify-content:space-between; align-items:flex-start; }
+.h-museum-editor.is-full[open] { display:flex; flex-direction:column; }
+.h-museum-editor.is-full .h-me-grid { flex:1; max-height:none; min-height:0; grid-template-columns:360px minmax(0, 1fr); }
 .h-me-grid { display:grid; grid-template-columns:330px minmax(0, 1fr); gap:20px; align-items:start; max-height:calc(100vh - 190px); overflow:auto; }
 .h-me-side { display:grid; gap:16px; }
 .h-me-side section, .h-me-main { border:1px solid #ddd; padding:12px 14px; background:var(--paper, #fff); }
@@ -3006,3 +3009,4 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rs-paint [data-rs-paint-help]{flex-basis:100%;min-height:1.3em}
 .h-rs-headbtns { display:flex; gap:8px; align-items:center; }
 [data-theme="dark"] .h-retouch-simple .h-rs-curve, [data-theme="dark"] .h-retouch-simple .h-rs-vlist figure { background:#1e1e1e; }
+.h-museum-editor.is-full .h-me-plan svg { max-height:68vh; }
