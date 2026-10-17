@@ -1168,6 +1168,16 @@ dialog.modal.is-full { width:100vw !important; height:100vh !important; max-widt
 .h-avx-montage.mt-left .h-mt-top { grid-template-columns:340px minmax(0, 1fr); }
 .h-avx-montage.mt-left .h-mt-side { order:-1; }
 .h-avx-montage.mt-nohelp .h-avx-help { display:none; }
+/* Le montage tient dans la fenêtre : l'image rétrécit (jusqu'à 160 px) pour laisser voir la frise et les boutons du bas ;
+   « Hauteur de l'image » devient sa hauteur maximale. La frise défile elle-même si elle a beaucoup de pistes. */
+.h-avx-montage .h-avx-body { overflow:hidden; }
+.h-avx-montage .h-avx-body > .h-mt { flex:1 1 auto; min-height:0; }
+.h-avx-montage .h-mt > .h-mt-top { flex:0 1 var(--mt-stage, 50vh); min-height:160px; grid-template-rows:minmax(0, 1fr); }
+.h-avx-montage.is-full .h-mt > .h-mt-top { flex-basis:calc(var(--mt-stage, 50vh) + 6vh); }
+.h-avx-montage .h-mt-top > .h-mt-stage, .h-avx-montage.is-full .h-mt-top > .h-mt-stage { height:auto; min-height:0; max-height:none; }
+.h-avx-montage .h-mt-top > .h-mt-side, .h-avx-montage.is-full .h-mt-top > .h-mt-side { height:auto; min-height:0; max-height:none; }
+.h-avx-montage .h-mt > .h-mt-tl { flex:0 1 auto; min-height:110px; overflow:auto; }
+@media (max-width: 1000px) { .h-avx-montage .h-avx-body { overflow:auto; } .h-avx-montage .h-mt > .h-mt-top { flex:none; grid-template-rows:none; } .h-avx-montage .h-mt-top > .h-mt-stage { height:var(--mt-stage, 50vh); } }
 .h-avx-montage .h-mt-lane { height:var(--mt-lane, 40px); }
 .h-avx-montage .h-mt-clip { height:calc(var(--mt-lane, 40px) - 10px); }
 .h-mt-stage canvas { touch-action:none; }
@@ -1719,6 +1729,14 @@ tr:hover .h-dp-mini.is-faint, .h-dp-mini.is-faint:focus { opacity:1; }
 }
 @media (min-width: 851px) and (max-width: 1180px) {
     html.side-right:not(.is-screen-embed) .topbar { grid-template-columns: 1fr var(--sidebar); }
+}
+/* Apparence : logo « MA FAMILLE · GÉNÉALOGIE » masqué, la barre des onglets prend toute la place */
+html.brand-hidden .topbar .brand { display: none; }
+html.brand-hidden .topbar,
+html.brand-hidden.side-right:not(.is-screen-embed) .topbar { grid-template-columns: 1fr auto; }
+@media (min-width: 851px) and (max-width: 1180px) {
+    html.brand-hidden .topbar,
+    html.brand-hidden.side-right:not(.is-screen-embed) .topbar { grid-template-columns: 1fr; }
 }
 
 /* 🏢 Fiche d'un employeur (façon fiche d'entreprise) */
@@ -2923,3 +2941,9 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-ek-builtin{margin-top:10px;font-size:13px}
 .h-ek-builtin p{line-height:2}
 .h-ek-panel{grid-column:1/-1}
+/* Raccourcis clavier : le cadre « Dans les outils de modification » ne colle plus au tableau du dessus et prend la même largeur */
+.shortcut-page > .h-ek-panel{margin-top:28px;max-width:none}
+/* Montage, retouche, mise en page et son : les cadres de gauche restent dans leur colonne (sans passer sous « Boutons et options ») */
+.h-mtp-cols > *{min-width:0}
+.h-mtp-stack{grid-template-columns:minmax(0,1fr)}
+.h-mtp-stack > .maintenance-panel{min-width:0;max-width:none}

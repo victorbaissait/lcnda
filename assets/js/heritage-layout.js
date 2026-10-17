@@ -595,7 +595,7 @@
                 ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image…']])}
                 ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
-                <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
+                <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
             <div class="ly-main"><div class="ly-tools" data-tbg="ly-tools" data-tbg-label="Outils (colonne de gauche)">${TOOLS.map(([k, ic, l]) => `<button type="button" data-ly-tool="${k}" title="${esc(l)}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi : clic = choisir la couleur"><button type="button" data-ly-target="fill" class="ly-fs-fill" title="Fond : clic pour choisir la couleur"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke" title="Contour : clic pour choisir la couleur"></button><button type="button" class="ly-fs-swap" data-ly-fsswap title="Intervertir fond et contour (⇧X)">⇄</button><button type="button" class="ly-fs-none" data-ly-fsnone title="Aucune couleur pour le fond ou le contour choisi (/)">⧄</button><input type="color" data-ly-fspick tabindex="-1" aria-hidden="true"></div></div>
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
                 <aside class="ly-panels"><span class="ly-resize" data-ly-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span><div class="ly-ptabs" data-tbg="ly-tabs" data-tbg-label="Onglets du panneau de droite">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
@@ -1003,7 +1003,22 @@
             pbody.innerHTML = ({pages: panelPages, layers: panelLayers, obj: panelObj, text: panelText, color: panelColor, links: panelLinks, history: panelHistory, doc: panelDoc}[panel] || panelPages)();
             if (panel === 'history') pbody.querySelector('.is-current')?.scrollIntoView({block: 'nearest'});
             pbody.scrollTop = keepScroll;
-            pbody.querySelectorAll('.ly-thumb .ly-page').forEach(p => { p.style.zoom = String(120 / px(D.page.w)); });
+            // vignette : réduite, avec un contour à son échelle (sinon une page blanche disparaît sur le panneau blanc)
+            const thumbZoom = (pg, w) => { const z = w / px(D.page.w); pg.style.zoom = String(z); pg.style.outline = `${(1 / z).toFixed(1)}px solid #b9b9c3`; };
+            pbody.querySelectorAll('.ly-thumb .ly-page').forEach(p => thumbZoom(p, 120));
+            // Beaucoup de pages : petites vignettes, dessinées seulement quand elles arrivent à l'écran
+            const lazy = pbody.querySelectorAll('.ly-thumb[data-ly-lazy]');
+            if (lazy.length) {
+                const io = new IntersectionObserver(entries => entries.forEach(en => {
+                    if (!en.isIntersecting) return;
+                    const b = en.target, i = Number(b.dataset.lyPage); io.unobserve(b); b.removeAttribute('data-ly-lazy');
+                    if (!D.pages[i]) return;
+                    b.querySelector('.ly-tph')?.insertAdjacentHTML('afterend', pageHtml(D, i, {preview: true, keyPrefix: 't' + i}));
+                    b.querySelector('.ly-tph')?.remove();
+                    const pg = b.querySelector('.ly-page'); if (pg) thumbZoom(pg, 48);
+                }), {root: pbody, rootMargin: '200px'});
+                lazy.forEach(b => io.observe(b));
+            }
         }
         function panelPages() {
             const many = D.pages.length > 120;
@@ -1013,7 +1028,7 @@
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-mnew>＋ Nouveau gabarit</button><button type="button" class="button small secondary" data-ly-mnone>Page sans gabarit</button><button type="button" class="button small secondary" data-ly-mdetach title="Les éléments du gabarit deviennent modifiables sur cette page">Détacher les éléments</button></div>`)
                 + sec(`Pages (${D.pages.length})`, `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="addend">＋ Page à la fin</button><button type="button" class="button small secondary" data-ly-cmd="insert">＋ Insérer…</button><button type="button" class="button small secondary" data-ly-cmd="duppage">Dupliquer</button><button type="button" class="button small secondary" data-ly-cmd="delpage">🗑</button></div>
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-pmove="-1" title="Avancer la page">↑ Avancer</button><button type="button" class="button small secondary" data-ly-pmove="1" title="Reculer la page">↓ Reculer</button><label class="ly-f ly-inline"><span>Aller à</span><input type="number" min="1" max="${D.pages.length}" data-ly-goto2 value="${cur + 1}"></label></div>
-                <div class="ly-thumbs${many ? ' is-many' : ''}">${spreads(D).map(sp => `<div class="ly-tspread">${sp.map(i => `<button type="button" class="ly-thumb${i === cur ? ' is-cur' : ''}" data-ly-page="${i}" title="Page ${i + (D.page.start || 1)}">${many ? '' : pageHtml(D, i, {preview: true, keyPrefix: 't' + i})}<span>${i + (D.page.start || 1)}${D.pages[i].master ? ' · ' + esc(D.pages[i].master) : ''}</span></button>`).join('')}</div>`).join('')}</div>`);
+                <div class="ly-thumbs${many ? ' is-many' : ''}${D.page.facing ? ' is-facing' : ''}">${spreads(D).map(sp => `<div class="ly-tspread">${sp.map(i => `<button type="button" class="ly-thumb${i === cur ? ' is-cur' : ''}" data-ly-page="${i}" ${many ? 'data-ly-lazy' : ''} title="Page ${i + (D.page.start || 1)}">${many ? '<i class="ly-tph"></i>' : pageHtml(D, i, {preview: true, keyPrefix: 't' + i})}<span>${i + (D.page.start || 1)}${D.pages[i].master ? ' · ' + esc(D.pages[i].master) : ''}</span></button>`).join('')}</div>`).join('')}</div>`);
         }
         function panelLayers() {
             const counts = Object.fromEntries(D.layers.map(l => [l.id, curList().filter(i => i.layer === l.id).length]));
@@ -1255,6 +1270,7 @@
         }
 
         setDirty(!id); render(); syncHistory(); requestAnimationFrame(() => zoomFit());
+        ext.fullInit?.(dl, 'layout', true); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         dl.showModal(); canvas.focus({preventScroll: true}); // les raccourcis (V, T, M…) marchent tout de suite
         return dl;
     }

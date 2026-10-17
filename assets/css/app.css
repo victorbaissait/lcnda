@@ -3447,6 +3447,8 @@ tr.row-sosa-impossible,.list-card.row-sosa-impossible{opacity:.45}
 
 /* Fiches en ligne (Identité) */
 .online-sheets-block{margin-top:1rem}
+.online-sheets-block > summary.section-label{display:list-item;cursor:pointer}
+.online-sheets-block:not([open]) > summary.section-label{margin-bottom:0}
 .online-sheets-list{display:flex;flex-direction:column;gap:10px;margin:8px 0}
 .online-sheet-card{padding:10px 12px;border:1px solid #ccc;border-radius:6px;min-width:0;overflow-wrap:anywhere}
 .online-sheet-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}

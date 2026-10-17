@@ -28,9 +28,9 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=203">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=148">
-    <link rel="stylesheet" href="assets/css/layout.css?v=8">
+    <link rel="stylesheet" href="assets/css/app.css?v=204">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=149">
+    <link rel="stylesheet" href="assets/css/layout.css?v=9">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
 </head></html>
@@ -147,37 +147,37 @@ header('X-Content-Type-Options: nosniff');
             <label class="span-2">Description physique<textarea name="physical_description" rows="3"></textarea></label>
             <label class="span-2">N° de référence<input name="reference_number"></label>
             <label class="span-2">Groupe patronymique <small style="font-weight:normal;color:#666">(choisir un existant ou taper un nouveau nom pour le créer)</small><div class="place-input-wrap" style="position:relative"><input name="new_surname_group" autocomplete="off" placeholder="ex : Dupont" id="new-surname-group-input"><div class="place-suggestions" id="surname-group-suggestions" hidden></div></div></label>
-            <label class="span-2 checkbox-line" id="person-artist-line"><input type="checkbox" name="is_artist" value="1" id="person-is-artist"> Artiste <small style="font-weight:normal;color:#666">(photographe, peintre, écrivain, cinéaste, sculpteur, dramaturge, poète, vidéaste, plasticien, danseur, acteur…)</small>
-                <span id="person-artist-discipline-wrap" style="display:none;margin-left:.6rem">
-                    <select name="artist_discipline" id="person-artist-discipline" style="font-size:.85em">
-                        <option value="">— Discipline —</option>
-                        <option value="photographe">Photographe</option>
-                        <option value="peintre">Peintre</option>
-                        <option value="ecrivain">Écrivain</option>
-                        <option value="cineaste">Cinéaste</option>
-                        <option value="sculpteur">Sculpteur</option>
-                        <option value="dramaturge">Dramaturge</option>
-                        <option value="poete">Poète</option>
-                        <option value="videaste">Vidéaste</option>
-                        <option value="plasticien">Plasticien</option>
-                        <option value="danseur">Danseur</option>
-                        <option value="acteur">Acteur</option>
-                    </select>
-                </span>
-            </label>
-            <div class="span-2" id="person-artist-display-wrap" style="display:none">
-                <label style="display:inline-flex;align-items:center;gap:.5rem;font-size:.88em">Afficher les événements artistiques dans :
-                    <select name="artist_events_display" id="person-artist-events-display" style="font-size:.9em">
-                        <option value="events">Le bloc Événements</option>
-                        <option value="block">Un bloc Œuvres à part</option>
-                        <option value="both">Les deux</option>
-                    </select>
-                </label>
-            </div>
             <input type="hidden" name="heritage_flags" value="1">
             <div class="span-2 person-heritage-flags">
                 <span class="person-heritage-flags-title">Blocs à afficher sur la fiche</span>
                 <label class="checkbox-line"><input type="checkbox" name="outside_genealogy" value="1"> Hors de ma généalogie <small style="font-weight:normal;color:#666">(individu utile pour une enquête, mais pas dans ma lignée directe)</small></label>
+                <label class="checkbox-line" id="person-artist-line"><input type="checkbox" name="is_artist" value="1" id="person-is-artist"> Artiste <small style="font-weight:normal;color:#666">(photographe, peintre, écrivain, cinéaste, sculpteur, dramaturge, poète, vidéaste, plasticien, danseur, acteur…)</small>
+                    <span id="person-artist-discipline-wrap" style="display:none;margin-left:.6rem">
+                        <select name="artist_discipline" id="person-artist-discipline" style="font-size:.85em">
+                            <option value="">— Discipline —</option>
+                            <option value="photographe">Photographe</option>
+                            <option value="peintre">Peintre</option>
+                            <option value="ecrivain">Écrivain</option>
+                            <option value="cineaste">Cinéaste</option>
+                            <option value="sculpteur">Sculpteur</option>
+                            <option value="dramaturge">Dramaturge</option>
+                            <option value="poete">Poète</option>
+                            <option value="videaste">Vidéaste</option>
+                            <option value="plasticien">Plasticien</option>
+                            <option value="danseur">Danseur</option>
+                            <option value="acteur">Acteur</option>
+                        </select>
+                    </span>
+                </label>
+                <div id="person-artist-display-wrap" style="display:none">
+                    <label style="display:inline-flex;align-items:center;gap:.5rem;font-size:.88em">Afficher les événements artistiques dans :
+                        <select name="artist_events_display" id="person-artist-events-display" style="font-size:.9em">
+                            <option value="events">Le bloc Événements</option>
+                            <option value="block">Un bloc Œuvres à part</option>
+                            <option value="both">Les deux</option>
+                        </select>
+                    </label>
+                </div>
                 <div id="person-military-toggle-wrap" style="display:none">
                     <label class="checkbox-line" id="person-military-toggle-label">
                         <input type="checkbox" name="show_military_block" value="1" id="person-show-military">
@@ -194,6 +194,7 @@ header('X-Content-Type-Options: nosniff');
                 <label class="checkbox-line"><input type="checkbox" name="show_voter_block" value="1"> 🗳️ Cartes d’électeur <small style="font-weight:normal;color:#666">(cartes avec photos, commune, bureau de vote, numéros, et toutes les dates où la personne a voté)</small></label>
                 <label class="checkbox-line"><input type="checkbox" name="show_language_block" value="1"> 🗣️ Langues <small style="font-weight:normal;color:#666">(langues parlées par la personne et sa descendance ; s’affiche aussi tout seul quand une langue est connue)</small></label>
             </div>
+            <div class="span-2" id="person-identity-empty-wrap"></div>
         </div>
         <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Enregistrer</button></div>
     </form>
@@ -1092,7 +1093,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=352" defer></script>
+<script src="assets/js/app.js?v=353" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
@@ -1105,7 +1106,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueils.js?v=14" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=13" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=4" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=23" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=24" defer></script>
 <script src="assets/js/heritage-calendars.js?v=6" defer></script>
 <script src="assets/js/heritage-assemble.js?v=2" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
@@ -1116,7 +1117,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=1" defer></script>
 <script src="assets/js/heritage-book.js?v=2" defer></script>
-<script src="assets/js/heritage-layout.js?v=18" defer></script>
+<script src="assets/js/heritage-layout.js?v=19" defer></script>
 <script src="assets/js/heritage-edittools.js?v=2" defer></script>
 <script src="assets/js/heritage-editorkeys.js?v=1" defer></script>
 <script src="assets/js/heritage-livrets.js?v=5" defer></script>
@@ -1125,7 +1126,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=10" defer></script>
 <script src="assets/js/heritage-boards.js?v=22" defer></script>
 <script src="assets/js/heritage-dnd.js?v=6" defer></script>
-<script src="assets/js/heritage-studio.js?v=34" defer></script>
+<script src="assets/js/heritage-studio.js?v=35" defer></script>
 <script src="assets/js/heritage-fiches.js?v=6" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>
 <script src="assets/js/heritage-museum.js?v=8" defer></script>

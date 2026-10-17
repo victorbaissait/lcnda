@@ -291,7 +291,7 @@
     const FULL_KEY = 'genealogie-editor-full';
     const fullAll = () => { try { return JSON.parse(localStorage.getItem(FULL_KEY) || '{}') || {}; } catch (_) { return {}; } };
     ext.fullButton = id => `<button type="button" class="icon-button h-full-btn" data-full-toggle="${esc(id)}" title="Plein écran (⛶)" aria-label="Plein écran">⛶</button>`;
-    ext.fullInit = (dlg, id) => { if (fullAll()[id]) dlg.classList.add('is-full'); };
+    ext.fullInit = (dlg, id, byDefault = false) => { const v = fullAll()[id]; if (v === undefined ? byDefault : v) { dlg.classList.add('is-full'); const b = dlg.querySelector(`[data-full-toggle="${CSS.escape(id)}"]`); if (b) b.title = 'Quitter le plein écran'; } };
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-full-toggle]'); if (!b) return;
         const dlg = b.closest('dialog'); if (!dlg) return;

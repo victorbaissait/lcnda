@@ -1368,7 +1368,7 @@
     /* ═════════ Maintenance → Montage, retouche, mise en page et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
     const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)']];
-    const FULL_EDITORS = EDITORS.filter(e => e[0] !== 'layout'); // l'atelier de mise en page occupe déjà tout l'écran
+    const FULL_EDITORS = EDITORS, FULL_DEFAULT = {layout: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
     /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
     const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
     const LAYOUT_FIELDS = ['side', 'stage', 'lane', 'help', ...MT_COLORS.map(c => c[0])];
@@ -1429,7 +1429,7 @@
                 </section>
                 <section class="maintenance-panel h-ek-panel"><h3>⌨️ Raccourcis à toi</h3><div data-ek-box></div></section>
                 <section class="maintenance-panel"><h3>⛶ Plein écran à l’ouverture</h3>
-                    <div class="form-grid h-mtp-grid">${FULL_EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], full[k] ? '1' : '0')}</select></label>`).join('')}</div>
+                    <div class="form-grid h-mtp-grid">${FULL_EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], (full[k] ?? FULL_DEFAULT[k]) ? '1' : '0')}</select></label>`).join('')}</div>
                 </section>
                 </div>
                 <section class="maintenance-panel"><h3>🧰 Boutons et options</h3>
