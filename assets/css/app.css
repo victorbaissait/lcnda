@@ -4182,3 +4182,10 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .ord-row .ord-arrow{width:28px;height:28px;min-width:28px;min-height:28px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);border-radius:0;box-shadow:none;margin:0}
 .ord-row .ord-arrow:disabled{opacity:.35}.ord-row .ord-arrow:not(:disabled):hover{background:var(--blue-soft,#eaf2ff)}
 .ord-row .dnd-grip,.ord-row .order-grip{cursor:grab;color:var(--muted,#888);font-size:15px}
+/* Apparence : lignes à glisser (menu, listes, cartes, graphiques) comme partout : ⠿ ☑ 01 libellé [nouveau nom] */
+.order-editor.compact .order-row.has-visibility{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.order-editor.compact .order-row.has-visibility>.order-grip{order:-3;flex:0 0 auto}
+.order-editor.compact .order-row.has-visibility>.order-visible{order:-2;flex:0 0 auto;margin:0}
+.order-editor.compact .order-row.has-visibility>.order-number{flex:0 0 auto}
+.order-editor.compact .order-row.has-visibility>b{flex:1 1 auto;min-width:0;overflow-wrap:normal}
+.order-editor.compact .order-row.has-visibility>.order-rename{flex:1 1 150px;min-width:0;width:auto;order:5}
