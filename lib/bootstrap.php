@@ -17,6 +17,7 @@ require_once __DIR__ . '/diagrams.php';
 require_once __DIR__ . '/vector.php';
 require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
 require_once __DIR__ . '/slideshows.php'; // 🎞️ Diaporamas et récits
+require_once __DIR__ . '/houses.php'; // 🏠 Maisons de famille
 require_once __DIR__ . '/dna.php';          // 🧬 ADN       // ✒️ Dessin vectoriel     // 📊 Mes diagrammes
 require_once __DIR__ . '/periodicals.php';  // 📰 Revues et magazines, ✉️ petites annonces
 require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page

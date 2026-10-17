@@ -190,6 +190,9 @@ try {
     if ($isWrite && $action === 'save_audio_project') {
         save_audio_project($pdo, $_FILES['file'] ?? null, $_POST);
     }
+    if ($isWrite && $action === 'house_model_upload') {
+        house_model_upload($pdo, $_FILES['file'] ?? null, $_POST);
+    }
     if ($isWrite && $action === 'retouch_media') {
         retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
     }
@@ -333,6 +336,10 @@ try {
         'dna' => json_response(dna_all($pdo, $_GET)),
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'houses' => json_response(['items' => houses_list($pdo)]),
+        'house' => json_response(house_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'house_models' => json_response(['items' => house_models_list($pdo)]),
+        'house_model' => house_model_file($pdo, safe_int($_GET['id'] ?? 0)),
         'slideshows' => json_response(['items' => slideshows_list($pdo)]),
         'slideshow' => json_response(slideshow_get($pdo, safe_int($_GET['id'] ?? 0))),
         'act_transcriptions' => json_response(['items' => act_transcriptions_list($pdo)]),
@@ -9213,6 +9220,10 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'rename_vector_doc' => rename_vector_doc($pdo,$data),
             'save_act_transcription' => save_act_transcription($pdo,$data),
             'save_slideshow' => save_slideshow($pdo,$data),
+            'save_house' => save_house($pdo,$data),
+            'delete_house' => delete_house($pdo,$data),
+            'rename_house' => rename_house($pdo,$data),
+            'delete_house_model' => delete_house_model($pdo,$data),
             'delete_slideshow' => delete_slideshow($pdo,$data),
             'rename_slideshow' => rename_slideshow($pdo,$data),
             'delete_act_transcription' => delete_act_transcription($pdo,$data),
