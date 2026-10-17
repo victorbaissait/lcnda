@@ -413,6 +413,8 @@
         {id: 'sepia', name: 'Sépia', titleFont: 'Palatino', bodyFont: 'Book Antiqua', accent: '#6b4226', paper: '#f4ead8', text: '#3b2a1a', soft: '#7d6650', light: '#e8d9bd', cover: 'photo', person: 'side', ornament: '❧'},
         {id: 'album', name: 'Album photo', titleFont: 'Futura', bodyFont: 'Gill Sans', accent: '#2f5d50', paper: '#ffffff', text: '#1f2a27', soft: '#5f6f6a', light: '#e3efe9', cover: 'photo', person: 'top', ornament: ''},
         {id: 'sobre', name: 'Sobre', titleFont: 'Helvetica Neue', bodyFont: 'Helvetica Neue', accent: '#333333', paper: '#ffffff', text: '#222222', soft: '#777777', light: '#f0f0f0', cover: 'center', person: 'side', ornament: '—'},
+        // l'allure de l'application : bleu, papier blanc, traits noirs, ombres bleues décalées, titre en tampon penché comme le logo
+        {id: 'site', name: 'Comme le site', titleFont: 'Arial', bodyFont: 'Arial', accent: '#0066cc', paper: '#ffffff', text: '#111111', soft: '#6e6e73', light: '#e6f0fb', cover: 'site', person: 'side', ornament: ''},
     ];
     const themeDoc = (th, size, pageOpts = {}) => {
         const d = defaults(), sz = SIZES.find(x => x[0] === size);
@@ -433,6 +435,17 @@
             items.push(shapeItem('rect', {x: 12, y: 12, w: W - 24, h: H - 24, fill: 'none', stroke: {c: 'sw-accent', w: 1.5}, name: 'Cadre'}), shapeItem('rect', {x: 15, y: 15, w: W - 30, h: H - 30, fill: 'none', stroke: {c: 'sw-accent', w: 0.5}, name: 'Cadre fin'}));
             if (th.ornament) items.push(textItem({x: b.x, y: H * 0.22, w: b.w, h: 20, html: `<p data-ps="ps-title" style="font-size:36px">${esc(th.ornament)}</p>`, name: 'Ornement'}));
             if (photo) { items.push(shapeItem('frame', {shape: 'ellipse', x: W / 2 - 25, y: H * 0.64, w: 50, h: 60, src: photo, fit: 'fill', stroke: {c: 'sw-accent', w: 1}, name: 'Portrait'})); author.y = H - 40; }
+            items.push(title, sub, author);
+        } else if (th.cover === 'site') {
+            const cx = b.x, cy = H * 0.18, cw = b.w, ch = H * 0.52;
+            items.push(shapeItem('rect', {x: cx + 5, y: cy + 5, w: cw, h: ch, fill: '#bfd8f2', stroke: {c: 'none', w: 0}, name: 'Ombre bleue'}),
+                shapeItem('rect', {x: cx, y: cy, w: cw, h: ch, fill: 'sw-paper', stroke: {c: 'sw-black', w: 1}, name: 'Carte'}),
+                textItem({x: cx + 8, y: cy + 7, w: cw - 16, h: 9, html: `<p data-ps="ps-running" style="color:${th.accent};text-align:left;font-weight:700">Livre de famille</p>`, name: 'Sur-titre'}),
+                shapeItem('rect', {x: cx + cw * 0.08, y: cy + ch * 0.28, w: cw * 0.84, h: ch * 0.3, rot: -5, fill: 'sw-accent', stroke: {c: 'none', w: 0}, name: 'Tampon'}));
+            Object.assign(title, {x: cx + cw * 0.1, w: cw * 0.8, y: cy + ch * 0.28, h: ch * 0.3, rot: -5, valign: 'middle'});
+            title.html = title.html.replace('data-ps="ps-title"', 'data-ps="ps-title" style="color:#ffffff;text-transform:uppercase"');
+            Object.assign(sub, {x: cx + 8, w: cw - 16, y: cy + ch * 0.66, h: ch * 0.14});
+            if (photo) items.push(shapeItem('frame', {x: W / 2 - 22, y: cy + ch + 14, w: 44, h: 44, rot: -5, src: photo, fit: 'fill', stroke: {c: 'sw-accent', w: 1.5}, name: 'Portrait'}));
             items.push(title, sub, author);
         } else if (th.cover === 'photo') {
             items.push(shapeItem('frame', {x: -3, y: -3, w: W + 6, h: H * 0.6 + 3, src: photo, fit: 'fill', fill: photo ? 'none' : 'sw-light', stroke: {c: 'none', w: 0}, name: 'Photo de couverture'}));

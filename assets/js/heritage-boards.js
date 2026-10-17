@@ -809,7 +809,28 @@
             if (!e.shiftKey) sel.clear();
             drag = {kind: 'marquee', wx, wy, sx: e.clientX, sy: e.clientY, base: new Set(sel)}; stage.setPointerCapture(e.pointerId); render();
         });
+        // Comme Freeform : en glissant un élément (ou un trait, une forme, une sélection) contre le bord, la vue défile
+        // toute seule et le tableau s'agrandit de ce côté ; plus on est près du bord, plus ça va vite.
+        let edgeRaf = 0, edgeEv = null;
+        const EDGE_KINDS = ['move', 'resize', 'newshape', 'draw', 'marquee', 'end', 'bend'];
+        const edgeStep = () => {
+            edgeRaf = 0;
+            if (!drag || !edgeEv || !EDGE_KINDS.includes(drag.kind)) return;
+            const r = stage.getBoundingClientRect(), E = 40, sp = d => Math.round(Math.min(E, Math.max(0, E - d)) / E * 18);
+            const vx = sp(edgeEv.clientX - r.left) - sp(r.right - edgeEv.clientX), vy = sp(edgeEv.clientY - r.top) - sp(r.bottom - edgeEv.clientY);
+            if (!vx && !vy) return;
+            view.x += vx; view.y += vy; applyView();
+            if (drag.kind === 'marquee') { drag.sx += vx; drag.sy += vy; } // le coin de départ suit le tableau
+            onDragMove(edgeEv);
+            edgeRaf = requestAnimationFrame(edgeStep);
+        };
         stage.addEventListener('pointermove', e => {
+            if (!drag) return;
+            onDragMove(e);
+            edgeEv = {clientX: e.clientX, clientY: e.clientY, shiftKey: e.shiftKey, altKey: e.altKey};
+            if (!edgeRaf && drag && EDGE_KINDS.includes(drag.kind)) edgeRaf = requestAnimationFrame(edgeStep);
+        });
+        function onDragMove(e) {
             if (!drag) return;
             const [wx, wy] = toWorld(e.clientX, e.clientY);
             if (drag.kind === 'pan') { view.x = drag.vx + e.clientX - drag.sx; view.y = drag.vy + e.clientY - drag.sy; applyView(); return; }
@@ -854,8 +875,9 @@
                 sel = new Set(drag.base); items.forEach(i => { if (hiddenIds.has(i.id) || lockedIds.has(i.id)) return; if (i.x < X1 && i.x + i.w > X0 && i.y < Y1 && i.y + i.h > Y0) groupOf(i).forEach(g => sel.add(g.id)); });
                 render();
             }
-        });
+        }
         const endDrag = () => {
+            cancelAnimationFrame(edgeRaf); edgeRaf = 0; edgeEv = null;
             if (!drag) return;
             const d = drag; drag = null; root.querySelector('[data-bd-marquee]').hidden = true; guides.innerHTML = '';
             if (d.kind === 'bend') { commit(); return; }

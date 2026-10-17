@@ -2834,6 +2834,7 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rt-lico{font-size:13px}
 .h-rt-lmore{grid-column:1/-1;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .h-rt-lmore .h-rt-lopac{flex:1;min-width:140px}
+.h-rt-lmore .h-rt-lblend{display:flex;gap:6px;align-items:center;font-size:12px;margin:0}.h-rt-lmore .h-rt-lblend select{font-size:12px;padding:2px 4px}
 .h-rt-lpar{display:flex;align-items:center;gap:4px;font-size:12px;margin:0}
 .h-rt-lpar select{font-size:12px;padding:1px 4px;max-width:150px}
 .h-rt-adjrow{grid-column:1/-1;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:12px}
@@ -2947,3 +2948,61 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-mtp-cols > *{min-width:0}
 .h-mtp-stack{grid-template-columns:minmax(0,1fr)}
 .h-mtp-stack > .maintenance-panel{min-width:0;max-width:none}
+
+/* 🎚️ Retouche simple (celle de la version 0.5.0, heritage-retouch-simple.js) */
+.h-retouch-simple { width:min(1280px, calc(100vw - 32px)); max-width:none; padding:18px 20px; }
+.h-rs-head { display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+.h-rs-head h2 { margin:2px 0 10px; font-size:20px; }
+.h-rs-body { display:grid; grid-template-columns:minmax(0, 1fr) 310px; gap:18px; align-items:start; }
+.h-rs-stage { position:relative; background:repeating-conic-gradient(#eee 0 25%, #fafafa 0 50%) 0 0 / 18px 18px; border:1px solid #ddd; display:flex; justify-content:center; align-items:center; min-height:300px; max-height:calc(100vh - 230px); }
+.h-rs-stage canvas { max-width:100%; max-height:calc(100vh - 232px); display:block; }
+.h-rs-before { position:absolute; left:10px; bottom:10px; user-select:none; }
+.h-rs-before.is-active { background:#111; color:#fff; }
+.h-rs-tools { display:grid; gap:8px; max-height:calc(100vh - 230px); overflow:auto; padding-right:4px; }
+.h-rs-presets { display:flex; flex-wrap:wrap; gap:6px; }
+.h-rs-slider { display:grid; gap:2px; font-size:13px; }
+.h-rs-slider span { display:flex; justify-content:space-between; }
+.h-rs-slider output { font-variant-numeric:tabular-nums; color:var(--muted, #666); }
+.h-rs-slider input { width:100%; }
+.h-rs-toggles { display:flex; flex-wrap:wrap; gap:4px 14px; }
+.h-rs-curve-head { display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
+.h-rs-ch { border:1px solid #ccc; background:transparent; padding:2px 7px; font-size:12px; cursor:pointer; margin-left:3px; }
+.h-rs-ch.is-active { background:#111; color:#fff; border-color:#111; }
+.h-rs-curve { width:100%; aspect-ratio:1; background:#fff; border:1px solid #ccc; touch-action:none; cursor:crosshair; }
+.h-rs-hist { fill:#e7e7e7; }
+.h-rs-grid line { stroke:#ddd; stroke-width:1; }
+.h-rs-grid .h-rs-diag { stroke-dasharray:4 4; }
+.h-rs-line { fill:none; stroke:#111; stroke-width:2.2; }
+.h-rs-line[data-ch="r"] { stroke:#d22; } .h-rs-line[data-ch="g"] { stroke:#1a9a3a; } .h-rs-line[data-ch="b"] { stroke:#1660d6; }
+.h-rs-curve circle { fill:#fff; stroke:#111; stroke-width:2; cursor:grab; }
+.h-rs-help, .h-rs-note { font-size:12px; margin:0; }
+@media (max-width:860px) { .h-rs-body { grid-template-columns:1fr; } .h-rs-tools { max-height:none; } }
+.h-rs-versions { margin-top:12px; border-top:1px solid #ddd; padding-top:8px; }
+.h-rs-versions h3 { margin:0 0 6px; font-size:13px; text-transform:uppercase; letter-spacing:.06em; }
+.h-rs-vlist { display:flex; gap:10px; overflow-x:auto; padding-bottom:4px; }
+.h-rs-vlist figure { margin:0; flex:0 0 150px; border:2px solid #ddd; padding:5px; display:grid; gap:4px; background:#fff; }
+.h-rs-vlist figure.is-shown { border-color:#111; }
+.h-rs-vlist figure.is-source { outline:3px solid #0066cc; outline-offset:-1px; }
+.h-rs-vlist img { width:100%; height:86px; object-fit:cover; background:#f3f3f3; }
+.h-rs-vlist figcaption { display:grid; gap:2px; font-size:12px; }
+.h-rs-vlist figcaption .link-button { justify-self:start; font-size:12px; }
+.h-rs-badge { justify-self:start; background:#111; color:#fff; font-size:11px; padding:1px 6px; }
+/* La fenêtre de retouche tient dans l'écran, boutons compris */
+.h-retouch-simple { max-height:calc(100vh - 20px); overflow:auto; }
+.h-retouch-simple .h-rs-stage { max-height:calc(100vh - 430px); min-height:240px; }
+.h-retouch-simple .h-rs-stage canvas { max-height:calc(100vh - 432px); }
+.h-retouch-simple .h-rs-tools { max-height:calc(100vh - 430px); min-height:240px; }
+.h-rs-curve circle.is-sel { fill:#0066cc; stroke:#0066cc; }
+.h-rs-curve circle.is-out { fill:#bbb; stroke:#bbb; opacity:.6; }
+.h-rs-curve:focus { outline:2px solid #0066cc; outline-offset:2px; }
+.h-rs-curve-tools { display:flex; gap:6px; }
+.h-rs-paint{display:flex;flex-wrap:wrap;gap:.5rem .9rem;align-items:center;margin:0 0 .6rem}
+.h-rs-modes{display:flex;gap:.3rem;flex-wrap:wrap}
+.h-rs-size{display:inline-flex;gap:.4rem;align-items:center}
+.h-rs-stage{position:relative}
+.h-rs-stage canvas.is-painting{cursor:none;touch-action:none}
+.h-rs-brush{position:absolute;border:1.5px solid #fff;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.6);pointer-events:none}
+.h-rs-src{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;pointer-events:none;background:linear-gradient(#fff,#fff) center/2px 100% no-repeat,linear-gradient(#fff,#fff) center/100% 2px no-repeat;filter:drop-shadow(0 0 1px #000)}
+.h-rs-paint [data-rs-paint-help]{flex-basis:100%;min-height:1.3em}
+.h-rs-headbtns { display:flex; gap:8px; align-items:center; }
+[data-theme="dark"] .h-retouch-simple .h-rs-curve, [data-theme="dark"] .h-retouch-simple .h-rs-vlist figure { background:#1e1e1e; }

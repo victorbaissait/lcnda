@@ -582,6 +582,11 @@
         }
         return c;
     }
+    /** Modes de fusion d'un calque (comme Photoshop ; ceux que sait faire le canvas) */
+    const RT_BLENDS = [['source-over', 'Normal'], ['multiply', 'Produit'], ['screen', 'Superposition (Écran)'], ['overlay', 'Incrustation'], ['darken', 'Obscurcir'], ['lighten', 'Éclaircir'],
+        ['color-dodge', 'Densité couleur −'], ['color-burn', 'Densité couleur +'], ['hard-light', 'Lumière crue'], ['soft-light', 'Lumière tamisée'], ['difference', 'Différence'], ['exclusion', 'Exclusion'],
+        ['hue', 'Teinte'], ['saturation', 'Saturation'], ['color', 'Couleur'], ['luminosity', 'Luminosité']];
+    const rtBlend = n => RT_BLENDS.some(b => b[0] === n?.blend) ? n.blend : 'source-over';
     /** Un calque (ou la photo) avec son masque appliqué */
     function rtMasked(src, maskOps, masks) { if (!maskOps) return src; const W = src.width, H = src.height, m = rtRenderMask(maskOps, W, H, masks), t = document.createElement('canvas'); t.width = W; t.height = H; const g = t.getContext('2d'); g.drawImage(src, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0); return t; }
     /** Sélection automatique (baguette magique) : les points de teinte proche, voisins (contigu) ou partout */
@@ -599,7 +604,10 @@
 
     /** Retouche d'une photo : on part de la version affichée (ou d'une autre, `source`), le résultat devient une nouvelle version.
      *  Outils : réglages, correcteur de taches, tampon (source choisie), pinceau (6 sortes), texte ; calques d'annotation ; historique ; zoom. */
-    async function openRetouch(source = '', project = null) {
+    async function openRetouch(source = '', project = null, {advanced = false} = {}) {
+        // la retouche simple (celle de la 0.5.0) si c'est la dernière choisie ; un projet s'ouvre toujours ici
+        let mode0 = ''; try { mode0 = localStorage.getItem('genealogie-retouch-mode') || ''; } catch (_) {}
+        if (!project && !advanced && mode0 === 'simple' && ext.openRetouchSimple) return ext.openRetouchSimple(source);
         const st0 = A().state, item = st0.lightboxMedia?.[st0.lightboxIndex];
         if (!item) return;
         let versions = [];
@@ -623,16 +631,16 @@
         const VTOOLS = [['move', '➤', 'Déplacer un élément d’un calque (V)', 'v'], ['marquee', '⬚', 'Sélection rectangle (M)', 'm'], ['ellipsesel', '◯', 'Sélection ellipse (⇧M)', ''], ['lasso', '➰', 'Lasso : entourer à main levée (L)', 'l'], ['polysel', '✒︎', 'Plume : sélection point par point (P) — double-clic ou Entrée pour fermer', 'p'], ['wand', '🪄', 'Sélection automatique (baguette magique) (W)', 'w'], ['crop', '⌗', 'Recadrer et redresser (C)', 'c'],
             ['heal', '🩹', 'Correcteur de taches (J)', 'j'], ['clone', '🧬', 'Tampon : un endroit, ou une zone sélectionnée (S)', 's'], ['brush', '🖌', 'Pinceau (B)', 'b'], ['shape', '⬜', 'Formes : rectangle, ellipse, ligne, flèche (U)', 'u'], ['text', 'T', 'Texte (T)', 't'], ['hand', '✋', 'Main (H, ou espace)', 'h'], ['zoom', '🔍', 'Zoom (Z) — ⌥ pour reculer', 'z']];
         const MENUS = [
-            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['close', 'Fermer']]],
+            ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['simple', '🎚️ Passer à la retouche simple'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['cropclear', 'Annuler le recadrage'], ['-'], ['reset', 'Remettre les réglages à zéro']]],
-            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:sel', 'Masque d’après la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
+            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['tab:filters', '✨ Filtres : flou, netteté, grain, vignette…'], ['filters:reset', 'Enlever les filtres']]],
             ['Affichage', [['side:toggle', 'Replier / ouvrir le panneau de droite', 'Tab'], ['-'], ['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
         ];
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-retouch h-rt2'; dlg.dataset.ownClose = '1'; // il demande lui-même avant de fermer
-        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="spacer"></span>${ext.tbButton('retouch')}${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="h-rt-head"><div><span class="eyebrow">RETOUCHE</span><h2>${esc(item.title || item.filename || 'Photo')}</h2></div><nav class="h-rt-menubar">${MENUS.map(([l, items]) => `<details class="h-rt-menu"><summary>${l}</summary><div class="h-rt-menulist">${items.map(([k, t, sc]) => k === '-' ? '<hr>' : `<button type="button" data-rt-cmd="${k}"><span>${esc(t)}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`).join('')}</nav><span class="spacer"></span><button type="button" class="button small secondary" data-rt-cmd="simple" title="La retouche simple de la version 0.5.0 : réglages, courbe, taches, tampon">🎚️ Simple</button>${ext.tbButton('retouch')}${ext.fullButton('retouch')}<button type="button" class="icon-button" data-rt-close aria-label="Fermer">×</button></div>
             <div class="h-rt-bar" data-tbg="rt-bar" data-tbg-label="Barre du haut (groupes)">
                 <span class="h-rt-modes" role="toolbar" data-tb="modes" data-tb-label="Les outils" data-tbg="rt-modes" data-tbg-label="Outils">${TOOLS.map(([k, i, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rt-mode="${k}" title="${esc(l)}">${i} ${esc(l)}</button>`).join('')}</span>
                 <span class="h-rt-hist-btns"><button type="button" class="button small secondary" data-rt-undo disabled title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-rt-redo disabled title="Rétablir (⇧⌘Z)">↷</button></span>
@@ -765,7 +773,7 @@
                 let own = typeOf(n) === 'group' ? renderStack(n.children, null, R) : R.layer(n), j = i + 1;
                 while (j < arr.length && typeOf(arr[j]) === 'adjust' && arr[j].clip) { if (arr[j].visible) own = applyAdjust(own, arr[j], R.W, R.H); j++; }
                 own = rtMasked(own, R.mask(n), masks);
-                const g = acc.getContext('2d'); g.globalAlpha = n.opacity ?? 1; g.drawImage(own, 0, 0); g.globalAlpha = 1;
+                const g = acc.getContext('2d'); g.globalAlpha = n.opacity ?? 1; g.globalCompositeOperation = rtBlend(n); g.drawImage(own, 0, 0); g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
                 i = j;
             }
             return acc;
@@ -832,8 +840,8 @@
         undoBtn.addEventListener('click', () => restore(hpos - 1));
         redoBtn.addEventListener('click', () => restore(hpos + 1));
         // ── Calques : un arbre (calques, groupes de groupes, réglages), visibilité, opacité, verrou, nom, masque ──
-        const thumbOf = (c, maskOps) => { const t = document.createElement('canvas'); t.width = 44; t.height = Math.max(1, Math.round(44 * ph / pw)); const g = t.getContext('2d'); if (maskOps) { g.fillStyle = '#fff'; g.fillRect(0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-out'; g.drawImage(rtRenderMask(maskOps, pw, ph, masks), 0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-over'; g.fillStyle = '#111'; g.fillRect(0, 0, t.width, t.height); } else g.drawImage(c, 0, 0, t.width, t.height); return t.toDataURL(); };
-        const maskBtns = (id, m) => m ? `<button type="button" class="h-rt-mthumb${maskEdit === id ? ' is-on' : ''}" data-rt-medit title="${maskEdit === id ? 'Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque' : 'Masque : clic pour le peindre au pinceau'}"><img src="${thumbOf(null, m)}" alt="masque"></button>` : `<button type="button" class="icon-button small" data-rt-madd title="Ajouter un masque (cacher une partie sans l’effacer)">🎭</button>`;
+        const thumbOf = (c, maskOps) => { const t = document.createElement('canvas'); t.width = 44; t.height = Math.max(1, Math.round(44 * ph / pw)); const g = t.getContext('2d'); if (maskOps) { g.fillStyle = '#111'; g.fillRect(0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-out'; g.drawImage(rtRenderMask(maskOps, pw, ph, masks), 0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-over'; g.fillStyle = '#fff'; g.fillRect(0, 0, t.width, t.height); } /* comme Photoshop : blanc = montré, noir = caché */ else g.drawImage(c, 0, 0, t.width, t.height); return t.toDataURL(); };
+        const maskBtns = (id, m) => m ? `<button type="button" class="h-rt-mthumb${maskEdit === id ? ' is-on' : ''}" data-rt-medit title="${maskEdit === id ? 'Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque' : 'Masque : clic pour le peindre au pinceau'}"><img src="${thumbOf(null, m)}" alt="masque"></button>` : `<button type="button" class="icon-button small" data-rt-madd title="Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection)">🎭</button>`;
         const groupsList = (except = null) => { const out = []; const rec = (arr, depth, banned) => arr.forEach(n => { if (typeOf(n) !== 'group') return; const ban = banned || n === except; if (!ban) out.push([n, depth]); rec(n.children, depth + 1, ban); }); rec(layers, 0, false); return out; };
         const ICON = {layer: '🖌', group: '📁', adjust: '🎚', photo: '🖼'};
         function rowHtml(n, depth) {
@@ -849,7 +857,7 @@
                 ${maskBtns(n.id, n.mask)}
                 ${t !== 'adjust' ? `<button type="button" class="h-rt-eye" data-rt-llock title="${n.locked ? 'Déverrouiller' : 'Verrouiller'}">${n.locked ? '🔒' : '🔓'}</button>` : ''}
                 <span class="h-rt-lmoves"><button type="button" class="icon-button small" data-rt-lmove="1" title="Monter">↑</button><button type="button" class="icon-button small" data-rt-lmove="-1" title="Descendre">↓</button>${t !== 'group' ? '<button type="button" class="icon-button small" data-rt-ldup title="Dupliquer">⧉</button>' : ''}<button type="button" class="icon-button small" data-rt-ldel title="${t === 'group' ? 'Supprimer le groupe (ce qu’il contient reste)' : t === 'photo' ? 'Retirer la photo des calques (⌘Z pour la remettre)' : 'Supprimer'}">✕</button></span>
-                <div class="h-rt-lmore"><label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${into}</div>
+                <div class="h-rt-lmore">${t !== 'adjust' ? `<label class="h-rt-lblend" title="Mode de fusion : comment le calque se mélange à ce qui est dessous">Fusion <select data-rt-lblend>${RT_BLENDS.map(([v, l]) => `<option value="${v}" ${rtBlend(n) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>` : ''}<label class="h-rt-lopac">Opacité <input type="range" min="0" max="100" value="${Math.round((n.opacity ?? 1) * 100)}" data-rt-lopac></label>${into}</div>
                 ${t === 'adjust' ? `<div class="h-rt-adjrow"><label class="checkbox-line" title="Comme un masque d’écrêtage de Photoshop"><input type="checkbox" data-rt-lclip ${n.clip ? 'checked' : ''}> <span>seulement sur ${(() => { const i = loc.arr.indexOf(n), below = loc.arr.slice(0, i).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)); return below ? `« ${esc(below.name)} »` : 'ce qui est juste dessous'; })()}</span></label><button type="button" class="link-button" data-rt-ladj>régler…</button></div><small class="muted">${n.clip ? 'ne touche que l’élément juste dessous' : loc.parent ? `touche tout ce qui est dessous dans « ${esc(loc.parent.name)} »` : 'touche tout ce qui est dessous'}</small>`
                 : t === 'photo' ? `<small class="muted">réglages, ${st.strokes.length} correction${st.strokes.length > 1 ? 's' : ''}</small>`
                 : t === 'group' ? `<small class="muted">${n.children.length} élément${n.children.length > 1 ? 's' : ''}</small>` : `<small class="muted">${n.ops.length} élément${n.ops.length > 1 ? 's' : ''}</small>${n.ops.length ? '<button type="button" class="link-button" data-rt-lclear>vider</button>' : ''}`}
@@ -879,7 +887,11 @@
             const id = li.dataset.rtL, l = target(id), name = l?.name; if (!l) return;
             if (e.target.closest('[data-rt-lvis]')) { l.visible = !l.visible; refreshLayers(); draw(); commit(`${name} ${l.visible ? 'montré' : 'masqué'}`); return; }
             if (e.target.closest('[data-rt-gopen]')) { l.open = l.open === false; refreshLayers(); return; }
-            if (e.target.closest('[data-rt-madd]')) { addMaskTo(id, []); setMode('brush'); commit(`Masque ajouté à ${name}`); toast('Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer.'); return; }
+            if (e.target.closest('[data-rt-madd]')) {
+                // ⌥ / Alt + clic, comme dans Photoshop : un masque négatif (tout caché, ou la sélection cachée) ; on peint ensuite en ⬜ pour montrer
+                if (e.altKey) { addMaskTo(id, selId ? [{type: 'sel', mask: selId, invert: true}] : [{type: 'all', mode: 'hide'}]); setMode('brush'); commit(`Masque qui cache ${selId ? 'la sélection' : 'tout'} ajouté à ${name}`); toast(selId ? 'Masque ajouté : la sélection est cachée.' : 'Masque ajouté : tout est caché ; peins en ⬜ pour montrer.'); return; }
+                addMaskTo(id, []); setMode('brush'); commit(`Masque ajouté à ${name}`); toast('Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer.'); return;
+            }
             if (e.target.closest('[data-rt-medit]')) { maskEdit = maskEdit === id ? '' : id; activeLayer = id === 'photo' ? '' : id; if (maskEdit) setMode('brush'); else setMode(mode); refreshLayers(); return; }
             if (e.target.closest('[data-rt-minv]')) { l.mask = [...l.mask, {type: 'invert'}]; refreshLayers(); draw(); commit(`Masque de ${name} inversé`); return; }
             if (e.target.closest('[data-rt-mdel]')) { l.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); refreshLayers(); draw(); commit(`Masque de ${name} retiré`); return; }
@@ -909,6 +921,7 @@
             const id = e.target.closest('[data-rt-l]')?.dataset.rtL, l = target(id); if (!l) return;
             if (e.target.matches('[data-rt-lopac]')) commit(`Opacité de ${l.name} : ${Math.round(l.opacity * 100)} %`);
             if (e.target.matches('[data-rt-lname]')) { refreshLayers(); commit(`Renommé « ${l.name} »`); }
+            if (e.target.matches('[data-rt-lblend]')) { l.blend = e.target.value === 'source-over' ? undefined : e.target.value; draw(); commit(`Fusion de ${l.name} : ${e.target.selectedOptions[0].textContent}`); }
             if (e.target.matches('[data-rt-lclip]')) { l.clip = e.target.checked; refreshLayers(); draw(); commit(`« ${l.name} » ${l.clip ? 'seulement sur l’élément dessous' : 'sur tout ce qui est dessous'}`); }
             if (e.target.matches('[data-rt-lpar]')) {
                 const loc = locate(id), g = nodeById(e.target.value); if (!loc) return;
@@ -1286,6 +1299,11 @@
             if (k === 'proj:open') return openProjects();
             if (a === 'download') return downloadFull(b === 'png' ? 'image/png' : 'image/jpeg');
             if (k === 'close') return askClose();
+            if (k === 'simple') { // la retouche simple de la 0.5.0 (le choix est retenu pour la prochaine fois)
+                if (!saved && hpos > 0 && !(projId && curKey() === projKey) && !confirm('Passer à la retouche simple ? Les retouches en cours seront perdues (💾 Enregistrer le projet les garde pour plus tard).')) return;
+                try { localStorage.setItem('genealogie-retouch-mode', 'simple'); } catch (_) {}
+                saved = true; dlg.close(); return ext.openRetouchSimple?.(source);
+            }
             if (k === 'undo') return restore(hpos - 1);
             if (k === 'redo') return restore(hpos + 1);
             if (a === 'preset') return dlg.querySelector(`[data-rt-preset="${b}"]`)?.click();
@@ -1301,6 +1319,11 @@
             if (k === 'sel:all') return combine(full(), 'new', 'Tout sélectionner');
             if (k === 'sel:none') { if (!selId) return; selId = null; refreshLayers(); setMode(mode); draw(); return commit('Désélectionner'); }
             if (k === 'mask:add') { const id = activeLayer && nodeById(activeLayer) ? activeLayer : 'photo', t = target(id); if (!t) return toast('Choisis d’abord un calque.', 'error'); if (t.mask) return toast('Ce calque a déjà un masque.'); addMaskTo(id, []); showTab('layers'); setMode('brush'); return commit('Masque ajouté'); }
+            if (k === 'mask:hideall' || k === 'mask:selhide') { // masque négatif (⌥ + 🎭 dans Photoshop)
+                const id = activeLayer && nodeById(activeLayer) ? activeLayer : 'photo', t = target(id); if (!t) return toast('Choisis d’abord un calque.', 'error'); if (t.mask) return toast('Ce calque a déjà un masque.');
+                if (k === 'mask:selhide' && !selId) return toast('Fais d’abord une sélection.', 'error');
+                addMaskTo(id, k === 'mask:selhide' ? [{type: 'sel', mask: selId, invert: true}] : [{type: 'all', mode: 'hide'}]); showTab('layers'); setMode('brush'); return commit(k === 'mask:selhide' ? 'Masque qui cache la sélection' : 'Masque qui cache tout');
+            }
             if (k === 'mask:invert' || k === 'mask:del') { const id = maskEdit || (activeLayer && nodeById(activeLayer) ? activeLayer : 'photo'), t = target(id); if (!t?.mask) return toast('Ce calque n’a pas de masque (Calque → Ajouter un masque).', 'error'); if (k === 'mask:invert') t.mask = [...t.mask, {type: 'invert'}]; else { t.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); } refreshLayers(); draw(); return commit(k === 'mask:invert' ? 'Masque inversé' : 'Masque retiré'); }
             if (!a.startsWith('sel') && k !== 'mask:sel') return;
             if (!needSel()) return;
