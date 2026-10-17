@@ -15,6 +15,7 @@ require_once __DIR__ . '/boards.php'; // tableaux (façon Freeform) // livrets d
 require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
 require_once __DIR__ . '/diagrams.php';
 require_once __DIR__ . '/vector.php';
+require_once __DIR__ . '/transcriptions.php'; // 📜 Transcription d'actes
 require_once __DIR__ . '/dna.php';          // 🧬 ADN       // ✒️ Dessin vectoriel     // 📊 Mes diagrammes
 require_once __DIR__ . '/periodicals.php';  // 📰 Revues et magazines, ✉️ petites annonces
 require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page

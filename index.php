@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=209">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=173">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=174">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1067,6 +1067,7 @@ header('X-Content-Type-Options: nosniff');
                         <option value="yiddish-hebrew-script">Yiddish · alphabet hébreu à installer</option>
                     </select>
                     <button type="button" class="button small secondary" id="handwriting-transcription" title="Reconnaissance manuscrite locale via Kraken si un modèle est installé. Le texte détecté est ajouté à la fin, sans rien effacer.">✍ HTR manuscrit</button>
+                    <button type="button" class="button small secondary" id="act-transcriber-open" title="Ouvrir l’atelier de transcription : l’image à gauche, le texte à droite, zones reliées, repérage des noms et des dates">📜 Atelier</button>
                 </span>
                 <span class="lightbox-ocr-status" id="ocr-transcription-status" hidden></span>
             </div>
@@ -1095,7 +1096,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=379" defer></script>
+<script src="assets/js/app.js?v=380" defer></script>
 <script src="assets/js/app-piece-archives.js?v=4" defer></script>
 <script src="assets/js/app-jeu.js?v=3" defer></script>
 <script src="assets/js/app-chronologie.js?v=3" defer></script>
@@ -1111,7 +1112,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=16" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=85" defer></script>
+<script src="assets/js/heritage-more.js?v=86" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=18" defer></script>
 <script src="assets/js/heritage-av.js?v=9" defer></script>
@@ -1149,6 +1150,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector.js?v=7" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=1" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=1" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=1" defer></script>
 <script src="assets/js/heritage-dna.js?v=3" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=3" defer></script>
 <script src="assets/js/museum-viewer.js?v=8" defer></script>
