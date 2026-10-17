@@ -7,7 +7,7 @@ declare(strict_types=1);
  * relié aux fiches. Table créée à la première utilisation (sans changer le numéro de structure).
  */
 
-const ACT_KINDS = ['naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'recensement', 'militaire', 'lettre', 'autre'];
+const TRANSCRIPTION_KINDS = ['naissance', 'bapteme', 'mariage', 'deces', 'sepulture', 'notarial', 'recensement', 'militaire', 'lettre', 'autre'];
 
 function act_transcriptions_ensure(PDO $pdo): void
 {
@@ -66,7 +66,7 @@ function save_act_transcription(PDO $pdo, array $data): array
     $id = safe_int($data['id'] ?? 0);
     $mediaId = safe_int($data['media_id'] ?? 0);
     if ($mediaId) { $c = $pdo->prepare('SELECT 1 FROM media WHERE id=?'); $c->execute([$mediaId]); if (!$c->fetchColumn()) { throw new RuntimeException('Image de l’acte introuvable.'); } }
-    $kind = in_array($data['kind'] ?? '', ACT_KINDS, true) ? $data['kind'] : 'autre';
+    $kind = in_array($data['kind'] ?? '', TRANSCRIPTION_KINDS, true) ? $data['kind'] : 'autre';
     $title = mb_substr(safe_text($data['title'] ?? ''), 0, 200) ?: 'Acte sans titre';
     $body = mb_substr(str_replace("\0", '', (string) (is_scalar($data['body'] ?? '') ? $data['body'] : '')), 0, 200000);
     $json = json_encode(act_transcription_clean_data($pdo, $data['data'] ?? []), JSON_UNESCAPED_UNICODE);

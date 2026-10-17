@@ -381,6 +381,7 @@ try {
         'employer_lookup' => json_response(employer_lookup(safe_text($_GET['q'] ?? ''))),
         'employer_record' => json_response(employer_record_detail($pdo, safe_text($_GET['name'] ?? ''))),
         'research_suggestions' => json_response(research_suggestions_data($pdo, max(1, min(200, safe_int($_GET['limit'] ?? 40))))),
+        'research_gaps' => json_response(research_gaps_data($pdo, $_GET)),
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),

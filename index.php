@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=209">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=179">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=180">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1106,13 +1106,13 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=3" defer></script>
 <script src="assets/js/app-listes.js?v=4" defer></script>
 <script src="assets/js/app-maintenance.js?v=3" defer></script>
-<script src="assets/js/app-recherche.js?v=3" defer></script>
+<script src="assets/js/app-recherche.js?v=4" defer></script>
 <script src="assets/js/app-graphiques.js?v=4" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=16" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=91" defer></script>
+<script src="assets/js/heritage-more.js?v=92" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=18" defer></script>
 <script src="assets/js/heritage-av.js?v=9" defer></script>
@@ -1152,6 +1152,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-vector-tree.js?v=1" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=1" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=1" defer></script>
+<script src="assets/js/heritage-research-gaps.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe.js?v=1" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=1" defer></script>
 <script src="assets/js/heritage-house.js?v=1" defer></script>
