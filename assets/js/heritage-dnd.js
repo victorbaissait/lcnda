@@ -28,10 +28,31 @@
     const signature = b => [...b.attributes].filter(a => a.name.startsWith('data-')).map(a => a.name + (a.value === '-1' ? '=-1' : '')).sort().join('|');
     const rowsLike = sig => [...document.querySelectorAll('button')].filter(b => isArrow(b, UP) && signature(b) === sig).map(rowOf).filter(Boolean);
 
+    /** ☑ Une seule façon de ranger, partout : ⠿ | ☑ | libellé | ↑ ↓. Seul l'ordre d'affichage change (CSS order),
+     *  rien n'est déplacé dans la page : chaque écran garde ses boutons et sa façon d'enregistrer. Les lignes riches
+     *  (zone de texte, plusieurs champs, lignes de tableau) restent comme elles sont. */
+    const childOf = (row, el) => { while (el && el.parentElement !== row) el = el.parentElement; return el; };
+    function tidy(row, up) {
+        if (row.dataset.ordRow || row.tagName === 'TR' || row.closest('[data-ord-off]')) return;
+        const down = downOf(row); if (!down) return;
+        if (row.querySelector('textarea') || row.querySelectorAll('input:not([type=checkbox]):not([type=radio]):not([type=color]), select').length > 2 || row.querySelectorAll('[data-dnd-row], li, tr').length) return;
+        row.dataset.ordRow = '1'; row.classList.add('ord-row');
+        [up, down].forEach(b => b.classList.add('ord-arrow'));
+        const arrows = childOf(row, up); if (arrows) arrows.style.order = '99';
+        if (childOf(row, down) && childOf(row, down) !== arrows) childOf(row, down).style.order = '99';
+        row.querySelectorAll('.order-grip, .dnd-grip, .saved-grip').forEach(g => { g.textContent = '⠿'; let c = childOf(row, g);
+            if (c && (c === arrows || c.contains(up))) { row.insertBefore(g, row.firstChild); c = g; } // la poignée toujours au début, pas collée aux flèches
+            if (c) c.style.order = '-3'; });
+        const box = [...row.querySelectorAll('input[type=checkbox]')].find(i => { const c = childOf(row, i); return c && c !== arrows; });
+        if (box) { const c = childOf(row, box); if (c.style.order !== '-3') c.style.order = '-2'; }
+        const main = [...row.children].find(c => !c.style.order && /\S/.test(c.textContent) && !c.matches('button, select, input, .order-number'));
+        (main || (box && /\S/.test(childOf(row, box).textContent) ? childOf(row, box) : null))?.classList.add('ord-main'); // la case et son libellé ensemble : ils prennent la place
+    }
     function enhance() {
         const ups = [...document.querySelectorAll('#workspace button, dialog[open] button')].filter(b => isArrow(b, UP));
         for (const up of ups) {
             const row = rowOf(up);
+            if (row) setTimeout(() => tidy(row, up), 0); // après la poignée, posée juste en dessous
             if (!row || row.dataset.dndRow || row.querySelector(HAS_OWN_GRIP) || row.closest('[data-dnd-off]')) continue;
             if (!downOf(row)) continue;
             row.dataset.dndRow = '1';

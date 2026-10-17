@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=217">
+    <link rel="stylesheet" href="assets/css/app.css?v=218">
     <link rel="stylesheet" href="assets/css/heritage.css?v=197">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
@@ -1109,7 +1109,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-carte.js?v=4" defer></script>
 <script src="assets/js/app-enquetes.js?v=3" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=3" defer></script>
-<script src="assets/js/app-sidegroups.js?v=3" defer></script>
+<script src="assets/js/app-sidegroups.js?v=4" defer></script>
 <script src="assets/js/app-listes.js?v=6" defer></script>
 <script src="assets/js/app-maintenance.js?v=5" defer></script>
 <script src="assets/js/app-recherche.js?v=4" defer></script>
@@ -1145,7 +1145,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=13" defer></script>
 <script src="assets/js/heritage-boards.js?v=23" defer></script>
-<script src="assets/js/heritage-dnd.js?v=6" defer></script>
+<script src="assets/js/heritage-dnd.js?v=7" defer></script>
 <script src="assets/js/heritage-studio.js?v=50" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=4" defer></script>
 <script src="assets/js/heritage-fiches.js?v=10" defer></script>

@@ -4177,3 +4177,8 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 :root[data-theme="dark"] .archive-room-piece.is-on{background:#12233d}
 :root[data-theme="dark"] .archive-room-piece button{background:#212121}
 /* ═════ fin du mode sombre automatique ═════ */
+/* ☑ lignes à ranger : la même partout (heritage-dnd.js) — ⠿ | ☑ | libellé | ↑ ↓ */
+.ord-row{display:flex!important;align-items:center;gap:8px;flex-wrap:nowrap}.ord-row>.ord-main{flex:1 1 auto;min-width:0;text-align:left;justify-content:flex-start}
+.ord-row .ord-arrow{width:28px;height:28px;min-width:28px;min-height:28px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);border-radius:0;box-shadow:none;margin:0}
+.ord-row .ord-arrow:disabled{opacity:.35}.ord-row .ord-arrow:not(:disabled):hover{background:var(--blue-soft,#eaf2ff)}
+.ord-row .dnd-grip,.ord-row .order-grip{cursor:grab;color:var(--muted,#888);font-size:15px}
