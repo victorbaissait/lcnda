@@ -584,7 +584,11 @@
     const MT_QUALITY = [[2, 'Légère (petit fichier)'], [5, 'Normale'], [8, 'Haute'], [14, 'Très haute (gros fichier)']];
     const MT_FPS = [24, 25, 30, 50, 60];
     const MT_COLORS = [['colV1', '🎬 Vidéo principale (Vidéo 1)', '#cfe0ff'], ['colV2', '🖼️ Vidéos incrustées', '#e3d4ff'], ['colT', '🔤 Textes', '#ffe7a8'], ['colA', '🎵 Sons', '#c9f0d4']];
-    const MT_DEF = {side: 'right', stage: 50, lane: 40, help: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128, ...Object.fromEntries(MT_COLORS.map(c => [c[0], c[2]]))};
+    const MT_SPEEDS = [0.1, 0.25, 0.5, 1, 1.5, 2, 4, 10];
+    /** « 0,5 ; 1 ; 2× » → [0.5, 1, 2] : de 0,1 à 10, sans doublons, 12 au plus, dans l'ordre */
+    const parseSpeeds = v => { const list = (Array.isArray(v) ? v : String(v ?? '').split(/[;\s/|]+/)).map(x => Number(String(x).replace(/,$/, '').replace(',', '.').replace(/[×x]/gi, ''))).filter(x => Number.isFinite(x) && x >= 0.1 && x <= 10).map(x => Math.round(x * 100) / 100); const u = [...new Set(list)]; return u.length ? u.sort((a, b) => a - b).slice(0, 12) : null; };
+    const speedsText = l => l.map(x => String(x).replace('.', ',')).join(' ; ');
+    const MT_DEF = {side: 'right', stage: 50, lane: 40, help: true, fmt: 'mp4', height: 0, quality: 5, fps: 30, abr: 128, speeds: MT_SPEEDS, ...Object.fromEntries(MT_COLORS.map(c => [c[0], c[2]]))};
     // texte lisible (noir ou blanc) sur la couleur choisie
     const inkOn = hex => { const m = /^#?([0-9a-f]{6})$/i.exec(hex || ''); if (!m) return '#111'; const n = parseInt(m[1], 16), l = 0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255); return l > 150 ? '#111' : '#fff'; };
     function montagePrefs() {
@@ -594,7 +598,7 @@
     function montagePrefsFrom(v) {
         const pick = (x, list, d) => list.includes(x) ? x : d, num = (x, a, b, d) => Number.isFinite(Number(x)) ? Math.min(b, Math.max(a, Number(x))) : d;
         return {side: pick(v.side, ['right', 'left'], 'right'), stage: num(v.stage, 25, 80, 50), lane: num(v.lane, 28, 70, 40), help: v.help !== false, fmt: pick(v.fmt, ['mp4', 'webm'], 'mp4'),
-            height: pick(Number(v.height), MT_SIZES.map(x => x[0]), 0), quality: pick(Number(v.quality), MT_QUALITY.map(x => x[0]), 5), fps: pick(Number(v.fps), MT_FPS, 30), abr: pick(Number(v.abr), [96, 128, 192, 256], 128),
+            height: pick(Number(v.height), MT_SIZES.map(x => x[0]), 0), quality: pick(Number(v.quality), MT_QUALITY.map(x => x[0]), 5), fps: pick(Number(v.fps), MT_FPS, 30), abr: pick(Number(v.abr), [96, 128, 192, 256], 128), speeds: parseSpeeds(v.speeds) || MT_SPEEDS,
             ...Object.fromEntries(MT_COLORS.map(([k, , d]) => [k, /^#[0-9a-f]{6}$/i.test(v[k] || '') ? v[k] : d]))};
     }
     ext.montagePrefs = montagePrefs; ext.montagePrefsDefaults = {MT_KEY, MT_SIZES, MT_QUALITY, MT_FPS, MT_DEF};
@@ -976,7 +980,7 @@
         const chk = (k, label, on) => `<label class="checkbox-line"><input type="checkbox" data-mt-k="${k}" ${on ? 'checked' : ''}> ${label}</label>`;
         // les réglages du son : pour un morceau (afx) ou pour tout le film (fx)
         const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
-        const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"> ×</label><div class="h-mt-quick">${[0.1, 0.25, 0.5, 1, 1.5, 2, 4, 10].map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}</div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
+        const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"> ×</label><div class="h-mt-quick">${montagePrefs().speeds.map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}<button type="button" data-mt-speededit title="Choisir les vitesses de ces boutons (aussi dans Maintenance → Montage)">✎</button></div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
         const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>Remettre à zéro</button></div><p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
         const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
         const imgDur = c => `<label class="h-avx-row">Durée à l’écran <input type="number" class="h-mt-num" min="0.1" max="3600" step="0.1" value="${Math.round(clen(c) * 10) / 10}" data-mt-k="imgdur"> s</label><div class="h-mt-quick">${[2, 3, 5, 8, 10, 15].map(v => `<button type="button" data-mt-imgdur="${v}">${v} s</button>`).join('')}</div>`;
@@ -1098,6 +1102,7 @@
             const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
             if (e.target.closest('[data-mt-sep]')) { dl.querySelector('[data-mt-op="detach"]')?.click(); return; }
+            if (e.target.closest('[data-mt-speededit]')) { (async () => { const cur = montagePrefs().speeds, n = await A().askText({title: 'Boutons de vitesse', message: 'Les vitesses des boutons rapides, de 0,1 à 10, séparées par des points-virgules :', value: speedsText(cur), okLabel: 'Enregistrer'}); if (n === null) return; const l = parseSpeeds(n); if (!l) return toast('Aucune vitesse valable (entre 0,1 et 10).', 'error'); let v = {}; try { v = JSON.parse(localStorage.getItem(MT_KEY) || '{}') || {}; } catch (_) {} v.speeds = l; try { localStorage.setItem(MT_KEY, JSON.stringify(v)); } catch (_) {} drawPane(); toast(`Boutons : ${speedsText(l)} ×`); })(); return; }
             const sp = e.target.closest('[data-mt-speed]'); if (sp) { const c = selected(); if (c) { c.speed = Number(sp.dataset.mtSpeed); touch(1); } return; }
             const idur = e.target.closest('[data-mt-imgdur]'); if (idur) { const c = selected(); if (c) { c.to = c.from + Number(idur.dataset.mtImgdur); touch(1); } return; }
             if (e.target.closest('[data-mt-afxall]')) { const c = selected(); if (!c) return; const f = {...(c.afx || {})}; [...P.v1, ...P.v2, ...P.audio].forEach(x => { if (!isImg(x)) x.afx = {...f}; }); toast('Réglages du son mis sur tous les sons du projet.'); touch(2); return; }
@@ -1589,6 +1594,7 @@
                     <label>Images par seconde<select data-mtp="fps">${opt(MT_FPS.map(f => [f, f + ' images/s']), p.fps)}</select></label>
                     <label>Son<select data-mtp="abr">${opt([[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], p.abr)}</select></label>
                     </div>
+                    <label class="h-mtp-speeds">⏩ Boutons rapides de vitesse (de 0,1 à 10, séparés par « ; ») <input data-mtp="speeds" value="${esc(speedsText(p.speeds))}" placeholder="0,1 ; 0,25 ; 0,5 ; 1 ; 1,5 ; 2 ; 4 ; 10"></label>
                     <p class="muted">On peut toujours les changer au moment d’enregistrer. MP4 seulement si l’ordinateur sait le faire, sinon WebM.</p>
                 </section>
                 <section class="maintenance-panel"><h3>🎚️ Retouche des photos</h3>
