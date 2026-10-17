@@ -40,6 +40,7 @@
     const ASPECTS = {'16:9': [1920, 1080, 'Large (16:9)'], '4:3': [1440, 1080, 'Standard (4:3)'], '16:10': [1920, 1200, '16:10'], '1:1': [1080, 1080, 'Carré'], '9:16': [1080, 1920, 'Vertical (téléphone)'], 'a4': [1754, 1240, 'A4 à l’italienne'], custom: [0, 0, 'Sur mesure…']};
     const SANS = '"Helvetica Neue", Helvetica, Arial, sans-serif', SERIF = 'Georgia, "Times New Roman", serif', PALA = '"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif';
     const THEMES = {
+        lcnda: {label: 'Comme l’application', bg: {type: 'color', c1: '#ffffff'}, fg: '#080808', accent: '#055dff', tf: 'Arial, Helvetica, sans-serif', bf: 'Arial, Helvetica, sans-serif', tw: 800},
         blanc: {label: 'Blanc', bg: {type: 'color', c1: '#ffffff'}, fg: '#1d1d1f', accent: '#0a84ff', tf: SANS, bf: SANS, tw: 700},
         noir: {label: 'Noir', bg: {type: 'color', c1: '#000000'}, fg: '#f5f5f7', accent: '#ff9f0a', tf: SANS, bf: SANS, tw: 700, dark: true},
         ardoise: {label: 'Ardoise', bg: {type: 'gradient', c1: '#34495e', c2: '#1a242f', angle: 160}, fg: '#f5f5f7', accent: '#64d2ff', tf: '"Avenir Next", Avenir, "Segoe UI", sans-serif', bf: '"Avenir Next", Avenir, "Segoe UI", sans-serif', tw: 600, dark: true},
