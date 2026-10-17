@@ -177,7 +177,9 @@
     }
 
     /* ─── Choisir un type (galerie avec aperçus) ─── */
-    const TEMPLATES = () => {
+    let tplCache = null;
+    const TEMPLATES = () => { if (tplCache) return tplCache; tplCache = buildTemplates(); return tplCache; };
+    const buildTemplates = () => {
         const K = R().KINDS, out = [];
         for (const [k, kind] of Object.entries(K)) {
             out.push({kind: k, icon: kind.icon, label: kind.label, group: kind.group});
@@ -200,22 +202,28 @@
     function chooseType({current = '', title = 'Nouveau diagramme'} = {}) {
         return new Promise(resolve => {
             const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
-            const groups = {};
-            TEMPLATES().forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
-            dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2><p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p></div><button type="button" class="icon-button" data-close>×</button></div>
+            const paint = () => {
+                // l'ordre, les types cachés et les groupes à soi : Maintenance → Types de diagrammes (heritage-diagram-kinds.js)
+                const all = TEMPLATES(), groups = {};
+                if (ext.diagramCatalog) ext.diagramCatalog(all).forEach(([g, items]) => { groups[g] = items.map(t => [t, all.indexOf(t)]); });
+                else all.forEach((t, i) => { (groups[t.group] = groups[t.group] || []).push([t, i]); });
+                dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 DIAGRAMMES</span><h2>${esc(title)}</h2><p class="muted">Choisis un dessin : il arrive avec un exemple que tu remplaces par tes chiffres (à la main, collés d’un tableur, d’un CSV, ou pris dans l’app).</p></div><span>${ext.openDiagramKindsEditor ? '<button type="button" class="button small secondary" data-kinds-cfg title="Ordre, types montrés ou cachés, groupes à toi">⚙️ Ranger les types</button>' : ''}<button type="button" class="icon-button" data-close>×</button></span></div>
                 ${Object.entries(groups).map(([g, items]) => `<h4>${esc(g)}</h4><div class="h-dg-tiles">${items.map(([t, i]) => `<button type="button" class="h-dg-tile ${current === t.kind && !t.o && !t.preset ? 'is-current' : ''}" data-tpl="${i}"><span class="h-dg-mini">${R().svg({...presetSpec(t), o: {...presetSpec(t).o, title: '', subtitle: '', source: '', legend: 'none', scale: 1.6}}, 480)}</span><span>${esc(t.icon)} ${esc(t.label)}</span></button>`).join('')}</div>`).join('')}`;
+            };
+            paint();
             document.body.appendChild(dlg);
             const done = v => { dlg.close(); dlg.remove(); resolve(v); };
-            dlg.addEventListener('click', e => { if (e.target.closest('[data-close]')) return done(null); const b = e.target.closest('[data-tpl]'); if (b) done(TEMPLATES()[Number(b.dataset.tpl)]); });
+            dlg.addEventListener('click', e => { if (e.target.closest('[data-close]')) return done(null); if (e.target.closest('[data-kinds-cfg]')) return ext.openDiagramKindsEditor({onSave: paint}); const b = e.target.closest('[data-tpl]'); if (b) done(TEMPLATES()[Number(b.dataset.tpl)]); });
             dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });
             dlg.showModal();
         });
     }
 
     /* ─── L'éditeur ─── */
-    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null} = {}) {
+    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null, spec: given = null, name: givenName = ''} = {}) {
         let rec;
-        if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error'); rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
+        if (!id && given && R().KINDS[given.kind]) rec = {id: 0, name: givenName || given.o?.title || R().KINDS[given.kind].label, spec: clone(given), links: link ? [link] : []}; // données déjà prêtes (statistique, import)
+        else if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error'); rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
             const t = kind ? {kind} : await chooseType(); if (!t) return null;
             const spec = presetSpec(t);
@@ -392,7 +400,7 @@
         const all = await list(true).catch(() => []);
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-dg-gallery';
         dlg.innerHTML = `<div class="h-dg-galhead"><div><span class="eyebrow">📊 MES DIAGRAMMES</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-close>×</button></div>
-            <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini">${R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
+            <div class="h-dg-tiles"><button type="button" class="h-dg-tile is-new" data-new><span class="h-dg-mini h-dg-plus">＋</span><span>Nouveau diagramme</span></button>${ext.diagramFromStat ? '<button type="button" class="h-dg-tile is-new" data-fromstat><span class="h-dg-mini h-dg-plus">📊</span><span>D’une statistique (de l’app ou à moi, tenue à jour)</span></button><button type="button" class="h-dg-tile is-new" data-import><span class="h-dg-mini h-dg-plus">📥</span><span>Importer (fichier, tableau, Wikipédia, image)</span></button>' : ''}${all.map(d => `<button type="button" class="h-dg-tile" data-pick="${d.id}"><span class="h-dg-mini">${R().svg({...specOf(d), o: {...(d.spec?.o || {}), legend: 'none', source: '', subtitle: ''}}, 480)}</span><span>${esc(R().KINDS[d.kind]?.icon || '📊')} ${esc(d.name)}</span></button>`).join('')}</div>`;
         document.body.appendChild(dlg);
         const done = v => { dlg.close(); dlg.remove(); resolve(v); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); done(null); });
@@ -400,6 +408,8 @@
             if (e.target.closest('[data-close]')) return done(null);
             const p = e.target.closest('[data-pick]'); if (p) return done(Number(p.dataset.pick));
             if (e.target.closest('[data-new]')) { dlg.close(); dlg.remove(); const r = await openEditor(null, {link, onSave: id => resolve(id), onClose: () => resolve(null)}); if (!r) resolve(null); }
+            if (e.target.closest('[data-fromstat]')) { dlg.close(); dlg.remove(); resolve(await ext.diagramFromStat({link})); }
+            if (e.target.closest('[data-import]')) { dlg.close(); dlg.remove(); resolve(await ext.diagramImport({link})); }
         });
         dlg.showModal();
     });
@@ -481,5 +491,5 @@
 
     // la liste est chargée tôt : la colonne de Graphiques la montre sans attendre
     setTimeout(() => { if (window.LCNDA_APP?.api) list().then(() => { if (S().module === 'graphiques') A().renderSidebar?.(); }).catch(() => {}); }, 400);
-    ext.diagramsInternals = {parseTable, pasteInto, fillFrom, gridCols, list, specCsv};
+    ext.diagramsInternals = {parseTable, pasteInto, fillFrom, gridCols, list, specCsv, TEMPLATES, presetSpec, openEditor, chooseType};
 })();

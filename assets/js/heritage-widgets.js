@@ -241,6 +241,7 @@
         const key = 'd' + (++fullSeq); keepView(key, {detail: {d, entries, data}});
         const hit = i => ` data-cw-detail="${key}" data-cw-i="${i}" tabindex="0" role="button"`;
         const legend = `<ul class="h-cw-legend">${entries.map(([v, n], i) => `<li${hit(i)}><i style="background:${col(v, i)}"></i>${esc(v)} <strong>${fmt(n)}</strong> <small class="muted">${pct(n)} %</small></li>`).join('')}</ul>`;
+        if (String(d.style || '').startsWith('dg:') && ext.diagramStatHtml) { const h = ext.diagramStatHtml(d, data, entries, (r, c) => cellText(data, r, c)); if (h) return `<div class="h-cw-dg">${h}</div>`; } // le diagramme a sa propre légende
         if (d.style === 'pie' || d.style === 'donut') {
             let at = 0;
             const stops = entries.map(([v, n], i) => { const from = at; at += n / total * 360; return `${col(v, i)} ${from.toFixed(1)}deg ${at.toFixed(1)}deg`; }).join(',');
@@ -757,7 +758,9 @@
     function kindHtml() { return kindHtmlInner() + captionField(target()); }
     /** Dessin, couleurs et nombre de valeurs : communs au graphique et à la statistique de l'app */
     function drawHtml(d) {
-        return `<label>Dessin <select data-cw-style>${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+        // les dessins simples, puis tous les types de « Mes diagrammes » (même catalogue, même ordre, mêmes groupes : Maintenance → Types de diagrammes)
+        const dgGroups = ext.diagramStatStyles ? ext.diagramStatStyles() : [];
+        return `<label>Dessin <select data-cw-style><optgroup label="Dessins simples">${CHART_STYLES.map(([k, l]) => `<option value="${k}" ${(d.style || 'bars') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>${dgGroups.map(([g, items]) => `<optgroup label="📊 ${esc(g)}">${items.map(([k, l]) => `<option value="${esc(k)}" ${d.style === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}</select></label>
                 <label>Couleurs <select data-cw-palette>${[['vive', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (photos anciennes)'], ['accent', 'Une couleur en dégradé']].map(([k, l]) => `<option value="${k}" ${(d.palette || 'vive') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${d.palette === 'accent' ? `<label>Couleur du dégradé<input type="color" data-cw-accent value="${esc(color(d.accentColor) || '#0066cc')}"></label>` : ''}
                 <div class="span-2"><span class="section-label">Couleur de chaque valeur</span><div class="h-cw-valcolors" data-cw-valcolors><small class="muted">Les valeurs apparaissent ici après le calcul de l’aperçu.</small></div></div>
@@ -1047,12 +1050,12 @@
         if (kind === 'numbers') out.counters = (Array.isArray(d.counters) ? d.counters : []).slice(0, 8).map(c => ({label: str(c.label, 80), src: cleanSrc(c.src)}));
         if (kind === 'list' || kind === 'chart') { out.src = cleanSrc(d.src); out.limit = Math.max(1, Math.min(100, Number(d.limit) || 8)); }
         if (kind === 'list') { out.columns = (Array.isArray(d.columns) ? d.columns : []).map(c => str(c, 40)).slice(0, 12); out.sort = d.sort?.col ? {col: str(d.sort.col, 40), dir: d.sort.dir === 'desc' ? 'desc' : 'asc'} : null; }
-        if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', ...TIME_GROUPS].includes(d.groupBy) ? d.groupBy : 'value', groupStep: Math.max(1, Math.min(500, Number(d.groupStep) || 25)), rangeFrom: str(d.rangeFrom, 40), rangeTo: str(d.rangeTo, 40), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
+        if (kind === 'chart') Object.assign(out, {group: str(d.group, 40), groupBy: ['value', ...TIME_GROUPS].includes(d.groupBy) ? d.groupBy : 'value', groupStep: Math.max(1, Math.min(500, Number(d.groupStep) || 25)), rangeFrom: str(d.rangeFrom, 40), rangeTo: str(d.rangeTo, 40), style: (CHART_STYLES.some(([k]) => k === d.style) || /^dg:[a-z0-9_]{2,30}(:[a-z0-9_]{1,30})?$/.test(String(d.style || ''))) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
         if (kind === 'screen') { const ok = ext.appScreen?.valid(d.target); Object.assign(out, ok ? (ext.appScreen.place?.clean(d) || {}) : {}, {target: ok ? String(d.target) : 'module:carte', personName: str(d.personName, 120), personId: Number(d.personId) || 0, height: Math.max(240, Math.min(2000, Number(d.height) || 560)), sidebar: !!d.sidebar}); }
         if (kind === 'appstat') Object.assign(out, {statType: APP_STATS.some(([k]) => k === d.statType) ? d.statType : 'surnames', statFrom: str(d.statFrom, 40).trim(), statTo: str(d.statTo, 40).trim(),
-            statGender: ['male', 'female', 'unknown'].includes(d.statGender) ? d.statGender : '', statLineage: !!d.statLineage, limit: Math.max(1, Math.min(60, Number(d.limit) || 10)), style: CHART_STYLES.some(([k]) => k === d.style) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
+            statGender: ['male', 'female', 'unknown'].includes(d.statGender) ? d.statGender : '', statLineage: !!d.statLineage, limit: Math.max(1, Math.min(60, Number(d.limit) || 10)), style: (CHART_STYLES.some(([k]) => k === d.style) || /^dg:[a-z0-9_]{2,30}(:[a-z0-9_]{1,30})?$/.test(String(d.style || ''))) ? d.style : 'bars', skipEmpty: d.skipEmpty !== false,
             palette: [...Object.keys(PALETTES), 'accent'].includes(d.palette) ? d.palette : 'vive', accentColor: color(d.accentColor) || '#0066cc',
             valueColors: Object.fromEntries(Object.entries(d.valueColors && typeof d.valueColors === 'object' ? d.valueColors : {}).filter(([k, v]) => color(v)).slice(0, 80).map(([k, v]) => [str(k, 80), v]))});
         if (kind !== 'app') out.caption = str(d.caption, 400);
@@ -1096,6 +1099,8 @@
         return cleanDef({...w, id: newId(), name: w.name || 'Widget importé'});
     }
     ext.cleanWidgetDef = d => cleanDef(d); // pour les tests
+    /** une statistique reçue (fichier .lcnda-widget.json) : rangée dans « Mes statistiques » ; rend sa clé de source pour un diagramme */
+    ext.importCustomStat = json => { const d = importDef(json); d.inStats = true; saveDefs([...defs(), d]); return {key: `my:${d.id}`, name: d.name}; };
     // Ouverts depuis l'Éditeur de blocs (champ « Statistique ») : nouvelle statistique, ou réglage d'une existante
     ext.newStatFor = async () => { mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); chooseStart(S().workspaceToken); };
     ext.editStatFor = async id => { mode = 'stats'; S().maintenanceTab = 'stats_editor'; await A().setModule('maintenance'); try { await loadMeta(); } catch (_) {} const cur = defs().find(x => x.id === id); if (!cur) return; editing = {...baseDef(cur), id: cur.id, _existing: true}; partIndex = -1; renderEditor(++S().workspaceToken); };

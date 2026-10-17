@@ -3579,3 +3579,13 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 .h-rt-mthumb.is-maskoff{position:relative}.h-rt-mthumb.is-maskoff::after{content:'';position:absolute;inset:0;background:linear-gradient(to top right,transparent 46%,#e02020 46% 54%,transparent 54%),linear-gradient(to bottom right,transparent 46%,#e02020 46% 54%,transparent 54%)}
 .h-rt-mthumb.is-shown{outline:2px solid #e02020}
 .h-tbcfg-ws{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 20px;background:var(--soft,#f2f3f6);border-bottom:1px solid var(--line,#d0d4dc)}.h-tbcfg-ws select{min-width:180px}
+/* 📊 Types de diagrammes, import, image → chiffres */
+.h-dk-group{border:1px solid var(--line,#d0d4dc);border-radius:10px;padding:8px 10px;margin:8px 0;background:var(--panel,#fff)}.h-dk-group header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.h-dk-group ol{list-style:none;margin:0;padding:0}.h-dk-group li{display:flex;align-items:center;gap:8px;padding:3px 0;border-top:1px dashed var(--line,#e2e5ea)}.h-dk-group li label{flex:1;margin:0}.h-dk-mv{display:inline-flex;gap:2px}.h-dk-group select{max-width:170px}
+.h-dk-dlg{width:min(820px,96vw)}.h-dk-body{padding:0 20px;max-height:70vh;overflow:auto}
+.h-dgi-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.h-dgi-tabs button{border:1px solid var(--line,#d0d4dc);background:var(--panel,#fff);border-radius:8px;padding:5px 10px;cursor:pointer;font:inherit}.h-dgi-tabs button.active{background:var(--accent,#0066cc);color:#fff}
+.h-dgi textarea{width:100%;font-family:ui-monospace,monospace}.h-dgi-list{max-height:260px;overflow:auto;padding-left:18px}.h-dgi-imgs{display:flex;flex-wrap:wrap;gap:6px}.h-dgi-imgs button{border:1px solid var(--line,#d0d4dc);border-radius:6px;padding:2px;background:#fff;cursor:pointer}.h-dgi-imgs img{height:90px;display:block}
+.h-dgi-howto{margin-top:10px}.h-dgi-howto summary{cursor:pointer;color:var(--accent,#0066cc)}
+.h-dgz{width:min(1100px,96vw)}.h-dgz-body{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:14px;padding:0 20px;max-height:72vh;overflow:auto}.h-dgz-img canvas{max-width:100%;border:1px solid var(--line,#d0d4dc)}.h-dgz-side label{display:flex;flex-direction:column;gap:3px;margin-bottom:6px}.h-dgz-table input{width:100%}.h-dgz-table input[type=color]{width:40px;padding:0}
+.h-cw-dg svg{width:100%;height:auto;max-height:520px}
+.h-dk-form{display:flex;flex-direction:column;gap:8px}.h-dk-form label:not(.checkbox-line){display:flex;flex-direction:column;gap:3px}
