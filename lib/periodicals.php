@@ -180,3 +180,94 @@ function reorder_periodical_articles(PDO $pdo, array $data): array
     foreach (array_values(array_map('intval', is_array($data['ids'] ?? null) ? $data['ids'] : [])) as $k => $aid) { $u->execute([$k + 1, $aid, safe_int($data['issue_id'] ?? 0)]); }
     return ['ok' => true];
 }
+
+/* ═══════════════ ✉️ Petites annonces et courriers aux journaux ═══════════════
+ * Des règles de tarif par journal (au mot, à la ligne, au caractère, au forfait ; minimum, mots gratuits, options,
+ * parutions, TVA…), lues si on veut sur une capture d'écran (OCR dans l'écran, corrigeable), et des annonces :
+ * texte, prix calculé, où on en est (brouillon, envoyée, publiée, réponses), captures, personnes, enquêtes, étiquettes. */
+const PRESS_AD_KINDS = ['annonce' => 'Petite annonce', 'recherche' => 'Avis de recherche', 'question' => 'Question généalogique / entraide', 'courrier' => 'Courrier des lecteurs',
+    'article' => 'Article, témoignage', 'communique' => 'Communiqué (association, réunion)', 'remerciements' => 'Remerciements, avis', 'autre' => 'Autre'];
+const PRESS_AD_STATUSES = ['draft' => 'Brouillon', 'ready' => 'Prête à envoyer', 'sent' => 'Envoyée', 'published' => 'Publiée', 'answered' => 'Réponses reçues', 'closed' => 'Terminée', 'refused' => 'Refusée'];
+const PRESS_AD_DATA_KEYS = ['options', 'insertions', 'sent_date', 'publish_date', 'issue_ref', 'cost_estimate', 'cost_paid', 'payment', 'answers', 'contact', 'notes', 'title_line'];
+const PRESS_RULE_KEYS = ['unit', 'price', 'member_price', 'chars_per_line', 'count_spaces', 'free_units', 'min_units', 'min_price', 'max_units', 'fixed_fee', 'title_price', 'bold_price', 'photo_price',
+    'box_price', 'domiciliation_price', 'web_price', 'discount_from', 'discount_pct', 'tax_pct', 'tax_included', 'deadline', 'send_to', 'payment', 'other'];
+
+function press_ads_ensure(PDO $pdo): void
+{
+    static $done = false;
+    if ($done) { return; }
+    periodicals_ensure($pdo);
+    $pdo->exec("CREATE TABLE IF NOT EXISTS press_ad_rules (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL DEFAULT '', periodical_id INTEGER NOT NULL DEFAULT 0, rules_json TEXT NOT NULL DEFAULT '{}',
+        source_text TEXT NOT NULL DEFAULT '', notes TEXT NOT NULL DEFAULT '', updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS press_ads (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL DEFAULT '', kind TEXT NOT NULL DEFAULT 'annonce', rules_id INTEGER NOT NULL DEFAULT 0,
+        periodical_id INTEGER NOT NULL DEFAULT 0, journal TEXT NOT NULL DEFAULT '', body TEXT NOT NULL DEFAULT '', status TEXT NOT NULL DEFAULT 'draft', data_json TEXT NOT NULL DEFAULT '{}',
+        created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+    $done = true;
+}
+
+function press_ads_all(PDO $pdo): array
+{
+    press_ads_ensure($pdo);
+    $rules = array_map(static function ($r) { $r['id'] = (int) $r['id']; $r['periodical_id'] = (int) $r['periodical_id']; $r['rules'] = json_decode((string) $r['rules_json'], true) ?: []; unset($r['rules_json']); return $r; },
+        $pdo->query('SELECT * FROM press_ad_rules ORDER BY name COLLATE NOCASE, id')->fetchAll());
+    $ads = array_map(static function ($r) { $r['id'] = (int) $r['id']; $r['rules_id'] = (int) $r['rules_id']; $r['periodical_id'] = (int) $r['periodical_id']; $r['data'] = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']); return $r; },
+        $pdo->query('SELECT * FROM press_ads ORDER BY updated_at DESC, id DESC')->fetchAll());
+    $links = [];
+    foreach ($pdo->query("SELECT pl.item_id, pl.entity_type, pl.entity_id, CASE pl.entity_type WHEN 'person' THEN trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) ELSE i.title END AS name
+        FROM periodical_links pl LEFT JOIN persons p ON pl.entity_type='person' AND p.id=pl.entity_id LEFT JOIN investigations i ON pl.entity_type='investigation' AND i.id=pl.entity_id WHERE pl.item_type='ad'") as $l) {
+        if ($l['name'] !== null) { $links[(int) $l['item_id']][] = ['type' => $l['entity_type'], 'id' => (int) $l['entity_id'], 'name' => $l['name'] !== '' ? $l['name'] : 'Sans nom']; }
+    }
+    $media = heritage_media($pdo, 'press_ad', array_column($ads, 'id'));
+    foreach ($ads as &$a) { $a['links'] = $links[$a['id']] ?? []; $a['labels'] = labels_for_entity($pdo, 'press_ad', $a['id']); $a['media'] = $media[$a['id']] ?? []; }
+    unset($a);
+    $periodicals = $pdo->query('SELECT id, title FROM periodicals ORDER BY title COLLATE NOCASE')->fetchAll();
+    return ['ads' => $ads, 'rules' => $rules, 'periodicals' => $periodicals, 'kinds' => PRESS_AD_KINDS, 'statuses' => PRESS_AD_STATUSES];
+}
+
+function save_press_ad_rules(PDO $pdo, array $data): array
+{
+    press_ads_ensure($pdo);
+    $id = safe_int($data['id'] ?? 0);
+    $name = mb_substr(safe_text($data['name'] ?? ''), 0, 200);
+    if ($name === '') { throw new RuntimeException('Donne un nom à ces règles (le journal, la rubrique).'); }
+    $raw = is_array($data['rules'] ?? null) ? $data['rules'] : [];
+    $rules = [];
+    foreach (PRESS_RULE_KEYS as $k) { if (isset($raw[$k]) && is_scalar($raw[$k]) && trim((string) $raw[$k]) !== '') { $rules[$k] = mb_substr(trim((string) $raw[$k]), 0, 2000); } }
+    $vals = [$name, safe_int($data['periodical_id'] ?? 0), json_encode($rules, JSON_UNESCAPED_UNICODE) ?: '{}', mb_substr((string) ($data['source_text'] ?? ''), 0, 20000), h_long($data, 'notes', 4000)];
+    if ($id) { $u = $pdo->prepare('UPDATE press_ad_rules SET name=?, periodical_id=?, rules_json=?, source_text=?, notes=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $u->execute([...$vals, $id]); if (!$u->rowCount()) { throw new RuntimeException('Règles introuvables.'); } }
+    else { $pdo->prepare('INSERT INTO press_ad_rules(name, periodical_id, rules_json, source_text, notes) VALUES(?,?,?,?,?)')->execute($vals); $id = (int) $pdo->lastInsertId(); }
+    return ['id' => $id];
+}
+
+function save_press_ad(PDO $pdo, array $data): array
+{
+    press_ads_ensure($pdo);
+    $id = safe_int($data['id'] ?? 0);
+    $title = mb_substr(safe_text($data['title'] ?? ''), 0, 200) ?: 'Annonce sans titre';
+    $raw = is_array($data['data'] ?? null) ? $data['data'] : [];
+    $d = [];
+    foreach (PRESS_AD_DATA_KEYS as $k) { if (!isset($raw[$k])) { continue; } if ($k === 'options' && is_array($raw[$k])) { $d[$k] = array_values(array_intersect(array_map('strval', $raw[$k]), ['title', 'bold', 'photo', 'box', 'domiciliation', 'web', 'member'])); } elseif (is_scalar($raw[$k]) && trim((string) $raw[$k]) !== '') { $d[$k] = mb_substr(trim((string) $raw[$k]), 0, 8000); } }
+    $vals = [$title, array_key_exists((string) ($data['kind'] ?? ''), PRESS_AD_KINDS) ? (string) $data['kind'] : 'annonce', safe_int($data['rules_id'] ?? 0), safe_int($data['periodical_id'] ?? 0),
+        mb_substr(safe_text($data['journal'] ?? ''), 0, 200), mb_substr((string) ($data['body'] ?? ''), 0, 20000), array_key_exists((string) ($data['status'] ?? ''), PRESS_AD_STATUSES) ? (string) $data['status'] : 'draft',
+        json_encode($d, JSON_UNESCAPED_UNICODE) ?: '{}'];
+    if ($id) { $u = $pdo->prepare('UPDATE press_ads SET title=?, kind=?, rules_id=?, periodical_id=?, journal=?, body=?, status=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $u->execute([...$vals, $id]); if (!$u->rowCount()) { throw new RuntimeException('Annonce introuvable.'); } }
+    else { $pdo->prepare('INSERT INTO press_ads(title, kind, rules_id, periodical_id, journal, body, status, data_json) VALUES(?,?,?,?,?,?,?,?)')->execute($vals); $id = (int) $pdo->lastInsertId(); }
+    $pdo->prepare("DELETE FROM periodical_links WHERE item_type='ad' AND item_id=?")->execute([$id]);
+    $ins = $pdo->prepare("INSERT OR IGNORE INTO periodical_links(item_type, item_id, entity_type, entity_id) VALUES('ad',?,?,?)");
+    foreach (['person' => 'persons', 'investigation' => 'investigations'] as $entity => $key) { foreach (array_unique(array_filter(array_map('intval', is_array($data[$key] ?? null) ? $data[$key] : []))) as $eid) { $ins->execute([$id, $entity, $eid]); } }
+    if (array_key_exists('label_ids', $data)) { set_label_links($pdo, ['entity_type' => 'press_ad', 'entity_id' => $id, 'label_ids' => is_array($data['label_ids']) ? $data['label_ids'] : []]); }
+    log_change($pdo, 'meta', 0, 'update', 'Annonce enregistrée : ' . $title);
+    return ['id' => $id];
+}
+
+function delete_press_item(PDO $pdo, array $data): array
+{
+    press_ads_ensure($pdo);
+    $id = safe_int($data['id'] ?? 0);
+    if (($data['what'] ?? '') === 'rules') { $pdo->prepare('DELETE FROM press_ad_rules WHERE id=?')->execute([$id]); $pdo->prepare('UPDATE press_ads SET rules_id=0 WHERE rules_id=?')->execute([$id]); return ['ok' => true]; }
+    heritage_delete_media_links($pdo, 'press_ad', $id);
+    $pdo->prepare("DELETE FROM label_links WHERE entity_type='press_ad' AND entity_id=?")->execute([$id]);
+    $pdo->prepare("DELETE FROM periodical_links WHERE item_type='ad' AND item_id=?")->execute([$id]);
+    $pdo->prepare('DELETE FROM press_ads WHERE id=?')->execute([$id]);
+    return ['ok' => true];
+}

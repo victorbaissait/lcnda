@@ -3055,3 +3055,25 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-pr-lsugg button{border:0;background:none;text-align:left;padding:6px 10px;cursor:pointer}.h-pr-lsugg button:hover{background:#eef5ff}
 .h-pr-arts{border-top:var(--line);margin-top:14px;padding-top:10px}.h-pr-arts h3{margin:0 0 8px}
 .h-pr-arts ol{margin:0 0 10px;padding-left:22px;display:grid;gap:4px}.h-pr-arts li{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.h-pr-arts li span{margin-left:auto;display:flex;gap:2px}
+
+/* ✉️ Petites annonces */
+.h-pa h3 { margin: 1.4rem 0 .6rem; }
+.h-pa-ocr { border: 1px dashed var(--line, #ccc); border-radius: 10px; padding: .6rem .9rem; margin: .8rem 0; }
+.h-pa-ocr h4 { margin: 0 0 .3rem; }
+.h-pa-ocrbar { display: flex; gap: .7rem; align-items: center; flex-wrap: wrap; }
+.h-pa-ocr textarea { width: 100%; margin: .4rem 0; }
+.h-pa-rules .is-ocr { background: #fff6bf; outline: 2px solid #e8c95a; }
+.h-pa-tpl { display: flex; flex-wrap: wrap; gap: .35rem; align-items: center; margin: .8rem 0 .4rem; }
+.h-pa-text { display: block; }
+.h-pa-text textarea { width: 100%; font-size: 1rem; }
+.h-pa-calc { margin: .5rem 0 1rem; padding: .6rem .8rem; border-radius: 10px; background: var(--panel-soft, rgba(127,127,127,.08)); }
+.h-pa-counts { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: .4rem; }
+.h-pa-bill { width: 100%; border-collapse: collapse; }
+.h-pa-bill td { padding: .15rem .3rem; border-bottom: 1px solid var(--line, #ddd); }
+.h-pa-bill td:last-child { text-align: right; white-space: nowrap; }
+.h-pa-bill .is-total td { font-weight: 700; border-bottom: 0; font-size: 1.05rem; }
+.h-pa-opts { display: flex; flex-wrap: wrap; gap: .3rem 1rem; border: 1px solid var(--line, #ddd); border-radius: 10px; }
+.h-pa-opts input[type=number] { width: 4.5rem; }
+.h-pa-draft { background: #eee; } .h-pa-ready { background: #e3f0ff; } .h-pa-sent { background: #fff1d6; } .h-pa-published { background: #dff5e1; }
+.h-pa-answered { background: #d6f0ff; } .h-pa-closed { background: #e8e8e8; } .h-pa-refused { background: #fde0e0; }
+@media (prefers-color-scheme: dark) { .h-pa-rules .is-ocr { background: #4a4214; } [class*="h-pa-"].h-pr-chip { color: #222; } }
