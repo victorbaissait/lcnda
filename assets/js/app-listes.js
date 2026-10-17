@@ -4,9 +4,24 @@
 (() => {
     'use strict';
     const {$, $$, api, archiveDigestOptionLabel, bindEntityLabelsFields, bindTableLinks, budgetCategories, budgetCategoryLabel, censusStatusText, confidenceLabel, courrierCopyFormatLabel, courrierCopyFormats, courrierFilters, courrierOrganismeLabel, courrierOrganismes, courrierStatutLabel, courrierStatuts, debounce, empty, escapeHtml, externalLinks, formObject, keepSosaOutsideClick, labelChip, labelEntityTypesText, labelTextColor, lifeText, listControllerSignal, mediaChronologyKey, mediaTypeShortLabelWithIcon, normalizedMediaType, onOutsideClick, openListReorderDialog, openMediaDuplicatesDialog, openMediaFaceDetectionDialog, orderedListTypes, persistUiState, personName, relationYears, reminderCategories, reminderCategoryLabel, reminderIsPast, renderClosedBranchesList, renderFairsList, renderFamilyMemoriesList, renderFamilyObjectsList, renderPrecisePlacesList, renderSidebar, renewListController, renewSosaSearchController, safeUrl, saveExternalLinks, sidebarSignal, sideButton, sosaRootId, sosaSearchSignal, state, summaryFromState, syncCourrierCopyOrder, toast, typeGlyph, years} = window.LCNDA_APP;
+    /* 🗂 rangées en groupes comme Maintenance (app-sidegroups.js), ou en une seule liste ; « Mes listes » toujours en bas, à part */
+    const LG_DEFAULT = [['g_people', '👥', 'Personnes et familles', ['persons', 'events', 'sosa', 'daboville', 'labels', 'occupations', 'employers', 'pets', 'cited_names', 'languages', 'living_contacts', 'closed_branches']],
+        ['g_places', '📍', 'Lieux et maisons', ['places', 'precise_places', 'villages', 'parishes', 'houses', 'old_maps', 'field_trips']],
+        ['g_docs', '🖼️', 'Médias et documents', ['media', 'audios', 'videos', 'recueils', 'depouillements', 'signatures', 'family_papers', 'family_booklets', 'voter_cards', 'probate', 'coats_of_arms', 'family_objects', 'family_memories']],
+        ['g_sources', '🏛️', 'Archives et sources', ['census', 'census_households', 'archives', 'archive_visits', 'courriers', 'external_links', 'periodicals', 'press_ads']],
+        ['g_history', '📜', 'Histoire', ['historical_context', 'poilus_list', 'resistance_list', 'voyages_list', 'placements_list']],
+        ['g_research', '🔎', 'Recherche et organisation', ['reminders', 'my_calendar', 'genea_calendar', 'research_budget', 'help_requests', 'fairs', 'investigations_list', 'battues_list']],
+        ['g_create', '🛠️', 'Créer et raconter', ['edit_tools', 'atelier_list', 'boards_list', 'topic_sheets_list', 'layout_books']]];
+    const listKeysAll = () => orderedListTypes(true).map(r => r[0]);
+    const LG = window.LCNDA_SIDEGROUPS({name: 'listes', panelTitle: 'Ordre des listes', key: 'genealogie-list-groups', defaults: LG_DEFAULT, allKeys: listKeysAll, label: k => orderedListTypes(true).find(r => r[0] === k)?.[2] || k, defaultEnabled: true,
+        flatOrder: listKeysAll, flatDefaults: () => (window.LCNDA_APP.defaultListTypes || orderedListTypes(true)).map(r => r[0]),
+        setFlatOrder: keys => { try { localStorage.setItem('genealogie-list-order', JSON.stringify(keys)); } catch (_) {} },
+        canHide: true, hidden: () => { try { return JSON.parse(localStorage.getItem('genealogie-list-hidden') || '[]'); } catch (_) { return []; } }, setHidden: keys => { try { localStorage.setItem('genealogie-list-hidden', JSON.stringify(keys)); } catch (_) {} },
+        mine: () => window.LCNDA_EXT?.extraListTypes?.() || [], mineKey: 'genealogie-mylists-order',
+        current: () => state.listType, eyebrow: 'LISTES', what: 'listes', searchPh: 'Chercher une liste…'});
     function renderListSidebar(content,footer){
-        const items=orderedListTypes(),mine=window.LCNDA_EXT?.extraListTypes?.()||[];
-        content.innerHTML=`<div class="side-menu">${items.map(([v,i,l])=>sideButton(v,i,l,state.listType)).join('')}${mine.length?`<span class="side-menu-sep">Mes listes</span>${mine.map(([v,i,l])=>sideButton(escapeHtml(v),escapeHtml(i),escapeHtml(l),state.listType)).join('')}`:''}</div>`;footer.innerHTML='<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="list-reorder" title="Changer l’ordre des listes du menu">Réordonner</button></div><small class="muted">Recherche et export des données</small>';$('#list-reorder')?.addEventListener('click',openListReorderDialog,{signal:sidebarSignal()});
+        LG.render(content, sidebarSignal());
+        footer.innerHTML='<div class="dashboard-footer-actions"><button class="button small secondary" type="button" id="list-reorder" title="En groupes ou en une seule liste, l’ordre, ce qui s’affiche, Mes listes">Réordonner</button></div><small class="muted">Recherche et export des données</small>';$('#list-reorder')?.addEventListener('click',()=>LG.openDialog(),{signal:sidebarSignal()});
         content.addEventListener('click',async event=>{const item=event.target.closest('[data-side-value]');if(item){state.listType=item.dataset.sideValue;state.precisePlaceKey='';renderSidebar();await renderList();}},{signal:sidebarSignal()});
     }
     const LIST_CARD_TYPES=['persons','events','places','media','census','reminders','research_budget','signatures','sosa','daboville','archives','external_links','courriers','changes'];
