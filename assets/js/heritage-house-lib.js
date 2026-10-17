@@ -453,7 +453,7 @@
         ext.openDialog({eyebrow: 'MAISON · MOBILIER', title: '⚙️ Ranger le mobilier', submitLabel: 'Enregistrer', wide: true,
             body: `<p class="muted">Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie.</p><div class="h-hs-arr"><section><h4>Catégories</h4><ol class="h-pet-layout" data-cats>${work.cats.map(c => row(c, esc(c), !work.hiddenCats.includes(c))).join('')}</ol></section>
                 <section><h4>Objets de <select data-cur>${work.cats.filter(c => c !== MINE || libIn(MINE).length).map(c => `<option ${c === cur ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></h4><div class="h-hs-arrb"><button type="button" class="button small secondary" data-all="1">Tout cocher</button><button type="button" class="button small secondary" data-all="0">Tout décocher</button></div><ol class="h-pet-layout" data-items>${itemsHtml()}</ol></section></div>
-                <button type="button" class="button small secondary" data-reset>Tout remettre comme au départ</button>`,
+                <button type="button" class="button small secondary" data-reset>↺ Remettre comme au départ</button>`,
             onOpen: dg => {
                 dg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const li = b.closest('[data-k]');
                     if (b.hasAttribute('data-up')) li?.previousElementSibling?.before(li); else if (b.hasAttribute('data-down')) li?.nextElementSibling?.after(li);

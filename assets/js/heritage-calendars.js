@@ -197,7 +197,7 @@
                     <label class="checkbox-line"><input type="checkbox" name="groupOthers" ${p.groupOthers ? 'checked' : ''}> Regrouper les autres sortes d’événements (métier, résidence…) sous « 📌 Autres événements »</label>` : `<label class="checkbox-line"><input type="checkbox" name="showDone" ${p.showDone !== false ? 'checked' : ''}> Montrer ce qui est fait ou passé</label>`}</fieldset>
                 <fieldset class="h-rc-modes"><legend>Sous chaque jour, la date dans ces calendriers</legend><div class="h-cal-altpick">${alts.map(([t, n]) => `<label class="checkbox-line"><input type="checkbox" name="alt" value="${t}" ${p.alt.includes(t) ? 'checked' : ''}> ${esc(n)}</label>`).join('')}</div></fieldset>
                 <fieldset class="h-rc-modes"><legend>Couleurs</legend><div class="h-cal-colors">${groupsOf(key).map(([g, l]) => `<label><input type="color" name="color_${g}" value="${colorOf(key, p, g)}"> ${esc(l)}</label>`).join('')}</div></fieldset>
-                <button type="button" class="button small secondary" data-cal-reset>↺ Tout remettre comme au départ</button>`,
+                <button type="button" class="button small secondary" data-cal-reset>↺ Remettre comme au départ</button>`,
             onOpen: d => d.querySelector('[data-cal-reset]').addEventListener('click', () => { if (!confirm('Remettre tous les réglages de ce calendrier comme au départ ?')) return; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); savePrefs(key, p); d.close(); after(); }),
             onSubmit: form => {
                 const fd = new FormData(form);

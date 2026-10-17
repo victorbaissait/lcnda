@@ -306,7 +306,7 @@
             return `<h4>${title}</h4><p class="muted">${help}</p>${cats().map(c => `<details ${c.items.some(([k]) => on.includes(k)) ? 'open' : ''}><summary>${esc(c.label)}</summary><div class="h-village-maps-grid">${c.items.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" data-am-fav="${which}" value="${esc(k)}" ${on.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</div></details>`).join('')}`; };
         return `<section class="person-block-config" id="h-addrmap-config"><header><span class="eyebrow">PLAN DU RECENSEMENT</span><h3>Fonds de carte du plan des adresses</h3><p>Dépouillements (onglet « Plan ») et fiche d’un village : les fonds cochés viennent en premier dans les menus ; le premier coché est celui de départ. Tous les autres restent dans les menus, par catégorie.</p></header>
             ${part('old', '🕰️ Carte ancienne (par-dessus)', 'Cassini, État-major, cartes et photos de 1950…')}${part('now', '🗺️ Aujourd’hui (dessous)', 'Plan, photo aérienne, carte hors ligne…')}
-            <p><button type="button" class="link-button" data-am-favreset>Revenir aux fonds proposés au départ</button></p></section>`;
+            <p><button type="button" class="link-button" data-am-favreset>↺ Remettre comme au départ</button></p></section>`;
     });
     ext.afterDesign.push(() => {
         const box = document.getElementById('h-addrmap-config');
