@@ -3578,3 +3578,4 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 .h-rt-node.is-clipbase [data-rt-lname]{text-decoration:underline;text-underline-offset:3px}
 .h-rt-mthumb.is-maskoff{position:relative}.h-rt-mthumb.is-maskoff::after{content:'';position:absolute;inset:0;background:linear-gradient(to top right,transparent 46%,#e02020 46% 54%,transparent 54%),linear-gradient(to bottom right,transparent 46%,#e02020 46% 54%,transparent 54%)}
 .h-rt-mthumb.is-shown{outline:2px solid #e02020}
+.h-tbcfg-ws{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 20px;background:var(--soft,#f2f3f6);border-bottom:1px solid var(--line,#d0d4dc)}.h-tbcfg-ws select{min-width:180px}

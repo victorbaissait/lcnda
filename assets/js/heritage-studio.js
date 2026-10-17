@@ -320,6 +320,10 @@
         const dir = ['+', '='].includes(e.key) ? 1 : e.key === '-' ? -1 : e.key === '0' ? 0 : null; if (dir === null) return;
         if (ext.editorZoom(dir)) e.preventDefault();
     }, true);
+    // espaces de travail : les mêmes « ensembles » que Maintenance → Montage, retouche… (genealogie-toolbar-sets = {éditeur: [{name, date, v}]})
+    const WS_KEY = 'genealogie-toolbar-sets';
+    const wsList = id => { try { const v = JSON.parse(localStorage.getItem(WS_KEY) || '{}')?.[id]; return Array.isArray(v) ? v.filter(x => x && x.name && x.v) : []; } catch (_) { return []; } };
+    const wsSave = (id, list) => { try { const all = JSON.parse(localStorage.getItem(WS_KEY) || '{}') || {}; all[id] = list; localStorage.setItem(WS_KEY, JSON.stringify(all)); } catch (_) { toast('Plus de place pour enregistrer : supprime un espace de travail.', 'error'); } };
     ext.tbButton = id => `<button type="button" class="button small secondary" data-tb-config="${esc(id)}" title="Ranger, montrer ou cacher les boutons et les options">⚙️ Personnaliser</button>`;
     document.addEventListener('click', e => {
         const b = e.target.closest?.('[data-tb-config]'); if (!b) return;
@@ -329,7 +333,8 @@
         const rows = g => tbKids(g).map(el => `<li class="h-pet-lrow" data-k="${esc(tbKeyOf(el))}"><input type="checkbox" ${el.classList.contains('is-tb-off') ? '' : 'checked'} title="Montrer"><span>${esc(tbLabel(el))}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('');
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-tbcfg';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">PERSONNALISER</span><h2>⚙️ Boutons et options</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-tbcfg-body"><p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois.</p>${groups.map(g => `<section><h4>${esc(g.dataset.tbgLabel || g.dataset.tbg)}</h4><ol class="h-pet-layout" data-g="${esc(g.dataset.tbg)}">${rows(g)}</ol></section>`).join('')}</div>
+            <div class="h-tbcfg-ws" data-ws><strong>🗂️ Espace de travail</strong><select data-ws-pick aria-label="Espace de travail"><option value="">— la disposition actuelle —</option>${wsList(id).map((x, i) => `<option value="${i}">${esc(x.name)}</option>`).join('')}</select><button type="button" class="button small secondary" data-ws-apply>Appliquer</button><button type="button" class="button small secondary" data-ws-save>＋ Enregistrer comme espace de travail…</button><button type="button" class="button small secondary" data-ws-del>Supprimer</button></div>
+            <div class="h-tbcfg-body"><p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). Gardé pour la prochaine fois. Comme les espaces de travail de Photoshop : enregistre une disposition sous un nom (« Restauration », « Montage rapide »…) et passe de l’une à l’autre.</p>${groups.map(g => `<section><h4>${esc(g.dataset.tbgLabel || g.dataset.tbg)}</h4><ol class="h-pet-layout" data-g="${esc(g.dataset.tbg)}">${rows(g)}</ol></section>`).join('')}</div>
             <div class="modal-actions"><button type="button" class="button secondary" data-reset>Tout remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Annuler</button><button type="button" class="button" data-ok>Enregistrer</button></div>`;
         (b.closest('dialog') || document.body).appendChild(dlg);
         dlg.addEventListener('click', ev => {
@@ -338,6 +343,13 @@
             if (ev.target.closest('[data-down]') && li.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
             if (ev.target.closest('[data-x]')) dlg.close();
             if (ev.target.closest('[data-reset]')) { const all = tbAll(); delete all[id]; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} toast('Boutons remis comme au départ (rouvre la fenêtre pour retrouver l’ordre de départ).'); root.querySelectorAll('.is-tb-off').forEach(x => x.classList.remove('is-tb-off')); dlg.close(); }
+            const cur = () => { const c = {order: {}, hidden: {}}; dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; c.order[ol.dataset.g] = lis.map(l => l.dataset.k); c.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); }); return c; };
+            const picked = () => { const i = dlg.querySelector('[data-ws-pick]').value; return i === '' ? null : wsList(id)[Number(i)]; };
+            if (ev.target.closest('[data-ws-apply]')) { const x = picked(); if (!x) return toast('Choisis un espace de travail.'); const all = tbAll(); all[id] = x.v; try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); toast(`Espace de travail « ${x.name} » appliqué.`); dlg.close(); return; }
+            if (ev.target.closest('[data-ws-del]')) { const x = picked(); if (!x || !confirm(`Supprimer l’espace de travail « ${x.name} » ?`)) return; wsSave(id, wsList(id).filter(y => y.name !== x.name)); const sel = dlg.querySelector('[data-ws-pick]'); sel.querySelector(`option[value="${sel.value}"]`)?.remove(); sel.value = ''; toast('Supprimé.'); return; }
+            if (ev.target.closest('[data-ws-save]')) { (async () => { const name = String((await A().askText?.({title: 'Espace de travail', message: 'Nom de cet espace de travail (boutons montrés et leur ordre) :', value: '', okLabel: 'Enregistrer'})) ?? '').trim().slice(0, 60); if (!name) return;
+                const list = wsList(id).filter(y => y.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: cur()}); wsSave(id, list.slice(-60));
+                const all = tbAll(); all[id] = cur(); try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); toast(`Espace de travail « ${name} » enregistré (aussi dans Maintenance → Montage, retouche, mise en page et son).`); dlg.close(); })(); return; }
             if (ev.target.closest('[data-ok]')) {
                 const cfg = {order: {}, hidden: {}};
                 dlg.querySelectorAll('[data-g]').forEach(ol => { const lis = [...ol.children]; cfg.order[ol.dataset.g] = lis.map(l => l.dataset.k); cfg.hidden[ol.dataset.g] = lis.filter(l => !l.querySelector('input').checked).map(l => l.dataset.k); });
