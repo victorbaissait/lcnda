@@ -419,14 +419,16 @@
     /* ═════════ 🌳 Lignées Y, mt, X ═════════ */
     RENDER.lines = {html() {
         const f = filt(), pid = Number(f.linePerson) || data.kits.find(k => k.person_id)?.person_id || Number(S().currentPersonId) || 0;
+        // le nom de la personne (jamais un numéro) : celui choisi, celui d'un test, ou celui de la fiche ouverte
+        const cp = S().currentPerson?.person, pname = (Number(f.linePerson) === pid && f.linePersonName && !/^#\d+$/.test(f.linePersonName) ? f.linePersonName : '') || data.kits.find(k => k.person_id === pid)?.person_name || (cp && Number(cp.id) === pid ? A().personName(cp) : '');
         return `${header('ADN', '🌳 Lignées Y, mt et X', 'D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X.')}
-            <div class="h-dna-filters"><label>Personne${A().collectionPersonField('dna_lp', pid ? {id: pid, first_name: f.linePersonName || '#' + pid, last_name: ''} : null, 'Choisis une personne…')}</label><label>Générations<input type="number" min="1" max="14" value="${esc(f.lineDepth || 10)}" data-dna-ld></label><button type="button" class="button small" data-dna-lgo>Afficher</button></div>
+            <div class="h-dna-filters"><label>Personne${A().collectionPersonField('dna_lp', pid ? {id: pid, first_name: pname || '…', last_name: ''} : null, 'Tape un nom, un prénom…')}</label><label>Générations<input type="number" min="1" max="14" value="${esc(f.lineDepth || 10)}" data-dna-ld></label><button type="button" class="button small" data-dna-lgo>Afficher</button></div>
             <div class="h-dna-lines" data-dna-lines>${pid ? '<p class="muted">Calcul…</p>' : '<p class="muted">Choisis une personne.</p>'}</div>`;
     }, async bind(root) {
         A().bindCollectionPersonFields(root);
         const f = filt(); root.querySelector('[data-dna-lgo]').addEventListener('click', () => { f.linePerson = Number(root.querySelector('[name=dna_lp]').value) || f.linePerson; f.linePersonName = root.querySelector('[data-cp-input="dna_lp"]').value; f.lineDepth = Number(root.querySelector('[data-dna-ld]').value) || 10; go('lines'); });
         const pid = Number(f.linePerson) || data.kits.find(k => k.person_id)?.person_id || Number(S().currentPersonId) || 0; if (!pid) return;
-        let r; try { r = await api('dna_lines', {person_id: pid, depth: f.lineDepth || 10}); } catch (e) { root.querySelector('[data-dna-lines]').innerHTML = `<p class="h-dna-warn">${esc(e.message)}</p>`; return; }
+        let r; try { r = await api('dna_lines', {person_id: pid, depth: f.lineDepth || 10}); const inp = root.querySelector('[data-cp-input="dna_lp"]'); if (inp && r.person && (!inp.value || inp.value === '…' || /^#\d+$/.test(inp.value))) { inp.value = A().personName(r.person); } } catch (e) { root.querySelector('[data-dna-lines]').innerHTML = `<p class="h-dna-warn">${esc(e.message)}</p>`; return; }
         const pl = p => `<li><span class="h-dna-gen">G${p.gen}</span> <button type="button" class="table-link" data-open-person="${p.id}">${esc(p.name || '?')}</button> <small class="muted">${esc([p.birth, p.death].filter(Boolean).map(d => String(d).slice(0, 4)).join('–'))}</small>${haplo(p.id)}</li>`;
         const haplo = id => { const k = data.kits.filter(x => x.person_id === id); return k.length ? ` <span class="h-dna-hap">${k.map(x => [x.haplo_y && 'Y ' + x.haplo_y, x.haplo_mt && 'mt ' + x.haplo_mt].filter(Boolean).join(' · ')).filter(Boolean).join(' / ')}</span>` : ''; };
         const male = r.person.gender === 'male';
@@ -478,10 +480,23 @@
             p.order = [...root.querySelectorAll('[data-dna-order] .h-dna-orow')].map(r => r.dataset.k); p.hidden = [...root.querySelectorAll('[data-dna-order] .h-dna-orow')].filter(r => !r.querySelector('input').checked).map(r => r.dataset.k);
             p.columns = [...root.querySelectorAll('[data-dna-cols] .h-dna-orow')].filter(r => r.querySelector('input').checked).map(r => r.dataset.k);
             root.querySelectorAll('[data-p]').forEach(i => { p[i.dataset.p] = num(i.value); }); root.querySelectorAll('[data-c]').forEach(i => { p.colors[i.dataset.c] = i.value; });
-            savePrefs(p); toast('Réglages ADN enregistrés.'); A().renderSidebar?.(); go('settings'); });
-        root.querySelector('[data-dna-reset]').addEventListener('click', () => { if (!confirm('Revenir aux réglages d’origine de l’onglet ADN ?')) return; const ack = p.ack; savePrefs({...DEFAULTS(), ack}); go('settings'); });
+            savePrefs(p); toast('Réglages ADN enregistrés.'); A().renderSidebar?.(); reopenSettings(); });
+        root.querySelector('[data-dna-reset]').addEventListener('click', () => { if (!confirm('Revenir aux réglages d’origine de l’onglet ADN ?')) return; const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
         root.querySelector('[data-dna-json]').addEventListener('click', () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda_dna: 1, exported: new Date().toISOString(), ...data}, null, 1)], {type: 'application/json'})); a.download = 'adn.json'; document.body.appendChild(a); a.click(); a.remove(); });
     }};
+
+    /** les réglages s'ouvrent dans l'onglet ADN ou dans Maintenance : on reste là où on était */
+    const reopenSettings = () => { if (S().module === 'maintenance') A().setModule('maintenance'); else go('settings'); };
+    /* Maintenance → « ADN : affichage et réglages » : exactement le même réglage que l'onglet ADN → ⚙️ Réglages (les deux restent pareils) */
+    ext.maintenance = ext.maintenance || {};
+    ext.maintenance.dna_prefs = async token => {
+        const ws = A().$('#workspace');
+        try { await load(); } catch (_) { data = data || {kits: [], matches: [], groups: [], segments: []}; }
+        if (token !== S().workspaceToken || S().module !== 'maintenance') return;
+        ws.innerHTML = `<section class="page h-dna-page" data-dna-sec="settings">${RENDER.settings.html()}<p class="muted">C’est le même réglage que dans l’onglet ADN → ⚙️ Réglages : le changer ici le change là-bas.${S().bootstrap && !document.querySelector('.nav-item[data-module="adn"]') ? ' L’onglet ADN est caché : Maintenance → Apparence → onglets du haut pour l’afficher.' : ''}</p></section>`;
+        const h2 = ws.querySelector('.h-dna-page h2'); if (h2) h2.textContent = '🧬 ADN : affichage et réglages';
+        RENDER.settings.bind(ws.querySelector('.h-dna-page'));
+    };
 
     /* ═════════ Sur la fiche d'une personne ═════════ */
     ext.personBlocks = ext.personBlocks || {};
