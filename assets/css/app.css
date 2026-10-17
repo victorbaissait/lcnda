@@ -3942,6 +3942,25 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 :root[data-hidden-rows="dim"] .dashboard-reorder-row.is-hidden-row b{text-decoration:line-through}
 :root[data-hidden-rows="keep"] .dashboard-reorder-row.is-hidden-row b,:root[data-hidden-rows="keep"] .dashboard-reorder-row.is-hidden-row .order-number{text-decoration:none}
 .h-hr-panel{display:grid;gap:8px;max-width:520px}.h-hr-level{display:flex;align-items:center;gap:10px}.h-hr-level input{flex:1}.h-hr-demo{display:grid;gap:6px;margin-top:6px}.h-hr-demo .order-row{display:flex!important;align-items:center;gap:8px;padding:8px}.h-hr-demo .order-row b{flex:1;text-align:left}
+/* 📰 Faire-part : champs qu'on affiche, masque, range, ajoute */
+.h-fp-fields{align-items:start}
+.h-fp-field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.h-fp-field.is-off{opacity:var(--hidden-row-opacity,.55)}
+.h-fp-field.is-off :is(input[name],textarea){text-decoration:line-through}
+.h-fp-fhead{display:flex;align-items:center;gap:6px;min-width:0;font-size:.92em}
+.h-fp-fhead>b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h-fp-vis{display:flex;margin:0}.h-fp-vis input{margin:0}
+.h-fp-flabel{flex:1;min-width:60px;font-weight:700;padding:2px 8px;min-height:0;height:28px;font-size:inherit}
+.h-fp-ftools{display:flex;gap:3px;align-items:center;margin-left:auto}
+.h-fp-ftools button{min-width:26px;height:26px;padding:0 5px;border:1px solid var(--border,#d6d9df);background:var(--surface,#fff);border-radius:6px;cursor:pointer;color:inherit}
+.h-fp-ftools button:disabled{opacity:.35;cursor:default}
+.h-fp-ftools .h-fp-tg.on{background:#055dff;color:#fff;border-color:#055dff}
+.h-fp-ftools select{height:26px;padding:0 4px;min-height:0;width:auto}
+.h-fp-addrow{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.h-fp-addrow select{width:auto}
+.h-fp-custom{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.h-fp-custom[hidden]{display:none}
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

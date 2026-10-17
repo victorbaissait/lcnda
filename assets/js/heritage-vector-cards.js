@@ -13,8 +13,15 @@
     const n2 = v => Math.round((Number(v) || 0) * 100) / 100;
     let seq = 0; const uid = () => 'c' + Date.now().toString(36) + (++seq).toString(36);
 
-    // formats en pixels (96 ppp)
-    const FORMATS = [['c10', 'Carte 10 × 15 cm', 378, 567], ['a6', 'A6 (10,5 × 14,8 cm)', 397, 559], ['a5', 'A5 (14,8 × 21 cm)', 559, 794], ['sq', 'Carré 14 × 14 cm', 529, 529], ['a4', 'Affiche A4', 794, 1123], ['a3', 'Affiche A3', 1123, 1587]];
+    // formats : en centimètres pour le papier, en pixels pour l'écran (96 ppp) ; « Personnalisé » prend la taille qu'on tape
+    const CM = c => Math.round(c / 2.54 * 96);
+    const FORMATS = [
+        ...[['c10', 'Carte 10 × 15 cm', 10, 15], ['a6', 'A6 (10,5 × 14,8 cm)', 10.5, 14.8], ['c12', 'Carte 12 × 17 cm', 12, 17], ['c13', 'Carte 13 × 18 cm', 13, 18], ['c15', 'Carte 15 × 21 cm', 15, 21], ['a5', 'A5 (14,8 × 21 cm)', 14.8, 21], ['c16', 'Carte 16 × 22 cm', 16, 22]].map(f => [...f, 'Cartes']),
+        ...[['q12', 'Carré 12 × 12 cm', 12, 12], ['sq', 'Carré 14 × 14 cm', 14, 14], ['q15', 'Carré 15 × 15 cm', 15, 15], ['q17', 'Carré 17 × 17 cm', 17, 17], ['q21', 'Carré 21 × 21 cm', 21, 21]].map(f => [...f, 'Carrés']),
+        ...[['dl', 'Allongé DL 10 × 21 cm', 10, 21], ['l11', 'Allongé 11 × 22 cm', 11, 22], ['menu', 'Menu 10 × 25 cm', 10, 25], ['mp', 'Marque-page 5 × 15 cm', 5, 15], ['bd', 'Bandeau 21 × 7 cm (marque-place, ruban)', 21, 7]].map(f => [...f, 'Allongés']),
+        ...[['a4', 'Affiche A4 (21 × 29,7 cm)', 21, 29.7], ['a3', 'Affiche A3 (29,7 × 42 cm)', 29.7, 42], ['p40', 'Affiche 40 × 60 cm', 40, 60], ['a2', 'Affiche A2 (42 × 59,4 cm)', 42, 59.4], ['p50', 'Affiche 50 × 70 cm', 50, 70], ['a1', 'Affiche A1 (59,4 × 84,1 cm)', 59.4, 84.1], ['p60', 'Affiche 60 × 80 cm', 60, 80]].map(f => [...f, 'Affiches']),
+    ].map(([k, l, w, h, g]) => [k, l, CM(w), CM(h), g]).concat([['ig', 'Carré (1080 × 1080 px)', 1080, 1080, 'Écran et réseaux'], ['st', 'Story, portable (1080 × 1920 px)', 1080, 1920, 'Écran et réseaux'], ['fb', 'Publication large (1200 × 630 px)', 1200, 630, 'Écran et réseaux'], ['ml', 'Courriel (600 × 800 px)', 600, 800, 'Écran et réseaux'], ['tv', 'Écran 16:9 (1920 × 1080 px)', 1920, 1080, 'Écran et réseaux']]);
+    const formatOptions = sel => [...new Set(FORMATS.map(f => f[4]))].map(g => `<optgroup label="${esc(g)}">${FORMATS.filter(f => f[4] === g).map(f => `<option value="${f[0]}" ${f[0] === sel ? 'selected' : ''}>${esc(f[1])}</option>`).join('')}</optgroup>`).join('') + `<option value="custom" ${sel === 'custom' ? 'selected' : ''}>✎ Personnalisé (en cm)…</option>`;
     const STYLES = {
         belle: {label: 'Belle Époque (1900)', paper: '#f7f0df', ink: '#3b2a1a', accent: '#8a6a2a', script: '"Snell Roundhand", "Apple Chancery", "Brush Script MT", cursive', serif: 'Didot, "Bodoni 72", Georgia, serif', frame: 'belle'},
         nouveau: {label: 'Art nouveau (1900)', paper: '#f1ecd6', ink: '#2f3b26', accent: '#6f8f4e', script: '"Apple Chancery", "Brush Script MT", cursive', serif: '"Palatino Linotype", Palatino, Georgia, serif', frame: 'nouveau'},
@@ -27,7 +34,7 @@
     // les modèles : les champs à remplir et la mise en page (du haut vers le bas)
     const KINDS = {
         naissance: {label: '👶 Naissance', style: 'classique', fields: [['intro', 'Phrase d’ouverture', 'Nous avons la joie de vous annoncer la naissance de'], ['name', 'Prénom (grand)', ''], ['date', 'Date et lieu', ''], ['detail', 'Poids, taille…', ''], ['family', 'Parents, frères et sœurs', '']]},
-        bapteme: {label: '🕊️ Baptême', style: 'nouveau', fields: [['intro', 'Phrase d’ouverture', 'sera baptisé'], ['name', 'Prénom (grand)', ''], ['date', 'Date, heure et église', ''], ['detail', 'Parrain et marraine', ''], ['family', 'Invitation', 'La cérémonie sera suivie d’un repas en famille']]},
+        bapteme: {label: '🕊️ Baptême', style: 'nouveau', fields: [['name', 'Prénom (grand)', ''], ['intro', 'Phrase d’ouverture', 'sera baptisé'], ['date', 'Date, heure et église', ''], ['detail', 'Parrain et marraine', ''], ['family', 'Invitation', 'La cérémonie sera suivie d’un repas en famille']]},
         mariage: {label: '💍 Mariage', style: 'belle', fields: [['intro', 'Phrase d’ouverture', 'ont la joie de vous faire part de leur mariage'], ['name', 'Les mariés (grand)', ''], ['date', 'Date et lieu', ''], ['detail', 'Cérémonie, réception', ''], ['family', 'Les parents', '']]},
         deces: {label: '🕯️ Décès', style: 'deuil', fields: [['intro', 'Phrase d’ouverture', 'ont la douleur de vous faire part du décès de'], ['name', 'Nom (grand)', ''], ['date', 'Survenu le…', ''], ['detail', 'Obsèques', ''], ['family', 'De la part de', '']]},
         cousinade: {label: '🌳 Cousinade', style: 'annees50', fields: [['intro', 'Titre', 'Grande cousinade'], ['name', 'La famille (grand)', ''], ['date', 'Date et lieu', ''], ['detail', 'Descendants de…', ''], ['family', 'Inscriptions, contact', '']]},
@@ -64,32 +71,39 @@
     const wrap = (t, font, size, maxW) => String(t || '').split('\n').flatMap(par => { const out = []; let line = ''; par.split(/\s+/).filter(Boolean).forEach(w => { const tt = line ? line + ' ' + w : w; if (measure(tt, font, size) > maxW && line) { out.push(line); line = w; } else line = tt; }); out.push(line); return out; }).join('\n');
     const T = (text, x, y, size, font, fill, o = {}) => ({id: uid(), type: 'text', name: o.name || String(text).split('\n')[0].slice(0, 30), text, x: n2(x), y: n2(y), size: n2(size), font, align: 'middle', fill, sw: 0, ...(o.bold ? {bold: true} : {}), ...(o.italic ? {italic: true} : {}), ...(o.ls ? {ls: o.ls} : {})});
 
+    /* o.fields : les champs dans l'ordre, [{key, role, label, value, hidden, size, italic}] ; role = intro, name, date, detail, family ou custom */
+    const CSIZE = {s: 12, n: 14, l: 20, t: 36};
     async function build(o) {
-        const st = STYLES[o.style] ? o.style : 'classique', S = STYLES[st], fmt = FORMATS.find(f => f[0] === o.format) || FORMATS[0], land = o.orient === 'land';
+        const st = STYLES[o.style] ? o.style : 'classique', S = STYLES[st];
+        const fmt = o.format === 'custom' ? ['custom', '', CM(Math.min(120, Math.max(3, Number(o.cw) || 10))), CM(Math.min(120, Math.max(3, Number(o.ch) || 15)))] : (FORMATS.find(f => f[0] === o.format) || FORMATS[0]), land = o.orient === 'land';
         const W = land ? fmt[3] : fmt[2], H = land ? fmt[2] : fmt[3], u = Math.min(W, H) / 400, maxW = W * .76;
-        const texts = [], photo = [];
+        const fields = (o.fields || []).filter(f => !f.hidden && String(f.value || '').trim()), texts = [], photo = [];
+        const custom = (f, font, y) => { const s = CSIZE[f.size] * u || 14 * u, fnt = f.size === 't' ? S.script : font, w2 = f.size === 't' ? String(f.value) : wrap(f.value, fnt, s, maxW), sz = f.size === 't' ? fitSize(w2, fnt, s, maxW) : s; texts.push(T(w2, W / 2, y + sz * .95, sz, fnt, f.size === 't' ? S.accent : S.ink, {italic: !!f.italic, bold: !!f.bold, name: f.label})); return (w2.split('\n').length * 1.25 + .8) * sz; };
         let y = H * (o.photo ? .1 : .16);
         if (o.kind === 'presse') { // un avis de journal : colonne étroite, filets, nom en capitales
             const f = S.serif; y = H * .12;
-            texts.push(T(String(o.intro || '').toLocaleUpperCase('fr-FR'), W / 2, y, 16 * u, f, S.ink, {bold: true, ls: 2 * u})); y += 26 * u;
-            texts.push(T(String(o.name || '').toLocaleUpperCase('fr-FR'), W / 2, y, fitSize(String(o.name || '').toLocaleUpperCase('fr-FR'), f, 30 * u, maxW, true), f, S.ink, {bold: true})); y += 22 * u;
-            [o.date, o.detail, o.family].filter(Boolean).forEach(t => { const s = 13 * u, w2 = wrap(t, f, s, maxW); texts.push(T(w2, W / 2, y + s, s, f, S.ink)); y += (w2.split('\n').length * 1.2 + 1) * s; });
+            fields.forEach(fd => { const t = String(fd.value);
+                if (fd.role === 'intro') { texts.push(T(t.toLocaleUpperCase('fr-FR'), W / 2, y, 16 * u, f, S.ink, {bold: true, ls: 2 * u, name: fd.label})); y += 26 * u; }
+                else if (fd.role === 'name') { const up = t.toLocaleUpperCase('fr-FR'); texts.push(T(up, W / 2, y, fitSize(up, f, 30 * u, maxW, true), f, S.ink, {bold: true, name: fd.label})); y += 22 * u; }
+                else if (fd.role === 'custom') y += custom(fd, f, y);
+                else { const s = 13 * u, w2 = wrap(t, f, s, maxW); texts.push(T(w2, W / 2, y + s, s, f, S.ink, {name: fd.label})); y += (w2.split('\n').length * 1.2 + 1) * s; } });
             const out = [R(W * .08, H * .06, W * .84, Math.min(H * .88, y), {stroke: S.ink, sw: 1.4 * u, name: 'Filet de l’avis'})];
             return {w: W, h: H, bg: '#ffffff', kind: 'card', objs: [{id: uid(), type: 'group', layer: true, name: 'Cadre', children: out}, {id: uid(), type: 'group', layer: true, name: 'Textes', children: texts}]};
         }
         if (o.photo) { const ph = Math.min(H * .3, W * .45), pw = ph * (o.photoRatio || .78); const clip = {id: uid(), type: 'ellipse', x: n2((W - pw) / 2), y: n2(y), w: n2(pw), h: n2(ph)};
             photo.push({id: uid(), type: 'group', name: 'Photo', clip, children: [{id: uid(), type: 'image', name: 'Photo', src: o.photo, x: clip.x, y: clip.y, w: clip.w, h: clip.h}]}, {...clip, id: uid(), name: 'Cadre de la photo', fill: 'none', stroke: S.accent, sw: n2(2 * u)}); y += ph + 26 * u; }
-        const big = String(o.name || '').trim(), introS = 15 * u, bigF = S.script, serif = S.serif;
-        if (o.kind === 'bapteme' && big) { texts.push(T(big, W / 2, y + 40 * u, fitSize(big, bigF, 52 * u, maxW), bigF, S.accent, {name: 'Prénom'})); y += 62 * u; if (o.intro) { const w2 = wrap(o.intro, serif, introS, maxW); texts.push(T(w2, W / 2, y + introS, introS, serif, S.ink, {italic: true})); y += (w2.split('\n').length * 1.2 + .6) * introS; } }
-        else {
-            if (o.intro) { const w2 = wrap(o.intro, serif, introS, maxW); texts.push(T(w2, W / 2, y + introS, introS, serif, S.ink, {italic: st !== 'moderne', ls: o.kind === 'cousinade' || o.kind === 'noces' ? 2 * u : 0})); y += (w2.split('\n').length * 1.2 + .8) * introS; }
-            if (big) { const s = fitSize(big, bigF, (o.kind === 'deces' ? 34 : 50) * u, maxW); texts.push(T(big, W / 2, y + s * .95, s, bigF, o.kind === 'deces' ? S.ink : S.accent, {name: 'Nom'})); y += s * 1.4; }
-        }
-        const sepY = y + 4 * u; y += 20 * u; // le filet se pose après le centrage (plus bas)
-        [['date', 17, false], ['detail', 13.5, true], ['family', 13, false]].forEach(([k, s0, it]) => { const t = String(o[k] || '').trim(); if (!t) return; const s = s0 * u, w2 = wrap(t, serif, s, maxW); texts.push(T(w2, W / 2, y + s, s, serif, S.ink, {italic: it, name: {date: 'Date et lieu', detail: 'Détails', family: 'Famille'}[k]})); y += (w2.split('\n').length * 1.25 + .9) * s; });
+        const bigF = S.script, serif = S.serif, introS = 15 * u;
+        let sepY = null; // le filet se pose sous le nom (ou sous le premier texte s'il n'y a pas de nom)
+        const hasName = fields.some(f => f.role === 'name');
+        fields.forEach((fd, i) => { const t = String(fd.value).trim();
+            if (fd.role === 'name') { const s = fitSize(t, bigF, (o.kind === 'deces' ? 34 : 50) * u, maxW); texts.push(T(t, W / 2, y + s * .95, s, bigF, o.kind === 'deces' ? S.ink : S.accent, {name: fd.label})); y += s * 1.4; }
+            else if (fd.role === 'intro') { const w2 = wrap(t, serif, introS, maxW); texts.push(T(w2, W / 2, y + introS, introS, serif, S.ink, {italic: st !== 'moderne', ls: o.kind === 'cousinade' || o.kind === 'noces' ? 2 * u : 0, name: fd.label})); y += (w2.split('\n').length * 1.2 + .8) * introS; }
+            else if (fd.role === 'custom') y += custom(fd, serif, y);
+            else { const [s0, it] = {date: [17, false], detail: [13.5, true], family: [13, false]}[fd.role] || [14, false], s = s0 * u, w2 = wrap(t, serif, s, maxW); texts.push(T(w2, W / 2, y + s, s, serif, S.ink, {italic: it, name: fd.label})); y += (w2.split('\n').length * 1.25 + .9) * s; }
+            if (sepY === null && (fd.role === 'name' || (!hasName && i === 0)) && i < fields.length - 1) { sepY = y + 4 * u; y += 20 * u; } });
         // tout le texte descend un peu s'il reste de la place (centré dans la page)
         const room = Math.max(0, H * .9 - y); if (room > 0) [...texts, ...photo].forEach(t => { if (t.y !== undefined) t.y = n2(t.y + room / 2); if (t.clip) t.clip.y = n2(t.clip.y + room / 2); (t.children || []).forEach(c => { c.y = n2(c.y + room / 2); }); });
-        texts.push(...sep(st, W, sepY + room / 2, u));
+        if (sepY !== null) texts.push(...sep(st, W, sepY + room / 2, u));
         return {w: W, h: H, bg: S.paper, kind: 'card', objs: [{id: uid(), type: 'group', layer: true, name: 'Cadre et ornements', children: frame(st, W, H)}, ...(photo.length ? [{id: uid(), type: 'group', layer: true, name: 'Photo', children: photo}] : []), {id: uid(), type: 'group', layer: true, name: 'Textes', children: texts}]};
     }
 
@@ -114,30 +128,74 @@
     }
     const toData = async file => { try { const b = await (await fetch(`media/${encodeURIComponent(file)}`)).blob(), im = await createImageBitmap(b), k = Math.min(1, 900 / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); return {src: c.toDataURL('image/jpeg', .86), ratio: c.width / c.height}; } catch (_) { return null; } };
 
+    /* 🧩 les champs de chaque modèle : on en ajoute, on en enlève, on en masque, on les range — retenu pour la prochaine fois */
+    const PREF = 'genealogie-faire-part';
+    const prefs = () => { try { return JSON.parse(localStorage.getItem(PREF) || '{}') || {}; } catch (_) { return {}; } };
+    const savePrefs = p => { try { localStorage.setItem(PREF, JSON.stringify(p)); } catch (_) {} };
+    const baseFields = k => KINDS[k].fields.map(([key, label, value]) => ({key, role: key, label, value, hidden: false}));
+    function fieldsOf(k) { const saved = prefs().fields?.[k]; if (!Array.isArray(saved) || !saved.length) return baseFields(k);
+        const base = Object.fromEntries(baseFields(k).map(f => [f.key, f]));
+        return saved.filter(f => f && (f.role === 'custom' || base[f.key])).map(f => f.role === 'custom' ? {key: String(f.key), role: 'custom', label: String(f.label || 'Champ'), value: '', hidden: !!f.hidden, size: CSIZE[f.size] ? f.size : 'n', italic: !!f.italic, bold: !!f.bold} : {...base[f.key], hidden: !!f.hidden}); }
+    const keepFields = (k, list) => { const p = prefs(); p.fields = p.fields || {}; p.fields[k] = list.map(({key, role, label, hidden, size, italic, bold}) => role === 'custom' ? {key, role, label, hidden, size, italic, bold} : {key, role, hidden}); savePrefs(p); };
+
     function openMaker(onDone, kind0 = 'naissance') {
-        let photoFile = '', personId = Number(A().state.currentPersonId) || 0;
-        const fieldsHtml = k => KINDS[k].fields.map(([f, l, dv]) => `<label class="${f === 'intro' || f === 'name' ? '' : 'span-2'}">${esc(l)}${f === 'detail' || f === 'family' || (k === 'presse' && f === 'date') ? `<textarea name="${f}" rows="2">${esc(dv)}</textarea>` : `<input name="${f}" value="${esc(dv)}">`}</label>`).join('');
-        ext.openDialog({eyebrow: 'FAIRE-PART ET AFFICHES', title: '📰 Un faire-part, une affiche', submitLabel: 'Créer et ouvrir',
+        let photoFile = '', personId = Number(A().state.currentPersonId) || 0, kind = kind0, fields = fieldsOf(kind0);
+        const pf = prefs();
+        const fieldHtml = (f, i) => { const long = f.role === 'detail' || f.role === 'family' || (kind === 'presse' && f.role === 'date') || (f.role === 'custom' && f.multi);
+            return `<div class="h-fp-field ${f.role === 'intro' || f.role === 'name' ? '' : 'span-2'} ${f.hidden ? 'is-off' : ''}" data-fp-i="${i}"><div class="h-fp-fhead">
+                <label class="h-fp-vis" title="Afficher ce champ sur le faire-part (décoché : gardé ici, mais pas imprimé)"><input type="checkbox" data-fp-vis ${f.hidden ? '' : 'checked'}></label>
+                ${f.role === 'custom' ? `<input class="h-fp-flabel" data-fp-label value="${esc(f.label)}" title="Nom du champ">` : `<b>${esc(f.label)}</b>`}
+                <span class="h-fp-ftools">${f.role === 'custom' ? `<select data-fp-size title="Taille du texte">${[['s', 'Petit'], ['n', 'Normal'], ['l', 'Grand'], ['t', 'Titre (calligraphié)']].map(([v, l]) => `<option value="${v}" ${f.size === v ? 'selected' : ''}>${l}</option>`).join('')}</select><button type="button" class="h-fp-tg ${f.italic ? 'on' : ''}" data-fp-it title="Italique"><i>I</i></button><button type="button" class="h-fp-tg ${f.bold ? 'on' : ''}" data-fp-bd title="Gras"><b>G</b></button>` : ''}
+                <button type="button" data-fp-up title="Monter" ${i ? '' : 'disabled'}>↑</button><button type="button" data-fp-down title="Descendre" ${i < fields.length - 1 ? '' : 'disabled'}>↓</button><button type="button" data-fp-del title="Enlever ce champ">🗑</button></span></div>
+                ${long ? `<textarea name="f_${esc(f.key)}" rows="2">${esc(f.value)}</textarea>` : `<input name="f_${esc(f.key)}" value="${esc(f.value)}">`}</div>`; };
+        const missing = () => baseFields(kind).filter(b => !fields.some(f => f.key === b.key));
+        const fieldsHtml = () => `${fields.map(fieldHtml).join('') || '<p class="muted span-2">Aucun champ : ajoute-en un.</p>'}<div class="h-fp-addrow span-2"><button type="button" class="button small secondary" data-fp-add>＋ Ajouter un champ</button>
+            ${missing().length ? `<select data-fp-back><option value="">Remettre un champ enlevé…</option>${missing().map(m => `<option value="${esc(m.key)}">${esc(m.label)}</option>`).join('')}</select>` : ''}<button type="button" class="button small secondary" data-fp-reset title="Revenir aux champs d’origine de ce modèle">↺ Réinitialiser</button></div>`;
+        ext.openDialog({eyebrow: 'FAIRE-PART ET AFFICHES', title: '📰 Un faire-part, une affiche', submitLabel: 'Créer et ouvrir', wide: true,
             body: `<div class="h-fp-form"><div class="h-fp-kinds">${Object.entries(KINDS).map(([k, v]) => `<label class="h-fp-kind"><input type="radio" name="kind" value="${k}" ${k === kind0 ? 'checked' : ''}><span>${esc(v.label)}</span></label>`).join('')}</div>
-                <div class="form-grid"><label>Style<select name="style">${Object.entries(STYLES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Format<select name="format">${FORMATS.map(f => `<option value="${f[0]}">${esc(f[1])}</option>`).join('')}</select></label><label>Sens<select name="orient"><option value="port">Portrait</option><option value="land">Paysage</option></select></label>
+                <div class="form-grid"><label>Style<select name="style">${Object.entries(STYLES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Format<select name="format">${formatOptions(pf.format || 'c10')}</select></label>
+                    <div class="h-fp-custom span-2" ${pf.format === 'custom' ? '' : 'hidden'}><label>Largeur (cm)<input type="number" name="cw" min="3" max="120" step="0.1" value="${esc(pf.cw || 10)}"></label><label>Hauteur (cm)<input type="number" name="ch" min="3" max="120" step="0.1" value="${esc(pf.ch || 15)}"></label></div>
+                    <label>Sens<select name="orient"><option value="port">Portrait</option><option value="land" ${pf.orient === 'land' ? 'selected' : ''}>Paysage</option></select></label>
                     <label>Remplir depuis une fiche<span class="h-fp-who">${A().collectionPersonField('fp_person', null, 'Nom, prénom…')}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></label></div>
-                <div class="form-grid" data-fp-fields>${fieldsHtml(kind0)}</div>
+                <div class="form-grid h-fp-fields" data-fp-fields></div>
                 <label class="checkbox-line"><input type="checkbox" name="usephoto"> Avec une photo <small class="muted" data-fp-photo>(celle de la fiche, ou à choisir)</small></label><input type="file" name="photofile" accept="image/*" hidden>
-                <p class="muted">Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis Fichier → Imprimer / PDF ou Exporter.</p></div>`,
+                <p class="muted">Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis Fichier → Imprimer / PDF ou Exporter.</p></div>`,
             onOpen: dg => {
-                const form = dg.querySelector('form') || dg, setKind = k => { dg.querySelector('[data-fp-fields]').innerHTML = fieldsHtml(k); dg.querySelector('[name=style]').value = KINDS[k].style; };
+                const box = dg.querySelector('[data-fp-fields]');
+                const grab = () => fields.forEach(f => { const el = box.querySelector(`[name="f_${CSS.escape(f.key)}"]`); if (el) f.value = el.value; });
+                const draw = () => { box.innerHTML = fieldsHtml(); };
+                const changed = () => { keepFields(kind, fields); draw(); };
+                const setKind = k => { grab(); const old = Object.fromEntries(fields.map(f => [f.role === 'custom' ? f.key : f.role, f.value])); kind = k; fields = fieldsOf(k);
+                    fields.forEach(f => { const v = old[f.role === 'custom' ? f.key : f.role]; if (v && f.role === 'name') f.value = v; }); draw(); dg.querySelector('[name=style]').value = KINDS[k].style; };
                 setKind(kind0);
-                dg.addEventListener('change', e => { if (e.target.name === 'kind') setKind(e.target.value); if (e.target.name === 'usephoto' && e.target.checked && !photoFile) dg.querySelector('[name=photofile]').click(); if (e.target.name === 'photofile' && e.target.files?.[0]) { const f = e.target.files[0], r = new FileReader(); r.onload = () => { photoFile = {data: r.result}; dg.querySelector('[data-fp-photo]').textContent = `(${f.name})`; }; r.readAsDataURL(f); } });
-                const fill = async pid => { const kind = dg.querySelector('[name=kind]:checked').value; try { const r = await fillFrom(kind, pid); Object.entries(r.values).forEach(([k, v]) => { const el = dg.querySelector(`[data-fp-fields] [name=${k}]`); if (el && v) el.value = v; }); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(`Rempli depuis la fiche de ${r.label} : relis et complète.`); } catch (e) { toast(e.message, 'error'); } };
+                box.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; grab();
+                    const i = Number(b.closest('[data-fp-i]')?.dataset.fpI);
+                    if (b.matches('[data-fp-up]') && i > 0) { [fields[i - 1], fields[i]] = [fields[i], fields[i - 1]]; changed(); }
+                    else if (b.matches('[data-fp-down]') && i < fields.length - 1) { [fields[i + 1], fields[i]] = [fields[i], fields[i + 1]]; changed(); }
+                    else if (b.matches('[data-fp-del]')) { fields.splice(i, 1); changed(); }
+                    else if (b.matches('[data-fp-it]')) { fields[i].italic = !fields[i].italic; changed(); }
+                    else if (b.matches('[data-fp-bd]')) { fields[i].bold = !fields[i].bold; changed(); }
+                    else if (b.matches('[data-fp-reset]')) { fields = baseFields(kind).map(f => ({...f, value: fields.find(x => x.key === f.key)?.value || f.value})); changed(); }
+                    else if (b.matches('[data-fp-add]')) { const label = await A().askText({title: 'Ajouter un champ', message: 'Nom du champ (par exemple « Lieu de la réception », « Menu », « Citation ») :', placeholder: 'Nom du champ', okLabel: 'Ajouter'});
+                        if (label === null || !String(label).trim()) return; fields.push({key: 'x' + uid(), role: 'custom', label: String(label).trim().slice(0, 60), value: '', hidden: false, size: 'n', italic: false, bold: false, multi: true}); changed(); box.querySelector(`[data-fp-i="${fields.length - 1}"] textarea, [data-fp-i="${fields.length - 1}"] input[name]`)?.focus(); } });
+                box.addEventListener('change', e => { const t = e.target, i = Number(t.closest('[data-fp-i]')?.dataset.fpI); grab();
+                    if (t.matches('[data-fp-vis]')) { fields[i].hidden = !t.checked; t.closest('.h-fp-field').classList.toggle('is-off', fields[i].hidden); keepFields(kind, fields); }
+                    else if (t.matches('[data-fp-size]')) { fields[i].size = t.value; keepFields(kind, fields); }
+                    else if (t.matches('[data-fp-label]')) { fields[i].label = t.value.trim().slice(0, 60) || 'Champ'; keepFields(kind, fields); }
+                    else if (t.matches('[data-fp-back]') && t.value) { const b = baseFields(kind).find(x => x.key === t.value); if (b) { const at = KINDS[kind].fields.findIndex(x => x[0] === b.key); let pos = fields.findIndex(f => KINDS[kind].fields.findIndex(x => x[0] === f.key) > at); fields.splice(pos < 0 ? fields.length : pos, 0, b); changed(); } } });
+                dg.addEventListener('change', e => { const t = e.target; if (t.name === 'kind') setKind(t.value);
+                    if (['format', 'orient', 'cw', 'ch'].includes(t.name)) { const p = prefs(); p[t.name] = t.value; savePrefs(p); if (t.name === 'format') dg.querySelector('.h-fp-custom').hidden = t.value !== 'custom'; }
+                    if (t.name === 'usephoto' && t.checked && !photoFile) dg.querySelector('[name=photofile]').click(); if (t.name === 'photofile' && t.files?.[0]) { const f = t.files[0], r = new FileReader(); r.onload = () => { photoFile = {data: r.result}; dg.querySelector('[data-fp-photo]').textContent = `(${f.name})`; }; r.readAsDataURL(f); } });
+                const fill = async pid => { try { const r = await fillFrom(kind, pid); grab(); Object.entries(r.values).forEach(([k, v]) => { const f = fields.find(x => x.role === k); if (f && v) f.value = v; }); draw(); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(`Rempli depuis la fiche de ${r.label} : relis et complète.`); } catch (e) { toast(e.message, 'error'); } };
                 dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-cp-input]').focus(); });
                 dg.querySelector('[data-cp-input="fp_person"]').parentElement.addEventListener('cp-pick', e => { personId = e.detail.id; fill(personId); });
-                void form;
+                dg._fpGrab = () => { grab(); return fields; };
             },
             onSubmit: async f => {
-                const o = Object.fromEntries(new FormData(f)); o.kind = f.querySelector('[name=kind]:checked').value;
+                const dg = f.closest('dialog') || f, o = Object.fromEntries(new FormData(f)); o.kind = kind; o.fields = (dg._fpGrab ? dg._fpGrab() : fields).map(x => ({...x}));
                 if (f.querySelector('[name=usephoto]').checked && photoFile) { const im = typeof photoFile === 'string' ? await toData(photoFile) : await (async () => { const i = await new Promise(ok => { const x = new Image(); x.onload = () => ok(x); x.onerror = () => ok(null); x.src = photoFile.data; }); return i ? {src: photoFile.data, ratio: i.naturalWidth / i.naturalHeight} : null; })(); if (im) { o.photo = im.src; o.photoRatio = Math.max(.55, Math.min(1.4, im.ratio)); } }
-                const doc = await build(o);
-                ext.openVectorEditor({doc, name: `${KINDS[o.kind].label.replace(/^\S+\s/, '')} — ${o.name || ''}`.trim(), onSaved: onDone, onClose: onDone});
+                const doc = await build(o), nm = o.fields.find(x => x.role === 'name')?.value || '';
+                ext.openVectorEditor({doc, name: `${KINDS[o.kind].label.replace(/^\S+\s/, '')} — ${nm}`.trim().replace(/ —$/, ''), onSaved: onDone, onClose: onDone});
             }});
     }
     ext.openCardMaker = openMaker;
