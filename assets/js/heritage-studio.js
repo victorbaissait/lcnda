@@ -439,21 +439,20 @@
     /** Poussière et rayures : un point (ou un trait fin) très différent de son voisinage est remplacé par la médiane du voisinage.
         Plus l'effet est fort, plus le voisinage est grand et plus le seuil est bas. */
     function rtDust(img, amount) {
+        // rapide : on compare chaque point à son voisinage flouté (le flou du navigateur), puis on remplace les points abîmés
+        // par la moyenne de leurs voisins sains (un flou qui ignore les points abîmés : ils sont rendus transparents)
         const W = img.width, H = img.height, d = img.data, r = Math.max(1, Math.round(W / 1600 * (1 + amount / 25))), thr = 70 - amount * 0.55;
-        const L = new Float32Array(W * H); for (let p = 0, i = 0; p < L.length; p++, i += 4) L[p] = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
-        const med = new Float32Array(W * H), win = [], step = r > 3 ? 2 : 1;
-        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { // médiane approchée sur une croix et des diagonales (rapide)
-            win.length = 0;
-            for (let k = -r; k <= r; k += step) { const xx = Math.min(W - 1, Math.max(0, x + k)), yy = Math.min(H - 1, Math.max(0, y + k)), y2 = Math.min(H - 1, Math.max(0, y - k));
-                win.push(L[y * W + xx], L[yy * W + x], L[yy * W + xx], L[y2 * W + xx]); }
-            win.sort((a, b) => a - b); med[y * W + x] = win[win.length >> 1];
-        }
-        const bad = new Uint8Array(W * H); for (let p = 0; p < bad.length; p++) if (Math.abs(L[p] - med[p]) > thr) bad[p] = 1;
-        // les points abîmés prennent la couleur moyenne de leurs voisins sains
-        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const p = y * W + x; if (!bad[p]) continue;
-            let n = 0, sr = 0, sg = 0, sb = 0; const rr = r + 1;
-            for (let yy = Math.max(0, y - rr); yy <= Math.min(H - 1, y + rr); yy++) for (let xx = Math.max(0, x - rr); xx <= Math.min(W - 1, x + rr); xx++) { const q = yy * W + xx; if (bad[q]) continue; const j = q * 4; sr += d[j]; sg += d[j + 1]; sb += d[j + 2]; n++; }
-            const i = p * 4; if (n) { d[i] = sr / n; d[i + 1] = sg / n; d[i + 2] = sb / n; } else { const f = med[p] / (L[p] || 1); d[i] *= f; d[i + 1] *= f; d[i + 2] *= f; } }
+        const src = document.createElement('canvas'); src.width = W; src.height = H; src.getContext('2d').putImageData(img, 0, 0);
+        const blur = (c, rad) => { const o = document.createElement('canvas'); o.width = W; o.height = H; const g = o.getContext('2d', {willReadFrequently: true}); g.filter = `blur(${rad}px)`; g.drawImage(c, 0, 0); return g.getImageData(0, 0, W, H).data; };
+        const B = blur(src, r * 1.5), bad = new Uint8Array(W * H); let nbad = 0;
+        for (let p = 0, i = 0; p < bad.length; p++, i += 4) { const l = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2], bl = 0.299 * B[i] + 0.587 * B[i + 1] + 0.114 * B[i + 2]; if (Math.abs(l - bl) > thr) { bad[p] = 1; nbad++; } }
+        if (!nbad) return img;
+        // les points abîmés et leur bord immédiat deviennent transparents, puis flou : la couleur des voisins sains
+        const hole = new ImageData(new Uint8ClampedArray(d), W, H);
+        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const p = y * W + x; if (!bad[p]) continue; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const xx = x + dx, yy = y + dy; if (xx >= 0 && yy >= 0 && xx < W && yy < H) hole.data[(yy * W + xx) * 4 + 3] = 0; } }
+        const hc = document.createElement('canvas'); hc.width = W; hc.height = H; hc.getContext('2d').putImageData(hole, 0, 0);
+        const F = blur(hc, r + 1.5);
+        for (let p = 0, i = 0; p < bad.length; p++, i += 4) { if (!bad[p]) continue; if (F[i + 3] > 8) { d[i] = F[i]; d[i + 1] = F[i + 1]; d[i + 2] = F[i + 2]; } else { d[i] = B[i]; d[i + 1] = B[i + 1]; d[i + 2] = B[i + 2]; } }
         return img;
     }
     /** 🎯 Sélectionner le sujet : le fond est appris sur les bords de l'image (couleurs les plus fréquentes), puis rempli depuis
@@ -479,7 +478,7 @@
         // le sujet : les morceaux qui ne sont pas du fond ; on garde les gros (au moins 8 % du plus gros)
         const lab = new Int32Array(N), sizes = [0]; let n = 0;
         for (let p0 = 0; p0 < N; p0++) { if (bg[p0] || lab[p0]) continue; n++; let sz = 0; const st2 = [p0]; lab[p0] = n; while (st2.length) { const p = st2.pop(), x = p % W; sz++; for (const q of [x > 0 ? p - 1 : -1, x < W - 1 ? p + 1 : -1, p - W, p + W]) if (q >= 0 && q < N && !bg[q] && !lab[q]) { lab[q] = n; st2.push(q); } } sizes.push(sz); }
-        const big = Math.max(0, ...sizes), keep = sizes.map(z => z >= big * 0.08 && z > 12);
+        let big = 0; for (const z of sizes) if (z > big) big = z; const keep = sizes.map(z => z >= big * 0.08 && z > 12);
         const mc = document.createElement('canvas'); mc.width = W; mc.height = H; const mg = mc.getContext('2d'), md = mg.createImageData(W, H);
         for (let p = 0; p < N; p++) if (!bg[p] && keep[lab[p]]) md.data[p * 4 + 3] = 255;
         mg.putImageData(md, 0, 0);
@@ -570,18 +569,25 @@
     const fxLumArr = img => { const L = new Float32Array(img.width * img.height); for (let p = 0; p < L.length; p++) L[p] = fxLum(img.data, p * 4); return L; };
     /** Kuwahara : chaque point prend la couleur moyenne du coin le plus uni autour de lui (effet peinture), rapide grâce aux sommes cumulées */
     function fxKuwahara(img, r) {
-        const W = img.width, H = img.height, d = img.data, S = (W + 1) * (H + 1), I = [0, 1, 2, 3].map(() => new Float64Array(S));
-        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = (y * W + x) * 4, l = fxLum(d, i), q = (y + 1) * (W + 1) + x + 1, up = q - (W + 1); [d[i], d[i + 1], d[i + 2], l * l].forEach((v, k) => { I[k][q] = v + I[k][q - 1] + I[k][up] - I[k][up - 1]; }); }
-        const sum = (k, x0, y0, x1, y1) => I[k][(y1 + 1) * (W + 1) + x1 + 1] - I[k][y0 * (W + 1) + x1 + 1] - I[k][(y1 + 1) * (W + 1) + x0] + I[k][y0 * (W + 1) + x0];
-        const out = new Uint8ClampedArray(d);
-        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-            let best = Infinity, br = 0, bg = 0, bb = 0;
-            for (const [ax, ay] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
-                const x0 = Math.max(0, Math.min(x, x + ax * r)), x1 = Math.min(W - 1, Math.max(x, x + ax * r)), y0 = Math.max(0, Math.min(y, y + ay * r)), y1 = Math.min(H - 1, Math.max(y, y + ay * r)), n = (x1 - x0 + 1) * (y1 - y0 + 1);
-                const r0 = sum(0, x0, y0, x1, y1) / n, g0 = sum(1, x0, y0, x1, y1) / n, b0 = sum(2, x0, y0, x1, y1) / n, l = 0.299 * r0 + 0.587 * g0 + 0.114 * b0, v = sum(3, x0, y0, x1, y1) / n - l * l;
-                if (v < best) { best = v; br = r0; bg = g0; bb = b0; }
+        // par bandes (sommes cumulées d'une bande à la fois) : rapide et peu de mémoire, même sur une grande photo
+        const W = img.width, H = img.height, d = img.data, out = new Uint8ClampedArray(d), BAND = 256, W1 = W + 1;
+        for (let top = 0; top < H; top += BAND) {
+            const y0b = Math.max(0, top - r), y1b = Math.min(H - 1, top + BAND - 1 + r), h = y1b - y0b + 1, S = W1 * (h + 1);
+            const IR = new Float64Array(S), IG = new Float64Array(S), IB = new Float64Array(S), IL = new Float64Array(S);
+            for (let yy = 0; yy < h; yy++) { const y = y0b + yy; for (let x = 0; x < W; x++) { const i = (y * W + x) * 4, rr = d[i], gg = d[i + 1], bb = d[i + 2], l = 0.299 * rr + 0.587 * gg + 0.114 * bb, q = (yy + 1) * W1 + x + 1, up = q - W1;
+                IR[q] = rr + IR[q - 1] + IR[up] - IR[up - 1]; IG[q] = gg + IG[q - 1] + IG[up] - IG[up - 1]; IB[q] = bb + IB[q - 1] + IB[up] - IB[up - 1]; IL[q] = l * l + IL[q - 1] + IL[up] - IL[up - 1]; } }
+            const yEnd = Math.min(H, top + BAND);
+            for (let y = top; y < yEnd; y++) for (let x = 0; x < W; x++) {
+                let best = Infinity, br = 0, bg = 0, bb = 0;
+                for (let k = 0; k < 4; k++) {
+                    const ax = k & 1 ? 1 : -1, ay = k & 2 ? 1 : -1;
+                    const x0 = ax < 0 ? Math.max(0, x - r) : x, x1 = ax < 0 ? x : Math.min(W - 1, x + r), ya = (ay < 0 ? Math.max(0, y - r) : y) - y0b, yb = (ay < 0 ? y : Math.min(H - 1, y + r)) - y0b, n = (x1 - x0 + 1) * (yb - ya + 1);
+                    const A = (yb + 1) * W1 + x1 + 1, Bq = ya * W1 + x1 + 1, C = (yb + 1) * W1 + x0, Dq = ya * W1 + x0;
+                    const r0 = (IR[A] - IR[Bq] - IR[C] + IR[Dq]) / n, g0 = (IG[A] - IG[Bq] - IG[C] + IG[Dq]) / n, b0 = (IB[A] - IB[Bq] - IB[C] + IB[Dq]) / n, l = 0.299 * r0 + 0.587 * g0 + 0.114 * b0, v = (IL[A] - IL[Bq] - IL[C] + IL[Dq]) / n - l * l;
+                    if (v < best) { best = v; br = r0; bg = g0; bb = b0; }
+                }
+                const i = (y * W + x) * 4; out[i] = br; out[i + 1] = bg; out[i + 2] = bb;
             }
-            const i = (y * W + x) * 4; out[i] = br; out[i + 1] = bg; out[i + 2] = bb;
         }
         d.set(out);
     }
@@ -641,7 +647,7 @@
         deglare: ['Autres', 'Enlever les reflets (vitre)', [['amount', 'Reflets en moins', 0, 100, 60, 1], ['size', 'Taille des reflets (0 = moyenne)', 0, 100, 0, 1]], (img, p) => rtDeglare(img, p.amount, p.size)],
     };
     const fxDefaults = t => Object.fromEntries((RT_FX[t]?.[2] || []).map(r => [r[0], r[4]]));
-    function rtFxApply(img, step) { const f = RT_FX[step?.t]; if (!f) return; const p = {...fxDefaults(step.t), ...step}; try { f[3](img, p, img.width / 1000); } catch (err) { console.warn('Filtre', step.t, err); } }
+    function rtFxApply(img, step) { const f = RT_FX[step?.t]; if (!f) return; const p = {...fxDefaults(step.t), ...step}; f[2].forEach(([k, , mn, mx, dv]) => { const v = Number(p[k]); p[k] = Number.isFinite(v) ? Math.min(mx, Math.max(mn, v)) : dv; }); /* réglages bornés (projet ou action d’ailleurs) */ try { f[3](img, p, img.width / 1000); } catch (err) { console.warn('Filtre', step.t, err); } }
     function rtFilters(img, f) {
         const W = img.width, H = img.height, d = img.data;
         if (f.deglare > 0) rtDeglare(img, f.deglare, f.deglareSize);
@@ -1002,9 +1008,11 @@
         const adjCache = new Map(); // un filtre lourd n'est recalculé que si ses réglages ou ce qui est dessous ont changé
         function applyAdjust(src, n, W, H) {
             const g0 = src.getContext('2d', {willReadFrequently: true}), id = g0.getImageData(0, 0, W, H);
-            let sum = 0; for (let i = 0; i < id.data.length; i += 1021) sum = (sum * 31 + id.data[i]) >>> 0;
-            const key = JSON.stringify(n.st) + '|' + W + 'x' + H + '|' + sum, hit = adjCache.get(n.id + ':' + W);
-            let o; if (hit?.key === key) o = hit.o; else { o = new ImageData(W, H); rtApply(id, o, n.st); if (n.st.filters?.chain?.length || n.st.filters?.deglare) adjCache.set(n.id + ':' + W, {key, o}); }
+            const heavy = W === pw && H === ph && (n.st.filters?.chain?.length || n.st.filters?.deglare || n.st.filters?.dust); // seulement l'aperçu ; jamais en pleine taille
+            let key = '';
+            if (heavy) { const u = new Uint32Array(id.data.buffer, id.data.byteOffset, id.data.byteLength >> 2); let h1 = 2166136261, h2 = 0; for (let i = 0; i < u.length; i++) { h1 = Math.imul(h1 ^ u[i], 16777619); h2 = (h2 + u[i] * (i + 1)) >>> 0; } key = JSON.stringify(n.st) + '|' + (h1 >>> 0) + ':' + h2; } // tous les points comptent
+            const hit = heavy ? adjCache.get(n.id) : null;
+            let o; if (hit?.key === key) o = hit.o; else { o = new ImageData(W, H); rtApply(id, o, n.st); if (heavy) adjCache.set(n.id, {key, o}); }
             const adj = blank(W, H); adj.getContext('2d').putImageData(o, 0, 0);
             const res = blank(W, H), g = res.getContext('2d'); g.drawImage(src, 0, 0); g.globalCompositeOperation = 'source-atop'; g.globalAlpha = n.opacity ?? 1; g.drawImage(rtMasked(adj, n.mask, masks), 0, 0); return res;
         }
@@ -1072,7 +1080,7 @@
         }
         // ── Historique : chaque geste ou réglage est une étape ; un clic sur une étape y revient ──
         let history = [], hpos = -1;
-        const snapshot = () => ({st: rtClone({...st, strokes: undefined}), strokes: rtClone(st.strokes), layers: rtClone(layers), activeLayer, selId});
+        const snapshot = () => ({st: rtClone({...st, strokes: undefined, persp: st.persp ?? st._persp0 ?? null, _persp0: undefined}), strokes: rtClone(st.strokes), layers: rtClone(layers), activeLayer, selId});
         const commit = label => {
             const snap = snapshot();
             if (hpos >= 0 && JSON.stringify(history[hpos].snap) === JSON.stringify(snap)) return; // rien n'a changé
@@ -1080,6 +1088,7 @@
             refreshHistory();
         };
         const restore = i => {
+            dlg.querySelector('.h-rt-fxpanel')?.remove(); // une fenêtre de filtre ouverte ne vise plus le bon calque
             const s = history[i]?.snap; if (!s) return;
             Object.keys(st).forEach(k => { if (k !== 'strokes') delete st[k]; }); Object.assign(st, rtClone(s.st));
             st.strokes = rtClone(s.strokes);
@@ -1643,6 +1652,7 @@
         const needSel = () => { if (!selId) { toast('Fais d’abord une sélection (outils ⬚ ◯ ➰ ✒︎ 🪄).', 'error'); return false; } return true; };
         const full = () => { const c = blankMask(), g = c.getContext('2d'); g.fillRect(0, 0, pw, ph); return c; };
         const downloadFull = async type => {
+            if (mode === 'persp') setMode('adjust');
             try { const c = await renderFull(); const blob = await new Promise(r => c.toBlob(r, type, 0.93)); if (!blob) throw new Error('Image trop grande pour le navigateur.'); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${String(item.title || item.filename || 'photo').replace(/\.[a-z0-9]+$/i, '').replace(/[^\p{L}\p{N} _-]+/gu, '').trim().slice(0, 60) || 'photo'}-retouche.${type === 'image/png' ? 'png' : 'jpg'}`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
             catch (err) { toast(err.message, 'error'); }
         };
@@ -1684,7 +1694,7 @@
         /* ⚡ Actions : les réglages de la photo (niveaux, courbe, filtres, colorisation…) et ses calques de réglage sans masque,
            gardés sous un nom, pour les remettre ici ou les appliquer d'un coup à plusieurs photos (une nouvelle version de chacune). */
         const ACT_KEY = 'genealogie-retouch-actions';
-        const actList = () => { try { return JSON.parse(localStorage.getItem(ACT_KEY) || '[]') || []; } catch (_) { return []; } };
+        const actList = () => { try { const v = JSON.parse(localStorage.getItem(ACT_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
         const actSave = l => { try { localStorage.setItem(ACT_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Plus de place pour les actions : supprimes-en une.', 'error'); return false; } };
         const actOf = () => { const s0 = rtClone({...st}); ['strokes', 'crop', 'persp', '_persp0'].forEach(k => delete s0[k]);
             const adj = []; layers.forEach(n => { if (typeOf(n) === 'adjust' && n.visible && !n.mask && !n.clip) adj.push({name: n.name, opacity: n.opacity ?? 1, st: rtClone(n.st)}); });
@@ -1960,6 +1970,7 @@
         }
         let projBusy = false;
         async function saveProject(asNew = false) {
+            if (mode === 'persp') setMode('adjust');
             if (projBusy) return;
             let name = projName;
             if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet de retouche', message: 'Nom du projet (pour le retrouver dans « 📂 Projets… ») :', value: projName || item.title || 'Ma retouche', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
@@ -2008,7 +2019,7 @@
         };
         drawVersions();
         // ── L'image en pleine taille : la photo retouchée (corrections, réglages, filtres, masque), les calques visibles, puis le recadrage ──
-        const hasAlpha = () => { const p = P(); return !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };
+        const hasAlpha = () => { const p = P(); return !!(st.persp || st._persp0) && (st.persp || st._persp0).some(([x, y]) => x < 0 || y < 0 || x > 1 || y > 1) || !p || !p.visible || p.opacity < 1 || !!p.mask || layers[0] !== p || st.strokes.some(s => s.tool === 'clear'); };
         async function renderFull() {
             const W = img.naturalWidth, H = img.naturalHeight;
             const pc = document.createElement('canvas'); pc.width = W; pc.height = H;
@@ -2027,6 +2038,7 @@
             return oc;
         }
         $$('[data-rt-save]').forEach(b => b.addEventListener('click', async () => {
+            if (mode === 'persp') setMode('adjust'); // la perspective en cours de réglage : on garde celle d'avant
             const saveMode = b.dataset.rtSave, label0 = b.textContent;
             const mpx = img.naturalWidth * img.naturalHeight / 1e6;
             if (mpx > 60 && !confirm(`Cette image est très grande (${Math.round(mpx)} millions de points) : l’enregistrement peut être long, voire échouer. Continuer ?`)) return;

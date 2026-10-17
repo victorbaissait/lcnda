@@ -676,6 +676,7 @@
 
         /* — dessin — */
         function render() {
+            chapCache = {sig: ''}; // le chapitre en cours ({chapitre}) se recalcule à chaque dessin
             $('[data-ly-css]').textContent = BASE_CSS + docCss(D, '.ly-editor .ly-board') + `.ly-editor .ly-board{--ly-zoom:${zoom}}`;
             const ctx = {editingId, preview: preview || !guides};
             if (editMaster) { const m = D.masters.find(x => x.id === editMaster); board.innerHTML = m ? `<div class="ly-spread is-master-edit"><div class="ly-master-banner">Gabarit « ${esc(m.name)} » — ce qui est posé ici apparaît sur toutes ses pages. <button type="button" class="button small secondary" data-ly-cmd="mfolio">＋ Numéro de page</button><button type="button" class="button small secondary" data-ly-cmd="mrunning">＋ Titre du livre en haut</button><button type="button" class="button small secondary" data-ly-cmd="mchapter">＋ Chapitre en cours en haut</button><button type="button" class="button small secondary" data-ly-cmd="mfooter">＋ Pied de page</button><button type="button" class="button small" data-ly-cmd="endmaster">Revenir aux pages</button></div>${masterHtml(D, m, ctx)}</div>` : ''; }
@@ -832,7 +833,7 @@
             const bb = bounds(items), lines = snapLines(items.map(x => x.id));
             const mv = ev => {
                 const P = mmAt(ev); let dx = P.x - P0.x, dy = P.y - P0.y; if (!moved && Math.hypot(dx, dy) * P.k < 3) return;
-                if (!moved && dup) { const copies = items.map(it => ({...JSON.parse(JSON.stringify(it)), id: nid('c')})); curList().push(...copies); items = copies; sel = copies.map(c => c.id); start.splice(0, start.length, ...copies.map(it => ({it, x: it.x, y: it.y}))); render(); }
+                if (!moved && dup) { const copies = relink(items, items.map(it => ({...JSON.parse(JSON.stringify(it)), id: nid('c')}))); curList().push(...copies); items = copies; sel = copies.map(c => c.id); start.splice(0, start.length, ...copies.map(it => ({it, x: it.x, y: it.y}))); render(); }
                 moved = true; if (ev.shiftKey) { if (Math.abs(dx) > Math.abs(dy)) dy = 0; else dx = 0; }
                 const sn = snapBox({x: bb.x + dx, y: bb.y + dy, w: bb.w, h: bb.h}, lines, P.k); dx += sn.dx; dy += sn.dy;
                 start.forEach(s => { s.it.x = r1(s.x + dx); s.it.y = r1(s.y + dy); const el = board.querySelector(`.ly-item[data-id="${CSS.escape(s.it.id)}"]`); if (el) { el.style.left = px(s.it.x) + 'px'; el.style.top = px(s.it.y) + 'px'; } });
@@ -913,7 +914,9 @@
         function arrange(kind) { const list = curList(), its = selected(); if (!its.length) return; its.forEach(it => { const i = list.indexOf(it); list.splice(i, 1); const n = list.length; const j = kind === 'front' ? n : kind === 'bottom' ? 0 : kind === 'fwd' ? Math.min(n, i + 1) : Math.max(0, i - 1); list.splice(j, 0, it); }); commit(); render(); }
         function del() { if (!sel.length) return; const list = curList(); sel.forEach(i => { const k = list.findIndex(x => x.id === i); if (k >= 0 && !locked(list[k])) list.splice(k, 1); }); sel = []; commit(); render(); }
         function copy(cut = false) { if (!sel.length) return; clip = JSON.stringify(selected()); try { navigator.clipboard?.writeText?.('')?.catch?.(() => {}); } catch (_) {} if (cut) del(); msg(`${JSON.parse(clip).length} objet(s) copié(s).`); }
-        function paste(inPlace = false) { if (!clip) return msg('Rien à coller.'); const its = JSON.parse(clip).map(it => ({...it, id: nid('c'), x: it.x + (inPlace ? 0 : 5), y: it.y + (inPlace ? 0 : 5)})); curList().push(...its); sel = its.map(i => i.id); commit(); render(); }
+        /** Des copies : un chaînage vers un bloc copié avec elles suit la copie ; vers un bloc qui n'est pas copié, il est coupé */
+        const relink = (orig, copies) => { const map = new Map(orig.map((o, k) => [o.id, copies[k].id])); copies.forEach(c => { if (c.next) { if (map.has(c.next)) c.next = map.get(c.next); else delete c.next; } }); return copies; };
+        function paste(inPlace = false) { if (!clip) return msg('Rien à coller.'); const src0 = JSON.parse(clip), its = relink(src0, src0.map(it => ({...it, id: nid('c'), x: it.x + (inPlace ? 0 : 5), y: it.y + (inPlace ? 0 : 5)}))); curList().push(...its); sel = its.map(i => i.id); commit(); render(); }
         function dup() { copy(); paste(); }
         const addPages = (n, at, master) => { const pages = Array.from({length: clamp(n, 1, 500)}, () => ({id: nid('p'), master: master ?? (D.pages[cur]?.master || 'A'), items: []})); D.pages.splice(clamp(at, 0, D.pages.length), 0, ...pages); commit(); goPage(at); msg(`${pages.length} page(s) ajoutée(s).`); };
         function insertPagesDialog() {
@@ -948,7 +951,7 @@
         }
         async function gotoDialog() { const v = await ask(`Aller à la page (1 à ${D.pages.length}) :`, String(cur + 1)); if (v) goPage(Number(v) - 1); }
         function delPage() { if (D.pages.length < 2) return msg('Il faut garder au moins une page.'); if (D.pages[cur].items.length && !confirm(`Supprimer la page ${cur + 1} et ce qu’elle contient ?`)) return; D.pages.splice(cur, 1); cur = Math.min(cur, D.pages.length - 1); sel = []; commit(); render(); }
-        function dupPage() { const p = JSON.parse(JSON.stringify(D.pages[cur])); p.id = nid('p'); p.items.forEach(it => { it.id = nid('c'); }); D.pages.splice(cur + 1, 0, p); commit(); goPage(cur + 1); }
+        function dupPage() { const p = JSON.parse(JSON.stringify(D.pages[cur])); p.id = nid('p'); const orig = D.pages[cur].items; p.items.forEach(it => { it.id = nid('c'); }); relink(orig, p.items); D.pages.splice(cur + 1, 0, p); commit(); goPage(cur + 1); }
         function lockToggle() { const its = selected(); if (!its.length) return; const v = !its.every(x => x.locked); its.forEach(x => { x.locked = v; }); commit(); render(); }
         function fitFrame() { const it = one(); if (!it) return; if (it.type === 'text') { const el = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"] .ly-txt`); if (el) { it.h = r1(el.scrollHeight / MM + (it.inset || 0) * 2 + 0.5); commit(); render(); } return; } if (it.src) { const im = new Image(); im.onload = () => { it.h = r1(it.w * im.naturalHeight / im.naturalWidth); it.imgS = 100; it.imgX = 0; it.imgY = 0; commit(); render(); }; im.src = it.src; } }
         async function placeImage(target = null) {
@@ -984,7 +987,9 @@
                 if (!measureOverflow(V, vl, V.pages[pi].items.filter(o => o !== vl))) break;
                 const np = {id: nid('p'), master: D.pages[pi].master, items: []}; D.pages.splice(pi + 1, 0, np);
                 const b = box(D, pi + 1), f = textItem({x: b.x, y: b.y, w: b.w, h: b.h, columns: last.columns || 1, gutter: last.gutter ?? 4, inset: last.inset || 0, layer: last.layer, name: 'Suite du texte'});
-                np.items.push(f); last.next = f.id; last = f; made++;
+                np.items.push(f); const prev = last; last.next = f.id; last = f; made++;
+                const V2 = resolveDoc(D), got = V2.pages[pi + 1]?.items.find(x => x.id === f.id)?.html || '';
+                if (!plainOf(got).trim()) { delete prev.next; D.pages.splice(pi + 1, 1); made--; break; } // plus rien ne passe : on s'arrête
             }
             if (!made) return msg('Le texte tient déjà dans ses blocs.');
             commit(`Texte réparti sur ${made} nouvelle${made > 1 ? 's' : ''} page${made > 1 ? 's' : ''}`); render(); msg(`${made} page${made > 1 ? 's' : ''} ajoutée${made > 1 ? 's' : ''} : le texte continue de bloc en bloc.`);
@@ -1014,6 +1019,7 @@
         /* ─── Objets dynamiques : photos de l'app (liées) et textes de fiches ─── */
         let linkState = {}, mediaRows = null;
         async function refreshLinks(silent = true) {
+            if (editingId) { if (!silent) msg('Termine d’abord le texte en cours (Échap), puis recommence.'); return; }
             const frames = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && (it.mediaId || /^media\//.test(it.src || '')));
             const dyn = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.dyn);
             if (!frames.length && !dyn.length) { if (!silent) msg('Aucun objet lié dans ce document.'); return; }
@@ -1038,9 +1044,10 @@
             if (!it?.mediaId) return msg('Cette image n’est pas liée à une photo de l’app.');
             if (!mediaRows) { try { mediaRows = (await api('media_av_list', {kind: 'image'})).items || []; } catch (_) { mediaRows = []; } }
             const r = mediaRows.find(x => Number(x.id) === Number(it.mediaId)); if (!r || !ext.openRetouch) return msg('Photo introuvable dans l’app.');
-            const before = new Set(document.querySelectorAll('dialog'));
-            A().state.lightboxMedia = [{...r, media_type: 'image'}]; A().state.lightboxIndex = 0; await ext.openRetouch();
-            let seen = false; const t = setInterval(() => { const fresh = [...document.querySelectorAll('dialog')].filter(d => !before.has(d)); if (fresh.length) seen = true; else if (seen || !dl.isConnected) { clearInterval(t); if (dl.isConnected) refreshLinks(false); } }, 600);
+            const before = new Set(document.querySelectorAll('dialog')), lb0 = A().state.lightboxMedia, li0 = A().state.lightboxIndex;
+            A().state.lightboxMedia = [{...r, media_type: 'image'}]; A().state.lightboxIndex = 0;
+            try { await ext.openRetouch(); } finally { A().state.lightboxMedia = lb0; A().state.lightboxIndex = li0; }
+            let seen = false, n = 0; const t = setInterval(() => { n++; const fresh = [...document.querySelectorAll('dialog')].filter(d => !before.has(d)); if (fresh.length) seen = true; else if (seen || !dl.isConnected || n > 10) { clearInterval(t); if (dl.isConnected && seen) refreshLinks(false); } }, 600);
         }
         function dynPersonDialog(it = null) {
             const f0 = it?.dyn?.fields || ['name', 'life', 'parents', 'partners'];
@@ -1065,7 +1072,7 @@
         /* ─── 🎨 Mes styles : gardés pour tous les documents ─── */
         const SL_KEY = 'genealogie-layout-stylesets';
         function styleLibrary() {
-            const sets = () => { try { return JSON.parse(localStorage.getItem(SL_KEY) || '[]') || []; } catch (_) { return []; } };
+            const sets = () => { try { const v = JSON.parse(localStorage.getItem(SL_KEY) || '[]'); return Array.isArray(v) ? v : []; } catch (_) { return []; } };
             const saveSets = l => { try { localStorage.setItem(SL_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Plus de place : supprime un ensemble.', 'error'); return false; } };
             const dg = ext.openDialog({eyebrow: 'STYLES', title: '🎨 Mes styles, pour tous mes documents', wide: true,
                 body: `<p class="muted">Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre. Les styles du même nom sont remplacés, les autres ajoutés.</p>
@@ -1545,6 +1552,7 @@
         const texts = []; const w = document.createTreeWalker(src, NodeFilter.SHOW_TEXT); let n, total = 0; while ((n = w.nextNode())) { texts.push([n, total]); total += n.data.length; }
         const at = k => { let i = texts.length - 1; while (i > 0 && texts[i][1] > k) i--; const [node, off] = texts[i] || [src, 0]; return [node, Math.min(node.data?.length ?? 0, k - off)]; };
         const part = (a, b) => { const r = document.createRange(); if (a === null) r.setStart(src, 0); else r.setStart(...at(a)); if (b === null) r.setEnd(src, src.childNodes.length); else r.setEnd(...at(b)); const d = document.createElement('div'); d.appendChild(r.cloneContents()); return d.innerHTML; };
+        if (!total) return {fit: html, rest: ''}; // pas de texte à couper (lignes vides) : tout reste ici, le bloc déborde
         const plain = texts.map(t => t[0].data).join('');
         let lo = 0, hi = total;
         while (lo < hi) { const mid = Math.ceil((lo + hi) / 2); if (!measureOverflow(doc, {...frame, html: part(null, mid)}, others)) lo = mid; else hi = mid - 1; }
@@ -1560,7 +1568,7 @@
     function resolveDoc(doc, {editingId = null} = {}) {
         const all = []; doc.pages.forEach((p, i) => p.items.forEach(it => all.push({it, i})));
         const special = all.some(({it}) => it.next || it.auto); if (!special) return doc;
-        const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length]))]);
+        const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length]).concat(p.items.filter(it => it.wrap && it.wrap.mode !== 'none').map(it => [it.id, it.x, it.y, it.w, it.h, it.wrap.mode, it.wrap.off, it.hidden])))]);
         if (resolveCache.key === key) return resolveCache.out;
         const V = JSON.parse(JSON.stringify(doc)), byId = new Map(); V.pages.forEach((p, i) => p.items.forEach(it => byId.set(it.id, {it, i, p})));
         const targets = new Set(); byId.forEach(({it}) => { if (it.next && byId.has(it.next)) targets.add(it.next); });
@@ -1668,7 +1676,7 @@
     }
 
     /* ═════════════ La bibliothèque : mes livres, mes designs, ceux de l'app ═════════════ */
-    const coverHtml = (doc, w = 100) => { try { const d = cleanDoc(doc); if (!d.pages.length) return ''; const k = w / px(d.page.w); return `<div class="ly-cover" style="width:${w}px;height:${r1(px(d.page.h) * k)}px"><style>${docCss(d, '.ly-cover')}</style><div style="zoom:${k}">${pageHtml(d, 0, {preview: true, keyPrefix: 'cv' + Math.random().toString(36).slice(2, 6)})}</div></div>`; } catch (_) { return '<div class="ly-cover is-empty">📕</div>'; } };
+    const coverHtml = (doc, w = 100) => { try { const d = resolveDoc(cleanDoc(doc)); if (!d.pages.length) return ''; const k = w / px(d.page.w); return `<div class="ly-cover" style="width:${w}px;height:${r1(px(d.page.h) * k)}px"><style>${docCss(d, '.ly-cover')}</style><div style="zoom:${k}">${pageHtml(d, 0, {preview: true, keyPrefix: 'cv' + Math.random().toString(36).slice(2, 6)})}</div></div>`; } catch (_) { return '<div class="ly-cover is-empty">📕</div>'; } };
     let builtinCache = null;
     const builtins = () => builtinCache || (builtinCache = THEMES.map(th => ({th, doc: builtinDesign(th, 'A4')})));
     async function openLibrary() {

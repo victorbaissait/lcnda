@@ -1098,7 +1098,7 @@
             const cdel = e.target.closest('[data-mt-chapdel]'); if (cdel) { P.chapters = (P.chapters || []).filter(x => x.id !== cdel.dataset.mtChapdel); touch(0); return; }
             if (e.target.closest('[data-mt-chapcopy]')) { const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés : colle-les dans la description de la vidéo.'), () => prompt('Copie ce texte :', txt)); return; }
             if (e.target.closest('[data-mt-chapvtt]')) { const list = [...P.chapters].sort((a, b) => a.t - b.t), T = montageEnd(P), ts = x => { const ms = Math.round(x * 1000), h = Math.floor(ms / 3600000), m = Math.floor(ms / 60000) % 60, s2 = Math.floor(ms / 1000) % 60; return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s2).padStart(2, '0')}.${String(ms % 1000).padStart(3, '0')}`; };
-                saveText(`${(projName || media.title || 'montage').replace(/[^\p{L}\p{N} _-]+/gu, '')}-chapitres.vtt`, 'WEBVTT\n\n' + list.map((c, i) => `${i + 1}\n${ts(c.t)} --> ${ts(list[i + 1]?.t ?? T)}\n${c.title}\n`).join('\n'), 'text/vtt'); return; }
+                saveText(`${(projName || media.title || 'montage').replace(/[^\p{L}\p{N} _-]+/gu, '')}-chapitres.vtt`, 'WEBVTT\n\n' + list.map((c, i) => `${i + 1}\n${ts(c.t)} --> ${ts(list[i + 1]?.t ?? T)}\n${String(c.title).replace(/-->/g, '->').replace(/\s*\n\s*/g, ' ')}\n`).join('\n'), 'text/vtt'); return; }
             const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
             if (e.target.closest('[data-mt-sep]')) { dl.querySelector('[data-mt-op="detach"]')?.click(); return; }
@@ -1320,7 +1320,7 @@
         function exportSubs() {
             const subs = P.texts.filter(x => x.sub || /^sous-titres/i.test(P.tracks.find(t => t.id === trackOf(P, x, 'texts'))?.name || '')), list = (subs.length ? subs : P.texts).slice().sort((a, b) => a.at - b.at);
             if (!list.length) return toast('Aucun texte à exporter.', 'error');
-            saveText(`${(projName || media.title || 'montage').replace(/[^\p{L}\p{N} _-]+/gu, '')}.srt`, list.map((x, i) => `${i + 1}\n${srtTime(x.at)} --> ${srtTime(x.at + x.dur)}\n${x.text}\n`).join('\n'), 'application/x-subrip');
+            saveText(`${(projName || media.title || 'montage').replace(/[^\p{L}\p{N} _-]+/gu, '')}.srt`, list.map((x, i) => `${i + 1}\n${srtTime(x.at)} --> ${srtTime(x.at + x.dur)}\n${String(x.text).replace(/-->/g, '->').replace(/\n\s*\n/g, '\n')}\n`).join('\n'), 'application/x-subrip');
         }
         let voiceRec = null;
         async function voiceOver(btn) {
@@ -1530,7 +1530,7 @@
                 },
             });
         });
-        dl.addEventListener('close', () => { eng?.destroy(); });
+        dl.addEventListener('close', () => { eng?.destroy(); if (voiceRec) { voiceRec.onstop = null; try { voiceRec.stop(); } catch (_) {} voiceRec.stream?.getTracks().forEach(tk => tk.stop()); voiceRec = null; } }); // le micro s'éteint avec le montage
         if (ext.tbApply) ext.tbApply(dl, 'video');
         await rebuild();
         drawTl(); drawRush(true); showProjName(); record(); // première étape de ↶

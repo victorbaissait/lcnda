@@ -1107,7 +1107,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueils.js?v=14" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=13" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=4" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=28" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=29" defer></script>
 <script src="assets/js/heritage-calendars.js?v=6" defer></script>
 <script src="assets/js/heritage-assemble.js?v=2" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
@@ -1118,7 +1118,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
 <script src="assets/js/heritage-employers.js?v=1" defer></script>
 <script src="assets/js/heritage-book.js?v=2" defer></script>
-<script src="assets/js/heritage-layout.js?v=21" defer></script>
+<script src="assets/js/heritage-layout.js?v=22" defer></script>
 <script src="assets/js/heritage-edittools.js?v=2" defer></script>
 <script src="assets/js/heritage-editorkeys.js?v=1" defer></script>
 <script src="assets/js/heritage-livrets.js?v=5" defer></script>
@@ -1127,7 +1127,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=10" defer></script>
 <script src="assets/js/heritage-boards.js?v=23" defer></script>
 <script src="assets/js/heritage-dnd.js?v=6" defer></script>
-<script src="assets/js/heritage-studio.js?v=41" defer></script>
+<script src="assets/js/heritage-studio.js?v=42" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=2" defer></script>
 <script src="assets/js/heritage-fiches.js?v=8" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=2" defer></script>
