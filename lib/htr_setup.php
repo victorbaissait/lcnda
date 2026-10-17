@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 function htr_dir(): string
 {
-    $d = DATA_DIR . '/htr';
+    $d = SHARED_DATA_DIR . '/htr'; // commun à toutes les généalogies
     if (!is_dir($d)) { @mkdir($d . '/models', 0775, true); }
     if (!is_dir($d . '/models')) { @mkdir($d . '/models', 0775, true); }
     return $d;

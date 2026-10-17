@@ -21,7 +21,7 @@ function offline_tile_svg(PDO $pdo, int $z, int $x, int $y): string
     $n = 2 ** $z;
     if ($x < 0 || $y < 0 || $x >= $n || $y >= $n) { return offline_tile_wrap(''); }
     $count = (int) $pdo->query('SELECT count(*) FROM commune_contours')->fetchColumn();
-    $dir = DATA_DIR . '/cache/offline-tiles/' . $count . '/' . $z . '/' . $x;
+    $dir = SHARED_DATA_DIR . '/cache/offline-tiles/' . $count . '/' . $z . '/' . $x;
     $file = $dir . '/' . $y . '.svg';
     if (is_file($file)) { return (string) file_get_contents($file); }
     $b = offline_tile_bounds($z, $x, $y);

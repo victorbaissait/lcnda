@@ -15,15 +15,19 @@
         const proto=Object.getPrototypeOf(store);
         const originalSet=proto.setItem,originalRemove=proto.removeItem;
         const pending={set:{},remove:new Set()};let timer=null;
+        let detached=false;
         const flush=(keepalive=false)=>{
             clearTimeout(timer);timer=null;
             const set=pending.set,remove=[...pending.remove];
-            if(!Object.keys(set).length&&!remove.length)return;
+            if(!Object.keys(set).length&&!remove.length)return Promise.resolve();
             pending.set={};pending.remove.clear();
             const csrf=window.INSTALL_CSRF||'';
-            fetch('api.php?action=save_settings',{method:'POST',keepalive,headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({set,remove,csrf})})
+            return fetch('api.php?action=save_settings',{method:'POST',keepalive,headers:{'Content-Type':'application/json','X-CSRF-Token':csrf},body:JSON.stringify({set,remove,csrf})})
                 .catch(()=>{Object.assign(pending.set,set);remove.forEach(k=>pending.remove.add(k));});
         };
+        // Changer de généalogie : les derniers réglages partent dans la base ouverte, puis la copie locale est vidée
+        // (sans le dire à la base) ; la généalogie suivante démarre avec SES réglages, rien n'est mélangé.
+        window.LCNDA_SETTINGS_DETACH=async()=>{await flush(false);detached=true;for(let i=store.length-1;i>=0;i--){const key=store.key(i);if(synced(key)){try{originalRemove.call(store,key);}catch(_){}}}};
         const schedule=()=>{if(!timer)timer=setTimeout(()=>flush(false),1000);};
         const base=Array.isArray(fromBase)?{}:fromBase;
         // Deuxième écran ou écran posé dans un onglet (?view=…) : la fenêtre principale tient déjà les réglages à jour.
@@ -34,8 +38,8 @@
             for(let i=0;i<store.length;i++){const key=store.key(i);if(synced(key)&&!(key in base)){pending.set[key]=store.getItem(key);}}
         }
         if(Object.keys(pending.set).length)schedule();
-        proto.setItem=function(key,value){originalSet.call(this,key,value);if(this===store&&synced(String(key))){pending.remove.delete(String(key));pending.set[String(key)]=String(value);schedule();}};
-        proto.removeItem=function(key){originalRemove.call(this,key);if(this===store&&synced(String(key))){delete pending.set[String(key)];pending.remove.add(String(key));schedule();}};
+        proto.setItem=function(key,value){originalSet.call(this,key,value);if(this===store&&!detached&&synced(String(key))){pending.remove.delete(String(key));pending.set[String(key)]=String(value);schedule();}};
+        proto.removeItem=function(key){originalRemove.call(this,key);if(this===store&&!detached&&synced(String(key))){delete pending.set[String(key)];pending.remove.add(String(key));schedule();}};
         window.addEventListener('pagehide',()=>flush(true));
     })();
 

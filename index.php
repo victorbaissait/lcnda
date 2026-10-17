@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=205">
+    <link rel="stylesheet" href="assets/css/app.css?v=206">
     <link rel="stylesheet" href="assets/css/heritage.css?v=151">
     <link rel="stylesheet" href="assets/css/layout.css?v=9">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
@@ -58,6 +58,7 @@ header('X-Content-Type-Options: nosniff');
             <button type="button" class="screen-tool" id="side-panel-open" title="Diviser l’écran en deux (⇧ + Entrée dans la recherche rapide ⌘K)" aria-label="Diviser l’écran en deux"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button>
             <button type="button" class="screen-tool" id="new-window-open" title="Ouvrir cet écran dans une nouvelle fenêtre" aria-label="Ouvrir dans une nouvelle fenêtre"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="7" width="14" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 4h10v10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="20" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2"/></svg></button>
             <button type="button" class="screen-tool" id="kiosk-toggle" title="Mode consultation : la famille peut tout parcourir sans rien modifier" aria-label="Mode consultation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
+            <button type="button" class="screen-tool genealogy-switch" id="genealogy-switch" title="Mes généalogies : changer, en créer une autre" aria-label="Mes généalogies"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M5 16.5V14h14v2.5M12 11.5V14"/></svg><span data-gen-name hidden></span></button>
             <span class="status-dot"></span>
             <span id="database-status">Base locale</span>
         </div>
@@ -1093,7 +1094,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=355" defer></script>
+<script src="assets/js/app.js?v=356" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
@@ -1122,13 +1123,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-editorkeys.js?v=1" defer></script>
 <script src="assets/js/heritage-livrets.js?v=5" defer></script>
 <script src="assets/js/heritage-pets.js?v=14" defer></script>
-<script src="assets/js/heritage-board-shapes.js?v=1" defer></script>
+<script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=10" defer></script>
 <script src="assets/js/heritage-boards.js?v=23" defer></script>
 <script src="assets/js/heritage-dnd.js?v=6" defer></script>
 <script src="assets/js/heritage-studio.js?v=36" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=1" defer></script>
 <script src="assets/js/heritage-fiches.js?v=7" defer></script>
+<script src="assets/js/heritage-genealogies.js?v=1" defer></script>
 <script src="assets/js/museum-viewer.js?v=6" defer></script>
 <script src="assets/js/heritage-museum.js?v=9" defer></script>
 <script>

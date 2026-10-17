@@ -62,7 +62,7 @@ function addr_dept(string $insee): string
 
 function addr_ban_dir(): string
 {
-    $d = DATA_DIR . '/ban';
+    $d = SHARED_DATA_DIR . '/ban'; // commun à toutes les généalogies
     if (!is_dir($d)) { @mkdir($d, 0775, true); }
     return $d;
 }

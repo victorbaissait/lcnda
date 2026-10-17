@@ -21,7 +21,7 @@ function reference_archive_path(string $name = 'geo-fr'): string
 
 function reference_download_dir(): string
 {
-    return DATA_DIR . '/reference';
+    return SHARED_DATA_DIR . '/reference'; // commun à toutes les généalogies
 }
 
 /** Catalogue des pays (data/reference/catalogue.json, fabriqué avec les fichiers) : nom, région, fichier, taille, sha256. */
@@ -83,7 +83,7 @@ function reference_database_path(string $name = 'geo-fr'): ?string
 {
     $archive = reference_archive_path($name);
     if (!is_file($archive)) { return null; }
-    $dir = DATA_DIR . '/cache';
+    $dir = SHARED_DATA_DIR . '/cache';
     if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { return null; }
     $target = $dir . '/reference-' . $name . '-' . substr(sha1((string) filesize($archive) . ':' . filemtime($archive)), 0, 12) . '.sqlite';
     if (is_file($target)) { return $target; }
@@ -204,7 +204,7 @@ function world_reference(): ?PDO
     $pdo = null;
     // Répertoire mondial complet (npm run fetch:geo) ; sinon, secours fabriqué depuis les fichiers des pays livrés
     $path = reference_database_path('geo-world');
-    if ($path) { foreach (glob(DATA_DIR . '/cache/reference-world-pays-*.sqlite') ?: [] as $old) { @unlink($old); } } // le secours ne sert plus
+    if ($path) { foreach (glob(SHARED_DATA_DIR . '/cache/reference-world-pays-*.sqlite') ?: [] as $old) { @unlink($old); } } // le secours ne sert plus
     $path ??= world_reference_from_countries();
     if (!$path) { return null; }
     try {
@@ -241,7 +241,7 @@ function world_reference_from_countries(): ?string
     foreach ($files as $f) { $cc = strtoupper(substr(basename($f), 4, 2)); if ($cc !== 'FR') { $byCc[$cc] ??= $f; } }
     if (!$byCc) { return null; }
     ksort($byCc);
-    $dir = DATA_DIR . '/cache';
+    $dir = SHARED_DATA_DIR . '/cache';
     if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { return null; }
     // « v2| » : le Québec et Oman rangés sous leur vrai pays (Canada, Oman) — un ancien secours est refait
     $sig = substr(sha1('v2|' . implode('|', array_map(static fn($f) => basename($f) . ':' . filesize($f), $byCc))), 0, 12);

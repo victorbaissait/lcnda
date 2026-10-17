@@ -61,6 +61,13 @@ try {
         kiosk_exit($payload);
     }
     kiosk_guard((string) $action, $isWrite);
+    // Plusieurs généalogies complètement séparées (lib/paths.php) : liste, création, changement, nom, mise de côté
+    if (!$isWrite && $action === 'genealogies') {
+        json_response(genealogies_list_data());
+    }
+    if ($isWrite && in_array($action, ['genealogy_create', 'genealogy_switch', 'genealogy_rename', 'genealogy_remove'], true)) {
+        json_response(genealogy_action((string) $action, $payload));
+    }
     if (!$isWrite && $action === 'database_profiles') {
         json_response(['current' => active_database_key(), 'databases' => available_database_profiles()]);
     }
@@ -5489,6 +5496,68 @@ function date_check_issues(PDO $pdo): array
         }
     }
     return $issues;
+}
+
+/** La liste des généalogies (la principale en premier), avec celle qui est ouverte */
+function genealogies_list_data(): array
+{
+    $reg = genealogies_registry();
+    $size = static fn(string $dir) => is_file($dir . '/genealogy.sqlite') ? (int) filesize($dir . '/genealogy.sqlite') : 0;
+    $list = [['id' => '', 'name' => $reg['main_name'], 'main' => true, 'active' => GENEALOGY_ID === '', 'size' => $size(SHARED_DATA_DIR)]];
+    foreach ($reg['list'] as $g) { $list[] = ['id' => $g['id'], 'name' => $g['name'], 'main' => false, 'active' => GENEALOGY_ID === $g['id'], 'size' => $size(genealogy_dir($g['id'])), 'created_at' => $g['created_at']]; }
+    return ['active' => GENEALOGY_ID, 'genealogies' => $list];
+}
+
+function genealogies_registry_save(array $reg): void
+{
+    $file = SHARED_DATA_DIR . '/genealogies.json';
+    $json = json_encode(['active' => $reg['active'], 'main_name' => $reg['main_name'], 'list' => array_values($reg['list'])], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    if ($json === false || file_put_contents($file . '.tmp', $json, LOCK_EX) === false || !rename($file . '.tmp', $file)) {
+        throw new RuntimeException('Impossible d’enregistrer la liste des généalogies.');
+    }
+}
+
+/** Créer, ouvrir, renommer ou mettre de côté une généalogie. « Mettre de côté » ne détruit rien : le dossier part dans
+    genealogies/_mises-de-cote/ (on peut le remettre à la main). La principale ne se met pas de côté. */
+function genealogy_action(string $action, array $data): array
+{
+    $reg = genealogies_registry();
+    $id = (string) ($data['id'] ?? '');
+    $known = $id === '' || in_array($id, array_column($reg['list'], 'id'), true);
+    $name = mb_substr(trim(preg_replace('/\s+/u', ' ', (string) ($data['name'] ?? ''))), 0, 80);
+    if ($action === 'genealogy_create') {
+        if ($name === '') { throw new RuntimeException('Donne un nom à la nouvelle généalogie.'); }
+        $slug = trim(preg_replace('/[^a-z0-9]+/', '-', strtolower(iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $name) ?: '')), '-') ?: 'genealogie';
+        $slug = substr($slug, 0, 30); $new = $slug; $n = 2;
+        while (in_array($new, array_column($reg['list'], 'id'), true) || is_dir(genealogy_dir($new))) { $new = $slug . '-' . $n++; }
+        foreach ([genealogy_dir($new), genealogy_dir($new) . '/media', genealogy_dir($new) . '/backups'] as $dir) {
+            if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('Impossible de créer le dossier de la généalogie.'); }
+        }
+        $reg['list'][] = ['id' => $new, 'name' => $name, 'created_at' => date('Y-m-d H:i:s')];
+        if (!empty($data['open'])) { $reg['active'] = $new; }
+        genealogies_registry_save($reg);
+        return ['ok' => true, 'id' => $new, 'active' => $reg['active']];
+    }
+    if (!$known || ($id !== '' && !genealogy_id_ok($id))) { throw new RuntimeException('Généalogie introuvable.'); }
+    if ($action === 'genealogy_switch') {
+        $reg['active'] = $id; genealogies_registry_save($reg);
+        return ['ok' => true, 'active' => $id];
+    }
+    if ($action === 'genealogy_rename') {
+        if ($name === '') { throw new RuntimeException('Le nom ne peut pas être vide.'); }
+        if ($id === '') { $reg['main_name'] = $name; } else { foreach ($reg['list'] as &$g) { if ($g['id'] === $id) { $g['name'] = $name; } } unset($g); }
+        genealogies_registry_save($reg);
+        return ['ok' => true];
+    }
+    // genealogy_remove
+    if ($id === '') { throw new RuntimeException('La généalogie principale ne peut pas être mise de côté.'); }
+    if ($id === GENEALOGY_ID || $id === $reg['active']) { throw new RuntimeException('Ouvre d’abord une autre généalogie.'); }
+    $aside = SHARED_DATA_DIR . '/genealogies/_mises-de-cote';
+    if (!is_dir($aside) && !@mkdir($aside, 0775, true) && !is_dir($aside)) { throw new RuntimeException('Impossible de créer le dossier des généalogies mises de côté.'); }
+    if (is_dir(genealogy_dir($id)) && !@rename(genealogy_dir($id), $aside . '/' . $id . '-' . date('Ymd-His'))) { throw new RuntimeException('Impossible de déplacer le dossier de la généalogie.'); }
+    $reg['list'] = array_values(array_filter($reg['list'], static fn($g) => $g['id'] !== $id));
+    genealogies_registry_save($reg);
+    return ['ok' => true];
 }
 
 function issues_data(PDO $pdo): never
