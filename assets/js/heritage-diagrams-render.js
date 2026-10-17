@@ -241,7 +241,7 @@
         const topLabels = o.eventLabels && evs.some(e => e.label) ? Math.max(...evs.map(e => textW(e.label, fs * .85))) * .75 + 8 : 0;
         const y0 = topLabels + 4, plotH = lines.length * rowH;
         let svg = '';
-        const tk = ticks(from, to, clamp(Math.round(pw / 70), 2, 30)); const step = num(o.step) > 0 ? num(o.step) : Math.max(1, tk.step);
+        const tk = ticks(from, to, clamp(Math.round(pw / 70), 2, 30)); const step = Math.max(num(o.step) > 0 ? num(o.step) : Math.max(1, tk.step), (to - from) / 200); // au plus 200 repères
         for (let v = Math.ceil(from / step) * step; v <= to + 1e-9; v += step) {
             const x = X(v); svg += `<line x1="${r2(x)}" y1="${r2(y0)}" x2="${r2(x)}" y2="${r2(y0 + plotH)}" stroke="currentColor" stroke-opacity=".15"/>` + T(x, y0 + plotH + fs, String(Math.round(v * 100) / 100), {size: fs * .9, anchor: 'middle'});
         }
