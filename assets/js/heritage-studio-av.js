@@ -616,9 +616,25 @@
         if (d?.look && typeof d.look === 'object') P.look = {...P.look, ...d.look};
         if (d?.fx && typeof d.fx === 'object') P.fx = {...P.fx, ...d.fx};
         P.fadeStart = !!d?.fadeStart; P.fadeEnd = !!d?.fadeEnd;
+        if (ASPECTS.some(a => a[0] === d?.aspect)) P.aspect = d.aspect;
+        P.blurBars = !!d?.blurBars; P.kbAuto = !!d?.kbAuto;
+        if (d?.duck && typeof d.duck === 'object') P.duck = {on: d.duck.on !== false, amount: Math.max(0, Math.min(1, Number(d.duck.amount ?? 0.3))), video: !!d.duck.video};
+        P.chapters = arr(d?.chapters).filter(c => c && Number.isFinite(Number(c.t))).map(c => ({id: String(c.id || nid('c')).slice(0, 20), t: Math.max(0, Number(c.t)), title: String(c.title || '').slice(0, 120)}));
         return P;
     }
     const KIND_OF_LIST = {v2: 'v', texts: 't', audio: 'a'};
+    /** Formats d'image du film : comme la vidéo, écran large, téléphone (vertical), carré, portrait des réseaux */
+    const ASPECTS = [['', 'Comme la 1re vidéo'], ['16:9', '🖥️ Écran 16:9'], ['9:16', '📱 Téléphone 9:16 (vertical)'], ['1:1', '⬛ Carré 1:1'], ['4:5', '🖼️ Portrait 4:5 (réseaux)'], ['4:3', '📺 Ancien écran 4:3']];
+    const aspectDims = a => { const [w, h] = String(a).split(':').map(Number); if (!w || !h) return null; const k = 1080 / Math.min(w, h); return [Math.round(w * k) & ~1, Math.round(h * k) & ~1]; };
+    /** Ken Burns : un zoom ou un glissement lent sur une photo, du début à la fin de son passage */
+    const KB = [['', 'Aucun'], ['auto', '🎲 Automatique (varié)'], ['in', '🔍 Zoom avant'], ['out', '🔎 Zoom arrière'], ['left', '⬅️ Glisse vers la gauche'], ['right', '➡️ Glisse vers la droite'], ['up', '⬆️ Monte'], ['down', '⬇️ Descend']];
+    function kbAt(c, P, local) {
+        let m = c.kb ?? (P.kbAuto ? 'auto' : ''); if (!m) return null;
+        if (m === 'auto') { const h = [...String(c.id)].reduce((a, ch) => (a * 31 + ch.charCodeAt(0)) >>> 0, 7); m = ['in', 'out', 'left', 'right', 'in', 'up'][h % 6]; }
+        const u = Math.max(0, Math.min(1, (local - (c.from || 0)) / Math.max(0.1, (c.to || 1) - (c.from || 0)))), e = u * u * (3 - 2 * u) * 0.35 + u * 0.65, z = 0.14;
+        if (m === 'in') return {s: 1 + z * e, x: 0, y: 0}; if (m === 'out') return {s: 1 + z * (1 - e), x: 0, y: 0};
+        const d = (e - 0.5) * 0.09; return {s: 1 + z * 0.8, x: m === 'left' ? -d : m === 'right' ? d : 0, y: m === 'up' ? -d : m === 'down' ? d : 0};
+    }
     /** La piste d'un élément (une ancienne piste « 1 / 2 » des sons devient A1 / A2) */
     const trackOf = (P, c, list) => { const k = KIND_OF_LIST[list]; if (typeof c.track === 'number') c.track = 'A' + c.track; if (c.track && P.tracks.some(t => t.id === c.track && t.kind === k)) return c.track; return P.tracks.find(t => t.kind === k)?.id || ''; };
     const trackIdx = (P, id) => P.tracks.findIndex(t => t.id === id);
@@ -674,8 +690,12 @@
             P.audio.forEach(a => { if (tt >= a.at && tt < a.at + clen(a) && !trackHidden(P, trackOf(P, a, 'audio'))) list.push({kind: 'a', c: a, local: a.from + (tt - a.at) * spd(a)}); });
             return {L, list};
         }
+        let duckLvl = 1;
         function sync(tt, hard = false) {
             const {list} = active(tt), keep = new Set();
+            // la musique baisse toute seule pendant une voix (sons marqués « voix », et si on veut le son des vidéos)
+            const D0 = P.duck || {on: true, amount: 0.3}, voice = D0.on !== false && list.some(it => (it.kind === 'a' && it.c.voice && (it.c.vol ?? 1) > 0) || (D0.video && it.kind === 'v1' && !it.x.c.mute && !P.sources[it.x.c.s]?.kind?.startsWith('image') && (it.x.c.vol ?? 1) > 0));
+            const want = voice ? Math.max(0, Math.min(1, D0.amount ?? 0.3)) : 1; duckLvl = hard ? want : duckLvl + (want - duckLvl) * 0.12;
             for (const it of list) {
                 const c = it.kind === 'v1' ? it.x.c : it.c, so = P.sources[c.s]; if (!so) continue;
                 const e = elFor(c.id, so.src, it.kind === 'a', so.kind === 'image', c.afx); keep.add(c.id);
@@ -688,6 +708,7 @@
                 let v = it.kind === 'a' ? (c.vol ?? 1) : (c.mute ? 0 : (c.vol ?? 1));
                 if (it.kind === 'a') { const len = clen(c), x = tt - c.at; if (c.fadeIn && x < c.fadeIn) v *= x / c.fadeIn; if (c.fadeOut && len - x < c.fadeOut) v *= Math.max(0, (len - x) / c.fadeOut); }
                 if (it.kind === 'v1' && it.x.cross && tt < it.x.at + it.x.cross) v *= (tt - it.x.at) / it.x.cross; // le son suit le fondu enchaîné
+                if (it.kind === 'a' && !c.voice) v *= duckLvl;
                 e.gain.gain.value = Math.max(0, v);
                 if (playing && e.el.paused) e.el.play().catch(() => {}); if (!playing && !e.el.paused) e.el.pause();
             }
@@ -703,6 +724,9 @@
             if (main) {
                 const turn = fx.rotate % 180 !== 0, bw = turn ? H : W, bh = turn ? W : H;
                 const ref = P.sources[P.v1[0]?.s], k = c.fit === 'fill' ? Math.max(bw / vw, bh / vh) : c.fit === 'none' ? Math.min(bw / (ref?.w || vw), bh / (ref?.h || vh)) : Math.min(bw / vw, bh / vh);
+                if (P.blurBars && (c.fit || 'fit') === 'fit' && Math.abs(vw / vh - bw / bh) > 0.02) { // bandes floues : la même image, agrandie et floutée, derrière
+                    const kc = Math.max(bw / vw, bh / vh); g.save(); g.filter = `${lookFilter(c.look || {}, P.look)} blur(${Math.round(Math.max(W, H) / 60)}px) brightness(0.72)`;
+                    g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180); g.drawImage(el, -vw * kc / 2 * 1.08, -vh * kc / 2 * 1.08, vw * kc * 1.08, vh * kc * 1.08); g.restore(); }
                 w = vw * k; h = vh * k; g.translate(W / 2, H / 2); g.rotate(fx.rotate * Math.PI / 180);
             } else {
                 w = (c.w || 35) / 100 * W; h = w * vh / vw; g.translate((c.x ?? 62) / 100 * W + w / 2, (c.y ?? 6) / 100 * H + h / 2);
@@ -711,6 +735,7 @@
             g.translate(v('px') / 100 * W + ax, v('py') / 100 * H + ay); g.rotate(v('rot') * Math.PI / 180); g.scale(sc * v('sx') / 100, sc * v('sy') / 100);
             const kx = v('kx'), ky = v('ky'); if (kx || ky) g.transform(1, Math.tan(ky * Math.PI / 180), Math.tan(kx * Math.PI / 180), 1, 0, 0);
             g.translate(-ax, -ay);
+            if (P.sources[c.s]?.kind === 'image') { const kb = kbAt(c, P, local); if (kb) { g.translate(kb.x * w, kb.y * h); g.scale(kb.s, kb.s); } }
             const cl = Math.max(0, Math.min(95, v('cl'))) / 100, cr = Math.max(0, Math.min(95, v('cr'))) / 100, ct = Math.max(0, Math.min(95, v('ct'))) / 100, cb = Math.max(0, Math.min(95, v('cb'))) / 100;
             const fw = 1 - cl - cr, fh = 1 - ct - cb;
             if (fw > 0.01 && fh > 0.01) {
@@ -725,7 +750,7 @@
             g.save(); g.globalCompositeOperation = 'soft-light'; g.globalAlpha = Math.min(0.8, Math.abs(w)); g.fillStyle = w > 0 ? '#ff9a3c' : '#3c8bff'; g.fillRect(0, 0, W, H); g.restore();
         }
         function drawText(x, tt) {
-            const local = tt - x.at, d = x.dur, size = Math.round((x.size || 6) / 100 * H), lines = String(x.text || '').split('\n');
+            const local = tt - x.at, d = x.dur, size = Math.round((x.size || 6) / 100 * Math.min(H, W)), lines = String(x.text || '').split('\n');
             let alpha = 1, dx = 0, dy = 0, scale = 1, shown = lines.join('\n'); const inT = Math.min(0.8, d / 3);
             if (x.fade !== false) { if (local < 0.4) alpha = local / 0.4; if (d - local < 0.4) alpha = Math.min(alpha, (d - local) / 0.4); }
             if (x.anim === 'fade') { alpha = Math.min(alpha, local < inT ? local / inT : 1); }
@@ -810,10 +835,10 @@
 
     /** Enregistre le montage (en temps réel) : l'image du moteur et son mélange de sons. */
     async function recordMontage(P, mime, onStep, {height = 0, quality = 5, fps = 30, abr = 128} = {}) {
-        const first = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s] || {w: 1280, h: 720}, turn = P.fx.rotate % 180 !== 0;
-        const W0 = first.w || 1280, H0 = first.h || 720, Wn = turn ? H0 : W0, Hn = turn ? W0 : H0;
-        // taille choisie (hauteur en lignes : 1080 p, 720 p…) ou celle de la vidéo (2 000 px au plus)
-        const sc = height ? height / Hn : Math.min(1, 2000 / Math.max(Wn, Hn));
+        const first = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s] || {w: 1280, h: 720}, turn = P.fx.rotate % 180 !== 0, ad = aspectDims(P.aspect);
+        const W0 = first.w || 1280, H0 = first.h || 720, Wn = ad ? ad[0] : turn ? H0 : W0, Hn = ad ? ad[1] : turn ? W0 : H0;
+        // taille choisie (en lignes : 1080 p, 720 p… ; pour un format choisi, le petit côté) ou celle de la vidéo (2 000 px au plus)
+        const sc = height ? height / (ad ? Math.min(Wn, Hn) : Hn) : Math.min(1, 2000 / Math.max(Wn, Hn));
         const cv = document.createElement('canvas'); cv.width = Math.max(2, Math.round(Wn * sc) & ~1); cv.height = Math.max(2, Math.round(Hn * sc) & ~1);
         const T = montageEnd(P);
         let finished; const done = new Promise(r => { finished = r; });
@@ -890,6 +915,9 @@
                     <button type="button" class="button small secondary" data-mt-op="kfnext" title="Aller à l'image clé suivante de l'élément choisi">◆ ▶</button>
                     <button type="button" class="button small secondary" data-mt-op="addtext">➕ Titre / texte</button>
                     <button type="button" class="button small secondary" data-mt-op="adda">➕ Son / musique</button>
+                    <button type="button" class="button small secondary" data-mt-op="voice" title="Enregistre ta voix au micro pendant que le film défile (casque conseillé)">🎙 Voix off</button>
+                    <button type="button" class="button small secondary" data-mt-op="sub" title="Un sous-titre de 3 s à la tête de lecture, sur la piste « Sous-titres »">💬 Sous-titre ici</button>
+                    <button type="button" class="button small secondary" data-mt-op="chapter" title="Un chapitre commence à la tête de lecture">🔖 Chapitre ici</button>
                 </div>
                 <div class="h-mt-tl" data-mt-tl></div>
                 <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéo et photo ↔ vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
@@ -901,14 +929,14 @@
         const $ = s => dl.querySelector(s), cv = $('[data-mt-canvas]');
         if (media.id) bindVersions(dl, media, 'video', () => { dirty = false; dl.close(); onDone?.(); });
         $('[data-avx-cancel]').addEventListener('click', () => dl.querySelector('[data-avx-close]').click());
-        const sizeFor = () => { const so = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s]; const turn = P.fx.rotate % 180 !== 0; const w = so?.w || 1280, h = so?.h || 720, k = Math.min(1, 1280 / Math.max(w, h)); return [Math.round((turn ? h : w) * k), Math.round((turn ? w : h) * k)]; };
+        const sizeFor = () => { const ad = aspectDims(P.aspect); if (ad) { const k = Math.min(1, 1280 / Math.max(...ad)); return [Math.round(ad[0] * k), Math.round(ad[1] * k)]; } const so = P.sources[P.v1[0]?.s] || P.sources[P.v2[0]?.s]; const turn = P.fx.rotate % 180 !== 0; const w = so?.w || 1280, h = so?.h || 720, k = Math.min(1, 1280 / Math.max(w, h)); return [Math.round((turn ? h : w) * k), Math.round((turn ? w : h) * k)]; };
         const fitCanvas = () => { [cv.width, cv.height] = sizeFor(); }; // l'image prend le format de la première vidéo
         let eng = null;
         const rebuild = async () => { const t = eng?.t || 0; eng?.destroy(); fitCanvas(); eng = montageEngine(P, cv, {onTime}); eng.decorate = decorate; await eng.seek(t); };
         // 0 : redessiner · 1 : recaler les vidéos · 2 : refaire le moteur (son général, rotation) ; pane=false : on écrit dans le panneau
         // ↶ ↷ : chaque changement du montage (couper, déplacer, régler…) est une étape ; les rushes, eux, restent
         let hist = [], hpos = -1, histTimer = 0;
-        const snapP = () => JSON.stringify({v1: P.v1, v2: P.v2, texts: P.texts, audio: P.audio, tracks: P.tracks, look: P.look, fx: P.fx, fadeStart: !!P.fadeStart, fadeEnd: !!P.fadeEnd});
+        const snapP = () => JSON.stringify({v1: P.v1, v2: P.v2, texts: P.texts, audio: P.audio, tracks: P.tracks, look: P.look, fx: P.fx, fadeStart: !!P.fadeStart, fadeEnd: !!P.fadeEnd, aspect: P.aspect || '', blurBars: !!P.blurBars, kbAuto: !!P.kbAuto, duck: P.duck || null, chapters: P.chapters || []});
         const record = () => { clearTimeout(histTimer); histTimer = 0; const v = snapP(); if (hist[hpos] === v) return; hist = hist.slice(0, hpos + 1); hist.push(v); if (hist.length > 300) hist.shift(); hpos = hist.length - 1; syncUndo(); };
         const schedHist = () => { clearTimeout(histTimer); histTimer = setTimeout(record, 350); };
         const syncUndo = () => { const u = dl.querySelector('[data-mt-op="undo"]'), r = dl.querySelector('[data-mt-op="redo"]'); if (u) u.disabled = hpos <= 0; if (r) r.disabled = hpos >= hist.length - 1; };
@@ -934,7 +962,8 @@
                 : tr.kind === 't' ? P.texts.filter(x => trackOf(P, x, 'texts') === tr.id).map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join('')
                 : P.audio.filter(a => trackOf(P, a, 'audio') === tr.id).map(a => block('audio', a, a.at, clen(a), (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join('');
             const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${tr.kind === 'main' ? '' : `<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button>${tr.kind === 'main' ? '' : `<button type="button" data-mt-tdel="${tr.id}" title="Supprimer cette piste">🗑</button>`}</span></span>${clipsOf(tr)}</div>`;
-            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px" data-dnd-off><div class="h-mt-ruler" data-mt-ruler>${ruler}</div><div>
+            const chaps = (P.chapters || []).map(c => `<button type="button" class="h-mt-chap" style="left:${OFF + c.t * pxs}px" data-mt-chapgo="${c.t}" title="🔖 ${esc(c.title)} (${fmt(c.t)})">🔖<span>${esc(c.title)}</span></button>`).join('');
+            $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px" data-dnd-off><div class="h-mt-ruler" data-mt-ruler>${ruler}${chaps}</div><div>
                 ${P.tracks.map(laneOf).join('')}</div>
                 <div class="h-mt-addtracks"><button type="button" class="button small secondary" data-mt-addtrack="v">＋ Piste vidéo</button><button type="button" class="button small secondary" data-mt-addtrack="t">＋ Piste texte</button><button type="button" class="button small secondary" data-mt-addtrack="a">＋ Piste son</button></div>
                 <i class="h-mt-ph" data-mt-ph style="left:${OFF + (eng?.t || 0) * pxs}px"></i></div>`;
@@ -949,6 +978,7 @@
         const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
         const speedHtml = c => `${rng('speed', 'Vitesse', 0.25, 4, 0.05, spd(c), ' ×')}<div class="h-mt-quick">${[0.5, 1, 1.5, 2].map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}</div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
         const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>Remettre à zéro</button></div><p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
+        const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
         const imgDur = c => `<label class="h-avx-row">Durée à l’écran <input type="number" class="h-mt-num" min="0.1" max="3600" step="0.1" value="${Math.round(clen(c) * 10) / 10}" data-mt-k="imgdur"> s</label><div class="h-mt-quick">${[2, 3, 5, 8, 10, 15].map(v => `<button type="button" data-mt-imgdur="${v}">${v} s</button>`).join('')}</div>`;
         const rng = (k, label, min, max, step, v, unit = '') => `<label class="h-avx-row">${label} <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-k="${k}"><output data-u="${unit}">${unit === '%' ? Math.round(v * 100) + ' %' : v + unit}</output></label>`;
         const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
@@ -996,12 +1026,12 @@
             const c = selected(), item = $('[data-mt-pane="item"]');
             if (!c) item.innerHTML = '<p class="muted">Choisis un élément sur la frise (un morceau, une incrustation, un texte, un son).</p>';
             else if (sel.track === 'v1') item.innerHTML = `<h4>${isImg(c) ? '🖼️ Photo' : '🎬 Morceau'} de la piste 1</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${isImg(c) ? `${fmt(c.to - c.from)} à l’écran` : `${fmt(c.from)} → ${fmt(c.to)}`}</p>
-                ${isImg(c) ? imgDur(c) : speedHtml(c)}
+                ${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}
                 <label class="h-avx-row">Transition avant <select data-mt-k="tr.type">${TRANS.map(([k, l]) => `<option value="${k}" ${(c.tr?.type || 'none') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>${rng('tr.d', 'Durée du fondu', 0.2, 4, 0.1, c.tr?.d ?? 1, ' s')}
                 ${isImg(c) ? '' : `${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-k="mute" ${c.mute ? 'checked' : ''}> 🔇 Sans son</label>${c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep title="Le son passe sur une piste son : on le déplace, le coupe ou le règle à part de l’image">🔊 Séparer le son de l’image</button>'}${clipSound(c)}`}
                 ${inspectorHtml(c, true)}
                 <h4>🎨 Couleurs de ce morceau</h4>${lookHtml(c.look || {}, 'look')}`;
-            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${isImg(c) ? imgDur(c) : speedHtml(c)}${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}
+            else if (sel.track === 'v2') item.innerHTML = `<h4>🖼️ Incrustation${isImg(c) ? ' (photo)' : ''}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')}</p>${isImg(c) ? imgDur(c) + kbHtml(c) : speedHtml(c)}${rng('w', 'Largeur', 10, 100, 1, c.w ?? 35, ' %')}${rng('x', 'Position horizontale', 0, 90, 1, c.x ?? 62, ' %')}${rng('y', 'Position verticale', 0, 90, 1, c.y ?? 6, ' %')}
                 ${isImg(c) ? '' : rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 0, '%') + (c.detached ? '<p class="muted">🔊 Son séparé : il est sur une piste son, à part.</p>' : '<button type="button" class="button small secondary" data-mt-sep>🔊 Séparer le son de l’image</button>') + clipSound(c)}${trackSel('v2', c)}<label class="checkbox-line"><input type="checkbox" data-mt-k="border" ${c.border !== false ? 'checked' : ''}> cadre blanc</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> apparaît et disparaît en fondu</label>
                 ${inspectorHtml(c, false)}`;
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
@@ -1012,12 +1042,18 @@
                 ${rng('x', 'Position horizontale', 0, 100, 1, c.x ?? 50, ' %')}${rng('y', 'Position verticale', 0, 100, 1, c.y ?? 80, ' %')}
                 <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="bold" ${c.bold ? 'checked' : ''}> gras</label><label class="checkbox-line"><input type="checkbox" data-mt-k="shadow" ${c.shadow !== false ? 'checked' : ''}> ombre</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fade" ${c.fade !== false ? 'checked' : ''}> entre et sort en fondu</label>`;
-            else item.innerHTML = `<h4>🎵 Son</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
+            else item.innerHTML = `<h4>${c.voice ? '🎙 Voix' : '🎵 Son'}</h4><p class="muted">${esc(P.sources[c.s]?.title || '')} · ${fmt(c.from)} → ${fmt(c.to)}</p>${chk('voice', '🎙 C’est une voix (la musique baisse toute seule pendant qu’elle parle)', c.voice)}${rng('vol', 'Volume', 0, 2, 0.05, c.vol ?? 1, '%')}${rng('fadeIn', 'Fondu d’entrée', 0, 10, 0.1, c.fadeIn || 0, ' s')}${rng('fadeOut', 'Fondu de sortie', 0, 10, 0.1, c.fadeOut || 0, ' s')}
                 ${speedHtml(c)}${trackSel('audio', c)}${clipSound(c)}`;
             $('[data-mt-pane="color"]').innerHTML = `<h4>🎨 Couleurs de tout le film</h4><p class="muted">S’ajoutent aux couleurs de chaque morceau (onglet Élément).</p>${lookHtml(P.look, 'film')}`;
             $('[data-mt-pane="sound"]').innerHTML = `<h4>🔊 Le son de tout le film</h4>${rng('fx.volume', 'Volume général', 0, 3, 0.05, P.fx.volume, '%')}${soundFx('fx', P.fx)}${chk('fx.mute', '🔇 Sans le son', P.fx.mute)}<p class="muted">S’ajoute aux réglages de chaque morceau (onglet 🎯 Élément → « 🔊 Son de ce morceau »).</p>`;
             $('[data-mt-pane="film"]').innerHTML = `<h4>🎞️ Le film</h4><div class="h-avx-row"><button type="button" class="button small secondary" data-mt-rot="-90">⟲ 90°</button><button type="button" class="button small secondary" data-mt-rot="90">⟳ 90°</button><small class="muted">${P.fx.rotate ? `tourné de ${P.fx.rotate}°` : ''}</small></div>
                 <label class="checkbox-line"><input type="checkbox" data-mt-k="fadeStart" ${P.fadeStart ? 'checked' : ''}> commence par un fondu depuis le noir</label><label class="checkbox-line"><input type="checkbox" data-mt-k="fadeEnd" ${P.fadeEnd ? 'checked' : ''}> finit par un fondu au noir</label>
+                <h4>📐 Format de l’image</h4><label class="h-avx-row">Format <select data-mt-aspect>${ASPECTS.map(([k, l]) => `<option value="${k}" ${(P.aspect || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <label class="checkbox-line"><input type="checkbox" data-mt-k="blurBars" ${P.blurBars ? 'checked' : ''}> bandes floues au lieu des bandes noires (la même image, floutée, derrière)</label>
+                <h4>🖼️ Photos</h4><label class="checkbox-line"><input type="checkbox" data-mt-k="kbAuto" ${P.kbAuto ? 'checked' : ''}> effet Ken Burns sur toutes les photos (zoom et glissement lents, variés)</label>
+                <h4>🎙 Musique et voix</h4><label class="checkbox-line"><input type="checkbox" data-mt-duck="on" ${P.duck?.on !== false ? 'checked' : ''}> la musique baisse toute seule pendant une voix</label>${rng('duck.amount', 'Musique pendant la voix', 0, 1, 0.05, P.duck?.amount ?? 0.3, '%')}<label class="checkbox-line"><input type="checkbox" data-mt-duck="video" ${P.duck?.video ? 'checked' : ''}> … et aussi pendant le son des vidéos de la piste 1</label>
+                <h4>🔖 Chapitres</h4>${(P.chapters || []).length ? `<ol class="h-mt-chaps">${[...P.chapters].sort((a, b) => a.t - b.t).map(c => `<li><button type="button" class="link-button" data-mt-chapgo="${c.t}">${fmt(c.t, false)}</button> <input value="${esc(c.title)}" data-mt-chapname="${esc(c.id)}"> <button type="button" class="icon-button" data-mt-chapdel="${esc(c.id)}" title="Enlever">✕</button></li>`).join('')}</ol>
+                    <div class="h-mt-quick"><button type="button" data-mt-chapcopy title="La liste « 00:00 Titre » à coller dans la description YouTube">📋 Copier pour YouTube</button><button type="button" data-mt-chapvtt>⬇ Fichier .vtt</button></div>` : '<p class="muted">« 🔖 Chapitre ici » pose un chapitre à la tête de lecture.</p>'}
                 <p class="muted">Durée du film : <b>${fmt(montageEnd(P))}</b></p>`;
         }
         // réglages → modèle
@@ -1037,7 +1073,7 @@
             const o = el.parentElement.querySelector('output'); if (o && el.type === 'range') o.textContent = o.dataset.u === '%' ? Math.round(v * 100) + ' %' : v + o.dataset.u;
             const film = k.startsWith('film.'), c = selected();
             if (film) setK(P.look, k.slice(5), v);
-            else if (k.startsWith('fx.') || k === 'fadeStart' || k === 'fadeEnd') setK(P, k, v);
+            else if (k.startsWith('fx.') || ['fadeStart', 'fadeEnd', 'blurBars', 'kbAuto'].includes(k) || k.startsWith('duck.')) { if (k.startsWith('duck.')) P.duck = P.duck || {on: true, amount: 0.3}; setK(P, k, v); }
             else if (c) {
                 if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
                 else if (k === 'track') { c.track = v; touch(1); return; }
@@ -1047,7 +1083,17 @@
             }
             touch(audioFx(k) ? 2 : (k === 'speed' || k === 'pitch') ? 1 : 0, false);
         });
+        dl.querySelector('.h-mt-side').addEventListener('change', e => {
+            if (e.target.matches('[data-mt-aspect]')) { P.aspect = e.target.value; touch(2); return; }
+            if (e.target.matches('[data-mt-duck]')) { P.duck = P.duck || {on: true, amount: 0.3}; P.duck[e.target.dataset.mtDuck] = e.target.checked; touch(1); return; }
+            if (e.target.matches('[data-mt-chapname]')) { const c = (P.chapters || []).find(x => x.id === e.target.dataset.mtChapname); if (c) { c.title = e.target.value.trim().slice(0, 120) || c.title; touch(0, false); } }
+        });
         dl.querySelector('.h-mt-side').addEventListener('click', e => {
+            const cgo = e.target.closest('[data-mt-chapgo]'); if (cgo) { eng.seek(Number(cgo.dataset.mtChapgo)); return; }
+            const cdel = e.target.closest('[data-mt-chapdel]'); if (cdel) { P.chapters = (P.chapters || []).filter(x => x.id !== cdel.dataset.mtChapdel); touch(0); return; }
+            if (e.target.closest('[data-mt-chapcopy]')) { const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés : colle-les dans la description de la vidéo.'), () => prompt('Copie ce texte :', txt)); return; }
+            if (e.target.closest('[data-mt-chapvtt]')) { const list = [...P.chapters].sort((a, b) => a.t - b.t), T = montageEnd(P), ts = x => { const ms = Math.round(x * 1000), h = Math.floor(ms / 3600000), m = Math.floor(ms / 60000) % 60, s2 = Math.floor(ms / 1000) % 60; return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s2).padStart(2, '0')}.${String(ms % 1000).padStart(3, '0')}`; };
+                saveText(`${(projName || media.title || 'montage').replace(/[^\p{L}\p{N} _-]+/gu, '')}-chapitres.vtt`, 'WEBVTT\n\n' + list.map((c, i) => `${i + 1}\n${ts(c.t)} --> ${ts(list[i + 1]?.t ?? T)}\n${c.title}\n`).join('\n'), 'text/vtt'); return; }
             const tab = e.target.closest('[data-mt-tab]'); if (tab) { dl.querySelectorAll('[data-mt-tab]').forEach(b => b.classList.toggle('is-active', b === tab)); dl.querySelectorAll('[data-mt-pane]').forEach(p => { p.hidden = p.dataset.mtPane !== tab.dataset.mtTab; }); return; }
             const lk = e.target.closest('[data-mt-look]'); if (lk) { const [scope, i] = lk.dataset.mtLook.split(':'), target = scope === 'film' ? P.look : (selected() ? (selected().look = selected().look || {}) : null); if (!target) return; Object.assign(target, LOOK0, LOOKS[Number(i)][1]); touch(0); return; }
             if (e.target.closest('[data-mt-sep]')) { dl.querySelector('[data-mt-op="detach"]')?.click(); return; }
@@ -1072,7 +1118,7 @@
         const boxOf = (track, c) => {
             const W = cv.width, H = cv.height, t = eng?.t || 0;
             if (track === 'v2') { if (t < c.at || t >= c.at + clen(c)) return null; const s = eng.videoSize(c.id) || {vw: 16, vh: 9}, w = (c.w || 35) / 100 * W; return {x: (c.x ?? 62) / 100 * W, y: (c.y ?? 6) / 100 * H, w, h: w * s.vh / s.vw}; }
-            if (track === 'texts') { if (t < c.at || t >= c.at + c.dur) return null; const size = (c.size || 6) / 100 * H, lines = String(c.text || ' ').split('\n'); measure.font = `${c.bold ? '700 ' : ''}${size}px ${c.font || 'Georgia, serif'}`;
+            if (track === 'texts') { if (t < c.at || t >= c.at + c.dur) return null; const size = (c.size || 6) / 100 * Math.min(H, W), lines = String(c.text || ' ').split('\n'); measure.font = `${c.bold ? '700 ' : ''}${size}px ${c.font || 'Georgia, serif'}`;
                 const w = Math.max(...lines.map(l => measure.measureText(l).width)) + size, h = lines.length * size * 1.25 + size * 0.3, cx = (c.x ?? 50) / 100 * W, cy = (c.y ?? 80) / 100 * H;
                 return {x: c.align === 'left' ? cx - size / 2 : c.align === 'right' ? cx - w + size / 2 : cx - w / 2, y: cy - h / 2, w, h}; }
             return null;
@@ -1108,6 +1154,7 @@
         const tl = $('[data-mt-tl]');
         tl.addEventListener('pointerdown', e => {
             const clip = e.target.closest('[data-mt-clip]'), x0 = e.clientX, inner = tl.querySelector('.h-mt-tlin'), r = inner.getBoundingClientRect();
+            const cg = e.target.closest('[data-mt-chapgo]'); if (cg) { e.preventDefault(); eng.seek(Number(cg.dataset.mtChapgo)); return; }
             if (!clip) { if (e.target.closest('.h-mt-lname, .h-mt-addtracks')) return; eng.seek((e.clientX - r.left - OFF) / pxs); return; }
             const [track, id] = clip.dataset.mtClip.split(':'); sel = {track, id};
             const c = selected(); drawTl();
@@ -1252,9 +1299,108 @@
             if (kind === 't') return toast('Une piste texte reçoit des titres (« ➕ Titre / texte »).', 'error');
             placeRush(s, kind === 'main' ? 'v1' : kind === 'a' ? lane.dataset.mtLane : lane?.dataset.mtLane || 'v2', at);
         });
+        /* ── 🔖 Chapitres, 💬 sous-titres, 🎙 voix off, 🪄 modèles ── */
+        const saveText = (name, text, type) => { if (ext.downloadText) return ext.downloadText(name, text, type); const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type})); a.download = name; a.click(); };
+        const chaptersText = () => { const list = [...(P.chapters || [])].sort((a, b) => a.t - b.t); if (list[0] && list[0].t > 0.5) list.unshift({t: 0, title: 'Début'}); const ts = x => { const s2 = Math.floor(x), h = Math.floor(s2 / 3600), m = Math.floor(s2 / 60) % 60; return `${h ? h + ':' + String(m).padStart(2, '0') : String(m).padStart(2, '0')}:${String(s2 % 60).padStart(2, '0')}`; }; return list.map(c => `${ts(c.t)} ${c.title}`).join('\n'); };
+        const subTrack = () => P.tracks.find(t => t.kind === 't' && /^sous-titres/i.test(t.name))?.id || (() => { const id = addTrack('t'); P.tracks.find(t => t.id === id).name = 'Sous-titres'; return id; })();
+        const subItem = (at, dur, text) => ({id: nid('t'), at, dur, text, size: 4.6, color: '#ffffff', bg: '#000000', font: 'Helvetica, Arial, sans-serif', x: 50, y: 89, anim: 'none', align: 'center', fade: false, shadow: false, sub: true, track: subTrack()});
+        const srtTime = x => { const ms = Math.max(0, Math.round(x * 1000)); return `${String(Math.floor(ms / 3600000)).padStart(2, '0')}:${String(Math.floor(ms / 60000) % 60).padStart(2, '0')}:${String(Math.floor(ms / 1000) % 60).padStart(2, '0')},${String(ms % 1000).padStart(3, '0')}`; };
+        function importSubs(text) {
+            const parseT = v => { const m = String(v).trim().match(/(?:(\d+):)?(\d{1,2}):(\d{2})[,.](\d{1,3})/); return m ? (Number(m[1] || 0) * 3600 + Number(m[2]) * 60 + Number(m[3]) + Number(m[4].padEnd(3, '0')) / 1000) : null; };
+            const cues = String(text).replace(/\r/g, '').replace(/^﻿?WEBVTT[^\n]*\n/, '').split(/\n{2,}/).map(b => { const lines = b.split('\n').filter(Boolean), i = lines.findIndex(l => l.includes('-->')); if (i < 0) return null; const [a, z] = lines[i].split('-->'); const t0 = parseT(a), t1 = parseT(z); if (t0 === null || t1 === null) return null; return {t0, t1, text: lines.slice(i + 1).join('\n').replace(/<[^>]+>/g, '').trim()}; }).filter(c => c && c.text);
+            if (!cues.length) return toast('Aucun sous-titre reconnu (fichier .srt ou .vtt).', 'error');
+            cues.forEach(c => P.texts.push(subItem(c.t0, Math.max(0.3, c.t1 - c.t0), c.text))); touch(0); toast(`${cues.length} sous-titres importés sur la piste « Sous-titres ».`);
+        }
+        function exportSubs() {
+            const subs = P.texts.filter(x => x.sub || /^sous-titres/i.test(P.tracks.find(t => t.id === trackOf(P, x, 'texts'))?.name || '')), list = (subs.length ? subs : P.texts).slice().sort((a, b) => a.at - b.at);
+            if (!list.length) return toast('Aucun texte à exporter.', 'error');
+            saveText(`${(projName || media.title || 'montage').replace(/[^\p{L}\p{N} _-]+/gu, '')}.srt`, list.map((x, i) => `${i + 1}\n${srtTime(x.at)} --> ${srtTime(x.at + x.dur)}\n${x.text}\n`).join('\n'), 'application/x-subrip');
+        }
+        let voiceRec = null;
+        async function voiceOver(btn) {
+            if (voiceRec) { voiceRec.stop(); return; }
+            if (!navigator.mediaDevices?.getUserMedia) return toast('Ce navigateur ne donne pas accès au micro.', 'error');
+            let stream; try { stream = await navigator.mediaDevices.getUserMedia({audio: {echoCancellation: true, noiseSuppression: true}}); } catch (_) { return toast('Micro refusé : autorise-le dans les réglages du navigateur ou du système.', 'error'); }
+            const mime = ['audio/webm;codecs=opus', 'audio/ogg;codecs=opus', 'audio/mp4', 'audio/webm'].find(m => window.MediaRecorder?.isTypeSupported?.(m)) || '';
+            const rec = new MediaRecorder(stream, mime ? {mimeType: mime} : {}), chunks = [], at = eng.t;
+            rec.ondataavailable = ev => { if (ev.data.size) chunks.push(ev.data); };
+            rec.onstop = async () => {
+                stream.getTracks().forEach(tk => tk.stop()); voiceRec = null; btn.textContent = '🎙 Voix off'; btn.classList.remove('is-rec'); eng.pause(); $('[data-mt-play]').textContent = '▶ Lire';
+                const type = (rec.mimeType || mime || 'audio/webm').split(';')[0], ext0 = type.includes('ogg') ? 'ogg' : type.includes('mp4') ? 'm4a' : 'webm';
+                const file = new File([new Blob(chunks, {type})], `voix-off-${new Date().toISOString().slice(0, 16).replace(/[:T]/g, '-')}.${ext0}`, {type});
+                if (file.size < 2000) return toast('Enregistrement trop court.', 'error');
+                const sIdx = await pushSource({src: URL.createObjectURL(file), title: `🎙 Voix off ${fmt(at, false)}`, file}, 'audio'); if (sIdx === null) return;
+                let tr = P.tracks.find(x => x.kind === 'a' && /^voix/i.test(x.name))?.id; if (!tr) { tr = addTrack('a'); P.tracks.find(x => x.id === tr).name = 'Voix off'; }
+                const k = {id: nid('a'), s: sIdx, from: 0, to: P.sources[sIdx].dur, at, vol: 1, fadeIn: 0, fadeOut: 0.2, voice: true, track: tr}; P.audio.push(k); sel = {track: 'audio', id: k.id};
+                await touch(1); toast('Voix off posée sur la piste « Voix off » (la musique baisse pendant qu’elle parle). 💾 Enregistrer le projet l’envoie dans les Médias.');
+            };
+            voiceRec = rec; rec.start(500); btn.textContent = '⏹ Arrêter la voix off'; btn.classList.add('is-rec');
+            toast('🎙 Enregistrement… parle pendant que le film défile (un casque évite que le son du film soit enregistré). ⏹ pour arrêter.');
+            if (!eng.playing) { $('[data-mt-play]').textContent = '⏸ Pause'; eng.play().catch(() => {}); }
+        }
+        /** 🪄 Modèles : « La vie de… » (les photos d'une personne, ses dates) ou « Une famille » (la personne, ses parents, conjoints, enfants) */
+        function templateDialog(kind) {
+            let chosen = 0;
+            ext.openDialog({eyebrow: 'MODÈLE DE MONTAGE', title: kind === 'life' ? '🪄 « La vie de… »' : '🪄 « Une famille »', wide: true, submitLabel: 'Fabriquer le montage',
+                body: `<p class="muted">${kind === 'life' ? 'Les photos de la personne, dans l’ordre des dates, avec un titre, sa naissance, ses grandes dates et un mot de la fin.' : 'Le portrait de la personne, puis de ses parents, conjoints et enfants, chacun avec son nom et ses dates.'} Tout reste modifiable ensuite.</p>
+                    <label>Personne <input type="search" data-q placeholder="Nom, prénom…" autocomplete="off"></label><div class="h-rc-results" data-res></div>
+                    <div class="form-grid"><label>Durée par photo <select name="dur">${[3, 4, 5, 6, 8].map(v => `<option value="${v}" ${v === 5 ? 'selected' : ''}>${v} s</option>`).join('')}</select></label>
+                    <label>Transition <select name="tr">${TRANS.map(([k, l]) => `<option value="${k}" ${k === 'cross' ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <label class="checkbox-line"><input type="checkbox" name="kb" checked> Ken Burns sur les photos</label><label class="checkbox-line"><input type="checkbox" name="music"> Ajouter une musique (choisie ensuite)</label>
+                    <label class="checkbox-line"><input type="checkbox" name="chap" checked> Un chapitre par grande étape</label></div>`,
+                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let tm = 0;
+                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(async () => { const rows = (await A().api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || [];
+                        res.innerHTML = rows.map(p => `<label class="checkbox-line"><input type="radio" name="pick" value="${p.id}"> ${esc(A().personName ? A().personName(p) : `${p.first_name || ''} ${p.last_name || ''}`)}</label>`).join('') || '<p class="muted">Personne trouvée.</p>';
+                        res.querySelectorAll('[name=pick]').forEach(r => r.addEventListener('change', () => { chosen = Number(r.value); })); }, 220); }); q.focus(); },
+                onSubmit: async form => {
+                    if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
+                    const f = Object.fromEntries(new FormData(form)), dur = Number(f.dur) || 5, trType = f.tr || 'cross', btn = form.querySelector('[type=submit]'); btn.textContent = 'Préparation…';
+                    const nm = x => [x?.first_name, x?.last_name].filter(Boolean).join(' ') || x?.name || '';
+                    const isPic = m => (m.media_type || 'image') === 'image' && /\.(jpe?g|png|webp|gif)$/i.test(m.filename || '');
+                    const yr = v => { const m = String(v || '').match(/(1[5-9]\d\d|20\d\d)/); return m ? Number(m[1]) : null; };
+                    const evText = e => [e?.date_text || e?.year, e?.place_name || e?.place].filter(Boolean).join(', ');
+                    const r = await A().api('person', {id: chosen}), p = r.person || {}, ev = r.events || [], find = re => ev.find(e => re.test(String(e.type || e.type_label || '')));
+                    const birth = find(/naiss|birth|bapt/i), death = find(/décè|deces|death|inhum/i), years = [yr(birth?.date_text || birth?.year), yr(death?.date_text || death?.year)];
+                    const slides = []; // {mediaRow, caption, chapter}
+                    if (kind === 'life') {
+                        const pics = (r.media || []).filter(isPic).sort((a, b) => (yr(a.date_text || a.date || a.title) ?? 9999) - (yr(b.date_text || b.date || b.title) ?? 9999));
+                        pics.forEach((m, i) => slides.push({m, caption: [m.title && !/\.(jpe?g|png)$/i.test(m.title) ? m.title : '', m.date_text || ''].filter(Boolean).join(' — '), chapter: i === 0 ? 'Les photos' : ''}));
+                    } else {
+                        const portrait = rr => (rr.media || []).find(isPic);
+                        const me = portrait(r); if (me) slides.push({m: me, caption: `${nm(p)}${years[0] && years[1] ? ` (${years[0]}–${years[1]})` : years[0] ? ` (° ${years[0]})` : years[1] ? ` († ${years[1]})` : ''}`, chapter: nm(p)});
+                        const rel = [...(r.parents || []).map(x => [x, 'Parent']), ...(r.partners || []).map(x => [x, 'Conjoint']), ...(r.children || []).map(x => [x, 'Enfant'])].slice(0, 16);
+                        for (const [x, role] of rel) { const id = Number(x.id || x.person_id); if (!id) continue; try { const rr = await A().api('person', {id}), pic = portrait(rr); if (pic) slides.push({m: pic, caption: `${role} : ${nm(rr.person)}`, chapter: role === 'Parent' && !slides.some(s0 => s0.chapter === 'Les parents') ? 'Les parents' : role === 'Conjoint' && !slides.some(s0 => s0.chapter === 'En couple') ? 'En couple' : role === 'Enfant' && !slides.some(s0 => s0.chapter === 'Les enfants') ? 'Les enfants' : ''}); } catch (_) {} }
+                    }
+                    if (!slides.length) { btn.textContent = 'Fabriquer le montage'; toast(kind === 'life' ? 'Cette personne n’a pas de photo dans sa fiche.' : 'Aucun portrait trouvé dans ces fiches.', 'error'); return false; }
+                    if ((P.v1.length || P.texts.length) && !confirm('Le montage n’est pas vide : ajouter ce modèle à la suite ?')) return false;
+                    btn.textContent = 'Les photos arrivent…';
+                    const start = montageEnd(P) > 0.2 && P.v1.length ? layoutV1(P).at(-1).end : 0;
+                    let t = start;
+                    for (const [i, sl] of slides.entries()) {
+                        const sIdx = await pushSource({src: url(sl.m.filename), title: sl.m.title || sl.m.filename, media: sl.m}, 'image'); if (sIdx === null) continue;
+                        const k = {id: nid('v'), s: sIdx, from: 0, to: dur, tr: {type: P.v1.length ? trType : 'none', d: 1}, look: {}, vol: 1, fit: 'fill', ...(f.kb ? {kb: 'auto'} : {})};
+                        const L0 = layoutV1(P); P.v1.push(k); const at = layoutV1(P).at(-1).at; t = at + dur;
+                        if (sl.caption) { const x = {id: nid('t'), at: at + 0.4, dur: Math.max(1.5, dur - 1), text: sl.caption, size: 4.8, color: '#ffffff', bg: '#000000', font: 'Georgia, serif', x: 50, y: 86, anim: 'fade', align: 'center'}; x.track = freeTrack('t', x.at, x.dur); P.texts.push(x); }
+                        if (f.chap && sl.chapter) { P.chapters = P.chapters || []; P.chapters.push({id: nid('c'), t: at, title: sl.chapter}); }
+                        void L0;
+                    }
+                    // titre au début, dates, et mot de la fin
+                    const title = {id: nid('t'), at: start + 0.2, dur: Math.min(dur * 1.4, 7), text: kind === 'life' ? `La vie de ${nm(p)}${years[0] && years[1] ? `\n${years[0]} – ${years[1]}` : years[0] ? `\n° ${years[0]}` : years[1] ? `\n† ${years[1]}` : ''}` : `La famille de ${nm(p)}`, size: 8, color: '#ffffff', bg: '', font: 'Georgia, serif', x: 50, y: 45, anim: 'zoom', align: 'center', bold: true};
+                    title.track = freeTrack('t', title.at, title.dur); P.texts.push(title);
+                    if (kind === 'life' && birth) { const x = {id: nid('t'), at: start + Math.min(dur * 1.4, 7) + 0.3, dur: dur, text: `Naissance : ${evText(birth)}`, size: 4.6, color: '#ffffff', bg: '#000000', font: 'Georgia, serif', x: 50, y: 12, anim: 'fade', align: 'center'}; x.track = freeTrack('t', x.at, x.dur); P.texts.push(x); }
+                    const endT = layoutV1(P).at(-1).end, fin = {id: nid('t'), at: Math.max(start, endT - dur), dur, text: kind === 'life' && death ? `Décès : ${evText(death)}` : 'Fin', size: kind === 'life' && death ? 5 : 7, color: '#ffffff', bg: kind === 'life' && death ? '#000000' : '', font: 'Georgia, serif', x: 50, y: kind === 'life' && death ? 12 : 50, anim: 'fade', align: 'center'};
+                    fin.track = freeTrack('t', fin.at, fin.dur); P.texts.push(fin);
+                    P.fadeStart = true; P.fadeEnd = true;
+                    if (f.music) { const s0 = await addSource('audio'); if (s0 !== null) { const T = montageEnd(P), k = {id: nid('a'), s: s0, from: 0, to: Math.min(P.sources[s0].dur, T - start), at: start, vol: 0.6, fadeIn: 1, fadeOut: 3}; k.track = freeTrack('a', start, k.to); P.audio.push(k); } }
+                    sel = null; await touch(2); record(); toast(`Montage fabriqué : ${slides.length} photo(s). Retouche ce que tu veux, puis 📤 Exporter.`);
+                }});
+        }
         dl.querySelector('.h-mt-ops').addEventListener('click', async e => {
             const b = e.target.closest('[data-mt-op]'); if (!b) return; const op = b.dataset.mtOp, c = selected(), t = eng.t;
             if (op === 'undo') return undoTo(hpos - 1);
+            if (op === 'voice') return voiceOver(b);
+            if (op === 'sub') { const k = subItem(t, 3, 'Sous-titre'); P.texts.push(k); sel = {track: 'texts', id: k.id}; touch(0); dl.querySelector('[data-mt-tab="item"]').click(); dl.querySelector('[data-mt-k="text"]')?.select(); return; }
+            if (op === 'chapter') { const n = await A().askText({title: 'Nouveau chapitre', message: `Titre du chapitre qui commence à ${fmt(t, false)} :`, value: `Chapitre ${(P.chapters || []).length + 1}`, okLabel: 'Ajouter'}); if (!n?.trim()) return; P.chapters = P.chapters || []; P.chapters.push({id: nid('c'), t, title: n.trim().slice(0, 120)}); dl.querySelector('[data-mt-tab="film"]').click(); return touch(0); }
             if (op === 'redo') return undoTo(hpos + 1);
             if (op === 'addv1') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('v'), s, from: 0, to: srcLen(s), tr: {type: P.v1.length ? 'cross' : 'none', d: 1}, look: {}, vol: 1}; P.v1.push(k); sel = {track: 'v1', id: k.id}; return touch(1); }
             if (op === 'addv2') { const s = await addSource('visual'); if (s === null) return; const k = {id: nid('i'), s, from: 0, to: srcLen(s), at: t, w: 35, x: 62, y: 6, opacity: 100, vol: 0}; k.track = freeTrack('v', t, k.to); P.v2.push(k); sel = {track: 'v2', id: k.id}; return touch(1); }
@@ -1307,9 +1453,9 @@
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
         // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
         const MT_MENUS = [
-            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '📤 Exporter la vidéo (MP4 / WebM)…'], ['-'], ['close', 'Fermer']]],
+            ['Fichier', [['proj', '💾 Enregistrer le projet', '⌘S'], ['projas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['projects', '📂 Projets…'], ['-'], ['export', '📤 Exporter la vidéo (MP4 / WebM, plusieurs formats)…'], ['subexport', '💬 Exporter les sous-titres (.srt)'], ['chapcopy', '🔖 Copier les chapitres (pour YouTube)'], ['-'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['op:split', '✂️ Couper ici', 'B'], ['op:start', '⟦ Commence ici'], ['op:end', '⟧ Finit ici'], ['op:left', '← Avancer le morceau'], ['op:right', 'Reculer le morceau →'], ['-'], ['op:detach', '🔊 Séparer le son de l’image'], ['op:del', '🗑 Enlever l’élément choisi', '⌫']]],
-            ['Ajouter', [['import', '📥 Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique']]],
+            ['Ajouter', [['import', '📥 Importer des rushes (vidéos, photos, sons)…'], ['base', '🗂 Un rush de la base…'], ['-'], ['op:addv1', '➕ Vidéo / photo à la suite'], ['op:addv2', '➕ Incrustation'], ['op:addtext', '➕ Titre / texte'], ['op:adda', '➕ Son / musique'], ['-'], ['op:voice', '🎙 Enregistrer une voix off'], ['op:sub', '💬 Sous-titre ici'], ['subimport', '💬 Importer des sous-titres (.srt, .vtt)…'], ['op:chapter', '🔖 Chapitre ici'], ['-'], ['tpl:life', '🪄 Modèle « La vie de… »'], ['tpl:family', '🪄 Modèle « Une famille »']]],
             ['Pistes', [['track:v', '＋ Piste vidéo'], ['track:t', '＋ Piste texte'], ['track:a', '＋ Piste son']]],
             ['Lecture', [['play', '▶ Lire / pause', 'Espace'], ['home', '⏮ Au début'], ['-'], ['op:kfprev', '◀ ◆ Image clé précédente'], ['op:kfnext', '◆ ▶ Image clé suivante']]],
             ['Affichage', [['tab:rush', '🎞️ Rushes'], ['tab:item', '🎯 Élément choisi'], ['tab:color', '🎨 Couleurs du film'], ['tab:sound', '🔊 Son du film'], ['tab:film', '🎞️ Le film (rotation, fondus)'], ['-'], ['zoom:in', 'Zoom avant sur la frise', '⌘+'], ['zoom:out', 'Zoom arrière sur la frise', '⌘−'], ['zoom:0', 'Zoom de départ', '⌘0'], ['-'], ['full', '⛶ Plein écran']]],
@@ -1334,6 +1480,10 @@
             if (a === 'tab') return q(`[data-mt-tab="${v}"]`);
             if (a === 'zoom') return ext.editorZoom?.(v === 'in' ? 1 : v === 'out' ? -1 : 0);
             if (k === 'full') return q('[data-full-toggle]');
+            if (k === 'subexport') return exportSubs();
+            if (k === 'chapcopy') { if (!(P.chapters || []).length) return toast('Aucun chapitre : « 🔖 Chapitre ici ».', 'error'); const txt = chaptersText(); navigator.clipboard?.writeText(txt).then(() => toast('Chapitres copiés.'), () => prompt('Copie ce texte :', txt)); return; }
+            if (k === 'subimport') { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.srt,.vtt,text/vtt,application/x-subrip'; inp.onchange = async () => { const fl = inp.files?.[0]; if (fl) importSubs(await fl.text()); }; inp.click(); return; }
+            if (a === 'tpl') return templateDialog(v);
         });
         dl.addEventListener('keydown', e => { if (e.key === 'Escape' && dl.querySelector('.h-mt-menubar details[open]')) { e.preventDefault(); e.stopPropagation(); closeMenus(); } }, true);
         const markDirty = () => showProjName(); dl.addEventListener('input', markDirty); dl.addEventListener('click', () => setTimeout(markDirty, 0));
@@ -1348,18 +1498,26 @@
                 <label>Taille ${sel2('height', MT_SIZES.map(([k, l]) => [k, k ? l : `${l} (${(P.sources[P.v1[0]?.s]?.w || sw)} × ${(P.sources[P.v1[0]?.s]?.h || sh)})`]), MP2.height)}</label>
                 <label>Qualité ${sel2('quality', MT_QUALITY, MP2.quality)}</label><label>Images par seconde ${sel2('fps', MT_FPS.map(f => [f, f + ' images/s']), MP2.fps)}</label>
                 <label>Son ${sel2('abr', [[96, '96 kb/s'], [128, '128 kb/s'], [192, '192 kb/s'], [256, '256 kb/s']], MP2.abr)}</label></div>
+                <div class="h-mt-fmts"><span>Formats (un fichier par format coché, l’un après l’autre) :</span>${ASPECTS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="fmt_${k || 'src'}" ${(P.aspect || '') === k ? 'checked' : ''}> ${l}</label>`).join('')}<label class="checkbox-line"><input type="checkbox" name="blurbars" ${P.blurBars ? 'checked' : ''}> bandes floues plutôt que noires</label></div>
                 <p class="muted">Réglages de départ : Maintenance → Montage, retouche, mise en page et son.</p></fieldset>`;
             ext.openDialog({eyebrow: 'EXPORTER LA VIDÉO', title: projName || media.title || 'Montage', wide: true, submitLabel: '📤 Exporter',
                 body: `<p class="h-cfg-explain">Le montage est rejoué pour être enregistré : cela prend <b>${fmt(T, false)}</b> (sa durée). Laisse la fenêtre ouverte.</p>` + saveOptionsHtml(media, types.map(([t, e2, label, help]) => ({key: t, label, help}))).replace('<fieldset class="h-rc-modes"><legend>Comment', exportHtml + '<fieldset class="h-rc-modes"><legend>Comment').replace('<input type="hidden" name="mode" value="new">', exportHtml + '<input type="hidden" name="mode" value="new">'),
                 onOpen: d => d.querySelectorAll('[name=mode]').forEach(r => r.addEventListener('change', () => { const ct = d.querySelector('[data-avx-copytitle]'); if (ct) ct.hidden = d.querySelector('[name=mode]:checked')?.value !== 'copy'; })),
                 onSubmit: async form => {
                     const f = Object.fromEntries(new FormData(form)), prog = form.querySelector('[data-avx-progress]'), type = types.find(x => x[0] === f.fmt) || types[0];
+                    const fmts = ASPECTS.map(a => a[0]).filter(k => f['fmt_' + (k || 'src')]); if (!fmts.length) fmts.push(P.aspect || '');
+                    const aspect0 = P.aspect, blur0 = P.blurBars; P.blurBars = !!f.blurbars;
                     eng.destroy(); eng = null;
                     try {
-                        const blob = await recordMontage(P, type[0], p => { prog.textContent = `Enregistrement… ${Math.round(p * 100)} %`; }, {height: Number(f.height) || 0, quality: Number(f.quality) || 5, fps: Number(f.fps) || 30, abr: Number(f.abr) || 128});
-                        prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
-                        await uploadResult(media, blob, type[1], {mode: f.mode === 'new' ? 'new' : f.mode === 'copy' ? 'copy' : 'version', show: f.mode === 'show', duration: T, note: f.note, title: f.title});
-                    } catch (err) { await rebuild(); throw err; }
+                        for (const [n, fa] of fmts.entries()) {
+                            P.aspect = fa; const lab = ASPECTS.find(a => a[0] === fa)?.[1].replace(/^[^\p{L}\p{N}]+\s/u, '') || '';
+                            const blob = await recordMontage(P, type[0], p => { prog.textContent = `${fmts.length > 1 ? `Format ${n + 1}/${fmts.length} (${lab}) — ` : ''}Enregistrement… ${Math.round(p * 100)} %`; }, {height: Number(f.height) || 0, quality: Number(f.quality) || 5, fps: Number(f.fps) || 30, abr: Number(f.abr) || 128});
+                            prog.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
+                            const first = n === 0, mode = first ? (f.mode === 'new' ? 'new' : f.mode === 'copy' ? 'copy' : 'version') : (media.id ? 'copy' : 'new');
+                            await uploadResult(media, blob, type[1], {mode, show: first && f.mode === 'show', duration: T, note: f.note, title: first ? f.title : `${f.title || projName || media.title || 'Montage'} (${lab})`});
+                        }
+                    } catch (err) { P.aspect = aspect0; P.blurBars = blur0; await rebuild(); throw err; }
+                    P.aspect = aspect0; if (fmts.length === 1) P.aspect = fmts[0];
                     await rebuild(); drawTl();
                     toast(f.mode === 'new' ? 'Montage enregistré : il est dans Listes → Vidéos.' : f.mode === 'copy' ? 'Nouvelle vidéo enregistrée, rattachée aux mêmes fiches.' : f.mode === 'show' ? 'Nouvelle version montrée partout. L’original est gardé.' : 'Version enregistrée (l’ancienne reste montrée).');
                     onDone?.(); // le montage reste ouvert : on peut continuer, ou 💾 enregistrer le projet
