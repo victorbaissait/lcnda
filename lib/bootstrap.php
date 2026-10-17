@@ -27,6 +27,7 @@ require_once __DIR__ . '/audio_projects.php'; // 🎧 Projets audio
 require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats) // fiches d'employeurs
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/research_gaps.php'; // « Que manque-t-il ? » : les actes à chercher, où et dans quelle série
+require_once __DIR__ . '/faces.php'; // 🏷️ « Qui est qui ? » : empreintes des visages (reconnaissance en local)
 require_once __DIR__ . '/collections.php';
 require_once __DIR__ . '/heritage.php';
 require_once __DIR__ . '/heritage_tools.php';

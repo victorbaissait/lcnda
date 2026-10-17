@@ -3552,3 +3552,13 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-dna-bar{display:inline-block;width:60px;height:8px;border-radius:4px;background:linear-gradient(90deg,#4e79a7 var(--w),#e6e9ee var(--w));vertical-align:middle;margin-right:4px}
 .h-dna-warn{background:#fff4d6;border-radius:8px;padding:6px 10px}.h-dna-ok{background:#dff5e3;border-radius:8px;padding:6px 10px}.h-dna-pl-m select{min-width:280px}
 @media (max-width:900px){.h-dna-auto{grid-template-columns:1fr}}
+/* 🏷️ Qui est qui ? */
+dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-faces-body{padding:0 20px 20px;overflow:auto;max-height:calc(94vh - 80px)}
+.h-faces-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}.h-faces-bar .spacer{flex:1}
+.h-faces-progress{position:relative;height:22px;border-radius:6px;background:var(--soft,#f2f3f6);overflow:hidden;margin-bottom:8px}.h-faces-progress span{position:absolute;inset:0 auto 0 0;background:#cfe0fb;transition:width .2s}.h-faces-progress small{position:relative;padding:0 8px;line-height:22px}
+.h-faces-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.h-faces-tabs button{border:1px solid var(--line,#d0d4dc);background:var(--panel,#fff);border-radius:8px;padding:5px 10px;cursor:pointer;font:inherit}.h-faces-tabs button.active{background:var(--accent,#0066cc);color:#fff;border-color:transparent}
+.h-faces-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}.h-face-card{border:1px solid var(--line,#d0d4dc);border-radius:10px;padding:10px;background:var(--panel,#fff)}.h-face-card.is-sure{border-color:#4caf50;box-shadow:inset 0 0 0 1px #4caf50}.h-face-card p{margin:6px 0}
+.h-face-pair{display:flex;align-items:center;gap:6px}.h-face-arrow{color:var(--muted,#6b7280)}.h-face-crop{display:inline-block;border-radius:8px;background-color:#ddd;background-repeat:no-repeat;flex:none;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+.h-face-act{display:flex;flex-wrap:wrap;gap:4px}.h-faces-groups{display:flex;flex-direction:column;gap:10px}.h-face-group{border:1px solid var(--line,#d0d4dc);border-radius:10px;padding:10px;background:var(--panel,#fff)}.h-face-group p{margin:6px 0}.h-face-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.h-faces-hint{background:#eef4ff;border-radius:8px;padding:10px 12px}
+.h-faces-grid.is-small{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
