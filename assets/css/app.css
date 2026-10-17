@@ -3882,3 +3882,4 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .mt-rgroup select{max-width:170px;font-size:12px}.mt-empty{padding:6px 10px}
 .mt-reorder .dashboard-reorder-row b{text-align:left;min-width:0}.mt-reorder .order-number{flex:0 0 auto}.mt-enable{align-items:flex-start;margin:4px 0 10px}.mt-enable small{display:block;font-weight:400}.mt-vis{display:inline-flex;align-items:center}.mt-rmine .mt-rghead small{margin-left:8px}
 .sg-panel .sg-sum{list-style:none;margin:8px 0;padding:0;font-size:.85rem}.sg-panel ol.sg-sum li{padding:3px 0;border-bottom:1px solid var(--line-soft,#e4e4e4)}.sg-panel>small{display:block;margin:-2px 0 4px}
+.mt-reorder .dashboard-reorder-row{grid-template-columns:18px 30px minmax(0,1fr) auto}.mt-reorder .dashboard-reorder-row:has(> .mt-vis){grid-template-columns:18px 22px 30px minmax(0,1fr) auto}
