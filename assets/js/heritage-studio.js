@@ -1007,7 +1007,7 @@
         // ── Calques : la photo (réglages, taches, tampon) tout en bas, puis un arbre (du bas vers le haut) de calques,
         //    de groupes (qui peuvent contenir d'autres groupes) et de calques de réglage (réglages et filtres) ──
         st.strokes = [];
-        let layers = [], activeLayer = '', layerSeq = 0, maskEdit = ''; // maskEdit : le calque (ou 'photo') dont on peint le masque
+        let layers = [], activeLayer = '', layerSeq = 0, maskEdit = ''; let maskShow = null; // maskShow : ⌥ + clic ou \\ pour voir le masque ; maskEdit : le calque (ou 'photo') dont on peint le masque
         const nid = p => p + (++layerSeq) + Date.now().toString(36);
         const typeOf = n => n?.type || 'layer';
         const walk = (arr, fn, parent = null) => arr.forEach(n => { fn(n, arr, parent); if (typeOf(n) === 'group') walk(n.children, fn, n); });
@@ -1056,7 +1056,7 @@
             const hit = heavy ? adjCache.get(n.id) : null;
             let o; if (hit?.key === key) o = hit.o; else { o = new ImageData(W, H); rtApply(id, o, n.st); if (heavy) adjCache.set(n.id, {key, o}); }
             const adj = blank(W, H); adj.getContext('2d').putImageData(o, 0, 0);
-            const res = blank(W, H), g = res.getContext('2d'); g.drawImage(src, 0, 0); g.globalCompositeOperation = 'source-atop'; g.globalAlpha = n.opacity ?? 1; g.drawImage(rtMasked(adj, n.mask, masks), 0, 0); return res;
+            const res = blank(W, H), g = res.getContext('2d'); g.drawImage(src, 0, 0); g.globalCompositeOperation = 'source-atop'; g.globalAlpha = n.opacity ?? 1; g.drawImage(rtMasked(adj, n.maskOff ? null : n.mask, masks), 0, 0); return res;
         }
         /** Une pile (du bas vers le haut) : calques, groupes (rendus à part, puis posés) et réglages. Un réglage « juste dessous »
             (clip) ne touche que l'élément qui est sous lui ; sinon il touche tout ce qui est dessous dans la même pile. */
@@ -1080,8 +1080,13 @@
             const pc = photo();
             const R = {W: pw, H: ph,
                 layer: l => { if (typeOf(l) === 'photo') return pc; const src = layerCanvas(l); if (!(painting?.preview && painting.layer === l && !painting.mask)) return src; const t = blank(pw, ph), g = t.getContext('2d'); g.drawImage(src, 0, 0); rtDrawOp(g, painting.preview, pw, ph, env()); return t; },
-                mask: n => painting?.mask && painting.layer === n ? [...(n.mask || []), painting.preview] : n.mask};
+                mask: n => painting?.mask && painting.layer === n ? [...(n.mask || []), painting.preview] : n.maskOff ? null : n.mask};
             ctx.drawImage(renderStack(layers, null, R), 0, 0);
+            const mn = maskShow && nodeById(maskShow.id); if (mn?.mask) { // ⌥ + clic : le masque seul ; \ : le masque en rouge (rubylith)
+                const white = blank(pw, ph), wg = white.getContext('2d'); wg.fillStyle = '#fff'; wg.fillRect(0, 0, pw, ph); const shown = rtMasked(white, R.mask(mn) || mn.mask, masks);
+                if (maskShow.mode === 'alone') { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, pw, ph); ctx.drawImage(shown, 0, 0); }
+                else { const red = blank(pw, ph), rg = red.getContext('2d'); rg.fillStyle = 'rgba(255,0,0,.5)'; rg.fillRect(0, 0, pw, ph); rg.globalCompositeOperation = 'destination-out'; rg.drawImage(shown, 0, 0); ctx.drawImage(red, 0, 0); } }
+            else if (maskShow) maskShow = null;
             if (painting?.patch) { ctx.save(); ctx.drawImage((() => { const t = blank(pw, ph), g = t.getContext('2d'); g.drawImage(pc, 0, 0); g.globalCompositeOperation = 'destination-in'; g.drawImage(masks.get(painting.patch.mask), 0, 0); return t; })(), painting.patch.dx * pw, painting.patch.dy * ph); ctx.restore(); }
             drawOverlay();
         }); };
@@ -1153,14 +1158,18 @@
         redoBtn.addEventListener('click', () => restore(hpos + 1));
         // ── Calques : un arbre (calques, groupes de groupes, réglages), visibilité, opacité, verrou, nom, masque ──
         const thumbOf = (c, maskOps) => { const t = document.createElement('canvas'); t.width = 44; t.height = Math.max(1, Math.round(44 * ph / pw)); const g = t.getContext('2d'); if (maskOps) { g.fillStyle = '#111'; g.fillRect(0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-out'; g.drawImage(rtRenderMask(maskOps, pw, ph, masks), 0, 0, t.width, t.height); g.globalCompositeOperation = 'destination-over'; g.fillStyle = '#fff'; g.fillRect(0, 0, t.width, t.height); } /* comme Photoshop : blanc = montré, noir = caché */ else g.drawImage(c, 0, 0, t.width, t.height); return t.toDataURL(); };
-        const maskBtns = (id, m) => m ? `<button type="button" class="h-rt-mthumb${maskEdit === id ? ' is-on' : ''}" data-rt-medit title="${maskEdit === id ? 'Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque' : 'Masque : clic pour le peindre au pinceau'}"><img src="${thumbOf(null, m)}" alt="masque"></button>` : `<button type="button" class="icon-button small" data-rt-madd title="Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection)">🎭</button>`;
+        const maskBtns = (id, m) => m ? `<button type="button" class="h-rt-mthumb${maskEdit === id ? ' is-on' : ''}${nodeById(id)?.maskOff ? ' is-maskoff' : ''}${maskShow?.id === id ? ' is-shown' : ''}" data-rt-medit title="${maskEdit === id ? 'Tu peins le masque (pinceau : ⬛ cacher / ⬜ montrer). Clic : revenir au calque' : 'Masque : clic pour le peindre au pinceau'} · ⇧ Maj + clic : désactiver / réactiver le masque · ⌥ Alt + clic : voir le masque seul · touche \\ : le masque en rouge par-dessus"><img src="${thumbOf(null, m)}" alt="masque"></button>` : `<button type="button" class="icon-button small" data-rt-madd title="Ajouter un masque (cacher une partie sans l’effacer) — ⌥ / Alt + clic : un masque qui cache tout (ou cache la sélection)">🎭</button>`;
         const groupsList = (except = null) => { const out = []; const rec = (arr, depth, banned) => arr.forEach(n => { if (typeOf(n) !== 'group') return; const ban = banned || n === except; if (!ban) out.push([n, depth]); rec(n.children, depth + 1, ban); }); rec(layers, 0, false); return out; };
         const ICON = {layer: '🖌', group: '📁', adjust: '🎚', photo: '🖼'};
         function rowHtml(n, depth) {
             const t = typeOf(n), mops = n.mask ? `<span class="h-rt-mops"><button type="button" class="link-button" data-rt-minv>inverser le masque</button><button type="button" class="link-button" data-rt-mdel>retirer le masque</button></span>` : '';
             const loc = locate(n.id), parentId = loc?.parent?.id || '';
             const into = `<label class="h-rt-lpar" title="Ranger dans un groupe">📁 <select data-rt-lpar><option value="">(hors groupe)</option>${groupsList(n).map(([g, d]) => `<option value="${g.id}" ${g.id === parentId ? 'selected' : ''}>${'  '.repeat(d)}${esc(g.name)}</option>`).join('')}</select></label>`;
-            const head = `<li class="h-rt-node is-${t}${(t === 'photo' ? !activeLayer : n.id === activeLayer) ? ' is-active' : ''}${n.visible ? '' : ' is-off'}" data-rt-l="${n.id}" style="--d:${depth}">
+            // écrêtage façon Photoshop : le réglage « seulement dessous » est décalé, avec une flèche vers l'élément qu'il touche (souligné)
+            const ix = loc ? loc.arr.indexOf(n) : -1, clipped = t === 'adjust' && n.clip, base = t !== 'adjust' && ix >= 0 && typeOf(loc.arr[ix + 1] || {}) === 'adjust' && loc.arr[ix + 1].clip;
+            const clipBase = clipped ? loc.arr.slice(0, ix).reverse().find(x => !(typeOf(x) === 'adjust' && x.clip)) : null;
+            const head = `<li class="h-rt-node is-${t}${(t === 'photo' ? !activeLayer : n.id === activeLayer) ? ' is-active' : ''}${n.visible ? '' : ' is-off'}${clipped ? ' is-clipped' : ''}${base ? ' is-clipbase' : ''}" data-rt-l="${n.id}" style="--d:${depth}">
+                ${clipped ? `<span class="h-rt-cliparrow" title="Masque d’écrêtage : ne touche que ${clipBase ? `« ${esc(clipBase.name)} »` : 'l’élément'} juste dessous (⌥ Alt + clic entre deux calques dans Photoshop)"><svg viewBox="0 0 14 16" width="12" height="14" aria-hidden="true"><path d="M3 1v9h7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 7l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1.6" transform="rotate(90 10 10)"/></svg></span>` : ''}
                 <span class="h-rt-grip" draggable="true" data-rt-grip title="Glisser pour ranger : au-dessus, en dessous, ou dans un groupe (lâcher au milieu d’un groupe)">⠿</span>
                 ${t === 'group' ? `<button type="button" class="h-rt-gtog" data-rt-gopen title="${n.open !== false ? 'Replier' : 'Déplier'}">${n.open !== false ? '▾' : '▸'}</button>` : '<span class="h-rt-gtog"></span>'}
                 <button type="button" class="h-rt-eye" data-rt-lvis title="${n.visible ? 'Masquer' : 'Montrer'}">${n.visible ? '👁' : '◌'}</button>
@@ -1204,6 +1213,8 @@
                 if (e.altKey) { addMaskTo(id, selId ? [{type: 'sel', mask: selId, invert: true}] : [{type: 'all', mode: 'hide'}]); setMode('brush'); commit(`Masque qui cache ${selId ? 'la sélection' : 'tout'} ajouté à ${name}`); toast(selId ? 'Masque ajouté : la sélection est cachée.' : 'Masque ajouté : tout est caché ; peins en ⬜ pour montrer.'); return; }
                 addMaskTo(id, []); setMode('brush'); commit(`Masque ajouté à ${name}`); toast('Masque ajouté : peins en ⬛ pour cacher, en ⬜ pour montrer.'); return;
             }
+            if (e.target.closest('[data-rt-medit]') && e.shiftKey) { l.maskOff = !l.maskOff; refreshLayers(); draw(); commit(`Masque de ${name} ${l.maskOff ? 'désactivé' : 'réactivé'}`); return; } // comme Photoshop
+            if (e.target.closest('[data-rt-medit]') && e.altKey) { maskShow = maskShow?.id === id && maskShow.mode === 'alone' ? null : {id, mode: 'alone'}; refreshLayers(); draw(); if (maskShow) toast('Masque seul : blanc = montré, noir = caché (⌥ + clic pour revenir)'); return; }
             if (e.target.closest('[data-rt-medit]')) { maskEdit = maskEdit === id ? '' : id; activeLayer = id === 'photo' ? '' : id; if (maskEdit) setMode('brush'); else setMode(mode); refreshLayers(); return; }
             if (e.target.closest('[data-rt-minv]')) { l.mask = [...l.mask, {type: 'invert'}]; refreshLayers(); draw(); commit(`Masque de ${name} inversé`); return; }
             if (e.target.closest('[data-rt-mdel]')) { l.mask = null; if (maskEdit === id) maskEdit = ''; setMode(mode); refreshLayers(); draw(); commit(`Masque de ${name} retiré`); return; }
@@ -2012,6 +2023,7 @@
             if (mod && k === 's') { e.preventDefault(); e.stopImmediatePropagation(); saveProject(e.shiftKey); return; }
             if (mod && ['a', 'd', 'i', 'j', 'g', 'f'].includes(k)) { if (k === 'i' && !e.shiftKey) return; e.preventDefault(); e.stopImmediatePropagation(); cmd({a: 'sel:all', d: 'sel:none', i: 'sel:invert', j: 'sel:copy', g: 'gwrap', f: 'fx:last'}[k]); return; }
             if (mod) return;
+            if (e.key === '\\') { const n = nodeById(maskEdit || activeLayer || 'photo'); if (!n?.mask) { toast('Ce calque n’a pas de masque.'); return; } e.preventDefault(); e.stopImmediatePropagation(); maskShow = maskShow?.id === n.id && maskShow.mode === 'ruby' ? null : {id: n.id, mode: 'ruby'}; refreshLayers(); draw(); if (maskShow) toast('Masque en rouge : ce qui est caché (touche \\ pour revenir)'); return; }
             if (e.key === 'Escape' && dlg.querySelector('details.h-rt-menu[open]')) { e.preventDefault(); e.stopImmediatePropagation(); dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open')); return; }
             if (e.key === 'Escape' && mode === 'persp') { e.preventDefault(); e.stopImmediatePropagation(); cmd('persp:cancel'); return; }
             if (e.key === 'Escape' && (poly || mode === 'crop' || moveSel)) { e.preventDefault(); e.stopImmediatePropagation(); if (poly) { poly = null; polyHover = null; draw(); } else if (mode === 'crop') { crop = null; setMode('adjust'); } else { moveSel = null; draw(); } return; }
@@ -2107,7 +2119,7 @@
             if (st.strokes.length) rtReplayStrokes(data, st.strokes, masks);
             fctx.putImageData(rtApply(data, data, st), 0, 0);
             const comp = document.createElement('canvas'); comp.width = W; comp.height = H; const cg = comp.getContext('2d');
-            const RF = {W, H, layer: l => { if (typeOf(l) === 'photo') return pc; const lc = blank(W, H); rtDrawLayer(lc, l, {masks, photo: pc}); return lc; }, mask: n => n.mask};
+            const RF = {W, H, layer: l => { if (typeOf(l) === 'photo') return pc; const lc = blank(W, H); rtDrawLayer(lc, l, {masks, photo: pc}); return lc; }, mask: n => n.maskOff ? null : n.mask};
             cg.drawImage(renderStack($('[data-rt-merge]').checked ? layers : P() ? [P()] : [], null, RF), 0, 0);
             if (!st.crop) return comp;
             const c = st.crop, oc = document.createElement('canvas'); oc.width = Math.max(1, Math.round(c.w * W)); oc.height = Math.max(1, Math.round(c.h * H));

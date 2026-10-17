@@ -3573,3 +3573,8 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 #lightbox .lb-sec{display:contents}#lightbox .lb-sec.lb-sec-off{display:none}
 .lb-prefs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}.lb-row .lb-move{display:inline-flex;gap:2px;margin-right:6px}.lb-row .lb-move .icon-button{width:26px;height:26px;font-size:.8rem}
 .lb-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line,#d0d4dc);border-radius:8px;margin:4px 0;background:var(--panel,#fff)}.lb-row b{flex:1;font-weight:600}.lb-row .lb-vis{margin:0}
+/* Retouche : écrêtage et masque désactivé, façon Photoshop */
+.h-rt-node.is-clipped{margin-left:22px;border-left:2px solid var(--accent,#0066cc)}.h-rt-cliparrow{display:inline-flex;color:var(--accent,#0066cc);margin-right:2px}
+.h-rt-node.is-clipbase [data-rt-lname]{text-decoration:underline;text-underline-offset:3px}
+.h-rt-mthumb.is-maskoff{position:relative}.h-rt-mthumb.is-maskoff::after{content:'';position:absolute;inset:0;background:linear-gradient(to top right,transparent 46%,#e02020 46% 54%,transparent 54%),linear-gradient(to bottom right,transparent 46%,#e02020 46% 54%,transparent 54%)}
+.h-rt-mthumb.is-shown{outline:2px solid #e02020}
