@@ -472,7 +472,7 @@
                 <h4>📏 Échelle</h4>${m.geo ? `<p class="muted vx-mhelp">Plan situé : ${esc(m.geo.name || '')} — il couvre <b>${fmtM(metersPerPx() * d.w)} × ${fmtM(metersPerPx() * d.h)}</b> (1 px ≈ ${String(+metersPerPx().toFixed(2)).replace('.', ',')} m). Les lieux de ta base se posent à leur vraie place (📍).</p>` : `<p class="muted vx-mhelp">Pour une carte juste et pas déformée, commence par <b>🗺️ Fond de carte d’un lieu</b> (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel :</p><label>1 pixel = … mètres<input type="number" data-vm="scale" min="0.001" step="0.1" value="${esc(m.scale || 1)}"></label>`}
                 <label class="checkbox-line"><input type="checkbox" data-vm="kmgrid" ${m.kmgrid ? 'checked' : ''}> Grille d’échelle (carreaux de 100 m, 1 km… ; ne s’imprime pas)</label><p class="muted vx-mhelp">Choisis un objet du plan : sa longueur ou sa surface réelles s’affichent dans Propriétés.</p>` : '<p class="muted">Le mode Plan ajoute des outils de carte : routes qui se raccordent, rivières, forêts, bâtiments, symboles (église, moulin, château…), noms qui suivent les rues, échelle, rose des vents, légende automatique, styles d’époque (état-major, cadastre napoléonien, Cassini…).</p>'}
                 <h4>🖼️ Fond et image de référence</h4><p class="muted vx-mhelp">Une carte ou une image (cadastre ancien, photo, plan scanné) sous le dessin, en transparence, pour décalquer. Elle ne s’imprime pas, sauf si tu le veux.</p>
-                <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="basemap">🗺️ Fond de carte d’un lieu…</button><button type="button" class="button small secondary" data-vm-cmd="refimg">🖼️ Image de référence…</button></div>
+                ${m.bm && ref ? `<div class="vx-bm-shift"><span>Décaler le fond</span>${PAD('data-vm-bmshift')}<small class="muted">un dixième de sa largeur à chaque clic ; le plan reste à la bonne échelle</small></div>` : ''}<div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="basemap">🗺️ Fond de carte d’un lieu…</button><button type="button" class="button small secondary" data-vm-cmd="refimg">🖼️ Image de référence…</button></div>
                 ${ref ? `<div class="vx-refbox"><label>Transparence (%) <input type="range" data-vm="refop" min="5" max="100" value="${Math.round(num(ref.op, .5) * 100)}"></label>
                     <div class="vx-row"><label class="checkbox-line"><input type="checkbox" data-vm="refshow" ${ref.show !== false ? 'checked' : ''}> Visible</label><label class="checkbox-line"><input type="checkbox" data-vm="refprint" ${ref.print ? 'checked' : ''}> Dans l’export</label><label class="checkbox-line"><input type="checkbox" data-vm="refgray" ${ref.gray ? 'checked' : ''}> En gris</label></div>
                     <label>Taille (%) <input type="range" data-vm="refscale" min="10" max="400" value="${Math.round(num(ref.k, 1) * 100)}"></label>
@@ -538,33 +538,57 @@
         /* ─── fond de carte : un lieu, un rayon, un fond → une image de référence calée, et le plan est « situé » ─── */
         const mercY = lat => { const r = clamp(lat, -85, 85) * Math.PI / 180; return Math.log(Math.tan(Math.PI / 4 + r / 2)); };
         const latOfY = y => (2 * Math.atan(Math.exp(y)) - Math.PI / 2) * 180 / Math.PI;
+        /** l'emprise d'un fond centré sur (lat, lon), large de km, aux proportions du plan de travail (Mercator, comme les tuiles) */
+        function bmBox(lat, lon, km, d) {
+            const dLon = km / (111.32 * Math.cos(lat * Math.PI / 180)), x0 = (lon - dLon / 2 + 180) / 360, x1 = (lon + dLon / 2 + 180) / 360;
+            const yc = (1 - mercY(lat) / Math.PI) / 2, hy = (x1 - x0) * d.h / d.w, y0 = yc - hy / 2, y1 = yc + hy / 2;
+            return {x0, x1, y0, y1, geo: {n: latOfY((1 - 2 * y0) * Math.PI), s: latOfY((1 - 2 * y1) * Math.PI), w: lon - dLon / 2, e: lon + dLon / 2, lat, lon}};
+        }
+        /** décale un centre de dx, dy kilomètres (est, nord) */
+        const bmShift = (lat, lon, dxKm, dyKm) => [clamp(lat + dyKm / 110.574, -84, 84), lon + dxKm / (111.32 * Math.cos(lat * Math.PI / 180))];
+        const KMS = [[0.3, '300 m (un quartier)'], [0.6, '600 m'], [1, '1 km (un bourg)'], [2, '2 km'], [4, '4 km (une commune)'], [8, '8 km'], [15, '15 km (un canton)'], [30, '30 km'], [80, '80 km (un pays)'], [250, '250 km (une région)']];
+        const PAD = (attr) => `<div class="vx-bm-pad" title="Décaler le fond (d’un dixième de sa largeur)"><button type="button" ${attr}="0,1" title="Vers le nord">↑</button><button type="button" ${attr}="-1,0" title="Vers l’ouest">←</button><button type="button" ${attr}="1,0" title="Vers l’est">→</button><button type="button" ${attr}="0,-1" title="Vers le sud">↓</button></div>`;
+        async function placeBasemap(bm, quiet) {
+            const d = ed.doc(), b = bmBox(bm.lat, bm.lon, bm.km, d); let src;
+            try { src = await stitch(bm.bg, b.x0, b.x1, b.y0, b.y1, d.w, d.h); }
+            catch (_) { try { src = await stitch('offline', b.x0, b.x1, b.y0, b.y1, d.w, d.h); toast('Le fond choisi n’a pas pu être lu : fond hors ligne à la place.'); } catch (e2) { toast('Carte impossible à charger.', 'error'); return false; } }
+            const m = mapDoc(); m.on = true; m.geo = {...b.geo, name: bm.name || '', place_id: bm.place_id || 0}; m.bm = {lat: bm.lat, lon: bm.lon, km: bm.km, bg: bm.bg, name: bm.name || '', place_id: bm.place_id || 0};
+            const op = num(bm.op ?? d.ref?.op, .55); d.ref = {src, x: 0, y: 0, w: d.w, h: d.h, k: 1, op, show: true, print: false, gray: false};
+            ed.commit(quiet ? 'Fond décalé' : 'Fond de carte'); ed.paint(); return true;
+        }
         function basemapDialog() {
-            const d = ed.doc();
-            ext.openDialog({eyebrow: 'PLAN', title: 'Fond de carte d’un lieu', submitLabel: 'Poser le fond',
-                body: `<p class="muted">La carte du lieu est posée sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer.</p>
-                    <label>Lieu<input type="search" data-q placeholder="Commune, village…" autocomplete="off" value="${esc(d.map?.geo?.name || '')}"></label><div data-res class="vx-pres"></div>
-                    <div class="vx-grid2"><label>Largeur couverte<select name="km">${[[0.3, '300 m (un quartier)'], [0.6, '600 m'], [1, '1 km (un bourg)'], [2, '2 km'], [4, '4 km (une commune)'], [8, '8 km'], [15, '15 km (un canton)'], [30, '30 km'], [80, '80 km (un pays)'], [250, '250 km (une région)']].map(([v, l]) => `<option value="${v}" ${v === 2 ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                    <label>Fond<select name="bg"><option value="offline">Hors ligne (contours des communes)</option>${A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml('osm') : '<option value="osm">OpenStreetMap</option>'}</select></label></div>
-                    <label>Transparence (%)<input type="range" name="op" min="10" max="100" value="55"></label>`,
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let t = 0; q.focus();
-                    const go = async () => { const rows = ((await api('board_place_search', {q: q.value.trim()}).catch(() => ({places: []}))).places || []).filter(p => p.lat || p.lon);
-                        res.innerHTML = rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}" ${i === 0 ? 'checked' : ''}> ${esc(r.name)} <small class="muted">${esc(r.detail || '')}</small></label>`).join('') || '<p class="muted">Rien trouvé (il faut un lieu avec des coordonnées).</p>'; res._rows = rows; };
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(go, 250); }); if (q.value.trim().length > 1) go(); },
+            const d = ed.doc(), m0 = mapDoc().bm; let rows = [], picked = m0 ? {name: m0.name, detail: '', lat: m0.lat, lon: m0.lon, id: m0.place_id} : null, off = [0, 0], pt = 0;
+            ext.openDialog({eyebrow: 'PLAN', title: '🗺️ Fond de carte d’un lieu', submitLabel: 'Poser le fond', wide: true,
+                body: `<div class="vx-bm"><div class="vx-bm-left"><p class="muted">La carte du lieu se pose sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer.</p>
+                    <label class="vx-bm-f"><span>Lieu</span><input type="search" data-q placeholder="Commune, village…" autocomplete="off" value="${esc(m0?.name || d.map?.geo?.name || '')}"></label>
+                    <div data-res class="vx-bm-res" role="listbox" aria-label="Lieux trouvés"></div>
+                    <div class="vx-grid2"><label class="vx-bm-f"><span>Largeur couverte</span><select name="km">${KMS.map(([v, l]) => `<option value="${v}" ${v === (m0?.km || 2) ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                    <label class="vx-bm-f"><span>Fond</span><select name="bg"><option value="offline">Hors ligne (contours des communes)</option>${A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(m0?.bg || 'osm') : '<option value="osm">OpenStreetMap</option>'}</select></label></div>
+                    <label class="vx-bm-f"><span>Transparence (%)</span><input type="range" name="op" min="10" max="100" value="${Math.round(num(d.ref?.op, .55) * 100)}"></label></div>
+                    <div class="vx-bm-right"><div class="vx-bm-prev" data-prev style="aspect-ratio:${d.w} / ${d.h}"><span class="muted" data-prevmsg>Choisis un lieu : la carte s’affiche ici.</span></div>
+                    <div class="vx-bm-under">${PAD('data-bmoff')}<span class="muted" data-offtxt>Centré sur le lieu</span><button type="button" class="button small secondary" data-bmrecenter>↺ Recentrer</button></div></div></div>`,
+                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'), prev = dg.querySelector('[data-prev]'); let t = 0; q.focus();
+                    const center = () => picked ? bmShift(num(picked.lat), num(picked.lon), off[0], off[1]) : null;
+                    const offTxt = () => { const [x, y] = off; dg.querySelector('[data-offtxt]').textContent = !x && !y ? 'Centré sur le lieu' : `Décalé de ${[y ? `${fmtKm(Math.abs(y))} vers le ${y > 0 ? 'nord' : 'sud'}` : '', x ? `${fmtKm(Math.abs(x))} vers l’${x > 0 ? 'est' : 'ouest'}` : ''].filter(Boolean).join(', ')}`; };
+                    const preview = () => { clearTimeout(pt); pt = setTimeout(async () => { const c = center(); if (!c) return; const km = num(dg.querySelector('[name=km]').value, 2), bg = dg.querySelector('[name=bg]').value, b = bmBox(c[0], c[1], km, d);
+                        prev.classList.add('is-loading'); let src = ''; try { src = await stitch(bg, b.x0, b.x1, b.y0, b.y1, 480, Math.round(480 * d.h / d.w)); } catch (_) { try { src = await stitch('offline', b.x0, b.x1, b.y0, b.y1, 480, Math.round(480 * d.h / d.w)); } catch (e2) {} }
+                        prev.classList.remove('is-loading'); prev.innerHTML = src ? `<img src="${src}" alt="Aperçu du fond" style="opacity:${num(dg.querySelector('[name=op]').value, 55) / 100}"><span class="vx-bm-cross" aria-hidden="true"></span>` : '<span class="muted">Carte impossible à charger.</span>'; }, 200); };
+                    const draw = () => { res.innerHTML = rows.map((r, i) => `<button type="button" class="vx-bm-item${picked && r === picked ? ' is-on' : ''}" data-pick="${i}" role="option"><b>${esc(r.name)}</b><small>${esc(r.detail || '')}</small></button>`).join('') || (q.value.trim().length > 1 ? '<p class="muted">Rien trouvé (il faut un lieu avec des coordonnées).</p>' : ''); };
+                    const go = async () => { rows = ((await api('board_place_search', {q: q.value.trim()}).catch(() => ({places: []}))).places || []).filter(p => p.lat || p.lon); if (rows.length && !rows.includes(picked)) { picked = rows[0]; off = [0, 0]; offTxt(); preview(); } draw(); };
+                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(go, 250); }); if (q.value.trim().length > 1) go(); else if (picked) preview();
+                    res.addEventListener('click', e => { const b = e.target.closest('[data-pick]'); if (!b) return; picked = rows[Number(b.dataset.pick)]; off = [0, 0]; offTxt(); draw(); preview(); });
+                    dg.addEventListener('click', e => { const b = e.target.closest('[data-bmoff]'); if (b) { const km = num(dg.querySelector('[name=km]').value, 2), [x, y] = b.dataset.bmoff.split(',').map(Number); off = [off[0] + x * km / 10, off[1] + y * km / 10]; offTxt(); preview(); }
+                        if (e.target.closest('[data-bmrecenter]')) { off = [0, 0]; offTxt(); preview(); } });
+                    dg.addEventListener('change', e => { if (e.target.matches('[name=km], [name=bg]')) preview(); });
+                    dg.addEventListener('input', e => { if (e.target.matches('[name=op]')) { const im = prev.querySelector('img'); if (im) im.style.opacity = num(e.target.value, 55) / 100; } });
+                    dg._center = center; },
                 onSubmit: async f => {
-                    const r = f.querySelector('[data-res]')._rows?.[Number(f.querySelector('[name=pick]:checked')?.value)]; if (!r) { toast('Choisis un lieu dans la liste.', 'error'); return false; }
-                    const km = num(f.querySelector('[name=km]').value, 2), bg = f.querySelector('[name=bg]').value, op = num(f.querySelector('[name=op]').value, 55) / 100;
-                    // emprise : la largeur demandée, la hauteur selon les proportions du plan de travail (en Mercator, comme les tuiles)
-                    const lat = num(r.lat), lon = num(r.lon), dLon = km / (111.32 * Math.cos(lat * Math.PI / 180)), x0 = (lon - dLon / 2 + 180) / 360, x1 = (lon + dLon / 2 + 180) / 360;
-                    const yc = (1 - mercY(lat) / Math.PI) / 2, hy = (x1 - x0) * d.h / d.w, y0 = yc - hy / 2, y1 = yc + hy / 2;
-                    const geo = {n: latOfY((1 - 2 * y0) * Math.PI), s: latOfY((1 - 2 * y1) * Math.PI), w: lon - dLon / 2, e: lon + dLon / 2, lat, lon, name: r.name, place_id: Number(r.id) || 0};
+                    const dg = f.closest('dialog'), c = dg?._center?.(); if (!c) { toast('Choisis un lieu dans la liste.', 'error'); return false; }
                     toast('Chargement de la carte…');
-                    let src;
-                    try { src = await stitch(bg, x0, x1, y0, y1, d.w, d.h); }
-                    catch (_) { try { src = await stitch('offline', x0, x1, y0, y1, d.w, d.h); toast('Le fond choisi n’a pas pu être lu : fond hors ligne à la place.'); } catch (e2) { toast('Carte impossible à charger.', 'error'); return false; } }
-                    const m = mapDoc(); m.on = true; m.geo = geo; d.ref = {src, x: 0, y: 0, w: d.w, h: d.h, k: 1, op, show: true, print: false, gray: false};
-                    ed.commit('Fond de carte'); ed.paint();
+                    return (await placeBasemap({lat: c[0], lon: c[1], km: num(f.querySelector('[name=km]').value, 2), bg: f.querySelector('[name=bg]').value, op: num(f.querySelector('[name=op]').value, 55) / 100, name: picked.name, place_id: Number(picked.id) || 0})) ? undefined : false;
                 }});
         }
+        const fmtKm = km => km < 1 ? `${Math.round(km * 1000)} m` : `${String(+km.toFixed(1)).replace('.', ',')} km`;
         /** assemble les tuiles qui couvrent [x0, x1] × [y0, y1] (coordonnées 0..1 du monde) en une image W × H */
         async function stitch(bg, x0, x1, y0, y1, W2, H2) {
             const outW = Math.min(2400, Math.max(600, W2 * 1.5)), z = clamp(Math.round(Math.log2(outW / ((x1 - x0) * 256))), 2, 18), n = 2 ** z, tx0 = Math.floor(x0 * n), tx1 = Math.floor(x1 * n), ty0 = Math.floor(y0 * n), ty1 = Math.floor(y1 * n);
@@ -631,6 +655,7 @@
             const el = e.target;
             if (e.type === 'click') {
                 const p = el.closest('[data-vm-pick]'); if (p) { const [tool, kind] = p.dataset.vmPick.split(':'), c = /^my_/.test(kind) ? customs().find(x => x.id === kind) : null; pick = c ? {tool, kind: c.d ? c.id : c.base, custom: c} : {tool, kind}; ed.setTool(tool); ed.paint(); return true; }
+                const sh = el.closest('[data-vm-bmshift]'); if (sh) { const bm = mapDoc().bm; if (!bm) return true; const [x, y] = sh.dataset.vmBmshift.split(',').map(Number), [la, lo] = bmShift(bm.lat, bm.lon, x * bm.km / 10, y * bm.km / 10); toast('Chargement de la carte…'); placeBasemap({...bm, lat: la, lon: lo}, true); return true; }
                 const c = el.closest('[data-vm-cmd]'); if (c) { const k = c.dataset.vmCmd;
                     if (k === 'paletteCfg') return openPaletteEditor(() => ed.paint()), true;
                     if (k === 'newItem') { editCustom(null, {selection: ed.selObjs?.() || []}).then(id => { if (id) ed.paint(); }); return true; }
