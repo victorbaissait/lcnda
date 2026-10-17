@@ -461,17 +461,19 @@ function board_event_row(array $e, string $scope): array
         'place' => (string) ($e['place'] ?? ''), 'lat' => $e['lat'] !== null ? (float) $e['lat'] : null, 'lon' => $e['lon'] !== null ? (float) $e['lon'] : null];
 }
 /** Un lieu de la base avec ses coordonnées (repères posés sur une carte de tableau) */
-function board_place_search(PDO $pdo, string $q): array
+/** $limit : 15 d'habitude ; la carte d'un lieu en demande plus (beaucoup de communes portent le même nom) */
+function board_place_search(PDO $pdo, string $q, int $limit = 15): array
 {
+    $limit = max(1, min(100, $limit));
     $q = trim($q); if (mb_strlen($q) < 2) { return []; }
-    $s = $pdo->prepare("SELECT id, name, county, country, latitude AS lat, longitude AS lon FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, name LIMIT 15");
+    $s = $pdo->prepare("SELECT id, name, county, country, latitude AS lat, longitude AS lon FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, name LIMIT {$limit}");
     $s->execute(['%' . $q . '%', $q . '%']);
     $rows = array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => (string) $r['name'], 'detail' => trim(implode(', ', array_filter([$r['county'], $r['country']]))), 'lat' => (float) $r['lat'], 'lon' => (float) $r['lon']], $s->fetchAll());
     // et les communes de France livrées avec l'app (sans être dans la base)
-    if (count($rows) < 8 && function_exists('heritage_place_search')) {
+    if (count($rows) < min(8, $limit) && function_exists('heritage_place_search')) {
         $seen = array_flip(array_map(static fn($r) => mb_strtolower($r['name']) . '|' . round($r['lat'], 2), $rows));
-        foreach (heritage_place_search($pdo, $q) as $r) {
-            if (count($rows) >= 15) { break; }
+        foreach (heritage_place_search($pdo, $q, $limit) as $r) {
+            if (count($rows) >= $limit) { break; }
             $lat = (float) ($r['lat'] ?? 0); $lon = (float) ($r['lon'] ?? 0); $name = (string) ($r['name'] ?? '');
             if ($name === '' || (!$lat && !$lon) || isset($seen[mb_strtolower($name) . '|' . round($lat, 2)])) { continue; }
             $seen[mb_strtolower($name) . '|' . round($lat, 2)] = 1;

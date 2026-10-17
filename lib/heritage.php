@@ -148,17 +148,17 @@ function heritage_geocode(PDO $pdo, string $text): ?array
 }
 
 /** Suggestions de lieux (base + villes du monde) avec coordonnées : nom exact d'abord, puis les plus peuplées. */
-function heritage_place_search(PDO $pdo, string $q): array
+function heritage_place_search(PDO $pdo, string $q, int $limit = 12): array
 {
     if (mb_strlen($q) < 2) { return []; }
     $rows = [];
     $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, COALESCE(population,0) AS population FROM places
         WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL
-        ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, COALESCE(population,0) DESC, name COLLATE NOCASE LIMIT 12");
+        ORDER BY CASE WHEN name LIKE ? COLLATE NOCASE THEN 0 ELSE 1 END, COALESCE(population,0) DESC, name COLLATE NOCASE LIMIT " . max(1, min(100, $limit)));
     try {
         $stmt->execute(["%{$q}%", "{$q}%"]);
     } catch (Throwable $_) { // anciennes bases sans colonne population
-        $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, 0 AS population FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY name COLLATE NOCASE LIMIT 12");
+        $stmt = $pdo->prepare("SELECT name, county, state, country, latitude, longitude, 0 AS population FROM places WHERE name LIKE ? COLLATE NOCASE AND latitude IS NOT NULL AND longitude IS NOT NULL ORDER BY name COLLATE NOCASE LIMIT " . max(1, min(100, $limit)));
         $stmt->execute(["{$q}%"]);
     }
     foreach ($stmt->fetchAll() as $r) { $rows[] = ['name' => $r['name'], 'sub' => $r['county'] ?: $r['state'], 'country' => $r['country'], 'lat' => $r['latitude'], 'lon' => $r['longitude'], 'pop' => (int) $r['population']]; }

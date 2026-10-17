@@ -1154,8 +1154,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-periodicals.js?v=4" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=3" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=3" defer></script>
-<script src="assets/js/heritage-vector.js?v=11" defer></script>
-<script src="assets/js/heritage-vector-map.js?v=6" defer></script>
+<script src="assets/js/heritage-vector.js?v=12" defer></script>
+<script src="assets/js/heritage-vector-map.js?v=7" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=5" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=2" defer></script>
 <script src="assets/js/heritage-vector-seal.js?v=3" defer></script>

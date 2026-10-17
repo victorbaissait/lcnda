@@ -369,7 +369,7 @@ try {
         'board' => json_response(board_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'board_place_key' => json_response((function () use ($pdo) { $s = $pdo->prepare('SELECT id, name, county, admin4_code FROM places WHERE id=?'); $s->execute([safe_int($_GET['id'] ?? 0)]); $r = $s->fetch(); return ['key' => $r && function_exists('village_key') ? village_key($r) : '']; })()),
         'board_people' => json_response(['people' => (object) board_people($pdo, explode(',', (string) ($_GET['ids'] ?? '')), ($_GET['events'] ?? '') === '1')]),
-        'board_place_search' => json_response(['places' => board_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
+        'board_place_search' => json_response(['places' => board_place_search($pdo, safe_text($_GET['q'] ?? ''), (int) ($_GET['limit'] ?? 15))]),
         'board_family_search' => json_response(['families' => board_family_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'board_link_person' => json_response(['person_id' => board_link_person($pdo, safe_text($_GET['kind'] ?? ''), safe_int($_GET['id'] ?? 0))]),
         'board_links_check' => json_response(board_links_check($pdo, ['links' => json_decode((string) ($_GET['links'] ?? '[]'), true) ?: []])),
