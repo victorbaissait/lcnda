@@ -44,7 +44,7 @@
             if (c && (c === arrows || c.contains(up))) { row.insertBefore(g, row.firstChild); c = g; } // la poignée toujours au début, pas collée aux flèches
             if (c) c.style.order = '-3'; });
         const box = [...row.querySelectorAll('input[type=checkbox]')].find(i => { const c = childOf(row, i); return c && c !== arrows; });
-        if (box) { const c = childOf(row, box); if (c.style.order !== '-3') c.style.order = '-2'; }
+        if (box) { box.classList.add('ord-vis'); const c = childOf(row, box); if (c.style.order !== '-3') c.style.order = '-2'; }
         const main = [...row.children].find(c => !c.style.order && /\S/.test(c.textContent) && !c.matches('button, select, input, .order-number'));
         (main || (box && /\S/.test(childOf(row, box).textContent) ? childOf(row, box) : null))?.classList.add('ord-main'); // la case et son libellé ensemble : ils prennent la place
     }

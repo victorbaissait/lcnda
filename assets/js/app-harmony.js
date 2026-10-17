@@ -39,6 +39,20 @@
             if (full && full.parentElement === bar) full.classList.add('stick-r2'); if (close?.matches?.('button') && close.parentElement === bar) close.classList.add('stick-r');
         });
     }
+    /* 👁 lignes cachées dans les listes à ranger : laissées telles quelles, ou grisées (niveau au choix) — Maintenance → Apparence */
+    const HR_KEY = 'genealogie-hidden-rows';
+    const hrPrefs = () => { try { const v = JSON.parse(localStorage.getItem(HR_KEY) || '{}') || {}; return {mode: v.mode === 'keep' ? 'keep' : 'dim', level: Math.min(85, Math.max(5, Number(v.level) || 45))}; } catch (_) { return {mode: 'dim', level: 45}; } };
+    const hrApply = () => { const p = hrPrefs(); document.documentElement.style.setProperty('--hidden-row-opacity', p.mode === 'keep' ? '1' : String(1 - p.level / 100)); document.documentElement.dataset.hiddenRows = p.mode; };
+    hrApply();
+    const EXT = window.LCNDA_EXT = window.LCNDA_EXT || {}; EXT.designPanels = EXT.designPanels || [];
+    EXT.designPanels.push(() => { const p = hrPrefs(); return `<section class="person-block-config" id="h-hidden-rows"><header><span class="eyebrow">APPARENCE</span><h3>👁 Lignes cachées dans les listes à ranger</h3><p>Dans les listes où l’on coche ce qui s’affiche (menus, listes, Réordonner, Personnaliser…) : une ligne décochée reste telle quelle, ou se grise un peu.</p></header>
+        <div class="maintenance-panel h-hr-panel"><label class="checkbox-line"><input type="radio" name="hr-mode" value="keep" ${p.mode === 'keep' ? 'checked' : ''}> Laisser telles quelles</label><label class="checkbox-line"><input type="radio" name="hr-mode" value="dim" ${p.mode === 'dim' ? 'checked' : ''}> Les griser</label>
+        <label class="h-hr-level" ${p.mode === 'keep' ? 'hidden' : ''}>Grisage <input type="range" min="5" max="85" step="5" data-hr-level value="${p.level}"> <output data-hr-out>${p.level} %</output></label>
+        <div class="h-hr-demo"><div class="order-row has-visibility"><span class="order-grip">⠿</span><label class="order-visible"><input type="checkbox" checked></label><span class="order-number">01</span><b>Une ligne affichée</b></div><div class="order-row has-visibility"><span class="order-grip">⠿</span><label class="order-visible"><input type="checkbox"></label><span class="order-number">02</span><b>Une ligne cachée</b></div></div></div></section>`; });
+    document.addEventListener('input', e => { const t = e.target; if (!t.closest?.('#h-hidden-rows')) return; const p = hrPrefs();
+        if (t.name === 'hr-mode') { p.mode = t.value; t.closest('section').querySelector('.h-hr-level').hidden = p.mode === 'keep'; }
+        if (t.matches('[data-hr-level]')) { p.level = Number(t.value); t.closest('section').querySelector('[data-hr-out]').textContent = `${p.level} %`; }
+        try { localStorage.setItem(HR_KEY, JSON.stringify(p)); } catch (_) {} hrApply(); });
     const scan = root => root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(tidy);
     let queued = new Set(), timer = 0;
     new MutationObserver(list => { list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) queued.add(n); })); clearTimeout(timer);

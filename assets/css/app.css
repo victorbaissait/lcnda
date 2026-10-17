@@ -3936,6 +3936,12 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .icon-action.ia-auto svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .ord-row .ord-arrow{width:29px;height:29px;min-width:29px;min-height:29px}
 :root[data-theme="dark"] .icon-action.is-danger{color:#ff7b86}
+/* 👁 lignes cachées (décochées) dans les listes à ranger : grisées au niveau choisi (Apparence), ou telles quelles */
+.order-row:has(.order-visible input:not(:checked)),.ord-row:has(.ord-vis:not(:checked)),.dashboard-reorder-row.is-hidden-row,.dashboard-reorder-row:has(.mt-vis input:not(:checked)),.lb-row:has(.lb-vis input:not(:checked)),.h-pet-lrow:has(> input[type=checkbox]:not(:checked)){opacity:var(--hidden-row-opacity,.55);transition:opacity .15s}
+.dashboard-reorder-row.is-hidden-row b,.dashboard-reorder-row.is-hidden-row .order-number{opacity:1}
+:root[data-hidden-rows="dim"] .dashboard-reorder-row.is-hidden-row b{text-decoration:line-through}
+:root[data-hidden-rows="keep"] .dashboard-reorder-row.is-hidden-row b,:root[data-hidden-rows="keep"] .dashboard-reorder-row.is-hidden-row .order-number{text-decoration:none}
+.h-hr-panel{display:grid;gap:8px;max-width:520px}.h-hr-level{display:flex;align-items:center;gap:10px}.h-hr-level input{flex:1}.h-hr-demo{display:grid;gap:6px;margin-top:6px}.h-hr-demo .order-row{display:flex!important;align-items:center;gap:8px;padding:8px}.h-hr-demo .order-row b{flex:1;text-align:left}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=221">
+    <link rel="stylesheet" href="assets/css/app.css?v=223">
     <link rel="stylesheet" href="assets/css/heritage.css?v=200">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
@@ -1109,7 +1109,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-carte.js?v=4" defer></script>
 <script src="assets/js/app-enquetes.js?v=3" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=3" defer></script>
-<script src="assets/js/app-harmony.js?v=2" defer></script>
+<script src="assets/js/app-harmony.js?v=3" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
 <script src="assets/js/app-listes.js?v=6" defer></script>
 <script src="assets/js/app-maintenance.js?v=7" defer></script>
@@ -1119,7 +1119,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=17" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=9" defer></script>
-<script src="assets/js/heritage-more.js?v=106" defer></script>
+<script src="assets/js/heritage-more.js?v=107" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=20" defer></script>
 <script src="assets/js/heritage-av.js?v=9" defer></script>
@@ -1146,7 +1146,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=15" defer></script>
 <script src="assets/js/heritage-boards.js?v=23" defer></script>
-<script src="assets/js/heritage-dnd.js?v=7" defer></script>
+<script src="assets/js/heritage-dnd.js?v=8" defer></script>
 <script src="assets/js/heritage-studio.js?v=52" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=4" defer></script>
 <script src="assets/js/heritage-fiches.js?v=10" defer></script>
