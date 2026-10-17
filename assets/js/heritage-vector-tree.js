@@ -36,20 +36,20 @@
     const FKEY = 'genealogie-decor-tree-formats', SKEY = 'genealogie-decor-tree-styles';
     const readJ = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v && typeof v === 'object' ? v : d; } catch (_) { return d; } };
     const writeJ = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
-    const ordered = (keys, pref) => [...(pref.order || []).filter(k => keys.includes(k)), ...keys.filter(k => !(pref.order || []).includes(k))];
+    const ordered = (keys, pref) => { const o = Array.isArray(pref.order) ? pref.order : []; return [...o.filter(k => keys.includes(k)), ...keys.filter(k => !o.includes(k))]; };
     /** tous les formats (de base et à soi) : [clé, nom affiché, largeur px, hauteur px, à soi ?] ; « visible » : sans les cachés, dans l'ordre choisi */
     function formats(visible = false) {
         const pref = readJ(FKEY, {}), mine = (Array.isArray(pref.custom) ? pref.custom : []).filter(f => f && /^my_[a-z0-9]{3,20}$/.test(f.id) && f.w > 0 && f.h > 0);
         const all = [...FMT0.map(([k, l, w, h]) => [k, `${l} (${fcm(w)} × ${fcm(h)} cm)`, px(w), px(h), false]), ...mine.map(f => [f.id, `${String(f.label || 'Mon format').slice(0, 60)} (${fcm(f.w)} × ${fcm(f.h)} cm)`, px(Math.min(500, f.w)), px(Math.min(500, f.h)), true])];
         const keys = ordered(all.map(f => f[0]), pref), list = keys.map(k => all.find(f => f[0] === k));
-        return visible ? list.filter(f => !(pref.hidden || []).includes(f[0])) : list;
+        return visible ? list.filter(f => !(Array.isArray(pref.hidden) ? pref.hidden : []).includes(f[0])) : list;
     }
     const FORMATS = formats();
     /** tous les styles (de base et à soi) */
     function themes(visible = false) {
         const pref = readJ(SKEY, {}), mine = Object.entries(pref.custom || {}).filter(([k, t]) => /^my_[a-z0-9]{3,20}$/.test(k) && t && typeof t === 'object').map(([k, t]) => [k, cleanTheme(t), true]);
         const all = [...Object.entries(THEMES).map(([k, t]) => [k, t, false]), ...mine], keys = ordered(all.map(x => x[0]), pref), list = keys.map(k => all.find(x => x[0] === k));
-        return visible ? list.filter(x => !(pref.hidden || []).includes(x[0])) : list;
+        return visible ? list.filter(x => !(Array.isArray(pref.hidden) ? pref.hidden : []).includes(x[0])) : list;
     }
     const HEX = /^#[0-9a-f]{6}$/i, hx = (v, d) => HEX.test(v || '') ? v : d;
     function cleanTheme(t) { const b = THEMES.classique; return {label: String(t.label || 'Mon style').replace(/[<>]/g, '').slice(0, 60), paper: hx(t.paper, b.paper), ink: hx(t.ink, b.ink), font: String(t.font || b.font).replace(/[^\p{L}\p{N} \-]/gu, '').slice(0, 60) || b.font,
@@ -325,7 +325,7 @@
                 <label class="h-dt-person">Personne au centre (ou au pied de l’arbre)${A().collectionPersonField('person', null, 'Tape un nom…')}</label>
                 <fieldset class="h-dt-shapes-box"><legend>Forme</legend><input type="hidden" name="shape" value="${shape0}"><div class="h-dt-shapes" data-tbg="dt-shapes" data-tbg-label="Formes de l’arbre">${SHAPES.map(([k, l]) => `<button type="button" class="h-dt-shape${shape0 === k ? ' is-on' : ''}" data-dt-shape="${k}" data-tb-label="${esc(l)}" aria-pressed="${shape0 === k}"><svg viewBox="0 0 48 48" aria-hidden="true">${SHAPE_ICON[k]}</svg><small>${esc(l)}</small></button>`).join('')}</div></fieldset>
                 <div class="h-dt-tools" data-tbg="dt-tools" data-tbg-label="Boutons de la fenêtre"><button type="button" class="button small secondary" data-dt-cmd="fmts">⚙️ Mes formats</button><button type="button" class="button small secondary" data-dt-cmd="themes">🎨 Mes styles</button><button type="button" class="button small secondary" data-dt-cmd="newtheme">＋ Créer un style</button><button type="button" class="button small secondary" data-dt-cmd="reset">↺ Réglages par défaut</button>${ext.tbButton ? ext.tbButton('decortree') : ''}</div>
-                <div class="form-grid"><label>Générations<select name="gens">${gensOpts(shape0).map(([k, l]) => `<option value="${k}" ${Number(v('gens', 5)) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <div class="form-grid"><label>Générations<select name="gens">${gensOpts(shape0).map(([k, l], _, all) => `<option value="${k}" ${Math.min(Number(v('gens', 5)) || 5, all.at(-1)[0]) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <label>Format<span class="h-dt-withbtn"><span data-fmtbox>${sel('format', fmtOpts(v('format', 'a3')), v('format', 'a3'))}</span><button type="button" class="button small secondary" data-dt-cmd="fmts" title="Mes formats ; ranger, montrer ou cacher">⚙️</button></span></label>
                     <label>Sens${sel('orient', [['auto', 'Selon la forme'], ['land', 'Paysage'], ['port', 'Portrait']], v('orient', 'auto'))}</label>
                     <label>Style<span class="h-dt-withbtn"><span data-themebox>${themeSel(v('theme', 'parchemin'))}</span><button type="button" class="button small secondary" data-dt-cmd="newtheme" title="Créer un style (à partir de celui choisi)">＋</button><button type="button" class="button small secondary" data-dt-cmd="themes" title="Mes styles ; ranger, montrer ou cacher">⚙️</button></span></label>
@@ -377,7 +377,7 @@
                 <label>Couleurs<select data-dtp="colors">${o([['branch', 'Côté paternel / maternel'], ['gender', 'Hommes / femmes'], ['generation', 'Dégradé par génération'], ['none', 'Une seule couleur']], sv.colors || 'branch')}</select></label><label>Place du titre<select data-dtp="titlePos">${o([['bottom', 'En bas'], ['top', 'En haut']], sv.titlePos || 'bottom')}</select></label></div>
                 <div class="h-mtp-row"><button type="button" class="button small secondary" data-dtp-cmd="fmts">⚙️ Les formats (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="themes">🎨 Les styles (à moi, montrés, rangés)</button><button type="button" class="button small secondary" data-dtp-cmd="reset">↺ Réglages de départ</button></div>`; },
         bind: (box, redraw) => {
-            box.addEventListener('change', e => { const k = e.target.dataset.dtp; if (!k) return; const sv = readJ(PREF, {}); sv[k] = k === 'gens' ? Number(e.target.value) : e.target.value; if (k === 'shape') sv.gens = Math.min(sv.gens || 5, SHAPES.find(x => x[0] === sv.shape)?.[3] || 10); writeJ(PREF, sv); toast('Enregistré.'); });
+            box.addEventListener('change', e => { const k = e.target.dataset.dtp; if (!k) return; const sv = readJ(PREF, {}); sv[k] = k === 'gens' ? Number(e.target.value) : e.target.value; if (k === 'shape' || k === 'gens') sv.gens = Math.min(sv.gens || 5, SHAPES.find(x => x[0] === sv.shape)?.[3] || 10); writeJ(PREF, sv); toast('Enregistré.'); });
             box.addEventListener('click', e => { const c = e.target.closest('[data-dtp-cmd]')?.dataset.dtpCmd; if (!c) return;
                 if (c === 'reset') { try { localStorage.removeItem(PREF); } catch (_) {} redraw(); toast('Réglages de départ.'); }
                 if (c === 'fmts') manageList({key: FKEY, title: '⚙️ Les formats', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓, et crée les tiens (en cm).', all: () => formats().map(f => [f[0], f[1], f[4]]), addLabel: '＋ Un format à moi', onAdd: () => editFormat(null), onEdit: id => editFormat(id), onDelete: id => { const p2 = readJ(FKEY, {}); p2.custom = (p2.custom || []).filter(x => x.id !== id); writeJ(FKEY, p2); }, onDone: redraw});

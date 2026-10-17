@@ -51,7 +51,23 @@
 
     // d'autres fichiers ajoutent leur outil (arbre décoratif, transcription, diaporama, plan de maison…) : ext.editToolsExtra.push({key, icon, label, …})
     ext.editToolsExtra = ext.editToolsExtra || [];
-    const allTools = () => [...TOOLS, ...ext.editToolsExtra.filter(t => t.key !== 'house'), ...ext.editToolsExtra.filter(t => t.key === 'house')]; // la maison (plan et 3D) à la fin
+    const baseTools = () => [...TOOLS, ...ext.editToolsExtra.filter(t => t.key !== 'house'), ...ext.editToolsExtra.filter(t => t.key === 'house')]; // la maison (plan et 3D) à la fin
+    // l'ordre des outils et ceux qu'on cache (⚙️ Ranger les outils) ; il en reste toujours au moins un
+    const ORDER_KEY = 'genealogie-edit-tools-order';
+    const toolPrefs = () => { try { const v = JSON.parse(localStorage.getItem(ORDER_KEY) || '{}'); return {order: Array.isArray(v?.order) ? v.order : [], hidden: Array.isArray(v?.hidden) ? v.hidden : []}; } catch (_) { return {order: [], hidden: []}; } };
+    const orderedTools = () => { const all = baseTools(), p = toolPrefs(); return [...p.order.map(k => all.find(t => t.key === k)).filter(Boolean), ...all.filter(t => !p.order.includes(t.key))]; };
+    const allTools = () => { const p = toolPrefs(), list = orderedTools().filter(t => !p.hidden.includes(t.key)); return list.length ? list : orderedTools(); };
+    function arrangeTools(onDone) {
+        const p = toolPrefs();
+        ext.openDialog({eyebrow: 'OUTILS DE MODIFICATION', title: '⚙️ Ranger les outils', submitLabel: 'Enregistrer',
+            body: `<p class="muted">Range les onglets avec ↑ ↓ et décoche ceux que tu ne veux pas voir.</p><ol class="h-pet-layout" data-list>${orderedTools().map(t => `<li class="h-pet-lrow" data-k="${esc(t.key)}"><input type="checkbox" ${p.hidden.includes(t.key) ? '' : 'checked'} title="Montrer"><span>${t.icon} ${esc(t.label)}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`).join('')}</ol><button type="button" class="button small secondary" data-reset>Tout remettre comme au départ</button>`,
+            onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const li = b.closest('[data-k]');
+                if (b.hasAttribute('data-up')) li.previousElementSibling?.before(li); else if (b.hasAttribute('data-down')) li.nextElementSibling?.after(li);
+                else if (b.hasAttribute('data-reset')) { try { localStorage.removeItem(ORDER_KEY); } catch (_) {} dg.close(); onDone?.(); } }),
+            onSubmit: f => { const li = [...f.querySelectorAll('[data-k]')], hidden = li.filter(x => !x.querySelector('input').checked).map(x => x.dataset.k); if (hidden.length >= li.length) { toast('Garde au moins un outil.', 'error'); return false; }
+                try { localStorage.setItem(ORDER_KEY, JSON.stringify({order: li.map(x => x.dataset.k), hidden})); } catch (_) {} onDone?.(); }});
+    }
+    ext.arrangeEditTools = arrangeTools;
     ext.lists = ext.lists || {};
     ext.lists.edit_tools = async token => {
         const S = A().state, ws = A().$('#workspace');
@@ -82,7 +98,7 @@
         const again = () => { if (S.module === 'listes' && S.listType === 'edit_tools') load(); };
         const drawPage = () => {
             const t = tool();
-            ws.innerHTML = `<section class="page collection-page h-et-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🛠️ Outils de modification</h2><p>Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet.</p></div></header>
+            ws.innerHTML = `<section class="page collection-page h-et-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🛠️ Outils de modification</h2><p>Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet.</p></div><div class="page-actions"><button type="button" class="button small secondary" data-et-arrange title="L’ordre des outils, et ceux qu’on montre">⚙️ Ranger les outils</button></div></header>
                 <div class="segmented enquetes-tab-toggle h-et-tabs">${allTools().map(x => `<button type="button" class="${x.key === tab ? 'is-active ' : ''}enquetes-tab-btn" data-et-tab="${x.key}"><span class="enquetes-tab-icon" aria-hidden="true">${x.icon}</span><span>${esc(x.label)}</span></button>`).join('')}</div>
                 <div class="h-et-bar"><input type="search" data-et-q placeholder="Chercher un projet (nom, photo, détails)…" value="${esc(q)}"><label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'Nom A → Z'], ['za', 'Nom Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label><span class="muted" data-et-count></span><span class="spacer"></span><button type="button" class="button" data-et-new>${esc(t.createLabel)}</button>${t.extra || ''}</div>
                 <div data-et-list></div></section>`;
@@ -92,6 +108,7 @@
         ws.onclick = async e => {
             const b = e.target.closest('button'); if (!b || !ws.querySelector('.h-et-page')) return; const d = b.dataset, t = tool();
             try {
+                if (d.etArrange !== undefined) return arrangeTools(() => { if (!allTools().some(x => x.key === tab)) tab = allTools()[0].key; drawPage(); });
                 if (d.etTab) { tab = d.etTab; try { localStorage.setItem(TAB_KEY, tab); } catch (_) {} return drawPage(); }
                 if (d.etNew !== undefined) return t.create(again);
                 if (d.etBlank !== undefined) return ext.newLayoutDoc?.('blank', again);

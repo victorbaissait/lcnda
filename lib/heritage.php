@@ -97,11 +97,19 @@ function heritage_media_search(PDO $pdo, string $q): array
 }
 
 /** Les photos à retoucher (Listes → Médias → « 🎚️ Retoucher ») : les plus récentes, ou celles qui répondent au filtre */
-function heritage_image_pick(PDO $pdo, string $q): array
+function heritage_image_pick(PDO $pdo, string $q, string $filter = ''): array
 {
-    $stmt = $pdo->prepare("SELECT id, title, filename, thumbnail, media_type FROM media WHERE lower(media_type)='image' AND filename<>''
-        AND (?='' OR title LIKE ? COLLATE NOCASE OR document_reference LIKE ? COLLATE NOCASE OR filename LIKE ? COLLATE NOCASE) ORDER BY id DESC LIMIT 120");
-    $stmt->execute([$q, "%{$q}%", "%{$q}%", "%{$q}%"]);
+    // aussi par personne rattachée (nom, prénom), titre du document, date ; filtre : sans / avec transcription, avec signature repérée
+    $cond = match ($filter) { 'notr' => " AND trim(COALESCE(m.transcription,''))=''", 'tr' => " AND trim(COALESCE(m.transcription,''))<>''",
+        'sig' => " AND EXISTS(SELECT 1 FROM media_tags t WHERE t.media_id=m.id AND COALESCE(t.tag_type,'person')='signature')", default => '' };
+    $like = "%{$q}%";
+    $stmt = $pdo->prepare("SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, COALESCE(m.document_reference,'') AS document_reference, CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, substr(COALESCE(m.transcription,''), 1, 20000) AS transcription,
+            (SELECT group_concat(trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')), ', ') FROM (SELECT DISTINCT entity_id FROM media_links WHERE media_id=m.id AND entity_type='person' LIMIT 3) l JOIN persons p ON p.id=l.entity_id) AS people
+        FROM media m WHERE lower(m.media_type)='image' AND m.filename<>'' {$cond}
+        AND (?='' OR m.title LIKE ? COLLATE NOCASE OR m.document_reference LIKE ? COLLATE NOCASE OR m.document_title LIKE ? COLLATE NOCASE OR m.filename LIKE ? COLLATE NOCASE OR m.date_text LIKE ? COLLATE NOCASE
+            OR m.id IN (SELECT ml.media_id FROM media_links ml JOIN persons p ON ml.entity_type='person' AND p.id=ml.entity_id WHERE trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) LIKE ? COLLATE NOCASE OR trim(COALESCE(p.last_name,'')||' '||COALESCE(p.first_name,'')) LIKE ? COLLATE NOCASE))
+        ORDER BY m.id DESC LIMIT 160");
+    $stmt->execute([$q, $like, $like, $like, $like, $like, $like, $like]);
     return $stmt->fetchAll();
 }
 

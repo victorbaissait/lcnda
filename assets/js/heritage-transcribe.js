@@ -308,22 +308,13 @@
             catch (e) { status(''); toast(`${e.message || 'Reconnaissance impossible.'} (Maintenance → Reconnaissance manuscrite pour installer un modèle)`, 'error'); }
         }
         /* ─── image : de la base ou de l'ordinateur ─── */
-        function pickImage() {
-            ext.openDialog({eyebrow: 'TRANSCRIPTION', title: 'Image de l’acte', submitLabel: 'Choisir',
-                body: `<label>Fichier de l’ordinateur (il va dans les médias)<input type="file" name="f" accept="image/*"></label><p class="muted">ou une image de la base :</p><label>Chercher<input type="search" data-mq placeholder="Titre, nom de fichier…" autocomplete="off"></label><div data-mres class="vx-mmedia"></div>`,
-                onOpen: dg => { const q = dg.querySelector('[data-mq]'), res = dg.querySelector('[data-mres]'); let tm = 0; const go = async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 40}).catch(() => ({data: []}))).data || []).filter(m => /\.(jpe?g|png|webp|gif)$/i.test(m.filename || '')); res._rows = rows;
-                    res.innerHTML = rows.map((m, i) => `<label title="${esc(m.title || m.filename)}"><input type="radio" name="mpick" value="${i}"><img src="media/${esc(encodeURIComponent(m.thumbnail || m.filename))}" alt="" loading="lazy"></label>`).join('') || '<p class="muted">Rien trouvé.</p>'; };
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go(); },
-                onSubmit: async f => {
-                    const file = f.querySelector('[name=f]').files?.[0], i = f.querySelector('[name=mpick]:checked')?.value, rows = f.querySelector('[data-mres]')._rows || [];
-                    if (file) { const fd = new FormData(); fd.append('file', file); fd.append('kind', 'image'); fd.append('title', file.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
-                        const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) { toast(j.error || 'Envoi impossible.', 'error'); return false; }
-                        t.media_id = j.result.media_id; t.filename = j.result.filename; }
-                    else if (i !== undefined) { const m = rows[Number(i)]; t.media_id = Number(m.id); t.filename = m.filename; if (!t.title) { t.title = m.title || ''; $('[data-tx="title"]').value = t.title; } if (!area.value.trim() && m.transcription) { area.value = m.transcription; before = area.value; t.body = area.value; } }
-                    else { toast('Choisis un fichier ou une image.', 'error'); return false; }
-                    if (t.data.zones.length && !confirm('Garder les zones déjà posées (elles étaient pour l’ancienne image) ?')) t.data.zones = [];
-                    touch(); await loadImage();
-                }});
+        async function pickImage() {
+            const m = await ext.pickImage({eyebrow: 'TRANSCRIPTION', title: 'Image de l’acte', intro: 'Clique sur l’image de l’acte. Une image de l’ordinateur est ajoutée aux Médias.'}); if (!m) return;
+            t.media_id = Number(m.id); t.filename = m.filename;
+            if (!t.title && m.title && !m.imported) { t.title = m.title; $('[data-tx="title"]').value = t.title; }
+            if (!area.value.trim() && m.transcription) { area.value = m.transcription; before = area.value; t.body = area.value; }
+            if (t.data.zones.length && !confirm('Garder les zones déjà posées (elles étaient pour l’ancienne image) ?')) t.data.zones = [];
+            touch(); await loadImage();
         }
         /* ─── enregistrer, exporter ─── */
         async function save(toMedia = false) {
@@ -386,6 +377,52 @@
         if (!t.filename && !ctx.id) setTimeout(pickImage, 50);
         return {get t() { return t; }, detect: runDetect, save};
     }
+
+    /* ═════════ Dans la visionneuse : la transcription de l'image ↔ l'outil Transcription d'actes ═════════ */
+    const kindLabel = k => (KINDS.find(x => x[0] === k) || [, k || 'Acte'])[1];
+    const lbItem = () => { const S = A()?.state; return S?.lightboxMedia?.[S.lightboxIndex] || null; };
+    let lbActs = [], lbFor = 0, lbSeq = 0;
+    async function lbRefresh(force = false) {
+        const area = document.getElementById('lightbox-transcription'), it = lbItem(); if (!area || !document.getElementById('lightbox')?.open) return;
+        let box = document.getElementById('lightbox-acts'); if (!box) { box = document.createElement('div'); box.id = 'lightbox-acts'; box.className = 'lb-acts'; area.after(box); }
+        const isImg = it && /\.(jpe?g|png|webp|gif|tiff?)$/i.test(it.filename || '');
+        if (!isImg) { box.hidden = true; return; } box.hidden = false;
+        if (!force && lbFor === Number(it.id)) return;
+        lbFor = Number(it.id); const n = ++lbSeq;
+        try { lbActs = (await api('act_transcriptions_media', {media_id: it.id})).items || []; } catch (_) { lbActs = []; }
+        if (n !== lbSeq) return;
+        box.innerHTML = `<div class="lb-acts-head"><span class="section-label">📜 Transcription d’actes</span><span class="lb-acts-btns"><button type="button" class="button small secondary" data-lbact-read title="Toute la transcription, en grand (et les actes transcrits dans l’outil)">📖 Lire en entier</button><button type="button" class="button small secondary" data-lbact-new title="Ouvrir l’outil Transcription d’actes sur cette image (zones, noms, dates)">${lbActs.length ? '＋ Nouvelle' : '📜 Transcrire dans l’outil'}</button></span></div>
+            ${lbActs.length ? `<ul class="lb-acts-list">${lbActs.map(a => `<li><button type="button" class="link-button" data-lbact-open="${a.id}" title="Ouvrir dans Transcription d’actes">📜 ${esc(a.title || kindLabel(a.kind))}</button> <small class="muted">${esc([kindLabel(a.kind), a.date_text, a.place].filter(Boolean).join(' · '))}${a.people?.length ? ` · ${a.people.length} personne${a.people.length > 1 ? 's' : ''}` : ''}</small></li>`).join('')}</ul>` : '<p class="muted small">Aucun acte transcrit dans l’outil pour cette image.</p>'}`;
+    }
+    function lbOpenTool(id) {
+        const it = lbItem(); if (!it) return;
+        const again = () => { lbFor = 0; lbRefresh(true); };
+        if (id) open({id, onClose: again}); else open({mediaId: it.id, filename: it.filename, title: it.title || '', text: document.getElementById('lightbox-transcription')?.value || it.transcription || '', onClose: again});
+    }
+    function lbRead() {
+        const it = lbItem(); if (!it) return; const txt = document.getElementById('lightbox-transcription')?.value || it.transcription || '';
+        const people = a => (a.people || []).filter(p => p.name).map(p => `${esc(p.name)}${p.role ? ` <small class="muted">(${esc(p.role)})</small>` : ''}`).join(', ');
+        const body = `<div class="lb-read"><figure class="lb-read-img"><img src="media/${encodeURIComponent(it.filename)}" alt=""></figure><div class="lb-read-txt">
+            <h3>Transcription du document</h3>${txt.trim() ? `<pre class="lb-read-pre">${esc(txt)}</pre>` : '<p class="muted">Rien d’écrit pour l’instant dans la visionneuse.</p>'}
+            ${lbActs.map(a => `<section class="lb-read-act"><h3>📜 ${esc(a.title || kindLabel(a.kind))}</h3><p class="muted">${esc([kindLabel(a.kind), a.date_text, a.place, a.source].filter(Boolean).join(' · '))}</p>${a.people?.length ? `<p><b>Personnes :</b> ${people(a)}</p>` : ''}${a.body?.trim() ? `<pre class="lb-read-pre">${esc(a.body)}</pre>` : ''}<button type="button" class="button small secondary" data-lbact-open="${a.id}">Ouvrir dans Transcription d’actes</button></section>`).join('')}</div></div>`;
+        ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `📖 ${it.title || 'Document'}`, wide: true, submitLabel: '🖨️ Imprimer', body,
+            onOpen: dg => { dg.classList.add('lb-read-dlg'); dg.addEventListener('click', e => { const b = e.target.closest('[data-lbact-open]'); if (b) { dg.close(); lbOpenTool(Number(b.dataset.lbactOpen)); } }); },
+            onSubmit: f => { const w = window.open('', '_blank'); if (!w) { toast('Fenêtre bloquée.', 'error'); return false; } const src = f.querySelector('.lb-read-txt').cloneNode(true); src.querySelectorAll('button').forEach(b => b.remove());
+                w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(it.title || 'Transcription')}</title><style>body{font:14px/1.5 Georgia,serif;margin:18mm}pre{white-space:pre-wrap;font:inherit}h3{margin:18px 0 4px}small,.muted{color:#666}</style><h2>${esc(it.title || 'Transcription')}</h2>${src.innerHTML}<script>onload=()=>setTimeout(()=>print(),250)<\/script>`); w.document.close(); return false; }});
+    }
+    document.addEventListener('click', e => {
+        const b = e.target.closest?.('[data-lbact-read],[data-lbact-new],[data-lbact-open],#act-transcriber-open'); if (!b || !b.closest('#lightbox')) return;
+        e.preventDefault(); e.stopImmediatePropagation();
+        if (b.hasAttribute('data-lbact-read')) return lbRead();
+        if (b.dataset.lbactOpen) return lbOpenTool(Number(b.dataset.lbactOpen));
+        if (b.id === 'act-transcriber-open' && lbActs.length && lbFor === Number(lbItem()?.id)) return lbOpenTool(lbActs[0].id); // l'acte déjà transcrit, plutôt qu'un doublon
+        lbOpenTool(0);
+    }, true);
+    // suivre l'image affichée dans la visionneuse
+    const lbWatch = () => { const lb = document.getElementById('lightbox'), im = document.getElementById('lightbox-image'); if (!lb || !im) return setTimeout(lbWatch, 500);
+        new MutationObserver(() => lbRefresh()).observe(im, {attributes: true, attributeFilter: ['src', 'hidden']});
+        new MutationObserver(() => { if (lb.open) lbRefresh(); else lbFor = 0; }).observe(lb, {attributes: true, attributeFilter: ['open']}); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lbWatch); else lbWatch();
 
     ext.openActTranscriber = open;
     ext.actDetect = detect; ext.actWordsToNumber = wordsToNumber; ext.actFindDates = findDates;

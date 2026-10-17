@@ -202,7 +202,7 @@
                 <div class="h-sl-tabs" role="tablist"><button type="button" data-sl-mode="sign">✍️ La signature d’un acte</button><button type="button" data-sl-mode="seal">🔏 Monogramme, cachet, tampon</button></div>
                 <section data-sl-pane="sign">
                     <p class="muted">Choisis l’image d’un acte, puis <b>encadre la signature</b> en glissant. Le papier, les taches et les lignes s’effacent ; l’encre devient un tracé net, à agrandir sans perte, à imprimer ou à graver.</p>
-                    <div class="h-sl-src"><button type="button" class="button small" data-sl-media>📷 Un acte des médias…</button><label class="button small secondary">💻 De l’ordinateur<input type="file" accept="image/*" data-sl-file hidden></label><span class="muted" data-sl-name></span></div>
+                    <div class="h-sl-src"><button type="button" class="button small" data-sl-media>📷 Un acte des médias…</button><button type="button" class="button small secondary" data-sl-known title="Une signature déjà encadrée dans la visionneuse (Signatures identifiées)">✍️ Une signature déjà repérée…</button><label class="button small secondary">💻 De l’ordinateur<input type="file" accept="image/*" data-sl-file hidden></label><span class="muted" data-sl-name></span></div>
                     <div class="h-sl-work"><div class="h-sl-stage" data-sl-stage><p class="muted">Aucune image pour l’instant.</p></div>
                         <div class="h-sl-side"><div class="h-sl-prev" data-sl-prev><p class="muted">L’aperçu de la signature s’affiche ici.</p></div>
                             <label>Encre ↔ papier <small class="muted" data-sl-thrv></small><input type="range" name="thr" min="40" max="250" value="140"></label>
@@ -264,7 +264,13 @@
                 ['speck', 'grow', 'lines', 'ink'].forEach(n => form.elements[n].addEventListener(n === 'speck' ? 'input' : 'change', () => preview()));
                 $('[data-sl-file]').addEventListener('change', e => { const file = e.target.files?.[0]; if (!file) return; const r = new FileReader(); r.onload = () => loadImg(r.result, file.name); r.readAsDataURL(file); });
                 $('[data-sl-media]').addEventListener('click', async () => { const m = await pickMedia(); if (m) await loadImg(mediaUrl(m.filename), m.title || m.filename); });
-                if (opts.src) loadImg(opts.src, opts.title || 'Acte');
+                // une signature repérée : l'image, le cadre (en % de l'image) et la personne viennent tout seuls
+                const useKnown = async r => { await loadImg(mediaUrl(r.filename), r.title || r.document_title || r.filename); if (!img) return;
+                    const W = img.naturalWidth, H = img.naturalHeight, pad = .015; crop = {x: Math.max(0, (Number(r.x) / 100 - pad) * W), y: Math.max(0, (Number(r.y) / 100 - pad) * H), w: Math.min(W, (Number(r.w) / 100 + 2 * pad) * W), h: Math.min(H, (Number(r.h) / 100 + 2 * pad) * H)}; crop.w = Math.min(crop.w, W - crop.x); crop.h = Math.min(crop.h, H - crop.y);
+                    f = null; drawStage(); preview(true);
+                    if (r.person_id) { const p = (await api('person', {id: r.person_id}).catch(() => null))?.person; const box = $('[data-cp-input="sl_person"]').parentElement; if (p) { box.querySelector('[data-cp-input]').value = A().personName(p); box.querySelector('input[type=hidden]').value = r.person_id; person = {id: Number(r.person_id), first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}; if (!form.elements.caption.value) form.elements.caption.value = [person.name, r.date_text].filter(Boolean).join(', '); } } };
+                $('[data-sl-known]').addEventListener('click', async () => { const r = await pickKnownSignature(); if (r) await useKnown(r); });
+                if (opts.signature) useKnown(opts.signature); else if (opts.src) loadImg(opts.src, opts.title || 'Acte');
                 /* — le sceau — */
                 const sp = $('[data-sl-sprev]');
                 function sealPrev() { const o = Object.fromEntries(new FormData(form)); o.bigMiddle = form.elements.bigMiddle.checked; const V = ext.vectorInternals; if (!V?.docSvg) { sp.innerHTML = '<p class="muted">Aperçu indisponible.</p>'; return; } try { sp.innerHTML = V.docSvg(buildSeal(o)); } catch (e) { sp.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }
@@ -293,18 +299,30 @@
         if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
         toast(`Signature rangée dans les médias de ${person.name}.`);
     }
-    function pickMedia() {
-        return new Promise(res => { let done = false;
-            ext.openDialog({eyebrow: 'SIGNATURES', title: 'L’image d’un acte', submitLabel: 'Choisir',
-                body: `<label>Chercher<input type="search" data-mq placeholder="Titre, nom de fichier, personne…" autocomplete="off"></label><div data-mres class="vx-mmedia h-ss-pick"></div>`,
-                onOpen: dg => { const q = dg.querySelector('[data-mq]'), box = dg.querySelector('[data-mres]'); let tm = 0;
-                    const go = async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 60}).catch(() => ({data: []}))).data || []).filter(m => /\.(jpe?g|png|webp|gif|tiff?)$/i.test(m.filename || '')); box._rows = rows;
-                        box.innerHTML = rows.map((m, i) => `<label title="${esc(m.title || m.filename)}"><input type="radio" name="mp" value="${i}"><img src="${esc(mediaUrl(m.thumbnail || m.filename))}" alt="" loading="lazy"></label>`).join('') || '<p class="muted">Rien trouvé.</p>'; };
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go();
+    const pickMedia = () => ext.pickImage({eyebrow: 'SIGNATURES', title: 'L’image d’un acte', intro: 'Clique sur l’image ; tu encadreras ensuite la signature. Le filtre « Avec une signature repérée » montre les actes où une signature a déjà été identifiée.'});
+    /** ✍️ les signatures déjà repérées sur les images (visionneuse → Signatures identifiées) */
+    function pickKnownSignature() {
+        return new Promise(res => { let rows = [], done = false;
+            ext.openDialog({eyebrow: 'SIGNATURES', title: '✍️ Une signature déjà repérée', submitLabel: 'Fermer', wide: true,
+                body: '<div class="h-rt-pick-bar"><input type="search" data-q placeholder="Nom de la personne, titre de l’acte…" autocomplete="off"></div><div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div><p class="muted small">Ce sont les signatures identifiées dans la visionneuse (colonne de droite → « Signatures identifiées ») et dans Listes → Signatures.</p>',
+                onOpen: dg => { const q = dg.querySelector('[data-q]'), grid = dg.querySelector('[data-grid]'); let tm = 0;
+                    const go = async () => { rows = ((await api('list', {type: 'signatures', q: q.value.trim(), limit: 120}).catch(() => ({data: []}))).data || []);
+                        grid.innerHTML = rows.map((r, i) => `<button type="button" class="h-rt-pick-item" data-i="${i}"><span class="h-sl-sigthumb" style="background-image:url('${esc(mediaUrl(r.filename))}');background-size:${(100 / Math.max(1, r.w)) * 100}% auto;background-position:${r.w >= 100 ? 0 : (r.x / (100 - r.w)) * 100}% ${r.h >= 100 ? 0 : (r.y / (100 - r.h)) * 100}%"></span><span>${esc(r.person_name || 'Sans nom')}</span><small>${esc(r.title || r.document_title || r.filename || '')}</small></button>`).join('') || '<p class="muted">Aucune signature repérée. Dans la visionneuse, « Signatures identifiées » permet d’en encadrer une sur un acte.</p>'; };
+                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 220); }); go();
+                    grid.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; done = true; res(rows[Number(b.dataset.i)]); dg.close(); });
                     dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
-                onSubmit: f => { const x = f.querySelector('[name=mp]:checked'); if (!x) { toast('Choisis une image.', 'error'); return false; } done = true; res(f.querySelector('[data-mres]')._rows[Number(x.value)]); }});
+                onSubmit: () => true});
         });
     }
+
+    // dans la visionneuse (Signatures identifiées) : 🔤 pour détourer et vectoriser la signature encadrée
+    const sealBtns = list => list.querySelectorAll('.tag-list-item').forEach(row => { if (row.querySelector('.tag-seal-btn')) return;
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'icon-button tag-seal-btn'; b.title = 'Détourer cette signature (Signatures et sceaux) : un tracé net, à imprimer ou graver'; b.textContent = '🔤';
+        b.addEventListener('click', e => { e.stopPropagation(); const S = A().state, tag = (S.lightboxTags || []).find(t => Number(t.id) === Number(row.dataset.tagId)), it = S.lightboxMedia?.[S.lightboxIndex]; if (!tag || !it) return;
+            open(null, {signature: {...tag, filename: it.filename, title: it.title || it.filename, date_text: it.date_text || ''}}); });
+        row.querySelector('.tag-edit-btn')?.before(b); });
+    const sigWatch = () => { const list = document.getElementById('lightbox-signatures-list'); if (!list) return setTimeout(sigWatch, 600); sealBtns(list); new MutationObserver(() => sealBtns(list)).observe(list, {childList: true}); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sigWatch); else sigWatch();
 
     ext.openSeals = open;
     ext.sealInternals = {otsu, flatten, inkMask, maskCanvas, signatureDoc, buildSeal, monogram, ringText, initialsOf, LETTERS, SHAPES, COLORS};

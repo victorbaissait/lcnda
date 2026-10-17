@@ -1678,6 +1678,7 @@
                     <label>Panneau (Réglages, Calques…)<select data-mtp-rtside>${opt([['right', 'À droite'], ['left', 'À gauche']], lsJson('genealogie-retouch-layout', {}).side || 'right')}</select></label></div>
                     <p class="muted">Aussi : la largeur du panneau se règle en tirant son bord dans la Retouche.</p>
                 </section>
+                ${ext.vectorMapPalette ? `<section class="maintenance-panel" data-mtp-blk="vectormap"><h3>🗺️ Dessin vectoriel — mode Plan : les éléments${blkMove}</h3><p class="muted">Les groupes (voies, eau, zones, symboles…) et leurs éléments : dans quel ordre, lesquels on voit, et les tiens (une allure de départ, un nom, une couleur, une largeur, ou un symbole que tu as dessiné).</p><div data-vmp-box>${ext.vectorMapPalette.html()}</div></section>` : ''}
                 ${ext.decorTreePrefs ? `<section class="maintenance-panel" data-mtp-blk="decortree"><h3>🌳 Arbre décoratif${blkMove}</h3><p class="muted">Ce que la fenêtre propose au départ, tes formats et tes styles. Les formes et les boutons se rangent dans « Boutons et options » (éditeur 🌳 Arbre décoratif), avec ses raccourcis.</p><div data-dtp-box>${ext.decorTreePrefs.html()}</div></section>` : ''}
                 <section class="maintenance-panel" data-mtp-blk="full"><h3>⛶ Plein écran à l’ouverture${blkMove}</h3>
                     <div class="form-grid h-mtp-grid">${FULL_EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], (full[k] ?? FULL_DEFAULT[k]) ? '1' : '0')}</select></label>`).join('')}</div>
@@ -1694,6 +1695,7 @@
             try { localStorage.setItem('genealogie-editor-shortcuts-tab', which === 'video' ? 'montage' : which); } catch (_) {}
             ext.editorKeysPanel?.(ws.querySelector('[data-ek-box]'));
             { const box = ws.querySelector('[data-dtp-box]'); if (box) ext.decorTreePrefs.bind(box, () => { box.innerHTML = ext.decorTreePrefs.html(); }); } // 🌳 arbre décoratif
+            { const box = ws.querySelector('[data-vmp-box]'); if (box) ext.vectorMapPalette.bind(box, () => { box.innerHTML = ext.vectorMapPalette.html(); }); } // 🗺️ éléments du mode Plan
             ws.querySelectorAll('[data-ek-tab]').forEach(b => { b.hidden = true; }); // l'éditeur se choisit plus haut
             // les grands blocs : deux colonnes, chacune dans son ordre (↑ ↓, ⇄ pour changer de colonne), gardé pour la prochaine fois
             { const cols = ws.querySelector('.h-mtp-cols'), left = ws.querySelector('.h-mtp-stack'), right = document.createElement('div'); right.className = 'h-mtp-stack'; right.dataset.col = 'right'; left.dataset.col = 'left'; cols.appendChild(right);

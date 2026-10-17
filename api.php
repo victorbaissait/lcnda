@@ -248,7 +248,8 @@ try {
         'genealogy_fairs' => json_response(['fairs' => genealogy_fairs_data($pdo)]),
         'heritage_overview' => json_response(heritage_overview($pdo)),
         'heritage_place_search' => json_response(['places' => heritage_place_search($pdo, safe_text($_GET['q'] ?? ''))]),
-        'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100))]),
+        'image_pick' => json_response(['media' => heritage_image_pick($pdo, mb_substr(safe_text($_GET['q'] ?? ''), 0, 100), (string) ($_GET['filter'] ?? ''))]),
+        'act_transcriptions_media' => json_response(['items' => act_transcriptions_for_media($pdo, safe_int($_GET['media_id'] ?? 0))]),
         'heritage_media_search' => json_response(['media' => heritage_media_search($pdo, safe_text($_GET['q'] ?? ''))]),
         'voyages' => json_response(['voyages' => voyages_data($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'placements' => json_response(['placements' => placements_data($pdo, safe_int($_GET['person_id'] ?? 0)), 'kinds' => PLACEMENT_KINDS]),
@@ -10231,7 +10232,7 @@ function merge_people(PDO $pdo,array $data): array
 function merge_person_references(PDO $pdo,int $target,int $source): void
 {
     $tables=$pdo->query("SELECT name,sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")->fetchAll();
-    $noFk=['living_contacts'=>['person_id'],'event_witnesses'=>['person_id'],'media_tags'=>['person_id'],'investigation_persons'=>['person_id'],'person_online_sheets'=>['person_id'],'grave_persons'=>['person_id']];
+    $noFk=['living_contacts'=>['person_id'],'event_witnesses'=>['person_id'],'media_tags'=>['person_id'],'investigation_persons'=>['person_id'],'person_online_sheets'=>['person_id'],'grave_persons'=>['person_id'],'artist_items'=>['person_id']];
     foreach($tables as $t){
         $table=(string)$t['name'];
         if($table==='persons'||stripos((string)$t['sql'],'VIRTUAL TABLE')!==false||str_starts_with($table,'person_search'))continue;

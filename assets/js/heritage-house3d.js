@@ -220,7 +220,7 @@
         bar.querySelector('[data-h3="roof"]').checked = opts.roof;
         let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H;
         function rebuild() {
-            scene.remove(house); house = new T.Group();
+            scene.remove(house); house.traverse(o => { if (o.isSprite) { o.material.map?.dispose(); o.material.dispose(); } }); house = new T.Group();
             const floors = opts.all ? Hcur.floors.filter(f => f.level <= Hcur.floors[fiCur].level) : [Hcur.floors[fiCur]];
             floors.forEach(f => house.add(buildFloor(Hcur, f, {cut: opts.cut && f === Hcur.floors[fiCur]})));
             const top = [...Hcur.floors].sort((a, b) => b.level - a.level)[0];

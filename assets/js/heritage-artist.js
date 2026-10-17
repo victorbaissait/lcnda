@@ -106,8 +106,8 @@
             <div class="h-ar-body" data-ar-body></div></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         const body = dlg.querySelector('[data-ar-body]');
-        const close = () => { dlg.close(); dlg.remove(); if (changed) ext.refreshView?.(); };
-        dlg.addEventListener('cancel', e => { e.preventDefault(); if (view) { view = null; paint(); } else close(); });
+        const close = () => { if (view?.mode === 'edit' && !confirm('Quitter sans enregistrer ?')) return; dlg.close(); dlg.remove(); if (changed) ext.refreshView?.(); };
+        dlg.addEventListener('cancel', e => { e.preventDefault(); if (view?.mode === 'edit' && !confirm('Quitter sans enregistrer ?')) return; if (view) { view = null; draft = null; paint(); } else close(); });
         const current = () => items.filter(i => i.kind === tab);
         const paintTabs = () => { dlg.querySelector('[data-ar-tabs]').innerHTML = Object.entries(KINDS).map(([k, [ic, l]]) => `<button type="button" class="${k === tab ? 'is-active' : ''}" data-ar-tab="${k}" title="${esc(l)}">${ic} ${esc({book: 'Bibliographie', work: 'Œuvres', release: 'Discographie', film: 'Filmographie'}[k] || l)} <small>${items.filter(i => i.kind === k).length || ''}</small></button>`).join(''); };
         function paint() {
@@ -250,7 +250,10 @@
                     const src = dg.querySelector('[data-src]'), iq = dg.querySelector('[data-iq]'), res = dg.querySelector('[data-res]'), help = dg.querySelector('[data-help]');
                     const HELP = {ol_isbn: 'L’ISBN (10 ou 13 chiffres) est au dos du livre.', ol_author: 'Le nom de l’auteur tel qu’il est publié.', ol_subject: 'Un sujet ou un nom : les livres qui en parlent.', wd: 'Le nom de l’artiste, ou l’adresse de sa page Wikidata (Q…).', csv: 'Copie les lignes de ton tableur (avec la ligne des titres de colonnes : N°, Titre, Date, Technique, Dimensions, Lieu, Propriétaire, État, Valeur…) et colle-les ci-dessous.',
                         discogs: 'Ex. https://www.discogs.com/artist/123456-Nom, …/master/…, …/release/…', discogs_search: 'Le nom de l’artiste ou de l’album (il faut le jeton : bouton 🔑 Clés).', mb: 'Le nom de l’artiste.', itunes: 'Le nom de l’artiste (et éventuellement de l’album).', imdb: 'Ex. https://www.imdb.com/name/nm0000123/ — la filmographie vient de Wikidata (et de TMDb si la clé est donnée).', tmdb: 'Le nom, ou l’adresse IMDb (nm…).'};
-                    const setHelp = () => { help.textContent = HELP[src.value] || ''; if (src.value === 'csv') { iq.replaceWith(Object.assign(document.createElement('textarea'), {rows: 8, className: 'h-ar-csv'})); dg.querySelector('[data-go]').textContent = 'Lire le tableau'; } };
+                    const setHelp = () => { help.textContent = HELP[src.value] || ''; const cur = dg.querySelector('[data-iq]') || dg.querySelector('.h-ar-csv');
+                        if (src.value === 'csv' && !cur.matches('.h-ar-csv')) cur.replaceWith(Object.assign(document.createElement('textarea'), {rows: 8, className: 'h-ar-csv'}));
+                        else if (src.value !== 'csv' && cur.matches('.h-ar-csv')) { const i = Object.assign(document.createElement('input'), {placeholder: 'Nom, adresse, ISBN…'}); i.dataset.iq = ''; cur.replaceWith(i); }
+                        dg.querySelector('[data-go]').textContent = src.value === 'csv' ? 'Lire le tableau' : 'Chercher'; };
                     src.addEventListener('change', () => { res.innerHTML = ''; res._cands = []; setHelp(); }); setHelp();
                     dg.querySelector('[data-go]').addEventListener('click', async () => { const val = (dg.querySelector('[data-iq]') || dg.querySelector('.h-ar-csv')).value.trim(); res.innerHTML = '<p class="muted">Recherche…</p>';
                         try { await SEARCH[src.value](val, res); } catch (er) { res.innerHTML = `<p class="error-text">${esc(er.message)}</p>`; } });
@@ -276,7 +279,7 @@
                 }});
         }
         // la liste à cocher des candidats
-        const candList = (res, cands, note = '') => { res._cands = cands; res.innerHTML = cands.length ? `${note ? `<p class="muted">${note}</p>` : ''}<label class="checkbox-line"><input type="checkbox" data-all checked> Tout cocher (${cands.length})</label><div class="h-ar-cands">${cands.map((c, i) => `<label class="checkbox-line"><input type="checkbox" data-cand="${i}" ${c.off ? '' : 'checked'}>${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(c.title)}</b> <small class="muted">${esc(c.sub || '')}</small></span></label>`).join('')}</div>` : '<p class="muted">Rien trouvé.</p>'; };
+        const candList = (res, cands, note = '') => { res._cands = cands; res.innerHTML = cands.length ? `${note ? `<p class="muted">${esc(note)}</p>` : ''}<label class="checkbox-line"><input type="checkbox" data-all checked> Tout cocher (${cands.length})</label><div class="h-ar-cands">${cands.map((c, i) => `<label class="checkbox-line"><input type="checkbox" data-cand="${i}" ${c.off ? '' : 'checked'}>${c.img ? `<img src="${esc(c.img)}" alt="" loading="lazy">` : ''}<span><b>${esc(c.title)}</b> <small class="muted">${esc(c.sub || '')}</small></span></label>`).join('')}</div>` : '<p class="muted">Rien trouvé.</p>'; };
         const choose = (res, rows, onPick, note = 'Lequel ?') => { res._pick = i => onPick(rows[i]); res.innerHTML = `<p class="muted">${esc(note)}</p>${rows.map((r, i) => `<button type="button" class="h-ar-choice" data-pick="${i}"><b>${esc(r.label)}</b> <small class="muted">${esc(r.description || '')}</small></button>`).join('') || '<p class="muted">Rien trouvé.</p>'}`; };
         const remote = q2 => post('artist_remote', q2);
         // Wikidata : trouver la personne (nom, adresse, Q…), puis la liste
@@ -332,7 +335,7 @@
                     full: async () => { const t = await remote({source: 'itunes', what: 'album', id: String(a.collectionId)}), songs = (t.results || []).filter(s => s.wrapperType === 'track'), discs = new Set(songs.map(s => s.discNumber)).size;
                         return {data: {title: a.collectionName, artist: a.artistName, year: yearOf(a.releaseDate), released: (a.releaseDate || '').slice(0, 10), genre: a.primaryGenreName || '', rtype: /- (single|ep)$/i.test(a.collectionName) ? (/ep$/i.test(a.collectionName) ? 'ep' : 'single') : 'album', format: 'Numérique', notes: a.copyright || '',
                             tracks: songs.map(s => ({pos: discs > 1 ? `${s.discNumber}-${s.trackNumber}` : String(s.trackNumber), title: s.trackName, dur: msDur(s.trackTimeMillis)})), photos: a.artworkUrl100 ? [{u: a.artworkUrl100.replace(/100x100bb/, '1200x1200bb'), k: 'recto'}] : []}}; }})), 'Albums d’Apple Music (titres et durées ; pas les éditions physiques).'); },
-            csv: async (val, res) => { const rows = parseCsv(val); if (rows.length < 2) throw new Error('Il faut la ligne des titres de colonnes et au moins une ligne.');
+            csv: async (val, res) => { if (!String(val || '').trim()) throw new Error('Colle d’abord les lignes du tableur (avec la ligne des titres).'); const rows = parseCsv(val); if (rows.length < 2) throw new Error('Il faut la ligne des titres de colonnes et au moins une ligne.');
                 const head = rows[0].map(h => h.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').trim());
                 const MAP = [['inv', /^(n[°o]|num|inv|cote)/], ['catref', /catalogue|raisonne/], ['title', /^titre|title|nom de l/], ['date', /^date|annee|year/], ['technique', /technique|medium/], ['support', /support/], ['dimstr', /dimension|format|taille/], ['h', /^haut/], ['w', /^larg/], ['d', /^prof/], ['location', /lieu|localisation|emplacement|ou est/], ['owner', /proprietaire|owner|collection/], ['condition', /etat|condition/], ['value', /valeur|prix|estimation/], ['provenance', /provenance|historique/], ['exhibitions', /exposition/], ['signature', /signature|inscription/], ['series', /serie/], ['note', /note|remarque|commentaire/]];
                 const idx = MAP.map(([k, re]) => [k, head.findIndex(h => re.test(h))]).filter(x => x[1] >= 0);

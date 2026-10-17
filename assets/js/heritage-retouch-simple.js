@@ -253,12 +253,13 @@
             ['bw', 'sepia', 'invert'].forEach(k => { dlg.querySelector(`[data-rs-t="${k}"]`).checked = !!st[k]; });
             drawCurve(); draw();
         };
-        dlg.addEventListener('input', e => { const k = e.target.dataset.rs; if (k) { st[k] = Number(e.target.value); dlg.querySelector(`[data-rs-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); } });
-        dlg.addEventListener('change', e => { const k = e.target.dataset.rsT; if (k) { st[k] = e.target.checked; if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); } });
+        dlg.addEventListener('input', e => { const k = e.target.dataset.rs; if (k) { st[k] = Number(e.target.value); manualEdit(); dlg.querySelector(`[data-rs-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); } });
+        dlg.addEventListener('change', e => { const k = e.target.dataset.rsT; if (k) { st[k] = e.target.checked; manualEdit(); if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); } });
         dlg.querySelectorAll('[data-rs-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rsCh; selPt = -1; dlg.querySelectorAll('[data-rs-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
         // un préréglage cliqué une 2e fois : retour à l'état d'avant (ex. « Négatif → positif » puis à nouveau → le négatif d'origine)
         let activePreset = -1, beforePreset = null;
         const markPreset = () => dlg.querySelectorAll('[data-rs-preset]').forEach(x => { const on = Number(x.dataset.rsPreset) === activePreset; x.classList.toggle('secondary', !on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); x.title = on ? 'Cliquer à nouveau pour revenir à l’état d’avant' : ''; });
+        const manualEdit = () => { if (activePreset >= 0) { activePreset = -1; markPreset(); } }; // un curseur touché à la main : le préréglage n'est plus « actif » (un 2e clic le réappliquera)
         dlg.querySelectorAll('[data-rs-preset]').forEach(b => b.addEventListener('click', () => {
             const i = Number(b.dataset.rsPreset);
             if (activePreset === i && beforePreset) { Object.assign(st, JSON.parse(beforePreset), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); return; }

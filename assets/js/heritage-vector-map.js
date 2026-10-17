@@ -103,9 +103,94 @@
     const DECOS = [['scale', 'Échelle', 260, 40], ['compass', 'Rose des vents', 120, 120], ['cartouche', 'Cartouche (titre)', 320, 140], ['legend', 'Légende (automatique)', 240, 260], ['frame', 'Cadre de carte (tout autour)', 0, 0]];
     // calques préparés (du bas vers le haut)
     const LAYERS = [['relief', 'Relief'], ['eau', 'Eau'], ['vegetation', 'Végétation'], ['parcelles', 'Parcelles'], ['routes', 'Routes et chemins'], ['bati', 'Bâti'], ['limites', 'Limites'], ['noms', 'Noms'], ['genealogie', 'Généalogie'], ['habillage', 'Habillage (échelle, légende…)']];
-    const lineOf = k => LINES.find(l => l[0] === k), zoneOf = k => ZONES.find(z => z[0] === k), symOf = k => SYMS.find(s => s[0] === k), labelOf = k => LABELS.find(l => l[0] === k), decoOf = k => DECOS.find(d => d[0] === k);
+    const lineOf = k => LINES.find(l => l[0] === k), zoneOf = k => ZONES.find(z => z[0] === k), labelOf = k => LABELS.find(l => l[0] === k), decoOf = k => DECOS.find(d => d[0] === k);
+    /* ═════════ La palette réglable (Maintenance → Montage, retouche, mise en page et son) : groupes et éléments rangés, montrés, cachés ; éléments à soi ═════════ */
+    const PKEY = 'genealogie-vector-map-palette', HEXRX = /^#[0-9a-f]{6}$/i, DRX = /^[MmLlHhVvCcSsQqTtAaZz0-9eE.,\s+-]{1,60000}$/;
+    const readP = () => { try { const v = JSON.parse(localStorage.getItem(PKEY) || '{}'); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; } catch (_) { return {}; } };
+    const writeP = v => { try { localStorage.setItem(PKEY, JSON.stringify(v)); } catch (_) { toast('Plus de place pour enregistrer ce réglage.', 'error'); } };
+    const arr = v => Array.isArray(v) ? v : [];
+    /** un élément à soi, nettoyé : {id, g (groupe), tool, base (genre de départ), label, color, w, d, vb} */
+    const cleanCustom = c => !c || typeof c !== 'object' || !/^my_[a-z0-9]{4,20}$/.test(c.id || '') || !['mline', 'mzone', 'msym', 'mlabel'].includes(c.tool) ? null : {id: c.id, g: String(c.g || '').replace(/[^a-z_]/g, '').slice(0, 20), tool: c.tool, base: String(c.base || '').replace(/[^a-z_]/g, '').slice(0, 20),
+        label: String(c.label || 'Mon élément').replace(/[<>]/g, '').slice(0, 60), color: HEXRX.test(c.color || '') ? c.color : '', w: Math.max(0, Math.min(60, Number(c.w) || 0)), d: typeof c.d === 'string' && DRX.test(c.d) ? c.d : '', vb: arr(c.vb).length === 4 && arr(c.vb).every(Number.isFinite) && c.vb[2] > 0 && c.vb[3] > 0 ? c.vb.map(Number) : null};
+    const customs = () => arr(readP().custom).map(cleanCustom).filter(Boolean);
+    // les symboles dessinés à soi : rangés aussi dans le document (pour qu'il se dessine pareil ailleurs)
+    const docSym = k => { const c = ctx.doc?.map?.syms?.[k] || customs().find(x => x.id === k); return c && c.d ? [k, c.label || 'Symbole', '', c.d, c.vb || [0, 0, 100, 100]] : null; };
+    const symOf = k => SYMS.find(s => s[0] === k) || (/^my_/.test(k || '') ? docSym(k) : null);
     const isLine = o => o?.type === 'path' && !!o.map && !!lineOf(o.map.k) && !o.closed;
     const isZone = o => o?.type === 'path' && !!o.map && !!zoneOf(o.map.k);
+
+    const BASE_GROUPS = () => [
+        ['voies', '🛣️ Voies', LINES.filter(l => l[3] === 'Voies').map(l => [l[0], l[1], 'mline'])], ['eau', '〰️ Eau', LINES.filter(l => l[3] === 'Eau').map(l => [l[0], l[1], 'mline'])],
+        ['zones', '▱ Zones (forêt, champ, lac, bourg…)', ZONES.map(z => [z[0], z[1], 'mzone'])], ['syms', '🏠 Bâtiments et symboles', [['building', 'Bâtiment (glisser un rectangle)', 'msym'], ...SYMS.map(s => [s[0], s[1], 'msym'])]],
+        ['limites', '┅ Limites, murs, haies, relief', LINES.filter(l => ['Limites', 'Relief', 'Bâti', 'Végétation'].includes(l[3])).map(l => [l[0], l[1], 'mline'])], ['noms', '🔤 Noms de lieux', LABELS.map(l => [l[0], l[1], 'mlabel'])],
+        ['deco', '🧭 Habillage', DECOS.map(d => [d[0], d[1], 'mdeco'])]];
+    const HOME = {mline: 'voies', mzone: 'zones', msym: 'syms', mlabel: 'noms'};
+    const BASES = {mline: LINES.map(l => [l[0], l[1]]), mzone: ZONES.map(z => [z[0], z[1]]), msym: [['building', 'Bâtiment (rectangle)'], ...SYMS.map(s => [s[0], s[1]])], mlabel: LABELS.map(l => [l[0], l[1]])};
+    const TOOLS_L = [['mline', 'Trait (route, rivière, limite…)'], ['mzone', 'Zone (forêt, champ, lac…)'], ['msym', 'Symbole, bâtiment'], ['mlabel', 'Nom de lieu']];
+    const customIcon = c => c.d ? `<svg viewBox="${c.vb.join(' ')}" width="20" height="20"><path d="${c.d}" fill="${c.color || '#d9cec2'}" stroke="#333" stroke-width="${n2(Math.max(c.vb[2], c.vb[3]) / 24)}"/></svg>` : `<span class="vx-mcust" style="background:${c.color || '#ccc'}"></span>`;
+    /** les groupes de la palette, dans l'ordre choisi, sans ce qui est caché, avec les éléments à soi ; « all » : tout (pour les réglages) */
+    function groupsFor(icons = {}, all = false) {
+        const P = readP(), mine = customs(), ord = arr(P.order), hidG = arr(P.hiddenGroups), its = P.items && typeof P.items === 'object' ? P.items : {};
+        const icon = (k, tool) => () => tool === 'mline' && icons.miniLine ? icons.miniLine(k) : tool === 'mzone' && icons.miniZone ? icons.miniZone(k) : tool === 'msym' && k === 'building' ? '<svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="6" width="18" height="12" fill="#d9cec2" stroke="#a39484"/></svg>' : tool === 'msym' && icons.miniSym ? icons.miniSym(k)
+            : tool === 'mlabel' ? `<b style="font-size:11px">Ab</b>` : tool === 'mdeco' ? ({scale: '📏', compass: '🧭', cartouche: '🏷️', legend: '📋', frame: '🖼️'}[k] || '•') : ({mline: '〰', mzone: '▱', msym: '⌂'}[tool] || '•');
+        let gs = BASE_GROUPS().map(([key, title, list]) => ({key, title, items: [...list.map(([k, label, tool]) => ({key: k, label, tool, icon: icon(k, tool)})), ...mine.filter(c => (c.g || HOME[c.tool]) === key).map(c => ({key: c.id, label: c.label, tool: c.tool, mine: true, c, icon: () => c.d || !icons.miniLine ? customIcon(c) : icon(c.base, c.tool)()}))]}));
+        gs = [...ord.map(k => gs.find(g => g.key === k)).filter(Boolean), ...gs.filter(g => !ord.includes(g.key))];
+        gs.forEach(g => { const io = arr(its[g.key]?.order), ih = arr(its[g.key]?.hidden); g.items = [...io.map(k => g.items.find(i => i.key === k)).filter(Boolean), ...g.items.filter(i => !io.includes(i.key))]; g.hiddenItems = ih; g.hidden = hidG.includes(g.key); if (!all) g.items = g.items.filter(i => !ih.includes(i.key)); });
+        return all ? gs : gs.filter(g => !g.hidden && g.items.length);
+    }
+    /** ⚙️ les réglages : groupes et éléments rangés (↑ ↓), montrés ou cachés, éléments à soi (＋ ✎ 🗑) */
+    function paletteEditorHtml() {
+        const row = (it, gk) => `<li class="h-pet-lrow" data-it="${esc(it.key)}"><input type="checkbox" ${(groupsFor({}, true).find(g => g.key === gk)?.hiddenItems || []).includes(it.key) ? '' : 'checked'} title="Montrer"><span>${esc(it.label)}${it.mine ? ' <small class="muted">· à moi</small>' : ''}</span>${it.mine ? `<button type="button" class="h-bt" data-vme-ed="${esc(it.key)}" title="Modifier">✎</button><button type="button" class="h-bt" data-vme-del="${esc(it.key)}" title="Supprimer">🗑</button>` : ''}<button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`;
+        return `<div class="vx-mpe">${groupsFor({}, true).map(g => `<section class="vx-mpe-g" data-g="${g.key}"><div class="h-pet-lrow vx-mpe-head"><input type="checkbox" data-gvis ${g.hidden ? '' : 'checked'} title="Montrer le groupe"><b>${esc(g.title)}</b><button type="button" class="h-bt" data-gup title="Monter le groupe">↑</button><button type="button" class="h-bt" data-gdown title="Descendre le groupe">↓</button></div><ol class="h-pet-layout">${g.items.map(it => row(it, g.key)).join('')}</ol></section>`).join('')}</div>
+            <div class="vx-row"><button type="button" class="button small" data-vme-new>＋ Créer un élément</button><button type="button" class="button small secondary" data-vme-reset>Tout remettre comme au départ</button></div>`;
+    }
+    function savePaletteFrom(box) {
+        const P = readP(), secs = [...box.querySelectorAll('.vx-mpe-g')];
+        P.order = secs.map(s => s.dataset.g); P.hiddenGroups = secs.filter(s => !s.querySelector('[data-gvis]').checked).map(s => s.dataset.g);
+        P.items = Object.fromEntries(secs.map(s => { const li = [...s.querySelectorAll('[data-it]')]; return [s.dataset.g, {order: li.map(x => x.dataset.it), hidden: li.filter(x => !x.querySelector('input').checked).map(x => x.dataset.it)}]; }));
+        writeP(P);
+    }
+    function bindPaletteEditor(box, redraw, onChange) {
+        box.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return;
+            const li = b.closest('[data-it]'), sec = b.closest('.vx-mpe-g');
+            if (b.hasAttribute('data-up')) { li.previousElementSibling?.before(li); savePaletteFrom(box); onChange?.(); return; }
+            if (b.hasAttribute('data-down')) { li.nextElementSibling?.after(li); savePaletteFrom(box); onChange?.(); return; }
+            if (b.hasAttribute('data-gup')) { sec.previousElementSibling?.before(sec); savePaletteFrom(box); onChange?.(); return; }
+            if (b.hasAttribute('data-gdown')) { sec.nextElementSibling?.after(sec); savePaletteFrom(box); onChange?.(); return; }
+            if (b.dataset.vmeEd) { if (await editCustom(b.dataset.vmeEd)) { redraw(); onChange?.(); } return; }
+            if (b.dataset.vmeDel) { if (!confirm('Supprimer cet élément ? (Ce qui est déjà dessiné avec reste sur les plans.)')) return; const P = readP(); P.custom = arr(P.custom).filter(c => c?.id !== b.dataset.vmeDel); writeP(P); redraw(); onChange?.(); return; }
+            if (b.hasAttribute('data-vme-new')) { if (await editCustom(null)) { redraw(); onChange?.(); } return; }
+            if (b.hasAttribute('data-vme-reset')) { if (!confirm('Remettre l’ordre et l’affichage de départ ? (Tes éléments sont gardés.)')) return; const P = readP(); delete P.order; delete P.hiddenGroups; delete P.items; writeP(P); redraw(); onChange?.(); } });
+        box.addEventListener('change', e => { if (e.target.matches('input[type=checkbox]')) { savePaletteFrom(box); onChange?.(); } });
+    }
+    function openPaletteEditor(onChange) {
+        ext.openDialog({eyebrow: 'MODE PLAN', title: '⚙️ Les éléments du plan', wide: true, submitLabel: 'Fermer', body: '<p class="muted">Range les groupes et les éléments avec ↑ ↓, décoche ce que tu ne veux pas voir, crée tes éléments. C’est gardé tout de suite (et aussi dans Maintenance → Montage, retouche, mise en page et son).</p><div data-vme-box></div>',
+            onOpen: dg => { const box = dg.querySelector('[data-vme-box]'), redraw = () => { box.innerHTML = paletteEditorHtml(); }; redraw(); bindPaletteEditor(box, redraw, onChange); }, onSubmit: () => { onChange?.(); }});
+    }
+    /** ＋ / ✎ un élément à soi : un genre de départ (son allure), un nom, une couleur, une largeur ; un symbole peut être dessiné soi-même (ce qui est choisi dans le dessin) */
+    function editCustom(id, {selection = []} = {}) {
+        return new Promise(res => { const c = id ? customs().find(x => x.id === id) : null, V = ext.vectorInternals;
+            const shapes = []; const walk = list => list.forEach(o => { if (o.type === 'group' && o.children) walk(o.children); else if (V?.shapeD && V.shapeD(o)) shapes.push(o); }); walk(selection || []);
+            const tool0 = c?.tool || (shapes.length ? 'msym' : 'mline'), opt = (list, cur) => list.map(([k, l]) => `<option value="${esc(k)}" ${k === cur ? 'selected' : ''}>${esc(l)}</option>`).join('');
+            ext.openDialog({eyebrow: 'MODE PLAN', title: c ? '✎ Mon élément' : '＋ Créer un élément', submitLabel: 'Enregistrer',
+                body: `<div class="form-grid"><label>Nom<input name="label" maxlength="60" value="${esc(c?.label || '')}" placeholder="ex. Chemin de halage, Lavoir communal…" required></label><label>Genre<select name="tool">${opt(TOOLS_L, tool0)}</select></label>
+                    <label>Allure de départ<select name="base"></select></label><label>Groupe<select name="g">${opt(BASE_GROUPS().filter(g => g[0] !== 'deco').map(g => [g[0], g[1]]), c?.g || HOME[tool0])}</select></label>
+                    <label class="checkbox-line"><input type="checkbox" name="usecolor" ${c?.color ? 'checked' : ''}> Ma couleur</label><label>Couleur<input type="color" name="color" value="${esc(c?.color || '#8a5a2b')}"></label>
+                    <label data-only="mline">Largeur (vide = celle de départ)<input type="number" name="w" min="0.5" max="60" step="0.5" value="${c?.w || ''}"></label></div>
+                    <div data-only="msym"><label class="checkbox-line"><input type="checkbox" name="own" ${c?.d || (!c && shapes.length) ? 'checked' : ''} ${!c?.d && !shapes.length ? 'disabled' : ''}> Mon dessin : ${c?.d ? 'celui déjà enregistré' : shapes.length ? `ce qui est choisi dans le dessin (${shapes.length} forme${shapes.length > 1 ? 's' : ''})` : 'choisis d’abord des formes dans le dessin (outil Sélection), puis « ＋ Créer un élément »'}</label>${c?.d && shapes.length ? `<label class="checkbox-line"><input type="checkbox" name="redraw"> Le remplacer par ce qui est choisi dans le dessin (${shapes.length})</label>` : ''}</div>`,
+                onOpen: dg => { const tool = dg.querySelector('[name=tool]'), base = dg.querySelector('[name=base]'), g = dg.querySelector('[name=g]');
+                    const sync = first => { const t = tool.value; base.innerHTML = opt(BASES[t], first && c?.base ? c.base : BASES[t][0][0]); if (!first) g.value = HOME[t]; dg.querySelectorAll('[data-only]').forEach(x => { x.hidden = x.dataset.only !== t; }); };
+                    sync(true); tool.addEventListener('change', () => sync(false)); },
+                onSubmit: f => { const v = n => f.querySelector(`[name=${n}]`), label = v('label').value.trim(); if (!label) { toast('Donne un nom à l’élément.', 'error'); return false; }
+                    const item = {id: c?.id || `my_${Math.random().toString(36).slice(2, 10)}`, g: v('g').value, tool: v('tool').value, base: v('base').value, label, color: v('usecolor').checked ? v('color').value : '', w: Number(v('w').value) || 0, d: '', vb: null};
+                    if (item.tool === 'msym' && v('own')?.checked) {
+                        if (shapes.length && (!c?.d || v('redraw')?.checked)) { const bx = shapes.map(o => V.box(o)).filter(Boolean), x0 = Math.min(...bx.map(b => b.x)), y0 = Math.min(...bx.map(b => b.y)), x1 = Math.max(...bx.map(b => b.x + b.w)), y1 = Math.max(...bx.map(b => b.y + b.h)), m = Math.max(x1 - x0, y1 - y0) * .04 || 1;
+                            item.d = shapes.map(o => V.shapeD(o)).join(' '); item.vb = [n2(x0 - m), n2(y0 - m), n2(x1 - x0 + 2 * m), n2(y1 - y0 + 2 * m)]; }
+                        else if (c?.d) { item.d = c.d; item.vb = c.vb; } }
+                    const clean = cleanCustom(item); if (!clean) { toast('Élément incomplet.', 'error'); return false; } if (item.d && !clean.d) { toast('Ce dessin est trop compliqué : simplifie-le.', 'error'); return false; }
+                    const P = readP(), list = arr(P.custom).filter(Boolean), i = list.findIndex(x => x.id === clean.id); if (i >= 0) list[i] = clean; else list.push(clean); if (list.length > 200) { toast('200 éléments à soi au plus.', 'error'); return false; } P.custom = list; writeP(P); res(clean.id); } }).addEventListener('close', () => res(null)); });
+    }
+    ext.vectorMapPalette = {html: paletteEditorHtml, bind: bindPaletteEditor, open: openPaletteEditor};
 
     /* contexte de dessin : le document (style, année, légende) ; posé par l'éditeur avant de dessiner */
     const ctx = {doc: null, editor: false};
@@ -184,8 +269,12 @@
     const readable = s => s.length > 1 && s[s.length - 1][0] < s[0][0] ? [...s].reverse() : s;
     const polyD = s => s.map((p, i) => `${i ? 'L' : 'M'}${n2(p[0])} ${n2(p[1])}`).join('');
     /** un trait de plan, en deux temps : le dessous (bordure) puis le dessus, pour que les croisements se raccordent */
+    /** une couleur à soi (élément à soi) remplace celle du style pour ce genre de trait */
+    function tinted(st0, k, c) { if (!HEXRX.test(c || '')) return st0; const st = {...st0};
+        if (['highway', 'road', 'street'].includes(k)) st[k] = [st0[k][0], c]; else if (['track', 'footpath'].includes(k)) st[k] = c; else if (k === 'rail') st.rail = c; else if (k === 'river' || k === 'canal') st.water = c; else if (k === 'stream' || k === 'coast') st.waterInk = c;
+        else if (k === 'wall') st.wall = c; else if (k === 'hedge') st.forest = c; else if (k === 'contour') st.contour = c; else if (k === 'cliff') st.ink = c; else if (k?.startsWith('b_')) st.border = c; else if (k === 'bridge') st.paper = c; return st; }
     function lineSvg(o, defs, pre, idAttr, pass = 'all') {
-        const st = S(), k = o.map.k, w = W(o), pts = smooth(o.pts || [], false, o.map.smooth !== false), d = dOf(pts, false); if (!d) return '';
+        const st = tinted(S(), o.map.k, o.map.color), k = o.map.k, w = W(o), pts = smooth(o.pts || [], false, o.map.smooth !== false), d = dOf(pts, false); if (!d) return '';
         const op = num(o.op, 1) < 1 ? ` opacity="${n2(num(o.op, 1))}"` : '';
         const casing = pass !== 'fill', fill = pass !== 'casing', g = body => body ? `<g${idAttr}${op}>${tip(o)}${body}</g>` : '';
         const strk = (c, sw, extra = '') => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${n2(sw)}" stroke-linecap="round" stroke-linejoin="round"${extra}/>`;
@@ -223,7 +312,7 @@
     }
     function zoneSvg(o, defs, pre, idAttr) {
         const st = S(), k = o.map.k, pts = smooth(o.pts || [], true, o.map.smooth === true), d = dOf(pts, true); if (!d) return '';
-        const fill = k === 'parcel' ? 'none' : pattern(k, defs, pre), stroke = k === 'parcel' ? st.ink : ['lake', 'sea', 'marsh'].includes(k) ? st.waterInk : ['forest', 'park', 'orchard', 'meadow'].includes(k) ? st.forestInk : k === 'town' ? st.buildingInk : st.ink;
+        const fill = HEXRX.test(o.map.color || '') ? o.map.color : k === 'parcel' ? 'none' : pattern(k, defs, pre), stroke = k === 'parcel' ? st.ink : ['lake', 'sea', 'marsh'].includes(k) ? st.waterInk : ['forest', 'park', 'orchard', 'meadow'].includes(k) ? st.forestInk : k === 'town' ? st.buildingInk : st.ink;
         const sw = k === 'parcel' ? .7 : ['field', 'meadow', 'square'].includes(k) ? .5 : .9;
         let label = '';
         const name = String(o.map.name || '').trim();
@@ -238,7 +327,8 @@
         let body;
         if (k === 'building') body = `<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" fill="${hex(o.map.fill, st.building)}" stroke="${st.buildingInk}" stroke-width=".9"/>`;
         else { const s = symOf(k) || SYMS[5], ink = hex(o.map.ink, st.ink);
-            body = `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(w / 100)} ${n2(h / 100)})">${s[3] ? `<path d="${s[3]}" fill="${hex(o.map.fill, k === 'pin' ? '#c0392b' : st.symFill)}"/>` : ''}<path d="${s[2]}" fill="none" stroke="${ink}" stroke-width="${n2(clamp(5 * 100 / Math.max(w, h), 2, 12))}" stroke-linejoin="round" stroke-linecap="round"/></g>`; }
+            const vb = s[4] || [0, 0, 100, 100], kx = w / vb[2], ky = h / vb[3], swv = clamp(5 * 100 / Math.max(w, h), 2, 12) * Math.max(vb[2], vb[3]) / 100;
+            body = `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(kx)} ${n2(ky)}) translate(${n2(-vb[0])} ${n2(-vb[1])})">${s[3] ? `<path d="${s[3]}" fill="${hex(o.map.fill, k === 'pin' ? '#c0392b' : st.symFill)}"${s[4] ? ` stroke="${ink}" stroke-width="${n2(swv * .5)}" stroke-linejoin="round"` : ''}/>` : ''}${s[2] ? `<path d="${s[2]}" fill="none" stroke="${ink}" stroke-width="${n2(swv)}" stroke-linejoin="round" stroke-linecap="round"/>` : ''}</g>`; }
         const name = String(o.map?.name || '').trim();
         if (name && o.map.label !== false) { const size = clamp(num(o.map.ls, 11), 5, 80), pos = o.map.lpos || 'right';
             const [tx, ty, anc] = pos === 'below' ? [x + w / 2, y + h + size, 'middle'] : pos === 'above' ? [x + w / 2, y - size * .4, 'middle'] : pos === 'left' ? [x - size * .4, y + h / 2 + size / 3, 'end'] : [x + w + size * .4, y + h / 2 + size / 3, 'start'];
@@ -331,7 +421,8 @@
     function attach(ed) {
         let pick = {tool: 'mline', kind: 'road'};
         const mapDoc = () => { const d = ed.doc(); d.map = d.map || {}; return d.map; };
-        const palette = (list, tool, title, icon) => `<div class="vx-mpal"><h5>${title}</h5><div class="vx-mpal-row">${list.map(x => `<button type="button" data-vm-pick="${tool}:${x[0]}" class="${pick.tool === tool && pick.kind === x[0] ? 'is-on' : ''}" title="${esc(x[1])}">${icon(x)}<span>${esc(x[1].replace(/ \(.*\)$/, ''))}</span></button>`).join('')}</div></div>`;
+        const isOn = (tool, key) => pick.tool === tool && (pick.custom ? pick.custom.id === key : pick.kind === key);
+        const paletteHtml = g => `<div class="vx-mpal"><h5>${esc(g.title)}</h5><div class="vx-mpal-row">${g.items.map(it => `<button type="button" data-vm-pick="${it.tool}:${it.key}" class="${isOn(it.tool, it.key) ? 'is-on' : ''}" title="${esc(it.label)}">${it.icon()}<span>${esc(it.label.replace(/ \(.*\)$/, ''))}</span></button>`).join('')}</div></div>`;
         const miniLine = k => `<svg viewBox="0 0 40 14" width="34" height="12">${(() => { const defs = []; const s = lineSvg({id: 'pv' + k, type: 'path', map: {k, label: false, w: Math.min(lineOf(k)[2], 7)}, pts: [P(3, 9), P(20, 4), P(37, 9)]}, defs, 'pv', '', 'all'); return `<defs>${defs.join('')}</defs>${s}`; })()}</svg>`;
         const miniZone = k => `<svg viewBox="0 0 30 18" width="28" height="16">${(() => { const defs = []; const s = zoneSvg({id: 'pz' + k, type: 'path', closed: true, map: {k, label: false}, pts: [P(2, 3), P(28, 2), P(27, 16), P(3, 15)]}, defs, 'pz', ''); return `<defs>${defs.join('')}</defs>${s}`; })()}</svg>`;
         const miniSym = k => `<svg viewBox="0 0 24 24" width="20" height="20">${symSvg({id: 'ps' + k, type: 'msym', map: {k, label: false}, x: 2, y: 2, w: 20, h: 20}, [], 'ps', '')}</svg>`;
@@ -345,13 +436,8 @@
                 ${on ? `<div class="vx-row"><label>Style<select data-vm="style">${Object.entries(STYLES).map(([k, s]) => `<option value="${k}" ${st === k ? 'selected' : ''}>${esc(s.label)}</option>`).join('')}</select></label></div>
                 <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="layers" title="Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage">🗂 Créer les calques d’un plan</button><label class="checkbox-line" title="Chaque objet va tout seul dans son calque (Routes, Eau, Bâti…)"><input type="checkbox" data-vm="auto" ${m.auto !== false ? 'checked' : ''}> Ranger tout seul</label></div>
                 <p class="muted vx-mhelp">Choisis ce que tu dessines, puis : <b>traits et zones</b> — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; <b>bâtiment</b> — glisse un rectangle ; <b>symbole, nom</b> — un clic.</p>
-                ${palette(LINES.filter(l => l[3] === 'Voies'), 'mline', '🛣️ Voies', l => miniLine(l[0]))}
-                ${palette(LINES.filter(l => l[3] === 'Eau'), 'mline', '〰️ Eau', l => miniLine(l[0]))}
-                ${palette(ZONES, 'mzone', '▱ Zones (forêt, champ, lac, bourg…)', z => miniZone(z[0]))}
-                ${palette([['building', 'Bâtiment (glisser un rectangle)'], ...SYMS.map(s => [s[0], s[1]])], 'msym', '🏠 Bâtiments et symboles', s => s[0] === 'building' ? '<svg viewBox="0 0 24 24" width="20" height="20"><rect x="3" y="6" width="18" height="12" fill="#d9cec2" stroke="#a39484"/></svg>' : miniSym(s[0]))}
-                ${palette(LINES.filter(l => ['Limites', 'Relief', 'Bâti', 'Végétation'].includes(l[3])), 'mline', '┅ Limites, murs, haies, relief', l => miniLine(l[0]))}
-                ${palette(LABELS, 'mlabel', '🔤 Noms de lieux', l => `<b style="font-size:${l[2] > 20 ? 13 : 11}px;${l[4] ? 'font-style:italic;' : ''}">${l[5] ? 'AB' : 'Ab'}</b>`)}
-                ${palette(DECOS, 'mdeco', '🧭 Habillage', dd => ({scale: '📏', compass: '🧭', cartouche: '🏷️', legend: '📋', frame: '🖼️'}[dd[0]]))}
+                ${paletteGroups().map(g => paletteHtml(g)).join('')}
+                <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="paletteCfg" title="Ranger, montrer ou cacher les groupes et les éléments ; créer les tiens (aussi dans Maintenance → Montage, retouche, mise en page et son)">⚙️ Ranger les éléments</button><button type="button" class="button small secondary" data-vm-cmd="newItem">＋ Créer un élément</button></div>
                 <h4>⏳ Curseur du temps</h4><p class="muted vx-mhelp">Donne à un objet ses années (onglet Propriétés) : en choisissant une année, ne reste que ce qui existait alors.</p>
                 <div class="vx-row"><label class="checkbox-line"><input type="checkbox" data-vm="yon" ${m.year ? 'checked' : ''}> Montrer l’année</label><b data-vm-yshow>${m.year || ''}</b></div>
                 <input type="range" data-vm="year" min="${y0}" max="${y1}" value="${m.year || y1}" ${m.year ? '' : 'disabled'} style="width:100%">
@@ -512,8 +598,10 @@
         function onPaneEvent(e) {
             const el = e.target;
             if (e.type === 'click') {
-                const p = el.closest('[data-vm-pick]'); if (p) { const [tool, kind] = p.dataset.vmPick.split(':'); pick = {tool, kind}; ed.setTool(tool); ed.paint(); return true; }
+                const p = el.closest('[data-vm-pick]'); if (p) { const [tool, kind] = p.dataset.vmPick.split(':'), c = /^my_/.test(kind) ? customs().find(x => x.id === kind) : null; pick = c ? {tool, kind: c.d ? c.id : c.base, custom: c} : {tool, kind}; ed.setTool(tool); ed.paint(); return true; }
                 const c = el.closest('[data-vm-cmd]'); if (c) { const k = c.dataset.vmCmd;
+                    if (k === 'paletteCfg') return openPaletteEditor(() => ed.paint()), true;
+                    if (k === 'newItem') { editCustom(null, {selection: ed.selObjs?.() || []}).then(id => { if (id) ed.paint(); }); return true; }
                     if (k === 'layers') makeLayers(); if (k === 'basemap') basemapDialog(); if (k === 'refimg') refImageDialog(); if (k === 'places') placesDialog(); if (k === 'links') linksDialog();
                     if (k === 'refmove') { ed.setTool('mref'); toast('Glisse l’image de référence pour la caler (Échap ou V pour finir).'); }
                     if (k === 'reffit') { const d = ed.doc(); if (d.ref) { Object.assign(d.ref, {x: 0, y: 0, w: d.w, h: d.h, k: 1}); ed.commit('Image ajustée'); } }
@@ -552,20 +640,23 @@
         function newObj(kind, x0, y0, x1, y1) {
             const k = pick.kind, st = S();
             if (kind === 'msym') {
-                if (k === 'building') { const x = Math.min(x0, x1), y = Math.min(y0, y1), w = Math.abs(x1 - x0), h = Math.abs(y1 - y0); if (w < 2 || h < 2) return null; return {id: ed.uid(), type: 'msym', name: 'Bâtiment', x, y, w, h, map: {k: 'building'}}; }
-                const s = ['dot_hamlet', 'dot_village'].includes(k) ? 14 : k === 'dot_city' ? 20 : 26; return {id: ed.uid(), type: 'msym', name: symOf(k)?.[1] || 'Symbole', x: x0 - s / 2, y: y0 - s / 2, w: s, h: s, map: {k, label: true, lpos: 'right', ls: 11}};
+                if (k === 'building') { const x = Math.min(x0, x1), y = Math.min(y0, y1), w = Math.abs(x1 - x0), h = Math.abs(y1 - y0); if (w < 2 || h < 2) return null; return {id: ed.uid(), type: 'msym', name: pick.custom?.label || 'Bâtiment', x, y, w, h, map: {k: 'building', ...(pick.custom?.color ? {fill: pick.custom.color} : {})}}; }
+                const c = pick.custom; if (c?.d) { const m = mapDoc(); m.syms = {...(m.syms || {}), [c.id]: {label: c.label, d: c.d, vb: c.vb}}; } // le dessin voyage avec le document
+                const s = ['dot_hamlet', 'dot_village'].includes(k) ? 14 : k === 'dot_city' ? 20 : 26; return {id: ed.uid(), type: 'msym', name: c?.label || symOf(k)?.[1] || 'Symbole', x: x0 - s / 2, y: y0 - s / 2, w: s, h: s, map: {k, label: true, lpos: 'right', ls: 11, ...(c?.color ? {fill: c.color} : {})}};
             }
-            if (kind === 'mlabel') { const L = labelOf(k) || LABELS[2]; return styleLabel({id: ed.uid(), type: 'text', name: L[1], text: L[5] ? 'NOM' : 'Nom', x: x0, y: y0, size: L[2], align: 'middle', map: {k}}); }
+            if (kind === 'mlabel') { const L = labelOf(k) || LABELS[2], o = styleLabel({id: ed.uid(), type: 'text', name: pick.custom?.label || L[1], text: L[5] ? 'NOM' : 'Nom', x: x0, y: y0, size: L[2], align: 'middle', map: {k}}); if (pick.custom?.color) { o.fill = pick.custom.color; o.map.custom = true; } return o; }
             if (kind === 'mdeco') { const D = decoOf(k); if (k === 'frame') return {id: ed.uid(), type: 'mdeco', name: D[1], x: 0, y: 0, w: ed.doc().w, h: ed.doc().h, locked: true, map: {k}};
                 return {id: ed.uid(), type: 'mdeco', name: D[1], x: x0 - D[2] / 2, y: y0 - D[3] / 2, w: D[2], h: D[3], map: {k, ...(k === 'cartouche' ? {title: ed.name() || 'Plan', sub: mapDoc().geo?.name || '', date: String(new Date().getFullYear())} : {})}}; }
             void st; return null;
         }
         /** un trait ou une zone qui commence (outil plume du plan) */
-        const newPen = tool => ({id: ed.uid(), type: 'path', name: (tool === 'mzone' ? zoneOf(pick.kind) : lineOf(pick.kind))?.[1]?.replace(/ \(.*\)$/, '') || 'Tracé', pts: [], closed: false, fill: 'none', stroke: 'none', sw: 0, map: {k: pick.kind, ...(tool === 'mline' ? {w: lineOf(pick.kind)?.[2]} : {})}});
+        const newPen = tool => { const c = pick.custom; return {id: ed.uid(), type: 'path', name: c?.label || (tool === 'mzone' ? zoneOf(pick.kind) : lineOf(pick.kind))?.[1]?.replace(/ \(.*\)$/, '') || 'Tracé', pts: [], closed: false, fill: 'none', stroke: 'none', sw: 0,
+            map: {k: pick.kind, ...(tool === 'mline' ? {w: c?.w || lineOf(pick.kind)?.[2]} : {}), ...(c?.color ? {color: c.color} : {})}}; };
         const layerOf = o => { const k = o.map?.k; if (o.type === 'text') return 'noms'; if (o.type === 'mdeco') return 'habillage'; if (o.type === 'msym') return ['pin', 'star'].includes(k) ? 'genealogie' : 'bati'; return (lineOf(k)?.[4]) || (zoneOf(k)?.[3]) || null; };
         const DEFAULT = {mline: 'road', mzone: 'forest', msym: 'house', mlabel: 'village', mdeco: 'scale'};
         /** un outil de plan choisi dans la colonne de gauche : garde le genre déjà choisi pour cet outil */
         const choose = tool => { if (pick.tool !== tool && DEFAULT[tool]) pick = {tool, kind: DEFAULT[tool]}; };
+        const paletteGroups = () => groupsFor({miniLine, miniZone, miniSym});
         return {paneHtml, propsHtml, onPaneEvent, newObj, newPen, layerOf, choose, pick: () => pick, basemap: basemapDialog, refimg: refImageDialog, places: placesDialog, layers: makeLayers, links: linksDialog,
             hint: tool => ({mline: `${lineOf(pick.kind)?.[1] || 'Trait'} : un clic par point (glisser : courbe à la main) · double-clic ou Entrée pour finir · les courbes se lissent toutes seules`, mzone: `${zoneOf(pick.kind)?.[1] || 'Zone'} : un clic par coin · clic sur le 1er point, double-clic ou Entrée pour fermer`, msym: pick.kind === 'building' ? 'Bâtiment : glisse un rectangle (⇧ : carré) ; tourne-le ensuite avec la Sélection' : `${symOf(pick.kind)?.[1] || 'Symbole'} : un clic pour le poser`, mlabel: 'Nom de lieu : un clic pour le poser, puis écris-le dans Propriétés', mdeco: 'Habillage : un clic pour le poser', mref: 'Glisse l’image de référence pour la caler sous le dessin'}[tool] || '')};
     }

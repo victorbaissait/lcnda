@@ -28,6 +28,15 @@ function act_transcriptions_list(PDO $pdo): array
             m.filename, COALESCE(NULLIF(m.thumbnail,''), m.filename) AS thumb FROM act_transcriptions t LEFT JOIN media m ON m.id=t.media_id ORDER BY t.updated_at DESC")->fetchAll());
 }
 
+/** les transcriptions d'actes faites sur une image (pour la visionneuse) */
+function act_transcriptions_for_media(PDO $pdo, int $mediaId): array
+{
+    act_transcriptions_ensure($pdo);
+    $s = $pdo->prepare('SELECT id, title, kind, date_text, place, source, body, data_json, updated_at FROM act_transcriptions WHERE media_id=? ORDER BY updated_at DESC LIMIT 20'); $s->execute([$mediaId]);
+    return array_map(static function ($r) { $d = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']);
+        $r['id'] = (int) $r['id']; $r['people'] = array_values(array_map(static fn($p) => ['name' => (string) ($p['name'] ?? ''), 'role' => (string) ($p['role'] ?? ''), 'person_id' => (int) ($p['person_id'] ?? 0)], array_filter(is_array($d['people'] ?? null) ? $d['people'] : [], 'is_array'))); return $r; }, $s->fetchAll());
+}
+
 function act_transcription_get(PDO $pdo, int $id): array
 {
     act_transcriptions_ensure($pdo);

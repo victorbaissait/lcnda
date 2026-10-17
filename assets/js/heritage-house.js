@@ -246,7 +246,7 @@
         }
         /* ─── étages ─── */
         function paintFloors() {
-            $('[data-hs-floors]').innerHTML = [...H.floors].map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level).map(([f, i]) => `<button type="button" class="${i === fi ? 'is-on' : ''}" data-hs-floor="${i}" title="Double-clic pour renommer">${esc(f.name)}</button>`).join('') + '<button type="button" data-hs-cmd="addfloor" title="Ajouter un étage au-dessus (ou une cave)">＋</button>';
+            $('[data-hs-floors]').innerHTML = [...H.floors].map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level).map(([f, i]) => `<button type="button" class="${i === fi ? 'is-on' : ''}" data-hs-floor="${i}" title="Double-clic pour renommer">${esc(f.name)}</button>`).join('') + '<button type="button" data-hs-cmd="addfloor" title="Ajouter un étage ou une cave">＋</button><button type="button" data-hs-cmd="floors" title="Gérer les étages : renommer, hauteur, supprimer">⋯</button>';
         }
         /* ─── panneau de droite ─── */
         const opt = (list, cur) => list.map(([k, l]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${esc(l)}</option>`).join('');
@@ -347,7 +347,7 @@
                 const o = {id: uid('o'), wall: nw.w.id, type: tool, pos, w: Math.min(w, L - 10), h: tool === 'window' ? 120 : 210, sill: tool === 'window' ? 90 : 0, swing: 'left', flip: false, style: 'porte'};
                 f.openings.push(o); sel = {type: 'opening', id: o.id}; setTool('select'); commit(tool === 'window' ? 'Fenêtre' : 'Porte'); return;
             }
-            if (tool === 'text') { const t2 = prompt('Texte :', ''); if (t2) { const lb = {id: uid('t'), x: p[0], y: p[1], text: t2.slice(0, 200), size: 28}; f.labels.push(lb); sel = {type: 'label', id: lb.id}; setTool('select'); commit('Texte'); } return; }
+            if (tool === 'text') { A().askText({title: 'Un texte sur le plan', message: 'Le texte à écrire (nom d’une pièce, d’un lieu, une remarque…)', value: '', okLabel: 'Poser'}).then(t2 => { if (t2) { const lb = {id: uid('t'), x: p[0], y: p[1], text: t2.slice(0, 200), size: 28}; f.labels.push(lb); sel = {type: 'label', id: lb.id}; setTool('select'); commit('Texte'); } }); return; }
         });
         svg.addEventListener('pointermove', e => {
             const [x, y] = toW(e), f = F(); lastXY = [x, y];
@@ -407,10 +407,11 @@
         /** ce qu'on tape : « 350 », « 3,5 m », « 350 @ 90 » (angle en degrés, 90 = vers le haut) ; une pièce : « 420 x 350 » */
         function applyNum(raw) {
             const s2 = String(raw || '').trim().toLowerCase(); if (!s2) { if (draft) finishDraft(); return; }
-            if (tool === 'room') { const [a, b] = s2.split(/\s*[x×*]\s*/), W = parseLen(a), D = parseLen(b ?? a); if (!(W >= 50 && D >= 50)) return toast('Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins).', 'error');
+            if (tool === 'room') { const [a, b0] = s2.split(/\s*[x×*]\s*/), b = b0 ?? a, u = (b.match(/(mm|cm|m)\s*$/) || [])[1], W = parseLen(u && !/(mm|cm|m)\s*$/.test(a) && parseLen(a) < 50 ? `${a} ${u}` : a), D = parseLen(b); // « 4,2 x 3,5 m » : l'unité vaut pour les deux (« 420 x 3,5 m » : 420 cm) if (!(W >= 50 && D >= 50)) return toast('Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins).', 'error');
                 const r = stage.getBoundingClientRect(), o = draft?.a || hover || snapPt((r.width / 2 - panX) / zoom - W / 2, (r.height / 2 - panY) / zoom - D / 2, null); draft = null; makeRoomRect(o, [o[0] + W, o[1] + D]); num.value = ''; return; }
             if (!draft?.pts?.length) return toast('Clique d’abord le point de départ sur le plan, puis tape la longueur.', 'error');
             const [ls, as] = s2.split(/\s*[@<;]\s*/), L = parseLen(ls); if (!(L > 0)) return toast('Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle.', 'error');
+            if (L <= 5) return toast(`${String(L).replace('.', ',')} cm, c’est trop court : pour des mètres, écris « ${ls} m ».`, 'error');
             const last = draft.pts[draft.pts.length - 1], prev = draft.pts[draft.pts.length - 2]; let ang;
             if (as !== undefined && as !== '') { const deg = Number(as.replace(',', '.').replace('°', '')); if (!Number.isFinite(deg)) return toast('Angle incompris (en degrés : 0 à droite, 90 en haut).', 'error'); ang = -deg * Math.PI / 180; }
             else if (hover && Math.hypot(hover[0] - last[0], hover[1] - last[1]) > 1) ang = Math.atan2(hover[1] - last[1], hover[0] - last[0]); // dans la direction de la souris
@@ -483,8 +484,8 @@
         function calibrate() {
             if (!H.ref) return; const pts = []; hint('Clique les deux bouts d’une longueur que tu connais sur le plan scanné (un mur, une cote)…'); setTool('select');
             const onDown = e => { e.stopPropagation(); e.preventDefault(); pts.push(toW(e)); if (pts.length < 2) return; svg.removeEventListener('pointerdown', onDown, true);
-                const L = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]), real = Number(String(prompt('Longueur réelle en centimètres ?', '500') || '').replace(',', '.')); hint(HINTS[tool]);
-                if (!(real > 0) || L < 1) return; const k = real / L, [ox, oy] = pts[0]; H.ref.x = ox + (H.ref.x - ox) * k; H.ref.y = oy + (H.ref.y - oy) * k; H.ref.w *= k; H.ref.h *= k; commit('Plan scanné mis à l’échelle'); fit(); };
+                const L = Math.hypot(pts[1][0] - pts[0][0], pts[1][1] - pts[0][1]), real0 = A().askText({title: 'Mettre le plan à l’échelle', message: 'Quelle est la longueur réelle entre ces deux points ? (en cm, ou 5 m)', value: '500', okLabel: 'Mettre à l’échelle'}); hint(HINTS[tool]);
+                real0.then(v => { const real = parseLen(v); if (!(real > 0) || L < 1) return; const k = real / L, [ox, oy] = pts[0]; H.ref.x = ox + (H.ref.x - ox) * k; H.ref.y = oy + (H.ref.y - oy) * k; H.ref.w *= k; H.ref.h *= k; commit('Plan scanné mis à l’échelle'); fit(); }); };
             svg.addEventListener('pointerdown', onDown, true);
         }
         const loadImg = src => new Promise((ok, ko) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => ko(new Error('Image illisible.')); i.src = src; });
@@ -520,7 +521,23 @@
             rot90: () => { const it = F().items.find(q => q.id === sel?.id); if (!it) return; it.rot = ((it.rot || 0) + 90) % 360; commit('Tourné'); },
             swing: () => { const o = F().openings.find(q => q.id === sel?.id); if (!o) return; o.swing = o.swing === 'right' ? 'left' : 'right'; commit('Sens d’ouverture'); }, flip: () => { const o = F().openings.find(q => q.id === sel?.id); if (!o) return; o.flip = !o.flip; commit('Côté d’ouverture'); },
             split: () => { const f = F(), w = f.walls.find(q => q.id === sel?.id); if (!w) return; const m = [(w.a[0] + w.b[0]) / 2, (w.a[1] + w.b[1]) / 2], w2 = {...JSON.parse(JSON.stringify(w)), id: uid('w'), a: [...m]}; w.b = [...m]; f.walls.push(w2); f.openings.filter(o => o.wall === w.id).forEach(o => { if (o.pos > .5) { o.wall = w2.id; o.pos = (o.pos - .5) * 2; } else o.pos *= 2; }); commit('Mur coupé'); },
-            addfloor: () => { const top = Math.max(...H.floors.map(f => f.level)), lvl = confirm('Ajouter un étage au-dessus ? (Annuler : une cave en dessous)') ? top + 1 : Math.min(...H.floors.map(f => f.level)) - 1; const f = newFloor(lvl); H.floors.push(f); fi = H.floors.length - 1; commit(`${f.name} ajouté`); },
+            addfloor: () => { const top = Math.max(...H.floors.map(f => f.level)), low = Math.min(...H.floors.map(f => f.level)), up = newFloor(top + 1).name, down = newFloor(low - 1).name;
+                ext.openDialog({eyebrow: 'MAISON', title: '＋ Un étage', submitLabel: 'Ajouter',
+                    body: `<fieldset class="h-hs-where"><legend>Où ?</legend><label class="checkbox-line"><input type="radio" name="where" value="up" checked> Au-dessus : <b>${esc(up)}</b></label><label class="checkbox-line"><input type="radio" name="where" value="down"> En dessous : <b>${esc(down)}</b> (cave, sous-sol)</label></fieldset>
+                        <div class="form-grid"><label>Nom<input name="name" maxlength="60" placeholder="${esc(up)}"></label><label>Hauteur sous plafond (cm)<input name="height" type="number" min="150" max="800" value="${F().height || 270}"></label></div>
+                        <label class="checkbox-line"><input type="checkbox" name="copy"> Reprendre les murs de « ${esc(F().name)} » (et ses fenêtres)</label>`,
+                    onOpen: dg => dg.addEventListener('change', e => { if (e.target.name === 'where') dg.querySelector('[name=name]').placeholder = e.target.value === 'up' ? up : down; }),
+                    onSubmit: form => { const isUp = form.querySelector('[name=where]:checked').value === 'up', src = F(), f = newFloor(isUp ? top + 1 : low - 1), nm = form.querySelector('[name=name]').value.trim(), hgt = Number(form.querySelector('[name=height]').value);
+                        if (nm) f.name = nm.slice(0, 60); if (hgt >= 150 && hgt <= 800) f.height = hgt;
+                        if (form.querySelector('[name=copy]').checked) { const map = new Map(); f.walls = src.walls.map(w => { const n = {...JSON.parse(JSON.stringify(w)), id: uid('w')}; map.set(w.id, n.id); return n; }); f.openings = src.openings.filter(o => o.type === 'window').map(o => ({...o, id: uid('o'), wall: map.get(o.wall)})); f.wallT = src.wallT; }
+                        H.floors.push(f); fi = H.floors.length - 1; sel = null; commit(`${f.name} ajouté`); }}); },
+            floors: () => { const rows = () => [...H.floors].map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level);
+                ext.openDialog({eyebrow: 'MAISON', title: '⋯ Les étages', submitLabel: 'Enregistrer', wide: true,
+                    body: `<p class="muted">Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient).</p><table class="h-hs-floortab"><thead><tr><th>Nom</th><th>Hauteur (cm)</th><th>Contenu</th><th></th></tr></thead><tbody>${rows().map(([f, i]) => `<tr data-fl="${i}"><td><input data-fn value="${esc(f.name)}" maxlength="60"></td><td><input data-fh type="number" min="150" max="800" value="${f.height}"></td><td class="muted">${f.walls.length} mur${f.walls.length > 1 ? 's' : ''}, ${f.rooms.length} pièce${f.rooms.length > 1 ? 's' : ''}, ${f.items.length} objet${f.items.length > 1 ? 's' : ''}</td><td><button type="button" class="button small danger" data-fdel>🗑 Supprimer</button></td></tr>`).join('')}</tbody></table>`,
+                    onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('[data-fdel]'); if (!b) return; const tr = b.closest('tr'); if (dg.querySelectorAll('tr[data-fl]:not(.is-del)').length < 2) return toast('Il faut au moins un étage.', 'error'); tr.classList.toggle('is-del'); b.textContent = tr.classList.contains('is-del') ? '↺ Garder' : '🗑 Supprimer'; }),
+                    onSubmit: form => { const del = []; form.querySelectorAll('tr[data-fl]').forEach(tr => { const f = H.floors[Number(tr.dataset.fl)]; if (tr.classList.contains('is-del')) { del.push(f); return; } f.name = tr.querySelector('[data-fn]').value.trim().slice(0, 60) || f.name; const h = Number(tr.querySelector('[data-fh]').value); if (h >= 150 && h <= 800) f.height = h; });
+                        if (del.length && !confirm(`Supprimer ${del.map(f => `« ${f.name} »`).join(', ')} et tout ce qu’${del.length > 1 ? 'ils contiennent' : 'il contient'} ?`)) return false;
+                        const cur = F(); H.floors = H.floors.filter(f => !del.includes(f)); fi = Math.max(0, H.floors.indexOf(cur)); if (!H.floors.includes(cur)) fi = Math.max(0, H.floors.findIndex(f => f.level === 0)); sel = null; commit(del.length ? `${del.length} étage${del.length > 1 ? 's' : ''} supprimé${del.length > 1 ? 's' : ''}` : 'Étages'); }}); },
             dupfloor: () => { const src = F(), f = newFloor(Math.max(...H.floors.map(q => q.level)) + 1), map = new Map(); f.walls = src.walls.map(w => { const n = {...JSON.parse(JSON.stringify(w)), id: uid('w')}; map.set(w.id, n.id); return n; }); f.openings = src.openings.filter(o => o.type === 'window').map(o => ({...o, id: uid('o'), wall: map.get(o.wall)})); f.wallT = src.wallT; f.height = src.height; H.floors.push(f); fi = H.floors.length - 1; commit(`${f.name} (murs repris)`); },
             delfloor: () => { if (H.floors.length < 2) return toast('Il faut au moins un étage.', 'error'); if (!confirm(`Supprimer « ${F().name} » et tout ce qu’il contient ?`)) return; H.floors.splice(fi, 1); fi = 0; sel = null; commit('Étage supprimé'); },
             import3d, importimg: importImg, importplan: importPlan, calib: calibrate,
@@ -547,7 +564,7 @@
             if (d.hsRpdel !== undefined) { const rm = F().rooms.find(q => q.id === sel?.id); rm?.people?.splice(Number(d.hsRpdel), 1); return commit('Personne retirée'); }
             if (d.hsPlace !== undefined) { const p = pane.querySelector('[data-hs-placeres]')._rows[Number(d.hsPlace)]; placeId = Number(p.id) || 0; placeText = p.name + (p.detail ? `, ${p.detail}` : ''); if (name === 'Maison de famille') { name = `Maison de ${p.name}`; $('[data-hs-name]').value = name; } pane.querySelector('[data-hs-placeres]').innerHTML = ''; dirty = true; paintSide(); return; }
         });
-        dlg.addEventListener('dblclick', e => { const b = e.target.closest('[data-hs-floor]'); if (!b) return; const f = H.floors[Number(b.dataset.hsFloor)], n = prompt('Nom de l’étage :', f.name); if (n?.trim()) { f.name = n.trim().slice(0, 60); commit('Étage renommé'); } });
+        dlg.addEventListener('dblclick', e => { const b = e.target.closest('[data-hs-floor]'); if (!b) return; const f = H.floors[Number(b.dataset.hsFloor)]; A().askText({title: 'Renommer l’étage', value: f.name, okLabel: 'Renommer'}).then(n => { if (n?.trim()) { f.name = n.trim().slice(0, 60); commit('Étage renommé'); } }); });
         let tmr = 0;
         pane.addEventListener('input', e => {
             const el = e.target, f = F(), v = el.type === 'checkbox' ? el.checked : el.value;
@@ -560,6 +577,7 @@
             if (el.dataset.hsProle !== undefined) { H.meta.people[Number(el.dataset.hsProle)].role = v; dirty = true; return; }
             if (el.matches('[data-hs-placeq]')) { placeText = el.value; placeId = 0; dirty = true; clearTimeout(tmr); tmr = setTimeout(async () => { const rows = ((await api('board_place_search', {q: el.value.trim()}).catch(() => ({places: []}))).places || []), box = pane.querySelector('[data-hs-placeres]'); box._rows = rows; box.innerHTML = rows.map((p, i) => `<button type="button" class="link-button" data-hs-place="${i}">📍 ${esc(p.name)} <small class="muted">${esc(p.detail || '')}</small></button>`).join(''); }, 250); return; }
             if (el.dataset.hsP && sel) {
+                if (sel.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset.hsP) && !el._geo) return; // la géométrie d'un mur : appliquée une fois la valeur finie (sinon les coins voisins se décrochent en cours de frappe)
                 const k = el.dataset.hsP, o = sel.type === 'wall' ? f.walls.find(q => q.id === sel.id) : sel.type === 'room' ? f.rooms.find(q => q.id === sel.id) : sel.type === 'item' ? f.items.find(q => q.id === sel.id) : sel.type === 'opening' ? f.openings.find(q => q.id === sel.id) : sel.type === 'label' ? f.labels.find(q => q.id === sel.id) : null; if (!o) return;
                 if (sel.type === 'wall' && k === 'len') { const L = wallLen(o), n = Number(v); if (n > 5 && L) { const nb = [o.a[0] + (o.b[0] - o.a[0]) / L * n, o.a[1] + (o.b[1] - o.a[1]) / L * n]; f.walls.forEach(q => { if (q !== o) ['a', 'b'].forEach(kk => { if (q[kk][0] === o.b[0] && q[kk][1] === o.b[1]) q[kk] = [...nb]; }); }); o.b = nb; } }
                 else if (sel.type === 'wall' && ['ang', 'ax', 'ay', 'bx', 'by'].includes(k)) { const n = Number(v); if (v === '' || !Number.isFinite(n)) return; const oa = [...o.a], ob = [...o.b];
@@ -574,7 +592,7 @@
                 later('Réglage'); return;
             }
         });
-        pane.addEventListener('change', () => { if (tmr) { clearTimeout(tmr); tmr = 0; } });
+        pane.addEventListener('change', e => { if (tmr) { clearTimeout(tmr); tmr = 0; } const el = e.target; if (sel?.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset?.hsP)) { el._geo = true; el.dispatchEvent(new Event('input', {bubbles: true})); el._geo = false; } });
         let laterT = 0; const later = label => { render(); clearTimeout(laterT); laterT = setTimeout(() => commit(label), 500); };
         const onKey = e => {
             if (!dlg.open || document.querySelector('dialog[open]:not(.h-hs-dlg)')) return;
@@ -588,7 +606,7 @@
             if ((k === 'delete' || k === 'backspace') && sel) { e.preventDefault(); CMD.del(); return; }
             if (k === 'r' && sel?.type === 'item') { CMD.rot90(); return; }
             const arr = {arrowleft: [-1, 0], arrowright: [1, 0], arrowup: [0, -1], arrowdown: [0, 1]}[k]; if (arr && sel && !view3d && !mod) { e.preventDefault(); const st = e.shiftKey ? (H.grid || 10) : 1; nudge(arr[0] * st, arr[1] * st); return; }
-            if (/^[0-9]$/.test(e.key) && !mod && !num.hidden && (draft?.pts?.length || tool === 'room')) { e.preventDefault(); num.value = e.key; num.focus(); return; } // taper une longueur
+            if (/^[0-9]$/.test(e.key) && !mod && !view3d && !num.hidden && (draft?.pts?.length || tool === 'room')) { e.preventDefault(); num.value = e.key; num.focus(); return; } // taper une longueur
             const t = {v: 'select', h: 'pan', w: 'wall', p: 'zone', d: 'door', f: 'window', m: 'dim', t: 'text', r: 'room'}[k]; if (t && !mod) setTool(t);
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };

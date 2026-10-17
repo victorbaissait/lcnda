@@ -64,6 +64,7 @@ function save_artist_item(PDO $pdo, array $d): array
     artist_ensure($pdo);
     $personId = safe_int($d['person_id'] ?? 0);
     $p = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $p->execute([$personId]); if (!$p->fetchColumn()) { throw new RuntimeException('Personne introuvable.'); }
+    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
     $kind = (string) ($d['kind'] ?? ''); if (!in_array($kind, ARTIST_KINDS, true)) { throw new RuntimeException('Genre d’élément inconnu.'); }
     $data = artist_clean(is_array($d['data'] ?? null) ? $d['data'] : []);
     $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -101,6 +102,7 @@ function save_artist_items(PDO $pdo, array $d): array
 function delete_artist_item(PDO $pdo, array $d): array
 {
     artist_ensure($pdo);
+    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, safe_int($d['person_id'] ?? 0)); }
     $pdo->prepare('DELETE FROM artist_items WHERE id=? AND person_id=?')->execute([safe_int($d['id'] ?? 0), safe_int($d['person_id'] ?? 0)]);
     return ['ok' => true];
 }
@@ -108,6 +110,7 @@ function delete_artist_item(PDO $pdo, array $d): array
 function reorder_artist_items(PDO $pdo, array $d): array
 {
     artist_ensure($pdo);
+    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, safe_int($d['person_id'] ?? 0)); }
     $s = $pdo->prepare('UPDATE artist_items SET sort_order=? WHERE id=? AND person_id=?');
     foreach (array_slice(is_array($d['ids'] ?? null) ? $d['ids'] : [], 0, 2000) as $i => $id) { $s->execute([$i + 1, safe_int($id), safe_int($d['person_id'] ?? 0)]); }
     return ['ok' => true];
@@ -245,6 +248,7 @@ function artist_store_image(PDO $pdo, int $personId, string $bin, string $title,
     if (@file_put_contents(MEDIA_DIR . '/' . $file, $bin) === false) { throw new RuntimeException('Impossible d’enregistrer l’image.'); }
     $pdo->prepare('INSERT INTO media(title, media_type, filename, thumbnail, description) VALUES(?,?,?,?,?)')->execute([mb_substr($title, 0, 300) ?: 'Image', 'image', $file, $file, mb_substr($note, 0, 500)]);
     $mid = (int) $pdo->lastInsertId();
+    if ($personId) { $e = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $e->execute([$personId]); if (!$e->fetchColumn()) { $personId = 0; } }
     if ($personId) {
         $pos = $pdo->prepare("SELECT COALESCE(MAX(position),0)+1 FROM media_links WHERE entity_type='person' AND entity_id=?"); $pos->execute([$personId]);
         $pdo->prepare("INSERT INTO media_links(media_id, entity_type, entity_id, position) VALUES(?,'person',?,?)")->execute([$mid, $personId, (int) $pos->fetchColumn()]);

@@ -71,7 +71,7 @@
     ext.openDiagramKindsEditor = ({onSave} = {}) => {
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-dk-dlg';
         dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">DIAGRAMMES</span><h2>⚙️ Ranger les types</h2></div><button type="button" class="icon-button" data-x>×</button></div><div class="h-dk-body">${kindsHelp}${kindsEditorHtml()}</div><div class="modal-actions"><button type="button" class="button secondary" data-dk-reset>Remettre comme au départ</button><span class="spacer"></span><button type="button" class="button secondary" data-x>Fermer</button><button type="button" class="button" data-dk-save>Enregistrer</button></div>`;
-        (document.querySelector('dialog[open]:last-of-type') || document.body).appendChild(dlg);
+        document.body.appendChild(dlg); // pas dans la galerie : son paint() remplace son contenu (« Tout remettre ») et ferait disparaître l'éditeur
         bindKindsEditor(dlg, () => { onSave?.(); });
         dlg.addEventListener('click', e => { if (e.target.closest('[data-x]') || e.target.closest('[data-dk-save]')) dlg.close(); });
         dlg.addEventListener('close', () => dlg.remove()); dlg.showModal();
@@ -108,7 +108,7 @@
         if (PEOPLE_TPL.has(id)) {
             if (!people) return '<p class="muted">Ce dessin a besoin d’une liste de personnes (source « Personnes »).</p>';
             if (id === 'timeline:lives') {
-                const rows = people.map(r => ({name: cell(r, 'name'), roles: cell(r, 'gender') || 'Personne', start: String(firstYear(cell(r, 'birth')) ?? ''), end: String(firstYear(cell(r, 'death')) ?? '')})).filter(r => r.start).map(r => r.end || Number(r.start) > new Date().getFullYear() - 100 ? r : {...r, end: r.start}) // décès inconnu et naissance ancienne : pas de barre jusqu'à aujourd'hui.sort((a, b) => a.start - b.start).slice(0, 80);
+                const rows = people.map(r => ({name: cell(r, 'name'), roles: cell(r, 'gender') || 'Personne', start: String(firstYear(cell(r, 'birth')) ?? ''), end: String(firstYear(cell(r, 'death')) ?? '')})).filter(r => r.start).map(r => r.end || Number(r.start) > new Date().getFullYear() - 100 ? r : {...r, end: r.start}).sort((a, b) => a.start - b.start).slice(0, 80); // décès inconnu et naissance ancienne : pas de barre jusqu'à aujourd'hui
                 const roles = [...new Set(rows.map(r => r.roles))].map((role, i) => ({role, color: /femme|female/i.test(role) ? '#e15759' : /homme|male/i.test(role) ? '#4e79a7' : PALETTE[i % PALETTE.length]}));
                 Object.assign(spec, {rows, roles, events: []}); spec.o.order = 'start';
             } else if (id === 'chrono') {
@@ -262,7 +262,7 @@
             function drawOverlay() { const k = Math.min(1, 520 / img.naturalWidth); cv.width = Math.round(img.naturalWidth * k); cv.height = Math.round(img.naturalHeight * k); const g = cv.getContext('2d'); g.drawImage(img, 0, 0, cv.width, cv.height); if (A0.boxes) { const s = cv.width / A0.W; g.lineWidth = 2; A0.boxes.slice(0, 60).forEach((b, i) => { g.strokeStyle = '#e02020'; g.strokeRect(b.x0 * s, b.y0 * s, (b.x1 - b.x0 + 1) * s, (b.y1 - b.y0 + 1) * s); g.fillStyle = '#e02020'; g.font = '12px sans-serif'; g.fillText(String(i + 1), b.x0 * s + 2, b.y0 * s + 12); }); } }
             const collect = () => [...dlg.querySelectorAll('tr[data-i]')].map(tr => ({label: tr.querySelector('[data-f=label]').value.trim() || '?', value: Number(tr.querySelector('[data-f=value]').value) || 0, color: tr.querySelector('[data-f=color]').value}));
             dlg.querySelector('[data-dgz-mode]').addEventListener('change', e => { mode = e.target.value; A0 = analyse(img, mode); paint(); });
-            dlg.querySelector('[data-dgz-scale]').addEventListener('change', e => { const cur = collect(); scale = Number(e.target.value) || 100; A0.rows = cur.map((r, i) => ({...r, value: (A0.rows[i]?.value ?? r.value)})); paint(); });
+            dlg.querySelector('[data-dgz-scale]').addEventListener('change', e => { const cur = collect(); A0.rows = cur.map(r => ({...r, value: r.value * 100 / scale})); scale = Number(e.target.value) || 100; paint(); /* les valeurs tapées sont gardées (ramenées à l'ancienne échelle), comme pour ＋ / × */ });
             dlg.addEventListener('click', async e => {
                 if (e.target.closest('[data-x]')) { dlg.close(); return; }
                 if (e.target.closest('[data-del]')) { const cur = collect(); const i = Number(e.target.closest('tr').dataset.i); A0.rows = cur.map(r => ({...r, value: r.value * 100 / scale})); A0.rows.splice(i, 1); A0.boxes?.splice(i, 1); paint(); return; }

@@ -3,7 +3,7 @@
  */
 (() => {
     'use strict';
-    const {$, $$, card, empty, escapeHtml, persistUiState, personName, setModule, state} = window.LCNDA_APP;
+    const {$, $$, card, empty, escapeHtml, persistUiState, personName, setModule, state, toast} = window.LCNDA_APP;
     function archiveRoomSettings(){
         try{return {sound:true,edit:false,bed:true,lamp:true,photoLab:'right',activeRoom:'archive',positions:{},...JSON.parse(localStorage.getItem('genealogie-archive-room')||'{}')}}catch(_){return {sound:true,edit:false,bed:true,lamp:true,photoLab:'right',activeRoom:'archive',positions:{}};}
     }
@@ -241,9 +241,9 @@
             const outline=new THREE.BoxHelper(new THREE.Object3D(),0x0066cc);outline.visible=false;scene.add(outline);
             const select=g=>{selected=g;if(g){outline.setFromObject(g);outline.visible=true;}else outline.visible=false;dialog.querySelectorAll('[data-room-piece]').forEach(r=>r.classList.toggle('is-on',r.dataset.roomPiece===g?.userData.piece.id));renderer.render(scene,camera);};
             dialog._archiveRoomPieces={list:()=>pieces.map(g=>g.userData.piece),select:id=>select(pieces.find(g=>g.userData.piece.id===id)||null),
-                rotate:id=>{const g=pieces.find(x=>x.userData.piece.id===id);if(!g||g.userData.piece.wall)return;g.rotation.y+=Math.PI/2;savePiece(g);select(g);},
+                rotate:id=>{const g=pieces.find(x=>x.userData.piece.id===id);if(!g||g.userData.piece.wall)return;if(lockedPiece(g)){toast('Élément verrouillé : déverrouille-le (🔒) pour le tourner.');return;}g.rotation.y+=Math.PI/2;savePiece(g);select(g);},
                 toggle:(id,on)=>{const g=pieces.find(x=>x.userData.piece.id===id);if(!g)return;g.visible=on;const settings=archiveRoomSettings();settings.layout={...(settings.layout||{}),[id]:{...((settings.layout||{})[id]||{}),hide:!on}};saveArchiveRoomSettings(settings);select(on?g:null);},
-                home:id=>{const g=pieces.find(x=>x.userData.piece.id===id);if(!g)return;g.position.x=g.userData.piece.home.x;g.position.z=g.userData.piece.home.z;g.rotation.y=0;savePiece(g);select(g);}};
+                home:id=>{const g=pieces.find(x=>x.userData.piece.id===id);if(!g)return;if(lockedPiece(g)){toast('Élément verrouillé : déverrouille-le (🔒) pour le remettre en place.');return;}g.position.x=g.userData.piece.home.x;g.position.z=g.userData.piece.home.z;g.rotation.y=0;savePiece(g);select(g);}};
             renderer.domElement.addEventListener('keydown',event=>{if(!editing()||!selected)return;if(event.key==='r'||event.key==='R'){event.preventDefault();dialog._archiveRoomPieces.rotate(selected.userData.piece.id);}});
             const lockedPiece=g=>!!((archiveRoomSettings().layout||{})[g.userData.piece.id]?.lock);
             renderer.domElement.addEventListener('pointerdown',event=>{if(editing()&&event.button===0){const at=pieceAt(event);if(at&&lockedPiece(at.g)){select(at.g);return;}if(at){const g=at.g;event.stopImmediatePropagation();held={g,sx:event.clientX,sy:event.clientY,x:g.position.x,z:g.position.z,moved:false};select(g);renderer.domElement.setPointerCapture?.(event.pointerId);return;}select(null);}},true);
@@ -337,9 +337,9 @@
                 event.preventDefault();object.setPointerCapture(event.pointerId);
                 const rect=stage.getBoundingClientRect(),id=object.dataset.roomObject;
                 const moveObject=ev=>{const settings=archiveRoomSettings(),pos={left:Math.max(1,Math.min(92,(ev.clientX-rect.left)/rect.width*100)),top:Math.max(1,Math.min(88,(ev.clientY-rect.top)/rect.height*100))};settings.positions={...(settings.positions||{}),[id]:pos};saveArchiveRoomSettings(settings);object.style.left=`${pos.left}%`;object.style.top=`${pos.top}%`;object.style.left=`${settings.positions[id].left}%`;object.style.top=`${settings.positions[id].top}%`;};
-                const sx=event.clientX,sy=event.clientY;let movedObj=false;
+                const sx=event.clientX,sy=event.clientY,hit=event.target.closest('[data-room-module],[data-room-binder-index]')||object;let movedObj=false; // l'élément réellement cliqué (classeur précis), pas le premier de l'objet
                 const moveGuard=ev=>{if(!movedObj&&Math.abs(ev.clientX-sx)+Math.abs(ev.clientY-sy)<=4)return;movedObj=true;moveObject(ev);};
-                const stop=()=>{object.removeEventListener('pointermove',moveGuard);object.removeEventListener('pointerup',stop);if(!movedObj){dialog._roomPass=true;try{(object.matches('[data-room-module],[data-room-binder-index]')?object:object.querySelector('[data-room-module],[data-room-binder-index]'))?.click();}finally{dialog._roomPass=false;}}};
+                const stop=()=>{object.removeEventListener('pointermove',moveGuard);object.removeEventListener('pointerup',stop);if(!movedObj){dialog._roomPass=true;try{(hit.matches('[data-room-module],[data-room-binder-index]')?hit:hit.querySelector('[data-room-module],[data-room-binder-index]'))?.click();}finally{dialog._roomPass=false;}}};
                 object.addEventListener('pointermove',moveGuard);
                 object.addEventListener('pointerup',stop);
             });

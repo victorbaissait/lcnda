@@ -343,7 +343,41 @@
 
     /** Crayon + poubelle, comme dans le bloc Événements. */
     const tools = (editAttr, deleteAttr, what) => `<span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ' + what, editAttr)}${A().actionButton('delete', 'Supprimer ' + what, deleteAttr)}</span>`;
-    setTimeout(() => { ext.miniMap = miniMap; ext.uploadFiles = uploadFiles; ext.openDialog = openDialog; ext.tools = tools; ext.refreshView = refreshView; ext.mediaEditorHtml = mediaEditorHtml; ext.bindMediaEditor = bindMediaEditor; ext.uploadMediaEditor = uploadMediaEditor; ext.placeField = placeField; ext.thumbs = thumbs; }, 0);
+    /** 🖼️ Choisir une image de l'app (le même choix partout : retouche, transcription d'actes, signatures…) : les images tout de suite,
+     *  en vignettes ; recherche par titre, cote, date, nom du fichier ou personne rattachée ; filtres ; ou une image de l'ordinateur.
+     *  Renvoie {id, filename, title, transcription…} ou null. */
+    function pickImage({eyebrow = 'MÉDIAS', title = 'Choisir une image', intro = '', filter = '', filters = true, allowImport = true, extra = ''} = {}) {
+        return new Promise(resolve => {
+            let done = false, items = [], timer = 0, seq = 0;
+            const finish = v => { if (done) return; done = true; resolve(v); dlg.close(); };
+            const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
+            dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+                <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher : titre, cote, date, nom d’une personne…" autocomplete="off">${filters ? `<select data-f aria-label="Filtre">${[['', 'Toutes les images'], ['notr', 'Pas encore transcrites'], ['tr', 'Déjà transcrites'], ['sig', 'Avec une signature repérée']].map(([k, l]) => `<option value="${k}" ${k === filter ? 'selected' : ''}>${l}</option>`).join('')}</select>` : ''}${extra}${allowImport ? '<label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-file hidden>📥 Image de l’ordinateur</label>' : ''}</div>
+                ${intro ? `<p class="muted small">${intro}</p>` : ''}<div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
+            document.body.append(dlg);
+            dlg.addEventListener('close', () => { dlg.remove(); if (!done) { done = true; resolve(null); } });
+            dlg.querySelector('[data-x]').addEventListener('click', () => dlg.close());
+            const grid = dlg.querySelector('[data-grid]'), q = dlg.querySelector('[data-q]'), f = dlg.querySelector('[data-f]');
+            const load = async () => { const n = ++seq;
+                try { items = (await A().api('image_pick', {q: q.value.trim(), filter: f?.value || ''})).media || []; } catch (e) { if (n === seq) grid.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; }
+                if (n !== seq) return;
+                grid.innerHTML = items.length ? items.map((m, i) => `<button type="button" class="h-rt-pick-item" data-i="${i}" title="${esc(m.title || m.filename)}"><img loading="lazy" alt="" src="media/${encodeURIComponent(m.thumbnail || m.filename)}">${Number(m.has_tr) ? '<b class="h-pick-badge" title="Déjà transcrite">📝</b>' : ''}<span>${esc(m.title || m.filename)}</span>${m.people || m.date_text ? `<small>${esc([m.people, m.date_text].filter(Boolean).join(' · '))}</small>` : ''}</button>`).join('')
+                    : `<p class="muted">${q.value.trim() || f?.value ? 'Aucune image ne correspond.' : 'Aucune image dans l’app pour l’instant.'}${allowImport ? ' Prends-en une sur l’ordinateur (« 📥 Image de l’ordinateur »).' : ''}</p>`; };
+            q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
+            q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (items.length === 1) finish(items[0]); } });
+            f?.addEventListener('change', load);
+            grid.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) finish(items[+b.dataset.i]); });
+            dlg.querySelector('[data-file]')?.addEventListener('change', async e => { const file = e.target.files?.[0]; if (!file) return;
+                const fd = new FormData(); fd.append('file', file); fd.append('kind', 'image'); fd.append('title', file.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
+                grid.innerHTML = '<div class="loading-block">Envoi de l’image…</div>';
+                try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible.');
+                    finish({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: file.name.replace(/\.[^.]+$/, ''), transcription: '', imported: true}); }
+                catch (err) { toast(err.message, 'error'); load(); } });
+            dlg.showModal(); q.focus(); load();
+            dlg._pickFinish = finish; // pour les boutons ajoutés (« extra »)
+        });
+    }
+    setTimeout(() => { ext.miniMap = miniMap; ext.uploadFiles = uploadFiles; ext.openDialog = openDialog; ext.tools = tools; ext.refreshView = refreshView; ext.mediaEditorHtml = mediaEditorHtml; ext.bindMediaEditor = bindMediaEditor; ext.uploadMediaEditor = uploadMediaEditor; ext.placeField = placeField; ext.thumbs = thumbs; ext.pickImage = pickImage; }, 0);
     const finite = v => v !== null && v !== '' && v !== undefined && Number.isFinite(Number(v));
 
     /* ═══════════════════════ 🚢 DÉPARTS : VOYAGES ET ÉMIGRATION ═══════════════════════ */
