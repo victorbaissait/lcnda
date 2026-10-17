@@ -1,0 +1,99 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.lab{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+/* ── le champ ── */
+.pp{position:relative}
+.pp-box{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;min-height:44px;padding:0 10px}
+.pp-box:focus-within{outline:3px solid rgba(5,93,255,.35);outline-offset:0}
+.pp-ico{font-size:15px;opacity:.6}
+.pp-box input{flex:1;border:0;outline:0;font:inherit;font-size:15px;min-width:60px;background:transparent;padding:10px 0}
+.pp-kbd{font-size:11px;color:#888;white-space:nowrap}
+/* ── la liste ── */
+.pp-list{margin-top:6px;border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);max-height:none}
+.pp-head{display:flex;justify-content:space-between;padding:7px 12px;font-size:12px;color:#666;border-bottom:1px solid #e3e5ea}
+.pp-item{display:flex;align-items:center;gap:11px;padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f1f4}
+.pp-item.on{background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff}
+.pp-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 13px system-ui;color:#fff;flex:none;background-size:cover;background-position:center}
+.pp-av.m{background:#3c78d8}.pp-av.f{background:#d9488f}.pp-av.u{background:#8a8f99}.pp-av.a{background:#e9a23b}
+.pp-txt{flex:1;min-width:0}
+.pp-name{font-weight:700;font-size:14.5px}.pp-name mark{background:#fff1a8;color:inherit;padding:0}
+.pp-meta{font-size:12.5px;color:#666;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-badge{font:700 11px/1 system-ui;border:1.5px solid #111;padding:3px 6px;white-space:nowrap}
+.pp-badge.sosa{background:#055dff;color:#fff;border-color:#055dff}
+.pp-foot{display:flex;flex-direction:column}
+.pp-act{display:flex;align-items:center;gap:9px;padding:9px 12px;font-weight:700;font-size:13.5px;border-top:1px solid #e3e5ea;color:#055dff}
+.pp-act.muted{color:#555;font-weight:600}
+.pp-hint{font-size:11.5px;color:#888;padding:7px 12px;border-top:1px solid #e3e5ea;background:#fafbfc}
+/* ── choisi ── */
+.pp-chip{display:inline-flex;align-items:center;gap:9px;border:2px solid #111;background:#fff;padding:5px 6px 5px 5px;box-shadow:3px 3px 0 rgba(5,93,255,.25);max-width:100%}
+.pp-chip .pp-av{width:30px;height:30px;font-size:12px}
+.pp-chip b{font-size:14.5px}.pp-chip small{color:#666;font-size:12.5px}
+.pp-chip .x{border:0;background:none;font-size:18px;cursor:pointer;padding:0 6px;color:#555}
+.pp-chip .go{border:1.5px solid #111;background:#fff;font-size:12px;padding:2px 6px;cursor:pointer}
+.pp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.pp-chips .pp-chip{box-shadow:none;padding:3px 4px 3px 3px}.pp-chips .pp-av{width:24px;height:24px;font-size:10px}
+.pp-empty{padding:14px 12px;font-size:13.5px;color:#555}
+.note{font-size:12.5px;color:#555;margin-top:12px;line-height:1.5}
+
+.zone{border:2px dashed #c9ccd3;padding:10px 12px 12px;margin-top:12px;transition:.15s}
+.zone.prim{border-color:#055dff;background:#f5f8ff}
+.zone-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.zone-h b{font-size:13.5px}.zone-h small{color:#777;font-size:12px}
+.main-card{display:flex;align-items:center;gap:12px;border:2px solid #111;background:#fff;padding:10px 12px;box-shadow:5px 5px 0 rgba(5,93,255,.3)}
+.main-card .pp-av{width:46px;height:46px;font-size:16px}
+.main-card .who{flex:1}.main-card .who b{font-size:16.5px}.main-card .who div{font-size:12.5px;color:#666;margin-top:2px}
+.star{font:700 11px/1 system-ui;background:#111;color:#fff;padding:4px 7px;letter-spacing:.04em}
+.btn-s{border:1.5px solid #111;background:#fff;font:600 12px system-ui;padding:4px 8px;cursor:pointer}
+.chip2{display:inline-flex;align-items:center;gap:7px;border:2px solid #111;background:#fff;padding:3px 4px 3px 3px}
+.chip2 .pp-av{width:26px;height:26px;font-size:10.5px}
+.chip2 b{font-size:13.5px}.chip2 small{color:#666;font-size:12px}
+.chip2 .role{font-size:11.5px;border:1px solid #bbb;padding:1px 5px;color:#444;background:#fafafa}
+.chip2 .tg{border:0;background:none;cursor:pointer;font-size:14px;padding:0 3px;color:#e1a500}
+.chip2 .tg.off{color:#aaa}
+.chip2 .x{border:0;background:none;font-size:16px;cursor:pointer;padding:0 4px;color:#555}
+.zone.prim .chip2{border-color:#055dff;box-shadow:2px 2px 0 rgba(5,93,255,.3)}
+.chips2{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.zone .pp-box{min-height:38px;border-width:1.5px}.zone .pp-box input{font-size:14px;padding:7px 0}
+.drag{font-size:11.5px;color:#055dff;margin-top:6px}
+.view{border:2px solid #111;background:#fff;padding:14px 16px}
+.vrow{display:flex;align-items:baseline;gap:10px;margin-top:10px;flex-wrap:wrap}
+.vrow>span.lbl{font:700 11px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#055dff;min-width:120px}
+.vrow.sec>span.lbl{color:#777}
+.vchip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #055dff;padding:2px 8px 2px 2px;font-weight:700;font-size:13.5px;background:#f5f8ff}
+.vrow.sec .vchip{border-color:#bbb;background:#fff;font-weight:600}
+.vchip .pp-av{width:22px;height:22px;font-size:9.5px}
+.vchip small{font-weight:500;color:#666}
+</style></head><body>
+<h1>👥 Personne principale, personnes principales et secondaires</h1>
+<p class="sub">Même champ et même liste que le modèle validé, rangés en trois niveaux (enquêtes, actes, recensements, tableaux… partout où il y a des rôles).</p>
+<div class="grid">
+<div class="case"><span class="tag">1 · Dans la fenêtre (on modifie)</span><h3>Personnes de l’enquête</h3>
+<span class="lab">⭐ Personne principale <small style="font-weight:400;color:#777">— une seule : l’enquête est rangée dans sa fiche</small></span>
+<div class="main-card"><span class="pp-av m">JM</span><div class="who"><b>Jean MARTIN</b><div>° 28 août 1922 Tulle · † 2010 Brive · Sosa 2</div></div><span class="star">★ PRINCIPALE</span><button class="btn-s">↗ Fiche</button><button class="btn-s">Changer</button></div>
+
+<div class="zone prim"><div class="zone-h"><b>★ Autres personnes principales</b><small>au cœur de la recherche</small></div>
+<div class="chips2"><span class="chip2"><span class="pp-av f">LB</span><b>Louise BORIE</b><small>1922</small><span class="role">épouse</span><button class="tg" title="Passer en secondaire">★</button><button class="x">×</button></span></div>
+<div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="＋ Ajouter une personne principale…"></div></div>
+
+<div class="zone"><div class="zone-h"><b>☆ Personnes secondaires</b><small>témoins, voisins, parrains, pistes…</small></div>
+<div class="chips2"><span class="chip2"><span class="pp-av m">PP</span><b>Pierre PEYRE</b><small>1893</small><span class="role">témoin ▾</span><button class="tg off" title="Passer en principale">☆</button><button class="x">×</button></span><span class="chip2"><span class="pp-av m">AB</span><b>Antoine BORIE</b><span class="role">parrain ▾</span><button class="tg off">☆</button><button class="x">×</button></span><span class="chip2"><span class="pp-av u">?</span><b>« le curé Lafon »</b><small>sans fiche</small><button class="tg off">☆</button><button class="x">×</button></span></div>
+<div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="＋ Ajouter une personne secondaire…"></div></div>
+<p class="note">★ / ☆ fait passer une personne de « principale » à « secondaire » (ou on la glisse d’une zone à l’autre). Le petit rôle (« témoin ▾ ») est facultatif : une liste (témoin, parrain, marraine, voisin, employeur, officier, déclarant…) ou un mot libre. « Changer » sur la principale : l’ancienne descend dans les principales, rien n’est perdu.</p>
+</div>
+
+<div class="case"><span class="tag">2 · À l’affichage (fiche de l’enquête, acte…)</span><h3>Lecture rapide</h3>
+<div class="view">
+<div style="display:flex;align-items:center;gap:12px"><span class="pp-av m" style="width:42px;height:42px">JM</span><div><b style="font-size:17px">Jean MARTIN</b> <span class="star" style="margin-left:6px">★ PRINCIPALE</span><div style="font-size:12.5px;color:#666;margin-top:3px">° 1922 Tulle · † 2010 Brive · Sosa 2</div></div></div>
+<div class="vrow"><span class="lbl">★ Principales</span><span class="vchip"><span class="pp-av f">LB</span>Louise BORIE <small>épouse</small></span></div>
+<div class="vrow sec"><span class="lbl">☆ Secondaires</span><span class="vchip"><span class="pp-av m">PP</span>Pierre PEYRE <small>témoin</small></span><span class="vchip"><span class="pp-av m">AB</span>Antoine BORIE <small>parrain</small></span><span class="vchip"><span class="pp-av u">?</span>le curé Lafon <small>sans fiche</small></span></div>
+</div>
+<p class="note">Chaque pastille ouvre la fiche. Les principales sont en bleu, les secondaires en gris : on voit tout de suite qui compte le plus. Une personne « sans fiche » (nom gardé tel quel) est grisée avec « ? » ; un clic propose « ＋ Créer sa fiche ».</p>
+<p class="note"><b>Quand l’outil n’a pas de rôles</b> (faire-part, une seule personne), on garde le modèle simple déjà validé.</p>
+</div>
+</div></body></html>
