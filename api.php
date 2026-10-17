@@ -327,6 +327,7 @@ try {
         'saint_stats' => json_response(saint_stats_data($pdo)),
         'boards' => json_response(['boards' => boards_list($pdo, $_GET)]),
         'topic_sheets' => json_response(['sheets' => topic_sheets_list($pdo)]),
+        'periodicals' => json_response(periodicals_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
         'layout_docs' => json_response(['docs' => layout_docs_list($pdo)]),
         'layout_doc' => json_response(layout_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
@@ -9180,6 +9181,11 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_booklet_design' => save_booklet_design($pdo,$data),
             'save_board' => save_board($pdo,$data),
             'save_topic_sheet' => save_topic_sheet($pdo,$data),
+            'save_periodical' => save_periodical($pdo,$data),
+            'save_periodical_issue' => save_periodical_issue($pdo,$data),
+            'save_periodical_article' => save_periodical_article($pdo,$data),
+            'delete_periodical_item' => delete_periodical_item($pdo,$data),
+            'reorder_periodical_articles' => reorder_periodical_articles($pdo,$data),
             'save_layout_doc' => save_layout_doc($pdo,$data),
             'delete_layout_doc' => delete_layout_doc($pdo,$data),
             'save_montage_project' => save_montage_project($pdo,$data),
@@ -9315,7 +9321,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad'];
 }
 
 function normalize_label_color(string $color): string

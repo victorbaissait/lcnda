@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=206">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=152">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=153">
     <link rel="stylesheet" href="assets/css/layout.css?v=9">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1094,7 +1094,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=356" defer></script>
+<script src="assets/js/app.js?v=357" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
@@ -1131,6 +1131,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-retouch-simple.js?v=1" defer></script>
 <script src="assets/js/heritage-fiches.js?v=7" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=1" defer></script>
+<script src="assets/js/heritage-periodicals.js?v=1" defer></script>
 <script src="assets/js/museum-viewer.js?v=7" defer></script>
 <script src="assets/js/heritage-museum.js?v=10" defer></script>
 <script>

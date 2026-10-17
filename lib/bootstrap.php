@@ -13,6 +13,7 @@ require_once __DIR__ . '/family_booklets.php';
 require_once __DIR__ . '/pets.php';
 require_once __DIR__ . '/boards.php'; // tableaux (façon Freeform) // livrets de famille
 require_once __DIR__ . '/topic_sheets.php'; // 📒 Fiches sur un sujet
+require_once __DIR__ . '/periodicals.php';  // 📰 Revues et magazines, ✉️ petites annonces
 require_once __DIR__ . '/layout_docs.php'; // 📐 Atelier de mise en page
 require_once __DIR__ . '/montage_projects.php'; // 🎬 Projets de montage vidéo
 require_once __DIR__ . '/retouch_projects.php'; // 🎚️ Projets de retouche
