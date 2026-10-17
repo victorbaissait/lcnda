@@ -1,8 +1,8 @@
-/* LCNDA — 🎞️ Diaporama et récit : des photos (avec un lent mouvement de caméra), des titres, des cartes où se dessine un
+/* LCNDA — 🎞️ Présentation et diaporama : des photos (avec un lent mouvement de caméra), des titres, des cartes où se dessine un
  * trajet (une migration, les lieux d'une vie), une voix enregistrée sur chaque diapositive, une musique qui baisse quand
  * la voix parle ; tout se lit ici en plein écran et s'exporte en vidéo. « ✨ Récit d'une personne » fabrique tout seul le
  * diaporama d'une vie (photos, lieux, carte du trajet, biographie). Plus simple que le montage vidéo.
- * Serveur : lib/slideshows.php. Listes → Outils de modification → « 🎞️ Diaporama et récit ».
+ * Serveur : lib/slideshows.php. Listes → Outils de modification → « 🎞️ Présentation et diaporama ».
  * « ＋ Nouveau » propose aussi la présentation façon Keynote (heritage-keynote.js), enregistrée dans la même liste.
  */
 (() => {
@@ -308,7 +308,7 @@
         }
         async function save() {
             name = $('[data-ss-name]').value.trim() || 'Mon diaporama'; status('Enregistrement…');
-            try { const r = await post('save_slideshow', {id, name, show}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Diaporama enregistré (Listes → Outils de modification → Diaporama et récit).'); ctx.onSaved?.(id); } catch (e) { status(''); toast(e.message, 'error'); }
+            try { const r = await post('save_slideshow', {id, name, show}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Diaporama enregistré (Listes → Outils de modification → Présentation et diaporama).'); ctx.onSaved?.(id); } catch (e) { status(''); toast(e.message, 'error'); }
         }
         function close() { if (dirty && !confirm('Fermer sans enregistrer le diaporama ?')) return; playing = false; cancelAnimationFrame(raf); stopAudio(); recording?.stop(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         /* ─── événements ─── */
@@ -370,12 +370,12 @@
     function chooseKind(again) {
         if (!ext.newPresentation) return open({onSaved: again, onClose: again});
         let last = 'slideshow'; try { last = localStorage.getItem(KIND_KEY) === 'keynote' ? 'keynote' : 'slideshow'; } catch (_) {}
-        ext.openDialog({eyebrow: 'NOUVEAU', title: 'Un diaporama ou une présentation ?', submitLabel: 'Commencer', wide: true,
+        ext.openDialog({eyebrow: 'NOUVEAU', title: 'Une présentation ou un diaporama ?', submitLabel: 'Commencer', wide: true,
             body: `<div class="kn-choice"><label class="kn-choice-card"><input type="radio" name="ss_kind" value="slideshow" ${last === 'slideshow' ? 'checked' : ''}><span class="kn-cc-ico">🎞️</span><b>Diaporama</b><span>Des photos qui défilent avec un lent mouvement de caméra, des titres, des cartes où se dessine un trajet, ta voix sur chaque photo, une musique. Simple, et s’exporte en vidéo.</span></label>
                 <label class="kn-choice-card"><input type="radio" name="ss_kind" value="keynote" ${last === 'keynote' ? 'checked' : ''}><span class="kn-cc-ico">🎤</span><b>Présentation (façon Keynote)</b><span>Des diapositives libres : textes, photos, formes, tableaux, graphiques, fiches et petits arbres de la généalogie ; thèmes, animations, transitions, mode présentateur avec notes. Importe PowerPoint, OpenDocument, PDF, images, texte.</span></label></div>`,
             onSubmit: f => { const k = f.elements.ss_kind?.value === 'keynote' ? 'keynote' : 'slideshow'; try { localStorage.setItem(KIND_KEY, k); } catch (_) {} if (k === 'keynote') ext.newPresentation({onSaved: again, onClose: again}); else open({onSaved: again, onClose: again}); }});
     }
-    ext.editToolsExtra.push({key: 'slideshow', icon: '🎞️', label: 'Diaporama et récit', what: 'diaporama ou de présentation',
+    ext.editToolsExtra.push({key: 'slideshow', icon: '🎞️', label: 'Présentation et diaporama', what: 'présentation ou de diaporama',
         load: async () => ((await api('slideshows')).items || []).map(r => ({id: r.id, name: r.name, date: r.updated_at, thumb: r.cover ? `<img src="${esc(mediaUrl(r.cover))}" alt="">` : `<span class="h-et-ico">${r.mode === 'keynote' ? '🎤' : '🎞️'}</span>`, info: `${r.mode === 'keynote' ? '🎤 Présentation' : '🎞️ Diaporama'} · ${r.slides} diapositive${r.slides > 1 ? 's' : ''}${r.mode === 'keynote' ? '' : ` · ${fmt(r.duration)}`}`})),
         open: (id, again) => open({id, onSaved: again, onClose: again}),
         create: again => chooseKind(again),

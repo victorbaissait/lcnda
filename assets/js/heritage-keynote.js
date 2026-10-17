@@ -1,4 +1,4 @@
-/* LCNDA — 🎤 Présentation (façon Keynote) : l'autre sorte de « 🎞️ Diaporama et récit ». Des diapositives où l'on pose
+/* LCNDA — 🎤 Présentation (façon Keynote) : l'autre sorte de « 🎞️ Présentation et diaporama ». Des diapositives où l'on pose
  * librement des objets : textes riches, images (recadrées, dans une forme), formes, tableaux, graphiques (Mes diagrammes),
  * fiches de la généalogie (carte d'une personne, portrait, petit arbre, frise de sa vie), vidéos et sons des médias.
  * Thèmes et dispositions (titre, titre et texte, photo pleine page, deux colonnes, citation…), fonds (couleur, dégradé,
@@ -1062,7 +1062,7 @@
         async function save() {
             if (editing) stopEdit();
             name = $('[data-kn-name]').value.trim() || 'Ma présentation'; status('Enregistrement…');
-            try { const r = await post('save_slideshow', {id, name, show: forSave()}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Présentation enregistrée (Listes → Outils de modification → 🎞️ Diaporama et récit).'); ctx.onSaved?.(id); }
+            try { const r = await post('save_slideshow', {id, name, show: forSave()}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Présentation enregistrée (Listes → Outils de modification → 🎞️ Présentation et diaporama).'); ctx.onSaved?.(id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
         function close() { if (editing) stopEdit(); if (dirty && !confirm('Fermer sans enregistrer la présentation ?')) return; closed = true; ro.disconnect(); docAc.abort(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
