@@ -14,6 +14,8 @@ Chaque fois qu'un outil (existant ou nouveau) demande de choisir une ou plusieur
 
 ## Choisir un lieu, et toute autre chose : même modèle (validé)
 
+> **STANDARD OBLIGATOIRE** (validé par l'utilisateur) : personnes, lieux et tout le reste (sources, médias, enquêtes, battues, étiquettes, maisons, revues, employeurs, recensements, événements…) se choisissent **toujours** avec ce même menu de recherche. Tout nouvel outil qui fait choisir quelque chose dans la base l'utilise tel quel, sans variante ni champ fait à la main.
+
 Maquette : `docs/design/choix-lieux-et-autres.html`. Même champ, même liste, même pastille, mêmes touches que pour les personnes ; seuls le symbole de gauche et la ligne grise changent.
 
 - **Lieux** : icône 📍 dans le champ. Liste rangée en groupes : « Dans ta généalogie » (repère bleu plein + badge « N événements »), « Communes de France (pas encore dans ta base) » (repère blanc + badge « Commune »), puis « Villes du monde » (repère blanc + pays). Chaque ligne : nom (lettres tapées surlignées), « Département (n°) · Région · Pays » ou « Région · Pays », population, ancien nom si connu.
