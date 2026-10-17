@@ -550,7 +550,26 @@
     const fontList = () => { const mine = readJ(FONTS_KEY, []); return [...new Set([...(Array.isArray(mine) ? mine : []).map(fontOk).filter(Boolean), ...(localFonts || []), ...BASE_FONTS])]; };
     async function loadLocalFonts() {
         if (typeof window.queryLocalFonts !== 'function') { const n = ((await A().askText({title: 'Police de l’ordinateur', message: 'Ce navigateur ne sait pas lister les polices : tape le nom exact d’une police installée (ex. Garamond) :', okLabel: 'Ajouter'})) || '').trim(); if (!n) return false; const mine = readJ(FONTS_KEY, []); writeJ(FONTS_KEY, [...new Set([fontOk(n), ...(Array.isArray(mine) ? mine : [])])].slice(0, 200)); return true; }
-        try { localFonts = [...new Set((await window.queryLocalFonts()).map(f => f.family))].sort((a, b) => a.localeCompare(b, 'fr')); toast(`${localFonts.length} polices de l’ordinateur ajoutées à la liste.`); return true; } catch (_) { toast('Accès aux polices refusé.', 'error'); return false; }
+        try { const all = await Promise.race([window.queryLocalFonts(), new Promise((_, no) => setTimeout(() => no(new Error('lent')), 8000))]); localFonts = [...new Set(all.map(f => f.family))].sort((a, b) => a.localeCompare(b, 'fr')); if (!localFonts.length) { toast('L’ordinateur n’a donné aucune police : tape son nom dans la fenêtre.', 'error'); localFonts = null; } return true; } catch (_) { toast('Les polices de l’ordinateur ne sont pas lisibles ici : tape le nom d’une police dans la fenêtre.', 'error'); return true; }
+    }
+    /** 🖥 choisir une police (celles de l'ordinateur en tête), vue dans sa propre forme ; resolve({font, to: 'title' | 'body' | 'sel'}) */
+    function pickFont(hasSel) {
+        return new Promise(res => { let done = false, chosen = '';
+            const all = () => [...new Set([...(localFonts || []), ...fontList()])];
+            ext.openDialog({eyebrow: 'PRÉSENTATION', title: '🖥 Choisir une police', submitLabel: 'Pour les titres', wide: true,
+                body: `<p class="muted">${localFonts ? `${localFonts.length} polices de cet ordinateur, puis celles de l’app.` : 'Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée.'} Clique sur une police, puis dis où elle va.</p>
+                    <input type="search" data-kf-q placeholder="Chercher une police, ou taper son nom…" autocomplete="off" style="width:100%">
+                    <div class="kn-fontpick" data-kf-list></div><p class="kn-fontprev" data-kf-prev>Choisis une police</p>
+                    <div class="kn-row"><button type="button" class="button secondary" data-kf-to="body">Pour les textes</button>${hasSel ? '<button type="button" class="button secondary" data-kf-to="sel">Pour le texte choisi</button>' : ''}</div>`,
+                onOpen: dg => { const q = dg.querySelector('[data-kf-q]'), box = dg.querySelector('[data-kf-list]'), prev = dg.querySelector('[data-kf-prev]');
+                    const draw = () => { const v = q.value.trim().toLowerCase(), list = all().filter(f => !v || f.toLowerCase().includes(v)).slice(0, 400);
+                        box.innerHTML = list.map(f => `<button type="button" class="kn-fontitem${f === chosen ? ' is-on' : ''}" data-kf="${esc(f)}" style="font-family:'${esc(f).replace(/'/g, '')}',sans-serif">${esc(f)}</button>`).join('') || `<p class="muted">Aucune police « ${esc(q.value)} » dans la liste : Entrée pour la prendre telle quelle.</p>`; };
+                    const pick = f => { chosen = fontOk(f) || ''; prev.textContent = chosen ? `${chosen} : Portez ce vieux whisky au juge blond qui fume` : 'Choisis une police'; prev.style.fontFamily = chosen ? `'${chosen.replace(/'/g, '')}', sans-serif` : ''; box.querySelectorAll('[data-kf]').forEach(b => b.classList.toggle('is-on', b.dataset.kf === chosen)); };
+                    q.addEventListener('input', draw); q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (q.value.trim()) pick(q.value.trim()); } });
+                    box.addEventListener('click', e => { const b = e.target.closest('[data-kf]'); if (b) pick(b.dataset.kf); });
+                    dg.addEventListener('click', e => { const b = e.target.closest('[data-kf-to]'); if (!b) return; if (!chosen) return toast('Clique d’abord sur une police.', 'error'); done = true; res({font: chosen, to: b.dataset.kfTo}); dg.close(); });
+                    dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); draw(); setTimeout(() => q.focus(), 30); },
+                onSubmit: () => { if (!chosen) { toast('Clique d’abord sur une police.', 'error'); return false; } done = true; res({font: chosen, to: 'title'}); }}); });
     }
     const shapeIcon = k => `<span class="kn-shico">${shapeSvg({kind: k, w: 34, h: k === 'line' || k === 'arrowline' ? 20 : 26, sw: 3}, {accent: 'currentColor'})}</span>`;
 
@@ -1102,7 +1121,11 @@
                 case 'clear': objs.forEach(q => { if (arg === 'fill') { delete q.fill; if (q.t === 'shape') q.nofill = true; } if (arg === 'stroke') { delete q.stroke; delete q.sw; } if (arg === 'border') { delete q.border; delete q.bw; } }); return touch(true);
                 case 'flipH': case 'flipV': objs.forEach(q => { q[k] = !q[k]; if (!q[k]) delete q[k]; }); return touch();
                 case 'natural': if (o?.t === 'image' && srcOf(o)) { const [nw, nh] = await imgSize(srcOf(o)); o.h = Math.round(o.w * nh / nw); touch(true); } return;
-                case 'localfonts': if (await loadLocalFonts()) paintInsp(); return;
+                case 'localfonts': { if (typeof window.queryLocalFonts === 'function' && !localFonts) await loadLocalFonts();
+                    const r = await pickFont(objs.some(q => ['text', 'shape', 'table', 'person'].includes(q.t))); if (!r) return paintInsp();
+                    const mine = readJ(FONTS_KEY, []); if (!(localFonts || []).includes(r.font) && !BASE_FONTS.includes(r.font)) writeJ(FONTS_KEY, [...new Set([r.font, ...(Array.isArray(mine) ? mine : [])])].slice(0, 200)); // une police tapée à la main reste dans la liste
+                    if (r.to === 'sel') { objs.forEach(q => { q.font = r.font; if (q.t === 'text') stripStyle(q, 'font-family'); }); toast(`Police « ${r.font} » pour le texte choisi.`); return touch(true); }
+                    show.fonts = {...(show.fonts || {}), [r.to]: r.font}; paintAll(); toast(`Police « ${r.font} » pour ${r.to === 'title' ? 'les titres' : 'les textes'}.`); return commit(); }
                 case 'rich': return rich(arg);
                 case 'align': objs.forEach(q => { q.align = arg; }); return touch(true);
                 case 'valign': objs.forEach(q => { q.valign = arg; }); return touch(true);
