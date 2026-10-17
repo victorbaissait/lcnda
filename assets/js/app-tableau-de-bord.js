@@ -3,7 +3,7 @@
  */
 (() => {
     'use strict';
-    const {$, $$, api, bindWebSearchPanels, bindWebSearchSitesEditors, card, censusStatusText, currentCustomTab, currentDashboardPage, dabovilleNumberFor, dashboardBaseType, dashboardBlockSettings, dashboardGroupItem, dashboardLineageCard, dashboardNewWidget, dashboardNormalizeWidget, dashboardPages, dashboardRecentPeople, dashboardSaintCard, dashboardWidgetInfo, dashboardWidgetLabel, dataRow, debounce, defaultDashboardBlockLimits, defaultDashboardBlocks, defaultDashboardBlockSpans, defaultPersonBlocks, empty, escapeHtml, familyMemoryCardHtml, familyObjectCardHtml, fillLineageWidgets, genderText, generationLabel, isUsableMapCoord, latToY, lifeText, lngToX, mapBackgroundValue, mapTileUrl, mediaPreviewHtml, mediaTypeShortLabelWithIcon, normalizedMediaType, openLightbox, orderedDashboardWidgetTypes, personBlockWidthChoices, personEventMap, personName, placeDisplay, readDesignSettings, readWebSearchSitesEditor, renderSidebar, restoreDoneText, saveDashboardBlockSettings, saveDashboardPages, setModule, sidebarSignal, sosaMap, sosaNumberFor, sosaNumbersText, sosaRootId, state, toast, webSearchPanelHtml, webSearchSettings, webSearchSitesEditor, years} = window.LCNDA_APP;
+    const {$, $$, api, confirmBox, emptyState, plural, bindWebSearchPanels, bindWebSearchSitesEditors, card, censusStatusText, currentCustomTab, currentDashboardPage, dabovilleNumberFor, dashboardBaseType, dashboardBlockSettings, dashboardGroupItem, dashboardLineageCard, dashboardNewWidget, dashboardNormalizeWidget, dashboardPages, dashboardRecentPeople, dashboardSaintCard, dashboardWidgetInfo, dashboardWidgetLabel, dataRow, debounce, defaultDashboardBlockLimits, defaultDashboardBlocks, defaultDashboardBlockSpans, defaultPersonBlocks, empty, escapeHtml, familyMemoryCardHtml, familyObjectCardHtml, fillLineageWidgets, genderText, generationLabel, isUsableMapCoord, latToY, lifeText, lngToX, mapBackgroundValue, mapTileUrl, mediaPreviewHtml, mediaTypeShortLabelWithIcon, normalizedMediaType, openLightbox, orderedDashboardWidgetTypes, personBlockWidthChoices, personEventMap, personName, placeDisplay, readDesignSettings, readWebSearchSitesEditor, renderSidebar, restoreDoneText, saveDashboardBlockSettings, saveDashboardPages, setModule, sidebarSignal, sosaMap, sosaNumberFor, sosaNumbersText, sosaRootId, state, toast, webSearchPanelHtml, webSearchSettings, webSearchSitesEditor, years} = window.LCNDA_APP;
     function renderDashboardSidebar(content, footer) {
         const catalog=orderedDashboardWidgetTypes(false);
         content.innerHTML = `<div class="dashboard-widget-catalog"><div class="dashboard-widget-catalog-item dashboard-widget-overview is-active"><div><span>01</span><strong>Vue générale</strong></div></div>${catalog.map(([type,number,label])=>`<div class="dashboard-widget-catalog-item"><div><span>${escapeHtml(number)}</span><strong>${escapeHtml(label)}</strong></div><div class="dashboard-widget-catalog-actions"><button type="button" data-info-dashboard-widget="${escapeHtml(type)}" aria-label="Infos ${escapeHtml(label)}">i</button><button type="button" data-add-dashboard-widget="${escapeHtml(type)}" aria-label="Ajouter ${escapeHtml(label)}">+</button></div></div>`).join('')}</div>`;
@@ -155,7 +155,7 @@
         const {pages:dashPagesList}=dashboardPages(),dashPage=currentDashboardPage();
         const dashPagesBar=dashPagesList.length>1?`<div class="segmented dash-pages" role="tablist">${dashPagesList.map(p=>`<button type="button" role="tab" data-dash-page="${escapeHtml(p.id)}" class="${p.id===dashPage.id?'is-active':''}" aria-selected="${p.id===dashPage.id}">${escapeHtml(p.name||'Page')}</button>`).join('')}</div>`:'';
         $('#workspace').innerHTML=`<section class="page dashboard-page${ownTab?' custom-tab-page':''}"><header class="page-header">${ownTab?`<div><span class="eyebrow">MON ONGLET</span><h2>${escapeHtml(`${ownTab.icon?ownTab.icon+' ':''}${ownTab.name||'Mon onglet'}`)}</h2>${ownTab.intro?`<p>${escapeHtml(ownTab.intro)}</p>`:''}</div><div class="page-actions"><button type="button" class="button secondary small" data-edit-custom-tab="${escapeHtml(ownTab.id)}">⚙️ Modifier l’onglet</button></div>`:`<div><span class="eyebrow">TABLEAU DE BORD</span><h2>${escapeHtml(dashPage.name||'Vue d’ensemble')}</h2><p>Un point rapide sur la base, les dates qui approchent, les modifications récentes et le travail à suivre.</p>${dashPagesBar}</div>`}</header>
-        <div class="card-grid dashboard-grid">${blocks||empty(ownTab?'Onglet vide : ajoute des widgets, tes widgets, tes listes ou tes statistiques depuis la colonne de gauche.':'Aucun widget affiché. Ajoute-en depuis la colonne de gauche.')}</div></section>`;
+        <div class="card-grid dashboard-grid">${blocks||empty(ownTab?'Onglet vide : ajoute des widgets, tes widgets, tes listes ou tes statistiques depuis la colonne de gauche.':'Aucun widget affiché. Ajoute-en depuis la colonne de gauche.',{icon:'🧩'})}</div></section>`;
         $$('[data-dash-page]').forEach(b=>b.addEventListener('click',()=>{state.dashboardPage=b.dataset.dashPage;renderDashboard();renderSidebar();}));
         $$('[data-dash-group-toggle]').forEach(b=>b.addEventListener('click',()=>{const current=dashboardBlockSettings();const g=current.widgets.find(w=>w.id===b.dataset.dashGroupToggle);if(!g)return;g.config={...g.config,collapsed:!g.config?.collapsed};saveDashboardBlockSettings(current);renderDashboard(undefined,{reuse:true});}));
         $('[data-edit-custom-tab]')?.addEventListener('click',()=>{state.tabsEditorOpen=ownTab.id;state.maintenanceTab='tabs_editor';setModule('maintenance');});
@@ -183,7 +183,7 @@
         $$('[data-dashboard-maintenance]').forEach(button=>button.addEventListener('click',()=>{state.maintenanceTab=button.dataset.dashboardMaintenance;setModule('maintenance');}));
         $$('[data-dashboard-module]').forEach(button=>button.addEventListener('click',()=>setModule(button.dataset.dashboardModule)));
         $$('[data-dashboard-restore]').forEach(button=>button.addEventListener('click',async()=>{
-            if(!confirm('Restaurer cette suppression ?'))return;
+            if(!await confirmBox('L’élément supprimé sera remis dans la base.',{title:'Restaurer cette suppression ?',okLabel:'Restaurer',danger:false}))return;
             button.disabled=true;
             try{const r=await api('restore_change',{}, {method:'POST',body:{id:button.dataset.dashboardRestore}});toast(restoreDoneText(r));await renderDashboard();}
             catch(error){button.disabled=false;toast(error.message,'error');}
@@ -382,11 +382,11 @@
         list.addEventListener('dragend',()=>{dragFrom=-1;$$('.is-dragging,.is-drop-target',list).forEach(r=>r.classList.remove('is-dragging','is-drop-target'));});
         $('[data-group-add]',dialog).addEventListener('click',()=>{widgets().unshift(dashboardGroupItem({config:{title:'Nouvel ensemble',depth:0}}));draw();setTimeout(()=>{const t=$('[data-group-title]',list);t?.focus();t?.select();},0);});
         const pagesBox=$('.dash-pages-editor',dialog);
-        pagesBox.addEventListener('click',e=>{
+        pagesBox.addEventListener('click',async e=>{
             if(e.target.closest('[data-page-add]')){const id=newPageId();pagesWork.push({id,name:`Page ${pagesWork.length+1}`,widgets:[]});editing=id;draw();setTimeout(()=>{const inp=pagesBox.querySelector(`[data-page-row="${id}"] [data-page-name]`);inp?.focus();inp?.select();},0);return;}
             const row=e.target.closest('[data-page-row]');if(!row)return;const id=row.dataset.pageRow;
             if(e.target.closest('[data-page-edit]')){editing=id;draw();return;}
-            if(e.target.closest('[data-page-del]')){const p=pagesWork.find(x=>x.id===id);if(p.widgets.length&&!confirm(`Supprimer la page « ${p.name||'Page'} » et ses ${p.widgets.length} widget(s) ?`))return;pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(defaultWork===id)defaultWork=pagesWork[0].id;draw();}
+            if(e.target.closest('[data-page-del]')){const p=pagesWork.find(x=>x.id===id);if(p.widgets.length&&!await confirmBox(p.widgets.length<2?'Son widget sera supprimé avec elle.':`Ses ${plural(p.widgets.length,'widget')} seront supprimés avec elle.`,{title:`Supprimer la page « ${p.name||'Page'} » ?`,okLabel:'Supprimer la page'}))return;pagesWork=pagesWork.filter(x=>x.id!==id);if(editing===id)editing=pagesWork[0].id;if(defaultWork===id)defaultWork=pagesWork[0].id;draw();}
         });
         pagesBox.addEventListener('input',e=>{const inp=e.target.closest('[data-page-name]');if(inp)pagesWork.find(x=>x.id===inp.closest('[data-page-row]').dataset.pageRow).name=inp.value;});
         pagesBox.addEventListener('change',e=>{if(e.target.name==='dash-default')defaultWork=e.target.value;});
@@ -409,7 +409,7 @@
         return [n(p.persons_created,'fiche créée','fiches créées'),n(p.persons_edited,'fiche complétée','fiches complétées'),n(p.events_created,'événement ajouté','événements ajoutés'),n(p.sources_created,'source ajoutée','sources ajoutées'),n(p.census_created,'recensement ajouté','recensements ajoutés'),n(p.media_added,'média ajouté','médias ajoutés'),n(p.sosa_new,'nouvel ancêtre Sosa','nouveaux ancêtres Sosa'),n(p.battues_closed,'battue terminée','battues terminées'),n(p.investigations_closed,'enquête terminée','enquêtes terminées')].filter(Boolean).join(', ');
     }
     function dashboardProgressCard(index,data,spanClass){
-        if(!data)return card(index,'Bilan de recherche','',empty('Bilan indisponible.'),spanClass);
+        if(!data)return card(index,'Bilan de recherche','',empty('Bilan indisponible.',{icon:'📊'}),spanClass);
         const month=new Date().toLocaleDateString('fr-FR',{month:'long'});
         const m=data.month,y=data.year,prev=data.previous_month;
         const monthText=progressSentence(m)||'pas encore de modification ce mois-ci';
@@ -417,27 +417,27 @@
         const max=Math.max(1,...data.months.map(x=>x.changes));
         const bars=data.months.map(x=>{const label=new Date(x.month+'-15').toLocaleDateString('fr-FR',{month:'short'});return `<div class="progress-bar" title="${escapeHtml(label)} : ${x.changes} modification${x.changes>1?'s':''}${x.persons?`, ${x.persons} fiche${x.persons>1?'s':''} créée${x.persons>1?'s':''}`:''}"><span style="height:${Math.max(x.changes?4:0,Math.round(60*x.changes/max))}px"></span><small>${escapeHtml(label.replace('.',''))}</small></div>`;}).join('');
         const body=`<p class="progress-line"><strong>En ${escapeHtml(month)} :</strong> ${escapeHtml(monthText)}.${m.work_days?` <span class="muted">${m.work_days} jour${m.work_days>1?'s':''} de recherche.</span>`:''} ${trend}</p>
-            <p class="progress-line"><strong>En ${escapeHtml(data.year_label)} :</strong> ${escapeHtml(progressSentence(y)||'rien pour l’instant')}.${y.work_days?` <span class="muted">${y.work_days} jours de recherche, ${Number(y.changes).toLocaleString('fr-FR')} modifications.</span>`:''}</p>
+            <p class="progress-line"><strong>En ${escapeHtml(data.year_label)} :</strong> ${escapeHtml(progressSentence(y)||'rien pour l’instant')}.${y.work_days?` <span class="muted">${plural(y.work_days,'jour')} de recherche, ${plural(y.changes,'modification')}.</span>`:''}</p>
             <div class="progress-chart" aria-label="Modifications par mois sur un an">${bars}</div>
             <small class="muted">D’après le journal des modifications : le travail fait à la main (les imports de fichiers ne comptent pas comme fiches créées).</small>`;
         return card(index,'Bilan de recherche','',body,spanClass);
     }
     function dashboardCollectionCard(index,detail,widget,spanClass,kind){
         const specific=widget.config?.personMode==='specific';const person=detail?.person;const title=kind==='objects'?'Objets de famille':'Mémoire familiale';
-        if(!person)return card(index,title,'',empty(specific?'Choisis une personne avec le crayon.':'Ouvre une fiche : elle apparaîtra ici.'),spanClass);
+        if(!person)return card(index,title,'',empty(specific?'Choisis une personne avec le crayon.':'Ouvre une fiche : elle apparaîtra ici.',{icon:'👤'}),spanClass);
         const rows=kind==='objects'?(detail.family_objects||[]):(detail.family_memories||[]);
-        const body=`<p class="web-search-person"><button class="link-button" type="button" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button> <small>${escapeHtml(years(person))}${specific?'':' · dernière fiche consultée'}</small></p>${rows.length?`<div class="collection-grid is-compact">${rows.map(row=>kind==='objects'?familyObjectCardHtml(row,true):familyMemoryCardHtml(row,true)).join('')}</div>`:empty(kind==='objects'?'Aucun objet lié à cette personne.':'Aucun souvenir lié à cette personne.')}<div class="page-actions"><button class="button small secondary" type="button" data-open-list="${kind==='objects'?'family_objects':'family_memories'}">Tout voir</button></div>`;
+        const body=`<p class="web-search-person"><button class="link-button" type="button" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button> <small>${escapeHtml(years(person))}${specific?'':' · dernière fiche consultée'}</small></p>${rows.length?`<div class="collection-grid is-compact">${rows.map(row=>kind==='objects'?familyObjectCardHtml(row,true):familyMemoryCardHtml(row,true)).join('')}</div>`:empty(kind==='objects'?'Aucun objet lié à cette personne.':'Aucun souvenir lié à cette personne.',{icon:'🏺'})}<div class="page-actions"><button class="button small secondary" type="button" data-open-list="${kind==='objects'?'family_objects':'family_memories'}">Tout voir</button></div>`;
         return card(index,title,rows.length||'',body,spanClass);
     }
     function dashboardWebSearchCard(index,detail,widget,spanClass){
         const specific=widget.config?.personMode==='specific';
         const person=detail?.person;
         const settings=widget.config?.sites?webSearchSettings(0,widget.config.sites):webSearchSettings(person?.id||0);
-        const body=person?`<p class="web-search-person"><button class="link-button" type="button" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button> <small>${escapeHtml(years(person))}${specific?'':' · dernière fiche consultée'}</small></p>${webSearchPanelHtml(detail,settings,`widget-${widget.id}`)}`:empty(specific?'Choisis une personne avec le crayon.':'Ouvre une fiche : elle apparaîtra ici.');
+        const body=person?`<p class="web-search-person"><button class="link-button" type="button" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button> <small>${escapeHtml(years(person))}${specific?'':' · dernière fiche consultée'}</small></p>${webSearchPanelHtml(detail,settings,`widget-${widget.id}`)}`:empty(specific?'Choisis une personne avec le crayon.':'Ouvre une fiche : elle apparaîtra ici.',{icon:'👤'});
         return card(index,'Chercher sur internet','',body,spanClass);
     }
     function dashboardListRows(items,emptyText,mapper){
-        if(!items.length)return empty(emptyText);
+        if(!items.length)return empty(emptyText,{icon:'📭'});
         return `<div class="dashboard-list">${items.map(mapper).join('')}</div>`;
     }
     function dashboardTodayCard(index,items,spanClass){
@@ -453,7 +453,7 @@
         return card(index,'Personnes verrouillées récemment',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="persons">Personnes</button>`);
     }
     function dashboardPersonBlockCard(index,detail,blockKey,spanClass,isSpecific=false,widgetId=''){
-        if(!detail?.person)return card(index,'Bloc de fiche personne','',empty('Aucune personne disponible pour ce widget.'),spanClass);
+        if(!detail?.person)return card(index,'Bloc de fiche personne','',empty('Aucune personne disponible pour ce widget.',{icon:'👥'}),spanClass);
         const person=detail.person;
         const label=(defaultPersonBlocks.find(row=>row[0]===blockKey)||[, 'Identité'])[1];
         const arrays={
@@ -462,23 +462,23 @@
             children:detail.children||[], partners:detail.partners||[]
         };
         const personTitle=personName(person)||`Personne #${person.id}`;
-        const listRows=(items,emptyText,mapper)=>items.length?`<div class="dashboard-list">${items.map(mapper).join('')}</div>`:empty(emptyText);
+        const listRows=(items,emptyText,mapper)=>items.length?`<div class="dashboard-list">${items.map(mapper).join('')}</div>`:empty(emptyText,{icon:'📭'});
         const mediaPreview=item=>mediaPreviewHtml(item,item.title||item.filename||'Média');
         const bodies={
             identity:()=>`<dl class="data-list">${dataRow('Prénom',person.first_name||'—')}${dataRow('Autres prénoms',person.middle_name||'—')}${dataRow('Nom inscrit',person.last_name||'—')}${dataRow('Dates',years(person)||'—')}${dataRow('Genre',genderText(person.gender))}${dataRow('Statut',lifeText(person.living_status))}${dataRow('Groupe',person.surname_group||'—')}${person.occupation?dataRow('Métier / activité',person.occupation):''}</dl>`,
             events:()=>listRows(arrays.events.slice(0,6),'Aucun événement renseigné.',event=>`<article class="dashboard-row"><div><strong>${escapeHtml(event.type_label||'Événement')} · ${escapeHtml(event.date_text||event.year||'date inconnue')}</strong><small>${escapeHtml(placeDisplay(event)||'')}</small></div></article>`),
-            media:()=>arrays.media.length?`<div class="media-grid media-card-grid dashboard-person-block-media">${arrays.media.slice(0,8).map(item=>`<article class="media-card-item"><button class="media-item media-card-preview" type="button" data-open-dashboard-person="${person.id}">${mediaPreview(item)}<span>${escapeHtml(item.attachment_label||item.title||item.filename||'Média')}</span></button></article>`).join('')}</div>`:empty('Aucun média.'),
+            media:()=>arrays.media.length?`<div class="media-grid media-card-grid dashboard-person-block-media">${arrays.media.slice(0,8).map(item=>`<article class="media-card-item"><button class="media-item media-card-preview" type="button" data-open-dashboard-person="${person.id}">${mediaPreview(item)}<span>${escapeHtml(item.attachment_label||item.title||item.filename||'Média')}</span></button></article>`).join('')}</div>`:empty('Aucun média.',{icon:'🖼️'}),
             notes:()=>listRows(arrays.notes.slice(0,5),'Aucune note.',note=>`<article class="dashboard-row"><div><strong>${escapeHtml(note.title||'Note sans titre')}</strong><small>${escapeHtml(String(note.body||'').slice(0,140))}</small></div></article>`),
             census:()=>{const records=detail.census?.records||[];return listRows(records.slice(0,6),'Aucun recensement.',record=>`<article class="dashboard-row"><div><strong>${escapeHtml(String(record.year||'Recensement'))}</strong><small>${escapeHtml([censusStatusText(record.status),record.place_name,record.address].filter(Boolean).join(' · '))}</small></div></article>`);},
             sources:()=>listRows(arrays.sources.slice(0,6),'Aucune source ou citation.',source=>`<article class="dashboard-row"><div><strong>${escapeHtml(source.title||source.name||'Source')}</strong><small>${escapeHtml(source.repository||source.url||source.entity_type||'')}</small></div></article>`),
             refs:()=>`<dl class="data-list">${dataRow('Identifiant GEDCOM',person.gedcom_id||'—')}${dataRow('FamilySearch',person.familysearch_id||'—')}${dataRow('Identifiant source',person.source_id||'—')}${dataRow('Numéro Sosa',sosaNumbersText(person.id)||'—')}${dataRow("Numéro d'Aboville",dabovilleNumberFor(person.id)||'—')}</dl>`,
-            maternity:()=>person.gender==='female'?`<dl class="data-list">${dataRow('Enfants connus',arrays.children.length)}${dataRow('Conjoints connus',arrays.partners.length)}${dataRow('Naissance',person.birth_date||person.birth_year||'—')}${dataRow('Décès',person.death_date||person.death_year||'—')}</dl>`:empty('Bloc surtout utile pour une fiche féminine.'),
+            maternity:()=>person.gender==='female'?`<dl class="data-list">${dataRow('Enfants connus',arrays.children.length)}${dataRow('Conjoints connus',arrays.partners.length)}${dataRow('Naissance',person.birth_date||person.birth_year||'—')}${dataRow('Décès',person.death_date||person.death_year||'—')}</dl>`:empty('Bloc surtout utile pour une fiche féminine.',{icon:'👩'}),
             investigations:()=>listRows([...arrays.battues.map(item=>({...item,_kind:'Battue'})),...arrays.investigations.map(item=>({...item,_kind:'Enquête'}))].slice(0,6),'Aucune enquête ou battue liée.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item._kind)} · ${escapeHtml(item.title||'Sans titre')}</strong><small>${escapeHtml(item.status||'')}</small></div></article>`),
-            signatures:()=>arrays.signatures.length?`<div class="list-card-grid person-signature-grid">${arrays.signatures.slice(0,6).map(sig=>`<article class="list-card" data-open-dashboard-person="${person.id}"><span class="list-card-icon">${sig.thumbnail?`<img src="media/${encodeURIComponent(sig.thumbnail)}" alt="">`:'✍'}</span><div><small class="list-card-date">${escapeHtml(sig.date_text||sig.created_at||'Date inconnue')}</small><h3>${escapeHtml(sig.title||sig.filename||'Signature')}</h3><p>${escapeHtml(sig.document_reference||sig.document_title||'Média lié')}</p></div></article>`).join('')}</div>`:empty('Aucune signature identifiée.'),
+            signatures:()=>arrays.signatures.length?`<div class="list-card-grid person-signature-grid">${arrays.signatures.slice(0,6).map(sig=>`<article class="list-card" data-open-dashboard-person="${person.id}"><span class="list-card-icon">${sig.thumbnail?`<img src="media/${encodeURIComponent(sig.thumbnail)}" alt="">`:'✍'}</span><div><small class="list-card-date">${escapeHtml(sig.date_text||sig.created_at||'Date inconnue')}</small><h3>${escapeHtml(sig.title||sig.filename||'Signature')}</h3><p>${escapeHtml(sig.document_reference||sig.document_title||'Média lié')}</p></div></article>`).join('')}</div>`:empty('Aucune signature identifiée.',{icon:'✍️'}),
             event_map:()=>personEventMap(arrays.events),
             completion:()=>{const completion=detail.completion||{score:0,items:[]};return `<div class="dashboard-coverage"><div><span>Score</span><strong>${Number(completion.score||0)}%</strong><i><b style="width:${Math.max(0,Math.min(100,Number(completion.score||0)))}%"></b></i><small>${(completion.items||[]).slice(0,4).map(item=>item.label||item).join(' · ')||'Aucun détail'}</small></div></div>`;},
             bio:()=>`<p class="auto-biography">${escapeHtml(detail.biography||'Pas assez d’informations pour générer une biographie utile.')}</p>`,
-            military:()=>{const milData=detail.militaryData||{};const rows=[['N° matricule',milData.matricule],['Classe',milData.classe_mobilisation],['Bureau',milData.bureau_recrutement],['Décision',milData.decision_conseil],['Notes',milData.notes_militaires]].filter(([,v])=>v&&String(v).trim());return rows.length?`<dl class="data-list">${rows.map(([k,v])=>dataRow(k,v)).join('')}</dl>`:empty('Aucune information militaire renseignée.');},
+            military:()=>{const milData=detail.militaryData||{};const rows=[['N° matricule',milData.matricule],['Classe',milData.classe_mobilisation],['Bureau',milData.bureau_recrutement],['Décision',milData.decision_conseil],['Notes',milData.notes_militaires]].filter(([,v])=>v&&String(v).trim());return rows.length?`<dl class="data-list">${rows.map(([k,v])=>dataRow(k,v)).join('')}</dl>`:empty('Aucune information militaire renseignée.',{icon:'🎖️'});},
             artistic_works:()=>{const artisticIds=new Set((state.bootstrap?.eventTypes||[]).filter(t=>Number(t.is_artistic)).map(t=>Number(t.id)));const works=arrays.events.filter(event=>artisticIds.has(Number(event.event_type_id)));return listRows(works.slice(0,6),'Aucune œuvre ou réalisation enregistrée.',event=>`<article class="dashboard-row"><div><strong>${escapeHtml(event.type_label||'Œuvre')}</strong><small>${escapeHtml([event.date_text||event.year,event.title||event.description].filter(Boolean).join(' · '))}</small></div></article>`);}
         };
         const body=(bodies[blockKey]||bodies.identity)();
@@ -509,15 +509,15 @@
         return card(index,'Signatures à comparer',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="signatures">Signatures</button>`);
     }
     function dashboardPlacesToCompleteCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucun lieu prioritaire à compléter.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.name,item.subdivision].filter(Boolean).join(' · ')||'Lieu')}</strong><small>${escapeHtml([item.county,item.state,item.country].filter(Boolean).join(', ')||'Coordonnées ou pays à compléter')} · ${Number(item.event_count||0)} évènement(s)</small></div><button class="button small secondary" data-dashboard-list="places">Lieux</button></article>`);
+        const body=dashboardListRows(items,'Aucun lieu prioritaire à compléter.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.name,item.subdivision].filter(Boolean).join(' · ')||'Lieu')}</strong><small>${escapeHtml([item.county,item.state,item.country].filter(Boolean).join(', ')||'Coordonnées ou pays à compléter')} · ${plural(Number(item.event_count||0),'évènement')}</small></div><button class="button small secondary" data-dashboard-list="places">Lieux</button></article>`);
         return card(index,'Communes à compléter',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="places">Lieux</button>`);
     }
     function dashboardBranchesCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucune branche à prioriser.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.branch||'Branche')}</strong><small>${Number(item.person_count||0)} personne(s) · ${Number(item.source_count||0)} source(s) · ${Number(item.media_count||0)} média(s)</small></div></article>`);
+        const body=dashboardListRows(items,'Aucune branche à prioriser.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.branch||'Branche')}</strong><small>${plural(Number(item.person_count||0),'personne')} · ${plural(Number(item.source_count||0),'source')} · ${plural(Number(item.media_count||0),'média')}</small></div></article>`);
         return card(index,'Branches les moins documentées',items.length,body,spanClass);
     }
     function dashboardCouplesCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucun couple prioritaire sans mariage.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.partner1_name||'Personne 1',item.partner2_name||'Personne 2'].join(' + '))}</strong><small>${Number(item.child_count||0)} enfant(s) connu(s)</small></div>${item.partner1_id?`<button class="button small secondary" data-open-dashboard-person="${item.partner1_id}">Ouvrir</button>`:''}</article>`);
+        const body=dashboardListRows(items,'Aucun couple prioritaire sans mariage.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml([item.partner1_name||'Personne 1',item.partner2_name||'Personne 2'].join(' + '))}</strong><small>${plural(Number(item.child_count||0),'enfant connu','enfants connus')}</small></div>${item.partner1_id?`<button class="button small secondary" data-open-dashboard-person="${item.partner1_id}">Ouvrir</button>`:''}</article>`);
         return card(index,'Couples sans mariage',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="events">Événements</button>`);
     }
     function dashboardConsistencyCard(index,items,spanClass){
@@ -533,7 +533,7 @@
         return card(index,'Communes à explorer',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="enquetes">Battues</button>`);
     }
     function dashboardBattuesPriorityCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucune battue prioritaire.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title||'Battue')}</strong><small>${escapeHtml(item.start_name||'Commune de départ inconnue')} · ${Number(item.todo_count||0)} à chercher · ${Number(item.item_count||0)} annotation(s)</small></div><button class="button small secondary" data-dashboard-module="enquetes">Ouvrir</button></article>`);
+        const body=dashboardListRows(items,'Aucune battue prioritaire.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title||'Battue')}</strong><small>${escapeHtml(item.start_name||'Commune de départ inconnue')} · ${Number(item.todo_count||0)} à chercher · ${plural(Number(item.item_count||0),'annotation')}</small></div><button class="button small secondary" data-dashboard-module="enquetes">Ouvrir</button></article>`);
         return card(index,'Battues prioritaires',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="enquetes">Battues</button>`);
     }
     function dashboardSourcesToCheckCard(index,items,spanClass){
@@ -554,20 +554,20 @@
     }
     function dashboardSosaProgressCard(index,progress,spanClass){
         const pct=Number(progress.percent||0);
-        const body=progress.root_id?`<div class="dashboard-coverage"><div><span>${escapeHtml(progress.root_name||'Racine SOSA')}</span><strong>${pct.toLocaleString('fr-FR')}%</strong><i><b style="width:${Math.max(0,Math.min(100,pct))}%"></b></i><small>${Number(progress.found||0).toLocaleString('fr-FR')} renseigné(s) · ${Number(progress.missing||0).toLocaleString('fr-FR')} manquant(s) · ${Number(progress.duplicates||0).toLocaleString('fr-FR')} doublon(s)</small></div></div>`:empty('Aucune racine SOSA définie.');
+        const body=progress.root_id?`<div class="dashboard-coverage"><div><span>${escapeHtml(progress.root_name||'Racine SOSA')}</span><strong>${pct.toLocaleString('fr-FR')}%</strong><i><b style="width:${Math.max(0,Math.min(100,pct))}%"></b></i><small>${plural(Number(progress.found||0),'renseigné')} · ${plural(Number(progress.missing||0),'manquant')} · ${plural(Number(progress.duplicates||0),'doublon')}</small></div></div>`:empty('Aucune racine SOSA définie.',{icon:'🌳'});
         return card(index,'Progression SOSA','',body,spanClass,`<button class="button small secondary" data-dashboard-list="sosa">SOSA</button>`);
     }
     function dashboardDuplicatesCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucun doublon probable repéré.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.label||'Doublon probable')}</strong><small>${Number(item.count||0)} personne(s) · naissance ${escapeHtml(item.birth_year||'?')}</small></div><button class="button small secondary" data-dashboard-maintenance="duplicates">Vérifier</button></article>`);
+        const body=dashboardListRows(items,'Aucun doublon probable repéré.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.label||'Doublon probable')}</strong><small>${plural(Number(item.count||0),'personne')} · naissance ${escapeHtml(item.birth_year||'?')}</small></div><button class="button small secondary" data-dashboard-maintenance="duplicates">Vérifier</button></article>`);
         return card(index,'Doublons probables',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-maintenance="duplicates">Doublons</button>`);
     }
     function dashboardLabelsCard(index,items,spanClass){
-        const body=items.length?`<div class="dashboard-labels">${items.map(label=>`<button type="button" class="dashboard-label-chip" data-dashboard-list="labels" style="--label-color:${escapeHtml(label.color||'#f1c36d')}"><span></span><strong>${escapeHtml(label.name)}</strong><small>${Number(label.link_count||0)} lien(s)</small></button>`).join('')}</div>`:empty('Aucune étiquette.');
+        const body=items.length?`<div class="dashboard-labels">${items.map(label=>`<button type="button" class="dashboard-label-chip" data-dashboard-list="labels" style="--label-color:${escapeHtml(label.color||'#f1c36d')}"><span></span><strong>${escapeHtml(label.name)}</strong><small>${plural(Number(label.link_count||0),'lien')}</small></button>`).join('')}</div>`:empty('Aucune étiquette.',{icon:'🏷️'});
         return card(index,'Étiquettes',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="labels">Toutes</button>`);
     }
     function dashboardMiniMapSvg(points,limit=80){
         const valid=(points||[]).slice(0,Math.max(1,limit)).map(point=>({lat:Number(point.latitude),lon:Number(point.longitude),count:Number(point.count||1),label:point.name||point.place||''})).filter(point=>isUsableMapCoord(point.lat,point.lon));
-        if(!valid.length)return empty('Aucun point géographique exploitable.');
+        if(!valid.length)return empty('Aucun point géographique exploitable.',{icon:'🗺️'});
         const width=620,height=260,padding=48;
         let zoom=valid.length===1?11:7;
         for(let z=12;z>=2;z--){
@@ -601,14 +601,14 @@
     }
     function dashboardPersonMapCard(index,map,spanClass,limit,isSpecific=false,widgetId=''){
         const person=map.person||null;
-        const body=person?`<div class="dashboard-person-map-head"><strong>${escapeHtml(person.person_name||'Personne')}</strong><small>${escapeHtml(person.years||'')}</small></div>${dashboardMiniMapSvg(map.points||[],limit)}`:empty('Aucune personne avec lieux datés.');
+        const body=person?`<div class="dashboard-person-map-head"><strong>${escapeHtml(person.person_name||'Personne')}</strong><small>${escapeHtml(person.years||'')}</small></div>${dashboardMiniMapSvg(map.points||[],limit)}`:empty('Aucune personne avec lieux datés.',{icon:'🗺️'});
         return card(index,'Carte d’une personne',Number(map.points?.length||0),body,spanClass,`${isSpecific?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`}${person?`<button class="button small" data-open-dashboard-person-map="${person.id}" data-person-name="${escapeHtml(person.person_name||'')}">Itinéraire</button>`:''}`);
     }
     function dashboardPersonTimelineCard(index,detail,spanClass,limit,isSpecific=false,widgetId=''){
-        if(!detail?.person)return card(index,'Timeline d’une personne','',empty('Aucune personne disponible.'),spanClass);
+        if(!detail?.person)return card(index,'Timeline d’une personne','',empty('Aucune personne disponible.',{icon:'👥'}),spanClass);
         const person=detail.person;
         const events=[...(detail.events||[])].filter(event=>event.date_text||event.year).sort((a,b)=>(Number(a.year)||99999)-(Number(b.year)||99999)||Number(a.id)-Number(b.id)).slice(0,limit);
-        const body=events.length?`<div class="dashboard-list dashboard-timeline-list">${events.map(event=>`<article class="dashboard-row"><div><strong>${escapeHtml(event.date_text||event.year||'Date inconnue')}</strong><small>${escapeHtml(event.type_label||'Événement')}${placeDisplay(event)?` · ${escapeHtml(placeDisplay(event))}`:''}</small></div></article>`).join('')}</div>`:empty('Aucun événement daté.');
+        const body=events.length?`<div class="dashboard-list dashboard-timeline-list">${events.map(event=>`<article class="dashboard-row"><div><strong>${escapeHtml(event.date_text||event.year||'Date inconnue')}</strong><small>${escapeHtml(event.type_label||'Événement')}${placeDisplay(event)?` · ${escapeHtml(placeDisplay(event))}`:''}</small></div></article>`).join('')}</div>`:empty('Aucun événement daté.',{icon:'📅'});
         return card(index,`Timeline · ${personName(person)||'Personne'}`,events.length,body,spanClass,`${isSpecific?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`}<button class="button small" data-open-dashboard-person="${person.id}">Ouvrir fiche</button>`);
     }
     function dashboardQuickStatCard(index,data,key,spanClass){
@@ -629,7 +629,7 @@
     }
     function dashboardSessionGoalCard(index,goal,spanClass,person=null){
         const linkedPerson=person?`<button class="table-link" data-open-dashboard-person="${person.id}">${escapeHtml(personName(person))}</button>`:'';
-        const body=goal?`<div class="dashboard-session-goal"><p>${escapeHtml(goal)}</p>${linkedPerson?`<small>Personne liée : ${linkedPerson}</small>`:''}</div>`:empty('Ajoute un objectif dans les réglages du widget.');
+        const body=goal?`<div class="dashboard-session-goal"><p>${escapeHtml(goal)}</p>${linkedPerson?`<small>Personne liée : ${linkedPerson}</small>`:''}</div>`:empty('Ajoute un objectif dans les réglages du widget.',{icon:'🎯'});
         return card(index,'Objectif de session','',body,spanClass);
     }
     function dashboardAchievementsCard(index,data,spanClass){
@@ -651,11 +651,11 @@
         return card(index,'Chiffres clés','',`<div class="dashboard-metrics">${metrics.map(([label,value])=>`<div><strong>${Number(value||0).toLocaleString('fr-FR')}</strong><span>${escapeHtml(label)}</span></div>`).join('')}</div>`, spanClass, `<button class="button small secondary" data-dashboard-list="persons">Listes</button>`);
     }
     function dashboardUpcomingCard(index,items,spanClass){
-        const body=items.length?`<div class="dashboard-list">${items.map(item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.date_label)} · ${escapeHtml(item.when_label)}</small></div>${item.person_id?`<button class="button small secondary" data-open-dashboard-person="${item.person_id}">Ouvrir</button>`:''}</article>`).join('')}</div>`:empty('Aucune date récurrente repérée dans les 7 prochains jours.');
+        const body=items.length?`<div class="dashboard-list">${items.map(item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.date_label)} · ${escapeHtml(item.when_label)}</small></div>${item.person_id?`<button class="button small secondary" data-open-dashboard-person="${item.person_id}">Ouvrir</button>`:''}</article>`).join('')}</div>`:empty('Aucune date récurrente repérée dans les 7 prochains jours.',{icon:'🎂'});
         return card(index,'Cette semaine dans l’histoire familiale',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="chronologie">Chronologie</button>`);
     }
     function dashboardRemindersCard(index,items,spanClass){
-        const body=items.length?`<div class="dashboard-list">${items.map(item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.date_label)} · ${escapeHtml(item.origin||'Rappel')}</small></div>${item.person_id?`<button class="button small secondary" data-open-dashboard-person="${item.person_id}">Ouvrir</button>`:''}</article>`).join('')}</div>`:empty('Aucun rappel à venir.');
+        const body=items.length?`<div class="dashboard-list">${items.map(item=>`<article class="dashboard-row"><div><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.date_label)} · ${escapeHtml(item.origin||'Rappel')}</small></div>${item.person_id?`<button class="button small secondary" data-open-dashboard-person="${item.person_id}">Ouvrir</button>`:''}</article>`).join('')}</div>`:empty('Aucun rappel à venir.',{icon:'⏰'});
         return card(index,'Rappels',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="reminders">Tous</button>`);
     }
     function dashboardChangesCard(index,items,spanClass){
@@ -665,25 +665,25 @@
         return card(index,'Dernières suppressions',items.length,dashboardChangeRows(items,true),spanClass,`<button class="button small secondary" data-dashboard-maintenance="changes">Journal</button>`);
     }
     function dashboardChangeRows(items,restore){
-        if(!items.length)return empty(restore?'Aucune suppression récente.':'Aucune modification récente.');
+        if(!items.length)return empty(restore?'Aucune suppression récente.':'Aucune modification récente.',{icon:'🕘'});
         return `<div class="dashboard-list">${items.map(row=>`<article class="dashboard-row"><div><strong>${escapeHtml(row.summary||row.action||'Modification')}</strong><small>${escapeHtml(row.created_at||'')} · ${escapeHtml(row.entity_label||row.entity_type||'')}</small></div>${restore&&row.restore_available?`<button class="button small secondary" data-dashboard-restore="${row.id}">Restaurer</button>`:restore&&row.restore_blocked?`<button class="button small secondary is-disabled" disabled title="${escapeHtml(row.restore_block_reason||'Restauration bloquée')}">Restaurer</button>`:''}</article>`).join('')}</div>`;
     }
     function dashboardRandomPersonCard(index,person,spanClass,isSpecific=false,widgetId=''){
-        const body=person?`<div class="dashboard-person"><div class="avatar">${escapeHtml((person.first_name||person.last_name||'?').slice(0,2).toUpperCase())}</div><div><h4>${escapeHtml(personName(person))}</h4><p>${escapeHtml(years(person))}</p>${person.surname_group?`<small>Groupe : ${escapeHtml(person.surname_group)}</small>`:''}</div></div>`:empty('Aucune personne disponible.');
+        const body=person?`<div class="dashboard-person"><div class="avatar">${escapeHtml((person.first_name||person.last_name||'?').slice(0,2).toUpperCase())}</div><div><h4>${escapeHtml(personName(person))}</h4><p>${escapeHtml(years(person))}</p>${person.surname_group?`<small>Groupe : ${escapeHtml(person.surname_group)}</small>`:''}</div></div>`:empty('Aucune personne disponible.',{icon:'👥'});
         return card(index,isSpecific?'Personne choisie':'Personne au hasard','',body,spanClass,`${isSpecific?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`}${person?`<button class="button small" data-open-dashboard-person="${person.id}">Ouvrir</button>`:''}`);
     }
     function dashboardPersonQuizCard(index,quiz,spanClass,widgetId=''){
-        if(!quiz)return card(index,'Quiz personne','',empty('Aucun événement exploitable pour ce quiz avec les filtres choisis.'),spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
+        if(!quiz)return card(index,'Quiz personne','',empty('Aucun événement exploitable pour ce quiz avec les filtres choisis.',{icon:'❓'}),spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
         const label=String(quiz.event_label||'événement').toLowerCase();
         const person=quiz.person_name||'Personne sans nom';
         const answer=String(quiz.answer||'').trim();
         const choices=(quiz.choices||[]).filter(Boolean);
-        if(!answer||choices.length<2)return card(index,'Quiz personne','',empty('Pas assez de dates distinctes pour générer des propositions.'),spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
+        if(!answer||choices.length<2)return card(index,'Quiz personne','',empty('Pas assez de dates distinctes pour générer des propositions.',{icon:'❓'}),spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
         const body=`<div class="dashboard-quiz"><p>Quelle est la date de <strong>${escapeHtml(label)}</strong> de <strong>${escapeHtml(person)}</strong> ?</p><div class="dashboard-quiz-answers">${choices.map(choice=>`<button type="button" data-dashboard-quiz-choice data-correct="${choice===answer?'1':'0'}">${escapeHtml(choice)}</button>`).join('')}</div></div>`;
         return card(index,'Quiz personne','',body,spanClass,`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>${quiz.person_id?`<button class="button small" data-open-dashboard-person="${quiz.person_id}">Ouvrir</button>`:''}`);
     }
     function dashboardRandomMediaCard(index,media,spanClass,widgetId='',isFavorite=false){
-        if(!media)return card(index,isFavorite?'Image favorite':'Image au hasard','',empty(isFavorite?'Choisis une image dans les réglages du widget.':'Aucune image disponible.'),spanClass,isFavorite?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
+        if(!media)return card(index,isFavorite?'Image favorite':'Image au hasard','',empty(isFavorite?'Choisis une image dans les réglages du widget.':'Aucune image disponible.',{icon:'🖼️'}),spanClass,isFavorite?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
         const title=media?.title||media?.document_title||media?.filename||'Média';
         const personLink=media?.attachment_person_id?`<button type="button" class="table-link dashboard-media-person" data-open-dashboard-person="${media.attachment_person_id}">${escapeHtml(media.attachment_person_name||'Personne liée')}</button>`:'';
         const preview=normalizedMediaType(media)==='image'&&(media.thumbnail||media.filename)?`<img src="media/${encodeURIComponent(media.thumbnail||media.filename)}" alt="${escapeHtml(title)}">`:`<span>${mediaTypeShortLabelWithIcon(media)}</span>`;
@@ -693,11 +693,11 @@
         return card(index,isFavorite?'Image favorite':'Image au hasard','',body,spanClass,isFavorite?'':`<button class="button small secondary" data-reroll-dashboard-widget="${escapeHtml(widgetId)}">Changer</button>`);
     }
     function dashboardKinshipWidgetCard(index,left,right,spanClass){
-        const body=(left&&right)?`<div class="dashboard-kinship-widget"><button class="table-link" data-open-dashboard-person="${left.id}">${escapeHtml(personName(left))}</button><span>↔</span><button class="table-link" data-open-dashboard-person="${right.id}">${escapeHtml(personName(right))}</button><small>Ouvre Comparaison pour analyser le lien.</small></div>`:empty('Choisis deux personnes dans les réglages du widget.');
+        const body=(left&&right)?`<div class="dashboard-kinship-widget"><button class="table-link" data-open-dashboard-person="${left.id}">${escapeHtml(personName(left))}</button><span>↔</span><button class="table-link" data-open-dashboard-person="${right.id}">${escapeHtml(personName(right))}</button><small>Ouvre Comparaison pour analyser le lien.</small></div>`:empty('Choisis deux personnes dans les réglages du widget.',{icon:'👥'});
         return card(index,'Lien entre deux personnes','',body,spanClass,`<button class="button small secondary" data-dashboard-module="comparaison">Comparer</button>`);
     }
     function dashboardFavoritesCard(index,items,spanClass){
-        const body=items.length?`<div class="dashboard-list">${items.map(person=>`<article class="dashboard-row"><div><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></div><button class="button small secondary" data-open-dashboard-person="${person.id}">Ouvrir</button></article>`).join('')}</div>`:empty('Aucune personne favorite.');
+        const body=items.length?`<div class="dashboard-list">${items.map(person=>`<article class="dashboard-row"><div><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></div><button class="button small secondary" data-open-dashboard-person="${person.id}">Ouvrir</button></article>`).join('')}</div>`:empty('Aucune personne favorite.',{icon:'⭐'});
         return card(index,'Personnes favorites',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="persons">Personnes</button>`);
     }
     function dashboardWorkCard(index,work,spanClass){
@@ -709,7 +709,7 @@
         return card(index,'Couverture de la base','',`<div class="dashboard-coverage">${rows.map(([label,row])=>{const pct=Number(row?.percent||0);return `<div><span>${escapeHtml(label)}</span><strong>${pct.toLocaleString('fr-FR')}%</strong><i><b style="width:${Math.max(0,Math.min(100,pct))}%"></b></i><small>${Number(row?.count||0).toLocaleString('fr-FR')} / ${Number(coverage.total||0).toLocaleString('fr-FR')}</small></div>`;}).join('')}</div>`,spanClass);
     }
     function dashboardPlacesCard(index,places,spanClass){
-        const body=places.length?`<div class="dashboard-list">${places.map(place=>`<article class="dashboard-row"><div><strong>${escapeHtml(place.name||'Lieu sans nom')}</strong><small>${Number(place.event_count||0).toLocaleString('fr-FR')} événement(s)</small></div></article>`).join('')}</div>`:empty('Aucun lieu renseigné.');
+        const body=places.length?`<div class="dashboard-list">${places.map(place=>`<article class="dashboard-row"><div><strong>${escapeHtml(place.name||'Lieu sans nom')}</strong><small>${plural(Number(place.event_count||0),'événement')}</small></div></article>`).join('')}</div>`:empty('Aucun lieu renseigné.',{icon:'📍'});
         return card(index,'Lieux les plus présents',places.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="places">Voir les lieux</button>`);
     }
 

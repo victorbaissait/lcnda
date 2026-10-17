@@ -56,7 +56,7 @@ header('X-Content-Type-Options: nosniff');
             <button class="nav-item" data-module="maintenance"><span>10</span>Maintenance</button>
         </nav>
         <div class="topbar-meta">
-            <button type="button" class="screen-tool" id="side-panel-open" title="Diviser l’écran en deux (⇧ + Entrée dans la recherche rapide ⌘K)" aria-label="Diviser l’écran en deux"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button>
+            <button type="button" class="screen-tool" id="side-panel-open" title="Diviser l’écran en deux — ou ⇧ + Entrée dans la recherche rapide" aria-label="Diviser l’écran en deux"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="4" x2="12" y2="20" stroke="currentColor" stroke-width="2"/></svg></button>
             <button type="button" class="screen-tool" id="new-window-open" title="Ouvrir cet écran dans une nouvelle fenêtre" aria-label="Ouvrir dans une nouvelle fenêtre"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="7" width="14" height="13" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 4h10v10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="20" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2"/></svg></button>
             <button type="button" class="screen-tool" id="kiosk-toggle" title="Mode consultation : la famille peut tout parcourir sans rien modifier" aria-label="Mode consultation"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
             <button type="button" class="screen-tool genealogy-switch" id="genealogy-switch" title="Mes généalogies : changer, en créer une autre" aria-label="Mes généalogies"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M5 16.5V14h14v2.5M12 11.5V14"/></svg><span data-gen-name hidden></span></button>
@@ -779,7 +779,7 @@ header('X-Content-Type-Options: nosniff');
             <div id="stats-colors-presets-list"></div>
             <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
                 <input id="stats-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
-                <button type="button" class="button small" id="stats-colors-save-preset">Sauvegarder</button>
+                <button type="button" class="button small" id="stats-colors-save-preset">Enregistrer</button>
             </div>
         </div>
 
@@ -807,7 +807,7 @@ header('X-Content-Type-Options: nosniff');
             <div id="battue-level-colors-presets-list"></div>
             <div style="display:flex;gap:8px;margin-top:.9rem;align-items:center">
                 <input id="battue-level-colors-preset-name" type="text" placeholder="Nom de la palette…" style="flex:1;padding:6px 8px;border:2px solid var(--line-color);border-radius:4px;font-size:.85em">
-                <button type="button" class="button small" id="battue-level-colors-save-preset">Sauvegarder</button>
+                <button type="button" class="button small" id="battue-level-colors-save-preset">Enregistrer</button>
             </div>
         </div>
         <div class="modal-actions">
@@ -1101,20 +1101,20 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=398" defer></script>
-<script src="assets/js/app-piece-archives.js?v=6" defer></script>
-<script src="assets/js/app-jeu.js?v=3" defer></script>
-<script src="assets/js/app-chronologie.js?v=4" defer></script>
-<script src="assets/js/app-comparaison.js?v=3" defer></script>
-<script src="assets/js/app-carte.js?v=4" defer></script>
-<script src="assets/js/app-enquetes.js?v=3" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=3" defer></script>
+<script src="assets/js/app.js?v=399" defer></script>
+<script src="assets/js/app-piece-archives.js?v=7" defer></script>
+<script src="assets/js/app-jeu.js?v=4" defer></script>
+<script src="assets/js/app-chronologie.js?v=5" defer></script>
+<script src="assets/js/app-comparaison.js?v=4" defer></script>
+<script src="assets/js/app-carte.js?v=5" defer></script>
+<script src="assets/js/app-enquetes.js?v=4" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=4" defer></script>
 <script src="assets/js/app-harmony.js?v=4" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
-<script src="assets/js/app-listes.js?v=6" defer></script>
-<script src="assets/js/app-maintenance.js?v=7" defer></script>
-<script src="assets/js/app-recherche.js?v=4" defer></script>
-<script src="assets/js/app-graphiques.js?v=4" defer></script>
+<script src="assets/js/app-listes.js?v=7" defer></script>
+<script src="assets/js/app-maintenance.js?v=8" defer></script>
+<script src="assets/js/app-recherche.js?v=5" defer></script>
+<script src="assets/js/app-graphiques.js?v=5" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=17" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>

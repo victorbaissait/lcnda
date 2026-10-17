@@ -56,7 +56,7 @@
             const height=Math.max(18,bottom-top);
             const years=event.end_year>event.start_year?`${event.start_year}-${event.end_year}`:String(event.start_year);
             return `<article class="historical-aligned-row" style="--timeline-top:${top}px;--timeline-height:${height}px"><div class="historical-span"></div><div class="timeline-card"><strong>${escapeHtml(event.label)}</strong><p>${escapeHtml([years,event.category,event.parent_label?`dans ${event.parent_label}`:''].filter(Boolean).join(' · '))}</p></div></article>`;
-        }).join('')||empty('Aucun événement historique dans cette période.');
+        }).join('')||empty('Aucun événement historique dans cette période.',{icon:'🕰️',hint:'Élargis la période ou affiche d’autres catégories.'});
     }
     function timelineAlignedHtml(events,minYear,maxYear,sharedPositions=null,includeHistorical=true){
         const historical=historicalTimelineEvents().filter(event=>!event.hidden&&event.end_year>=minYear&&event.start_year<=maxYear);
@@ -128,7 +128,7 @@
     }
 
     function timelineRowsHtml(data){
-        return data.events.length?`<div class="timeline">${data.events.map(event=>`<article class="timeline-row"><div class="timeline-year">${event.year}</div><span class="timeline-node" style="--event-color:${escapeHtml(event.color)}"></span><div class="timeline-card"><strong>${escapeHtml(event.type)} · <button class="table-link" data-open-person="${event.person_id}">${escapeHtml([event.first_name,event.last_name].filter(Boolean).join(' '))}</button></strong><p>${escapeHtml([event.date_text,event.place].filter(Boolean).join(' — '))}</p></div></article>`).join('')}</div>`:empty('Aucun événement daté dans cette sélection.');
+        return data.events.length?`<div class="timeline">${data.events.map(event=>`<article class="timeline-row"><div class="timeline-year">${event.year}</div><span class="timeline-node" style="--event-color:${escapeHtml(event.color)}"></span><div class="timeline-card"><strong>${escapeHtml(event.type)} · <button class="table-link" data-open-person="${event.person_id}">${escapeHtml([event.first_name,event.last_name].filter(Boolean).join(' '))}</button></strong><p>${escapeHtml([event.date_text,event.place].filter(Boolean).join(' — '))}</p></div></article>`).join('')}</div>`:empty('Aucun événement daté dans cette sélection.',{icon:'🕰️',hint:'Ajoute des dates aux événements des fiches pour les voir sur la frise.'});
     }
 
     async function renderTimeline(token=++state.workspaceToken){
