@@ -3544,3 +3544,11 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-gap-where{margin:6px 0 0 6px;padding-left:16px;font-size:.9em}.h-gap-where li{margin:2px 0}
 .h-gap-foot{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:6px;font-size:.85em}.h-gap-links{margin-left:auto}.h-gap-dig{background:#fff4d6;border-radius:5px;padding:0 6px}.h-gap-dig.ok{background:#dff5e3}
 @media print{body.h-gaps-printing .sidebar,body.h-gaps-printing header.app-header,body.h-gaps-printing .h-gaps-bar,body.h-gaps-printing .h-gaps-kinds,body.h-gaps-printing .page-actions,body.h-gaps-printing .h-gap-act,body.h-gaps-printing .h-gap-links{display:none!important}body.h-gaps-printing .h-gap{break-inside:avoid;border-color:#999}}
+/* 🧬 Groupes automatiques et placement d'un cousin */
+.h-dna-auto{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr);gap:16px;align-items:start}.h-dna-matrix{overflow:auto;max-width:100%;background:var(--panel,#fff);border:1px solid var(--line,#d0d4dc);border-radius:10px;padding:8px}
+.h-dna-cl-list{display:flex;flex-direction:column;gap:10px}.h-dna-cl{padding:12px 14px;border-left:6px solid var(--c)!important}.h-dna-cl h3{margin:0 0 6px;font-size:1em}.h-dna-cl p{margin:4px 0}
+.h-dna-chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:.9em}.h-dna-chips span{background:var(--soft,#f2f3f6);border-radius:5px;padding:0 6px}.h-dna-cl-m{font-size:.9em}
+.h-dna-plcard{padding:12px 14px;margin:10px 0}.h-dna-plcard h3{margin:0 0 8px}.h-dna-rels{display:flex;flex-wrap:wrap;gap:6px}.h-dna-relp{position:relative;border:1px solid var(--line,#d0d4dc);border-radius:8px;padding:3px 8px;font-size:.88em;overflow:hidden;background:linear-gradient(90deg,#dbe7fb var(--w),transparent var(--w))}
+.h-dna-bar{display:inline-block;width:60px;height:8px;border-radius:4px;background:linear-gradient(90deg,#4e79a7 var(--w),#e6e9ee var(--w));vertical-align:middle;margin-right:4px}
+.h-dna-warn{background:#fff4d6;border-radius:8px;padding:6px 10px}.h-dna-ok{background:#dff5e3;border-radius:8px;padding:6px 10px}.h-dna-pl-m select{min-width:280px}
+@media (max-width:900px){.h-dna-auto{grid-template-columns:1fr}}

@@ -41,13 +41,13 @@
         <h4>Textes officiels</h4><ul class="h-dna-links">${LAW_LINKS.map(([t, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)} ↗</a></li>`).join('')}</ul>` : `<p><button type="button" class="link-button" data-dna-go="law">Lire la mise en garde complète et les textes officiels →</button></p>`}</section>`;
 
     /* ═════════ Réglages (modulable) ═════════ */
-    const SECTIONS = [['home', '🏠', 'Synthèse'], ['law', '⚖️', 'Loi et mises en garde'], ['kits', '🧬', 'Mes tests'], ['matches', '👥', 'Correspondances'], ['groups', '🗂️', 'Groupes (méthode de Leeds)'],
+    const SECTIONS = [['home', '🏠', 'Synthèse'], ['law', '⚖️', 'Loi et mises en garde'], ['kits', '🧬', 'Mes tests'], ['matches', '👥', 'Correspondances'], ['groups', '🗂️', 'Groupes (méthode de Leeds)'], ['auto', '🔗', 'Groupes automatiques'], ['place', '📍', 'Placer un cousin'],
         ['chromo', '🧩', 'Chromosomes et segments'], ['calc', '📐', 'Calculateur de cM'], ['lines', '🌳', 'Lignées Y, mt et X'], ['origins', '🌍', 'Origines estimées'], ['learn', '📚', 'Comprendre l’ADN'], ['settings', '⚙️', 'Réglages']];
     const COLUMNS = [['name', 'Nom'], ['kit', 'Test'], ['cm', 'cM partagés'], ['pct', '% partagé'], ['segments', 'Segments'], ['longest', 'Plus long segment'], ['relationship', 'Relation (société)'], ['guess', 'Relation probable'],
         ['side', 'Côté'], ['groups', 'Groupes'], ['person', 'Fiche liée'], ['mrca', 'Ancêtre commun'], ['status', 'Suivi'], ['tree', 'Arbre'], ['surnames', 'Noms en commun'], ['places', 'Lieux'], ['stars', '★'], ['notes', 'Notes']];
     const PKEY = 'genealogie-adn-prefs';
     const DEFAULTS = () => ({order: SECTIONS.map(s => s[0]), hidden: ['origins'], columns: ['name', 'cm', 'segments', 'longest', 'guess', 'side', 'groups', 'person', 'status', 'stars'], minCm: 0, pageSize: 200,
-        colors: {paternal: '#4e79a7', maternal: '#e15759', both: '#7b3f8c', unknown: '#9aa0a6', '': '#9aa0a6'}, leedsMin: 90, leedsMax: 400, total: 6800, ack: false, home: ['law', 'counts', 'hist', 'top', 'todo', 'sides']});
+        colors: {paternal: '#4e79a7', maternal: '#e15759', both: '#7b3f8c', unknown: '#9aa0a6', '': '#9aa0a6'}, leedsMin: 90, leedsMax: 400, autoMin: 30, autoMax: 600, total: 6800, ack: false, home: ['law', 'counts', 'hist', 'top', 'todo', 'sides']});
     let prefsCache = null;
     const prefs = () => { if (prefsCache) return prefsCache; let p = {}; try { p = JSON.parse(localStorage.getItem(PKEY) || '{}') || {}; } catch (_) {} const d = DEFAULTS();
         prefsCache = {...d, ...p, colors: {...d.colors, ...(p.colors || {})}}; const known = SECTIONS.map(s => s[0]);
@@ -360,6 +360,148 @@
         root.querySelector('[data-dna-leedsmake]')?.addEventListener('click', async () => { const L = leeds(Number(filt().kit) || 0);
             try { for (const [i, c] of L.clusters.entries()) { const name = `Leeds ${i + 1} (${c.seed.name})`, old = data.groups.find(g => g.name === name); const gid = old ? old.id : (await post('save_dna_group', {name, color: PALETTE[i % PALETTE.length], notes: `Créé par la méthode de Leeds autour de ${c.seed.name} (${fmt(c.seed.shared_cm)} cM).`})).result.id; await post('bulk_dna_matches', {ids: c.members.map(m => m.id), add_group: gid}); }
                 toast(`${L.clusters.length} groupe(s) créé(s).`); await refresh(); } catch (e) { toast(e.message, 'error'); } });
+    }};
+
+    /* ═════════ 🔗 Groupes automatiques (façon « AutoCluster ») ═════════
+     * Un graphe : deux correspondances sont liées si l'une figure dans les « correspondances en commun » de l'autre, ou si
+     * leurs segments se chevauchent (≥ 7 cM) sur le même chromosome. Les grappes sortent d'une propagation d'étiquettes
+     * pondérée (stable, sans hasard). Chaque grappe pointe en général vers un couple d'ancêtres : on le devine par les
+     * correspondances déjà placées dans l'arbre, les noms et les lieux en commun, et le côté. */
+    let tree = null, treeKit = 0;
+    const loadTree = async kit => { if (!kit) return null; if (treeKit !== kit || !tree) { tree = await api('dna_tree', {kit, gen: 8}).catch(() => null); treeKit = kit; } return tree; };
+    const words = v => String(Array.isArray(v) ? v.join(';') : v || '').split(/[;,\n/]+/).map(x => x.trim()).filter(Boolean);
+    const normW = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z]/g, '');
+    const genOf = s => Math.floor(Math.log2(s));
+    const GEN_NAMES = ['vous', 'parents', 'grands-parents', 'arrière-grands-parents', 'arrière-arrière-grands-parents (4e génération)', '5e génération', '6e génération', '7e génération', '8e génération'];
+    const coupleSide = s => { const g = genOf(s); return g < 1 ? '' : s < (1 << g) * 1.5 ? 'paternal' : 'maternal'; };
+    const coupleLabel = (s, t) => { const a = t?.ancestors?.find(x => x.sosa === s), b = t?.ancestors?.find(x => x.sosa === s + 1); return `Sosa ${s}-${s + 1} : ${a ? a.name : 'inconnu'} & ${b ? b.name : 'inconnue'}`; };
+    function autoClusters(kitId, t) {
+        const p = prefs(), lo = num(p.autoMin) || 30, hi = num(p.autoMax) || 600;
+        const pool = data.matches.filter(m => (!kitId || m.kit_id === kitId) && m.shared_cm >= lo && m.shared_cm <= hi).sort((a, b) => b.shared_cm - a.shared_cm).slice(0, 400);
+        const idx = new Map(pool.map((m, i) => [m.id, i])), byName = new Map(pool.map((m, i) => [m.name.toLowerCase(), i]));
+        const W = pool.map(() => new Map()), link = (i, j, w) => { if (i === j || i === undefined || j === undefined) return; W[i].set(j, (W[i].get(j) || 0) + w); W[j].set(i, (W[j].get(i) || 0) + w); };
+        pool.forEach((m, i) => (m.data?.shared_matches || []).forEach(n => link(i, byName.get(String(n).toLowerCase()), 1)));
+        let segLinks = 0;
+        overlaps(data.segments.filter(s => (!kitId || s.kit_id === kitId) && s.match_id)).forEach(o => { const a = idx.get(o.s1.match_id), b = idx.get(o.s2.match_id); if (a !== undefined && b !== undefined && Math.min(num(o.s1.cm) || 99, num(o.s2.cm) || 99) >= 7) { link(a, b, 1.5); segLinks++; } });
+        // propagation d'étiquettes : chacun prend l'étiquette la plus lourde de ses voisins (les plus proches d'abord)
+        const lab = pool.map((_, i) => i);
+        for (let it = 0; it < 25; it++) { let moved = 0;
+            pool.forEach((_, i) => { if (!W[i].size) return; const sc = new Map(); W[i].forEach((w, j) => sc.set(lab[j], (sc.get(lab[j]) || 0) + w)); let best = lab[i], bw = (sc.get(lab[i]) || 0) + .01; sc.forEach((w, l) => { if (w > bw || (w === bw && l < best)) { best = l; bw = w; } }); if (best !== lab[i]) { lab[i] = best; moved++; } });
+            if (!moved) break; }
+        const groups = new Map(); pool.forEach((m, i) => { if (!W[i].size) return; if (!groups.has(lab[i])) groups.set(lab[i], []); groups.get(lab[i]).push(i); });
+        const clusters = [...groups.values()].filter(g => g.length >= 2).sort((a, b) => b.length - a.length || pool[a[0]].shared_cm - pool[b[0]].shared_cm).slice(0, 24).map((g, k) => {
+            const members = g.map(i => pool[i]).sort((a, b) => b.shared_cm - a.shared_cm);
+            const count = list => { const c = new Map(); list.forEach(x => { const k2 = normW(x); if (k2.length > 2) c.set(k2, {w: x, n: (c.get(k2)?.n || 0) + 1}); }); return [...c.values()].filter(x => x.n >= 2).sort((a, b) => b.n - a.n).slice(0, 6); };
+            const surnames = count(members.flatMap(m => words(m.data?.surnames))), places = count(members.flatMap(m => words(m.data?.places)));
+            const sides = members.map(m => m.side).filter(s => s === 'paternal' || s === 'maternal'), side = sides.length ? (sides.filter(s => s === 'paternal').length >= sides.length / 2 ? 'paternal' : 'maternal') : '';
+            // l'ancêtre commun : les correspondances déjà placées dans l'arbre, sinon les noms de famille de l'arbre
+            const votes = new Map(); members.forEach(m => (t?.linked?.[m.id] || []).forEach(f => { const c = f.sosa - (f.sosa % 2); votes.set(c, (votes.get(c) || 0) + 3); }));
+            if (t?.ancestors && surnames.length) t.ancestors.forEach(a => { const hit = surnames.find(s => normW(s.w) === normW(a.last)); if (hit && a.sosa >= 4) { const c = a.sosa - (a.sosa % 2); if (!side || coupleSide(c) === side) votes.set(c, (votes.get(c) || 0) + hit.n / (1 + genOf(c) / 4)); } });
+            const top = [...votes.entries()].sort((a, b) => b[1] - a[1])[0];
+            const internal = g.reduce((a, i) => a + [...W[i].keys()].filter(j => g.includes(j)).length, 0) / 2, possible = g.length * (g.length - 1) / 2;
+            return {k, members, idx: g, surnames, places, side: side || (top ? coupleSide(top[0]) : ''), couple: top ? top[0] : 0, sure: top && members.some(m => t?.linked?.[m.id]), density: possible ? internal / possible : 0, color: PALETTE[k % PALETTE.length]};
+        });
+        const order = [...clusters.flatMap(c => c.idx)];
+        return {pool, W, clusters, order, lo, hi, segLinks, withShared: pool.filter(m => (m.data?.shared_matches || []).length).length};
+    }
+    function clusterMatrix(A2) {
+        const n = A2.order.length; if (!n) return '';
+        const cell = n > 60 ? 7 : n > 30 ? 10 : 14, lab = 170, size = n * cell, cl = new Map(); A2.clusters.forEach(c => c.idx.forEach(i => cl.set(i, c)));
+        let rects = '';
+        A2.order.forEach((i, r) => A2.order.forEach((j, c) => { if (i === j) { rects += `<rect x="${lab + c * cell}" y="${r * cell}" width="${cell}" height="${cell}" fill="${cl.get(i).color}"/>`; return; } if (!A2.W[i].has(j)) return; const same = cl.get(i) === cl.get(j); rects += `<rect x="${lab + c * cell}" y="${r * cell}" width="${cell - .5}" height="${cell - .5}" fill="${same ? cl.get(i).color : '#9aa0a6'}" opacity="${same ? .9 : .45}"/>`; }));
+        const names = A2.order.map((i, r) => `<text x="${lab - 4}" y="${r * cell + cell * .78}" font-size="${Math.min(11, cell - 1)}" text-anchor="end">${esc(A2.pool[i].name.slice(0, 26))}</text>`).join('');
+        return `<div class="h-dna-matrix"><svg viewBox="0 0 ${lab + size + 2} ${size + 2}" width="${lab + size + 2}" style="max-width:100%">${names}<rect x="${lab}" y="0" width="${size}" height="${size}" fill="none" stroke="#d0d4dc"/>${rects}</svg></div>`;
+    }
+    RENDER.auto = {html() {
+        const f = filt(), kit = Number(f.kit) || data.kits[0]?.id || 0, A2 = autoClusters(kit, tree && treeKit === kit ? tree : null), p = prefs();
+        return `${header('ADN', '🔗 Groupes automatiques', 'Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome.')}
+            <div class="h-dna-filters"><label>Test<select data-auto-kit>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label><label>De (cM)<input type="number" min="0" data-auto-p="autoMin" value="${esc(p.autoMin ?? 30)}"></label><label>à (cM)<input type="number" min="0" data-auto-p="autoMax" value="${esc(p.autoMax ?? 600)}"></label></div>
+            <p class="muted">${fmt(A2.pool.length)} correspondance(s) entre ${A2.lo} et ${A2.hi} cM ; ${fmt(A2.withShared)} avec des correspondances en commun, ${fmt(A2.segLinks)} chevauchement(s) de segments. Les très proches parents (au-delà de ${A2.hi} cM) sont écartés : ils correspondent à tout le monde.</p>
+            ${A2.clusters.length ? `<div class="h-dna-auto">${clusterMatrix(A2)}<div class="h-dna-cl-list">${A2.clusters.map(c => `<article class="card h-dna-cl" style="--c:${c.color}"><h3><span class="h-dna-gchip" style="--c:${c.color}">Grappe ${c.k + 1}</span> <small class="muted">${c.members.length} correspondances · ${fmt(c.members.at(-1).shared_cm)}–${fmt(c.members[0].shared_cm)} cM · liens ${Math.round(c.density * 100)} %</small></h3>
+                    <p>${c.couple ? `${c.sure ? '🎯 Ancêtres communs' : '🤔 Ancêtres probables'} : <b>${esc(coupleLabel(c.couple, tree))}</b> <small class="muted">(${esc(GEN_NAMES[genOf(c.couple)] || '')}${c.side ? ', ' + esc(label(SIDES, c.side).toLowerCase()) : ''})</small>` : `<span class="muted">Ancêtre commun encore inconnu${c.side ? ` (côté ${esc(label(SIDES, c.side).toLowerCase())})` : ''} : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille.</span>`}</p>
+                    ${c.surnames.length ? `<p class="h-dna-chips">Noms : ${c.surnames.map(s => `<span>${esc(s.w)} ×${s.n}</span>`).join('')}</p>` : ''}${c.places.length ? `<p class="h-dna-chips">Lieux : ${c.places.map(s => `<span>${esc(s.w)} ×${s.n}</span>`).join('')}</p>` : ''}
+                    <p class="h-dna-cl-m">${c.members.map(m => `<button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> <small>${fmt(m.shared_cm)}</small>`).join(' · ')}</p></article>`).join('')}</div></div>
+                <p><button type="button" class="button" data-auto-make>Créer ${A2.clusters.length} groupe(s) avec ces couleurs</button> <small class="muted">(ou mettre à jour ceux déjà créés)</small></p>`
+            : `<p class="muted">Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes).</p>`}`;
+    }, bind(root) {
+        bindMatchLinks(root);
+        const kit = () => Number(root.querySelector('[data-auto-kit]')?.value) || 0;
+        root.querySelector('[data-auto-kit]')?.addEventListener('change', e => { filt().kit = Number(e.target.value); go('auto'); });
+        root.querySelectorAll('[data-auto-p]').forEach(i => i.addEventListener('change', () => { const p = prefs(); p[i.dataset.autoP] = num(i.value); savePrefs(p); go('auto'); }));
+        if (kit() && treeKit !== kit()) loadTree(kit()).then(() => { if (S().adnTab === 'auto') go('auto'); });
+        root.querySelector('[data-auto-make]')?.addEventListener('click', async () => { const A2 = autoClusters(kit(), tree);
+            try { for (const c of A2.clusters) { const name = `Grappe ${c.k + 1} (${c.members[0].name})`, old = data.groups.find(g => g.name === name);
+                const gid = old ? old.id : (await post('save_dna_group', {name, color: c.color, side: c.side, ancestor: c.couple ? coupleLabel(c.couple, tree) : '', notes: `Groupe automatique : ${c.members.length} correspondances qui se correspondent entre elles.`})).result.id;
+                await post('bulk_dna_matches', {ids: c.members.map(m => m.id), add_group: gid}); if (c.side) await post('bulk_dna_matches', {ids: c.members.filter(m => !m.side).map(m => m.id), side: c.side}); }
+                toast(`${A2.clusters.length} groupe(s) créé(s) ou mis à jour.`); await refresh(); } catch (e) { toast(e.message, 'error'); } });
+    }};
+
+    /* ═════════ 📍 Placement probable d'un cousin ═════════
+     * cM partagés → relations possibles (Shared cM Project) → générations de l'ancêtre commun → les couples de l'arbre à
+     * cette génération, pondérés par le côté, les noms et lieux en commun, la grappe et l'âge. Indicatif, jamais une preuve. */
+    // relation → génération du couple commun (côté testeur) et décalage : [génération, « demi »] ; plusieurs options pour les « R »
+    const REL_GEN = {P: [[1, 0]], FS: [[1, 0]], HS: [[1, 1]], GP: [[2, 0]], AU: [[2, 0], [1, 0]], GGP: [[3, 0]], GAU: [[3, 0], [1, 0]], HAU: [[2, 1], [1, 1]], '1C': [[2, 0]], H1C: [[2, 1]], '1C1R': [[2, 0], [3, 0]], '1C2R': [[2, 0], [4, 0]], H1C1R: [[2, 1], [3, 1]],
+        '2C': [[3, 0]], H2C: [[3, 1]], '2C1R': [[3, 0], [4, 0]], '2C2R': [[3, 0], [5, 0]], '3C': [[4, 0]], H3C: [[4, 1]], '3C1R': [[4, 0], [5, 0]], '4C': [[5, 0]], '5C': [[6, 0]], '6C': [[7, 0]]};
+    const DIRECT = ['P', 'GP', 'GGP'];
+    function placeMatch(m, t, opts = {}) {
+        const cm = num(opts.cm ?? m?.shared_cm), rels = guess(cm), out = new Map();
+        const ms = words(opts.surnames ?? m?.data?.surnames).map(normW), mp = words(opts.places ?? m?.data?.places).map(normW), side = opts.side ?? m?.side ?? '';
+        const mBy = num(opts.by ?? m?.data?.birth_year) || 0, tBy = t?.root_by || 0, diff = mBy && tBy ? mBy - tBy : 0;
+        const cl = opts.cluster || null, anc = new Map((t?.ancestors || []).map(a => [a.sosa, a]));
+        const lineOf = c => { const l = []; [c, c + 1].forEach(s0 => { for (let s = s0, d = 0; d < 3 && s < 1 << 11; d++, s *= 2) [s, s + 1].slice(0, d ? 2 : 1).forEach(x => anc.get(x) && l.push(anc.get(x))); }); return l; };
+        let direct = 0;
+        rels.forEach(r => {
+            if (DIRECT.includes(r.code)) { direct += r.p; return; }
+            const opt = REL_GEN[r.code] || []; if (!opt.length) return;
+            const younger = 1 / (1 + Math.exp(-diff / 12)); // né après le testeur → l'ancêtre commun est le plus proche
+            opt.forEach(([g, half], k) => {
+                const wOpt = opt.length === 1 ? 1 : (diff ? (k === 0 ? younger : 1 - younger) : .5);
+                for (let s = 1 << g; s < 2 << g; s += 2) {
+                    let w = r.p * wOpt / (1 << (g - 1)), why = [];
+                    const cs = coupleSide(s); if (side === 'paternal' || side === 'maternal') { if (cs !== side) w *= .03; else why.push('côté'); }
+                    const line = lineOf(s), sn = new Set(line.map(a => normW(a.last))), pl = new Set(line.flatMap(a => a.places.map(normW)));
+                    const sHit = ms.filter(x => sn.has(x)), pHit = mp.filter(x => pl.has(x));
+                    if (sHit.length) { w *= 1 + 3 * sHit.length; why.push('noms : ' + [...new Set(line.filter(a => sHit.includes(normW(a.last))).map(a => a.last))].join(', ')); }
+                    if (pHit.length) { w *= 1 + 1.5 * pHit.length; why.push('lieux : ' + [...new Set(line.flatMap(a => a.places).filter(x => pHit.includes(normW(x))))].slice(0, 3).join(', ')); }
+                    if (cl?.couple) { const c0 = cl.couple; let rel = false; for (let x = s; x >= 2; x = Math.floor(x / 2)) if (x - (x % 2) === c0) rel = true; for (let x = c0; x >= 2; x = Math.floor(x / 2)) if (x - (x % 2) === s) rel = true; if (rel) { w *= 5; why.push(`grappe ${cl.k + 1}`); } }
+                    const key = `${s}`, o = out.get(key) || {s, w: 0, rels: new Map(), why: new Set(), half: false};
+                    o.w += w; o.rels.set(r.code, (o.rels.get(r.code) || 0) + w); why.forEach(x => o.why.add(x)); if (half) o.half = true; out.set(key, o);
+                }
+            });
+        });
+        const list = [...out.values()], tot = list.reduce((a, x) => a + x.w, 0) || 1;
+        list.forEach(x => { x.p = x.w / tot; x.rel = [...x.rels.entries()].sort((a, b) => b[1] - a[1]).map(([c]) => c); });
+        return {cm, rels, direct, list: list.sort((a, b) => b.w - a.w).slice(0, 14)};
+    }
+    RENDER.place = {html() {
+        const f = filt(), kit = Number(f.kit) || data.kits[0]?.id || 0, t = tree && treeKit === kit ? tree : null, k = data.kits.find(x => x.id === kit);
+        const ms = data.matches.filter(m => m.kit_id === kit), sel = ms.find(m => m.id === Number(f.placeId)) || null, manual = f.placeManual || {};
+        const A2 = t ? autoClusters(kit, t) : null, cl = sel && A2 ? A2.clusters.find(c => c.members.includes(sel)) : null;
+        const R = (sel || num(manual.cm)) ? placeMatch(sel, t, sel ? {cluster: cl} : {cm: manual.cm, side: manual.side, surnames: manual.surnames, places: manual.places, by: manual.by}) : null;
+        const relRow = R ? R.rels.slice(0, 6).map(r => `<span class="h-dna-relp" style="--w:${Math.round(r.p * 100)}%"><b>${esc(r.code)}</b> ${esc(r.name)} <small>${Math.round(r.p * 100)} %</small></span>`).join('') : '';
+        return `${header('ADN', '📍 Placer un cousin dans l’arbre', 'Pour une correspondance (ou un nombre de cM), les relations possibles et les couples d’ancêtres de ton arbre par lesquels elle descend probablement, du plus au moins probable. On s’appuie sur les cM (Shared cM Project), le côté, les noms et lieux en commun, la grappe et l’âge : c’est une piste à vérifier, jamais une preuve.')}
+            <div class="h-dna-filters"><label>Test<select data-pl-kit>${data.kits.map(x => `<option value="${x.id}" ${x.id === kit ? 'selected' : ''}>${esc(kitName(x))}</option>`).join('')}</select></label>
+                <label class="h-dna-pl-m">Correspondance<select data-pl-match><option value="">— ou les cM à la main ci-dessous —</option>${ms.slice(0, 1500).map(m => `<option value="${m.id}" ${sel?.id === m.id ? 'selected' : ''}>${esc(m.name)} — ${fmt(m.shared_cm)} cM${m.person_id ? ' ✓' : ''}</option>`).join('')}</select></label></div>
+            ${!sel ? `<div class="h-dna-filters"><label>cM partagés<input type="number" min="0" step="0.1" data-pl-man="cm" value="${esc(manual.cm || '')}"></label><label>Côté<select data-pl-man="side">${SIDES.map(([v, l]) => `<option value="${v}" ${(manual.side || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Année de naissance<input type="number" data-pl-man="by" value="${esc(manual.by || '')}"></label><label>Noms en commun<input data-pl-man="surnames" value="${esc(manual.surnames || '')}" placeholder="MARTIN; DUBOIS"></label><label>Lieux<input data-pl-man="places" value="${esc(manual.places || '')}"></label></div>` : ''}
+            ${!k?.person_id ? '<p class="h-dna-warn">Ce test n’est relié à aucune fiche : relie-le à la personne testée (🧬 Mes tests) pour que l’arbre serve au placement.</p>' : !t ? '<p class="muted">Lecture de l’arbre…</p>' : ''}
+            ${R ? `<section class="card h-dna-plcard"><h3>${sel ? esc(sel.name) : 'Correspondance'} — ${fmt(R.cm, 1)} cM${sel?.longest_cm ? ` · plus long segment ${fmt(sel.longest_cm, 1)} cM` : ''}</h3><div class="h-dna-rels">${relRow || '<span class="muted">Hors des valeurs connues.</span>'}</div>
+                ${R.direct > .2 ? `<p class="h-dna-warn">À ${Math.round(R.direct * 100)} % une parenté en ligne directe (parent, grand-parent, arrière-grand-parent) : regarde d’abord ta proche famille.</p>` : ''}
+                ${cl ? `<p>Dans la <b>grappe ${cl.k + 1}</b>${cl.couple ? ` — ancêtres ${cl.sure ? 'communs' : 'probables'} de la grappe : ${esc(coupleLabel(cl.couple, t))}` : ''}.</p>` : ''}
+                ${sel && t?.linked?.[sel.id] ? `<p class="h-dna-ok">🎯 Déjà placée dans l’arbre : ancêtres communs ${esc(coupleLabel(t.linked[sel.id][0].sosa - t.linked[sel.id][0].sosa % 2, t))}.</p>` : ''}</section>
+            <div class="data-table-wrap"><table class="data-table h-dna-place"><thead><tr><th>Probabilité</th><th>Couple d’ancêtres</th><th>Génération</th><th>Relation</th><th>Indices</th><th></th></tr></thead><tbody>
+                ${R.list.map(x => `<tr><td><span class="h-dna-bar" style="--w:${Math.max(2, Math.round(x.p * 100))}%"></span> ${Math.round(x.p * 100)} %</td><td>${esc(coupleLabel(x.s, t))}${/^H/.test(x.rel[0] || '') ? ' <small class="muted">(un seul des deux : demi-cousin)</small>' : ''}</td><td>${esc(GEN_NAMES[genOf(x.s)] || '')}<br><small class="muted">${esc(label(SIDES, coupleSide(x.s)))}</small></td><td>${x.rel.slice(0, 2).map(esc).join(', ')}</td><td><small>${[...x.why].map(esc).join(' · ') || '—'}</small></td>
+                    <td>${sel ? `<button type="button" class="button small secondary" data-pl-keep="${x.s}">Retenir</button>` : ''}</td></tr>`).join('')}</tbody></table></div>
+            <p class="muted">Ensuite : cherche les descendants de ce couple (« Descendance » dans Graphiques), compare avec l’arbre de la correspondance, et note-la dans la fiche (Ancêtre commun, Fiche liée).</p>` : '<p class="muted">Choisis une correspondance ou entre des cM.</p>'}`;
+    }, bind(root) {
+        const f = filt();
+        root.querySelector('[data-pl-kit]')?.addEventListener('change', e => { f.kit = Number(e.target.value); f.placeId = 0; go('place'); });
+        root.querySelector('[data-pl-match]')?.addEventListener('change', e => { f.placeId = Number(e.target.value) || 0; go('place'); });
+        root.querySelectorAll('[data-pl-man]').forEach(i => i.addEventListener('change', () => { f.placeManual = {...(f.placeManual || {}), [i.dataset.plMan]: i.value}; go('place'); }));
+        const kit = Number(f.kit) || data.kits[0]?.id || 0; if (kit && treeKit !== kit) loadTree(kit).then(() => { if (S().adnTab === 'place') go('place'); });
+        root.querySelectorAll('[data-pl-keep]').forEach(b => b.addEventListener('click', async () => {
+            const m = data.matches.find(x => x.id === Number(f.placeId)); if (!m) return; const s = Number(b.dataset.plKeep), side = coupleSide(s);
+            try { await post('save_dna_match', {id: m.id, kit_id: m.kit_id, name: m.name, person_id: m.person_id || 0, shared_cm: m.shared_cm, segments: m.segments, longest_cm: m.longest_cm, relationship: m.relationship, side: m.side || side, status: m.status, groups: m.groups, data: {...(m.data || {}), mrca: `${coupleLabel(s, tree)} (probable)`}});
+                toast('Noté dans la correspondance (Ancêtre commun, côté).'); await refresh(); } catch (e) { toast(e.message, 'error'); } }));
     }};
 
     /* ═════════ 🧩 Chromosomes ═════════ */

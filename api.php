@@ -335,6 +335,7 @@ try {
         'vector_docs' => json_response(['docs' => vector_docs_list($pdo)]),
         'dna' => json_response(dna_all($pdo, $_GET)),
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
+        'dna_tree' => json_response(dna_tree_data($pdo, safe_int($_GET['kit'] ?? 0), safe_int($_GET['gen'] ?? 8))),
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'houses' => json_response(['items' => houses_list($pdo)]),
         'house' => json_response(house_get($pdo, safe_int($_GET['id'] ?? 0))),

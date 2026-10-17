@@ -298,3 +298,47 @@ function dna_lines(PDO $pdo, int $pid, int $depth = 10): array
     }
     return ['person' => $me, 'y' => $line($pid, 0), 'mt' => $line($pid, 1), 'x' => $x];
 }
+
+/**
+ * 🔗📍 Pour les groupes automatiques et le placement d'un cousin : l'arbre du testeur (ancêtres par numéro Sosa, avec leurs
+ * noms de famille et leurs lieux), et pour chaque correspondance reliée à une fiche, l'ancêtre commun calculé dans l'arbre
+ * (le plus proche : génération côté testeur, et nombre de générations côté correspondance).
+ */
+function dna_tree_data(PDO $pdo, int $kitId, int $maxGen = 8): array
+{
+    dna_ensure($pdo);
+    $maxGen = max(2, min(10, $maxGen));
+    $s = $pdo->prepare('SELECT person_id FROM dna_kits WHERE id=?'); $s->execute([$kitId]); $root = (int) $s->fetchColumn();
+    if (!$root) { return ['root' => 0, 'ancestors' => [], 'linked' => []]; }
+    $positions = array_filter(sosa_positions($pdo, $root, 20000)['positions'] ?? [], static fn($k) => $k < (2 << $maxGen), ARRAY_FILTER_USE_KEY);
+    ksort($positions);
+    $ids = array_values(array_unique($positions)); $people = [];
+    if ($ids) {
+        $marks = implode(',', array_fill(0, count($ids), '?'));
+        $q = $pdo->prepare("SELECT id, first_name, last_name, gender FROM persons WHERE id IN ($marks)"); $q->execute($ids);
+        foreach ($q->fetchAll() as $p) { $people[(int) $p['id']] = ['first' => (string) $p['first_name'], 'last' => (string) $p['last_name'], 'gender' => (string) $p['gender'], 'by' => null, 'places' => []]; }
+        $q = $pdo->prepare("SELECT e.person_id, e.year, t.gedcom_tag, COALESCE(pl.name,'') AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id WHERE e.person_id IN ($marks)"); $q->execute($ids);
+        foreach ($q->fetchAll() as $e) { $p = &$people[(int) $e['person_id']]; if (in_array($e['gedcom_tag'], ['BIRT', 'BAPM', 'CHR'], true) && $e['year'] !== null && $p['by'] === null) { $p['by'] = (int) $e['year']; }
+            $pl = trim(explode(',', (string) $e['place'])[0]); if ($pl !== '' && count($p['places']) < 8 && !in_array($pl, $p['places'], true)) { $p['places'][] = $pl; } unset($p); }
+    }
+    $ancestors = [];
+    foreach ($positions as $sosa => $pid) { if (!isset($people[$pid])) { continue; } $p = $people[$pid]; $ancestors[] = ['sosa' => $sosa, 'id' => $pid, 'name' => trim($p['first'] . ' ' . $p['last']), 'last' => $p['last'], 'gender' => $p['gender'], 'by' => $p['by'], 'places' => $p['places']]; }
+    // les correspondances reliées à une fiche : leurs ancêtres (en largeur), le premier qui est aussi un ancêtre du testeur
+    $sosaOf = []; foreach ($positions as $sosa => $pid) { if (!isset($sosaOf[$pid]) || $sosa < $sosaOf[$pid]) { $sosaOf[$pid] = $sosa; } }
+    $linked = [];
+    $s = $pdo->prepare('SELECT id, person_id FROM dna_matches WHERE kit_id=? AND person_id IS NOT NULL'); $s->execute([$kitId]);
+    foreach ($s->fetchAll() as $m) {
+        $start = (int) $m['person_id']; $queue = [[$start, 0]]; $seen = [$start => true]; $found = [];
+        while ($queue && count($seen) < 3000) {
+            [$pid, $d] = array_shift($queue);
+            if (isset($sosaOf[$pid]) && $pid !== $root) { $found[] = ['sosa' => $sosaOf[$pid], 'gen' => (int) floor(log($sosaOf[$pid], 2)), 'up' => $d]; if (count($found) >= 2) { break; } continue; } // un couple : les deux partenaires
+            if ($pid === $root && $d > 0) { continue; }
+            if ($d >= 12) { continue; }
+            foreach (sosa_parent_ids($pdo, $pid) as $par) { if ($par && !isset($seen[$par])) { $seen[$par] = true; $queue[] = [$par, $d + 1]; } }
+        }
+        if ($found) { $linked[(int) $m['id']] = $found; }
+    }
+    $s = $pdo->prepare('SELECT p.first_name, p.last_name FROM persons p WHERE p.id=?'); $s->execute([$root]); $r = $s->fetch();
+    $by = null; $q = $pdo->prepare("SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=? AND t.gedcom_tag IN ('BIRT','BAPM','CHR') AND e.year IS NOT NULL LIMIT 1"); $q->execute([$root]); $by = $q->fetchColumn();
+    return ['root' => $root, 'root_name' => $r ? trim($r['first_name'] . ' ' . $r['last_name']) : '', 'root_by' => $by !== false ? (int) $by : null, 'ancestors' => $ancestors, 'linked' => $linked ?: new stdClass()];
+}
