@@ -108,12 +108,32 @@
     const newFloor = (n = 0) => ({id: uid('f'), name: n === 0 ? 'Rez-de-chaussée' : n === -1 ? 'Cave' : n === 1 ? '1er étage' : `${n}e étage`, level: n, height: 270, wallT: 20, walls: [], openings: [], rooms: [], items: [], dims: [], labels: []});
     const newHouse = () => ({unit: 'cm', grid: 10, floors: [newFloor(0)], roof: {on: true, pitch: 40, color: '#8a4b3a', kind: 'tuiles'}, meta: {people: [], note: ''}, ref: null});
 
+    /* un plan ouvert depuis la base (ou une base reçue d'ailleurs) : seuls des nombres, des couleurs, des images sûres et
+       des mots-clés simples ; le texte libre (noms, notes) est toujours échappé à l'affichage */
+    const H_FREE = new Set(['name', 'note', 'text', 'title', 'label', 'period', 'place', 'place_text', 'caption']);
+    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape']);
+    const H_COLOR = /^(color|.*Color)$/, H_IMG = /^(src|img|image|href|top|thumb|tex|texture)$/;
+    const imgSafe = v => /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(v) || /^media\/[\w.%-]+$/.test(v) || /^api\.php\?action=house_model_file&id=\d+$/.test(v);
+    function cleanHouse(v, key = '') {
+        if (Array.isArray(v)) return v.slice(0, 20000).map(x => cleanHouse(x, key));
+        if (v && typeof v === 'object') { const o = {}; Object.entries(v).slice(0, 200).forEach(([k, x]) => { if (/^[\w$-]{1,40}$/.test(k)) o[k] = cleanHouse(x, k); }); return o; }
+        if (typeof v === 'string') {
+            if (H_FREE.has(key)) return v.slice(0, 2000);
+            if (H_COLOR.test(key)) return /^#[0-9a-f]{3,8}$/i.test(v) ? v : '#999999';
+            if (H_IMG.test(key)) return imgSafe(v) ? v : '';
+            if (H_WORD.has(key)) return /^[\w.:-]{0,60}$/.test(v) ? v : '';
+            const n = Number(v); return Number.isFinite(n) ? n : 0;
+        }
+        if (typeof v === 'number') return Number.isFinite(v) ? v : 0;
+        return typeof v === 'boolean' || v === null ? v : null;
+    }
+
     /* ═════════ L'éditeur ═════════ */
     async function open(ctx = {}) {
         let id = 0, name = 'Maison de famille', placeId = 0, placeText = '', period = '', H = newHouse();
-        if (ctx.id) { try { const r = await api('house', {id: ctx.id}); id = r.id; name = r.name; placeId = r.place_id; placeText = r.place_text; period = r.period; H = {...newHouse(), ...(r.house || {})}; if (!Array.isArray(H.floors) || !H.floors.length) H.floors = [newFloor(0)]; } catch (e) { return toast(e.message, 'error'); } }
+        if (ctx.id) { try { const r = await api('house', {id: ctx.id}); id = r.id; name = r.name; placeId = r.place_id; placeText = r.place_text; period = r.period; H = {...newHouse(), ...cleanHouse(r.house || {})}; if (!Array.isArray(H.floors) || !H.floors.length) H.floors = [newFloor(0)]; } catch (e) { return toast(e.message, 'error'); } }
         let fi = H.floors.findIndex(f => f.level === 0); if (fi < 0) fi = 0;
-        let tool = 'select', zoom = .6, panX = 80, panY = 80, sel = null, drag = null, draft = null, hover = null, dirty = false, hist = [], hpos = -1, view3d = null, tab = 'props', libCat = 'Chambre', libQ = '', mine = [];
+        let exporting = false, tool = 'select', zoom = .6, panX = 80, panY = 80, sel = null, drag = null, draft = null, hover = null, dirty = false, hist = [], hpos = -1, view3d = null, tab = 'props', libCat = 'Chambre', libQ = '', mine = [];
         const F = () => H.floors[fi];
         const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-hs-dlg';
         dlg.innerHTML = `<div class="h-hs">
@@ -168,13 +188,13 @@
             return s + `<rect x="${-half}" y="${-th / 2 - 6}" width="${o.w}" height="${th + 12}" fill="transparent"/></g>`;
         }
         function render() {
-            if (view3d) { view3d.update?.(H, fi); paintSide(); paintFloors(); return; }
+            if (view3d && !exporting) { view3d.update?.(H, fi); paintSide(); paintFloors(); return; }
             const f = F(), d = defs(); $('[data-hs-defs]').innerHTML = d.html;
             const g = H.grid || 10, step = g * (zoom < .25 ? 10 : zoom < .7 ? 5 : 1), r = stage.getBoundingClientRect();
             const vx0 = -panX / zoom, vy0 = -panY / zoom, vx1 = vx0 + r.width / zoom, vy1 = vy0 + r.height / zoom;
             let h = '';
-            for (let x = Math.floor(vx0 / step) * step; x < vx1; x += step) h += `<path d="M${x} ${vy0}V${vy1}" class="${x % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
-            for (let y = Math.floor(vy0 / step) * step; y < vy1; y += step) h += `<path d="M${vx0} ${y}H${vx1}" class="${y % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
+            if (!exporting) for (let x = Math.floor(vx0 / step) * step; x < vx1; x += step) h += `<path d="M${x} ${vy0}V${vy1}" class="${x % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
+            if (!exporting) for (let y = Math.floor(vy0 / step) * step; y < vy1; y += step) h += `<path d="M${vx0} ${y}H${vx1}" class="${y % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
             if (H.ref?.src && H.ref.show !== false && (H.ref.floor ?? f.id) === f.id) h += `<image href="${esc(H.ref.src)}" x="${H.ref.x}" y="${H.ref.y}" width="${H.ref.w}" height="${H.ref.h}" opacity="${H.ref.op ?? .45}" preserveAspectRatio="none" style="pointer-events:none"/>`;
             // l'étage du dessous, en transparence, pour superposer les murs
             const below = H.floors.filter(q => q.level < f.level).sort((a, b) => b.level - a.level)[0];
@@ -410,8 +430,9 @@
         function planSvg(f = F()) {
             const pts = [...f.walls.flatMap(w => [w.a, w.b]), ...f.rooms.flatMap(r => r.pts), ...f.items.flatMap(i => [[i.x - i.w / 2, i.y - i.d / 2], [i.x + i.w / 2, i.y + i.d / 2]])]; if (!pts.length) return null;
             const m = 80, x0 = Math.min(...pts.map(p => p[0])) - m, y0 = Math.min(...pts.map(p => p[1])) - m, x1 = Math.max(...pts.map(p => p[0])) + m, y1 = Math.max(...pts.map(p => p[1])) + m;
-            const z0 = zoom, px = panX, py = panY, s0 = sel; zoom = 1; panX = -x0; panY = -y0; sel = null; const showG = world.innerHTML; render();
-            const body = world.innerHTML.replace(/<path d="M[^"]*" class="h-hs-g2?"\/>/g, ''), dfs = $('[data-hs-defs]').innerHTML; zoom = z0; panX = px; panY = py; sel = s0; render(); void showG;
+            // l'étage demandé, sans la grille ni la sélection, même depuis la vue 3D ; puis on remet tout
+            const z0 = zoom, px = panX, py = panY, s0 = sel, f0 = fi, want = H.floors.indexOf(f); zoom = 1; panX = -x0; panY = -y0; sel = null; if (want >= 0) fi = want; exporting = true;
+            let body = '', dfs = ''; try { render(); body = world.innerHTML; dfs = $('[data-hs-defs]').innerHTML; } finally { exporting = false; zoom = z0; panX = px; panY = py; sel = s0; fi = f0; render(); }
             return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${x0} ${y0} ${x1 - x0} ${y1 - y0}" width="${Math.round(x1 - x0)}" height="${Math.round(y1 - y0)}"><style>.h-hs-rname{font-family:Georgia,serif;text-anchor:middle;fill:#3a3530;font-weight:700}.h-hs-rarea{font-family:Georgia,serif;text-anchor:middle;fill:#6a6560}.h-hs-iname{font-family:Helvetica,sans-serif;text-anchor:middle;fill:#555}.h-hs-label{font-family:Georgia,serif;fill:#3a3530}.h-hs-dim path{stroke:#2a5db0;stroke-width:1;fill:none}.h-hs-dim text{fill:#2a5db0;text-anchor:middle;font-family:Helvetica,sans-serif}</style><defs>${dfs}</defs><rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}" fill="#fff"/>${body}<text x="${x0 + 30}" y="${y1 - 30}" font-family="Georgia,serif" font-size="36" fill="#3a3530">${esc(name)} — ${esc(f.name)}</text></svg>`;
         }
         const svgToPng = svgText => new Promise((ok, ko) => { const m = svgText.match(/width="(\d+)" height="(\d+)"/), W = Math.min(6000, +m[1] * 2), Hh = Math.min(6000, +m[2] * 2), url = URL.createObjectURL(new Blob([svgText], {type: 'image/svg+xml'})), i = new Image(); i.onload = () => { const c = document.createElement('canvas'); c.width = W; c.height = Hh; c.getContext('2d').drawImage(i, 0, 0, W, Hh); URL.revokeObjectURL(url); c.toBlob(ok, 'image/png'); }; i.onerror = () => { URL.revokeObjectURL(url); ko(new Error('Image impossible.')); }; i.src = url; });

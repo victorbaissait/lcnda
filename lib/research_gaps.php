@@ -135,7 +135,7 @@ function gaps_where(string $kind, ?int $from, ?int $to, array $arch, string $pla
 function research_gaps_data(PDO $pdo, array $q = []): array
 {
     $maxGen = max(2, min(12, safe_int($q['gen'] ?? 7) ?: 7));
-    $base = function_exists('research_suggestions_data') ? research_suggestions_data($pdo, 200) : ['root_id' => 0, 'items' => []];
+    $base = function_exists('research_suggestions_data') ? research_suggestions_data($pdo, 0) : ['root_id' => 0, 'items' => []];
     $root = (int) ($base['root_id'] ?? 0);
     if (!$root) { return ['root_id' => 0, 'items' => [], 'archives' => [], 'counts' => []]; }
     $positions = array_filter(sosa_positions($pdo, $root, 20000)['positions'] ?? [], static fn($s) => $s < (1 << $maxGen), ARRAY_FILTER_USE_KEY);

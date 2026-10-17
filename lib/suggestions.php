@@ -104,7 +104,7 @@ function research_suggestions_data(PDO $pdo, int $limit = 40): array
     $order = ['birth' => 0, 'marriage' => 1, 'death' => 2, 'parents' => 3];
     usort($items, static fn($a, $b) => [$a['generation'], $order[$a['kind']], $a['sosa']] <=> [$b['generation'], $order[$b['kind']], $b['sosa']]);
     $total = count($items);
-    $items = array_slice($items, 0, max(1, min(200, $limit)));
+    if ($limit > 0) { $items = array_slice($items, 0, max(1, min(200, $limit))); } // 0 : tout (« Que manque-t-il ? »)
     foreach ($items as &$it) {
         $p = $people[$it['person_id']];
         $it['name'] = trim($p['first_name'] . ' ' . $p['last_name']) ?: 'Personne #' . $it['person_id'];

@@ -137,7 +137,7 @@
     /* ═════════ L'éditeur ═════════ */
     async function open(ctx = {}) {
         let id = 0, name = 'Mon diaporama', show = newShow();
-        if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = Array.isArray(show.slides) ? show.slides : []; } catch (e) { return toast(e.message, 'error'); } }
+        if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); } catch (e) { return toast(e.message, 'error'); } }
         let cur = 0, dirty = false, t = 0, playing = false, raf = 0, t0 = 0, p0 = 0, recording = null;
         const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-ss-dlg';
         dlg.innerHTML = `<div class="h-ss">

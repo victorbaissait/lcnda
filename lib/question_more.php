@@ -157,7 +157,12 @@ function qm_kinship(PDO $pdo, int $x, int $y): ?array
     foreach ($ax as $anc => $a) { if (isset($ay[$anc])) { $s = $a + $ay[$anc]; if (!$best || $s < $best['sum']) { $best = ['anc' => $anc, 'a' => $a, 'b' => $ay[$anc], 'sum' => $s]; } } }
     if (!$best) { return null; }
     $commons = array_keys(array_filter($ax, static fn($a, $anc) => isset($ay[$anc]) && $a === $best['a'] && $ay[$anc] === $best['b'], ARRAY_FILTER_USE_BOTH));
-    return $best + ['commons' => $commons, 'half' => count($commons) === 1 && $best['a'] > 0 && $best['b'] > 0];
+    // « demi » seulement si l'ancêtre commun a un conjoint connu qui n'est pas, lui, ancêtre des deux (un conjoint absent de l'arbre ne prouve rien)
+    $half = false;
+    if (count($commons) === 1 && $best['a'] > 0 && $best['b'] > 0) {
+        foreach (qm_couples($pdo) as $c) { if ($c['a'] === $commons[0] || $c['b'] === $commons[0]) { $sp = $c['a'] === $commons[0] ? $c['b'] : $c['a']; if ($sp && !(isset($ax[$sp]) && isset($ay[$sp]))) { $half = true; break; } } }
+    }
+    return $best + ['commons' => $commons, 'half' => $half];
 }
 
 function qm_answer(array $understood, string $answer, array $extra = []): array
@@ -173,6 +178,7 @@ function qm_rows(array $list, int $limit = 15): array
 function question_special(PDO $pdo, string $question, int $personId = 0): ?array
 {
     $q = trim(preg_replace('/\s+/u', ' ', $question));
+    if (mb_strlen($q) > 300) { $q = mb_substr($q, 0, 300); } // une question, pas un texte : le calcul reste rapide
     $t = ' ' . strtolower(ascii_fold($q)) . ' ';
     $people = null; $P = static function () use ($pdo, &$people) { return $people ??= qm_people($pdo); };
     $now = (int) date('Y');

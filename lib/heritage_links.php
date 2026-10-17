@@ -270,6 +270,7 @@ function same_birthday_ids(PDO $pdo, int $personId): array
 
 function ask_question(PDO $pdo, string $question, int $personId = 0): array
 {
+    if (mb_strlen($question) > 300) { $question = mb_substr($question, 0, 300); }
     // les questions qui demandent un calcul (lien de parenté, records, moyennes, fréquences, époques…) : lib/question_more.php
     if (function_exists('question_special') && ($sp = question_special($pdo, $question, $personId))) {
         $ids = array_slice(array_values(array_unique($sp['ids'] ?? [])), 0, 1000);
