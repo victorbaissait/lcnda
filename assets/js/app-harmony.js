@@ -26,10 +26,23 @@
         if (first && /^\s*\+\s/.test(first.textContent)) first.textContent = first.textContent.replace(/^(\s*)\+\s+/, '$1＋ ');
         else if (first && first.textContent.trim() === '+') first.textContent = first.textContent.replace('+', '＋');
     }
+    /* 📱 petit écran : le panneau de droite des outils devient un tiroir (☰), et ⛶ et × restent au bout de la barre du haut */
+    const MAINS = '.vx-main, .h-hs-main, .kn-main', BARS = '.vx-top, .h-hs-top, .kn-top, .h-avx-montage > .modal-head, .h-rt-head';
+    function narrow(root) {
+        (root.matches?.(MAINS) ? [root] : [...(root.querySelectorAll?.(MAINS) || [])]).forEach(m => {
+            if (m.querySelector(':scope > .drawer-btn')) return;
+            const b = document.createElement('button'); b.type = 'button'; b.className = 'drawer-btn'; b.textContent = '☰'; b.title = 'Montrer ou cacher le panneau des réglages'; b.setAttribute('aria-label', b.title);
+            b.addEventListener('click', () => { const d = m.closest('dialog') || m; d.classList.toggle('drawer-open'); }); m.appendChild(b);
+        });
+        (root.matches?.(BARS) ? [root] : [...(root.querySelectorAll?.(BARS) || [])]).forEach(bar => {
+            const full = bar.querySelector('[data-full-toggle]'), btns = [...bar.querySelectorAll('button')], close = full ? full.nextElementSibling : btns.at(-1);
+            if (full && full.parentElement === bar) full.classList.add('stick-r2'); if (close?.matches?.('button') && close.parentElement === bar) close.classList.add('stick-r');
+        });
+    }
     const scan = root => root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(tidy);
     let queued = new Set(), timer = 0;
     new MutationObserver(list => { list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) queued.add(n); })); clearTimeout(timer);
-        timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (!n.isConnected) return; if (n.matches?.('button')) tidy(n); scan(n); }); }, 40); })
+        timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (!n.isConnected) return; if (n.matches?.('button')) tidy(n); scan(n); narrow(n); }); }, 40); })
         .observe(document.documentElement, {childList: true, subtree: true});
     document.addEventListener('DOMContentLoaded', () => scan(document));
 })();

@@ -3894,6 +3894,48 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .sg-panel .sg-sum{list-style:none;margin:8px 0;padding:0;font-size:.85rem}.sg-panel ol.sg-sum li{padding:3px 0;border-bottom:1px solid var(--line-soft,#e4e4e4)}.sg-panel>small{display:block;margin:-2px 0 4px}
 .mt-reorder .dashboard-reorder-row{grid-template-columns:18px 30px minmax(0,1fr) auto}.mt-reorder .dashboard-reorder-row:has(> .mt-vis){grid-template-columns:18px 22px 30px minmax(0,1fr) auto}
 .mt-gitems,.mt-groups [data-mt-flat]{display:grid;gap:9px;padding:0 0 4px}.mt-groups [data-mt-flat]+.side-menu-sep{margin-top:6px}
+/* ═════ Harmonisation 7/7 : petit écran (fenêtre réduite, tablette) ═════ */
+/* les barres du haut des outils défilent de côté ; ⛶ et × restent toujours visibles à droite (app-harmony.js les marque) */
+@media (max-width:1000px){
+.vx-top,.h-hs-top,.kn-top,.h-avx-montage > .modal-head,.h-rt-head,.ly-head,.ly-top{flex-wrap:nowrap!important;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.vx-top>*,.h-hs-top>*,.kn-top>*{flex-shrink:0}
+.stick-r,.stick-r2{position:sticky;z-index:5;background:var(--card-bg,#fff)}.stick-r{right:0}.stick-r2{right:40px}
+}
+/* le panneau de droite devient un tiroir : ☰ pour l'ouvrir, la zone de dessin garde toute la place */
+.drawer-btn{display:none}
+@media (max-width:900px){
+.vx-main,.h-hs-main{grid-template-columns:48px minmax(0,1fr)!important;position:relative}
+.kn-main{grid-template-columns:110px minmax(0,1fr)!important;position:relative}
+.vx-panel,.h-hs-side,.kn-insp{position:absolute!important;top:0;right:0;bottom:0;width:min(340px,88vw)!important;transform:translateX(100%);transition:transform .2s ease;z-index:30;box-shadow:-8px 0 22px rgba(0,0,0,.2);visibility:hidden}
+.drawer-open .vx-panel,.drawer-open .h-hs-side,.drawer-open .kn-insp{transform:none;visibility:visible}
+.drawer-btn{display:inline-grid;place-items:center;position:absolute;top:8px;right:8px;z-index:31;width:36px;height:36px;padding:0;border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);font-size:18px;cursor:pointer;box-shadow:2px 2px 0 rgba(5,93,255,.25)}
+.drawer-open .drawer-btn{right:calc(min(340px,88vw) + 8px)}
+}
+/* colonne de gauche (Maintenance, Listes…) en écran étroit : en-tête et pied compacts, plus de place pour la liste ; repliable */
+@media (max-width:850px){
+.sidebar{max-height:62vh}
+.sidebar-top{padding:8px 14px!important;min-height:0!important}.sidebar-top h1{font-size:18px!important;margin:0!important}.sidebar-top .eyebrow{font-size:9px}
+.sidebar-footer{padding:6px 14px!important}.sidebar-footer>span,.sidebar-footer>small{display:none}
+.sidebar-toggle{display:inline-grid!important}
+}
+/* ☑ lignes à ranger : la même partout (heritage-dnd.js) — ⠿ | ☑ | libellé | ↑ ↓ */
+.ord-row{display:flex!important;align-items:center;gap:8px;flex-wrap:nowrap}.ord-row>.ord-main{flex:1 1 auto;min-width:0;text-align:left;justify-content:flex-start}
+.ord-row .ord-arrow{width:28px;height:28px;min-width:28px;min-height:28px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);border-radius:0;box-shadow:none;margin:0}
+.ord-row .ord-arrow:disabled{opacity:.35}.ord-row .ord-arrow:not(:disabled):hover{background:var(--blue-soft,#eaf2ff)}
+.ord-row .dnd-grip,.ord-row .order-grip{cursor:grab;color:var(--muted,#888);font-size:15px}
+/* Apparence : lignes à glisser (menu, listes, cartes, graphiques) comme partout : ⠿ ☑ 01 libellé [nouveau nom] */
+.order-editor.compact .order-row.has-visibility{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.order-editor.compact .order-row.has-visibility>.order-grip{order:-3;flex:0 0 auto}
+.order-editor.compact .order-row.has-visibility>.order-visible{order:-2;flex:0 0 auto;margin:0}
+.order-editor.compact .order-row.has-visibility>.order-number{flex:0 0 auto}
+.order-editor.compact .order-row.has-visibility>b{flex:1 1 auto;min-width:0;overflow-wrap:normal}
+.order-editor.compact .order-row.has-visibility>.order-rename{flex:1 1 150px;min-width:0;width:auto;order:5}
+/* 🧩 mêmes petits boutons partout (app-harmony.js) : poubelle et crayon de la fiche personne, 29 px */
+.icon-action.ia-auto{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;padding:0!important;display:inline-grid!important;place-items:center;font-size:0;line-height:1;border:1.5px solid var(--ink)!important;background:var(--card-bg,#fff)!important;color:var(--ink)!important;border-radius:0!important;box-shadow:2px 2px 0 rgba(5,93,255,.2)}
+.icon-action.ia-auto.is-danger{color:#a31625!important}.icon-action.ia-auto:hover{color:#fff!important;background:var(--blue)!important}.icon-action.ia-auto.is-danger:hover{background:#c91d2e!important}
+.icon-action.ia-auto svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ord-row .ord-arrow{width:29px;height:29px;min-width:29px;min-height:29px}
+:root[data-theme="dark"] .icon-action.is-danger{color:#ff7b86}
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}
@@ -4176,22 +4218,5 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 :root[data-theme="dark"] .archive-room-piece{background:#212121}
 :root[data-theme="dark"] .archive-room-piece.is-on{background:#12233d}
 :root[data-theme="dark"] .archive-room-piece button{background:#212121}
+:root[data-theme="dark"] .icon-action.ia-auto.is-danger{color:#e9a5ac!important}
 /* ═════ fin du mode sombre automatique ═════ */
-/* ☑ lignes à ranger : la même partout (heritage-dnd.js) — ⠿ | ☑ | libellé | ↑ ↓ */
-.ord-row{display:flex!important;align-items:center;gap:8px;flex-wrap:nowrap}.ord-row>.ord-main{flex:1 1 auto;min-width:0;text-align:left;justify-content:flex-start}
-.ord-row .ord-arrow{width:28px;height:28px;min-width:28px;min-height:28px;padding:0!important;display:inline-flex;align-items:center;justify-content:center;font-size:14px;line-height:1;border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);border-radius:0;box-shadow:none;margin:0}
-.ord-row .ord-arrow:disabled{opacity:.35}.ord-row .ord-arrow:not(:disabled):hover{background:var(--blue-soft,#eaf2ff)}
-.ord-row .dnd-grip,.ord-row .order-grip{cursor:grab;color:var(--muted,#888);font-size:15px}
-/* Apparence : lignes à glisser (menu, listes, cartes, graphiques) comme partout : ⠿ ☑ 01 libellé [nouveau nom] */
-.order-editor.compact .order-row.has-visibility{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 8px}
-.order-editor.compact .order-row.has-visibility>.order-grip{order:-3;flex:0 0 auto}
-.order-editor.compact .order-row.has-visibility>.order-visible{order:-2;flex:0 0 auto;margin:0}
-.order-editor.compact .order-row.has-visibility>.order-number{flex:0 0 auto}
-.order-editor.compact .order-row.has-visibility>b{flex:1 1 auto;min-width:0;overflow-wrap:normal}
-.order-editor.compact .order-row.has-visibility>.order-rename{flex:1 1 150px;min-width:0;width:auto;order:5}
-/* 🧩 mêmes petits boutons partout (app-harmony.js) : poubelle et crayon de la fiche personne, 29 px */
-.icon-action.ia-auto{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;padding:0!important;display:inline-grid!important;place-items:center;font-size:0;line-height:1;border:1.5px solid var(--ink)!important;background:var(--card-bg,#fff)!important;color:var(--ink)!important;border-radius:0!important;box-shadow:2px 2px 0 rgba(5,93,255,.2)}
-.icon-action.ia-auto.is-danger{color:#a31625!important}.icon-action.ia-auto:hover{color:#fff!important;background:var(--blue)!important}.icon-action.ia-auto.is-danger:hover{background:#c91d2e!important}
-.icon-action.ia-auto svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.ord-row .ord-arrow{width:29px;height:29px;min-width:29px;min-height:29px}
-:root[data-theme="dark"] .icon-action.is-danger{color:#ff7b86}
