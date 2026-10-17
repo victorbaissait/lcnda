@@ -3518,3 +3518,9 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-hs-cimg img{width:100%;height:100%;object-fit:contain}.h-hs-cact{display:flex;gap:4px;margin-top:6px}
 :root[data-theme="dark"] .h-hs,:root[data-theme="dark"] .h-hs-pane{color:#e6e6e6}
 :root[data-theme="dark"] .h-hs-top,:root[data-theme="dark"] .h-hs-side,:root[data-theme="dark"] .h-hs-menu>div,:root[data-theme="dark"] .h-hs-lib button{background:#24272c;border-color:#3a3f46;color:#e6e6e6}
+/* 📰 Faire-part et affiches */
+.h-fp-form{display:grid;gap:10px}
+.h-fp-kinds{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:5px}
+.h-fp-kind{display:flex;align-items:center;gap:6px;border:1px solid #dfe2e8;border-radius:8px;padding:6px 8px;cursor:pointer}
+.h-fp-kind:has(input:checked){border-color:#2a7de1;background:#eef5ff}
+.h-fp-who{display:flex;gap:4px}.h-fp-who input{flex:1}
