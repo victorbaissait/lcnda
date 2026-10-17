@@ -1618,7 +1618,7 @@
     /** Point d'entrée : un média {id, filename, title, media_type}. */
     /* ═════════ Maintenance → Montage, retouche, mise en page et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
-    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)'], ['vector', '✒️ Dessin vectoriel']];
+    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)'], ['vector', '✒️ Dessin vectoriel'], ['house', '🏠 Maison (plan et 3D)']];
     const FULL_EDITORS = [...EDITORS, ['museum', '🏛️ Musée de famille (Aménager)']], FULL_DEFAULT = {layout: true, museum: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
     /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
     const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
@@ -1689,7 +1689,7 @@
                     <div class="form-grid h-mtp-grid"><label>Éditeur<select data-mtp-which>${opt(EDITORS, which)}</select></label></div>
                     ${presetBar('toolbar', toolbarSets(which), 'ces boutons')}
                     <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
-                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
+                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : which === 'house' ? 'le plan d’une maison (Listes → 🏠 Maisons de famille)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
                 <div class="h-ek-panel h-mtp-keys"><h4>⌨️ Raccourcis de « ${esc(edName)} »</h4><div data-ek-box></div><p class="muted"><button type="button" class="button small secondary" data-mtp-allkeys>⌨️ Tous les raccourcis de l’app (Maintenance → Raccourcis clavier)</button></p></div>
                 </section></div></section>`;
             // les raccourcis suivent l'éditeur choisi (même liste que Maintenance → Raccourcis clavier)

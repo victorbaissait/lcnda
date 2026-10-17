@@ -205,7 +205,11 @@
         await three();
         const W = () => box2.clientWidth || 800, Hh = () => box2.clientHeight || 600;
         const renderer = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true}); renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.setSize(W(), Hh()); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; renderer.outputColorSpace = T.SRGBColorSpace;
-        box2.innerHTML = `<div class="h-hs-3dbar"><label class="checkbox-line"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés (voir dedans)</label><label class="checkbox-line"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure" title="Deux clics sur la maison : la distance (et la hauteur entre les deux points)">📏 Mesurer</button><span class="segmented"><button type="button" data-h3="view" data-v="top" title="Vue de dessus">Dessus</button><button type="button" data-h3="view" data-v="front" title="Vue de face">Face</button><button type="button" data-h3="view" data-v="side" title="Vue de côté">Côté</button></span><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>`;
+        // la barre de la vue 3D est dans l'éditeur (pour pouvoir la ranger avec ⚙️ Personnaliser) ; sinon on la crée ici
+        let bar = box2.parentElement?.querySelector('[data-h3bar]'), ownBar = false;
+        if (!bar) { ownBar = true; box2.innerHTML = '<div class="h-hs-3dbar"><label class="checkbox-line"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés</label><label class="checkbox-line"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure">📏 Mesurer</button><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>'; bar = box2.querySelector('.h-hs-3dbar'); }
+        else { box2.innerHTML = ''; bar.hidden = false; bar.querySelectorAll('input[data-h3]').forEach(i => { i.checked = i.dataset.h3 === 'all'; }); bar.querySelectorAll('.is-on').forEach(b => b.classList.remove('is-on')); const wb = bar.querySelector('[data-h3="walk"]'); if (wb) wb.textContent = '🚶 Visiter'; }
+        const barAc = new AbortController(), sig = {signal: barAc.signal};
         box2.appendChild(renderer.domElement);
         const scene = new T.Scene(); scene.background = new T.Color('#dfe8ef'); scene.fog = new T.Fog('#dfe8ef', 60, 220);
         scene.add(new T.HemisphereLight('#ffffff', '#8a7a66', 1.6)); const sun = new T.DirectionalLight('#fff4e0', 2.2); sun.position.set(18, 30, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -30, right: 30, top: 30, bottom: -30, far: 120}); scene.add(sun);
@@ -213,7 +217,7 @@
         const cam = new T.PerspectiveCamera(50, W() / Hh(), .05, 500);
         let house = new T.Group(); scene.add(house);
         const opts = {all: true, roof: H.roof?.on !== false, cut: false, dims: false};
-        box2.querySelector('[data-h3="roof"]').checked = opts.roof;
+        bar.querySelector('[data-h3="roof"]').checked = opts.roof;
         let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H;
         function rebuild() {
             scene.remove(house); house = new T.Group();
@@ -258,11 +262,11 @@
         el.addEventListener('wheel', e => { e.preventDefault(); if (walk) return; dist = clamp(dist * Math.exp(e.deltaY * .0012), 1.5, 200); }, {passive: false});
         const keys = new Set(); const kd = e => { if (e.target.closest?.('input, textarea')) return; keys.add(e.key.toLowerCase()); }, ku = e => keys.delete(e.key.toLowerCase());
         document.addEventListener('keydown', kd); document.addEventListener('keyup', ku);
-        box2.querySelector('.h-hs-3dbar').addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; rebuild(); } });
-        box2.querySelector('.h-hs-3dbar').addEventListener('click', e => { const bt = e.target.closest('button'), k = bt?.dataset.h3;
+        bar.addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; rebuild(); } }, sig);
+        bar.addEventListener('click', e => { const bt = e.target.closest('button'), k = bt?.dataset.h3;
             if (k === 'measure') { measuring = !measuring; bt.classList.toggle('is-on', measuring); el.style.cursor = measuring ? 'crosshair' : ''; if (!measuring) clearMeasure(); return; }
             if (k === 'view') { walk = false; const v = bt.dataset.v; home(); if (v === 'top') { pitch = 1.5; yaw = 0; } else if (v === 'front') { pitch = .06; yaw = 0; } else { pitch = .06; yaw = Math.PI / 2; } return; }
-            if (k === 'home') home(); if (k === 'walk') { walk = !walk; e.target.textContent = walk ? '✋ Arrêter la visite' : '🚶 Visiter'; if (walk) { const f = Hcur.floors[fiCur], bb = new T.Box3().setFromObject(house), c = bb.getCenter(new T.Vector3()); cam.position.set(c.x, floorBase(Hcur, f) + 1.6, c.z); yaw = Math.PI; pitch = 0; } else home(); } });
+            if (k === 'home') home(); if (k === 'walk') { walk = !walk; e.target.textContent = walk ? '✋ Arrêter la visite' : '🚶 Visiter'; if (walk) { const f = Hcur.floors[fiCur], bb = new T.Box3().setFromObject(house), c = bb.getCenter(new T.Vector3()); cam.position.set(c.x, floorBase(Hcur, f) + 1.6, c.z); yaw = Math.PI; pitch = 0; } else home(); } }, sig);
         let raf = 0, last = performance.now();
         const loop = now => { const dt = Math.min(.05, (now - last) / 1000); last = now;
             if (walk) { const sp = (keys.has('shift') ? 3.2 : 1.6) * dt, f2 = new T.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), r2 = new T.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
@@ -275,7 +279,7 @@
         const ro = new ResizeObserver(() => { renderer.setSize(W(), Hh()); cam.aspect = W() / Hh(); cam.updateProjectionMatrix(); }); ro.observe(box2);
         return {update: (H2, fi2) => { Hcur = H2; fiCur = fi2; rebuild(); },
             shot: () => new Promise(ok => { renderer.render(scene, cam); renderer.domElement.toBlob(ok, 'image/png'); }),
-            destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); renderer.dispose(); box2.innerHTML = ''; }};
+            destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); renderer.dispose(); box2.innerHTML = ''; barAc.abort(); if (!ownBar) bar.hidden = true; }};
     }
 
     ext.house3d = {mount, inspect, parseModel};
