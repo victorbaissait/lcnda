@@ -416,13 +416,13 @@
         ['eyedrop', '💧', 'Pipette (prend la couleur d’un objet)', 'I'], ['hand', '✋', 'Main (déplacer la vue)', 'H'], ['zoom', '🔍', 'Loupe (⌥ : dézoomer)', 'Z']];
     const SWATCHES = ['#000000', '#ffffff', '#7f7f7f', '#d81e1e', '#e6862a', '#f4c430', '#1a8a3a', '#1f4fa3', '#7b3f8c', '#8b5a2b', '#f2c9a8', 'none'];
     const newDoc = () => ({w: 800, h: 600, bg: '#ffffff', grid: 0, snap: false, objs: []});
-    const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o), ...(/^[a-z]{2,20}$/.test(o.kind || '') ? {kind: o.kind} : {})}; }; // kind : « tree » pour un arbre décoratif, etc.
+    const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o), ...(/^[a-z]{2,20}$/.test(o.kind || '') ? {kind: o.kind} : {}), ...(typeof o.blasonOn === 'boolean' ? {blasonOn: o.blasonOn} : {})}; }; // kind : « tree » pour un arbre décoratif, etc.
     /** les réglages du mode Plan et l'image de référence (vérifiés : nombres, style connu, image sûre) */
     function cleanMap(o) {
         const out = {}, m = o.map;
         if (m && typeof m === 'object') {
             const g = m.geo && typeof m.geo === 'object' && ['n', 's', 'w', 'e'].every(k => Number.isFinite(Number(m.geo[k]))) ? {n: num(m.geo.n), s: num(m.geo.s), w: num(m.geo.w), e: num(m.geo.e), lat: num(m.geo.lat), lon: num(m.geo.lon), name: String(m.geo.name || '').slice(0, 120), place_id: Math.max(0, Math.round(num(m.geo.place_id)))} : null;
-            out.map = {on: !!m.on, style: VM()?.STYLES?.[m.style] ? m.style : (/^[a-z]{2,20}$/.test(m.style || '') ? m.style : 'modern'), auto: m.auto !== false, year: num(m.year) ? Math.round(clamp(num(m.year), -3000, 3000)) : null, scale: clamp(num(m.scale, 1), 0.001, 1e6), ...(g ? {geo: g} : {})};
+            out.map = {on: !!m.on, style: VM()?.STYLES?.[m.style] ? m.style : (/^[a-z]{2,20}$/.test(m.style || '') ? m.style : 'modern'), auto: m.auto !== false, year: num(m.year) ? Math.round(clamp(num(m.year), -3000, 3000)) : null, scale: clamp(num(m.scale, 1), 0.001, 1e6), ...(m.kmgrid ? {kmgrid: true} : {}), ...(m.askGeo ? {askGeo: true} : {}), ...(g ? {geo: g} : {})};
         }
         const r = o.ref;
         if (r && typeof r === 'object' && imgOk(r.src)) out.ref = {src: r.src, x: num(r.x), y: num(r.y), w: clamp(num(r.w, 100), 1, 100000), h: clamp(num(r.h, 100), 1, 100000), k: clamp(num(r.k, 1), .1, 4), op: clamp(num(r.op, .5), .05, 1), show: r.show !== false, print: !!r.print, gray: !!r.gray};
@@ -452,9 +452,9 @@
                     ${menu('Plan', [['map_on', '🗺️ Mode Plan (cartes) : oui / non'], ['map_tab', 'Palette du plan (routes, rivières, bâtiments…)'], ['-'], ['map_base', '🗺️ Fond de carte d’un lieu…'], ['map_ref', '🖼️ Image de référence (en transparence)…'], ['-'], ['map_layers', '🗂 Créer les calques d’un plan'], ['map_places', '📍 Lieux de la base sur le plan…'], ['map_links', '🔗 Objets reliés à la famille…']])}
                     ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Tout le plan de travail', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['grid', 'Grille et magnétisme…'], ['smart', 'Repères commentés (aimanter aux objets) : oui / non']])}</nav>
                 <div class="vx-hist" data-tbg="vx-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" data-vx-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" data-vx-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></div>
-                <span class="vx-spacer"></span><span class="vx-status" data-vx-status></span>${ext.tbButton ? ext.tbButton('vector') : ''}<button type="button" class="button small" data-vx-cmd="save">💾 Enregistrer</button>${ctx.coat ? '<button type="button" class="button small secondary" data-vx-cmd="tocoat">🛡️ Dans ces armoiries</button>' : ''}${ctx.shape || ctx.onShape ? '<button type="button" class="button small secondary" data-vx-cmd="toshape">🔷 Enregistrer la forme</button>' : ''}<button type="button" class="icon-button" data-vx-close title="Fermer">×</button></header>
+                <span class="vx-spacer"></span><span class="vx-status" data-vx-status></span><span class="vx-modes" data-tbg="vx-modes" data-tbg-label="Modes (en haut)"><label class="vx-mode" data-tb="vx-mode-blason" title="Montre l’onglet et le menu Blason"><input type="checkbox" data-vx-mode="blason"> 🛡️ Mode Blason</label><label class="vx-mode" data-tb="vx-mode-map" title="Montre l’onglet Plan et ses outils (routes, rivières…)"><input type="checkbox" data-vx-mode="map"> 🗺️ Mode Carte</label></span>${ext.tbButton ? ext.tbButton('vector') : ''}<button type="button" class="button small" data-vx-cmd="save">💾 Enregistrer</button>${ctx.coat ? '<button type="button" class="button small secondary" data-vx-cmd="tocoat">🛡️ Dans ces armoiries</button>' : ''}${ctx.shape || ctx.onShape ? '<button type="button" class="button small secondary" data-vx-cmd="toshape">🔷 Enregistrer la forme</button>' : ''}<button type="button" class="icon-button" data-vx-close title="Fermer">×</button></header>
             <div class="vx-main"><aside class="vx-tools" data-tbg="vx-tools" data-tbg-label="Outils (colonne de gauche)">${TOOLS.map(([k, ic, l, sc]) => `<button type="button" data-vx-tool="${k}" title="${esc(l)} (${sc})">${ic}</button>`).join('')}
-                    <div class="vx-maptools" data-vx-maptools hidden title="Outils du mode Plan"><button type="button" data-vx-tab-go="map" title="🗺️ Plan : la palette des routes, rivières, bâtiments…">🗺️</button>${[['mline', '🛣️', 'Voie, rivière, limite (un clic par point)'], ['mzone', '▱', 'Zone : forêt, champ, lac, bourg…'], ['msym', '🏠', 'Bâtiment ou symbole'], ['mlabel', '🔤', 'Nom de lieu'], ['mdeco', '🧭', 'Échelle, rose des vents, cartouche, légende']].map(([k, ic, l]) => `<button type="button" data-vx-tool="${k}" title="${esc(l)}">${ic}</button>`).join('')}</div>
+                    <div class="vx-maptools" data-vx-maptools hidden title="Outils du mode Plan"><button type="button" data-vx-tab-go="map" title="🗺️ Plan : la palette des routes, rivières, bâtiments…">🗺️</button>${[['mline', '🛣️', 'Voie, rivière, limite (un clic par point)'], ['mzone', '▱', 'Zone : forêt, champ, lac, bourg…'], ['msym', '🏠', 'Bâtiment ou symbole'], ['mlabel', '📍', 'Nom de lieu (ville, village, rivière… déjà mis en forme pour une carte ; T = texte libre)'], ['mdeco', '🧭', 'Échelle, rose des vents, cartouche, légende']].map(([k, ic, l]) => `<button type="button" data-vx-tool="${k}" title="${esc(l)}">${ic}</button>`).join('')}</div>
                     <div class="vx-fs" title="Remplissage et contour de la sélection"><span class="vx-fsfill" data-vx-fsfill></span><span class="vx-fsstroke" data-vx-fsstroke></span></div></aside>
                 <div class="vx-stage" data-vx-stage tabindex="-1"><div class="vx-crumbs" data-vx-crumbs hidden></div><svg class="vx-svg" data-vx-svg xmlns="http://www.w3.org/2000/svg"><defs data-vx-defs></defs><g data-vx-world><rect data-vx-board class="vx-board"/><g data-vx-ref></g><g data-vx-grid></g><g data-vx-content></g><g data-vx-ui></g></g></svg></div>
                 <aside class="vx-panel"><div class="vx-psize" data-vx-psize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille d’origine)"></div><nav class="segmented vx-tabs" data-tbg="vx-tabs" data-tbg-label="Onglets du panneau de droite"><button type="button" data-vx-tab="props" class="is-active">Propriétés</button><button type="button" data-vx-tab="layers">Calques</button><button type="button" data-vx-tab="map" title="Mode Plan (cartes), fond de carte, image de référence">🗺️ Plan</button><button type="button" data-vx-tab="blason">Blason</button><button type="button" data-vx-tab="doc">Document</button></nav><div class="vx-pane" data-vx-pane></div></aside></div>
@@ -466,7 +466,7 @@
         ext.editorKeysAttach?.(dlg, 'vector'); // ⌨️ raccourcis à soi
         const $ = s => dlg.querySelector(s);
         const svgEl = $('[data-vx-svg]'), world = $('[data-vx-world]'), content = $('[data-vx-content]'), ui = $('[data-vx-ui]'), defsEl = $('[data-vx-defs]'), stage = $('[data-vx-stage]'), pane = $('[data-vx-pane]');
-        let tab = 'props';
+        let tab = ctx.tab === 'map' ? 'map' : 'props';
         const status = t => { $('[data-vx-status]').textContent = t || ''; };
         const hint = t => { $('[data-vx-hint]').textContent = t || ''; };
         /* calques et groupes : on travaille « dans » un calque ou un groupe (mode isolé, comme Illustrator) ;
@@ -529,6 +529,7 @@
         function drawRef() {
             const g = $('[data-vx-ref]'), r = doc.ref; if (!g) return;
             g.innerHTML = r && r.show !== false && imgOk(r.src) ? `<image href="${esc(r.src)}" x="${n2(r.x)}" y="${n2(r.y)}" width="${n2(r.w)}" height="${n2(r.h)}" preserveAspectRatio="none" opacity="${n2(clamp(num(r.op, .5), .05, 1))}" style="pointer-events:none${r.gray ? ';filter:grayscale(1)' : ''}"/>` : '';
+            g.innerHTML += ext.vectorMap?.scaleGridSvg?.(doc) || ''; // la grille d'échelle d'une carte (jamais imprimée)
         }
         function render() {
             mapCtx(doc, true); drawRef();
@@ -776,17 +777,18 @@
                 const open = g && (openGroups.has(o.id) || inside);
                 rows.push(`<div class="vx-layer${sel.includes(o.id) && here ? ' is-sel' : ''}${active ? ' is-active' : ''}${here ? '' : ' is-out'}${o.layer ? ' is-layer' : ''}" data-vx-layer="${esc(o.id)}" draggable="true" style="--d:${path.length}">`
                     + (g ? `<button type="button" class="vx-ltw" data-vx-ltoggle title="Déplier / replier">${open ? '▾' : '▸'}</button>` : '<span class="vx-ltw"></span>')
-                    + `<span class="vx-lic">${o.layer ? '📄' : LIC[o.type] || '•'}</span><input data-vx-lname value="${esc(o.name || '')}" placeholder="${esc(o.type)}">`
+                    + `<span class="vx-lic">${o.layer ? '📄' : LIC[o.type] || '•'}</span><input data-vx-lname readonly title="Double-clic pour renommer" value="${esc(o.name || '')}" placeholder="${esc(o.type)}">`
                     + (g ? `<button type="button" data-vx-lenter title="${active ? 'Sortir de ce ' + (o.layer ? 'calque' : 'groupe') : 'Travailler dans ce ' + (o.layer ? 'calque' : 'groupe') + ' : les nouveaux dessins y vont'}" class="vx-lenter${active ? ' is-on' : ''}">${active ? '●' : '○'}</button>` : '')
                     + `<button type="button" data-vx-lvis title="Montrer / cacher">${o.hidden ? '🙈' : '👁'}</button><button type="button" data-vx-llock title="Verrouiller">${o.locked ? '🔒' : '🔓'}</button><button type="button" data-vx-lup title="Vers le haut">↑</button><button type="button" data-vx-ldown title="Vers le bas">↓</button><button type="button" data-vx-ldel title="Supprimer">🗑</button></div>`);
                 if (open) walk(o.children || [], [...path, o.id]);
             });
             walk(doc.objs, []);
             const where = scope.length ? pathName(scope).map(esc).join(' › ') : 'le dessin (hors calque)';
-            return `<div class="vx-ltools"><button type="button" class="button small" data-vx-lnew title="Un calque vide, au-dessus des autres : tu dessines dedans">＋ Calque</button><button type="button" class="button small secondary" data-vx-lgroup title="${sel.length ? 'Range la sélection dans un groupe' : 'Un groupe vide dans le calque actuel'}">🗂 ${sel.length ? 'Grouper la sélection' : 'Groupe'}</button>${scope.length ? '<button type="button" class="button small secondary" data-vx-lexit title="Revenir au niveau du dessus (Échap)">⤴ Sortir</button>' : ''}</div>
+            return `<div class="vx-ltools"><button type="button" class="button small" data-vx-lnew title="Un calque vide, au-dessus des autres : tu dessines dedans">＋ Calque</button><button type="button" class="button small secondary" data-vx-lgroup title="${sel.length ? 'Range la sélection dans un groupe' : 'Un groupe vide dans le calque actuel'}">🗂 ${sel.length ? 'Grouper la sélection' : 'Groupe'}</button>${(() => { const gs = []; const w = (arr, d) => arr.forEach(o => { if (isLayerGroup(o)) { if (!sel.includes(o.id)) gs.push([o.id, '\u2003'.repeat(d) + (o.layer ? '📄 ' : '🗂 ') + (o.name || (o.layer ? 'Calque' : 'Groupe'))]); w(o.children || [], d + 1); } }); w(doc.objs, 0);
+                    return sel.length && gs.length ? `<select class="vx-lmoveto" data-vx-lmoveto title="Ranger la sélection dans un groupe ou un calque, sans glisser"><option value="">📁 Ranger dans…</option>${gs.map(([id, n]) => `<option value="${esc(id)}">${esc(n)}</option>`).join('')}</select>` : ''; })()}${scope.length ? '<button type="button" class="button small secondary" data-vx-lexit title="Revenir au niveau du dessus (Échap)">⤴ Sortir</button>' : ''}</div>
                 <p class="vx-lwhere">Tu dessines dans : <strong>${where}</strong></p>
                 <div class="vx-layers" data-vx-ltree>${rows.join('') || '<p class="muted">Rien encore : ＋ Calque pour commencer, ou dessine avec les outils de gauche, ou Fichier → Importer.</p>'}</div>
-                <p class="muted vx-lhelp">Glisse une ligne sur un groupe pour l’y ranger, entre deux lignes pour changer l’ordre. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir.</p>`;
+                <p class="muted vx-lhelp">Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir.</p>`;
         }
         /** déplacer un objet (n'importe où) avant / après une ligne, ou dans un groupe */
         function moveInTree(id, targetId, where) {
@@ -804,7 +806,16 @@
             const n = doc.objs.filter(o => o.layer).length + 1, g = {id: uid(), type: 'group', layer: true, name: `Calque ${n}`, children: []};
             doc.objs.push(g); enterScope([g.id]); openGroups.add(g.id); return g;
         }
+        /** les modes Blason et Carte : cochés en haut, sinon leurs onglets et menus sont cachés */
+        const blasonOn = () => doc.blasonOn ?? (doc.kind === 'blason' || /"name":"Blason"/.test(JSON.stringify(doc.objs || []).slice(0, 200000)));
+        function paintModes() {
+            const b = blasonOn(), m = !!doc.map?.on; if ((tab === 'blason' && !b) || (tab === 'map' && !m)) tab = 'props';
+            dlg.querySelectorAll('[data-vx-tab="blason"]').forEach(x => { x.hidden = !b; }); dlg.querySelectorAll('[data-vx-tab="map"]').forEach(x => { x.hidden = !m; });
+            const mb = dlg.querySelector('[data-vx-mode="blason"]'), mm = dlg.querySelector('[data-vx-mode="map"]'); if (mb) mb.checked = b; if (mm) mm.checked = m;
+            dlg.querySelectorAll('.vx-menus details').forEach(d => { const t = d.querySelector('summary')?.textContent.trim(); if (t === 'Blason') d.hidden = !b; if (t === 'Plan') d.hidden = !m; });
+        }
         function paintPanel() {
+            paintModes();
             dlg.querySelectorAll('[data-vx-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.vxTab === tab));
             if (document.activeElement && pane.contains(document.activeElement) && document.activeElement.matches('input:not([type=color]):not([type=range]), textarea, select') && tab === 'props') return; // on écrit : ne pas tout redessiner
             if (tab === 'layers') { pane.innerHTML = layersPane(); return; }
@@ -871,7 +882,11 @@
         pane.addEventListener('input', e => { if (e.target.dataset.vxFree) applyFree(e.target.dataset.vxFree, e.target.value, false); });
         pane.addEventListener('change', e => { if (e.target.dataset.vxFree) applyFree(e.target.dataset.vxFree, e.target.value, true); });
         pane.addEventListener('input', e => { const el = e.target; if (el.dataset.vxP) setProp(el.dataset.vxP, el.type === 'checkbox' ? el.checked : el.value, el); else if (el.matches('[data-vx-lname]')) { const o = findAny(el.closest('[data-vx-layer]').dataset.vxLayer)?.o; if (o) { o.name = el.value.slice(0, 60); dirty = true; } } else if (el.dataset.bl !== undefined) { blasonState[el.dataset.bl] = el.value; paintBlasonPreview(); } });
-        pane.addEventListener('change', e => { const el = e.target; if (el.dataset.vxP && laterT) { clearTimeout(laterT); laterT = 0; commit('Propriété changée'); } if (el.matches('[data-vx-lname]')) commit('Calque renommé'); });
+        pane.addEventListener('change', e => { const el = e.target; if (el.dataset.vxP && laterT) { clearTimeout(laterT); laterT = 0; commit('Propriété changée'); } if (el.matches('[data-vx-lname]')) commit('Calque renommé');
+            if (el.matches('[data-vx-lmoveto]') && el.value) { const gid = el.value, ids = sel.slice(); let n = 0; ids.forEach(id => { if (moveInTree(id, gid, 'into')) n++; }); if (n) commit('Rangé dans un groupe'); else { toast('Impossible de ranger ici (un groupe ne va pas dans lui-même).', 'error'); paintPanel(); } } });
+        const renameLayer = id => setTimeout(() => { const inp = [...pane.querySelectorAll('[data-vx-layer]')].find(r => r.dataset.vxLayer === id)?.querySelector('[data-vx-lname]'); if (!inp) return; inp.readOnly = false; inp.focus(); inp.select(); }, 30);
+        pane.addEventListener('focusout', e => { if (e.target.matches?.('[data-vx-lname]')) e.target.readOnly = true; });
+        pane.addEventListener('keydown', e => { if (e.target.matches?.('[data-vx-lname]') && e.key === 'Enter') e.target.blur(); });
         pane.addEventListener('focusout', () => { if (laterT) { clearTimeout(laterT); laterT = 0; setTimeout(() => commit('Propriété changée'), 0); } });
         pane.addEventListener('click', e => {
             const b = e.target.closest('button'); if (!b) return;
@@ -897,16 +912,19 @@
             if (b.dataset.blTintc) { applyFree('data-bl-tintfree', b.dataset.blTintc, true); return; }
             if (b.dataset.blTint) { const hex = tHex(b.dataset.blTint); selObjs().filter(o => !o.locked && o.type !== 'image').forEach(o => { if (o.type === 'group') (o.children || []).forEach(c => { if (c.fill !== 'none') c.fill = hex; }); else { o.fill = hex; delete o.grad; } }); commit(`Émail : ${b.title}`); return; }
         });
+        let lastLClick = {};
         pane.addEventListener('click', e => {
             if (tab !== 'layers' || e.target.closest('button, input')) return;
-            const row = e.target.closest('[data-vx-layer]'); if (!row) return; const f = findAny(row.dataset.vxLayer); if (!f || f.o.hidden) return;
+            const row = e.target.closest('[data-vx-layer]'); if (!row) return;
+            const now = Date.now(); if (lastLClick.id === row.dataset.vxLayer && now - lastLClick.t < 450) { lastLClick = {}; renameLayer(row.dataset.vxLayer); return; } lastLClick = {id: row.dataset.vxLayer, t: now}; // double-clic : renommer
+            const f = findAny(row.dataset.vxLayer); if (!f || f.o.hidden) return;
             if (!samePath(f.path, scope) && !enterScope(f.path)) return;
             if (f.o.locked) { render(); return; }
             sel = e.shiftKey ? [...new Set([...sel, f.o.id])] : [f.o.id]; setTool(tool === 'direct' ? 'direct' : 'select'); render();
         });
         let lDrag = null;
         pane.addEventListener('dragstart', e => { const row = e.target.closest?.('[data-vx-layer]'); if (!row || tab !== 'layers') return; lDrag = row.dataset.vxLayer; e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', lDrag); } catch (_) {} row.classList.add('is-drag'); });
-        const dropWhere = (row, e) => { const r = row.getBoundingClientRect(), t = (e.clientY - r.top) / r.height, g = isLayerGroup(findAny(row.dataset.vxLayer)?.o); return g && t > .28 && t < .72 ? 'into' : t < .5 ? 'above' : 'below'; };
+        const dropWhere = (row, e) => { const r = row.getBoundingClientRect(), t = (e.clientY - r.top) / r.height, g = isLayerGroup(findAny(row.dataset.vxLayer)?.o); return g && t > .18 && t < .82 ? 'into' : t < .5 ? 'above' : 'below'; };
         pane.addEventListener('dragover', e => { if (!lDrag) return; const row = e.target.closest('[data-vx-layer]'); pane.querySelectorAll('.vx-drop-above,.vx-drop-below,.vx-drop-into').forEach(x => x.classList.remove('vx-drop-above', 'vx-drop-below', 'vx-drop-into')); if (!row || row.dataset.vxLayer === lDrag) return; e.preventDefault(); row.classList.add('vx-drop-' + dropWhere(row, e)); });
         pane.addEventListener('drop', e => { if (!lDrag) return; const row = e.target.closest('[data-vx-layer]'); const id = lDrag; lDrag = null; if (!row) return; e.preventDefault(); if (moveInTree(id, row.dataset.vxLayer, dropWhere(row, e))) commit('Rangé'); else paintPanel(); });
         pane.addEventListener('dragend', () => { lDrag = null; pane.querySelectorAll('.is-drag,.vx-drop-above,.vx-drop-below,.vx-drop-into').forEach(x => x.classList.remove('is-drag', 'vx-drop-above', 'vx-drop-below', 'vx-drop-into')); });
@@ -1191,6 +1209,9 @@
             const up = () => { ps.removeEventListener('pointermove', mv); ps.removeEventListener('pointerup', up); ps.classList.remove('is-on'); try { localStorage.setItem(PW_KEY, String(parseInt(getComputedStyle(mainEl).getPropertyValue('--vx-pw')) || '')); } catch (_) {} };
             ps.addEventListener('pointermove', mv); ps.addEventListener('pointerup', up); });
         ps.addEventListener('dblclick', () => { setPw(0); try { localStorage.removeItem(PW_KEY); } catch (_) {} applyView(); });
+        dlg.addEventListener('change', e => { const md = e.target.dataset?.vxMode; if (!md) return; const on = e.target.checked;
+            if (md === 'map') { doc.map = {...(doc.map || {}), on}; if (on && !doc.kind) doc.kind = 'map'; tab = on ? 'map' : tab; commit(on ? 'Mode Carte' : 'Mode Carte désactivé'); }
+            else { doc.blasonOn = on; tab = on ? 'blason' : tab; commit(on ? 'Mode Blason' : 'Mode Blason désactivé'); } paintPanel(); });
         /* 🗺️ le mode Plan reçoit de quoi agir sur ce dessin */
         MP = ext.vectorMap?.attach({doc: () => doc, cur, selObjs, commit, render, uid, dlg, pane, fit, normImage: async (src, type) => (await normImage(src, type)).src, toDataUrl, name: () => $('[data-vx-name]').value,
             setTool: t => { if (penPath) finishPen(); setTool(t); }, paint: paintPanel, redraw: renderNoPanel, close: () => close(),

@@ -16,6 +16,7 @@
 
     const THEMES = {
         parchemin: {label: 'Parchemin ancien', paper: '#efe2c2', ink: '#4a3420', font: 'Palatino Linotype', pat: ['#e2c595', '#d6b47f'], mat: ['#dccaa6', '#cfb88f'], center: '#e9d2a3', empty: '#f3e9d2', trunk: '#6b4a2b', leaf: ['#7d8f4e', '#93a45c', '#6a7d3f'], title: '#5a2e12', frame: true},
+        lcnda: {label: 'Comme l’application (noir, blanc et bleu)', paper: '#ffffff', ink: '#080808', font: 'Arial', pat: ['#eaf2ff', '#d6e6ff'], mat: ['#f4f4f4', '#e8e8e8'], center: '#cfe0ff', empty: '#ffffff', trunk: '#080808', leaf: ['#055dff', '#0066cc', '#5b93ff'], title: '#055dff', frame: true},
         classique: {label: 'Classique', paper: '#ffffff', ink: '#2b2b2b', font: 'Georgia', pat: ['#cfe0f3', '#b8d0ec'], mat: ['#f6d3dc', '#efbecc'], center: '#f4e7b0', empty: '#f6f6f6', trunk: '#7a5634', leaf: ['#6f9c4a', '#86b35c', '#5d8a3b'], title: '#1d3557', frame: true},
         botanique: {label: 'Botanique (vert)', paper: '#f7f5ec', ink: '#2f3b26', font: 'Garamond', pat: ['#cfe3c0', '#bad6a5'], mat: ['#e8eec8', '#d8e3b1'], center: '#f1e6b8', empty: '#f3f3ea', trunk: '#5c4127', leaf: ['#5f8a3a', '#78a24c', '#4c7430', '#9bbb5e'], title: '#2f4a1c', frame: false},
         heraldique: {label: 'Héraldique (azur, gueules et or)', paper: '#f8f1dc', ink: '#1c2a4a', font: 'Times New Roman', pat: ['#2c4f8f', '#3a62a8'], mat: ['#a83232', '#bf4646'], center: '#e3bb4a', empty: '#ece4cc', trunk: '#5a4630', leaf: ['#3f6b3a', '#56844e'], title: '#1c2a4a', frame: true},

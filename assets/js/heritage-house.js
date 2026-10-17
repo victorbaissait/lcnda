@@ -1,6 +1,6 @@
 /* LCNDA — 🏠 Plan de maison (comme un logiciel d'architecte, en plus simple) : des étages, des murs tracés au clic (aimantés à
  * la grille, aux coins et aux angles), des pièces dessinées d'un coup (murs compris) avec leur surface, des portes et des
- * fenêtres posées sur les murs, des cotes, du mobilier (plus de 50 objets d'hier et d'aujourd'hui, et ses propres objets :
+ * fenêtres posées sur les murs, des cotes, du mobilier (plus de 300 objets d’hier et d’aujourd’hui : heritage-house-lib.js, et ses propres objets :
  * image vue de dessus, ou fichier 3D OBJ, STL, glTF, GLB), des textures de murs et de sols, un plan scanné à calquer,
  * et la vue en 3D (heritage-house3d.js) avec toit. La maison est reliée à un lieu, à ses habitants, et chaque pièce peut
  * garder ses souvenirs (« la chambre où est née… »). Serveur : lib/houses.php.
@@ -56,7 +56,7 @@
 
     /** le dessin vu de dessus d'un meuble, centré en (0, 0), dans une boîte w × d */
     function sym2d(item) {
-        const L = libOf(item.kind), w = item.w, d = item.d, c = item.color || L?.[6] || '#9a8a7a', k = item.img ? 'img' : item.model ? 'model' : L?.[7] || 'box', S = 'stroke="#3a3530" stroke-width="1.6" vector-effect="non-scaling-stroke"';
+        const L = libOf(item.kind), w = item.w, d = item.d, c = item.color || L?.[6] || '#9a8a7a', k = item.img ? 'img' : item.model ? 'model' : item.s2 || L?.[7] || 'box', S = 'stroke="#3a3530" stroke-width="1.6" vector-effect="non-scaling-stroke"';
         const R = (x, y, ww, hh, f = c, ex = '') => `<rect x="${x}" y="${y}" width="${ww}" height="${hh}" fill="${f}" ${S} ${ex}/>`;
         const x0 = -w / 2, y0 = -d / 2;
         switch (k) {
@@ -89,7 +89,7 @@
             case 'stairs': { const n = Math.max(4, Math.round(d / 25)); return R(x0, y0, w, d, '#e8dccb') + Array.from({length: n - 1}, (_, i) => `<path d="M${x0} ${y0 + d * (i + 1) / n}H${w / 2}" ${S}/>`).join('') + `<path d="M0 ${d / 2 - 10}V${y0 + 14}M-8 ${y0 + 26}L0 ${y0 + 14}L8 ${y0 + 26}" fill="none" stroke="#c0392b" stroke-width="2" vector-effect="non-scaling-stroke"/>`; }
             case 'stairsL': return R(x0, y0, w, d, '#e8dccb') + Array.from({length: 6}, (_, i) => `<path d="M0 0L${Math.cos(Math.PI + i * Math.PI / 10) * w / 2} ${Math.sin(Math.PI + i * Math.PI / 10) * d / 2}" ${S}/>`).join('') + Array.from({length: 4}, (_, i) => `<path d="M${x0 + w * (i + 1) / 5} 0V${d / 2}" ${S}/>`).join('');
             case 'model': return R(x0, y0, w, d, '#c9d6e3') + `<path d="M${x0} ${y0}L${w / 2} ${d / 2}M${w / 2} ${y0}L${x0} ${d / 2}" ${S} opacity=".35"/>`;
-            default: return R(x0, y0, w, d);
+            default: return ext.houseSym2dX?.(k, item, {R, S, c, w, d, x0, y0, esc}) ?? R(x0, y0, w, d); // les formes du catalogue étendu (heritage-house-lib.js)
         }
     }
     /** les motifs des sols (vus de dessus) */
@@ -116,7 +116,7 @@
     /* un plan ouvert depuis la base (ou une base reçue d'ailleurs) : seuls des nombres, des couleurs, des images sûres et
        des mots-clés simples ; le texte libre (noms, notes) est toujours échappé à l'affichage */
     const H_FREE = new Set(['name', 'note', 'text', 'title', 'label', 'period', 'place', 'place_text', 'caption']);
-    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis']);
+    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis', 's2', 's3']);
     const H_COLOR = /^(color|.*Color)$/, H_IMG = /^(src|img|image|href|top|thumb|tex|texture)$/;
     const imgSafe = v => /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(v) || /^media\/[\w.%-]+$/.test(v) || /^api\.php\?action=house_model_file&id=\d+$/.test(v);
     function cleanHouse(v, key = '') {
@@ -264,6 +264,7 @@
             dlg.querySelectorAll('[data-hs-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.hsTab === tab));
             if (pane.contains(document.activeElement) && document.activeElement.matches('input:not([type=range]):not([type=color]):not([type=checkbox]):not([type=radio]), textarea')) return;
             const f = F();
+            if (tab === 'lib' && ext.houseLibUI) { pane.innerHTML = ext.houseLibUI.pane({cat: libCat, q: libQ, mine, sym2d, setCat: c => { libCat = c; }}); return; } // catégories rangées, objets créés, bibliothèque en ligne (heritage-house-lib.js)
             if (tab === 'lib') {
                 const cats = [...new Set(LIB.map(l => l[2]))], q = libQ.toLowerCase();
                 const list = q ? LIB.filter(l => l[1].toLowerCase().includes(q)) : LIB.filter(l => l[2] === libCat);
@@ -572,8 +573,9 @@
             if (d.hsMode) return toggle3d(d.hsMode === '3d');
             if (d.hsFloor !== undefined) { fi = Number(d.hsFloor); sel = null; draft = null; if (view3d) view3d.update(H, fi); render(); return; }
             if (d.hsCat) { libCat = d.hsCat; libQ = ''; if (libCat === 'Mes objets') await loadMine(); return paintSide(); }
-            if (d.hsLib) { const L = libOf(d.hsLib); if (view3d) await toggle3d(false); return placeItem({kind: L[0], w: L[3], d: L[4], h: L[5], color: L[6]}); }
-            if (d.hsMine) { const m = mine.find(q => q.id === Number(d.hsMine)); if (!m) return; if (view3d) await toggle3d(false); return placeItem({kind: 'model', name: m.name, w: Math.round(m.dims?.w || 100), d: Math.round(m.dims?.d || 100), h: Math.round(m.dims?.h || 100), model: {id: m.id, ext: m.ext}}); }
+            if (d.hsLibcmd && ext.houseLibUI) return ext.houseLibUI.cmd(d.hsLibcmd, d, {mine, loadMine, paint: paintSide, place: async base => { if (view3d) await toggle3d(false); placeItem(base); }});
+            if (d.hsLib) { const L = libOf(d.hsLib); if (!L) return; if (view3d) await toggle3d(false); return placeItem(ext.houseLibUI?.itemOf(L) || {kind: L[0], w: L[3], d: L[4], h: L[5], color: L[6]}); }
+            if (d.hsMine) { const m = mine.find(q => q.id === Number(d.hsMine)); if (!m) return; if (view3d) await toggle3d(false); return placeItem({kind: 'model', name: m.name, w: Math.round(m.dims?.w || 100), d: Math.round(m.dims?.d || 100), h: Math.round(m.dims?.h || 100), model: {id: m.id, ext: m.ext, ...(m.mtl ? {mtl: m.mtl} : {})}}); }
             if (d.hsPopen) { if (dirty && !confirm('Ouvrir la fiche ? La maison non enregistrée sera perdue (💾 d’abord).')) return; dirty = false; close(); A().openPersonById?.(Number(d.hsPopen)); return; }
             if (d.hsPdel !== undefined) { H.meta.people.splice(Number(d.hsPdel), 1); return commit('Habitant retiré'); }
             if (d.hsRpdel !== undefined) { const rm = F().rooms.find(q => q.id === sel?.id); rm?.people?.splice(Number(d.hsRpdel), 1); return commit('Personne retirée'); }
@@ -583,7 +585,7 @@
         let tmr = 0;
         pane.addEventListener('input', e => {
             const el = e.target, f = F(), v = el.type === 'checkbox' ? el.checked : el.value;
-            if (el.matches('[data-hs-libq]')) { libQ = el.value; clearTimeout(tmr); tmr = setTimeout(() => { const p0 = el.selectionStart; paintSide(); const i = pane.querySelector('[data-hs-libq]'); i.focus(); i.setSelectionRange(p0, p0); }, 200); return; }
+            if (el.matches('[data-hs-libq]')) { libQ = el.value; clearTimeout(tmr); tmr = setTimeout(() => { const p0 = el.selectionStart; el.blur(); paintSide(); /* le champ quitté le temps de redessiner (sinon le panneau ne bouge pas pendant la frappe) */ const i = pane.querySelector('[data-hs-libq]'); i.focus(); i.setSelectionRange(p0, p0); }, 200); return; }
             if (el.dataset.hsF) { const k = el.dataset.hsF; f[k] = ['level', 'height', 'wallT'].includes(k) ? Number(v) : v; later('Étage'); return; }
             if (el.dataset.hsH) { H[el.dataset.hsH] = Number(v); later('Grille'); return; }
             if (el.dataset.hsRoof) { const k = el.dataset.hsRoof; H.roof = H.roof || {}; H.roof[k] = ['pitch', 'over', 'chimneyPos'].includes(k) ? Number(v) : v; if (k === 'kind') delete H.roof.color; later('Toit'); if (k === 'on' || k === 'kind') setTimeout(paintSide, 0); return; } // la couverture choisie reprend sa couleur

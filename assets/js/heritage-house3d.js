@@ -53,7 +53,7 @@
 
     /* ═════════ Les meubles en volume ═════════ */
     function furniture(it, L) {
-        const g = new T.Group(), w = M(it.w), d = M(it.d), h = M(it.h ?? L?.[5] ?? 80), col = it.color || L?.[6] || '#9a8a7a', shape = it.img ? 'img' : L?.[7] || 'box';
+        const g = new T.Group(), w = M(it.w), d = M(it.d), h = M(it.h ?? L?.[5] ?? 80), col = it.color || L?.[6] || '#9a8a7a', shape = it.s3 || (it.img ? 'img' : L?.[8] || L?.[7] || 'box'); // la forme en volume : celle de l'objet créé, sinon celle du catalogue (heritage-house-lib.js en ajoute)
         const put = (m, x, y, z) => { m.position.set(x, y, z); g.add(m); return m; }, B = (ww, hh, dd, c = col, x = 0, y = hh / 2, z = 0) => put(box(ww, hh, dd, mat(c)), x, y, z);
         const C = (r, hh, c = col, x = 0, y = hh / 2, z = 0, seg = 24) => put(new T.Mesh(new T.CylinderGeometry(r, r, hh, seg), mat(c)), x, y, z);
         const legs = (top, lw = .05) => [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => B(lw, top, lw, col, sx * (w / 2 - lw), top / 2, sz * (d / 2 - lw)));
@@ -85,7 +85,7 @@
             case 'stairsL': { const n = 12; for (let i = 0; i < n; i++) { const a = Math.PI + i * Math.PI / 2 / n, m = B(Math.min(w, d) * .5, (i + 1) * h / n, .22, col, 0, (i + 1) * h / n / 2, 0); m.position.set(Math.cos(a) * w * .25 + w * .25, (i + 1) * h / n / 2, Math.sin(a) * d * .25 + d * .25); m.rotation.y = -a; } break; }
             case 'img': { const m = box(w, Math.max(.02, h), d, [mat(col), mat(col), new T.MeshStandardMaterial({map: new T.TextureLoader().load(it.img)}), mat(col), mat(col), mat(col)]); m.position.y = Math.max(.02, h) / 2; g.add(m); break; }
             case 'piano': B(w, h, d); B(w, .05, d * .4, '#f4f4f4', 0, h * .55, d / 2 + d * .2); break;
-            default: B(w, h, d);
+            default: if (!ext.houseFurnitureX?.(shape, {T, g, B, C, put, legs, box, mat, w, d, h, col, it})) B(w, h, d);
         }
         return g;
     }
@@ -142,10 +142,12 @@
     async function parseModel(buf, extn, mtlText = '') { await three(); extn = extn.toLowerCase(); if (extn === 'obj') return parseOBJ(new TextDecoder().decode(buf), parseMTL(mtlText)); if (extn === 'stl') return parseSTL(buf); if (extn === 'glb' || extn === 'gltf') return parseGLTF(buf, extn === 'glb'); throw new Error('Format 3D inconnu.'); }
     /** la taille d'un modèle en centimètres (l'unité est devinée : mètres, centimètres ou millimètres) */
     const unitScale = (s, fmt = '') => { const m = Math.max(s.x, s.y, s.z); if (fmt === 'stl') return m > 50 ? .1 : m < 5 ? 100 : 1; return m < 20 ? 100 : m > 2000 ? .1 : 1; }; // un STL est presque toujours en millimètres
-    async function inspect(file, mtlFile) {
+    const inspect = async (file, mtlFile) => inspectBuf(await file.arrayBuffer(), file.name.split('.').pop(), mtlFile ? await mtlFile.text() : '');
+    /** mesurer un modèle déjà rangé (bibliothèque en ligne, pack ZIP) : sa taille en cm et une vignette */
+    async function inspectBuf(buf, extn, mtlText = '') {
         await three();
-        const obj = await parseModel(await file.arrayBuffer(), file.name.split('.').pop(), mtlFile ? await mtlFile.text() : '');
-        const bb = new T.Box3().setFromObject(obj), s = bb.getSize(new T.Vector3()), k = unitScale(s, file.name.split('.').pop().toLowerCase());
+        const obj = await parseModel(buf, extn, mtlText);
+        const bb = new T.Box3().setFromObject(obj), s = bb.getSize(new T.Vector3()), k = unitScale(s, String(extn).toLowerCase());
         let thumb = '';
         try { const r = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true, alpha: true}); r.setSize(160, 160); const sc = new T.Scene(); sc.add(new T.HemisphereLight('#ffffff', '#666666', 2.4)); const dl = new T.DirectionalLight('#ffffff', 1.4); dl.position.set(2, 3, 2); sc.add(dl); sc.add(obj);
             const c = bb.getCenter(new T.Vector3()), R = Math.max(s.x, s.y, s.z) || 1, cam = new T.PerspectiveCamera(35, 1, R / 100, R * 20); cam.position.set(c.x + R * 1.4, c.y + R * 1.1, c.z + R * 1.6); cam.lookAt(c); r.render(sc, cam); thumb = r.domElement.toDataURL('image/png'); r.dispose(); } catch (_) {}
@@ -309,5 +311,5 @@
             destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); renderer.dispose(); box2.innerHTML = ''; barAc.abort(); if (!ownBar) bar.hidden = true; }};
     }
 
-    ext.house3d = {mount, inspect, parseModel};
+    ext.house3d = {mount, inspect, inspectBuf, parseModel};
 })();

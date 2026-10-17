@@ -193,6 +193,9 @@ try {
     if ($isWrite && $action === 'house_model_upload') {
         house_model_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }
+    if (in_array($action, HOUSE_LIB_ACTIONS, true)) { // 🏠 objets créés, bibliothèque en ligne, packs ZIP (lib/house_library.php)
+        house_lib_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if ($isWrite && $action === 'retouch_media') {
         retouch_media($pdo, $_FILES['file'] ?? null, $_POST);
     }

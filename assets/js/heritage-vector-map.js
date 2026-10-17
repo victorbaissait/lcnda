@@ -21,27 +21,27 @@
     /* ═════════ Styles d'époque ═════════ */
     // chaque style : papier, encre, police, et la couleur de chaque genre d'objet
     const STYLES = {
-        modern: {label: 'Carte moderne', paper: '#f4f1ea', ink: '#3a3a3a', font: 'Helvetica, Arial, sans-serif', italic: false, halo: '#ffffff',
+        modern: {name: 'Carte moderne', paper: '#f4f1ea', ink: '#3a3a3a', font: 'Helvetica, Arial, sans-serif', italic: false, halo: '#ffffff',
             highway: ['#c98a2b', '#f6cf66'], road: ['#b9ab90', '#ffffff'], street: ['#c9bea8', '#ffffff'], track: '#9c7d55', footpath: '#9c7d55', rail: '#5a5a5a', ties: false,
             water: '#aacfee', waterInk: '#5f93c6', forest: '#c6e0ad', forestInk: '#7ea463', meadow: '#dcecc6', field: '#f0e9c8', fieldInk: '#d6c98e', vine: '#e2d3ea', vineInk: '#9a76ad', orchard: '#d9ebc0', marsh: '#d7e9e2', town: '#e6ded3', park: '#cfe8b8', cemetery: '#d3dccd', sand: '#f3e6b8', parcel: 'none',
             building: '#d9cec2', buildingInk: '#a39484', wall: '#7c7064', hedge: '#7ea463', border: '#8a5aa8', contour: '#c49a6c', symFill: '#ffffff', label: '#333333', water_label: '#3f73a8'},
-        etatmajor: {label: 'Carte d’état-major (XIXᵉ)', paper: '#f2e8cf', ink: '#3b2f24', font: 'Georgia, "Times New Roman", serif', italic: true, halo: '#f2e8cf',
+        etatmajor: {name: 'Carte d’état-major (XIXᵉ)', paper: '#f2e8cf', ink: '#3b2f24', font: 'Georgia, "Times New Roman", serif', italic: true, halo: '#f2e8cf',
             highway: ['#3b2f24', '#efd9a8'], road: ['#3b2f24', '#f2e8cf'], street: ['#3b2f24', '#f2e8cf'], track: '#3b2f24', footpath: '#3b2f24', rail: '#2a2018', ties: true,
             water: '#c9dde6', waterInk: '#4a7598', forest: '#d6dfc2', forestInk: '#5e7a4c', meadow: '#dfe6c8', field: '#efe4c4', fieldInk: '#cbb98a', vine: '#e6d6d6', vineInk: '#7a5050', orchard: '#dfe5c7', marsh: '#d5e2dc', town: '#e8d6c8', park: '#d8e3c4', cemetery: '#dfe0cf', sand: '#efe1b8', parcel: 'none',
             building: '#d88a78', buildingInk: '#5a2a20', wall: '#3b2f24', hedge: '#5e7a4c', border: '#3b2f24', contour: '#a07850', symFill: '#f2e8cf', label: '#2a2018', water_label: '#3a5f80'},
-        cadastre: {label: 'Cadastre napoléonien', paper: '#fbf6ea', ink: '#2b2b2b', font: '"Times New Roman", Georgia, serif', italic: false, halo: '#fbf6ea',
+        cadastre: {name: 'Cadastre napoléonien', paper: '#fbf6ea', ink: '#2b2b2b', font: '"Times New Roman", Georgia, serif', italic: false, halo: '#fbf6ea',
             highway: ['#2b2b2b', '#fbf6ea'], road: ['#2b2b2b', '#fbf6ea'], street: ['#2b2b2b', '#fbf6ea'], track: '#2b2b2b', footpath: '#2b2b2b', rail: '#2b2b2b', ties: true,
             water: '#b9d4ea', waterInk: '#3f6f9c', forest: '#e2ead2', forestInk: '#6d8a5a', meadow: '#e8eed8', field: '#fbf6ea', fieldInk: '#b8ab8a', vine: '#efe3e3', vineInk: '#7a5050', orchard: '#e6edd6', marsh: '#dfeae6', town: '#f3e6dc', park: '#e2ead2', cemetery: '#e6e8dc', sand: '#f3e8c8', parcel: 'none',
             building: '#eaa79b', buildingInk: '#7a2a20', wall: '#2b2b2b', hedge: '#6d8a5a', border: '#2b2b2b', contour: '#a88a6a', symFill: '#fbf6ea', label: '#2b2b2b', water_label: '#2f5f8c'},
-        cassini: {label: 'Carte de Cassini (XVIIIᵉ)', paper: '#ede0bd', ink: '#4a3a28', font: 'Garamond, "EB Garamond", Georgia, serif', italic: true, halo: '#ede0bd',
+        cassini: {name: 'Carte de Cassini (XVIIIᵉ)', paper: '#ede0bd', ink: '#4a3a28', font: 'Garamond, "EB Garamond", Georgia, serif', italic: true, halo: '#ede0bd',
             highway: ['#4a3a28', '#e6d3a5'], road: ['#4a3a28', '#ede0bd'], street: ['#4a3a28', '#ede0bd'], track: '#4a3a28', footpath: '#4a3a28', rail: '#4a3a28', ties: true,
             water: '#b8cdc9', waterInk: '#4f7480', forest: '#d8dcb6', forestInk: '#4f6a3a', meadow: '#e0dfbb', field: '#ede0bd', fieldInk: '#c4ad7c', vine: '#e2d0c2', vineInk: '#6e4a3a', orchard: '#dcdcb8', marsh: '#d3d9c3', town: '#e0c9b0', park: '#dad9b4', cemetery: '#dcd8c0', sand: '#ead8a8', parcel: 'none',
             building: '#b7664f', buildingInk: '#4a2418', wall: '#4a3a28', hedge: '#4f6a3a', border: '#7a3a28', contour: '#9a7a50', symFill: '#ede0bd', label: '#3a2a18', water_label: '#3a5a66'},
-        parchment: {label: 'Plan ancien (parchemin)', paper: '#e7d3a8', ink: '#5a3c1c', font: '"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif', italic: true, halo: '#e7d3a8',
+        parchment: {name: 'Plan ancien (parchemin)', paper: '#e7d3a8', ink: '#5a3c1c', font: '"Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif', italic: true, halo: '#e7d3a8',
             highway: ['#5a3c1c', '#dcc18c'], road: ['#5a3c1c', '#e7d3a8'], street: ['#5a3c1c', '#e7d3a8'], track: '#5a3c1c', footpath: '#5a3c1c', rail: '#5a3c1c', ties: true,
             water: '#b9c6b8', waterInk: '#4c6a66', forest: '#cfc79a', forestInk: '#5a5a2a', meadow: '#d8cf9e', field: '#e2cd9c', fieldInk: '#b89a64', vine: '#d8c0a0', vineInk: '#6a4a2a', orchard: '#d2c89a', marsh: '#ccc8a8', town: '#d8bf94', park: '#cfc79a', cemetery: '#d2c6a0', sand: '#e2c890', parcel: 'none',
             building: '#c08a5a', buildingInk: '#4a2c10', wall: '#5a3c1c', hedge: '#5a5a2a', border: '#7a2a10', contour: '#9a7040', symFill: '#e7d3a8', label: '#4a2c10', water_label: '#3c5a56'},
-        bw: {label: 'Noir et blanc (à imprimer)', paper: '#ffffff', ink: '#111111', font: 'Helvetica, Arial, sans-serif', italic: false, halo: '#ffffff',
+        bw: {name: 'Noir et blanc (à imprimer)', paper: '#ffffff', ink: '#111111', font: 'Helvetica, Arial, sans-serif', italic: false, halo: '#ffffff',
             highway: ['#111111', '#ffffff'], road: ['#111111', '#ffffff'], street: ['#111111', '#ffffff'], track: '#111111', footpath: '#111111', rail: '#111111', ties: true,
             water: '#e4e4e4', waterInk: '#111111', forest: '#ffffff', forestInk: '#111111', meadow: '#ffffff', field: '#ffffff', fieldInk: '#777777', vine: '#ffffff', vineInk: '#111111', orchard: '#ffffff', marsh: '#ffffff', town: '#eeeeee', park: '#ffffff', cemetery: '#ffffff', sand: '#f4f4f4', parcel: 'none',
             building: '#bbbbbb', buildingInk: '#111111', wall: '#111111', hedge: '#111111', border: '#111111', contour: '#888888', symFill: '#ffffff', label: '#111111', water_label: '#111111'},
@@ -191,6 +191,23 @@
                     const P = readP(), list = arr(P.custom).filter(Boolean), i = list.findIndex(x => x.id === clean.id); if (i >= 0) list[i] = clean; else list.push(clean); if (list.length > 200) { toast('200 éléments à soi au plus.', 'error'); return false; } P.custom = list; writeP(P); res(clean.id); } }).addEventListener('close', () => res(null)); });
     }
     ext.vectorMapPalette = {html: paletteEditorHtml, bind: bindPaletteEditor, open: openPaletteEditor};
+    /** 🗺️ une carte nouvelle : le format, puis (conseillé) le lieu et la largeur couverte, pour une échelle juste */
+    function newMapDoc(again) {
+        const F = [['a4l', 'A4 paysage', 1123, 794], ['a4p', 'A4 portrait', 794, 1123], ['a3l', 'A3 paysage', 1587, 1123], ['a3p', 'A3 portrait', 1123, 1587], ['a2l', 'A2 paysage', 2245, 1587], ['sq', 'Carré', 1200, 1200], ['screen', 'Écran 16:9', 1920, 1080]];
+        ext.openDialog({eyebrow: 'CARTE', title: '🗺️ Une nouvelle carte', submitLabel: 'Créer la carte',
+            body: `<div class="form-grid"><label>Nom<input name="name" maxlength="120" placeholder="Plan du village en 1850"></label><label>Format<select name="fmt">${F.map(f => `<option value="${f[0]}" ${f[0] === 'a3l' ? 'selected' : ''}>${esc(f[1])}</option>`).join('')}</select></label></div>
+                <label class="checkbox-line"><input type="checkbox" name="geo" checked> Situer la carte tout de suite (conseillé) : le lieu et la largeur couverte donnent la bonne échelle, et la carte n’est pas déformée</label><label class="checkbox-line"><input type="checkbox" name="grid" checked> Grille d’échelle pendant le dessin</label>`,
+            onSubmit: f => { const fm = F.find(x => x[0] === f.querySelector('[name=fmt]').value) || F[2], name = f.querySelector('[name=name]').value.trim() || 'Ma carte';
+                ext.openVectorEditor?.({doc: {w: fm[2], h: fm[3], bg: '#ffffff', objs: [], kind: 'map', map: {on: true, style: 'modern', auto: true, kmgrid: f.querySelector('[name=grid]').checked, ...(f.querySelector('[name=geo]').checked ? {askGeo: true} : {})}}, name, tab: 'map', onSaved: again, onClose: again}); }});
+    }
+    ext.newMapDoc = newMapDoc;
+    ext.editToolsExtra = ext.editToolsExtra || [];
+    ext.editToolsExtra.push({key: 'maps', icon: '🗺️', label: 'Carte', what: 'carte',
+        load: async () => ((await A().api('vector_docs')).docs || []).filter(d => d.kind === 'map').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">🗺️</span>', info: `${d.objects} calque${d.objects > 1 ? 's' : ''} ou objet${d.objects > 1 ? 's' : ''}`})),
+        open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
+        create: again => newMapDoc(again),
+        rename: (id, name) => A().api('rename_vector_doc', {}, {method: 'POST', body: {id, name}}),
+        remove: id => A().api('delete_vector_doc', {}, {method: 'POST', body: {id}}), createLabel: '＋ Nouvelle carte'});
 
     /* contexte de dessin : le document (style, année, légende) ; posé par l'éditeur avant de dessiner */
     const ctx = {doc: null, editor: false};
@@ -341,6 +358,16 @@
         if (g && num(g.e) !== num(g.w)) { const lat = (num(g.n) + num(g.s)) / 2; return (num(g.e) - num(g.w)) * 111320 * Math.cos(lat * Math.PI / 180) / (ctx.doc.w || 1); }
         return clamp(num(m.scale, 1), 0.001, 1e6);
     }
+    /** des mètres lisibles : 850 m, 1,2 km ; des surfaces : 320 m², 1,4 ha, 2,3 km² */
+    const fmtM = m => m >= 1000 ? `${String(+(m / 1000).toFixed(m >= 10000 ? 1 : 2)).replace('.', ',')} km` : `${Math.round(m)} m`;
+    const fmtA = a => a >= 1e6 ? `${String(+(a / 1e6).toFixed(2)).replace('.', ',')} km²` : a >= 1e4 ? `${String(+(a / 1e4).toFixed(2)).replace('.', ',')} ha` : `${Math.round(a)} m²`;
+    /** la grille d'échelle (dans l'éditeur seulement, jamais imprimée) : des carrés de 10 m à 10 km selon la taille du plan */
+    function scaleGridSvg(doc) {
+        if (!doc?.map?.on || !doc.map.kmgrid) return ''; const mpp = metersPerPx(), W = doc.w, H = doc.h, target = Math.max(W, H) / 8 * mpp;
+        const steps = [5, 10, 20, 50, 100, 200, 250, 500, 1000, 2000, 5000, 10000, 20000, 50000], st = steps.find(v => v >= target * .6) || steps.at(-1), px = st / mpp; if (!(px > 4)) return '';
+        let h = ''; for (let x = px; x < W; x += px) h += `M${n2(x)} 0V${n2(H)}`; for (let y = px; y < H; y += px) h += `M0 ${n2(y)}H${n2(W)}`;
+        return `<g class="vx-kmgrid" style="pointer-events:none"><path d="${h}" fill="none" stroke="#1f6feb" stroke-opacity=".35" stroke-width="1" vector-effect="non-scaling-stroke" stroke-dasharray="4 4"/><g transform="translate(${n2(px * .1)} ${n2(H - px * .15)})"><rect width="${n2(px)}" height="${n2(Math.max(4, px * .06))}" fill="#1f6feb" opacity=".8"/><text y="-6" font-size="${n2(Math.max(10, Math.min(28, px * .14)))}" fill="#1f6feb" font-family="Helvetica, Arial, sans-serif" font-weight="700">${fmtM(st)} · un carreau</text></g></g>`;
+    }
     function decoSvg(o, defs, pre, idAttr) {
         const st = S(), k = o.map.k, x = num(o.x), y = num(o.y), w = Math.max(1, num(o.w, 100)), h = Math.max(1, num(o.h, 40)), F = `font-family="${esc(st.font)}"`;
         let body = '';
@@ -433,7 +460,7 @@
             const ref = d.ref;
             return `<div class="vx-form vx-map">
                 <label class="checkbox-line vx-mon"><input type="checkbox" data-vm="on" ${on ? 'checked' : ''}> <b>Mode Plan</b> : dessiner une carte (routes, rivières, bâtiments…)</label>
-                ${on ? `<div class="vx-row"><label>Style<select data-vm="style">${Object.entries(STYLES).map(([k, s]) => `<option value="${k}" ${st === k ? 'selected' : ''}>${esc(s.label)}</option>`).join('')}</select></label></div>
+                ${on ? `<div class="vx-row"><label>Style<select data-vm="style">${Object.entries(STYLES).map(([k, s]) => `<option value="${k}" ${st === k ? 'selected' : ''}>${esc(s.name || k)}</option>`).join('')}</select></label></div>
                 <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="layers" title="Relief, Eau, Végétation, Parcelles, Routes, Bâti, Limites, Noms, Généalogie, Habillage">🗂 Créer les calques d’un plan</button><label class="checkbox-line" title="Chaque objet va tout seul dans son calque (Routes, Eau, Bâti…)"><input type="checkbox" data-vm="auto" ${m.auto !== false ? 'checked' : ''}> Ranger tout seul</label></div>
                 <p class="muted vx-mhelp">Choisis ce que tu dessines, puis : <b>traits et zones</b> — un clic par point, double-clic ou Entrée pour finir (les courbes se lissent toutes seules) ; <b>bâtiment</b> — glisse un rectangle ; <b>symbole, nom</b> — un clic.</p>
                 ${paletteGroups().map(g => paletteHtml(g)).join('')}
@@ -442,7 +469,8 @@
                 <div class="vx-row"><label class="checkbox-line"><input type="checkbox" data-vm="yon" ${m.year ? 'checked' : ''}> Montrer l’année</label><b data-vm-yshow>${m.year || ''}</b></div>
                 <input type="range" data-vm="year" min="${y0}" max="${y1}" value="${m.year || y1}" ${m.year ? '' : 'disabled'} style="width:100%">
                 <h4>📍 Généalogie</h4><div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="places" title="${m.geo ? 'Les lieux et adresses de ta base qui tombent sur ce plan' : 'Il faut d’abord un fond de carte (situer le plan)'}">📍 Lieux de la base</button><button type="button" class="button small secondary" data-vm-cmd="links" title="Les objets reliés à une personne ou à un lieu">🔗 Objets reliés</button></div>
-                <h4>📏 Échelle</h4>${m.geo ? `<p class="muted vx-mhelp">Plan situé : ${esc(m.geo.name || '')} (1 px ≈ ${String(+metersPerPx().toFixed(2)).replace('.', ',')} m).</p>` : `<label>1 pixel = … mètres<input type="number" data-vm="scale" min="0.001" step="0.1" value="${esc(m.scale || 1)}"></label>`}` : '<p class="muted">Le mode Plan ajoute des outils de carte : routes qui se raccordent, rivières, forêts, bâtiments, symboles (église, moulin, château…), noms qui suivent les rues, échelle, rose des vents, légende automatique, styles d’époque (état-major, cadastre napoléonien, Cassini…).</p>'}
+                <h4>📏 Échelle</h4>${m.geo ? `<p class="muted vx-mhelp">Plan situé : ${esc(m.geo.name || '')} — il couvre <b>${fmtM(metersPerPx() * d.w)} × ${fmtM(metersPerPx() * d.h)}</b> (1 px ≈ ${String(+metersPerPx().toFixed(2)).replace('.', ',')} m). Les lieux de ta base se posent à leur vraie place (📍).</p>` : `<p class="muted vx-mhelp">Pour une carte juste et pas déformée, commence par <b>🗺️ Fond de carte d’un lieu</b> (plus bas) : l’échelle se règle toute seule. Sinon, dis combien vaut un pixel :</p><label>1 pixel = … mètres<input type="number" data-vm="scale" min="0.001" step="0.1" value="${esc(m.scale || 1)}"></label>`}
+                <label class="checkbox-line"><input type="checkbox" data-vm="kmgrid" ${m.kmgrid ? 'checked' : ''}> Grille d’échelle (carreaux de 100 m, 1 km… ; ne s’imprime pas)</label><p class="muted vx-mhelp">Choisis un objet du plan : sa longueur ou sa surface réelles s’affichent dans Propriétés.</p>` : '<p class="muted">Le mode Plan ajoute des outils de carte : routes qui se raccordent, rivières, forêts, bâtiments, symboles (église, moulin, château…), noms qui suivent les rues, échelle, rose des vents, légende automatique, styles d’époque (état-major, cadastre napoléonien, Cassini…).</p>'}
                 <h4>🖼️ Fond et image de référence</h4><p class="muted vx-mhelp">Une carte ou une image (cadastre ancien, photo, plan scanné) sous le dessin, en transparence, pour décalquer. Elle ne s’imprime pas, sauf si tu le veux.</p>
                 <div class="vx-row"><button type="button" class="button small secondary" data-vm-cmd="basemap">🗺️ Fond de carte d’un lieu…</button><button type="button" class="button small secondary" data-vm-cmd="refimg">🖼️ Image de référence…</button></div>
                 ${ref ? `<div class="vx-refbox"><label>Transparence (%) <input type="range" data-vm="refop" min="5" max="100" value="${Math.round(num(ref.op, .5) * 100)}"></label>
@@ -458,6 +486,9 @@
             let h = '<div class="vx-mprops"><h4>🗺️ Plan</h4>';
             if (kinds) h += `<label>Genre<select data-vmp="k">${kinds.map(([k, l]) => `<option value="${k}" ${m.k === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
             if (o.map && o.type !== 'text' && o.type !== 'mdeco') h += `<label>Nom (s’écrit sur la carte)<input data-vmp="name" value="${esc(m.name || '')}" maxlength="120"></label><label class="checkbox-line"><input type="checkbox" data-vmp="label" ${m.label !== false ? 'checked' : ''}> Écrire le nom</label>`;
+            if (o.map && (isLine(o) || isZone(o) || o.type === 'msym')) { const mpp = metersPerPx(), P2 = (o.pts || []).map(q => [num(q.x), num(q.y)]);
+                const len = P2.reduce((a, q, i) => i ? a + Math.hypot(q[0] - P2[i - 1][0], q[1] - P2[i - 1][1]) : 0, 0) + (isZone(o) && P2.length > 2 ? Math.hypot(P2[0][0] - P2.at(-1)[0], P2[0][1] - P2.at(-1)[1]) : 0), ar = Math.abs(P2.reduce((a, q, i) => { const r2 = P2[(i + 1) % P2.length]; return a + q[0] * r2[1] - r2[0] * q[1]; }, 0)) / 2;
+                h += `<p class="vx-mreal">📏 ${isLine(o) ? `Longueur réelle : <b>${fmtM(len * mpp)}</b>` : isZone(o) ? `Surface : <b>${fmtA(ar * mpp * mpp)}</b> · tour : ${fmtM(len * mpp)}` : `Taille réelle : <b>${fmtM(num(o.w) * mpp)} × ${fmtM(num(o.h) * mpp)}</b>`}${mapDoc().geo ? '' : ' <small class="muted">(échelle à régler)</small>'}</p>`; }
             if (isLine(o)) h += `<label>Largeur <input type="range" data-vmp="w" min="0.5" max="60" step="0.5" value="${W(o)}"></label><label class="checkbox-line"><input type="checkbox" data-vmp="smooth" ${m.smooth !== false ? 'checked' : ''}> Courbes lissées</label>`;
             if (o.type === 'msym') h += `<div class="vx-grid2"><label>Nom placé<select data-vmp="lpos">${[['right', 'à droite'], ['left', 'à gauche'], ['above', 'au-dessus'], ['below', 'en dessous']].map(([k, l]) => `<option value="${k}" ${(m.lpos || 'right') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>Taille du nom<input type="number" data-vmp="ls" min="5" max="80" value="${esc(m.ls || 11)}"></label></div>
                 <div class="vx-row"><label>Couleur<input type="color" data-vmp="fill" value="${esc(/^#[0-9a-f]{6}$/i.test(m.fill || '') ? m.fill : (m.k === 'building' ? S().building : S().symFill))}"></label><button type="button" class="button small secondary" data-vmp-reset title="Reprendre les couleurs du style">Couleur du style</button></div>`;
@@ -595,6 +626,7 @@
             const order = LAYERS.map(l => l[0]); d.objs.sort((a, b) => (a.mapLayer ? order.indexOf(a.mapLayer) : 99) - (b.mapLayer ? order.indexOf(b.mapLayer) : 99));
             mapDoc().on = true; ed.commit(n ? `${n} calques de plan créés` : 'Calques déjà là');
         }
+        if (mapDoc().askGeo) { delete mapDoc().askGeo; setTimeout(() => basemapDialog(), 400); } // une carte nouvelle : d'abord la situer (échelle juste)
         function onPaneEvent(e) {
             const el = e.target;
             if (e.type === 'click') {
@@ -616,9 +648,10 @@
             }
             const vm = el.dataset.vm, vmp = el.dataset.vmp;
             if (vm) { const m = mapDoc(), d = ed.doc(), final = e.type === 'change';
-                if (vm === 'on') { m.on = el.checked; ed.commit(m.on ? 'Mode Plan' : 'Mode Plan désactivé'); ed.paint(); return true; }
+                if (vm === 'on') { m.on = el.checked; if (m.on && !d.kind) d.kind = 'map'; ed.commit(m.on ? 'Mode Plan' : 'Mode Plan désactivé'); ed.paint(); return true; }
                 if (vm === 'style' && final) { m.style = el.value; if (confirm('Prendre aussi la couleur de papier de ce style pour le fond ?')) d.bg = STYLES[m.style].paper; restyleAll(); ed.commit('Style du plan'); return true; }
                 if (vm === 'auto') { m.auto = el.checked; ed.commit('Rangement'); return true; }
+                if (vm === 'kmgrid') { m.kmgrid = el.checked; ed.commit(m.kmgrid ? 'Grille d’échelle' : 'Sans grille d’échelle'); return true; }
                 if (vm === 'yon') { m.year = el.checked ? Number(ed.pane.querySelector('[data-vm="year"]').value) : null; ed.commit(m.year ? `Année ${m.year}` : 'Toutes les époques'); ed.paint(); return true; }
                 if (vm === 'year') { m.year = Number(el.value); const s = ed.pane.querySelector('[data-vm-yshow]'); if (s) s.textContent = m.year; ed.redraw(); if (final) ed.commit(`Année ${m.year}`); return true; }
                 if (vm === 'scale') { m.scale = clamp(num(el.value, 1), 0.001, 1e6); ed.redraw(); if (final) ed.commit('Échelle'); return true; }
@@ -661,5 +694,5 @@
             hint: tool => ({mline: `${lineOf(pick.kind)?.[1] || 'Trait'} : un clic par point (glisser : courbe à la main) · double-clic ou Entrée pour finir · les courbes se lissent toutes seules`, mzone: `${zoneOf(pick.kind)?.[1] || 'Zone'} : un clic par coin · clic sur le 1er point, double-clic ou Entrée pour fermer`, msym: pick.kind === 'building' ? 'Bâtiment : glisse un rectangle (⇧ : carré) ; tourne-le ensuite avec la Sélection' : `${symOf(pick.kind)?.[1] || 'Symbole'} : un clic pour le poser`, mlabel: 'Nom de lieu : un clic pour le poser, puis écris-le dans Propriétés', mdeco: 'Habillage : un clic pour le poser', mref: 'Glisse l’image de référence pour la caler sous le dessin'}[tool] || '')};
     }
 
-    ext.vectorMap = {ctx, svg, inTime, isLine, isZone, styleLabel, attach, STYLES, LINES, ZONES, SYMS, LABELS, DECOS, LAYERS, legendKinds};
+    ext.vectorMap = {ctx, svg, scaleGridSvg, metersPerPx, inTime, isLine, isZone, styleLabel, attach, STYLES, LINES, ZONES, SYMS, LABELS, DECOS, LAYERS, legendKinds};
 })();

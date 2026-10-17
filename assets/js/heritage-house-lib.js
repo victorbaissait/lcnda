@@ -1,0 +1,539 @@
+/* LCNDA — 🏠 Plan de maison : la bibliothèque d'objets (complète heritage-house.js et heritage-house3d.js).
+ *  - le catalogue : plus de 300 objets d'hier et d'aujourd'hui, rangés en 12 catégories (Chambre… Ferme, animaux… Structure),
+ *    chacun avec son dessin vu de dessus et sa forme en 3D, aux vraies dimensions (cm) ;
+ *  - « ＋ Créer un objet » : ses propres objets (nom, catégorie, taille, couleur, formes 2D et 3D, image vue de dessus), gardés
+ *    sur le serveur (lib/house_library.php), modifiables et supprimables ;
+ *  - « 📦 Bibliothèque en ligne (libre de droit) » : les modèles 3D CC0 de Poly Haven, et les packs ZIP CC0 (Kenney, Quaternius…)
+ *    qu'on a téléchargés soi-même ; la licence, l'auteur et la source restent avec chaque modèle (« Mes objets ») ;
+ *  - « ⚙️ Ranger » : montrer, cacher, ordonner les catégories et les objets (gardé dans genealogie-house-lib).
+ */
+(() => {
+    'use strict';
+    const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+    const A = () => window.LCNDA_APP;
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    const toast = (...a) => A().toast(...a);
+    const api = (...a) => A().api(...a);
+    const post = (action, body) => api(action, {}, {method: 'POST', body});
+    const norm = s => String(s || '').toLocaleLowerCase('fr').normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const MINE = 'Mes objets';
+    const CATS = ['Chambre', 'Séjour', 'Cuisine', 'Salle d’eau', 'Rangement', 'Bureau', 'Enfants', 'Religion, souvenirs', 'Métiers, atelier', 'Ferme, animaux', 'Jardin, extérieur', 'Structure'];
+
+    /* ═════════ Le catalogue ═════════
+       [clé, nom, largeur, profondeur, hauteur (cm), couleur, forme vue de dessus, forme 3D (sinon la même), options {elev: cm du sol, pic: image d'un cadre}] */
+    const MORE = {
+        'Chambre': [['litbateau', 'Lit bateau (Empire)', 100, 200, 95, '#8a5a32', 'bed1'], ['litlp', 'Lit Louis-Philippe', 130, 200, 90, '#7a4f2a', 'bed2'], ['litbaldaquin', 'Lit à baldaquin', 160, 210, 220, '#6a4026', 'canopy'],
+            ['litfer', 'Lit en fer forgé', 140, 195, 110, '#3a3a3a', 'bed2'], ['lit160', 'Grand lit (160)', 160, 200, 55, '#d9cbb3', 'bed2'], ['litpaille', 'Paillasse (lit de paille)', 90, 190, 20, '#c9ad6a', 'bed1'],
+            ['armoireN', 'Armoire normande', 160, 65, 230, '#7a4a24', 'wardrobe'], ['armoireglace', 'Armoire à glace', 110, 50, 210, '#8a5a32', 'wardrobe'], ['chiffonnier', 'Chiffonnier, semainier', 60, 40, 140, '#8a5a32', 'drawers'],
+            ['tablenuit', 'Table de nuit à marbre', 40, 35, 80, '#7a4f2a', 'box', 'cabinet'], ['lampechevet', 'Lampe de chevet', 25, 25, 45, '#d9c27a', 'roundsmall', 'roundsmall', {elev: 55}], ['potchambre', 'Pot de chambre', 25, 25, 20, '#f4f4f4', 'round', 'tub'],
+            ['paravent', 'Paravent', 150, 30, 170, '#b98b5c', 'screen'], ['psyche', 'Psyché (miroir sur pied)', 60, 50, 170, '#8a5a32', 'mirror'], ['voltaire', 'Fauteuil Voltaire', 65, 75, 105, '#7a2e2e', 'armchair'],
+            ['banquette', 'Banquette de pied de lit', 120, 40, 45, '#8b3a3a', 'bench', 'legsbox'], ['descente', 'Descente de lit', 140, 70, 1, '#8a3a3a', 'rug'], ['dressing', 'Dressing', 200, 60, 240, '#e9e1cf', 'wardrobe'],
+            ['chaisepaille', 'Chaise paillée', 42, 42, 88, '#9a6a3a', 'chair'], ['coffremariage', 'Coffre de mariage', 110, 50, 60, '#6a4026', 'chest'], ['malleCh', 'Malle-cabine', 60, 45, 110, '#5a3b22', 'cabinet'],
+            ['tablecoiffer', 'Table de toilette à miroir', 90, 45, 150, '#9a6a3a', 'desk', 'legsbox'], ['bassinoire', 'Chaufferette, bassinoire', 30, 30, 15, '#b06a3a', 'round', 'cyl'], ['cheminee_ch', 'Cheminée de chambre', 120, 40, 110, '#e8e2d6', 'fireplace']],
+        'Séjour': [['tableovale', 'Table ovale à rallonges', 180, 100, 75, '#8a5a32', 'oval'], ['tablefermette', 'Table de ferme', 220, 85, 76, '#9a6a3a', 'table'], ['tablebasse', 'Table basse', 110, 60, 45, '#7a4f2a', 'table'],
+            ['gueridon', 'Guéridon', 60, 60, 72, '#6a4026', 'round'], ['bergere', 'Bergère', 75, 80, 95, '#a0522d', 'armchair'], ['bascule', 'Fauteuil à bascule', 65, 95, 100, '#7a4f2a', 'rocking'],
+            ['canape3', 'Canapé trois places', 220, 95, 85, '#5f6f8a', 'sofa'], ['meridienne', 'Méridienne', 180, 70, 80, '#6f4e7c', 'sofa'], ['pouf', 'Pouf', 50, 50, 42, '#8b3a3a', 'round', 'cyl'],
+            ['pendule', 'Pendule de cheminée', 35, 15, 45, '#c9a24a', 'clock', 'clock', {elev: 120}], ['chemineeG', 'Grande cheminée à manteau', 220, 80, 180, '#bfb4a3', 'fireplace'], ['poelefaience', 'Poêle en faïence', 90, 70, 170, '#d8d0c0', 'stove'],
+            ['television', 'Télévision', 110, 25, 65, '#1a1a1a', 'tv', 'tv', {elev: 50}], ['meubletv', 'Meuble TV', 160, 45, 50, '#7a4f2a', 'cabinet'], ['gramophone', 'Gramophone', 45, 45, 60, '#7a4f2a', 'gramo', 'gramo', {elev: 75}],
+            ['harmonium', 'Harmonium', 120, 55, 110, '#4a2f1f', 'piano'], ['pianoqueue', 'Piano à queue', 150, 200, 100, '#151515', 'grandpiano'], ['lustre', 'Lustre', 70, 70, 60, '#c9a24a', 'chandelier', 'chandelier', {elev: 190}],
+            ['tapisrond', 'Tapis rond', 160, 160, 1, '#7a5a8a', 'rugR'], ['biblivitree', 'Bibliothèque vitrée', 120, 40, 210, '#7a4f2a', 'shelves', 'vitrine'], ['chaisecannee', 'Chaise cannée', 45, 48, 95, '#6a4026', 'chair'],
+            ['jardiniere', 'Jardinière', 80, 30, 60, '#5f8a3a', 'planter'], ['cage', 'Cage à oiseaux', 40, 40, 60, '#c9a24a', 'cage', 'cage', {elev: 75}], ['aquarium', 'Aquarium', 100, 40, 60, '#6aa7c9', 'box', 'aquarium', {elev: 75}],
+            ['console', 'Console', 110, 35, 80, '#7a4f2a', 'table'], ['secretaireS', 'Bonheur-du-jour', 80, 45, 120, '#8a5a32', 'desk', 'hutch'], ['canapelit', 'Canapé-lit, clic-clac', 190, 90, 85, '#4f5d6a', 'sofa']],
+        'Cuisine': [['potager', 'Potager (fourneau maçonné)', 150, 60, 85, '#c46a4a', 'range', 'counter'], ['atre', 'Âtre avec crémaillère', 180, 80, 160, '#9a8f80', 'fireplace'], ['four', 'Four encastrable', 60, 60, 85, '#d0d0d0', 'appliance'],
+            ['plaques', 'Plaques de cuisson', 60, 52, 5, '#222222', 'cooktop', 'cooktop', {elev: 85}], ['lavevaisselle', 'Lave-vaisselle', 60, 60, 85, '#eeeeee', 'appliance'], ['congelateur', 'Congélateur coffre', 100, 65, 85, '#f2f2f2', 'appliance'],
+            ['glaciere', 'Glacière (armoire à glace)', 80, 55, 130, '#8a5a32', 'cabinet'], ['evierdouble', 'Évier double', 120, 60, 90, '#c9cfd4', 'sinkdouble'], ['ilot', 'Îlot central', 180, 90, 90, '#cfc6b3', 'box', 'counter'],
+            ['angle', 'Plan de travail en L', 240, 180, 90, '#cfc6b3', 'lshape'], ['hotte', 'Hotte', 90, 50, 60, '#bbbbbb', 'hood', 'hood', {elev: 150}], ['meublehaut', 'Meuble haut', 120, 35, 70, '#e9e1cf', 'cabinet', 'cabinet', {elev: 145}],
+            ['meublebas', 'Meuble bas', 120, 60, 90, '#e9e1cf', 'cabinet'], ['tabouret', 'Tabouret', 35, 35, 65, '#9a6a3a', 'stool'], ['tablecuisine', 'Table de cuisine', 120, 75, 75, '#cfc6b3', 'table'],
+            ['panetiere', 'Panetière', 80, 35, 90, '#9a6a3a', 'cabinet', 'legsbox'], ['billot', 'Billot de boucher', 60, 60, 85, '#a87b4d', 'box', 'legsbox'], ['seau', 'Seau, cruche', 30, 30, 35, '#8a8a8a', 'round', 'tub'],
+            ['saloir', 'Saloir, jarre', 50, 50, 70, '#b4553a', 'round', 'cyl'], ['microondes', 'Micro-ondes', 50, 40, 30, '#2b2b2b', 'appliance', 'appliance', {elev: 90}], ['gaziniere', 'Cuisinière à gaz', 60, 60, 85, '#efefef', 'range'],
+            ['chaudron', 'Chaudron', 50, 50, 40, '#2a2a2a', 'round', 'tub'], ['moulincafe', 'Moulin à café', 15, 15, 25, '#7a4f2a', 'box', 'box', {elev: 85}], ['frigoUS', 'Réfrigérateur américain', 90, 70, 180, '#d9d9d9', 'appliance'],
+            ['vaisselierM', 'Égouttoir, vaisselier mural', 80, 25, 70, '#9a6a3a', 'shelves', 'shelves', {elev: 130}]],
+        'Salle d’eau': [['sabot', 'Baignoire sabot', 110, 70, 90, '#e9e4da', 'bathsabot'], ['baignoirepieds', 'Baignoire sur pieds (fonte)', 170, 80, 65, '#f4f4f4', 'bath', 'clawbath'], ['cuvier', 'Cuvier, baquet', 90, 90, 50, '#8a5a32', 'round', 'tub'],
+            ['bidet', 'Bidet', 38, 55, 40, '#f4f4f4', 'bidet'], ['doublevasque', 'Double vasque', 140, 50, 85, '#f4f4f4', 'sinkdouble'], ['italienne', 'Douche à l’italienne', 120, 90, 200, '#e6eef2', 'shower'],
+            ['lavabocolonne', 'Lavabo sur colonne', 60, 45, 85, '#f4f4f4', 'basin', 'pedestal'], ['lavelinge', 'Machine à laver', 60, 60, 85, '#f2f2f2', 'washer'], ['sechelinge', 'Sèche-linge', 60, 60, 85, '#f2f2f2', 'washer'],
+            ['ballon', 'Chauffe-eau, ballon', 55, 55, 120, '#efefef', 'round', 'cyl'], ['radiateur', 'Radiateur', 80, 10, 60, '#eeeeee', 'radiator', 'radiator', {elev: 15}], ['sechserv', 'Sèche-serviettes', 50, 8, 110, '#eeeeee', 'radiator', 'radiator', {elev: 30}],
+            ['meublevasque', 'Meuble vasque', 80, 50, 85, '#e9e1cf', 'basin'], ['miroirsdb', 'Miroir de salle de bains', 70, 4, 80, '#c9a24a', 'mirror', 'mirror', {elev: 110}], ['wcturc', 'WC à la turque', 70, 90, 5, '#e9e4da', 'turc'],
+            ['chaisepercee', 'Chaise percée', 50, 50, 75, '#7a4f2a', 'chair'], ['lessiveuse', 'Lessiveuse', 50, 50, 60, '#9aa3a8', 'round', 'tub'], ['etendoir', 'Étendoir à linge', 150, 55, 110, '#cfcfcf', 'rack'],
+            ['panierlinge', 'Panier à linge', 45, 35, 60, '#c9a77a', 'chest'], ['colonnesdb', 'Colonne de rangement', 40, 35, 180, '#f4f4f4', 'cabinet'], ['wcsuspendu', 'WC suspendu', 36, 55, 40, '#f4f4f4', 'wc'],
+            ['receveur', 'Bac à douche', 80, 80, 6, '#f4f4f4', 'shower', 'box']],
+        'Rangement': [['malle', 'Malle de voyage', 90, 50, 55, '#5a3b22', 'chest'], ['bahut', 'Bahut', 140, 55, 110, '#6a4026', 'cabinet'], ['deuxcorps', 'Buffet deux corps', 140, 55, 220, '#7a4f2a', 'cabinet', 'hutch'],
+            ['enfilade', 'Enfilade', 200, 50, 85, '#7a4f2a', 'cabinet'], ['confiturier', 'Confiturier', 70, 40, 110, '#9a6a3a', 'cabinet'], ['vitrine', 'Vitrine', 100, 40, 180, '#7a4f2a', 'shelves', 'vitrine'],
+            ['etageremetal', 'Étagère métallique', 100, 40, 200, '#8a8f94', 'shelves'], ['penderie', 'Penderie, portant', 120, 50, 170, '#555555', 'rack'], ['portemanteau', 'Portemanteau', 45, 45, 180, '#6a4026', 'coatstand'],
+            ['acases', 'Meuble à cases', 150, 35, 150, '#e9e1cf', 'shelves'], ['placardmural', 'Placard mural', 200, 60, 240, '#e9e1cf', 'wardrobe'], ['chaussures', 'Meuble à chaussures', 90, 30, 100, '#9a6a3a', 'drawers'],
+            ['casierbouteilles', 'Casier à bouteilles', 60, 30, 100, '#9a6a3a', 'shelves'], ['cartons', 'Pile de cartons', 60, 40, 90, '#c9a26a', 'crates'], ['cantine', 'Cantine militaire', 80, 45, 40, '#4f5d3a', 'chest'],
+            ['armoirelinge', 'Armoire à linge', 130, 60, 210, '#8a5a32', 'wardrobe'], ['parapluies', 'Porte-parapluies', 25, 25, 60, '#555555', 'round', 'tub'], ['meubleentree', 'Meuble d’entrée', 100, 35, 85, '#7a4f2a', 'drawers'],
+            ['vestiaire', 'Vestiaire métallique', 90, 50, 180, '#7a8a96', 'wardrobe'], ['commodebasse', 'Commode basse', 120, 45, 70, '#8a5a32', 'drawers'], ['coffrebois', 'Coffre à bois', 80, 45, 60, '#7a4f2a', 'chest']],
+        'Bureau': [['secretaire', 'Secrétaire à abattant', 90, 45, 140, '#7a4a24', 'cabinet', 'hutch'], ['bureauplat', 'Bureau plat (ministre)', 160, 80, 76, '#6a4026', 'desk'], ['bureaucylindre', 'Bureau à cylindre', 120, 65, 110, '#7a4f2a', 'desk', 'legsbox'],
+            ['fauteuilbureau', 'Fauteuil de bureau', 60, 60, 100, '#333333', 'officechair'], ['chaisebureau', 'Chaise de bureau en bois', 50, 50, 90, '#7a4f2a', 'chair'], ['cartonnier', 'Cartonnier', 80, 40, 150, '#6a4026', 'drawers'],
+            ['classeur', 'Classeur à tiroirs', 50, 65, 130, '#8a8f94', 'drawers'], ['ordinateur', 'Ordinateur (écran)', 55, 25, 45, '#222222', 'tv', 'tv', {elev: 75}], ['imprimante', 'Imprimante, scanner', 45, 40, 25, '#e5e5e5', 'appliance', 'appliance', {elev: 75}],
+            ['machineecrire', 'Machine à écrire', 45, 35, 20, '#2b2b2b', 'box', 'box', {elev: 75}], ['globe', 'Globe terrestre', 40, 40, 90, '#3a6aa0', 'globe'], ['coffrefort', 'Coffre-fort', 60, 55, 90, '#3d4a3d', 'safe'],
+            ['lampebureau', 'Lampe de bureau', 20, 20, 45, '#2f5a3a', 'roundsmall', 'roundsmall', {elev: 75}], ['biblimurale', 'Bibliothèque murale', 200, 35, 220, '#6a4026', 'shelves'], ['tableadessin', 'Table à dessin', 120, 80, 95, '#9a6a3a', 'table'],
+            ['archives', 'Boîtes d’archives', 80, 35, 30, '#c9a26a', 'crates'], ['telephone', 'Téléphone mural (ancien)', 25, 15, 30, '#3a2a1a', 'box', 'box', {elev: 140}], ['tableaunoir', 'Tableau noir, tableau blanc', 150, 5, 100, '#22332a', 'mirror', 'frame', {elev: 80, pic: 'board'}],
+            ['bureaumoderne', 'Bureau moderne', 140, 70, 75, '#e9e1cf', 'desk'], ['caissonbureau', 'Caisson à tiroirs', 40, 55, 60, '#e9e1cf', 'drawers'], ['fauteuilclub', 'Fauteuil club', 85, 85, 80, '#6a3a22', 'armchair']],
+        'Enfants': [['berceauosier', 'Berceau en osier', 55, 95, 80, '#c9a77a', 'cradle'], ['litbarreaux', 'Lit à barreaux', 70, 130, 95, '#e9e1cf', 'crib'], ['litsuperpose', 'Lits superposés', 95, 200, 160, '#9a6a3a', 'bunk'],
+            ['tablelanger', 'Table à langer', 90, 55, 95, '#e9e1cf', 'drawers'], ['coffrejouets', 'Coffre à jouets', 80, 40, 45, '#c9605a', 'chest'], ['chevalbascule', 'Cheval à bascule', 90, 35, 75, '#b0703a', 'rockhorse'],
+            ['parc', 'Parc', 100, 100, 75, '#e9e1cf', 'playpen'], ['chaisehaute', 'Chaise haute', 50, 55, 100, '#c9a77a', 'chair'], ['pupitre', 'Pupitre d’écolier', 60, 50, 75, '#8a5a32', 'desk', 'legsbox'],
+            ['landau', 'Landau', 90, 55, 105, '#2f3b52', 'pram'], ['maisonpoupee', 'Maison de poupée', 70, 40, 80, '#d6c3a0', 'hut', 'hut', {elev: 0}], ['tipi', 'Tipi', 120, 120, 160, '#e9dcc3', 'cone'],
+            ['petitetable', 'Petite table', 70, 50, 50, '#e0c46a', 'table'], ['petitechaise', 'Petite chaise', 30, 30, 55, '#e07a5a', 'chair'], ['tapisjeu', 'Tapis de jeu', 150, 120, 1, '#6aa7c9', 'rug'],
+            ['ours', 'Ours en peluche', 30, 25, 40, '#a87b4d', 'teddy'], ['bibliEnfant', 'Bibliothèque basse', 90, 30, 90, '#e0c46a', 'shelves'], ['trotteur', 'Trotteur, porteur', 50, 60, 45, '#d9532a', 'box', 'pram']],
+        'Religion, souvenirs': [['crucifix', 'Crucifix', 40, 5, 60, '#6a4026', 'cross', 'cross', {elev: 140}], ['benitier', 'Bénitier', 15, 10, 20, '#e8e4dc', 'box', 'box', {elev: 120}], ['oratoire', 'Petit autel, oratoire', 80, 40, 120, '#7a4f2a', 'cabinet'],
+            ['vierge', 'Statue de la Vierge', 30, 30, 60, '#dfe6f0', 'statue', 'statue', {elev: 90}], ['cierge', 'Chandelier, cierge', 15, 15, 50, '#f2e6c4', 'candle', 'candle', {elev: 75}], ['portrait', 'Portrait de famille', 60, 4, 80, '#8a6a3a', 'mirror', 'frame', {elev: 130, pic: 'portrait'}],
+            ['photomariage', 'Photo de mariage encadrée', 30, 4, 40, '#3a2a1a', 'mirror', 'frame', {elev: 140, pic: 'photo'}], ['arbregen', 'Arbre généalogique encadré', 120, 4, 90, '#6a4026', 'mirror', 'frame', {elev: 110, pic: 'tree'}],
+            ['globemariee', 'Globe de mariée', 35, 25, 50, '#d9c27a', 'globe', 'cage', {elev: 75}], ['medailles', 'Cadre de médailles', 40, 4, 30, '#3a2a1a', 'mirror', 'frame', {elev: 140, pic: 'medals'}], ['lutrin', 'Bible familiale sur lutrin', 50, 40, 110, '#6a4026', 'lectern'],
+            ['coffret', 'Coffret à souvenirs', 40, 30, 25, '#7a4f2a', 'chest', 'chest', {elev: 75}], ['vitrinesouv', 'Vitrine à souvenirs', 90, 40, 160, '#7a4f2a', 'shelves', 'vitrine'], ['lampehuile', 'Lampe à huile', 20, 20, 40, '#c9a24a', 'candle', 'candle', {elev: 75}],
+            ['bustier', 'Buste sur colonne', 40, 40, 160, '#e8e4dc', 'statue'], ['icone', 'Icône, image pieuse', 30, 3, 40, '#c9a24a', 'mirror', 'frame', {elev: 140, pic: 'portrait'}], ['albums', 'Pile d’albums de famille', 35, 30, 25, '#5a2a1a', 'crates', 'crates', {elev: 75}],
+            ['plaque', 'Plaque commémorative', 60, 3, 40, '#7a6a5a', 'mirror', 'frame', {elev: 150}], ['mallesouv', 'Malle aux souvenirs', 90, 50, 55, '#5a3b22', 'chest'], ['croixmur', 'Croix de bois au mur', 30, 4, 45, '#6a4026', 'cross', 'cross', {elev: 150}], ['retable', 'Retable, armoire d’église', 150, 50, 220, '#8a6a3a', 'cabinet', 'hutch']],
+        'Métiers, atelier': [['forge', 'Forge (foyer)', 120, 90, 90, '#4a3a2a', 'fireplace'], ['soufflet', 'Soufflet de forge', 120, 60, 50, '#6a4026', 'box', 'legsbox'], ['tour', 'Tour à bois', 180, 50, 110, '#5a5a5a', 'desk', 'legsbox'],
+            ['presseimpr', 'Presse à imprimer', 150, 90, 160, '#2b2b2b', 'box', 'press'], ['meule', 'Meule à aiguiser', 80, 50, 100, '#9a8a7a', 'wheel'], ['cuve', 'Cuve de vigneron', 150, 150, 180, '#8a5a32', 'barrel'],
+            ['pressoir', 'Pressoir à vin', 160, 160, 200, '#7a4f2a', 'round', 'press'], ['alambic', 'Alambic', 120, 80, 160, '#b06a3a', 'still'], ['comptoir', 'Comptoir de boutique', 250, 60, 100, '#7a4f2a', 'cabinet', 'counter'],
+            ['balance', 'Balance à bascule', 60, 40, 110, '#3a3a3a', 'box'], ['caisse', 'Caisse enregistreuse', 45, 40, 35, '#3a3a3a', 'box', 'box', {elev: 100}], ['etalage', 'Étalage de magasin', 200, 45, 200, '#9a6a3a', 'shelves'],
+            ['barbier', 'Fauteuil de barbier', 70, 90, 110, '#7a2e2e', 'armchair'], ['cordonnier', 'Établi de cordonnier', 100, 60, 70, '#8a5a32', 'desk'], ['chevalet', 'Chevalet de peintre', 70, 60, 180, '#9a6a3a', 'easel'],
+            ['dentelle', 'Carreau de dentellière', 50, 40, 60, '#8a5a32', 'box', 'legsbox'], ['fourboulanger', 'Four de boulanger', 250, 300, 200, '#a9583e', 'breadoven'], ['barrique', 'Barrique', 60, 95, 60, '#8a5a32', 'barrel'],
+            ['meulemoulin', 'Meule de moulin', 150, 150, 50, '#a9a296', 'round', 'cyl'], ['chevalet_scie', 'Chevalet de scieur', 120, 60, 80, '#9a6a3a', 'bench'], ['machine_coudre_pied', 'Machine à coudre à pédale', 90, 45, 100, '#2b2b2b', 'desk'],
+            ['etabli_menuisier', 'Établi de menuisier', 220, 75, 85, '#b98b5c', 'desk', 'legsbox'], ['etagere_outils', 'Panneau à outils', 150, 10, 100, '#9a7a5a', 'shelves', 'frame', {elev: 100}]],
+        'Ferme, animaux': [['vache', 'Vache', 70, 220, 145, '#8a6a4a', 'animal'], ['cheval', 'Cheval', 60, 230, 165, '#6a4026', 'animal'], ['ane', 'Âne', 45, 160, 120, '#8a8a8a', 'animal'],
+            ['cochon', 'Cochon', 50, 130, 75, '#e8b0a0', 'animal'], ['mouton', 'Mouton', 45, 120, 85, '#ece6d8', 'animal'], ['chevre', 'Chèvre', 35, 110, 75, '#c9b49a', 'animal'],
+            ['poule', 'Poule', 25, 40, 40, '#b0703a', 'animal'], ['chien', 'Chien', 30, 90, 60, '#a07850', 'animal'], ['chat', 'Chat', 20, 50, 30, '#555555', 'animal'],
+            ['clapier', 'Clapier à lapins', 120, 60, 120, '#9a7a5a', 'shelves'], ['poulailler', 'Poulailler', 200, 150, 180, '#9a7a5a', 'hut'], ['niche', 'Niche', 70, 90, 80, '#9a6a3a', 'hut'],
+            ['stalle', 'Stalle, box d’écurie', 250, 350, 150, '#8a6a4a', 'stall'], ['abreuvoir', 'Abreuvoir', 200, 60, 60, '#a9a296', 'trough'], ['ratelier', 'Râtelier à foin', 200, 50, 150, '#8a6a4a', 'rack'],
+            ['meulefoin', 'Meule de foin', 400, 400, 400, '#d9b75a', 'cone', 'stack'], ['botte', 'Botte de paille', 100, 50, 40, '#e0c46a', 'box'], ['charrue', 'Charrue', 80, 250, 100, '#6a4a2a', 'plow'],
+            ['herse', 'Herse', 200, 150, 30, '#5a4a3a', 'harrow'], ['tracteur', 'Tracteur ancien', 350, 170, 220, '#b0302a', 'tractor'], ['brouette', 'Brouette', 140, 60, 60, '#5f6f6f', 'barrow'],
+            ['baratte', 'Baratte à beurre', 45, 45, 90, '#9a6a3a', 'round', 'cyl'], ['ruche', 'Ruche', 50, 50, 70, '#e0c46a', 'hive'], ['coffregrain', 'Coffre à grain', 150, 70, 90, '#8a6a4a', 'chest'],
+            ['bidonlait', 'Bidon à lait', 35, 35, 60, '#c9cfd4', 'round', 'cyl'], ['tombereau', 'Tombereau', 300, 160, 140, '#7a5a3a', 'cart']],
+        'Jardin, extérieur': [['fruitier', 'Arbre fruitier', 400, 400, 450, '#6a9a3a', 'tree'], ['conifere', 'Sapin, conifère', 250, 250, 800, '#2f5a2f', 'cone', 'conifer'], ['haie', 'Haie', 300, 80, 150, '#4f7a2f', 'hedge'],
+            ['buisson', 'Buisson, arbuste', 120, 120, 120, '#5f8a3a', 'plant', 'ball'], ['massif', 'Massif de fleurs', 200, 100, 40, '#c4607a', 'flowerbed'], ['potagerJ', 'Potager (planches)', 400, 300, 20, '#7a5a3a', 'garden'],
+            ['mare', 'Mare, bassin', 300, 200, 20, '#4a7fa8', 'pond'], ['fontaine', 'Fontaine', 150, 150, 150, '#a9a296', 'fountain'], ['lavoir', 'Lavoir', 400, 300, 250, '#a9a296', 'lavoir'],
+            ['fourpain', 'Four à pain', 200, 250, 180, '#a9583e', 'breadoven'], ['pompe', 'Pompe à bras', 40, 40, 120, '#2f4f3f', 'pump'], ['calvaire', 'Croix de chemin, calvaire', 100, 100, 350, '#a9a296', 'cross'],
+            ['tombe', 'Pierre tombale', 90, 200, 90, '#9a9a9a', 'grave'], ['tablejardin', 'Table de jardin', 160, 90, 75, '#6a8a4a', 'table'], ['chaisejardin', 'Chaise de jardin', 50, 55, 85, '#6a8a4a', 'chair'],
+            ['transat', 'Transat, chaise longue', 60, 160, 80, '#d8c08a', 'lounger'], ['parasol', 'Parasol', 250, 250, 240, '#c0392b', 'parasol'], ['barbecue', 'Barbecue', 100, 60, 95, '#333333', 'range'],
+            ['balancoire', 'Balançoire', 250, 150, 220, '#8a6a4a', 'swing'], ['toboggan', 'Toboggan', 60, 250, 150, '#d9532a', 'slide'], ['pergola', 'Pergola, tonnelle', 300, 300, 250, '#8a6a4a', 'pergola'],
+            ['cloture', 'Clôture, barrière', 300, 10, 110, '#8a6a4a', 'fence'], ['portail', 'Portail', 350, 10, 160, '#3a3a3a', 'gate'], ['muret', 'Muret de pierre', 300, 40, 90, '#a9a296', 'box', 'wallstone'],
+            ['velo', 'Bicyclette', 180, 60, 105, '#2a4a6a', 'bike'], ['cabane', 'Cabane de jardin', 250, 200, 230, '#8a6a4a', 'hut'], ['serre', 'Serre', 300, 200, 230, '#cfe6f3', 'greenhouse'],
+            ['tasbois', 'Tas de bois', 200, 60, 120, '#8a5a32', 'woodpile'], ['bouleau', 'Bouleau, arbre fin', 200, 200, 700, '#7aa35a', 'tree'], ['banc_pierre', 'Banc de pierre', 160, 45, 45, '#a9a296', 'bench', 'legsbox']],
+        'Structure': [['colimacon', 'Escalier en colimaçon', 160, 160, 280, '#9a7a5a', 'spiral'], ['meunier', 'Échelle de meunier', 70, 150, 280, '#9a7a5a', 'stairs'], ['echelle', 'Échelle', 50, 10, 300, '#9a7a5a', 'ladder'],
+            ['colonne', 'Colonne ronde', 40, 40, 280, '#d9d2c4', 'round', 'cyl'], ['poutre', 'Poutre apparente', 400, 20, 25, '#6a4a2a', 'box', 'box', {elev: 245}], ['trappe', 'Trappe de cave', 80, 80, 2, '#7a4f2a', 'hatch'],
+            ['marche', 'Marche, seuil', 100, 30, 17, '#a9a296', 'box'], ['gardecorps', 'Garde-corps, rampe', 200, 5, 100, '#5a3b22', 'fence'], ['conduit', 'Conduit de cheminée', 60, 50, 280, '#bfb4a3', 'box'],
+            ['verriere', 'Verrière, cloison vitrée', 200, 8, 240, '#2b2b2b', 'glasswall'], ['radiateurfonte', 'Radiateur en fonte', 90, 20, 70, '#c9c9c9', 'radiator', 'radiator', {elev: 10}], ['chaudiere', 'Chaudière', 60, 50, 90, '#efefef', 'appliance'],
+            ['pilier', 'Pilier de pierre', 50, 50, 280, '#a9a296', 'box', 'wallstone'], ['estrade', 'Estrade, palier', 200, 100, 20, '#9a7a5a', 'box'], ['murbas', 'Muret, demi-cloison', 200, 15, 110, '#e9e1cf', 'box'],
+            ['niche_mur', 'Niche, alcôve', 100, 30, 200, '#d9d2c4', 'shelves']],
+    };
+    // les objets d'origine : quelques-uns changent de catégorie (leur clé reste, les maisons enregistrées ne bougent pas) et gagnent une forme 3D plus juste
+    const MOVE = {berceau: 'Enfants', litenfant: 'Enfants', bureau: 'Bureau', prieDieu: 'Religion, souvenirs', mangeoire: 'Ferme, animaux', charrette: 'Ferme, animaux'};
+    const RENAME_CAT = {'Métiers, ferme': 'Métiers, atelier', 'Extérieur': 'Jardin, extérieur'};
+    const SHAPE3D = {chevet: 'cabinet', coiffeuse: 'legsbox', banc: 'bench', petrin: 'legsbox', frigo: 'appliance', plan: 'counter', enclume: 'anvil', mangeoire: 'trough', bancjardin: 'bench', vaisselier: 'hutch', radio: 'radio'};
+    let LIB = null;
+    function extend() {
+        if (LIB || !ext.houseLib?.LIB) return !!LIB; LIB = ext.houseLib.LIB;
+        LIB.forEach(l => { l[2] = MOVE[l[0]] || RENAME_CAT[l[2]] || l[2]; if (SHAPE3D[l[0]]) l[8] = SHAPE3D[l[0]]; });
+        const have = new Set(LIB.map(l => l[0]));
+        Object.entries(MORE).forEach(([cat, rows]) => rows.forEach(([k, n, w, d, h, c, s2, s3, o]) => { if (!have.has(k)) { have.add(k); LIB.push([k, n, cat, w, d, h, c, s2, s3 || s2, o || null]); } }));
+        return true;
+    }
+    if (!extend()) document.addEventListener('DOMContentLoaded', extend, {once: true});
+    setTimeout(extend, 0);
+
+    /* ═════════ Les dessins vus de dessus (centrés en 0, 0 ; boîte w × d) ═════════ */
+    const rep = (n, f) => { const a = {length: n}; return Array.from(a, (_, i) => f(i, a)); }; // n fois, avec a.length = n
+    ext.houseSym2dX = (k, item, {R, S, c, w, d, x0, y0}) => {
+        const E = (cx, cy, rx, ry, f = c, ex = '') => `<ellipse cx="${cx}" cy="${cy}" rx="${Math.max(.1, rx)}" ry="${Math.max(.1, ry)}" fill="${f}" ${S} ${ex}/>`, P = (dd, f = 'none', ex = '') => `<path d="${dd}" fill="${f}" ${S} ${ex}/>`;
+        const m = Math.min(w, d), x1 = w / 2, y1 = d / 2, Rr = (x, y, ww, hh, rx, f = c) => `<rect x="${x}" y="${y}" width="${ww}" height="${hh}" rx="${rx}" fill="${f}" ${S}/>`;
+        switch (k) {
+            case 'rounded': return Rr(x0, y0, w, d, m * .18);
+            case 'oval': return E(0, 0, w / 2, d / 2);
+            case 'tri': return P(`M0 ${y0}L${x1} ${y1}L${x0} ${y1}Z`, c);
+            case 'lshape': { const t = Math.min(65, m * .45); return P(`M${x0} ${y0}H${x1}V${y0 + t}H${x0 + t}V${y1}H${x0}Z`, c); }
+            case 'bench': return R(x0, y0, w, d) + [1, 2].map(i => `<path d="M${x0} ${y0 + d * i / 3}H${x1}" ${S} opacity=".45"/>`).join('');
+            case 'stool': return E(0, 0, w / 2, d / 2) + E(0, 0, w * .3, d * .3, 'none', 'opacity=".5"');
+            case 'rocking': return R(x0 + w * .1, y0 + d * .15, w * .8, d * .65) + R(x0 + w * .1, y0 + d * .15, w * .8, d * .15) + P(`M${x0 + 3} ${y0}Q${x0 - 4} 0 ${x0 + 3} ${y1}M${x1 - 3} ${y0}Q${x1 + 4} 0 ${x1 - 3} ${y1}`);
+            case 'cradle': return E(0, 0, w / 2, d / 2) + E(0, d * .05, w * .38, d * .38, '#fff8') + P(`M${x0} ${y0 + 4}H${x1}M${x0} ${y1 - 4}H${x1}`);
+            case 'crib': case 'playpen': return R(x0, y0, w, d, '#fff') + R(x0 + 4, y0 + 4, w - 8, d - 8, c, 'opacity=".55"') + Array.from({length: Math.max(3, Math.round(w / 12))}, (_, i) => `<path d="M${x0 + w * (i + .5) / Math.max(3, Math.round(w / 12))} ${y0}v4M${x0 + w * (i + .5) / Math.max(3, Math.round(w / 12))} ${y1}v-4" ${S}/>`).join('');
+            case 'bunk': return R(x0, y0, w, d) + R(x0 + 6, y0 + 6, w - 12, 22, '#fff') + `<path d="M${x0} ${y0}L${x1} ${y1}" ${S} stroke-dasharray="6 4"/>` + R(x1 - 14, y1 - 50, 10, 46, 'none');
+            case 'pram': return Rr(x0 + w * .1, y0 + d * .2, w * .8, d * .7, 8) + E(0, y0 + d * .25, w * .4, d * .2, '#0002') + P(`M${x0 + w * .2} ${y0}H${x1 - w * .2}`);
+            case 'rockhorse': return P(`M${x0} ${y0 + 2}Q0 ${y0 - 6} ${x1} ${y0 + 2}M${x0} ${y1 - 2}Q0 ${y1 + 6} ${x1} ${y1 - 2}`) + E(0, 0, w * .2, d * .35) + E(0, y0 + d * .12, w * .14, d * .1);
+            case 'tv': return R(x0, y0 + d * .35, w, d * .3, '#222') + R(x0 + w * .35, y0 + d * .65, w * .3, d * .35, '#555');
+            case 'appliance': return R(x0, y0, w, d) + `<path d="M${x0} ${y1 - 5}H${x1}" ${S}/>`;
+            case 'washer': return R(x0, y0, w, d) + `<circle r="${m * .3}" fill="#cfd8e0" ${S}/>`;
+            case 'cooktop': return R(x0, y0, w, d, '#222') + [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([a, b]) => `<circle cx="${a * w / 4}" cy="${b * d / 4}" r="${m * .16}" fill="none" stroke="#999" stroke-width="1.4" vector-effect="non-scaling-stroke"/>`).join('');
+            case 'sinkdouble': return R(x0, y0, w, d) + [-1, 1].map(s => `<rect x="${s < 0 ? x0 + w * .06 : w * .04}" y="${y0 + d * .2}" width="${w * .4}" height="${d * .6}" rx="${d * .12}" fill="#fff" ${S}/>`).join('');
+            case 'hood': return R(x0, y0, w, d, c, 'stroke-dasharray="6 4" fill-opacity=".5"') + R(-w * .15, y0, w * .3, d * .45, 'none');
+            case 'bathsabot': return `<rect x="${x0}" y="${y0}" width="${w}" height="${d}" rx="${d * .3}" fill="${c}" ${S}/>` + E(w * .12, 0, w * .3, d * .32, '#fff') + R(x0 + 6, y0 + d * .2, w * .25, d * .6, '#fff');
+            case 'bidet': return `<ellipse rx="${w / 2}" ry="${d / 2}" fill="${c}" ${S}/>` + E(0, d * .05, w * .3, d * .3, '#fff');
+            case 'turc': return R(x0, y0, w, d) + E(0, d * .1, w * .18, d * .2, '#555') + R(-w * .3, -d * .3, w * .15, d * .2, '#d9d2c4') + R(w * .15, -d * .3, w * .15, d * .2, '#d9d2c4');
+            case 'radiator': return R(x0, y0, w, d) + rep(Math.min(30, Math.max(3, Math.round(w / 8))), (i, a) => `<path d="M${x0 + w * (i + 1) / (a.length + 1)} ${y0}V${y1}" ${S} opacity=".5"/>`).join('');
+            case 'mirror': return R(x0, y0, w, Math.max(2, d)) + `<path d="M${x0 + w * .1} ${y1 + 2}H${x1 - w * .1}" stroke="#7aa6c9" stroke-width="2" vector-effect="non-scaling-stroke"/>`;
+            case 'screen': { const n = Math.max(2, Math.round(w / 50)); return P(`M${Array.from({length: n + 1}, (_, i) => `${x0 + w * i / n} ${i % 2 ? y1 : y0}`).join('L')}`, 'none', 'stroke-width="4"'); }
+            case 'gramo': return R(x0 + w * .2, y0 + d * .2, w * .6, d * .6) + `<circle r="${m * .25}" fill="#222" ${S}/>` + P(`M0 0L${x1} ${y0}`, 'none') + E(x1 - m * .15, y0 + m * .15, m * .18, m * .18, '#c9a24a');
+            case 'grandpiano': return P(`M${x0} ${y0}H${x1}V${y0 + d * .45}Q${x1} ${y1} 0 ${y1}Q${x0} ${y1} ${x0} ${y0 + d * .5}Z`, c) + R(x0, y0, w, d * .12, '#fff');
+            case 'chandelier': return `<circle r="${m * .42}" fill="none" ${S} stroke-dasharray="5 4"/>` + Array.from({length: 6}, (_, i) => `<circle cx="${Math.cos(i * 1.047) * m * .42}" cy="${Math.sin(i * 1.047) * m * .42}" r="${m * .06}" fill="${c}" ${S}/>`).join('') + `<circle r="${m * .08}" fill="${c}" ${S}/>`;
+            case 'rugR': return E(0, 0, w / 2, d / 2, c, 'opacity=".55"') + E(0, 0, w / 2 - 10, d / 2 - 10, 'none');
+            case 'planter': return R(x0, y0, w, d, '#8a5a32') + rep(Math.max(2, Math.round(w / 25)), (i, a) => `<circle cx="${x0 + w * (i + .5) / a.length}" r="${m * .42}" fill="${c}" opacity=".9"/>`).join('');
+            case 'cage': return `<circle r="${m / 2}" fill="none" ${S}/>` + [0, 1, 2, 3].map(i => `<path d="M${Math.cos(i * .785) * m / 2} ${Math.sin(i * .785) * m / 2}L${-Math.cos(i * .785) * m / 2} ${-Math.sin(i * .785) * m / 2}" ${S} opacity=".5"/>`).join('');
+            case 'crates': return R(x0, y0, w, d) + R(x0 + w * .1, y0 + d * .1, w * .6, d * .6, c, 'opacity=".8"') + `<path d="M${x0} ${y0}L${x1} ${y1}" ${S} opacity=".3"/>`;
+            case 'coatstand': return `<circle r="${m * .35}" fill="none" ${S}/><circle r="${m * .08}" fill="${c}" ${S}/>` + [0, 1, 2, 3].map(i => `<path d="M0 0L${Math.cos(i * 1.57 + .78) * m * .45} ${Math.sin(i * 1.57 + .78) * m * .45}" ${S}/>`).join('');
+            case 'officechair': return Array.from({length: 5}, (_, i) => `<path d="M0 0L${Math.cos(i * 1.2566) * m * .48} ${Math.sin(i * 1.2566) * m * .48}" ${S}/>`).join('') + Rr(x0 + w * .1, y0 + d * .15, w * .8, d * .7, m * .15) + R(x0 + w * .12, y0, w * .76, d * .14);
+            case 'globe': return `<circle r="${m / 2}" fill="${c}" ${S}/><ellipse rx="${m * .2}" ry="${m / 2}" fill="none" ${S} opacity=".6"/><path d="M${-m / 2} 0H${m / 2}" ${S} opacity=".6"/>`;
+            case 'safe': return R(x0, y0, w, d) + `<circle cy="${y1 - 6}" r="${m * .12}" fill="#ccc" ${S}/>`;
+            case 'candle': return `<circle r="${m / 2}" fill="#c9a24a" ${S}/><circle r="${m * .2}" fill="${c}" ${S}/>`;
+            case 'cross': return d < 20 ? R(x0, y0, w, Math.max(2, d)) + R(-3, y0 - 3, 6, d + 6, '#3a3530') : R(x0, y0, w, d, '#bfb4a3') + R(-m * .08, y0 + d * .15, m * .16, d * .7, c) + R(x0 + w * .2, -m * .08, w * .6, m * .16, c);
+            case 'statue': return R(x0, y0, w, d, '#bfb4a3') + `<circle r="${m * .3}" fill="${c}" ${S}/><circle r="${m * .13}" fill="${c}" ${S}/>`;
+            case 'lectern': return R(x0 + w * .1, y0, w * .8, d * .8) + `<circle cy="${y1 - d * .1}" r="${m * .08}" fill="${c}" ${S}/>`;
+            case 'easel': return P(`M${x0} ${y1}L0 ${y0}L${x1} ${y1}M0 ${y0}V${y1}`, 'none', 'stroke-width="3"') + R(x0 + w * .1, y1 - d * .3, w * .8, 5, '#f4efe4');
+            case 'press': return `<circle r="${m / 2}" fill="${c}" ${S}/><circle r="${m * .36}" fill="none" ${S}/><circle r="${m * .06}" fill="#333"/>` + R(x0, -m * .05, w, m * .1, c);
+            case 'still': return `<circle cx="${-w * .15}" r="${Math.min(w * .3, d * .45)}" fill="${c}" ${S}/><circle cx="${w * .3}" r="${Math.min(w * .15, d * .3)}" fill="${c}" ${S}/>` + P(`M${-w * .15} 0L${w * .3} 0`);
+            case 'breadoven': return R(x0, y0, w, d, '#bfb4a3') + E(0, d * .05, w * .42, d * .4, c) + R(-w * .12, y1 - d * .15, w * .24, d * .15, '#2a2420');
+            case 'animal': return E(0, d * .05, w * .45, d * .38) + E(0, y0 + d * .1, w * .26, d * .1) + P(`M0 ${y1 - d * .1}L0 ${y1}`, 'none');
+            case 'teddy': return `<circle cy="${d * .1}" r="${m * .4}" fill="${c}" ${S}/><circle cy="${y0 + m * .2}" r="${m * .22}" fill="${c}" ${S}/>`;
+            case 'stall': return R(x0, y0, w, d, '#e0c46a', 'opacity=".45"') + P(`M${x0} ${y1}V${y0}H${x1}V${y1}`, 'none', 'stroke-width="5"') + P(`M${x0} ${y1}H${x0 + w * .4}`, 'none', 'stroke-width="3"');
+            case 'trough': return R(x0, y0, w, d) + R(x0 + 6, y0 + 6, w - 12, d - 12, '#6a9ac2');
+            case 'rack': return P(`M${x0} 0H${x1}`, 'none', 'stroke-width="3"') + R(x0, y0, 6, d, c) + R(x1 - 6, y0, 6, d, c);
+            case 'plow': return P(`M0 ${y0}V${y1 - d * .25}`, 'none', 'stroke-width="4"') + P(`M${x0} ${y1}L0 ${y1 - d * .3}L${x1} ${y1}`, 'none', 'stroke-width="3"') + E(0, y1 - d * .2, w * .2, d * .08, '#777');
+            case 'harrow': return R(x0, y0, w, d, 'none') + [1, 2, 3].map(i => `<path d="M${x0} ${y0 + d * i / 4}H${x1}M${x0 + w * i / 4} ${y0}V${y1}" ${S}/>`).join('');
+            case 'tractor': return R(x0 + w * .05, y0 + d * .3, w * .6, d * .4) + R(x0 + w * .55, y0, w * .35, d * .22, '#1a1a1a') + R(x0 + w * .55, y1 - d * .22, w * .35, d * .22, '#1a1a1a') + R(x0, y0 + d * .1, w * .18, d * .14, '#1a1a1a') + R(x0, y1 - d * .24, w * .18, d * .14, '#1a1a1a') + R(x0 + w * .6, y0 + d * .35, w * .15, d * .3, '#333');
+            case 'barrow': return P(`M${x0 + w * .15} ${y0}H${x1 - w * .2}L${x1 - w * .3} ${y1}H${x0 + w * .25}Z`, c) + `<path d="M${x1 - w * .25} ${y0 + d * .2}H${x1}M${x1 - w * .25} ${y1 - d * .2}H${x1}" ${S}/>` + R(x0, -4, w * .15, 8, '#222');
+            case 'hive': return R(x0, y0, w, d) + `<path d="M${x0} ${y0 + d / 3}H${x1}M${x0} ${y0 + d * 2 / 3}H${x1}" ${S} opacity=".5"/>`;
+            case 'hedge': return Rr(x0, y0, w, d, m * .4) + rep(Math.max(2, Math.round(w / 40)), (i, a) => `<circle cx="${x0 + w * (i + .5) / a.length}" r="${m * .35}" fill="#0002"/>`).join('');
+            case 'flowerbed': return Rr(x0, y0, w, d, m * .3, '#7a5a3a') + Array.from({length: Math.min(40, Math.max(4, Math.round(w * d / 900)))}, (_, i) => `<circle cx="${x0 + w * ((i * 37) % 97 + 2) / 100}" cy="${y0 + d * ((i * 61) % 89 + 5) / 100}" r="${Math.min(8, m * .08)}" fill="${['#c4607a', '#e0c46a', '#ffffff', '#8a6ac4', '#e07a5a'][i % 5]}"/>`).join('');
+            case 'garden': return R(x0, y0, w, d, '#7a5a3a') + rep(Math.max(2, Math.round(d / 60)), (i, a) => `<path d="M${x0 + 8} ${y0 + d * (i + .5) / a.length}H${x1 - 8}" stroke="#5f8a3a" stroke-width="${Math.max(4, d / a.length * .35)}" stroke-dasharray="10 8"/>`).join('');
+            case 'pond': return E(0, 0, w / 2, d / 2, '#a9a296') + E(0, 0, w / 2 - 8, d / 2 - 8, c);
+            case 'fountain': return `<circle r="${m / 2}" fill="#a9a296" ${S}/><circle r="${m / 2 - 8}" fill="#6a9ac2" ${S}/><circle r="${m * .14}" fill="#a9a296" ${S}/>`;
+            case 'lavoir': return R(x0, y0, w, d, '#e8dccb', 'stroke-dasharray="8 5"') + R(x0 + w * .1, y0 + d * .2, w * .8, d * .6, '#a9a296') + R(x0 + w * .14, y0 + d * .26, w * .72, d * .48, '#6a9ac2') + [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([a, b]) => R(a * w * .45 - 7, b * d * .45 - 7, 14, 14, '#6a4a2a')).join('');
+            case 'pump': return `<circle r="${m * .3}" fill="${c}" ${S}/>` + R(-3, y0, 6, d * .5, c) + R(-m * .1, y1 - d * .25, m * .2, d * .25, '#a9a296');
+            case 'grave': return R(x0, y0, w, d) + R(x0 + w * .1, y0, w * .8, d * .12, '#7a7a7a') + `<path d="M0 ${y0 + d * .3}V${y0 + d * .6}M${-w * .12} ${y0 + d * .4}H${w * .12}" ${S}/>`;
+            case 'lounger': return R(x0, y0, w, d * .4, c) + R(x0, y0 + d * .4, w, d * .6) + Array.from({length: 4}, (_, i) => `<path d="M${x0} ${y0 + d * (i + 1) / 5}H${x1}" ${S} opacity=".35"/>`).join('');
+            case 'parasol': return `<circle r="${m / 2}" fill="${c}" ${S} opacity=".85"/>` + Array.from({length: 8}, (_, i) => `<path d="M0 0L${Math.cos(i * .785) * m / 2} ${Math.sin(i * .785) * m / 2}" ${S} opacity=".5"/>`).join('') + '<circle r="4" fill="#333"/>';
+            case 'swing': return P(`M${x0} ${y0}L${x0 + w * .08} 0L${x0} ${y1}M${x1} ${y0}L${x1 - w * .08} 0L${x1} ${y1}M${x0 + w * .08} 0H${x1 - w * .08}`, 'none', 'stroke-width="3"') + R(-30, -8, 60, 16, '#6a4a2a');
+            case 'slide': return R(x0, y0, w, d * .2, '#9a7a5a') + R(x0 + w * .1, y0 + d * .2, w * .8, d * .8) + `<path d="M${x0 + w * .1} ${y0 + d * .2}V${y1}M${x1 - w * .1} ${y0 + d * .2}V${y1}" ${S}/>`;
+            case 'pergola': return [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([a, b]) => R(a * (w / 2 - 6) - 6, b * (d / 2 - 6) - 6, 12, 12, c)).join('') + rep(Math.max(3, Math.round(w / 50)), (i, a) => `<path d="M${x0 + w * (i + .5) / a.length} ${y0 - 8}V${y1 + 8}" ${S} opacity=".6"/>`).join('') + `<path d="M${x0} ${y0 + 6}H${x1}M${x0} ${y1 - 6}H${x1}" ${S}/>`;
+            case 'fence': case 'gate': return `<path d="M${x0} 0H${x1}" stroke="${c}" stroke-width="${Math.max(3, d)}"/>` + rep(Math.max(2, Math.ceil(w / 100) + 1), (i, a) => R(x0 + (w - 8) * i / (a.length - 1), -Math.max(5, d / 2 + 2), 8, Math.max(10, d + 4), k === 'gate' && (i === 0 || i === a.length - 1) ? '#a9a296' : c)).join('');
+            case 'bike': return `<path d="M${x0 + w * .15} 0H${x1 - w * .15}" ${S} stroke-width="3"/>` + R(x0, -3, w * .3, 6, '#222') + R(x1 - w * .3, -3, w * .3, 6, '#222') + `<path d="M${x1 - w * .3} ${y0}V${y1}" ${S} stroke-width="3"/>`;
+            case 'hut': return R(x0, y0, w, d) + `<path d="M${x0} 0H${x1}" ${S}/>` + R(-Math.min(w * .15, 45), y1 - 4, Math.min(w * .3, 90), 4, '#3a2a1a');
+            case 'greenhouse': return R(x0, y0, w, d, c, 'fill-opacity=".6"') + `<path d="M${x0} 0H${x1}" ${S}/>` + rep(Math.max(2, Math.round(w / 60)), (i, a) => `<path d="M${x0 + w * (i + 1) / (a.length + 1)} ${y0}V${y1}" ${S} opacity=".5"/>`).join('');
+            case 'woodpile': return R(x0, y0, w, d) + rep(Math.max(3, Math.round(w / 15)), (i, a) => `<circle cx="${x0 + w * (i + .5) / a.length}" r="${Math.min(d * .4, w / a.length * .45)}" fill="#c9a26a" ${S}/>`).join('');
+            case 'spiral': return `<circle r="${m / 2}" fill="#e8dccb" ${S}/>` + Array.from({length: 12}, (_, i) => `<path d="M0 0L${Math.cos(i * .524) * m / 2} ${Math.sin(i * .524) * m / 2}" ${S}/>`).join('') + `<circle r="${m * .06}" fill="#555"/>`;
+            case 'ladder': return R(x0, y0, w, Math.max(4, d), 'none') + rep(Math.max(2, Math.round(w / 25)), (i, a) => `<path d="M${x0 + w * (i + .5) / a.length} ${y0}V${y1}" ${S}/>`).join('');
+            case 'hatch': return R(x0, y0, w, d) + R(x0 + 6, y0 + 6, w - 12, d - 12, 'none', 'stroke-dasharray="5 3"') + '<circle r="4" fill="none" stroke="#333" vector-effect="non-scaling-stroke"/>';
+            case 'glasswall': return R(x0, y0, w, Math.max(3, d), '#cfe6f3') + rep(Math.max(2, Math.round(w / 60)), (i, a) => R(x0 + w * i / a.length - 2, y0, 4, Math.max(3, d), c)).join('');
+            case 'canopy': return R(x0, y0, w, d) + R(x0 + 6, y0 + 6, w / 2 - 12, 22, '#fff') + R(6, y0 + 6, w / 2 - 12, 22, '#fff') + [[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([a, b]) => R(a * (w / 2 - 4) - 4, b * (d / 2 - 4) - 4, 8, 8, '#3a3530')).join('') + `<path d="M${x0} ${y0}L${x1} ${y1}M${x1} ${y0}L${x0} ${y1}" ${S} stroke-dasharray="6 5" opacity=".5"/>`;
+            case 'cone': return `<circle r="${m / 2}" fill="${c}" ${S}/>` + Array.from({length: 8}, (_, i) => `<path d="M0 0L${Math.cos(i * .785) * m / 2} ${Math.sin(i * .785) * m / 2}" ${S} opacity=".45"/>`).join('');
+            default: return undefined;
+        }
+    };
+
+    /* ═════════ Les formes en volume (mètres) ═════════ */
+    const picCache = new Map();
+    function picTex(T, kind) {
+        if (picCache.has(kind)) return picCache.get(kind);
+        const c = document.createElement('canvas'); c.width = 256; c.height = 192; const g = c.getContext('2d');
+        const bg = {board: '#22332a', tree: '#f3ead6', portrait: '#d9c7a3', photo: '#cdbb98', medals: '#3a2a4a'}[kind] || '#e8e2d6'; g.fillStyle = bg; g.fillRect(0, 0, 256, 192);
+        g.strokeStyle = g.fillStyle = '#6a5038';
+        if (kind === 'tree') { g.lineWidth = 3; g.beginPath(); g.moveTo(128, 180); g.lineTo(128, 110); [[64, 70], [192, 70], [36, 30], [92, 30], [164, 30], [220, 30]].forEach(([x, y], i) => { g.moveTo(i < 2 ? 128 : (i < 4 ? 64 : 192), i < 2 ? 110 : 70); g.lineTo(x, y); }); g.stroke(); [[128, 150], [64, 70], [192, 70], [36, 30], [92, 30], [164, 30], [220, 30]].forEach(([x, y]) => { g.fillStyle = '#8a6a3a'; g.beginPath(); g.ellipse(x, y, 16, 11, 0, 0, 7); g.fill(); }); }
+        else if (kind === 'portrait' || kind === 'photo') { const fig = (x, s) => { g.fillStyle = '#5a4430'; g.beginPath(); g.ellipse(x, 70, 22 * s, 28 * s, 0, 0, 7); g.fill(); g.beginPath(); g.ellipse(x, 170, 50 * s, 60 * s, 0, Math.PI, 0); g.fill(); g.fillStyle = '#c9a77a'; g.beginPath(); g.ellipse(x, 74, 15 * s, 20 * s, 0, 0, 7); g.fill(); }; if (kind === 'photo') { fig(96, .9); fig(160, .9); } else fig(128, 1.1); }
+        else if (kind === 'board') { g.strokeStyle = '#e8efe8'; g.lineWidth = 2; for (let i = 0; i < 4; i++) { g.beginPath(); g.moveTo(30, 50 + i * 30); g.lineTo(120 + i * 25, 50 + i * 30); g.stroke(); } }
+        else if (kind === 'medals') { ['#c9a24a', '#bfbfbf', '#b06a3a'].forEach((col, i) => { g.fillStyle = ['#c0392b', '#2a5db0', '#2a7a3a'][i]; g.fillRect(60 + i * 55, 40, 26, 50); g.fillStyle = col; g.beginPath(); g.arc(73 + i * 55, 115, 20, 0, 7); g.fill(); }); }
+        const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; picCache.set(kind, t); return t;
+    }
+    ext.houseFurnitureX = (shape, x) => {
+        const {T, g, B, C, put, legs, box, mat, w, d, h, col, it} = x, m = Math.min(w, d);
+        const sh = (c, f) => '#' + new T.Color(c).multiplyScalar(f).getHexString(), dk = sh(col, .55);
+        const Sp = (rx, ry, rz, c = col, px = 0, py = 0, pz = 0, half = false) => { const o = put(new T.Mesh(half ? new T.SphereGeometry(1, 20, 10, 0, Math.PI * 2, 0, Math.PI / 2) : new T.SphereGeometry(1, 18, 12), mat(c)), px, py, pz); o.scale.set(Math.max(.001, rx), Math.max(.001, ry), Math.max(.001, rz)); return o; };
+        const Cy = (rx, rz, hh, c = col, px = 0, py = hh / 2, pz = 0, open = false, opts = {}) => { const o = put(new T.Mesh(new T.CylinderGeometry(1, 1, hh, 28, 1, open), mat(c, '', open ? {side: T.DoubleSide, ...opts} : opts)), px, py, pz); o.scale.set(Math.max(.001, rx), 1, Math.max(.001, rz)); return o; };
+        const Co = (r, hh, c = col, px = 0, py = hh / 2, pz = 0, seg = 18) => put(new T.Mesh(new T.ConeGeometry(r, hh, seg), mat(c)), px, py, pz);
+        const To = (r, t, c = col, px = 0, py = 0, pz = 0) => put(new T.Mesh(new T.TorusGeometry(r, t, 8, 28), mat(c)), px, py, pz);
+        const glass = () => new T.MeshStandardMaterial({color: '#cfe6f3', transparent: true, opacity: .32, roughness: .1});
+        const G = (ww, hh, dd, px, py, pz) => put(box(ww, hh, dd, glass()), px, py, pz);
+        const gable = (ww, dd, y0, rh, c) => { const s = new T.Shape([new T.Vector2(-ww / 2, 0), new T.Vector2(ww / 2, 0), new T.Vector2(0, rh)]), geo = new T.ExtrudeGeometry(s, {depth: dd, bevelEnabled: false}); geo.translate(0, 0, -dd / 2); return put(new T.Mesh(geo, c?.isMaterial ? c : mat(c)), 0, y0, 0); };
+        const knob = (px, py, pz) => Sp(.015, .015, .015, '#c9a24a', px, py, pz);
+        const corners = (fn, ix = .5, iz = .5) => [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => fn(a * (w * ix), b * (d * iz)));
+        switch (shape) {
+            case 'cabinet': { B(w - .02, .06, d - .02, dk, 0, .03); B(w, h - .1, d, col, 0, .06 + (h - .1) / 2); B(w + .03, .04, d + .03, col, 0, h - .02); const n = w > .5 ? 2 : 1; for (let i = 1; i < n; i++) B(.008, h - .2, .006, dk, -w / 2 + w * i / n, .06 + (h - .1) / 2, d / 2 + .003); for (let i = 0; i < n; i++) knob(n === 1 ? w * .35 : -w / 2 + w * (i + .5) / n + (i ? -1 : 1) * w * .2, h * .55, d / 2 + .012); return true; }
+            case 'wardrobe': B(w - .02, .1, d - .02, dk, 0, .05); B(w, h - .22, d, col, 0, .1 + (h - .22) / 2); B(w + .08, .12, d + .06, col, 0, h - .06); B(.01, h - .3, .006, dk, 0, h / 2, d / 2 + .003); if (w > 1) [-1, 1].forEach(s => B(w * .36, (h - .4) * .8, .008, sh(col, 1.12), s * w / 4, h / 2, d / 2 + .004)); knob(-.04, h * .5, d / 2 + .012); knob(.04, h * .5, d / 2 + .012); return true;
+            case 'hutch': B(w, h * .45, d); B(w + .03, .03, d + .03, sh(col, .9), 0, h * .45 + .015); B(w * .96, h * .5, d * .5, col, 0, h * .465 + h * .25, -d * .25); B(w, .05, d * .55, col, 0, h - .025, -d * .25); [1, 2].forEach(i => B(w * .9, .015, d * .45, '#e8e2d6', 0, h * .465 + h * .5 * i / 3, -d * .22)); B(.008, h * .35, .006, dk, 0, h * .225, d / 2 + .003); knob(-.04, h * .3, d / 2 + .012); knob(.04, h * .3, d / 2 + .012); return true;
+            case 'vitrine': B(w, .06, d); B(w, .05, d, col, 0, h - .025); [-1, 1].forEach(s => B(.04, h, d, col, s * (w / 2 - .02), h / 2)); B(w, h, .01, sh(col, .8), 0, h / 2, -d / 2 + .005); [1, 2, 3].forEach(i => B(w - .08, .015, d - .04, '#e8e2d6', 0, h * i / 4)); G(w - .08, h - .11, .01, 0, h / 2, d / 2 - .005); return true;
+            case 'drawers': { B(w, h, d); const n = clampN(Math.round(h / .22), 2, 8); for (let i = 1; i < n; i++) B(w - .03, .008, .006, dk, 0, h * i / n, d / 2 + .003); for (let i = 0; i < n; i++) (w > .5 ? [-w * .25, w * .25] : [0]).forEach(px => knob(px, h * (i + .5) / n, d / 2 + .012)); return true; }
+            case 'chest': B(w, h * .82, d); B(w + .02, h * .18, d + .02, sh(col, .85), 0, h * .91); if (w > .4) [-1, 1].forEach(s => B(.03, h + .005, d + .025, '#3a3a3a', s * w * .3, h / 2)); B(.06, .07, .01, '#c9a24a', 0, h * .72, d / 2 + .015); return true;
+            case 'shelves': { [-1, 1].forEach(s => B(.025, h, d, col, s * (w / 2 - .0125), h / 2)); B(w, h, .01, sh(col, .8), 0, h / 2, -d / 2 + .005); const n = clampN(Math.round(h / .35), 1, 8), books = ['#7a2e2e', '#2f4f6f', '#3a5a3a', '#8a6a3a', '#5a3a6a', '#a07850']; for (let i = 0; i <= n; i++) B(w, .02, d, col, 0, Math.min(h - .01, .01 + (h - .02) * i / n)); if (d > .2 && h / n > .25) for (let i = 0; i < n; i++) for (let j = 0; j < 4; j++) { const bw = (w - .08) / 4 * .9; B(bw, Math.min(.24, (h / n) * .7), d * .7, books[(i * 4 + j) % 6], -w / 2 + .04 + (w - .08) * (j + .5) / 4, .02 + (h - .02) * i / n + Math.min(.24, (h / n) * .7) / 2, 0); } return true; }
+            case 'legsbox': { const th = Math.min(h * .45, .35); B(w, th, d, col, 0, h - th / 2); legs(h - th, .06); return true; }
+            case 'counter': B(w, h - .04, d); B(w + .04, .04, d + .04, '#e8e2d6', 0, h - .02); return true;
+            case 'oval': { const top = Cy(w / 2, d / 2, .04, col, 0, h - .02); top.castShadow = true; corners((px, pz) => B(.05, h - .04, .05, col, px * .6, (h - .04) / 2, pz * .5), .5, .5); return true; }
+            case 'bench': B(w, .05, d, col, 0, h - .025); legs(h - .05, .05); return true;
+            case 'stool': Cy(m / 2, m / 2, .04, col, 0, h - .02); for (let i = 0; i < 3; i++) { const a = i * 2.094; C(.015, h - .04, col, Math.cos(a) * m * .35, (h - .04) / 2, Math.sin(a) * m * .35); } return true;
+            case 'cyl': Cy(w / 2, d / 2, h); return true;
+            case 'tub': Cy(w / 2, d / 2, h, col, 0, h / 2, 0, true); Cy(w / 2 * .97, d / 2 * .97, .02, sh(col, .7), 0, .01); return true;
+            case 'ball': Sp(w / 2, h / 2, d / 2, col, 0, h / 2); return true;
+            case 'cone': Co(m / 2, h, col, 0, h / 2, 0, 20); return true;
+            case 'conifer': C(.12, h * .15, '#6a4a2a', 0, h * .075); Co(m / 2, h * .55, col, 0, h * .15 + h * .275); Co(m * .35, h * .4, sh(col, 1.1), 0, h * .6 + h * .2); return true;
+            case 'stack': Cy(w / 2, d / 2, h * .45); Co(m / 2, h * .55, col, 0, h * .45 + h * .275, 0, 24); return true;
+            case 'rocking': { B(w, .08, d * .6, col, 0, .42); const b = B(w, .65, .05, col, 0, .42 + .3, -d * .3); b.rotation.x = -.25; [-1, 1].forEach(s => { B(.05, .05, d * .6, col, s * (w / 2 - .025), .62); B(.04, .4, .04, col, s * (w / 2 - .03), .22, d * .2); B(.04, .4, .04, col, s * (w / 2 - .03), .22, -d * .25); B(.04, .04, d, dk, s * (w / 2 - .03), .03); }); return true; }
+            case 'rockhorse': [-1, 1].forEach(s => B(.04, .05, d, dk, s * .1, .04)); corners((px, pz) => B(.04, h * .4, .04, col, px * .25, .05 + h * .2, pz * .4), .5, .5); Sp(w * .32, h * .15, d * .32, col, 0, h * .6); Sp(w * .2, h * .14, d * .12, col, 0, h * .85, -d * .33); B(.03, .14, d * .2, '#3a2a1a', 0, h * .8, -d * .2); return true;
+            case 'tv': B(w * .35, .02, Math.max(.08, d * .8), '#222', 0, .01); B(.05, .08, .03, '#222', 0, .06); B(w, h - .1, .04, '#111', 0, .1 + (h - .1) / 2); B(w - .03, h - .13, .005, '#1d2a3a', 0, .1 + (h - .1) / 2, .021); return true;
+            case 'radio': B(w, h, d); B(w * .5, h * .5, .005, '#c9b48a', -w * .15, h * .55, d / 2 + .003); knob(w * .3, h * .4, d / 2 + .01); knob(w * .3, h * .7, d / 2 + .01); return true;
+            case 'appliance': case 'washer': B(w, h, d); B(w * .5, .02, .02, '#888', 0, h * .78, d / 2 + .015); B(w, .07, .006, '#333', 0, h - .05, d / 2 + .003); if (shape === 'washer') put(new T.Mesh(new T.CircleGeometry(Math.min(w, h) * .28, 28), mat('#2a3a4a')), 0, h * .45, d / 2 + .004); return true;
+            case 'cooktop': B(w, h, d, '#222'); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => { To(m * .13, .006, '#888', a * w / 4, h + .004, b * d / 4).rotation.x = Math.PI / 2; }); return true;
+            case 'sinkdouble': B(w, h, d); [-1, 1].forEach(s => B(w * .4, .01, d * .6, '#e9eef2', s * w * .22, h + .005)); C(.015, .2, '#aaa', 0, h + .1, -d * .35); return true;
+            case 'lshape': { const t = Math.min(.65, m * .45); B(w, h, t, col, 0, h / 2, -d / 2 + t / 2); B(t, h, d - t, col, -w / 2 + t / 2, h / 2, t / 2); B(w + .02, .03, t + .02, '#e8e2d6', 0, h + .015, -d / 2 + t / 2); B(t + .02, .03, d - t, '#e8e2d6', -w / 2 + t / 2, h + .015, t / 2); return true; }
+            case 'hood': B(w, .12, d, col, 0, .06); B(w * .3, h - .12, d * .4, col, 0, .12 + (h - .12) / 2, -d * .25); return true;
+            case 'bathsabot': B(w, h * .62, d, col, 0, h * .31); B(w * .45, h * .38, d, col, -w * .275, h * .62 + h * .19); B(w * .5, .01, d * .7, '#dfe9ef', w * .2, h * .62 + .005); return true;
+            case 'clawbath': B(w, h - .12, d, col, 0, .12 + (h - .12) / 2); B(w - .1, .01, d - .1, '#dfe9ef', 0, h + .005); corners((px, pz) => Sp(.04, .06, .04, '#c9a24a', px * .82, .06, pz * .72)); return true;
+            case 'bidet': C(m * .45, h, col, 0, h / 2, d * .05); B(w * .5, .02, d * .45, '#dfe9ef', 0, h + .01, d * .05); return true;
+            case 'pedestal': C(.09, h - .15, col, 0, (h - .15) / 2); B(w, .15, d, col, 0, h - .075); B(w * .6, .01, d * .5, '#dfe9ef', 0, h + .005); return true;
+            case 'turc': B(w, .03, d, col, 0, .015); { const o = put(new T.Mesh(new T.CircleGeometry(1, 24), mat('#333')), 0, .032, d * .1); o.rotation.x = -Math.PI / 2; o.scale.set(w * .18, d * .2, 1); } return true;
+            case 'radiator': { const n = clampN(Math.round(w / .06), 3, 40); for (let i = 0; i < n; i++) B(w / n * .7, h, d, col, -w / 2 + (i + .5) * w / n, h / 2); B(w, .03, d * .6, col, 0, h * .1); return true; }
+            case 'mirror': case 'frame': { const dd = Math.max(.02, d), pic = ext.houseLib?.libOf(it.kind)?.[9]?.pic; B(w, h, dd, col, 0, h / 2); const face = shape === 'mirror' ? new T.MeshStandardMaterial({color: '#cfe0ee', metalness: .6, roughness: .08}) : pic ? new T.MeshStandardMaterial({map: picTex(T, pic), roughness: .9}) : mat('#d8c9a8'); put(box(w * .86, h * .86, .004, face), 0, h / 2, dd / 2 + .002); if (shape === 'mirror' && h > 1.2 && d > .2) { [-1, 1].forEach(s => B(.04, .05, d, col, s * w * .35, .025)); } return true; }
+            case 'screen': { const n = Math.max(2, Math.round(w / .5)), pw = w / n; for (let i = 0; i < n; i++) { const p = B(pw, h, .025, i % 2 ? col : sh(col, .9), -w / 2 + pw * (i + .5), h / 2, i % 2 ? .05 : -.05); p.rotation.y = i % 2 ? .3 : -.3; } return true; }
+            case 'gramo': { B(w * .6, .15, d * .6, col, 0, .075); Cy(w * .25, d * .25, .01, '#111', 0, .155); const hn = put(new T.Mesh(new T.ConeGeometry(m * .45, h * .7, 24, 1, true), mat('#c9a24a', '', {side: T.DoubleSide, metalness: .5, roughness: .4})), w * .1, .15 + h * .45, -d * .1); hn.rotation.x = Math.PI * .78; return true; }
+            case 'grandpiano': B(w, .3, d * .75, col, 0, h - .15, -d * .125); Cy(w / 2, d * .25, .3, col, 0, h - .15, d * .25); [[-w * .4, -d * .4], [w * .4, -d * .4], [0, d * .4]].forEach(([px, pz]) => B(.07, h - .3, .07, col, px, (h - .3) / 2, pz)); B(w, .04, .16, '#f4f4f4', 0, h - .3, -d / 2 - .06); { const lid = B(w * .95, .02, d * .7, col, 0, h + .25, -d * .05); lid.rotation.z = .35; } return true;
+            case 'chandelier': To(m * .4, .015, col, 0, h * .3).rotation.x = Math.PI / 2; C(.015, h, col, 0, h / 2); for (let i = 0; i < 6; i++) { const a = i * 1.047; C(.012, .08, '#f2e6c4', Math.cos(a) * m * .4, h * .3 + .05, Math.sin(a) * m * .4); Sp(.01, .025, .01, '#ffcc55', Math.cos(a) * m * .4, h * .3 + .11, Math.sin(a) * m * .4).material = new T.MeshStandardMaterial({color: '#ffcc55', emissive: '#ffaa22', emissiveIntensity: 1}); } return true;
+            case 'rugR': Cy(w / 2, d / 2, .01, col, 0, .005); return true;
+            case 'planter': B(w, h * .45, d, '#8a5a32', 0, h * .225); Sp(w * .48, h * .35, d * .7, col, 0, h * .6); return true;
+            case 'cage': Cy(w / 2 * .9, d / 2 * .9, .04, col, 0, .02); Cy(w / 2 * .88, d / 2 * .88, h * .7, col, 0, .04 + h * .35, 0, true, {wireframe: true}); Sp(w / 2 * .88, h * .26, d / 2 * .88, col, 0, .04 + h * .7, 0, true).material = mat(col, '', {wireframe: true}); return true;
+            case 'aquarium': B(w, .04, d, '#222', 0, .02); B(w, .04, d, '#222', 0, h - .02); G(w, h - .08, d, 0, h / 2, 0); B(w - .02, (h - .08) * .8, d - .02, '#6aa7c9', 0, .04 + (h - .08) * .4).material = new T.MeshStandardMaterial({color: '#6aa7c9', transparent: true, opacity: .4}); return true;
+            case 'crates': B(w, h * .5, d, col, 0, h * .25); B(w * .9, h * .3, d * .9, sh(col, .9), .02, h * .65); B(w * .7, h * .2, d * .75, sh(col, 1.1), -.03, h * .9); return true;
+            case 'coatstand': C(.02, h, col, 0, h / 2); Cy(m * .35, m * .35, .03, col, 0, .015); for (let i = 0; i < 4; i++) { const hk = B(.14, .02, .02, col, Math.cos(i * 1.57) * .06, h - .1, Math.sin(i * 1.57) * .06); hk.rotation.y = -i * 1.57; hk.rotation.z = .4; } return true;
+            case 'officechair': for (let i = 0; i < 5; i++) { const s = B(m * .48, .03, .04, '#222', Math.cos(i * 1.2566) * m * .24, .05, Math.sin(i * 1.2566) * m * .24); s.rotation.y = -i * 1.2566; } C(.025, .35, '#555', 0, .25); B(w * .85, .08, d * .8, col, 0, .47); B(w * .8, h - .55, .06, col, 0, .55 + (h - .55) / 2, -d * .38); return true;
+            case 'globe': { const r = m / 2 * .9; Cy(m * .3, m * .3, .03, '#6a4026', 0, .015); C(.02, h - r, '#6a4026', 0, (h - r) / 2); Sp(r, r, r, col, 0, h - r); To(r * 1.06, .008, '#c9a24a', 0, h - r).rotation.y = .4; return true; }
+            case 'safe': B(w, h, d); put(new T.Mesh(new T.CircleGeometry(m * .12, 24), mat('#c9c9c9')), 0, h * .6, d / 2 + .004); B(.12, .03, .03, '#c9c9c9', w * .25, h * .45, d / 2 + .015); return true;
+            case 'candle': Cy(m * .45, m * .45, .02, '#c9a24a', 0, .01); C(m * .16, h * .8, col, 0, .02 + h * .4); Sp(.012, .03, .012, '#ffcc55', 0, h * .86).material = new T.MeshStandardMaterial({color: '#ffcc55', emissive: '#ffaa22', emissiveIntensity: 1}); return true;
+            case 'cross': if (h < 1.2) { B(Math.max(.03, w * .1), h, Math.max(.02, d), col, 0, h / 2); B(w, Math.max(.03, w * .1), Math.max(.02, d), col, 0, h * .7); } else { B(w, .3, d, '#a9a296', 0, .15); B(w * .4, .4, d * .4, '#a9a296', 0, .5); B(.08, h - .7, .08, '#3a3a3a', 0, .7 + (h - .7) / 2); B(Math.max(.6, w * .6), .08, .08, '#3a3a3a', 0, h * .8); } return true;
+            case 'statue': { const ph = h > 1 ? h * .6 : h * .2; B(w, ph, d, '#bfb4a3', 0, ph / 2); Co(m * .3, (h - ph) * .75, col, 0, ph + (h - ph) * .375); Sp(m * .13, m * .14, m * .13, col, 0, ph + (h - ph) * .75 + m * .1); return true; }
+            case 'lectern': C(.03, h * .85, col, 0, h * .425); B(w * .6, .04, d * .6, col, 0, .02); { const t = B(w, .03, d * .8, col, 0, h - .05); t.rotation.x = -.4; const bk = B(w * .8, .04, d * .6, '#5a2a1a', 0, h - .02, .01); bk.rotation.x = -.4; } return true;
+            case 'easel': [-1, 1].forEach(s => { const l = B(.03, h, .03, col, s * w * .35, h / 2, .05); l.rotation.x = .12; l.rotation.z = s * -.08; }); { const b = B(.03, h * .95, .03, col, 0, h * .47, -d * .3); b.rotation.x = -.35; const cv = B(w * .8, h * .35, .02, '#f4efe4', 0, h * .62, .1); cv.rotation.x = .12; B(w * .9, .03, .06, col, 0, h * .42, .1); } return true;
+            case 'press': Cy(m / 2, m / 2, .35, col, 0, .175); Cy(m * .38, m * .38, h * .35, col, 0, .35 + h * .175, 0, true); C(.05, h * .65, '#3a3a3a', 0, .35 + h * .32); B(w * .95, .14, .14, col, 0, h - .07); [-1, 1].forEach(s => B(.14, h, .14, col, s * w * .45, h / 2)); return true;
+            case 'still': B(w * .5, h * .25, d * .8, '#3a3a3a', -w * .15, h * .125); Sp(m * .38, h * .25, m * .38, col, -w * .15, h * .45); C(.05, h * .3, col, -w * .15, h * .8); { const p = B(w * .5, .04, .04, col, w * .1, h * .9); p.rotation.z = -.3; } Cy(m * .2, m * .2, h * .5, col, w * .32, h * .25); return true;
+            case 'breadoven': B(w, h * .4, d, '#a9a296', 0, h * .2); Sp(w * .45, h * .55, d * .45, col, 0, h * .4, 0, true); B(w * .28, h * .2, .04, '#1a1a1a', 0, h * .5, d * .44); B(.3, h * .4, .3, col, 0, h * .8, -d * .25); return true;
+            case 'animal': { const lh = h * .45, bh = h * .42; Sp(w * .5, bh / 2, d * .36, col, 0, lh + bh / 2, d * .05); Sp(w * .3, h * .12, d * .12, col, 0, h * .82, -d * .38); B(w * .3, h * .25, d * .1, col, 0, h * .7, -d * .3).rotation.x = .5; corners((px, pz) => C(Math.max(.012, w * .08), lh + .02, d < .6 ? '#d9a23a' : sh(col, .8), px * .55, lh / 2, pz * .5), .5, .5); return true; }
+            case 'teddy': Sp(w * .4, h * .3, d * .4, col, 0, h * .3); Sp(w * .3, h * .2, d * .3, col, 0, h * .75); [-1, 1].forEach(s => { Sp(w * .1, w * .1, w * .06, col, s * w * .22, h * .93); Sp(w * .12, h * .1, d * .12, col, s * w * .3, h * .12, d * .15); }); return true;
+            case 'stall': B(w, h, .05, col, 0, h / 2, -d / 2 + .025); [-1, 1].forEach(s => B(.05, h, d, col, s * (w / 2 - .025), h / 2)); B(w * .4, h * .7, .05, col, -w * .3, h * .35, d / 2 - .025); B(w, .02, d, '#d9b75a', 0, .01); return true;
+            case 'trough': B(w, .05, d, col, 0, .025); [-1, 1].forEach(s => { B(w, h, .06, col, 0, h / 2, s * (d / 2 - .03)); B(.06, h, d, col, s * (w / 2 - .03), h / 2); }); B(w - .12, .01, d - .12, '#4a7fa8', 0, h * .7); return true;
+            case 'rack': [-1, 1].forEach(s => { B(.05, h, .05, col, s * (w / 2 - .025), h / 2); B(.05, .03, d, col, s * (w / 2 - .025), .015); }); (d > .4 ? [-d / 3, 0, d / 3] : [0]).forEach(pz => B(w, .03, .03, col, 0, h - .05, pz)); return true;
+            case 'anvil': B(w * .4, h * .55, d * .7, '#3a3a3a', 0, h * .275); B(w, h * .35, d * .8, '#2f2f2f', 0, h * .72); Co(d * .3, w * .3, '#2f2f2f', w * .6, h * .78).rotation.z = -Math.PI / 2; return true;
+            case 'plow': { const b = B(.08, .08, d * .9, col, 0, h * .5); b.rotation.x = -.2; const s2 = B(w * .4, .05, .35, '#5a5a5a', 0, .12, d * .32); s2.rotation.x = .4; [-1, 1].forEach(s => { const hd = B(.04, .04, d * .4, col, s * w * .25, h * .75, d * .38); hd.rotation.x = .6; }); To(.25, .03, '#3a2a1a', 0, .25, -d * .4).rotation.y = Math.PI / 2; return true; }
+            case 'harrow': for (let i = 0; i < 4; i++) B(w, .06, .08, col, 0, h / 2, -d / 2 + d * (i + .5) / 4); for (let i = 0; i < 3; i++) B(.08, .06, d, col, -w / 2 + w * (i + .5) / 3, h / 2); return true;
+            case 'tractor': { B(w * .5, h * .3, d * .38, col, -w * .15, h * .45); B(w * .3, h * .2, d * .5, col, w * .15, h * .4); B(w * .18, .06, d * .4, '#222', w * .15, h * .58); C(.03, .4, '#222', w * .05, h * .7); C(.04, .5, '#333', -w * .25, h * .75);
+                [[w * .25, h * .32, d / 2 - .18], [-w * .32, h * .16, d / 2 - .12]].forEach(([px, r, pz]) => [-1, 1].forEach(s => { C(r, .25, '#1a1a1a', px, r, s * pz, 24).rotation.x = Math.PI / 2; })); return true; }
+            case 'barrow': { const t = B(w * .55, .22, d * .9, col, w * .05, .42); t.rotation.z = .1; [-1, 1].forEach(s => { B(w * .55, .03, .03, '#6a4a2a', w * .25, .42, s * d * .35); B(.03, .3, .03, '#6a4a2a', w * .2, .15, s * d * .3); }); C(.2, .06, '#222', -w * .38, .2, 0).rotation.x = Math.PI / 2; return true; }
+            case 'hive': legs(h * .15, .04); B(w, h * .35, d, col, 0, h * .15 + h * .175); B(w, h * .35, d, sh(col, .9), 0, h * .5 + h * .175); B(w * 1.12, .05, d * 1.12, '#8a4b3a', 0, h - .025); return true;
+            case 'hedge': put(box(w, h, d, mat(col, 'herbe'), .5), 0, h / 2, 0); return true;
+            case 'flowerbed': { B(w, .12, d, '#6a4a2a', 0, .06); const nx = clampN(Math.round(w / .25), 1, 10), nz = clampN(Math.round(d / .25), 1, 6), cols = ['#c4607a', '#e0c46a', '#ffffff', '#8a6ac4', '#e07a5a']; for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) Sp(.07, .07, .07, (i + j) % 3 ? cols[(i * 3 + j) % 5] : '#5f8a3a', -w / 2 + w * (i + .5) / nx, .12 + Math.min(h, .3) * .6, -d / 2 + d * (j + .5) / nz); return true; }
+            case 'garden': { B(w, .1, d, '#6a4a2a', 0, .05); const rows = clampN(Math.round(d / .6), 2, 10), n = clampN(Math.round(w / .4), 2, 12); for (let r = 0; r < rows; r++) for (let i = 0; i < n; i++) Sp(.12, .1, .12, r % 2 ? '#5f8a3a' : '#7aa35a', -w / 2 + w * (i + .5) / n, .14, -d / 2 + d * (r + .5) / rows); return true; }
+            case 'pond': Cy(w / 2 + .08, d / 2 + .08, .02, '#8a8a7a', 0, .01); Cy(w / 2, d / 2, .04, '#4a7fa8', 0, .02).material = new T.MeshStandardMaterial({color: '#4a7fa8', roughness: .15, metalness: .1}); return true;
+            case 'fountain': Cy(w / 2, d / 2, .5, '#a9a296', 0, .25, 0, true); Cy(w / 2 * .97, d / 2 * .97, .02, '#4a7fa8', 0, .4); C(.12, h * .7, '#a9a296', 0, h * .35); Cy(.35, .35, .12, '#a9a296', 0, h * .7); Sp(.08, .12, .08, '#a9a296', 0, h * .82); return true;
+            case 'lavoir': B(w * .8, .45, d * .6, '#a9a296', 0, .225); B(w * .75, .01, d * .55, '#4a7fa8', 0, .455); corners((px, pz) => B(.15, h, .15, '#6a4a2a', px * .9, h / 2, pz * .9)); { const r = put(box(w * 1.06, .06, d * 1.06, mat('#8a4b3a', 'tuiles'), 1), 0, h, 0); r.rotation.x = .15; } return true;
+            case 'pump': B(.3, .2, .3, '#a9a296', 0, .1); C(.08, h * .8, col, 0, .2 + h * .4); Sp(.1, .1, .1, col, 0, h); { const hd = B(.04, .04, .5, col, 0, h * .9, .25); hd.rotation.x = -.4; } B(.05, .05, .2, col, 0, h * .6, -.12); return true;
+            case 'grave': B(w, .2, d, col, 0, .1); B(w * .8, h, .12, col, 0, h / 2, -d / 2 + .08); return true;
+            case 'lounger': B(w, .05, d * .55, col, 0, .3, d * .2); { const b = B(w, .05, d * .45, col, 0, .5, -d * .25); b.rotation.x = .7; } corners((px, pz) => B(.04, .3, .04, '#6a4a2a', px * .9, .15, pz * .8)); return true;
+            case 'parasol': Cy(.25, .25, .06, '#333', 0, .03); C(.025, h, '#dddddd', 0, h / 2); Co(m / 2, .45, col, 0, h - .2, 0, 8); return true;
+            case 'swing': [-1, 1].forEach(s => [-1, 1].forEach(t => { const p = B(.08, h * 1.02, .08, col, s * (w / 2 - .1), h / 2, t * d * .3); p.rotation.x = -t * .3; })); B(w, .1, .1, col, 0, h); [-1, 1].forEach(s => B(.01, h * .6, .01, '#cccccc', s * .25, h * .7)); B(.6, .04, .25, '#6a4a2a', 0, h * .4); return true;
+            case 'slide': { [-1, 1].forEach(s => B(.04, h, .04, col, s * (w / 2 - .02), h / 2, -d / 2 + .1)); for (let i = 1; i < 5; i++) B(w, .03, .03, col, 0, h * i / 5, -d / 2 + .1); B(w, .05, .4, col, 0, h, -d / 2 + .3); const L = Math.hypot(h, d * .8), sl = B(w * .8, .04, L, col, 0, h / 2, d * .1); sl.rotation.x = Math.atan2(h, d * .8); return true; }
+            case 'pergola': corners((px, pz) => B(.12, h, .12, col, px * .94, h / 2, pz * .94)); [-1, 1].forEach(s => B(w, .12, .12, col, 0, h - .06, s * (d / 2 - .06))); { const n = clampN(Math.round(w / .5), 3, 14); for (let i = 0; i < n; i++) B(.06, .1, d + .2, col, -w / 2 + w * (i + .5) / n, h + .05, 0); } return true;
+            case 'fence': case 'gate': { const n = clampN(Math.ceil(w / 1) + 1, 2, 30); for (let i = 0; i < n; i++) B(shape === 'gate' && (i === 0 || i === n - 1) ? .3 : .08, shape === 'gate' && (i === 0 || i === n - 1) ? h + .3 : h, shape === 'gate' && (i === 0 || i === n - 1) ? .3 : .08, shape === 'gate' && (i === 0 || i === n - 1) ? '#a9a296' : col, -w / 2 + w * i / (n - 1), (shape === 'gate' && (i === 0 || i === n - 1) ? h + .3 : h) / 2); [.3, .82].forEach(f => B(w, .07, .04, col, 0, h * f)); if (shape === 'gate') { const nb = clampN(Math.round(w / .12), 4, 40); for (let i = 0; i < nb; i++) B(.022, h * .9, .022, col, -w / 2 + w * (i + .5) / nb, h * .45); } return true; }
+            case 'wallstone': put(box(w, h, d, mat(col, 'pierre'), .8), 0, h / 2, 0); return true;
+            case 'bike': [-1, 1].forEach(s => To(h * .33, .02, '#222', s * w * .32, h * .33, 0)); B(w * .45, .03, .03, col, 0, h * .55); { const a = B(.03, h * .5, .03, col, -w * .08, h * .45); a.rotation.z = .35; const f2 = B(.03, h * .5, .03, col, w * .25, h * .5); f2.rotation.z = -.3; } B(.2, .04, .08, '#222', -w * .1, h * .8); B(.04, .04, d * .8, '#888', w * .22, h * .92); return true;
+            case 'hut': B(w, h * .62, d, col, 0, h * .31); gable(w * 1.08, d * 1.08, h * .62, h * .38, '#8a4b3a'); B(Math.min(w * .3, .9), h * .45, .02, '#3a2a1a', 0, h * .225, d / 2 + .01); return true;
+            case 'greenhouse': G(w, h * .65, d, 0, h * .325, 0); gable(w, d, h * .65, h * .35, glass()); corners((px, pz) => B(.04, h * .65, .04, '#eeeeee', px, h * .325, pz)); B(w, .04, .04, '#eeeeee', 0, h * .65, 0); return true;
+            case 'woodpile': { const rows = clampN(Math.round(h / .15), 2, 8), n = clampN(Math.round(d / .15), 1, 6); for (let r = 0; r < rows; r++) for (let i = 0; i < n; i++) { const lg = C(.07, w, sh(col, .9 + ((r + i) % 3) * .1), 0, .07 + r * (h - .14) / Math.max(1, rows - 1), -d / 2 + d * (i + .5) / n, 10); lg.rotation.z = Math.PI / 2; } return true; }
+            case 'spiral': { C(.06, h, '#555', 0, h / 2); const r = m / 2, n = 16; for (let i = 0; i < n; i++) { const a = i * Math.PI * 2 * .85 / n, s = B(r, .04, .28, col, Math.cos(a) * r / 2, (i + 1) * h / n, Math.sin(a) * r / 2); s.rotation.y = -a; } return true; }
+            case 'ladder': [-1, 1].forEach(s => B(.04, h, .05, col, s * (w / 2 - .02), h / 2)); { const n = clampN(Math.round(h / .3), 2, 20); for (let i = 0; i < n; i++) B(w, .03, .03, col, 0, (i + .5) * h / n); } return true;
+            case 'hatch': B(w, .03, d, col, 0, .015); To(.04, .008, '#555', 0, .035, 0).rotation.x = Math.PI / 2; return true;
+            case 'glasswall': { const n = clampN(Math.round(w / .6), 2, 12); for (let i = 0; i <= n; i++) B(.04, h, Math.max(.03, d), col, -w / 2 + w * i / n, h / 2); [.025, h * .4, h - .025].forEach(py => B(w, .04, Math.max(.03, d), col, 0, py)); G(w, h, .01, 0, h / 2, 0); return true; }
+            case 'canopy': B(w, .35, d); B(w - .04, .18, d - .12, '#f4efe4', 0, .44, .04); [-1, 1].forEach(s => B(w / 2 - .08, .1, .3, '#ffffff', s * w / 4, .58, -d / 2 + .25)); corners((px, pz) => B(.07, h, .07, col, px * (1 - .07 / w), h / 2, pz * (1 - .07 / d))); [-1, 1].forEach(s => { B(w, .15, .05, col, 0, h - .075, s * (d / 2 - .025)); B(.05, .15, d, col, s * (w / 2 - .025), h - .075, 0); B(.02, h - .6, d * .22, '#8b3a3a', s * (w / 2 - .02), .55 + (h - .6) / 2, -d / 2 + d * .12); }); return true;
+            case 'bunk': corners((px, pz) => B(.06, h, .06, col, px * (1 - .06 / w), h / 2, pz * (1 - .06 / d))); [.25, h * .62].forEach(py => { B(w, .06, d, col, 0, py); B(w - .06, .12, d - .06, '#f4efe4', 0, py + .09); }); B(.03, .2, d * .6, col, w / 2 - .03, h * .62 + .25, -d * .1); for (let i = 1; i < 5; i++) B(.03, .03, .35, col, w / 2 - .03, h * .62 * i / 5, d / 2 - .25); return true;
+            case 'crib': case 'playpen': { const y0 = shape === 'crib' ? .3 : .04; B(w, .05, d, col, 0, y0); B(w - .04, .1, d - .04, '#f4efe4', 0, y0 + .08); [-1, 1].forEach(s => { B(w, .04, .04, col, 0, h - .02, s * (d / 2 - .02)); B(.04, .04, d, col, s * (w / 2 - .02), h - .02, 0); }); corners((px, pz) => B(.05, h, .05, col, px * (1 - .05 / w), h / 2, pz * (1 - .05 / d))); const nx = clampN(Math.round(w / .1), 2, 14), nz = clampN(Math.round(d / .1), 2, 14), bh = h - y0 - .04; for (let i = 1; i < nx; i++) [-1, 1].forEach(s => C(.012, bh, col, -w / 2 + w * i / nx, y0 + bh / 2, s * (d / 2 - .02), 6)); for (let i = 1; i < nz; i++) [-1, 1].forEach(s => C(.012, bh, col, s * (w / 2 - .02), y0 + bh / 2, -d / 2 + d * i / nz, 6)); return true; }
+            case 'cradle': Cy(w / 2, d / 2, h * .45, col, 0, h * .55 + h * .225 - h * .1, 0, true); Cy(w / 2 * .95, d / 2 * .95, .03, col, 0, h * .45); [-1, 1].forEach(s => B(.04, .05, d * .95, sh(col, .7), s * w * .35, .03)); corners((px, pz) => B(.04, h * .42, .04, col, px * .7, h * .21, pz * .6)); return true;
+            case 'pram': B(w * .9, h * .3, d * .7, col, 0, h * .55, d * .08); Sp(w * .45, h * .28, d * .3, col, 0, h * .7, -d * .2, true); [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => { C(h * .15, .03, '#222', a * w * .42, h * .15, b * d * .32, 18).rotation.z = Math.PI / 2; }); B(w * .8, .03, .03, '#888', 0, h, d / 2); [-1, 1].forEach(s => { const r2 = B(.025, h * .5, .025, '#888', s * w * .4, h * .8, d * .45); r2.rotation.x = -.5; }); return true;
+            case 'img': return false;
+            default: return false;
+        }
+    };
+    const clampN = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    /* ═════════ Rangement : catégories et objets montrés, cachés, ordonnés ═════════ */
+    const PREF_KEY = 'genealogie-house-lib';
+    const prefs = () => { try { const v = JSON.parse(localStorage.getItem(PREF_KEY) || '{}') || {}; return {cats: Array.isArray(v.cats) ? v.cats : [], hiddenCats: Array.isArray(v.hiddenCats) ? v.hiddenCats : [], items: v.items && typeof v.items === 'object' ? v.items : {}, hidden: Array.isArray(v.hidden) ? v.hidden : []}; } catch (_) { return {cats: [], hiddenCats: [], items: {}, hidden: []}; } };
+    const savePrefs = p => { try { localStorage.setItem(PREF_KEY, JSON.stringify(p)); } catch (_) {} };
+    let models = []; // les objets 3D importés (« Mes objets »), venus de l'éditeur
+    const baseCats = () => { extend(); const seen = new Set([...CATS, MINE]), extra = []; (LIB || []).forEach(l => { if (!seen.has(l[2])) { seen.add(l[2]); extra.push(l[2]); } }); models.forEach(m => { if (m.cat && !seen.has(m.cat)) { seen.add(m.cat); extra.push(m.cat); } }); return [...CATS, ...extra, MINE]; };
+    const orderedCats = (p = prefs()) => { const all = baseCats(); return [...p.cats.filter(c => all.includes(c)), ...all.filter(c => !p.cats.includes(c))]; };
+    const visibleCats = (p = prefs()) => { const l = orderedCats(p).filter(c => !p.hiddenCats.includes(c)); return l.length ? l : orderedCats(p); };
+    const libIn = cat => (LIB || []).filter(l => l[2] === cat || (cat === MINE && l[9]?.custom));
+    const orderedItems = (cat, p = prefs()) => { const all = libIn(cat), o = p.items[cat] || []; return [...o.map(k => all.find(l => l[0] === k)).filter(Boolean), ...all.filter(l => !o.includes(l[0]))]; };
+
+    /* ═════════ Les objets créés (serveur) ═════════ */
+    let customLoaded = false, customLoading = null;
+    const toEntry = o => [o.kind, o.name, o.cat || MINE, o.w, o.d, o.h, o.color, o.img ? 'img' : o.shape2d, o.shape3d, {custom: true, id: o.id, img: o.img || '', note: o.note || '', s2: o.shape2d}];
+    function registerCustom(o) { extend(); const e = toEntry(o), i = LIB.findIndex(l => l[0] === o.kind); if (i >= 0) LIB[i] = e; else LIB.push(e); }
+    function loadCustom() { if (customLoading) return customLoading; customLoading = api('house_objects').then(r => { extend(); for (let i = LIB.length - 1; i >= 0; i--) if (LIB[i][9]?.custom) LIB.splice(i, 1); (r.items || []).forEach(registerCustom); customLoaded = true; }).catch(() => { customLoaded = true; }).finally(() => { customLoading = null; }); return customLoading; }
+    const repaintLib = () => { const b = document.querySelector('dialog.h-hs-dlg [data-hs-tab="lib"].is-active'); if (b) b.click(); };
+
+    /** ce qui se pose sur le plan quand on clique un objet du catalogue */
+    function itemOf(L) {
+        const o = L[9] || {}, it = {kind: L[0], w: L[3], d: L[4], h: L[5], color: L[6], ...(o.elev ? {elev: o.elev} : {})};
+        if (o.custom) Object.assign(it, {name: L[1], s2: o.s2 || L[7], s3: L[8], ...(o.img ? {img: o.img} : {}), ...(o.note ? {note: o.note} : {})});
+        return it;
+    }
+
+    /* ═════════ Le panneau « Mobilier » ═════════ */
+    const tileSvg = (l, sym2d) => { const w = l[3], d = l[4], k = Math.max(w, d) / 10, it = itemOf(l); return `<svg viewBox="${-w / 2 - k} ${-d / 2 - k} ${w + 2 * k} ${d + 2 * k}" width="46" height="40" aria-hidden="true">${sym2d({...it, w, d})}</svg>`; };
+    const licTitle = m => [m.name, m.ext?.toUpperCase(), m.license && `Licence : ${m.license}`, m.author && `Auteur : ${m.author}`, m.source && `Source : ${m.source}`].filter(Boolean).join(' — ');
+    const modelTile = m => `<div class="h-hs-tile"><button type="button" data-hs-mine="${m.id}" title="${esc(licTitle(m))}">${m.thumb ? `<img src="${esc(m.thumb)}" alt="">` : '<span class="h-hs-ico">🧊</span>'}<small>${esc(m.name)}</small>${m.license ? `<i class="h-hs-lic">${esc(/cc0|domaine public|public domain/i.test(m.license) ? 'CC0' : 'licence')}</i>` : ''}</button><button type="button" class="h-hs-tedit" data-hs-libcmd="editmodel" data-id="${m.id}" title="Renommer, ranger, voir la licence, supprimer">✎</button></div>`;
+    const libTile = (l, sym2d) => { const o = l[9] || {}; const b = `<button type="button" data-hs-lib="${esc(l[0])}" title="${esc(l[1])} — ${l[3]} × ${l[4]} × ${l[5]} cm">${tileSvg(l, sym2d)}<small>${esc(l[1])}</small></button>`; return o.custom ? `<div class="h-hs-tile">${b}<button type="button" class="h-hs-tedit" data-hs-libcmd="editobj" data-id="${o.id}" title="Modifier ou supprimer cet objet">✎</button></div>` : `<div class="h-hs-tile">${b}</div>`; };
+    let lastSetCat = null; // pour ouvrir la catégorie d'un objet qu'on vient de créer
+    function pane({cat, q, mine, sym2d, setCat}) {
+        extend(); models = mine || []; lastSetCat = setCat || null;
+        if (!customLoaded) loadCustom().then(repaintLib);
+        const p = prefs(), cats = visibleCats(p); if (!cats.includes(cat)) { cat = cats[0]; setCat?.(cat); }
+        const words = norm(q).split(/\s+/).filter(Boolean), hit = s => words.every(w => norm(s).includes(w));
+        let body;
+        if (words.length) {
+            const libs = cats.flatMap(c => c === MINE ? [] : orderedItems(c, p)).filter(l => !p.hidden.includes(l[0]) && hit(`${l[1]} ${l[2]}`)), ms = models.filter(m => hit(`${m.name} ${m.cat} ${m.source} ${m.author}`));
+            const seen = new Set(), uniq = libs.filter(l => !seen.has(l[0]) && seen.add(l[0]));
+            body = uniq.length || ms.length ? `<div class="h-hs-lib">${uniq.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>` : '<p class="muted">Rien ne correspond. ＋ Crée l’objet, ou cherche-le dans la 📦 Bibliothèque en ligne.</p>';
+        } else if (cat === MINE) {
+            const own = orderedItems(MINE, p).filter(l => !p.hidden.includes(l[0]));
+            body = `<div class="h-hs-lib">${own.map(l => libTile(l, sym2d)).join('')}${models.map(modelTile).join('')}</div>${own.length || models.length ? '' : '<p class="muted">Ici : les objets que tu crées (＋ Créer un objet), ceux téléchargés dans la 📦 Bibliothèque en ligne, et les fichiers 3D importés (📥 Importer, en haut).</p>'}`;
+        } else {
+            const list = orderedItems(cat, p).filter(l => !p.hidden.includes(l[0])), ms = models.filter(m => m.cat === cat);
+            body = `<div class="h-hs-lib">${list.map(l => libTile(l, sym2d)).join('')}${ms.map(modelTile).join('')}</div>${list.length || ms.length ? '' : '<p class="muted">Aucun objet montré dans cette catégorie (⚙️ Ranger pour en remontrer).</p>'}`;
+        }
+        return `<input type="search" data-hs-libq placeholder="Chercher : lit, poêle, rouet, vache…" value="${esc(q)}">
+            <div class="h-hs-libbar"><button type="button" class="button small" data-hs-libcmd="create" title="Un objet à toi : nom, taille, couleur, forme, image">＋ Créer un objet</button><button type="button" class="button small secondary" data-hs-libcmd="online" title="Des modèles 3D libres de droit (CC0) à télécharger">📦 Bibliothèque en ligne</button><button type="button" class="button small secondary" data-hs-libcmd="arrange" title="Montrer, cacher, ranger les catégories et les objets">⚙️ Ranger</button></div>
+            <div class="h-hs-cats">${cats.map(c => `<button type="button" class="${c === cat && !words.length ? 'is-on' : ''}" data-hs-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>${body}
+            <p class="muted h-hs-help">Clic sur un objet : il se pose au milieu de la vue ; glisse-le ensuite à sa place (R ou la poignée ronde pour tourner).</p>`;
+    }
+
+    /* ═════════ ＋ Créer (ou modifier) un objet ═════════ */
+    const S2 = [['box', 'Rectangle'], ['rounded', 'Rectangle arrondi'], ['round', 'Rond'], ['oval', 'Ovale'], ['lshape', 'En L'], ['tri', 'Triangle'], ['table', 'Table'], ['chair', 'Chaise'], ['armchair', 'Fauteuil'], ['sofa', 'Canapé'], ['bed1', 'Lit simple'], ['bed2', 'Lit double'], ['cabinet', 'Meuble à portes'], ['wardrobe', 'Armoire'], ['drawers', 'Commode'], ['chest', 'Coffre'], ['shelves', 'Étagère'], ['desk', 'Bureau'], ['barrel', 'Tonneau'], ['plant', 'Plante'], ['rug', 'Tapis'], ['animal', 'Animal'], ['hut', 'Cabane'], ['cone', 'Cône, tipi']];
+    const S3 = [['box', 'Bloc (boîte pleine)'], ['cyl', 'Cylindre'], ['table', 'Table (plateau et 4 pieds)'], ['legsbox', 'Caisson sur pieds'], ['cabinet', 'Meuble à portes'], ['wardrobe', 'Armoire (corniche)'], ['drawers', 'Commode à tiroirs'], ['chest', 'Coffre à couvercle'], ['shelves', 'Étagère ouverte'], ['chair', 'Chaise'], ['sofa', 'Canapé, fauteuil'], ['bed1', 'Lit'], ['plant', 'Plante en pot'], ['ball', 'Boule'], ['cone', 'Cône'], ['hut', 'Cabane (toit)'], ['lshape', 'En L'], ['rug', 'À plat (tapis)'], ['animal', 'Animal'], ['img', 'Plateau avec l’image dessus']];
+    const readImg = file => new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => { const im = new Image(); im.onload = () => { const k = Math.min(1, 480 / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(im.naturalWidth * k)); c.height = Math.max(1, Math.round(im.naturalHeight * k)); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); ok(c.toDataURL(/png/i.test(file.type) ? 'image/png' : 'image/jpeg', .85)); }; im.onerror = () => ko(new Error('Image illisible.')); im.src = r.result; }; r.onerror = () => ko(new Error('Image illisible.')); r.readAsDataURL(file); });
+    function createObject(ctx, edit = null) {
+        extend(); const o = edit ? {...edit} : {name: '', cat: ctx.cat && ctx.cat !== MINE ? ctx.cat : MINE, w: 80, d: 50, h: 90, color: '#9a6a3a', shape2d: 'box', shape3d: 'box', img: '', note: ''};
+        const cats = [...new Set([...baseCats()])], sym2d = ext.houseInternals?.sym2d;
+        const opt = (list, cur) => list.map(([k, l]) => `<option value="${esc(k)}" ${cur === k ? 'selected' : ''}>${esc(l)}</option>`).join('');
+        ext.openDialog({eyebrow: 'MAISON · MOBILIER', title: edit ? `✎ ${edit.name}` : '＋ Créer un objet', submitLabel: edit ? 'Enregistrer' : 'Créer l’objet', wide: true,
+            body: `<div class="h-hs-mk"><div class="form-grid h-hs-mkg"><label class="h-hs-full">Nom<input name="name" maxlength="80" required value="${esc(o.name)}" placeholder="ex. Armoire de la grand-mère, pressoir du moulin…"></label>
+                <div class="h-hs-full h-hs-mk2"><label>Catégorie<select name="cat">${opt(cats.map(c => [c, c]), cats.includes(o.cat) ? o.cat : MINE)}<option value="__new">Nouvelle catégorie…</option></select></label><label data-newcat hidden>Nom de la catégorie<input name="newcat" maxlength="40" placeholder="ex. Grenier"></label></div>
+                <label class="h-hs-s2">Largeur (cm)<input name="w" type="number" min="1" max="5000" step="1" value="${o.w}"></label><label class="h-hs-s2">Profondeur (cm)<input name="d" type="number" min="1" max="5000" step="1" value="${o.d}"></label><label class="h-hs-s2">Hauteur (cm)<input name="h" type="number" min="1" max="2000" step="1" value="${o.h}"></label>
+                <label>Vu de dessus (2D)<select name="shape2d">${opt(S2, o.shape2d)}</select></label><label>En volume (3D)<select name="shape3d">${opt(S3, o.shape3d)}</select></label>
+                <label>Couleur<input name="color" type="color" value="${esc(o.color)}"></label><label>Image vue de dessus (facultatif)<input name="imgfile" type="file" accept="image/png,image/jpeg,image/webp"></label>
+                <div class="h-hs-mkimg h-hs-full" data-imgrow ${o.img ? '' : 'hidden'}><img data-img alt="" src="${esc(o.img)}"><button type="button" class="button small secondary" data-imgdel>Retirer l’image</button></div>
+                <label class="h-hs-full">Note (souvenir, provenance)<textarea name="note" rows="2" maxlength="1000">${esc(o.note)}</textarea></label></div>
+                <figure class="h-hs-mkprev"><div data-prev></div><figcaption class="muted" data-prevcap></figcaption></figure></div>`,
+            onOpen: dg => {
+                const f = dg.querySelector('form'), prev = () => { const w = Math.max(1, +f.elements.w.value || 1), d = Math.max(1, +f.elements.d.value || 1), k = Math.max(w, d) / 10, it = {kind: '', w, d, color: f.elements.color.value, s2: f.elements.shape2d.value, ...(o.img ? {img: o.img} : {})};
+                    dg.querySelector('[data-prev]').innerHTML = sym2d ? `<svg viewBox="${-w / 2 - k} ${-d / 2 - k} ${w + 2 * k} ${d + 2 * k}" width="180" height="150">${sym2d(it)}</svg>` : ''; dg.querySelector('[data-prevcap]').textContent = `${w} × ${d} cm, ${+f.elements.h.value || 0} cm de haut`; };
+                f.addEventListener('input', e => { if (e.target.name === 'cat') dg.querySelector('[data-newcat]').hidden = e.target.value !== '__new'; prev(); });
+                f.elements.imgfile.addEventListener('change', async () => { const fl = f.elements.imgfile.files?.[0]; if (!fl) return; try { o.img = await readImg(fl); dg.querySelector('[data-img]').src = o.img; dg.querySelector('[data-imgrow]').hidden = false; if (f.elements.shape3d.value === 'box') f.elements.shape3d.value = 'img'; prev(); } catch (e) { toast(e.message, 'error'); } });
+                dg.querySelector('[data-imgdel]').addEventListener('click', () => { o.img = ''; f.elements.imgfile.value = ''; dg.querySelector('[data-imgrow]').hidden = true; if (f.elements.shape3d.value === 'img') f.elements.shape3d.value = 'box'; prev(); });
+                prev(); setTimeout(() => f.elements.name.focus(), 30);
+            },
+            onDelete: edit ? async () => { if (!confirm(`Supprimer l’objet « ${edit.name} » de la bibliothèque ? (ceux déjà posés dans les maisons restent)`)) return false; await post('delete_house_object', {id: edit.id}); const i = LIB.findIndex(l => l[0] === edit.kind); if (i >= 0) LIB.splice(i, 1); toast('Objet supprimé.'); ctx.paint?.(); } : undefined,
+            onSubmit: async f => {
+                const cat = f.elements.cat.value === '__new' ? f.elements.newcat.value.trim() : f.elements.cat.value; if (!cat) { toast('Donne un nom à la nouvelle catégorie.', 'error'); return false; }
+                const r = await post('save_house_object', {id: edit?.id || 0, name: f.elements.name.value.trim(), cat, w: +f.elements.w.value, d: +f.elements.d.value, h: +f.elements.h.value, color: f.elements.color.value, shape2d: f.elements.shape2d.value, shape3d: f.elements.shape3d.value, img: o.img || '', note: f.elements.note.value});
+                registerCustom(r.result); toast(edit ? 'Objet modifié (ceux déjà posés gardent leur ancienne forme).' : `« ${r.result.name} » est dans « ${r.result.cat} » : clique-le pour le poser.`); ctx.setCat?.(r.result.cat); ctx.paint?.();
+            }});
+    }
+
+    /* ═════════ Un objet 3D importé : nom, catégorie, licence ═════════ */
+    function editModel(ctx, m) {
+        const cats = baseCats().filter(c => c !== MINE);
+        ext.openDialog({eyebrow: 'MAISON · MES OBJETS', title: `🧊 ${m.name}`, submitLabel: 'Enregistrer',
+            body: `<div class="h-hs-form"><label>Nom<input name="name" maxlength="120" value="${esc(m.name)}" required></label><label>Montrer aussi dans la catégorie<select name="cat"><option value="">— seulement dans « Mes objets » —</option>${cats.map(c => `<option ${m.cat === c ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>
+                <dl class="h-hs-licdl"><dt>Format</dt><dd>${esc(String(m.ext || '').toUpperCase())}${m.dims?.w ? ` · ${Math.round(m.dims.w)} × ${Math.round(m.dims.d)} × ${Math.round(m.dims.h)} cm` : ''}</dd><dt>Licence</dt><dd>${esc(m.license || 'non précisée (fichier importé)')}</dd>${m.author ? `<dt>Auteur</dt><dd>${esc(m.author)}</dd>` : ''}${m.source ? `<dt>Source</dt><dd>${/^https:\/\//.test(m.source_url || '') ? `<a href="${esc(m.source_url)}" target="_blank" rel="noopener noreferrer">${esc(m.source)}</a>` : esc(m.source)}</dd>` : ''}</dl></div>`,
+            onDelete: async () => { if (!confirm(`Supprimer « ${m.name} » de « Mes objets » ? (le fichier 3D est effacé : là où il est posé, il redevient une simple boîte)`)) return false; await post('delete_house_model', {id: m.id}); if (m.mtl) await post('delete_house_model', {id: m.mtl}).catch(() => {}); await ctx.loadMine(); toast('Objet supprimé.'); ctx.paint(); },
+            onSubmit: async f => { await post('update_house_model', {id: m.id, name: f.elements.name.value.trim(), cat: f.elements.cat.value}); await ctx.loadMine(); ctx.paint(); }});
+    }
+
+    /* ═════════ ⚙️ Ranger ═════════ */
+    function arrange(ctx) {
+        extend(); const p = prefs(), work = {cats: orderedCats(p), hiddenCats: [...p.hiddenCats], items: {...p.items}, hidden: [...p.hidden]};
+        let cur = visibleCats(p).find(c => c !== MINE) || CATS[0];
+        const row = (k, label, on) => `<li class="h-pet-lrow" data-k="${esc(k)}"><input type="checkbox" ${on ? 'checked' : ''} title="Montrer"><span>${label}</span><button type="button" class="h-bt" data-up title="Monter">↑</button><button type="button" class="h-bt" data-down title="Descendre">↓</button></li>`;
+        const itemsHtml = () => orderedItems(cur, {...work, cats: work.cats}).map(l => row(l[0], esc(l[1]), !work.hidden.includes(l[0]))).join('') || '<li class="muted">Aucun objet.</li>';
+        const keepItems = dg => { const ol = dg.querySelector('[data-items]'), li = [...ol.querySelectorAll('[data-k]')]; if (!li.length) return; work.items[cur] = li.map(x => x.dataset.k); li.forEach(x => { const k = x.dataset.k, on = x.querySelector('input').checked; work.hidden = work.hidden.filter(h => h !== k); if (!on) work.hidden.push(k); }); };
+        ext.openDialog({eyebrow: 'MAISON · MOBILIER', title: '⚙️ Ranger le mobilier', submitLabel: 'Enregistrer', wide: true,
+            body: `<p class="muted">Coche ce que tu veux voir et range avec ↑ ↓ : les catégories, puis les objets de chaque catégorie.</p><div class="h-hs-arr"><section><h4>Catégories</h4><ol class="h-pet-layout" data-cats>${work.cats.map(c => row(c, esc(c), !work.hiddenCats.includes(c))).join('')}</ol></section>
+                <section><h4>Objets de <select data-cur>${work.cats.filter(c => c !== MINE || libIn(MINE).length).map(c => `<option ${c === cur ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></h4><div class="h-hs-arrb"><button type="button" class="button small secondary" data-all="1">Tout cocher</button><button type="button" class="button small secondary" data-all="0">Tout décocher</button></div><ol class="h-pet-layout" data-items>${itemsHtml()}</ol></section></div>
+                <button type="button" class="button small secondary" data-reset>Tout remettre comme au départ</button>`,
+            onOpen: dg => {
+                dg.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const li = b.closest('[data-k]');
+                    if (b.hasAttribute('data-up')) li?.previousElementSibling?.before(li); else if (b.hasAttribute('data-down')) li?.nextElementSibling?.after(li);
+                    else if (b.dataset.all) dg.querySelectorAll('[data-items] input').forEach(i => { i.checked = b.dataset.all === '1'; });
+                    else if (b.hasAttribute('data-reset')) { try { localStorage.removeItem(PREF_KEY); } catch (_) {} dg.close(); toast('Mobilier remis comme au départ.'); ctx.paint(); } });
+                dg.querySelector('[data-cur]').addEventListener('change', e => { keepItems(dg); cur = e.target.value; dg.querySelector('[data-items]').innerHTML = itemsHtml(); });
+            },
+            onSubmit: f => { keepItems(f); const li = [...f.querySelectorAll('[data-cats] [data-k]')], hc = li.filter(x => !x.querySelector('input').checked).map(x => x.dataset.k); if (hc.length >= li.length) { toast('Garde au moins une catégorie.', 'error'); return false; }
+                savePrefs({cats: li.map(x => x.dataset.k), hiddenCats: hc, items: work.items, hidden: work.hidden}); ctx.paint(); }});
+    }
+
+    /* ═════════ 📦 Bibliothèque en ligne (libre de droit) ═════════ */
+    const PACKS = [['Kenney — Furniture Kit (140 meubles)', 'https://kenney.nl/assets/furniture-kit'], ['Kenney — tous les packs 3D', 'https://kenney.nl/assets/category:3D'], ['Quaternius — packs 3D (meubles, ferme, nature…)', 'https://quaternius.com/'], ['OpenGameArt — filtre « CC0 »', 'https://opengameart.org/art-search-advanced?field_art_type_tid%5B%5D=10&field_art_license_tid%5B%5D=4']];
+    async function afterImport(ctx, id, ext2, mtl = 0) { // mesurer le modèle et en faire une vignette, chez soi (three.js)
+        try { const buf = await (await fetch(`api.php?action=house_model&id=${id}`)).arrayBuffer(), mt = mtl ? await (await fetch(`api.php?action=house_model&id=${mtl}`)).text() : '';
+            const info = await ext.house3d?.inspectBuf(buf, ext2, mt); if (info) await post('house_model_meta', {id, dims: info.dims, thumb: info.thumb}); } catch (_) {}
+    }
+    function online(ctx) {
+        extend(); const cats = baseCats().filter(c => c !== MINE); let tab = 'ph', results = [], phCats = [], pack = null, busy = false;
+        const catSel = name => `<select name="${name}"><option value="">« Mes objets » seulement</option>${cats.map(c => `<option>${esc(c)}</option>`).join('')}</select>`;
+        const dlg = ext.openDialog({eyebrow: 'MAISON · MOBILIER', title: '📦 Bibliothèque en ligne (libre de droit)', submitLabel: 'Fermer', wide: true,
+            body: `<p class="muted">Des modèles 3D <b>libres de droit</b> (CC0 : domaine public, utilisables sans condition) à poser dans tes maisons. Ils arrivent dans <b>Mobilier → « Mes objets »</b>, avec leur licence, leur auteur et leur source.</p>
+                <nav class="segmented h-hs-ontabs"><button type="button" class="is-active" data-ot="ph">🌐 Poly Haven (en ligne)</button><button type="button" data-ot="zip">🗜️ Un pack ZIP (Kenney, Quaternius…)</button></nav>
+                <section data-op="ph"><div class="h-hs-onbar"><input type="search" data-q placeholder="Chercher (en français ou en anglais) : chaise, tonneau, lampe, vase…" autocomplete="off"><select data-pc><option value="">Toutes les catégories</option></select><label>Ranger aussi dans ${catSel('phcat')}</label></div>
+                    <div class="h-hs-onres" data-res><p class="muted">Chargement de la liste…</p></div>
+                    <p class="h-hs-credit muted">Modèles fournis par <a href="https://polyhaven.com/models" target="_blank" rel="noopener noreferrer">Poly Haven</a> (Powered by Poly Haven) — licence <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr" target="_blank" rel="noopener noreferrer">CC0 1.0</a>. Le téléchargement passe par ton serveur (environ 1 à 10 Mo par modèle, textures comprises).</p></section>
+                <section data-op="zip" hidden><p class="muted">Télécharge d’abord un pack <b>CC0</b> sur le site de son auteur (un fichier .zip), puis choisis-le ici : tu coches les modèles à garder (GLB, glTF, OBJ, STL).</p><ul class="h-hs-packs">${PACKS.map(([l, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(l)}</a> <span class="h-hs-lic">CC0</span></li>`).join('')}</ul>
+                    <label class="button small secondary h-hs-zipbtn">🗜️ Choisir le fichier ZIP…<input type="file" accept=".zip,application/zip" data-zip hidden></label><div data-pack></div></section>`,
+            onSubmit: () => true,
+            onOpen: dg => {
+                const $ = s => dg.querySelector(s), resBox = $('[data-res]');
+                const draw = () => { resBox.innerHTML = results.length ? `<p class="muted">${results.length} modèle${results.length > 1 ? 's' : ''}${results.total > results.length ? ` (les ${results.length} plus téléchargés sur ${results.total})` : ''}</p><div class="h-hs-ongrid">${results.map(r => `<article class="h-hs-oncard"><img loading="lazy" src="api.php?action=house_online_thumb&amp;id=${encodeURIComponent(r.id)}" alt="" onerror="this.style.visibility='hidden'"><b>${esc(r.name)}</b><small class="muted">${esc((r.authors || []).join(', ') || 'Poly Haven')} · <span class="h-hs-lic">CC0</span></small><span class="h-hs-onact"><button type="button" class="button small" data-imp="${esc(r.id)}">＋ Importer</button><a href="${esc(r.page)}" target="_blank" rel="noopener noreferrer" title="Voir sur Poly Haven">↗</a></span></article>`).join('')}</div>` : '<p class="muted">Aucun modèle ne correspond.</p>'; };
+                let tmr = 0, seq = 0;
+                const search = async () => { const my = ++seq; resBox.innerHTML = '<p class="muted">Recherche…</p>';
+                    try { const r = await api('house_online', {source: 'polyhaven', q: $('[data-q]').value.trim(), cat: $('[data-pc]').value}); if (my !== seq) return; results = r.items || []; results.total = r.total;
+                        if (!phCats.length && r.cats?.length) { phCats = r.cats; $('[data-pc]').innerHTML = '<option value="">Toutes les catégories</option>' + phCats.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join(''); } draw(); }
+                    catch (e) { if (my === seq) resBox.innerHTML = `<p class="h-hs-onerr">⚠️ ${esc(e.message)}</p><p class="muted">Sans internet, tu peux toujours importer un pack ZIP déjà téléchargé (onglet à côté), ou ＋ créer tes objets.</p>`; } };
+                $('[data-q]').addEventListener('input', () => { clearTimeout(tmr); tmr = setTimeout(search, 300); }); $('[data-q]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); clearTimeout(tmr); search(); } }); $('[data-pc]').addEventListener('change', search);
+                dg.addEventListener('click', async e => {
+                    const t = e.target.closest('[data-ot]'); if (t) { tab = t.dataset.ot; dg.querySelectorAll('[data-ot]').forEach(b => b.classList.toggle('is-active', b === t)); dg.querySelectorAll('[data-op]').forEach(s => { s.hidden = s.dataset.op !== tab; }); return; }
+                    const imp = e.target.closest('[data-imp]'); if (imp) { if (busy) return toast('Un téléchargement est en cours…'); busy = true; const r = results.find(x => x.id === imp.dataset.imp); imp.disabled = true; imp.textContent = '⏳ Téléchargement…';
+                        try { const j = (await post('house_online_import', {source: 'polyhaven', id: r.id, cat: dg.querySelector('[name=phcat]').value})).result; imp.textContent = '⏳ Mesure…'; await afterImport(ctx, j.id, j.ext); await ctx.loadMine(); ctx.paint(); imp.textContent = '✓ Dans « Mes objets »'; toast(`« ${j.name} » est dans Mobilier → « Mes objets » (CC0, Poly Haven).`); }
+                        catch (err) { imp.disabled = false; imp.textContent = '＋ Importer'; toast(err.message, 'error'); } finally { busy = false; } return; }
+                    if (e.target.closest('[data-packall]')) { const on = e.target.closest('[data-packall]').dataset.packall === '1'; dg.querySelectorAll('[data-pk]').forEach(i => { i.checked = on; }); return; }
+                    if (e.target.closest('[data-packgo]')) return packImport(dg);
+                });
+                $('[data-zip]').addEventListener('change', async e => { const fl = e.target.files?.[0]; if (!fl) return; const box = $('[data-pack]'); box.innerHTML = '<p class="muted">Envoi et lecture du pack…</p>';
+                    try { if (pack) post('house_pack_cancel', {token: pack.token}).catch(() => {}); const fd = new FormData(); fd.append('file', fl); fd.append('csrf', A().state.csrf);
+                        const r = await fetch('api.php?action=house_pack_upload', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible (fichier trop gros pour le serveur ?).');
+                        pack = j.result; const lt = pack.license_text || '', cc0 = /\bCC0\b|creative ?commons ?zero|public ?domain|domaine public/i.test(lt), src = /kenney/i.test(lt + fl.name) ? 'Kenney (kenney.nl)' : /quaternius/i.test(lt + fl.name) ? 'Quaternius (quaternius.com)' : '';
+                        const best = new Map(); pack.items.forEach(it => { const key = it.path.replace(/\.[^.]+$/, '').toLowerCase().split('/').pop(); if (!best.has(key)) best.set(key, it); });
+                        box.innerHTML = `${lt ? `<details class="h-hs-packlic"><summary>Licence trouvée dans le pack${cc0 ? ' : <span class="h-hs-lic">CC0</span>' : ''}</summary><pre>${esc(lt)}</pre></details>` : '<p class="h-hs-onerr">Aucun fichier de licence dans le pack : vérifie sur le site de l’auteur qu’il est bien libre de droit.</p>'}
+                            <div class="form-grid"><label>Licence<input name="plic" value="${cc0 ? 'CC0 1.0 (domaine public)' : ''}" placeholder="CC0 1.0 (domaine public)"></label><label>Auteur, source<input name="psrc" value="${esc(src)}" placeholder="ex. Kenney (kenney.nl)"></label><label>Adresse du pack (facultatif)<input name="purl" placeholder="https://…"></label><label>Ranger aussi dans ${catSel('pcat')}</label></div>
+                            <div class="h-hs-arrb"><b>${pack.items.length} modèle${pack.items.length > 1 ? 's' : ''}</b><button type="button" class="button small secondary" data-packall="1">Tout cocher</button><button type="button" class="button small secondary" data-packall="0">Tout décocher</button></div>
+                            <ul class="h-hs-packlist">${pack.items.map(it => `<li><label class="checkbox-line"><input type="checkbox" data-pk="${esc(it.path)}" ${best.get(it.path.replace(/\.[^.]+$/, '').toLowerCase().split('/').pop()) === it ? 'checked' : ''}> ${esc(it.path.split('/').pop())} <small class="muted">${esc(it.ext.toUpperCase())} · ${Math.max(1, Math.round(it.size / 1024))} Ko · ${esc(it.path.split('/').slice(0, -1).join('/'))}</small></label></li>`).join('')}</ul>
+                            <button type="button" class="button" data-packgo>⤓ Importer les modèles cochés</button><p class="muted" data-packst></p>`;
+                    } catch (err) { box.innerHTML = `<p class="h-hs-onerr">⚠️ ${esc(err.message)}</p>`; } finally { e.target.value = ''; } });
+                async function packImport(dg2) {
+                    if (busy || !pack) return; const paths = [...dg2.querySelectorAll('[data-pk]:checked')].map(i => i.dataset.pk); if (!paths.length) return toast('Coche au moins un modèle.', 'error');
+                    const lic = dg2.querySelector('[name=plic]').value.trim(); if (!lic) return toast('Indique la licence du pack (par exemple CC0 1.0).', 'error');
+                    busy = true; const st = dg2.querySelector('[data-packst]'), out = [], errs = [];
+                    try { for (let i = 0; i < paths.length; i += 8) { st.textContent = `Import… ${Math.min(paths.length, i + 8)} / ${paths.length}`; const r = (await post('house_pack_import', {token: pack.token, paths: paths.slice(i, i + 8), license: lic, source: dg2.querySelector('[name=psrc]').value, author: dg2.querySelector('[name=psrc]').value, source_url: dg2.querySelector('[name=purl]').value.trim(), cat: dg2.querySelector('[name=pcat]').value, finish: i + 8 >= paths.length})).result; out.push(...r.items); errs.push(...r.errors); }
+                        for (let i = 0; i < out.length; i++) { st.textContent = `Mesure et vignettes… ${i + 1} / ${out.length}`; await afterImport(ctx, out[i].id, out[i].ext, out[i].mtl); }
+                        pack = null; await ctx.loadMine(); ctx.paint(); st.textContent = `✓ ${out.length} modèle${out.length > 1 ? 's' : ''} dans « Mes objets ».${errs.length ? ` ${errs.length} refusé${errs.length > 1 ? 's' : ''} : ${errs.join(' · ')}` : ''}`; dg2.querySelector('[data-pack]').querySelectorAll('button, input').forEach(b => { b.disabled = true; });
+                    } catch (err) { toast(err.message, 'error'); st.textContent = ''; } finally { busy = false; }
+                }
+                dg.addEventListener('close', () => { if (pack) post('house_pack_cancel', {token: pack.token}).catch(() => {}); });
+                search();
+            }});
+        return dlg;
+    }
+
+    /* ═════════ Les commandes venues de l'éditeur ═════════ */
+    async function cmd(name, data, ctx) {
+        const c = {...ctx, paint: () => ctx.paint(), setCat: cat => lastSetCat?.(cat)};
+        if (name === 'create') return createObject({...c, cat: document.querySelector('dialog.h-hs-dlg .h-hs-cats .is-on')?.dataset.hsCat});
+        if (name === 'editobj') { await (customLoaded ? null : loadCustom()); const L = LIB.find(l => l[9]?.custom && l[9].id === Number(data.id)); if (!L) return; return createObject(c, {id: L[9].id, kind: L[0], name: L[1], cat: L[2], w: L[3], d: L[4], h: L[5], color: L[6], shape2d: L[9].s2 || L[7], shape3d: L[8], img: L[9].img, note: L[9].note}); }
+        if (name === 'editmodel') { const m = (ctx.mine || []).find(q => q.id === Number(data.id)); if (m) editModel(c, m); return; }
+        if (name === 'arrange') return arrange(c);
+        if (name === 'online') return online(c);
+    }
+    ext.houseLibUI = {pane, cmd, itemOf, loadCustom, prefs, CATS};
+})();

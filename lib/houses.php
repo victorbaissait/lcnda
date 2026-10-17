@@ -96,8 +96,9 @@ function rename_house(PDO $pdo, array $data): array
 /* ─── objets 3D importés ─── */
 function house_models_list(PDO $pdo): array
 {
-    houses_ensure($pdo);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'ext' => $r['ext'], 'size' => (int) $r['size'], 'dims' => json_decode((string) $r['dims_json'], true) ?: new stdClass(), 'thumb' => $r['thumb'], 'created_at' => $r['created_at']],
+    house_lib_ensure($pdo); // licence, auteur, source, catégorie (lib/house_library.php)
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'ext' => $r['ext'], 'size' => (int) $r['size'], 'dims' => json_decode((string) $r['dims_json'], true) ?: new stdClass(), 'thumb' => $r['thumb'], 'created_at' => $r['created_at'],
+        'license' => $r['license'], 'author' => $r['author'], 'source' => $r['source'], 'source_url' => $r['source_url'], 'cat' => $r['cat'], 'mtl' => (int) $r['mtl_id']],
         $pdo->query('SELECT * FROM house_models ORDER BY created_at DESC')->fetchAll());
 }
 
