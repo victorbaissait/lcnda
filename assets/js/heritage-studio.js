@@ -525,6 +525,11 @@
             if (op.kind === 'arrow') { const a = Math.atan2(y2 - y1, x2 - x1), L = Math.max(lw * 4, 10); c.beginPath(); c.moveTo(x2, y2); c.lineTo(x2 - L * Math.cos(a - 0.45), y2 - L * Math.sin(a - 0.45)); c.lineTo(x2 - L * Math.cos(a + 0.45), y2 - L * Math.sin(a + 0.45)); c.closePath(); c.fillStyle = op.color; c.fill(); }
             c.restore(); return;
         }
+        if (op.type === 'image') { // une image placée (Calque → Placer une image) : boîte x, y, w, h (0 à 1), rotation en degrés
+            const im = env?.masks?.get(op.mask); if (!im) { c.restore(); return; }
+            c.globalAlpha = op.opacity ?? 1; c.translate((op.x + op.w / 2) * W, (op.y + op.h / 2) * H); c.rotate((op.rot || 0) * Math.PI / 180);
+            c.imageSmoothingQuality = 'high'; c.drawImage(im, -op.w * W / 2, -op.h * H / 2, op.w * W, op.h * H); c.restore(); return;
+        }
         if (op.type === 'fillmask') { // une sélection remplie d'une couleur, sur un calque
             const m = env?.masks?.get(op.mask); if (!m) { c.restore(); return; }
             const t = document.createElement('canvas'); t.width = W; t.height = H; const g = t.getContext('2d'); g.fillStyle = op.color; g.fillRect(0, 0, W, H); g.globalCompositeOperation = 'destination-in'; g.drawImage(m, 0, 0, W, H);
@@ -634,7 +639,7 @@
             ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['simple', '🎚️ Passer à la retouche simple'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['cropclear', 'Annuler le recadrage'], ['-'], ['reset', 'Remettre les réglages à zéro']]],
-            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
+            ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['tab:filters', '✨ Filtres : flou, netteté, grain, vignette…'], ['filters:reset', 'Enlever les filtres']]],
             ['Affichage', [['side:toggle', 'Replier / ouvrir le panneau de droite', 'Tab'], ['-'], ['zoom:in', 'Zoom avant', '+'], ['zoom:out', 'Zoom arrière', '−'], ['zoom:fit', 'Toute l’image', '0'], ['zoom:100', 'Taille réelle', '1']]],
@@ -807,7 +812,14 @@
             }
             if (drag?.sel) { const d = drag; octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 600); octx.setLineDash([6, 4]); octx.beginPath(); selPath(octx, d.sel); octx.stroke(); octx.restore(); }
             if (poly?.length) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.fillStyle = '#fff'; octx.lineWidth = Math.max(1, pw / 600); octx.beginPath(); poly.forEach(([x, y], i) => i ? octx.lineTo(x, y) : octx.moveTo(x, y)); if (polyHover) octx.lineTo(...polyHover); octx.stroke(); poly.forEach(([x, y]) => { octx.fillRect(x - 3, y - 3, 6, 6); octx.strokeRect(x - 3, y - 3, 6, 6); }); octx.restore(); }
-            if (moveSel && mode === 'move') { const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i], bb = op && opBox(op); if (bb) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 700); octx.setLineDash([5, 4]); octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8); octx.restore(); } }
+            if (moveSel && mode === 'move') { const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i], bb = op && opBox(op); if (bb) { octx.save(); octx.strokeStyle = '#2a7de1'; octx.lineWidth = Math.max(1, pw / 700); octx.setLineDash([5, 4]);
+                if (op.type === 'image') { // une image placée : son cadre (tourné), 4 poignées pour la taille, une ronde pour la faire pivoter
+                    const hs = imgHandles(op), k = handleSize(); octx.beginPath(); hs.corners.forEach(([x, y], i) => i ? octx.lineTo(x, y) : octx.moveTo(x, y)); octx.closePath(); octx.stroke(); octx.setLineDash([]); octx.fillStyle = '#fff';
+                    octx.beginPath(); octx.moveTo(...hs.topMid); octx.lineTo(...hs.rot); octx.stroke();
+                    hs.corners.forEach(([x, y]) => { octx.fillRect(x - k, y - k, k * 2, k * 2); octx.strokeRect(x - k, y - k, k * 2, k * 2); });
+                    octx.beginPath(); octx.arc(hs.rot[0], hs.rot[1], k * 1.1, 0, Math.PI * 2); octx.fill(); octx.stroke();
+                } else octx.strokeRect(bb.x * pw - 4, bb.y * ph - 4, bb.w * pw + 8, bb.h * ph + 8);
+                octx.restore(); } }
         }
         // ── Historique : chaque geste ou réglage est une étape ; un clic sur une étape y revient ──
         let history = [], hpos = -1;
@@ -1157,18 +1169,62 @@
         // ── ➤ Déplacer : trouver l'élément sous le clic, le glisser ──
         const mctx = document.createElement('canvas').getContext('2d');
         function opBox(op) {
+            if (op.type === 'image') return {x: op.x, y: op.y, w: op.w, h: op.h};
             if (op.type === 'shape') { const x = Math.min(op.x1, op.x2), y = Math.min(op.y1, op.y2); return {x, y, w: Math.abs(op.x2 - op.x1), h: Math.abs(op.y2 - op.y1)}; }
             if (op.type === 'text') { const size = Math.max(6, op.size * pw); mctx.font = `${op.italic ? 'italic ' : ''}${op.bold ? 'bold ' : ''}${size}px ${op.font || 'Arial'}`; const lines = String(op.text).split('\n'); return {x: op.x, y: op.y, w: Math.max(...lines.map(l => mctx.measureText(l).width)) / pw, h: lines.length * size * 1.2 / ph}; }
             if (op.type === 'pixels' || op.type === 'fillmask') { const m = masks.get(op.mask), b = m && (op._bb || (op._bb = maskBox(m))); return b ? {x: b.x / pw + (op.dx || 0), y: b.y / ph + (op.dy || 0), w: b.w / pw, h: b.h / ph} : null; }
             if (op.points?.length) { const xs = op.points.map(p => p[0]), ys = op.points.map(p => p[1]), pad = (op.size || 0) / 2; const x = Math.min(...xs) - pad, y = Math.min(...ys) - pad * pw / ph; return {x, y, w: Math.max(...xs) - Math.min(...xs) + pad * 2, h: Math.max(...ys) - Math.min(...ys) + pad * 2 * pw / ph}; }
             return null;
         }
+        const handleSize = () => Math.max(4, 6 * pw / (canvas.getBoundingClientRect().width || pw));
+        /** Coins (tournés), milieu du haut et poignée de rotation d'une image placée, en pixels de l'aperçu */
+        const imgHandles = op => {
+            const cx = (op.x + op.w / 2) * pw, cy = (op.y + op.h / 2) * ph, r = (op.rot || 0) * Math.PI / 180, hw = op.w * pw / 2, hh = op.h * ph / 2;
+            const at = (dx, dy) => [cx + dx * Math.cos(r) - dy * Math.sin(r), cy + dx * Math.sin(r) + dy * Math.cos(r)];
+            return {corners: [at(-hw, -hh), at(hw, -hh), at(hw, hh), at(-hw, hh)], topMid: at(0, -hh), rot: at(0, -hh - handleSize() * 5)};
+        };
+        /** 🖼️ Placer une image : sur un nouveau calque, au centre, ni plus large ni plus haute que 60 % de la photo */
+        const placeImage = (img, name = 'Image') => {
+            const nw = img.naturalWidth || img.width, nh = img.naturalHeight || img.height; if (!nw || !nh) return toast('Image illisible.', 'error');
+            const k = Math.min(1, 2000 / Math.max(nw, nh)), c = document.createElement('canvas'); c.width = Math.max(1, Math.round(nw * k)); c.height = Math.max(1, Math.round(nh * k));
+            c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+            const f = Math.min(0.6 * pw / nw, 0.6 * ph / nh, 1 * pw / nw), w = nw * f / pw, h = nh * f / ph;
+            const l = newLayer(String(name).replace(/\.[a-z0-9]{2,5}$/i, '').slice(0, 60) || 'Image');
+            l.ops.push({type: 'image', mask: addMask(c), x: (1 - w) / 2, y: (1 - h) / 2, w, h, rot: 0, opacity: 1});
+            activeLayer = l.id; maskEdit = ''; renderLayer(l); setMode('move'); moveSel = {layer: l.id, i: 0}; refreshLayers(); showTab('layers'); draw();
+            commit(`Image placée : « ${l.name} »`); toast('Image placée : ➤ glisse-la, tire un coin pour la taille (⇧ : libre), la poignée ronde pour la tourner.');
+        };
+        const placeFile = file => { if (!file || !/^image\//.test(file.type)) return toast('Ce fichier n’est pas une image.', 'error'); const u = URL.createObjectURL(file), im = new Image(); im.onload = () => { placeImage(im, file.name || 'Image'); URL.revokeObjectURL(u); }; im.onerror = () => { URL.revokeObjectURL(u); toast('Image illisible.', 'error'); }; im.src = u; };
+        const placeUrl = (url, name) => { const im = new Image(); im.onload = () => placeImage(im, name); im.onerror = () => toast('Image introuvable.', 'error'); im.src = url; };
+        function placeDialog() {
+            const pd = document.createElement('dialog'); pd.className = 'modal h-modal h-rt-pick';
+            pd.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>🖼️ Placer une image</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+                <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><label class="button small">📥 De l’ordinateur<input type="file" accept="image/*" data-file hidden></label></div>
+                <p class="muted small">Elle arrive sur un nouveau calque. Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V / Ctrl+V).</p>
+                <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
+            document.body.append(pd); pd.addEventListener('close', () => pd.remove()); pd.querySelector('[data-x]').addEventListener('click', () => pd.close());
+            let timer = 0, seq = 0;
+            const load = async () => { const n = ++seq, grid = pd.querySelector('[data-grid]'); let items = []; try { items = (await api('image_pick', {q: pd.querySelector('[data-q]').value.trim()})).media || []; } catch (er) { grid.innerHTML = `<p class="muted">${esc(er.message)}</p>`; return; } if (n !== seq) return;
+                grid.innerHTML = items.length ? items.map(m => `<button type="button" class="h-rt-pick-item" data-f="${esc(m.filename)}" data-t="${esc(m.title || m.filename)}"><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy"><span>${esc(m.title || m.filename)}</span></button>`).join('') : '<p class="muted">Aucune photo trouvée.</p>'; };
+            pd.querySelector('[data-q]').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 250); });
+            pd.querySelector('[data-grid]').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; pd.close(); placeUrl(`media/${encodeURIComponent(b.dataset.f)}`, b.dataset.t); });
+            pd.querySelector('[data-file]').addEventListener('change', e => { const f = e.target.files?.[0]; if (f) { pd.close(); placeFile(f); } });
+            pd.showModal(); load();
+        }
+        // une image glissée depuis l'ordinateur sur la photo, ou collée (⌘V) : placée sur un nouveau calque
+        stage.addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; } });
+        stage.addEventListener('drop', e => { const f = [...(e.dataTransfer?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); placeFile(f); } });
+        document.addEventListener('paste', function onPaste(e) {
+            if (!dlg.isConnected) { document.removeEventListener('paste', onPaste); return; }
+            if (!dlg.open || e.target.closest?.('input, textarea, [contenteditable]') || document.querySelector('dialog[open]:not(.h-retouch)')) return;
+            const f = [...(e.clipboardData?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); placeFile(f); }
+        });
         const hitOp = (x, y) => { const rx = x / pw, ry = y / ph, tolx = 6 / pw * (pw / canvas.getBoundingClientRect().width), toly = tolx * pw / ph;
             for (const l of hitList()) { for (let i = l.ops.length - 1; i >= 0; i--) { const b = opBox(l.ops[i]); if (b && rx >= b.x - tolx && rx <= b.x + b.w + tolx && ry >= b.y - toly && ry <= b.y + b.h + toly) return {layer: l.id, i}; } }
             return null; };
         const moveOp = (op, dx, dy) => {
             if (op.type === 'shape') { op.x1 += dx; op.x2 += dx; op.y1 += dy; op.y2 += dy; }
-            else if (op.type === 'text') { op.x += dx; op.y += dy; }
+            else if (op.type === 'text' || op.type === 'image') { op.x += dx; op.y += dy; }
             else if (op.type === 'pixels' || op.type === 'fillmask') { op.dx = (op.dx || 0) + dx; op.dy = (op.dy || 0) + dy; }
             else if (op.points) op.points = op.points.map(([px, py]) => [px + dx, py + dy]);
         };
@@ -1182,6 +1238,12 @@
             if (mode === 'zoom') { drag = {zoom: true, x0: e.clientX, y0: e.clientY, alt: e.altKey}; canvas.setPointerCapture(e.pointerId); return; }
             if (mode === 'text') { if (e.detail > 1) return; const h = hitOp(x, y), op = h && nodeById(h.layer).ops[h.i]; if (op?.type === 'text') return placeText(op.x * pw, op.y * ph, h); return placeText(x, y); }
             if (mode === 'move') {
+                const cur = moveSel && nodeById(moveSel.layer)?.ops[moveSel.i];
+                if (cur?.type === 'image' && !lockedDeep(nodeById(moveSel.layer))) { // une poignée de l'image choisie : taille ou rotation
+                    const hs = imgHandles(cur), k = handleSize() * 2.2, ci = hs.corners.findIndex(([hx, hy]) => Math.hypot(hx - x, hy - y) <= k);
+                    if (Math.hypot(hs.rot[0] - x, hs.rot[1] - y) <= k) { drag = {imgRot: true, moved: false}; canvas.setPointerCapture(e.pointerId); return; }
+                    if (ci >= 0) { const o = hs.corners[(ci + 2) % 4]; drag = {imgSize: true, anchor: o, ratio: cur.w * pw / (cur.h * ph), moved: false}; canvas.setPointerCapture(e.pointerId); return; }
+                }
                 moveSel = hitOp(x, y); if (moveSel) { activeLayer = moveSel.layer; refreshLayers(); drag = {move: true, x, y, moved: false}; canvas.setPointerCapture(e.pointerId); }
                 draw(); return;
             }
@@ -1227,6 +1289,21 @@
             const [x, y] = toCanvas(e);
             if (poly && !drag) { polyHover = [x, y]; draw(); return; }
             if (drag?.sel) { const d = drag.sel; if (d.kind === 'poly') d.pts.push([x, y]); else { let nx = x, ny = y; if (e.shiftKey && drag.how === 'new') { const s0 = Math.max(Math.abs(x - d.x0), Math.abs(y - d.y0)); nx = d.x0 + Math.sign(x - d.x0 || 1) * s0; ny = d.y0 + Math.sign(y - d.y0 || 1) * s0; } d.x1 = nx; d.y1 = ny; } draw(); return; }
+            if ((drag?.imgSize || drag?.imgRot) && moveSel) { // agrandir / réduire (⇧ : sans garder les proportions) ou faire pivoter (⇧ : de 15° en 15°)
+                const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i]; if (!op) return;
+                const cx = (op.x + op.w / 2) * pw, cy = (op.y + op.h / 2) * ph;
+                if (drag.imgRot) { let a = Math.atan2(y - cy, x - cx) * 180 / Math.PI + 90; if (e.shiftKey) a = Math.round(a / 15) * 15; op.rot = Math.round(((a + 540) % 360) - 180); }
+                else { // le coin opposé ne bouge pas (calcul dans le repère de l'image, qui peut être tournée)
+                    const r = (op.rot || 0) * Math.PI / 180, [ax, ay] = drag.anchor, vx = x - ax, vy = y - ay;
+                    let lw = Math.abs(vx * Math.cos(r) + vy * Math.sin(r)), lh = Math.abs(-vx * Math.sin(r) + vy * Math.cos(r));
+                    if (!e.shiftKey) { if (lw / lh > drag.ratio) lh = lw / drag.ratio; else lw = lh * drag.ratio; }
+                    lw = Math.max(8, lw); lh = Math.max(8, lh);
+                    const sx = Math.sign(vx * Math.cos(r) + vy * Math.sin(r)) || 1, sy = Math.sign(-vx * Math.sin(r) + vy * Math.cos(r)) || 1;
+                    const mx = ax + (sx * lw / 2) * Math.cos(r) - (sy * lh / 2) * Math.sin(r), my = ay + (sx * lw / 2) * Math.sin(r) + (sy * lh / 2) * Math.cos(r);
+                    op.w = lw / pw; op.h = lh / ph; op.x = mx / pw - op.w / 2; op.y = my / ph - op.h / 2;
+                }
+                drag.moved = true; renderLayer(l); draw(); return;
+            }
             if (drag?.move && moveSel) { const l = nodeById(moveSel.layer), op = l?.ops[moveSel.i]; if (!op) return; moveOp(op, (x - drag.x) / pw, (y - drag.y) / ph); drag.x = x; drag.y = y; drag.moved = true; renderLayer(l); draw(); return; }
             if (!painting) return;
             if (painting.tool === 'shape') { const p = painting.preview; let ex = x, ey = y; if (e.shiftKey) { if (['line', 'arrow'].includes(p.kind)) { const a = Math.round(Math.atan2(y - painting.y0, x - painting.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x - painting.x0, y - painting.y0); ex = painting.x0 + Math.cos(a) * L; ey = painting.y0 + Math.sin(a) * L; } else { const s0 = Math.max(Math.abs(x - painting.x0), Math.abs(y - painting.y0)); ex = painting.x0 + Math.sign(x - painting.x0 || 1) * s0; ey = painting.y0 + Math.sign(y - painting.y0 || 1) * s0; } } p.x2 = ex / pw; p.y2 = ey / ph; draw(); return; }
@@ -1246,6 +1323,7 @@
                 if (s.kind !== 'poly' && (Math.abs(s.x1 - s.x0) < 2 || Math.abs(s.y1 - s.y0) < 2)) { if (d.how === 'new' && selId) { selId = null; refreshLayers(); setMode(mode); draw(); commit('Désélectionner'); } else draw(); return; }
                 if (s.kind === 'poly' && s.pts.length < 3) { draw(); return; }
                 combine(shapeMask(s), d.how); return; }
+            if (drag?.imgSize || drag?.imgRot) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(d.imgRot ? `Image tournée sur « ${l?.name || ''} »` : `Image agrandie / réduite sur « ${l?.name || ''} »`); } return; }
             if (drag?.move) { const d = drag; drag = null; if (d.moved) { const l = nodeById(moveSel?.layer); refreshLayers(); commit(`Élément déplacé sur « ${l?.name || ''} »`); } return; }
             if (!painting) return;
             const g = painting; painting = null;
@@ -1330,6 +1408,7 @@
             if (k === 'reset') return $('[data-rt-reset]').click();
             if (k === 'cropok') { endCrop(true); return setMode('adjust'); }
             if (k === 'cropclear') { if (mode === 'crop') { crop = {x: 0, y: 0, w: 1, h: 1, a: 0}; angleIn.value = 0; $('[data-rt-angle-out]').textContent = '0°'; syncCrop(); } if (st.crop) { st.crop = null; draw(); commit('Recadrage enlevé'); } return; }
+            if (k === 'img:place') return placeDialog();
             if (k === 'ladd') { newLayer(); refreshLayers(); showTab('layers'); return commit('Nouveau calque'); }
             if (k === 'gadd') { newGroup(); refreshLayers(); showTab('layers'); return commit('Nouveau groupe'); }
             if (k === 'gwrap') { showTab('layers'); return groupWrap(); }
@@ -1570,7 +1649,8 @@
         if (project?.project) { // un projet rouvert : ses masques (images), puis tout son état, comme une étape de l'historique
             const d = project.project;
             try {
-                for (const [id, src] of Object.entries(d.masks || {})) { if (!/^k\d+$/.test(id) || !/^data:image\/png;base64,/.test(src)) continue; const im = new Image(); im.src = src; await im.decode(); const c = blankMask(); c.getContext('2d').drawImage(im, 0, 0, pw, ph); masks.set(id, c); maskSeq = Math.max(maskSeq, Number(id.slice(1)) || 0); }
+                const imgIds = new Set(); (function walk(v) { if (Array.isArray(v)) v.forEach(walk); else if (v && typeof v === 'object') { if (v.type === 'image' && typeof v.mask === 'string') imgIds.add(v.mask); Object.values(v).forEach(walk); } })(d.layers);
+                for (const [id, src] of Object.entries(d.masks || {})) { if (!/^k\d+$/.test(id) || !/^data:image\/png;base64,/.test(src)) continue; const im = new Image(); im.src = src; await im.decode(); const c = imgIds.has(id) ? Object.assign(document.createElement('canvas'), {width: im.naturalWidth, height: im.naturalHeight}) : blankMask(); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); masks.set(id, c); maskSeq = Math.max(maskSeq, Number(id.slice(1)) || 0); } // une image placée garde sa vraie taille
                 const snap = {st: {...rtDefault(), ...(d.st || {}), strokes: undefined}, strokes: Array.isArray(d.strokes) ? d.strokes : [], layers: Array.isArray(d.layers) ? d.layers : [], activeLayer: String(d.activeLayer || ''), photoL: d.photoL || {}, selId: d.selId && masks.has(d.selId) ? d.selId : null};
                 history.push({label: `Projet « ${project.name} » rouvert`, at: new Date(), snap: rtClone(snap)}); restore(history.length - 1);
                 projKey = curKey();
