@@ -333,6 +333,7 @@ try {
         'dna' => json_response(dna_all($pdo, $_GET)),
         'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
+        'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
         'person_names' => json_response(person_names($pdo)),
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),

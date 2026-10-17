@@ -71,3 +71,39 @@ function delete_vector_doc(PDO $pdo, array $data): array
     log_change($pdo, 'meta', 0, 'delete', 'Dessin supprimé');
     return ['id' => $id];
 }
+
+/**
+ * 🗺️ Mode Plan : les lieux de la base (et les adresses précises des événements) qui tombent dans un cadre (n, s, w, e en degrés),
+ * pour les poser sur un plan situé.
+ */
+function vector_map_places(PDO $pdo, float $n, float $s, float $w, float $e): array
+{
+    if (!($n > $s) || !($e > $w) || $n > 90 || $s < -90 || ($e - $w) > 30) { throw new RuntimeException('Cadre de carte invalide.'); }
+    $places = [];
+    $st = $pdo->prepare("SELECT pl.id, pl.name, pl.county, pl.country, pl.latitude AS lat, pl.longitude AS lon, (SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS n
+        FROM places pl WHERE pl.latitude BETWEEN ? AND ? AND pl.longitude BETWEEN ? AND ? ORDER BY n DESC, pl.name LIMIT 300");
+    $st->execute([$s, $n, $w, $e]);
+    $seen = [];
+    foreach ($st->fetchAll() as $r) {
+        $key = mb_strtolower(trim((string) $r['name'])) . '|' . round((float) $r['lat'], 2) . '|' . round((float) $r['lon'], 2); // le même lieu saisi plusieurs fois : une seule fois sur le plan
+        if (isset($seen[$key])) { continue; }
+        $seen[$key] = true;
+        $places[] = ['id' => (int) $r['id'], 'label' => (string) $r['name'], 'detail' => trim(implode(', ', array_filter([(string) $r['county'], ((int) $r['n']) ? $r['n'] . ' événement(s)' : '']))), 'lat' => (float) $r['lat'], 'lon' => (float) $r['lon']];
+    }
+    $addresses = [];
+    $st = $pdo->prepare("SELECT e.id, e.address, e.year, e.precise_lat AS lat, e.precise_lon AS lon, t.label AS type, p.id AS person_id, trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS person
+        FROM events e LEFT JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id
+        WHERE e.precise_lat BETWEEN ? AND ? AND e.precise_lon BETWEEN ? AND ? ORDER BY e.year LIMIT 300");
+    $st->execute([$s, $n, $w, $e]);
+    $seen = [];
+    foreach ($st->fetchAll() as $r) {
+        $label = trim((string) $r['address']) ?: trim((string) $r['person']);
+        $key = mb_strtolower($label) . '|' . round((float) $r['lat'], 4) . '|' . round((float) $r['lon'], 4);
+        if (isset($seen[$key])) { continue; }
+        $seen[$key] = true;
+        $addresses[] = ['id' => (int) $r['id'], 'label' => mb_substr($label ?: 'Adresse', 0, 80), 'detail' => trim(implode(' · ', array_filter([(string) $r['person'], (string) $r['type'], $r['year'] ? (string) $r['year'] : '']))),
+            'lat' => (float) $r['lat'], 'lon' => (float) $r['lon'], 'year' => $r['year'] ? (int) $r['year'] : null, 'person_id' => (int) $r['person_id'], 'person' => (string) $r['person'],
+            'note' => trim(implode(' ', array_filter([(string) $r['type'], (string) $r['person'], $r['year'] ? '(' . $r['year'] . ')' : ''])))];
+    }
+    return ['places' => $places, 'addresses' => $addresses];
+}
