@@ -3023,7 +3023,8 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .mp-in { font-size:.55px; text-anchor:middle; fill:var(--blue, #0066cc); font-weight:700; }
 .mp-h { fill:var(--blue, #0066cc); opacity:.0; cursor:ew-resize; }
 .mp-room:hover .mp-h { opacity:.55; }
-.mp-h[data-mph="s"] { cursor:ns-resize; } .mp-h[data-mph="se"] { cursor:nwse-resize; }
+.mp-h[data-mph="s"], .mp-h[data-mph="n"] { cursor:ns-resize; } .mp-h[data-mph="se"], .mp-h[data-mph="nw"] { cursor:nwse-resize; } .mp-h[data-mph="sw"], .mp-h[data-mph="ne"] { cursor:nesw-resize; }
+.mp-size.is-live { font-size:.9px; font-weight:700; fill:var(--blue, #0066cc); }
 .mp-door { cursor:pointer; } .mp-door rect { fill:#fff; stroke:var(--blue, #0066cc); stroke-width:.12; }
 .mp-door.is-shut rect { fill:#111; stroke:#111; }
 .h-me-mplan-note { margin:6px 0 0; font-size:12px; }

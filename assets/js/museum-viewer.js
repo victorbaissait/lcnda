@@ -73,6 +73,13 @@
         const total = free.reduce((s, [a, b]) => s + b - a, 0) || len, slot = total / Math.max(1, n);
         return Array.from({length: n}, (_, k) => { let t = slot * (k + 0.5); for (const [a, b] of free) { if (t <= b - a) return {along: a + t, slot}; t -= b - a; } return {along: 0, slot}; });
     }
+    /** Un élément placé à la main qui tomberait devant une porte est poussé juste à côté (du côté le plus proche qui a la place). */
+    function clearDoors(along, half, limit, doorAlongs) {
+        const gap = 0.7 + half, hits = a => doorAlongs.some(d => Math.abs(a - d) < gap - 0.001);
+        if (!hits(along)) return along;
+        const tries = doorAlongs.flatMap(d => [d - gap, d + gap]).filter(a => Math.abs(a) <= limit + 0.001 && !hits(a)).sort((a, b) => Math.abs(a - along) - Math.abs(b - along));
+        return tries.length ? tries[0] : along;
+    }
     /**
      * Où va chaque élément d'une salle : sur un mur (position, hauteur) ou au milieu (x, z, orientation).
      * Placé à la main sur le plan (settings.along / y, ou px / pz / rot), sinon réparti tout seul.
@@ -90,7 +97,7 @@
             const slots = doors ? freeSlots(len, doors.filter(d => d.wall === wall).map(d => d.along), auto.length) : null; // avec le plan du musée : pas devant une porte
             list.forEach(it => {
                 let along, sl;
-                if (isNum(it.settings?.along)) { along = alongOf(wall, Math.max(-1, Math.min(1, Number(it.settings.along))) * wallLimit(wall, W, D, halfWidth(it))); sl = Math.min(len, 2.6); }
+                if (isNum(it.settings?.along)) { along = clearDoors(alongOf(wall, Math.max(-1, Math.min(1, Number(it.settings.along))) * wallLimit(wall, W, D, halfWidth(it))), halfWidth(it), wallLimit(wall, W, D, halfWidth(it)), doors ? doors.filter(d => d.wall === wall).map(d => d.along) : []); sl = Math.min(len, 2.6); }
                 else if (slots) { ({along, slot: sl} = slots[auto.indexOf(it)]); }
                 else { along = -len / 2 + slot * (auto.indexOf(it) + 0.5); sl = slot; }
                 spots.set(it, {wall, along, slot: sl, y: isNum(it.settings?.y) ? Math.max(0.6, Math.min(3.4, Number(it.settings.y))) : null});

@@ -82,7 +82,7 @@
                     <button type="button" class="button small secondary" data-me-import>Importer un musée reçu…</button></section>
                 ${data.guestbook.length ? `<section><h3>Livre d’or</h3><ul class="h-me-book">${data.guestbook.map(g => `<li><p>${esc(g.message)}</p><small>${esc(g.name)} · ${esc(g.date)}</small>${readOnly ? '' : `<button type="button" class="icon-button danger" data-me-book-del="${g.id}" title="Effacer ce message">🗑</button>`}</li>`).join('')}</ul></section>` : ''}
             </aside>
-            <section class="h-me-main"><section class="h-me-mplan"><div class="h-me-plan-head"><h3>🗺️ Plan du musée</h3><small class="muted">${readOnly ? 'Vu de dessus : les salles et leurs portes.' : 'Vu de dessus, comme un plan de maison : glisse une salle pour la placer, tire ses bords (▸ ▾ ◢) pour l’agrandir. Deux salles collées par un mur sont reliées par une porte ; clic sur une porte pour la fermer ou la rouvrir. Clic sur une salle pour l’aménager.'}</small></div>
+            <section class="h-me-main"><section class="h-me-mplan"><div class="h-me-plan-head"><h3>🗺️ Plan du musée</h3><small class="muted">${readOnly ? 'Vu de dessus : les salles et leurs portes.' : 'Vu de dessus, comme un plan de maison : glisse une salle pour la placer, tire un de ses bords ou un coin pour l’agrandir (⇧ Maj sur un coin : garder les proportions). Deux salles collées par un mur sont reliées par une porte ; clic sur une porte pour la fermer ou la rouvrir. Clic sur une salle pour l’aménager.'}</small></div>
                 <svg data-me-mplan aria-label="Plan du musée" preserveAspectRatio="xMidYMid meet"></svg>${data.settings?.plan ? '' : `<p class="muted h-me-mplan-note">${readOnly ? '' : 'Pour l’instant, les salles s’enchaînent l’une après l’autre (portes sur le mur d’entrée). Dès que tu déplaces une salle, la visite suit ce plan.'}</p>`}</section>
                 ${room ? `
                 ${readOnly ? `<h3>${esc(room.name)}</h3>${room.intro ? `<p>${esc(room.intro)}</p>` : ''}` : `<form data-me-roomform class="h-me-form h-me-roomform"><label class="span-2">Nom de la salle<input name="name" value="${esc(room.name)}" maxlength="120"></label>
@@ -162,6 +162,12 @@
         const closed = () => new Set(Array.isArray(data.settings?.closed) ? data.settings.closed : []);
         // les portes possibles (même calcul que la visite, sans tenir compte des portes fermées) pour les dessiner toutes
         const allDoors = () => { const d = V.museumDoors(rooms.map((r, i) => ({...r, settings: {...r.settings, mx: rects[i].x, mz: rects[i].z, size: 'custom', width: rects[i].W, depth: rects[i].D}})), {plan: true}) || []; const seen = new Map(); d.forEach((list, i) => list.forEach(x => { if (!seen.has(x.key)) seen.set(x.key, {...x, from: i}); })); return [...seen.values()]; };
+        // les poignées sur les quatre côtés et les quatre coins (⇧ Maj sur un coin garde les proportions, comme dans Photoshop)
+        const handles = r => {
+            const L = r.x, R = r.x + r.W, T = r.z, B = r.z + r.D, mx = r.x + r.W / 2, mz = r.z + r.D / 2, side = (x, y, w, hh, k) => `<rect x="${x}" y="${y}" width="${w}" height="${hh}" class="mp-h" data-mph="${k}"><title>${k.length === 2 ? 'Agrandir (⇧ Maj : garder les proportions)' : 'Agrandir'}</title></rect>`;
+            return side(R - 0.35, mz - 1, 0.7, 2, 'e') + side(L - 0.35, mz - 1, 0.7, 2, 'w') + side(mx - 1, B - 0.35, 2, 0.7, 's') + side(mx - 1, T - 0.35, 2, 0.7, 'n')
+                + side(R - 0.6, B - 0.6, 1.2, 1.2, 'se') + side(L - 0.6, B - 0.6, 1.2, 1.2, 'sw') + side(R - 0.6, T - 0.6, 1.2, 1.2, 'ne') + side(L - 0.6, T - 0.6, 1.2, 1.2, 'nw');
+        };
         const draw = () => {
             // le cadre ne bouge pas pendant un glisser (sinon l'échelle change sous la souris) ; une marge pour placer une salle autour
             if (!drag || !view) { const m = 6; view = [Math.min(...rects.map(r => r.x)) - m, Math.min(...rects.map(r => r.z)) - m, Math.max(...rects.map(r => r.x + r.W)) + m, Math.max(...rects.map(r => r.z + r.D)) + m]; }
@@ -172,9 +178,9 @@
             for (let z = Math.ceil(z0); z < z1; z++) h += `<line x1="${x0}" y1="${z}" x2="${x1}" y2="${z}" class="pl-grid"/>`;
             rects.forEach((r, i) => {
                 h += `<g class="mp-room${i === current ? ' is-cur' : ''}" data-mp="${i}"><rect x="${r.x}" y="${r.z}" width="${r.W}" height="${r.D}" class="mp-rect"/>
-                    <text x="${r.x + r.W / 2}" y="${r.z + r.D / 2 - 0.2}" class="mp-name">${i + 1}. ${esc(rooms[i].name || 'Salle')}</text><text x="${r.x + r.W / 2}" y="${r.z + r.D / 2 + 1}" class="mp-size">${String(r.W).replace('.', ',')} × ${String(r.D).replace('.', ',')} m</text>
+                    <text x="${r.x + r.W / 2}" y="${r.z + r.D / 2 - 0.2}" class="mp-name">${i + 1}. ${esc(rooms[i].name || 'Salle')}</text><text x="${r.x + r.W / 2}" y="${r.z + r.D / 2 + 1}" class="mp-size${drag?.handle && drag.i === i ? ' is-live' : ''}">${String(r.W).replace('.', ',')} × ${String(r.D).replace('.', ',')} m${drag?.ratio && drag.i === i ? ' 🔗' : ''}</text>
                     <text x="${r.x + r.W / 2}" y="${r.z + 0.9}" class="mp-wall">fond</text><text x="${r.x + r.W / 2}" y="${r.z + r.D - 0.45}" class="${i === 0 ? 'mp-in' : 'mp-wall'}">${i === 0 ? '▲ entrée du musée' : 'entrée'}</text>
-                    ${readOnly ? '' : `<rect x="${r.x + r.W - 0.35}" y="${r.z + r.D / 2 - 1}" width="0.7" height="2" class="mp-h" data-mph="e"/><rect x="${r.x + r.W / 2 - 1}" y="${r.z + r.D - 0.35}" width="2" height="0.7" class="mp-h" data-mph="s"/><rect x="${r.x + r.W - 0.6}" y="${r.z + r.D - 0.6}" width="1.2" height="1.2" class="mp-h" data-mph="se"/>`}</g>`;
+                    ${readOnly ? '' : handles(r)}</g>`;
             });
             const shut = closed();
             allDoors().forEach(d => {
@@ -217,8 +223,18 @@
             const [x, z] = point(e), r = rects[drag.i], dx = x - drag.sx, dz = z - drag.sz;
             if (Math.hypot(dx, dz) > 0.25) drag.moved = true; if (!drag.moved) return;
             if (drag.handle) {
-                if (drag.handle.includes('e')) r.W = clamp(snap(drag.W0 + dx), 8, 40);
-                if (drag.handle.includes('s')) r.D = clamp(snap(drag.D0 + dz), 8, 40);
+                const k = drag.handle, ex = k.includes('e') ? dx : k.includes('w') ? -dx : null, ez = k.includes('s') ? dz : k.includes('n') ? -dz : null;
+                if (e.shiftKey && ex !== null && ez !== null) { // proportions gardées : la plus grande des deux poussées l'emporte
+                    const lo = Math.max(8 / drag.W0, 8 / drag.D0), hi = Math.min(40 / drag.W0, 40 / drag.D0);
+                    const f = clamp(Math.max((drag.W0 + ex) / drag.W0, (drag.D0 + ez) / drag.D0), lo, hi);
+                    r.W = clamp(snap(drag.W0 * f), 8, 40); r.D = clamp(snap(drag.D0 * f), 8, 40); // au demi-mètre, comme l'enregistrement
+                } else {
+                    if (ex !== null) r.W = clamp(snap(drag.W0 + ex), 8, 40);
+                    if (ez !== null) r.D = clamp(snap(drag.D0 + ez), 8, 40);
+                }
+                r.x = k.includes('w') ? drag.x0 + drag.W0 - r.W : drag.x0; // tirer à gauche ou en haut : le côté opposé reste en place
+                r.z = k.includes('n') ? drag.z0 + drag.D0 - r.D : drag.z0;
+                drag.ratio = e.shiftKey && ex !== null && ez !== null;
             } else { [r.x, r.z] = magnet(drag.i, snap(drag.x0 + dx), snap(drag.z0 + dz)); }
             draw();
         });
