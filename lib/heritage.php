@@ -532,6 +532,7 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'boards' => function_exists('boards_linked') ? boards_linked($pdo, 'person', $personId) : [],
         'custom_blocks' => function_exists('custom_blocks_for_person') ? custom_blocks_for_person($pdo, $personId) : [],
         'recueils' => function_exists('recueils_for_entity') ? recueils_for_entity($pdo, 'person', (string) $personId) : [],
+        'houses' => function_exists('house_links_lookup') ? house_links_lookup($pdo, $personId, 0) : [], // 🏠 les maisons de famille où elle a vécu (lib/houses.php)
     ];
 }
 

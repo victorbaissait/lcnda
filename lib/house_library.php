@@ -32,6 +32,8 @@ function house_lib_ensure(PDO $pdo): void
     $pdo->exec("CREATE TABLE IF NOT EXISTS house_objects (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL DEFAULT '', cat TEXT NOT NULL DEFAULT '', w REAL NOT NULL DEFAULT 60, d REAL NOT NULL DEFAULT 60,
         h REAL NOT NULL DEFAULT 80, color TEXT NOT NULL DEFAULT '#9a8a7a', shape2d TEXT NOT NULL DEFAULT 'box', shape3d TEXT NOT NULL DEFAULT 'box', img TEXT NOT NULL DEFAULT '', note TEXT NOT NULL DEFAULT '',
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
+    // la personnalisation d'un objet créé (matière, 2e couleur, pieds, hauteur du sol, rotation, coins, portes, tiroirs, époque)
+    if (!in_array('opts_json', array_column($pdo->query('PRAGMA table_info(house_objects)')->fetchAll(), 'name'), true)) { $pdo->exec("ALTER TABLE house_objects ADD COLUMN opts_json TEXT NOT NULL DEFAULT '{}'"); }
     $done = true;
 }
 
@@ -69,8 +71,21 @@ function house_lib_dispatch(PDO $pdo, string $action, bool $isWrite, array $data
 /* ═════════ Mes objets créés ═════════ */
 function house_obj_row(array $r): array
 {
+    $opts = house_obj_opts(json_decode((string) ($r['opts_json'] ?? '{}'), true) ?: []);
     return ['id' => (int) $r['id'], 'kind' => 'u' . $r['id'], 'name' => $r['name'], 'cat' => $r['cat'], 'w' => (float) $r['w'], 'd' => (float) $r['d'], 'h' => (float) $r['h'], 'color' => $r['color'],
-        'shape2d' => $r['shape2d'], 'shape3d' => $r['shape3d'], 'img' => $r['img'], 'note' => $r['note'], 'updated_at' => $r['updated_at']];
+        'shape2d' => $r['shape2d'], 'shape3d' => $r['shape3d'], 'img' => $r['img'], 'note' => $r['note'], 'updated_at' => $r['updated_at']] + $opts;
+}
+
+const HOUSE_OBJ_MATS = ['boisclair', 'chene', 'noyer', 'merisier', 'boisfonce', 'peint', 'metal', 'fonte', 'cuivre', 'laiton', 'zinc', 'pierre', 'marbre', 'gres', 'faience', 'tissu', 'velours', 'cuir', 'osier', 'paille', 'verre'];
+const HOUSE_OBJ_FEET = ['droits', 'tournes', 'boules', 'patins', 'roulettes'];
+/** la personnalisation d'un objet : seulement des valeurs connues ou bornées (rien d'autre n'est gardé) */
+function house_obj_opts(array $d): array
+{
+    $n = static fn($v, int $min, int $max): int => max($min, min($max, (int) round(is_numeric($v) ? (float) $v : 0)));
+    $o = ['matl' => in_array($d['matl'] ?? '', HOUSE_OBJ_MATS, true) ? $d['matl'] : '', 'color2' => preg_match('/^#[0-9a-f]{6}$/i', (string) ($d['color2'] ?? '')) ? strtolower((string) $d['color2']) : '',
+        'feet' => in_array($d['feet'] ?? '', HOUSE_OBJ_FEET, true) ? $d['feet'] : '', 'elev' => $n($d['elev'] ?? 0, 0, 400), 'rot' => ((int) round((float) ($d['rot'] ?? 0)) % 360 + 360) % 360, 'rad' => $n($d['rad'] ?? 0, 0, 50),
+        'doors' => $n($d['doors'] ?? 0, 0, 8), 'drawers' => $n($d['drawers'] ?? 0, 0, 12), 'period' => mb_substr(trim(preg_replace('/[\x00-\x1F\x7F<>]/u', '', safe_text($d['period'] ?? '')) ?? ''), 0, 60)];
+    return array_filter($o, static fn($v) => $v !== '' && $v !== 0);
 }
 
 function house_objects_list(PDO $pdo): array
@@ -91,17 +106,19 @@ function save_house_object(PDO $pdo, array $d): array
     if ($name === '') { throw new RuntimeException('Donne un nom à l’objet.'); }
     $num = static function ($v, float $min, float $max, float $def): float { $n = is_numeric($v) ? (float) $v : $def; return round(max($min, min($max, $n)), 1); };
     $color = preg_match('/^#[0-9a-f]{6}$/i', (string) ($d['color'] ?? '')) ? strtolower((string) $d['color']) : '#9a8a7a';
-    $s2 = in_array($d['shape2d'] ?? '', HOUSE_OBJ_SHAPES2D, true) ? $d['shape2d'] : 'box';
-    $s3 = in_array($d['shape3d'] ?? '', HOUSE_OBJ_SHAPES3D, true) ? $d['shape3d'] : 'box';
+    // une forme : un mot-clé simple (celles de la liste, ou celle d'un objet du catalogue repris comme point de départ)
+    $shape = static fn($v): string => is_string($v) && preg_match('/^[A-Za-z][A-Za-z0-9_]{0,23}$/', $v) ? $v : 'box';
+    $s2 = $shape($d['shape2d'] ?? ''); $s3 = $shape($d['shape3d'] ?? '');
     $img = (string) ($d['img'] ?? '');
     if ($img !== '' && (strlen($img) > 400000 || !preg_match('#^data:image/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$#', $img))) { throw new RuntimeException('Image refusée : une image PNG, JPEG ou WebP de moins de 300 Ko.'); }
     if ($s3 === 'img' && $img === '') { $s3 = 'box'; }
-    $vals = [$name, house_lib_cat($d['cat'] ?? '') ?: 'Mes objets', $num($d['w'] ?? 0, 1, 5000, 60), $num($d['d'] ?? 0, 1, 5000, 60), $num($d['h'] ?? 0, 0.5, 2000, 80), $color, $s2, $s3, $img, mb_substr(safe_text($d['note'] ?? ''), 0, 1000)];
+    $vals = [$name, house_lib_cat($d['cat'] ?? '') ?: 'Mes objets', $num($d['w'] ?? 0, 1, 5000, 60), $num($d['d'] ?? 0, 1, 5000, 60), $num($d['h'] ?? 0, 0.5, 2000, 80), $color, $s2, $s3, $img, mb_substr(safe_text($d['note'] ?? ''), 0, 1000),
+        json_encode((object) house_obj_opts($d), JSON_UNESCAPED_UNICODE)];
     if ($id) {
-        $s = $pdo->prepare('UPDATE house_objects SET name=?, cat=?, w=?, d=?, h=?, color=?, shape2d=?, shape3d=?, img=?, note=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $s->execute([...$vals, $id]);
+        $s = $pdo->prepare('UPDATE house_objects SET name=?, cat=?, w=?, d=?, h=?, color=?, shape2d=?, shape3d=?, img=?, note=?, opts_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $s->execute([...$vals, $id]);
         if (!$s->rowCount()) { throw new RuntimeException('Objet introuvable.'); }
     } else {
-        $pdo->prepare('INSERT INTO house_objects(name, cat, w, d, h, color, shape2d, shape3d, img, note) VALUES(?,?,?,?,?,?,?,?,?,?)')->execute($vals);
+        $pdo->prepare('INSERT INTO house_objects(name, cat, w, d, h, color, shape2d, shape3d, img, note, opts_json) VALUES(?,?,?,?,?,?,?,?,?,?,?)')->execute($vals);
         $id = (int) $pdo->lastInsertId();
     }
     $s = $pdo->prepare('SELECT * FROM house_objects WHERE id=?'); $s->execute([$id]);

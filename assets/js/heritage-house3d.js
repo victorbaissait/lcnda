@@ -37,6 +37,11 @@
             case 'lauzes': { let y = 0; while (y < S) { const h = 18 + rnd() * 16; let x = -rnd() * 40; while (x < S) { const w = 30 + rnd() * 50; g.fillStyle = shade(color, .7 + rnd() * .45); g.beginPath(); g.moveTo(x, y); g.lineTo(x + w, y + rnd() * 4); g.lineTo(x + w - 3, y + h); g.lineTo(x + 2, y + h - rnd() * 4); g.fill(); x += w + 2; } y += h + 2; } noise(.1); break; }
             case 'bacacier': { for (let x = 0; x < S; x += 32) { g.fillStyle = shade(color, 1.12); g.fillRect(x, 0, 8, S); g.fillStyle = shade(color, .82); g.fillRect(x + 8, 0, 4, S); } break; }
             case 'vernies': { for (let r = 0; r < 10; r++) for (let x = (r % 2) * -16; x < S; x += 32) { const k = (Math.floor(x / 32) + r) % 4; g.fillStyle = [color, '#2f6b3a', '#c99a2e', '#1e1e1e'][k]; g.fillRect(x + 1, r * 26 + 1, 30, 25); } noise(.06); break; }
+            // les matières des objets (heritage-house.js : OBJ_MATS)
+            case 'bois': { for (let i = 0; i < 46; i++) { g.strokeStyle = shade(color, .68 + rnd() * .3); g.lineWidth = .6 + rnd() * 2.2; g.beginPath(); const y = rnd() * S, ph = rnd() * 6; for (let x = 0; x <= S; x += 8) g.lineTo(x, y + Math.sin(x / 38 + ph) * 3.5); g.stroke(); } for (let i = 0; i < 3; i++) { g.strokeStyle = shade(color, .55); g.lineWidth = 1.2; g.beginPath(); g.ellipse(rnd() * S, rnd() * S, 9 + rnd() * 8, 3 + rnd() * 2, 0, 0, 7); g.stroke(); } noise(.04); break; }
+            case 'marbre': { noise(.04, 1200); for (let i = 0; i < 9; i++) { g.strokeStyle = `rgba(90,90,100,${.12 + rnd() * .25})`; g.lineWidth = .5 + rnd() * 1.8; g.beginPath(); let x = rnd() * S, y = 0; g.moveTo(x, y); while (y < S) { x += (rnd() - .5) * 40; y += 10 + rnd() * 20; g.lineTo(x, y); } g.stroke(); } break; }
+            case 'osier': { const n = 16, c2 = S / n; for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { g.fillStyle = shade(color, (i + j) % 2 ? .78 + rnd() * .1 : 1 + rnd() * .1); if ((i + j) % 2) g.fillRect(i * c2 + 1, j * c2 + 3, c2 - 2, c2 - 6); else g.fillRect(i * c2 + 3, j * c2 + 1, c2 - 6, c2 - 2); } noise(.05); break; }
+            case 'tissu': { noise(.07, 6000); g.strokeStyle = 'rgba(0,0,0,.06)'; for (let i = 0; i < S; i += 4) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, S); g.stroke(); g.beginPath(); g.moveTo(0, i); g.lineTo(S, i); g.stroke(); } break; }
             case 'herbe': case 'gravier': case 'terre': case 'chaux': case 'torchis': case 'platre': case 'beton': case 'tapis': noise(kind === 'platre' ? .03 : .14, kind === 'herbe' ? 5000 : 2500); break;
             default: noise(.05);
         }
@@ -52,15 +57,27 @@
     const mat = (color, kind = '', opts = {}) => { const key = `${color}|${kind}|${JSON.stringify(opts)}`; if (!matCache.has(key)) matCache.set(key, new T.MeshStandardMaterial({color: kind ? '#ffffff' : color, map: kind ? tex(kind, color) : null, roughness: .85, metalness: 0, ...opts})); return matCache.get(key); };
 
     /* ═════════ Les meubles en volume ═════════ */
+    /* les pieds qu'on peut ajouter à un objet : [hauteur (m), épaisseur, forme] */
+    const FEET = {droits: [.12, .045, 'box'], tournes: [.15, .05, 'turn'], boules: [.07, .06, 'ball'], patins: [.035, .07, 'box'], roulettes: [.07, .045, 'wheel']};
+    const NO_FEET = new Set(['rug', 'rugR', 'img', 'stairs', 'stairsL', 'spiral', 'tree', 'conifer', 'animal', 'hedge', 'flowerbed', 'garden', 'pond', 'hatch', 'mirror', 'frame', 'cross']);
     function furniture(it, L) {
-        const g = new T.Group(), w = M(it.w), d = M(it.d), h = M(it.h ?? L?.[5] ?? 80), col = it.color || L?.[6] || '#9a8a7a', shape = it.s3 || (it.img ? 'img' : L?.[8] || L?.[7] || 'box'); // la forme en volume : celle de l'objet créé, sinon celle du catalogue (heritage-house-lib.js en ajoute)
-        const put = (m, x, y, z) => { m.position.set(x, y, z); g.add(m); return m; }, B = (ww, hh, dd, c = col, x = 0, y = hh / 2, z = 0) => put(box(ww, hh, dd, mat(c)), x, y, z);
-        const C = (r, hh, c = col, x = 0, y = hh / 2, z = 0, seg = 24) => put(new T.Mesh(new T.CylinderGeometry(r, r, hh, seg), mat(c)), x, y, z);
-        const legs = (top, lw = .05) => [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => B(lw, top, lw, col, sx * (w / 2 - lw), top / 2, sz * (d / 2 - lw)));
+        let g = new T.Group(); const w = M(it.w), d = M(it.d), h0 = M(it.h ?? L?.[5] ?? 80), col = it.color || L?.[6] || '#9a8a7a', shape = it.s3 || (it.img ? 'img' : L?.[8] || L?.[7] || 'box'); // la forme en volume : celle de l'objet créé, sinon celle du catalogue (heritage-house-lib.js en ajoute)
+        // personnalisation : matière (bois, cuivre, fonte…), deuxième couleur (pieds, poignées, détails), pieds, coins arrondis
+        const OM = it.matl ? ext.houseLib?.OBJ_MATS?.find(q => q[0] === it.matl) : null, col2 = /^#[0-9a-f]{6}$/i.test(it.color2 || '') ? it.color2 : '';
+        const fm = (c, k = '', o = {}) => OM && c === col && !k ? mat(c, OM[3] || '', {metalness: OM[4], roughness: OM[5], ...(OM[6] < 1 ? {transparent: true, opacity: OM[6]} : {}), ...o}) : mat(c, k, o);
+        const ft = FEET[it.feet] && !NO_FEET.has(shape) ? FEET[it.feet] : null, fh = ft ? Math.min(ft[0], h0 * .4) : 0, h = h0 - fh, rad = clamp(Number(it.rad) || 0, 0, 50) / 100;
+        const put = (m, x, y, z) => { m.position.set(x, y, z); g.add(m); return m; }, B = (ww, hh, dd, c = col, x = 0, y = hh / 2, z = 0) => put(box(ww, hh, dd, fm(c)), x, y, z);
+        const C = (r, hh, c = col, x = 0, y = hh / 2, z = 0, seg = 24) => put(new T.Mesh(new T.CylinderGeometry(r, r, hh, seg), fm(c)), x, y, z);
+        const legs = (top, lw = .05) => [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => B(lw, top, lw, col2 || col, sx * (w / 2 - lw), top / 2, sz * (d / 2 - lw)));
+        /** un plateau (ou un bloc) aux coins arrondis */
+        const RB = (ww, hh, dd, c, y0) => { const r = Math.min(ww, dd) * rad, x = ww / 2, z = dd / 2, sh = new T.Shape(); sh.moveTo(-x + r, -z); sh.lineTo(x - r, -z); sh.quadraticCurveTo(x, -z, x, -z + r); sh.lineTo(x, z - r); sh.quadraticCurveTo(x, z, x - r, z); sh.lineTo(-x + r, z); sh.quadraticCurveTo(-x, z, -x, z - r); sh.lineTo(-x, -z + r); sh.quadraticCurveTo(-x, -z, -x + r, -z);
+            const geo = new T.ExtrudeGeometry(sh, {depth: hh, bevelEnabled: false, curveSegments: 8}); geo.rotateX(-Math.PI / 2); return put(new T.Mesh(geo, fm(c)), 0, y0, 0); };
+        const top = (th) => rad > 0 ? RB(w, th, d, col, h - th) : B(w, th, d, col, 0, h - th / 2);
         switch (shape) {
             case 'bed1': case 'bed2': B(w, .35, d); B(w - .04, .18, d - .12, '#f4efe4', 0, .44, .04); B(w, Math.max(.6, h + .45), .06, col, 0, Math.max(.6, h + .45) / 2, -d / 2 + .03); if (shape === 'bed2') { B(w / 2 - .08, .1, .3, '#ffffff', -w / 4, .58, -d / 2 + .25); B(w / 2 - .08, .1, .3, '#ffffff', w / 4, .58, -d / 2 + .25); } else B(w - .12, .1, .3, '#ffffff', 0, .58, -d / 2 + .25); break;
             case 'litclos': B(w, h, d); B(w * .7, h * .5, .02, '#2a1a10', 0, h * .5, d / 2 + .005); break;
-            case 'table': case 'desk': B(w, .04, d, col, 0, h - .02); legs(h - .04); break;
+            case 'table': case 'desk': top(.04); legs(h - .04); break;
+            case 'box': if (rad > 0) RB(w, h, d, col, 0); else B(w, h, d); break;
             case 'round': C(Math.min(w, d) / 2, .04, col, 0, h - .02); C(.05, h - .04); C(Math.min(w, d) / 4, .03, col, 0, .015); break;
             case 'chair': B(w, .05, d * .9, col, 0, .45, d * .05); B(w, h - .45, .04, col, 0, .45 + (h - .45) / 2, -d / 2 + .02); legs(.45, .035); break;
             case 'armchair': case 'sofa': B(w, .42, d); B(w, h, .18, col, 0, h / 2, -d / 2 + .09); B(.14, .62, d, col, -w / 2 + .07, .31); B(.14, .62, d, col, w / 2 - .07, .31); break;
@@ -85,7 +102,18 @@
             case 'stairsL': { const n = 12; for (let i = 0; i < n; i++) { const a = Math.PI + i * Math.PI / 2 / n, m = B(Math.min(w, d) * .5, (i + 1) * h / n, .22, col, 0, (i + 1) * h / n / 2, 0); m.position.set(Math.cos(a) * w * .25 + w * .25, (i + 1) * h / n / 2, Math.sin(a) * d * .25 + d * .25); m.rotation.y = -a; } break; }
             case 'img': { const m = box(w, Math.max(.02, h), d, [mat(col), mat(col), new T.MeshStandardMaterial({map: new T.TextureLoader().load(it.img)}), mat(col), mat(col), mat(col)]); m.position.y = Math.max(.02, h) / 2; g.add(m); break; }
             case 'piano': B(w, h, d); B(w, .05, d * .4, '#f4f4f4', 0, h * .55, d / 2 + d * .2); break;
-            default: if (!ext.houseFurnitureX?.(shape, {T, g, B, C, put, legs, box, mat, w, d, h, col, it})) B(w, h, d);
+            default: if (!ext.houseFurnitureX?.(shape, {T, g, B, C, put, legs, box, mat: fm, w, d, h, col, col2, it})) { if (rad > 0) RB(w, h, d, col, 0); else B(w, h, d); }
+        }
+        if (ft) { // les pieds : l'objet monte d'autant
+            const out = new T.Group(), fc = col2 || '#' + new T.Color(col).multiplyScalar(.6).getHexString(), fw = Math.min(ft[1], w * .2, d * .2), ins = fw * .9;
+            g.position.y = fh; out.add(g);
+            [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([a, b]) => { const px = a * (w / 2 - ins), pz = b * (d / 2 - ins); let me;
+                if (ft[2] === 'ball') { me = new T.Mesh(new T.SphereGeometry(fw * .6, 14, 10), mat(fc)); me.scale.y = fh / (fw * 1.2); me.position.set(px, fh / 2, pz); }
+                else if (ft[2] === 'turn') { me = new T.Mesh(new T.CylinderGeometry(fw * .55, fw * .25, fh, 14), mat(fc)); me.position.set(px, fh / 2, pz); }
+                else if (ft[2] === 'wheel') { me = new T.Mesh(new T.SphereGeometry(fh * .45, 12, 8), mat('#222222')); me.position.set(px, fh * .45, pz); }
+                else { me = box(fw, fh, fw, mat(fc)); me.position.set(px, fh / 2, pz); }
+                out.add(me); });
+            g = out;
         }
         return g;
     }
@@ -311,5 +339,17 @@
             destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); renderer.dispose(); box2.innerHTML = ''; barAc.abort(); if (!ownBar) bar.hidden = true; }};
     }
 
-    ext.house3d = {mount, inspect, inspectBuf, parseModel};
+    /** l'aperçu en 3D d'un seul objet (fenêtre « Créer un objet ») : une image, faite avec un seul rendu partagé */
+    let snapR = null;
+    async function snapshot(it, W = 180, Hh = 150) {
+        await three();
+        if (!snapR) { snapR = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true, alpha: true}); snapR.outputColorSpace = T.SRGBColorSpace; }
+        snapR.setSize(W, Hh); const sc = new T.Scene(); sc.add(new T.HemisphereLight('#ffffff', '#776655', 2.2)); const dl = new T.DirectionalLight('#fff4e0', 1.8); dl.position.set(2, 4, 3); sc.add(dl);
+        const g = furniture({...it, kind: it.kind || ''}, ext.houseLib?.libOf(it.kind)); sc.add(g);
+        const bb = new T.Box3().setFromObject(g), c = bb.getCenter(new T.Vector3()), sz = bb.getSize(new T.Vector3()), R = Math.max(sz.x, sz.y, sz.z, .1);
+        const cam = new T.PerspectiveCamera(32, W / Hh, R / 50, R * 30); cam.position.set(c.x + R * 1.25, c.y + R * .95, c.z + R * 1.7); cam.lookAt(c);
+        snapR.render(sc, cam); const url = snapR.domElement.toDataURL('image/png');
+        sc.traverse(o => { if (o.isMesh) o.geometry?.dispose?.(); }); return url;
+    }
+    ext.house3d = {mount, inspect, inspectBuf, parseModel, snapshot};
 })();
