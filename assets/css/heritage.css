@@ -3286,3 +3286,10 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .vx-recent{margin-top:3px;align-items:center}.vx-recent small{font-size:10px;color:#888;margin-right:3px}
 .vx-penprev{fill:none;stroke:#1473e6;stroke-dasharray:4 3}.vx-penclose{fill:none;stroke:#1473e6;stroke-width:2px}
 .vx-guide{stroke:#e0219b}
+
+/* Maintenance → Montage, retouche, mise en page et son : blocs rangeables, raccourcis de l'éditeur choisi */
+.h-mtp-blkmove{float:right;display:inline-flex;gap:2px;margin-left:8px}.h-mtp-blkmove .h-bt{font-size:12px;padding:1px 6px}
+.h-mtp-stack[data-col]{min-height:40px}.h-mtp-keys{margin-top:14px;border-top:1px solid var(--line,#ddd);padding-top:10px}
+/* Outils de modification (et leurs raccourcis) : tous sur une seule ligne, quel que soit leur nombre */
+.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{grid-template-columns:none!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);max-width:1180px}
+@media (max-width:700px){.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr))!important}}

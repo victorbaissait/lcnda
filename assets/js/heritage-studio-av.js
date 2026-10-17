@@ -1541,7 +1541,7 @@
     /** Point d'entrée : un média {id, filename, title, media_type}. */
     /* ═════════ Maintenance → Montage, retouche, mise en page et son : disposition, enregistrement, boutons, plein écran ═════════ */
     ext.maintenance = ext.maintenance || {};
-    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)']];
+    const EDITORS = [['video', '🎬 Montage vidéo'], ['retouch', '🎚️ Retouche des photos'], ['audio', '🎧 Modifier le son'], ['layout', '📐 Mise en page (livres de famille)'], ['vector', '✒️ Dessin vectoriel']];
     const FULL_EDITORS = [...EDITORS, ['museum', '🏛️ Musée de famille (Aménager)']], FULL_DEFAULT = {layout: true, museum: true}; // l'atelier de mise en page s'ouvre en plein écran si on n'a rien choisi
     /* Ensembles nommés (💾, comme les Réglages des animaux) : une disposition du montage, ou les boutons d'un éditeur */
     const LAYOUT_SETS = 'genealogie-montage-layout-sets', TB_SETS = 'genealogie-toolbar-sets';
@@ -1564,6 +1564,8 @@
         const lsJson = readJson;
         let which = st.montagePrefsEditor || 'video';
         ext.maintenance.montage_prefs.ac?.abort(); const ac = ext.maintenance.montage_prefs.ac = new AbortController();
+        const BLK_KEY = 'genealogie-montage-page-order';
+        const blkMove = '<span class="h-mtp-blkmove"><button type="button" class="h-bt" data-blk-up title="Monter ce bloc">↑</button><button type="button" class="h-bt" data-blk-down title="Descendre ce bloc">↓</button><button type="button" class="h-bt" data-blk-side title="Passer dans l’autre colonne">⇄</button></span>';
         const draw = () => {
             if (token !== st.workspaceToken) return;
             const p = montagePrefs(), full = lsJson('genealogie-editor-full', {}), defs = (ext.tbDefs?.() || {})[which], cfg = lsJson('genealogie-toolbars', {})[which] || {};
@@ -1575,7 +1577,7 @@
                 <div class="page-actions"><button type="button" class="button" data-mtp-save>Enregistrer</button></div></header>
                 <div class="h-mtp-cols">
                 <div class="h-mtp-stack">
-                <section class="maintenance-panel"><h3>🎬 Disposition du montage</h3>
+                <section class="maintenance-panel" data-mtp-blk="layout"><h3>🎬 Disposition du montage${blkMove}</h3>
                     ${presetBar('layout', layoutSets(), 'cette disposition')}
                     <div class="form-grid h-mtp-grid">
                     <label>Panneau des réglages<select data-mtp="side">${opt([['right', 'À droite de l’image'], ['left', 'À gauche de l’image']], p.side)}</select></label>
@@ -1586,7 +1588,7 @@
                     <h4>🎨 Couleur des blocs sur la frise</h4><div class="h-mtp-colors">${MT_COLORS.map(([k, l]) => `<label class="h-mtp-color"><input type="color" data-mtp="${k}" value="${esc(p[k])}"> <span class="h-mtp-swatch" data-mtp-sw="${k}" style="background:${esc(p[k])};color:${inkOn(p[k])}">${esc(l)}</span></label>`).join('')}</div>
                     <button type="button" class="button small secondary" data-mtp-colreset>Couleurs de départ</button>
                 </section>
-                <section class="maintenance-panel"><h3>📤 Enregistrement des vidéos (par défaut)</h3>
+                <section class="maintenance-panel" data-mtp-blk="export"><h3>📤 Enregistrement des vidéos (par défaut)${blkMove}</h3>
                     <div class="form-grid h-mtp-grid">
                     <label>Format<select data-mtp="fmt">${opt([['mp4', 'MP4 (H.264) — lu partout'], ['webm', 'WebM — léger']], p.fmt)}</select></label>
                     <label>Taille<select data-mtp="height">${opt(MT_SIZES, p.height)}</select></label>
@@ -1597,23 +1599,31 @@
                     <label class="h-mtp-speeds">⏩ Boutons rapides de vitesse (de 0,1 à 10, séparés par « ; ») <input data-mtp="speeds" value="${esc(speedsText(p.speeds))}" placeholder="0,1 ; 0,25 ; 0,5 ; 1 ; 1,5 ; 2 ; 4 ; 10"></label>
                     <p class="muted">On peut toujours les changer au moment d’enregistrer. MP4 seulement si l’ordinateur sait le faire, sinon WebM.</p>
                 </section>
-                <section class="maintenance-panel"><h3>🎚️ Retouche des photos</h3>
+                <section class="maintenance-panel" data-mtp-blk="retouch"><h3>🎚️ Retouche des photos${blkMove}</h3>
                     <div class="form-grid h-mtp-grid"><label>Colonne d’outils (➤ ⬚ ◯ 🪄 ⌗ 🖌 T…)<select data-mtp-rttools>${opt([['side', 'À côté de l’image (entre l’image et le panneau)'], ['left', 'Tout à gauche'], ['right', 'Tout à droite (après le panneau)']], lsJson('genealogie-retouch-layout', {}).tools || 'side')}</select></label>
                     <label>Panneau (Réglages, Calques…)<select data-mtp-rtside>${opt([['right', 'À droite'], ['left', 'À gauche']], lsJson('genealogie-retouch-layout', {}).side || 'right')}</select></label></div>
                     <p class="muted">Aussi : la largeur du panneau se règle en tirant son bord dans la Retouche.</p>
                 </section>
-                <section class="maintenance-panel h-ek-panel"><h3>⌨️ Raccourcis à toi</h3><div data-ek-box></div></section>
-                <section class="maintenance-panel"><h3>⛶ Plein écran à l’ouverture</h3>
+                <section class="maintenance-panel" data-mtp-blk="full"><h3>⛶ Plein écran à l’ouverture${blkMove}</h3>
                     <div class="form-grid h-mtp-grid">${FULL_EDITORS.map(([k, l]) => `<label>${esc(l)}<select data-mtp-full="${k}">${opt([['0', 'Fenêtre'], ['1', 'Plein écran']], (full[k] ?? FULL_DEFAULT[k]) ? '1' : '0')}</select></label>`).join('')}</div>
                 </section>
                 </div>
-                <section class="maintenance-panel"><h3>🧰 Boutons et options</h3>
+                <section class="maintenance-panel" data-mtp-blk="tools"><h3>🧰 Boutons et options${blkMove}</h3>
                     <div class="form-grid h-mtp-grid"><label>Éditeur<select data-mtp-which>${opt(EDITORS, which)}</select></label></div>
                     ${presetBar('toolbar', toolbarSets(which), 'ces boutons')}
                     <p class="muted">Coche ce qu’on montre, range avec ↑ ↓ (ou en glissant ⠿). C’est aussi dans chaque éditeur : « ⚙️ Personnaliser ». Les ensembles ci-dessus sont ceux de « ${esc(edName)} ».</p>
-                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
+                    ${groups ? `<div class="h-tbcfg-body" data-mtp-groups>${groups}</div><button type="button" class="button small secondary" data-mtp-reset>Tout remettre comme au départ</button>` : `<p class="muted">Ouvre une fois ${which === 'video' ? 'le montage vidéo (Listes → Vidéos → « 🎬 Montage »)' : which === 'retouch' ? 'la retouche d’une photo (visionneuse → « Retoucher »)' : which === 'layout' ? 'l’atelier de mise en page (Listes → 📐 Livres de famille, ou Export propre → Livre de famille)' : which === 'vector' ? 'le dessin vectoriel (Listes → Outils de modification → ✒️ Dessin vectoriel)' : 'la modification d’un son (Listes → Audios → ✏️)'} : ses boutons apparaîtront ici.</p>`}
+                <div class="h-ek-panel h-mtp-keys"><h4>⌨️ Raccourcis de « ${esc(edName)} »</h4><div data-ek-box></div><p class="muted"><button type="button" class="button small secondary" data-mtp-allkeys>⌨️ Tous les raccourcis de l’app (Maintenance → Raccourcis clavier)</button></p></div>
                 </section></div></section>`;
+            // les raccourcis suivent l'éditeur choisi (même liste que Maintenance → Raccourcis clavier)
+            try { localStorage.setItem('genealogie-editor-shortcuts-tab', which === 'video' ? 'montage' : which); } catch (_) {}
             ext.editorKeysPanel?.(ws.querySelector('[data-ek-box]'));
+            ws.querySelectorAll('[data-ek-tab]').forEach(b => { b.hidden = true; }); // l'éditeur se choisit plus haut
+            // les grands blocs : deux colonnes, chacune dans son ordre (↑ ↓, ⇄ pour changer de colonne), gardé pour la prochaine fois
+            { const cols = ws.querySelector('.h-mtp-cols'), left = ws.querySelector('.h-mtp-stack'), right = document.createElement('div'); right.className = 'h-mtp-stack'; right.dataset.col = 'right'; left.dataset.col = 'left'; cols.appendChild(right);
+              const saved = lsJson(BLK_KEY, null), def = {left: ['layout', 'export', 'retouch', 'full'], right: ['tools']}, lay = saved && Array.isArray(saved.left) && Array.isArray(saved.right) ? saved : def;
+              const all = [...ws.querySelectorAll('[data-mtp-blk]')], put = (col, keys) => keys.forEach(k => { const el = all.find(x => x.dataset.mtpBlk === k); if (el) col.appendChild(el); });
+              put(left, lay.left); put(right, lay.right); all.filter(el => !lay.left.includes(el.dataset.mtpBlk) && !lay.right.includes(el.dataset.mtpBlk)).forEach(el => (el.dataset.mtpBlk === 'tools' ? right : left).appendChild(el)); }
         };
         draw();
         // ce qui est à l'écran (pas encore enregistré) : disposition, boutons de l'éditeur choisi
@@ -1640,6 +1650,13 @@
             if (op.save(list.slice(-60))) { draw(); toast(`${n} ensemble(s) importé(s) : choisis-en un puis « Appliquer ».`); }
         }, {signal: ac.signal});
         ws.addEventListener('click', async e => {
+            const mv = e.target.closest('[data-blk-up],[data-blk-down],[data-blk-side]');
+            if (mv) { const blk = mv.closest('[data-mtp-blk]'), lay = {left: [...ws.querySelectorAll('[data-col="left"] > [data-mtp-blk]')].map(b => b.dataset.mtpBlk), right: [...ws.querySelectorAll('[data-col="right"] > [data-mtp-blk]')].map(b => b.dataset.mtpBlk)};
+                const side = lay.left.includes(blk.dataset.mtpBlk) ? 'left' : 'right', list = lay[side], i = list.indexOf(blk.dataset.mtpBlk);
+                if (mv.matches('[data-blk-side]')) { list.splice(i, 1); lay[side === 'left' ? 'right' : 'left'].push(blk.dataset.mtpBlk); }
+                else { const j = i + (mv.matches('[data-blk-up]') ? -1 : 1); if (j < 0 || j >= list.length) return; [list[i], list[j]] = [list[j], list[i]]; }
+                writeJson(BLK_KEY, lay); draw(); return; }
+            if (e.target.closest('[data-mtp-allkeys]')) { st.maintenanceTab = 'raccourcis'; A().setModule('maintenance'); return; }
             const li = e.target.closest('li');
             if (e.target.closest('[data-up]') && li?.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
             if (e.target.closest('[data-down]') && li?.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
