@@ -20,12 +20,14 @@
     /** Ouvrir une autre généalogie : ses réglages à elle, et on repart de son tableau de bord */
     async function open(id) {
         try {
-            await window.LCNDA_SETTINGS_DETACH?.();
+            await window.LCNDA_SETTINGS_DETACH?.(); // les réglages de celle-ci sont enregistrés, puis détachés
+            let detached = true;
+            try { await call('genealogy_switch', {id}); detached = false; }
+            finally { if (detached) setTimeout(() => location.reload(), 1800); } // échec : on recharge, les réglages reviennent du serveur
             // l'écran ouvert et la fiche choisie sont ceux de l'autre généalogie : on les oublie
             ['genealogie-last-route', 'genealogie-baissait-ui-v2'].forEach(k => { try { localStorage.removeItem(k); } catch (_) {} });
-            await call('genealogy_switch', {id});
             location.href = location.pathname;
-        } catch (e) { toast(e.message, 'error'); }
+        } catch (e) { toast(e.message + ' (la page va se recharger)', 'error'); }
     }
 
     async function dialog() {

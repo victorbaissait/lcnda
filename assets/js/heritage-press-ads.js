@@ -34,7 +34,8 @@
     /** Le prix, ligne par ligne : {total, lines: [[texte, montant]], warn: [...]} */
     function price(text, r = {}, opts = [], insertions = 1) {
         const c = counts(text, r), out = [], warn = [];
-        if (!r.unit) return {total: null, lines: [], warn: ['Choisis ou crée les règles du journal pour calculer le prix.'], c};
+        if (!['word', 'line', 'char', 'fixed'].includes(r.unit)) return {total: null, lines: [], warn: ['Choisis ou crée les règles du journal pour calculer le prix.'], c};
+        r = Object.fromEntries(Object.entries(r).map(([k, v]) => [k, /(_price|price|_units|fee|_from|_pct|chars_per_line)$/.test(k) && num(v) !== null ? String(Math.max(0, k === 'discount_pct' ? Math.min(100, num(v)) : num(v))) : v])); // pas de prix ni de nombre négatifs
         const units = r.unit === 'word' ? c.words : r.unit === 'line' ? c.lines : r.unit === 'char' ? c.chars : 1;
         const unitName = {word: 'mot', line: 'ligne', char: 'caractère', fixed: 'forfait'}[r.unit];
         const member = opts.includes('member') && num(r.member_price) !== null, p = member ? num(r.member_price) : (num(r.price) ?? 0);
@@ -59,30 +60,30 @@
     const ocr = () => window.Tesseract ? Promise.resolve(window.Tesseract) : ocrP || (ocrP = new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js'; s.onload = () => window.Tesseract ? ok(window.Tesseract) : ko(new Error('Lecteur de texte indisponible.')); s.onerror = () => { ocrP = null; ko(new Error('Impossible de charger le lecteur de texte (il faut internet).')); }; document.head.appendChild(s); }));
     /** Ce qu'on reconnaît dans un texte de tarifs, en français : {clé: valeur} */
     function parseRules(raw) {
-        const t = ' ' + String(raw || '').replace(/\s+/g, ' ').replace(/(\d)\s*,\s*(\d)/g, '$1.$2').toLowerCase() + ' ', r = {};
-        const money = '(\\d+(?:\\.\\d+)?)\\s*(?:€|euros?|eur)';
+        const t = ' ' + String(raw || '').slice(0, 8000).replace(/\d{9,}/g, ' ').replace(/\s+/g, ' ').replace(/(\d)\s*,\s*(\d)/g, '$1.$2').toLowerCase() + ' ', r = {};
+        const money = '(?<![\\d.])(\\d{1,7}(?:\\.\\d+)?)\\s*(?:€|euros?|eur)';
         const m = re => t.match(new RegExp(re, 'i'));
         let x;
         if ((x = m(`${money}\\s*(?:le|par|/|la|du|pour un|pour le)\\s*mot`)) || (x = m(`mot\\s*(?:supplémentaire)?\\s*[:=]?\\s*${money}`))) { r.unit = 'word'; r.price = x[1]; }
         else if ((x = m(`${money}\\s*(?:la|par|/|pour une|pour la)\\s*ligne`)) || (x = m(`ligne\\s*(?:supplémentaire)?\\s*[:=]?\\s*${money}`))) { r.unit = 'line'; r.price = x[1]; }
         else if ((x = m(`${money}\\s*(?:le|par|/)\\s*(?:signe|caract)`))) { r.unit = 'char'; r.price = x[1]; }
         else if ((x = m(`(?:forfait|prix unique|tarif unique)\\s*(?:de)?\\s*[:=]?\\s*${money}`))) { r.unit = 'fixed'; r.price = x[1]; }
-        if ((x = m('(\\d+)\\s*(?:caractères|signes|lettres)\\s*(?:espaces compris\\s*)?(?:par|/|la)\\s*ligne'))) r.chars_per_line = x[1];
+        if ((x = m('(?<![\\d.])(\\d{1,7})\\s*(?:caractères|signes|lettres)\\s*(?:espaces compris\\s*)?(?:par|/|la)\\s*ligne'))) r.chars_per_line = x[1];
         if (/espaces non compris|hors espaces/.test(t)) r.count_spaces = '0';
-        if ((x = m('(\\d+)\\s*(?:premiers?)\\s*(?:mots|lignes)?\\s*(?:gratuits?|offerts?)')) || (x = m('(?:gratuits?|offerts?)\\s*(?:jusqu.à|pour les)\\s*(\\d+)\\s*(?:premiers?\\s*)?(?:mots|lignes)'))) r.free_units = x[1];
-        if ((x = m('minimum\\s*(?:de|:)?\\s*(\\d+)\\s*(?:mots|lignes|caractères)'))) r.min_units = x[1];
+        if ((x = m('(?<![\\d.])(\\d{1,7})\\s*(?:premiers?)\\s*(?:mots|lignes)?\\s*(?:gratuits?|offerts?)')) || (x = m('(?:gratuits?|offerts?)\\s*(?:jusqu.à|pour les)\\s*(?<![\\d.])(\\d{1,7})\\s*(?:premiers?\\s*)?(?:mots|lignes)'))) r.free_units = x[1];
+        if ((x = m('minimum\\s*(?:de|:)?\\s*(?<![\\d.])(\\d{1,7})\\s*(?:mots|lignes|caractères)'))) r.min_units = x[1];
         if ((x = m(`minimum\\s*(?:de\\s*perception|de|:)?\\s*${money}`)) || (x = m(`${money}\\s*minimum`))) r.min_price = x[1];
-        if ((x = m('(?:maximum|max\\.?|au plus|pas plus de)\\s*(?:de|:)?\\s*(\\d+)\\s*(?:mots|lignes|caractères)'))) r.max_units = x[1];
+        if ((x = m('(?:maximum|max\\.?|au plus|pas plus de)\\s*(?:de|:)?\\s*(?<![\\d.])(\\d{1,7})\\s*(?:mots|lignes|caractères)'))) r.max_units = x[1];
         if ((x = m(`(?:adhérents?|abonnés?|membres?)\\s*[:=]?\\s*${money}`))) r.member_price = x[1]; else if (/gratuite?s?\s*(?:pour les|aux)\s*(?:adhérents|abonnés|membres)/.test(t)) r.member_price = '0';
         const opt = (key, words) => { const y = m(`(?:${words})[^.€\\d]{0,40}${money}`) || m(`${money}[^.\\d]{0,20}(?:${words})`); if (y) r[key] = y[1]; };
         opt('photo_price', 'photo|logo|image|illustration'); opt('box_price', 'encadr[ée]|cadre|filet'); opt('bold_price', 'gras|caractères gras'); opt('title_price', 'titre|en-tête|accroche');
         opt('domiciliation_price', 'domiciliation|réponse au journal|sous référence|boîte'); opt('web_price', 'internet|site|en ligne|web'); opt('fixed_fee', 'frais (?:de dossier|fixes|techniques)|frais d.insertion');
-        if ((x = m('tva\\s*(?:de|à)?\\s*(\\d+(?:\\.\\d+)?)\\s*%'))) r.tax_pct = x[1];
+        if ((x = m('tva\\s*(?:de|à)?\\s*(?<![\\d.])(\\d{1,7}(?:\\.\\d+)?)\\s*%'))) r.tax_pct = x[1];
         if (/\bttc\b|tva comprise|taxes? comprises?/.test(t)) r.tax_included = '1';
-        if ((x = m('(\\d+)\\s*%\\s*(?:de\\s*)?(?:remise|réduction)[^\\d]{0,30}(\\d+)\\s*(?:parutions|insertions|numéros)'))) { r.discount_pct = x[1]; r.discount_from = x[2]; }
-        else if ((x = m('(\\d+)\\s*(?:parutions|insertions|numéros)[^\\d]{0,30}(\\d+)\\s*%'))) { r.discount_from = x[1]; r.discount_pct = x[2]; }
+        if ((x = m('(?<![\\d.])(\\d{1,7})\\s*%\\s*(?:de\\s*)?(?:remise|réduction)[^\\d]{0,30}(?<![\\d.])(\\d{1,7})\\s*(?:parutions|insertions|numéros)'))) { r.discount_pct = x[1]; r.discount_from = x[2]; }
+        else if ((x = m('(?<![\\d.])(\\d{1,7})\\s*(?:parutions|insertions|numéros)[^\\d]{0,30}(?<![\\d.])(\\d{1,7})\\s*%'))) { r.discount_from = x[1]; r.discount_pct = x[2]; }
         if ((x = m('(?:avant le|date limite|au plus tard le|clôture)\\s*:?\\s*(\\d{1,2}(?:er)?\\s+[a-zéû]+(?:\\s+\\d{4})?|\\d{1,2}[/.]\\d{1,2}(?:[/.]\\d{2,4})?)'))) r.deadline = x[1];
-        if ((x = String(raw || '').match(/[\w.+-]+@[\w-]+\.[\w.]+/))) r.send_to = x[0];
+        if ((x = String(raw || '').slice(0, 8000).match(/(?<![\w.+-])[\w.+-]{1,64}@[\w-]{1,63}\.[\w.]{2,63}/))) r.send_to = x[0];
         return r;
     }
 

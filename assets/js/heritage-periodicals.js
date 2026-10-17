@@ -22,9 +22,10 @@
     const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
     const PREFS = 'genealogie-periodicals-view';
     const STATUS_CLS = {owned: 'is-owned', wanted: 'is-wanted', ordered: 'is-ordered', subscribed: 'is-owned', digital: 'is-digital', borrowed: 'is-borrowed', lent: 'is-borrowed', given: 'is-given'};
-    const money = v => { const n = Number(String(v ?? '').replace(',', '.').replace(/[^\d.]/g, '')); return Number.isFinite(n) && String(v ?? '').trim() !== '' ? n : null; };
+    /** le premier nombre d'un prix écrit à la main : « 6,90 € (n°254) » → 6.9, « 1 234,56 € » → 1234.56, « env. 7 € » → 7 */
+    const money = v => { const m = String(v ?? '').match(/(\d{1,3}(?:[  .]\d{3})+|\d+)(?:[.,](\d{1,2}))?(?!\d)/); if (!m) return null; const n = Number(m[1].replace(/[  .]/g, '') + (m[2] ? '.' + m[2] : '')); return Number.isFinite(n) ? n : null; };
     const euro = n => n === null ? '' : n.toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'});
-    const stars = n => Number(n) ? '★'.repeat(Number(n)) + '☆'.repeat(5 - Number(n)) : '';
+    const stars = n => { const k = Math.max(0, Math.min(5, Math.round(Number(n)) || 0)); return k ? '★'.repeat(k) + '☆'.repeat(5 - k) : ''; };
     let D = null; // tout ce que le serveur a renvoyé
 
     /* ─── Les mots de chaque famille ─── */
@@ -38,10 +39,13 @@
 
     /* ─── Minutage : « 52:34 », « 1:02:10 », « 52'34 », « 52 min 34 » ─── */
     function tcSec(t) {
-        const m = String(t || '').match(/(\d{1,2})\s*(?:[:h]|min)\s*(\d{1,2})(?:\s*[:'m]\s*(\d{1,2}))?|(\d{1,3})\s*['’]\s*(\d{1,2})/);
+        const s = String(t || ''), ok = (...v) => v.every(x => x === undefined || Number(x) < 60);
+        let m = s.match(/(?<!\d)(\d{1,2})\s*h\s*(\d{1,2})(?:\s*(?:min|m|['’:])\s*(\d{1,2}))?(?!\d)/i); // 1 h 32, 1h02, 1h02m30
+        if (m) return ok(m[2], m[3]) ? Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3] || 0) : null;
+        m = s.match(/(?<!\d)(\d{1,3})\s*(?::|min|['’])\s*(\d{1,2})(?:\s*[:'’]\s*(\d{1,2}))?(?!\d)/); // 52:34, 1:02:10, 52'34, 120:00
         if (!m) return null;
-        if (m[4]) return Number(m[4]) * 60 + Number(m[5]);
-        return m[3] !== undefined ? Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3]) : Number(m[1]) * 60 + Number(m[2]);
+        if (m[3] !== undefined) return ok(m[2], m[3]) ? Number(m[1]) * 3600 + Number(m[2]) * 60 + Number(m[3]) : null;
+        return ok(m[2]) ? Number(m[1]) * 60 + Number(m[2]) : null;
     }
     const fmtTc = s => { s = Math.max(0, Math.floor(s)); const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), x = String(s % 60).padStart(2, '0'); return h ? `${h}:${String(m).padStart(2, '0')}:${x}` : `${m}:${x}`; };
     /** un lien qui ouvre la vidéo en ligne au bon moment (YouTube, Vimeo, Dailymotion, INA…) */
@@ -78,7 +82,7 @@
     const cmp = keys => (a, b) => { for (const k of keys) { const s = SORTS[k]; if (!s) continue; const x = s[1](a), y = s[1](b); if (x < y) return s[2] ? 1 : -1; if (x > y) return s[2] ? -1 : 1; } return 0; };
 
     /* ─── Filtres ─── */
-    const prefs = () => ({fam: '', view: 'issues', q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', sort: ['family', 'periodical', 'date'], ...ls(PREFS, {})});
+    const prefs = () => { const p = {fam: '', view: 'issues', q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', sort: ['family', 'periodical', 'date'], ...ls(PREFS, {})}; if (!Array.isArray(p.sort)) p.sort = ['family', 'periodical', 'date']; return p; };
     const textOfIssue = i => [i.number, i.title, i.date_text, pOf(i)?.title, ...Object.values(i.data || {}), ...(i.links || []).map(l => l.name), ...(i.labels || []).map(l => l.name),
         ...D.articles.filter(a => a.issue_id === i.id).flatMap(a => [a.title, a.authors, a.rubric, ...Object.values(a.data || {})])].join(' ').toLowerCase();
     const textOfArticle = a => [a.title, a.authors, a.pages, a.rubric, ...Object.values(a.data || {}), ...(a.links || []).map(l => l.name), ...(a.labels || []).map(l => l.name), pOf(a)?.title, issueOf(a)?.number, issueOf(a)?.title].join(' ').toLowerCase();
@@ -196,7 +200,7 @@
             const inv = e.target.closest('[data-pr-inv]'); if (inv) { e.stopPropagation(); openInvestigation(inv.dataset.prInv); return; }
             if (e.target.closest('a,button,input,select')) return;
             const ir = e.target.closest('[data-pr-issue]'); if (ir) return issueDialog(D.issues.find(i => i.id === Number(ir.dataset.prIssue)));
-            const ar = e.target.closest('[data-pr-article]'); if (ar) { const a = D.articles.find(x => x.id === Number(ar.dataset.prArticle)); return articleDialog(a, issueOf(a)); }
+            const ar = e.target.closest('[data-pr-article]'); if (ar) { const a = D.articles.find(x => x.id === Number(ar.dataset.prArticle)); if (!a) return toast('Introuvable : la liste a changé, elle se recharge.', 'error'), reload(); return articleDialog(a, issueOf(a)); }
             const pr = e.target.closest('[data-pr-periodical]'); if (pr) return periodicalDialog(D.periodicals.find(p => p.id === Number(pr.dataset.prPeriodical)));
         });
         ws.querySelector('[data-pr-csv]').addEventListener('click', () => csv(prefs().view, rows));
@@ -208,7 +212,7 @@
     }
     const openInvestigation = id => { S().enquetesTab = 'enquetes'; S().currentBattueId = 0; S().currentInvestigationId = Number(id); S().investigationFolderId = 0; A().setModule('enquetes'); };
     function csv(view, rows) {
-        const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+        const q = v => { let t = String(v ?? ''); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; }; // pas de formule dans un tableur
         let head, body;
         if (view === 'articles') { head = ['Famille', 'Titre', 'Auteurs, qui parle', 'Dans', 'N°', 'Date', 'Pages, minutage', 'Rubrique', 'Sorte', 'Ce qu’on voit', 'Résumé', 'Ce qui est dit, citation', 'Lieux', 'Période', 'Noms cités', 'Rattaché à', 'Étiquettes'];
             body = rows.articles.map(a => { const i = issueOf(a); return [D.families?.[famOf(a)], a.title, a.authors, i ? issueName(i) : '', i?.number, i?.date_text, a.pages, a.rubric, D.article_kinds[a.kind], a.data?.what_seen, a.data?.summary, a.data?.transcript || a.data?.quote, a.data?.places, a.data?.period, a.data?.surnames, (a.links || []).map(l => l.name).join(', '), (a.labels || []).map(l => l.name).join(', ')]; }); }
@@ -303,7 +307,7 @@
                 ${fam === 'doc' ? '' : `<span><button type="button" class="icon-button" data-art-move="-1" ${k ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="icon-button" data-art-move="1" ${k < arts.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span>`}</li>`; };
         const player = fam !== 'doc' || !i ? '' : vid ? `<div class="h-pr-player"><video controls preload="metadata" src="media/${encodeURIComponent(vid.filename)}" data-pr-video></video>
                 <div class="h-pr-playbar"><b data-pr-now>0:00</b><button type="button" class="button small" data-pr-grab>📸 Capturer cette image</button><button type="button" class="button small secondary" data-pr-mark>📌 Noter ce moment</button><small class="muted">La capture s’ouvre dans un nouveau moment, à annoter.</small></div></div>`
-            : `<p class="muted h-pr-hint">🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le ${d.video_url ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, fais une capture d’écran (⌘⇧4 sur Mac, Win+Maj+S sur PC), puis « ＋ Moment » et colle-la (⌘V / Ctrl+V).</p>`;
+            : `<p class="muted h-pr-hint">🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le ${urlAt(d.video_url, null) ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, fais une capture d’écran (⌘⇧4 sur Mac, Win+Maj+S sur PC), puis « ＋ Moment » et colle-la (⌘V / Ctrl+V).</p>`;
         ext.openDialog({eyebrow: w.item.toUpperCase(), title: i ? issueName(i) : `Nouveau${fam === 'revue' ? ' numéro' : fam === 'livre' ? ' livre' : ' documentaire'}`, wide: true, labels: ['periodical_issue', i?.labels || []],
             body: `<div class="form-grid">${fields}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>
                 ${linksField(i?.links || [])}
@@ -322,7 +326,7 @@
                     dl.querySelector('[data-pr-mark]').addEventListener('click', () => { video.pause(); articleDialog(null, i, {pages: fmtTc(video.currentTime)}); });
                 }
                 dl.querySelectorAll('[data-seek]').forEach(b => b.addEventListener('click', () => { const s = Number(b.dataset.seek); if (b.dataset.seek === '') return;
-                    if (video) { video.currentTime = s; video.play().catch(() => {}); video.scrollIntoView({block: 'nearest', behavior: 'smooth'}); } else if (d.video_url) window.open(urlAt(d.video_url, s), '_blank', 'noopener'); }));
+                    if (video) { video.currentTime = s; video.play().catch(() => {}); video.scrollIntoView({block: 'nearest', behavior: 'smooth'}); } else if (urlAt(d.video_url, s)) window.open(urlAt(d.video_url, s), '_blank', 'noopener'); }));
                 dl.querySelector('[data-art-add]')?.addEventListener('click', () => articleDialog(null, i, video ? {pages: video.currentTime ? fmtTc(video.currentTime) : ''} : {}));
                 dl.querySelector('[data-to-atelier]')?.addEventListener('click', () => atelierDialog([{type: 'issue', id: i.id}], true));
                 dl.querySelectorAll('[data-art-edit]').forEach(b => b.addEventListener('click', () => articleDialog(D.articles.find(a => a.id === Number(b.closest('[data-art]').dataset.art)), i)));
@@ -359,7 +363,7 @@
             <canvas class="h-pr-ancv"></canvas>`;
         const cv = host.querySelector('canvas'), cx = cv.getContext('2d'), img = new Image(), shapes = [];
         let tool = 'arrow', cur = null;
-        const url = URL.createObjectURL(file);
+        const url = URL.createObjectURL(file); img.addEventListener('load', () => URL.revokeObjectURL(url), {once: true});
         const color = () => host.querySelector('[data-an-color]').value, width = () => Number(host.querySelector('[data-an-w]').value) * Math.max(1, cv.width / 1200);
         const paint = () => {
             cx.drawImage(img, 0, 0);
@@ -373,7 +377,8 @@
                 else if (s.t === 'text') { cx.font = `bold ${s.w * 5}px system-ui, sans-serif`; cx.lineWidth = s.w / 2; cx.strokeStyle = '#fff'; cx.strokeText(s.txt, s.x, s.y); cx.fillText(s.txt, s.x, s.y); }
             }
         };
-        const changed = () => { paint(); if (!shapes.length) return onChange(file); cv.toBlob(b => onChange(new File([b], file.name.replace(/\.\w+$/, '') + '-annotee.jpg', {type: 'image/jpeg'})), 'image/jpeg', 0.92); };
+        // la capture à envoyer : une promesse (l'image annotée se fabrique en arrière-plan ; l'envoi l'attend)
+        const changed = () => { paint(); if (!shapes.length) return onChange(Promise.resolve(file)); onChange(new Promise(r => cv.toBlob(b => r(b ? new File([b], file.name.replace(/\.\w+$/, '') + '-annotee.jpg', {type: 'image/jpeg'}) : file), 'image/jpeg', 0.92))); };
         img.onload = () => { cv.width = img.naturalWidth; cv.height = img.naturalHeight; paint(); };
         img.src = url;
         const pos = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * cv.width / r.width, (e.clientY - r.top) * cv.height / r.height]; };
@@ -428,7 +433,7 @@
                 const v = A().formObject(form);
                 const r = await post('save_periodical_article', {id: a?.id || 0, issue_id: issue.id, title: v.title || (v.pages ? `Moment ${v.pages}` : ''), authors: v.authors || '', pages: v.pages || '', rubric: v.rubric || '', kind: v.kind,
                     data: dataOf(form, ['what_seen', 'transcript', 'summary', 'quote', 'keywords', 'places', 'period', 'surnames', 'sources', 'url', 'rating', 'read', 'notes']), ...readLinks(form), label_ids: readLabels(form)});
-                const id = Number((r.result || r).id), cap = form.closest('dialog')._pendingCapture?.();
+                const id = Number((r.result || r).id), cap = await form.closest('dialog')._pendingCapture?.();
                 if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'periodical_article', id);
                 if (cap && ext.uploadFiles) await ext.uploadFiles('periodical_article', id, [cap], '');
                 toast('Enregistré.'); await reload();
