@@ -53,7 +53,20 @@
         if (t.name === 'hr-mode') { p.mode = t.value; t.closest('section').querySelector('.h-hr-level').hidden = p.mode === 'keep'; }
         if (t.matches('[data-hr-level]')) { p.level = Number(t.value); t.closest('section').querySelector('[data-hr-out]').textContent = `${p.level} %`; }
         try { localStorage.setItem(HR_KEY, JSON.stringify(p)); } catch (_) {} hrApply(); });
-    const scan = root => root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(tidy);
+    /* 📁 « Choose File » → un bouton en français « 📁 Choisir un fichier » et le nom du fichier choisi (les champs cachés, déclenchés par un autre bouton, ne changent pas) */
+    function filePick(inp) {
+        if (inp.dataset.fpDone || inp.hidden || inp.closest('[hidden], .file-pick, label.button') || inp.style.display === 'none') return; inp.dataset.fpDone = '1';
+        const many = inp.multiple, w = document.createElement('span'); w.className = 'file-pick';
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'button small secondary'; b.textContent = many ? '📁 Choisir des fichiers' : '📁 Choisir un fichier';
+        const n = document.createElement('span'); n.className = 'file-pick-name'; n.textContent = 'Aucun fichier choisi';
+        inp.replaceWith(w); w.append(inp, b, n);
+        b.addEventListener('click', () => inp.click());
+        const show = () => { const f = [...(inp.files || [])]; n.textContent = !f.length ? 'Aucun fichier choisi' : f.length === 1 ? f[0].name : `${f.length} fichiers`; n.title = f.map(x => x.name).join('\n'); };
+        inp.addEventListener('change', show); inp.form?.addEventListener('reset', () => setTimeout(show));
+    }
+    /* ⌨️ un raccourci clavier se lit dans la bulle d'aide : data-shortcut="⌘S" → « Enregistrer (⌘S) » */
+    function shortcutTip(el) { const k = el.dataset.shortcut; if (!k || el.dataset.scDone === k) return; el.dataset.scDone = k; const t = (el.getAttribute('title') || el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s*\([^()]*\)\s*$/, m => (m.includes(k) ? '' : m)); el.title = `${t} (${k})`; }
+    const scan = root => { root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(tidy); root.querySelectorAll?.('input[type=file]:not([data-fp-done])').forEach(filePick); root.querySelectorAll?.('[data-shortcut]').forEach(shortcutTip); if (root.matches?.('[data-shortcut]')) shortcutTip(root); };
     let queued = new Set(), timer = 0;
     new MutationObserver(list => { list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) queued.add(n); })); clearTimeout(timer);
         timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (!n.isConnected) return; if (n.matches?.('button')) tidy(n); scan(n); narrow(n); }); }, 40); })

@@ -255,7 +255,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .button:hover { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
 .button:disabled, .button.is-disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: 3px 3px 0 rgba(5,93,255,.18); }
 .button.secondary { color: var(--ink); background: white; }
-.button.danger { background: #111; }
+.button.danger { background: #d0182f; color: #fff; }
+.button.secondary.danger { background: white; color: #b0152a; border-color: #b0152a; }
 .button.small { min-height: 32px; padding: 6px 10px; font-size: 11px; box-shadow: 3px 3px 0 rgba(5,93,255,.25); }
 .form-separator { border: 0; border-top: 2px solid var(--ink); margin: 18px 0; }
 
@@ -3960,6 +3961,22 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .h-fp-addrow select{width:auto}
 .h-fp-custom{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .h-fp-custom[hidden]{display:none}
+
+/* 🧩 Harmonisation : confirmation, listes vides, bouton de fichier, bas des fenêtres */
+.confirm-box-text{margin:0;padding:4px 20px 6px;white-space:pre-line;line-height:1.5}
+.empty-box{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;padding:28px 18px;border:1.5px dashed var(--line-color,#c9ccd3);color:var(--muted,#6b7280);grid-column:1/-1;width:100%;box-sizing:border-box}
+.empty-box b{color:var(--ink,#111);font-size:15px}
+.empty-box small{max-width:46ch;line-height:1.45}
+.empty-box-ico{font-size:28px;line-height:1}
+.empty-box .button{margin-top:6px}
+.file-pick{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap;max-width:100%}
+.file-pick input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.file-pick-name{font-size:13px;color:var(--muted,#6b7280);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:28ch}
+/* bas des fenêtres : Supprimer à gauche, puis Annuler, puis le bouton principal à droite */
+.modal-actions>.danger:not([type=submit]),.modal-actions>[data-h-delete]{order:-2}
+.modal-actions>.spacer{order:-1}
+.modal-actions>.button.secondary:not(.danger),.modal-actions>button.secondary:not(.danger){order:1}
+.modal-actions>[type=submit],.modal-actions>.button:not(.secondary){order:2}
 
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
