@@ -5470,7 +5470,7 @@ function date_check_issues(PDO $pdo): array
         WHERE e.date_text GLOB '*[0-9]*' AND COALESCE(e.date_calendar,'gregorian') IN ('','gregorian','julian')") as $r) {
         $d = date_text_parts((string) $r['date_text']); if (!$d) { continue; }
         [$day, $month, $year] = $d;
-        $julian = $r['date_calendar'] === 'julian';
+        $julian = $r['date_calendar'] === 'julian' || $year < 1583; // avant 1582, on vivait en calendrier julien (29 février 1500 a existé)
         $ok = $month >= 1 && $month <= 12 && $day >= 1 && ($julian ? $day <= [31, ($year % 4 === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][$month - 1] : checkdate($month, $day, max(1, $year)));
         if (!$ok) { $issues[] = ['key' => "impossible-date:{$r['id']}", 'severity' => 'error', 'person_id' => (int) $r['pid'], 'title' => 'Date qui n’existe pas', 'detail' => $nm((int) $r['pid']) . ' : ' . $r['label'] . ' le « ' . $r['date_text'] . ' » (ce jour n’existe pas dans le calendrier ' . ($julian ? 'julien' : 'grégorien') . ').']; }
     }
@@ -10145,6 +10145,7 @@ function merge_people(PDO $pdo,array $data): array
     assert_person_unlocked($pdo,$target);assert_person_unlocked($pdo,$source);
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
     merge_person_references($pdo,$target,$source);
+    if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
     // Cases « bloc à afficher » cochées sur l'une ou l'autre fiche
     $flags=array_values(array_filter(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(),'name'),static fn($c)=>preg_match('/^show_[a-z_]+_block$/',(string)$c)));
     foreach($flags as $flag)$pdo->prepare("UPDATE persons SET {$flag}=1 WHERE id=? AND (SELECT {$flag} FROM persons WHERE id=?)=1")->execute([$target,$source]);
@@ -11288,6 +11289,7 @@ function delete_person(PDO $pdo,array $data): array
         $pdo->prepare("DELETE FROM {$table} WHERE entity_type='person' AND entity_id=?")->execute([$id]);
     }
     if(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // la fiche d'animal (la liste) reste, avec son nom, ses dates
+    if(function_exists('periodical_links_person'))periodical_links_person($pdo,$id,0); // revues, livres, documentaires, annonces : le lien s'en va
     $pdo->prepare('UPDATE census_members SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE archive_digest_people SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE families SET partner1_id=NULL WHERE partner1_id=?')->execute([$id]);

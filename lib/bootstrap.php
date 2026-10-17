@@ -141,14 +141,16 @@ function csrf_token(): string
     if (empty($_SESSION['csrf'])) {
         $_SESSION['csrf'] = bin2hex(random_bytes(24));
     }
-    return $_SESSION['csrf'];
+    // un jeton par généalogie : une fenêtre restée sur une autre généalogie (changée ailleurs) ne peut pas écrire dans celle-ci
+    $g = defined('GENEALOGY_ID') ? (string) GENEALOGY_ID : '';
+    return $g === '' ? $_SESSION['csrf'] : substr(hash_hmac('sha256', 'genealogy:' . $g, $_SESSION['csrf']), 0, 48);
 }
 
 function verify_csrf(array $data): void
 {
     $token = (string) ($data['csrf'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? ''));
     if (!hash_equals(csrf_token(), $token)) {
-        json_response(['error' => 'Session expirée. Recharge la page.'], 419);
+        json_response(['error' => 'Session expirée, ou une autre généalogie a été ouverte entre-temps (autre fenêtre) : recharge la page.'], 419);
     }
 }
 

@@ -91,7 +91,7 @@ function periodical_set_links(PDO $pdo, string $type, int $id, array $data): voi
 function periodical_links_map(PDO $pdo, string $itemType = ''): array
 {
     $links = [];
-    $s = $pdo->prepare("SELECT pl.*, CASE pl.entity_type WHEN 'person' THEN trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) WHEN 'investigation' THEN i.title
+    $s = $pdo->prepare("SELECT pl.*, CASE pl.entity_type WHEN 'person' THEN CASE WHEN p.id IS NULL THEN NULL ELSE trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) END WHEN 'investigation' THEN i.title
             WHEN 'investigation_item' THEN ii.title || ' — ' || COALESCE(i2.title,'') END AS name, ii.investigation_id AS inv
         FROM periodical_links pl LEFT JOIN persons p ON pl.entity_type='person' AND p.id=pl.entity_id LEFT JOIN investigations i ON pl.entity_type='investigation' AND i.id=pl.entity_id
         LEFT JOIN investigation_items ii ON pl.entity_type='investigation_item' AND ii.id=pl.entity_id LEFT JOIN investigations i2 ON i2.id=ii.investigation_id
@@ -102,6 +102,14 @@ function periodical_links_map(PDO $pdo, string $itemType = ''): array
         $links[$l['item_type'] . ':' . $l['item_id']][] = ['type' => $l['entity_type'], 'id' => (int) $l['entity_id'], 'name' => $l['name'] !== '' ? $l['name'] : 'Sans nom'] + ($l['inv'] ? ['inv' => (int) $l['inv']] : []);
     }
     return $links;
+}
+
+/** Une personne supprimée ($to = 0) ou fusionnée dans une autre : ses liens de revues, livres, documentaires et annonces suivent */
+function periodical_links_person(PDO $pdo, int $from, int $to): void
+{
+    if (!$pdo->query("SELECT 1 FROM sqlite_master WHERE type='table' AND name='periodical_links'")->fetchColumn()) { return; }
+    if ($to > 0) { $pdo->prepare("UPDATE OR IGNORE periodical_links SET entity_id=? WHERE entity_type='person' AND entity_id=?")->execute([$to, $from]); }
+    $pdo->prepare("DELETE FROM periodical_links WHERE entity_type='person' AND entity_id=?")->execute([$from]);
 }
 
 /** Tous les noms de la généalogie (pour l'index des noms d'un livre) */
@@ -205,6 +213,7 @@ function delete_periodical_item(PDO $pdo, array $data): array
 {
     periodicals_ensure($pdo);
     $what = (string) ($data['what'] ?? ''); $id = safe_int($data['id'] ?? 0);
+    if ($id <= 0) { throw new RuntimeException('Élément introuvable.'); } // jamais l'id 0 : il désigne les livres et films sans collection
     $dropArticle = static function (int $aid) use ($pdo): void {
         heritage_delete_media_links($pdo, 'periodical_article', $aid); $pdo->prepare("DELETE FROM label_links WHERE entity_type='periodical_article' AND entity_id=?")->execute([$aid]);
         $pdo->prepare("DELETE FROM periodical_links WHERE item_type='article' AND item_id=?")->execute([$aid]); $pdo->prepare('DELETE FROM periodical_articles WHERE id=?')->execute([$aid]);
@@ -229,7 +238,7 @@ function reorder_periodical_articles(PDO $pdo, array $data): array
 {
     periodicals_ensure($pdo);
     $u = $pdo->prepare('UPDATE periodical_articles SET position=? WHERE id=? AND issue_id=?');
-    foreach (array_values(array_map('intval', is_array($data['ids'] ?? null) ? $data['ids'] : [])) as $k => $aid) { $u->execute([$k + 1, $aid, safe_int($data['issue_id'] ?? 0)]); }
+    foreach (array_slice(array_values(array_map('intval', is_array($data['ids'] ?? null) ? $data['ids'] : [])), 0, 2000) as $k => $aid) { $u->execute([$k + 1, $aid, safe_int($data['issue_id'] ?? 0)]); }
     return ['ok' => true];
 }
 
@@ -326,7 +335,7 @@ function press_ads_all(PDO $pdo): array
     $ads = array_map(static function ($r) { $r['id'] = (int) $r['id']; $r['rules_id'] = (int) $r['rules_id']; $r['periodical_id'] = (int) $r['periodical_id']; $r['data'] = json_decode((string) $r['data_json'], true) ?: []; unset($r['data_json']); return $r; },
         $pdo->query('SELECT * FROM press_ads ORDER BY updated_at DESC, id DESC')->fetchAll());
     $links = [];
-    foreach ($pdo->query("SELECT pl.item_id, pl.entity_type, pl.entity_id, CASE pl.entity_type WHEN 'person' THEN trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) ELSE i.title END AS name
+    foreach ($pdo->query("SELECT pl.item_id, pl.entity_type, pl.entity_id, CASE pl.entity_type WHEN 'person' THEN CASE WHEN p.id IS NULL THEN NULL ELSE trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) END ELSE i.title END AS name
         FROM periodical_links pl LEFT JOIN persons p ON pl.entity_type='person' AND p.id=pl.entity_id LEFT JOIN investigations i ON pl.entity_type='investigation' AND i.id=pl.entity_id WHERE pl.item_type='ad'") as $l) {
         if ($l['name'] !== null) { $links[(int) $l['item_id']][] = ['type' => $l['entity_type'], 'id' => (int) $l['entity_id'], 'name' => $l['name'] !== '' ? $l['name'] : 'Sans nom']; }
     }
@@ -367,7 +376,7 @@ function save_press_ad(PDO $pdo, array $data): array
     else { $pdo->prepare('INSERT INTO press_ads(title, kind, rules_id, periodical_id, journal, body, status, data_json) VALUES(?,?,?,?,?,?,?,?)')->execute($vals); $id = (int) $pdo->lastInsertId(); }
     $pdo->prepare("DELETE FROM periodical_links WHERE item_type='ad' AND item_id=?")->execute([$id]);
     $ins = $pdo->prepare("INSERT OR IGNORE INTO periodical_links(item_type, item_id, entity_type, entity_id) VALUES('ad',?,?,?)");
-    foreach (['person' => 'persons', 'investigation' => 'investigations'] as $entity => $key) { foreach (array_unique(array_filter(array_map('intval', is_array($data[$key] ?? null) ? $data[$key] : []))) as $eid) { $ins->execute([$id, $entity, $eid]); } }
+    foreach (['person' => 'persons', 'investigation' => 'investigations'] as $entity => $key) { foreach (array_slice(array_unique(array_filter(array_map('intval', is_array($data[$key] ?? null) ? $data[$key] : []))), 0, 500) as $eid) { $ins->execute([$id, $entity, $eid]); } }
     if (array_key_exists('label_ids', $data)) { set_label_links($pdo, ['entity_type' => 'press_ad', 'entity_id' => $id, 'label_ids' => is_array($data['label_ids']) ? $data['label_ids'] : []]); }
     log_change($pdo, 'meta', 0, 'update', 'Annonce enregistrée : ' . $title);
     return ['id' => $id];
@@ -376,8 +385,9 @@ function save_press_ad(PDO $pdo, array $data): array
 function delete_press_item(PDO $pdo, array $data): array
 {
     press_ads_ensure($pdo);
-    $id = safe_int($data['id'] ?? 0);
-    if (($data['what'] ?? '') === 'rules') { $pdo->prepare('DELETE FROM press_ad_rules WHERE id=?')->execute([$id]); $pdo->prepare('UPDATE press_ads SET rules_id=0 WHERE rules_id=?')->execute([$id]); return ['ok' => true]; }
+    $id = safe_int($data['id'] ?? 0); $what = (string) ($data['what'] ?? '');
+    if ($id <= 0 || !in_array($what, ['rules', 'ad'], true)) { throw new RuntimeException('Élément introuvable.'); }
+    if ($what === 'rules') { $pdo->prepare('DELETE FROM press_ad_rules WHERE id=?')->execute([$id]); $pdo->prepare('UPDATE press_ads SET rules_id=0 WHERE rules_id=?')->execute([$id]); return ['ok' => true]; }
     heritage_delete_media_links($pdo, 'press_ad', $id);
     $pdo->prepare("DELETE FROM label_links WHERE entity_type='press_ad' AND entity_id=?")->execute([$id]);
     $pdo->prepare("DELETE FROM periodical_links WHERE item_type='ad' AND item_id=?")->execute([$id]);

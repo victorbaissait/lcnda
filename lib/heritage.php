@@ -1692,6 +1692,9 @@ function offsite_copy_now(PDO $pdo, array $data): never
         try {
             if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('dossier introuvable (disque ou clé débranché ?)'); }
             if (!is_writable($dir)) { throw new RuntimeException('dossier non accessible en écriture'); }
+            // une généalogie autre que la principale range ses copies (et ses médias) dans son propre sous-dossier :
+            // deux généalogies sauvegardées sur la même clé ne s'effacent pas l'une l'autre
+            if (defined('GENEALOGY_ID') && GENEALOGY_ID !== '') { $dir .= '/genealogie-' . GENEALOGY_ID; if (!is_dir($dir) && !@mkdir($dir, 0775, true) && !is_dir($dir)) { throw new RuntimeException('impossible de créer le sous-dossier de cette généalogie'); } }
             $name = 'genealogie-backup-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '-hors-ordinateur.db';
             $pdo->exec('VACUUM main INTO ' . $pdo->quote($dir . '/' . $name));
             // On garde les 5 dernières copies de ce dossier

@@ -11820,7 +11820,7 @@ ${backupSectionHtml()}
         if(cal==='gregorian'||cal==='julian'){
             const d=parseNumericCalendarDate(text)||parseFrenchDateText(text);
             if(d){
-                const leap=cal==='julian'?d.year%4===0:(d.year%4===0&&(d.year%100!==0||d.year%400===0));
+                const leap=cal==='julian'||d.year<1583?d.year%4===0:(d.year%4===0&&(d.year%100!==0||d.year%400===0)); // avant 1582 : calendrier julien
                 const max=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31][d.month-1];
                 if(d.month<1||d.month>12)out.push(`Le mois ${d.month} n’existe pas (de 1 à 12).`);
                 else if(d.day<1||d.day>max)out.push(`Le ${d.day} ${['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][d.month-1]} ${d.year} n’existe pas (${max} jours ce mois-là).`);
