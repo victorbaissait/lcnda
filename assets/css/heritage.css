@@ -4289,3 +4289,6 @@ dialog.kn-play-dlg::backdrop{background:#000}
 /* ═════ fin du mode sombre automatique ═════ */
 .kn-fontpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:4px;max-height:46vh;overflow:auto;margin:8px 0;padding:2px}.kn-fontitem{text-align:left;padding:8px 10px;border:1px solid var(--line-color,#ccc);background:var(--card-bg,#fff);color:var(--ink);font-size:17px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kn-fontitem:hover{border-color:var(--blue)}.kn-fontitem.is-on{outline:2px solid var(--blue);outline-offset:-2px}
 .kn-fontprev{font-size:24px;margin:6px 0 10px;min-height:1.4em}
+/* 💾 Réglages enregistrés : la même barre partout */
+.h-pp-presets>strong:first-child,.h-bp-sets>strong:first-child{white-space:nowrap;font-size:13px;margin-right:2px}
+.h-bp-sets{padding:6px 10px;border:1.5px dashed var(--line-color,#bbb)}
