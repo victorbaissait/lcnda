@@ -3524,3 +3524,13 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-fp-kind{display:flex;align-items:center;gap:6px;border:1px solid #dfe2e8;border-radius:8px;padding:6px 8px;cursor:pointer}
 .h-fp-kind:has(input:checked){border-color:#2a7de1;background:#eef5ff}
 .h-fp-who{display:flex;gap:4px}.h-fp-who input{flex:1}
+/* 🔤 Signatures et sceaux */
+.h-sl-tabs{display:flex;gap:6px;margin-bottom:10px}.h-sl-tabs button{border:1px solid var(--line,#d0d4dc);background:var(--panel,#fff);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit}.h-sl-tabs button.active{background:var(--accent,#0066cc);color:#fff;border-color:transparent}
+.h-sl-src{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.h-sl-work{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+.h-sl-stage{position:relative;min-height:220px;background:var(--soft,#f2f3f6);border-radius:8px;padding:6px;display:flex;flex-direction:column;align-items:center}.h-sl-stage canvas{max-width:100%;cursor:crosshair;touch-action:none;display:block}
+.h-sl-crop{position:absolute;border:2px dashed #e0442a;background:rgba(224,68,42,.08);pointer-events:none}.h-sl-tip{margin:4px 0 0;font-size:.85em}
+.h-sl-side{display:flex;flex-direction:column;gap:8px}.h-sl-side label{display:flex;flex-direction:column;gap:3px}.h-sl-side .checkbox-line{flex-direction:row}.h-sl-side .h-fp-who button{white-space:nowrap}.h-sl-side .form-grid{gap:8px}
+.h-sl-prev{min-height:110px;border-radius:8px;border:1px solid var(--line,#d0d4dc);display:flex;align-items:center;justify-content:center;padding:6px;background-color:#fff;background-image:linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%),linear-gradient(45deg,#eee 25%,transparent 25%,transparent 75%,#eee 75%);background-size:16px 16px;background-position:0 0,8px 8px}.h-sl-prev canvas{max-width:100%;max-height:180px}
+.h-sl-sealprev{display:flex;align-items:center;justify-content:center;background:var(--soft,#f2f3f6);border-radius:8px;min-height:320px}.h-sl-sealprev svg{width:min(100%,420px);height:auto}
+@media (max-width:760px){.h-sl-work{grid-template-columns:1fr}}
