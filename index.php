@@ -1097,7 +1097,7 @@ header('X-Content-Type-Options: nosniff');
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
 <script src="assets/js/app.js?v=383" defer></script>
-<script src="assets/js/app-piece-archives.js?v=4" defer></script>
+<script src="assets/js/app-piece-archives.js?v=5" defer></script>
 <script src="assets/js/app-jeu.js?v=3" defer></script>
 <script src="assets/js/app-chronologie.js?v=3" defer></script>
 <script src="assets/js/app-comparaison.js?v=3" defer></script>
