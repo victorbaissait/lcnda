@@ -33,9 +33,19 @@
         revue: {ic: '📰', item: 'Numéro', items: 'Numéros', cont: 'Revue', conts: 'Revues', part: 'Article', parts: 'Articles', pages: 'Pages', none: 'Aucun article pour l’instant.'},
         livre: {ic: '📖', item: 'Livre', items: 'Livres', cont: 'Collection, série', conts: 'Collections, séries', part: 'Chapitre, passage', parts: 'Chapitres, passages', pages: 'Pages', none: 'Aucun chapitre ni passage noté.'},
         doc: {ic: '🎬', item: 'Documentaire', items: 'Documentaires, films', cont: 'Série, émission', conts: 'Séries, émissions', part: 'Moment', parts: 'Moments', pages: 'Minutage', none: 'Aucun moment noté.'},
+        podcast: {ic: '🎙️', item: 'Épisode', items: 'Podcasts (épisodes)', cont: 'Podcast, émission de radio', conts: 'Podcasts, émissions', part: 'Moment', parts: 'Moments', pages: 'Minutage', none: 'Aucun moment noté.'},
         '': {ic: '📚', item: 'Élément', items: 'Numéros, livres, films', cont: 'Revue, collection, série', conts: 'Revues, collections, séries', part: 'Contenu', parts: 'Articles, chapitres, moments', pages: 'Pages, minutage'},
     };
     const famOf = r => !r ? 'revue' : r.issue_id !== undefined ? famOf(issueOf(r)) : (r.family || 'revue');
+    /* ─── Les types : les quatre de départ (revue, livre, documentaire, podcast) et ceux qu'on crée, qui se comportent comme l'un d'eux ─── */
+    const BASES = ['revue', 'livre', 'doc', 'podcast'];
+    const typeCfg = k => (D?.types || []).find(t => t.key === k) || {};
+    /** le comportement d'un type : un type à soi fait comme sa « base » */
+    const baseOf = k => BASES.includes(k) ? k : (BASES.includes(typeCfg(k).base) ? typeCfg(k).base : 'livre');
+    const timed = k => ['doc', 'podcast'].includes(baseOf(k)); // contenu minuté (moments)
+    /** les mots d'un type */
+    const Wf = k => { if (W[k]) return W[k]; const t = typeCfg(k), b = W[baseOf(k)]; return {...b, ic: t.icon || '📁', item: t.item || 'Élément', items: t.name || 'Mon type'}; };
+    const allFams = () => [...BASES, ...(D?.types || []).filter(t => !BASES.includes(t.key)).map(t => t.key)];
 
     /* ─── Minutage : « 52:34 », « 1:02:10 », « 52'34 », « 52 min 34 » ─── */
     function tcSec(t) {
@@ -62,7 +72,7 @@
     const I = r => r.issue_id !== undefined ? (issueOf(r) || {}) : r;
     const SORTS = {
         periodical: ['Revue, collection, série', r => (pOf(r)?.title || '').toLowerCase()],
-        family: ['Revue / livre / documentaire', r => ['revue', 'livre', 'doc'].indexOf(famOf(r))],
+        family: ['Revue / livre / documentaire / podcast', r => allFams().indexOf(famOf(r))],
         kind: ['Sorte', r => D.kinds[pOf(r)?.kind] || ''],
         date: ['Date', r => I(r).sort_date || '0000'],
         date_desc: ['Date (récent d’abord)', r => I(r).sort_date || '0000', true],
@@ -78,11 +88,11 @@
     };
     const pOf = r => D.periodicals.find(p => p.id === (r.periodical_id ?? issueOf(r)?.periodical_id));
     const issueOf = a => D.issues.find(i => i.id === a.issue_id);
-    const partsOf = i => { const list = D.articles.filter(a => a.issue_id === i.id); return famOf(i) === 'doc' ? list.sort((a, b) => (tcSec(a.pages) ?? 1e9) - (tcSec(b.pages) ?? 1e9) || a.position - b.position) : list; };
+    const partsOf = i => { const list = D.articles.filter(a => a.issue_id === i.id); return timed(famOf(i)) ? list.sort((a, b) => (tcSec(a.pages) ?? 1e9) - (tcSec(b.pages) ?? 1e9) || a.position - b.position) : list; };
     const cmp = keys => (a, b) => { for (const k of keys) { const s = SORTS[k]; if (!s) continue; const x = s[1](a), y = s[1](b); if (x < y) return s[2] ? 1 : -1; if (x > y) return s[2] ? -1 : 1; } return 0; };
 
     /* ─── Filtres ─── */
-    const prefs = () => { const p = {fam: '', view: 'issues', q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', sort: ['family', 'periodical', 'date'], ...ls(PREFS, {})}; if (!Array.isArray(p.sort)) p.sort = ['family', 'periodical', 'date']; return p; };
+    const prefs = () => { const p = {fam: '', view: 'issues', q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: '', dispBy: {}, groupBy: {}, sort: ['family', 'periodical', 'date'], ...ls(PREFS, {})}; if (!p.dispBy || typeof p.dispBy !== 'object') p.dispBy = {}; if (!p.groupBy || typeof p.groupBy !== 'object') p.groupBy = {}; if (!Array.isArray(p.sort)) p.sort = ['family', 'periodical', 'date']; return p; };
     const textOfIssue = i => [i.number, i.title, i.date_text, pOf(i)?.title, ...Object.values(i.data || {}), ...(i.links || []).map(l => l.name), ...(i.labels || []).map(l => l.name),
         ...D.articles.filter(a => a.issue_id === i.id).flatMap(a => [a.title, a.authors, a.rubric, ...Object.values(a.data || {})])].join(' ').toLowerCase();
     const textOfArticle = a => [a.title, a.authors, a.pages, a.rubric, ...Object.values(a.data || {}), ...(a.links || []).map(l => l.name), ...(a.labels || []).map(l => l.name), pOf(a)?.title, issueOf(a)?.number, issueOf(a)?.title].join(' ').toLowerCase();
@@ -92,6 +102,7 @@
         if (f.q && !f.q.toLowerCase().split(/\s+/).filter(Boolean).every(w => (isArticle ? textOfArticle(r) : textOfIssue(r)).includes(w))) return false;
         if (f.periodical && String(per?.id) !== f.periodical) return false;
         if (f.kind && per?.kind !== f.kind) return false;
+        if (f.cat && (iss?.data?.category || '') !== (f.cat === '__none' ? '' : f.cat)) return false;
         if (f.status && (iss?.status || '') !== (f.status === '__none' ? '' : f.status)) return false; // « __none » : pas précisé
         const lab = [...(r.labels || []), ...(isArticle ? [] : D.articles.filter(a => a.issue_id === r.id).flatMap(a => a.labels || []))];
         if (f.label && !lab.some(l => String(l.id) === f.label)) return false;
@@ -112,41 +123,47 @@
     const linkChips = ls0 => (ls0 || []).map(l => l.type === 'person' ? `<button type="button" class="link-button" data-pr-person="${l.id}">👤 ${esc(l.name)}</button>`
         : `<button type="button" class="link-button" data-pr-inv="${l.type === 'investigation' ? l.id : l.inv}">${LINK_IC[l.type]} ${esc(l.name)}</button>`).join(' ');
     const thumbOf = (r, roles = ['cover']) => (r.media || []).find(x => roles.includes(x.role) && x.media_type === 'image') || (r.media || []).find(x => x.media_type === 'image' || !x.media_type);
-    const cover = i => { const m = thumbOf(i); return m ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : `<span>${W[famOf(i)].ic}</span>`; };
+    const cover = i => { const m = thumbOf(i); return m ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : `<span>${Wf(famOf(i)).ic}</span>`; };
     const videoOf = i => (i.media || []).find(m => m.role === 'video') || (i.media || []).find(m => m.media_type === 'video');
-    const issueName = i => { const p = pOf(i), f = famOf(i);
+    const audioOf = i => (i.media || []).find(m => m.role === 'audio') || (i.media || []).find(m => m.media_type === 'audio');
+    const issueName = i => { const p = pOf(i), f = timed(famOf(i)) ? 'doc' : baseOf(famOf(i));
         if (f === 'revue') return `${p?.title || 'Revue'}${i.number ? ' n° ' + i.number : ''}${i.data?.special ? ' (hors-série)' : ''}`;
         return `${i.title || 'Sans titre'}${p ? ` (${p.title}${i.number ? (f === 'doc' ? ', ép. ' : ', n° ') + i.number : ''})` : i.number ? ` (${f === 'doc' ? 'ép. ' : 'tome '}${i.number})` : ''}`; };
 
+    const dispOf = f => f.dispBy[f.fam || 'all'] || (f.fam ? typeCfg(f.fam).view : '') || 'list';
+    const groupOf = f => f.groupBy[f.fam || 'all'] ?? (f.fam ? typeCfg(f.fam).group : '') ?? '';
     ext.lists.periodicals = async token => {
         try { D = await api('periodicals'); } catch (error) { if (token === S().workspaceToken) A().$('#workspace').innerHTML = `<section class="page">${A().empty(error.message)}</section>`; return; }
         if (token !== S().workspaceToken) return;
         draw();
     };
     function draw() {
-        const f = prefs(), ws = A().$('#workspace'), w = W[f.fam] || W[''];
+        const f = prefs(), ws = A().$('#workspace'), w = f.fam ? Wf(f.fam) : W[''];
         const issues = D.issues.filter(i => keep(i, f, false)).sort(cmp(f.sort));
         const articles = D.articles.filter(a => keep(a, f, true)).sort(cmp(f.sort));
         const wanted = D.issues.filter(i => ['wanted', 'ordered'].includes(i.status) && keep({...i}, {...f, status: ''}, false)).sort(cmp(['priority', ...f.sort]));
         const conts = D.periodicals.filter(p => !f.fam || (p.family || 'revue') === f.fam);
+        const famName = k => k === 'revue' ? '📰 Revues' : k === 'livre' ? '📖 Livres' : k === 'doc' ? '🎬 Documentaires' : k === 'podcast' ? '🎙️ Podcasts' : `${Wf(k).ic} ${Wf(k).items}`;
         const labels = [...new Map([...D.periodicals, ...D.issues, ...D.articles].flatMap(r => r.labels || []).map(l => [l.id, l])).values()].sort((a, b) => a.name.localeCompare(b.name));
         const invs = [...new Map([...D.issues, ...D.articles].flatMap(r => (r.links || []).filter(l => l.type !== 'person')).map(l => l.type === 'investigation' ? [l.id, l] : [l.inv, {id: l.inv, name: l.name.split(' — ').slice(1).join(' — ') || l.name}])).values()];
         const opt = (v, l, cur) => `<option value="${esc(v)}" ${String(cur) === String(v) ? 'selected' : ''}>${esc(l)}</option>`;
         const sortSel = k => `<select data-pr-sort="${k}">${opt('', '—', f.sort[k] || '')}${Object.entries(SORTS).map(([v, [l]]) => opt(v, l, f.sort[k] || '')).join('')}</select>`;
         const views = [['issues', `${w.ic} ${w.items} (${issues.length})`], ['articles', `📄 ${w.parts} (${articles.length})`], ['periodicals', `🗂️ ${w.conts} (${conts.length})`], ['wanted', `🛒 À acheter (${wanted.length})`]];
-        const fams = [['', '📚 Tout'], ['revue', '📰 Revues'], ['livre', '📖 Livres'], ['doc', '🎬 Documentaires']];
-        const kinds = Object.entries(D.kinds).filter(([k]) => !f.fam || (D.family_kinds?.[f.fam] || []).includes(k));
+        const fams = [['', '📚 Tout'], ...allFams().map(k => [k, famName(k)])];
+        const kinds = Object.entries(D.kinds).filter(([k]) => !f.fam || (D.family_kinds?.[baseOf(f.fam)] || []).includes(k));
         const total = wanted.reduce((s, i) => s + (money(i.data?.cover_price) || 0), 0);
-        const newBtns = (f.fam ? [f.fam] : ['revue', 'livre', 'doc']).map((k, n) => `<button type="button" class="button ${n ? 'secondary' : ''}" data-pr-new="issue" data-fam="${k}">＋ ${W[k].item}</button>`).join('');
+        const newBtns = (f.fam ? [f.fam] : allFams()).map((k, n) => `<button type="button" class="button ${n ? 'secondary' : ''}" data-pr-new="issue" data-fam="${k}">＋ ${esc(Wf(k).item)}</button>`).join('');
         ws.innerHTML = `<section class="page h-pr">
             <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📚 Revues, livres et documentaires</h2><p>Ce que tu as lu, vu, ce que tu veux acheter ; chaque article, chapitre ou moment, et qui ou quoi y est cité.</p></div>
-                <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? W[f.fam].cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⬇️ CSV</button></div></header>
+                <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⬇️ CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
             <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${k}">${l}</button>`).join('')}</div>
             <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${k}">${esc(l)}</button>`).join('')}</div>
+            ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><button type="button" class="${dispOf(f) === 'list' ? 'is-on' : ''}" data-pr-disp="list">📋 Liste</button><button type="button" class="${dispOf(f) === 'cards' ? 'is-on' : ''}" data-pr-disp="cards">🗂️ Fiches</button><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
             <div class="h-pr-filters">
                 <input type="search" data-pr-f="q" value="${esc(f.q)}" placeholder="Chercher (titre, auteur, lieu, nom cité, ce qu’on voit, notes…)">
                 <select data-pr-f="periodical">${opt('', 'Toutes (revues, collections, séries)', f.periodical)}${conts.map(p => opt(p.id, p.title, f.periodical)).join('')}</select>
                 <select data-pr-f="kind">${opt('', 'Toutes les sortes', f.kind)}${kinds.map(([v, l]) => opt(v, l, f.kind)).join('')}</select>
+                <select data-pr-f="cat">${opt('', 'Toutes les catégories', f.cat)}${categories().map(c => opt(c, c, f.cat)).join('')}${opt('__none', 'Sans catégorie', f.cat)}</select>
                 <select data-pr-f="status">${opt('', 'Où j’en suis : tout', f.status)}${Object.entries(D.statuses).map(([v, l]) => opt(v || '__none', l, f.status)).join('')}</select>
                 <select data-pr-f="label">${opt('', 'Toutes les étiquettes', f.label)}${labels.map(l => opt(l.id, l.name, f.label)).join('')}</select>
                 <select data-pr-f="inv">${opt('', 'Toutes les enquêtes', f.inv)}${invs.map(l => opt(l.id, l.name, f.inv)).join('')}</select>
@@ -155,43 +172,66 @@
                 <span class="h-pr-sorts">Trier par ${sortSel(0)} puis ${sortSel(1)} puis ${sortSel(2)}</span>
                 <button type="button" class="link-button" data-pr-reset>Tout effacer</button>
             </div>
-            <div data-pr-body>${f.view === 'articles' ? articlesTable(articles) : f.view === 'periodicals' ? periodicalCards(conts) : f.view === 'wanted' ? `<p class="h-pr-total">${wanted.length} à acheter ou commandé${wanted.length > 1 ? 's' : ''}${total ? ` · environ <strong>${esc(euro(total))}</strong> au prix affiché` : ''}</p>${issuesTable(wanted, true)}` : issuesTable(issues)}</div>
+            <div data-pr-body>${f.view === 'articles' ? articlesTable(articles) : f.view === 'periodicals' ? periodicalCards(conts) : f.view === 'wanted' ? `<p class="h-pr-total">${wanted.length} à acheter ou commandé${wanted.length > 1 ? 's' : ''}${total ? ` · environ <strong>${esc(euro(total))}</strong> au prix affiché` : ''}</p>${issuesShown(wanted, f, true)}` : issuesShown(issues, f)}</div>
         </section>`;
         bind(ws, {issues, articles, wanted});
+    }
+    /** les éléments en liste ou en fiches, groupés par catégorie si on veut */
+    function issuesShown(rows, f, buy = false) {
+        const one = list => dispOf(f) === 'cards' ? issueCards(list) : issuesTable(list, buy);
+        if (groupOf(f) !== 'category' || !rows.length) return one(rows);
+        const cats = [...new Set(rows.map(i => i.data?.category || ''))].sort((a, b) => !a ? 1 : !b ? -1 : a.localeCompare(b, 'fr'));
+        return cats.map(c => `<section class="h-pr-group"><h3>🏷 ${esc(c || 'Sans catégorie')} <small>(${rows.filter(i => (i.data?.category || '') === c).length})</small></h3>${one(rows.filter(i => (i.data?.category || '') === c))}</section>`).join('');
+    }
+    /** une fiche par élément, comme dans « Mes fiches » : couverture, titre, puis les champs montrés pour ce type */
+    function issueCards(rows) {
+        if (!rows.length) return A().empty(D.issues.length ? 'Rien ne correspond.' : 'Commence par « ＋ Numéro », « ＋ Livre », « ＋ Documentaire » ou « ＋ Épisode ».');
+        const val = (i, f, bf) => { if (['title', 'periodical_id', 'summary', 'notes'].includes(f.k)) return ''; const c = FIELD_CAT[f.k] || {}, v = c.data || f.k.startsWith('cf_') ? i.data?.[f.k] : i[f.k];
+            if (f.k === 'status') return ''; // déjà en pastille if (f.k === 'rating') return stars(v); if (f.k === 'priority') return '🔥'.repeat(Number(v) || 0); if (c.type === 'check' || f.type === 'check') return v ? fieldLabel(f, bf) : '';
+            return v ? (['number', 'date_text', 'creators', 'host', 'channel', 'publisher', 'category', 'duration'].includes(f.k) ? String(v) : `${fieldLabel(f, bf)} : ${v}`) : ''; };
+        return `<div class="h-fi-cards h-pr-fcards">${rows.map(i => { const fm = famOf(i), bf = baseOf(fm), p = pOf(i), m = thumbOf(i), title = bf === 'revue' ? `${p?.title || ''}${i.number ? ' n° ' + i.number : ''}` : i.title;
+            const lines = fieldsFor(fm).filter(f => f.show).map(f => val(i, f, bf)).filter(Boolean).slice(0, 6);
+            return `<article class="h-fi-card h-pr-fcard" data-pr-issue="${i.id}" style="--fi-c:${esc(typeCfg(fm).color || ({revue: '#0066cc', livre: '#7b3f8c', doc: '#c0392b', podcast: '#16a085'}[bf]))}">
+                <div class="h-fi-cover ${m ? '' : 'is-icon'}">${m ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy">` : Wf(fm).ic}</div>
+                <strong>${esc(title || 'Sans titre')}</strong>${bf === 'revue' && i.title ? `<small>${esc(i.title)}</small>` : p && bf !== 'revue' ? `<small>${esc(p.title)}</small>` : ''}
+                ${lines.map(l => `<small>${esc(l)}</small>`).join('')}<small class="h-pr-fchips">${statusChip(i.status)}${labelChips(i.labels)}</small></article>`; }).join('')}</div>`;
     }
     function issuesTable(rows, buy = false) {
         if (!rows.length) return A().empty(D.issues.length ? 'Rien ne correspond.' : 'Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire ».');
         return `<div class="data-table-wrap"><table class="data-table h-pr-table"><thead><tr><th></th><th>Titre</th><th>Auteur, réalisation</th><th>N°, tome, épisode</th><th>Date</th><th>Où j’en suis</th>${buy ? '<th>Priorité</th><th>Prix</th><th>Où l’acheter</th>' : '<th>Contenu</th><th>Rattaché à</th><th>Étiquettes</th>'}</tr></thead><tbody>
-            ${rows.map(i => { const p = pOf(i), fm = famOf(i), n = D.articles.filter(a => a.issue_id === i.id).length, sub = fm === 'revue' ? i.title : [i.data?.subtitle, p?.title].filter(Boolean).join(' · ');
-                return `<tr data-pr-issue="${i.id}"><td class="h-pr-cover">${cover(i)}</td><td><strong>${W[fm].ic} ${esc(fm === 'revue' ? (p?.title || '') : i.title)}</strong>${sub ? `<small>${esc(sub)}</small>` : ''}${i.data?.rating ? `<small class="h-pr-stars">${stars(i.data.rating)}</small>` : ''}${i.data?.read ? ` <small>✓ ${fm === 'doc' ? 'vu' : 'lu'}</small>` : ''}${videoOf(i) ? ' <small title="Le film est dans l’application">🎞️</small>' : ''}</td>
-                <td>${esc(i.data?.creators || '')}${fm === 'doc' && i.data?.channel ? `<small>${esc(i.data.channel)}</small>` : ''}</td><td>${esc(i.number)}${i.data?.special ? ' <small>HS</small>' : ''}</td><td>${esc(i.date_text)}${i.data?.duration ? `<small>${esc(i.data.duration)}</small>` : ''}</td><td>${statusChip(i.status)}</td>
-                ${buy ? `<td>${'🔥'.repeat(Number(i.data?.priority) || 0) || '—'}</td><td>${esc(i.data?.cover_price || '')}</td><td>${i.data?.buy_url ? `<a href="${esc(/^https?:\/\//i.test(i.data.buy_url) ? i.data.buy_url : '#')}" target="_blank" rel="noopener">acheter ↗</a>` : esc(p?.data?.where_buy || '')}</td>` : `<td>${n ? `${n} ${esc(W[fm].parts.toLowerCase())}` : ''}</td><td>${linkChips(i.links)}</td><td>${labelChips(i.labels)}</td>`}</tr>`; }).join('')}
+            ${rows.map(i => { const p = pOf(i), fm = famOf(i), bf = baseOf(fm), n = D.articles.filter(a => a.issue_id === i.id).length, sub = bf === 'revue' ? i.title : [i.data?.subtitle, p?.title].filter(Boolean).join(' · ');
+                return `<tr data-pr-issue="${i.id}"><td class="h-pr-cover">${cover(i)}</td><td><strong>${Wf(fm).ic} ${esc(bf === 'revue' ? (p?.title || '') : i.title)}</strong>${sub ? `<small>${esc(sub)}</small>` : ''}${i.data?.rating ? `<small class="h-pr-stars">${stars(i.data.rating)}</small>` : ''}${i.data?.read ? ` <small>✓ ${bf === 'doc' ? 'vu' : bf === 'podcast' ? 'écouté' : 'lu'}</small>` : ''}${videoOf(i) ? ' <small title="Le film est dans l’application">🎞️</small>' : ''}${audioOf(i) ? ' <small title="L’épisode est dans l’application">🎧</small>' : ''}${i.data?.category ? `<small class="h-pr-cat">🏷 ${esc(i.data.category)}</small>` : ''}</td>
+                <td>${esc(i.data?.creators || i.data?.host || '')}${timed(fm) && i.data?.channel ? `<small>${esc(i.data.channel)}</small>` : ''}</td><td>${esc(i.number)}${i.data?.special ? ' <small>HS</small>' : ''}</td><td>${esc(i.date_text)}${i.data?.duration ? `<small>${esc(i.data.duration)}</small>` : ''}</td><td>${statusChip(i.status)}</td>
+                ${buy ? `<td>${'🔥'.repeat(Number(i.data?.priority) || 0) || '—'}</td><td>${esc(i.data?.cover_price || '')}</td><td>${i.data?.buy_url ? `<a href="${esc(/^https?:\/\//i.test(i.data.buy_url) ? i.data.buy_url : '#')}" target="_blank" rel="noopener">acheter ↗</a>` : esc(p?.data?.where_buy || '')}</td>` : `<td>${n ? `${n} ${esc(Wf(fm).parts.toLowerCase())}` : ''}</td><td>${linkChips(i.links)}</td><td>${labelChips(i.labels)}</td>`}</tr>`; }).join('')}
         </tbody></table></div>`;
     }
     function articlesTable(rows) {
         if (!rows.length) return A().empty('Rien ne correspond. Les articles, chapitres et moments s’ajoutent dans la fiche d’un numéro, d’un livre ou d’un documentaire.');
         return `<div class="data-table-wrap"><table class="data-table h-pr-table"><thead><tr><th></th><th>Titre</th><th>Auteurs, qui parle</th><th>Dans</th><th>Date</th><th>Pages, minutage</th><th>Sorte</th><th>Rattaché à</th><th>Étiquettes</th></tr></thead><tbody>
             ${rows.map(a => { const i = issueOf(a), fm = famOf(a), th = thumbOf(a, ['']), txt = a.data?.what_seen || a.data?.summary || '';
-                return `<tr data-pr-article="${a.id}"><td class="h-pr-cover">${th ? `<img src="media/${encodeURIComponent(th.thumbnail || th.filename)}" alt="" loading="lazy">` : `<span>${W[fm].ic}</span>`}</td><td><strong>${esc(a.title)}</strong>${txt ? `<small>${esc(String(txt).slice(0, 140))}${String(txt).length > 140 ? '…' : ''}</small>` : ''}${a.data?.rating ? `<small class="h-pr-stars">${stars(a.data.rating)}</small>` : ''}</td>
-                <td>${esc(a.authors)}</td><td>${esc(i ? issueName(i) : '')}</td><td>${esc(i?.date_text || '')}</td><td>${fm === 'doc' && a.pages ? `⏱ ${esc(a.pages)}` : esc(a.pages)}</td><td>${esc([a.rubric, D.article_kinds[a.kind]].filter(Boolean).join(' · '))}</td><td>${linkChips(a.links)}</td><td>${labelChips(a.labels)}</td></tr>`; }).join('')}
+                return `<tr data-pr-article="${a.id}"><td class="h-pr-cover">${th ? `<img src="media/${encodeURIComponent(th.thumbnail || th.filename)}" alt="" loading="lazy">` : `<span>${Wf(fm).ic}</span>`}</td><td><strong>${esc(a.title)}</strong>${txt ? `<small>${esc(String(txt).slice(0, 140))}${String(txt).length > 140 ? '…' : ''}</small>` : ''}${a.data?.rating ? `<small class="h-pr-stars">${stars(a.data.rating)}</small>` : ''}</td>
+                <td>${esc(a.authors)}</td><td>${esc(i ? issueName(i) : '')}</td><td>${esc(i?.date_text || '')}</td><td>${timed(fm) && a.pages ? `⏱ ${esc(a.pages)}` : esc(a.pages)}</td><td>${esc([a.rubric, D.article_kinds[a.kind]].filter(Boolean).join(' · '))}</td><td>${linkChips(a.links)}</td><td>${labelChips(a.labels)}</td></tr>`; }).join('')}
         </tbody></table></div>`;
     }
     function periodicalCards(conts) {
         if (!conts.length) return A().empty('Rien ici : « ＋ Revue, collection, série ». (Un livre ou un documentaire n’a pas besoin d’être dans une collection ou une série.)');
         return `<div class="h-pr-cards">${conts.map(p => { const fm = p.family || 'revue', is = D.issues.filter(i => i.periodical_id === p.id), own = is.filter(i => ['owned', 'subscribed', 'digital'].includes(i.status)).length, want = is.filter(i => ['wanted', 'ordered'].includes(i.status)).length, last = [...is].sort(cmp(['date_desc']))[0];
-            return `<article class="h-pr-card" data-pr-periodical="${p.id}"><header><strong>${W[fm].ic} ${esc(p.title)}</strong><small>${esc(D.kinds[p.kind] || '')}${p.publisher ? ' · ' + esc(p.publisher) : ''}</small></header>
-                <p>${is.length} ${esc(W[fm].items.toLowerCase())} · ${own} à moi · ${want} à acheter${p.data?.subscribed ? ` · 📬 abonné${p.data.subscription_end ? ' jusqu’au ' + esc(p.data.subscription_end) : ''}` : ''}</p>
+            return `<article class="h-pr-card" data-pr-periodical="${p.id}"><header><strong>${Wf(fm).ic} ${esc(p.title)}</strong><small>${esc(D.kinds[p.kind] || '')}${p.publisher ? ' · ' + esc(p.publisher) : ''}</small></header>
+                <p>${is.length} ${esc(Wf(fm).items.toLowerCase())} · ${own} à moi · ${want} à acheter${p.data?.subscribed ? ` · 📬 abonné${p.data.subscription_end ? ' jusqu’au ' + esc(p.data.subscription_end) : ''}` : ''}</p>
                 ${last ? `<small class="muted">Dernier : ${esc(issueName(last))} ${esc(last.date_text || '')}</small>` : ''}${labelChips(p.labels)}
-                <div class="page-actions compact"><button type="button" class="button small secondary" data-pr-only="${p.id}">Voir tout</button><button type="button" class="button small secondary" data-pr-addissue="${p.id}">＋ ${esc(W[fm].item)}</button></div></article>`; }).join('')}</div>`;
+                <div class="page-actions compact"><button type="button" class="button small secondary" data-pr-only="${p.id}">Voir tout</button><button type="button" class="button small secondary" data-pr-addissue="${p.id}">＋ ${esc(Wf(fm).item)}</button></div></article>`; }).join('')}</div>`;
     }
     function bind(ws, rows) {
         const save = patch => { lsSet(PREFS, {...prefs(), ...patch}); draw(); };
         ws.querySelectorAll('[data-pr-fam]').forEach(b => b.addEventListener('click', () => save({fam: b.dataset.prFam, periodical: '', kind: ''})));
         ws.querySelectorAll('[data-pr-view]').forEach(b => b.addEventListener('click', () => save({view: b.dataset.prView})));
+        ws.querySelectorAll('[data-pr-disp]').forEach(b => b.addEventListener('click', () => { const p = prefs(); save({dispBy: {...p.dispBy, [p.fam || 'all']: b.dataset.prDisp}}); }));
+        ws.querySelector('[data-pr-group]')?.addEventListener('change', e => { const p = prefs(); save({groupBy: {...p.groupBy, [p.fam || 'all']: e.target.checked ? 'category' : ''}}); });
+        ws.querySelector('[data-pr-types]')?.addEventListener('click', () => typesDialog());
         let t = 0;
         ws.querySelectorAll('[data-pr-f]').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { clearTimeout(t); t = setTimeout(() => { const pos = el.selectionStart; save({[el.dataset.prF]: el.value}); const again = A().$(`[data-pr-f="${el.dataset.prF}"]`); if (again && el.tagName !== 'SELECT') { again.focus(); try { again.setSelectionRange(pos, pos); } catch (_) {} } }, el.tagName === 'SELECT' ? 0 : 300); }));
         ws.querySelectorAll('[data-pr-sort]').forEach(el => el.addEventListener('change', () => { const s = [...prefs().sort]; s[Number(el.dataset.prSort)] = el.value; save({sort: s.filter((v, k) => v || k < 3)}); }));
-        ws.querySelector('[data-pr-reset]').addEventListener('click', () => save({q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: ''}));
+        ws.querySelector('[data-pr-reset]').addEventListener('click', () => save({q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: ''}));
         ws.querySelectorAll('[data-pr-new]').forEach(b => b.addEventListener('click', () => b.dataset.prNew === 'periodical' ? periodicalDialog(null, prefs().fam || 'revue') : issueDialog(null, Number(prefs().periodical) || 0, b.dataset.fam)));
         ws.querySelectorAll('[data-pr-only]').forEach(b => b.addEventListener('click', () => save({view: 'issues', periodical: b.dataset.prOnly})));
         ws.querySelectorAll('[data-pr-addissue]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); issueDialog(null, Number(b.dataset.prAddissue)); }));
@@ -215,9 +255,9 @@
         const q = v => { let t = String(v ?? ''); if (/^[=+\-@\t\r]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; }; // pas de formule dans un tableur
         let head, body;
         if (view === 'articles') { head = ['Famille', 'Titre', 'Auteurs, qui parle', 'Dans', 'N°', 'Date', 'Pages, minutage', 'Rubrique', 'Sorte', 'Ce qu’on voit', 'Résumé', 'Ce qui est dit, citation', 'Lieux', 'Période', 'Noms cités', 'Rattaché à', 'Étiquettes'];
-            body = rows.articles.map(a => { const i = issueOf(a); return [D.families?.[famOf(a)], a.title, a.authors, i ? issueName(i) : '', i?.number, i?.date_text, a.pages, a.rubric, D.article_kinds[a.kind], a.data?.what_seen, a.data?.summary, a.data?.transcript || a.data?.quote, a.data?.places, a.data?.period, a.data?.surnames, (a.links || []).map(l => l.name).join(', '), (a.labels || []).map(l => l.name).join(', ')]; }); }
+            body = rows.articles.map(a => { const i = issueOf(a); return [D.families?.[famOf(a)] || Wf(famOf(a)).items, a.title, a.authors, i ? issueName(i) : '', i?.number, i?.date_text, a.pages, a.rubric, D.article_kinds[a.kind], a.data?.what_seen, a.data?.summary, a.data?.transcript || a.data?.quote, a.data?.places, a.data?.period, a.data?.surnames, (a.links || []).map(l => l.name).join(', '), (a.labels || []).map(l => l.name).join(', ')]; }); }
         else { const list = view === 'wanted' ? rows.wanted : rows.issues; head = ['Famille', 'Revue, collection, série', 'Titre', 'Auteur, réalisation', 'Éditeur, chaîne', 'N°', 'Hors-série', 'Date', 'Durée', 'ISBN', 'Où j’en suis', 'Priorité', 'Prix', 'Prix payé', 'Rangé où', 'Contenu', 'Rattaché à', 'Étiquettes', 'Notes'];
-            body = list.map(i => [D.families?.[famOf(i)], pOf(i)?.title, i.title, i.data?.creators, i.data?.publisher || i.data?.channel, i.number, i.data?.special ? 'oui' : '', i.date_text, i.data?.duration, i.data?.isbn, D.statuses[i.status || ''], i.data?.priority, i.data?.cover_price, i.data?.price_paid, i.data?.storage, partsOf(i).map(a => (famOf(i) === 'doc' && a.pages ? a.pages + ' ' : '') + a.title).join(' | '), (i.links || []).map(l => l.name).join(', '), (i.labels || []).map(l => l.name).join(', '), i.data?.notes]); }
+            body = list.map(i => [D.families?.[famOf(i)] || Wf(famOf(i)).items, pOf(i)?.title, i.title, i.data?.creators, i.data?.publisher || i.data?.channel, i.number, i.data?.special ? 'oui' : '', i.date_text, i.data?.duration, i.data?.isbn, D.statuses[i.status || ''], i.data?.priority, i.data?.cover_price, i.data?.price_paid, i.data?.storage, partsOf(i).map(a => (timed(famOf(i)) && a.pages ? a.pages + ' ' : '') + a.title).join(' | '), (i.links || []).map(l => l.name).join(', '), (i.labels || []).map(l => l.name).join(', '), i.data?.notes]); }
         const text = '﻿' + [head, ...body].map(r => r.map(q).join(';')).join('\r\n');
         if (ext.downloadText) ext.downloadText(`bibliotheque-${view}.csv`, text, 'text/csv;charset=utf-8'); else { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], {type: 'text/csv'})); a.download = `bibliotheque-${view}.csv`; a.click(); }
     }
@@ -263,13 +303,13 @@
 
     /* ─── Une revue, une collection, une série ─── */
     function periodicalDialog(p, fam0 = 'revue') {
-        const d = p?.data || {}, fam = p?.family || fam0, w = W[fam];
-        const kinds = Object.entries(D.kinds).filter(([k]) => (D.family_kinds?.[fam] || Object.keys(D.kinds)).includes(k));
-        ext.openDialog({eyebrow: w.cont.toUpperCase(), title: p ? p.title : `Nouvelle ${fam === 'revue' ? 'revue' : fam === 'livre' ? 'collection ou série' : 'série ou émission'}`, wide: true, labels: ['periodical_periodical', p?.labels || []],
-            body: `<div class="form-grid">${field('family', 'Famille', fam, {type: 'select', list: Object.entries(D.families || {revue: 'Revues'})})}${field('kind', 'Sorte', p?.kind || kinds[0]?.[0], {type: 'select', list: kinds})}
-                ${field('title', 'Nom', p?.title || '', {span: true, ph: fam === 'revue' ? 'Revue française de généalogie, bulletin du cercle…' : fam === 'livre' ? 'Que sais-je ?, Les Rougon-Macquart…' : 'Secrets d’histoire, Apocalypse, Retour aux sources…'})}
-                ${field('publisher', fam === 'doc' ? 'Chaîne, producteur' : 'Éditeur', p?.publisher || '')}${field('website', 'Site internet', d.website, {ph: 'https://'})}
-                ${fam === 'revue' ? `${field('association', 'Association, cercle', d.association)}${field('issn', 'ISSN', d.issn)}${field('frequency', 'Parution', d.frequency, {ph: 'mensuelle, trimestrielle…'})}
+        const d = p?.data || {}, fam = p?.family || fam0, w = Wf(fam), bf = baseOf(fam);
+        const kinds = Object.entries(D.kinds).filter(([k]) => (D.family_kinds?.[bf] || Object.keys(D.kinds)).includes(k));
+        ext.openDialog({eyebrow: w.cont.toUpperCase(), title: p ? p.title : `Nouvelle ${bf === 'revue' ? 'revue' : bf === 'livre' ? 'collection ou série' : bf === 'podcast' ? 'émission (podcast, radio)' : 'série ou émission'}`, wide: true, labels: ['periodical_periodical', p?.labels || []],
+            body: `<div class="form-grid">${field('family', 'Type', fam, {type: 'select', list: allFams().map(k => [k, D.families?.[k] || Wf(k).items])})}${field('kind', 'Sorte', p?.kind || kinds[0]?.[0], {type: 'select', list: kinds})}
+                ${field('title', 'Nom', p?.title || '', {span: true, ph: bf === 'revue' ? 'Revue française de généalogie, bulletin du cercle…' : bf === 'livre' ? 'Que sais-je ?, Les Rougon-Macquart…' : bf === 'podcast' ? 'La Fabrique de l’histoire, Affaires sensibles, Généalogie pour tous…' : 'Secrets d’histoire, Apocalypse, Retour aux sources…'})}
+                ${field('publisher', bf === 'doc' ? 'Chaîne, producteur' : bf === 'podcast' ? 'Producteur, radio, plateforme' : 'Éditeur', p?.publisher || '')}${field('website', 'Site internet', d.website, {ph: 'https://'})}
+                ${bf === 'revue' ? `${field('association', 'Association, cercle', d.association)}${field('issn', 'ISSN', d.issn)}${field('frequency', 'Parution', d.frequency, {ph: 'mensuelle, trimestrielle…'})}
                 ${field('subscribed', '📬 Je suis abonné', d.subscribed, {type: 'check'})}${field('subscription_end', 'Abonnement jusqu’au', d.subscription_end)}${field('subscription_price', 'Prix de l’abonnement', d.subscription_price)}` : ''}
                 ${field('country', 'Pays, région', d.country)}${field('language', 'Langue', d.language)}${field('start_year', 'Depuis (année)', d.start_year)}${field('end_year', 'Jusqu’à (année)', d.end_year)}
                 ${field('where_buy', 'Où l’acheter, le voir', d.where_buy, {ph: 'kiosque, librairie, replay…'})}${field('contact', 'Contact', d.contact)}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>`,
@@ -277,56 +317,108 @@
             onDelete: p ? async () => { if (!confirm(`Supprimer « ${p.title} » et tout ce qu’il contient ? (les images restent dans les Médias)`)) return false; await post('delete_periodical_item', {what: 'periodical', id: p.id}); await reload(); } : null});
     }
 
-    /* ─── Un numéro, un livre, un documentaire (et son contenu) ─── */
+    /* ─── Les champs d'un élément : un catalogue, un ordre de départ par type, et les réglages de chacun (montrés, ordre, champs à soi) ─── */
+    const L = (bf, m, d) => m[bf] ?? d; // un libellé selon le comportement
+    const FIELD_CAT = {
+        periodical_id: {label: 'Revue, collection, série, podcast'},
+        number: {label: bf => L(bf, {revue: 'Numéro', livre: 'N° dans la collection, tome', doc: 'Épisode, saison', podcast: 'Épisode, saison'}, 'Numéro'), ph: bf => L(bf, {revue: '254', doc: 'S2 E4', podcast: 'S3 E12'}, '')},
+        date_text: {label: bf => L(bf, {revue: 'Date', livre: 'Année, date', doc: 'Diffusé, sorti le', podcast: 'Publié le'}, 'Date'), ph: bf => L(bf, {revue: 'mars 2024, été 1998, 12/03/1925…', livre: '1987'}, ''), col: true},
+        special: {label: 'Hors-série / numéro spécial', type: 'check'},
+        title: {label: bf => L(bf, {revue: 'Thème, titre de couverture', podcast: 'Titre de l’épisode'}, 'Titre'), span: true, col: true},
+        subtitle: {label: 'Sous-titre', span: true, data: true},
+        creators: {label: bf => L(bf, {livre: 'Auteurs', doc: 'Réalisation', podcast: 'Auteurs, journalistes'}, 'Auteurs'), ph: 'Prénom Nom, Prénom Nom', data: true},
+        host: {label: 'Animateur, animatrice', data: true},
+        guests: {label: 'Invités, qui parle', data: true},
+        publisher: {label: bf => L(bf, {doc: 'Production', podcast: 'Producteur'}, 'Éditeur'), data: true},
+        place: {label: 'Lieu d’édition', data: true},
+        edition: {label: 'Édition', ph: '2e édition, poche…', data: true},
+        isbn: {label: 'ISBN', data: true},
+        channel: {label: bf => L(bf, {podcast: 'Radio, plateforme (Spotify, Apple, Deezer…)'}, 'Chaîne, diffuseur, plateforme'), data: true},
+        duration: {label: 'Durée', ph: '1 h 32', data: true},
+        language: {label: 'Langue', data: true},
+        video_url: {label: 'Où le voir (lien : replay, YouTube, INA…)', span: true, ph: 'https://', data: true},
+        audio_url: {label: 'Où l’écouter (lien de l’épisode)', span: true, ph: 'https://', data: true},
+        category: {label: 'Catégorie', type: 'cat', data: true},
+        status: {label: 'Où j’en suis', type: 'status', col: true},
+        priority: {label: 'Envie de l’acheter', type: 'select', list: [['', '—'], ['1', '🔥 un peu'], ['2', '🔥🔥 beaucoup'], ['3', '🔥🔥🔥 indispensable']], data: true},
+        cover_price: {label: bf => bf === 'doc' ? 'Prix (DVD, location…)' : 'Prix', ph: '6,90 €', data: true},
+        price_paid: {label: 'Prix payé', data: true}, bought_date: {label: 'Acheté le', data: true}, bought_where: {label: 'Acheté où', data: true},
+        buy_url: {label: 'Où le trouver (lien)', ph: 'https://', data: true}, digital_url: {label: 'Version numérique (lien)', ph: 'https://', data: true},
+        storage: {label: 'Rangé où', ph: bf => timed(bf) ? 'DVD de l’étagère, disque dur, dossier…' : 'bibliothèque du bureau, boîte 3…', data: true},
+        condition: {label: 'État', data: true}, pages_count: {label: 'Nombre de pages', data: true},
+        rating: {label: 'Ma note', type: 'select', list: RATING, data: true},
+        read: {label: bf => L(bf, {doc: 'Vu', podcast: 'Écouté'}, 'Lu'), type: 'check', data: true},
+        summary: {label: bf => L(bf, {livre: 'Résumé, table des matières', revue: 'Sommaire (texte libre)'}, 'Résumé'), type: 'textarea', span: true, rows: 4, data: true},
+    };
+    const BUY = ['status', 'priority', 'cover_price', 'price_paid', 'bought_date', 'bought_where', 'buy_url', 'digital_url', 'storage', 'condition'];
+    const FIELD_ORDER = {
+        revue: ['periodical_id', 'number', 'date_text', 'special', 'title', 'category', ...BUY, 'pages_count', 'rating', 'read', 'summary'],
+        livre: ['title', 'subtitle', 'creators', 'publisher', 'place', 'date_text', 'edition', 'isbn', 'periodical_id', 'number', 'pages_count', 'language', 'category', ...BUY, 'rating', 'read', 'summary'],
+        doc: ['title', 'creators', 'channel', 'publisher', 'date_text', 'duration', 'periodical_id', 'number', 'language', 'video_url', 'category', ...BUY.filter(k => k !== 'digital_url'), 'rating', 'read', 'summary'],
+        podcast: ['title', 'periodical_id', 'number', 'date_text', 'duration', 'host', 'guests', 'channel', 'publisher', 'language', 'audio_url', 'category', 'status', 'rating', 'read', 'summary'],
+    };
+    /** obligatoire : la revue d'un numéro, le titre de tout le reste */
+    const requiredField = (k, bf) => bf === 'revue' ? k === 'periodical_id' : k === 'title';
+    /** les champs d'un type, dans l'ordre : [{k, show, label?, type?}] (les réglages d'abord, puis ce qui manque) */
+    function fieldsFor(fam) {
+        const bf = baseOf(fam), def = FIELD_ORDER[bf], all = [...def, ...Object.keys(FIELD_CAT).filter(k => !def.includes(k))];
+        const cfg = Array.isArray(typeCfg(fam).fields) ? typeCfg(fam).fields.filter(f => f && (FIELD_CAT[f.k] || /^cf_[a-z0-9_]{1,30}$/.test(f.k))) : [];
+        const out = cfg.map(f => ({...f, show: !!f.show || requiredField(f.k, bf)}));
+        all.forEach(k => { if (!out.some(f => f.k === k)) out.push({k, show: def.includes(k)}); });
+        return out;
+    }
+    const fieldLabel = (f, bf) => f.label && f.k.startsWith('cf_') ? f.label : (typeof FIELD_CAT[f.k]?.label === 'function' ? FIELD_CAT[f.k].label(bf) : FIELD_CAT[f.k]?.label || f.k);
+    const categories = () => [...new Set(D.issues.map(i => i.data?.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
+
+    /* ─── Un numéro, un livre, un documentaire, un épisode (et son contenu) ─── */
     function issueDialog(i, periodicalId = 0, fam0 = '') {
         const per0 = D.periodicals.find(p => p.id === Number(periodicalId));
-        const fam = i ? famOf(i) : (per0?.family || fam0 || prefs().fam || 'revue'), w = W[fam];
+        const fam = i ? famOf(i) : (per0?.family || fam0 || prefs().fam || 'revue'), w = Wf(fam), bf = baseOf(fam), isT = timed(fam);
         const conts = D.periodicals.filter(p => (p.family || 'revue') === fam);
-        if (fam === 'revue' && !conts.length) { toast('Ajoute d’abord une revue.'); return periodicalDialog(null, 'revue'); }
-        const d = i?.data || {}, arts = i ? partsOf(i) : [], vid = i && fam === 'doc' ? videoOf(i) : null;
-        const pid = i?.periodical_id ?? (per0 && (per0.family || 'revue') === fam ? per0.id : (fam === 'revue' ? conts[0].id : 0));
-        const contSel = field('periodical_id', fam === 'revue' ? 'Revue' : w.cont + ' (facultatif)', pid, {type: 'select', list: [...(fam === 'revue' ? [] : [[0, '— aucune —']]), ...conts.map(p => [p.id, p.title])]});
-        const buy = `${field('status', 'Où j’en suis', i?.status || '', {type: 'select', list: Object.entries(D.statuses)})}${field('priority', 'Envie de l’acheter', d.priority, {type: 'select', list: [['', '—'], ['1', '🔥 un peu'], ['2', '🔥🔥 beaucoup'], ['3', '🔥🔥🔥 indispensable']]})}
-            ${field('cover_price', fam === 'doc' ? 'Prix (DVD, location…)' : 'Prix', d.cover_price, {ph: '6,90 €'})}${field('price_paid', 'Prix payé', d.price_paid)}${field('bought_date', 'Acheté le', d.bought_date)}${field('bought_where', 'Acheté où', d.bought_where)}
-            ${field('buy_url', 'Où le trouver (lien)', d.buy_url, {ph: 'https://'})}${fam === 'doc' ? '' : field('digital_url', 'Version numérique (lien)', d.digital_url, {ph: 'https://'})}${field('storage', 'Rangé où', d.storage, {ph: fam === 'doc' ? 'DVD de l’étagère, disque dur, dossier…' : 'bibliothèque du bureau, boîte 3…'})}${field('condition', 'État', d.condition)}`;
-        const fields = fam === 'revue' ? `${contSel}${field('number', 'Numéro', i?.number || '', {ph: '254'})}${field('date_text', 'Date', i?.date_text || '', {ph: 'mars 2024, été 1998, 12/03/1925…'})}${field('special', 'Hors-série / numéro spécial', d.special, {type: 'check'})}
-                ${field('title', 'Thème, titre de couverture', i?.title || '', {span: true})}${buy}${field('pages_count', 'Nombre de pages', d.pages_count)}${field('rating', 'Ma note', d.rating, {type: 'select', list: RATING})}${field('read', 'Lu', d.read, {type: 'check'})}
-                ${field('summary', 'Sommaire (texte libre)', d.summary, {type: 'textarea', span: true, rows: 4})}`
-            : fam === 'livre' ? `${field('title', 'Titre', i?.title || '', {span: true})}${field('subtitle', 'Sous-titre', d.subtitle, {span: true})}${field('creators', 'Auteurs', d.creators, {ph: 'Prénom Nom, Prénom Nom'})}${field('publisher', 'Éditeur', d.publisher)}
-                ${field('place', 'Lieu d’édition', d.place)}${field('date_text', 'Année, date', i?.date_text || '', {ph: '1987'})}${field('edition', 'Édition', d.edition, {ph: '2e édition, poche…'})}${field('isbn', 'ISBN', d.isbn)}
-                ${contSel}${field('number', 'N° dans la collection, tome', i?.number || '')}${field('pages_count', 'Nombre de pages', d.pages_count)}${field('language', 'Langue', d.language)}${buy}
-                ${field('rating', 'Ma note', d.rating, {type: 'select', list: RATING})}${field('read', 'Lu', d.read, {type: 'check'})}${field('summary', 'Résumé, table des matières', d.summary, {type: 'textarea', span: true, rows: 4})}`
-            : `${field('title', 'Titre', i?.title || '', {span: true})}${field('creators', 'Réalisation', d.creators)}${field('channel', 'Chaîne, diffuseur, plateforme', d.channel)}${field('publisher', 'Production', d.publisher)}
-                ${field('date_text', 'Diffusé, sorti le', i?.date_text || '')}${field('duration', 'Durée', d.duration, {ph: '1 h 32'})}${contSel}${field('number', 'Épisode, saison', i?.number || '', {ph: 'S2 E4'})}${field('language', 'Langue', d.language)}
-                ${field('video_url', 'Où le voir (lien : replay, YouTube, INA…)', d.video_url, {span: true, ph: 'https://'})}${buy}${field('rating', 'Ma note', d.rating, {type: 'select', list: RATING})}${field('read', 'Vu', d.read, {type: 'check'})}
-                ${field('summary', 'Résumé', d.summary, {type: 'textarea', span: true, rows: 4})}`;
-        const roles = fam === 'doc' ? [['cover', '🖼️ Affiche, vignette', 'image/*'], ['video', '🎞️ Le film lui-même (fichier vidéo, si tu l’as)', 'video/*'], ['', '📸 Captures d’écran, documents', 'image/*,application/pdf']]
-            : [['cover', '🖼️ Couverture', 'image/*'], ['', fam === 'livre' ? '📸 Pages photographiées, captures, PDF' : '📸 Captures d’écran, pages, PDF', 'image/*,application/pdf']];
-        const partLine = (a, k) => { const th = fam === 'doc' ? thumbOf(a, ['']) : null, sec = tcSec(a.pages);
-            return `<li data-art="${a.id}">${th ? `<img class="h-pr-mthumb" src="media/${encodeURIComponent(th.thumbnail || th.filename)}" alt="">` : ''}${fam === 'doc' && a.pages ? `<button type="button" class="h-pr-tc" data-seek="${sec ?? ''}" title="${vid ? 'Aller à ce moment' : d.video_url ? 'Ouvrir la vidéo à ce moment' : ''}">⏱ ${esc(a.pages)}</button> ` : ''}<button type="button" class="link-button" data-art-edit>${esc(a.title)}</button> <small>${esc([a.authors, fam !== 'doc' && a.pages && 'p. ' + a.pages, D.article_kinds[a.kind]].filter(Boolean).join(' · '))}</small>
-                ${fam === 'doc' ? '' : `<span><button type="button" class="icon-button" data-art-move="-1" ${k ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="icon-button" data-art-move="1" ${k < arts.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span>`}</li>`; };
-        const player = fam !== 'doc' || !i ? '' : vid ? `<div class="h-pr-player"><video controls preload="metadata" src="media/${encodeURIComponent(vid.filename)}" data-pr-video></video>
+        if (bf === 'revue' && !conts.length) { toast(`Ajoute d’abord ${fam === 'revue' ? 'une revue' : `une « ${w.cont} »`}.`); return periodicalDialog(null, fam); }
+        const d = i?.data || {}, arts = i ? partsOf(i) : [], vid = i && bf === 'doc' ? videoOf(i) : null, aud = i && bf === 'podcast' ? audioOf(i) : null;
+        const pid = i?.periodical_id ?? (per0 && (per0.family || 'revue') === fam ? per0.id : (bf === 'revue' ? conts[0].id : 0));
+        const one = f => { const c = FIELD_CAT[f.k] || {}, lab = fieldLabel(f, bf), v = c.data || f.k.startsWith('cf_') ? d[f.k] : i?.[f.k], ph = typeof c.ph === 'function' ? c.ph(bf) : c.ph || '';
+            if (f.k === 'periodical_id') return field('periodical_id', bf === 'revue' ? w.cont : w.cont + ' (facultatif)', pid, {type: 'select', list: [...(bf === 'revue' ? [] : [[0, '— aucune —']]), ...conts.map(p => [p.id, p.title])]});
+            if (c.type === 'status') return field('status', lab, i?.status || '', {type: 'select', list: Object.entries(D.statuses)});
+            if (c.type === 'cat') return `<label>${esc(lab)}<input name="category" list="h-pr-cats" value="${esc(v || '')}" placeholder="Généalogie, histoire locale, guerre…" autocomplete="off"></label>`;
+            const t = f.k.startsWith('cf_') ? ({textarea: 'textarea', check: 'check', number: 'number', date: 'date', url: 'url'}[f.type] || 'text') : c.type || 'text';
+            return field(f.k, lab, v ?? '', {type: t, span: c.span || t === 'textarea', ph, list: c.list, rows: c.rows || 3}); };
+        const fields = fieldsFor(fam).filter(f => f.show).map(one).join('') + `<datalist id="h-pr-cats">${categories().map(c => `<option value="${esc(c)}">`).join('')}</datalist>`;
+        const roles = bf === 'doc' ? [['cover', '🖼️ Affiche, vignette', 'image/*'], ['video', '🎞️ Le film lui-même (fichier vidéo, si tu l’as)', 'video/*'], ['', '📸 Captures d’écran, documents', 'image/*,application/pdf']]
+            : bf === 'podcast' ? [['cover', '🖼️ Image de l’émission', 'image/*'], ['audio', '🎧 L’épisode lui-même (fichier audio, si tu l’as)', 'audio/*'], ['', '📸 Captures, documents', 'image/*,application/pdf']]
+            : [['cover', '🖼️ Couverture', 'image/*'], ['', bf === 'livre' ? '📸 Pages photographiées, captures, PDF' : '📸 Captures d’écran, pages, PDF', 'image/*,application/pdf']];
+        const onlineUrl = bf === 'podcast' ? d.audio_url : d.video_url, player0 = vid || aud;
+        const partLine = (a, k) => { const th = isT ? thumbOf(a, ['']) : null, sec = tcSec(a.pages);
+            return `<li data-art="${a.id}">${th ? `<img class="h-pr-mthumb" src="media/${encodeURIComponent(th.thumbnail || th.filename)}" alt="">` : ''}${isT && a.pages ? `<button type="button" class="h-pr-tc" data-seek="${sec ?? ''}" title="${player0 ? 'Aller à ce moment' : onlineUrl ? 'Ouvrir à ce moment' : ''}">⏱ ${esc(a.pages)}</button> ` : ''}<button type="button" class="link-button" data-art-edit>${esc(a.title)}</button> <small>${esc([a.authors, !isT && a.pages && 'p. ' + a.pages, D.article_kinds[a.kind]].filter(Boolean).join(' · '))}</small>
+                ${isT ? '' : `<span><button type="button" class="icon-button" data-art-move="-1" ${k ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="icon-button" data-art-move="1" ${k < arts.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span>`}</li>`; };
+        const player = !isT || !i ? '' : vid ? `<div class="h-pr-player"><video controls preload="metadata" src="media/${encodeURIComponent(vid.filename)}" data-pr-video></video>
                 <div class="h-pr-playbar"><b data-pr-now>0:00</b><button type="button" class="button small" data-pr-grab>📸 Capturer cette image</button><button type="button" class="button small secondary" data-pr-mark>📌 Noter ce moment</button><small class="muted">La capture s’ouvre dans un nouveau moment, à annoter.</small></div></div>`
+            : aud ? `<div class="h-pr-player is-audio"><audio controls preload="metadata" src="media/${encodeURIComponent(aud.filename)}" data-pr-video></audio>
+                <div class="h-pr-playbar"><b data-pr-now>0:00</b><button type="button" class="button small" data-pr-mark>📌 Noter ce moment</button><small class="muted">Le minutage du moment se remplit tout seul.</small></div></div>`
+            : bf === 'podcast' ? `<p class="muted h-pr-hint">🎧 Pour écouter l’épisode ici et noter ses moments d’un clic, ajoute le fichier audio plus bas. Sinon : écoute-le ${urlAt(d.audio_url, null) ? `<a href="${esc(urlAt(d.audio_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, puis « ＋ Moment » avec son minutage.</p>`
             : `<p class="muted h-pr-hint">🎞️ Pour regarder le film ici et capturer ses images d’un clic, ajoute le fichier vidéo plus bas. Sinon : regarde-le ${urlAt(d.video_url, null) ? `<a href="${esc(urlAt(d.video_url, null))}" target="_blank" rel="noopener">en ligne ↗</a>` : 'où tu veux'}, fais une capture d’écran (⌘⇧4 sur Mac, Win+Maj+S sur PC), puis « ＋ Moment » et colle-la (⌘V / Ctrl+V).</p>`;
-        ext.openDialog({eyebrow: w.item.toUpperCase(), title: i ? issueName(i) : `Nouveau${fam === 'revue' ? ' numéro' : fam === 'livre' ? ' livre' : ' documentaire'}`, wide: true, labels: ['periodical_issue', i?.labels || []],
+        const newTitle = {revue: 'Nouveau numéro', livre: 'Nouveau livre', doc: 'Nouveau documentaire', podcast: 'Nouvel épisode'}[fam] || `Nouveau : ${w.item}`;
+        ext.openDialog({eyebrow: w.item.toUpperCase(), title: i ? issueName(i) : newTitle, wide: true, labels: ['periodical_issue', i?.labels || []],
             body: `<div class="form-grid">${fields}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>
+                <p class="muted h-pr-setnote">Les champs montrés et leur ordre se règlent dans « ⚙️ Réglages » (en haut de la liste).</p>
                 ${linksField(i?.links || [])}
                 ${ext.mediaEditorHtml ? ext.mediaEditorHtml('periodical_issue', i?.id || 0, i?.media || [], roles) : ''}
-                <section class="h-pr-arts"><h3>${fam === 'doc' ? '🎬' : '📄'} ${esc(w.parts)}${arts.length ? ` (${arts.length})` : ''}</h3>${player}
-                    ${i ? `${arts.length ? `<ol class="${fam === 'doc' ? 'is-moments' : ''}">${arts.map(partLine).join('')}</ol>` : `<p class="muted">${esc(w.none)}</p>`}<div class="page-actions compact"><button type="button" class="button small" data-art-add>＋ ${esc(w.part)}</button><button type="button" class="button small secondary" data-to-atelier>📚 Vers l’Atelier</button></div>` : `<p class="muted">Enregistre d’abord, puis ajoute ${fam === 'doc' ? 'ses moments' : fam === 'livre' ? 'ses chapitres et passages' : 'ses articles'}.</p>`}</section>`,
+                <section class="h-pr-arts"><h3>${isT ? (bf === 'podcast' ? '🎙️' : '🎬') : '📄'} ${esc(w.parts)}${arts.length ? ` (${arts.length})` : ''}</h3>${player}
+                    ${i ? `${arts.length ? `<ol class="${isT ? 'is-moments' : ''}">${arts.map(partLine).join('')}</ol>` : `<p class="muted">${esc(w.none)}</p>`}<div class="page-actions compact"><button type="button" class="button small" data-art-add>＋ ${esc(w.part)}</button><button type="button" class="button small secondary" data-to-atelier>📚 Vers l’Atelier</button></div>` : `<p class="muted">Enregistre d’abord, puis ajoute ${isT ? 'ses moments' : bf === 'livre' ? 'ses chapitres et passages' : 'ses articles'}.</p>`}</section>`,
             onOpen: dl => {
                 bindLinks(dl);
                 const video = dl.querySelector('[data-pr-video]');
                 if (video) {
                     const now = dl.querySelector('[data-pr-now]');
                     video.addEventListener('timeupdate', () => { now.textContent = fmtTc(video.currentTime); });
-                    dl.querySelector('[data-pr-grab]').addEventListener('click', async () => {
+                    dl.querySelector('[data-pr-grab]')?.addEventListener('click', async () => {
                         try { const at = video.currentTime; video.pause(); const file = await grabFrame(video, at); articleDialog(null, i, {pages: fmtTc(at), file}); } catch (err) { toast(err.message, 'error'); }
                     });
                     dl.querySelector('[data-pr-mark]').addEventListener('click', () => { video.pause(); articleDialog(null, i, {pages: fmtTc(video.currentTime)}); });
                 }
                 dl.querySelectorAll('[data-seek]').forEach(b => b.addEventListener('click', () => { const s = Number(b.dataset.seek); if (b.dataset.seek === '') return;
-                    if (video) { video.currentTime = s; video.play().catch(() => {}); video.scrollIntoView({block: 'nearest', behavior: 'smooth'}); } else if (urlAt(d.video_url, s)) window.open(urlAt(d.video_url, s), '_blank', 'noopener'); }));
+                    if (video) { video.currentTime = s; video.play().catch(() => {}); video.scrollIntoView({block: 'nearest', behavior: 'smooth'}); } else if (urlAt(onlineUrl, s)) window.open(urlAt(onlineUrl, s), '_blank', 'noopener'); }));
                 dl.querySelector('[data-art-add]')?.addEventListener('click', () => articleDialog(null, i, video ? {pages: video.currentTime ? fmtTc(video.currentTime) : ''} : {}));
                 dl.querySelector('[data-to-atelier]')?.addEventListener('click', () => atelierDialog([{type: 'issue', id: i.id}], true));
                 dl.querySelectorAll('[data-art-edit]').forEach(b => b.addEventListener('click', () => articleDialog(D.articles.find(a => a.id === Number(b.closest('[data-art]').dataset.art)), i)));
@@ -334,16 +426,68 @@
             },
             onSubmit: async form => {
                 const v = A().formObject(form);
-                const r = await post('save_periodical_issue', {id: i?.id || 0, family: fam, periodical_id: v.periodical_id || 0, number: v.number || '', title: v.title || '', date_text: v.date_text || '', status: v.status,
-                    data: dataOf(form, ['creators', 'subtitle', 'publisher', 'place', 'edition', 'isbn', 'channel', 'duration', 'language', 'video_url', 'special', 'priority', 'cover_price', 'price_paid', 'bought_date', 'bought_where', 'buy_url', 'digital_url', 'storage', 'condition', 'pages_count', 'rating', 'read', 'summary', 'notes']),
-                    ...readLinks(form), label_ids: readLabels(form)});
+                // les champs cachés gardent leur valeur : on ne renvoie que ceux du formulaire, le reste de « data » est repris tel quel
+                const keys = [...Object.keys(FIELD_CAT).filter(k => FIELD_CAT[k].data), ...fieldsFor(fam).filter(f => f.k.startsWith('cf_')).map(f => f.k), 'notes'];
+                const data = {...(i?.data || {}), ...dataOf(form, keys)};
+                const r = await post('save_periodical_issue', {id: i?.id || 0, family: fam, periodical_id: form.elements.periodical_id ? v.periodical_id || 0 : pid || 0, number: form.elements.number ? v.number || '' : i?.number || '', title: form.elements.title ? v.title || '' : i?.title || '',
+                    date_text: form.elements.date_text ? v.date_text || '' : i?.date_text || '', status: form.elements.status ? v.status : i?.status || '', data, ...readLinks(form), label_ids: readLabels(form)});
                 const id = Number((r.result || r).id);
                 if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'periodical_issue', id);
                 toast('Enregistré.'); await reload();
-                const hadVideo = !!vid, nowVideo = fam === 'doc' && [...form.querySelectorAll('[data-h-upload-role="video"]')].some(x => x.files?.length);
-                if (!i || (nowVideo && !hadVideo)) setTimeout(() => issueDialog(D.issues.find(x => x.id === id)), 50); // on reste dessus pour ajouter le contenu, ou regarder le film
+                const hadPlayer = !!player0, nowPlayer = isT && [...form.querySelectorAll('[data-h-upload-role="video"],[data-h-upload-role="audio"]')].some(x => x.files?.length);
+                if (!i || (nowPlayer && !hadPlayer)) setTimeout(() => issueDialog(D.issues.find(x => x.id === id)), 50); // on reste dessus pour ajouter le contenu, ou regarder / écouter
             },
             onDelete: i ? async () => { if (!confirm(`Supprimer ${issueName(i)} et tout son contenu ? (les images restent dans les Médias)`)) return false; await post('delete_periodical_item', {what: 'issue', id: i.id}); await reload(); } : null});
+    }
+
+    /* ─── ⚙️ Réglages des types : ceux de départ et les tiens ; pour chacun, les champs (montrés, ordre, champs à soi) et l'affichage ─── */
+    function typesDialog() {
+        const BASE_NAMES = {revue: '📰 Revue (numéros, articles)', livre: '📖 Livre (chapitres, passages)', doc: '🎬 Documentaire (moments minutés, film)', podcast: '🎙️ Podcast (épisodes, moments minutés, son)'};
+        let T = allFams().map(k => { const c = typeCfg(k); return {key: k, base: baseOf(k), name: c.name || '', item: c.item || '', icon: c.icon || '', view: c.view || 'list', group: c.group || '', fields: fieldsFor(k).map(f => ({...f}))}; });
+        let cur = prefs().fam && T.some(t => t.key === prefs().fam) ? prefs().fam : 'revue';
+        const tOf = () => T.find(t => t.key === cur) || T[0];
+        const nameOf = t => BASES.includes(t.key) ? ({revue: '📰 Revues', livre: '📖 Livres', doc: '🎬 Documentaires', podcast: '🎙️ Podcasts'}[t.key]) : `${t.icon || '📁'} ${t.name || 'Mon type'}`;
+        const paint = dl => {
+            const t = tOf(), mine = !BASES.includes(t.key), bf = t.base;
+            dl.querySelector('[data-ty-body]').innerHTML = `<div class="h-pr-tylist">${T.map(x => `<button type="button" class="${x.key === cur ? 'is-on' : ''}" data-ty-pick="${esc(x.key)}">${esc(nameOf(x))}</button>`).join('')}<button type="button" class="button small" data-ty-new>＋ Nouveau type</button></div>
+                <div class="h-pr-tyedit">
+                ${mine ? `<div class="form-grid"><label>Nom (au pluriel)<input data-ty="name" value="${esc(t.name)}" placeholder="Cartes postales, Thèses, Expositions…" maxlength="60"></label><label>Un élément s’appelle<input data-ty="item" value="${esc(t.item)}" placeholder="Carte, Thèse, Exposition…" maxlength="40"></label>
+                    <label>Icône<input data-ty="icon" value="${esc(t.icon)}" placeholder="📮" maxlength="8"></label><label>Il fonctionne comme<select data-ty="base">${BASES.map(b => `<option value="${b}" ${b === bf ? 'selected' : ''}>${esc(BASE_NAMES[b])}</option>`).join('')}</select></label></div>` : `<p class="muted">${esc(BASE_NAMES[t.key])}</p>`}
+                <div class="form-grid"><label>Affichage par défaut<select data-ty="view"><option value="list" ${t.view === 'list' ? 'selected' : ''}>📋 Liste</option><option value="cards" ${t.view === 'cards' ? 'selected' : ''}>🗂️ Fiches</option></select></label><label class="checkbox-line"><input type="checkbox" data-ty="group" ${t.group === 'category' ? 'checked' : ''}> Grouper par catégorie par défaut</label></div>
+                <h4>Champs de la fiche (montrés, dans cet ordre)</h4><p class="muted">Coche ce qui s’affiche (dans la fiche de l’élément et sur ses cartes) ; ↑ ↓ pour l’ordre. Un champ caché garde ce qu’on y avait écrit.</p>
+                <ol class="h-pet-layout h-pr-tyfields">${t.fields.map((f, n) => { const req = requiredField(f.k, bf), own = f.k.startsWith('cf_');
+                    return `<li class="h-pet-lrow" data-n="${n}"><input type="checkbox" data-ty-show ${f.show || req ? 'checked' : ''} ${req ? 'disabled title="Obligatoire"' : ''}>${own ? `<input class="h-pr-tyown" data-ty-flabel value="${esc(f.label || '')}" placeholder="Nom du champ" maxlength="60"><select data-ty-ftype>${[['text', 'texte'], ['textarea', 'long texte'], ['number', 'nombre'], ['date', 'date'], ['url', 'lien'], ['check', 'case à cocher']].map(([v, l]) => `<option value="${v}" ${(f.type || 'text') === v ? 'selected' : ''}>${l}</option>`).join('')}</select>` : `<span>${esc(fieldLabel(f, bf))}</span>`}
+                        <button type="button" class="h-bt" data-ty-up title="Monter">↑</button><button type="button" class="h-bt" data-ty-down title="Descendre">↓</button>${own ? '<button type="button" class="h-bt" data-ty-fdel title="Retirer ce champ">🗑</button>' : ''}</li>`; }).join('')}</ol>
+                <div class="page-actions compact"><button type="button" class="button small secondary" data-ty-addfield>＋ Champ à moi</button><button type="button" class="button small secondary" data-ty-reset>Champs comme au départ</button>${mine ? '<button type="button" class="button small danger" data-ty-del>Supprimer ce type</button>' : ''}</div></div>`;
+        };
+        ext.openDialog({eyebrow: '📚 REVUES, LIVRES, DOCUMENTAIRES, PODCASTS', title: '⚙️ Réglages des types', wide: true, submitLabel: 'Enregistrer',
+            body: `<div class="h-pr-types" data-ty-body></div>`,
+            onOpen: dl => {
+                paint(dl);
+                const body = dl.querySelector('[data-ty-body]');
+                body.addEventListener('input', e => { const t = tOf(), k = e.target.dataset.ty; if (k && ['name', 'item', 'icon'].includes(k)) t[k] = e.target.value; const li = e.target.closest('[data-n]'); if (li && e.target.matches('[data-ty-flabel]')) t.fields[Number(li.dataset.n)].label = e.target.value; });
+                body.addEventListener('change', e => { const t = tOf(), k = e.target.dataset.ty, li = e.target.closest('[data-n]');
+                    if (k === 'base') { t.base = e.target.value; paint(dl); } // les champs restent ; les libellés suivent le nouveau comportement
+                    if (k === 'view') t.view = e.target.value; if (k === 'group') t.group = e.target.checked ? 'category' : '';
+                    if (li && e.target.matches('[data-ty-show]')) t.fields[Number(li.dataset.n)].show = e.target.checked;
+                    if (li && e.target.matches('[data-ty-ftype]')) t.fields[Number(li.dataset.n)].type = e.target.value; });
+                body.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const t = tOf(), li = b.closest('[data-n]'), n = li ? Number(li.dataset.n) : -1;
+                    if (b.dataset.tyPick) { cur = b.dataset.tyPick; return paint(dl); }
+                    if (b.matches('[data-ty-new]')) { const key = 'c_' + Date.now().toString(36).slice(-8); T.push({key, base: 'livre', name: 'Mon type', item: 'Élément', icon: '📁', view: 'cards', group: '', fields: FIELD_ORDER.livre.map(k => ({k, show: true}))}); cur = key; paint(dl); dl.querySelector('[data-ty="name"]')?.select(); return; }
+                    if (b.matches('[data-ty-up]') && n > 0) { [t.fields[n - 1], t.fields[n]] = [t.fields[n], t.fields[n - 1]]; return paint(dl); }
+                    if (b.matches('[data-ty-down]') && n < t.fields.length - 1) { [t.fields[n + 1], t.fields[n]] = [t.fields[n], t.fields[n + 1]]; return paint(dl); }
+                    if (b.matches('[data-ty-fdel]')) { t.fields.splice(n, 1); return paint(dl); }
+                    if (b.matches('[data-ty-addfield]')) { let k; do { k = 'cf_' + Math.random().toString(36).slice(2, 8); } while (t.fields.some(f => f.k === k)); t.fields.push({k, show: true, label: '', type: 'text'}); paint(dl); [...dl.querySelectorAll('[data-ty-flabel]')].pop()?.focus(); return; }
+                    if (b.matches('[data-ty-reset]')) { const own = t.fields.filter(f => f.k.startsWith('cf_')), def = FIELD_ORDER[t.base]; t.fields = [...def.map(k => ({k, show: true})), ...Object.keys(FIELD_CAT).filter(k => !def.includes(k)).map(k => ({k, show: false})), ...own]; return paint(dl); }
+                    if (b.matches('[data-ty-del]')) { const n2 = D.issues.filter(i => i.family === t.key).length + D.periodicals.filter(x => x.family === t.key).length;
+                        if (!confirm(`Supprimer le type « ${t.name} » ?${n2 ? ` Ses ${n2} élément(s) passeront dans « ${BASE_NAMES[t.base]} » (rien n’est effacé).` : ''}`)) return; T = T.filter(x => x !== t); cur = 'revue'; return paint(dl); }
+                });
+            },
+            onSubmit: async () => {
+                const bad = T.find(t => !BASES.includes(t.key) && !String(t.name).trim()); if (bad) { toast('Donne un nom à chaque type.', 'error'); return false; }
+                const types = T.map(t => ({key: t.key, base: t.base, name: t.name, item: t.item, icon: t.icon, view: t.view, group: t.group, fields: t.fields.filter(f => !f.k.startsWith('cf_') || String(f.label || '').trim()).map(f => ({k: f.k, show: !!f.show, ...(f.k.startsWith('cf_') ? {label: f.label, type: f.type || 'text'} : {})}))}));
+                await post('save_periodical_types', {types}); toast('Réglages des types enregistrés.'); await reload();
+            }});
     }
 
     /** L'image du film à cet instant, en JPEG */
@@ -397,12 +541,12 @@
     /* ─── Un article, un chapitre, un moment ─── */
     function articleDialog(a, issue, preset = {}) {
         if (!issue) return toast('Introuvable.', 'error');
-        const d = a?.data || {}, fam = famOf(issue), w = W[fam];
-        const kinds = Object.entries(D.article_kinds).filter(([k]) => (D.family_article_kinds?.[fam] || Object.keys(D.article_kinds)).includes(k));
+        const d = a?.data || {}, fam0 = famOf(issue), w = Wf(fam0), bf = baseOf(fam0), isT = timed(fam0), fam = isT ? 'doc' : bf, pod = bf === 'podcast';
+        const kinds = Object.entries(D.article_kinds).filter(([k]) => (D.family_article_kinds?.[bf] || Object.keys(D.article_kinds)).includes(k));
         const fields = fam === 'doc'
             ? `${field('pages', 'Moment (minutage)', a?.pages || preset.pages || '', {ph: '52:34 ou 1:02:10 – 1:03:00'})}${field('kind', 'Sorte', a?.kind || 'moment', {type: 'select', list: kinds})}
-               ${field('title', 'En quelques mots', a?.title || '', {span: true, ph: 'La maison de l’arrière-grand-père, l’acte de mariage montré…'})}${field('authors', 'Qui parle, qui on voit', a?.authors || '')}${field('places', 'Lieux', d.places)}
-               ${field('what_seen', 'Ce qu’on voit, ce qu’on apprend', d.what_seen, {type: 'textarea', span: true, rows: 3})}${field('transcript', 'Ce qui est dit (mot à mot)', d.transcript, {type: 'textarea', span: true, rows: 2})}
+               ${field('title', 'En quelques mots', a?.title || '', {span: true, ph: 'La maison de l’arrière-grand-père, l’acte de mariage montré…'})}${field('authors', pod ? 'Qui parle' : 'Qui parle, qui on voit', a?.authors || '')}${field('places', 'Lieux', d.places)}
+               ${field('what_seen', pod ? 'Ce qu’on entend, ce qu’on apprend' : 'Ce qu’on voit, ce qu’on apprend', d.what_seen, {type: 'textarea', span: true, rows: 3})}${field('transcript', 'Ce qui est dit (mot à mot)', d.transcript, {type: 'textarea', span: true, rows: 2})}
                ${field('period', 'Période', d.period)}${field('surnames', 'Noms cités', d.surnames)}${field('sources', 'Documents montrés, sources', d.sources, {type: 'textarea', span: true, rows: 2})}${field('keywords', 'Mots-clés', d.keywords, {span: true})}
                ${field('rating', 'Importance', d.rating, {type: 'select', list: RATING})}`
             : `${field('title', fam === 'livre' ? 'Titre du chapitre, du passage' : 'Titre', a?.title || '', {span: true})}${field('authors', fam === 'livre' ? 'Auteur (si différent du livre)' : 'Auteurs', a?.authors || '')}${field('pages', 'Pages', a?.pages || '', {ph: '12-15'})}
@@ -411,10 +555,10 @@
                ${field('keywords', 'Mots-clés', d.keywords, {span: true, ph: 'meunier, émigration, registres protestants…'})}${field('places', 'Lieux', d.places)}${field('period', 'Période', d.period, {ph: '1750-1820'})}
                ${field('surnames', 'Noms de famille cités', d.surnames, {span: true})}${field('sources', 'Sources citées', d.sources, {type: 'textarea', span: true, rows: 2})}
                ${field('url', 'Lien (version en ligne)', d.url, {ph: 'https://'})}${field('rating', 'Ma note', d.rating, {type: 'select', list: RATING})}${field('read', 'Lu', d.read, {type: 'check'})}`;
-        const sec = tcSec(a?.pages || preset.pages), vurl = fam === 'doc' && sec !== null ? urlAt(issue.data?.video_url, sec) : '';
+        const sec = tcSec(a?.pages || preset.pages), vurl = isT && sec !== null ? urlAt(pod ? issue.data?.audio_url : issue.data?.video_url, sec) : '';
         ext.openDialog({eyebrow: `${w.part.toUpperCase()} · ${issueName(issue)}`, title: a ? a.title : `Nouveau${fam === 'doc' ? ' moment' : fam === 'livre' ? ' chapitre ou passage' : ' article'}`, wide: true, labels: ['periodical_article', a?.labels || []],
             body: `<div class="form-grid">${fields}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>
-                ${vurl ? `<p><a href="${esc(vurl)}" target="_blank" rel="noopener">▶ Revoir ce moment en ligne ↗</a></p>` : ''}
+                ${vurl ? `<p><a href="${esc(vurl)}" target="_blank" rel="noopener">${pod ? '▶ Réécouter ce moment en ligne ↗' : '▶ Revoir ce moment en ligne ↗'}</a></p>` : ''}
                 <section class="h-pr-capture"><h4>📸 ${fam === 'doc' ? 'Capture de ce moment' : 'Capture'}</h4><p class="muted" data-cap-hint>${fam === 'doc' ? 'Colle une capture d’écran (⌘V / Ctrl+V) ou choisis-la ci-dessous : tu peux ensuite l’annoter (flèches, cercles, texte).' : 'Colle une capture (⌘V / Ctrl+V) pour l’annoter avant de l’ajouter.'}</p><div data-cap-annot></div></section>
                 ${linksField(a?.links || [])}
                 ${ext.mediaEditorHtml ? ext.mediaEditorHtml('periodical_article', a?.id || 0, a?.media || [], [['', fam === 'doc' ? '📸 Captures de ce moment' : '📸 Captures d’écran, PDF', 'image/*,application/pdf']]) : ''}`,
@@ -473,10 +617,10 @@
         try { D = await api('periodicals'); } catch (e) { return toast(e.message, 'error'); }
         if (!D.issues.length) return toast('Rien encore dans Listes → Revues, livres et documentaires.');
         const rows = [...D.issues.map(i => ({key: 'issue:' + i.id, fam: famOf(i), label: issueName(i), sub: [i.data?.creators, i.date_text].filter(Boolean).join(' · ')})),
-            ...D.articles.map(a => { const i = issueOf(a); return {key: 'article:' + a.id, fam: famOf(a), label: (famOf(a) === 'doc' && a.pages ? `⏱ ${a.pages} — ` : '') + a.title, sub: `dans ${i ? issueName(i) : '?'}${a.authors ? ' · ' + a.authors : ''}`, child: true}; })];
+            ...D.articles.map(a => { const i = issueOf(a); return {key: 'article:' + a.id, fam: famOf(a), label: (timed(famOf(a)) && a.pages ? `⏱ ${a.pages} — ` : '') + a.title, sub: `dans ${i ? issueName(i) : '?'}${a.authors ? ' · ' + a.authors : ''}`, child: true}; })];
         ext.openDialog({eyebrow: 'ATELIER', title: '📚 Ajouter des revues, livres, documentaires', wide: true, submitLabel: 'Ajouter au projet',
-            body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option><option value="revue">📰 Revues</option><option value="livre">📖 Livres</option><option value="doc">🎬 Documentaires</option></select><button type="button" class="link-button" data-pk-all>tout cocher (affichés)</button></div>
-                <div class="h-pr-pick">${rows.map(r => `<label class="checkbox-line ${r.child ? 'is-child' : ''}" data-fam="${r.fam}"><input type="checkbox" value="${r.key}"> ${W[r.fam].ic} <span><b>${esc(r.label)}</b> <small class="muted">${esc(r.sub)}</small></span></label>`).join('')}</div>`,
+            body: `<div class="h-pr-pickbar"><input type="search" data-pk-q placeholder="Chercher…"><select data-pk-fam><option value="">Tout</option>${allFams().map(k => `<option value="${esc(k)}">${Wf(k).ic} ${esc(Wf(k).items)}</option>`).join('')}</select><button type="button" class="link-button" data-pk-all>tout cocher (affichés)</button></div>
+                <div class="h-pr-pick">${rows.map(r => `<label class="checkbox-line ${r.child ? 'is-child' : ''}" data-fam="${r.fam}"><input type="checkbox" value="${r.key}"> ${Wf(r.fam).ic} <span><b>${esc(r.label)}</b> <small class="muted">${esc(r.sub)}</small></span></label>`).join('')}</div>`,
             onOpen: dl => {
                 const q = dl.querySelector('[data-pk-q]'), fam = dl.querySelector('[data-pk-fam]');
                 const filt = () => dl.querySelectorAll('.h-pr-pick label').forEach(l => { l.hidden = (fam.value && l.dataset.fam !== fam.value) || !l.textContent.toLowerCase().includes(q.value.trim().toLowerCase()); });

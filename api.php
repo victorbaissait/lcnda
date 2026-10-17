@@ -9213,6 +9213,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_periodical_article' => save_periodical_article($pdo,$data),
             'delete_periodical_item' => delete_periodical_item($pdo,$data),
             'reorder_periodical_articles' => reorder_periodical_articles($pdo,$data),
+            'save_periodical_types' => save_periodical_types($pdo,$data),
             'save_press_ad' => save_press_ad($pdo,$data),
             'save_press_ad_rules' => save_press_ad_rules($pdo,$data),
             'delete_press_item' => delete_press_item($pdo,$data),

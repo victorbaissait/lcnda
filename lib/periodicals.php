@@ -12,23 +12,23 @@ declare(strict_types=1);
  * ancienne ouvre toujours la base et les ignore).
  */
 
-const PERIODICAL_FAMILIES = ['revue' => 'Revues et magazines', 'livre' => 'Livres', 'doc' => 'Documentaires, films, émissions'];
+const PERIODICAL_FAMILIES = ['revue' => 'Revues et magazines', 'livre' => 'Livres', 'doc' => 'Documentaires, films, émissions', 'podcast' => 'Podcasts, émissions de radio'];
 const PERIODICAL_KINDS = ['magazine' => 'Magazine grand public', 'genealogie' => 'Revue de généalogie', 'cercle' => 'Bulletin de cercle / d’association', 'histoire_locale' => 'Revue d’histoire locale',
     'histoire' => 'Revue d’histoire', 'journal' => 'Journal quotidien', 'hebdo' => 'Hebdomadaire / journal régional', 'savante' => 'Revue savante', 'archives' => 'Revue d’archives / de musée', 'autre' => 'Autre',
-    'collection' => 'Collection d’un éditeur', 'serie_livres' => 'Série, saga, œuvre en plusieurs tomes', 'serie_doc' => 'Série documentaire', 'emission' => 'Émission (télé, radio, podcast)', 'chaine' => 'Chaîne, plateforme, archives filmées'];
+    'collection' => 'Collection d’un éditeur', 'serie_livres' => 'Série, saga, œuvre en plusieurs tomes', 'serie_doc' => 'Série documentaire', 'emission' => 'Émission (télé, radio, podcast)', 'chaine' => 'Chaîne, plateforme, archives filmées', 'podcast_show' => 'Podcast (une émission)', 'radio' => 'Émission de radio'];
 /** les sortes de « revue » proposées selon la famille (une collection de livres, une série documentaire…) */
 const PERIODICAL_FAMILY_KINDS = ['revue' => ['magazine', 'genealogie', 'cercle', 'histoire_locale', 'histoire', 'journal', 'hebdo', 'savante', 'archives', 'autre'],
-    'livre' => ['collection', 'serie_livres', 'autre'], 'doc' => ['serie_doc', 'emission', 'chaine', 'autre']];
+    'livre' => ['collection', 'serie_livres', 'autre'], 'doc' => ['serie_doc', 'emission', 'chaine', 'autre'], 'podcast' => ['podcast_show', 'radio', 'chaine', 'autre']];
 const PERIODICAL_STATUSES = ['owned' => 'Je l’ai', 'wanted' => 'À acheter', 'ordered' => 'Commandé', 'subscribed' => 'Reçu par abonnement', 'digital' => 'Numérique (PDF, en ligne)',
     'borrowed' => 'Emprunté / consulté', 'lent' => 'Prêté', 'given' => 'Donné / vendu', '' => 'Pas précisé'];
 const PERIODICAL_ARTICLE_KINDS = ['article' => 'Article', 'dossier' => 'Dossier', 'genealogie' => 'Généalogie publiée', 'chronique' => 'Chronique', 'methode' => 'Méthode, conseils', 'source' => 'Présentation d’une source / d’un fonds',
     'courrier' => 'Courrier des lecteurs', 'question' => 'Question / entraide', 'annonce' => 'Petite annonce', 'compte_rendu' => 'Compte rendu, lecture', 'photo' => 'Photo, illustration', 'carte' => 'Carte, plan', 'autre' => 'Autre',
     'chapitre' => 'Chapitre', 'passage' => 'Passage à retenir', 'annexe' => 'Annexe, document reproduit', 'moment' => 'Moment, séquence', 'temoignage' => 'Témoignage, interview', 'image_archive' => 'Image d’archive, photo montrée',
-    'lieu_filme' => 'Lieu filmé', 'document_montre' => 'Document montré (acte, lettre…)', 'generique' => 'Générique, crédits'];
+    'lieu_filme' => 'Lieu filmé', 'document_montre' => 'Document montré (acte, lettre…)', 'generique' => 'Générique, crédits', 'extrait' => 'Extrait à réécouter', 'lecture' => 'Lecture d’un document'];
 const PERIODICAL_FAMILY_ARTICLE_KINDS = ['revue' => ['article', 'dossier', 'genealogie', 'chronique', 'methode', 'source', 'courrier', 'question', 'annonce', 'compte_rendu', 'photo', 'carte', 'autre'],
-    'livre' => ['chapitre', 'passage', 'annexe', 'genealogie', 'source', 'photo', 'carte', 'autre'], 'doc' => ['moment', 'temoignage', 'image_archive', 'document_montre', 'lieu_filme', 'carte', 'generique', 'autre']];
+    'livre' => ['chapitre', 'passage', 'annexe', 'genealogie', 'source', 'photo', 'carte', 'autre'], 'doc' => ['moment', 'temoignage', 'image_archive', 'document_montre', 'lieu_filme', 'carte', 'generique', 'autre'], 'podcast' => ['moment', 'temoignage', 'extrait', 'lecture', 'source', 'generique', 'autre']];
 const PERIODICAL_DATA_KEYS = ['issn', 'frequency', 'website', 'association', 'country', 'language', 'start_year', 'end_year', 'subscribed', 'subscription_end', 'subscription_price', 'contact', 'where_buy', 'notes'];
-const PERIODICAL_ISSUE_DATA_KEYS = ['creators', 'subtitle', 'publisher', 'place', 'edition', 'isbn', 'channel', 'duration', 'language', 'video_url', 'special', 'pages_count', 'cover_price', 'price_paid', 'bought_date', 'bought_where', 'storage', 'priority', 'buy_url', 'digital_url', 'summary', 'notes', 'rating', 'read', 'condition'];
+const PERIODICAL_ISSUE_DATA_KEYS = ['audio_url', 'host', 'guests', 'category', 'creators', 'subtitle', 'publisher', 'place', 'edition', 'isbn', 'channel', 'duration', 'language', 'video_url', 'special', 'pages_count', 'cover_price', 'price_paid', 'bought_date', 'bought_where', 'storage', 'priority', 'buy_url', 'digital_url', 'summary', 'notes', 'rating', 'read', 'condition'];
 const PERIODICAL_ARTICLE_DATA_KEYS = ['what_seen', 'transcript', 'summary', 'keywords', 'places', 'period', 'surnames', 'sources', 'url', 'rating', 'notes', 'read', 'quote'];
 
 function periodicals_ensure(PDO $pdo): void
@@ -49,6 +49,8 @@ function periodicals_ensure(PDO $pdo): void
         $cols = array_column($pdo->query("PRAGMA table_info($t)")->fetchAll(), 'name');
         if (!in_array('family', $cols, true)) { $pdo->exec("ALTER TABLE $t ADD COLUMN family TEXT NOT NULL DEFAULT 'revue'"); }
     }
+    // les types (les quatre de départ, réglés à sa façon, et ceux qu'on crée) : nom, icône, comportement, champs montrés et leur ordre, affichage
+    $pdo->exec("CREATE TABLE IF NOT EXISTS periodical_types (type_key TEXT PRIMARY KEY, data_json TEXT NOT NULL DEFAULT '{}', position INTEGER NOT NULL DEFAULT 0)");
     $pdo->exec("CREATE TABLE IF NOT EXISTS periodical_links (item_type TEXT NOT NULL, item_id INTEGER NOT NULL, entity_type TEXT NOT NULL, entity_id INTEGER NOT NULL,
         PRIMARY KEY (item_type, item_id, entity_type, entity_id))");
     $done = true;
@@ -70,10 +72,11 @@ function periodical_sort_date(string $text): string
     return sprintf('%04d-%02d-%02d', $y, $mo, $d);
 }
 
-function periodical_data(array $raw, array $keys): string
+function periodical_data(array $raw, array $keys, bool $custom = false): string
 {
     $out = [];
     foreach ($keys as $k) { if (isset($raw[$k]) && is_scalar($raw[$k]) && trim((string) $raw[$k]) !== '') { $out[$k] = trim(mb_substr((string) $raw[$k], 0, 8000)); } }
+    if ($custom) { $n = 0; foreach ($raw as $k => $v) { if (is_string($k) && preg_match('/^cf_[a-z0-9_]{1,30}$/', $k) && is_scalar($v) && trim((string) $v) !== '' && $n++ < 60) { $out[$k] = trim(mb_substr((string) $v, 0, 8000)); } } }
     return json_encode($out, JSON_UNESCAPED_UNICODE) ?: '{}';
 }
 
@@ -149,7 +152,7 @@ function periodicals_all(PDO $pdo): array
     foreach ($periodicals as &$pe) { $pe['labels'] = $labels['periodical:' . $pe['id']] ?? []; }
     unset($is, $ar, $pe);
     return ['periodicals' => $periodicals, 'issues' => $issues, 'articles' => $articles, 'kinds' => PERIODICAL_KINDS, 'statuses' => PERIODICAL_STATUSES, 'article_kinds' => PERIODICAL_ARTICLE_KINDS,
-        'families' => PERIODICAL_FAMILIES, 'family_kinds' => PERIODICAL_FAMILY_KINDS, 'family_article_kinds' => PERIODICAL_FAMILY_ARTICLE_KINDS];
+        'families' => PERIODICAL_FAMILIES, 'family_kinds' => PERIODICAL_FAMILY_KINDS, 'family_article_kinds' => PERIODICAL_FAMILY_ARTICLE_KINDS, 'types' => periodical_types($pdo)];
 }
 
 function save_periodical(PDO $pdo, array $data): array
@@ -159,7 +162,7 @@ function save_periodical(PDO $pdo, array $data): array
     $title = mb_substr(safe_text($data['title'] ?? ''), 0, 200);
     if ($title === '') { throw new RuntimeException('Donne le nom de la revue.'); }
     $kind = array_key_exists((string) ($data['kind'] ?? ''), PERIODICAL_KINDS) ? (string) $data['kind'] : 'autre';
-    $family = array_key_exists((string) ($data['family'] ?? ''), PERIODICAL_FAMILIES) ? (string) $data['family'] : 'revue';
+    $family = periodical_family($pdo, (string) ($data['family'] ?? ''));
     $vals = [$title, $kind, mb_substr(safe_text($data['publisher'] ?? ''), 0, 200), periodical_data(is_array($data['data'] ?? null) ? $data['data'] : [], PERIODICAL_DATA_KEYS), $family];
     if ($id) { $s = $pdo->prepare('UPDATE periodicals SET title=?, kind=?, publisher=?, data_json=?, family=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $s->execute([...$vals, $id]); if (!$s->rowCount()) { throw new RuntimeException('Revue introuvable.'); }
         $pdo->prepare('UPDATE periodical_issues SET family=? WHERE periodical_id=?')->execute([$family, $id]); }
@@ -173,22 +176,22 @@ function save_periodical_issue(PDO $pdo, array $data): array
 {
     periodicals_ensure($pdo);
     $id = safe_int($data['id'] ?? 0); $pid = safe_int($data['periodical_id'] ?? 0);
-    $family = array_key_exists((string) ($data['family'] ?? ''), PERIODICAL_FAMILIES) ? (string) $data['family'] : 'revue';
+    $family = periodical_family($pdo, (string) ($data['family'] ?? ''));
     $ptitle = '';
     if ($pid) { // la revue, la collection ou la série décide de la famille
         $s = $pdo->prepare('SELECT title, family FROM periodicals WHERE id=?'); $s->execute([$pid]); $per = $s->fetch();
         if (!$per) { throw new RuntimeException('Revue, collection ou série introuvable.'); }
         $ptitle = (string) $per['title']; $family = (string) $per['family'];
-    } elseif ($family === 'revue') { throw new RuntimeException('Choisis la revue de ce numéro.'); }
-    if ($family !== 'revue' && trim((string) ($data['title'] ?? '')) === '') { throw new RuntimeException($family === 'livre' ? 'Donne le titre du livre.' : 'Donne le titre du documentaire.'); }
+    } elseif (periodical_base($pdo, $family) === 'revue') { throw new RuntimeException('Choisis la revue de ce numéro.'); }
+    if (periodical_base($pdo, $family) !== 'revue' && trim((string) ($data['title'] ?? '')) === '') { throw new RuntimeException(['livre' => 'Donne le titre du livre.', 'doc' => 'Donne le titre du documentaire.', 'podcast' => 'Donne le titre de l’épisode.'][$family] ?? 'Donne un titre.'); }
     $dateText = mb_substr(safe_text($data['date_text'] ?? ''), 0, 80);
     $status = array_key_exists((string) ($data['status'] ?? ''), PERIODICAL_STATUSES) ? (string) $data['status'] : '';
     $vals = [$pid, mb_substr(safe_text($data['number'] ?? ''), 0, 40), mb_substr(safe_text($data['title'] ?? ''), 0, 300), $dateText, periodical_sort_date($dateText), $status,
-        periodical_data(is_array($data['data'] ?? null) ? $data['data'] : [], PERIODICAL_ISSUE_DATA_KEYS), $family];
+        periodical_data(is_array($data['data'] ?? null) ? $data['data'] : [], PERIODICAL_ISSUE_DATA_KEYS, true), $family];
     if ($id) { $u = $pdo->prepare('UPDATE periodical_issues SET periodical_id=?, number=?, title=?, date_text=?, sort_date=?, status=?, data_json=?, family=?, updated_at=CURRENT_TIMESTAMP WHERE id=?'); $u->execute([...$vals, $id]); if (!$u->rowCount()) { throw new RuntimeException('Numéro introuvable.'); } }
     else { $pdo->prepare('INSERT INTO periodical_issues(periodical_id, number, title, date_text, sort_date, status, data_json, family) VALUES(?,?,?,?,?,?,?,?)')->execute($vals); $id = (int) $pdo->lastInsertId(); }
     periodical_set_links($pdo, 'issue', $id, $data);
-    log_change($pdo, 'meta', 0, 'update', ['revue' => 'Numéro enregistré : ', 'livre' => 'Livre enregistré : ', 'doc' => 'Documentaire enregistré : '][$family] . trim($ptitle . ($vals[1] !== '' ? ' n° ' . $vals[1] : '') . ' ' . $vals[2]));
+    log_change($pdo, 'meta', 0, 'update', (['revue' => 'Numéro enregistré : ', 'livre' => 'Livre enregistré : ', 'doc' => 'Documentaire enregistré : ', 'podcast' => 'Épisode enregistré : '][$family] ?? 'Élément enregistré : ') . trim($ptitle . ($vals[1] !== '' ? ' n° ' . $vals[1] : '') . ' ' . $vals[2]));
     return ['id' => $id];
 }
 
@@ -393,4 +396,71 @@ function delete_press_item(PDO $pdo, array $data): array
     $pdo->prepare("DELETE FROM periodical_links WHERE item_type='ad' AND item_id=?")->execute([$id]);
     $pdo->prepare('DELETE FROM press_ads WHERE id=?')->execute([$id]);
     return ['ok' => true];
+}
+
+/* ─── Les types : réglages des quatre de départ, et types à soi (« c_… », qui se comportent comme l'un des quatre) ─── */
+function periodical_types(PDO $pdo): array
+{
+    periodicals_ensure($pdo);
+    $out = [];
+    foreach ($pdo->query('SELECT type_key, data_json FROM periodical_types ORDER BY position, type_key')->fetchAll() as $r) {
+        $d = json_decode((string) $r['data_json'], true); if (!is_array($d)) { $d = []; }
+        $out[] = ['key' => (string) $r['type_key']] + $d;
+    }
+    return $out;
+}
+/** la famille d'un élément : l'une des quatre, ou un type à soi qui existe */
+function periodical_family(PDO $pdo, string $key): string
+{
+    if (array_key_exists($key, PERIODICAL_FAMILIES)) { return $key; }
+    if (preg_match('/^c_[a-z0-9]{2,24}$/', $key)) { periodicals_ensure($pdo); $s = $pdo->prepare('SELECT 1 FROM periodical_types WHERE type_key=?'); $s->execute([$key]); if ($s->fetchColumn()) { return $key; } }
+    return 'revue';
+}
+function save_periodical_types(PDO $pdo, array $data): array
+{
+    periodicals_ensure($pdo);
+    $list = is_array($data['types'] ?? null) ? array_slice($data['types'], 0, 60) : [];
+    $clean = []; $seen = [];
+    foreach ($list as $t) {
+        if (!is_array($t)) { continue; }
+        $key = (string) ($t['key'] ?? '');
+        $builtin = array_key_exists($key, PERIODICAL_FAMILIES);
+        if (!$builtin && !preg_match('/^c_[a-z0-9]{2,24}$/', $key)) { continue; }
+        if (isset($seen[$key])) { continue; } $seen[$key] = true;
+        $base = array_key_exists((string) ($t['base'] ?? ''), PERIODICAL_FAMILIES) ? (string) $t['base'] : ($builtin ? $key : 'livre');
+        $fields = [];
+        foreach (array_slice(is_array($t['fields'] ?? null) ? $t['fields'] : [], 0, 80) as $f) {
+            if (!is_array($f) || !preg_match('/^[a-z][a-z0-9_]{0,40}$/', (string) ($f['k'] ?? ''))) { continue; }
+            $row = ['k' => (string) $f['k'], 'show' => !empty($f['show'])];
+            if (str_starts_with($row['k'], 'cf_')) { $row['label'] = mb_substr(safe_text($f['label'] ?? ''), 0, 60) ?: 'Champ'; $row['type'] = in_array($f['type'] ?? '', ['text', 'textarea', 'number', 'date', 'url', 'check'], true) ? $f['type'] : 'text'; }
+            $fields[] = $row;
+        }
+        $d = ['base' => $base, 'fields' => $fields, 'view' => in_array($t['view'] ?? '', ['list', 'cards'], true) ? $t['view'] : 'list', 'group' => ($t['group'] ?? '') === 'category' ? 'category' : ''];
+        if (!$builtin) { $d['name'] = mb_substr(safe_text($t['name'] ?? ''), 0, 60) ?: 'Mon type'; $d['icon'] = mb_substr(safe_text($t['icon'] ?? ''), 0, 8) ?: '📁'; $d['item'] = mb_substr(safe_text($t['item'] ?? ''), 0, 40) ?: 'Élément'; }
+        $clean[$key] = $d;
+    }
+    $own = !$pdo->inTransaction(); // api.php en ouvre souvent déjà une
+    if ($own) { $pdo->beginTransaction(); }
+    try {
+        // un type à soi supprimé : ses éléments reprennent le type dont il avait le comportement
+        foreach (periodical_types($pdo) as $old) {
+            if (!array_key_exists($old['key'], PERIODICAL_FAMILIES) && !isset($clean[$old['key']])) {
+                $base = array_key_exists((string) ($old['base'] ?? ''), PERIODICAL_FAMILIES) ? $old['base'] : 'livre';
+                foreach (['periodicals', 'periodical_issues'] as $t) { $pdo->prepare("UPDATE $t SET family=? WHERE family=?")->execute([$base, $old['key']]); }
+            }
+        }
+        $pdo->exec('DELETE FROM periodical_types');
+        $ins = $pdo->prepare('INSERT INTO periodical_types(type_key, data_json, position) VALUES(?,?,?)'); $n = 0;
+        foreach ($clean as $k => $d) { $ins->execute([$k, json_encode($d, JSON_UNESCAPED_UNICODE), $n++]); }
+        if ($own) { $pdo->commit(); }
+    } catch (Throwable $e) { if ($own && $pdo->inTransaction()) { $pdo->rollBack(); } throw $e; }
+    log_change($pdo, 'meta', 0, 'update', 'Revues, livres et documentaires : réglages des types');
+    return ['types' => periodical_types($pdo)];
+}
+/** le comportement d'un type à soi (revue, livre, doc, podcast) */
+function periodical_base(PDO $pdo, string $family): string
+{
+    if (array_key_exists($family, PERIODICAL_FAMILIES)) { return $family; }
+    foreach (periodical_types($pdo) as $t) { if ($t['key'] === $family) { return array_key_exists((string) ($t['base'] ?? ''), PERIODICAL_FAMILIES) ? $t['base'] : 'livre'; } }
+    return 'livre';
 }

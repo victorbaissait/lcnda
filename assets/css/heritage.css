@@ -3293,3 +3293,12 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 /* Outils de modification (et leurs raccourcis) : tous sur une seule ligne, quel que soit leur nombre */
 .segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{grid-template-columns:none!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);max-width:1180px}
 @media (max-width:700px){.segmented.enquetes-tab-toggle.h-et-tabs,.segmented.enquetes-tab-toggle.h-ek-tabs{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+/* Revues, livres, documentaires, podcasts : affichage en fiches, catégories, réglages des types */
+.h-pr-disp{align-items:center}.h-pr-disp .checkbox-line{margin-left:10px;font-size:13px}
+.h-pr-group{margin-top:14px}.h-pr-group > h3{font-size:15px;margin:0 0 8px}.h-pr-group > h3 small{color:var(--muted,#777);font-weight:400}
+.h-pr-fcards{margin-top:6px}.h-pr-fcard .h-pr-fchips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.h-pr-cat{display:block;color:var(--muted,#777)}
+.h-pr-player.is-audio audio{width:100%}.h-pr-setnote{font-size:12px;margin:4px 0 10px}
+.h-pr-types{display:grid;grid-template-columns:220px minmax(0,1fr);gap:16px;align-items:start}
+.h-pr-tylist{display:flex;flex-direction:column;gap:4px}.h-pr-tylist > button:not(.button){text-align:left;border:2px solid var(--ink,#111);background:var(--white,#fff);padding:6px 8px;cursor:pointer;font:inherit}.h-pr-tylist > button.is-on{background:var(--blue,#0066cc);color:#fff}
+.h-pr-tyfields{max-height:46vh;overflow:auto}.h-pr-tyown{flex:1;min-width:0}
+@media (max-width:760px){.h-pr-types{grid-template-columns:1fr}}
