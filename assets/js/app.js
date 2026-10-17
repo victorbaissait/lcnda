@@ -13054,18 +13054,29 @@ ${backupSectionHtml()}
     // OCR tapuscrit : Tesseract dans le navigateur.
     // HTR manuscrit : service local côté serveur, branchable sur Kraken + modèles .mlmodel.
     // Le texte détecté est toujours AJOUTÉ À LA FIN de la transcription existante, jamais en remplacement.
+    // Le lecteur (Tesseract.js) est livré avec l'app (assets/vendor/tesseract) ; seul son moteur, trop lourd, vient
+    // d'internet : il n'est exécuté que si son empreinte est exactement celle attendue (sinon refusé).
+    const OCR_CORE={url:'https://cdn.jsdelivr.net/npm/tesseract.js-core@5.1.1/tesseract-core-lstm.wasm.js',integrity:'sha384-EKWY5JDwphQoyxhvYU7eaCcyQ0EdV6fZK3L2vzfZcv2ichRdNd6pSnyWPNv6fMuR'};
     let ocrEnginePromise=null;
     function loadOcrEngine(){
-        if(window.Tesseract)return Promise.resolve(window.Tesseract);
         if(ocrEnginePromise)return ocrEnginePromise;
-        ocrEnginePromise=new Promise((resolve,reject)=>{
-            const script=document.createElement('script');
-            script.src='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
-            script.async=true;
-            script.onload=()=>{window.Tesseract?resolve(window.Tesseract):reject(new Error('Moteur OCR indisponible après chargement.'));};
-            script.onerror=()=>{ocrEnginePromise=null;reject(new Error('Impossible de charger le moteur OCR (connexion internet requise).'));};
-            document.head.appendChild(script);
+        const script=new Promise((resolve,reject)=>{
+            if(window.Tesseract)return resolve(window.Tesseract);
+            const el=document.createElement('script');
+            el.src='assets/vendor/tesseract/tesseract.min.js';
+            el.async=true;
+            el.onload=()=>{window.Tesseract?resolve(window.Tesseract):reject(new Error('Moteur OCR indisponible après chargement.'));};
+            el.onerror=()=>reject(new Error('Impossible de charger le lecteur de texte.'));
+            document.head.appendChild(el);
         });
+        const core=fetch(OCR_CORE.url,{integrity:OCR_CORE.integrity,credentials:'omit'}).then(r=>{if(!r.ok)throw new Error();return r.blob();})
+            // « #.js » : Tesseract n'utilise tel quel qu'un chemin finissant par .js
+            .then(b=>URL.createObjectURL(new Blob([b],{type:'application/javascript'}))+'#.js')
+            .catch(()=>{throw new Error('Impossible de charger le moteur OCR (connexion internet requise, ou fichier modifié refusé).');});
+        ocrEnginePromise=Promise.all([script,core]).then(([T,corePath])=>{
+            const base={workerPath:'assets/vendor/tesseract/worker.min.js',workerBlobURL:false,corePath};
+            return {...T,recognize:(image,langs,options={})=>T.recognize(image,langs,{...options,...base}),createWorker:(langs,oem,options={},config)=>T.createWorker(langs,oem,{...options,...base},config)};
+        }).catch(error=>{ocrEnginePromise=null;throw error;});
         return ocrEnginePromise;
     }
     /** La visionneuse montre-t-elle encore ce média ? (une réponse lente ne doit pas toucher la page suivante) */
@@ -13558,7 +13569,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';const st=$('#database-status');if(st)st.textContent=personCountLabel(state.bootstrap.stats.personnes);if(state.module==='personnes'){renderSidebar();loadPeople();}}
-    window.LCNDA_APP={refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

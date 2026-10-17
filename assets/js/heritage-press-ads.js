@@ -56,8 +56,7 @@
     }
 
     /* ─── Lire les règles sur une capture (OCR) ─── */
-    let ocrP = null;
-    const ocr = () => window.Tesseract ? Promise.resolve(window.Tesseract) : ocrP || (ocrP = new Promise((ok, ko) => { const s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js'; s.onload = () => window.Tesseract ? ok(window.Tesseract) : ko(new Error('Lecteur de texte indisponible.')); s.onerror = () => { ocrP = null; ko(new Error('Impossible de charger le lecteur de texte (il faut internet).')); }; document.head.appendChild(s); }));
+    const ocr = () => A().loadOcrEngine();
     /** Ce qu'on reconnaît dans un texte de tarifs, en français : {clé: valeur} */
     function parseRules(raw) {
         const t = ' ' + String(raw || '').slice(0, 8000).replace(/\d{9,}/g, ' ').replace(/\s+/g, ' ').replace(/(\d)\s*,\s*(\d)/g, '$1.$2').toLowerCase() + ' ', r = {};

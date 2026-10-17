@@ -1094,7 +1094,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=359" defer></script>
+<script src="assets/js/app.js?v=360" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=13" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
@@ -1127,12 +1127,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-board-kit.js?v=10" defer></script>
 <script src="assets/js/heritage-boards.js?v=23" defer></script>
 <script src="assets/js/heritage-dnd.js?v=6" defer></script>
-<script src="assets/js/heritage-studio.js?v=42" defer></script>
+<script src="assets/js/heritage-studio.js?v=43" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=2" defer></script>
 <script src="assets/js/heritage-fiches.js?v=8" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=2" defer></script>
 <script src="assets/js/heritage-periodicals.js?v=3" defer></script>
-<script src="assets/js/heritage-press-ads.js?v=2" defer></script>
+<script src="assets/js/heritage-press-ads.js?v=3" defer></script>
 <script src="assets/js/museum-viewer.js?v=7" defer></script>
 <script src="assets/js/heritage-museum.js?v=10" defer></script>
 <script>

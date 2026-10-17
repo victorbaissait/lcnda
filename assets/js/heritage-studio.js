@@ -1483,7 +1483,9 @@
         stage.addEventListener('drop', e => { const f = [...(e.dataTransfer?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); placeFile(f); } });
         document.addEventListener('paste', function onPaste(e) {
             if (!dlg.isConnected) { document.removeEventListener('paste', onPaste); return; }
-            if (!dlg.open || e.target.closest?.('input, textarea, [contenteditable]') || document.querySelector('dialog[open]:not(.h-retouch)')) return;
+            if (!dlg.open || e.target.closest?.('input, textarea, [contenteditable]')) return;
+            // une autre fenêtre ouverte PAR-DESSUS la retouche (pas celle d'où elle a été ouverte, ex. la mise en page) garde le collage
+            const over = document.activeElement?.closest?.('dialog'); if (over && over !== dlg) return;
             const f = [...(e.clipboardData?.files || [])].find(x => /^image\//.test(x.type)); if (f) { e.preventDefault(); placeFile(f); }
         });
         const hitOp = (x, y) => { const rx = x / pw, ry = y / ph, tolx = 6 / pw * (pw / canvas.getBoundingClientRect().width), toly = tolx * pw / ph;
