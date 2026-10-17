@@ -41,7 +41,7 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
     if (preg_match('/\b(meme jour|meme date|jour de naissance) que (moi|[a-z].*?)(\?|$)/', $t, $m)) {
         $who = trim($m[2]);
         $pid = 0;
-        if ($who === 'moi') { $pid = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 ORDER BY id LIMIT 1')->fetchColumn(); }
+        if ($who === 'moi') { $pid = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn(); }
         else { $pid = question_find_person($pdo, $who); }
         if ($pid) {
             $c['same_birthday'] = $pid;
@@ -270,6 +270,13 @@ function same_birthday_ids(PDO $pdo, int $personId): array
 
 function ask_question(PDO $pdo, string $question, int $personId = 0): array
 {
+    // les questions qui demandent un calcul (lien de parenté, records, moyennes, fréquences, époques…) : lib/question_more.php
+    if (function_exists('question_special') && ($sp = question_special($pdo, $question, $personId))) {
+        $ids = array_slice(array_values(array_unique($sp['ids'] ?? [])), 0, 1000);
+        if ($ids) { $pp = collection_people($pdo, $ids); $sp['people'] = array_values(array_filter(array_map(static fn($id) => $pp[$id] ?? null, $ids))); $sp['count'] = count(array_unique($sp['ids'])); }
+        unset($sp['ids']);
+        return $sp;
+    }
     $r = question_to_criteria($pdo, $question, $personId);
     $ids = !empty($r['criteria']['same_birthday']) ? same_birthday_ids($pdo, (int) $r['criteria']['same_birthday']) : run_saved_search($pdo, $r['criteria']);
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
@@ -294,6 +301,7 @@ function ask_question(PDO $pdo, string $question, int $personId = 0): array
     foreach ($r['relation']['homonyms'] ?? [] as $hid) {
         $homonyms[] = ['id' => (int) $hid, 'name' => question_person_name($pdo, (int) $hid), 'life' => person_life_years($pdo, (int) $hid), 'chosen' => (int) $hid === (int) $r['relation']['person']];
     }
+    if ($answer === '' && preg_match('/\bcombien\b/', strtolower(ascii_fold($question)))) { $answer = count($ids) === 1 ? '1 fiche répond à la question.' : count($ids) . ' fiches répondent à la question.'; }
     return ['understood' => $r['understood'], 'answer' => $answer, 'criteria' => $r['criteria'], 'homonyms' => $homonyms, 'count' => count($ids), 'people' => array_values(array_filter(array_map(static fn($id) => $people[$id] ?? null, $ids)))];
 }
 

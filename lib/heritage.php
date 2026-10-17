@@ -1265,7 +1265,7 @@ function run_saved_search(PDO $pdo, array $criteria): array
     $stmt->execute($params);
     $ids = array_map('intval', $stmt->fetchAll(PDO::FETCH_COLUMN));
     if ($c['ancestors']) { // seulement les ancêtres de la personne de départ de l'arbre
-        $start = (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 ORDER BY id LIMIT 1')->fetchColumn();
+        $start = (int) $pdo->query('SELECT id FROM persons ORDER BY is_start DESC, id LIMIT 1')->fetchColumn(); // sans personne de départ cochée : la première fiche (comme ailleurs)
         $anc = $start ? h_ancestors($pdo, $start, 40) : [];
         unset($anc[$start]);
         $ids = array_values(array_filter($ids, static fn($id) => isset($anc[$id])));

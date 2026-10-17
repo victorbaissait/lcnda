@@ -3562,3 +3562,7 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 .h-face-act{display:flex;flex-wrap:wrap;gap:4px}.h-faces-groups{display:flex;flex-direction:column;gap:10px}.h-face-group{border:1px solid var(--line,#d0d4dc);border-radius:10px;padding:10px;background:var(--panel,#fff)}.h-face-group p{margin:6px 0}.h-face-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .h-faces-hint{background:#eef4ff;border-radius:8px;padding:10px 12px}
 .h-faces-grid.is-small{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
+/* 🔎 Questions qui demandent un calcul */
+.h-question-more{margin:6px 0 10px}.h-question-more summary{cursor:pointer;color:var(--accent,#0066cc)}.h-question-more-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:8px}.h-question-more-grid div{display:flex;flex-direction:column;align-items:flex-start;gap:2px}.h-question-more-grid .link-button{text-align:left}
+.h-question-facts{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;background:var(--soft,#f2f3f6);border-radius:8px;padding:10px 14px;margin:8px 0}.h-question-facts dt{font-weight:600}.h-question-facts dd{margin:0}
+.h-question-rank{max-width:720px}.h-question-rank td:first-child{width:2.5em}.h-question-rank td:last-child{white-space:nowrap;text-align:right}
