@@ -493,7 +493,9 @@
             // dans un calque (pas dans un groupe isolé) : les autres calques restent nets et un clic dessus y passe, comme dans Illustrator
             const isolate = scope.some(id => !findAny(id)?.o?.layer);
             const walk = (arr, depth) => listSvg(arr, o => {
-                if (!isolate && depth === 0 && o.layer && scope[0] !== o.id && isLayerGroup(o)) return o.hidden ? '' : `<g${num(o.op, 1) < 1 ? ` opacity="${n2(num(o.op, 1))}"` : ''}>${listSvg(o.children || [], c => objSvg(c, defs, 'e', c.locked ? false : 'out'))}</g>`;
+                if (!isolate && depth === 0 && o.layer && scope[0] !== o.id && isLayerGroup(o)) { if (o.hidden) return '';
+                    let clip = ''; if (o.clip) { const cid = `ec${String(o.id).replace(/\W/g, '')}`; defs.push(`<clipPath id="${cid}"><path d="${esc(shapeD(o.clip))}"${rotAttr(o.clip)}/></clipPath>`); clip = ` clip-path="url(#${cid})"`; } // ✂️ calque masqué
+                    return `<g${num(o.op, 1) < 1 ? ` opacity="${n2(num(o.op, 1))}"` : ''}><g${clip}>${listSvg(o.children || [], c => objSvg(c, defs, 'e', c.locked ? false : 'out'))}</g></g>`; }
                 if (depth < scope.length && o.id === scope[depth] && isLayerGroup(o)) {
                     if (o.hidden) return '';
                     let clip = ''; if (o.clip) { const cid = `ec${String(o.id).replace(/\W/g, '')}`; defs.push(`<clipPath id="${cid}"><path d="${esc(shapeD(o.clip))}"${rotAttr(o.clip)}/></clipPath>`); clip = ` clip-path="url(#${cid})"`; }
@@ -779,6 +781,7 @@
                     + (g ? `<button type="button" class="vx-ltw" data-vx-ltoggle title="Déplier / replier">${open ? '▾' : '▸'}</button>` : '<span class="vx-ltw"></span>')
                     + `<span class="vx-lic">${o.layer ? '📄' : LIC[o.type] || '•'}</span><input data-vx-lname readonly title="Double-clic pour renommer" value="${esc(o.name || '')}" placeholder="${esc(o.type)}">`
                     + (g ? `<button type="button" data-vx-lenter title="${active ? 'Sortir de ce ' + (o.layer ? 'calque' : 'groupe') : 'Travailler dans ce ' + (o.layer ? 'calque' : 'groupe') + ' : les nouveaux dessins y vont'}" class="vx-lenter${active ? ' is-on' : ''}">${active ? '●' : '○'}</button>` : '')
+                    + (g ? `<button type="button" data-vx-lclip class="vx-lclip${o.clip ? ' is-on' : ''}" title="${o.clip ? 'Retirer le masque : la forme revient tout en haut, rien n’est perdu' : `Masquer avec la forme du dessus : la forme la plus haute de ce ${o.layer ? 'calque' : 'groupe'} le découpe (on ne voit que ce qui est dedans)`}">✂️</button>` : '')
                     + `<button type="button" data-vx-lvis title="Montrer / cacher">${o.hidden ? '🙈' : '👁'}</button><button type="button" data-vx-llock title="Verrouiller">${o.locked ? '🔒' : '🔓'}</button><button type="button" data-vx-lup title="Vers le haut">↑</button><button type="button" data-vx-ldown title="Vers le bas">↓</button><button type="button" data-vx-ldel title="Supprimer">🗑</button></div>`);
                 if (open) walk(o.children || [], [...path, o.id]);
             });
@@ -788,7 +791,7 @@
                     return sel.length && gs.length ? `<select class="vx-lmoveto" data-vx-lmoveto title="Ranger la sélection dans un groupe ou un calque, sans glisser"><option value="">📁 Ranger dans…</option>${gs.map(([id, n]) => `<option value="${esc(id)}">${esc(n)}</option>`).join('')}</select>` : ''; })()}${scope.length ? '<button type="button" class="button small secondary" data-vx-lexit title="Revenir au niveau du dessus (Échap)">⤴ Sortir</button>' : ''}</div>
                 <p class="vx-lwhere">Tu dessines dans : <strong>${where}</strong></p>
                 <div class="vx-layers" data-vx-ltree data-dnd-off data-ord-off>${rows.join('') || A().emptyState({icon: '🗂️', text: 'Aucun calque pour l’instant', hint: 'Dessine avec les outils de gauche, ou Fichier → Importer.', action: {label: '＋ Calque', attrs: 'data-vx-lnew'}})}</div>
-                <p class="muted vx-lhelp">Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir.</p>`;
+                <p class="muted vx-lhelp">Glisse une ligne sur un groupe pour l’y ranger (il devient bleu), entre deux lignes pour changer l’ordre ; ou sélectionne puis « 📁 Ranger dans… ». Double-clic sur un nom pour le renommer. ✂️ : la forme la plus haute du groupe ou du calque le découpe (masque), 2e clic pour le retirer. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir.</p>`;
         }
         /** déplacer un objet (n'importe où) avant / après une ligne, ou dans un groupe */
         function moveInTree(id, targetId, where) {
@@ -899,6 +902,13 @@
             const row = b.closest('[data-vx-layer]'); if (row) { const f = findAny(row.dataset.vxLayer); if (!f) return; const {o, arr, path} = f, i = arr.indexOf(o);
                 if (b.matches('[data-vx-ltoggle]')) { if (openGroups.has(o.id)) openGroups.delete(o.id); else openGroups.add(o.id); paintPanel(); return; }
                 if (b.matches('[data-vx-lenter]')) { if (samePath([...path, o.id], scope)) { scope = path.slice(); sel = []; nodeSel = null; render(); } else if (enterScope([...path, o.id])) { openGroups.add(o.id); render(); } return; }
+                if (b.matches('[data-vx-lclip]')) { // ✂️ masque d'un groupe ou d'un calque : sa forme la plus haute le découpe ; un 2e clic la rend
+                    const what = o.layer ? 'calque' : 'groupe';
+                    if (o.clip) { const shape = {...clone(o.clip), id: uid(), name: o.clip.name || 'Forme du masque'}; delete o.clip; (o.children = o.children || []).push(shape); sel = []; commit('Masque retiré'); toast(`Masque retiré : la forme est revenue tout en haut du ${what}.`); return; }
+                    const kids = o.children || [], k = kids.map((c, j) => [c, j]).reverse().find(([c]) => c.type !== 'group' && c.type !== 'image' && c.type !== 'text' && shapeD(c));
+                    if (!k) return toast(`Pose d’abord une forme (rond, ovale, rectangle, tracé…) tout en haut de ce ${what} : elle servira de découpe.`, 'error');
+                    if (kids.length < 2) return toast(`Il faut quelque chose à découper sous la forme, dans ce ${what}.`, 'error');
+                    o.clip = clone(k[0]); kids.splice(k[1], 1); sel = sel.filter(x => x !== k[0].id); commit('Masque'); toast(`✂️ Masque posé : on ne voit plus que ce qui est dans « ${k[0].name || 'la forme'} ».`); return; }
                 if (b.matches('[data-vx-lvis]')) { o.hidden = !o.hidden; if (o.hidden) sel = sel.filter(s => s !== o.id); commit(o.hidden ? 'Masqué' : 'Affiché'); return; }
                 if (b.matches('[data-vx-llock]')) { o.locked = !o.locked; if (o.locked) sel = sel.filter(s => s !== o.id); commit(o.locked ? 'Verrouillé' : 'Déverrouillé'); return; }
                 if (b.matches('[data-vx-lup]') && i < arr.length - 1) { [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]; commit('Calque monté'); return; }

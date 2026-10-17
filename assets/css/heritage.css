@@ -3926,6 +3926,8 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .vx-bm-pad button{border:1.5px solid var(--ink);background:var(--card-bg,#fff);color:var(--ink);cursor:pointer;padding:0;font-size:13px}.vx-bm-pad button:hover{background:var(--blue-soft,#eaf2ff)}
 .vx-bm-pad button:nth-child(1){grid-column:2;grid-row:1}.vx-bm-pad button:nth-child(2){grid-column:1;grid-row:2}.vx-bm-pad button:nth-child(3){grid-column:3;grid-row:2}.vx-bm-pad button:nth-child(4){grid-column:2;grid-row:3}
 .vx-bm-shift{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0}.vx-bm-shift>span{font-weight:700;font-size:12px}.vx-bm-shift small{flex-basis:100%}
+.vx-layer .vx-lclip{opacity:.35;filter:grayscale(1)}.vx-layer .vx-lclip:hover{opacity:.8}.vx-layer .vx-lclip.is-on{opacity:1;filter:none;background:#e8f0ff;border-radius:4px}
+
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .h-poilu-event.is-blesse>strong,:root[data-theme="dark"] .h-poilu-event.is-tue>strong,:root[data-theme="dark"] .h-poilu-event.is-gaze>strong{color:#f49aa3}
 :root[data-theme="dark"] .h-calib-image{background:#292929}
