@@ -88,7 +88,7 @@
             ws.querySelector('[data-et-count]').textContent = loading ? '…' : `${list.length}${list.length !== rows.length ? ` sur ${rows.length}` : ''} projet${rows.length > 1 ? 's' : ''}`;
             box.innerHTML = loading ? '<div class="loading-block">Chargement…</div>' : list.length ? `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>Nom</th><th>Détails</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${esc(fmtDate(r.date))}</td>
                 <td><div class="h-et-act"><button type="button" class="button small" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>Ouvrir</button><button type="button" class="button small secondary" data-et-ren="${r.id}" title="Renommer">✎</button><button type="button" class="button small secondary" data-et-del="${r.id}" title="Supprimer le projet">🗑</button></div></td></tr>`).join('')}</tbody></table></div>`
-                : A().empty(rows.length ? 'Aucun projet ne correspond à la recherche.' : `Aucun projet de ${t.what} pour l’instant : « ${t.createLabel} ».`);
+                : rows.length ? A().empty('Aucun projet ne correspond à la recherche', {icon: '🔎', hint: 'Change les mots cherchés.'}) : A().empty(`Aucun projet de ${t.what} pour l’instant`, {icon: '🗂️', action: {label: t.createLabel, attrs: 'data-et-new'}});
         };
         const load = async () => {
             loading = true; drawList();
@@ -118,7 +118,7 @@
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
                 if (d.etRen) { const r = rows.find(x => x.id === Number(d.etRen)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: r?.name || '', okLabel: 'Renommer'}); if (!n?.trim()) return; await t.rename(r.id, n.trim().slice(0, 160)); toast('Projet renommé.'); return load(); }
-                if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!confirm(`Supprimer le projet « ${r?.name} » ? (les photos, vidéos et sons restent dans les Médias)`)) return; await t.remove(r.id); toast('Projet supprimé.'); return load(); }
+                if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!await A().confirmBox('Les photos, vidéos et sons restent dans les Médias.', {title: `Supprimer le projet « ${r?.name} » ?`, okLabel: 'Supprimer le projet'})) return; await t.remove(r.id); toast('Projet supprimé.'); return load(); }
             } catch (err) { toast(err.message, 'error'); }
         };
         ws.oninput = e => { if (e.target.matches('[data-et-q]')) { q = e.target.value; drawList(); } };

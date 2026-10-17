@@ -23,7 +23,7 @@
     const LP = (type, labels) => window.LCNDA_EXT?.labelsPicker?.(type, labels) || ''; // étiquettes (heritage-more.js)
     const LC = labels => window.LCNDA_EXT?.labelChips?.(labels) || '';
     const toast = (...args) => A().toast(...args);
-    const empty = text => A().empty(text);
+    const empty = (text, o) => A().empty(text, o); // o : {icon, hint, action: {label, attrs}}
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
@@ -105,7 +105,7 @@
         const type = box.dataset.hMediaType, id = Number(box.dataset.hMediaId);
         box.addEventListener('click', async event => {
             const rm = event.target.closest('[data-h-media-remove]');
-            if (rm && confirm('Retirer ce fichier de la fiche ? (il reste dans les médias de l’application)')) {
+            if (rm && await A().confirmBox('Il reste dans les médias de l’application.', {title: 'Retirer ce fichier de la fiche ?', okLabel: 'Retirer'})) {
                 try { await api('remove_collection_media', {}, {method: 'POST', body: {collection_type: type, collection_id: id, media_id: rm.dataset.hMediaRemove}}); rm.parentElement.remove(); }
                 catch (error) { toast(error.message, 'error'); }
             }
@@ -416,7 +416,7 @@
         if (!flagShown(p, 'show_voyage_block')) return '';
         const rows = detail.heritage?.voyages || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(v => voyageCardHtml(v, {editable: !Number(p.is_locked)})).join('')}</div><div class="h-voyage-map">${voyagePaths(rows)}<small class="muted">Trajet en mer tracé au plus court en ne passant que par la mer (détroits ; canaux de Suez, Kiel et Panama seulement après leur ouverture) ; en pointillés, le trajet à terre jusqu’à la destination.</small></div></div>`
-            : empty('Aucun voyage pour l’instant. Ajoute le départ : date, port, navire, destination, liste de passagers, naturalisation…');
+            : empty('Aucun voyage pour l’instant', {icon: '🚢', hint: 'Ajoute le départ : date, port, navire, destination, liste de passagers, naturalisation…', action: editOnly('x') ? {label: '＋ Voyage', attrs: `data-h-voyage-edit="0" data-h-voyage-person="${p.id}"`} : null});
         return card(index, 'Départs / émigration', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-voyage-edit="0" data-h-voyage-person="${p.id}">+ Voyage</button>`));
     };
     // Champs préfixés « c_ » : ne pas se mélanger avec la naturalisation de la personne principale
@@ -465,7 +465,7 @@
                 toast(r.dep?.[0] == null || r.dest?.[0] == null ? 'Voyage enregistré (un lieu n’a pas été trouvé : choisis-le dans les suggestions pour tracer le trajet).' : 'Voyage enregistré.');
                 await refreshView();
             },
-            onDelete: v.id ? async () => { if (!confirm('Supprimer ce voyage ?')) return false; await api('delete_voyage', {}, {method: 'POST', body: {id: v.id}}); toast('Voyage supprimé.'); await refreshView(); } : null,
+            onDelete: v.id ? async () => { if (!await A().confirmBox('', {title: 'Supprimer ce voyage ?', okLabel: 'Supprimer le voyage'})) return false; await api('delete_voyage', {}, {method: 'POST', body: {id: v.id}}); toast('Voyage supprimé.'); await refreshView(); } : null,
         });
     }
     document.addEventListener('click', event => {
@@ -480,24 +480,24 @@
         event.preventDefault();
         try {
             const d = b.dataset;
-            if (d.hVoyageDelete) { if (!confirm('Supprimer ce voyage ?')) return; await api('delete_voyage', {}, {method: 'POST', body: {id: d.hVoyageDelete}}); toast('Voyage supprimé.'); }
-            else if (d.hPlacementDelete) { if (!confirm('Supprimer ce placement ?')) return; await api('delete_placement', {}, {method: 'POST', body: {id: d.hPlacementDelete}}); toast('Placement supprimé.'); }
+            if (d.hVoyageDelete) { if (!await A().confirmBox('', {title: 'Supprimer ce voyage ?', okLabel: 'Supprimer le voyage'})) return; await api('delete_voyage', {}, {method: 'POST', body: {id: d.hVoyageDelete}}); toast('Voyage supprimé.'); }
+            else if (d.hPlacementDelete) { if (!await A().confirmBox('', {title: 'Supprimer ce placement ?', okLabel: 'Supprimer le placement'})) return; await api('delete_placement', {}, {method: 'POST', body: {id: d.hPlacementDelete}}); toast('Placement supprimé.'); }
             else if (d.hCoatDelete) {
                 const coat = ((await api('coats_of_arms')).coats || []).find(c => Number(c.id) === Number(d.hCoatDelete));
                 if (!coat) return;
                 const personId = Number(d.hCoatPerson) || 0, others = (coat.people || []).filter(l => Number(l.person.id) !== personId);
                 if (personId && others.length) {
-                    if (!confirm(`Retirer « ${coat.title} » de cette fiche ? Les armoiries restent pour les ${others.length} autre(s) porteur(s).`)) return;
+                    if (!await A().confirmBox(`Les armoiries restent pour ${others.length > 1 ? `les ${others.length} autres porteurs` : 'l’autre porteur'}.`, {title: `Retirer « ${coat.title} » de cette fiche ?`, okLabel: 'Retirer'})) return;
                     await api('save_coat_of_arms', {}, {method: 'POST', body: {...coat, people: others.map(l => ({person_id: l.person.id, note: l.note}))}});
                     toast('Armoiries retirées de cette fiche.');
                 } else {
-                    if (!confirm(`Supprimer les armoiries « ${coat.title} » ?`)) return;
+                    if (!await A().confirmBox('', {title: `Supprimer les armoiries « ${coat.title} » ?`, okLabel: 'Supprimer les armoiries'})) return;
                     await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: coat.id}}); toast('Armoiries supprimées.');
                 }
             }
-            else if (d.hPoiluClear) { if (!confirm('Effacer tout le parcours de poilu (unités et événements) ?')) return; await api('save_poilu', {}, {method: 'POST', body: {person_id: d.hPoiluClear, units: [], events: []}}); toast('Parcours effacé.'); }
-            else if (d.hProbateDelete) { if (!confirm('Supprimer cet inventaire après décès ?')) return; await api('delete_probate_inventory', {}, {method: 'POST', body: {id: d.hProbateDelete}}); toast('Inventaire supprimé.'); }
-            else if (d.hPaperDelete) { if (!confirm('Retirer ce document de l’inventaire des papiers ?')) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: d.hPaperDelete}}); toast('Document retiré.'); }
+            else if (d.hPoiluClear) { if (!await A().confirmBox('Les unités et les événements du parcours seront supprimés.', {title: 'Supprimer tout le parcours de poilu ?', okLabel: 'Supprimer le parcours'})) return; await api('save_poilu', {}, {method: 'POST', body: {person_id: d.hPoiluClear, units: [], events: []}}); toast('Parcours supprimé.'); }
+            else if (d.hProbateDelete) { if (!await A().confirmBox('', {title: 'Supprimer cet inventaire après décès ?', okLabel: 'Supprimer l’inventaire'})) return; await api('delete_probate_inventory', {}, {method: 'POST', body: {id: d.hProbateDelete}}); toast('Inventaire supprimé.'); }
+            else if (d.hPaperDelete) { if (!await A().confirmBox('', {title: 'Supprimer ce document de l’inventaire des papiers ?', okLabel: 'Supprimer le document'})) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: d.hPaperDelete}}); toast('Document supprimé.'); }
             await refreshView();
         } catch (error) { toast(error.message, 'error'); }
     });
@@ -526,7 +526,7 @@
         if (!flagShown(p, 'show_placement_block')) return '';
         const rows = detail.heritage?.placements || [];
         const body = rows.length ? `<div class="h-voyage-layout"><div class="h-records">${rows.map(r => placementCardHtml(r, {editable: !Number(p.is_locked)})).join('')}</div><div>${placementMap(rows)}</div></div>`
-            : empty('Aucun placement enregistré : nourrice, abandon, hospice, Assistance publique… avec le lieu et la durée.');
+            : empty('Aucun placement pour l’instant', {icon: '👶', hint: 'Nourrice, abandon, hospice, Assistance publique… avec le lieu et la durée.', action: editOnly('x') ? {label: '＋ Placement', attrs: `data-h-placement-edit="0" data-h-placement-person="${p.id}"`} : null});
         return card(index, 'Enfant placé', rows.length || '', body, 'span-12', editOnly(`<button type="button" class="button small secondary" data-h-placement-edit="0" data-h-placement-person="${p.id}">+ Placement</button>`));
     };
     async function openPlacementDialog(id, personId) {
@@ -556,7 +556,7 @@
                 await uploadMediaEditor(form, 'placement', saved.result.id);
                 toast('Placement enregistré.'); await refreshView();
             },
-            onDelete: r.id ? async () => { if (!confirm('Supprimer ce placement ?')) return false; await api('delete_placement', {}, {method: 'POST', body: {id: r.id}}); toast('Supprimé.'); await refreshView(); } : null,
+            onDelete: r.id ? async () => { if (!await A().confirmBox('', {title: 'Supprimer ce placement ?', okLabel: 'Supprimer le placement'})) return false; await api('delete_placement', {}, {method: 'POST', body: {id: r.id}}); toast('Supprimé.'); await refreshView(); } : null,
         });
     }
     document.addEventListener('click', event => {
@@ -585,7 +585,7 @@
         if (!flagShown(p, 'show_heraldry_block')) return '';
         const rows = detail.heritage?.coats_of_arms || [];
         registerCoatMedia(rows);
-        const body = rows.length ? `<div class="h-coats">${rows.map(c => coatCardHtml(c, {compact: true, currentPersonId: p.id})).join('')}</div>` : empty('Aucune armoirie liée à cette personne.');
+        const body = rows.length ? `<div class="h-coats">${rows.map(c => coatCardHtml(c, {compact: true, currentPersonId: p.id})).join('')}</div>` : empty('Aucune armoirie pour l’instant', {icon: '🛡️', hint: 'Lie des armoiries à cette personne.', action: editOnly('x') ? {label: '＋ Armoiries', attrs: `data-h-coat-link="${p.id}"`} : null});
         return card(index, 'Blason / noblesse', rows.length || '', body, 'span-6', editOnly(`<button type="button" class="button small secondary" data-h-coat-link="${p.id}">+ Armoiries</button>`));
     };
     async function openCoatDialog(id, presetPerson = null) {
@@ -612,7 +612,7 @@
                 await uploadMediaEditor(form, 'coat_of_arms', saved.result.id);
                 toast('Armoiries enregistrées.'); await refreshView();
             },
-            onDelete: c.id ? async () => { if (!confirm(`Supprimer « ${c.title} » ?`)) return false; await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: c.id}}); toast('Supprimé.'); await refreshView(); } : null,
+            onDelete: c.id ? async () => { if (!await A().confirmBox('', {title: `Supprimer les armoiries « ${c.title} » ?`, okLabel: 'Supprimer les armoiries'})) return false; await api('delete_coat_of_arms', {}, {method: 'POST', body: {id: c.id}}); toast('Supprimé.'); await refreshView(); } : null,
             onOpen: dialog => {
                 dialog.addEventListener('click', event => {
                     if (event.target.closest('[data-h-coat-vector]')) {
@@ -790,7 +790,7 @@
         rows.forEach(v => { const d = (v.destination || v.arrival_port || '?').split(',')[0].trim(); destinations[d] = (destinations[d] || 0) + 1; });
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Départs et émigration', 'Les branches parties au Québec, aux États-Unis, en Argentine, en Algérie… Chaque voyage se remplit depuis le bloc « Départs / émigration » de la fiche (case à cocher dans IDENTITÉ → Modifier la personne).')}
             <div class="collection-toolbar">${personPickerAdd('+ Voyage', 'data-h-voyage-add-list')}</div>
-            ${rows.length ? `<p class="muted">${plural(rows.length, 'voyage', 'voyages')} · ${Object.entries(destinations).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${voyagePaths(rows)}<div class="h-records h-records-grid">${rows.map(v => voyageCardHtml(v, {withPerson: true})).join('')}</div>` : empty('Aucun voyage enregistré.')}</section>`;
+            ${rows.length ? `<p class="muted">${plural(rows.length, 'voyage', 'voyages')} · ${Object.entries(destinations).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${voyagePaths(rows)}<div class="h-records h-records-grid">${rows.map(v => voyageCardHtml(v, {withPerson: true})).join('')}</div>` : empty('Aucun voyage pour l’instant', {icon: '🚢', hint: 'Coche « Départs / émigration » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le voyage dans son bloc.'})}</section>`;
         A().bindCollectionPersonFields(A().$('#workspace'));
         A().$('[data-h-voyage-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return toast('Choisis d’abord la personne.', 'error'); openVoyageDialog(0, pid); });
     };
@@ -805,7 +805,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Enfants placés', 'Enfants mis en nourrice, abandonnés ou recueillis par l’hospice : lieu et durée du placement. Beaucoup d’enfants de Paris partaient en nourrice dans le Morvan.')}
             <div class="collection-toolbar">${personPickerAdd('+ Placement', 'data-h-placement-add-list')}</div>
             ${rows.length ? `<p class="muted">${plural(rows.length, 'placement', 'placements')} · ${Object.entries(places).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${placementMap(rows)}
-            <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table>` : empty('Aucun placement enregistré.')}</section>`;
+            <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table>` : empty('Aucun placement pour l’instant', {icon: '👶', hint: 'Coche « Enfant placé » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le placement dans son bloc.'})}</section>`;
         A().bindCollectionPersonFields(A().$('#workspace'));
         A().$('[data-h-placement-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return toast('Choisis d’abord la personne.', 'error'); openPlacementDialog(0, pid); });
     };
@@ -819,7 +819,7 @@
         registerCoatMedia(rows);
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Armoiries', 'Les blasons de ta famille : l’image, la description dans la langue des héraldistes (« d’azur à trois fleurs de lys d’or »), la devise et les personnes qui l’ont porté. Sur une fiche, coche « Noblesse / blason » pour l’afficher.')}
             <div class="collection-toolbar"><input type="search" id="h-coats-q" value="${esc(q)}" placeholder="Chercher (nom, blasonnement, famille)…"><button type="button" class="button" data-h-coat-edit="0">+ Armoiries</button></div>
-            <div class="h-coats h-coats-grid">${rows.map(c => coatCardHtml(c)).join('') || empty('Aucune armoirie. Ajoute la première avec « + Armoiries » (image du blason, blasonnement, porteurs).')}</div></section>`;
+            <div class="h-coats h-coats-grid">${rows.map(c => coatCardHtml(c)).join('') || empty('Aucune armoirie pour l’instant', {icon: '🛡️', hint: 'Image du blason, blasonnement, porteurs.', action: {label: '＋ Armoiries', attrs: 'data-h-coat-edit="0"'}})}</div></section>`;
         A().$('#h-coats-q').addEventListener('change', event => { S().hCoatsQuery = event.target.value.trim(); A().renderList(); });
     };
 
@@ -829,7 +829,7 @@
         if (!isCurrent(token)) return;
         const rows = data.poilus || [];
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Poilus 14-18', 'Les soldats de la Grande Guerre : leurs unités et, pour chaque date importante (blessure, disparition…), le lien vers le journal de marche de leur régiment ce jour-là.')}
-            ${rows.length ? rows.map(r => `<article class="h-record"><header><div>${chip(r.person)}${(r.person.mort_pour_la_france === 'yes') ? ' <span class="collection-kind">Mort pour la France</span>' : ''}</div>${tools(`data-h-poilu-edit="${r.person.id}"`, `data-h-poilu-clear="${r.person.id}"`, 'ce parcours')}</header>${poiluHtml(r, r.person)}</article>`).join('') : empty('Aucun poilu : coche « Poilu 14-18 » dans IDENTITÉ → Modifier la personne, puis saisis son parcours.')}</section>`;
+            ${rows.length ? rows.map(r => `<article class="h-record"><header><div>${chip(r.person)}${(r.person.mort_pour_la_france === 'yes') ? ' <span class="collection-kind">Mort pour la France</span>' : ''}</div>${tools(`data-h-poilu-edit="${r.person.id}"`, `data-h-poilu-clear="${r.person.id}"`, 'ce parcours')}</header>${poiluHtml(r, r.person)}</article>`).join('') : empty('Aucun poilu pour l’instant', {icon: '🎖️', hint: 'Coche « Poilu 14-18 » dans IDENTITÉ → Modifier la personne, puis saisis son parcours.'})}</section>`;
         A().bindTableLinks();
     };
 
@@ -847,9 +847,9 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Inventaires après décès', 'Saisis un inventaire pièce par pièce (meubles, bétail, outils, linge…) avec la valeur de chaque objet. Le total est converti en journées de travail d’un journalier pour comparer la richesse d’une génération à l’autre (Graphiques → Statistiques → Richesse).')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-probate-new>+ Inventaire</button><button type="button" class="button secondary" data-h-probate-compare>Comparer les générations</button></div>
             ${editing ? probateFormHtml(editing) : ''}
-            ${rows.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Notaire</th><th>Total</th><th>Net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => { const d = workDays(r.net, r.currency, r.year); return `<tr><td>${personLink(r.person_id, r.person_name)}${LC(r.labels)}</td><td>${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td>${esc(moneyText(r.total, r.currency))}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${d ? fmt(d) : '—'}</td><td>${tools(`data-h-probate-edit="${r.id}"`, `data-h-probate-delete="${r.id}"`, 'cet inventaire')}</td></tr>`; }).join('')}</tbody></table>` : (editing ? '' : empty('Aucun inventaire après décès.'))}</section>`;
+            ${rows.length ? `<table class="data-table"><thead><tr><th>Personne</th><th>Date</th><th>Notaire</th><th>Total</th><th>Net</th><th>Journées de travail</th><th></th></tr></thead><tbody>${rows.map(r => { const d = workDays(r.net, r.currency, r.year); return `<tr><td>${personLink(r.person_id, r.person_name)}${LC(r.labels)}</td><td>${esc(r.date_text)}</td><td>${esc(r.notary)}</td><td>${esc(moneyText(r.total, r.currency))}</td><td>${esc(moneyText(r.net, r.currency))}</td><td>${d ? fmt(d) : '—'}</td><td>${tools(`data-h-probate-edit="${r.id}"`, `data-h-probate-delete="${r.id}"`, 'cet inventaire')}</td></tr>`; }).join('')}</tbody></table>` : (editing ? '' : empty('Aucun inventaire après décès pour l’instant', {icon: '📜', action: {label: '＋ Inventaire', attrs: 'data-h-probate-new'}}))}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-h-probate-new]').addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: 0}));
+        ws.querySelectorAll('[data-h-probate-new]').forEach(b => b.addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: 0})));
         ws.querySelector('[data-h-probate-compare]').addEventListener('click', () => { S().graphTab = 'stats'; S().graphStatsType = 'probate_wealth'; A().setModule('graphiques'); });
         ws.querySelectorAll('[data-h-probate-edit]').forEach(b => b.addEventListener('click', () => ext.lists.probate(++S().workspaceToken, {id: Number(b.dataset.hProbateEdit)})));
         if (editing) bindProbateForm(editing);
@@ -885,7 +885,7 @@
         form.querySelector('[data-h-item-add5]').addEventListener('click', () => { form.querySelector('[data-h-rows=items]').insertAdjacentHTML('beforeend', [1, 2, 3, 4, 5].map(() => probateItemRow()).join('')); });
         form.addEventListener('click', () => setTimeout(live, 0));
         form.querySelector('[data-h-probate-cancel]').addEventListener('click', () => A().renderList());
-        form.querySelector('[data-h-probate-delete]')?.addEventListener('click', async () => { if (!confirm('Supprimer cet inventaire ?')) return; await api('delete_probate_inventory', {}, {method: 'POST', body: {id: inv.id}}); toast('Supprimé.'); A().renderList(); });
+        form.querySelector('[data-h-probate-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: 'Supprimer cet inventaire après décès ?', okLabel: 'Supprimer l’inventaire'})) return; await api('delete_probate_inventory', {}, {method: 'POST', body: {id: inv.id}}); toast('Supprimé.'); A().renderList(); });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form);
@@ -914,11 +914,11 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Papiers de famille', 'L’inventaire de tes originaux papier (livrets de famille, actes anciens, lettres, photos papier) : où chacun est rangé, son numéro de classement, une étiquette à imprimer et à coller sur la chemise, et le lien vers son scan.')}
             <div class="collection-toolbar"><input type="search" id="h-papers-q" value="${esc(q)}" placeholder="Chercher (titre, n°, rangement, chez qui)…"><button type="button" class="button" data-h-paper-new>+ Document</button><button type="button" class="button secondary" data-h-paper-labels>Imprimer les étiquettes</button><button type="button" class="button secondary" data-h-paper-print>Imprimer l’inventaire</button></div>
             ${editing ? paperFormHtml(editing, locations) : ''}
-            ${rows.length ? Object.entries(groups).map(([loc, list]) => `<h3>📦 ${esc(loc)} <small>(${list.length})</small></h3><table class="data-table h-papers"><thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th>N°</th><th>Document</th><th>Date</th><th>Chez</th><th>Personnes</th><th>Scan</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`).join('')}</tbody></table>`).join('') : (editing ? '' : empty('Aucun document. Ajoute le premier avec « + Document ».'))}</section>`;
+            ${rows.length ? Object.entries(groups).map(([loc, list]) => `<h3>📦 ${esc(loc)} <small>(${list.length})</small></h3><table class="data-table h-papers"><thead><tr><th><input type="checkbox" data-h-paper-all title="Tout cocher"></th><th>N°</th><th>Document</th><th>Date</th><th>Chez</th><th>Personnes</th><th>Scan</th><th></th></tr></thead><tbody>${list.map(r => `<tr><td><input type="checkbox" data-h-paper-check="${r.id}"></td><td><span class="h-paper-number">${esc(r.class_number)}</span></td><td><strong>${esc(r.title)}</strong>${LC(r.labels)}${r.kind ? `<br><small>${esc(r.kind)}</small>` : ''}${r.condition_text ? `<br><small class="muted">État : ${esc(r.condition_text)}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.holder_text)}</td><td>${(r.people || []).map(chip).join('<br>')}</td><td>${thumbs('paper-' + r.id, r.media, {emptyText: 'pas de scan'})}</td><td>${tools(`data-h-paper-edit="${r.id}"`, `data-h-paper-delete="${r.id}"`, 'ce document')}</td></tr>`).join('')}</tbody></table>`).join('') : (editing ? '' : empty('Aucun document pour l’instant', {icon: '🗄️', hint: 'Actes, livrets, lettres, photos… et où ils sont rangés.', action: {label: '＋ Document', attrs: 'data-h-paper-new'}}))}</section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
         ws.querySelector('#h-papers-q').addEventListener('change', event => { S().hPapersQuery = event.target.value.trim(); A().renderList(); });
-        ws.querySelector('[data-h-paper-new]').addEventListener('click', () => ext.lists.family_papers(++S().workspaceToken, {id: 0}));
+        ws.querySelectorAll('[data-h-paper-new]').forEach(b => b.addEventListener('click', () => ext.lists.family_papers(++S().workspaceToken, {id: 0})));
         ws.querySelectorAll('[data-h-paper-edit]').forEach(b => b.addEventListener('click', () => ext.lists.family_papers(++S().workspaceToken, {id: Number(b.dataset.hPaperEdit)})));
         ws.querySelectorAll('[data-h-paper-all]').forEach(c => c.addEventListener('change', () => c.closest('table').querySelectorAll('[data-h-paper-check]').forEach(x => { x.checked = c.checked; })));
         const chosen = () => { const ids = [...ws.querySelectorAll('[data-h-paper-check]:checked')].map(c => Number(c.dataset.hPaperCheck)); return ids.length ? rows.filter(r => ids.includes(Number(r.id))) : rows; };
@@ -943,7 +943,7 @@
         const form = A().$('#h-paper-form');
         A().bindCollectionPersonFields(form); bindMediaEditor(form); form.scrollIntoView({block: 'start'});
         form.querySelector('[data-h-paper-cancel]').addEventListener('click', () => A().renderList());
-        form.querySelector('[data-h-paper-delete]')?.addEventListener('click', async () => { if (!confirm(`Supprimer « ${p.title} » de l’inventaire ?`)) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: p.id}}); toast('Supprimé.'); A().renderList(); });
+        form.querySelector('[data-h-paper-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer « ${p.title} » de l’inventaire ?`, okLabel: 'Supprimer le document'})) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: p.id}}); toast('Supprimé.'); A().renderList(); });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form);
@@ -968,7 +968,7 @@
     }
     function printPaperInventory(rows) {
         printWindow('Inventaire des papiers de famille', 'main{max-width:780px;margin:24px auto;padding:0 24px}h1{font-size:24px}table{width:100%;border-collapse:collapse;font-size:12px}td,th{border-bottom:1px solid #999;padding:6px;text-align:left;vertical-align:top}.n{font-weight:900;white-space:nowrap}',
-            `<main><h1>Inventaire des papiers de famille</h1><p>${rows.length} document(s) — ${new Date().toLocaleDateString('fr-FR')}</p><table><thead><tr><th>N°</th><th>Document</th><th>Date</th><th>Rangement</th><th>Chez</th><th>Scan</th></tr></thead><tbody>${rows.map(r => `<tr><td class="n">${esc(r.class_number)}</td><td><b>${esc(r.title)}</b>${r.kind ? `<br>${esc(r.kind)}` : ''}${r.people?.length ? `<br><small>${esc(r.people.map(p => A().personName(p)).join(', '))}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.storage_location)}</td><td>${esc(r.holder_text)}</td><td>${r.media?.length ? 'oui' : '—'}</td></tr>`).join('')}</tbody></table></main>`);
+            `<main><h1>Inventaire des papiers de famille</h1><p>${plural(rows.length, 'document', 'documents')} — ${new Date().toLocaleDateString('fr-FR')}</p><table><thead><tr><th>N°</th><th>Document</th><th>Date</th><th>Rangement</th><th>Chez</th><th>Scan</th></tr></thead><tbody>${rows.map(r => `<tr><td class="n">${esc(r.class_number)}</td><td><b>${esc(r.title)}</b>${r.kind ? `<br>${esc(r.kind)}` : ''}${r.people?.length ? `<br><small>${esc(r.people.map(p => A().personName(p)).join(', '))}</small>` : ''}</td><td>${esc(r.date_text)}</td><td>${esc(r.storage_location)}</td><td>${esc(r.holder_text)}</td><td>${r.media?.length ? 'oui' : '—'}</td></tr>`).join('')}</tbody></table></main>`);
     }
 
     // Les listes ouvertes depuis une fiche (« + Inventaire », « Ouvrir ») passent par S().hEdit
@@ -1016,9 +1016,9 @@
             <div class="h-trip-list">${(data.trips || []).map(t => `<article class="h-record h-trip ${t.status === 'done' ? 'is-done' : ''}"><header><div><strong>${t.status === 'done' ? '✅' : '🚗'} ${esc(t.title)}</strong>${LC(t.labels)}<div class="muted">${esc([t.date_start ? dateFr(t.date_start) : 'dates à fixer', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''}</div>
                 <div>${plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.day_count) ? ` sur ${plural(Number(t.day_count), 'jour', 'jours')}` : ''}${Number(t.stop_count) ? ` · ${fmt(t.done_count)} faite${t.done_count > 1 ? 's' : ''}` : ''}${t.status === 'done' && t.done_at ? ` · fait le ${esc(dateFr(t.done_at))}` : ''}</div>
                 ${Number(t.stop_count) ? `<div class="h-progress"><span style="width:${Math.round(100 * t.done_count / t.stop_count)}%"></span></div>` : ''}</div>
-                <div class="page-actions compact"><button type="button" class="button small" data-h-trip-open="${t.id}">Ouvrir</button><button type="button" class="button small secondary" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button></div></header>${t.notes ? `<p class="muted">${nl(t.notes)}</p>` : ''}</article>`).join('') || empty(filter === 'done' ? 'Aucun circuit fait pour l’instant.' : 'Aucun circuit à faire. Crée le premier avec « + Circuit ».')}</div></section>`;
+                <div class="page-actions compact"><button type="button" class="button small" data-h-trip-open="${t.id}">Ouvrir</button><button type="button" class="button small secondary" data-h-trip-status="${t.id}" data-status="${t.status === 'done' ? 'todo' : 'done'}">${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button></div></header>${t.notes ? `<p class="muted">${nl(t.notes)}</p>` : ''}</article>`).join('') || (filter === 'done' ? empty('Aucun circuit fait pour l’instant', {icon: '✅'}) : empty('Aucun circuit à faire pour l’instant', {icon: '🚗', action: {label: '＋ Circuit', attrs: 'data-h-trip-new'}}))}</div></section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-h-trip-new]').addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {edit: 0}));
+        ws.querySelectorAll('[data-h-trip-new]').forEach(b => b.addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {edit: 0})));
         ws.querySelectorAll('[data-h-trip-filter]').forEach(b => b.addEventListener('click', () => { S().hTripFilter = b.dataset.hTripFilter; A().renderList(); }));
         ws.querySelectorAll('[data-h-trip-open]').forEach(b => b.addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {trip: Number(b.dataset.hTripOpen)})));
         ws.querySelectorAll('[data-h-trip-status]').forEach(b => b.addEventListener('click', async () => { await api('set_field_trip_status', {}, {method: 'POST', body: {id: b.dataset.hTripStatus, status: b.dataset.status}}); toast(b.dataset.status === 'done' ? 'Circuit marqué fait : il reste consultable dans « Faits ».' : 'Circuit remis à faire.'); A().renderList(); }));
@@ -1040,7 +1040,7 @@
     function bindTripForm(t) {
         const form = A().$('#h-trip-form');
         A().bindCollectionPersonFields(form); form.scrollIntoView({block: 'start'});
-        form.querySelector('[data-h-trip-cancel]').addEventListener('click', () => { if (drafts.length && !confirm('Abandonner ce circuit et ses étapes ?')) return; ext.lists.field_trips(++S().workspaceToken, t.id ? {trip: t.id} : {back: true}); });
+        form.querySelector('[data-h-trip-cancel]').addEventListener('click', async () => { if (drafts.length && !await A().confirmBox('Les étapes ajoutées ne seront pas enregistrées.', {title: 'Quitter sans enregistrer ce circuit ?', okLabel: 'Quitter sans enregistrer', danger: true})) return; ext.lists.field_trips(++S().workspaceToken, t.id ? {trip: t.id} : {back: true}); });
         // étapes ajoutées pendant la création : gardées ici, enregistrées avec le circuit
         const drafts = [], draftBox = form.querySelector('[data-h-trip-drafts]');
         const draftNames = x => Object.fromEntries(Object.entries(x.person_names || {}).map(([pid, n]) => [pid, {id: Number(pid), display_name: n, first_name: n, last_name: ''}]));
@@ -1048,14 +1048,14 @@
             const sorted = drafts.map((d, i) => [d, i]).sort((a, b) => (Number(a[0].day) || 1) - (Number(b[0].day) || 1));
             draftBox.innerHTML = sorted.map(([d, i]) => { const x = d.extra || {}, n = (x.checklist || []).length;
                 return `<div class="h-trip-draft"><span class="h-trip-draft-day">Jour ${Number(d.day) || 1}</span><div><strong>${esc(d.title || 'Étape sans titre')}</strong> <small class="muted">${esc(tripKinds[d.kind] || '')}</small><div class="muted">${esc([d.place_text, x.time_from && 'arrivée ' + x.time_from, x.transport, x.goals && 'je cherche : ' + x.goals, n && n + ' ligne' + (n > 1 ? 's' : '') + ' à cocher'].filter(Boolean).join(' · '))}</div></div>
-                    <span class="h-trip-draft-tools"><button type="button" class="button small secondary" data-h-draft-edit="${i}">Modifier</button><button type="button" class="icon-button" data-h-draft-del="${i}" title="Retirer">✕</button></span></div>`; }).join('') || '<p class="muted">Aucune étape pour l’instant.</p>'; };
+                    <span class="h-trip-draft-tools"><button type="button" class="button small secondary" data-h-draft-edit="${i}">Modifier</button><button type="button" class="icon-button" data-h-draft-del="${i}" title="Retirer">✕</button></span></div>`; }).join('') || empty('Aucune étape pour l’instant', {icon: '📍', action: {label: '＋ Étape', attrs: 'data-h-draft-add'}}); };
         const editDraft = i => { const d = i === null ? {kind: 'autre', day: drafts.length ? Math.max(...drafts.map(x => Number(x.day) || 1)) : 1, _draft: i !== null} : {...drafts[i], _draft: true};
             openStopDialog(d, draftNames(d.extra || {}), {onSave: async (v, extra) => { const row = {...v, lat: v.place_text_lat, lon: v.place_text_lon, extra}; if (i === null) drafts.push(row); else drafts[i] = row; paintDrafts(); }}); };
         paintDrafts();
-        form.querySelector('[data-h-draft-add]')?.addEventListener('click', () => editDraft(null));
-        draftBox?.addEventListener('click', e => { const ed = e.target.closest('[data-h-draft-edit]'), del = e.target.closest('[data-h-draft-del]');
+        form.addEventListener('click', e => { if (e.target.closest('[data-h-draft-add]')) editDraft(null); }); // aussi le bouton de la liste vide
+        draftBox?.addEventListener('click', async e => { const ed = e.target.closest('[data-h-draft-edit]'), del = e.target.closest('[data-h-draft-del]');
             if (ed) editDraft(Number(ed.dataset.hDraftEdit));
-            if (del && confirm('Retirer cette étape ?')) { drafts.splice(Number(del.dataset.hDraftDel), 1); paintDrafts(); } });
+            if (del && await A().confirmBox('', {title: 'Retirer cette étape ?', okLabel: 'Retirer l’étape'})) { drafts.splice(Number(del.dataset.hDraftDel), 1); paintDrafts(); } });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form), generate = event.submitter?.value === '1';
@@ -1065,7 +1065,7 @@
                 const saved = await api('save_field_trip', {}, {method: 'POST', body: {id: t.id, title: v.title, start_place: v.start_place, date_start: v.date_start, date_end: v.date_end, stops_per_day: v.stops_per_day, notes: v.notes, status: t.status || 'todo', people, generate: generate ? 1 : 0}});
                 let failed = 0;
                 for (const d of drafts) { try { await api('save_field_trip_stop', {}, {method: 'POST', body: {...d, id: 0, trip_id: saved.result.id, done: 0}}); } catch (_) { failed++; } }
-                if (failed) toast(`${failed} étape(s) non enregistrée(s) : ajoute-les depuis le circuit.`, 'error');
+                if (failed) toast(`${plural(failed, 'étape non enregistrée', 'étapes non enregistrées')} : ajoute-les depuis le circuit.`, 'error');
                 else if (saved.result.warning) toast('Circuit enregistré. ' + saved.result.warning, 'error');
                 else toast(generate ? 'Circuit préparé.' : 'Circuit enregistré.');
                 ext.lists.field_trips(++S().workspaceToken, {trip: saved.result.id});
@@ -1159,27 +1159,27 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page h-trip-page">${pageHeader(t.status === 'done' ? 'CIRCUIT FAIT' : 'CIRCUIT', t.title, `${esc([t.date_start ? dateFr(t.date_start) : '', t.date_end && t.date_end !== t.date_start ? '→ ' + dateFr(t.date_end) : ''].join(' '))}${t.start_place ? ` · départ de ${esc(t.start_place)}` : ''} · ${plural(t.stops.length, 'étape', 'étapes')} sur ${plural(dayNums.length, 'jour', 'jours')} · pour ${(t.people_rows || []).map(p => esc(A().personName(p))).join(', ') || '—'}`,
             `<button type="button" class="button secondary" data-h-trip-back>← Tous les circuits</button><button type="button" class="button secondary" data-h-trip-edit>Modifier</button><button type="button" class="button secondary" data-h-trip-regen>Préparer à nouveau</button><button type="button" class="button" data-h-trip-print>Carnet de route à imprimer</button><button type="button" class="button secondary" data-h-trip-done>${t.status === 'done' ? 'Remettre à faire' : 'Marquer fait'}</button><button type="button" class="button secondary danger" data-h-trip-delete>Supprimer</button>`)}
             ${t.stops.length ? miniMap(points, paths) : ''}
-            ${dayNums.map((d, i) => `<section class="h-day"><header class="h-day-head"><h3><span class="h-day-dot" style="background:${dayColors[i % dayColors.length]}"></span>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h3>${dayRouteLinks(days[d], i === 0 ? t.start_place : '')}</header><ol class="h-stops">${days[d].map(stopHtml).join('')}</ol></section>`).join('') || empty('Aucune étape : « Préparer à nouveau » (il faut des événements avec un lieu), ou ajoute une étape à la main.')}
+            ${dayNums.map((d, i) => `<section class="h-day"><header class="h-day-head"><h3><span class="h-day-dot" style="background:${dayColors[i % dayColors.length]}"></span>Jour ${d}${dayDate(d) ? ` — ${esc(dayDate(d))}` : ''}</h3>${dayRouteLinks(days[d], i === 0 ? t.start_place : '')}</header><ol class="h-stops">${days[d].map(stopHtml).join('')}</ol></section>`).join('') || empty('Aucune étape pour l’instant', {icon: '📍', hint: '« Préparer à nouveau » (il faut des événements avec un lieu), ou ajoute une étape à la main.', action: {label: '＋ Étape', attrs: 'data-h-stop-edit="0"'}})}
             <p><button type="button" class="button small secondary" data-h-stop-edit="0">+ Étape</button></p>
             ${t.notes ? `<div class="maintenance-panel"><h4>Notes</h4><p>${nl(t.notes)}</p></div>` : ''}</section>`;
         const ws = A().$('#workspace');
         const reload = () => renderTrip(++S().workspaceToken, id);
         ws.querySelector('[data-h-trip-back]').addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {back: true}));
         ws.querySelector('[data-h-trip-edit]').addEventListener('click', () => ext.lists.field_trips(++S().workspaceToken, {edit: id}));
-        ws.querySelector('[data-h-trip-regen]').addEventListener('click', async () => { if (!confirm('Préparer à nouveau les étapes ? Les étapes non faites sont remplacées.')) return; try { const r = await api('generate_field_trip', {}, {method: 'POST', body: {id}}); toast(`${r.result.stops} étapes sur ${r.result.days} jour(s).`); reload(); } catch (error) { toast(error.message, 'error'); } });
+        ws.querySelector('[data-h-trip-regen]').addEventListener('click', async () => { if (!await A().confirmBox('Les étapes non faites sont remplacées.', {title: 'Préparer à nouveau les étapes ?', okLabel: 'Remplacer les étapes'})) return; try { const r = await api('generate_field_trip', {}, {method: 'POST', body: {id}}); toast(`${A().plural(r.result.stops, 'étape')} sur ${A().plural(r.result.days, 'jour')}.`); reload(); } catch (error) { toast(error.message, 'error'); } });
         ws.querySelector('[data-h-trip-print]').addEventListener('click', () => printTrip(t, days, dayNums, dayDate));
         ws.querySelector('[data-h-trip-done]').addEventListener('click', async () => { const status = t.status === 'done' ? 'todo' : 'done'; await api('set_field_trip_status', {}, {method: 'POST', body: {id, status}}); toast(status === 'done' ? 'Circuit marqué fait.' : 'Circuit remis à faire.'); reload(); });
-        ws.querySelector('[data-h-trip-delete]').addEventListener('click', async () => { if (!confirm(`Supprimer le circuit « ${t.title} » ?`)) return; await api('delete_field_trip', {}, {method: 'POST', body: {id}}); toast('Circuit supprimé.'); ext.lists.field_trips(++S().workspaceToken, {back: true}); });
+        ws.querySelector('[data-h-trip-delete]').addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer le circuit « ${t.title} » ?`, okLabel: 'Supprimer le circuit'})) return; await api('delete_field_trip', {}, {method: 'POST', body: {id}}); toast('Circuit supprimé.'); ext.lists.field_trips(++S().workspaceToken, {back: true}); });
         ws.querySelectorAll('[data-h-stop-done]').forEach(c => c.addEventListener('change', async () => { await api('set_field_trip_stop_done', {}, {method: 'POST', body: {id: c.dataset.hStopDone, done: c.checked ? 1 : 0}}); c.closest('.h-stop').classList.toggle('is-done', c.checked); }));
         ws.querySelectorAll('[data-h-stop-ck]').forEach(c => c.addEventListener('change', async () => { try { await api('set_field_trip_stop_check', {}, {method: 'POST', body: {id: c.dataset.hStopCk, index: Number(c.dataset.i), done: c.checked ? 1 : 0}}); const st = t.stops.find(x => Number(x.id) === Number(c.dataset.hStopCk)); if (st?.extra?.checklist?.[c.dataset.i]) st.extra.checklist[c.dataset.i].done = c.checked ? 1 : 0; } catch (error) { c.checked = !c.checked; toast(error.message, 'error'); } }));
         ws.querySelectorAll('[data-h-stop-move]').forEach(b => b.addEventListener('click', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopMove, direction: Number(b.dataset.dir)}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-day]').forEach(sel => sel.addEventListener('change', async () => { await api('move_field_trip_stop', {}, {method: 'POST', body: {id: sel.dataset.hStopDay, day: Number(sel.value)}}); reload(); }));
-        ws.querySelectorAll('[data-h-stop-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette étape ?')) return; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopDelete}}); reload(); }));
+        ws.querySelectorAll('[data-h-stop-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('', {title: 'Supprimer cette étape ?', okLabel: 'Supprimer l’étape'})) return; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: b.dataset.hStopDelete}}); reload(); }));
         ws.querySelectorAll('[data-h-stop-edit]').forEach(b => b.addEventListener('click', () => {
             const s = t.stops.find(x => Number(x.id) === Number(b.dataset.hStopEdit)) || {id: 0, kind: 'autre', day: dayNums[dayNums.length - 1] || 1};
             openStopDialog(s, t.stop_people || {}, {
                 onSave: async (v, extra) => { await api('save_field_trip_stop', {}, {method: 'POST', body: {...v, id: s.id, trip_id: id, lat: v.place_text_lat, lon: v.place_text_lon, done: s.done, extra}}); toast('Étape enregistrée.'); reload(); },
-                onDelete: s.id ? async () => { if (!confirm('Supprimer cette étape ?')) return false; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: s.id}}); reload(); } : null,
+                onDelete: s.id ? async () => { if (!await A().confirmBox('', {title: 'Supprimer cette étape ?', okLabel: 'Supprimer l’étape'})) return false; await api('delete_field_trip_stop', {}, {method: 'POST', body: {id: s.id}}); reload(); } : null,
             });
         }));
     }
@@ -1290,9 +1290,9 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Cartes anciennes', 'Pose ta propre carte ancienne sur la carte : un plan cadastral photographié aux archives, un vieux plan de village… Indique 3 points que tu reconnais (l’église, un carrefour, le moulin) et l’app la superpose exactement à la carte, avec un réglage de transparence. Places-y ensuite les maisons de tes ancêtres.')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-oldmap-new>+ Carte ancienne</button></div>
             <div class="collection-grid">${maps.map(m => `<article class="collection-card">${m.filename ? `<div class="collection-photo"><img src="media/${encodeURIComponent(m.filename)}" alt="" loading="lazy"></div>` : ''}<div class="collection-body"><strong>${esc(m.title)}</strong>${LC(m.labels)}${m.year_text ? ` <span class="collection-kind">${esc(m.year_text)}</span>` : ''}<p class="muted">${m.transform ? `✅ Calée (${m.control_points.length} points)` : `⚠ À caler : ${m.control_points.length}/3 points`} · ${plural(m.markers.length, 'maison placée', 'maisons placées')}</p>
-                <div class="page-actions"><button type="button" class="button small" data-h-oldmap-edit="${m.id}">Caler / placer</button>${m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : ''}</div></div></article>`).join('') || empty('Aucune carte ancienne. Ajoute une photo de plan avec « + Carte ancienne ».')}</div></section>`;
+                <div class="page-actions"><button type="button" class="button small" data-h-oldmap-edit="${m.id}">Caler / placer</button>${m.transform ? `<button type="button" class="button small secondary" data-h-oldmap-show="${m.id}">Voir sur la carte</button>` : ''}</div></div></article>`).join('') || empty('Aucune carte ancienne pour l’instant', {icon: '🗺️', hint: 'Ajoute une photo de plan, puis cale-la sur la carte.', action: {label: '＋ Carte ancienne', attrs: 'data-h-oldmap-new'}})}</div></section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-h-oldmap-new]').addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken, 0));
+        ws.querySelectorAll('[data-h-oldmap-new]').forEach(b => b.addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken, 0)));
         ws.querySelectorAll('[data-h-oldmap-edit]').forEach(b => b.addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken, Number(b.dataset.hOldmapEdit))));
         ws.querySelectorAll('[data-h-oldmap-show]').forEach(b => b.addEventListener('click', () => showOldMapOnMainMap(Number(b.dataset.hOldmapShow))));
     };
@@ -1318,7 +1318,7 @@
                 <div class="maintenance-panel"><h4>Maisons placées</h4><ul class="h-houses"></ul></div>` : '<p class="muted">Enregistre d’abord la carte avec son image ; tu pourras ensuite la caler.</p>'}</section>`;
         const ws = A().$('#workspace'), form = ws.querySelector('#h-oldmap-form');
         ws.querySelector('[data-h-oldmap-back]').addEventListener('click', () => ext.lists.old_maps(++S().workspaceToken));
-        ws.querySelector('[data-h-oldmap-delete]')?.addEventListener('click', async () => { if (!confirm(`Supprimer la carte « ${ed.title} » ?`)) return; await api('delete_old_map', {}, {method: 'POST', body: {id: ed.id}}); toast('Carte supprimée.'); ext.lists.old_maps(++S().workspaceToken); });
+        ws.querySelector('[data-h-oldmap-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer la carte « ${ed.title} » ?`, okLabel: 'Supprimer la carte'})) return; await api('delete_old_map', {}, {method: 'POST', body: {id: ed.id}}); toast('Carte supprimée.'); ext.lists.old_maps(++S().workspaceToken); });
         ws.querySelector('[data-h-oldmap-show]')?.addEventListener('click', () => showOldMapOnMainMap(ed.id));
         let active = ed.control_points.findIndex(p => !finite(p.u) || !finite(p.lat));
         if (active < 0) active = ed.control_points.length < 3 ? ed.control_points.length : 0;
@@ -1372,9 +1372,9 @@
             ws.querySelector('[data-h-house-mode]').addEventListener('click', () => { if (!computeTransform(ed.control_points)) toast('Cale d’abord la carte (3 points), pour que les maisons apparaissent aussi sur la carte.'); houseMode = true; toast('Clique sur la maison dans l’image.'); });
             ws.querySelector('[data-h-calib-preview]').addEventListener('change', refresh);
             form.elements.opacity.addEventListener('input', refresh);
-            ws.addEventListener('click', event => {
+            ws.addEventListener('click', async event => {
                 const pick = event.target.closest('[data-h-calib-pick]');
-                if (pick) { const i = Number(pick.dataset.hCalibPick); if (i === active && confirm('Effacer ce point pour le refaire ?')) { ed.control_points[i] = {label: ed.control_points[i].label}; } active = i; houseMode = false; refresh(); }
+                if (pick) { const i = Number(pick.dataset.hCalibPick); if (i === active && await A().confirmBox('', {title: 'Supprimer ce point pour le refaire ?', okLabel: 'Supprimer le point'})) { ed.control_points[i] = {label: ed.control_points[i].label}; } active = i; houseMode = false; refresh(); }
                 const rm = event.target.closest('[data-h-house-remove]');
                 if (rm) { ed.markers.splice(Number(rm.dataset.hHouseRemove), 1); refresh(); }
             });
@@ -1459,10 +1459,10 @@
         const list = await api('saved_searches').catch(() => ({searches: []}));
         if (token !== st.workspaceToken || st.module !== 'recherche') return;
         const ws = A().$('#workspace');
-        ws.innerHTML = `<section class="page">${pageHeader('RECHERCHE', 'Recherches enregistrées', 'Sauvegarde une recherche (« tous les Dupont nés dans le Nord avant 1800 ») pour la relancer en un clic. L’app signale les nouvelles fiches qui y répondent, par exemple après un import ou une fusion.')}
+        ws.innerHTML = `<section class="page">${pageHeader('RECHERCHE', 'Recherches enregistrées', 'Enregistre une recherche (« tous les Dupont nés dans le Nord avant 1800 ») pour la relancer en un clic. L’app signale les nouvelles fiches qui y répondent, par exemple après un import ou une fusion.')}
             <div class="h-search-layout"><div>${criteriaForm(st.hSearch.criteria)}<div id="h-search-results"></div></div>
             <aside class="maintenance-panel h-saved-list"><h3>Mes recherches</h3>${(list.searches || []).map(s => `<article class="h-saved ${s.new_count ? 'has-new' : ''} ${Number(st.hSearch.id) === Number(s.id) ? 'is-active' : ''}"><button type="button" class="link-button" data-h-saved-run="${s.id}"><strong>${esc(s.name)}</strong></button>${s.new_count ? ` <span class="h-new-badge">${s.new_count} nouvelle${s.new_count > 1 ? 's' : ''}</span>` : ''}<small>${esc(s.description)}</small><small>${plural(s.count, 'fiche', 'fiches')}${s.error ? ' · ' + esc(s.error) : ''}</small>
-                <span class="h-saved-tools">${s.new_count ? `<button type="button" class="link-button" data-h-saved-seen="${s.id}">marquer comme vues</button>` : ''}<button type="button" class="link-button" data-h-saved-delete="${s.id}">supprimer</button></span></article>`).join('') || '<p class="muted">Aucune recherche enregistrée.</p>'}</aside></div></section>`;
+                <span class="h-saved-tools">${s.new_count ? `<button type="button" class="link-button" data-h-saved-seen="${s.id}">marquer comme vues</button>` : ''}<button type="button" class="link-button" data-h-saved-delete="${s.id}">supprimer</button></span></article>`).join('') || empty('Aucune recherche enregistrée pour l’instant', {icon: '🔎', hint: 'Remplis les critères puis enregistre la recherche.'})}</aside></div></section>`;
         const form = ws.querySelector('#h-search-form');
         const run = async (criteria, id = 0) => {
             const box = ws.querySelector('#h-search-results');
@@ -1489,7 +1489,7 @@
             run(s.criteria, s.id);
         }));
         ws.querySelectorAll('[data-h-saved-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hSavedSeen}}); notified = {}; ext.research(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-h-saved-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette recherche enregistrée ?')) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hSavedDelete}}); ext.research(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-saved-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('', {title: 'Supprimer cette recherche enregistrée ?', okLabel: 'Supprimer la recherche'})) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hSavedDelete}}); ext.research(++S().workspaceToken); }));
         if (st.hSearch.id || Object.values(st.hSearch.criteria || {}).some(Boolean)) run(st.hSearch.criteria, st.hSearch.id);
     };
     // Nouvelles fiches qui répondent à une recherche enregistrée : signalées après un import, une fusion, une nouvelle fiche…
@@ -1614,7 +1614,7 @@
     });
     ext.dashboard.field_trips_widget = {load: () => api('field_trips', {status: 'todo'}), render: (index, widget, span, data) => {
         const rows = data?.trips || [];
-        return card(index, 'Circuits sur le terrain', rows.length || '', rows.length ? `<ul class="h-widget-list">${rows.slice(0, 6).map(t => `<li><button type="button" class="link-button" data-h-open-list="field_trips" data-h-edit="${t.id}">🚗 ${esc(t.title)}</button><br><small>${esc(t.date_start ? dateFr(t.date_start) : 'dates à fixer')} · ${plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.stop_count) ? ` · ${t.done_count} faite(s)` : ''}</small></li>`).join('')}</ul>${more('field_trips', 'Tous les circuits')}` : empty('Aucun circuit à faire.') + more('field_trips', 'Préparer un circuit'), span);
+        return card(index, 'Circuits sur le terrain', rows.length || '', rows.length ? `<ul class="h-widget-list">${rows.slice(0, 6).map(t => `<li><button type="button" class="link-button" data-h-open-list="field_trips" data-h-edit="${t.id}">🚗 ${esc(t.title)}</button><br><small>${esc(t.date_start ? dateFr(t.date_start) : 'dates à fixer')} · ${plural(Number(t.stop_count), 'étape', 'étapes')}${Number(t.stop_count) ? ` · ${plural(Number(t.done_count) || 0, 'faite', 'faites')}` : ''}</small></li>`).join('')}</ul>${more('field_trips', 'Tous les circuits')}` : empty('Aucun circuit à faire.') + more('field_trips', 'Préparer un circuit'), span);
     }};
     ext.dashboard.offsite_backup_widget = {load: () => api('offsite_status'), render: (index, widget, span, data) => card(index, 'Copie hors de l’ordinateur', '', offsiteSummaryHtml(data, true), span)};
 

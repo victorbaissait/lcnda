@@ -94,11 +94,11 @@
         const persist = () => save(read(form));
         form.addEventListener('input', persist); form.addEventListener('change', persist);
         form.elements.accent.addEventListener('input', () => { form.dataset.accentSet = '1'; persist(); });
-        form.addEventListener('click', e => {
+        form.addEventListener('click', async e => {
             const mv = e.target.closest('[data-book-move]');
             if (mv) { const li = mv.closest('li'); if (mv.dataset.bookMove === '-1' && li.previousElementSibling) li.parentElement.insertBefore(li, li.previousElementSibling); else if (mv.dataset.bookMove === '1' && li.nextElementSibling) li.parentElement.insertBefore(li.nextElementSibling, li); persist(); return; }
             if (e.target.closest('[data-book-accent-reset]')) { form.dataset.accentSet = '0'; const c = read(form); c.accent = ''; save(c); A().toast('Couleur du style choisi.'); return; }
-            if (e.target.closest('[data-book-reset]')) { if (!confirm('Remettre tous les réglages du livre comme au départ ?')) return; localStorage.removeItem(KEY); const sec = form.closest('.h-book'); sec.outerHTML = ext.familyBookPanelHtml(); ext.bindFamilyBook(exportUrl); return; }
+            if (e.target.closest('[data-book-reset]')) { if (!await A().confirmBox('', {title: 'Remettre tous les réglages du livre comme au départ ?', okLabel: 'Réinitialiser'})) return; localStorage.removeItem(KEY); const sec = form.closest('.h-book'); sec.outerHTML = ext.familyBookPanelHtml(); ext.bindFamilyBook(exportUrl); return; }
             const f = e.target.closest('[data-book-format]'); if (!f) return;
             const c = read(form); save(c);
             const root = form.elements.book_root?.value || String(A().state.bootstrap?.startPersonId || '');

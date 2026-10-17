@@ -146,11 +146,11 @@
                 <label>Format<select data-ss-g="aspect">${Object.keys(ASPECTS).map(k => `<option ${show.aspect === k ? 'selected' : ''}>${k}</option>`).join('')}</select></label>
                 <label>Style<select data-ss-g="theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}" ${show.theme === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></label>
                 <span class="h-ss-music" data-ss-music></span><span class="spacer"></span><span class="muted" data-ss-status></span>
-                <button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En présentation</button><button type="button" class="button small secondary" data-ss-cmd="export" title="Une vidéo (WebM) à garder ou partager">⏺ Exporter la vidéo</button><button type="button" class="button small" data-ss-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>
+                <button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En présentation</button><button type="button" class="button small secondary" data-ss-cmd="export" title="Une vidéo (WebM) à garder ou partager">⏺ Exporter la vidéo</button><button type="button" class="button small" data-ss-cmd="save" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>
             <div class="h-ss-main">
                 <aside class="h-ss-list"><div class="h-ss-add"><button type="button" data-ss-cmd="addphotos">＋ Photos</button><button type="button" data-ss-cmd="addtitle">＋ Titre</button><button type="button" data-ss-cmd="addmap">＋ Carte (trajet)</button><button type="button" class="is-story" data-ss-cmd="story">✨ Récit d’une personne</button></div><ol data-ss-slides></ol></aside>
                 <section class="h-ss-center"><div class="h-ss-stage" data-ss-stage><canvas data-ss-canvas></canvas></div>
-                    <div class="h-ss-transport"><button type="button" class="button small" data-ss-cmd="play">▶ Lire</button><button type="button" class="button small secondary" data-ss-cmd="full" title="Plein écran">⛶</button><input type="range" data-ss-seek min="0" max="1000" value="0"><output data-ss-time>0:00 / 0:00</output></div></section>
+                    <div class="h-ss-transport"><button type="button" class="button small" data-ss-cmd="play" data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-ss-cmd="full" title="Plein écran">⛶</button><input type="range" data-ss-seek min="0" max="1000" value="0"><output data-ss-time>0:00 / 0:00</output></div></section>
                 <aside class="h-ss-props" data-ss-props></aside></div></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         const $ = s => dlg.querySelector(s), canvas = $('[data-ss-canvas]');
@@ -259,7 +259,7 @@
                 if (bio) { const parts = bio.match(/[^.!?]+[.!?]+/g) || [bio]; let chunk = ''; const chunks = []; parts.forEach(sn => { if ((chunk + sn).length > 230 && chunk) { chunks.push(chunk.trim()); chunk = ''; } chunk += sn; }); if (chunk.trim()) chunks.push(chunk.trim()); chunks.slice(0, 4).forEach(c => slides.push(newSlide('title', {title: '', sub: c, dur: Math.max(6, Math.round(c.length / 18))}))); }
                 if (!ev.length && !photos.length && !route.length && !bio) toast('Peu de choses sur cette personne : le récit est court, complète-le à la main.');
                 show.slides.push(...slides); cur = show.slides.length - slides.length; if (name === 'Mon diaporama') { name = `Récit — ${nm}`; $('[data-ss-name]').value = name; }
-                touch(); await rebuild(); status(`${slides.length} diapositives ajoutées`);
+                touch(); await rebuild(); status(`${A().plural(slides.length, 'diapositive ajoutée', 'diapositives ajoutées')}`);
             } catch (e) { status(''); toast(e.message, 'error'); }
         }
         /* ─── voix ─── */
@@ -282,7 +282,7 @@
             if (!show.slides.length) return toast('Le diaporama est vide.', 'error');
             if (playing) play();
             await eng.prepare();
-            const total = eng.total(); if (!confirm(`L’export rejoue le diaporama en entier (${fmt(total)}) et l’enregistre en vidéo. Laisse la fenêtre ouverte. Continuer ?`)) return;
+            const total = eng.total(); if (!await A().confirmBox(`L’export rejoue le diaporama en entier (${fmt(total)}) et l’enregistre en vidéo. Laisse la fenêtre ouverte.`, {title: 'Exporter en vidéo ?', okLabel: 'Exporter la vidéo'})) return;
             const ac = new AudioContext(), dest = ac.createMediaStreamDestination(), vstream = canvas.captureStream(30);
             const mk = src => { const a = new Audio(); a.crossOrigin = 'anonymous'; a.src = src; const node = ac.createMediaElementSource(a), gain = ac.createGain(); node.connect(gain).connect(dest); return {a, gain}; };
             const mus = show.music ? mk(mediaUrl(show.music.filename)) : null; if (mus) mus.a.loop = true;
@@ -301,7 +301,7 @@
             mr.stop(); mus?.a.pause(); voices.forEach(v => v.a.pause()); await done; ac.close();
             const blob = new Blob(chunks, {type: 'video/webm'}); status('');
             if (!blob.size) return toast('La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur.', 'error');
-            const keep = confirm('Vidéo prête. Ajouter la vidéo aux Médias de l’app ? (Annuler : la télécharger seulement)');
+            const keep = await A().confirmBox('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.', {title: 'Vidéo prête', okLabel: 'Ajouter aux Médias', cancelLabel: 'Télécharger seulement', danger: false});
             if (keep) { const fd = new FormData(); fd.append('file', blob, 'diaporama.webm'); fd.append('kind', 'video'); fd.append('title', name); fd.append('duration', String(total)); fd.append('csrf', A().state.csrf);
                 const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) toast(j.error || 'Envoi impossible.', 'error'); else toast('Vidéo ajoutée aux Médias.'); }
             else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${(A().safeExportFilename ? A().safeExportFilename(name, 'diaporama') : 'diaporama')}.webm`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
@@ -310,7 +310,7 @@
             name = $('[data-ss-name]').value.trim() || 'Mon diaporama'; status('Enregistrement…');
             try { const r = await post('save_slideshow', {id, name, show}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Diaporama enregistré (Listes → Outils de modification → Présentation et diaporama).'); ctx.onSaved?.(id); } catch (e) { status(''); toast(e.message, 'error'); }
         }
-        function close() { if (dirty && !confirm('Fermer sans enregistrer le diaporama ?')) return; playing = false; cancelAnimationFrame(raf); stopAudio(); recording?.stop(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications du diaporama seront perdues.', {title: 'Fermer sans enregistrer le diaporama ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; playing = false; cancelAnimationFrame(raf); stopAudio(); recording?.stop(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         /* ─── événements ─── */
         dlg.addEventListener('click', async e => {
             const li = e.target.closest('[data-ss-i]'), del = e.target.closest('[data-ss-del]');

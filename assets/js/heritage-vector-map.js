@@ -158,9 +158,9 @@
             if (b.hasAttribute('data-gup')) { sec.previousElementSibling?.before(sec); savePaletteFrom(box); onChange?.(); return; }
             if (b.hasAttribute('data-gdown')) { sec.nextElementSibling?.after(sec); savePaletteFrom(box); onChange?.(); return; }
             if (b.dataset.vmeEd) { if (await editCustom(b.dataset.vmeEd)) { redraw(); onChange?.(); } return; }
-            if (b.dataset.vmeDel) { if (!confirm('Supprimer cet élément ? (Ce qui est déjà dessiné avec reste sur les plans.)')) return; const P = readP(); P.custom = arr(P.custom).filter(c => c?.id !== b.dataset.vmeDel); writeP(P); redraw(); onChange?.(); return; }
+            if (b.dataset.vmeDel) { if (!await A().confirmBox('Ce qui est déjà dessiné avec reste sur les plans.', {title: 'Supprimer cet élément ?', okLabel: 'Supprimer l’élément'})) return; const P = readP(); P.custom = arr(P.custom).filter(c => c?.id !== b.dataset.vmeDel); writeP(P); redraw(); onChange?.(); return; }
             if (b.hasAttribute('data-vme-new')) { if (await editCustom(null)) { redraw(); onChange?.(); } return; }
-            if (b.hasAttribute('data-vme-reset')) { if (!confirm('Remettre l’ordre et l’affichage de départ ? (Tes éléments sont gardés.)')) return; const P = readP(); delete P.order; delete P.hiddenGroups; delete P.items; writeP(P); redraw(); onChange?.(); } });
+            if (b.hasAttribute('data-vme-reset')) { if (!await A().confirmBox('Tes éléments sont gardés.', {title: 'Remettre l’ordre et l’affichage de départ ?', okLabel: 'Réinitialiser'})) return; const P = readP(); delete P.order; delete P.hiddenGroups; delete P.items; writeP(P); redraw(); onChange?.(); } });
         box.addEventListener('change', e => { if (e.target.matches('input[type=checkbox]')) { savePaletteFrom(box); onChange?.(); } });
     }
     function openPaletteEditor(onChange) {
@@ -648,7 +648,7 @@
             LAYERS.forEach(([key, label]) => { if (d.objs.some(o => o.layer && o.mapLayer === key)) return; d.objs.push({id: ed.uid(), type: 'group', layer: true, mapLayer: key, name: label, children: []}); n++; });
             // dans l'ordre du plan (du bas vers le haut), les calques à soi restent au-dessus
             const order = LAYERS.map(l => l[0]); d.objs.sort((a, b) => (a.mapLayer ? order.indexOf(a.mapLayer) : 99) - (b.mapLayer ? order.indexOf(b.mapLayer) : 99));
-            mapDoc().on = true; ed.commit(n ? `${n} calques de plan créés` : 'Calques déjà là');
+            mapDoc().on = true; ed.commit(n ? `${A().plural(n, 'calque de plan créé', 'calques de plan créés')}` : 'Calques déjà là');
         }
         if (mapDoc().askGeo) { delete mapDoc().askGeo; setTimeout(() => basemapDialog(), 400); } // une carte nouvelle : d'abord la situer (échelle juste)
         function onPaneEvent(e) {
@@ -674,7 +674,8 @@
             const vm = el.dataset.vm, vmp = el.dataset.vmp;
             if (vm) { const m = mapDoc(), d = ed.doc(), final = e.type === 'change';
                 if (vm === 'on') { m.on = el.checked; if (m.on && !d.kind) d.kind = 'map'; ed.commit(m.on ? 'Mode Plan' : 'Mode Plan désactivé'); ed.paint(); return true; }
-                if (vm === 'style' && final) { m.style = el.value; if (confirm('Prendre aussi la couleur de papier de ce style pour le fond ?')) d.bg = STYLES[m.style].paper; restyleAll(); ed.commit('Style du plan'); return true; }
+                if (vm === 'style' && final) { m.style = el.value; restyleAll(); ed.commit('Style du plan'); const st0 = m.style; // puis la question du fond (fenêtre de l'app, sans bloquer)
+                    A().confirmBox('', {title: 'Prendre aussi la couleur de papier de ce style pour le fond ?', okLabel: 'Prendre le papier', cancelLabel: 'Garder mon fond', danger: false}).then(ok => { if (!ok || m.style !== st0) return; d.bg = STYLES[st0].paper; restyleAll(); ed.commit('Fond du plan'); }); return true; }
                 if (vm === 'auto') { m.auto = el.checked; ed.commit('Rangement'); return true; }
                 if (vm === 'kmgrid') { m.kmgrid = el.checked; ed.commit(m.kmgrid ? 'Grille d’échelle' : 'Sans grille d’échelle'); return true; }
                 if (vm === 'yon') { m.year = el.checked ? Number(ed.pane.querySelector('[data-vm="year"]').value) : null; ed.commit(m.year ? `Année ${m.year}` : 'Toutes les époques'); ed.paint(); return true; }

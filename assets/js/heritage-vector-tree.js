@@ -284,7 +284,7 @@
             onOpen: dg => dg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const li = b.closest('[data-k]'), list = dg.querySelector('[data-list]');
                 if (b.hasAttribute('data-up')) li.previousElementSibling?.before(li); else if (b.hasAttribute('data-down')) li.nextElementSibling?.after(li);
                 else if (b.hasAttribute('data-add') || b.hasAttribute('data-ed')) { save(dg); const ok = await (b.hasAttribute('data-add') ? onAdd() : onEdit(li.dataset.k)); if (ok) list.innerHTML = rowsHtml(); }
-                else if (b.hasAttribute('data-del')) { if (!confirm('Supprimer ?')) return; onDelete(li.dataset.k); li.remove(); }
+                else if (b.hasAttribute('data-del')) { if (!await A().confirmBox('', {title: `Supprimer « ${all().find(([k]) => k === li.dataset.k)?.[1] || 'cet élément'} » ?`, okLabel: 'Supprimer'})) return; onDelete(li.dataset.k); li.remove(); }
                 else if (b.hasAttribute('data-reset')) { const pref = readJ(key, {}); delete pref.order; delete pref.hidden; writeJ(key, pref); list.innerHTML = rowsHtml(); } }),
             onSubmit: dg => { if (save(dg) === false) return false; onDone?.(); }});
     }
@@ -348,7 +348,7 @@
                 const refill = () => { const f = dg.querySelector('[name=format]').value, t = dg.querySelector('[name=theme]').value; dg.querySelector('[data-fmtbox]').innerHTML = sel('format', fmtOpts(f), f); dg.querySelector('[data-themebox]').innerHTML = themeSel(t); };
                 dg.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const c = b.dataset.dtCmd;
                     if (b.dataset.dtShape) return setShape(b.dataset.dtShape);
-                    if (c === 'reset') { if (!confirm('Revenir aux réglages de départ de l’arbre (forme, format, style, cases…) ?')) return; try { localStorage.removeItem(PREF); } catch (_) {} dg.close(); setTimeout(() => openMaker(onDone), 50); return; }
+                    if (c === 'reset') { if (!await A().confirmBox('Forme, format, style, cases… reviennent comme au départ.', {title: 'Revenir aux réglages de départ de l’arbre ?', okLabel: 'Réinitialiser'})) return; try { localStorage.removeItem(PREF); } catch (_) {} dg.close(); setTimeout(() => openMaker(onDone), 50); return; }
                     if (c === 'fmts') manageList({key: FKEY, title: '⚙️ Les formats', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓, et crée les tiens (en cm).', all: () => formats().map(f => [f[0], f[1], f[4]]), addLabel: '＋ Un format à moi',
                         onAdd: () => editFormat(null), onEdit: id => editFormat(id), onDelete: id => { const p2 = readJ(FKEY, {}); p2.custom = (p2.custom || []).filter(x => x.id !== id); writeJ(FKEY, p2); }, onDone: refill});
                     if (c === 'themes') manageList({key: SKEY, title: '🎨 Les styles', intro: 'Coche ceux qu’on voit dans la liste, range-les avec ↑ ↓ ; crée les tiens (couleurs, police, cadre), modifie-les ou supprime-les.', all: () => themes().map(([k, t, mine]) => [k, t.label, mine]), addLabel: '＋ Créer un style',

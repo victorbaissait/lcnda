@@ -81,7 +81,7 @@
                 .replace(/\s*\((⌘|⇧|⌥|Ctrl|Maj|Alt|[A-Z0-9\\]|Tab|Échap)[^)]{0,8}\)/g, '').replace(/\s+—\s+(Tab|⌥.*|Alt.*)$/, '').trim();
             if (!label) return;
             const group = clean(menu?.querySelector('summary')?.textContent) || clean(b.closest('[data-tbg]')?.dataset.tbgLabel) || clean(b.closest('details')?.querySelector('summary')?.textContent) || 'Autres boutons';
-            const row = [id, label.slice(0, 90), group.replace(/\s*\(\d+\)$/, '').slice(0, 50), clean(b.querySelector('kbd')?.textContent).slice(0, 12)]; row.menu = !!menu;
+            const row = [id, label.slice(0, 90), group.replace(/\s*\(\d+\)$/, '').slice(0, 50), clean((k0 => k0?.dataset.ekOrig ?? k0?.textContent)(b.querySelector('kbd'))).slice(0, 12)]; row.menu = !!menu; // la touche de l'outil (pas celle à soi, écrite par-dessus)
             found.set(id, row);
         });
         if (!found.size) return;
@@ -89,13 +89,59 @@
         found.forEach((r, id) => had.set(id, r.slice(0, 4)));
         all[kind] = [...had.values()].slice(0, 400); write(CMDS, all);
     }
-    /** Un outil s'ouvre : on note ses commandes (tout de suite, puis une fois tout affiché, et à la fermeture) */
+    /* ── ⌨️ La touche dans la bulle d'aide des boutons : la touche à soi si on en a donné une, sinon celle de l'outil
+     *     (data-shortcut posé par l'outil, ou la touche écrite dans le menu pour la même commande) ── */
+    const MENU_SEL = '.h-rt-menu, .ly-menus details, .h-mt-menubar details, .vx-menus details';
+    // les boutons de barre qui font la même chose qu'une commande de menu (pour y lire la touche à soi)
+    const ALIAS = {
+        montage: b => b.dataset.mtOp ? `data-mt-cmd=${['undo', 'redo'].includes(b.dataset.mtOp) ? '' : 'op:'}${b.dataset.mtOp}` : b.hasAttribute('data-mt-play') ? 'data-mt-cmd=play' : b.hasAttribute('data-mt-saveproj') ? 'data-mt-cmd=proj' : '',
+        retouch: b => { const d = b.dataset, c = d.rtUndo !== undefined ? 'undo' : d.rtRedo !== undefined ? 'redo' : d.rtProjsave !== undefined ? 'proj:save' : d.rtZoomfit !== undefined ? 'zoom:fit' : d.rtZoom100 !== undefined ? 'zoom:100' : d.rtZoom ? `zoom:${d.rtZoom === '1' ? 'in' : 'out'}` : ''; return c ? `data-rt-cmd=${c}` : ''; },
+    };
+    const glyphs = s => { const K = kit(); return !s || !K || K.IS_MAC ? s : String(s).replace(/⇧/g, 'Maj+').replace(/⌥/g, 'Alt+').replace(/⌘/g, 'Ctrl+').replace(/Pg↑/, 'Page↑').replace(/Pg↓/, 'Page↓'); };
+    /** Comme app-harmony.js : « Enregistrer » + data-shortcut="⌘S" → bulle « Enregistrer (⌘S) » (et suit une touche changée) */
+    function tipOf(el, k) {
+        if (el.dataset.shortcut === k && el.dataset.scDone === k) return;
+        const prev = el.dataset.scDone; el.dataset.shortcut = k; el.dataset.scDone = k;
+        let t = (el.getAttribute('title') || el.getAttribute('aria-label') || el.textContent || '').trim();
+        if (prev && t.endsWith(` (${prev})`)) t = t.slice(0, -prev.length - 3);
+        t = t.replace(/\s*\([^()]*\)\s*$/, m => (m.includes(k) ? '' : m));
+        el.title = `${t} (${k})`;
+    }
+    function decorate(dl, kind) {
+        const rx = ATTR[kind], p = prefs()[kind] || {}, K = kit();
+        const idOf = b => { const a = rx && [...b.attributes].find(x => rx.test(x.name)); return a ? (a.value ? `${a.name}=${a.value}` : a.name) : (ALIAS[kind]?.(b) || ''); };
+        const btns = [...dl.querySelectorAll('button')], menuKey = new Map();
+        btns.forEach(b => { // la première fois : la touche prévue par l'outil
+            if (!b.dataset.ekSeen) { b.dataset.ekSeen = '1'; b.dataset.scBuiltin = b.dataset.shortcut || ''; }
+            const kb = b.closest(MENU_SEL) && b.querySelector(':scope > kbd'); if (!kb) return;
+            if (kb.dataset.ekOrig === undefined) kb.dataset.ekOrig = kb.textContent;
+            const id = idOf(b); if (id && kb.dataset.ekOrig && kb.dataset.ekOrig !== '▸') menuKey.set(id, kb.dataset.ekOrig);
+        });
+        btns.forEach(b => {
+            const id = idOf(b), mine = id && p[id] && K ? K.comboLabel(p[id]) : '';
+            if (b.closest(MENU_SEL) && b.querySelector(':scope > kbd, :scope > span')) { // une ligne de menu : sa touche est écrite à droite
+                let kb = b.querySelector(':scope > kbd');
+                if (mine && !kb) { kb = document.createElement('kbd'); kb.dataset.ekOrig = ''; b.appendChild(kb); }
+                if (kb && kb.dataset.ekOrig !== '▸') { const want = mine || glyphs(kb.dataset.ekOrig || ''); if (kb.textContent !== want) kb.textContent = want; }
+                return;
+            }
+            const k = mine || glyphs(b.dataset.scBuiltin || (id && menuKey.get(id)) || '');
+            if (k) tipOf(b, k);
+        });
+    }
+    /** Un outil s'ouvre : on note ses commandes (tout de suite, puis une fois tout affiché, et à la fermeture),
+     *  et la touche de chaque bouton va dans sa bulle (à chaque fois que l'outil redessine ses boutons) */
     ext.editorKeysAttach = (dl, kind) => {
         if (!dl || !ATTR[kind]) return;
         dl.dataset.edKind = kind;
         const go = () => { try { harvest(dl, kind); } catch (_) {} };
         setTimeout(go, 50); setTimeout(go, 2000); dl.addEventListener('close', go, {once: true});
+        let t = 0; const deco = () => { clearTimeout(t); t = setTimeout(() => { try { decorate(dl, kind); } catch (_) {} }, 60); };
+        const mo = new MutationObserver(deco); mo.observe(dl, {childList: true, subtree: true}); deco();
+        dl.addEventListener('close', () => mo.disconnect(), {once: true});
     };
+    ext.shortcutLabel = glyphs; // « ⌘S » → « Ctrl+S » hors Mac (pour les outils qui posent data-shortcut eux-mêmes)
+    ext.editorKeysDecorate = (dl, kind) => { try { decorate(dl, kind || dl?.dataset.edKind); } catch (_) {} };
 
     /* ── Les touches : avant celles de l'outil et de l'app (écoute sur la fenêtre, en premier) ── */
     let capturing = null;
@@ -183,12 +229,12 @@
                 <details class="h-ek-builtin"><summary>Touches déjà prévues dans cet outil</summary><p>${Object.entries(BUILTIN[kind] || {}).map(([c, l]) => `${K.kbd(c)} ${esc(l)}`).join(' · ')}</p></details>`;
         };
         draw();
-        box.onclick = e => {
+        box.onclick = async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
             if (d.ekTab) { kind = d.ekTab; try { localStorage.setItem(TAB, kind); } catch (_) {} return draw(); }
             if (d.ekSet) return captureKey(kind, d.ekSet, cmds(kind).find(r => r[0] === d.ekSet)?.[1] || d.ekSet, draw);
             if (d.ekDel) { const p = prefs(); delete p[kind][d.ekDel]; savePrefs(p); toast('Raccourci retiré.'); return draw(); }
-            if (d.ekClear !== undefined) { if (!confirm('Retirer tous tes raccourcis de cet outil ?')) return; const p = prefs(); p[kind] = {}; savePrefs(p); return draw(); }
+            if (d.ekClear !== undefined) { if (!await A().confirmBox('Les raccourcis de départ de l’outil reviennent.', {title: 'Retirer tous tes raccourcis de cet outil ?', okLabel: 'Retirer mes raccourcis'})) return; const p = prefs(); p[kind] = {}; savePrefs(p); return draw(); }
         };
         box.oninput = e => { if (e.target.matches('[data-ek-q]')) { q = e.target.value; const pos = e.target.selectionStart; draw(); const i = box.querySelector('[data-ek-q]'); i.focus(); i.setSelectionRange(pos, pos); } };
     };

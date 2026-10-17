@@ -557,7 +557,7 @@
         return new Promise(res => { let done = false, chosen = '';
             const all = () => [...new Set([...(localFonts || []), ...fontList()])];
             ext.openDialog({eyebrow: 'PRÉSENTATION', title: '🖥 Choisir une police', submitLabel: 'Pour les titres', wide: true,
-                body: `<p class="muted">${localFonts ? `${localFonts.length} polices de cet ordinateur, puis celles de l’app.` : 'Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée.'} Clique sur une police, puis dis où elle va.</p>
+                body: `<p class="muted">${localFonts ? `${A().plural(localFonts.length, 'police')} de cet ordinateur, puis celles de l’app.` : 'Les polices de l’app ; une autre police installée : tape son nom exact puis Entrée.'} Clique sur une police, puis dis où elle va.</p>
                     <input type="search" data-kf-q placeholder="Chercher une police, ou taper son nom…" autocomplete="off" style="width:100%">
                     <div class="kn-fontpick" data-kf-list></div><p class="kn-fontprev" data-kf-prev>Choisis une police</p>
                     <div class="kn-row"><button type="button" class="button secondary" data-kf-to="body">Pour les textes</button>${hasSel ? '<button type="button" class="button secondary" data-kf-to="sel">Pour le texte choisi</button>' : ''}</div>`,
@@ -576,7 +576,8 @@
     /* ═════════ L'éditeur ═════════ */
     const HANDLES = [['nw', -1, -1], ['n', 0, -1], ['ne', 1, -1], ['e', 1, 0], ['se', 1, 1], ['s', 0, 1], ['sw', -1, 1], ['w', -1, 0]];
     const opt = (list, v) => list.map(([k, l]) => `<option value="${esc(k)}" ${String(k) === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('');
-    const tbtn = (attr, icon, label, title = label) => `<button type="button" class="kn-tb" ${attr} title="${esc(title)}" data-tb-label="${esc(`${icon} ${title}`)}"><b>${icon}</b><span class="kn-tbl">${esc(label)}</span></button>`;
+    // la touche écrite à la fin de la bulle (« Grouper (⌘G) ») va aussi dans data-shortcut
+    const tbtn = (attr, icon, label, title = label) => { const sc = (String(title).match(/\(([⌘⇧⌥][^()]{0,8})\)$/) || [])[1] || ''; return `<button type="button" class="kn-tb" ${attr} title="${esc(title)}" data-tb-label="${esc(`${icon} ${title}`)}"${sc ? ` data-shortcut="${esc(sc)}"` : ''}><b>${icon}</b><span class="kn-tbl">${esc(label)}</span></button>`; };
     async function openEditor(ctx = {}) {
         let id = 0, name = ctx.name || 'Ma présentation', show;
         try {
@@ -591,7 +592,7 @@
         const fileMenu = [['import', '⤒ Importer (PowerPoint, OpenDocument, PDF, images, texte, JSON)…'], ['-'], ['exp_pdf', '🖨️ PDF / imprimer (une diapositive par page)'], ['exp_pdfnotes', '🖨️ PDF avec les notes de l’orateur'], ['exp_png', '🖼️ Cette diapositive en PNG'], ['exp_pngall', '🗂️ Toutes les diapositives en PNG (.zip)'], ['exp_video', '⏺ Vidéo (WebM)'], ['exp_json', '⤓ Fichier de la présentation (.json)']];
         dlg.innerHTML = `<div class="kn">
             <header class="kn-top"><span class="kn-logo">🎤</span><input class="kn-name" data-kn-name value="${esc(name)}" maxlength="200" aria-label="Nom de la présentation">
-                <span class="kn-grp" data-tbg="kn-hist" data-tbg-label="Annuler / rétablir"><button type="button" class="kn-tb" data-kn-cmd="undo" title="Annuler (⌘Z)" data-tb-label="↶ Annuler (⌘Z)"><b>↶</b><span class="kn-tbl">Annuler</span></button><button type="button" class="kn-tb" data-kn-cmd="redo" title="Rétablir (⇧⌘Z)" data-tb-label="↷ Rétablir (⇧⌘Z)"><b>↷</b><span class="kn-tbl">Rétablir</span></button></span>
+                <span class="kn-grp" data-tbg="kn-hist" data-tbg-label="Annuler / rétablir"><button type="button" class="kn-tb" data-kn-cmd="undo" title="Annuler (⌘Z)" data-tb-label="↶ Annuler (⌘Z)" data-shortcut="⌘Z"><b>↶</b><span class="kn-tbl">Annuler</span></button><button type="button" class="kn-tb" data-kn-cmd="redo" title="Rétablir (⇧⌘Z)" data-tb-label="↷ Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z"><b>↷</b><span class="kn-tbl">Rétablir</span></button></span>
                 <span class="kn-grp" data-tbg="kn-insert" data-tbg-label="Insérer (barre du haut)">
                     ${tbtn('data-kn-ins="text"', 'T', 'Texte', 'Une zone de texte')}
                     <details class="kn-dd" data-kn-dd="shape" data-tb-label="◆ Formes"><summary class="kn-tb" title="Une forme"><b>◆</b><span class="kn-tbl">Forme</span></summary><div class="kn-ddl kn-shapes">${SHAPES.map(([k, l]) => `<button type="button" data-kn-ins="shape:${k}" title="${esc(l)}">${shapeIcon(k)}</button>`).join('')}</div></details>
@@ -609,7 +610,7 @@
                 <span class="kn-spacer"></span><span class="kn-state" data-kn-state></span>
                 <span class="kn-grp" data-tbg="kn-play" data-tbg-label="Lecture">${tbtn('data-kn-cmd="play"', '▶', 'Lire', 'Lire en plein écran depuis le début (⌥⌘↩)')}${tbtn('data-kn-cmd="playhere"', '⏵', 'D’ici', 'Lire depuis cette diapositive (⌘↩)')}${tbtn('data-kn-cmd="presenter"', '🎤', 'Présentateur', 'Plein écran + fenêtre du présentateur (notes, suivante, chronomètre)')}</span>
                 <span class="kn-grp" data-tbg="kn-file" data-tbg-label="Fichier">${tbtn('data-kn-cmd="import"', '⤒', 'Importer', 'PowerPoint, OpenDocument, PDF, images, Markdown, texte, JSON')}<details class="kn-dd kn-dd-r" data-kn-dd="export" data-tb-label="⤓ Exporter (PDF, PNG, vidéo, fichier)"><summary class="kn-tb" title="PDF, images, vidéo, fichier"><b>⤓</b><span class="kn-tbl">Exporter</span></summary><div class="kn-ddl">${fileMenu.slice(2).map(([k, l]) => `<button type="button" data-kn-cmd="${k}">${l}</button>`).join('')}</div></details></span>
-                ${ext.tbButton ? ext.tbButton('keynote') : ''}<button type="button" class="button small" data-kn-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('keynote') : ''}<button type="button" class="icon-button" data-kn-cmd="close" aria-label="Fermer">×</button></header>
+                ${ext.tbButton ? ext.tbButton('keynote') : ''}<button type="button" class="button small" data-kn-cmd="save" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('keynote') : ''}<button type="button" class="icon-button" data-kn-cmd="close" aria-label="Fermer">×</button></header>
             <div class="kn-main">
                 <aside class="kn-nav"><div class="kn-navbar" data-tbg="kn-navbar" data-tbg-label="Diapositives (au-dessus de la liste)"><span class="kn-split"><button type="button" class="kn-nb is-main" data-kn-cmd="newslide" title="Nouvelle diapositive">＋ Diapositive</button><details class="kn-dd" data-kn-dd="layouts" data-tb-label="▾ Choisir la disposition"><summary class="kn-nb" title="Choisir la disposition">▾</summary><div class="kn-ddl kn-lays" data-kn-lays></div></details></span><button type="button" class="kn-nb" data-kn-cmd="dupslide" title="Dupliquer la diapositive (pour un déplacement magique)">⧉</button><button type="button" class="kn-nb" data-kn-cmd="skipslide" title="Sauter / ne plus sauter à la lecture">👁</button><button type="button" class="kn-nb" data-kn-cmd="section" title="Commencer une section (un groupe de diapositives) ici">§</button><button type="button" class="kn-nb" data-kn-cmd="delslide" title="Supprimer la diapositive">🗑</button></div><ol class="kn-nlist" data-kn-slides></ol></aside>
                 <section class="kn-center"><div class="kn-canvas" data-kn-canvas><div class="kn-stage" data-kn-stage><div class="kn-slidebox" data-kn-slide></div><div class="kn-ov" data-kn-ov></div></div></div>
@@ -963,7 +964,7 @@
         }
         function paneObjs() {
             const list = S().objs.slice().reverse();
-            return `<div data-tbg="kn-objs" data-tbg-label="Inspecteur : « Objets »"><section class="kn-is" data-kn-osec="list" data-tb-label="Objets de la diapositive"><h4>Objets (le premier est devant)</h4>${list.length ? `<ol class="kn-layers">${list.map(o => `<li class="${sel.has(o.id) ? 'is-cur' : ''}${o.hide ? ' is-hid' : ''}"><button type="button" class="kn-lname" data-kn-x="osel:${esc(o.id)}"><span class="kn-lico">${TYPE_ICON[o.t]}</span><span>${esc(cut(objLabel(o), 34))}</span>${o.g ? '<small title="Dans un groupe">⊞</small>' : ''}</button>${B(`ohide:${o.id}`, o.hide ? '🙈' : '👁', o.hide ? 'Montrer' : 'Cacher')}${B(`olock:${o.id}`, o.lock ? '🔒' : '🔓', o.lock ? 'Déverrouiller' : 'Verrouiller')}${B(`oup:${o.id}`, '↑', 'Vers le devant')}${B(`odown:${o.id}`, '↓', 'Vers le fond')}</li>`).join('')}</ol>` : '<p class="muted">Aucun objet : insère un texte, une image… (barre du haut).</p>'}</section></div>`;
+            return `<div data-tbg="kn-objs" data-tbg-label="Inspecteur : « Objets »"><section class="kn-is" data-kn-osec="list" data-tb-label="Objets de la diapositive"><h4>Objets (le premier est devant)</h4>${list.length ? `<ol class="kn-layers">${list.map(o => `<li class="${sel.has(o.id) ? 'is-cur' : ''}${o.hide ? ' is-hid' : ''}"><button type="button" class="kn-lname" data-kn-x="osel:${esc(o.id)}"><span class="kn-lico">${TYPE_ICON[o.t]}</span><span>${esc(cut(objLabel(o), 34))}</span>${o.g ? '<small title="Dans un groupe">⊞</small>' : ''}</button>${B(`ohide:${o.id}`, o.hide ? '🙈' : '👁', o.hide ? 'Montrer' : 'Cacher')}${B(`olock:${o.id}`, o.lock ? '🔒' : '🔓', o.lock ? 'Déverrouiller' : 'Verrouiller')}${B(`oup:${o.id}`, '↑', 'Vers le devant')}${B(`odown:${o.id}`, '↓', 'Vers le fond')}</li>`).join('')}</ol>` : A().emptyState({icon: '🧩', text: 'Aucun objet sur cette diapositive pour l’instant', hint: 'Insère un texte, une image… avec la barre du haut.'})}</section></div>`;
         }
         function paneDoc() {
             const th = themeOf(show), [W, H] = WH(), fonts = fontList(), tot = show.slides.filter(s => !s.skip).reduce((a, s) => a + num(s.dur, 5), 0);
@@ -974,7 +975,7 @@
                 sec('colors', 'Couleurs et polices', `<div class="kn-g2">${F('Texte', iColor('data-kn-d="colors.fg"', th.fg, 'dclear:colors.fg'))}${F('Accent', iColor('data-kn-d="colors.accent"', th.accent, 'dclear:colors.accent'))}</div>${F('Police des titres', fsel('fonts.title', show.fonts?.title))}${F('Police des textes', fsel('fonts.body', show.fonts?.body))}<div class="kn-row">${B('localfonts', '🖥 Les polices de l’ordinateur')}</div>`),
                 sec('format', 'Format', `${F('Format des diapositives', `<select data-kn-x="aspect">${opt(Object.entries(ASPECTS).map(([k, v]) => [k, v[2]]), show.aspect)}</select>`)}${show.aspect === 'custom' ? `<div class="kn-g2">${F('Largeur (points)', `<input type="number" data-kn-x="cw" min="320" max="4000" value="${W}">`)}${F('Hauteur (points)', `<input type="number" data-kn-x="ch" min="240" max="4000" value="${H}">`)}</div>` : ''}<p class="muted">${W} × ${H} points. En changeant de format, les objets sont agrandis ou réduits ensemble.</p>`),
                 sec('sound', 'Musique', `${show.music ? `<p>🎵 ${esc(show.music.title || 'Musique')}</p><div class="kn-row">${B('music', 'Changer…')}${B('nomusic', 'Retirer')}</div>${F('Volume', iRange('data-kn-d="musicVol"', show.musicVol ?? .5, 0, 1, .05))}` : `<div class="kn-row">${B('music', '🎵 Une musique pendant la lecture…')}</div>`}`),
-                sec('loop', 'Lecture', `${iChk('data-kn-d="loop"', show.loop, 'Recommencer au début à la fin (borne, exposition)')}<p class="muted">${show.slides.length} diapositive${show.slides.length > 1 ? 's' : ''}${show.slides.some(s => s.skip) ? ` dont ${show.slides.filter(s => s.skip).length} sautée(s)` : ''} · ${fmt(tot)} en lecture toute seule (durées des diapositives).</p>`),
+                sec('loop', 'Lecture', `${iChk('data-kn-d="loop"', show.loop, 'Recommencer au début à la fin (borne, exposition)')}<p class="muted">${show.slides.length} diapositive${show.slides.length > 1 ? 's' : ''}${show.slides.some(s => s.skip) ? ` dont ${A().plural(show.slides.filter(s => s.skip).length, 'sautée')}` : ''} · ${fmt(tot)} en lecture toute seule (durées des diapositives).</p>`),
             ].join('')}</div>`;
         }
         function paintInsp() {
@@ -1085,7 +1086,7 @@
             try { const r = await post('save_slideshow', {id, name, show: forSave()}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Présentation enregistrée (Listes → Outils de modification → 🎞️ Présentation et diaporama).'); ctx.onSaved?.(id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
-        function close() { if (editing) stopEdit(); if (dirty && !confirm('Fermer sans enregistrer la présentation ?')) return; closed = true; ro.disconnect(); docAc.abort(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        async function close() { if (editing) stopEdit(); if (dirty && !await A().confirmBox('Les dernières modifications de la présentation seront perdues.', {title: 'Fermer sans enregistrer la présentation ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; closed = true; ro.disconnect(); docAc.abort(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         const ctl = {get show() { return show; }, get cur() { return cur; }, get name() { return $('[data-kn-name]').value || name; },
             addSlides(list, {replace = false, meta = null} = {}) {
                 if (editing) stopEdit();
@@ -1410,7 +1411,7 @@
             slides.push(s); if (si % 5 === 4) await new Promise(r => setTimeout(r, 0));
         }
         if (!slides.length) throw new Error('aucune diapositive trouvée');
-        return {slides, meta: {w: W, h: H}, notes: [...(skippedImg ? [`${skippedImg} image(s) dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté.`] : [])]};
+        return {slides, meta: {w: W, h: H}, notes: [...(skippedImg ? [`${A().plural(skippedImg, 'image')} dans un format que le navigateur ne lit pas (EMF, WMF…) ont été laissées de côté.`] : [])]};
     }
     function pptxText(txBody, k, phType, kindTx, colorOf, fontOf) {
         let html = '', plain = '', listOpen = '', firstSize = 0, firstColor = '', align = '';
@@ -1514,7 +1515,7 @@
             slides.push(s);
         }
         if (!slides.length) throw new Error('aucune diapositive trouvée');
-        return {slides, meta: {w: W, h: H}, notes: skipped ? [`${skipped} image(s) illisibles laissées de côté.`] : []};
+        return {slides, meta: {w: W, h: H}, notes: skipped ? [`${A().plural(skipped, 'image illisible laissée', 'images illisibles laissées')} de côté.`] : []};
     }
     /* ─── PDF : les images qu'il contient (scans, photos), une par diapositive ─── */
     const ascii85 = str => { let t = str.replace(/\s/g, ''); if (t.startsWith('<~')) t = t.slice(2); const e = t.indexOf('~>'); if (e >= 0) t = t.slice(0, e); const out = []; let i = 0;
@@ -1537,7 +1538,7 @@
         }
         if (!out.length) throw new Error('aucune image (scan, photo) n’a été trouvée dans ce PDF. Son texte et ses dessins ne peuvent pas être lus ici : exporte-le plutôt en images, ou en PowerPoint depuis le logiciel qui l’a fait');
         const slides = []; let i = 0; for (const d of out) { const f = await storeImage(d, `page-${++i}.jpg`, `${fname.replace(/\.[^.]+$/, '')} — image ${i}`); if (f) slides.push(photoSlide(show, f)); }
-        return {slides, notes: [`PDF : ${slides.length} image(s) reprises ; le texte et les dessins du PDF ne sont pas lus.`]};
+        return {slides, notes: [`PDF : ${A().plural(slides.length, 'image reprise', 'images reprises')} ; le texte et les dessins du PDF ne sont pas lus.`]};
     }
     /* ─── Markdown, texte : « # » = une diapositive, « - » = une puce, « --- » sépare, « > » une citation ─── */
     function importText(txt, show, md = true) {
@@ -1662,7 +1663,7 @@
         const list = show.slides.filter(s => !s.skip); if (!list.length) return toast('Aucune diapositive.', 'error');
         if (typeof MediaRecorder !== 'function') return toast('Ce navigateur ne sait pas enregistrer de vidéo.', 'error');
         const [W, H] = dims(show), sc = Math.min(1, 1280 / W), cw = Math.round(W * sc / 2) * 2, chh = Math.round(H * sc / 2) * 2, durs = list.map(s => clamp(num(s.dur, 5), 1, 600)), total = durs.reduce((a, b) => a + b, 0);
-        if (!confirm(`La vidéo rejoue la présentation en entier (${fmt(total)}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte. Continuer ?`)) return;
+        if (!await A().confirmBox(`La vidéo rejoue la présentation en entier (${fmt(total)}, durées de l’onglet 🖼 Diapositive) et l’enregistre. Laisse la fenêtre ouverte.`, {title: 'Fabriquer la vidéo ?', okLabel: 'Fabriquer la vidéo'})) return;
         try {
             const frames = []; for (const [i, s] of list.entries()) { status(`⏺ Préparation : ${i + 1} / ${list.length}`); frames.push(await slideCanvas(show, s, sc)); }
             const c = document.createElement('canvas'); c.width = cw; c.height = chh; const g = c.getContext('2d'), vs = c.captureStream(30);
@@ -1684,7 +1685,7 @@
             await new Promise(res => { const step = () => { const t = (performance.now() - t0) / 1000; if (t >= total) { draw(total - .01); return res(); } draw(t); status(`⏺ Vidéo : ${Math.round(t / total * 100)} %`); requestAnimationFrame(step); }; step(); });
             mr.stop(); mus?.pause(); await done; ac.close().catch(() => {}); status('');
             const blob = new Blob(chunks, {type: 'video/webm'}); if (!blob.size) return toast('La vidéo est vide : l’enregistrement n’a pas pu se faire dans ce navigateur.', 'error');
-            if (confirm('Vidéo prête. Ajouter la vidéo aux Médias de l’app ? (Annuler : la télécharger seulement)')) { const u = await uploadBlob(blob, 'presentation.webm', 'video', name || 'Présentation'); toast(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.'); }
+            if (await A().confirmBox('Tu peux l’ajouter aux Médias de l’app, ou seulement la télécharger.', {title: 'Vidéo prête', okLabel: 'Ajouter aux Médias', cancelLabel: 'Télécharger seulement', danger: false})) { const u = await uploadBlob(blob, 'presentation.webm', 'video', name || 'Présentation'); toast(u ? 'Vidéo ajoutée aux Médias.' : 'Envoi impossible.'); }
             else download(blob, `${safeName(name)}.webm`);
         } catch (e) { status(''); toast(`Vidéo impossible : ${e.message}`, 'error'); }
     }

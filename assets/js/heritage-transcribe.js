@@ -139,11 +139,11 @@
                 <select data-tx="kind" title="Genre d’acte">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="Date de l’acte"><input data-tx="place" placeholder="Lieu" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="Source (AD, cote, vue)" value="${esc(t.source)}" title="Archives, cote, numéro de vue">
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status></span>
-                <button type="button" class="button small" data-tx-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
+                <button type="button" class="button small" data-tx-cmd="save" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
             <div class="h-tx-main">
                 <section class="h-tx-left">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button><span class="h-tx-sep"></span>
-                        <button type="button" data-tx-tool="pan" title="Déplacer l’image (ou barre d’espace)">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone (elle se relie au passage choisi dans le texte)">▭ Zone</button>
+                        <button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone (elle se relie au passage choisi dans le texte)" data-shortcut="Z">▭ Zone</button>
                         <button type="button" data-tx-cmd="zin" title="Zoom avant">＋</button><button type="button" data-tx-cmd="zout" title="Zoom arrière">－</button><button type="button" data-tx-cmd="fit" title="Toute l’image">⤢</button><button type="button" data-tx-cmd="rot" title="Tourner de 90°">⟳</button><span class="h-tx-sep"></span>
                         <label title="Contraste">◐<input type="range" data-tx-view="contrast" min="50" max="300" value="${t.data.view.contrast}"></label><label title="Luminosité">☀<input type="range" data-tx-view="bright" min="40" max="220" value="${t.data.view.bright}"></label>
                         <label class="checkbox-line" title="Négatif : encre claire sur fond sombre"><input type="checkbox" data-tx-view="invert" ${t.data.view.invert ? 'checked' : ''}>Négatif</label><label class="checkbox-line"><input type="checkbox" data-tx-view="gray" ${t.data.view.gray ? 'checked' : ''}>Gris</label></div>
@@ -264,7 +264,7 @@
                 onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input')); }, 30); }, // les fiches du nom lu s’affichent tout de suite
                 onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) { toast('Choisis une fiche.', 'error'); return false; } p.person_id = chosen; touch(); paintPeople(); }});
         }
-        $('[data-tx-found]').addEventListener('click', e => {
+        $('[data-tx-found]').addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
             if (d.txGoto) { const [s, en] = d.txGoto.split(':').map(Number); selectText({s, e: en}); const z = t.data.zones.find(q => q.s < en && s < q.e); if (z) { selZone = z.id; drawZones(); reveal(z); } return; }
             if (d.txKeep) return keep(found[Number(d.txKeep)]);
@@ -275,7 +275,7 @@
             if (d.txPlink) return linkPerson(Number(d.txPlink));
             if (d.txPunlink) { t.data.people[Number(d.txPunlink)].person_id = 0; touch(); paintPeople(); return; }
             if (d.txPdel) { t.data.people.splice(Number(d.txPdel), 1); touch(); paintPeople(); return; }
-            if (d.txPopen) { if (dirty && !confirm('Ouvrir la fiche ? La transcription non enregistrée sera perdue (💾 d’abord).')) return; dlg.close(); dlg.remove(); A().openPersonById?.(Number(d.txPopen)); }
+            if (d.txPopen) { if (dirty && !await A().confirmBox('La transcription non enregistrée sera perdue (💾 d’abord).', {title: 'Ouvrir la fiche ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return; dlg.close(); dlg.remove(); A().openPersonById?.(Number(d.txPopen)); }
         });
         $('[data-tx-found]').addEventListener('change', e => { const s = e.target.closest('[data-tx-prole]'); if (s) { t.data.people[Number(s.dataset.txProle)].role = s.value; touch(); } });
         /* ─── lecture automatique ─── */
@@ -313,7 +313,7 @@
             t.media_id = Number(m.id); t.filename = m.filename;
             if (!t.title && m.title && !m.imported) { t.title = m.title; $('[data-tx="title"]').value = t.title; }
             if (!area.value.trim() && m.transcription) { area.value = m.transcription; before = area.value; t.body = area.value; }
-            if (t.data.zones.length && !confirm('Garder les zones déjà posées (elles étaient pour l’ancienne image) ?')) t.data.zones = [];
+            if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) t.data.zones = [];
             touch(); await loadImage();
         }
         /* ─── enregistrer, exporter ─── */
@@ -348,7 +348,7 @@
             if (k === 'ocr') return runOcr();
             if (k === 'htr') return runHtr();
             if (k === 'detect') return runDetect();
-            if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast('Pas de modèle pour ce genre d’acte.', 'error'); if (area.value.trim() && !confirm('Ajouter le modèle à la fin du texte ?')) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
+            if (k === 'template') { const tp = TEMPLATES[$('[data-tx="kind"]').value]; if (!tp) return toast('Pas de modèle pour ce genre d’acte.', 'error'); if (area.value.trim() && !await A().confirmBox('Le texte déjà écrit est gardé.', {title: 'Ajouter le modèle à la fin du texte ?', okLabel: 'Ajouter le modèle'})) return; area.value += (area.value.trim() ? '\n\n' : '') + tp; area.dispatchEvent(new Event('input')); return; }
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast('Texte copié.')).catch(() => toast('Copie impossible ici.', 'error')); return; }
             if (k === 'print') return printIt();
@@ -361,7 +361,7 @@
         });
         dlg.addEventListener('change', e => { if (e.target.dataset.tx === 'kind') { t.kind = e.target.value; touch(); } });
         const onKey = e => {
-            if (!dlg.open) return;
+            if (!dlg.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dlg) return; // une fenêtre par-dessus (confirmation…) garde ses touches
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); return; }
             if (e.target.closest?.('input, textarea, select')) return;
             if (e.key === ' ' && !space) { space = true; stage.dataset.tool = 'pan'; e.preventDefault(); }
@@ -370,7 +370,7 @@
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
-        function close() { if (dirty && !confirm('Fermer sans enregistrer la transcription ?')) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); ro.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); ro.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         const ro = new ResizeObserver(() => { if (imgW && !drag) { applyView(); } }); ro.observe(stage);
         paintMirror(); paintPeople(); await loadImage();

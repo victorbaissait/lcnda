@@ -71,7 +71,7 @@
                 </aside></div>`;
         document.body.appendChild(dl);
         const $ = s => dl.querySelector(s), cv = $('[data-as-canvas]'), g = cv.getContext('2d');
-        const close = () => { if (dirty && layers.length > 1 && !confirm('Fermer sans enregistrer l’assemblage ?')) return; dl.close(); };
+        const close = async () => { if (dirty && layers.length > 1 && !await A().confirmBox('L’assemblage non enregistré sera perdu.', {title: 'Fermer sans enregistrer l’assemblage ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; dl.close(); };
         $('[data-as-close]').addEventListener('click', close);
         dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); close(); });
         dl.addEventListener('close', () => dl.remove());

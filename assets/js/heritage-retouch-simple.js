@@ -179,8 +179,8 @@
         document.body.appendChild(dlg);
         dlg.addEventListener('close', () => dlg.remove());
         dlg.querySelectorAll('[data-rs-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
-        dlg.querySelector('[data-rs-advanced]').addEventListener('click', () => {
-            if (st.strokes.length && !confirm('Passer à la retouche avancée ? Les corrections en cours seront perdues.')) return;
+        dlg.querySelector('[data-rs-advanced]').addEventListener('click', async () => {
+            if (st.strokes.length && !await A().confirmBox('Les corrections en cours seront perdues.', {title: 'Passer à la retouche avancée ?', okLabel: 'Passer sans enregistrer', danger: true})) return;
             try { localStorage.setItem('genealogie-retouch-mode', 'advanced'); } catch (_) {}
             dlg.close(); ext.openRetouch?.(source, null, {advanced: true});
         });
@@ -301,7 +301,7 @@
         const release = () => { if (dragging >= 0 && outside === dragging) { outside = -1; removePoint(dragging); } dragging = -1; outside = -1; drawCurve(); };
         svg.addEventListener('pointerup', release); svg.addEventListener('pointercancel', release);
         // ⌫ / Suppr enlève le point choisi (écouté sur toute la page : un clic sur la courbe ne lui donne pas le clavier)
-        const onKey = e => { if (dlg.open && (e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0 && !e.target.closest?.('input, textarea, select, [contenteditable]')) { e.preventDefault(); removePoint(selPt); } };
+        const onKey = e => { if (dlg.open && [...document.querySelectorAll('dialog[open]')].at(-1) === dlg && (e.key === 'Delete' || e.key === 'Backspace') && selPt >= 0 && !e.target.closest?.('input, textarea, select, [contenteditable]')) { e.preventDefault(); removePoint(selPt); } };
         document.addEventListener('keydown', onKey); dlg.addEventListener('close', () => document.removeEventListener('keydown', onKey));
         svg.addEventListener('contextmenu', e => { const hit = e.target.closest('[data-rs-pt]'); if (hit) { e.preventDefault(); removePoint(Number(hit.dataset.rsPt)); } });
         dlg.querySelector('[data-rs-ptdel]').addEventListener('click', () => removePoint(selPt));
@@ -325,7 +325,7 @@
                 catch (error) { toast(error.message, 'error'); }
             }));
             box.querySelectorAll('[data-rs-vdel]').forEach(b => b.addEventListener('click', async () => {
-                if (!confirm('Supprimer cette version retouchée ? L’original et les autres versions restent.')) return;
+                if (!await A().confirmBox('L’original et les autres versions restent.', {title: 'Supprimer cette version retouchée ?', okLabel: 'Supprimer la version'})) return;
                 try { const r = await api('retouch_delete_version', {}, {method: 'POST', body: {media_id: item.id, version_id: b.dataset.rsVdel}}); versions = r.result.versions; applyShown(r.result.filename); drawVersions(); toast('Version supprimée.'); }
                 catch (error) { toast(error.message, 'error'); }
             }));
@@ -335,7 +335,7 @@
         dlg.querySelectorAll('[data-rs-save]').forEach(b => b.addEventListener('click', async () => {
             const mode = b.dataset.rsSave, label0 = b.textContent;
             const mpx = img.naturalWidth * img.naturalHeight / 1e6;
-            if (mpx > 60 && !confirm(`Cette image est très grande (${Math.round(mpx)} millions de points) : l’enregistrement peut être long, voire échouer. Continuer ?`)) return;
+            if (mpx > 60 && !await A().confirmBox(`Cette image est très grande (${Math.round(mpx)} millions de points) : l’enregistrement peut être long, voire échouer.`, {title: 'Enregistrer quand même ?', okLabel: 'Enregistrer'})) return;
             dlg.querySelectorAll('.modal-actions button').forEach(x => { x.disabled = true; });
             b.textContent = 'Enregistrement…';
             try {
