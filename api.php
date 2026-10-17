@@ -328,6 +328,8 @@ try {
         'boards' => json_response(['boards' => boards_list($pdo, $_GET)]),
         'topic_sheets' => json_response(['sheets' => topic_sheets_list($pdo)]),
         'periodicals' => json_response(periodicals_all($pdo)),
+        'diagrams' => json_response(diagrams_all($pdo, $_GET)),
+        'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
         'person_names' => json_response(person_names($pdo)),
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),
         'press_ads' => json_response(press_ads_all($pdo)),
@@ -9185,6 +9187,10 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_board' => save_board($pdo,$data),
             'save_topic_sheet' => save_topic_sheet($pdo,$data),
             'save_periodical' => save_periodical($pdo,$data),
+            'save_diagram' => save_diagram($pdo,$data),
+            'delete_diagram' => delete_diagram($pdo,$data),
+            'link_diagram' => link_diagram($pdo,$data),
+            'reorder_diagrams' => reorder_diagrams($pdo,$data),
             'periodicals_to_atelier' => periodicals_to_atelier($pdo,$data),
             'save_periodical_issue' => save_periodical_issue($pdo,$data),
             'save_periodical_article' => save_periodical_article($pdo,$data),
@@ -9328,7 +9334,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 function allowed_label_entity_types(): array
 {
     return ['person','event','place','media','census','note','source','investigation','view','archive_visit','family_object','family_memory',
-        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad'];
+        'voyage','placement','coat_of_arms','poilu','probate_inventory','family_paper','field_trip','old_map','parish','cited_name','help_request','resistance','custom_block_entry','village','custom_list','custom_list_record','voter','family_booklet','pet','periodical_periodical','periodical_issue','periodical_article','press_ad','diagram'];
 }
 
 function normalize_label_color(string $color): string
@@ -10146,6 +10152,7 @@ function merge_people(PDO $pdo,array $data): array
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
     merge_person_references($pdo,$target,$source);
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
+    if(function_exists('diagram_links_person'))diagram_links_person($pdo,$source,$target);
     // Cases « bloc à afficher » cochées sur l'une ou l'autre fiche
     $flags=array_values(array_filter(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(),'name'),static fn($c)=>preg_match('/^show_[a-z_]+_block$/',(string)$c)));
     foreach($flags as $flag)$pdo->prepare("UPDATE persons SET {$flag}=1 WHERE id=? AND (SELECT {$flag} FROM persons WHERE id=?)=1")->execute([$target,$source]);
@@ -11289,6 +11296,7 @@ function delete_person(PDO $pdo,array $data): array
         $pdo->prepare("DELETE FROM {$table} WHERE entity_type='person' AND entity_id=?")->execute([$id]);
     }
     if(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // la fiche d'animal (la liste) reste, avec son nom, ses dates
+    if(function_exists('diagram_links_person'))diagram_links_person($pdo,$id,0);
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$id,0); // revues, livres, documentaires, annonces : le lien s'en va
     $pdo->prepare('UPDATE census_members SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE archive_digest_people SET person_id=NULL WHERE person_id=?')->execute([$id]);

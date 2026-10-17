@@ -77,7 +77,7 @@
     const SHAPES = ['rect', 'ellipse', 'polygon', 'star', 'line', 'path', 'frame', 'compound'];
     const hexOk = c => /^#[0-9a-f]{6}$/i.test(String(c || ''));
     const fontOk = f => String(f || '').replace(/[^\w\s\-'.,À-ÿ]/g, '').slice(0, 80);
-    const srcOk = s => s === '' || /^media\/[A-Za-z0-9._%\-]{1,240}$/.test(s) || /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(s);
+    const srcOk = s => s === '' || /^media\/[A-Za-z0-9._%\-]{1,240}$/.test(s) || /^data:image\/(png|jpeg|webp|gif|svg\+xml);base64,[A-Za-z0-9+/=]+$/.test(s);
 
     /* ═════════════ Texte riche : seulement ce qui est prévu (contre le code glissé dans un fichier) ═════════════ */
     const TAGS = new Set(['P', 'DIV', 'SPAN', 'BR', 'B', 'STRONG', 'I', 'EM', 'U', 'S', 'STRIKE', 'SUB', 'SUP', 'A', 'UL', 'OL', 'LI', 'H1', 'H2', 'H3', 'H4', 'BLOCKQUOTE', 'SMALL']);
@@ -212,6 +212,7 @@
         if (it.type === 'text' && ['toc', 'index'].includes(it.auto)) { o.auto = it.auto; o.autoStyles = (Array.isArray(it.autoStyles) ? it.autoStyles : []).filter(x => /^[a-z0-9_-]{1,40}$/i.test(String(x))).slice(0, 12); o.autoPs = /^[a-z0-9_-]{1,40}$/i.test(String(it.autoPs || '')) ? it.autoPs : 'ps-body'; o.autoDots = it.autoDots !== false;
             if (Array.isArray(it.names)) o.names = it.names.filter(n => typeof n === 'string').slice(0, 20000).map(n => n.slice(0, 160)); }
         if (Number(it.mediaId) > 0) o.mediaId = Math.round(Number(it.mediaId));
+        if (it.type === 'frame' && Number(it.diagramId) > 0) o.diagramId = Math.round(Number(it.diagramId));
         if (it.type === 'text' && it.dyn?.type === 'person' && Number(it.dyn.id) > 0) o.dyn = {type: 'person', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).filter(f => DYN_FIELDS.some(d => d[0] === f)), at: String(it.dyn.at || '').slice(0, 40)};
         return o;
     }
@@ -619,7 +620,7 @@
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
                 <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['pdf', '📄 Exporter en PDF (imprimer)…'], ['pdfbleed', '📄 PDF avec fond perdu et traits de coupe…'], ['html', '🌐 Exporter en page HTML'], ['json', '⬇️ Exporter le fichier du document (.json)'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '🔗 Mettre à jour les liens (photos, fiches)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
                 ${menu('Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Désélectionner', 'Échap']])}
-                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…']])}
+                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…']])}
                 ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
                 <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
@@ -1022,7 +1023,8 @@
             if (editingId) { if (!silent) msg('Termine d’abord le texte en cours (Échap), puis recommence.'); return; }
             const frames = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && (it.mediaId || /^media\//.test(it.src || '')));
             const dyn = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.dyn);
-            if (!frames.length && !dyn.length) { if (!silent) msg('Aucun objet lié dans ce document.'); return; }
+            const dgs = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && it.diagramId);
+            if (!frames.length && !dyn.length && !dgs.length) { if (!silent) msg('Aucun objet lié dans ce document.'); return; }
             let changed = 0;
             if (frames.length) {
                 try { mediaRows = (await api('media_av_list', {kind: 'image'})).items || []; } catch (_) { mediaRows = mediaRows || []; }
@@ -1034,6 +1036,7 @@
                 });
             }
             for (const it of dyn) { try { const h = await personDynHtml(it.dyn.id, it.dyn.fields); if (h !== it.html) { it.html = h; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = 'ok'; it.dyn.at = new Date().toISOString().slice(0, 16); } catch (_) { linkState[it.id] = 'missing'; } }
+            for (const it of dgs) { try { const svg = ext.diagramSvg ? await ext.diagramSvg(it.diagramId) : ''; if (!svg) { linkState[it.id] = 'missing'; continue; } const src = svgSrc(svg); if (src !== it.src) { it.src = src; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
             if (changed) { commit('Liens mis à jour'); render(); }
             const miss = Object.values(linkState).filter(v => v === 'missing').length;
             if (!silent || changed || miss) msg(`🔗 Liens : ${changed ? `${changed} mis à jour` : 'tout est à jour'}${miss ? `, ${miss} introuvable${miss > 1 ? 's' : ''}` : ''}.`);
@@ -1048,6 +1051,17 @@
             A().state.lightboxMedia = [{...r, media_type: 'image'}]; A().state.lightboxIndex = 0;
             try { await ext.openRetouch(); } finally { A().state.lightboxMedia = lb0; A().state.lightboxIndex = li0; }
             let seen = false, n = 0; const t = setInterval(() => { n++; const fresh = [...document.querySelectorAll('dialog')].filter(d => !before.has(d)); if (fresh.length) seen = true; else if (seen || !dl.isConnected || n > 10) { clearInterval(t); if (dl.isConnected && seen) refreshLinks(false); } }, 600);
+        }
+        /** 📊 un de « Mes diagrammes », en image nette (SVG) qui suit le diagramme : « Mettre à jour les liens » le redessine */
+        const svgSrc = svg => 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+        async function insertDiagram() {
+            if (!ext.pickDiagram) return msg('Diagrammes indisponibles.');
+            const id = await ext.pickDiagram({title: 'Insérer un diagramme'}); if (!id) return;
+            const svg = await ext.diagramSvg(id); if (!svg) return msg('Diagramme introuvable.');
+            const m = svg.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/), ratio = m ? Number(m[2]) / Number(m[1]) : .6;
+            const b = box(D, cur), w = Math.min(b.w, 140), it = shapeItem('frame', {x: b.x, y: b.y, w, h: r1(w * ratio), layer: activeLayer(), fit: 'fit'});
+            Object.assign(it, {src: svgSrc(svg), srcName: 'Diagramme', diagramId: id, fill: 'none', name: 'Diagramme'}); curList().push(it); sel = [it.id];
+            commit('Diagramme inséré'); render();
         }
         function dynPersonDialog(it = null) {
             const f0 = it?.dyn?.fields || ['name', 'life', 'parents', 'partners'];
@@ -1141,7 +1155,7 @@
                 addend: () => addPages(1, D.pages.length), insert: insertPagesDialog, masters: () => mastersDialog(), duppage: dupPage, delpage: delPage, goto: gotoDialog, first: () => goPage(0), prev: () => goPage(cur - 1), next: () => goPage(cur + 1), last: () => goPage(D.pages.length - 1),
                 zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? 'Magnétisme activé.' : 'Magnétisme coupé.'); }, preview: () => { preview = !preview; render(); },
                 endmaster: () => { editMaster = null; sel = []; render(); },
-                preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), dynperson: () => dynPersonDialog(),
+                preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), dynperson: () => dynPersonDialog(), dyndiagram: () => insertDiagram(),
                 chain: () => { const it = one(); if (it?.type !== 'text') return msg('Choisis d’abord un bloc de texte.'); if (it.next) return msg('Ce bloc est déjà chaîné (« Couper le chaînage » d’abord).'); linkFrom = it.id; canvas.classList.add('is-linking'); render(); msg('➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler.'); },
                 unchain: () => { const it = one(); if (!it?.next) return msg('Ce bloc n’est pas chaîné vers un autre.'); delete it.next; commit('Chaînage coupé'); render(); },
                 autoflow: () => autoflow(),
@@ -1270,7 +1284,7 @@
             h += sec('Effets', `<div class="ly-grid2">${num('opacity', 'Opacité', f0.opacity ?? 100, {min: 0, max: 100, step: 1, unit: '%'})}${sel2('blend', 'Fusion', BLENDS, f0.blend || 'normal')}${num('feather', 'Contour progressif', f0.feather || 0, {min: 0, max: 50, step: 0.5})}</div>
                 <label class="ly-f ly-check"><input type="checkbox" data-ly-set="shadow.on" ${f0.shadow?.on ? 'checked' : ''}> Ombre portée</label>${f0.shadow?.on ? `<div class="ly-grid2">${num('shadow.x', 'Décalage X', f0.shadow.x ?? 1.5)}${num('shadow.y', 'Décalage Y', f0.shadow.y ?? 1.5)}${num('shadow.blur', 'Flou', f0.shadow.blur ?? 2, {min: 0, max: 50})}${num('shadow.o', 'Opacité', f0.shadow.o ?? 50, {min: 0, max: 100, step: 1, unit: '%'})}<label class="ly-f"><span>Couleur</span><input type="color" data-ly-set="shadow.c" value="${esc(f0.shadow.c || '#000000')}"></label></div>` : ''}`, false);
             if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', 'Le texte voisin', WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
-            if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.mediaId ? `<p class="ly-help">Image <b>liée</b> à une photo de l’app${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : linkState[it.id] === 'updated' ? ' — mise à jour' : ''} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✏️ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
+            if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.diagramId ? `<p class="ly-help">📊 Diagramme <b>lié</b>${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : ''} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »).</p><div class="ly-row"><button type="button" class="button small" data-ly-editdg>✏️ Modifier le diagramme</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button></div>` : it.mediaId ? `<p class="ly-help">Image <b>liée</b> à une photo de l’app${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : linkState[it.id] === 'updated' ? ' — mise à jour' : ''} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✏️ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
                 : '<p class="ly-help">Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base.</p>');
             if (it?.type === 'frame') h += sec('Cadre d’image', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">🖼️ ${it.src ? 'Remplacer' : 'Placer'} l’image</button>${it.src ? '<button type="button" class="button small secondary" data-ly-imgclear>Vider</button><button type="button" class="button small secondary" data-ly-cmd="fitframe">Cadre au contenu</button>' : ''}</div>${sel2('fit', 'Ajustement', FITS, it.fit || 'fill')}<div class="ly-grid2">${num('imgS', 'Échelle', it.imgS || 100, {min: 5, max: 2000, step: 1, unit: '%'})}${num('imgX', 'Décalage X', it.imgX || 0)}${num('imgY', 'Décalage Y', it.imgY || 0)}</div>`);
             if (it?.type === 'text') h += sec('Bloc de texte', `<div class="ly-grid2">${num('columns', 'Colonnes', it.columns || 1, {min: 1, max: 12, step: 1, unit: ''})}${num('gutter', 'Gouttière', it.gutter ?? 4, {min: 0, max: 50, step: 0.5})}${num('inset', 'Marge intérieure', it.inset || 0, {min: 0, max: 100, step: 0.5})}${sel2('valign', 'Vertical', [['top', 'En haut'], ['middle', 'Au milieu'], ['bottom', 'En bas'], ['justify', 'Justifié']], it.valign || 'top')}</div><div class="ly-row"><button type="button" class="button small secondary" data-ly-cmd="fitframe">Ajuster la hauteur au texte</button></div>`);
@@ -1388,6 +1402,7 @@
             const ch = e.target.closest('[data-ly-chaingo]'); if (ch) { const pi = pageOfItem(ch.dataset.lyChaingo); goPage(pi); sel = [ch.dataset.lyChaingo]; drawSel(); renderPanel(); return; }
             if (e.target.closest('[data-ly-editorig]')) return editOriginal(one());
             const eo2 = e.target.closest('[data-ly-editorig2]'); if (eo2) return editOriginal(findItem(eo2.dataset.lyEditorig2)?.it);
+            if (e.target.closest('[data-ly-editdg]')) { const it = one(); if (it?.diagramId) ext.openDiagramEditor?.(it.diagramId, {onSave: () => refreshLinks(false)}); return; }
             if (e.target.closest('[data-ly-unlinkimg]')) { const it = one(); if (it) { delete it.mediaId; commit('Image incorporée'); render(); } return; }
             if (e.target.closest('[data-ly-dynupd]')) { const it = one(); if (it?.dyn) { it.html = await personDynHtml(it.dyn.id, it.dyn.fields); it.dyn.at = new Date().toISOString().slice(0, 16); commit('Texte de la fiche mis à jour'); render(); } return; }
             if (e.target.closest('[data-ly-dynedit]')) return dynPersonDialog(one());
@@ -1569,7 +1584,9 @@
         const all = []; doc.pages.forEach((p, i) => p.items.forEach(it => all.push({it, i})));
         const special = all.some(({it}) => it.next || it.auto); if (!special) return doc;
         const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length]).concat(p.items.filter(it => it.wrap && it.wrap.mode !== 'none').map(it => [it.id, it.x, it.y, it.w, it.h, it.wrap.mode, it.wrap.off, it.hidden])))]);
-        if (resolveCache.key === key) return resolveCache.out;
+        // seuls les textes sont recalculés (et gardés en mémoire) ; les autres objets viennent toujours du document, tels quels
+        const live = V0 => { const tx = new Map(); V0.pages.forEach(p => p.items.forEach(x => { if (x.type === 'text') tx.set(x.id, x); })); return {...doc, pages: doc.pages.map(p => ({...p, items: p.items.map(x => x.type === 'text' ? tx.get(x.id) || x : x)}))}; };
+        if (resolveCache.key === key) return live(resolveCache.out);
         const V = JSON.parse(JSON.stringify(doc)), byId = new Map(); V.pages.forEach((p, i) => p.items.forEach(it => byId.set(it.id, {it, i, p})));
         const targets = new Set(); byId.forEach(({it}) => { if (it.next && byId.has(it.next)) targets.add(it.next); });
         const chainOf = head => { const out = [], seen = new Set(); let c = head; while (c && !seen.has(c.id)) { seen.add(c.id); out.push(c); c = c.next ? byId.get(c.next)?.it : null; if (c && c.type !== 'text') break; } return out; };
@@ -1609,7 +1626,7 @@
             if (it.next) runChain(it, html); else it.html = html;
         });
         resolveCache = {key, out: V};
-        return V;
+        return live(V);
     }
     /* ── Objets dynamiques : le texte d'une fiche de la généalogie ── */
     const DYN_FIELDS = [['name', 'Nom complet'], ['life', 'Naissance et décès (dates et lieux)'], ['parents', 'Parents'], ['partners', 'Conjoint(s)'], ['children', 'Enfants'], ['occupation', 'Profession'], ['events', 'Tous les événements'], ['notes', 'Notes']];

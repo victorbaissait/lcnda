@@ -29,6 +29,7 @@
         chart: ['📊', 'Graphique', 'Des barres ou un camembert : par métier, par lieu, par décennie, par siècle…'],
         appstat: ['📈', 'Statistique de l’app', 'Une statistique de Graphiques → Statistiques (noms, prénoms, lieux, années…) redessinée à ta façon : barres, camembert, courbe, mosaïque, avec tes filtres.'],
         screen: ['📺', 'Écran de l’app', 'Une liste, un diagramme, une statistique, la fiche d’une personne ou d’un village, la carte, une de tes listes… directement dans le widget.'],
+        diagram: ['🏛️', 'Diagramme', 'Un de « Mes diagrammes » : hémicycle, fer à cheval, frise des membres d’un groupe, camembert, flux, organigramme…'],
         text: ['📝', 'Texte', 'Un pense-bête, une citation, une consigne, avec des émojis.'],
         links: ['🔗', 'Raccourcis', 'Des boutons vers les écrans, les listes ou des sites que tu utilises souvent.'],
         journey: ['🧭', 'Parcours jour par jour', 'Des étapes datées (écrites à la main, ou les événements d’une personne) en frise et sur la carte : un voyage, une guerre, une vie.'],
@@ -489,6 +490,7 @@
     }
     function bodyHtml(d, datas) {
         if (d.kind === 'journey') return journeyHtml(d, datas);
+        if (d.kind === 'diagram') return Number(d.diagramId) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(d.diagramId) : '<p class="muted">Choisis le diagramme dans l’Éditeur de widgets.</p>';
         if (d.kind === 'text') return d.text ? `<div class="h-cw-text">${nl(d.text)}</div>` : '<p class="muted">Texte vide.</p>';
         if (d.kind === 'links') return linksHtml(d);
         const err = datas.find(x => x?.error);
@@ -500,7 +502,7 @@
         if (d.kind === 'screen') { const sc = ext.appScreen; const c = {target: d.target || 'module:carte', sidebar: !!d.sidebar, layout: d.layout}; if (sc?.nested && sc.valid(c.target)) return sc.nestedLink(c.target, sc.label(c.target)); return sc && sc.valid(c.target) ? `<iframe class="h-ct-frame" src="${esc(sc.url(c))}" title="${esc(sc.label(c.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(d.height) || 560))}px"></iframe><p class="h-cw-more"><button type="button" class="link-button" data-ct-open-screen="${esc(c.target)}">↗ Ouvrir en grand</button></p>` : '<p class="muted">Choisis l’écran dans l’Éditeur de widgets.</p>'; }
         return '';
     }
-    const PART_KINDS = ['numbers', 'list', 'chart', 'appstat', 'screen', 'text', 'links', 'journey'];
+    const PART_KINDS = ['numbers', 'list', 'chart', 'appstat', 'screen', 'diagram', 'text', 'links', 'journey'];
     const captionHtml = d => d.caption ? `<p class="h-cw-caption">${nl(d.caption)}</p>` : '';
     function partsHtml(d, datas) {
         if (d.kind === 'app') return '';
@@ -809,6 +811,8 @@
                 ${d.jSource === 'person' ? `<label>Personne${A().collectionPersonField('cw_jperson', Number(d.jPerson) ? {id: Number(d.jPerson), first_name: d.jPersonName || '#' + d.jPerson, last_name: ''} : null, 'Nom de la personne')}</label>`
                 : `<div data-j-rows>${(d.steps || []).map(row).join('')}</div><button type="button" class="button small secondary" data-j-add>+ Étape</button><p class="muted">Dates libres (« 12 mars 1943 », « vers 1850 »…) ; avec des dates complètes, l’app compte les jours et les durées. Le lieu choisi dans la liste se place sur la carte.</p>`}`;
         }
+        if (d.kind === 'diagram') { const items = ext.diagramItems?.() || [];
+            return `<div class="form-grid"><label class="span-2">Diagramme<select data-cw-diagram><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(d.diagramId) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p class="span-2"><button type="button" class="button small secondary" data-cw-dgnew>+ Nouveau diagramme</button> ${Number(d.diagramId) ? '<button type="button" class="button small secondary" data-cw-dgedit>✎ Modifier ce diagramme</button>' : ''}</p><p class="span-2 muted">Le widget montre toujours la dernière version du diagramme (Graphiques → Mes diagrammes).</p></div>`; }
         if (d.kind === 'text') return `<label>Texte<textarea rows="6" data-cw-text placeholder="Un pense-bête, une citation… Les émojis marchent 🌳">${esc(d.text || '')}</textarea></label>`;
         if (d.kind === 'links') {
             const app = A(), opt = (v, l, cur) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`;
@@ -885,6 +889,7 @@
         const box = ws.querySelector('[data-cw-kind-box]');
         // données et critères
         box.addEventListener('change', e => {
+            if (e.target.matches('[data-cw-diagram]')) { d.diagramId = Number(e.target.value) || 0; if (d === root && !root.name) root.name = e.target.selectedOptions[0]?.textContent.replace(/^\S+\s/, '') || ''; return again(); }
             const srcBox = e.target.closest('[data-cw-src]');
             if (srcBox) {
                 const src = srcAt(srcBox.dataset.cwSrc);
@@ -940,6 +945,8 @@
             if (e.target.closest('[data-cw-counter-add]')) { d.counters.push({label: '', src: P()}); return again(); }
             const del = e.target.closest('[data-cw-counter-del]'); if (del) { d.counters.splice(Number(del.dataset.cwCounterDel), 1); return again(); }
             if (e.target.closest('[data-cw-tochart]')) { const c = appStatToChart(d); if (c) { Object.keys(d).forEach(k => delete d[k]); Object.assign(d, c); toast('C’est maintenant un graphique : ajoute tes conditions avec « + Critère ».'); return again(); } }
+            if (e.target.closest('[data-cw-dgnew]')) { ext.openDiagramEditor?.(null, {onSave: id => { d.diagramId = id; again(); }}); return; }
+            if (e.target.closest('[data-cw-dgedit]')) { ext.openDiagramEditor?.(Number(d.diagramId), {onSave: () => again()}); return; }
             if (e.target.closest('[data-cw-propose]')) { d.caption = proposeCaption(d); return again(); }
             if (e.target.closest('[data-cw-linkadd]')) { d.links.push({label: '', target: 'module:personnes'}); return again(); }
             const ld = e.target.closest('[data-cw-linkdel]'); if (ld) { d.links.splice(Number(ld.closest('[data-cw-link]').dataset.cwLink), 1); return again(); }
@@ -1056,6 +1063,7 @@
                 steps: (Array.isArray(d.steps) ? d.steps : []).slice(0, 300).map(x => ({date: str(x.date, 60), date_end: str(x.date_end, 60), title: str(x.title, 160), place: str(x.place, 200), lat: num(x.lat), lon: num(x.lon), emoji: str(x.emoji, 16), color: color(x.color), text: str(x.text, 2000)}))});
         }
         if (kind === 'text') out.text = str(d.text, 5000);
+        if (kind === 'diagram') out.diagramId = Math.max(0, Number(d.diagramId) || 0);
         if (kind === 'links') out.links = (Array.isArray(d.links) ? d.links : []).slice(0, 20).map(l => ({label: str(l.label, 60), target: /^(module|list|maint|person):[a-z0-9_]{1,40}$/i.test(String(l.target)) || /^url:https?:\/\/\S{1,500}$/i.test(String(l.target)) ? String(l.target) : ''})).filter(l => l.target);
         return out;
     }
@@ -1102,6 +1110,29 @@
 
     /* ─── 📊 Mes statistiques dans Graphiques → Statistiques ─── */
     ext.customStatItems = () => defs().filter(d => d.inStats && d.kind !== 'app').map(d => [d.id, `${d.icon ? d.icon + ' ' : ''}${d.name || 'Ma statistique'}`]);
+    ext.addDiagramWidget = dg => {
+        const d = {...baseDef({kind: 'diagram', icon: '📊', name: dg.name, width: '12'}), diagramId: dg.id};
+        saveDefs([...defs(), d]); addToDashboard(d.id);
+    };
+    /* 📊 Mes diagrammes : leurs chiffres peuvent venir de l'app (exemples, statistiques de l'app, mes statistiques) */
+    async function diagramSourceDef(key) {
+        const t = String(key).slice(0, String(key).indexOf(':')), k = String(key).slice(String(key).indexOf(':') + 1);
+        if (t === 'app') return APP_STATS.some(x => x[0] === k) ? {kind: 'appstat', statType: k, limit: 30} : null;
+        if (t === 'ex') { if (!meta) await loadMeta(); return EXAMPLES(meta || {}).filter(d => d.kind === 'chart')[Number(k)] || null; }
+        if (t === 'my') return defs().find(d => d.id === k && ['chart', 'appstat'].includes(d.kind)) || null;
+        return null;
+    }
+    ext.diagramStatSources = async () => {
+        if (!meta) { try { await loadMeta(); } catch (_) {} }
+        return [...EXAMPLES(meta || {}).filter(d => d.kind === 'chart').map((d, i) => [`ex:${i}`, d.name, 'Exemples']),
+            ...APP_STATS.map(([k, l]) => [`app:${k}`, l, 'Statistiques de l’app']),
+            ...defs().filter(d => ['chart', 'appstat'].includes(d.kind)).map(d => [`my:${d.id}`, d.name || 'Ma statistique', 'Mes statistiques'])];
+    };
+    ext.diagramStatRows = async key => {
+        const d = await diagramSourceDef(key); if (!d) throw new Error('Source introuvable (statistique supprimée ?).');
+        const datas = await loadData(d); if (datas[0]?.error) throw new Error(datas[0].error);
+        return groupRows(datas[0] || {}, {...d, limit: Math.max(Number(d.limit) || 10, 30)}).map(([v, n]) => [v, n]);
+    };
     ext.openCustomStat = id => { const st = S(); st.graphMode = 'stats'; st.graphStatsType = id; A().setModule('graphiques'); };
     ext.renderCustomStat = async (token, id) => {
         const d = defs().find(x => x.id === id);

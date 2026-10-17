@@ -9,7 +9,7 @@ declare(strict_types=1);
  * rattachés à la fiche (family_collection_media, type « topic_sheet », rôle = le bloc).
  */
 
-const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget'];
+const TOPIC_BLOCK_TYPES = ['text', 'images', 'people', 'dates', 'quote', 'links', 'divider', 'screen', 'widget', 'diagram'];
 const TOPIC_WIDTHS = ['3', '4', '6', '8', '9', '12'];
 
 function topic_text($v, int $max): string
@@ -60,6 +60,8 @@ function topic_clean_block($b): ?array
             $out['personName'] = topic_text($b['personName'] ?? '', 200);
             foreach (['layout'] as $k) { if (isset($b[$k]) && is_array($b[$k])) { $j = json_encode($b[$k]); if ($j !== false && strlen($j) < 4000) { $out[$k] = $b[$k]; } } }
             break;
+        case 'diagram':
+            $out['diagram'] = max(0, (int) ($b['diagram'] ?? 0)); break;
         case 'widget':
             $w = (string) ($b['widget'] ?? '');
             $out['widget'] = preg_match('/^cw_[a-z0-9]{4,24}$/', $w) ? $w : ''; break;

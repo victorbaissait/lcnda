@@ -25,6 +25,7 @@
         ['links', '🔗', 'Liens', 'Sites, archives en ligne, articles'],
         ['divider', '➖', 'Intertitre', 'Un titre pour séparer les parties'],
         ['screen', '📺', 'Écran de l’app', 'Carte, arbre, liste, Mes listes, fiche d’une personne, village…'],
+        ['diagram', '🏛️', 'Diagramme', 'Un de « Mes diagrammes » : hémicycle, frise d’un groupe, camembert…'],
         ['widget', '📊', 'Widget ou statistique à soi', 'Ceux de l’Éditeur de widgets / de statistiques'],
     ];
     const kindOf = t => KINDS.find(k => k[0] === t) || KINDS[0];
@@ -196,11 +197,12 @@
                 if (as.nested) return as.nestedLink(b.target, b.title || as.label(b.target));
                 return as.valid(b.target) ? `<iframe class="h-ct-frame" src="${esc(as.url(b))}" title="${esc(b.title || as.label(b.target))}" loading="lazy" style="height:${Math.max(240, Math.min(2000, Number(b.height) || 560))}px"></iframe>` : '<p class="muted">Cet écran n’existe plus : ✎ pour en choisir un autre.</p>';
             }
+            case 'diagram': return Number(b.diagram) && ext.diagramEmbedHtml ? ext.diagramEmbedHtml(b.diagram) : '<p class="muted">Aucun diagramme choisi : ✎ pour en choisir un.</p>';
             case 'widget': return b.widget ? `<div class="h-fi-widget" data-fi-widget="${esc(b.widget)}"><p class="muted">Calcul…</p></div>` : '<p class="muted">Aucun widget choisi : ✎ pour en choisir un.</p>';
             default: return '';
         }
     }
-    const titleOf = b => b.title || (b.type === 'screen' && ext.appScreen ? ext.appScreen.label(b.target) : b.type === 'widget' ? (ext.customWidgetDefs?.()[b.widget]?.name || 'Widget') : kindOf(b.type)[2]);
+    const titleOf = b => b.title || (b.type === 'screen' && ext.appScreen ? ext.appScreen.label(b.target) : b.type === 'widget' ? (ext.customWidgetDefs?.()[b.widget]?.name || 'Widget') : b.type === 'diagram' ? ((ext.diagramItems?.() || []).find(x => Number(x[0]) === Number(b.diagram))?.[1].replace(/^\S+\s/, '') || 'Diagramme') : kindOf(b.type)[2]);
     function renderSheet(token) {
         const c = cur;
         const blocks = c.blocks.map((b, i) => {
@@ -271,6 +273,7 @@
         if (b.type === 'screen') body = ext.appScreen ? `<label>Écran ${ext.appScreen.select(b.target, 'name="target"')}</label><label>Personne <small>(pour « Fiche d’une personne »)</small>${A().collectionPersonField?.('fi_person', String(b.target).startsWith('person:') ? {id: Number(b.target.slice(7)), first_name: b.personName || '', last_name: ''} : null, 'Nom de la personne') || ''}</label>
             <label>Hauteur<select name="height">${ext.appScreen.heights.map(([v, l]) => `<option value="${v}" ${String(b.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="sidebar" ${b.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label>
             <p class="muted">Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour.</p>` : '<p class="muted">Écrans indisponibles.</p>';
+        if (b.type === 'diagram') { const items = ext.diagramItems?.() || []; body = `<label>Diagramme<select name="diagram"><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(b.diagram) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p><button type="button" class="button small secondary" data-fi-dgnew>+ Nouveau diagramme</button></p><p class="muted">Graphiques → Mes diagrammes : le bloc montre toujours sa dernière version.</p>`; }
         if (b.type === 'widget') { const defs = Object.values(ext.customWidgetDefs?.() || {}); body = defs.length ? `<label>Widget ou statistique<select name="widget">${defs.map(w => `<option value="${esc(w.id)}" ${b.widget === w.id ? 'selected' : ''}>${esc((w.icon || '🧱') + ' ' + (w.name || w.id))}</option>`).join('')}</select></label><p class="muted">Pour en créer un : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>` : '<p class="muted">Aucun widget ni statistique à toi pour l’instant : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>'; }
         const onOpen = dlg => {
                 const root = dlg.querySelector('.h-dialog-body') || dlg;
@@ -278,6 +281,7 @@
                 root.addEventListener('click', e => {
                     if (e.target.closest('[data-fi-rowadd]')) { const box = root.querySelector('[data-fi-rows]'), last = box.lastElementChild; const n = last.cloneNode(true); n.querySelectorAll('input').forEach(x => { x.value = ''; }); box.appendChild(n); n.querySelector('input').focus(); }
                     if (e.target.closest('[data-fi-rowdel]')) { const row = e.target.closest('.h-fi-row'), box = row.parentElement; if (box.children.length > 1) row.remove(); else row.querySelectorAll('input').forEach(x => { x.value = ''; }); }
+                    if (e.target.closest('[data-fi-dgnew]')) ext.openDiagramEditor?.(null, {onSave: id => { const sel = root.querySelector('[name=diagram]'); if (sel) { sel.insertAdjacentHTML('beforeend', `<option value="${id}">${esc((ext.diagramItems?.() || []).find(x => Number(x[0]) === Number(id))?.[1] || 'Nouveau diagramme')}</option>`); sel.value = String(id); } }});
                     if (e.target.closest('[data-fi-pdel]')) e.target.closest('.h-fi-chip').remove();
                     const add = e.target.closest('[data-fi-padd]'); if (add) { const box = root.querySelector('[data-fi-pp]'); if (!box.querySelector(`[data-pid="${add.dataset.fiPadd}"]`)) box.insertAdjacentHTML('beforeend', `<span class="h-fi-chip" data-pid="${add.dataset.fiPadd}">${esc(add.dataset.name)} <button type="button" data-fi-pdel aria-label="Retirer">×</button></span>`); add.remove(); }
                 });
@@ -299,6 +303,7 @@
                 if (b.type === 'people') { b.ids = [...form.querySelectorAll('[data-fi-pp] [data-pid]')].map(x => Number(x.dataset.pid)); b.note = f.note || ''; }
                 if (b.type === 'screen') { let target = f.target || 'module:carte'; const pid = Number(form.elements.fi_person?.value) || 0; if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes'; b.target = target; b.personName = form.querySelector('[data-cp-input="fi_person"]')?.value || ''; b.height = Number(f.height) || 560; b.sidebar = !!form.elements.sidebar?.checked; }
                 if (b.type === 'widget') b.widget = f.widget || '';
+                if (b.type === 'diagram') b.diagram = Number(f.diagram) || 0;
                 if (fresh) cur.blocks.push(b); else cur.blocks[i] = b;
                 await save();
                 if (b.type === 'images' && ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id);
@@ -344,6 +349,7 @@
             if (b.type === 'divider') return `<h2>${esc(b.title)}</h2>`;
             let inner = '';
             if (b.type === 'images') inner = mediaOf(b).filter(m => m.media_type === 'image' || /\.(jpe?g|png|gif|webp)$/i.test(m.filename || '')).map(m => `<img src="${esc(abs('media/' + encodeURIComponent(m.filename)))}" alt="">`).join('') + (b.caption ? `<p><i>${esc(b.caption)}</i></p>` : '');
+            else if (b.type === 'diagram') inner = document.querySelector(`[data-dg-embed="${Number(b.diagram)}"] .h-dg-svg`)?.innerHTML || '';
             else if (b.type === 'screen' || b.type === 'widget') inner = '<p><i>(écran de l’app : à voir dans LCNDA)</i></p>';
             else inner = blockBody(b).replace(/<button[^>]*data-h-person[^>]*>/g, '<div class="p">').replace(/<\/button>/g, '</div>');
             return `<section style="width:${Math.round(Number(b.width || 12) / 12 * 100) - 2}%"><h3>${esc(titleOf(b))}</h3>${inner}</section>`;
