@@ -242,9 +242,14 @@
         const pad = 4, s = res / Math.max(b.w, b.h), W = Math.ceil(b.w * s) + pad * 2, H = Math.ceil(b.h * s) + pad * 2;
         const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d');
         g.setTransform(s, 0, 0, s, pad - b.x * s, pad - b.y * s); g.fillStyle = '#000'; g.strokeStyle = '#000';
+        // chaque forme est dessinée entière (fond, contour, enfants d'un groupe) sur sa propre feuille, puis combinée d'un coup
+        const t = document.createElement('canvas'); t.width = W; t.height = H; const tg = t.getContext('2d');
         objs.forEach((o, i) => {
-            g.globalCompositeOperation = i === 0 || op === 'union' || op === 'outline' ? 'source-over' : op === 'intersect' ? 'destination-in' : op === 'subtract' ? 'destination-out' : 'xor';
-            paintObj(g, o, op === 'outline' ? 'stroke' : mode);
+            const blend = i === 0 || op === 'union' || op === 'outline' ? 'source-over' : op === 'intersect' ? 'destination-in' : op === 'subtract' ? 'destination-out' : 'xor';
+            if (blend === 'source-over') { paintObj(g, o, op === 'outline' ? 'stroke' : mode); return; }
+            tg.setTransform(1, 0, 0, 1, 0, 0); tg.clearRect(0, 0, W, H); tg.setTransform(s, 0, 0, s, pad - b.x * s, pad - b.y * s); tg.fillStyle = '#000'; tg.strokeStyle = '#000';
+            paintObj(tg, o, mode);
+            g.save(); g.setTransform(1, 0, 0, 1, 0, 0); g.globalCompositeOperation = blend; g.drawImage(t, 0, 0); g.restore();
         });
         const data = g.getImageData(0, 0, W, H).data, mask = new Uint8Array(W * H);
         for (let i = 0; i < W * H; i++) mask[i] = data[i * 4 + 3] > 127 ? 1 : 0;
@@ -434,8 +439,12 @@
         const selObjs = () => sel.map(byId).filter(Boolean);
         const editable = o => o && !o.locked && !o.hidden;
         /* historique */
-        const commit = (label = '') => { hist = hist.slice(0, hi + 1); hist.push(JSON.stringify(doc)); if (hist.length > 150) hist.shift(); hi = hist.length - 1; dirty = true; status(label ? `✓ ${label}` : ''); render(); };
-        const restore = i => { if (i < 0 || i >= hist.length) return; hi = i; doc = cleanDoc(JSON.parse(hist[hi])); sel = sel.filter(id => byId(id)); nodeSel = null; dirty = true; render(); };
+        // l'historique garde les images importées une seule fois (sinon chaque étape recopierait des Mo)
+        const imgStore = new Map(), imgKey = new Map();
+        const snapshot = () => JSON.stringify(doc, (k, v) => { if (k === 'src' && typeof v === 'string' && v.length > 2000) { let id = imgKey.get(v); if (!id) { id = '@img:' + imgKey.size; imgKey.set(v, id); imgStore.set(id, v); } return id; } return v; });
+        const unsnap = t => JSON.parse(t, (k, v) => k === 'src' && typeof v === 'string' && v.startsWith('@img:') ? imgStore.get(v) || '' : v);
+        const commit = (label = '') => { hist = hist.slice(0, hi + 1); hist.push(snapshot()); if (hist.length > 150) hist.shift(); hi = hist.length - 1; dirty = true; status(label ? `✓ ${label}` : ''); render(); };
+        const restore = i => { if (i < 0 || i >= hist.length) return; hi = i; doc = cleanDoc(unsnap(hist[hi])); sel = sel.filter(id => byId(id)); nodeSel = null; dirty = true; render(); };
         /* vue */
         const applyView = () => { world.setAttribute('transform', `translate(${n2(panX)} ${n2(panY)}) scale(${zoom})`); $('[data-vx-zoom]').textContent = `${Math.round(zoom * 100)} %`; drawUi(); drawGrid(); };
         const fit = () => { const r = stage.getBoundingClientRect(); zoom = clamp(Math.min((r.width - 60) / doc.w, (r.height - 60) / doc.h), 0.02, 40); panX = (r.width - doc.w * zoom) / 2; panY = (r.height - doc.h * zoom) / 2; applyView(); };
@@ -508,8 +517,8 @@
                 if (h) { const list = selObjs(); const one = list.length === 1 ? list[0] : null; drag = {h, x, y, orig: list.map(o => clone(o)), ids: list.map(o => o.id), b: one ? box(one) : unionBox(list), one}; return; }
                 const id = hitId(e), o = id && byId(id);
                 if (o && !o.locked) { if (e.shiftKey) sel = sel.includes(id) ? sel.filter(s => s !== id) : [...sel, id]; else if (!sel.includes(id)) sel = [id];
-                    if (e.altKey) { const copies = selObjs().map(q => ({...clone(q), id: uid()})); doc.objs.push(...copies); sel = copies.map(q => q.id); }
-                    drag = {move: true, x, y, orig: selObjs().map(q => clone(q))}; render(); return; }
+                    let dup = false; if (e.altKey) { const copies = selObjs().map(q => { const c = clone(q); reId(c); return c; }); doc.objs.push(...copies); sel = copies.map(q => q.id); dup = true; }
+                    drag = {move: true, dup, x, y, orig: selObjs().map(q => clone(q))}; render(); return; }
                 if (!e.shiftKey) sel = []; drag = {marquee: [x, y, x, y], add: e.shiftKey ? sel.slice() : []}; render(); return;
             }
             if (tool === 'direct') {
@@ -551,6 +560,8 @@
                 if (e.shiftKey) { if (t === 'line') { const a = Math.round(Math.atan2(y1 - drag.y0, x1 - drag.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x1 - drag.x0, y1 - drag.y0); x1 = drag.x0 + Math.cos(a) * L; y1 = drag.y0 + Math.sin(a) * L; } else { const s = Math.max(Math.abs(x1 - drag.x0), Math.abs(y1 - drag.y0)); x1 = drag.x0 + Math.sign(x1 - drag.x0 || 1) * s; y1 = drag.y0 + Math.sign(y1 - drag.y0 || 1) * s; } }
                 drag.x1 = x1; drag.y1 = y1; const o = makeShape(t, drag.x0, drag.y0, x1, y1); const defs = []; ui.innerHTML = o ? objSvg(o, defs, 'p') : ''; }
         });
+        /** un objet tourné tourne autour du centre de sa boîte : après un changement de taille, on le recale pour que le point (ax, ay) ne bouge pas à l'écran */
+        const keepAnchor = (before, after, ax, ay) => { const r = num(after.rot) * Math.PI / 180; if (!r) return; const w = (o, x, y) => { const b = box(o), cx = b.x + b.w / 2, cy = b.y + b.h / 2; return [cx + (x - cx) * Math.cos(r) - (y - cy) * Math.sin(r), cy + (x - cx) * Math.sin(r) + (y - cy) * Math.cos(r)]; }; const p0 = w(before, ax, ay), p1 = w(after, ax, ay); moveObj(after, p0[0] - p1[0], p0[1] - p1[1]); };
         const unrot = (o, x, y) => { const r = -num(o.rot) * Math.PI / 180; if (!r) return [x, y]; const b = box(o), cx = b.x + b.w / 2, cy = b.y + b.h / 2; return [cx + (x - cx) * Math.cos(r) - (y - cy) * Math.sin(r), cy + (x - cx) * Math.sin(r) + (y - cy) * Math.cos(r)]; };
         function makeShape(t, x0, y0, x1, y1) {
             const x = Math.min(x0, x1), y = Math.min(y0, y1), w = Math.abs(x1 - x0), h = Math.abs(y1 - y0);
@@ -577,7 +588,7 @@
             if (!h.includes('w') && !h.includes('e')) fx = 1; if (!h.includes('n') && !h.includes('s')) fy = 1;
             if (Math.abs(fx) < 0.001 || Math.abs(fy) < 0.001) return;
             const fs = Math.sqrt(Math.abs(fx * fy));
-            orig.forEach((o0, k) => { const o = mapObj(clone(o0), (px, py) => [ax + (px - ax) * fx, ay + (py - ay) * fy], fs); const i = doc.objs.findIndex(q => q.id === ids[k]); if (i >= 0) doc.objs[i] = o; });
+            orig.forEach((o0, k) => { const o = mapObj(clone(o0), (px, py) => [ax + (px - ax) * fx, ay + (py - ay) * fy], fs); if (one) keepAnchor(o0, o, ax, ay); const i = doc.objs.findIndex(q => q.id === ids[k]); if (i >= 0) doc.objs[i] = o; });
             drag.moved = true; render();
         }
         svgEl.addEventListener('pointerup', e => {
@@ -585,6 +596,7 @@
             if (d.pan) return;
             if (d.marquee) { drawUi(); paintPanel(); return; }
             if (d.pen) { render(); return; }
+            if (d.move && d.dup && !d.moved) { commit('Dupliqué'); return; }
             if ((d.move || d.h || d.node || d.hand) && d.moved) { commit(d.move ? 'Déplacé' : d.h === 'rot' ? 'Tourné' : d.h ? 'Redimensionné' : 'Point modifié'); return; }
             if (d.pencil) { const pts = d.pencil; if (pts.length < 3) { drawUi(); return; }
                 const mask = null; void mask;
@@ -642,7 +654,7 @@
             }
             const list = selObjs().filter(o => !o.locked); if (!list.length) return;
             list.forEach(o => {
-                if (['x', 'y', 'w', 'h'].includes(k)) { const b = rbox(o), val = num(v); if (k === 'x') moveObj(o, val - b.x, 0); if (k === 'y') moveObj(o, 0, val - b.y); if (k === 'w' && b.w && val > 0) { const f = val / b.w; mapObj(o, (px, py) => [b.x + (px - b.x) * f, py]); } if (k === 'h' && b.h && val > 0) { const f = val / b.h; mapObj(o, (px, py) => [px, b.y + (py - b.y) * f]); } return; }
+                if (['x', 'y', 'w', 'h'].includes(k)) { const b = rbox(o), val = num(v); if (k === 'x') moveObj(o, val - b.x, 0); if (k === 'y') moveObj(o, 0, val - b.y); const ub = box(o), before = clone(o); if (k === 'w' && ub.w && val > 0) { const f = val / ub.w; mapObj(o, (px, py) => [ub.x + (px - ub.x) * f, py]); keepAnchor(before, o, ub.x, ub.y); } if (k === 'h' && ub.h && val > 0) { const f = val / ub.h; mapObj(o, (px, py) => [px, ub.y + (py - ub.y) * f]); keepAnchor(before, o, ub.x, ub.y); } return; }
                 if (k === 'rot') { o.rot = ((num(v) % 360) + 360) % 360; return; }
                 if (k === 'op') { o.op = clamp(num(v, 100) / 100, 0, 1); return; }
                 if (['bold', 'italic', 'closed', 'evenodd'].includes(k)) { o[k] = el.checked; return; }
@@ -704,7 +716,7 @@
             box2.innerHTML = `<svg viewBox="-4 -4 108 128" width="120" height="144">${(() => { const b2 = objSvg(obj, defs, 'bp'); return `<defs>${defs.join('')}</defs>${b2}`; })()}</svg>`;
             const t = pane.querySelector('[data-bl-text]'); if (t) t.textContent = blazon;
         }
-        new MutationObserver(() => { if (tab === 'blason' && pane.querySelector('[data-bl-prev]') && !pane.querySelector('[data-bl-prev] svg')) paintBlasonPreview(); }).observe(pane, {childList: true});
+        const blObs = new MutationObserver(() => { if (tab === 'blason' && pane.querySelector('[data-bl-prev]') && !pane.querySelector('[data-bl-prev] svg')) paintBlasonPreview(); }); blObs.observe(pane, {childList: true});
         pane.addEventListener('input', e => { if (!e.target.matches('[data-vx-chq]')) return; const q = e.target.value.trim().toLowerCase(), out = pane.querySelector('[data-vx-chres]'); if (q.length < 2 || !K()) { out.innerHTML = ''; return; }
             out.innerHTML = K().allShapes().filter(s => s.d && !s.mask && (s.n || '').toLowerCase().includes(q)).slice(0, 40).map(s => `<button type="button" data-bl-charge="${esc(s.k)}" title="${esc(s.n)}">${K().shapeSvg(s, 24)}</button>`).join('') || '<small class="muted">Rien trouvé.</small>'; });
         function addCharge(key, fill) {
@@ -723,7 +735,7 @@
         const fname = ext2 => `${(A().safeExportFilename ? A().safeExportFilename(name || 'dessin', 'dessin') : 'dessin')}.${ext2}`;
         const download = (blob, n) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = n; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
         const CMDS = {
-            undo: () => restore(hi - 1), redo: () => restore(hi + 1),
+            undo: () => { if (laterT) { clearTimeout(laterT); laterT = 0; commit(); } restore(hi - 1); }, redo: () => { if (laterT) { clearTimeout(laterT); laterT = 0; commit(); } restore(hi + 1); },
             new: () => { if (dirty && !confirm('Commencer un nouveau dessin ? Ce qui n’est pas enregistré sera perdu.')) return; docId = 0; name = 'Mon dessin'; $('[data-vx-name]').value = name; doc = newDoc(); sel = []; hist = []; hi = -1; commit(); dirty = false; fit(); },
             open: async () => { if (dirty && !confirm('Ouvrir un autre dessin ? Ce qui n’est pas enregistré sera perdu.')) return; const docs = (await api('vector_docs').catch(() => ({docs: []}))).docs || []; if (!docs.length) return toast('Aucun dessin enregistré.', 'error');
                 ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title: 'Ouvrir un dessin', body: `<div class="vx-open">${docs.map(d => `<label class="vx-openitem"><input type="radio" name="pick" value="${d.id}">${d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span>✒️</span>'}<span>${esc(d.name)}</span></label>`).join('')}</div>`, submitLabel: 'Ouvrir',
@@ -745,7 +757,7 @@
             group: () => { const l = sorted(); if (l.length < 2) return toast('Choisis au moins deux objets.', 'error'); const at = idx(l[l.length - 1]); const g = {id: uid(), type: 'group', name: 'Groupe', children: l}; doc.objs = doc.objs.filter(o => !l.includes(o)); doc.objs.splice(at - l.length + 1, 0, g); sel = [g.id]; commit('Groupé'); },
             ungroup: () => { const gs = selObjs().filter(o => o.type === 'group'); if (!gs.length) return; const out = []; gs.forEach(g => { const at = idx(g), kids = (g.children || []).map(c => { const c2 = clone(c); if (num(g.rot)) { const gb = box(g), cb = box(c2), r = num(g.rot) * Math.PI / 180, gx = gb.x + gb.w / 2, gy = gb.y + gb.h / 2, cx = cb.x + cb.w / 2, cy = cb.y + cb.h / 2; moveObj(c2, gx + (cx - gx) * Math.cos(r) - (cy - gy) * Math.sin(r) - cx, gy + (cx - gx) * Math.sin(r) + (cy - gy) * Math.cos(r) - cy); c2.rot = (num(c2.rot) + num(g.rot)) % 360; } if (num(g.op, 1) < 1) c2.op = num(c2.op, 1) * num(g.op, 1); return c2; });
                     if (g.clip) toast('Le masque d’écrêtage est retiré en dissociant.'); doc.objs.splice(at, 1, ...kids); out.push(...kids.map(k => k.id)); }); sel = out; commit('Dissocié'); },
-            clipmask: () => { const l = sorted(); if (l.length < 2) return toast('Choisis la forme qui découpe (au-dessus) et ce qu’elle découpe.', 'error'); const top = l[l.length - 1]; if (!shapeD(top)) return toast('L’objet du dessus doit être une forme ou un tracé.', 'error'); const rest = l.slice(0, -1), at = idx(rest[rest.length - 1]); const g = {id: uid(), type: 'group', name: 'Masque', clip: clone(top), children: rest}; doc.objs = doc.objs.filter(o => !l.includes(o)); doc.objs.splice(Math.min(at, doc.objs.length), 0, g); sel = [g.id]; commit('Masque d’écrêtage'); },
+            clipmask: () => { const l = sorted(); if (l.length < 2) return toast('Choisis la forme qui découpe (au-dessus) et ce qu’elle découpe.', 'error'); const top = l[l.length - 1]; if (!shapeD(top)) return toast('L’objet du dessus doit être une forme ou un tracé.', 'error'); const rest = l.slice(0, -1), at = idx(rest[rest.length - 1]) - (rest.length - 1); const g = {id: uid(), type: 'group', name: 'Masque', clip: clone(top), children: rest}; doc.objs = doc.objs.filter(o => !l.includes(o)); doc.objs.splice(clamp(at, 0, doc.objs.length), 0, g); sel = [g.id]; commit('Masque d’écrêtage'); },
             unclip: () => { const g = selObjs().find(o => o.type === 'group' && o.clip); if (!g) return; const shape = {...clone(g.clip), id: uid(), fill: 'none', stroke: '#888888', sw: 1, name: 'Ancien masque'}; delete g.clip; doc.objs.splice(idx(g) + 1, 0, shape); commit('Masque retiré'); },
             front: () => { const l = sorted(); doc.objs = [...doc.objs.filter(o => !l.includes(o)), ...l]; commit('Premier plan'); }, bottom: () => { const l = sorted(); doc.objs = [...l, ...doc.objs.filter(o => !l.includes(o))]; commit('Arrière-plan'); },
             fwd: () => { const l = sorted().reverse(); l.forEach(o => { const i = idx(o); if (i < doc.objs.length - 1 && !l.includes(doc.objs[i + 1])) [doc.objs[i], doc.objs[i + 1]] = [doc.objs[i + 1], doc.objs[i]]; }); commit('Avancé'); },
@@ -908,7 +920,7 @@
                     await upload({collection_type: 'coat_of_arms', collection_id: Number(id), collection_role: ''}, await pngFile()); toast('Image enregistrée dans les armoiries (fiche d’une personne → bloc Blason, ou Listes → Armoiries).'); } catch (e) { toast(e.message, 'error'); return false; } }});
         }
         /* fermer */
-        const close = () => { if (dirty && !confirm('Fermer sans enregistrer le dessin ?')) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); document.removeEventListener('paste', onPaste); dlg.close(); dlg.remove(); ctx.onClose?.(); };
+        const close = () => { if (dirty && !confirm('Fermer sans enregistrer le dessin ?')) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); document.removeEventListener('paste', onPaste); try { blObs.disconnect(); rsObs.disconnect(); } catch (_) {} dlg.close(); dlg.remove(); ctx.onClose?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (penPath) { finishPen(); return; } close(); });
         $('[data-vx-close]').addEventListener('click', close);
         $('[data-vx-name]').addEventListener('input', () => { dirty = true; });
@@ -921,7 +933,7 @@
         commit(); dirty = false; status(''); setTool('select'); fit();
         if (ctx.svg) addImported(importSvgText(ctx.svg), 'SVG importé');
         if (ctx.imageSrc) { try { const im = await normImage(/^media\//.test(ctx.imageSrc) ? await toDataUrl(ctx.imageSrc) : ctx.imageSrc), k = Math.min(1, doc.w * .9 / im.w, doc.h * .9 / im.h); addImported([{id: uid(), type: 'image', name: 'Image d’origine', src: im.src, x: 0, y: 0, w: im.w * k, h: im.h * k}], 'Image importée'); dirty = false; hint('L’image d’origine est là : Blason → « Vectoriser une image » pour la refaire en tracés, ou dessine par-dessus à la plume.'); } catch (e) { toast(e.message, 'error'); } }
-        new ResizeObserver(() => applyView()).observe(stage);
+        const rsObs = new ResizeObserver(() => { if (dlg.isConnected) applyView(); }); rsObs.observe(stage);
         return {get doc() { return doc; }, cmd: (k, ...a) => CMDS[k]?.(...a), setTool, select: ids => { sel = ids; render(); }, importSvgText: t => addImported(importSvgText(t), 'SVG'), close: () => { dirty = false; close(); }};
     }
 

@@ -171,8 +171,9 @@
             const deg = layout === 'hemicycle' ? 180 : layout === 'circle' ? 360 : clamp(num(o.angle) || 220, 60, 359);
             const inner = clamp(num(o.inner ?? (layout === 'circle' ? 45 : 38)), 5, 90) / 100;
             const L = layout === 'horseshoe' ? horseshoeSeats(N, inner, clamp(num(o.arm ?? 80), 10, 300) / 100, num(o.rows)) : arcSeats(N, deg, inner, num(o.rows));
-            const xs = L.seats.map(s => s.x), ys = L.seats.map(s => s.y), half = L.size / 2;
-            const minX = Math.min(...xs) - half, maxX = Math.max(...xs) + half, minY = Math.min(...ys) - half, maxY = Math.max(...ys) + half;
+            const half = L.size / 2; let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+            for (const q of L.seats) { if (q.x < minX) minX = q.x; if (q.x > maxX) maxX = q.x; if (q.y < minY) minY = q.y; if (q.y > maxY) maxY = q.y; }
+            minX -= half; maxX += half; minY -= half; maxY += half;
             const k = Math.min(W / (maxX - minX), (num(o.maxHeight) || W * 1.2) / (maxY - minY));
             const ox = (W - (maxX - minX) * k) / 2 - minX * k, oy = -minY * k;
             L.seats.forEach((s, i) => { svg += seatSvg(ox + s.x * k, oy + s.y * k, L.size * k, colorAt[i], stroke); });
@@ -197,11 +198,12 @@
             const seq = g => { const a = []; groups[g].forEach(p => { for (let k = 0; k < p.n; k++) a.push(p); }); return a; };
             const gov = gridBlock(count('gov'), benchR, sp + s / 2, s / 2, s, true), oppY = gov.h + s * 1.6;
             const opp = gridBlock(count('opp'), benchR, sp + s / 2, oppY + s / 2, s);
-            gov.seats.forEach((q, i) => { svg += seatSvg(q.x, q.y, s, seq('gov')[i], stroke); });
-            opp.seats.forEach((q, i) => { svg += seatSvg(q.x, q.y, s, seq('opp')[i], stroke); });
+            const sG = seq('gov'), sO = seq('opp'), sS = seq('speaker'), sC = seq('cross');
+            gov.seats.forEach((q, i) => { svg += seatSvg(q.x, q.y, s, sG[i], stroke); });
+            opp.seats.forEach((q, i) => { svg += seatSvg(q.x, q.y, s, sO[i], stroke); });
             const totalH = oppY + opp.h;
-            seq('speaker').forEach((p, i) => { svg += seatSvg(s / 2, totalH / 2 + (i - (count('speaker') - 1) / 2) * s, s, p, stroke); });
-            if (count('cross')) { const cx0 = sp + colsMain * s + s * 1.5, cr = Math.ceil(count('cross') / crossC); seq('cross').forEach((p, i) => { svg += seatSvg(cx0 + (i % crossC) * s + s / 2, totalH / 2 - cr * s / 2 + Math.floor(i / crossC) * s + s / 2, s, p, stroke); }); }
+            sS.forEach((p, i) => { svg += seatSvg(s / 2, totalH / 2 + (i - (count('speaker') - 1) / 2) * s, s, p, stroke); });
+            if (count('cross')) { const cx0 = sp + colsMain * s + s * 1.5, cr = Math.ceil(count('cross') / crossC); sC.forEach((p, i) => { svg += seatSvg(cx0 + (i % crossC) * s + s / 2, totalH / 2 - cr * s / 2 + Math.floor(i / crossC) * s + s / 2, s, p, stroke); }); }
             h = totalH;
             if (o.total !== false) svg += T(sp + colsMain * s / 2, gov.h + s * .8, o.centerText || `${fmt(N, 0)} sièges`, {size: fs * 1.1, anchor: 'middle', weight: 700});
         } else { // salle de classe / amphithéâtre droit, face à la tribune

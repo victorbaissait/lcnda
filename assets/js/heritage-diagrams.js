@@ -213,7 +213,7 @@
     }
 
     /* ─── L'éditeur ─── */
-    async function openEditor(id = null, {link = null, kind = null, onSave = null} = {}) {
+    async function openEditor(id = null, {link = null, kind = null, onSave = null, onClose = null} = {}) {
         let rec;
         if (id) { const d = await get(id); if (!d) return toast('Diagramme introuvable.', 'error'); rec = {id: d.id, name: d.name, spec: specOf(d), links: clone(d.links || [])}; }
         else {
@@ -349,7 +349,7 @@
                     onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; pasteInto(grid(gi), spec, parseTable(t)); delete spec.live; keep(); }});
             }
         });
-        const close = () => { if (dirty && !confirm('Fermer sans enregistrer les changements ?')) return; dlg.close(); dlg.remove(); };
+        const close = () => { if (dirty && !confirm('Fermer sans enregistrer les changements ?')) return; dlg.close(); dlg.remove(); onClose?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         dlg.querySelector('[data-dg-close]').addEventListener('click', close);
         dlg.querySelector('[data-dg-name]').addEventListener('input', e => { rec.name = e.target.value; dirty = true; });
@@ -399,7 +399,7 @@
         dlg.addEventListener('click', async e => {
             if (e.target.closest('[data-close]')) return done(null);
             const p = e.target.closest('[data-pick]'); if (p) return done(Number(p.dataset.pick));
-            if (e.target.closest('[data-new]')) { dlg.close(); dlg.remove(); await openEditor(null, {link, onSave: id => resolve(id)}); }
+            if (e.target.closest('[data-new]')) { dlg.close(); dlg.remove(); const r = await openEditor(null, {link, onSave: id => resolve(id), onClose: () => resolve(null)}); if (!r) resolve(null); }
         });
         dlg.showModal();
     });

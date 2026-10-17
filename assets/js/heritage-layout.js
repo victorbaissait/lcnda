@@ -1585,7 +1585,7 @@
         const special = all.some(({it}) => it.next || it.auto); if (!special) return doc;
         const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length]).concat(p.items.filter(it => it.wrap && it.wrap.mode !== 'none').map(it => [it.id, it.x, it.y, it.w, it.h, it.wrap.mode, it.wrap.off, it.hidden])))]);
         // seuls les textes sont recalculés (et gardés en mémoire) ; les autres objets viennent toujours du document, tels quels
-        const live = V0 => { const tx = new Map(); V0.pages.forEach(p => p.items.forEach(x => { if (x.type === 'text') tx.set(x.id, x); })); return {...doc, pages: doc.pages.map(p => ({...p, items: p.items.map(x => x.type === 'text' ? tx.get(x.id) || x : x)}))}; };
+        const live = V0 => { const tx = new Map(); V0.pages.forEach(p => p.items.forEach(x => { if (x.type === 'text') tx.set(x.id, x); })); return {...doc, pages: doc.pages.map(p => ({...p, items: p.items.map(x => { const c = x.type === 'text' && tx.get(x.id); return c ? {...x, html: c.html, ...(c._follow !== undefined ? {_follow: c._follow} : {})} : x; })}))}; };
         if (resolveCache.key === key) return live(resolveCache.out);
         const V = JSON.parse(JSON.stringify(doc)), byId = new Map(); V.pages.forEach((p, i) => p.items.forEach(it => byId.set(it.id, {it, i, p})));
         const targets = new Set(); byId.forEach(({it}) => { if (it.next && byId.has(it.next)) targets.add(it.next); });
