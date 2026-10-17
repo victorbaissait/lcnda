@@ -3,6 +3,7 @@
  * la voix parle ; tout se lit ici en plein écran et s'exporte en vidéo. « ✨ Récit d'une personne » fabrique tout seul le
  * diaporama d'une vie (photos, lieux, carte du trajet, biographie). Plus simple que le montage vidéo.
  * Serveur : lib/slideshows.php. Listes → Outils de modification → « 🎞️ Diaporama et récit ».
+ * « ＋ Nouveau » propose aussi la présentation façon Keynote (heritage-keynote.js), enregistrée dans la même liste.
  */
 (() => {
     'use strict';
@@ -137,7 +138,7 @@
     /* ═════════ L'éditeur ═════════ */
     async function open(ctx = {}) {
         let id = 0, name = 'Mon diaporama', show = newShow();
-        if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); } catch (e) { return toast(e.message, 'error'); } }
+        if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); if (r.show?.mode === 'keynote') return ext.openKeynote ? ext.openKeynote({...ctx, preload: r}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); } catch (e) { return toast(e.message, 'error'); } }
         let cur = 0, dirty = false, t = 0, playing = false, raf = 0, t0 = 0, p0 = 0, recording = null;
         const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-ss-dlg';
         dlg.innerHTML = `<div class="h-ss">
@@ -145,7 +146,7 @@
                 <label>Format<select data-ss-g="aspect">${Object.keys(ASPECTS).map(k => `<option ${show.aspect === k ? 'selected' : ''}>${k}</option>`).join('')}</select></label>
                 <label>Style<select data-ss-g="theme">${Object.entries(THEMES).map(([k, v]) => `<option value="${k}" ${show.theme === k ? 'selected' : ''}>${v.label}</option>`).join('')}</select></label>
                 <span class="h-ss-music" data-ss-music></span><span class="spacer"></span><span class="muted" data-ss-status></span>
-                <button type="button" class="button small secondary" data-ss-cmd="export" title="Une vidéo (WebM) à garder ou partager">⏺ Exporter la vidéo</button><button type="button" class="button small" data-ss-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>
+                <button type="button" class="button small secondary" data-ss-cmd="tokeynote" title="Une présentation façon Keynote faite de ces diapositives (textes, formes, animations, mode présentateur…) ; le diaporama reste tel quel">🎤 En présentation</button><button type="button" class="button small secondary" data-ss-cmd="export" title="Une vidéo (WebM) à garder ou partager">⏺ Exporter la vidéo</button><button type="button" class="button small" data-ss-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-ss-cmd="close">×</button></header>
             <div class="h-ss-main">
                 <aside class="h-ss-list"><div class="h-ss-add"><button type="button" data-ss-cmd="addphotos">＋ Photos</button><button type="button" data-ss-cmd="addtitle">＋ Titre</button><button type="button" data-ss-cmd="addmap">＋ Carte (trajet)</button><button type="button" class="is-story" data-ss-cmd="story">✨ Récit d’une personne</button></div><ol data-ss-slides></ol></aside>
                 <section class="h-ss-center"><div class="h-ss-stage" data-ss-stage><canvas data-ss-canvas></canvas></div>
@@ -209,7 +210,7 @@
                 ext.openDialog({eyebrow: 'DIAPORAMA', title, submitLabel: multi ? 'Ajouter' : 'Choisir',
                     body: `<label>Fichier${multi ? 's' : ''} de l’ordinateur (ils vont dans les médias)<input type="file" name="f" accept="${kind === 'image' ? 'image/*' : 'audio/*'}" ${multi ? 'multiple' : ''}></label><p class="muted">ou de la base :</p><label>Chercher<input type="search" data-mq placeholder="Titre, nom de fichier…" autocomplete="off"></label><div data-mres class="${kind === 'image' ? 'vx-mmedia h-ss-pick' : 'h-ss-picka'}"></div>`,
                     onOpen: dg => { const q = dg.querySelector('[data-mq]'), box = dg.querySelector('[data-mres]'); let tm = 0;
-                        const go = async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 60}).catch(() => ({data: []}))).data || []).filter(m => rx.test(m.filename || '')); box._rows = rows;
+                        const go = async () => { const res = await api('list', {type: 'media', q: q.value.trim(), limit: 60}).catch(() => ({rows: []})), rows = (res.rows || res.data || []).filter(m => rx.test(m.filename || '')); box._rows = rows;
                             box.innerHTML = rows.map((m, i) => kind === 'image' ? `<label title="${esc(m.title || m.filename)}"><input type="${multi ? 'checkbox' : 'radio'}" name="mp" value="${i}"><img src="${esc(mediaUrl(m.thumbnail || m.filename))}" alt="" loading="lazy"></label>` : `<label class="checkbox-line"><input type="radio" name="mp" value="${i}"> 🎵 ${esc(m.title || m.filename)}</label>`).join('') || '<p class="muted">Rien trouvé.</p>'; };
                         q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go();
                         dg.addEventListener('close', () => { if (!done) res([]); }, {once: true}); },
@@ -330,6 +331,7 @@
             if (k === 'addtitle') { show.slides.splice(cur + 1, 0, newSlide('title', {title: 'Titre', sub: ''})); cur = Math.min(cur + 1, show.slides.length - 1); touch(); return rebuild(); }
             if (k === 'addmap') { show.slides.splice(cur + 1, 0, newSlide('map', {title: 'Le trajet', route: [], mapBg: 'offline'})); cur = Math.min(cur + 1, show.slides.length - 1); touch(); return rebuild(); }
             if (k === 'story') return story();
+            if (k === 'tokeynote') { if (!ext.keynoteFromSlideshow) return toast('L’éditeur de présentation n’est pas chargé.', 'error'); if (playing) play(); return ext.keynoteFromSlideshow(show, $('[data-ss-name]').value.trim() || name, {onSaved: ctx.onSaved, onClose: ctx.onClose}); }
             if (k === 'rephoto' && s) { const l = await pickMedia({multi: false, title: 'Changer la photo'}); if (l[0]) { s.media_id = l[0].media_id; s.filename = l[0].filename; touch(); await rebuild(); } return; }
             if (k === 'music') { const l = await pickMedia({kind: 'audio', multi: false, title: 'Une musique'}); if (l[0]) { show.music = {media_id: l[0].media_id, filename: l[0].filename, title: l[0].title}; music?.pause(); music = null; touch(); paintProps(); } return; }
             if (k === 'nomusic') { show.music = null; music?.pause(); music = null; touch(); paintProps(); return; }
@@ -363,12 +365,22 @@
     ext.openSlideshow = open;
     ext.slideshowInternals = {makeEngine, mapBackground};
     ext.editToolsExtra = ext.editToolsExtra || [];
-    ext.editToolsExtra.push({key: 'slideshow', icon: '🎞️', label: 'Diaporama et récit', what: 'diaporama',
-        load: async () => ((await api('slideshows')).items || []).map(r => ({id: r.id, name: r.name, date: r.updated_at, thumb: r.cover ? `<img src="${esc(mediaUrl(r.cover))}" alt="">` : '<span class="h-et-ico">🎞️</span>', info: `${r.slides} diapositive${r.slides > 1 ? 's' : ''} · ${fmt(r.duration)}`})),
+    /* « ＋ Nouveau » : un diaporama (photos, titres, cartes, voix) ou une présentation façon Keynote (heritage-keynote.js) */
+    const KIND_KEY = 'genealogie-slideshow-kind';
+    function chooseKind(again) {
+        if (!ext.newPresentation) return open({onSaved: again, onClose: again});
+        let last = 'slideshow'; try { last = localStorage.getItem(KIND_KEY) === 'keynote' ? 'keynote' : 'slideshow'; } catch (_) {}
+        ext.openDialog({eyebrow: 'NOUVEAU', title: 'Un diaporama ou une présentation ?', submitLabel: 'Commencer', wide: true,
+            body: `<div class="kn-choice"><label class="kn-choice-card"><input type="radio" name="ss_kind" value="slideshow" ${last === 'slideshow' ? 'checked' : ''}><span class="kn-cc-ico">🎞️</span><b>Diaporama</b><span>Des photos qui défilent avec un lent mouvement de caméra, des titres, des cartes où se dessine un trajet, ta voix sur chaque photo, une musique. Simple, et s’exporte en vidéo.</span></label>
+                <label class="kn-choice-card"><input type="radio" name="ss_kind" value="keynote" ${last === 'keynote' ? 'checked' : ''}><span class="kn-cc-ico">🎤</span><b>Présentation (façon Keynote)</b><span>Des diapositives libres : textes, photos, formes, tableaux, graphiques, fiches et petits arbres de la généalogie ; thèmes, animations, transitions, mode présentateur avec notes. Importe PowerPoint, OpenDocument, PDF, images, texte.</span></label></div>`,
+            onSubmit: f => { const k = f.elements.ss_kind?.value === 'keynote' ? 'keynote' : 'slideshow'; try { localStorage.setItem(KIND_KEY, k); } catch (_) {} if (k === 'keynote') ext.newPresentation({onSaved: again, onClose: again}); else open({onSaved: again, onClose: again}); }});
+    }
+    ext.editToolsExtra.push({key: 'slideshow', icon: '🎞️', label: 'Diaporama et récit', what: 'diaporama ou de présentation',
+        load: async () => ((await api('slideshows')).items || []).map(r => ({id: r.id, name: r.name, date: r.updated_at, thumb: r.cover ? `<img src="${esc(mediaUrl(r.cover))}" alt="">` : `<span class="h-et-ico">${r.mode === 'keynote' ? '🎤' : '🎞️'}</span>`, info: `${r.mode === 'keynote' ? '🎤 Présentation' : '🎞️ Diaporama'} · ${r.slides} diapositive${r.slides > 1 ? 's' : ''}${r.mode === 'keynote' ? '' : ` · ${fmt(r.duration)}`}`})),
         open: (id, again) => open({id, onSaved: again, onClose: again}),
-        create: again => open({onSaved: again, onClose: again}),
+        create: again => chooseKind(again),
         rename: (id, name) => post('rename_slideshow', {id, name}),
-        remove: id => post('delete_slideshow', {id}), createLabel: '＋ Nouveau diaporama',
-        extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une personne</button>',
-        onExtra: (k, again) => { if (k === 'story') open({story: true, onSaved: again, onClose: again}); }});
+        remove: id => post('delete_slideshow', {id}), createLabel: '＋ Nouveau',
+        extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une personne</button><button type="button" class="button secondary" data-et-x="kimport" title="PowerPoint (.pptx), OpenDocument (.odp), PDF, images, Markdown, texte, JSON">⤒ Importer une présentation</button>',
+        onExtra: (k, again) => { if (k === 'story') open({story: true, onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
 })();

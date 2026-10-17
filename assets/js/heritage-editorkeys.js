@@ -14,7 +14,7 @@
     const toast = (...a) => A().toast(...a);
     const kit = () => A()?.shortcutKit;
     const KEY = 'genealogie-editor-shortcuts', CMDS = 'genealogie-editor-cmds', TAB = 'genealogie-editor-shortcuts-tab';
-    const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif']];
+    const EDITORS = [['montage', '🎬', 'Montage vidéo'], ['audio', '🎧', 'Son'], ['retouch', '🎚️', 'Retouche des photos'], ['layout', '📐', 'Mise en page'], ['vector', '✒️', 'Dessin vectoriel'], ['house', '🏠', 'Maison (plan et 3D)'], ['decortree', '🌳', 'Arbre décoratif'], ['keynote', '🎤', 'Présentation (Keynote)']];
     // les attributs qui disent « quelle commande » sur les boutons de chaque outil
     const ATTR = {
         montage: /^data-mt-cmd$/, // ses menus disent tout (lecture, outils, onglets, pistes)
@@ -24,11 +24,15 @@
         vector: /^data-vx-(cmd|tool|tab)$/,
         house: /^data-hs-(cmd|tool|tab|mode)$/,
         decortree: /^data-dt-(cmd|shape)$/,
+        keynote: /^data-kn-(cmd|ins|tab)$/,
     };
     const ID_RX = /^data-[a-z0-9-]{2,40}(=[^<>"`\\\u0000-\u001f]{0,60})?$/, COMBO_RX = /^[^<>"`\u0000-\u001f]{1,40}$/;
     // les touches que l'outil connaît déjà (une touche à soi les remplace, on prévient)
     const BUILTIN = {
         decortree: {Escape: 'Fermer la fenêtre', Enter: 'Fabriquer l’arbre'},
+        keynote: {'Mod+S': 'Enregistrer', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+Y': 'Rétablir', 'Mod+C': 'Copier', 'Mod+X': 'Couper', 'Mod+V': 'Coller', 'Mod+D': 'Dupliquer', 'Mod+A': 'Tout sélectionner', 'Mod+G': 'Grouper', 'Mod+Shift+G': 'Dissocier', 'Mod+L': 'Verrouiller / déverrouiller',
+            'Mod+]': 'Avancer', 'Mod+[': 'Reculer', 'Mod+Shift+]': 'Tout devant', 'Mod+Shift+[': 'Tout derrière', 'Mod+Enter': 'Lire depuis cette diapositive', 'Mod+Alt+Enter': 'Lire depuis le début', Enter: 'Écrire dans l’objet choisi', Escape: 'Ne rien choisir / finir d’écrire',
+            Backspace: 'Supprimer', Delete: 'Supprimer', PageDown: 'Diapositive suivante', PageUp: 'Diapositive précédente', ArrowLeft: 'Déplacer de 1 point (⇧ : 10)', ArrowRight: 'Déplacer de 1 point (⇧ : 10)', ArrowUp: 'Déplacer de 1 point (⇧ : 10)', ArrowDown: 'Déplacer de 1 point (⇧ : 10)'},
         house: {'Mod+S': 'Enregistrer', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', Escape: 'Arrêter le tracé, ne rien choisir', Enter: 'Finir le tracé', Backspace: 'Supprimer', Delete: 'Supprimer', Space: 'Main (en restant appuyé)', ArrowLeft: 'Décaler de 1 cm', ArrowRight: 'Décaler de 1 cm', ArrowUp: 'Décaler de 1 cm', ArrowDown: 'Décaler de 1 cm',
             V: 'Choisir', H: 'Main', R: 'Pièce (ou tourner l’objet choisi)', W: 'Mur', P: 'Pièce de forme libre', D: 'Porte', F: 'Fenêtre', M: 'Cote', T: 'Texte'},
         montage: {'Mod+S': 'Enregistrer le projet', 'Mod+Shift+S': 'Enregistrer le projet sous un autre nom', 'Mod+Z': 'Annuler', 'Mod+Shift+Z': 'Rétablir', 'Mod+Y': 'Rétablir', Space: 'Lire / pause', B: 'Couper ici', Backspace: 'Enlever l’élément choisi', Delete: 'Enlever l’élément choisi'},
