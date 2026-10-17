@@ -3569,3 +3569,7 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 .h-rs-zoom{display:inline-flex;gap:2px;align-items:center;margin-left:auto}.h-rs-zoom .button{min-width:34px}
 .h-rs-stage.is-zoomed{display:block;overflow:auto}.h-rs-stage.is-zoomed canvas{max-width:none!important;max-height:none!important}
 .h-rs-presets [aria-pressed="true"]{box-shadow:inset 0 0 0 2px rgba(255,255,255,.6)}
+/* 🖼️ Visionneuse réglable */
+#lightbox .lb-sec{display:contents}#lightbox .lb-sec.lb-sec-off{display:none}
+.lb-prefs{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}.lb-row .lb-move{display:inline-flex;gap:2px;margin-right:6px}.lb-row .lb-move .icon-button{width:26px;height:26px;font-size:.8rem}
+.lb-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid var(--line,#d0d4dc);border-radius:8px;margin:4px 0;background:var(--panel,#fff)}.lb-row b{flex:1;font-weight:600}.lb-row .lb-vis{margin:0}
