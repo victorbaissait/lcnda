@@ -3406,3 +3406,17 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 :root[data-theme="dark"] .h-tx,:root[data-theme="dark"] .h-tx-editor textarea{color:#e6e6e6}
 :root[data-theme="dark"] .h-tx-top,:root[data-theme="dark"] .h-tx-tools,:root[data-theme="dark"] .h-tx-found,:root[data-theme="dark"] .h-tx-mirror,:root[data-theme="dark"] .h-tx-chars{background:#24272c;border-color:#3a3f46}
 :root[data-theme="dark"] .h-tx-tools button,:root[data-theme="dark"] .h-tx-chars button,:root[data-theme="dark"] .h-tx-more summary,:root[data-theme="dark"] .h-tx-more>div{background:#2c3036;border-color:#3a3f46;color:#e6e6e6}
+/* 🧭 Retouche : restauration pas à pas */
+.h-rt-restore{display:grid;gap:6px}
+.h-rt-step{border:1px solid #dfe2e8;border-radius:8px;background:#fff;padding:0}
+.h-rt-step summary{cursor:pointer;padding:8px 10px;font-weight:700;display:flex;align-items:center;gap:8px;list-style:none}
+.h-rt-step summary::-webkit-details-marker{display:none}
+.h-rt-step[open] summary{border-bottom:1px solid #eef0f4}
+.h-rt-stepn{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#2a7de1;color:#fff;font-size:12px;flex:0 0 auto}
+.h-rt-stepok{margin-left:auto;color:#2e9b4f;font-style:normal}
+.h-rt-step p{margin:8px 10px 6px;font-size:12px;line-height:1.45}
+.h-rt-stepbtns{display:flex;flex-wrap:wrap;gap:5px;padding:0 10px 10px}
+.h-rt-stepbtns .h-rt-slider{width:100%}
+.h-rt-palette{display:flex;flex-wrap:wrap;gap:4px;width:100%;margin-top:4px}
+.h-rt-palette button{width:24px;height:24px;border-radius:50%;border:1px solid rgba(0,0,0,.25);cursor:pointer;padding:0}
+:root[data-theme="dark"] .h-rt-step{background:#24272c;border-color:#3a3f46}

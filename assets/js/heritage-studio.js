@@ -717,6 +717,34 @@
     /** Rejoue les coups (groupes d'un même geste) sur une image : correcteur et tampon. */
     /** L'opacité (0 à 255) d'un masque de sélection, à la taille voulue */
     function rtMaskAlpha(maskCanvas, W, H) { const c = document.createElement('canvas'); c.width = W; c.height = H; const g = c.getContext('2d', {willReadFrequently: true}); g.drawImage(maskCanvas, 0, 0, W, H); const d = g.getImageData(0, 0, W, H).data, a = new Uint8ClampedArray(W * H); for (let i = 0; i < a.length; i++) a[i] = d[i * 4 + 3]; return a; }
+    /**
+     * 🧭 Restauration : les petites taches d'une photo (poussières, points blancs ou noirs, piqûres) — ce qui tranche nettement
+     * sur son voisinage et reste petit. Renvoie des touches du correcteur {x, y, r} (en fractions de l'image).
+     * force : 1 (seulement les taches franches) à 100 (beaucoup) ; taille : rayon maximal d'une tache, en points.
+     */
+    function rtSpots(img, force = 50, maxR = 6, inside = null) {
+        const W = img.width, H = img.height, d = img.data, L = new Float32Array(W * H);
+        for (let i = 0, j = 0; i < L.length; i++, j += 4) L[i] = 0.299 * d[j] + 0.587 * d[j + 1] + 0.114 * d[j + 2];
+        // voisinage : moyenne dans une boîte (intégrale), assez large pour ne pas « voir » la tache elle-même
+        const R = Math.max(4, Math.round(maxR * 1.8)), I = new Float64Array((W + 1) * (H + 1));
+        for (let y = 0; y < H; y++) { let row = 0; for (let x = 0; x < W; x++) { row += L[y * W + x]; I[(y + 1) * (W + 1) + x + 1] = I[y * (W + 1) + x + 1] + row; } }
+        const mean = (x, y) => { const x0 = Math.max(0, x - R), y0 = Math.max(0, y - R), x1 = Math.min(W, x + R + 1), y1 = Math.min(H, y + R + 1); return (I[y1 * (W + 1) + x1] - I[y0 * (W + 1) + x1] - I[y1 * (W + 1) + x0] + I[y0 * (W + 1) + x0]) / ((x1 - x0) * (y1 - y0)); };
+        const thr = 70 - force * 0.55, mark = new Uint8Array(W * H);
+        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { const i = y * W + x; if (inside && !inside[i]) continue; if (Math.abs(L[i] - mean(x, y)) > thr) mark[i] = 1; }
+        // les taches : des groupes de points marqués, petits et à peu près ronds (pas un bord, pas un trait du dessin)
+        const out = [], stack = [], maxA = Math.PI * maxR * maxR * 1.4;
+        for (let i = 0; i < mark.length; i++) {
+            if (mark[i] !== 1) continue;
+            let n = 0, sx = 0, sy = 0, x0 = W, y0 = H, x1 = 0, y1 = 0, big = false; stack.push(i); mark[i] = 2;
+            while (stack.length) { const k = stack.pop(), x = k % W, y = (k - x) / W; n++; sx += x; sy += y; if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; if (n > maxA) big = true;
+                for (const q of [k - 1, k + 1, k - W, k + W]) if (q >= 0 && q < mark.length && mark[q] === 1 && Math.abs((q % W) - x) <= 1) { mark[q] = 2; stack.push(q); } }
+            const bw = x1 - x0 + 1, bh = y1 - y0 + 1;
+            if (big || n < 1 || bw > maxR * 2.6 || bh > maxR * 2.6 || Math.max(bw, bh) > 4 * Math.min(bw, bh) + 2) continue;
+            out.push({x: (sx / n + .5) / W, y: (sy / n + .5) / H, r: (Math.max(bw, bh) / 2 * 1.6 + 3.5) / W}); // un peu plus large que la tache : ni anneau ni bord
+            if (out.length >= 4000) break;
+        }
+        return out;
+    }
     function rtReplayStrokes(img, strokes, masks = null) {
         const W = img.width, H = img.height, data = img.data;
         for (const g of strokes) {
@@ -842,7 +870,19 @@
 
     /** Retouche d'une photo : on part de la version affichée (ou d'une autre, `source`), le résultat devient une nouvelle version.
      *  Outils : réglages, correcteur de taches, tampon (source choisie), pinceau (6 sortes), texte ; calques d'annotation ; historique ; zoom. */
-    async function openRetouch(source = '', project = null, {advanced = false} = {}) {
+    // 🧭 la restauration pas à pas : [clé, titre, explication, boutons] (les boutons appellent les commandes de la retouche)
+    const RT_PALETTE = [['#e9c2a6', 'Peau claire'], ['#d39e7e', 'Peau hâlée'], ['#a8725a', 'Peau mate'], ['#e7a3a0', 'Joues, lèvres'], ['#5a3a24', 'Cheveux bruns'], ['#c9a35e', 'Cheveux blonds'], ['#9a9a9a', 'Cheveux gris'], ['#8fb3d9', 'Ciel'], ['#6f8f4e', 'Feuillage'], ['#9fbf6a', 'Herbe'], ['#2f3f66', 'Uniforme, costume bleu'], ['#6b2d2d', 'Robe bordeaux'], ['#3a3a3a', 'Habit noir'], ['#d8cfb8', 'Mur, pierre'], ['#b5653e', 'Brique, tuile'], ['#7b5a3a', 'Bois']];
+    const RT_RESTORE_STEPS = [
+        ['frame', '⌗ Cadrer et redresser', 'Une photo scannée de travers, avec ses bords blancs ou abîmés : on la redresse, puis on garde ce qui compte.', '<button type="button" class="button small" data-rt-cmd="straighten:auto">📐 Redresser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="mode:crop">⌗ Recadrer</button><button type="button" class="button small secondary" data-rt-cmd="mode:persp">⧈ Photo prise de biais</button>'],
+        ['color', '🎨 Couleurs passées, photo jaunie', 'Le temps jaunit, pâlit ou rosit les photos. « Enlever le jaunissement » remet chaque couleur à sa place ; « Raviver » redonne du contraste.', '<button type="button" class="button small" data-rt-cmd="restore:yellow">🟨 Enlever le jaunissement</button><button type="button" class="button small secondary" data-rt-cmd="preset:1">✨ Raviver une vieille photo</button><button type="button" class="button small secondary" data-rt-cmd="preset:0">Réglage automatique</button>'],
+        ['spots', '🧹 Poussières et petites taches', 'Les points blancs ou noirs, les piqûres : l’app les cherche et les enlève une par une (avec le correcteur). Pour ne traiter qu’une partie, sélectionne-la d’abord. Ce qui reste : le correcteur 🩹 à la main.', '<label class="h-rt-slider"><span>Sensibilité <output data-rt-spotf-out>50</output></span><input type="range" min="1" max="100" value="50" data-rt-spotf></label><label class="h-rt-slider"><span>Taille maximale d’une tache <output data-rt-spots-out>6</output></span><input type="range" min="2" max="20" value="6" data-rt-spots></label><button type="button" class="button small" data-rt-cmd="restore:spots">🔍 Repérer et enlever les taches</button><button type="button" class="button small secondary" data-rt-cmd="mode:heal">🩹 Correcteur à la main</button><button type="button" class="button small secondary" data-rt-cmd="fx:dust">Filtre poussière et rayures</button>'],
+        ['tears', '🩹 Déchirures, plis, rayures', 'Avec le correcteur, glisse le long d’une rayure ou d’un pli : il est comblé par ce qui l’entoure. Pour un morceau manquant (coin arraché), le tampon recopie une partie voisine.', '<button type="button" class="button small" data-rt-cmd="restore:tear">🩹 Correcteur pour les rayures</button><button type="button" class="button small secondary" data-rt-cmd="mode:clone">🧬 Tampon (morceau manquant)</button><button type="button" class="button small secondary" data-rt-cmd="mode:lasso">➰ Entourer une zone…</button>'],
+        ['grain', '🌫️ Grain et bruit', 'Une photo granuleuse ou un tirage abîmé : on adoucit sans perdre les contours.', '<button type="button" class="button small" data-rt-cmd="fx:denoise2">Réduire le bruit…</button><button type="button" class="button small secondary" data-rt-cmd="fx:surface">Flou de surface (garde les contours)…</button><button type="button" class="button small secondary" data-rt-cmd="fx:median">Médiane…</button>'],
+        ['face', '🙂 Netteté des visages', 'Entoure un visage avec l’ellipse ◯, puis « Visage plus net » : il est débruité et accentué, seulement là (calque à part, que tu peux doser).', '<button type="button" class="button small secondary" data-rt-cmd="mode:ellipsesel">◯ Entourer le visage</button><button type="button" class="button small" data-rt-cmd="restore:face">✨ Visage plus net</button><button type="button" class="button small secondary" data-rt-cmd="sel:subject">🎯 Sélectionner le sujet</button>'],
+        ['colorize', '🌈 Coloriser une photo en noir et blanc', 'Tout seul (un dégradé de couleurs d’époque), ou à la main : choisis une couleur ci-dessous et peins doucement, la lumière de la photo est gardée.', '<button type="button" class="button small" data-rt-cmd="colorize:auto">🎨 Coloriser tout seul</button><button type="button" class="button small secondary" data-rt-cmd="colorize:paint">🖌 Coloriser au pinceau</button><div class="h-rt-palette">' + RT_PALETTE.map(([c, l]) => `<button type="button" data-rt-cmd="restore:color:${c}" style="background:${c}" title="${l}"></button>`).join('') + '</div>'],
+        ['save', '✅ Comparer et enregistrer', 'Garde appuyé « 👁 Avant / après » (sous la photo) pour comparer. La photo restaurée devient une nouvelle version : l’original reste.', '<button type="button" class="button small" data-rt-cmd="save:show">💾 Enregistrer et afficher</button><button type="button" class="button small secondary" data-rt-cmd="proj:save">Garder le travail pour plus tard</button>'],
+    ];
+    async function openRetouch(source = '', project = null, {advanced = false, tab = ''} = {}) {
         // la retouche simple (celle de la 0.5.0) si c'est la dernière choisie ; un projet s'ouvre toujours ici
         let mode0 = ''; try { mode0 = localStorage.getItem('genealogie-retouch-mode') || ''; } catch (_) {}
         if (!project && !advanced && mode0 !== 'advanced' && ext.openRetouchSimple) return ext.openRetouchSimple(source);
@@ -872,7 +912,7 @@
             ['Fichier', [['proj:save', '💾 Enregistrer le projet (pour continuer plus tard)', '⌘S'], ['proj:saveas', 'Enregistrer le projet sous un autre nom…', '⇧⌘S'], ['proj:open', '📂 Ouvrir un projet…'], ['-'], ['save:show', 'Enregistrer et afficher cette version'], ['save:keep', 'Enregistrer sans l’afficher'], ['save:copy', 'Copie séparée'], ['-'], ['download:png', 'Télécharger en PNG'], ['download:jpg', 'Télécharger en JPG'], ['-'], ['actions', '⚡ Actions : réglages enregistrés, à refaire sur plusieurs photos…'], ['-'], ['simple', '⚡ Passer à la retouche rapide'], ['close', 'Fermer']]],
             ['Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['tab:history', '🕘 Historique']]],
             ['Image', [['tab:adjust', '🎚 Réglages, niveaux et courbe'], ['preset:0', 'Réglage automatique'], ['mode:crop', '⌗ Recadrer et redresser'], ['straighten:auto', '📐 Redresser automatiquement'], ['cropclear', 'Annuler le recadrage'], ['mode:persp', '⧈ Redresser la perspective (photo prise de biais)…'], ['persp:clear', 'Enlever la perspective'], ['-'],
-                ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['reset', 'Remettre les réglages à zéro']]],
+                ['tab:restore', '🧭 Restaurer une vieille photo (pas à pas)'], ['tab:filters', '🧹 Poussière et rayures (Filtres)'], ['deglare', '🪟 Enlever les reflets (vitre) : calque à part'], ['colorize:auto', '🎨 Coloriser : calque de réglage (dégradé)'], ['colorize:paint', '🖌 Coloriser au pinceau : calque « Couleur »'], ['-'], ['reset', 'Remettre les réglages à zéro']]],
             ['Calque', [['ladd', '＋ Nouveau calque'], ['gadd', '📁 Nouveau groupe'], ['gwrap', 'Grouper le calque choisi', '⌘G'], ['aadd', '🎚 Nouveau calque de réglage'], ['img:place', '🖼️ Placer une image…'], ['sel:copy', 'Copier la sélection sur un calque', '⌘J'], ['-'], ['mask:add', '🎭 Ajouter un masque au calque choisi'], ['mask:hideall', '🎭 Masque qui cache tout (⌥ + clic sur 🎭)'], ['mask:sel', 'Masque d’après la sélection'], ['mask:selhide', 'Masque qui cache la sélection'], ['mask:invert', 'Inverser le masque'], ['mask:del', 'Retirer le masque'], ['-'], ['tab:layers', '🗂 Calques']]],
             ['Sélection', [['sel:subject', '🎯 Sélectionner le sujet (automatique)'], ['-'], ['sel:all', 'Tout sélectionner', '⌘A'], ['sel:none', 'Désélectionner', '⌘D'], ['sel:invert', 'Inverser', '⇧⌘I'], ['-'], ['sel:feather', 'Contour progressif…'], ['sel:grow', 'Agrandir…'], ['sel:shrink', 'Réduire…'], ['-'], ['sel:fill', 'Remplir avec la couleur'], ['sel:clear', 'Effacer (transparent)', '⌫'], ['sel:crop', 'Recadrer sur la sélection']]],
             ['Filtre', [['fx:last', '↻ Refaire le dernier filtre', '⌘F'], ['-'], ...['Flou', 'Bruit', 'Netteté', 'Esthétiques', 'Artistiques', 'Pixellisation', 'Rendu', 'Déformation', 'Autres'].map(cat => ['>', cat, Object.entries(RT_FX).filter(([, f]) => f[0] === cat).map(([k, f]) => ['fx:' + k, f[1] + '…'])]),
@@ -915,7 +955,7 @@
                 </div>
                 <nav class="h-rt-vtools" data-tbg="rt-vtools" data-tbg-label="Colonne d’outils">${VTOOLS.map(([k, i, l]) => `<button type="button" data-rt-mode="${k}" data-rt-v title="${esc(l)}" data-tb-label="${esc(l)}">${i}</button>`).join('')}<span class="h-rt-fg" title="Couleur (pinceau, texte, formes, remplir)" data-tb-label="Couleur"><input type="color" value="#d0021b" data-rt-color2></span></nav>
                 <aside class="h-rt-side"><button type="button" class="h-rt-sidetog" data-rt-sidetog title="Replier le panneau (plus de place pour la photo) — Tab">⇥</button><span class="h-rt-resize" data-rt-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span>
-                    <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button></div>
+                    <div class="h-rt-tabs"><button type="button" class="is-active" data-rt-tab="adjust">🎚 Réglages</button><button type="button" data-rt-tab="filters">✨ Filtres</button><button type="button" data-rt-tab="layers">🗂 Calques</button><button type="button" data-rt-tab="history">🕘 Historique</button><button type="button" data-rt-tab="restore" title="Restaurer une vieille photo, pas à pas">🧭 Restaurer</button></div>
                     <div class="h-rt-tools" data-rt-pane="adjust" data-tbg="rt-adjust" data-tbg-label="Panneau Réglages"><div class="h-rt-target" data-rt-target></div><div class="h-rt-presets" data-tb-label="Préréglages">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rt-preset="${i}">${esc(l)}</button>`).join('')}</div>
                         ${RT_SLIDERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt="${k}"></label>`).join('')}
                         <details class="h-rt-levels"><summary><strong>Niveaux</strong> <small class="muted">point noir, tons moyens, point blanc</small></summary>${RT_LEVELS.map(([k, l, mn, mx, dv]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-out="${k}">${dv}</output></span><input type="range" min="${mn}" max="${mx}" value="${dv}" data-rt="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-lvlauto>Niveaux automatiques</button></details>
@@ -929,6 +969,8 @@
                     <div class="h-rt-tools" data-rt-pane="filters" hidden><div class="h-rt-target" data-rt-target></div><div data-rt-fxlist></div><p class="muted">Filtres rapides, après les réglages : sur la photo, ou dans un calque de réglage (sur tout ce qui est dessous, ou seulement le calque juste dessous). Les mêmes sur l’image enregistrée en pleine taille.</p>${RT_FILTERS.map(([k, l, mn, mx]) => `<label class="h-rt-slider"><span>${esc(l)} <output data-rt-fout="${k}">0</output></span><input type="range" min="${mn}" max="${mx}" value="0" data-rt-f="${k}"></label>`).join('')}<button type="button" class="link-button" data-rt-cmd="filters:reset">Enlever les filtres</button></div>
                     <div class="h-rt-tools" data-rt-pane="layers" hidden></div>
                     <div class="h-rt-tools" data-rt-pane="history" hidden></div>
+                    <div class="h-rt-tools h-rt-restore" data-rt-pane="restore" hidden>${RT_RESTORE_STEPS.map(([k, t, help, btns], i) => `<details class="h-rt-step" data-rt-step="${k}" ${i === 0 ? 'open' : ''}><summary><span class="h-rt-stepn">${i + 1}</span> ${t} <i class="h-rt-stepok" hidden>✓</i></summary><p class="muted">${help}</p><div class="h-rt-stepbtns">${btns}</div></details>`).join('')}
+                        <p class="muted h-rt-help">Chaque étape est facultative et se défait (↶). Rien n’abîme l’original : la photo restaurée devient une nouvelle version.</p></div>
                 </aside>
             </div>
             <div class="modal-actions"><button type="button" class="button small secondary" data-rt-projopen title="Rouvrir un travail de retouche enregistré">📂 Projets…</button><button type="button" class="button small secondary" data-rt-projsave title="Garde tout le travail (calques, groupes, masques, réglages…) pour le rouvrir et continuer (⌘S)">💾 Enregistrer le projet</button><span class="h-rt-projname" data-rt-projname></span><label class="checkbox-line h-rt-merge" data-rt-mergebox hidden><input type="checkbox" data-rt-merge checked> <span>avec les annotations (calques visibles)</span></label><span class="spacer"></span><button type="button" class="button secondary" data-rt-close>Annuler</button><button type="button" class="button secondary" data-rt-save="copy" title="Un autre média, rattaché aux mêmes fiches">Copie séparée</button><button type="button" class="button secondary" data-rt-save="keep" title="Gardée dans les versions, la photo affichée ne change pas">Enregistrer sans l’afficher</button><button type="button" class="button" data-rt-save="show">Enregistrer et afficher cette version</button></div>
@@ -1816,6 +1858,35 @@
                 toast('Peins les couleurs (pinceau doux) : le calque est en fusion « Couleur », la lumière de la photo est gardée. 🧽 pour corriger, opacité du calque pour doser.');
                 return commit('Calque de couleurs (pinceau)');
             }
+            if (a === 'restore') { // 🧭 la restauration pas à pas
+                const step = dlg.querySelector(`[data-rt-step] [data-rt-cmd="${CSS.escape(k)}"]`)?.closest('[data-rt-step]'); step?.querySelector('.h-rt-stepok')?.removeAttribute('hidden');
+                if (b === 'spots') {
+                    help.textContent = 'Recherche des taches…'; await new Promise(r => setTimeout(r, 30));
+                    const inside = selId ? rtMaskAlpha(masks.get(selId), pw, ph) : null;
+                    const dabs = rtSpots(srcData, Number($('[data-rt-spotf]')?.value || 50), Number($('[data-rt-spots]')?.value || 6), inside); help.textContent = HELP[optsFor(mode)] || '';
+                    if (!dabs.length) return toast('Aucune tache trouvée : augmente la sensibilité ou la taille.');
+                    const g = {tool: 'heal', dabs}; st.strokes.push(g); rtReplayStrokes(srcData, [g], masks); strokeVer++; draw(); refreshLayers();
+                    toast(`${dabs.length} tache${dabs.length > 1 ? 's' : ''} enlevée${dabs.length > 1 ? 's' : ''} : compare avec 👁 ; ↶ si c’est trop.`);
+                    return commit(`Taches enlevées automatiquement (${dabs.length})`);
+                }
+                if (b === 'yellow') { // chaque couleur ramenée à la plage de la luminosité (sombre et clair) : la dominante (jaune, rose) s'en va, le contraste reste
+                    const hs = [0, 1, 2, 3].map(() => new Uint32Array(256)), d = srcData.data, n = d.length / 4;
+                    for (let i = 0; i < d.length; i += 4) { hs[0][d[i]]++; hs[1][d[i + 1]]++; hs[2][d[i + 2]]++; hs[3][Math.round(0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2])]++; }
+                    const pct = (h, p) => { let acc = 0; for (let v = 0; v < 256; v++) { acc += h[v]; if (acc >= n * p) return v; } return 255; };
+                    const L0 = pct(hs[3], .01), L1 = Math.max(L0 + 10, pct(hs[3], .99)), mid = (L0 + L1) / 2;
+                    ['r', 'g', 'b'].forEach((c, i) => { const lo = pct(hs[i], .01), hi = Math.max(lo + 8, pct(hs[i], .99)), mc = (lo + hi) / 2, k = (L1 - L0) / (hi - lo); // la même pente pour toutes, chaque couleur recentrée
+                        const f = v => Math.round(Math.max(0, Math.min(255, mid + (v - mc) * k))); st.curves[c] = [[0, f(0)], [lo, L0], [hi, L1], [255, f(255)]].filter((q, j, arr) => j === 0 || q[0] > arr[j - 1][0]); });
+                    syncControls(); draw(); return commit('Jaunissement enlevé (chaque couleur remise à sa place)');
+                }
+                if (b === 'face') {
+                    if (!selId) { setMode('ellipsesel'); return toast('Entoure d’abord le visage avec l’ellipse ◯ (glisse sur la photo), puis reclique « Visage plus net ».'); }
+                    const n = newAdjust('Visage plus net'); n.st.filters = {chain: [{t: 'denoise2', ...fxDefaults('denoise2'), amount: 30}, {t: 'unsharp', ...fxDefaults('unsharp'), amount: 140, r: 1.4, thr: 4}]}; n.mask = [{type: 'sel', mask: selId}];
+                    refreshLayers(); syncControls(); draw(); toast('Visage débruité et accentué sur un calque à part : son opacité dose l’effet.'); return commit('Visage plus net');
+                }
+                if (b === 'tear') { setMode('heal'); const sz = $('[data-rt-size]'); if (sz) { sz.value = 26; sz.dispatchEvent(new Event('input', {bubbles: true})); } return toast('Correcteur prêt : glisse le long de la rayure ou du pli (zoome pour être précis).'); }
+                if (b === 'color') { const c = k.slice('restore:color:'.length); const l = nodeById(activeLayer); if (!(l && typeOf(l) === 'layer' && l.blend === 'color')) await cmd('colorize:paint'); setColor(c); setMode('brush'); return; }
+                return;
+            }
             if (k === 'ladd') { newLayer(); refreshLayers(); showTab('layers'); return commit('Nouveau calque'); }
             if (k === 'gadd') { newGroup(); refreshLayers(); showTab('layers'); return commit('Nouveau groupe'); }
             if (k === 'gwrap') { showTab('layers'); return groupWrap(); }
@@ -1846,6 +1917,7 @@
             if (k === 'mask:sel') { const id = activeLayer && nodeById(activeLayer) ? activeLayer : 'photo'; if (!target(id)) return toast('Choisis d’abord un calque.', 'error'); addMaskTo(id, [{type: 'sel', mask: selId}]); showTab('layers'); return commit(`Masque d’après la sélection (${id === 'photo' ? 'photo' : target(id).name})`); }
             if (k === 'sel:crop') { const bx = maskBox(m); if (!bx) return; st.crop = {x: bx.x / pw, y: bx.y / ph, w: bx.w / pw, h: bx.h / ph, a: 0}; selId = null; refreshLayers(); draw(); return commit('Recadré sur la sélection'); }
         }
+        dlg.addEventListener('input', e => { const r = e.target.closest('[data-rt-spotf],[data-rt-spots]'); if (r) dlg.querySelector(r.matches('[data-rt-spotf]') ? '[data-rt-spotf-out]' : '[data-rt-spots-out]').textContent = r.value; });
         dlg.addEventListener('click', e => {
             const c = e.target.closest('[data-rt-cmd]'); if (c) { e.preventDefault(); cmd(c.dataset.rtCmd); return; }
             if (!e.target.closest('details.h-rt-menu')) dlg.querySelectorAll('details.h-rt-menu[open]').forEach(d => d.removeAttribute('open'));
@@ -2068,7 +2140,7 @@
             }
         }));
         dlg.showModal();
-        photo(); setMode('adjust');
+        photo(); setMode('adjust'); if (tab) showTab(tab);
         try { if (localStorage.getItem('genealogie-retouch-side-closed') === '1') setSideClosed(true); } catch (_) {}
         commit('Ouverture de la photo');
         if (project?.project) { // un projet rouvert : ses masques (images), puis tout son état, comme une étape de l'historique
@@ -2117,10 +2189,10 @@
     ext.openRetouch = openRetouch;
 
     /** Listes → Médias → « 🎚️ Retoucher » : une photo de l'app (les plus récentes, ou filtrées) ou une photo importée, puis la Retouche */
-    function pickRetouch() {
-        const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch(); };
+    function pickRetouch({restore = false} = {}) {
+        const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch('', null, restore ? {advanced: true, tab: 'restore'} : {}); };
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>Quelle photo retoucher ?</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
+        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>${restore ? 'Quelle photo restaurer ?' : 'Quelle photo retoucher ?'}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
             <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher une photo de l’app (titre, cote, nom du fichier)…"><button type="button" class="button small secondary" data-projects title="Rouvrir un travail de retouche enregistré">📂 Projets</button><button type="button" class="button small secondary" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
             <p class="muted small">Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.</p>
             <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
@@ -2176,4 +2248,5 @@
         dlg.showModal(); load();
     }
     ext.pickRetouch = pickRetouch;
+    ext.openRestore = () => pickRetouch({restore: true}); // 🧭 restaurer une vieille photo, pas à pas
 })();

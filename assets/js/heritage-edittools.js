@@ -34,7 +34,7 @@
             open: id => ext.openRetouchProject?.(id),
             create: () => ext.pickRetouch?.(),
             rename: (id, name) => post('rename_retouch_project', {id, name}),
-            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche'},
+            remove: id => post('delete_retouch_project', {id}), createLabel: '＋ Nouvelle retouche', extra: '<button type="button" class="button secondary" data-et-restore title="Une vieille photo abîmée : redresser, couleurs, taches, déchirures, visages, colorisation, pas à pas">🧭 Restaurer une vieille photo</button>'},
         {key: 'vector', icon: '✒️', label: 'Dessin vectoriel', what: 'dessin',
             load: async () => ((await api('vector_docs')).docs || []).map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">✒️</span>', info: `${d.objects} objet${d.objects > 1 ? 's' : ''}`})),
             open: (id, again) => ext.openVectorEditor?.({id, onSaved: again, onClose: again}),
@@ -96,6 +96,7 @@
                 if (d.etNew !== undefined) return t.create(again);
                 if (d.etBlank !== undefined) return ext.newLayoutDoc?.('blank', again);
                 if (d.etStudio !== undefined) return ext.openLayoutStudio?.();
+                if (d.etRestore !== undefined) return ext.openRestore?.();
                 if (d.etVxblason !== undefined) return ext.openVectorEditor?.({coat: {title: 'Blason'}, onSaved: again, onClose: again});
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
