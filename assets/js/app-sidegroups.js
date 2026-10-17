@@ -41,7 +41,7 @@
             const btn = k => sb(esc(k), String(++n).padStart(2, '0'), esc(cfg.label(k)), cur);
             const mineBtns = () => mine.map(([v, i, l]) => sb(esc(v), esc(i), esc(l), cur)).join('');
             const isOpen = (id, items) => items.includes(cur) || p.open === 'open' || (p.closedMode === 'remember' && p.openState[id]);
-            const group = (id, icon, label, inner, count, items) => `<details class="mt-group" data-mt-group="${esc(id)}" ${isOpen(id, items) ? 'open' : ''}><summary><span class="mt-gicon">${esc(icon)}</span><span class="mt-glabel">${esc(label)}</span><small>${count}</small></summary>${inner}</details>`;
+            const group = (id, icon, label, inner, count, items) => `<details class="mt-group" data-mt-group="${esc(id)}" ${isOpen(id, items) ? 'open' : ''}><summary><span class="mt-gicon">${esc(icon)}</span><span class="mt-glabel">${esc(label)}</span><small>${count}</small></summary><div class="mt-gitems">${inner}</div></details>`;
             const search = `<input type="search" class="mt-search" data-mt-search placeholder="${esc(cfg.searchPh || 'Chercher…')}" aria-label="${esc(cfg.searchPh || 'Chercher')}">`;
             if (p.enabled) {
                 content.innerHTML = `<div class="side-menu mt-groups">${search}${p.groups.map(g => { const vis = g.items.filter(k => !hid.has(k)); return vis.length ? group(g.id, g.icon, g.label, vis.map(btn).join(''), vis.length, vis) : ''; }).join('')}${mine.length ? group(MINE, '⭐', 'Mes listes', mineBtns(), mine.length, mine.map(m => m[0])) : ''}</div>`;
