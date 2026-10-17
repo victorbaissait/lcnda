@@ -4189,3 +4189,9 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .order-editor.compact .order-row.has-visibility>.order-number{flex:0 0 auto}
 .order-editor.compact .order-row.has-visibility>b{flex:1 1 auto;min-width:0;overflow-wrap:normal}
 .order-editor.compact .order-row.has-visibility>.order-rename{flex:1 1 150px;min-width:0;width:auto;order:5}
+/* 🧩 mêmes petits boutons partout (app-harmony.js) : poubelle et crayon de la fiche personne, 29 px */
+.icon-action.ia-auto{width:29px!important;height:29px!important;min-width:29px!important;min-height:29px!important;padding:0!important;display:inline-grid!important;place-items:center;font-size:0;line-height:1;border:1.5px solid var(--ink)!important;background:var(--card-bg,#fff)!important;color:var(--ink)!important;border-radius:0!important;box-shadow:2px 2px 0 rgba(5,93,255,.2)}
+.icon-action.ia-auto.is-danger{color:#a31625!important}.icon-action.ia-auto:hover{color:#fff!important;background:var(--blue)!important}.icon-action.ia-auto.is-danger:hover{background:#c91d2e!important}
+.icon-action.ia-auto svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.ord-row .ord-arrow{width:29px;height:29px;min-width:29px;min-height:29px}
+:root[data-theme="dark"] .icon-action.is-danger{color:#ff7b86}

@@ -28,7 +28,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=219">
+    <link rel="stylesheet" href="assets/css/app.css?v=220">
     <link rel="stylesheet" href="assets/css/heritage.css?v=198">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
@@ -1109,6 +1109,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-carte.js?v=4" defer></script>
 <script src="assets/js/app-enquetes.js?v=3" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=3" defer></script>
+<script src="assets/js/app-harmony.js?v=1" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
 <script src="assets/js/app-listes.js?v=6" defer></script>
 <script src="assets/js/app-maintenance.js?v=7" defer></script>
