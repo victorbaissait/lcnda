@@ -83,7 +83,7 @@
             ${Object.keys(LISTS).map(k => `<section class="h-emp-card h-emp-wide"><h3>${LISTS[k].icon} ${LISTS[k].title}</h3>${rowsHtml(k, d[k] || [])}</section>`).join('')}
             <section class="h-emp-card h-emp-wide"><h3>📝 Notes et histoire</h3><textarea name="notes" rows="6" placeholder="L’histoire de l’entreprise, les conditions de travail, ce que la famille en racontait…">${esc(d.notes || '')}</textarea></section>
             <section class="h-emp-card h-emp-wide"><h3>📚 Sources</h3><textarea name="sources" rows="4" placeholder="Archives d’entreprise, presse, registres du commerce, livres…">${esc(d.sources || '')}</textarea></section>
-            <div class="modal-actions"><button type="button" class="button secondary" data-emp-delete ${r.id ? '' : 'hidden'}>Effacer la fiche</button><span class="spacer"></span><button type="button" class="button secondary" data-emp-cancel>Annuler</button><button type="submit" class="button">Enregistrer</button></div>
+            <div class="modal-actions"><button type="button" class="button secondary danger" data-emp-delete ${r.id ? '' : 'hidden'}>Supprimer la fiche</button><span class="spacer"></span><button type="button" class="button secondary" data-emp-cancel>Annuler</button><button type="submit" class="button">Enregistrer</button></div>
         </form>`;
     }
     function readForm(form) {
@@ -138,9 +138,9 @@
                 if (mv && row) { if (mv.dataset.empMove === '-1' && row.previousElementSibling) row.parentElement.insertBefore(row, row.previousElementSibling); else if (mv.dataset.empMove === '1' && row.nextElementSibling) row.parentElement.insertBefore(row.nextElementSibling, row); return; }
                 if (e.target.closest('[data-emp-cancel]')) { if (r.name) show(); else dlg.close(); return; }
                 if (e.target.closest('[data-emp-delete]')) {
-                    if (!confirm(`Effacer la fiche de « ${r.name} » ? Les recensements et les fiches des personnes ne changent pas.`)) return;
+                    if (!await A().confirmBox(`Supprimer la fiche de « ${r.name} » ? Les recensements et les fiches des personnes ne changent pas.`, {title: 'Supprimer la fiche', okLabel: 'Supprimer la fiche'})) return;
                     try { await api('delete_employer_record', {}, {method: 'POST', body: {name: r.name}}); } catch (error) { toast(error.message, 'error'); return; }
-                    toast('Fiche effacée.'); dlg.close(); refreshList(); return;
+                    toast('Fiche supprimée.'); dlg.close(); refreshList(); return;
                 }
                 const pick = e.target.closest('[data-emp-pick]');
                 if (pick) { fillFrom(form, lookups[Number(pick.dataset.empPick)], r.people || []); return; }

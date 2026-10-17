@@ -38,10 +38,10 @@
                 <span class="h-bk-cover">${(r.cover || r.media?.[0]) ? A().mediaThumbHtml(r.cover || r.media[0]) : '<span class="h-bk-coverart">LIVRET<br>DE<br>FAMILLE</span>'}</span>
                 <span class="h-bk-info"><strong>${esc(r.title)}</strong><small>${esc([r.commune, r.marriage_date && 'mariage ' + r.marriage_date].filter(Boolean).join(' · ') || 'Commune et date à compléter')}</small>
                 <small>${fmt(r.children)} enfant${r.children > 1 ? 's' : ''} · ${fmt(r.linked)}/${fmt(r.people)} personne${r.people > 1 ? 's' : ''} reliée${r.linked > 1 ? 's' : ''} · ${fmt(r.media_count)} photo${r.media_count > 1 ? 's' : ''}</small></span></button>`).join('')}</div>`
-                : A().empty(st.hBookletQ ? 'Aucun livret ne correspond.' : 'Aucun livret transcrit. « + Nouveau livret » : tu recopies ce qui est écrit, page par page, et tu relies les personnes à leurs fiches.')}</section>`;
+                : (st.hBookletQ ? A().emptyState({icon: '🔍', text: 'Aucun livret ne correspond.'}) : A().emptyState({icon: '📘', text: 'Aucun livret pour l’instant', hint: 'Tu recopies ce qui est écrit, page par page, et tu relies les personnes à leurs fiches.', action: {label: '＋ Nouveau livret', attrs: 'data-bk-new'}}))}</section>`;
         const ws = A().$('#workspace');
         let t = 0; ws.querySelector('[data-bk-q]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.hBookletQ = e.target.value; ext.lists.family_booklets(++st.workspaceToken); }, 300); });
-        ws.querySelector('[data-bk-new]').addEventListener('click', () => openEditor(null));
+        ws.querySelectorAll('[data-bk-new]').forEach(b => b.addEventListener('click', () => openEditor(null)));
         ws.querySelectorAll('[data-bk-open]').forEach(b => b.addEventListener('click', () => { st.hBooklet = Number(b.dataset.bkOpen); ext.lists.family_booklets(++st.workspaceToken); }));
     };
 
@@ -91,7 +91,7 @@
         ws.querySelector('[data-bk-tags]').addEventListener('click', () => { openEditor(b, again); setTimeout(() => { const lb = [...document.querySelectorAll('dialog[open] .h-labels-picker')].pop(); lb?.scrollIntoView({block: 'center'}); lb?.querySelector('[data-lp-add]')?.click(); }, 200); });
         ws.querySelector('[data-bk-print]').addEventListener('click', () => window.print());
         ws.querySelector('[data-bk-del]').addEventListener('click', async () => {
-            if (!confirm(`Supprimer « ${b.title} » ? Les fiches des personnes et les photos restent.`)) return;
+            if (!await A().confirmBox(`Supprimer « ${b.title} » ? Les fiches des personnes et les photos restent.`, {title: 'Supprimer le livret', okLabel: 'Supprimer le livret'})) return;
             try { await api('delete_booklet', {}, {method: 'POST', body: {id}}); toast('Livret supprimé.'); st.hBooklet = 0; ext.lists.family_booklets(++st.workspaceToken); } catch (error) { toast(error.message, 'error'); }
         });
     }
@@ -180,7 +180,7 @@
                     if (p) { const pr = PRESETS[p.dataset.bkPreset]; Object.entries(pr).forEach(([k, v]) => { const el = form.elements[k]; if (!el || k === 'label') return; if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === v)) el.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(v.split(',')[0].replace(/"/g, ''))}</option>`); el.value = v; }); read(); g.preset = p.dataset.bkPreset; return; }
                     const mp = e.target.closest('[data-bk-myname]'); if (mp) { const x = myDesigns().find(y => y.name === mp.dataset.bkMyname); if (!x) return; g = {...effectiveDesign({}), ...x.design}; Object.entries(x.design).forEach(([k, v]) => { const el = form.elements[k]; if (!el || typeof v === 'object' || el instanceof RadioNodeList) return; if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === String(v))) el.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(String(v).replace(/^local:/, '').split(',')[0].replace(/"/g, ''))}</option>`); el.value = v; }); ['size', 'title_size'].forEach(k => { if (x.design[k]) { dl.querySelector(`[data-bk-num="${k}"]`).value = x.design[k]; } });
                         const ord = [...(x.design.order || []), ...SECTIONS.map(y => y[0]).filter(k => !(x.design.order || []).includes(k))]; dl.querySelector('[data-bk-order]').innerHTML = orderLis(g, ord); applyDesign(pageEl, g); toast(`Apparence « ${x.name} » appliquée (« Enregistrer » pour la garder sur ce livret).`); return; }
-                    const md = e.target.closest('[data-bk-mydelname]'); if (md) { const nm = md.dataset.bkMydelname; if (!confirm(`Supprimer l’apparence « ${nm} » ?`)) return; try { localStorage.setItem(MY_DESIGNS, JSON.stringify(myDesigns().filter(x => x.name !== nm))); } catch (_) {} dl.querySelector('[data-bk-mine]').innerHTML = mineHtml(); return; }
+                    const md = e.target.closest('[data-bk-mydelname]'); if (md) { const nm = md.dataset.bkMydelname; if (!await A().confirmBox(`Supprimer l’apparence « ${nm} » ?`, {title: 'Supprimer l’apparence', okLabel: 'Supprimer l’apparence'})) return; try { localStorage.setItem(MY_DESIGNS, JSON.stringify(myDesigns().filter(x => x.name !== nm))); } catch (_) {} dl.querySelector('[data-bk-mine]').innerHTML = mineHtml(); return; }
                     if (e.target.closest('[data-bk-mysave]')) { read(); ext.openDialog({eyebrow: 'LIVRET DE FAMILLE', title: 'Enregistrer cette apparence', submitLabel: 'Enregistrer', body: '<label>Nom de l’apparence<input name="nm" maxlength="60" value="Mon livret" required></label><p class="muted">Elle sera proposée dans « Mes apparences », pour tous les livrets (sans l’image de couverture, propre à chaque livret).</p>',
                         onSubmit: f2 => { const nm = f2.elements.nm.value.trim() || 'Mon livret'; const {label, cover_media, cover_mode, ...design} = g; const l = [...myDesigns().filter(x => x.name !== nm), {name: nm, design}].slice(-40); try { localStorage.setItem(MY_DESIGNS, JSON.stringify(l)); } catch (_) { toast('Impossible de garder l’apparence.', 'error'); return false; } toast(`Apparence « ${nm} » enregistrée : elle est dans « Mes apparences ».`); const box = dl.querySelector('[data-bk-mine]'); if (box) box.innerHTML = mineHtml(); }}); return; }
                     const mv = e.target.closest('[data-bk-move]');
@@ -197,7 +197,7 @@
                                 sel.insertAdjacentHTML('beforeend', `<optgroup label="— Polices de votre ordinateur —" data-local-fonts>${families.map(f => `<option value="local:${esc(f)}" style="font-family:'${esc(f)}'">${esc(f)}</option>`).join('')}</optgroup>`);
                                 sel.value = cur;
                             }
-                            msg.textContent = families.length ? `${families.length} police(s) trouvée(s) : elles sont à la fin des deux listes.` : 'Aucune police trouvée : autorise l’accès aux polices si l’app te le demande.';
+                            msg.textContent = families.length ? `${A().plural(families.length, 'police trouvée', 'polices trouvées')} : elles sont à la fin des deux listes.` : 'Aucune police trouvée : autorise l’accès aux polices si l’app te le demande.';
                         } catch (_) { msg.textContent = 'Accès aux polices refusé ou indisponible.'; }
                     }
                 });
@@ -277,7 +277,7 @@
                     if (fs && e.target.closest('[data-bk-down]') && fs.nextElementSibling) { fs.parentElement.insertBefore(fs.nextElementSibling, fs); renumber(body); return; }
                     if (fs && e.target.closest('[data-bk-create]')) {
                         const s = readSlot(fs); if (!s.written_name) { toast('Écris d’abord le nom et les prénoms.', 'error'); return; }
-                        if (s.person_id && !confirm('Cette case est déjà reliée à une fiche. En créer une autre ?')) return;
+                        if (s.person_id && !await A().confirmBox('Cette case est déjà reliée à une fiche. En créer une autre ?', {title: 'Case déjà reliée', okLabel: 'Créer une autre fiche'})) return;
                         const role = fs.dataset.bkSlot, gender = s.sex === 'F' || /wife|mother/.test(role) ? 'female' : s.sex === 'M' || /husband|father/.test(role) ? 'male' : 'unknown';
                         try {
                             const r = await api('save_person', {}, {method: 'POST', body: {...splitName(s.written_name), gender, living_status: s.death_date ? 'deceased' : 'unknown', occupation: s.occupation}});
@@ -319,7 +319,7 @@
                 const keys = [...form.querySelectorAll('[name=k]:checked')].map(i => i.value);
                 if (!keys.length) { toast('Rien de coché.'); return true; }
                 const res = await api('apply_booklet', {}, {method: 'POST', body: {id, keys}});
-                toast(`${res.result?.done ?? res.done ?? keys.length} information(s) reportée(s) sur les fiches.`);
+                toast(`${A().plural(res.result?.done ?? res.done ?? keys.length, 'information reportée', 'informations reportées')} sur les fiches.`);
                 done?.();
             },
         });

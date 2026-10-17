@@ -84,13 +84,13 @@
             q('[data-rt-unmerge]').addEventListener('click', () => { const g = range(); const drop = new Set(spans().filter(x => x.r >= g.r0 && x.r <= g.r1 && x.c >= g.c0 && x.c <= g.c1).map(x => x.m)); t.merges = t.merges.filter(m => !drop.has(m)); changed(); paint(); });
             q('[data-rt-delrow]').addEventListener('click', async () => {
                 const g = range(); const gone = t.rows.slice(g.r0, g.r1 + 1);
-                if (gone.some(r => Object.values(r.c).some(v => String(v).trim()) || r.person) && !confirm(`Supprimer ${gone.length > 1 ? `ces ${gone.length} lignes` : 'cette ligne'} ?${gone.some(r => r.person) ? '\n\nLe rattachement à la fiche sera retiré.' : ''}`)) return;
+                if (gone.some(r => Object.values(r.c).some(v => String(v).trim()) || r.person) && !await A().confirmBox(`Supprimer ${gone.length > 1 ? `ces ${gone.length} lignes` : 'cette ligne'} ?${gone.some(r => r.person) ? '\n\nLe rattachement à la fiche sera retiré.' : ''}`, {title: 'Supprimer des lignes', okLabel: 'Supprimer'})) return;
                 for (const r of gone) if (r.person) await onPerson?.(r, null);
                 mergesRemove('r', g.r0, gone.length); t.rows.splice(g.r0, gone.length); sel = null; changed(); paint();
             });
-            q('[data-rt-delcol]').addEventListener('click', () => {
+            q('[data-rt-delcol]').addEventListener('click', async () => {
                 const g = range(); const gone = t.cols.slice(g.c0, g.c1 + 1);
-                if (gone.some(c => t.rows.some(r => String(r.c[c.id] || '').trim())) && !confirm(`Supprimer ${gone.length > 1 ? `ces ${gone.length} colonnes` : `la colonne « ${gone[0].name || g.c0 + 1} »`} et leur contenu ?`)) return;
+                if (gone.some(c => t.rows.some(r => String(r.c[c.id] || '').trim())) && !await A().confirmBox(`Supprimer ${gone.length > 1 ? `ces ${gone.length} colonnes` : `la colonne « ${gone[0].name || g.c0 + 1} »`} et leur contenu ?`, {title: 'Supprimer des colonnes', okLabel: 'Supprimer'})) return;
                 gone.forEach(c => t.rows.forEach(r => delete r.c[c.id])); mergesRemove('c', g.c0, gone.length); t.cols.splice(g.c0, gone.length); sel = null; changed(); paint();
             });
             q('[data-rt-csv]').addEventListener('click', csv);
@@ -114,7 +114,7 @@
                 });
             });
             qa('[data-rt-person]').forEach(b => b.addEventListener('click', () => onPerson?.(t.rows[Number(b.dataset.rtPerson)], 'pick').then(ok => { if (ok) { changed(); paint(); } })));
-            qa('[data-rt-unp]').forEach(b => b.addEventListener('click', async () => { const r = t.rows[Number(b.dataset.rtUnp)]; if (!confirm(`Ne plus rattacher cette ligne à ${r.person.name} ?`)) return; await onPerson?.(r, null); delete r.person; changed(); paint(); }));
+            qa('[data-rt-unp]').forEach(b => b.addEventListener('click', async () => { const r = t.rows[Number(b.dataset.rtUnp)]; if (!await A().confirmBox(`Ne plus rattacher cette ligne à ${r.person.name} ?`, {title: 'Détacher de la fiche', okLabel: 'Ne plus rattacher', danger: true})) return; await onPerson?.(r, null); delete r.person; changed(); paint(); }));
             qa('[data-rt-openp]').forEach(b => b.addEventListener('click', () => onOpenPerson?.(t.rows[Number(b.dataset.rtOpenp)].person)));
             if (!t.locked) dragging();
         }
@@ -145,7 +145,7 @@
             while (t.cols.length < c0 + w) t.cols.push({id: uid('c'), name: ''});
             lines.forEach((l, i) => l.forEach((v, j) => { t.rows[r0 + i].c[t.cols[c0 + j].id] = v.trim(); }));
             sel = {r0, c0, r1: r0 + lines.length - 1, c1: c0 + w - 1}; changed(); paint();
-            A().toast?.(`${lines.length} ligne(s) collée(s).`);
+            A().toast?.(`${A().plural(lines.length, 'ligne collée', 'lignes collées')}.`);
         }
         function csv() {
             const cell = v => /[";\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;

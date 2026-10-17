@@ -336,7 +336,7 @@
             if (f.files[0].size > 5e6) return toast('Fichier trop gros (5 Mo au plus).', 'error');
             pasteInto(grid(f.dataset.dgCsv), spec, parseTable(await f.files[0].text())); delete spec.live; paint(); later(); toast('Tableau importé.');
         });
-        pane.addEventListener('click', e => {
+        pane.addEventListener('click', async e => {
             const b = e.target.closest('button'); if (!b) return;
             const keep = () => { const y = pane.scrollTop; paint(); pane.scrollTop = y; later(); };
             if (b.dataset.dgAdd !== undefined) { const g = grid(b.dataset.dgAdd); spec[g.key].push({}); keep(); pane.querySelector(`[data-grid="${b.dataset.dgAdd}"] tbody tr:last-child input`)?.focus(); return; }
@@ -345,11 +345,11 @@
                 else { const j = b.dataset.dgRow === 'up' ? i - 1 : i + 1; if (j >= 0 && j < rows.length) [rows[i], rows[j]] = [rows[j], rows[i]]; }
                 return keep(); }
             if (b.dataset.dgAddser !== undefined) { spec.series = [...(spec.series?.length ? spec.series : [{name: 'Série 1'}]), {name: `Série ${(spec.series?.length || 1) + 1}`}]; return keep(); }
-            if (b.dataset.dgDelser !== undefined) { const j = Number(b.dataset.dgDelser); if (!confirm(`Supprimer la série « ${spec.series[j]?.name || j + 1} » et ses chiffres ?`)) return;
+            if (b.dataset.dgDelser !== undefined) { const j = Number(b.dataset.dgDelser); if (!await A().confirmBox(`Supprimer la série « ${spec.series[j]?.name || j + 1} » et ses chiffres ?`, {title: 'Supprimer la série', okLabel: 'Supprimer la série'})) return;
                 spec.series.splice(j, 1); (spec.rows || []).forEach(r => { for (let k = j; k < spec.series.length + 1; k++) r['s' + k] = r['s' + (k + 1)]; delete r['s' + spec.series.length]; }); return keep(); }
             if (b.hasAttribute('data-dg-autocolor')) { const g = grid(b.dataset.g); delete spec[g.key][Number(b.dataset.r)][b.dataset.k]; return keep(); }
             if (b.dataset.dgSort !== undefined) { const g = grid(b.dataset.dgSort), c = gridCols(g, spec).find(x => x.type === 'number'); spec[g.key].sort((x, y) => R().num(y[c.k]) - R().num(x[c.k])); return keep(); }
-            if (b.dataset.dgClear !== undefined) { if (!confirm('Vider ce tableau ?')) return; spec[grid(b.dataset.dgClear).key] = []; delete spec.live; return keep(); }
+            if (b.dataset.dgClear !== undefined) { if (!await A().confirmBox('Vider ce tableau ?', {title: 'Vider le tableau', okLabel: 'Vider le tableau'})) return; spec[grid(b.dataset.dgClear).key] = []; delete spec.live; return keep(); }
             if (b.hasAttribute('data-dg-unlive')) { delete spec.live; return keep(); }
             if (b.dataset.dgPaste !== undefined) {
                 const gi = b.dataset.dgPaste;
@@ -357,7 +357,7 @@
                     onSubmit: form => { const t = form.querySelector('[name=t]').value; if (!t.trim()) return false; pasteInto(grid(gi), spec, parseTable(t)); delete spec.live; keep(); }});
             }
         });
-        const close = () => { if (dirty && !confirm('Fermer sans enregistrer les changements ?')) return; dlg.close(); dlg.remove(); onClose?.(); };
+        const close = async () => { if (dirty && !await A().confirmBox('Fermer sans enregistrer les changements ?', {title: 'Changements non enregistrés', okLabel: 'Fermer sans enregistrer', danger: true})) return; dlg.close(); dlg.remove(); onClose?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         dlg.querySelector('[data-dg-close]').addEventListener('click', close);
         dlg.querySelector('[data-dg-name]').addEventListener('input', e => { rec.name = e.target.value; dirty = true; });
@@ -368,7 +368,7 @@
             const same = t.kind === spec.kind;
             if (same || tableToTable) { spec.kind = t.kind; spec.o = {...spec.o, ...(t.o || {})}; }
             else { const hasData = (spec.rows || []).length; const keepO = {title: spec.o.title, subtitle: spec.o.subtitle, source: spec.o.source, palette: spec.o.palette, width: spec.o.width, bg: spec.o.bg};
-                if (hasData && !confirm('Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ?')) return;
+                if (hasData && !await A().confirmBox('Ce type ne lit pas le même tableau : l’exemple remplace tes données. Continuer ?', {title: 'Changer de type', okLabel: 'Remplacer mes données'})) return;
                 spec = presetSpec(t); Object.entries(keepO).forEach(([k, v]) => { if (v !== undefined && v !== '') spec.o[k] = v; }); }
             dirty = true; paint(); draw();
         });
@@ -437,7 +437,7 @@
         ws.querySelectorAll('[data-dg-pexp]').forEach(b => b.addEventListener('click', () => exportAs(b.dataset.dgPexp, d.name, specOf(d)).catch(e => toast(e.message, 'error'))));
         ws.querySelector('[data-dg-print]').addEventListener('click', async () => { const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée par le navigateur.', 'error'); w.document.write(`<!doctype html><meta charset="utf-8"><title>${esc(d.name)}</title><style>body{margin:0}svg{width:100%;height:auto}</style>${await svgOf(d)}<script>onload=()=>setTimeout(()=>print(),200)<\/script>`); w.document.close(); });
         ws.querySelector('[data-dg-dup]').addEventListener('click', async () => { try { const r = await post('save_diagram', {name: d.name + ' (copie)', kind: d.kind, spec: d.spec}); await list(true); S().graphDiagramId = Number(r.result?.id); A().setModule('graphiques'); toast('Copie créée.'); } catch (e) { toast(e.message, 'error'); } });
-        ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!confirm(`Supprimer le diagramme « ${d.name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.`)) return; try { await post('delete_diagram', {id: d.id}); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast('Diagramme supprimé.'); } catch (e) { toast(e.message, 'error'); } });
+        ws.querySelector('[data-dg-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer le diagramme « ${d.name} » ? Il disparaît aussi des widgets, fiches et enquêtes où il est posé.`, {title: 'Supprimer le diagramme', okLabel: 'Supprimer le diagramme'})) return; try { await post('delete_diagram', {id: d.id}); await list(true); S().graphDiagramId = cache[0]?.id || 0; if (!cache.length) S().graphMode = 'diagram'; A().setModule('graphiques'); toast('Diagramme supprimé.'); } catch (e) { toast(e.message, 'error'); } });
         ws.querySelector('[data-dg-dash]').addEventListener('click', () => addToDashboard(d));
         ws.querySelectorAll('[data-dg-golink]').forEach(b => b.addEventListener('click', () => { const [type, id, inv] = b.dataset.dgGolink.split(':'); goLink(type, Number(id), Number(inv)); }));
     }

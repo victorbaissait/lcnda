@@ -174,17 +174,17 @@
             ${list.length ? `<div class="h-records">${list.map((t, i) => `<article class="h-record"><header><div><strong>${esc(t.icon || '🗂️')} ${esc(t.name || 'Mon onglet')}</strong> <small>${kindText(t)}</small>${t.hidden ? ' <span class="collection-kind">masqué</span>' : ''}</div>
                     <span class="h-saved-tools"><button type="button" class="link-button" data-ct-edit="${esc(t.id)}">modifier</button><button type="button" class="link-button" data-ct-dup="${esc(t.id)}">dupliquer</button><button type="button" class="link-button" data-ct-hide="${esc(t.id)}">${t.hidden ? 'afficher' : 'masquer'}</button><button type="button" class="link-button" data-ct-del="${esc(t.id)}">supprimer</button></span></header>
                     ${t.intro ? `<p>${esc(t.intro)}</p>` : ''}<div class="page-actions"><button type="button" class="button small" data-ct-open="${esc(t.id)}">Ouvrir l’onglet</button><button type="button" class="button small secondary" data-ct-share="${esc(t.id)}">📤 Partager (fichier)</button></div></article>`).join('')}</div>`
-                : A().empty('Aucun onglet à toi pour le moment : « + Nouvel onglet ».')}</section>`;
+                : A().emptyState({icon: '🗂️', text: 'Aucun onglet à toi pour l’instant', hint: 'Un onglet rassemble sur un écran les widgets, listes et statistiques de ton choix.', action: {label: '＋ Nouvel onglet', attrs: 'data-ct-new'}})}</section>`;
         const ws = A().$('#workspace'), find = id => list.find(t => t.id === id);
-        ws.querySelector('[data-ct-new]').addEventListener('click', chooseStart);
+        ws.querySelectorAll('[data-ct-new]').forEach(b => b.addEventListener('click', chooseStart));
         ws.querySelectorAll('[data-ct-edit]').forEach(b => b.addEventListener('click', () => editTab({...find(b.dataset.ctEdit)}, true)));
         ws.querySelectorAll('[data-ct-dup]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctDup); editTab({...JSON.parse(JSON.stringify(t)), id: newId(), name: (t.name || 'Mon onglet') + ' (copie)'}, false); }));
         ws.querySelectorAll('[data-ct-open]').forEach(b => b.addEventListener('click', () => openTab(find(b.dataset.ctOpen))));
         ws.querySelectorAll('[data-ct-share]').forEach(b => b.addEventListener('click', () => shareTab(find(b.dataset.ctShare))));
         ws.querySelectorAll('[data-ct-hide]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctHide); t.hidden = !t.hidden; menuHidden(t.id, t.hidden); save(list); refresh(); }));
-        ws.querySelectorAll('[data-ct-del]').forEach(b => b.addEventListener('click', () => {
+        ws.querySelectorAll('[data-ct-del]').forEach(b => b.addEventListener('click', async () => {
             const t = find(b.dataset.ctDel);
-            if (!confirm(`Supprimer l’onglet « ${t.name || 'Mon onglet'} » ? Les widgets, listes et statistiques qu’il montrait ne sont pas supprimés.`)) return;
+            if (!await A().confirmBox(`Supprimer l’onglet « ${t.name || 'Mon onglet'} » ? Les widgets, listes et statistiques qu’il montrait ne sont pas supprimés.`, {title: 'Supprimer l’onglet', okLabel: 'Supprimer l’onglet'})) return;
             save(list.filter(x => x.id !== t.id)); toast('Onglet supprimé.'); refresh();
         }));
         ws.querySelector('[data-ct-import]').addEventListener('change', async e => {

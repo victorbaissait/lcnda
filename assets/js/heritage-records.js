@@ -13,7 +13,7 @@
     const nl = value => esc(value).replace(/\n/g, '<br>');
     const api = (...args) => A().api(...args);
     const toast = (...args) => A().toast(...args);
-    const empty = text => A().empty(text);
+    const empty = (text, o) => A().empty(text, o);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
@@ -114,9 +114,9 @@
         box.addEventListener('change', e => { if (e.target.dataset.rb) read(e.target); if (e.target.dataset.rbs) { readSub(e.target); if (e.target.dataset.rbs === 'type') again(); } });
         const readSub = el => { const x = fieldAt(el), sf = x.fields[Number(el.closest('[data-rb-sub]').dataset.rbSub)], k = el.dataset.rbs;
             if (k === 'options') sf.options = el.value.split(',').map(o => o.trim()).filter(Boolean); else sf[k] = el.value; };
-        box.addEventListener('click', e => {
+        box.addEventListener('click', async e => {
             const t = e.target;
-            if (t.closest('[data-rb-del]')) { const i = Number(t.closest('[data-rb-i]').dataset.rbI); if (d.fields[i].type === 'steps' && !confirm('Retirer les étapes ? Celles déjà écrites dans les fiches ne seront plus affichées.')) return; d.fields.splice(i, 1); again(); }
+            if (t.closest('[data-rb-del]')) { const i = Number(t.closest('[data-rb-i]').dataset.rbI); if (d.fields[i].type === 'steps' && !await A().confirmBox('Retirer les étapes ? Celles déjà écrites dans les fiches ne seront plus affichées.', {title: 'Retirer les étapes', okLabel: 'Retirer les étapes'})) return; d.fields.splice(i, 1); again(); }
             else if (t.closest('[data-rb-move]')) { const i = Number(t.closest('[data-rb-i]').dataset.rbI), j = i + Number(t.closest('[data-rb-move]').dataset.rbMove); if (j >= 0 && j < d.fields.length) { [d.fields[i], d.fields[j]] = [d.fields[j], d.fields[i]]; again(); } }
             else if (t.closest('[data-rbs-add]')) { fieldAt(t).fields.push(f('text', '')); again(); }
             else if (t.closest('[data-rbs-del]')) { const x = fieldAt(t); x.fields.splice(Number(t.closest('[data-rb-sub]').dataset.rbSub), 1); again(); }
@@ -176,7 +176,7 @@
         A().bindCollectionPersonFields(root);
         ext.bindMediaEditor?.(root);
         const renumber = box => box.querySelectorAll('[data-step-n]').forEach((n, i) => { const x = d.fields.find(y => y.key === box.dataset.steps); n.textContent = `${x?.item || 'Étape'} ${i + 1}`; });
-        root.addEventListener('click', e => {
+        root.addEventListener('click', async e => {
             const t = e.target;
             const addP = t.closest('[data-person-add]');
             if (addP) { const box = root.querySelector(`[data-people="${addP.dataset.personAdd}"]`); box.insertAdjacentHTML('beforeend', `<div class="h-rec-person">${A().collectionPersonField('p_' + addP.dataset.personAdd, null, 'Ancêtre ou personne…')}<button type="button" class="icon-button" data-person-del title="Retirer">✕</button></div>`); A().bindCollectionPersonFields(box); box.lastElementChild.querySelector('input')?.focus(); return; }
@@ -185,7 +185,7 @@
             if (addS) { const x = d.fields.find(y => y.key === addS.dataset.stepAdd), box = root.querySelector(`[data-steps="${x.key}"]`);
                 box.insertAdjacentHTML('beforeend', stepRow(x, {}, box.children.length, {})); renumber(box); A().bindCollectionPersonFields(box);
                 const last = box.lastElementChild; last.querySelector('input:not([type=checkbox]),textarea,select')?.focus(); return; }
-            if (t.closest('[data-step-del]')) { const row = t.closest('[data-step]'), box = row.parentElement; const hasText = [...row.querySelectorAll('input:not([type=hidden]):not([type=checkbox]),textarea')].some(i => i.value.trim()); if (hasText && !confirm('Retirer cette ligne ?')) return; row.remove(); renumber(box); return; }
+            if (t.closest('[data-step-del]')) { const row = t.closest('[data-step]'), box = row.parentElement; const hasText = [...row.querySelectorAll('input:not([type=hidden]):not([type=checkbox]),textarea')].some(i => i.value.trim()); if (hasText && !await A().confirmBox('Retirer cette ligne ?', {title: 'Retirer la ligne', okLabel: 'Retirer la ligne'})) return; row.remove(); renumber(box); return; }
             const mv = t.closest('[data-step-move]');
             if (mv) { const row = t.closest('[data-step]'), box = row.parentElement; if (mv.dataset.stepMove === '-1' && row.previousElementSibling) box.insertBefore(row, row.previousElementSibling); else if (mv.dataset.stepMove === '1' && row.nextElementSibling) box.insertBefore(row.nextElementSibling, row); renumber(box); }
         });
@@ -275,7 +275,7 @@
         ws.querySelector('[data-rv-back]')?.addEventListener('click', back);
         ws.querySelector('[data-rv-edit]').addEventListener('click', goEdit);
         ws.querySelector('[data-rv-del]').addEventListener('click', async () => {
-            if (!confirm(`Supprimer la liste « ${L.name} » et ses ${plural(data.rows.length, 'fiche', 'fiches')} ?`)) return;
+            if (!await A().confirmBox(`Supprimer la liste « ${L.name} » et ses ${plural(data.rows.length, 'fiche', 'fiches')} ?`, {title: 'Supprimer la liste', okLabel: 'Supprimer la liste'})) return;
             await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; S().hRec = {};
             ext.afterListDeleted?.(inLists);
         });
@@ -361,7 +361,7 @@
         ws.querySelector('[data-rd-edit]').addEventListener('click', () => { v.open = 0; v.edit = rec.id; reload(); });
         ws.querySelector('[data-rd-print]').addEventListener('click', () => window.print());
         ws.querySelector('[data-rd-status]')?.addEventListener('click', async e => { await api('set_my_list_record_status', {}, {method: 'POST', body: {id: rec.id, status: e.currentTarget.dataset.rdStatus}}); reload(); });
-        ws.querySelector('[data-rd-del]').addEventListener('click', async () => { if (!confirm(`Supprimer « ${title} » ?`)) return; await api('delete_my_list_record', {}, {method: 'POST', body: {id: rec.id}}); toast('Fiche supprimée.'); v.open = 0; reload(); });
+        ws.querySelector('[data-rd-del]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer « ${title} » ?`, {title: 'Supprimer la fiche', okLabel: 'Supprimer la fiche'})) return; await api('delete_my_list_record', {}, {method: 'POST', body: {id: rec.id}}); toast('Fiche supprimée.'); v.open = 0; reload(); });
         ws.querySelectorAll('[data-rd-step]').forEach(c => c.addEventListener('change', async () => {
             try { await api('set_my_list_record_step', {}, {method: 'POST', body: {id: rec.id, field: c.dataset.rdStep, index: Number(c.dataset.i), done: c.checked ? 1 : 0}}); reload(); }
             catch (error) { toast(error.message, 'error'); c.checked = !c.checked; }

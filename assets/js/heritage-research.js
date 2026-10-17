@@ -15,7 +15,7 @@
     const nl = value => esc(value).replace(/\n/g, '<br>');
     const api = (...args) => A().api(...args);
     const toast = (...args) => A().toast(...args);
-    const empty = text => A().empty(text);
+    const empty = (text, o) => A().empty(text, o);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
@@ -205,8 +205,8 @@
                 ${target ? `<div class="h-at-words"><div class="h-progress"><span style="width:${Math.min(100, Math.round(100 * words / target))}%"></span></div><small>${fmt(words)} mots sur ${fmt(target)}</small></div>` : words ? `<small>${fmt(words)} mots écrits</small>` : ''}
                 ${days !== null ? `<small class="${days < 0 ? 'h-at-late' : ''}">${days < 0 ? `échéance dépassée de ${plural(-days, 'jour', 'jours')}` : `rendu dans ${plural(days, 'jour', 'jours')}`}</small>` : ''}</div></article>`; };
         ws.innerHTML = `<section class="page collection-page h-at">${`<header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>📚 Atelier de recherche</h2><p>Pour écrire une thèse, un livre, un article ou préparer une exposition : un projet, ses dossiers et sous-dossiers sans limite (parties, chapitres, sources…), et tout ce que tu y ranges — références, archives, gravures, citations, notes, personnes de ta base, lieux, dates, tâches, brouillons. Bibliographie toute prête, chronologie, carte.</p></div><div class="page-actions"><button type="button" class="button" data-at-new>+ Projet</button><button type="button" class="button secondary" data-at-importproject>⬇ Importer un projet (Zotero…)</button><button type="button" class="button secondary" data-at-settings title="Maintenance → Atelier de recherche">⚙ Réglages</button></div></header>`}
-            ${projects.length ? `<div class="h-at-projects">${projects.map(card).join('')}</div>` : empty('Aucun projet pour l’instant. Clique sur « + Projet » : par exemple « Les montreurs de vues d’optique, XVIIIe-XIXe siècles ».')}</section>`;
-        ws.querySelector('[data-at-new]').addEventListener('click', () => projectDialog(null, data.kinds));
+            ${projects.length ? `<div class="h-at-projects">${projects.map(card).join('')}</div>` : A().emptyState({icon: '🔬', text: 'Aucun projet pour l’instant', hint: 'Par exemple « Les montreurs de vues d’optique, XVIIIe-XIXe siècles ».', action: {label: '＋ Projet', attrs: 'data-at-new'}})}</section>`;
+        ws.querySelectorAll('[data-at-new]').forEach(b => b.addEventListener('click', () => projectDialog(null, data.kinds)));
         ws.querySelector('[data-at-importproject]').addEventListener('click', () => importProjectDialog(data.kinds));
         ws.querySelector('[data-at-settings]').addEventListener('click', () => openSettings());
         lastKinds = data.kinds;
@@ -243,7 +243,7 @@
                 ext.atelier(++S().workspaceToken);
             },
             onDelete: isNew ? null : async () => {
-                if (!confirm(`Supprimer « ${p.title} » avec tous ses dossiers et ses ${plural(P?.items.length || 0, 'élément', 'éléments')} ? C’est définitif.`)) return false;
+                if (!await A().confirmBox(`Supprimer « ${p.title} » avec tous ses dossiers et ses ${plural(P?.items.length || 0, 'élément', 'éléments')} ? C’est définitif.`, {title: 'Supprimer le projet', okLabel: 'Supprimer le projet'})) return false;
                 await post('delete_atelier_project', {id: p.id}); st().project = 0; toast('Projet supprimé.'); ext.atelier(++S().workspaceToken);
             },
         });
@@ -633,10 +633,10 @@
                 const ev = (r.events || []).slice(0, 8);
                 html = `<p><b>${esc(A().personName(p))}</b> ${esc(A().years ? A().years(p) : '')}</p>${d.kind === 'person_block' ? `<p class="muted">Bloc montré : <b>${esc((A().defaultPersonBlocks.find(b => b[0] === d.sub) || [, d.sub])[1])}</b> (↗ Ouvrir mène à ce bloc)</p>` : ''}
                     ${ev.length ? `<ul class="h-at-applist">${ev.map(e => `<li>${esc(e.type_label || 'Événement')} — ${esc(e.date_text || e.year || '')}${e.place_name ? ' · ' + esc(e.place_name) : ''}</li>`).join('')}</ul>` : ''}`; }
-            else if (d.kind === 'village') { const v = await api('village', {key: d.key}); html = `<p><b>${esc(v.name)}</b> ${esc([v.county, v.country].filter(Boolean).join(', '))}</p><p class="muted">${[v.people_count && `${v.people_count} personne(s) de la famille`, (v.baptemes || v.mariages || v.deces) && `${(v.baptemes || 0) + (v.mariages || 0) + (v.deces || 0)} baptême(s), mariage(s), décès`, (v.families || []).length && `familles : ${(v.families || []).slice(0, 6).map(f => f.name || f.surname || f).join(', ')}`].filter(Boolean).join(' · ')}</p>`; }
+            else if (d.kind === 'village') { const v = await api('village', {key: d.key}); html = `<p><b>${esc(v.name)}</b> ${esc([v.county, v.country].filter(Boolean).join(', '))}</p><p class="muted">${[v.people_count && `${plural(v.people_count, 'personne', 'personnes')} de la famille`, (v.baptemes || v.mariages || v.deces) && `${plural((v.baptemes || 0) + (v.mariages || 0) + (v.deces || 0), 'acte', 'actes')} (baptêmes, mariages, décès)`, (v.families || []).length && `familles : ${(v.families || []).slice(0, 6).map(f => f.name || f.surname || f).join(', ')}`].filter(Boolean).join(' · ')}</p>`; }
             else if (d.kind === 'recueil') { const r = await api('recueil', {id: d.key}); const imgs = new Map(r.images.map(x => [x.id, x]));
                 let pg = r.pages; if (d.page_from) { const a = r.pages.find(p => p.id === Number(d.page_from)), b = r.pages.find(p => p.id === Number(d.page_to)) || a; if (a) pg = r.pages.filter(p => p.num >= Math.min(a.num, b.num) && p.num <= Math.max(a.num, b.num)); }
-                html = `<p><b>${esc(r.recueil.title)}</b> · ${pg.length} page(s)</p><div class="h-rc-for-strip">${pg.slice(0, 12).map(p => { const im = imgs.get(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-open-recueil="${d.key}" data-recueil-page="${p.id}" title="Page ${p.num}">${im ? `<img src="media/${encodeURIComponent(im.thumbnail)}" alt="">` : ''}<small>${p.num}</small></button>`; }).join('')}</div>`; }
+                html = `<p><b>${esc(r.recueil.title)}</b> · ${plural(pg.length, 'page', 'pages')}</p><div class="h-rc-for-strip">${pg.slice(0, 12).map(p => { const im = imgs.get(p.shown_image_id); return `<button type="button" class="h-rc-thumb" data-open-recueil="${d.key}" data-recueil-page="${p.id}" title="Page ${p.num}">${im ? `<img src="media/${encodeURIComponent(im.thumbnail)}" alt="">` : ''}<small>${p.num}</small></button>`; }).join('')}</div>`; }
             else if (d.kind === 'media') { const r = await api('list', {type: 'media', q: d.label, limit: 40}); const m = (r.rows || []).find(x => String(x.id) === String(d.key));
                 html = m ? ((m.media_type || 'image') === 'image' ? `<img class="h-at-appimg" src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="">` : `<p>${esc(m.media_type)} · ${esc(m.filename)}</p>`) + (m.transcription ? `<p class="h-at-notetext">${esc(m.transcription.slice(0, 400))}</p>` : '') : '<p class="muted">Média introuvable (supprimé ?).</p>'; }
             else html = `<p class="muted">${esc(d.extra || '')}</p>`;
@@ -757,7 +757,7 @@
             },
             onDelete: isNew ? null : async () => {
                 const sub = descendants(Number(folder.id)).length - 1;
-                if (!confirm(`Supprimer le dossier « ${folder.name} »${sub ? ` et ses ${plural(sub, 'sous-dossier', 'sous-dossiers')}` : ''} ? Les éléments ne sont pas supprimés : ils restent dans le projet (dans « Non classés » s’ils ne sont rangés nulle part ailleurs).`)) return false;
+                if (!await A().confirmBox(`Supprimer le dossier « ${folder.name} »${sub ? ` et ses ${plural(sub, 'sous-dossier', 'sous-dossiers')}` : ''} ? Les éléments ne sont pas supprimés : ils restent dans le projet (dans « Non classés » s’ils ne sont rangés nulle part ailleurs).`, {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return false;
                 await post('delete_atelier_folder', {id: folder.id}); if (st().node === Number(folder.id)) st().node = 'all'; await reload();
             },
         });
@@ -814,7 +814,7 @@
     /** Un projet complet reçu apporte ses sortes d'éléments à soi : on les ajoute aux réglages si elles manquent. */
     function mergeImportedTypes(text) {
         if (!String(text).slice(0, 200).includes('lcnda-atelier-projet')) return;
-        try { const doc = JSON.parse(text); let n = 0; (doc.custom_types || []).forEach(t => { if (t?.key && !CFG.types.some(x => x.key === t.key)) { CFG.types.push({...t, custom: true}); n++; } }); if (n) { saveCfg(); toast(`${n} sorte(s) d’élément ajoutée(s) aux réglages de l’Atelier.`); } } catch (_) {}
+        try { const doc = JSON.parse(text); let n = 0; (doc.custom_types || []).forEach(t => { if (t?.key && !CFG.types.some(x => x.key === t.key)) { CFG.types.push({...t, custom: true}); n++; } }); if (n) { saveCfg(); toast(`${n > 1 ? `${fmt(n)} sortes d’élément ajoutées` : '1 sorte d’élément ajoutée'} aux réglages de l’Atelier.`); } } catch (_) {}
     }
     /** Les blocs du document (titres, paragraphes, citations, références) dans l'ordre du plan. */
     function projectBlocks() {
@@ -945,12 +945,12 @@
             if (q('[data-at-untag]')) return act('untag', v.sel, {tag: q('[data-at-untag]').dataset.atUntag});
             if (q('[data-at-unfile]')) return act('remove', v.sel, {folder_id: Number(q('[data-at-unfile]').dataset.atUnfile)});
             if (q('[data-at-unrel]')) { const i = P.byId.get(v.sel[0]); const rel = (i.data.related || []).filter(x => Number(x) !== Number(q('[data-at-unrel]').dataset.atUnrel)); return saveData(i, {related: rel}); }
-            if (q('[data-at-emptytrash]')) { const ids = P.items.filter(i => Number(i.trashed)).map(i => Number(i.id)); if (confirm(`Supprimer définitivement ${plural(ids.length, 'élément', 'éléments')} ?`)) { await act('delete', ids); v.sel = []; } return; }
+            if (q('[data-at-emptytrash]')) { const ids = P.items.filter(i => Number(i.trashed)).map(i => Number(i.id)); if (await A().confirmBox(`Supprimer définitivement ${plural(ids.length, 'élément', 'éléments')} ?`, {title: 'Vider la corbeille', okLabel: 'Supprimer définitivement'})) { await act('delete', ids); v.sel = []; } return; }
             if (q('[data-at-unsel]')) { v.sel = []; return renderProject(S().workspaceToken, true); }
             if (q('[data-at-bulk]')) {
                 const a = q('[data-at-bulk]').dataset.atBulk;
                 if (a === 'tag') { const tg = await A().askText({title: 'Étiquette', message: 'Étiquette à ajouter aux éléments choisis :', okLabel: 'Ajouter'}); if (tg?.trim()) await act('tag', v.sel, {tag: tg.trim()}); return; }
-                if (a === 'delete' && !confirm(`Supprimer définitivement ${plural(v.sel.length, 'élément', 'éléments')} ?`)) return;
+                if (a === 'delete' && !await A().confirmBox(`Supprimer définitivement ${plural(v.sel.length, 'élément', 'éléments')} ?`, {title: 'Supprimer définitivement', okLabel: 'Supprimer définitivement'})) return;
                 await act(a, v.sel, {folder_id: typeof v.node === 'number' ? v.node : 0}); if (['trash', 'delete', 'restore', 'remove'].includes(a)) { v.sel = []; renderProject(S().workspaceToken, true); }
                 return;
             }
@@ -1062,7 +1062,7 @@
         return {nav, types, plans, folders};
     }
     const cfgSummary = c => { const n = c || {}; const mine = list => (list || []).filter(x => x.custom).length; const hidden = list => (list || []).filter(x => x.hidden).length;
-        return [`menu : ${mine(n.nav) ? plural(mine(n.nav), 'vue à moi', 'vues à moi') : 'pas de vue à moi'}${hidden(n.nav) ? `, ${fmt(hidden(n.nav))} masqué(s)` : ''}`, `${plural(mine(n.types), 'sorte à moi', 'sortes à moi')}${hidden(n.types) ? `, ${fmt(hidden(n.types))} masquée(s)` : ''}`, `dossiers ${n.folders?.closed || '📁'}${n.folders?.open || '📂'}`, `${plural(mine(n.plans), 'plan à moi', 'plans à moi')}`].join(' · '); };
+        return [`menu : ${mine(n.nav) ? plural(mine(n.nav), 'vue à moi', 'vues à moi') : 'pas de vue à moi'}${hidden(n.nav) ? `, ${plural(hidden(n.nav), 'masqué', 'masqués')}` : ''}`, `${plural(mine(n.types), 'sorte à moi', 'sortes à moi')}${hidden(n.types) ? `, ${plural(hidden(n.types), 'masquée', 'masquées')}` : ''}`, `dossiers ${n.folders?.closed || '📁'}${n.folders?.open || '📂'}`, `${plural(mine(n.plans), 'plan à moi', 'plans à moi')}`].join(' · '); };
     const applyCfg = settings => { try { localStorage.setItem(CFG_KEY, JSON.stringify(cleanCfg(settings))); } catch (_) {} CFG = loadCfg(); };
     const downloadCfg = (name, settings) => ext.downloadText(`reglages-atelier-${String(name).normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').toLowerCase().slice(0, 50) || 'lcnda'}.lcnda-atelier.json`,
         JSON.stringify({type: 'lcnda-atelier-reglages', version: 1, name, exported: new Date().toISOString(), settings: cleanCfg(settings)}, null, 1));
@@ -1142,11 +1142,11 @@
             if (sec && t.dataset.cfg === 'label' && !t.value.trim()) { saveCfg(); again(); } // nom vidé : celui de l'app revient
         }, {signal: ws._cfgCtl.signal});
         ws.querySelector('[data-cfg-pname]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); ws.querySelector('[data-cfg-psave]').click(); } });
-        ws.addEventListener('click', e => {
+        ws.addEventListener('click', async e => {
             const t = e.target, [sec, i] = at(t);
             if (t.closest('[data-cfg-emoji]')) { const input = t.closest('.h-at-iconfield').querySelector('input'); return ext.pickEmoji?.(input); }
             if (t.closest('[data-cfg-move]')) { const l = listOf(sec), j = i + Number(t.closest('[data-cfg-move]').dataset.cfgMove); if (j >= 0 && j < l.length) { [l[i], l[j]] = [l[j], l[i]]; saveCfg(); again(); } return; }
-            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; if (!confirm(`Supprimer « ${x.label} » ?${sec === 'types' ? ' Les éléments déjà faits avec cette sorte gardent leurs valeurs.' : ''}`)) return; listOf(sec).splice(i, 1); saveCfg(); again(); return; }
+            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; if (!await A().confirmBox(`Supprimer « ${x.label} » ?${sec === 'types' ? ' Les éléments déjà faits avec cette sorte gardent leurs valeurs.' : ''}`, {title: 'Supprimer cet élément', okLabel: 'Supprimer'})) return; listOf(sec).splice(i, 1); saveCfg(); again(); return; }
             if (t.closest('[data-cfg-view-add]')) return viewDialog(null);
             if (t.closest('[data-cfg-view-edit]')) return viewDialog(CFG.nav[i]);
             if (t.closest('[data-cfg-type-add]')) return typeDialog(null);
@@ -1161,7 +1161,7 @@
             const name = () => ws.querySelector('[data-cfg-pname]').value.trim();
             if (t.closest('[data-cfg-psave]')) { const n = name(); if (!n) { toast('Donne un nom à ces réglages.', 'error'); ws.querySelector('[data-cfg-pname]').focus(); return; }
                 const list = profiles(), same = list.findIndex(x => x.name.toLowerCase() === n.toLowerCase());
-                if (same >= 0 && !confirm(`Des réglages « ${list[same].name} » existent déjà. Les remplacer ?`)) return;
+                if (same >= 0 && !await A().confirmBox(`Des réglages « ${list[same].name} » existent déjà. Les remplacer ?`, {title: 'Réglages déjà enregistrés', okLabel: 'Remplacer'})) return;
                 const entry = {name: n, saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; if (same >= 0) list[same] = entry; else list.push(entry);
                 saveProfiles(list); toast(`Réglages « ${n} » enregistrés.`); again(); return; }
             if (t.closest('[data-cfg-pexport-now]')) { downloadCfg(name() || 'reglages actuels', readCfg()); toast('Fichier prêt : l’autre personne l’importe dans Maintenance → Atelier de recherche.'); return; }
@@ -1173,11 +1173,11 @@
                 list.push({name: n, saved: new Date().toISOString(), from: str(data.author, 60), settings: cleanCfg(data.settings)}); saveProfiles(list);
                 toast(`Réglages « ${n} » importés : clique sur « Appliquer » pour les utiliser.`); again(); })(); return; }
             const pi = b => Number(t.closest(`[${b}]`)?.getAttribute(b));
-            if (t.closest('[data-cfg-papply]')) { const x = profiles()[pi('data-cfg-papply')]; if (!x || !confirm(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`)) return; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return; }
-            if (t.closest('[data-cfg-pupdate]')) { const list = profiles(), i = pi('data-cfg-pupdate'); if (!list[i] || !confirm(`Remplacer « ${list[i].name} » par les réglages actuels ?`)) return; list[i] = {...list[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(list); toast('Mis à jour.'); again(); return; }
+            if (t.closest('[data-cfg-papply]')) { const x = profiles()[pi('data-cfg-papply')]; if (!x || !await A().confirmBox(`Appliquer les réglages « ${x.name} » ?\n\nLes réglages actuels de l’Atelier seront remplacés (enregistre-les avant si tu veux les garder). Tes projets ne changent pas.`, {title: 'Appliquer des réglages', okLabel: 'Appliquer les réglages'})) return; applyCfg(x.settings); toast(`Réglages « ${x.name} » appliqués.`); again(); return; }
+            if (t.closest('[data-cfg-pupdate]')) { const list = profiles(), i = pi('data-cfg-pupdate'); if (!list[i] || !await A().confirmBox(`Remplacer « ${list[i].name} » par les réglages actuels ?`, {title: 'Mettre à jour les réglages', okLabel: 'Remplacer'})) return; list[i] = {...list[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(list); toast('Mis à jour.'); again(); return; }
             if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; A().askText({title: 'Renommer', message: 'Nouveau nom :', value: list[i].name, okLabel: 'Renommer'}).then(n => { if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); }); return; }
             if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); toast('Fichier prêt.'); } return; }
-            if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !confirm(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`)) return; list.splice(i, 1); saveProfiles(list); again(); return; }
+            if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !await A().confirmBox(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`, {title: 'Supprimer les réglages', okLabel: 'Supprimer les réglages'})) return; list.splice(i, 1); saveProfiles(list); again(); return; }
             if (t.closest('[data-cfg-reset]')) return resetSections(['nav', 'types', 'folders', 'plans']);
         }, {signal: ws._cfgCtl.signal});
 
@@ -1185,7 +1185,7 @@
          * Remet une ou plusieurs parties comme au départ (ordre, noms, émojis, masqués de l'app). S'il y a des éléments créés à la main
          * (vues, sortes, plans), on demande : les garder (mis à la fin, juste avant la Corbeille pour le menu) ou les supprimer.
          */
-        function resetSections(secs) {
+        async function resetSections(secs) {
             const NAMES = {nav: 'le menu de gauche', types: 'les sortes d’éléments', folders: 'les émojis des dossiers', plans: 'les plans de départ'};
             const KIND = {nav: 'vue', types: 'sorte d’élément', plans: 'plan'};
             const builtinKeys = {nav: NAV_BUILTIN.map(x => x[0]), types: Object.keys(TYPES), plans: Object.keys(PLANS)};
@@ -1205,7 +1205,7 @@
                 toast(keep && mine.length ? `Remis comme au départ ; ${plural(mine.length, 'élément à toi gardé', 'éléments à toi gardés')} à la fin.` : 'Remis comme au départ.');
                 again();
             };
-            if (!mine.length) { if (confirm(`Remettre ${what} comme au départ ?`)) doIt(false); return; }
+            if (!mine.length) { if (await A().confirmBox(`Remettre ${what} comme au départ ?`, {title: 'Comme au départ', okLabel: 'Remettre comme au départ', danger: true})) doIt(false); return; }
             dialog({eyebrow: 'RÉINITIALISER', title: `Remettre ${what} comme au départ`, submitLabel: 'Garder mes éléments (mis à la fin)',
                 body: `<p>Les réglages de l’app reviennent comme au départ : ordre, noms, émojis, éléments masqués.</p>
                     <p>Tu as aussi créé toi-même :</p><ul class="h-cfg-mine">${mine.map(({sec, x}) => `<li>${esc(x.icon || '')} <b>${esc(x.label)}</b> <small class="muted">(${KIND[sec]})</small></li>`).join('')}</ul>

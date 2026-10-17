@@ -14,6 +14,7 @@
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
     const fmt = n => Number(n || 0).toLocaleString('fr-FR');
+    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const mediaUrl = f => `media/${encodeURIComponent(f)}`;
 
     /* ═════════ Le modèle : bibliothèque et poids, vérifiés par leur empreinte (SRI) ═════════ */
@@ -100,8 +101,8 @@
         async function reload() { idx = await api('faces_index'); R = analyse(idx); draw(); }
         function draw() {
             const M = media(), toScan = idx.media.filter(m => !m.scanned).length;
-            $('[data-fc-stat]').innerHTML = `${fmt(idx.media.length)} photo(s) · ${fmt(idx.media.length - toScan)} analysée(s) · ${fmt(idx.prints.length)} visage(s) · <b>${fmt(R.known.length)}</b> identifié(s), ${fmt(R.byPerson.size)} personne(s) connue(s)`;
-            $('[data-fc-scan]').textContent = toScan ? `🔍 Analyser ${fmt(toScan)} nouvelle(s) photo(s)` : '🔍 Rien de nouveau à analyser'; $('[data-fc-scan]').disabled = busy || !toScan;
+            $('[data-fc-stat]').innerHTML = `${plural(idx.media.length, 'photo', 'photos')} · ${plural(idx.media.length - toScan, 'analysée', 'analysées')} · ${plural(idx.prints.length, 'visage', 'visages')} · <b>${fmt(R.known.length)}</b> ${R.known.length > 1 ? 'identifiés' : 'identifié'}, ${plural(R.byPerson.size, 'personne connue', 'personnes connues')}`;
+            $('[data-fc-scan]').textContent = toScan ? `🔍 Analyser ${plural(toScan, 'nouvelle photo', 'nouvelles photos')}` : '🔍 Rien de nouveau à analyser'; $('[data-fc-scan]').disabled = busy || !toScan;
             const tabs = [['props', `💡 Propositions (${R.props.length})`], ['groups', `👥 Inconnus regroupés (${R.groups.filter(g => g.length > 1).length})`], ['alone', `❔ Autres inconnus (${R.groups.filter(g => g.length === 1).length})`], ['known', `✓ Identifiés (${R.byPerson.size})`]];
             $('[data-fc-tabs]').innerHTML = tabs.map(([k, l]) => `<button type="button" class="${k === tab ? 'active' : ''}" data-fc-tab="${k}">${esc(l)}</button>`).join('');
             const pane = $('[data-fc-pane]');
@@ -113,7 +114,7 @@
             if (tab === 'groups' || tab === 'alone') { const gs = R.groups.map((g, i) => [g, i]).filter(([g]) => tab === 'groups' ? g.length > 1 : g.length === 1);
                 pane.innerHTML = gs.length ? `<div class="${tab === 'alone' ? 'h-faces-grid is-small' : 'h-faces-groups'}">${gs.slice(0, 120).map(([g, i]) => `<article class="h-face-group" data-fc-g="${i}"><div class="h-face-row">${g.slice(0, 12).map(f => crop(f, M, 64)).join('')}${g.length > 12 ? `<span class="muted">+${g.length - 12}</span>` : ''}</div>
                     <p>${g.length > 1 ? `<b>${g.length} visages</b> qui se ressemblent, sur ${new Set(g.map(f => f.media_id)).size} photos. ` : ''}Qui est-ce ?</p><div class="h-face-act"><button type="button" class="button small" data-fc-name>Nommer…</button><button type="button" class="button small secondary" data-fc-gign>Ignorer</button></div></article>`).join('')}</div>` : '<p class="muted">Rien ici.</p>'; }
-            if (tab === 'known') pane.innerHTML = R.byPerson.size ? `<div class="h-faces-groups">${[...R.byPerson.values()].sort((a, b) => b.faces.length - a.faces.length).map(P => `<article class="h-face-group"><p><button type="button" class="table-link" data-h-person="${P.id}">${esc(P.name)}</button> <small class="muted">${P.faces.length} visage(s)</small></p><div class="h-face-row">${P.faces.slice(0, 14).map(f => crop(f, M, 56)).join('')}</div></article>`).join('')}</div>` : '<p class="muted">Personne n’est encore identifié.</p>';
+            if (tab === 'known') pane.innerHTML = R.byPerson.size ? `<div class="h-faces-groups">${[...R.byPerson.values()].sort((a, b) => b.faces.length - a.faces.length).map(P => `<article class="h-face-group"><p><button type="button" class="table-link" data-h-person="${P.id}">${esc(P.name)}</button> <small class="muted">${plural(P.faces.length, 'visage', 'visages')}</small></p><div class="h-face-row">${P.faces.slice(0, 14).map(f => crop(f, M, 56)).join('')}</div></article>`).join('')}</div>` : '<p class="muted">Personne n’est encore identifié.</p>';
         }
         const pickPerson = title => new Promise(res => { let done = false;
             ext.openDialog({eyebrow: 'QUI EST QUI ?', title, submitLabel: 'Choisir', body: `<label>Personne${A().collectionPersonField('fp_person', null, 'Nom, prénom…')}</label><label>Certitude<select name="conf"><option value="probable">Probable</option><option value="certain">Certaine</option><option value="possible">Possible</option></select></label>`,
@@ -127,14 +128,14 @@
                 if (e.target.closest('[data-fc-yes]') && p) { await identify([p.face], p.person, p.sure ? 'probable' : 'possible'); toast(`Identifié : ${p.person.name}.`); await reload(); }
                 else if (e.target.closest('[data-fc-other]') && p) { const who = await pickPerson('Qui est-ce ?'); if (who) { await identify([p.face], who, who.conf); await reload(); } }
                 else if (e.target.closest('[data-fc-ign]') && p) { await post('face_ignore', {id: p.face.id}); await reload(); }
-                else if (e.target.closest('[data-fc-acceptall]')) { const sure = R.props.filter(x => x.sure); if (!confirm(`Identifier ${sure.length} visage(s) d’après les propositions très probables ? (certitude « probable », modifiable ensuite)`)) return; for (const x of sure) await identify([x.face], x.person, 'probable'); toast(`${sure.length} visage(s) identifié(s).`); await reload(); }
-                else if (e.target.closest('[data-fc-name]')) { const g = R.groups[Number(e.target.closest('[data-fc-g]').dataset.fcG)]; const who = await pickPerson(g.length > 1 ? `Qui est-ce ? (${g.length} visages)` : 'Qui est-ce ?'); if (who) { await identify(g, who, who.conf); toast(`${g.length} visage(s) : ${who.name}.`); await reload(); } }
+                else if (e.target.closest('[data-fc-acceptall]')) { const sure = R.props.filter(x => x.sure); if (!await A().confirmBox(`Identifier ${plural(sure.length, 'visage', 'visages')} d’après les propositions très probables ? (certitude « probable », modifiable ensuite)`, {title: 'Identifier les visages', okLabel: 'Identifier'})) return; for (const x of sure) await identify([x.face], x.person, 'probable'); toast(`${plural(sure.length, 'visage identifié', 'visages identifiés')}.`); await reload(); }
+                else if (e.target.closest('[data-fc-name]')) { const g = R.groups[Number(e.target.closest('[data-fc-g]').dataset.fcG)]; const who = await pickPerson(g.length > 1 ? `Qui est-ce ? (${g.length} visages)` : 'Qui est-ce ?'); if (who) { await identify(g, who, who.conf); toast(`${plural(g.length, 'visage', 'visages')} : ${who.name}.`); await reload(); } }
                 else if (e.target.closest('[data-fc-gign]')) { const g = R.groups[Number(e.target.closest('[data-fc-g]').dataset.fcG)]; for (const f of g) await post('face_ignore', {id: f.id}); await reload(); }
             } catch (err) { toast(err.message, 'error'); }
         });
         async function scan(all) {
             const list = idx.media.filter(m => all || !m.scanned); if (!list.length) return;
-            if (all && !confirm(`Ré-analyser ${list.length} photo(s) ? (les identifications restent)`)) return;
+            if (all && !await A().confirmBox(`Ré-analyser ${plural(list.length, 'photo', 'photos')} ? (les identifications restent)`, {title: 'Ré-analyser les photos', okLabel: 'Ré-analyser'})) return;
             busy = true; stop = false; $('[data-fc-stop]').hidden = false; $('[data-fc-scan]').disabled = true; $('[data-fc-rescan]').disabled = true;
             const prog = $('[data-fc-prog]'); prog.hidden = false; const bar = prog.querySelector('span'), txt = prog.querySelector('small');
             try {
@@ -144,7 +145,7 @@
                     bar.style.width = `${(i / list.length * 100).toFixed(1)}%`; txt.textContent = `${i + 1} / ${list.length} · ${list[i].title || list[i].filename}`;
                     try { const r = await scanOne(F, list[i]); faces += r.length; await post('save_face_scan', {media_id: list[i].id, faces: r, model: MODEL}); } catch (_) {}
                 }
-                toast(`${stop ? 'Analyse arrêtée' : 'Analyse finie'} : ${faces} visage(s) trouvé(s).`);
+                toast(`${stop ? 'Analyse arrêtée' : 'Analyse finie'} : ${plural(faces, 'visage trouvé', 'visages trouvés')}.`);
             } catch (err) { toast(err.message, 'error'); }
             busy = false; prog.hidden = true; $('[data-fc-stop]').hidden = true; $('[data-fc-rescan]').disabled = false;
             await reload(); tab = R.props.length ? 'props' : 'groups'; draw();

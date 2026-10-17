@@ -70,7 +70,7 @@
                 return `<div class="h-atw-big" data-atw-clock>${hms(today)}</div><p class="muted">aujourd’hui · en tout <b data-atw-total>${hms((t.total || 0) + run)}</b></p>
                     <div class="h-atw-row"><button type="button" class="button small" data-atw-do="chrono-toggle">${t.start ? '⏸ Pause' : '▶ Démarrer'}</button><button type="button" class="button small secondary" data-atw-do="chrono-reset" title="Remettre aujourd’hui à zéro">↺</button></div>`; }
             case 'timer': { const t = timers()[w.id]; const left = t ? (t.paused ? t.left : t.end - Date.now()) : c.minutes * 60000;
-                return `<div class="h-atw-big ${t?.onBreak ? 'is-break' : ''}" data-atw-clock>${hms(Math.max(0, left))}</div>${t?.pomodoro || c.pomodoro ? `<p class="muted">${t?.onBreak ? '☕ pause' : '✍️ travail'} · ${t?.rounds || 0} séance(s) faite(s)</p>` : `<p class="muted">${c.minutes} min</p>`}
+                return `<div class="h-atw-big ${t?.onBreak ? 'is-break' : ''}" data-atw-clock>${hms(Math.max(0, left))}</div>${t?.pomodoro || c.pomodoro ? `<p class="muted">${t?.onBreak ? '☕ pause' : '✍️ travail'} · ${A().plural(t?.rounds || 0, 'séance faite', 'séances faites')}</p>` : `<p class="muted">${c.minutes} min</p>`}
                     <div class="h-atw-row"><button type="button" class="button small" data-atw-do="timer-toggle">${t && !t.paused && !t.rang ? '⏸ Pause' : '▶ Démarrer'}</button><button type="button" class="button small secondary" data-atw-do="timer-reset">↺</button>
                     ${[5, 15, 25, 45].map(m => `<button type="button" class="button small secondary" data-atw-min="${m}">${m}</button>`).join('')}</div>`; }
             case 'words': { const now = ctx.items.filter(i => i.type === 'draft').reduce((s, i) => s + words(i.data?.text), 0);
@@ -80,7 +80,7 @@
                     <p class="muted">${pct >= 100 ? '🎉 Objectif du jour atteint !' : `encore ${(c.goal - done).toLocaleString('fr-FR')} mots aujourd’hui`}${target ? ` · projet : ${now.toLocaleString('fr-FR')} / ${target.toLocaleString('fr-FR')}` : ''}</p>`; }
             case 'todo': { const lim = new Date(Date.now() + c.days * 864e5), limIso = `${lim.getFullYear()}-${pad(lim.getMonth() + 1)}-${pad(lim.getDate())}`;
                 const tasks = ctx.items.filter(i => i.type === 'task' && !Number(i.data?.done)), due = tasks.filter(i => i.data?.due && i.data.due <= limIso).sort((a, b) => a.data.due.localeCompare(b.data.due)), late = due.filter(i => i.data.due < todayIso()).length;
-                return `<div class="h-atw-big">${due.length} <small>tâche(s) avant le ${lim.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})}</small></div>${late ? `<p class="h-at-late">⏰ ${late} en retard</p>` : ''}
+                return `<div class="h-atw-big">${due.length} <small>${due.length > 1 ? 'tâches' : 'tâche'} avant le ${lim.toLocaleDateString('fr-FR', {day: 'numeric', month: 'long'})}</small></div>${late ? `<p class="h-at-late">⏰ ${late} en retard</p>` : ''}
                     <ul class="h-atw-list">${due.slice(0, 8).map(i => `<li><button type="button" class="link-button" data-atw-item="${i.id}">${esc(i.title)}</button> <small class="muted">${dateFr(i.data.due)}</small></li>`).join('')}</ul>${tasks.length > due.length ? `<p class="muted">+ ${tasks.length - due.length} sans échéance ou plus tard</p>` : ''}`; }
             case 'reminders': case 'agenda': { const a = await agenda(), end = new Date(Date.now() + c.days * 864e5), endIso = `${end.getFullYear()}-${pad(end.getMonth() + 1)}-${pad(end.getDate())}`, t0 = todayIso();
                 let rows = a.items.filter(it => w.type === 'reminders' ? it.src === 'reminder' : (c.pins.includes(it.src + ':' + it.id) || (c.srcs.includes(it.src) && (!c.word || (it.title + ' ' + it.sub).toLowerCase().includes(c.word.toLowerCase())))));
@@ -135,13 +135,13 @@
             for (const w of list) { const b = box.querySelector(`[data-atw="${w.id}"] [data-atw-body]`); try { b.innerHTML = await widgetBody(w, ctx); } catch (e) { b.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }
         };
         await draw();
-        box.addEventListener('click', e => {
+        box.addEventListener('click', async e => {
             const sec = e.target.closest('[data-atw]'), w = sec ? list.find(x => x.id === sec.dataset.atw) : null;
             if (e.target.closest('[data-atw-add]')) return ext.openDialog({eyebrow: 'WIDGETS DU PROJET', title: 'Ajouter un widget', submitLabel: 'Fermer', body: `<div class="h-at-exports">${Object.entries(TYPES).map(([k, [ic, l, h]]) => `<button type="button" class="button secondary" data-atw-new="${k}">${ic} ${esc(l)}<small>${esc(h)}</small></button>`).join('')}</div>`,
                 onOpen: d => d.querySelectorAll('[data-atw-new]').forEach(b => b.addEventListener('click', () => { const nw = {id: uid(), type: b.dataset.atwNew, cfg: {}}; list.push(nw); save(); d.close(); draw(); if (['dash', 'agenda'].includes(nw.type)) settingsDialog(nw, () => { save(); draw(); }, ctx); })), onSubmit: () => true});
             if (!w) { const it = e.target.closest('[data-atw-item]'); return; }
             const mv = e.target.closest('[data-atw-move]'); if (mv) { const i = list.indexOf(w), j = i + Number(mv.dataset.atwMove); if (j >= 0 && j < list.length) { [list[i], list[j]] = [list[j], list[i]]; save(); draw(); } return; }
-            if (e.target.closest('[data-atw-del]')) { if (confirm('Retirer ce widget ?')) { list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); } return; }
+            if (e.target.closest('[data-atw-del]')) { if (await A().confirmBox('Retirer ce widget ?', {title: 'Retirer le widget', okLabel: 'Retirer'})) { list = list.filter(x => x !== w); setTimer(w.id, null); save(); draw(); } return; }
             if (e.target.closest('[data-atw-cfg]')) return settingsDialog(w, () => { save(); draw(); }, ctx);
             const item = e.target.closest('[data-atw-item]'); if (item) return ctx.openItem?.(Number(item.dataset.atwItem));
             const ag = e.target.closest('[data-atw-agenda]'); if (ag) { const [src, id] = ag.dataset.atwAgenda.split(':'); const it = agendaCache.data?.items.find(x => x.src === src && String(x.id) === id); if (it) ext.lists?.my_calendar_open?.(it); return; }
@@ -150,7 +150,7 @@
                 const c = {...DEFAULT_CFG[w.type], ...(w.cfg || {})}, a = doBtn?.dataset.atwDo;
                 if (a === 'chrono-toggle') { const t = timers()[w.id] || {kind: 'chrono', total: 0, today: 0, day: todayIso()}; if (t.day !== todayIso()) Object.assign(t, {day: todayIso(), today: 0});
                     if (t.start) { const run = Date.now() - t.start; t.total = (t.total || 0) + run; t.today = (t.today || 0) + run; t.start = 0; } else t.start = Date.now(); setTimer(w.id, t); }
-                if (a === 'chrono-reset') { const t = timers()[w.id]; if (t && confirm('Remettre le temps d’aujourd’hui à zéro ? (le total reste)')) { Object.assign(t, {today: 0, start: t.start ? Date.now() : 0, day: todayIso()}); setTimer(w.id, t); } }
+                if (a === 'chrono-reset') { const t = timers()[w.id]; if (t && await A().confirmBox('Remettre le temps d’aujourd’hui à zéro ? (le total reste)', {title: 'Remettre à zéro', okLabel: 'Remettre à zéro'})) { Object.assign(t, {today: 0, start: t.start ? Date.now() : 0, day: todayIso()}); setTimer(w.id, t); } }
                 if (min) { w.cfg = {...c, minutes: Number(min.dataset.atwMin)}; save(); setTimer(w.id, null); }
                 if (a === 'timer-toggle') { let t = timers()[w.id];
                     if (!t || t.rang) { t = {kind: 'timer', minutes: c.minutes, pomodoro: c.pomodoro, end: Date.now() + c.minutes * 60000}; try { if (window.Notification && Notification.permission === 'default') Notification.requestPermission(); } catch (_) {} }

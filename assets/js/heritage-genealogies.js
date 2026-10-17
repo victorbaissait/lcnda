@@ -7,6 +7,8 @@
     'use strict';
     const esc = v => String(v ?? '').replace(/[&<>'"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'}[c]));
     const toast = (msg, type) => window.LCNDA_APP?.toast ? window.LCNDA_APP.toast(msg, type) : alert(msg);
+    // Confirmation au style de l'app ; confirm() du navigateur seulement si l'app n'est pas chargée
+    const ask = (msg, o) => window.LCNDA_APP?.confirmBox ? window.LCNDA_APP.confirmBox(msg, o) : Promise.resolve(confirm(msg));
     // fonctionne aussi sur l'écran d'installation, où l'app n'est pas démarrée
     async function call(action, body = null) {
         const csrf = window.LCNDA_APP?.state?.csrf || window.INSTALL_CSRF || '';
@@ -54,7 +56,7 @@
                 return;
             }
             if (e.target.closest('[data-aside]')) {
-                if (!confirm(`Mettre de côté « ${g.name} » ? Elle disparaît de la liste ; son dossier est gardé (genealogies/_mises-de-cote) et rien n’est effacé.`)) return;
+                if (!await ask(`Mettre de côté « ${g.name} » ? Elle disparaît de la liste ; son dossier est gardé (genealogies/_mises-de-cote) et rien n’est effacé.`, {title: 'Mettre de côté', okLabel: 'Mettre de côté', danger: false})) return;
                 try { await call('genealogy_remove', {id}); dl.close(); dialog(); toast('Généalogie mise de côté.'); } catch (err) { toast(err.message, 'error'); }
             }
         });

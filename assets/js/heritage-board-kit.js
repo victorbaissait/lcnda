@@ -582,10 +582,10 @@
                 ext.openDialog({eyebrow: 'RÉGLAGES DES TABLEAUX', title: 'Enregistrer sous un nom', submitLabel: 'Enregistrer',
                     body: `<div class="form-grid"><label class="span-2">Nom de ces réglages<input name="name" maxlength="60" required value="${esc(cur || 'Mes réglages')}" list="h-bp-setnames"><datalist id="h-bp-setnames">${l0.map(x => `<option value="${esc(x.name)}">`).join('')}</datalist></label>
                         <p class="muted span-2">Tout ce qui est réglé ici est gardé : couleurs et palettes, pointes, formes (et tes formes), polices, tailles et arrondi, tableur, pinceaux, ordre des menus. Un nom déjà pris remplace ses réglages.</p></div>`,
-                    onSubmit: form => {
+                    onSubmit: async form => {
                         const name = form.elements.name.value.trim().slice(0, 60); if (!name) return false;
                         const l = sets(), at = l.findIndex(x => x.name === name);
-                        if (at >= 0 && !confirm(`Remplacer les réglages « ${name} » déjà enregistrés ?`)) return false;
+                        if (at >= 0 && !await A().confirmBox(`Remplacer les réglages « ${name} » déjà enregistrés ?`, {title: 'Réglages déjà enregistrés', okLabel: 'Remplacer'})) return false;
                         const item = {name, prefs: clean(p), saved_at: new Date().toISOString()};
                         if (at >= 0) l[at] = item; else l.push(item);
                         if (!saveSets(l)) return false;
@@ -596,18 +596,18 @@
             if (e.target.closest('[data-bp-setapply]')) {
                 const n = ws.querySelector('[data-bp-set]').value, it = sets()[Number(n)];
                 if (n === '' || !it) { toast('Choisis d’abord des réglages enregistrés.', 'error'); return; }
-                if (!confirm(`Reprendre les réglages « ${it.name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).`)) return;
+                if (!await A().confirmBox(`Reprendre les réglages « ${it.name} » ? Les réglages actuels sont remplacés (enregistre-les d’abord sous un nom si tu veux les garder).`, {title: 'Reprendre ces réglages', okLabel: 'Reprendre les réglages'})) return;
                 p = clean(it.prefs); savePrefs(p); draw(); toast(`Réglages « ${it.name} » appliqués.`);
                 return;
             }
             if (e.target.closest('[data-bp-setdel]')) {
                 const n = ws.querySelector('[data-bp-set]').value, l = sets(), it = l[Number(n)];
                 if (n === '' || !it) { toast('Choisis d’abord les réglages à supprimer.', 'error'); return; }
-                if (!confirm(`Supprimer les réglages enregistrés « ${it.name} » ? (les réglages en cours ne changent pas)`)) return;
+                if (!await A().confirmBox(`Supprimer les réglages enregistrés « ${it.name} » ? (les réglages en cours ne changent pas)`, {title: 'Supprimer les réglages', okLabel: 'Supprimer les réglages'})) return;
                 l.splice(Number(n), 1); if (saveSets(l)) { collect(); draw(); toast(`« ${it.name} » supprimé.`); }
                 return;
             }
-            if (e.target.closest('[data-bp-reset]')) { if (!confirm('Revenir aux réglages d’origine des tableaux ? Tes palettes, formes, listes de polices et pinceaux à toi seront retirés.')) return; p = DEFAULTS(); savePrefs(p); draw(); toast('Réglages d’origine remis.'); return; }
+            if (e.target.closest('[data-bp-reset]')) { if (!await A().confirmBox('Revenir aux réglages d’origine des tableaux ? Tes palettes, formes, listes de polices et pinceaux à toi seront retirés.', {title: 'Réglages d’origine', okLabel: 'Revenir aux réglages d’origine', danger: true})) return; p = DEFAULTS(); savePrefs(p); draw(); toast('Réglages d’origine remis.'); return; }
             // couleurs
             const box = e.target.closest('[data-bp-colors]');
             if (box) {
@@ -619,12 +619,12 @@
                 return;
             }
             if (e.target.closest('[data-bp-palnew], [data-bp-paldup]')) { collect(); const dup = !!e.target.closest('[data-bp-paldup]'); const n = {id: 'p' + Date.now().toString(36), name: dup ? pal().name + ' (copie)' : 'Ma palette', colors: JSON.parse(JSON.stringify(dup ? pal().colors : PALETTE0))}; p.palettes.push(n); p.palette = n.id; draw(); return; }
-            if (e.target.closest('[data-bp-paldel]')) { if (!confirm(`Supprimer la palette « ${pal().name} » ?`)) return; p.palettes = p.palettes.filter(x => x.id !== p.palette); p.palette = p.palettes[0].id; draw(); return; }
+            if (e.target.closest('[data-bp-paldel]')) { if (!await A().confirmBox(`Supprimer la palette « ${pal().name} » ?`, {title: 'Supprimer la palette', okLabel: 'Supprimer la palette'})) return; p.palettes = p.palettes.filter(x => x.id !== p.palette); p.palette = p.palettes[0].id; draw(); return; }
             // formes
             const sh = e.target.closest('.h-bp-shape');
             if (sh && e.target.closest('[data-bp-shtoggle]')) { collect(); const k = sh.dataset.k; p.shapesHidden = p.shapesHidden.includes(k) ? p.shapesHidden.filter(x => x !== k) : [...p.shapesHidden, k]; draw(); return; }
             if (e.target.closest('[data-bp-hnew]')) { collect(); headMaker(p, h => { p.customHeads.push(h); p.heads.push(h.k); draw(); toast(`Pointe « ${h.n} » créée : elle est dans la liste (n’oublie pas « Enregistrer »).`); }); return; }
-            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { if (!confirm('Supprimer cette pointe ? (les traits qui l’utilisent prennent un triangle)')) return; collect(); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
+            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { if (!await A().confirmBox('Supprimer cette pointe ? (les traits qui l’utilisent prennent un triangle)', {title: 'Supprimer la pointe', okLabel: 'Supprimer la pointe'})) return; collect(); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
             if (sh && e.target.closest('[data-bp-shquick]')) { collect(); const nm = shapeByKey(sh.dataset.k, p)?.n || 'La forme'; if (p.quickShapes.includes(sh.dataset.k)) { toast(`⚡ « ${nm} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer).`); return; } p.quickShapes.push(sh.dataset.k); draw(); toast(`⚡ « ${nm} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ».`); return; }
             if (sh && e.target.closest('[data-bp-qleft], [data-bp-qright]')) { const sib = e.target.closest('[data-bp-qleft]') ? sh.previousElementSibling : sh.nextElementSibling; if (sib) sh.parentNode.insertBefore(...(e.target.closest('[data-bp-qleft]') ? [sh, sib] : [sib, sh])); return; }
             const vecDone = k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { const i = p.customShapes.findIndex(x => x.k === k); if (i >= 0) p.customShapes[i] = made; else p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); };
@@ -632,11 +632,11 @@
             if (sh && e.target.closest('[data-bp-shvec]')) { collect(); const s0 = shapeByKey(sh.dataset.k, p); if (s0) ext.openVectorEditor?.({shape: {...s0, d: s0.s && s0.s !== 100 ? s0.d : s0.d}, onShape: vecDone}); return; }
             if (sh && e.target.closest('[data-bp-shfrom]')) { collect(); openComposer({base: sh.dataset.k, onSave: k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); }}); return; }
             if (sh && e.target.closest('[data-bp-unquick]')) { collect(); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
-            if (sh && e.target.closest('[data-bp-shdel]')) { if (!confirm('Supprimer cette forme ? (les tableaux qui l’utilisent la gardent)')) return; collect(); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
+            if (sh && e.target.closest('[data-bp-shdel]')) { if (!await A().confirmBox('Supprimer cette forme ? (les tableaux qui l’utilisent la gardent)', {title: 'Supprimer la forme', okLabel: 'Supprimer la forme'})) return; collect(); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
             // polices
             if (e.target.closest('[data-bp-flnew]')) { collect(); p.fontLists.push({name: 'Ma liste', fonts: []}); draw(); return; }
             const fl = e.target.closest('[data-fl]');
-            if (fl && e.target.closest('[data-bp-fldel]')) { if (!confirm('Supprimer cette liste de polices ?')) return; collect(); p.fontLists.splice(Number(fl.dataset.fl), 1); draw(); return; }
+            if (fl && e.target.closest('[data-bp-fldel]')) { if (!await A().confirmBox('Supprimer cette liste de polices ?', {title: 'Supprimer la liste de polices', okLabel: 'Supprimer la liste'})) return; collect(); p.fontLists.splice(Number(fl.dataset.fl), 1); draw(); return; }
             if (fl && e.target.closest('[data-bp-fdel]')) { collect(); p.fontLists[Number(fl.dataset.fl)].fonts.splice(Number(e.target.closest('[data-j]').dataset.j), 1); draw(); return; }
             if (fl && e.target.closest('[data-bp-fadd]')) { const v = fl.querySelector('[data-bp-fname]').value.trim(); if (!v) return; collect(); const l = p.fontLists[Number(fl.dataset.fl)]; if (!l.fonts.includes(v)) l.fonts.push(v); draw(); return; }
             if (e.target.closest('[data-bp-local]')) {

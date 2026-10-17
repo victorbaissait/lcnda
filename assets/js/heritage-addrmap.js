@@ -232,7 +232,7 @@
         async function online() {
             const todo = D.addresses.filter(a => !a.point && a.street_status !== 'gone');
             if (!todo.length) { toast('Toutes les adresses sont placées.'); return; }
-            if (!confirm(`Chercher en ligne ${plural(todo.length, 'adresse', 'adresses')} (service de l’IGN, Internet nécessaire) ?\n\nLes rues disparues ne seront pas trouvées : place-les à la main.`)) return;
+            if (!await A().confirmBox(`Chercher en ligne ${plural(todo.length, 'adresse', 'adresses')} (service de l’IGN, Internet nécessaire) ?\n\nLes rues disparues ne seront pas trouvées : place-les à la main.`, {title: 'Chercher en ligne', okLabel: 'Chercher en ligne'})) return;
             let ok = 0;
             for (const a of todo) {
                 const name = a.street_status === 'renamed' && a.current_name ? a.current_name : a.street;
@@ -272,9 +272,9 @@
                     const r = await post('save_addr_street', {insee: D.insee, ...f, path: cur?.path || []}); const o = r.result || r;
                     toast(`Rue enregistrée${o.placed ? ` · ${plural(o.placed, 'adresse replacée', 'adresses replacées')}` : ''}.`);
                     await reload();
-                    if (f.status === 'gone' && !(cur?.path || []).length && confirm('Tracer maintenant le parcours de cette rue disparue sur la carte ?')) startDraw(D.streets.find(s => s.old_name.toLowerCase() === f.old_name.toLowerCase()));
+                    if (f.status === 'gone' && !(cur?.path || []).length && await A().confirmBox('Tracer maintenant le parcours de cette rue disparue sur la carte ?', {title: 'Rue disparue', okLabel: 'Tracer le parcours', cancelLabel: 'Plus tard'})) startDraw(D.streets.find(s => s.old_name.toLowerCase() === f.old_name.toLowerCase()));
                 },
-                onDelete: cur ? async () => { if (!confirm(`Oublier « ${cur.old_name} » ?`)) return false; await post('save_addr_street', {insee: D.insee, old_name: cur.old_name, delete: 1}); await reload(); } : null,
+                onDelete: cur ? async () => { if (!await A().confirmBox(`Oublier « ${cur.old_name} » ?`, {title: 'Oublier cette rue', okLabel: 'Oublier la rue'})) return false; await post('save_addr_street', {insee: D.insee, old_name: cur.old_name, delete: 1}); await reload(); } : null,
             });
         }
         function startDraw(s) {

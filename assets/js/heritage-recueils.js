@@ -83,10 +83,10 @@
                         <span class="h-rc-meter" title="${pct} % des pages transcrites"><i style="width:${pct}%"></i></span>
                         <small>${plural(r.versions, 'version', 'versions')} · ${pct} % transcrit${r.links ? ` · 🔗 ${r.links}` : ''}${r.loose ? ` · <b class="h-rc-warn">${plural(r.loose, 'photo à ranger', 'photos à ranger')}</b>` : ''}</small></span>
                 </button>`; }).join('')}</div>`
-            : A().empty(s.q ? 'Aucun recueil ne correspond.' : 'Aucun recueil pour l’instant : clique sur « + Nouveau recueil », puis ajoute tes photos.')}
+            : (s.q ? A().emptyState({icon: '🔍', text: 'Aucun recueil ne correspond.'}) : A().emptyState({icon: '📚', text: 'Aucun recueil pour l’instant', hint: 'Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page.', action: {label: '＋ Nouveau recueil', attrs: 'data-rc-new'}}))}
         </section>`;
         const sec = ws.querySelector('.h-rc');
-        sec.querySelector('[data-rc-new]').addEventListener('click', () => recueilDialog(null));
+        sec.querySelectorAll('[data-rc-new]').forEach(b => b.addEventListener('click', () => recueilDialog(null)));
         let timer = 0;
         sec.querySelector('[data-rc-q]')?.addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); ext.lists.recueils(++S().workspaceToken).then(() => { const i = A().$('[data-rc-q]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }, 250); });
     };
@@ -109,12 +109,12 @@
                 ext.lists.recueils(++S().workspaceToken).then(() => { if (!r) addPhotosDialog(); });
             },
             onDelete: r ? async () => {
-                const keep = confirm(`Supprimer le recueil « ${r.title} » ?\n\nOK : supprimer le recueil (ses pages, transcriptions, versions).\nLes photos restent dans Médias.`);
+                const keep = await A().confirmBox(`Supprimer le recueil « ${r.title} » avec ses pages, transcriptions et versions ?\n\nLes photos restent dans Médias.`, {title: 'Supprimer le recueil', okLabel: 'Supprimer le recueil'});
                 if (!keep) return false;
-                const also = confirm('Supprimer aussi les photos qui ne servent nulle part ailleurs ?\n\nOK : oui, les supprimer · Annuler : les garder dans Médias');
+                const also = await A().confirmBox('Supprimer aussi les photos qui ne servent nulle part ailleurs ?\n\nSinon, elles restent dans Médias.', {title: 'Photos du recueil', okLabel: 'Supprimer aussi les photos', cancelLabel: 'Garder les photos', danger: true});
                 const res = await post('delete_recueil', {id: r.id, delete_media: also});
                 const out = res.result || res;
-                toast(also ? `Recueil supprimé (${out.media_deleted} photo(s) supprimée(s), ${out.media_kept} gardée(s) car utilisées ailleurs).` : 'Recueil supprimé : les photos sont toujours dans Médias.');
+                toast(also ? `Recueil supprimé (${plural(out.media_deleted, 'photo supprimée', 'photos supprimées')}, ${plural(out.media_kept, 'gardée', 'gardées')} car utilisées ailleurs).` : 'Recueil supprimé : les photos sont toujours dans Médias.');
                 Object.assign(st(), {id: 0, page: 0});
                 ext.lists.recueils(++S().workspaceToken);
             } : null,
@@ -182,7 +182,7 @@
                 <span class="segmented"><button type="button" class="${s.view !== 'table' ? 'is-active' : ''}" data-rc-view="grid">▦ Mosaïque</button><button type="button" class="${s.view === 'table' ? 'is-active' : ''}" data-rc-view="table">☰ Tableau</button></span>
                 <button type="button" class="button small secondary" data-rc-newpage>+ Page sans photo</button></div>
             ${ls.length || trays().length ? looseHtml(ls) : ''}
-            ${!D.pages.length ? A().empty('Pas encore de page : clique sur « + Ajouter des photos ». Chaque photo devient une page, dans l’ordre.') :
+            ${!D.pages.length ? A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: 'Chaque photo devient une page, dans l’ordre.', action: {label: '＋ Ajouter des photos', attrs: 'data-rc-add-empty'}}) :
             s.view === 'table' ? `<div class="data-table-wrap"><table class="data-table h-rc-table"><thead><tr><th>N°</th><th>Page</th>${D.versions.map(v => `<th>${esc(v.name)}</th>`).join('')}<th>Transcription</th></tr></thead><tbody>${pages.map(p => {
                 const imgs = pageImages(p.id);
                 return `<tr data-rc-row="${p.id}"><td>${p.num}</td><td><button type="button" class="table-link" data-rc-open="${p.id}">${esc(p.label || 'Page ' + p.num)}</button></td>${D.versions.map(v => `<td>${imgs.filter(i => i.version_id === v.id).map(i => `<button type="button" class="h-rc-thumb tiny ${i.id === p.shown_image_id ? 'is-best' : ''}" data-rc-open="${p.id}" data-rc-image="${i.id}" title="${i.role === 'detail' ? 'Détail' : 'Page'}${i.id === p.shown_image_id ? ' · image retenue' : ''}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy">${i.role === 'detail' ? '<em>🔍</em>' : ''}</button>`).join('') || '<span class="muted">—</span>'}</td>`).join('')}<td class="h-rc-excerpt">${esc(excerpt(p.transcription)) || '<span class="muted">—</span>'}</td></tr>`; }).join('')}</tbody></table></div>`
@@ -191,6 +191,7 @@
         body.querySelector('[data-rc-q2]').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); paintPages(body); const i = body.querySelector('[data-rc-q2]'); i.focus(); i.setSelectionRange(i.value.length, i.value.length); }, 250); });
         body.querySelectorAll('[data-rc-view]').forEach(b => b.addEventListener('click', () => { s.view = b.dataset.rcView; paintPages(body); }));
         body.querySelector('[data-rc-newpage]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id}); if (r) { s.page = r.id; paint(); } });
+        body.querySelector('[data-rc-add-empty]')?.addEventListener('click', () => addPhotosDialog());
         body.querySelectorAll('[data-rc-page],[data-rc-open]').forEach(b => b.addEventListener('click', () => { s.page = Number(b.dataset.rcPage || b.dataset.rcOpen); s.image = Number(b.dataset.rcImage || 0); s.compare = 0; paint(); }));
         body.querySelectorAll('[data-rc-zoom]').forEach(b => b.addEventListener('click', () => openViewer([imgById(b.dataset.rcZoom)], 0)));
         bindLoose(body);
@@ -294,7 +295,7 @@
         box.querySelector('[data-rc-pickall]')?.addEventListener('click', () => { const ids = loose().map(i => i.id); if (ids.some(id => picked().has(id))) picked().clear(); else ids.forEach(id => picked().add(id)); paint(); });
         box.querySelectorAll('[data-rc-trayren]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const from = b.dataset.rcTrayren, to = await askTrayName('Nouveau nom du dossier :', from); if (!to || to === from) return;
             openTrays()[to] = openTrays()[from]; await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().map(t => t === from ? to : t), rename: {from, to}}, 'Dossier renommé.'); }));
-        box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!confirm(`Supprimer le dossier « ${name} » ?\n\nSes photos restent « à ranger », sans dossier.`)) return;
+        box.querySelectorAll('[data-rc-traydel]').forEach(b => b.addEventListener('click', async e => { e.preventDefault(); const name = b.dataset.rcTraydel; if (!await A().confirmBox(`Supprimer le dossier « ${name} » ?\n\nSes photos restent « à ranger », sans dossier.`, {title: 'Supprimer le dossier', okLabel: 'Supprimer le dossier'})) return;
             await run('save_recueil_trays', {recueil_id: D.recueil.id, trays: trays().filter(t => t !== name)}, 'Dossier supprimé.'); }));
         const saveOrder = list => run('save_recueil_trays', {recueil_id: D.recueil.id, trays: list});
         box.querySelectorAll('[data-rc-traymove]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const name = b.closest('[data-rc-tray]').dataset.rcTray, list = [...trays()], i = list.indexOf(name), j = i + Number(b.dataset.rcTraymove);
@@ -329,13 +330,13 @@
         const prev = D.pages[idx - 1], next = D.pages[idx + 1];
         const stage = i => i ? `<figure class="h-rc-figure"><img src="${esc(fullUrl(i))}" alt="" data-rc-zoom="${i.id}" title="Cliquer : agrandir, pivoter, retoucher"><figcaption>${esc(versionById(i.version_id)?.name || '')}${i.role === 'detail' ? ' · 🔍 détail' : ''}${i.id === p.best_image_id ? ' · ⭐ retenue' : i.id === p.shown_image_id ? ' · montrée (la plus récente)' : ''}</figcaption></figure>` : '';
         body.innerHTML = `<div class="h-rc-pagebar"><button type="button" class="button small secondary" data-rc-allpages>▦ Toutes les pages</button>
-                <span class="h-rc-pagenav"><button type="button" class="button small secondary" data-rc-go="${prev?.id || ''}" ${prev ? '' : 'disabled'} title="Page précédente (Alt + ←)">‹</button>
+                <span class="h-rc-pagenav"><button type="button" class="button small secondary" data-rc-go="${prev?.id || ''}" ${prev ? '' : 'disabled'} title="Page précédente" data-shortcut="⌥←">‹</button>
                 <select data-rc-jump>${D.pages.map(x => `<option value="${x.id}" ${x.id === p.id ? 'selected' : ''}>${esc(pageName(x))}</option>`).join('')}</select>
-                <button type="button" class="button small secondary" data-rc-go="${next?.id || ''}" ${next ? '' : 'disabled'} title="Page suivante (Alt + →)">›</button></span>
+                <button type="button" class="button small secondary" data-rc-go="${next?.id || ''}" ${next ? '' : 'disabled'} title="Page suivante" data-shortcut="⌥→">›</button></span>
                 <span class="muted">${p.num} / ${D.pages.length}</span></div>
             <div class="h-rc-pageview">
                 <div class="h-rc-stage-wrap">
-                    <div class="h-rc-stage ${cmp ? 'is-compare' : ''}">${imgs.length > 1 && !cmp && cur ? `<button type="button" class="h-rc-imgnav is-prev" data-rc-imgstep="-1" title="Image précédente de cette page (←)">‹</button><button type="button" class="h-rc-imgnav is-next" data-rc-imgstep="1" title="Image suivante de cette page (→)">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}${cur ? stage(cur) + (cmp ? stage(cmp) : '') : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-rc-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
+                    <div class="h-rc-stage ${cmp ? 'is-compare' : ''}">${imgs.length > 1 && !cmp && cur ? `<button type="button" class="h-rc-imgnav is-prev" data-rc-imgstep="-1" title="Image précédente de cette page" data-shortcut="←">‹</button><button type="button" class="h-rc-imgnav is-next" data-rc-imgstep="1" title="Image suivante de cette page" data-shortcut="→">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}${cur ? stage(cur) + (cmp ? stage(cmp) : '') : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-rc-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
                     ${cur ? `<div class="h-rc-imgactions">
                         ${p.best_image_id === cur.id ? '<span class="h-rc-kept">⭐ Image retenue pour cette page</span>' : `<button type="button" class="button small" data-rc-best="${cur.id}" title="C’est elle qu’on voit dans la mosaïque, le résumé et les fiches">⭐ Garder celle-ci</button>`}
                         <button type="button" class="button small secondary" data-rc-zoom="${cur.id}">🔍 Agrandir, pivoter, retoucher</button>
@@ -381,7 +382,7 @@
         }}));
         body.querySelector('[data-rc-role]')?.addEventListener('click', () => run('update_recueil_image', {id: cur.id, role: cur.role === 'detail' ? 'page' : 'detail'}));
         body.querySelector('[data-rc-moveimg]')?.addEventListener('change', async e => { const t = await pageTarget(e.target.value); if (!t || t.page_id === p.id) { e.target.value = String(p.id); return; } const r = await run('update_recueil_image', {id: cur.id, ...t}, t.page_id === 0 ? 'Photo mise « à ranger ».' : 'Photo déplacée.'); if (r) { s.image = 0; paint(); } });
-        body.querySelector('[data-rc-remove]')?.addEventListener('click', () => { if (confirm('Retirer cette photo du recueil ? Elle reste dans Médias.')) { s.image = 0; run('remove_recueil_image', {id: cur.id}, 'Photo retirée du recueil.'); } });
+        body.querySelector('[data-rc-remove]')?.addEventListener('click', async () => { if (await A().confirmBox('Retirer cette photo du recueil ? Elle reste dans Médias.', {title: 'Retirer la photo', okLabel: 'Retirer la photo'})) { s.image = 0; run('remove_recueil_image', {id: cur.id}, 'Photo retirée du recueil.'); } });
         body.querySelectorAll('[data-rc-addhere]').forEach(b => b.addEventListener('click', () => addPhotosDialog({pageId: p.id})));
         body.querySelectorAll('[data-rc-pagemove]').forEach(b => b.addEventListener('click', () => run('save_recueil_page', {id: p.id, move: Number(b.dataset.rcPagemove)})));
         const stepImg = d => { if (imgs.length < 2 || !cur) return; const i = imgs.indexOf(cur); s.image = imgs[(i + d + imgs.length) % imgs.length].id; s.compare = 0; paint(); };
@@ -391,7 +392,7 @@
         const ownersBox = body.querySelector('[data-rc-owners]');
         if (ownersBox && cur) get('recueil_media_owners', {media_id: cur.media_id}).then(r => { if (!ownersBox.isConnected) return; const o = r.owners || []; ownersBox.innerHTML = o.length ? `🔗 Cette image est aussi : ${o.map(x => `<span class="h-rc-chip">${esc(x.label)}${x.name ? ' · ' + esc(x.name) : ''}</span>`).join(' ')}` : ''; }).catch(() => {});
         body.querySelector('[data-rc-insert]').addEventListener('click', async () => { const r = await run('save_recueil_page', {recueil_id: D.recueil.id, after: p.id}); if (r) go(r.id); });
-        body.querySelector('[data-rc-delpage]').addEventListener('click', async () => { if (!confirm(`Supprimer la ${pageName(p)} ?${imgs.length ? `\n\nSes ${imgs.length} photo(s) passent « à ranger ».` : ''}${p.transcription.trim() ? '\n\nSa transcription sera perdue.' : ''}`)) return; s.page = (next || prev)?.id || 0; await run('delete_recueil_page', {id: p.id}, 'Page supprimée.'); });
+        body.querySelector('[data-rc-delpage]').addEventListener('click', async () => { if (!await A().confirmBox(`Supprimer la ${pageName(p)} ?${imgs.length ? `\n\n${imgs.length > 1 ? `Ses ${imgs.length} photos passent` : 'Sa photo passe'} « à ranger ».` : ''}${p.transcription.trim() ? '\n\nSa transcription sera perdue.' : ''}`, {title: 'Supprimer la page', okLabel: 'Supprimer la page'})) return; s.page = (next || prev)?.id || 0; await run('delete_recueil_page', {id: p.id}, 'Page supprimée.'); });
         // Enregistrement au fil de la frappe
         const saved = body.querySelector('[data-rc-saved]');
         let timer = 0, pending = {};
@@ -606,7 +607,7 @@
                     const cell = i => i ? `<button type="button" class="h-rc-cmpcell ${i.id === p.best_image_id ? 'is-best' : i.id === p.shown_image_id ? 'is-shown' : ''}" data-rc-keep="${p.id}:${i.id}" title="${i.id === p.best_image_id ? 'Image retenue' : 'Garder celle-ci pour la page'}"><img src="${esc(thumbUrl(i))}" alt="" loading="lazy"><span>${i.id === p.best_image_id ? '⭐ retenue' : i.id === p.shown_image_id ? '☆ garder <small>(montrée pour l’instant)</small>' : '☆ garder'}</span></button>` : '<span class="h-rc-cmpcell is-empty">pas de photo</span>';
                     return `<div class="h-rc-cmprow"><button type="button" class="table-link" data-rc-open="${p.id}">${esc(pageName(p))}</button>${cell(ia)}${cell(ib)}</div>`; }).join('')}</div></section>` : ''}
             ${D.versions.map((v, k) => { const imgs = D.images.filter(i => i.version_id === v.id); const covered = new Set(imgs.filter(i => i.page_id && i.role === 'page').map(i => i.page_id)).size;
-                return `<section class="maintenance-panel h-rc-version" data-rc-v="${v.id}"><div class="h-cfg-head"><h3>🗂️ ${esc(v.name)} <small class="muted">${esc(v.date_text || '')} · ${plural(imgs.length, 'photo', 'photos')} · ${covered} page(s) sur ${D.pages.length}</small></h3>
+                return `<section class="maintenance-panel h-rc-version" data-rc-v="${v.id}"><div class="h-cfg-head"><h3>🗂️ ${esc(v.name)} <small class="muted">${esc(v.date_text || '')} · ${plural(imgs.length, 'photo', 'photos')} · ${plural(covered, 'page', 'pages')} sur ${D.pages.length}</small></h3>
                     <span class="h-cfg-actions"><button type="button" class="icon-button" data-rc-vmove="-1" ${k ? '' : 'disabled'} title="Monter">↑</button><button type="button" class="icon-button" data-rc-vmove="1" ${k < D.versions.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>
                     <button type="button" class="button small secondary" data-rc-vedit>Renommer…</button><button type="button" class="button small" data-rc-vadd>+ Photos</button>${D.versions.length > 1 ? '<button type="button" class="icon-button danger" data-rc-vdel title="Supprimer cette version">🗑</button>' : ''}</span></div>
                     ${v.notes ? `<p class="muted">${nl(v.notes)}</p>` : ''}
@@ -621,7 +622,7 @@
             sec.querySelectorAll('[data-rc-vmove]').forEach(b => b.addEventListener('click', () => run('save_recueil_version', {...v, move: Number(b.dataset.rcVmove)})));
             sec.querySelector('[data-rc-vedit]').addEventListener('click', () => versionDialog(v));
             sec.querySelector('[data-rc-vadd]').addEventListener('click', () => addPhotosDialog({versionId: v.id}));
-            sec.querySelector('[data-rc-vdel]')?.addEventListener('click', () => { if (confirm(`Supprimer la version « ${v.name} » ?\n\nSes photos quittent le recueil (elles restent dans Médias). Les pages et leurs transcriptions restent.`)) run('delete_recueil_version', {id: v.id}, 'Version supprimée.'); });
+            sec.querySelector('[data-rc-vdel]')?.addEventListener('click', async () => { if (await A().confirmBox(`Supprimer la version « ${v.name} » ?\n\nSes photos quittent le recueil (elles restent dans Médias). Les pages et leurs transcriptions restent.`, {title: 'Supprimer la version', okLabel: 'Supprimer la version'})) run('delete_recueil_version', {id: v.id}, 'Version supprimée.'); });
         });
         body.querySelector('[data-rc-vnew]').addEventListener('click', () => versionDialog(null));
     }
@@ -647,7 +648,7 @@
             <button type="button" class="button" data-rc-lnew>+ Rattacher</button>`;
         body.querySelector('[data-rc-lnew]').addEventListener('click', () => linkDialog(null));
         body.querySelectorAll('[data-rc-ledit]').forEach(b => b.addEventListener('click', () => linkDialog(D.links.find(l => l.id === Number(b.dataset.rcLedit)))));
-        body.querySelectorAll('[data-rc-ldel]').forEach(b => b.addEventListener('click', () => { if (confirm('Détacher ?')) run('delete_recueil_link', {id: Number(b.dataset.rcLdel)}, 'Détaché.'); }));
+        body.querySelectorAll('[data-rc-ldel]').forEach(b => b.addEventListener('click', async () => { if (await A().confirmBox('Détacher ce lien du recueil ?', {title: 'Détacher', okLabel: 'Détacher'})) run('delete_recueil_link', {id: Number(b.dataset.rcLdel)}, 'Détaché.'); }));
         bindEntityOpen(body);
         A().bindTableLinks?.();
     }
@@ -714,7 +715,7 @@
             case 'progress': { const pct = pages.length ? Math.round(done.length / pages.length * 100) : 0; const todo = pages.filter(p => !p.transcription.trim()).slice(0, b.n);
                 inner = `<div class="h-rc-meter big"><i style="width:${pct}%"></i></div><p><b>${pct} %</b> — ${done.length} sur ${pages.length} pages</p>${todo.length ? `<p class="muted">À transcrire : ${todo.map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${pages.length - done.length > todo.length ? '…' : ''}</p>` : ''}`; break; }
             case 'versions': inner = `<ul class="h-rc-vlist">${D.versions.map(v => { const n = new Set(imgs.filter(i => i.version_id === v.id && i.page_id && i.role === 'page').map(i => i.page_id)).size; const kept = pages.filter(p => imgById(p.shown_image_id)?.version_id === v.id).length;
-                return `<li><b>${esc(v.name)}</b> ${v.date_text ? `<small class="muted">${esc(v.date_text)}</small>` : ''}<span class="h-rc-meter"><i style="width:${pages.length ? Math.round(n / pages.length * 100) : 0}%"></i></span><small>${n} / ${pages.length} pages · ⭐ ${kept} retenue(s)</small></li>`; }).join('')}</ul>`; break;
+                return `<li><b>${esc(v.name)}</b> ${v.date_text ? `<small class="muted">${esc(v.date_text)}</small>` : ''}<span class="h-rc-meter"><i style="width:${pages.length ? Math.round(n / pages.length * 100) : 0}%"></i></span><small>${n} / ${pages.length} pages · ⭐ ${plural(kept, 'retenue', 'retenues')}</small></li>`; }).join('')}</ul>`; break;
             case 'missing': { const rows = D.versions.map(v => ({v, miss: pages.filter(p => !imgs.some(i => i.page_id === p.id && i.version_id === v.id && i.role === 'page'))})).filter(x => x.miss.length);
                 const none = pages.filter(p => !imgs.some(i => i.page_id === p.id));
                 inner = rows.length || none.length ? `${none.length ? `<p><b>Sans aucune photo :</b> ${none.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}</p>` : ''}${D.versions.length > 1 ? rows.map(x => `<p><b>${esc(x.v.name)} :</b> ${x.miss.slice(0, b.n).map(p => `<button type="button" class="link-button" data-rc-open="${p.id}">${p.num}</button>`).join(', ')}${x.miss.length > b.n ? '…' : ''}</p>`).join('') : ''}` : '<p class="muted">Toutes les pages ont leurs photos.</p>'; break; }
@@ -771,7 +772,7 @@
     const folderOptions = (folders, current) => `<option value="" ${current == null ? 'selected' : ''}>🌐 Partout dans l’enquête</option><option value="0" ${current === 0 ? 'selected' : ''}>Racine de l’enquête</option>${folders.map(f => `<option value="${f.id}" ${current === f.id ? 'selected' : ''}>${'— '.repeat(f.depth || 0)}📁 ${esc(f.name)}</option>`).join('')}`;
     function forEntityHtml(rows, type, key, place = null) {
         return `<div class="h-rc-for">${rows.map(r => `<div class="h-rc-for-item"><div class="h-rc-for-head"><button type="button" class="table-link" data-open-recueil="${r.recueil_id}"><strong>${esc(r.icon || '📚')} ${esc(r.title)}</strong></button>
-                <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? `pages ${r.from_num} à ${r.to_num}` : `page ${r.from_num}`) : `tout le recueil (${r.total_pages} p.)`} · ${r.transcribed}/${r.pages} transcrite(s)${r.reference ? ' · ' + esc(r.reference) : ''}</small>
+                <small class="muted">${r.from_num ? (r.to_num && r.to_num !== r.from_num ? `pages ${r.from_num} à ${r.to_num}` : `page ${r.from_num}`) : `tout le recueil (${r.total_pages} p.)`} · ${r.transcribed}/${r.pages} ${r.transcribed > 1 ? 'transcrites' : 'transcrite'}${r.reference ? ' · ' + esc(r.reference) : ''}</small>
                 ${place ? `<label class="h-rc-for-move" title="Le laisser visible dans tous les dossiers, ou le ranger dans un seul">Déplacer vers<select data-rc-linkmove="${r.link_id}">${folderOptions(place.folders, r.folder_id)}</select></label>` : ''}
                 <button type="button" class="icon-button" data-rc-unlink="${r.link_id}" title="Détacher">✕</button></div>
                 ${r.note ? `<p class="muted">${esc(r.note)}</p>` : ''}
@@ -782,7 +783,7 @@
     ext.recueilAttachDialog = async (type, key, after, {folderId = null, folders = null} = {}) => {
         if (type === 'investigation' && !folders) { const host = document.querySelector(`[data-rc-host][data-rc-type="investigation"][data-rc-key="${CSS.escape(String(key))}"]`); try { folders = JSON.parse(host?.dataset.rcFolders || '[]'); } catch (_) { folders = []; } }
         const list = (await get('recueils').catch(() => ({recueils: []}))).recueils || [];
-        if (!list.length) { if (confirm('Pas encore de recueil. En créer un maintenant (Listes › Recueils) ?')) { S().listType = 'recueils'; Object.assign(st(), {id: 0}); A().setModule('listes'); } return; }
+        if (!list.length) { if (await A().confirmBox('Pas encore de recueil. En créer un maintenant (Listes › Recueils) ?', {title: 'Aucun recueil', okLabel: 'Créer un recueil'})) { S().listType = 'recueils'; Object.assign(st(), {id: 0}); A().setModule('listes'); } return; }
         let pages = [];
         dialog({eyebrow: 'RECUEIL', title: 'Rattacher un recueil', wide: true, submitLabel: 'Rattacher',
             body: `<label>Recueil<select name="recueil_id">${list.map(r => `<option value="${r.id}">${esc(r.icon || '📚')} ${esc(r.title)} (${r.pages} p.)</option>`).join('')}</select></label><div data-rc-range></div>
@@ -825,7 +826,7 @@
     ext.refreshRecueilHosts = () => document.querySelectorAll('[data-rc-host][data-rc-filled]').forEach(box => ext.recueilsSection(box, box.dataset.rcType, box.dataset.rcKey, {title: box.dataset.rcTitle || '📚 Recueils', hideEmpty: box.dataset.rcHideEmpty !== undefined}));
     function bindFor(root, after, place = null) {
         root.querySelectorAll('[data-rc-attach]').forEach(b => b.addEventListener('click', () => { const [type, ...k] = b.dataset.rcAttach.split(':'); ext.recueilAttachDialog(type, k.join(':'), after, place ? {folderId: place.folder, folders: place.folders} : {}); }));
-        root.querySelectorAll('[data-rc-unlink]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Détacher ce recueil ?')) return; await post('delete_recueil_link', {id: Number(b.dataset.rcUnlink)}); toast('Détaché.'); after?.(); }));
+        root.querySelectorAll('[data-rc-unlink]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Détacher ce recueil ?', {title: 'Détacher le recueil', okLabel: 'Détacher'})) return; await post('delete_recueil_link', {id: Number(b.dataset.rcUnlink)}); toast('Détaché.'); after?.(); }));
     }
     /** Toute case <div data-rc-host data-rc-type="village" data-rc-key="…"> posée par un écran se remplit seule. */
     const fillHosts = () => document.querySelectorAll('[data-rc-host]:not([data-rc-filled])').forEach(box => {

@@ -103,11 +103,11 @@
         A().$('#workspace').innerHTML = `<section class="page h-fi">
             <header class="page-header"><div><span class="eyebrow">FICHES</span><h2>📒 Mes fiches</h2><p>Une fiche par sujet : l’histoire d’un pays à une époque, un lieu, un métier, une guerre, une coutume… Tu y mets ce que tu veux : du texte, des images et des documents, des personnes de la base, une frise de dates, des citations, des liens, et tout ce que l’app sait montrer (carte, arbre, listes, Mes listes, widgets et statistiques à toi).</p></div>
                 <div class="page-actions"><button type="button" class="button" data-fi-new>＋ Nouvelle fiche</button></div></header>
-            ${sheets.length ? `<div class="h-fi-cards">${sheets.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}">${s.cover ? `<span class="h-fi-cover">${A().mediaThumbHtml(s.cover)}</span>` : `<span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span>`}<strong>${esc(s.icon || '')} ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks} bloc${s.blocks > 1 ? 's' : ''}</small></button>`).join('')}</div>` : A().empty('Aucune fiche pour l’instant : « ＋ Nouvelle fiche ».')}
+            ${sheets.length ? `<div class="h-fi-cards">${sheets.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}">${s.cover ? `<span class="h-fi-cover">${A().mediaThumbHtml(s.cover)}</span>` : `<span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span>`}<strong>${esc(s.icon || '')} ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks} bloc${s.blocks > 1 ? 's' : ''}</small></button>`).join('')}</div>` : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: {label: '＋ Nouvelle fiche', attrs: 'data-fi-new'}})}
             ${tpls.length ? `<h3 class="h-fi-modhead">⭐ Mes modèles <small class="muted">— des fiches toutes prêtes à remplir, proposées dans « Nouvelle fiche »</small></h3><div class="h-fi-cards is-models">${tpls.map(s => `<button type="button" class="h-fi-card" data-fi-open="${s.id}" style="${s.color ? `--fi-c:${esc(s.color)}` : ''}"><span class="h-fi-cover is-icon">${esc(s.icon || '📒')}</span><strong>⭐ ${esc(s.title)}</strong><small>${esc(s.subtitle || '')}</small><small class="muted">${s.blocks.length} bloc${s.blocks.length > 1 ? 's' : ''}</small></button>`).join('')}</div>` : ''}
         </section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-fi-new]').addEventListener('click', newSheet);
+        ws.querySelectorAll('[data-fi-new]').forEach(b => b.addEventListener('click', newSheet));
         ws.querySelectorAll('[data-fi-open]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiOpen); A().setModule('fiches'); }));
     }
     /** Les blocs vidés de leur contenu : même ordre, mêmes titres, largeurs, couleurs et réglages (écran, widget, disposition des images) */
@@ -136,7 +136,7 @@
                     e.preventDefault(); e.stopPropagation();
                     const id = Number(b.dataset.fiTpledit || b.dataset.fiTpldel), t = mine.find(x => x.id === id);
                     if (b.dataset.fiTpledit) { d.close(); S().ficheId = id; editing = true; return A().setModule('fiches'); }
-                    if (!confirm(`Supprimer le modèle « ${t?.title} » ? (les fiches déjà créées avec lui ne changent pas)`)) return;
+                    if (!await A().confirmBox(`Supprimer le modèle « ${t?.title} » ? (les fiches déjà créées avec lui ne changent pas)`, {title: 'Supprimer le modèle', okLabel: 'Supprimer le modèle'})) return;
                     try { await post('delete_topic_sheet', {id}); mine = mine.filter(x => x.id !== id); const wasMine = d.querySelector('input[name="tpl"]:checked')?.value === 'u' + id; d.querySelector('[data-fi-mine]').innerHTML = mineHtml(); if (wasMine) d.querySelector('input[name="tpl"]').checked = true; toast('Modèle supprimé.'); } catch (err) { toast(err.message, 'error'); }
                 });
             },
@@ -230,11 +230,11 @@
             if (d.fiPrint !== undefined) return printSheet();
             if (d.fiCopy !== undefined) return duplicateSheet();
             if (d.fiUse !== undefined) { const r = await post('save_topic_sheet', {title: 'Nouvelle fiche', subtitle: '', icon: c.icon, color: c.color, blocks: emptyBlocks(c.blocks, true)}); toast('Fiche créée avec ce modèle : change son titre dans « ⚙️ Titre, icône, couleur ».'); S().ficheId = Number(r.result?.id || r.id); editing = true; return A().setModule('fiches'); }
-            if (d.fiDelete !== undefined) { if (!confirm(c.template ? `Supprimer le modèle « ${c.title} » ? (les fiches déjà créées avec lui ne changent pas)` : `Supprimer la fiche « ${c.title} » ? (les images restent dans les médias de l’app)`)) return; await post('delete_topic_sheet', {id: c.id}); toast(c.template ? 'Modèle supprimé.' : 'Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
+            if (d.fiDelete !== undefined) { if (!await A().confirmBox(c.template ? `Supprimer le modèle « ${c.title} » ? (les fiches déjà créées avec lui ne changent pas)` : `Supprimer la fiche « ${c.title} » ? (les images restent dans les médias de l’app)`, {title: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche', okLabel: c.template ? 'Supprimer le modèle' : 'Supprimer la fiche'})) return; await post('delete_topic_sheet', {id: c.id}); toast(c.template ? 'Modèle supprimé.' : 'Fiche supprimée.'); S().ficheId = 0; return A().setModule('fiches'); }
             if (d.fiUp !== undefined && i > 0) { [c.blocks[i - 1], c.blocks[i]] = [c.blocks[i], c.blocks[i - 1]]; await save(); return renderSheet(token); }
             if (d.fiDown !== undefined && i < c.blocks.length - 1) { [c.blocks[i + 1], c.blocks[i]] = [c.blocks[i], c.blocks[i + 1]]; await save(); return renderSheet(token); }
             if (d.fiDup !== undefined) { const b = JSON.parse(JSON.stringify(c.blocks[i])); b.id = uid(); c.blocks.splice(i + 1, 0, b); await save(); return renderSheet(token); }
-            if (d.fiDel !== undefined) { const b = c.blocks[i]; if (!confirm(`Supprimer le bloc « ${titleOf(b)} » ?`)) return; c.blocks.splice(i, 1); await save(); return refresh(); }
+            if (d.fiDel !== undefined) { const b = c.blocks[i]; if (!await A().confirmBox(`Supprimer le bloc « ${titleOf(b)} » ?`, {title: 'Supprimer le bloc', okLabel: 'Supprimer le bloc'})) return; c.blocks.splice(i, 1); await save(); return refresh(); }
             if (d.fiEdit !== undefined) return editBlock(i, null, t.closest('[data-fi-block]'));
         });
     }
@@ -365,10 +365,10 @@
         const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
         A().$('#workspace').innerHTML = `<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📒 Fiches</h2><p>Les fiches sur un sujet (onglet « Fiches ») : clique sur une fiche pour l’ouvrir.</p></div>
                 <div class="page-actions"><button type="button" class="button" data-fi-listnew>＋ Nouvelle fiche</button></div></header>
-            ${sheets.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée le</th></tr></thead><tbody>${sheets.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${esc(fmtDate(s.updated_at))}</td></tr>`).join('')}</tbody></table></div>` : A().empty('Aucune fiche pour l’instant : « ＋ Nouvelle fiche ».')}</section>`;
+            ${sheets.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée le</th></tr></thead><tbody>${sheets.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${esc(fmtDate(s.updated_at))}</td></tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: {label: '＋ Nouvelle fiche', attrs: 'data-fi-listnew'}})}</section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-fi-listopen]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiListopen); A().setModule('fiches'); }));
-        ws.querySelector('[data-fi-listnew]').addEventListener('click', newSheet);
+        ws.querySelectorAll('[data-fi-listnew]').forEach(b => b.addEventListener('click', newSheet));
     };
     ext.fichesInternals = {md}; // pour les essais
 })();

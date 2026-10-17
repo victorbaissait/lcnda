@@ -102,13 +102,13 @@
             <h3>Mes annonces et courriers</h3>
             ${D.ads.length ? `<div class="data-table-wrap"><table class="data-table h-pr-table"><thead><tr><th>Annonce</th><th>Journal</th><th>Sorte</th><th>Où j’en suis</th><th>Parution</th><th>Prix calculé</th><th>Payé</th><th>Rattachée à</th></tr></thead><tbody>
                 ${D.ads.map(a => { const pr = price(a.body, rulesOf(a)?.rules || {}, a.data?.options || [], num(a.data?.insertions) || 1); return `<tr data-pa-ad="${a.id}"><td><strong>${esc(a.title)}</strong><small>${esc(String(a.body || '').slice(0, 110))}${String(a.body || '').length > 110 ? '…' : ''}</small></td><td>${esc(journalOf(a))}</td><td>${esc(D.kinds[a.kind] || '')}</td><td><span class="h-pr-chip h-pa-${esc(a.status)}">${esc(D.statuses[a.status] || '')}</span></td><td>${esc([a.data?.publish_date, a.data?.issue_ref].filter(Boolean).join(' · '))}</td><td>${pr.total === null ? '—' : esc(euro(pr.total))}</td><td>${esc(a.data?.cost_paid || '')}</td><td>${(a.links || []).map(l => `${l.type === 'person' ? '👤' : '🔎'} ${esc(l.name)}`).join(', ')}</td></tr>`; }).join('')}
-            </tbody></table></div>` : A().empty('Aucune annonce pour l’instant : « ＋ Annonce ou courrier ».')}
+            </tbody></table></div>` : A().emptyState({icon: '📰', text: 'Aucune annonce pour l’instant', hint: 'Écris ton annonce et vois tout de suite combien elle coûtera d’après les règles du journal.', action: {label: '＋ Annonce ou courrier', attrs: 'data-pa-new'}})}
             <h3>Règles des journaux</h3>
-            ${D.rules.length ? `<div class="h-pr-cards">${D.rules.map(r => `<article class="h-pr-card" data-pa-rules="${r.id}"><header><strong>${esc(r.name)}</strong><small>${esc(summary(r.rules))}</small></header>${r.rules.deadline ? `<p>📅 Date limite : ${esc(r.rules.deadline)}</p>` : ''}${r.rules.send_to ? `<p>✉️ ${esc(r.rules.send_to)}</p>` : ''}</article>`).join('')}</div>` : '<p class="muted">Aucune règle enregistrée. « ＋ Règles d’un journal », ou « 📷 Lire une capture des règles » pour les remplir toutes seules.</p>'}
+            ${D.rules.length ? `<div class="h-pr-cards">${D.rules.map(r => `<article class="h-pr-card" data-pa-rules="${r.id}"><header><strong>${esc(r.name)}</strong><small>${esc(summary(r.rules))}</small></header>${r.rules.deadline ? `<p>📅 Date limite : ${esc(r.rules.deadline)}</p>` : ''}${r.rules.send_to ? `<p>✉️ ${esc(r.rules.send_to)}</p>` : ''}</article>`).join('')}</div>` : A().emptyState({icon: '📏', text: 'Aucune règle pour l’instant', hint: 'Ou « 📷 Lire une capture des règles » pour les remplir toutes seules.', action: {label: '＋ Règles d’un journal', attrs: 'data-pa-rules-new'}})}
         </section>`;
         const page = ws.querySelector('.h-pa');
-        page.querySelector('[data-pa-new]').addEventListener('click', () => adDialog(null));
-        page.querySelector('[data-pa-rules-new]').addEventListener('click', () => rulesDialog(null));
+        page.querySelectorAll('[data-pa-new]').forEach(b => b.addEventListener('click', () => adDialog(null)));
+        page.querySelectorAll('[data-pa-rules-new]').forEach(b => b.addEventListener('click', () => rulesDialog(null)));
         page.querySelector('[data-pa-ocr]').addEventListener('click', () => rulesDialog(null, {ocrNow: true}));
         page.addEventListener('click', e => { const ad = e.target.closest('[data-pa-ad]'); if (ad) return adDialog(D.ads.find(a => a.id === Number(ad.dataset.paAd))); const ru = e.target.closest('[data-pa-rules]'); if (ru) rulesDialog(D.rules.find(r => r.id === Number(ru.dataset.paRules))); });
     }
@@ -153,7 +153,7 @@
                 await post('save_press_ad_rules', {id: r?.id || 0, name: form.elements.name.value, periodical_id: form.elements.periodical_id.value, rules, source_text: form.elements.source_text.value, notes: form.elements.notes.value});
                 toast('Règles enregistrées.'); await reload();
             },
-            onDelete: r ? async () => { if (!confirm(`Supprimer les règles « ${r.name} » ? (les annonces restent)`)) return false; await post('delete_press_item', {what: 'rules', id: r.id}); await reload(); } : null});
+            onDelete: r ? async () => { if (!await A().confirmBox(`Supprimer les règles « ${r.name} » ? (les annonces restent)`, {title: 'Supprimer les règles', okLabel: 'Supprimer les règles'})) return false; await post('delete_press_item', {what: 'rules', id: r.id}); await reload(); } : null});
         return dl;
     }
 
@@ -199,7 +199,7 @@
                     dl._estimate = pr.total;
                 };
                 dl.addEventListener('input', calc); dl.addEventListener('change', calc); calc();
-                dl.querySelectorAll('[data-pa-tpl]').forEach(b => b.addEventListener('click', () => { const ta = dl.querySelector('[name=body]'); if (ta.value.trim() && !confirm('Remplacer le texte par ce modèle ?')) return; ta.value = TEMPLATES[Number(b.dataset.paTpl)][1]; ta.focus(); calc(); }));
+                dl.querySelectorAll('[data-pa-tpl]').forEach(b => b.addEventListener('click', async () => { const ta = dl.querySelector('[name=body]'); if (ta.value.trim() && !await A().confirmBox('Remplacer le texte par ce modèle ?', {title: 'Utiliser ce modèle', okLabel: 'Remplacer le texte'})) return; ta.value = TEMPLATES[Number(b.dataset.paTpl)][1]; ta.focus(); calc(); }));
             },
             onSubmit: async form => {
                 const v = A().formObject(form), links = {persons: [], investigations: []};
@@ -212,7 +212,7 @@
                 if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'press_ad', Number((r.result || r).id));
                 toast('Annonce enregistrée.'); await reload();
             },
-            onDelete: ad ? async () => { if (!confirm(`Supprimer « ${ad.title} » ?`)) return false; await post('delete_press_item', {what: 'ad', id: ad.id}); await reload(); } : null});
+            onDelete: ad ? async () => { if (!await A().confirmBox(`Supprimer « ${ad.title} » ?`, {title: 'Supprimer l’annonce', okLabel: 'Supprimer l’annonce'})) return false; await post('delete_press_item', {what: 'ad', id: ad.id}); await reload(); } : null});
     }
     let invCache = null;
     function bindLinks(root) {

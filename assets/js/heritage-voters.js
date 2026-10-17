@@ -94,7 +94,7 @@
         const edit = event.target.closest?.('[data-h-voter-edit]');
         if (edit) { openVoterDialog(Number(edit.dataset.hVoterEdit)); return; }
         const clear = event.target.closest?.('[data-h-voter-clear]');
-        if (clear && confirm('Effacer les cartes d’électeur et les votes de cette fiche ?')) {
+        if (clear && await A().confirmBox('Supprimer les cartes d’électeur et les votes de cette fiche ?', {title: 'Supprimer les cartes et votes', okLabel: 'Supprimer'})) {
             try { await api('clear_voter_cards', {}, {method: 'POST', body: {person_id: clear.dataset.hVoterClear}}); toast('Cartes effacées.'); refresh(); } catch (error) { toast(error.message, 'error'); }
         }
     });
@@ -225,7 +225,7 @@
             ${people.length ? `<p class="muted">${plural(people.length, 'électeur', 'électeurs')} · ${plural(people.reduce((n, r) => n + r.cards.length, 0), 'carte', 'cartes')} · ${plural(votes, 'vote noté', 'votes notés')}</p>
             <div class="data-table-wrap"><table class="data-table sortable-table"><thead><tr>${['Personne', 'Commune(s)', 'Cartes', 'Votes', 'Premier vote ou carte', 'Dernier'].map((h, i) => `<th><button data-sort-column="${i}">${h}</button></th>`).join('')}<th>Photos</th></tr></thead><tbody>
                 ${people.map(r => `<tr><td data-sort-value="${esc(pname(r.person).toLowerCase())}">${personLink(r.person.id, pname(r.person))}${r.person.birth_year ? ` <small class="muted">(${esc(r.person.birth_year)}–${esc(r.person.death_year || '')})</small>` : ''}</td><td data-sort-value="${esc((r.communes[0] || '').toLowerCase())}">${esc(r.communes.join(', ') || '—')}</td><td data-sort-value="${r.cards.length}">${r.cards.length}</td><td data-sort-value="${r.votes.length}">${r.votes.length}</td><td data-sort-value="${r.first || 9999}">${r.first || '—'}</td><td data-sort-value="${r.last || 0}">${r.last || '—'}</td><td>${ext.thumbs ? ext.thumbs('voters-list-' + r.person.id, (r.media || []).slice(0, 4)) : ''}</td></tr>`).join('')}</tbody></table></div>`
-            : A().empty('Aucune carte d’électeur pour le moment.')}
+            : A().emptyState({icon: '🗳️', text: 'Aucune carte d’électeur pour l’instant', hint: 'Elles s’ajoutent sur la fiche d’une personne (bloc Cartes d’électeur).'})}
             ${world ? `<section class="maintenance-panel h-suffrage"><h3>🌍 Le droit de vote dans le monde</h3>
                 <div class="h-suffrage-controls"><div class="segmented">${[['women', '👩 Femmes'], ['men', '👨 Hommes'], ['gap', '↔ Écart']].map(([k, l]) => `<button type="button" data-h-suffrage-who="${k}" class="${st.hSuffrage.who === k ? 'is-active' : ''}">${l}</button>`).join('')}</div>
                     ${st.hSuffrage.who !== 'gap' ? `<label class="checkbox-line"><input type="checkbox" data-h-suffrage-at ${st.hSuffrage.atYear ? 'checked' : ''}> Voir qui pouvait voter en</label><input type="range" min="1840" max="2025" step="1" value="${st.hSuffrage.atYear || 1920}" data-h-suffrage-year ${st.hSuffrage.atYear ? '' : 'disabled'} aria-label="Année"><strong data-h-suffrage-yearlabel>${st.hSuffrage.atYear || ''}</strong>` : ''}</div>

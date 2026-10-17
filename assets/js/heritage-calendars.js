@@ -96,7 +96,7 @@
                 const dayCell = (y, m, d, outside = false) => { const list = ix.day.get(iso(y, m, d)) || [], wd = dow(y, m, d);
                     return `<div class="h-cal-cell ${outside ? 'is-out' : ''} ${iso(y, m, d) === today ? 'is-today' : ''} ${p.weekend && (wd === 0 || wd === 6) ? 'is-we' : ''}" data-cal-go="day:${y}:${m}:${d}">
                         <div class="h-cal-dhead"><b>${d}</b>${head(y, m, d)}${onNew ? `<button type="button" class="h-cal-plus" data-cal-new="${iso(y, m, d)}" title="Créer ce jour-là">＋</button>` : ''}</div>
-                        ${list.slice(0, p.max).map(it => chip(it)).join('')}${list.length > p.max ? `<span class="h-cal-more">+${list.length - p.max} autre(s)</span>` : ''}</div>`; };
+                        ${list.slice(0, p.max).map(it => chip(it)).join('')}${list.length > p.max ? `<span class="h-cal-more">+${list.length - p.max} ${list.length - p.max > 1 ? 'autres' : 'autre'}</span>` : ''}</div>`; };
                 const order = [...Array(7).keys()].map(i => (p.weekStart + i) % 7);
                 const heat = n => n ? `style="--h:${Math.min(1, 0.18 + Math.log2(n + 1) / 6)}"` : '';
                 let body = '', label = '';
@@ -117,14 +117,14 @@
                     label = longDate(cy, cm, cd);
                     const list = ix.day.get(iso(cy, cm, cd)) || [];
                     const corr = A().converterCalendarOptions.filter(([t]) => t !== 'gregorian').map(([t, n]) => [n, altText(cy, cm, cd, t)]).filter(x => x[1]);
-                    body = `<div class="h-cal-dayview"><div><h3>${list.length ? `${list.length} élément(s)` : 'Rien ce jour-là'}</h3>${list.map(it => `<div class="h-cal-dayitem" style="--c:${colorOf(key, p, it.group)}">${chip(it, true)}</div>`).join('')}
+                    body = `<div class="h-cal-dayview"><div><h3>${list.length ? A().plural(list.length, 'élément') : 'Rien ce jour-là'}</h3>${list.map(it => `<div class="h-cal-dayitem" style="--c:${colorOf(key, p, it.group)}">${chip(it, true)}</div>`).join('')}
                             ${onNew ? `<button type="button" class="button small" data-cal-new="${iso(cy, cm, cd)}">+ Créer ce jour-là</button>` : ''}</div>
                         <aside class="h-cal-corr"><h4>Ce jour dans les autres calendriers</h4><dl>${corr.map(([n, t]) => `<dt>${esc(n)}</dt><dd>${esc(t)}</dd>`).join('')}</dl></aside></div>`;
                 } else if (c.view === 'year') {
                     label = String(cy);
                     body = `${band(ix.year.get(cy))}<div class="h-cal-yeargrid">${MONTHS.map((mn, i) => { const m = i + 1, first = (dow(cy, m, 1) - p.weekStart + 7) % 7, n = ix.count(cy, m);
                         return `<div class="h-cal-mini"><button type="button" class="h-cal-minihead" data-cal-go="month:${cy}:${m}:1">${mn} ${n ? `<small>${n}</small>` : ''}</button><div class="h-cal-minigrid">${order.map(k => `<span class="h-cal-miniwd">${DAYS[k][0].toUpperCase()}</span>`).join('')}${'<span></span>'.repeat(first)}${[...Array(dim(cy, m)).keys()].map(k => { const d = k + 1, c2 = ix.count(cy, m, d);
-                            return `<button type="button" class="h-cal-miniday ${c2 ? 'has' : ''} ${iso(cy, m, d) === today ? 'is-today' : ''}" ${heat(c2)} data-cal-go="day:${cy}:${m}:${d}" title="${longDate(cy, m, d)}${c2 ? ` · ${c2} élément(s)` : ''}">${d}</button>`; }).join('')}</div>${(ix.month.get(`${cy}-${pad(m)}`) || []).length ? `<small class="muted">+ ${(ix.month.get(`${cy}-${pad(m)}`) || []).length} sans jour précis</small>` : ''}</div>`; }).join('')}</div>`;
+                            return `<button type="button" class="h-cal-miniday ${c2 ? 'has' : ''} ${iso(cy, m, d) === today ? 'is-today' : ''}" ${heat(c2)} data-cal-go="day:${cy}:${m}:${d}" title="${longDate(cy, m, d)}${c2 ? ` · ${A().plural(c2, 'élément')}` : ''}">${d}</button>`; }).join('')}</div>${(ix.month.get(`${cy}-${pad(m)}`) || []).length ? `<small class="muted">+ ${(ix.month.get(`${cy}-${pad(m)}`) || []).length} sans jour précis</small>` : ''}</div>`; }).join('')}</div>`;
                 } else if (c.view === 'decade') {
                     const y0 = Math.floor(cy / 10) * 10; label = `${y0} – ${y0 + 9}`;
                     body = `<table class="h-cal-heat"><thead><tr><th></th>${MONTHS_S.map(m => `<th>${m}</th>`).join('')}<th>Année</th></tr></thead><tbody>${[...Array(10).keys()].map(k => { const y = y0 + k;
@@ -198,7 +198,7 @@
                 <fieldset class="h-rc-modes"><legend>Sous chaque jour, la date dans ces calendriers</legend><div class="h-cal-altpick">${alts.map(([t, n]) => `<label class="checkbox-line"><input type="checkbox" name="alt" value="${t}" ${p.alt.includes(t) ? 'checked' : ''}> ${esc(n)}</label>`).join('')}</div></fieldset>
                 <fieldset class="h-rc-modes"><legend>Couleurs</legend><div class="h-cal-colors">${groupsOf(key).map(([g, l]) => `<label><input type="color" name="color_${g}" value="${colorOf(key, p, g)}"> ${esc(l)}</label>`).join('')}</div></fieldset>
                 <button type="button" class="button small secondary" data-cal-reset>↺ Remettre comme au départ</button>`,
-            onOpen: d => d.querySelector('[data-cal-reset]').addEventListener('click', () => { if (!confirm('Remettre tous les réglages de ce calendrier comme au départ ?')) return; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); savePrefs(key, p); d.close(); after(); }),
+            onOpen: d => d.querySelector('[data-cal-reset]').addEventListener('click', async () => { if (!await A().confirmBox('Remettre tous les réglages de ce calendrier comme au départ ?', {title: 'Réglages de départ', okLabel: 'Remettre comme au départ', danger: true})) return; Object.keys(p).forEach(k => delete p[k]); Object.assign(p, JSON.parse(JSON.stringify(DEFAULTS[key]))); savePrefs(key, p); d.close(); after(); }),
             onSubmit: form => {
                 const fd = new FormData(form);
                 Object.assign(p, {weekStart: Number(fd.get('weekStart')), style: fd.get('style'), size: fd.get('size'), view: fd.get('view'), max: Math.max(1, Math.min(20, Number(fd.get('max')) || 3)),
@@ -236,7 +236,7 @@
             return data.events.filter(e => !pk || String(e[pk] || '') === pv).map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
             title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e}));
         },
-        extraToolbar: (data) => placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : `<input type="search" data-cal-person placeholder="👤 Une seule personne…" list="h-cal-people"><datalist id="h-cal-people"></datalist>`}</span>${data.undated ? `<small class="muted">${data.undated} événement(s) sans date lisible</small>` : ''}`,
+        extraToolbar: (data) => placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : `<input type="search" data-cal-person placeholder="👤 Une seule personne…" list="h-cal-people"><datalist id="h-cal-people"></datalist>`}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
         bindExtra: (sec, data, p, c, {reload, draw}) => {
             sec.querySelector('[data-cal-place-clear]')?.addEventListener('click', () => { genea().place = ''; draw(); });
             sec.querySelector('[data-cal-place]')?.addEventListener('input', e => { const o = [...sec.querySelectorAll('#h-cal-places option')].find(x => x.value === e.target.value); if (o) { genea().place = o.dataset.key; draw(); } });
@@ -358,7 +358,7 @@
             const li = r => r.kind === 'anniv'
                 ? `<li style="--c:${colorOf('genea', pg, r.e.group)}"><span class="h-agw-when">${dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-person="${r.e.who[0]?.id || 0}">🎂 ${esc(r.e.type)} — ${esc(r.e.who.map(w => w.name).join(' et '))}</button> <small class="muted">il y a ${r.years} ans (${r.e.y})</small></li>`
                 : `<li class="${r.kind === 'late' ? 'is-late' : ''}" style="--c:${colorOf('agenda', p, r.it.src)}"><span class="h-agw-when">${r.kind === 'late' ? '⏰ en retard' : dayLabel(r.when)}</span><button type="button" class="link-button" data-agw-item="${esc(r.it.src + ':' + r.it.id)}">${esc(r.it.title)}</button>${r.it.sub ? ` <small class="muted">${esc(r.it.sub)}</small>` : ''}${r.it.end ? ` <small class="muted">→ ${esc(r.it.end.split('-').reverse().slice(0, 2).join('/'))}</small>` : ''}</li>`;
-            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} autre(s).</p>` : ''}` : `<p class="muted">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</p>`;
+            const html = rows.length ? `<ul class="h-agw">${rows.slice(0, limit).map(li).join('')}</ul>${rows.length > limit ? `<p class="muted">… et ${rows.length - limit} ${rows.length - limit > 1 ? 'autres' : 'autre'}.</p>` : ''}` : `<p class="muted">Rien de prévu ${c.days === 1 ? 'aujourd’hui' : `sur les ${c.days} prochains jours`}.</p>`;
             setTimeout(() => document.querySelectorAll('[data-agw-item]:not([data-b]), [data-agw-person]:not([data-b])').forEach(b => { b.dataset.b = '1'; b.addEventListener('click', () => {
                 if (b.dataset.agwPerson) { S().currentPersonId = Number(b.dataset.agwPerson); return A().setModule('personnes'); }
                 const [src, id] = b.dataset.agwItem.split(':'), it = (data.agenda.items || []).find(x => x.src === src && String(x.id) === id);

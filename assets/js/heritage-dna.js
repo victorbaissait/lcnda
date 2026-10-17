@@ -16,6 +16,7 @@
     const toast = (...a) => A().toast(...a);
     const num = v => { const n = parseFloat(String(v ?? '').replace(/[\s  ]/g, '').replace(',', '.')); return Number.isFinite(n) ? n : 0; };
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
+    const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && S().module === 'adn';
     const header = (eyebrow, title, intro, actions = '') => `<header class="page-header"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2>${intro ? `<p>${intro}</p>` : ''}</div>${actions ? `<div class="page-actions">${actions}</div>` : ''}</header>`;
 
@@ -127,7 +128,7 @@
                 <section class="card"><h3>Par côté</h3>${chart({kind: 'donut', series: [{name: 'Correspondances'}], rows: bySide.filter(x => x[1]).map(([l, n, c]) => ({label: l, s0: n, color: c})), o: {height: 260, legend: 'right'}})}</section>
                 <section class="card"><h3>Les plus proches</h3><ol class="h-dna-top">${matches.slice(0, 10).map(m => `<li><button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> — ${fmt(m.shared_cm, 1)} cM <small class="muted">${esc(guessShort(m.shared_cm))}</small></li>`).join('')}</ol></section>
                 <section class="card"><h3>À contacter</h3>${todo.length ? `<ul>${todo.map(m => `<li><button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> — ${fmt(m.shared_cm, 1)} cM</li>`).join('')}</ul>` : '<p class="muted">Personne : mets « À contacter » dans le suivi d’une correspondance.</p>'}</section>` : ''}
-                ${kits.map(k => `<section class="card"><h3>🧬 ${esc(kitName(k))}</h3><p>${esc(label(TYPES, k.test_type))}${k.haplo_y ? `<br>ADN-Y : <b>${esc(k.haplo_y)}</b>` : ''}${k.haplo_mt ? `<br>ADNmt : <b>${esc(k.haplo_mt)}</b>` : ''}</p><p class="muted">${fmt(matches.filter(m => m.kit_id === k.id).length)} correspondance(s)</p></section>`).join('')}</div>`;
+                ${kits.map(k => `<section class="card"><h3>🧬 ${esc(kitName(k))}</h3><p>${esc(label(TYPES, k.test_type))}${k.haplo_y ? `<br>ADN-Y : <b>${esc(k.haplo_y)}</b>` : ''}${k.haplo_mt ? `<br>ADNmt : <b>${esc(k.haplo_mt)}</b>` : ''}</p><p class="muted">${plural(matches.filter(m => m.kit_id === k.id).length, 'correspondance', 'correspondances')}</p></section>`).join('')}</div>`;
     }, bind: root => bindMatchLinks(root)};
 
     /* ═════════ ⚖️ Loi ═════════ */
@@ -155,7 +156,7 @@
                 <label>Marqueurs Y-STR<textarea name="y_str" rows="4" placeholder="DYS393=13, DYS390=24…">${esc(d.y_str || '')}</textarea></label><label>Mutations ADNmt<textarea name="mt_mutations" rows="4" placeholder="16519C, 263G…">${esc(d.mt_mutations || '')}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label></div>`,
             onOpen: dlg => A().bindCollectionPersonFields(dlg),
-            onDelete: k.id ? async () => { if (!confirm('Supprimer ce test, ses correspondances et ses segments ?')) return false; await post('delete_dna_kit', {id: k.id}); toast('Test supprimé.'); await refresh(); } : undefined,
+            onDelete: k.id ? async () => { if (!await A().confirmBox('Supprimer ce test, ses correspondances et ses segments ?', {title: 'Supprimer le test', okLabel: 'Supprimer le test'})) return false; await post('delete_dna_kit', {id: k.id}); toast('Test supprimé.'); await refresh(); } : undefined,
             onSubmit: async f => { const v = Object.fromEntries(new FormData(f));
                 try { await post('save_dna_kit', {id: k.id || 0, person_id: Number(v.dna_person) || 0, label: v.label, company: v.company, test_type: v.test_type, kit_number: v.kit_number, test_date: v.test_date, haplo_y: v.haplo_y, haplo_mt: v.haplo_mt,
                     data: {ethnicity: ethParse(v.ethnicity), y_str: v.y_str, mt_mutations: v.mt_mutations, notes: v.notes, chip: v.chip, manager: v.manager, gedmatch: v.gedmatch, raw_file: v.raw_file, consent: v.consent}}); toast('Test enregistré.'); await refresh(); }
@@ -169,9 +170,9 @@
                 ${k.person_id ? `<p><button type="button" class="table-link" data-open-person="${k.person_id}">👤 ${esc(k.person_name)}</button></p>` : ''}
                 ${k.haplo_y || k.haplo_mt ? `<p>${k.haplo_y ? `ADN-Y <b>${esc(k.haplo_y)}</b> ` : ''}${k.haplo_mt ? `ADNmt <b>${esc(k.haplo_mt)}</b>` : ''}</p>` : ''}
                 ${k.data?.ethnicity?.length ? chart({kind: 'bars', width: 420, series: [{name: '%'}], rows: k.data.ethnicity.slice(0, 8).map(e => ({label: e.region, s0: e.percent})), o: {unit: '%'}}) : ''}
-                <p class="muted">${fmt(matches.filter(m => m.kit_id === k.id).length)} correspondance(s) · <button type="button" class="link-button" data-dna-kitmatches="${k.id}">les voir</button></p></article>`).join('') || A().empty('Aucun test : « + Nouveau test ».')}</div>`;
+                <p class="muted">${plural(matches.filter(m => m.kit_id === k.id).length, 'correspondance', 'correspondances')} · <button type="button" class="link-button" data-dna-kitmatches="${k.id}">les voir</button></p></article>`).join('') || A().emptyState({icon: '🧬', text: 'Aucun test ADN pour l’instant', hint: 'Ajoute ton test (Ancestry, MyHeritage, 23andMe…) pour y ranger tes correspondances.', action: {label: '＋ Nouveau test', attrs: 'data-dna-newkit'}})}</div>`;
     }, bind(root) {
-        root.querySelector('[data-dna-newkit]').addEventListener('click', () => kitDialog());
+        root.querySelectorAll('[data-dna-newkit]').forEach(b => b.addEventListener('click', () => kitDialog()));
         root.querySelectorAll('[data-dna-kit]').forEach(b => b.addEventListener('click', () => kitDialog(kitById(b.dataset.dnaKit))));
         root.querySelectorAll('[data-dna-kitmatches]').forEach(b => b.addEventListener('click', () => { S().adnFilter = {...(S().adnFilter || {}), kit: Number(b.dataset.dnaKitmatches)}; go('matches'); }));
     }};
@@ -232,7 +233,7 @@
         root.querySelector('[data-dna-import]').addEventListener('click', () => importDialog());
         root.querySelector('[data-dna-export]').addEventListener('click', () => exportCsv(filtered()));
         root.querySelector('[data-dna-cols]').addEventListener('click', () => go('settings'));
-        const upd = () => { const n = root.querySelectorAll('[data-dna-chk]:checked').length; root.querySelector('.h-dna-bulk').hidden = !n; root.querySelector('[data-dna-nsel]').textContent = `${n} cochée(s) :`; };
+        const upd = () => { const n = root.querySelectorAll('[data-dna-chk]:checked').length; root.querySelector('.h-dna-bulk').hidden = !n; root.querySelector('[data-dna-nsel]').textContent = `${plural(n, 'cochée', 'cochées')} :`; };
         root.addEventListener('change', e => { if (e.target.matches('[data-dna-all]')) root.querySelectorAll('[data-dna-chk]').forEach(c => { c.checked = e.target.checked; }); if (e.target.matches('[data-dna-chk], [data-dna-all]')) upd(); });
         root.querySelector('[data-dna-bdel]').addEventListener('click', () => bulk(root, 'delete', 1));
         bindMatchLinks(root);
@@ -240,7 +241,7 @@
     async function bulk(root, k, v) {
         const ids = [...root.querySelectorAll('[data-dna-chk]:checked')].map(c => Number(c.dataset.dnaChk)); if (!ids.length || !v || v === '0') return;
         const body = {ids}; if (k === 'bside') body.side = v; if (k === 'bstatus') body.status = v; if (k === 'bgroup') body.add_group = Number(v); if (k === 'bungroup') body.remove_group = Number(v);
-        if (k === 'delete') { if (!confirm(`Supprimer ${ids.length} correspondance(s) et leurs segments ?`)) return; body.delete = 1; }
+        if (k === 'delete') { if (!await A().confirmBox(ids.length > 1 ? `Supprimer ${ids.length} correspondances et leurs segments ?` : 'Supprimer cette correspondance et ses segments ?', {title: 'Supprimer les correspondances', okLabel: 'Supprimer'})) return; body.delete = 1; }
         try { await post('bulk_dna_matches', body); toast('Fait.'); await refresh(); } catch (e) { toast(e.message, 'error'); }
     }
     function bindMatchLinks(root) { root.querySelectorAll('[data-dna-match]').forEach(b => b.addEventListener('click', () => { const m = data.matches.find(x => x.id === Number(b.dataset.dnaMatch)); if (m) matchDialog(m); })); }
@@ -267,7 +268,7 @@
             onOpen: dlg => { A().bindCollectionPersonFields(dlg); const box = dlg.querySelector('[data-dna-guess]'), inp = dlg.querySelector('[data-dna-cm]');
                 const paint = () => { const g = guess(inp.value); box.innerHTML = g.length ? `<b>Relation probable (${fmt(num(inp.value), 1)} cM, ${fmt(pctOf(inp.value), 2)} %)</b> : ${g.slice(0, 5).map(x => `${esc(x.name)} <small>${Math.round(x.p * 100)} %</small>`).join(' · ')}` : '<small class="muted">Tape les cM partagés : la relation probable s’affiche ici.</small>'; };
                 inp.addEventListener('input', paint); paint(); },
-            onDelete: m.id ? async () => { if (!confirm(`Supprimer « ${m.name} » ?`)) return false; await post('delete_dna_match', {id: m.id}); toast('Supprimée.'); await refresh(); } : undefined,
+            onDelete: m.id ? async () => { if (!await A().confirmBox(`Supprimer « ${m.name} » ?`, {title: 'Supprimer la correspondance', okLabel: 'Supprimer la correspondance'})) return false; await post('delete_dna_match', {id: m.id}); toast('Supprimée.'); await refresh(); } : undefined,
             onSubmit: async f => { const v = Object.fromEntries(new FormData(f));
                 try { await post('save_dna_match', {id: m.id || 0, kit_id: Number(v.kit_id), name: v.name, shared_cm: v.shared_cm, segments: v.segments, longest_cm: v.longest_cm, relationship: v.relationship, side: v.side, status: v.status,
                     person_id: Number(v.dna_mperson) || 0, groups: data.groups.filter(g => v['g_' + g.id]).map(g => g.id),
@@ -286,7 +287,7 @@
     const parseCsv = t => ext.diagramsInternals?.parseTable ? ext.diagramsInternals.parseTable(t) : String(t).split(/\r?\n/).map(l => l.split(/[;,\t]/));
     function mapDialog({title, fields, head, rows, intro, extra = '', onGo}) {
         const map = autoMap(head, fields);
-        ext.openDialog({eyebrow: 'ADN · IMPORT', title, wide: true, submitLabel: `Importer ${fmt(rows.length)} ligne(s)`,
+        ext.openDialog({eyebrow: 'ADN · IMPORT', title, wide: true, submitLabel: `Importer ${plural(rows.length, 'ligne', 'lignes')}`,
             body: `<p class="muted">${intro}</p>${extra}<div class="h-dna-map">${fields.map(([k, l]) => `<label>${esc(l)}<select name="m_${k}"><option value="-1">— ne pas prendre —</option>${head.map((h, i) => `<option value="${i}" ${map[k] === i ? 'selected' : ''}>${esc(h)}</option>`).join('')}</select></label>`).join('')}</div>
                 <p class="muted">Aperçu : ${esc(rows.slice(0, 3).map(r => r.slice(0, 6).join(' | ')).join(' ⏎ '))}</p>`,
             onSubmit: async f => { const m = Object.fromEntries(fields.map(([k]) => [k, Number(f.querySelector(`[name=m_${k}]`).value)])); return onGo(m, f); }});
@@ -305,7 +306,7 @@
                     const out = rows.map(r => ({name: get(r, 'name'), shared_cm: num(get(r, 'shared_cm')), segments: Math.round(num(get(r, 'segments'))), longest_cm: num(get(r, 'longest_cm')), relationship: get(r, 'relationship'), side: sideOf(get(r, 'side')),
                         data: Object.fromEntries(['shared_matches', 'surnames', 'places', 'tree_size', 'tree_url', 'contact', 'x_cm', 'country', 'notes'].map(k => [k, get(r, k)]).filter(([, v]) => v !== ''))})).filter(r => r.name);
                     try { let added = 0, updated = 0; for (let i = 0; i < out.length; i += 3000) { const res = await post('import_dna_matches', {kit_id: Number(f.querySelector('[name=kit]').value), rows: out.slice(i, i + 3000)}); added += res.result?.added || 0; updated += res.result?.updated || 0; }
-                        toast(`${fmt(added)} ajoutée(s), ${fmt(updated)} mise(s) à jour.`); await refresh(); } catch (e) { toast(e.message, 'error'); return false; }
+                        toast(`${plural(added, 'ajoutée', 'ajoutées')}, ${plural(updated, 'mise', 'mises')} à jour.`); await refresh(); } catch (e) { toast(e.message, 'error'); return false; }
                 }});
         };
         input.click();
@@ -339,27 +340,27 @@
         ext.openDialog({eyebrow: 'ADN', title: g.id ? 'Modifier le groupe' : 'Nouveau groupe', submitLabel: 'Enregistrer',
             body: `<label>Nom<input name="name" required value="${esc(g.name || '')}" placeholder="Branche Martin (Bretagne)"></label><label>Couleur<input type="color" name="color" value="${esc(color(g.color || PALETTE[data.groups.length % PALETTE.length]))}"></label>
                 <label>Côté<select name="side">${SIDES.map(([v, l]) => `<option value="${v}" ${(g.side || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Couple d’ancêtres supposé<input name="ancestor" value="${esc(g.ancestor || '')}"></label><label>Notes<textarea name="notes" rows="3">${esc(g.notes || '')}</textarea></label>`,
-            onDelete: g.id ? async () => { if (!confirm(`Supprimer le groupe « ${g.name} » ? (les correspondances restent)`)) return false; await post('delete_dna_group', {id: g.id}); await refresh(); } : undefined,
+            onDelete: g.id ? async () => { if (!await A().confirmBox(`Supprimer le groupe « ${g.name} » ? (les correspondances restent)`, {title: 'Supprimer le groupe', okLabel: 'Supprimer le groupe'})) return false; await post('delete_dna_group', {id: g.id}); await refresh(); } : undefined,
             onSubmit: async f => { const v = Object.fromEntries(new FormData(f)); try { await post('save_dna_group', {id: g.id || 0, ...v}); await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }});
     }
     RENDER.groups = {html() {
         const kit = Number(filt().kit) || 0, L = leeds(kit);
         return `${header('ADN', '🗂️ Groupes et méthode de Leeds', 'Range tes correspondances par branche. La méthode de Leeds regroupe les cousins de 2e et 3e degré (≈ 90 à 400 cM) qui se correspondent entre eux : chaque groupe pointe souvent vers un de tes 8 arrière-grands-parents… à condition d’avoir noté leurs « correspondances en commun ».', '<button type="button" class="button" data-dna-newgroup>+ Nouveau groupe</button>')}
             <div class="h-dna-cards">${data.groups.map(g => `<article class="card h-dna-group" style="--c:${color(g.color)}"><header><h3><span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></h3><button type="button" class="icon-action" data-dna-group="${g.id}">✎</button></header>
-                <p>${esc(label(SIDES, g.side))}${g.ancestor ? ` · ${esc(g.ancestor)}` : ''}</p><p class="muted">${fmt(data.matches.filter(m => m.groups.includes(g.id)).length)} correspondance(s) · <button type="button" class="link-button" data-dna-gmatches="${g.id}">les voir</button></p>${g.notes ? `<p><small>${esc(g.notes)}</small></p>` : ''}</article>`).join('') || A().empty('Aucun groupe.')}</div>
+                <p>${esc(label(SIDES, g.side))}${g.ancestor ? ` · ${esc(g.ancestor)}` : ''}</p><p class="muted">${plural(data.matches.filter(m => m.groups.includes(g.id)).length, 'correspondance', 'correspondances')} · <button type="button" class="link-button" data-dna-gmatches="${g.id}">les voir</button></p>${g.notes ? `<p><small>${esc(g.notes)}</small></p>` : ''}</article>`).join('') || A().emptyState({icon: '🗂️', text: 'Aucun groupe pour l’instant', hint: 'Un groupe range ensemble les correspondances d’une même branche.', action: {label: '＋ Nouveau groupe', attrs: 'data-dna-newgroup'}})}</div>
             <h3>Méthode de Leeds automatique</h3>
-            <p class="muted">${fmt(L.pool)} correspondance(s) entre ${L.lo} et ${L.hi} cM${kit ? ' pour ce test' : ''} (bornes dans ⚙️ Réglages)${L.missing ? ` ; ${fmt(L.missing)} sans « correspondances en commun » notées, donc ignorées` : ''}.</p>
+            <p class="muted">${plural(L.pool, 'correspondance', 'correspondances')} entre ${L.lo} et ${L.hi} cM${kit ? ' pour ce test' : ''} (bornes dans ⚙️ Réglages)${L.missing ? ` ; ${fmt(L.missing)} sans « correspondances en commun » notées, donc ignorées` : ''}.</p>
             ${L.clusters.length ? `<div class="data-table-wrap"><table class="data-table h-dna-leeds"><thead><tr><th>Correspondance</th><th>cM</th>${L.clusters.map((c, i) => `<th style="background:${PALETTE[i % PALETTE.length]};color:#fff">${i + 1}</th>`).join('')}</tr></thead><tbody>
                 ${L.grid.filter(r => r.cols.some(Boolean)).map(r => `<tr><td><button type="button" class="link-button" data-dna-match="${r.m.id}">${esc(r.m.name)}</button></td><td>${fmt(r.m.shared_cm, 0)}</td>${r.cols.map((v, i) => `<td style="${v ? `background:${PALETTE[i % PALETTE.length]};opacity:${v === 2 ? 1 : .45}` : ''}"></td>`).join('')}</tr>`).join('')}</tbody></table></div>
-                <p><button type="button" class="button" data-dna-leedsmake>Créer ${L.clusters.length} groupe(s) avec ces couleurs</button></p>` : '<p class="muted">Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »).</p>'}`;
+                <p><button type="button" class="button" data-dna-leedsmake>Créer ${plural(L.clusters.length, 'groupe', 'groupes')} avec ces couleurs</button></p>` : '<p class="muted">Pas encore de groupe trouvé : ouvre tes correspondances proches et remplis « Correspondances en commun » (ou importe une colonne « Shared matches »).</p>'}`;
     }, bind(root) {
         bindMatchLinks(root);
-        root.querySelector('[data-dna-newgroup]').addEventListener('click', () => groupDialog());
+        root.querySelectorAll('[data-dna-newgroup]').forEach(b => b.addEventListener('click', () => groupDialog()));
         root.querySelectorAll('[data-dna-group]').forEach(b => b.addEventListener('click', () => groupDialog(groupById(b.dataset.dnaGroup))));
         root.querySelectorAll('[data-dna-gmatches]').forEach(b => b.addEventListener('click', () => { filt().group = Number(b.dataset.dnaGmatches); go('matches'); }));
         root.querySelector('[data-dna-leedsmake]')?.addEventListener('click', async () => { const L = leeds(Number(filt().kit) || 0);
             try { for (const [i, c] of L.clusters.entries()) { const name = `Leeds ${i + 1} (${c.seed.name})`, old = data.groups.find(g => g.name === name); const gid = old ? old.id : (await post('save_dna_group', {name, color: PALETTE[i % PALETTE.length], notes: `Créé par la méthode de Leeds autour de ${c.seed.name} (${fmt(c.seed.shared_cm)} cM).`})).result.id; await post('bulk_dna_matches', {ids: c.members.map(m => m.id), add_group: gid}); }
-                toast(`${L.clusters.length} groupe(s) créé(s).`); await refresh(); } catch (e) { toast(e.message, 'error'); } });
+                toast(`${plural(L.clusters.length, 'groupe créé', 'groupes créés')}.`); await refresh(); } catch (e) { toast(e.message, 'error'); } });
     }};
 
     /* ═════════ 🔗 Groupes automatiques (façon « AutoCluster ») ═════════
@@ -416,12 +417,12 @@
         const f = filt(), kit = Number(f.kit) || data.kits[0]?.id || 0, A2 = autoClusters(kit, tree && treeKit === kit ? tree : null), p = prefs();
         return `${header('ADN', '🔗 Groupes automatiques', 'Les correspondances qui se correspondent entre elles forment des grappes : chaque grappe descend en général d’un même couple d’ancêtres. Le calcul utilise les « correspondances en commun » notées ou importées, et les segments qui se chevauchent sur un même chromosome.')}
             <div class="h-dna-filters"><label>Test<select data-auto-kit>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('')}</select></label><label>De (cM)<input type="number" min="0" data-auto-p="autoMin" value="${esc(p.autoMin ?? 30)}"></label><label>à (cM)<input type="number" min="0" data-auto-p="autoMax" value="${esc(p.autoMax ?? 600)}"></label></div>
-            <p class="muted">${fmt(A2.pool.length)} correspondance(s) entre ${A2.lo} et ${A2.hi} cM ; ${fmt(A2.withShared)} avec des correspondances en commun, ${fmt(A2.segLinks)} chevauchement(s) de segments. Les très proches parents (au-delà de ${A2.hi} cM) sont écartés : ils correspondent à tout le monde.</p>
+            <p class="muted">${plural(A2.pool.length, 'correspondance', 'correspondances')} entre ${A2.lo} et ${A2.hi} cM ; ${fmt(A2.withShared)} avec des correspondances en commun, ${plural(A2.segLinks, 'chevauchement', 'chevauchements')} de segments. Les très proches parents (au-delà de ${A2.hi} cM) sont écartés : ils correspondent à tout le monde.</p>
             ${A2.clusters.length ? `<div class="h-dna-auto">${clusterMatrix(A2)}<div class="h-dna-cl-list">${A2.clusters.map(c => `<article class="card h-dna-cl" style="--c:${c.color}"><h3><span class="h-dna-gchip" style="--c:${c.color}">Grappe ${c.k + 1}</span> <small class="muted">${c.members.length} correspondances · ${fmt(c.members.at(-1).shared_cm)}–${fmt(c.members[0].shared_cm)} cM · liens ${Math.round(c.density * 100)} %</small></h3>
                     <p>${c.couple ? `${c.sure ? '🎯 Ancêtres communs' : '🤔 Ancêtres probables'} : <b>${esc(coupleLabel(c.couple, tree))}</b> <small class="muted">(${esc(GEN_NAMES[genOf(c.couple)] || '')}${c.side ? ', ' + esc(label(SIDES, c.side).toLowerCase()) : ''})</small>` : `<span class="muted">Ancêtre commun encore inconnu${c.side ? ` (côté ${esc(label(SIDES, c.side).toLowerCase())})` : ''} : place une de ces correspondances dans l’arbre (fiche liée), ou ajoute ses noms de famille.</span>`}</p>
                     ${c.surnames.length ? `<p class="h-dna-chips">Noms : ${c.surnames.map(s => `<span>${esc(s.w)} ×${s.n}</span>`).join('')}</p>` : ''}${c.places.length ? `<p class="h-dna-chips">Lieux : ${c.places.map(s => `<span>${esc(s.w)} ×${s.n}</span>`).join('')}</p>` : ''}
                     <p class="h-dna-cl-m">${c.members.map(m => `<button type="button" class="link-button" data-dna-match="${m.id}">${esc(m.name)}</button> <small>${fmt(m.shared_cm)}</small>`).join(' · ')}</p></article>`).join('')}</div></div>
-                <p><button type="button" class="button" data-auto-make>Créer ${A2.clusters.length} groupe(s) avec ces couleurs</button> <small class="muted">(ou mettre à jour ceux déjà créés)</small></p>`
+                <p><button type="button" class="button" data-auto-make>Créer ${plural(A2.clusters.length, 'groupe', 'groupes')} avec ces couleurs</button> <small class="muted">(ou mettre à jour ceux déjà créés)</small></p>`
             : `<p class="muted">Pas encore de grappe : il faut des « correspondances en commun » (fiche d’une correspondance, ou colonne « Shared matches » à l’import) ou des segments (🧩 Chromosomes).</p>`}`;
     }, bind(root) {
         bindMatchLinks(root);
@@ -433,7 +434,7 @@
             try { for (const c of A2.clusters) { const name = `Grappe ${c.k + 1} (${c.members[0].name})`, old = data.groups.find(g => g.name === name);
                 const gid = old ? old.id : (await post('save_dna_group', {name, color: c.color, side: c.side, ancestor: c.couple ? coupleLabel(c.couple, tree) : '', notes: `Groupe automatique : ${c.members.length} correspondances qui se correspondent entre elles.`})).result.id;
                 await post('bulk_dna_matches', {ids: c.members.map(m => m.id), add_group: gid}); if (c.side) await post('bulk_dna_matches', {ids: c.members.filter(m => !m.side).map(m => m.id), side: c.side}); }
-                toast(`${A2.clusters.length} groupe(s) créé(s) ou mis à jour.`); await refresh(); } catch (e) { toast(e.message, 'error'); } });
+                toast(`${plural(A2.clusters.length, 'groupe créé ou mis', 'groupes créés ou mis')} à jour.`); await refresh(); } catch (e) { toast(e.message, 'error'); } });
     }};
 
     /* ═════════ 📍 Placement probable d'un cousin ═════════
@@ -521,7 +522,7 @@
         const svg = `<svg viewBox="0 0 ${W} ${CHR.length * rowH + 10}" class="h-dna-chr">${CHR.map(([c, L], i) => { const y = i * rowH + 4, k = (W - 50) / maxL;
             return `<text x="4" y="${y + 12}" font-size="11">${c}</text><rect x="40" y="${y + 3}" width="${(L * k).toFixed(1)}" height="12" rx="6" fill="#e9ecef" stroke="#c4c9cf"/>${segs.filter(s => s.chromosome === c).map(s => `<rect x="${(40 + mb(s.start) * k).toFixed(1)}" y="${y + 3}" width="${Math.max(1.5, (mb(s.end) - mb(s.start)) * k).toFixed(1)}" height="12" fill="${esc(segColor(s, by))}" opacity=".85"><title>${esc(segName(s))} — chr ${c} : ${fmt(mb(s.start), 1)}–${fmt(mb(s.end), 1)} Mb, ${fmt(s.cm, 1)} cM${s.ancestor ? ' — ' + esc(s.ancestor) : ''}</title></rect>`).join('')}`; }).join('')}</svg>`;
         return `${header('ADN', '🧩 Chromosomes et segments', 'Le « navigateur de chromosomes » : où chaque correspondance partage de l’ADN avec toi. Des segments qui se chevauchent viennent peut-être du même ancêtre (triangulation — à confirmer : chacun doit aussi correspondre avec l’autre sur ce segment).', '<button type="button" class="button secondary" data-dna-segimport>📥 Importer des segments (CSV)</button><button type="button" class="button secondary" data-dna-segadd>+ Segment</button>')}
-            <div class="h-dna-filters"><select data-dna-ck>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('') || '<option>Aucun test</option>'}</select><select data-dna-paint>${[['match', 'Couleur par correspondance'], ['group', 'Par groupe'], ['side', 'Par côté']].map(([v, l]) => `<option value="${v}" ${by === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="muted">${fmt(segs.length)} segment(s)</span></div>
+            <div class="h-dna-filters"><select data-dna-ck>${data.kits.map(k => `<option value="${k.id}" ${k.id === kit ? 'selected' : ''}>${esc(kitName(k))}</option>`).join('') || '<option>Aucun test</option>'}</select><select data-dna-paint>${[['match', 'Couleur par correspondance'], ['group', 'Par groupe'], ['side', 'Par côté']].map(([v, l]) => `<option value="${v}" ${by === v ? 'selected' : ''}>${l}</option>`).join('')}</select><span class="muted">${plural(segs.length, 'segment', 'segments')}</span></div>
             <div class="card">${svg}</div>
             <h3>Chevauchements (triangulation possible) <small>${fmt(ov.length)}</small></h3>
             ${ov.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Chr</th><th>De (Mb)</th><th>À (Mb)</th><th>Correspondance 1</th><th>Correspondance 2</th></tr></thead><tbody>${ov.slice(0, 300).map(o => `<tr><td>${o.c}</td><td>${fmt(mb(o.a), 1)}</td><td>${fmt(mb(o.b), 1)}</td><td>${esc(segName(o.s1))}</td><td>${esc(segName(o.s2))}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">Aucun pour l’instant.</p>'}
@@ -543,7 +544,7 @@
                 mapDialog({title: `Segments de « ${file.name} »`, fields: SF, head: all[0], rows: all.slice(1), intro: 'Les segments sont rattachés aux correspondances du même nom (dans ce test). Positions en paires de bases ou en Mb (GRCh37).', extra: '<label class="checkbox-line"><input type="checkbox" name="replace"> Remplacer tous les segments de ce test</label>',
                     onGo: async (m, fm) => { const get = (r, k) => m[k] >= 0 ? String(r[m[k]] ?? '').trim() : '';
                         const rows = all.slice(1).map(r => ({label: get(r, 'label'), chromosome: get(r, 'chromosome'), start: num(get(r, 'start')), end: num(get(r, 'end')), cm: num(get(r, 'cm')), snps: Math.round(num(get(r, 'snps')))}));
-                        try { let n = 0; for (let i = 0; i < rows.length; i += 5000) { const r = await post('save_dna_segments', {kit_id: kit(), replace: i === 0 && fm.querySelector('[name=replace]').checked ? 1 : 0, rows: rows.slice(i, i + 5000)}); n += r.result?.n || 0; } toast(`${fmt(n)} segment(s) importé(s).`); await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }}); };
+                        try { let n = 0; for (let i = 0; i < rows.length; i += 5000) { const r = await post('save_dna_segments', {kit_id: kit(), replace: i === 0 && fm.querySelector('[name=replace]').checked ? 1 : 0, rows: rows.slice(i, i + 5000)}); n += r.result?.n || 0; } toast(`${plural(n, 'segment importé', 'segments importés')}.`); await refresh(); } catch (e) { toast(e.message, 'error'); return false; } }}); };
             input.click(); });
     }};
 
@@ -576,7 +577,7 @@
         const male = r.person.gender === 'male';
         root.querySelector('[data-dna-lines]').innerHTML = `<section class="card"><h3>♂ ADN-Y — lignée paternelle directe</h3>${male ? '' : '<p class="muted">Seuls les hommes ont un ADN-Y. Une femme n’a pas d’ADN-Y : ce sont ceux de son père, de ses frères ou d’un cousin du même nom qui le portent.</p>'}<ol>${r.y.map(pl).join('') || '<li class="muted">Pas de père connu dans l’arbre.</li>'}</ol><p class="muted">Tous ces hommes ont (presque) le même chromosome Y : un homme vivant de cette lignée peut le faire tester.</p></section>
             <section class="card"><h3>♀ ADN mitochondrial — lignée maternelle directe</h3><ol>${r.mt.map(pl).join('') || '<li class="muted">Pas de mère connue dans l’arbre.</li>'}</ol><p class="muted">Transmis par les mères à tous leurs enfants ; seules les filles le transmettent à leur tour.</p></section>
-            <section class="card"><h3>✕ ADN-X — ancêtres possibles</h3><p class="muted">${male ? 'Un homme reçoit son X de sa mère seulement.' : 'Une femme reçoit un X de chaque parent.'} Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. ${fmt(r.x.length)} ancêtre(s) possible(s) :</p>
+            <section class="card"><h3>✕ ADN-X — ancêtres possibles</h3><p class="muted">${male ? 'Un homme reçoit son X de sa mère seulement.' : 'Une femme reçoit un X de chaque parent.'} Un père ne transmet que le X qu’il tient de sa mère : certains ancêtres ne peuvent donc pas avoir donné d’X. ${plural(r.x.length, 'ancêtre possible', 'ancêtres possibles')} :</p>
                 ${[...new Set(r.x.map(p => p.gen))].map(g => `<h4>Génération ${g} <small>(${r.x.filter(p => p.gen === g).length})</small></h4><ul class="h-dna-xlist">${r.x.filter(p => p.gen === g).map(pl).join('')}</ul>`).join('') || '<p class="muted">Aucun parent connu.</p>'}</section>`;
     }};
 
@@ -623,7 +624,7 @@
             p.columns = [...root.querySelectorAll('[data-dna-cols] .h-dna-orow')].filter(r => r.querySelector('input').checked).map(r => r.dataset.k);
             root.querySelectorAll('[data-p]').forEach(i => { p[i.dataset.p] = num(i.value); }); root.querySelectorAll('[data-c]').forEach(i => { p.colors[i.dataset.c] = i.value; });
             savePrefs(p); toast('Réglages ADN enregistrés.'); A().renderSidebar?.(); reopenSettings(); });
-        root.querySelector('[data-dna-reset]').addEventListener('click', () => { if (!confirm('Revenir aux réglages d’origine de l’onglet ADN ?')) return; const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
+        root.querySelector('[data-dna-reset]').addEventListener('click', async () => { if (!await A().confirmBox('Revenir aux réglages d’origine de l’onglet ADN ?', {title: 'Réglages d’origine', okLabel: 'Revenir aux réglages d’origine', danger: true})) return; const ack = p.ack; savePrefs({...DEFAULTS(), ack}); reopenSettings(); });
         root.querySelector('[data-dna-json]').addEventListener('click', () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda_dna: 1, exported: new Date().toISOString(), ...data}, null, 1)], {type: 'application/json'})); a.download = 'adn.json'; document.body.appendChild(a); a.click(); a.remove(); });
     }};
 

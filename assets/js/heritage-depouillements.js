@@ -84,9 +84,9 @@
                 <span class="h-rc-cover">${cover ? `<img src="${esc(thumb(cover))}" alt="" loading="lazy">` : '<span class="h-rc-cover-empty">📜</span>'}${pages.length ? `<span class="h-rc-badge">${plural(pages.length, 'page', 'pages')}</span>` : ''}</span>
                 <span class="h-rc-card-body"><strong>${esc(types[r.record_type] || r.record_type || 'Dépouillement')}${r.year_text ? ' · ' + esc(r.year_text) : ''}</strong>
                     <small class="muted">${esc([r.city_alias && r.city_alias !== (r.place_name || r.city_name) ? r.city_alias : '', r.archive_service, r.archive_reference].filter(Boolean).join(' · ')) || '&nbsp;'}</small>
-                    <span class="h-rc-meter" title="${done} page(s) dépouillée(s) sur ${total}${r.page_total ? ' vues du scan' : ''} (${pct} %)"><i style="width:${pct}%"></i></span>
+                    <span class="h-rc-meter" title="${plural(done, 'page dépouillée', 'pages dépouillées')} sur ${total}${r.page_total ? ' vues du scan' : ''} (${pct} %)"><i style="width:${pct}%"></i></span>
                     ${r.page_total || r.doc_pages ? `<small class="muted">${r.page_total ? `📷 ${plural(r.page_total, 'vue', 'vues')} en ligne` : ''}${r.page_total && r.doc_pages ? ' · ' : ''}${r.doc_pages ? `📄 document de ${plural(r.doc_pages, 'page', 'pages')}` : ''}</small>` : ''}
-                    <small>${esc(statuses[r.status] || r.status || '')} · 👥 ${(r.people || []).length} · 🏠 ${households(r.people || [])} foyer(s)${ls ? ` · <b class="h-rc-warn">${plural(ls, 'photo à ranger', 'photos à ranger')}</b>` : ''}</small></span></button>`;
+                    <small>${esc(statuses[r.status] || r.status || '')} · 👥 ${(r.people || []).length} · 🏠 ${plural(households(r.people || []), 'foyer', 'foyers')}${ls ? ` · <b class="h-rc-warn">${plural(ls, 'photo à ranger', 'photos à ranger')}</b>` : ''}</small></span></button>`;
         };
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
@@ -96,10 +96,10 @@
                 <select data-dp-type><option value="">Tous les types</option>${Object.entries(types).map(([k, l]) => `<option value="${esc(k)}" ${s.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
                 <select data-dp-status><option value="">Tous les états</option>${Object.entries(statuses).map(([k, l]) => `<option value="${esc(k)}" ${s.status === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>
             ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3><div class="h-rc-grid">${list.map(card).join('')}</div>`).join('')
-            : A().empty(s.q || s.type || s.status ? 'Aucun dépouillement ne correspond.' : 'Aucun dépouillement pour l’instant : « + Nouveau dépouillement » (la fiche se remplit dans Recherche).')}</section>`;
+            : (s.q || s.type || s.status ? A().emptyState({icon: '🔍', text: 'Aucun dépouillement ne correspond.'}) : A().emptyState({icon: '📑', text: 'Aucun dépouillement pour l’instant', hint: 'La fiche du dépouillement se remplit dans Recherche.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-dp-new'}}))}</section>`;
         const sec = ws.querySelector('.h-dp');
         sec.querySelectorAll('[data-dp-open]').forEach(b => b.addEventListener('click', () => { Object.assign(s, {id: Number(b.dataset.dpOpen), page: '', tab: 'pages', image: 0}); ext.lists.depouillements(++S().workspaceToken); }));
-        sec.querySelector('[data-dp-new]').addEventListener('click', newInResearch);
+        sec.querySelectorAll('[data-dp-new]').forEach(b => b.addEventListener('click', newInResearch));
         sec.querySelector('[data-dp-research]').addEventListener('click', () => openInResearch(0));
         let timer = 0;
         sec.querySelector('[data-dp-q]').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); ext.lists.depouillements(++S().workspaceToken).then(() => { const i = A().$('[data-dp-q]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }, 300); });
@@ -182,8 +182,9 @@
                 return `<button type="button" class="h-rc-page" data-dp-page="${esc(p.number)}"><span class="h-rc-thumb">${img ? `<img src="${esc(thumb(img))}" alt="" loading="lazy">` : '<span class="h-rc-nophoto">pas de photo</span>'}<span class="h-rc-num">${esc(p.number)}</span></span>
                     <span class="h-rc-page-name"><i class="h-dp-dot" style="background:${col}" title="${esc(lab)}"></i> ${esc(lab)}</span>
                     <span class="h-rc-page-meta"><small>${ppl.length ? `👥 ${ppl.length} · 🏠 ${households(ppl)}` : esc(CONTENT[p.content_type] || '')}${p.act_from ? ` · actes ${esc(p.act_from)}${p.act_to ? '–' + esc(p.act_to) : ''}` : ''}</small></span></button>`; }).join('')}</div>`
-            : A().empty('Pas encore de page : « + Page » ou « + Ajouter des photos ».')}`;
+            : A().emptyState({icon: '📄', text: 'Aucune page pour l’instant', hint: '« + Page » pour une page sans photo, ou ajoute les photos du registre.', action: {label: '＋ Ajouter des photos', attrs: 'data-dp-add-empty'}})}`;
         body.querySelector('[data-dp-newpage]').addEventListener('click', async () => { const n = await pageFromSelect('__new'); if (n) { st().page = n; await reload(); } });
+        body.querySelector('[data-dp-add-empty]')?.addEventListener('click', () => addPhotos(''));
         body.querySelectorAll('[data-dp-page]').forEach(b => b.addEventListener('click', () => { st().page = b.dataset.dpPage; st().image = 0; paint(); }));
         body.querySelectorAll('[data-dp-zoom]').forEach(b => b.addEventListener('click', () => viewer([r.media.find(m => m.id === Number(b.dataset.dpZoom))], 0)));
         body.querySelectorAll('[data-dp-assign]').forEach(sel => sel.addEventListener('change', async () => {
@@ -204,13 +205,13 @@
         const ms = pageMedia(r, p.number), imgs = ms.filter(isImage), cur = imgs.find(m => m.id === s.image) || imgs[0] || null;
         const lines = D.lines.filter(l => String(l.page_number || '').trim() === p.number).sort((a, b) => (a.line_number - b.line_number) || (a.id - b.id));
         body.innerHTML = `<div class="h-rc-pagebar"><button type="button" class="button small secondary" data-dp-allpages>▦ Toutes les pages</button>
-                <span class="h-rc-pagenav"><button type="button" class="button small secondary" data-dp-go="${esc(prev?.number ?? '')}" ${prev ? '' : 'disabled'} title="Page précédente (Alt + ←)">‹</button>
+                <span class="h-rc-pagenav"><button type="button" class="button small secondary" data-dp-go="${esc(prev?.number ?? '')}" ${prev ? '' : 'disabled'} title="Page précédente" data-shortcut="⌥←">‹</button>
                 <select data-dp-jump>${pages.map(x => `<option value="${esc(x.number)}" ${x.number === p.number ? 'selected' : ''}>Page ${esc(x.number)}</option>`).join('')}</select>
-                <button type="button" class="button small secondary" data-dp-go="${esc(next?.number ?? '')}" ${next ? '' : 'disabled'} title="Page suivante (Alt + →)">›</button></span>
+                <button type="button" class="button small secondary" data-dp-go="${esc(next?.number ?? '')}" ${next ? '' : 'disabled'} title="Page suivante" data-shortcut="⌥→">›</button></span>
                 <span class="muted">${idx + 1} / ${pages.length}</span></div>
             <div class="h-rc-pageview">
                 <div class="h-rc-stage-wrap">
-                    <div class="h-rc-stage">${imgs.length > 1 ? `<button type="button" class="h-rc-imgnav is-prev" data-dp-imgstep="-1" title="Photo précédente de cette page (←)">‹</button><button type="button" class="h-rc-imgnav is-next" data-dp-imgstep="1" title="Photo suivante de cette page (→)">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}
+                    <div class="h-rc-stage">${imgs.length > 1 ? `<button type="button" class="h-rc-imgnav is-prev" data-dp-imgstep="-1" title="Photo précédente de cette page" data-shortcut="←">‹</button><button type="button" class="h-rc-imgnav is-next" data-dp-imgstep="1" title="Photo suivante de cette page" data-shortcut="→">›</button><span class="h-rc-imgcount">${imgs.indexOf(cur) + 1} / ${imgs.length}</span>` : ''}
                         ${cur ? `<figure class="h-rc-figure"><img src="${esc(full(cur))}" alt="" data-dp-zoomcur title="Cliquer : agrandir, pivoter, retoucher"><figcaption>${esc(cur.title || '')}</figcaption></figure>` : `<div class="h-rc-nophoto big">Pas de photo pour cette page.<br><button type="button" class="button small" data-dp-addhere>+ Ajouter une photo de cette page</button></div>`}</div>
                     ${cur ? `<div class="h-rc-imgactions"><button type="button" class="button small secondary" data-dp-zoomcur>🔍 Agrandir, pivoter, retoucher</button>
                         <label class="h-rc-move">Déplacer vers ${pageSelect('data-dp-moveimg', p.number)}</label>
@@ -246,7 +247,7 @@
         body.querySelector('[data-dp-moveimg]')?.addEventListener('change', async e => {
             try { const n = await pageFromSelect(e.target.value); if (n === null || n === p.number) { e.target.value = p.number; return; } await post('link_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id, page_number: n}); toast(n ? `Photo déplacée en page ${n}.` : 'Photo mise « à ranger ».'); s.image = 0; await reload(); } catch (err) { toast(err.message, 'error'); }
         });
-        body.querySelector('[data-dp-unlink]')?.addEventListener('click', async () => { if (!confirm('Retirer cette photo du dépouillement ? Elle reste dans Médias.')) return; await post('unlink_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id}); s.image = 0; toast('Photo retirée du dépouillement.'); reload(); });
+        body.querySelector('[data-dp-unlink]')?.addEventListener('click', async () => { if (!await A().confirmBox('Retirer cette photo du dépouillement ? Elle reste dans Médias.', {title: 'Retirer la photo', okLabel: 'Retirer la photo'})) return; await post('unlink_archive_digest_media', {archive_digest_id: r.id, media_id: cur.id}); s.image = 0; toast('Photo retirée du dépouillement.'); reload(); });
         // fiche de la page, enregistrée au fil de la saisie
         const saved = body.querySelector('[data-dp-saved]'); let timer = 0;
         const savePage = async () => {
@@ -262,7 +263,7 @@
         });
         body.querySelector('[data-dp-delpage]').addEventListener('click', async () => {
             const nPeople = (r.people || []).filter(x => String(x.page_number || '').trim() === p.number).length, nLines = lines.length;
-            if (!confirm(`Supprimer la page ${p.number} ?${ms.length ? `\n\nSes ${ms.length} photo(s) passent « à ranger ».` : ''}${nPeople || nLines ? `\n${[nPeople && `Ses ${nPeople} personne(s) relevée(s)`, nLines && `ses ${nLines} ligne(s) de transcription`].filter(Boolean).join(' et ')} seront supprimées aussi (gardées dans l’Historique).` : ''}`)) return;
+            if (!await A().confirmBox(`Supprimer la page ${p.number} ?${ms.length ? `\n\n${ms.length > 1 ? `Ses ${ms.length} photos passent` : 'Sa photo passe'} « à ranger ».` : ''}${nPeople || nLines ? `\n${[nPeople && (nPeople > 1 ? `Ses ${nPeople} personnes relevées` : 'Sa personne relevée'), nLines && (nLines > 1 ? `ses ${nLines} lignes de transcription` : 'sa ligne de transcription')].filter(Boolean).join(' et ')} ${nPeople + nLines > 1 ? 'seront supprimées' : 'sera supprimée'} aussi (gardées dans l’Historique).` : ''}`, {title: 'Supprimer la page', okLabel: 'Supprimer la page'})) return;
             await post('save_archive_digest_page', {archive_digest_id: r.id, old_number: p.number, delete: 1, delete_content: 1}); delete DRAFTS[`${r.id}:${p.number}`]; s.page = (next || prev)?.number || ''; toast('Page supprimée.'); reload();
         });
         // transcription : chaque ligne s'enregistre ; Entrée dans la dernière en crée une nouvelle
@@ -270,7 +271,7 @@
         body.querySelectorAll('[data-dp-line]').forEach(row => {
             const l = lines.find(x => x.id === Number(row.dataset.dpLine)), ta = row.querySelector('[data-dp-ltext]');
             autosize(ta); ta.addEventListener('input', () => autosize(ta)); ta.addEventListener('blur', () => lineSave(ta, l));
-            row.querySelector('[data-dp-ldel]').addEventListener('click', async () => { if (!confirm('Supprimer cette ligne ?')) return; await post('delete_archive_digest_transcription_line', {id: l.id}); D.lines = D.lines.filter(x => x !== l); paint(); });
+            row.querySelector('[data-dp-ldel]').addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette ligne ?', {title: 'Supprimer la ligne', okLabel: 'Supprimer la ligne'})) return; await post('delete_archive_digest_transcription_line', {id: l.id}); D.lines = D.lines.filter(x => x !== l); paint(); });
         });
         const nl = body.querySelector('[data-dp-lnew]');
         nl.addEventListener('keydown', async e => {
@@ -382,12 +383,12 @@
                     });
                 });
                 tr.querySelector('[data-dp-del]').addEventListener('click', async () => {
-                    if (x.id) { if (!confirm(`Supprimer ${[x.first_name, x.last_name].filter(Boolean).join(' ') || 'cette personne'} du relevé ?`)) return; await post('delete_archive_digest_person', {id: x.id}); rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); }
+                    if (x.id) { if (!await A().confirmBox(`Supprimer ${[x.first_name, x.last_name].filter(Boolean).join(' ') || 'cette personne'} du relevé ?`, {title: 'Supprimer du relevé', okLabel: 'Supprimer du relevé'})) return; await post('delete_archive_digest_person', {id: x.id}); rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); }
                     else { x._gone = true; const k = draft.indexOf(x); if (k >= 0) draft.splice(k, 1); }
                     render();
                 });
                 tr.querySelector('[data-dp-p]')?.addEventListener('click', () => pickPerson(x).then(ok => { if (ok) render(); }));
-                tr.querySelector('[data-dp-unp]')?.addEventListener('click', async () => { if (!confirm('Ne plus rattacher cette personne relevée à la fiche ?')) return; x.person_id = null; x.person_name = ''; await save(x); render(); });
+                tr.querySelector('[data-dp-unp]')?.addEventListener('click', async () => { if (!await A().confirmBox('Ne plus rattacher cette personne relevée à la fiche ?', {title: 'Détacher de la fiche', okLabel: 'Ne plus rattacher', danger: true})) return; x.person_id = null; x.person_name = ''; await save(x); render(); });
             });
             box.querySelectorAll('tr[data-dp-hh]').forEach(tr => {
                 const uid = tr.dataset.dpHh, head = () => members(uid)[0] || {};
@@ -401,12 +402,12 @@
                     const k = keyOf(head());
                     const nk = ((await A().askText({title: 'Numéro du foyer', message: 'Nouveau numéro de ce foyer seulement (tel qu’il est écrit dans le document, même s’il ne suit pas) :', value: k, okLabel: 'Renuméroter'})) ?? '').trim();
                     if (nk === k) return;
-                    if (nk && all().some(y => uidOf(y) !== uid && keyOf(y) === nk) && !confirm(`Un autre foyer de cette page porte déjà le n° ${nk}. Les deux garderont ce numéro mais resteront deux foyers distincts. Continuer ?`)) return;
+                    if (nk && all().some(y => uidOf(y) !== uid && keyOf(y) === nk) && !await A().confirmBox(`Un autre foyer de cette page porte déjà le n° ${nk}. Les deux garderont ce numéro mais resteront deux foyers distincts. Continuer ?`, {title: 'Numéro déjà pris', okLabel: 'Garder ce numéro'})) return;
                     try { await setHousehold(uid, {new_key: nk}); render(); toast(`Foyer n° ${nk || '—'}.`); } catch (e) { toast(e.message, 'error'); }
                 });
                 tr.querySelector('[data-dp-hhdel]').addEventListener('click', async () => {
                     const ms = members(uid), saved = ms.filter(x => x.id);
-                    if (saved.length && !confirm(`Supprimer le foyer ${keyOf(head()) || 'sans n°'} et ses ${plural(saved.length, 'personne relevée', 'personnes relevées')} ?\n\nLes fiches rattachées ne sont pas supprimées.`)) return;
+                    if (saved.length && !await A().confirmBox(`Supprimer le foyer ${keyOf(head()) || 'sans n°'} et ses ${plural(saved.length, 'personne relevée', 'personnes relevées')} ?\n\nLes fiches rattachées ne sont pas supprimées.`, {title: 'Supprimer le foyer', okLabel: 'Supprimer le foyer'})) return;
                     try { if (saved.length) await post('save_archive_digest_household', {archive_digest_id: r.id, page_number: pageNumber, household_uid: uid, delete: 1});
                         ms.forEach(x => { if (x.id) { rows.splice(rows.indexOf(x), 1); r.people = r.people.filter(y => y !== x); } else { x._gone = true; draft.splice(draft.indexOf(x), 1); } }); render(); toast('Foyer supprimé.'); } catch (e) { toast(e.message, 'error'); }
                 });
@@ -435,7 +436,7 @@
                 lines[i].forEach((v, j) => { const col = COLS2[c0 + j]; if (col) x[col[0]] = v.trim(); });
                 await save(x).catch(e => toast(e.message, 'error'));
             }
-            toast(`${lines.length} ligne(s) collée(s).`); render();
+            toast(`${plural(lines.length, 'ligne collée', 'lignes collées')}.`); render();
         }
         function pickPerson(x) {
             return new Promise(resolve => {

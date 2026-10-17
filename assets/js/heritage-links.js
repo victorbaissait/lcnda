@@ -18,7 +18,7 @@
     const LP = (type, labels) => window.LCNDA_EXT?.labelsPicker?.(type, labels) || ''; // étiquettes (heritage-more.js)
     const LC = labels => window.LCNDA_EXT?.labelChips?.(labels) || '';
     const toast = (...args) => A().toast(...args);
-    const empty = text => A().empty(text);
+    const empty = (text, o) => A().empty(text, o);
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
@@ -88,7 +88,7 @@
         if (!document.body.contains(box)) return;
         box.innerHTML = `<details class="maintenance-panel h-question-saved" ${S().hQuestionSavedOpen !== false ? 'open' : ''}><summary><strong>Recherches enregistrées</strong> <span class="muted">(${list.length})</span></summary>
             ${list.length ? `<div class="h-question-saved-list">${list.map(s => `<article class="h-saved ${s.new_count ? 'has-new' : ''}"><button type="button" class="link-button" data-hq-run="${s.id}"><strong>${esc(s.name)}</strong></button>${s.new_count ? ` <span class="h-new-badge">${s.new_count} nouvelle${s.new_count > 1 ? 's' : ''}</span>` : ''}<small>${esc(s.description)}</small><small>${plural(s.count, 'fiche', 'fiches')}${s.error ? ' · ' + esc(s.error) : ''}</small>
-                <span class="h-saved-tools">${s.new_count ? `<button type="button" class="link-button" data-hq-seen="${s.id}">marquer comme vues</button>` : ''}<button type="button" class="link-button" data-hq-delete="${s.id}">supprimer</button></span></article>`).join('')}</div>` : '<p class="muted">Aucune recherche enregistrée. Pose une question, puis « Enregistrer comme recherche ».</p>'}</details>`;
+                <span class="h-saved-tools">${s.new_count ? `<button type="button" class="link-button" data-hq-seen="${s.id}">marquer comme vues</button>` : ''}<button type="button" class="link-button" data-hq-delete="${s.id}">supprimer</button></span></article>`).join('')}</div>` : A().emptyState({icon: '🔎', text: 'Aucune recherche enregistrée pour l’instant', hint: 'Pose une question, puis « Enregistrer comme recherche ».'})}</details>`;
         box.querySelector('details').addEventListener('toggle', event => { S().hQuestionSavedOpen = event.target.open; });
         box.querySelectorAll('[data-hq-run]').forEach(b => b.addEventListener('click', async () => {
             const s = list.find(x => Number(x.id) === Number(b.dataset.hqRun)), out = document.getElementById('h-question-out');
@@ -101,7 +101,7 @@
             } catch (error) { out.innerHTML = `<p class="h-offsite-sentence is-warn">${esc(error.message)}</p>`; }
         }));
         box.querySelectorAll('[data-hq-seen]').forEach(b => b.addEventListener('click', async () => { await api('mark_saved_search_seen', {}, {method: 'POST', body: {id: b.dataset.hqSeen}}); renderSavedQuestions(); }));
-        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette recherche enregistrée ?')) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hqDelete}}); toast('Recherche supprimée.'); renderSavedQuestions(); }));
+        box.querySelectorAll('[data-hq-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette recherche enregistrée ?', {title: 'Supprimer la recherche', okLabel: 'Supprimer la recherche'})) return; await api('delete_saved_search', {}, {method: 'POST', body: {id: b.dataset.hqDelete}}); toast('Recherche supprimée.'); renderSavedQuestions(); }));
     }
     // Recherche → « Poser une question en français » : un écran à part
     ext.question = async token => {
@@ -165,7 +165,7 @@
         const ed = event.target.closest?.('[data-h-lang-edit]');
         if (ed) { const L = S().currentPerson?.heritage?.languages; const l = L?.own.find(x => Number(x.id) === Number(ed.dataset.hLangEdit)); if (l) personLanguageDialog(Number(l.person_id), l); }
         const del = event.target.closest?.('[data-h-lang-delete]');
-        if (del && confirm('Supprimer cette langue ?')) { await api('delete_person_language', {}, {method: 'POST', body: {id: del.dataset.hLangDelete}}); toast('Langue supprimée.'); await refresh(); }
+        if (del && await A().confirmBox('Supprimer cette langue ?', {title: 'Supprimer la langue', okLabel: 'Supprimer la langue'})) { await api('delete_person_language', {}, {method: 'POST', body: {id: del.dataset.hLangDelete}}); toast('Langue supprimée.'); await refresh(); }
     });
     document.addEventListener('change', async event => {
         const c = event.target.closest?.('[data-h-lang-noinherit]');
@@ -229,7 +229,7 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Langues de la famille', 'La langue parlée par chacun ou par une branche (flamand, picard, breton, occitan, alsacien, yiddish, italien…). Elle éclaire les noms mal orthographiés par un curé qui ne comprenait pas la langue de la famille, et indique dans quelle langue chercher : dans le Nord, une partie des registres et des actes notariés est en flamand. Une langue notée sur une personne vaut aussi pour sa descendance, sauf refus explicite sur une fiche.')}
             ${langs.length ? `<div class="h-lang-legend">${langs.map((l, i) => `<span><i style="background:${langColors[i % langColors.length]}"></i>${esc(l.language)} <small>(${l.people.length})</small></span>`).join('')}</div>${map}
             ${langs.map((l, i) => `<details class="maintenance-panel"><summary><strong style="color:${langColors[i % langColors.length]}">${esc(l.language)}</strong> — ${plural(l.people.length, 'personne', 'personnes')} (${l.declared} déclarée${l.declared > 1 ? 's' : ''})</summary><table class="data-table"><tbody>${l.people.slice(0, 300).map(p => `<tr><td>${personLink(p.person.id, A().personName(p.person), A().years(p.person))}</td><td><small>${esc(p.how)}${p.certainty !== 'certain' ? ` · ${esc(p.certainty)}` : ''}</small></td><td><small>${esc(p.place?.place || '')}</small></td></tr>`).join('')}</tbody></table></details>`).join('')}`
-            : empty('Aucune langue notée. Sur une fiche, coche « Langues » dans IDENTITÉ → Modifier la personne, puis « + Langue ».')}
+            : empty('Aucune langue notée pour l’instant', {icon: '🗣️', hint: 'Sur une fiche, coche « Langues » dans IDENTITÉ → Modifier la personne, puis « + Langue ».'})}
             <h3>Langue des actes et des documents</h3>${(data.records || []).length ? `<table class="data-table"><thead><tr><th>Langue</th><th>Acte ou document</th><th>Certitude</th></tr></thead><tbody>${data.records.map(r => `<tr><td>${esc(r.language)}</td><td>${r.entity_type === 'event' ? '📜 ' : '📄 '}${r.person_id ? personLink(r.person_id, r.label) : esc(r.label || '')}</td><td>${esc(data.certainties?.[r.certainty] || r.certainty)}</td></tr>`).join('')}</tbody></table>` : '<p class="muted">Aucune. La langue d’un acte se note dans la fenêtre de l’événement ; celle d’un document dans sa transcription (Listes → Noms cités).</p>'}</section>`;
         A().bindTableLinks();
     };
@@ -373,13 +373,13 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Demandes d’entraide', 'Pour un ancêtre où tu es bloqué, l’app rédige un message prêt à copier sur un forum, sur l’entraide de Geneanet ou sur un groupe Facebook : ce que l’on sait (avec les sources), ce que l’on cherche, ce qui a déjà été essayé (tiré des enquêtes). Les demandes bien présentées obtiennent beaucoup plus de réponses.')}
             <div class="collection-toolbar"><button type="button" class="button" data-h-help-new>+ Demande</button><div class="segmented-filter">${[['open', `En cours (${counts.open})`], ['closed', `Terminées (${counts.closed})`], ['all', 'Toutes']].map(([k, l]) => `<button type="button" class="button small ${filter === k ? '' : 'secondary'}" data-h-help-filter="${k}">${esc(l)}</button>`).join('')}</div></div>
             ${e ? helpFormHtml(e) : ''}
-            ${rows.length ? `<div class="h-records">${rows.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">Mise à jour : ${esc(r.updated_at)}</small></article>`).join('')}</div>` : (e ? '' : empty(filter === 'closed' ? 'Aucune demande terminée.' : 'Aucune demande en cours. Prépare la première avec « + Demande ».'))}</section>`;
+            ${rows.length ? `<div class="h-records">${rows.map(r => `<article class="h-record"><header><div><strong>🤝 ${esc(helpTargets[r.target] || 'Demande')}</strong>${LC(r.labels)} — ${personLink(r.person_id, r.person_name)} <span class="collection-kind">${esc(helpStatuses[r.status] || r.status)}</span>${r.posted_where ? ` <small>· ${esc(r.posted_where)}</small>` : ''}${r.posted_url ? ` <a href="${esc(r.posted_url)}" target="_blank" rel="noopener noreferrer">voir ↗</a>` : ''}</div>${tools(`data-h-help-edit="${r.id}"`, `data-h-help-delete="${r.id}"`, 'cette demande')}</header>${r.question ? `<p>${nl(r.question)}</p>` : ''}${r.answer ? `<p class="h-transcription"><strong>Réponse :</strong> ${nl(r.answer)}</p>` : ''}<small class="muted">Mise à jour : ${esc(r.updated_at)}</small></article>`).join('')}</div>` : (e ? '' : (filter === 'closed' ? empty('Aucune demande terminée.', {icon: '✅'}) : A().emptyState({icon: '🤝', text: 'Aucune demande en cours', hint: 'Pour un ancêtre où tu es bloqué : l’app rédige un message prêt à copier sur un forum ou un groupe d’entraide.', action: {label: '＋ Demande', attrs: 'data-h-help-new'}})))}</section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks();
-        ws.querySelector('[data-h-help-new]').addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: 0}));
+        ws.querySelectorAll('[data-h-help-new]').forEach(b => b.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: 0})));
         ws.querySelectorAll('[data-h-help-filter]').forEach(b => b.addEventListener('click', () => { st.hHelpFilter = b.dataset.hHelpFilter; A().renderList(); }));
         ws.querySelectorAll('[data-h-help-edit]').forEach(b => b.addEventListener('click', () => ext.lists.help_requests(++S().workspaceToken, {id: Number(b.dataset.hHelpEdit)})));
-        ws.querySelectorAll('[data-h-help-delete]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette demande ?')) return; await api('delete_help_request', {}, {method: 'POST', body: {id: b.dataset.hHelpDelete}}); A().renderList(); }));
+        ws.querySelectorAll('[data-h-help-delete]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette demande ?', {title: 'Supprimer la demande', okLabel: 'Supprimer la demande'})) return; await api('delete_help_request', {}, {method: 'POST', body: {id: b.dataset.hHelpDelete}}); A().renderList(); }));
         if (e) bindHelpForm(e);
     };
     function helpFormHtml(e) {
@@ -401,7 +401,7 @@
         form.querySelector('[data-h-help-draft]').addEventListener('click', async () => {
             const pid = Number(form.querySelector('[name=person_id]').value);
             if (!pid) return toast('Choisis d’abord l’ancêtre (dans les suggestions).', 'error');
-            if (form.message.value.trim() && !confirm('Remplacer le message actuel par un nouveau brouillon ?')) return;
+            if (form.message.value.trim() && !await A().confirmBox('Remplacer le message actuel par un nouveau brouillon ?', {title: 'Nouveau brouillon', okLabel: 'Remplacer le message'})) return;
             try { const r = await api('help_request_draft', {person_id: pid, target: form.target.value, question: form.question.value, format: form.format.value}); form.message.value = r.message; }
             catch (error) { toast(error.message, 'error'); }
         });

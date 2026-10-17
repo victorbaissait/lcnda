@@ -185,7 +185,7 @@
     }
     /** une fiche par élément, comme dans « Mes fiches » : couverture, titre, puis les champs montrés pour ce type */
     function issueCards(rows) {
-        if (!rows.length) return A().empty(D.issues.length ? 'Rien ne correspond.' : 'Commence par « ＋ Numéro », « ＋ Livre », « ＋ Documentaire » ou « ＋ Épisode ».');
+        if (!rows.length) return (D.issues.length ? A().empty('Rien ne correspond.', {icon: '🔍'}) : A().emptyState({icon: '📰', text: 'Rien pour l’instant', hint: 'Commence par « ＋ Numéro », « ＋ Livre », « ＋ Documentaire » ou « ＋ Épisode », en haut de la page.'}));
         const val = (i, f, bf) => { if (['title', 'periodical_id', 'summary', 'notes'].includes(f.k)) return ''; const c = FIELD_CAT[f.k] || {}, v = c.data || f.k.startsWith('cf_') ? i.data?.[f.k] : i[f.k];
             if (f.k === 'status') return ''; // déjà en pastille if (f.k === 'rating') return stars(v); if (f.k === 'priority') return '🔥'.repeat(Number(v) || 0); if (c.type === 'check' || f.type === 'check') return v ? fieldLabel(f, bf) : '';
             return v ? (['number', 'date_text', 'creators', 'host', 'channel', 'publisher', 'category', 'duration'].includes(f.k) ? String(v) : `${fieldLabel(f, bf)} : ${v}`) : ''; };
@@ -197,7 +197,7 @@
                 ${lines.map(l => `<small>${esc(l)}</small>`).join('')}<small class="h-pr-fchips">${statusChip(i.status)}${labelChips(i.labels)}</small></article>`; }).join('')}</div>`;
     }
     function issuesTable(rows, buy = false) {
-        if (!rows.length) return A().empty(D.issues.length ? 'Rien ne correspond.' : 'Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire ».');
+        if (!rows.length) return (D.issues.length ? A().empty('Rien ne correspond.', {icon: '🔍'}) : A().emptyState({icon: '📰', text: 'Rien pour l’instant', hint: 'Commence par « ＋ Numéro », « ＋ Livre » ou « ＋ Documentaire », en haut de la page.'}));
         return `<div class="data-table-wrap"><table class="data-table h-pr-table"><thead><tr><th></th><th>Titre</th><th>Auteur, réalisation</th><th>N°, tome, épisode</th><th>Date</th><th>Où j’en suis</th>${buy ? '<th>Priorité</th><th>Prix</th><th>Où l’acheter</th>' : '<th>Contenu</th><th>Rattaché à</th><th>Étiquettes</th>'}</tr></thead><tbody>
             ${rows.map(i => { const p = pOf(i), fm = famOf(i), bf = baseOf(fm), n = D.articles.filter(a => a.issue_id === i.id).length, sub = bf === 'revue' ? i.title : [i.data?.subtitle, p?.title].filter(Boolean).join(' · ');
                 return `<tr data-pr-issue="${i.id}"><td class="h-pr-cover">${cover(i)}</td><td><strong>${Wf(fm).ic} ${esc(bf === 'revue' ? (p?.title || '') : i.title)}</strong>${sub ? `<small>${esc(sub)}</small>` : ''}${i.data?.rating ? `<small class="h-pr-stars">${stars(i.data.rating)}</small>` : ''}${i.data?.read ? ` <small>✓ ${bf === 'doc' ? 'vu' : bf === 'podcast' ? 'écouté' : 'lu'}</small>` : ''}${videoOf(i) ? ' <small title="Le film est dans l’application">🎞️</small>' : ''}${audioOf(i) ? ' <small title="L’épisode est dans l’application">🎧</small>' : ''}${i.data?.category ? `<small class="h-pr-cat">🏷 ${esc(i.data.category)}</small>` : ''}</td>
@@ -214,7 +214,7 @@
         </tbody></table></div>`;
     }
     function periodicalCards(conts) {
-        if (!conts.length) return A().empty('Rien ici : « ＋ Revue, collection, série ». (Un livre ou un documentaire n’a pas besoin d’être dans une collection ou une série.)');
+        if (!conts.length) return A().emptyState({icon: '📚', text: 'Aucune revue, collection ou série pour l’instant', hint: 'Un livre ou un documentaire n’a pas besoin d’être dans une collection ou une série.', action: {label: '＋ Revue, collection, série', attrs: 'data-pr-new="periodical"'}});
         return `<div class="h-pr-cards">${conts.map(p => { const fm = p.family || 'revue', is = D.issues.filter(i => i.periodical_id === p.id), own = is.filter(i => ['owned', 'subscribed', 'digital'].includes(i.status)).length, want = is.filter(i => ['wanted', 'ordered'].includes(i.status)).length, last = [...is].sort(cmp(['date_desc']))[0];
             return `<article class="h-pr-card" data-pr-periodical="${p.id}"><header><strong>${Wf(fm).ic} ${esc(p.title)}</strong><small>${esc(D.kinds[p.kind] || '')}${p.publisher ? ' · ' + esc(p.publisher) : ''}</small></header>
                 <p>${is.length} ${esc(Wf(fm).items.toLowerCase())} · ${own} à moi · ${want} à acheter${p.data?.subscribed ? ` · 📬 abonné${p.data.subscription_end ? ' jusqu’au ' + esc(p.data.subscription_end) : ''}` : ''}</p>
@@ -314,7 +314,7 @@
                 ${field('country', 'Pays, région', d.country)}${field('language', 'Langue', d.language)}${field('start_year', 'Depuis (année)', d.start_year)}${field('end_year', 'Jusqu’à (année)', d.end_year)}
                 ${field('where_buy', 'Où l’acheter, le voir', d.where_buy, {ph: 'kiosque, librairie, replay…'})}${field('contact', 'Contact', d.contact)}${field('notes', 'Notes', d.notes, {type: 'textarea', span: true})}</div>`,
             onSubmit: async form => { const v = A().formObject(form); await post('save_periodical', {id: p?.id || 0, family: v.family, title: v.title, kind: v.kind, publisher: v.publisher, data: dataOf(form, ['association', 'issn', 'frequency', 'website', 'country', 'language', 'start_year', 'end_year', 'subscribed', 'subscription_end', 'subscription_price', 'where_buy', 'contact', 'notes']), label_ids: readLabels(form)}); toast('Enregistré.'); await reload(); },
-            onDelete: p ? async () => { if (!confirm(`Supprimer « ${p.title} » et tout ce qu’il contient ? (les images restent dans les Médias)`)) return false; await post('delete_periodical_item', {what: 'periodical', id: p.id}); await reload(); } : null});
+            onDelete: p ? async () => { if (!await A().confirmBox(`Supprimer « ${p.title} » et tout ce qu’il contient ? (les images restent dans les Médias)`, {title: 'Supprimer le périodique', okLabel: 'Supprimer'})) return false; await post('delete_periodical_item', {what: 'periodical', id: p.id}); await reload(); } : null});
     }
 
     /* ─── Les champs d'un élément : un catalogue, un ordre de départ par type, et les réglages de chacun (montrés, ordre, champs à soi) ─── */
@@ -437,7 +437,7 @@
                 const hadPlayer = !!player0, nowPlayer = isT && [...form.querySelectorAll('[data-h-upload-role="video"],[data-h-upload-role="audio"]')].some(x => x.files?.length);
                 if (!i || (nowPlayer && !hadPlayer)) setTimeout(() => issueDialog(D.issues.find(x => x.id === id)), 50); // on reste dessus pour ajouter le contenu, ou regarder / écouter
             },
-            onDelete: i ? async () => { if (!confirm(`Supprimer ${issueName(i)} et tout son contenu ? (les images restent dans les Médias)`)) return false; await post('delete_periodical_item', {what: 'issue', id: i.id}); await reload(); } : null});
+            onDelete: i ? async () => { if (!await A().confirmBox(`Supprimer ${issueName(i)} et tout son contenu ? (les images restent dans les Médias)`, {title: 'Supprimer le numéro', okLabel: 'Supprimer le numéro'})) return false; await post('delete_periodical_item', {what: 'issue', id: i.id}); await reload(); } : null});
     }
 
     /* ─── ⚙️ Réglages des types : ceux de départ et les tiens ; pour chacun, les champs (montrés, ordre, champs à soi) et l'affichage ─── */
@@ -471,7 +471,7 @@
                     if (k === 'view') t.view = e.target.value; if (k === 'group') t.group = e.target.checked ? 'category' : '';
                     if (li && e.target.matches('[data-ty-show]')) t.fields[Number(li.dataset.n)].show = e.target.checked;
                     if (li && e.target.matches('[data-ty-ftype]')) t.fields[Number(li.dataset.n)].type = e.target.value; });
-                body.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; const t = tOf(), li = b.closest('[data-n]'), n = li ? Number(li.dataset.n) : -1;
+                body.addEventListener('click', async e => { const b = e.target.closest('button'); if (!b) return; const t = tOf(), li = b.closest('[data-n]'), n = li ? Number(li.dataset.n) : -1;
                     if (b.dataset.tyPick) { cur = b.dataset.tyPick; return paint(dl); }
                     if (b.matches('[data-ty-new]')) { const key = 'c_' + Date.now().toString(36).slice(-8); T.push({key, base: 'livre', name: 'Mon type', item: 'Élément', icon: '📁', view: 'cards', group: '', fields: FIELD_ORDER.livre.map(k => ({k, show: true}))}); cur = key; paint(dl); dl.querySelector('[data-ty="name"]')?.select(); return; }
                     if (b.matches('[data-ty-up]') && n > 0) { [t.fields[n - 1], t.fields[n]] = [t.fields[n], t.fields[n - 1]]; return paint(dl); }
@@ -480,7 +480,7 @@
                     if (b.matches('[data-ty-addfield]')) { let k; do { k = 'cf_' + Math.random().toString(36).slice(2, 8); } while (t.fields.some(f => f.k === k)); t.fields.push({k, show: true, label: '', type: 'text'}); paint(dl); [...dl.querySelectorAll('[data-ty-flabel]')].pop()?.focus(); return; }
                     if (b.matches('[data-ty-reset]')) { const own = t.fields.filter(f => f.k.startsWith('cf_')), def = FIELD_ORDER[t.base]; t.fields = [...def.map(k => ({k, show: true})), ...Object.keys(FIELD_CAT).filter(k => !def.includes(k)).map(k => ({k, show: false})), ...own]; return paint(dl); }
                     if (b.matches('[data-ty-del]')) { const n2 = D.issues.filter(i => i.family === t.key).length + D.periodicals.filter(x => x.family === t.key).length;
-                        if (!confirm(`Supprimer le type « ${t.name} » ?${n2 ? ` Ses ${n2} élément(s) passeront dans « ${BASE_NAMES[t.base]} » (rien n’est effacé).` : ''}`)) return; T = T.filter(x => x !== t); cur = 'revue'; return paint(dl); }
+                        if (!await A().confirmBox(`Supprimer le type « ${t.name} » ?${n2 ? ` ${n2 > 1 ? `Ses ${n2} éléments passeront` : `Son élément passera`} dans « ${BASE_NAMES[t.base]} » (rien n’est effacé).` : ''}`, {title: 'Supprimer le type', okLabel: 'Supprimer le type'})) return; T = T.filter(x => x !== t); cur = 'revue'; return paint(dl); }
                 });
             },
             onSubmit: async () => {
@@ -583,7 +583,7 @@
                 toast('Enregistré.'); await reload();
                 const open = [...document.querySelectorAll('dialog[open] .h-pr-arts')].pop(); if (open) { open.closest('dialog').close(); setTimeout(() => issueDialog(D.issues.find(x => x.id === issue.id)), 50); }
             },
-            onDelete: a ? async () => { if (!confirm(`Supprimer « ${a.title} » ?`)) return false; await post('delete_periodical_item', {what: 'article', id: a.id}); await reload(); } : null});
+            onDelete: a ? async () => { if (!await A().confirmBox(`Supprimer « ${a.title} » ?`, {title: 'Supprimer l’article', okLabel: 'Supprimer l’article'})) return false; await post('delete_periodical_item', {what: 'article', id: a.id}); await reload(); } : null});
     }
 
     /* ─── 📚 Vers un projet de l'Atelier ─── */
@@ -609,7 +609,7 @@
                 let list = items;
                 if (form.elements.parts?.checked) list = items.flatMap(x => x.type === 'issue' ? [x, ...partsOf(D.issues.find(i => i.id === x.id) || {id: 0}).map(a => ({type: 'article', id: a.id}))] : [x]);
                 const r = await post('periodicals_to_atelier', {project_id: form.elements.project.value, folder_id: form.elements.folder.value, items: list});
-                toast(`${(r.result || r).created} élément(s) ajouté(s) au projet de l’Atelier.`);
+                toast(`${A().plural((r.result || r).created, 'élément ajouté', 'éléments ajoutés')} au projet de l’Atelier.`);
             }});
     }
     /** Depuis l'Atelier : « + Ajouter ▾ → 📚 Revues, livres, documentaires… » */
@@ -631,7 +631,7 @@
                 const items = [...form.querySelectorAll('.h-pr-pick input:checked')].map(c => { const [type, id] = c.value.split(':'); return {type, id: Number(id)}; });
                 if (!items.length) { toast('Coche au moins un élément.', 'error'); return false; }
                 const r = await post('periodicals_to_atelier', {project_id: projectId, folder_id: folderId, items});
-                toast(`${(r.result || r).created} élément(s) ajouté(s).`); done?.();
+                toast(`${A().plural((r.result || r).created, 'élément ajouté', 'éléments ajoutés')}.`); done?.();
             }});
     };
     ext.openPeriodicalIssue = id => api('periodicals').then(r => { D = r; issueDialog(D.issues.find(i => i.id === Number(id))); });

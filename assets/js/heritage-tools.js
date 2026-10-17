@@ -17,7 +17,7 @@
     const LP = (type, labels) => window.LCNDA_EXT?.labelsPicker?.(type, labels) || ''; // étiquettes (heritage-more.js)
     const LC = labels => window.LCNDA_EXT?.labelChips?.(labels) || '';
     const toast = (...args) => A().toast(...args);
-    const empty = text => A().empty(text);
+    const empty = (text, o) => A().empty(text, o);
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
@@ -242,7 +242,7 @@
                 <label class="checkbox-line"><input type="checkbox" name="move_imported" ${s.move_imported ? 'checked' : ''}> Ranger les fichiers importés dans le sous-dossier « Importés dans LCNDA »</label></div>
                 <p class="muted">Formats : JPEG, PNG, WebP, GIF, PDF${s.can_convert ? ', et HEIC (iPhone) ou TIFF, convertis en JPEG' : ' (les photos HEIC de l’iPhone et les TIFF ne sont pas convertibles sur cet ordinateur : règle l’iPhone sur « Le plus compatible »)'}. Conseil : un dossier réservé aux scans (AirDrop dépose dans « Téléchargements », où il y a de tout). Un même fichier n’est jamais importé deux fois.</p>
                 <div class="page-actions"><button class="button" type="submit">Enregistrer</button>${s.dir ? '<button class="button secondary" type="button" data-h-scan-now>Vérifier maintenant</button>' : ''}<span class="muted">${s.dir ? (s.reachable ? `${s.pending ? `${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : 'Rien en attente'} · ${plural(s.total, 'fichier importé', 'fichiers importés')} en tout` : '⚠ dossier introuvable (disque débranché ?)') : ''}</span></div></form>
-            <h3>Derniers arrivés</h3>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.map(r => `<span class="collection-media-item" title="${esc(r.filename)} — ${esc(r.imported_at)}">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div><p><button type="button" class="button small secondary" data-h-scan-identify>Voir les médias à identifier</button></p>` : empty('Rien d’arrivé pour l’instant.')}</section>`;
+            <h3>Derniers arrivés</h3>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.map(r => `<span class="collection-media-item" title="${esc(r.filename)} — ${esc(r.imported_at)}">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div><p><button type="button" class="button small secondary" data-h-scan-identify>Voir les médias à identifier</button></p>` : empty('Rien d’arrivé pour l’instant', {icon: '📥'})}</section>`;
         const form = A().$('#h-scan-form');
         form.addEventListener('submit', async event => {
             event.preventDefault();
@@ -252,7 +252,7 @@
         A().$('[data-h-scan-now]')?.addEventListener('click', async () => { const before = scanState?.enabled; scanState = {...scanState, enabled: true}; await scanTick(); scanState.enabled = before; rerender(); });
         A().$('[data-h-scan-identify]')?.addEventListener('click', () => { S().listType = 'media'; A().setModule('listes'); });
     };
-    ext.dashboard.scan_inbox_widget = {load: () => api('scan_inbox_status'), render: (index, widget, span, s) => card(index, 'Dossier Scans', s?.total || '', !s?.dir ? `${empty('Aucun dossier surveillé.')}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Choisir un dossier</button></div>`
+    ext.dashboard.scan_inbox_widget = {load: () => api('scan_inbox_status'), render: (index, widget, span, s) => card(index, 'Dossier Scans', s?.total || '', !s?.dir ? `${empty('Aucun dossier surveillé pour l’instant', {icon: '📂'})}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Choisir un dossier</button></div>`
         : `<p>${s.enabled ? '📥 Surveillé' : '⏸ Pas surveillé'} : <code>${esc(s.dir)}</code>${s.pending ? ` · ${plural(s.pending, 'fichier en attente', 'fichiers en attente')}` : ''}</p>${s.recent?.length ? `<div class="collection-media-edit">${s.recent.slice(0, 6).map(r => `<span class="collection-media-item">${r.media_file ? A().mediaThumbHtml({media_type: r.media_type, filename: r.media_file, title: r.title}) : esc(r.filename)}</span>`).join('')}</div>` : ''}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="scan_inbox">Réglages</button></div>`, span)};
 
     /* ═══════════════════════ ⛪ PAROISSES D'ANCIEN RÉGIME ═══════════════════════ */
@@ -305,18 +305,18 @@
                 <label>Jusqu’en<input type="number" name="until_year" value="${esc(e.until_year || 1790)}" min="1000" max="1900"></label><label>Depuis (si connu)<input type="number" name="from_year" value="${esc(e.from_year || '')}" placeholder="—"></label>
                 <label class="span-2">Note, source<input name="note" value="${esc(e.note || '')}" placeholder="Paroisse érigée en 1792 ; voir aussi la chapelle de…"></label></div>
                 ${LP('parish', e.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-parish-cancel>Annuler</button>${e.id ? '<button class="button secondary danger" type="button" data-h-parish-delete>Supprimer</button>' : ''}</div></form>` : ''}
-            ${rows.length ? `<table class="data-table"><thead><tr><th>Lieu</th><th>Avant</th><th>Paroisse</th><th>Événements concernés</th><th>Note</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.place_name || r.place_text)}</strong>${LC(r.labels)}${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), 'événement', 'événements') : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ce rattachement', `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', 'Supprimer ce rattachement', `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table>` : (e ? '' : empty('Aucun rattachement. Ajoute le premier avec « + Rattachement ».'))}</section>`;
+            ${rows.length ? `<table class="data-table"><thead><tr><th>Lieu</th><th>Avant</th><th>Paroisse</th><th>Événements concernés</th><th>Note</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td><strong>${esc(r.place_name || r.place_text)}</strong>${LC(r.labels)}${r.place_county ? `<br><small>${esc(r.place_county)}</small>` : ''}</td><td>${r.from_year ? `${esc(r.from_year)}–` : ''}${esc(r.until_year)}</td><td>⛪ ${esc(r.parish_name)}</td><td>${r.old_event_count ? plural(Number(r.old_event_count), 'événement', 'événements') : '—'}</td><td><small>${esc(r.note)}</small></td><td><span class="inline-actions h-tools">${A().actionButton('edit', 'Modifier ce rattachement', `data-h-parish-edit="${r.id}"`)}${A().actionButton('delete', 'Supprimer ce rattachement', `data-h-parish-del="${r.id}"`)}</span></td></tr>`).join('')}</tbody></table>` : (e ? '' : A().emptyState({icon: '⛪', text: 'Aucun rattachement pour l’instant', hint: 'Note de quelle paroisse dépendait chaque hameau ou village avant la Révolution.', action: {label: '＋ Rattachement', attrs: 'data-h-parish-new'}}))}</section>`;
         const ws = A().$('#workspace');
         ws.querySelector('#h-parish-q').addEventListener('change', ev => { S().hParishQ = ev.target.value.trim(); rerender(); });
-        ws.querySelector('[data-h-parish-new]').addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: 0}));
-        ws.querySelectorAll('[data-h-parish-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer ce rattachement ?')) return; await api('delete_parish', {}, {method: 'POST', body: {id: b.dataset.hParishDel}}); await loadParishMap(); rerender(); }));
+        ws.querySelectorAll('[data-h-parish-new]').forEach(b => b.addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: 0})));
+        ws.querySelectorAll('[data-h-parish-del]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: b.dataset.hParishDel}}); await loadParishMap(); rerender(); }));
         ws.querySelectorAll('[data-h-parish-edit]').forEach(b => b.addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: Number(b.dataset.hParishEdit)})));
         const form = ws.querySelector('#h-parish-form');
         if (!form) return;
         if (e.place_id) form.querySelector('[name=place_id]').value = e.place_id;
         if (e.parish_place_id) form.querySelector('[name=parish_place_id]').value = e.parish_place_id;
         form.querySelector('[data-h-parish-cancel]').addEventListener('click', () => rerender());
-        form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!confirm('Supprimer ce rattachement ?')) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); rerender(); });
+        form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); rerender(); });
         form.addEventListener('submit', async ev => {
             ev.preventDefault();
             const v = A().formObject(form);
@@ -345,7 +345,7 @@
             body = groups.length ? `<div class="h-cite-groups">${groups.map(g => `<article class="h-record"><header><div><strong>${esc(g.name)}</strong>${g.occupations.length ? `, ${esc(g.occupations.join(', '))}` : ''} — apparaît dans <strong>${plural(g.acts, 'acte', 'actes')}</strong>${g.from ? ` ${g.from === g.to ? `en ${g.from}` : `entre ${g.from} et ${g.to}`}` : ''}
                 ${g.roles.length ? `<div class="muted">${esc(g.roles.join(', '))}${g.places.length ? ' · ' + esc(g.places.join(', ')) : ''}</div>` : ''}${g.person_id ? `<div>Fiche : ${personLink(g.person_id, g.person_name)}</div>` : ''}</div></header>
                 <details><summary>Les ${g.items.length} mentions</summary><ul class="h-cite-items">${g.items.map(i => `<li>${LC(i.labels)}${esc(i.date_text || i.year || '')} ${i.role ? `<em>${esc(i.role)}</em>` : ''} ${i.media_id ? `<button type="button" class="link-button" data-h-cite-open="${i.media_id}">${esc(i.media_title || 'transcription')}</button>` : ''}${i.snippet ? `<br><small class="h-transcription">… ${esc(i.snippet)} …</small>` : ''} <button type="button" class="link-button" data-h-cite-del="${i.id}">retirer</button></li>`).join('')}</ul></details></article>`).join('')}</div>`
-                : empty('Aucun nom indexé. Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.');
+                : empty('Aucun nom indexé pour l’instant', {icon: '🏷️', hint: 'Ouvre « Marquer dans les transcriptions » : sélectionne un nom dans le texte d’un acte, ou accepte les noms repérés par l’app.'});
         } else {
             const media = data.media || [];
             body = media.length ? `<table class="data-table"><thead><tr><th>Document</th><th>Début de la transcription</th><th>Noms marqués</th><th></th></tr></thead><tbody>${media.map(m => `<tr><td><strong>${esc(m.title || 'Sans titre')}</strong>${m.document_reference ? `<br><small>${esc(m.document_reference)}</small>` : ''}${m.date_text ? `<br><small>${esc(m.date_text)}</small>` : ''}</td><td><small>${esc(m.excerpt)}…</small></td><td>${Number(m.marked) || '—'}</td><td><button type="button" class="button small" data-h-cite-open="${m.id}">Ouvrir</button></td></tr>`).join('')}</tbody></table>`
@@ -433,12 +433,12 @@
         if (!isCurrent(token)) return;
         const alerts = data.alerts || [];
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Voyages impossibles', 'Une même fiche se trouve à deux endroits trop éloignés en trop peu de temps (« parrain à Lille le 3 mars, témoin à Marseille le 4 mars 1790 ») : c’est le signe classique de deux homonymes confondus dans une seule fiche. Seuls les événements avec une date exacte et un lieu placé sur la carte sont comparés (y compris comme témoin).')}
-            ${alerts.length ? `<p class="muted">${plural(alerts.length, 'alerte', 'alertes')}, les plus nettes d’abord.</p>${journeysTable(alerts)}` : empty('Aucun voyage impossible repéré.')}</section>`;
+            ${alerts.length ? `<p class="muted">${plural(alerts.length, 'alerte', 'alertes')}, les plus nettes d’abord.</p>${journeysTable(alerts)}` : empty('Aucun voyage impossible repéré.', {icon: '✅'})}</section>`;
         A().bindTableLinks();
     };
     ext.dashboard.journeys_widget = {load: () => api('impossible_journeys'), render: (index, widget, span, data) => {
         const alerts = (data?.alerts || []).slice(0, 5);
-        return card(index, 'Voyages impossibles', (data?.alerts || []).length || '', alerts.length ? `${journeysTable(alerts)}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="journeys">Tout voir</button></div>` : empty('Aucun voyage impossible repéré.'), span);
+        return card(index, 'Voyages impossibles', (data?.alerts || []).length || '', alerts.length ? `${journeysTable(alerts)}<div class="page-actions"><button type="button" class="button small secondary" data-h-open-maint="journeys">Tout voir</button></div>` : empty('Aucun voyage impossible repéré.', {icon: '✅'}), span);
     }};
 
     /* ═══════════════════════ 🤝 TRAVAIL À DEUX ═══════════════════════ */
@@ -485,7 +485,7 @@
                 ev.preventDefault();
                 const accepted = [...apply.querySelectorAll('[name=accept]:checked')].map(c => Number(c.value));
                 if (!accepted.length) return toast('Aucun changement coché.', 'error');
-                if (!confirm(`Appliquer ${accepted.length} changement(s) ? Une copie de sécurité de ta base est faite avant.`)) return;
+                if (!await A().confirmBox(`Appliquer ${plural(accepted.length, 'changement', 'changements')} ? Une copie de sécurité de ta base est faite avant.`, {title: 'Appliquer les changements', okLabel: 'Appliquer'})) return;
                 try {
                     const r = await api('sync_apply', {}, {method: 'POST', body: {token: preview.token, accepted}});
                     toast(`${plural(r.applied, 'changement appliqué', 'changements appliqués')}${r.locked_skipped ? ` ; ${plural(r.locked_skipped, 'changement ignoré', 'changements ignorés')} (fiche verrouillée)` : ''}.`);

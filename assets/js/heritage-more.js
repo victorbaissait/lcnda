@@ -15,7 +15,7 @@
     const nl = value => esc(value).replace(/\n/g, '<br>');
     const api = (...args) => A().api(...args);
     const toast = (...args) => A().toast(...args);
-    const empty = text => A().empty(text);
+    const empty = (text, o) => A().empty(text, o);
     const card = (...args) => A().card(...args);
     const S = () => A().state;
     const fmt = (n, d = 0) => Number(n || 0).toLocaleString('fr-FR', {maximumFractionDigits: d});
@@ -234,7 +234,7 @@
         const edit = event.target.closest?.('[data-h-res-edit]');
         if (edit) { openResistanceDialog(Number(edit.dataset.hResEdit)); return; }
         const clear = event.target.closest?.('[data-h-res-clear]');
-        if (clear && confirm('Effacer tout le parcours de résistant de cette fiche ?')) {
+        if (clear && await A().confirmBox('Supprimer tout le parcours de résistant de cette fiche ?', {title: 'Supprimer le parcours', okLabel: 'Supprimer le parcours'})) {
             try { await api('clear_resistance', {}, {method: 'POST', body: {person_id: clear.dataset.hResClear}}); toast('Parcours effacé.'); refresh(); } catch (error) { toast(error.message, 'error'); }
         }
     });
@@ -299,7 +299,7 @@
         people.forEach(r => { const c = (r.steps || []).filter(s => s.lat !== null && s.lat !== '').map(s => [Number(s.lat), Number(s.lon)]); c.forEach((x, i) => pts.push({lat: x[0], lon: x[1], label: pname(r.person) + ' — ' + (r.steps.filter(s => s.lat !== null && s.lat !== '')[i]?.place_text || '')})); if (c.length > 1) paths.push({coords: c, color: '#b5523b', dashed: true}); });
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Résistants', 'Les résistants de la famille : réseaux, arrestations, caches, déportations, et leurs parcours sur la carte. Pour en ajouter un : fiche → Identité → « Blocs à afficher sur la fiche » → ✊ Résistant.')}
             ${people.length ? `${pts.length && ext.miniMap ? `<section class="maintenance-panel">${ext.miniMap(pts, paths, {height: 380})}</section>` : ''}
-            <table class="data-table"><thead><tr><th>Personne</th><th>Nom de guerre</th><th>Réseau, mouvement</th><th>Période</th><th>Devenir</th><th>Étapes</th></tr></thead><tbody>${people.map(r => { const pr = r.profile || {}; return `<tr><td>${pLink(r.person)}${ext.labelChips(r.labels)}</td><td>${esc(pr.nom_de_guerre || '')}</td><td>${esc([pr.network, pr.movement].filter(Boolean).join(' · '))}</td><td>${esc([pr.joined, pr.left_date].filter(Boolean).join(' → '))}</td><td>${[Number(pr.arrested) && '⛓️ arrêté', Number(pr.deported) && '🚂 déporté', Number(pr.killed) && '⚰️ mort'].filter(Boolean).join(', ')}${pr.fate ? `<br><small>${esc(pr.fate)}</small>` : ''}</td><td>${(r.steps || []).length}</td></tr>`; }).join('')}</tbody></table>` : empty('Aucun résistant pour l’instant.')}</section>`;
+            <table class="data-table"><thead><tr><th>Personne</th><th>Nom de guerre</th><th>Réseau, mouvement</th><th>Période</th><th>Devenir</th><th>Étapes</th></tr></thead><tbody>${people.map(r => { const pr = r.profile || {}; return `<tr><td>${pLink(r.person)}${ext.labelChips(r.labels)}</td><td>${esc(pr.nom_de_guerre || '')}</td><td>${esc([pr.network, pr.movement].filter(Boolean).join(' · '))}</td><td>${esc([pr.joined, pr.left_date].filter(Boolean).join(' → '))}</td><td>${[Number(pr.arrested) && '⛓️ arrêté', Number(pr.deported) && '🚂 déporté', Number(pr.killed) && '⚰️ mort'].filter(Boolean).join(', ')}${pr.fate ? `<br><small>${esc(pr.fate)}</small>` : ''}</td><td>${(r.steps || []).length}</td></tr>`; }).join('')}</tbody></table>` : empty('Aucun résistant pour l’instant', {icon: '🎖️', hint: 'Sur une fiche : Identité → « Blocs à afficher sur la fiche » → ✊ Résistant.'})}</section>`;
         A().bindTableLinks();
     };
 
@@ -422,7 +422,7 @@
         const edit = event.target.closest?.('[data-h-cb-edit]');
         if (edit) { openEntryDialog(Number(edit.dataset.hCbBlock), Number(edit.dataset.hCbEdit)); return; }
         const del = event.target.closest?.('[data-h-cb-del]');
-        if (del && confirm('Supprimer cette fiche du bloc ?')) {
+        if (del && await A().confirmBox('Supprimer cette fiche du bloc ?', {title: 'Supprimer du bloc', okLabel: 'Supprimer'})) {
             try { await api('delete_custom_block_entry', {}, {method: 'POST', body: {id: del.dataset.hCbDel}}); toast('Supprimé.'); refresh(); } catch (error) { toast(error.message, 'error'); }
         }
     });
@@ -559,13 +559,13 @@
             <section class="maintenance-panel"><h3>Importer un bloc reçu</h3><p class="muted">Un fichier « .lcnda-bloc.json » envoyé par un cousin : seul le modèle du bloc est partagé, jamais les données des fiches.</p><input type="file" accept=".json,application/json" data-h-be-import></section>
             ${blocks.length ? `<div class="h-records">${blocks.map(b => `<article class="h-record"><header><div><strong>${esc(b.icon)} ${esc(b.name)}</strong> <small>${plural(b.fields.length, 'champ', 'champs')} · ${plural(b.entry_count, 'fiche remplie', 'fiches remplies')}${b.author ? ' · par ' + esc(b.author) : ''}</small></div>${tools(`data-h-be-edit="${b.id}"`, `data-h-be-del="${b.id}"`, 'ce bloc')}</header>
                 ${b.description ? `<p>${esc(b.description)}</p>` : ''}<p class="muted">${b.fields.map(f => typeInfo(f.type)[1] + ' ' + esc(f.label)).join(' · ')}</p><p><small>📌 ${esc(DISPLAY[b.display] || '')}</small></p>
-                <div class="page-actions"><a class="button small secondary" href="api.php?action=export_custom_block_def&id=${b.id}" download>📤 Partager (fichier)</a></div></article>`).join('')}</div>` : empty('Aucun bloc pour l’instant : clique sur « + Nouveau bloc ».')}</section>`;
+                <div class="page-actions"><a class="button small secondary" href="api.php?action=export_custom_block_def&id=${b.id}" download>📤 Partager (fichier)</a></div></article>`).join('')}</div>` : A().emptyState({icon: '🧱', text: 'Aucun bloc pour l’instant', hint: 'Un bloc ajoute tes propres rubriques aux fiches des personnes.', action: {label: '＋ Nouveau bloc', attrs: 'data-h-be-new'}})}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-h-be-new]').addEventListener('click', () => chooseTemplate(token, blocks));
+        ws.querySelectorAll('[data-h-be-new]').forEach(b => b.addEventListener('click', () => chooseTemplate(token, blocks)));
         ws.querySelectorAll('[data-h-be-edit]').forEach(b => b.addEventListener('click', () => { const d = blocks.find(x => Number(x.id) === Number(b.dataset.hBeEdit)); editorDef = JSON.parse(JSON.stringify(d)); renderBlockEditor(++S().workspaceToken); }));
         ws.querySelectorAll('[data-h-be-del]').forEach(b => b.addEventListener('click', async () => {
             const d = blocks.find(x => Number(x.id) === Number(b.dataset.hBeDel));
-            if (!confirm(`Supprimer le bloc « ${d.name} »${d.entry_count ? ` et ce qui a été rempli sur ${plural(d.entry_count, 'fiche', 'fiches')}` : ''} ?`)) return;
+            if (!await A().confirmBox(`Supprimer le bloc « ${d.name} »${d.entry_count ? ` et ce qui a été rempli sur ${plural(d.entry_count, 'fiche', 'fiches')}` : ''} ?`, {title: 'Supprimer le bloc', okLabel: 'Supprimer le bloc'})) return;
             await api('delete_custom_block_def', {}, {method: 'POST', body: {id: d.id}}); toast('Bloc supprimé.'); ext.maintenance.block_editor(++S().workspaceToken);
         }));
         ws.querySelector('[data-h-be-import]').addEventListener('change', async e => {
@@ -704,7 +704,7 @@
             const sn = e.target.closest('[data-be-stat-new]'), se = e.target.closest('[data-be-stat-edit]');
             if (sn || se) { const key = (sn || se).dataset[sn ? 'beStatNew' : 'beStatEdit']; const f = d.fields.find(x => x.key === key); ext.blockStatReturn = {key}; if (se && f?.widget) ext.editStatFor?.(f.widget); else ext.newStatFor?.(); }
         });
-        box.addEventListener('click', e => { if (e.target.closest('[data-be-newwidget]')) { if (!confirm('Ouvrir l’Éditeur de widgets ? Enregistre d’abord ce bloc si tu ne veux pas perdre tes changements.')) return; S().maintenanceTab = 'widget_editor'; A().setModule('maintenance'); } });
+        box.addEventListener('click', async e => { if (e.target.closest('[data-be-newwidget]')) { if (!await A().confirmBox('Ouvrir l’Éditeur de widgets ? Enregistre d’abord ce bloc si tu ne veux pas perdre tes changements.', {title: 'Éditeur de widgets', okLabel: 'Ouvrir l’Éditeur de widgets'})) return; S().maintenanceTab = 'widget_editor'; A().setModule('maintenance'); } });
         box.addEventListener('input', e => {
             const row = e.target.closest('[data-be-i]'); if (!row) return;
             const f = d.fields[Number(row.dataset.beI)], k = e.target.dataset.be;
@@ -750,7 +750,7 @@
         const alerts = (data.alerts || []).filter(a => level === 'all' || a.level === level);
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Âges et écarts', 'Âge au mariage, âge des parents, écart entre les naissances, décès avant la naissance, mariage après le décès, et les erreurs de génération (fratrie étalée sur deux générations, ancêtre Sosa trop jeune ou trop vieux pour sa place dans la lignée) : ce qui est impossible ou très rare signale souvent une erreur (homonyme, mauvaise date, mauvais parents).')}
             <div class="collection-toolbar"><label>Afficher <select data-h-age-level><option value="all">toutes les alertes (${(data.alerts || []).length})</option>${Object.entries(LEVEL).map(([k, [i, l]]) => `<option value="${k}" ${level === k ? 'selected' : ''}>${i} ${l} (${(data.alerts || []).filter(a => a.level === k).length})</option>`).join('')}</select></label></div>
-            ${alerts.length ? `<table class="data-table"><thead><tr><th></th><th>Personne</th><th>Alerte</th><th>Détail</th><th>Autre fiche</th></tr></thead><tbody>${alerts.map(a => `<tr><td title="${esc(LEVEL[a.level][1])}">${LEVEL[a.level][0]}</td><td>${pLink(a.person)}</td><td><strong>${esc(a.text)}</strong></td><td><small>${esc(a.detail)}</small></td><td>${pLink(a.other)}</td></tr>`).join('')}</tbody></table>` : empty('Aucune alerte : les âges et les écarts sont vraisemblables.')}
+            ${alerts.length ? `<table class="data-table"><thead><tr><th></th><th>Personne</th><th>Alerte</th><th>Détail</th><th>Autre fiche</th></tr></thead><tbody>${alerts.map(a => `<tr><td title="${esc(LEVEL[a.level][1])}">${LEVEL[a.level][0]}</td><td>${pLink(a.person)}</td><td><strong>${esc(a.text)}</strong></td><td><small>${esc(a.detail)}</small></td><td>${pLink(a.other)}</td></tr>`).join('')}</tbody></table>` : empty('Aucune alerte : les âges et les écarts sont vraisemblables.', {icon: '✅'})}
             <section class="maintenance-panel"><h3>Moyennes de la famille</h3><p class="muted">Repères en France : au XVIIIe siècle, les femmes se marient vers 25-26 ans et les hommes vers 27-28 ans ; un enfant naît en moyenne tous les 2 ans à 2 ans et demi (24 à 30 mois).</p>
             ${(data.periods || []).length ? `<table class="data-table"><thead><tr><th>Période (mariage ou naissance)</th><th>Âge au mariage des hommes</th><th>des femmes</th><th>Mariages</th><th>Écart entre naissances</th></tr></thead><tbody>${data.periods.map(r => `<tr><td>${esc(r.period)}</td><td>${r.men !== null ? fmt(r.men, 1) + ' ans' : '—'}</td><td>${r.women !== null ? fmt(r.women, 1) + ' ans' : '—'}</td><td>${r.n}</td><td>${r.spacing !== null ? fmt(r.spacing, 1) + ' mois' : '—'} <small class="muted">${r.spacing_n ? '(' + r.spacing_n + ')' : ''}</small></td></tr>`).join('')}</tbody></table>` : empty('Pas assez de dates.')}</section></section>`;
         A().bindTableLinks();
@@ -769,12 +769,12 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Harmoniser les variantes', 'Une base propre : « Laboureur », « laboureur », « labour. » et « Labourreur » deviennent une seule écriture. Rien n’est changé sans ton accord : choisis l’écriture à garder, décoche ce qui ne doit pas bouger, puis confirme.')}
             <div class="h-tabs">${HARM_FIELDS.map(([k, l]) => `<button type="button" class="button small ${k === field ? '' : 'secondary'}" data-h-harm-field="${k}">${esc(l)}</button>`).join('')}</div>
             ${groups.length ? `<p>${plural(groups.length, 'groupe de variantes trouvé', 'groupes de variantes trouvés')}.</p><div class="h-records">${groups.map((g, gi) => `<article class="h-record h-harm" data-h-harm="${gi}"><div class="h-harm-variants">${g.variants.map(v => `<label class="checkbox-line"><input type="checkbox" data-h-harm-v value="${esc(v.value)}" checked> <span class="h-harm-value">${esc(v.value)}</span> <small>(${v.count})</small> <button type="button" class="link-button" data-h-harm-pick="${esc(v.value)}" title="Garder cette écriture">← garder</button></label>`).join('')}</div>
-                <div class="h-harm-target"><label>Écrire partout<input data-h-harm-target value="${esc(g.proposal)}"></label><button type="button" class="button small" data-h-harm-apply>Harmoniser</button></div></article>`).join('')}</div>` : empty('Aucune variante trouvée pour ce champ.')}
+                <div class="h-harm-target"><label>Écrire partout<input data-h-harm-target value="${esc(g.proposal)}"></label><button type="button" class="button small" data-h-harm-apply>Harmoniser</button></div></article>`).join('')}</div>` : empty('Aucune variante trouvée pour ce champ.', {icon: '✅'})}
             ${history.length ? `<section class="maintenance-panel"><h3>Dernières harmonisations</h3><table class="data-table"><tbody>${history.map(h => `<tr><td><small>${esc(dateTimeFr(h.at))}</small></td><td>${esc(h.summary)}</td><td>${h.undoable ? `<button type="button" class="button small secondary" data-h-harm-undo="${h.id}">↶ Annuler</button>` : `<small class="muted">${h.undone ? 'annulée' : 'faite avant l’annulation possible'}</small>`}</td></tr>`).join('')}</tbody></table></section>` : ''}</section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-h-harm-field]').forEach(b => b.addEventListener('click', () => { S().hHarmField = b.dataset.hHarmField; ext.maintenance.harmonize(++S().workspaceToken); }));
         ws.querySelectorAll('[data-h-harm-undo]').forEach(b => b.addEventListener('click', async () => {
-            if (!confirm('Remettre les anciennes écritures pour cette harmonisation ?')) return;
+            if (!await A().confirmBox('Remettre les anciennes écritures pour cette harmonisation ?', {title: 'Annuler l’harmonisation', okLabel: 'Remettre les anciennes écritures'})) return;
             try { const r = await api('undo_harmonize', {}, {method: 'POST', body: {id: b.dataset.hHarmUndo}}); toast(`${plural(r.result.restored, 'écriture remise', 'écritures remises')}.`); ext.maintenance.harmonize(++S().workspaceToken); }
             catch (error) { toast(error.message, 'error'); }
         }));
@@ -786,7 +786,7 @@
                 const values = [...box.querySelectorAll('[data-h-harm-v]:checked')].map(i => i.value).filter(v => v !== target);
                 if (!target || !values.length) return toast('Rien à changer.', 'error');
                 const n = g.variants.filter(v => values.includes(v.value)).reduce((s, v) => s + v.count, 0);
-                if (!confirm(`Remplacer ${values.map(v => `« ${v} »`).join(', ')} par « ${target} » ?\n\n${plural(n, 'élément sera modifié', 'éléments seront modifiés')}. (Annulable ensuite : « Dernières harmonisations », en bas de cette page.)`)) return;
+                if (!await A().confirmBox(`Remplacer ${values.map(v => `« ${v} »`).join(', ')} par « ${target} » ?\n\n${plural(n, 'élément sera modifié', 'éléments seront modifiés')}. (Annulable ensuite : « Dernières harmonisations », en bas de cette page.)`, {title: 'Harmoniser les écritures', okLabel: 'Remplacer'})) return;
                 try { const r = await api('apply_variants', {}, {method: 'POST', body: {field, target, values}}); toast(`${plural(r.result.changed, 'modification', 'modifications')}.`); ext.maintenance.harmonize(++S().workspaceToken); }
                 catch (error) { toast(error.message, 'error'); }
             });
@@ -805,11 +805,11 @@
             ${alerts.length ? `${ext.miniMap && pts.length ? `<section class="maintenance-panel">${ext.miniMap(pts, [], {height: 340})}<p class="muted">🟢 centre de la famille · 🔴 lieux suspects</p></section>` : ''}
             <table class="data-table"><thead><tr><th>Lieu</th><th>Coordonnées</th><th>Pourquoi</th><th>Événements</th><th></th></tr></thead><tbody>${alerts.map((a, i) => `<tr><td><strong>${esc(a.place.name)}</strong><br><small>${esc([a.place.county, a.place.state, a.place.country].filter(Boolean).join(', '))}</small></td>
                 <td><small>${fmt(a.place.lat, 4)}, ${fmt(a.place.lon, 4)}<br>à ${fmt(a.distance)} km de la famille</small></td><td><ul>${a.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul></td><td>${a.place.n}</td>
-                <td>${a.suggest ? `<button type="button" class="button small" data-h-mp-fix="${i}">${esc(a.suggest.why)}</button><br>` : ''}<button type="button" class="link-button" data-h-mp-ignore="${a.place.id}">C’est juste, ne plus signaler</button></td></tr>`).join('')}</tbody></table>` : empty('Aucun lieu suspect : tous les points sont vraisemblables.')}</section>`;
+                <td>${a.suggest ? `<button type="button" class="button small" data-h-mp-fix="${i}">${esc(a.suggest.why)}</button><br>` : ''}<button type="button" class="link-button" data-h-mp-ignore="${a.place.id}">C’est juste, ne plus signaler</button></td></tr>`).join('')}</tbody></table>` : empty('Aucun lieu suspect : tous les points sont vraisemblables.', {icon: '✅'})}</section>`;
         const ws = A().$('#workspace');
         ws.querySelectorAll('[data-h-mp-fix]').forEach(b => b.addEventListener('click', async () => {
             const a = alerts[Number(b.dataset.hMpFix)];
-            if (!confirm(`${a.suggest.why} pour « ${a.place.name} » ?`)) return;
+            if (!await A().confirmBox(`${a.suggest.why} pour « ${a.place.name} » ?`, {title: 'Appliquer la suggestion', okLabel: 'Appliquer'})) return;
             try { await api('fix_place', {}, {method: 'POST', body: {id: a.place.id, lat: a.suggest.lat, lon: a.suggest.lon, insee: a.suggest.insee || ''}}); toast('Lieu corrigé.'); ext.maintenance.misplaced(++S().workspaceToken); } catch (error) { toast(error.message, 'error'); }
         }));
         ws.querySelectorAll('[data-h-mp-ignore]').forEach(b => b.addEventListener('click', async () => { await api('fix_place', {}, {method: 'POST', body: {id: b.dataset.hMpIgnore, ignore: 1}}); ext.maintenance.misplaced(++S().workspaceToken); }));
@@ -841,7 +841,7 @@
                 <form id="h-vault-open" autocomplete="off" class="form-grid"><label>Mon fichier « .lcnda-coffre »<input type="file" name="file" accept=".lcnda-coffre" required></label><label>Mon mot de passe<input type="password" name="password" required autocomplete="off"></label><div class="page-actions span-2"><button class="button secondary" type="submit">Déchiffrer</button></div></form></section>
             <section class="maintenance-panel"><h3>🗄️ Les copies que je garde pour mes cousins</h3><p class="muted">Elles restent chiffrées : tu ne peux pas les lire, seulement les rendre. On garde les 3 dernières de chaque cousin.</p>
                 <form id="h-vault-store" class="page-actions"><input type="file" name="file" accept=".lcnda-coffre" required><button class="button small" type="submit">Ranger la copie d’un cousin</button></form>
-                ${s.held.length ? `<table class="data-table"><thead><tr><th>De</th><th>Copie du</th><th>Reçue le</th><th>Taille</th><th></th></tr></thead><tbody>${s.held.map(h => { const age = h.copy_created_at ? Math.floor((Date.now() - new Date(h.copy_created_at)) / 864e5) : null; return `<tr><td><strong>${esc(h.owner)}</strong></td><td>${esc(dateTimeFr(h.copy_created_at))}${age > 180 ? `<br><small class="h-offsite-sentence is-warn">ancienne (${plural(age, 'jour', 'jours')}) : demande-lui une copie récente</small>` : ''}</td><td>${esc(dateTimeFr(h.received_at))}</td><td>${sizeText(h.size)}</td><td><a class="button small secondary" href="api.php?action=vault_download&id=${h.id}" download>Lui rendre (télécharger)</a> <button type="button" class="icon-button danger" data-h-vault-del="${h.id}" title="Supprimer">🗑</button></td></tr>`; }).join('')}</tbody></table>` : empty('Aucune copie gardée pour l’instant.')}</section></div></section>`;
+                ${s.held.length ? `<table class="data-table"><thead><tr><th>De</th><th>Copie du</th><th>Reçue le</th><th>Taille</th><th></th></tr></thead><tbody>${s.held.map(h => { const age = h.copy_created_at ? Math.floor((Date.now() - new Date(h.copy_created_at)) / 864e5) : null; return `<tr><td><strong>${esc(h.owner)}</strong></td><td>${esc(dateTimeFr(h.copy_created_at))}${age > 180 ? `<br><small class="h-offsite-sentence is-warn">ancienne (${plural(age, 'jour', 'jours')}) : demande-lui une copie récente</small>` : ''}</td><td>${esc(dateTimeFr(h.received_at))}</td><td>${sizeText(h.size)}</td><td><a class="button small secondary" href="api.php?action=vault_download&id=${h.id}" download>Lui rendre (télécharger)</a> <button type="button" class="icon-button danger" data-h-vault-del="${h.id}" title="Supprimer">🗑</button></td></tr>`; }).join('')}</tbody></table>` : empty('Aucune copie gardée pour l’instant', {icon: '🗄️', hint: 'Quand un cousin te confie sa copie chiffrée, range-la avec le bouton ci-dessus.'})}</section></div></section>`;
         const ws = A().$('#workspace');
         const rerender = () => ext.maintenance.cousin_vault(++S().workspaceToken);
         ws.querySelector('#h-vault-export').addEventListener('submit', async e => {
@@ -865,10 +865,10 @@
         });
         ws.querySelector('#h-vault-open').addEventListener('submit', async e => {
             e.preventDefault();
-            try { const j = await postForm('vault_open', new FormData(e.currentTarget)); alert(`Copie déchiffrée (${plural(j.persons, 'fiche', 'fiches')}, du ${dateTimeFr(j.created_at)}).\n\nElle est rangée dans tes sauvegardes sous le nom :\n${j.file}\n\nPour la rouvrir : Maintenance → Sauvegarde.`); }
+            try { const j = await postForm('vault_open', new FormData(e.currentTarget)); toast(`Copie déchiffrée (${plural(j.persons, 'fiche', 'fiches')}, du ${dateTimeFr(j.created_at)}) : elle est rangée dans tes sauvegardes sous le nom « ${j.file} ». Pour la rouvrir : Maintenance → Sauvegarde.`); }
             catch (error) { toast(error.message, 'error'); }
         });
-        ws.querySelectorAll('[data-h-vault-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette copie du coffre ? Ton cousin ne pourra plus te la demander.')) return; await api('vault_delete', {}, {method: 'POST', body: {id: b.dataset.hVaultDel}}); rerender(); }));
+        ws.querySelectorAll('[data-h-vault-del]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette copie du coffre ? Ton cousin ne pourra plus te la demander.', {title: 'Supprimer la copie', okLabel: 'Supprimer la copie'})) return; await api('vault_delete', {}, {method: 'POST', body: {id: b.dataset.hVaultDel}}); rerender(); }));
     };
     // Rappel au démarrage : seulement si une copie a déjà été confiée et qu'elle a plus de 3 mois
     setTimeout(async () => {
@@ -946,7 +946,7 @@
                 <p class="muted">La fusion déplace événements, médias, sources, notes, relations… vers la fiche gardée, puis supprime l’autre.</p>
                 <div class="page-actions"><button type="button" class="button" data-h-merge="${a}" data-h-merge-src="${b}">Garder A (fusionner B dans A)</button><button type="button" class="button" data-h-merge="${b}" data-h-merge-src="${a}">Garder B (fusionner A dans B)</button></div>`,
             onOpen: d => d.querySelectorAll('[data-h-merge]').forEach(btn => btn.addEventListener('click', async () => {
-                if (!confirm(`Fusionner la fiche #${btn.dataset.hMergeSrc} dans la fiche #${btn.dataset.hMerge} ?\n\nLa fiche #${btn.dataset.hMergeSrc} sera supprimée après déplacement de ses données.`)) return;
+                if (!await A().confirmBox(`Fusionner la fiche #${btn.dataset.hMergeSrc} dans la fiche #${btn.dataset.hMerge} ?\n\nLa fiche #${btn.dataset.hMergeSrc} sera supprimée après déplacement de ses données.`, {title: 'Fusionner les fiches', okLabel: 'Fusionner', danger: true})) return;
                 try { await api('merge_people', {}, {method: 'POST', body: {target_id: btn.dataset.hMerge, source_id: btn.dataset.hMergeSrc}}); toast('Fusion effectuée.'); d.close(); A().renderMaintenance(); }
                 catch (error) { toast(error.message, 'error'); }
             })),
@@ -1007,7 +1007,7 @@
                 <label>Année<select data-hc="year"><option value="">Toutes</option>${data.years.map(y => `<option value="${y.year}" ${String(y.year) === String(f.year) ? 'selected' : ''}>${y.year} (${fmt(y.n)})</option>`).join('')}</select></label>
                 <label class="span-2">Chercher un nom, un métier, une adresse<input type="search" data-hc="q" value="${esc(f.q)}" placeholder="Dupont, cultivateur, rue du Moulin…"></label></div>
             <p class="muted">${plural(recs.length, 'foyer', 'foyers')} · ${plural(people, 'personne relevée', 'personnes relevées')}${data.truncated ? ' (les 2 000 premiers)' : ''} ${recs.length ? '<button type="button" class="link-button" data-hc-csv>Exporter en CSV</button>' : ''}</p>
-            ${recs.length ? [...byYear.entries()].map(([y, list]) => `<details class="h-census-year" open><summary><strong>${esc(y)}</strong> — ${plural(list.length, 'foyer', 'foyers')}, ${plural(list.reduce((n, r) => n + r.members.length, 0), 'personne', 'personnes')}</summary>${list.map(household).join('')}</details>`).join('') : empty('Aucun recensement ne correspond. Les recensements s’ajoutent depuis la fiche d’une personne (bloc Recensements).')}</section>`;
+            ${recs.length ? [...byYear.entries()].map(([y, list]) => `<details class="h-census-year" open><summary><strong>${esc(y)}</strong> — ${plural(list.length, 'foyer', 'foyers')}, ${plural(list.reduce((n, r) => n + r.members.length, 0), 'personne', 'personnes')}</summary>${list.map(household).join('')}</details>`).join('') : empty('Aucun recensement ne correspond', {icon: '🏠', hint: 'Les recensements s’ajoutent depuis la fiche d’une personne (bloc Recensements).'})}</section>`;
         const ws = A().$('#workspace');
         const rerun = () => ext.lists.census_households(++S().workspaceToken);
         ws.querySelectorAll('select[data-hc]').forEach(el => el.addEventListener('change', () => { const k = el.dataset.hc; st[k === 'village' ? 'hCensusVillage' : 'hCensusYear'] = el.value; rerun(); }));
@@ -1193,7 +1193,7 @@
         st.hVillageWikiTried = st.hVillageWikiTried || {};
         if (pops.length < 2 && !st.hVillageWikiTried[key] && navigator.onLine !== false) { st.hVillageWikiTried[key] = true; fetchWiki(true); }
         ws.querySelector('[data-h-village-clear]').addEventListener('click', async () => {
-            if (!confirm('Effacer ce qui a été noté sur ce village (église, populations, notes) ? Les familles et les métiers, calculés depuis les fiches, restent.')) return;
+            if (!await A().confirmBox('Supprimer ce qui a été noté sur ce village (église, populations, notes) ? Les familles et les métiers, calculés depuis les fiches, restent.', {title: 'Supprimer les notes du village', okLabel: 'Supprimer'})) return;
             try { await api('save_village_profile', {}, {method: 'POST', body: {key, name: v.name, populations: [], pending_labels: []}}); toast('Fiche du village effacée.'); again(); } catch (error) { toast(error.message, 'error'); }
         });
     }
@@ -1684,9 +1684,9 @@
         const ruleText = (l) => l.source === 'records' ? 'formulaire : ' + ((l.definition.fields || []).filter(x => x.type !== 'heading').map(x => x.label).join(', ') || 'aucun champ') : l.source === 'free' ? 'rien ne vient de la base : tu écris toi-même chaque ligne' : listMeta.sources?.[l.source] ? `reprise de la liste « ${listMeta.sources[l.source]} »${Object.keys(l.definition.filters || {}).length ? ' · filtrée' : ''}` : (l.definition.rules || []).map(r => (RULES[r.field]?.[l.source === 'events' ? 'ev' : 'pe'] || r.field) + (r.value ? ` « ${r.value} »` : '') + (r.from || r.to ? ` ${r.from || '…'}–${r.to || '…'}` : '')).join(l.definition.match === 'any' ? ' OU ' : ' ET ') || 'aucun critère';
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('MAINTENANCE', 'Éditeur de listes', 'Des listes sur mesure. <b>Des fiches avec ton propre formulaire</b>, comme « Circuits sur le terrain » : champs au choix, dates, lieux sur la carte, personnes, photos, étapes sans limite, onglets « À faire / Faits / Tous ». Ou bien une liste tirée de la base : des événements (comme les divorces) ou des personnes, avec des critères (période, lieu, nom, étiquette, ancêtres…), tes colonnes, et tes propres colonnes à remplir.', '<button type="button" class="button" data-h-list-new>+ Nouvelle liste</button><button type="button" class="button secondary" data-h-list-import>Importer une liste…</button>')}
             ${lists.length ? `<div class="h-records">${lists.map(l => `<article class="h-record"><header><div><button type="button" class="table-link" data-h-list-open="${l.id}"><strong>${esc(l.icon)} ${esc(l.name)}</strong></button> <small class="muted">${sourceName(l.source)}${l.definition.in_lists ? ' · aussi dans l’onglet Listes' : ''}</small>${ext.labelChips(l.labels)}</div><span class="h-list-actions"><button type="button" class="link-button" data-h-list-share="${l.id}" title="Fichier à envoyer à un autre utilisateur de LCNDA">Partager</button>${tools(`data-h-list-edit="${l.id}"`, `data-h-list-del="${l.id}"`, 'cette liste')}</span></header>
-                ${l.description ? `<p>${esc(l.description)}</p>` : ''}<p class="muted">${esc(ruleText(l))}${(l.definition.custom || []).length ? ` · colonnes à remplir : ${esc(l.definition.custom.map(c => c.label).join(', '))}` : ''}</p></article>`).join('')}</div>` : empty('Aucune liste pour l’instant : clique sur « + Nouvelle liste ».')}</section>`;
+                ${l.description ? `<p>${esc(l.description)}</p>` : ''}<p class="muted">${esc(ruleText(l))}${(l.definition.custom || []).length ? ` · colonnes à remplir : ${esc(l.definition.custom.map(c => c.label).join(', '))}` : ''}</p></article>`).join('')}</div>` : A().emptyState({icon: '📋', text: 'Aucune liste pour l’instant', hint: 'Une liste rassemble les fiches qui répondent à tes critères.', action: {label: '＋ Nouvelle liste', attrs: 'data-h-list-new'}})}</section>`;
         const ws = A().$('#workspace');
-        ws.querySelector('[data-h-list-new]').addEventListener('click', () => dialog({
+        ws.querySelectorAll('[data-h-list-new]').forEach(b => b.addEventListener('click', () => dialog({
             eyebrow: 'NOUVELLE LISTE', title: 'Par quoi commencer ?',
             body: (() => {
                 const kind = t => ({events: 'Des événements', persons: 'Des personnes', free: 'Des lignes écrites à la main'}[t.source] || (listMeta.sources?.[t.source] ? 'Liste « ' + listMeta.sources[t.source] + ' »' : ''));
@@ -1708,7 +1708,7 @@
                     start({icon: l.icon, description: l.description, source: l.source, definition: def}, 'Copie de ' + l.name);
                 }));
             },
-        }));
+        })));
         ws.querySelector('[data-h-list-import]').addEventListener('click', async () => {
             const text = await ext.pickFile('.json,application/json');
             if (text === null) return;
@@ -1721,7 +1721,7 @@
         }));
         ws.querySelectorAll('[data-h-list-open]').forEach(b => b.addEventListener('click', () => { S().hListOpen = Number(b.dataset.hListOpen); ext.maintenance.my_lists(++S().workspaceToken); }));
         ws.querySelectorAll('[data-h-list-edit]').forEach(b => b.addEventListener('click', () => { const l = lists.find(x => x.id === Number(b.dataset.hListEdit)); listEditor = JSON.parse(JSON.stringify(l)); renderListEditor(++S().workspaceToken); }));
-        ws.querySelectorAll('[data-h-list-del]').forEach(b => b.addEventListener('click', async () => { if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return; await api('delete_my_list', {}, {method: 'POST', body: {id: b.dataset.hListDel}}); refreshPinnedLists(); ext.maintenance.my_lists(++S().workspaceToken); }));
+        ws.querySelectorAll('[data-h-list-del]').forEach(b => b.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette liste ? (les fiches ne sont pas touchées)', {title: 'Supprimer la liste', okLabel: 'Supprimer la liste'})) return; await api('delete_my_list', {}, {method: 'POST', body: {id: b.dataset.hListDel}}); refreshPinnedLists(); ext.maintenance.my_lists(++S().workspaceToken); }));
     };
     /** Pour l'éditeur de widgets (heritage-widgets.js) : les mêmes critères que « Mes listes ». */
     ext.listRules = () => RULES;
@@ -1920,7 +1920,7 @@
         const modesBar = D => `<div class="h-lv-modes"><span class="h-lv-modes-tabs">${DMODES.map(([m, l]) => `<button type="button" class="${D.mode === m ? 'is-on' : ''}" data-lv-mode="${m}">${l}</button>`).join('')}</span>
             ${D.mode !== 'table' && allCols.length ? `<label class="h-lv-mini">Trier <select data-lv-sortsel><option value="">—</option>${allCols.map(([c, l]) => `<option value="${esc(c)}" ${sort?.col === c ? 'selected' : ''}>${esc(l)}${sort?.col === c ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ''}</option>`).join('')}</select></label><label class="h-lv-mini">Filtrer <select data-lv-filtersel><option value="">choisir…</option>${allCols.map(([c, l]) => `<option value="${esc(c)}">${esc(l)}</option>`).join('')}</select></label>` : ''}
             <button type="button" class="button small secondary" data-lv-look>🎨 Apparence</button></div>`;
-        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header(inLists ? 'LISTES' : 'ÉDITEUR DE LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(shown.length, unit[0], unit[1])}</strong>${shown.length !== data.rows.length ? ` affichée(s) sur ${fmt(data.rows.length)}` : ''}${data.truncated ? ' (liste coupée : les premières seulement)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
+        A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header(inLists ? 'LISTES' : 'ÉDITEUR DE LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(shown.length, unit[0], unit[1])}</strong>${shown.length !== data.rows.length ? ` ${shown.length > 1 ? 'affichées' : 'affichée'} sur ${fmt(data.rows.length)}` : ''}${data.truncated ? ' (liste coupée : les premières seulement)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
                 `${inLists ? '' : '<button type="button" class="button secondary" data-lv-back>← Éditeur de listes</button>'}<button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
             ${isFree ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>+ Ajouter une ligne</button></div>' : ''}
             ${isPersons ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
@@ -1967,7 +1967,7 @@
         ws.querySelector('[data-lv-back]')?.addEventListener('click', () => { S().hListOpen = 0; ext.maintenance.my_lists(++S().workspaceToken); });
         ws.querySelector('[data-lv-edit]').addEventListener('click', goEdit);
         ws.querySelector('[data-lv-del]').addEventListener('click', async () => {
-            if (!confirm('Supprimer cette liste ? (les fiches ne sont pas touchées)')) return;
+            if (!await A().confirmBox('Supprimer cette liste ? (les fiches ne sont pas touchées)', {title: 'Supprimer la liste', okLabel: 'Supprimer la liste'})) return;
             await api('delete_my_list', {}, {method: 'POST', body: {id}}); S().hListOpen = 0; await refreshPinnedLists();
             if (inLists) { S().listType = 'persons'; A().renderSidebar?.(); A().renderList?.(); } else ext.maintenance.my_lists(++S().workspaceToken);
         });
@@ -2021,7 +2021,7 @@
             if (t.closest('[data-lv-media]')) { const r = rowOf(t.closest('[data-lv-key]')?.dataset.lvKey); if (r?.media) A().openLightbox([r.media], 0, true); return; }
             const b = t.closest('[data-lv-remove]'); if (!b) return;
             const el = b.closest('[data-lv-key]');
-            if (isFree && !confirm('Supprimer cette ligne ?')) return;
+            if (isFree && !await A().confirmBox('Supprimer cette ligne ?', {title: 'Supprimer la ligne', okLabel: 'Supprimer la ligne'})) return;
             try { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: el.dataset.lvKey, included: -1}}); }
             catch (error) { return toast(error.message, 'error'); }
             data.rows = data.rows.filter(r => r.key !== el.dataset.lvKey); shown = shown.filter(r => r.key !== el.dataset.lvKey); el.remove(); toast(isFree ? 'Ligne supprimée.' : 'Retirée de la liste.');

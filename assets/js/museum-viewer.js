@@ -479,8 +479,10 @@
             o.querySelector('[data-lm-sign]').addEventListener('submit', async e => {
                 e.preventDefault(); const f = e.target, name = f.name.value.trim(), message = f.message.value.trim();
                 if (!name || !message) return;
-                try { data.guestbook = opts.onSign ? await opts.onSign(name, message) : [...(data.guestbook || []), {name, message, date: new Date().toLocaleDateString('fr-FR')}]; o.querySelector('.lm-book-list').innerHTML = bookHtml(data.guestbook); f.reset(); }
-                catch (err) { alert(err.message || 'Impossible de signer.'); }
+                try { data.guestbook = opts.onSign ? await opts.onSign(name, message) : [...(data.guestbook || []), {name, message, date: new Date().toLocaleDateString('fr-FR')}]; o.querySelector('.lm-book-list').innerHTML = bookHtml(data.guestbook); f.reset(); f.querySelector('[data-lm-err]')?.remove(); }
+                catch (err) { // message sous le formulaire (la visionneuse exportée n'a pas les messages de l'app)
+                    let m = f.querySelector('[data-lm-err]'); if (!m) { m = document.createElement('p'); m.className = 'lm-muted'; m.dataset.lmErr = ''; m.setAttribute('role', 'alert'); f.append(m); }
+                    m.textContent = '⚠️ ' + (err.message || 'Impossible de signer.'); }
             });
         }
         function catalogHtml() {

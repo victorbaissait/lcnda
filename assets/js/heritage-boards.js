@@ -273,18 +273,18 @@
         let layers = Array.isArray(b.data?.layers) ? b.data.layers.map(l => ({...l})) : [], steps = Array.isArray(b.data?.steps) ? b.data.steps.map(x => ({...x})) : [], snapOn = !!b.data?.snap, activeLayer = '';
         const boardExtra = () => ({bgColor, bgPattern, layers, steps, snap: snapOn});
         // barre d'outils et en-tête : dans l'ordre choisi (Maintenance → Réglages des tableaux → Menus et options)
-        const TOOL_DEFS = {select: ['↖', 'Choisir, déplacer (V)'], hand: ['✋', 'Se déplacer (H ou espace)'], text: ['T', 'Texte (T)'], note: ['🗒', 'Note (N)'], shape: ['⬠', 'Formes (S)'], line: ['╱', 'Trait (L)'], arrow: ['➝', 'Flèche (A)'], pen: ['✍︎', 'Dessin à main levée (P)'], eraser: ['⌫', 'Gomme (E)'], table: ['▦', 'Tableur (G)']};
+        const TOOL_DEFS = {select: ['↖', 'Choisir, déplacer', 'V'], hand: ['✋', 'Se déplacer', 'H ou Espace'], text: ['T', 'Texte', 'T'], note: ['🗒', 'Note', 'N'], shape: ['⬠', 'Formes', 'S'], line: ['╱', 'Trait', 'L'], arrow: ['➝', 'Flèche', 'A'], pen: ['✍︎', 'Dessin à main levée', 'P'], eraser: ['⌫', 'Gomme', 'E'], table: ['▦', 'Tableur', 'G']};
         const ordered = (order, hidden, all) => [...(order || []).filter(k => all.includes(k)), ...all.filter(k => !(order || []).includes(k))].filter(k => !(hidden || []).includes(k));
-        const toolButtons = () => { const p = P(); return ordered(p.toolsOrder, (p.toolsHidden || []).filter(k => k !== 'select'), Object.keys(TOOL_DEFS)).map(k => `<button type="button" class="h-bt" data-bd-tool="${k}" title="${esc(TOOL_DEFS[k][1])}"><span>${TOOL_DEFS[k][0]}</span></button>`).join(''); };
+        const toolButtons = () => { const p = P(); return ordered(p.toolsOrder, (p.toolsHidden || []).filter(k => k !== 'select'), Object.keys(TOOL_DEFS)).map(k => `<button type="button" class="h-bt" data-bd-tool="${k}" title="${esc(TOOL_DEFS[k][1])}" data-shortcut="${esc(TOOL_DEFS[k][2])}"><span>${TOOL_DEFS[k][0]}</span></button>`).join(''); };
         const BG_LIST = [['dots', 'Fond à points'], ['grid', 'Quadrillé'], ['lines', 'Lignes'], ['plain', 'Uni'], ['paper', 'Papier'], ['cork', 'Liège'], ['dark', 'Sombre'], ['custom', 'Couleur à choisir…']];
         const HEAD_DEFS = {
-            undo: () => '<button type="button" class="button small secondary" data-bd-undo title="Annuler (⌘Z)">↶</button>', redo: () => '<button type="button" class="button small secondary" data-bd-redo title="Rétablir (⇧⌘Z)">↷</button>',
+            undo: () => '<button type="button" class="button small secondary" data-bd-undo title="Annuler" data-shortcut="⌘Z">↶</button>', redo: () => '<button type="button" class="button small secondary" data-bd-redo title="Rétablir" data-shortcut="⇧⌘Z">↷</button>',
             bg: () => `<span class="h-bd-bgpick"><select data-bd-bg title="Fond">${BG_LIST.map(([k, l]) => `<option value="${k}" ${bg === k ? 'selected' : ''}>${l}</option>`).join('')}</select><input type="color" data-bd-bgcolor value="${esc(bgColor)}" title="Couleur du fond" ${bg === 'custom' ? '' : 'hidden'}><select data-bd-bgpattern title="Motif sur la couleur" ${bg === 'custom' ? '' : 'hidden'}>${[['', 'sans motif'], ['dots', 'points'], ['grid', 'quadrillé'], ['lines', 'lignes']].map(([k, l]) => `<option value="${k}" ${bgPattern === k ? 'selected' : ''}>${l}</option>`).join('')}</select></span>`,
             snaps: () => '<button type="button" class="button small secondary" data-bd-snaps title="Instantanés : figer l’état du tableau, y revenir, en faire un nouveau tableau">📸 Instantanés</button>',
             copy: () => '<button type="button" class="button small secondary" data-bd-copy title="Créer un nouveau tableau à partir de celui-ci">⧉ Copie</button>',
             export: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-export title="Image PNG ou JPG, PDF, impression, fichier du tableau">⬇ Exporter</button></span>',
             hyp: () => '<button type="button" class="button small secondary h-bd-hypcount" data-bd-hypcount title="Les pistes à vérifier : clic pour aller à la suivante" hidden>❓ 0</button>',
-            search: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-search title="Chercher dans le tableau (⌘F)">🔍</button></span>',
+            search: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-search title="Chercher dans le tableau" data-shortcut="⌘F">🔍</button></span>',
             layers: () => '<span class="h-bd-menuwrap"><button type="button" class="button small secondary" data-bd-layers title="Calques : montrer, cacher, verrouiller">🗂</button></span>',
             snapgrid: () => `<button type="button" class="button small secondary ${snapOn ? 'is-on' : ''}" data-bd-snapgrid title="Grille aimantée et guides d’alignement">🧲</button>`,
             minimap: () => '<button type="button" class="button small secondary" data-bd-minimap title="Mini-carte du tableau (montrer ou cacher)">🗺</button>',
@@ -313,7 +313,7 @@
                 <span class="h-bt-sep"></span>
                 <span class="h-bt-opts" data-bd-opts></span>
                 <span class="spacer"></span>
-                <span class="h-bt-zoom"><button type="button" class="h-bt" data-bd-zoom="-1" title="Dézoomer">−</button><span class="h-bd-menuwrap"><button type="button" class="h-bt h-bd-zoomout" data-bd-zoomout title="Zoom : ajuster à la sélection, adapter à la fenêtre…">100 %</button></span><button type="button" class="h-bt" data-bd-zoom="1" title="Zoomer">+</button><button type="button" class="h-bt" data-bd-fit title="Tout voir">⤢</button><button type="button" class="h-bt" data-bd-groups title="Montrer ce qui est groupé">⧉</button></span>
+                <span class="h-bt-zoom"><button type="button" class="h-bt" data-bd-zoom="-1" title="Dézoomer" data-shortcut="-">−</button><span class="h-bd-menuwrap"><button type="button" class="h-bt h-bd-zoomout" data-bd-zoomout title="Zoom : ajuster à la sélection, adapter à la fenêtre…">100 %</button></span><button type="button" class="h-bt" data-bd-zoom="1" title="Zoomer" data-shortcut="+">+</button><button type="button" class="h-bt" data-bd-fit title="Tout voir" data-shortcut="0">⤢</button><button type="button" class="h-bt" data-bd-groups title="Montrer ce qui est groupé">⧉</button></span>
             </div>
             <div class="h-board-main">
                 <div class="h-board-stage" data-bd-stage data-bg="${bg}" data-pattern="${esc(bgPattern)}" style="--bgc:${esc(bgColor)}">${BOARD_FILTERS}<div class="h-board-world" data-bd-world></div><div class="h-board-marquee" data-bd-marquee hidden></div>
@@ -1238,12 +1238,12 @@
                 opacity: () => numField('opacity', 'Opacité', 5, 100, 1, Math.round((one?.opacity ?? 1) * 100), '%', 5, 100),
                 actions: () => `<div class="h-bd-actions">
                     ${['folder', 'recueil', 'person', 'link', 'screen', 'weblink', 'media', 'timeline'].includes(t) || (t === 'map' && one.mapSrc) ? '<button type="button" class="button small" data-bd-act="open">↗ Ouvrir</button>' : ''}
-                    <button type="button" class="button small secondary" data-bd-act="duplicate">Dupliquer</button>
-                    <button type="button" class="button small secondary" data-bd-act="lock">${l.every(i => i.locked) ? '🔓 Déverrouiller' : '🔒 Verrouiller'}</button>
-                    ${l.length > 1 ? '<button type="button" class="button small secondary" data-bd-act="group">⧉ Grouper</button>' : ''}${l.some(i => i.group) ? '<button type="button" class="button small secondary" data-bd-act="ungroup">Dégrouper</button>' : ''}
+                    <button type="button" class="button small secondary" data-bd-act="duplicate" data-shortcut="⌘D">Dupliquer</button>
+                    <button type="button" class="button small secondary" data-bd-act="lock" data-shortcut="⌘L">${l.every(i => i.locked) ? '🔓 Déverrouiller' : '🔒 Verrouiller'}</button>
+                    ${l.length > 1 ? '<button type="button" class="button small secondary" data-bd-act="group" data-shortcut="⌘G">⧉ Grouper</button>' : ''}${l.some(i => i.group) ? '<button type="button" class="button small secondary" data-bd-act="ungroup" data-shortcut="⇧⌘G">Dégrouper</button>' : ''}
                     ${l.some(i => i.type === 'draw') ? '<button type="button" class="button small secondary" data-bd-act="toshape" title="Faire de ce dessin une forme à toi (réutilisable)">✏️ En faire une forme</button>' : ''}
-                    <button type="button" class="button small secondary" data-bd-act="front">Devant</button><button type="button" class="button small secondary" data-bd-act="back">Derrière</button>
-                    <button type="button" class="button small secondary danger" data-bd-act="delete">Supprimer</button></div>`,
+                    <button type="button" class="button small secondary" data-bd-act="front" data-shortcut="]">Devant</button><button type="button" class="button small secondary" data-bd-act="back" data-shortcut="[">Derrière</button>
+                    <button type="button" class="button small secondary danger" data-bd-act="delete" data-shortcut="Suppr">Supprimer</button></div>`,
             };
             const order = ordered(p.inspectorOrder, p.inspectorHidden, Object.keys(SECTIONS));
             inspector.innerHTML = `<h4>${grp ? `⧉ Groupe ${grp} · ${l.length} éléments` : one ? ({table: 'Tableur', shape: 'Forme', note: 'Note', text: 'Texte', draw: 'Dessin', line: headOf(one, 'end') !== 'none' || headOf(one, 'start') !== 'none' ? 'Flèche' : 'Trait', media: 'Média', webimage: 'Image du web', weblink: 'Lien web', tag: 'Étiquette', folder: 'Dossier', recueil: 'Recueil', person: 'Fiche', widget: 'Widget', timeline: 'Frise vivante', map: 'Carte', frame: 'Cadre', link: 'Écran de l’app', screen: 'Écran de l’app'}[t] || 'Élément') : `${l.length} éléments`}</h4>
@@ -1586,15 +1586,15 @@
                         const bt = e.target.closest('[data-bd-snap]'); if (!bt) return;
                         const sid = Number(bt.dataset.id), s0 = list.find(x => x.id === sid);
                         try {
-                            if (bt.dataset.bdSnap === 'restore') { if (ro()) return; if (!confirm(`Revenir à « ${s0?.label} » ? L’état actuel est gardé en instantané.`)) return; clearTimeout(saveT); await api('restore_board_snapshot', {}, {method: 'POST', body: {id: sid}}); d.close(); dirty = false; toast('Tableau revenu à l’instantané.'); go(b.id); }
+                            if (bt.dataset.bdSnap === 'restore') { if (ro()) return; if (!await A().confirmBox(`Revenir à « ${s0?.label} » ? L’état actuel est gardé en instantané.`, {title: 'Revenir à cet instantané', okLabel: 'Revenir à l’instantané'})) return; clearTimeout(saveT); await api('restore_board_snapshot', {}, {method: 'POST', body: {id: sid}}); d.close(); dirty = false; toast('Tableau revenu à l’instantané.'); go(b.id); }
                             if (bt.dataset.bdSnap === 'copy') { d.close(); copyDialog(sid, s0?.label); }
-                            if (bt.dataset.bdSnap === 'delete') { if (!confirm(`Supprimer l’instantané « ${s0?.label} » ?`)) return; await api('delete_board_snapshot', {}, {method: 'POST', body: {id: sid}}); list = list.filter(x => x.id !== sid); d.querySelector('[data-bd-snaplist]').innerHTML = snapList(list); }
+                            if (bt.dataset.bdSnap === 'delete') { if (!await A().confirmBox(`Supprimer l’instantané « ${s0?.label} » ?`, {title: 'Supprimer l’instantané', okLabel: 'Supprimer l’instantané'})) return; await api('delete_board_snapshot', {}, {method: 'POST', body: {id: sid}}); list = list.filter(x => x.id !== sid); d.querySelector('[data-bd-snaplist]').innerHTML = snapList(list); }
                         } catch (error) { toast(error.message, 'error'); }
                     });
                 }});
         }
         const snapRows = list => list.length ? list.map(s0 => `<article class="h-bd-snap">${s0.thumb ? `<img src="${esc(s0.thumb)}" alt="">` : '<span class="h-bd-snapblank">🧩</span>'}<div><strong>${esc(s0.label)}</strong><small class="muted">${esc(String(s0.created_at || '').slice(0, 16).replace('T', ' '))} · ${fmt(s0.item_count)} élément${s0.item_count > 1 ? 's' : ''}</small>
-            <span class="h-bd-snapacts"><button type="button" class="button small secondary" data-bd-snap="restore" data-id="${s0.id}">↺ Revenir à cet état</button><button type="button" class="button small secondary" data-bd-snap="copy" data-id="${s0.id}">⧉ En faire un tableau</button><button type="button" class="button small secondary danger" data-bd-snap="delete" data-id="${s0.id}" aria-label="Supprimer">🗑</button></span></div></article>`).join('') : '<p class="muted">Pas encore d’instantané.</p>';
+            <span class="h-bd-snapacts"><button type="button" class="button small secondary" data-bd-snap="restore" data-id="${s0.id}">↺ Revenir à cet état</button><button type="button" class="button small secondary" data-bd-snap="copy" data-id="${s0.id}">⧉ En faire un tableau</button><button type="button" class="button small secondary danger" data-bd-snap="delete" data-id="${s0.id}" aria-label="Supprimer">🗑</button></span></div></article>`).join('') : A().emptyState({icon: '📸', text: 'Aucun instantané pour l’instant'});
         const snapList = list => { const auto = list.filter(x => String(x.label || '').startsWith('⏱')), mine = list.filter(x => !String(x.label || '').startsWith('⏱'));
             return snapRows(mine) + (auto.length ? `<details class="h-bd-autosnaps"><summary>⏱ Versions automatiques (${auto.length}) <small class="muted">une par jour de travail au plus, les 30 dernières gardées</small></summary>${snapRows(auto)}</details>` : ''); };
         function copyDialog(snapshotId = 0, snapLabel = '') {
@@ -2029,7 +2029,7 @@
             draw();
             btn.closest('.h-bd-menuwrap').appendChild(m);
             const changed = () => { render(); queueSave(true); draw(); };
-            m.addEventListener('click', e => {
+            m.addEventListener('click', async e => {
                 if (e.target.closest('[data-lnew]')) { if (ro()) return; const L = {id: 'l' + uid(), name: 'Calque ' + (layers.length + 1), hidden: false, locked: false}; layers.push(L); activeLayer = L.id; changed(); return; }
                 if (e.target.closest('[data-lmove]')) { if (ro()) return; selItems().forEach(i => { if (activeLayer) i.layer = activeLayer; else delete i.layer; }); render(); commit(); draw(); return; }
                 const L = id0 => layers.find(x => x.id === id0);
@@ -2037,7 +2037,7 @@
                 const lk = e.target.closest('[data-llock]'); if (lk) { const l0 = L(lk.dataset.llock); l0.locked = !l0.locked; changed(); return; }
                 const up = e.target.closest('[data-lup]'); if (up) { const i = layers.findIndex(x => x.id === up.dataset.lup); if (i < layers.length - 1) { [layers[i], layers[i + 1]] = [layers[i + 1], layers[i]]; restackLayers(); } changed(); return; }
                 const ls = e.target.closest('[data-lsel]'); if (ls) { sel = new Set(items.filter(i => i.layer === ls.dataset.lsel && !hiddenIds.has(i.id)).map(i => i.id)); render(); draw(); return; }
-                const dl = e.target.closest('[data-ldel]'); if (dl) { if (ro()) return; const id0 = dl.dataset.ldel; if (!confirm('Supprimer ce calque ? Ses éléments restent, sur le calque principal.')) return; items.forEach(i => { if (i.layer === id0) delete i.layer; }); layers = layers.filter(x => x.id !== id0); if (activeLayer === id0) activeLayer = ''; render(); commit(); draw(); }
+                const dl = e.target.closest('[data-ldel]'); if (dl) { if (ro()) return; const id0 = dl.dataset.ldel; if (!await A().confirmBox('Supprimer ce calque ? Ses éléments restent, sur le calque principal.', {title: 'Supprimer le calque', okLabel: 'Supprimer le calque'})) return; items.forEach(i => { if (i.layer === id0) delete i.layer; }); layers = layers.filter(x => x.id !== id0); if (activeLayer === id0) activeLayer = ''; render(); commit(); draw(); }
             });
             m.addEventListener('change', e => { const a = e.target.closest('[data-lact]'); if (a) { activeLayer = a.dataset.lact; draw(); } const n = e.target.closest('[data-lname]'); if (n) { const l0 = layers.find(x => x.id === n.dataset.lname); if (l0) { l0.name = n.value.trim() || l0.name; queueSave(true); } } });
             setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target) && !btn.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0);
@@ -2137,7 +2137,7 @@
             const saved = {...view}; let n = 0;
             sel.clear(); render(); root.classList.add('is-present');
             const bar = document.createElement('div'); bar.className = 'h-bd-presentbar'; stage.appendChild(bar);
-            const show = () => { bar.innerHTML = `<button type="button" data-pv="-1" ${n ? '' : 'disabled'} title="Étape d’avant (←)">◀</button><span><strong>${esc(list[n].name || '')}</strong> <small>${n + 1} / ${list.length}</small></span><button type="button" data-pv="1" ${n < list.length - 1 ? '' : 'disabled'} title="Étape suivante (→ ou espace)">▶</button><button type="button" data-pend title="Quitter (Échap)">✕</button>`; setTimeout(() => glideTo(list[n]), 30); };
+            const show = () => { bar.innerHTML = `<button type="button" data-pv="-1" ${n ? '' : 'disabled'} title="Étape d’avant" data-shortcut="←">◀</button><span><strong>${esc(list[n].name || '')}</strong> <small>${n + 1} / ${list.length}</small></span><button type="button" data-pv="1" ${n < list.length - 1 ? '' : 'disabled'} title="Étape suivante" data-shortcut="→ ou Espace">▶</button><button type="button" data-pend title="Quitter" data-shortcut="Échap">✕</button>`; setTimeout(() => glideTo(list[n]), 30); };
             let over = false;
             const onFs = () => { if (!document.fullscreenElement) end(); }; // Échap quitte d'abord le plein écran : la présentation s'arrête aussi
             const end = () => { if (over) return; over = true; document.removeEventListener('fullscreenchange', onFs); window.removeEventListener('keydown', key, true); bar.remove(); root.classList.remove('is-present'); Object.assign(view, saved); setTimeout(applyView, 30); try { document.fullscreenElement && document.exitFullscreen(); } catch (_) {} };
@@ -2157,7 +2157,7 @@
 
     /* ═════════ Supprimer un tableau (et ses dossiers) ═════════ */
     async function deleteBoard(id, title, done) {
-        if (!confirm(`Supprimer le tableau « ${title || 'sans titre'} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app.`)) return;
+        if (!await A().confirmBox(`Supprimer le tableau « ${title || 'sans titre'} » et tous ses dossiers ? Les photos, sons et fiches posés dessus restent dans l’app.`, {title: 'Supprimer le tableau', okLabel: 'Supprimer le tableau'})) return;
         try { const r = await api('delete_board', {}, {method: 'POST', body: {id}}); toast(Number(r.result?.deleted || r.deleted) > 1 ? 'Tableau et dossiers supprimés.' : 'Tableau supprimé.'); done?.(); }
         catch (error) { toast(error.message, 'error'); }
     }
@@ -2198,7 +2198,7 @@
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" placeholder="Qui est le père de Marie ?" required></label>${owner.owner_type ? `<label class="span-2">Partie <small class="muted">(facultatif)</small><input name="part" placeholder="Piste 1, les témoins…"></label>` : ''}</div>
                 <h4>Pour commencer</h4><div class="h-bd-templates">${TEMPLATES.map(([k, i, l, h], n) => `<label class="h-bd-tpl"><input type="radio" name="tpl" value="${k}" ${n ? '' : 'checked'}><span class="h-bd-tplicon">${i}</span><strong>${esc(l)}</strong><small>${esc(h)}</small></label>`).join('')}</div>
                 ${mine.length ? `<h4>Mes modèles</h4><div class="h-bd-templates" data-bd-mytpl>${mine.map(t => `<label class="h-bd-tpl"><input type="radio" name="tpl" value="my:${esc(t.id)}"><span class="h-bd-tplicon">${esc(t.icon || '⭐')}</span><strong>${esc(t.name)}</strong><small>${esc(t.hint || `${t.items.length} élément${t.items.length > 1 ? 's' : ''}`)}</small><button type="button" class="h-bd-tpldel" data-bd-tpldel="${esc(t.id)}" title="Supprimer ce modèle" aria-label="Supprimer ce modèle">×</button></label>`).join('')}</div>` : '<p class="muted"><small>Pour faire tes propres modèles : dans un tableau, ⬇ Exporter → ⭐ En faire un modèle.</small></p>'}`,
-            onOpen: d => d.querySelector('[data-bd-mytpl]')?.addEventListener('click', e => { const x = e.target.closest('[data-bd-tpldel]'); if (!x) return; e.preventDefault(); const t = myTemplates().find(t0 => t0.id === x.dataset.bdTpldel); if (!t || !confirm(`Supprimer le modèle « ${t.name} » ?`)) return; try { localStorage.setItem(TPL_KEY, JSON.stringify(myTemplates().filter(t0 => t0.id !== t.id))); } catch (_) {} x.closest('.h-bd-tpl').remove(); }),
+            onOpen: d => d.querySelector('[data-bd-mytpl]')?.addEventListener('click', async e => { const x = e.target.closest('[data-bd-tpldel]'); if (!x) return; e.preventDefault(); const t = myTemplates().find(t0 => t0.id === x.dataset.bdTpldel); if (!t || !await A().confirmBox(`Supprimer le modèle « ${t.name} » ?`, {title: 'Supprimer le modèle', okLabel: 'Supprimer le modèle'})) return; try { localStorage.setItem(TPL_KEY, JSON.stringify(myTemplates().filter(t0 => t0.id !== t.id))); } catch (_) {} x.closest('.h-bd-tpl').remove(); }),
             onSubmit: async form => {
                 const title = form.elements.title.value.trim() || 'Tableau sans titre', v = form.elements.tpl.value;
                 let data;
@@ -2239,8 +2239,8 @@
         if (token !== st.workspaceToken || st.module !== 'enquetes') return;
         const rows = data.boards || [];
         ws.innerHTML = `<section class="page h-boards"><header class="page-header"><div><span class="eyebrow">ENQUÊTES</span><h2>Tableaux</h2><p>Une toile libre, comme un grand tableau de liège : on y pose des notes, des formes, des flèches, des dessins, des photos, des sons, des PDF, des fiches, des écrans de l’app… Chaque tableau peut être libre ou rangé dans une enquête, une battue ou un projet de l’Atelier.</p></div><div class="page-actions"><button type="button" class="button" data-bd-new>🧩 + Nouveau tableau</button></div></header>
-            ${rows.length ? `<div class="h-bd-grid">${rows.map(cardHtml).join('')}</div>` : A().empty(st.boardsQ || (st.boardsFilter && st.boardsFilter !== 'all') ? 'Aucun tableau ici.' : 'Aucun tableau pour l’instant. « + Nouveau tableau » : vide, mur d’indices, carte mentale, frise…')}</section>`;
-        ws.querySelector('[data-bd-new]').addEventListener('click', () => newBoard());
+            ${rows.length ? `<div class="h-bd-grid">${rows.map(cardHtml).join('')}</div>` : (st.boardsQ || (st.boardsFilter && st.boardsFilter !== 'all') ? A().emptyState({icon: '🔍', text: 'Aucun tableau ici.'}) : A().emptyState({icon: '🧩', text: 'Aucun tableau pour l’instant', hint: 'Vide, mur d’indices, carte mentale, frise…', action: {label: '＋ Nouveau tableau', attrs: 'data-bd-new'}}))}</section>`;
+        ws.querySelectorAll('[data-bd-new]').forEach(b => b.addEventListener('click', () => newBoard()));
         ws.querySelectorAll('[data-bd-go]').forEach(x => x.addEventListener('click', () => go(Number(x.dataset.bdGo))));
     };
     ext.boardsSidebar = (content, footer, tabs, signal) => {
@@ -2300,7 +2300,7 @@
         const sort = st.bdListSort[kind] || {i: -1, dir: 1};
         if (sort.i >= 0) { const f = cols[sort.i][2]; rows = [...rows].sort((a, b) => { const x = f(a), y = f(b); return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), 'fr')) * sort.dir; }); }
         A().$('#workspace').innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${esc(title)}</h2><p>${fmt(rows.length)} ligne${rows.length > 1 ? 's' : ''}. Un clic sur un titre l’ouvre ; un clic sur une colonne trie.</p></div></header>
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${sort.i === i ? (sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().empty('Rien pour l’instant.')}</section>`;
+            ${rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${sort.i === i ? (sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'})}</section>`;
         const ws = A().$('#workspace');
         A().bindTableLinks?.();
         ws.querySelectorAll('[data-bd-sort]').forEach(x => x.addEventListener('click', () => { const i = Number(x.dataset.bdSort); st.bdListSort[kind] = {i, dir: sort.i === i ? -sort.dir : 1}; listPage(++st.workspaceToken, kind); }));
