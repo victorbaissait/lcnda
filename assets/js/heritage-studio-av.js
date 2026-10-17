@@ -643,8 +643,8 @@
     function layoutV1(P) {
         let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, clen(c)), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, clen(P.v1[k - 1]) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
     }
-    /** Vitesse d'un morceau (0,1 × à 8 ×) et sa durée sur la frise : un morceau accéléré dure moins longtemps */
-    const spd = c => Math.max(0.1, Math.min(8, Number(c?.speed) || 1));
+    /** Vitesse d'un morceau (0,1 × à 10 ×) et sa durée sur la frise : un morceau accéléré dure moins longtemps */
+    const spd = c => Math.max(0.1, Math.min(10, Number(c?.speed) || 1)); // de 0,1 × (ralenti) à 10 × (accéléré)
     const clen = c => (c.to - c.from) / spd(c);
     const montageEnd = P => Math.max(0.1, layoutV1(P).at(-1)?.end || 0, ...P.v2.map(c => c.at + clen(c)), ...P.texts.map(x => x.at + x.dur), ...P.audio.map(a => a.at + clen(a)));
     const lookFilter = (a, b = LOOK0) => `brightness(${(a.bright ?? 1) * (b.bright ?? 1)}) contrast(${(a.contrast ?? 1) * (b.contrast ?? 1)}) saturate(${(a.sat ?? 1) * (b.sat ?? 1)}) hue-rotate(${(a.hue || 0) + (b.hue || 0)}deg)`;
@@ -976,7 +976,7 @@
         const chk = (k, label, on) => `<label class="checkbox-line"><input type="checkbox" data-mt-k="${k}" ${on ? 'checked' : ''}> ${label}</label>`;
         // les réglages du son : pour un morceau (afx) ou pour tout le film (fx)
         const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
-        const speedHtml = c => `${rng('speed', 'Vitesse', 0.25, 4, 0.05, spd(c), ' ×')}<div class="h-mt-quick">${[0.5, 1, 1.5, 2].map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}</div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
+        const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"> ×</label><div class="h-mt-quick">${[0.1, 0.25, 0.5, 1, 1.5, 2, 4, 10].map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}</div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
         const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>Remettre à zéro</button></div><p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
         const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
         const imgDur = c => `<label class="h-avx-row">Durée à l’écran <input type="number" class="h-mt-num" min="0.1" max="3600" step="0.1" value="${Math.round(clen(c) * 10) / 10}" data-mt-k="imgdur"> s</label><div class="h-mt-quick">${[2, 3, 5, 8, 10, 15].map(v => `<button type="button" data-mt-imgdur="${v}">${v} s</button>`).join('')}</div>`;
@@ -1077,6 +1077,7 @@
             else if (c) {
                 if (k === 'hasbg') { c.bg = v ? (dl.querySelector('[data-mt-k="bg"]').value || '#000000') : ''; dl.querySelector('[data-mt-k="bg"]').disabled = !v; }
                 else if (k === 'track') { c.track = v; touch(1); return; }
+                else if (k === 'speedn') { const v2 = Number(String(v).replace(',', '.')); if (!(v2 > 0)) return; c.speed = Math.max(0.1, Math.min(10, v2)); touch(1, false); return; }
                 else if (k === 'imgdur') { const d = Number(String(v).replace(',', '.')); if (!(d > 0)) return; c.to = c.from + Math.max(0.1, Math.min(IMG_MAX, d)); }
                 else if (k === 'tr.type' || k === 'tr.d') { c.tr = c.tr || {type: 'none', d: 1}; c.tr[k.slice(3)] = k === 'tr.d' ? Number(v) : v; }
                 else setK(c, k, v);
