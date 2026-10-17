@@ -395,7 +395,7 @@
 
     /* ═════════ L'éditeur ═════════ */
     const TOOLS = [['select', '➤', 'Sélection', 'V'], ['direct', '⌖', 'Sélection directe (points et poignées)', 'A'], ['pen', '✒️', 'Plume (clic : point, glisser : courbe)', 'P'], ['pencil', '✏️', 'Crayon (à main levée)', 'N'],
-        ['rect', '▭', 'Rectangle', 'M'], ['ellipse', '◯', 'Ellipse', 'L'], ['polygon', '⬡', 'Polygone', 'Y'], ['star', '☆', 'Étoile', 'S'], ['line', '╱', 'Ligne', '\\'], ['text', 'T', 'Texte', 'T'],
+        ['rect', '▭', 'Rectangle', 'M'], ['ellipse', '◯', 'Ellipse', 'L'], ['polygon', '⬡', 'Polygone', 'Y'], ['star', '☆', 'Étoile', 'S'], ['spiral', '🌀', 'Spirale (glisser depuis le centre)', 'O'], ['line', '╱', 'Ligne', '\\'], ['text', 'T', 'Texte', 'T'],
         ['eyedrop', '💧', 'Pipette (prend la couleur d’un objet)', 'I'], ['hand', '✋', 'Main (déplacer la vue)', 'H'], ['zoom', '🔍', 'Loupe (⌥ : dézoomer)', 'Z']];
     const SWATCHES = ['#000000', '#ffffff', '#7f7f7f', '#d81e1e', '#e6862a', '#f4c430', '#1a8a3a', '#1f4fa3', '#7b3f8c', '#8b5a2b', '#f2c9a8', 'none'];
     const newDoc = () => ({w: 800, h: 600, bg: '#ffffff', grid: 0, snap: false, objs: []});
@@ -415,17 +415,17 @@
             <header class="vx-top"><span class="vx-logo">✒️</span><input class="vx-name" data-vx-name value="${esc(name)}" maxlength="200" aria-label="Nom du dessin">
                 <nav class="vx-menus">${menu('Fichier', [['new', 'Nouveau dessin'], ['open', 'Ouvrir un dessin…'], ['save', 'Enregistrer', '⌘S'], ['-'], ['import', '⤒ Importer (SVG, PNG, JPG, WEBP, GIF, BMP…)', '⌘I'], ['-'], ['exp_svg', '⤓ Exporter en SVG'], ['exp_png', '⤓ Exporter en PNG'], ['exp_jpg', '⤓ Exporter en JPG'], ['exp_webp', '⤓ Exporter en WEBP'], ['exp_pdf', '🖨️ Imprimer / PDF'], ['exp_sel', '⤓ Exporter la sélection en SVG'], ['copysvg', '📋 Copier le code SVG'], ['copypng', '📋 Copier l’image'], ['-'], ['toshape', '🔷 Enregistrer comme forme (Mes formes)…'], ['tomedia', '🖼️ Enregistrer dans les médias d’une fiche…'], ['tocoat', '🛡️ Enregistrer comme image d’armoiries…']])}
                     ${menu('Édition', [['undo', 'Annuler', '⌘Z'], ['redo', 'Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Ne rien sélectionner', 'Échap']])}
-                    ${menu('Objet', [['group', 'Grouper', '⌘G'], ['ungroup', 'Dissocier', '⇧⌘G'], ['clipmask', 'Masque d’écrêtage (l’objet du dessus découpe les autres)', '⌘7'], ['unclip', 'Retirer le masque'], ['-'], ['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['flipH', 'Retourner horizontalement'], ['flipV', 'Retourner verticalement'], ['rot90', 'Tourner de 90°'], ['-'], ['topath', 'Convertir en tracé (points modifiables)'], ['outline', 'Contour du trait → forme'], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher']])}
+                    ${menu('Objet', [['group', 'Grouper', '⌘G'], ['ungroup', 'Dissocier', '⇧⌘G'], ['clipmask', 'Masque d’écrêtage (l’objet du dessus découpe les autres)', '⌘7'], ['unclip', 'Retirer le masque'], ['-'], ['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['flipH', 'Retourner horizontalement'], ['flipV', 'Retourner verticalement'], ['rot90', 'Tourner de 90°'], ['-'], ['topath', 'Convertir en tracé (points modifiables)'], ['outline', 'Contour du trait → forme'], ['simplify', 'Simplifier le tracé…'], ['-'], ['transform', 'Transformer… (échelle, inclinaison, copies)'], ['repeat_circle', 'Répétition en cercle…'], ['repeat_grid', 'Répétition en grille…'], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher']])}
                     ${menu('Aligner', [['al_l', 'À gauche'], ['al_c', 'Au centre (horizontal)'], ['al_r', 'À droite'], ['al_t', 'En haut'], ['al_m', 'Au milieu (vertical)'], ['al_b', 'En bas'], ['-'], ['di_h', 'Répartir horizontalement'], ['di_v', 'Répartir verticalement'], ['-'], ['al_art', 'Centrer sur le plan de travail']])}
                     ${menu('Pathfinder', [['pf_union', '⬤ Réunir'], ['pf_subtract', '◐ Soustraire (le dessous moins le reste)'], ['pf_intersect', '◑ Intersection'], ['pf_exclude', '◎ Exclure (là où ils se croisent)']])}
                     ${menu('Blason', [['blason', '🛡️ Créer un blason…'], ['charge', '⚜️ Ajouter un meuble (fleur de lys, lion, étoile…)…'], ['-'], ['vectorize', '🪄 Vectoriser une image (refaire un blason scanné)…']])}
-                    ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Tout le plan de travail', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['grid', 'Grille et magnétisme…']])}</nav>
+                    ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Tout le plan de travail', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['grid', 'Grille et magnétisme…'], ['smart', 'Repères commentés (aimanter aux objets) : oui / non']])}</nav>
                 <div class="vx-hist"><button type="button" data-vx-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" data-vx-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></div>
                 <span class="vx-spacer"></span><span class="vx-status" data-vx-status></span><button type="button" class="button small" data-vx-cmd="save">💾 Enregistrer</button>${ctx.coat ? '<button type="button" class="button small secondary" data-vx-cmd="tocoat">🛡️ Dans ces armoiries</button>' : ''}${ctx.shape || ctx.onShape ? '<button type="button" class="button small secondary" data-vx-cmd="toshape">🔷 Enregistrer la forme</button>' : ''}<button type="button" class="icon-button" data-vx-close title="Fermer">×</button></header>
             <div class="vx-main"><aside class="vx-tools">${TOOLS.map(([k, ic, l, sc]) => `<button type="button" data-vx-tool="${k}" title="${esc(l)} (${sc})">${ic}</button>`).join('')}
                     <div class="vx-fs" title="Remplissage et contour de la sélection"><span class="vx-fsfill" data-vx-fsfill></span><span class="vx-fsstroke" data-vx-fsstroke></span></div></aside>
-                <div class="vx-stage" data-vx-stage tabindex="-1"><svg class="vx-svg" data-vx-svg xmlns="http://www.w3.org/2000/svg"><defs data-vx-defs></defs><g data-vx-world><rect data-vx-board class="vx-board"/><g data-vx-grid></g><g data-vx-content></g><g data-vx-ui></g></g></svg></div>
-                <aside class="vx-panel"><nav class="segmented vx-tabs"><button type="button" data-vx-tab="props" class="is-active">Propriétés</button><button type="button" data-vx-tab="layers">Calques</button><button type="button" data-vx-tab="blason">Blason</button><button type="button" data-vx-tab="doc">Document</button></nav><div class="vx-pane" data-vx-pane></div></aside></div>
+                <div class="vx-stage" data-vx-stage tabindex="-1"><div class="vx-crumbs" data-vx-crumbs hidden></div><svg class="vx-svg" data-vx-svg xmlns="http://www.w3.org/2000/svg"><defs data-vx-defs></defs><g data-vx-world><rect data-vx-board class="vx-board"/><g data-vx-grid></g><g data-vx-content></g><g data-vx-ui></g></g></svg></div>
+                <aside class="vx-panel"><div class="vx-psize" data-vx-psize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille d’origine)"></div><nav class="segmented vx-tabs"><button type="button" data-vx-tab="props" class="is-active">Propriétés</button><button type="button" data-vx-tab="layers">Calques</button><button type="button" data-vx-tab="blason">Blason</button><button type="button" data-vx-tab="doc">Document</button></nav><div class="vx-pane" data-vx-pane></div></aside></div>
             <footer class="vx-foot"><span data-vx-zoom></span><span data-vx-pos></span><span class="vx-hint" data-vx-hint></span></footer>
             <input type="file" data-vx-file hidden accept="image/*,.svg,image/svg+xml,.bmp,.tif,.tiff,.ico,.avif">
         </div>`;
@@ -435,7 +435,39 @@
         let tab = 'props';
         const status = t => { $('[data-vx-status]').textContent = t || ''; };
         const hint = t => { $('[data-vx-hint]').textContent = t || ''; };
-        const byId = id => doc.objs.find(o => o.id === id);
+        /* calques et groupes : on travaille « dans » un calque ou un groupe (mode isolé, comme Illustrator) ;
+           scope = le chemin des groupes ouverts ; les nouveaux dessins, la sélection, l'ordre se font dans ce conteneur */
+        let scope = [];
+        const isLayerGroup = o => o?.type === 'group';
+        function cur() {
+            let a = doc.objs;
+            for (let k = 0; k < scope.length; k++) { const g = a.find(o => o.id === scope[k] && isLayerGroup(o)); if (!g) { scope = scope.slice(0, k); break; } if (!Array.isArray(g.children)) g.children = []; a = g.children; }
+            return a;
+        }
+        const scopeGroup = () => { let a = doc.objs, g = null; for (const gid of scope) { g = a.find(o => o.id === gid); if (!g) return null; a = g.children || []; } return g; };
+        const setCur = arr => { const g = scope.length ? scopeGroup() : null; if (g) g.children = arr; else doc.objs = arr; };
+        /** un objet n'importe où dans l'arbre : {o, arr (son conteneur), path (les groupes au-dessus)} */
+        const findAny = (id, arr = doc.objs, path = []) => { for (const o of arr) { if (o.id === id) return {o, arr, path}; if (isLayerGroup(o)) { const r = findAny(id, o.children || [], [...path, o.id]); if (r) return r; } } return null; };
+        const pathName = path => { let a = doc.objs; return path.map(gid => { const g = a.find(o => o.id === gid); a = g?.children || []; return g?.name || 'Groupe'; }); };
+        /** entrer dans un groupe : refusé s'il est tourné (les points ne tomberaient plus sous la souris) */
+        function enterScope(path) {
+            let a = doc.objs; for (const gid of path) { const g = a.find(o => o.id === gid); if (!g) return false; if (num(g.rot)) { toast(`« ${g.name || 'Ce groupe'} » est tourné : remets sa rotation à 0, ou dissocie-le, pour travailler dedans.`, 'error'); return false; } a = g.children || []; }
+            if (penPath) finishPen(); scope = path.slice(); sel = []; nodeSel = null; return true;
+        }
+        /** le dessin : ce qui est hors du calque où l'on travaille est pâli et ne se clique pas */
+        function treeSvg(defs) {
+            const walk = (arr, depth) => arr.map(o => {
+                if (depth < scope.length && o.id === scope[depth] && isLayerGroup(o)) {
+                    if (o.hidden) return '';
+                    let clip = ''; if (o.clip) { const cid = `ec${String(o.id).replace(/\W/g, '')}`; defs.push(`<clipPath id="${cid}"><path d="${esc(shapeD(o.clip))}"${rotAttr(o.clip)}/></clipPath>`); clip = ` clip-path="url(#${cid})"`; }
+                    return `<g${num(o.op, 1) < 1 ? ` opacity="${n2(num(o.op, 1))}"` : ''}><g${clip}>${walk(o.children || [], depth + 1)}</g></g>`;
+                }
+                const live = depth === scope.length, svg = objSvg(o, defs, 'e', live);
+                return live ? svg : `<g class="vx-dim">${svg}</g>`;
+            }).join('');
+            return walk(doc.objs, 0);
+        }
+        const byId = id => cur().find(o => o.id === id);
         const selObjs = () => sel.map(byId).filter(Boolean);
         const editable = o => o && !o.locked && !o.hidden;
         /* historique */
@@ -460,10 +492,26 @@
         function render() {
             const b = $('[data-vx-board]'); b.setAttribute('width', doc.w); b.setAttribute('height', doc.h); b.setAttribute('fill', doc.bg === 'transparent' ? 'url(#vxchk)' : col(doc.bg, '#fff'));
             const defs = ['<pattern id="vxchk" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fff"/><rect width="8" height="8" fill="#e8e8e8"/><rect x="8" y="8" width="8" height="8" fill="#e8e8e8"/></pattern>'];
-            content.innerHTML = doc.objs.map(o => objSvg(o, defs, 'e', true)).join('') + (penPath ? `<path d="${ptsD(penPath.pts, false)}" fill="none" stroke="#1473e6" stroke-width="${n2(1.5 / zoom)}"/>` : '');
+            content.innerHTML = treeSvg(defs) + (penPath ? `<path d="${ptsD(penPath.pts, false)}" fill="none" stroke="#1473e6" stroke-width="${n2(1.5 / zoom)}"/>` : '');
             defsEl.innerHTML = defs.join('');
-            drawUi(); drawGrid(); paintPanel(); paintFs();
+            drawUi(); drawGrid(); paintPanel(); paintFs(); paintCrumbs();
             $('[data-vx-tool="' + tool + '"]')?.classList.add('is-active');
+        }
+        function paintCrumbs() {
+            const c = $('[data-vx-crumbs]'); if (!c) return; c.hidden = !scope.length; if (!scope.length) { c.innerHTML = ''; return; }
+            const names = pathName(scope); c.innerHTML = `<button type="button" data-vx-crumb="${scope.length - 1}" title="Sortir d’un niveau (Échap)">⤴</button><button type="button" data-vx-crumb="0">Dessin</button>${names.map((n, i) => `<span>›</span><button type="button" data-vx-crumb="${i + 1}" class="${i === names.length - 1 ? 'is-on' : ''}">${esc(n)}</button>`).join('')}`;
+        }
+        /* repères commentés : en déplaçant, les bords et centres s'aimantent à ceux des autres objets et du plan de travail (⌘ : sans) */
+        const SMART_KEY = 'lcnda-vx-smart'; let smart = (() => { try { return localStorage.getItem(SMART_KEY) !== '0'; } catch (_) { return true; } })();
+        function smartSnap(b, dx, dy, ids) {
+            if (!b) return {dx, dy, g: null}; const th = 6 / zoom, others = cur().filter(o => !ids.includes(o.id) && !o.hidden).map(rbox).filter(r => r.w || r.h).concat([{x: 0, y: 0, w: doc.w, h: doc.h}]);
+            const best = (mine, targets) => { let d = null, v = null; mine.forEach(m => targets.forEach(t => { const dd = t - m; if (Math.abs(dd) < th && (d === null || Math.abs(dd) < Math.abs(d))) { d = dd; v = t; } })); return [d, v]; };
+            const [ddx, vx] = best([b.x + dx, b.x + dx + b.w / 2, b.x + dx + b.w], others.flatMap(r => [r.x, r.x + r.w / 2, r.x + r.w]));
+            const [ddy, vy] = best([b.y + dy, b.y + dy + b.h / 2, b.y + dy + b.h], others.flatMap(r => [r.y, r.y + r.h / 2, r.y + r.h]));
+            const g = []; const nx = dx + (ddx || 0), ny = dy + (ddy || 0);
+            if (vx !== null) { const ys = others.filter(r => [r.x, r.x + r.w / 2, r.x + r.w].some(t => Math.abs(t - vx) < .01)).flatMap(r => [r.y, r.y + r.h]); g.push(['x', vx, Math.min(b.y + ny, ...ys), Math.max(b.y + ny + b.h, ...ys)]); }
+            if (vy !== null) { const xs = others.filter(r => [r.y, r.y + r.h / 2, r.y + r.h].some(t => Math.abs(t - vy) < .01)).flatMap(r => [r.x, r.x + r.w]); g.push(['y', vy, Math.min(b.x + nx, ...xs), Math.max(b.x + nx + b.w, ...xs)]); }
+            return {dx: nx, dy: ny, g: g.length ? g : null};
         }
         const H = () => 9 / zoom;
         function drawUi() {
@@ -488,8 +536,15 @@
                 }
                 h += '</g>';
             }
+            if (drag?.guides) drag.guides.forEach(([k, v, a, b2]) => { h += k === 'x' ? `<line x1="${n2(v)}" y1="${n2(a)}" x2="${n2(v)}" y2="${n2(b2)}" class="vx-guide" stroke-width="${n2(1 / zoom)}"/>` : `<line x1="${n2(a)}" y1="${n2(v)}" x2="${n2(b2)}" y2="${n2(v)}" class="vx-guide" stroke-width="${n2(1 / zoom)}"/>`; });
             if (drag?.marquee) { const m = drag.marquee; h += `<rect x="${n2(Math.min(m[0], m[2]))}" y="${n2(Math.min(m[1], m[3]))}" width="${n2(Math.abs(m[2] - m[0]))}" height="${n2(Math.abs(m[3] - m[1]))}" class="vx-marquee" stroke-width="${n2(1 / zoom)}"/>`; }
-            if (penPath?.pts.length) { const p0 = penPath.pts[0]; h += `<circle cx="${n2(p0.x)}" cy="${n2(p0.y)}" r="${n2(H() / 1.4)}" class="vx-penstart"/>`; }
+            if (penPath?.pts.length) { const p0 = penPath.pts[0], last = penPath.pts.at(-1);
+                if (penHover && tool === 'pen') { let [hx, hy, sh] = penHover; if (sh) { const a = Math.round(Math.atan2(hy - last.y, hx - last.x) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(hx - last.x, hy - last.y); hx = last.x + Math.cos(a) * L; hy = last.y + Math.sin(a) * L; }
+                    const near = penPath.pts.length > 2 && Math.hypot(p0.x - hx, p0.y - hy) < 10 / zoom; if (near) { hx = p0.x; hy = p0.y; }
+                    h += `<path d="M${n2(last.x)} ${n2(last.y)}${last.o ? `C${n2(last.o[0])} ${n2(last.o[1])} ${n2(hx)} ${n2(hy)} ${n2(hx)} ${n2(hy)}` : `L${n2(hx)} ${n2(hy)}`}" class="vx-penprev" stroke-width="${n2(1 / zoom)}"/>`;
+                    if (near) h += `<circle cx="${n2(p0.x)}" cy="${n2(p0.y)}" r="${n2(H())}" class="vx-penclose"/>`; }
+                penPath.pts.forEach((q, i) => { if (q.o && i === penPath.pts.length - 1) h += `<line x1="${n2(q.x)}" y1="${n2(q.y)}" x2="${n2(q.o[0])}" y2="${n2(q.o[1])}" class="vx-hline" stroke-width="${n2(1 / zoom)}"/><circle cx="${n2(q.o[0])}" cy="${n2(q.o[1])}" r="${n2(H() / 2.4)}" class="vx-hand"/>`; h += `<rect x="${n2(q.x - H() / 2.6)}" y="${n2(q.y - H() / 2.6)}" width="${n2(H() / 1.3)}" height="${n2(H() / 1.3)}" class="vx-node"/>`; });
+                h += `<circle cx="${n2(p0.x)}" cy="${n2(p0.y)}" r="${n2(H() / 1.4)}" class="vx-penstart"/>`; }
             ui.innerHTML = h;
         }
         function paintFs() {
@@ -500,16 +555,17 @@
         const styleNew = () => ({fill: defaults.fill, stroke: defaults.stroke, sw: defaults.sw});
         /* outils */
         function setTool(t) { if (penPath && t !== 'pen') finishPen(); tool = t; dlg.querySelectorAll('[data-vx-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.vxTool === t)); stage.dataset.tool = t;
-            hint({select: 'Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir, ⇧ garde les proportions · rond du haut : tourner (⇧ : par 15°)', direct: 'Glisse les points et leurs poignées · ⌥ clic sur un point : angle ↔ courbe · ⌫ : supprimer le point · double-clic sur un tracé : ajouter un point', pen: 'Clic : un point · glisser : une courbe · clic sur le premier point : fermer · Entrée ou Échap : terminer', pencil: 'Dessine à main levée : le trait est lissé', text: 'Clic : nouveau texte (écris-le dans « Propriétés »)', eyedrop: 'Clic sur un objet : sa couleur et son trait vont à la sélection', hand: 'Glisser : déplacer la vue (ou barre d’espace, ou la molette)', zoom: 'Clic : zoomer · ⌥ clic : dézoomer · ⌘ molette partout'}[t] || 'Glisse pour dessiner la forme · ⇧ : carré, cercle, angle droit');
+            hint({select: 'Clic : choisir (⇧ : en plus) · glisser : déplacer · poignées : agrandir, ⇧ garde les proportions · rond du haut : tourner (⇧ : par 15°)', direct: 'Glisse les points et leurs poignées · ⌥ clic sur un point : angle ↔ courbe · ⌫ : supprimer le point · double-clic sur un tracé : ajouter un point', pen: 'Clic : un point · glisser : une courbe (⌥ : casser la poignée) · ⇧ : angles de 45° · clic sur le 1er point : fermer · ⌫ : retirer le dernier point · Entrée, Échap ou double-clic : terminer · clic sur le bout d’un tracé ouvert choisi : le reprendre', pencil: 'Dessine à main levée : le trait est lissé', text: 'Clic : nouveau texte (écris-le dans « Propriétés »)', eyedrop: 'Clic sur un objet : sa couleur et son trait vont à la sélection', hand: 'Glisser : déplacer la vue (ou barre d’espace, ou la molette)', zoom: 'Clic : zoomer · ⌥ clic : dézoomer · ⌘ molette partout', spiral: 'Glisse depuis le centre : la taille et le départ de la spirale'}[t] || 'Glisse pour dessiner la forme · ⇧ : carré, cercle, angle droit');
             drawUi(); }
-        function finishPen() { if (penPath && penPath.pts.length > 1) { doc.objs.push(penPath); sel = [penPath.id]; penPath = null; commit('Tracé à la plume'); } else { penPath = null; render(); } }
+        function finishPen() { penHover = null; if (penPath && penPath.pts.length > 1) { cur().push(penPath); sel = [penPath.id]; penPath = null; commit('Tracé à la plume'); } else { penPath = null; render(); } }
         /* glisser */
-        let drag = null, space = false;
+        let drag = null, space = false, penHover = null;
         const hitId = e => e.target.closest?.('[data-vx]')?.dataset.vx;
         svgEl.addEventListener('pointerdown', e => {
             if (document.activeElement?.matches?.('input, textarea, select')) document.activeElement.blur(); stage.focus({preventScroll: true});
             if (e.button === 1 || space || tool === 'hand') { drag = {pan: true, sx: e.clientX, sy: e.clientY, px: panX, py: panY}; svgEl.setPointerCapture(e.pointerId); return; }
             if (e.button !== 0) return;
+            { const now = Date.now(), dbl = lastDown && now - lastDown.t < 400 && Math.hypot(e.clientX - lastDown.x, e.clientY - lastDown.y) < 6; lastDown = dbl ? null : {t: now, x: e.clientX, y: e.clientY}; if (dbl) { lastDblAt = now; handleDouble(e); return; } }
             const [x, y] = toDoc(e); svgEl.setPointerCapture(e.pointerId);
             const h = e.target.closest('[data-vx-h]')?.dataset.vxH;
             if (tool === 'zoom') { const r = svgEl.getBoundingClientRect(); zoomAt(e.altKey ? 1 / 1.5 : 1.5, e.clientX - r.left, e.clientY - r.top); return; }
@@ -517,7 +573,7 @@
                 if (h) { const list = selObjs(); const one = list.length === 1 ? list[0] : null; drag = {h, x, y, orig: list.map(o => clone(o)), ids: list.map(o => o.id), b: one ? box(one) : unionBox(list), one}; return; }
                 const id = hitId(e), o = id && byId(id);
                 if (o && !o.locked) { if (e.shiftKey) sel = sel.includes(id) ? sel.filter(s => s !== id) : [...sel, id]; else if (!sel.includes(id)) sel = [id];
-                    let dup = false; if (e.altKey) { const copies = selObjs().map(q => { const c = clone(q); reId(c); return c; }); doc.objs.push(...copies); sel = copies.map(q => q.id); dup = true; }
+                    let dup = false; if (e.altKey) { const copies = selObjs().map(q => { const c = clone(q); reId(c); return c; }); cur().push(...copies); sel = copies.map(q => q.id); dup = true; }
                     drag = {move: true, dup, x, y, orig: selObjs().map(q => clone(q))}; render(); return; }
                 if (!e.shiftKey) sel = []; drag = {marquee: [x, y, x, y], add: e.shiftKey ? sel.slice() : []}; render(); return;
             }
@@ -527,34 +583,45 @@
                     drag = {node: true, id, i: Number(i), x, y, orig: clone(o)}; drawUi(); return; }
                 if (hd) { const [id, i, w] = hd.split(':'); drag = {hand: true, id, i: Number(i), w, orig: clone(byId(id))}; return; }
                 const id = hitId(e), o = id && byId(id);
-                if (o && !o.locked) { if (o.type !== 'path') { const conv = o.type === 'svgpath' ? dToPts(o.d) : null; const n = o.type === 'svgpath' ? (conv ? {...o, type: 'path', pts: conv.pts, closed: conv.closed} : null) : toPath(o); if (n && n.type === 'path') { if (n.d) delete n.d; doc.objs[doc.objs.indexOf(o)] = n; commit('Converti en tracé'); } else if (o.type === 'svgpath') hint('Ce tracé a plusieurs morceaux : Objet → Dissocier n’y peut rien ; utilise la Sélection pour le transformer.'); }
+                if (o && !o.locked) { if (o.type !== 'path') { const conv = o.type === 'svgpath' ? dToPts(o.d) : null; const n = o.type === 'svgpath' ? (conv ? {...o, type: 'path', pts: conv.pts, closed: conv.closed} : null) : toPath(o); if (n && n.type === 'path') { if (n.d) delete n.d; cur()[cur().indexOf(o)] = n; commit('Converti en tracé'); } else if (o.type === 'svgpath') hint('Ce tracé a plusieurs morceaux : Objet → Dissocier n’y peut rien ; utilise la Sélection pour le transformer.'); }
                     sel = [id]; nodeSel = null; render(); return; }
                 sel = []; nodeSel = null; render(); return;
             }
             if (tool === 'pen') {
                 if (penPath && penPath.pts.length > 2) { const p0 = penPath.pts[0]; if (Math.hypot(p0.x - x, p0.y - y) < 10 / zoom) { penPath.closed = true; finishPen(); return; } }
-                if (!penPath) penPath = {id: uid(), type: 'path', name: 'Tracé', pts: [], closed: false, ...styleNew(), fill: 'none'};
-                penPath.pts.push(P(snap(x), snap(y))); drag = {pen: true}; render(); return;
+                if (!penPath) {
+                    // reprendre un tracé ouvert déjà choisi, en cliquant sur l'un de ses bouts
+                    const o = selObjs()[0], tol = 10 / zoom;
+                    if (o && o.type === 'path' && !o.closed && !o.locked && (o.pts || []).length > 1 && !num(o.rot)) { const a = o.pts[0], z = o.pts.at(-1), nearA = Math.hypot(a.x - x, a.y - y) < tol, nearZ = Math.hypot(z.x - x, z.y - y) < tol;
+                        if (nearA || nearZ) { if (nearA && !nearZ) o.pts.reverse().forEach(q => { const t = q.i; q.i = q.o; q.o = t; }); penPath = o; setCur(cur().filter(q => q !== o)); sel = []; hint('Tracé repris : continue à cliquer · Entrée ou double-clic : terminer'); render(); return; } }
+                    penPath = {id: uid(), type: 'path', name: 'Tracé', pts: [], closed: false, ...styleNew(), fill: 'none'};
+                }
+                let px = snap(x), py = snap(y); const last = penPath.pts.at(-1);
+                if (e.shiftKey && last) { const a = Math.round(Math.atan2(py - last.y, px - last.x) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(px - last.x, py - last.y); px = last.x + Math.cos(a) * L; py = last.y + Math.sin(a) * L; }
+                if (last && Math.hypot(px - last.x, py - last.y) < 1.5 / zoom) { drag = {pen: true}; return; } // le 2e clic d'un double-clic n'ajoute pas de point
+                penPath.pts.push(P(px, py)); drag = {pen: true}; render(); return;
             }
             if (tool === 'eyedrop') { const o = byId(hitId(e) || ''); if (!o) return; selObjs().forEach(q => { if (q === o) return; ['fill', 'stroke', 'sw', 'dash', 'grad', 'op'].forEach(k => { if (o[k] !== undefined) q[k] = clone(o[k]); else delete q[k]; }); }); defaults.fill = o.fill ?? defaults.fill; defaults.stroke = o.stroke ?? defaults.stroke; commit('Couleur prise'); return; }
-            if (tool === 'text') { const o = {id: uid(), type: 'text', name: 'Texte', text: 'Texte', x: snap(x), y: snap(y), size: 36, font: 'Georgia', fill: defaults.fill === 'none' ? '#000000' : defaults.fill, sw: 0}; doc.objs.push(o); sel = [o.id]; setTool('select'); tab = 'props'; commit('Texte'); setTimeout(() => { const t = pane.querySelector('[data-vx-p="text"]'); t?.focus(); t?.select(); }, 30); return; }
+            if (tool === 'text') { const o = {id: uid(), type: 'text', name: 'Texte', text: 'Texte', x: snap(x), y: snap(y), size: 36, font: 'Georgia', fill: defaults.fill === 'none' ? '#000000' : defaults.fill, sw: 0}; cur().push(o); sel = [o.id]; setTool('select'); tab = 'props'; commit('Texte'); setTimeout(() => { const t = pane.querySelector('[data-vx-p="text"]'); t?.focus(); t?.select(); }, 30); return; }
             if (tool === 'pencil') { drag = {pencil: [[x, y]]}; return; }
             drag = {create: tool, x0: snap(x), y0: snap(y), x, y};
         });
         svgEl.addEventListener('pointermove', e => {
             const [x, y] = toDoc(e); $('[data-vx-pos]').textContent = `x ${Math.round(x)} · y ${Math.round(y)}`;
+            if (!drag && tool === 'pen' && penPath) { penHover = [x, y, e.shiftKey]; drawUi(); return; }
             if (!drag) return;
             if (drag.pan) { panX = drag.px + e.clientX - drag.sx; panY = drag.py + e.clientY - drag.sy; applyView(); return; }
             if (drag.move) { let dx = x - drag.x, dy = y - drag.y; if (e.shiftKey) { if (Math.abs(dx) > Math.abs(dy)) dy = 0; else dx = 0; } if (doc.snap && doc.grid) { const b = unionBox(drag.orig); dx = snap(b.x + dx) - b.x; dy = snap(b.y + dy) - b.y; }
-                drag.orig.forEach(o0 => { const i = doc.objs.findIndex(o => o.id === o0.id); if (i >= 0) doc.objs[i] = moveObj(clone(o0), dx, dy); }); drag.moved = true; render(); return; }
+                drag.guides = null; if (smart && !(e.metaKey || e.ctrlKey) && !(doc.snap && doc.grid)) { const r = smartSnap(unionBox(drag.orig), dx, dy, drag.orig.map(o => o.id)); dx = r.dx; dy = r.dy; drag.guides = r.g; }
+                drag.orig.forEach(o0 => { const i = cur().findIndex(o => o.id === o0.id); if (i >= 0) cur()[i] = moveObj(clone(o0), dx, dy); }); drag.moved = true; render(); return; }
             if (drag.marquee) { drag.marquee[2] = x; drag.marquee[3] = y; const m = drag.marquee, x0 = Math.min(m[0], m[2]), x1 = Math.max(m[0], m[2]), y0 = Math.min(m[1], m[3]), y1 = Math.max(m[1], m[3]);
-                sel = [...new Set([...drag.add, ...doc.objs.filter(o => !o.locked && !o.hidden).filter(o => { const b = rbox(o); return b.x < x1 && b.x + b.w > x0 && b.y < y1 && b.y + b.h > y0; }).map(o => o.id)])]; drawUi(); return; }
+                sel = [...new Set([...drag.add, ...cur().filter(o => !o.locked && !o.hidden).filter(o => { const b = rbox(o); return b.x < x1 && b.x + b.w > x0 && b.y < y1 && b.y + b.h > y0; }).map(o => o.id)])]; drawUi(); return; }
             if (drag.h) { resizeOrRotate(x, y, e); return; }
             if (drag.node || drag.hand) { const o = byId(drag.id); if (!o) return; const [lx, ly] = unrot(o, x, y);
                 if (drag.node) { const p = o.pts[drag.i], q = drag.orig.pts[drag.i], dx = snap(lx) - q.x, dy = snap(ly) - q.y; p.x = q.x + dx; p.y = q.y + dy; if (q.i) p.i = [q.i[0] + dx, q.i[1] + dy]; if (q.o) p.o = [q.o[0] + dx, q.o[1] + dy]; }
                 else { const p = o.pts[drag.i]; p[drag.w] = [lx, ly]; if (!e.altKey) { const other = drag.w === 'i' ? 'o' : 'i'; if (p[other]) { const len = Math.hypot(p[other][0] - p.x, p[other][1] - p.y), a = Math.atan2(ly - p.y, lx - p.x) + Math.PI; p[other] = [p.x + Math.cos(a) * len, p.y + Math.sin(a) * len]; } } }
                 drag.moved = true; render(); return; }
-            if (drag.pen) { const p = penPath?.pts.at(-1); if (!p) return; if (Math.hypot(x - p.x, y - p.y) > 2 / zoom) { p.o = [x, y]; p.i = [2 * p.x - x, 2 * p.y - y]; render(); } return; }
+            if (drag.pen) { const p = penPath?.pts.at(-1); if (!p) return; if (Math.hypot(x - p.x, y - p.y) > 2 / zoom) { p.o = [x, y]; if (!e.altKey) p.i = [2 * p.x - x, 2 * p.y - y]; render(); } return; }
             if (drag.pencil) { drag.pencil.push([x, y]); const d = 'M' + drag.pencil.map(p => n2(p[0]) + ' ' + n2(p[1])).join('L'); ui.innerHTML = `<path d="${d}" fill="none" stroke="${col(defaults.stroke, '#222')}" stroke-width="${n2(defaults.sw || 2)}"/>`; return; }
             if (drag.create) { let x1 = snap(x), y1 = snap(y); const t = drag.create;
                 if (e.shiftKey) { if (t === 'line') { const a = Math.round(Math.atan2(y1 - drag.y0, x1 - drag.x0) / (Math.PI / 4)) * Math.PI / 4, L = Math.hypot(x1 - drag.x0, y1 - drag.y0); x1 = drag.x0 + Math.cos(a) * L; y1 = drag.y0 + Math.sin(a) * L; } else { const s = Math.max(Math.abs(x1 - drag.x0), Math.abs(y1 - drag.y0)); x1 = drag.x0 + Math.sign(x1 - drag.x0 || 1) * s; y1 = drag.y0 + Math.sign(y1 - drag.y0 || 1) * s; } }
@@ -565,6 +632,10 @@
         const unrot = (o, x, y) => { const r = -num(o.rot) * Math.PI / 180; if (!r) return [x, y]; const b = box(o), cx = b.x + b.w / 2, cy = b.y + b.h / 2; return [cx + (x - cx) * Math.cos(r) - (y - cy) * Math.sin(r), cy + (x - cx) * Math.sin(r) + (y - cy) * Math.cos(r)]; };
         function makeShape(t, x0, y0, x1, y1) {
             const x = Math.min(x0, x1), y = Math.min(y0, y1), w = Math.abs(x1 - x0), h = Math.abs(y1 - y0);
+            if (t === 'spiral') { const R = Math.hypot(x1 - x0, y1 - y0); if (R < 3) return null; const turns = 3, steps = turns * 8, a0 = Math.atan2(y1 - y0, x1 - x0), dt = (turns * 2 * Math.PI) / steps;
+                const pt = k => { const t = k * dt, r = R * k / steps, a = a0 - turns * 2 * Math.PI + t; return [x0 + r * Math.cos(a), y0 + r * Math.sin(a)]; };
+                const pts = []; for (let k = 1; k <= steps; k++) { const [px, py] = pt(k), [ax, ay] = pt(k - .01), [bx, by] = pt(Math.min(steps, k + .01)), len = Math.hypot(bx - ax, by - ay) || 1, tl = (R * k / steps) * dt / 3 * Math.max(1, steps / k / 4), tx = (bx - ax) / len * tl, ty = (by - ay) / len * tl; pts.push(P(px, py, [px - tx, py - ty], [px + tx, py + ty])); }
+                return {id: uid(), type: 'path', name: 'Spirale', pts, closed: false, fill: 'none', stroke: defaults.stroke === 'none' ? '#222222' : defaults.stroke, sw: defaults.sw || 2}; }
             if (t === 'line') return {id: uid(), type: 'path', name: 'Ligne', pts: [P(x0, y0), P(x1, y1)], closed: false, fill: 'none', stroke: defaults.stroke === 'none' ? '#222222' : defaults.stroke, sw: defaults.sw || 2};
             if (w < 1 || h < 1) return null;
             return {id: uid(), type: t, name: {rect: 'Rectangle', ellipse: 'Ellipse', polygon: 'Polygone', star: 'Étoile'}[t], x, y, w, h, ...styleNew(), ...(t === 'polygon' ? {n: 6} : t === 'star' ? {n: 5, inner: 45} : t === 'rect' ? {r: 0} : {})};
@@ -576,7 +647,7 @@
                 const r = a * Math.PI / 180;
                 orig.forEach((o0, k) => { const o = clone(o0), ob = box(o0), ocx = ob.x + ob.w / 2, ocy = ob.y + ob.h / 2;
                     if (!one) { const nx = cx + (ocx - cx) * Math.cos(r) - (ocy - cy) * Math.sin(r), ny = cy + (ocx - cx) * Math.sin(r) + (ocy - cy) * Math.cos(r); moveObj(o, nx - ocx, ny - ocy); }
-                    o.rot = ((num(o0.rot) + a) % 360 + 360) % 360; const i = doc.objs.findIndex(q => q.id === ids[k]); if (i >= 0) doc.objs[i] = o; });
+                    o.rot = ((num(o0.rot) + a) % 360 + 360) % 360; const i = cur().findIndex(q => q.id === ids[k]); if (i >= 0) cur()[i] = o; });
                 drag.moved = true; render(); return;
             }
             const [lx, ly] = one ? unrot(one, x, y) : [x, y];
@@ -588,7 +659,7 @@
             if (!h.includes('w') && !h.includes('e')) fx = 1; if (!h.includes('n') && !h.includes('s')) fy = 1;
             if (Math.abs(fx) < 0.001 || Math.abs(fy) < 0.001) return;
             const fs = Math.sqrt(Math.abs(fx * fy));
-            orig.forEach((o0, k) => { const o = mapObj(clone(o0), (px, py) => [ax + (px - ax) * fx, ay + (py - ay) * fy], fs); if (one) keepAnchor(o0, o, ax, ay); const i = doc.objs.findIndex(q => q.id === ids[k]); if (i >= 0) doc.objs[i] = o; });
+            orig.forEach((o0, k) => { const o = mapObj(clone(o0), (px, py) => [ax + (px - ax) * fx, ay + (py - ay) * fy], fs); if (one) keepAnchor(o0, o, ax, ay); const i = cur().findIndex(q => q.id === ids[k]); if (i >= 0) cur()[i] = o; });
             drag.moved = true; render();
         }
         svgEl.addEventListener('pointerup', e => {
@@ -603,25 +674,78 @@
                 const simp = (() => { const rdp = (p, eps) => { if (p.length < 3) return p; let dm = 0, ix = 0; const [ax, ay] = p[0], [bx, by] = p[p.length - 1], L = Math.hypot(bx - ax, by - ay) || 1; for (let i = 1; i < p.length - 1; i++) { const dd = Math.abs((by - ay) * p[i][0] - (bx - ax) * p[i][1] + bx * ay - by * ax) / L; if (dd > dm) { dm = dd; ix = i; } } return dm > eps ? [...rdp(p.slice(0, ix + 1), eps).slice(0, -1), ...rdp(p.slice(ix), eps)] : [p[0], p[p.length - 1]]; }; return rdp(pts, 1.5 / zoom); })();
                 const closed = Math.hypot(simp[0][0] - simp.at(-1)[0], simp[0][1] - simp.at(-1)[1]) < 12 / zoom && simp.length > 3; if (closed) simp.pop();
                 const n = simp.length, pp = simp.map((p, i) => { const a = simp[closed ? (i - 1 + n) % n : Math.max(0, i - 1)], b2 = simp[closed ? (i + 1) % n : Math.min(n - 1, i + 1)], t = [(b2[0] - a[0]) / 6, (b2[1] - a[1]) / 6]; return P(p[0], p[1], [p[0] - t[0], p[1] - t[1]], [p[0] + t[0], p[1] + t[1]]); });
-                const o = {id: uid(), type: 'path', name: 'Crayon', pts: pp, closed, fill: closed ? defaults.fill : 'none', stroke: defaults.stroke === 'none' ? '#222222' : defaults.stroke, sw: defaults.sw || 2}; doc.objs.push(o); sel = [o.id]; commit('Trait au crayon'); return; }
-            if (d.create) { const o = d.x1 !== undefined ? makeShape(d.create, d.x0, d.y0, d.x1, d.y1) : null; if (!o) { drawUi(); return; } doc.objs.push(o); sel = [o.id]; commit(o.name); }
+                const o = {id: uid(), type: 'path', name: 'Crayon', pts: pp, closed, fill: closed ? defaults.fill : 'none', stroke: defaults.stroke === 'none' ? '#222222' : defaults.stroke, sw: defaults.sw || 2}; cur().push(o); sel = [o.id]; commit('Trait au crayon'); return; }
+            if (d.create) { const o = d.x1 !== undefined ? makeShape(d.create, d.x0, d.y0, d.x1, d.y1) : null; if (!o) { drawUi(); return; } cur().push(o); sel = [o.id]; commit(o.name); }
         });
-        svgEl.addEventListener('dblclick', e => {
-            const id = hitId(e), o = id && byId(id); if (!o) return;
+        let lastDown = null, lastDblAt = 0;
+        svgEl.addEventListener('dblclick', e => { if (Date.now() - lastDblAt < 600) return; handleDouble(e); });
+        /** double-clic (détecté à la main : le dessin est refait entre les deux clics, le navigateur n'envoie alors pas « dblclick ») */
+        function handleDouble(e) {
+            if (tool === 'pen') { if (penPath) finishPen(); return; }
+            let id = hitId(e), o = id && byId(id);
+            if (!o && tool === 'select') { const [x, y] = toDoc(e); o = selObjs().find(g => (() => { const r = rbox(g); return x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h; })()); id = o?.id; } // le cadre de sélection est par-dessus
+            if (!o) { if (scope.length && tool === 'select') { scope = scope.slice(0, -1); sel = []; render(); } return; }
             if (o.type === 'text') { sel = [id]; tab = 'props'; render(); pane.querySelector('[data-vx-p="text"]')?.focus(); return; }
             if (tool === 'direct' && o.type === 'path') { // ajouter un point au plus près
                 const [x, y] = unrot(o, ...toDoc(e)); let best = 0, bd = Infinity; o.pts.forEach((p, i) => { const q = o.pts[(i + 1) % o.pts.length]; if (!o.closed && i === o.pts.length - 1) return; const mx = (p.x + q.x) / 2, my = (p.y + q.y) / 2, dd = Math.hypot(mx - x, my - y); if (dd < bd) { bd = dd; best = i; } });
                 o.pts.splice(best + 1, 0, P(x, y)); nodeSel = {id, i: best + 1}; commit('Point ajouté'); return; }
-            if (o.type === 'group') { sel = (o.children || []).length ? [id] : sel; hint('Pour modifier l’intérieur d’un groupe : Objet → Dissocier (⇧⌘G).'); }
-        });
+            if (o.type === 'group') { if (enterScope([...scope, o.id])) { openGroups.add(o.id); render(); hint(`Tu es dans « ${o.name || 'le groupe'} » : le reste est pâli. Échap ou ⤴ pour en sortir.`); } }
+        }
         stage.addEventListener('wheel', e => { e.preventDefault(); const r = svgEl.getBoundingClientRect(); if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * 0.0022), e.clientX - r.left, e.clientY - r.top); else { panX -= e.deltaX; panY -= e.deltaY; applyView(); } }, {passive: false});
         /* panneau de droite */
-        const swatchRow = (attr, cur) => `<div class="vx-sw">${[...SWATCHES, ...TINCTURES.map(t => t[2])].filter((c, i, a) => a.indexOf(c) === i).map(c => `<button type="button" ${attr}="${c}" title="${esc(TINCTURES.find(t => t[2] === c)?.[1] || c)}" class="${c === cur ? 'is-on' : ''}" style="${c === 'none' ? 'background:repeating-linear-gradient(45deg,#fff 0 4px,#e33 4px 5px)' : `background:${c}`}"></button>`).join('')}</div>`;
+        /* couleurs : les émaux et nuances de base, les dernières couleurs libres employées, et 🎨 pour n'importe quelle couleur */
+        const RECENT_KEY = 'lcnda-vx-recent-colors';
+        const recentColors = () => { try { const a = JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); return Array.isArray(a) ? a.filter(c => /^#[0-9a-f]{6}$/i.test(c)).slice(0, 10) : []; } catch (_) { return []; } };
+        const rememberColor = c => { if (!/^#[0-9a-f]{6}$/i.test(c || '')) return; try { localStorage.setItem(RECENT_KEY, JSON.stringify([c.toLowerCase(), ...recentColors().filter(x => x !== c.toLowerCase())].slice(0, 10))); } catch (_) {} };
+        const hex6 = (c, d = '#000000') => /^#[0-9a-f]{6}$/i.test(c || '') ? c : d;
+        const freeColor = (attr, cur, title = 'Couleur libre : n’importe quelle couleur') => `<label class="vx-swfree" title="${esc(title)}">🎨<input type="color" data-vx-free="${attr}" value="${esc(hex6(cur))}"></label>`;
+        const swatchRow = (attr, cur) => { const base = [...SWATCHES, ...TINCTURES.map(t => t[2])].filter((c, i, a) => a.indexOf(c) === i), rec = recentColors().filter(c => !base.includes(c));
+            const btn = c => `<button type="button" ${attr}="${c}" title="${esc(TINCTURES.find(t => t[2] === c)?.[1] || c)}" class="${c === cur ? 'is-on' : ''}" style="${c === 'none' ? 'background:repeating-linear-gradient(45deg,#fff 0 4px,#e33 4px 5px)' : `background:${c}`}"></button>`;
+            return `<div class="vx-sw">${base.map(btn).join('')}${freeColor(attr, cur)}</div>${rec.length ? `<div class="vx-sw vx-recent"><small>Récentes</small>${rec.map(btn).join('')}</div>` : ''}`; };
         const fld = (k, label, v, {type = 'number', step = 1, min = '', max = ''} = {}) => `<label>${esc(label)}<input data-vx-p="${k}" type="${type}" step="${step}" ${min !== '' ? `min="${min}"` : ''} ${max !== '' ? `max="${max}"` : ''} value="${esc(v ?? '')}"></label>`;
+        /* ─── panneau Calques : l'arbre des calques et groupes (le haut de la liste = le dessus du dessin) ─── */
+        const openGroups = new Set();
+        const LIC = {group: '🗂', text: 'T', image: '🖼', path: '✒', svgpath: '✒', rect: '▭', ellipse: '◯', polygon: '⬡', star: '☆'};
+        const samePath = (a, b) => a.length === b.length && a.every((x, i) => x === b[i]);
+        function layersPane() {
+            const rows = [];
+            const walk = (arr, path) => [...arr].reverse().forEach(o => {
+                const g = isLayerGroup(o), here = samePath(path, scope), active = g && samePath([...path, o.id], scope), inside = g && scope.length > path.length && scope[path.length] === o.id && samePath(scope.slice(0, path.length), path);
+                const open = g && (openGroups.has(o.id) || inside);
+                rows.push(`<div class="vx-layer${sel.includes(o.id) && here ? ' is-sel' : ''}${active ? ' is-active' : ''}${here ? '' : ' is-out'}${o.layer ? ' is-layer' : ''}" data-vx-layer="${esc(o.id)}" draggable="true" style="--d:${path.length}">`
+                    + (g ? `<button type="button" class="vx-ltw" data-vx-ltoggle title="Déplier / replier">${open ? '▾' : '▸'}</button>` : '<span class="vx-ltw"></span>')
+                    + `<span class="vx-lic">${o.layer ? '📄' : LIC[o.type] || '•'}</span><input data-vx-lname value="${esc(o.name || '')}" placeholder="${esc(o.type)}">`
+                    + (g ? `<button type="button" data-vx-lenter title="${active ? 'Sortir de ce ' + (o.layer ? 'calque' : 'groupe') : 'Travailler dans ce ' + (o.layer ? 'calque' : 'groupe') + ' : les nouveaux dessins y vont'}" class="vx-lenter${active ? ' is-on' : ''}">${active ? '●' : '○'}</button>` : '')
+                    + `<button type="button" data-vx-lvis title="Montrer / cacher">${o.hidden ? '🙈' : '👁'}</button><button type="button" data-vx-llock title="Verrouiller">${o.locked ? '🔒' : '🔓'}</button><button type="button" data-vx-lup title="Vers le haut">↑</button><button type="button" data-vx-ldown title="Vers le bas">↓</button><button type="button" data-vx-ldel title="Supprimer">🗑</button></div>`);
+                if (open) walk(o.children || [], [...path, o.id]);
+            });
+            walk(doc.objs, []);
+            const where = scope.length ? pathName(scope).map(esc).join(' › ') : 'le dessin (hors calque)';
+            return `<div class="vx-ltools"><button type="button" class="button small" data-vx-lnew title="Un calque vide, au-dessus des autres : tu dessines dedans">＋ Calque</button><button type="button" class="button small secondary" data-vx-lgroup title="${sel.length ? 'Range la sélection dans un groupe' : 'Un groupe vide dans le calque actuel'}">🗂 ${sel.length ? 'Grouper la sélection' : 'Groupe'}</button>${scope.length ? '<button type="button" class="button small secondary" data-vx-lexit title="Revenir au niveau du dessus (Échap)">⤴ Sortir</button>' : ''}</div>
+                <p class="vx-lwhere">Tu dessines dans : <strong>${where}</strong></p>
+                <div class="vx-layers" data-vx-ltree>${rows.join('') || '<p class="muted">Rien encore : ＋ Calque pour commencer, ou dessine avec les outils de gauche, ou Fichier → Importer.</p>'}</div>
+                <p class="muted vx-lhelp">Glisse une ligne sur un groupe pour l’y ranger, entre deux lignes pour changer l’ordre. ○ : travailler dans ce calque ou ce groupe. Dans le dessin : double-clic sur un groupe pour y entrer, Échap pour en sortir.</p>`;
+        }
+        /** déplacer un objet (n'importe où) avant / après une ligne, ou dans un groupe */
+        function moveInTree(id, targetId, where) {
+            if (id === targetId) return false;
+            const src = findAny(id), dst = findAny(targetId); if (!src || !dst) return false;
+            if (dst.path.includes(id) || (where === 'into' && targetId === id)) return false; // pas dans lui-même
+            if (where === 'into' && !isLayerGroup(dst.o)) return false;
+            src.arr.splice(src.arr.indexOf(src.o), 1);
+            if (where === 'into') { dst.o.children = dst.o.children || []; dst.o.children.push(src.o); openGroups.add(dst.o.id); }
+            else { const i = dst.arr.indexOf(dst.o); dst.arr.splice(where === 'above' ? i + 1 : i, 0, src.o); } // au-dessus dans la liste = après dans le tableau
+            if (!findAny(id) || !samePath(findAny(id).path, scope)) sel = sel.filter(s => s !== id);
+            return true;
+        }
+        function newLayer() {
+            const n = doc.objs.filter(o => o.layer).length + 1, g = {id: uid(), type: 'group', layer: true, name: `Calque ${n}`, children: []};
+            doc.objs.push(g); enterScope([g.id]); openGroups.add(g.id); return g;
+        }
         function paintPanel() {
             dlg.querySelectorAll('[data-vx-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.vxTab === tab));
             if (document.activeElement && pane.contains(document.activeElement) && document.activeElement.matches('input:not([type=color]):not([type=range]), textarea, select') && tab === 'props') return; // on écrit : ne pas tout redessiner
-            if (tab === 'layers') { pane.innerHTML = `<div class="vx-layers">${[...doc.objs].reverse().map(o => `<div class="vx-layer ${sel.includes(o.id) ? 'is-sel' : ''}" data-vx-layer="${esc(o.id)}"><span class="vx-lic">${{group: '🗂', text: 'T', image: '🖼', path: '✒', svgpath: '✒', rect: '▭', ellipse: '◯', polygon: '⬡', star: '☆'}[o.type] || '•'}</span><input data-vx-lname value="${esc(o.name || '')}" placeholder="${esc(o.type)}"><button type="button" data-vx-lvis title="Montrer / cacher">${o.hidden ? '🙈' : '👁'}</button><button type="button" data-vx-llock title="Verrouiller">${o.locked ? '🔒' : '🔓'}</button><button type="button" data-vx-lup title="Vers le haut">↑</button><button type="button" data-vx-ldown title="Vers le bas">↓</button></div>`).join('') || '<p class="muted">Rien encore : dessine avec les outils de gauche, ou Fichier → Importer.</p>'}</div>`; return; }
+            if (tab === 'layers') { pane.innerHTML = layersPane(); return; }
             if (tab === 'doc') { pane.innerHTML = `<div class="vx-form"><h4>Plan de travail</h4>${fld('dw', 'Largeur (px)', doc.w, {min: 10, max: 20000})}${fld('dh', 'Hauteur (px)', doc.h, {min: 10, max: 20000})}
                 <div class="vx-row">${[['A4 portrait', 794, 1123], ['A4 paysage', 1123, 794], ['Carré', 1000, 1000], ['Écu (5 × 6)', 500, 600], ['16:9', 1280, 720]].map(([l, w, h]) => `<button type="button" class="button small secondary" data-vx-size="${w}x${h}">${l}</button>`).join('')}</div>
                 <label>Fond<select data-vx-p="dbg"><option value="#ffffff" ${doc.bg !== 'transparent' ? 'selected' : ''}>Couleur</option><option value="transparent" ${doc.bg === 'transparent' ? 'selected' : ''}>Transparent</option></select></label>${doc.bg !== 'transparent' ? `<label>Couleur du fond<input type="color" data-vx-p="dbgc" value="${esc(/^#[0-9a-f]{6}$/i.test(doc.bg) ? doc.bg : '#ffffff')}"></label>` : ''}
@@ -638,9 +762,9 @@
                 ${o.type === 'rect' ? fld('r', 'Arrondi des coins', o.r || 0, {min: 0, max: 5000}) : ''}${o.type === 'polygon' || o.type === 'star' ? fld('n', o.type === 'star' ? 'Branches' : 'Côtés', o.n, {min: 3, max: 60}) : ''}${o.type === 'star' ? fld('inner', 'Creux (%)', o.inner, {min: 5, max: 100}) : ''}
                 ${o.type === 'path' ? `<label class="checkbox-line"><input type="checkbox" data-vx-p="closed" ${o.closed ? 'checked' : ''}> Tracé fermé</label>` : ''}${['path', 'svgpath'].includes(o.type) ? `<label class="checkbox-line"><input type="checkbox" data-vx-p="evenodd" ${o.evenodd ? 'checked' : ''}> Trous (pair-impair)</label>` : ''}
                 ${o.type === 'image' ? '<p><button type="button" class="button small" data-vx-cmd="vectorize">🪄 Vectoriser cette image</button></p>' : ''}
-                ${o.type !== 'image' && o.type !== 'group' ? `<h4>Remplissage</h4>${swatchRow('data-vx-fill', o.fill)}<div class="vx-row"><input type="color" data-vx-p="fill" value="${esc(/^#[0-9a-f]{6}$/i.test(o.fill || '') ? o.fill : '#000000')}" title="Autre couleur"><select data-vx-p="gtype"><option value="">Couleur unie</option><option value="linear" ${o.grad?.type === 'linear' ? 'selected' : ''}>Dégradé linéaire</option><option value="radial" ${o.grad?.type === 'radial' ? 'selected' : ''}>Dégradé radial</option></select></div>
+                ${o.type !== 'image' && o.type !== 'group' ? `<h4>Remplissage</h4>${swatchRow('data-vx-fill', o.fill)}<div class="vx-row"><select data-vx-p="gtype"><option value="">Couleur unie</option><option value="linear" ${o.grad?.type === 'linear' ? 'selected' : ''}>Dégradé linéaire</option><option value="radial" ${o.grad?.type === 'radial' ? 'selected' : ''}>Dégradé radial</option></select></div>
                     ${o.grad ? `<div class="vx-row"><input type="color" data-vx-p="gc1" value="${esc(/^#[0-9a-f]{6}$/i.test(o.grad.c1 || '') ? o.grad.c1 : '#ffffff')}"><input type="color" data-vx-p="gc2" value="${esc(/^#[0-9a-f]{6}$/i.test(o.grad.c2 || '') ? o.grad.c2 : '#000000')}">${o.grad.type === 'linear' ? `<input type="number" data-vx-p="gangle" value="${n2(o.grad.angle || 0)}" title="Angle (°)" style="width:70px">` : ''}</div>` : ''}
-                    <h4>Contour</h4>${swatchRow('data-vx-stroke', num(o.sw) ? o.stroke : 'none')}<div class="vx-row"><input type="color" data-vx-p="stroke" value="${esc(/^#[0-9a-f]{6}$/i.test(o.stroke || '') ? o.stroke : '#000000')}">${fld('sw', 'Épaisseur', o.sw || 0, {min: 0, max: 500, step: .5})}</div>
+                    <h4>Contour</h4>${swatchRow('data-vx-stroke', num(o.sw) ? o.stroke : 'none')}<div class="vx-row">${fld('sw', 'Épaisseur', o.sw || 0, {min: 0, max: 500, step: .5})}</div>
                     <div class="vx-grid2"><label>Pointillés<select data-vx-p="dash">${[['', 'plein'], ['dash', 'tirets'], ['dot', 'points'], ['long', 'longs tirets'], ['dashdot', 'tiret-point']].map(([k, l]) => `<option value="${k}" ${(o.dash || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>Bouts<select data-vx-p="cap">${[['round', 'ronds'], ['butt', 'plats'], ['square', 'carrés']].map(([k, l]) => `<option value="${k}" ${(o.cap || 'round') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label>Angles<select data-vx-p="join">${[['round', 'ronds'], ['miter', 'pointus'], ['bevel', 'biseautés']].map(([k, l]) => `<option value="${k}" ${(o.join || 'round') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label></div>` : ''}
                 <label>Opacité (%) <input type="range" data-vx-p="op" min="0" max="100" value="${Math.round(num(o.op, 1) * 100)}"></label>
                 <div class="vx-row">${many ? '<button type="button" class="button small secondary" data-vx-cmd="group">Grouper</button>' : ''}${o.type === 'group' ? '<button type="button" class="button small secondary" data-vx-cmd="ungroup">Dissocier</button>' : ''}${['rect', 'ellipse', 'polygon', 'star'].includes(o.type) ? '<button type="button" class="button small secondary" data-vx-cmd="topath">Convertir en tracé</button>' : ''}<button type="button" class="button small secondary" data-vx-cmd="dup">Dupliquer</button><button type="button" class="button small danger" data-vx-cmd="del">Supprimer</button></div></div>`;
@@ -671,8 +795,16 @@
         }
         let laterT = 0;
         const later = (label, typing = false) => { if (typing) { renderNoPanel(); clearTimeout(laterT); laterT = setTimeout(() => { laterT = 0; commit(label); }, 600); } else commit(label); };
-        const renderNoPanel = () => { const defs = []; content.innerHTML = doc.objs.map(o => objSvg(o, defs, 'e', true)).join(''); defsEl.innerHTML = '<pattern id="vxchk" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fff"/><rect width="8" height="8" fill="#e8e8e8"/><rect x="8" y="8" width="8" height="8" fill="#e8e8e8"/></pattern>' + defs.join(''); drawUi(); dirty = true; };
-        pane.addEventListener('input', e => { const el = e.target; if (el.dataset.vxP) setProp(el.dataset.vxP, el.type === 'checkbox' ? el.checked : el.value, el); else if (el.matches('[data-vx-lname]')) { const o = byId(el.closest('[data-vx-layer]').dataset.vxLayer); if (o) { o.name = el.value.slice(0, 60); dirty = true; } } else if (el.dataset.bl !== undefined) { blasonState[el.dataset.bl] = el.value; paintBlasonPreview(); } });
+        const renderNoPanel = () => { const defs = []; content.innerHTML = treeSvg(defs); defsEl.innerHTML = '<pattern id="vxchk" width="16" height="16" patternUnits="userSpaceOnUse"><rect width="16" height="16" fill="#fff"/><rect width="8" height="8" fill="#e8e8e8"/><rect x="8" y="8" width="8" height="8" fill="#e8e8e8"/></pattern>' + defs.join(''); drawUi(); dirty = true; };
+        const applyFree = (attr, c, final) => {
+            if (attr === 'data-vx-dfill' || attr === 'data-vx-dstroke') { defaults[attr === 'data-vx-dfill' ? 'fill' : 'stroke'] = c; paintFs(); if (final) { rememberColor(c); paintPanel(); } return; }
+            const list = selObjs().filter(o => !o.locked); if (!list.length) return toast('Choisis d’abord un objet.', 'error');
+            list.forEach(o => { if (attr === 'data-vx-stroke') { o.stroke = c; if (!num(o.sw)) o.sw = 2; } else if (attr === 'data-bl-tintfree') { if (o.type === 'group') (o.children || []).forEach(ch => { if (ch.fill !== 'none') ch.fill = c; }); else if (o.type !== 'image') { o.fill = c; delete o.grad; } } else { o.fill = c; delete o.grad; } });
+            if (final) { rememberColor(c); clearTimeout(laterT); laterT = 0; commit('Couleur libre'); } else later('Couleur libre', true);
+        };
+        pane.addEventListener('input', e => { if (e.target.dataset.vxFree) applyFree(e.target.dataset.vxFree, e.target.value, false); });
+        pane.addEventListener('change', e => { if (e.target.dataset.vxFree) applyFree(e.target.dataset.vxFree, e.target.value, true); });
+        pane.addEventListener('input', e => { const el = e.target; if (el.dataset.vxP) setProp(el.dataset.vxP, el.type === 'checkbox' ? el.checked : el.value, el); else if (el.matches('[data-vx-lname]')) { const o = findAny(el.closest('[data-vx-layer]').dataset.vxLayer)?.o; if (o) { o.name = el.value.slice(0, 60); dirty = true; } } else if (el.dataset.bl !== undefined) { blasonState[el.dataset.bl] = el.value; paintBlasonPreview(); } });
         pane.addEventListener('change', e => { const el = e.target; if (el.dataset.vxP && laterT) { clearTimeout(laterT); laterT = 0; commit('Propriété changée'); } if (el.matches('[data-vx-lname]')) commit('Calque renommé'); });
         pane.addEventListener('focusout', () => { if (laterT) { clearTimeout(laterT); laterT = 0; setTimeout(() => commit('Propriété changée'), 0); } });
         pane.addEventListener('click', e => {
@@ -680,17 +812,38 @@
             const sw = b.dataset.vxFill ?? b.dataset.vxStroke; if (sw !== undefined) { const k = b.dataset.vxFill !== undefined ? 'fill' : 'stroke'; selObjs().filter(o => !o.locked).forEach(o => { if (k === 'fill') { o.fill = sw; delete o.grad; } else if (sw === 'none') o.sw = 0; else { o.stroke = sw; if (!num(o.sw)) o.sw = 2; } }); commit(k === 'fill' ? 'Remplissage' : 'Contour'); return; }
             if (b.dataset.vxDfill) { defaults.fill = b.dataset.vxDfill; paintPanel(); paintFs(); return; } if (b.dataset.vxDstroke) { defaults.stroke = b.dataset.vxDstroke; paintPanel(); paintFs(); return; }
             if (b.dataset.vxSize) { const [w, h] = b.dataset.vxSize.split('x').map(Number); doc.w = w; doc.h = h; commit('Plan de travail'); fit(); return; }
-            const row = b.closest('[data-vx-layer]'); if (row) { const o = byId(row.dataset.vxLayer); if (!o) return; const i = doc.objs.indexOf(o);
+            if (b.matches('[data-vx-lnew]')) { newLayer(); commit('Nouveau calque'); return; }
+            if (b.matches('[data-vx-lgroup]')) { if (sel.length) { CMDS.group(); return; } const g = {id: uid(), type: 'group', name: 'Groupe', children: []}; cur().push(g); const path = [...scope, g.id]; enterScope(path); openGroups.add(g.id); commit('Nouveau groupe'); return; }
+            if (b.matches('[data-vx-lexit]')) { scope = scope.slice(0, -1); sel = []; nodeSel = null; render(); return; }
+            const row = b.closest('[data-vx-layer]'); if (row) { const f = findAny(row.dataset.vxLayer); if (!f) return; const {o, arr, path} = f, i = arr.indexOf(o);
+                if (b.matches('[data-vx-ltoggle]')) { if (openGroups.has(o.id)) openGroups.delete(o.id); else openGroups.add(o.id); paintPanel(); return; }
+                if (b.matches('[data-vx-lenter]')) { if (samePath([...path, o.id], scope)) { scope = path.slice(); sel = []; nodeSel = null; render(); } else if (enterScope([...path, o.id])) { openGroups.add(o.id); render(); } return; }
                 if (b.matches('[data-vx-lvis]')) { o.hidden = !o.hidden; if (o.hidden) sel = sel.filter(s => s !== o.id); commit(o.hidden ? 'Masqué' : 'Affiché'); return; }
-                if (b.matches('[data-vx-llock]')) { o.locked = !o.locked; commit(o.locked ? 'Verrouillé' : 'Déverrouillé'); return; }
-                if (b.matches('[data-vx-lup]') && i < doc.objs.length - 1) { [doc.objs[i], doc.objs[i + 1]] = [doc.objs[i + 1], doc.objs[i]]; commit('Calque monté'); return; }
-                if (b.matches('[data-vx-ldown]') && i > 0) { [doc.objs[i], doc.objs[i - 1]] = [doc.objs[i - 1], doc.objs[i]]; commit('Calque descendu'); return; } }
+                if (b.matches('[data-vx-llock]')) { o.locked = !o.locked; if (o.locked) sel = sel.filter(s => s !== o.id); commit(o.locked ? 'Verrouillé' : 'Déverrouillé'); return; }
+                if (b.matches('[data-vx-lup]') && i < arr.length - 1) { [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]; commit('Calque monté'); return; }
+                if (b.matches('[data-vx-ldown]') && i > 0) { [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]]; commit('Calque descendu'); return; }
+                if (b.matches('[data-vx-ldel]')) { if (isLayerGroup(o) && (o.children || []).length && !confirm(`Supprimer « ${o.name || 'ce groupe'} » et tout ce qu’il contient ?`)) return; arr.splice(i, 1); sel = sel.filter(s => s !== o.id); if (scope.includes(o.id)) scope = scope.slice(0, scope.indexOf(o.id)); commit('Supprimé'); return; }
+                return; }
             if (b.dataset.blCharge) { blasonState.charge = b.dataset.blCharge; paintPanel(); return; }
-            if (b.matches('[data-bl-make]')) { const {obj, blazon} = makeBlason(blasonState, {x: (doc.w - Math.min(doc.w * .7, doc.h * .7 / 1.2)) / 2, y: (doc.h - Math.min(doc.w * .7, doc.h * .7 / 1.2) * 1.2) / 2, width: Math.min(doc.w * .7, doc.h * .7 / 1.2)}); doc.objs.push(obj); sel = [obj.id]; lastBlazon = blazon; ctx.onBlazon?.(blazon); commit('Blason créé'); paintPanel(); return; }
+            if (b.matches('[data-bl-make]')) { const {obj, blazon} = makeBlason(blasonState, {x: (doc.w - Math.min(doc.w * .7, doc.h * .7 / 1.2)) / 2, y: (doc.h - Math.min(doc.w * .7, doc.h * .7 / 1.2) * 1.2) / 2, width: Math.min(doc.w * .7, doc.h * .7 / 1.2)}); cur().push(obj); sel = [obj.id]; lastBlazon = blazon; ctx.onBlazon?.(blazon); commit('Blason créé'); paintPanel(); return; }
             if (b.matches('[data-bl-copy]')) { navigator.clipboard?.writeText(lastBlazon || blasonText()).then(() => toast('Blasonnement copié.')).catch(() => {}); return; }
             if (b.matches('[data-bl-addcharge]')) { addCharge(blasonState.charge, tHex(blasonState.d)); return; }
+            if (b.dataset.blTintc) { applyFree('data-bl-tintfree', b.dataset.blTintc, true); return; }
             if (b.dataset.blTint) { const hex = tHex(b.dataset.blTint); selObjs().filter(o => !o.locked && o.type !== 'image').forEach(o => { if (o.type === 'group') (o.children || []).forEach(c => { if (c.fill !== 'none') c.fill = hex; }); else { o.fill = hex; delete o.grad; } }); commit(`Émail : ${b.title}`); return; }
         });
+        pane.addEventListener('click', e => {
+            if (tab !== 'layers' || e.target.closest('button, input')) return;
+            const row = e.target.closest('[data-vx-layer]'); if (!row) return; const f = findAny(row.dataset.vxLayer); if (!f || f.o.hidden) return;
+            if (!samePath(f.path, scope) && !enterScope(f.path)) return;
+            if (f.o.locked) { render(); return; }
+            sel = e.shiftKey ? [...new Set([...sel, f.o.id])] : [f.o.id]; setTool(tool === 'direct' ? 'direct' : 'select'); render();
+        });
+        let lDrag = null;
+        pane.addEventListener('dragstart', e => { const row = e.target.closest?.('[data-vx-layer]'); if (!row || tab !== 'layers') return; lDrag = row.dataset.vxLayer; e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', lDrag); } catch (_) {} row.classList.add('is-drag'); });
+        const dropWhere = (row, e) => { const r = row.getBoundingClientRect(), t = (e.clientY - r.top) / r.height, g = isLayerGroup(findAny(row.dataset.vxLayer)?.o); return g && t > .28 && t < .72 ? 'into' : t < .5 ? 'above' : 'below'; };
+        pane.addEventListener('dragover', e => { if (!lDrag) return; const row = e.target.closest('[data-vx-layer]'); pane.querySelectorAll('.vx-drop-above,.vx-drop-below,.vx-drop-into').forEach(x => x.classList.remove('vx-drop-above', 'vx-drop-below', 'vx-drop-into')); if (!row || row.dataset.vxLayer === lDrag) return; e.preventDefault(); row.classList.add('vx-drop-' + dropWhere(row, e)); });
+        pane.addEventListener('drop', e => { if (!lDrag) return; const row = e.target.closest('[data-vx-layer]'); const id = lDrag; lDrag = null; if (!row) return; e.preventDefault(); if (moveInTree(id, row.dataset.vxLayer, dropWhere(row, e))) commit('Rangé'); else paintPanel(); });
+        pane.addEventListener('dragend', () => { lDrag = null; pane.querySelectorAll('.is-drag,.vx-drop-above,.vx-drop-below,.vx-drop-into').forEach(x => x.classList.remove('is-drag', 'vx-drop-above', 'vx-drop-below', 'vx-drop-into')); });
         /* l'onglet Blason */
         const blasonState = {shield: 'francais', division: 'plein', ordinary: 'aucune', a: 'azur', b: 'or', c: 'gueules', d: 'or', charge: 'mdi_fleur_de_lis', count: '3', chargeSize: '100'};
         const tSel = (k, label) => `<label>${esc(label)}<select data-bl="${k}">${TINCTURES.map(([t, l, h]) => `<option value="${t}" ${blasonState[k] === t ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
@@ -708,7 +861,7 @@
                 <div class="vx-grid2"><label>Nombre<select data-bl="count">${[0, 1, 2, 3, 4, 5, 6].map(n => `<option value="${n}" ${String(blasonState.count) === String(n) ? 'selected' : ''}>${n ? n : 'aucun'}</option>`).join('')}</select></label>${tSel('d', 'Émail des meubles')}</div>
                 <label>Taille des meubles (%) <input type="range" data-bl="chargeSize" min="40" max="160" value="${esc(blasonState.chargeSize)}"></label>
                 <div class="vx-row"><button type="button" class="button small" data-bl-make>🛡️ Créer ce blason</button><button type="button" class="button small secondary" data-bl-addcharge title="Ajoute un meuble ${esc(sh?.n || '')} seul, à placer où tu veux">⚜️ Ajouter un meuble seul</button><button type="button" class="button small secondary" data-bl-copy>📋 Copier le blasonnement</button></div>
-                <h4>Émaux (sur la sélection)</h4><div class="vx-sw">${TINCTURES.map(([t, l, h]) => `<button type="button" data-bl-tint="${t}" title="${esc(l)}" style="background:${h}"></button>`).join('')}</div></div>`;
+                <h4>Émaux (sur la sélection)</h4><div class="vx-sw">${TINCTURES.map(([t, l, h]) => `<button type="button" data-bl-tint="${t}" title="${esc(l)}" style="background:${h}"></button>`).join('')}${freeColor('data-bl-tintfree', selObjs()[0]?.fill, 'Couleur libre (hors des émaux du blason)')}</div>${recentColors().length ? `<div class="vx-sw vx-recent"><small>Récentes</small>${recentColors().map(c => `<button type="button" data-bl-tintc="${c}" title="${c}" style="background:${c}"></button>`).join('')}</div>` : ''}</div>`;
         }
         function paintBlasonPreview() {
             const box2 = pane.querySelector('[data-bl-prev]'); if (!box2) return;
@@ -722,10 +875,10 @@
         function addCharge(key, fill) {
             const s = Math.min(doc.w, doc.h) * .25, d = chargeD(key, doc.w / 2, doc.h / 2, s); if (!d) return toast('Forme introuvable.', 'error');
             const sh = K().shapeByKey(key), one = dToPts(d), o = {id: uid(), type: one ? 'path' : 'svgpath', name: sh?.n || 'Meuble', fill, stroke: '#222222', sw: 0, evenodd: !!sh?.eo, ...(one ? {pts: one.pts, closed: one.closed} : {d})};
-            doc.objs.push(o); sel = [o.id]; commit('Meuble ajouté');
+            cur().push(o); sel = [o.id]; commit('Meuble ajouté');
         }
         /* commandes */
-        const idx = o => doc.objs.indexOf(o);
+        const idx = o => cur().indexOf(o);
         const sorted = () => selObjs().sort((a, b) => idx(a) - idx(b));
         async function exportImg(fmt, scale = 2) {
             const svg = await inlineMedia(docSvg(doc));
@@ -736,10 +889,10 @@
         const download = (blob, n) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = n; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
         const CMDS = {
             undo: () => { if (laterT) { clearTimeout(laterT); laterT = 0; commit(); } restore(hi - 1); }, redo: () => { if (laterT) { clearTimeout(laterT); laterT = 0; commit(); } restore(hi + 1); },
-            new: () => { if (dirty && !confirm('Commencer un nouveau dessin ? Ce qui n’est pas enregistré sera perdu.')) return; docId = 0; name = 'Mon dessin'; $('[data-vx-name]').value = name; doc = newDoc(); sel = []; hist = []; hi = -1; commit(); dirty = false; fit(); },
+            new: () => { if (dirty && !confirm('Commencer un nouveau dessin ? Ce qui n’est pas enregistré sera perdu.')) return; docId = 0; name = 'Mon dessin'; $('[data-vx-name]').value = name; doc = newDoc(); sel = []; scope = []; newLayer(); hist = []; hi = -1; commit(); dirty = false; fit(); },
             open: async () => { if (dirty && !confirm('Ouvrir un autre dessin ? Ce qui n’est pas enregistré sera perdu.')) return; const docs = (await api('vector_docs').catch(() => ({docs: []}))).docs || []; if (!docs.length) return toast('Aucun dessin enregistré.', 'error');
                 ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title: 'Ouvrir un dessin', body: `<div class="vx-open">${docs.map(d => `<label class="vx-openitem"><input type="radio" name="pick" value="${d.id}">${d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span>✒️</span>'}<span>${esc(d.name)}</span></label>`).join('')}</div>`, submitLabel: 'Ouvrir',
-                    onSubmit: async f => { const id = Number(f.querySelector('[name=pick]:checked')?.value); if (!id) return false; const r = await api('vector_doc', {id}); docId = r.id; name = r.name; $('[data-vx-name]').value = name; doc = cleanDoc(r.doc); sel = []; hist = []; hi = -1; commit(); dirty = false; fit(); }}); },
+                    onSubmit: async f => { const id = Number(f.querySelector('[name=pick]:checked')?.value); if (!id) return false; const r = await api('vector_doc', {id}); docId = r.id; name = r.name; $('[data-vx-name]').value = name; doc = cleanDoc(r.doc); sel = []; scope = []; hist = []; hi = -1; commit(); dirty = false; fit(); }}); },
             save: () => saveDoc(),
             import: () => $('[data-vx-file]').click(),
             exp_svg: () => download(new Blob([docSvg(doc)], {type: 'image/svg+xml'}), fname('svg')),
@@ -750,30 +903,66 @@
             copypng: async () => { try { const b = await exportImg('png'); await navigator.clipboard.write([new ClipboardItem({'image/png': b})]); toast('Image copiée.'); } catch (_) { toast('Copie impossible ici : exporte en PNG.', 'error'); } },
             toshape: () => saveAsShape(), tomedia: () => saveToMedia(), tocoat: () => saveToCoat(),
             cut: () => { CMDS.copy(); CMDS.del(); }, copy: () => { const l = sorted(); if (l.length) { clip = clone(l); status(`${l.length} copié${l.length > 1 ? 's' : ''}`); } },
-            paste: () => { if (!clip?.length) return; const copies = clip.map(o => { const c = clone(o); reId(c); return moveObj(c, 12, 12); }); clip = clone(copies); doc.objs.push(...copies); sel = copies.map(o => o.id); commit('Collé'); },
-            dup: () => { const l = sorted(); if (!l.length) return; const copies = l.map(o => { const c = clone(o); reId(c); return moveObj(c, 12, 12); }); doc.objs.push(...copies); sel = copies.map(o => o.id); commit('Dupliqué'); },
-            del: () => { if (nodeSel && tool === 'direct') { const o = byId(nodeSel.id); if (o?.pts?.length > 2) { o.pts.splice(nodeSel.i, 1); nodeSel = null; commit('Point supprimé'); return; } } const ids = new Set(selObjs().filter(o => !o.locked).map(o => o.id)); if (!ids.size) return; doc.objs = doc.objs.filter(o => !ids.has(o.id)); sel = []; commit('Supprimé'); },
-            all: () => { sel = doc.objs.filter(o => !o.locked && !o.hidden).map(o => o.id); render(); }, none: () => { sel = []; nodeSel = null; render(); },
-            group: () => { const l = sorted(); if (l.length < 2) return toast('Choisis au moins deux objets.', 'error'); const at = idx(l[l.length - 1]); const g = {id: uid(), type: 'group', name: 'Groupe', children: l}; doc.objs = doc.objs.filter(o => !l.includes(o)); doc.objs.splice(at - l.length + 1, 0, g); sel = [g.id]; commit('Groupé'); },
+            paste: () => { if (!clip?.length) return; const copies = clip.map(o => { const c = clone(o); reId(c); return moveObj(c, 12, 12); }); clip = clone(copies); cur().push(...copies); sel = copies.map(o => o.id); commit('Collé'); },
+            dup: () => { const l = sorted(); if (!l.length) return; const copies = l.map(o => { const c = clone(o); reId(c); return moveObj(c, 12, 12); }); cur().push(...copies); sel = copies.map(o => o.id); commit('Dupliqué'); },
+            del: () => { if (nodeSel && tool === 'direct') { const o = byId(nodeSel.id); if (o?.pts?.length > 2) { o.pts.splice(nodeSel.i, 1); nodeSel = null; commit('Point supprimé'); return; } } const ids = new Set(selObjs().filter(o => !o.locked).map(o => o.id)); if (!ids.size) return; setCur(cur().filter(o => !ids.has(o.id))); sel = []; commit('Supprimé'); },
+            all: () => { sel = cur().filter(o => !o.locked && !o.hidden).map(o => o.id); render(); }, none: () => { sel = []; nodeSel = null; render(); },
+            group: () => { const l = sorted(); if (l.length < 2) return toast('Choisis au moins deux objets.', 'error'); const at = idx(l[l.length - 1]); const g = {id: uid(), type: 'group', name: 'Groupe', children: l}; setCur(cur().filter(o => !l.includes(o))); cur().splice(at - l.length + 1, 0, g); sel = [g.id]; commit('Groupé'); },
             ungroup: () => { const gs = selObjs().filter(o => o.type === 'group'); if (!gs.length) return; const out = []; gs.forEach(g => { const at = idx(g), kids = (g.children || []).map(c => { const c2 = clone(c); if (num(g.rot)) { const gb = box(g), cb = box(c2), r = num(g.rot) * Math.PI / 180, gx = gb.x + gb.w / 2, gy = gb.y + gb.h / 2, cx = cb.x + cb.w / 2, cy = cb.y + cb.h / 2; moveObj(c2, gx + (cx - gx) * Math.cos(r) - (cy - gy) * Math.sin(r) - cx, gy + (cx - gx) * Math.sin(r) + (cy - gy) * Math.cos(r) - cy); c2.rot = (num(c2.rot) + num(g.rot)) % 360; } if (num(g.op, 1) < 1) c2.op = num(c2.op, 1) * num(g.op, 1); return c2; });
-                    if (g.clip) toast('Le masque d’écrêtage est retiré en dissociant.'); doc.objs.splice(at, 1, ...kids); out.push(...kids.map(k => k.id)); }); sel = out; commit('Dissocié'); },
-            clipmask: () => { const l = sorted(); if (l.length < 2) return toast('Choisis la forme qui découpe (au-dessus) et ce qu’elle découpe.', 'error'); const top = l[l.length - 1]; if (!shapeD(top)) return toast('L’objet du dessus doit être une forme ou un tracé.', 'error'); const rest = l.slice(0, -1), at = idx(rest[rest.length - 1]) - (rest.length - 1); const g = {id: uid(), type: 'group', name: 'Masque', clip: clone(top), children: rest}; doc.objs = doc.objs.filter(o => !l.includes(o)); doc.objs.splice(clamp(at, 0, doc.objs.length), 0, g); sel = [g.id]; commit('Masque d’écrêtage'); },
-            unclip: () => { const g = selObjs().find(o => o.type === 'group' && o.clip); if (!g) return; const shape = {...clone(g.clip), id: uid(), fill: 'none', stroke: '#888888', sw: 1, name: 'Ancien masque'}; delete g.clip; doc.objs.splice(idx(g) + 1, 0, shape); commit('Masque retiré'); },
-            front: () => { const l = sorted(); doc.objs = [...doc.objs.filter(o => !l.includes(o)), ...l]; commit('Premier plan'); }, bottom: () => { const l = sorted(); doc.objs = [...l, ...doc.objs.filter(o => !l.includes(o))]; commit('Arrière-plan'); },
-            fwd: () => { const l = sorted().reverse(); l.forEach(o => { const i = idx(o); if (i < doc.objs.length - 1 && !l.includes(doc.objs[i + 1])) [doc.objs[i], doc.objs[i + 1]] = [doc.objs[i + 1], doc.objs[i]]; }); commit('Avancé'); },
-            back: () => { const l = sorted(); l.forEach(o => { const i = idx(o); if (i > 0 && !l.includes(doc.objs[i - 1])) [doc.objs[i], doc.objs[i - 1]] = [doc.objs[i - 1], doc.objs[i]]; }); commit('Reculé'); },
+                    if (g.clip) toast('Le masque d’écrêtage est retiré en dissociant.'); cur().splice(at, 1, ...kids); out.push(...kids.map(k => k.id)); }); sel = out; commit('Dissocié'); },
+            clipmask: () => { const l = sorted(); if (l.length < 2) return toast('Choisis la forme qui découpe (au-dessus) et ce qu’elle découpe.', 'error'); const top = l[l.length - 1]; if (!shapeD(top)) return toast('L’objet du dessus doit être une forme ou un tracé.', 'error'); const rest = l.slice(0, -1), at = idx(rest[rest.length - 1]) - (rest.length - 1); const g = {id: uid(), type: 'group', name: 'Masque', clip: clone(top), children: rest}; setCur(cur().filter(o => !l.includes(o))); cur().splice(clamp(at, 0, cur().length), 0, g); sel = [g.id]; commit('Masque d’écrêtage'); },
+            unclip: () => { const g = selObjs().find(o => o.type === 'group' && o.clip); if (!g) return; const shape = {...clone(g.clip), id: uid(), fill: 'none', stroke: '#888888', sw: 1, name: 'Ancien masque'}; delete g.clip; cur().splice(idx(g) + 1, 0, shape); commit('Masque retiré'); },
+            front: () => { const l = sorted(); setCur([...cur().filter(o => !l.includes(o)), ...l]); commit('Premier plan'); }, bottom: () => { const l = sorted(); setCur([...l, ...cur().filter(o => !l.includes(o))]); commit('Arrière-plan'); },
+            fwd: () => { const l = sorted().reverse(); l.forEach(o => { const i = idx(o); if (i < cur().length - 1 && !l.includes(cur()[i + 1])) [cur()[i], cur()[i + 1]] = [cur()[i + 1], cur()[i]]; }); commit('Avancé'); },
+            back: () => { const l = sorted(); l.forEach(o => { const i = idx(o); if (i > 0 && !l.includes(cur()[i - 1])) [cur()[i], cur()[i - 1]] = [cur()[i - 1], cur()[i]]; }); commit('Reculé'); },
             flipH: () => { const l = selObjs(), b = unionBox(l); if (!b) return; l.forEach(o => { mapObj(o, (x, y) => [2 * b.x + b.w - x, y]); if (num(o.rot)) o.rot = 360 - num(o.rot); }); commit('Retourné'); },
             flipV: () => { const l = selObjs(), b = unionBox(l); if (!b) return; l.forEach(o => { mapObj(o, (x, y) => [x, 2 * b.y + b.h - y]); if (num(o.rot)) o.rot = 360 - num(o.rot); }); commit('Retourné'); },
             rot90: () => { selObjs().forEach(o => { o.rot = (num(o.rot) + 90) % 360; }); commit('Tourné'); },
-            topath: () => { let n = 0; sel.forEach(id => { const o = byId(id), i = idx(o); if (o && ['rect', 'ellipse', 'polygon', 'star'].includes(o.type)) { doc.objs[i] = toPath(o); n++; } else if (o?.type === 'svgpath') { const c = dToPts(o.d); if (c) { const p = {...o, type: 'path', pts: c.pts, closed: c.closed}; delete p.d; doc.objs[i] = p; n++; } } }); if (n) commit('Converti en tracé'); else toast('Rien à convertir.', 'error'); },
-            outline: () => { const l = sorted().filter(o => num(o.sw)); if (!l.length) return toast('Choisis un objet qui a un contour.', 'error'); const d = rasterOp(l, 'outline'); if (!d) return; const o = {id: uid(), type: 'svgpath', name: 'Contour', d, fill: l[0].stroke || '#000', sw: 0, evenodd: true}; doc.objs.splice(idx(l[l.length - 1]) + 1, 0, o); sel = [o.id]; commit('Contour → forme'); },
-            lock: () => { const l = selObjs(); const v = !l.every(o => o.locked); l.forEach(o => { o.locked = v; }); commit(v ? 'Verrouillé' : 'Déverrouillé'); }, hide: () => { selObjs().forEach(o => { o.hidden = true; }); sel = []; commit('Masqué'); }, showall: () => { doc.objs.forEach(o => { o.hidden = false; }); commit('Tout affiché'); },
+            topath: () => { let n = 0; sel.forEach(id => { const o = byId(id), i = idx(o); if (o && ['rect', 'ellipse', 'polygon', 'star'].includes(o.type)) { cur()[i] = toPath(o); n++; } else if (o?.type === 'svgpath') { const c = dToPts(o.d); if (c) { const p = {...o, type: 'path', pts: c.pts, closed: c.closed}; delete p.d; cur()[i] = p; n++; } } }); if (n) commit('Converti en tracé'); else toast('Rien à convertir.', 'error'); },
+            outline: () => { const l = sorted().filter(o => num(o.sw)); if (!l.length) return toast('Choisis un objet qui a un contour.', 'error'); const d = rasterOp(l, 'outline'); if (!d) return; const o = {id: uid(), type: 'svgpath', name: 'Contour', d, fill: l[0].stroke || '#000', sw: 0, evenodd: true}; cur().splice(idx(l[l.length - 1]) + 1, 0, o); sel = [o.id]; commit('Contour → forme'); },
+            lock: () => { const l = selObjs(); const v = !l.every(o => o.locked); l.forEach(o => { o.locked = v; }); commit(v ? 'Verrouillé' : 'Déverrouillé'); }, hide: () => { selObjs().forEach(o => { o.hidden = true; }); sel = []; commit('Masqué'); }, showall: () => { cur().forEach(o => { o.hidden = false; }); commit('Tout affiché'); },
             zin: () => { const r = stage.getBoundingClientRect(); zoomAt(1.25, r.width / 2, r.height / 2); }, zout: () => { const r = stage.getBoundingClientRect(); zoomAt(0.8, r.width / 2, r.height / 2); }, zfit: () => fit(), z100: () => { const r = stage.getBoundingClientRect(); zoomAt(1 / zoom, r.width / 2, r.height / 2); },
             grid: () => { tab = 'doc'; paintPanel(); },
             blason: () => { tab = 'blason'; paintPanel(); }, charge: () => { tab = 'blason'; paintPanel(); setTimeout(() => pane.querySelector('[data-vx-chq]')?.focus(), 30); },
             vectorize: () => vectorizeDialog(),
+            smart: () => { smart = !smart; try { localStorage.setItem(SMART_KEY, smart ? '1' : '0'); } catch (_) {} toast(smart ? 'Repères commentés : en déplaçant, les objets s’aimantent aux autres (⌘ pour s’en passer).' : 'Repères commentés désactivés.'); },
+            simplify: () => { const l = selObjs().filter(o => o.type === 'path' && !o.locked && (o.pts || []).length > 3); if (!l.length) return toast('Choisis un tracé (Objet → Convertir en tracé si besoin).', 'error');
+                ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title: 'Simplifier le tracé', submitLabel: 'Simplifier', body: `<p class="muted">Retire les points en trop (un trait au crayon, un dessin vectorisé…) en gardant l’allure.</p><label>Force <input type="range" name="t" min="1" max="40" value="6"></label><label class="checkbox-line"><input type="checkbox" name="smooth" checked> Lisser les courbes</label>`,
+                    onSubmit: f => { const tol = num(f.querySelector('[name=t]').value, 6) / zoom, smooth = f.querySelector('[name=smooth]').checked; let before = 0, after = 0;
+                        l.forEach(o => { before += o.pts.length; const xy = o.pts.map(q => [q.x, q.y]); const rdp = (pp, eps) => { if (pp.length < 3) return pp; let dm = 0, ix = 0; const [ax, ay] = pp[0], [bx, by] = pp[pp.length - 1], L = Math.hypot(bx - ax, by - ay) || 1; for (let i = 1; i < pp.length - 1; i++) { const dd = Math.abs((by - ay) * pp[i][0] - (bx - ax) * pp[i][1] + bx * ay - by * ax) / L; if (dd > dm) { dm = dd; ix = i; } } return dm > eps ? [...rdp(pp.slice(0, ix + 1), eps).slice(0, -1), ...rdp(pp.slice(ix), eps)] : [pp[0], pp[pp.length - 1]]; };
+                            const keep = rdp(o.closed ? [...xy, xy[0]] : xy, tol); if (o.closed) keep.pop(); if (keep.length < 2) return; const n = keep.length;
+                            o.pts = keep.map((q, i) => { if (!smooth) return P(q[0], q[1]); const a = keep[o.closed ? (i - 1 + n) % n : Math.max(0, i - 1)], c = keep[o.closed ? (i + 1) % n : Math.min(n - 1, i + 1)], t = [(c[0] - a[0]) / 6, (c[1] - a[1]) / 6]; return P(q[0], q[1], [q[0] - t[0], q[1] - t[1]], [q[0] + t[0], q[1] + t[1]]); }); after += o.pts.length; });
+                        commit('Tracé simplifié'); toast(`${before} → ${after} points.`); }}); },
+            transform: () => { const l = selObjs().filter(o => !o.locked); if (!l.length) return toast('Choisis d’abord des objets.', 'error');
+                ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title: 'Transformer', submitLabel: 'Appliquer', body: `<p class="muted">Autour du centre de la sélection. Avec des copies, chaque copie reprend la transformation de la précédente (une frise, un dégradé de tailles…).</p>
+                    <div class="vx-grid2"><label>Échelle horizontale (%)<input name="sx" type="number" value="100" step="1"></label><label>Échelle verticale (%)<input name="sy" type="number" value="100" step="1"></label>
+                    <label>Inclinaison horizontale (°)<input name="kx" type="number" value="0" min="-80" max="80"></label><label>Inclinaison verticale (°)<input name="ky" type="number" value="0" min="-80" max="80"></label>
+                    <label>Rotation (°)<input name="r" type="number" value="0"></label><label>Copies<input name="n" type="number" value="0" min="0" max="200"></label>
+                    <label>Décalage X<input name="dx" type="number" value="0"></label><label>Décalage Y<input name="dy" type="number" value="0"></label></div>`,
+                    onSubmit: f => { const v = k => num(f.querySelector(`[name=${k}]`).value), sx = v('sx') / 100 || 1, sy = v('sy') / 100 || 1, kx = Math.tan(clamp(v('kx'), -80, 80) * Math.PI / 180), ky = Math.tan(clamp(v('ky'), -80, 80) * Math.PI / 180), r = v('r'), n = clamp(Math.round(v('n')), 0, 200), mx = v('dx'), my = v('dy');
+                        const step = list => { const b = unionBox(list), cx = b.x + b.w / 2, cy = b.y + b.h / 2, ra = r * Math.PI / 180;
+                            return list.map(o0 => { let o = (kx || ky) && ['rect', 'ellipse', 'polygon', 'star'].includes(o0.type) ? toPath(o0) : o0;
+                                mapObj(o, (x, y) => { const X = (x - cx) * sx, Y = (y - cy) * sy; return [cx + X + kx * Y + mx, cy + Y + ky * X + my]; }, Math.sqrt(Math.abs(sx * sy)));
+                                if (r) { const ob = box(o), ocx = ob.x + ob.w / 2, ocy = ob.y + ob.h / 2; if (list.length > 1 || n) moveObj(o, cx + mx + (ocx - cx - mx) * Math.cos(ra) - (ocy - cy - my) * Math.sin(ra) - ocx, cy + my + (ocx - cx - mx) * Math.sin(ra) + (ocy - cy - my) * Math.cos(ra) - ocy); o.rot = ((num(o.rot) + r) % 360 + 360) % 360; }
+                                return o; }); };
+                        if (!n) { const out = step(l); out.forEach((o, i) => { const at = cur().indexOf(l[i]); if (at >= 0) cur()[at] = o; }); commit('Transformé'); return; }
+                        let prev = l, made = []; for (let k = 0; k < n; k++) { const copies = prev.map(o => { const c = clone(o); reId(c); return c; }); prev = step(copies); made.push(...prev); }
+                        cur().push(...made); sel = made.map(o => o.id); commit(`${n} copie${n > 1 ? 's' : ''} transformée${n > 1 ? 's' : ''}`); }}); },
+            repeat_circle: () => { const l = selObjs().filter(o => !o.locked); if (!l.length) return toast('Choisis d’abord des objets.', 'error'); const b = unionBox(l);
+                ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title: 'Répétition en cercle', submitLabel: 'Répéter', body: `<p class="muted">Des copies tournent autour d’un centre (une rosace, une couronne de meubles autour d’un écu…). Le tout devient un groupe.</p>
+                    <div class="vx-grid2"><label>Nombre (avec l’original)<input name="n" type="number" value="8" min="2" max="120"></label><label>Centre<select name="c"><option value="below">Sous la sélection (rosace)</option><option value="art">Centre du plan de travail</option><option value="self">Centre de la sélection</option></select></label>
+                    <label>Distance au centre (si « sous la sélection »)<input name="d" type="number" value="${n2(Math.max(b.w, b.h))}"></label><label class="checkbox-line"><input type="checkbox" name="turn" checked> Tourner chaque copie</label></div>`,
+                    onSubmit: f => { const n = clamp(Math.round(num(f.querySelector('[name=n]').value, 8)), 2, 120), mode = f.querySelector('[name=c]').value, dd = num(f.querySelector('[name=d]').value, b.h), turn = f.querySelector('[name=turn]').checked;
+                        const c = mode === 'art' ? [doc.w / 2, doc.h / 2] : mode === 'self' ? [b.x + b.w / 2, b.y + b.h / 2] : [b.x + b.w / 2, b.y + b.h / 2 + dd];
+                        const all = [...l]; for (let k = 1; k < n; k++) { const a = 2 * Math.PI * k / n, deg = 360 * k / n; l.forEach(o0 => { const o = clone(o0); reId(o); const ob = box(o), ocx = ob.x + ob.w / 2, ocy = ob.y + ob.h / 2; moveObj(o, c[0] + (ocx - c[0]) * Math.cos(a) - (ocy - c[1]) * Math.sin(a) - ocx, c[1] + (ocx - c[0]) * Math.sin(a) + (ocy - c[1]) * Math.cos(a) - ocy); if (turn) o.rot = ((num(o.rot) + deg) % 360 + 360) % 360; all.push(o); }); }
+                        const at = Math.min(...l.map(o => cur().indexOf(o))), g = {id: uid(), type: 'group', name: 'Répétition en cercle', children: all}; setCur(cur().filter(o => !l.includes(o))); cur().splice(clamp(at, 0, cur().length), 0, g); sel = [g.id]; commit('Répétition en cercle'); }}); },
+            repeat_grid: () => { const l = selObjs().filter(o => !o.locked); if (!l.length) return toast('Choisis d’abord des objets.', 'error'); const b = unionBox(l);
+                ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title: 'Répétition en grille', submitLabel: 'Répéter', body: `<p class="muted">Des copies en lignes et colonnes (un semé d’hermines, de fleurs de lys…). Le tout devient un groupe.</p><div class="vx-grid2"><label>Colonnes<input name="c" type="number" value="4" min="1" max="60"></label><label>Lignes<input name="r" type="number" value="3" min="1" max="60"></label><label>Écart horizontal<input name="gx" type="number" value="${n2(b.w * .5)}"></label><label>Écart vertical<input name="gy" type="number" value="${n2(b.h * .5)}"></label></div><label class="checkbox-line"><input type="checkbox" name="stag"> Une ligne sur deux décalée (en quinconce)</label>`,
+                    onSubmit: f => { const v = k => num(f.querySelector(`[name=${k}]`).value), C = clamp(Math.round(v('c')), 1, 60), R = clamp(Math.round(v('r')), 1, 60), gx = v('gx'), gy = v('gy'), st = f.querySelector('[name=stag]').checked; if (C * R * l.length > 4000) { toast('Trop de copies (4 000 au plus).', 'error'); return false; }
+                        const all = []; for (let r = 0; r < R; r++) for (let c = 0; c < C; c++) { if (!r && !c) { all.push(...l); continue; } l.forEach(o0 => { const o = clone(o0); reId(o); moveObj(o, c * (b.w + gx) + (st && r % 2 ? (b.w + gx) / 2 : 0), r * (b.h + gy)); all.push(o); }); }
+                        const at = Math.min(...l.map(o => cur().indexOf(o))), g = {id: uid(), type: 'group', name: 'Répétition en grille', children: all}; setCur(cur().filter(o => !l.includes(o))); cur().splice(clamp(at, 0, cur().length), 0, g); sel = [g.id]; commit('Répétition en grille'); }}); },
         };
-        const pf = op => () => { const l = sorted().filter(o => o.type !== 'image'); if (l.length < 2) return toast('Choisis au moins deux formes.', 'error'); status('Calcul…'); setTimeout(() => { const d = rasterOp(l, op); if (d === null) return; if (!d) { status(''); return toast('Le résultat est vide (les formes ne se touchent pas ?).', 'error'); } const base = l[0], o = {id: uid(), type: 'svgpath', name: {union: 'Réunion', subtract: 'Soustraction', intersect: 'Intersection', exclude: 'Exclusion'}[op], d, fill: base.fill === 'none' ? '#000000' : base.fill, grad: base.grad, stroke: base.stroke, sw: base.sw, evenodd: true}; if (!o.grad) delete o.grad; const at = idx(l[0]); doc.objs = doc.objs.filter(x => !l.includes(x)); doc.objs.splice(Math.min(at, doc.objs.length), 0, o); sel = [o.id]; commit(o.name); }, 20); };
+        const pf = op => () => { const l = sorted().filter(o => o.type !== 'image'); if (l.length < 2) return toast('Choisis au moins deux formes.', 'error'); status('Calcul…'); setTimeout(() => { const d = rasterOp(l, op); if (d === null) return; if (!d) { status(''); return toast('Le résultat est vide (les formes ne se touchent pas ?).', 'error'); } const base = l[0], o = {id: uid(), type: 'svgpath', name: {union: 'Réunion', subtract: 'Soustraction', intersect: 'Intersection', exclude: 'Exclusion'}[op], d, fill: base.fill === 'none' ? '#000000' : base.fill, grad: base.grad, stroke: base.stroke, sw: base.sw, evenodd: true}; if (!o.grad) delete o.grad; const at = idx(l[0]); setCur(cur().filter(x => !l.includes(x))); cur().splice(Math.min(at, cur().length), 0, o); sel = [o.id]; commit(o.name); }, 20); };
         Object.assign(CMDS, {pf_union: pf('union'), pf_subtract: pf('subtract'), pf_intersect: pf('intersect'), pf_exclude: pf('exclude')});
         const align = k => () => { const l = selObjs().filter(o => !o.locked); if (!l.length) return; const ref = k === 'al_art' || l.length === 1 ? {x: 0, y: 0, w: doc.w, h: doc.h} : unionBox(l);
             if (k === 'di_h' || k === 'di_v') { if (l.length < 3) return toast('Il faut au moins trois objets.', 'error'); const h2 = k === 'di_h', s = [...l].sort((a, b) => h2 ? rbox(a).x - rbox(b).x : rbox(a).y - rbox(b).y), tot = s.reduce((a, o) => a + (h2 ? rbox(o).w : rbox(o).h), 0), gap = ((h2 ? ref.w : ref.h) - tot) / (s.length - 1); let p = h2 ? ref.x : ref.y; s.forEach(o => { const b = rbox(o); moveObj(o, h2 ? p - b.x : 0, h2 ? 0 : p - b.y); p += (h2 ? b.w : b.h) + gap; }); commit('Réparti'); return; }
@@ -782,6 +971,7 @@
         const reId = o => { o.id = uid(); (o.children || []).forEach(reId); if (o.clip) o.clip.id = uid(); };
         dlg.addEventListener('click', e => {
             const c = e.target.closest('[data-vx-cmd]'); if (c) { c.closest('details')?.removeAttribute('open'); try { const r = CMDS[c.dataset.vxCmd]?.(); r?.catch?.(err => toast(err.message, 'error')); } catch (err) { toast(err.message, 'error'); } return; }
+            const cr = e.target.closest('[data-vx-crumb]'); if (cr) { const n = clamp(Number(cr.dataset.vxCrumb) || 0, 0, scope.length); scope = scope.slice(0, n); sel = []; nodeSel = null; render(); return; }
             const t = e.target.closest('[data-vx-tool]'); if (t) { setTool(t.dataset.vxTool); return; }
             const tb = e.target.closest('[data-vx-tab]'); if (tb) { tab = tb.dataset.vxTab; paintPanel(); return; }
             if (!e.target.closest('details.vx-menu')) dlg.querySelectorAll('details.vx-menu[open]').forEach(d => d.removeAttribute('open'));
@@ -797,8 +987,9 @@
             if (k === ' ' && !space) { space = true; stage.dataset.tool = 'hand'; e.preventDefault(); return; }
             const map = mod ? {z: e.shiftKey ? 'redo' : 'undo', y: 'redo', c: 'copy', x: 'cut', v: null, d: 'dup', a: 'all', g: e.shiftKey ? 'ungroup' : 'group', i: 'import', 0: 'zfit', 1: 'z100', '=': 'zin', '+': 'zin', '-': 'zout', 7: 'clipmask', ']': e.shiftKey ? 'front' : 'fwd', '[': e.shiftKey ? 'bottom' : 'back', '}': 'front', '{': 'bottom'} : {};
             if (mod && k in map) { if (map[k]) { e.preventDefault(); CMDS[map[k]](); } return; }
+            if ((k === 'delete' || k === 'backspace') && penPath) { e.preventDefault(); penPath.pts.pop(); if (!penPath.pts.length) { penPath = null; penHover = null; } render(); return; }
             if (k === 'delete' || k === 'backspace') { e.preventDefault(); CMDS.del(); return; }
-            if (k === 'escape') { e.preventDefault(); if (penPath) finishPen(); else if (sel.length) CMDS.none(); return; }
+            if (k === 'escape') { e.preventDefault(); if (penPath) finishPen(); else if (sel.length) CMDS.none(); else if (scope.length) { scope = scope.slice(0, -1); render(); } return; }
             if (k === 'enter' && penPath) { finishPen(); return; }
             if (k.startsWith('arrow') && sel.length) { e.preventDefault(); const s2 = e.shiftKey ? 10 : 1, dx = k === 'arrowleft' ? -s2 : k === 'arrowright' ? s2 : 0, dy = k === 'arrowup' ? -s2 : k === 'arrowdown' ? s2 : 0; selObjs().filter(o => !o.locked).forEach(o => moveObj(o, dx, dy)); clearTimeout(laterT); renderNoPanel(); laterT = setTimeout(() => { laterT = 0; commit('Déplacé'); }, 400); return; }
             if (!mod && !e.altKey) { const t = TOOLS.find(x => x[3].toLowerCase() === k); if (t) { setTool(t[0]); e.preventDefault(); } }
@@ -827,7 +1018,7 @@
             if (!objs.length) return toast('Rien de lisible dans ce fichier.', 'error');
             const b = unionBox(objs); if (b && (b.w > doc.w || b.h > doc.h)) { const f = Math.min(doc.w / b.w, doc.h / b.h) * .9; objs.forEach(o => mapObj(o, (x, y) => [(x - b.x) * f, (y - b.y) * f], f)); }
             const b2 = unionBox(objs); if (b2) objs.forEach(o => moveObj(o, (doc.w - b2.w) / 2 - b2.x, (doc.h - b2.h) / 2 - b2.y));
-            doc.objs.push(...objs); sel = objs.map(o => o.id); setTool('select'); commit(label);
+            cur().push(...objs); sel = objs.map(o => o.id); setTool('select'); commit(label);
         }
         async function importFile(f) {
             if (!f) return; if (f.size > 25e6) return toast('Fichier trop gros (25 Mo au plus).', 'error');
@@ -843,7 +1034,7 @@
         stage.addEventListener('drop', e => { const f = e.dataTransfer?.files?.[0]; if (f) { e.preventDefault(); importFile(f); } });
         /* vectoriser */
         function vectorizeDialog() {
-            const img = selObjs().find(o => o.type === 'image') || doc.objs.find(o => o.type === 'image' && !o.hidden);
+            const img = selObjs().find(o => o.type === 'image') || cur().find(o => o.type === 'image' && !o.hidden);
             if (!img) { toast('Importe d’abord une image (Fichier → Importer), puis choisis-la.', 'error'); $('[data-vx-file]').click(); return; }
             ext.openDialog({eyebrow: 'VECTORISER', title: 'Transformer l’image en tracés', submitLabel: 'Vectoriser',
                 body: `<p class="muted">Pour refaire un blason, un sceau, un logo, une signature : l’image devient des formes nettes, modifiables, agrandissables sans flou. L’image d’origine reste dessous (masquée).</p>
@@ -862,7 +1053,7 @@
                         const kx = img.w / r.W, ky = img.h / r.H;
                         const layers = r.layers.map(l => { const o = {id: uid(), type: 'svgpath', name: `Couleur ${l.color}`, d: loopsD(l.loops), fill: l.color, stroke: l.color, sw: Math.max(0.4, 0.5 * kx), join: 'round', evenodd: true}; mapObj(o, (x, y) => [img.x + x * kx, img.y + y * ky]); o.sw = Math.max(0.3, 0.6 * kx); return o; });
                         const g = {id: uid(), type: 'group', name: 'Image vectorisée', children: layers, rot: img.rot || 0};
-                        img.hidden = true; doc.objs.splice(idx(img) + 1, 0, g); sel = [g.id]; commit(`Vectorisé : ${layers.length} couleur${layers.length > 1 ? 's' : ''}`);
+                        img.hidden = true; cur().splice(idx(img) + 1, 0, g); sel = [g.id]; commit(`Vectorisé : ${layers.length} couleur${layers.length > 1 ? 's' : ''}`);
                         hint('Fait : Objet → Dissocier pour reprendre chaque couleur ; Sélection directe pour les points.');
                     } catch (e) { status(''); toast(e.message, 'error'); return false; }
                 }});
@@ -876,7 +1067,7 @@
         }
         /** la sélection (ou tout) → une forme des tableaux (« Mes formes »), dans une boîte 100 × 100 */
         function shapeFromSel() {
-            const l = (sel.length ? sorted() : doc.objs.filter(o => !o.hidden)).flatMap(function flat(o) { return o.type === 'group' ? (o.children || []).flatMap(flat) : [o]; }).filter(o => shapeD(o));
+            const l = (sel.length ? sorted() : cur().filter(o => !o.hidden)).flatMap(function flat(o) { return o.type === 'group' ? (o.children || []).flatMap(flat) : [o]; }).filter(o => shapeD(o));
             if (!l.length || !K()) return null;
             const ds = l.map(o => { const c = clone(o); if (num(c.rot)) { const b = box(c), r = num(c.rot) * Math.PI / 180, cx = b.x + b.w / 2, cy = b.y + b.h / 2; const p = c.type === 'path' || c.type === 'svgpath' ? c : toPath(c); mapObj(p, (x, y) => [cx + (x - cx) * Math.cos(r) - (y - cy) * Math.sin(r), cy + (x - cx) * Math.sin(r) + (y - cy) * Math.cos(r)]); p.rot = 0; return shapeD(p); } return shapeD(c); }).join('');
             return {d: K().pathStr(K().fitSegs(K().absPath(ds))), eo: l.length > 1 || l.some(o => o.evenodd)};
@@ -924,12 +1115,23 @@
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (penPath) { finishPen(); return; } close(); });
         $('[data-vx-close]').addEventListener('click', close);
         $('[data-vx-name]').addEventListener('input', () => { dirty = true; });
+        /* largeur du panneau de droite : réglable en le tirant par son bord, comme dans Photoshop */
+        const PW_KEY = 'lcnda-vx-panel-w', mainEl = $('.vx-main');
+        const setPw = w => { if (w) mainEl.style.setProperty('--vx-pw', `${Math.round(w)}px`); else mainEl.style.removeProperty('--vx-pw'); };
+        try { const w0 = Number(localStorage.getItem(PW_KEY)); if (w0 >= 220) setPw(w0); } catch (_) {}
+        const ps = $('[data-vx-psize]');
+        ps.addEventListener('pointerdown', e => { e.preventDefault(); ps.setPointerCapture(e.pointerId); ps.classList.add('is-on');
+            const mv = ev => { const r = mainEl.getBoundingClientRect(); setPw(clamp(r.right - ev.clientX, 220, Math.min(900, r.width * .7))); applyView(); };
+            const up = () => { ps.removeEventListener('pointermove', mv); ps.removeEventListener('pointerup', up); ps.classList.remove('is-on'); try { localStorage.setItem(PW_KEY, String(parseInt(getComputedStyle(mainEl).getPropertyValue('--vx-pw')) || '')); } catch (_) {} };
+            ps.addEventListener('pointermove', mv); ps.addEventListener('pointerup', up); });
+        ps.addEventListener('dblclick', () => { setPw(0); try { localStorage.removeItem(PW_KEY); } catch (_) {} applyView(); });
         /* départ */
         dlg.showModal(); stage.focus({preventScroll: true});
+        if (!ctx.id && !doc.objs.length) newLayer(); // un nouveau dessin commence avec « Calque 1 »
         if (ctx.coat && !ctx.id) { doc.w = 500; doc.h = 600; name = ctx.coat.title || 'Blason'; $('[data-vx-name]').value = name; tab = 'blason'; }
         if (ctx.shape?.d && !ctx.id) { doc.w = 600; doc.h = 600; name = ctx.shape.n || 'Forme'; $('[data-vx-name]').value = name; const sh = ctx.shape, segs = K().absPath(sh.d), b = segsBox(segs) || {x: 0, y: 0, w: 100, h: 100}, k = 400 / Math.max(b.w, b.h);
             const d = K().pathStr(segs.map(([c, ...a]) => { const o = [c]; for (let j = 0; j < a.length; j += 2) o.push(100 + (a[j] - b.x) * k + (400 - b.w * k) / 2, 100 + (a[j + 1] - b.y) * k + (400 - b.h * k) / 2); return o; }));
-            const one = dToPts(d); doc.objs.push({id: uid(), type: one ? 'path' : 'svgpath', name: sh.n || 'Forme', fill: '#3a3a3a', stroke: '#222222', sw: 0, evenodd: !!sh.eo, ...(one ? {pts: one.pts, closed: one.closed} : {d})}); }
+            const one = dToPts(d); cur().push({id: uid(), type: one ? 'path' : 'svgpath', name: sh.n || 'Forme', fill: '#3a3a3a', stroke: '#222222', sw: 0, evenodd: !!sh.eo, ...(one ? {pts: one.pts, closed: one.closed} : {d})}); }
         commit(); dirty = false; status(''); setTool('select'); fit();
         if (ctx.svg) addImported(importSvgText(ctx.svg), 'SVG importé');
         if (ctx.imageSrc) { try { const im = await normImage(/^media\//.test(ctx.imageSrc) ? await toDataUrl(ctx.imageSrc) : ctx.imageSrc), k = Math.min(1, doc.w * .9 / im.w, doc.h * .9 / im.h); addImported([{id: uid(), type: 'image', name: 'Image d’origine', src: im.src, x: 0, y: 0, w: im.w * k, h: im.h * k}], 'Image importée'); dirty = false; hint('L’image d’origine est là : Blason → « Vectoriser une image » pour la refaire en tracés, ou dessine par-dessus à la plume.'); } catch (e) { toast(e.message, 'error'); } }
