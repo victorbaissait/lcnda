@@ -3589,3 +3589,13 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 .h-dgz{width:min(1100px,96vw)}.h-dgz-body{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:14px;padding:0 20px;max-height:72vh;overflow:auto}.h-dgz-img canvas{max-width:100%;border:1px solid var(--line,#d0d4dc)}.h-dgz-side label{display:flex;flex-direction:column;gap:3px;margin-bottom:6px}.h-dgz-table input{width:100%}.h-dgz-table input[type=color]{width:40px;padding:0}
 .h-cw-dg svg{width:100%;height:auto;max-height:520px}
 .h-dk-form{display:flex;flex-direction:column;gap:8px}.h-dk-form label:not(.checkbox-line){display:flex;flex-direction:column;gap:3px}
+/* Maison : précision (coordonnées, saisie au clavier, aimants, cotes 3D) */
+.h-hs-g4c{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.h-hs-g4c input{min-width:0}
+.h-hs-pbar{position:absolute;left:10px;top:8px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;max-width:calc(100% - 20px);font:12px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:#334;background:#ffffffe6;border:1px solid #d6dbe2;border-radius:7px;padding:3px 8px;box-shadow:0 1px 3px #0001}
+.h-hs-pbar [data-hs-seg]:empty{display:none}.h-hs-pbar [data-hs-seg]{color:#1d5fb8;font-weight:600}
+.h-hs-pbar input{width:260px;max-width:60vw;font:inherit;padding:2px 6px;border:1px solid #9bb9e3;border-radius:5px;background:#fff}
+.h-hs-guide{stroke:#e0457b;stroke-width:1;stroke-dasharray:5 4;fill:none;vector-effect:non-scaling-stroke}.h-hs-guide.is-ang{stroke:#2a7de1}
+.h-hs-snapmk{fill:none;stroke:#e0457b;stroke-width:1.5;vector-effect:non-scaling-stroke}.h-hs-snapmk.is-mid{stroke:#19a974}
+.h-hs-snapm>div{min-width:250px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}.h-hs-snapm>div label:not(.checkbox-line){display:flex;flex-direction:column;font-size:12px;gap:2px}
+.h-hs-3dmeasure{position:absolute;pointer-events:none;transform:translate(-50%,-120%);background:#1d2733e6;color:#fff;font:600 12px/1.3 ui-monospace,Menlo,monospace;padding:3px 7px;border-radius:6px;white-space:nowrap}
+.h-hs-3dbar .is-on{background:#2a7de1;color:#fff}

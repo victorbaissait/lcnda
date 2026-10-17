@@ -156,7 +156,7 @@
     }
 
     /* ═════════ La maison construite ═════════ */
-    function floorBase(H, f) { const fl = [...H.floors].sort((a, b) => a.level - b.level); let y = 0; if (f.level >= 0) { for (const q of fl) if (q.level >= 0 && q.level < f.level) y += M(q.height) + .2; } else { for (const q of fl) if (q.level < 0 && q.level >= f.level) y -= M(q.height) + .2; } return y; }
+    function floorBase(H, f) { const fl = [...H.floors].sort((a, b) => a.level - b.level); let y = 0; if (f.level >= 0) { for (const q of fl) if (q.level >= 0 && q.level < f.level) y += M(q.height) + M(H.slab ?? 20); } else { for (const q of fl) if (q.level < 0 && q.level >= f.level) y -= M(q.height) + M(H.slab ?? 20); } return y; }
     function buildFloor(H, f, {cut = false} = {}) {
         const g = new T.Group(), L = ext.houseLib, base = floorBase(H, f), fh = M(f.height);
         g.position.y = base;
@@ -171,7 +171,10 @@
             const t = M(w.t || f.wallT), wh = cut ? Math.min(1.1, M(w.h || f.height)) : M(w.h || f.height), ang = Math.atan2(bz - az, bx - ax), wm = L.WALL_MATS.find(m => m[0] === (w.mat || 'platre')), material = mat(w.color || wm?.[2] || '#eee', w.mat || 'platre');
             const holes = f.openings.filter(o => o.wall === w.id).map(o => ({s: o.pos * len - M(o.w) / 2, e: o.pos * len + M(o.w) / 2, y0: o.type === 'window' ? M(o.sill ?? 90) : 0, y1: (o.type === 'window' ? M(o.sill ?? 90) : 0) + M(o.h), o})).sort((a, b) => a.s - b.s);
             const piece = (s, e, y0, y1) => { if (e - s < .005 || y1 - y0 < .005) return; const m = box(e - s, y1 - y0, t + .002, material, 1.1); const mid = (s + e) / 2; m.position.set(ax + Math.cos(ang) * mid, y0 + (y1 - y0) / 2, az + Math.sin(ang) * mid); m.rotation.y = -ang; m.castShadow = m.receiveShadow = true; g.add(m); };
-            let cur2 = -t / 2; // le mur déborde de la moitié de son épaisseur aux deux bouts : les angles se ferment
+            // le mur ne déborde de la moitié de son épaisseur que là où il rejoint un autre mur (l'angle se ferme) : un bout libre garde sa vraie longueur
+            const joined = p => f.walls.some(q => q !== w && [q.a, q.b].some(c => Math.abs(c[0] - p[0]) < .5 && Math.abs(c[1] - p[1]) < .5));
+            const ext0 = joined(w.a) ? t / 2 : 0, ext1 = joined(w.b) ? t / 2 : 0;
+            let cur2 = -ext0;
             holes.forEach(hh => { piece(cur2, hh.s, 0, wh); piece(hh.s, hh.e, 0, Math.min(wh, hh.y0)); piece(hh.s, hh.e, Math.min(wh, hh.y1), wh);
                 // la menuiserie : une vitre et son cadre, ou une porte
                 const mid = (hh.s + hh.e) / 2, cx = ax + Math.cos(ang) * mid, cz = az + Math.sin(ang) * mid, ow = hh.e - hh.s, oh = Math.min(wh, hh.y1) - hh.y0;
@@ -179,7 +182,7 @@
                     else if (hh.o.style !== 'arche') { const door = box(ow - .02, oh - .01, .04, mat(hh.o.style === 'grange' ? '#6a4a2a' : '#8a5a32', 'lambris'), .8); const sg = hh.o.flip ? -1 : 1, hinge = hh.o.swing === 'right' ? 1 : -1, open = .9; // la porte entrouverte
                         const pivot = new T.Group(); pivot.position.set(ax + Math.cos(ang) * (mid + hinge * ow / 2), hh.y0, az + Math.sin(ang) * (mid + hinge * ow / 2)); pivot.rotation.y = -ang + hinge * sg * open; door.position.set(-hinge * (ow - .02) / 2, (oh - .01) / 2, 0); pivot.add(door); g.add(pivot); } }
                 cur2 = hh.e; });
-            piece(cur2, len + t / 2, 0, wh);
+            piece(cur2, len + ext1, 0, wh);
         });
         // les meubles
         f.items.forEach(it => { const Lb = L.libOf(it.kind), m = furniture(it, Lb); m.position.set(M(it.x), M(it.elev || 0), M(it.y)); m.rotation.y = -(it.rot || 0) * Math.PI / 180; m.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } }); g.add(m);
@@ -202,14 +205,14 @@
         await three();
         const W = () => box2.clientWidth || 800, Hh = () => box2.clientHeight || 600;
         const renderer = new T.WebGLRenderer({antialias: true, preserveDrawingBuffer: true}); renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.setSize(W(), Hh()); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap; renderer.outputColorSpace = T.SRGBColorSpace;
-        box2.innerHTML = `<div class="h-hs-3dbar"><label class="checkbox-line"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés (voir dedans)</label><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>`;
+        box2.innerHTML = `<div class="h-hs-3dbar"><label class="checkbox-line"><input type="checkbox" data-h3="all" checked> Tous les étages</label><label class="checkbox-line"><input type="checkbox" data-h3="roof"> Toit</label><label class="checkbox-line"><input type="checkbox" data-h3="cut"> Murs coupés (voir dedans)</label><label class="checkbox-line"><input type="checkbox" data-h3="dims"> Cotes</label><button type="button" class="button small secondary" data-h3="measure" title="Deux clics sur la maison : la distance (et la hauteur entre les deux points)">📏 Mesurer</button><span class="segmented"><button type="button" data-h3="view" data-v="top" title="Vue de dessus">Dessus</button><button type="button" data-h3="view" data-v="front" title="Vue de face">Face</button><button type="button" data-h3="view" data-v="side" title="Vue de côté">Côté</button></span><button type="button" class="button small secondary" data-h3="walk">🚶 Visiter</button><button type="button" class="button small secondary" data-h3="home">⌂ Vue d’ensemble</button></div>`;
         box2.appendChild(renderer.domElement);
         const scene = new T.Scene(); scene.background = new T.Color('#dfe8ef'); scene.fog = new T.Fog('#dfe8ef', 60, 220);
         scene.add(new T.HemisphereLight('#ffffff', '#8a7a66', 1.6)); const sun = new T.DirectionalLight('#fff4e0', 2.2); sun.position.set(18, 30, 12); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -30, right: 30, top: 30, bottom: -30, far: 120}); scene.add(sun);
         const ground = new T.Mesh(new T.PlaneGeometry(400, 400), new T.MeshStandardMaterial({color: '#a9b88f', roughness: 1})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.06; ground.receiveShadow = true; scene.add(ground);
         const cam = new T.PerspectiveCamera(50, W() / Hh(), .05, 500);
         let house = new T.Group(); scene.add(house);
-        const opts = {all: true, roof: H.roof?.on !== false, cut: false};
+        const opts = {all: true, roof: H.roof?.on !== false, cut: false, dims: false};
         box2.querySelector('[data-h3="roof"]').checked = opts.roof;
         let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H;
         function rebuild() {
@@ -218,25 +221,48 @@
             floors.forEach(f => house.add(buildFloor(Hcur, f, {cut: opts.cut && f === Hcur.floors[fiCur]})));
             const top = [...Hcur.floors].sort((a, b) => b.level - a.level)[0];
             if (opts.roof && opts.all && top === Hcur.floors[fiCur]) { const r = buildRoof(Hcur, top); if (r) house.add(r); }
-            scene.add(house);
+            if (opts.dims) { const f = Hcur.floors[fiCur], y0 = floorBase(Hcur, f); f.walls.forEach(w => { const L = Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]); if (L < 20) return; const sp = label3d(fmt3(L)); sp.position.set(M((w.a[0] + w.b[0]) / 2), y0 + M(w.h || f.height) + .25, M((w.a[1] + w.b[1]) / 2)); house.add(sp); });
+                const hh = label3d(`↕ ${fmt3(f.height)}`, '#1d5fb8'), xs = f.walls.flatMap(w => [w.a[0], w.b[0]]), zs = f.walls.flatMap(w => [w.a[1], w.b[1]]); if (xs.length) { hh.position.set(M(Math.min(...xs)) - .4, y0 + M(f.height) / 2, M(Math.min(...zs)) - .4); house.add(hh); } }
+            scene.add(house); measureObjs.forEach(o => scene.add(o));
         }
+        const fmt3 = cm => cm >= 100 ? `${(Math.round(cm) / 100).toFixed(2).replace('.', ',')} m` : `${Math.round(cm)} cm`;
+        function label3d(text, color = '#222') { const c = document.createElement('canvas'), x = c.getContext('2d'); x.font = '600 44px system-ui, sans-serif'; const w = Math.ceil(x.measureText(text).width) + 28; c.width = w; c.height = 64;
+            x.font = '600 44px system-ui, sans-serif'; x.fillStyle = '#ffffffe8'; x.beginPath(); x.roundRect?.(0, 0, w, 64, 14); if (!x.roundRect) x.rect(0, 0, w, 64); x.fill(); x.fillStyle = color; x.textBaseline = 'middle'; x.fillText(text, 14, 34);
+            const tex = new T.CanvasTexture(c); tex.colorSpace = T.SRGBColorSpace; const sp = new T.Sprite(new T.SpriteMaterial({map: tex, depthTest: false, transparent: true})); sp.renderOrder = 10; sp.scale.set(w / 64 * .32, .32, 1); return sp; }
+        // 📏 mesurer : deux clics sur la maison
+        let measuring = false, mPts = [], measureObjs = []; const mLabel = document.createElement('div'); mLabel.className = 'h-hs-3dmeasure'; mLabel.hidden = true; box2.appendChild(mLabel);
+        const clearMeasure = () => { measureObjs.forEach(o => { scene.remove(o); o.geometry?.dispose?.(); }); measureObjs = []; mPts = []; mLabel.hidden = true; };
+        const ray = new T.Raycaster(), ndc = new T.Vector2();
+        function pickMeasure(e) {
+            const r = el.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(ndc, cam);
+            const hit = ray.intersectObjects([house, ground], true).find(h => h.object.isMesh); if (!hit) return;
+            if (mPts.length >= 2) clearMeasure();
+            const p = hit.point.clone(); mPts.push(p);
+            const dot = new T.Mesh(new T.SphereGeometry(.04, 12, 8), new T.MeshBasicMaterial({color: '#e0457b', depthTest: false})); dot.renderOrder = 11; dot.position.copy(p); scene.add(dot); measureObjs.push(dot);
+            if (mPts.length === 2) { const [a, b] = mPts, line = new T.Line(new T.BufferGeometry().setFromPoints([a, b]), new T.LineBasicMaterial({color: '#e0457b', depthTest: false})); line.renderOrder = 11; scene.add(line); measureObjs.push(line);
+                const d = a.distanceTo(b) * 100, dh = Math.abs(a.y - b.y) * 100, dxz = Math.hypot(a.x - b.x, a.z - b.z) * 100; mLabel.textContent = `${fmt3(d)}${dh > 2 ? ` · au sol ${fmt3(dxz)} · ↕ ${fmt3(dh)}` : ''}`; mLabel.hidden = false; }
+        }
+        const placeLabel = () => { if (mLabel.hidden || mPts.length < 2) return; const m = mPts[0].clone().add(mPts[1]).multiplyScalar(.5).project(cam), r = el.getBoundingClientRect(); mLabel.style.left = `${(m.x + 1) / 2 * r.width}px`; mLabel.style.top = `${(1 - m.y) / 2 * r.height + 34}px`; mLabel.style.visibility = m.z < 1 ? '' : 'hidden'; };
         function home() { const bb = new T.Box3().setFromObject(house); if (bb.isEmpty()) { target.set(0, 0, 0); dist = 15; return; } bb.getCenter(target); const s = bb.getSize(new T.Vector3()); dist = Math.max(6, Math.max(s.x, s.z) * 1.4); yaw = .8; pitch = .65; walk = false; }
         const place = () => { if (walk) return; cam.position.set(target.x + dist * Math.cos(pitch) * Math.sin(yaw), target.y + dist * Math.sin(pitch), target.z + dist * Math.cos(pitch) * Math.cos(yaw)); cam.lookAt(target); };
         rebuild(); home();
         // souris : tourner, déplacer, approcher ; en visite : regarder
         let dragM = null; const el = renderer.domElement;
         el.addEventListener('contextmenu', e => e.preventDefault());
-        el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); dragM = {x: e.clientX, y: e.clientY, pan: e.button === 2 || e.shiftKey}; });
+        el.addEventListener('pointerdown', e => { el.setPointerCapture(e.pointerId); dragM = {x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY, pan: e.button === 2 || e.shiftKey}; });
         el.addEventListener('pointermove', e => { if (!dragM) return; const dx = e.clientX - dragM.x, dy = e.clientY - dragM.y; dragM.x = e.clientX; dragM.y = e.clientY;
             if (walk) { yaw -= dx * .004; pitch = clamp(pitch - dy * .004, -1.2, 1.2); return; }
             if (dragM.pan) { const right = new T.Vector3(Math.cos(yaw), 0, -Math.sin(yaw)), fwd = new T.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), k = dist * .0018; target.addScaledVector(right, -dx * k).addScaledVector(fwd, dy * k); }
             else { yaw -= dx * .006; pitch = clamp(pitch + dy * .005, .05, 1.5); } });
-        el.addEventListener('pointerup', () => { dragM = null; });
+        el.addEventListener('pointerup', e => { const d = dragM; dragM = null; if (measuring && d && e.button === 0 && Math.hypot(e.clientX - d.x0, e.clientY - d.y0) < 5) pickMeasure(e); });
         el.addEventListener('wheel', e => { e.preventDefault(); if (walk) return; dist = clamp(dist * Math.exp(e.deltaY * .0012), 1.5, 200); }, {passive: false});
         const keys = new Set(); const kd = e => { if (e.target.closest?.('input, textarea')) return; keys.add(e.key.toLowerCase()); }, ku = e => keys.delete(e.key.toLowerCase());
         document.addEventListener('keydown', kd); document.addEventListener('keyup', ku);
         box2.querySelector('.h-hs-3dbar').addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; rebuild(); } });
-        box2.querySelector('.h-hs-3dbar').addEventListener('click', e => { const k = e.target.closest('button')?.dataset.h3; if (k === 'home') home(); if (k === 'walk') { walk = !walk; e.target.textContent = walk ? '✋ Arrêter la visite' : '🚶 Visiter'; if (walk) { const f = Hcur.floors[fiCur], bb = new T.Box3().setFromObject(house), c = bb.getCenter(new T.Vector3()); cam.position.set(c.x, floorBase(Hcur, f) + 1.6, c.z); yaw = Math.PI; pitch = 0; } else home(); } });
+        box2.querySelector('.h-hs-3dbar').addEventListener('click', e => { const bt = e.target.closest('button'), k = bt?.dataset.h3;
+            if (k === 'measure') { measuring = !measuring; bt.classList.toggle('is-on', measuring); el.style.cursor = measuring ? 'crosshair' : ''; if (!measuring) clearMeasure(); return; }
+            if (k === 'view') { walk = false; const v = bt.dataset.v; home(); if (v === 'top') { pitch = 1.5; yaw = 0; } else if (v === 'front') { pitch = .06; yaw = 0; } else { pitch = .06; yaw = Math.PI / 2; } return; }
+            if (k === 'home') home(); if (k === 'walk') { walk = !walk; e.target.textContent = walk ? '✋ Arrêter la visite' : '🚶 Visiter'; if (walk) { const f = Hcur.floors[fiCur], bb = new T.Box3().setFromObject(house), c = bb.getCenter(new T.Vector3()); cam.position.set(c.x, floorBase(Hcur, f) + 1.6, c.z); yaw = Math.PI; pitch = 0; } else home(); } });
         let raf = 0, last = performance.now();
         const loop = now => { const dt = Math.min(.05, (now - last) / 1000); last = now;
             if (walk) { const sp = (keys.has('shift') ? 3.2 : 1.6) * dt, f2 = new T.Vector3(-Math.sin(yaw), 0, -Math.cos(yaw)), r2 = new T.Vector3(Math.cos(yaw), 0, -Math.sin(yaw));
@@ -244,7 +270,7 @@
                 if (keys.has('arrowleft') || keys.has('q') || keys.has('a')) cam.position.addScaledVector(r2, -sp); if (keys.has('arrowright') || keys.has('d')) cam.position.addScaledVector(r2, sp);
                 cam.lookAt(cam.position.x - Math.sin(yaw) * Math.cos(pitch), cam.position.y + Math.sin(pitch), cam.position.z - Math.cos(yaw) * Math.cos(pitch)); }
             else place();
-            renderer.render(scene, cam); raf = requestAnimationFrame(loop); };
+            placeLabel(); renderer.render(scene, cam); raf = requestAnimationFrame(loop); };
         raf = requestAnimationFrame(loop);
         const ro = new ResizeObserver(() => { renderer.setSize(W(), Hh()); cam.aspect = W() / Hh(); cam.updateProjectionMatrix(); }); ro.observe(box2);
         return {update: (H2, fi2) => { Hcur = H2; fiCur = fi2; rebuild(); },

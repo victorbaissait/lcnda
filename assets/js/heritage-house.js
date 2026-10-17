@@ -17,7 +17,12 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const r1 = v => Math.round(v * 10) / 10;
     let seq = 0; const uid = p => p + Date.now().toString(36) + (++seq).toString(36);
-    const fmtLen = cm => cm >= 100 ? `${String(r1(cm / 100)).replace('.', ',')} m` : `${Math.round(cm)} cm`;
+    const fmtLen = cm => cm >= 100 ? `${(Math.round(cm) / 100).toFixed(2).replace('.', ',')} m` : `${String(r1(cm)).replace('.', ',')} cm`;
+    /** « 350 », « 3,5 m », « 35 mm » → centimètres */
+    const parseLen = s => { const m = String(s ?? '').trim().toLowerCase().replace(',', '.').match(/^(\d+(?:\.\d+)?)\s*(m|cm|mm)?$/); if (!m) return NaN; const v = Number(m[1]); return m[2] === 'm' ? v * 100 : m[2] === 'mm' ? v / 10 : v; };
+    /* les aimants (gardés pour toutes les maisons) */
+    const SNAP_KEY = 'genealogie-house-snap', SNAP0 = {grid: true, corner: true, mid: true, wall: true, angle: true, align: true, step: 45};
+    const snapPrefs = () => { try { return {...SNAP0, ...(JSON.parse(localStorage.getItem(SNAP_KEY) || '{}') || {})}; } catch (_) { return {...SNAP0}; } };
 
     /* ═════════ Matériaux et mobilier ═════════ */
     const WALL_MATS = [['platre', 'Plâtre blanc', '#f2efe8'], ['chaux', 'Enduit à la chaux', '#e9e1cf'], ['pierre', 'Pierre apparente', '#b9ac97'], ['brique', 'Brique', '#a9583e'], ['colombage', 'Colombage (pans de bois)', '#efe6cf'],
@@ -142,12 +147,13 @@
                 <span class="segmented h-hs-mode"><button type="button" class="is-active" data-hs-mode="2d">Plan 2D</button><button type="button" data-hs-mode="3d">Vue 3D</button></span>
                 <span class="spacer"></span><span class="muted" data-hs-status></span>
                 <button type="button" class="button small secondary" data-hs-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="button small secondary" data-hs-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button>
+                <details class="h-hs-menu h-hs-snapm"><summary class="button small secondary" title="Aimants et précision">🧲 Aimants</summary><div data-hs-snapbox></div></details>
                 <details class="h-hs-menu"><summary class="button small secondary">📥 Importer</summary><div><button type="button" data-hs-cmd="import3d">🧊 Un objet 3D (OBJ, STL, glTF, GLB)…</button><button type="button" data-hs-cmd="importimg">🖼️ Un objet en image (vue de dessus)…</button><button type="button" data-hs-cmd="importplan">📐 Un plan scanné, à calquer…</button></div></details>
                 <details class="h-hs-menu"><summary class="button small secondary">⤓ Exporter</summary><div><button type="button" data-hs-cmd="png">🖼️ Plan en image (PNG)</button><button type="button" data-hs-cmd="svg">✒️ Plan en SVG</button><button type="button" data-hs-cmd="print">🖨️ Imprimer le plan</button><button type="button" data-hs-cmd="shot3d">📷 Capture de la vue 3D</button></div></details>
                 <button type="button" class="button small" data-hs-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-hs-cmd="close">×</button></header>
             <div class="h-hs-main">
                 <nav class="h-hs-tools">${[['select', '➤', 'Choisir, déplacer (V)'], ['pan', '✋', 'Déplacer la vue (H ou barre d’espace)'], ['room', '⬚', 'Pièce rectangulaire, murs compris (R) : glisser'], ['wall', '▬', 'Mur (W) : un clic par coin, double-clic ou Entrée pour finir'], ['zone', '▱', 'Pièce de forme libre, sans murs (P) : un clic par coin'], ['door', '🚪', 'Porte (D) : clic sur un mur'], ['window', '🪟', 'Fenêtre (F) : clic sur un mur'], ['dim', '📏', 'Cote, mesure (M) : deux clics'], ['text', 'T', 'Texte (T)']].map(([k, i, l]) => `<button type="button" data-hs-tool="${k}" title="${esc(l)}">${i}</button>`).join('')}</nav>
-                <section class="h-hs-stage" data-hs-stage tabindex="-1"><svg data-hs-svg><defs data-hs-defs></defs><g data-hs-world></g></svg><div class="h-hs-3d" data-hs-3d hidden></div><div class="h-hs-hint" data-hs-hint></div></section>
+                <section class="h-hs-stage" data-hs-stage tabindex="-1"><svg data-hs-svg><defs data-hs-defs></defs><g data-hs-world></g></svg><div class="h-hs-3d" data-hs-3d hidden></div><div class="h-hs-hint" data-hs-hint></div><div class="h-hs-pbar" data-hs-pbar><span data-hs-xy>X — · Y —</span><span data-hs-seg></span><input data-hs-num autocomplete="off" spellcheck="false" hidden></div></section>
                 <aside class="h-hs-side"><nav class="segmented h-hs-tabs">${[['props', 'Propriétés'], ['lib', 'Mobilier'], ['floor', 'Étage'], ['house', 'Maison']].map(([k, l]) => `<button type="button" data-hs-tab="${k}">${l}</button>`).join('')}</nav><div class="h-hs-pane" data-hs-pane></div></aside>
             </div></div>`;
         document.body.appendChild(dlg); dlg.showModal();
@@ -166,13 +172,23 @@
             const x0 = Math.min(...pts.map(p => p[0])), x1 = Math.max(...pts.map(p => p[0])), y0 = Math.min(...pts.map(p => p[1])), y1 = Math.max(...pts.map(p => p[1]));
             zoom = clamp(Math.min((r.width - 120) / Math.max(100, x1 - x0), (r.height - 120) / Math.max(100, y1 - y0)), .05, 6); panX = r.width / 2 - (x0 + x1) / 2 * zoom; panY = r.height / 2 - (y0 + y1) / 2 * zoom; applyView(); };
         /* ─── aimants : grille, coins des murs, angles ─── */
+        let snapO = snapPrefs(), guides = [], lastXY = null;
         const snapPt = (x, y, e, from = null) => {
-            if (e?.altKey) return [x, y];
-            const tol = 14 / zoom;
-            for (const w of F().walls) for (const p of [w.a, w.b]) if (Math.hypot(p[0] - x, p[1] - y) < tol) return [p[0], p[1]]; // un coin existant
-            if (from) { const dx = x - from[0], dy = y - from[1], L = Math.hypot(dx, dy), a = Math.atan2(dy, dx), s = Math.round(a / (Math.PI / 4)) * Math.PI / 4; // angles droits et à 45°
-                if (Math.abs(a - s) < .12 || e?.shiftKey) { const g = H.grid || 10, L2 = Math.round(L / g) * g; return [from[0] + Math.cos(s) * L2, from[1] + Math.sin(s) * L2]; } }
-            const g = H.grid || 10; return [Math.round(x / g) * g, Math.round(y / g) * g];
+            guides = [];
+            if (e?.altKey) return [r1(x), r1(y)];
+            const tol = 14 / zoom, f = F(), g = H.grid || 10, gr = v => snapO.grid ? Math.round(v / g) * g : Math.round(v); // sans grille : au centimètre
+            if (snapO.corner) { for (const w of f.walls) for (const p of [w.a, w.b]) if (Math.hypot(p[0] - x, p[1] - y) < tol) { guides.push({pt: p}); return [p[0], p[1]]; } // un coin existant
+                for (const rm of f.rooms) for (const p of rm.pts) if (Math.hypot(p[0] - x, p[1] - y) < tol) { guides.push({pt: p}); return [p[0], p[1]]; } }
+            if (snapO.mid) for (const w of f.walls) { const m = [r1((w.a[0] + w.b[0]) / 2), r1((w.a[1] + w.b[1]) / 2)]; if (Math.hypot(m[0] - x, m[1] - y) < tol) { guides.push({pt: m, mid: true}); return m; } } // le milieu d'un mur
+            if (from && (snapO.angle || e?.shiftKey)) { const dx = x - from[0], dy = y - from[1], L = Math.hypot(dx, dy), a = Math.atan2(dy, dx), st = (e?.shiftKey ? 45 : snapO.step) * Math.PI / 180, s2 = Math.round(a / st) * st; // angles droits, 45°, 15°…
+                if (L > 1 && (Math.abs(a - s2) < Math.min(.12, st / 2.5) || e?.shiftKey)) { const L2 = gr(L), p = [r1(from[0] + Math.cos(s2) * L2), r1(from[1] + Math.sin(s2) * L2)]; guides.push({a: from, b: p, ang: true}); return p; } }
+            if (snapO.wall) { const nw = nearestWall(x, y); if (nw && nw.d < tol * .7) { const w = nw.w, L = wallLen(w) || 1, d0 = Math.round(nw.t * L); guides.push({pt: [nw.px, nw.py]}); return [r1(w.a[0] + (w.b[0] - w.a[0]) / L * d0), r1(w.a[1] + (w.b[1] - w.a[1]) / L * d0)]; } } // sur un mur, au cm
+            let px = gr(x), py = gr(y);
+            if (snapO.align) { let bx = null, by = null; // dans l'alignement d'un coin existant (lignes de rappel)
+                for (const w of f.walls) for (const p of [w.a, w.b]) { if (Math.abs(p[0] - x) < tol && (!bx || Math.abs(p[0] - x) < Math.abs(bx[0] - x))) bx = p; if (Math.abs(p[1] - y) < tol && (!by || Math.abs(p[1] - y) < Math.abs(by[1] - y))) by = p; }
+                if (from) { if (Math.abs(from[0] - x) < tol) bx = from; if (Math.abs(from[1] - y) < tol) by = from; }
+                if (bx) px = bx[0]; if (by) py = by[1]; if (bx) guides.push({a: bx, b: [px, py]}); if (by) guides.push({a: by, b: [px, py]}); }
+            return [px, py];
         };
         const wallLen = w => Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]);
         /** le point d'un mur le plus proche : {w, t (0..1), d (distance)} */
@@ -190,7 +206,7 @@
         function render() {
             if (view3d && !exporting) { view3d.update?.(H, fi); paintSide(); paintFloors(); return; }
             const f = F(), d = defs(); $('[data-hs-defs]').innerHTML = d.html;
-            const g = H.grid || 10, step = g * (zoom < .25 ? 10 : zoom < .7 ? 5 : 1), r = stage.getBoundingClientRect();
+            const g = H.grid || 10, r = stage.getBoundingClientRect(); let step = g; while (step * zoom < 8) step *= step % 2 && step < 10 ? 2 : 5;
             const vx0 = -panX / zoom, vy0 = -panY / zoom, vx1 = vx0 + r.width / zoom, vy1 = vy0 + r.height / zoom;
             let h = '';
             if (!exporting) for (let x = Math.floor(vx0 / step) * step; x < vx1; x += step) h += `<path d="M${x} ${vy0}V${vy1}" class="${x % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
@@ -225,8 +241,8 @@
                 else if (draft.kind === 'dim' && hover) h += dim(last, hover, 0, 'is-live'); }
             if (draft?.kind === 'room' && draft.b) { const [a, b] = [draft.a, draft.b], x = Math.min(a[0], b[0]), y = Math.min(a[1], b[1]), w = Math.abs(b[0] - a[0]), hh = Math.abs(b[1] - a[1]);
                 h += `<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="#2a7de11a" stroke="#2a7de1" stroke-width="${f.wallT}" stroke-opacity=".5"/>` + dim([x, y], [x + w, y], -f.wallT / 2 - 20 / zoom, 'is-live') + dim([x + w, y], [x + w, y + hh], -f.wallT / 2 - 20 / zoom, 'is-live') + `<text x="${x + w / 2}" y="${y + hh / 2}" font-size="${14 / zoom}" class="h-hs-rarea">${String(r1(w * hh / 10000)).replace('.', ',')} m²</text>`; }
-            if (hover && ['wall', 'zone', 'dim', 'room'].includes(tool)) h += `<circle cx="${hover[0]}" cy="${hover[1]}" r="${4 / zoom}" fill="#2a7de1"/>`;
-            world.innerHTML = h; applyView(); paintSide(); paintFloors();
+            if (hover && ['wall', 'zone', 'dim', 'room'].includes(tool)) { h += guides.map(q => q.pt ? `<rect x="${q.pt[0] - 6 / zoom}" y="${q.pt[1] - 6 / zoom}" width="${12 / zoom}" height="${12 / zoom}" class="h-hs-snapmk${q.mid ? ' is-mid' : ''}" transform="${q.mid ? `rotate(45 ${q.pt[0]} ${q.pt[1]})` : ''}"/>` : `<path d="M${q.a[0]} ${q.a[1]}L${q.b[0]} ${q.b[1]}" class="h-hs-guide${q.ang ? ' is-ang' : ''}"/>`).join(''); h += `<circle cx="${hover[0]}" cy="${hover[1]}" r="${4 / zoom}" fill="#2a7de1"/>`; }
+            world.innerHTML = h; applyView(); paintSide(); paintFloors(); if (lastXY) readout(...lastXY);
         }
         /* ─── étages ─── */
         function paintFloors() {
@@ -252,7 +268,7 @@
                 pane.innerHTML = `<div class="h-hs-form"><label>Nom de l’étage<input data-hs-f="name" value="${esc(f.name)}"></label><div class="h-hs-g2c"><label>Niveau<input type="number" data-hs-f="level" value="${f.level}" min="-3" max="9"></label><label>Hauteur sous plafond (cm)<input type="number" data-hs-f="height" value="${f.height}" min="150" max="800"></label></div>
                     <label>Épaisseur des nouveaux murs (cm)<input type="number" data-hs-f="wallT" value="${f.wallT}" min="5" max="120"></label>
                     <label class="checkbox-line"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}> Cotes des murs</label>${below ? `<label class="checkbox-line"><input type="checkbox" data-hs-f="showBelow" ${f.showBelow !== false ? 'checked' : ''}> Voir l’étage du dessous en transparence</label>` : ''}
-                    <label>Pas de la grille (cm)<select data-hs-h="grid">${[5, 10, 25, 50].map(v => `<option ${H.grid === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label>
+                    <div class="h-hs-g2c"><label>Pas de la grille (cm)<select data-hs-h="grid">${[1, 2, 5, 10, 25, 50, 100].map(v => `<option ${H.grid === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label>Épaisseur des planchers (cm)<input type="number" data-hs-h="slab" value="${H.slab ?? 20}" min="0" max="120"></label></div>
                     <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="dupfloor">⧉ Dupliquer cet étage (murs)</button><button type="button" class="button small danger" data-hs-cmd="delfloor">Supprimer l’étage</button></div>
                     <h4>Toit (vue 3D)</h4><label class="checkbox-line"><input type="checkbox" data-hs-roof="on" ${H.roof?.on !== false ? 'checked' : ''}> Un toit à deux pans sur l’étage le plus haut</label><div class="h-hs-g2c"><label>Pente (°)<input type="number" data-hs-roof="pitch" value="${H.roof?.pitch ?? 40}" min="10" max="70"></label><label>Couverture<select data-hs-roof="kind">${opt([['tuiles', 'Tuiles'], ['ardoises', 'Ardoises'], ['chaume', 'Chaume'], ['zinc', 'Zinc']], H.roof?.kind || 'tuiles')}</select></label></div>
                     ${H.ref?.src ? `<h4>Plan scanné</h4><label>Transparence<input type="range" min="5" max="100" value="${Math.round((H.ref.op ?? .45) * 100)}" data-hs-ref="op"></label><div class="h-hs-row"><label class="checkbox-line"><input type="checkbox" data-hs-ref="show" ${H.ref.show !== false ? 'checked' : ''}> Visible</label><button type="button" class="button small secondary" data-hs-cmd="calib">📏 Mettre à l’échelle (2 points)</button><button type="button" class="button small secondary" data-hs-cmd="refmove">✥ Déplacer</button><button type="button" class="button small danger" data-hs-cmd="refdel">Retirer</button></div>` : ''}</div>`;
@@ -275,16 +291,17 @@
             let h = '<div class="h-hs-form">';
             if (sel.type === 'wall') h += `<h4>Mur · ${fmtLen(wallLen(o))}</h4><div class="h-hs-g2c"><label>Longueur (cm)<input type="number" data-hs-p="len" value="${Math.round(wallLen(o))}" min="10"></label><label>Épaisseur (cm)<input type="number" data-hs-p="t" value="${o.t || f.wallT}" min="5" max="150"></label></div>
                 <label>Matériau (côtés)<select data-hs-p="mat">${opt(WALL_MATS.map(m => [m[0], m[1]]), o.mat || 'platre')}</select></label><label>Couleur (papier peint, enduit)<input type="color" data-hs-p="color" value="${esc(o.color || WALL_MATS.find(m => m[0] === (o.mat || 'platre'))[2])}"></label>
+                <label>Angle (°, 0 = vers la droite, 90 = vers le haut)<input type="number" data-hs-p="ang" value="${degOf(o.a, o.b)}" step="0.5"></label><div class="h-hs-g4c"><label>Début X<input type="number" data-hs-p="ax" value="${r1(o.a[0])}" step="1"></label><label>Début Y<input type="number" data-hs-p="ay" value="${r1(o.a[1])}" step="1"></label><label>Fin X<input type="number" data-hs-p="bx" value="${r1(o.b[0])}" step="1"></label><label>Fin Y<input type="number" data-hs-p="by" value="${r1(o.b[1])}" step="1"></label></div>
                 <label>Hauteur (cm, vide = celle de l’étage)<input type="number" data-hs-p="h" value="${o.h || ''}" min="20" max="900"></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="split">✂ Couper en deux</button></div>`;
             if (sel.type === 'opening') h += `<h4>${o.type === 'window' ? 'Fenêtre' : 'Porte'}</h4><div class="h-hs-g2c"><label>Largeur (cm)<input type="number" data-hs-p="w" value="${o.w}" min="30" max="600"></label><label>Hauteur (cm)<input type="number" data-hs-p="h" value="${o.h}" min="30" max="400"></label></div>
                 ${o.type === 'window' ? `<label>Allège (cm du sol)<input type="number" data-hs-p="sill" value="${o.sill ?? 90}" min="0" max="300"></label>` : `<label>Genre<select data-hs-p="style">${opt([['porte', 'Porte'], ['double', 'Porte double'], ['entree', 'Porte d’entrée'], ['arche', 'Passage, arche'], ['grange', 'Porte de grange']], o.style || 'porte')}</select></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="swing">↔ Sens d’ouverture</button><button type="button" class="button small secondary" data-hs-cmd="flip">⇅ Côté</button></div>`}
-                <label>Position sur le mur<input type="range" min="0" max="1000" value="${Math.round(o.pos * 1000)}" data-hs-p="pos"></label>`;
-            if (sel.type === 'room') h += `<h4>Pièce · ${String(r1(area(o.pts) / 10000)).replace('.', ',')} m²</h4><label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" list="hs-rooms"></label><datalist id="hs-rooms">${['Salle commune', 'Cuisine', 'Chambre', 'Chambre des parents', 'Chambre des enfants', 'Salon', 'Salle à manger', 'Bureau', 'Grenier', 'Cave', 'Cellier', 'Étable', 'Écurie', 'Grange', 'Fournil', 'Atelier', 'Boutique', 'Entrée', 'Couloir', 'Salle d’eau', 'Cour', 'Jardin', 'Potager', 'Basse-cour'].map(v => `<option value="${v}">`).join('')}</datalist>
+                <label>Position sur le mur<input type="range" min="0" max="1000" value="${Math.round(o.pos * 1000)}" data-hs-p="pos"></label>${(() => { const w = f.walls.find(q => q.id === o.wall), L = w ? wallLen(w) : 0, s0 = r1(o.pos * L - o.w / 2); return w ? `<div class="h-hs-g2c"><label>Du début du mur (cm)<input type="number" data-hs-p="from" value="${s0}" min="0" step="1"></label><label>Jusqu’à la fin (cm)<input type="number" data-hs-p="to" value="${r1(L - s0 - o.w)}" min="0" step="1"></label></div>` : ''; })()}`;
+            if (sel.type === 'room') h += `<h4>Pièce · ${(area(o.pts) / 10000).toFixed(2).replace('.', ',')} m²</h4><p class="muted">${(() => { const xs = o.pts.map(p => p[0]), ys = o.pts.map(p => p[1]); return `${fmtLen(Math.max(...xs) - Math.min(...xs))} × ${fmtLen(Math.max(...ys) - Math.min(...ys))} hors tout · périmètre ${fmtLen(o.pts.reduce((a, p, i) => a + Math.hypot(o.pts[(i + 1) % o.pts.length][0] - p[0], o.pts[(i + 1) % o.pts.length][1] - p[1]), 0))}`; })()}</p><label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" list="hs-rooms"></label><datalist id="hs-rooms">${['Salle commune', 'Cuisine', 'Chambre', 'Chambre des parents', 'Chambre des enfants', 'Salon', 'Salle à manger', 'Bureau', 'Grenier', 'Cave', 'Cellier', 'Étable', 'Écurie', 'Grange', 'Fournil', 'Atelier', 'Boutique', 'Entrée', 'Couloir', 'Salle d’eau', 'Cour', 'Jardin', 'Potager', 'Basse-cour'].map(v => `<option value="${v}">`).join('')}</datalist>
                 <div class="h-hs-g2c"><label>Sol<select data-hs-p="floor">${opt(FLOOR_MATS.map(m => [m[0], m[1]]), o.floor || 'parquet')}</select></label><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || FLOOR_MATS.find(m => m[0] === (o.floor || 'parquet'))[2])}"></label></div>
                 <h4>🕯 Souvenirs de la pièce</h4><label>Ce qui s’y est passé<textarea data-hs-p="note" rows="4" placeholder="La chambre où est née Marie en 1890 ; la veillée…">${esc(o.note || '')}</textarea></label><label>Époque<input data-hs-p="period" value="${esc(o.period || '')}" placeholder="ex. 1890 – 1920"></label>
                 <ul class="h-hs-people">${(o.people || []).map((p, i) => `<li><button type="button" class="link-button" data-hs-popen="${p.id}">${esc(p.label)}</button><button type="button" class="icon-button" data-hs-rpdel="${i}">×</button></li>`).join('')}</ul><button type="button" class="button small secondary" data-hs-cmd="roompeople">＋ Une personne liée à la pièce…</button>`;
             if (sel.type === 'item') { const L = libOf(o.kind); h += `<h4>${esc(o.name || L?.[1] || 'Objet')}</h4><label>Nom<input data-hs-p="name" value="${esc(o.name || '')}" placeholder="${esc(L?.[1] || '')}"></label><div class="h-hs-g3c"><label>Largeur<input type="number" data-hs-p="w" value="${Math.round(o.w)}" min="5"></label><label>Profondeur<input type="number" data-hs-p="d" value="${Math.round(o.d)}" min="1"></label><label>Hauteur<input type="number" data-hs-p="hgt" value="${Math.round(o.h ?? L?.[5] ?? 80)}" min="1"></label></div>
-                <div class="h-hs-g2c"><label>Rotation (°)<input type="number" data-hs-p="rot" value="${Math.round(o.rot || 0)}" step="15"></label><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || L?.[6] || '#9a8a7a')}"></label></div><label>Hauteur du sol (cm)<input type="number" data-hs-p="elev" value="${o.elev || 0}" min="0" max="400"></label>
+                <div class="h-hs-g2c"><label>Rotation (°)<input type="number" data-hs-p="rot" value="${Math.round(o.rot || 0)}" step="15"></label><label>Couleur<input type="color" data-hs-p="color" value="${esc(o.color || L?.[6] || '#9a8a7a')}"></label></div><div class="h-hs-g3c"><label>X (cm)<input type="number" data-hs-p="x" value="${r1(o.x)}" step="1"></label><label>Y (cm)<input type="number" data-hs-p="y" value="${r1(o.y)}" step="1"></label><label>Du sol (cm)<input type="number" data-hs-p="elev" value="${o.elev || 0}" min="0" max="400"></label></div>
                 <label>Souvenir (objet de famille, histoire)<textarea data-hs-p="note" rows="2">${esc(o.note || '')}</textarea></label><div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="rot90">⟳ 90°</button><button type="button" class="button small secondary" data-hs-cmd="dup">⧉ Dupliquer</button></div>`; }
             if (sel.type === 'label') h += `<h4>Texte</h4><label>Texte<input data-hs-p="text" value="${esc(o.text)}"></label><label>Taille<input type="number" data-hs-p="size" value="${o.size || 24}" min="6" max="300"></label>`;
             if (sel.type === 'dim') h += `<h4>Cote · ${fmtLen(Math.hypot(o.b[0] - o.a[0], o.b[1] - o.a[1]))}</h4>`;
@@ -333,7 +350,7 @@
             if (tool === 'text') { const t2 = prompt('Texte :', ''); if (t2) { const lb = {id: uid('t'), x: p[0], y: p[1], text: t2.slice(0, 200), size: 28}; f.labels.push(lb); sel = {type: 'label', id: lb.id}; setTool('select'); commit('Texte'); } return; }
         });
         svg.addEventListener('pointermove', e => {
-            const [x, y] = toW(e), f = F();
+            const [x, y] = toW(e), f = F(); lastXY = [x, y];
             if (drag?.pan) { panX = drag.px + e.clientX - drag.sx; panY = drag.py + e.clientY - drag.sy; applyView(); render(); return; }
             if (draft?.kind === 'room' && tool === 'room') { draft.b = snapPt(x, y, e); render(); return; } // une pièce qu'on glisse
             if (!drag) { if (['wall', 'zone', 'dim', 'room'].includes(tool)) { hover = snapPt(x, y, e, draft?.pts?.[draft.pts.length - 1]); render(); } return; }
@@ -377,7 +394,53 @@
             render();
         }
         const HINTS = {select: 'Clic : choisir · glisser : déplacer · poignées : allonger un mur, déformer une pièce · ⌫ : supprimer', pan: 'Glisser pour déplacer la vue', room: 'Glisse en diagonale : une pièce rectangulaire avec ses quatre murs (la surface s’affiche)', wall: 'Un clic par coin (aimant : grille, coins, angles droits ; Alt : libre) · double-clic ou Entrée : finir · clic sur le 1er point : fermer (et créer la pièce)', zone: 'Une pièce de forme libre (sans murs) : un clic par coin, double-clic pour finir', door: 'Clic sur un mur : une porte (glisse-la ensuite le long du mur)', window: 'Clic sur un mur : une fenêtre', dim: 'Deux clics : une cote (la distance s’affiche)', text: 'Clic : écrire un texte sur le plan'};
-        function setTool(t) { if (draft && t !== tool) finishDraft(); tool = t; dlg.querySelectorAll('[data-hs-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.hsTool === t)); stage.dataset.tool = t; hint(HINTS[t] || ''); }
+        function setTool(t) { if (draft && t !== tool) finishDraft(); tool = t; dlg.querySelectorAll('[data-hs-tool]').forEach(b => b.classList.toggle('is-active', b.dataset.hsTool === t)); stage.dataset.tool = t; hint(HINTS[t] || ''); numField(); }
+        /* ─── précision : coordonnées, longueur et angle en direct, saisie au clavier ─── */
+        const num = $('[data-hs-num]'), degOf = (a, b) => { const d = Math.atan2(-(b[1] - a[1]), b[0] - a[0]) * 180 / Math.PI; return r1((d + 360) % 360); }; // 0° vers la droite, 90° vers le haut
+        function numField() { const on = ['wall', 'zone', 'dim', 'room'].includes(tool); num.hidden = !on; num.placeholder = tool === 'room' ? 'largeur x profondeur (ex. 420 x 350, 4,2 x 3,5 m) ↵' : 'longueur (cm, ou 3,5 m) puis @angle ↵'; if (!on) num.value = ''; }
+        function readout(x, y) {
+            const p = hover && ['wall', 'zone', 'dim', 'room'].includes(tool) ? hover : [x, y], fmt = v => String(r1(v)).replace('.', ',');
+            $('[data-hs-xy]').textContent = `X ${fmt(p[0])} · Y ${fmt(p[1])} cm`;
+            const last = draft?.pts?.[draft.pts.length - 1] || (draft?.kind === 'room' ? draft.a : null), q = draft?.kind === 'room' ? draft.b : hover;
+            $('[data-hs-seg]').textContent = last && q ? (draft.kind === 'room' ? `${fmt(Math.abs(q[0] - last[0]))} × ${fmt(Math.abs(q[1] - last[1]))} cm` : `↦ ${fmtLen(Math.hypot(q[0] - last[0], q[1] - last[1]))} · ∠ ${String(degOf(last, q)).replace('.', ',')}°`) : '';
+        }
+        /** ce qu'on tape : « 350 », « 3,5 m », « 350 @ 90 » (angle en degrés, 90 = vers le haut) ; une pièce : « 420 x 350 » */
+        function applyNum(raw) {
+            const s2 = String(raw || '').trim().toLowerCase(); if (!s2) { if (draft) finishDraft(); return; }
+            if (tool === 'room') { const [a, b] = s2.split(/\s*[x×*]\s*/), W = parseLen(a), D = parseLen(b ?? a); if (!(W >= 50 && D >= 50)) return toast('Écris largeur x profondeur : 420 x 350 (cm) ou 4,2 x 3,5 m (50 cm au moins).', 'error');
+                const r = stage.getBoundingClientRect(), o = draft?.a || hover || snapPt((r.width / 2 - panX) / zoom - W / 2, (r.height / 2 - panY) / zoom - D / 2, null); draft = null; makeRoomRect(o, [o[0] + W, o[1] + D]); num.value = ''; return; }
+            if (!draft?.pts?.length) return toast('Clique d’abord le point de départ sur le plan, puis tape la longueur.', 'error');
+            const [ls, as] = s2.split(/\s*[@<;]\s*/), L = parseLen(ls); if (!(L > 0)) return toast('Longueur incomprise : 350, 3,5 m, ou 350 @ 90 pour l’angle.', 'error');
+            const last = draft.pts[draft.pts.length - 1], prev = draft.pts[draft.pts.length - 2]; let ang;
+            if (as !== undefined && as !== '') { const deg = Number(as.replace(',', '.').replace('°', '')); if (!Number.isFinite(deg)) return toast('Angle incompris (en degrés : 0 à droite, 90 en haut).', 'error'); ang = -deg * Math.PI / 180; }
+            else if (hover && Math.hypot(hover[0] - last[0], hover[1] - last[1]) > 1) ang = Math.atan2(hover[1] - last[1], hover[0] - last[0]); // dans la direction de la souris
+            else ang = prev ? Math.atan2(last[1] - prev[1], last[0] - prev[0]) : 0;
+            const p = [r1(last[0] + Math.cos(ang) * L), r1(last[1] + Math.sin(ang) * L)]; draft.pts.push(p); hover = null; num.value = '';
+            if (tool === 'dim' && draft.pts.length === 2) finishDraft(); else render(); readout(...p);
+        }
+        num.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); e.stopPropagation(); applyNum(num.value); } else if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); num.value = ''; num.blur(); stage.focus({preventScroll: true}); } });
+        /* ─── 🧲 aimants ─── */
+        function paintSnap() {
+            const box = $('[data-hs-snapbox]'), c = (k, l) => `<label class="checkbox-line"><input type="checkbox" data-hs-snap="${k}" ${snapO[k] ? 'checked' : ''}> ${l}</label>`;
+            box.innerHTML = c('grid', 'Grille') + c('corner', 'Coins des murs et des pièces') + c('mid', 'Milieu des murs') + c('wall', 'Le long des murs (au cm)') + c('align', 'Alignements (lignes de rappel)') + c('angle', 'Angles')
+                + `<label>Pas des angles<select data-hs-snap="step">${[90, 45, 30, 15, 5, 1].map(v => `<option value="${v}" ${snapO.step === v ? 'selected' : ''}>${v}°</option>`).join('')}</select></label><label>Pas de la grille<select data-hs-snapgrid>${[1, 2, 5, 10, 25, 50, 100].map(v => `<option value="${v}" ${H.grid === v ? 'selected' : ''}>${v} cm</option>`).join('')}</select></label>`
+                + '<p class="muted">Alt : aucun aimant (au mm près) · ⇧ : angles à 45° · flèches : décaler ce qui est choisi de 1 cm (⇧ : d’un pas de grille) · en traçant, tape la longueur au clavier.</p>';
+        }
+        $('[data-hs-snapbox]').addEventListener('click', e => e.stopPropagation());
+        $('[data-hs-snapbox]').addEventListener('change', e => { const el = e.target;
+            if (el.matches('[data-hs-snapgrid]')) { H.grid = Number(el.value); commit('Grille'); return; }
+            const k = el.dataset.hsSnap; if (!k) return; snapO[k] = k === 'step' ? Number(el.value) : el.checked; try { localStorage.setItem(SNAP_KEY, JSON.stringify(snapO)); } catch (_) {} });
+        /** décaler au clavier ce qui est choisi */
+        function nudge(dx, dy) {
+            const f = F(); if (!sel) return;
+            const moveCorner = (p, q) => f.walls.forEach(w => ['a', 'b'].forEach(k => { if (w[k][0] === p[0] && w[k][1] === p[1]) w[k] = [...q]; }));
+            if (sel.type === 'item' || sel.type === 'label') { const o = f[sel.type === 'item' ? 'items' : 'labels'].find(q => q.id === sel.id); if (o) { o.x = r1(o.x + dx); o.y = r1(o.y + dy); } }
+            else if (sel.type === 'wall') { const w = f.walls.find(q => q.id === sel.id); if (!w) return; const a = [...w.a], b = [...w.b], na = [r1(a[0] + dx), r1(a[1] + dy)], nb = [r1(b[0] + dx), r1(b[1] + dy)]; moveCorner(a, na); moveCorner(b, nb); w.a = na; w.b = nb; }
+            else if (sel.type === 'room') { const rm = f.rooms.find(q => q.id === sel.id); if (rm) rm.pts = rm.pts.map(p => [r1(p[0] + dx), r1(p[1] + dy)]); }
+            else if (sel.type === 'dim') { const dm = f.dims.find(q => q.id === sel.id); if (dm) { dm.a = [dm.a[0] + dx, dm.a[1] + dy]; dm.b = [dm.b[0] + dx, dm.b[1] + dy]; } }
+            else if (sel.type === 'opening') { const o = f.openings.find(q => q.id === sel.id), w = o && f.walls.find(q => q.id === o.wall); if (!w) return; const L = wallLen(w) || 1, ux = (w.b[0] - w.a[0]) / L, uy = (w.b[1] - w.a[1]) / L, d = (dx * ux + dy * uy) || dx || dy; o.pos = clamp(o.pos + d / L, (o.w / 2 + 2) / L, 1 - (o.w / 2 + 2) / L); }
+            later('Décalé');
+        }
         /* ─── les commandes ─── */
         const placeItem = (base) => { const f = F(), r = stage.getBoundingClientRect(), x = (r.width / 2 - panX) / zoom, y = (r.height / 2 - panY) / zoom, g = H.grid || 10; const it = {id: uid('i'), x: Math.round(x / g) * g, y: Math.round(y / g) * g, rot: 0, ...base}; f.items.push(it); sel = {type: 'item', id: it.id}; setTool('select'); tab = 'props'; commit(`${it.name || libOf(it.kind)?.[1] || 'Objet'} posé`); };
         const pickPerson = title => new Promise(res => { let chosen = null, done = false;
@@ -444,7 +507,7 @@
             try { const r = await post('save_house', {id, name, place_id: placeId, place_text: placeText, period, house: H, thumb: await thumb()}); id = r.result.id; dirty = false; status('✓ Enregistré'); toast('Maison enregistrée (Listes → Maisons de famille).'); ctx.onSaved?.(id); } catch (e) { status(''); toast(e.message, 'error'); }
         }
         async function toggle3d(on) {
-            dlg.querySelectorAll('[data-hs-mode]').forEach(b => b.classList.toggle('is-active', b.dataset.hsMode === (on ? '3d' : '2d')));
+            dlg.querySelectorAll('[data-hs-mode]').forEach(b => b.classList.toggle('is-active', b.dataset.hsMode === (on ? '3d' : '2d'))); $('[data-hs-pbar]').hidden = !!on;
             if (on && !view3d) { if (!ext.house3d) return toast('Vue 3D indisponible.', 'error'); status('Construction de la maison en 3D…'); const box = $('[data-hs-3d]'); box.hidden = false; svg.style.display = 'none';
                 try { view3d = await ext.house3d.mount(box, H, fi); status(''); hint('Glisser : tourner · clic droit ou ⇧ glisser : déplacer · molette : approcher · 🚶 visite : flèches ou Z Q S D'); } catch (e) { box.hidden = true; svg.style.display = ''; status(''); return toast(e.message, 'error'); } }
             if (!on && view3d) { view3d.destroy(); view3d = null; $('[data-hs-3d]').hidden = true; svg.style.display = ''; hint(HINTS[tool]); render(); }
@@ -499,9 +562,14 @@
             if (el.dataset.hsP && sel) {
                 const k = el.dataset.hsP, o = sel.type === 'wall' ? f.walls.find(q => q.id === sel.id) : sel.type === 'room' ? f.rooms.find(q => q.id === sel.id) : sel.type === 'item' ? f.items.find(q => q.id === sel.id) : sel.type === 'opening' ? f.openings.find(q => q.id === sel.id) : sel.type === 'label' ? f.labels.find(q => q.id === sel.id) : null; if (!o) return;
                 if (sel.type === 'wall' && k === 'len') { const L = wallLen(o), n = Number(v); if (n > 5 && L) { const nb = [o.a[0] + (o.b[0] - o.a[0]) / L * n, o.a[1] + (o.b[1] - o.a[1]) / L * n]; f.walls.forEach(q => { if (q !== o) ['a', 'b'].forEach(kk => { if (q[kk][0] === o.b[0] && q[kk][1] === o.b[1]) q[kk] = [...nb]; }); }); o.b = nb; } }
+                else if (sel.type === 'wall' && ['ang', 'ax', 'ay', 'bx', 'by'].includes(k)) { const n = Number(v); if (v === '' || !Number.isFinite(n)) return; const oa = [...o.a], ob = [...o.b];
+                    if (k === 'ang') { const L = wallLen(o); o.b = [r1(o.a[0] + Math.cos(-n * Math.PI / 180) * L), r1(o.a[1] + Math.sin(-n * Math.PI / 180) * L)]; } else { const e2 = k[0] === 'a' ? 'a' : 'b'; o[e2] = k[1] === 'x' ? [n, o[e2][1]] : [o[e2][0], n]; }
+                    f.walls.forEach(q => { if (q !== o) ['a', 'b'].forEach(kk => { if (q[kk][0] === oa[0] && q[kk][1] === oa[1]) q[kk] = [...o.a]; else if (q[kk][0] === ob[0] && q[kk][1] === ob[1]) q[kk] = [...o.b]; }); }); }
+                else if (sel.type === 'opening' && (k === 'from' || k === 'to')) { const w = f.walls.find(q => q.id === o.wall), L = w ? wallLen(w) : 0, n = Number(v); if (!L || v === '' || !Number.isFinite(n)) return; const s0 = k === 'from' ? n : L - n - o.w; o.pos = clamp((s0 + o.w / 2) / L, (o.w / 2) / L, 1 - (o.w / 2) / L); }
                 else if (k === 'pos') o.pos = Number(v) / 1000;
                 else if (k === 'hgt') o.h = Number(v);
                 else if (['t', 'w', 'd', 'h', 'rot', 'sill', 'size', 'elev'].includes(k)) o[k] = v === '' ? undefined : Number(v);
+                else if ((k === 'x' || k === 'y') && v !== '' && Number.isFinite(Number(v))) o[k] = Number(v);
                 else o[k] = v;
                 later('Réglage'); return;
             }
@@ -519,13 +587,15 @@
             if (k === 'enter' && draft) { finishDraft(); return; }
             if ((k === 'delete' || k === 'backspace') && sel) { e.preventDefault(); CMD.del(); return; }
             if (k === 'r' && sel?.type === 'item') { CMD.rot90(); return; }
+            const arr = {arrowleft: [-1, 0], arrowright: [1, 0], arrowup: [0, -1], arrowdown: [0, 1]}[k]; if (arr && sel && !view3d && !mod) { e.preventDefault(); const st = e.shiftKey ? (H.grid || 10) : 1; nudge(arr[0] * st, arr[1] * st); return; }
+            if (/^[0-9]$/.test(e.key) && !mod && !num.hidden && (draft?.pts?.length || tool === 'room')) { e.preventDefault(); num.value = e.key; num.focus(); return; } // taper une longueur
             const t = {v: 'select', h: 'pan', w: 'wall', p: 'zone', d: 'door', f: 'window', m: 'dim', t: 'text', r: 'room'}[k]; if (t && !mod) setTool(t);
         };
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         dlg.addEventListener('cancel', e => { e.preventDefault(); const ae = document.activeElement; if (ae && dlg.contains(ae) && ae.matches('input, textarea, select')) { ae.blur(); stage.focus({preventScroll: true}); return; } if (draft) { draft = null; render(); return; } if (sel) { sel = null; render(); return; } close(); }); // Échap : quitter le champ, le tracé, la sélection, puis fermer
         new ResizeObserver(() => { if (dlg.isConnected && !view3d) render(); }).observe(stage);
-        setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); hist = [snap0()]; hpos = 0; fit(); render();
+        $('.h-hs-snapm').addEventListener('toggle', e => { if (e.target.open) paintSnap(); }); paintSnap(); setTool(H.floors.some(f => f.walls.length) ? 'select' : 'room'); hist = [snap0()]; hpos = 0; fit(); render(); stage.focus({preventScroll: true});
         return {get house() { return H; }, setTool, commit, render, toggle3d, save, cmd: k => CMD[k]?.()};
     }
 
