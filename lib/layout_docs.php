@@ -21,7 +21,7 @@ function layout_src_ok(string $src): bool
 {
     if ($src === '') { return true; }
     if (preg_match('#^media/[A-Za-z0-9._%\-]{1,240}$#', $src)) { return true; }
-    return (bool) preg_match('#^data:image/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$#', $src);
+    return (bool) preg_match('#^data:image/(png|jpeg|webp|gif|svg\+xml);base64,[A-Za-z0-9+/=]+$#', $src);
 }
 
 /** Toutes les adresses d'images du document sont vérifiées ; une mauvaise est vidée */

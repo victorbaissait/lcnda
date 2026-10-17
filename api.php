@@ -330,6 +330,8 @@ try {
         'periodicals' => json_response(periodicals_all($pdo)),
         'diagrams' => json_response(diagrams_all($pdo, $_GET)),
         'vector_docs' => json_response(['docs' => vector_docs_list($pdo)]),
+        'dna' => json_response(dna_all($pdo, $_GET)),
+        'dna_lines' => json_response(dna_lines($pdo, safe_int($_GET['person_id'] ?? 0), safe_int($_GET['depth'] ?? 10))),
         'vector_doc' => json_response(vector_doc_get($pdo, safe_int($_GET['id'] ?? 0))),
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
         'person_names' => json_response(person_names($pdo)),
@@ -9191,6 +9193,16 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'save_periodical' => save_periodical($pdo,$data),
             'save_diagram' => save_diagram($pdo,$data),
             'save_vector_doc' => save_vector_doc($pdo,$data),
+            'save_dna_kit' => save_dna_kit($pdo,$data),
+            'delete_dna_kit' => delete_dna_kit($pdo,$data),
+            'save_dna_match' => save_dna_match($pdo,$data),
+            'import_dna_matches' => import_dna_matches($pdo,$data),
+            'bulk_dna_matches' => bulk_dna_matches($pdo,$data),
+            'delete_dna_match' => delete_dna_match($pdo,$data),
+            'save_dna_segments' => save_dna_segments($pdo,$data),
+            'delete_dna_segments' => delete_dna_segments($pdo,$data),
+            'save_dna_group' => save_dna_group($pdo,$data),
+            'delete_dna_group' => delete_dna_group($pdo,$data),
             'rename_vector_doc' => rename_vector_doc($pdo,$data),
             'delete_vector_doc' => delete_vector_doc($pdo,$data),
             'delete_diagram' => delete_diagram($pdo,$data),
@@ -10158,6 +10170,7 @@ function merge_people(PDO $pdo,array $data): array
     merge_person_references($pdo,$target,$source);
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
     if(function_exists('diagram_links_person'))diagram_links_person($pdo,$source,$target);
+    if(function_exists('dna_links_person'))dna_links_person($pdo,$source,$target);
     // Cases « bloc à afficher » cochées sur l'une ou l'autre fiche
     $flags=array_values(array_filter(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(),'name'),static fn($c)=>preg_match('/^show_[a-z_]+_block$/',(string)$c)));
     foreach($flags as $flag)$pdo->prepare("UPDATE persons SET {$flag}=1 WHERE id=? AND (SELECT {$flag} FROM persons WHERE id=?)=1")->execute([$target,$source]);
@@ -11302,6 +11315,7 @@ function delete_person(PDO $pdo,array $data): array
     }
     if(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // la fiche d'animal (la liste) reste, avec son nom, ses dates
     if(function_exists('diagram_links_person'))diagram_links_person($pdo,$id,0);
+    if(function_exists('dna_links_person'))dna_links_person($pdo,$id,0);
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$id,0); // revues, livres, documentaires, annonces : le lien s'en va
     $pdo->prepare('UPDATE census_members SET person_id=NULL WHERE person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE archive_digest_people SET person_id=NULL WHERE person_id=?')->execute([$id]);

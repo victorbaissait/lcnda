@@ -3244,3 +3244,31 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .vx-shprev{display:flex;justify-content:center}.vx-pres{display:grid;gap:4px;max-height:240px;overflow:auto}
 .h-bp-vecbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 @media (max-width:900px){.vx-main{grid-template-columns:44px 1fr}.vx-panel{position:absolute;right:0;top:0;bottom:0;width:280px;box-shadow:-4px 0 14px rgba(0,0,0,.2)}}
+
+/* ═════════ 🧬 ADN (heritage-dna.js) ═════════ */
+.h-dna-law{border:2px solid #c0392b;background:#fff6f4;padding:14px 18px;margin:0 0 18px;color:#3a1f1a}.h-dna-law h3{margin:0 0 8px;color:#a5281b}.h-dna-law.is-short{padding:10px 14px}.h-dna-law ul{margin:6px 0 6px 18px}.h-dna-law li{margin:4px 0}
+.h-dna-links a{color:#0b57d0;word-break:break-word}.h-dna-ack{margin:12px 0;font-weight:600}
+.h-dna-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:0 0 16px}
+.h-dna-stat{display:grid;gap:2px;text-align:left;border:1px solid var(--line);background:var(--white,#fff);padding:12px;cursor:pointer}.h-dna-stat strong{font-size:26px}.h-dna-stat span{color:var(--muted);font-size:13px}
+.h-dna-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr));gap:14px}.h-dna-grid .card,.h-dna-cards .card{padding:12px 14px}
+.h-dna-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:12px;margin-bottom:18px}
+.h-dna-kit header,.h-dna-group header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}.h-dna-kit h3,.h-dna-group h3{margin:0}
+.h-dna-chart svg{width:100%;height:auto;display:block}
+.h-dna-empty{border:1px dashed var(--line);padding:12px 18px;margin-bottom:16px}
+.h-dna-filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 10px}.h-dna-filters input[type=search]{min-width:240px}.h-dna-filters input[type=number]{width:90px}
+.h-dna-bulk{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#eef5ff;border:1px solid #bcd3f5;padding:6px 8px;margin-bottom:8px}
+.h-dna-table td{vertical-align:top}.h-dna-table .c-cm{text-align:right;white-space:nowrap}
+.h-dna-side{display:inline-block;padding:1px 7px;border-radius:10px;background:color-mix(in srgb,var(--c) 18%,transparent);border:1px solid var(--c);font-size:12px;white-space:nowrap}
+.h-dna-gchip{display:inline-block;margin:1px 3px 1px 0;padding:1px 7px;border-radius:10px;background:var(--c);color:#fff;font-size:12px;white-space:nowrap}
+.h-dna-gpick{display:flex;flex-wrap:wrap;gap:8px}.h-dna-guess{background:#f4f8ee;border:1px solid #cfe0b8;padding:6px 10px}
+.h-dna-warn{background:#fff8e1;border:1px solid #f0d27a;padding:8px 12px}
+.h-dna-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin:10px 0}.h-dna-map label{display:grid;gap:3px;font-size:13px}
+.h-dna-leeds td{min-width:22px}.h-dna-leeds th{font-size:12px}
+.h-dna-chr{width:100%;height:auto;display:block}
+.h-dna-calc{display:flex;align-items:flex-end;gap:12px;margin-bottom:12px}.h-dna-calc input{font-size:20px;width:160px}
+.h-dna-ref tr.is-fit{background:#eef7e8;font-weight:600}
+.h-dna-lines{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(380px,100%),1fr));gap:12px}.h-dna-lines .card{padding:12px 14px}.h-dna-lines ol,.h-dna-xlist{margin:4px 0 4px 18px}
+.h-dna-gen{display:inline-block;min-width:30px;font-size:11px;color:var(--muted)}.h-dna-hap{font-size:12px;background:#eef3ff;padding:0 6px;border-radius:8px}
+.h-dna-learn summary{cursor:pointer;list-style:none}.h-dna-learn summary h3{display:inline;margin:0}.h-dna-learn{padding:12px 16px;margin-bottom:10px}.h-dna-gloss dt{font-weight:700;margin-top:6px}.h-dna-gloss dd{margin:0 0 0 14px}
+.h-dna-settings{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(420px,100%),1fr));gap:14px}.h-dna-settings .card{padding:12px 16px}
+.h-dna-orow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #0000000d}.h-dna-orow button{border:0;background:none;cursor:pointer;padding:0 4px}
