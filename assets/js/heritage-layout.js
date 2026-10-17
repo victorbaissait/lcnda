@@ -628,7 +628,7 @@
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
                 <aside class="ly-panels"><span class="ly-resize" data-ly-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span><div class="ly-ptabs" data-tbg="ly-tabs" data-tbg-label="Onglets du panneau de droite">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
             <div class="ly-status" data-tbg="ly-status" data-tbg-label="Barre du bas"><button type="button" data-ly-cmd="first" title="Première page">⏮</button><button type="button" data-ly-cmd="prev" title="Page précédente">‹</button><span data-tb="page" data-tb-label="Numéro de la page">Page <input type="number" min="1" data-ly-goto> / <b data-ly-total></b></span><button type="button" data-ly-cmd="next" title="Page suivante">›</button><button type="button" data-ly-cmd="last" title="Dernière page">⏭</button>
-                <select data-ly-zoom aria-label="Zoom" data-tb-label="Zoom">${[25, 33, 50, 66, 75, 100, 125, 150, 200, 300, 400].map(z => `<option value="${z / 100}">${z} %</option>`).join('')}<option value="fit">Page entière</option></select><span class="ly-pos" data-ly-pos data-tb-label="Position du pointeur (mm)"></span><span class="ly-msg" data-ly-msg data-tb-label="Messages"></span></div>
+                <select data-ly-zoom aria-label="Zoom" data-tb-label="Zoom">${[25, 33, 50, 66, 75, 100, 125, 150, 200, 300, 400].map(z => `<option value="${z / 100}">${z} %</option>`).join('')}<option value="fit">Page entière</option></select><span class="ly-pos" data-ly-pos data-tb-label="Position du pointeur (mm)"></span><button type="button" class="ly-light" data-ly-light data-ly-cmd="preflight" data-tb-label="Voyant des erreurs (contrôle en direct)" title="Contrôle en direct"><i></i><span>…</span></button><span class="ly-msg" data-ly-msg data-tb-label="Messages"></span></div>
             <style data-ly-css></style>`;
         document.body.appendChild(dl);
         ext.tbApply?.(dl, 'layout');
@@ -689,7 +689,7 @@
             markOverflow();
         }
         /** Un texte qui ne tient pas dans son cadre : petit ⊞ rouge, comme dans InDesign */
-        function markOverflow() { board.querySelectorAll('.ly-text').forEach(el => { const t = el.querySelector('.ly-txt'), bx = el.querySelector('.ly-txtbox'); if (!t || !bx) return; const over = t.scrollHeight > bx.clientHeight + 2 || t.scrollWidth > bx.clientWidth + 2; el.classList.toggle('is-over', over); }); }
+        function markOverflow() { board.querySelectorAll('.ly-text').forEach(el => { const t = el.querySelector('.ly-txt'), bx = el.querySelector('.ly-txtbox'); if (!t || !bx) return; const over = t.scrollHeight > bx.clientHeight + 2 || t.scrollWidth > bx.clientWidth + 2; el.classList.toggle('is-over', over); }); scheduleLight(); }
         function drawSel() {
             board.querySelectorAll('.ly-selbox,.ly-snapline').forEach(x => x.remove());
             const pe = pageEl(); if (!pe) return;
@@ -778,6 +778,10 @@
         let drag = null, pen = null;
         canvas.addEventListener('pointerdown', e => {
             if (e.button === 1 || tool === 'hand' || e.target.closest('.ly-master-banner')) { if (e.target.closest('.ly-master-banner')) return; const sx = canvas.scrollLeft, sy = canvas.scrollTop, x0 = e.clientX, y0 = e.clientY; const mv = ev => { canvas.scrollLeft = sx - (ev.clientX - x0); canvas.scrollTop = sy - (ev.clientY - y0); }; const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); }; addEventListener('pointermove', mv); addEventListener('pointerup', up); return; }
+            { // le petit + rouge d'un texte qui déborde : un clic dessus, puis un clic sur un autre bloc, et la suite y continue (comme dans InDesign)
+                const ov = !linkFrom && e.target.closest('.ly-item.ly-text.is-over:not(.ly-has-next):not(.ly-from-master)');
+                if (ov) { const r = ov.getBoundingClientRect(); if (e.clientX > r.right - 12 && e.clientY > r.bottom - 12) { e.preventDefault(); e.stopPropagation(); sel = [ov.dataset.id]; return exec('chain'); } }
+            }
             if (linkFrom) { // ➜ chaîner : le prochain clic choisit le bloc qui reçoit la suite
                 e.preventDefault(); const el = e.target.closest('.ly-item.ly-text:not(.ly-from-master)'), from = findItem(linkFrom)?.it; linkFrom = null; canvas.classList.remove('is-linking');
                 if (!el || !from) { render(); return msg('Chaînage annulé.'); }
@@ -1100,6 +1104,24 @@
                 }});
         }
         /* ─── ✅ Contrôle avant impression ─── */
+        const textOf = html => plainOf(String(html || '').replace(/<br\s*\/?>|<\/(?:p|div|li|h[1-6])>/gi, '$&\n'));
+        // chaque bloc, ses paragraphes séparés ; les titres courts de la page (le nom d'une fiche) servent de sujet aux lignes sans nom
+        const textBlocks = V => V.pages.flatMap((pg, i) => { const items = pg.items.filter(it => it.type === 'text' && !it.hidden && !it.auto), ctx = items.map(it => plainOf(it.html).trim()).filter(t => t && t.length <= 80);
+            return items.map(it => ({page: i, id: it.id, text: textOf(it.html), ctx})); });
+        /** 🟢🔴 Le voyant du bas, comme dans InDesign : vert s'il n'y a rien à corriger, rouge avec le nombre d'erreurs (texte qui déborde, fait contredit par une fiche) ; un clic ouvre le contrôle */
+        let lightTimer = 0, lightRun = 0;
+        function scheduleLight() { clearTimeout(lightTimer); lightTimer = setTimeout(updateLight, 900); }
+        async function updateLight() {
+            const el = $('[data-ly-light]'); if (!el || !dl.isConnected) return; const run = ++lightRun;
+            let over = 0, factErr = 0, factWarn = 0; const V = resolveDoc(D, {editingId});
+            V.pages.forEach(pg => pg.items.forEach(it => { if (it.type === 'text' && !it.hidden && measureOverflow(V, it, pg.items.filter(o => o !== it))) over++; }));
+            if (ext.factCheck) { try { const f = await ext.factCheck(textBlocks(V)); factErr = f.filter(x => x.lvl === 'err').length; factWarn = f.filter(x => x.lvl === 'warn').length; } catch (_) {} }
+            if (run !== lightRun) return;
+            const n = over + factErr, parts = [over ? `${over} texte${over > 1 ? 's' : ''} qui déborde${over > 1 ? 'nt' : ''}` : '', factErr ? `${factErr} fait${factErr > 1 ? 's' : ''} contredit${factErr > 1 ? 's' : ''} par les fiches` : '', factWarn ? `${factWarn} à vérifier` : ''].filter(Boolean);
+            el.classList.toggle('is-err', n > 0); el.classList.toggle('is-warn', !n && factWarn > 0);
+            el.querySelector('span').textContent = n ? `${n} erreur${n > 1 ? 's' : ''}` : factWarn ? `${factWarn} à vérifier` : 'Aucune erreur';
+            el.title = (parts.length ? parts.join(' · ') : 'Aucun texte ne déborde, aucun fait contredit par les fiches') + '. Clic : le contrôle détaillé.';
+        }
         const fontOkHere = f => { const c = document.createElement('canvas').getContext('2d'), t = 'mmmmmmmmmmlliWWQ@#'; return ['monospace', 'serif', 'sans-serif'].some(base => { c.font = `72px ${base}`; const w0 = c.measureText(t).width; c.font = `72px "${f}", ${base}`; return c.measureText(t).width !== w0; }); };
         async function preflight() {
             if (editingId) stopEditing();
@@ -1131,6 +1153,8 @@
                     }
                 }
             }
+            // 🔎 ce que dit le texte, comparé aux fiches (dates et lieux de naissance, baptême, décès, inhumation, mariage)
+            if (ext.factCheck) { try { issues.push(...await ext.factCheck(textBlocks(V))); } catch (_) { add('info', -1, '', 'Vérification des faits impossible pour le moment (la base ne répond pas).'); } }
             const fonts = new Set([...D.paraStyles, ...D.charStyles].map(x => x.font).filter(Boolean)); D.pages.forEach(p => p.items.forEach(it => { (String(it.html || '').match(/font-family:\s*([^;"]+)/g) || []).forEach(x => fonts.add(x.replace(/font-family:\s*/, '').split(',')[0].replace(/&quot;|['"]/g, '').trim())); }));
             [...fonts].filter(f => f && !/^(serif|sans-serif|monospace|cursive|system-ui)$/i.test(f) && !fontOkHere(f)).forEach(f => add('warn', -1, '', `Police « ${f} » absente de cet ordinateur : une autre la remplace à l’impression.`));
             if (!D.page.bleed) add('info', -1, '', 'Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord.');

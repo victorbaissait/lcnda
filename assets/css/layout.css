@@ -144,3 +144,12 @@
 .ly-sllist{list-style:none;padding:0}.ly-sllist li{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;padding:.35rem 0;border-bottom:1px solid var(--line,#ddd)}.ly-sllist li span{margin-left:auto;display:flex;gap:.3rem}
 .ly-autost{display:grid;grid-template-columns:1fr 1fr;gap:0 .5rem}
 .ly-dynres{max-height:30vh;overflow:auto;margin:.3rem 0}
+
+/* 🟢🔴 voyant du contrôle en direct (barre du bas) */
+.ly-status .ly-light{display:inline-flex;align-items:center;gap:6px;padding:2px 8px;border:1px solid transparent;background:none;color:inherit;cursor:pointer;font-size:12px;white-space:nowrap;border-radius:10px}
+.ly-status .ly-light:hover{border-color:currentColor}
+.ly-light i{width:10px;height:10px;border-radius:50%;background:#1aa34a;box-shadow:0 0 0 2px rgba(26,163,74,.2)}
+.ly-light.is-warn i{background:#e8a317;box-shadow:0 0 0 2px rgba(232,163,23,.25)}
+.ly-light.is-err i{background:#e0102f;box-shadow:0 0 0 2px rgba(224,16,47,.25)}
+.ly-light.is-err span{color:#e0102f;font-weight:700}
+.ly-item.ly-text.is-over:not(.ly-has-next)::after{cursor:copy}

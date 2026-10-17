@@ -118,7 +118,30 @@ function periodical_links_person(PDO $pdo, int $from, int $to): void
 /** Tous les noms de la généalogie (pour l'index des noms d'un livre) */
 function person_names(PDO $pdo): array
 {
+    if (($_GET['facts'] ?? '') === '1') { return person_facts($pdo); }
     return ['persons' => $pdo->query("SELECT id, first_name, last_name FROM persons WHERE trim(COALESCE(last_name,''))<>'' ORDER BY last_name, first_name LIMIT 20000")->fetchAll()];
+}
+
+/** 🔎 Pour vérifier un texte (mise en page) : chaque personne avec ses naissance, baptême, décès, inhumation et mariages (date, année, lieu) */
+function person_facts(PDO $pdo): array
+{
+    $people = [];
+    foreach ($pdo->query("SELECT id, first_name, middle_name, last_name, gender FROM persons WHERE trim(COALESCE(last_name,''))<>'' OR trim(COALESCE(first_name,''))<>'' LIMIT 30000") as $r) {
+        $people[(int) $r['id']] = ['id' => (int) $r['id'], 'f' => (string) $r['first_name'], 'm' => (string) $r['middle_name'], 'l' => (string) $r['last_name'], 'g' => (string) $r['gender'], 'ev' => []];
+    }
+    $q = $pdo->query("SELECT e.person_id, e.family_id, et.gedcom_tag AS tag, e.date_text, e.year, COALESCE(pl.name,'') AS place, f.partner1_id, f.partner2_id
+        FROM events e JOIN event_types et ON et.id=e.event_type_id LEFT JOIN places pl ON pl.id=e.place_id LEFT JOIN families f ON e.scope='family' AND f.id=e.family_id
+        WHERE et.gedcom_tag IN ('BIRT','CHR','BAPM','DEAT','BURI','MARR')");
+    foreach ($q as $r) {
+        $ev = [$r['tag'] === 'CHR' ? 'BAPM' : $r['tag'], (string) $r['date_text'], $r['year'] !== null ? (int) $r['year'] : null, (string) $r['place']];
+        if ($r['person_id'] && isset($people[(int) $r['person_id']])) { $people[(int) $r['person_id']]['ev'][] = $ev; }
+        elseif ($r['family_id']) {
+            foreach ([[(int) $r['partner1_id'], (int) $r['partner2_id']], [(int) $r['partner2_id'], (int) $r['partner1_id']]] as [$a, $b]) {
+                if ($a && isset($people[$a])) { $people[$a]['ev'][] = [...$ev, $b ?: null]; }
+            }
+        }
+    }
+    return ['persons' => array_values($people)];
 }
 
 /** Chercher une partie d'enquête (piste, document, tâche…) à rattacher */
