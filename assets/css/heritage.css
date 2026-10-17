@@ -3097,3 +3097,22 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-pr-pick { max-height: 55vh; overflow: auto; border: 1px solid var(--line, #ddd); border-radius: 8px; padding: .4rem .6rem; }
 .h-pr-pick .is-child { padding-left: 1.6rem; }
 .h-pr-pick label[hidden] { display: none; }
+
+/* Retouche : niveaux, colorisation, actions */
+.h-rt-levels { margin: .4rem 0; border-top: 1px solid var(--line, #ddd); padding-top: .3rem; }
+.h-rt-levels summary { cursor: pointer; }
+.h-rt-levels select { width: 100%; }
+.h-rt-actnew { display: flex; gap: .5rem; flex-wrap: wrap; margin: .5rem 0; }
+.h-rt-actnew input { flex: 1; min-width: 220px; }
+.h-rt-actlist { list-style: none; padding: 0; }
+.h-rt-actlist li { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; padding: .4rem 0; border-bottom: 1px solid var(--line, #ddd); }
+.h-rt-actlist li span { margin-left: auto; display: flex; gap: .3rem; }
+.h-rt-batchbar { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.h-rt-batchbar input[type=search] { flex: 1; min-width: 220px; }
+.h-rt-batchres { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .4rem; max-height: 40vh; overflow: auto; margin: .5rem 0; }
+.h-rt-bpick { display: flex; flex-direction: column; gap: .2rem; border: 2px solid transparent; border-radius: 6px; padding: .2rem; cursor: pointer; }
+.h-rt-bpick.is-on { border-color: #2a7de1; }
+.h-rt-bpick input { position: absolute; opacity: 0; }
+.h-rt-bpick img { width: 100%; height: 80px; object-fit: cover; border-radius: 4px; }
+.h-rt-bpick small { font-size: .72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.h-rt-batchgo { display: flex; gap: .6rem; align-items: center; }
