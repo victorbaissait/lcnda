@@ -604,15 +604,20 @@
     ext.montagePrefs = montagePrefs; ext.montagePrefsDefaults = {MT_KEY, MT_SIZES, MT_QUALITY, MT_FPS, MT_DEF};
 
     // les pistes, de haut en bas : vidéos incrustées (au-dessus = devant), la vidéo principale, les textes, les sons
-    const TRACK_KINDS = {v: ['🖼️', 'Vidéo'], main: ['🎬', 'Vidéo 1'], t: ['🔤', 'Textes'], a: ['🎵', 'Son']};
+    const TRACK_KINDS = {v: ['🎬', 'Vidéo'], main: ['🎬', 'Vidéo 1'], t: ['🔤', 'Textes'], a: ['🎵', 'Son']};
     function montageModel(sources) {
-        return {sources, v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0},
+        return {sources, folders: [], v1: [], v2: [], texts: [], audio: [], look: {...LOOK0}, fx: {volume: 1, clarity: false, noise: false, mute: false, rotate: 0},
             tracks: [{id: 'V2', kind: 'v', name: 'Vidéo 2'}, {id: 'V1', kind: 'main', name: 'Vidéo 1'}, {id: 'T1', kind: 't', name: 'Textes 1'}, {id: 'A1', kind: 'a', name: 'Son 1'}, {id: 'A2', kind: 'a', name: 'Son 2'}]};
     }
     /** Un projet enregistré, remis en état (ce qui manque reprend sa valeur de départ ; les rushes doivent être des médias de la base) */
     function projectModel(d) {
         const P = montageModel([]), arr = v => Array.isArray(v) ? v : [];
-        P.sources = arr(d?.sources).filter(x => x && /^media\//.test(String(x.src || '')) && ['video', 'image', 'audio'].includes(x.kind)).map(x => ({src: String(x.src), title: String(x.title || '').slice(0, 200), kind: x.kind, dur: Number(x.dur) || (x.kind === 'image' ? IMG_MAX : 1), w: Number(x.w) || 0, h: Number(x.h) || 0, ...(x.mediaId ? {mediaId: Number(x.mediaId)} : {})}));
+        P.sources = arr(d?.sources).filter(x => x && /^media\//.test(String(x.src || '')) && ['video', 'image', 'audio'].includes(x.kind)).map(x => ({src: String(x.src), title: String(x.title || '').slice(0, 200), kind: x.kind, dur: Number(x.dur) || (x.kind === 'image' ? IMG_MAX : 1), w: Number(x.w) || 0, h: Number(x.h) || 0, ...(x.mediaId ? {mediaId: Number(x.mediaId)} : {}), ...(typeof x.folder === 'string' && x.folder ? {folder: x.folder.slice(0, 16)} : {})}));
+        // les dossiers des rushes (et leurs sous-dossiers) ; un parent inconnu ou une boucle ramène le dossier à la racine
+        P.folders = arr(d?.folders).filter(f => f && typeof f.id === 'string' && f.id).slice(0, 300).map(f => ({id: f.id.slice(0, 16), name: String(f.name || 'Dossier').slice(0, 80), ...(typeof f.parent === 'string' && f.parent ? {parent: f.parent.slice(0, 16)} : {})}));
+        const fIds = new Set(P.folders.map(f => f.id));
+        P.folders.forEach(f => { if (f.parent && !fIds.has(f.parent)) delete f.parent; const seen = new Set([f.id]); for (let q = f.parent; q; q = P.folders.find(g => g.id === q)?.parent) { if (seen.has(q)) { delete f.parent; break; } seen.add(q); } });
+        P.sources.forEach(x => { if (x.folder && !fIds.has(x.folder)) delete x.folder; });
         const okS = c => c && Number.isInteger(c.s) && c.s >= 0 && c.s < P.sources.length;
         P.v1 = arr(d?.v1).filter(okS); P.v2 = arr(d?.v2).filter(okS); P.audio = arr(d?.audio).filter(okS); P.texts = arr(d?.texts).filter(x => x && typeof x.text === 'string');
         if (arr(d?.tracks).length) P.tracks = arr(d.tracks).filter(t => t && typeof t.id === 'string' && ['v', 'main', 't', 'a'].includes(t.kind)).map(t => ({id: t.id.slice(0, 12), kind: t.kind, name: String(t.name || '').slice(0, 60), ...(t.hidden ? {hidden: true} : {})}));
@@ -689,7 +694,8 @@
         // ce qui joue au moment t
         function active(tt) {
             const L = layoutV1(P), list = [];
-            L.forEach((x, k) => { if (tt >= x.at && tt < x.end) list.push({kind: 'v1', x, k, local: x.c.from + (tt - x.at) * spd(x.c)}); });
+            const mainOff = P.tracks.some(t => t.kind === 'main' && t.hidden); // la piste principale cachée : ni vue ni entendue
+            L.forEach((x, k) => { if (!mainOff && tt >= x.at && tt < x.end) list.push({kind: 'v1', x, k, local: x.c.from + (tt - x.at) * spd(x.c)}); });
             P.v2.forEach(c => { if (tt >= c.at && tt < c.at + clen(c) && !trackHidden(P, trackOf(P, c, 'v2'))) list.push({kind: 'v2', c, local: c.from + (tt - c.at) * spd(c)}); });
             P.audio.forEach(a => { if (tt >= a.at && tt < a.at + clen(a) && !trackHidden(P, trackOf(P, a, 'audio'))) list.push({kind: 'a', c: a, local: a.from + (tt - a.at) * spd(a)}); });
             return {L, list};
@@ -924,7 +930,7 @@
                     <button type="button" class="button small secondary" data-mt-op="chapter" title="Un chapitre commence à la tête de lecture">🔖 Chapitre ici</button>
                 </div>
                 <div class="h-mt-tl" data-mt-tl></div>
-                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéo et photo ↔ vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
+                <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
                 ${ver.html}
                 <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button secondary" data-mt-saveproj title="Garde le montage pour le rouvrir et continuer plus tard (⌘S)">💾 Enregistrer le projet</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM)">📤 Exporter la vidéo…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
@@ -965,7 +971,7 @@
                 : tr.kind === 'v' ? P.v2.filter(c => trackOf(P, c, 'v2') === tr.id).map(c => block('v2', c, c.at, clen(c), P.sources[c.s]?.title || 'Incrustation', 'is-v2')).join('')
                 : tr.kind === 't' ? P.texts.filter(x => trackOf(P, x, 'texts') === tr.id).map(x => block('texts', x, x.at, x.dur, x.text.split('\n')[0] || 'Texte', 'is-text')).join('')
                 : P.audio.filter(a => trackOf(P, a, 'audio') === tr.id).map(a => block('audio', a, a.at, clen(a), (a.detached ? '🔊 ' : '🎵 ') + (P.sources[a.s]?.title || 'Son'), 'is-audio')).join('');
-            const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${tr.kind === 'main' ? '' : `<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button>${tr.kind === 'main' ? '' : `<button type="button" data-mt-tdel="${tr.id}" title="Supprimer cette piste">🗑</button>`}</span></span>${clipsOf(tr)}</div>`;
+            const laneOf = tr => `<div class="h-mt-lane ${tr.hidden ? 'is-hidden' : ''}" data-mt-lane="${tr.id}" data-kind="${tr.kind}"><span class="h-mt-lname"><b title="Double-clic pour renommer" data-mt-tname="${tr.id}">${TRACK_KINDS[tr.kind][0]} ${esc(tr.name)}</b><span class="h-mt-tbtns">${`<button type="button" data-mt-tvis="${tr.id}" title="${tr.hidden ? 'Montrer cette piste' : 'Cacher cette piste (ni vue ni entendue)'}">${tr.hidden ? '🙈' : '👁'}</button>`}<button type="button" data-mt-tup="${tr.id}" title="Monter la piste">↑</button><button type="button" data-mt-tdown="${tr.id}" title="Descendre la piste">↓</button><button type="button" data-mt-tdel="${tr.id}" title="${tr.kind === 'main' ? 'Vider cette piste (elle reste, c’est la piste de base du film)' : 'Supprimer cette piste'}">🗑</button></span></span>${clipsOf(tr)}</div>`;
             const chaps = (P.chapters || []).map(c => `<button type="button" class="h-mt-chap" style="left:${OFF + c.t * pxs}px" data-mt-chapgo="${c.t}" title="🔖 ${esc(c.title)} (${fmt(c.t)})">🔖<span>${esc(c.title)}</span></button>`).join('');
             $('[data-mt-tl]').innerHTML = `<div class="h-mt-tlin" style="width:${W}px" data-dnd-off><div class="h-mt-ruler" data-mt-ruler>${ruler}${chaps}</div><div>
                 ${P.tracks.map(laneOf).join('')}</div>
@@ -1202,6 +1208,12 @@
             const id = d.mtTvis || d.mtTup || d.mtTdown || d.mtTdel, i = trackIdx(P, id), tr = P.tracks[i]; if (!tr) return;
             if (d.mtTvis) { tr.hidden = !tr.hidden; return touch(1); }
             if (d.mtTup || d.mtTdown) { const j = i + (d.mtTup ? -1 : 1); if (j < 0 || j >= P.tracks.length) return; [P.tracks[i], P.tracks[j]] = [P.tracks[j], P.tracks[i]]; return touch(0); }
+            if (d.mtTdel && tr.kind === 'main') { // la piste de base du film reste : on la vide
+                if (!P.v1.length) return toast('Cette piste est déjà vide.');
+                if (!confirm(`Vider la piste « ${tr.name} » (${P.v1.length > 1 ? `ses ${P.v1.length} éléments` : 'son élément'}) ?`)) return;
+                const gone = new Set(P.v1.map(c => c.id)); P.v1.forEach(c => { if (c.detached) { const a = P.audio.find(x => x.id === c.detached); if (a) delete a.detached; } }); P.v1.splice(0);
+                if (sel && gone.has(sel.id)) sel = null; toast(`Piste « ${tr.name} » vidée.`); return touch(1);
+            }
             if (d.mtTdel) {
                 const list = LISTS[tr.kind], mine = list.filter(c => trackOf(P, c, LISTNAME[tr.kind]) === id);
                 if (mine.length && !confirm(`Supprimer la piste « ${tr.name} » et ${mine.length > 1 ? `ses ${mine.length} éléments` : 'son élément'} ?`)) return;
@@ -1234,7 +1246,7 @@
         const pushSource = async (o, kind) => {
             try {
                 const m = kind === 'image' ? await loadImageMeta(o.src) : kind === 'video' ? await loadMeta(o.src) : await new Promise((res, rej) => { const a = document.createElement('audio'); a.preload = 'metadata'; a.onloadedmetadata = () => realDuration(a).then(dur => res({dur}), () => rej(new Error('Son illisible (durée inconnue)'))); a.onerror = () => rej(new Error('Son illisible')); a.src = o.src; });
-                const src = {src: o.src, title: o.title, kind, ...m, ...(o.media?.id ? {mediaId: o.media.id} : {})};
+                const src = {src: o.src, title: o.title, kind, ...m, ...(o.media?.id ? {mediaId: o.media.id} : {}), ...(rushDir ? {folder: rushDir} : {})}; // rangé dans le dossier ouvert
                 if (o.file) Object.defineProperty(src, '_file', {value: o.file, enumerable: false});
                 P.sources.push(src); dirty = true; drawRush(); return P.sources.length - 1;
             } catch (e) { toast(`${o.title || 'Fichier'} : ${e.message}`, 'error'); return null; }
@@ -1251,19 +1263,67 @@
             touch(1); drawRush();
         };
         const usesOf = s => [...P.v1, ...P.v2, ...P.audio].filter(c => c.s === s).length;
-        let rushKey = '';
+        let rushKey = '', rushDir = '', rushSort = 'added';
+        try { rushSort = ['added', 'name', 'kind'].includes(localStorage.getItem('lcnda-mt-rush-sort')) ? localStorage.getItem('lcnda-mt-rush-sort') : 'added'; } catch (_) {}
+        // 📁 les dossiers des rushes, comme dans un logiciel de montage : dossiers, sous-dossiers, glisser pour ranger
+        const folderOf = id => P.folders.find(f => f.id === id);
+        const subOf = id => P.folders.filter(f => (f.parent || '') === (id || ''));
+        const inside = (id, anc) => { for (let q = id; q; q = folderOf(q)?.parent) if (q === anc) return true; return false; }; // id est dans anc (ou anc lui-même)
+        const pathOf = id => { const out = []; for (let q = id; q && out.length < 50; q = folderOf(q)?.parent) out.unshift(folderOf(q)); return out.filter(Boolean); };
+        const countIn = id => P.sources.filter(x => x.folder && inside(x.folder, id)).length;
+        const folderLabel = id => id ? pathOf(id).map(f => f.name).join(' › ') : 'Tous les rushes (racine)';
         function drawRush(force = false) {
             const pane = $('[data-mt-pane="rush"]'); if (!pane) return;
-            const key = P.sources.map((x, i) => x.src + ':' + usesOf(i)).join('|'); if (!force && key === rushKey) return; rushKey = key;
+            if (rushDir && !folderOf(rushDir)) rushDir = '';
+            const key = P.sources.map((x, i) => x.src + ':' + usesOf(i) + ':' + (x.folder || '') + ':' + x.title).join('|') + '#' + JSON.stringify(P.folders) + rushDir + rushSort; if (!force && key === rushKey) return; rushKey = key;
             const thumb = (x, i) => x.kind === 'image' ? `<img src="${esc(x.src)}" alt="" loading="lazy">` : x.kind === 'video' ? `<video src="${esc(x.src)}#t=0.5" muted preload="metadata" playsinline></video><i class="h-mt-rdur">${fmt(x.dur, false)}</i>` : `<span class="h-mt-raudio">🎵</span><i class="h-mt-rdur">${fmt(x.dur, false)}</i>`;
+            const here = P.sources.map((x, i) => [x, i]).filter(([x]) => (x.folder || '') === rushDir);
+            const ord = {video: 0, image: 1, audio: 2}, coll = new Intl.Collator('fr', {numeric: true, sensitivity: 'base'});
+            if (rushSort === 'name') here.sort((a, b) => coll.compare(a[0].title || '', b[0].title || ''));
+            if (rushSort === 'kind') here.sort((a, b) => ord[a[0].kind] - ord[b[0].kind] || coll.compare(a[0].title || '', b[0].title || ''));
+            const dirs = subOf(rushDir).sort((a, b) => coll.compare(a.name, b.name));
+            const crumbs = [`<button type="button" data-mt-rdir="" class="${rushDir ? '' : 'is-cur'}" title="Revenir à la racine (on peut y déposer un rush ou un dossier)">🎞️ Tous</button>`, ...pathOf(rushDir).map(f => `<button type="button" data-mt-rdir="${esc(f.id)}" class="${f.id === rushDir ? 'is-cur' : ''}">${esc(f.name)}</button>`)].join('<span>›</span>');
             pane.innerHTML = `<div class="h-mt-rhead"><h4>🎞️ Rushes</h4><span class="muted">${P.sources.length || 'aucun'}</span></div>
-                <div class="h-mt-rbar"><label class="button small" title="Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois)">📥 Importer<input type="file" multiple accept="video/*,image/*,audio/*" data-mt-rimport hidden></label><button type="button" class="button small secondary" data-mt-rbase>🗂 De la base</button></div>
-                ${P.sources.length ? `<div class="h-mt-rgrid">${P.sources.map((x, i) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
+                <div class="h-mt-rbar"><label class="button small" title="Vidéos, photos ou sons de l’ordinateur (plusieurs à la fois), rangés dans le dossier ouvert">📥 Importer<input type="file" multiple accept="video/*,image/*,audio/*" data-mt-rimport hidden></label><button type="button" class="button small secondary" data-mt-rbase>🗂 De la base</button><button type="button" class="button small secondary" data-mt-rnewdir title="Nouveau dossier dans le dossier ouvert">📁＋ Dossier</button>
+                    <select data-mt-rsort aria-label="Trier les rushes" title="Trier les rushes"><option value="added" ${rushSort === 'added' ? 'selected' : ''}>Ordre d’arrivée</option><option value="name" ${rushSort === 'name' ? 'selected' : ''}>Nom</option><option value="kind" ${rushSort === 'kind' ? 'selected' : ''}>Genre (vidéo, photo, son)</option></select></div>
+                ${P.folders.length || rushDir ? `<nav class="h-mt-rcrumbs" aria-label="Dossier ouvert">${crumbs}</nav>` : ''}
+                ${here.length || dirs.length ? `<div class="h-mt-rgrid">${dirs.map(f => { const n = countIn(f.id), sub = subOf(f.id).length; return `<figure class="h-mt-rush h-mt-rfolder" draggable="true" data-mt-rfolder="${esc(f.id)}" title="Clic pour ouvrir ; glisse un rush ou un dossier dessus pour l’y ranger">
+                    <div class="h-mt-rthumb is-folder"><span>📁</span>${n ? `<b class="h-mt-ruse" title="Rushes dedans (sous-dossiers compris)">${n}</b>` : ''}</div>
+                    <figcaption>${esc(f.name)}</figcaption><small class="h-mt-rfmeta">${n} rush${n > 1 ? 'es' : ''}${sub ? ` · ${sub} dossier${sub > 1 ? 's' : ''}` : ''}</small>
+                    <div class="h-mt-racts"><button type="button" data-mt-rfopen title="Ouvrir ce dossier">Ouvrir</button><button type="button" data-mt-rfmove title="Mettre ce dossier dans un autre">📁</button><button type="button" data-mt-rfren title="Renommer ce dossier">✎</button><button type="button" data-mt-rfdel title="Supprimer ce dossier (ce qu’il contient remonte d’un cran)">🗑</button></div></figure>`; }).join('')}${here.map(([x, i]) => { const n = usesOf(i); return `<figure class="h-mt-rush" draggable="true" data-mt-rush="${i}" title="Glisse-le sur une piste de la frise">
                     <div class="h-mt-rthumb is-${x.kind}">${thumb(x, i)}${n ? `<b class="h-mt-ruse" title="Sur la frise">${n}×</b>` : ''}</div>
                     <figcaption>${esc(x.title || 'Sans titre')}</figcaption>
-                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rren title="Renommer ce rush">✎</button><button type="button" data-mt-rdel title="${n ? `Supprimer ce rush du projet (et ses ${n} passage${n > 1 ? 's' : ''} sur la frise)` : 'Supprimer ce rush du projet'}">🗑</button></div></figure>`; }).join('')}</div>`
-                : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
+                    <div class="h-mt-racts">${x.kind === 'audio' ? `<button type="button" data-mt-rplace="a" title="Sur une piste son, à la tête de lecture">＋ Son</button>` : `<button type="button" data-mt-rplace="v1" title="À la suite dans Vidéo 1">＋ À la suite</button><button type="button" data-mt-rplace="v2" title="En incrustation, à la tête de lecture">＋ Incruster</button>${x.kind === 'video' ? '<button type="button" data-mt-rplace="asound" title="Seulement le son de cette vidéo, sur une piste son">＋ Son seul</button>' : ''}`}<button type="button" data-mt-rmove title="Ranger ce rush dans un dossier">📁</button><button type="button" data-mt-rren title="Renommer ce rush">✎</button><button type="button" data-mt-rdel title="${n ? `Supprimer ce rush du projet (et ses ${n} passage${n > 1 ? 's' : ''} sur la frise)` : 'Supprimer ce rush du projet'}">🗑</button></div></figure>`; }).join('')}</div>`
+                : P.sources.length ? `<p class="muted h-mt-rempty">Ce dossier est vide : glisse un rush sur son nom en haut, ou importe ici.</p>` : `<p class="muted h-mt-rempty">Importe tes vidéos, photos et sons : ils attendent ici, prêts à être glissés sur la frise.</p>`}`;
         }
+        /** Choisir un dossier (pour y ranger un rush ou un dossier) : la liste de tous, en arbre */
+        const pickFolder = (title, skip = null) => new Promise(res => {
+            const rows = [], walk = (id, depth) => subOf(id).sort((a, b) => a.name.localeCompare(b.name, 'fr')).forEach(f => { if (skip && inside(f.id, skip)) return; rows.push([f.id, depth, f.name]); walk(f.id, depth + 1); });
+            walk('', 1);
+            const d = document.createElement('dialog'); d.className = 'h-mt-rpick';
+            d.innerHTML = `<form method="dialog"><h4>${esc(title)}</h4><div class="h-mt-rpicklist"><button value="" type="submit">🎞️ Tous les rushes (racine)</button>${rows.map(([id, dep, n]) => `<button value="${esc(id)}" type="submit" style="padding-left:${dep * 14}px">📁 ${esc(n)}</button>`).join('')}<button value="__new" type="submit">📁＋ Nouveau dossier…</button></div><menu><button value="__cancel" type="submit" class="button small secondary">Annuler</button></menu></form>`;
+            dl.appendChild(d); d.addEventListener('close', () => { const v = d.returnValue; d.remove(); res(v === '__cancel' || v === undefined ? null : v); }, {once: true});
+            d.addEventListener('cancel', () => { d.returnValue = '__cancel'; });
+            d.showModal();
+        });
+        const newFolder = async parent => {
+            const n = ((await A().askText({title: 'Nouveau dossier', message: `Nom du dossier${parent ? ` (dans « ${folderLabel(parent)} »)` : ''} :`, value: '', okLabel: 'Créer'})) || '').trim().slice(0, 80);
+            if (!n) return null;
+            if (P.folders.length >= 300) { toast('300 dossiers au plus.', 'error'); return null; }
+            let id; do id = 'F' + (++uid) + Math.random().toString(36).slice(2, 6); while (folderOf(id));
+            P.folders.push({id, name: n, ...(parent ? {parent} : {})}); dirty = true; return id;
+        };
+        const moveRush = (i, dir) => { const x = P.sources[i]; if (!x) return; if (dir) x.folder = dir; else delete x.folder; dirty = true; drawRush(true); toast(`« ${x.title || 'Rush'} » rangé dans ${dir ? `« ${folderLabel(dir)} »` : 'la racine'}.`); };
+        const moveFolder = (id, dir) => { const f = folderOf(id); if (!f) return; if (dir && inside(dir, id)) return toast('Un dossier ne peut pas aller dans lui-même ni dans un de ses sous-dossiers.', 'error'); if (dir) f.parent = dir; else delete f.parent; dirty = true; drawRush(true); };
+        $('[data-mt-pane="rush"]').addEventListener('change', e => { const so = e.target.closest('[data-mt-rsort]'); if (!so) return; rushSort = so.value; try { localStorage.setItem('lcnda-mt-rush-sort', rushSort); } catch (_) {} drawRush(true); });
+        // ranger en glissant : un rush ou un dossier, déposé sur un dossier ou sur le fil (« Tous », un dossier parent)
+        $('[data-mt-pane="rush"]').addEventListener('dragover', e => { const t = e.target.closest('[data-mt-rfolder],[data-mt-rdir]'); if (!t || !(e.dataTransfer.types.includes('text/x-lcnda-rush') || e.dataTransfer.types.includes('text/x-lcnda-rfolder'))) return; e.preventDefault(); e.dataTransfer.dropEffect = 'move'; t.classList.add('is-drop'); });
+        $('[data-mt-pane="rush"]').addEventListener('dragleave', e => e.target.closest?.('[data-mt-rfolder],[data-mt-rdir]')?.classList.remove('is-drop'));
+        $('[data-mt-pane="rush"]').addEventListener('drop', e => {
+            const t = e.target.closest('[data-mt-rfolder],[data-mt-rdir]'); if (!t) return; e.preventDefault(); t.classList.remove('is-drop');
+            const dir = t.dataset.mtRfolder ?? t.dataset.mtRdir, r = e.dataTransfer.getData('text/x-lcnda-rush'), f = e.dataTransfer.getData('text/x-lcnda-rfolder');
+            if (r !== '') moveRush(Number(r), dir); else if (f && f !== dir) moveFolder(f, dir);
+        });
         $('[data-mt-pane="rush"]').addEventListener('change', async e => {
             const inp = e.target.closest('[data-mt-rimport]'); if (!inp) return;
             const files = [...inp.files]; inp.value = ''; let n = 0;
@@ -1272,8 +1332,25 @@
         });
         $('[data-mt-pane="rush"]').addEventListener('click', async e => {
             if (e.target.closest('[data-mt-rbase]')) { const o = await pickOther('any'); if (o) await pushSource(o, o.kind); return; }
+            if (e.target.closest('[data-mt-rnewdir]')) { if (await newFolder(rushDir)) drawRush(true); return; }
+            const crumb = e.target.closest('[data-mt-rdir]'); if (crumb) { rushDir = crumb.dataset.mtRdir; return drawRush(true); }
+            const fo = e.target.closest('[data-mt-rfolder]');
+            if (fo) {
+                const id = fo.dataset.mtRfolder, f = folderOf(id); if (!f) return;
+                if (e.target.closest('[data-mt-rfren]')) { const n = ((await A().askText({title: 'Renommer le dossier', message: 'Nouveau nom :', value: f.name, okLabel: 'Renommer'})) || '').trim().slice(0, 80); if (n) { f.name = n; dirty = true; drawRush(true); } return; }
+                if (e.target.closest('[data-mt-rfmove]')) { let v = await pickFolder(`Mettre « ${f.name} » dans…`, id); if (v === '__new') v = await newFolder(''); if (v !== null) moveFolder(id, v); return; }
+                if (e.target.closest('[data-mt-rfdel]')) { // ce qu'il contient remonte d'un cran : rien ne quitte le projet
+                    const n = P.sources.filter(x => x.folder === id).length + subOf(id).length;
+                    if (n && !confirm(`Supprimer le dossier « ${f.name} » ? Ce qu’il contient (${n} élément${n > 1 ? 's' : ''}) remonte dans ${f.parent ? `« ${folderOf(f.parent)?.name} »` : 'la racine'}.`)) return;
+                    P.sources.forEach(x => { if (x.folder === id) { if (f.parent) x.folder = f.parent; else delete x.folder; } });
+                    subOf(id).forEach(g => { if (f.parent) g.parent = f.parent; else delete g.parent; });
+                    P.folders.splice(P.folders.indexOf(f), 1); dirty = true; drawRush(true); return;
+                }
+                rushDir = id; return drawRush(true); // un clic sur le dossier l'ouvre
+            }
             const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; const i = Number(fig.dataset.mtRush);
             const pl = e.target.closest('[data-mt-rplace]'); if (pl) return placeRush(i, pl.dataset.mtRplace);
+            if (e.target.closest('[data-mt-rmove]')) { let v = await pickFolder(`Ranger « ${P.sources[i].title || 'ce rush'} » dans…`); if (v === '__new') v = await newFolder(rushDir); if (v !== null) moveRush(i, v); return; }
             if (e.target.closest('[data-mt-rren]')) { const so = P.sources[i], n = await A().askText({title: 'Renommer le rush', message: 'Nouveau nom :', value: so.title || '', okLabel: 'Renommer'}); if (n === null || !n.trim()) return; so.title = n.trim().slice(0, 200); dirty = true; drawRush(true); drawTl(); return; }
             if (e.target.closest('[data-mt-rdel]')) {
                 const so = P.sources[i], n = usesOf(i);
@@ -1288,7 +1365,7 @@
             }
         });
         // glisser un rush sur une piste de la frise
-        $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copy'; });
+        $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fo = e.target.closest('[data-mt-rfolder]'); if (fo) { e.dataTransfer.setData('text/x-lcnda-rfolder', fo.dataset.mtRfolder); e.dataTransfer.effectAllowed = 'move'; return; } const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copyMove'; });
         const tlEl = $('[data-mt-tl]');
         // la piste visée : celle qui est à la hauteur de la souris (même au-dessus d'un morceau, de la tête de lecture ou du nom de la piste)
         const laneAt = (y, target) => [...tlEl.querySelectorAll('[data-mt-lane]')].find(l => { const r = l.getBoundingClientRect(); return y >= r.top && y < r.bottom; }) || target?.closest?.('[data-mt-lane]');

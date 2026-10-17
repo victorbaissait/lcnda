@@ -3303,3 +3303,24 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-pr-tylist{display:flex;flex-direction:column;gap:4px}.h-pr-tylist > button:not(.button){text-align:left;border:2px solid var(--ink,#111);background:var(--white,#fff);padding:6px 8px;cursor:pointer;font:inherit}.h-pr-tylist > button.is-on{background:var(--blue,#0066cc);color:#fff}
 .h-pr-tyfields{max-height:46vh;overflow:auto}.h-pr-tyown{flex:1;min-width:0}
 @media (max-width:760px){.h-pr-types{grid-template-columns:1fr}}
+/* 📁 Montage : dossiers des rushes */
+.h-mt-rbar select{font-size:12px;padding:3px 6px;border-radius:6px;border:1px solid #d5d9df;background:#fff;color:inherit}
+.h-mt-rcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:3px;margin:0 0 8px;font-size:12px}
+.h-mt-rcrumbs span{color:var(--muted,#888)}
+.h-mt-rcrumbs button{border:1px solid transparent;background:none;border-radius:5px;padding:2px 6px;cursor:pointer;color:inherit;font:inherit}
+.h-mt-rcrumbs button:hover{background:#eef3fb}
+.h-mt-rcrumbs button.is-cur{font-weight:700;border-color:#d5d9df;background:#f6f7f9}
+.h-mt-rcrumbs button.is-drop,.h-mt-rfolder.is-drop{outline:2px dashed #2a7de1;outline-offset:1px;background:rgba(42,125,225,.08)}
+.h-mt-rfolder{cursor:pointer}
+.h-mt-rthumb.is-folder{background:linear-gradient(135deg,#f3d27a,#e2ac3f)}
+.h-mt-rthumb.is-folder span{font-size:34px}
+.h-mt-rfmeta{font-size:10.5px;color:var(--muted,#777);padding:0 7px}
+.h-mt-rpick{border:1px solid #d5d9df;border-radius:10px;padding:14px 16px;min-width:280px;max-width:min(440px,calc(100vw - 32px))}
+.h-mt-rpick h4{margin:0 0 8px}
+.h-mt-rpicklist{display:grid;gap:2px;max-height:50vh;overflow:auto}
+.h-mt-rpicklist button{text-align:left;border:0;background:none;border-radius:6px;padding:5px 8px;cursor:pointer;color:inherit;font:inherit}
+.h-mt-rpicklist button:hover{background:#eef3fb}
+.h-mt-rpick menu{display:flex;justify-content:flex-end;margin:10px 0 0;padding:0}
+:root[data-theme="dark"] .h-mt-rbar select,:root[data-theme="dark"] .h-mt-rcrumbs button.is-cur{background:#24272c;border-color:#3a3f46}
+:root[data-theme="dark"] .h-mt-rpick{background:#1d2024;color:#e6e6e6;border-color:#3a3f46}
+:root[data-theme="dark"] .h-mt-rcrumbs button:hover,:root[data-theme="dark"] .h-mt-rpicklist button:hover{background:#2c3440}

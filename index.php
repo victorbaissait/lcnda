@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=209">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=171">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=172">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1119,7 +1119,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-recueils.js?v=14" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=13" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=4" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=31" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=32" defer></script>
 <script src="assets/js/heritage-calendars.js?v=6" defer></script>
 <script src="assets/js/heritage-assemble.js?v=2" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
