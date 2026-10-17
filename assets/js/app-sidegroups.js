@@ -24,7 +24,10 @@
             const groups = (Array.isArray(p.groups) && p.groups.length ? p.groups : defaults()).filter(g => g && typeof g === 'object').map(g => ({id: /^g_\w{1,24}$/.test(g.id || '') && g.id !== MINE ? g.id : gid(), icon: String(g.icon || '📁').slice(0, 4), label: String(g.label || 'Groupe').slice(0, 60),
                 items: (Array.isArray(g.items) ? g.items : []).filter(k => keys.includes(k) && !seen.has(k) && seen.add(k))}));
             // une page ou une liste nouvelle (ou sortie d'un groupe effacé) : dans son groupe prévu, sinon dans le dernier
-            keys.filter(k => !seen.has(k)).forEach(k => { const home = cfg.defaults.find(g => g[3].includes(k)), g = groups.find(x => x.id === home?.[0]) || groups.at(-1); if (g) g.items.push(k); else groups.push({id: 'g_misc', icon: '📁', label: 'Autres', items: [k]}); });
+            keys.filter(k => !seen.has(k)).forEach(k => { const home = cfg.defaults.find(g => g[3].includes(k)), g = groups.find(x => x.id === home?.[0]) || groups.at(-1);
+                if (!g) { groups.push({id: 'g_misc', icon: '📁', label: 'Autres', items: [k]}); return; }
+                const before = home ? home[3].slice(0, home[3].indexOf(k)).reverse().find(x => g.items.includes(x)) : null; // juste après sa voisine de départ
+                if (before) g.items.splice(g.items.indexOf(before) + 1, 0, k); else g.items.push(k); });
             return {enabled: typeof p.enabled === 'boolean' ? p.enabled : cfg.defaultEnabled !== false, groups, open: p.open === 'closed' ? 'closed' : 'open', closedMode: p.closedMode === 'remember' ? 'remember' : 'always', openState: p.openState && typeof p.openState === 'object' ? p.openState : {}};
         }
         const save = p => writeJ(cfg.key, {enabled: p.enabled, groups: p.groups, open: p.open, closedMode: p.closedMode, openState: p.openState});

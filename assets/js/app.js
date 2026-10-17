@@ -483,7 +483,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function listHiddenKeys(){try{return JSON.parse(localStorage.getItem('genealogie-list-hidden')||'[]');}catch(_){return[];}}
     function orderedListTypes(includeHidden=false){const order=savedOrder('genealogie-list-order',defaultListTypes.map(item=>item[0]));const hidden=listHiddenKeys();let visibleIndex=0;return order.filter(value=>includeHidden||!hidden.includes(value)).map((value,index)=>{const item=defaultListTypes.find(row=>row[0]===value);return [item[0],String(includeHidden?index+1:++visibleIndex).padStart(2,'0'),item[2]];});}
     function dynamicMapTypes(){const tags=(state.bootstrap?.mapEventTags||[]);const extra=tags.map(t=>[t.gedcom_tag,t.label]);const all=[['all','Tous les événements'],...extra];return all;}function orderedMapTypes(includeHidden=false){const dynamic=dynamicMapTypes();const keys=dynamic.map(i=>i[0]);const order=savedOrder('genealogie-map-order',keys);const hidden=mapHiddenKeys();return order.filter(value=>includeHidden||value==='all'||!hidden.includes(value)).map((value,index)=>{const item=dynamic.find(r=>r[0]===value)||[value,value];return [item[0],String(index+1).padStart(2,'0'),item[1]];});}
-    const defaultMaintenanceTabs=[['design','01','Apparence'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire'],['faq','12b','FAQ / tuto'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre'],['raccourcis','17','Raccourcis clavier'],['journeys','18','Voyages impossibles'],['scan_inbox','19','Dossier « Scans » surveillé'],['sync','20','Travail à deux'],['ages','21','Âges et écarts'],['harmonize','22','Harmoniser les variantes'],['misplaced','23','Lieux mal placés'],['cousin_vault','24','Copie chez un cousin'],['block_editor','25','Éditeur de blocs'],['board_prefs','25e','Réglages des tableaux'],['pet_prefs','25f','Réglages des animaux'],['montage_prefs','25g','Montage, retouche, mise en page et son'],['dna_prefs','25h','ADN : affichage et réglages'],['viewer_prefs','25i','Visionneuse d’images'],['diagram_kinds','25j','Types de diagrammes'],['widget_editor','25b','Éditeur de widgets'],['stats_editor','25c','Éditeur de statistiques'],['tabs_editor','25d','Éditeur d’onglets'],['htr','26','Reconnaissance d’écriture (HTR)'],['my_lists','27','Éditeur de listes'],['atelier','28','Atelier de recherche']];
+    const defaultMaintenanceTabs=[['design','01','Apparence'],['design_board','01b','Tableau de bord'],['design_sheets','01c','Fiches personnes et animaux'],['issues','02','Incohérences avancées'],['duplicates','03','Fusion de doublons'],['branches','04','Branches'],['bulk','05','Modifications groupées'],['changes','06','Journal des modifications'],['export','07','Export propre'],['import','08','Import'],['labels','09','Étiquettes'],['event_types','10','Types d\'événements'],['calendar_measures','11','Calendrier / mesures'],['help','12','Glossaire'],['faq','12b','FAQ / tuto'],['infos','13','Infos'],['safety','14','Sécurité & comparaison'],['entretien','15','Entretien'],['fusion','16','Fusionner un arbre'],['raccourcis','17','Raccourcis clavier'],['journeys','18','Voyages impossibles'],['scan_inbox','19','Dossier « Scans » surveillé'],['sync','20','Travail à deux'],['ages','21','Âges et écarts'],['harmonize','22','Harmoniser les variantes'],['misplaced','23','Lieux mal placés'],['cousin_vault','24','Copie chez un cousin'],['block_editor','25','Éditeur de blocs'],['board_prefs','25e','Réglages des tableaux'],['pet_prefs','25f','Réglages des animaux'],['montage_prefs','25g','Montage, retouche, mise en page et son'],['dna_prefs','25h','ADN : affichage et réglages'],['viewer_prefs','25i','Visionneuse d’images'],['diagram_kinds','25j','Types de diagrammes'],['widget_editor','25b','Éditeur de widgets'],['stats_editor','25c','Éditeur de statistiques'],['tabs_editor','25d','Éditeur d’onglets'],['htr','26','Reconnaissance d’écriture (HTR)'],['my_lists','27','Éditeur de listes'],['atelier','28','Atelier de recherche']];
     function orderedMaintenanceTabs(){const order=savedOrder('genealogie-maintenance-order',defaultMaintenanceTabs.map(item=>item[0]));return order.map((value,index)=>{const item=defaultMaintenanceTabs.find(row=>row[0]===value);return [item[0],String(index+1).padStart(2,'0'),item[2]];});}
     function mapBackgroundValue(value){return ['offline','color','grid','dark','osmfr','light','minimal','roads','relief','cyclosm','wikimedia','satellite','ohm','esri_topo','esri_street','voyager','osmde','cassini','cassini_royal','etatmajor','nls_6inch','nls_natgrid','cartoweb','swisstopo','swisstopo_dufour','swisstopo_siegfried','ferraris','vandermaelen','popp','frickx','buurtwegen','ign_ortho_1950','ign_scan50_1950','ign_hr_ortho','ign_planv2','nls_25inch','nls_1inch','gsgs3906','london_1940s','usgs_topo','usgs_imagery','ign_es_mtn50','ign_es_pnoa','esri_ocean','esri_natgeo','esri_physical','esri_relief','nasa_modis','nasa_landsat_weld'].includes(value)?value:'bw';}
     function mapBackgroundSelectHtml(mapBg){
@@ -4693,7 +4693,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $('[data-reset]',dialog).addEventListener('click',()=>{rows=defaults.map(r=>({...r,label:rows.find(x=>x.key===r.key)?.label||r.label}));draw();});
         const close=()=>{dialog.close();dialog.remove();};
         $$('[data-close]',dialog).forEach(b=>b.addEventListener('click',close));
-        $('[data-save]',dialog).addEventListener('click',()=>{if(save(rows)===false)return;close();renderSidebar();if(state.module==='maintenance'&&state.maintenanceTab==='design')renderDesignTools();});
+        $('[data-save]',dialog).addEventListener('click',()=>{if(save(rows)===false)return;close();renderSidebar();if(state.module==='maintenance'&&DESIGN_TABS.includes(state.maintenanceTab))renderDesignTools();});
         dialog.addEventListener('cancel',e=>{if(e.target!==dialog)return;e.preventDefault();close();});
         dialog.showModal();
     }
@@ -5362,10 +5362,20 @@ ${backupSectionHtml()}
         });
         dialog.showModal();
     }
+    // Apparence en trois pages : l'apparence générale, le tableau de bord, les fiches des personnes et des animaux.
+    // Une seule page est construite (tous les réglages restent branchés) ; chaque onglet n'en montre que sa part.
+    const DESIGN_TABS=['design','design_board','design_sheets'];
+    const DESIGN_PART_HEAD={design_board:['Tableau de bord','La bibliothèque de widgets et les widgets posés sur le tableau de bord.'],design_sheets:['Fiches personnes et animaux','Les blocs des fiches, leur ordre, les filtres, les générations, la recherche sur internet et les exceptions par fiche.']};
+    function splitDesignPage(){
+        const page=$('#workspace > .page');if(!page)return;const tab=state.maintenanceTab;
+        const partOf=el=>{const t=(el.querySelector(':scope > header .eyebrow, :scope > .eyebrow, header .eyebrow')?.textContent||'').toUpperCase();return /TABLEAU DE BORD/.test(t)?'design_board':/FICHES? (PERSONNES|ANIMAUX)/.test(t)?'design_sheets':'design';};
+        [...page.children].forEach(el=>{if(el.matches('.page-header'))return;el.hidden=partOf(el)!==tab;});
+        const head=DESIGN_PART_HEAD[tab];if(head){const h=page.querySelector('.page-header');if(h){h.querySelector('h2').textContent=head[0];const p=h.querySelector('p');if(p)p.textContent=head[1];}}
+    }
     async function renderDesignTools(token=++state.workspaceToken){
-        if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='design')return;
+        if(token!==state.workspaceToken||state.module!=='maintenance'||!DESIGN_TABS.includes(state.maintenanceTab))return;
         const lockData=await api('lock_candidates');
-        if(token!==state.workspaceToken||state.module!=='maintenance'||state.maintenanceTab!=='design')return;
+        if(token!==state.workspaceToken||state.module!=='maintenance'||!DESIGN_TABS.includes(state.maintenanceTab))return;
         const design=readDesignSettings();
         const menuHidden=menuHiddenKeys();
         const ownTabs=Object.fromEntries(customTabs().map(t=>[t.id,t]));const menuItems=orderedMenuKeys().map(key=>[key,modules[key]?.[1]||(ownTabs[key]?`${ownTabs[key].icon?ownTabs[key].icon+' ':''}${ownTabs[key].name||'Mon onglet'} (mon onglet)`:key),key!=='maintenance',key==='maintenance'||(!menuHidden.includes(key)&&!ownTabs[key]?.hidden)]);
@@ -5409,6 +5419,7 @@ ${backupSectionHtml()}
         </section>
         ${(window.LCNDA_EXT?.designPanelsEnd||[]).map(fn=>{try{return fn();}catch(error){console.error(error);return '';}}).join('')}
         </section>`;
+        splitDesignPage();
         enhanceDesignFormOptions(design);
         reorderDesignPrimaryFields();
         $('#design-form').addEventListener('submit',async event=>{

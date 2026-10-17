@@ -1101,7 +1101,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=392" defer></script>
+<script src="assets/js/app.js?v=393" defer></script>
 <script src="assets/js/app-piece-archives.js?v=6" defer></script>
 <script src="assets/js/app-jeu.js?v=3" defer></script>
 <script src="assets/js/app-chronologie.js?v=3" defer></script>
@@ -1109,9 +1109,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-carte.js?v=4" defer></script>
 <script src="assets/js/app-enquetes.js?v=3" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=3" defer></script>
-<script src="assets/js/app-sidegroups.js?v=4" defer></script>
+<script src="assets/js/app-sidegroups.js?v=5" defer></script>
 <script src="assets/js/app-listes.js?v=6" defer></script>
-<script src="assets/js/app-maintenance.js?v=5" defer></script>
+<script src="assets/js/app-maintenance.js?v=6" defer></script>
 <script src="assets/js/app-recherche.js?v=4" defer></script>
 <script src="assets/js/app-graphiques.js?v=4" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
