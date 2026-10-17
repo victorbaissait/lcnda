@@ -1106,12 +1106,12 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-listes.js?v=3" defer></script>
 <script src="assets/js/app-maintenance.js?v=3" defer></script>
 <script src="assets/js/app-recherche.js?v=3" defer></script>
-<script src="assets/js/app-graphiques.js?v=3" defer></script>
+<script src="assets/js/app-graphiques.js?v=4" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=16" defer></script>
 <script src="assets/js/heritage-tools.js?v=7" defer></script>
 <script src="assets/js/heritage-links.js?v=8" defer></script>
-<script src="assets/js/heritage-more.js?v=84" defer></script>
+<script src="assets/js/heritage-more.js?v=85" defer></script>
 <script src="assets/js/heritage-records.js?v=1" defer></script>
 <script src="assets/js/heritage-research.js?v=18" defer></script>
 <script src="assets/js/heritage-av.js?v=9" defer></script>
@@ -1131,7 +1131,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-employers.js?v=1" defer></script>
 <script src="assets/js/heritage-book.js?v=2" defer></script>
 <script src="assets/js/heritage-layout.js?v=25" defer></script>
-<script src="assets/js/heritage-edittools.js?v=5" defer></script>
+<script src="assets/js/heritage-edittools.js?v=6" defer></script>
 <script src="assets/js/heritage-editorkeys.js?v=3" defer></script>
 <script src="assets/js/heritage-livrets.js?v=5" defer></script>
 <script src="assets/js/heritage-pets.js?v=14" defer></script>
@@ -1146,8 +1146,9 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-periodicals.js?v=4" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=3" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=2" defer></script>
-<script src="assets/js/heritage-vector.js?v=6" defer></script>
+<script src="assets/js/heritage-vector.js?v=7" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=1" defer></script>
+<script src="assets/js/heritage-vector-tree.js?v=1" defer></script>
 <script src="assets/js/heritage-dna.js?v=3" defer></script>
 <script src="assets/js/heritage-press-ads.js?v=3" defer></script>
 <script src="assets/js/museum-viewer.js?v=8" defer></script>

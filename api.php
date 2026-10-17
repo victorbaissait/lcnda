@@ -2322,6 +2322,8 @@ function tree_data(PDO $pdo, int $id): never
         $allIds=array_values(array_unique(array_filter($allIds)));$allMarks=implode(',',array_fill(0,count($allIds),'?'));$stmt=$pdo->prepare(person_select()." WHERE p.id IN ($allMarks)");$stmt->execute($allIds);foreach($stmt->fetchAll() as $person)$people[(int)$person['id']]=$person;
         // en option : les animaux de chacun, posés à côté de leur maître
         if(($_GET['pets']??'')==='1'&&function_exists('pets_by_owner'))foreach(pets_by_owner($pdo,array_keys($people)) as $ownerId=>$list)$people[$ownerId]['pets']=$list;
+        // en option : les lieux de naissance et de décès (arbre décoratif)
+        if(($_GET['places']??'')==='1'&&$people){$pm=implode(',',array_fill(0,count($people),'?'));$ps=$pdo->prepare("SELECT e.person_id,t.gedcom_tag,pl.name FROM events e JOIN event_types t ON t.id=e.event_type_id JOIN places pl ON pl.id=e.place_id WHERE e.person_id IN ($pm) AND t.gedcom_tag IN ('BIRT','DEAT','CHR','BAPM','BURI') ORDER BY e.id");$ps->execute(array_keys($people));foreach($ps->fetchAll() as $r){$pid=(int)$r['person_id'];$k=in_array($r['gedcom_tag'],['BIRT','CHR','BAPM'],true)?'birth_place':'death_place';if(isset($people[$pid])&&empty($people[$pid][$k]))$people[$pid][$k]=(string)$r['name'];}}
     }
     $seen=[];$tree=tree_node_from_maps($id,$depth,$people,$relations,$seen);
     if($mode==='descendants')attach_tree_partners($tree,$partners,$people);

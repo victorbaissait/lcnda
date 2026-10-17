@@ -416,7 +416,7 @@
         ['eyedrop', '💧', 'Pipette (prend la couleur d’un objet)', 'I'], ['hand', '✋', 'Main (déplacer la vue)', 'H'], ['zoom', '🔍', 'Loupe (⌥ : dézoomer)', 'Z']];
     const SWATCHES = ['#000000', '#ffffff', '#7f7f7f', '#d81e1e', '#e6862a', '#f4c430', '#1a8a3a', '#1f4fa3', '#7b3f8c', '#8b5a2b', '#f2c9a8', 'none'];
     const newDoc = () => ({w: 800, h: 600, bg: '#ffffff', grid: 0, snap: false, objs: []});
-    const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o)}; };
+    const cleanDoc = d => { const o = d && typeof d === 'object' ? d : {}; return {w: clamp(num(o.w, 800), 10, 20000), h: clamp(num(o.h, 600), 10, 20000), bg: o.bg === 'transparent' ? 'transparent' : col(o.bg, '#ffffff'), grid: clamp(num(o.grid), 0, 500), snap: !!o.snap, objs: Array.isArray(o.objs) ? o.objs.filter(x => x && typeof x === 'object').slice(0, 20000) : [], ...cleanMap(o), ...(/^[a-z]{2,20}$/.test(o.kind || '') ? {kind: o.kind} : {})}; }; // kind : « tree » pour un arbre décoratif, etc.
     /** les réglages du mode Plan et l'image de référence (vérifiés : nombres, style connu, image sûre) */
     function cleanMap(o) {
         const out = {}, m = o.map;
@@ -436,6 +436,7 @@
     async function openEditor(ctx = {}) {
         let docId = 0, name = 'Mon dessin', doc = newDoc();
         if (ctx.id) { try { const r = await api('vector_doc', {id: ctx.id}); docId = r.id; name = r.name; doc = cleanDoc(r.doc); } catch (e) { return toast(e.message, 'error'); } }
+        else if (ctx.doc) { doc = cleanDoc(ctx.doc); name = String(ctx.name || name).slice(0, 200); } // un dessin tout fait (arbre décoratif, faire-part…)
         let MP = null; const isPen = t => t === 'pen' || t === 'mline' || t === 'mzone';
         let sel = [], tool = 'select', zoom = 1, panX = 0, panY = 0, dirty = false, hist = [], hi = -1, clip = null, penPath = null, nodeSel = null, lastBlazon = '';
         const dlg = document.createElement('dialog'); dlg.className = 'modal is-full vx-dlg'; dlg.dataset.ownClose = '1';

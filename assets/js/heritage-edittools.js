@@ -49,13 +49,16 @@
             remove: id => post('delete_layout_doc', {id}), createLabel: '＋ Nouveau livre', extra: '<button type="button" class="button secondary" data-et-blank>⬜ Livre vide</button><button type="button" class="button secondary" data-et-studio>📐 Ouvrir l’atelier</button>'},
     ];
 
+    // d'autres fichiers ajoutent leur outil (arbre décoratif, transcription, diaporama, plan de maison…) : ext.editToolsExtra.push({key, icon, label, …})
+    ext.editToolsExtra = ext.editToolsExtra || [];
+    const allTools = () => [...TOOLS, ...ext.editToolsExtra];
     ext.lists = ext.lists || {};
     ext.lists.edit_tools = async token => {
         const S = A().state, ws = A().$('#workspace');
         let tab = (() => { try { return localStorage.getItem(TAB_KEY) || 'montage'; } catch (_) { return 'montage'; } })();
-        if (!TOOLS.some(t => t.key === tab)) tab = 'montage';
+        if (!allTools().some(t => t.key === tab)) tab = 'montage';
         let q = '', sort = 'recent', rows = [], loading = false;
-        const tool = () => TOOLS.find(t => t.key === tab);
+        const tool = () => allTools().find(t => t.key === tab);
         const visible = () => {
             const n = s => String(s || '').toLocaleLowerCase('fr').normalize('NFD').replace(/[̀-ͯ]/g, '');
             const words = n(q).split(/\s+/).filter(Boolean);
@@ -80,7 +83,7 @@
         const drawPage = () => {
             const t = tool();
             ws.innerHTML = `<section class="page collection-page h-et-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🛠️ Outils de modification</h2><p>Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet.</p></div></header>
-                <div class="segmented enquetes-tab-toggle h-et-tabs">${TOOLS.map(x => `<button type="button" class="${x.key === tab ? 'is-active ' : ''}enquetes-tab-btn" data-et-tab="${x.key}"><span class="enquetes-tab-icon" aria-hidden="true">${x.icon}</span><span>${esc(x.label)}</span></button>`).join('')}</div>
+                <div class="segmented enquetes-tab-toggle h-et-tabs">${allTools().map(x => `<button type="button" class="${x.key === tab ? 'is-active ' : ''}enquetes-tab-btn" data-et-tab="${x.key}"><span class="enquetes-tab-icon" aria-hidden="true">${x.icon}</span><span>${esc(x.label)}</span></button>`).join('')}</div>
                 <div class="h-et-bar"><input type="search" data-et-q placeholder="Chercher un projet (nom, photo, détails)…" value="${esc(q)}"><label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'Nom A → Z'], ['za', 'Nom Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label><span class="muted" data-et-count></span><span class="spacer"></span><button type="button" class="button" data-et-new>${esc(t.createLabel)}</button>${t.extra || ''}</div>
                 <div data-et-list></div></section>`;
             load();
@@ -94,6 +97,7 @@
                 if (d.etBlank !== undefined) return ext.newLayoutDoc?.('blank', again);
                 if (d.etStudio !== undefined) return ext.openLayoutStudio?.();
                 if (d.etVxblason !== undefined) return ext.openVectorEditor?.({coat: {title: 'Blason'}, onSaved: again, onClose: again});
+                if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
                 if (d.etRen) { const r = rows.find(x => x.id === Number(d.etRen)), n = await A().askText({title: 'Renommer le projet', message: 'Nouveau nom :', value: r?.name || '', okLabel: 'Renommer'}); if (!n?.trim()) return; await t.rename(r.id, n.trim().slice(0, 160)); toast('Projet renommé.'); return load(); }
                 if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!confirm(`Supprimer le projet « ${r?.name} » ? (les photos, vidéos et sons restent dans les Médias)`)) return; await t.remove(r.id); toast('Projet supprimé.'); return load(); }

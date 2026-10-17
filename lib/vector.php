@@ -21,8 +21,8 @@ function vector_ensure(PDO $pdo): void
 function vector_docs_list(PDO $pdo): array
 {
     vector_ensure($pdo);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'thumb' => $r['thumb'], 'updated_at' => $r['updated_at'], 'objects' => (int) $r['n']],
-        $pdo->query("SELECT id, name, thumb, updated_at, COALESCE(json_array_length(doc_json, '$.objs'), 0) AS n FROM vector_docs ORDER BY updated_at DESC")->fetchAll());
+    return array_map(static fn($r) => ['id' => (int) $r['id'], 'name' => $r['name'], 'thumb' => $r['thumb'], 'updated_at' => $r['updated_at'], 'objects' => (int) $r['n'], 'kind' => (string) ($r['kind'] ?? '')],
+        $pdo->query("SELECT id, name, thumb, updated_at, COALESCE(json_array_length(doc_json, '$.objs'), 0) AS n, COALESCE(json_extract(doc_json, '$.kind'), '') AS kind FROM vector_docs ORDER BY updated_at DESC")->fetchAll());
 }
 
 function vector_doc_get(PDO $pdo, int $id): array
