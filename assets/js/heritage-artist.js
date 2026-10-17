@@ -100,11 +100,11 @@
         const prefs = readJ(PREFS, {sort: 'year', workView: 'cards'});
         const load = async () => { items = (await api('artist_items', {person_id: pid})).items || []; };
         try { const d = await api('person', {id: pid}); person = d.person || d; await load(); } catch (e) { return toast(e.message, 'error'); }
-        const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-ar-dlg';
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-ar-dlg';
         dlg.innerHTML = `<div class="h-ar"><header class="h-ar-top"><div><span class="eyebrow">🎨 CATALOGUE DE L’ARTISTE</span><h2>${esc(A().personName ? A().personName(person) : `${person.first_name || ''} ${person.last_name || ''}`)}</h2></div>
-            <nav class="segmented h-ar-tabs" data-ar-tabs></nav><span class="spacer"></span><button type="button" class="button small secondary" data-ar-cmd="keys" title="Jeton Discogs, clé TMDb">🔑 Clés</button><button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer">×</button></header>
+            <nav class="segmented h-ar-tabs" data-ar-tabs></nav><span class="spacer"></span><button type="button" class="button small secondary" data-ar-cmd="keys" title="Jeton Discogs, clé TMDb">🔑 Clés</button>${ext.fullButton ? ext.fullButton('artist') : ''}<button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer">×</button></header>
             <div class="h-ar-body" data-ar-body></div></div>`;
-        document.body.appendChild(dlg); dlg.showModal();
+        document.body.appendChild(dlg); ext.fullInit?.(dlg, 'artist', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const body = dlg.querySelector('[data-ar-body]');
         const close = () => { if (view?.mode === 'edit' && !confirm('Quitter sans enregistrer ?')) return; dlg.close(); dlg.remove(); if (changed) ext.refreshView?.(); };
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (view?.mode === 'edit' && !confirm('Quitter sans enregistrer ?')) return; if (view) { view = null; draft = null; paint(); } else close(); });

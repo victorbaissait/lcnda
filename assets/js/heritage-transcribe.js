@@ -133,13 +133,13 @@
         if (ctx.id) { try { const r = await api('act_transcription', {id: ctx.id}); t = {...t, ...r, data: {...t.data, ...(r.data || {})}}; t.data.view = {...{contrast: 100, bright: 100, invert: false, rot: 0, gray: false}, ...(r.data?.view || {})}; } catch (e) { return toast(e.message, 'error'); } }
         else if (ctx.mediaId) { t.media_id = Number(ctx.mediaId); t.filename = ctx.filename || ''; t.title = ctx.title || ''; t.body = ctx.text || ''; }
         let dirty = false, tool = 'pan', zoom = 1, panX = 0, panY = 0, selZone = null, found = [], imgW = 0, imgH = 0, matchCache = new Map();
-        const dlg = document.createElement('dialog'); dlg.className = 'modal is-full h-tx-dlg';
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-tx-dlg';
         dlg.innerHTML = `<div class="h-tx">
             <header class="h-tx-top"><span class="h-tx-logo">📜</span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="Titre de l’acte (ex. Baptême de Jean Martin, 1790)" value="${esc(t.title)}">
                 <select data-tx="kind" title="Genre d’acte">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="Date de l’acte"><input data-tx="place" placeholder="Lieu" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="Source (AD, cote, vue)" value="${esc(t.source)}" title="Archives, cote, numéro de vue">
                 <span class="spacer"></span><span class="muted h-tx-status" data-tx-status></span>
-                <button type="button" class="button small" data-tx-cmd="save">💾 Enregistrer</button><button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
+                <button type="button" class="button small" data-tx-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
             <div class="h-tx-main">
                 <section class="h-tx-left">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button><span class="h-tx-sep"></span>
@@ -160,7 +160,7 @@
                     <div class="h-tx-found" data-tx-found></div>
                 </section>
             </div></div>`;
-        document.body.appendChild(dlg); dlg.showModal();
+        document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
         const status = s => { $('[data-tx-status]').textContent = s || ''; };
         const touch = () => { dirty = true; status('modifié'); };

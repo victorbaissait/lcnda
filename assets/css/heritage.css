@@ -4293,3 +4293,6 @@ dialog.kn-play-dlg::backdrop{background:#000}
 .h-pp-presets>strong:first-child,.h-bp-sets>strong:first-child{white-space:nowrap;font-size:13px;margin-right:2px}
 .h-bp-sets{padding:6px 10px;border:1.5px dashed var(--line-color,#bbb)}
 .h-hs-floors select[data-hs-ghost]{border:0;background:transparent;font:inherit;font-size:12px;padding:2px 4px;margin-left:4px;cursor:pointer;color:inherit;max-width:170px}
+/* ⛶ en fenêtre (pas en plein écran) : une grande fenêtre, pas une petite boîte */
+.vx-dlg:not(.is-full),.h-hs-dlg:not(.is-full),.h-tx-dlg:not(.is-full),.h-ar-dlg:not(.is-full){width:min(1500px,94vw)!important;max-width:94vw!important;height:90vh!important;max-height:90vh!important}
+.h-full-btn{width:34px;height:34px;padding:0;display:inline-grid;place-items:center;font-size:16px}

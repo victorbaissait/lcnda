@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=220">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=199">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=200">
     <link rel="stylesheet" href="assets/css/layout.css?v=10">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1154,7 +1154,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-periodicals.js?v=4" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=3" defer></script>
 <script src="assets/js/heritage-diagrams.js?v=3" defer></script>
-<script src="assets/js/heritage-vector.js?v=9" defer></script>
+<script src="assets/js/heritage-vector.js?v=10" defer></script>
 <script src="assets/js/heritage-vector-map.js?v=5" defer></script>
 <script src="assets/js/heritage-vector-tree.js?v=5" defer></script>
 <script src="assets/js/heritage-vector-cards.js?v=2" defer></script>
@@ -1163,11 +1163,11 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-faces.js?v=2" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=3" defer></script>
-<script src="assets/js/heritage-artist.js?v=3" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=3" defer></script>
+<script src="assets/js/heritage-artist.js?v=4" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=4" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=5" defer></script>
 <script src="assets/js/heritage-keynote.js?v=4" defer></script>
-<script src="assets/js/heritage-house.js?v=10" defer></script>
+<script src="assets/js/heritage-house.js?v=11" defer></script>
 <script src="assets/js/heritage-house3d.js?v=6" defer></script>
 <script src="assets/js/heritage-house-lib.js?v=2" defer></script>
 <script src="assets/js/heritage-dna.js?v=5" defer></script>
