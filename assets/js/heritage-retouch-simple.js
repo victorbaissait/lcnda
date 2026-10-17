@@ -162,6 +162,7 @@
             <div class="h-rs-paint"><span class="h-rs-modes">${[['adjust', '🎚 Réglages'], ['heal', '🩹 Correcteur de taches'], ['clone', '🧬 Tampon de duplication']].map(([k, l]) => `<button type="button" class="button small ${k === 'adjust' ? '' : 'secondary'}" data-rs-mode="${k}">${l}</button>`).join('')}</span>
                 <label class="h-rs-size" hidden>Taille <input type="range" min="3" max="120" value="18" data-rs-size> <output data-rs-size-out>18</output></label>
                 <button type="button" class="button small secondary" data-rs-undo disabled>↶ Annuler la dernière correction</button>
+                <span class="h-rs-zoom" title="Zoom"><span class="muted">🔍</span><button type="button" class="button small secondary" data-rs-zoom="out" title="Dézoomer (⌘/Ctrl + molette)">−</button><button type="button" class="button small secondary" data-rs-zoom="fit" title="Toute l’image (clic : 100 %)" data-rs-zoom-label>Ajusté</button><button type="button" class="button small secondary" data-rs-zoom="in" title="Zoomer (⌘/Ctrl + molette)">+</button></span>
                 <small class="muted" data-rs-paint-help></small></div>
             <div class="h-rs-body"><div class="h-rs-stage"><canvas data-rs-canvas width="${pw}" height="${ph}"></canvas><span class="h-rs-brush" data-rs-brush hidden></span><span class="h-rs-src" data-rs-src hidden></span><button type="button" class="button small secondary h-rs-before" data-rs-before title="Garder appuyé pour voir l’original">👁 Avant / après</button></div>
             <div class="h-rs-tools"><div class="h-rs-presets">${RT_PRESETS.map(([l], i) => `<button type="button" class="button small secondary" data-rs-preset="${i}">${esc(l)}</button>`).join('')}</div>
@@ -255,8 +256,22 @@
         dlg.addEventListener('input', e => { const k = e.target.dataset.rs; if (k) { st[k] = Number(e.target.value); dlg.querySelector(`[data-rs-out="${k}"]`).textContent = st[k] > 0 ? '+' + st[k] : st[k]; draw(); } });
         dlg.addEventListener('change', e => { const k = e.target.dataset.rsT; if (k) { st[k] = e.target.checked; if (k === 'bw' && st.bw) st.sepia = false; if (k === 'sepia' && st.sepia) st.bw = false; syncControls(); } });
         dlg.querySelectorAll('[data-rs-ch]').forEach(b => b.addEventListener('click', () => { channel = b.dataset.rsCh; selPt = -1; dlg.querySelectorAll('[data-rs-ch]').forEach(x => x.classList.toggle('is-active', x === b)); drawCurve(); }));
-        dlg.querySelectorAll('[data-rs-preset]').forEach(b => b.addEventListener('click', () => { const keep = {bw: false, sepia: false, invert: false, strokes: st.strokes}; Object.assign(st, rtDefault(), keep); RT_PRESETS[Number(b.dataset.rsPreset)][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); } syncControls(); }));
-        dlg.querySelector('[data-rs-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); syncControls(); }); // les corrections de taches ont leur propre « Annuler »
+        // un préréglage cliqué une 2e fois : retour à l'état d'avant (ex. « Négatif → positif » puis à nouveau → le négatif d'origine)
+        let activePreset = -1, beforePreset = null;
+        const markPreset = () => dlg.querySelectorAll('[data-rs-preset]').forEach(x => { const on = Number(x.dataset.rsPreset) === activePreset; x.classList.toggle('secondary', !on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); x.title = on ? 'Cliquer à nouveau pour revenir à l’état d’avant' : ''; });
+        dlg.querySelectorAll('[data-rs-preset]').forEach(b => b.addEventListener('click', () => {
+            const i = Number(b.dataset.rsPreset);
+            if (activePreset === i && beforePreset) { Object.assign(st, JSON.parse(beforePreset), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); return; }
+            if (activePreset < 0) beforePreset = JSON.stringify({...st, strokes: undefined});
+            const keep = {bw: false, sepia: false, invert: false, strokes: st.strokes}; Object.assign(st, rtDefault(), keep); RT_PRESETS[i][1](st); if (st._auto) { delete st._auto; rtAuto(srcData, st); }
+            activePreset = i; markPreset(); syncControls(); }));
+        // zoom : « Ajusté » (toute l'image) ou un facteur ; ⌘/Ctrl + molette ; l'aperçu défile quand il dépasse
+        let zoom = 0; const stage = canvas.parentElement, zLabel = dlg.querySelector('[data-rs-zoom-label]');
+        const fitK = () => { const r = stage.getBoundingClientRect(); return Math.min(1, (r.width - 4) / pw, (r.height - 4) / ph) || 1; };
+        const setZoom = z => { zoom = z ? Math.max(.1, Math.min(8, z)) : 0; stage.classList.toggle('is-zoomed', !!zoom); canvas.style.width = zoom ? `${Math.round(pw * zoom)}px` : ''; canvas.style.height = zoom ? `${Math.round(ph * zoom)}px` : ''; zLabel.textContent = zoom ? `${Math.round(zoom * 100 / scale)} %` : 'Ajusté'; };
+        dlg.querySelectorAll('[data-rs-zoom]').forEach(b => b.addEventListener('click', () => { const z = zoom || fitK(), k = b.dataset.rsZoom; setZoom(k === 'in' ? z * 1.25 : k === 'out' ? (z / 1.25 <= fitK() ? 0 : z / 1.25) : (zoom ? 0 : scale)); }));
+        stage.addEventListener('wheel', e => { if (!e.ctrlKey && !e.metaKey) return; e.preventDefault(); const z = zoom || fitK(); setZoom(e.deltaY < 0 ? z * 1.12 : (z / 1.12 <= fitK() ? 0 : z / 1.12)); }, {passive: false});
+        dlg.querySelector('[data-rs-reset]').addEventListener('click', () => { Object.assign(st, rtDefault(), {strokes: st.strokes}); activePreset = -1; markPreset(); syncControls(); }); // les corrections de taches ont leur propre « Annuler »
         const before = dlg.querySelector('[data-rs-before]');
         const setBefore = v => { showBefore = v; before.classList.toggle('is-active', v); draw(); };
         before.addEventListener('pointerdown', () => setBefore(true));
