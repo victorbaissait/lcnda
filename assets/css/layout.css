@@ -128,3 +128,19 @@
 .ly-fs-swap:hover,.ly-fs-none:hover{opacity:1;color:var(--ly-acc)}
 .ly-fs input[data-ly-fspick]{position:absolute;left:0;top:0;width:20px;height:20px;opacity:0;pointer-events:none;border:0;padding:0}
 .ly-thumbs.is-facing > .ly-tspread:first-child{justify-self:stretch;justify-content:flex-end}
+/* texte chaîné, sommaire / index, objets dynamiques */
+.ly-item.ly-has-next::before{content:'➜';position:absolute;right:-7px;bottom:-7px;width:13px;height:13px;font:700 9px/13px system-ui;text-align:center;color:#fff;background:#2f6bff;border:1px solid #fff;border-radius:2px;z-index:2}
+.ly-item.ly-follow::before{content:'↳';position:absolute;left:-7px;top:-7px;width:13px;height:13px;font:700 9px/13px system-ui;text-align:center;color:#fff;background:#2f6bff;border:1px solid #fff;border-radius:2px;z-index:2}
+.ly-item.ly-auto{outline:1px dashed #9b6bff}
+.ly-item.ly-dyn{outline:1px dashed #12a37a}
+.ly-board.no-guides .ly-item.ly-has-next::before,.ly-board.no-guides .ly-item.ly-follow::before{display:none}
+.ly-board.no-guides .ly-item.ly-auto,.ly-board.no-guides .ly-item.ly-dyn{outline:none}
+.ly-board.is-linking .ly-item.ly-text{cursor:copy;outline:2px solid rgba(47,107,255,.6)}
+.ly-board.is-linking .ly-item.ly-text:hover{outline:3px solid #2f6bff;background:rgba(47,107,255,.06)}
+.ly-preflight{list-style:none;padding:0;margin:.5rem 0;max-height:60vh;overflow:auto}
+.ly-preflight li{padding:.35rem .5rem;border-bottom:1px solid var(--line,#ddd)}
+.ly-preflight li.is-err{background:rgba(224,16,47,.06)}
+.ly-preflight li.is-warn{background:rgba(245,166,35,.08)}
+.ly-sllist{list-style:none;padding:0}.ly-sllist li{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;padding:.35rem 0;border-bottom:1px solid var(--line,#ddd)}.ly-sllist li span{margin-left:auto;display:flex;gap:.3rem}
+.ly-autost{display:grid;grid-template-columns:1fr 1fr;gap:0 .5rem}
+.ly-dynres{max-height:30vh;overflow:auto;margin:.3rem 0}

@@ -207,6 +207,12 @@
         if (Array.isArray(it.points)) o.points = it.points.slice(0, 2000).filter(p => Array.isArray(p)).map(p => [clamp(p[0], -10, 10), clamp(p[1], -10, 10)]);
         if (it.type === 'compound') { o.op = ['union', 'subtract', 'intersect', 'exclude'].includes(it.op) ? it.op : 'union'; o.parts = (Array.isArray(it.parts) ? it.parts : []).slice(0, 40).map(cleanItem).filter(p => p && p.type !== 'text' && p.type !== 'compound'); }
         if (typeof it.link === 'string' && /^(https?:\/\/|mailto:)/i.test(it.link)) o.link = it.link.slice(0, 1000);
+        // texte chaîné, sommaire et index automatiques, objets dynamiques (média de l'app, texte d'une fiche)
+        if (it.type === 'text' && /^[a-z0-9_-]{1,40}$/i.test(String(it.next || ''))) o.next = it.next;
+        if (it.type === 'text' && ['toc', 'index'].includes(it.auto)) { o.auto = it.auto; o.autoStyles = (Array.isArray(it.autoStyles) ? it.autoStyles : []).filter(x => /^[a-z0-9_-]{1,40}$/i.test(String(x))).slice(0, 12); o.autoPs = /^[a-z0-9_-]{1,40}$/i.test(String(it.autoPs || '')) ? it.autoPs : 'ps-body'; o.autoDots = it.autoDots !== false;
+            if (Array.isArray(it.names)) o.names = it.names.filter(n => typeof n === 'string').slice(0, 20000).map(n => n.slice(0, 160)); }
+        if (Number(it.mediaId) > 0) o.mediaId = Math.round(Number(it.mediaId));
+        if (it.type === 'text' && it.dyn?.type === 'person' && Number(it.dyn.id) > 0) o.dyn = {type: 'person', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).filter(f => DYN_FIELDS.some(d => d[0] === f)), at: String(it.dyn.at || '').slice(0, 40)};
         return o;
     }
 
@@ -313,7 +319,7 @@
     const isLeftPage = (doc, i) => doc.page.facing && (i + (doc.page.start || 1)) % 2 === 0;
     const pageMargins = (doc, i) => { const m = doc.page.margin, left = isLeftPage(doc, i); return {t: m.t, b: m.b, l: doc.page.facing ? (left ? m.o : m.i) : m.i, r: doc.page.facing ? (left ? m.i : m.o) : m.o}; };
     const layerOf = (doc, it) => doc.layers.find(l => l.id === it.layer) || doc.layers[0];
-    function tokens(html, ctx) { return html.replace(/\{page\}/g, String(ctx.pageNo)).replace(/\{pages\}/g, String(ctx.pages)).replace(/\{titre\}/g, esc(ctx.title || '')).replace(/\{date\}/g, new Date().toLocaleDateString('fr-FR')); }
+    function tokens(html, ctx) { return html.replace(/\{chapitre\}/g, esc(ctx.chapter || '')).replace(/\{page\}/g, String(ctx.pageNo)).replace(/\{pages\}/g, String(ctx.pages)).replace(/\{titre\}/g, esc(ctx.title || '')).replace(/\{date\}/g, new Date().toLocaleDateString('fr-FR')); }
     /** Habillage : les objets voisins repoussent le texte (zones taillées en flotteurs CSS shape-outside, d'un côté ou des deux) */
     function wrapFloats(doc, it, others) {
         const ins = it.inset || 0, W = px(it.w) - px(ins) * 2, H = px(it.h) - px(ins) * 2; if (W <= 4 || H <= 4) return '';
@@ -354,7 +360,7 @@
         if (it.feather > 0) fx.push(`blur(${px(it.feather) / 3}px)`);
         const tr = `rotate(${it.rot || 0}deg)${it.flipX || it.flipY ? ` scale(${it.flipX ? -1 : 1},${it.flipY ? -1 : 1})` : ''}`;
         const style = `left:${px(it.x)}px;top:${px(it.y)}px;width:${w}px;height:${h}px;transform:${tr};opacity:${clamp(it.opacity ?? 100, 0, 100) / 100}${it.blend && it.blend !== 'normal' ? `;mix-blend-mode:${it.blend}` : ''}${fx.length ? `;filter:${fx.join(' ')}` : ''}`;
-        const attrs = `class="ly-item ly-${it.type}${ctx.master ? ' ly-from-master' : ''}${L?.locked || it.locked ? ' is-locked' : ''}" data-id="${esc(it.id)}" style="${style}"`;
+        const attrs = `class="ly-item ly-${it.type}${ctx.master ? ' ly-from-master' : ''}${L?.locked || it.locked ? ' is-locked' : ''}${it.next ? ' ly-has-next' : ''}${it._follow ? ' ly-follow' : ''}${it.auto ? ' ly-auto' : ''}${it.mediaId || it.dyn ? ' ly-dyn' : ''}" data-id="${esc(it.id)}" style="${style}"`;
         let inner = '';
         if (it.type === 'compound') inner = compoundSvg(doc, it, w, h, key);
         else if (it.type === 'text') {
@@ -386,12 +392,20 @@
     function pageHtml(doc, i, ctx = {}) {
         const pg = doc.pages[i], master = doc.masters.find(m => m.id === pg.master), W = px(doc.page.w), H = px(doc.page.h), m = pageMargins(doc, i);
         const c = {...ctx, pageNo: i + (doc.page.start || 1), pages: doc.pages.length + (doc.page.start || 1) - 1, title: doc.title};
+        if (master?.items.some(x => (x.html || '').includes('{chapitre}'))) c.chapter = chapterAt(doc, i);
         const masterItems = master && !ctx.editMaster ? ordered(doc, master.items) : [];
         const all = [...masterItems, ...pg.items];
         const guides = ctx.print || ctx.preview ? '' : `<div class="ly-margins" style="left:${px(m.l)}px;top:${px(m.t)}px;right:${px(m.r)}px;bottom:${px(m.b)}px">${doc.page.columns > 1 ? Array.from({length: doc.page.columns - 1}, (_, k) => { const cw = (doc.page.w - m.l - m.r - doc.page.gutter * (doc.page.columns - 1)) / doc.page.columns; const x = (cw + doc.page.gutter) * (k + 1); return `<i style="left:${px(x - doc.page.gutter)}px;width:${px(doc.page.gutter)}px"></i>`; }).join('') : ''}</div>`;
         const items = ordered(doc, pg.items);
         const outer = ctx.print || ctx.preview ? '' : `${doc.page.bleed ? `<div class="ly-bleed" style="inset:-${px(doc.page.bleed)}px"></div>` : ''}${doc.page.slug ? `<div class="ly-slug" style="inset:-${px((doc.page.bleed || 0) + doc.page.slug)}px"></div>` : ''}`;
         return `<div class="ly-page${isLeftPage(doc, i) ? ' is-left' : ''}" data-page="${i}" style="width:${W}px;height:${H}px;background:${cssPaint(doc, doc.page.paper)}">${outer}${guides}${masterItems.map(it => itemHtml(doc, it, {...c, master: true, others: all})).join('')}${items.map(it => itemHtml(doc, it, {...c, others: all})).join('')}${ctx.print ? '' : `<span class="ly-pageno">${c.pageNo}${master ? ` · ${esc(master.name.split('-')[0])}` : ''}</span>`}</div>`;
+    }
+    /** Le titre du dernier chapitre (style « Chapitre ») commencé sur cette page ou avant : pour le titre courant {chapitre} */
+    let chapCache = {sig: '', list: []};
+    function chapterAt(doc, i) {
+        const sig = doc.pages.length + ':' + doc.pages.reduce((n, p) => n + p.items.reduce((m, it) => m + (it.html || '').length, 0), 0);
+        if (chapCache.sig !== sig || chapCache.doc !== doc) { let last = ''; chapCache = {sig, doc, list: doc.pages.map(p => { [...p.items].filter(x => x.type === 'text').sort((a, b) => a.y - b.y).forEach(t => { const m = [...(t.html || '').matchAll(/data-ps="ps-chapter"[^>]*>([\s\S]*?)<\/(p|h\d)>/g)].pop(); if (m) last = plainOf(m[1]).trim(); }); return last; })}; }
+        return chapCache.list[i] || '';
     }
     function masterHtml(doc, m, ctx = {}) {
         const W = px(doc.page.w), H = px(doc.page.h), mm = doc.page.margin;
@@ -404,7 +418,7 @@
         for (; i < n; i += 2) out.push(i + 1 < n ? [i, i + 1] : [i]);
         return out;
     }
-    const BASE_CSS = `.ly-page{position:relative;overflow:hidden;flex:none}.ly-item{position:absolute;transform-origin:50% 50%;box-sizing:border-box}.ly-svg{position:absolute;left:0;top:0;overflow:visible}.ly-txtbox{position:absolute;inset:0;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}.ly-txt{outline:none;column-fill:auto;height:auto;max-height:100%;overflow-wrap:break-word}.ly-txt p,.ly-txt h1,.ly-txt h2,.ly-txt h3,.ly-txt h4{margin:0}.ly-txt ul,.ly-txt ol{margin:0;padding-left:1.4em}.ly-txt a{color:inherit}.ly-wrapf{pointer-events:none}`;
+    const BASE_CSS = `.ly-page{position:relative;overflow:hidden;flex:none}.ly-item{position:absolute;transform-origin:50% 50%;box-sizing:border-box}.ly-svg{position:absolute;left:0;top:0;overflow:visible}.ly-txtbox{position:absolute;inset:0;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}.ly-txt{outline:none;column-fill:auto;height:auto;max-height:100%;overflow-wrap:break-word}.ly-txt p,.ly-txt h1,.ly-txt h2,.ly-txt h3,.ly-txt h4{margin:0}.ly-txt ul,.ly-txt ol{margin:0;padding-left:1.4em}.ly-txt a{color:inherit}.ly-wrapf{pointer-events:none}.ly-toc{display:flex;align-items:baseline;gap:.35em}.ly-toc .ly-tl{flex:1;min-width:1em;border-bottom:1px dotted currentColor;transform:translateY(-.3em)}.ly-toc .ly-tsp{flex:1}[data-cont]{text-indent:0!important}`;
     /* ═════════════ Designs (modèles de départ) : intégrés à l'app, ou enregistrés par soi (is_design) ═════════════ */
     const THEMES = [
         {id: 'classique', name: 'Classique', titleFont: 'Garamond', bodyFont: 'Georgia', accent: '#7a2e2e', paper: '#fffdf8', text: '#2a2522', soft: '#7a6f66', light: '#f1e7dc', cover: 'frame', person: 'side', ornament: '❦'},
@@ -472,9 +486,9 @@
         if (!measureHost) { measureHost = document.createElement('div'); measureHost.className = 'ly-measure'; measureHost.style.cssText = 'position:absolute;left:-30000px;top:0;visibility:hidden;pointer-events:none'; document.body.appendChild(measureHost); }
         measureHost.innerHTML = `<style>${BASE_CSS}${docCss(doc, '.ly-measure')}</style><div class="ly-page" style="width:${px(doc.page.w)}px;height:${px(doc.page.h)}px">${itemHtml(doc, {...it, x: 0, y: 0, rot: 0}, {pageNo: 1, pages: 1, others: (others || []).map(o => ({...o, x: o.x - it.x, y: o.y - it.y}))})}</div>`;
         const t = measureHost.querySelector('.ly-txt'), bx = measureHost.querySelector('.ly-txtbox'); if (!t || !bx) return false;
-        const cols = clamp(it.columns || 1, 1, 12);
-        if (cols > 1) { t.style.height = bx.clientHeight - px(it.inset || 0) * 2 + 'px'; return t.scrollWidth > t.clientWidth + 2; }
-        return t.scrollHeight > bx.clientHeight - px(it.inset || 0) * 2 + 1;
+        // le texte est toujours en colonnes (même une seule) : ce qui ne tient pas part dans une colonne de plus, sur le côté
+        t.style.height = bx.clientHeight - px(it.inset || 0) * 2 + 'px';
+        return t.scrollWidth > t.clientWidth + 2 || t.scrollHeight > bx.clientHeight - px(it.inset || 0) * 2 + 1;
     }
     const paraHtml = p => `<p data-ps="${p.ps}">${p.lead ? `<b>${esc(p.lead)}</b> ` : ''}${esc(p.text)}</p>`;
     /** Combien de paragraphes tiennent dans ce cadre (un paragraphe trop long est coupé entre deux mots) */
@@ -603,9 +617,9 @@
         const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; dl.dataset.ownClose = '1'; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
-                <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['pdf', '📄 Exporter en PDF (imprimer)…'], ['pdfbleed', '📄 PDF avec fond perdu et traits de coupe…'], ['html', '🌐 Exporter en page HTML'], ['json', '⬇️ Exporter le fichier du document (.json)'], ['-'], ['close', 'Fermer']])}
+                <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['pdf', '📄 Exporter en PDF (imprimer)…'], ['pdfbleed', '📄 PDF avec fond perdu et traits de coupe…'], ['html', '🌐 Exporter en page HTML'], ['json', '⬇️ Exporter le fichier du document (.json)'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '🔗 Mettre à jour les liens (photos, fiches)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
                 ${menu('Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Désélectionner', 'Échap']])}
-                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image…']])}
+                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…']])}
                 ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
                 <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
@@ -664,8 +678,9 @@
         function render() {
             $('[data-ly-css]').textContent = BASE_CSS + docCss(D, '.ly-editor .ly-board') + `.ly-editor .ly-board{--ly-zoom:${zoom}}`;
             const ctx = {editingId, preview: preview || !guides};
-            if (editMaster) { const m = D.masters.find(x => x.id === editMaster); board.innerHTML = m ? `<div class="ly-spread is-master-edit"><div class="ly-master-banner">Gabarit « ${esc(m.name)} » — ce qui est posé ici apparaît sur toutes ses pages. <button type="button" class="button small" data-ly-cmd="endmaster">Revenir aux pages</button></div>${masterHtml(D, m, ctx)}</div>` : ''; }
-            else board.innerHTML = spreads(D).map(sp => `<div class="ly-spread${sp.includes(cur) ? ' is-cur' : ''}">${sp.map(i => pageHtml(D, i, ctx)).join('')}</div>`).join('');
+            if (editMaster) { const m = D.masters.find(x => x.id === editMaster); board.innerHTML = m ? `<div class="ly-spread is-master-edit"><div class="ly-master-banner">Gabarit « ${esc(m.name)} » — ce qui est posé ici apparaît sur toutes ses pages. <button type="button" class="button small secondary" data-ly-cmd="mfolio">＋ Numéro de page</button><button type="button" class="button small secondary" data-ly-cmd="mrunning">＋ Titre du livre en haut</button><button type="button" class="button small secondary" data-ly-cmd="mchapter">＋ Chapitre en cours en haut</button><button type="button" class="button small secondary" data-ly-cmd="mfooter">＋ Pied de page</button><button type="button" class="button small" data-ly-cmd="endmaster">Revenir aux pages</button></div>${masterHtml(D, m, ctx)}</div>` : ''; }
+            else { const V = resolveDoc(D, {editingId}); board.innerHTML = spreads(V).map(sp => `<div class="ly-spread${sp.includes(cur) ? ' is-cur' : ''}">${sp.map(i => pageHtml(V, i, ctx)).join('')}</div>`).join(''); }
+            if (linkFrom) board.classList.add('is-linking'); else board.classList.remove('is-linking');
             board.style.zoom = zoom; board.classList.toggle('no-guides', !guides || preview);
             drawSel(); syncChrome(); renderPanel();
             if (editingId) { const t = board.querySelector(`.ly-item[data-id="${CSS.escape(editingId)}"] .ly-txt`); if (t) { bindEditing(t); } }
@@ -701,7 +716,13 @@
         const pageOfEvent = e => e.target.closest?.('.ly-page');
 
         /* — texte : édition dans le cadre — */
-        function startEditing(it) { if (locked(it)) return msg('Objet verrouillé.'); editingId = it.id; sel = [it.id]; render(); const t = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"] .ly-txt`); if (t) { t.focus(); const r = document.createRange(); r.selectNodeContents(t); r.collapse(false); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } panel = 'text'; renderPanel(); }
+        function startEditing(it) {
+            if (it.auto) { panel = 'obj'; sel = [it.id]; render(); return msg(it.auto === 'toc' ? 'Le sommaire se remplit tout seul (réglages dans Objet).' : 'L’index se remplit tout seul (réglages dans Objet).'); }
+            const head = chainHead(it);
+            if (head !== it) { if (head.auto) return msg('Ce bloc est la suite d’un sommaire ou d’un index automatique.'); const pi = pageOfItem(head.id); if (pi >= 0 && pi !== cur) { cur = pi; } msg('Texte chaîné : il s’écrit dans son premier bloc (la suite se remplit toute seule).'); it = head; }
+            if (it.dyn && !confirm('Ce texte suit une fiche de la généalogie (objet dynamique). L’écrire à la main le détache de la fiche : continuer ?')) return;
+            if (it.dyn) { delete it.dyn; commit('Texte détaché de la fiche'); }
+            if (locked(it)) return msg('Objet verrouillé.'); editingId = it.id; sel = [it.id]; render(); const t = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"] .ly-txt`); if (t) { t.focus(); const r = document.createRange(); r.selectNodeContents(t); r.collapse(false); const s = getSelection(); s.removeAllRanges(); s.addRange(r); } panel = 'text'; renderPanel(); }
         const readEditing = el => { const c = el.cloneNode(true); c.querySelectorAll('.ly-wrapf').forEach(x => x.remove()); return c.innerHTML; };
         function bindEditing(t) {
             if (t.dataset.bound) return; t.dataset.bound = '1';
@@ -755,6 +776,11 @@
         let drag = null, pen = null;
         canvas.addEventListener('pointerdown', e => {
             if (e.button === 1 || tool === 'hand' || e.target.closest('.ly-master-banner')) { if (e.target.closest('.ly-master-banner')) return; const sx = canvas.scrollLeft, sy = canvas.scrollTop, x0 = e.clientX, y0 = e.clientY; const mv = ev => { canvas.scrollLeft = sx - (ev.clientX - x0); canvas.scrollTop = sy - (ev.clientY - y0); }; const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); }; addEventListener('pointermove', mv); addEventListener('pointerup', up); return; }
+            if (linkFrom) { // ➜ chaîner : le prochain clic choisit le bloc qui reçoit la suite
+                e.preventDefault(); const el = e.target.closest('.ly-item.ly-text:not(.ly-from-master)'), from = findItem(linkFrom)?.it; linkFrom = null; canvas.classList.remove('is-linking');
+                if (!el || !from) { render(); return msg('Chaînage annulé.'); }
+                const to = findItem(el.dataset.id)?.it; if (to) setLink(from, to); else render(); return;
+            }
             // tracer en partant de la table de montage (hors de la page, dans le fond perdu) : sur la page courante
             const pe = pageOfEvent(e) || (!['select', 'hand', 'zoom'].includes(tool) ? pageEl() : null);
             if (editingId) { if (e.target.closest('.ly-txt[contenteditable="true"]')) return; stopEditing(); }
@@ -929,7 +955,173 @@
             const res = await pickImage(); if (!res) return;
             let it = target && (target.type === 'frame') ? target : one()?.type === 'frame' ? one() : null;
             if (!it) { const b = box(D, cur); const im = await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = res.src; }); const ratio = im ? im.naturalHeight / im.naturalWidth : 0.75, w = Math.min(b.w, 100); it = shapeItem('frame', {x: b.x, y: b.y, w, h: r1(w * ratio), layer: activeLayer(), fit: 'fill'}); curList().push(it); }
-            it.src = res.src; it.srcName = res.name; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; commit(); render();
+            it.src = res.src; it.srcName = res.name; if (res.mediaId) it.mediaId = res.mediaId; else delete it.mediaId; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; commit(); render();
+        }
+        /* ─── Texte chaîné : un texte qui continue d'un bloc à l'autre, sur plusieurs pages ─── */
+        let linkFrom = null;
+        const allText = () => D.pages.flatMap(p => p.items.filter(it => it.type === 'text'));
+        const pageOfItem = idv => D.pages.findIndex(p => p.items.some(x => x.id === idv));
+        const chainHead = it => { let h = it; for (let g = 0; g < 2000; g++) { const prev = allText().find(x => x.next === h.id); if (!prev || prev === it) return h; h = prev; } return h; };
+        const chainList = head => { const out = [], seen = new Set(); let c = head; while (c && !seen.has(c.id)) { seen.add(c.id); out.push(c); c = c.next ? findItem(c.next)?.it : null; } return out; };
+        function setLink(from, to) {
+            if (to === from) { render(); return msg('Choisis un autre bloc.'); }
+            if (to.auto) { render(); return msg('Un sommaire ou un index ne peut pas recevoir la suite d’un texte.'); }
+            if (allText().some(x => x.next === to.id)) { render(); return msg('Ce bloc reçoit déjà la suite d’un autre texte.'); }
+            const head = chainHead(from);
+            if (chainList(to).includes(from) || chainHead(to) === head) { render(); return msg('Ce chaînage ferait une boucle.'); }
+            if (plainOf(to.html).trim() && !confirm('Ce bloc contient déjà du texte : il sera ajouté à la fin du texte chaîné. Continuer ?')) { render(); return; }
+            if (plainOf(to.html).trim()) head.html = (head.html || '') + to.html;
+            to.html = '<p data-ps="ps-body"><br></p>'; from.next = to.id;
+            commit('Blocs de texte chaînés'); render(); msg(`➜ Chaîné : la suite va dans le bloc de la page ${pageOfItem(to.id) + (D.page.start || 1)}.`);
+        }
+        /** Faire couler : tant que le dernier bloc déborde, une page de plus (même gabarit) avec un bloc dans ses marges, chaîné */
+        async function autoflow() {
+            const it0 = one(); if (it0?.type !== 'text') return msg('Choisis d’abord un bloc de texte.');
+            let last = chainList(chainHead(it0)).at(-1), made = 0;
+            msg('Je répartis le texte…'); await new Promise(r => setTimeout(r, 20));
+            for (let k = 0; k < 300; k++) {
+                const V = resolveDoc(D), pi = pageOfItem(last.id), vl = V.pages[pi]?.items.find(x => x.id === last.id); if (!vl) break;
+                if (!measureOverflow(V, vl, V.pages[pi].items.filter(o => o !== vl))) break;
+                const np = {id: nid('p'), master: D.pages[pi].master, items: []}; D.pages.splice(pi + 1, 0, np);
+                const b = box(D, pi + 1), f = textItem({x: b.x, y: b.y, w: b.w, h: b.h, columns: last.columns || 1, gutter: last.gutter ?? 4, inset: last.inset || 0, layer: last.layer, name: 'Suite du texte'});
+                np.items.push(f); last.next = f.id; last = f; made++;
+            }
+            if (!made) return msg('Le texte tient déjà dans ses blocs.');
+            commit(`Texte réparti sur ${made} nouvelle${made > 1 ? 's' : ''} page${made > 1 ? 's' : ''}`); render(); msg(`${made} page${made > 1 ? 's' : ''} ajoutée${made > 1 ? 's' : ''} : le texte continue de bloc en bloc.`);
+        }
+        /** Gabarit : numéro de page, titre courant, chapitre en cours, pied de page */
+        function masterAdd(kind) {
+            const m = D.masters.find(x => x.id === editMaster); if (!m) return msg('Ouvre d’abord un gabarit (Pages → Modifier).');
+            const mm = D.page.margin, x = mm.o, w = D.page.w - mm.i - mm.o, top = Math.max(4, mm.t - 11), bottom = D.page.h - mm.b + 6;
+            const html = {folio: '<p data-ps="ps-folio">{page}</p>', running: '<p data-ps="ps-running">{titre}</p>', chapter: '<p data-ps="ps-running">{chapitre}</p>', footer: '<p data-ps="ps-folio">{titre} — {page} / {pages}</p>'}[kind];
+            const it = textItem({x, y: ['folio', 'footer'].includes(kind) ? bottom : top, w, h: 7, html, layer: activeLayer(), name: {folio: 'Folio', running: 'Titre courant', chapter: 'Chapitre courant', footer: 'Pied de page'}[kind]});
+            m.items.push(it); sel = [it.id]; commit(`Gabarit : ${it.name}`); render();
+        }
+        /** Table des matières ou index des noms, qui se remplissent tout seuls */
+        async function insertAuto(kind) {
+            if (editMaster) return msg('Pas dans un gabarit : sur une page.');
+            const b = box(D, cur), it = textItem({x: b.x, y: b.y, w: b.w, h: b.h, layer: activeLayer(), name: kind === 'toc' ? 'Table des matières' : 'Index des noms', auto: kind,
+                autoStyles: kind === 'toc' ? D.paraStyles.filter(s => ['ps-chapter'].includes(s.id)).map(s => s.id) : [], autoPs: kind === 'toc' ? 'ps-body' : 'ps-list', columns: kind === 'index' ? 2 : 1, gutter: 6});
+            if (kind === 'index') {
+                if (!D.charStyles.some(c => c.id === 'cs-index')) D.charStyles.push({id: 'cs-index', name: 'Nom à indexer'});
+                if (confirm('Chercher aussi dans le texte les noms des personnes de la généalogie ? (Sinon : seulement les noms marqués avec le style de caractère « Nom à indexer ».)')) {
+                    try { const r = await api('person_names'); it.names = (r.persons || []).map(p => `${p.first_name || ''}|${p.last_name || ''}`); } catch (err) { toast(err.message, 'error'); }
+                }
+            }
+            curList().push(it); sel = [it.id]; panel = 'obj'; commit(kind === 'toc' ? 'Table des matières' : 'Index des noms'); render();
+            msg(kind === 'toc' ? 'Sommaire : il suit les paragraphes en style « Chapitre » (d’autres styles dans Objet). S’il est long : Objet → Faire couler le texte.' : 'Index : rangé par nom, avec les pages. S’il est long : Objet → Faire couler le texte.');
+        }
+        /* ─── Objets dynamiques : photos de l'app (liées) et textes de fiches ─── */
+        let linkState = {}, mediaRows = null;
+        async function refreshLinks(silent = true) {
+            const frames = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && (it.mediaId || /^media\//.test(it.src || '')));
+            const dyn = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.dyn);
+            if (!frames.length && !dyn.length) { if (!silent) msg('Aucun objet lié dans ce document.'); return; }
+            let changed = 0;
+            if (frames.length) {
+                try { mediaRows = (await api('media_av_list', {kind: 'image'})).items || []; } catch (_) { mediaRows = mediaRows || []; }
+                const byId = new Map(mediaRows.map(r => [Number(r.id), r])), byFile = new Map(mediaRows.map(r => [r.filename, r]));
+                frames.forEach(it => {
+                    if (!it.mediaId) { const r0 = byFile.get(String(it.src).replace(/^media\//, '')); if (r0) { it.mediaId = Number(r0.id); changed++; } }
+                    const r = byId.get(Number(it.mediaId)); if (!r || r.exists === false) { linkState[it.id] = 'missing'; return; }
+                    const want = `media/${r.filename}`; if (it.src !== want) { it.src = want; it.srcName = r.title || r.filename; linkState[it.id] = 'updated'; changed++; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok';
+                });
+            }
+            for (const it of dyn) { try { const h = await personDynHtml(it.dyn.id, it.dyn.fields); if (h !== it.html) { it.html = h; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = 'ok'; it.dyn.at = new Date().toISOString().slice(0, 16); } catch (_) { linkState[it.id] = 'missing'; } }
+            if (changed) { commit('Liens mis à jour'); render(); }
+            const miss = Object.values(linkState).filter(v => v === 'missing').length;
+            if (!silent || changed || miss) msg(`🔗 Liens : ${changed ? `${changed} mis à jour` : 'tout est à jour'}${miss ? `, ${miss} introuvable${miss > 1 ? 's' : ''}` : ''}.`);
+            if (panel === 'links') renderPanel();
+        }
+        /** ✏️ Modifier l'original : la photo s'ouvre dans la retouche ; à la fermeture, le cadre se met à jour */
+        async function editOriginal(it) {
+            if (!it?.mediaId) return msg('Cette image n’est pas liée à une photo de l’app.');
+            if (!mediaRows) { try { mediaRows = (await api('media_av_list', {kind: 'image'})).items || []; } catch (_) { mediaRows = []; } }
+            const r = mediaRows.find(x => Number(x.id) === Number(it.mediaId)); if (!r || !ext.openRetouch) return msg('Photo introuvable dans l’app.');
+            const before = new Set(document.querySelectorAll('dialog'));
+            A().state.lightboxMedia = [{...r, media_type: 'image'}]; A().state.lightboxIndex = 0; await ext.openRetouch();
+            let seen = false; const t = setInterval(() => { const fresh = [...document.querySelectorAll('dialog')].filter(d => !before.has(d)); if (fresh.length) seen = true; else if (seen || !dl.isConnected) { clearInterval(t); if (dl.isConnected) refreshLinks(false); } }, 600);
+        }
+        function dynPersonDialog(it = null) {
+            const f0 = it?.dyn?.fields || ['name', 'life', 'parents', 'partners'];
+            let chosen = it?.dyn?.id || 0;
+            ext.openDialog({eyebrow: 'OBJET DYNAMIQUE', title: it ? 'Texte lié à une fiche' : 'Insérer le texte d’une fiche', submitLabel: it ? 'Mettre à jour' : 'Insérer',
+                body: `<p class="muted">Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait.</p>
+                    <label>Personne <input type="search" data-q placeholder="Nom, prénom…" autocomplete="off"></label><div class="ly-dynres" data-res>${chosen ? '<p class="muted">Fiche déjà choisie (cherche pour en changer).</p>' : ''}</div>
+                    <fieldset><legend>Ce qu’il faut montrer</legend>${DYN_FIELDS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="f_${k}" ${f0.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</fieldset>`,
+                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let t = 0;
+                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const rows = (await api('search', {type: 'persons', q: q.value.trim(), limit: 12}).catch(() => ({data: []}))).data || [];
+                        res.innerHTML = rows.map(p => `<label class="checkbox-line"><input type="radio" name="pick" value="${p.id}"> ${esc(A().personName ? A().personName(p) : `${p.first_name || ''} ${p.last_name || ''}`)}</label>`).join('') || '<p class="muted">Personne trouvée.</p>';
+                        res.querySelectorAll('[name=pick]').forEach(r => r.addEventListener('change', () => { chosen = Number(r.value); })); }, 220); }); },
+                onSubmit: async f => {
+                    if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
+                    const fields = DYN_FIELDS.map(([k]) => k).filter(k => f.elements['f_' + k]?.checked); if (!fields.length) { toast('Coche au moins une chose à montrer.', 'error'); return false; }
+                    const html = await personDynHtml(chosen, fields);
+                    if (it) { it.dyn = {type: 'person', id: chosen, fields, at: new Date().toISOString().slice(0, 16)}; it.html = html; }
+                    else { const b = box(D, cur); const n = textItem({x: b.x, y: b.y, w: Math.min(b.w, 90), h: 50, html, layer: activeLayer(), name: 'Texte lié à une fiche', dyn: {type: 'person', id: chosen, fields, at: new Date().toISOString().slice(0, 16)}}); curList().push(n); sel = [n.id]; }
+                    commit('Texte lié à une fiche'); render();
+                }});
+        }
+        /* ─── 🎨 Mes styles : gardés pour tous les documents ─── */
+        const SL_KEY = 'genealogie-layout-stylesets';
+        function styleLibrary() {
+            const sets = () => { try { return JSON.parse(localStorage.getItem(SL_KEY) || '[]') || []; } catch (_) { return []; } };
+            const saveSets = l => { try { localStorage.setItem(SL_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Plus de place : supprime un ensemble.', 'error'); return false; } };
+            const dg = ext.openDialog({eyebrow: 'STYLES', title: '🎨 Mes styles, pour tous mes documents', wide: true,
+                body: `<p class="muted">Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre. Les styles du même nom sont remplacés, les autres ajoutés.</p>
+                    <div class="ly-row"><input data-slname placeholder="Nom de l’ensemble (ex. « Mon livre classique »)" maxlength="60"><button type="button" class="button small" data-sladd>＋ Garder les styles de ce document</button></div><div data-sllist></div>`,
+                onOpen: d => {
+                    const draw = () => { const l = sets(); d.querySelector('[data-sllist]').innerHTML = l.length ? `<ol class="ly-sllist">${l.map((x, i) => `<li><b>${esc(x.name)}</b> <small class="muted">${x.paraStyles.length} styles de paragraphe · ${x.charStyles.length} de caractère</small><span><button type="button" class="button small" data-slput="${i}">Mettre dans ce document</button><button type="button" class="icon-button" data-sldel="${i}" title="Supprimer">🗑</button></span></li>`).join('')}</ol>` : '<p class="muted">Aucun ensemble gardé.</p>'; };
+                    draw();
+                    d.addEventListener('click', e => {
+                        if (e.target.closest('[data-sladd]')) { const name = d.querySelector('[data-slname]').value.trim() || docName; const used = new Set(JSON.stringify([D.paraStyles, D.charStyles]).match(/(sw|gr)-[a-z0-9_-]+/gi) || []); const l = sets(); l.push({name, paraStyles: D.paraStyles, charStyles: D.charStyles, swatches: D.swatches.filter(x => used.has(x.id))}); if (saveSets(l)) { toast(`Styles gardés : « ${name} ».`); draw(); } return; }
+                        const put = e.target.closest('[data-slput]'); if (put) { const x = sets()[Number(put.dataset.slput)]; if (!x) return; const merge = (arr, add) => { add.forEach(s0 => { const k = arr.findIndex(y => y.id === s0.id); if (k >= 0) arr[k] = JSON.parse(JSON.stringify(s0)); else arr.push(JSON.parse(JSON.stringify(s0))); }); };
+                            merge(D.paraStyles, x.paraStyles); merge(D.charStyles, x.charStyles); merge(D.swatches, x.swatches || []); commit(`Styles « ${x.name} » mis dans le document`); render(); toast('Styles mis dans le document : tout le texte qui les utilise suit.'); dg.close(); return; }
+                        const del = e.target.closest('[data-sldel]'); if (del) { const l = sets(); l.splice(Number(del.dataset.sldel), 1); saveSets(l); draw(); }
+                    });
+                }});
+        }
+        /* ─── ✅ Contrôle avant impression ─── */
+        const fontOkHere = f => { const c = document.createElement('canvas').getContext('2d'), t = 'mmmmmmmmmmlliWWQ@#'; return ['monospace', 'serif', 'sans-serif'].some(base => { c.font = `72px ${base}`; const w0 = c.measureText(t).width; c.font = `72px "${f}", ${base}`; return c.measureText(t).width !== w0; }); };
+        async function preflight() {
+            if (editingId) stopEditing();
+            msg('Contrôle en cours…'); await new Promise(r => setTimeout(r, 20));
+            const V = resolveDoc(D), st0 = D.page.start || 1, issues = [], add = (lvl, page, id, text) => issues.push({lvl, page, id, text});
+            const sizes = new Map();
+            const natural = src => sizes.has(src) ? sizes.get(src) : new Promise(r => { const im = new Image(); im.onload = () => { const v = [im.naturalWidth, im.naturalHeight]; sizes.set(src, v); r(v); }; im.onerror = () => { sizes.set(src, null); r(null); }; im.src = src; });
+            for (const [i, pg] of V.pages.entries()) {
+                const m = pageMargins(D, i), B = D.page.bleed || 0, master = D.masters.find(x => x.id === pg.master);
+                if (!pg.items.length && !master?.items.length) add('info', i, '', 'Page vide.');
+                for (const it of pg.items) {
+                    if (it.hidden) continue;
+                    if (it.type === 'text') {
+                        if (measureOverflow(V, it, pg.items.filter(o => o !== it))) add('err', i, it.id, it.next ? 'Texte qui déborde (alors qu’il est chaîné : vérifie le bloc suivant).' : 'Texte qui déborde de son bloc (⊞) : agrandis le bloc, chaîne-le, ou « Faire couler le texte ».');
+                        if (it.x < m.l - 0.5 || it.y < m.t - 0.5 || it.x + it.w > D.page.w - m.r + 0.5 || it.y + it.h > D.page.h - m.b + 0.5) add('warn', i, it.id, 'Texte hors des marges : il risque d’être coupé ou trop près du bord.');
+                        if (!plainOf(it.html).trim() && !it._follow) add('info', i, it.id, 'Bloc de texte vide.');
+                    }
+                    if (it.type === 'frame') {
+                        if (!it.src) { add('warn', i, it.id, 'Cadre d’image vide.'); continue; }
+                        if (it.mediaId && linkState[it.id] === 'missing') add('err', i, it.id, 'Photo liée introuvable dans l’app.');
+                        const n = await natural(it.src);
+                        if (!n) add('err', i, it.id, 'Image illisible.');
+                        else { const ar = n[0] / n[1], s = (it.imgS || 100) / 100, fit = it.fit || 'fill', wmm = (fit === 'fit' ? Math.min(it.w, it.h * ar) : fit === 'stretch' ? it.w : Math.max(it.w, it.h * ar)) * s, ppi = Math.round(n[0] / (wmm / 25.4));
+                            if (ppi < 150) add(ppi < 96 ? 'err' : 'warn', i, it.id, `Image trop petite pour l’impression : ${ppi} points par pouce à cette taille (il en faut 300 pour une belle impression, 150 au minimum).`); }
+                    }
+                    if (it.type !== 'text' && B > 0) { // touche le bord sans aller jusqu'au fond perdu
+                        const near = (a, b) => Math.abs(a - b) < 1;
+                        if ((near(it.x, 0) && it.x > -B + 0.2) || (near(it.y, 0) && it.y > -B + 0.2) || (near(it.x + it.w, D.page.w) && it.x + it.w < D.page.w + B - 0.2) || (near(it.y + it.h, D.page.h) && it.y + it.h < D.page.h + B - 0.2)) add('warn', i, it.id, `Touche le bord de la page sans aller jusqu’au fond perdu (${B} mm) : un liseré blanc peut apparaître à la coupe.`);
+                    }
+                }
+            }
+            const fonts = new Set([...D.paraStyles, ...D.charStyles].map(x => x.font).filter(Boolean)); D.pages.forEach(p => p.items.forEach(it => { (String(it.html || '').match(/font-family:\s*([^;"]+)/g) || []).forEach(x => fonts.add(x.replace(/font-family:\s*/, '').split(',')[0].replace(/&quot;|['"]/g, '').trim())); }));
+            [...fonts].filter(f => f && !/^(serif|sans-serif|monospace|cursive|system-ui)$/i.test(f) && !fontOkHere(f)).forEach(f => add('warn', -1, '', `Police « ${f} » absente de cet ordinateur : une autre la remplace à l’impression.`));
+            if (!D.page.bleed) add('info', -1, '', 'Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord.');
+            const ico = {err: '⛔', warn: '⚠️', info: 'ℹ️'}, n = k => issues.filter(x => x.lvl === k).length;
+            msg('');
+            ext.openDialog({eyebrow: 'CONTRÔLE AVANT IMPRESSION', title: issues.some(x => x.lvl === 'err') ? `${n('err')} problème(s) à corriger` : 'Prêt pour l’impression' + (n('warn') ? ` (${n('warn')} avertissement(s))` : ' ✓'), wide: true,
+                body: `<p class="muted">${n('err')} erreur(s) · ${n('warn')} avertissement(s) · ${n('info')} remarque(s). Clique sur « Aller » pour voir l’objet. Pour l’imprimeur : Fichier → « PDF avec fond perdu et traits de coupe ».</p>
+                    <ol class="ly-preflight">${issues.sort((a, b) => ['err', 'warn', 'info'].indexOf(a.lvl) - ['err', 'warn', 'info'].indexOf(b.lvl) || a.page - b.page).map(x => `<li class="is-${x.lvl}">${ico[x.lvl]} ${x.page >= 0 ? `<b>Page ${x.page + st0}</b> — ` : ''}${esc(x.text)}${x.page >= 0 ? ` <button type="button" class="link-button" data-pfgo="${x.page}:${esc(x.id)}">Aller</button>` : ''}</li>`).join('') || '<li>✅ Rien à signaler.</li>'}</ol>`,
+                onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('[data-pfgo]'); if (!b) return; const [pi, idv] = b.dataset.pfgo.split(':'); dg.close(); goPage(Number(pi)); if (idv) { sel = [idv]; drawSel(); panel = 'obj'; renderPanel(); } })});
         }
         const CMD_LABELS = {cut: 'Couper', paste: 'Coller', dup: 'Dupliquer', del: 'Supprimer', front: 'Premier plan', fwd: 'Avancer', back: 'Reculer', bottom: 'Arrière-plan', lock: 'Verrouiller / déverrouiller', hide: 'Masquer', showall: 'Tout afficher', fitframe: 'Ajuster le cadre', place: 'Placer une image', addend: 'Page ajoutée à la fin', insert: 'Pages insérées', duppage: 'Page dupliquée', delpage: 'Page supprimée'};
         async function exec(cmd) {
@@ -942,6 +1134,11 @@
                 addend: () => addPages(1, D.pages.length), insert: insertPagesDialog, masters: () => mastersDialog(), duppage: dupPage, delpage: delPage, goto: gotoDialog, first: () => goPage(0), prev: () => goPage(cur - 1), next: () => goPage(cur + 1), last: () => goPage(D.pages.length - 1),
                 zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? 'Magnétisme activé.' : 'Magnétisme coupé.'); }, preview: () => { preview = !preview; render(); },
                 endmaster: () => { editMaster = null; sel = []; render(); },
+                preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), dynperson: () => dynPersonDialog(),
+                chain: () => { const it = one(); if (it?.type !== 'text') return msg('Choisis d’abord un bloc de texte.'); if (it.next) return msg('Ce bloc est déjà chaîné (« Couper le chaînage » d’abord).'); linkFrom = it.id; canvas.classList.add('is-linking'); render(); msg('➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler.'); },
+                unchain: () => { const it = one(); if (!it?.next) return msg('Ce bloc n’est pas chaîné vers un autre.'); delete it.next; commit('Chaînage coupé'); render(); },
+                autoflow: () => autoflow(),
+                mfolio: () => masterAdd('folio'), mrunning: () => masterAdd('running'), mchapter: () => masterAdd('chapter'), mfooter: () => masterAdd('footer'),
             };
             await C[cmd]?.();
         }
@@ -973,6 +1170,7 @@
                 e.preventDefault(); ({c: () => copy(), x: () => copy(true), v: () => paste(e.shiftKey || e.altKey), d: dup, a: () => exec('all'), j: gotoDialog, 0: zoomFit, 1: () => setZoom(1), '=': () => setZoom(zoom * 1.25), '+': () => setZoom(zoom * 1.25), '-': () => setZoom(zoom / 1.25), ']': () => arrange(e.shiftKey ? 'front' : 'fwd'), '[': () => arrange(e.shiftKey ? 'bottom' : 'back')})[k]?.(); return;
             }
             if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); del(); return; }
+            if (e.key === 'Escape' && linkFrom) { linkFrom = null; canvas.classList.remove('is-linking'); render(); msg('Chaînage annulé.'); return; }
             if (e.key === 'Escape') { sel = []; drawSel(); renderPanel(); return; }
             if (e.key === 'PageDown') { e.preventDefault(); goPage(cur + 1); return; } if (e.key === 'PageUp') { e.preventDefault(); goPage(cur - 1); return; }
             if (e.key.startsWith('Arrow') && sel.length) { e.preventDefault(); const d = e.shiftKey ? 5 : 1, dx = e.key === 'ArrowLeft' ? -d : e.key === 'ArrowRight' ? d : 0, dy = e.key === 'ArrowUp' ? -d : e.key === 'ArrowDown' ? d : 0; selected().filter(x => !locked(x)).forEach(x => { x.x = r1(x.x + dx); x.y = r1(x.y + dy); }); commit('Déplacement au clavier'); render(); return; }
@@ -1026,7 +1224,7 @@
                     if (!en.isIntersecting) return;
                     const b = en.target, i = Number(b.dataset.lyPage); io.unobserve(b); b.removeAttribute('data-ly-lazy');
                     if (!D.pages[i]) return;
-                    b.querySelector('.ly-tph')?.insertAdjacentHTML('afterend', pageHtml(D, i, {preview: true, keyPrefix: 't' + i}));
+                    b.querySelector('.ly-tph')?.insertAdjacentHTML('afterend', pageHtml(resolveDoc(D), i, {preview: true, keyPrefix: 't' + i}));
                     b.querySelector('.ly-tph')?.remove();
                     const pg = b.querySelector('.ly-page'); if (pg) thumbZoom(pg, 48);
                 }), {root: pbody, rootMargin: '200px'});
@@ -1041,7 +1239,7 @@
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-mnew>＋ Nouveau gabarit</button><button type="button" class="button small secondary" data-ly-mnone>Page sans gabarit</button><button type="button" class="button small secondary" data-ly-mdetach title="Les éléments du gabarit deviennent modifiables sur cette page">Détacher les éléments</button></div>`)
                 + sec(`Pages (${D.pages.length})`, `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="addend">＋ Page à la fin</button><button type="button" class="button small secondary" data-ly-cmd="insert">＋ Insérer…</button><button type="button" class="button small secondary" data-ly-cmd="duppage">Dupliquer</button><button type="button" class="button small secondary" data-ly-cmd="delpage">🗑</button></div>
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-pmove="-1" title="Avancer la page">↑ Avancer</button><button type="button" class="button small secondary" data-ly-pmove="1" title="Reculer la page">↓ Reculer</button><label class="ly-f ly-inline"><span>Aller à</span><input type="number" min="1" max="${D.pages.length}" data-ly-goto2 value="${cur + 1}"></label></div>
-                <div class="ly-thumbs${many ? ' is-many' : ''}${D.page.facing ? ' is-facing' : ''}">${spreads(D).map(sp => `<div class="ly-tspread">${sp.map(i => `<button type="button" class="ly-thumb${i === cur ? ' is-cur' : ''}" data-ly-page="${i}" ${many ? 'data-ly-lazy' : ''} title="Page ${i + (D.page.start || 1)}">${many ? '<i class="ly-tph"></i>' : pageHtml(D, i, {preview: true, keyPrefix: 't' + i})}<span>${i + (D.page.start || 1)}${D.pages[i].master ? ' · ' + esc(D.pages[i].master) : ''}</span></button>`).join('')}</div>`).join('')}</div>`);
+                <div class="ly-thumbs${many ? ' is-many' : ''}${D.page.facing ? ' is-facing' : ''}">${spreads(D).map(sp => `<div class="ly-tspread">${sp.map(i => `<button type="button" class="ly-thumb${i === cur ? ' is-cur' : ''}" data-ly-page="${i}" ${many ? 'data-ly-lazy' : ''} title="Page ${i + (D.page.start || 1)}">${many ? '<i class="ly-tph"></i>' : pageHtml(resolveDoc(D), i, {preview: true, keyPrefix: 't' + i})}<span>${i + (D.page.start || 1)}${D.pages[i].master ? ' · ' + esc(D.pages[i].master) : ''}</span></button>`).join('')}</div>`).join('')}</div>`);
         }
         function panelLayers() {
             const counts = Object.fromEntries(D.layers.map(l => [l.id, curList().filter(i => i.layer === l.id).length]));
@@ -1065,8 +1263,19 @@
             h += sec('Effets', `<div class="ly-grid2">${num('opacity', 'Opacité', f0.opacity ?? 100, {min: 0, max: 100, step: 1, unit: '%'})}${sel2('blend', 'Fusion', BLENDS, f0.blend || 'normal')}${num('feather', 'Contour progressif', f0.feather || 0, {min: 0, max: 50, step: 0.5})}</div>
                 <label class="ly-f ly-check"><input type="checkbox" data-ly-set="shadow.on" ${f0.shadow?.on ? 'checked' : ''}> Ombre portée</label>${f0.shadow?.on ? `<div class="ly-grid2">${num('shadow.x', 'Décalage X', f0.shadow.x ?? 1.5)}${num('shadow.y', 'Décalage Y', f0.shadow.y ?? 1.5)}${num('shadow.blur', 'Flou', f0.shadow.blur ?? 2, {min: 0, max: 50})}${num('shadow.o', 'Opacité', f0.shadow.o ?? 50, {min: 0, max: 100, step: 1, unit: '%'})}<label class="ly-f"><span>Couleur</span><input type="color" data-ly-set="shadow.c" value="${esc(f0.shadow.c || '#000000')}"></label></div>` : ''}`, false);
             if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', 'Le texte voisin', WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
+            if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.mediaId ? `<p class="ly-help">Image <b>liée</b> à une photo de l’app${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : linkState[it.id] === 'updated' ? ' — mise à jour' : ''} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✏️ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
+                : '<p class="ly-help">Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base.</p>');
             if (it?.type === 'frame') h += sec('Cadre d’image', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">🖼️ ${it.src ? 'Remplacer' : 'Placer'} l’image</button>${it.src ? '<button type="button" class="button small secondary" data-ly-imgclear>Vider</button><button type="button" class="button small secondary" data-ly-cmd="fitframe">Cadre au contenu</button>' : ''}</div>${sel2('fit', 'Ajustement', FITS, it.fit || 'fill')}<div class="ly-grid2">${num('imgS', 'Échelle', it.imgS || 100, {min: 5, max: 2000, step: 1, unit: '%'})}${num('imgX', 'Décalage X', it.imgX || 0)}${num('imgY', 'Décalage Y', it.imgY || 0)}</div>`);
             if (it?.type === 'text') h += sec('Bloc de texte', `<div class="ly-grid2">${num('columns', 'Colonnes', it.columns || 1, {min: 1, max: 12, step: 1, unit: ''})}${num('gutter', 'Gouttière', it.gutter ?? 4, {min: 0, max: 50, step: 0.5})}${num('inset', 'Marge intérieure', it.inset || 0, {min: 0, max: 100, step: 0.5})}${sel2('valign', 'Vertical', [['top', 'En haut'], ['middle', 'Au milieu'], ['bottom', 'En bas'], ['justify', 'Justifié']], it.valign || 'top')}</div><div class="ly-row"><button type="button" class="button small secondary" data-ly-cmd="fitframe">Ajuster la hauteur au texte</button></div>`);
+            if (it?.type === 'text' && !editMaster) {
+                const head = chainHead(it), list = chainList(head), k = list.indexOf(it), pg = idv => pageOfItem(idv) + (D.page.start || 1);
+                h += sec('➜ Texte chaîné', `${list.length > 1 ? `<p class="ly-help">Bloc ${k + 1} sur ${list.length} : ${list.map((x, j) => `<button type="button" class="link-button" data-ly-chaingo="${esc(x.id)}">${j === k ? '<b>' : ''}p. ${pg(x.id)}${j === k ? '</b>' : ''}</button>`).join(' → ')}</p>` : '<p class="ly-help">Un texte peut continuer d’un bloc à l’autre, sur d’autres pages : il passe tout seul à la suite quand le premier est plein.</p>'}
+                    <div class="ly-row">${it.next ? '<button type="button" class="button small secondary" data-ly-cmd="unchain">Couper après ce bloc</button>' : '<button type="button" class="button small secondary" data-ly-cmd="chain">➜ Chaîner vers un bloc…</button>'}<button type="button" class="button small secondary" data-ly-cmd="autoflow" title="Ajoute des pages (même gabarit) et des blocs chaînés jusqu’à ce que tout le texte tienne">⤵ Faire couler sur de nouvelles pages</button></div>`, list.length > 1 || !!it.auto);
+                if (it.auto) h += sec(it.auto === 'toc' ? '📑 Table des matières' : '🔤 Index des noms', it.auto === 'toc'
+                    ? `<p class="ly-help">Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) :</p><div class="ly-autost">${D.paraStyles.map(s0 => `<label class="ly-f ly-check"><input type="checkbox" data-ly-autost="${esc(s0.id)}" ${(it.autoStyles || []).includes(s0.id) ? 'checked' : ''}> ${esc(s0.name)}${(it.autoStyles || []).includes(s0.id) ? ` <small>(niveau ${(it.autoStyles || []).indexOf(s0.id) + 1})</small>` : ''}</label>`).join('')}</div>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-body')}<label class="ly-f ly-check"><input type="checkbox" data-ly-set="autoDots" ${it.autoDots !== false ? 'checked' : ''}> Points de conduite (……… 12)</label>`
+                    : `<p class="ly-help">Noms marqués avec le style de caractère « Nom à indexer »${it.names?.length ? `, et ${it.names.length} personnes de la généalogie cherchées dans le texte` : ''}. Rangé par nom de famille, avec les pages.</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-idxnames>${it.names?.length ? '↻ Recharger les noms de la généalogie' : '＋ Chercher les noms de la généalogie'}</button>${it.names?.length ? '<button type="button" class="button small secondary" data-ly-idxnone>Seulement les noms marqués</button>' : ''}</div>`);
+                if (it.dyn) h += sec('👤 Objet dynamique : fiche', `<p class="ly-help">Ce texte suit une fiche de la généalogie${it.dyn.at ? ` (mis à jour le ${esc(it.dyn.at.replace('T', ' à '))})` : ''}. L’écrire à la main le détache.</p><div class="ly-row"><button type="button" class="button small" data-ly-dynupd>↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-dynedit>Changer la fiche ou ce qu’on montre…</button><button type="button" class="button small secondary" data-ly-dynopen>↗ Ouvrir la fiche</button><button type="button" class="button small secondary" data-ly-dyndetach>Détacher</button></div>`);
+            }
             if (it) h += sec('Lien', `<label class="ly-f"><span>Adresse</span><input type="url" data-ly-set="link" value="${esc(it.link || '')}" placeholder="https://… (cliquable dans le PDF et le HTML)"></label>`, !!it.link);
             h += sec('Aligner et répartir', `<div class="ly-row">${[['l', '⇤', 'À gauche'], ['ch', '↔', 'Centrer'], ['r', '⇥', 'À droite'], ['t', '⤒', 'En haut'], ['cv', '↕', 'Au milieu'], ['b', '⤓', 'En bas']].map(([k, ic, t]) => `<button type="button" class="button small secondary" data-ly-align="${k}" title="${t}">${ic}</button>`).join('')}</div><div class="ly-row">${sel2('alignTo', 'Par rapport à', [['sel', 'la sélection'], ['margins', 'aux marges'], ['page', 'à la page']], dl.dataset.alignTo || (its.length > 1 ? 'sel' : 'margins'), 'data-ly-alignto')}</div>${its.length > 2 ? `<div class="ly-row"><button type="button" class="button small secondary" data-ly-dist="h">Répartir ↔</button><button type="button" class="button small secondary" data-ly-dist="v">Répartir ↕</button></div>` : ''}`, its.length > 1);
             const shp = its.filter(x => ['rect', 'ellipse', 'polygon', 'star', 'path', 'frame'].includes(x.type));
@@ -1102,7 +1311,8 @@
         }
         function panelLinks() {
             const rows = []; D.pages.forEach((p, i) => p.items.forEach(it => { if (it.src !== undefined && it.type === 'frame') rows.push({i, it}); })); D.masters.forEach(m => m.items.forEach(it => { if (it.type === 'frame') rows.push({i: -1, m, it}); }));
-            return sec(`Liens — images placées (${rows.filter(r => r.it.src).length})`, rows.length ? `<div class="ly-links">${rows.map(({i, m, it}) => `<div class="ly-linkrow">${it.src ? `<img src="${esc(it.src)}" alt="">` : '<span class="ly-noimg">vide</span>'}<span><b>${esc(it.srcName || (it.src?.startsWith('data:') ? 'Image intégrée' : it.src?.replace('media/', '') || 'Cadre vide'))}</b><small>${m ? esc(m.name) : `page ${i + (D.page.start || 1)}`} · ${it.src?.startsWith('data:') ? 'intégrée au document' : it.src ? 'photo de la base' : '—'}</small></span>${m ? '' : `<button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button><button type="button" class="button small secondary" data-ly-linkrep="${i}:${esc(it.id)}">Remplacer</button>`}</div>`).join('')}</div>` : '<p class="ly-help">Aucun cadre d’image : outil ⊠ ou Objet → Placer une image.</p>');
+            const dyn = []; D.pages.forEach((p, i) => p.items.forEach(it => { if (it.dyn) dyn.push({i, it}); }));
+            return `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="relink">↻ Mettre à jour tous les liens</button></div>` + (dyn.length ? sec(`Textes liés à des fiches (${dyn.length})`, `<div class="ly-links">${dyn.map(({i, it}) => `<div class="ly-linkrow"><span class="ly-noimg">👤</span><span><b>${esc(plainOf(it.html).slice(0, 60))}</b><small>page ${i + (D.page.start || 1)} · ${linkState[it.id] === 'missing' ? '⛔ fiche introuvable' : 'suit la fiche'}</small></span><button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button></div>`).join('')}</div>`) : '') + sec(`Liens — images placées (${rows.filter(r => r.it.src).length})`, rows.length ? `<div class="ly-links">${rows.map(({i, m, it}) => `<div class="ly-linkrow">${it.src ? `<img src="${esc(it.src)}" alt="">` : '<span class="ly-noimg">vide</span>'}<span><b>${esc(it.srcName || (it.src?.startsWith('data:') ? 'Image intégrée' : it.src?.replace('media/', '') || 'Cadre vide'))}</b><small>${m ? esc(m.name) : `page ${i + (D.page.start || 1)}`} · ${it.src?.startsWith('data:') ? 'intégrée au document' : it.mediaId ? ({missing: '⛔ introuvable', updated: '🔗 liée · mise à jour'}[linkState[it.id]] || '🔗 liée · à jour') : it.src ? 'photo de la base' : '—'}</small></span>${it.mediaId && !m ? `<button type="button" class="button small secondary" data-ly-editorig2="${esc(it.id)}" title="Retoucher la photo de l’app">✏️</button>` : ''}${m ? '' : `<button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button><button type="button" class="button small secondary" data-ly-linkrep="${i}:${esc(it.id)}">Remplacer</button>`}</div>`).join('')}</div>` : '<p class="ly-help">Aucun cadre d’image : outil ⊠ ou Objet → Placer une image.</p>');
         }
         function panelHistory() {
             const t = d => d.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
@@ -1123,6 +1333,7 @@
         const setPath = (o, k, v) => { const ks = k.split('.'); let t = o; ks.slice(0, -1).forEach(x => { t[x] = t[x] && typeof t[x] === 'object' ? t[x] : {}; t = t[x]; }); t[ks.at(-1)] = v; };
         const labelOfField = el => (el.closest('label')?.querySelector('span')?.textContent || el.closest('label')?.firstChild?.textContent || '').trim();
         pbody.addEventListener('change', async e => {
+            if (e.target.matches('[data-ly-autost]')) { const it = one(); if (!it) return; const k = e.target.dataset.lyAutost; it.autoStyles = (it.autoStyles || []).filter(x => x !== k); if (e.target.checked) it.autoStyles.push(k); commit('Sommaire : styles'); render(); return; }
             if (e.target.matches('[data-ly-pmaster]')) { const v = e.target.value, m = D.masters.find(x => x.id === v); D.pages[cur].master = m ? m.id : ''; act = m ? `Gabarit « ${m.name} » sur la page ${cur + 1}` : `Gabarit enlevé de la page ${cur + 1}`; commit(); render(); return; }
             const el = e.target; act = labelOfField(el) ? `${labelOfField(el)} changé` : '';
             if (el.matches('[data-ly-set]')) {
@@ -1167,6 +1378,16 @@
         });
         pbody.addEventListener('mousedown', e => { if (e.target.closest('[data-ly-exec],[data-ly-palign],[data-ly-ins],[data-ly-pstyle],[data-ly-cstyle],[data-ly-link],[data-ly-tcol]')) e.preventDefault(); }); // garder la sélection du texte
         pbody.addEventListener('click', async e => {
+            const ch = e.target.closest('[data-ly-chaingo]'); if (ch) { const pi = pageOfItem(ch.dataset.lyChaingo); goPage(pi); sel = [ch.dataset.lyChaingo]; drawSel(); renderPanel(); return; }
+            if (e.target.closest('[data-ly-editorig]')) return editOriginal(one());
+            const eo2 = e.target.closest('[data-ly-editorig2]'); if (eo2) return editOriginal(findItem(eo2.dataset.lyEditorig2)?.it);
+            if (e.target.closest('[data-ly-unlinkimg]')) { const it = one(); if (it) { delete it.mediaId; commit('Image incorporée'); render(); } return; }
+            if (e.target.closest('[data-ly-dynupd]')) { const it = one(); if (it?.dyn) { it.html = await personDynHtml(it.dyn.id, it.dyn.fields); it.dyn.at = new Date().toISOString().slice(0, 16); commit('Texte de la fiche mis à jour'); render(); } return; }
+            if (e.target.closest('[data-ly-dynedit]')) return dynPersonDialog(one());
+            if (e.target.closest('[data-ly-dynopen]')) { const it = one(); if (it?.dyn) { A().state.currentPersonId = it.dyn.id; if (!dirty || confirm('Fermer la mise en page pour ouvrir la fiche ? (enregistre d’abord si besoin)')) { keyAc.abort(); dl.close(); A().setModule('personnes'); } } return; }
+            if (e.target.closest('[data-ly-dyndetach]')) { const it = one(); if (it) { delete it.dyn; commit('Texte détaché de la fiche'); render(); } return; }
+            if (e.target.closest('[data-ly-idxnames]')) { const it = one(); try { const r = await api('person_names'); it.names = (r.persons || []).map(p => `${p.first_name || ''}|${p.last_name || ''}`); commit('Index : noms de la généalogie'); render(); } catch (err) { toast(err.message, 'error'); } return; }
+            if (e.target.closest('[data-ly-idxnone]')) { const it = one(); delete it.names; commit('Index : noms marqués seulement'); render(); return; }
             const b = e.target.closest('button, [data-ly-lpick]'); if (!b) return; const d = b.dataset;
             // double-clic sur le nom d'un calque : le renommer (le premier clic redessine la liste, le dblclick natif se perd)
             if (d.lyLpick !== undefined && e.detail === 2) { const l = D.layers.find(x => x.id === b.closest('[data-ly-layer]')?.dataset.lyLayer), v = await ask('Nom du calque :', l?.name); if (l && v) { l.name = v.slice(0, 60); commit(); renderPanel(); } return; }
@@ -1285,6 +1506,7 @@
         setDirty(!id); render(); syncHistory(); requestAnimationFrame(() => zoomFit());
         ext.fullInit?.(dl, 'layout', true); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         dl.showModal(); canvas.focus({preventScroll: true}); // les raccourcis (V, T, M…) marchent tout de suite
+        setTimeout(() => refreshLinks(true).catch(() => {}), 300); // objets dynamiques : photos retouchées, fiches changées
         return dl;
     }
     /* ═════════════ Images : une photo de la base, ou un fichier de l'ordinateur (intégré, réduit) ═════════════ */
@@ -1294,13 +1516,13 @@
             let done = false;
             const dlg = ext.openDialog({eyebrow: 'PLACER UNE IMAGE', title: 'Choisir une image', wide: true, submitLabel: 'Placer',
                 body: `<label class="h-rc-drop"><input type="file" name="file" accept="image/png,image/jpeg,image/webp,image/gif"><span>📁 Une image de l’ordinateur (intégrée au document)…</span></label>
-                    <p class="muted">… ou une photo de la base :</p><input type="search" data-q placeholder="Chercher…">
+                    <p class="muted">… ou une photo de la base : elle reste <b>liée</b> (objet dynamique) — retouchée dans l’app, elle se met à jour ici.</p><input type="search" data-q placeholder="Chercher…">
                     <div class="ly-imgpick" data-list>${rows.map(r => `<label title="${esc(r.title || r.filename)}"><input type="radio" name="pick" value="${r.id}"><img src="media/${encodeURIComponent(r.filename)}" alt="" loading="lazy"><span>${esc(r.title || r.filename)}</span></label>`).join('') || '<p class="muted">Aucune photo dans la base.</p>'}</div>`,
                 onOpen: d => d.querySelector('[data-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
                 onSubmit: async f => {
                     const file = f.file.files[0], pick = f.querySelector('[name=pick]:checked');
                     if (file) { if (!/^image\/(png|jpeg|webp|gif)$/.test(file.type)) { toast('Image PNG, JPEG, WebP ou GIF seulement.', 'error'); return false; } const src = await shrink(file); done = true; resolve({src, name: file.name}); return; }
-                    if (pick) { const r = rows.find(x => x.id === Number(pick.value)); done = true; resolve({src: `media/${r.filename}`, name: r.title || r.filename}); return; }
+                    if (pick) { const r = rows.find(x => x.id === Number(pick.value)); done = true; resolve({src: `media/${r.filename}`, name: r.title || r.filename, mediaId: r.id}); return; }
                     toast('Choisis une image.', 'error'); return false;
                 }});
             dlg.addEventListener('close', () => { if (!done) resolve(null); });
@@ -1315,14 +1537,105 @@
         });
     }
 
+    /* ═════════════ Texte chaîné, sommaire, index : ce qu'affiche chaque bloc (calculé, jamais enregistré) ═════════════ */
+    /** Ce qui tient dans ce cadre : la coupe se fait n'importe où dans le texte (entre deux mots), en gardant la mise en forme */
+    function splitFit(doc, frame, html, others) {
+        if (!measureOverflow(doc, {...frame, html}, others)) return {fit: html, rest: ''};
+        const src = document.createElement('div'); src.innerHTML = html;
+        const texts = []; const w = document.createTreeWalker(src, NodeFilter.SHOW_TEXT); let n, total = 0; while ((n = w.nextNode())) { texts.push([n, total]); total += n.data.length; }
+        const at = k => { let i = texts.length - 1; while (i > 0 && texts[i][1] > k) i--; const [node, off] = texts[i] || [src, 0]; return [node, Math.min(node.data?.length ?? 0, k - off)]; };
+        const part = (a, b) => { const r = document.createRange(); if (a === null) r.setStart(src, 0); else r.setStart(...at(a)); if (b === null) r.setEnd(src, src.childNodes.length); else r.setEnd(...at(b)); const d = document.createElement('div'); d.appendChild(r.cloneContents()); return d.innerHTML; };
+        const plain = texts.map(t => t[0].data).join('');
+        let lo = 0, hi = total;
+        while (lo < hi) { const mid = Math.ceil((lo + hi) / 2); if (!measureOverflow(doc, {...frame, html: part(null, mid)}, others)) lo = mid; else hi = mid - 1; }
+        let k = lo; while (k > 0 && k < total && !/\s/.test(plain[k - 1]) && !/\s/.test(plain[k])) k--; // entre deux mots
+        if (k <= 0) k = Math.max(1, lo);
+        let rest = part(k, null).replace(/^(\s*<(p|h\d|li|div)\b)/i, '$1 data-cont="1"'); // la suite d'un paragraphe coupé : pas de retrait de 1re ligne
+        return {fit: part(null, k), rest};
+    }
+    const plainOf = html => { const d = document.createElement('div'); d.innerHTML = html || ''; return d.textContent || ''; };
+    const fold = t => String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    let resolveCache = {key: '', out: null};
+    /** Le document tel qu'il s'affiche : textes chaînés répartis de cadre en cadre, sommaires et index remplis */
+    function resolveDoc(doc, {editingId = null} = {}) {
+        const all = []; doc.pages.forEach((p, i) => p.items.forEach(it => all.push({it, i})));
+        const special = all.some(({it}) => it.next || it.auto); if (!special) return doc;
+        const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length]))]);
+        if (resolveCache.key === key) return resolveCache.out;
+        const V = JSON.parse(JSON.stringify(doc)), byId = new Map(); V.pages.forEach((p, i) => p.items.forEach(it => byId.set(it.id, {it, i, p})));
+        const targets = new Set(); byId.forEach(({it}) => { if (it.next && byId.has(it.next)) targets.add(it.next); });
+        const chainOf = head => { const out = [], seen = new Set(); let c = head; while (c && !seen.has(c.id)) { seen.add(c.id); out.push(c); c = c.next ? byId.get(c.next)?.it : null; if (c && c.type !== 'text') break; } return out; };
+        const runChain = (head, html) => { const frames = chainOf(head); let rest = html;
+            frames.forEach((f, k) => { const pg = byId.get(f.id).p, others = pg.items.filter(o => o !== f); if (k > 0) f._follow = true;
+                if (editingId && f.id === editingId) { f.html = rest; rest = ''; return; } // le bloc qu'on écrit montre tout son texte
+                if (k === frames.length - 1 || !rest) { f.html = rest || ''; rest = ''; return; }
+                const r = splitFit(V, f, rest, others); f.html = r.fit; rest = r.rest; }); };
+        // 1. les textes ordinaires chaînés
+        byId.forEach(({it}) => { if (it.type === 'text' && it.next && !targets.has(it.id) && !it.auto) runChain(it, it.html); });
+        // 2. sommaires et index, d'après les pages telles qu'elles sont maintenant
+        const start = V.page.start || 1, pageTexts = V.pages.map(p => [...p.items].filter(x => x.type === 'text' && !x.auto).sort((a, b) => a.y - b.y || a.x - b.x));
+        byId.forEach(({it}) => {
+            if (!it.auto || targets.has(it.id)) return;
+            let html = '';
+            if (it.auto === 'toc') {
+                const want = it.autoStyles?.length ? it.autoStyles : ['ps-chapter'], rows = [];
+                pageTexts.forEach((list, i) => list.forEach(t => { const d = document.createElement('div'); d.innerHTML = t.html || ''; d.querySelectorAll('[data-ps]').forEach(b => { const lvl = want.indexOf(b.dataset.ps); const txt = (b.textContent || '').replace(/\s+/g, ' ').trim(); if (lvl >= 0 && txt && !b.hasAttribute('data-cont')) rows.push({txt, lvl, page: i + start}); }); }));
+                html = rows.map(r => `<p data-ps="${esc(it.autoPs || 'ps-body')}" class="ly-toc" style="margin-left:${r.lvl * 5}mm"><span>${esc(r.txt)}</span>${it.autoDots !== false ? '<i class="ly-tl"></i>' : '<i class="ly-tsp"></i>'}<span>${r.page}</span></p>`).join('') || '<p data-ps="ps-body"><em>(Le sommaire se remplit avec les paragraphes en style « Chapitre », ou ceux choisis dans Objet.)</em></p>';
+            } else {
+                const map = new Map(), add = (name, page) => { const k = fold(name); if (!map.has(k)) map.set(k, {name, pages: new Set()}); map.get(k).pages.add(page); };
+                const key = t => fold(t).split(/[^a-z0-9'-]+/).filter(Boolean).join(' ');
+                const names = (it.names || []).map(n => { const [f, l] = n.split('|'); return {f: f || '', l: l || '', k: key(`${f} ${l}`), r: key(`${l} ${f}`)}; }).filter(n => n.k.includes(' ') && n.k.length > 4);
+                pageTexts.forEach((list, i) => {
+                    const page = i + start, d = document.createElement('div'); d.innerHTML = list.map(t => t.html || '').join(' ');
+                    d.querySelectorAll('[data-cs="cs-index"]').forEach(sp => { const t = (sp.textContent || '').replace(/\s+/g, ' ').trim(); if (t) add(t, page); });
+                    if (names.length) { // tous les groupes de 2 à 4 mots de la page, pour trouver vite « prénom nom » et « nom prénom »
+                        const toks = fold(d.textContent || '').split(/[^a-z0-9'-]+/).filter(Boolean), grams = new Set();
+                        for (let a = 0; a < toks.length; a++) for (let n = 2; n <= 4 && a + n <= toks.length; n++) grams.add(toks.slice(a, a + n).join(' '));
+                        names.forEach(n => { if (grams.has(n.k) || grams.has(n.r)) add(`${n.l.toUpperCase()} ${n.f}`.trim(), page); }); }
+                });
+                const rows = [...map.values()].sort((a, b) => fold(a.name).localeCompare(fold(b.name)));
+                let letter = '';
+                const pagesTxt = set => { const ps = [...set].sort((a, b) => a - b), out = []; for (let k = 0; k < ps.length; k++) { let j = k; while (j + 1 < ps.length && ps[j + 1] === ps[j] + 1) j++; out.push(j > k + 1 ? `${ps[k]}–${ps[j]}` : j === k + 1 ? `${ps[k]}, ${ps[j]}` : String(ps[k])); k = j; } return out.join(', '); };
+                html = rows.map(r => { const l = fold(r.name)[0]?.toUpperCase() || '#'; const head = l !== letter ? `<p data-ps="ps-head">${esc(l)}</p>` : ''; letter = l; return `${head}<p data-ps="${esc(it.autoPs || 'ps-list')}">${esc(r.name)}, ${pagesTxt(r.pages)}</p>`; }).join('') || '<p data-ps="ps-body"><em>(L’index se remplit avec les noms marqués en style de caractère « Nom à indexer », et les personnes de la généalogie trouvées dans le texte.)</em></p>';
+            }
+            if (it.next) runChain(it, html); else it.html = html;
+        });
+        resolveCache = {key, out: V};
+        return V;
+    }
+    /* ── Objets dynamiques : le texte d'une fiche de la généalogie ── */
+    const DYN_FIELDS = [['name', 'Nom complet'], ['life', 'Naissance et décès (dates et lieux)'], ['parents', 'Parents'], ['partners', 'Conjoint(s)'], ['children', 'Enfants'], ['occupation', 'Profession'], ['events', 'Tous les événements'], ['notes', 'Notes']];
+    async function personDynHtml(id, fields) {
+        const r = await api('person', {id}), p = r.person || {}, nm = x => [x?.first_name, x?.last_name].filter(Boolean).join(' ') || x?.name || '';
+        const ev = (r.events || []), find = re => ev.find(e => re.test(String(e.type || e.type_label || e.event_type || '')));
+        const evTxt = e => e ? [e.date_text || e.year, e.place_name || e.place].filter(Boolean).join(', ') : '';
+        const out = [];
+        if (fields.includes('name')) out.push(`<p data-ps="ps-name">${esc(nm(p))}</p>`);
+        if (fields.includes('life')) { const b = find(/naiss|birth|bapt/i), d = find(/décè|deces|death|inhum|sépult/i); const t = [b && `° ${evTxt(b)}`, d && `† ${evTxt(d)}`].filter(Boolean).join(' — '); if (t) out.push(`<p data-ps="ps-dates">${esc(t)}</p>`); }
+        if (fields.includes('occupation') && (p.occupation || p.profession)) out.push(`<p data-ps="ps-body">${esc(p.occupation || p.profession)}</p>`);
+        const list = (label, arr) => { const names = (arr || []).map(nm).filter(Boolean); if (names.length) out.push(`<p data-ps="ps-body"><b>${label} :</b> ${esc(names.join(', '))}</p>`); };
+        if (fields.includes('parents')) list('Parents', r.parents);
+        if (fields.includes('partners')) list('Conjoint(s)', r.partners);
+        if (fields.includes('children')) list('Enfants', r.children);
+        if (fields.includes('events')) ev.forEach(e => out.push(`<p data-ps="ps-list">${esc(e.type_label || e.type || 'Événement')} : ${esc(evTxt(e))}</p>`));
+        if (fields.includes('notes')) (r.notes || []).slice(0, 10).forEach(n => { const t = plainOf(n.content || n.text || n.note || ''); if (t.trim()) out.push(`<p data-ps="ps-body">${esc(t.trim())}</p>`); });
+        return out.join('') || `<p data-ps="ps-body">${esc(nm(p) || 'Fiche')}</p>`;
+    }
+
     /* ═════════════ Exports ═════════════ */
     const slug = n => String(n || 'livre').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'livre';
     const download = (name, blob) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); };
-    function printHtml(doc, name, withButton, {bleed = false} = {}) {
+    function printHtml(doc0, name, withButton, {bleed = false} = {}) {
+        const doc = resolveDoc(doc0);
         // avec fond perdu : la feuille est agrandie du fond perdu et d'une bande pour les traits de coupe (la ligne-bloc, sinon 8 mm)
         const B = bleed ? doc.page.bleed || 0 : 0, M = bleed ? Math.max(8, doc.page.slug || 0) : 0, W = doc.page.w + 2 * (B + M), H = doc.page.h + 2 * (B + M);
-        const marks = () => { const pw = px(doc.page.w), ph = px(doc.page.h), o = px(B + M), L = px(Math.max(3, M - 2)), g = px(B + 1); const ln = (x1, y1, x2, y2) => `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}"/>`; return `<svg class="ly-marks" width="${px(W)}" height="${px(H)}" stroke="#000" stroke-width="0.5">${[[o, o], [o + pw, o], [o, o + ph], [o + pw, o + ph]].map(([x, y], k) => { const sx = k % 2 ? 1 : -1, sy = k > 1 ? 1 : -1; return ln(x + sx * g, y, x + sx * (g + L), y) + ln(x, y + sy * g, x, y + sy * (g + L)); }).join('')}</svg>`; };
-        const pages = doc.pages.map((_, i) => { const pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i}); return bleed ? `<div class="ly-sheet" style="width:${px(W)}px;height:${px(H)}px">${marks()}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(doc.page.w + 2 * B)}px;height:${px(doc.page.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg; }).join('');
+        // traits de coupe, repères de montage (cibles), gamme de couleurs et ligne d'informations, comme pour un imprimeur
+        const marks = i => { const pw = px(doc.page.w), ph = px(doc.page.h), o = px(B + M), L = px(Math.max(3, M - 2)), g = px(B + 1), mid = px(M / 2); const ln = (x1, y1, x2, y2) => `<line x1="${r1(x1)}" y1="${r1(y1)}" x2="${r1(x2)}" y2="${r1(y2)}"/>`;
+            const reg = (cx, cy) => { const r = px(2.2); return `<circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r)}" fill="none"/><circle cx="${r1(cx)}" cy="${r1(cy)}" r="${r1(r / 2.2)}" fill="#000"/>${ln(cx - r * 1.6, cy, cx + r * 1.6, cy)}${ln(cx, cy - r * 1.6, cx, cy + r * 1.6)}`; };
+            const bar = ['#00aeef', '#ec008c', '#fff200', '#000000', '#00a651', '#ed1c24', '#2e3192', '#808080', '#bfbfbf'].map((c, k) => `<rect x="${r1(o + px(6) + k * px(4))}" y="${r1(mid - px(1.6))}" width="${r1(px(4))}" height="${r1(px(3.2))}" fill="${c}" stroke="none"/>`).join('');
+            const info = `<text x="${r1(o)}" y="${r1(px(H) - mid + px(1))}" font-size="${r1(px(2.2))}" font-family="Arial, sans-serif" fill="#000" stroke="none">${esc(name)} · page ${i + (doc.page.start || 1)} · ${r1(doc.page.w)} × ${r1(doc.page.h)} mm · fond perdu ${r1(B)} mm · ${new Date().toLocaleString('fr-FR')}</text>`;
+            return `<svg class="ly-marks" width="${px(W)}" height="${px(H)}" stroke="#000" stroke-width="0.5">${[[o, o], [o + pw, o], [o, o + ph], [o + pw, o + ph]].map(([x, y], k) => { const sx = k % 2 ? 1 : -1, sy = k > 1 ? 1 : -1; return ln(x + sx * g, y, x + sx * (g + L), y) + ln(x, y + sy * g, x, y + sy * (g + L)); }).join('')}${M >= 6 ? reg(o + pw / 2, mid) + reg(o + pw / 2, px(H) - mid) + reg(mid, o + ph / 2) + reg(px(W) - mid, o + ph / 2) + bar + info : ''}</svg>`; };
+        const pages = doc.pages.map((_, i) => { const pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i}); return bleed ? `<div class="ly-sheet" style="width:${px(W)}px;height:${px(H)}px">${marks(i)}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(doc.page.w + 2 * B)}px;height:${px(doc.page.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg; }).join('');
         return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)}</title><base href="${esc(location.href.replace(/[^/]*$/, ''))}"><style>${BASE_CSS}${docCss(doc, 'body')}
             @page{size:${W}mm ${H}mm;margin:0}html,body{margin:0;padding:0;background:#888}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             .ly-page{margin:12px auto;box-shadow:0 2px 12px rgba(0,0,0,.35)}.ly-page.is-bleed{overflow:visible;margin:0;box-shadow:none}.ly-sheet{position:relative;margin:12px auto;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.35)}.ly-bleedclip{position:absolute;overflow:hidden}.ly-marks{position:absolute;left:0;top:0}.ly-bar{position:sticky;top:0;z-index:9;display:flex;gap:10px;align-items:center;padding:10px 16px;background:#111;color:#fff;font:14px system-ui}.ly-bar button{font:inherit;padding:6px 14px;border-radius:6px;border:0;background:#2f6bff;color:#fff;cursor:pointer}

@@ -328,6 +328,7 @@ try {
         'boards' => json_response(['boards' => boards_list($pdo, $_GET)]),
         'topic_sheets' => json_response(['sheets' => topic_sheets_list($pdo)]),
         'periodicals' => json_response(periodicals_all($pdo)),
+        'person_names' => json_response(person_names($pdo)),
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),

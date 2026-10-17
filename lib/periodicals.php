@@ -104,6 +104,12 @@ function periodical_links_map(PDO $pdo, string $itemType = ''): array
     return $links;
 }
 
+/** Tous les noms de la généalogie (pour l'index des noms d'un livre) */
+function person_names(PDO $pdo): array
+{
+    return ['persons' => $pdo->query("SELECT id, first_name, last_name FROM persons WHERE trim(COALESCE(last_name,''))<>'' ORDER BY last_name, first_name LIMIT 20000")->fetchAll()];
+}
+
 /** Chercher une partie d'enquête (piste, document, tâche…) à rattacher */
 function periodical_link_search(PDO $pdo, string $q): array
 {
