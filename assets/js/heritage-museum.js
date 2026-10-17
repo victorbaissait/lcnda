@@ -82,7 +82,9 @@
                     <button type="button" class="button small secondary" data-me-import>Importer un musée reçu…</button></section>
                 ${data.guestbook.length ? `<section><h3>Livre d’or</h3><ul class="h-me-book">${data.guestbook.map(g => `<li><p>${esc(g.message)}</p><small>${esc(g.name)} · ${esc(g.date)}</small>${readOnly ? '' : `<button type="button" class="icon-button danger" data-me-book-del="${g.id}" title="Effacer ce message">🗑</button>`}</li>`).join('')}</ul></section>` : ''}
             </aside>
-            <section class="h-me-main">${room ? `
+            <section class="h-me-main"><section class="h-me-mplan"><div class="h-me-plan-head"><h3>🗺️ Plan du musée</h3><small class="muted">${readOnly ? 'Vu de dessus : les salles et leurs portes.' : 'Vu de dessus, comme un plan de maison : glisse une salle pour la placer, tire ses bords (▸ ▾ ◢) pour l’agrandir. Deux salles collées par un mur sont reliées par une porte ; clic sur une porte pour la fermer ou la rouvrir. Clic sur une salle pour l’aménager.'}</small></div>
+                <svg data-me-mplan aria-label="Plan du musée" preserveAspectRatio="xMidYMid meet"></svg>${data.settings?.plan ? '' : `<p class="muted h-me-mplan-note">${readOnly ? '' : 'Pour l’instant, les salles s’enchaînent l’une après l’autre (portes sur le mur d’entrée). Dès que tu déplaces une salle, la visite suit ce plan.'}</p>`}</section>
+                ${room ? `
                 ${readOnly ? `<h3>${esc(room.name)}</h3>${room.intro ? `<p>${esc(room.intro)}</p>` : ''}` : `<form data-me-roomform class="h-me-form h-me-roomform"><label class="span-2">Nom de la salle<input name="name" value="${esc(room.name)}" maxlength="120"></label>
                     <label class="span-2">Texte d’accueil de la salle <small>(lu au début de la visite guidée)</small><textarea name="intro" rows="2">${esc(room.intro)}</textarea></label>
                     <label>Taille<select name="size">${[['small', 'Petite (10 × 8 m)'], ['medium', 'Moyenne (14 × 10 m)'], ['large', 'Grande (18 × 12 m)'], ['custom', 'Sur mesure…']].map(([v, l]) => `<option value="${v}" ${(room.settings.size || 'medium') === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -106,7 +108,9 @@
         const again = (ri = data.rooms.indexOf(room)) => { dlg.close(); openEditor(data.id, Math.max(0, ri)); };
         const guard = fn => async (...args) => { try { await fn(...args); } catch (error) { toast(error.message, 'error'); } };
         dlg.querySelectorAll('[data-me-close]').forEach(b => b.addEventListener('click', () => dlg.close()));
-        if (room) mountPlan(dlg, room, readOnly, () => again(), {first: data.rooms.indexOf(room) === 0, last: data.rooms.indexOf(room) === data.rooms.length - 1});
+        const planDoors = window.LCNDA_MUSEUM_VIEWER?.museumDoors?.(data.rooms, data.settings) || null;
+        if (!readOnly || data.settings?.plan) mountMuseumPlan(dlg, data, data.rooms.indexOf(room), readOnly, i => again(i));
+        if (room) mountPlan(dlg, room, readOnly, () => again(), {first: data.rooms.indexOf(room) === 0, last: data.rooms.indexOf(room) === data.rooms.length - 1, doors: planDoors?.[data.rooms.indexOf(room)] || null, rooms: data.rooms});
         dlg.querySelector('[data-me-visit]').addEventListener('click', () => { dlg.close(); openMuseum(data.id, Math.max(0, data.rooms.indexOf(room))); });
         dlg.querySelector('[data-me-print]').addEventListener('click', () => { dlg.close(); openMuseum(data.id, 0).then(() => document.querySelector('#h-museum-dialog [data-lm-catalog]')?.click()); });
         dlg.querySelectorAll('[data-me-room]').forEach(b => b.addEventListener('click', () => again(Number(b.dataset.meRoom))));
@@ -121,7 +125,7 @@
         if (readOnly) return;
         dlg.querySelector('[data-me-museum]')?.addEventListener('submit', guard(async e => {
             e.preventDefault(); const f = e.target;
-            await post('save_museum', {id: data.id, title: f.title.value, subtitle: f.subtitle.value, intro: f.intro.value, author: f.author.value, settings: {guestbook: f.guestbook.checked}});
+            await post('save_museum', {id: data.id, title: f.title.value, subtitle: f.subtitle.value, intro: f.intro.value, author: f.author.value, settings: {...data.settings, guestbook: f.guestbook.checked}}); // le plan du musée reste
             toast('Musée enregistré.'); again();
         }));
         dlg.querySelector('[data-me-room-add]').addEventListener('click', guard(async () => { await post('save_museum_room', {museum_id: data.id, name: `Salle ${data.rooms.length + 1}`, settings: {size: 'medium', floor: 'light', wall: '#ffffff'}}); again(data.rooms.length); }));
@@ -129,7 +133,7 @@
         dlg.querySelectorAll('[data-me-room-up],[data-me-room-down]').forEach(b => b.addEventListener('click', guard(async () => { const i = Number(b.dataset.meRoomUp ?? b.dataset.meRoomDown), to = b.dataset.meRoomUp !== undefined ? i - 1 : i + 1; const ids = data.rooms.map(r => r.id); const [mv] = ids.splice(i, 1); ids.splice(to, 0, mv); await post('museum_reorder', {what: 'rooms', ids}); again(ids.indexOf(room?.id)); })));
         if (!room) return;
         const rf = dlg.querySelector('[data-me-roomform]');
-        rf.addEventListener('submit', guard(async e => { e.preventDefault(); await post('save_museum_room', {id: room.id, name: rf.name.value, intro: rf.intro.value, settings: {size: rf.size.value, floor: rf.floor.value, wall: rf.wall.value, ...(rf.size.value === 'custom' ? {width: rf.width.value, depth: rf.depth.value} : {})}}); toast('Salle enregistrée.'); again(); }));
+        rf.addEventListener('submit', guard(async e => { e.preventDefault(); await post('save_museum_room', {id: room.id, name: rf.name.value, intro: rf.intro.value, settings: {mx: room.settings.mx, mz: room.settings.mz, size: rf.size.value, floor: rf.floor.value, wall: rf.wall.value, ...(rf.size.value === 'custom' ? {width: rf.width.value, depth: rf.depth.value} : {})}}); toast('Salle enregistrée.'); again(); }));
         dlg.querySelector('[data-me-room-del]').addEventListener('click', guard(async () => { if (!confirm(`Supprimer la salle « ${room.name} » et tout ce qui y est exposé ? (les photos restent dans la base)`)) return; await post('delete_museum_room', {id: room.id}); again(0); }));
         bindAudio(rf, 'room', room, () => again());
         rf.size.addEventListener('change', () => { // « Sur mesure » part de la taille actuelle
@@ -149,6 +153,97 @@
     }
     ext.openMuseumEditor = openEditor;
 
+    /* ───────── 🗺️ Plan du musée : les salles vues de dessus, à placer et agrandir, et leurs portes ───────── */
+    function mountMuseumPlan(dlg, data, current, readOnly, openRoom) {
+        const V = window.LCNDA_MUSEUM_VIEWER, svg = dlg.querySelector('[data-me-mplan]');
+        if (!V?.museumRects || !svg) return;
+        const rooms = data.rooms, snap = v => Math.round(v * 2) / 2, clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+        let rects = V.museumRects(rooms), drag = null, view = null;
+        const closed = () => new Set(Array.isArray(data.settings?.closed) ? data.settings.closed : []);
+        // les portes possibles (même calcul que la visite, sans tenir compte des portes fermées) pour les dessiner toutes
+        const allDoors = () => { const d = V.museumDoors(rooms.map((r, i) => ({...r, settings: {...r.settings, mx: rects[i].x, mz: rects[i].z, size: 'custom', width: rects[i].W, depth: rects[i].D}})), {plan: true}) || []; const seen = new Map(); d.forEach((list, i) => list.forEach(x => { if (!seen.has(x.key)) seen.set(x.key, {...x, from: i}); })); return [...seen.values()]; };
+        const draw = () => {
+            // le cadre ne bouge pas pendant un glisser (sinon l'échelle change sous la souris) ; une marge pour placer une salle autour
+            if (!drag || !view) { const m = 6; view = [Math.min(...rects.map(r => r.x)) - m, Math.min(...rects.map(r => r.z)) - m, Math.max(...rects.map(r => r.x + r.W)) + m, Math.max(...rects.map(r => r.z + r.D)) + m]; }
+            const [x0, z0, x1, z1] = view;
+            svg.setAttribute('viewBox', `${x0} ${z0} ${x1 - x0} ${z1 - z0}`);
+            let h = '';
+            for (let x = Math.ceil(x0); x < x1; x++) h += `<line x1="${x}" y1="${z0}" x2="${x}" y2="${z1}" class="pl-grid"/>`;
+            for (let z = Math.ceil(z0); z < z1; z++) h += `<line x1="${x0}" y1="${z}" x2="${x1}" y2="${z}" class="pl-grid"/>`;
+            rects.forEach((r, i) => {
+                h += `<g class="mp-room${i === current ? ' is-cur' : ''}" data-mp="${i}"><rect x="${r.x}" y="${r.z}" width="${r.W}" height="${r.D}" class="mp-rect"/>
+                    <text x="${r.x + r.W / 2}" y="${r.z + r.D / 2 - 0.2}" class="mp-name">${i + 1}. ${esc(rooms[i].name || 'Salle')}</text><text x="${r.x + r.W / 2}" y="${r.z + r.D / 2 + 1}" class="mp-size">${String(r.W).replace('.', ',')} × ${String(r.D).replace('.', ',')} m</text>
+                    <text x="${r.x + r.W / 2}" y="${r.z + 0.9}" class="mp-wall">fond</text><text x="${r.x + r.W / 2}" y="${r.z + r.D - 0.45}" class="${i === 0 ? 'mp-in' : 'mp-wall'}">${i === 0 ? '▲ entrée du musée' : 'entrée'}</text>
+                    ${readOnly ? '' : `<rect x="${r.x + r.W - 0.35}" y="${r.z + r.D / 2 - 1}" width="0.7" height="2" class="mp-h" data-mph="e"/><rect x="${r.x + r.W / 2 - 1}" y="${r.z + r.D - 0.35}" width="2" height="0.7" class="mp-h" data-mph="s"/><rect x="${r.x + r.W - 0.6}" y="${r.z + r.D - 0.6}" width="1.2" height="1.2" class="mp-h" data-mph="se"/>`}</g>`;
+            });
+            const shut = closed();
+            allDoors().forEach(d => {
+                const P = rects[d.from], horiz = d.wall === 'back' || d.wall === 'front';
+                const cx = horiz ? P.x + P.W / 2 + (d.wall === 'front' ? -d.along : d.along) : (d.wall === 'right' ? P.x + P.W : P.x), cz = horiz ? (d.wall === 'front' ? P.z + P.D : P.z) : P.z + P.D / 2 + (d.wall === 'right' ? -d.along : d.along);
+                const off = shut.has(d.key);
+                h += `<g class="mp-door${off ? ' is-shut' : ''}" data-mpd="${esc(d.key)}"><title>${off ? 'Porte fermée : clic pour l’ouvrir' : 'Porte : clic pour la fermer'}</title><rect x="${horiz ? cx - 0.7 : cx - 0.25}" y="${horiz ? cz - 0.25 : cz - 0.7}" width="${horiz ? 1.4 : 0.5}" height="${horiz ? 0.5 : 1.4}"/></g>`;
+            });
+            svg.innerHTML = h;
+        };
+        const point = e => { const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; const q = p.matrixTransform(svg.getScreenCTM().inverse()); return [q.x, q.y]; };
+        // aimant : un bord qui passe près du bord d'une autre salle s'y colle (pour qu'elles se touchent et aient une porte)
+        const magnet = (i, x, z) => {
+            const r = rects[i], M = 0.7; let bx = x, bz = z, dx = M, dz = M;
+            rects.forEach((o, j) => { if (j === i) return;
+                [[o.x + o.W - x], [o.x - (x + r.W)], [o.x - x], [o.x + o.W - (x + r.W)]].forEach(([d]) => { if (Math.abs(d) < dx) { dx = Math.abs(d); bx = x + d; } });
+                [[o.z + o.D - z], [o.z - (z + r.D)], [o.z - z], [o.z + o.D - (z + r.D)]].forEach(([d]) => { if (Math.abs(d) < dz) { dz = Math.abs(d); bz = z + d; } }); });
+            return [bx, bz];
+        };
+        const save = async (i, extra = {}) => {
+            const firstTime = !data.settings?.plan;
+            if (firstTime) { // le premier changement fixe la place de toutes les salles : la visite suit désormais le plan
+                for (let k = 0; k < rooms.length; k++) if (k !== i) await post('save_museum_room', {id: rooms[k].id, name: rooms[k].name, intro: rooms[k].intro, settings: {...rooms[k].settings, mx: rects[k].x, mz: rects[k].z}});
+                data.settings = {...data.settings, plan: true}; await post('save_museum', {id: data.id, title: data.title, subtitle: data.subtitle, intro: data.intro, author: data.author, settings: data.settings});
+            }
+            const r = rooms[i], R = rects[i];
+            await post('save_museum_room', {id: r.id, name: r.name, intro: r.intro, settings: {...r.settings, mx: R.x, mz: R.z, ...extra}});
+        };
+        if (readOnly) { draw(); return; }
+        svg.addEventListener('pointerdown', e => {
+            const door = e.target.closest('[data-mpd]');
+            if (door) { e.preventDefault(); drag = {door: door.dataset.mpd}; return; }
+            const g = e.target.closest('[data-mp]'); if (!g) return;
+            const i = Number(g.dataset.mp), [x, z] = point(e), handle = e.target.closest('[data-mph]')?.dataset.mph;
+            drag = {i, handle, sx: x, sz: z, x0: rects[i].x, z0: rects[i].z, W0: rects[i].W, D0: rects[i].D, moved: false};
+            svg.setPointerCapture(e.pointerId); e.preventDefault();
+        });
+        svg.addEventListener('pointermove', e => {
+            if (!drag || drag.door) return;
+            const [x, z] = point(e), r = rects[drag.i], dx = x - drag.sx, dz = z - drag.sz;
+            if (Math.hypot(dx, dz) > 0.25) drag.moved = true; if (!drag.moved) return;
+            if (drag.handle) {
+                if (drag.handle.includes('e')) r.W = clamp(snap(drag.W0 + dx), 8, 40);
+                if (drag.handle.includes('s')) r.D = clamp(snap(drag.D0 + dz), 8, 40);
+            } else { [r.x, r.z] = magnet(drag.i, snap(drag.x0 + dx), snap(drag.z0 + dz)); }
+            draw();
+        });
+        const end = async () => {
+            const d = drag; drag = null; if (!d) return;
+            try {
+                if (d.door) { // ouvrir / fermer une porte
+                    const set = closed(); set.has(d.door) ? set.delete(d.door) : set.add(d.door);
+                    if (!data.settings?.plan) await save(0);
+                    data.settings = {...data.settings, plan: true, closed: [...set]};
+                    await post('save_museum', {id: data.id, title: data.title, subtitle: data.subtitle, intro: data.intro, author: data.author, settings: data.settings});
+                    return openRoom(current);
+                }
+                if (!d.moved) return openRoom(d.i); // un clic : aménager cette salle
+                if (rects.some((o, j) => j !== d.i && o.x < rects[d.i].x + rects[d.i].W - 0.05 && rects[d.i].x < o.x + o.W - 0.05 && o.z < rects[d.i].z + rects[d.i].D - 0.05 && rects[d.i].z < o.z + o.D - 0.05)) {
+                    toast('Deux salles ne peuvent pas se chevaucher.', 'error'); rects = V.museumRects(rooms); draw(); return;
+                }
+                await save(d.i, d.handle ? {size: 'custom', width: rects[d.i].W, depth: rects[d.i].D} : {});
+                openRoom(current);
+            } catch (error) { toast(error.message, 'error'); }
+        };
+        svg.addEventListener('pointerup', end); svg.addEventListener('pointercancel', () => { drag = null; rects = V.museumRects(rooms); draw(); });
+        draw();
+    }
+
     /* ───────── Plan de la salle (vu de dessus, comme un plan d'architecte) ───────── */
 
     const FOOT = {bench: [1.8, 0.45], chair: [0.5, 0.5], sofa: [2, 0.85], plant: [0.6, 0.6, 'c'], column: [0.56, 0.56, 'c'], pedestal: [0.6, 0.6], rope: [2.1, 0.12], rug: [3, 2],
@@ -163,19 +258,28 @@
         const canHang = it => !['decor', 'seat'].includes(it.kind);
         const toWorld = (wall, along, W, D) => wall === 'back' ? [along, -D / 2] : wall === 'front' ? [-along, D / 2] : wall === 'left' ? [-W / 2, along] : [W / 2, -along];
         const draw = () => {
-            const {W, D, spots} = V.layoutRoom(room);
+            const {W, D, spots} = V.layoutRoom(room, pos.doors || null);
             svg.setAttribute('viewBox', `${-W / 2 - 1} ${-D / 2 - 1} ${W + 2} ${D + 2}`);
             let h = `<rect x="${-W / 2}" y="${-D / 2}" width="${W}" height="${D}" class="pl-room"/>`;
             for (let x = Math.ceil(-W / 2); x < W / 2; x++) h += `<line x1="${x}" y1="${-D / 2}" x2="${x}" y2="${D / 2}" class="pl-grid"/>`;
             for (let z = Math.ceil(-D / 2); z < D / 2; z++) h += `<line x1="${-W / 2}" y1="${z}" x2="${W / 2}" y2="${z}" class="pl-grid"/>`;
             h += `<text x="0" y="${-D / 2 - 0.35}" class="pl-wall">Mur du fond</text><text x="0" y="${D / 2 + 0.65}" class="pl-wall">Mur d’entrée</text>`;
             h += `<text x="${-W / 2 - 0.35}" y="0" class="pl-wall" transform="rotate(-90 ${-W / 2 - 0.35} 0)">Mur de gauche</text><text x="${W / 2 + 0.35}" y="0" class="pl-wall" transform="rotate(90 ${W / 2 + 0.35} 0)">Mur de droite</text>`;
-            // Les mêmes portes que dans la visite : vers la salle précédente (ou la sortie), vers la suivante
-            const doors = [];
-            doors.push([W / 2 - 1.3, pos.first ? 'sortie' : 'salle précédente']);
-            if (!pos.last) doors.push([-(W / 2 - 1.3), 'salle suivante']);
-            doors.forEach(([x, t]) => { h += `<rect x="${x - 0.63}" y="${D / 2 - 0.08}" width="1.26" height="0.16" class="pl-door"/><text x="${x}" y="${D / 2 - 0.3}" class="pl-small">${t}</text>`; });
-            h += `<text x="0" y="${D / 2 - 0.5}" class="pl-small">▲ on entre ici</text>`;
+            // Les mêmes portes que dans la visite : celles du plan du musée, sinon salle précédente (ou sortie) et suivante
+            if (pos.doors) {
+                pos.doors.forEach(d => {
+                    const [x, z] = toWorld(d.wall, d.along, W, D), horiz = d.wall === 'back' || d.wall === 'front', t = `salle ${d.to + 1}${pos.rooms?.[d.to]?.name ? ' : ' + pos.rooms[d.to].name : ''}`;
+                    const tx = horiz ? x : x + (d.wall === 'left' ? 0.35 : -0.35), tz = horiz ? z + (d.wall === 'back' ? 0.45 : -0.3) : z;
+                    h += `<rect x="${horiz ? x - 0.63 : x - 0.08}" y="${horiz ? z - 0.08 : z - 0.63}" width="${horiz ? 1.26 : 0.16}" height="${horiz ? 0.16 : 1.26}" class="pl-door"/><text x="${tx}" y="${tz}" class="pl-small" ${horiz ? '' : `transform="rotate(${d.wall === 'left' ? -90 : 90} ${tx} ${tz})"`}>${esc(t)}</text>`;
+                });
+                if (pos.first) { const busy = pos.doors.some(d => d.wall === 'front' && Math.abs(d.along + (W / 2 - 1.3)) < 1.8), x = busy ? -(W / 2 - 1.3) : W / 2 - 1.3; h += `<rect x="${x - 0.63}" y="${D / 2 - 0.08}" width="1.26" height="0.16" class="pl-door"/><text x="${x}" y="${D / 2 - 0.3}" class="pl-small">sortie</text>`; }
+            } else {
+                const doors = [];
+                doors.push([W / 2 - 1.3, pos.first ? 'sortie' : 'salle précédente']);
+                if (!pos.last) doors.push([-(W / 2 - 1.3), 'salle suivante']);
+                doors.forEach(([x, t]) => { h += `<rect x="${x - 0.63}" y="${D / 2 - 0.08}" width="1.26" height="0.16" class="pl-door"/><text x="${x}" y="${D / 2 - 0.3}" class="pl-small">${t}</text>`; });
+            }
+            if (!pos.doors) h += `<text x="0" y="${D / 2 - 0.5}" class="pl-small">▲ on entre ici</text>`;
             (room.items || []).forEach((it, k) => {
                 const sp = spots.get(it); if (!sp) return;
                 const sel = selected === it ? ' is-sel' : '', label = esc(it.title || it.source_title || MODELS[it.settings?.model] || '');
@@ -195,7 +299,7 @@
         };
         const sideHtml = () => {
             const it = selected; if (!it) { side.innerHTML = '<p class="muted">Clique sur un élément du plan.</p>'; return; }
-            const {spots} = V.layoutRoom(room), sp = spots.get(it), st = it.settings || {};
+            const {spots} = V.layoutRoom(room, pos.doors || null), sp = spots.get(it), st = it.settings || {};
             side.innerHTML = `<p><strong>${ICON[it.kind] || ''} ${esc(it.title || it.source_title || MODELS[st.model] || 'Sans titre')}</strong><br><small class="muted">${sp?.center ? 'Au milieu de la salle' : esc(WALLS[it.wall] || '')}</small></p>
                 ${readOnly ? '' : `${sp?.center ? `<label>Orientation <output>${Math.round((sp.rot || 0) * 180 / Math.PI)}°</output><input type="range" min="-180" max="180" step="15" value="${Math.round((sp.rot || 0) * 180 / Math.PI)}" data-pl-set="rot"></label>`
                     : `<label>Hauteur au mur <output>${(sp?.y ?? 1.6).toFixed(2)} m</output><input type="range" min="0.8" max="2.8" step="0.05" value="${sp?.y ?? (it.kind === 'text' ? 1.9 : 1.6)}" data-pl-set="y"></label>`}
@@ -221,7 +325,7 @@
         });
         svg.addEventListener('pointermove', e => {
             if (!drag) return;
-            const {W, D} = V.layoutRoom(room), [x, z] = point(e), it = drag.it, st = {...(it.settings || {})};
+            const {W, D} = V.layoutRoom(room, pos.doors || null), [x, z] = point(e), it = drag.it, st = {...(it.settings || {})};
             const dist = {back: z + D / 2, front: D / 2 - z, left: x + W / 2, right: W / 2 - x};
             const wall = Object.entries(dist).sort((a, b) => a[1] - b[1])[0];
             if (canHang(it) && wall[1] < 0.9) {

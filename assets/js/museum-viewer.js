@@ -33,11 +33,52 @@
     /** Demi-largeur approximative d'un élément accroché (cadre ou texte), pour qu'il ne déborde ni sur une porte ni dans un coin. */
     const halfWidth = it => it.kind === 'text' ? Math.min(1.3, 1.3 * (Number(it.settings?.scale) || 1)) : Math.min(1.25, 0.5 * 1.35 * (Number(it.settings?.scale) || 1) + 0.15);
     /**
+     * 🗺️ Plan du musée (settings.plan) : chaque salle a sa place vue de dessus (settings.mx, mz : coin du fond à gauche,
+     * en mètres ; le haut du plan est le mur du fond). Deux salles qui se touchent par un mur, sur au moins 1,6 m,
+     * sont reliées par une porte au milieu de la partie commune (sauf si on l'a fermée : settings.closed « id-id »).
+     * Sans plan : null, et les salles s'enchaînent comme avant (portes sur le mur d'entrée).
+     * Rend, pour chaque salle, ses portes : [{wall, along, to (n° de salle), key}].
+     */
+    const roomKey = (r, i) => String(r?.id ?? 'i' + i);
+    function museumRects(rooms) {
+        let right = 0;
+        const rects = rooms.map((r, i) => { const [W, D] = roomSize(r.settings); const st = r.settings || {}; return {i, W, D, x: isNum(st.mx) ? Number(st.mx) : null, z: isNum(st.mz) ? Number(st.mz) : null}; });
+        rects.forEach(r => { if (r.x !== null && r.z !== null) right = Math.max(right, r.x + r.W); });
+        // les salles pas encore placées : à la suite, à droite (alignées sur le mur d'entrée)
+        const maxD = Math.max(10, ...rects.map(r => r.D));
+        rects.forEach(r => { if (r.x === null || r.z === null) { r.x = right; r.z = maxD - r.D; right += r.W; } });
+        return rects;
+    }
+    function museumDoors(rooms, settings = {}) {
+        if (!settings?.plan) return null;
+        const rects = museumRects(rooms), closed = new Set(Array.isArray(settings.closed) ? settings.closed : []), out = rooms.map(() => []);
+        const near = (a, b) => Math.abs(a - b) < 0.05;
+        for (let a = 0; a < rects.length; a++) for (let b = a + 1; b < rects.length; b++) {
+            const A = rects[a], B = rects[b], k1 = roomKey(rooms[a], a), k2 = roomKey(rooms[b], b), key = [k1, k2].sort().join('-');
+            if (closed.has(key)) continue;
+            const add = (P, wP, Q, wQ, mid) => { // mid : coordonnée du plan (x ou z) du milieu de la porte
+                const cP = wP === 'back' || wP === 'front' ? mid - (P.x + P.W / 2) : mid - (P.z + P.D / 2), cQ = wQ === 'back' || wQ === 'front' ? mid - (Q.x + Q.W / 2) : mid - (Q.z + Q.D / 2);
+                out[P.i].push({wall: wP, along: alongOf(wP, cP), to: Q.i, key}); out[Q.i].push({wall: wQ, along: alongOf(wQ, cQ), to: P.i, key});
+            };
+            const zLo = Math.max(A.z, B.z), zHi = Math.min(A.z + A.D, B.z + B.D), xLo = Math.max(A.x, B.x), xHi = Math.min(A.x + A.W, B.x + B.W);
+            if (zHi - zLo >= 1.6) { if (near(A.x + A.W, B.x)) add(A, 'right', B, 'left', (zLo + zHi) / 2); else if (near(B.x + B.W, A.x)) add(B, 'right', A, 'left', (zLo + zHi) / 2); }
+            if (xHi - xLo >= 1.6) { if (near(A.z + A.D, B.z)) add(A, 'front', B, 'back', (xLo + xHi) / 2); else if (near(B.z + B.D, A.z)) add(B, 'front', A, 'back', (xLo + xHi) / 2); }
+        }
+        return out;
+    }
+    /** Répartit n éléments le long d'un mur, en laissant la place des portes (± 1 m autour de chacune) */
+    function freeSlots(len, doorAlongs, n) {
+        let free = [[-len / 2, len / 2]];
+        doorAlongs.forEach(d => { free = free.flatMap(([a, b]) => { const lo = d - 1, hi = d + 1; if (hi <= a || lo >= b) return [[a, b]]; return [[a, Math.max(a, lo)], [Math.min(b, hi), b]].filter(([x, y]) => y - x > 0.05); }); });
+        const total = free.reduce((s, [a, b]) => s + b - a, 0) || len, slot = total / Math.max(1, n);
+        return Array.from({length: n}, (_, k) => { let t = slot * (k + 0.5); for (const [a, b] of free) { if (t <= b - a) return {along: a + t, slot}; t -= b - a; } return {along: 0, slot}; });
+    }
+    /**
      * Où va chaque élément d'une salle : sur un mur (position, hauteur) ou au milieu (x, z, orientation).
      * Placé à la main sur le plan (settings.along / y, ou px / pz / rot), sinon réparti tout seul.
      * Servi aussi au plan de l'aménagement, pour qu'il montre exactement la même chose que la visite.
      */
-    function layoutRoom(room) {
+    function layoutRoom(room, doors = null) {
         const [W, D] = roomSize(room.settings);
         const spots = new Map();
         const byWall = {back: [], left: [], right: [], front: []}; const center = [];
@@ -45,10 +86,12 @@
         Object.entries(byWall).forEach(([wall, list]) => {
             const auto = list.filter(it => !isNum(it.settings?.along));
             const full = wall === 'back' || wall === 'front' ? W : D;
-            const len = full - (wall === 'front' ? 5.4 : 1.4), slot = auto.length ? len / auto.length : len;
+            const len = full - (wall === 'front' && !doors ? 5.4 : 1.4), slot = auto.length ? len / auto.length : len;
+            const slots = doors ? freeSlots(len, doors.filter(d => d.wall === wall).map(d => d.along), auto.length) : null; // avec le plan du musée : pas devant une porte
             list.forEach(it => {
                 let along, sl;
                 if (isNum(it.settings?.along)) { along = alongOf(wall, Math.max(-1, Math.min(1, Number(it.settings.along))) * wallLimit(wall, W, D, halfWidth(it))); sl = Math.min(len, 2.6); }
+                else if (slots) { ({along, slot: sl} = slots[auto.indexOf(it)]); }
                 else { along = -len / 2 + slot * (auto.indexOf(it) + 0.5); sl = slot; }
                 spots.set(it, {wall, along, slot: sl, y: isNum(it.settings?.y) ? Math.max(0.6, Math.min(3.4, Number(it.settings.y))) : null});
             });
@@ -185,20 +228,27 @@
             // Nom de la salle en grandes lettres sur le mur du fond
             const title = textTexture([room.name || `Salle ${i + 1}`], {width: 1400, bg: null, sizes: [78], pad: 20});
             const tw = Math.min(W * 0.55, 7.5), tp = plane(title.tex, tw, tw / title.aspect, true); onWall(tp, 'back', 0, 3.65); scene.add(tp);
-            // Portes : salle précédente (ou sortie) à gauche, salle suivante à droite, sur le mur d'entrée
-            const door = (side, label, action) => {
+            // Portes : avec le plan du musée, vers chaque salle voisine ; sinon salle précédente (ou sortie) à gauche et salle
+            // suivante à droite, sur le mur d'entrée
+            const door = (side, label, action, wall = 'front', along = null) => {
                 const g = new THREE.Group(); const x = side === 'left' ? (W / 2 - 1.3) : -(W / 2 - 1.3); // vu de l'intérieur, face au mur d'entrée
-                const leaf = plane(textTexture([label, side === 'left' ? '←' : '→'], {width: 520, sizes: [44, 70], border: 10}).tex, 1.25, 2.25);
+                const leaf = plane(textTexture([label, side === 'left' ? '←' : side === 'right' ? '→' : '🚪'], {width: 520, sizes: [44, 70], border: 10}).tex, 1.25, 2.25);
                 leaf.userData.action = action; targets.push(leaf); g.add(leaf); leaf.position.y = 1.13;
                 const fr = (w, h, px, py) => { const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.08), new THREE.MeshBasicMaterial({color: 0xffffff})); b.position.set(px, py, 0); g.add(b); const e = new THREE.LineSegments(new THREE.EdgesGeometry(b.geometry), ink()); e.position.copy(b.position); g.add(e); };
                 fr(0.1, 2.4, -0.68, 1.2); fr(0.1, 2.4, 0.68, 1.2); fr(1.46, 0.1, 0, 2.4);
-                onWall(g, 'front', -x, 0, 0.05); scene.add(g);
+                onWall(g, wall, along ?? -x, 0, 0.05); scene.add(g);
             };
-            if (i > 0) door('left', `Salle ${i} : ${rooms[i - 1].name || ''}`, {type: 'room', index: i - 1});
-            else if (opts.onExit) door('left', 'Sortie', {type: 'exit'});
-            if (i < rooms.length - 1) door('right', `Salle ${i + 2} : ${rooms[i + 1].name || ''}`, {type: 'room', index: i + 1});
+            const planDoors = museumDoors(rooms, data.settings)?.[i] || null;
+            if (planDoors) {
+                planDoors.forEach(d => door('plan', `Salle ${d.to + 1} : ${rooms[d.to].name || ''}`, {type: 'room', index: d.to}, d.wall, d.along));
+                if (i === 0 && opts.onExit) { const busy = planDoors.some(d => d.wall === 'front' && Math.abs(d.along + (W / 2 - 1.3)) < 1.8); door(busy ? 'right' : 'left', 'Sortie', {type: 'exit'}); }
+            } else {
+                if (i > 0) door('left', `Salle ${i} : ${rooms[i - 1].name || ''}`, {type: 'room', index: i - 1});
+                else if (opts.onExit) door('left', 'Sortie', {type: 'exit'});
+                if (i < rooms.length - 1) door('right', `Salle ${i + 2} : ${rooms[i + 1].name || ''}`, {type: 'room', index: i + 1});
+            }
             // Œuvres aux murs
-            const lay = layoutRoom(room);
+            const lay = layoutRoom(room, planDoors);
             (room.items || []).forEach(it => { const sp = lay.spots.get(it); if (!sp) return; if (sp.center) placeCenter(it, sp); else placeWallItem(it, sp); });
             if (i === 0 && data.settings?.guestbook !== false) lectern(-W / 2 + 1.6, D / 2 - 2.2);
             $('[data-lm-room]').textContent = `Salle ${i + 1} / ${rooms.length} · ${room.name || ''}`;
@@ -556,5 +606,5 @@
             goRoom: i => enterRoom(i), startTour, stopTour,
         };
     }
-    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, roomSize, alongOf, wallLimit, halfWidth};
+    window.LCNDA_MUSEUM_VIEWER = {mount, MODELS, layoutRoom, SIZES, roomSize, alongOf, wallLimit, halfWidth, museumDoors, museumRects, roomKey};
 })();

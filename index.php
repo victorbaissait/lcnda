@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=206">
-    <link rel="stylesheet" href="assets/css/heritage.css?v=151">
+    <link rel="stylesheet" href="assets/css/heritage.css?v=152">
     <link rel="stylesheet" href="assets/css/layout.css?v=9">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
@@ -1131,8 +1131,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-retouch-simple.js?v=1" defer></script>
 <script src="assets/js/heritage-fiches.js?v=7" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=1" defer></script>
-<script src="assets/js/museum-viewer.js?v=6" defer></script>
-<script src="assets/js/heritage-museum.js?v=9" defer></script>
+<script src="assets/js/museum-viewer.js?v=7" defer></script>
+<script src="assets/js/heritage-museum.js?v=10" defer></script>
 <script>
 (function () {
     var toggle = document.getElementById('lightbox-tag-toggle');

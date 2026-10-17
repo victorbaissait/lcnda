@@ -132,6 +132,8 @@ function museum_clean_settings(mixed $raw, array $allowed): string
         if ($type === 'color') { if (is_string($v) && preg_match('/^#[0-9a-f]{6}$/i', $v)) { $out[$k] = $v; } }
         elseif ($type === 'meters') { if (is_numeric($v)) { $out[$k] = max(8, min(40, round((float) $v * 2) / 2)); } } // taille d'une salle sur mesure
         elseif ($type === 'bool') { $out[$k] = !empty($v) && $v !== '0'; }
+        elseif ($type === 'pos') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = max(-400, min(400, round((float) $v * 2) / 2)); } } // place d'une salle sur le plan du musée (m)
+        elseif ($type === 'keys') { if (is_array($v)) { $out[$k] = array_values(array_slice(array_unique(array_filter(array_map('strval', $v), static fn($x) => (bool) preg_match('/^[a-z0-9]{1,12}-[a-z0-9]{1,12}$/i', $x))), 0, 400)); } } // portes fermées « id-id »
         elseif ($type === 'num') { if ($v !== '' && $v !== null && is_numeric($v)) { $out[$k] = max(-1, min(3.4, round((float) $v, 3))); } }
         elseif ($type === 'deg') { if ($v !== '' && $v !== null && is_numeric($v)) { $d = fmod((float) $v + 180, 360); if ($d < 0) { $d += 360; } $out[$k] = (int) round($d - 180); } }
         elseif (is_array($type)) { if (in_array($v, $type, true)) { $out[$k] = $v; } }
@@ -145,14 +147,14 @@ function museum_save(PDO $pdo, array $data): array
     museum_writable($pdo, $id);
     $pdo->prepare('UPDATE museums SET title=?, subtitle=?, intro=?, author=?, settings_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([
         mb_substr(safe_text($data['title'] ?? ''), 0, 120) ?: 'Musée de la famille', mb_substr(safe_text($data['subtitle'] ?? ''), 0, 200), h_long($data, 'intro', 4000),
-        mb_substr(safe_text($data['author'] ?? ''), 0, 120), museum_clean_settings($data['settings'] ?? [], ['guestbook' => 'bool', 'wall' => 'color']), $id]);
+        mb_substr(safe_text($data['author'] ?? ''), 0, 120), museum_clean_settings($data['settings'] ?? [], ['guestbook' => 'bool', 'wall' => 'color', 'plan' => 'bool', 'closed' => 'keys']), $id]);
     return ['id' => $id];
 }
 
 function museum_save_room(PDO $pdo, array $data): array
 {
     $id = safe_int($data['id'] ?? 0);
-    $settings = museum_clean_settings($data['settings'] ?? [], ['size' => ['small', 'medium', 'large', 'custom'], 'width' => 'meters', 'depth' => 'meters', 'wall' => 'color', 'floor' => ['light', 'wood', 'stone', 'dark']]);
+    $settings = museum_clean_settings($data['settings'] ?? [], ['size' => ['small', 'medium', 'large', 'custom'], 'width' => 'meters', 'depth' => 'meters', 'wall' => 'color', 'floor' => ['light', 'wood', 'stone', 'dark'], 'mx' => 'pos', 'mz' => 'pos']);
     $vals = [mb_substr(safe_text($data['name'] ?? ''), 0, 120) ?: 'Nouvelle salle', h_long($data, 'intro', 4000), $settings];
     if ($id) {
         museum_writable($pdo, museum_of_room($pdo, $id));
@@ -392,7 +394,13 @@ function museum_package(PDO $pdo, int $id, string $format, ZipArchive $zip): arr
         }
         $rooms[] = ['name' => $r['name'], 'intro' => $r['intro'], 'settings' => $r['settings'], 'audio' => $add((string) $r['audio_file'], false), 'items' => $items];
     }
-    return ['type' => 'lcnda-musee', 'version' => 1, 'title' => $m['title'], 'subtitle' => $m['subtitle'], 'intro' => $m['intro'], 'author' => $m['author'], 'settings' => $m['settings'],
+    // portes fermées du plan : « id-id » devient « iN-iM » (n° des salles), les id ne voyagent pas
+    $settings = $m['settings'];
+    if (!empty($settings['closed']) && is_array($settings['closed'])) {
+        $idx = []; foreach (array_values($m['rooms']) as $k => $r) { $idx[(string) $r['id']] = 'i' . $k; }
+        $settings['closed'] = array_values(array_filter(array_map(static function ($key) use ($idx) { $p = explode('-', (string) $key); if (count($p) !== 2 || !isset($idx[$p[0]], $idx[$p[1]])) { return ''; } $q = [$idx[$p[0]], $idx[$p[1]]]; sort($q, SORT_STRING); return implode('-', $q); }, $settings['closed'])));
+    }
+    return ['type' => 'lcnda-musee', 'version' => 1, 'title' => $m['title'], 'subtitle' => $m['subtitle'], 'intro' => $m['intro'], 'author' => $m['author'], 'settings' => $settings,
         'rooms' => $rooms, 'guestbook' => array_map(static fn($g) => ['name' => $g['name'], 'message' => $g['message'], 'date' => $g['date']], $m['guestbook'])];
 }
 
@@ -465,7 +473,7 @@ function museum_import(PDO $pdo, ?array $file): never
     try {
         $pdo->prepare('INSERT INTO museums(title, subtitle, intro, author, imported, settings_json) VALUES(?,?,?,?,1,?)')->execute([
             mb_substr(safe_text($pkg['title'] ?? ''), 0, 120) ?: 'Musée reçu', mb_substr(safe_text($pkg['subtitle'] ?? ''), 0, 200), mb_substr((string) ($pkg['intro'] ?? ''), 0, 4000),
-            mb_substr(safe_text($pkg['author'] ?? ''), 0, 120), museum_clean_settings($pkg['settings'] ?? [], ['guestbook' => 'bool', 'wall' => 'color'])]);
+            mb_substr(safe_text($pkg['author'] ?? ''), 0, 120), museum_clean_settings($pkg['settings'] ?? [], ['guestbook' => 'bool', 'wall' => 'color', 'plan' => 'bool', 'closed' => 'keys'])]);
         $mid = (int) $pdo->lastInsertId();
         $dir = museum_dir($mid);
         $taken = [];
@@ -481,10 +489,11 @@ function museum_import(PDO $pdo, ?array $file): never
             file_put_contents($dir . '/' . $name, $bytes);
             return $taken[$ref] = 'musee/' . $mid . '/' . $name;
         };
-        $images = array_values(array_unique(MUSEUM_IMAGES)); $sounds = array_values(array_unique(MUSEUM_AUDIO));
+        $images = array_values(array_unique(MUSEUM_IMAGES)); $sounds = array_values(array_unique(MUSEUM_AUDIO)); $newIds = [];
         foreach (array_slice(is_array($pkg['rooms'] ?? null) ? $pkg['rooms'] : [], 0, 200) as $k => $r) {
             if (!is_array($r)) { continue; }
             $room = museum_save_room($pdo, ['museum_id' => $mid, 'name' => $r['name'] ?? '', 'intro' => $r['intro'] ?? '', 'settings' => $r['settings'] ?? []]);
+            $newIds['i' . $k] = (string) $room['id'];
             $audio = $take($r['audio'] ?? '', $sounds);
             if ($audio) { $pdo->prepare('UPDATE museum_rooms SET audio_file=? WHERE id=?')->execute([$audio, $room['id']]); }
             foreach (array_slice(is_array($r['items'] ?? null) ? $r['items'] : [], 0, 2000) as $it) {
@@ -494,6 +503,12 @@ function museum_import(PDO $pdo, ?array $file): never
                 $a = $take($it['audio'] ?? '', $sounds);
                 if ($a) { $pdo->prepare('UPDATE museum_items SET audio_file=? WHERE id=?')->execute([$a, $saved['id']]); }
             }
+        }
+        // portes fermées du plan : « iN-iM » (n° des salles du paquet) redevient « id-id »
+        $ms = museum_settings((string) $pdo->query('SELECT settings_json FROM museums WHERE id=' . $mid)->fetchColumn());
+        if (!empty($ms['closed'])) {
+            $ms['closed'] = array_values(array_filter(array_map(static function ($key) use ($newIds) { $p = explode('-', (string) $key); if (count($p) !== 2 || !isset($newIds[$p[0]], $newIds[$p[1]])) { return ''; } $q = [$newIds[$p[0]], $newIds[$p[1]]]; sort($q, SORT_STRING); return implode('-', $q); }, $ms['closed'])));
+            $pdo->prepare('UPDATE museums SET settings_json=? WHERE id=?')->execute([json_encode($ms), $mid]);
         }
         $ins = $pdo->prepare('INSERT INTO museum_guestbook(museum_id, name, message) VALUES(?,?,?)');
         foreach (array_slice(is_array($pkg['guestbook'] ?? null) ? $pkg['guestbook'] : [], 0, 2000) as $g) {

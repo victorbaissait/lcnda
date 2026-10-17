@@ -3010,3 +3010,21 @@ html.is-screen-embed [data-h-village-back],html.is-screen-embed [data-h-village-
 .h-rs-headbtns { display:flex; gap:8px; align-items:center; }
 [data-theme="dark"] .h-retouch-simple .h-rs-curve, [data-theme="dark"] .h-retouch-simple .h-rs-vlist figure { background:#1e1e1e; }
 .h-museum-editor.is-full .h-me-plan svg { max-height:68vh; }
+/* 🗺️ Plan du musée (Aménager) */
+.h-me-mplan { margin-bottom:16px; border-bottom:1px solid #ddd; padding-bottom:12px; }
+.h-me-mplan svg { width:100%; max-height:46vh; background:#fff; border:1px solid #ddd; touch-action:none; user-select:none; }
+.h-museum-editor.is-full .h-me-mplan svg { max-height:52vh; }
+.mp-room { cursor:grab; }
+.mp-rect { fill:#f7f9fc; stroke:#111; stroke-width:.14; }
+.mp-room.is-cur .mp-rect { fill:#e6f0fb; stroke:var(--blue, #0066cc); stroke-width:.22; }
+.mp-room:hover .mp-rect { fill:#eef4fb; }
+.mp-name { font-size:.75px; font-weight:700; text-anchor:middle; fill:#111; pointer-events:none; }
+.mp-size, .mp-wall { font-size:.5px; text-anchor:middle; fill:#777; pointer-events:none; }
+.mp-in { font-size:.55px; text-anchor:middle; fill:var(--blue, #0066cc); font-weight:700; }
+.mp-h { fill:var(--blue, #0066cc); opacity:.0; cursor:ew-resize; }
+.mp-room:hover .mp-h { opacity:.55; }
+.mp-h[data-mph="s"] { cursor:ns-resize; } .mp-h[data-mph="se"] { cursor:nwse-resize; }
+.mp-door { cursor:pointer; } .mp-door rect { fill:#fff; stroke:var(--blue, #0066cc); stroke-width:.12; }
+.mp-door.is-shut rect { fill:#111; stroke:#111; }
+.h-me-mplan-note { margin:6px 0 0; font-size:12px; }
+.h-me-mplan .pl-grid { stroke:#eef0f3; stroke-width:.03; }
