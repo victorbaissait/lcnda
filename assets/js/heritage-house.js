@@ -219,9 +219,12 @@
             if (!exporting) for (let x = Math.floor(vx0 / step) * step; x < vx1; x += step) h += `<path d="M${x} ${vy0}V${vy1}" class="${x % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
             if (!exporting) for (let y = Math.floor(vy0 / step) * step; y < vy1; y += step) h += `<path d="M${vx0} ${y}H${vx1}" class="${y % (step * 10) === 0 ? 'h-hs-g2' : 'h-hs-g'}"/>`;
             if (H.ref?.src && H.ref.show !== false && (H.ref.floor ?? f.id) === f.id) h += `<image href="${esc(H.ref.src)}" x="${H.ref.x}" y="${H.ref.y}" width="${H.ref.w}" height="${H.ref.h}" opacity="${H.ref.op ?? .45}" preserveAspectRatio="none" style="pointer-events:none"/>`;
-            // l'étage du dessous, en transparence, pour superposer les murs
-            const below = H.floors.filter(q => q.level < f.level).sort((a, b) => b.level - a.level)[0];
-            if (below && f.showBelow !== false) h += `<g opacity=".18" style="pointer-events:none">${below.walls.map(w => `<path d="M${w.a[0]} ${w.a[1]}L${w.b[0]} ${w.b[1]}" stroke="#333" stroke-width="${w.t || below.wallT}" stroke-linecap="square"/>`).join('')}</g>`;
+            // 👻 calque : l'étage du dessous et/ou du dessus en transparence, pour caler celui-ci (murs et contours des pièces)
+            const below = H.floors.filter(q => q.level < f.level).sort((a, b) => b.level - a.level)[0], above = H.floors.filter(q => q.level > f.level).sort((a, b) => a.level - b.level)[0];
+            const gm = ghostOf(f), gop = clamp(Number(H.ghostOp ?? .3), .05, .9);
+            const ghost = (q, col) => `<g opacity="${gop}" style="pointer-events:none">${q.rooms.map(rm => `<path d="M${rm.pts.map(p => p.join(' ')).join('L')}Z" fill="${col}" fill-opacity=".12" stroke="${col}" stroke-width="${2 / zoom}" stroke-dasharray="${8 / zoom} ${5 / zoom}"/>`).join('')}${q.walls.map(w => `<path d="M${w.a[0]} ${w.a[1]}L${w.b[0]} ${w.b[1]}" stroke="${col}" stroke-width="${w.t || q.wallT}" stroke-linecap="square"/>`).join('')}</g>`;
+            if (below && (gm === 'below' || gm === 'both')) h += ghost(below, '#7a4b1e');
+            if (above && (gm === 'above' || gm === 'both')) h += ghost(above, '#1f6feb');
             f.rooms.forEach(rm => { const isSel = sel?.type === 'room' && sel.id === rm.id, [cx, cy] = centroid(rm.pts), fs = clamp(Math.sqrt(area(rm.pts)) / 9, 14, 60);
                 h += `<g data-hs="room:${rm.id}" class="h-hs-room${isSel ? ' is-sel' : ''}"><path d="M${rm.pts.map(p => p.join(' ')).join('L')}Z" fill="url(#${d.pats.get(`${rm.floor || 'parquet'}|${rm.color || ''}`)})" stroke="${isSel ? '#2a7de1' : 'none'}" stroke-width="2" vector-effect="non-scaling-stroke"/>
                     <text x="${cx}" y="${cy}" font-size="${fs}" class="h-hs-rname">${esc(rm.name || 'Pièce')}</text><text x="${cx}" y="${cy + fs * 1.1}" font-size="${fs * .65}" class="h-hs-rarea">${String(r1(area(rm.pts) / 10000)).replace('.', ',')} m²${rm.people?.length || rm.note ? ' · 🕯' : ''}</text></g>`; });
@@ -255,8 +258,10 @@
             world.innerHTML = h; applyView(); paintSide(); paintFloors(); if (lastXY) readout(...lastXY);
         }
         /* ─── étages ─── */
+        const ghostOf = f => f.ghost || (f.showBelow === false ? 'none' : 'below');
+        const ghostSel = f => `<select data-hs-ghost title="Voir un autre étage en transparence, pour caler celui-ci" aria-label="Calque d’un autre étage">${[['none', '👻 Calque : non'], ['below', '👻 Dessous'], ['above', '👻 Dessus'], ['both', '👻 Les deux']].map(([k, l]) => `<option value="${k}" ${ghostOf(f) === k ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
         function paintFloors() {
-            $('[data-hs-floors]').innerHTML = [...H.floors].map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level).map(([f, i]) => `<button type="button" class="${i === fi ? 'is-on' : ''}" data-hs-floor="${i}" title="Double-clic pour renommer">${esc(f.name)}</button>`).join('') + '<button type="button" data-hs-cmd="addfloor" title="Ajouter un étage ou une cave">＋</button><button type="button" data-hs-cmd="floors" title="Gérer les étages : renommer, hauteur, supprimer">⋯</button>';
+            $('[data-hs-floors]').innerHTML = [...H.floors].map((f, i) => [f, i]).sort((a, b) => b[0].level - a[0].level).map(([f, i]) => `<button type="button" class="${i === fi ? 'is-on' : ''}" data-hs-floor="${i}" title="Double-clic pour renommer">${esc(f.name)}</button>`).join('') + '<button type="button" data-hs-cmd="addfloor" title="Ajouter un étage ou une cave">＋</button><button type="button" data-hs-cmd="floors" title="Gérer les étages : renommer, hauteur, supprimer">⋯</button>' + (H.floors.length > 1 ? ghostSel(F()) : '');
         }
         /* ─── panneau de droite ─── */
         const opt = (list, cur) => list.map(([k, l]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${esc(l)}</option>`).join('');
@@ -278,7 +283,7 @@
                 const below = H.floors.some(q => q.level < f.level);
                 pane.innerHTML = `<div class="h-hs-form"><label>Nom de l’étage<input data-hs-f="name" value="${esc(f.name)}"></label><div class="h-hs-g2c"><label>Niveau<input type="number" data-hs-f="level" value="${f.level}" min="-3" max="9"></label><label>Hauteur sous plafond (cm)<input type="number" data-hs-f="height" value="${f.height}" min="150" max="800"></label></div>
                     <label>Épaisseur des nouveaux murs (cm)<input type="number" data-hs-f="wallT" value="${f.wallT}" min="5" max="120"></label>
-                    <label class="checkbox-line"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}> Cotes des murs</label>${below ? `<label class="checkbox-line"><input type="checkbox" data-hs-f="showBelow" ${f.showBelow !== false ? 'checked' : ''}> Voir l’étage du dessous en transparence</label>` : ''}
+                    <label class="checkbox-line"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}> Cotes des murs</label>${H.floors.length > 1 ? `<label>Calque d’un autre étage (pour caler celui-ci)${ghostSel(f)}</label><label>Transparence du calque<input type="range" min="5" max="90" step="5" data-hs-ghostop value="${Math.round(clamp(Number(H.ghostOp ?? .3), .05, .9) * 100)}"></label>` : ''}
                     <div class="h-hs-g2c"><label>Pas de la grille (cm)<select data-hs-h="grid">${[1, 2, 5, 10, 25, 50, 100].map(v => `<option ${H.grid === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label>Épaisseur des planchers (cm)<input type="number" data-hs-h="slab" value="${H.slab ?? 20}" min="0" max="120"></label></div>
                     <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="dupfloor">⧉ Dupliquer cet étage (murs)</button><button type="button" class="button small danger" data-hs-cmd="delfloor">Supprimer l’étage</button></div>
                     <h4>Toit (vue 3D)</h4><label class="checkbox-line"><input type="checkbox" data-hs-roof="on" ${H.roof?.on ? 'checked' : ''}> Un toit sur l’étage le plus haut</label>
@@ -599,6 +604,9 @@
         });
         dlg.addEventListener('dblclick', e => { const b = e.target.closest('[data-hs-floor]'); if (!b) return; const f = H.floors[Number(b.dataset.hsFloor)]; A().askText({title: 'Renommer l’étage', value: f.name, okLabel: 'Renommer'}).then(n => { if (n?.trim()) { f.name = n.trim().slice(0, 60); commit('Étage renommé'); } }); });
         let tmr = 0;
+        // 👻 calque d'un autre étage : la liste (en haut ou dans l'onglet Étage) et sa transparence
+        dlg.addEventListener('change', e => { const el = e.target; if (!el.matches?.('[data-hs-ghost]')) return; F().ghost = el.value; delete F().showBelow; later('Calque'); render(); });
+        dlg.addEventListener('input', e => { const el = e.target; if (!el.matches?.('[data-hs-ghostop]')) return; H.ghostOp = Number(el.value) / 100; dirty = true; render(); });
         pane.addEventListener('input', e => {
             const el = e.target, f = F(), v = el.type === 'checkbox' ? el.checked : el.value;
             if (el.matches('[data-hs-libq]')) { libQ = el.value; clearTimeout(tmr); tmr = setTimeout(() => { const p0 = el.selectionStart; el.blur(); paintSide(); /* le champ quitté le temps de redessiner (sinon le panneau ne bouge pas pendant la frappe) */ const i = pane.querySelector('[data-hs-libq]'); i.focus(); i.setSelectionRange(p0, p0); }, 200); return; }

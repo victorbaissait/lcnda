@@ -4292,3 +4292,4 @@ dialog.kn-play-dlg::backdrop{background:#000}
 /* 💾 Réglages enregistrés : la même barre partout */
 .h-pp-presets>strong:first-child,.h-bp-sets>strong:first-child{white-space:nowrap;font-size:13px;margin-right:2px}
 .h-bp-sets{padding:6px 10px;border:1.5px dashed var(--line-color,#bbb)}
+.h-hs-floors select[data-hs-ghost]{border:0;background:transparent;font:inherit;font-size:12px;padding:2px 4px;margin-left:4px;cursor:pointer;color:inherit;max-width:170px}
