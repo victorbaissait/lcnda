@@ -75,8 +75,16 @@ function topic_sheets_list(PDO $pdo): array
     return array_map(static function ($r) use ($media) {
         $d = json_decode((string) $r['data_json'], true) ?: [];
         return ['id' => (int) $r['id'], 'title' => $r['title'], 'subtitle' => $r['subtitle'], 'icon' => $r['icon'], 'color' => $r['color'],
-            'blocks' => count($d['blocks'] ?? []), 'cover' => $media[(int) $r['id']][0] ?? null, 'updated_at' => $r['updated_at']];
+            'blocks' => count($d['blocks'] ?? []), 'cover' => topic_sheet_cover($media[(int) $r['id']] ?? []), 'updated_at' => $r['updated_at']];
     }, $rows);
+}
+
+/** Vignette d'une fiche : l'image de couverture choisie (⚙️ La fiche), sinon sa première image */
+function topic_sheet_cover(array $media): ?array
+{
+    foreach ($media as $m) { if (($m['role'] ?? '') === 'cover') { return $m; } }
+    foreach ($media as $m) { if (($m['media_type'] ?? '') === 'image') { return $m; } }
+    return $media[0] ?? null;
 }
 
 /** ⭐ Les modèles de fiche (des fiches marquées « template », rangées à part) : leurs blocs servent à créer des fiches construites pareil */

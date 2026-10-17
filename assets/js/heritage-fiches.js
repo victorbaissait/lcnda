@@ -330,9 +330,10 @@
         ext.openDialog({eyebrow: 'FICHE', title: '⚙️ La fiche', submitLabel: 'Enregistrer',
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" value="${esc(cur.title)}" required maxlength="200"></label><label>Icône<input name="icon" value="${esc(cur.icon || '📒')}" class="h-fi-iconin" readonly title="Choisir une icône"></label>
                 <label>Couleur<span class="h-fi-colrow"><input type="color" name="color" value="${esc(cur.color || '#0066cc')}"><label class="checkbox-line"><input type="checkbox" name="hascolor" ${cur.color ? 'checked' : ''}> utiliser</label></span></label>
-                <label class="span-2">Sous-titre<input name="subtitle" value="${esc(cur.subtitle || '')}" maxlength="600"></label></div>`,
-            onOpen: d => d.querySelector('.h-fi-iconin').addEventListener('click', e => ext.pickEmoji?.(e.target)),
-            onSubmit: async form => { const f = Object.fromEntries(new FormData(form)); Object.assign(cur, {title: f.title.trim(), icon: f.icon || '📒', subtitle: f.subtitle || '', color: form.elements.hascolor.checked ? f.color : ''}); await save(); refresh(); }});
+                <label class="span-2">Sous-titre<input name="subtitle" value="${esc(cur.subtitle || '')}" maxlength="600"></label></div>
+                ${ext.mediaEditorHtml ? `<div class="h-fi-coverpick">${ext.mediaEditorHtml('topic_sheet', cur.id, (cur.media || []).filter(m => m.role === 'cover'), [['cover', '🖼️ Image de couverture (la vignette de la fiche dans la liste ; sinon la première image de la fiche)', 'image/*']])}</div>` : ''}`,
+            onOpen: d => { d.querySelector('.h-fi-iconin').addEventListener('click', e => ext.pickEmoji?.(e.target)); ext.bindMediaEditor?.(d); },
+            onSubmit: async form => { const f = Object.fromEntries(new FormData(form)); Object.assign(cur, {title: f.title.trim(), icon: f.icon || '📒', subtitle: f.subtitle || '', color: form.elements.hascolor.checked ? f.color : ''}); await save(); if (ext.uploadMediaEditor) await ext.uploadMediaEditor(form, 'topic_sheet', cur.id); refresh(); }});
     }
 
     /* ─── Imprimer : une page propre (texte, images, personnes, dates, citations, liens ; les écrans et widgets en titre) ─── */

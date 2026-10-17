@@ -9137,6 +9137,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     // Tous les calendriers : convertisseur et calendrier par défaut (les dates des fiches se saisissent dans les cinq premiers)
     const converterCalendarOptions=[...calendarTypeOptions,['ethiopic','Éthiopien'],['indian','Indien (national, ère Saka)'],['japanese','Japonais (ères, depuis 1873)'],['korean','Coréen (année Dangi)'],['korean_lunar','Coréen lunaire (traditionnel)'],['chinese','Chinois (lunaire)'],['bengali','Bengali (Bangladesh)'],['persian','Persan (hégirien solaire)'],['juche','Juche (Corée du Nord)'],['thai','Thaï (ère bouddhiste)'],['burmese','Birman (année)'],['druk','Bhoutanais drukpa (année)'],['coptic','Copte'],['byzantine','Byzantin (Anno Mundi, Russie avant 1700)'],['minguo','Minguo (Taïwan)'],['umalqura','Hégirien Umm al-Qura (Arabie saoudite)'],['roman','Romain (calendes, nones, ides)'],['english_os','Angleterre, ancien style (avant 1752)'],['easter_style','France, style de Pâques (avant 1567)'],['spanish_era','Ère d’Espagne'],['maya','Compte long maya']];
     function calendarLabel(value){return (converterCalendarOptions.find(([key])=>key===value)||calendarTypeOptions[0])[1];}
+    // « Calendrier de cette date » (événement, média, visionneuse d'images) : tous les calendriers du convertisseur
+    document.querySelectorAll('select[name="date_calendar"], #lightbox-date-calendar').forEach(select=>{const value=select.value;select.innerHTML=converterCalendarOptions.map(([key,label])=>`<option value="${key}">${escapeHtml(label)}</option>`).join('');select.value=value||'gregorian';});
     function defaultCalendarValue(design){return converterCalendarOptions.some(([key])=>key===design?.defaultCalendar)?design.defaultCalendar:'gregorian';}
     function gregorianToJdn(year,month,day){const a=Math.floor((14-month)/12),y=year+4800-a,m=month+12*a-3;return day+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;}
     function jdnToGregorian(jdn){const a=jdn+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor(146097*b/4),d=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*d/4),m=Math.floor((5*e+2)/153);return {year:100*b+d-4800+Math.floor(m/10),month:m+3-12*Math.floor(m/10),day:e-Math.floor((153*m+2)/5)+1};}
@@ -9303,6 +9305,10 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
     function readCalendarJdnRaw(form){
         const type=form.elements.calendar_type.value;
         const year=Number(form.elements.year.value),month=Number(form.elements.month.value),day=Number(form.elements.day.value);
+        return calendarYmdToJdn(type,year,month,day,{era:form.elements.era?.value||'',leap:!!form.elements.leap_month?.checked});
+    }
+    /** Jour julien d'une date (an, mois, jour) dans n'importe quel calendrier du convertisseur */
+    function calendarYmdToJdn(type,year,month,day,{era='',leap=false}={}){
         if(!year||!month||!day)return null;
         if(type==='julian')return julianToJdn(year,month,day);
         if(type==='islamic')return islamicToJdn(year,month,day);
@@ -9310,10 +9316,10 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(type==='hebrew')return hebrewToJdn(year,month,day);
         if(type==='ethiopic')return month>13||day>(month===13?(year%4===3?6:5):30)?null:ethiopicToJdn(year,month,day);
         if(type==='indian')return month>12||day>indianMonthDays(year,month)?null:indianToJdn(year,month,day);
-        if(type==='japanese')return japaneseToJdn(form.elements.era?.value||'',year,month,day);
+        if(type==='japanese')return japaneseToJdn(era,year,month,day);
         if(type==='korean')return gregorianToJdn(year-2333,month,day);
-        if(type==='korean_lunar')return koreanLunarToJdn(year,month,day,form.elements.leap_month?.checked);
-        if(type==='chinese')return koreanLunarToJdn(year,month,day,form.elements.leap_month?.checked,'chinese');
+        if(type==='korean_lunar')return koreanLunarToJdn(year,month,day,leap);
+        if(type==='chinese')return koreanLunarToJdn(year,month,day,leap,'chinese');
         if(type==='bengali')return month>12||day>bengaliMonthDays(year,month)?null:bengaliToJdn(year,month,day);
         if(type==='persian')return month>12||day>persianMonthDays(year,month)?null:persianToJdn(year,month,day);
         if(type==='juche')return year<1?null:gregorianToJdn(year+1911,month,day);
@@ -9370,6 +9376,8 @@ return `<button type="button" data-open-person="${item.person_id||''}"><span>${e
         if(type==='islamic')jdn=islamicToJdn(parsed.year,parsed.month,parsed.day);
         if(type==='republican')jdn=republicanToJdn(parsed.year,parsed.month,parsed.day);
         if(type==='hebrew')jdn=hebrewToJdn(parsed.year,parsed.month,parsed.day);
+        // les autres calendriers du convertisseur (Maintenance → Calendrier / mesures), date écrite en chiffres
+        if(jdn===null&&!['roman','english_os','easter_style','spanish_era','maya','umalqura','burmese','druk'].includes(type)){try{jdn=calendarYmdToJdn(type,parsed.year,parsed.month,parsed.day);}catch(_){jdn=null;}}
         return jdn||null;
     }
     function formatCalendarByType(jdn,type){
@@ -11762,7 +11770,7 @@ ${backupSectionHtml()}
             });
             form.elements.event_scope.dataset.familyBound='1';
         }
-        form.elements.date_text.value=eventItem?.date_text||'';if(form.elements.date_uncertain)form.elements.date_uncertain.checked=Number(eventItem?.date_uncertain||0)===1;if(form.elements.date_calendar)form.elements.date_calendar.value=eventItem?.date_calendar||(calendarTypeOptions.some(([k])=>k===defaultCalendarSetting())?defaultCalendarSetting():'gregorian');if(form.elements.date_converted)form.elements.date_converted.value=eventItem?.date_converted||automaticEquivalentFromDateText(eventItem?.date_text||'',form.elements.date_calendar?.value||'gregorian');if(form.elements.date_alternative)form.elements.date_alternative.value=eventItem?.date_alternative||'';form.elements.title.value=eventItem?.title||'';form.elements.place_name.value=eventItem?placeDisplay(eventItem):(eventItem?.place_name||'');form.elements.country.value=eventItem?.country||'France';form.elements.description.value=eventItem?.description||'';if(form.elements.fact_confidence)form.elements.fact_confidence.value=eventItem?.fact_confidence||'unknown';if(form.elements.confidence_origin)form.elements.confidence_origin.value=eventItem?.confidence_origin||'';renderEventConfidenceMediaChoices(detail,eventItem?.confidence_media_id||0);setupEventConfidencePickers(detail);
+        form.elements.date_text.value=eventItem?.date_text||'';if(form.elements.date_uncertain)form.elements.date_uncertain.checked=Number(eventItem?.date_uncertain||0)===1;if(form.elements.date_calendar)form.elements.date_calendar.value=eventItem?.date_calendar||(converterCalendarOptions.some(([k])=>k===defaultCalendarSetting())?defaultCalendarSetting():'gregorian');if(form.elements.date_converted)form.elements.date_converted.value=eventItem?.date_converted||automaticEquivalentFromDateText(eventItem?.date_text||'',form.elements.date_calendar?.value||'gregorian');if(form.elements.date_alternative)form.elements.date_alternative.value=eventItem?.date_alternative||'';form.elements.title.value=eventItem?.title||'';form.elements.place_name.value=eventItem?placeDisplay(eventItem):(eventItem?.place_name||'');form.elements.country.value=eventItem?.country||'France';form.elements.description.value=eventItem?.description||'';if(form.elements.fact_confidence)form.elements.fact_confidence.value=eventItem?.fact_confidence||'unknown';if(form.elements.confidence_origin)form.elements.confidence_origin.value=eventItem?.confidence_origin||'';renderEventConfidenceMediaChoices(detail,eventItem?.confidence_media_id||0);setupEventConfidencePickers(detail);
         $('#event-dialog-title').dataset.artisticOnly=artisticOnly?'1':'';
         if(form.elements.first_name)form.elements.first_name.value=eventItem?.first_name||'';
         if(form.elements.last_name)form.elements.last_name.value=eventItem?.last_name||'';
