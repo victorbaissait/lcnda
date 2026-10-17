@@ -30,9 +30,13 @@
             case 'damier': { for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { g.fillStyle = (i + j) % 2 ? '#222' : '#eee'; g.fillRect(i * 64, j * 64, 64, 64); } break; }
             case 'papier': { for (let x = 0; x < S; x += 32) { g.fillStyle = shade(color, .9); g.fillRect(x, 0, 10, S); } for (let y = 16; y < S; y += 48) for (let x = 21; x < S; x += 32) { g.fillStyle = shade(color, 1.15); g.beginPath(); g.arc(x, y, 4, 0, 7); g.fill(); } break; }
             case 'tuiles': { for (let r = 0; r < 10; r++) for (let x = (r % 2) * -16; x < S; x += 32) { g.fillStyle = shade(color, .8 + rnd() * .3); g.beginPath(); g.ellipse(x + 16, r * 26 + 18, 15, 16, 0, 0, Math.PI); g.fill(); } break; }
-            case 'ardoises': { for (let r = 0; r < 12; r++) for (let x = (r % 2) * -20; x < S; x += 40) { g.fillStyle = shade('#4a5058', .8 + rnd() * .3); g.fillRect(x + 1, r * 22, 38, 21); } break; }
-            case 'chaume': { for (let i = 0; i < 2500; i++) { g.strokeStyle = shade('#b8995a', .7 + rnd() * .5); g.beginPath(); const x = rnd() * S, y = rnd() * S; g.moveTo(x, y); g.lineTo(x + (rnd() - .5) * 6, y + 16); g.stroke(); } break; }
-            case 'zinc': { for (let x = 0; x < S; x += 32) { g.fillStyle = shade('#9aa3a8', .85 + rnd() * .2); g.fillRect(x, 0, 30, S); } break; }
+            case 'ardoises': { for (let r = 0; r < 12; r++) for (let x = (r % 2) * -20; x < S; x += 40) { g.fillStyle = shade(color, .8 + rnd() * .3); g.fillRect(x + 1, r * 22, 38, 21); } break; }
+            case 'chaume': { for (let i = 0; i < 2500; i++) { g.strokeStyle = shade(color, .7 + rnd() * .5); g.beginPath(); const x = rnd() * S, y = rnd() * S; g.moveTo(x, y); g.lineTo(x + (rnd() - .5) * 6, y + 16); g.stroke(); } break; }
+            case 'zinc': { for (let x = 0; x < S; x += 32) { g.fillStyle = shade(color, .85 + rnd() * .2); g.fillRect(x, 0, 30, S); } break; }
+            case 'tuilesplates': { for (let r = 0; r < 14; r++) for (let x = (r % 2) * -12; x < S; x += 24) { g.fillStyle = shade(color, .78 + rnd() * .35); g.fillRect(x + 1, r * 18 + 1, 22, 17); } break; }
+            case 'lauzes': { let y = 0; while (y < S) { const h = 18 + rnd() * 16; let x = -rnd() * 40; while (x < S) { const w = 30 + rnd() * 50; g.fillStyle = shade(color, .7 + rnd() * .45); g.beginPath(); g.moveTo(x, y); g.lineTo(x + w, y + rnd() * 4); g.lineTo(x + w - 3, y + h); g.lineTo(x + 2, y + h - rnd() * 4); g.fill(); x += w + 2; } y += h + 2; } noise(.1); break; }
+            case 'bacacier': { for (let x = 0; x < S; x += 32) { g.fillStyle = shade(color, 1.12); g.fillRect(x, 0, 8, S); g.fillStyle = shade(color, .82); g.fillRect(x + 8, 0, 4, S); } break; }
+            case 'vernies': { for (let r = 0; r < 10; r++) for (let x = (r % 2) * -16; x < S; x += 32) { const k = (Math.floor(x / 32) + r) % 4; g.fillStyle = [color, '#2f6b3a', '#c99a2e', '#1e1e1e'][k]; g.fillRect(x + 1, r * 26 + 1, 30, 25); } noise(.06); break; }
             case 'herbe': case 'gravier': case 'terre': case 'chaux': case 'torchis': case 'platre': case 'beton': case 'tapis': noise(kind === 'platre' ? .03 : .14, kind === 'herbe' ? 5000 : 2500); break;
             default: noise(.05);
         }
@@ -189,15 +193,38 @@
             if (it.model) loadModel(it.model).then(obj => { const bb = new T.Box3().setFromObject(obj), s = bb.getSize(new T.Vector3()), c = bb.getCenter(new T.Vector3()); obj.position.sub(new T.Vector3(c.x, bb.min.y, c.z)); const wrap = new T.Group(); wrap.add(obj); wrap.scale.set(M(it.w) / (s.x || 1), M(it.h ?? 80) / (s.y || 1), M(it.d) / (s.z || 1)); m.clear(); m.add(wrap); wrap.traverse(o => { if (o.isMesh) o.castShadow = true; }); }).catch(() => {}); });
         return g;
     }
+    /** le toit : deux pans, quatre pans (croupe), pavillon, appentis (un pan), mansardé, plat (terrasse) ; pente, sens du faîtage, débord, couverture et couleurs, cheminée */
+    const ROOF_COLORS = {tuiles: '#8a4b3a', tuilesplates: '#9a4a32', ardoises: '#4a5058', chaume: '#b8995a', zinc: '#9aa3a8', lauzes: '#7d7a72', bacacier: '#5b6670', vernies: '#9a3b23'};
     function buildRoof(H, top) {
         const r = H.roof || {}, xs = top.walls.flatMap(w => [w.a[0], w.b[0]]), zs = top.walls.flatMap(w => [w.a[1], w.b[1]]); if (!xs.length) return null;
-        const ov = .35, x0 = M(Math.min(...xs)) - ov, x1 = M(Math.max(...xs)) + ov, z0 = M(Math.min(...zs)) - ov, z1 = M(Math.max(...zs)) + ov, along = x1 - x0 >= z1 - z0, span = along ? z1 - z0 : x1 - x0, run = along ? x1 - x0 : z1 - z0;
-        const rise = Math.tan((r.pitch ?? 40) * Math.PI / 180) * span / 2, y0 = floorBase(H, top) + M(top.height), kind = r.kind || 'tuiles', col = r.kind === 'ardoises' ? '#4a5058' : r.kind === 'chaume' ? '#b8995a' : r.kind === 'zinc' ? '#9aa3a8' : (r.color || '#8a4b3a');
-        const g = new T.Group(), slope = Math.hypot(span / 2, rise), angle = Math.atan2(rise, span / 2), m = mat(col, kind, {side: T.DoubleSide});
-        [-1, 1].forEach(s => { const p = box(run, .08, slope, m, 1); p.position.set(0, rise / 2, s * span / 4); p.rotation.x = s * angle; p.castShadow = true; g.add(p); });
-        const tri = new T.Shape([new T.Vector2(-span / 2 + ov, 0), new T.Vector2(span / 2 - ov, 0), new T.Vector2(0, rise - ov * Math.tan(angle))]), gm = mat('#e9e1cf', 'chaux', {side: T.DoubleSide});
-        [-1, 1].forEach(s => { const t2 = new T.Mesh(new T.ShapeGeometry(tri), gm); t2.rotation.y = Math.PI / 2; t2.position.x = s * (run / 2 - ov); g.add(t2); });
-        g.position.set((x0 + x1) / 2, y0, (z0 + z1) / 2); if (!along) g.rotation.y = Math.PI / 2;
+        const ov = M(clamp(Number(r.over ?? 35), 0, 200)), X0 = M(Math.min(...xs)) - ov, X1 = M(Math.max(...xs)) + ov, Z0 = M(Math.min(...zs)) - ov, Z1 = M(Math.max(...zs)) + ov;
+        const longX = X1 - X0 >= Z1 - Z0, along = r.axis === 'short' ? !longX : r.axis === 'x' ? true : r.axis === 'z' ? false : longX; // le faîtage suit la longueur (ou le sens choisi)
+        const run = along ? X1 - X0 : Z1 - Z0, span = along ? Z1 - Z0 : X1 - X0, shape = r.shape || 'gable', pitch = clamp(Number(r.pitch ?? 40), 2, 75) * Math.PI / 180;
+        const kind = ROOF_COLORS[r.kind] ? r.kind : 'tuiles', col = /^#[0-9a-f]{6}$/i.test(r.color || '') ? r.color : ROOF_COLORS[kind], y0 = floorBase(H, top) + M(top.height);
+        const mRoof = mat(col, kind, {side: T.DoubleSide}), mWall = mat(/^#[0-9a-f]{6}$/i.test(r.gableColor || '') ? r.gableColor : '#e9e1cf', 'chaux', {side: T.DoubleSide});
+        const g = new T.Group(), cx = (X0 + X1) / 2, cz = (Z0 + Z1) / 2;
+        // repère local : u le long du faîtage, v en travers (centré), y vers le haut
+        const P = (u, y, v) => along ? new T.Vector3(cx + u, y, cz + v) : new T.Vector3(cx + v, y, cz + u);
+        const face = (pts, m) => { const geo = new T.BufferGeometry(), pos = [], uv = []; const tri = (a, b2, c) => [a, b2, c].forEach(q => { pos.push(q.x, q.y, q.z); uv.push((along ? q.x : q.z) / 1.1, (q.y + (along ? q.z : q.x)) / 1.1); });
+            for (let i = 1; i < pts.length - 1; i++) tri(pts[0], pts[i], pts[i + 1]); geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); geo.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); geo.computeVertexNormals(); const me = new T.Mesh(geo, m); me.castShadow = me.receiveShadow = true; g.add(me); };
+        const hu = run / 2, hv = span / 2;
+        /** d'un rectangle (bas) vers un rectangle plus petit ou une ligne de faîtage (haut) : 4 pans ; « ends » : pignons verticaux au lieu des pans des bouts */
+        const ring = (lo, hi, yl, yh, ends) => { const L = lo.map(([u, v]) => P(u, yl, v)), Hh = hi.map(([u, v]) => P(u, yh, v));
+            face([L[0], L[1], Hh[1], Hh[0]], mRoof); face([L[2], L[3], Hh[3], Hh[2]], mRoof); face([L[1], L[2], Hh[2], Hh[1]], ends ? mWall : mRoof); face([L[3], L[0], Hh[0], Hh[3]], ends ? mWall : mRoof); };
+        const rect = (a, b2) => [[-a, -b2], [a, -b2], [a, b2], [-a, b2]];
+        let ridgeY = y0;
+        if (shape === 'flat') { const th = .25, slab = box(run, th, span, mRoof, 1.2); slab.position.copy(P(0, y0 + th / 2, 0)); if (!along) slab.rotation.y = Math.PI / 2; slab.castShadow = true; g.add(slab);
+            if (r.parapet !== false) { const ph = .45, t = .12; [[run, t, 0, -hv + t / 2], [run, t, 0, hv - t / 2], [t, span, -hu + t / 2, 0], [t, span, hu - t / 2, 0]].forEach(([a, b2, u, v]) => { const m2 = box(along ? a : b2, ph, along ? b2 : a, mWall, 1); m2.position.copy(P(u, y0 + th + ph / 2, v)); g.add(m2); }); }
+            ridgeY = y0 + .7; }
+        else if (shape === 'shed') { const rise = Math.tan(pitch) * span; face([P(-hu, y0, -hv), P(hu, y0, -hv), P(hu, y0 + rise, hv), P(-hu, y0 + rise, hv)], mRoof); // un seul pan, haut côté « arrière »
+            face([P(-hu, y0, -hv), P(-hu, y0 + rise, hv), P(-hu, y0, hv)], mWall); face([P(hu, y0, -hv), P(hu, y0 + rise, hv), P(hu, y0, hv)], mWall); face([P(-hu, y0, hv), P(hu, y0, hv), P(hu, y0 + rise, hv), P(-hu, y0 + rise, hv)], mWall); ridgeY = y0 + rise; }
+        else if (shape === 'mansard') { const low = Math.tan(Math.max(pitch, 60 * Math.PI / 180)) , inset = Math.min(hv, hu) * .28, h1 = inset * low, top2 = Math.tan(Math.min(pitch, 30 * Math.PI / 180)) * (hv - inset);
+            ring(rect(hu, hv), rect(hu - inset, hv - inset), y0, y0 + h1, false);
+            const ru = Math.max(0, hu - inset - (hv - inset)); ring(rect(hu - inset, hv - inset), [[-ru, 0], [ru, 0], [ru, 0], [-ru, 0]], y0 + h1, y0 + h1 + top2, false); ridgeY = y0 + h1 + top2; }
+        else { const rise = Math.tan(pitch) * hv, ru = shape === 'gable' ? hu : shape === 'pyramid' ? 0 : Math.max(0, hu - hv); // deux pans : faîtage d'un bout à l'autre ; croupe : raccourci ; pavillon : une pointe
+            ring(rect(hu, hv), [[-ru, 0], [ru, 0], [ru, 0], [-ru, 0]], y0, y0 + rise, shape === 'gable'); ridgeY = y0 + rise; }
+        // la cheminée
+        if (r.chimney) { const cw = .55, ch = Math.max(.9, ridgeY - y0 + .7), pos = clamp(Number(r.chimneyPos ?? 30), 0, 100) / 100, u = -hu + ov + (run - 2 * ov) * pos, c = box(cw, ch, cw, mat('#a0826d', 'brique'), .8); c.position.copy(P(u, y0 + ch / 2, shape === 'shed' ? 0 : -hv * .25)); c.castShadow = true; g.add(c); }
         return g;
     }
     /** la vue 3D dans « box » : tourner, approcher, visiter */
@@ -216,7 +243,7 @@
         const ground = new T.Mesh(new T.PlaneGeometry(400, 400), new T.MeshStandardMaterial({color: '#a9b88f', roughness: 1})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.06; ground.receiveShadow = true; scene.add(ground);
         const cam = new T.PerspectiveCamera(50, W() / Hh(), .05, 500);
         let house = new T.Group(); scene.add(house);
-        const opts = {all: true, roof: H.roof?.on !== false, cut: false, dims: false};
+        const opts = {all: true, roof: !!H.roof?.on, cut: false, dims: false}; // pas de toit tant qu'on ne l'a pas demandé
         bar.querySelector('[data-h3="roof"]').checked = opts.roof;
         let target = new T.Vector3(), dist = 20, yaw = .8, pitch = .7, walk = false, fiCur = fi, Hcur = H;
         function rebuild() {
@@ -262,7 +289,7 @@
         el.addEventListener('wheel', e => { e.preventDefault(); if (walk) return; dist = clamp(dist * Math.exp(e.deltaY * .0012), 1.5, 200); }, {passive: false});
         const keys = new Set(); const kd = e => { if (e.target.closest?.('input, textarea')) return; keys.add(e.key.toLowerCase()); }, ku = e => keys.delete(e.key.toLowerCase());
         document.addEventListener('keydown', kd); document.addEventListener('keyup', ku);
-        bar.addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; rebuild(); } }, sig);
+        bar.addEventListener('input', e => { const k = e.target.dataset.h3; if (k in opts) { opts[k] = e.target.checked; if (k === 'roof') { Hcur.roof = {...(Hcur.roof || {}), on: opts.roof}; box2.dispatchEvent(new CustomEvent('h3-roof', {bubbles: true})); } rebuild(); } }, sig);
         bar.addEventListener('click', e => { const bt = e.target.closest('button'), k = bt?.dataset.h3;
             if (k === 'measure') { measuring = !measuring; bt.classList.toggle('is-on', measuring); el.style.cursor = measuring ? 'crosshair' : ''; if (!measuring) clearMeasure(); return; }
             if (k === 'view') { walk = false; const v = bt.dataset.v; home(); if (v === 'top') { pitch = 1.5; yaw = 0; } else if (v === 'front') { pitch = .06; yaw = 0; } else { pitch = .06; yaw = Math.PI / 2; } return; }
@@ -277,7 +304,7 @@
             placeLabel(); renderer.render(scene, cam); raf = requestAnimationFrame(loop); };
         raf = requestAnimationFrame(loop);
         const ro = new ResizeObserver(() => { renderer.setSize(W(), Hh()); cam.aspect = W() / Hh(); cam.updateProjectionMatrix(); }); ro.observe(box2);
-        return {update: (H2, fi2) => { Hcur = H2; fiCur = fi2; rebuild(); },
+        return {update: (H2, fi2) => { Hcur = H2; fiCur = fi2; opts.roof = !!H2.roof?.on; const rb = bar.querySelector('[data-h3="roof"]'); if (rb) rb.checked = opts.roof; rebuild(); },
             shot: () => new Promise(ok => { renderer.render(scene, cam); renderer.domElement.toBlob(ok, 'image/png'); }),
             destroy: () => { cancelAnimationFrame(raf); ro.disconnect(); document.removeEventListener('keydown', kd); document.removeEventListener('keyup', ku); renderer.dispose(); box2.innerHTML = ''; barAc.abort(); if (!ownBar) bar.hidden = true; }};
     }

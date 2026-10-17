@@ -3671,3 +3671,8 @@ dialog.modal.h-faces{width:min(1180px,96vw);max-width:96vw;max-height:94vh}.h-fa
 .h-hs-where{border:1px solid var(--line,#ddd);border-radius:8px;padding:6px 12px;margin:0 0 10px}.h-hs-floortab{width:100%;border-collapse:collapse}.h-hs-floortab td,.h-hs-floortab th{padding:5px;border-bottom:1px solid var(--line,#e3e3e3);text-align:left}.h-hs-floortab tr.is-del td{opacity:.45;text-decoration:line-through}.h-hs-floortab tr.is-del td:last-child{opacity:1;text-decoration:none}
 .h-hs-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}.h-hs-tabs button{padding:0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .segmented.h-hs-tabs:has(> button){grid-template-columns:repeat(4,minmax(0,1fr))}.segmented.h-ar-tabs:has(> button){display:flex;flex-wrap:nowrap;grid-template-columns:none}
+/* maison : aides pour fermer un tracé */
+.h-hs-ghost{fill:none;stroke:#e0457b;stroke-width:1.5;stroke-dasharray:8 6;vector-effect:non-scaling-stroke;opacity:.85}
+.h-hs-closept{fill:#fff;stroke:#e0457b;stroke-width:2;vector-effect:non-scaling-stroke}.h-hs-startpt{fill:#2a7de133;stroke:#2a7de1;stroke-width:2;vector-effect:non-scaling-stroke}
+.h-hs-snapclose{fill:#19a97433;stroke:#19a974;stroke-width:2.5;vector-effect:non-scaling-stroke}
+.h-hs-closetxt{fill:#a3264f;text-anchor:middle;font-weight:600;paint-order:stroke;stroke:#fff;stroke-width:3px;pointer-events:none}

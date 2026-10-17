@@ -111,12 +111,12 @@
     const area = pts => { let a = 0; pts.forEach((p, i) => { const q = pts[(i + 1) % pts.length]; a += p[0] * q[1] - q[0] * p[1]; }); return Math.abs(a / 2); };
     const centroid = pts => { const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]); return [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2]; };
     const newFloor = (n = 0) => ({id: uid('f'), name: n === 0 ? 'Rez-de-chaussée' : n === -1 ? 'Cave' : n === 1 ? '1er étage' : `${n}e étage`, level: n, height: 270, wallT: 20, walls: [], openings: [], rooms: [], items: [], dims: [], labels: []});
-    const newHouse = () => ({unit: 'cm', grid: 10, floors: [newFloor(0)], roof: {on: true, pitch: 40, color: '#8a4b3a', kind: 'tuiles'}, meta: {people: [], note: ''}, ref: null});
+    const newHouse = () => ({unit: 'cm', grid: 10, floors: [newFloor(0)], roof: {on: false, pitch: 40, color: '#8a4b3a', kind: 'tuiles'}, meta: {people: [], note: ''}, ref: null});
 
     /* un plan ouvert depuis la base (ou une base reçue d'ailleurs) : seuls des nombres, des couleurs, des images sûres et
        des mots-clés simples ; le texte libre (noms, notes) est toujours échappé à l'affichage */
     const H_FREE = new Set(['name', 'note', 'text', 'title', 'label', 'period', 'place', 'place_text', 'caption']);
-    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape']);
+    const H_WORD = new Set(['mtl', 'style', 'mat', 'floor', 'kind', 'type', 'id', 'unit', 'swing', 'role', 'wall', 'room', 'icon', 'ext', 'side', 'model', 'pid', 'key', 'cat', 'shape', 'axis']);
     const H_COLOR = /^(color|.*Color)$/, H_IMG = /^(src|img|image|href|top|thumb|tex|texture)$/;
     const imgSafe = v => /^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(v) || /^media\/[\w.%-]+$/.test(v) || /^api\.php\?action=house_model_file&id=\d+$/.test(v);
     function cleanHouse(v, key = '') {
@@ -158,6 +158,7 @@
             </div></div>`;
         document.body.appendChild(dlg); dlg.showModal();
         const $ = s => dlg.querySelector(s), svg = $('[data-hs-svg]'), world = $('[data-hs-world]'), stage = $('[data-hs-stage]'), pane = $('[data-hs-pane]');
+        dlg.addEventListener('pointerdown', e => dlg.querySelectorAll('details.h-hs-menu[open]').forEach(d => { if (!d.contains(e.target)) d.removeAttribute('open'); })); // un menu ouvert se ferme quand on clique ailleurs
         const status = s => { $('[data-hs-status]').textContent = s || ''; };
         const hint = s => { $('[data-hs-hint]').textContent = s || ''; };
         /* ─── historique ─── */
@@ -177,6 +178,9 @@
             guides = [];
             if (e?.altKey) return [r1(x), r1(y)];
             const tol = 14 / zoom, f = F(), g = H.grid || 10, gr = v => snapO.grid ? Math.round(v / g) * g : Math.round(v); // sans grille : au centimètre
+            const dp = draft?.kind === 'wall' || draft?.kind === 'zone' ? draft.pts || [] : [], closeP = rectClose(dp);
+            if (closeP && Math.hypot(closeP[0] - x, closeP[1] - y) < tol) { guides.push({pt: closeP, close: true}); return [...closeP]; } // le 4e coin d'un rectangle
+            if (dp.length > 2 && Math.hypot(dp[0][0] - x, dp[0][1] - y) < tol) { guides.push({pt: dp[0], close: true}); return [...dp[0]]; } // revenir au départ
             if (snapO.corner) { for (const w of f.walls) for (const p of [w.a, w.b]) if (Math.hypot(p[0] - x, p[1] - y) < tol) { guides.push({pt: p}); return [p[0], p[1]]; } // un coin existant
                 for (const rm of f.rooms) for (const p of rm.pts) if (Math.hypot(p[0] - x, p[1] - y) < tol) { guides.push({pt: p}); return [p[0], p[1]]; } }
             if (snapO.mid) for (const w of f.walls) { const m = [r1((w.a[0] + w.b[0]) / 2), r1((w.a[1] + w.b[1]) / 2)]; if (Math.hypot(m[0] - x, m[1] - y) < tol) { guides.push({pt: m, mid: true}); return m; } } // le milieu d'un mur
@@ -185,11 +189,14 @@
             if (snapO.wall) { const nw = nearestWall(x, y); if (nw && nw.d < tol * .7) { const w = nw.w, L = wallLen(w) || 1, d0 = Math.round(nw.t * L); guides.push({pt: [nw.px, nw.py]}); return [r1(w.a[0] + (w.b[0] - w.a[0]) / L * d0), r1(w.a[1] + (w.b[1] - w.a[1]) / L * d0)]; } } // sur un mur, au cm
             let px = gr(x), py = gr(y);
             if (snapO.align) { let bx = null, by = null; // dans l'alignement d'un coin existant (lignes de rappel)
-                for (const w of f.walls) for (const p of [w.a, w.b]) { if (Math.abs(p[0] - x) < tol && (!bx || Math.abs(p[0] - x) < Math.abs(bx[0] - x))) bx = p; if (Math.abs(p[1] - y) < tol && (!by || Math.abs(p[1] - y) < Math.abs(by[1] - y))) by = p; }
+                for (const p of [...f.walls.flatMap(w => [w.a, w.b]), ...dp.slice(0, -1)]) { if (Math.abs(p[0] - x) < tol && (!bx || Math.abs(p[0] - x) < Math.abs(bx[0] - x))) bx = p; if (Math.abs(p[1] - y) < tol && (!by || Math.abs(p[1] - y) < Math.abs(by[1] - y))) by = p; }
                 if (from) { if (Math.abs(from[0] - x) < tol) bx = from; if (Math.abs(from[1] - y) < tol) by = from; }
                 if (bx) px = bx[0]; if (by) py = by[1]; if (bx) guides.push({a: bx, b: [px, py]}); if (by) guides.push({a: by, b: [px, py]}); }
             return [px, py];
         };
+        /** le coin qui fermerait un rectangle (après deux murs à angle droit) : une aide, pas une obligation */
+        const rectClose = pts => { if (pts.length !== 3) return null; const [A, B, C] = pts, u = [B[0] - A[0], B[1] - A[1]], v = [C[0] - B[0], C[1] - B[1]], lu = Math.hypot(...u), lv = Math.hypot(...v);
+            if (lu < 1 || lv < 1 || Math.abs(u[0] * v[0] + u[1] * v[1]) / (lu * lv) > .02) return null; return [r1(A[0] + C[0] - B[0]), r1(A[1] + C[1] - B[1])]; };
         const wallLen = w => Math.hypot(w.b[0] - w.a[0], w.b[1] - w.a[1]);
         /** le point d'un mur le plus proche : {w, t (0..1), d (distance)} */
         const nearestWall = (x, y) => { let best = null; F().walls.forEach(w => { const dx = w.b[0] - w.a[0], dy = w.b[1] - w.a[1], L2 = dx * dx + dy * dy || 1, t = clamp(((x - w.a[0]) * dx + (y - w.a[1]) * dy) / L2, 0, 1), px = w.a[0] + dx * t, py = w.a[1] + dy * t, d = Math.hypot(x - px, y - py); if (!best || d < best.d) best = {w, t, d, px, py}; }); return best; };
@@ -236,12 +243,15 @@
             if (sel?.type === 'room') { const rm = f.rooms.find(q => q.id === sel.id); if (rm) h += rm.pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="${6 / zoom}" class="h-hs-handle" data-hs-rp="${i}"/>`).join(''); }
             // ce qu'on est en train de tracer
             if (draft?.pts?.length) { const pts = [...draft.pts, ...(hover ? [hover] : [])], last = draft.pts[draft.pts.length - 1];
-                if (draft.kind === 'wall') { h += `<path d="M${pts.map(p => p.join(' ')).join('L')}" stroke="#2a7de1" stroke-opacity=".55" stroke-width="${f.wallT}" fill="none" stroke-linecap="square"/>`; if (hover) h += dim(last, hover, f.wallT / 2 + 20 / zoom, 'is-live'); }
+                if (draft.kind === 'wall') { h += `<path d="M${pts.map(p => p.join(' ')).join('L')}" stroke="#2a7de1" stroke-opacity=".55" stroke-width="${f.wallT}" fill="none" stroke-linecap="square"/>`; if (hover) h += dim(last, hover, f.wallT / 2 + 20 / zoom, 'is-live');
+                    const st0 = draft.pts[0], D = rectClose(draft.pts); // le départ, et le rectangle qu'on pourrait fermer
+                    if (D) h += `<path d="M${last.join(' ')}L${D.join(' ')}L${st0.join(' ')}" class="h-hs-ghost"/><circle cx="${D[0]}" cy="${D[1]}" r="${7 / zoom}" class="h-hs-closept"/><text x="${D[0]}" y="${D[1] - 12 / zoom}" font-size="${11 / zoom}" class="h-hs-closetxt">${fmtLen(Math.hypot(D[0] - last[0], D[1] - last[1]))} pour fermer en rectangle</text>`;
+                    if (draft.pts.length > 1) h += `<circle cx="${st0[0]}" cy="${st0[1]}" r="${9 / zoom}" class="h-hs-startpt"/><text x="${st0[0]}" y="${st0[1] - 14 / zoom}" font-size="${11 / zoom}" class="h-hs-closetxt">départ${draft.pts.length > 2 ? ' (clic : fermer)' : ''}</text>`; }
                 else if (draft.kind === 'zone') h += `<path d="M${pts.map(p => p.join(' ')).join('L')}Z" fill="#2a7de122" stroke="#2a7de1" stroke-width="1.5" vector-effect="non-scaling-stroke"/>`;
                 else if (draft.kind === 'dim' && hover) h += dim(last, hover, 0, 'is-live'); }
             if (draft?.kind === 'room' && draft.b) { const [a, b] = [draft.a, draft.b], x = Math.min(a[0], b[0]), y = Math.min(a[1], b[1]), w = Math.abs(b[0] - a[0]), hh = Math.abs(b[1] - a[1]);
                 h += `<rect x="${x}" y="${y}" width="${w}" height="${hh}" fill="#2a7de11a" stroke="#2a7de1" stroke-width="${f.wallT}" stroke-opacity=".5"/>` + dim([x, y], [x + w, y], -f.wallT / 2 - 20 / zoom, 'is-live') + dim([x + w, y], [x + w, y + hh], -f.wallT / 2 - 20 / zoom, 'is-live') + `<text x="${x + w / 2}" y="${y + hh / 2}" font-size="${14 / zoom}" class="h-hs-rarea">${String(r1(w * hh / 10000)).replace('.', ',')} m²</text>`; }
-            if (hover && ['wall', 'zone', 'dim', 'room'].includes(tool)) { h += guides.map(q => q.pt ? `<rect x="${q.pt[0] - 6 / zoom}" y="${q.pt[1] - 6 / zoom}" width="${12 / zoom}" height="${12 / zoom}" class="h-hs-snapmk${q.mid ? ' is-mid' : ''}" transform="${q.mid ? `rotate(45 ${q.pt[0]} ${q.pt[1]})` : ''}"/>` : `<path d="M${q.a[0]} ${q.a[1]}L${q.b[0]} ${q.b[1]}" class="h-hs-guide${q.ang ? ' is-ang' : ''}"/>`).join(''); h += `<circle cx="${hover[0]}" cy="${hover[1]}" r="${4 / zoom}" fill="#2a7de1"/>`; }
+            if (hover && ['wall', 'zone', 'dim', 'room'].includes(tool)) { h += guides.map(q => q.pt && q.close ? `<circle cx="${q.pt[0]}" cy="${q.pt[1]}" r="${11 / zoom}" class="h-hs-snapclose"/>` : q.pt ? `<rect x="${q.pt[0] - 6 / zoom}" y="${q.pt[1] - 6 / zoom}" width="${12 / zoom}" height="${12 / zoom}" class="h-hs-snapmk${q.mid ? ' is-mid' : ''}" transform="${q.mid ? `rotate(45 ${q.pt[0]} ${q.pt[1]})` : ''}"/>` : `<path d="M${q.a[0]} ${q.a[1]}L${q.b[0]} ${q.b[1]}" class="h-hs-guide${q.ang ? ' is-ang' : ''}"/>`).join(''); h += `<circle cx="${hover[0]}" cy="${hover[1]}" r="${4 / zoom}" fill="#2a7de1"/>`; }
             world.innerHTML = h; applyView(); paintSide(); paintFloors(); if (lastXY) readout(...lastXY);
         }
         /* ─── étages ─── */
@@ -252,7 +262,7 @@
         const opt = (list, cur) => list.map(([k, l]) => `<option value="${k}" ${cur === k ? 'selected' : ''}>${esc(l)}</option>`).join('');
         function paintSide() {
             dlg.querySelectorAll('[data-hs-tab]').forEach(b => b.classList.toggle('is-active', b.dataset.hsTab === tab));
-            if (pane.contains(document.activeElement) && document.activeElement.matches('input:not([type=range]):not([type=color]), textarea')) return;
+            if (pane.contains(document.activeElement) && document.activeElement.matches('input:not([type=range]):not([type=color]):not([type=checkbox]):not([type=radio]), textarea')) return;
             const f = F();
             if (tab === 'lib') {
                 const cats = [...new Set(LIB.map(l => l[2]))], q = libQ.toLowerCase();
@@ -270,7 +280,12 @@
                     <label class="checkbox-line"><input type="checkbox" data-hs-f="showDims" ${f.showDims !== false ? 'checked' : ''}> Cotes des murs</label>${below ? `<label class="checkbox-line"><input type="checkbox" data-hs-f="showBelow" ${f.showBelow !== false ? 'checked' : ''}> Voir l’étage du dessous en transparence</label>` : ''}
                     <div class="h-hs-g2c"><label>Pas de la grille (cm)<select data-hs-h="grid">${[1, 2, 5, 10, 25, 50, 100].map(v => `<option ${H.grid === v ? 'selected' : ''}>${v}</option>`).join('')}</select></label><label>Épaisseur des planchers (cm)<input type="number" data-hs-h="slab" value="${H.slab ?? 20}" min="0" max="120"></label></div>
                     <div class="h-hs-row"><button type="button" class="button small secondary" data-hs-cmd="dupfloor">⧉ Dupliquer cet étage (murs)</button><button type="button" class="button small danger" data-hs-cmd="delfloor">Supprimer l’étage</button></div>
-                    <h4>Toit (vue 3D)</h4><label class="checkbox-line"><input type="checkbox" data-hs-roof="on" ${H.roof?.on !== false ? 'checked' : ''}> Un toit à deux pans sur l’étage le plus haut</label><div class="h-hs-g2c"><label>Pente (°)<input type="number" data-hs-roof="pitch" value="${H.roof?.pitch ?? 40}" min="10" max="70"></label><label>Couverture<select data-hs-roof="kind">${opt([['tuiles', 'Tuiles'], ['ardoises', 'Ardoises'], ['chaume', 'Chaume'], ['zinc', 'Zinc']], H.roof?.kind || 'tuiles')}</select></label></div>
+                    <h4>Toit (vue 3D)</h4><label class="checkbox-line"><input type="checkbox" data-hs-roof="on" ${H.roof?.on ? 'checked' : ''}> Un toit sur l’étage le plus haut</label>
+                    ${H.roof?.on ? `<div class="h-hs-g2c"><label>Forme<select data-hs-roof="shape">${opt([['gable', 'Deux pans (pignons)'], ['hip', 'Quatre pans (croupes)'], ['pyramid', 'Pavillon (pointe)'], ['shed', 'Un pan (appentis)'], ['mansard', 'Mansardé'], ['flat', 'Plat (toit-terrasse)']], H.roof?.shape || 'gable')}</select></label><label>Faîtage<select data-hs-roof="axis">${opt([['long', 'Dans la longueur'], ['short', 'Dans la largeur'], ['x', 'Est – ouest'], ['z', 'Nord – sud']], H.roof?.axis || 'long')}</select></label>
+                        <label>Pente (°)<input type="number" data-hs-roof="pitch" value="${H.roof?.pitch ?? 40}" min="2" max="75"></label><label>Débord (cm)<input type="number" data-hs-roof="over" value="${H.roof?.over ?? 35}" min="0" max="200"></label>
+                        <label>Couverture<select data-hs-roof="kind">${opt([['tuiles', 'Tuiles canal'], ['tuilesplates', 'Tuiles plates'], ['vernies', 'Tuiles vernissées'], ['ardoises', 'Ardoises'], ['lauzes', 'Lauzes (pierre)'], ['chaume', 'Chaume'], ['zinc', 'Zinc'], ['bacacier', 'Bac acier']], H.roof?.kind || 'tuiles')}</select></label><label>Couleur<input type="color" data-hs-roof="color" value="${esc(/^#[0-9a-f]{6}$/i.test(H.roof?.color || '') ? H.roof.color : ({tuiles: '#8a4b3a', tuilesplates: '#9a4a32', ardoises: '#4a5058', chaume: '#b8995a', zinc: '#9aa3a8', lauzes: '#7d7a72', bacacier: '#5b6670', vernies: '#9a3b23'})[H.roof?.kind || 'tuiles'] || '#8a4b3a')}"></label>
+                        <label>Pignons, acrotères<input type="color" data-hs-roof="gableColor" value="${esc(/^#[0-9a-f]{6}$/i.test(H.roof?.gableColor || '') ? H.roof.gableColor : '#e9e1cf')}"></label><label class="checkbox-line"><input type="checkbox" data-hs-roof="parapet" ${H.roof?.parapet !== false ? 'checked' : ''}> Acrotère (toit plat)</label>
+                        <label class="checkbox-line"><input type="checkbox" data-hs-roof="chimney" ${H.roof?.chimney ? 'checked' : ''}> Une cheminée</label><label>Place de la cheminée<input type="range" data-hs-roof="chimneyPos" min="0" max="100" value="${H.roof?.chimneyPos ?? 30}"></label></div>` : ''}
                     ${H.ref?.src ? `<h4>Plan scanné</h4><label>Transparence<input type="range" min="5" max="100" value="${Math.round((H.ref.op ?? .45) * 100)}" data-hs-ref="op"></label><div class="h-hs-row"><label class="checkbox-line"><input type="checkbox" data-hs-ref="show" ${H.ref.show !== false ? 'checked' : ''}> Visible</label><button type="button" class="button small secondary" data-hs-cmd="calib">📏 Mettre à l’échelle (2 points)</button><button type="button" class="button small secondary" data-hs-cmd="refmove">✥ Déplacer</button><button type="button" class="button small danger" data-hs-cmd="refdel">Retirer</button></div>` : ''}</div>`;
                 return;
             }
@@ -571,7 +586,7 @@
             if (el.matches('[data-hs-libq]')) { libQ = el.value; clearTimeout(tmr); tmr = setTimeout(() => { const p0 = el.selectionStart; paintSide(); const i = pane.querySelector('[data-hs-libq]'); i.focus(); i.setSelectionRange(p0, p0); }, 200); return; }
             if (el.dataset.hsF) { const k = el.dataset.hsF; f[k] = ['level', 'height', 'wallT'].includes(k) ? Number(v) : v; later('Étage'); return; }
             if (el.dataset.hsH) { H[el.dataset.hsH] = Number(v); later('Grille'); return; }
-            if (el.dataset.hsRoof) { H.roof = H.roof || {}; H.roof[el.dataset.hsRoof] = el.dataset.hsRoof === 'pitch' ? Number(v) : v; later('Toit'); return; }
+            if (el.dataset.hsRoof) { const k = el.dataset.hsRoof; H.roof = H.roof || {}; H.roof[k] = ['pitch', 'over', 'chimneyPos'].includes(k) ? Number(v) : v; if (k === 'kind') delete H.roof.color; later('Toit'); if (k === 'on' || k === 'kind') setTimeout(paintSide, 0); return; } // la couverture choisie reprend sa couleur
             if (el.dataset.hsRef && H.ref) { if (el.dataset.hsRef === 'op') H.ref.op = Number(v) / 100; else H.ref.show = v; later('Plan scanné'); return; }
             if (el.dataset.hsM) { if (el.dataset.hsM === 'period') period = v; else H.meta[el.dataset.hsM] = v; dirty = true; return; }
             if (el.dataset.hsProle !== undefined) { H.meta.people[Number(el.dataset.hsProle)].role = v; dirty = true; return; }
@@ -593,6 +608,7 @@
             }
         });
         pane.addEventListener('change', e => { if (tmr) { clearTimeout(tmr); tmr = 0; } const el = e.target; if (sel?.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset?.hsP)) { el._geo = true; el.dispatchEvent(new Event('input', {bubbles: true})); el._geo = false; } });
+        stage.addEventListener('h3-roof', () => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); hpos = hist.length - 1; dirty = true; status(H.roof?.on ? '✓ Toit ajouté' : '✓ Toit retiré'); }); // la case Toit de la vue 3D est gardée avec la maison
         let laterT = 0; const later = label => { render(); clearTimeout(laterT); laterT = setTimeout(() => commit(label), 500); };
         const onKey = e => {
             if (!dlg.open || document.querySelector('dialog[open]:not(.h-hs-dlg)')) return;
