@@ -208,7 +208,7 @@
     const PERSON_BADGE_COLOR_PRESETS_KEY = 'genealogie-person-badge-color-presets';
     const SITE_DEFAULTS_APPLIED_KEY = 'genealogie-site-defaults-applied';
     const SITE_DEFAULT_KEYS = [
-        'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','lcnda-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles','genealogie-edit-tools-order','genealogie-vector-map-palette',
+        'genealogie-design','genealogie-design-presets','genealogie-menu-order','genealogie-menu-hidden','genealogie-menu-names','genealogie-lightbox-sections','genealogie-calendar-choices','genealogie-diagram-kinds','genealogie-house-snap','lcnda-decor-tree','genealogie-decor-tree-formats','genealogie-decor-tree-styles','genealogie-edit-tools-order','genealogie-maintenance-groups','genealogie-vector-map-palette',
         'genealogie-list-order','genealogie-list-hidden','genealogie-map-order','genealogie-map-hidden','genealogie-maintenance-order','genealogie-board-prefs','genealogie-board-prefs-sets',
         'genealogie-graph-diagram-order','genealogie-graph-diagram-hidden','genealogie-graph-stats-order','genealogie-graph-stats-hidden',
         'genealogie-tile-cat-order','genealogie-tile-hidden-cats','genealogie-tile-hidden','genealogie-tile-custom-cats',
