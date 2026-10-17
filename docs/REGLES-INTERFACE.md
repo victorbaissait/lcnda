@@ -12,6 +12,19 @@ Chaque fois qu'un outil (existant ou nouveau) demande de choisir une ou plusieur
 - **Choisie** : une pastille (initiales/photo, nom, années, Sosa) avec « ↗ Fiche » et « × » pour changer. Plusieurs personnes : des pastilles + une case « ＋ Ajouter une personne… ».
 - **Avec des rôles** : « ⭐ Personne principale » (une seule, grande carte avec « ★ PRINCIPALE », « ↗ Fiche », « Changer » — l'ancienne descend dans les principales), zone bleue « ★ Autres personnes principales », zone grise « ☆ Personnes secondaires » ; sur chaque pastille un rôle facultatif (témoin, parrain, marraine, voisin, employeur, officier, déclarant… ou mot libre), ★/☆ pour changer de zone (ou glisser), × pour retirer ; une personne sans fiche = pastille grise « ? ». À la lecture : la principale en grand, puis lignes « ★ Principales » (pastilles bleues) et « ☆ Secondaires » (pastilles grises), rôle à côté du nom, clic = ouvrir la fiche.
 
+## Choisir un lieu, et toute autre chose : même modèle (validé)
+
+Maquette : `docs/design/choix-lieux-et-autres.html`. Même champ, même liste, même pastille, mêmes touches que pour les personnes ; seuls le symbole de gauche et la ligne grise changent.
+
+- **Lieux** : icône 📍 dans le champ. Liste rangée en groupes : « Dans ta généalogie » (repère bleu plein + badge « N événements »), « Communes de France (pas encore dans ta base) » (repère blanc + badge « Commune »), puis « Villes du monde » (repère blanc + pays). Chaque ligne : nom (lettres tapées surlignées), « Département (n°) · Région · Pays » ou « Région · Pays », population, ancien nom si connu.
+  - **Jamais bloqué par les homonymes** : pas de limite fixe — la liste défile et charge la suite en descendant ; on peut préciser en tapant le département, son numéro, la région ou le pays après le nom (« saint-martin gers », « saint-martin 32 », « springfield usa ») ; les plus peuplées d'abord à pertinence égale.
+  - En bas : « ＋ Créer le lieu « … » » et « 🗺 Choisir sur la carte ». Rien trouvé : « Aucun lieu pour « … ». Vérifie l'orthographe, ou : ».
+  - Choisi : pastille (repère, nom, département) avec « ↗ Lieu », « 🗺 » (sur la carte) et « × ». Plusieurs lieux : pastilles + « ＋ Ajouter un lieu… ».
+  - Un lieu « pas encore dans ta base » n'y entre qu'une fois choisi.
+- **Tout le reste** (sources 📚, médias en vignette, enquêtes 🔍, battues, étiquettes en pastille de couleur, maisons en vignette, revues, employeurs, recensements, événements…) : symbole ou vignette à gauche, nom, ligne grise utile, badge à droite ; choisi → même pastille avec « ↗ Ouvrir » et « × ».
+- **Recherche mélangée** (« une personne, une enquête, un lieu… ») : filtres en haut avec le nombre trouvé (« Tout (9) », « 👤 Personnes (2) »…), résultats rangés par sorte, chaque ligne au format de sa sorte ; Tab passe d'un filtre à l'autre.
+- **Ne changent pas** : les petits menus à choix fixes (Portrait / Paysage, Style, État…) restent des menus déroulants simples.
+
 ## Outils communs à utiliser (window.LCNDA_APP)
 
 - `confirmBox(message, {title, okLabel, danger})` au lieu de `confirm()` ; `toast()` au lieu de `alert()` ; `askText()` pour une question.

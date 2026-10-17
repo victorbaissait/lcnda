@@ -1,0 +1,119 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.lab{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+/* ── le champ ── */
+.pp{position:relative}
+.pp-box{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;min-height:44px;padding:0 10px}
+.pp-box:focus-within{outline:3px solid rgba(5,93,255,.35);outline-offset:0}
+.pp-ico{font-size:15px;opacity:.6}
+.pp-box input{flex:1;border:0;outline:0;font:inherit;font-size:15px;min-width:60px;background:transparent;padding:10px 0}
+.pp-kbd{font-size:11px;color:#888;white-space:nowrap}
+/* ── la liste ── */
+.pp-list{margin-top:6px;border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);max-height:none}
+.pp-head{display:flex;justify-content:space-between;padding:7px 12px;font-size:12px;color:#666;border-bottom:1px solid #e3e5ea}
+.pp-item{display:flex;align-items:center;gap:11px;padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f1f4}
+.pp-item.on{background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff}
+.pp-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 13px system-ui;color:#fff;flex:none;background-size:cover;background-position:center}
+.pp-av.m{background:#3c78d8}.pp-av.f{background:#d9488f}.pp-av.u{background:#8a8f99}.pp-av.a{background:#e9a23b}
+.pp-txt{flex:1;min-width:0}
+.pp-name{font-weight:700;font-size:14.5px}.pp-name mark{background:#fff1a8;color:inherit;padding:0}
+.pp-meta{font-size:12.5px;color:#666;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-badge{font:700 11px/1 system-ui;border:1.5px solid #111;padding:3px 6px;white-space:nowrap}
+.pp-badge.sosa{background:#055dff;color:#fff;border-color:#055dff}
+.pp-foot{display:flex;flex-direction:column}
+.pp-act{display:flex;align-items:center;gap:9px;padding:9px 12px;font-weight:700;font-size:13.5px;border-top:1px solid #e3e5ea;color:#055dff}
+.pp-act.muted{color:#555;font-weight:600}
+.pp-hint{font-size:11.5px;color:#888;padding:7px 12px;border-top:1px solid #e3e5ea;background:#fafbfc}
+/* ── choisi ── */
+.pp-chip{display:inline-flex;align-items:center;gap:9px;border:2px solid #111;background:#fff;padding:5px 6px 5px 5px;box-shadow:3px 3px 0 rgba(5,93,255,.25);max-width:100%}
+.pp-chip .pp-av{width:30px;height:30px;font-size:12px}
+.pp-chip b{font-size:14.5px}.pp-chip small{color:#666;font-size:12.5px}
+.pp-chip .x{border:0;background:none;font-size:18px;cursor:pointer;padding:0 6px;color:#555}
+.pp-chip .go{border:1.5px solid #111;background:#fff;font-size:12px;padding:2px 6px;cursor:pointer}
+.pp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.pp-chips .pp-chip{box-shadow:none;padding:3px 4px 3px 3px}.pp-chips .pp-av{width:24px;height:24px;font-size:10px}
+.pp-empty{padding:14px 12px;font-size:13.5px;color:#555}
+.note{font-size:12.5px;color:#555;margin-top:12px;line-height:1.5}
+
+.ic{width:34px;height:34px;display:grid;place-items:center;flex:none;font-size:17px;border:2px solid #111;background:#fff}
+.ic.pin{border-radius:50% 50% 50% 0;transform:rotate(-45deg);width:28px;height:28px;background:#055dff;border-color:#055dff;margin:0 3px}
+.ic.pin span{transform:rotate(45deg);color:#fff;font-size:12px;font-weight:700}
+.ic.pin.ref{background:#fff;border-color:#9aa1ad}.ic.pin.ref span{color:#6b7280}
+.ic.thumb{background:linear-gradient(135deg,#c9b38a,#7d6a4a);border-color:#111}
+.ic.house{background:linear-gradient(160deg,#e8dcc4,#b9a27a)}
+.ic.dot{border:0}.ic.dot i{width:16px;height:16px;border-radius:50%;display:block}
+.grp{font:700 11px/1 system-ui;letter-spacing:.1em;text-transform:uppercase;color:#055dff;padding:9px 12px 5px;background:#fafbfc;border-bottom:1px solid #eef0f3}
+.grp.gray{color:#777}
+.filt{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid #e3e5ea}
+.filt span{border:1.5px solid #111;padding:3px 8px;font-size:12px;font-weight:600;background:#fff}
+.filt span.on{background:#111;color:#fff}
+.badge2{font:600 11.5px/1 system-ui;color:#555;border:1px solid #ccc;padding:3px 6px;white-space:nowrap;background:#fff}
+.badge2.blue{border-color:#055dff;color:#055dff}
+.row3{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+</style></head><body>
+<h1>🧭 Choisir un lieu, et tout le reste — sur le modèle des personnes</h1>
+<p class="sub">Même champ, même liste, même pastille, mêmes touches (↑ ↓ Entrée Échap) : seul le petit symbole de gauche et la ligne grise changent selon ce qu’on choisit.</p>
+<div class="grid">
+
+<div class="case"><span class="tag">1 · Lieux — en tapant « saint-m »</span><h3>Villes, villages, paroisses</h3>
+<span class="lab">Lieu</span>
+<div class="pp"><div class="pp-box"><span class="pp-ico">📍</span><input value="saint-m"><span class="pp-kbd">Échap</span></div>
+<div class="pp-list">
+<div class="pp-head"><span>3 lieux de ta base · 41 communes de France</span><span>↑ ↓ Entrée</span></div>
+<div class="grp">Dans ta généalogie</div>
+<div class="pp-item on"><span class="ic pin"><span>●</span></span><div class="pp-txt"><div class="pp-name"><mark>Saint-M</mark>artin-la-Méanne</div><div class="pp-meta">Corrèze (19) · Nouvelle-Aquitaine · France</div></div><span class="badge2 blue">12 événements</span></div>
+<div class="pp-item"><span class="ic pin"><span>●</span></span><div class="pp-txt"><div class="pp-name"><mark>Saint-M</mark>artial-de-Gimel</div><div class="pp-meta">Corrèze (19) · France · anc. « Saint-Martial »</div></div><span class="badge2 blue">3 événements</span></div>
+<div class="grp gray">Communes de France (pas encore dans ta base)</div>
+<div class="pp-item"><span class="ic pin ref"><span>○</span></span><div class="pp-txt"><div class="pp-name"><mark>Saint-M</mark>artin (Gers)</div><div class="pp-meta">Gers (32) · Occitanie · 402 hab.</div></div><span class="badge2">Commune</span></div>
+<div class="pp-item"><span class="ic pin ref"><span>○</span></span><div class="pp-txt"><div class="pp-name"><mark>Saint-M</mark>artin (Haut-Rhin)</div><div class="pp-meta">Haut-Rhin (68) · Grand Est · 1 205 hab.</div></div><span class="badge2">Commune</span></div>
+<div class="pp-hint">… 39 autres : la liste défile</div>
+<div class="pp-foot"><div class="pp-act">＋ Créer le lieu « saint-m »</div><div class="pp-act muted">🗺 Choisir sur la carte</div></div>
+</div></div>
+<p class="note">Pin bleu plein = déjà dans ta généalogie (avec le nombre d’événements) ; pin blanc = commune de France livrée avec l’app. Toujours le département et son numéro pour distinguer les homonymes ; l’ancien nom quand il existe.</p>
+</div>
+
+<div class="case"><span class="tag">2 · Lieu choisi</span><h3>La même pastille que les personnes</h3>
+<span class="lab">Lieu</span>
+<div class="pp-chip"><span class="ic pin" style="width:24px;height:24px"><span style="font-size:10px">●</span></span><span><b>Saint-Martin-la-Méanne</b> <small>Corrèze (19)</small></span><button class="go">↗ Lieu</button><button class="go">🗺</button><button class="x">×</button></div>
+<p class="note">« ↗ Lieu » ouvre la fiche du lieu, 🗺 le montre sur la carte, × pour changer.</p>
+<span class="lab" style="margin-top:14px">Rien trouvé</span>
+<div class="pp-list"><div class="pp-empty">Aucun lieu pour « Durandville ». Vérifie l’orthographe, ou :</div><div class="pp-foot"><div class="pp-act">＋ Créer le lieu « Durandville »</div><div class="pp-act muted">🗺 Choisir sur la carte</div></div></div>
+<span class="lab" style="margin-top:14px">Plusieurs lieux</span>
+<div class="pp-chips"><span class="pp-chip"><span class="ic pin" style="width:18px;height:18px"><span style="font-size:8px">●</span></span><b>Tulle</b><small>19</small><button class="x">×</button></span><span class="pp-chip"><span class="ic pin" style="width:18px;height:18px"><span style="font-size:8px">●</span></span><b>Naves</b><small>19</small><button class="x">×</button></span></div>
+<div class="pp"><div class="pp-box"><span class="pp-ico">📍</span><input placeholder="＋ Ajouter un lieu…"></div></div>
+</div>
+
+<div class="case"><span class="tag">3 · Tout le reste</span><h3>Même liste, un symbole par sorte</h3>
+<div class="pp-list">
+<div class="pp-item"><span class="ic">📚</span><div class="pp-txt"><div class="pp-name">Registre paroissial de Naves</div><div class="pp-meta">Source · AD Corrèze · cote 3 E 123</div></div><span class="badge2">8 citations</span></div>
+<div class="pp-item"><span class="ic thumb"></span><div class="pp-txt"><div class="pp-name">Mariage Martin–Borie</div><div class="pp-meta">Photo · 1949 · 2 personnes reconnues</div></div><span class="badge2">Média</span></div>
+<div class="pp-item"><span class="ic">🔍</span><div class="pp-txt"><div class="pp-name">Retrouver l’acte de mariage</div><div class="pp-meta">Enquête · Jean MARTIN · en cours</div></div><span class="badge2 blue">En cours</span></div>
+<div class="pp-item"><span class="ic dot"><i style="background:#d9488f"></i></span><div class="pp-txt"><div class="pp-name">À vérifier</div><div class="pp-meta">Étiquette · 14 fiches</div></div></div>
+<div class="pp-item"><span class="ic house"></span><div class="pp-txt"><div class="pp-name">Maison de Naves</div><div class="pp-meta">Maison · 3 époques · rattachée à 4 personnes</div></div></div>
+</div>
+<p class="note">Sources, médias (vignette), enquêtes, battues, étiquettes (pastille de couleur), maisons (vignette), revues, employeurs, recensements, événements… : un symbole ou une vignette à gauche, le nom, une ligne grise utile, un badge à droite. Choisi → la même pastille avec « ↗ Ouvrir » et ×.</p>
+</div>
+
+<div class="case"><span class="tag">4 · Recherche mélangée</span><h3>« Une personne, une enquête, un lieu… »</h3>
+<div class="pp"><div class="pp-box"><span class="pp-ico">🔍</span><input value="naves"></div>
+<div class="pp-list">
+<div class="filt"><span class="on">Tout (9)</span><span>👤 Personnes (2)</span><span>📍 Lieux (1)</span><span>🔍 Enquêtes (1)</span><span>🏠 Maisons (1)</span><span>📚 Sources (4)</span></div>
+<div class="grp">👤 Personnes</div>
+<div class="pp-item on"><span class="pp-av m">JM</span><div class="pp-txt"><div class="pp-name">Joseph MARTIN</div><div class="pp-meta">° 1952 <mark>Naves</mark> · † 2010 Brive</div></div><span class="pp-badge sosa">Sosa 1</span></div>
+<div class="grp">📍 Lieux</div>
+<div class="pp-item"><span class="ic pin"><span>●</span></span><div class="pp-txt"><div class="pp-name"><mark>Naves</mark></div><div class="pp-meta">Corrèze (19) · France</div></div><span class="badge2 blue">9 événements</span></div>
+<div class="grp">🏠 Maisons</div>
+<div class="pp-item"><span class="ic house"></span><div class="pp-txt"><div class="pp-name">Maison de <mark>Naves</mark></div><div class="pp-meta">Maison · 3 époques</div></div></div>
+<div class="pp-hint">↹ Tab passe d’un filtre à l’autre</div>
+</div></div>
+<p class="note">Quand un champ accepte plusieurs sortes de choses : des filtres en haut (avec le nombre trouvé), les résultats rangés par sorte, chaque ligne au format de sa sorte.</p>
+</div>
+</div>
+<p class="note" style="max-width:1180px;margin-top:22px"><b>Ne changent pas :</b> les petites listes fixes (Portrait / Paysage, Style, État « En cours / Terminée »…) restent des menus déroulants simples ; on harmonise les champs où l’on <b>cherche</b> quelque chose dans ta base.</p>
+</body></html>
