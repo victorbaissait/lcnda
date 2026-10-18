@@ -123,6 +123,7 @@ function art_schema(PDO $pdo): void
 function art_kind_ok(PDO $pdo, string $kind): bool
 {
     if (in_array($kind, ART_BUILTIN_KINDS, true)) { return true; }
+    if (function_exists('oeuvres_kind_ok') && oeuvres_kind_ok($kind)) { return true; } // 🧩 lib/oeuvres.php
     if (isset(art_extra_types()[$kind])) { return true; }
     if (preg_match('/^profile_([a-z][a-z0-9_]{1,40})$/', $kind, $pm)) { art_ensure($pdo); $ps = $pdo->prepare('SELECT 1 FROM profiles WHERE key=?'); $ps->execute([$pm[1]]); if ($ps->fetchColumn()) { return true; } } // sinon : les autres règles (sciences…) décident
     if (function_exists('sciences_kind_ok') && sciences_kind_ok($kind)) { return true; } // 🔬 lib/sciences.php
@@ -277,7 +278,7 @@ function art_subline(array $d, string $kind): string
     if (function_exists('sciences_subline') && ($sci = sciences_subline($d, $kind)) !== null) { return mb_substr($sci, 0, 160); } // 🔬
     return mb_substr(match ($kind) {
         'release' => $pick(['format', 'catno']), 'work' => $pick(['catref', 'technique']), 'recording' => $pick(['rkind', 'date', 'dur']),
-        'book' => $pick(['isbn']), 'film' => $pick(['jobs', 'role']), 'exhibition' => $pick(['venue', 'dates']), default => $pick(['date', 'note']),
+        'book' => $pick(['isbn']), 'film' => $pick(['jobs', 'role']), 'exhibition' => $pick(['venue', 'dates']), default => (function_exists('oeuvres_subline') ? oeuvres_subline($d, $kind) : '') ?: $pick(['date', 'note']), // 🧩 lib/oeuvres.php
     }, 0, 160);
 }
 
@@ -456,6 +457,7 @@ function art_save_item(PDO $pdo, array $d): array
     }
     art_reindex($pdo, $id, $data);
     if (function_exists('sciences_after_save')) { sciences_after_save($pdo, $personId, $kind, $id); } // 🔬
+    if (function_exists('oeuvres_register_type')) { oeuvres_register_type($pdo, $kind); } // 🧩 lib/oeuvres.php
     if ($kind === 'profile') { $pdo->prepare("INSERT INTO person_profiles(person_id, profile_key, item_id) VALUES(?, 'artist', ?) ON CONFLICT(person_id, profile_key) DO UPDATE SET item_id=excluded.item_id")->execute([$personId, $id]); }
     elseif (str_starts_with($kind, 'profile_')) { $pdo->prepare('INSERT INTO person_profiles(person_id, profile_key, item_id) VALUES(?, ?, ?) ON CONFLICT(person_id, profile_key) DO UPDATE SET item_id=excluded.item_id')->execute([$personId, substr($kind, 8), $id]); } // 🧩
     return ['id' => $id];
@@ -577,6 +579,7 @@ function art_save_type(PDO $pdo, array $d): array
         parent_type=excluded.parent_type, def=excluded.def, version=version+1, updated_at=CURRENT_TIMESTAMP")
         ->execute([$key, $label, $s('many') ?: $label . 's', $s('icon', 16) ?: '✦', $s('color', 20), $s('family', 40) ?: $s('domain', 40), $s('domain', 40), $s('parent_type', 44), $json]);
     $pdo->prepare('DELETE FROM type_fields WHERE type_key=?')->execute([$key]);
+    $pdo->prepare('DELETE FROM type_links WHERE from_type=?')->execute([$key]); // 🧩 liens refaits à chaque enregistrement
     $ins = $pdo->prepare('INSERT OR IGNORE INTO type_fields(type_key, group_key, group_label, ord, field_key, kind, label, settings, vis_fiche, vis_list, vis_card, vis_export, filterable, source_field) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
     $ord = 0;
     foreach ($groups as $g) {
@@ -587,7 +590,7 @@ function art_save_type(PDO $pdo, array $d): array
             $ins->execute([$key, mb_substr((string) ($g['key'] ?? 'main'), 0, 40), mb_substr((string) ($g['label'] ?? ''), 0, 80), $ord++, (string) $f['key'], mb_substr((string) ($f['type'] ?? 'text'), 0, 20),
                 mb_substr((string) ($f['label'] ?? ''), 0, 120), json_encode($set, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES), !empty($f['star']) ? 1 : 0, !empty($f['inList']) ? 1 : 0, !empty($f['inCard']) ? 1 : 0,
                 ($f['inExport'] ?? true) ? 1 : 0, !empty($f['filterable']) ? 1 : 0, mb_substr((string) ($f['source'] ?? ''), 0, 90)]);
-            if (($f['type'] ?? '') === 'item') {
+            if (in_array($f['type'] ?? '', ['item', 'items'], true)) { // 🧩 item ou items
                 foreach (is_array($f['kinds'] ?? null) ? $f['kinds'] : [] as $to) { $pdo->prepare('INSERT INTO type_links(from_type, to_type, field_key, name_fwd, name_back) VALUES(?,?,?,?,?)')->execute([$key, (string) $to, (string) $f['key'], mb_substr((string) ($f['label'] ?? ''), 0, 80), mb_substr((string) ($f['back'] ?? ''), 0, 80)]); }
             }
         }

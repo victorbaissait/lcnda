@@ -1455,7 +1455,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     /* ═════ 💾 Réglages enregistrés : un fichier par réglage, pour le garder ou le donner ═════
        Fichier « lcnda-reglage-<outil>-<nom>.json » = {lcnda:'reglage', outil, nom, version:1, donnees}. */
-    const SETTING_TOOLS={presets:'les designs (Apparence → Mes propres designs)',raccourcis:'les raccourcis clavier',apparence:'l’apparence (designs)',tableaux:'les réglages des tableaux',animaux:'les animaux',atelier:'l’Atelier de recherche','palette-stats':'les couleurs des statistiques','palette-battues':'les couleurs des battues','palette-badges':'les couleurs des badges',artistes:'les réglages des artistes (champs affichés, page de l’artiste)'};
+    const SETTING_TOOLS={presets:'les designs (Apparence → Mes propres designs)',raccourcis:'les raccourcis clavier',apparence:'l’apparence (designs)',tableaux:'les réglages des tableaux',animaux:'les animaux',atelier:'l’Atelier de recherche','palette-stats':'les couleurs des statistiques','palette-battues':'les couleurs des battues','palette-badges':'les couleurs des badges',artistes:'les réglages des artistes (champs affichés, page de l’artiste)','types-oeuvres':'les types d’œuvres (✎ Mes types)'};
     const settingToolName=o=>SETTING_TOOLS[o]||`l’outil « ${o} »`;
     function settingFileName(outil,nom){return `lcnda-reglage-${safeExportFilename(outil,'outil')}-${safeExportFilename(nom,'reglage')}.json`;}
     /** ⤓ Exporter un réglage : télécharge le fichier .json */

@@ -1,0 +1,1084 @@
+{
+ "source": "Arrêté du 24 décembre 2015 fixant la liste des métiers d'art (NOR EINI1509227A, JORF n°0026 du 31 janvier 2016), annexe — version en vigueur au 18 octobre 2026",
+ "url": "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000031941949/",
+ "licence": "etalab-2.0",
+ "domaines": [
+  {
+   "domaine": "Architecture et jardins",
+   "titre": "Domaine de l'architecture et des jardins",
+   "metiers": [
+    {
+     "nom": "Ardoisier",
+     "specialites": []
+    },
+    {
+     "nom": "Atrier",
+     "specialites": []
+    },
+    {
+     "nom": "Briquetier",
+     "specialites": []
+    },
+    {
+     "nom": "Campaniste",
+     "specialites": []
+    },
+    {
+     "nom": "Charpentier",
+     "specialites": [
+      "Charpentier de marine"
+     ]
+    },
+    {
+     "nom": "Chaumier",
+     "specialites": []
+    },
+    {
+     "nom": "Couvreur du patrimoine bâti",
+     "specialites": [
+      "Couvreur ornemaniste",
+      "Lauzier",
+      "Lavier"
+     ]
+    },
+    {
+     "nom": "Escaliéteur",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de carreaux",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de bardeaux ou de lattes",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de girouettes et d'éléments de faîtage (terre cuite vernissée ou non, métal…)",
+     "specialites": []
+    },
+    {
+     "nom": "Fontainier",
+     "specialites": []
+    },
+    {
+     "nom": "Jardinier du patrimoine",
+     "specialites": [],
+     "type": "o_jardin"
+    },
+    {
+     "nom": "Maçon du patrimoine bâti",
+     "specialites": [
+      "Murailler",
+      "Rocailleur"
+     ]
+    },
+    {
+     "nom": "Maître verrier (Vitrailliste)",
+     "specialites": [],
+     "type": "o_vitrail"
+    },
+    {
+     "nom": "Marbrier",
+     "specialites": []
+    },
+    {
+     "nom": "Menuisier",
+     "specialites": [
+      "Treillageur (fabricant de treillages)"
+     ],
+     "type": "o_ebenisterie"
+    },
+    {
+     "nom": "Métallier",
+     "specialites": []
+    },
+    {
+     "nom": "Parqueteur",
+     "specialites": []
+    },
+    {
+     "nom": "Paveur-dalleur",
+     "specialites": []
+    },
+    {
+     "nom": "Sculpteur sur pierre",
+     "specialites": [],
+     "type": "o_sculpture"
+    },
+    {
+     "nom": "Tailleur de pierre",
+     "specialites": []
+    },
+    {
+     "nom": "Tuilier",
+     "specialites": []
+    }
+   ],
+   "icone": "🏛",
+   "type": "o_architecture"
+  },
+  {
+   "domaine": "Ameublement et décoration",
+   "titre": "Domaine de l'ameublement et de la décoration",
+   "metiers": [
+    {
+     "nom": "Canneur-rempailleur",
+     "specialites": []
+    },
+    {
+     "nom": "Cirier",
+     "specialites": []
+    },
+    {
+     "nom": "Doreur",
+     "specialites": []
+    },
+    {
+     "nom": "Ebéniste",
+     "specialites": []
+    },
+    {
+     "nom": "Emailleur sur lave",
+     "specialites": []
+    },
+    {
+     "nom": "Encadreur",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de compositions et décors végétaux stables et durables",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de tapis et/ou tapisseries",
+     "specialites": [
+      "Lissier haute lice",
+      "Lissier basse lice",
+      "Lissier savonnerie",
+      "Tufteur"
+     ]
+    },
+    {
+     "nom": "Fabricant de serrures",
+     "specialites": []
+    },
+    {
+     "nom": "Fresquiste",
+     "specialites": [],
+     "type": "o_fresque"
+    },
+    {
+     "nom": "Graveur sur pierre",
+     "specialites": []
+    },
+    {
+     "nom": "Laqueur",
+     "specialites": []
+    },
+    {
+     "nom": "Lapidaire tourneur sur pierres dures et fines",
+     "specialites": []
+    },
+    {
+     "nom": "Marqueteur",
+     "specialites": []
+    },
+    {
+     "nom": "Marqueteur de pailles",
+     "specialites": []
+    },
+    {
+     "nom": "Marqueteur de pierres dures",
+     "specialites": []
+    },
+    {
+     "nom": "Menuisier en sièges",
+     "specialites": []
+    },
+    {
+     "nom": "Mosaïste",
+     "specialites": [],
+     "type": "o_mosaique"
+    },
+    {
+     "nom": "Mouleur",
+     "specialites": []
+    },
+    {
+     "nom": "Passementier",
+     "specialites": []
+    },
+    {
+     "nom": "Peintre en décor",
+     "specialites": [],
+     "type": "o_fresque"
+    },
+    {
+     "nom": "Peintre sur mobilier",
+     "specialites": []
+    },
+    {
+     "nom": "Poêlier",
+     "specialites": []
+    },
+    {
+     "nom": "Sellier d'ameublement",
+     "specialites": []
+    },
+    {
+     "nom": "Sculpteur sur bois",
+     "specialites": [],
+     "type": "o_sculpture"
+    },
+    {
+     "nom": "Sculpteur sur métal",
+     "specialites": [],
+     "type": "o_sculpture"
+    },
+    {
+     "nom": "Staffeur-stucateur",
+     "specialites": []
+    },
+    {
+     "nom": "Tapissier d'ameublement et/ou tapissier décorateur",
+     "specialites": [],
+     "type": "o_piece_art"
+    },
+    {
+     "nom": "Tourneur sur bois",
+     "specialites": []
+    },
+    {
+     "nom": "Tourneur sur métal",
+     "specialites": []
+    },
+    {
+     "nom": "Vannier",
+     "specialites": [],
+     "type": "o_piece_art"
+    },
+    {
+     "nom": "Vernisseur",
+     "specialites": []
+    }
+   ],
+   "icone": "🪑",
+   "type": "o_ebenisterie"
+  },
+  {
+   "domaine": "Luminaire",
+   "titre": "Domaine du luminaire",
+   "metiers": [
+    {
+     "nom": "Fabricant de luminaires",
+     "specialites": [
+      "Fabricant d'abat-jour"
+     ]
+    }
+   ],
+   "icone": "💡",
+   "type": "o_piece_art"
+  },
+  {
+   "domaine": "Bijouterie, joaillerie, orfèvrerie, horlogerie",
+   "titre": "Domaine de la bijouterie, joaillerie, orfèvrerie, horlogerie",
+   "metiers": [
+    {
+     "nom": "Apprêteur",
+     "specialites": []
+    },
+    {
+     "nom": "Argenteur et/ou Doreur sur métal",
+     "specialites": []
+    },
+    {
+     "nom": "Batteur d'or",
+     "specialites": []
+    },
+    {
+     "nom": "Bijoutier",
+     "specialites": [
+      "Bijoutier en métaux précieux",
+      "Bijoutier fantaisie"
+     ]
+    },
+    {
+     "nom": "Chaîniste",
+     "specialites": []
+    },
+    {
+     "nom": "Ciseleur",
+     "specialites": []
+    },
+    {
+     "nom": "Décorateur en résine",
+     "specialites": []
+    },
+    {
+     "nom": "Diamantaire",
+     "specialites": []
+    },
+    {
+     "nom": "Emailleur sur métal",
+     "specialites": [
+      "Emailleur sur cadrans"
+     ]
+    },
+    {
+     "nom": "Fondeur d'étain",
+     "specialites": []
+    },
+    {
+     "nom": "Horloger",
+     "specialites": [],
+     "type": "o_horlogerie"
+    },
+    {
+     "nom": "Glypticien",
+     "specialites": []
+    },
+    {
+     "nom": "Graveur",
+     "specialites": [
+      "Graveur héraldiste",
+      "Graveur médailleur"
+     ]
+    },
+    {
+     "nom": "Guillocheur",
+     "specialites": []
+    },
+    {
+     "nom": "Joaillier",
+     "specialites": []
+    },
+    {
+     "nom": "Lapidaire",
+     "specialites": []
+    },
+    {
+     "nom": "Orfèvre",
+     "specialites": []
+    },
+    {
+     "nom": "Polisseur",
+     "specialites": []
+    },
+    {
+     "nom": "Sertisseur",
+     "specialites": []
+    }
+   ],
+   "icone": "💍",
+   "type": "o_orfevrerie"
+  },
+  {
+   "domaine": "Métal",
+   "titre": "Domaine du métal",
+   "metiers": [
+    {
+     "nom": "Armurier",
+     "specialites": []
+    },
+    {
+     "nom": "Bronzier",
+     "specialites": [
+      "Monteur en bronze"
+     ]
+    },
+    {
+     "nom": "Ciseleur",
+     "specialites": []
+    },
+    {
+     "nom": "Coutelier",
+     "specialites": []
+    },
+    {
+     "nom": "Dinandier",
+     "specialites": []
+    },
+    {
+     "nom": "Emailleur sur métal",
+     "specialites": []
+    },
+    {
+     "nom": "Féron",
+     "specialites": []
+    },
+    {
+     "nom": "Ferronnier-Forgeron",
+     "specialites": []
+    },
+    {
+     "nom": "Fondeur",
+     "specialites": [
+      "Fondeur de caractères",
+      "Fondeur statuaire",
+      "Fondeur de cloches et sonnailles"
+     ],
+     "type": "o_sculpture"
+    },
+    {
+     "nom": "Graveur",
+     "specialites": [],
+     "type": "o_medaille"
+    },
+    {
+     "nom": "Modeleur-Mouleur",
+     "specialites": []
+    },
+    {
+     "nom": "Monnayeur de monnaies ou de médailles",
+     "specialites": [],
+     "type": "o_medaille"
+    },
+    {
+     "nom": "Patineur",
+     "specialites": []
+    },
+    {
+     "nom": "Potier d'étain",
+     "specialites": []
+    },
+    {
+     "nom": "Taillandier",
+     "specialites": []
+    }
+   ],
+   "icone": "⚒️",
+   "type": "o_ferronnerie"
+  },
+  {
+   "domaine": "Céramique",
+   "titre": "Domaine de la céramique",
+   "metiers": [
+    {
+     "nom": "Céramiste",
+     "specialites": [
+      "Faïencier",
+      "Modeleur",
+      "Mouleur",
+      "Porcelainier",
+      "Potier de grès",
+      "Potier de terre cuite",
+      "Potier de raku",
+      "Potier terre vernissée",
+      "Sculpteur sur terre",
+      "Tourneur céramique"
+     ]
+    },
+    {
+     "nom": "Décorateur sur céramique",
+     "specialites": [
+      "Emailleur sur terre",
+      "Peintre-fileur doreur",
+      "Peintre sur faïence",
+      "Peintre sur porcelaine"
+     ]
+    },
+    {
+     "nom": "Santonnier",
+     "specialites": []
+    }
+   ],
+   "icone": "🏺",
+   "type": "o_ceramique"
+  },
+  {
+   "domaine": "Verre et cristal",
+   "titre": "Domaine du verre et du cristal",
+   "metiers": [
+    {
+     "nom": "Verrier à la main",
+     "specialites": [
+      "Cueilleur",
+      "Poseur/faiseur de pieds ou de jambes",
+      "Souffleur à la canne"
+     ]
+    },
+    {
+     "nom": "Verrier fondeur",
+     "specialites": [
+      "Bombeur",
+      "Fondeur par fusion (fusing)",
+      "Fondeur en pâte de verre",
+      "Mouleur (formeur à chaud)"
+     ]
+    },
+    {
+     "nom": "Verrier au chalumeau",
+     "specialites": [
+      "Souffleur au chalumeau",
+      "Fileur au chalumeau",
+      "Modeleur au chalumeau",
+      "Préparateur presse-papier"
+     ]
+    },
+    {
+     "nom": "Verrier décorateur",
+     "specialites": [
+      "Doreur (or et autres métaux précieux)",
+      "Graveur",
+      "Miroitier-argenteur",
+      "Peintre",
+      "Polisseur",
+      "Sculpteur",
+      "Tailleur"
+     ]
+    }
+   ],
+   "icone": "🫙",
+   "type": "o_verre"
+  },
+  {
+   "domaine": "Tabletterie",
+   "titre": "Domaine de la tabletterie",
+   "metiers": [
+    {
+     "nom": "Brossier",
+     "specialites": []
+    },
+    {
+     "nom": "Cornier",
+     "specialites": []
+    },
+    {
+     "nom": "Ecailliste",
+     "specialites": []
+    },
+    {
+     "nom": "Graveur sur ivoire et autres matériaux d'origine animale",
+     "specialites": []
+    },
+    {
+     "nom": "Ivoirier",
+     "specialites": []
+    },
+    {
+     "nom": "Nacrier",
+     "specialites": []
+    },
+    {
+     "nom": "Pipier",
+     "specialites": []
+    },
+    {
+     "nom": "Tabletier",
+     "specialites": []
+    }
+   ],
+   "icone": "🦴",
+   "type": "o_piece_art"
+  },
+  {
+   "domaine": "Mode et accessoires",
+   "titre": "Domaine de la mode et des accessoires",
+   "metiers": [
+    {
+     "nom": "Boutonnier",
+     "specialites": []
+    },
+    {
+     "nom": "Chapelier",
+     "specialites": []
+    },
+    {
+     "nom": "Corsetier",
+     "specialites": []
+    },
+    {
+     "nom": "Couturier",
+     "specialites": []
+    },
+    {
+     "nom": "Couturier flou",
+     "specialites": []
+    },
+    {
+     "nom": "Eventailliste",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de parapluies, parasols, ombrelles et cannes",
+     "specialites": []
+    },
+    {
+     "nom": "Formier",
+     "specialites": []
+    },
+    {
+     "nom": "Lunetier",
+     "specialites": []
+    },
+    {
+     "nom": "Modéliste",
+     "specialites": []
+    },
+    {
+     "nom": "Modiste",
+     "specialites": []
+    },
+    {
+     "nom": "Parurier floral",
+     "specialites": []
+    },
+    {
+     "nom": "Plumassier",
+     "specialites": []
+    },
+    {
+     "nom": "Tailleur",
+     "specialites": []
+    }
+   ],
+   "icone": "👒",
+   "type": "o_piece_art"
+  },
+  {
+   "domaine": "Textile",
+   "titre": "Domaine du textile",
+   "metiers": [
+    {
+     "nom": "Brodeur",
+     "specialites": [
+      "Brodeur à l'aiguille",
+      "Brodeur crochet (Lunéville)",
+      "Brodeur sur machine guidée main"
+     ],
+     "type": "o_broderie"
+    },
+    {
+     "nom": "Dentellier",
+     "specialites": [
+      "Dentellier à l'aiguille",
+      "Dentellier au fuseau",
+      "Tulliste"
+     ],
+     "type": "o_broderie"
+    },
+    {
+     "nom": "Ennoblisseur textile",
+     "specialites": [
+      "Gaufreur sur textile",
+      "Moireur",
+      "Peintre décorateur sur tissu",
+      "Plisseur",
+      "Sabreur sur velours",
+      "Teinturier"
+     ]
+    },
+    {
+     "nom": "Fabricant d'objets en textiles",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de coiffes",
+     "specialites": []
+    },
+    {
+     "nom": "Feutrier",
+     "specialites": []
+    },
+    {
+     "nom": "Sérigraphe",
+     "specialites": []
+    },
+    {
+     "nom": "Tisserand",
+     "specialites": [
+      "Tisserand à bras",
+      "Veloutier"
+     ]
+    },
+    {
+     "nom": "Tresseur",
+     "specialites": []
+    }
+   ],
+   "icone": "🧵",
+   "type": "o_tapisserie"
+  },
+  {
+   "domaine": "Cuir",
+   "titre": "Domaine du cuir",
+   "metiers": [
+    {
+     "nom": "Bottier main",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de chaussures",
+     "specialites": []
+    },
+    {
+     "nom": "Fourreur",
+     "specialites": []
+    },
+    {
+     "nom": "Gainier",
+     "specialites": []
+    },
+    {
+     "nom": "Gantier",
+     "specialites": []
+    },
+    {
+     "nom": "Gaufreur sur cuir",
+     "specialites": []
+    },
+    {
+     "nom": "Malletier",
+     "specialites": [
+      "Layetier"
+     ]
+    },
+    {
+     "nom": "Maroquinier",
+     "specialites": [
+      "Coupeur"
+     ]
+    },
+    {
+     "nom": "Pareur",
+     "specialites": []
+    },
+    {
+     "nom": "Sellier-maroquinier",
+     "specialites": [
+      "Sellier-harnacheur"
+     ]
+    },
+    {
+     "nom": "Tanneur",
+     "specialites": []
+    },
+    {
+     "nom": "Mégissier",
+     "specialites": [
+      "Parcheminier"
+     ]
+    },
+    {
+     "nom": "Taxidermiste",
+     "specialites": []
+    }
+   ],
+   "icone": "👜",
+   "type": "o_piece_art"
+  },
+  {
+   "domaine": "Spectacle",
+   "titre": "Domaine du spectacle",
+   "metiers": [
+    {
+     "nom": "Costumier",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant d'accessoires de spectacle",
+     "specialites": [
+      "Fabricant de masques"
+     ]
+    },
+    {
+     "nom": "Fabricant de décors de spectacle",
+     "specialites": []
+    },
+    {
+     "nom": "Perruquier-posticheur",
+     "specialites": []
+    }
+   ],
+   "icone": "🎭",
+   "type": "o_decor"
+  },
+  {
+   "domaine": "Papier, graphisme et impression",
+   "titre": "Domaine du papier, du graphisme et de l'impression",
+   "metiers": [
+    {
+     "nom": "Calligraphe",
+     "specialites": [],
+     "type": "o_calligraphie"
+    },
+    {
+     "nom": "Cartonnier",
+     "specialites": []
+    },
+    {
+     "nom": "Dominotier",
+     "specialites": []
+    },
+    {
+     "nom": "Doreur sur cuir",
+     "specialites": []
+    },
+    {
+     "nom": "Doreur sur tranche",
+     "specialites": []
+    },
+    {
+     "nom": "Enlumineur",
+     "specialites": [],
+     "type": "o_icone"
+    },
+    {
+     "nom": "Fabricant d'objets en papier et/ou carton",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de papier",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de papier peint",
+     "specialites": []
+    },
+    {
+     "nom": "Fondeur de caractères",
+     "specialites": [],
+     "type": "o_police"
+    },
+    {
+     "nom": "Graveur de poinçons",
+     "specialites": [],
+     "type": "o_gravure"
+    },
+    {
+     "nom": "Graveur et imprimeur en gaufrage",
+     "specialites": [],
+     "type": "o_gravure"
+    },
+    {
+     "nom": "Imagier au pochoir",
+     "specialites": []
+    },
+    {
+     "nom": "Imprimeur",
+     "specialites": [
+      "Imprimeur en héliogravure",
+      "Imprimeur en lithographie",
+      "Imprimeur en sérigraphie",
+      "Imprimeur en taille-douce",
+      "Imprimeur en typographie"
+     ],
+     "type": "o_affiche"
+    },
+    {
+     "nom": "Marbreur sur papier",
+     "specialites": []
+    },
+    {
+     "nom": "Relieur",
+     "specialites": [],
+     "type": "o_reliure"
+    },
+    {
+     "nom": "Photographe technicien",
+     "specialites": []
+    }
+   ],
+   "icone": "📜",
+   "type": "o_piece_art"
+  },
+  {
+   "domaine": "Jeux, jouets et ouvrages mécaniques",
+   "titre": "Domaine des jeux, jouets et ouvrages mécaniques",
+   "metiers": [
+    {
+     "nom": "Charron",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant d'automates (métal, bois, papier, textile, résine)",
+     "specialites": [],
+     "type": "o_automate"
+    },
+    {
+     "nom": "Fabricant de figurines",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de jeux",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de jouets",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de manèges",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de maquettes",
+     "specialites": [],
+     "type": "o_maquette"
+    },
+    {
+     "nom": "Fabricant de marionnettes",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant de poupées ou de peluches de collection",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant et/ou Restaurateur de véhicules de collection (avions, bateaux, voitures, motos…)",
+     "specialites": [
+      "Carrossier"
+     ]
+    }
+   ],
+   "icone": "🧸",
+   "type": "o_piece_art"
+  },
+  {
+   "domaine": "Facture instrumentale",
+   "titre": "Domaine de la facture instrumentale",
+   "metiers": [
+    {
+     "nom": "Archetier",
+     "specialites": []
+    },
+    {
+     "nom": "Fabricant d'anches",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'accordéons",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'instruments à vent",
+     "specialites": [
+      "Facteur et/ou restaurateur d'instruments à vent en bois",
+      "Facteur et/ou restaurateur d'instruments à vent en métal",
+      "Chaudronnier"
+     ]
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'instruments de musique mécanique",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'instruments traditionnels",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'orgues",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'harmoniums",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur d'instruments à claviers",
+     "specialites": [
+      "Facteur et/ou restaurateur de clavecins et épinettes",
+      "Facteur et/ou restaurateur de pianos"
+     ]
+    },
+    {
+     "nom": "Facteur et/ou restaurateur de harpes",
+     "specialites": []
+    },
+    {
+     "nom": "Facteur et/ou restaurateur de percussions",
+     "specialites": []
+    },
+    {
+     "nom": "Luthier en guitare et/ou Restaurateur de guitares",
+     "specialites": []
+    },
+    {
+     "nom": "Luthier et/ou Restaurateur d'instruments à cordes frottées",
+     "specialites": []
+    }
+   ],
+   "icone": "🎻",
+   "type": "o_lutherie"
+  },
+  {
+   "domaine": "Restauration",
+   "titre": "Domaine de la restauration",
+   "metiers": [
+    {
+     "nom": "Restaurateur de peintures",
+     "specialites": [
+      "Tableaux sur bois ou sur toile",
+      "Supports contemporains",
+      "Peinture murale"
+     ]
+    },
+    {
+     "nom": "Restaurateur de documents graphiques et imprimés",
+     "specialites": [
+      "Estampes, dessins…",
+      "Papier peint"
+     ]
+    },
+    {
+     "nom": "Restaurateur de photographies",
+     "specialites": [
+      "Sur tout support, papier et verre"
+     ]
+    },
+    {
+     "nom": "Restaurateur de sculptures",
+     "specialites": [
+      "Bois, métal, pierre, plâtre, cire, matériaux composites, matériaux contemporains…"
+     ]
+    },
+    {
+     "nom": "Restaurateur de textiles",
+     "specialites": [
+      "Vêtements, tapis, tapisseries, objets en textiles, accessoires de mode"
+     ]
+    },
+    {
+     "nom": "Restaurateur de cuirs",
+     "specialites": []
+    },
+    {
+     "nom": "Restaurateur de métal",
+     "specialites": [
+      "Horlogerie, orfèvrerie, bronzes"
+     ]
+    },
+    {
+     "nom": "Restaurateur de meubles",
+     "specialites": []
+    },
+    {
+     "nom": "Restaurateur de mosaïques",
+     "specialites": []
+    },
+    {
+     "nom": "Restaurateur de céramiques",
+     "specialites": [
+      "Terre cuite, faïence et porcelaine"
+     ]
+    },
+    {
+     "nom": "Restaurateur de verre et de cristal",
+     "specialites": []
+    },
+    {
+     "nom": "Restaurateur de vitraux",
+     "specialites": []
+    },
+    {
+     "nom": "Restaurateur d'objets scientifiques, techniques, industriels",
+     "specialites": []
+    }
+   ],
+   "icone": "🩺",
+   "type": "o_piece_art"
+  }
+ ],
+ "note": "Liste officielle des métiers d'art (16 domaines). Champs ajoutés par LCNDA : « icone » et « type » (le type d'œuvre proposé, par domaine et parfois par métier) ; les noms officiels ne sont pas modifiés."
+}

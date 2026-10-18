@@ -46,6 +46,7 @@ require_once __DIR__ . '/family_book.php'; // livre de famille (parties, formats
 require_once __DIR__ . '/suggestions.php'; // suggestions de recherche (trous de la lignée Sosa)
 require_once __DIR__ . '/research_gaps.php'; // « Que manque-t-il ? » : les actes à chercher, où et dans quelle série
 require_once __DIR__ . '/artist_catalog.php'; // 🎨 catalogue d'un artiste : bibliographie, œuvres, discographie, filmographie
+require_once __DIR__ . '/oeuvres.php'; // 🧩 types d'œuvres (sculpture, affiche, concerto, pièce, ferronnerie… 131 types) : clés permises du moteur
 require_once __DIR__ . '/profils.php'; // 🧩 profils d'une personne (politique, sportif, militaire… et les siens) : sortes du moteur, « Cette personne était… »
 require_once __DIR__ . '/sciences.php'; // 🔬 inventions, découvertes, publications, expéditions (sur le moteur lib/art_engine.php)
 require_once __DIR__ . '/blocs.php'; // 📰 🏆 🎓 blocs communs à toute personne : médias, récompenses, formation
