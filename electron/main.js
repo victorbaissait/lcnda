@@ -448,6 +448,16 @@ async function boot() {
     details.requestHeaders[SECRET_HEADER] = server.secret;
     callback({ requestHeaders: details.requestHeaders });
   });
+  // Permissions : l'application n'obtient que ce dont elle se sert (micro et caméra pour enregistrer et dicter,
+  // notifications, presse-papiers pour coller une image, plein écran, souris capturée pendant la visite de la maison),
+  // et seulement pour ses propres pages. Les sites ouverts dans la fenêtre « à côté » n'obtiennent rien.
+  const APP_PERMISSIONS = new Set(['media', 'notifications', 'clipboard-read', 'clipboard-sanitized-write', 'fullscreen', 'pointerLock']);
+  const appAsks = (wc, permission, url) => APP_PERMISSIONS.has(permission) && sameOrigin(url || wc?.getURL?.() || '', server.origin);
+  session.defaultSession.setPermissionRequestHandler((wc, permission, callback, details) => callback(appAsks(wc, permission, details?.requestingUrl)));
+  session.defaultSession.setPermissionCheckHandler((wc, permission, requestingOrigin) => appAsks(wc, permission, requestingOrigin));
+  const webSession = session.fromPartition('persist:lcnda-web');
+  webSession.setPermissionRequestHandler((_wc, _permission, callback) => callback(false));
+  webSession.setPermissionCheckHandler(() => false);
   session.defaultSession.on('will-download', (event, item) => {
     item.setSaveDialogOptions({ defaultPath: path.join(app.getPath('downloads'), item.getFilename()) });
   });
