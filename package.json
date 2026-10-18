@@ -12,6 +12,7 @@
     "fetch:php": "node electron/fetch-php.js",
     "fetch:geo": "node electron/fetch-geo.js",
     "test:migrations": "node tests/test-migrations.js",
+    "test:profils": "node tests/test-profils.js",
     "dist:mac": "electron-builder --mac --arm64 --x64",
     "dist:mac-arm64": "electron-builder --mac --arm64",
     "dist:win": "electron-builder --win --x64",

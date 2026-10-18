@@ -11833,6 +11833,7 @@ function save_person(PDO $pdo,array $data): array
         $stmt->execute([$first,safe_text($data['middle_name']??''),$last,safe_text($data['prefix']??''),safe_text($data['suffix']??''),safe_text($data['gender']??'unknown'),safe_text($data['living_status']??'unknown'),safe_text($data['reference_number']??''),safe_int($data['surname_group_id']??0)?:null,safe_text($data['occupation']??''),safe_text($data['height_text']??''),safe_text($data['physical_description']??''),safe_text($data['eye_color']??''),safe_text($data['skin_color']??''),safe_text($data['nationality']??''),safe_text($data['ethnicity']??''),in_array(($data['verify_status']??'normal'),['normal','verify'],true)?($data['verify_status']??'normal'):'normal',(isset($data['outside_genealogy'])&&$data['outside_genealogy']?1:0),(isset($data['is_artist'])&&$data['is_artist']?1:0),safe_text($data['artist_discipline']??''),$artistDisplayI,(isset($data['show_military_block'])&&$data['show_military_block']?1:0)]);
         $id=(int)$pdo->lastInsertId();
         // un animal : une fiche comme une personne, avec sa fiche d'animal (caractéristiques, pedigree)
+        if(function_exists('profils_sync_artist')&&!empty($data['is_artist']))profils_sync_artist($pdo,$id,1); // 🧩 profil « artist »
         if(($data['kind']??'')==='animal'){$pdo->prepare("UPDATE persons SET kind='animal' WHERE id=?")->execute([$id]);pet_of_person($pdo,$id,true);}
         if(array_key_exists('mort_pour_la_france',$data)){$pdo->prepare('UPDATE persons SET mort_pour_la_france=? WHERE id=?')->execute([safe_text($data['mort_pour_la_france'])?:'unknown',$id]);}$created=$pdo->query('SELECT * FROM persons WHERE id='.$id)->fetch();log_change($pdo,'person',$id,'create','Création de '.full_name($created),null,$created);rebuild_search($pdo,$id);return $created;
     }
@@ -11868,6 +11869,7 @@ function save_person(PDO $pdo,array $data): array
     foreach(['show_voyage_block','show_placement_block','show_heraldry_block','show_poilu_block','show_language_block','show_resistance_block','show_voter_block'] as $flag)if(array_key_exists('heritage_flags',$data)){$set[]="$flag=?";$values[]=(isset($data[$flag])&&$data[$flag]?1:0);}
     if(!$set)return $before;
     $values[]=$id;$pdo->prepare('UPDATE persons SET '.implode(',',$set).',updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute($values);
+    if(function_exists('profils_sync_artist'))profils_sync_artist($pdo,$id,isset($data['is_artist'])&&$data['is_artist']?1:0); // 🧩 la case « Artiste » = le profil « artist »
     $stmt->execute([$id]);$after=$stmt->fetch();log_change($pdo,'person',$id,'update','Modification de '.full_name($after),$before,$after);
     rebuild_search($pdo,$id);return $after;
 }

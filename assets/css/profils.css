@@ -1,0 +1,153 @@
+/* LCNDA — 🧩 Profils d'une personne (assets/js/heritage-profils*.js) : maquettes AA, R, P, Q de « Profils et œuvres ».
+   Couleur d'un profil : --pf (posée par le script). Le mode sombre est en bas (scripts/build-dark-css.py). */
+
+/* — AA : la fenêtre des profils — */
+.pf-dlg { width: min(980px, 96vw); padding: 0; }
+.pf-dlg form { display: flex; flex-direction: column; max-height: 90vh; }
+.pf-dlg .modal-head { padding: 12px 16px 6px; }
+.pf-dlg .modal-head small { display: block; margin-top: 2px; }
+.pf-dlg .modal-actions { display: flex; gap: 8px; align-items: center; padding: 10px 16px; flex-wrap: wrap; }
+.pf-dlg .modal-actions .spacer { flex: 1; }
+.pf-dlg .modal-actions > :first-child { margin-right: auto; }
+.pf-addone { align-self: flex-start; }
+.pf-cbody, .pf-wbody { padding: 4px 16px 10px; overflow: auto; min-height: 0; }
+.pf-cbody input[type=search] { width: 100%; margin: 4px 0 10px; }
+.pf-voc { columns: 3 220px; column-gap: 16px; font-size: 13px; }
+.pf-vg { break-inside: avoid; margin-bottom: 10px; }
+.pf-grp { font: 800 10.5px system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: #666; margin: 2px 0 4px; border-bottom: 1px solid #e3e5ea; padding-bottom: 2px; }
+.pf-vg.is-mine .pf-grp { color: #7b2ff7; }
+.pf-ck { display: grid; grid-template-columns: 18px 22px minmax(0, 1fr) auto; gap: 4px; align-items: start; padding: 3px 4px; cursor: pointer; border-left: 3px solid transparent; }
+.pf-ck:hover { background: var(--blue-soft, #eef4ff); }
+.pf-ck:has(input:checked) { border-left-color: var(--pf, #055dff); background: color-mix(in srgb, var(--pf, #055dff) 9%, transparent); font-weight: 700; }
+.pf-ck input { margin: 2px 0 0; }
+.pf-ic { text-align: center; }
+.pf-lb { overflow-wrap: anywhere; }
+.pf-lb small { display: block; font-weight: 400; color: #777; font-size: 11px; line-height: 1.25; }
+.pf-lb mark { background: #fff1a8; color: inherit; padding: 0; }
+.pf-tools { display: inline-flex; gap: 2px; }
+.pf-none { column-span: all; padding: 12px; border: 1.5px dashed #c4c8cf; }
+.pf-small { font-size: 12.5px; }
+.pf-note { font-size: 12px; color: #666; margin: 8px 0 0; }
+
+/* — AA : créer un profil — */
+.pf-wiz { width: min(640px, 96vw); }
+.pf-steps { display: flex; gap: 0; margin: 0 16px 8px; border: 2px solid var(--ink, #111); width: fit-content; }
+.pf-steps span { padding: 4px 10px; font: 700 12px system-ui, sans-serif; border-right: 2px solid var(--ink, #111); background: var(--white, #fff); }
+.pf-steps span:last-child { border-right: 0; }
+.pf-steps span.on { background: #055dff; color: #fff; }
+.pf-steps span.dn { background: #e8f7ee; color: #1aa34a; }
+.pf-fld { display: flex; flex-direction: column; gap: 3px; font-size: 13px; margin-bottom: 8px; font-weight: 600; }
+.pf-fld input, .pf-fld select { font-weight: 400; }
+.pf-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pf-icon-in { font-size: 18px; }
+.pf-icons { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+.pf-ib { width: 32px; height: 32px; border: 1.5px solid #c4c8cf; background: var(--white, #fff); font-size: 17px; cursor: pointer; padding: 0; }
+.pf-sub { display: block; font-size: 12px; margin: 10px 0 4px; }
+.pf-lib { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 2px 10px; font-size: 13px; max-height: 210px; overflow: auto; border: 1px solid #e3e5ea; padding: 6px; }
+.pf-lib small { color: #777; }
+.pf-cf { display: grid; grid-template-columns: minmax(0, 1.3fr) 130px minmax(0, 1fr) 28px; gap: 6px; align-items: center; margin-bottom: 4px; }
+
+/* — sur la fiche — */
+.pf-block .ar-row { margin-top: 8px; }
+.pf-badges { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.pf-b { display: inline-flex; align-items: center; gap: 5px; font: 800 10.5px/1.6 system-ui, sans-serif; letter-spacing: .06em; padding: 2px 8px; color: #fff; background: var(--pf, #8a8f99); text-transform: uppercase; border: 0; white-space: nowrap; }
+.pf-b.is-btn { cursor: pointer; }
+.pf-b.is-btn:hover { filter: brightness(1.1); box-shadow: 2px 2px 0 rgba(0, 0, 0, .25); }
+.pf-b.is-on { outline: 2px solid var(--ink, #111); outline-offset: 1px; }
+.pf-b.is-add { background: var(--white, #fff); color: #055dff; border: 1.5px dashed #055dff; cursor: pointer; }
+.pf-formrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 4px 0; }
+.pf-fr-l { font-weight: 600; }
+
+/* — R : la page — */
+.pf-hero .pf-hmain { flex: 1; min-width: 0; }
+.pf-hero h2 { margin: 0 0 6px; }
+.pf-segrow { margin-top: 8px; }
+.pf-seg { flex-wrap: wrap; }
+.pf-hero.is-one { background: linear-gradient(90deg, var(--white, #fff), color-mix(in srgb, var(--pf) 12%, var(--white, #fff))); }
+.pf-ey { font: 700 10.5px system-ui, sans-serif; letter-spacing: .1em; color: var(--pf) !important; }
+.pf-hero .ar-hero-links { margin-top: 6px; }
+.pf-switch { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.pf-blk.has-pf { border-top: 5px solid var(--pf); }
+.pf-blk .ar-bh { gap: 6px; }
+.pf-fl { margin-bottom: 6px; }
+.pf-fl > small { display: block; }
+.pf-page > .pf-note { margin-top: 10px; }
+
+/* la frise */
+.pf-gantt { font-size: 12px; overflow: hidden; }
+.pf-gax, .pf-grow { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 8px; align-items: center; }
+.pf-gax { font: 600 10.5px system-ui, sans-serif; color: #888; margin-bottom: 2px; }
+.pf-gax > div { position: relative; height: 14px; }
+.pf-gax > div span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.pf-gax > div span:first-child { transform: none; }
+.pf-gax > div span:last-child { transform: translateX(-100%); }
+.pf-grow { margin: 3px 0; }
+.pf-glab { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; }
+.pf-tr { position: relative; height: 20px; background: repeating-linear-gradient(90deg, #f3f4f6 0 calc(100% / var(--steps, 5) - 1px), #e3e5ea calc(100% / var(--steps, 5) - 1px) calc(100% / var(--steps, 5))); }
+.pf-bar { position: absolute; top: 2px; height: 16px; font: 700 10px/16px system-ui, sans-serif; color: #fff; padding: 0 4px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; background: var(--pf, #8a8f99); border: 0; text-align: left; min-width: 6px; }
+button.pf-bar { cursor: pointer; }
+button.pf-bar:hover { filter: brightness(1.12); z-index: 1; }
+
+/* tableaux, résultats, médailles */
+.pf-t td { vertical-align: top; }
+.pf-res { font: 700 11px system-ui, sans-serif; padding: 0 5px; border: 1.5px solid var(--ink, #111); white-space: nowrap; }
+.pf-res.w { background: #e8f7ee; border-color: #1aa34a; color: #1aa34a; }
+.pf-res.l { background: #fdecee; border-color: #d0182f; color: #d0182f; }
+.pf-medal { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font: 800 11px system-ui, sans-serif; color: #111; border: 2px solid #111; margin-right: 5px; flex: none; }
+.pf-medal.o { background: #f4c542; } .pf-medal.a { background: #d5d8de; } .pf-medal.b { background: #d99a5b; }
+.pf-mline { display: flex; align-items: center; flex-wrap: wrap; gap: 3px; margin: 3px 0; }
+.pf-filt button { font-size: 11.5px; }
+.pf-stats td, .pf-stats th { text-align: right; }
+.pf-stats td:first-child, .pf-stats th:first-child, .pf-stats td:nth-child(2), .pf-stats th:nth-child(2) { text-align: left; }
+.pf-elo { width: 100%; max-width: 420px; height: 96px; color: #055dff; display: block; }
+.pf-elo circle { fill: #055dff; }
+
+/* champs propres au sport (formulaire) */
+.pf-sfwrap { border: 1px dashed #c4c8cf; padding: 6px 8px; }
+.pf-sfgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 10px; margin-top: 4px; }
+.pf-sf .ar-flab { display: block; font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+.pf-stgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 6px; margin-top: 4px; }
+.pf-st { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; gap: 2px; }
+
+/* le panneau « ⚙️ Organiser » */
+.pf-cards { display: flex; flex-direction: column; gap: 5px; margin-bottom: 6px; }
+.pf-card { border: 2px solid var(--ink, #111); background: var(--white, #fff); padding: 5px 8px; display: grid; grid-template-columns: 16px minmax(0, 1fr) auto auto; gap: 8px; align-items: center; font-size: 13px; }
+.pf-card.off { opacity: .55; }
+.pf-card.drag { box-shadow: inset 4px 0 0 #055dff; }
+.pf-card .tools { display: flex; gap: 2px; }
+.pf-card .tools button { width: 22px; height: 22px; border: 1px solid #bbb; background: var(--white, #fff); font-size: 11px; padding: 0; cursor: pointer; color: inherit; }
+.pf-card .ui-toggle { margin: 0; }
+.pf-lbl { border-left: 4px solid var(--pf, transparent); padding-left: 5px; }
+.pf-togs { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.pf-side { border: 1.5px solid #e3e5ea; padding: 8px; margin-top: 10px; font-size: 12px; }
+.pf-kinds { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+.pf-kinds b { display: block; }
+
+@media (max-width: 760px) {
+    .pf-voc { columns: 1; }
+    .pf-gax, .pf-grow { grid-template-columns: 96px minmax(0, 1fr); }
+    .pf-cf { grid-template-columns: 1fr 1fr; }
+    .pf-row2, .pf-kinds { grid-template-columns: 1fr; }
+    .pf-hero .ar-hero-ph { width: 56px; height: 56px; font-size: 18px; }
+    .pf-gax > div span:nth-child(even) { display: none; }
+}
+
+/* ═════ Mode sombre écrit à la main ═════ */
+:root[data-theme="dark"] .pf-hero.is-one { background: linear-gradient(90deg, var(--white), color-mix(in srgb, var(--pf) 22%, var(--white))); }
+:root[data-theme="dark"] .pf-tr { background: repeating-linear-gradient(90deg, #2a2d33 0 calc(100% / var(--steps, 5) - 1px), #3a3e46 calc(100% / var(--steps, 5) - 1px) calc(100% / var(--steps, 5))); }
+:root[data-theme="dark"] .pf-lb mark { background: #6b5a00; }
+:root[data-theme="dark"] .pf-medal { color: #111; }
+:root[data-theme="dark"] .pf-medal.a { background: #d5d8de; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .pf-grp{color:#c7c7c7;border-bottom:1px solid #474a52}
+:root[data-theme="dark"] .pf-none{border:1.5px dashed #494b50}
+:root[data-theme="dark"] .pf-note{color:#c7c7c7}
+:root[data-theme="dark"] .pf-steps span.dn{background:#1d3326;color:#a6e7bd}
+:root[data-theme="dark"] .pf-ib{border:1.5px solid #494b50}
+:root[data-theme="dark"] .pf-lib{border:1px solid #474a52}
+:root[data-theme="dark"] .pf-res.w{background:#1d3326;color:#a6e7bd}
+:root[data-theme="dark"] .pf-res.l{background:#371519}
+:root[data-theme="dark"] .pf-sfwrap{border:1px dashed #494b50}
+:root[data-theme="dark"] .pf-card .tools button{border:1px solid #4c4c4c}
+:root[data-theme="dark"] .pf-side{border:1.5px solid #474a52}
+/* ═════ fin du mode sombre automatique ═════ */

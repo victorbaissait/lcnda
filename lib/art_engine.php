@@ -41,6 +41,18 @@ const ART_BUILTIN_KINDS = ['release', 'master', 'track_work', 'recording', 'copy
 /** les clés de lien reconnues dans le JSON → sorte de la cible */
 const ART_REF_KEYS = ['iid' => 'item', 'plid' => 'place', 'mid' => 'media', 'sid' => 'source', 'perid' => 'periodical', 'evid' => 'event', 'aid' => 'animal', 'empid' => 'employer'];
 
+/** les sortes déclarées par d'autres fichiers (lib/profils.php…) :
+ *  $GLOBALS['ART_EXTRA_TYPES'][clé] = [nom, pluriel, icône, famille, type parent, profil ou [profils] qui la portent] */
+function art_extra_types(): array { return is_array($GLOBALS['ART_EXTRA_TYPES'] ?? null) ? $GLOBALS['ART_EXTRA_TYPES'] : []; }
+/** le(s) profil(s) d'une sorte : ['artist'] pour les sortes d'artiste et celles de l'utilisateur ; « profile_<clé> » = la fiche du profil <clé> */
+function art_kind_profiles(string $kind): array
+{
+    $x = art_extra_types()[$kind] ?? null;
+    if (is_array($x) && !empty($x[5])) { return array_values(array_filter(array_map('strval', (array) $x[5]))); }
+    if (preg_match('/^profile_([a-z][a-z0-9_]{1,40})$/', $kind, $m)) { return [$m[1]]; }
+    return ['artist'];
+}
+
 function art_ensure(PDO $pdo): void
 {
     static $done = false;
@@ -111,6 +123,8 @@ function art_schema(PDO $pdo): void
 function art_kind_ok(PDO $pdo, string $kind): bool
 {
     if (in_array($kind, ART_BUILTIN_KINDS, true)) { return true; }
+    if (isset(art_extra_types()[$kind])) { return true; }
+    if (preg_match('/^profile_([a-z][a-z0-9_]{1,40})$/', $kind, $pm)) { art_ensure($pdo); $ps = $pdo->prepare('SELECT 1 FROM profiles WHERE key=?'); $ps->execute([$pm[1]]); if ($ps->fetchColumn()) { return true; } } // sinon : les autres règles (sciences…) décident
     if (function_exists('sciences_kind_ok') && sciences_kind_ok($kind)) { return true; } // 🔬 lib/sciences.php
     if (!preg_match('/^t_[a-z0-9_]{1,40}$/', $kind)) { return false; }
     art_ensure($pdo);
@@ -404,8 +418,15 @@ function art_save_item(PDO $pdo, array $d): array
     if ($isArtist === false) { throw new RuntimeException('Personne introuvable.'); }
     if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
     $kind = (string) ($d['kind'] ?? ''); if (!art_kind_ok($pdo, $kind)) { throw new RuntimeException('Sorte de fiche inconnue.'); }
+    $kindProfiles = art_kind_profiles($kind); // 🧩 politique, sport, profil de l'utilisateur… : le profil se coche tout seul
+    $profOwn = $kindProfiles !== ['artist'] && !(function_exists('sciences_kind_ok') && sciences_kind_ok($kind));
+    if ($profOwn) {
+        $hp = $pdo->prepare('SELECT count(*) FROM person_profiles WHERE person_id=? AND profile_key IN (' . implode(',', array_fill(0, count($kindProfiles), '?')) . ')'); $hp->execute([$personId, ...$kindProfiles]);
+        if (!(int) $hp->fetchColumn()) { $pdo->prepare('INSERT OR IGNORE INTO profiles(key, label, icon, origin) VALUES(?,?,?,\'builtin\')')->execute([$kindProfiles[0], $kindProfiles[0], '']); $pdo->prepare('INSERT OR IGNORE INTO person_profiles(person_id, profile_key) VALUES(?,?)')->execute([$personId, $kindProfiles[0]]); }
+        if (($xt = art_extra_types()[$kind] ?? null) && is_array($xt)) { $pdo->prepare("INSERT OR IGNORE INTO item_types(key, label, plural, icon, family, domain, parent_type, origin) VALUES(?,?,?,?,?,?,?,'builtin')")->execute([$kind, (string) $xt[0], (string) ($xt[1] ?? $xt[0]), (string) ($xt[2] ?? '✦'), (string) ($xt[3] ?? 'autre'), (string) ($xt[3] ?? 'autre'), (string) ($xt[4] ?? '')]); }
+    }
     $sciOwn = function_exists('sciences_before_save') && sciences_before_save($pdo, $personId, $kind, $d); // 🔬 profil inventeur / scientifique / explorateur
-    if (!$sciOwn && !(int) $isArtist) {
+    if (!$sciOwn && !$profOwn && !(int) $isArtist) {
         if (empty($d['make_artist'])) { throw new RuntimeException('Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue.'); }
         art_make_artist($pdo, $personId, (string) ($d['discipline'] ?? ''));
     }
@@ -419,6 +440,7 @@ function art_save_item(PDO $pdo, array $d): array
     $placeId = null;
     foreach (['place', 'location', 'wplace', 'studio', 'venue_place'] as $k) { if (is_array($data[$k] ?? null) && (int) ($data[$k]['plid'] ?? 0) > 0) { $placeId = (int) $data[$k]['plid']; break; } }
     $id = safe_int($d['id'] ?? 0);
+    if (!$id && $kind !== 'profile' && str_starts_with($kind, 'profile_')) { $pf = $pdo->prepare('SELECT id FROM items WHERE person_id=? AND type_key=? ORDER BY id LIMIT 1'); $pf->execute([$personId, $kind]); $id = (int) $pf->fetchColumn(); } // 🧩 une fiche par profil
     if (!$id && $kind === 'profile') { // une seule fiche de profil d'artiste par personne
         $pf = $pdo->prepare("SELECT id FROM items WHERE person_id=? AND type_key='profile' ORDER BY id LIMIT 1"); $pf->execute([$personId]); $id = (int) $pf->fetchColumn();
     }
@@ -435,6 +457,7 @@ function art_save_item(PDO $pdo, array $d): array
     art_reindex($pdo, $id, $data);
     if (function_exists('sciences_after_save')) { sciences_after_save($pdo, $personId, $kind, $id); } // 🔬
     if ($kind === 'profile') { $pdo->prepare("INSERT INTO person_profiles(person_id, profile_key, item_id) VALUES(?, 'artist', ?) ON CONFLICT(person_id, profile_key) DO UPDATE SET item_id=excluded.item_id")->execute([$personId, $id]); }
+    elseif (str_starts_with($kind, 'profile_')) { $pdo->prepare('INSERT INTO person_profiles(person_id, profile_key, item_id) VALUES(?, ?, ?) ON CONFLICT(person_id, profile_key) DO UPDATE SET item_id=excluded.item_id')->execute([$personId, substr($kind, 8), $id]); } // 🧩
     return ['id' => $id];
 }
 
@@ -662,6 +685,7 @@ function art_api_get(PDO $pdo, array $g): array
         'items' => art_items_by_ids($pdo, explode(',', (string) ($g['ids'] ?? ''))),
         'cited' => ['items' => art_person_cited($pdo, safe_int($g['person_id'] ?? 0))],
         'types' => ['types' => art_types_all($pdo)],
+        'profiles' => profils_get($pdo, safe_int($g['person_id'] ?? 0)), // 🧩 lib/profils.php
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }
@@ -677,6 +701,7 @@ function art_api_post(PDO $pdo, array $d): array
         'reorder' => art_reorder_items($pdo, $d),
         'make_artist' => art_make_artist($pdo, safe_int($d['person_id'] ?? 0), (string) ($d['discipline'] ?? '')),
         'set_profile' => art_set_profile($pdo, $d),
+        'set_profiles' => profils_set_many($pdo, $d), 'save_profile_def' => profils_save_def($pdo, $d), 'delete_profile_def' => profils_delete_def($pdo, $d), // 🧩 lib/profils.php
         'save_type' => art_save_type($pdo, $d),
         'delete_type' => art_delete_type($pdo, $d),
         'save_settings' => art_save_settings($pdo, $d),
