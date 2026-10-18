@@ -1083,14 +1083,24 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         default => 'biological',
     };
     $pediByChild = [];
+    // enfants cités par la famille (CHIL) ; un enfant relié seulement par son FAMC (sans CHIL dans la famille) est relié quand même
+    $chilOf = [];
+    foreach ($records as $rec) {
+        if ($rec->tag !== 'FAM') { continue; }
+        foreach (gedimport_children($rec, 'CHIL') as $chil) { $chilOf[(string) $rec->xref][trim($chil->value, '@ ')] = true; }
+    }
+    $famcOnly = [];
     foreach ($records as $rec) {
         if ($rec->tag !== 'INDI') { continue; }
         $fil = ($f = gedimport_child($rec, '_FIL')) ? $relation($f->value) : 'biological';
         foreach (gedimport_children($rec, 'FAMC') as $famc) {
             $pedi = ($p = gedimport_child($famc, 'PEDI')) ? $relation($p->value) : $fil;
-            $pediByChild[$rec->xref][trim($famc->value, '@ ')] = $pedi;
+            $famXref = trim($famc->value, '@ ');
+            $pediByChild[$rec->xref][$famXref] = $pedi;
+            if ($famXref !== '' && !isset($chilOf[$famXref][(string) $rec->xref])) { $famcOnly[$famXref][(string) $rec->xref] = true; }
         }
     }
+    $stats['famc_only_links'] = 0;
     // Liens qui feraient une boucle (quelqu'un parent de lui-même, ou ancêtre de son propre parent) : ignorés et comptés
     $parentsOf = [];
     $isAncestor = static function (int $ancestor, int $person) use (&$parentsOf): bool {
@@ -1121,8 +1131,10 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $familyMap[(string) $rec->xref] = $fid;
         $stats['families']++;
         $position = 0;
-        foreach (gedimport_children($rec, 'CHIL') as $chil) {
-            $xref = trim($chil->value, '@ ');
+        $kids = array_map(static fn($c) => [trim($c->value, '@ '), $c], gedimport_children($rec, 'CHIL'));
+        foreach (array_keys($famcOnly[(string) $rec->xref] ?? []) as $x) { $kids[] = [(string) $x, null]; }
+        foreach ($kids as [$xref, $chil]) {
+            if ($chil === null && isset($personMap[$xref])) { $stats['famc_only_links']++; }
             if (!isset($personMap[$xref])) { continue; }
             $childId = $personMap[$xref];
             $loop = false;
@@ -1136,8 +1148,8 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
             }
             foreach ([$husb, $wife] as $parent) { if ($parent !== null) { $parentsOf[$childId][] = $parent; } }
             $base = $pediByChild[$xref][(string) $rec->xref] ?? 'biological';
-            $r1 = ($n = gedimport_child($chil, '_FREL')) ? $relation($n->value) : $base;
-            $r2 = ($n = gedimport_child($chil, '_MREL')) ? $relation($n->value) : $base;
+            $r1 = ($chil && ($n = gedimport_child($chil, '_FREL'))) ? $relation($n->value) : $base;
+            $r2 = ($chil && ($n = gedimport_child($chil, '_MREL'))) ? $relation($n->value) : $base;
             $insertChild->execute([$fid, $personMap[$xref], $r1, $r2, $position++]);
             $stats['children_links']++;
         }
@@ -1154,6 +1166,12 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
         $applyLabels($rec, 'family', $fid);
     }
 
+    if ($stats['famc_only_links'] > 0) {
+        $n = $stats['famc_only_links'];
+        $stats['warnings'][] = $n < 2
+            ? '1 enfant n’était relié à sa famille que depuis sa propre fiche (FAMC, sans CHIL dans la famille) : la filiation a été reprise.'
+            : $n . ' enfants n’étaient reliés à leur famille que depuis leur propre fiche (FAMC, sans CHIL dans la famille) : les filiations ont été reprises.';
+    }
     $pdo->exec("UPDATE persons SET living_status='deceased' WHERE living_status='unknown' AND id IN (SELECT e.person_id FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE t.gedcom_tag IN ('DEAT','BURI','CREM'))");
     gedimport_rebuild_search($pdo);
     return ['format' => 'gedcom'] + $stats;

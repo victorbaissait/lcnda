@@ -646,7 +646,7 @@
             clearTimeout(saveT); saveT = setTimeout(save, changed ? 900 : 2500);
         }
         // les enregistrements passent l'un après l'autre (un ancien ne peut pas écraser un plus récent)
-        let saveChain = Promise.resolve(), changes = 0;
+        let saveChain = Promise.resolve(), changes = 0, boardRev = b.rev || '', forceNext = false, conflictOpen = false;
         function save() { saveChain = saveChain.then(save1, save1); return saveChain; }
         const saveNow = () => { clearTimeout(saveT); status('Enregistrement…'); return save(); };
         async function save1() {
@@ -657,7 +657,16 @@
             const title = root.querySelector('[data-bd-title]').value.trim() || 'Tableau sans titre';
             const body = {id: b.id, title, icon: b.icon, color: b.color, status: root.querySelector('[data-bd-state]').value, ...ownerData, data: {items, view, bg, locked: boardLocked, links, ...boardExtra()}};
             if (thumb) body.thumb = thumb;
-            try { const res = await api('save_board', {}, {method: 'POST', body}); const sl = (res.result || res).links; if (Array.isArray(sl) && sl.length === links.length) { links = sl; renderLinks(); } if (at === changes) { dirty = false; status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); } } catch (error) { status('⚠ ' + error.message); }
+            if (boardRev) body.base_rev = boardRev; // deux onglets : le serveur refuse si le tableau a changé ailleurs
+            if (forceNext) { body.force = 1; forceNext = false; }
+            if (conflictOpen) return; // la question « Recharger / Garder ma version » est déjà posée
+            try { const res = await api('save_board', {}, {method: 'POST', body}); if ((res.result || res).rev) boardRev = (res.result || res).rev; const sl = (res.result || res).links; if (Array.isArray(sl) && sl.length === links.length) { links = sl; renderLinks(); } if (at === changes) { dirty = false; status(boardLocked ? '🔒 Verrouillé' : 'Enregistré ✓'); } } catch (error) {
+                if (!error.conflict) { status('⚠ ' + error.message); return; }
+                status('⚠ Modifié dans une autre fenêtre'); conflictOpen = true;
+                const choice = await (A().conflictBox?.({what: 'Ce tableau'}) ?? Promise.resolve(null)); conflictOpen = false;
+                if (choice === 'reload') { dirty = false; clearTimeout(saveT); go(b.id); }
+                else if (choice === 'overwrite') { forceNext = true; saveNow(); }
+            }
         }
         // ── miniature (et image PNG) : les éléments redessinés sur un canevas ──
         async function thumbnail(W, H, scale0 = 0, type = 'image/png', onlySel = false) {
@@ -2325,14 +2334,17 @@
     ext.boardsSidebar = (content, footer, tabs, signal) => {
         const st = S();
         content.innerHTML = `${tabs}<p class="enquetes-tab-help">Des toiles libres pour chercher, relier, montrer : notes, flèches, photos, sons, fiches…</p>
-            <div class="search-box"><label for="boards-search">Rechercher un tableau</label><div class="search-row"><input id="boards-search" value="${esc(st.boardsQ || '')}" placeholder="Titre, partie…"><button type="button">⌕</button></div></div>
+            <div class="search-box"><label for="boards-search">Rechercher un tableau</label><div data-bd-search>${window.LCNDA_UI?.searchField ? '' : `<input id="boards-search" type="search" value="${esc(st.boardsQ || '')}" placeholder="Chercher… (titre, partie)">`}</div></div>
             <div class="side-menu">${[['all', '01', 'Tous'], ['free', '02', 'Libres'], ['investigation', '03', 'Dans une enquête'], ['battue', '04', 'Dans une battue'], ['atelier_project', '05', 'Dans l’Atelier']].map(([v, i, l]) => `<button class="side-menu-item ${(st.boardsFilter || 'all') === v ? 'is-active' : ''}" data-bd-filter="${v}"><span class="side-number">${i}</span>${l}</button>`).join('')}</div>
             <div class="side-menu h-bd-statusmenu">${[['all', 'É1', 'Toutes les états'.replace('Toutes les états', 'Tous les états')], ['open', 'É2', 'En cours'], ['paused', 'É3', 'En pause'], ['closed', 'É4', 'Terminés']].map(([v, i, l]) => `<button class="side-menu-item ${(st.boardsStatus || 'all') === v ? 'is-active' : ''}" data-bd-status="${v}"><span class="side-number">${i}</span>${l}</button>`).join('')}</div>`;
         footer.innerHTML = '<button class="button small" id="new-board">+ Nouveau tableau</button>';
         footer.querySelector('#new-board').addEventListener('click', () => newBoard());
         content.addEventListener('click', e => { const s0 = e.target.closest('[data-bd-status]'); if (s0) { st.boardsStatus = s0.dataset.bdStatus; st.currentBoardId = 0; content.querySelectorAll('[data-bd-status]').forEach(x => x.classList.toggle('is-active', x === s0)); ext.boards(++st.workspaceToken); return; } }, {signal});
         content.addEventListener('click', e => { const f = e.target.closest('[data-bd-filter]'); if (f) { st.boardsFilter = f.dataset.bdFilter; st.currentBoardId = 0; content.querySelectorAll('[data-bd-filter]').forEach(x => x.classList.toggle('is-active', x === f)); ext.boards(++st.workspaceToken); } }, {signal});
-        let t = 0; content.querySelector('#boards-search').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.boardsQ = e.target.value; st.currentBoardId = 0; ext.boards(++st.workspaceToken); }, 300); });
+        // C1 : la case de recherche commune (loupe, ×, Échap vide, « / » pour y aller)
+        const slot = content.querySelector('[data-bd-search]'), UIx = window.LCNDA_UI;
+        if (UIx?.searchField) { const f = UIx.searchField({placeholder: 'Chercher… (titre, partie)', value: st.boardsQ || '', label: 'Rechercher un tableau'}); f.input.id = 'boards-search'; slot.appendChild(f); }
+        let t = 0; content.querySelector('#boards-search').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { if (st.boardsQ === e.target.value) return; st.boardsQ = e.target.value; st.currentBoardId = 0; ext.boards(++st.workspaceToken); }, 300); });
     };
 
     /* ═════════ Dans une enquête, une battue, un projet : ses tableaux ═════════ */

@@ -3978,6 +3978,11 @@ html.is-screen-embed.is-screen-embed-sidebar .workspace{grid-column:2}
 .modal-actions>.button.secondary:not(.danger),.modal-actions>button.secondary:not(.danger){order:1}
 .modal-actions>[type=submit],.modal-actions>.button:not(.secondary){order:2}
 
+/* un nom très long (collage malheureux) se coupe au lieu de déborder de la fiche */
+.person-hero h2, .person-hero h1 { overflow-wrap: break-word; min-width: 0; }
+/* titres PARENTS / CONJOINTS… et leur ＋ : passent à la ligne au lieu de se chevaucher (grand texte, espacements) */
+.relation-heading { flex-wrap: wrap; }
+.relation-heading > span { min-width: 0; overflow-wrap: anywhere; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .install-card .import-form label{color:#c7c7c7}
 :root[data-theme="dark"] .person-list-item .life-dot.deceased{border-color:#4c4c4c}

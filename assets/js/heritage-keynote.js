@@ -486,6 +486,7 @@
         }
         const toggleLaser = () => { laser = !laser; laserEl.hidden = !laser; pv.classList.toggle('is-laser', laser); };
         window.addEventListener('keydown', onKey, true); window.addEventListener('resize', fit);
+        dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); exit(); });
         pv.addEventListener('pointermove', e => { if (laser) { laserEl.style.left = e.clientX + 'px'; laserEl.style.top = e.clientY + 'px'; } hud.classList.add('is-on'); clearTimeout(hudT); hudT = setTimeout(() => hud.classList.remove('is-on'), 1800); });
         pv.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (b) { const a = b.dataset.p; if (a === 'next') next(); if (a === 'prev') prev(); if (a === 'exit') exit(); if (a === 'laser') toggleLaser(); if (a === 'presenter') openPresenter(); if (a === 'help') $('[data-help]').hidden = !$('[data-help]').hidden; return; }
@@ -628,6 +629,8 @@
         const undo = () => { if (editing) stopEdit(); clearTimeout(commitT); if (hist[hi] !== snapOf()) commit(); if (hi > 0) { hi--; restore(hist[hi]); } };
         const redo = () => { if (hi < hist.length - 1) { hi++; restore(hist[hi]); } };
         /* ─── le zoom de la diapositive ─── */
+        // 🤏 téléphone : zoom à deux doigts sur la diapositive (la page ne s'agrandit plus)
+        try { window.LCNDA_UI?.bindPinch?.(canvasEl, f => { zoom = String(Math.max(.1, Math.min(4, K * f))); fitZoom(); }, {touchAction: 'pan-x pan-y'}); } catch (_) {} // un doigt fait défiler, deux doigts zooment
         function fitZoom() {
             const [W, H] = WH();
             K = zoom === 'fit' ? Math.max(.05, Math.min((canvasEl.clientWidth - 48) / W, (canvasEl.clientHeight - 48) / H)) : Number(zoom);
@@ -1218,7 +1221,7 @@
         document.addEventListener('pointerdown', e => { if (closed || e.target.closest?.('details.kn-dd')) return; dlg.querySelectorAll('details.kn-dd[open]').forEach(x => x.removeAttribute('open')); }, {capture: true, signal: docAc.signal});
         /* ─── glisser une diapositive dans la liste, une photo de l'ordinateur sur la diapositive ─── */
         let dragI = -1;
-        navList.addEventListener('dragstart', e => { const li = e.target.closest('[data-kn-i]'); if (!li) return; dragI = Number(li.dataset.knI); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'kn-slide'); });
+        navList.addEventListener('dragstart', e => { const li = e.target.closest?.('[data-kn-i]'); if (!li) return; dragI = Number(li.dataset.knI); e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', 'kn-slide'); });
         navList.addEventListener('dragover', e => { if (dragI >= 0 && e.target.closest('[data-kn-i]')) { e.preventDefault(); navList.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); e.target.closest('[data-kn-i]').classList.add('is-drop'); } });
         navList.addEventListener('drop', e => { const li = e.target.closest('[data-kn-i]'); if (dragI < 0 || !li) return; e.preventDefault(); const to = Number(li.dataset.knI), [m] = show.slides.splice(dragI, 1); show.slides.splice(to, 0, m); cur = to; dragI = -1; paintAll(); commit(); });
         navList.addEventListener('dragend', () => { dragI = -1; navList.querySelectorAll('.is-drop').forEach(x => x.classList.remove('is-drop')); });
@@ -1277,6 +1280,7 @@
             if (KN_CLIP.objs?.length || KN_CLIP.slides?.length) { e.preventDefault(); paste(); return; }
             const txt = e.clipboardData?.getData('text/plain'); if (txt?.trim()) { e.preventDefault(); const [W, H] = WH(); addObj({id: uid(), t: 'text', role: 'body', ...center(W * .6, H * .3), size: Math.round(H * .04), html: textToHtml(txt.slice(0, 5000))}); }
         }, {signal: docAc.signal});
+        dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { if (e.target !== dlg) return; e.preventDefault(); if (escUsed) { escUsed = false; return; } const om = dlg.querySelectorAll('details.kn-dd[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (document.fullscreenElement) return; close(); });
         /* ─── c'est parti ─── */
         ext.editorKeysAttach?.(dlg, 'keynote');

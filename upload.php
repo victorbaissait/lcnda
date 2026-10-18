@@ -66,7 +66,15 @@ try {
         }
         for($i=0;$i<$count;$i++){
             $name=is_array($files['name'])?$files['name'][$i]:$files['name'];$tmp=is_array($files['tmp_name'])?$files['tmp_name'][$i]:$files['tmp_name'];$error=is_array($files['error'])?$files['error'][$i]:$files['error'];$size=is_array($files['size'])?$files['size'][$i]:$files['size'];
-            if($error!==UPLOAD_ERR_OK)throw new RuntimeException("Échec de l’import de {$name}");
+            if($error!==UPLOAD_ERR_OK){ // dire pourquoi, en français
+                $extE=strtolower(pathinfo((string)$name,PATHINFO_EXTENSION));$okExt=array_merge(array_values($allowed),['jpeg','jpg','tif','tiff','aif','aiff','aifc','m4a','mov']);
+                if($extE!==''&&!in_array($extE,$okExt,true))throw new RuntimeException("Format non accepté : {$name} (ici : photos, PDF, sons ou vidéos).");
+                if($error===UPLOAD_ERR_INI_SIZE||$error===UPLOAD_ERR_FORM_SIZE)throw new RuntimeException("{$name} est trop gros pour être envoyé (au plus ".ini_get('upload_max_filesize')." par fichier avec les réglages actuels).");
+                if($error===UPLOAD_ERR_NO_FILE)throw new RuntimeException('Aucun fichier reçu : choisis-le à nouveau.');
+                if($error===UPLOAD_ERR_PARTIAL)throw new RuntimeException("L’envoi de {$name} a été interrompu : réessaie.");
+                throw new RuntimeException("Échec de l’import de {$name} : le serveur n’a pas pu le recevoir (code {$error}). Réessaie ; si ça recommence, redémarre LCNDA.");
+            }
+            if(($size??1)===0||@filesize($tmp)===0)throw new RuntimeException("Ce fichier est vide (0 octet) : {$name}.");
             $mime=(new finfo(FILEINFO_MIME_TYPE))->file($tmp);$ext=strtolower(pathinfo((string)$name,PATHINFO_EXTENSION));if(!isset($allowed[$mime])&&in_array($ext,['aif','aiff','aifc'],true))$mime=$ext==='aifc'?'audio/x-aifc':'audio/x-aiff';if(!isset($allowed[$mime]))throw new RuntimeException("Format non accepté : {$name}");
             $mediaType=$mime==='application/pdf'?'pdf':(str_starts_with($mime,'audio/')?'audio':(str_starts_with($mime,'video/')?'video':'image'));
             if($mediaType==='video'&&($_POST['audio_only']??'')==='1')$mediaType='audio'; // un mémo vocal enregistré (WebM sans image)

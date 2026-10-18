@@ -37,7 +37,9 @@
      * set(données) les applique. Fichier exporté : lcnda-reglage-<outil>-<nom>.json = {lcnda:'reglage', outil, nom, version:1, donnees}.
      */
     function presetBox({tool, label = 'ces réglages', get, set, toolName = ''}) {
-        const KEY = `lcnda-reglages-${tool}`;
+        // « genealogie-… » : la clé suit la base (synchro des réglages, app.js) ; l'ancienne clé « lcnda-reglages-… » est reprise une fois
+        const KEY = `genealogie-reglages-${String(tool).toLowerCase().replace(/[^a-z0-9-]+/g, '-').slice(0, 60)}`, OLD = `lcnda-reglages-${tool}`;
+        try { const old = localStorage.getItem(OLD); if (old !== null) { if (localStorage.getItem(KEY) === null) localStorage.setItem(KEY, old); localStorage.removeItem(OLD); } } catch (_) {}
         const list = () => { try { const a = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(a) ? a.filter(x => x && typeof x.name === 'string' && x.data && typeof x.data === 'object') : []; } catch (_) { return []; } };
         const keep = a => { try { localStorage.setItem(KEY, JSON.stringify(a.slice(0, 60))); return true; } catch (_) { toast('Plus de place pour enregistrer ce réglage.', 'error'); return false; } };
         const box = document.createElement('div'); box.className = 'h-pp-presets vx-presets'; box.dataset.vxPresets = tool;
@@ -935,6 +937,7 @@
                 o.pts.splice(best + 1, 0, P(x, y)); nodeSel = {id, i: best + 1}; commit('Point ajouté'); return; }
             if (o.type === 'group') { if (enterScope([...scope, o.id])) { openGroups.add(o.id); render(); hint(`Tu es dans « ${o.name || 'le groupe'} » : le reste est pâli. Échap ou ⤴ pour en sortir.`); } }
         }
+        try { window.LCNDA_UI?.pinchAsWheel?.(stage, 0.0022); } catch (_) {} // 🤏 téléphone : zoom à deux doigts sur le dessin
         stage.addEventListener('wheel', e => { e.preventDefault(); const r = svgEl.getBoundingClientRect(); if (e.ctrlKey || e.metaKey) zoomAt(Math.exp(-e.deltaY * 0.0022), e.clientX - r.left, e.clientY - r.top); else { panX -= e.deltaX; panY -= e.deltaY; applyView(); } }, {passive: false});
         /* panneau de droite */
         /* couleurs : les émaux et nuances de base, les dernières couleurs libres employées, et 🎨 pour n'importe quelle couleur */
@@ -1455,13 +1458,13 @@
             if (!dlg.open || document.querySelector('dialog[open]:not(.vx-dlg)') && document.activeElement?.closest('dialog') !== dlg) return;
             const typing = e.target.closest?.('input, textarea, select, [contenteditable]'), mod = e.metaKey || e.ctrlKey, k = e.key.toLowerCase();
             if (mod && k === 's') { e.preventDefault(); saveDoc(); return; }
-            if (typing) return;
+            if (typing) { if (k === 'escape' && typing.closest('.vx-dlg, dialog') === dlg) { e.preventDefault(); e.stopPropagation(); typing.blur?.(); try { stage.focus({preventScroll: true}); } catch (_) {} } return; } // Échap pendant la saisie d'un texte : on quitte le champ (sans proposer de fermer)
             if (k === ' ' && !space) { space = true; stage.dataset.tool = 'hand'; e.preventDefault(); return; }
             const map = mod ? {z: e.shiftKey ? 'redo' : 'undo', y: 'redo', c: 'copy', x: 'cut', v: null, d: 'dup', a: 'all', g: e.shiftKey ? 'ungroup' : 'group', i: 'import', 0: 'zfit', 1: 'z100', '=': 'zin', '+': 'zin', '-': 'zout', 7: 'clipmask', ']': e.shiftKey ? 'front' : 'fwd', '[': e.shiftKey ? 'bottom' : 'back', '}': 'front', '{': 'bottom'} : {};
             if (mod && k in map) { if (map[k]) { e.preventDefault(); CMDS[map[k]](); } return; }
             if ((k === 'delete' || k === 'backspace') && penPath) { e.preventDefault(); penPath.pts.pop(); if (!penPath.pts.length) { penPath = null; penHover = null; } render(); return; }
             if (k === 'delete' || k === 'backspace') { e.preventDefault(); CMDS.del(); return; }
-            if (k === 'escape') { e.preventDefault(); if (tool === 'mref') setTool('select'); else if (penPath) finishPen(); else if (sel.length) CMDS.none(); else if (scope.length) { scope = scope.slice(0, -1); render(); } return; }
+            if (k === 'escape') { e.preventDefault(); if (tool === 'mref') setTool('select'); else if (penPath) finishPen(); else if (sel.length) CMDS.none(); else if (scope.length) { scope = scope.slice(0, -1); render(); } else close(); return; } // rien à désélectionner : Échap ferme (avec la question s'il reste des modifications)
             if (k === 'enter' && penPath) { finishPen(); return; }
             if (k.startsWith('arrow') && sel.length) { e.preventDefault(); const s2 = e.shiftKey ? 10 : 1, dx = k === 'arrowleft' ? -s2 : k === 'arrowright' ? s2 : 0, dy = k === 'arrowup' ? -s2 : k === 'arrowdown' ? s2 : 0; selObjs().filter(o => !o.locked).forEach(o => moveObj(o, dx, dy)); clearTimeout(laterT); renderNoPanel(); laterT = setTimeout(() => { laterT = 0; commit('Déplacé'); }, 400); return; }
             if (!mod && !e.altKey) { const t = TOOLS.find(x => x[3].toLowerCase() === k); if (t) { setTool(t[0]); e.preventDefault(); } }

@@ -349,7 +349,7 @@
         if (!s) return null;
         let low = 0; // une année avant l'an 1000 : comprise, mais la base ne la range pas encore
         const bad = t => ({ok: false, text: t}), good = (label, extra = '') => ({ok: true, label, extra, ...(low ? {warn: `année ${low} : l’app ne range pas encore les dates d’avant l’an ${MIN_YEAR} (le texte est gardé tel quel, mais il ne sert ni au tri, ni aux âges, ni aux frises)`} : {})});
-        const check = d => { if (!d) return null; if (d.error) return d; if (d.y > NOW_Y) return {error: `date dans le futur : ${d.label}`}; if (d.y && d.y < MIN_YEAR) low = d.y; return d; };
+        const check = d => { if (!d) return null; if (d.error) return d; if (d.y === 0 || d.y !== undefined && d.y !== null && Number(d.y) === 0) return {error: 'date impossible : l’an 0 n’existe pas (on passe de l’an 1 avant J.-C. à l’an 1)'}; if (d.y > NOW_Y) return {error: `date dans le futur : ${d.label}`}; if (d.y && d.y < MIN_YEAR) low = d.y; return d; };
         let m;
         if ((m = s.match(/^(?:entre|de|du)\s+(.+?)\s+(?:et|a|au|-)\s+(.+)$/))) {
             const a = check(oneDate(m[1])), b = check(oneDate(m[2]));
@@ -714,8 +714,9 @@
 
     /* ═════ E3 La fenêtre d'export unique ═════ */
     const FORMATS = {pdf: ['📄 PDF', 'imprimer, envoyer', 'pdf'], png: ['🖼 PNG', 'transparent', 'png'], jpg: ['📷 JPG', 'léger', 'jpg'], svg: ['✒ SVG', 'dessin', 'svg'], print: ['🖨 Imprimer', 'tout de suite', ''], file: ['💾 Fichier', 'de l’outil', 'json']};
-    /** E3 — openExportDialog({title, formats:[{id, label, hint, ext, run}], defaultName, preview, info, bleed, quality, saveCopy}) → Promise<{format,…}|null> */
-    UI.openExportDialog = ({title = 'Exporter', formats = [], defaultName = '', preview = null, info = '', bleed = false, quality = true, saveCopy = false, value = ''} = {}) => new Promise(resolve => {
+    /** E3 — openExportDialog({title, formats:[{id, label, hint, ext, run}], defaultName, preview, info, bleed, quality, saveCopy, copyChecked}) → Promise<{format,…}|null>
+     *  saveCopy : montre la case « Ranger aussi une copie dans les médias » ; décochée sauf copyChecked (l'export est lié à une fiche ou un média) */
+    UI.openExportDialog = ({title = 'Exporter', formats = [], defaultName = '', preview = null, info = '', bleed = false, quality = true, saveCopy = false, copyChecked = false, value = ''} = {}) => new Promise(resolve => {
         const fm = formats.map(f => { const d = FORMATS[f.id] || [f.label || f.id, '', f.ext || '']; return {...f, label: f.label || d[0], hint: f.hint ?? d[1], ext: f.ext ?? d[2]}; });
         if (!fm.length) { resolve(null); return; }
         const safe = n => (A().safeExportFilename ? A().safeExportFilename(n, 'export') : String(n || 'export').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'export');
@@ -726,7 +727,7 @@
             <div data-ui-q></div>
             ${bleed ? '<label class="checkbox-line ui-export-check" data-ui-bleedrow><input type="checkbox" data-ui-bleed> <span data-help="La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord." data-help-faq="fond perdu">Fond perdu et traits de coupe (imprimeur)</span></label>' : ''}
             <div data-ui-namerow><span class="ui-export-lab">Nom du fichier</span><span class="ui-export-name"><input type="text" class="ui-export-name-input" data-ui-name spellcheck="false" aria-label="Nom du fichier"><span data-ui-ext></span></span></div>
-            ${saveCopy ? '<label class="checkbox-line ui-export-check"><input type="checkbox" data-ui-copy checked> Ranger aussi une copie dans les médias de la fiche</label>' : ''}
+            ${saveCopy ? `<label class="checkbox-line ui-export-check"><input type="checkbox" data-ui-copy${copyChecked ? ' checked' : ''}> Ranger aussi une copie dans les médias</label>` : ''}
             <div data-ui-err></div></div>
             <div class="ui-export-side">${preview ? `<div class="ui-export-prev" data-ui-prev>${UI.spinner('Aperçu…')}</div>` : ''}${info ? `<small class="ui-export-info">${esc(info)}</small>` : ''}</div></div>
             <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-ui-x>Annuler</button><button type="submit" class="button" data-ui-go></button></div></form>`;
@@ -767,7 +768,31 @@
         return accept.split(',').map(s => s.trim().toLowerCase()).filter(Boolean).some(a => (a.startsWith('.') ? f.name.toLowerCase().endsWith(a) : a.endsWith('/*') ? (f.type || '').startsWith(a.slice(0, -1)) : f.type === a));
     };
     /** E4 — bindFileDrop(el, onFiles, {accept, paste}) : la zone s'allume en bleu au survol d'un fichier ; ⌘V colle un fichier */
-    UI.bindFileDrop = (el, onFiles, {accept = '', paste = true} = {}) => {
+    /** 🤏 bindPinch(el, onZoom(facteur, x, y)) : zoom à deux doigts dans un outil (téléphone, tablette). La page, elle, ne
+     *  s'agrandit plus (touch-action:none). Pendant le pincement, les mouvements ne vont pas à l'outil (pas de trait parasite). */
+    UI.bindPinch = (el, onZoom, {touchAction = 'none'} = {}) => {
+        if (!el || el._uiPinch) return el; el._uiPinch = true; if (touchAction) el.style.touchAction = touchAction;
+        const pts = new Map(); let last = 0;
+        const gap = () => { const [a, b] = [...pts.values()]; return Math.hypot(a.x - b.x, a.y - b.y); };
+        const mid = () => { const [a, b] = [...pts.values()]; return {x: (a.x + b.x) / 2, y: (a.y + b.y) / 2}; };
+        el.addEventListener('pointerdown', e => { if (e.pointerType !== 'touch') return; pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); if (pts.size === 2) { last = gap(); e.stopImmediatePropagation(); } }, true);
+        el.addEventListener('pointermove', e => {
+            if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, {x: e.clientX, y: e.clientY});
+            if (pts.size < 2) return; e.stopImmediatePropagation(); e.preventDefault();
+            const g = gap(); if (last > 0 && g > 0 && Math.abs(g - last) > 1) { const m = mid(); try { onZoom(g / last, m.x, m.y); } catch (err) { console.error(err); } last = g; }
+        }, true);
+        const up = e => { if (!pts.has(e.pointerId)) return; const pinching = pts.size >= 2; pts.delete(e.pointerId); if (pts.size < 2) last = 0; if (pinching) e.stopImmediatePropagation(); };
+        el.addEventListener('pointerup', up, true); el.addEventListener('pointercancel', up, true);
+        return el;
+    };
+    /** pour les outils qui zooment déjà à la molette (ctrl + molette = zoom) : le pincement passe par là */
+    UI.pinchAsWheel = (el, k = 0.002) => UI.bindPinch(el, (f, x, y) => { el.dispatchEvent(new WheelEvent('wheel', {deltaY: -Math.log(f) / k, ctrlKey: true, clientX: x, clientY: y, bubbles: true, cancelable: true})); });
+    /* les écoutes « coller » posées sur le document pour une zone de dépôt : retirées dès que la zone a quitté la page
+     * (éditeur fermé), sinon elles gardaient en mémoire tout l'éditeur fermé (un de plus à chaque ouverture) */
+    const pasteZones = new Set(); let pasteSweepT = 0, pasteObs = null;
+    const sweepPaste = () => { pasteSweepT = 0; pasteZones.forEach(z => { if (z.el.isConnected) { z.seen = true; return; } if (z.seen) { document.removeEventListener('paste', z.fn); pasteZones.delete(z); } }); if (!pasteZones.size && pasteObs) { pasteObs.disconnect(); pasteObs = null; } };
+    const watchPaste = z => { pasteZones.add(z); z.seen = z.el.isConnected; if (!z.seen) setTimeout(() => { if (z.el.isConnected) z.seen = true; }, 0); if (!pasteObs) { pasteObs = new MutationObserver(() => { if (!pasteSweepT) pasteSweepT = setTimeout(sweepPaste, 300); }); pasteObs.observe(document.documentElement, {childList: true, subtree: true}); } };
+    UI.bindFileDrop = (el, onFiles, {accept = '', paste = true, signal = null} = {}) => {
         if (!el || el._uiDrop) return el; el._uiDrop = true;
         const hasFiles = e => [...(e.dataTransfer?.types || [])].includes('Files');
         let depth = 0;
@@ -778,13 +803,14 @@
         el.addEventListener('drop', e => { if (!hasFiles(e)) return; e.preventDefault(); e.stopPropagation(); depth = 0; el.classList.remove('is-drag-over'); send(e.dataTransfer.files); });
         if (paste) {
             const onPaste = e => {
-                if (!el.isConnected) { document.removeEventListener('paste', onPaste); return; }
+                if (!el.isConnected) { document.removeEventListener('paste', onPaste); pasteZones.forEach(z => { if (z.fn === onPaste) pasteZones.delete(z); }); return; }
                 if (!shown(el) || editable(e.target) && !el.contains(e.target)) return;
                 const top = topLayer(); if (top !== document && !top.contains(el)) return; // seulement la fenêtre du dessus
                 const files = [...(e.clipboardData?.files || [])]; if (!files.length) return;
                 e.preventDefault(); send(files);
             };
-            document.addEventListener('paste', onPaste);
+            document.addEventListener('paste', onPaste, signal ? {signal} : undefined);
+            watchPaste({el, fn: onPaste});
         }
         return el;
     };

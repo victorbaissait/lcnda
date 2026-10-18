@@ -846,7 +846,7 @@ function dashboard_baptisms_without_sponsors(PDO $pdo): array
         JOIN event_types t ON t.id=e.event_type_id
         LEFT JOIN persons p ON p.id=e.person_id
         LEFT JOIN places pl ON pl.id=e.place_id
-        WHERE t.gedcom_tag IN ('CHR','BAPM') AND NOT EXISTS(SELECT 1 FROM event_witnesses ew WHERE ew.event_id=e.id)
+        WHERE t.gedcom_tag IN ('CHR','BAPM') AND NOT EXISTS(SELECT 1 FROM event_witnesses ew JOIN persons wp ON wp.id=ew.person_id WHERE ew.event_id=e.id)
         ORDER BY COALESCE(e.updated_at,e.created_at) DESC,e.id DESC
         LIMIT 80")->fetchAll();
 }
@@ -6104,6 +6104,7 @@ function restore_deleted_event(PDO $pdo,array $change,array $before): array
     foreach(($snapshot['source_links']??[]) as $row)insert_snapshot_row($pdo,'source_links',$row);
     foreach(($snapshot['notes']??[]) as $row)insert_snapshot_row($pdo,'notes',$row);
     foreach(($snapshot['label_links']??[]) as $row)insert_snapshot_row($pdo,'label_links',$row,true);
+    foreach(($snapshot['witnesses']??[]) as $row){if(record_exists($pdo,'persons',(int)($row['person_id']??0)))insert_snapshot_row($pdo,'event_witnesses',$row,true);}
     if(!empty($event['person_id']))rebuild_search($pdo,(int)$event['person_id']);
     log_change($pdo,'event',$eventId,'restore','Restauration de l’événement supprimé #'.$eventId,null,['restored_from_change_id'=>(int)$change['id'],'event_id'=>$eventId]);
     return ['entity_type'=>'event','entity_id'=>$eventId];
@@ -7942,13 +7943,15 @@ function save_event_witnesses(PDO $pdo, array $data): array
     // Decode witnesses JSON array: [{person_id, note}]
     $witnesses = json_decode($data['witnesses'] ?? '[]', true);
     if (!is_array($witnesses)) $witnesses = [];
+    // rien n'a changé (cas le plus courant : « Enregistrer » d'un événement) : rien n'est écrit ni journalisé
+    $want = [];
+    foreach ($witnesses as $pos => $w) { $pid = (int)($w['person_id'] ?? 0); if ($pid) $want[] = [$pid, (string)($w['note'] ?? ''), (int)$pos]; }
+    $cur = $pdo->prepare('SELECT person_id,note,position FROM event_witnesses WHERE event_id=? ORDER BY position,id'); $cur->execute([$eventId]);
+    $have = array_map(static fn($r) => [(int)$r['person_id'], (string)$r['note'], (int)$r['position']], $cur->fetchAll(PDO::FETCH_ASSOC));
+    if ($have === $want) return ['event_id' => $eventId, 'unchanged' => true];
     $pdo->prepare('DELETE FROM event_witnesses WHERE event_id=?')->execute([$eventId]);
     $stmt = $pdo->prepare('INSERT INTO event_witnesses(event_id,person_id,note,position) VALUES(?,?,?,?)');
-    foreach ($witnesses as $pos => $w) {
-        $pid = (int)($w['person_id'] ?? 0);
-        if (!$pid) continue;
-        $stmt->execute([$eventId, $pid, $w['note'] ?? '', $pos]);
-    }
+    foreach ($want as [$pid, $note, $pos]) $stmt->execute([$eventId, $pid, $note, $pos]);
     log_change($pdo, 'event', $eventId, 'update', 'Mise à jour des témoins - événement #' . $eventId);
     return ['event_id' => $eventId];
 }
@@ -9169,11 +9172,29 @@ function delete_archive_digest_person(PDO $pdo, array $data): array
     return ['id' => $id];
 }
 
-function handle_write(PDO $pdo, string $action, array $data): never
+/**
+ * Ouvre la transaction d'une écriture en prenant TOUT DE SUITE le verrou d'écriture de la base (comme BEGIN IMMEDIATE) :
+ * deux enregistrements envoyés en même temps (double-clic, deux onglets) s'attendent alors (busy_timeout) au lieu
+ * d'échouer en « base occupée ». On garde beginTransaction() de PDO (les fonctions appelées regardent inTransaction()
+ * pour ouvrir ou non leur propre transaction) et on prend le verrou par une écriture qui ne change rien.
+ */
+function begin_write_transaction(PDO $pdo): void
 {
     $pdo->beginTransaction();
+    try { $pdo->exec('DELETE FROM persons WHERE 0'); }
+    catch (Throwable $e) {
+        if (stripos($e->getMessage(), 'no such table') === false) { if ($pdo->inTransaction()) $pdo->rollBack(); throw $e; }
+    }
+}
+
+function handle_write(PDO $pdo, string $action, array $data): never
+{
+    try { begin_write_transaction($pdo); }
+    catch (Throwable $e) { json_response(['error'=>readable_error_message($e)],422); }
     try {
         assert_write_target_unlocked($pdo,$action,$data); // fiche verrouillée : rien de ce qui la touche ne change
+        assert_person_name_lengths(array_intersect_key($data,['first_name'=>1,'middle_name'=>1,'last_name'=>1])); // tous les noms et prénoms (fiche, variante, recensement, relevé…) : 200 caractères au plus
+        assert_text_sizes($action,$data); // événements et notes : des tailles raisonnables (un collage de plusieurs Mo est refusé)
         $result = match ($action) {
             'save_person' => save_person($pdo,$data),
             'set_person_lock' => set_person_lock($pdo,$data),
@@ -9525,6 +9546,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
         json_response(['ok'=>true,'result'=>$result]);
     } catch(Throwable $e){
         if($pdo->inTransaction())$pdo->rollBack();
+        if($e instanceof LcndaConflict)json_response(['error'=>$e->getMessage(),'conflict'=>true],409);
         json_response(['error'=>readable_error_message($e)],422);
     }
 }
@@ -9535,6 +9557,11 @@ function handle_write(PDO $pdo, string $action, array $data): never
  */
 function readable_error_message(Throwable $e): string
 {
+    // erreur interne de PHP (TypeError, ValueError, « json_decode(): Argument #1… ») : un message simple ; le détail va au journal du serveur
+    if($e instanceof Error||$e instanceof ErrorException||$e instanceof JsonException){
+        error_log('LCNDA erreur interne : '.get_class($e).' : '.$e->getMessage().' @ '.basename($e->getFile()).':'.$e->getLine());
+        return 'L’enregistrement n’a pas pu se faire (une donnée reçue n’a pas la forme attendue). Rien n’a été modifié. Réessaie ; si ça recommence, recharge la page et signale-le.';
+    }
     if(!($e instanceof PDOException))return $e->getMessage();
     $raw=$e->getMessage();
     error_log('LCNDA erreur base : '.$raw);
@@ -9652,6 +9679,10 @@ function set_label_links(PDO $pdo,array $data): array
     $raw=$data['label_ids']??[];
     if(!is_array($raw))$raw=[$raw];
     $ids=array_values(array_unique(array_filter(array_map('intval',$raw))));
+    // mêmes étiquettes qu'avant : rien à écrire ni à journaliser (sinon ⌘Z ne pouvait plus annuler la vraie modification)
+    $cur=$pdo->prepare('SELECT label_id FROM label_links WHERE entity_type=? AND entity_id=?');$cur->execute([$type,$entityId]);
+    $have=array_map('intval',$cur->fetchAll(PDO::FETCH_COLUMN));$a=$have;$b=$ids;sort($a);sort($b);
+    if($a===$b)return ['entity_type'=>$type,'entity_id'=>$entityId,'labels'=>labels_for_entity($pdo,$type,$entityId),'unchanged'=>true];
     $delete=$pdo->prepare('DELETE FROM label_links WHERE entity_type=? AND entity_id=?');
     $delete->execute([$type,$entityId]);
     $insert=$pdo->prepare('INSERT OR IGNORE INTO label_links(label_id,entity_type,entity_id) VALUES(?,?,?)');
@@ -9976,6 +10007,15 @@ function person_is_ancestor_of(PDO $pdo, int $ancestorId, int $personId): bool
 function add_relation(PDO $pdo,array $data): array
 {
     $personId=safe_int($data['person_id']??0);$relatedId=safe_int($data['related_id']??0);$type=safe_text($data['relation_type']??'');
+    // « Créer une nouvelle personne » : la fiche et le lien dans la même écriture (handle_write) ; si le lien est refusé
+    // (enfant qui a déjà deux parents, fiche verrouillée…), la fiche n'est pas créée non plus.
+    $createdId=0;
+    if(!$relatedId&&!empty($data['new_person'])&&is_array($data['new_person'])&&$personId&&in_array($type,['parent','child','spouse'],true)){
+        if(!person_exists($pdo,$personId))throw new RuntimeException('Personne introuvable');
+        assert_person_unlocked($pdo,$personId);
+        $np=array_intersect_key($data['new_person'],array_flip(['first_name','last_name','middle_name','gender','living_status']));
+        $created=save_person($pdo,$np);$relatedId=$createdId=(int)$created['id'];
+    }
     if(!$personId||!$relatedId||!in_array($type,['parent','child','spouse'],true))throw new RuntimeException('Relation incomplète');
     if($personId===$relatedId)throw new RuntimeException('Une personne ne peut pas être liée à elle-même');
     if(!person_exists($pdo,$personId)||!person_exists($pdo,$relatedId))throw new RuntimeException('Personne introuvable');
@@ -9990,7 +10030,7 @@ function add_relation(PDO $pdo,array $data): array
         $exists=$pdo->prepare('SELECT id FROM families WHERE (partner1_id=? AND partner2_id=?) OR (partner1_id=? AND partner2_id=?) LIMIT 1');$exists->execute([$personId,$relatedId,$relatedId,$personId]);
         if(!$exists->fetchColumn())$pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,?)')->execute([$personId,$relatedId]);
     }
-    log_change($pdo,'person',$personId,'add-relation',relation_log_text('Ajout',$pdo,$personId,$relatedId,$type));return ['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type];
+    log_change($pdo,'person',$personId,'add-relation',relation_log_text('Ajout',$pdo,$personId,$relatedId,$type),null,['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type]);return ['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type,'created_id'=>$createdId]; // le lien gardé dans le journal : ⌘Z peut le retirer
 }
 
 function set_relation_status(PDO $pdo,array $data): array
@@ -11742,10 +11782,42 @@ function validate_person_choices(array $data): void
     if(array_key_exists('living_status',$data)&&!in_array(safe_text($data['living_status']),['living','deceased','unknown'],true))throw new RuntimeException('Statut invalide : choisis Vivant, Décédé ou Inconnu.');
 }
 
+/** Un nom ou un prénom garde une taille raisonnable (un collage malheureux de 10 000 lettres est refusé avec un message clair) : 200 caractères au plus. */
+function assert_person_name_lengths(array $data): void
+{
+    $max=200;
+    $labels=['first_name'=>'Le prénom','middle_name'=>'Le deuxième prénom','last_name'=>'Le nom','prefix'=>'Le titre','suffix'=>'Le suffixe'];
+    foreach($labels as $field=>$label){
+        if(array_key_exists($field,$data)&&is_scalar($data[$field])&&mb_strlen(trim((string)$data[$field]))>$max){
+            throw new RuntimeException($label.' est trop long ('.mb_strlen(trim((string)$data[$field])).' caractères) : '.$max.' au plus. Vérifie ce qui a été collé dans la case.');
+        }
+    }
+}
+
+/** Tailles raisonnables des textes d'un événement (titre 500, autres textes 20 000) et d'une note (titre 500, texte 200 000). */
+function assert_text_sizes(string $action, array $data): void
+{
+    $fmt = static fn(int $n) => number_format($n, 0, ',', ' ');
+    $limits = match ($action) {
+        'add_event', 'save_event' => ['short' => 500, 'long' => 20000, 'shortKeys' => ['title', 'name', 'label', 'date_text', 'date_alternative'], 'what' => 'de l’événement'],
+        'add_note', 'save_note', 'save_research_note' => ['short' => 500, 'long' => 200000, 'shortKeys' => ['title'], 'what' => 'de la note'],
+        default => null,
+    };
+    if (!$limits) return;
+    $names = ['title' => 'Le titre', 'body' => 'Le texte', 'description' => 'La description', 'notes' => 'La note', 'date_text' => 'La date', 'name' => 'Le nom', 'label' => 'Le nom'];
+    foreach ($data as $key => $value) {
+        if (!is_string($key) || !is_string($value) || $key === 'csrf') continue;
+        $max = in_array($key, $limits['shortKeys'], true) ? $limits['short'] : $limits['long'];
+        $len = mb_strlen($value);
+        if ($len > $max) throw new RuntimeException(($names[$key] ?? 'Un des textes') . ' ' . $limits['what'] . ' contient trop de texte (' . $fmt($len) . ' caractères) : ' . $fmt($max) . ' au plus. Coupe-le, ou range le document complet en média.');
+    }
+}
+
 function save_person(PDO $pdo,array $data): array
 {
     $id=safe_int($data['id']??0);
     validate_person_choices($data);
+    assert_person_name_lengths($data);
     if(!$id){
         $first=safe_text($data['first_name']??'');$last=safe_text($data['last_name']??'');
         if($first===''&&$last==='')throw new RuntimeException('Indique au moins un prénom ou un nom');
@@ -11760,6 +11832,18 @@ function save_person(PDO $pdo,array $data): array
     $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Personne introuvable');
     assert_person_unlocked($pdo,$id);
+    // deux onglets : la fiche a-t-elle changé ailleurs depuis l'ouverture de la fenêtre ? (seulement les cases que
+    // l'autre fenêtre a changées ET que celle-ci remplacerait ; _force = « Enregistrer quand même »)
+    if(!empty($data['_base'])&&empty($data['_force'])){
+        $base=is_array($data['_base'])?$data['_base']:(json_decode((string)$data['_base'],true)?:[]);
+        $norm=static fn($v)=>trim((string)safe_text(is_scalar($v)?(string)$v:''));
+        $changed=[];
+        foreach($base as $field=>$was){
+            if(!is_string($field)||!array_key_exists($field,$before)||!array_key_exists($field,$data))continue;
+            if($norm($before[$field])!==$norm($was)&&$norm($data[$field])!==$norm($before[$field]))$changed[]=$field;
+        }
+        if($changed)throw new LcndaConflict('Cette fiche a été modifiée dans une autre fenêtre depuis que tu l’as ouverte : recharge-la pour voir les changements (tes modifications ne sont pas perdues : elles restent dans cette fenêtre ; copie-les avant de recharger, ou choisis « Enregistrer quand même » pour remplacer l’autre version).');
+    }
     // comme à la création : une fiche garde au moins un prénom ou un nom
     $firstAfter=array_key_exists('first_name',$data)?safe_text($data['first_name']):safe_text($before['first_name']??'');
     $lastAfter=array_key_exists('last_name',$data)?safe_text($data['last_name']):safe_text($before['last_name']??'');
@@ -11816,6 +11900,9 @@ function delete_person(PDO $pdo,array $data): array
     $pdo->prepare('UPDATE hypotheses SET related_person_id=NULL WHERE related_person_id=?')->execute([$id]);
     $pdo->prepare('UPDATE branches SET root_person_id=NULL WHERE root_person_id=?')->execute([$id]);
     $pdo->prepare('DELETE FROM person_search WHERE person_id=CAST(? AS INTEGER)')->execute([$id]);
+    // témoins / parrains (sans clé étrangère) : la fiche comme témoin ailleurs, et les témoins de ses événements (gardés dans l'instantané)
+    $pdo->prepare('DELETE FROM event_witnesses WHERE person_id=?')->execute([$id]);
+    if($ids)$pdo->prepare('DELETE FROM event_witnesses WHERE event_id IN ('.implode(',',array_fill(0,count($ids),'?')).')')->execute($ids);
     $pdo->prepare('DELETE FROM persons WHERE id=?')->execute([$id]);
     log_change($pdo,'person',$id,'delete','Suppression de '.full_name($person),$person+['_restore_kind'=>'person_delete','_snapshot'=>$snapshot],null);
     return ['id'=>$id];
@@ -11868,6 +11955,12 @@ function person_delete_snapshot(PDO $pdo,int $personId): array
             foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)$snapshot['links'][$table][]=$row;
         }
     }
+    // Témoins, parrains, marraines (pas de clé étrangère) : ceux de la fiche ailleurs, et ceux de ses événements
+    if(in_array('event_witnesses',$tables,true)){
+        $marks=$eventIds?' OR event_id IN ('.implode(',',array_fill(0,count($eventIds),'?')).')':'';
+        $stmt=$pdo->prepare("SELECT * FROM event_witnesses WHERE person_id=?{$marks}");$stmt->execute([$personId,...$eventIds]);
+        foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)$snapshot['links']['event_witnesses'][]=$row;
+    }
     return $snapshot;
 }
 
@@ -11892,7 +11985,11 @@ function restore_deleted_person(PDO $pdo,array $change,array $before): array
             if(!preg_match('/^[a-z0-9_]+$/',(string)$ref['table'].(string)$ref['column']))continue;
             $pdo->prepare('UPDATE "'.$ref['table'].'" SET "'.$ref['column'].'"=? WHERE id=? AND "'.$ref['column'].'" IS NULL')->execute([$ref['value'],(int)$ref['id']]);
         }
-        foreach($snapshot['links']??[] as $table=>$rows){foreach($rows as $row)$insert((string)$table,$row);}
+        foreach($snapshot['links']??[] as $table=>$rows){foreach($rows as $row){
+            // un témoin dont la fiche ou l'événement n'existe plus n'est pas remis (pas de clé étrangère pour le refuser)
+            if($table==='event_witnesses'&&(!record_exists($pdo,'persons',(int)($row['person_id']??0))||!record_exists($pdo,'events',(int)($row['event_id']??0)))){$skipped++;continue;}
+            $insert((string)$table,$row);
+        }}
     }
     rebuild_search($pdo,$personId);
     log_change($pdo,'person',$personId,'restore','Restauration de la fiche supprimée '.full_name($person),null,['restored_from_change_id'=>(int)$change['id'],'person_id'=>$personId,'skipped'=>$skipped]);
@@ -12120,6 +12217,7 @@ function delete_event(PDO $pdo,array $data): array
     $sourceLinks=$pdo->prepare("SELECT * FROM source_links WHERE entity_type='event' AND entity_id=?");$sourceLinks->execute([$id]);
     $notes=$pdo->prepare("SELECT * FROM notes WHERE entity_type='event' AND entity_id=?");$notes->execute([$id]);
     $labelLinks=$pdo->prepare("SELECT * FROM label_links WHERE entity_type='event' AND entity_id=?");$labelLinks->execute([$id]);
+    $witnesses=$pdo->prepare('SELECT * FROM event_witnesses WHERE event_id=?');$witnesses->execute([$id]);
     $snapshot=[
         '_restore_kind'=>'event_delete',
         'event'=>$before,
@@ -12127,7 +12225,9 @@ function delete_event(PDO $pdo,array $data): array
         'source_links'=>$sourceLinks->fetchAll(),
         'notes'=>$notes->fetchAll(),
         'label_links'=>$labelLinks->fetchAll(),
+        'witnesses'=>$witnesses->fetchAll(), // témoins, parrains : remis à la restauration
     ];
+    $pdo->prepare('DELETE FROM event_witnesses WHERE event_id=?')->execute([$id]);
     $pdo->prepare("DELETE FROM media_links WHERE entity_type='event' AND entity_id=?")->execute([$id]);
     $pdo->prepare("DELETE FROM source_links WHERE entity_type='event' AND entity_id=?")->execute([$id]);
     $pdo->prepare("DELETE FROM notes WHERE entity_type='event' AND entity_id=?")->execute([$id]);

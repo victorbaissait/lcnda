@@ -438,7 +438,7 @@
         injectCss();
         let id = 0, name = 'Mon diaporama', show = newShow();
         if (ctx.id) { try { const r = await api('slideshow', {id: ctx.id}); if (r.show?.mode === 'keynote') return ext.openKeynote ? ext.openKeynote({...ctx, preload: r}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); id = r.id; name = r.name; show = {...newShow(), ...(r.show || {})}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); } catch (e) { return toast(e.message, 'error'); } }
-        if (ctx.preset?.show) { show = {...newShow(), ...ctx.preset.show}; name = ctx.preset.name || name; }
+        if (ctx.preset?.show) { show = {...newShow(), ...ctx.preset.show}; show.slides = (Array.isArray(show.slides) ? show.slides : []).filter(x => x && typeof x === 'object').map(x => ({...x, dur: Math.min(600, Math.max(1, Number(x.dur) || 5))})); name = ctx.preset.name || name; }
         let cur = 0, dirty = !!ctx.preset, t = 0, playing = false, raf = 0, t0 = 0, p0 = 0, recording = null, hist = [], hi = -1, histT = 0;
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-ss-dlg';
         const ui = UI(), extra = `<span class="h-ss-extra" data-tbg="ss-top" data-tbg-label="Barre du haut (format, style, musique)">
@@ -710,10 +710,11 @@
         });
         // glisser une diapositive pour changer l'ordre
         let dragI = -1;
-        dlg.addEventListener('dragstart', e => { const li = e.target.closest('[data-ss-i]'); if (!li) return; dragI = Number(li.dataset.ssI); e.dataTransfer.effectAllowed = 'move'; });
+        dlg.addEventListener('dragstart', e => { const li = e.target.closest?.('[data-ss-i]'); if (!li) return; dragI = Number(li.dataset.ssI); e.dataTransfer.effectAllowed = 'move'; });
         dlg.addEventListener('dragover', e => { if (dragI >= 0 && e.target.closest('[data-ss-i]')) e.preventDefault(); });
         dlg.addEventListener('drop', async e => { const li = e.target.closest('[data-ss-i]'); if (dragI < 0 || !li) return; e.preventDefault(); const to = Number(li.dataset.ssI); const [m] = show.slides.splice(dragI, 1); show.slides.splice(to, 0, m); cur = to; dragI = -1; touch(); await rebuild(); });
         dlg.addEventListener('dragend', () => { dragI = -1; });
+        dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); if (document.fullscreenElement) return; close(); });
         dlg.addEventListener('keydown', e => {
             if ([...document.querySelectorAll('dialog[open]')].at(-1) !== dlg) return; // une fenêtre par-dessus garde ses touches
@@ -732,6 +733,20 @@
     ext.openSlideshow = open;
     ext.slideshowInternals = {makeEngine, mapBackground, whenOf, fullDate};
     ext.editToolsExtra = ext.editToolsExtra || [];
+    /** ⤒ Rouvrir un diaporama exporté (« 💾 Fichier », type lcnda-diaporama) : il s'ouvre dans l'éditeur, tel quel (cartes animées,
+     *  voix, musique comprises), et entre dans la base au premier 💾 Enregistrer. */
+    function importShowFile(again) {
+        const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json'; inp.hidden = true; inp.dataset.fpDone = '1';
+        inp.addEventListener('change', async () => {
+            const f = inp.files?.[0]; inp.remove(); if (!f) return;
+            let data = null; try { data = JSON.parse(await f.text()); } catch (_) {}
+            if (data?.type === 'lcnda-presentation') return toast('Ce fichier est une présentation : utilise « ⤒ Importer une présentation ».', 'error');
+            if (data?.type !== 'lcnda-diaporama' || !data.show || !Array.isArray(data.show.slides)) return toast('Ce fichier n’est pas un diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier).', 'error');
+            if (data.show.mode === 'keynote' && ext.openKeynote) return toast('Ce fichier est une présentation : utilise « ⤒ Importer une présentation ».', 'error');
+            open({preset: {show: data.show, name: `${String(data.name || 'Diaporama').slice(0, 180)} (importé)`}, onSaved: again, onClose: again});
+        });
+        document.body.appendChild(inp); inp.click();
+    }
     /* « ＋ Nouveau » : un diaporama (photos, titres, cartes, voix) ou une présentation façon Keynote (heritage-keynote.js) */
     const KIND_KEY = 'genealogie-slideshow-kind';
     function chooseKind(again) {
@@ -748,8 +763,8 @@
         create: again => chooseKind(again),
         rename: (id, name) => post('rename_slideshow', {id, name}),
         remove: id => post('delete_slideshow', {id}), createLabel: '＋ Nouveau',
-        extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une vie</button><button type="button" class="button secondary" data-et-x="kimport" title="PowerPoint (.pptx), OpenDocument (.odp), PDF, images, Markdown, texte, JSON">⤒ Importer une présentation</button>',
-        onExtra: (k, again) => { if (k === 'story') open({story: true, onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
+        extra: '<button type="button" class="button secondary" data-et-x="story" title="Les photos, les lieux et la vie d’une personne, en diaporama tout fait">✨ Récit d’une vie</button><button type="button" class="button secondary" data-et-x="kimport" title="PowerPoint (.pptx), OpenDocument (.odp), PDF, images, Markdown, texte, JSON">⤒ Importer une présentation</button><button type="button" class="button secondary" data-et-x="ssimport" title="Un fichier de diaporama exporté par LCNDA (⤓ Exporter → 💾 Fichier)">⤒ Importer un diaporama</button>',
+        onExtra: (k, again) => { if (k === 'ssimport') return importShowFile(again); if (k === 'story') open({story: true, onSaved: again, onClose: again}); if (k === 'kimport') ext.importPresentation ? ext.importPresentation({onSaved: again, onClose: again}) : toast('L’éditeur de présentation n’est pas chargé.', 'error'); }});
 
     /* ✨ sur la fiche d'une personne : un bouton dans la rangée du haut (ext.afterPerson, sans toucher app.js) */
     ext.afterPerson = ext.afterPerson || [];

@@ -37,7 +37,16 @@ function undo_comparable(array $row): array
 /** La dernière modification du journal et ce qu'on peut en faire : ['available'=>bool, 'mode'=>'revert'|'restore', …]. */
 function undo_candidate(PDO $pdo): array
 {
-    $row = $pdo->query("SELECT * FROM change_log WHERE entity_type NOT IN ('meta','app_settings','settings') ORDER BY id DESC LIMIT 1")->fetch();
+    // les lignes « satellites » écrites juste après une modification (étiquettes, témoins d'un événement) ne cachent pas
+    // la vraie modification : ⌘Z regarde celle d'avant si elle date du même moment
+    $rows = $pdo->query("SELECT * FROM change_log WHERE entity_type NOT IN ('meta','app_settings','settings') ORDER BY id DESC LIMIT 12")->fetchAll();
+    $satellite = static fn($r) => ($r['action'] ?? '') === 'labels' || (($r['action'] ?? '') === 'update' && str_starts_with((string) ($r['summary'] ?? ''), 'Mise à jour des témoins'));
+    $row = $rows[0] ?? false;
+    for ($i = 0; $row && $satellite($row) && isset($rows[$i + 1]); $i++) {
+        $next = $rows[$i + 1];
+        if (abs(strtotime((string) $row['created_at']) - strtotime((string) $next['created_at'])) > 60) { break; }
+        $row = $next;
+    }
     if (!$row) { return ['available' => false, 'reason' => 'Le journal des modifications est vide.']; }
     $base = ['id' => (int) $row['id'], 'summary' => (string) $row['summary'], 'created_at' => (string) $row['created_at'], 'entity_type' => (string) $row['entity_type']];
     $before = json_decode((string) ($row['before_json'] ?? ''), true) ?: [];
@@ -56,7 +65,32 @@ function undo_candidate(PDO $pdo): array
         if (array_intersect_key($cur, $aft) != $aft) { return $base + ['available' => false, 'reason' => 'La fiche a été modifiée depuis, autrement.']; }
         return $base + ['available' => true, 'mode' => 'revert'];
     }
-    return $base + ['available' => false, 'reason' => 'Ce type de modification ne s’annule pas automatiquement (le journal des modifications en garde la trace).'];
+    // 🔒 verrouillage / déverrouillage d'une fiche : on remet l'état d'avant
+    if (in_array($row['action'], ['lock', 'unlock'], true) && $row['entity_type'] === 'person' && !empty($after['id'])) {
+        $stmt = $pdo->prepare('SELECT is_locked FROM persons WHERE id=?'); $stmt->execute([(int) $after['id']]); $now = $stmt->fetchColumn();
+        if ($now === false) { return $base + ['available' => false, 'reason' => 'La fiche n’existe plus.']; }
+        if ((int) $now !== (int) ($after['is_locked'] ?? 0)) { return $base + ['available' => false, 'reason' => 'Le verrou de la fiche a déjà changé depuis : rien à annuler.']; }
+        return $base + ['available' => true, 'mode' => 'lock'];
+    }
+    // 👪 un lien de parenté ajouté : on le retire (seulement s'il n'emporte rien avec lui, comme « Retirer le lien »)
+    if ($row['action'] === 'add-relation' && !empty($after['related_id']) && !empty($after['person_id'])) {
+        if (!record_exists($pdo, 'persons', (int) $after['person_id']) || !record_exists($pdo, 'persons', (int) $after['related_id'])) { return $base + ['available' => false, 'reason' => 'Une des deux fiches n’existe plus.']; }
+        return $base + ['available' => true, 'mode' => 'unrelate'];
+    }
+    // ＋ une fiche tout juste créée, sans rien d'autre depuis : on la retire (elle reste restaurable, « ↷ Rétablir »)
+    if ($row['action'] === 'create' && $row['entity_type'] === 'person' && (int) $row['entity_id'] > 0) {
+        $id = (int) $row['entity_id'];
+        $stmt = $pdo->prepare('SELECT * FROM persons WHERE id=?'); $stmt->execute([$id]); $current = $stmt->fetch();
+        if (!$current) { return $base + ['available' => false, 'reason' => 'La fiche n’existe plus.']; }
+        $cur = undo_comparable($current); $aft = array_intersect_key(undo_comparable($after), $cur);
+        unset($cur['is_bookmarked'], $aft['is_bookmarked'], $cur['is_start'], $aft['is_start']);
+        if (array_intersect_key($cur, $aft) != $aft) { return $base + ['available' => false, 'reason' => 'La fiche a été modifiée depuis sa création : pour la retirer, ouvre-la et choisis « Supprimer la fiche ».']; }
+        $snap = function_exists('person_delete_snapshot') ? person_delete_snapshot($pdo, $id) : ['rows' => ['?'], 'nulls' => [], 'links' => []];
+        $attached = array_filter(array_merge(array_values($snap['rows'] ?? []), array_values($snap['nulls'] ?? []), array_values($snap['links'] ?? [])), static fn($v) => !empty($v));
+        if ($attached) { return $base + ['available' => false, 'reason' => 'Des éléments ont été ajoutés à cette fiche depuis sa création (événements, liens, notes, médias…) : pour la retirer, ouvre-la et choisis « Supprimer la fiche ».']; }
+        return $base + ['available' => true, 'mode' => 'uncreate'];
+    }
+    return $base + ['available' => false, 'reason' => 'Celle-ci ne s’annule pas d’un coup de ⌘Z : défais-la à la main (Maintenance → Journal des modifications montre ce qui a changé).'];
 }
 
 function undo_change(PDO $pdo, array $data): array
@@ -66,6 +100,24 @@ function undo_change(PDO $pdo, array $data): array
         throw new RuntimeException('La dernière modification a changé entre-temps : rien n’a été annulé.');
     }
     if ($candidate['mode'] === 'restore') { return ['undone' => $candidate['summary'], 'result' => restore_change($pdo, ['id' => $candidate['id']])]; }
+    if (in_array($candidate['mode'], ['lock', 'unlock', 'unrelate', 'uncreate'], true)) {
+        $row = $pdo->query('SELECT * FROM change_log WHERE id=' . (int) $candidate['id'])->fetch();
+        $before = json_decode((string) ($row['before_json'] ?? ''), true) ?: [];
+        $after = json_decode((string) ($row['after_json'] ?? ''), true) ?: [];
+        if ($candidate['mode'] === 'lock') {
+            $id = (int) $after['id'];
+            set_person_lock($pdo, ['id' => $id, 'locked' => (int) ($before['is_locked'] ?? 0)]);
+            return ['undone' => (string) $row['summary'], 'person_id' => $id, 'redo' => ['action' => 'set_person_lock', 'body' => ['id' => $id, 'locked' => (int) ($after['is_locked'] ?? 0)]]];
+        }
+        if ($candidate['mode'] === 'unrelate') {
+            $rel = ['person_id' => (int) $after['person_id'], 'related_id' => (int) $after['related_id'], 'relation_type' => (string) ($after['relation_type'] ?? '')];
+            remove_relation($pdo, $rel);
+            return ['undone' => (string) $row['summary'], 'person_id' => $rel['person_id'], 'redo' => ['action' => 'add_relation', 'body' => $rel]];
+        }
+        $id = (int) $row['entity_id'];
+        delete_person($pdo, ['id' => $id]);
+        return ['undone' => (string) $row['summary'], 'person_id' => 0, 'deleted_person_id' => $id, 'redo' => ['action' => 'undo_last']];
+    }
     $row = $pdo->query('SELECT * FROM change_log WHERE id=' . (int) $candidate['id'])->fetch();
     $before = json_decode((string) $row['before_json'], true) ?: [];
     $table = $row['entity_type'] === 'person' ? 'persons' : 'events';

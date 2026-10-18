@@ -84,6 +84,11 @@ html.a11y-shapes .histogram-column:nth-child(even) > * { background-image: repea
 html.a11y-zoom #workspace, html.a11y-zoom .sidebar-content, html.a11y-zoom .sidebar-top, html.a11y-zoom .sidebar-footer,
 html.a11y-zoom .toast-region > .toast, html.a11y-zoom dialog.modal[open]:not(.is-full) > * { zoom: var(--a11y-zoom, 1); }
 html.a11y-zoom dialog.modal[open]:not(.is-full) { overflow: auto; }
+/* grand texte, espacements : sur la fiche, le nom prend toute la largeur et les outils (Sosa, état, boutons) passent dessous */
+html.a11y-zoom .person-hero, html.a11y-spacing .person-hero { grid-template-columns: auto minmax(0, 1fr); }
+html.a11y-zoom .person-hero-tools, html.a11y-spacing .person-hero-tools { grid-column: 1 / -1; justify-items: start; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+html.a11y-zoom .person-hero-actions, html.a11y-spacing .person-hero-actions { flex-direction: row; flex-wrap: wrap; border-left: 0; padding-left: 0; }
+html.a11y-simple.a11y-zoom .workspace { padding-bottom: calc(72px * var(--a11y-zoom, 1)); }
 /* la colonne de gauche s'élargit avec le texte (sinon ses boutons débordent) */
 html.a11y-zoom { --sidebar: min(calc(320px * var(--a11y-zoom, 1)), 42vw); }
 @media (max-width: 1180px) { html.a11y-zoom { --sidebar: min(calc(288px * var(--a11y-zoom, 1)), 42vw); } }

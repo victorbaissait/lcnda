@@ -67,8 +67,16 @@
     /* ⌨️ un raccourci clavier se lit dans la bulle d'aide : data-shortcut="⌘S" → « Enregistrer (⌘S) » */
     function shortcutTip(el) { const k = el.dataset.shortcut; if (!k || el.dataset.scDone === k) return; el.dataset.scDone = k; const t = (el.getAttribute('title') || el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s*\([^()]*\)\s*$/, m => (m.includes(k) ? '' : m)); el.title = `${t} (${k})`; }
     const scan = root => { root.querySelectorAll?.('button:not([data-ia-done]), label.button:not([data-ia-done])').forEach(tidy); root.querySelectorAll?.('input[type=file]:not([data-fp-done])').forEach(filePick); root.querySelectorAll?.('[data-shortcut]').forEach(shortcutTip); if (root.matches?.('[data-shortcut]')) shortcutTip(root); };
+    /* ⏎ Entrée dans un champ d'une fenêtre = enregistrer (pas fermer) : le × d'en-tête et « Annuler » (value="cancel")
+     * sans type étaient les premiers boutons d'envoi du formulaire, donc ceux qu'Entrée « cliquait » (fenêtre fermée,
+     * saisie perdue). Ils deviennent de simples boutons qui ferment la fenêtre ; Entrée va au bouton principal. */
+    function fixCancel(root) {
+        const list = root.matches?.('dialog form button[value="cancel"]:not([type])') ? [root] : [...(root.querySelectorAll?.('form button[value="cancel"]:not([type])') || [])].filter(b => b.closest('dialog'));
+        list.forEach(b => { b.type = 'button'; if (b.dataset.lcCancel) return; b.dataset.lcCancel = '1'; b.addEventListener('click', () => { const d = b.closest('dialog'); if (d?.open) d.close('cancel'); }); });
+    }
+    fixCancel(document);
     let queued = new Set(), timer = 0;
-    new MutationObserver(list => { list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) queued.add(n); })); clearTimeout(timer);
+    new MutationObserver(list => { list.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) { queued.add(n); fixCancel(n); } })); clearTimeout(timer);
         timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (!n.isConnected) return; if (n.matches?.('button')) tidy(n); scan(n); narrow(n); }); }, 40); })
         .observe(document.documentElement, {childList: true, subtree: true});
     document.addEventListener('DOMContentLoaded', () => scan(document));

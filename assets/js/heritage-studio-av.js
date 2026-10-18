@@ -56,6 +56,7 @@
         if (id) ext.editorKeysAttach?.(dl, id === 'video' ? 'montage' : id); // ⌨️ raccourcis à soi
         const close = async () => { if (await onClose?.() === false) return; dl.close(); };
         dl.querySelector('[data-avx-close]').addEventListener('click', close);
+        dl.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); close(); }); // « Annuler » du choix d'un fichier envoie aussi « cancel » : on l'ignore
         dl.addEventListener('close', () => dl.remove());
         dl.showModal();
@@ -64,11 +65,11 @@
 
     /** Choisir un son, une vidéo ou (kind 'visual') une vidéo ou une photo, ou (kind 'any') un rush : la fenêtre unique des médias
      *  (un fichier de l'ordinateur y entre dans les Médias et se coche). Résout {src, title, media, kind} — une liste si multiple — ou null. */
-    async function pickOther(kind, {multiple = false} = {}) {
+    async function pickOther(kind, {multiple = false, eyebrow = ''} = {}) {
         const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des médias n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
         const types = kind === 'any' ? ['video', 'image', 'audio'] : kind === 'visual' ? ['video', 'image'] : [kind];
         const title = kind === 'any' ? (multiple ? 'Ajouter des rushes' : 'Ajouter un rush') : kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son';
-        const r = await P.openMediaPicker({types, multiple, eyebrow: 'ASSEMBLER', title, ...(multiple ? {} : {okLabel: 'Ajouter'})});
+        const r = await P.openMediaPicker({types, multiple, eyebrow: eyebrow || (kind === 'audio' ? 'SON' : 'MONTAGE'), title, ...(multiple ? {} : {okLabel: 'Ajouter'})});
         if (!r) return null;
         const conv = it => ({src: url(it.filename), title: it.title || it.filename, kind: it.media_type, media: {...it, kind: it.media_type, duration_seconds: it.duration, exists: true}});
         return multiple ? (Array.isArray(r) ? r : [r]).map(conv) : conv(r);
@@ -649,10 +650,13 @@
         P.sources.forEach(x => { if (x.folder && !fIds.has(x.folder)) delete x.folder; });
         const okS = c => c && Number.isInteger(c.s) && c.s >= 0 && c.s < P.sources.length;
         P.v1 = arr(d?.v1).filter(okS); P.v2 = arr(d?.v2).filter(okS); P.audio = arr(d?.audio).filter(okS); P.texts = arr(d?.texts).filter(x => x && typeof x.text === 'string');
+        // look, tf, kf, fx, afx d'un morceau : toujours des objets (un ancien enregistrement les rendait en [] : couleurs perdues)
+        const objOf = v => (v && typeof v === 'object' && !Array.isArray(v) ? v : {});
+        [...P.v1, ...P.v2, ...P.audio, ...P.texts].forEach(c => ['look', 'tf', 'kf', 'fx', 'afx'].forEach(k => { if (k in c) c[k] = objOf(c[k]); }));
         if (arr(d?.tracks).length) P.tracks = arr(d.tracks).filter(t => t && typeof t.id === 'string' && ['v', 'main', 't', 'a'].includes(t.kind)).map(t => ({id: t.id.slice(0, 12), kind: t.kind, name: String(t.name || '').slice(0, 60), ...(t.hidden ? {hidden: true} : {})}));
         if (!P.tracks.some(t => t.kind === 'main')) P.tracks.splice(1, 0, {id: 'V1', kind: 'main', name: 'Vidéo 1'});
-        if (d?.look && typeof d.look === 'object') P.look = {...P.look, ...d.look};
-        if (d?.fx && typeof d.fx === 'object') P.fx = {...P.fx, ...d.fx};
+        if (d?.look && typeof d.look === 'object' && !Array.isArray(d.look)) P.look = {...P.look, ...d.look};
+        if (d?.fx && typeof d.fx === 'object' && !Array.isArray(d.fx)) P.fx = {...P.fx, ...d.fx};
         P.fadeStart = !!d?.fadeStart; P.fadeEnd = !!d?.fadeEnd;
         if (ASPECTS.some(a => a[0] === d?.aspect)) P.aspect = d.aspect;
         P.blurBars = !!d?.blurBars; P.kbAuto = !!d?.kbAuto;
@@ -1292,7 +1296,7 @@
                 P.sources.push(src); dirty = true; drawRush(); return P.sources.length - 1;
             } catch (e) { toast(`${o.title || 'Fichier'} : ${e.message}`, 'error'); return null; }
         };
-        const addSource = async kind => { const o = await pickOther(kind); if (!o) return null; if (kind === 'visual') kind = o.kind === 'image' ? 'image' : 'video'; return pushSource(o, kind); };
+        const addSource = async kind => { const o = await pickOther(kind, {eyebrow: 'MONTAGE'}); if (!o) return null; if (kind === 'visual') kind = o.kind === 'image' ? 'image' : 'video'; return pushSource(o, kind); };
         // poser un rush sur la frise : à la suite (Vidéo 1), en incrustation ou en son, au moment voulu
         const placeRush = (s, how, at = null) => {
             const so = P.sources[s]; if (!so) return; const t = at ?? eng?.t ?? 0;
@@ -1374,7 +1378,7 @@
             if (n) toast(`${n} rush${n > 1 ? 'es' : ''} ajouté${n > 1 ? 's' : ''} : glisse-les sur la frise.`);
         });
         $('[data-mt-pane="rush"]').addEventListener('click', async e => {
-            if (e.target.closest('[data-mt-rbase]')) { const list = await pickOther('any', {multiple: true}); for (const o of list || []) await pushSource(o, o.kind); return; } // plusieurs rushes d'un coup
+            if (e.target.closest('[data-mt-rbase]')) { const list = await pickOther('any', {multiple: true, eyebrow: 'MONTAGE'}); for (const o of list || []) await pushSource(o, o.kind); return; } // plusieurs rushes d'un coup
             if (e.target.closest('[data-mt-rnewdir]')) { if (await newFolder(rushDir)) drawRush(true); return; }
             const crumb = e.target.closest('[data-mt-rdir]'); if (crumb) { rushDir = crumb.dataset.mtRdir; return drawRush(true); }
             const fo = e.target.closest('[data-mt-rfolder]');
@@ -1408,7 +1412,7 @@
             }
         });
         // glisser un rush sur une piste de la frise
-        $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fo = e.target.closest('[data-mt-rfolder]'); if (fo) { e.dataTransfer.setData('text/x-lcnda-rfolder', fo.dataset.mtRfolder); e.dataTransfer.effectAllowed = 'move'; return; } const fig = e.target.closest('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copyMove'; });
+        $('[data-mt-pane="rush"]').addEventListener('dragstart', e => { const fo = e.target.closest?.('[data-mt-rfolder]'); if (fo) { e.dataTransfer.setData('text/x-lcnda-rfolder', fo.dataset.mtRfolder); e.dataTransfer.effectAllowed = 'move'; return; } const fig = e.target.closest?.('[data-mt-rush]'); if (!fig) return; e.dataTransfer.setData('text/x-lcnda-rush', fig.dataset.mtRush); e.dataTransfer.effectAllowed = 'copyMove'; });
         const tlEl = $('[data-mt-tl]');
         // la piste visée : celle qui est à la hauteur de la souris (même au-dessus d'un morceau, de la tête de lecture ou du nom de la piste)
         const laneAt = (y, target) => [...tlEl.querySelectorAll('[data-mt-lane]')].find(l => { const r = l.getBoundingClientRect(); return y >= r.top && y < r.bottom; }) || target?.closest?.('[data-mt-lane]');

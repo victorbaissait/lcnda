@@ -48,6 +48,7 @@ function save_montage_project(PDO $pdo, array $data): array
         if (!is_array($s) || !montage_src_ok((string) ($s['src'] ?? ''))) { throw new RuntimeException('Un rush du projet n’est pas un média de la base.'); }
         if (!in_array($s['kind'] ?? '', ['video', 'image', 'audio'], true)) { throw new RuntimeException('Rush illisible.'); }
     }
+    $p = json_keep_objects($p, ['look', 'tf', 'kf', 'fx', 'afx', 'duck']); // couleurs, cadrage, images clés d'un morceau : des objets, même vides
     $json = json_encode($p, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     if ($json === false) { throw new RuntimeException('Projet illisible.'); }
     if (strlen($json) > MONTAGE_PROJECT_MAX) { throw new RuntimeException('Projet trop lourd (4 Mo au plus).'); }

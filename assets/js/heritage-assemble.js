@@ -61,6 +61,7 @@
         ext.rtEnsureCss?.(); ext.tbApply?.(dl, 'assemble'); UI?.harmonizeTopbar?.(dl.querySelector('.h-as-head')); ext.fullInit?.(dl, 'assemble');
         const close = async () => { if (dirty && layers.length > 1 && !await A().confirmBox('L’assemblage non enregistré sera perdu.', {title: 'Fermer sans enregistrer l’assemblage ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; dl.close(); };
         $('[data-as-close]').addEventListener('click', close);
+        dl.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); close(); });
         dl.addEventListener('close', () => dl.remove());
         dl.showModal();

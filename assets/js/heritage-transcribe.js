@@ -388,6 +388,7 @@
         const onKeyUp = e => { if (e.key === ' ') { space = false; stage.dataset.tool = tool; } };
         document.addEventListener('keydown', onKey, true); document.addEventListener('keyup', onKeyUp, true);
         async function close() { if (dirty && !await A().confirmBox('Les dernières modifications de la transcription seront perdues.', {title: 'Fermer sans enregistrer la transcription ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; document.removeEventListener('keydown', onKey, true); document.removeEventListener('keyup', onKeyUp, true); ro.disconnect(); dlg.close(); dlg.remove(); ctx.onClose?.(); }
+        dlg.dataset.ownClose = '1'; // Échap : l'outil demande lui-même s'il faut (une seule question « Fermer sans enregistrer ? »)
         dlg.addEventListener('cancel', e => { e.preventDefault(); close(); });
         const ro = new ResizeObserver(() => { if (imgW && !drag) { applyView(); } }); ro.observe(stage);
         paintMirror(); paintPeople(); await loadImage();

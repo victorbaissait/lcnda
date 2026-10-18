@@ -1351,6 +1351,16 @@
             ['Pourquoi Listes → Lieux montre moins de lieux ?', 'La liste ne montre que les lieux de ta généalogie (et ceux que tu as créés), pas les 80 000 communes de référence. Listes → Personnes ne montre pas les animaux, et un mariage affiche les deux conjoints.'],
             ['Que garde un export GEDCOM ?', 'Les étiquettes, les animaux, les titres des notes et les dates en calendrier républicain ou julien sont gardés, et l’import les relit. Un lien impossible (quelqu’un qui serait son propre ancêtre) est ignoré à l’import et signalé.'],
             ['Comment sont rangées les dates républicaines et très anciennes ?', 'Une date républicaine (« 15 brumaire an II ») reçoit son équivalent grégorien et son année, pour les tris et les âges. Les années avant l’an 1000 sont comprises (« vers 845 »).'],
+            ['Pourquoi le bouton affiche « Enregistrement… » ?', 'Pendant l’enregistrement, le bouton attend : un double-clic ou une Entrée répétée ne crée plus de doublon. Il redevient normal dès que c’est fini, même en cas d’erreur.'],
+            ['Que fait la touche Entrée dans une fenêtre ?', 'Dans une case d’une ligne, Entrée enregistre la fenêtre (comme le bouton bleu) ; elle ne la ferme plus en perdant ce qui a été tapé. Dans un grand texte, Entrée passe à la ligne.'],
+            ['Que veut dire « modifié dans une autre fenêtre » ?', 'Si la même fiche, le même tableau ou la même mise en page est ouvert dans deux onglets, LCNDA ne remplace plus en silence ce que l’autre a enregistré : recharge pour voir l’autre version, ou choisis « Enregistrer quand même » / « Garder ma version ».'],
+            ['Et si LCNDA ne répond plus ?', 'Le message « Pas de connexion avec LCNDA » le dit, ta saisie reste dans la fenêtre et « Réessayer » relance l’enregistrement. Si tu fermes ou recharges l’onglet avec une saisie non enregistrée, le navigateur demande d’abord.'],
+            ['Comment marche Échap ?', 'Échap ferme les fenêtres et les outils (dessin, maison…) quand rien n’est en cours. S’il y a des modifications, il demande d’abord, et appuyer plusieurs fois ne fait plus rien perdre. Dans une case de recherche, Échap la vide d’abord.'],
+            ['Que fait ⌘Z (Ctrl+Z) hors des éditeurs ?', 'Il annule tout de suite la dernière création de fiche (si rien n’y a été ajouté), un verrouillage ou un lien de parenté, avec « ↷ Rétablir ». Sinon il explique comment défaire à la main.'],
+            ['Que deviennent les témoins et parrains d’une fiche supprimée ?', 'Supprimer une fiche ou un événement retire aussi ses témoins et parrains ; la restauration les remet.'],
+            ['Comment rouvrir un diaporama exporté ?', 'Un fichier exporté par « ⤓ Exporter → 💾 Fichier » se rouvre avec « ⤒ Importer un diaporama » dans la liste des diaporamas.'],
+            ['Comment zoomer sur téléphone ?', 'Dans la maison, le dessin et la présentation, deux doigts zooment le plan ou la diapositive, pas la page.'],
+            ['Puis-je rattraper un widget retiré du tableau de bord ?', 'Oui : « ↶ Annuler » dans le message en bas à gauche. Un tableau de bord vide propose « ＋ Ajouter un widget ».'],
             ['À quoi sert la barre au-dessus des listes ?', 'Chercher, Filtrer, Liste | Fiches et Trier sont toujours au même endroit. Les filtres choisis s’affichent en pastilles bleues (« Femmes × ») : un clic sur une pastille la retire, « Tout effacer » les retire toutes. Chaque liste retient tes réglages, même après avoir fermé l’app. Dans Personnes, tu peux filtrer par genre, lieu de naissance et étiquette.'],
             ['Pourquoi l’app ne me demande plus « Es-tu sûr ? » avant de supprimer ?', 'Pour une note, un événement, une ligne, un élément dans un outil…, la suppression se fait tout de suite et un message en bas à gauche propose « ↶ Annuler » pendant 6 secondes (la souris dessus arrête le temps). Après Annuler, « ↷ Rétablir » refait la suppression. La question reste seulement pour ce qui ne se rattrape pas : une fiche entière, une base, vider la corbeille.'],
             ['Les fichiers CSV que je télécharge sont-ils sûrs ?', 'Oui : un texte qui commence par =, +, - ou @ est précédé d’une apostrophe, pour qu’Excel, Numbers ou LibreOffice ne le prennent pas pour une formule cachée.'],
@@ -1573,9 +1583,10 @@
     const faqSyn = w => FAQ_SYN[w] || FAQ_SYN[w.replace(/s$/, '')] || FAQ_SYN[w.replace(/(es|s|x)$/, 'e')] || FAQ_SYN[w.replace(/er$/, 'e')] || '';
     const faqFold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[’']/g, ' ');
     const faqStem = w => w.length > 4 ? w.replace(/(ements|ement|ations|ation|ees|es|s|x|e)$/, '') : w.replace(/s$/, '');
-    const faqWords = t => faqFold(t).split(/[^a-z0-9]+/).filter(w => w.length > 1 && !FAQ_STOP.has(w));
+    // un mot composé (« faire-part ») reste entier dans la question ; dans les textes, il compte entier et en morceaux
+    const faqWords = (t, query = false) => { const out = []; faqFold(t).split(/[^a-z0-9-]+/).forEach(tok => { const parts = tok.split('-').filter(Boolean); if (parts.length > 1) { out.push(parts.join('')); if (!query) out.push(...parts); } else if (parts[0]) out.push(parts[0]); }); return out.filter(w => w.length > 1 && !FAQ_STOP.has(w)); };
     function faqSearch(query) {
-        const words = faqWords(query);
+        const words = faqWords(query, true);
         if (!words.length) return null;
         const wanted = words.map(w => [faqStem(w), ...faqSyn(w).split(' ').filter(Boolean).map(faqStem)]);
         const hits = [];

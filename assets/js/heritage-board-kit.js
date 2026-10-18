@@ -483,7 +483,7 @@
         root.querySelectorAll('[data-bp-order]').forEach(box => {
             box.addEventListener('click', e => { const r = e.target.closest('.h-bp-row'); if (!r) return; if (e.target.closest('[data-bp-up]') && r.previousElementSibling) r.parentNode.insertBefore(r, r.previousElementSibling); if (e.target.closest('[data-bp-down]') && r.nextElementSibling) r.parentNode.insertBefore(r.nextElementSibling, r); });
             let dragged = null;
-            box.addEventListener('dragstart', e => { dragged = e.target.closest('.h-bp-row'); dragged?.classList.add('is-drag'); e.dataTransfer?.setData('text/plain', ''); });
+            box.addEventListener('dragstart', e => { dragged = e.target.closest?.('.h-bp-row'); dragged?.classList.add('is-drag'); e.dataTransfer?.setData('text/plain', ''); });
             box.addEventListener('dragend', () => { dragged?.classList.remove('is-drag'); dragged = null; });
             box.addEventListener('dragover', e => { if (!dragged) return; e.preventDefault(); const r = e.target.closest('.h-bp-row'); if (!r || r === dragged || r.parentNode !== box) return; const bb = r.getBoundingClientRect(); box.insertBefore(dragged, e.clientY < bb.top + bb.height / 2 ? r : r.nextSibling); });
         });

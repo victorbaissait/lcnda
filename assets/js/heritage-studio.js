@@ -1126,7 +1126,7 @@
             const blob = await canvasBlob(c, type, 0.93); saveBlobAs(blob, o.filename);
             if (o.saveCopy) { await rtUploadCopy(blob, {mediaId, title: copyTitle || title}); toast('Image téléchargée ; une copie est rangée dans les médias.'); }
         };
-        return UI.openExportDialog({title, defaultName: title, quality: false, saveCopy: !!mediaId, info: '',
+        return UI.openExportDialog({title, defaultName: title, quality: false, saveCopy: !!mediaId, copyChecked: !!mediaId, info: '',
             preview: async () => { const c = await full(), k = Math.min(1, 360 / Math.max(c.width, c.height)), t = document.createElement('canvas'); t.width = Math.max(1, Math.round(c.width * k)); t.height = Math.max(1, Math.round(c.height * k)); t.getContext('2d').drawImage(c, 0, 0, t.width, t.height); return t.toDataURL('image/jpeg', 0.85); },
             formats: [{id: png ? 'png' : 'jpg', run: run(png ? 'image/png' : 'image/jpeg')}, {id: png ? 'jpg' : 'png', run: run(png ? 'image/jpeg' : 'image/png')}, {id: 'print', run: run('print')}]});
     };
@@ -1155,7 +1155,7 @@
             const blob = await canvasBlob(c, type, 0.93); saveBlobAs(blob, x.filename);
             if (x.saveCopy) { await rtUploadCopy(blob, {mediaId, title: `${title} (avant / après)`}); toast('Avant / après téléchargé ; une copie est rangée dans les médias.'); }
         };
-        return UI.openExportDialog({title: `Avant / après — ${title}`, defaultName: `${title} avant-apres`, quality: false, saveCopy: !!mediaId, info: '',
+        return UI.openExportDialog({title: `Avant / après — ${title}`, defaultName: `${title} avant-apres`, quality: false, saveCopy: !!mediaId, copyChecked: !!mediaId, info: '',
             preview: async () => { // les réglages de l'avant / après vont sous les formats ; l'aperçu à droite
                 const main = [...document.querySelectorAll('dialog.ui-export')].pop()?.querySelector('.ui-export-formats'); if (main) main.after(box); else pimg.after(box);
                 redraw(); return pimg; },
@@ -1766,7 +1766,7 @@
         const isInside = (n, maybeChild) => { let hit = false; if (typeOf(n) === 'group') walk(n.children, x => { if (x === maybeChild) hit = true; }); return hit; };
         const zoneOf = (li, e) => { if (li.dataset.rtGin) return 'into'; const r = li.getBoundingClientRect(), y = (e.clientY - r.top) / r.height, grp = li.classList.contains('is-group'); return grp && y > 0.3 && y < 0.75 ? 'into' : y < 0.5 ? 'above' : 'below'; };
         const clearDrop = () => paneLayers.querySelectorAll('.drop-above,.drop-below,.drop-into').forEach(x => x.classList.remove('drop-above', 'drop-below', 'drop-into'));
-        paneLayers.addEventListener('dragstart', e => { const g = e.target.closest('[data-rt-grip]'); if (!g) return; dragId = g.closest('[data-rt-l]').dataset.rtL; e.dataTransfer.setData('text/x-lcnda-layer', dragId); e.dataTransfer.effectAllowed = 'move'; g.closest('li').classList.add('is-dragging'); });
+        paneLayers.addEventListener('dragstart', e => { const g = e.target.closest?.('[data-rt-grip]'); if (!g) return; dragId = g.closest('[data-rt-l]').dataset.rtL; e.dataTransfer.setData('text/x-lcnda-layer', dragId); e.dataTransfer.effectAllowed = 'move'; g.closest('li').classList.add('is-dragging'); });
         paneLayers.addEventListener('dragend', () => { dragId = ''; clearDrop(); paneLayers.querySelectorAll('.is-dragging').forEach(x => x.classList.remove('is-dragging')); });
         paneLayers.addEventListener('dragover', e => {
             if (!dragId) return; const li = e.target.closest('li[data-rt-l], li[data-rt-gin]'); if (!li) return;

@@ -148,7 +148,16 @@
     }
 
     /* ─────────── État ─────────── */
-    const st = () => (S().atelier ||= {project: 0, node: 'overview', sel: [], tags: [], q: '', type: '', sort: {col: 'title', dir: 1}, closed: {}});
+    // les autres écrans (tableau, calendrier, recueil…) ouvrent l'Atelier avec seulement {project, sel} : on complète avec les valeurs de départ
+    const ATELIER_DEF = () => ({project: 0, node: 'overview', sel: [], tags: [], q: '', type: '', sort: {col: 'title', dir: 1}, closed: {}});
+    const st = () => {
+        const s = S(), a = s.atelier && typeof s.atelier === 'object' ? s.atelier : (s.atelier = {}), d = ATELIER_DEF();
+        for (const k of Object.keys(d)) {
+            const want = d[k], have = a[k];
+            if (have === undefined || have === null || (Array.isArray(want) ? !Array.isArray(have) : typeof want === 'object' ? typeof have !== 'object' || Array.isArray(have) : false)) a[k] = want;
+        }
+        return a;
+    };
     let P = null; // projet chargé : {project, folders, items, people}
     const load = async id => { P = await api('atelier_project', {id}); P.byId = new Map(P.items.map(i => [Number(i.id), i])); P.fById = new Map(P.folders.map(f => [Number(f.id), f])); return P; };
     const kids = parent => P.folders.filter(f => (f.parent_id === null ? 0 : Number(f.parent_id)) === parent).sort((a, b) => a.position - b.position || a.id - b.id);

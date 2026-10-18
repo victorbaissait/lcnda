@@ -1,6 +1,50 @@
 (() => {
     'use strict';
 
+    /* 🛡 Un seul enregistrement à la fois dans une fenêtre (double-clic, clics répétés, Entrée répétée, réseau lent) :
+     * le formulaire d'une <dialog> déjà en train d'enregistrer ignore les nouveaux envois ; son bouton principal est
+     * désactivé (aspect C8) avec « Enregistrement… », et libéré dès que l'enregistrement est fini, réussi ou non
+     * (ou quand la fenêtre se ferme). Les écoutes « submit » sont enveloppées pour savoir quand leur travail (async) finit.
+     * Un formulaire qui gère déjà son propre bouton (il le désactive lui-même) garde son affichage. */
+    const SUBMIT_GUARD=(()=>{
+        const proto=EventTarget.prototype,origAdd=proto.addEventListener,origRemove=proto.removeEventListener,wrapped=new WeakMap();
+        const out={last:null,failSeq:0,okSeq:0};
+        proto.addEventListener=function(type,fn,opts){
+            if(type==='submit'&&typeof fn==='function'){
+                let w=wrapped.get(fn);
+                if(!w){w=function(ev){const r=fn.apply(this,arguments);if(r&&typeof r.then==='function'){const f=ev?.target;if(f&&Array.isArray(f._lcPending))f._lcPending.push(r);}return r;};wrapped.set(fn,w);}
+                return origAdd.call(this,type,w,opts);
+            }
+            return origAdd.call(this,type,fn,opts);
+        };
+        proto.removeEventListener=function(type,fn,opts){return origRemove.call(this,type,(type==='submit'&&typeof fn==='function'&&wrapped.get(fn))||fn,opts);};
+        const busyLabel=b=>/enregistr|ajout|créer|conserv|rattach|valid|import|lier|envoy/i.test(b.textContent||'')?'Enregistrement…':'Un instant…';
+        origAdd.call(document,'submit',ev=>{
+            const form=ev.target;if(!(form instanceof HTMLFormElement))return;
+            const dlg=form.closest('dialog');if(!dlg)return;
+            if(form._lcBusy){ev.preventDefault();ev.stopImmediatePropagation();return;}
+            form._lcBusy=true;form._lcPending=[];out.last={form,dialog:dlg};
+            const wasDirty=dlg.dataset.dirty==='1',seq=out.failSeq,okSeq=out.okSeq,btn=ev.submitter||form.querySelector('button[type="submit"],button:not([type])');
+            let touched=false,weDisabled=false,done=false;
+            const release=()=>{if(done)return;done=true;form._lcBusy=false;form._lcPending=null;dlg.removeEventListener('close',release);
+                if(touched&&btn){btn.innerHTML=btn._lcHtml;if(weDisabled)btn.disabled=false;btn.classList.remove('is-busy');btn.removeAttribute('aria-busy');btn.removeAttribute('aria-disabled');}};
+            dlg.addEventListener('close',release);
+            // l'aspect tout de suite (avant le travail de la fenêtre) ; « disabled » seulement après (certaines fenêtres
+            // regardent si leur bouton est actif pendant l'envoi) ; rendu aussitôt si l'envoi n'attend rien
+            if(btn&&btn.isConnected&&!btn.disabled){touched=true;btn._lcHtml=btn.innerHTML;btn.classList.add('is-busy');btn.setAttribute('aria-busy','true');btn.setAttribute('aria-disabled','true');btn.innerHTML=`<span class="ui-spin" aria-hidden="true"></span>${busyLabel(btn)}`;}
+            setTimeout(()=>{
+                if(done)return;const ps=form._lcPending||[];
+                if(!ps.length){release();return;}
+                if(touched&&btn.isConnected&&!btn.disabled){btn.disabled=true;weDisabled=true;}
+                Promise.allSettled(ps).then(()=>{if(wasDirty&&dlg.open&&(out.failSeq!==seq||out.okSeq===okSeq))dlg.dataset.dirty='1';release();}); // échec (ou rien d'enregistré) : la saisie reste « modifiée »
+            },0);
+        },true);
+        // 🚪 Recharger ou fermer l'onglet avec une fenêtre de saisie modifiée : le navigateur demande avant
+        origAdd.call(window,'beforeunload',ev=>{if(document.querySelector('dialog[open][data-dirty="1"]:not(#lightbox)')){ev.preventDefault();ev.returnValue='';return '';}});
+        return out;
+    })();
+    const NET_ERROR_MSG='Pas de connexion avec LCNDA : rien n’est perdu, réessaie.';
+
     // ── Réglages de l'interface rangés aussi dans la base (structure n°4, lib/settings.php) ──
     // Les réglages restent lus dans le localStorage (rapide, comme avant) ; la base en garde une copie pour qu'ils
     // suivent la sauvegarde complète et un autre ordinateur. Au démarrage : la base gagne pour les clés qu'elle
@@ -1146,11 +1190,16 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             init.headers = {...init.headers, 'Content-Type':'application/json', 'X-CSRF-Token':state.csrf};
             init.body = JSON.stringify({...options.body, csrf:state.csrf});
         }
-        const response = await fetch(url, init);
+        const writing = !!(options.method && options.method !== 'GET');
+        let response;
+        // réseau coupé, serveur arrêté : un message clair en français (au lieu de « Failed to fetch »)
+        try { response = await fetch(url, init); }
+        catch (error) { if (error?.name === 'AbortError') throw error; if (writing) SUBMIT_GUARD.failSeq++; const e = new Error(NET_ERROR_MSG); e.network = true; e.cause = error; throw e; }
         const data = await response.json().catch(() => ({error:'Réponse illisible du serveur'}));
-        if (!response.ok || data.error) throw new Error(data.error || `Erreur ${response.status}`);
+        if (!response.ok || data.error) { if (writing) SUBMIT_GUARD.failSeq++; const e = new Error(data.error || `Erreur ${response.status}`); e.status = response.status; e.conflict = response.status === 409 || !!data.conflict; throw e; }
         // Après une modification, le nombre de personnes affiché est recompté (création, suppression, fusion,
         // ajout d'un parent… : il n'était calculé qu'à l'ouverture de l'application).
+        if (writing) SUBMIT_GUARD.okSeq++;
         if (options.method && options.method !== 'GET' && action !== 'save_settings') { schedulePersonCountRefresh(); window.dispatchEvent(new CustomEvent('lcnda:data-changed', {detail: {action}})); }
         return data;
     }
@@ -1243,6 +1292,22 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             (isDanger?dialog.querySelector('[data-cb-cancel].button'):dialog.querySelector('[data-cb-ok]'))?.focus();
         });
     }
+    /** 🔁 Deux onglets sur le même éditeur (tableau, mise en page…) : « Recharger » (voir la version de l'autre fenêtre)
+     *  ou « Garder ma version (écraser) ». Renvoie 'reload', 'overwrite' ou null (× ou Échap : on continue sans enregistrer). */
+    function conflictBox({what='Ce document'}={}){
+        return new Promise(resolve=>{
+            const dialog=document.createElement('dialog');
+            dialog.className='modal small-modal confirm-box-dialog lc-conflict-dialog';
+            dialog.innerHTML=`<form method="dialog"><div class="modal-head"><div><span class="eyebrow">⚠️ ATTENTION</span><h2>Modifié dans une autre fenêtre</h2></div><button class="icon-button" type="button" data-cf="" aria-label="Fermer">×</button></div><p class="confirm-box-text">${escapeHtml(what)} a été modifié dans une autre fenêtre (ou un autre onglet) depuis que tu l’as ouvert ici. Tes changements ne sont pas perdus : ils restent affichés ici tant que tu ne choisis pas.</p><p class="confirm-box-text"><b>Recharger</b> : voir la version de l’autre fenêtre (tes derniers changements d’ici sont abandonnés).<br><b>Garder ma version</b> : enregistrer ce qui est ici à la place de l’autre version.</p><div class="modal-actions"><button type="button" class="button secondary" data-cf="overwrite">Garder ma version (écraser)</button><button type="submit" class="button" data-cf="reload">Recharger</button></div></form>`;
+            document.body.appendChild(dialog);
+            let answer=null;
+            dialog.querySelector('form').addEventListener('submit',e=>{e.preventDefault();answer='reload';dialog.close();});
+            dialog.querySelectorAll('button[type=button][data-cf]').forEach(b=>b.addEventListener('click',()=>{answer=b.dataset.cf||null;dialog.close();}));
+            dialog.addEventListener('close',()=>{dialog.remove();resolve(answer);});
+            dialog.showModal();
+            dialog.querySelector('[data-cf="reload"]')?.focus();
+        });
+    }
     /** Pluriels : plural(1,'personne') → « 1 personne », plural(3,'personne') → « 3 personnes », plural(2,'cheval','chevaux') ; 0 et 1 au singulier */
     function plural(n,one,many=''){const v=Number(n)||0;return `${v.toLocaleString('fr-FR')} ${Math.abs(v)<2?one:(many||(/[sxz]$/.test(one)?one:`${one}s`))}`;}
     /** 📭 Liste vide : toujours le même message clair, avec le bouton pour commencer.
@@ -1303,6 +1368,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const acts=item.querySelector('.ui-toast-acts');
         const buttons=[];
         if(opts.action&&opts.action.label)buttons.push(opts.action);
+        // pas de connexion pendant un enregistrement : « Réessayer » renvoie la fenêtre restée ouverte
+        if(kind==='error'&&typeof opts.retry!=='function'&&text===NET_ERROR_MSG){const last=SUBMIT_GUARD.last;if(last&&last.dialog.open&&last.form.isConnected)opts={...opts,retry:()=>{if(last.dialog.open)last.form.requestSubmit();}};}
         if(kind==='error'&&typeof opts.retry==='function')buttons.push({label:'Réessayer',run:opts.retry});
         (opts.actions||[]).forEach(a=>a&&a.label&&buttons.push(a));
         buttons.forEach(a=>{const b=document.createElement('button');b.type='button';b.className='ui-toast-btn';b.textContent=a.label;if(a.title)b.title=a.title;b.addEventListener('click',async e=>{e.stopPropagation();if(b.disabled)return;b.disabled=true;if(a.close!==false)close();try{await a.run?.(e);}catch(error){console.error(error);}});acts.appendChild(b);});
@@ -1981,7 +2048,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const code=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
         let index=0;
         document.addEventListener('keydown',event=>{
-            if(event.target.matches('input,textarea,select')||$('#lightbox')?.open)return;
+            if(event.target.matches?.('input,textarea,select')||$('#lightbox')?.open)return;
             const key=event.key.length===1?event.key.toLowerCase():event.key;
             index=key===code[index]?index+1:(key===code[0]?1:0);
             if(index===code.length){index=0;openArchiveRoom();}
@@ -3136,7 +3203,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     async function openPersonHistoryDialog(personId, detail = null) {
         let dialog = $('#person-history-dialog');
         if (!dialog) {
-            document.body.insertAdjacentHTML('beforeend', `<dialog class="modal person-history-modal" id="person-history-dialog"><div class="modal-head"><div><span class="eyebrow">HISTORIQUE</span><h2 id="person-history-title">Historique de la fiche</h2></div><button class="modal-close" data-close-person-history aria-label="Fermer">×</button></div><div class="modal-body" id="person-history-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-person-history>Fermer</button></div></dialog>`);
+            document.body.insertAdjacentHTML('beforeend', `<dialog class="modal person-history-modal" id="person-history-dialog"><div class="modal-head"><div><span class="eyebrow">HISTORIQUE</span><h2 id="person-history-title">Historique de la fiche</h2></div><button class="modal-close" type="button" data-close-person-history aria-label="Fermer">×</button></div><div class="modal-body" id="person-history-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-person-history>Fermer</button></div></dialog>`);
             dialog = $('#person-history-dialog');
             $$('[data-close-person-history]', dialog).forEach(button => button.addEventListener('click', () => dialog.close()));
         }
@@ -4369,12 +4436,26 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     async function undoLastChange(){
         const c=await api('undo_candidate');
-        if(!c.available)return toast(c.summary?`Impossible d’annuler « ${c.summary} » : ${c.reason}`:c.reason,'error');
+        // rien d'annulable d'un coup : un message doux (pas une erreur), qui dit quoi faire
+        if(!c.available)return toast(c.summary?`ℹ️ « ${c.summary} » ne s’annule pas automatiquement. ${c.reason}`:`ℹ️ ${c.reason}`);
+        const refresh=(r={})=>{if(r.deleted_person_id&&Number(state.currentPersonId)===Number(r.deleted_person_id)){state.currentPersonId=0;}if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);else setModule(state.module,false);};
+        // ce qui se défait sans risque (fiche tout juste créée, verrou, lien de parenté) : tout de suite, avec « ↷ Rétablir » (H7)
+        if(['uncreate','lock','unrelate'].includes(c.mode)){
+            const r=(await api('undo_change',{},{method:'POST',body:{id:c.id}})).result||{};
+            const redo=r.redo;
+            const doRedo=async()=>{try{
+                    if(redo?.action==='undo_last'){const n=await api('undo_candidate');if(!n.available||n.mode!=='restore')throw new Error(n.reason||'plus possible');const rr=(await api('undo_change',{},{method:'POST',body:{id:n.id}})).result||{};const pid=Number(rr.result?.entity_id||rr.result?.id||r.deleted_person_id)||0;if(pid)state.currentPersonId=pid;}
+                    else if(redo?.action)await api(redo.action,{},{method:'POST',body:redo.body||{}});
+                    toast(`↷ Rétabli : « ${c.summary} »`);refresh();
+                }catch(error){toast(`Impossible de rétablir : ${error.message||error}`,'error',{retry:doRedo});}};
+            toast(`↶ Annulé : « ${r.undone||c.summary} »`,'',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});
+            refresh(r);return;
+        }
         const when=c.created_at?new Date(c.created_at.replace(' ','T')+'Z').toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'}):'';
         if(!await confirmBox(`« ${c.summary} »${when?`\n(${when})`:''}\n\n${c.mode==='restore'?'Ce qui a été supprimé sera remis.':'La fiche reprendra exactement son état d’avant cette modification.'}`,{title:'Annuler la dernière modification ?',okLabel:'Annuler la modification',cancelLabel:'Garder',danger:true}))return;
         const r=await api('undo_change',{},{method:'POST',body:{id:c.id}});
         toast(`Annulé : ${r.result?.undone||c.summary}`);
-        if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);else setModule(state.module,false);
+        refresh();
     }
 
     // Échap dans une fenêtre de saisie : demander avant de perdre ce qui a été tapé
@@ -4385,6 +4466,17 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     document.addEventListener('submit',event=>{const d=event.target.closest?.('dialog');if(d)d.dataset.dirty='';},true);
     document.addEventListener('cancel',event=>{const d=event.target;if(!(d instanceof HTMLDialogElement)||d.id==='lightbox'||d.dataset.dirty!=='1'||d.dataset.ownClose)return;event.preventDefault();confirmBox('Ce que tu as tapé dans cette fenêtre sera perdu.',{title:'Fermer sans enregistrer ?',okLabel:'Fermer sans enregistrer',cancelLabel:'Continuer la saisie',danger:true}).then(ok=>{if(ok){d.dataset.dirty='';d.close();}});},true);
 
+    // Échap répété : Chrome / Electron ferment une fenêtre au 2e « cancel » refusé sans clic entre deux (même si on a demandé
+    // « Fermer sans enregistrer ? ») et la saisie était perdue. Échap passe donc par ici : la touche est retenue, et la fenêtre
+    // du dessus reçoit un « cancel » à nous (les questions et les éditeurs y répondent comme avant) ; personne ne le refuse → elle se ferme.
+    window.addEventListener('keydown',event=>{
+        if(event.key!=='Escape'||event.defaultPrevented||event.isComposing||event.metaKey||event.ctrlKey||event.altKey)return;
+        const d=[...document.querySelectorAll('dialog[open]')].filter(x=>{try{return x.matches(':modal');}catch(_){return false;}}).at(-1);
+        if(!d||d.id==='lightbox')return;
+        event.preventDefault();
+        const ev=new Event('cancel',{cancelable:true});d.dispatchEvent(ev);
+        if(!ev.defaultPrevented&&d.open)d.close();
+    });
     // Champs de date : « v », « av », « ap », « en » au début → proposer « vers », « avant », « après », « entre … et »
     const DATE_FIELD_SELECTOR='input[name="date_text"],input[name="create_event_date"],input[name="date_alternative"]';
     const DATE_WORDS=[['vers','vers '],['avant','avant '],['après','après '],['entre … et','entre  et ']];
@@ -5090,7 +5182,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         document.body.append(dialog);draw();
         let dragFrom=-1;
         list.addEventListener('click',e=>{const row=e.target.closest('[data-index]');if(!row)return;const i=Number(row.dataset.index);if(e.target.closest('[data-eye]')){rows[i].hidden=!rows[i].hidden;draw();list.querySelector(`[data-index="${i}"] [data-eye]`)?.focus();return;}const mv=e.target.closest('[data-move]');if(mv){const j=i+Number(mv.dataset.move);if(j<0||j>=rows.length)return;[rows[i],rows[j]]=[rows[j],rows[i]];draw();list.querySelector(`[data-index="${j}"] [data-move="${mv.dataset.move}"]`)?.focus();}});
-        list.addEventListener('dragstart',e=>{if(e.target.closest('button'))return;const row=e.target.closest('[data-index]');if(!row)return;dragFrom=Number(row.dataset.index);row.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain','m');}catch(_){}});
+        list.addEventListener('dragstart',e=>{if(e.target.closest?.('button'))return;const row=e.target.closest?.('[data-index]');if(!row)return;dragFrom=Number(row.dataset.index);row.classList.add('is-dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain','m');}catch(_){}});
         list.addEventListener('dragover',e=>{if(dragFrom<0)return;e.preventDefault();$$('.is-drop-target',list).forEach(r=>r.classList.remove('is-drop-target'));e.target.closest('[data-index]')?.classList.add('is-drop-target');});
         list.addEventListener('drop',e=>{e.preventDefault();const row=e.target.closest('[data-index]');if(!row||dragFrom<0)return;const to=Number(row.dataset.index);const [moved]=rows.splice(dragFrom,1);rows.splice(to,0,moved);dragFrom=-1;draw();});
         list.addEventListener('dragend',()=>{dragFrom=-1;$$('.is-dragging,.is-drop-target',list).forEach(r=>r.classList.remove('is-dragging','is-drop-target'));});
@@ -6150,7 +6242,7 @@ ${backupSectionHtml()}
 
     function setupDragOrder(list){
         let dragged=null;
-        list.addEventListener('dragstart',event=>{const grip=event.target.closest('.order-grip');if(!grip){event.preventDefault();return;}dragged=grip.closest('.order-row');if(!dragged)return;dragged.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';});
+        list.addEventListener('dragstart',event=>{const grip=event.target.closest?.('.order-grip');if(!grip){event.preventDefault();return;}dragged=grip.closest('.order-row');if(!dragged)return;dragged.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';});
         list.addEventListener('dragover',event=>{if(!dragged)return;event.preventDefault();const after=getDragAfterElement(list,event.clientY);if(after==null)list.append(dragged);else list.insertBefore(dragged,after);renumberOrderList(list);});
         list.addEventListener('dragend',()=>{dragged?.classList.remove('is-dragging');dragged=null;renumberOrderList(list);});
     }
@@ -6190,7 +6282,7 @@ ${backupSectionHtml()}
         if(!grid)return;
         let dragged=null;
         const isUnlocked=()=>$(lockSelector)?.dataset.locked==='0';
-        grid.addEventListener('dragstart',event=>{if(!isUnlocked()){event.preventDefault();return;}const item=event.target.closest('.media-card-item')||event.target.closest('.media-item');if(!item){event.preventDefault();return;}dragged=item;item.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';});
+        grid.addEventListener('dragstart',event=>{if(!isUnlocked()){event.preventDefault();return;}const item=event.target.closest?.('.media-card-item')||event.target.closest?.('.media-item');if(!item){event.preventDefault();return;}dragged=item;item.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';});
         grid.addEventListener('dragover',event=>{if(!dragged||!isUnlocked())return;event.preventDefault();const after=getMediaDragAfterElement(grid,event.clientX,event.clientY);$$('.media-drop-target',grid).forEach(el=>el.classList.remove('media-drop-target'));(after||grid.lastElementChild)?.classList.add('media-drop-target',after?'drop-before':'drop-after');});
         grid.addEventListener('dragleave',event=>{if(!event.relatedTarget||!grid.contains(event.relatedTarget)){$$('.media-drop-target',grid).forEach(el=>el.classList.remove('media-drop-target','drop-before','drop-after'));}});
         grid.addEventListener('drop',event=>{event.preventDefault();if(!dragged||!isUnlocked())return;const after=getMediaDragAfterElement(grid,event.clientX,event.clientY);$$('.media-drop-target',grid).forEach(el=>el.classList.remove('media-drop-target','drop-before','drop-after'));if(after==null)grid.append(dragged);else grid.insertBefore(dragged,after);});
@@ -6227,7 +6319,7 @@ ${backupSectionHtml()}
 
     function bindDialogs(){
         $$('dialog button[value="cancel"]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();button.closest('dialog')?.close();}));
-        $('#person-form').addEventListener('submit',async event=>{event.preventDefault();const personForm=event.currentTarget;try{const result=await api('save_person',{}, {method:'POST',body:formObject(personForm)});for(const fn of (window.LCNDA_EXT?.afterPersonSave||[])){try{await fn(result.result,personForm);}catch(error){console.error(error);}}$('#person-dialog').close();state.currentPersonId=Number(result.result.id);toast('Fiche enregistrée.');await loadPeople();await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        $('#person-form').addEventListener('submit',async event=>{event.preventDefault();const personForm=event.currentTarget;const force=personForm._lcForce;personForm._lcForce=false;personForm.querySelector('.lc-conflict')?.remove();try{const body=formObject(personForm);if(Number(body.id)&&personForm._lcBase){body._base=JSON.stringify(personForm._lcBase);if(force)body._force=1;}const result=await api('save_person',{}, {method:'POST',body});for(const fn of (window.LCNDA_EXT?.afterPersonSave||[])){try{await fn(result.result,personForm);}catch(error){console.error(error);}}$('#person-dialog').close();state.currentPersonId=Number(result.result.id);document.dispatchEvent(new CustomEvent('lcnda:person-saved',{detail:{person:result.result,created:!Number(body.id)}}));toast('Fiche enregistrée.');await loadPeople();await selectPerson(state.currentPersonId);}catch(error){if(error.conflict)return showSaveConflict(personForm,error.message);toast(error.message,'error');}});
         $('#military-form').addEventListener('submit',async event=>{event.preventDefault();try{const values=formObject(event.currentTarget);await api('save_military',{},{method:'POST',body:values});$('#military-dialog').close();toast('Informations militaires enregistrées.');await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
         $('#grave-form').addEventListener('submit',async event=>{event.preventDefault();try{const values=formObject(event.currentTarget);values.city=values.place_name||'';values.gps_lat=values.precise_lat||'';values.gps_lon=values.precise_lon||'';await api('save_grave',{},{method:'POST',body:values});$('#grave-dialog').close();toast('Sépulture enregistrée.');await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
         $('#grave-form').addEventListener('click',e=>{
@@ -6265,7 +6357,7 @@ ${backupSectionHtml()}
         // la personne liée : menu de choix unique (champ related_id) ; « ＋ Créer la fiche » passe au mode « nouvelle personne » prérempli
         $('#relation-search').addEventListener('picker-change',event=>{const form=$('#relation-form'),it=event.detail.item;if(it&&Number(it.id)===Number(form.elements.person_id.value)){toast('Choisis une autre personne que celle-ci.','error');pkSet(event.currentTarget,null);}});
         $('#relation-search').addEventListener('picker-create',event=>{if(event.detail.kind!=='person')return;event.preventDefault();const form=$('#relation-form'),words=String(event.detail.text||'').trim().split(/\s+/);form.elements.entry_mode.value='new';form.elements.entry_mode.dispatchEvent(new Event('change'));form.elements.new_last_name.value=words.length>1?words[words.length-1]:words[0]||'';form.elements.new_first_name.value=words.length>1?words.slice(0,-1).join(' '):'';form.elements.new_first_name.focus();});
-        $('#relation-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,values=formObject(form);try{if(['none','none_suspected'].includes(values.entry_mode)){await api('set_relation_status',{}, {method:'POST',body:{person_id:values.person_id,relation_type:values.relation_type,status:values.entry_mode}});$('#relation-dialog').close();toast('Mention familiale enregistrée.');await selectPerson(Number(values.person_id));return;}let relatedId=Number(values.related_id)||0;if(values.entry_mode==='new'){const created=await api('save_person',{}, {method:'POST',body:{first_name:values.new_first_name,last_name:values.new_last_name,gender:values.new_gender,living_status:values.new_living_status}});relatedId=Number(created.result.id);}if(!relatedId)throw new Error('Choisis une personne dans les résultats.');await api('add_relation',{}, {method:'POST',body:{person_id:values.person_id,related_id:relatedId,relation_type:values.relation_type}});$('#relation-dialog').close();toast('Relation familiale ajoutée.');await loadPeople();await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
+        $('#relation-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,values=formObject(form);try{if(['none','none_suspected'].includes(values.entry_mode)){await api('set_relation_status',{}, {method:'POST',body:{person_id:values.person_id,relation_type:values.relation_type,status:values.entry_mode}});$('#relation-dialog').close();toast('Mention familiale enregistrée.');await selectPerson(Number(values.person_id));return;}let relatedId=Number(values.related_id)||0;const newPerson=values.entry_mode==='new'?{first_name:values.new_first_name,last_name:values.new_last_name,gender:values.new_gender,living_status:values.new_living_status}:null;if(newPerson){if(!String(newPerson.first_name||'').trim()&&!String(newPerson.last_name||'').trim())throw new Error('Indique au moins un prénom ou un nom');relatedId=0;}else if(!relatedId)throw new Error('Choisis une personne dans les résultats.');/* nouvelle fiche + lien en une seule écriture : rien n'est créé si le lien est refusé */await api('add_relation',{}, {method:'POST',body:{person_id:values.person_id,related_id:relatedId,relation_type:values.relation_type,...(newPerson?{new_person:newPerson}:{})}});$('#relation-dialog').close();toast('Relation familiale ajoutée.');await loadPeople();await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
         $('#note-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{const result=await api(values.id?'save_note':'add_note',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#note-label-picker',savedId);$('#note-dialog').close();toast(values.id?'Note modifiée.':'Note ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#online-sheet-add-field').addEventListener('click',()=>{const list=$('#online-sheet-checks-list');list.insertAdjacentHTML('beforeend',onlineSheetCheckRowHtml(`custom_${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`,'',null,true));list.lastElementChild.querySelector('[data-check-label]')?.focus();});
         $('#online-sheet-checks-list').addEventListener('click',event=>{if(event.target.closest('[data-check-remove]'))event.target.closest('.online-sheet-check-row')?.remove();});
@@ -6274,7 +6366,7 @@ ${backupSectionHtml()}
         $('#online-sheet-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);values.checks=JSON.stringify(collectOnlineSheetChecks());try{await api('save_online_sheet',{}, {method:'POST',body:values});$('#online-sheet-dialog').close();toast(values.id?'Fiche en ligne modifiée.':'Fiche en ligne ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#source-form').elements.entity_type.addEventListener('change',updateSourceTargetFields);
         $('#source-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{const result=await api(values.id?'save_source':'add_web_source',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#source-label-picker',savedId);$('#source-dialog').close();toast(values.id?'Source modifiée.':'Source ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
-        $('#media-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;const battueItemId=Number(form.elements.battue_item_id?.value)||0;const isMilitary=!battueItemId&&form.elements.event_id.value==='__military';const idDocumentTypes={'__voter_card':'voter_card','__id_card':'id_card','__permit':'driving_permit'};const idDocumentSubjectType=!battueItemId?(idDocumentTypes[form.elements.event_id.value]||''):'';const personId=Number(form.elements.person_id.value)||state.currentPersonId;const body=new FormData(form);if(![...(body.getAll('files[]'))].filter(f=>f&&f.size>0).length){toast('Sélectionne au moins un fichier ou un dossier.','error');return;}if(battueItemId){body.set('person_id','');body.set('event_id','');body.set('census_id','');body.set('investigation_id','');}if(isMilitary){body.set('event_id','');body.set('entity_type_override','military');}if(idDocumentSubjectType){body.set('event_id','');}body.append('csrf',state.csrf);try{const response=await fetch('upload.php',{method:'POST',body});const result=await response.json();if(!response.ok||result.error)throw new Error(result.error||'Import impossible');for(const mediaId of (result.media||[])){await applyLabelPickerAfterSave('#media-label-picker',Number(mediaId));}const isCorrespondence=!$('#media-correspondence-fields').hidden;const dateText=form.elements.date_text?.value||'';const dateCalendar=form.elements.date_calendar?.value||'gregorian';const mediaSubjectType=idDocumentSubjectType||form.elements.media_subject_type?.value||'';const replyTo=form.elements.correspondence_reply_to_media_id?.value||'';if((isCorrespondence||dateText||dateCalendar!=='gregorian'||mediaSubjectType||replyTo)&&(result.media||[]).length){const customType=(form.elements.correspondence_type_custom?.value||'').trim();const correspondenceType=isCorrespondence?(customType?`custom:${customType}`:(form.elements.correspondence_type?.value||'')):'';const correspondentNames=isCorrespondence?($('#media-correspondent-value')?.value||'[]'):'[]';for(const mediaId of (result.media||[])){const saveBody={media_id:mediaId};if(dateText)saveBody.date_text=dateText;saveBody.date_calendar=dateCalendar;if(mediaSubjectType)saveBody.media_subject_type=mediaSubjectType;if(isCorrespondence){saveBody.correspondence_type=correspondenceType;saveBody.correspondent_names=correspondentNames;if(replyTo)saveBody.correspondence_reply_to_media_id=replyTo;}await api('save_media',{},{method:'POST',body:saveBody});}}if(isMilitary&&(result.media||[]).length){await api('link_entity_media',{},{method:'POST',body:{entity_type:'military',entity_id:personId,person_id:personId,media_ids:result.media}});}$('#media-dialog').close();toast(`${plural(result.media.length,'média importé','médias importés')}.`);if(battueItemId)await renderBattueDetail(state.currentBattueId);else if(form.elements.investigation_id.value)await renderInvestigationDetail(Number(form.elements.investigation_id.value));else await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        $('#media-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;const battueItemId=Number(form.elements.battue_item_id?.value)||0;const isMilitary=!battueItemId&&form.elements.event_id.value==='__military';const idDocumentTypes={'__voter_card':'voter_card','__id_card':'id_card','__permit':'driving_permit'};const idDocumentSubjectType=!battueItemId?(idDocumentTypes[form.elements.event_id.value]||''):'';const personId=Number(form.elements.person_id.value)||state.currentPersonId;const body=new FormData(form);{const all=[...(body.getAll('files[]'))].filter(f=>f&&typeof f==='object'&&f.name);if(!all.filter(f=>f.size>0).length){toast(all.length?(all.length===1?`Ce fichier est vide (0 octet) : ${all[0].name}.`:'Ces fichiers sont vides (0 octet).'):'Sélectionne au moins un fichier ou un dossier.','error');return;}}if(battueItemId){body.set('person_id','');body.set('event_id','');body.set('census_id','');body.set('investigation_id','');}if(isMilitary){body.set('event_id','');body.set('entity_type_override','military');}if(idDocumentSubjectType){body.set('event_id','');}body.append('csrf',state.csrf);try{const response=await fetch('upload.php',{method:'POST',body});const result=await response.json();if(!response.ok||result.error)throw new Error(result.error||'Import impossible');for(const mediaId of (result.media||[])){await applyLabelPickerAfterSave('#media-label-picker',Number(mediaId));}const isCorrespondence=!$('#media-correspondence-fields').hidden;const dateText=form.elements.date_text?.value||'';const dateCalendar=form.elements.date_calendar?.value||'gregorian';const mediaSubjectType=idDocumentSubjectType||form.elements.media_subject_type?.value||'';const replyTo=form.elements.correspondence_reply_to_media_id?.value||'';if((isCorrespondence||dateText||dateCalendar!=='gregorian'||mediaSubjectType||replyTo)&&(result.media||[]).length){const customType=(form.elements.correspondence_type_custom?.value||'').trim();const correspondenceType=isCorrespondence?(customType?`custom:${customType}`:(form.elements.correspondence_type?.value||'')):'';const correspondentNames=isCorrespondence?($('#media-correspondent-value')?.value||'[]'):'[]';for(const mediaId of (result.media||[])){const saveBody={media_id:mediaId};if(dateText)saveBody.date_text=dateText;saveBody.date_calendar=dateCalendar;if(mediaSubjectType)saveBody.media_subject_type=mediaSubjectType;if(isCorrespondence){saveBody.correspondence_type=correspondenceType;saveBody.correspondent_names=correspondentNames;if(replyTo)saveBody.correspondence_reply_to_media_id=replyTo;}await api('save_media',{},{method:'POST',body:saveBody});}}if(isMilitary&&(result.media||[]).length){await api('link_entity_media',{},{method:'POST',body:{entity_type:'military',entity_id:personId,person_id:personId,media_ids:result.media}});}$('#media-dialog').close();toast(`${plural(result.media.length,'média importé','médias importés')}.`);if(battueItemId)await renderBattueDetail(state.currentBattueId);else if(form.elements.investigation_id.value)await renderInvestigationDetail(Number(form.elements.investigation_id.value));else await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         // Boutons Fichiers / Dossier dans #media-dialog
         (function(){
             let _mediaFiles=[];
@@ -6423,8 +6515,20 @@ ${backupSectionHtml()}
     // un animal : « mâle / femelle », « en vie / mort » ; une personne : comme d'habitude
     function personKindLabels(form,kind){kind=kind||form.querySelector('[name=kind]:checked')?.value||'human';const an=kind==='animal';const g=form.elements.gender;if(g){const t=an?{unknown:'?',male:'♂ Mâle',female:'♀ Femelle',nonbinary:'Autre'}:{unknown:'Non renseigné',male:'Masculin',female:'Féminin',nonbinary:'Autre / non binaire'};[...g.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const s=form.elements.living_status;if(s){const t=an?{unknown:'À vérifier',living:'En vie',deceased:'Mort(e)'}:{unknown:'À vérifier',living:'Vivante',deceased:'Décédée'};[...s.options].forEach(o=>{o.textContent=t[o.value]||o.textContent;});}const f=form.elements.first_name?.closest('label');if(f&&f.firstChild)f.firstChild.textContent=an?'Nom':'Prénom';const l=form.elements.last_name?.closest('label');if(l&&l.firstChild)l.firstChild.textContent=an?'Affixe (nom de l’élevage)':'Nom inscrit';$('#person-dialog-title').textContent=form.elements.id.value?(an?'Modifier l’animal':'Modifier la personne'):(an?'Nouvel animal':'Nouvelle personne');}
     document.addEventListener('change',e=>{if(!e.target.matches?.('#person-form [name=kind]'))return;if(e.target.value==='animal'&&!e.target.form.elements.id.value&&window.LCNDA_EXT?.newAnimalFiche){$('#person-dialog').close();window.LCNDA_EXT.newAnimalFiche();return;}personKindLabels(e.target.form);});
+    /** Deux onglets : la fiche a changé ailleurs depuis l'ouverture de la fenêtre. La saisie reste ouverte, avec un message
+     *  (⚠️ attention, C7) et le choix « Enregistrer quand même » (remplace l'autre version) ; rien n'est perdu. */
+    function showSaveConflict(form,message){
+        form.querySelector('.lc-conflict')?.remove();
+        const box=document.createElement('div');box.className='lc-conflict';
+        box.innerHTML=(window.LCNDA_UI?.notice?window.LCNDA_UI.notice('warn',message):`<div class="ui-notice ui-notice-warn" role="status">⚠️ ${escapeHtml(message)}</div>`)+'<div class="lc-conflict-acts"><button type="button" class="button small secondary" data-lc-force>Enregistrer quand même (remplacer l’autre version)</button></div>';
+        box.querySelector('[data-lc-force]').addEventListener('click',()=>{form._lcForce=true;form.requestSubmit();});
+        (form.querySelector('.modal-actions')||form.lastElementChild)?.before(box);
+        const d=form.closest('dialog');if(d)d.dataset.dirty='1';
+        box.scrollIntoView({block:'nearest'});
+        toast(message,'error');
+    }
     function openPersonDialog(detail){if(detail?.person?.kind==='animal'&&window.LCNDA_EXT?.editAnimalFiche){window.LCNDA_EXT.editAnimalFiche(detail,'pe1');return;} // un animal : son formulaire d'animal, pas celui d'un humain
-        const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';{const kc=form.querySelector('[data-kind-choice]');if(kc)kc.hidden=true;}['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));try{const d=readDesignSettings();if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);
+        const form=$('#person-form'),p=detail.person;$('#person-dialog-title').textContent='Modifier la personne';{const kc=form.querySelector('[data-kind-choice]');if(kc)kc.hidden=true;}['id','first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france'].forEach(field=>form.elements[field].value=p[field]??(field==='verify_status'?'normal':field==='mort_pour_la_france'?'unknown':''));form._lcBase=Object.fromEntries(['first_name','middle_name','last_name','prefix','suffix','gender','living_status','verify_status','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','reference_number','mort_pour_la_france','surname_group_id'].map(field=>[field,p[field]??'']));form.querySelector('.lc-conflict')?.remove();try{const d=readDesignSettings();if(d.defaultMortPourLaFrance&&d.defaultMortPourLaFrance!=='unknown'&&(!p.mort_pour_la_france||p.mort_pour_la_france==='unknown'))form.elements.mort_pour_la_france.value=d.defaultMortPourLaFrance;}catch(_){}form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+detail.surnameGroups.map(group=>`<option value="${group.id}" ${Number(group.id)===Number(p.surname_group_id)?'selected':''}>${escapeHtml(group.name)}</option>`).join('');if(form.elements.outside_genealogy)form.elements.outside_genealogy.checked=!!(Number(p.outside_genealogy)||0);
         personKindLabels(form,p.kind==='animal'?'animal':'human');
         // Tout en bas : cacher ou montrer les lignes vides de l'Identité (cette fiche / toutes)
         const emptyWrap=$('#person-identity-empty-wrap');
@@ -6467,7 +6571,7 @@ ${backupSectionHtml()}
         genderSel._militaryHandler=updateMilitaryToggle;
         genderSel.addEventListener('change',updateMilitaryToggle);
         $('#person-dialog').showModal();}
-    function openNewPersonDialog(){if((baseMode()==='breeding'||state.peopleScope==='animals')&&window.LCNDA_EXT?.newAnimalFiche){window.LCNDA_EXT.newAnimalFiche();return;}const form=$('#person-form');form.reset();form.elements.id.value='';{const ew=$('#person-identity-empty-wrap');if(ew)ew.innerHTML='';}$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
+    function openNewPersonDialog(){if((baseMode()==='breeding'||state.peopleScope==='animals')&&window.LCNDA_EXT?.newAnimalFiche){window.LCNDA_EXT.newAnimalFiche();return;}const form=$('#person-form');form.reset();form._lcBase=null;form.querySelector('.lc-conflict')?.remove();form.elements.id.value='';{const ew=$('#person-identity-empty-wrap');if(ew)ew.innerHTML='';}$('#person-dialog-title').textContent='Nouvelle fiche';const kc=form.querySelector('[data-kind-choice]');if(kc){kc.hidden=false;const k=baseMode()==='breeding'||state.peopleScope==='animals'||state.personTab==='animals'?'animal':'human';form.querySelectorAll('[name=kind]').forEach(r=>{r.checked=r.value===k;});personKindLabels(form);}const groups=state.currentPerson?.surnameGroups||[];form.elements.surname_group_id.innerHTML='<option value="">Non classé</option>'+groups.map(group=>`<option value="${group.id}">${escapeHtml(group.name)}</option>`).join('');$('#person-dialog').showModal();}
 
     function openMilitaryDialog(detail){
         const form=$('#military-form');
@@ -6574,18 +6678,21 @@ ${backupSectionHtml()}
         input.addEventListener('focus',()=>{if(box.innerHTML){position();box.hidden=false;}});
         input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();hide();input.blur();commit(input.value.trim());}});
         input.addEventListener('blur',()=>{setTimeout(()=>{if(!box.hidden){hide();commit(input.value.trim());}},120);});
-        box.addEventListener('click',event=>{
-            const button=event.target.closest('button[data-surname-name]');
-            if(!button)return;
-            input.value=button.dataset.surnameName;
-            hide();
-            commit(button.dataset.surnameName);
-        });
+        // la liste reste dans la page d'une visite à l'autre de la Carte : ses écoutes sont posées une seule fois et visent la
+        // case de la visite en cours (avant : une écoute de plus à chaque visite, qui gardait en mémoire toute l'ancienne carte)
+        box._lcCur={input,hide,commit,position};
         if(!box.dataset.outsideClickBound){
             box.dataset.outsideClickBound='1';
-            document.addEventListener('click',event=>{if(event.target!==input&&!box.contains(event.target))hide();});
-            window.addEventListener('scroll',()=>{if(!box.hidden)position();},{passive:true});
-            window.addEventListener('resize',()=>{if(!box.hidden)position();});
+            box.addEventListener('click',event=>{
+                const button=event.target.closest?.('button[data-surname-name]'),cur=box._lcCur;
+                if(!button||!cur)return;
+                cur.input.value=button.dataset.surnameName;
+                cur.hide();
+                cur.commit(button.dataset.surnameName);
+            });
+            document.addEventListener('click',event=>{const cur=box._lcCur;if(cur&&event.target!==cur.input&&!box.contains(event.target)){box.hidden=true;box.innerHTML='';}});
+            window.addEventListener('scroll',()=>{if(!box.hidden&&box._lcCur?.input.isConnected)box._lcCur.position();},{passive:true});
+            window.addEventListener('resize',()=>{if(!box.hidden&&box._lcCur?.input.isConnected)box._lcCur.position();});
         }
     }
 
@@ -7298,7 +7405,7 @@ ${backupSectionHtml()}
         const renderPreview=()=>{const item=byId(selectedId);if(!item)return;preview.innerHTML=`<span class="eyebrow">APERÇU</span><div class="event-media-order-preview-media">${mediaPreviewHtml(item,item.title||'Image')}</div><strong>${escapeHtml(item.title||item.filename||'Image')}</strong><small>Image ${$$('.event-media-order-item',list).findIndex(row=>Number(row.dataset.eventOrderMediaId)===Number(item.id))+1} sur ${items.length}</small>`;$$('.event-media-order-item',list).forEach(row=>row.classList.toggle('is-selected',Number(row.dataset.eventOrderMediaId)===selectedId));};
         renderPreview();
         list.addEventListener('click',event=>{const button=event.target.closest('[data-event-order-select]');if(!button)return;selectedId=Number(button.dataset.eventOrderSelect);renderPreview();});
-        list.addEventListener('dragstart',event=>{const grip=event.target.closest('[data-event-order-grip]');if(!grip){event.preventDefault();return;}dragged=grip.closest('.event-media-order-item');if(!dragged)return;dragged.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';});
+        list.addEventListener('dragstart',event=>{const grip=event.target.closest?.('[data-event-order-grip]');if(!grip){event.preventDefault();return;}dragged=grip.closest('.event-media-order-item');if(!dragged)return;dragged.classList.add('is-dragging');event.dataTransfer.effectAllowed='move';});
         list.addEventListener('dragover',event=>{if(!dragged)return;event.preventDefault();const after=getDragAfterElement(list,event.clientY,'.event-media-order-item');if(after===null)list.append(dragged);else list.insertBefore(dragged,after);$$('.event-media-order-item',list).forEach((row,index)=>$('[data-event-order-number]',row).textContent=String(index+1));renderPreview();});
         list.addEventListener('dragend',()=>{dragged?.classList.remove('is-dragging');dragged=null;});
         $$('[data-close-event-media-order]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
@@ -8450,7 +8557,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
-    window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,conflictBox,openNewPersonDialog,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

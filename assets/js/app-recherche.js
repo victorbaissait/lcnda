@@ -710,7 +710,7 @@
     function openInseeImportDialog(){
         let dialog=$('#insee-import-dialog');
         if(!dialog){
-            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-import-modal" id="insee-import-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE</span><h2>Importer des fichiers CSV</h2></div><button class="modal-close" data-close-insee-import aria-label="Fermer">×</button></div><div class="modal-body" id="insee-import-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-import>Fermer</button></div></dialog>`);
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-import-modal" id="insee-import-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE</span><h2>Importer des fichiers CSV</h2></div><button class="modal-close" type="button" data-close-insee-import aria-label="Fermer">×</button></div><div class="modal-body" id="insee-import-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-import>Fermer</button></div></dialog>`);
             dialog=$('#insee-import-dialog');
             $$('[data-close-insee-import]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
             dialog.addEventListener('close',()=>{renderInseeSearch();});
@@ -781,7 +781,7 @@
     async function openInseeRemoteDialog(){
         let dialog=$('#insee-remote-dialog');
         if(!dialog){
-            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-remote-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE · DATA.GOUV.FR</span><h2>Fichiers publiés par l’INSEE</h2></div><button class="modal-close" data-close-insee-remote aria-label="Fermer">×</button></div><div class="modal-body" id="insee-remote-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-remote>Fermer</button></div></dialog>`);
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-remote-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE · DATA.GOUV.FR</span><h2>Fichiers publiés par l’INSEE</h2></div><button class="modal-close" type="button" data-close-insee-remote aria-label="Fermer">×</button></div><div class="modal-body" id="insee-remote-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-remote>Fermer</button></div></dialog>`);
             dialog=$('#insee-remote-dialog');
             $$('[data-close-insee-remote]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
             dialog.addEventListener('close',()=>{if(state.module==='recherche'&&state.researchKind==='insee')renderInseeSearch();});
@@ -817,7 +817,7 @@
     async function openInseeImportsDialog(){
         let dialog=$('#insee-imports-dialog');
         if(!dialog){
-            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-imports-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE</span><h2>Fichiers déjà importés</h2></div><button class="modal-close" data-close-insee-imports aria-label="Fermer">×</button></div><div class="modal-body" id="insee-imports-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-imports>Fermer</button></div></dialog>`);
+            document.body.insertAdjacentHTML('beforeend',`<dialog class="modal insee-imports-modal" id="insee-imports-dialog"><div class="modal-head"><div><span class="eyebrow">DÉCÈS INSEE</span><h2>Fichiers déjà importés</h2></div><button class="modal-close" type="button" data-close-insee-imports aria-label="Fermer">×</button></div><div class="modal-body" id="insee-imports-body"></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" data-close-insee-imports>Fermer</button></div></dialog>`);
             dialog=$('#insee-imports-dialog');
             $$('[data-close-insee-imports]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
         }

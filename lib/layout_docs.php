@@ -59,7 +59,7 @@ function layout_doc_get(PDO $pdo, int $id): array
     $s->execute([$id]);
     $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Document introuvable.'); }
-    return ['id' => (int) $r['id'], 'name' => $r['name'], 'is_design' => (int) $r['is_design'], 'updated_at' => $r['updated_at'], 'doc' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
+    return ['id' => (int) $r['id'], 'name' => $r['name'], 'is_design' => (int) $r['is_design'], 'updated_at' => $r['updated_at'], 'rev' => content_rev((string) $r['data_json']), 'doc' => json_decode((string) $r['data_json'], true) ?: new stdClass()];
 }
 
 function save_layout_doc(PDO $pdo, array $data): array
@@ -75,6 +75,13 @@ function save_layout_doc(PDO $pdo, array $data): array
     if ($json === false) { throw new RuntimeException('Document illisible.'); }
     if (strlen($json) > LAYOUT_DOC_MAX) { throw new RuntimeException('Document trop lourd (24 Mo au plus) : utilise des photos de la base plutôt que des photos importées, ou des photos plus petites.'); }
     $design = !empty($data['is_design']) ? 1 : 0;
+    // deux onglets sur le même document : refusé si le contenu a changé ailleurs depuis la dernière lecture (base_rev), sauf « Garder ma version »
+    if ($id && (string) ($data['base_rev'] ?? '') !== '' && empty($data['force'])) {
+        $cur = $pdo->prepare('SELECT data_json FROM layout_documents WHERE id=?'); $cur->execute([$id]); $now = $cur->fetchColumn();
+        if ($now !== false && content_rev((string) $now) !== (string) $data['base_rev'] && (string) $now !== $json) {
+            throw new LcndaConflict('Ce document a été modifié dans une autre fenêtre depuis que tu l’as ouvert.');
+        }
+    }
     if ($id) {
         $s = $pdo->prepare('UPDATE layout_documents SET name=?, is_design=?, data_json=?, updated_at=CURRENT_TIMESTAMP WHERE id=?');
         $s->execute([$name, $design, $json, $id]);
@@ -84,7 +91,7 @@ function save_layout_doc(PDO $pdo, array $data): array
         $id = (int) $pdo->lastInsertId();
     }
     log_change($pdo, 'meta', 0, ($data['id'] ?? 0) ? 'update' : 'create', ($design ? 'Design' : 'Document') . ' de mise en page enregistré : ' . $name);
-    return ['id' => $id, 'name' => $name];
+    return ['id' => $id, 'name' => $name, 'rev' => content_rev($json)];
 }
 
 function delete_layout_doc(PDO $pdo, array $data): array

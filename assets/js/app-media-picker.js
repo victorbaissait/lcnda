@@ -126,7 +126,8 @@
             let result = null, done = false;
             const finish = v => { if (done) return; done = true; result = v; if (v) remember(Array.isArray(v) ? v : [v]); d.close(); };
             d.addEventListener('close', () => { document.removeEventListener('paste', onPaste, true); d.remove(); resolve(result); });
-            d.addEventListener('cancel', e => { e.preventDefault(); finish(null); });
+            // Échap (C1) : une recherche tapée se vide d'abord ; la fenêtre se ferme à l'Échap suivant
+            d.addEventListener('cancel', e => { e.preventDefault(); if (qIn && qIn.value && (document.activeElement === qIn || d.contains(document.activeElement))) { qIn.value = ''; qIn.dispatchEvent(new Event('input', {bubbles: true})); qIn.focus(); return; } finish(null); });
             d._mpFinish = it => finish(multiple ? (Array.isArray(it) ? it : [it]) : it); // pour les boutons ajoutés par l'outil (« extra »)
 
             // ── filtres ──

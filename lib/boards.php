@@ -59,7 +59,7 @@ function board_detail(PDO $pdo, int $id): array
     }
     return ['id' => (int) $b['id'], 'title' => (string) $b['title'], 'icon' => (string) $b['icon'], 'color' => (string) $b['color'], 'owner_type' => (string) $b['owner_type'],
         'owner_id' => (int) $b['owner_id'], 'owner_label' => board_owner_label($pdo, (string) $b['owner_type'], (int) $b['owner_id']), 'part' => (string) $b['part'], 'status' => (string) ($b['status'] ?? 'open'),
-        'parent_id' => $b['parent_id'] !== null ? (int) $b['parent_id'] : null, 'path' => $path, 'data' => $data, 'media' => $media, 'updated_at' => $b['updated_at']];
+        'parent_id' => $b['parent_id'] !== null ? (int) $b['parent_id'] : null, 'path' => $path, 'data' => $data, 'media' => $media, 'updated_at' => $b['updated_at'], 'rev' => content_rev((string) $b['data_json'])];
 }
 
 /**
@@ -174,6 +174,13 @@ function save_board(PDO $pdo, array $data): array
         $fields['data_json'] = $json; $fields['item_count'] = count($items);
         if ($thumb !== '') { $fields['thumb'] = $thumb; }
     }
+    // deux onglets sur le même tableau : refusé si le contenu a changé ailleurs depuis la dernière lecture (base_rev), sauf « Garder ma version »
+    if ($id && isset($fields['data_json']) && (string) ($data['base_rev'] ?? '') !== '' && empty($data['force'])) {
+        $cur = $pdo->prepare('SELECT data_json FROM boards WHERE id=?'); $cur->execute([$id]); $now = $cur->fetchColumn();
+        if ($now !== false && content_rev((string) $now) !== (string) $data['base_rev'] && (string) $now !== $fields['data_json']) {
+            throw new LcndaConflict('Ce tableau a été modifié dans une autre fenêtre depuis que tu l’as ouvert.');
+        }
+    }
     if ($id && isset($fields['data_json'])) { board_auto_version($pdo, $id, $fields['data_json']); }
     if ($id) {
         $set = implode(', ', array_map(static fn($k) => "$k=?", array_keys($fields)));
@@ -190,7 +197,7 @@ function save_board(PDO $pdo, array $data): array
         $pdo->prepare('INSERT INTO boards(' . implode(',', $cols) . ') VALUES(' . implode(',', array_fill(0, count($cols), '?')) . ')')->execute(array_values($fields));
         $id = (int) $pdo->lastInsertId();
     }
-    return ['id' => $id, 'title' => $title];
+    return ['id' => $id, 'title' => $title] + (isset($fields['data_json']) ? ['rev' => content_rev($fields['data_json'])] : []);
 }
 
 /** Ce à quoi un tableau est associé, en plus de son rangement : des fiches, des enquêtes, des battues, des projets, des recueils… */

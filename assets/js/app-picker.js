@@ -479,17 +479,24 @@
         if (!dlg || !form) { toast('Crée d’abord la fiche dans Personnes, puis choisis-la ici.'); return; }
         const find = async () => { try { const d = await get({kind: 'person', q: text, limit: 100}); return (d.groups || []).flatMap(g => g.items); } catch (_) { return []; } };
         const before = new Set((await find()).map(x => x.id));
-        const btn = document.getElementById('new-person');
-        if (btn) btn.click();
-        else for (const mod of [{ctrlKey: true}, {metaKey: true}]) { if (dlg.open) break; document.dispatchEvent(new KeyboardEvent('keydown', {key: 'N', code: 'KeyN', shiftKey: true, bubbles: true, cancelable: true, ...mod})); } // raccourci « Nouvelle personne »
+        // la fenêtre « Nouvelle fiche » de l'app, depuis n'importe quel écran (plus besoin d'être dans Personnes)
+        const openNew = window.LCNDA_APP?.openNewPersonDialog;
+        if (typeof openNew === 'function') openNew(); else document.getElementById('new-person')?.click();
         if (!dlg.open) { toast('Crée d’abord la fiche dans Personnes, puis choisis-la ici.'); return; }
+        let savedId = 0; const onSaved = e => { if (e.detail?.created) savedId = Number(e.detail.person?.id) || 0; };
+        document.addEventListener('lcnda:person-saved', onSaved);
         // « Pierre DURANDAL » → prénom Pierre, nom DURANDAL (le mot en capitales, sinon le dernier mot)
         const words = text.trim().split(/\s+/), up = words.filter(w => w.length > 1 && w === w.toUpperCase() && /\p{L}/u.test(w));
         const last = up.length ? up.join(' ') : words.length > 1 ? words[words.length - 1] : words[0];
         const first = up.length ? words.filter(w => !up.includes(w)).join(' ') : words.length > 1 ? words.slice(0, -1).join(' ') : '';
         if (form.elements.last_name) form.elements.last_name.value = last;
         if (form.elements.first_name) form.elements.first_name.value = first;
-        dlg.addEventListener('close', () => setTimeout(async () => { const fresh = (await find()).filter(x => !before.has(x.id)); if (fresh.length === 1) done(fresh[0]); }, 700), {once: true});
+        dlg.addEventListener('close', () => setTimeout(async () => {
+            document.removeEventListener('lcnda:person-saved', onSaved);
+            const fresh = (await find()).filter(x => !before.has(x.id)), mine = savedId ? fresh.find(x => Number(x.id) === savedId) : null;
+            if (mine) done(mine); else if (fresh.length === 1) done(fresh[0]);
+            else if (savedId) { try { const d = await get({kind: 'person', q: '#' + savedId, limit: 5}); const it = (d.groups || []).flatMap(g => g.items).find(x => Number(x.id) === savedId); if (it) done(it); } catch (_) {} }
+        }, 400), {once: true});
     }
     function mapAct(c, s, text, item) {
         const ev = new CustomEvent('picker-map', {bubbles: true, cancelable: true, detail: {kind: 'place', text, item, field: c.opts.name, pick: it => { const n = norm(it, 'place'); if (n && s) pick(c, s, n); }}});

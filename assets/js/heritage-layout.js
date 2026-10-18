@@ -628,7 +628,8 @@
         root.addEventListener('keydown', e => { const inp = e.target.closest?.('[data-fontpick]'); if (inp && e.key === 'Enter') { e.preventDefault(); if (inp.value.trim()) pick(inp, inp.value.trim()); } });
     }
 
-    async function openEditor({id = 0, name = 'Sans titre', doc, isDesign = false, onSaved}) {
+    async function openEditor({id = 0, name = 'Sans titre', doc, isDesign = false, onSaved, rev = ''}) {
+        let docRev = rev || ''; // deux onglets : la version lue ici (le serveur refuse si elle a changé ailleurs)
         let D = cleanDoc(doc), docId = id, docName = name, design = !!isDesign, dirty = false;
         let cur = 0, editMaster = null, sel = [], editingId = null, tool = 'select', zoom = 0.75, fillTarget = 'fill', guides = true, snapOn = true, preview = false, panel = 'pages', clip = null, savedRange = null, lastTextColor = '#111111';
         let act = ''; // ce qu'on vient de faire, pour l'historique
@@ -1464,17 +1465,24 @@
         }, {signal: keyAc.signal});
 
         /* — enregistrer, exporter, fermer — */
-        async function save({copy: asCopy = false, design: asDesign = false} = {}) {
+        async function save({copy: asCopy = false, design: asDesign = false, force = false} = {}) {
             if (editingId) stopEditing();
             let name = String(docName || '').trim() || 'Sans titre';
             if (asCopy || asDesign) { const n = await ask(asDesign ? 'Nom du design (il sera proposé pour les prochains livres) :' : 'Nom de la copie :', asDesign ? `${name} (design)` : `${name} (copie)`); if (!n) return; name = n.trim().slice(0, 160); }
             if (!asCopy && !asDesign) status('saving');
             try {
-                const res = (await post('save_layout_doc', {id: asCopy || asDesign ? 0 : docId, name, is_design: asDesign ? 1 : (asCopy ? 0 : (design ? 1 : 0)), doc: D})).result;
-                if (!asCopy && !asDesign) { docId = res.id; docName = res.name; setDirty(false); } // « ✓ Enregistré » en haut, sans message
+                const own = !asCopy && !asDesign;
+                const res = (await post('save_layout_doc', {id: own ? docId : 0, name, is_design: asDesign ? 1 : (asCopy ? 0 : (design ? 1 : 0)), doc: D, ...(own && docId && docRev ? {base_rev: docRev} : {}), ...(force ? {force: 1} : {})})).result;
+                if (own) { docId = res.id; docName = res.name; if (res.rev) docRev = res.rev; setDirty(false); } // « ✓ Enregistré » en haut, sans message
                 else toast(asDesign ? `Design « ${res.name} » enregistré : il est proposé pour les nouveaux livres.` : `Copie « ${res.name} » enregistrée.`);
                 onSaved?.();
-            } catch (err) { if (!asCopy && !asDesign) status('error'); toast(err.message, 'error'); }
+            } catch (err) {
+                if (!asCopy && !asDesign) status('error');
+                if (!err.conflict || asCopy || asDesign) { toast(err.message, 'error'); return; }
+                const choice = await (A().conflictBox?.({what: 'Ce document'}) ?? Promise.resolve(null));
+                if (choice === 'overwrite') return save({force: true});
+                if (choice === 'reload') { const keepId = docId; setDirty(false); keyAc.abort(); dl.close(); ext.openLayoutDoc?.(keepId, onSaved); }
+            }
         }
         async function close() { if (editingId) stopEditing(); if (dirty && !await A().confirmBox('Les dernières modifications seront perdues.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; keyAc.abort(); dl.close(); }
         dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); const om = dl.querySelectorAll('details.ly-menu[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
@@ -2285,7 +2293,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
                 if (d.close !== undefined) return dlg.close();
                 if (d.defaults !== undefined) return defaultsDialog();
                 if (d.new) return newDocWizard(d.new, reopen);
-                if (d.open) { const r = await api('layout_doc', {id: Number(d.open)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: reopen}); }
+                if (d.open) { const r = await api('layout_doc', {id: Number(d.open)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: reopen, rev: r.rev}); }
                 if (d.usedesign) { const r = await api('layout_doc', {id: Number(d.usedesign)}); return newDocWizard('design', reopen, {designId: r.id}); }
                 if (d.builtin) return newDocWizard('design', reopen, {builtin: d.builtin});
                 if (d.editbuiltin) { const x = builtins().find(y => y.th.id === d.editbuiltin); return openEditor({id: 0, name: `Design ${x.th.name}`, doc: JSON.parse(JSON.stringify(x.doc)), isDesign: true, onSaved: reopen}); }
@@ -2360,7 +2368,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     /* Listes → 📐 Livres de famille : ce qu'on a fait dans l'atelier (livres et designs), pour les ouvrir, en créer, régler */
     ext.lists = ext.lists || {};
     // pour Listes → 🛠️ Outils de modification
-    ext.openLayoutDoc = async (id, onSaved) => { const r = await api('layout_doc', {id}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved}); };
+    ext.openLayoutDoc = async (id, onSaved) => { const r = await api('layout_doc', {id}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved, rev: r.rev}); };
     ext.newLayoutDoc = (mode, onSaved) => newDocWizard(mode, onSaved);
     ext.layoutCoverHtml = (cover, w) => coverHtml(cover, w);
     ext.lists.layout_books = async token => {
@@ -2405,7 +2413,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
                 if (d.lylNew) return newDocWizard(d.lylNew, again);
                 if (d.lylDefaults !== undefined) return defaultsDialog();
                 if (d.lylStudio !== undefined) return openLibrary();
-                if (d.lylOpen) { const r = await api('layout_doc', {id: Number(d.lylOpen)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: again}); }
+                if (d.lylOpen) { const r = await api('layout_doc', {id: Number(d.lylOpen)}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved: again, rev: r.rev}); }
                 if (d.lylUse) return newDocWizard('design', again, {designId: Number(d.lylUse)});
                 if (d.lylDup) { const r = await api('layout_doc', {id: Number(d.lylDup)}); await post('save_layout_doc', {name: `${r.name} (copie)`.slice(0, 160), is_design: r.is_design, doc: r.doc}); toast('Copie faite.'); return draw(); }
                 if (d.lylRen) { const r = await api('layout_doc', {id: Number(d.lylRen)}), n = await ask('Nouveau nom :', r.name); if (!n) return; await post('save_layout_doc', {id: r.id, name: n, is_design: r.is_design, doc: r.doc}); return draw(); }

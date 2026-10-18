@@ -1,5 +1,20 @@
 <?php
 declare(strict_types=1);
+/** Enregistrement refusé parce que la même chose a changé ailleurs (autre onglet, autre fenêtre) depuis son ouverture : réponse 409. */
+if (!class_exists('LcndaConflict')) { class LcndaConflict extends RuntimeException {} }
+/** Version d'un contenu enregistré (tableau, mise en page) : change dès que le contenu change, même dans la même seconde. */
+function content_rev(?string $json): string { return substr(sha1((string) $json), 0, 16); }
+/** Le JSON reçu est lu en tableaux PHP : un objet vide {} y devient [] et repartait ainsi au navigateur (où ce qu'on y range
+ *  ensuite est ignoré). Remet un objet vide pour les clés qui sont des objets côté JS (ex. look, tf, kf du montage). */
+function json_keep_objects(mixed $v, array $objectKeys): mixed
+{
+    if (!is_array($v)) { return $v; }
+    foreach ($v as $k => $x) {
+        if (is_string($k) && in_array($k, $objectKeys, true) && $x === []) { $v[$k] = new stdClass(); }
+        elseif (is_array($x)) { $v[$k] = json_keep_objects($x, $objectKeys); }
+    }
+    return $v;
+}
 
 require_once __DIR__ . '/host_guard.php'; // noms d'hôte locaux seulement (aussi sous Apache / MAMP, sans router.php)
 if (!lcnda_host_guard()) exit;
@@ -167,6 +182,21 @@ function verify_csrf(array $data): void
     }
 }
 
+/**
+ * Une fois par base (repère dans app_migrations) : les témoins / parrains restés après la suppression de leur fiche ou de
+ * leur événement (event_witnesses n'a pas de clé étrangère) sont retirés. Les suppressions le font maintenant elles-mêmes.
+ */
+function cleanup_orphan_witnesses_once(PDO $pdo): void
+{
+    try {
+        $mark = 'cleanup_event_witnesses_orphans_1';
+        $s = $pdo->prepare('SELECT 1 FROM app_migrations WHERE name=?'); $s->execute([$mark]);
+        if ($s->fetchColumn()) { return; }
+        $pdo->exec('DELETE FROM event_witnesses WHERE person_id NOT IN (SELECT id FROM persons) OR event_id NOT IN (SELECT id FROM events)');
+        $pdo->prepare('INSERT OR REPLACE INTO app_migrations(name) VALUES(?)')->execute([$mark]);
+    } catch (Throwable $_) { /* table absente ou base occupée : ce sera fait à la prochaine ouverture */ }
+}
+
 function db(): PDO
 {
     static $pdo = null;
@@ -197,6 +227,7 @@ function db(): PDO
     }
     drop_unexpected_schema_objects($pdo);
     migrate_database($pdo, DB_PATH);
+    cleanup_orphan_witnesses_once($pdo);
     // Communes françaises (contours, voisinages, GeoNames) : chargées une fois si la base ne les a pas.
     ensure_reference_data($pdo, DB_PATH);
     return $pdo;

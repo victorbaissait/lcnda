@@ -234,7 +234,7 @@
         let fi = H.floors.findIndex(f => f.level === 0); if (fi < 0) fi = 0;
         let tracing = false, exporting = false, tool = 'select', zoom = .6, panX = 80, panY = 80, sel = null, drag = null, draft = null, hover = null, dirty = false, hist = [], hpos = -1, view3d = null, tab = 'props', libCat = 'Chambre', libQ = '', mine = [];
         const F = () => H.floors[fi];
-        const dlg = document.createElement('dialog'); dlg.className = 'modal h-hs-dlg';
+        const dlg = document.createElement('dialog'); dlg.className = 'modal h-hs-dlg'; dlg.dataset.ownClose = '1'; // Échap : la maison demande elle-même (une seule question)
         dlg.innerHTML = `<div class="h-hs">
             <header class="h-hs-top"><span class="h-hs-logo" aria-hidden="true">🏠</span><input class="h-hs-name" data-hs-name value="${esc(name)}" maxlength="200" aria-label="Nom de la maison">
                 <nav class="h-hs-floors" data-hs-floors></nav><span class="h-hs-vers" data-hs-vers></span>
@@ -639,6 +639,7 @@
             if (d.moved) commit({wallEnd: 'Mur modifié', roomPt: 'Pièce modifiée', rot: 'Objet tourné', refMove: 'Plan ancien déplacé'}[Object.keys(d).find(k => ['wallEnd', 'roomPt', 'rot', 'refMove'].includes(k))] || 'Déplacé');
         });
         svg.addEventListener('dblclick', e => { if (draft) finishDraft(); else { const hit = hitOf(e); if (hit?.type === 'room') { tab = 'props'; sel = hit; render(); pane.querySelector('[data-hs-p="name"]')?.focus(); } } });
+        try { window.LCNDA_UI?.pinchAsWheel?.(stage, .0018); } catch (_) {} // 🤏 téléphone : zoom à deux doigts sur le plan (pas sur la page)
         stage.addEventListener('wheel', e => { if (view3d) return; e.preventDefault(); const r = svg.getBoundingClientRect(), cx = e.clientX - r.left, cy = e.clientY - r.top; if (e.ctrlKey || e.metaKey || Math.abs(e.deltaY) > Math.abs(e.deltaX)) { const z = clamp(zoom * Math.exp(-e.deltaY * .0018), .03, 8); panX = cx - (cx - panX) * z / zoom; panY = cy - (cy - panY) * z / zoom; zoom = z; } else { panX -= e.deltaX; panY -= e.deltaY; } render(); }, {passive: false});
         /** une pièce rectangulaire : 4 murs (ceux qui existent déjà ne sont pas doublés) et la pièce elle-même */
         function makeRoomRect(a, b) {
@@ -1065,6 +1066,7 @@
         let tmr = 0;
         // 👻 calque d'un autre étage : la liste (en haut ou dans l'onglet Étage) et sa transparence
         dlg.addEventListener('change', e => { const el = e.target; if (el.matches?.('[data-hs-ver]')) { stopPlay(); const v0 = el.value; if (v0 === '__new' || v0 === '__manage') { paintVers(); CMD[v0 === '__new' ? 'vernew' : 'vers'](); } else switchVer(v0); return; } if (!el.matches?.('[data-hs-ghost]')) return; F().ghost = el.value; delete F().showBelow; later('Calque'); render(); });
+        dlg.addEventListener('input', e => { if (e.target.matches?.('[data-hs-name]')) { dirty = true; syncSt(); } }); // renommer = une modification (× demande avant de la perdre)
         dlg.addEventListener('input', e => { const el = e.target; if (!el.matches?.('[data-hs-ghostop]')) return; H.ghostOp = Number(el.value) / 100; dirty = true; render(); });
         // le lieu de la maison : le menu de choix unique (un lieu de la base, ou un texte gardé tel quel) → place_id + place_text
         pane.addEventListener('picker-change', async e => {
@@ -1124,7 +1126,7 @@
             if (view3d?.walking?.()) { if (k === 'escape') { e.preventDefault(); if (!view3d.justUnlocked()) view3d.stopWalk(); } return; } // 🚶 en visite : les lettres servent à marcher
             if (mod && k === 'z') { e.preventDefault(); restore(e.shiftKey ? hpos + 1 : hpos - 1); return; }
             if (k === ' ' && !space) { space = true; stage.dataset.tool = 'pan'; e.preventDefault(); return; }
-            if (k === 'escape') { e.preventDefault(); if (draft) { draft = null; hover = null; render(); } else if (sel) { sel = null; render(); } else if (tool !== 'select') setTool('select'); return; }
+            if (k === 'escape') { e.preventDefault(); if (draft) { draft = null; hover = null; render(); } else if (sel) { sel = null; render(); } else if (tool !== 'select') setTool('select'); else close(); return; } // rien en cours : Échap ferme (avec la question s'il reste des modifications)
             if (k === 'enter' && draft) { finishDraft(); return; }
             if ((k === 'delete' || k === 'backspace') && sel) { e.preventDefault(); CMD.del(); return; }
             if (k === 'r' && sel?.type === 'item') { CMD.rot90(); return; }
