@@ -193,6 +193,10 @@ try {
     if ($isWrite && $action === 'save_audio_project') {
         save_audio_project($pdo, $_FILES['file'] ?? null, $_POST);
     }
+    if ($action === 'puzzle' || $action === 'puzzle_write') { // 🧩 parties de puzzle (lib/puzzle.php)
+        require_once __DIR__ . '/lib/puzzle.php';
+        puzzle_dispatch($pdo, (string) $action, $isWrite, $payload);
+    }
     if ($isWrite && $action === 'house_model_upload') {
         house_model_upload($pdo, $_FILES['file'] ?? null, $_POST);
     }

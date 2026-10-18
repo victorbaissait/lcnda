@@ -8,7 +8,9 @@
  *    à chaque mouvement on ne redessine que le groupe tiré (fluide à 1000 pièces) ;
  *  - chrono en temps réel (pause quand l'onglet est caché ou avec ⏸ / Espace, image floutée en pause), record par image
  *    et par nombre de pièces, historique des puzzles terminés ;
- *  - enregistrement tout seul (retardé) dans ce navigateur, comme les autres parties.
+ *  - parties, historique et records rangés dans la base de la généalogie (lib/puzzle.php) : enregistrement tout seul
+ *    (2,5 s après le dernier coup, au plus toutes les 10 s, à la pause, en quittant l'écran ou la page), « 💾 Enregistrer »
+ *    (⌘S), « ✓ Enregistré » dans la barre ; si le serveur ne répond pas, secours dans ce navigateur, renvoyé ensuite.
  *
  *  API (window.LCNDA_PUZZLE) : owns(id), renderSetup(workspace, ctx), render(workspace, id, ctx), sidebarHtml(activeId),
  *  bindSidebar(content, ctx, signal), gameCount(), debug() (pour les tests).
@@ -29,35 +31,157 @@
     const fmtTime = ms => { const s = Math.floor(Math.max(0, Number(ms) || 0) / 1000), h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60; return h ? `${h}:${p2(m)}:${p2(x)}` : `${p2(m)}:${p2(x)}`; };
 
     const TITLE = 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle';
-    /* Rangé seulement dans ce navigateur (« lcnda_ » : ni copié dans la base toutes les secondes — l'état d'un puzzle de
-     * 1000 pièces pèse ~30 ko et change sans arrêt —, ni repris par les autres fenêtres à chaque coup). */
-    const GAMES_KEY = 'lcnda_puzzle-games-v1', STATE_PREFIX = 'lcnda_puzzle-state-v1:', HISTORY_KEY = 'lcnda_puzzle-history-v1';
-    const RECORDS_KEY = 'lcnda_puzzle-records-v1', PREFS_KEY = 'lcnda_puzzle-prefs-v1';
-    const MAX_GAMES = 8, MAX_HISTORY = 30, MIN_PIECES = 4, MAX_PIECES = 1000;
+    const PREFS_KEY = 'lcnda_puzzle-prefs-v1';
+    const MAX_GAMES = 30, MIN_PIECES = 4, MAX_PIECES = 1000;
     const COUNTS = [12, 24, 48, 100, 150, 300, 500, 1000];
+    const SAVE_QUIET_MS = 2500, SAVE_EVERY_MS = 10000; // enregistrement : 2,5 s après le dernier coup, au plus toutes les 10 s
 
-    // ── mémoire du navigateur (jamais bloquante : une erreur de place prévient une fois) ──
-    let quotaWarned = false;
+    // ── mémoire du navigateur : réglages, et secours quand le serveur ne répond pas ──
     const store = {
         get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (_) { return d; } },
-        set(k, v) {
-            try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) {
-                if (!quotaWarned) { quotaWarned = true; toast('Plus assez de place dans ce navigateur pour enregistrer le puzzle : termine ou supprime une ancienne partie.', 'error'); }
-                return false;
-            }
-        },
+        set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (_) { return false; } },
         del(k) { try { localStorage.removeItem(k); } catch (_) {} },
     };
-    const games = () => { const v = store.get(GAMES_KEY, []); return Array.isArray(v) ? v.filter(g => g && g.id) : []; };
-    const saveGames = list => store.set(GAMES_KEY, list.slice(0, MAX_GAMES));
-    const history = () => { const v = store.get(HISTORY_KEY, []); return Array.isArray(v) ? v.filter(g => g && g.id) : []; };
-    const records = () => { const v = store.get(RECORDS_KEY, {}); return v && typeof v === 'object' ? v : {}; };
     const recordKey = meta => `${meta.image?.key || meta.image?.url || ''}|${meta.cols * meta.rows}`;
     const prefs = () => ({count: 48, shape: 'jigsaw', rotate: false, model: true, ...(store.get(PREFS_KEY, {}) || {})});
     const owns = id => /^puz-/.test(String(id || ''));
     const newId = () => `puz-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-    const gameCount = () => games().length;
 
+    /* ═════ Les parties sont rangées dans la base de la généalogie (lib/puzzle.php) ═════
+     * GET puzzle → la liste (en cours, terminées, records) ; GET puzzle&uid → une partie avec ses pièces ;
+     * POST puzzle_write {op: save | finish | delete}. Pas de passage par api() d'app.js : chaque écriture y relance le
+     * compte des personnes et prévient tout l'écran (lcnda:data-changed), inutile pour un jeu qui s'enregistre souvent.
+     * Si le serveur ne répond pas (ou en mode consultation), le dernier état non envoyé est gardé dans ce navigateur
+     * (« lcnda_puzzle-pending-v2:<base> », une entrée par partie) et renvoyé dès que possible. */
+    const LEGACY = {games: 'lcnda_puzzle-games-v1', state: 'lcnda_puzzle-state-v1:', history: 'lcnda_puzzle-history-v1', records: 'lcnda_puzzle-records-v1'};
+    const BASE_KEY = 'lcnda_puzzle-base-v2', PENDING_PREFIX = 'lcnda_puzzle-pending-v2:', LIST_PREFIX = 'lcnda_puzzle-list-v2:';
+    const C = {loaded: false, loading: null, offline: false, kiosk: false, base: store.get(BASE_KEY, '') || '', games: [], history: [], records: {}, listeners: new Set()};
+    const pendingKey = () => PENDING_PREFIX + (C.base || 'x');
+    const pendingAll = () => { const v = store.get(pendingKey(), {}); return v && typeof v === 'object' && !Array.isArray(v) ? v : {}; };
+    function pendingPut(p) {
+        const all = pendingAll(), old = all[p.uid];
+        if (old && old.op === 'finish' && p.op !== 'finish') return; // une partie finie ne redevient pas « en cours »
+        const merged = old && p.op === 'save' && old.op === 'save' ? {...old, ...p, meta: {...(old.meta || {}), ...(p.meta || {})}, state: p.state || old.state} : p;
+        all[p.uid] = merged; store.set(pendingKey(), all);
+    }
+    function pendingDrop(uid, ts) { const all = pendingAll(); if (all[uid] && (!ts || Number(all[uid].saved_at || 0) <= ts)) { delete all[uid]; store.set(pendingKey(), all); } }
+    const csrf = () => APP().state?.csrf || window.INSTALL_CSRF || '';
+    async function send(body, {keepalive = false} = {}) {
+        let r;
+        try { r = await fetch('api.php?action=puzzle_write', {method: 'POST', keepalive, headers: {'Content-Type': 'application/json', Accept: 'application/json', 'X-CSRF-Token': csrf()}, body: JSON.stringify({...body, csrf: csrf()})}); }
+        catch (e) { const x = new Error('Pas de connexion avec LCNDA : la partie est gardée dans ce navigateur.'); x.network = true; throw x; }
+        const d = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
+        if (!r.ok || d.error) { const x = new Error(d.error || `Erreur ${r.status}`); x.status = r.status; x.kiosk = r.status === 423; x.network = r.status >= 500 || r.status === 419; throw x; }
+        C.offline = false; return d;
+    }
+    const notify = () => C.listeners.forEach(f => { try { f(); } catch (_) {} });
+    /** Applique localement ce qu'on vient d'enregistrer (la colonne de gauche suit sans relire le serveur). */
+    function cachePut(meta, status = 'playing') {
+        C.games = C.games.filter(g => g.id !== meta.id); C.history = C.history.filter(g => g.id !== meta.id);
+        if (status === 'playing') C.games.unshift(meta); else if (status === 'done') C.history.unshift(meta);
+        store.set(LIST_PREFIX + (C.base || 'x'), {games: C.games.map(g => ({...g, image: g.image?.url?.startsWith('data:') ? {...g.image, url: ''} : g.image})), history: C.history.slice(0, 100), records: C.records});
+    }
+    /** Un envoi : réussi → oublié du secours ; refusé définitivement (422) → oublié aussi ; sinon gardé pour plus tard. */
+    async function push(p, opts = {}) {
+        try {
+            const d = await send(p, opts); pendingDrop(p.uid, Number(p.saved_at || 0)); C.kiosk = false;
+            if (Object.keys(pendingAll()).length) setTimeout(flushPending, 50);
+            return {ok: true, d};
+        } catch (e) {
+            if (e.status === 422 || e.status === 404) { pendingDrop(p.uid); return {ok: false, refused: true, error: e}; }
+            pendingPut(p); if (e.kiosk) C.kiosk = true; else C.offline = true; schedulePendingRetry();
+            return {ok: false, error: e};
+        }
+    }
+    let retryT = 0, flushing = false;
+    function schedulePendingRetry() { if (!retryT) retryT = setTimeout(() => { retryT = 0; flushPending(); }, 20000); }
+    async function flushPending() {
+        if (flushing) return; flushing = true;
+        try {
+            for (const p of Object.values(pendingAll())) {
+                try { await send(p); pendingDrop(p.uid, Number(p.saved_at || 0)); }
+                catch (e) { if (e.status === 422 || e.status === 404) pendingDrop(p.uid); else { if (e.kiosk) C.kiosk = true; else C.offline = true; schedulePendingRetry(); break; } }
+            }
+        } finally { flushing = false; notify(); }
+    }
+    window.addEventListener('online', () => flushPending());
+
+    /** Les anciennes parties gardées dans le navigateur (avant l'enregistrement dans la base) : reprises une fois, puis effacées. */
+    async function adoptLegacy() {
+        const g0 = store.get(LEGACY.games, null), h0 = store.get(LEGACY.history, null);
+        if (!Array.isArray(g0) && !Array.isArray(h0)) return 0;
+        let n = 0, failed = false;
+        for (const g of (Array.isArray(g0) ? g0 : [])) {
+            if (!g || !owns(g.id)) continue;
+            const st = store.get(LEGACY.state + g.id, null);
+            if (!st) continue;
+            try { await send({op: 'save', uid: g.id, meta: g, state: st, saved_at: Number(g.updatedAt) || Date.now()}); n++; }
+            catch (e) { if (e.status !== 422) { failed = true; break; } }
+        }
+        for (const h of (failed ? [] : Array.isArray(h0) ? h0.slice().reverse() : [])) {
+            if (!h || !owns(h.id)) continue;
+            try { await send({op: 'finish', uid: h.id, meta: h, time: Number(h.time) || Number(h.elapsed) || 0, saved_at: Number(h.finishedAt) || Date.now()}); n++; }
+            catch (e) { if (e.status !== 422) { failed = true; break; } }
+        }
+        if (failed) return -1;
+        try { Object.keys(localStorage).filter(k => k.startsWith(LEGACY.state)).forEach(k => store.del(k)); } catch (_) {}
+        [LEGACY.games, LEGACY.history, LEGACY.records].forEach(k => store.del(k));
+        return n;
+    }
+    /** Relit la liste dans la base (une seule requête à la fois). Serveur muet : la dernière liste connue + le secours. */
+    function loadAll(force = false) {
+        if (C.loading && !force) return C.loading;
+        C.loading = (async () => {
+            try {
+                let r = await fetch('api.php?action=puzzle', {headers: {Accept: 'application/json'}});
+                let d = await r.json();
+                if (!r.ok || d.error) throw Object.assign(new Error(d.error || 'Erreur'), {status: r.status});
+                if (d.base && d.base !== C.base) {
+                    const orphan = store.get(PENDING_PREFIX + 'x', null); // envoyé hors ligne avant de connaître la base
+                    C.base = d.base; store.set(BASE_KEY, d.base);
+                    if (orphan && typeof orphan === 'object') { Object.values(orphan).forEach(pendingPut); store.del(PENDING_PREFIX + 'x'); }
+                }
+                C.offline = false;
+                const hadPending = Object.keys(pendingAll()).length > 0;
+                if (hadPending) await flushPending();
+                const adopted = await adoptLegacy();
+                if (adopted > 0 || hadPending) { r = await fetch('api.php?action=puzzle', {headers: {Accept: 'application/json'}}); d = await r.json(); }
+                C.games = Array.isArray(d.games) ? d.games : []; C.history = Array.isArray(d.history) ? d.history : []; C.records = d.records && typeof d.records === 'object' ? {...d.records} : {};
+                if (adopted > 0) toast(`🧩 ${plural(adopted, 'partie de puzzle rangée', 'parties de puzzle rangées')} dans la base de la généalogie.`, 'success');
+            } catch (e) {
+                C.offline = true;
+                const l = store.get(LIST_PREFIX + (C.base || 'x'), null);
+                if (l && !C.loaded) { C.games = l.games || []; C.history = l.history || []; C.records = l.records || {}; }
+            }
+            // ce qui n'est pas encore parti (hors ligne) se voit quand même
+            for (const p of Object.values(pendingAll())) {
+                if (p.op === 'save' && p.meta?.image && !C.games.some(g => g.id === p.uid) && !C.history.some(g => g.id === p.uid)) C.games.unshift({...p.meta, id: p.uid});
+                if (p.op === 'delete') { C.games = C.games.filter(g => g.id !== p.uid); C.history = C.history.filter(g => g.id !== p.uid); }
+            }
+            C.loaded = true; C.loading = null; notify();
+            return C;
+        })();
+        return C.loading;
+    }
+    /** Une partie avec ses pièces : la base, sauf si ce navigateur a plus récent (pas encore envoyé). */
+    async function loadGame(uid) {
+        const p = pendingAll()[uid];
+        let g = null, err = null;
+        try {
+            const r = await fetch('api.php?action=puzzle&uid=' + encodeURIComponent(uid), {headers: {Accept: 'application/json'}});
+            const d = await r.json();
+            if (r.status === 404) err = Object.assign(new Error(d.error || 'Partie introuvable.'), {status: 404});
+            else if (!r.ok || d.error) throw new Error(d.error || 'Erreur');
+            else g = d.game;
+        } catch (e) { err = err || Object.assign(e, {network: true}); C.offline = true; }
+        if (p && p.op === 'save' && (!g || Number(p.saved_at || 0) > Number(g.saved_at || 0)) && (g || p.meta?.image) && p.state) {
+            return {uid, status: 'playing', meta: {...(g?.meta || {}), ...p.meta, id: uid}, state: p.state, saved_at: p.saved_at, local: true};
+        }
+        if (p && p.op === 'finish' && (!g || g.status !== 'done')) return {uid, status: 'done', meta: {...(g?.meta || {}), ...p.meta, id: uid, time: p.time}, state: null, local: true};
+        if (g) return g;
+        throw err || new Error('Partie introuvable.');
+    }
+    const gameCount = () => C.games.length;
     // ── calculs de la grille ──
     /** Nombre de pièces demandé → colonnes × lignes, pièces presque carrées, total le plus proche. */
     function gridFor(n, w, h) {
@@ -263,7 +387,7 @@
         form.elements.model.addEventListener('change', e => { setup.model = e.target.checked; savePrefs(); });
         showEstimate();
         let starting = false;
-        form.addEventListener('submit', e => {
+        form.addEventListener('submit', async e => {
             e.preventDefault(); if (starting) return;
             if (gameCount() >= MAX_GAMES) { smsg.innerHTML = notice('warn', `Les ${MAX_GAMES} puzzles en cours sont gardés : supprime-en un pour en commencer un autre.`); return; }
             if (!setup.image) { smsg.innerHTML = notice('warn', 'Choisis d’abord une image : dans la base, la photo d’une personne, ou glisse-la ici.'); q('[data-pz-media]').focus(); return; }
@@ -272,13 +396,14 @@
             setup.name = form.elements.name.value;
             try {
                 const {meta, st} = createGame(setup);
-                const okState = store.set(STATE_PREFIX + meta.id, st);
-                if (!okState || !saveGames([meta, ...games()])) { store.del(STATE_PREFIX + meta.id); throw new Error('place'); }
+                const res = await push({op: 'save', uid: meta.id, meta, state: st, saved_at: Date.now()});
+                if (res.refused) throw res.error;
+                fresh.set(meta.id, {meta, state: st}); cachePut(meta);
                 setup = {...setup, image: null, name: ''};
                 ctx.open?.(meta.id);
             } catch (err) {
                 starting = false; btn.disabled = false; btn.textContent = '🧩 Commencer le puzzle';
-                smsg.innerHTML = notice('error', err.message === 'place' ? 'Plus de place pour enregistrer ce puzzle dans le navigateur.' : `Le puzzle n’a pas pu commencer : ${err.message || err}`);
+                smsg.innerHTML = notice('error', `Le puzzle n’a pas pu commencer : ${err.message || err}`);
             }
         });
     }
@@ -295,19 +420,33 @@
     let cur = null; // la partie affichée
     function stopRunning() { if (cur) cur.stop(); cur = null; }
 
+    const fresh = new Map(); // parties qu'on vient de créer : pas besoin de les relire
+    let renderSeq = 0;
     function render(ws, id, ctx) {
-        const meta = games().find(g => g.id === id), done = !meta && history().find(g => g.id === id);
-        if (!meta && !done) return false;
+        const known = C.games.some(g => g.id === id) || C.history.some(g => g.id === id) || fresh.has(id) || !!pendingAll()[id];
+        if (C.loaded && !known && !C.offline) return false;
         stopRunning();
-        cur = new Game(ws, meta || done, ctx, !!done);
+        const seq = ++renderSeq, f = fresh.get(id); fresh.delete(id);
+        if (f) { cur = new Game(ws, f.meta, ctx, false, f.state); return true; }
+        ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait">${UI().spinner ? UI().spinner('Ouverture de la partie…') : 'Ouverture de la partie…'}</div></section>`;
+        loadGame(id).then(g => {
+            if (seq !== renderSeq || !ws.isConnected) return;
+            cur = new Game(ws, {...g.meta, id}, ctx, g.status === 'done', g.state);
+        }).catch(e => {
+            if (seq !== renderSeq || !ws.isConnected) return;
+            if (e.status === 404) { C.games = C.games.filter(g => g.id !== id); C.history = C.history.filter(g => g.id !== id); ctx.newGame?.(); return; }
+            ws.innerHTML = `<section class="goose-page pz-page"><div class="pz-wrap pz-wait">${notice('error', `La partie n’a pas pu être ouverte : ${e.message || e}`)}<button type="button" class="button" data-pz-retry>Réessayer</button></div></section>`;
+            ws.querySelector('[data-pz-retry]').addEventListener('click', () => render(ws, id, ctx));
+        });
         return true;
     }
 
     const BAR_BTN = (attr, label, title, extra = '') => `<button type="button" class="pz-btn" ${attr} title="${esc(title)}" aria-label="${esc(title)}"${extra}>${label}</button>`;
 
     class Game {
-        constructor(ws, meta, ctx, finished) {
-            this.ws = ws; this.meta = {...meta}; this.ctx = ctx || {}; this.finished = finished; this.ac = new AbortController();
+        constructor(ws, meta, ctx, finished, state = null) {
+            this.ws = ws; this.meta = {...meta}; this.ctx = ctx || {}; this.finished = finished; this.ac = new AbortController(); this.initState = state;
+            this.dirty = false; this.stateDirty = false; this.firstDirty = 0; this.saving = null; this.saveState = C.kiosk ? 'kiosk' : C.offline ? 'offline' : 'saved';
             this.elapsed = finished ? Number(meta.time) || 0 : Number(meta.elapsed) || 0; this.runStart = 0; this.paused = false; this.pauseReason = '';
             this.cam = {s: 1, x: 0, y: 0}; this.drag = null; this.pan = null; this.pinch = null; this.pointers = new Map(); this.sel = -1;
             this.raf = 0; this.saveT = 0; this.lastSec = -1; this.stats = {frames: 0, last: 0, max: 0, sum: 0, dragFrames: 0, dragSum: 0, dragMax: 0};
@@ -315,12 +454,13 @@
         }
         get G() { return this.geo; }
         html() {
-            const m = this.meta, total = m.cols * m.rows, rec = records()[recordKey(m)];
-            this.ws.innerHTML = `<section class="goose-page pz-page pz-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${this.finished ? 'PUZZLE TERMINÉ' : 'PUZZLE EN COURS'} · ${num(total)} PIÈCES (${m.cols} × ${m.rows})</span><h2>${esc(m.name)}</h2><p>${esc(m.image?.title || '')}${m.shape === 'square' ? ' · carrés simples' : ''}${m.rotate ? ' · pièces tournées' : ''}</p></div>
+            const m = this.meta, total = m.cols * m.rows, rec = C.records[recordKey(m)];
+            this.ws.innerHTML = `<section class="goose-page pz-page pz-play"><header class="goose-head goose-game-head"><div><span class="eyebrow">${this.finished ? 'PUZZLE TERMINÉ' : 'PUZZLE EN COURS'} · ${num(total)} PIÈCES (${m.cols} × ${m.rows})</span><h2><input class="pz-name" data-pz-name value="${esc(m.name)}" maxlength="120" aria-label="Nom de la partie" title="Le nom de la partie : clique pour le changer"${this.finished ? ' readonly' : ''}></h2><p>${esc(m.image?.title || '')}${m.shape === 'square' ? ' · carrés simples' : ''}${m.rotate ? ' · pièces tournées' : ''}</p></div>
                 <div class="page-actions">${this.finished ? '<button type="button" class="button small" data-pz-again title="Recommencer ce puzzle avec la même image et le même nombre de pièces">↻ Rejouer</button>' : ''}<button type="button" class="button small secondary" data-pz-new title="Préparer une autre partie">＋ Nouvelle partie</button>${this.finished ? '' : '<button type="button" class="button small secondary" data-pz-delete title="Supprimer ce puzzle (tu pourras annuler)">Supprimer</button>'}</div></header>
                 <div class="pz-wrap" data-pz-wrap>
                     <div class="pz-bar">
                         <div class="pz-clock"><span class="pz-time" data-pz-time aria-label="Temps passé">${fmtTime(this.elapsed)}</span>${this.finished ? '' : BAR_BTN('data-pz-pause', '❚❚', 'Mettre en pause (Espace)', ' data-shortcut="Espace"')}</div>
+                        ${this.finished ? '' : `<div class="pz-savebox"><span class="ui-status pz-status" data-ui-status data-pz-status aria-live="polite"></span><button type="button" class="button small pz-save" data-pz-save title="Enregistrer la partie maintenant (elle s’enregistre aussi toute seule)" data-shortcut="⌘S">💾 Enregistrer</button></div>`}
                         <div class="pz-progress"><span data-pz-count aria-live="polite"></span><i class="pz-meter"><b data-pz-meter></b></i><small data-pz-record>${rec ? `Ton record : ${fmtTime(rec)}` : ''}</small></div>
                         <div class="pz-tools">
                             ${BAR_BTN('data-pz-model', '🖼', 'Montrer ou cacher l’image modèle', ` aria-pressed="${m.model !== false}"`)}
@@ -345,7 +485,8 @@
             this.el = {wrap: $('[data-pz-wrap]'), stage: $('[data-pz-stage]'), canvas: $('[data-pz-canvas]'), time: $('[data-pz-time]'), count: $('[data-pz-count]'), meter: $('[data-pz-meter]'), record: $('[data-pz-record]'),
                 pause: $('[data-pz-pausebox]'), why: $('[data-pz-pausewhy]'), win: $('[data-pz-win]'), loading: $('[data-pz-loading]'), model: $('[data-pz-modelbox]'), modelImg: $('[data-pz-modelimg]')};
             this.ctx2 = this.el.canvas.getContext('2d');
-            this.bindBar();
+            this.savedElapsed = Math.round(this.elapsed); this.lastTimeSave = performance.now();
+            this.bindBar(); this.setStatus(this.saveState);
         }
         async load() {
             const m = this.meta;
@@ -373,7 +514,7 @@
             const G = this.geo, n = G.n;
             this.tx = new Float32Array(n); this.ty = new Float32Array(n);
             for (let p = 0; p < n; p++) { this.tx[p] = (p % G.cols + .5) * G.pw; this.ty[p] = (Math.floor(p / G.cols) + .5) * G.ph; }
-            const st = this.finished ? null : store.get(STATE_PREFIX + this.meta.id, null), ok = st && Array.isArray(st.cx) && st.cx.length === n;
+            const st = this.finished ? null : this.initState, ok = st && Array.isArray(st.cx) && st.cx.length === n; this.initState = null;
             this.cx = Float32Array.from(ok ? st.cx : this.tx); this.cy = Float32Array.from(ok ? st.cy : this.ty);
             this.rot = Uint8Array.from(ok ? st.rot : new Array(n).fill(0)); this.lk = Uint8Array.from(ok ? st.lk : new Array(n).fill(1));
             this.grp = Int32Array.from(ok && Array.isArray(st.grp) && st.grp.length === n ? st.grp : Array.from({length: n}, (_, i) => i));
@@ -537,7 +678,7 @@
         }
         afterMove(res) {
             if (res) this.staticLayer = null;
-            this.updateCount(); this.scheduleSave(); this.requestDraw();
+            this.updateCount(); this.markDirty(true); this.requestDraw();
             if (this.placed >= this.geo.n && !this.finished) this.win();
         }
 
@@ -591,7 +732,8 @@
             c.addEventListener('wheel', e => { e.preventDefault(); if (this.paused) return; const pt = pos(e), k = e.deltaMode === 1 ? 0.05 : 0.0018; this.zoomAt(pt.x, pt.y, Math.exp(-e.deltaY * k)); }, {passive: false, signal: this.ac.signal});
             if ('ResizeObserver' in window) { this.ro = new ResizeObserver(() => { if (this.alive()) this.resize(); }); this.ro.observe(this.el.stage); }
             document.addEventListener('visibilitychange', () => { if (document.hidden) this.pause('hidden'); }, sig);
-            window.addEventListener('pagehide', () => this.saveNow(), sig);
+            window.addEventListener('pagehide', () => this.saveNow({keepalive: true, force: true}), sig);
+            window.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && !e.altKey && (e.key === 's' || e.key === 'S') && this.alive() && !this.finished && !document.querySelector('dialog[open]')) { e.preventDefault(); e.stopImmediatePropagation(); this.saveNow({force: true}); } }, {capture: true, signal: this.ac.signal});
             document.addEventListener('fullscreenchange', () => { this.el.wrap.classList.toggle('is-full', document.fullscreenElement === this.el.wrap || this.cssFull); setTimeout(() => { this.resize(); this.fit(); }, 60); }, sig);
             document.addEventListener('keydown', e => this.onKey(e), sig);
         }
@@ -632,7 +774,12 @@
             q('[data-pz-zout]')?.addEventListener('click', () => this.zoomAt(this.cw / 2, this.ch / 2, 0.8), sig);
             q('[data-pz-fit]')?.addEventListener('click', () => this.fit(), sig);
             q('[data-pz-full]')?.addEventListener('click', () => this.toggleFull(), sig);
-            q('[data-pz-new]')?.addEventListener('click', () => { this.saveNow(); this.ctx.newGame?.(); }, sig);
+            q('[data-pz-new]')?.addEventListener('click', () => { this.ctx.newGame?.(); }, sig); // stop() enregistre
+            q('[data-pz-save]')?.addEventListener('click', () => this.saveNow({force: true}), sig);
+            const name = q('[data-pz-name]');
+            name?.addEventListener('input', () => { if (this.finished) return; this.meta.name = name.value.trim().slice(0, 120) || 'Mon puzzle'; this.markDirty(false); }, sig);
+            name?.addEventListener('change', () => { if (!this.finished) this.saveNow(); }, sig);
+            name?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === 'Escape') { e.preventDefault(); if (e.key === 'Escape') name.value = this.meta.name; name.blur(); } }, sig);
             q('[data-pz-again]')?.addEventListener('click', () => this.again(), sig);
             q('[data-pz-delete]')?.addEventListener('click', () => this.remove(), sig);
             this.el.model.addEventListener('click', () => this.el.model.classList.toggle('is-big'), sig);
@@ -690,7 +837,7 @@
         onTick() {
             if (!this.alive()) { this.stop(); return; }
             this.showTime();
-            if (!this.paused && !this.finished && performance.now() - (this.lastTimeSave || 0) > 5000) { this.lastTimeSave = performance.now(); this.scheduleSave(); }
+            if (!this.paused && !this.finished && !this.saveT && !this.saving && performance.now() - (this.lastTimeSave || 0) > SAVE_EVERY_MS) this.saveNow(); // le temps, au plus toutes les 10 s
         }
         updateCount() {
             const n = this.geo.n, k = this.placed, pc = Math.floor(k * 100 / n);
@@ -698,33 +845,82 @@
         }
 
         // ── enregistrement (retardé, sans bloquer) ──
+        /** Quelque chose a changé : enregistrement 2,5 s après le dernier coup, et au plus tard 10 s après le premier. */
+        markDirty(pieces = true) {
+            if (this.finished || this.removed) return;
+            if (pieces) this.stateDirty = true;
+            if (!this.dirty) { this.dirty = true; this.firstDirty = performance.now(); }
+            if (!this.saving) this.setStatus('dirty');
+            this.scheduleSave();
+        }
         scheduleSave() {
             if (this.finished) return; clearTimeout(this.saveT);
-            this.saveT = setTimeout(() => { const run = () => this.saveNow(); if (window.requestIdleCallback) requestIdleCallback(run, {timeout: 1500}); else run(); }, 800);
+            const wait = Math.max(0, Math.min(SAVE_QUIET_MS, this.firstDirty + SAVE_EVERY_MS - performance.now()));
+            this.saveT = setTimeout(() => { this.saveT = 0; const run = () => this.saveNow(); if (window.requestIdleCallback) requestIdleCallback(run, {timeout: 1200}); else run(); }, wait);
         }
-        saveMeta(extra = {}) {
-            if (this.finished) return;
-            const list = games(), i = list.findIndex(g => g.id === this.meta.id); if (i < 0) return;
-            this.meta = {...list[i], model: this.meta.model, edges: this.meta.edges, elapsed: Math.round(this.now()), placed: this.placed, updatedAt: Date.now(), ...extra};
-            list[i] = this.meta; saveGames(list);
-        }
-        saveNow() {
-            clearTimeout(this.saveT); this.saveT = 0;
-            if (this.finished || !this.geo || this.dead || this.removed) return;
+        saveMeta() { this.markDirty(false); }
+        piecesState() {
             const r1 = v => Math.round(v * 10) / 10;
-            store.set(STATE_PREFIX + this.meta.id, {v: 1, cx: Array.from(this.cx, r1), cy: Array.from(this.cy, r1), rot: Array.from(this.rot), grp: Array.from(this.grp), lk: Array.from(this.lk), order: this.order.slice()});
-            this.saveMeta();
+            return {v: 1, cx: Array.from(this.cx, r1), cy: Array.from(this.cy, r1), rot: Array.from(this.rot), grp: Array.from(this.grp), lk: Array.from(this.lk), order: this.order.slice()};
+        }
+        /** Ce qu'on envoie : la description (l'image seulement si elle est courte : une copie intégrée reste côté base) et les pièces. */
+        payload(withState = true) {
+            const m = this.meta, img = m.image && String(m.image.url || '').length <= 4000 ? m.image : undefined;
+            const meta = {name: m.name, cols: m.cols, rows: m.rows, shape: m.shape, rotate: !!m.rotate, model: m.model !== false, edges: !!m.edges, seed: m.seed, createdAt: m.createdAt, elapsed: Math.round(this.now()), placed: this.placed};
+            if (img) meta.image = img;
+            const p = {op: 'save', uid: m.id, meta, saved_at: Date.now()};
+            if (withState) p.state = this.piecesState();
+            return p;
+        }
+        setStatus(kind, msg = '') {
+            this.saveState = kind; const el = this.ws.querySelector('[data-pz-status]'); if (!el) return;
+            if (kind === 'offline' || kind === 'kiosk' || kind === 'refused') {
+                const t = kind === 'kiosk' ? '⚠️ Consultation : gardé ici' : kind === 'refused' ? '⚠️ Pas enregistré' : '⚠️ Gardé dans ce navigateur';
+                el.innerHTML = `<span class="ui-status-txt is-error">${esc(t)}</span>`;
+                el.title = kind === 'kiosk' ? 'Mode consultation : la base ne peut pas être modifiée. La partie est gardée dans ce navigateur.' : kind === 'refused' ? msg : 'Le serveur ne répond pas : la partie est gardée dans ce navigateur et partira dans la base dès que possible.';
+            } else { if (UI().savedStatus) UI().savedStatus(el, kind); else el.textContent = kind === 'saved' ? '✓ Enregistré' : kind === 'saving' ? 'Enregistrement…' : '• modifié'; el.title = ''; }
+        }
+        /** Enregistre tout de suite (bouton 💾, ⌘S, pause, sortie de l'écran ; keepalive au moment de quitter la page). */
+        async saveNow({keepalive = false, force = false} = {}) {
+            clearTimeout(this.saveT); this.saveT = 0;
+            if (this.finished || !this.geo || this.removed) return;
+            const el = Math.round(this.now());
+            if (!force && !this.dirty && Math.abs(el - (this.savedElapsed ?? -1e12)) < 900) return;
+            const withState = this.stateDirty || force || this.saveState !== 'saved';
+            const p = this.payload(withState);
+            this.dirty = false; this.stateDirty = false; this.firstDirty = 0; this.savedElapsed = el; this.lastTimeSave = performance.now();
+            Object.assign(this.meta, {elapsed: p.meta.elapsed, placed: p.meta.placed, updatedAt: Date.now()}); cachePut({...this.meta});
+            if (keepalive) { // la page se ferme : copie de secours ici, et envoi qui survit à la fermeture
+                pendingPut(withState ? p : {...p, state: this.piecesState()});
+                send(p, {keepalive: JSON.stringify(p).length < 60000}).then(() => pendingDrop(p.uid, p.saved_at)).catch(() => {});
+                return;
+            }
+            this.setStatus('saving'); this.saving = p;
+            const res = await push(p);
+            if (this.saving === p) this.saving = null;
+            if (!res.ok && !res.refused) this.stateDirty = true; // au prochain essai, les pièces repartent
+            if (this.removed || this.finished) return;
+            if (res.ok) this.setStatus(this.dirty ? 'dirty' : 'saved');
+            else this.setStatus(res.refused ? 'refused' : C.kiosk ? 'kiosk' : 'offline', res.error?.message || '');
+            this.ctx.renderSidebar?.();
         }
 
         // ── fin ──
         win() {
             this.elapsed = this.now(); this.runStart = 0; this.finished = true; this.showTime(true);
-            const m = this.meta, time = Math.round(this.elapsed), key = recordKey(m), rec = records(), old = Number(rec[key]) || 0, best = !old || time < old;
-            if (best) { rec[key] = time; store.set(RECORDS_KEY, rec); }
+            clearTimeout(this.saveT); this.saveT = 0;
+            const m = this.meta, time = Math.round(this.elapsed), key = recordKey(m), old = Number(C.records[key]) || 0, best = !old || time < old;
+            if (best) C.records[key] = time;
             const entry = {...m, elapsed: time, time, placed: this.geo.n, finishedAt: Date.now(), record: best};
-            store.set(HISTORY_KEY, [entry, ...history().filter(h => h.id !== m.id)].slice(0, MAX_HISTORY));
-            saveGames(games().filter(g => g.id !== m.id)); store.del(STATE_PREFIX + m.id);
-            this.meta = entry;
+            cachePut(entry, 'done'); this.meta = entry;
+            const fin = this.payload(false); fin.op = 'finish'; fin.time = time; fin.meta.elapsed = time; fin.meta.placed = this.geo.n;
+            if (!fin.meta.image && m.image) fin.meta.image = m.image; // une partie restée hors ligne : la base doit pouvoir la créer
+            push(fin).then(res => { // la base a le dernier mot (un record battu sur un autre ordinateur)
+                if (!res.ok || !this.el.record.isConnected) return;
+                const before = Number(res.d.record_before) || 0;
+                if (before && before !== old) { C.records[key] = Math.min(before, time); this.el.record.textContent = time < before ? '🏆 Nouveau record !' : `Ton record : ${fmtTime(before)}`; }
+            });
+            this.ws.querySelector('.pz-savebox')?.remove(); this.ws.querySelector('[data-pz-name]')?.setAttribute('readonly', '');
             this.el.record.textContent = best ? '🏆 Nouveau record !' : `Ton record : ${fmtTime(old)}`;
             this.ws.querySelector('[data-pz-pause]')?.remove();
             ['[data-pz-edges]', '[data-pz-shuffle]', '[data-pz-sort]', '[data-pz-rotate]'].forEach(s => this.ws.querySelector(s)?.remove());
@@ -742,15 +938,22 @@
             const m = this.meta;
             if (gameCount() >= MAX_GAMES) { toast(`Les ${MAX_GAMES} puzzles en cours sont gardés : supprime-en un pour en recommencer un.`, 'error'); return; }
             const {meta, st} = createGame({image: m.image, count: m.cols * m.rows, shape: m.shape, rotate: m.rotate, model: m.model, name: m.name});
-            if (!store.set(STATE_PREFIX + meta.id, st) || !saveGames([meta, ...games()])) { store.del(STATE_PREFIX + meta.id); return; }
-            this.ctx.open?.(meta.id);
+            push({op: 'save', uid: meta.id, meta, state: st, saved_at: Date.now()}).then(res => {
+                if (res.refused) { toast(`Le puzzle n’a pas pu recommencer : ${res.error?.message || ''}`, 'error'); return; }
+                fresh.set(meta.id, {meta, state: st}); cachePut(meta); this.ctx.open?.(meta.id);
+            });
         }
         remove() {
-            this.saveNow(); this.removed = true;
-            const m = games().find(g => g.id === this.meta.id), st = store.get(STATE_PREFIX + this.meta.id, null); if (!m) return;
-            saveGames(games().filter(g => g.id !== m.id)); store.del(STATE_PREFIX + m.id);
+            if (!this.geo) return;
+            const snap = this.payload(true), m = {...this.meta, elapsed: snap.meta.elapsed, placed: snap.meta.placed};
+            if (m.image) snap.meta.image = m.image;
+            this.removed = true; clearTimeout(this.saveT);
+            cachePut(m, 'gone'); push({op: 'delete', uid: m.id, saved_at: Date.now()});
             this.ctx.newGame?.();
-            toast(`Puzzle « ${m.name} » supprimé.`, '', {action: {label: '↶ Annuler', run: () => { if (st) store.set(STATE_PREFIX + m.id, st); saveGames([m, ...games().filter(g => g.id !== m.id)]); this.ctx.open?.(m.id); }}});
+            toast(`Puzzle « ${m.name} » supprimé.`, '', {action: {label: '↶ Annuler', run: async () => {
+                const res = await push({...snap, saved_at: Date.now()}); if (res.refused) { toast(res.error?.message || 'Impossible de remettre ce puzzle.', 'error'); return; }
+                fresh.set(m.id, {meta: m, state: snap.state}); cachePut(m); this.ctx.open?.(m.id);
+            }}});
         }
         stop() {
             if (this.dead) return;
@@ -762,12 +965,18 @@
 
     /* ═════════════════════ Colonne de gauche ═════════════════════ */
     function sidebarHtml(active) {
-        const list = games(), hist = history(), rec = records();
+        if (!C.loaded && !C.loading) loadAll(); // la liste vient de la base : la colonne se redessine quand elle arrive
+        const list = C.games, hist = C.history, rec = C.records;
         const inProgress = list.map(g => `<button class="side-button pz-side ${g.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(g.id)}" title="Reprendre ce puzzle"><strong>🧩 ${esc(g.name)}</strong><small>Puzzle · ${num(g.cols * g.rows)} pièces</small><small>⏱ ${fmtTime(g.elapsed)} · ${Math.floor((g.placed || 0) * 100 / Math.max(1, g.cols * g.rows))} %</small></button>`).join('');
         const done = hist.length ? `<div class="pz-side-title">🏆 Puzzles terminés</div>${hist.map(h => { const best = Number(rec[recordKey(h)]) || 0; return `<button class="side-button pz-side pz-side-done ${h.id === active ? 'is-active' : ''}" type="button" data-pz-open="${esc(h.id)}" title="Revoir ce puzzle terminé"><strong>${esc(h.name)}</strong><small>${num(h.cols * h.rows)} pièces · ⏱ ${fmtTime(h.time)}${best && best === Number(h.time) ? ' · 🏆' : ''}</small><small>${new Date(h.finishedAt || Date.now()).toLocaleDateString('fr-FR')}${best ? ` · record ${fmtTime(best)}` : ''}</small></button>`; }).join('')}` : '';
         return inProgress + done;
     }
     function bindSidebar(content, ctx, signal) {
+        if (!content.dataset.pzListen) { // une seule écoute : quand la liste arrive de la base, la colonne se redessine
+            content.dataset.pzListen = '1';
+            const f = () => { if (!content.isConnected) { C.listeners.delete(f); return; } if (content.querySelector('.goose-side-menu') && !C.loading) ctx.renderSidebar?.(); };
+            C.listeners.add(f);
+        }
         content.querySelectorAll('[data-pz-open]').forEach(b => b.addEventListener('click', () => ctx.open?.(b.dataset.pzOpen), signal ? {signal} : undefined));
     }
 

@@ -41,7 +41,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/profils.css?v=1">
     <link rel="stylesheet" href="assets/css/sciences.css?v=1">
     <link rel="stylesheet" href="assets/css/blocs.css?v=1">
-    <link rel="stylesheet" href="assets/css/puzzle.css?v=1">
+    <link rel="stylesheet" href="assets/css/puzzle.css?v=3">
 </head></html>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
@@ -1098,8 +1098,8 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-picker.js?v=5" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
-<script src="assets/js/app-puzzle.js?v=1" defer></script>
-<script src="assets/js/app-jeu.js?v=6" defer></script>
+<script src="assets/js/app-puzzle.js?v=3" defer></script>
+<script src="assets/js/app-jeu.js?v=8" defer></script>
 <script src="assets/js/app-chronologie.js?v=6" defer></script>
 <script src="assets/js/app-comparaison.js?v=6" defer></script>
 <script src="assets/js/app-carte.js?v=7" defer></script>
@@ -1117,7 +1117,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=134" defer></script>
+<script src="assets/js/heritage-more.js?v=135" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>

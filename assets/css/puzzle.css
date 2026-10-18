@@ -87,6 +87,16 @@
     .pz-src .button { flex: 1 1 100%; }
 }
 
+/* ── enregistrement (comme la zone E1 des éditeurs) et nom tapable ── */
+.pz-savebox { display: flex; align-items: center; gap: 8px; }
+.pz-status { min-width: 9.5em; justify-content: flex-end; }
+.pz-name { font: inherit; font-size: inherit; font-weight: inherit; letter-spacing: inherit; color: inherit; background: transparent; border: 0; border-bottom: 3px dashed transparent; padding: 0; margin: 0; width: 100%; min-width: 0; }
+.pz-name:hover:not([readonly]) { border-bottom-color: #bbb; }
+.pz-name:focus { outline: 0; border-bottom-color: #0b63e5; }
+.pz-name[readonly] { cursor: default; }
+.pz-wait { display: grid; place-items: center; gap: 12px; min-height: 320px; padding: 24px; }
+@media (max-width: 700px) { .pz-savebox { order: 2; } .pz-status { min-width: 0; } }
+
 /* ── mode sombre (écrit à la main : la table et les cartes) ── */
 :root[data-theme="dark"] .pz-stage { background: #26231f; }
 :root[data-theme="dark"] .pz-wrap, :root[data-theme="dark"] .pz-bar, :root[data-theme="dark"] .pz-hint { background: #212121; border-color: #e8e8e8; }
@@ -94,6 +104,7 @@
 :root[data-theme="dark"] .pz-btn[aria-pressed="true"], :root[data-theme="dark"] .pz-btn.is-on, :root[data-theme="dark"] .pz-count.is-active { background: #e8e8e8; color: #111; }
 :root[data-theme="dark"] .pz-pause > div, :root[data-theme="dark"] .pz-win-card, :root[data-theme="dark"] .pz-model, :root[data-theme="dark"] .pz-image-card { background: #212121; border-color: #e8e8e8; }
 :root[data-theme="dark"] .pz-loading { background: rgba(20,20,20,.75); }
+:root[data-theme="dark"] .pz-name:hover:not([readonly]) { border-bottom-color: #555; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .pz-image-empty{background:#252525}
 :root[data-theme="dark"] .pz-image-empty small,:root[data-theme="dark"] .pz-image-card small{color:#c7c7c7}
