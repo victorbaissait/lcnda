@@ -82,7 +82,7 @@
     function pageCfg(store) {
         const s = store.settings?.page || {}, model = M[s.model || defModel(store)] || M.musicien;
         const custom = s.custom || [];
-        const order = [...new Set([...(s.order || model.order), ...ALL, ...custom.map(c => c.key)])].filter(k => P[k] || custom.some(c => c.key === k));
+        const order = [...new Set([...(s.order || model.order), ...Object.keys(P), ...custom.map(c => c.key)])].filter(k => P[k] || custom.some(c => c.key === k));
         const hidden = new Set(s.hidden || model.hidden);
         return {order, hidden, widths: s.widths || {}, custom, modelKey: s.model || defModel(store)};
     }

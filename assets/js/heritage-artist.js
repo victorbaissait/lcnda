@@ -369,7 +369,9 @@
             body.scrollTop = sig === C._sig ? keep : 0; C._sig = sig;
             if (C.panel?.page && S.view !== 'page') C.panel.close(); else C.panel?.refresh?.();
         }
-        async function save() {
+        let saving = null; // un seul enregistrement à la fois : ⌘S répété ne crée pas deux fiches
+        function save() { if (!saving) saving = saveOnce().finally(() => { saving = null; }); return saving; }
+        async function saveOnce() {
             if (!S.edit) return;
             collect(body, store, current(), S.draft);
             if (!String(S.draft.title || '').trim()) { toast('Il faut un titre.', 'error'); body.querySelector('[data-fk="title"] input')?.focus(); return; }

@@ -6,6 +6,7 @@ require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
 require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .heredis)
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
+require_once __DIR__ . '/lib/scene.php'; // 🎤 scène : coordonnées des lieux des concerts (assets/js/heritage-scene*.js)
 require_once __DIR__ . '/lib/layout_extra.php'; // 📐 mise en page : arbre dynamique, citations, vérificateur, index des lieux et métiers
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
@@ -397,6 +398,7 @@ try {
         'research_gaps' => json_response(research_gaps_data($pdo, $_GET)),
         'faces_index' => json_response(faces_index($pdo)),
         'artist_items' => json_response(['items' => artist_items_for($pdo, safe_int($_GET['person_id'] ?? 0))]),
+        'scene' => json_response(scene_api_get($pdo, $_GET)), // 🎤 scène : coordonnées des lieux (lib/scene.php)
         'art' => json_response(art_api_get($pdo, $_GET)), // 🎨 moteur des catalogues d'artistes (lib/art_engine.php)
         'sciences' => json_response(sciences_api_get($pdo, $_GET)), // 🔬 coordonnées des lieux (lib/sciences.php)
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)

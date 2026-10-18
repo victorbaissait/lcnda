@@ -36,6 +36,7 @@
     "test:addrmap": "node tests/test-addrmap.js",
     "test:sosa-stats-tabs": "node tests/test-sosa-stats-tabs.js",
     "test:artist": "node tests/test-artist.js",
+    "test:scene": "node tests/test-scene.js",
     "test:oeuvres": "node tests/test-oeuvres.js",
     "test:blocs": "node tests/test-blocs.js"
   },

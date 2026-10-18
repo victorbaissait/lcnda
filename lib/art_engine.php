@@ -31,7 +31,7 @@ declare(strict_types=1);
 const ART_BUILTIN_TYPES = [
     'release' => ['Disque', 'Disques', '💿', 'music', 'master'], 'master' => ['Album (toutes éditions)', 'Albums', '💽', 'music', ''],
     'track_work' => ['Morceau', 'Morceaux', '🎵', 'music', ''], 'recording' => ['Enregistrement', 'Enregistrements', '🎙', 'music', 'track_work'],
-    'copy' => ['Exemplaire', 'Exemplaires', '📦', 'collection', ''], 'concert' => ['Concert', 'Concerts', '📅', 'music', ''],
+    'copy' => ['Exemplaire', 'Exemplaires', '📦', 'collection', ''], 'concert' => ['Concert ou représentation', 'Concerts et représentations', '🎤', 'scene', ''],
     'text' => ['Texte', 'Textes', '📜', 'books', ''], 'book' => ['Livre (édition)', 'Livres', '📚', 'books', 'text'],
     'work' => ['Œuvre d’art', 'Œuvres', '🖼', 'art', ''], 'exhibition' => ['Exposition', 'Expositions', '🏛', 'art', ''],
     'film' => ['Film, spectacle', 'Films et spectacles', '🎬', 'film', ''], 'org' => ['Organisation', 'Organisations', '🏷', 'autre', ''],
@@ -278,7 +278,9 @@ function art_subline(array $d, string $kind): string
     if (function_exists('sciences_subline') && ($sci = sciences_subline($d, $kind)) !== null) { return mb_substr($sci, 0, 160); } // 🔬
     return mb_substr(match ($kind) {
         'release' => $pick(['format', 'catno']), 'work' => $pick(['catref', 'technique']), 'recording' => $pick(['rkind', 'date', 'dur']),
-        'book' => $pick(['isbn']), 'film' => $pick(['jobs', 'role']), 'exhibition' => $pick(['venue', 'dates']), default => (function_exists('oeuvres_subline') ? oeuvres_subline($d, $kind) : '') ?: $pick(['date', 'note']), // 🧩 lib/oeuvres.php
+        'book' => $pick(['isbn']), 'film' => $pick(['jobs', 'role']), 'exhibition' => $pick(['venue', 'dates']),
+        'concert' => $pick(['date', 'venue']), 'tour' => $pick(['dates', 'artist']), 'role' => $pick(['character', 'rkind']), 'stage_piece' => $pick(['pkind', 'written']),
+        'series' => $pick(['dates', 'channel']), 'season' => $pick(['dates']), 'episode' => $pick(['date', 'dur']), default => (function_exists('oeuvres_subline') ? oeuvres_subline($d, $kind) : '') ?: $pick(['date', 'note']), // 🧩 lib/oeuvres.php
     }, 0, 160);
 }
 

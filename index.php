@@ -36,6 +36,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
     <link rel="stylesheet" href="assets/css/ui.css?v=4">
     <link rel="stylesheet" href="assets/css/artist.css?v=1">
+    <link rel="stylesheet" href="assets/css/scene.css?v=1">
     <link rel="stylesheet" href="assets/css/oeuvres.css?v=1">
     <link rel="stylesheet" href="assets/css/profils.css?v=1">
     <link rel="stylesheet" href="assets/css/sciences.css?v=1">
@@ -1114,7 +1115,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=132" defer></script>
+<script src="assets/js/heritage-more.js?v=133" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
@@ -1159,7 +1160,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-faces.js?v=4" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=3" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=3" defer></script>
-<script src="assets/js/heritage-artist.js?v=11" defer></script>
+<script src="assets/js/heritage-artist.js?v=12" defer></script>
 <script src="assets/js/heritage-artist-fields.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-panel.js?v=8" defer></script>
 <script src="assets/js/heritage-artist-music.js?v=8" defer></script>
@@ -1169,10 +1170,14 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-sciences.js?v=1" defer></script>
 <script src="assets/js/heritage-sciences-explore.js?v=1" defer></script>
 <script src="assets/js/heritage-sciences-profile.js?v=1" defer></script>
-<script src="assets/js/heritage-artist-page.js?v=9" defer></script>
+<script src="assets/js/heritage-artist-page.js?v=10" defer></script>
 <script src="assets/js/heritage-artist-list.js?v=9" defer></script>
 <script src="assets/js/heritage-artist-import.js?v=8" defer></script>
 <script src="assets/js/heritage-artist-catalogue.js?v=8" defer></script>
+<script src="assets/js/heritage-scene.js?v=1" defer></script>
+<script src="assets/js/heritage-scene-list.js?v=1" defer></script>
+<script src="assets/js/heritage-scene-actor.js?v=1" defer></script>
+<script src="assets/js/heritage-scene-series.js?v=1" defer></script>
 <script src="assets/js/heritage-oeuvres.js?v=1" defer></script>
 <script src="assets/js/heritage-oeuvres-fiches.js?v=1" defer></script>
 <script src="assets/js/heritage-oeuvres-types.js?v=1" defer></script>

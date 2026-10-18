@@ -1,0 +1,147 @@
+/* LCNDA — 🎤 Scène (assets/js/heritage-scene*.js) : maquettes U à X de docs/design/profils-et-oeuvres.html
+   (un soir et sa setlist, toutes les dates et leurs statistiques, le profil acteur, la série complète).
+   S'appuie sur assets/css/artist.css (.ar-*) ; couleurs : variables de l'app ; mode sombre en bas (scripts/build-dark-css.py). */
+
+/* — des champs qui n'apparaissent que pour certaines sortes — */
+.ar-fld:has(> .sc-gate[hidden]) { display: none; }
+.sc-gate[hidden] { display: none; }
+
+/* — U : la fiche d'un soir — */
+.ar-dlg .ar-h2, .sc-rhd b { overflow-wrap: anywhere; }
+.sc-genres { margin: 0 0 10px; }
+.sc-genres > button[disabled] { opacity: .45; cursor: not-allowed; }
+.sc-when { margin: -2px 0 8px; font-size: 13.5px; }
+.sc-setlist td.n { font-weight: 700; white-space: nowrap; }
+.sc-setlist tr.sc-enc { background: #fff8e1; }
+.sc-setlist tr.sc-set td { background: #f2f4f7; padding-top: 8px; }
+.sc-setlist tr.sc-inter td { color: var(--muted); }
+.sc-setlist:not(.is-open) tr.sl-mid { display: none; }
+.sc-setlist.is-open tr.sc-fold { display: none; }
+.sc-setlist td.pl { width: 150px; }
+.sc-mk { font-size: 12px; color: var(--blue-bright); margin-left: 4px; }
+.sc-sl-edit .ar-note { margin-top: 4px; }
+.sc-press + .sc-press { margin-top: 6px; }
+.sc-tone { display: inline-block; min-width: 18px; text-align: center; font: 800 12px system-ui, sans-serif; border: 1.5px solid currentColor; }
+.sc-tone.pos { color: #1aa34a; } .sc-tone.neg { color: #d0182f; } .sc-tone.neu { color: #777; }
+.sc-quote { font: italic 12.5px/1.45 Georgia, serif; color: #444; border-left: 3px solid #d7dbe2; padding-left: 8px; margin-top: 3px; }
+
+[data-fk="setlist"] .ar-cell.w-s { min-width: 128px; }
+.sc-times { display: flex; align-items: center; gap: 6px; }
+.sc-times .ar-in { width: 120px; }
+
+/* — tournée : barres de la setlist type — */
+.sc-barcell { width: 32%; }
+.sc-bar { display: block; height: 10px; background: #7b2ff7; min-width: 2px; }
+.sc-bar.is-enc { background: #e1a500; }
+
+/* — V : la liste, la carte, la frise, les statistiques — */
+.sc-views { flex-wrap: wrap; }
+.sc-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; background: var(--c, #7b2ff7); }
+.sc-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 4px 0 10px; font-size: 12.5px; }
+.sc-frise { display: flex; flex-direction: column; gap: 10px; }
+.sc-fy { border-top: 1px solid #e3e5ea; padding-top: 6px; }
+.sc-fyh { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+.sc-fyh b { font-size: 15px; min-width: 52px; }
+.sc-fbar { display: block; height: 6px; background: #7b2ff7; opacity: .35; flex: 0 0 auto; max-width: 60%; }
+.sc-fdots { display: flex; flex-wrap: wrap; gap: 5px; }
+.sc-fdot { display: inline-flex; flex-direction: column; align-items: flex-start; border: 1.5px solid var(--ink); border-left: 5px solid var(--c, #7b2ff7); background: var(--white); color: inherit; padding: 2px 6px; font: 600 12px/1.25 system-ui, sans-serif; cursor: pointer; max-width: 160px; text-align: left; }
+.sc-fdot small { font-weight: 500; color: var(--muted); font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+.sc-fdot.sc-wide { max-width: 260px; }
+.sc-fdot:hover, .sc-fdot:focus-visible { background: var(--blue-soft); }
+.sc-places { display: flex; flex-wrap: wrap; margin-top: 8px; }
+.sc-mapwrap .h-map-point:hover circle, .sc-mapbox .h-map-point:hover circle { stroke: #111; }
+.sc-map .h-map, .sc-mapbox .h-map { max-width: 100%; }
+.ar-blk.w-8 { grid-column: span 8; }
+.sc-stats .ar-blk.w-12 { grid-column: span 12; }
+.sc-strip { display: flex; align-items: flex-end; gap: 2px; height: 90px; border-bottom: 1.5px solid var(--ink); }
+.sc-strip i { flex: 1 1 0; background: #7b2ff7; min-width: 2px; }
+.sc-strip i.is-zero { background: #d7dbe2; }
+.sc-strip.sc-red { height: 46px; }
+.sc-strip.sc-red i { background: #d0182f; }
+.sc-axis { display: flex; justify-content: space-between; font: 600 10.5px system-ui, sans-serif; color: var(--muted); margin-top: 2px; }
+.sc-tabs { margin-top: 8px; }
+.sc-dl { margin-top: 8px !important; }
+.sc-hbars { display: flex; flex-direction: column; gap: 3px; }
+.sc-hb { display: grid; grid-template-columns: minmax(0, 40%) 1fr 34px; align-items: center; gap: 6px; font-size: 12.5px; }
+.sc-hb span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sc-hb i { display: block; height: 10px; background: #7b2ff7; min-width: 2px; }
+.sc-hb b { text-align: right; font-variant-numeric: tabular-nums; }
+.sc-top td:nth-child(2) { font-variant-numeric: tabular-nums; }
+.sc-pkline, .sc-cmp-pk { max-width: 520px; margin-bottom: 8px; }
+.sc-cmp-pk { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: none; }
+.sc-cmp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; font-size: 12.5px; line-height: 1.5; }
+.sc-cmp .sc-a { color: #7b2ff7; } .sc-cmp .sc-b { color: #1aa34a; }
+
+/* — W : les rôles — */
+.sc-notice { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.sc-notice .ui-notice { flex: 1 1 360px; margin: 0; }
+.sc-dompills { margin: 8px 0; }
+.sc-dom { display: inline-block; width: 18px; text-align: center; }
+.sc-roles td:first-child { white-space: nowrap; color: var(--muted); }
+.sc-rcard { border: 2px solid var(--ink); background: var(--white); margin-top: 10px; padding: 8px 10px; }
+.sc-rhd { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sc-rhd .spacer { flex: 1; }
+.sc-kind { font: 800 10px system-ui, sans-serif; letter-spacing: .08em; color: #fff; background: #d0182f; padding: 2px 6px; }
+.sc-kind.edit { background: var(--blue-bright); }
+.sc-rbody { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin-top: 6px; }
+.sc-rbody .ar-thumbs { grid-template-columns: repeat(3, 1fr); margin-top: 0; }
+.sc-rbody .ar-thumbs span { aspect-ratio: 1; border: 1.5px solid var(--ink); position: relative; overflow: hidden; display: block; }
+.sc-rbody .ar-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sc-ahero { margin-bottom: 6px; }
+.sc-ahero .eyebrow { font: 700 10.5px/1.3 system-ui, sans-serif; letter-spacing: .1em; color: #d0182f; }
+.sc-ahero p { margin: 2px 0 0; }
+.sc-mini { display: flex; flex-direction: column; gap: 2px; }
+.sc-mline { font-size: 12.5px; line-height: 1.45; overflow-wrap: anywhere; }
+.sc-mline + .sc-mline { margin-top: 2px; }
+.sc-res { font: 700 10.5px system-ui, sans-serif; border: 1.5px solid #888; color: #666; padding: 0 4px; }
+.sc-res.w { border-color: #1aa34a; color: #1aa34a; }
+.sc-sm { font-size: 11.5px; }
+.sc-d-cinema { --c: #d0182f; } .sc-d-tv { --c: #055dff; } .sc-d-theatre { --c: #7b2ff7; } .sc-d-voice { --c: #1aa34a; } .sc-d-ad { --c: #e1a500; } .sc-d-clip { --c: #d9488f; }
+.sc-d-radio { --c: #0a9bb5; } .sc-d-game { --c: #555; } .sc-d-audiobook { --c: #8a5a2b; } .sc-d-scene { --c: #b5523b; } .sc-d-other { --c: #999; }
+.sc-leg .sc-dot { background: var(--c, #7b2ff7); }
+
+/* — X : la série, ses saisons, ses épisodes, le panneau de la personne — */
+.sc-tree { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 16px; align-items: start; }
+.sc-flat { border-top: 0; margin-top: 0; padding-top: 0; }
+.sc-seasons tr.is-sel, .sc-eps tr.is-sel { background: var(--blue-soft); }
+.sc-eps tr.is-on td { background: #eef4ff; }
+.sc-eps td:first-child { width: 26px; }
+.sc-eps td.n { white-space: nowrap; width: 70px; }
+.sc-pan { border: 2px solid var(--ink); background: var(--white); position: sticky; top: 0; }
+.sc-ph { padding: 8px 12px; border-bottom: 2px solid var(--ink); background: var(--card-head-bg, #fafbfc); }
+.sc-pb { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.sc-who { display: flex; flex-wrap: wrap; gap: 4px; }
+.sc-wchip { border: 1.5px solid var(--ink); background: var(--white); color: inherit; font: 600 12px system-ui, sans-serif; padding: 2px 7px; cursor: pointer; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sc-wchip.is-active { background: var(--ink); color: var(--white); }
+.sc-wchip.is-add { border-style: dashed; }
+.sc-fld { display: flex; flex-direction: column; gap: 3px; font-size: 12.5px; }
+.sc-fld > span { font-weight: 700; color: var(--muted); font-size: 11.5px; }
+.sc-range { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; font-size: 13px; }
+.sc-range .sc-n { width: 52px; }
+.sc-lot { font-size: 12px; }
+.sc-pf { display: flex; gap: 6px; align-items: center; padding: 8px 12px; border-top: 2px solid var(--ink); }
+.sc-pf .spacer { flex: 1; }
+
+@media (max-width: 1100px) {
+    .ar-blk.w-8 { grid-column: span 12; }
+    .sc-tree { grid-template-columns: minmax(0, 1fr); }
+    .sc-pan { position: static; }
+}
+@media (max-width: 640px) {
+    .sc-cmp, .sc-cmp-pk, .sc-rbody { grid-template-columns: minmax(0, 1fr); }
+    .sc-fdot { max-width: 46vw; }
+}
+
+/* ═════ Mode sombre écrit à la main ═════ */
+:root[data-theme="dark"] .sc-setlist tr.sc-enc { background: #3a3220; }
+:root[data-theme="dark"] .sc-setlist tr.sc-set td { background: #2c2f35; }
+:root[data-theme="dark"] .sc-eps tr.is-on td { background: #22304a; }
+:root[data-theme="dark"] .sc-quote { color: #c9ccd2; border-left-color: #474a52; }
+:root[data-theme="dark"] .sc-strip i.is-zero { background: #474a52; }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .sc-tone.pos{color:#a6e7bd}
+:root[data-theme="dark"] .sc-fy{border-top:1px solid #474a52}
+:root[data-theme="dark"] .sc-cmp .sc-b{color:#a6e7bd}
+:root[data-theme="dark"] .sc-res{color:#c7c7c7}
+:root[data-theme="dark"] .sc-res.w{color:#a6e7bd}
+/* ═════ fin du mode sombre automatique ═════ */
