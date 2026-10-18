@@ -310,7 +310,9 @@
     const monthOf = w => { w = fold(w).replace(/\.$/, ''); if (/^\d{1,2}$/.test(w)) return Number(w); const k = MONTH_KEYS.find(([p]) => w.startsWith(p)); return k ? k[1] : 0; };
     const roman = s => { const m = String(s).toUpperCase(); if (/^\d+$/.test(m)) return Number(m); if (!/^[IVX]+$/.test(m)) return 0; const v = {I: 1, V: 5, X: 10}; let t = 0; for (let i = 0; i < m.length; i++) t += v[m[i]] < (v[m[i + 1]] || 0) ? -v[m[i]] : v[m[i]]; return t; };
     const toRoman = n => ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'][n] || String(n);
-    const dim = (m, y) => new Date(Date.UTC(y, m, 0)).getUTCDate();
+    // jours dans le mois ; avant 1583, calendrier julien : une année sur quatre est bissextile (29 février 1500 existe)
+    const dim = (m, y) => m === 2 && y < 1583 ? (y % 4 === 0 ? 29 : 28) : new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const MIN_YEAR = 1000; // la base ne range l'année des dates qu'à partir de l'an 1000 (api.php, add_event / update_event)
     const NOW_Y = new Date().getFullYear();
     function oneDate(s) {
         s = s.trim().replace(/^le\s+/, ''); let m;
@@ -325,7 +327,10 @@
             const y = roman(m[3]); if (!y || y > 14) return {error: `an ${m[3].toUpperCase()} : le calendrier républicain va de l’an I à l’an XIV`};
             if (!m[2]) return {label: `an ${toRoman(y)}`, extra: ` (calendrier républicain : de sept. ${1791 + y} à sept. ${1792 + y})`, y: 1792 + y, k: (1792 + y) * 10000};
             const mi = REP.findIndex(x => x.startsWith(fold(m[2]).slice(0, 4))), d = m[1] === '1er' ? 1 : Number(m[1]);
-            if (mi < 0) return null; if (d < 1 || d > (mi === 12 ? 6 : 30)) return {error: `date impossible : ${d} ${REP[mi]}`};
+            if (mi < 0) return null;
+            // jours complémentaires (sans-culottides) : 5, ou 6 les années sextiles (III, VII, XI)
+            if (mi === 12 && d === 6 && ![3, 7, 11].includes(y)) return {error: `date impossible : 6e jour complémentaire de l’an ${toRoman(y)} (seules les années III, VII et XI en ont un 6e)`};
+            if (d < 1 || d > (mi === 12 ? 6 : 30)) return {error: `date impossible : ${d} ${REP[mi]}`};
             const app = A(); let g = '';
             if (app.republicanToJdn && app.jdnToGregorian) { const gd = app.jdnToGregorian(app.republicanToJdn(y, mi + 1, d)); g = ` (${gd.day === 1 ? '1er' : gd.day} ${MONTHS[gd.month - 1]} ${gd.year})`; }
             return {label: `${d === 1 ? '1er' : d} ${(app.republicanMonths?.[mi] || REP[mi]).toLowerCase()} an ${toRoman(y)}`, extra: g, y: 1792 + y, k: (1792 + y) * 10000 + mi * 100 + d};
@@ -342,29 +347,30 @@
     UI.readDate = raw => {
         const s = fold(raw).trim().replace(/\s+/g, ' ').replace(/,/g, '');
         if (!s) return null;
-        const bad = t => ({ok: false, text: t}), good = (label, extra = '') => ({ok: true, label, extra});
-        const check = d => { if (!d) return null; if (d.error) return d; if (d.y > NOW_Y) return {error: `date dans le futur : ${d.label}`}; return d; };
+        let low = 0; // une année avant l'an 1000 : comprise, mais la base ne la range pas encore
+        const bad = t => ({ok: false, text: t}), good = (label, extra = '') => ({ok: true, label, extra, ...(low ? {warn: `année ${low} : l’app ne range pas encore les dates d’avant l’an ${MIN_YEAR} (le texte est gardé tel quel, mais il ne sert ni au tri, ni aux âges, ni aux frises)`} : {})});
+        const check = d => { if (!d) return null; if (d.error) return d; if (d.y > NOW_Y) return {error: `date dans le futur : ${d.label}`}; if (d.y && d.y < MIN_YEAR) low = d.y; return d; };
         let m;
         if ((m = s.match(/^(?:entre|de|du)\s+(.+?)\s+(?:et|a|au|-)\s+(.+)$/))) {
             const a = check(oneDate(m[1])), b = check(oneDate(m[2]));
             if (a?.error) return bad(a.error); if (b?.error) return bad(b.error);
             if (a && b) return a.k > b.k ? bad(`la première date est après la seconde (${a.label} / ${b.label})`) : good(`entre ${a.label} et ${b.label}`);
         }
-        if ((m = s.match(/^(vers|environ|env\.?|circa|ca\.?|c\.|~)\s*(.+)$/))) { const d = check(oneDate(m[2])); if (d?.error) return bad(d.error); if (d) return good(`vers ${d.label}`, ` (environ, ± ${/^\d{1,2}|1er/.test(d.label) ? 'quelques jours' : '1 an'})`); }
+        if ((m = s.match(/^(vers|environ|env\.?|circa|ca\.?|c\.|~)\s*(.+)$/))) { const d = check(oneDate(m[2])); if (d?.error) return bad(d.error); if (d) return good(`vers ${d.label}`, ` (environ, ± ${/^(\d{1,2}|1er)\s/.test(d.label) ? 'quelques jours' : /^[a-zéû]+\s\d/.test(d.label) ? 'quelques semaines' : '1 an'})`); }
         if ((m = s.match(/^(avant|av\.?)\s+(.+)$/))) { const d = check(oneDate(m[2])); if (d?.error) return bad(d.error); if (d) return good(`avant ${d.label}`); }
         if ((m = s.match(/^(apres|ap\.?|depuis)\s+(.+)$/))) { const d = check(oneDate(m[2])); if (d?.error) return bad(d.error); if (d) return good(`après ${d.label}`); }
         const d = check(oneDate(s)); if (d?.error) return bad(d.error); if (d) return good(d.label, d.extra || '');
         const p = A().parsedGenealogyDate?.(raw); if (p?.year) return bad(`je ne comprends que l’année : ${p.year}`);
         return bad('je ne comprends pas cette date (exemples : 7 mai 1925, 08/12/1960, vers 1784, entre 1880 et 1885, an II)');
     };
-    const dateHelpHtml = r => (!r ? '' : r.ok ? `✓ Compris : <b>${esc(r.label)}</b>${esc(r.extra || '')}` : `⚠️ ${esc(r.text.charAt(0).toUpperCase() + r.text.slice(1))}`);
+    const dateHelpHtml = r => (!r ? '' : r.ok ? `✓ Compris : <b>${esc(r.label)}</b>${esc(r.extra || '')}${r.warn ? `<br>⚠️ ${esc(r.warn.charAt(0).toUpperCase() + r.warn.slice(1))}` : ''}` : `⚠️ ${esc(r.text.charAt(0).toUpperCase() + r.text.slice(1))}`);
     function buildDate(inp, {calendar = true} = {}) {
         inp.dataset.uiDone = '1';
         const w = h('span', 'ui-date'), box = h('span', 'ui-date-box'), help = h('span', 'ui-date-help');
         help.setAttribute('aria-live', 'polite');
         inp.parentNode?.insertBefore(w, inp); box.appendChild(inp); w.append(box, help); inp.classList.add('ui-date-input');
         if (!inp.placeholder) inp.placeholder = '7 mai 1925, vers 1784, entre 1880 et 1885…';
-        const upd = () => { const r = UI.readDate(rawGet(inp)); help.innerHTML = dateHelpHtml(r); help.className = `ui-date-help${r ? (r.ok ? ' is-ok' : ' is-warn') : ''}`; };
+        const upd = () => { const r = UI.readDate(rawGet(inp)); help.innerHTML = dateHelpHtml(r); help.className = `ui-date-help${r ? (r.ok && !r.warn ? ' is-ok' : ' is-warn') : ''}`; };
         if (calendar) {
             const b = h('button', 'ui-date-cal', '📅'); b.type = 'button'; b.title = 'Choisir sur un calendrier'; b.setAttribute('aria-label', b.title); b.tabIndex = -1;
             const cal = document.createElement('input'); cal.type = 'date'; cal.className = 'ui-native-date'; cal.tabIndex = -1; cal.setAttribute('aria-hidden', 'true'); cal.dataset.uiOff = '1';

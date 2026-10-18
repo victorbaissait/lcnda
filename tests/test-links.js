@@ -74,7 +74,7 @@ const out = JSON.parse(r.stdout.trim().split('\n').pop());
 const checks = [
   ['question : ancêtres boulangers à Lille avant 1850', () => { assert.deepEqual(out.q1[0], [2]); assert.ok(out.q1[1].some(u => u.includes('boulanger'))); }],
   ['question : né le même jour que moi', () => assert.deepEqual(out.q2, [5])],
-  ['question : a-t-il eu des enfants ? → oui, 2 (du plus âgé au plus jeune)', () => { assert.deepEqual(out.rel_enfants[0], [8, 7]); assert.equal(out.rel_enfants[1], 'Oui, 2 enfants.'); assert.ok(out.rel_enfants[2][0].startsWith('enfants de Adrien Paul Baissait')); }],
+  ['question : a-t-il eu des enfants ? → oui, 2 (du plus âgé au plus jeune)', () => { assert.deepEqual(out.rel_enfants[0], [8, 7]); assert.equal(out.rel_enfants[1], 'Oui, 2 enfants.'); assert.ok(out.rel_enfants[2][0].startsWith('enfants d’Adrien Paul Baissait')); }],
   ['question : un fils → seulement les garçons', () => { assert.deepEqual(out.rel_fils[0], [7]); assert.equal(out.rel_fils[1], 'Oui, 1 fils.'); }],
   ['question : petits-enfants (prénom du milieu omis)', () => assert.deepEqual(out.rel_petits[0], [9])],
   ['question : pas de fille → non', () => { assert.deepEqual(out.rel_filles[0], []); assert.ok(out.rel_filles[1].startsWith('Non : aucune fille')); }],

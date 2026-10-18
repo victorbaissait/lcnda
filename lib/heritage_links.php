@@ -52,6 +52,7 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
     }
     // Parenté d'une personne nommée : « Adrien Paul Baissait a-t-il eu des enfants ? », « les petites-filles de Marie Dupont »
     $rel = question_relation($pdo, $q, $t, $personId);
+    if ($rel && !empty($rel['ask'])) { return ['ask' => $rel, 'criteria' => null, 'understood' => [$rel['labels'][1] . ' de « ' . $rel['word'] . ' »', 'plusieurs fiches']]; }
     if ($rel) {
         $c['relation'] = $rel['relation']; $c['relation_of'] = $rel['person'];
         if ($rel['gender']) { $c['gender'] = $rel['gender']; }
@@ -64,6 +65,12 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
     elseif (preg_match('/\b(hommes|garcons|peres|fils)\b/', $t)) { $c['gender'] = 'male'; $understood[] = 'hommes'; }
     if (preg_match('/\b(encore en vie|vivants|vivantes)\b/', $t)) { $c['living'] = 'living'; $understood[] = 'vivants'; }
 
+    // « qui s'appelle Marie-Thérèse », « prénommés Gaston » : le prénom, mis de côté (« Marie » n'est pas « mariée »)
+    $calledName = '';
+    if (preg_match('/(?:pr[ée]nomm[ée]e?s?|s[\'’]\s*appel(?:le|lent|ait|aient)|nomm[ée]e?s?)\s+(\p{L}[\p{L}\p{M}]*(?:-\p{L}[\p{L}\p{M}]*)*)/iu', $q, $m)) {
+        $calledName = $m[1];
+        $t = str_replace(' ' . strtolower(ascii_fold($calledName)) . ' ', '  ', $t);
+    }
     $events = ['birth' => '/\b(nee?s?|naissances?|naquit|naquirent|venus? au monde)\b/', 'CHR' => '/\b(baptise(e|s|es)?|baptemes?)\b/', 'MARR' => '/\b(marie(e|s|es)?|mariages?|epouse|ont epouse|se sont maries)\b/',
         'BURI' => '/\b(inhume(e|s|es)?|enterre(e|s|es)?|inhumations?)\b/', 'death' => '/\b(morte?s?|decede(e|s|es)?|deces|meurent|mourut|moururent)\b/', 'RESI' => '/\b(habitai(en)?t|vivai(en)?t|residai(en)?t|domicilie(e|s|es)?|demeurai(en)?t)\b/'];
     foreach ($events as $key => $re) { if (preg_match($re, $t)) { $c['event'] = $key; $understood[] = ['birth' => 'naissance ou baptême', 'CHR' => 'baptême', 'MARR' => 'mariage', 'BURI' => 'inhumation', 'death' => 'décès ou inhumation', 'RESI' => 'résidence'][$key]; break; } }
@@ -105,17 +112,19 @@ function question_to_criteria(PDO $pdo, string $question, int $personId = 0): ar
     }
 
     // Prénoms et noms de famille présents dans la base (« les Dupont », « prénommés Gaston »)
-    if (preg_match('/(?:prenomme(?:e|s|es)?|s\'appel(?:le|lent|ait|aient)|nomme(?:e|s|es)?) ([a-z-]+)/', $t, $m)) { $c['first_name'] = ucfirst($m[1]); $understood[] = 'prénom : ' . ucfirst($m[1]); }
+    if ($calledName !== '') { $nm = mb_strtoupper(mb_substr($calledName, 0, 1)) . mb_substr($calledName, 1); $c['first_name'] = $nm; $understood[] = 'prénom : ' . $nm; $used[strtolower(ascii_fold($calledName))] = true; }
+    // noms de famille de la base, comparés sans accents ni majuscules (« Lefevre » trouve « LEFÈVRE »)
+    $lastNames = [];
+    foreach ($pdo->query("SELECT DISTINCT last_name FROM persons WHERE trim(COALESCE(last_name,''))<>''")->fetchAll(PDO::FETCH_COLUMN) as $ln) { $lastNames[strtolower(ascii_fold((string) $ln))] ??= (string) $ln; }
     foreach (preg_split('/[^\p{L}\'’-]+/u', $q) as $i => $word) {
         if ($i === 0 || mb_strlen($word) < 3 || !preg_match('/^\p{Lu}/u', $word) || isset($used[strtolower(ascii_fold($word))])) { continue; }
-        if (!isset($c['last_name'])) {
-            $s = $pdo->prepare('SELECT 1 FROM persons WHERE last_name=? COLLATE NOCASE LIMIT 1'); $s->execute([$word]);
-            if ($s->fetchColumn()) { $c['last_name'] = $word; $c['name_mode'] = 'exact'; $understood[] = "nom : {$word}"; continue; }
-        }
-        if (!isset($c['first_name'])) {
-            $s = $pdo->prepare("SELECT 1 FROM persons WHERE (' '||first_name||' ') LIKE ? COLLATE NOCASE LIMIT 1"); $s->execute(['% ' . $word . ' %']);
-            if ($s->fetchColumn()) { $c['first_name'] = $word; $understood[] = "prénom : {$word}"; }
-        }
+        if (!isset($c['last_name']) && isset($lastNames[$lf = strtolower(ascii_fold(str_replace('’', "'", $word)))])) { $c['last_name'] = $lastNames[$lf]; $c['name_mode'] = 'exact'; $understood[] = "nom : {$lastNames[$lf]}"; continue; }
+        if (!isset($c['first_name']) && question_first_name_ids($pdo, $word, true)) { $c['first_name'] = $word; $understood[] = "prénom : {$word}"; }
+    }
+    // seule la sorte d'événement a été comprise, mais la question donne une date, un âge… qu'on n'a pas su lire : on le dit plutôt que de tout lister
+    $onlyEvent = !$rel && $c['event'] !== 'any' && count(array_diff(array_keys($c), ['event'])) === 0;
+    if ($onlyEvent && preg_match('/\d|\b(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre|an [ivx]+|ans|vendemiaire|brumaire|frimaire|nivose|pluviose|ventose|germinal|floreal|prairial|messidor|thermidor|fructidor|naissance|jour|semaine|annee)\b/', preg_replace('/\b(nee?s?|naissances?)\b/', '', $t, 1))) {
+        throw new RuntimeException('Je n’ai pas compris la date ou l’âge de la question, alors je ne liste pas tout. Exemples : « Qui est né le 7 mai 1950 ? », « nés en 1924 », « nés en l’an II », « nés un 15 brumaire », « morts à 70 ans », « morts avant leur naissance ».');
     }
     if (count($understood) === 0) { throw new RuntimeException('Je n’ai pas compris la question. Exemples : « Quels ancêtres étaient boulangers à Lille avant 1850 ? », « Qui est né le même jour que moi ? », « les Dupont mariés dans le Nord au XVIIIe siècle ».'); }
     $criteria = saved_search_criteria($c);
@@ -142,9 +151,12 @@ const QUESTION_RELATIONS = [
     'parents' => ['parents', '', ['parent', 'parents']],
     'peres?' => ['parents', 'male', ['père', 'pères']],
     'meres?' => ['parents', 'female', ['mère', 'mères']],
+    'demi[- ]freres? et (?:demi[- ])?soeurs?' => ['siblings', '', ['demi-frère ou demi-sœur', 'demi-frères et demi-sœurs'], true],
     'freres? et soeurs?|fratrie' => ['siblings', '', ['frère ou sœur', 'frères et sœurs']],
-    'freres?|demi-freres?' => ['siblings', 'male', ['frère', 'frères']],
-    'soeurs?|demi-soeurs?' => ['siblings', 'female', ['sœur', 'sœurs']],
+    'demi[- ]freres?' => ['siblings', 'male', ['demi-frère', 'demi-frères'], true],
+    'demi[- ]soeurs?' => ['siblings', 'female', ['demi-sœur', 'demi-sœurs'], true],
+    'freres?' => ['siblings', 'male', ['frère', 'frères']],
+    'soeurs?' => ['siblings', 'female', ['sœur', 'sœurs']],
     'conjoints?|epoux|maris?|epouses?|femme' => ['spouses', '', ['conjoint', 'conjoints']],
 ];
 
@@ -162,9 +174,9 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
     $joined = ''; $starts = [];
     foreach ($tokens as $i => $tk) { $starts[$i] = strlen($joined) + ($i ? 1 : 0); $joined .= ($i ? ' ' : '') . $tk['fold']; }
     $found = null; $relTokens = [];
-    foreach (QUESTION_RELATIONS as $re => [$relation, $gender, $labels]) {
+    foreach (QUESTION_RELATIONS as $re => $def) {
         if (preg_match('/(?<![a-z-])(' . $re . ')(?![a-z-])/', $joined, $m, PREG_OFFSET_CAPTURE)) {
-            $found = [$relation, $gender, $labels];
+            $found = [$def[0], $def[1], $def[2], !empty($def[3])];
             $from = $m[1][1]; $to = $from + strlen($m[1][0]);
             foreach ($starts as $i => $st) { if ($st >= $from && $st < $to) { $relTokens[$i] = true; } }
             break;
@@ -175,8 +187,9 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
     $particles = ['de', 'du', 'des', 'd', 'la', 'le', 'les', 'l', 'van', 'von', 'der', 'di', 'da', 'y', 'et'];
     $people = [];
     foreach ($pdo->query("SELECT id, COALESCE(first_name,'') AS f, COALESCE(last_name,'') AS l FROM persons") as $r) {
-        $first = preg_split('/[\s-]+/', strtolower(ascii_fold((string) $r['f'])), -1, PREG_SPLIT_NO_EMPTY);
-        $last = preg_split('/[\s-]+/', strtolower(ascii_fold((string) $r['l'])), -1, PREG_SPLIT_NO_EMPTY);
+        // mêmes coupures que pour la question : espaces, traits d'union, apostrophes (« Marie-Thérèse », « D'ARTOIS »)
+        $first = question_name_words((string) $r['f']);
+        $last = question_name_words((string) $r['l']);
         if ($first && $last) { $people[] = ['id' => (int) $r['id'], 'first' => $first, 'last' => $last]; }
     }
     $best = null;
@@ -205,8 +218,13 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
             }
         }
     }
-    if (!$best) { return null; }
-    [$relation, $gender, $labels] = $found;
+    [$relation, $gender, $labels, $half] = $found;
+    if (!$best) { // un prénom seul (« les frères et sœurs de Louis ») : s'il n'y en a qu'un, c'est lui ; sinon on demande lequel
+        $m = question_first_name_scan($pdo, $q, array_keys($relTokens));
+        if (!$m) { return null; }
+        if (count($m['ids']) > 1 && !($chosenId && in_array($chosenId, $m['ids'], true))) { return ['ask' => $m['ids'], 'word' => $m['word'], 'labels' => $labels, 'relation' => $relation]; }
+        $best = ['id' => count($m['ids']) > 1 ? $chosenId : $m['ids'][0], 'homonyms' => count($m['ids']) > 1 ? $m['ids'] : [], 'from' => $m['index'], 'to' => $m['index']];
+    }
     $id = $best['id'];
     $name = question_person_name($pdo, $id);
     $life = person_life_years($pdo, $id);
@@ -216,11 +234,60 @@ function question_relation(PDO $pdo, string $q, string $t, int $chosenId = 0): ?
         if (($k >= $best['from'] && $k <= $best['to']) || isset($relTokens[$k])) { $rest = substr_replace($rest, str_repeat(' ', strlen($tokens[$k]['text'])), $tokens[$k]['at'], strlen($tokens[$k]['text'])); }
     }
     $low = mb_strtolower($q);
-    return ['relation' => $relation, 'person' => $id, 'gender' => $gender, 'labels' => $labels,
-        'label' => $labels[1] . ' de ' . $name . ($life !== '' ? " ({$life})" : '') . (count($best['homonyms']) > 1 ? ' — ' . count($best['homonyms']) . " fiches portent ce nom, réponse pour la fiche n°{$id}" : ''), 'name' => $name,
+    return ['relation' => $relation, 'person' => $id, 'gender' => $gender, 'labels' => $labels, 'half' => $half,
+        'label' => $labels[1] . ' ' . question_de($name) . ($life !== '' ? " ({$life})" : '') . (count($best['homonyms']) > 1 ? ' — ' . count($best['homonyms']) . " fiches portent ce nom, réponse pour la fiche n°{$id}" : ''), 'name' => $name,
         'homonyms' => count($best['homonyms']) > 1 ? $best['homonyms'] : [],
         'yesno' => (bool) preg_match('/\b(a-t-(il|elle)|ont-(ils|elles)|avai(t|ent)-(il|elle|ils|elles)|est-ce qu|y a-t-il|a t il|a t elle)/u', $low) && !preg_match('/\b(qui|quels?|quelles?|combien|liste|donne|montre)\b/u', $low),
         'rest' => trim(preg_replace('/\s+/u', ' ', $rest))];
+}
+
+/** les mots d'un nom, sans accents ni majuscules, coupés aux espaces, traits d'union et apostrophes (« D'ARTOIS » → d, artois) */
+function question_name_words(string $s): array { return preg_split('/[^a-z0-9]+/', strtolower(ascii_fold($s)), -1, PREG_SPLIT_NO_EMPTY); }
+/** « de Louis », « d’Antoine » */
+function question_de(string $name): string { return function_exists('qm_de') ? qm_de($name) : 'de ' . $name; }
+/** les fiches (personnes, pas les animaux) dont le prénom contient ce mot entier (« Louis » ne donne pas « Louise » ; accents sans importance) */
+function question_first_name_ids(PDO $pdo, string $word, bool $withAnimals = false): array
+{
+    static $index = null;
+    if ($index === null) {
+        $index = [];
+        $hasKind = (bool) array_filter($pdo->query('PRAGMA table_info(persons)')->fetchAll(), static fn($c) => $c['name'] === 'kind');
+        foreach ($pdo->query("SELECT id, COALESCE(first_name,'') || ' ' || COALESCE(middle_name,'') AS f, " . ($hasKind ? "COALESCE(kind,'human')='animal'" : '0') . " AS animal FROM persons") as $r) { foreach (question_name_words((string) $r['f']) as $w) { $index[$w][(int) $r['id']] = (bool) $r['animal']; } }
+    }
+    $words = question_name_words($word);
+    if (!$words) { return []; }
+    $ids = null;
+    foreach ($words as $w) { $hit = $index[$w] ?? []; $ids = $ids === null ? $hit : array_intersect_key($ids, $hit); }
+    $ids = array_map('intval', array_keys(array_filter($ids ?? [], static fn($animal) => $withAnimals || !$animal))); sort($ids);
+    return $ids;
+}
+/**
+ * Un prénom seul dans la question (« les frères de Louis », « les enfants de Marie-Thérèse ») : le premier mot en majuscule
+ * (ou juste après « de », « d' », « à ») qui est le prénom d'au moins une fiche. Rend [word, ids, index du mot] ou null.
+ */
+function question_first_name_scan(PDO $pdo, string $q, array $skip = []): ?array
+{
+    preg_match_all('/[\p{L}\p{M}-]+/u', $q, $mm);
+    $stop = ['qui', 'que', 'quel', 'quels', 'quelle', 'quelles', 'combien', 'est', 'sont', 'les', 'des', 'ses', 'son', 'sa', 'mes', 'mon', 'ma', 'moi', 'tous', 'toutes', 'liste', 'donne', 'montre', 'ont', 'avait', 'avaient'];
+    $prev = '';
+    foreach ($mm[0] as $i => $w) {
+        $fold = strtolower(ascii_fold($w));
+        $ok = !in_array($i, $skip, true) && mb_strlen($w) >= 3 && !in_array($fold, $stop, true) && (preg_match('/^\p{Lu}/u', $w) || in_array($prev, ['de', 'd', 'a', 'pour', 'chez'], true));
+        $prev = $fold;
+        if (!$ok) { continue; }
+        $ids = question_first_name_ids($pdo, $w);
+        if ($ids) { return ['word' => $w, 'ids' => $ids, 'index' => $i]; }
+    }
+    return null;
+}
+
+/** parmi ces fiches, celles qui sont des animaux */
+function question_animal_ids(PDO $pdo, array $ids): array
+{
+    $ids = array_values(array_filter(array_map('intval', $ids)));
+    if (!$ids) { return []; }
+    try { return array_map('intval', $pdo->query("SELECT id FROM persons WHERE kind='animal' AND id IN (" . implode(',', $ids) . ')')->fetchAll(PDO::FETCH_COLUMN)); }
+    catch (Throwable $_) { return []; }
 }
 
 /** « 1850-1921 » à partir des événements de naissance et de décès (ou vide). */
@@ -279,15 +346,67 @@ function ask_question(PDO $pdo, string $question, int $personId = 0): array
         return $sp;
     }
     $r = question_to_criteria($pdo, $question, $personId);
-    $ids = !empty($r['criteria']['same_birthday']) ? same_birthday_ids($pdo, (int) $r['criteria']['same_birthday']) : run_saved_search($pdo, $r['criteria']);
+    if (!empty($r['ask'])) { // un prénom seul porté par plusieurs fiches : on demande laquelle
+        $a = $r['ask'];
+        $hom = array_map(static fn($id) => ['id' => (int) $id, 'name' => question_person_name($pdo, (int) $id), 'life' => person_life_years($pdo, (int) $id), 'chosen' => false], $a['ask']);
+        return ['understood' => $r['understood'], 'answer' => 'Plusieurs fiches ont le prénom « ' . $a['word'] . ' » : laquelle ? Choisis-la ci-dessus (« Répondre pour celle-ci »), ou écris aussi le nom de famille.',
+            'criteria' => null, 'homonyms' => $hom, 'count' => 0, 'people' => [], 'rows' => [], 'facts' => [['Prénom', $a['word']], ['Fiches', (string) count($hom)]]];
+    }
+    $crit = $r['criteria'];
+    if (!empty($crit['same_birthday'])) { $ids = same_birthday_ids($pdo, (int) $crit['same_birthday']); }
+    elseif (($fn = (string) ($crit['first_name'] ?? '')) !== '') {
+        // le prénom : un mot entier, sans tenir compte des accents (« Louis » ne donne pas « Louise », « Therese » trouve « Thérèse »)
+        $wanted = array_flip(question_first_name_ids($pdo, $fn, true));
+        try { $ids = run_saved_search($pdo, ['first_name' => ''] + $crit); }
+        catch (RuntimeException $_) { $ids = array_map('intval', $pdo->query('SELECT id FROM persons ORDER BY last_name COLLATE NOCASE, first_name COLLATE NOCASE')->fetchAll(PDO::FETCH_COLUMN)); }
+        $ids = array_values(array_filter($ids, static fn($id) => isset($wanted[(int) $id])));
+    } else { $ids = run_saved_search($pdo, $crit); }
+    // les animaux ne comptent pas parmi les personnes (sauf si la question parle d'animaux, ou ne trouve qu'eux par leur nom : « qui est Rex »)
+    $fold = ' ' . strtolower(ascii_fold($question)) . ' ';
+    if ($ids && !(function_exists('qm_about_animals') && qm_about_animals($fold))) {
+        $an = question_animal_ids($pdo, $ids);
+        $named = ($crit['first_name'] ?? '') !== '' || ($crit['last_name'] ?? '') !== '';
+        if ($an && !($named && count($an) === count($ids))) { $ids = array_values(array_diff($ids, $an)); }
+    }
+    // frères et sœurs : les pleins (mêmes parents) et les demi (un seul parent en commun) ; « demi-frères » ne garde que les demi
+    $rel = $r['relation'] ?? null;
+    $sibKind = []; $sibNote = '';
+    if ($rel && $rel['relation'] === 'siblings') {
+        $mine = h_parents($pdo, (int) $rel['person']);
+        $kindOf = static function (int $sid) use ($pdo, $mine) {
+            $theirs = h_parents($pdo, $sid); $common = array_values(array_intersect($mine, $theirs));
+            if (count($mine) >= 2 && count($theirs) >= 2) { return count($common) >= 2 ? ['full'] : ['half', $common[0] ?? 0]; }
+            return ['unknown', $common[0] ?? 0];
+        };
+        foreach ($ids as $sid) { $sibKind[$sid] = $kindOf((int) $sid); }
+        if (!empty($rel['half'])) { $ids = array_values(array_filter($ids, static fn($sid) => $sibKind[$sid][0] === 'half')); }
+        $nameOf = static fn(int $id) => question_person_name($pdo, $id);
+        $gOf = static function (array $ids) use ($pdo) { if (!$ids) { return []; } return array_map('strval', $pdo->query('SELECT gender FROM persons WHERE id IN (' . implode(',', array_map('intval', $ids)) . ')')->fetchAll(PDO::FETCH_COLUMN)); };
+        $by = static function (int $par) use ($pdo, $nameOf) { $g = $pdo->prepare('SELECT gender FROM persons WHERE id=?'); $g->execute([$par]); $x = (string) $g->fetchColumn(); return ($x === 'female' ? 'même mère : ' : ($x === 'male' ? 'même père : ' : 'parent en commun : ')) . $nameOf($par); };
+        $half = array_values(array_filter($ids, static fn($sid) => $sibKind[$sid][0] === 'half'));
+        $full = array_values(array_filter($ids, static fn($sid) => $sibKind[$sid][0] === 'full'));
+        $unk = array_values(array_filter($ids, static fn($sid) => $sibKind[$sid][0] === 'unknown'));
+        $halfList = implode(', ', array_map(static fn($sid) => $nameOf((int) $sid) . ' (' . $by((int) $sibKind[$sid][1]) . ')', $half));
+        if (!empty($rel['half'])) { $sibNote = $half ? ' ' . $halfList . '.' : ''; }
+        elseif ($half || ($unk && $full)) {
+            $gw = static function (array $g, bool $plural) { $m = in_array('male', $g, true) || array_diff($g, ['male', 'female']); $f = in_array('female', $g, true); return $m && !$f ? ($plural ? 'demi-frères' : 'demi-frère') : (!$m && $f ? ($plural ? 'demi-sœurs' : 'demi-sœur') : ($plural ? 'demi-frères et demi-sœurs' : 'demi-frère ou demi-sœur')); };
+            $parts = [];
+            if ($full) { $parts[] = 'Mêmes parents : ' . implode(', ', array_map($nameOf, $full)) . '.'; }
+            if ($half) { $parts[] = count($half) . ' ' . $gw($gOf($half), count($half) > 1) . ' : ' . $halfList . '.'; }
+            if ($unk) { $parts[] = 'Un seul parent connu, frère ou demi-frère ? ' . implode(', ', array_map($nameOf, $unk)) . '.'; }
+            $sibNote = ' ' . implode(' ', $parts);
+        }
+    }
     $people = collection_people($pdo, array_slice($ids, 0, 1000));
     $answer = '';
-    if ($rel = $r['relation'] ?? null) { // une phrase de réponse : « Oui, 2 enfants. »
+    if ($rel) { // une phrase de réponse : « Oui, 2 enfants. »
         [$one, $many] = $rel['labels'];
         $n = count($ids);
         $what = $n === 1 ? "1 {$one}" : "{$n} {$many}";
         $none = $rel['gender'] === 'female' ? 'aucune' : 'aucun';
         $relIds = search_relatives($pdo, $rel['relation'], (int) $rel['person']);
+        if ($relIds) { $relIds = array_values(array_diff($relIds, question_animal_ids($pdo, $relIds))); }
+        if (!empty($rel['half'])) { $relIds = array_values(array_filter($relIds, static fn($sid) => (($sibKind[$sid] ?? null) ?: $kindOf((int) $sid))[0] === 'half')); }
         if ($rel['gender'] && $relIds) { $g = $pdo->prepare('SELECT count(*) FROM persons WHERE gender=? AND id IN (' . implode(',', array_map('intval', $relIds)) . ')'); $g->execute([$rel['gender']]); $all = (int) $g->fetchColumn(); }
         else { $all = count($relIds); }
         if (!$n && $all) { // il y en a, mais aucun ne répond aux autres critères de la question
@@ -296,6 +415,7 @@ function ask_question(PDO $pdo, string $question, int $personId = 0): array
         if ($rel['yesno']) { $answer = $n ? "Oui, {$what}." : "Non : {$none} {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
         else { $answer = $n ? "{$rel['name']} : {$what}." : ucfirst($none) . " {$one} n’est connu" . ($none === 'aucune' ? 'e' : '') . " dans l’arbre pour {$rel['name']}."; }
         }
+        if ($n) { $answer .= $sibNote; }
     }
     // Plusieurs fiches portent le nom cité : on les montre toutes, pour pouvoir répondre pour une autre
     $homonyms = [];

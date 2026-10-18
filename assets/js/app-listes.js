@@ -534,7 +534,9 @@
         if(type==='courriers'&&key==='courrier_actions')return courrierActionsHtmlCell(row);
         if(type==='sosa'&&key==='sosa_number')return `<strong>${Number(row.sosa_number||0).toLocaleString('fr-FR')}</strong>`;
         if(type==='sosa'&&key==='sosa_person')return row.person_id?`<button class="table-link" data-open-person="${row.person_id}">${escapeHtml(row.person||'Personne')}</button>`:`<span class="cell-muted">${escapeHtml(row.person||'SOSA manquant')}</span>`;
-        if(type==='sosa'&&key==='sosa_status')return `<span class="reminder-state ${row.status==='renseigné'?'is-done':row.status==='doublon'?'is-upcoming':'is-late'}">${escapeHtml(row.status||'')}</span>`;
+        // implexe : un même ancêtre à plusieurs places (des cousins qui se sont mariés) — ce n'est pas un doublon à fusionner
+        if(type==='sosa'&&key==='sosa_status'&&(row.status==='doublon'||row.status==='implexe'))return `<span class="reminder-state is-upcoming sosa-implexe" title="Implexe : cette personne est ton ancêtre par plusieurs lignées, elle a donc plusieurs numéros Sosa. C’est normal (souvent des cousins qui se sont mariés) : ce n’est pas un doublon, il n’y a rien à fusionner.">🔁 implexe</span>`;
+        if(type==='sosa'&&key==='sosa_status')return `<span class="reminder-state ${row.status==='renseigné'?'is-done':'is-late'}">${escapeHtml(row.status||'')}</span>`;
         if(type==='daboville'&&key==='daboville_number')return `<strong>${escapeHtml(String(row.daboville_number||''))}</strong>`;
         if(type==='daboville'&&key==='daboville_person')return row.person_id?`<button class="table-link" data-open-person="${row.person_id}">${escapeHtml(row.person||'Personne')}</button>`:`<span class="cell-muted">${escapeHtml(row.person||'Personne')}</span>`;
         if(type==='daboville'&&key==='daboville_status')return `<span class="reminder-state ${row.status==='renseigné'?'is-done':'is-upcoming'}">${escapeHtml(row.status||'')}</span>`;
