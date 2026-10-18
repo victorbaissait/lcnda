@@ -392,3 +392,11 @@ button.mpk-tile { display: block; width: 100%; padding: 0; margin: 0; text-align
 :root[data-theme="dark"] .mpk-im.doc { background: #1c1c1c; }
 :root[data-theme="dark"] .mpk-dialog .mpk-pchip { color: var(--ink, #e8e8e8); }
 :root[data-theme="dark"] .mf .mf-add, :root[data-theme="dark"] .media-compare-pickbtn, :root[data-theme="dark"] .h-rc-covmedia { color: #a9a9a9; }
+
+/* La pastille et les ronds d'initiales ne se laissent pas déformer par les règles de l'écran autour (span en bloc, texte gris…) */
+.pk .pk-chip, .pk-chip { display: inline-flex !important; flex-direction: row !important; align-items: center !important; }
+.pk-av { display: grid !important; place-items: center !important; text-align: center !important; margin: 0 !important; padding: 0 !important; line-height: 1 !important; color: #fff !important; letter-spacing: 0 !important; }
+.pk-av.photo { color: transparent !important; }
+.pk-chip > span:not(.pk-av):not(.pk-ic) { display: inline !important; margin: 0 !important; color: inherit; font-size: inherit; font-weight: inherit; }
+.pk-chip b { color: var(--ink, #111); font-weight: 700; }
+.pk-item .pk-av, .pk-chip2 .pk-av, .pk-main-card .pk-av, .pk-view .pk-av { display: grid !important; place-items: center !important; }

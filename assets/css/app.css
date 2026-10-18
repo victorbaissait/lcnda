@@ -1531,8 +1531,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 @media(max-width:760px){#design-form{padding:22px}#design-form .design-primary-grid{grid-template-columns:1fr}}
 .local-lock-tools{margin-top:28px}
 .local-lock-inline{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:18px;padding:14px;border:2px solid var(--ink);background:#f7fbff}
-.local-lock-inline strong,.local-lock-inline span{display:block}
-.local-lock-inline span{margin-top:4px;color:var(--muted);font-size:12px;font-weight:800}
+.local-lock-inline>div>strong,.local-lock-inline>div>span{display:block}
+.local-lock-inline>div>span{margin-top:4px;color:var(--muted);font-size:12px;font-weight:800}
 .design-presets-head{margin-top:14px}
 .design-presets-head .page-actions{align-items:center}
 .design-presets-head input[type="text"]{border:2px solid var(--ink);padding:9px 10px;font-weight:800;min-width:180px}
@@ -1743,7 +1743,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 /* Blocs encadrés */
 :root[data-theme="dark"] .local-lock-inline { background: #1e2836; border-color: #3a4a5a; }
 :root[data-theme="dark"] .local-lock-inline strong { color: #e8e8e8; }
-:root[data-theme="dark"] .local-lock-inline span { color: #aaa; }
+:root[data-theme="dark"] .local-lock-inline > div > span { color: #aaa; }
 
 /* Designs enregistrés */
 :root[data-theme="dark"] .design-preset-row { background: #2a2a2a; border-color: #444; color: #e8e8e8; }

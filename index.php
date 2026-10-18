@@ -28,8 +28,8 @@ header('X-Content-Type-Options: nosniff');
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
-    <link rel="stylesheet" href="assets/css/app.css?v=225">
-    <link rel="stylesheet" href="assets/css/picker.css?v=3">
+    <link rel="stylesheet" href="assets/css/app.css?v=226">
+    <link rel="stylesheet" href="assets/css/picker.css?v=4">
     <link rel="stylesheet" href="assets/css/heritage.css?v=203">
     <link rel="stylesheet" href="assets/css/layout.css?v=11">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
