@@ -248,7 +248,7 @@
             <label>Du<input name="s_date_start" value="${esc(s.date_start || '')}" placeholder="12 mars 1943"></label><label>Au <small>(facultatif)</small><input name="s_date_end" value="${esc(s.date_end || '')}" placeholder="20 mars 1943"></label>
             <label>Ce qui s’est passé<select name="s_kind">${Object.entries(resistanceKinds).map(([k, l]) => `<option value="${k}" ${s.kind === k ? 'selected' : ''}>${KIND_ICON[k] || ''} ${esc(l)}</option>`).join('')}</select></label>
             <label>Lieu${placeField('s_place', s.place_text, s.lat, s.lon, 'Lyon, ferme des Brosses, prison de Montluc…')}</label>
-            <label>Avec (fiche)${A().collectionPersonField('s_person', s.linked_person_id ? {id: s.linked_person_id, first_name: s.linked_name || '', last_name: ''} : null, 'Compagnon, logeur, dénonciateur…')}</label>
+            <div><span class="pk-lab">Avec (fiche)</span>${window.LCNDA_PICKER.pickerField({name: 's_person', kind: 'person', value: Number(s.linked_person_id) || null, placeholder: 'Compagnon, logeur, dénonciateur…'})}</div>
             <label>Avec (texte libre)<input name="s_linked_text" value="${esc(s.linked_text || '')}" placeholder="le groupe Combat de Bourg"></label>
             <label class="span-2">Détails<textarea name="s_note" rows="2">${esc(s.note || '')}</textarea></label></div>
             <div class="h-row-actions"><button type="button" class="icon-button" data-h-res-up title="Monter">↑</button><button type="button" class="icon-button" data-h-res-down title="Descendre">↓</button><button type="button" class="icon-button danger" data-h-res-del title="Retirer cette étape">🗑</button></div></div>`;
@@ -267,7 +267,7 @@
                 <h4>Documents, photos, enregistrements</h4>${ext.mediaEditorHtml ? ext.mediaEditorHtml('resistance', personId, r.media || [], [['', 'Carte de combattant, fiche d’arrestation, photos, témoignage enregistré…', 'image/*,application/pdf,audio/*,video/*']]) : ''}`,
             onOpen: d => {
                 const rows = d.querySelector('[data-h-res-rows]');
-                d.querySelector('[data-h-res-add]').addEventListener('click', () => { rows.insertAdjacentHTML('beforeend', stepRow()); A().bindCollectionPersonFields(rows.lastElementChild); });
+                d.querySelector('[data-h-res-add]').addEventListener('click', () => { rows.insertAdjacentHTML('beforeend', stepRow()); });
                 rows.addEventListener('click', e => {
                     const row = e.target.closest('.h-res-row');
                     if (e.target.closest('[data-h-res-del]')) row.remove();
@@ -436,7 +436,7 @@
             case 'select': return `<label>${esc(f.label)}${help}<select name="${name}"${req}><option value="">—</option>${f.options.map(o => `<option ${o === value ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select></label>`;
             case 'checkbox': return `<label class="checkbox-line"><input type="checkbox" name="${name}" ${value ? 'checked' : ''}> ${esc(f.label)}</label>`;
             case 'url': return `<label>${esc(f.label)}${help}<input type="url" name="${name}" value="${esc(value ?? '')}" placeholder="https://…"></label>`;
-            case 'person': return `<label>${esc(f.label)}${help}${A().collectionPersonField(name, entry?.people?.[f.key] || null, 'Tape un nom…')}</label>`;
+            case 'person': return `<div><span class="pk-lab">${esc(f.label)}</span>${help}${window.LCNDA_PICKER.pickerField({name, kind: 'person', value: entry?.people?.[f.key]?.id ? Number(entry.people[f.key].id) : null})}</div>`; // menu de choix unique
             case 'place': return `<label>${esc(f.label)}${help}${ext.placeField ? ext.placeField(name, value?.text || '', value?.lat ?? '', value?.lon ?? '', 'Commune, adresse…') : `<input name="${name}" value="${esc(value?.text || '')}">`}</label>`;
             case 'person_info': return `<div class="h-cb-info"><strong>ℹ️ ${esc(infoLabel(f, allFields))}</strong> <small class="muted">(repris tout seul de la fiche${f.from !== 'self' ? ' choisie' : ''})</small>${value ? ` : ${esc(value)}` : ' : <span class="muted">rien de connu pour l’instant</span>'}</div>`;
             case 'map': return `<p class="muted span-2">🗺️ ${esc(f.label)} : la carte montrera les lieux de ce bloc.</p>`;
@@ -1925,11 +1925,10 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page h-mylist">${header(inLists ? 'LISTES' : 'ÉDITEUR DE LISTES', (L.icon || '📋') + ' ' + L.name, esc(L.description || '') + `<br><strong>${plural(shown.length, unit[0], unit[1])}</strong>${shown.length !== data.rows.length ? ` ${shown.length > 1 ? 'affichées' : 'affichée'} sur ${fmt(data.rows.length)}` : ''}${data.truncated ? ' (liste coupée : les premières seulement)' : ''}` + (L.labels?.length ? '<br>' + ext.labelChips(L.labels) : ''),
                 `${inLists ? '' : '<button type="button" class="button secondary" data-lv-back>← Éditeur de listes</button>'}<button type="button" class="button secondary" data-lv-csv>Exporter (CSV)</button><button type="button" class="button secondary" data-lv-print>Imprimer</button>${tools('data-lv-edit', 'data-lv-del', 'cette liste')}`)}
             ${isFree ? '<div class="collection-toolbar"><button type="button" class="button" data-lv-newrow>+ Ajouter une ligne</button></div>' : ''}
-            ${isPersons ? `<div class="collection-toolbar"><label class="h-lv-add">Ajouter une personne à la main ${A().collectionPersonField('lv_add', null, 'Tape un nom…')}</label><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
+            ${isPersons ? `<div class="collection-toolbar"><div class="h-lv-add"><span class="pk-lab">Ajouter une personne à la main</span>${window.LCNDA_PICKER.pickerField({name: 'lv_add', kind: 'person'})}</div><button type="button" class="button small" data-lv-addbtn>Ajouter</button></div>` : ''}
             ${filterChips}${!isFree && data.rows.length && disp.mode === 'table' ? '<p class="muted h-lv-help">Clic sur le nom d’une colonne : trier · <b>▾</b> : ne garder que certaines valeurs (des personnes, des villes, une période…)</p>' : ''}
             ${modesBar(disp)}<div ${bodyAttrs(disp)}>${bodyHtml(disp)}</div></section>`;
         A().bindTableLinks?.();
-        A().bindCollectionPersonFields(A().$('#workspace'));
         const ws = A().$('#workspace');
         const reload = () => renderListView(++S().workspaceToken, id, inLists);
         const saveFilters = async next => { try { await api('save_my_list_filters', {}, {method: 'POST', body: {id, filters: next}}); reload(); } catch (error) { toast(error.message, 'error'); } };
@@ -1987,7 +1986,7 @@
         const pickPerson = b => {
             const key = b.closest('[data-lv-key]').dataset.lvKey, field = b.dataset.lvPerson;
             dialog({eyebrow: 'MES LISTES', title: 'Relier à une fiche', submitLabel: 'Relier',
-                body: `<label class="h-block-label">Personne${A().collectionPersonField('lv_pick', null, 'Tape un nom…')}</label><p class="muted">Laisse vide puis « Relier » pour enlever le lien.</p>`,
+                body: `<div class="h-block-label"><span class="pk-lab">Personne</span>${window.LCNDA_PICKER.pickerField({name: 'lv_pick', kind: 'person'})}</div><p class="muted">Laisse vide puis « Relier » pour enlever le lien.</p>`,
                 onSubmit: async form => { await api('save_my_list_row', {}, {method: 'POST', body: {list_id: id, row_key: key, field, value: form.querySelector('[name=lv_pick]').value}}); reload(); }});
         };
         ws.querySelector('[data-lv-addbtn]')?.addEventListener('click', async () => {
@@ -1998,7 +1997,7 @@
         const body = ws.querySelector('[data-lv-body]');
         const rowOf = key => data.rows.find(r => r.key === key);
         const paint = D => { body.className = `h-lv-body h-lv-size-${D.size || 'm'}`; body.style.setProperty('--lv-accent', D.accent || '#0066cc'); body.innerHTML = bodyHtml(D);
-            ws.querySelectorAll('[data-lv-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.lvMode === D.mode)); A().bindTableLinks?.(); A().bindCollectionPersonFields(body); };
+            ws.querySelectorAll('[data-lv-mode]').forEach(b => b.classList.toggle('is-on', b.dataset.lvMode === D.mode)); A().bindTableLinks?.(); };
         const saveDisplay = async D => { const r = await api('save_my_list_display', {}, {method: 'POST', body: {id, display: D}}); disp = fresh(r.result?.display || r.display || D); d.display = disp; return disp; };
         ws.querySelectorAll('[data-lv-mode]').forEach(b => b.addEventListener('click', async () => {
             const changed = (disp.mode === 'table') !== (b.dataset.lvMode === 'table'); disp = {...disp, mode: b.dataset.lvMode};

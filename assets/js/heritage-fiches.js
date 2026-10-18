@@ -268,28 +268,20 @@
             + (ext.mediaEditorHtml ? ext.mediaEditorHtml('topic_sheet', cur.id, mediaOf(b), [[b.id, 'Images et documents', 'image/*,application/pdf']]) : '');
         if (b.type === 'dates') body = `<p class="muted">Une date par ligne (ex. « 1772 », « 3 mai 1791 ») et ce qui s’est passé. Elles sont rangées dans l’ordre que tu leur donnes.</p>${rowsEditor(b.rows || [], [['date', 'Date', 1], ['text', 'Ce qui s’est passé', 4]])}`;
         if (b.type === 'links') body = `${rowsEditor(b.rows || [], [['label', 'Nom', 2], ['url', 'https://…', 3], ['note', 'Note', 2]])}`;
-        if (b.type === 'people') body = `<div class="h-fi-pp" data-fi-pp>${(b.ids || []).map(pid => { const p = cur.people?.[pid]; return `<span class="h-fi-chip" data-pid="${pid}">${esc(p ? `${p.first_name || ''} ${p.last_name || ''}`.trim() : '#' + pid)} <button type="button" data-fi-pdel aria-label="Retirer">×</button></span>`; }).join('')}</div>
-            <label>Ajouter une personne<input type="search" data-fi-psearch placeholder="Tape un nom…" autocomplete="off"></label><div class="h-fi-presults" data-fi-presults></div><label>Note <small>(facultatif)</small><input name="note" value="${esc(b.note || '')}" maxlength="2000"></label>`;
-        if (b.type === 'screen') body = ext.appScreen ? `<label>Écran ${ext.appScreen.select(b.target, 'name="target"')}</label><label>Personne <small>(pour « Fiche d’une personne »)</small>${A().collectionPersonField?.('fi_person', String(b.target).startsWith('person:') ? {id: Number(b.target.slice(7)), first_name: b.personName || '', last_name: ''} : null, 'Nom de la personne') || ''}</label>
+        if (b.type === 'people') body = `<div><span class="pk-lab">Personnes</span>${window.LCNDA_PICKER.pickerField({name: 'fi_people', kind: 'person', multiple: true, value: (b.ids || []).map(Number).filter(Boolean)})}</div><label>Note <small>(facultatif)</small><input name="note" value="${esc(b.note || '')}" maxlength="2000"></label>`;
+        if (b.type === 'screen') body = ext.appScreen ? `<label>Écran ${ext.appScreen.select(b.target, 'name="target"')}</label><div><span class="pk-lab">Personne <small>(pour « Fiche d’une personne »)</small></span>${window.LCNDA_PICKER.pickerField({name: 'fi_person', kind: 'person', value: String(b.target).startsWith('person:') ? Number(b.target.slice(7)) || null : null})}</div>
             <label>Hauteur<select name="height">${ext.appScreen.heights.map(([v, l]) => `<option value="${v}" ${String(b.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="sidebar" ${b.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label>
             <p class="muted">Mes listes, les listes de l’app, la carte, les arbres, les statistiques, la fiche d’une personne, un village… : tout écran de l’app se met dans la fiche, à jour.</p>` : '<p class="muted">Écrans indisponibles.</p>';
         if (b.type === 'diagram') { const items = ext.diagramItems?.() || []; body = `<label>Diagramme<select name="diagram"><option value="">— choisir —</option>${items.map(([id, l]) => `<option value="${id}" ${Number(b.diagram) === Number(id) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><p><button type="button" class="button small secondary" data-fi-dgnew>+ Nouveau diagramme</button></p><p class="muted">Graphiques → Mes diagrammes : le bloc montre toujours sa dernière version.</p>`; }
         if (b.type === 'widget') { const defs = Object.values(ext.customWidgetDefs?.() || {}); body = defs.length ? `<label>Widget ou statistique<select name="widget">${defs.map(w => `<option value="${esc(w.id)}" ${b.widget === w.id ? 'selected' : ''}>${esc((w.icon || '🧱') + ' ' + (w.name || w.id))}</option>`).join('')}</select></label><p class="muted">Pour en créer un : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>` : '<p class="muted">Aucun widget ni statistique à toi pour l’instant : Maintenance → Éditeur de widgets ou Éditeur de statistiques.</p>'; }
         const onOpen = dlg => {
                 const root = dlg.querySelector('.h-dialog-body') || dlg;
-                ext.bindMediaEditor?.(root); A().bindCollectionPersonFields?.(root);
+                ext.bindMediaEditor?.(root);
+                root.addEventListener('picker-change', e => { if (e.detail.name === 'fi_person') root.dataset.fiPersonName = e.detail.item?.title || ''; });
                 root.addEventListener('click', e => {
                     if (e.target.closest('[data-fi-rowadd]')) { const box = root.querySelector('[data-fi-rows]'), last = box.lastElementChild; const n = last.cloneNode(true); n.querySelectorAll('input').forEach(x => { x.value = ''; }); box.appendChild(n); n.querySelector('input').focus(); }
                     if (e.target.closest('[data-fi-rowdel]')) { const row = e.target.closest('.h-fi-row'), box = row.parentElement; if (box.children.length > 1) row.remove(); else row.querySelectorAll('input').forEach(x => { x.value = ''; }); }
                     if (e.target.closest('[data-fi-dgnew]')) ext.openDiagramEditor?.(null, {onSave: id => { const sel = root.querySelector('[name=diagram]'); if (sel) { sel.insertAdjacentHTML('beforeend', `<option value="${id}">${esc((ext.diagramItems?.() || []).find(x => Number(x[0]) === Number(id))?.[1] || 'Nouveau diagramme')}</option>`); sel.value = String(id); } }});
-                    if (e.target.closest('[data-fi-pdel]')) e.target.closest('.h-fi-chip').remove();
-                    const add = e.target.closest('[data-fi-padd]'); if (add) { const box = root.querySelector('[data-fi-pp]'); if (!box.querySelector(`[data-pid="${add.dataset.fiPadd}"]`)) box.insertAdjacentHTML('beforeend', `<span class="h-fi-chip" data-pid="${add.dataset.fiPadd}">${esc(add.dataset.name)} <button type="button" data-fi-pdel aria-label="Retirer">×</button></span>`); add.remove(); }
-                });
-                let timer = 0;
-                root.querySelector('[data-fi-psearch]')?.addEventListener('input', e => {
-                    clearTimeout(timer); const q = e.target.value.trim(), out = root.querySelector('[data-fi-presults]');
-                    if (q.length < 2) { out.innerHTML = ''; return; }
-                    timer = setTimeout(async () => { try { const r = await api('people', {q, limit: 20}); out.innerHTML = (r.people || []).map(p => `<button type="button" class="button small secondary" data-fi-padd="${p.id}" data-name="${esc(A().personName(p))}">＋ ${esc(A().personName(p))} <small class="muted">${esc(A().years?.(p) || '')}</small></button>`).join('') || '<p class="muted">Personne trouvée.</p>'; } catch (_) {} }, 250);
                 });
             };
         const onSubmit = async form => {
@@ -300,8 +292,8 @@
                 if (b.type === 'images') { b.layout = f.layout; b.caption = f.caption || ''; }
                 if (b.type === 'dates' || b.type === 'links') b.rows = [...form.querySelectorAll('.h-fi-row')].map(r => Object.fromEntries([...r.querySelectorAll('[data-k]')].map(x => [x.dataset.k, x.value.trim()]))).filter(r => Object.values(r).some(Boolean));
                 if (b.type === 'links' && b.rows.some(r => r.url && !/^https?:\/\//i.test(r.url))) { toast('Une adresse doit commencer par http:// ou https://', 'error'); return false; }
-                if (b.type === 'people') { b.ids = [...form.querySelectorAll('[data-fi-pp] [data-pid]')].map(x => Number(x.dataset.pid)); b.note = f.note || ''; }
-                if (b.type === 'screen') { let target = f.target || 'module:carte'; const pid = Number(form.elements.fi_person?.value) || 0; if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes'; b.target = target; b.personName = form.querySelector('[data-cp-input="fi_person"]')?.value || ''; b.height = Number(f.height) || 560; b.sidebar = !!form.elements.sidebar?.checked; }
+                if (b.type === 'people') { b.ids = String(f.fi_people || '').split(',').map(Number).filter(Boolean); b.note = f.note || ''; }
+                if (b.type === 'screen') { let target = f.target || 'module:carte'; const pid = Number(form.elements.fi_person?.value) || 0; if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes'; b.target = target; b.personName = (form.querySelector('.h-dialog-body') || form).dataset.fiPersonName ?? (pid ? b.personName || '' : ''); b.height = Number(f.height) || 560; b.sidebar = !!form.elements.sidebar?.checked; }
                 if (b.type === 'widget') b.widget = f.widget || '';
                 if (b.type === 'diagram') b.diagram = Number(f.diagram) || 0;
                 if (fresh) cur.blocks.push(b); else cur.blocks[i] = b;
@@ -319,7 +311,7 @@
             host.classList.add('is-back');
             target.innerHTML = `<form class="h-fi-back dashboard-widget-back" novalidate><div class="dashboard-widget-back-title"><strong>${fresh ? 'Nouveau bloc' : 'Réglages du bloc'}</strong><span>${ic} ${esc(label)}</span></div>${common}${body}<div class="page-actions compact h-fi-back-actions"><button type="submit" class="button small">${fresh ? 'Ajouter' : 'Enregistrer'}</button><button type="button" class="button small secondary" data-fi-cancel>Annuler</button></div></form>`;
             const form = target.querySelector('form');
-            A().bindCollectionPersonFields?.(form); onOpen(form);
+            onOpen(form);
             form.querySelector('[data-fi-cancel]').addEventListener('click', () => refresh());
             // la largeur se voit tout de suite, comme pour un widget
             form.addEventListener('click', e => { const w = e.target.closest('[data-fi-w]'); if (!w) return; form.elements.width.value = w.dataset.fiW; form.querySelectorAll('[data-fi-w]').forEach(x => x.setAttribute('aria-pressed', String(x === w))); host.className = host.className.replace(/\bspan-\d+\b/, 'span-' + w.dataset.fiW); });

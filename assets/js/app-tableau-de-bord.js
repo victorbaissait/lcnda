@@ -219,7 +219,8 @@
         const secondPersonWidget=widget.type==='kinship_widget';
         const mode=widget.config?.personMode==='specific'?'specific':'random';
         const quickStatOptions=[['persons','Personnes'],['events','Événements'],['media','Médias'],['sources','Sources'],['reminders_due','Rappels proches'],['open_investigations','Enquêtes ouvertes'],['open_battues','Battues ouvertes'],['issues','Incohérences']];
-        const personPicker=(label,nameKey,idKey)=>`<label>${escapeHtml(label)}<input type="text" data-dashboard-person-search data-dashboard-person-name-key="${escapeHtml(nameKey)}" data-dashboard-person-id-key="${escapeHtml(idKey)}" value="${escapeHtml(widget.config?.[nameKey]||'')}" placeholder="Tape un nom…" autocomplete="off"><input type="hidden" data-dashboard-person-id value="${escapeHtml(widget.config?.[idKey]||'')}"><div class="place-suggestions dashboard-person-suggestions" hidden></div></label>`;
+        // personne du widget : menu de choix unique ; les champs cachés [data-dashboard-person-search] (nom) et [data-dashboard-person-id] suivent
+        const personPicker=(label,nameKey,idKey)=>{const id=Number(widget.config?.[idKey])||0,name=widget.config?.[nameKey]||'';return `<div class="pk-host"><span>${escapeHtml(label)}</span><span data-dashboard-person-pk>${(window.LCNDA_PICKER?.pickerField({name:'dashboard_person_'+idKey,kind:'person',allowCreate:false,value:id?{id,title:name,kind:'person'}:null})||'').replace(` name="dashboard_person_${idKey}"`,'')}<input type="hidden" data-dashboard-person-search data-dashboard-person-name-key="${escapeHtml(nameKey)}" data-dashboard-person-id-key="${escapeHtml(idKey)}" value="${escapeHtml(name)}"><input type="hidden" data-dashboard-person-id value="${escapeHtml(widget.config?.[idKey]||'')}"></span></div>`;};
         const quizTypeIds=Array.isArray(widget.config?.quizEventTypeIds)?widget.config.quizEventTypeIds.map(Number).filter(Boolean):[];
         const quizAll=!quizTypeIds.length;
         const quizTypes=(state.bootstrap?.eventTypes||[]).filter(type=>Number(type.usage_count)>0).sort((a,b)=>String(a.label||'').localeCompare(String(b.label||''),'fr',{sensitivity:'base'}));
@@ -270,22 +271,14 @@
         saveDashboardBlockSettings(settings);
     }
     function setupDashboardWidgetPersonPickers(){
-        $$('[data-dashboard-person-search]').forEach(input=>{
-            const box=input.parentElement.querySelector('.dashboard-person-suggestions');
-            const hidden=input.parentElement.querySelector('[data-dashboard-person-id]');
-            if(!box||!hidden)return;
-            const run=debounce(async()=>{
-                const q=input.value.trim();
-                hidden.value='';
-                if(q.length<2){box.hidden=true;box.innerHTML='';return;}
-                try{
-                    const rows=await api('people',{q,limit:20});
-                    box.innerHTML=(rows.people||rows.items||rows||[]).slice(0,8).map(person=>`<button type="button" data-dashboard-person-pick="${person.id}" data-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><span>${escapeHtml(years(person))}</span></button>`).join('');
-                    box.hidden=!box.innerHTML;
-                    $$('[data-dashboard-person-pick]',box).forEach(button=>button.addEventListener('click',()=>{hidden.value=button.dataset.dashboardPersonPick;input.value=button.dataset.name||'';const editor=input.closest('[data-dashboard-widget-editor]');const mode=$('[data-dashboard-person-mode]',editor);if(mode)mode.value='specific';box.hidden=true;}));
-                }catch(_){box.hidden=true;}
-            },220);
-            input.addEventListener('input',run);
+        $$('[data-dashboard-person-pk]').forEach(wrap=>{
+            if(wrap.dataset.pkBound)return;wrap.dataset.pkBound='1';
+            wrap.addEventListener('picker-change',event=>{
+                const it=event.detail.item;
+                wrap.querySelector('[data-dashboard-person-id]').value=it&&!it.free?it.id:'';
+                wrap.querySelector('[data-dashboard-person-search]').value=it?it.title:'';
+                const mode=$('[data-dashboard-person-mode]',wrap.closest('[data-dashboard-widget-editor]'));if(mode&&it)mode.value='specific';
+            });
         });
     }
     function setupDashboardWidgetMediaPickers(){

@@ -94,7 +94,12 @@ function picker_search(PDO $pdo, array $get): array
     $q = trim((string) preg_replace('/\s+/u', ' ', mb_substr((string) ($get['q'] ?? ''), 0, 120)));
     $offset = max(0, (int) ($get['offset'] ?? 0));
     $limit = max(1, min(100, (int) ($get['limit'] ?? 30)));
-    $opts = ['animals' => (string) ($get['animals'] ?? '1') !== '0', 'mixed' => count($kinds) > 1];
+    $opts = ['animals' => (string) ($get['animals'] ?? '1') !== '0', 'mixed' => count($kinds) > 1,
+        'person_id' => max(0, (int) ($get['person_id'] ?? 0)), 'media_type' => in_array($get['media_type'] ?? '', ['image', 'audio', 'video', 'document'], true) ? $get['media_type'] : ''];
+    // near=lat,lon : les lieux les plus proches d'un point cliqué sur la carte
+    if (in_array('place', $kinds, true) && preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/', (string) ($get['near'] ?? ''), $m)) {
+        return ['groups' => picker_places_near($pdo, (float) $m[1], (float) $m[2], min($limit, 30)), 'more' => false, 'next_offset' => 0];
+    }
     // ids=3,7 : relire des fiches déjà choisies (pickerSet avec de simples numéros)
     $ids = array_slice(array_values(array_unique(array_filter(array_map('intval', explode(',', (string) ($get['ids'] ?? ''))), static fn(int $i): bool => $i > 0))), 0, 100);
     if ($ids) {
@@ -140,7 +145,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
         $r = match ($kind) {
             'person' => picker_persons($pdo, $q, $offset, $limit, $opts),
             'source' => picker_sources($pdo, $q, $offset, $limit),
-            'media' => picker_media($pdo, $q, $offset, $limit),
+            'media' => picker_media($pdo, $q, $offset, $limit, $opts),
             'investigation' => picker_investigations($pdo, $q, $offset, $limit),
             'battue' => picker_battues($pdo, $q, $offset, $limit),
             'label' => picker_labels($pdo, $q, $offset, $limit),
@@ -475,7 +480,7 @@ function picker_place_rows(PDO $pdo, array $split, string $seg, int $offset, int
     $census = picker_table_exists($pdo, 'census_records') ? '+(SELECT count(*) FROM census_records c WHERE c.place_id=pl.id)' : '';
     // pour les communes : max(population) choisit la ligne la plus peuplée de chaque groupe (colonnes « nues » de SQLite)
     [$from, $pop] = $seg === 'base' ? ["FROM places pl WHERE {$split['where']} AND {$split['used']}", 'COALESCE(pl.population,0)'] : picker_place_fr_sql($pdo, $split['where']);
-    $sql = "SELECT pl.id, pl.name, pl.county, pl.state, pl.country, pl.subdivision, pl.admin2_code, {$pop} AS population, pl.alternate_names, pl.geoname_id,
+    $sql = "SELECT pl.id, pl.name, pl.county, pl.state, pl.country, pl.subdivision, pl.admin2_code, pl.admin4_code, pl.latitude, pl.longitude, {$pop} AS population, pl.alternate_names, pl.geoname_id,
         ((SELECT count(*) FROM events e WHERE e.place_id=pl.id){$census}) AS n_events,
         CASE WHEN picker_fold(pl.name)=:nx THEN 0 WHEN picker_fold(pl.name) LIKE :np THEN 1 WHEN picker_fold(pl.name) LIKE :nw THEN 2 WHEN picker_fold(pl.name) LIKE :nf THEN 3 ELSE 4 END AS rank
         {$from}
@@ -504,7 +509,11 @@ function picker_place_item(array $r, string $group, string $typed = ''): array
         'kind' => 'place', 'id' => (int) $r['id'], 'title' => (string) $r['name'], 'name' => (string) $r['name'], 'meta' => implode(' · ', $meta),
         'badge' => $group === 'base' ? ($n ? picker_plural($n, 'événement') : '') : 'Commune', 'badge_style' => $group === 'base' ? 'blue' : '',
         'group' => $group, 'icon' => '📍', 'short' => $short, 'county' => $dept, 'state_name' => $state, 'dept_code' => $country === 'France' ? $num : '',
-    ];
+        'dept' => $country === 'France' ? $num : '', 'country' => $country, 'insee' => $country === 'France' ? trim((string) ($r['admin4_code'] ?? '')) : '',
+        'lat' => isset($r['latitude']) && $r['latitude'] !== null && $r['latitude'] !== '' ? (float) $r['latitude'] : null,
+        'lon' => isset($r['longitude']) && $r['longitude'] !== null && $r['longitude'] !== '' ? (float) $r['longitude'] : null,
+        'place_name' => implode(', ', array_filter([trim((string) $r['name']), $dept, $country], static fn($v) => $v !== '')),
+    ] + (isset($r['distance_km']) ? ['distance_km' => round((float) $r['distance_km'], 1)] : []);
 }
 
 /** Autre nom du lieu, montré seulement quand c'est grâce à lui qu'on l'a trouvé (« Saint-Martial » tapé → anc. « Saint-Martial ») :
@@ -554,7 +563,7 @@ function picker_world_rows(PDO $pdo, string $name, array $rest): array
         $where .= ' AND (' . implode(' OR ', $part) . ')';
     }
     try {
-        $s = $world->prepare("SELECT w.geoname_id, w.name, w.search_key, w.state, w.country_code, w.population, c.name AS country
+        $s = $world->prepare("SELECT w.geoname_id, w.name, w.search_key, w.state, w.country_code, w.population, w.latitude, w.longitude, c.name AS country
             FROM world_places w JOIN countries c ON c.code = w.country_code WHERE {$where}
             ORDER BY CASE WHEN w.search_key = ? THEN 0 ELSE 1 END, w.population DESC LIMIT 300");
         $s->execute([...$params, $name]);
@@ -582,8 +591,47 @@ function picker_world_item(array $r): array
         'kind' => 'place', 'id' => null, 'ref' => (int) $r['geoname_id'], 'title' => (string) $r['name'], 'name' => (string) $r['name'], 'meta' => implode(' · ', $meta),
         'badge' => (string) $r['country'], 'badge_style' => '', 'group' => 'world', 'icon' => '📍',
         'short' => trim((string) $r['state']) !== '' ? trim((string) $r['state']) . ', ' . $r['country'] : (string) $r['country'],
-        'county' => trim((string) $r['state']),
+        'county' => '', 'state_name' => trim((string) $r['state']), 'dept' => '', 'insee' => '', 'country' => (string) $r['country'],
+        'lat' => isset($r['latitude']) ? (float) $r['latitude'] : null, 'lon' => isset($r['longitude']) ? (float) $r['longitude'] : null,
+        'place_name' => implode(', ', array_filter([(string) $r['name'], trim((string) $r['state']), (string) $r['country']], static fn($v) => $v !== '')),
     ];
+}
+
+/** Lieux les plus proches d'un point (« 🗺 Choisir sur la carte ») : ceux de ta base, puis les communes livrées. */
+function picker_places_near(PDO $pdo, float $lat, float $lon, int $limit): array
+{
+    $groups = [];
+    $cos = max(0.05, cos(deg2rad($lat)));
+    foreach (['base' => 'Dans ta généalogie', 'fr' => 'Communes (pas encore dans ta base)'] as $seg => $label) {
+        $items = [];
+        foreach ([0.15, 0.5, 2.0] as $box) { // on élargit la zone tant qu'on ne trouve rien
+            $used = picker_place_used_sql($pdo);
+            $census = picker_table_exists($pdo, 'census_records') ? '+(SELECT count(*) FROM census_records c WHERE c.place_id=pl.id)' : '';
+            $s = $pdo->prepare("SELECT pl.*, ((SELECT count(*) FROM events e WHERE e.place_id=pl.id){$census}) AS n_events,
+                ((pl.latitude-:lat)*(pl.latitude-:lat) + ((pl.longitude-:lon)*:cos)*((pl.longitude-:lon)*:cos)) AS d2
+                FROM places pl WHERE pl.latitude BETWEEN :la1 AND :la2 AND pl.longitude BETWEEN :lo1 AND :lo2 AND " . ($seg === 'base' ? $used : "NOT {$used}") . "
+                ORDER BY d2, COALESCE(pl.population,0) DESC LIMIT " . ($seg === 'base' ? 8 : $limit * 3));
+            $s->execute([':lat' => $lat, ':lon' => $lon, ':cos' => $cos, ':la1' => $lat - $box, ':la2' => $lat + $box, ':lo1' => $lon - $box / $cos, ':lo2' => $lon + $box / $cos]);
+            $rows = $s->fetchAll(PDO::FETCH_ASSOC);
+            if ($rows) {
+                $seen = $seg === 'fr' ? ($baseKeys ?? []) : [];
+                foreach ($rows as $r) {
+                    $k = mb_strtolower((string) $r['name']) . '|' . ($r['admin4_code'] ?: $r['id']); // un seul hameau homonyme par commune
+                    if ($seg === 'fr' && isset($seen[$k])) { continue; }
+                    $seen[$k] = true;
+                    $r['distance_km'] = sqrt((float) $r['d2']) * 111.2;
+                    $it = picker_place_item($r, $seg);
+                    $it['meta'] = trim($it['meta'] . ' · à ' . number_format($it['distance_km'], 1, ',', ' ') . ' km', ' ·');
+                    $items[] = $it;
+                    if (count($items) >= ($seg === 'base' ? 8 : $limit)) { break; }
+                }
+                break;
+            }
+        }
+        if ($seg === 'base') { $baseKeys = []; foreach ($items as $it) { $baseKeys[mb_strtolower($it['name']) . '|' . ($it['insee'] ?: $it['id'])] = true; } }
+        $groups[] = ['kind' => 'place', 'key' => $seg, 'label' => $label, 'total' => count($items), 'items' => $items];
+    }
+    return $groups;
 }
 
 /**
@@ -596,7 +644,9 @@ function picker_place_adopt(PDO $pdo, array $data): array
     $geo = (int) ($data['geoname_id'] ?? 0);
     $name = trim(mb_substr((string) ($data['name'] ?? ''), 0, 200));
     if ($geo <= 0 && $name !== '') {
-        $pdo->prepare('INSERT INTO places(name,country) VALUES(?,?)')->execute([$name, trim(mb_substr((string) ($data['country'] ?? ''), 0, 100))]);
+        $lat = is_numeric($data['lat'] ?? null) && abs((float) $data['lat']) <= 90 ? (float) $data['lat'] : null;
+        $lon = is_numeric($data['lon'] ?? null) && abs((float) $data['lon']) <= 180 ? (float) $data['lon'] : null;
+        $pdo->prepare('INSERT INTO places(name,country,latitude,longitude) VALUES(?,?,?,?)')->execute([$name, trim(mb_substr((string) ($data['country'] ?? ''), 0, 100)), $lat, $lon]);
         $id = (int) $pdo->lastInsertId();
         if (function_exists('log_change')) { log_change($pdo, 'place', $id, 'create', 'Lieu créé : ' . $name); }
     } else {
@@ -625,12 +675,20 @@ function picker_sources(PDO $pdo, string $q, int $offset, int $limit): array
     ], $rows)];
 }
 
-function picker_media(PDO $pdo, string $q, int $offset, int $limit): array
+function picker_media(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
 {
     $params = [];
-    $where = picker_text_where(['m.title', 'm.filename', 'm.description', 'm.document_title'], $q, $params);
-    $people = picker_table_exists($pdo, 'media_links') ? "(SELECT count(*) FROM media_links ml WHERE ml.media_id=m.id AND ml.entity_type='person')" : '0';
-    [$total, $rows] = picker_page($pdo, "SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, {$people} AS n", "FROM media m WHERE {$where}", 'm.id DESC', $params, $offset, $limit);
+    $links = picker_table_exists($pdo, 'media_links');
+    // aussi la cote (document_reference) et le nom des personnes rattachées
+    $names = $links ? "(SELECT group_concat(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''),' ; ') FROM media_links ml JOIN persons p ON p.id=ml.entity_id WHERE ml.media_id=m.id AND ml.entity_type='person')" : "''";
+    $where = picker_text_where(['m.title', 'm.filename', 'm.description', 'm.document_title', 'm.document_reference', $names], $q, $params);
+    if (!empty($opts['person_id']) && $links) { $where .= " AND EXISTS(SELECT 1 FROM media_links pl2 WHERE pl2.media_id=m.id AND pl2.entity_type='person' AND pl2.entity_id=:pid)"; $params[':pid'] = (int) $opts['person_id']; }
+    if (!empty($opts['media_type'])) {
+        if ($opts['media_type'] === 'document') { $where .= " AND m.media_type IN ('document','pdf')"; }
+        else { $where .= ' AND m.media_type = :mt'; $params[':mt'] = $opts['media_type']; }
+    }
+    $people = $links ? "(SELECT count(*) FROM media_links ml WHERE ml.media_id=m.id AND ml.entity_type='person')" : '0';
+    [$total, $rows] = picker_page($pdo, "SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, m.document_reference, {$people} AS n", "FROM media m WHERE {$where}", 'm.id DESC', $params, $offset, $limit);
     $types = ['image' => 'Photo', 'document' => 'Document', 'audio' => 'Audio', 'video' => 'Vidéo', 'pdf' => 'PDF'];
     $icons = ['audio' => '🎧', 'video' => '🎬', 'document' => '📄', 'pdf' => '📄'];
     return ['total' => $total, 'items' => array_map(static function ($r) use ($types, $icons) {
@@ -639,9 +697,10 @@ function picker_media(PDO $pdo, string $q, int $offset, int $limit): array
         $n = (int) $r['n'];
         return [
             'kind' => 'media', 'id' => (int) $r['id'], 'title' => trim((string) $r['title']) ?: (string) $r['filename'] ?: 'Média #' . $r['id'],
-            'meta' => implode(' · ', array_filter([$types[$type] ?? ucfirst($type), trim((string) $r['date_text']), $n ? picker_plural($n, 'personne') : ''])),
+            'meta' => implode(' · ', array_filter([$types[$type] ?? ucfirst($type), trim((string) $r['date_text']), trim((string) $r['document_reference']), $n ? picker_plural($n, 'personne') : ''])),
             'badge' => 'Média', 'badge_style' => '', 'group' => 'media', 'icon' => $icons[$type] ?? '🖼',
             'thumb' => $thumb !== '' ? 'media/' . rawurlencode($thumb) : '', 'short' => trim((string) $r['date_text']),
+            'filename' => (string) $r['filename'], 'media_type' => $type,
         ];
     }, $rows)];
 }
@@ -731,7 +790,9 @@ function picker_census(PDO $pdo, string $q, int $offset, int $limit): array
 {
     if (!picker_table_exists($pdo, 'census_records')) { return ['total' => 0, 'items' => []]; }
     $params = [];
-    $where = picker_text_where(['c.address', 'pl.name', "'recensement '||c.year", 'c.notes'], $q, $params);
+    // aussi les membres du foyer : nom relevé (first_name, display_name) et fiche liée
+    $members = picker_table_exists($pdo, 'census_members') ? "(SELECT group_concat(COALESCE(cm.first_name,'')||' '||COALESCE(cm.display_name,'')||' '||COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,''),' ; ') FROM census_members cm LEFT JOIN persons p ON p.id=cm.person_id WHERE cm.census_id=c.id)" : "''";
+    $where = picker_text_where(['c.address', 'pl.name', "'recensement '||c.year", 'c.notes', $members], $q, $params);
     [$total, $rows] = picker_page($pdo, 'SELECT c.id, c.year, c.address, c.date_text, pl.name AS place, pl.county',
         "FROM census_records c LEFT JOIN places pl ON pl.id=c.place_id WHERE {$where}", 'c.year DESC, pl.name COLLATE NOCASE, c.id', $params, $offset, $limit);
     return ['total' => $total, 'items' => array_map(static fn($r) => [

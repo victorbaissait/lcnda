@@ -128,7 +128,7 @@
             : type === 'textarea' ? `<label class="span-2">${esc(l)}<textarea name="r_${k}" rows="3">${esc(v[k] || '')}</textarea></label>` : `<label>${esc(l)}<input name="r_${k}" value="${esc(v[k] || '')}"></label>`;
         const dl = ext.openDialog({eyebrow: 'RÈGLES D’UN JOURNAL', title: r ? r.name : 'Nouvelles règles', wide: true,
             body: `<div class="form-grid"><label>Nom (journal, rubrique)<input name="name" value="${esc(r?.name || '')}" required placeholder="Ouest-France, petites annonces du dimanche…"></label>
-                <label>Revue de la liste « Revues »<select name="periodical_id"><option value="0">—</option>${D.periodicals.map(p => `<option value="${p.id}" ${Number(p.id) === r?.periodical_id ? 'selected' : ''}>${esc(p.title)}</option>`).join('')}</select></label></div>
+                <div><span class="pk-lab">Revue de la liste « Revues »</span>${window.LCNDA_PICKER.pickerField({name: 'periodical_id', kind: 'periodical', value: Number(r?.periodical_id) || null})}</div></div>
                 <section class="h-pa-ocr"><h4>📷 Remplir à partir d’une capture d’écran des règles</h4><p class="muted">Choisis ou colle (⌘V) une capture de la page des tarifs : le texte est lu, les règles reconnues sont remplies ci-dessous <mark>en jaune</mark>. Vérifie et corrige. (La lecture demande internet la première fois.)</p>
                 <div class="h-pa-ocrbar"><label class="button small">Choisir une capture<input type="file" accept="image/*" data-pa-ocrfile hidden></label><small data-pa-ocrstate></small></div>
                 <details data-pa-srcbox ${r?.source_text ? 'open' : ''}><summary>Texte des règles (lu sur la capture, ou copié-collé de la page du journal)</summary><textarea name="source_text" rows="6">${esc(r?.source_text || '')}</textarea><button type="button" class="button small secondary" data-pa-reparse>Remplir à partir de ce texte</button></details></section>
@@ -150,7 +150,7 @@
             },
             onSubmit: async form => {
                 const rules = {}; RFIELDS.forEach(([k]) => { rules[k] = form.elements['r_' + k]?.value || ''; });
-                await post('save_press_ad_rules', {id: r?.id || 0, name: form.elements.name.value, periodical_id: form.elements.periodical_id.value, rules, source_text: form.elements.source_text.value, notes: form.elements.notes.value});
+                await post('save_press_ad_rules', {id: r?.id || 0, name: form.elements.name.value, periodical_id: Number(form.elements.periodical_id.value) || 0, rules, source_text: form.elements.source_text.value, notes: form.elements.notes.value});
                 toast('Règles enregistrées.'); await reload();
             },
             onDelete: r ? async () => { if (!await A().confirmBox(`Supprimer les règles « ${r.name} » ? (les annonces restent)`, {title: 'Supprimer les règles', okLabel: 'Supprimer les règles'})) return false; await post('delete_press_item', {what: 'rules', id: r.id}); await reload(); } : null});
@@ -172,7 +172,7 @@
             body: `<div class="form-grid"><label class="span-2">Titre (pour toi)<input name="title" value="${esc(ad?.title || '')}" placeholder="Recherche descendants Guerche — Ouest-France"></label>
                 <label>Sorte<select name="kind">${Object.entries(D.kinds).map(([k, l]) => `<option value="${k}" ${k === (ad?.kind || 'annonce') ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
                 <label>Où j’en suis<select name="status">${Object.entries(D.statuses).map(([k, l]) => `<option value="${k}" ${k === (ad?.status || 'draft') ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>Journal (liste des revues)<select name="periodical_id"><option value="0">—</option>${D.periodicals.map(p => `<option value="${p.id}" ${Number(p.id) === ad?.periodical_id ? 'selected' : ''}>${esc(p.title)}</option>`).join('')}</select></label>
+                <div><span class="pk-lab">Journal (liste des revues)</span>${window.LCNDA_PICKER.pickerField({name: 'periodical_id', kind: 'periodical', value: Number(ad?.periodical_id) || null})}</div>
                 <label>ou autre journal<input name="journal" value="${esc(ad?.journal || '')}" placeholder="Le Courrier de l’Ouest…"></label>
                 <label class="span-2">Règles de tarif<select name="rules_id"><option value="0">— aucune (pas de calcul) —</option>${D.rules.map(r => `<option value="${r.id}" ${r.id === ad?.rules_id ? 'selected' : ''}>${esc(r.name)} — ${esc(summary(r.rules))}</option>`).join('')}</select></label></div>
                 <div class="h-pa-tpl"><span class="section-label">Modèles</span>${TEMPLATES.map(([l], k) => `<button type="button" class="button small secondary" data-pa-tpl="${k}">${esc(l)}</button>`).join('')}</div>
@@ -188,7 +188,7 @@
                 <div class="h-pa-linkslot"></div>`,
             onOpen: dl => {
                 // personnes et enquêtes : le même champ que dans « Revues et magazines »
-                const slot = dl.querySelector('.h-pa-linkslot'); slot.outerHTML = `<div class="h-pr-links" data-pr-links><span class="section-label">Rattachée à</span><span class="h-pr-linkchips">${(ad?.links || []).map(l => `<span class="h-pr-lchip" data-type="${l.type}" data-id="${l.id}">${l.type === 'person' ? '👤' : '🔎'} ${esc(l.name)} <button type="button" data-pr-unlink aria-label="Retirer">×</button></span>`).join('')}</span><span class="h-pr-addlink"><input type="search" data-pr-lq placeholder="Ajouter une personne ou une enquête…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></span></div>`;
+                const slot = dl.querySelector('.h-pa-linkslot'); slot.outerHTML = `<div class="h-pr-links" data-pr-links><span class="section-label">Rattachée à</span><span class="h-pr-linkchips">${(ad?.links || []).map(l => `<span class="h-pr-lchip" data-type="${l.type}" data-id="${l.id}">${l.type === 'person' ? '👤' : '🔎'} ${esc(l.name)} <button type="button" data-pr-unlink aria-label="Retirer">×</button></span>`).join('')}</span><div class="h-pr-addlink" data-pr-lpk style="flex:1 1 320px;min-width:min(100%,320px)">${window.LCNDA_PICKER.pickerField({name: 'pr_link', kind: 'person,investigation', placeholder: 'Ajouter une personne ou une enquête…'})}</div></div>`;
                 bindLinks(dl);
                 const calc = () => {
                     const f = dl.querySelector('form'), r = D.rules.find(x => x.id === Number(f.elements.rules_id.value))?.rules || {}, o = OPTIONS.map(([k]) => k).filter(k => f.elements['opt_' + k]?.checked);
@@ -205,7 +205,7 @@
                 const v = A().formObject(form), links = {persons: [], investigations: []};
                 form.querySelectorAll('.h-pr-lchip').forEach(c => links[c.dataset.type === 'person' ? 'persons' : 'investigations'].push(Number(c.dataset.id)));
                 const lb = form.querySelector('[data-pending-labels]');
-                const r = await post('save_press_ad', {id: ad?.id || 0, title: v.title, kind: v.kind, status: v.status, periodical_id: v.periodical_id, journal: v.journal, rules_id: v.rules_id, body: form.elements.body.value,
+                const r = await post('save_press_ad', {id: ad?.id || 0, title: v.title, kind: v.kind, status: v.status, periodical_id: Number(v.periodical_id) || 0, journal: v.journal, rules_id: v.rules_id, body: form.elements.body.value,
                     data: {options: OPTIONS.map(([k]) => k).filter(k => form.elements['opt_' + k]?.checked), insertions: v.insertions, sent_date: v.sent_date, publish_date: v.publish_date, issue_ref: v.issue_ref, cost_paid: v.cost_paid,
                         cost_estimate: form.closest('dialog')._estimate ?? '', payment: v.payment, contact: v.contact, answers: v.answers, notes: v.notes},
                     ...links, label_ids: lb ? (lb.dataset.ids || '').split(',').map(Number).filter(Boolean) : undefined});
@@ -214,22 +214,15 @@
             },
             onDelete: ad ? async () => { if (!await A().confirmBox(`Supprimer « ${ad.title} » ?`, {title: 'Supprimer l’annonce', okLabel: 'Supprimer l’annonce'})) return false; await post('delete_press_item', {what: 'ad', id: ad.id}); await reload(); } : null});
     }
-    let invCache = null;
     function bindLinks(root) {
         const box = root.querySelector('[data-pr-links]'); if (!box) return;
-        const input = box.querySelector('[data-pr-lq]'), sugg = box.querySelector('.h-pr-lsugg'); let t = 0;
-        box.addEventListener('click', e => {
-            if (e.target.closest('[data-pr-unlink]')) { e.target.closest('.h-pr-lchip').remove(); return; }
-            const s = e.target.closest('[data-add-type]'); if (!s) return;
-            if (!box.querySelector(`.h-pr-lchip[data-type="${s.dataset.addType}"][data-id="${s.dataset.addId}"]`)) box.querySelector('.h-pr-linkchips').insertAdjacentHTML('beforeend', `<span class="h-pr-lchip" data-type="${s.dataset.addType}" data-id="${s.dataset.addId}">${s.dataset.addType === 'person' ? '👤' : '🔎'} ${esc(s.dataset.addName)} <button type="button" data-pr-unlink aria-label="Retirer">×</button></span>`);
-            input.value = ''; sugg.hidden = true;
-        });
-        input.addEventListener('input', () => { clearTimeout(t); const q = input.value.trim(); if (q.length < 2) { sugg.hidden = true; return; } t = setTimeout(async () => {
-            let people = [], invs = [];
-            try { people = (await api('search', {type: 'persons', q, limit: 8})).data || []; } catch (_) {}
-            try { if (!invCache) invCache = (await api('investigations', {status: 'all'})).investigations || []; invs = invCache.filter(i => String(i.title || '').toLowerCase().includes(q.toLowerCase())).slice(0, 6); } catch (_) {}
-            sugg.innerHTML = [...people.map(p => `<button type="button" data-add-type="person" data-add-id="${p.id}" data-add-name="${esc(A().personName(p))}">👤 ${esc(A().personName(p))}</button>`), ...invs.map(i => `<button type="button" data-add-type="investigation" data-add-id="${i.id}" data-add-name="${esc(i.title)}">🔎 ${esc(i.title)}</button>`)].join('') || '<small class="muted">Rien trouvé.</small>';
-            sugg.hidden = false; }, 220); });
+        box.addEventListener('click', e => { if (e.target.closest('[data-pr-unlink]')) e.target.closest('.h-pr-lchip').remove(); });
+        // personnes et enquêtes : le menu de choix unique (recherche mélangée) ; il ne part pas avec le formulaire
+        const pk = box.querySelector('[data-pr-lpk]');
+        pk?.querySelector('.pk > input[type=hidden]')?.removeAttribute('name');
+        pk?.addEventListener('picker-change', e => { const it = e.detail.item; if (!it?.id) return; const type = it.kind === 'investigation' ? 'investigation' : 'person';
+            if (!box.querySelector(`.h-pr-lchip[data-type="${type}"][data-id="${Number(it.id)}"]`)) box.querySelector('.h-pr-linkchips').insertAdjacentHTML('beforeend', `<span class="h-pr-lchip" data-type="${type}" data-id="${Number(it.id)}">${type === 'person' ? '👤' : '🔎'} ${esc(it.title)} <button type="button" data-pr-unlink aria-label="Retirer">×</button></span>`);
+            window.LCNDA_PICKER.pickerSet(pk.querySelector('.pk'), null); });
     }
     ext.pressAdsInternals = {price, parseRules, counts}; // pour les essais
 })();

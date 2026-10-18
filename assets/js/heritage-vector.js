@@ -1191,8 +1191,8 @@
         }
         function pickPerson(title, onPick) {
             ext.openDialog({eyebrow: 'DESSIN VECTORIEL', title, submitLabel: 'Envoyer',
-                body: `<label>Personne${A().collectionPersonField('vx_pick', null, 'Nom, prénom…')}</label><p class="muted">L’image (PNG, nette, fond ${doc.bg === 'transparent' ? 'transparent' : 'compris'}) y est ajoutée.</p>`,
-                onOpen: dg => { setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30); },
+                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'vx_pick', kind: 'person'})}</div><p class="muted">L’image (PNG, nette, fond ${doc.bg === 'transparent' ? 'transparent' : 'compris'}) y est ajoutée.</p>`,
+                onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); },
                 onSubmit: async f => { const chosen = Number(f.elements.vx_pick?.value) || 0; if (!chosen) { toast('Choisis une personne.', 'error'); return false; } try { await onPick(chosen); } catch (e) { toast(e.message, 'error'); return false; } }});
         }
         function saveToMedia() { pickPerson('Enregistrer dans les médias d’une fiche', async pid => { status('Envoi…'); await upload({person_id: pid}, await pngFile()); status('✓ Envoyé'); toast('Image ajoutée aux médias de la fiche.'); }); }

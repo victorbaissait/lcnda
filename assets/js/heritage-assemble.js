@@ -24,7 +24,7 @@
             let done = false;
             const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: 'Ajouter des photos', wide: true, submitLabel: 'Ajouter',
                 body: `<label class="h-rc-drop"><input type="file" name="files" accept="image/*" multiple><span>📁 Des photos de l’ordinateur…</span></label>
-                    <p class="muted">… ou des photos déjà dans la base :</p><input type="search" data-as-q placeholder="Chercher…">
+                    <p class="muted">… ou des photos déjà dans la base :</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-as-q placeholder="Titre ou nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher"></div></div>
                     <div class="h-as-pick" data-as-list>${rows.map(r => `<label title="${esc(r.title || r.filename)}"><input type="checkbox" name="pick" value="${r.id}"><img src="${esc(url(r.thumbnail || r.filename))}" alt="" loading="lazy"><small>${esc(r.title || r.filename)}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
                 onOpen: d => d.querySelector('[data-as-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-as-list] label').forEach(l => { l.hidden = !l.title.toLowerCase().includes(q); }); }),
                 onSubmit: form => {

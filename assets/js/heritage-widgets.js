@@ -773,7 +773,7 @@
             const sc = ext.appScreen; if (!sc) return '<p class="muted">Écrans indisponibles.</p>';
             const isPerson = String(d.target || '').startsWith('person:');
             return `<div class="form-grid"><label class="span-2">Écran ${sc.select(isPerson ? 'person:' : (d.target || 'module:carte'), 'data-cw-screen')}</label>${sc.place?.kind(d.target) ? sc.place.html(d) : ''}
-                ${isPerson ? `<label>Personne${A().collectionPersonField('cw_screenperson', Number(String(d.target).slice(7)) ? {id: Number(String(d.target).slice(7)), first_name: d.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>` : ''}
+                ${isPerson ? `<div><span class="pk-lab">Personne</span>${window.LCNDA_PICKER.pickerField({name: 'cw_screenperson', kind: 'person', value: Number(String(d.target).slice(7)) || null})}</div>` : ''}
                 <label>Hauteur <select data-cw-screenh>${sc.heights.map(([v, l]) => `<option value="${v}" ${String(d.height || 560) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-cw-screensb ${d.sidebar ? 'checked' : ''}> <span>avec sa colonne de gauche (ses menus)</span></label></div>`;
         }
@@ -812,7 +812,7 @@
                 <label>Ordre<select data-cw-jorder><option value="date" ${d.jOrder !== 'manual' ? 'selected' : ''}>par date</option><option value="manual" ${d.jOrder === 'manual' ? 'selected' : ''}>dans l’ordre écrit</option></select></label>
                 <label>Hauteur de la carte<input type="number" min="160" max="600" step="20" data-cw-jmaph value="${esc(d.jMapHeight || 280)}"></label>
                 <div class="span-2 h-checks"><label class="checkbox-line"><input type="checkbox" data-cw-jflag="jMap" ${d.jMap !== false ? 'checked' : ''}> Carte du parcours</label><label class="checkbox-line"><input type="checkbox" data-cw-jflag="jDays" ${d.jDays !== false ? 'checked' : ''}> « Jour 1, Jour 2… »</label><label class="checkbox-line"><input type="checkbox" data-cw-jflag="jText" ${d.jText !== false ? 'checked' : ''}> Textes des étapes</label>${d.jSource === 'person' ? `<label class="checkbox-line"><input type="checkbox" data-cw-jflag="jWithPlace" ${d.jWithPlace ? 'checked' : ''}> Seulement les événements avec un lieu</label>` : ''}</div></div>
-                ${d.jSource === 'person' ? `<label>Personne${A().collectionPersonField('cw_jperson', Number(d.jPerson) ? {id: Number(d.jPerson), first_name: d.jPersonName || '#' + d.jPerson, last_name: ''} : null, 'Nom de la personne')}</label>`
+                ${d.jSource === 'person' ? `<div><span class="pk-lab">Personne</span>${window.LCNDA_PICKER.pickerField({name: 'cw_jperson', kind: 'person', value: Number(d.jPerson) || null})}</div>`
                 : `<div data-j-rows>${(d.steps || []).map(row).join('')}</div><button type="button" class="button small secondary" data-j-add>+ Étape</button><p class="muted">Dates libres (« 12 mars 1943 », « vers 1850 »…) ; avec des dates complètes, l’app compte les jours et les durées. Le lieu choisi dans la liste se place sur la carte.</p>`}`;
         }
         if (d.kind === 'diagram') { const items = ext.diagramItems?.() || [];
@@ -957,7 +957,6 @@
         });
         // ── Écran de l'app : la personne choisie pour « Fiche d'une personne » ──
         if (d.kind === 'screen') {
-            A().bindCollectionPersonFields?.(box);
             if (ext.appScreen?.place?.kind(d.target)) {
                 ext.appScreen.place.bind(box, d, () => {
                     // nom du widget : celui de la commune, tant qu'il n'a pas été changé à la main
@@ -967,17 +966,17 @@
                 });
                 if (!ext.appScreen._villagesLoaded) { ext.appScreen._villagesLoaded = true; ext.appScreen.loadLists().then(() => again()); } // la liste des communes
             }
-            box.addEventListener('click', () => setTimeout(() => {
-                const h = box.querySelector('[name=cw_screenperson]'); const id = Number(h?.value) || 0;
-                if (id && d.target !== 'person:' + id) { d.target = 'person:' + id; d.personId = id; d.personName = box.querySelector('[data-cp-input="cw_screenperson"]')?.value || ''; preview(); }
-            }, 0));
+            box.addEventListener('picker-change', e => { // menu de choix unique
+                if (e.detail.name !== 'cw_screenperson') return; const id = Number(e.detail.value) || 0;
+                if (id && d.target !== 'person:' + id) { d.target = 'person:' + id; d.personId = id; d.personName = e.detail.item?.title || ''; preview(); }
+            });
         }
         // ── Parcours jour par jour : étapes, personne, réglages ──
         if (d.kind === 'journey') {
-            A().bindCollectionPersonFields?.(box);
+            let jName = null; box.addEventListener('picker-change', e => { if (e.detail.name === 'cw_jperson') jName = e.detail.item?.title || ''; }, true); // nom de la personne choisie
             const readSteps = () => readJourneyRows(box);
             const syncSteps = () => { if (d.jSource !== 'person') d.steps = readSteps(); };
-            const readPerson = () => { const h = box.querySelector('[name=cw_jperson]'); if (!h) return; const id = Number(h.value) || 0; if (id !== Number(d.jPerson)) { d.jPerson = id; d.jPersonName = h.closest('label')?.querySelector('input:not([type=hidden])')?.value || ''; preview(); } };
+            const readPerson = () => { const h = box.querySelector('[name=cw_jperson]'); if (!h) return; const id = Number(h.value) || 0; if (id !== Number(d.jPerson)) { d.jPerson = id; d.jPersonName = jName ?? d.jPersonName ?? ''; preview(); } };
             box.addEventListener('input', e => { if (e.target.closest('[data-j-row]')) { syncSteps(); preview(); } });
             box.addEventListener('change', e => {
                 if (e.target.closest('[data-j-row]')) { syncSteps(); preview(); return; }

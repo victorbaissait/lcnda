@@ -145,7 +145,7 @@
             case 'number': return `<input type="text" inputmode="decimal" name="${name}" value="${esc(v ?? '')}"${ph}${req(x)}>`;
             case 'select': return `<select name="${name}"${req(x)}><option value="">—</option>${(x.options || []).map(o => `<option ${o === v ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`;
             case 'url': return `<input type="url" name="${name}" value="${esc(v ?? '')}" placeholder="${esc(x.placeholder || 'https://…')}">`;
-            case 'person': return A().collectionPersonField(name, v ? people[v] || {id: v, first_name: '#' + v, last_name: ''} : null, 'Tape un nom…');
+            case 'person': return window.LCNDA_PICKER.pickerField({name, kind: 'person', value: Number(v) || null}); // menu de choix unique
             case 'place': return ext.placeField(name, v?.text || '', v?.lat ?? '', v?.lon ?? '', x.placeholder || 'Commune, adresse…');
             default: return `<input type="text" name="${name}" value="${esc(v ?? '')}"${ph}${req(x)}>`;
         }
@@ -155,6 +155,7 @@
         <div class="h-rec-step-head">${x.checkable !== false ? `<label class="checkbox-line"><input type="checkbox" data-step-done ${it.done ? 'checked' : ''}> fait</label>` : ''}<strong data-step-n>${esc(x.item || 'Étape')} ${i + 1}</strong>
             <span class="h-rb-tools"><button type="button" class="icon-button" data-step-move="-1" title="Monter">↑</button><button type="button" class="icon-button" data-step-move="1" title="Descendre">↓</button><button type="button" class="icon-button danger" data-step-del title="Retirer">✕</button></span></div>
         <div class="form-grid">${x.fields.map(sf => sf.type === 'checkbox' ? `<label class="checkbox-line${sf.width === 'half' ? '' : ' span-2'}"><input type="checkbox" data-s="${esc(sf.key)}" ${it[sf.key] ? 'checked' : ''}> ${esc(sf.label)}</label>`
+            : sf.type === 'person' ? `<div${span(sf)}><span class="pk-lab">${esc(sf.label)}</span>${inputHtml(sf, it[sf.key], `s_${x.key}_${++stepSeq}_${sf.key}`, people).replace(/name="/, `data-s="${esc(sf.key)}" name="`)}</div>`
             : `<label${span(sf)}>${esc(sf.label)}${inputHtml(sf, it[sf.key], `s_${x.key}_${++stepSeq}_${sf.key}`, people).replace(/name="/, `data-s="${esc(sf.key)}" name="`)}</label>`).join('')}</div></div>`;
     function formInner(d, rec, people) {
         const data = rec.data || {};
@@ -164,26 +165,23 @@
             if (x.type === 'heading') return `<h4 class="span-2 h-rec-heading">${esc(x.label)}</h4>${x.help ? `<p class="muted span-2">${esc(x.help)}</p>` : ''}`;
             if (x.type === 'media') return '';
             if (x.type === 'checkbox') return `<label class="checkbox-line${x.width === 'half' ? '' : ' span-2'}"><input type="checkbox" name="f_${esc(x.key)}" ${v ? 'checked' : ''}> ${esc(x.label)}</label>`;
-            if (x.type === 'people') return `<div class="span-2"><span class="section-label">${esc(x.label)}</span>${helpHtml(x)}<div class="h-rec-people" data-people="${esc(x.key)}">${(Array.isArray(v) && v.length ? v : ['']).map(pid => `<div class="h-rec-person">${A().collectionPersonField('p_' + x.key, pid ? people[pid] || {id: pid, first_name: '#' + pid, last_name: ''} : null, 'Ancêtre ou personne…')}<button type="button" class="icon-button" data-person-del title="Retirer">✕</button></div>`).join('')}</div><button type="button" class="button small secondary" data-person-add="${esc(x.key)}">+ Personne</button></div>`;
+            if (x.type === 'people') return `<div class="span-2"><span class="section-label">${esc(x.label)}</span>${helpHtml(x)}<div class="h-rec-people" data-people="${esc(x.key)}">${window.LCNDA_PICKER.pickerField({name: 'p_' + x.key, kind: 'person', multiple: true, value: (Array.isArray(v) ? v : []).map(Number).filter(Boolean)})}</div></div>`;
             if (x.type === 'steps') { const items = Array.isArray(v) ? v : [];
                 return `<div class="span-2 h-rec-steps-box"><span class="section-label">${esc(x.label)}</span>${helpHtml(x)}<div class="h-rec-steps" data-steps="${esc(x.key)}">${items.map((it, i) => stepRow(x, it, i, people)).join('')}</div>
                     <button type="button" class="button small secondary" data-step-add="${esc(x.key)}">+ ${esc(x.item || 'Étape')}</button></div>`; }
+            if (x.type === 'person') return `<div${span(x)}><span class="pk-lab">${esc(x.label)}${x.required ? ' <small class="muted">(obligatoire)</small>' : ''}</span>${inputHtml(x, v, 'f_' + x.key, people)}${helpHtml(x)}</div>`;
             return `<label${span(x)}>${esc(x.label)}${x.required ? ' <small class="muted">(obligatoire)</small>' : ''}${inputHtml(x, v, 'f_' + x.key, people)}${helpHtml(x)}</label>`;
         }).join('')}</div>
         ${media.length && ext.mediaEditorHtml ? ext.mediaEditorHtml('custom_list_record', rec.id, rec.media || [], media.map(x => [x.key, x.label, ACCEPT[x.accept] || ACCEPT.all])) : ''}`;
     }
     function bindForm(root, d) {
-        A().bindCollectionPersonFields(root);
         ext.bindMediaEditor?.(root);
         const renumber = box => box.querySelectorAll('[data-step-n]').forEach((n, i) => { const x = d.fields.find(y => y.key === box.dataset.steps); n.textContent = `${x?.item || 'Étape'} ${i + 1}`; });
         root.addEventListener('click', async e => {
             const t = e.target;
-            const addP = t.closest('[data-person-add]');
-            if (addP) { const box = root.querySelector(`[data-people="${addP.dataset.personAdd}"]`); box.insertAdjacentHTML('beforeend', `<div class="h-rec-person">${A().collectionPersonField('p_' + addP.dataset.personAdd, null, 'Ancêtre ou personne…')}<button type="button" class="icon-button" data-person-del title="Retirer">✕</button></div>`); A().bindCollectionPersonFields(box); box.lastElementChild.querySelector('input')?.focus(); return; }
-            if (t.closest('[data-person-del]')) { const row = t.closest('.h-rec-person'), box = row.parentElement; if (box.children.length > 1) row.remove(); else row.querySelectorAll('input').forEach(i => { i.value = ''; }); return; }
             const addS = t.closest('[data-step-add]');
             if (addS) { const x = d.fields.find(y => y.key === addS.dataset.stepAdd), box = root.querySelector(`[data-steps="${x.key}"]`);
-                box.insertAdjacentHTML('beforeend', stepRow(x, {}, box.children.length, {})); renumber(box); A().bindCollectionPersonFields(box);
+                box.insertAdjacentHTML('beforeend', stepRow(x, {}, box.children.length, {})); renumber(box);
                 const last = box.lastElementChild; last.querySelector('input:not([type=checkbox]),textarea,select')?.focus(); return; }
             if (t.closest('[data-step-del]')) { const row = t.closest('[data-step]'), box = row.parentElement; const hasText = [...row.querySelectorAll('input:not([type=hidden]):not([type=checkbox]),textarea')].some(i => i.value.trim()); if (hasText && !await A().confirmBox('Retirer cette ligne ?', {title: 'Retirer la ligne', okLabel: 'Retirer la ligne'})) return; row.remove(); renumber(box); return; }
             const mv = t.closest('[data-step-move]');
@@ -201,7 +199,7 @@
         };
         d.fields.forEach(x => {
             if (x.type === 'heading' || x.type === 'media') return;
-            if (x.type === 'people') { data[x.key] = [...root.querySelectorAll(`[data-people="${x.key}"] input[type=hidden][name="p_${x.key}"]`)].map(i => Number(i.value)).filter(Boolean); return; }
+            if (x.type === 'people') { data[x.key] = String(root.querySelector(`[data-people="${x.key}"] input[type=hidden][name="p_${x.key}"]`)?.value || '').split(',').map(Number).filter(Boolean); return; }
             if (x.type === 'steps') { data[x.key] = [...root.querySelectorAll(`[data-steps="${x.key}"] > [data-step]`)].map(row => {
                 const it = {done: row.querySelector('[data-step-done]')?.checked ? 1 : 0};
                 x.fields.forEach(sf => { it[sf.key] = val(row.querySelector(`[data-s="${sf.key}"]`), sf); });

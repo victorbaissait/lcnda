@@ -4,11 +4,17 @@
 (() => {
     'use strict';
     const {$, $$, api, askText, confirmBox, emptyState, plural, bindTableLinks, debounce, empty, escapeHtml, formObject, importUpload, inseeAuto, inseeImportRemote, inseeSize, mediaTypeShortLabel, mediaTypeShortLabelWithIcon, normalizedMediaType, onOutsideClick, openLightbox, persistUiState, personName, placeDisplay, relationYears, renderSidebar, researchProximityFieldsHtml, safeUrl, setupDragOrder, sidebarSignal, state, toast, typeGlyph, webSearchAllSites, webSearchContext, webSearchGroups, webSearchLifeRange, webSearchParams, webSearchSettings, years} = window.LCNDA_APP;
+    /** Champ 📍 du menu de choix unique. local : le champ caché n'a pas de name (l'outil remplit ses propres champs). */
+    function pkPlace(name,id,title,o={}){
+        const value=Number(id)?Number(id):(o.free?`txt:${o.free}`:null); // un numéro : le menu relit le lieu (département…)
+        const html=window.LCNDA_PICKER?.pickerField({name,kind:'place',value,allowFree:!!o.allowFree,allowCreate:false})||'';
+        return o.local?html.replace(` name="${name}"`,''):html;
+    }
     function renderResearchSidebar(content,footer){
         const usedTypes=state.bootstrap.eventTypes.filter(type=>Number(type.usage_count)>0).sort((a,b)=>a.label.localeCompare(b.label,'fr',{sensitivity:'base'}));
         const options=usedTypes.map(type=>`<option value="${type.id}" ${Number(type.id)===Number(state.dateSearch.eventTypeId)?'selected':''}>${escapeHtml(type.label)} (${Number(type.usage_count).toLocaleString('fr-FR')})</option>`).join('');
         const dateWindowMode=state.dateSearch.dateWindowMode||'exact';
-        content.innerHTML=`<form id="research-form" class="sidebar-form"><label>Type de recherche<select name="search_kind"><option value="question" ${state.researchKind==='question'?'selected':''}>Poser une question en français</option><option value="gaps" ${state.researchKind==='gaps'?'selected':''}>🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série)</option><option value="text" ${state.researchKind==='text'?'selected':''}>Texte, personne ou lieu</option><option value="place_name" ${state.researchKind==='place_name'?'selected':''}>Nom de lieu avec joker</option><option value="dates" ${state.researchKind==='dates'?'selected':''}>Période ou date précise</option><option value="proximity" ${state.researchKind==='proximity'?'selected':''}>Proximité géographique et temporelle</option><option value="transcriptions" ${state.researchKind==='transcriptions'?'selected':''}>Plein texte dans les transcriptions</option><option value="insee" ${state.researchKind==='insee'?'selected':''}>Décès (fichier INSEE)</option><option value="web" ${state.researchKind==='web'?'selected':''}>Chercher sur internet</option><option value="saved" ${state.researchKind==='saved'?'selected':''}>Recherche multicritère / recherches enregistrées</option></select></label>${researchProximityFieldsHtml()}<div id="research-text-fields"><label>Rechercher<input name="text_q" value="${escapeHtml(state.research.q)}" placeholder="Nom, ville, année…" autocomplete="off"></label><label>Dans<select name="category"><option value="all">Tout</option><option value="name" ${state.research.category==='name'?'selected':''}>Noms et personnes</option><option value="place" ${state.research.category==='place'?'selected':''}>Villes, lieux et pays</option><option value="year" ${state.research.category==='year'?'selected':''}>Années</option><option value="occupation" ${state.research.category==='occupation'?'selected':''}>Métier / activité</option><option value="employer" ${state.research.category==='employer'?'selected':''}>Employeur</option></select></label></div><div id="research-place-name-fields"><label>Nom du lieu<input name="place_name_q" value="${escapeHtml(state.placeNameSearch?.q||'')}" placeholder="Ex : *aris, Sa* Denis, **mont" autocomplete="off"></label><label>Pays<input name="place_name_country" value="${escapeHtml(state.placeNameSearch?.country||'')}" placeholder="France, Belgique…" list="place-name-country-options" autocomplete="off"><datalist id="place-name-country-options"></datalist></label><label>Division / subdivision<input name="place_name_division" value="${escapeHtml(state.placeNameSearch?.division||'')}" placeholder="Seine-Saint-Denis, Réunion, Québec…" list="place-name-division-options" autocomplete="off"><datalist id="place-name-division-options"></datalist></label></div><div id="research-transcription-fields"><label>Texte à chercher<input name="transcription_q" value="${escapeHtml(state.transcriptionSearch.q||'')}" placeholder="Mot ou expression dans OCR, HTR ou saisie manuelle…" autocomplete="off"></label></div><div id="research-insee-fields"><label>Prénom<input name="insee_prenom" value="${escapeHtml(state.inseeSearch?.prenom||'')}" placeholder="Prénom" autocomplete="off"></label><label>Nom<input name="insee_nom" value="${escapeHtml(state.inseeSearch?.nom||'')}" placeholder="Nom" autocomplete="off"></label><label>Sexe<select name="insee_sexe"><option value="">Indifférent</option><option value="M" ${state.inseeSearch?.sexe==='M'?'selected':''}>Homme</option><option value="F" ${state.inseeSearch?.sexe==='F'?'selected':''}>Femme</option></select></label><label>Date de naissance<input name="insee_date_naissance" value="${escapeHtml(state.inseeSearch?.dateNaissance||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Né(e) entre<input name="insee_birth_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearFrom||'')}" placeholder="1900"></label><label>et<input name="insee_birth_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearTo||'')}" placeholder="1950"></label></div><label>Commune de naissance<input name="insee_commune_naissance" value="${escapeHtml(state.inseeSearch?.communeNaissance||'')}" placeholder="Ville de naissance" autocomplete="off"></label><label>Date de décès<input name="insee_date_deces" value="${escapeHtml(state.inseeSearch?.dateDeces||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Décédé(e) entre<input name="insee_death_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearFrom||'')}" placeholder="2000"></label><label>et<input name="insee_death_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearTo||'')}" placeholder="2024"></label></div><label>Commune de décès<input name="insee_commune_deces" value="${escapeHtml(state.inseeSearch?.communeDeces||'')}" placeholder="Ville de décès" autocomplete="off"></label><label>Département (naissance ou décès)<input name="insee_departement" value="${escapeHtml(state.inseeSearch?.departement||'')}" placeholder="Ex : 75, 2A, 971…" autocomplete="off"></label><label>Région (naissance ou décès)<input name="insee_region" value="${escapeHtml(state.inseeSearch?.region||'')}" placeholder="Ex : Bretagne, Occitanie…" autocomplete="off"></label></div><div id="research-date-fields"><label>Précision<select name="date_mode"><option value="range">Période par années</option><option value="exact" ${state.dateSearch.mode==='exact'?'selected':''}>Date(s) précise(s)</option></select></label><div class="year-range-fields" id="research-year-range"><label>De<input name="year_from" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearFrom)}" placeholder="1300"></label><label>À<input name="year_to" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearTo)}" placeholder="1650"></label></div><div id="research-exact-date-fields"><label>Date(s) précise(s)<input name="exact_dates" value="${escapeHtml(state.dateSearch.values)}" placeholder="08/03/1922, 07/05/1925"></label><label>Élargir<select name="date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="research-date-window-days">Nombre de jours<input name="date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(state.dateSearch.dateWindowDays||'')}" placeholder="30"></label></div><label>Événements<select name="event_type_id"><option value="0">Tous les événements</option>${options}</select></label><label>Métier<select name="occupation_id"><option value="">Tous les métiers</option>${(state.bootstrap.occupations||[]).map(occ=>`<option value="${escapeHtml(occ.name)}" ${state.dateSearch.occupationId===occ.name?'selected':''} >${escapeHtml(occ.name)} (${Number(occ.person_count).toLocaleString('fr-FR')})</option>`).join('')}</select></label><div class="research-place-picker" id="research-place-picker"><span class="research-place-label">Ville</span><div class="research-place-input-wrap"><input id="research-place-input" type="text" autocomplete="off" placeholder="Filtrer par ville…" value=""><input type="hidden" name="date_place_id" value="${escapeHtml(String(state.dateSearch.placeId||0))}"><div class="place-suggestions" id="research-place-suggestions" hidden></div></div>${state.dateSearch.placeId&&state.dateSearch.placeName?`<div class="research-place-chip"><span>${escapeHtml(state.dateSearch.placeName)}</span><button type="button" class="research-place-chip-remove" id="research-place-remove" aria-label="Supprimer la ville">×</button></div>`:''}</div><label>Mot facultatif<input name="date_q" value="${state.researchKind==='dates'?escapeHtml(state.research.q):''}" placeholder="Personne, type…"></label></div><button class="button" type="submit">Afficher les correspondances</button><div class="segmented result-display"><button type="button" data-research-display="list" class="${state.researchDisplay==='list'?'is-active':''}">Liste</button><button type="button" data-research-display="cards" class="${state.researchDisplay==='cards'?'is-active':''}">Fiches</button></div></form>`;
+        content.innerHTML=`<form id="research-form" class="sidebar-form"><label>Type de recherche<select name="search_kind"><option value="question" ${state.researchKind==='question'?'selected':''}>Poser une question en français</option><option value="gaps" ${state.researchKind==='gaps'?'selected':''}>🔍 Que manque-t-il ? (actes à chercher, où et dans quelle série)</option><option value="text" ${state.researchKind==='text'?'selected':''}>Texte, personne ou lieu</option><option value="place_name" ${state.researchKind==='place_name'?'selected':''}>Nom de lieu avec joker</option><option value="dates" ${state.researchKind==='dates'?'selected':''}>Période ou date précise</option><option value="proximity" ${state.researchKind==='proximity'?'selected':''}>Proximité géographique et temporelle</option><option value="transcriptions" ${state.researchKind==='transcriptions'?'selected':''}>Plein texte dans les transcriptions</option><option value="insee" ${state.researchKind==='insee'?'selected':''}>Décès (fichier INSEE)</option><option value="web" ${state.researchKind==='web'?'selected':''}>Chercher sur internet</option><option value="saved" ${state.researchKind==='saved'?'selected':''}>Recherche multicritère / recherches enregistrées</option></select></label>${researchProximityFieldsHtml()}<div id="research-text-fields"><label>Rechercher<input name="text_q" value="${escapeHtml(state.research.q)}" placeholder="Nom, ville, année…" autocomplete="off"></label><label>Dans<select name="category"><option value="all">Tout</option><option value="name" ${state.research.category==='name'?'selected':''}>Noms et personnes</option><option value="place" ${state.research.category==='place'?'selected':''}>Villes, lieux et pays</option><option value="year" ${state.research.category==='year'?'selected':''}>Années</option><option value="occupation" ${state.research.category==='occupation'?'selected':''}>Métier / activité</option><option value="employer" ${state.research.category==='employer'?'selected':''}>Employeur</option></select></label></div><div id="research-place-name-fields"><label>Nom du lieu<input name="place_name_q" value="${escapeHtml(state.placeNameSearch?.q||'')}" placeholder="Ex : *aris, Sa* Denis, **mont" autocomplete="off"></label><label>Pays<input name="place_name_country" value="${escapeHtml(state.placeNameSearch?.country||'')}" placeholder="France, Belgique…" list="place-name-country-options" autocomplete="off"><datalist id="place-name-country-options"></datalist></label><label>Division / subdivision<input name="place_name_division" value="${escapeHtml(state.placeNameSearch?.division||'')}" placeholder="Seine-Saint-Denis, Réunion, Québec…" list="place-name-division-options" autocomplete="off"><datalist id="place-name-division-options"></datalist></label></div><div id="research-transcription-fields"><label>Texte à chercher<input name="transcription_q" value="${escapeHtml(state.transcriptionSearch.q||'')}" placeholder="Mot ou expression dans OCR, HTR ou saisie manuelle…" autocomplete="off"></label></div><div id="research-insee-fields"><label>Prénom<input name="insee_prenom" value="${escapeHtml(state.inseeSearch?.prenom||'')}" placeholder="Prénom" autocomplete="off"></label><label>Nom<input name="insee_nom" value="${escapeHtml(state.inseeSearch?.nom||'')}" placeholder="Nom" autocomplete="off"></label><label>Sexe<select name="insee_sexe"><option value="">Indifférent</option><option value="M" ${state.inseeSearch?.sexe==='M'?'selected':''}>Homme</option><option value="F" ${state.inseeSearch?.sexe==='F'?'selected':''}>Femme</option></select></label><label>Date de naissance<input name="insee_date_naissance" value="${escapeHtml(state.inseeSearch?.dateNaissance||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Né(e) entre<input name="insee_birth_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearFrom||'')}" placeholder="1900"></label><label>et<input name="insee_birth_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.birthYearTo||'')}" placeholder="1950"></label></div><label>Commune de naissance<input name="insee_commune_naissance" value="${escapeHtml(state.inseeSearch?.communeNaissance||'')}" placeholder="Ville de naissance" autocomplete="off"></label><label>Date de décès<input name="insee_date_deces" value="${escapeHtml(state.inseeSearch?.dateDeces||'')}" placeholder="JJ/MM/AAAA ou AAAA"></label><div class="year-range-fields"><label>Décédé(e) entre<input name="insee_death_year_from" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearFrom||'')}" placeholder="2000"></label><label>et<input name="insee_death_year_to" type="number" min="1700" max="2200" value="${escapeHtml(state.inseeSearch?.deathYearTo||'')}" placeholder="2024"></label></div><label>Commune de décès<input name="insee_commune_deces" value="${escapeHtml(state.inseeSearch?.communeDeces||'')}" placeholder="Ville de décès" autocomplete="off"></label><label>Département (naissance ou décès)<input name="insee_departement" value="${escapeHtml(state.inseeSearch?.departement||'')}" placeholder="Ex : 75, 2A, 971…" autocomplete="off"></label><label>Région (naissance ou décès)<input name="insee_region" value="${escapeHtml(state.inseeSearch?.region||'')}" placeholder="Ex : Bretagne, Occitanie…" autocomplete="off"></label></div><div id="research-date-fields"><label>Précision<select name="date_mode"><option value="range">Période par années</option><option value="exact" ${state.dateSearch.mode==='exact'?'selected':''}>Date(s) précise(s)</option></select></label><div class="year-range-fields" id="research-year-range"><label>De<input name="year_from" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearFrom)}" placeholder="1300"></label><label>À<input name="year_to" type="number" min="1" max="9999" value="${escapeHtml(state.dateSearch.yearTo)}" placeholder="1650"></label></div><div id="research-exact-date-fields"><label>Date(s) précise(s)<input name="exact_dates" value="${escapeHtml(state.dateSearch.values)}" placeholder="08/03/1922, 07/05/1925"></label><label>Élargir<select name="date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="research-date-window-days">Nombre de jours<input name="date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(state.dateSearch.dateWindowDays||'')}" placeholder="30"></label></div><label>Événements<select name="event_type_id"><option value="0">Tous les événements</option>${options}</select></label><label>Métier<select name="occupation_id"><option value="">Tous les métiers</option>${(state.bootstrap.occupations||[]).map(occ=>`<option value="${escapeHtml(occ.name)}" ${state.dateSearch.occupationId===occ.name?'selected':''} >${escapeHtml(occ.name)} (${Number(occ.person_count).toLocaleString('fr-FR')})</option>`).join('')}</select></label><div class="research-place-picker" id="research-place-picker"><span class="research-place-label">Ville</span><div class="research-place-input-wrap" id="research-place-input">${pkPlace('date_place_id',state.dateSearch.placeId,state.dateSearch.placeName)}</div></div><label>Mot facultatif<input name="date_q" value="${state.researchKind==='dates'?escapeHtml(state.research.q):''}" placeholder="Personne, type…"></label></div><button class="button" type="submit">Afficher les correspondances</button><div class="segmented result-display"><button type="button" data-research-display="list" class="${state.researchDisplay==='list'?'is-active':''}">Liste</button><button type="button" data-research-display="cards" class="${state.researchDisplay==='cards'?'is-active':''}">Fiches</button></div></form>`;
         footer.textContent='Un clic sur une ville d’un graphique ouvre aussi cet écran.';
         const searchKindSelect=$('#research-form').elements.search_kind;
         if(searchKindSelect&&!searchKindSelect.querySelector('option[value="archive_digest"]')){
@@ -21,7 +27,7 @@
         const ads=state.archiveDigestSearch||{};
         const archiveRadius=Number(ads.radiusKm)||0;
         const archiveRadiusLabel=archiveRadius>0?`Rayon : ${archiveRadius} km`:'Commune exacte uniquement';
-        $('#research-insee-fields')?.insertAdjacentHTML('beforebegin',`<div id="research-archive-digest-fields"><label>Recherche<input name="archive_digest_q" value="${escapeHtml(ads.q||'')}" placeholder="Cote, nom, archive, annotation…" autocomplete="off"></label><div class="research-place-picker archive-digest-place-picker" id="archive-digest-place-picker"><span class="research-place-label">Ville ou commune</span><div class="research-place-input-wrap"><input id="archive-digest-place-input" name="archive_digest_city" value="${escapeHtml(ads.city||ads.placeName||'')}" placeholder="Tape pour choisir une commune…" autocomplete="off"><input type="hidden" name="archive_digest_place_id" value="${escapeHtml(String(ads.placeId||0))}"><div class="place-suggestions" id="archive-digest-place-suggestions" hidden></div></div><div class="proximity-radius-field archive-digest-radius-field"><span class="research-place-label">Zone autour de la commune</span><input id="archive-digest-radius" name="archive_digest_radius_km" type="range" min="0" max="50" step="1" value="${archiveRadius}"><output id="archive-digest-radius-value" class="proximity-radius-value">${escapeHtml(archiveRadiusLabel)}</output></div></div><label>Département<input name="archive_digest_dept" value="${escapeHtml(ads.dept||'')}" placeholder="18, Cher…" autocomplete="off"></label><label>Région<input name="archive_digest_region" value="${escapeHtml(ads.region||'')}" placeholder="Centre-Val de Loire…" autocomplete="off"></label><label>Type d’acte<select name="archive_digest_record_type"><option value="">Tous</option><option value="table_decennale">Table décennale</option><option value="mariage">Mariage</option><option value="naissance">Naissance</option><option value="deces">Décès</option><option value="bapteme">Baptême</option><option value="succession">Succession</option><option value="recensement">Recensement</option><option value="prison">Prison</option><option value="fiche_militaire">Fiche militaire</option><option value="liste_prisonnier">Liste prisonnier</option><option value="autre">Autre</option></select></label><label>État<select name="archive_digest_status"><option value="">Tous</option><option value="todo">À faire</option><option value="done">Terminé</option><option value="review">À revoir</option><option value="doubt">Doute</option><option value="priority">Priorité</option><option value="later">Plus tard</option></select></label></div>`);
+        $('#research-insee-fields')?.insertAdjacentHTML('beforebegin',`<div id="research-archive-digest-fields"><label>Recherche<input name="archive_digest_q" value="${escapeHtml(ads.q||'')}" placeholder="Cote, nom, archive, annotation…" autocomplete="off"></label><div class="research-place-picker archive-digest-place-picker" id="archive-digest-place-picker"><span class="research-place-label">Ville ou commune</span><div class="research-place-input-wrap" id="archive-digest-place-input">${pkPlace('archive_digest_place_pick',ads.placeId,ads.placeName||ads.city,{allowFree:true,local:true,free:ads.city})}<input type="hidden" name="archive_digest_city" value="${escapeHtml(ads.city||ads.placeName||'')}"><input type="hidden" name="archive_digest_place_id" value="${escapeHtml(String(ads.placeId||0))}"></div><div class="proximity-radius-field archive-digest-radius-field"><span class="research-place-label">Zone autour de la commune</span><input id="archive-digest-radius" name="archive_digest_radius_km" type="range" min="0" max="50" step="1" value="${archiveRadius}"><output id="archive-digest-radius-value" class="proximity-radius-value">${escapeHtml(archiveRadiusLabel)}</output></div></div><label>Département<input name="archive_digest_dept" value="${escapeHtml(ads.dept||'')}" placeholder="18, Cher…" autocomplete="off"></label><label>Région<input name="archive_digest_region" value="${escapeHtml(ads.region||'')}" placeholder="Centre-Val de Loire…" autocomplete="off"></label><label>Type d’acte<select name="archive_digest_record_type"><option value="">Tous</option><option value="table_decennale">Table décennale</option><option value="mariage">Mariage</option><option value="naissance">Naissance</option><option value="deces">Décès</option><option value="bapteme">Baptême</option><option value="succession">Succession</option><option value="recensement">Recensement</option><option value="prison">Prison</option><option value="fiche_militaire">Fiche militaire</option><option value="liste_prisonnier">Liste prisonnier</option><option value="autre">Autre</option></select></label><label>État<select name="archive_digest_status"><option value="">Tous</option><option value="todo">À faire</option><option value="done">Terminé</option><option value="review">À revoir</option><option value="doubt">Doute</option><option value="priority">Priorité</option><option value="later">Plus tard</option></select></label></div>`);
         if($('#research-form').elements.archive_digest_record_type)$('#research-form').elements.archive_digest_record_type.value=state.archiveDigestSearch?.recordType||'';
         if($('#research-form').elements.archive_digest_status)$('#research-form').elements.archive_digest_status.value=state.archiveDigestSearch?.status||'';
         const archiveDigestAddButton=document.createElement('button');
@@ -70,206 +76,23 @@
         divisionInput.addEventListener('input',refreshDivisions);
     }
 
+    /* 📍 Lieux de la recherche : le menu de choix unique. Les champs envoyés restent les mêmes (date_place_id, proximity_place_id,
+     * archive_digest_place_id + archive_digest_city) ; un nom tapé sans lieu de la base est gardé tel quel là où c'était permis. */
     function setupResearchPlacePicker(){
-        const input=$('#research-place-input');
-        const hidden=$('#research-form').elements.date_place_id;
-        const suggestionsBox=$('#research-place-suggestions');
-        if(!input||!hidden||!suggestionsBox)return;
-
-        // Afficher la valeur persistée
-        if(state.dateSearch.placeId&&state.dateSearch.placeName)input.value=state.dateSearch.placeName;
-
-        const hide=()=>{suggestionsBox.hidden=true;suggestionsBox.innerHTML='';};
-
-        const search=debounce(async()=>{
-            const q=input.value.trim();
-            if(q.length<2){hide();return;}
-            try{
-                const data=await api('place_suggestions',{q,country:''});
-                suggestionsBox.innerHTML=(data.places||[]).map(place=>
-                    `<button type="button" data-place-id="${place.id}" data-place-label="${escapeHtml(place.label||place.name)}" data-place-name="${escapeHtml(place.name)}"><strong>${escapeHtml(place.name)}</strong>${place.subdivision?`<span>${escapeHtml(place.subdivision)}</span>`:''}<small>${escapeHtml([place.county,place.state,place.country].filter(Boolean).join(', '))}</small></button>`
-                ).join('');
-                suggestionsBox.hidden=!suggestionsBox.innerHTML;
-            }catch(_){hide();}
-        },220);
-
-        input.addEventListener('input',()=>{
-            // Si on retape, on réinitialise la sélection
-            hidden.value='0';
-            state.dateSearch.placeId=0;
-            state.dateSearch.placeName='';
-            const chip=$('.research-place-chip');
-            if(chip)chip.remove();
-            search();
-        });
-        input.addEventListener('focus',()=>{if(suggestionsBox.innerHTML)suggestionsBox.hidden=false;});
-
-        suggestionsBox.addEventListener('click',event=>{
-            const button=event.target.closest('button[data-place-id]');
-            if(!button)return;
-            const placeId=Number(button.dataset.placeId);
-            const placeName=button.dataset.placeName||button.dataset.placeLabel||'';
-            hidden.value=String(placeId);
-            input.value=placeName;
-            state.dateSearch.placeId=placeId;
-            state.dateSearch.placeName=placeName;
-            persistUiState();
-            hide();
-            // Afficher le chip
-            let chip=$('.research-place-chip');
-            if(!chip){
-                chip=document.createElement('div');
-                chip.className='research-place-chip';
-                input.closest('.research-place-input-wrap').insertAdjacentElement('afterend',chip);
-            }
-            chip.innerHTML=`<span title="${escapeHtml(button.dataset.placeLabel||placeName)}">${escapeHtml(placeName)}</span><button type="button" class="research-place-chip-remove" id="research-place-remove" aria-label="Supprimer la ville">×</button>`;
-            bindResearchPlaceRemove();
-        });
-
-        onOutsideClick('research-place',event=>{
-            if(!$('#research-place-picker')?.contains(event.target))hide();
-        });
-
-        bindResearchPlaceRemove();
+        const field=$('#research-place-input');if(!field||field.dataset.pkBound)return;field.dataset.pkBound='1';
+        field.addEventListener('picker-change',event=>{const it=event.detail.item;state.dateSearch.placeId=it&&!it.free?Number(it.id):0;state.dateSearch.placeName=it?(it.name||it.title):'';persistUiState();});
     }
-
-    function bindResearchPlaceRemove(){
-        const btn=$('#research-place-remove');
-        if(!btn||btn._placeBound)return;
-        btn._placeBound=true;
-        btn.addEventListener('click',()=>{
-            state.dateSearch.placeId=0;
-            state.dateSearch.placeName='';
-            persistUiState();
-            const hidden=$('#research-form')?.elements.date_place_id;
-            if(hidden)hidden.value='0';
-            const input=$('#research-place-input');
-            if(input)input.value='';
-            const chip=$('.research-place-chip');
-            if(chip)chip.remove();
-        });
-    }
-    // --- Place-picker pour la recherche par proximité géographique et temporelle ---
     function setupProximityPlacePicker(){
-        const input=$('#proximity-place-input');
-        const hidden=$('#research-form').elements.proximity_place_id;
-        const suggestionsBox=$('#proximity-place-suggestions');
-        if(!input||!hidden||!suggestionsBox)return;
-
-        if(state.proximitySearch.placeId&&state.proximitySearch.placeName)input.value=state.proximitySearch.placeName;
-
-        const hide=()=>{suggestionsBox.hidden=true;suggestionsBox.innerHTML='';};
-
-        const search=debounce(async()=>{
-            const q=input.value.trim();
-            if(q.length<2){hide();return;}
-            try{
-                const data=await api('place_suggestions',{q,country:''});
-                suggestionsBox.innerHTML=(data.places||[]).map(place=>
-                    `<button type="button" data-place-id="${place.id}" data-place-label="${escapeHtml(place.label||place.name)}" data-place-name="${escapeHtml(place.name)}"><strong>${escapeHtml(place.name)}</strong>${place.subdivision?`<span>${escapeHtml(place.subdivision)}</span>`:''}<small>${escapeHtml([place.county,place.state,place.country].filter(Boolean).join(', '))}</small></button>`
-                ).join('');
-                suggestionsBox.hidden=!suggestionsBox.innerHTML;
-            }catch(_){hide();}
-        },220);
-
-        input.addEventListener('input',()=>{
-            hidden.value='0';
-            state.proximitySearch.placeId=0;
-            state.proximitySearch.placeName='';
-            const chip=$('#proximity-place-picker .research-place-chip');
-            if(chip)chip.remove();
-            search();
-        });
-        input.addEventListener('focus',()=>{if(suggestionsBox.innerHTML)suggestionsBox.hidden=false;});
-
-        suggestionsBox.addEventListener('click',event=>{
-            const button=event.target.closest('button[data-place-id]');
-            if(!button)return;
-            const placeId=Number(button.dataset.placeId);
-            const placeName=button.dataset.placeName||button.dataset.placeLabel||'';
-            hidden.value=String(placeId);
-            input.value=placeName;
-            state.proximitySearch.placeId=placeId;
-            state.proximitySearch.placeName=placeName;
-            persistUiState();
-            hide();
-            let chip=$('#proximity-place-picker .research-place-chip');
-            if(!chip){
-                chip=document.createElement('div');
-                chip.className='research-place-chip';
-                input.closest('.research-place-input-wrap').insertAdjacentElement('afterend',chip);
-            }
-            chip.innerHTML=`<span title="${escapeHtml(button.dataset.placeLabel||placeName)}">${escapeHtml(placeName)}</span><button type="button" class="research-place-chip-remove" id="proximity-place-remove" aria-label="Supprimer la commune">×</button>`;
-            bindProximityPlaceRemove();
-        });
-
-        onOutsideClick('proximity-place',event=>{
-            if(!$('#proximity-place-picker')?.contains(event.target))hide();
-        });
-
-        bindProximityPlaceRemove();
+        const field=$('#proximity-place-input');if(!field||field.dataset.pkBound)return;field.dataset.pkBound='1';
+        field.addEventListener('picker-change',event=>{const it=event.detail.item;state.proximitySearch.placeId=it&&!it.free?Number(it.id):0;state.proximitySearch.placeName=it?(it.name||it.title):'';persistUiState();});
     }
-
-    function bindProximityPlaceRemove(){
-        const btn=$('#proximity-place-remove');
-        if(!btn||btn._placeBound)return;
-        btn._placeBound=true;
-        btn.addEventListener('click',()=>{
-            state.proximitySearch.placeId=0;
-            state.proximitySearch.placeName='';
-            persistUiState();
-            const hidden=$('#research-form')?.elements.proximity_place_id;
-            if(hidden)hidden.value='0';
-            const input=$('#proximity-place-input');
-            if(input)input.value='';
-            const chip=$('#proximity-place-picker .research-place-chip');
-            if(chip)chip.remove();
-        });
-    }
-
-    // Commune de référence du dépouillement : la sélection explicite donne
-    // accès au rayon géographique, tandis qu'une saisie libre conserve la
-    // recherche textuelle habituelle sur les anciens noms de commune.
+    // Commune de référence du dépouillement : un lieu choisi donne accès au rayon géographique ; un nom gardé tel quel
+    // (« ✎ Garder le texte ») conserve la recherche textuelle habituelle sur les anciens noms de commune.
     function setupArchiveDigestPlacePicker(){
-        const form=$('#research-form');
-        const input=$('#archive-digest-place-input');
-        const hidden=form?.elements.archive_digest_place_id;
-        const suggestionsBox=$('#archive-digest-place-suggestions');
-        if(!input||!hidden||!suggestionsBox)return;
-        const ads=state.archiveDigestSearch||{};
-        if(ads.placeId&&ads.placeName)input.value=ads.placeName;
-        const hide=()=>{suggestionsBox.hidden=true;suggestionsBox.innerHTML='';};
-        const search=debounce(async()=>{
-            const q=input.value.trim();
-            if(q.length<2){hide();return;}
-            try{
-                const data=await api('place_suggestions',{q,country:''});
-                suggestionsBox.innerHTML=(data.places||[]).map(place=>`<button type="button" data-place-id="${place.id}" data-place-label="${escapeHtml(place.label||place.name)}" data-place-name="${escapeHtml(place.name)}"><strong>${escapeHtml(place.name)}</strong>${place.subdivision?`<span>${escapeHtml(place.subdivision)}</span>`:''}<small>${escapeHtml([place.county,place.state,place.country].filter(Boolean).join(', '))}</small></button>`).join('');
-                suggestionsBox.hidden=!suggestionsBox.innerHTML;
-            }catch(_){hide();}
-        },220);
-        input.addEventListener('input',()=>{
-            hidden.value='0';
-            state.archiveDigestSearch.placeId=0;
-            state.archiveDigestSearch.placeName='';
-            search();
-        });
-        input.addEventListener('focus',()=>{if(suggestionsBox.innerHTML)suggestionsBox.hidden=false;});
-        suggestionsBox.addEventListener('click',event=>{
-            const button=event.target.closest('button[data-place-id]');
-            if(!button)return;
-            const placeId=Number(button.dataset.placeId);
-            const placeName=button.dataset.placeName||button.dataset.placeLabel||'';
-            hidden.value=String(placeId);
-            input.value=placeName;
-            state.archiveDigestSearch.placeId=placeId;
-            state.archiveDigestSearch.placeName=placeName;
-            persistUiState();
-            hide();
-        });
-        onOutsideClick('archive-digest-place',event=>{
-            if(!$('#archive-digest-place-picker')?.contains(event.target))hide();
-        });
+        const form=$('#research-form'),field=$('#archive-digest-place-input');if(!form||!field||field.dataset.pkBound)return;field.dataset.pkBound='1';
+        field.addEventListener('picker-change',event=>{const it=event.detail.item;const id=it&&!it.free?Number(it.id):0,name=it?(it.free?it.title:(it.name||it.title)):'';
+            form.elements.archive_digest_place_id.value=String(id);form.elements.archive_digest_city.value=name;
+            state.archiveDigestSearch.placeId=id;state.archiveDigestSearch.placeName=id?name:'';persistUiState();});
     }
     // --- fin place-picker proximité ---
 
@@ -287,7 +110,7 @@
         const groups=webSearchGroups.map(group=>[group,visible.filter(site=>site[2]===group)]).filter(([,list])=>list.length);
         const v=key=>escapeHtml(f[key]??'');
         $('#workspace').innerHTML=`<section class="page web-search-tool"><header class="page-header"><div><span class="eyebrow">RECHERCHE</span><h2>Chercher sur internet</h2><p>Pour une personne qui n’est pas encore dans la base, ou pour partir d’une fiche et changer un détail. Les sites s’ouvrent dans ton navigateur ; leur choix et leur ordre se règlent dans Maintenance → Apparence.</p></div></header>
-            <section class="maintenance-panel"><div class="web-search-tool-from"><label>Partir d’une fiche<input type="search" id="wst-person" placeholder="Tape un nom…" autocomplete="off"></label><div class="autocomplete-list" id="wst-person-list" hidden></div><button class="button small secondary" type="button" id="wst-clear">Vider</button></div>
+            <section class="maintenance-panel"><div class="web-search-tool-from"><div class="pk-host" style="flex:1;min-width:240px"><span>Partir d’une fiche</span><div id="wst-person">${window.LCNDA_PICKER?.pickerField({name: 'wst_person', kind: 'person', allowCreate: false}) || ''}</div></div><button class="button small secondary" type="button" id="wst-clear">Vider</button></div>
             <form id="wst-form" class="form-grid web-search-tool-form" style="padding:0">
                 <label>Prénom<input name="first" value="${v('first')}" placeholder="Jean"></label>
                 <label>Autres prénoms<input name="middle" value="${v('middle')}" placeholder="Pierre Marie"></label>
@@ -322,10 +145,9 @@
         panel.addEventListener('click',event=>{const link=event.target.closest('[data-ws-site]');if(link&&link.getAttribute('href')==='#'){event.preventDefault();toast('Tape au moins un prénom ou un nom.');}});
         $('#wst-clear').addEventListener('click',()=>{state.webSearchForm=null;renderWebSearchTool();});
         // Remplir depuis une fiche de la base
-        const input=$('#wst-person'),list=$('#wst-person-list');let timer=0;
-        input.addEventListener('input',()=>{clearTimeout(timer);const q=input.value.trim();if(q.length<2){list.hidden=true;return;}timer=setTimeout(async()=>{let data={data:[]};try{data=await api('search',{type:'persons',q,limit:8});}catch(_){}list.innerHTML=(data.data||[]).map(person=>`<button type="button" data-wst-person="${person.id}">${escapeHtml(personName(person))} <small>${escapeHtml(years(person))}</small></button>`).join('')||'<small class="muted">Aucune fiche</small>';list.hidden=false;},200);});
-        list.addEventListener('click',async event=>{const button=event.target.closest('[data-wst-person]');if(!button)return;list.hidden=true;
-            let detail;try{detail=await api('person',{id:button.dataset.wstPerson});}catch(error){toast(error.message,'error');return;}
+        // la fiche de départ : menu de choix unique
+        $('#wst-person').addEventListener('picker-change',async event=>{const it=event.detail.item;if(!it||it.free||!it.id)return;
+            let detail;try{detail=await api('person',{id:it.id});}catch(error){toast(error.message,'error');return;}
             const person=detail.person||{};const ctx=webSearchContext(detail);const spouse=(detail.partners||[])[0];
             const placeOf=kind=>ctx.places.find(place=>place.kind===kind);const place=placeOf('birth')||placeOf('death')||ctx.places[0];
             state.webSearchForm={first:String(person.first_name||'').trim(),middle:String(person.middle_name||'').trim(),last:String(person.last_name||'').trim(),place:place?.value||'',placeKind:place?.kind||'birth',
@@ -386,7 +208,7 @@
     }
     function archiveDigestLabel(map,value){return (map&&map[value])||value||'—';}
     function archiveDigestFormHtml(row={}){
-        return `<form id="archive-digest-form" class="archive-digest-form card-form"><input type="hidden" name="id" value="${escapeHtml(String(row.id||0))}"><div class="form-grid"><label>Modèle de dépouillement<select name="template_key" data-archive-digest-template>${archiveDigestTemplateOptions(row.template_key||'standard')}</select><small data-archive-digest-template-help>${escapeHtml(ARCHIVE_DIGEST_TEMPLATES[row.template_key||'standard']?.help||ARCHIVE_DIGEST_TEMPLATES.standard.help)}</small></label><label>Type d’acte<select name="record_type">${archiveDigestTypeOptions(row.record_type||'autre')}</select></label><label>Ville / commune<div class="research-place-input-wrap"><input name="city_name" value="${escapeHtml(row.city_name||row.place_name||'')}" placeholder="Tape pour choisir une commune ou saisis un ancien nom" autocomplete="off"><input type="hidden" name="place_id" value="${escapeHtml(String(row.place_id||0))}"><div class="place-suggestions" data-archive-digest-place-suggestions hidden></div></div></label><label>Commune liée / rattachée<input name="city_alias" value="${escapeHtml(row.city_alias||'')}" placeholder="Ancienne commune, hameau…"></label><label>Département<input name="department" value="${escapeHtml(row.department||row.county||'')}" placeholder="18, Cher…"></label><label>Région<input name="region" value="${escapeHtml(row.region||row.state||'')}" placeholder="Région"></label><label>Archives / service<input name="archive_service" value="${escapeHtml(row.archive_service||'')}" placeholder="AD 18, commune…"></label><label>Cote / registre<input name="archive_reference" value="${escapeHtml(row.archive_reference||'')}" placeholder="3 E 123, vue 42…"></label><label class="span-2">Lien direct vers l’archive<input name="archive_url" type="url" value="${escapeHtml(row.archive_url||'')}" placeholder="https://archives…"></label><label>Période / année<input name="year_text" value="${escapeHtml(row.year_text||'')}" placeholder="1801, 1793-1802…"></label><label>État<select name="status">${archiveDigestStatusOptions(row.status||'todo')}</select></label></div><div class="archive-digest-textareas"><label>Ce que je cherche<textarea name="searched" rows="3" placeholder="Nom, famille, acte, hypothèse…">${escapeHtml(row.searched||'')}</textarea></label><label>Ce que j’ai trouvé<textarea name="found" rows="3" placeholder="Homonyme, cousin possible, rien trouvé…">${escapeHtml(row.found||'')}</textarea></label><label>Annotation<textarea name="notes" rows="3" placeholder="À revoir, lacune, table incomplète, piste annexe…">${escapeHtml(row.notes||'')}</textarea></label></div><div class="modal-actions"><span class="spacer"></span>${row.id?'<button class="button secondary" type="button" data-archive-digest-cancel>Annuler</button>':''}<button class="button" type="submit">${row.id?'Enregistrer':'Ajouter le dépouillement'}</button></div></form>`;
+        return `<form id="archive-digest-form" class="archive-digest-form card-form"><input type="hidden" name="id" value="${escapeHtml(String(row.id||0))}"><div class="form-grid"><label>Modèle de dépouillement<select name="template_key" data-archive-digest-template>${archiveDigestTemplateOptions(row.template_key||'standard')}</select><small data-archive-digest-template-help>${escapeHtml(ARCHIVE_DIGEST_TEMPLATES[row.template_key||'standard']?.help||ARCHIVE_DIGEST_TEMPLATES.standard.help)}</small></label><label>Type d’acte<select name="record_type">${archiveDigestTypeOptions(row.record_type||'autre')}</select></label><div class="pk-host"><span>Ville / commune <small>(ou un ancien nom, gardé tel quel)</small></span><div class="research-place-input-wrap" data-archive-digest-place>${pkPlace('archive_entry_place_pick',row.place_id,row.city_name||row.place_name,{allowFree:true,local:true,free:row.city_name||row.place_name})}<input type="hidden" name="city_name" value="${escapeHtml(row.city_name||row.place_name||'')}"><input type="hidden" name="place_id" value="${escapeHtml(String(row.place_id||0))}"></div></div><label>Commune liée / rattachée<input name="city_alias" value="${escapeHtml(row.city_alias||'')}" placeholder="Ancienne commune, hameau…"></label><label>Département<input name="department" value="${escapeHtml(row.department||row.county||'')}" placeholder="18, Cher…"></label><label>Région<input name="region" value="${escapeHtml(row.region||row.state||'')}" placeholder="Région"></label><label>Archives / service<input name="archive_service" value="${escapeHtml(row.archive_service||'')}" placeholder="AD 18, commune…"></label><label>Cote / registre<input name="archive_reference" value="${escapeHtml(row.archive_reference||'')}" placeholder="3 E 123, vue 42…"></label><label class="span-2">Lien direct vers l’archive<input name="archive_url" type="url" value="${escapeHtml(row.archive_url||'')}" placeholder="https://archives…"></label><label>Période / année<input name="year_text" value="${escapeHtml(row.year_text||'')}" placeholder="1801, 1793-1802…"></label><label>État<select name="status">${archiveDigestStatusOptions(row.status||'todo')}</select></label></div><div class="archive-digest-textareas"><label>Ce que je cherche<textarea name="searched" rows="3" placeholder="Nom, famille, acte, hypothèse…">${escapeHtml(row.searched||'')}</textarea></label><label>Ce que j’ai trouvé<textarea name="found" rows="3" placeholder="Homonyme, cousin possible, rien trouvé…">${escapeHtml(row.found||'')}</textarea></label><label>Annotation<textarea name="notes" rows="3" placeholder="À revoir, lacune, table incomplète, piste annexe…">${escapeHtml(row.notes||'')}</textarea></label></div><div class="modal-actions"><span class="spacer"></span>${row.id?'<button class="button secondary" type="button" data-archive-digest-cancel>Annuler</button>':''}<button class="button" type="submit">${row.id?'Enregistrer':'Ajouter le dépouillement'}</button></div></form>`;
     }
     function enhanceArchiveDigestForm(form,row={}){
         if(!form||form.querySelector('[data-archive-digest-details]'))return;
@@ -759,34 +581,10 @@
     }
 
     function setupArchiveDigestEntryPlacePicker(form){
-        if(!form)return;
-        const input=form?.elements.city_name;
-        const hidden=form?.elements.place_id;
-        const suggestions=form.querySelector('[data-archive-digest-place-suggestions]');
-        if(!input||!hidden||!suggestions)return;
-        const hide=()=>{suggestions.hidden=true;suggestions.innerHTML='';};
-        const search=debounce(async()=>{
-            const q=input.value.trim();
-            if(q.length<2){hide();return;}
-            try{
-                const data=await api('place_suggestions',{q,country:''});
-                suggestions.innerHTML=(data.places||[]).map(place=>`<button type="button" data-place-id="${place.id}" data-place-name="${escapeHtml(place.name||'')}" data-place-county="${escapeHtml(place.county||'')}" data-place-state="${escapeHtml(place.state||'')}"><strong>${escapeHtml(place.name||'')}</strong><small>${escapeHtml([place.subdivision,place.county,place.state,place.country].filter(Boolean).join(' · '))}</small></button>`).join('');
-                suggestions.hidden=!suggestions.innerHTML;
-            }catch(_){hide();}
-        },220);
-        input.addEventListener('input',()=>{hidden.value='0';search();});
-        input.addEventListener('focus',()=>{if(suggestions.innerHTML)suggestions.hidden=false;});
-        suggestions.addEventListener('click',event=>{
-            const button=event.target.closest('button[data-place-id]');
-            if(!button)return;
-            hidden.value=button.dataset.placeId||'0';
-            input.value=button.dataset.placeName||'';
+        const field=form?.querySelector('[data-archive-digest-place]');if(!field||field.dataset.pkBound)return;field.dataset.pkBound='1';
+        field.addEventListener('picker-change',event=>{const it=event.detail.item;form.elements.place_id.value=String(it&&!it.free?Number(it.id):0);form.elements.city_name.value=it?(it.free?it.title:(it.name||it.title)):'';
             const dept=form.elements.department,region=form.elements.region;
-            if(dept&&!dept.value)dept.value=button.dataset.placeCounty||'';
-            if(region&&!region.value)region.value=button.dataset.placeState||'';
-            hide();
-        });
-        document.addEventListener('click',event=>{if(!form.contains(event.target))hide();},{signal:sidebarSignal()});
+            if(it&&!it.free){if(dept&&!dept.value)dept.value=it.county||'';if(region&&!region.value)region.value=it.state_name||'';}});
     }
 
     function openArchiveDigestMediaDialog(row,pageNumber=''){

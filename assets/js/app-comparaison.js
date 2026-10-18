@@ -14,57 +14,32 @@
                 const rows=state.imageCompare.results||[];
                 resultsBox.innerHTML=rows.length?rows.map(item=>`<article class="saved-item media-compare-result-row"><span>${mediaCompareThumb(item)}<span class="media-compare-info"><strong>${escapeHtml(item.title||item.attachment_label||item.filename)}</strong><small>${escapeHtml([item.date_text,item.document_reference,item.attachment_label].filter(Boolean).join(' · ')||'Même contexte')}</small></span></span><span class="saved-actions"><button type="button" data-image-side="left" data-image-pick="${item.id}">A</button><button type="button" data-image-side="right" data-image-pick="${item.id}">B</button></span></article>`).join(''):'<p>Aucun média trouvé.</p>';
             };
+            // « Personne » : la personne se choisit avec le menu de choix unique, ses médias s'affichent
             const renderPersonSuggestions=()=>{
-                if(state.imageCompare.scope!=='person'||!suggestionsBox)return;
-                if(state.imageCompare.personId){
-                    suggestionsBox.innerHTML=`<span class="person-suggestion-locked">Personne choisie : <strong>${escapeHtml(state.imageCompare.personName)}</strong> <button type="button" data-person-suggest-clear="1">changer</button></span>`;
-                    return;
-                }
-                const list=state.imageCompare.personSuggestions||[];
-                suggestionsBox.innerHTML=list.length?`<span class="person-suggestion-label">Suggestions :</span>${list.map(p=>`<button type="button" class="person-suggestion-chip" data-person-suggest="${p.id}" data-person-suggest-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}${years(p)?` <small>${escapeHtml(years(p))}</small>`:''}</button>`).join('')}`:'';
+                if(!suggestionsBox)return;
+                if(state.imageCompare.scope!=='person'){suggestionsBox.innerHTML='';return;}
+                if(suggestionsBox.querySelector('.pk'))return;
+                const id=Number(state.imageCompare.personId)||0;
+                suggestionsBox.innerHTML=(window.LCNDA_PICKER?.pickerField({name:'image_compare_person',kind:'person',allowCreate:false,value:id?{id,title:state.imageCompare.personName||'',kind:'person'}:null})||'').replace(' name="image_compare_person"','');
             };
+            suggestionsBox?.addEventListener('picker-change',event=>{const it=event.detail.item;state.imageCompare.personId=it&&!it.free?Number(it.id):0;state.imageCompare.personName=it?it.title:'';persistUiState();runImgSearch();},{signal:sidebarSignal()});
             const runImgSearch=debounce(async()=>{
                 state.imageCompare.query=search.value;persistUiState();
                 const q=search.value.trim();
-                if(q.length<2){state.imageCompare.results=[];state.imageCompare.personSuggestions=[];resultsBox.innerHTML='<p>Saisis au moins deux caractères.</p>';renderPersonSuggestions();return;}
-                if(state.imageCompare.scope==='person'&&!state.imageCompare.personId){
-                    api('people',{q,limit:8}).then(peopleData=>{
-                        state.imageCompare.personSuggestions=peopleData.people||[];
-                        renderPersonSuggestions();
-                    }).catch(()=>{});
-                }else{
-                    suggestionsBox.innerHTML='';
-                }
+                const personChosen=state.imageCompare.scope==='person'&&Number(state.imageCompare.personId);
+                if(q.length<2&&!personChosen){state.imageCompare.results=[];resultsBox.innerHTML=state.imageCompare.scope==='person'?'<p>Choisis une personne, ou saisis au moins deux caractères.</p>':'<p>Saisis au moins deux caractères.</p>';renderPersonSuggestions();return;}
                 const params={type:'media',q,limit:40,scope:state.imageCompare.scope};
                 if(state.imageCompare.scope==='person'&&state.imageCompare.personId)params.person_id=state.imageCompare.personId;
                 const data=await api('list',params);
                 state.imageCompare.results=data.rows||[];
                 renderImgResults();
             },260);
-            search.addEventListener('input',()=>{if(state.imageCompare.personId){state.imageCompare.personId=0;state.imageCompare.personName='';}runImgSearch();},{signal:sidebarSignal()});
+            search.addEventListener('input',()=>runImgSearch(),{signal:sidebarSignal()});
             scopeBar.addEventListener('click',event=>{const btn=event.target.closest('[data-scope]');if(!btn)return;state.imageCompare.scope=btn.dataset.scope;state.imageCompare.personId=0;state.imageCompare.personName='';state.imageCompare.personSuggestions=[];$$('.media-compare-scope-btn',scopeBar).forEach(b=>b.classList.toggle('is-active',b===btn));renderPersonSuggestions();runImgSearch();},{signal:sidebarSignal()});
             renderPersonSuggestions();
             content.addEventListener('click',async event=>{
                 const modeBtn=event.target.closest('[data-comparison-mode]');
                 if(modeBtn){state.comparisonMode=modeBtn.dataset.comparisonMode;persistUiState();renderSidebar();await renderComparison();return;}
-                const suggestBtn=event.target.closest('[data-person-suggest]');
-                if(suggestBtn){
-                    state.imageCompare.personId=Number(suggestBtn.dataset.personSuggest);
-                    state.imageCompare.personName=suggestBtn.dataset.personSuggestName||'';
-                    search.value=state.imageCompare.personName;
-                    state.imageCompare.query=state.imageCompare.personName;
-                    persistUiState();
-                    renderPersonSuggestions();
-                    runImgSearch();
-                    return;
-                }
-                const suggestClearBtn=event.target.closest('[data-person-suggest-clear]');
-                if(suggestClearBtn){
-                    state.imageCompare.personId=0;state.imageCompare.personName='';
-                    renderPersonSuggestions();
-                    runImgSearch();
-                    return;
-                }
                 const pickBtn=event.target.closest('[data-image-pick]');
                 if(pickBtn){
                     const id=Number(pickBtn.dataset.imagePick);
@@ -76,11 +51,12 @@
             $('#clear-image-comparison').addEventListener('click',async()=>{state.imageCompare={left:null,right:null,query:'',scope:'',results:[],personId:0,personName:'',personSuggestions:[]};persistUiState();renderSidebar();await renderComparison();},{signal:sidebarSignal()});
             return;
         }
-        content.innerHTML=`${modeToggle}<div class="search-box"><label for="comparison-global-search">Chercher une personne</label><div class="search-row"><input id="comparison-global-search" value="${escapeHtml(state.comparison.query)}" placeholder="Nom, prénom…"><button id="comparison-search-button">⌕</button></div></div><div class="person-list" id="comparison-results">${empty('Cherche puis choisis A ou B dans les résultats.',{icon:'⚖️'})}</div>`;
+        // personnes A et B : menu de choix unique
+        const pkSide=(side,label)=>{const id=Number(state.comparison[side])||0;return `<div class="pk-host"><span>${label}</span><div data-compare-pk="${side}">${(window.LCNDA_PICKER?.pickerField({name:'compare_'+side,kind:'person',allowCreate:false,value:id?{id,title:state.comparison[`${side}Name`]||'',kind:'person'}:null})||'').replace(` name="compare_${side}"`,'')}</div></div>`;};
+        content.innerHTML=`${modeToggle}<div class="search-box comparison-pickers">${pkSide('left','Personne A')}${pkSide('right','Personne B')}</div>`;
         footer.innerHTML=`<button class="button small secondary" id="clear-comparison">Réinitialiser</button>`;
-        const run=debounce(async()=>{state.comparison.query=$('#comparison-global-search').value;persistUiState();const q=state.comparison.query.trim();if(q.length<2){$('#comparison-results').innerHTML=empty('Saisis au moins deux caractères.',{icon:'⌨️'});return;}const data=await api('people',{q,limit:40});$('#comparison-results').innerHTML=data.people.map(person=>`<article class="saved-item"><span><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></span><span class="saved-actions"><button data-compare-side="left" data-person-id="${person.id}" data-person-name="${escapeHtml(personName(person))}">A</button><button data-compare-side="right" data-person-id="${person.id}" data-person-name="${escapeHtml(personName(person))}">B</button></span></article>`).join('')||empty('Aucun résultat.',{icon:'🔎',hint:'Essaie un autre nom ou une autre orthographe.'});});
-        $('#comparison-global-search').addEventListener('input',run,{signal:sidebarSignal()});$('#comparison-search-button').addEventListener('click',run,{signal:sidebarSignal()});
-        content.addEventListener('click',async event=>{const modeBtn=event.target.closest('[data-comparison-mode]');if(modeBtn){state.comparisonMode=modeBtn.dataset.comparisonMode;persistUiState();renderSidebar();await renderComparison();return;}const button=event.target.closest('[data-compare-side]');if(!button)return;const side=button.dataset.compareSide;state.comparison[side]=Number(button.dataset.personId);state.comparison[`${side}Name`]=button.dataset.personName;persistUiState();await renderComparison();},{signal:sidebarSignal()});
+        content.addEventListener('picker-change',async event=>{const side=event.target.closest('[data-compare-pk]')?.dataset.comparePk;if(!side)return;const it=event.detail.item;state.comparison[side]=it&&!it.free?Number(it.id):0;state.comparison[`${side}Name`]=it?it.title:'';persistUiState();await renderComparison();},{signal:sidebarSignal()});
+        content.addEventListener('click',async event=>{const modeBtn=event.target.closest('[data-comparison-mode]');if(modeBtn){state.comparisonMode=modeBtn.dataset.comparisonMode;persistUiState();renderSidebar();await renderComparison();}},{signal:sidebarSignal()});
         $('#clear-comparison').addEventListener('click',async()=>{state.comparison={left:0,right:0,leftName:'',rightName:'',query:''};persistUiState();renderSidebar();await renderComparison();},{signal:sidebarSignal()});
     }
 

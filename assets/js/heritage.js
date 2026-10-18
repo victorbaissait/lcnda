@@ -30,6 +30,13 @@
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const personLink = (id, name, extra = '') => id ? `<button type="button" class="table-link" data-h-person="${Number(id)}">${esc(name || 'Personne')}</button>${extra ? ` <small>${esc(extra)}</small>` : ''}` : esc(name || '');
     const chip = person => person ? A().personChip(person) : '';
+    // 🔍 Menu de choix unique (assets/js/app-picker.js, docs/PICKER.md) : personnes, lieux, médias…
+    const PK = () => window.LCNDA_PICKER || A();
+    const pf = o => PK().pickerField(o);
+    /** Le même champ, sans rien envoyer au serveur (son champ caché n'a pas de nom) : l'outil lit le choix lui-même. */
+    const pfLocal = o => pf(o).replace(` name="${esc(o.name)}"`, '');
+    /** Champ « une personne » : le numéro suffit, le composant relit la fiche (nom, années, Sosa). */
+    const personPick = (name, person, more = {}) => pf({name, kind: 'person', value: person && typeof person === 'object' ? (Number(person.id) || null) : (Number(person) || null), ...more});
     const designBg = () => { try { return A().mapBackgroundValue(JSON.parse(localStorage.getItem('genealogie-design') || '{}').mapBackground); } catch (_) { return 'bw'; } };
     const today = () => new Date().toISOString().slice(0, 10);
     const dateFr = value => {
@@ -96,7 +103,7 @@
                 return `<div class="h-media-role"><h5>${esc(label)}</h5><div class="collection-media-edit">${items.map(m => `<span class="collection-media-item">${A().mediaThumbHtml(m)}<button type="button" data-h-media-remove="${m.id}" aria-label="Retirer">✕</button></span>`).join('')}</div>
                 <input type="file" multiple data-h-upload-role="${esc(role)}" accept="${esc(accept || 'image/*,application/pdf')}"></div>`;
             }).join('')}
-            ${id ? `<div class="h-media-link"><input type="search" data-h-media-search placeholder="Ou lier un média déjà dans l’application (titre, cote)…" autocomplete="off"><select data-h-media-link-role>${roles.map(([role, label]) => `<option value="${esc(role)}">${esc(label)}</option>`).join('')}</select><div class="h-media-results" hidden></div></div>` : '<small class="muted">Les fichiers choisis sont envoyés à l’enregistrement.</small>'}
+            ${id ? `<div class="h-media-link h-pk-solo"><span class="pk-lab">Ou lier un média déjà dans l’application</span>${pfLocal({name: 'h_media_link', kind: 'media', placeholder: 'Titre, cote, nom du fichier…'})}<select data-h-media-link-role>${roles.map(([role, label]) => `<option value="${esc(role)}">${esc(label)}</option>`).join('')}</select></div>` : '<small class="muted">Les fichiers choisis sont envoyés à l’enregistrement.</small>'}
         </div>`;
     }
     function bindMediaEditor(root) {
@@ -109,29 +116,17 @@
                 try { await api('remove_collection_media', {}, {method: 'POST', body: {collection_type: type, collection_id: id, media_id: rm.dataset.hMediaRemove}}); rm.parentElement.remove(); }
                 catch (error) { toast(error.message, 'error'); }
             }
-            const pick = event.target.closest('[data-h-media-pick]');
-            if (pick) {
-                try {
-                    await api('link_collection_media', {}, {method: 'POST', body: {collection_type: type, collection_id: id, media_id: pick.dataset.hMediaPick, role: box.querySelector('[data-h-media-link-role]').value}});
-                    toast('Média lié. Il apparaîtra après l’enregistrement.');
-                    pick.disabled = true; pick.textContent += ' ✓';
-                } catch (error) { toast(error.message, 'error'); }
-            }
         });
-        const search = box.querySelector('[data-h-media-search]');
-        if (search) {
-            let timer = 0;
-            search.addEventListener('input', () => {
-                clearTimeout(timer);
-                const q = search.value.trim(), results = box.querySelector('.h-media-results');
-                if (q.length < 2) { results.hidden = true; return; }
-                timer = setTimeout(async () => {
-                    const data = await api('heritage_media_search', {q}).catch(() => ({media: []}));
-                    results.innerHTML = (data.media || []).map(m => `<button type="button" class="h-media-pick" data-h-media-pick="${m.id}">${m.media_type === 'image' ? `<img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="">` : '📄'} ${esc(m.title || m.filename)}${m.document_reference ? ` <small>${esc(m.document_reference)}</small>` : ''}</button>`).join('') || '<small class="muted">Aucun média trouvé.</small>';
-                    results.hidden = false;
-                }, 250);
-            });
-        }
+        // « Lier un média déjà dans l'application » : le menu de choix unique (sorte media)
+        box.addEventListener('picker-change', async event => {
+            const it = event.detail.item, field = event.target.closest('.pk');
+            if (!it?.id || !field) return;
+            try {
+                await api('link_collection_media', {}, {method: 'POST', body: {collection_type: type, collection_id: id, media_id: it.id, role: box.querySelector('[data-h-media-link-role]').value}});
+                toast(`« ${it.title} » lié. Il apparaîtra après l’enregistrement.`);
+                PK().pickerSet(field, null);
+            } catch (error) { toast(error.message, 'error'); }
+        });
     }
     async function uploadMediaEditor(root, type, id) {
         let count = 0;
@@ -141,42 +136,53 @@
         return count;
     }
 
-    /** Champ « lieu » avec suggestions (base + villes du monde) ; les coordonnées choisies vont dans deux champs cachés. */
+    /** Champ « lieu » : le menu de choix unique (sorte place). Pour les outils qui l'utilisent, rien ne change :
+     *  le formulaire reçoit le texte du lieu sous `name` (« Tulle, Corrèze, France ») et ses coordonnées sous
+     *  `name_lat` / `name_lon` ; le tout est dans un `.h-place`, la case texte porte `data-h-place`.
+     *  Un texte sans lieu de la base reste possible (« ✎ Garder le texte ») : il sera cherché à l'enregistrement, comme avant. */
     function placeField(name, value, lat, lon, placeholder = '') {
-        return `<span class="h-place"><input type="text" name="${name}" value="${esc(value || '')}" placeholder="${esc(placeholder)}" autocomplete="off" data-h-place="${name}"><input type="hidden" name="${name}_lat" value="${lat ?? ''}"><input type="hidden" name="${name}_lon" value="${lon ?? ''}"><span class="h-place-list" hidden></span>${lat != null && lat !== '' ? '<small class="h-place-ok" title="Placé sur la carte">📍</small>' : ''}</span>`;
+        const text = String(value ?? '').trim(), placed = lat != null && lat !== '';
+        // valeur déjà enregistrée : on n'a que son texte, on le montre en pastille
+        const cur = text ? {kind: 'place', id: null, ref: 'texte', title: text, name: text, short: placed ? 'sur la carte' : '', group: placed ? 'base' : 'fr'} : null;
+        return `<span class="h-place h-place-menu"><input type="hidden" name="${esc(name)}" value="${esc(text)}" data-h-place="${esc(name)}"><input type="hidden" name="${esc(name)}_lat" value="${esc(lat ?? '')}"><input type="hidden" name="${esc(name)}_lon" value="${esc(lon ?? '')}">${pfLocal({name: name + '__lieu', kind: 'place', value: cur, allowFree: true})}</span>`;
     }
-    document.addEventListener('input', event => {
-        const input = event.target.closest?.('[data-h-place]');
-        if (!input) return;
-        const wrap = input.parentElement, list = wrap.querySelector('.h-place-list');
-        wrap.querySelector(`[name="${input.name}_lat"]`).value = '';
-        wrap.querySelector(`[name="${input.name}_lon"]`).value = '';
-        wrap.querySelector('.h-place-ok')?.remove();
-        clearTimeout(input._hTimer);
-        const q = input.value.split(',')[0].trim();
-        if (q.length < 2) { list.hidden = true; return; }
-        input._hTimer = setTimeout(async () => {
-            const seq = input._hSeq = (input._hSeq || 0) + 1;
-            const data = await api('heritage_place_search', {q}).catch(() => ({places: []}));
-            if (seq !== input._hSeq || input.value.split(',')[0].trim() !== q) return; // réponse d'une frappe plus ancienne
-            list.innerHTML = (data.places || []).map(p => `<button type="button" data-h-place-pick data-label="${esc(p.label)}" data-lat="${p.lat}" data-lon="${p.lon}">${esc(p.label)}</button>`).join('') || '<small class="muted">Lieu inconnu : il sera cherché à l’enregistrement.</small>';
-            list.hidden = false;
-        }, 220);
+    const placeCountry = c => { c = String(c || '').trim(); return c.length > 3 && c === c.toUpperCase() ? c.charAt(0) + c.slice(1).toLowerCase() : c; }; // « FRANCE » → « France »
+    /** Texte et coordonnées d'un lieu choisi dans le menu (les items de picker_search n'ont pas de coordonnées). */
+    async function placeTextAndCoords(it) {
+        const name = String(it.name || it.title || '').replace(/\s*\(.*\)$/, '').trim(), sub = it.county || it.state_name || '';
+        const fold = t => String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+        try { // même texte qu'avant (« Ville, Département, Pays ») et coordonnées, par la recherche des lieux
+            const rows = (await api('heritage_place_search', {q: name})).places || [];
+            const hit = rows.find(p => fold(p.label).startsWith(fold(name + ', ' + sub + ',')) || (sub === '' && fold(p.label).startsWith(fold(name + ',')))) || (sub ? null : rows.find(p => fold(p.label.split(',')[0]) === fold(name)));
+            if (hit) return {text: hit.label, lat: hit.lat, lon: hit.lon};
+        } catch (_) {}
+        let row = null; // sinon : la fiche du lieu, par son numéro
+        try { row = (await api('place_monograph', {place_id: it.id, show_events: 0, show_digests: 0, show_battues: 0, show_cemetery: 0})).place; } catch (_) {}
+        const text = [name, sub || row?.county || row?.state || '', placeCountry(row?.country)].filter(Boolean).join(', ');
+        return {text, lat: row?.latitude ?? '', lon: row?.longitude ?? ''};
+    }
+    document.addEventListener('picker-change', async event => {
+        const field = event.target.closest?.('.pk'), wrap = field?.parentElement;
+        if (!wrap?.classList.contains('h-place-menu')) return;
+        const it = event.detail.item, input = wrap.querySelector('[data-h-place]'), n = input.name;
+        const seq = wrap._hSeq = (wrap._hSeq || 0) + 1;
+        let v = {text: '', lat: '', lon: ''};
+        if (it?.free) v.text = it.title;
+        else if (it?.id) v = await placeTextAndCoords(it);
+        if (seq !== wrap._hSeq) return; // un autre choix entre-temps
+        input.value = v.text;
+        wrap.querySelector(`[name="${n}_lat"]`).value = v.lat ?? '';
+        wrap.querySelector(`[name="${n}_lon"]`).value = v.lon ?? '';
+        input.dispatchEvent(new Event('input', {bubbles: true}));
+        input.dispatchEvent(new Event('change', {bubbles: true}));
     });
-    document.addEventListener('click', event => {
-        const b = event.target.closest?.('[data-h-place-pick]');
-        if (!b) return;
-        const wrap = b.closest('.h-place'), input = wrap.querySelector('[data-h-place]');
-        input.value = b.dataset.label;
-        wrap.querySelector(`[name="${input.name}_lat"]`).value = b.dataset.lat;
-        wrap.querySelector(`[name="${input.name}_lon"]`).value = b.dataset.lon;
-        wrap.querySelector('.h-place-list').hidden = true;
-        if (!wrap.querySelector('.h-place-ok')) wrap.insertAdjacentHTML('beforeend', '<small class="h-place-ok" title="Placé sur la carte">📍</small>');
-    });
-    document.addEventListener('focusout', event => {
-        const input = event.target.closest?.('[data-h-place]');
-        if (input) setTimeout(() => { const l = input.parentElement?.querySelector('.h-place-list'); if (l) l.hidden = true; }, 200);
-    });
+    // le composant envoie aussi « change » sur son champ caché (sans nom) : inutile ici, le vrai « change » part une fois le texte rempli
+    document.addEventListener('change', event => { if (event.target.matches?.('.h-place-menu > .pk > input[type=hidden]')) event.stopPropagation(); }, true);
+    // un menu de choix posé dans un <label> (« <label>Port de départ${placeField(…)}</label> ») : un clic dans sa liste ou sur ses
+    // boutons ne doit pas « activer » le label (sinon le clic repart dans la case de saisie et le choix est perdu)
+    document.addEventListener('click', event => { const t = event.target; if (t.closest?.('label .pk') && !t.matches('input, textarea, select')) event.preventDefault(); });
+    // ↗ Lieu / 🗺 sur une valeur ancienne (texte seul) : pas encore de lieu de la base derrière
+    document.addEventListener('picker-open', event => { if (event.target.closest?.('.h-place-menu') && !event.detail.id) { event.preventDefault(); toast('Ce lieu est écrit en texte : choisis-le dans la liste pour le relier à un lieu de ta base.'); } });
 
     /** Fenêtre de saisie (même allure que les autres fenêtres de l'application). */
     function openDialog({eyebrow = '', title = '', body = '', wide = false, submitLabel = 'Enregistrer', onSubmit, onDelete, onOpen, labels = null}) {
@@ -200,7 +206,7 @@
         dialog.querySelector('[data-h-delete]')?.addEventListener('click', async () => {
             try { if (await onDelete() !== false) dialog.close(); } catch (error) { toast(error.message, 'error'); }
         });
-        A().bindCollectionPersonFields(dialog);
+        A().bindCollectionPersonFields?.(dialog); // anciens champs encore passés par d'autres outils
         bindMediaEditor(dialog);
         onOpen?.(dialog);
         dialog.showModal();
@@ -346,14 +352,26 @@
     /** 🖼️ Choisir une image de l'app (le même choix partout : retouche, transcription d'actes, signatures…) : les images tout de suite,
      *  en vignettes ; recherche par titre, cote, date, nom du fichier ou personne rattachée ; filtres ; ou une image de l'ordinateur.
      *  Renvoie {id, filename, title, transcription…} ou null. */
+    /** Petites règles pour les cartes de pickImage (au style du menu de choix ; heritage.css n'est pas touché ici). */
+    function pickMenuCss() {
+        if (document.getElementById('h-pick-menu-css')) return;
+        const st = document.createElement('style'); st.id = 'h-pick-menu-css';
+        st.textContent = `.h-pick-q{flex:1;min-width:220px;margin:4px 0}.h-pk-solo .pk-list{position:static}.h-media-link{flex-wrap:wrap;align-items:flex-start}.h-media-link>.pk-lab{flex-basis:100%;margin:0}.h-media-link>.pk{flex:1 1 260px}.h-rt-pick .h-pick-head{margin-top:8px;border:0;padding:4px 0}
+.h-rt-pick .pk-card{border:2px solid #e3e5ea;border-radius:0;gap:3px}.h-rt-pick .pk-card:hover{border-color:#111}.h-rt-pick .pk-card.on{border-color:#055dff;background:#eaf1ff;box-shadow:inset 0 -4px 0 #055dff}
+.h-rt-pick .pk-card img{border-radius:0}.h-rt-pick .pk-card .pk-name{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.h-rt-pick .pk-card .pk-meta{font-size:11.5px;margin:0}
+.h-rt-pick .pk-card mark{background:#fff1a8;color:inherit;padding:0}.h-rt-pick .pk-card .h-pick-badge{position:absolute;top:10px;left:10px;max-width:none}
+:root[data-theme="dark"] .h-rt-pick .pk-card{border-color:#3a3a3a}:root[data-theme="dark"] .h-rt-pick .pk-card:hover{border-color:#ddd}:root[data-theme="dark"] .h-rt-pick .pk-card.on{border-color:#4d9fff;background:#16263d;box-shadow:inset 0 -4px 0 #4d9fff}:root[data-theme="dark"] .h-rt-pick .pk-card mark{background:#6b5a00}`;
+        document.head.appendChild(st);
+    }
     function pickImage({eyebrow = 'MÉDIAS', title = 'Choisir une image', intro = '', filter = '', filters = true, allowImport = true, extra = ''} = {}) {
         return new Promise(resolve => {
-            let done = false, items = [], timer = 0, seq = 0;
+            let done = false, items = [], timer = 0, seq = 0, active = 0;
             const finish = v => { if (done) return; done = true; resolve(v); dlg.close(); };
             const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
             dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-                <div class="h-rt-pick-bar"><input type="search" data-q placeholder="Chercher : titre, cote, date, nom d’une personne…" autocomplete="off">${filters ? `<select data-f aria-label="Filtre">${[['', 'Toutes les images'], ['notr', 'Pas encore transcrites'], ['tr', 'Déjà transcrites'], ['sig', 'Avec une signature repérée']].map(([k, l]) => `<option value="${k}" ${k === filter ? 'selected' : ''}>${l}</option>`).join('')}</select>` : ''}${extra}${allowImport ? '<label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-file hidden>📥 Image de l’ordinateur</label>' : ''}</div>
-                ${intro ? `<p class="muted small">${intro}</p>` : ''}<div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
+                <div class="h-rt-pick-bar"><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-q placeholder="Titre, cote, date, nom d’une personne…" autocomplete="off" spellcheck="false" aria-label="Chercher une image"></div></div>${filters ? `<select data-f aria-label="Filtre">${[['', 'Toutes les images'], ['notr', 'Pas encore transcrites'], ['tr', 'Déjà transcrites'], ['sig', 'Avec une signature repérée']].map(([k, l]) => `<option value="${k}" ${k === filter ? 'selected' : ''}>${l}</option>`).join('')}</select>` : ''}${extra}${allowImport ? '<label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-file hidden>📥 Image de l’ordinateur</label>' : ''}</div>
+                ${intro ? `<p class="muted small">${intro}</p>` : ''}<div class="pk-head h-pick-head" data-head hidden></div><div class="h-rt-pick-grid" data-grid role="listbox"><div class="loading-block">Chargement…</div></div>`;
+            pickMenuCss();
             document.body.append(dlg);
             dlg.addEventListener('close', () => { dlg.remove(); if (!done) { done = true; resolve(null); } });
             dlg.querySelector('[data-x]').addEventListener('click', () => dlg.close());
@@ -361,10 +379,24 @@
             const load = async () => { const n = ++seq;
                 try { items = (await A().api('image_pick', {q: q.value.trim(), filter: f?.value || ''})).media || []; } catch (e) { if (n === seq) grid.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; }
                 if (n !== seq) return;
-                grid.innerHTML = items.length ? items.map((m, i) => `<button type="button" class="h-rt-pick-item" data-i="${i}" title="${esc(m.title || m.filename)}"><img loading="lazy" alt="" src="media/${encodeURIComponent(m.thumbnail || m.filename)}">${Number(m.has_tr) ? '<b class="h-pick-badge" title="Déjà transcrite">📝</b>' : ''}<span>${esc(m.title || m.filename)}</span>${m.people || m.date_text ? `<small>${esc([m.people, m.date_text].filter(Boolean).join(' · '))}</small>` : ''}</button>`).join('')
-                    : `<p class="muted">${q.value.trim() || f?.value ? 'Aucune image ne correspond.' : 'Aucune image dans l’app pour l’instant.'}${allowImport ? ' Prends-en une sur l’ordinateur (« 📥 Image de l’ordinateur »).' : ''}</p>`; };
+                active = 0;
+                const head = dlg.querySelector('[data-head]'); head.hidden = !items.length;
+                head.innerHTML = `<span>${items.length} ${items.length > 1 ? 'images trouvées' : 'image trouvée'}</span><span>↑ ↓ ← → Entrée</span>`;
+                // cartes au style du menu de choix : vignette, titre (lettres tapées surlignées), ligne grise, badge
+                const qq = q.value.trim(), hl = t => { const e = esc(t); if (qq.length < 2) return e; const i = e.toLowerCase().indexOf(esc(qq).toLowerCase()); return i < 0 ? e : e.slice(0, i) + '<mark>' + e.slice(i, i + esc(qq).length) + '</mark>' + e.slice(i + esc(qq).length); };
+                grid.innerHTML = items.length ? items.map((m, i) => `<button type="button" class="h-rt-pick-item pk-card${i === 0 ? ' on' : ''}" role="option" data-i="${i}" title="${esc(m.title || m.filename)}"><img loading="lazy" alt="" src="media/${encodeURIComponent(m.thumbnail || m.filename)}">${Number(m.has_tr) ? '<b class="pk-badge2 blue h-pick-badge" title="Déjà transcrite">📝 transcrite</b>' : ''}<span class="pk-name">${hl(m.title || m.filename)}</span>${m.people || m.date_text ? `<small class="pk-meta">${esc([m.people, m.date_text].filter(Boolean).join(' · '))}</small>` : ''}</button>`).join('')
+                    : `<p class="muted pk-empty">${q.value.trim() || f?.value ? 'Aucune image ne correspond.' : 'Aucune image dans l’app pour l’instant.'}${allowImport ? ' Prends-en une sur l’ordinateur (« 📥 Image de l’ordinateur »).' : ''}</p>`; };
             q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
-            q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (items.length === 1) finish(items[0]); } });
+            // clavier comme le menu : ↑ ↓ ← → pour choisir, Entrée pour valider
+            const setOn = i => { const cards = [...grid.querySelectorAll('.pk-card')]; if (!cards.length) return; active = (i + cards.length) % cards.length; cards.forEach((c, k) => c.classList.toggle('on', k === active)); cards[active].scrollIntoView({block: 'nearest'}); };
+            const perRow = () => { const cards = grid.querySelectorAll('.pk-card'); if (cards.length < 2) return 1; const top = cards[0].offsetTop; let n = 0; for (const c of cards) { if (c.offsetTop !== top) break; n++; } return n || 1; };
+            q.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); if (items[active]) finish(items[active]); }
+                else if (e.key === 'ArrowRight' && q.selectionStart === q.value.length) { e.preventDefault(); setOn(active + 1); }
+                else if (e.key === 'ArrowLeft' && q.selectionEnd === 0) { e.preventDefault(); setOn(active - 1); }
+                else if (e.key === 'ArrowDown') { e.preventDefault(); setOn(active + perRow()); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); setOn(active - perRow()); }
+            });
             f?.addEventListener('change', load);
             grid.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) finish(items[+b.dataset.i]); });
             dlg.querySelector('[data-file]')?.addEventListener('change', async e => { const file = e.target.files?.[0]; if (!file) return;
@@ -377,7 +409,7 @@
             dlg._pickFinish = finish; // pour les boutons ajoutés (« extra »)
         });
     }
-    setTimeout(() => { ext.miniMap = miniMap; ext.uploadFiles = uploadFiles; ext.openDialog = openDialog; ext.tools = tools; ext.refreshView = refreshView; ext.mediaEditorHtml = mediaEditorHtml; ext.bindMediaEditor = bindMediaEditor; ext.uploadMediaEditor = uploadMediaEditor; ext.placeField = placeField; ext.thumbs = thumbs; ext.pickImage = pickImage; }, 0);
+    setTimeout(() => { ext.miniMap = miniMap; ext.uploadFiles = uploadFiles; ext.openDialog = openDialog; ext.tools = tools; ext.refreshView = refreshView; ext.mediaEditorHtml = mediaEditorHtml; ext.bindMediaEditor = bindMediaEditor; ext.uploadMediaEditor = uploadMediaEditor; ext.placeField = placeField; ext.thumbs = thumbs; ext.pickImage = pickImage; ext.pickMenuCss = pickMenuCss; ext.placeCoords = placeTextAndCoords; pickMenuCss(); }, 0);
     const finite = v => v !== null && v !== '' && v !== undefined && Number.isFinite(Number(v));
 
     /* ═══════════════════════ 🚢 DÉPARTS : VOYAGES ET ÉMIGRATION ═══════════════════════ */
@@ -421,7 +453,7 @@
     };
     // Champs préfixés « c_ » : ne pas se mélanger avec la naturalisation de la personne principale
     function companionRow(c = {}) {
-        return `<div class="transfer-row h-companion-row">${A().collectionPersonField('c_person_id', c.person || null, 'Fiche (époux, enfant, frère…)')}<input name="c_relation" value="${esc(c.relation || '')}" placeholder="Lien (épouse, fils…)">
+        return `<div class="transfer-row h-companion-row">${personPick('c_person_id', c.person)}<input name="c_relation" value="${esc(c.relation || '')}" placeholder="Lien (épouse, fils…)">
             <input name="c_naturalization_date" value="${esc(c.naturalization_date || '')}" placeholder="Naturalisé·e le…"><input name="c_naturalization_place" value="${esc(c.naturalization_place || '')}" placeholder="Lieu / tribunal"><input name="c_naturalization_text" value="${esc(c.naturalization_text || '')}" placeholder="Détails"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
     }
     async function openVoyageDialog(id, personId) {
@@ -544,7 +576,7 @@
                 <label>Du<input name="start_date" value="${f('start_date')}" placeholder="1878-03-12 ou mars 1878"></label>
                 <label>Au<input name="end_date" value="${f('end_date')}" placeholder="1881-06-02"></label>
                 <label>Durée <small>(sinon calculée)</small><input name="duration_text" value="${f('duration_text')}" placeholder="3 ans"></label>
-                <label>Nourrice (fiche)${A().collectionPersonField('nurse_person_id', r.nurse_person_id ? {id: r.nurse_person_id, first_name: r.nurse_person_name || ''} : null, 'Personne de la base…')}</label>
+                <div><span class="pk-lab">Nourrice (fiche)</span>${personPick('nurse_person_id', r.nurse_person_id)}</div>
                 <label>ou nom de la nourrice / famille<input name="nurse_name" value="${f('nurse_name')}" placeholder="Femme Lazare, cultivateurs"></label>
                 <label>Mois de nourrice / pension<input name="wage_text" value="${f('wage_text')}" placeholder="15 francs par mois"></label>
                 <label>Ce qu’il est devenu<input name="outcome" value="${f('outcome')}" placeholder="Rendu à sa mère, décédé en nourrice, majorité…"></label>
@@ -592,7 +624,7 @@
         let c = {people: presetPerson ? [{person: presetPerson, note: ''}] : [], media: []};
         if (id) { const data = await api('coats_of_arms'); c = (data.coats || []).find(x => Number(x.id) === Number(id)) || c; }
         const f = k => esc(c[k] || '');
-        const personRow = (l = {}) => `<div class="transfer-row">${A().collectionPersonField('person_id', l.person || null, 'Personne…')}<input type="text" name="note" value="${esc(l.note || '')}" placeholder="Rôle (chef de nom, branche cadette…)"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+        const personRow = (l = {}) => `<div class="transfer-row">${personPick('person_id', l.person)}<input type="text" name="note" value="${esc(l.note || '')}" placeholder="Rôle (chef de nom, branche cadette…)"><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
         openDialog({
             eyebrow: 'ARMOIRIES', title: id ? 'Modifier les armoiries' : 'Nouvelles armoiries', wide: true, labels: ['coat_of_arms', c.labels],
             body: `<div class="form-grid">
@@ -660,7 +692,6 @@
         if (add) {
             const root = add.closest('form') || document, tpl = root.querySelector(`[data-h-template="${add.dataset.hRowAdd}"]`);
             root.querySelector(`[data-h-rows="${add.dataset.hRowAdd}"]`).insertAdjacentHTML('beforeend', tpl.innerHTML);
-            A().bindCollectionPersonFields(root);
         }
         const rm = event.target.closest?.('[data-h-row-remove]');
         if (rm) rm.closest('.transfer-row, tr')?.remove();
@@ -777,7 +808,7 @@
     }
     const isCurrent = token => token === S().workspaceToken && S().module === 'listes';
     function personPickerAdd(label, attr) {
-        return `<span class="h-person-add">${A().collectionPersonField('h_add_person', null, 'Pour qui ? (nom)')}<button type="button" class="button" ${attr}>${esc(label)}</button></span>`;
+        return `<span class="h-person-add">${personPick('h_add_person', null, {placeholder: 'Pour qui ? Nom, prénom…'})}<button type="button" class="button" ${attr}>${esc(label)}</button></span>`;
     }
     function pickedPerson(button) { return Number(button.closest('.h-person-add')?.querySelector('[name=h_add_person]')?.value) || 0; }
 
@@ -791,7 +822,6 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${pageHeader('LISTES', 'Départs et émigration', 'Les branches parties au Québec, aux États-Unis, en Argentine, en Algérie… Chaque voyage se remplit depuis le bloc « Départs / émigration » de la fiche (case à cocher dans IDENTITÉ → Modifier la personne).')}
             <div class="collection-toolbar">${personPickerAdd('+ Voyage', 'data-h-voyage-add-list')}</div>
             ${rows.length ? `<p class="muted">${plural(rows.length, 'voyage', 'voyages')} · ${Object.entries(destinations).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${voyagePaths(rows)}<div class="h-records h-records-grid">${rows.map(v => voyageCardHtml(v, {withPerson: true})).join('')}</div>` : empty('Aucun voyage pour l’instant', {icon: '🚢', hint: 'Coche « Départs / émigration » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le voyage dans son bloc.'})}</section>`;
-        A().bindCollectionPersonFields(A().$('#workspace'));
         A().$('[data-h-voyage-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return toast('Choisis d’abord la personne.', 'error'); openVoyageDialog(0, pid); });
     };
 
@@ -806,7 +836,6 @@
             <div class="collection-toolbar">${personPickerAdd('+ Placement', 'data-h-placement-add-list')}</div>
             ${rows.length ? `<p class="muted">${plural(rows.length, 'placement', 'placements')} · ${Object.entries(places).sort((a, b) => b[1] - a[1]).map(([d, n]) => `${esc(d)} (${n})`).join(' · ')}</p>${placementMap(rows)}
             <table class="data-table"><thead><tr><th>Enfant</th><th>Situation</th><th>Lieu</th><th>Période</th><th>Durée</th><th>Nourrice / institution</th><th></th></tr></thead><tbody>${rows.map(r => `<tr><td>${personLink(r.person_id, r.person_name)}</td><td>${esc(r.kind_label)}</td><td>${esc(r.place_text)}${r.origin_text ? `<br><small>depuis ${esc(r.origin_text)}</small>` : ''}</td><td>${esc([r.start_date, r.end_date].filter(Boolean).join(' → '))}</td><td>${esc(r.duration)}</td><td>${esc([r.nurse_person_name, r.nurse_name, r.institution].filter(Boolean).join(' · '))}</td><td>${tools(`data-h-placement-edit="${r.id}" data-h-placement-person="${r.person_id}"`, `data-h-placement-delete="${r.id}"`, 'ce placement')}</td></tr>`).join('')}</tbody></table>` : empty('Aucun placement pour l’instant', {icon: '👶', hint: 'Coche « Enfant placé » sur une fiche (IDENTITÉ → Modifier la personne), puis ajoute le placement dans son bloc.'})}</section>`;
-        A().bindCollectionPersonFields(A().$('#workspace'));
         A().$('[data-h-placement-add-list]').addEventListener('click', event => { const pid = pickedPerson(event.currentTarget); if (!pid) return toast('Choisis d’abord la personne.', 'error'); openPlacementDialog(0, pid); });
     };
 
@@ -860,7 +889,7 @@
     function probateFormHtml(inv) {
         const f = k => esc(inv[k] || '');
         return `<form class="maintenance-panel collection-form" id="h-probate-form"><h3>${inv.id ? 'Modifier l’inventaire' : 'Nouvel inventaire après décès'}</h3>
-            <div class="form-grid"><label>Défunt(e)${A().collectionPersonField('person_id', inv.person || null, 'Personne de la base…')}</label><label>Date<input name="date_text" value="${f('date_text')}" placeholder="12 mars 1782"></label>
+            <div class="form-grid"><div><span class="pk-lab">Défunt(e)</span>${personPick('person_id', inv.person)}</div><label>Date<input name="date_text" value="${f('date_text')}" placeholder="12 mars 1782"></label>
             <label>Notaire<input name="notary" value="${f('notary')}" placeholder="Me Dubois, notaire à Tulle"></label><label>Lieu<input name="place_text" value="${f('place_text')}"></label>
             <label>Monnaie<select name="currency"><option value="livre" ${inv.currency === 'livre' ? 'selected' : ''}>Livres tournois (l, s, d)</option><option value="franc" ${inv.currency === 'franc' ? 'selected' : ''}>Francs</option><option value="nf" ${inv.currency === 'nf' ? 'selected' : ''}>Nouveaux francs (1960-2001)</option></select></label><label>Cote<input name="reference" value="${f('reference')}" placeholder="AD19, 3 E 1234"></label></div>
             <h4>Objets, pièce par pièce</h4><p class="muted">Valeur : « 12 l 5 s 3 d » (livres, sols, deniers), « 12 livres 5 sols », ou un nombre (« 152,50 »). La catégorie « Dettes » est déduite du total.</p>
@@ -873,7 +902,7 @@
     }
     function bindProbateForm(inv) {
         const form = A().$('#h-probate-form');
-        A().bindCollectionPersonFields(form); bindMediaEditor(form); form.scrollIntoView({block: 'start'});
+        bindMediaEditor(form); form.scrollIntoView({block: 'start'});
         const live = () => {
             const cur = form.elements.currency.value; let total = 0, debts = 0;
             form.querySelectorAll('.h-item-row').forEach(r => { const v = parseAmount(r.querySelector('[name=value_text]').value) || 0; if (r.querySelector('[name=category]').value === 'dettes') debts += v; else total += v; });
@@ -928,26 +957,25 @@
     };
     function paperFormHtml(p, locations) {
         const f = k => esc(p[k] || '');
-        const personRow = (person = null) => `<div class="transfer-row">${A().collectionPersonField('person_id', person, 'Personne concernée…')}<button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
         return `<form class="maintenance-panel collection-form" id="h-paper-form"><h3>${p.id ? 'Modifier le document' : 'Nouveau document'}</h3>
             <div class="form-grid"><label>N° de classement<input name="class_number" value="${f('class_number')}" placeholder="P-0001"></label><label>Titre<input name="title" required value="${f('title')}" placeholder="Livret de famille Dupont-Martin"></label>
             <label>Type<input name="kind" value="${f('kind')}" list="h-paper-kinds"><datalist id="h-paper-kinds">${paperKinds.map(k => `<option>${esc(k)}</option>`).join('')}</datalist></label><label>Date<input name="date_text" value="${f('date_text')}" placeholder="1923"></label>
             <label>Où il est rangé<input name="storage_location" value="${f('storage_location')}" list="h-paper-locations" placeholder="Boîte 3, classeur bleu"><datalist id="h-paper-locations">${locations.map(l => `<option>${esc(l)}</option>`).join('')}</datalist></label>
             <label>Chez qui<input name="holder_text" value="${f('holder_text')}" placeholder="Chez moi, chez tante Monique…"></label><label>État<input name="condition_text" value="${f('condition_text')}" placeholder="Bon, déchiré, taché…"></label>
             <label class="span-2">Description<textarea name="description" rows="2">${f('description')}</textarea></label></div>
-            <h4>Personnes concernées</h4><div class="h-rows" data-h-rows="paper-people">${(p.people?.length ? p.people : [null]).map(personRow).join('')}</div><button type="button" class="button small secondary" data-h-row-add="paper-people">+ Personne</button><template data-h-template="paper-people">${personRow()}</template>
+            <h4>Personnes concernées</h4>${pfLocal({name: 'paper_people', kind: 'person', multiple: true, value: (p.people || []).map(x => Number(x?.id || x)).filter(Boolean)})}
             <h4>Scan dans l’application</h4>${mediaEditorHtml('family_paper', p.id, p.media, [['', 'Scan (ou photo) du document']])}
             ${LP('family_paper', p.labels)}<div class="page-actions action-zone"><button class="button" type="submit">Enregistrer</button><button class="button secondary" type="button" data-h-paper-cancel>Annuler</button>${p.id ? '<button class="button secondary danger" type="button" data-h-paper-delete>Supprimer</button>' : ''}</div></form>`;
     }
     function bindPaperForm(p) {
         const form = A().$('#h-paper-form');
-        A().bindCollectionPersonFields(form); bindMediaEditor(form); form.scrollIntoView({block: 'start'});
+        bindMediaEditor(form); form.scrollIntoView({block: 'start'});
         form.querySelector('[data-h-paper-cancel]').addEventListener('click', () => A().renderList());
         form.querySelector('[data-h-paper-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('', {title: `Supprimer « ${p.title} » de l’inventaire ?`, okLabel: 'Supprimer le document'})) return; await api('delete_family_paper', {}, {method: 'POST', body: {id: p.id}}); toast('Supprimé.'); A().renderList(); });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form);
-            const people = [...form.querySelectorAll('[name=person_id]')].map(i => Number(i.value)).filter(Boolean);
+            const people = PK().pickerValue(form.querySelector('.pk[data-picker]')).map(Number).filter(Boolean);
             try {
                 const saved = await api('save_family_paper', {}, {method: 'POST', body: {...v, id: p.id, people}});
                 const n = await uploadMediaEditor(form, 'family_paper', saved.result.id);
@@ -1026,7 +1054,7 @@
     };
     function tripFormHtml(t) {
         const people = t.people || [], rowsById = Object.fromEntries((t.people_rows || []).map(p => [p.id, p]));
-        const row = (p = {}) => `<div class="transfer-row h-trip-person">${A().collectionPersonField('person_id', rowsById[p.id] || null, 'Ancêtre ou personne…')}<select name="mode"><option value="person" ${p.mode === 'person' ? 'selected' : ''}>cette personne seulement</option><option value="ascendants" ${p.mode === 'ascendants' || !p.mode ? 'selected' : ''}>et ses ascendants</option><option value="descendants" ${p.mode === 'descendants' ? 'selected' : ''}>et ses descendants</option></select><label class="h-inline">sur <input type="number" name="generations" min="1" max="12" value="${Number(p.generations) || 4}" class="h-narrow"> générations</label><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
+        const row = (p = {}) => `<div class="transfer-row h-trip-person">${personPick('person_id', p.id || null)}<select name="mode"><option value="person" ${p.mode === 'person' ? 'selected' : ''}>cette personne seulement</option><option value="ascendants" ${p.mode === 'ascendants' || !p.mode ? 'selected' : ''}>et ses ascendants</option><option value="descendants" ${p.mode === 'descendants' ? 'selected' : ''}>et ses descendants</option></select><label class="h-inline">sur <input type="number" name="generations" min="1" max="12" value="${Number(p.generations) || 4}" class="h-narrow"> générations</label><button type="button" class="button small secondary" data-h-row-remove aria-label="Retirer">✕</button></div>`;
         return `<form class="maintenance-panel collection-form" id="h-trip-form"><h3>${t.id ? 'Modifier le circuit' : 'Nouveau circuit'}</h3>
             <div class="form-grid"><label>Nom<input name="title" required value="${esc(t.title || '')}" placeholder="Sur les traces des Dupont en Corrèze"></label><label>Point de départ<input name="start_place" value="${esc(t.start_place || '')}" placeholder="Brive-la-Gaillarde (hôtel, gîte…)"></label>
             <label>Du<input type="date" name="date_start" value="${esc(t.date_start || '')}"></label><label>Au<input type="date" name="date_end" value="${esc(t.date_end || '')}"></label>
@@ -1039,7 +1067,7 @@
     }
     function bindTripForm(t) {
         const form = A().$('#h-trip-form');
-        A().bindCollectionPersonFields(form); form.scrollIntoView({block: 'start'});
+        form.scrollIntoView({block: 'start'});
         form.querySelector('[data-h-trip-cancel]').addEventListener('click', async () => { if (drafts.length && !await A().confirmBox('Les étapes ajoutées ne seront pas enregistrées.', {title: 'Quitter sans enregistrer ce circuit ?', okLabel: 'Quitter sans enregistrer', danger: true})) return; ext.lists.field_trips(++S().workspaceToken, t.id ? {trip: t.id} : {back: true}); });
         // étapes ajoutées pendant la création : gardées ici, enregistrées avec le circuit
         const drafts = [], draftBox = form.querySelector('[data-h-trip-drafts]');
@@ -1077,7 +1105,6 @@
     function stopExtraForm(x, peopleMap) {
         const v = k => esc(x[k] || '');
         const ck = (c = {text: '', done: 0}) => `<div class="h-ck-row"><input type="checkbox" data-ck-done ${c.done ? 'checked' : ''} title="Fait"><input data-ck-text value="${esc(c.text)}" placeholder="Ex. : prendre la carte de lecteur"><button type="button" class="icon-button" data-ck-del title="Retirer">×</button></div>`;
-        const chip = pid => `<span class="label-chip" data-x-person="${Number(pid)}">${esc(peopleMap[pid] ? A().personName(peopleMap[pid]) : '#' + pid)} <button type="button" class="link-button" data-x-person-del aria-label="Retirer">×</button></span>`;
         return `<details class="h-stop-sec" open><summary>🚗 Logistique</summary><div class="form-grid">
                 <label>Arrivée<input type="time" name="x_time_from" value="${v('time_from')}"></label><label>Départ<input type="time" name="x_time_to" value="${v('time_to')}"></label>
                 <label>Durée prévue<input name="x_duration" value="${v('duration')}" placeholder="1 h 30"></label><label>Transport<select name="x_transport">${['', 'Voiture', 'À pied', 'Vélo', 'Train', 'Bus / car', 'Bateau', 'Avion'].map(o => `<option ${x.transport === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label>
@@ -1093,7 +1120,7 @@
                 <label class="span-2">Cotes, registres, tombes à voir<textarea name="x_references" rows="2" placeholder="3 E 45/12 (BMS 1702-1730), carré B rang 4…">${v('references')}</textarea></label></div></details>
             <details class="h-stop-sec" open><summary>🎯 Recherche</summary><div class="form-grid">
                 <label class="span-2">Ce que je cherche<textarea name="x_goals" rows="2" placeholder="Acte de mariage de Jean et Marie (vers 1745), tombe des Dupont…">${v('goals')}</textarea></label>
-                <div class="span-2"><span class="section-label">Personnes recherchées</span><div class="h-x-people" data-x-people>${(x.person_ids || []).map(chip).join('')}</div><span class="h-person-add">${A().collectionPersonField('x_person_pick', null, 'Ajouter une personne (nom)')}<button type="button" class="button small secondary" data-x-person-add>Ajouter</button></span></div>
+                <div class="span-2"><span class="section-label">Personnes recherchées</span><div class="h-x-people" data-x-people>${pf({name: 'x_person_pick', kind: 'person', multiple: true, value: (x.person_ids || []).map(Number).filter(Boolean)})}</div></div>
                 <label>Résultat<select name="x_result">${[['todo', 'À faire'], ['found', 'Trouvé'], ['partial', 'En partie'], ['none', 'Rien trouvé']].map(([k, l]) => `<option value="${k}" ${(x.result || 'todo') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="span-2">Ce que j’ai trouvé (compte rendu après la visite)<textarea name="x_findings" rows="3">${v('findings')}</textarea></label></div></details>
             <details class="h-stop-sec" open><summary>✅ Liste à cocher</summary><div data-ck-list>${(x.checklist || []).map(ck).join('')}</div><button type="button" class="button small secondary" data-ck-add>+ Ligne</button></details>`;
@@ -1102,21 +1129,18 @@
         const list = dlg.querySelector('[data-ck-list]');
         dlg.querySelector('[data-ck-add]')?.addEventListener('click', () => { list.insertAdjacentHTML('beforeend', '<div class="h-ck-row"><input type="checkbox" data-ck-done title="Fait"><input data-ck-text placeholder="Ex. : prendre la carte de lecteur"><button type="button" class="icon-button" data-ck-del title="Retirer">×</button></div>'); list.lastElementChild.querySelector('[data-ck-text]').focus(); });
         list?.addEventListener('click', e => { if (e.target.closest('[data-ck-del]')) e.target.closest('.h-ck-row').remove(); });
-        const people = dlg.querySelector('[data-x-people]');
-        people?.addEventListener('click', e => { if (e.target.closest('[data-x-person-del]')) e.target.closest('[data-x-person]').remove(); });
-        dlg.querySelector('[data-x-person-add]')?.addEventListener('click', e => {
-            const box = e.currentTarget.closest('.h-person-add'), pid = Number(box.querySelector('[name=x_person_pick]')?.value) || 0;
-            if (!pid) return toast('Choisis d’abord la personne dans la liste.', 'error');
-            if (people.querySelector(`[data-x-person="${pid}"]`)) return;
-            const name = box.querySelector('input[type=text], input:not([type=hidden])')?.value || '#' + pid;
-            people.insertAdjacentHTML('beforeend', `<span class="label-chip" data-x-person="${pid}">${esc(name)} <button type="button" class="link-button" data-x-person-del aria-label="Retirer">×</button></span>`);
-        });
+    }
+    /** Personnes recherchées d'une étape : les fiches choisies dans le menu (numéro + nom). */
+    function stopPeople(form) {
+        const el = form.querySelector('[data-x-people] .pk'); if (!el) return [];
+        let items = []; try { items = JSON.parse(el.dataset.pkValue || '[]'); } catch (_) {}
+        return (Array.isArray(items) ? items : []).filter(it => it && !it.free && Number(it.id));
     }
     function readStopExtra(form) {
         const x = {};
         form.querySelectorAll('[name^="x_"]').forEach(el => { if (el.name === 'x_person_pick') return; x[el.name.slice(2)] = el.type === 'checkbox' ? (el.checked ? 1 : 0) : el.value; });
         x.checklist = [...form.querySelectorAll('.h-ck-row')].map(r => ({text: r.querySelector('[data-ck-text]').value.trim(), done: r.querySelector('[data-ck-done]').checked ? 1 : 0})).filter(c => c.text);
-        x.person_ids = [...form.querySelectorAll('[data-x-person]')].map(c => Number(c.dataset.xPerson));
+        x.person_ids = stopPeople(form).map(p => Number(p.id));
         return x;
     }
     async function renderTrip(token, id) {
@@ -1195,7 +1219,7 @@
                     <label>Notes<textarea name="notes" rows="2">${esc(s.notes || '')}</textarea></label>`,
             wide: true,
             onOpen: dlg => bindStopExtraForm(dlg),
-            onSubmit: async form => { const extra = readStopExtra(form); extra.person_names = Object.fromEntries([...form.querySelectorAll('[data-x-person]')].map(c => [c.dataset.xPerson, c.firstChild?.textContent.trim() || ''])); await onSave(values(form), extra); },
+            onSubmit: async form => { const extra = readStopExtra(form); extra.person_names = Object.fromEntries(stopPeople(form).map(p => [p.id, p.title || ''])); await onSave(values(form), extra); },
             onDelete,
         });
     }
@@ -1688,8 +1712,8 @@
     ext.exportPanels.push(() => `<section class="maintenance-panel" id="h-branch-export"><h3>👨‍👩‍👧 GEDCOM d’une seule branche</h3>
         <p>Pour un cousin qui ne s’intéresse qu’à sa branche : un GEDCOM limité aux <b>ascendants d’une personne</b>, ou aux <b>descendants d’un couple</b>, au lieu de toute ta base. Combine-le avec « Pour partager » pour masquer les vivants.</p>
         <form id="h-branch-form" class="form-grid"><label>Branche<select name="branch_mode"><option value="ascendants">Ascendants d’une personne</option><option value="descendants">Descendants d’un couple (ou d’une personne)</option></select></label>
-            <label>Personne${A().collectionPersonField('branch_person', null, 'Personne…')}</label>
-            <label data-h-partner>Conjoint (pour un couple)${A().collectionPersonField('branch_partner', null, 'Conjoint…')}</label>
+            <div><span class="pk-lab">Personne</span>${personPick('branch_person', null)}</div>
+            <div data-h-partner><span class="pk-lab">Conjoint (pour un couple)</span>${personPick('branch_partner', null)}</div>
             <label>Générations, au plus<input type="number" name="branch_generations" min="1" max="60" value="60"></label>
             <label class="checkbox-line" data-h-spouses><input type="checkbox" name="branch_spouses" checked> Avec les conjoints des descendants</label>
             <label>Version<select name="gedcom_version"><option value="7">GEDCOM 7.0</option><option value="5.5.1">GEDCOM 5.5.1</option></select></label>
@@ -1699,7 +1723,6 @@
     ext.afterExport.push(() => {
         const form = document.getElementById('h-branch-form');
         if (!form) return;
-        A().bindCollectionPersonFields(form);
         const sync = () => { const desc = form.elements.branch_mode.value === 'descendants'; form.querySelector('[data-h-partner]').hidden = !desc; form.querySelector('[data-h-spouses]').hidden = !desc; };
         form.elements.branch_mode.addEventListener('change', sync); sync();
         form.addEventListener('submit', event => {

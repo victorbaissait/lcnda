@@ -14,6 +14,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.lists = ext.lists || {};
     const esc = v => A().escapeHtml(v ?? '');
+    const PKF = o => window.LCNDA_PICKER.pickerField(o); // le menu de choix unique (docs/PICKER.md)
     const api = (...a) => A().api(...a);
     const toast = (...a) => A().toast(...a);
     const S = () => A().state;
@@ -1226,7 +1227,7 @@
                 tl: () => t === 'timeline' ? `<label>Titre <input data-bd-str="title" value="${esc(one.title || '')}" placeholder="Frise"></label><label>Événements <select data-bd-sel="tlMode"><option value="person" ${(one.tlMode || 'person') === 'person' ? 'selected' : ''}>de la personne</option><option value="family" ${one.tlMode === 'family' ? 'selected' : ''}>de la personne, son couple et ses enfants</option></select></label><button type="button" class="button small secondary" data-bd-pickperson>👤 Changer de personne</button>${numField('fs', 'Taille du texte', 9, 13, 1, one.fs || 12)}` : '',
                 map: () => t === 'map' ? `<label>Titre <input data-bd-str="title" value="${esc(one.title || '')}" placeholder="Carte"></label>
                     <label>Lieux de… <select data-bd-mapkind>${[['', 'aucune fiche (seulement mes repères)'], ['person', 'une personne'], ['family', 'une personne et sa famille'], ['investigation', 'la personne d’une enquête']].map(([k, l]) => `<option value="${k}" ${String(one.mapSrc || '').split(':')[0] === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
-                    ${one.mapSrc ? `<p class="muted"><small data-bd-mapsrclabel>…</small></p>` : ''}${String(one.mapSrc || '').startsWith('investigation') ? '' : '<button type="button" class="button small secondary" data-bd-mapperson>👤 Choisir la personne</button>'}<label data-bd-mapinvbox ${String(one.mapSrc || '').startsWith('investigation') ? '' : 'hidden'}>Enquête <select data-bd-mapinv><option value="">…</option></select></label>
+                    ${one.mapSrc ? `<p class="muted"><small data-bd-mapsrclabel>…</small></p>` : ''}${String(one.mapSrc || '').startsWith('investigation') ? '' : '<button type="button" class="button small secondary" data-bd-mapperson>👤 Choisir la personne</button>'}<div data-bd-mapinvbox ${String(one.mapSrc || '').startsWith('investigation') ? '' : 'hidden'}><span class="pk-lab">Enquête</span>${PKF({name: 'bd_mapinv', kind: 'investigation', value: String(one.mapSrc || '').startsWith('investigation:') ? Number(String(one.mapSrc).split(':')[1]) || null : null})}</div>
                     <label class="checkbox-line"><input type="checkbox" data-bd-check="mapPath" ${one.mapPath ? 'checked' : ''}> <span>relier les lieux dans l’ordre (le parcours)</span></label>
                     <label>Poser un repère</label><input type="search" placeholder="Une commune, un lieu…" data-bd-pinq><div class="h-bd-results" data-bd-pinres></div>
                     ${(one.pins || []).length ? `<ul class="h-bd-pins">${one.pins.map((pn, i) => `<li><span class="h-sw" style="background:${esc(pn.color || '#d0021b')}"></span><input data-bd-pinlabel="${i}" value="${esc(pn.label || '')}"><button type="button" class="h-bd-unlink" data-bd-pindel="${i}" title="Enlever ce repère">×</button></li>`).join('')}</ul>` : ''}` : '',
@@ -1459,20 +1460,20 @@
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Ajouter au tableau', wide: true, submitLabel: 'Fermer',
                 body: `<div class="h-bd-add">
                     <section data-k="files"><h4>📎 Des fichiers</h4><p class="muted">Images, GIF, sons, vidéos, PDF (ou glisse-les sur le tableau, ou colle une image).</p><input type="file" multiple accept="image/*,audio/*,video/*,application/pdf,.aif,.aiff" data-bd-files></section>
-                    <section data-k="media"><h4>🖼 Un média de l’app</h4><input type="search" placeholder="Titre, cote…" data-bd-msearch><div class="h-bd-results" data-bd-mres></div></section>
+                    <section data-k="media"><h4>🖼 Un média de l’app</h4>${PKF({name: 'bd_media', kind: 'media'})}</section>
                     <section data-k="web"><h4>🌐 D’ailleurs</h4><label>Adresse d’une image ou d’un site<input data-bd-url placeholder="https://…"></label><button type="button" class="button small" data-bd-addurl>Poser</button></section>
-                    <section data-k="person"><h4>👤 Une fiche</h4>${A().collectionPersonField('bd_person', null, 'Nom de la personne')}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
+                    <section data-k="person"><h4>👤 Une fiche</h4>${PKF({name: 'bd_person', kind: 'person'})}<button type="button" class="button small" data-bd-addperson>Poser la fiche</button></section>
                     <section data-k="screen"><h4>📺 Un écran de l’app</h4><p class="muted">Une liste, un diagramme, une statistique, la carte, un village, une de tes listes…</p>${sc ? sc.select('list:villages', 'data-bd-screen') : ''}<label class="checkbox-line"><input type="checkbox" data-bd-screenprev checked> <span>avec l’aperçu vivant</span></label><button type="button" class="button small" data-bd-addscreen>Poser l’écran</button></section>
                     <section data-k="widget"><h4>✨ Un de mes widgets</h4>${own.length ? `<select data-bd-widgetsel>${own.map(([k, d]) => `<option value="${esc(k)}">${esc((d.icon || '🧱') + ' ' + (d.name || 'Mon widget'))}</option>`).join('')}</select><button type="button" class="button small" data-bd-addwidget>Poser le widget</button>` : '<p class="muted">Crée d’abord un widget (Maintenance → Éditeur de widgets).</p>'}</section>
                     <section data-k="recueil"><h4>📚 Un recueil</h4><input type="search" placeholder="Titre du recueil" data-bd-rsearch><div class="h-bd-results" data-bd-rres></div></section>
-                    <section data-k="tag"><h4>🏷 Une étiquette</h4><input type="search" placeholder="Étiquette de l’app, ou un mot à toi" data-bd-tsearch><div class="h-bd-results" data-bd-tres></div><button type="button" class="button small" data-bd-addtag>Poser ce mot</button></section>
+                    <section data-k="tag"><h4>🏷 Une étiquette</h4>${PKF({name: 'bd_label', kind: 'label'})}<input placeholder="ou un mot à toi" data-bd-tsearch><button type="button" class="button small" data-bd-addtag>Poser ce mot</button></section>
                     <section data-k="table"><h4>▦ Un tableur</h4><p class="muted">Une grille à remplir, avec des formules (=SOMME…) ; on peut y coller un bout d’Excel ou de Numbers.</p><button type="button" class="button small" data-bd-addtable>Poser un tableur</button></section>
                     <section data-k="folder"><h4>📁 Un dossier</h4><p class="muted">Un tableau dans le tableau : double-clic pour y entrer.</p><input data-bd-foldername placeholder="Nom du dossier"><button type="button" class="button small" data-bd-addfolder>Créer le dossier</button></section>
-                    <section data-k="tree"><h4>🌳 Un arbre automatique</h4><p class="muted">Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches.</p>${A().collectionPersonField('bd_tree', null, 'Nom de la personne')}
+                    <section data-k="tree"><h4>🌳 Un arbre automatique</h4><p class="muted">Une personne, et ses parents, grands-parents ou enfants posés en fiches reliées par des flèches.</p>${PKF({name: 'bd_tree', kind: 'person'})}
                         <div class="h-bd-row"><label>Montrer <select data-bd-treemode><option value="up">ses ancêtres</option><option value="down">ses descendants</option><option value="near">sa famille proche</option></select></label><label>Générations <input type="number" min="1" max="6" value="3" data-bd-treegens class="h-bd-numbox"></label></div>
                         <label class="checkbox-line"><input type="checkbox" data-bd-treespouse checked> <span>avec les conjoints</span></label><label class="checkbox-line"><input type="checkbox" data-bd-treearrow checked> <span>flèches (sinon des traits)</span></label><button type="button" class="button small" data-bd-addtree>Poser l’arbre</button></section>
-                    <section data-k="timeline"><h4>🗓 Une frise vivante</h4><p class="muted">Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche.</p>${A().collectionPersonField('bd_tl', null, 'Nom de la personne')}<label>Événements <select data-bd-tlmode><option value="person">de la personne</option><option value="family">de la personne, son couple et ses enfants</option></select></label><button type="button" class="button small" data-bd-addtl>Poser la frise</button></section>
-                    <section data-k="map"><h4>🗺 Une carte</h4><p class="muted">Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères.</p>${A().collectionPersonField('bd_map', null, 'Nom de la personne (facultatif)')}<label>Lieux de <select data-bd-mapmode><option value="person">la personne</option><option value="family">la personne et sa famille</option><option value="">personne : seulement mes repères</option></select></label><button type="button" class="button small" data-bd-addmap>Poser la carte</button></section>
+                    <section data-k="timeline"><h4>🗓 Une frise vivante</h4><p class="muted">Les événements d’une personne (ou de sa famille) placés tout seuls sur une ligne du temps ; elle suit la fiche.</p>${PKF({name: 'bd_tl', kind: 'person'})}<label>Événements <select data-bd-tlmode><option value="person">de la personne</option><option value="family">de la personne, son couple et ses enfants</option></select></label><button type="button" class="button small" data-bd-addtl>Poser la frise</button></section>
+                    <section data-k="map"><h4>🗺 Une carte</h4><p class="muted">Les lieux d’une personne, de sa famille ou d’une enquête ; tu peux y poser tes repères.</p>${PKF({name: 'bd_map', kind: 'person', placeholder: 'Nom de la personne (facultatif)'})}<label>Lieux de <select data-bd-mapmode><option value="person">la personne</option><option value="family">la personne et sa famille</option><option value="">personne : seulement mes repères</option></select></label><button type="button" class="button small" data-bd-addmap>Poser la carte</button></section>
                     <section data-k="frame"><h4>▭ Un cadre</h4><p class="muted">Une zone nommée (« Branche paternelle », « Sources à voir ») : ce qui est dedans bouge avec elle ; on peut la replier.</p><input data-bd-framename placeholder="Nom du cadre"><button type="button" class="button small" data-bd-addframe>Poser le cadre</button></section>
                     <section data-k="memo"><h4>🎙 Un mémo vocal</h4><p class="muted">Enregistre ta voix ici : le son est rangé avec le tableau et posé dessus.</p><button type="button" class="button small" data-bd-addmemo>🎙 Enregistrer</button></section>
                     <section data-k="import"><h4>💾 Importer un tableau</h4><p class="muted">Un fichier « .lcnda-tableau.json » (⬇ Exporter → Fichier du tableau) : il devient un nouveau tableau.</p><input type="file" accept=".json,application/json" data-bd-import></section>
@@ -1484,12 +1485,16 @@
                     dlg.querySelector('[data-bd-import]').addEventListener('change', async e => { const f = e.target.files[0]; if (!f) return; close(); importBoard(f); });
                     dlg.querySelector('[data-bd-files]').addEventListener('change', e => { uploadAndPlace(e.target.files); close(); });
                     const live = (input, box, fn, pick) => { let t = 0; input.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const q = input.value.trim(); if (q.length < 1) { box.innerHTML = ''; return; } const rows = await fn(q).catch(() => []); box.innerHTML = rows.slice(0, 12).map((r, i) => `<button type="button" data-i="${i}">${r.html}</button>`).join('') || '<small class="muted">Rien trouvé.</small>'; box.querySelectorAll('[data-i]').forEach(bt => bt.addEventListener('click', () => { pick(rows[Number(bt.dataset.i)]); close(); })); }, 250); }); };
-                    live(dlg.querySelector('[data-bd-msearch]'), dlg.querySelector('[data-bd-mres]'), async q => ((await api('heritage_media_search', {q})).media || []).map(m => ({m, html: `${esc(m.title || m.filename)} <small class="muted">${esc(m.media_type || '')}</small>`})),
-                        async r => { media[r.m.id] = r.m; const k = kindOfMedia(r.m); place({type: 'media', media_id: Number(r.m.id), w: k === 'audio' ? 300 : 280, h: k === 'audio' ? 92 : 200}); });
+                    // média et étiquette : le menu de choix unique ; la chose est posée dès qu'elle est choisie
+                    dlg.addEventListener('picker-change', async e => {
+                        const it = e.detail.item; if (!it?.id) return;
+                        if (e.detail.name === 'bd_media') {
+                            let m = null; try { m = (await api('media_brief', {ids: String(it.id)})).media?.[it.id]; } catch (_) {}
+                            m = {...(m || {title: it.title}), id: Number(it.id)}; media[it.id] = m; const k = kindOfMedia(m);
+                            place({type: 'media', media_id: Number(it.id), w: k === 'audio' ? 300 : 280, h: k === 'audio' ? 92 : 200}); close();
+                        } else if (e.detail.name === 'bd_label') { place({type: 'tag', text: it.title, label_id: Number(it.id), fill: it.color || '#0066cc', color: '#ffffff', w: 160, h: 38}); close(); }
+                    });
                     live(dlg.querySelector('[data-bd-rsearch]'), dlg.querySelector('[data-bd-rres]'), async q => ((await api('recueils', {q})).recueils || []).map(r => ({r, html: `${esc((r.icon || '📚') + ' ' + r.title)}`})), r => place({type: 'recueil', recueil_id: Number(r.r.id), title: r.r.title, w: 220, h: 130}));
-                    let labels = null;
-                    live(dlg.querySelector('[data-bd-tsearch]'), dlg.querySelector('[data-bd-tres]'), async q => { labels = labels || (await api('my_lists')).labels || []; return labels.filter(l => l.name.toLowerCase().includes(q.toLowerCase())).map(l => ({l, html: `<span class="h-bi-tag" style="background:${esc(l.color || '#0066cc')}">🏷 ${esc(l.name)}</span>`})); },
-                        r => place({type: 'tag', text: r.l.name, label_id: Number(r.l.id), fill: r.l.color || '#0066cc', color: '#ffffff', w: 160, h: 38}));
                     dlg.querySelector('[data-bd-addtag]').addEventListener('click', () => { const v = dlg.querySelector('[data-bd-tsearch]').value.trim(); if (!v) return; place({type: 'tag', text: v, fill: '#0066cc', color: '#ffffff', w: Math.max(90, v.length * 10 + 50), h: 38}); close(); });
                     dlg.querySelector('[data-bd-addurl]').addEventListener('click', () => { const v = dlg.querySelector('[data-bd-url]').value.trim(); if (!/^https?:\/\//.test(v)) { toast('Une adresse qui commence par https://', 'error'); return; } addUrl(v); close(); });
                     dlg.querySelector('[data-bd-addtable]').addEventListener('click', () => { const t = place(newTable()); sel = new Set([t.id]); cellSel = {id: t.id, r: 0, c: 0}; render(); close(); });
@@ -1511,9 +1516,9 @@
         root.querySelector('[data-bd-lockall]').addEventListener('click', () => { boardLocked = !boardLocked; showLock(); save(); toast(boardLocked ? 'Tableau verrouillé : on peut le regarder et ouvrir ce qu’il contient, rien ne bouge.' : 'Tableau déverrouillé.'); });
         // ── associé à… (une fiche, une enquête, une partie d'enquête, une battue, un projet, un recueil, un autre tableau) ──
         const LINK_KINDS = {person: ['👤', 'Une personne'], investigation: ['🔎', 'Une enquête'], battue: ['🧭', 'Une battue'], atelier_project: ['🛠', 'Un projet de l’Atelier'], recueil: ['📚', 'Un recueil'], place: ['📍', 'Un lieu (sa commune)'], media: ['🖼', 'Un média (photo, acte, son…)'], label: ['🏷', 'Une étiquette'], family: ['💑', 'Une famille (un couple)'], event: ['📅', 'Un événement'], pet: ['🐾', 'Un animal'], board: ['🧩', 'Un autre tableau']};
-        const SEARCH_KINDS = {place: async q => ((await api('quick_search', {q})).places || []).map(r => ({id: r.id, title: r.name + (r.county ? ` (${r.county})` : ''), key: 'n:' + String(r.name || '').toLowerCase().trim() + '|' + String(r.county || '').toLowerCase().trim()})),
-            media: async q => ((await api('heritage_media_search', {q})).media || []).map(m => ({id: m.id, title: m.title || m.filename})),
-            family: async q => (await api('board_family_search', {q})).families || [],
+        // ces sortes se choisissent avec le menu de choix unique ; familles et événements gardent leur recherche
+        const PICK_KINDS = ['person', 'investigation', 'battue', 'place', 'media', 'label'];
+        const SEARCH_KINDS = {family: async q => (await api('board_family_search', {q})).families || [],
             event: async q => ((await api('list', {type: 'events', q})).rows || []).slice(0, 15).map(e => ({id: e.id, title: [e.type, e.date_text || e.year, e.person && '— ' + e.person, e.place && '(' + e.place + ')'].filter(Boolean).join(' ')}))};
         function renderLinks() {
             root.querySelector('[data-bd-links]').innerHTML = links.map((l, i) => `<span class="h-bd-link"><button type="button" class="link-button" data-bd-linkgo="${i}" title="Ouvrir">${LINK_KINDS[l.kind]?.[0] || '🔗'} ${esc(l.label || '#' + l.id)}${l.part ? ` · ${esc(l.part)}` : ''}</button><button type="button" class="h-bd-unlink" data-bd-unlink="${i}" title="Ne plus associer" aria-label="Ne plus associer">×</button></span>`).join('')
@@ -1541,12 +1546,12 @@
             if (l.kind === 'media') { try { const m = (await api('media_brief', {ids: String(l.id)})).media?.[l.id]; if (m) A().openLightbox?.([{...m, id: Number(l.id)}], 0, true); else toast('Média introuvable.', 'error'); } catch (error) { toast(error.message, 'error'); } }
         }
         async function linkDialog() {
-            const [inv, bat, ate, rec, brd, lab, pts] = await Promise.all([api('research_lists', {kind: 'investigations'}), api('research_lists', {kind: 'battues'}), api('research_lists', {kind: 'atelier'}), api('recueils', {q: ''}), api('boards', {owner_type: 'all'}), api('my_lists'), api('pets', {})].map(p => p.catch(() => ({}))));
-            const opts = {investigation: inv.rows || [], battue: bat.rows || [], atelier_project: ate.rows || [], recueil: (rec.recueils || []).map(r => ({id: r.id, title: (r.icon || '📚') + ' ' + r.title})), board: (brd.boards || []).filter(r => Number(r.id) !== Number(b.id)), label: (lab.labels || []).map(l0 => ({id: l0.id, title: l0.name})), pet: (pts.pets || []).map(x => ({id: x.id, title: x.title + (x.breed ? ' (' + x.breed + ')' : '')}))};
+            const [ate, rec, brd, pts] = await Promise.all([api('research_lists', {kind: 'atelier'}), api('recueils', {q: ''}), api('boards', {owner_type: 'all'}), api('pets', {})].map(p => p.catch(() => ({}))));
+            const opts = {atelier_project: ate.rows || [], recueil: (rec.recueils || []).map(r => ({id: r.id, title: (r.icon || '📚') + ' ' + r.title})), board: (brd.boards || []).filter(r => Number(r.id) !== Number(b.id)), pet: (pts.pets || []).map(x => ({id: x.id, title: x.title + (x.breed ? ' (' + x.breed + ')' : '')}))};
             let found = null;
             ext.openDialog({eyebrow: 'TABLEAU', title: 'Associer ce tableau', submitLabel: 'Associer',
                 body: `<div class="form-grid"><label class="span-2">À quoi <select name="kind">${Object.entries(LINK_KINDS).map(([k, [i, lb]]) => `<option value="${k}">${i} ${lb}</option>`).join('')}</select></label>
-                    <div class="span-2" data-bd-lperson>${A().collectionPersonField('bd_lperson', null, 'Nom de la personne')}</div>
+                    <div class="span-2" data-bd-lpick></div>
                     <label class="span-2" data-bd-lother hidden>Laquelle <select name="target"></select></label>
                     <div class="span-2" data-bd-lsearch hidden><input type="search" placeholder="Chercher…" data-bd-lq><div class="h-bd-results" data-bd-lres></div><small class="muted" data-bd-lpicked></small></div>
                     <label class="span-2">Partie <small class="muted">(facultatif : piste 1, les témoins, la branche paternelle…)</small><input name="part" maxlength="120"></label>
@@ -1555,14 +1560,16 @@
                     const k = d.querySelector('[name=kind]'), s = d.querySelector('[name=target]');
                     let t0 = 0; const q = d.querySelector('[data-bd-lq]'), res = d.querySelector('[data-bd-lres]');
                     q.addEventListener('input', () => { clearTimeout(t0); t0 = setTimeout(async () => { const fn = SEARCH_KINDS[k.value]; if (!fn || q.value.trim().length < 2) { res.innerHTML = ''; return; } const rows = await fn(q.value.trim()).catch(() => []); res.innerHTML = rows.slice(0, 12).map((r, i) => `<button type="button" data-i="${i}">${esc(r.title)}</button>`).join('') || '<small class="muted">Rien trouvé.</small>'; res.querySelectorAll('[data-i]').forEach(bt => bt.addEventListener('click', () => { found = rows[Number(bt.dataset.i)]; d.querySelector('[data-bd-lpicked]').textContent = '✓ ' + found.title; res.innerHTML = ''; })); }, 250); });
-                    const fill = () => { const isP = k.value === 'person', isS = !!SEARCH_KINDS[k.value]; found = null; d.querySelector('[data-bd-lpicked]').textContent = ''; d.querySelector('[data-bd-lsearch]').hidden = !isS; d.querySelector('[data-bd-lperson]').hidden = !isP; d.querySelector('[data-bd-lother]').hidden = isP || isS; if (!isP && !isS) s.innerHTML = (opts[k.value] || []).map(r => `<option value="${r.id}">${esc(r.title || '#' + r.id)}</option>`).join('') || '<option value="">(aucun pour l’instant)</option>'; };
+                    // menu de choix unique : on garde la chose choisie (id, nom, et pour un lieu sa clé de commune)
+                    d.addEventListener('picker-change', e => { if (e.detail.name !== 'bd_lpick') return; const it = e.detail.item; found = it?.id ? {id: it.id, title: it.kind === 'place' && it.county ? `${it.name || it.title} (${it.county})` : it.title, ...(it.kind === 'place' ? {key: 'n:' + String(it.name || it.title || '').toLowerCase().trim() + '|' + String(it.county || '').toLowerCase().trim()} : {})} : null; });
+                    const fill = () => { const isP = PICK_KINDS.includes(k.value), isS = !!SEARCH_KINDS[k.value]; found = null; d.querySelector('[data-bd-lpicked]').textContent = ''; d.querySelector('[data-bd-lsearch]').hidden = !isS; const lp = d.querySelector('[data-bd-lpick]'); lp.hidden = !isP; lp.innerHTML = isP ? PKF({name: 'bd_lpick', kind: k.value}) : ''; d.querySelector('[data-bd-lother]').hidden = isP || isS; if (!isP && !isS) s.innerHTML = (opts[k.value] || []).map(r => `<option value="${r.id}">${esc(r.title || '#' + r.id)}</option>`).join('') || '<option value="">(aucun pour l’instant)</option>'; };
                     k.addEventListener('change', fill); fill();
                 },
                 onSubmit: async form => {
                     const kind = form.elements.kind.value, part = form.elements.part.value.trim();
                     let id0 = 0, label = '';
-                    if (kind === 'person') { id0 = Number(form.elements.bd_lperson?.value) || 0; if (id0) label = (await personBrief(id0)).name; }
-                    else if (SEARCH_KINDS[kind]) { id0 = Number(found?.id) || 0; label = found?.title || ''; }
+                    if (kind === 'person') { id0 = Number(form.elements.bd_lpick?.value) || 0; if (id0) label = (await personBrief(id0)).name; }
+                    else if (PICK_KINDS.includes(kind) || SEARCH_KINDS[kind]) { id0 = Number(found?.id) || 0; label = found?.title || ''; }
                     else { id0 = Number(form.elements.target.value) || 0; label = (opts[kind] || []).find(r => Number(r.id) === id0)?.title || ''; }
                     if (!id0) { toast('Choisis à quoi associer le tableau.', 'error'); return false; }
                     if (links.some(l => l.kind === kind && Number(l.id) === id0 && (l.part || '') === part)) { toast('Déjà associé.'); return; }
@@ -1700,7 +1707,7 @@
         window.addEventListener('beforeunload', onUnload);
         /* ═════ Arbre, frise, carte, cadres, calques, guides, recherche, mini-carte, présentation, commentaires, liens tout prêts, collage, modèles, mémo vocal ═════ */
         const guides = document.createElement('div'); guides.className = 'h-board-guides'; world.appendChild(guides);
-        const pickPerson = (title, cb) => ext.openDialog({eyebrow: 'TABLEAU', title, submitLabel: 'Choisir', body: `<div class="form-grid"><div class="span-2">${A().collectionPersonField('bd_pp', null, 'Nom de la personne')}</div></div>`,
+        const pickPerson = (title, cb) => ext.openDialog({eyebrow: 'TABLEAU', title, submitLabel: 'Choisir', body: `<div class="form-grid"><div class="span-2">${PKF({name: 'bd_pp', kind: 'person'})}</div></div>`,
             onSubmit: form => { const id0 = Number(form.elements.bd_pp?.value) || 0; if (!id0) { toast('Choisis la personne.', 'error'); return false; } cb(id0); }});
         // centrer la vue sur des éléments, sans trop zoomer
         function focusOn(list, maxK = 1.2) {
@@ -1844,27 +1851,26 @@
             if (e.target.matches('[data-bd-mapkind]') && one) {
                 if (ro()) return true; const k = e.target.value, [k0, v0] = String(one.mapSrc || '').split(':');
                 if (!k) { one.mapSrc = ''; sigs.delete(one.id); render(); commit(); return true; }
-                if (k === 'investigation') { one.mapSrc = ''; sigs.delete(one.id); render(); const box = inspector.querySelector('[data-bd-mapinvbox]'); if (box) box.hidden = false; loadInv(); return true; }
+                if (k === 'investigation') { one.mapSrc = ''; sigs.delete(one.id); render(); const box = inspector.querySelector('[data-bd-mapinvbox]'); if (box) box.hidden = false; return true; }
                 if (v0 && k0 !== 'investigation') { one.mapSrc = `${k}:${v0}`; sigs.delete(one.id); render(); commit(); }
                 else pickPerson('Les lieux de…', id0 => { one.mapSrc = `${k}:${id0}`; sigs.delete(one.id); render(); commit(); });
                 return true;
             }
-            if (e.target.matches('[data-bd-mapinv]') && one) { if (ro() || !e.target.value) return true; one.mapSrc = 'investigation:' + Number(e.target.value); sigs.delete(one.id); render(); commit(); return true; }
+            if (e.target.matches('[name=bd_mapinv]')) return true; // vu par picker-change ci-dessous
             return false;
         }
-        async function loadInv() {
-            const s0 = inspector.querySelector('[data-bd-mapinv]'); if (!s0) return;
-            const rows = (await invList()).filter(r => r.person_id);
-            const cur = String(selItems()[0]?.mapSrc || '').split(':')[1];
-            s0.innerHTML = '<option value="">…</option>' + rows.map(r => `<option value="${r.id}" ${String(r.id) === cur ? 'selected' : ''}>${esc(r.title)}${r.person ? ' — ' + esc(r.person) : ''}</option>`).join('') + (rows.length ? '' : '<option value="" disabled>(aucune enquête sur une personne)</option>');
-        }
+        // la carte d'une enquête : choisie avec le menu de choix unique (seulement une enquête sur une personne)
+        inspector.addEventListener('picker-change', e => {
+            if (e.detail.name !== 'bd_mapinv') return; const one = selItems()[0], it = e.detail.item; if (!one || ro() || !it?.id) return;
+            if (!Number(it.person_id)) { toast('Cette enquête ne porte pas sur une personne : choisis-en une autre.', 'error'); return; }
+            one.mapSrc = 'investigation:' + Number(it.id); sigs.delete(one.id); render(); commit();
+        });
         function inspectorInput(e) {
             if (!e.target.matches('[data-bd-pinq]')) return;
             clearTimeout(pinT); const q = e.target.value.trim(), box = inspector.querySelector('[data-bd-pinres]');
             pinT = setTimeout(async () => { if (q.length < 2) { box.innerHTML = ''; return; } const rows = ((await api('board_place_search', {q}).catch(() => ({}))).places || []); box.innerHTML = rows.map(r => `<button type="button" data-bd-pinadd="${esc(JSON.stringify({name: r.name, lat: r.lat, lon: r.lon}))}">📍 ${esc(r.name)} <small class="muted">${esc(r.detail || '')}</small></button>`).join('') || '<small class="muted">Aucun lieu avec ses coordonnées.</small>'; }, 250);
         }
         const inspObs = new MutationObserver(async () => {
-            if (inspector.querySelector('[data-bd-mapinvbox]:not([hidden])') && (inspector.querySelector('[data-bd-mapinv]')?.options.length || 0) <= 1) loadInv();
             const lb = inspector.querySelector('[data-bd-mapsrclabel]'), one = selItems()[0]; if (!lb || !one?.mapSrc) return;
             const [k, v] = one.mapSrc.split(':'); if (k !== 'investigation') { const p = await personBrief(v); lb.textContent = (k === 'family' ? 'Famille de ' : '') + p.name; }
             else lb.textContent = 'Enquête n° ' + v;
@@ -2169,18 +2175,22 @@
 
     /* ═════════ Rangement d'un tableau : libre, enquête, battue, atelier, et sa partie ═════════ */
     async function placeDialog(o, done) {
-        const [inv, bat, ate] = await Promise.all([api('research_lists', {kind: 'investigations'}), api('research_lists', {kind: 'battues'}), api('research_lists', {kind: 'atelier'})].map(p => p.catch(() => ({rows: []}))));
-        const opts = {investigation: inv.rows, battue: bat.rows, atelier_project: ate.rows};
+        // enquête ou battue : le menu de choix unique ; les projets de l'Atelier gardent leur liste
+        const ate = await api('research_lists', {kind: 'atelier'}).catch(() => ({rows: []}));
+        const opts = {atelier_project: ate.rows};
         ext.openDialog({eyebrow: 'TABLEAU', title: 'Ranger le tableau', submitLabel: 'Ranger',
             body: `<div class="form-grid"><label>Où <select name="owner_type">${Object.entries(OWNERS).map(([k, l]) => `<option value="${k}" ${o.owner_type === k ? 'selected' : ''}>${OWNER_ICONS[k]} ${l}</option>`).join('')}</select></label>
-                <label data-bd-ownerbox>Laquelle <select name="owner_id"></select></label>
+                <label data-bd-ownerbox>Laquelle <select name="owner_id"></select></label><div data-bd-ownerpk hidden></div>
                 <label class="span-2">Partie <small class="muted">(facultatif : pour avoir plusieurs tableaux, « Piste 1 », « Les témoins »…)</small><input name="part" value="${esc(o.part || '')}"></label></div>`,
             onOpen: d => {
                 const t = d.querySelector('[name=owner_type]'), s = d.querySelector('[name=owner_id]'), box = d.querySelector('[data-bd-ownerbox]');
-                const fill = () => { const rows = opts[t.value] || []; box.hidden = !t.value; s.innerHTML = rows.map(r => `<option value="${r.id}" ${Number(o.owner_id) === Number(r.id) ? 'selected' : ''}>${esc(r.title || '#' + r.id)}</option>`).join('') || '<option value="">(aucune)</option>'; };
+                const pkBox = d.querySelector('[data-bd-ownerpk]');
+                const fill = () => { const pkKind = ['investigation', 'battue'].includes(t.value) ? t.value : '';
+                    pkBox.hidden = !pkKind; pkBox.innerHTML = pkKind ? `<span class="pk-lab">Laquelle</span>${PKF({name: 'owner_pk', kind: pkKind, value: o.owner_type === pkKind ? Number(o.owner_id) || null : null})}` : ''; s.disabled = !!pkKind;
+                    const rows = opts[t.value] || []; box.hidden = !t.value || !!pkKind; s.innerHTML = rows.map(r => `<option value="${r.id}" ${Number(o.owner_id) === Number(r.id) ? 'selected' : ''}>${esc(r.title || '#' + r.id)}</option>`).join('') || '<option value="">(aucune)</option>'; };
                 t.addEventListener('change', fill); fill();
             },
-            onSubmit: form => { o.owner_type = form.elements.owner_type.value; o.owner_id = Number(form.elements.owner_id.value) || 0; o.part = form.elements.part.value.trim(); if (o.owner_type && !o.owner_id) o.owner_type = ''; done(); },
+            onSubmit: form => { o.owner_type = form.elements.owner_type.value; o.owner_id = Number((['investigation', 'battue'].includes(o.owner_type) ? form.elements.owner_pk : form.elements.owner_id)?.value) || 0; o.part = form.elements.part.value.trim(); if (o.owner_type && !o.owner_id) o.owner_type = ''; done(); },
         });
     }
 

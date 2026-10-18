@@ -56,7 +56,7 @@
             const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: kind === 'any' ? 'Ajouter un rush' : kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son', wide: true, submitLabel: 'Ajouter',
                 body: `<label class="h-rc-drop"><input type="file" name="file" accept="${kind === 'any' ? 'video/*,image/*,audio/*' : kind === 'visual' ? 'video/*,image/*' : kind + '/*'}"><span>📁 Un fichier de l’ordinateur…</span></label>
                     <p class="muted">… ou ${what} déjà dans la base :</p>
-                    <input type="search" data-avx-q placeholder="Chercher…">
+                    <div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🎬</span><input type="text" class="pk-input" data-avx-q placeholder="Titre ou nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher"></div></div>
                     <div class="h-rc-results" data-avx-list>${rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}"> ${icon(r)} ${esc(r.title || r.filename)} <small class="muted">${r.duration ? fmt(r.duration, false) : r.kind === 'image' ? 'photo' : ''}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
                 onOpen: d => d.querySelector('[data-avx-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-avx-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
                 onSubmit: form => {
@@ -1426,12 +1426,12 @@
             let chosen = 0;
             ext.openDialog({eyebrow: 'MODÈLE DE MONTAGE', title: kind === 'life' ? '🪄 « La vie de… »' : '🪄 « Une famille »', wide: true, submitLabel: 'Fabriquer le montage',
                 body: `<p class="muted">${kind === 'life' ? 'Les photos de la personne, dans l’ordre des dates, avec un titre, sa naissance, ses grandes dates et un mot de la fin.' : 'Le portrait de la personne, puis de ses parents, conjoints et enfants, chacun avec son nom et ses dates.'} Tout reste modifiable ensuite.</p>
-                    <label>Personne ${A().collectionPersonField('av_tpl', null, 'Nom, prénom…')}</label>
+                    <div><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'av_tpl', kind: 'person'})}</div>
                     <div class="form-grid"><label>Durée par photo <select name="dur">${[3, 4, 5, 6, 8].map(v => `<option value="${v}" ${v === 5 ? 'selected' : ''}>${v} s</option>`).join('')}</select></label>
                     <label>Transition <select name="tr">${TRANS.map(([k, l]) => `<option value="${k}" ${k === 'cross' ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <label class="checkbox-line"><input type="checkbox" name="kb" checked> Ken Burns sur les photos</label><label class="checkbox-line"><input type="checkbox" name="music"> Ajouter une musique (choisie ensuite)</label>
                     <label class="checkbox-line"><input type="checkbox" name="chap" checked> Un chapitre par grande étape</label></div>`,
-                onOpen: dg => { setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30); },
+                onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); },
                 onSubmit: async form => { chosen = Number(form.elements.av_tpl?.value) || 0;
                     if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
                     const f = Object.fromEntries(new FormData(form)), dur = Number(f.dur) || 5, trType = f.tr || 'cross', btn = form.querySelector('[type=submit]'); btn.textContent = 'Préparation…';

@@ -211,12 +211,8 @@
             if (c === 'csv' || c === 'json' || c === 'print') return exportKind(c);
         });
         const nextInv = () => { const nums = items.filter(i => i.kind === 'work').map(i => Number(String(i.data.inv || '').match(/(\d+)\s*$/)?.[1] || 0)); const n = (nums.length ? Math.max(...nums) : 0) + 1, pre = (items.find(i => i.kind === 'work' && /\d+\s*$/.test(i.data.inv || ''))?.data.inv || '').replace(/\d+\s*$/, ''); return `${pre}${String(n).padStart(3, '0')}`; };
-        async function pickMedia() {
-            return new Promise(res => { let picked = null; ext.openDialog({eyebrow: 'MÉDIAS', title: 'Choisir une image', submitLabel: 'Prendre', body: '<label>Chercher<input type="search" data-q placeholder="titre, cote…" autocomplete="off"></label><div class="h-ar-mpick" data-res></div>',
-                onOpen: dg => { const qq = dg.querySelector('[data-q]'), box = dg.querySelector('[data-res]'); let tm = 0; qq.focus(); qq.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(async () => { const rows = ((await api('heritage_media_search', {q: qq.value.trim()}).catch(() => ({media: []}))).media || []).filter(m => (m.media_type || 'image') === 'image'); box._rows = rows; box.innerHTML = rows.map((m, i) => `<button type="button" data-i="${i}"><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt=""><small>${esc(m.title || m.filename)}</small></button>`).join('') || '<p class="muted">Rien.</p>'; }, 250); });
-                    box.addEventListener('click', ev => { const b = ev.target.closest('[data-i]'); if (!b) return; picked = box._rows[Number(b.dataset.i)]; box.querySelectorAll('button').forEach(x => x.classList.toggle('is-on', x === b)); }); },
-                onSubmit: () => { if (!picked) { toast('Choisis une image.', 'error'); return false; } res(picked); }}).addEventListener('close', () => res(picked)); });
-        }
+        // une image des médias : le même choix d'image que partout (heritage.js pickImage : vignettes, recherche au style du menu)
+        async function pickMedia() { return ext.pickImage ? ext.pickImage({eyebrow: 'MÉDIAS', title: 'Choisir une image', filters: false, allowImport: false}) : null; }
         function editKeys() {
             const k = keys();
             ext.openDialog({eyebrow: 'IMPORTS', title: '🔑 Clés personnelles', submitLabel: 'Enregistrer', body: `<p class="muted">Facultatives. Elles restent dans ce navigateur et ne servent qu’aux imports.</p>

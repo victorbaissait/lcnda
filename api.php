@@ -7905,6 +7905,11 @@ function investigation_detail(PDO $pdo,int $id): never
             WHERE iiad.investigation_item_id=? ORDER BY ade.year_text COLLATE NOCASE,ade.id");
         $archiveDigests->execute([(int)$itemRow['id']]);
         $itemRow['archive_digests']=$archiveDigests->fetchAll();
+        ensure_investigation_item_persons($pdo);
+        $itemPersons=$pdo->prepare("SELECT p.id,trim(replace(replace(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''),'  ',' '),'  ',' ')) AS name FROM investigation_item_persons iip JOIN persons p ON p.id=iip.person_id WHERE iip.investigation_item_id=? ORDER BY iip.position,iip.id");
+        $itemPersons->execute([(int)$itemRow['id']]);$itemPersonRows=$itemPersons->fetchAll();
+        $itemRow['linked_person_ids']=implode(',',array_column($itemPersonRows,'id'));
+        $itemRow['linked_person_names']=implode('|',array_column($itemPersonRows,'name'));
         if(!empty($itemRow['linked_event_id'])){
             $computedLabel=investigation_event_label($pdo,(int)$itemRow['linked_event_id']);
             if($computedLabel!=='')$itemRow['linked_event_label']=$computedLabel;
@@ -10413,7 +10418,25 @@ function add_investigation_item(PDO $pdo,array $data): array
     $reminderMode=safe_text($data['reminder_mode']??'none');if(!in_array($reminderMode,['none','on','before','after'],true))$reminderMode='none';
     $reminderDue=safe_text($data['reminder_due_at']??'');if($reminderMode==='none')$reminderDue='';
     $archiveDigestIds=archive_digest_ids_from_data($data['archive_digest_ids']??($data['archive_digest_id']??''));validate_archive_digest_ids($pdo,$archiveDigestIds);$archiveDigestId=$archiveDigestIds[0]??null;
-    $pdo->prepare('INSERT INTO investigation_items(investigation_id,kind,title,url,notes,status,reminder_due_at,reminder_mode,archive_digest_id) VALUES(?,?,?,?,?,?,?,?,?)')->execute([$investigationId,$kind,$title,$url,safe_text($data['notes']??''),$status,$reminderDue,$reminderMode,$archiveDigestId]);$id=(int)$pdo->lastInsertId();replace_item_archive_digests($pdo,'investigation_item_archive_digests','investigation_item_id',$id,$archiveDigestIds);$pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$investigationId]);return ['id'=>$id];
+    $pdo->prepare('INSERT INTO investigation_items(investigation_id,kind,title,url,notes,status,reminder_due_at,reminder_mode,archive_digest_id) VALUES(?,?,?,?,?,?,?,?,?)')->execute([$investigationId,$kind,$title,$url,safe_text($data['notes']??''),$status,$reminderDue,$reminderMode,$archiveDigestId]);$id=(int)$pdo->lastInsertId();replace_item_archive_digests($pdo,'investigation_item_archive_digests','investigation_item_id',$id,$archiveDigestIds);if(array_key_exists('linked_person_ids',$data))replace_investigation_item_persons($pdo,$id,$data['linked_person_ids']);$pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([$investigationId]);return ['id'=>$id];
+}
+
+/** Personnes liées à une piste (champ « 6,21 » du menu de choix) : table investigation_item_persons, dans l'ordre choisi. */
+function ensure_investigation_item_persons(PDO $pdo): void
+{
+    static $done=false;if($done)return;$done=true;
+    $pdo->exec('CREATE TABLE IF NOT EXISTS investigation_item_persons (id INTEGER PRIMARY KEY AUTOINCREMENT, investigation_item_id INTEGER NOT NULL, person_id INTEGER NOT NULL, position INTEGER NOT NULL DEFAULT 0,
+        FOREIGN KEY(investigation_item_id) REFERENCES investigation_items(id) ON DELETE CASCADE, FOREIGN KEY(person_id) REFERENCES persons(id) ON DELETE CASCADE, UNIQUE(investigation_item_id, person_id))');
+    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_inv_item_persons_person ON investigation_item_persons(person_id)');
+}
+
+function replace_investigation_item_persons(PDO $pdo,int $itemId,mixed $raw): void
+{
+    ensure_investigation_item_persons($pdo);
+    $ids=array_values(array_unique(array_filter(array_map('intval',is_array($raw)?$raw:explode(',',(string)$raw)),static fn(int $v): bool=>$v>0)));
+    $pdo->prepare('DELETE FROM investigation_item_persons WHERE investigation_item_id=?')->execute([$itemId]);
+    $exists=$pdo->prepare('SELECT 1 FROM persons WHERE id=?');$ins=$pdo->prepare('INSERT OR IGNORE INTO investigation_item_persons(investigation_item_id,person_id,position) VALUES(?,?,?)');
+    foreach($ids as $i=>$pid){$exists->execute([$pid]);if($exists->fetchColumn())$ins->execute([$itemId,$pid,$i]);}
 }
 
 function save_investigation_item(PDO $pdo,array $data): array
@@ -10430,6 +10453,7 @@ function save_investigation_item(PDO $pdo,array $data): array
     $archiveDigestIds=archive_digest_ids_from_data($data['archive_digest_ids']??($data['archive_digest_id']??''));validate_archive_digest_ids($pdo,$archiveDigestIds);$archiveDigestId=$archiveDigestIds[0]??null;
     $pdo->prepare('UPDATE investigation_items SET kind=?,title=?,url=?,notes=?,status=?,reminder_due_at=?,reminder_mode=?,archive_digest_id=? WHERE id=?')->execute([$kind,$title,$url,safe_text($data['notes']??''),$status,$reminderDue,$reminderMode,$archiveDigestId,$id]);
     replace_item_archive_digests($pdo,'investigation_item_archive_digests','investigation_item_id',$id,$archiveDigestIds);
+    replace_investigation_item_persons($pdo,$id,$data['linked_person_ids']??''); // le formulaire n'envoie rien quand on a tout retiré
     if(!empty($old['investigation_id']))$pdo->prepare('UPDATE investigations SET updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([(int)$old['investigation_id']]);
     log_change($pdo,'investigation_item',$id,'update','Piste modifiée : '.$title,$old,['id'=>$id,'title'=>$title,'status'=>$status,'reminder_due_at'=>$reminderDue,'reminder_mode'=>$reminderMode]);
     return ['id'=>$id,'investigation_id'=>(int)($old['investigation_id']??0)];

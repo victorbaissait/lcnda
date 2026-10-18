@@ -46,7 +46,7 @@
   <form id="family-book-form" class="h-book-form" novalidate>
     <fieldset><legend>1. La branche</legend><div class="form-grid">
       <label>Qui <select name="scope"><option value="all" ${c.scope === 'all' ? 'selected' : ''}>toute la base</option><option value="ancestors" ${c.scope === 'ancestors' ? 'selected' : ''}>les ancêtres de…</option><option value="descendants" ${c.scope === 'descendants' ? 'selected' : ''}>les descendants de…</option><option value="both" ${c.scope === 'both' ? 'selected' : ''}>ancêtres et descendants de…</option></select></label>
-      <label>Personne de départ ${A().collectionPersonField('book_root', start ? {id: start, first_name: localStorage.getItem('genealogie-sosa-root-name') || ('Personne #' + start), last_name: ''} : null, 'Le de cujus par défaut')}</label>
+      <div><span class="pk-lab">Personne de départ</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'book_root', kind: 'person', value: start || null})}</div>
       <label>Générations <input type="number" name="generations" min="1" max="30" value="${esc(c.generations)}"></label>
       <label>Ordre des fiches ${sel('order', [['book', 'celui de l’arbre (Sosa, d’Aboville)'], ['generation', 'par génération'], ['birth', 'par date de naissance'], ['name', 'par nom (alphabétique)']])}</label>
     </div></fieldset>
@@ -89,7 +89,6 @@
     }
     ext.bindFamilyBook = exportUrl => {
         const form = document.getElementById('family-book-form'); if (!form) return;
-        A().bindCollectionPersonFields?.(form);
         if (load().accent) form.dataset.accentSet = '1';
         const persist = () => save(read(form));
         form.addEventListener('input', persist); form.addEventListener('change', persist);

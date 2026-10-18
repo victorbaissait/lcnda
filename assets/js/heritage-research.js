@@ -528,7 +528,7 @@
                 case 'longtext': return `<label class="span-2">${esc(f.label)}<textarea name="${n}" rows="4"${ph}${req}>${esc(val)}</textarea>${help}</label>`;
                 case 'select': return `<label${cls}>${esc(f.label)}<select name="${n}"${req}><option value=""></option>${(f.options || []).map(o => `<option ${o === val ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>${help}</label>`;
                 case 'checkbox': return `<label class="checkbox-line${f.width === 'half' ? '' : ' span-2'}"><input type="checkbox" name="${n}" ${Number(val) ? 'checked' : ''}> ${esc(f.label)}</label>`;
-                case 'person': return `<label${cls}>${esc(f.label)}${A().collectionPersonField(n, val ? people[val] || {id: val, first_name: '#' + val, last_name: ''} : null, 'Tape un nom…')}${help}</label>`;
+                case 'person': return `<div${cls}><span class="pk-lab">${esc(f.label)}</span>${window.LCNDA_PICKER.pickerField({name: n, kind: 'person', value: Number(val) || null})}${help}</div>`; // menu de choix unique
                 case 'place': return `<label${cls}>${esc(f.label)}${ext.placeField(n, val?.text || '', val?.lat ?? '', val?.lon ?? '', f.placeholder || 'Commune, adresse…')}${help}</label>`;
                 case 'number': return `<label${cls}>${esc(f.label)}<input name="${n}" inputmode="decimal" value="${esc(val)}"${ph}${req}>${help}</label>`;
                 case 'url': return `<label${cls}>${esc(f.label)}<input type="url" name="${n}" value="${esc(val)}" placeholder="${esc(f.placeholder || 'https://…')}"${req}>${help}</label>`;
@@ -561,6 +561,8 @@
     /* ─── 🔗 Venant du logiciel : une fiche, un bloc, un village, une liste, un recueil… ─── */
     const APP_KINDS = {person: ['👤', 'Une fiche (personne)'], person_block: ['🧩', 'Un bloc d’une fiche'], village: ['🏘️', 'La fiche d’un village'], list: ['📋', 'Une liste'],
         recueil: ['📚', 'Un recueil (ou quelques pages)'], investigation: ['🔍', 'Une enquête'], battue: ['🧭', 'Une battue'], media: ['🖼️', 'Une image, un son, une vidéo'], atelier_project: ['🗂️', 'Un autre projet de l’Atelier']};
+    // ces sortes se choisissent avec le menu de choix unique (docs/PICKER.md) ; villages, listes, recueils et projets gardent leur recherche
+    const APP_PK = {person: 'person', person_block: 'person', investigation: 'investigation', battue: 'battue', media: 'media'};
     async function appSearch(kind, q) {
         if (['person', 'person_block', 'village', 'investigation', 'battue', 'atelier_project'].includes(kind)) return ((await api('recueil_search', {type: kind === 'person_block' ? 'person' : kind, q})).results || []).filter(r => kind !== 'atelier_project' || Number(r.key) !== Number(P.project.id));
         if (kind === 'media') return ((await api('list', {type: 'media', q, limit: 40})).rows || []).map(r => ({key: String(r.id), label: r.title || r.filename, extra: r.date_text || r.media_type || '', thumb: r.media_type === 'image' || !r.media_type ? (r.thumbnail || r.filename) : ''}));
@@ -576,7 +578,8 @@
         dialog({eyebrow: 'VENANT DU LOGICIEL', title: item ? 'Modifier' : 'Ajouter un élément du logiciel', wide: true, submitLabel: item ? 'Enregistrer' : 'Ajouter',
             body: `<p class="muted">L’élément reste <b>vivant</b> : il montre toujours ce qu’il y a dans le logiciel, et « ↗ Ouvrir » y mène.</p>
                 <div class="form-grid"><label>Quoi ?<select name="kind">${Object.entries(APP_KINDS).map(([k, [ic, l]]) => `<option value="${k}" ${(d.kind || 'person') === k ? 'selected' : ''}>${ic} ${esc(l)}</option>`).join('')}</select></label>
-                <label>Chercher<input type="search" data-app-q value="${esc(item ? d.label : '')}" placeholder="Nom, titre, commune…"></label></div>
+                <label data-app-qbox>Chercher<input type="search" data-app-q value="${esc(item ? d.label : '')}" placeholder="Nom, titre, commune…"></label></div>
+                <div data-app-pk hidden></div>
                 <div class="h-rc-results h-at-appres" data-app-res></div>
                 <div data-app-more></div>
                 <div class="form-grid"><label class="span-2">Titre dans le projet <small class="muted">(facultatif)</small><input name="title" value="${esc(item?.title || '')}" placeholder="(le nom choisi)"></label>
@@ -590,11 +593,18 @@
                             <label class="checkbox-line"><input type="radio" name="scope" value="some" ${d.page_from ? 'checked' : ''}> De la page <select name="page_from">${pages.map(p => `<option value="${p.id}" ${Number(d.page_from) === p.id ? 'selected' : ''}>${p.num}${p.label ? ' — ' + esc(p.label) : ''}</option>`).join('')}</select> à <select name="page_to">${pages.map(p => `<option value="${p.id}" ${Number(d.page_to || d.page_from) === p.id ? 'selected' : ''}>${p.num}${p.label ? ' — ' + esc(p.label) : ''}</option>`).join('')}</select></label></fieldset>` : ''; }
                     else more.innerHTML = ''; };
                 let timer = 0;
-                const search = async () => { const list = await appSearch(kindSel.value, q.value.trim()).catch(() => []);
+                const pk = dl.querySelector('[data-app-pk]');
+                pk.addEventListener('picker-change', e => { const it = e.detail.item; chosen = it?.id ? {key: String(it.id), label: it.title, extra: it.short || ''} : null; drawMore(); });
+                const search = async () => {
+                    const pkKind = APP_PK[kindSel.value]; pk.hidden = !pkKind; dl.querySelector('[data-app-qbox]').hidden = !!pkKind;
+                    res.hidden = !!pkKind;
+                    if (pkKind) { res.innerHTML = ''; if (!pk.querySelector('.pk')) pk.innerHTML = window.LCNDA_PICKER.pickerField({name: 'app_pick', kind: pkKind, value: chosen && APP_PK[d.kind] === pkKind ? {id: Number(chosen.key), title: chosen.label, short: chosen.extra || ''} : null}); return; }
+                    pk.innerHTML = '';
+                    const list = await appSearch(kindSel.value, q.value.trim()).catch(() => []);
                     res.innerHTML = list.map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" data-extra="${esc(x.extra || '')}" ${chosen?.key === x.key ? 'checked' : ''}>${x.thumb ? `<img src="media/${encodeURIComponent(x.thumb)}" alt="" class="h-at-appthumb">` : ''} ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="muted">Rien trouvé.</p>';
                     res.querySelectorAll('[name=pick]').forEach(r => r.addEventListener('change', () => { chosen = {key: r.value, label: r.dataset.label, extra: r.dataset.extra}; drawMore(); })); };
                 q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(search, 250); });
-                kindSel.addEventListener('change', () => { chosen = null; q.value = ''; search(); drawMore(); });
+                kindSel.addEventListener('change', () => { chosen = null; q.value = ''; pk.innerHTML = ''; search(); drawMore(); });
                 search(); drawMore();
             },
             onSubmit: async form => {
@@ -675,14 +685,14 @@
             case 'media': fields = `<label class="span-2">Titre<input name="title" required value="${esc(title)}" placeholder="Vue d’optique : la place Saint-Marc à Venise"></label>
                     ${inp('creator', 'Auteur, graveur, éditeur', d.creator, 'placeholder="Basset, rue Saint-Jacques"')}${inp('date', 'Date', d.date, 'placeholder="vers 1770"')}${inp('technique', 'Technique', d.technique, 'placeholder="eau-forte coloriée"')}${inp('dimensions', 'Dimensions', d.dimensions)}
                     ${inp('holder', 'Conservé à', d.holder, 'placeholder="BnF, département des Estampes"')}${inp('call_number', 'Cote, n° d’inventaire', d.call_number)}${inp('credit', 'Crédit, droits', d.credit)}${inp('url', 'Lien', d.url, 'type="url"')}${area('caption', 'Légende, description', d.caption, 3)}`; break;
-            case 'person': fields = `<label class="span-2">Personne de ta base <small>(facultatif)</small>${A().collectionPersonField('person_id', d.person_id ? people[d.person_id] || {id: d.person_id, first_name: '#' + d.person_id, last_name: ''} : null, 'Tape un nom…')}</label>
+            case 'person': fields = `<div class="span-2"><span class="pk-lab">Personne de ta base <small>(facultatif)</small></span>${window.LCNDA_PICKER.pickerField({name: 'person_id', kind: 'person', value: Number(d.person_id) || null})}</div>
                     <label class="span-2">Nom <small>(si ce n’est pas quelqu’un de ta base)</small><input name="title" value="${esc(title)}" placeholder="Pierre Martin, montreur d’optique"></label>
                     ${inp('role', 'Rôle, métier', d.role, 'placeholder="montreur de vues d’optique, colporteur"')}${inp('dates', 'Dates', d.dates, 'placeholder="vers 1740 – après 1789"')}${inp('places', 'Lieux', d.places, 'placeholder="Briançonnais, Paris, foires de Beaucaire"', 'span-2')}`; break;
             case 'place': fields = `<label class="span-2">Lieu${ext.placeField('place', d.place?.text || '', d.place?.lat ?? '', d.place?.lon ?? '', 'Commune, adresse, monument…')}</label>
                     ${inp('kind', 'Sorte de lieu', d.kind, 'placeholder="foire, atelier, dépôt d’archives"')}<label>Titre <small>(facultatif)</small><input name="title" value="${esc(title)}"></label>`; break;
             case 'event': fields = `<label class="span-2">Titre<input name="title" required value="${esc(title)}" placeholder="Foire Saint-Germain : un montreur d’optique condamné"></label>
                     ${inp('date', 'Date', d.date, 'placeholder="1775-02-03, ou mars 1775"')}${inp('end', 'Jusqu’au', d.end)}<label class="span-2">Lieu${ext.placeField('place', d.place?.text || '', d.place?.lat ?? '', d.place?.lon ?? '', 'Commune, adresse…')}</label>
-                    <div class="span-2"><span class="section-label">Personnes de ta base</span><div data-at-people>${(d.people?.length ? d.people : ['']).map(pid => `<div class="h-rec-person">${A().collectionPersonField('ev_person', pid ? people[pid] || {id: pid, first_name: '#' + pid, last_name: ''} : null, 'Tape un nom…')}</div>`).join('')}</div><button type="button" class="button small secondary" data-at-padd>+ Personne</button></div>`; break;
+                    <div class="span-2"><span class="section-label">Personnes de ta base</span><div data-at-people>${window.LCNDA_PICKER.pickerField({name: 'ev_person', kind: 'person', multiple: true, value: (d.people || []).map(Number).filter(Boolean)})}</div></div>`; break;
             case 'link': fields = `${inp('url', 'Adresse', d.url, 'type="url" required placeholder="https://…"', 'span-2')}<label class="span-2">Titre<input name="title" value="${esc(title)}"></label>${inp('site', 'Site', d.site, 'placeholder="Gallica, Europeana…"')}${inp('accessed', 'Consulté le', d.accessed)}`; break;
             case 'task': fields = `<label class="span-2">Tâche<input name="title" required value="${esc(title)}" placeholder="Demander les cotes F/12 aux Archives nationales"></label>
                     <label>Pour le<input type="date" name="due" value="${esc(d.due || '')}"></label><label>Priorité<select name="priority">${['haute', 'normale', 'basse'].map(o => `<option ${(d.priority || 'normale') === o ? 'selected' : ''}>${o}</option>`).join('')}</select></label><label class="checkbox-line"><input type="checkbox" name="done" ${Number(d.done) ? 'checked' : ''}> Fait</label>`; break;
@@ -703,7 +713,6 @@
                 const cbox = dl.querySelector('[data-at-creators]');
                 dl.querySelector('[data-at-cadd]')?.addEventListener('click', () => { cbox.insertAdjacentHTML('beforeend', creatorRow()); cbox.lastElementChild.querySelector('input').focus(); });
                 cbox?.addEventListener('click', e => { if (e.target.closest('[data-c-del]')) { const r = e.target.closest('.h-at-creator'); if (cbox.children.length > 1) r.remove(); else r.querySelectorAll('input').forEach(x => { x.value = ''; }); } });
-                dl.querySelector('[data-at-padd]')?.addEventListener('click', () => { const box = dl.querySelector('[data-at-people]'); box.insertAdjacentHTML('beforeend', `<div class="h-rec-person">${A().collectionPersonField('ev_person', null, 'Tape un nom…')}</div>`); A().bindCollectionPersonFields(box); });
                 const wc = dl.querySelector('[data-at-wc]'), ta = dl.querySelector('.h-at-writer');
                 if (wc && ta) { const up = () => { wc.textContent = '— ' + plural((ta.value.match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu) || []).length, 'mot', 'mots'); }; ta.addEventListener('input', up); up(); }
             },
@@ -719,7 +728,7 @@
                     media: () => Object.assign(data, Object.fromEntries(['creator', 'date', 'technique', 'dimensions', 'holder', 'call_number', 'credit', 'url', 'caption'].map(k => [k, val(k)]))),
                     person: () => Object.assign(data, {person_id: Number(val('person_id')) || null, role: val('role'), dates: val('dates'), places: val('places'), name: val('title')}),
                     place: () => Object.assign(data, {place: place('place'), kind: val('kind')}),
-                    event: () => Object.assign(data, {date: val('date'), end: val('end'), place: place('place'), people: [...form.querySelectorAll('[data-at-people] input[type=hidden][name=ev_person]')].map(x => Number(x.value)).filter(Boolean)}),
+                    event: () => Object.assign(data, {date: val('date'), end: val('end'), place: place('place'), people: val('ev_person').split(',').map(Number).filter(Boolean)}),
                     link: () => Object.assign(data, {url: val('url'), site: val('site'), accessed: val('accessed')}),
                     task: () => Object.assign(data, {due: val('due'), priority: val('priority'), done: f('done')?.checked ? 1 : 0}),
                     draft: () => Object.assign(data, {text: val('text'), target: Number(val('target')) || 0, stage: val('stage')}),

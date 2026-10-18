@@ -224,7 +224,7 @@
             ${removable ? `<span class="h-bk-slottools"><button type="button" class="icon-button small" data-bk-up aria-label="Monter">↑</button><button type="button" class="icon-button small" data-bk-down aria-label="Descendre">↓</button><button type="button" class="icon-button small" data-bk-remove aria-label="Retirer">✕</button></span>` : ''}
             <div class="form-grid">
                 ${field('written_name', 'Nom et prénoms (tels qu’écrits)', s.written_name, 'MARTIN Jean Baptiste')}
-                <label>Fiche reliée ${A().collectionPersonField('bk_p_' + prefix.replace(/[^a-z0-9_]/gi, '_'), p ? {id: p.id, first_name: p.name, last_name: ''} : null, 'Chercher la personne')}<button type="button" class="link-button" data-bk-create>＋ créer la fiche avec ce qui est écrit</button></label>
+                <div><span class="pk-lab">Fiche reliée</span>${window.LCNDA_PICKER.pickerField({name: 'bk_p_' + prefix.replace(/[^a-z0-9_]/gi, '_'), kind: 'person', value: p ? Number(p.id) : (Number(s.person_id) || null)})}<button type="button" class="link-button" data-bk-create>＋ créer la fiche avec ce qui est écrit</button></div>
                 ${child ? `<label>Sexe <select name="sex"><option value="">—</option><option value="M" ${s.sex === 'M' ? 'selected' : ''}>garçon</option><option value="F" ${s.sex === 'F' ? 'selected' : ''}>fille</option></select></label>` : ''}
                 ${field('birth_date', 'Né(e) le', s.birth_date, '12 mars 1888')}${field('birth_place', 'à', s.birth_place, 'Pernay')}
                 ${field('occupation', 'Profession', s.occupation)}${field('residence', 'Domicile', s.residence)}
@@ -269,8 +269,8 @@
                 const body = dlg.querySelector('.h-dialog-body');
                 body.addEventListener('click', async e => {
                     const j = e.target.closest('[data-bk-jump]'); if (j) { e.preventDefault(); dlg.querySelector('#' + j.dataset.bkJump)?.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
-                    if (e.target.closest('[data-bk-addchild]')) { const box = body.querySelector('[data-bk-children]'); box.insertAdjacentHTML('beforeend', slotEditor('child_n' + Date.now().toString(36), {}, `Enfant n°${box.children.length + 1}`, people, {child: true, removable: true})); A().bindCollectionPersonFields(box.lastElementChild); box.lastElementChild.querySelector('input').focus(); return; }
-                    if (e.target.closest('[data-bk-addother]')) { const box = body.querySelector('[data-bk-others]'); box.insertAdjacentHTML('beforeend', slotEditor('other_n' + Date.now().toString(36), {}, 'Personne citée', people, {removable: true})); A().bindCollectionPersonFields(box.lastElementChild); return; }
+                    if (e.target.closest('[data-bk-addchild]')) { const box = body.querySelector('[data-bk-children]'); box.insertAdjacentHTML('beforeend', slotEditor('child_n' + Date.now().toString(36), {}, `Enfant n°${box.children.length + 1}`, people, {child: true, removable: true})); box.lastElementChild.querySelector('input').focus(); return; }
+                    if (e.target.closest('[data-bk-addother]')) { const box = body.querySelector('[data-bk-others]'); box.insertAdjacentHTML('beforeend', slotEditor('other_n' + Date.now().toString(36), {}, 'Personne citée', people, {removable: true})); return; }
                     const fs = e.target.closest('[data-bk-slot]');
                     if (fs && e.target.closest('[data-bk-remove]')) { fs.remove(); renumber(body); return; }
                     if (fs && e.target.closest('[data-bk-up]') && fs.previousElementSibling) { fs.parentElement.insertBefore(fs, fs.previousElementSibling); renumber(body); return; }
@@ -281,8 +281,7 @@
                         const role = fs.dataset.bkSlot, gender = s.sex === 'F' || /wife|mother/.test(role) ? 'female' : s.sex === 'M' || /husband|father/.test(role) ? 'male' : 'unknown';
                         try {
                             const r = await api('save_person', {}, {method: 'POST', body: {...splitName(s.written_name), gender, living_status: s.death_date ? 'deceased' : 'unknown', occupation: s.occupation}});
-                            const pid = Number(r.result?.id || r.id); const hid = fs.querySelector('input[type=hidden][name^="bk_p_"]'), vis = hid?.parentElement?.querySelector('[data-cp-input]');
-                            if (hid) hid.value = pid; if (vis) vis.value = s.written_name;
+                            const pid = Number(r.result?.id || r.id); const pkEl = fs.querySelector('.pk'); if (pkEl) window.LCNDA_PICKER.pickerSet(pkEl, {id: pid, title: s.written_name}); // la pastille montre la fiche créée
                             toast(`Fiche créée pour ${s.written_name}. « Reporter sur les fiches » ajoutera ses dates.`);
                         } catch (error) { toast(error.message, 'error'); }
                     }

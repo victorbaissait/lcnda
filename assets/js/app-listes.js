@@ -4,6 +4,8 @@
 (() => {
     'use strict';
     const {$, $$, api, confirmBox, emptyState, plural, archiveDigestOptionLabel, bindEntityLabelsFields, bindTableLinks, budgetCategories, budgetCategoryLabel, censusStatusText, confidenceLabel, courrierCopyFormatLabel, courrierCopyFormats, courrierFilters, courrierOrganismeLabel, courrierOrganismes, courrierStatutLabel, courrierStatuts, debounce, empty, escapeHtml, externalLinks, formObject, keepSosaOutsideClick, labelChip, labelEntityTypesText, labelTextColor, lifeText, listControllerSignal, mediaChronologyKey, mediaTypeShortLabelWithIcon, normalizedMediaType, onOutsideClick, openListReorderDialog, openMediaDuplicatesDialog, openMediaFaceDetectionDialog, orderedListTypes, persistUiState, personName, relationYears, reminderCategories, reminderCategoryLabel, reminderIsPast, renderClosedBranchesList, renderFairsList, renderFamilyMemoriesList, renderFamilyObjectsList, renderPrecisePlacesList, renderSidebar, renewListController, renewSosaSearchController, safeUrl, saveExternalLinks, sidebarSignal, sideButton, sosaRootId, sosaSearchSignal, state, summaryFromState, syncCourrierCopyOrder, toast, typeGlyph, years} = window.LCNDA_APP;
+    /** 🔍 Menu de choix unique (app-picker.js) ; champ caché sans name : la liste lit le choix elle-même (picker-change). */
+    const pk = o => (window.LCNDA_PICKER?.pickerField(o) || '').replace(` name="${o.name}"`, '');
     /* 🗂 rangées en groupes comme Maintenance (app-sidegroups.js), ou en une seule liste ; « Mes listes » toujours en bas, à part */
     const LG_DEFAULT = [['g_people', '👥', 'Personnes et familles', ['persons', 'events', 'sosa', 'daboville', 'labels', 'occupations', 'employers', 'pets', 'cited_names', 'languages', 'living_contacts', 'closed_branches']],
         ['g_places', '📍', 'Lieux et maisons', ['places', 'precise_places', 'villages', 'parishes', 'houses', 'old_maps', 'field_trips']],
@@ -54,12 +56,12 @@
         const dbSosaRootName=type==='sosa'?(dbSosaRootId?(localStorage.getItem('genealogie-sosa-root-name')||`Personne #${dbSosaRootId}`):''):'';
         const effectiveListSosaRootId=type==='sosa'?(state.listSosaRootId||dbSosaRootId):0;
         const listSosaRootOverridden=type==='sosa'&&!!state.listSosaRootId&&state.listSosaRootId!==dbSosaRootId;
-        const sosaRootHtml=type==='sosa'?`<div class="list-gender-filter sosa-list-filters sosa-list-root-filter"><div><strong>SOSA n°1 de cette liste</strong><span>${effectiveListSosaRootId?`${escapeHtml(listSosaRootOverridden?state.listSosaRootName:dbSosaRootName)}${listSosaRootOverridden?' (choix local, sans impact sur la base)':''}`:'Aucune personne racine définie'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box"><input type="text" id="list-sosa-root-search" placeholder="Rechercher une personne…" value="${escapeHtml(listSosaRootOverridden?state.listSosaRootName:'')}" autocomplete="off"><input type="hidden" id="list-sosa-root-input" value="${state.listSosaRootId||''}"><div class="relation-results sosa-results" id="list-sosa-root-results" hidden></div></div><button class="button small" type="button" id="list-sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button>${listSosaRootOverridden?'<button class="button small secondary" type="button" id="list-sosa-root-reset">Réinitialiser sur le Sosa 1 de la base</button>':''}</div></div>`:'';
+        const sosaRootHtml=type==='sosa'?`<div class="list-gender-filter sosa-list-filters sosa-list-root-filter"><div><strong>SOSA n°1 de cette liste</strong><span>${effectiveListSosaRootId?`${escapeHtml(listSosaRootOverridden?state.listSosaRootName:dbSosaRootName)}${listSosaRootOverridden?' (choix local, sans impact sur la base)':''}`:'Aucune personne racine définie'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="list-sosa-root-search">${pk({name: 'list_sosa_root', kind: 'person', value: listSosaRootOverridden ? {id: Number(state.listSosaRootId), title: state.listSosaRootName || '', kind: 'person'} : null})}</div><button class="button small" type="button" id="list-sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button>${listSosaRootOverridden?'<button class="button small secondary" type="button" id="list-sosa-root-reset">Réinitialiser sur le Sosa 1 de la base</button>':''}</div></div>`:'';
         const sosaFilterHtml=type==='sosa'?`<div class="list-gender-filter sosa-list-filters"><label>Trier <select id="list-sosa-sort"><option value="sosa_asc" ${state.listSosaSort==='sosa_asc'?'selected':''}>SOSA croissant</option><option value="sosa_desc" ${state.listSosaSort==='sosa_desc'?'selected':''}>SOSA décroissant</option><option value="birth_asc" ${state.listSosaSort==='birth_asc'?'selected':''}>Naissance chronologique</option><option value="birth_desc" ${state.listSosaSort==='birth_desc'?'selected':''}>Naissance antéchronologique</option><option value="marriage_asc" ${state.listSosaSort==='marriage_asc'?'selected':''}>Mariage chronologique</option><option value="marriage_desc" ${state.listSosaSort==='marriage_desc'?'selected':''}>Mariage antéchronologique</option><option value="death_asc" ${state.listSosaSort==='death_asc'?'selected':''}>Mort chronologique</option><option value="death_desc" ${state.listSosaSort==='death_desc'?'selected':''}>Mort antéchronologique</option></select></label><label class="checkbox-row"><input id="list-sosa-missing" type="checkbox" ${state.listSosaMissing?'checked':''}> Afficher les SOSA manquants</label><label class="checkbox-row"><input id="list-sosa-impossible" type="checkbox" ${state.listSosaImpossible?'checked':''} ${state.listSosaMissing?'':'disabled'}> Inclure les manquants impossibles</label></div>`:'';
-        const dabovilleRootHtml=type==='daboville'?`<div class="list-gender-filter sosa-list-filters sosa-list-root-filter"><div><strong>Racine (n°1) de cette liste d’Aboville</strong><span>${state.listDabovilleRootId?escapeHtml(state.listDabovilleRootName||`Personne #${state.listDabovilleRootId}`):'Aucune personne racine définie'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box"><input type="text" id="list-daboville-root-search" placeholder="Rechercher une personne…" value="${escapeHtml(state.listDabovilleRootName||'')}" autocomplete="off"><input type="hidden" id="list-daboville-root-input" value="${state.listDabovilleRootId||''}"><div class="relation-results sosa-results" id="list-daboville-root-results" hidden></div></div><button class="button small" type="button" id="list-daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button>${state.listDabovilleRootId?'<button class="button small secondary" type="button" id="list-daboville-root-reset">Retirer la racine</button>':''}</div></div>`:'';
+        const dabovilleRootHtml=type==='daboville'?`<div class="list-gender-filter sosa-list-filters sosa-list-root-filter"><div><strong>Racine (n°1) de cette liste d’Aboville</strong><span>${state.listDabovilleRootId?escapeHtml(state.listDabovilleRootName||`Personne #${state.listDabovilleRootId}`):'Aucune personne racine définie'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="list-daboville-root-search">${pk({name: 'list_daboville_root', kind: 'person', value: state.listDabovilleRootId ? {id: Number(state.listDabovilleRootId), title: state.listDabovilleRootName || '', kind: 'person'} : null})}</div><button class="button small" type="button" id="list-daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button>${state.listDabovilleRootId?'<button class="button small secondary" type="button" id="list-daboville-root-reset">Retirer la racine</button>':''}</div></div>`:'';
         const dabovilleFilterHtml=type==='daboville'?`<div class="list-gender-filter sosa-list-filters"><label>Trier <select id="list-daboville-sort"><option value="daboville_asc" ${state.listDabovilleSort==='daboville_asc'?'selected':''}>N° d’Aboville croissant</option><option value="daboville_desc" ${state.listDabovilleSort==='daboville_desc'?'selected':''}>N° d’Aboville décroissant</option><option value="birth_asc" ${state.listDabovilleSort==='birth_asc'?'selected':''}>Naissance chronologique</option><option value="birth_desc" ${state.listDabovilleSort==='birth_desc'?'selected':''}>Naissance antéchronologique</option><option value="marriage_asc" ${state.listDabovilleSort==='marriage_asc'?'selected':''}>Mariage chronologique</option><option value="marriage_desc" ${state.listDabovilleSort==='marriage_desc'?'selected':''}>Mariage antéchronologique</option><option value="death_asc" ${state.listDabovilleSort==='death_asc'?'selected':''}>Mort chronologique</option><option value="death_desc" ${state.listDabovilleSort==='death_desc'?'selected':''}>Mort antéchronologique</option></select></label></div>`:'';
         const mediaKindOptions=[['all','Tous'],['image','Photos'],['audio','Audio'],['video','Vidéo'],['pdf','PDF']];
-        const mediaFilterHtml=type==='media'?`<div class="list-gender-filter media-list-filters"><label>Type <select id="list-media-kind">${mediaKindOptions.map(([value,label])=>`<option value="${value}" ${state.listMediaKind===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}</select></label><label>Ville <span class="media-city-input-wrap"><input type="text" id="list-media-city" placeholder="Nantes, Rennes…" value="${escapeHtml(state.listMediaCity||'')}" autocomplete="off"><div class="place-suggestions" id="list-media-city-suggestions" hidden></div></span></label><label>Date de <input type="date" id="list-media-date-from" value="${escapeHtml(state.listMediaDateFrom||'')}"></label><label>Date à <input type="date" id="list-media-date-to" value="${escapeHtml(state.listMediaDateTo||'')}"></label></div>`:'';
+        const mediaFilterHtml=type==='media'?`<div class="list-gender-filter media-list-filters"><label>Type <select id="list-media-kind">${mediaKindOptions.map(([value,label])=>`<option value="${value}" ${state.listMediaKind===value?'selected':''}>${escapeHtml(label)}</option>`).join('')}</select></label><div class="pk-host media-city-input-wrap" style="min-width:220px"><span>Ville</span><div id="list-media-city">${pk({name: 'list_media_city', kind: 'place', allowFree: true, allowCreate: false, value: state.listMediaCity ? `txt:${state.listMediaCity}` : null})}</div></div><label>Date de <input type="date" id="list-media-date-from" value="${escapeHtml(state.listMediaDateFrom||'')}"></label><label>Date à <input type="date" id="list-media-date-to" value="${escapeHtml(state.listMediaDateTo||'')}"></label></div>`:'';
         const displayToggle=listCanDisplayCards(type)?`<div class="segmented list-display-toggle"><button type="button" data-list-display="table" class="${state.listDisplay!=='cards'?'is-active':''}">Liste</button><button type="button" data-list-display="cards" class="${state.listDisplay==='cards'?'is-active':''}">Fiches</button></div>`:'';
         const mediaDuplicatesActionHtml=type==='media'?'<div class="page-actions media-list-actions"><button type="button" class="button small" data-h-open-list="recueils" title="Pages photographiées dans l’ordre : registres, listes, cahiers…">📚 Recueils</button><button type="button" class="button small secondary" onclick="window.LCNDA_EXT?.openAssembler?.()" title="Mettre plusieurs photos ensemble : redimensionner, faire tourner, transparence">🧩 Assembler des photos</button><button type="button" class="button small secondary" onclick="window.LCNDA_EXT?.pickRetouch?.()" title="Choisir une photo de l’app ou en importer une, puis la retoucher">🎚️ Retoucher</button><button type="button" class="button small secondary" id="media-duplicates-btn">+ Recherche de doublons</button><button type="button" class="button small secondary" id="media-face-detect-btn">+ Détection de visage</button><button type="button" class="button small secondary" onclick="window.LCNDA_EXT?.openFaces?.()" title="Reconnaître les visages d’après ceux déjà identifiés (sur cet ordinateur)">🏷️ Qui est qui ?</button></div>':'';
         $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">${type==='living_contacts'?'CARNET D’ADRESSES PRIVÉ':'LISTE DYNAMIQUE'}</span><h2>${labels[type]}</h2><p id="list-count">${type==='living_contacts'?'Contacts séparés de l’arbre généalogique, utiles notamment pour une réunion de famille.':'Chargement par lots pour garder l’interface fluide…'}</p></div>${mediaDuplicatesActionHtml}</header><div class="list-toolbar"><div class="search-box" style="position:static;max-width:500px"><div class="search-row"><input id="list-search" placeholder="Filtrer cette liste…"><button aria-label="Rechercher">⌕</button></div></div>${displayToggle}</div>${genderFilterHtml}${reminderFilterHtml}${reminderActionsHtml}${budgetActionsHtml}${courrierFilterHtml}${courrierActionsHtml}${livingContactsActionsHtml}${sosaRootHtml}${sosaFilterHtml}${dabovilleRootHtml}${dabovilleFilterHtml}${mediaFilterHtml}${(type==='labels'||type==='occupations'||type==='employers')?'<div class="page-actions" style="margin-top:0">'+(type==='employers'?'<button type="button" class="button small" data-employer-new>🏢 + Nouvel employeur</button>':'')+'<button type="button" class="button small secondary" id="label-list-show-all">Afficher tous les éléments</button><button type="button" class="button small secondary" id="label-list-hide-all">Masquer tous les éléments</button></div>':''}<div id="table-target"><div class="loading-block">Préparation de la liste…</div></div><div class="list-more-wrap" id="list-more-wrap"></div></section>`;
@@ -118,29 +120,8 @@
             state.listSosaRootId=0;state.listSosaRootName='';
             persistUiState();await renderList();
         });
-        $('#list-sosa-root-search')?.addEventListener('input',debounce(async event=>{
-            const q=event.target.value.trim(),results=$('#list-sosa-root-results');
-            $('#list-sosa-root-input').value='';
-            if(!results)return;
-            if(q.length<2){results.hidden=true;results.innerHTML='';return;}
-            renewSosaSearchController();
-            try{
-                const result=await api('people',{q,limit:30},{signal:sosaSearchSignal()});
-                results.innerHTML=result.people.length?result.people.map(person=>`<button type="button" class="relation-result" data-list-sosa-person="${person.id}" data-list-sosa-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';
-                results.hidden=false;
-            }catch(error){if(error.name!=='AbortError')toast(error.message,'error');}
-        },250));
-        $('#list-sosa-root-results')?.addEventListener('click',async event=>{
-            const button=event.target.closest('[data-list-sosa-person]');if(!button)return;
-            state.listSosaRootId=Number(button.dataset.listSosaPerson);
-            state.listSosaRootName=button.dataset.listSosaName;
-            const results=$('#list-sosa-root-results');if(results){results.hidden=true;results.innerHTML='';}
-            persistUiState();await renderList();
-        });
-        document.addEventListener('click',keepSosaOutsideClick(event=>{
-            const box=$('#list-sosa-root-results')||$('#sosa-root-results')||$('#list-daboville-root-results')||$('#daboville-root-results');if(!box||box.hidden)return;
-            if(!event.target.closest('.sosa-search-box'))box.hidden=true;
-        }));
+        // racine Sosa de la liste : menu de choix unique
+        $('#list-sosa-root-search')?.addEventListener('picker-change',async event=>{const it=event.detail.item;if(!it||it.free)return;state.listSosaRootId=Number(it.id);state.listSosaRootName=it.title;persistUiState();await renderList();});
         $('#list-daboville-sort')?.addEventListener('change',async event=>{state.listDabovilleSort=event.target.value;persistUiState();await renderList();});
         $('#list-daboville-use-current')?.addEventListener('click',async()=>{
             if(!state.currentPersonId)return;
@@ -152,25 +133,7 @@
             state.listDabovilleRootId=0;state.listDabovilleRootName='';
             persistUiState();await renderList();
         });
-        $('#list-daboville-root-search')?.addEventListener('input',debounce(async event=>{
-            const q=event.target.value.trim(),results=$('#list-daboville-root-results');
-            $('#list-daboville-root-input').value='';
-            if(!results)return;
-            if(q.length<2){results.hidden=true;results.innerHTML='';return;}
-            renewSosaSearchController();
-            try{
-                const result=await api('people',{q,limit:30},{signal:sosaSearchSignal()});
-                results.innerHTML=result.people.length?result.people.map(person=>`<button type="button" class="relation-result" data-list-daboville-person="${person.id}" data-list-daboville-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';
-                results.hidden=false;
-            }catch(error){if(error.name!=='AbortError')toast(error.message,'error');}
-        },250));
-        $('#list-daboville-root-results')?.addEventListener('click',async event=>{
-            const button=event.target.closest('[data-list-daboville-person]');if(!button)return;
-            state.listDabovilleRootId=Number(button.dataset.listDabovillePerson);
-            state.listDabovilleRootName=button.dataset.listDabovilleName;
-            const results=$('#list-daboville-root-results');if(results){results.hidden=true;results.innerHTML='';}
-            persistUiState();await renderList();
-        });
+        $('#list-daboville-root-search')?.addEventListener('picker-change',async event=>{const it=event.detail.item;if(!it||it.free)return;state.listDabovilleRootId=Number(it.id);state.listDabovilleRootName=it.title;persistUiState();await renderList();});
         const refreshMediaRows=async()=>{
             renewListController();
             const refreshToken=state.workspaceToken;
@@ -182,36 +145,10 @@
                 rows=next.rows;data=next;paint();
             }catch(error){if(error.name!=='AbortError')toast(error.message,'error');}
         };
-        $('#list-media-city')?.addEventListener('input',debounce(async event=>{city=event.target.value;state.listMediaCity=city;persistUiState();await refreshMediaRows();}));
+        // ville des médias : menu des lieux (un lieu de la base, ou le texte tapé gardé tel quel) ; le filtre reste un nom de ville
+        $('#list-media-city')?.addEventListener('picker-change',async event=>{const it=event.detail.item;city=it?(it.free?it.title:(it.name||it.title)):'';state.listMediaCity=city;persistUiState();await refreshMediaRows();});
         $('#list-media-date-from')?.addEventListener('change',async event=>{date_from=event.target.value;state.listMediaDateFrom=date_from;persistUiState();await refreshMediaRows();});
         $('#list-media-date-to')?.addEventListener('change',async event=>{date_to=event.target.value;state.listMediaDateTo=date_to;persistUiState();await refreshMediaRows();});
-        const mediaCityInput=$('#list-media-city');
-        const mediaCitySuggestions=$('#list-media-city-suggestions');
-        if(mediaCityInput&&mediaCitySuggestions){
-            const hideMediaCitySuggestions=()=>{mediaCitySuggestions.hidden=true;mediaCitySuggestions.innerHTML='';};
-            const searchMediaCitySuggestions=debounce(async()=>{
-                const cq=mediaCityInput.value.trim();
-                if(cq.length<2){hideMediaCitySuggestions();return;}
-                try{
-                    const suggestData=await api('place_suggestions',{q:cq,country:''});
-                    const seen=new Set();
-                    const places=(suggestData.places||[]).filter(place=>{const key=(place.name||'').toLowerCase();if(seen.has(key))return false;seen.add(key);return true;});
-                    mediaCitySuggestions.innerHTML=places.map(place=>`<button type="button" data-city-name="${escapeHtml(place.name)}"><strong>${escapeHtml(place.name)}</strong>${place.subdivision?`<span>${escapeHtml(place.subdivision)}</span>`:''}<small>${escapeHtml([place.county,place.state,place.country].filter(Boolean).join(', '))}</small></button>`).join('');
-                    mediaCitySuggestions.hidden=!mediaCitySuggestions.innerHTML;
-                }catch(_){hideMediaCitySuggestions();}
-            },220);
-            mediaCityInput.addEventListener('input',searchMediaCitySuggestions);
-            mediaCityInput.addEventListener('focus',()=>{if(mediaCitySuggestions.innerHTML)mediaCitySuggestions.hidden=false;});
-            mediaCitySuggestions.addEventListener('click',async event=>{
-                const button=event.target.closest('button[data-city-name]');
-                if(!button)return;
-                mediaCityInput.value=button.dataset.cityName;
-                hideMediaCitySuggestions();
-                city=mediaCityInput.value;state.listMediaCity=city;persistUiState();
-                await refreshMediaRows();
-            });
-            onOutsideClick('media-city',event=>{if(!mediaCityInput.contains(event.target)&&!mediaCitySuggestions.contains(event.target))hideMediaCitySuggestions();});
-        }
     }
 
     function reminderModeText(mode){

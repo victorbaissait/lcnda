@@ -175,7 +175,7 @@
             if (s.type === 'title') h += `${field('title', 'Titre', `<textarea rows="2" data-ss-p="title">${esc(s.title || '')}</textarea>`)}${field('sub', 'Sous-titre', `<textarea rows="2" data-ss-p="sub">${esc(s.sub || '')}</textarea>`)}<div class="h-ss-grid">${field('bg', 'Fond', `<input type="color" data-ss-p="bg" value="${esc(s.bg || (THEMES[show.theme] || THEMES.classique).bg)}">`)}${field('fg', 'Texte', `<input type="color" data-ss-p="fg" value="${esc(s.fg || (THEMES[show.theme] || THEMES.classique).fg)}">`)}</div>`;
             if (s.type === 'map') h += `${field('title', 'Titre sur la carte', `<input data-ss-p="title" value="${esc(s.title || '')}" maxlength="120">`)}<div class="h-ss-grid">${field('mapBg', 'Fond', `<select data-ss-p="mapBg"><option value="offline">Hors ligne</option>${A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(s.mapBg || '') : ''}</select>`)}${field('color', 'Couleur du trajet', `<input type="color" data-ss-p="color" value="${esc(s.color || '#c0392b')}">`)}</div>
                 <h4>Les étapes du trajet</h4><ol class="h-ss-route">${(s.route || []).map((q, i) => `<li><input data-ss-r="${i}:label" value="${esc(q.label || q.name || '')}" placeholder="Lieu"><input data-ss-r="${i}:year" value="${esc(q.year || '')}" placeholder="Année" size="5"><button type="button" class="icon-button" data-ss-rup="${i}" title="Monter">↑</button><button type="button" class="icon-button" data-ss-rdel="${i}" title="Retirer">×</button></li>`).join('')}</ol>
-                <div class="h-ss-addplace"><input type="search" data-ss-placeq placeholder="Ajouter un lieu : commune, village…" autocomplete="off"><div data-ss-placeres class="h-ss-res"></div></div><button type="button" class="button small secondary" data-ss-cmd="routeperson">👤 Les lieux de la vie d’une personne…</button>`;
+                <div class="h-ss-addplace" data-ss-addplace>${(window.LCNDA_PICKER || A()).pickerField({name: 'ss_place', kind: 'place'})}</div><button type="button" class="button small secondary" data-ss-cmd="routeperson">👤 Les lieux de la vie d’une personne…</button>`;
             h += `${field('text', s.type === 'map' ? 'Légende' : 'Texte (légende)', `<textarea rows="3" data-ss-p="text" placeholder="Ce que raconte cette diapositive…">${esc(s.text || '')}</textarea>`)}${field('textPos', 'Place du texte', `<select data-ss-p="textPos">${[['bottom', 'En bas'], ['top', 'En haut'], ['center', 'Au milieu']].map(([k, l]) => `<option value="${k}" ${s.textPos === k ? 'selected' : ''}>${l}</option>`).join('')}</select>`)}
                 <h4>🎙 Voix</h4>${s.voice ? `<audio controls src="${esc(mediaUrl(s.voice.filename))}"></audio><div class="h-ss-row"><button type="button" class="link-button" data-ss-cmd="voicedel">retirer la voix</button><button type="button" class="link-button" data-ss-cmd="voicefit" title="La diapositive dure le temps de la voix">⇥ durée = voix</button></div>` : ''}
                 <div class="h-ss-row"><button type="button" class="button small ${recording ? 'danger' : ''}" data-ss-cmd="rec">${recording ? '⏹ Arrêter' : '🎙 Enregistrer ma voix'}</button><button type="button" class="button small secondary" data-ss-cmd="voicepick">🔊 Un son de la base…</button></div>`;
@@ -208,7 +208,7 @@
             return new Promise(res => {
                 let done = false;
                 ext.openDialog({eyebrow: 'DIAPORAMA', title, submitLabel: multi ? 'Ajouter' : 'Choisir',
-                    body: `<label>Fichier${multi ? 's' : ''} de l’ordinateur (ils vont dans les médias)<input type="file" name="f" accept="${kind === 'image' ? 'image/*' : 'audio/*'}" ${multi ? 'multiple' : ''}></label><p class="muted">ou de la base :</p><label>Chercher<input type="search" data-mq placeholder="Titre, nom de fichier…" autocomplete="off"></label><div data-mres class="${kind === 'image' ? 'vx-mmedia h-ss-pick' : 'h-ss-picka'}"></div>`,
+                    body: `<label>Fichier${multi ? 's' : ''} de l’ordinateur (ils vont dans les médias)<input type="file" name="f" accept="${kind === 'image' ? 'image/*' : 'audio/*'}" ${multi ? 'multiple' : ''}></label><p class="muted">ou de la base :</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">${kind === 'image' ? '🖼' : '🎵'}</span><input type="text" class="pk-input" data-mq placeholder="Titre, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher dans les médias"></div></div><div data-mres class="${kind === 'image' ? 'vx-mmedia h-ss-pick' : 'h-ss-picka'}"></div>`,
                     onOpen: dg => { const q = dg.querySelector('[data-mq]'), box = dg.querySelector('[data-mres]'); let tm = 0;
                         const go = async () => { const res = await api('list', {type: 'media', q: q.value.trim(), limit: 60}).catch(() => ({rows: []})), rows = (res.rows || res.data || []).filter(m => rx.test(m.filename || '')); box._rows = rows;
                             box.innerHTML = rows.map((m, i) => kind === 'image' ? `<label title="${esc(m.title || m.filename)}"><input type="${multi ? 'checkbox' : 'radio'}" name="mp" value="${i}"><img src="${esc(mediaUrl(m.thumbnail || m.filename))}" alt="" loading="lazy"></label>` : `<label class="checkbox-line"><input type="radio" name="mp" value="${i}"> 🎵 ${esc(m.title || m.filename)}</label>`).join('') || '<p class="muted">Rien trouvé.</p>'; };
@@ -237,9 +237,8 @@
             const cp = Number(A().state.currentPersonId) || 0;
             return new Promise(res => { let done = false;
                 ext.openDialog({eyebrow: 'DIAPORAMA', title, submitLabel: 'Choisir',
-                    body: `<label>Personne${A().collectionPersonField('ss_pick', cp ? {id: cp, first_name: 'La personne affichée', last_name: ''} : null, 'Nom, prénom…')}</label>${cp ? '<p class="muted">La personne affichée en ce moment, ou cherche-en une autre.</p>' : ''}`,
-                    onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); setTimeout(() => { q.focus(); q.select(); }, 30);
-                        if (cp) api('person', {id: cp}).then(r => { if (r.person && dg.querySelector('[name=ss_pick]').value == cp) q.value = A().personName(r.person); }).catch(() => {});
+                    body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'ss_pick', kind: 'person', value: cp || null})}</div>${cp ? '<p class="muted">La personne affichée en ce moment, ou × pour en chercher une autre.</p>' : ''}`,
+                    onOpen: dg => { setTimeout(() => (dg.querySelector('.pk-search:not([hidden]) .pk-input') || dg.querySelector('.pk-chosen .go'))?.focus(), 30);
                         dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
                     onSubmit: f => { const chosen = Number(f.elements.ss_pick?.value) || 0; if (!chosen) { toast('Choisis une personne.', 'error'); return false; } done = true; res(chosen); }}); });
         }
@@ -316,11 +315,10 @@
             const li = e.target.closest('[data-ss-i]'), del = e.target.closest('[data-ss-del]');
             if (del) { show.slides.splice(Number(del.dataset.ssDel), 1); cur = clamp(cur, 0, show.slides.length - 1); touch(); await rebuild(); return; }
             if (li && !e.target.closest('button')) { if (playing) play(); goSlide(Number(li.dataset.ssI)); return; }
-            const rdel = e.target.closest('[data-ss-rdel]'), rup = e.target.closest('[data-ss-rup]'), pr = e.target.closest('[data-ss-placepick]');
+            const rdel = e.target.closest('[data-ss-rdel]'), rup = e.target.closest('[data-ss-rup]');
             const s = show.slides[cur];
             if (rdel && s) { s.route.splice(Number(rdel.dataset.ssRdel), 1); touch(); await rebuild(); return; }
             if (rup && s) { const i = Number(rup.dataset.ssRup); if (i > 0) { [s.route[i - 1], s.route[i]] = [s.route[i], s.route[i - 1]]; touch(); await rebuild(); } return; }
-            if (pr && s) { const p = $('[data-ss-placeres]')._rows[Number(pr.dataset.ssPlacepick)]; s.route = s.route || []; s.route.push({name: p.name, label: p.name, year: '', lat: +p.lat, lon: +p.lon}); touch(); await rebuild(); return; }
             const c = e.target.closest('[data-ss-cmd]'); if (!c) return; const k = c.dataset.ssCmd;
             if (k === 'close') return close();
             if (k === 'save') return save();
@@ -347,9 +345,18 @@
             if (el.dataset.ssP && s) { const k = el.dataset.ssP; s[k] = k === 'dur' ? clamp(Number(el.value) || 5, 1, 120) : el.value; touch(); if (['mapBg'].includes(k)) await rebuild(); else { drawAt(t); if (k === 'dur' || k === 'title' || k === 'text') paintList(); } return; }
             if (el.dataset.ssR && s) { const [i, k] = el.dataset.ssR.split(':'); s.route[Number(i)][k] = el.value; touch(); drawAt(t); return; }
             if (el.dataset.ssG) { const k = el.dataset.ssG; if (k === 'musicVol') { show.musicVol = Number(el.value) / 100; if (music) music.volume = show.musicVol; touch(); return; } show[k] = el.value; touch(); await rebuild(); return; }
-            if (el.matches('[data-ss-placeq]')) { clearTimeout(el._t); el._t = setTimeout(async () => { const rows = ((await api('board_place_search', {q: el.value.trim()}).catch(() => ({places: []}))).places || []).filter(p => p.lat || p.lon), box = $('[data-ss-placeres]'); box._rows = rows; box.innerHTML = rows.map((p, i) => `<button type="button" class="link-button" data-ss-placepick="${i}">📍 ${esc(p.name)} <small class="muted">${esc(p.detail || '')}</small></button>`).join('') || '<small class="muted">Rien trouvé.</small>'; }, 250); }
         });
         dlg.addEventListener('change', e => { if (e.target.matches('[data-ss-name]')) touch(); });
+        // ＋ un lieu au trajet : le menu de choix unique (sorte place) ; ses coordonnées viennent de la recherche des lieux
+        dlg.addEventListener('picker-change', async e => {
+            const it = e.detail.item, s = show.slides[cur], field = e.target.closest('[data-ss-addplace] .pk');
+            if (!field || !it?.id || !s) return;
+            const c = await (ext.placeCoords ? ext.placeCoords(it) : Promise.resolve({}));
+            (window.LCNDA_PICKER || A()).pickerSet(field, null);
+            if (c.lat === '' || c.lat == null) return toast(`« ${it.title} » n’a pas encore de position sur la carte.`, 'error');
+            const name = String(it.name || it.title).replace(/\s*\(.*\)$/, '');
+            s.route = s.route || []; s.route.push({name, label: name, year: '', lat: +c.lat, lon: +c.lon}); touch(); await rebuild();
+        });
         // glisser une diapositive pour changer l'ordre
         let dragI = -1;
         dlg.addEventListener('dragstart', e => { const li = e.target.closest('[data-ss-i]'); if (!li) return; dragI = Number(li.dataset.ssI); e.dataTransfer.effectAllowed = 'move'; });

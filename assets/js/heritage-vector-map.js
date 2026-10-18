@@ -16,6 +16,9 @@
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
     const toast = (...a) => A().toast(...a);
     const api = (...a) => A().api(...a);
+    // 🔍 menu de choix unique (assets/js/app-picker.js) ; pkItem : la chose choisie dans un champ (avec son nom)
+    const PK = () => window.LCNDA_PICKER || A();
+    const pkItem = el => { if (!el) return null; let v = []; try { v = JSON.parse(el.dataset.pkValue || '[]'); } catch (_) {} const it = Array.isArray(v) ? v[0] : null; return it && !it.free && (it.id || it.ref) ? it : null; };
     const hex = (c, d) => /^#[0-9a-f]{3,8}$/i.test(String(c || '')) ? c : d;
 
     /* ═════════ Styles d'époque ═════════ */
@@ -514,17 +517,16 @@
         /* les fenêtres */
         async function linkDialog(o, what) {
             if (what === 'person') return ext.openDialog({eyebrow: 'PLAN', title: 'Lier à une personne', submitLabel: 'Lier', // même champ « personne » que partout ailleurs
-                body: `<label>Personne${A().collectionPersonField('vm_pick', o.map?.link?.type === 'person' && o.map.link.id ? {id: o.map.link.id, first_name: o.map.link.label, last_name: ''} : null, 'Nom, prénom…')}</label>`,
-                onOpen: dg => setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30),
-                onSubmit: f => { const id = Number(f.elements.vm_pick?.value) || 0; if (!id) { toast('Choisis dans la liste.', 'error'); return false; }
-                    o.map = o.map || {}; o.map.link = {type: 'person', id, label: String(f.querySelector('[data-cp-input]').value).slice(0, 120)}; ed.commit('Lien ajouté'); }});
+                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${PK().pickerField({name: 'vm_pick', kind: 'person', value: o.map?.link?.type === 'person' && o.map.link.id ? o.map.link.id : null})}</div>`,
+                onOpen: dg => setTimeout(() => dg.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(), 30),
+                onSubmit: f => { const it = pkItem(f.querySelector('.pk')); if (!it) { toast('Choisis dans la liste.', 'error'); return false; }
+                    o.map = o.map || {}; o.map.link = {type: 'person', id: Number(it.id), label: String(it.title || '').slice(0, 120)}; ed.commit('Lien ajouté'); }});
             ext.openDialog({eyebrow: 'PLAN', title: 'Lier à un lieu', submitLabel: 'Lier',
-                body: `<label>Lieu<input type="search" data-q placeholder="Commune, lieu…" autocomplete="off"></label><div data-res class="vx-pres"></div>`,
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'); let t = 0; q.focus();
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => {
-                        const rows = ((await api('board_place_search', {q: q.value.trim()}).catch(() => ({places: []}))).places || []).map(p => ({id: Number(p.id) || 0, label: p.name + (p.detail ? ` (${p.detail})` : ''), lat: p.lat, lon: p.lon}));
-                        res.innerHTML = rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}"> ${esc(r.label)}</label>`).join('') || '<p class="muted">Rien trouvé.</p>'; res._rows = rows; }, 220); }); },
-                onSubmit: f => { const i = f.querySelector('[name=pick]:checked')?.value, r = f.querySelector('[data-res]')._rows?.[Number(i)]; if (!r) { toast('Choisis dans la liste.', 'error'); return false; }
+                body: `<div class="h-pk-solo"><span class="pk-lab">Lieu</span>${PK().pickerField({name: 'vm_place', kind: 'place', value: o.map?.link?.type === 'place' && o.map.link.id ? {id: o.map.link.id, title: o.map.link.label, name: o.map.name || o.map.link.label} : null})}</div>`,
+                onOpen: dg => setTimeout(() => dg.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(), 30),
+                onSubmit: async f => { const it = pkItem(f.querySelector('.pk')); if (!it) { toast('Choisis dans la liste.', 'error'); return false; }
+                    const c = it.lat != null ? it : await (ext.placeCoords ? ext.placeCoords(it) : Promise.resolve({}));
+                    const r = {id: Number(it.id) || 0, label: it.title, lat: c.lat === '' ? null : c.lat, lon: c.lon === '' ? null : c.lon};
                     o.map = o.map || {}; o.map.link = {type: what, id: r.id, label: String(r.label).slice(0, 120), ...(r.lat ? {lat: r.lat, lon: r.lon} : {})}; if (!o.map.name && o.type !== 'text') o.map.name = String(r.label).replace(/ \(.*\)$/, ''); ed.commit('Lien ajouté'); }});
         }
         function openLink(m) { if (!m?.link) return; if (m.link.type === 'person' && m.link.id) { ed.close?.(); A().openPersonById?.(m.link.id); } else toast(`${m.link.label}${m.link.lat ? ` (${num(m.link.lat).toFixed(4)}, ${num(m.link.lon).toFixed(4)})` : ''}`); }
@@ -557,26 +559,28 @@
             ed.commit(quiet ? 'Fond décalé' : 'Fond de carte'); ed.paint(); return true;
         }
         function basemapDialog() {
-            const d = ed.doc(), m0 = mapDoc().bm; let rows = [], picked = m0 ? {name: m0.name, detail: '', lat: m0.lat, lon: m0.lon, id: m0.place_id} : null, off = [0, 0], pt = 0;
+            const d = ed.doc(), m0 = mapDoc().bm; let picked = m0 ? {name: m0.name, detail: '', lat: m0.lat, lon: m0.lon, id: m0.place_id} : null, off = [0, 0], pt = 0;
             ext.openDialog({eyebrow: 'PLAN', title: '🗺️ Fond de carte d’un lieu', submitLabel: 'Poser le fond', wide: true,
                 body: `<div class="vx-bm"><div class="vx-bm-left"><p class="muted">La carte du lieu se pose sous le dessin, en transparence, à la taille du plan de travail : décalque les rues, les rivières, les maisons. Le plan est alors « situé » : l’échelle est juste et les lieux de ta base peuvent s’y placer.</p>
-                    <label class="vx-bm-f"><span>Lieu</span><input type="search" data-q placeholder="Commune, village…" autocomplete="off" value="${esc(m0?.name || d.map?.geo?.name || '')}"></label>
-                    <div data-res class="vx-bm-res" role="listbox" aria-label="Lieux trouvés"></div>
+                    <div class="vx-bm-f" data-bmplace><span>Lieu</span>${PK().pickerField({name: 'vm_bm', kind: 'place', value: m0?.name ? (m0.place_id ? {id: m0.place_id, title: m0.name, name: m0.name} : {id: null, ref: 'carte', title: m0.name, name: m0.name, group: 'base'}) : null})}</div>
                     <div class="vx-grid2"><label class="vx-bm-f"><span>Largeur couverte</span><select name="km">${KMS.map(([v, l]) => `<option value="${v}" ${v === (m0?.km || 2) ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                     <label class="vx-bm-f"><span>Fond</span><select name="bg"><option value="offline">Hors ligne (contours des communes)</option>${A().mapBackgroundSelectHtml ? A().mapBackgroundSelectHtml(m0?.bg || 'osm') : '<option value="osm">OpenStreetMap</option>'}</select></label></div>
                     <label class="vx-bm-f"><span>Transparence (%)</span><input type="range" name="op" min="10" max="100" value="${Math.round(num(d.ref?.op, .55) * 100)}"></label></div>
                     <div class="vx-bm-right"><div class="vx-bm-prev" data-prev style="aspect-ratio:${d.w} / ${d.h}"><span class="muted" data-prevmsg>Choisis un lieu : la carte s’affiche ici.</span></div>
                     <div class="vx-bm-under">${PAD('data-bmoff')}<span class="muted" data-offtxt>Centré sur le lieu</span><button type="button" class="button small secondary" data-bmrecenter>↺ Recentrer</button></div></div></div>`,
-                onOpen: dg => { const q = dg.querySelector('[data-q]'), res = dg.querySelector('[data-res]'), prev = dg.querySelector('[data-prev]'); let t = 0; q.focus();
+                onOpen: dg => { const prev = dg.querySelector('[data-prev]'); setTimeout(() => dg.querySelector('[data-bmplace] .pk-search:not([hidden]) .pk-input')?.focus(), 30);
                     const center = () => picked ? bmShift(num(picked.lat), num(picked.lon), off[0], off[1]) : null;
                     const offTxt = () => { const [x, y] = off; dg.querySelector('[data-offtxt]').textContent = !x && !y ? 'Centré sur le lieu' : `Décalé de ${[y ? `${fmtKm(Math.abs(y))} vers le ${y > 0 ? 'nord' : 'sud'}` : '', x ? `${fmtKm(Math.abs(x))} vers l’${x > 0 ? 'est' : 'ouest'}` : ''].filter(Boolean).join(', ')}`; };
                     const preview = () => { clearTimeout(pt); pt = setTimeout(async () => { const c = center(); if (!c) return; const km = num(dg.querySelector('[name=km]').value, 2), bg = dg.querySelector('[name=bg]').value, b = bmBox(c[0], c[1], km, d);
                         prev.classList.add('is-loading'); let src = ''; try { src = await stitch(bg, b.x0, b.x1, b.y0, b.y1, 480, Math.round(480 * d.h / d.w)); } catch (_) { try { src = await stitch('offline', b.x0, b.x1, b.y0, b.y1, 480, Math.round(480 * d.h / d.w)); } catch (e2) {} }
                         prev.classList.remove('is-loading'); prev.innerHTML = src ? `<img src="${src}" alt="Aperçu du fond" style="opacity:${num(dg.querySelector('[name=op]').value, 55) / 100}"><span class="vx-bm-cross" aria-hidden="true"></span>` : '<span class="muted">Carte impossible à charger.</span>'; }, 200); };
-                    const draw = () => { res.innerHTML = (rows.length > 1 ? `<p class="vx-bm-count">${rows.length} lieux trouvés${rows.length >= 100 ? ' (les 100 premiers : précise le nom)' : ''} — fais défiler</p>` : '') + rows.map((r, i) => `<button type="button" class="vx-bm-item${picked && r === picked ? ' is-on' : ''}" data-pick="${i}" role="option"><b>${esc(r.name)}</b><small>${esc(r.detail || '')}</small></button>`).join('') || (q.value.trim().length > 1 ? '<p class="muted">Rien trouvé (il faut un lieu avec des coordonnées).</p>' : ''); };
-                    const go = async () => { rows = ((await api('board_place_search', {q: q.value.trim(), limit: 100}).catch(() => ({places: []}))).places || []).filter(p => p.lat || p.lon); if (rows.length && !rows.includes(picked)) { picked = rows[0]; off = [0, 0]; offTxt(); preview(); } draw(); };
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(go, 250); }); if (q.value.trim().length > 1) go(); else if (picked) preview();
-                    res.addEventListener('click', e => { const b = e.target.closest('[data-pick]'); if (!b) return; picked = rows[Number(b.dataset.pick)]; off = [0, 0]; offTxt(); draw(); preview(); });
+                    // lieu choisi dans le menu : ses coordonnées, puis l'aperçu (le décalage repart de zéro)
+                    dg.querySelector('[data-bmplace]').addEventListener('picker-change', async e => { const it = e.detail.item;
+                        if (!it) { picked = null; prev.innerHTML = '<span class="muted" data-prevmsg>Choisis un lieu : la carte s’affiche ici.</span>'; return; }
+                        const c = await (ext.placeCoords ? ext.placeCoords(it) : Promise.resolve({}));
+                        if (c.lat === '' || c.lat == null) { picked = null; toast(`« ${it.title} » n’a pas encore de position : choisis un autre lieu (ou la commune voisine).`, 'error'); return; }
+                        picked = {name: String(it.name || it.title).replace(/\s*\(.*\)$/, ''), detail: it.short || '', lat: +c.lat, lon: +c.lon, id: Number(it.id) || 0}; off = [0, 0]; offTxt(); preview(); });
+                    if (picked) preview();
                     dg.addEventListener('click', e => { const b = e.target.closest('[data-bmoff]'); if (b) { const km = num(dg.querySelector('[name=km]').value, 2), [x, y] = b.dataset.bmoff.split(',').map(Number); off = [off[0] + x * km / 10, off[1] + y * km / 10]; offTxt(); preview(); }
                         if (e.target.closest('[data-bmrecenter]')) { off = [0, 0]; offTxt(); preview(); } });
                     dg.addEventListener('change', e => { if (e.target.matches('[name=km], [name=bg]')) preview(); });
@@ -610,10 +614,10 @@
             const d = ed.doc();
             ext.openDialog({eyebrow: 'PLAN', title: 'Image de référence', submitLabel: 'Poser l’image',
                 body: `<p class="muted">Un cadastre ancien, une photo aérienne, un plan scanné, un croquis… posé sous le dessin, en transparence, pour dessiner par-dessus. Il ne s’exporte pas (sauf si tu le demandes).</p>
-                    <label>Fichier de l’ordinateur<input type="file" name="f" accept="image/*"></label><p class="muted">ou une image de la base :</p><label>Chercher dans les médias<input type="search" data-mq placeholder="Titre, nom de fichier…" autocomplete="off"></label><div data-mres class="vx-mmedia"></div>
+                    <label>Fichier de l’ordinateur<input type="file" name="f" accept="image/*"></label><p class="muted">ou une image de la base :</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-mq placeholder="Titre, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher dans les médias"></div></div><div data-mres class="vx-mmedia"></div>
                     <label>Transparence (%)<input type="range" name="op" min="10" max="100" value="50"></label>`,
                 onOpen: dg => { const q = dg.querySelector('[data-mq]'), res = dg.querySelector('[data-mres]'); let t = 0;
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 24}).catch(() => ({data: []}))).data || []).filter(m => /\.(jpe?g|png|webp|gif)$/i.test(m.filename || ''));
+                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const r0 = await api('list', {type: 'media', q: q.value.trim(), limit: 24}).catch(() => ({rows: []})), rows = (r0.rows || r0.data || []).filter(m => /\.(jpe?g|png|webp|gif)$/i.test(m.filename || ''));
                         res.innerHTML = rows.map(m => `<label title="${esc(m.title || m.filename)}"><input type="radio" name="mpick" value="${esc('media/' + m.filename)}"><img src="${esc('media/' + m.filename)}" alt="" loading="lazy"></label>`).join('') || '<p class="muted">Rien trouvé.</p>'; }, 250); }); },
                 onSubmit: async f => {
                     const file = f.querySelector('[name=f]').files?.[0], media = f.querySelector('[name=mpick]:checked')?.value, op = num(f.querySelector('[name=op]').value, 50) / 100;

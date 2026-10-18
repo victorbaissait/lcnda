@@ -384,7 +384,7 @@
     };
     function helpFormHtml(e) {
         return `<form class="maintenance-panel collection-form" id="h-help-form"><h3>${e.id ? 'Modifier la demande' : 'Nouvelle demande d’entraide'}</h3>
-            <div class="form-grid"><label>Pour quel ancêtre ?${A().collectionPersonField('person_id', e.person || null, 'Personne…')}</label><label>Je cherche<select name="target">${Object.entries(helpTargets).map(([k, l]) => `<option value="${k}" ${e.target === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+            <div class="form-grid"><div><span class="pk-lab">Pour quel ancêtre ?</span>${window.LCNDA_PICKER.pickerField({name: 'person_id', kind: 'person', value: e.person?.id ? Number(e.person.id) : (Number(e.person_id) || null)})}</div><label>Je cherche<select name="target">${Object.entries(helpTargets).map(([k, l]) => `<option value="${k}" ${e.target === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
             <label class="span-2">Ma question, avec mes mots (facultatif)<textarea name="question" rows="2" placeholder="Je cherche le baptême de Jean Dupont vers 1750, probablement dans une paroisse voisine de Halluin…">${esc(e.question || '')}</textarea></label>
             <label>Où publier<select name="format"><option value="forum">Forum (message complet)</option><option value="geneanet">Entraide Geneanet</option><option value="facebook">Groupe Facebook (plus court)</option></select></label>
             <div class="page-actions" style="align-self:end"><button type="button" class="button secondary" data-h-help-draft>Rédiger le message</button></div>
@@ -396,7 +396,7 @@
     }
     function bindHelpForm(e) {
         const form = A().$('#h-help-form');
-        A().bindCollectionPersonFields(form); form.scrollIntoView({block: 'start'});
+        form.scrollIntoView({block: 'start'});
         form.querySelector('[data-h-help-cancel]').addEventListener('click', () => A().renderList());
         form.querySelector('[data-h-help-draft]').addEventListener('click', async () => {
             const pid = Number(form.querySelector('[name=person_id]').value);

@@ -24,7 +24,7 @@
     const plural = (n, one, many) => `${fmt(n)} ${n > 1 ? many : one}`;
     const isCurrent = token => token === S().workspaceToken && ['listes', 'maintenance'].includes(S().module);
     /** Redessine l'écran ouvert (une liste, ou un onglet de Maintenance). */
-    const rerender = () => S().module === 'maintenance' ? A().renderMaintenance() : rerender();
+    const rerender = () => S().module === 'maintenance' ? A().renderMaintenance() : A().renderList(); // (corrigé : s'appelait elle-même à l'infini)
     ext.maintenance = ext.maintenance || {};
     document.addEventListener('click', event => {
         const b = event.target.closest?.('[data-h-open-maint]');
@@ -264,31 +264,17 @@
         const list = parishMap?.by_insee?.[insee];
         return list?.length ? `<div class="h-parish-hint">${list.map(p => `⛪ Avant ${esc(p.until)}, chercher dans les registres de la paroisse de <strong>${esc(p.parish)}</strong>`).join('<br>')}</div>` : '';
     };
-    function placePicker(name, label, placeholder) {
-        return `<span class="h-place"><input type="text" data-h-pp="${name}" value="${esc(label || '')}" placeholder="${esc(placeholder)}" autocomplete="off"><input type="hidden" name="${name}"><span class="h-place-list" hidden></span></span>`;
+    /** Lieu d'un rattachement : le menu de choix unique (docs/PICKER.md). Le formulaire envoie toujours
+     *  le numéro du lieu (name) et, à côté, son texte (data-h-pp) : un nom sans fiche reste gardé tel quel. */
+    function placePicker(name, id, label) {
+        id = Number(id) || 0;
+        return `<span class="h-place-pk"><input type="hidden" name="${name}" value="${id || ''}"><input type="hidden" data-h-pp="${name}" value="${esc(label || '')}">${window.LCNDA_PICKER.pickerField({name: name + '_pk', kind: 'place', allowFree: true, value: id ? id : (label ? 'txt:' + label : null)})}</span>`;
     }
-    document.addEventListener('input', event => {
-        const input = event.target.closest?.('[data-h-pp]');
-        if (!input) return;
-        const wrap = input.parentElement, list = wrap.querySelector('.h-place-list');
-        wrap.querySelector('input[type=hidden]').value = '';
-        clearTimeout(input._t);
-        if (input.value.trim().length < 2) { list.hidden = true; return; }
-        input._t = setTimeout(async () => {
-            const q = input.value.trim(), seq = input._seq = (input._seq || 0) + 1;
-            const data = await api('parish_place_search', {q}).catch(() => ({places: []}));
-            if (seq !== input._seq || input.value.trim() !== q) return; // réponse d'une frappe plus ancienne
-            list.innerHTML = (data.places || []).map(p => `<button type="button" data-h-pp-pick="${p.id}" data-label="${esc(p.label)}">${esc(p.label)}</button>`).join('') || '<small class="muted">Aucun lieu de ce nom dans la base : le texte sera gardé.</small>';
-            list.hidden = false;
-        }, 220);
-    });
-    document.addEventListener('click', event => {
-        const b = event.target.closest?.('[data-h-pp-pick]');
-        if (!b) return;
-        const wrap = b.closest('.h-place');
-        wrap.querySelector('[data-h-pp]').value = b.dataset.label;
-        wrap.querySelector('input[type=hidden]').value = b.dataset.hPpPick;
-        wrap.querySelector('.h-place-list').hidden = true;
+    document.addEventListener('picker-change', event => {
+        const wrap = event.target.closest?.('.h-place-pk'); if (!wrap) return;
+        const it = event.detail.item, id = wrap.querySelector(':scope > input[name]'), txt = wrap.querySelector(':scope > [data-h-pp]');
+        id.value = it && !it.free && it.id ? it.id : '';
+        txt.value = it ? (it.free ? it.title : [it.name || it.title, it.county || it.state_name].filter(Boolean).join(', ')) : '';
     });
     ext.lists.parishes = async (token, edit = null) => {
         const q = S().hParishQ || '';
@@ -299,8 +285,8 @@
         A().$('#workspace').innerHTML = `<section class="page collection-page">${header('LISTES', 'Paroisses d’Ancien Régime', 'Beaucoup de hameaux et de villages dépendaient de la paroisse d’à côté : les baptêmes, mariages et sépultures d’avant la Révolution sont alors dans les registres d’une autre commune. Note ces rattachements au fil de tes trouvailles : l’app l’indique sur les événements des fiches, dans les battues et dans les registres en ligne.')}
             <div class="collection-toolbar"><input type="search" id="h-parish-q" value="${esc(q)}" placeholder="Chercher un lieu ou une paroisse…"><button type="button" class="button" data-h-parish-new>+ Rattachement</button></div>
             ${e ? `<form class="maintenance-panel collection-form" id="h-parish-form"><h3>${e.id ? 'Modifier le rattachement' : 'Nouveau rattachement'}</h3><div class="form-grid">
-                <label>Lieu (hameau, village, commune actuelle)${placePicker('place_id', e.place_name || e.place_text, 'Le Bourg-Neuf')}</label>
-                <label>Dépendait de la paroisse de${placePicker('parish_place_id', e.parish_place_name || '', 'Saint-Martin')}</label>
+                <div><span class="pk-lab">Lieu (hameau, village, commune actuelle)</span>${placePicker('place_id', e.place_id, e.place_name || e.place_text)}</div>
+                <div><span class="pk-lab">Dépendait de la paroisse de</span>${placePicker('parish_place_id', e.parish_place_id, e.parish_place_name || '')}</div>
                 <label>Nom de la paroisse (tel que dans les registres)<input name="parish_name" value="${esc(e.parish_name || '')}" placeholder="Saint-Martin de Brive"></label>
                 <label>Jusqu’en<input type="number" name="until_year" value="${esc(e.until_year || 1790)}" min="1000" max="1900"></label><label>Depuis (si connu)<input type="number" name="from_year" value="${esc(e.from_year || '')}" placeholder="—"></label>
                 <label class="span-2">Note, source<input name="note" value="${esc(e.note || '')}" placeholder="Paroisse érigée en 1792 ; voir aussi la chapelle de…"></label></div>
@@ -313,8 +299,7 @@
         ws.querySelectorAll('[data-h-parish-edit]').forEach(b => b.addEventListener('click', () => ext.lists.parishes(++S().workspaceToken, {id: Number(b.dataset.hParishEdit)})));
         const form = ws.querySelector('#h-parish-form');
         if (!form) return;
-        if (e.place_id) form.querySelector('[name=place_id]').value = e.place_id;
-        if (e.parish_place_id) form.querySelector('[name=parish_place_id]').value = e.parish_place_id;
+        form.querySelectorAll('.h-place-pk .pk > input[type=hidden]').forEach(h => h.removeAttribute('name')); // seuls place_id / parish_place_id partent, comme avant
         form.querySelector('[data-h-parish-cancel]').addEventListener('click', () => rerender());
         form.querySelector('[data-h-parish-delete]')?.addEventListener('click', async () => { if (!await A().confirmBox('Supprimer ce rattachement ?', {title: 'Supprimer le rattachement', okLabel: 'Supprimer le rattachement'})) return; await api('delete_parish', {}, {method: 'POST', body: {id: e.id}}); await loadParishMap(); rerender(); });
         form.addEventListener('submit', async ev => {
@@ -387,10 +372,9 @@
                 <div class="h-dialog-body"><div class="form-grid"><label class="span-2">Nom<input name="name" required value="${esc(preset.name)}"></label>
                 <label>Rôle dans l’acte<input name="role" value="${esc(preset.role || '')}" list="h-cite-roles"><datalist id="h-cite-roles">${roles.map(r => `<option>${esc(r)}</option>`).join('')}</datalist></label><label>Métier<input name="occupation" value="${esc(preset.occupation || '')}"></label>
                 <label>Année<input type="number" name="year" value="${esc(year)}"></label><label>Lieu<input name="place_text" placeholder="Demeurant à…"></label>
-                <label class="span-2">C’est quelqu’un de la base ?${A().collectionPersonField('person_id', null, 'Fiche (facultatif)…')}</label></div>${LP('cited_name', [])}${preset.snippet ? `<p class="h-transcription">… ${esc(preset.snippet)} …</p>` : ''}</div>
+                <div class="span-2"><span class="pk-lab">C’est quelqu’un de la base ? <small>(facultatif)</small></span>${window.LCNDA_PICKER.pickerField({name: 'person_id', kind: 'person'})}</div></div>${LP('cited_name', [])}${preset.snippet ? `<p class="h-transcription">… ${esc(preset.snippet)} …</p>` : ''}</div>
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-close>Annuler</button><button type="submit" class="button">Ajouter</button></div></form>`;
             document.body.appendChild(dialog);
-            A().bindCollectionPersonFields(dialog);
             dialog.addEventListener('close', () => dialog.remove());
             dialog.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => dialog.close()));
             dialog.querySelector('form').addEventListener('submit', async ev => {

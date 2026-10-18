@@ -38,40 +38,26 @@
         if(state.graphMode==='kinship')bindKinshipSearch();
     }
 
-    function kinshipSearchPanel(){return `<div class="kinship-search"><label>Première personne<input id="kinship-from-search" value="${escapeHtml(state.graphKinship.fromName)}" placeholder="Prénom et nom"></label><div class="relation-results" id="kinship-from-results"></div><label>Deuxième personne<input id="kinship-to-search" value="${escapeHtml(state.graphKinship.toName)}" placeholder="Prénom et nom"></label><div class="relation-results" id="kinship-to-results"></div><button class="button" id="show-kinship" ${state.graphKinship.from&&state.graphKinship.to?'':'disabled'}>Afficher le lien</button></div>`;}
-    function bindKinshipSearch(){['from','to'].forEach(side=>{const input=$(`#kinship-${side}-search`),results=$(`#kinship-${side}-results`);let controller=null;input.addEventListener('input',debounce(async()=>{const q=input.value.trim();state.graphKinship[`${side}Name`]=input.value;state.graphKinship[side]=0;$('#show-kinship').disabled=true;if(q.length<2){results.innerHTML='';return;}controller?.abort();controller=new AbortController();const data=await api('people',{q,limit:20},{signal:controller.signal});results.innerHTML=data.people.map(person=>`<button type="button" class="relation-result" data-kinship-side="${side}" data-person-id="${person.id}" data-person-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join('')||'<p>Aucune personne trouvée.</p>';},220));});$$('[id^="kinship-"][id$="-results"]').forEach(results=>results.addEventListener('click',event=>{const button=event.target.closest('[data-kinship-side]');if(!button)return;const side=button.dataset.kinshipSide;state.graphKinship[side]=Number(button.dataset.personId);state.graphKinship[`${side}Name`]=button.dataset.personName;$(`#kinship-${side}-search`).value=button.dataset.personName;results.innerHTML='';$('#show-kinship').disabled=!(state.graphKinship.from&&state.graphKinship.to);persistUiState();}));$('#show-kinship').addEventListener('click',()=>renderGraph());}
+    /** 🔍 Menu de choix unique ; champ caché sans name (le graphique lit le choix par picker-change). */
+    const pk = o => (window.LCNDA_PICKER?.pickerField(o) || '').replace(` name="${o.name}"`, '');
+    const pkPerson = (id, name) => Number(id) ? {id: Number(id), title: name || '', kind: 'person'} : null;
+    function kinshipSearchPanel(){return `<div class="kinship-search"><div class="pk-host"><span>Première personne</span><div id="kinship-from-search">${pk({name:'kinship_from',kind:'person',allowCreate:false,value:pkPerson(state.graphKinship.from,state.graphKinship.fromName)})}</div></div><div class="pk-host"><span>Deuxième personne</span><div id="kinship-to-search">${pk({name:'kinship_to',kind:'person',allowCreate:false,value:pkPerson(state.graphKinship.to,state.graphKinship.toName)})}</div></div><button class="button" id="show-kinship" ${state.graphKinship.from&&state.graphKinship.to?'':'disabled'}>Afficher le lien</button></div>`;}
+    function bindKinshipSearch(){['from','to'].forEach(side=>{$(`#kinship-${side}-search`)?.addEventListener('picker-change',event=>{const it=event.detail.item;state.graphKinship[side]=it&&!it.free?Number(it.id):0;state.graphKinship[`${side}Name`]=it?it.title:'';$('#show-kinship').disabled=!(state.graphKinship.from&&state.graphKinship.to);persistUiState();});});$('#show-kinship').addEventListener('click',()=>renderGraph());}
     function graphComparePanelHtml(){
         if(!state.graphCompare.enabled)return '';
-        return `<div class="graph-compare-panel"><label>Orientation <select id="graph-compare-orientation"><option value="vertical" ${state.graphCompare.orientation==='vertical'?'selected':''}>Côte à côte</option><option value="horizontal" ${state.graphCompare.orientation==='horizontal'?'selected':''}>Dessus / dessous</option></select></label><label>Personne A<input id="graph-compare-a-search" value="${escapeHtml(state.graphCompare.aName||'')}" placeholder="Prénom et nom"></label><div class="relation-results" id="graph-compare-a-results"></div><label>Personne B<input id="graph-compare-b-search" value="${escapeHtml(state.graphCompare.bName||'')}" placeholder="Prénom et nom"></label><div class="relation-results" id="graph-compare-b-results"></div><button type="button" class="button small" id="graph-compare-apply" ${state.graphCompare.a&&state.graphCompare.b?'':'disabled'}>Comparer</button></div>`;
+        return `<div class="graph-compare-panel"><label>Orientation <select id="graph-compare-orientation"><option value="vertical" ${state.graphCompare.orientation==='vertical'?'selected':''}>Côte à côte</option><option value="horizontal" ${state.graphCompare.orientation==='horizontal'?'selected':''}>Dessus / dessous</option></select></label><div class="pk-host"><span>Personne A</span><div id="graph-compare-a-search">${pk({name:'graph_compare_a',kind:'person',allowCreate:false,value:pkPerson(state.graphCompare.a,state.graphCompare.aName)})}</div></div><div class="pk-host"><span>Personne B</span><div id="graph-compare-b-search">${pk({name:'graph_compare_b',kind:'person',allowCreate:false,value:pkPerson(state.graphCompare.b,state.graphCompare.bName)})}</div></div><button type="button" class="button small" id="graph-compare-apply" ${state.graphCompare.a&&state.graphCompare.b?'':'disabled'}>Comparer</button></div>`;
     }
     function bindGraphCompareControls(){
         const toggle=$('#graph-compare-toggle');
         if(toggle)toggle.addEventListener('click',async()=>{state.graphCompare.enabled=!state.graphCompare.enabled;persistUiState();await renderGraph();});
         const orientation=$('#graph-compare-orientation');
         if(orientation)orientation.addEventListener('change',async event=>{state.graphCompare.orientation=event.target.value;persistUiState();await renderGraph();});
+        // personnes A et B : menu de choix unique
         ['a','b'].forEach(side=>{
-            const input=$(`#graph-compare-${side}-search`),results=$(`#graph-compare-${side}-results`);
-            if(!input||!results)return;
-            let controller=null;
-            input.addEventListener('input',debounce(async()=>{
-                const q=input.value.trim();
-                state.graphCompare[`${side}Name`]=input.value;
-                state.graphCompare[side]=0;
-                const apply=$('#graph-compare-apply');if(apply)apply.disabled=true;
-                if(q.length<2){results.innerHTML='';return;}
-                controller?.abort();
-                controller=new AbortController();
-                const data=await api('people',{q,limit:20},{signal:controller.signal});
-                results.innerHTML=data.people.map(person=>`<button type="button" class="relation-result" data-graph-compare-side="${side}" data-person-id="${person.id}" data-person-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join('')||'<p>Aucune personne trouvée.</p>';
-            },220));
-            results.addEventListener('click',event=>{
-                const button=event.target.closest('[data-graph-compare-side]');
-                if(!button)return;
-                const selectedSide=button.dataset.graphCompareSide;
-                state.graphCompare[selectedSide]=Number(button.dataset.personId);
-                state.graphCompare[`${selectedSide}Name`]=button.dataset.personName;
-                $(`#graph-compare-${selectedSide}-search`).value=button.dataset.personName;
-                results.innerHTML='';
+            $(`#graph-compare-${side}-search`)?.addEventListener('picker-change',event=>{
+                const it=event.detail.item;
+                state.graphCompare[side]=it&&!it.free?Number(it.id):0;
+                state.graphCompare[`${side}Name`]=it?it.title:'';
                 const apply=$('#graph-compare-apply');if(apply)apply.disabled=!(state.graphCompare.a&&state.graphCompare.b);
                 persistUiState();
             });
@@ -126,7 +112,7 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         const title=place.name||cfg.name||'Monographie de commune';
         const typeOptions=(data.event_types||[]).map(type=>`<option value="${type.id}" ${Number(cfg.eventTypeId)===Number(type.id)?'selected':''}>${escapeHtml(type.label)}</option>`).join('');
         const activeFilters=`<div class="place-monograph-filter">
-            <div class="place-monograph-search-wrap"><label>Commune<input id="place-monograph-search" value="${escapeHtml(cfg.name||'')}" placeholder="Tape une commune..."></label><div class="place-suggestions" id="place-monograph-results"></div></div>
+            <div class="place-monograph-search-wrap pk-host"><span>Commune</span><div id="place-monograph-search">${pk({name:'place_monograph',kind:'place',allowCreate:false,value:Number(cfg.id)?{id:Number(cfg.id),title:cfg.name||'',name:cfg.name||'',kind:'place',short:cfg.county||''}:null})}</div></div>
             <label>De<input id="place-monograph-from" inputmode="numeric" value="${escapeHtml(cfg.yearFrom||'')}" placeholder="Année"></label>
             <label>À<input id="place-monograph-to" inputmode="numeric" value="${escapeHtml(cfg.yearTo||'')}" placeholder="Année"></label>
             <label>Type d’acte<select id="place-monograph-type"><option value="0">Tous les actes</option>${typeOptions}</select></label>
@@ -167,27 +153,14 @@ function statsSideButton([type,label],index){return `<button class="side-menu-it
         }
         const saveFilters=()=>{cfg.yearFrom=$('#place-monograph-from').value.trim();cfg.yearTo=$('#place-monograph-to').value.trim();cfg.eventTypeId=Number($('#place-monograph-type').value||0);cfg.showEvents=$('#place-monograph-events').checked;cfg.showDigests=$('#place-monograph-digests').checked;cfg.showBattues=$('#place-monograph-battues').checked;cfg.showCemetery=$('#place-monograph-cemetery').checked;persistUiState();};
         $('#place-monograph-refresh').addEventListener('click',async()=>{saveFilters();await renderPlaceMonograph();});
-        let placeController=null;
-        const monographSearchInput=$('#place-monograph-search');
-        const searchPlaceMonograph=debounce(async q=>{
-            const results=$('#place-monograph-results');
-            if(q.length<2){results.innerHTML='';return;}
-            placeController?.abort();
-            placeController=new AbortController();
-            try{
-                const found=await api('place_name_search',{q},{signal:placeController.signal});
-                results.innerHTML=(found.places||[]).slice(0,12).map(item=>`<button type="button" data-place-monograph-choice='${escapeHtml(JSON.stringify(item))}'><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.label||[item.county,item.state,item.country].filter(Boolean).join(' · '))}</small></button>`).join('')||'<small class="place-monograph-no-result">Aucune commune trouvée.</small>';
-            }catch(error){
-                if(error.name!=='AbortError')results.innerHTML='<small class="place-monograph-no-result">Recherche indisponible.</small>';
-            }
-        },240);
-        monographSearchInput.addEventListener('input',event=>{
-            const q=event.currentTarget.value.trim();
-            Object.assign(cfg,{name:q,id:0,county:'',state:'',country:'',latitude:null,longitude:null});
-            persistUiState();
-            searchPlaceMonograph(q);
+        // la commune : menu de choix unique (lieux de la base, communes de France, villes du monde) ; les coordonnées viennent de place_name_search
+        $('#place-monograph-search').addEventListener('picker-change',async event=>{
+            const it=event.detail.item;
+            if(!it||it.free){Object.assign(cfg,{name:'',id:0,county:'',state:'',country:'',latitude:null,longitude:null});persistUiState();await renderPlaceMonograph();return;}
+            Object.assign(cfg,{id:Number(it.id),name:it.name||it.title,county:it.county||'',state:it.state_name||'',country:'',latitude:null,longitude:null});
+            try{const found=await api('place_name_search',{q:it.name||it.title});const same=(found.places||[]).find(p=>Number(p.id)===Number(it.id));if(same)Object.assign(cfg,{county:same.county||cfg.county,state:same.state||cfg.state,country:same.country||'',latitude:same.latitude??null,longitude:same.longitude??null});}catch(_){}
+            persistUiState();await renderPlaceMonograph();
         });
-        $('#place-monograph-results').addEventListener('click',async event=>{const choice=event.target.closest('[data-place-monograph-choice]');if(!choice)return;const place=JSON.parse(choice.dataset.placeMonographChoice);Object.assign(cfg,{id:Number(place.id||0),name:place.name||'',county:place.county||'',state:place.state||'',country:place.country||'',latitude:place.latitude??null,longitude:place.longitude??null});persistUiState();await renderPlaceMonograph();});
         $('#place-monograph-map')?.addEventListener('click',()=>{state.mapCenter={lat:Number(place.latitude),lon:Number(place.longitude)};state.mapKeepCenter=true;setModule('carte');});
         $$('[data-monograph-person]').forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.monographPerson);setModule('personnes');}));
         $$('[data-monograph-battue]').forEach(button=>button.addEventListener('click',()=>{state.currentBattueId=Number(button.dataset.monographBattue);state.enquetesTab='battue';setModule('enquetes');}));

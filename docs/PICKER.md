@@ -28,8 +28,8 @@ obligatoire). Les fonctions sont sur `window.LCNDA_PICKER` et aussi sur `window.
 Le champ **se lie tout seul** : on insère le HTML renvoyé par `pickerField()` n'importe où (innerHTML, fenêtre,
 panneau…), un `MutationObserver` s'en occupe. Aucun « bind » à appeler.
 
-Pour le titre du champ, mettre `<span class="pk-lab">Personne</span>` juste avant (ou le `label` habituel de l'outil
-**à côté**) : ne pas envelopper le champ dans un `<label>`, sinon un clic sur ses boutons irait dans la case de saisie.
+Pour le titre du champ, mettre `<span class="pk-lab">Personne</span>` juste avant. Si le champ est quand même posé dans
+un `<label>`, le composant empêche qu'un clic sur ses boutons ou ses lignes soit renvoyé vers une case du label.
 
 ## Exemples à copier
 
@@ -82,7 +82,20 @@ P.pickerSet(fieldEl, 45);         // ne déclenche pas picker-change
 Options de `pickerField` : `name` (obligatoire), `kind` (`'person'` par défaut, ou plusieurs séparées par des virgules),
 `value`, `multiple`, `placeholder` (le texte d'aide est déjà le bon, à ne changer que si besoin), `allowFree` (nom
 libre), `allowCreate` (par défaut : « ＋ Créer » pour les personnes et les lieux seulement ; `true` l'ajoute aux autres
-sortes — l'outil doit alors écouter `picker-create`), `roles`, `animals: false` (sans les animaux).
+sortes — l'outil doit alors écouter `picker-create`), `roles`, `animals: false` (sans les animaux), et :
+
+- `hiddenName: false` (ou `name: ''`) : le champ caché n'a pas d'attribut `name` — rien n'est ajouté au formulaire
+  autour ; on lit la valeur avec `pickerValue()` ou dans `picker-change`.
+- `inline: true` : la liste s'ouvre dans le flux (sous la case, en poussant la suite) au lieu de flotter — pour les
+  petites fenêtres qui défilent (`openPicker` le fait toujours). Sans cette option, la liste flotte sous la case, s'ouvre
+  vers le haut si la place manque dessous, et passe en position fixe sur l'écran si un conteneur qui coupe
+  (`overflow: hidden/auto`) est trop petit.
+- `filter: {person_id, media_type}` (médias) : seulement les médias rattachés à cette personne, et/ou d'un type
+  (`image`, `audio`, `video`, `document`). Ex. `pickerField({name: 'media_id', kind: 'media', filter: {person_id: 12, media_type: 'image'}})`.
+- `roles: {roleList: false}` (ou `[]`) : pas de menu « rôle ▾ » du tout (un rôle déjà enregistré reste affiché, en simple texte).
+
+La case montre le symbole de la sorte (🔍 personne, 📍 lieu, 📚 source, 🖼 média, 🔍 enquête, 🧭 battue, 🏷 étiquette,
+🏠 maison, 📰 revue, 🏭 employeur, 📋 recensement ; 🔍 en recherche mélangée).
 
 ## Format des valeurs (champ caché `name=…`)
 
@@ -99,11 +112,11 @@ Côté PHP : `safe_int()` pour un id ; pour `txt:` garder le texte ; pour les r�
 | Événement | `detail` | Quand |
 | --- | --- | --- |
 | `picker-change` | `{name, kind, value, item}` (ou `items`) | après chaque choix, retrait, rôle, ★/☆ |
-| `cp-pick` | `{id, name, field}` | compatibilité avec l'ancien `collectionPersonField` (personne, un seul choix) |
+| `cp-pick` | `{id, name, field}` | compatibilité avec l'ancien `collectionPersonField` (personne, un seul choix) : seulement quand une fiche est choisie (id > 0), pas au retrait |
 | `change` | — | sur l'`<input type=hidden>` (pour les formulaires qui écoutent `change`) |
 | `picker-create` | `{kind, text, field, target, pick(item)}` | « ＋ Créer… ». Appeler `e.preventDefault()` pour s'en occuper, puis `e.detail.pick({id, title})` pour choisir la fiche créée. Sinon : personne → fenêtre « Nouvelle fiche » préremplie, la fiche enregistrée est choisie ; lieu → créé tel quel dans `places`. |
 | `picker-open` | `{kind, id, item}` | « ↗ Fiche / ↗ Lieu / ↗ Ouvrir ». `preventDefault()` pour ouvrir soi-même. Sinon : personne → `openPersonById`, enquête, battue, maison → leur écran ; le reste → petit message. |
-| `picker-map` | `{kind:'place', text, item, field, pick(item)}` | « 🗺 Choisir sur la carte » ou 🗺 d'une pastille. `preventDefault()` + `pick(item)` pour renvoyer le lieu choisi sur la carte. |
+| `picker-map` | `{kind:'place', text, item, field, pick(item)}` | « 🗺 Choisir sur la carte » ou 🗺 d'une pastille. `preventDefault()` + `pick(item)` pour renvoyer le lieu choisi sur la carte. Sinon : une petite carte s'ouvre (fond de carte de l'app, `mapTileUrl`) ; un clic propose les lieux de ta base et les communes les plus proches (`near=`), ou « ＋ Créer un lieu ici » (avec ses coordonnées). |
 
 ```js
 panel.addEventListener('picker-change', e => { if (e.detail.name === 'place_id') refreshMap(e.detail.value); });
@@ -127,6 +140,20 @@ d'un filtre à l'autre en recherche mélangée, Retour arrière dans une case vi
 Item : `{kind, id, title, meta, badge, badge_style ('blue'|''), group, icon?, color?, thumb?, initials?, gender?, ref?, short?}`.
 `short` = petite info de la pastille (années, département). Le Sosa est ajouté côté navigateur (`sosaNumberFor`).
 
+Champs en plus selon la sorte :
+
+| Sorte | Champs |
+| --- | --- |
+| lieu (`base`, `fr`, `world`) | `name` (nom seul, sans « (Gers) »), `lat`, `lon`, `country`, `county` (département), `dept` (n° de département, France), `insee` (code commune, France), `place_name` (« Nom, Département, Pays »), `state_name` ; `distance_km` avec `near=` |
+| média | `filename`, `thumb` (`media/…`), `media_type` |
+| personne | `initials`, `gender` (`male`/`female`/`unknown`), `thumb` (portrait), `kind: 'animal'` pour un animal |
+| étiquette | `color` |
+| enquête | `person_id` |
+| employeur | `key` |
+
+Autres paramètres GET : `person_id=` et `media_type=` (médias), `near=lat,lon` (lieux les plus proches d'un point :
+groupes `base` puis `fr`, distance dans la ligne grise).
+
 - Personnes : prénom / 2e prénom / nom / variantes de noms / lieu de naissance ou de décès, sans accents ; NOM en capitales ;
   « ° date lieu · † date lieu » ; indice « fils de… / épouse de… » quand un autre a le même nom ; nom qui commence par la
   frappe d'abord.
@@ -134,8 +161,10 @@ Item : `{kind, id, title, meta, badge, badge_style ('blue'|''), group, icon?, co
   `id` = null). Mots en plus pour préciser : numéro ou nom de département, région, pays (« saint-martin 32 »,
   « springfield usa ») ; le serveur essaie les découpages nom / précision et garde le premier qui trouve.
   Exact > commence par > début de mot > contient, puis les plus peuplées.
+- Médias : titre, nom de fichier, description, titre et cote du document (`document_reference`), noms des personnes rattachées.
+- Recensements : adresse, lieu, année, notes, et noms des membres du foyer (nom relevé et fiche liée).
 - `POST picker_place_adopt {geoname_id}` → `{id, item}` : la ville du monde entre dans `places` (`place_from_world`).
-  `{name, country?}` sans geoname_id : crée un lieu tapé à la main (repli de « ＋ Créer le lieu »).
+  `{name, country?, lat?, lon?}` sans geoname_id : crée un lieu tapé à la main ou cliqué sur la carte.
 - Toutes les requêtes sont préparées ; `q` n'est jamais collé dans le SQL. Une table absente (ancienne base) donne une
   liste vide, sans erreur.
 

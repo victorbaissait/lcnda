@@ -156,8 +156,8 @@
                 <div class="form-grid"><label>Style<select name="style">${Object.entries(STYLES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Format<select name="format">${formatOptions(pf.format || 'c10')}</select></label>
                     <div class="h-fp-custom span-2" ${pf.format === 'custom' ? '' : 'hidden'}><label>Largeur (cm)<input type="number" name="cw" min="3" max="120" step="0.1" value="${esc(pf.cw || 10)}"></label><label>Hauteur (cm)<input type="number" name="ch" min="3" max="120" step="0.1" value="${esc(pf.ch || 15)}"></label></div>
                     <label>Sens<select name="orient"><option value="port">Portrait</option><option value="land" ${pf.orient === 'land' ? 'selected' : ''}>Paysage</option></select></label>
-                    <label>Remplir depuis une fiche<span class="h-fp-who">${A().collectionPersonField('fp_person', null, 'Nom, prénom…')}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></label></div>
-                <div class="form-grid h-fp-fields" data-fp-fields></div>
+                    <div><span class="pk-lab">Remplir depuis une fiche</span><span class="h-fp-who" data-fp-who>${(window.LCNDA_PICKER || A()).pickerField({name: 'fp_person', kind: 'person'})}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></div></div>
+                <div class="form-grid h-fp-fields" data-fp-fields data-dnd-off data-ord-off></div>
                 <label class="checkbox-line"><input type="checkbox" name="usephoto"> Avec une photo <small class="muted" data-fp-photo>(celle de la fiche, ou à choisir)</small></label><input type="file" name="photofile" accept="image/*" hidden>
                 <p class="muted">Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis Fichier → Imprimer / PDF ou Exporter.</p></div>`,
             onOpen: dg => {
@@ -187,8 +187,8 @@
                     if (['format', 'orient', 'cw', 'ch'].includes(t.name)) { const p = prefs(); p[t.name] = t.value; savePrefs(p); if (t.name === 'format') dg.querySelector('.h-fp-custom').hidden = t.value !== 'custom'; }
                     if (t.name === 'usephoto' && t.checked && !photoFile) dg.querySelector('[name=photofile]').click(); if (t.name === 'photofile' && t.files?.[0]) { const f = t.files[0], r = new FileReader(); r.onload = () => { photoFile = {data: r.result}; dg.querySelector('[data-fp-photo]').textContent = `(${f.name})`; }; r.readAsDataURL(f); } });
                 const fill = async pid => { try { const r = await fillFrom(kind, pid); grab(); Object.entries(r.values).forEach(([k, v]) => { const f = fields.find(x => x.role === k); if (f && v) f.value = v; }); draw(); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(`Rempli depuis la fiche de ${r.label} : relis et complète.`); } catch (e) { toast(e.message, 'error'); } };
-                dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-cp-input]').focus(); });
-                dg.querySelector('[data-cp-input="fp_person"]').parentElement.addEventListener('cp-pick', e => { personId = e.detail.id; fill(personId); });
+                dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-fp-who] .pk-search:not([hidden]) .pk-input')?.focus(); });
+                dg.querySelector('[data-fp-who]').addEventListener('cp-pick', e => { if (!e.detail.id) return; personId = e.detail.id; fill(personId); });
                 dg._fpGrab = () => { grab(); return fields; };
             },
             onSubmit: async f => {

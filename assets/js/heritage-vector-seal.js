@@ -196,7 +196,8 @@
     /* ═════════ La fenêtre ═════════ */
     function open(onDone, opts = {}) {
         let mode = opts.mode || 'sign', img = null, imgName = '', crop = null, f = null, person = null, autoThr = 140;
-        const pickPersonHtml = pre => `<span class="h-fp-who">${A().collectionPersonField(pre + '_person', null, 'Nom, prénom…')}<button type="button" class="button small secondary" data-${pre}-cur>Fiche affichée</button></span>`;
+        const PK = () => window.LCNDA_PICKER || A();
+        const pickPersonHtml = pre => `<span class="h-fp-who" data-who="${pre}">${PK().pickerField({name: pre + '_person', kind: 'person'})}<button type="button" class="button small secondary" data-${pre}-cur>Fiche affichée</button></span>`;
         ext.openDialog({eyebrow: 'CALLIGRAPHIE ET SCEAUX', title: '🔤 Signatures et sceaux', wide: true, submitLabel: 'Créer et ouvrir dans le dessin',
             body: `<div class="h-sl">
                 <div class="h-sl-tabs" role="tablist"><button type="button" data-sl-mode="sign">✍️ La signature d’un acte</button><button type="button" data-sl-mode="seal">🔏 Monogramme, cachet, tampon</button></div>
@@ -210,13 +211,13 @@
                             <label>Épaisseur du trait<select name="grow"><option value="-1">Plus fin</option><option value="0" selected>Comme l’original</option><option value="1">Plus épais</option><option value="2">Bien plus épais</option></select></label>
                             <label class="checkbox-line"><input type="checkbox" name="lines"> Effacer les lignes du registre</label>
                             <label>Couleur<select name="ink">${INKS.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label>
-                            <label>De qui est cette signature ?${pickPersonHtml('sl')}</label>
+                            <div><span class="pk-lab">De qui est cette signature ?</span>${pickPersonHtml('sl')}</div>
                             <label>Légende sous la signature (facultatif)<input name="caption" placeholder="ex. Jean Martin, 1832 — acte de mariage"></label>
                             <label class="checkbox-line"><input type="checkbox" name="tomedia" checked> Ranger aussi l’image (fond transparent) dans les médias de la personne</label></div></div>
                 </section>
                 <section data-sl-pane="seal" hidden>
                     <div class="h-sl-work"><div class="h-sl-sealprev" data-sl-sprev></div>
-                        <div class="h-sl-side"><label>D’après une personne ${pickPersonHtml('sl2')}</label>
+                        <div class="h-sl-side"><div><span class="pk-lab">D’après une personne</span>${pickPersonHtml('sl2')}</div>
                             <div class="form-grid"><label>Initiales<input name="initials" value="JM" maxlength="6"></label><label>Lettres<select name="letters">${Object.entries(LETTERS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label>
                                 <label>Forme<select name="shape">${Object.entries(SHAPES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Couleur<select name="color">${Object.entries(COLORS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label>
                                 <label class="span-2">Légende du haut<input name="top" placeholder="ex. FAMILLE MARTIN"></label><label class="span-2">Légende du bas<input name="bottom" placeholder="ex. TULLE · 1832"></label></div>
@@ -228,11 +229,12 @@
                 const setMode = m => { mode = m; dg.querySelectorAll('[data-sl-mode]').forEach(b => b.classList.toggle('active', b.dataset.slMode === m)); dg.querySelectorAll('[data-sl-pane]').forEach(p => { p.hidden = p.dataset.slPane !== m; }); if (m === 'seal') sealPrev(); };
                 dg.querySelectorAll('[data-sl-mode]').forEach(b => b.addEventListener('click', () => setMode(b.dataset.slMode)));
                 /* — la personne (les deux volets) — */
-                const bindWho = (pre, onPick) => { const box = $(`[data-cp-input="${pre}_person"]`).parentElement, q = box.querySelector('[data-cp-input]'), hid = box.querySelector('input[type=hidden]');
-                    const use = (id, p) => { q.value = A().personName(p); hid.value = id; onPick({id, first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}); };
-                    box.addEventListener('cp-pick', async e => { const {id, name} = e.detail, p = (await api('person', {id}).catch(() => null))?.person; if (p) use(id, p); else onPick({id, first: '', last: name, name, year: ''}); });
-                    $(`[data-${pre}-cur]`).addEventListener('click', async () => { const id = Number(A().state.currentPersonId) || 0; if (!id) { toast('Aucune fiche affichée : cherche la personne.', 'error'); q.focus(); return; } const p = (await api('person', {id}).catch(() => null))?.person; if (p) use(id, p); }); };
-                bindWho('sl', p => { person = p; const cap = form.elements.caption; if (!cap.value) cap.value = p.name; });
+                // le menu de choix unique ; « Fiche affichée » le remplit avec la personne ouverte
+                const bindWho = (pre, onPick, onClear = () => {}) => { const box = $(`[data-who="${pre}"]`), field = box.querySelector('.pk');
+                    const use = (id, p) => { PK().pickerSet(field, id); onPick({id, first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}); };
+                    box.addEventListener('cp-pick', async e => { const {id, name} = e.detail; if (!id) return onClear(); const p = (await api('person', {id}).catch(() => null))?.person; if (p) onPick({id, first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}); else onPick({id, first: '', last: name, name, year: ''}); });
+                    $(`[data-${pre}-cur]`).addEventListener('click', async () => { const id = Number(A().state.currentPersonId) || 0; if (!id) { toast('Aucune fiche affichée : cherche la personne.', 'error'); box.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(); return; } const p = (await api('person', {id}).catch(() => null))?.person; if (p) use(id, p); }); };
+                bindWho('sl', p => { person = p; const cap = form.elements.caption; if (!cap.value) cap.value = p.name; }, () => { person = null; });
                 bindWho('sl2', p => { form.elements.initials.value = initialsOf(p.first, p.last).toLocaleUpperCase('fr-FR'); form.elements.top.value = `Famille ${p.last || ''}`.trim().toLocaleUpperCase('fr-FR'); sealPrev(); });
                 /* — la signature — */
                 const stage = $('[data-sl-stage]');
@@ -268,7 +270,7 @@
                 const useKnown = async r => { await loadImg(mediaUrl(r.filename), r.title || r.document_title || r.filename); if (!img) return;
                     const W = img.naturalWidth, H = img.naturalHeight, pad = .015; crop = {x: Math.max(0, (Number(r.x) / 100 - pad) * W), y: Math.max(0, (Number(r.y) / 100 - pad) * H), w: Math.min(W, (Number(r.w) / 100 + 2 * pad) * W), h: Math.min(H, (Number(r.h) / 100 + 2 * pad) * H)}; crop.w = Math.min(crop.w, W - crop.x); crop.h = Math.min(crop.h, H - crop.y);
                     f = null; drawStage(); preview(true);
-                    if (r.person_id) { const p = (await api('person', {id: r.person_id}).catch(() => null))?.person; const box = $('[data-cp-input="sl_person"]').parentElement; if (p) { box.querySelector('[data-cp-input]').value = A().personName(p); box.querySelector('input[type=hidden]').value = r.person_id; person = {id: Number(r.person_id), first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}; if (!form.elements.caption.value) form.elements.caption.value = [person.name, r.date_text].filter(Boolean).join(', '); } } };
+                    if (r.person_id) { const p = (await api('person', {id: r.person_id}).catch(() => null))?.person; if (p) { PK().pickerSet($('[data-who="sl"] .pk'), Number(r.person_id)); person = {id: Number(r.person_id), first: p.first_name, last: p.last_name, name: A().personName(p), year: p.birth_year}; if (!form.elements.caption.value) form.elements.caption.value = [person.name, r.date_text].filter(Boolean).join(', '); } } };
                 $('[data-sl-known]').addEventListener('click', async () => { const r = await pickKnownSignature(); if (r) await useKnown(r); });
                 if (opts.signature) useKnown(opts.signature); else if (opts.src) loadImg(opts.src, opts.title || 'Acte');
                 /* — le sceau — */
@@ -304,10 +306,10 @@
     function pickKnownSignature() {
         return new Promise(res => { let rows = [], done = false;
             ext.openDialog({eyebrow: 'SIGNATURES', title: '✍️ Une signature déjà repérée', submitLabel: 'Fermer', wide: true,
-                body: '<div class="h-rt-pick-bar"><input type="search" data-q placeholder="Nom de la personne, titre de l’acte…" autocomplete="off"></div><div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div><p class="muted small">Ce sont les signatures identifiées dans la visionneuse (colonne de droite → « Signatures identifiées ») et dans Listes → Signatures.</p>',
+                body: '<div class="h-rt-pick-bar"><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">✍️</span><input type="text" class="pk-input" data-q placeholder="Nom de la personne, titre de l’acte…" autocomplete="off" spellcheck="false" aria-label="Chercher une signature"></div></div></div><div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div><p class="muted small">Ce sont les signatures identifiées dans la visionneuse (colonne de droite → « Signatures identifiées ») et dans Listes → Signatures.</p>',
                 onOpen: dg => { const q = dg.querySelector('[data-q]'), grid = dg.querySelector('[data-grid]'); let tm = 0;
-                    const go = async () => { rows = ((await api('list', {type: 'signatures', q: q.value.trim(), limit: 120}).catch(() => ({data: []}))).data || []);
-                        grid.innerHTML = rows.map((r, i) => `<button type="button" class="h-rt-pick-item" data-i="${i}"><span class="h-sl-sigthumb" style="background-image:url('${esc(mediaUrl(r.filename))}');background-size:${(100 / Math.max(1, r.w)) * 100}% auto;background-position:${r.w >= 100 ? 0 : (r.x / (100 - r.w)) * 100}% ${r.h >= 100 ? 0 : (r.y / (100 - r.h)) * 100}%"></span><span>${esc(r.person_name || 'Sans nom')}</span><small>${esc(r.title || r.document_title || r.filename || '')}</small></button>`).join('') || '<p class="muted">Aucune signature repérée. Dans la visionneuse, « Signatures identifiées » permet d’en encadrer une sur un acte.</p>'; };
+                    const go = async () => { const r0 = await api('list', {type: 'signatures', q: q.value.trim(), limit: 120}).catch(() => ({rows: []})); rows = r0.rows || r0.data || [];
+                        grid.innerHTML = rows.map((r, i) => `<button type="button" class="h-rt-pick-item pk-card" data-i="${i}"><span class="h-sl-sigthumb" style="background-image:url('${esc(mediaUrl(r.filename))}');background-size:${(100 / Math.max(1, r.w)) * 100}% auto;background-position:${r.w >= 100 ? 0 : (r.x / (100 - r.w)) * 100}% ${r.h >= 100 ? 0 : (r.y / (100 - r.h)) * 100}%"></span><span class="pk-name">${esc(r.person_name || 'Sans nom')}</span><small class="pk-meta">${esc(r.title || r.document_title || r.filename || '')}</small></button>`).join('') || '<p class="muted">Aucune signature repérée. Dans la visionneuse, « Signatures identifiées » permet d’en encadrer une sur un acte.</p>'; };
                     q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 220); }); go();
                     grid.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; done = true; res(rows[Number(b.dataset.i)]); dg.close(); });
                     dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },

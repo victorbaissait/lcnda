@@ -2018,27 +2018,16 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     function mediaForEvent(media,eventId){return media.filter(item=>csvIds(item.event_ids).includes(Number(eventId)));}
     function eventConfidenceMediaPeople(item){return (item.people_links||item.people||[]).map(person=>person.name||person.person_name).filter(Boolean);}
     function eventConfidenceMediaLabel(item){return [item.title||item.document_title||item.filename||item.attachment_label,item.document_reference,item.date_text,eventConfidenceMediaPeople(item).join(', ')].filter(Boolean).join(' · ')||`Média #${item.id}`;}
-    function renderEventConfidenceMediaChoices(detail,selectedId=0){const select=$('#event-confidence-media');if(!select)return;const media=detail?.media||[];const selected=Number(selectedId)||0;const hasSelected=selected&&media.some(item=>Number(item.id)===selected);select.innerHTML=`<option value="">Aucun média précis</option>${media.map(item=>`<option value="${item.id}">${escapeHtml(eventConfidenceMediaLabel(item))}</option>`).join('')}${selected&&!hasSelected?`<option value="${selected}">Média de preuve #${selected}</option>`:''}`;select.value=selected?String(selected):'';}
+    /** Média de preuve du fait : menu de choix unique (champ confidence_media_id) ; un média de la fiche est montré sans relecture. */
+    function renderEventConfidenceMediaChoices(detail,selectedId=0){const field=$('#event-confidence-media');if(!field)return;const selected=Number(selectedId)||0;const media=(detail?.media||[]).find(item=>Number(item.id)===selected);pkSet(field,selected?(media?{id:selected,kind:'media',title:eventConfidenceMediaLabel(media),thumb:normalizedMediaType(media)==='image'?`media/${encodeURIComponent(media.thumbnail||media.filename)}`:''}:selected):null);}
     function eventConfidenceOriginQuery(input){const caret=input.selectionStart??input.value.length,before=input.value.slice(0,caret),segment=before.slice(Math.max(0,...['.',',',';',':','('].map(mark=>before.lastIndexOf(mark)+1))).trim();const words=segment.split(/\s+/).filter(Boolean);const clean=words=>words.join(' ').replace(/^(?:de|du|des|d['’]|chez|avec|pour|par)\s+/i,'').trim();const primary=clean(words.slice(-2)),fallback=clean(words.slice(-1));const query=primary.length>=2?primary:fallback;const start=query?before.lastIndexOf(query):caret;return {query,start:start<0?caret:start,end:caret,fallback:fallback!==query&&fallback.length>=2?fallback:''};}
     function setupEventConfidencePickers(detail){
-        const origin=$('#event-confidence-origin'),personSuggestions=$('#event-confidence-person-suggestions'),mediaSearch=$('#event-confidence-media-search'),mediaSuggestions=$('#event-confidence-media-suggestions'),mediaPersonSearch=$('#event-confidence-media-person-search'),mediaPersonSuggestions=$('#event-confidence-media-person-suggestions'),mediaScopeHelp=$('#event-confidence-media-scope-help');
+        const origin=$('#event-confidence-origin'),personSuggestions=$('#event-confidence-person-suggestions');// le média de preuve : menu de choix unique (renderEventConfidenceMediaChoices)
         if(origin&&personSuggestions){
             let candidates=[],range={start:0,end:0};
             const findPeople=async query=>{const response=await api('people',{q:query,limit:8});return response.people||[];};
             origin.oninput=debounce(async()=>{const parsed=eventConfidenceOriginQuery(origin);if(parsed.query.length<2){personSuggestions.hidden=true;personSuggestions.innerHTML='';return;}try{let people=await findPeople(parsed.query),usedQuery=parsed.query;if(!people.length&&parsed.fallback){people=await findPeople(parsed.fallback);usedQuery=parsed.fallback;}range={start:Math.max(0,(origin.selectionStart??origin.value.length)-usedQuery.length),end:origin.selectionStart??origin.value.length};candidates=people;personSuggestions.innerHTML=people.map(person=>`<button type="button" class="place-suggestion" data-confidence-person-id="${person.id}">${escapeHtml(personName(person))}<small>${escapeHtml(years(person))}</small></button>`).join('')||'<div class="place-no-result">Aucun nom trouvé</div>';personSuggestions.hidden=false;}catch(_){personSuggestions.hidden=true;}},180);
             personSuggestions.onclick=event=>{const button=event.target.closest('[data-confidence-person-id]');if(!button)return;const person=candidates.find(row=>Number(row.id)===Number(button.dataset.confidencePersonId));if(!person)return;const name=personName(person),before=origin.value.slice(0,range.start),after=origin.value.slice(range.end);origin.value=before+name+after;const cursor=(before+name).length;origin.focus();origin.setSelectionRange(cursor,cursor);personSuggestions.hidden=true;personSuggestions.innerHTML='';};
-        }
-        if(mediaSearch&&mediaSuggestions){
-            let mediaRows=[],mediaPeople=[],mediaPersonId=0,mediaPersonName='';
-            const setMediaScopeHelp=()=>{if(mediaScopeHelp)mediaScopeHelp.textContent=mediaPersonId?`Médias liés à ${mediaPersonName}. Efface ce nom pour revenir à toute la généalogie.`:'Laisse vide pour chercher dans tous les médias de la généalogie.';};
-            const renderMediaRows=rows=>{mediaRows=rows.slice(0,12);mediaSuggestions.innerHTML=mediaRows.map(media=>{const names=eventConfidenceMediaPeople(media);const details=[media.document_reference,media.date_text,names.length?`Personne${names.length>1?'s':''} : ${names.join(', ')}`:'Média de la généalogie'].filter(Boolean).join(' · ');return `<button type="button" class="place-suggestion" data-confidence-media-id="${media.id}"><strong>${escapeHtml(media.title||media.document_title||media.filename||'Média sans titre')}</strong><small>${escapeHtml(details)}</small></button>`;}).join('')||'<div class="place-no-result">Aucun média trouvé</div>';mediaSuggestions.hidden=false;};
-            const loadMedia=async()=>{const q=mediaSearch.value.trim();if(!mediaPersonId&&q.length<2){mediaSuggestions.hidden=true;mediaSuggestions.innerHTML='';return;}try{const response=await api('list',{type:'media',q,limit:30,scope:mediaPersonId?'person':'',person_id:mediaPersonId||''});renderMediaRows(response.rows||[]);}catch(error){mediaSuggestions.innerHTML=`<div class="place-no-result">${escapeHtml(error.message||'Recherche indisponible')}</div>`;mediaSuggestions.hidden=false;}};
-            mediaSearch.oninput=debounce(loadMedia,220);
-            if(mediaPersonSearch&&mediaPersonSuggestions){
-                mediaPersonSearch.oninput=debounce(async()=>{const q=mediaPersonSearch.value.trim();mediaPersonId=0;mediaPersonName='';setMediaScopeHelp();if(q.length<2){mediaPersonSuggestions.hidden=true;mediaPersonSuggestions.innerHTML='';return;}try{const response=await api('people',{q,limit:8});mediaPeople=response.people||[];mediaPersonSuggestions.innerHTML=mediaPeople.map(person=>`<button type="button" class="place-suggestion" data-confidence-media-person-id="${person.id}">${escapeHtml(personName(person))}<small>${escapeHtml(years(person))}</small></button>`).join('')||'<div class="place-no-result">Aucune personne trouvée</div>';mediaPersonSuggestions.hidden=false;}catch(_){mediaPersonSuggestions.hidden=true;}},180);
-                mediaPersonSuggestions.onclick=event=>{const button=event.target.closest('[data-confidence-media-person-id]');if(!button)return;const person=mediaPeople.find(row=>Number(row.id)===Number(button.dataset.confidenceMediaPersonId));if(!person)return;mediaPersonId=Number(person.id);mediaPersonName=personName(person);mediaPersonSearch.value=mediaPersonName;mediaPersonSuggestions.hidden=true;mediaPersonSuggestions.innerHTML='';setMediaScopeHelp();mediaSearch.value='';loadMedia();};
-            }
-            mediaSuggestions.onclick=event=>{const button=event.target.closest('[data-confidence-media-id]');if(!button)return;const media=mediaRows.find(row=>Number(row.id)===Number(button.dataset.confidenceMediaId)),select=$('#event-confidence-media');if(!media||!select)return;let option=[...select.options].find(row=>Number(row.value)===Number(media.id));if(!option){option=document.createElement('option');option.value=String(media.id);option.textContent=eventConfidenceMediaLabel(media);select.append(option);}select.value=String(media.id);mediaSearch.value='';mediaSuggestions.hidden=true;mediaSuggestions.innerHTML='';};
         }
     }
     function mediaForCensus(media,censusId){return media.filter(item=>csvIds(item.census_ids).includes(Number(censusId)));}
@@ -2653,58 +2642,22 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         if(!chipsEl)return;
         chipsEl.innerHTML=list.map((person,index)=>`<span class="map-route-chip correspondent-chip${person.id?'':' is-freetext'}"><i style="--route-color:${person.id?'var(--blue)':'#f2c500'}"></i>${escapeHtml(person.name)}<button type="button" data-remove-correspondent="${index}" aria-label="Retirer ${escapeHtml(person.name)}">×</button></span>`).join('');
     }
+    /** Destinataires / expéditeurs d'une correspondance : menu de choix unique (plusieurs personnes, nom libre accepté).
+     *  Le champ caché garde son format : JSON [{id, name}] (id 0 = nom libre). Renvoie {get, set} comme avant. */
     function setupCorrespondentPicker({chipsEl,searchInput,suggestionsEl,hiddenInput}){
-        if(!chipsEl||!searchInput||!suggestionsEl||!hiddenInput)return null;
+        if(!chipsEl||!hiddenInput)return null;
         let list=correspondentListFromValue(hiddenInput.value);
-        const sync=()=>{hiddenInput.value=JSON.stringify(list);renderCorrespondentChips(chipsEl,list);};
-        sync();
-        chipsEl.addEventListener('click',event=>{
-            const button=event.target.closest('[data-remove-correspondent]');
-            if(!button)return;
-            list.splice(Number(button.dataset.removeCorrespondent),1);
-            sync();
-        });
-        function addPerson(id,name){
-            name=String(name||'').trim();
-            if(!name)return;
-            const already=list.some(p=>(id&&p.id===id)||(!id&&!p.id&&p.name.toLowerCase()===name.toLowerCase()));
-            if(already){searchInput.value='';suggestionsEl.hidden=true;return;}
-            list.push({id:id||0,name});
-            sync();
-            searchInput.value='';
-            suggestionsEl.hidden=true;
-        }
-        let searchTimeout;
-        searchInput.addEventListener('input',()=>{
-            clearTimeout(searchTimeout);
-            const q=searchInput.value.trim();
-            if(q.length<2){suggestionsEl.hidden=true;return;}
-            searchTimeout=setTimeout(async()=>{
-                try{
-                    const data=await api('search',{type:'persons',q,limit:8});
-                    const people=data.data||[];
-                    const personButtons=people.map(p=>{
-                        const nm=(p.first_name+' '+p.last_name).trim()||'(Sans nom)';
-                        const dates=p.birth_year?(p.death_year?`${p.birth_year} — ${p.death_year}`:`${p.birth_year} — ?`):'';
-                        return `<button type="button" class="relation-result" data-id="${p.id}" data-name="${escapeHtml(nm)}"><strong>${escapeHtml(nm)}</strong>${dates?`<small>${escapeHtml(dates)}</small>`:''}</button>`;
-                    }).join('');
-                    const freeTextButton=`<button type="button" class="relation-result correspondent-freetext" data-id="0" data-name="${escapeHtml(q)}">+ Ajouter « ${escapeHtml(q)} » comme nom libre (personne non trouvée dans l’arbre)</button>`;
-                    suggestionsEl.innerHTML=personButtons+freeTextButton;
-                    suggestionsEl.hidden=false;
-                    suggestionsEl.querySelectorAll('[data-id]').forEach(el=>{
-                        el.addEventListener('click',()=>addPerson(Number(el.dataset.id),el.dataset.name));
-                    });
-                }catch(_){/* recherche indisponible, on ignore */}
-            },220);
-        });
-        searchInput.addEventListener('keydown',event=>{
-            if(event.key==='Enter'){event.preventDefault();addPerson(0,searchInput.value);}
-        });
-        document.addEventListener('click',event=>{
-            if(!event.target.closest||event.target===searchInput)return;
-            if(!event.target.closest(`#${suggestionsEl.id}`)&&!event.target.closest(`#${searchInput.id}`))suggestionsEl.hidden=true;
-        });
-        return {get:()=>list.slice(),set:newList=>{list=Array.isArray(newList)?newList.filter(p=>p&&p.name).map(p=>({id:Number(p.id)||0,name:String(p.name)})):[];sync();}};
+        [chipsEl,searchInput,suggestionsEl].forEach(el=>{if(el)el.hidden=true;});
+        const host=document.createElement('div');host.className='correspondent-pk';chipsEl.insertAdjacentElement('afterend',host);
+        const toValue=l=>l.map(p=>p.id?{id:Number(p.id),title:p.name,kind:'person'}:`txt:${p.name}`);
+        host.innerHTML=pkField({name:'correspondent_pick',kind:'person',multiple:true,allowFree:true,value:toValue(list)});
+        const field=host.querySelector('.pk');
+        // le menu n'envoie rien lui-même : seul le champ caché d'origine part avec le formulaire
+        field.querySelector(':scope > input[type=hidden]')?.removeAttribute('name');
+        const sync=()=>{hiddenInput.value=JSON.stringify(list);};
+        sync();pkBindQuickCreate(host);
+        host.addEventListener('picker-change',event=>{field.querySelector(':scope > input[type=hidden]')?.removeAttribute('name');list=(event.detail.items||[]).map(it=>({id:it.free?0:Number(it.id)||0,name:String(it.title||'').trim()})).filter(p=>p.name);sync();});
+        return {get:()=>list.slice(),set:newList=>{list=Array.isArray(newList)?newList.filter(p=>p&&p.name).map(p=>({id:Number(p.id)||0,name:String(p.name)})):[];sync();pkSet(field,toValue(list));field.querySelector(':scope > input[type=hidden]')?.removeAttribute('name');}};
     }
     const correspondenceTypeLabels={lettre:'Lettre',carte_postale:'Carte postale',telegramme:'Télégramme',carte_voeux:'Carte de vœux',faire_part:'Faire-part',autre:'Autre correspondance'};
     function correspondenceTypeLabel(value){const text=String(value||'');return text.startsWith('custom:')?text.slice(7):correspondenceTypeLabels[text]||'Correspondance';}
@@ -3392,7 +3345,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const radiusKm=Number(ps.radiusKm)||0;
         const radiusLabel=radiusKm>0?`± ${radiusKm} km autour de la commune`:'Commune exacte uniquement';
         const dateWindowMode=ps.dateWindowMode||'exact';
-        return `<div id="research-proximity-fields"><div class="research-place-picker" id="proximity-place-picker"><span class="research-place-label">Commune</span><div class="research-place-input-wrap"><input id="proximity-place-input" type="text" autocomplete="off" placeholder="Filtrer par commune…" value=""><input type="hidden" name="proximity_place_id" value="${escapeHtml(String(ps.placeId||0))}"><div class="place-suggestions" id="proximity-place-suggestions" hidden></div></div>${ps.placeId&&ps.placeName?`<div class="research-place-chip"><span>${escapeHtml(ps.placeName)}</span><button type="button" class="research-place-chip-remove" id="proximity-place-remove" aria-label="Supprimer la commune">×</button></div>`:''}</div><div class="proximity-radius-field"><span class="research-place-label">Zone de recherche</span><input id="proximity-radius" name="proximity_radius_km" type="range" min="0" max="50" step="1" value="${radiusKm}"><output id="proximity-radius-value" class="proximity-radius-value">${escapeHtml(radiusLabel)}</output></div><label>Temps<select name="proximity_date_mode"><option value="range" ${(ps.dateMode||'range')==='range'?'selected':''}>Période par années</option><option value="exact" ${ps.dateMode==='exact'?'selected':''}>Date précise</option></select></label><div class="year-range-fields" id="proximity-year-range"><label>De<input name="proximity_year_from" type="number" min="1" max="9999" value="${escapeHtml(ps.yearFrom)}" placeholder="1800"></label><label>À<input name="proximity_year_to" type="number" min="1" max="9999" value="${escapeHtml(ps.yearTo)}" placeholder="1810"></label></div><div id="proximity-exact-date-fields"><label>Date précise<input name="proximity_exact_date" value="${escapeHtml(ps.exactDate||'')}" placeholder="30/02/1988"></label><label>Élargir<select name="proximity_date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="proximity-date-window-days">Nombre de jours<input name="proximity_date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(ps.dateWindowDays||'')}" placeholder="30"></label></div></div>`;
+        return `<div id="research-proximity-fields"><div class="research-place-picker" id="proximity-place-picker"><span class="research-place-label">Commune</span><div class="research-place-input-wrap" id="proximity-place-input">${pkField({name:'proximity_place_id',kind:'place',allowCreate:false,value:Number(ps.placeId)||null})}</div></div><div class="proximity-radius-field"><span class="research-place-label">Zone de recherche</span><input id="proximity-radius" name="proximity_radius_km" type="range" min="0" max="50" step="1" value="${radiusKm}"><output id="proximity-radius-value" class="proximity-radius-value">${escapeHtml(radiusLabel)}</output></div><label>Temps<select name="proximity_date_mode"><option value="range" ${(ps.dateMode||'range')==='range'?'selected':''}>Période par années</option><option value="exact" ${ps.dateMode==='exact'?'selected':''}>Date précise</option></select></label><div class="year-range-fields" id="proximity-year-range"><label>De<input name="proximity_year_from" type="number" min="1" max="9999" value="${escapeHtml(ps.yearFrom)}" placeholder="1800"></label><label>À<input name="proximity_year_to" type="number" min="1" max="9999" value="${escapeHtml(ps.yearTo)}" placeholder="1810"></label></div><div id="proximity-exact-date-fields"><label>Date précise<input name="proximity_exact_date" value="${escapeHtml(ps.exactDate||'')}" placeholder="30/02/1988"></label><label>Élargir<select name="proximity_date_window_mode"><option value="exact">Non, date exacte</option><option value="before" ${dateWindowMode==='before'?'selected':''}>Avant</option><option value="after" ${dateWindowMode==='after'?'selected':''}>Après</option><option value="both" ${dateWindowMode==='both'?'selected':''}>Avant et après</option></select></label><label id="proximity-date-window-days">Nombre de jours<input name="proximity_date_window_days" type="number" min="0" max="365" step="1" value="${escapeHtml(ps.dateWindowDays||'')}" placeholder="30"></label></div></div>`;
     }
     /* 🔎 Recherche : dans app-recherche.js (chargé juste après app.js) ; ici, des relais. */
     async function renderResearch(...a){const f=await appPartReady('renderResearch');if(f)return f(...a);$('#workspace').innerHTML=empty('La recherche n’a pas pu se charger (fichier app-recherche.js manquant ?).',{icon:'⚠️',hint:'Recharge la page ; si le problème continue, le fichier manque peut-être.'});}
@@ -3464,30 +3417,6 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     // d'autre de la frontière, anciennes communes en sous-nom) ou se retire (refusé si une battue l'utilise).
     // Pays des battues rangés par grandes régions (régions données par le catalogue ; ordre d'affichage ci-dessous)
 
-    function setupCommuneAutocomplete(input,hidden,box){
-        if(!input||!hidden||!box)return;
-        if(input.dataset.communeAutocompleteReady==='1')return;
-        input.dataset.communeAutocompleteReady='1';
-        let controller=null;
-        input.addEventListener('input',debounce(async()=>{
-            const q=input.value.trim();
-            hidden.value='';
-            if(q.length<2){box.hidden=true;box.innerHTML='';return;}
-            controller?.abort();controller=new AbortController();
-            try{
-                const data=await api('commune_suggestions',{q},{signal:controller.signal});
-                box.innerHTML=(data.communes||[]).map(row=>`<button type="button" class="place-suggestion" data-insee="${escapeHtml(row.insee_code)}" data-label="${escapeHtml(row.label)}"><strong>${escapeHtml(row.name)}</strong><small>${escapeHtml(row.insee_code)} · ${escapeHtml([row.admin2,row.admin1].filter(Boolean).join(' · ')||'France')}</small></button>`).join('')||'<p>Aucune commune trouvée.</p>';
-                box.hidden=false;
-            }catch(error){if(error.name!=='AbortError')box.innerHTML=`<p>${escapeHtml(error.message)}</p>`;}
-        },220));
-        box.addEventListener('click',event=>{
-            const button=event.target.closest('[data-insee]');
-            if(!button)return;
-            hidden.value=button.dataset.insee;
-            input.value=button.dataset.label;
-            box.hidden=true;
-        });
-    }
 
     function archiveDigestOptionLabel(item){const types={table_decennale:'Table décennale',mariage:'Mariage',naissance:'Naissance',deces:'Décès',bapteme:'Baptême',succession:'Succession',recensement:'Recensement',prison:'Prison',fiche_militaire:'Fiche militaire',liste_prisonnier:'Liste prisonnier',autre:'Autre'};const type=types[item.archive_digest_record_type||item.record_type]||item.archive_digest_record_type||item.record_type||'';return [type,item.archive_digest_year||item.year_text,item.archive_digest_place_name||item.place_name||item.archive_digest_city||item.city_name||item.archive_digest_alias||item.city_alias,item.archive_digest_reference||item.archive_reference].filter(Boolean).join(' · ');}
     /** Dates manquantes estimées d'après la famille et les actes (aide pour savoir quels registres consulter). */
@@ -4256,11 +4185,66 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     /* ── Objets de famille, mémoire familiale, lieux précis, saint du jour, entretien des liens ── */
     const personChip=person=>person?`<button type="button" class="table-link" data-open-person="${person.id}">${escapeHtml(personName(person))}</button>${/\d/.test(years(person)||'')?` <small>${escapeHtml(years(person))}</small>`:''}`:'';
     const mediaThumbHtml=m=>m.media_type==='image'?`<img src="media/${encodeURIComponent(m.filename)}" alt="${escapeHtml(m.title||'')}" loading="lazy">`:`<span class="collection-file">${m.media_type==='audio'?'♪':(m.media_type==='video'?'▶':'📄')} ${escapeHtml(m.title||'')}</span>`;
-    /** Champ « personne » avec suggestions (le numéro de la fiche est gardé dans un champ caché). */
-    function collectionPersonField(name,person,placeholder='Tape un nom…'){
-        return `<span class="collection-person-field"><input type="text" data-cp-input="${name}" value="${escapeHtml(person?personName(person):'')}" placeholder="${escapeHtml(placeholder)}" autocomplete="off"><input type="hidden" name="${name}" value="${person?Number(person.id):''}"><span class="collection-person-list" hidden></span></span>`;
+    /* ── 🔍 Menu de choix unique (assets/js/app-picker.js, mode d'emploi docs/PICKER.md) ── */
+    const PK=()=>window.LCNDA_PICKER||null;
+    // titre au-dessus d'un menu de choix dans une grille de formulaire (même allure que les <label> voisins)
+    const PK_ROLES=['témoin','parrain','marraine','voisin','employeur','officier','déclarant','épouse','époux','enfant','parent','autre'];
+    /** Le champ du menu de choix ; si app-picker.js n'est pas encore chargé, un champ vide qu'il remplira en se liant. */
+    function pkField(o={}){
+        if(PK())return PK().pickerField(o);
+        const opts={name:o.name||'picker',kind:String(o.kind||'person'),multiple:!!o.multiple,placeholder:o.placeholder||'',allowFree:!!o.allowFree,allowCreate:o.allowCreate===undefined?'auto':!!o.allowCreate,roles:o.roles?{main:o.roles.main!==false,roleList:o.roles.roleList?.length?o.roles.roleList:PK_ROLES}:null,animals:o.animals===false?0:1,label:''};
+        const v=o.value;const val=opts.roles?(typeof v==='string'?(()=>{try{return JSON.parse(v);}catch(_){return null;}})():v):(v==null||v===''?[]:Array.isArray(v)?v:(opts.multiple&&typeof v==='string'?v.split(','):[v]));
+        return `<div class="pk${opts.roles?' pk-roles':''}" data-picker="${escapeHtml(opts.kind)}" data-pk-opts="${escapeHtml(JSON.stringify(opts))}" data-pk-value="${escapeHtml(JSON.stringify(val))}"><input type="hidden" name="${escapeHtml(opts.name)}" value=""></div>`;
     }
-    function bindCollectionPersonFields(root){
+    const pkValue=el=>PK()?PK().pickerValue(el):null;
+    /** Menu qui n'envoie rien avec le formulaire autour (l'outil lit la valeur lui-même, par picker-change) : champ caché sans name. */
+    const pkFieldLocal=o=>pkField(o).replace(` name="${escapeHtml(o.name)}"`,'');
+    const pkSet=(el,value)=>{if(el&&PK())PK().pickerSet(el,value);};
+    /** Une personne déjà connue → valeur du menu (le composant relit les années, le Sosa, la photo). */
+    const pkPersonValue=person=>person&&Number(person.id)?{id:Number(person.id),title:personName(person),kind:'person'}:null;
+    /** Pays d'un lieu choisi dans le menu (l'item ne le donne pas à part : il est au bout de la ligne grise). */
+    function pkPlaceCountry(item){
+        if(!item)return '';
+        if(item.group==='fr')return 'France';
+        const parts=String(item.meta||'').split(' · ').map(x=>x.trim()).filter(x=>x&&!/hab\.$/.test(x)&&!/^anc\./.test(x));
+        const last=parts[parts.length-1]||'';
+        if(!last||last===item.county||last.startsWith(String(item.county||'')+' (')&&item.county||last===item.state_name)return '';
+        return /^[A-ZÀ-Ý' -]+$/.test(last)?last.charAt(0)+last.slice(1).toLowerCase():last;
+    }
+    /** « ＋ Créer la fiche » dans une fenêtre déjà ouverte : la fiche est créée tout de suite (prénom + NOM), puis choisie. */
+    async function pkQuickCreatePerson(text){
+        const words=String(text||'').trim().split(/\s+/).filter(Boolean);if(!words.length)return null;
+        const up=words.filter(w=>w.length>1&&w===w.toUpperCase()&&/\p{L}/u.test(w));
+        const last=up.length?up.join(' '):words.length>1?words[words.length-1]:words[0];
+        const first=up.length?words.filter(w=>!up.includes(w)).join(' '):words.length>1?words.slice(0,-1).join(' '):'';
+        const created=await api('save_person',{},{method:'POST',body:{first_name:first,last_name:last,gender:'unknown',living_status:'unknown'}});
+        const id=Number(created?.result?.id||0);if(!id)return null;
+        try{await loadPeople();}catch(_){}
+        toast(`Fiche créée : ${[first,last].filter(Boolean).join(' ')}.`);
+        return {id,title:[first,last].filter(Boolean).join(' '),kind:'person'};
+    }
+    /** Écoute « ＋ Créer la fiche » d'un menu de personnes dans `root` et crée la fiche sans quitter la fenêtre. */
+    function pkBindQuickCreate(root){
+        if(!root||root.dataset.pkQuickCreate)return;root.dataset.pkQuickCreate='1';
+        root.addEventListener('picker-create',event=>{if(event.detail?.kind!=='person'||event.detail.target==='view')return;event.preventDefault();pkQuickCreatePerson(event.detail.text).then(it=>{if(it)event.detail.pick(it);}).catch(error=>toast(error.message,'error'));});
+    }
+    /** Ancien champ « personne » : il produit maintenant le menu de choix unique (même champ caché `name`, même événement cp-pick).
+     *  Une case cachée [data-cp-input] garde le nom choisi pour les outils qui la lisent encore. */
+    function collectionPersonField(name,person,placeholder='Tape un nom…'){
+        const pid=person&&Number(person.id)?Number(person.id):0;
+        const nm=pid?personName(person):'';
+        // nom provisoire (« #12 », « Fiche n°12 », « … ») : le composant relit la fiche
+        const value=pid?(/^(#\d+|Fiche n°\s*\d+|…|La personne affichée|Personne #?\d+|Personne sans nom)$/.test(nm)?pid:{id:pid,title:nm,kind:'person'}):null;
+        return `<span class="collection-person-field cp-picker">${pkField({name,kind:'person',value})}<input type="text" class="cp-compat" data-cp-input="${escapeHtml(name)}" data-cp-bound="1" value="${escapeHtml(pid?nm:'')}" tabindex="-1" aria-hidden="true"></span>`;
+    }
+    // garde la case [data-cp-input] à jour avec la personne choisie
+    document.addEventListener('picker-change',event=>{const wrap=event.target.closest?.('.cp-picker');if(!wrap)return;const inp=wrap.querySelector(':scope > [data-cp-input]');if(inp)inp.value=event.detail?.item?.title||'';});
+    // un outil qui donne le focus à l'ancienne case, ou y écrit un nom puis envoie « input », atteint la case du menu
+    document.addEventListener('focusin',event=>{if(!event.target.matches?.('.cp-compat'))return;const pk=event.target.closest('.cp-picker')?.querySelector('.pk-search:not([hidden]) .pk-input');if(pk)pk.focus();},true);
+    document.addEventListener('input',event=>{if(!event.target.matches?.('.cp-compat'))return;const pk=event.target.closest('.cp-picker')?.querySelector('.pk-search:not([hidden]) .pk-input');if(pk){pk.value=event.target.value;pk.focus();pk.dispatchEvent(new Event('input',{bubbles:true}));}},true);
+    /** Le menu se lie tout seul ; ceci ne sert plus qu'aux anciens champs encore écrits à la main ailleurs. */
+    function bindCollectionPersonFields(root){bindLegacyPersonFields(root);}
+    function bindLegacyPersonFields(root){
         $$('[data-cp-input]',root).forEach(input=>{if(input.dataset.cpBound)return;input.dataset.cpBound='1';
             const hidden=input.parentElement.querySelector('input[type=hidden]'),list=input.parentElement.querySelector('.collection-person-list');let timer=0,seq=0; // seq : une recherche partie avant un choix ne rouvre pas la liste
             input.addEventListener('input',()=>{hidden.value='';clearTimeout(timer);const q=input.value.trim();if(q.length<2){list.hidden=true;return;}
@@ -5312,7 +5296,7 @@ ${backupSectionHtml()}
         const map=sosaMap();
         const count=Object.keys(map).length;
         const rootName=rootId?(localStorage.getItem('genealogie-sosa-root-name')||`Personne #${rootId}`):'';
-        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation Sosa</strong><span>${rootId?`Sosa n°1 (de cujus) : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box"><input type="text" id="sosa-root-search" placeholder="Rechercher une personne…" value="${escapeHtml(rootId?rootName:'')}" autocomplete="off"><input type="hidden" id="sosa-root-input" value="${rootId||''}"><div class="relation-results sosa-results" id="sosa-root-results" hidden></div></div><button class="button small" type="button" id="sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="sosa-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="sosa-clear">Retirer</button>':''}</div></div>`;
+        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation Sosa</strong><span>${rootId?`Sosa n°1 (de cujus) : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="sosa-root-pick">${pkFieldLocal({name:'sosa_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="sosa-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="sosa-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="sosa-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="sosa-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="sosa-clear">Retirer</button>':''}</div></div>`;
     }
     function dabovilleRootId(){return Number(localStorage.getItem('genealogie-daboville-root'))||0;}
     function dabovilleMap(){try{return JSON.parse(localStorage.getItem('genealogie-daboville-map')||'{}');}catch(_){return {};}}
@@ -5330,7 +5314,7 @@ ${backupSectionHtml()}
         const map=dabovilleMap();
         const count=Object.keys(map).length;
         const rootName=rootId?(localStorage.getItem('genealogie-daboville-root-name')||`Personne #${rootId}`):'';
-        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation d'Aboville</strong><span>${rootId?`N°1 : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box"><input type="text" id="daboville-root-search" placeholder="Rechercher une personne…" value="${escapeHtml(rootId?rootName:'')}" autocomplete="off"><input type="hidden" id="daboville-root-input" value="${rootId||''}"><div class="relation-results sosa-results" id="daboville-root-results" hidden></div></div><button class="button small" type="button" id="daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="daboville-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="daboville-clear">Retirer</button>':''}</div></div>`;
+        return `<div class="local-lock-inline sosa-inline"><div><strong>Numérotation d'Aboville</strong><span>${rootId?`N°1 : ${escapeHtml(rootName)} · ${plural(count,'personne numérotée','personnes numérotées')}`:'Aucune personne racine définie pour le moment'}</span></div><div class="page-actions sosa-inline-actions"><div class="sosa-search-box" id="daboville-root-pick">${pkFieldLocal({name:'daboville_root_pick',kind:'person',value:rootId?(/^Personne #/.test(rootName)?rootId:{id:rootId,title:rootName,kind:'person'}):null})}<input type="hidden" id="daboville-root-search" value="${escapeHtml(rootId?rootName:'')}"><input type="hidden" id="daboville-root-input" value="${rootId||''}"></div><button class="button small" type="button" id="daboville-use-current" ${state.currentPersonId?'':'disabled'} title="Utiliser la personne actuellement ouverte">Utiliser la fiche ouverte</button><button class="button small" type="button" id="daboville-recalculate">Recalculer</button>${rootId?'<button class="button small secondary" type="button" id="daboville-clear">Retirer</button>':''}</div></div>`;
     }
     function designPresets(){try{return JSON.parse(localStorage.getItem('genealogie-design-presets')||'{}');}catch(_){return {};}}
     function saveDesignPresets(presets){localStorage.setItem('genealogie-design-presets',JSON.stringify(presets));}
@@ -5676,37 +5660,16 @@ ${backupSectionHtml()}
         }));
         $('#sosa-use-current')?.addEventListener('click',()=>{
             if(!state.currentPersonId)return;
-            const search=$('#sosa-root-search'),input=$('#sosa-root-input'),results=$('#sosa-root-results');
-            const current=summaryFromState();
-            input.value=state.currentPersonId;
-            search.value=current?personName(current):`Personne #${state.currentPersonId}`;
-            if(results){results.hidden=true;results.innerHTML='';}
+            const current=summaryFromState(),name=current?personName(current):`Personne #${state.currentPersonId}`;
+            $('#sosa-root-input').value=state.currentPersonId;$('#sosa-root-search').value=name;
+            pkSet($('#sosa-root-pick .pk'),{id:Number(state.currentPersonId),title:name,kind:'person'});
         });
-        $('#sosa-root-search')?.addEventListener('input',debounce(async event=>{
-            const q=event.target.value.trim(),results=$('#sosa-root-results');
-            $('#sosa-root-input').value='';
-            if(q.length<2){results.hidden=true;results.innerHTML='';return;}
-            sosaSearchController?.abort();sosaSearchController=new AbortController();
-            results.hidden=false;results.innerHTML='<p>Recherche…</p>';
-            try{
-                const result=await api('people',{q,limit:30},{signal:sosaSearchController.signal});
-                results.innerHTML=result.people.length?result.people.map(person=>`<button type="button" class="relation-result" data-sosa-person="${person.id}" data-sosa-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';
-            }catch(error){if(error.name!=='AbortError')results.innerHTML=`<p>${escapeHtml(error.message)}</p>`;}
-        }));
-        $('#sosa-root-results')?.addEventListener('click',event=>{
-            const button=event.target.closest('[data-sosa-person]');if(!button)return;
-            $('#sosa-root-input').value=button.dataset.sosaPerson;
-            $('#sosa-root-search').value=button.dataset.sosaName;
-            const results=$('#sosa-root-results');results.hidden=true;results.innerHTML='';
-        });
-        document.addEventListener('click',sosaOutsideClickHandler=sosaOutsideClickHandler||(event=>{
-            const box=$('#sosa-root-results');if(!box||box.hidden)return;
-            if(!event.target.closest('.sosa-search-box'))box.hidden=true;
-        }));
+        // la racine Sosa : menu de choix unique ; les champs cachés #sosa-root-input / #sosa-root-search suivent
+        $('#sosa-root-pick')?.addEventListener('picker-change',event=>{const it=event.detail.item;$('#sosa-root-input').value=it&&!it.free?it.id:'';$('#sosa-root-search').value=it?it.title:'';});
         $('#sosa-recalculate')?.addEventListener('click',async()=>{
             const input=$('#sosa-root-input');
             const rootId=Number(input?.value)||0;
-            if(!rootId){toast('Choisis une personne dans les résultats de recherche (sosa n°1).','error');return;}
+            if(!rootId){toast('Choisis la personne n°1 (de cujus).','error');return;}
             try{
                 const result=await recalculateSosaMap(rootId);
                 if(!result.root_id){toast('Personne introuvable.','error');return;}
@@ -5725,37 +5688,15 @@ ${backupSectionHtml()}
         });
         $('#daboville-use-current')?.addEventListener('click',()=>{
             if(!state.currentPersonId)return;
-            const search=$('#daboville-root-search'),input=$('#daboville-root-input'),results=$('#daboville-root-results');
-            const current=summaryFromState();
-            input.value=state.currentPersonId;
-            search.value=current?personName(current):`Personne #${state.currentPersonId}`;
-            if(results){results.hidden=true;results.innerHTML='';}
+            const current=summaryFromState(),name=current?personName(current):`Personne #${state.currentPersonId}`;
+            $('#daboville-root-input').value=state.currentPersonId;$('#daboville-root-search').value=name;
+            pkSet($('#daboville-root-pick .pk'),{id:Number(state.currentPersonId),title:name,kind:'person'});
         });
-        $('#daboville-root-search')?.addEventListener('input',debounce(async event=>{
-            const q=event.target.value.trim(),results=$('#daboville-root-results');
-            $('#daboville-root-input').value='';
-            if(q.length<2){results.hidden=true;results.innerHTML='';return;}
-            sosaSearchController?.abort();sosaSearchController=new AbortController();
-            results.hidden=false;results.innerHTML='<p>Recherche…</p>';
-            try{
-                const result=await api('people',{q,limit:30},{signal:sosaSearchController.signal});
-                results.innerHTML=result.people.length?result.people.map(person=>`<button type="button" class="relation-result" data-daboville-person="${person.id}" data-daboville-name="${escapeHtml(personName(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';
-            }catch(error){if(error.name!=='AbortError')results.innerHTML=`<p>${escapeHtml(error.message)}</p>`;}
-        }));
-        $('#daboville-root-results')?.addEventListener('click',event=>{
-            const button=event.target.closest('[data-daboville-person]');if(!button)return;
-            $('#daboville-root-input').value=button.dataset.dabovillePerson;
-            $('#daboville-root-search').value=button.dataset.dabovilleName;
-            const results=$('#daboville-root-results');results.hidden=true;results.innerHTML='';
-        });
-        document.addEventListener('click',sosaOutsideClickHandler=sosaOutsideClickHandler||(event=>{
-            const box=$('#daboville-root-results');if(!box||box.hidden)return;
-            if(!event.target.closest('.sosa-search-box'))box.hidden=true;
-        }));
+        $('#daboville-root-pick')?.addEventListener('picker-change',event=>{const it=event.detail.item;$('#daboville-root-input').value=it&&!it.free?it.id:'';$('#daboville-root-search').value=it?it.title:'';});
         $('#daboville-recalculate')?.addEventListener('click',async()=>{
             const input=$('#daboville-root-input');
             const rootId=Number(input?.value)||0;
-            if(!rootId){toast("Choisis une personne dans les résultats de recherche (n°1 d'Aboville).",'error');return;}
+            if(!rootId){toast("Choisis la personne n°1 d'Aboville.",'error');return;}
             try{
                 const result=await recalculateDabovilleMap(rootId);
                 if(!result.root_id){toast('Personne introuvable.','error');return;}
@@ -5930,36 +5871,8 @@ ${backupSectionHtml()}
             const clear=e.target.closest('#grave-precise-clear');
             if(clear){e.preventDefault();const form=$('#grave-form');form.elements.precise_lat.value='';form.elements.precise_lon.value='';renderGravePreciseBlock(form,null);return;}
         });
-        $('#grave-person-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const personId=form.elements.selected_person_id.value;if(!personId){toast('Sélectionne une personne dans la liste.','error');return;}await api('add_grave_person',{},{method:'POST',body:{grave_id:form.elements.grave_id.value,person_id:personId}});$('#grave-person-dialog').close();toast('Personne ajoutée à la sépulture.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
-        (()=>{
-            const searchInput=$('#grave-person-search');const resultsEl=$('#grave-person-results');
-            if(!searchInput||!resultsEl)return;
-            let searchTimeout;
-            searchInput.addEventListener('input',()=>{
-                clearTimeout(searchTimeout);
-                const q=searchInput.value.trim();
-                if(q.length<2){resultsEl.innerHTML='<p>Saisis au moins deux caractères.</p>';return;}
-                searchTimeout=setTimeout(async()=>{
-                    try{
-                        const data=await api('search',{type:'persons',q,limit:10});
-                        const people=data.data||[];
-                        resultsEl.innerHTML=people.length?people.map(p=>{
-                            const nm=(p.first_name+' '+p.last_name).trim()||'(Sans nom)';
-                            const dates=p.birth_year?(p.death_year?`${p.birth_year} — ${p.death_year}`:`${p.birth_year} — ?`):'';
-                            return `<button type="button" class="relation-result" data-id="${p.id}" data-name="${escapeHtml(nm)}"><strong>${escapeHtml(nm)}</strong>${dates?`<small>${escapeHtml(dates)}</small>`:''}</button>`;
-                        }).join(''):'<p>Aucune personne trouvée.</p>';
-                        resultsEl.querySelectorAll('[data-id]').forEach(el=>{
-                            el.addEventListener('click',()=>{
-                                $('#grave-person-form').elements.selected_person_id.value=el.dataset.id;
-                                $('#grave-person-selected').hidden=false;
-                                $('#grave-person-selected span').textContent=`Personne sélectionnée : ${el.dataset.name} · #${el.dataset.id}`;
-                                resultsEl.innerHTML='';
-                            });
-                        });
-                    }catch(_){/* recherche indisponible */}
-                },220);
-            });
-        })();
+        $('#grave-person-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const personId=form.elements.selected_person_id.value;if(!Number(personId)){toast('Choisis une personne.','error');return;}await api('add_grave_person',{},{method:'POST',body:{grave_id:form.elements.grave_id.value,person_id:personId}});$('#grave-person-dialog').close();toast('Personne ajoutée à la sépulture.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
+        pkBindQuickCreate($('#grave-person-dialog')); // la personne : menu de choix unique (champ selected_person_id)
         $('#event-form').addEventListener('submit',async event=>{event.preventDefault();if(event.currentTarget.elements.work_fields)event.currentTarget.elements.work_fields.value=collectEventWorkFields();const values=formObject(event.currentTarget);if(event.currentTarget.elements.date_uncertain)values.date_uncertain=event.currentTarget.elements.date_uncertain.checked?'1':'0';try{const result=await api(values.id?'save_event':'add_event',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#event-label-picker',savedId);if(savedId&&state.eventWitnesses!==undefined){try{const sponsors=isBaptismEventType(values.event_type_id)?(state.eventSponsors||[]):[];const linked=[...sponsors.map(s=>({person_id:s.person_id,note:sponsorNote(s)})),...state.eventWitnesses.map(w=>({person_id:w.person_id,note:w.note||''}))];await api('save_event_witnesses',{},{method:'POST',body:{event_id:savedId,witnesses:JSON.stringify(linked)}});}catch(_){}}$('#event-dialog').close();toast(values.id?'Événement modifié.':'Événement ajouté.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         (()=>{const wrap=$('#event-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});bindEventDateAlternative();})();
         (()=>{const wrap=$('#media-form .date-text-wrap');if(!wrap)return;const textInput=wrap.querySelector('[name="date_text"]');const hiddenPicker=wrap.querySelector('.date-picker-hidden');const toggleBtn=wrap.querySelector('.date-picker-toggle');if(!textInput||!hiddenPicker||!toggleBtn)return;toggleBtn.addEventListener('click',()=>{hiddenPicker.valueAsDate=null;const iso=dateTextToIso(textInput.value);if(iso)hiddenPicker.value=iso;try{if(hiddenPicker.showPicker)hiddenPicker.showPicker();else hiddenPicker.click();}catch(_){hiddenPicker.click();}});hiddenPicker.addEventListener('change',()=>{if(hiddenPicker.value){textInput.value=isoToDateText(hiddenPicker.value);textInput.dispatchEvent(new Event('input'));}});})();
@@ -5984,8 +5897,9 @@ ${backupSectionHtml()}
         $('#add-sponsor-btn')?.addEventListener('click',()=>openSponsorSearch());
         $('#add-witness-btn').addEventListener('click',()=>openWitnessSearch());
         $('#relation-form').elements.entry_mode.addEventListener('change',event=>{const creating=event.target.value==='new',linking=event.target.value==='existing';$('#relation-existing-fields').hidden=!linking;$('#relation-new-fields').hidden=!creating;});
-        $('#relation-search').addEventListener('input',debounce(async event=>{const q=event.target.value.trim(),target=$('#relation-results');$('#relation-form').elements.related_id.value='';if(q.length<2){target.innerHTML='<p>Saisis au moins deux caractères.</p>';return;}relationController?.abort();relationController=new AbortController();target.innerHTML='<p>Recherche…</p>';try{const result=await api('people',{q,limit:30},{signal:relationController.signal});const people=result.people.filter(person=>Number(person.id)!==Number($('#relation-form').elements.person_id.value));target.innerHTML=people.length?people.map(person=>`<button type="button" class="relation-result" data-relation-person="${person.id}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';}catch(error){if(error.name!=='AbortError')target.innerHTML=`<p>${escapeHtml(error.message)}</p>`;}}));
-        $('#relation-results').addEventListener('click',event=>{const button=event.target.closest('[data-relation-person]');if(!button)return;$$('[data-relation-person]',$('#relation-results')).forEach(item=>item.classList.toggle('is-selected',item===button));$('#relation-form').elements.related_id.value=button.dataset.relationPerson;});
+        // la personne liée : menu de choix unique (champ related_id) ; « ＋ Créer la fiche » passe au mode « nouvelle personne » prérempli
+        $('#relation-search').addEventListener('picker-change',event=>{const form=$('#relation-form'),it=event.detail.item;if(it&&Number(it.id)===Number(form.elements.person_id.value)){toast('Choisis une autre personne que celle-ci.','error');pkSet(event.currentTarget,null);}});
+        $('#relation-search').addEventListener('picker-create',event=>{if(event.detail.kind!=='person')return;event.preventDefault();const form=$('#relation-form'),words=String(event.detail.text||'').trim().split(/\s+/);form.elements.entry_mode.value='new';form.elements.entry_mode.dispatchEvent(new Event('change'));form.elements.new_last_name.value=words.length>1?words[words.length-1]:words[0]||'';form.elements.new_first_name.value=words.length>1?words.slice(0,-1).join(' '):'';form.elements.new_first_name.focus();});
         $('#relation-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,values=formObject(form);try{if(['none','none_suspected'].includes(values.entry_mode)){await api('set_relation_status',{}, {method:'POST',body:{person_id:values.person_id,relation_type:values.relation_type,status:values.entry_mode}});$('#relation-dialog').close();toast('Mention familiale enregistrée.');await selectPerson(Number(values.person_id));return;}let relatedId=Number(values.related_id)||0;if(values.entry_mode==='new'){const created=await api('save_person',{}, {method:'POST',body:{first_name:values.new_first_name,last_name:values.new_last_name,gender:values.new_gender,living_status:values.new_living_status}});relatedId=Number(created.result.id);}if(!relatedId)throw new Error('Choisis une personne dans les résultats.');await api('add_relation',{}, {method:'POST',body:{person_id:values.person_id,related_id:relatedId,relation_type:values.relation_type}});$('#relation-dialog').close();toast('Relation familiale ajoutée.');await loadPeople();await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
         $('#note-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{const result=await api(values.id?'save_note':'add_note',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#note-label-picker',savedId);$('#note-dialog').close();toast(values.id?'Note modifiée.':'Note ajoutée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#online-sheet-add-field').addEventListener('click',()=>{const list=$('#online-sheet-checks-list');list.insertAdjacentHTML('beforeend',onlineSheetCheckRowHtml(`custom_${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`,'',null,true));list.lastElementChild.querySelector('[data-check-label]')?.focus();});
@@ -6039,9 +5953,9 @@ ${backupSectionHtml()}
         $('#media-form').elements.census_id?.addEventListener('change',event=>{const form=$('#media-form');if(event.target.value){form.elements.event_id.value='';form.elements.create_event.checked=false;updateMediaCreateEventFields();}});
         $('#media-form').elements.event_id?.addEventListener('change',event=>{if(event.target.value)$('#media-form').elements.census_id.value='';});
         $('#census-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{const result=await api('save_census_record',{}, {method:'POST',body:values});const savedId=Number(values.id||result?.result?.id||0);await applyLabelPickerAfterSave('#census-label-picker',savedId);$('#census-dialog').close();toast('Recensement enregistré.');await selectPerson(Number(values.person_id));}catch(error){toast(error.message,'error');}});
-        $('#census-member-search').addEventListener('input',debounce(async event=>{const q=event.target.value.trim(),target=$('#census-member-results'),form=$('#census-member-form');form.elements.person_id.value='';$('#census-member-selected').hidden=true;if(q.length<2){target.innerHTML='<p>Saisis au moins deux caractères.</p>';return;}censusMemberController?.abort();censusMemberController=new AbortController();target.innerHTML='<p>Recherche…</p>';try{const result=await api('people',{q,limit:30},{signal:censusMemberController.signal});const returnId=Number(form.elements.return_person_id.value)||0;const people=result.people.filter(person=>Number(person.id)!==returnId);target.innerHTML=people.length?people.map(person=>`<button type="button" class="relation-result" data-census-member-person="${person.id}" data-person-name="${escapeHtml(personName(person))}" data-person-years="${escapeHtml(relationYears(person))}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(relationYears(person))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';}catch(error){if(error.name!=='AbortError')target.innerHTML=`<p>${escapeHtml(error.message)}</p>`;}}));
-        $('#census-member-results').addEventListener('click',event=>{const button=event.target.closest('[data-census-member-person]');if(!button)return;selectCensusMemberPerson(button.dataset.censusMemberPerson,button.dataset.personName,button.dataset.personYears);});
-        $('#clear-census-member-person').addEventListener('click',()=>clearCensusMemberPerson(true));
+        // la fiche liée : menu de choix unique (champ person_id) ; le nom relevé se remplit s'il est vide
+        pkBindQuickCreate($('#census-member-dialog'));
+        $('#census-member-search').addEventListener('picker-change',event=>{const form=$('#census-member-form'),it=event.detail.item;if(it&&!it.free&&!form.elements.display_name.value.trim())form.elements.display_name.value=it.title||'';});
         $('#census-member-form').addEventListener('submit',async event=>{event.preventDefault();const values=formObject(event.currentTarget);try{if(!values.id&&values.person_id){const memberships=(await api('census_member_memberships',{person_id:values.person_id})).records||[];const currentId=Number(values.census_id);const sameRecord=memberships.find(item=>Number(item.census_id)===currentId);const otherRecords=memberships.filter(item=>Number(item.census_id)!==currentId);const recordLabel=item=>`recensement ${item.year||'?'}${item.place_name?` à ${item.place_name}`:''}${item.address?` — ${item.address}`:''}`;if(sameRecord&&!await confirmBox(`Elle est déjà rattachée à ce ${recordLabel(sameRecord)}.\n\nEnregistrer mettra à jour ses informations dans ce foyer, sans créer de doublon. Continuer ?`,{title:'Personne déjà dans ce foyer',okLabel:'Enregistrer',danger:false}))return;if(otherRecords.length&&!await confirmBox(`Elle est déjà rattachée à ${otherRecords.length<2?'un autre recensement':`${otherRecords.length} autres recensements`} :\n${otherRecords.map(recordLabel).join('\n')}\n\nC’est normal pour des années différentes ; vérifie toutefois qu’il ne s’agit pas d’un doublon avant d’ajouter ce nouveau rattachement. Continuer ?`,{title:'Personne déjà recensée ailleurs',okLabel:'Ajouter quand même',danger:false}))return;}const result=await api(values.id?'update_census_member':'add_census_member',{}, {method:'POST',body:values});$('#census-member-dialog').close();toast(values.id?'Membre du foyer modifié.':result?.result?.updated_existing?'Membre déjà présent : informations mises à jour.':'Membre du foyer ajouté.');await selectPerson(Number(values.return_person_id)||state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#census-media-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget,formData=new FormData(form),mediaIds=formData.getAll('media_ids[]'),files=[...(form.elements['files[]']?.files||[])];const personId=Number(form.elements.person_id.value)||state.currentPersonId;try{let linked=0,imported=0;if(mediaIds.length){const result=await api('link_census_media',{}, {method:'POST',body:{census_id:form.elements.census_id.value,person_id:personId,media_ids:mediaIds}});linked=Number(result.result.added)||0;}if(files.length){formData.append('csrf',state.csrf);const response=await fetch('upload.php',{method:'POST',body:formData});const result=await response.json();if(!response.ok||result.error)throw new Error(result.error||'Import impossible');imported=(result.media||[]).length;}if(!linked&&!imported)throw new Error('Choisis un média existant ou importe un fichier.');$('#census-media-dialog').close();toast([linked?`${plural(linked,'média lié','médias liés')}`:null,imported?`${plural(imported,'média importé','médias importés')}`:null].filter(Boolean).join(' · '));await selectPerson(personId);}catch(error){toast(error.message,'error');}});
         $('#entity-media-form').addEventListener('submit',async event=>{event.preventDefault();const form=event.currentTarget;const mediaIds=[...form.querySelectorAll('[name="media_ids[]"] option:checked')].map(option=>option.value);const files=[...(form.elements['files[]']?.files||[])];const personId=Number(form.elements.person_id.value)||state.currentPersonId;const entityType=form.elements.entity_type.value;const entityId=form.elements.entity_id.value;try{let linked=0,imported=0;if(mediaIds.length){const result=await api('link_entity_media',{}, {method:'POST',body:{entity_type:entityType,entity_id:entityId,person_id:personId,media_ids:mediaIds}});linked=Number(result.result.added)||0;}if(files.length){const uploadData=new FormData();uploadData.append('person_id',personId);uploadData.append('title',form.elements.title.value);uploadData.append('document_reference',form.elements.document_reference.value);uploadData.append('document_title',form.elements.document_title.value);uploadData.append('document_url',form.elements.document_url.value);uploadData.append('document_pages',form.elements.document_pages.value);files.forEach(file=>uploadData.append('files[]',file));uploadData.append('csrf',state.csrf);const response=await fetch('upload.php',{method:'POST',body:uploadData});const result=await response.json();if(!response.ok||result.error)throw new Error(result.error||'Import impossible');imported=(result.media||[]).length;if((result.media||[]).length){await api('link_entity_media',{}, {method:'POST',body:{entity_type:entityType,entity_id:entityId,person_id:personId,media_ids:result.media}});}}if(!linked&&!imported)throw new Error('Choisis un média existant ou importe un fichier.');$('#entity-media-dialog').close();toast([linked?`${plural(linked,'média lié','médias liés')}`:null,imported?`${plural(imported,'média importé','médias importés')}`:null].filter(Boolean).join(' · '));await selectPerson(personId);}catch(error){toast(error.message,'error');}});
@@ -6052,13 +5966,13 @@ ${backupSectionHtml()}
         $('#battue-level-colors-form')?.addEventListener('submit',event=>{event.preventDefault();const form=event.currentTarget;const colors=Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]);saveBattueLevelColors(colors);$('#battue-level-colors-dialog').close();toast('Couleurs des niveaux enregistrées.');});
         $('#battue-level-colors-reset')?.addEventListener('click',()=>{const form=$('#battue-level-colors-form');DEFAULT_BATTUE_LEVEL_COLORS.forEach((c,i)=>{const input=form?.querySelector(`[name="battue_level_${i}"]`);if(input)input.value=c;});});
         $('#battue-level-colors-save-preset')?.addEventListener('click',()=>{const nameInput=$('#battue-level-colors-preset-name');const name=(nameInput?.value||'').trim();if(!name){toast('Indique un nom pour cette palette.','error');nameInput?.focus();return;}const form=$('#battue-level-colors-form');const colors=Array.from({length:DEFAULT_BATTUE_LEVEL_COLORS.length},(_,i)=>form.querySelector(`[name="battue_level_${i}"]`)?.value||DEFAULT_BATTUE_LEVEL_COLORS[i]);const presets=getBattueLevelColorPresets();presets[String(Date.now())]={name,colors};saveBattueLevelColorPresets(presets);if(nameInput)nameInput.value='';renderBattueLevelColorPresetsList();toast(`Palette « ${name} » sauvegardée.`);});
-        $('#investigation-form').addEventListener('submit',async event=>{event.preventDefault();try{const formData=formObject(event.currentTarget);formData.additional_persons=$('#investigation-extra-persons')?.value||'';formData.linked_battues=$('#investigation-linked-battues')?.value||'';const result=await api('save_investigation',{}, {method:'POST',body:formData});$('#investigation-dialog').close();state.currentInvestigationId=Number(result.result.id);if(state.module==='personnes')await selectPerson(state.currentPersonId);else await renderInvestigations();toast('Enquête enregistrée.');}catch(error){toast(error.message,'error');}});
+        $('#investigation-form').addEventListener('submit',async event=>{event.preventDefault();try{const formData=formObject(event.currentTarget);formData.additional_persons=$('#investigation-extra-persons')?.value||'';delete formData.people_json;if(!Number(formData.person_id)){toast('Choisis la personne principale de l’enquête.','error');return;}const result=await api('save_investigation',{}, {method:'POST',body:formData});$('#investigation-dialog').close();state.currentInvestigationId=Number(result.result.id);if(state.module==='personnes')await selectPerson(state.currentPersonId);else await renderInvestigations();toast('Enquête enregistrée.');}catch(error){toast(error.message,'error');}});
         $('#battue-form')?.addEventListener('submit',async event=>{
             event.preventDefault();
-            const values=formObject(event.currentTarget);
+            const values=formObject(event.currentTarget);delete values.battue_commune_pick;delete values.battue_people_json;
             if(!values.start_insee_code){
-                toast('Choisis une commune dans les résultats.','error');
-                $('#battue-commune-search')?.focus();
+                toast('Choisis la commune de départ.','error');
+                $('#battue-commune-search .pk-input')?.focus();
                 return;
             }
             try{
@@ -6078,7 +5992,7 @@ ${backupSectionHtml()}
         });
         $('#investigation-item-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const values=formObject(form);const editId=form.dataset.editItemId;const personIds=$('#investigation-item-person-ids')?.value||'';if(personIds)values.linked_person_ids=personIds;if(editId){values.id=editId;await api('save_investigation_item',{},{method:'POST',body:values});$('#investigation-item-dialog').close();await renderInvestigationDetail(Number(values.investigation_id));toast('Piste modifiée.');}else{await api('add_investigation_item',{},{method:'POST',body:values});$('#investigation-item-dialog').close();await renderInvestigationDetail(Number(values.investigation_id));toast('Piste ajoutée.');}}catch(error){toast(error.message,'error');}});
         $('#investigation-media-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget,values=formObject(form),formData=new FormData(form);values.media_ids=formData.getAll('media_ids[]');values.item_ids=formData.getAll('item_ids[]');await api('link_investigation_media',{}, {method:'POST',body:values});$('#investigation-media-dialog').close();await renderInvestigationDetail(Number(values.investigation_id));toast(`${plural(values.media_ids.length,'média associé','médias associés')}.`);}catch(error){toast(error.message,'error');}});
-        $('#investigation-item-event-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const select=$('#investigation-item-event-select');const option=select.options[select.selectedIndex];if(!option||!option.value){toast('Choisis un événement.','error');return;}const values=formObject(form);if(!values.item_id){toast('Piste introuvable.','error');return;}const personLabel=$('#investigation-item-event-person-search')?.value||'';await api('link_event_to_investigation_item',{},{method:'POST',body:{item_id:values.item_id,event_id:option.value,person_label:personLabel}});$('#investigation-item-event-dialog').close();await renderInvestigationDetail(Number(values.investigation_id));toast('Événement lié à la piste.');}catch(error){toast(error.message,'error');}});
+        $('#investigation-item-event-form').addEventListener('submit',async event=>{event.preventDefault();try{const form=event.currentTarget;const select=$('#investigation-item-event-select');const option=select.options[select.selectedIndex];if(!option||!option.value){toast('Choisis un événement.','error');return;}const values=formObject(form);if(!values.item_id){toast('Piste introuvable.','error');return;}const personLabel=$('#investigation-item-event-person-search .pk-chosen b')?.textContent||'';await api('link_event_to_investigation_item',{},{method:'POST',body:{item_id:values.item_id,event_id:option.value,person_label:personLabel}});$('#investigation-item-event-dialog').close();await renderInvestigationDetail(Number(values.investigation_id));toast('Événement lié à la piste.');}catch(error){toast(error.message,'error');}});
         $('#hypothesis-form').addEventListener('submit',async event=>{event.preventDefault();try{await api('save_hypothesis',{}, {method:'POST',body:formObject(event.currentTarget)});$('#hypothesis-dialog').close();toast('Hypothèse enregistrée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#evidence-form').addEventListener('submit',async event=>{event.preventDefault();try{await api('save_evidence',{}, {method:'POST',body:formObject(event.currentTarget)});$('#evidence-dialog').close();toast('Preuve enregistrée.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
         $('#research-note-form').addEventListener('submit',async event=>{event.preventDefault();try{await api('save_research_note',{}, {method:'POST',body:formObject(event.currentTarget)});$('#research-note-dialog').close();toast('Journal enregistré.');await selectPerson(state.currentPersonId);}catch(error){toast(error.message,'error');}});
@@ -6227,12 +6141,9 @@ ${backupSectionHtml()}
         const form=$('#grave-person-form');
         form.reset();
         form.elements.grave_id.value=graveId;
-        $('#grave-person-search').value='';
-        $('#grave-person-results').innerHTML='<p>Saisis au moins deux caractères.</p>';
-        form.elements.selected_person_id.value='';
-        $('#grave-person-selected').hidden=true;
+        pkSet($('#grave-person-search'),null);
         $('#grave-person-dialog').showModal();
-        setTimeout(()=>$('#grave-person-search').focus(),30);
+        setTimeout(()=>$('#grave-person-search .pk-input')?.focus(),30);
     }
     function fillEventTypes(selected,scope='person',artisticOnly=false){const person=state.currentPerson?.person||null;const isArtist=person?Number(person.is_artist)===1:true;let types=state.bootstrap.eventTypes.filter(type=>type.scope===scope&&(!Number(type.is_artistic)||isArtist));if(artisticOnly)types=types.filter(type=>Number(type.is_artistic));$('#event-form').elements.event_type_id.innerHTML=types.map(type=>`<option value="${type.id}" ${Number(type.id)===Number(selected)?'selected':''}>${escapeHtml(type.label)}</option>`).join('');}
     // Renvoie la liste des champs spécifiques (dimensions, durée…) définis sur un type d'événement artistique
@@ -6296,74 +6207,35 @@ ${backupSectionHtml()}
             persistUiState();
             renderMap();
         }));
-        const input=$('#map-route-person-search'),box=$('#map-route-person-suggestions');
-        if(!input||!box)return;
-        const selectedIds=new Set(routePeopleSelection().map(person=>Number(person.id)));
-        const hide=()=>{box.hidden=true;box.innerHTML='';};
-        const addPerson=(person)=>{
+        // ajouter une personne : menu de choix unique (rendu par mapRoutePeopleHtml dans app-carte.js)
+        const wrap=$('#map-route-person-search');if(!wrap)return;
+        wrap.addEventListener('picker-change',event=>{
+            const it=event.detail.item;if(!it||it.free||!it.id)return;
             const people=normalizeRoutePeople();
-            if(people.some(item=>item.id===Number(person.id))){hide();input.value='';return;}
-            if(people.length>=8){toast('Limite simple : 8 personnes à comparer.','error');return;}
-            people.push({id:Number(person.id),name:personName(person)});
+            if(people.some(item=>item.id===Number(it.id))){pkSet(event.target,null);return;}
+            if(people.length>=8){toast('Limite simple : 8 personnes à comparer.','error');pkSet(event.target,null);return;}
+            people.push({id:Number(it.id),name:it.title});
             state.mapRoutePeople=people;
             state.mapRouteStep='all';
-            input.value='';
-            hide();
             persistUiState();
             renderMap();
-        };
-        const search=debounce(async()=>{
-            const q=input.value.trim();
-            if(q.length<2){hide();return;}
-            try{
-                const data=await api('search',{q,limit:12});
-                const people=(data.data||[]).filter(person=>!selectedIds.has(Number(person.id))).slice(0,8);
-                box.innerHTML=people.length?people.map(person=>`<button type="button" class="place-suggestion" data-route-person="${person.id}"><strong>${escapeHtml(personName(person))}</strong><small>${escapeHtml(years(person))}</small></button>`).join(''):'<div class="place-no-result">Aucune personne à ajouter</div>';
-                box.hidden=false;
-                $$('[data-route-person]',box).forEach(button=>button.addEventListener('click',()=>{
-                    const person=people.find(item=>Number(item.id)===Number(button.dataset.routePerson));
-                    if(person)addPerson(person);
-                }));
-            }catch(_){hide();}
-        },180);
-        input.addEventListener('input',search);
-        input.addEventListener('keydown',event=>{if(event.key==='Escape')hide();});
-        document.addEventListener('click',event=>{if(!event.target.closest('#map-route-person-search')&&!event.target.closest('#map-route-person-suggestions'))hide();},{once:true});
-    }
-
-    function setupPlaceAutocomplete(form){
-        const input=form.elements.place_name,hidden=form.elements.place_id,country=form.elements.country;
-        if(!input||!hidden||input.dataset.placeAutocompleteReady)return;
-        input.dataset.placeAutocompleteReady='1';
-        const suggestions=document.createElement('div');
-        suggestions.className='place-suggestions';
-        suggestions.hidden=true;
-        input.insertAdjacentElement('afterend',suggestions);
-        const hide=()=>{suggestions.hidden=true;suggestions.innerHTML='';};
-        const search=debounce(async()=>{
-            const q=input.value.trim();
-            hidden.value='';
-            if(q.length<2){hide();return;}
-            try{
-                const data=await api('place_suggestions',{q,country:'',world:1});
-                suggestions.innerHTML=(data.places||[]).map(place=>`<button type="button" data-place-id="${place.id}" data-place-name="${escapeHtml(place.name)}" data-place-country="${escapeHtml(place.country)}" data-place-label="${escapeHtml(place.label)}"><strong>${escapeHtml(place.name)}</strong>${place.subdivision?`<span>${escapeHtml(place.subdivision)}</span>`:''}<small>${escapeHtml([place.county,place.state,place.country].filter(Boolean).join(', '))}</small></button>`).join('');
-                suggestions.hidden=!suggestions.innerHTML;
-            }catch(_){hide();}
-        },220);
-        input.addEventListener('input',search);
-        input.addEventListener('focus',()=>{if(suggestions.innerHTML)suggestions.hidden=false;});
-        country?.addEventListener('input',()=>{hidden.value='';hide();});
-        suggestions.addEventListener('click',event=>{
-            const button=event.target.closest('button[data-place-id]');
-            if(!button)return;
-            hidden.value=button.dataset.placeId;
-            input.value=button.dataset.placeLabel||button.dataset.placeName||'';
-            if(country)country.value=button.dataset.placeCountry||country.value;
-            hide();
         });
-        onOutsideClick('place-'+(form.id||'form'),event=>{if(!form.contains(event.target))hide();});
     }
-
+    /** Lieu d'un événement, d'un recensement, d'une sépulture : le menu de choix unique (📍), posé dans index.php
+     *  ([data-place-picker], champ caché place_id). Le formulaire envoie toujours place_id, place_name et country (remplis au choix).
+     *  Appelée à chaque ouverture, après le remplissage des champs : elle remet la pastille du lieu enregistré
+     *  (ou du nom seul, pour une ancienne sépulture). Un lieu qui n'existe pas encore : « ＋ Créer le lieu ». */
+    function setupPlaceAutocomplete(form){
+        const host=form?.querySelector('[data-place-picker]'),field=host?.querySelector('.pk');if(!field)return;
+        if(!host.dataset.pkBound){host.dataset.pkBound='1';
+            host.addEventListener('picker-change',event=>{const item=event.detail.item;if(form.elements.place_name)form.elements.place_name.value=item?(item.free?item.title:(item.name||item.title||'')):'';const country=item&&!item.free?pkPlaceCountry(item):'';if(country&&form.elements.country)form.elements.country.value=country;});
+        }
+        const id=Number(field.querySelector(':scope > input[type=hidden]')?.value||0)||0,name=form.elements.place_name?.value||'';
+        pkSet(field,id?id:(name?`txt:${name}`:null));
+        // un nom seul (ancienne sépulture) : si ce lieu est dans ta base, on montre sa vraie pastille
+        if(!id&&name){const q=name.split(',')[0].trim(),fold=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+            api('picker_search',{kind:'place',q,limit:5}).then(data=>{const base=(data.groups||[]).find(g=>g.key==='base')?.items||[];const hit=base.filter(it=>fold(it.name||it.title)===fold(q));if(hit.length===1&&(form.elements.place_name?.value||'')===name)pkSet(field,hit[0]);}).catch(()=>{});}
+    }
     function renderEventWitnesses(){
         const list=$('#event-witnesses-list');if(!list)return;
         if(!state.eventWitnesses.length){list.innerHTML='<small class="label-field-empty">Aucun témoin ajouté.</small>';return;}
@@ -6401,37 +6273,19 @@ ${backupSectionHtml()}
         $$('[data-sponsor-note]',list).forEach(input=>input.addEventListener('input',()=>{const idx=Number(input.dataset.sponsorNote);if(state.eventSponsors[idx])state.eventSponsors[idx].note=input.value;}));
     }
 
+    /** Petit panneau « ＋ Ajouter un témoin » : le menu de choix unique (« ＋ Créer la fiche » crée la personne sans quitter l'événement). */
     function openWitnessSearch(){
         const block=$('#event-witnesses-block');if(!block)return;
-        // Remove existing search panel if any
         let panel=$('#witness-search-panel');
         if(panel){panel.remove();return;}
         panel=document.createElement('div');panel.id='witness-search-panel';panel.className='witness-search-panel';
-        panel.innerHTML=`<div class="witness-search-entry"><label>Utiliser<select id="witness-entry-mode"><option value="existing">Personne existante</option><option value="new">Créer une personne</option></select></label></div><div id="witness-existing-fields"><label>Rechercher<input id="witness-search-input" autocomplete="off" placeholder="Commence à saisir un nom…"></label><div id="witness-results" class="relation-results"><p>Saisis au moins deux caractères.</p></div></div><div id="witness-new-fields" hidden><div class="relation-new-grid"><label>Prénom<input id="witness-new-first"></label><label>Nom<input id="witness-new-last"></label></div><button type="button" class="button small" id="witness-new-add">Ajouter cette personne</button></div>`;
+        panel.innerHTML=`<div class="pk-host"><span>Témoin</span>${pkField({name:'witness_pick',kind:'person'})}</div>`;
         const addBtn=$('#add-witness-btn');if(addBtn)addBtn.after(panel);else block.appendChild(panel);
-        const modeSelect=$('#witness-entry-mode');
-        modeSelect.addEventListener('change',()=>{$('#witness-existing-fields').hidden=modeSelect.value!=='existing';$('#witness-new-fields').hidden=modeSelect.value!=='new';});
-        $('#witness-search-input').addEventListener('input',debounce(async()=>{
-            const q=$('#witness-search-input').value.trim(),results=$('#witness-results');
-            if(q.length<2){results.innerHTML='<p>Saisis au moins deux caractères.</p>';return;}
-            state.witnessSearchController?.abort();state.witnessSearchController=new AbortController();
-            results.innerHTML='<p>Recherche…</p>';
-            try{const data=await api('people',{q,limit:30},{signal:state.witnessSearchController.signal});
-            const currentPersonId=Number($('#event-form').elements.person_id.value);
-            const already=new Set(state.eventWitnesses.map(w=>w.person_id));
-            const people=data.people.filter(p=>Number(p.id)!==currentPersonId&&!already.has(Number(p.id)));
-            results.innerHTML=people.length?people.map(p=>`<button type="button" class="relation-result" data-witness-pick="${p.id}" data-witness-name="${escapeHtml(personName(p))}"><strong>${escapeHtml(personName(p))}</strong><small>${escapeHtml(relationYears(p))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';
-            $$('[data-witness-pick]',results).forEach(btn=>btn.addEventListener('click',()=>{addWitness(Number(btn.dataset.witnessPick),btn.dataset.witnessName);panel.remove();}));
-            }catch(err){if(err.name!=='AbortError')results.innerHTML=`<p>${escapeHtml(err.message)}</p>`;}
-        },220));
-        $('#witness-new-add').addEventListener('click',async()=>{
-            const first=$('#witness-new-first').value.trim(),last=$('#witness-new-last').value.trim();
-            if(!last){toast('Saisis au moins un nom.','error');return;}
-            try{const created=await api('save_person',{},{method:'POST',body:{first_name:first,last_name:last,gender:'unknown',living_status:'unknown'}});
-            const pid=Number(created.result.id);const name=[first,last].filter(Boolean).join(' ');
-            await loadPeople();addWitness(pid,name);panel.remove();}catch(err){toast(err.message,'error');}
-        });
-        setTimeout(()=>$('#witness-search-input')?.focus(),30);
+        pkBindQuickCreate(panel);
+        panel.addEventListener('picker-change',event=>{const it=event.detail.item;if(!it||it.free||!it.id)return;
+            if(Number(it.id)===Number($('#event-form').elements.person_id.value)){toast('C’est la personne de l’événement.','error');pkSet(event.target,null);return;}
+            addWitness(Number(it.id),it.title);panel.remove();});
+        setTimeout(()=>panel.querySelector('.pk-input')?.focus(),30);
     }
 
     function addWitness(personId,name){
@@ -6445,34 +6299,13 @@ ${backupSectionHtml()}
         let panel=$('#sponsor-search-panel');
         if(panel){panel.remove();return;}
         panel=document.createElement('div');panel.id='sponsor-search-panel';panel.className='witness-search-panel';
-        panel.innerHTML=`<div class="witness-search-entry"><label>Utiliser<select id="sponsor-entry-mode"><option value="existing">Personne existante</option><option value="new">Créer une personne</option></select></label><label>Rôle<select id="sponsor-role"><option value="Parrain">Parrain</option><option value="Marraine">Marraine</option></select></label></div><div id="sponsor-existing-fields"><label>Rechercher<input id="sponsor-search-input" autocomplete="off" placeholder="Commence à saisir un nom…"></label><div id="sponsor-results" class="relation-results"><p>Saisis au moins deux caractères.</p></div></div><div id="sponsor-new-fields" hidden><div class="relation-new-grid"><label>Prénom<input id="sponsor-new-first"></label><label>Nom<input id="sponsor-new-last"></label></div><button type="button" class="button small" id="sponsor-new-add">Ajouter cette personne</button></div>`;
+        panel.innerHTML=`<div class="witness-search-entry"><label>Rôle<select id="sponsor-role"><option value="Parrain">Parrain</option><option value="Marraine">Marraine</option></select></label></div><div class="pk-host"><span>Personne</span>${pkField({name:'sponsor_pick',kind:'person'})}</div>`;
         const addBtn=$('#add-sponsor-btn');if(addBtn)addBtn.after(panel);else block.appendChild(panel);
-        const modeSelect=$('#sponsor-entry-mode');
-        modeSelect.addEventListener('change',()=>{$('#sponsor-existing-fields').hidden=modeSelect.value!=='existing';$('#sponsor-new-fields').hidden=modeSelect.value!=='new';});
-        $('#sponsor-search-input').addEventListener('input',debounce(async()=>{
-            const q=$('#sponsor-search-input').value.trim(),results=$('#sponsor-results');
-            if(q.length<2){results.innerHTML='<p>Saisis au moins deux caractères.</p>';return;}
-            state.witnessSearchController?.abort();state.witnessSearchController=new AbortController();
-            results.innerHTML='<p>Recherche…</p>';
-            try{
-                const data=await api('people',{q,limit:30},{signal:state.witnessSearchController.signal});
-                const currentPersonId=Number($('#event-form').elements.person_id.value);
-                const already=new Set([...state.eventSponsors.map(s=>s.person_id),...state.eventWitnesses.map(w=>w.person_id)]);
-                const people=data.people.filter(p=>Number(p.id)!==currentPersonId&&!already.has(Number(p.id)));
-                results.innerHTML=people.length?people.map(p=>`<button type="button" class="relation-result" data-sponsor-pick="${p.id}" data-sponsor-name="${escapeHtml(personName(p))}"><strong>${escapeHtml(personName(p))}</strong><small>${escapeHtml(relationYears(p))}</small></button>`).join(''):'<p>Aucune personne trouvée.</p>';
-                $$('[data-sponsor-pick]',results).forEach(btn=>btn.addEventListener('click',()=>{addSponsor(Number(btn.dataset.sponsorPick),btn.dataset.sponsorName,$('#sponsor-role')?.value||'Parrain');panel.remove();}));
-            }catch(err){if(err.name!=='AbortError')results.innerHTML=`<p>${escapeHtml(err.message)}</p>`;}
-        },220));
-        $('#sponsor-new-add').addEventListener('click',async()=>{
-            const first=$('#sponsor-new-first').value.trim(),last=$('#sponsor-new-last').value.trim();
-            if(!last){toast('Saisis au moins un nom.','error');return;}
-            try{
-                const created=await api('save_person',{},{method:'POST',body:{first_name:first,last_name:last,gender:'unknown',living_status:'unknown'}});
-                const pid=Number(created.result.id),name=[first,last].filter(Boolean).join(' ');
-                await loadPeople();addSponsor(pid,name,$('#sponsor-role')?.value||'Parrain');panel.remove();
-            }catch(err){toast(err.message,'error');}
-        });
-        setTimeout(()=>$('#sponsor-search-input')?.focus(),30);
+        pkBindQuickCreate(panel);
+        panel.addEventListener('picker-change',event=>{const it=event.detail.item;if(!it||it.free||!it.id)return;
+            if(Number(it.id)===Number($('#event-form').elements.person_id.value)){toast('C’est la personne de l’événement.','error');pkSet(event.target,null);return;}
+            addSponsor(Number(it.id),it.title,$('#sponsor-role')?.value||'Parrain');panel.remove();});
+        setTimeout(()=>panel.querySelector('.pk-input')?.focus(),30);
     }
 
     function addSponsor(personId,name,role='Parrain'){
@@ -6680,93 +6513,24 @@ ${backupSectionHtml()}
         if(!form.dataset.dateCheckBound){form.dataset.dateCheckBound='1';['input','change'].forEach(ev=>form.addEventListener(ev,e=>{if(e.target.matches('[name="date_text"],[name="date_calendar"],[name="event_type_id"],.date-picker-hidden'))setTimeout(()=>form._dateCheck?.(),0);}));}
         form._dateCheck();
     }
-    function openRelationDialog(personId,type){const form=$('#relation-form');form.reset();form.elements.person_id.value=personId;form.elements.relation_type.value=type;form.elements.related_id.value='';[...form.elements.entry_mode.options].forEach(option=>option.hidden=type==='parent'&&['none','none_suspected'].includes(option.value));$('#relation-existing-fields').hidden=false;$('#relation-new-fields').hidden=true;$('#relation-results').innerHTML='<p>Saisis au moins deux caractères.</p>';$('#relation-dialog-title').textContent=`Ajouter ${type==='parent'?'un parent':type==='child'?'un enfant':'un conjoint'}`;$('#relation-dialog').showModal();setTimeout(()=>$('#relation-search').focus(),30);}
+    function openRelationDialog(personId,type){const form=$('#relation-form');form.reset();form.elements.person_id.value=personId;form.elements.relation_type.value=type;pkSet($('#relation-search'),null);[...form.elements.entry_mode.options].forEach(option=>option.hidden=type==='parent'&&['none','none_suspected'].includes(option.value));$('#relation-existing-fields').hidden=false;$('#relation-new-fields').hidden=true;$('#relation-dialog-title').textContent=`Ajouter ${type==='parent'?'un parent':type==='child'?'un enfant':'un conjoint'}`;$('#relation-dialog').showModal();setTimeout(()=>$('#relation-search .pk-input')?.focus(),30);}
     function openInvestigationDialog(personId,item=null){
         const form=$('#investigation-form');form.reset();
         form.elements.id.value=item?.id||'';
         form.elements.person_id.value=personId;
         ['title','question','known_facts','documents','status'].forEach(field=>form.elements[field].value=item?.[field]||(field==='status'?'open':''));
         $('#investigation-dialog-title').textContent=item?'Modifier l’enquête':'Nouvelle enquête';
-        // Gestion des personnes supplémentaires
-        let extraPersons=[];
-        const extraPersonsInput=$('#investigation-extra-persons');
-        const extraList=$('#investigation-extra-persons-list');
-        const extraSearch=$('#investigation-extra-person-search');
-        const extraSugg=$('#investigation-extra-person-suggestions');
-        function syncExtraPersonsInput(){if(extraPersonsInput)extraPersonsInput.value=extraPersons.map(p=>p.id+':'+p.role).join(',');}
-        function renderExtraPersons(){
-            if(!extraList)return;
-            const primaries=extraPersons.filter(p=>p.role==='primary');
-            const secondaries=extraPersons.filter(p=>p.role==='secondary');
-            let html='';
-            if(primaries.length){html+=primaries.map(p=>`<div class="inv-extra-person-chip primary" data-pid="${p.id}"><span class="inv-extra-person-badge primary">Principale</span><span>${escapeHtml(p.name)}</span><button type="button" class="inv-extra-person-role" data-pid="${p.id}" title="Passer en secondaire">⇓</button><button type="button" class="inv-extra-person-remove" data-pid="${p.id}" aria-label="Retirer">×</button></div>`).join('');}
-            if(primaries.length&&secondaries.length)html+='<div class="inv-extra-person-separator"><span>Secondaires</span></div>';
-            if(secondaries.length){html+=secondaries.map(p=>`<div class="inv-extra-person-chip secondary" data-pid="${p.id}"><span class="inv-extra-person-badge secondary">Secondaire</span><span>${escapeHtml(p.name)}</span><button type="button" class="inv-extra-person-role" data-pid="${p.id}" title="Passer en principale">⇑</button><button type="button" class="inv-extra-person-remove" data-pid="${p.id}" aria-label="Retirer">×</button></div>`).join('');}
-            extraList.innerHTML=html||'';
-            extraList.querySelectorAll('.inv-extra-person-remove').forEach(btn=>btn.addEventListener('click',()=>{extraPersons=extraPersons.filter(p=>String(p.id)!==btn.dataset.pid);syncExtraPersonsInput();renderExtraPersons();}));
-            extraList.querySelectorAll('.inv-extra-person-role').forEach(btn=>btn.addEventListener('click',()=>{const p=extraPersons.find(p=>String(p.id)===btn.dataset.pid);if(p){p.role=p.role==='primary'?'secondary':'primary';syncExtraPersonsInput();renderExtraPersons();}}));
-        }
-        // Pré-remplir si édition
-        if(item?.linked_persons&&Array.isArray(item.linked_persons)){extraPersons=item.linked_persons.map(p=>({id:String(p.person_id),name:p.person_name,role:p.role||'secondary'}));}
-        else{extraPersons=[];}
-        syncExtraPersonsInput();renderExtraPersons();
-        // Personne principale : affichée et modifiable (avant, elle était choisie d'office et invisible, et la recherche
-        // des personnes supplémentaires la cachait sans explication).
-        const mainBox=$('#investigation-main-person'),mainSearch=$('#investigation-main-person-search'),mainSugg=$('#investigation-main-person-suggestions');
-        const mainId=()=>String(form.elements.person_id.value||'');
-        const renderMain=name=>{if(mainBox)mainBox.innerHTML=mainId()?`<div class="inv-extra-person-chip primary"><span class="inv-extra-person-badge primary">Principale</span><span>${escapeHtml(name||'Personne #'+mainId())}</span></div>`:'<p class="muted">Aucune : choisis la personne principale de l’enquête.</p>';};
-        renderMain(Number(state.currentPerson?.person?.id)===Number(personId)?personName(state.currentPerson.person):'');
-        if(mainId()&&Number(state.currentPerson?.person?.id)!==Number(personId))api('person',{id:mainId()}).then(detail=>renderMain(personName(detail.person))).catch(()=>{});
-        if(mainSearch&&mainSugg){
-            mainSearch.value='';mainSugg.hidden=true;mainSugg.innerHTML='';
-            mainSearch.oninput=debounce(async()=>{
-                const q=mainSearch.value.trim();if(q.length<2){mainSugg.hidden=true;mainSugg.innerHTML='';return;}
-                const results=await api('people',{q,limit:8});
-                mainSugg.innerHTML=(results.people||[]).filter(p=>String(p.id)!==mainId()).map(p=>`<button type="button" data-pid="${p.id}" data-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('');
-                mainSugg.hidden=!mainSugg.innerHTML;
-                mainSugg.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
-                    form.elements.person_id.value=btn.dataset.pid;
-                    extraPersons=extraPersons.filter(p=>String(p.id)!==String(btn.dataset.pid));
-                    syncExtraPersonsInput();renderExtraPersons();renderMain(btn.dataset.name);
-                    mainSearch.value='';mainSugg.hidden=true;mainSugg.innerHTML='';
-                }));
-            });
-        }
-        // Autocomplete recherche
-        if(extraSearch){
-            extraSearch.value='';
-            let extraSearchController=new AbortController();
-            extraSearch.oninput=debounce(async()=>{
-                const q=extraSearch.value.trim();if(q.length<2){if(extraSugg){extraSugg.hidden=true;extraSugg.innerHTML='';}return;}
-                const results=await api('people',{q,limit:8});
-                if(!extraSugg)return;
-                extraSugg.innerHTML=(results.people||[]).filter(p=>String(p.id)!==mainId()&&!extraPersons.some(ep=>String(ep.id)===String(p.id))).map(p=>`<button type="button" data-pid="${p.id}" data-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('');
-                extraSugg.hidden=!extraSugg.innerHTML;
-                extraSugg.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{extraPersons.push({id:btn.dataset.pid,name:btn.dataset.name,role:'secondary'});syncExtraPersonsInput();renderExtraPersons();extraSearch.value='';extraSugg.hidden=true;extraSugg.innerHTML='';},{signal:extraSearchController.signal}));
-            });
-        }
-        let linkedBattues=(item?.linked_battues||[]).map(b=>({id:String(b.battue_id||b.id),title:b.title||`Battue #${b.battue_id||b.id}`,meta:[b.start_name,b.start_insee_code].filter(Boolean).join(' · ')}));
-        const battueInput=$('#investigation-linked-battues'),battueList=$('#investigation-linked-battues-list'),battueSearch=$('#investigation-battue-search'),battueSugg=$('#investigation-battue-suggestions');
-        const syncBattues=()=>{if(battueInput)battueInput.value=linkedBattues.map(b=>b.id).join(',');};
-        const renderBattues=()=>{
-            if(!battueList)return;
-            battueList.innerHTML=linkedBattues.map(b=>`<div class="inv-extra-person-chip secondary"><span class="inv-extra-person-badge secondary">Battue</span><span>${escapeHtml(b.title)}</span>${b.meta?`<small>${escapeHtml(b.meta)}</small>`:''}<button type="button" class="inv-extra-person-remove" data-remove-linked-battue="${escapeHtml(b.id)}" aria-label="Retirer">×</button></div>`).join('');
-            battueList.querySelectorAll('[data-remove-linked-battue]').forEach(btn=>btn.addEventListener('click',()=>{linkedBattues=linkedBattues.filter(b=>String(b.id)!==String(btn.dataset.removeLinkedBattue));syncBattues();renderBattues();}));
-        };
-        syncBattues();renderBattues();
-        if(battueSearch&&battueSugg){
-            battueSearch.value='';
-            battueSugg.hidden=true;
-            battueSugg.innerHTML='';
-            battueSearch.oninput=debounce(async()=>{
-                const q=battueSearch.value.trim();
-                if(q.length<2){battueSugg.hidden=true;battueSugg.innerHTML='';return;}
-                const result=await api('battues',{q,status:'all'});
-                battueSugg.innerHTML=(result.battues||[]).filter(b=>!linkedBattues.some(lb=>String(lb.id)===String(b.id))).map(b=>`<button type="button" data-linked-battue="${b.id}" data-title="${escapeHtml(b.title)}" data-meta="${escapeHtml([b.start_name,b.start_insee_code].filter(Boolean).join(' · '))}">${escapeHtml(b.title)}<small>${escapeHtml([b.start_name,b.start_insee_code].filter(Boolean).join(' · '))}</small></button>`).join('');
-                battueSugg.hidden=!battueSugg.innerHTML;
-                battueSugg.querySelectorAll('[data-linked-battue]').forEach(btn=>btn.addEventListener('click',()=>{linkedBattues.push({id:btn.dataset.linkedBattue,title:btn.dataset.title,meta:btn.dataset.meta});syncBattues();renderBattues();battueSearch.value='';battueSugg.hidden=true;battueSugg.innerHTML='';}));
-            });
-        }
+        // Personnes : menu de choix unique avec rôles (principale + principales + secondaires). Le serveur reçoit toujours
+        // person_id (la principale) et additional_persons « id:primary,id:secondary » ; les noms sans fiche et les mots de rôle ne sont pas gardés.
+        const extraPersonsInput=$('#investigation-extra-persons'),peopleBox=$('#investigation-people');
+        const linked=(item?.linked_persons||[]).map(p=>({id:Number(p.person_id),title:p.person_name||'',kind:'person',primary:(p.role||'secondary')==='primary'}));
+        const mainValue=Number(personId)?(Number(state.currentPerson?.person?.id)===Number(personId)?{id:Number(personId),title:personName(state.currentPerson.person),kind:'person'}:Number(personId)):null;
+        peopleBox.innerHTML=pkField({name:'people_json',kind:'person',roles:{main:true},value:{main:mainValue,people:linked}});
+        const syncPeople=()=>{const v=pkValue(peopleBox.querySelector('.pk'))||{main:null,people:[]};form.elements.person_id.value=v.main||'';if(extraPersonsInput)extraPersonsInput.value=(v.people||[]).filter(p=>p.id&&Number(p.id)!==Number(v.main)).map(p=>`${p.id}:${p.primary?'primary':'secondary'}`).join(',');};
+        syncPeople();
+        if(!peopleBox.dataset.pkBound){peopleBox.dataset.pkBound='1';pkBindQuickCreate(peopleBox);peopleBox.addEventListener('picker-change',()=>{const v=pkValue(peopleBox.querySelector('.pk'))||{};$('#investigation-form').elements.person_id.value=v.main||'';const input=$('#investigation-extra-persons');if(input)input.value=(v.people||[]).filter(p=>p.id&&Number(p.id)!==Number(v.main)).map(p=>`${p.id}:${p.primary?'primary':'secondary'}`).join(',');});}
+        // Battues liées : menu de choix unique (champ linked_battues « 12,45 »)
+        pkSet($('#investigation-battue-search'),(item?.linked_battues||[]).map(b=>({id:Number(b.battue_id||b.id),title:b.title||`Battue #${b.battue_id||b.id}`,kind:'battue',meta:[b.start_name,b.start_insee_code].filter(Boolean).join(' · ')})));
         $('#investigation-dialog').showModal();
     }
     function openBattueDialog(item=null,seedPersons=[]){
@@ -6782,56 +6546,22 @@ ${backupSectionHtml()}
         form.elements.max_level.value=String(item?.max_level ?? 2);
         form.elements.status.value=item?.status||'open';
         form.elements.notes.value=item?.notes||'';
-        let linkedPersons=(item?.linked_persons||seedPersons||[]).map(p=>({person_id:String(p.person_id),person_name:p.person_name||p.name||'',role:p.role||'primary'}));
-        const linkedInput=$('#battue-linked-persons'),linkedList=$('#battue-linked-persons-list'),personSearch=$('#battue-person-search'),personSuggestions=$('#battue-person-suggestions');
-        const syncLinked=()=>{if(linkedInput)linkedInput.value=linkedPersons.map(p=>`${p.person_id}:${p.role||'primary'}`).join(',');};
-        const renderLinked=()=>{
-            if(!linkedList)return;
-            linkedList.innerHTML=linkedPersons.map(p=>`<div class="inv-extra-person-chip ${escapeHtml(p.role||'primary')}"><span class="inv-extra-person-badge ${escapeHtml(p.role||'primary')}">${p.role==='secondary'?'Secondaire':'Principale'}</span><span>${escapeHtml(p.person_name||`Personne #${p.person_id}`)}</span><button type="button" class="inv-extra-person-role" data-battue-person-role="${escapeHtml(p.person_id)}">${p.role==='secondary'?'⇑':'⇓'}</button><button type="button" class="inv-extra-person-remove" data-battue-person-remove="${escapeHtml(p.person_id)}" aria-label="Retirer">×</button></div>`).join('');
-            linkedList.querySelectorAll('[data-battue-person-remove]').forEach(btn=>btn.addEventListener('click',()=>{linkedPersons=linkedPersons.filter(p=>String(p.person_id)!==String(btn.dataset.battuePersonRemove));syncLinked();renderLinked();}));
-            linkedList.querySelectorAll('[data-battue-person-role]').forEach(btn=>btn.addEventListener('click',()=>{const p=linkedPersons.find(row=>String(row.person_id)===String(btn.dataset.battuePersonRole));if(p){p.role=p.role==='secondary'?'primary':'secondary';syncLinked();renderLinked();}}));
-        };
-        syncLinked();renderLinked();
-        if(personSearch&&personSuggestions){
-            personSearch.value='';
-            personSuggestions.hidden=true;
-            personSuggestions.innerHTML='';
-            personSearch.oninput=debounce(async()=>{
-                const q=personSearch.value.trim();
-                if(q.length<2){personSuggestions.hidden=true;personSuggestions.innerHTML='';return;}
-                const result=await api('people',{q,limit:8});
-                personSuggestions.innerHTML=(result.people||[]).filter(p=>!linkedPersons.some(lp=>String(lp.person_id)===String(p.id))).map(p=>`<button type="button" data-battue-person="${p.id}" data-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('');
-                personSuggestions.hidden=!personSuggestions.innerHTML;
-                personSuggestions.querySelectorAll('[data-battue-person]').forEach(btn=>btn.addEventListener('click',()=>{linkedPersons.push({person_id:btn.dataset.battuePerson,person_name:btn.dataset.name,role:'primary'});syncLinked();renderLinked();personSearch.value='';personSuggestions.hidden=true;personSuggestions.innerHTML='';}));
-            });
-        }
-        let linkedInvestigations=(item?.linked_investigations||[]).map(inv=>({id:String(inv.investigation_id||inv.id),title:inv.title||`Enquête #${inv.investigation_id||inv.id}`,meta:inv.person_name||''}));
-        const investigationInput=$('#battue-linked-investigations'),investigationList=$('#battue-linked-investigations-list'),investigationSearch=$('#battue-investigation-search'),investigationSuggestions=$('#battue-investigation-suggestions');
-        const syncInvestigations=()=>{if(investigationInput)investigationInput.value=linkedInvestigations.map(inv=>inv.id).join(',');};
-        const renderInvestigations=()=>{
-            if(!investigationList)return;
-            investigationList.innerHTML=linkedInvestigations.map(inv=>`<div class="inv-extra-person-chip secondary"><span class="inv-extra-person-badge secondary">Enquête</span><span>${escapeHtml(inv.title)}</span>${inv.meta?`<small>${escapeHtml(inv.meta)}</small>`:''}<button type="button" class="inv-extra-person-remove" data-remove-linked-investigation="${escapeHtml(inv.id)}" aria-label="Retirer">×</button></div>`).join('');
-            investigationList.querySelectorAll('[data-remove-linked-investigation]').forEach(btn=>btn.addEventListener('click',()=>{linkedInvestigations=linkedInvestigations.filter(inv=>String(inv.id)!==String(btn.dataset.removeLinkedInvestigation));syncInvestigations();renderInvestigations();}));
-        };
-        syncInvestigations();renderInvestigations();
-        if(investigationSearch&&investigationSuggestions){
-            investigationSearch.value='';
-            investigationSuggestions.hidden=true;
-            investigationSuggestions.innerHTML='';
-            investigationSearch.oninput=debounce(async()=>{
-                const q=investigationSearch.value.trim();
-                if(q.length<2){investigationSuggestions.hidden=true;investigationSuggestions.innerHTML='';return;}
-                const result=await api('investigations',{q,status:'all'});
-                investigationSuggestions.innerHTML=(result.investigations||[]).filter(inv=>!linkedInvestigations.some(li=>String(li.id)===String(inv.id))).map(inv=>`<button type="button" data-linked-investigation="${inv.id}" data-title="${escapeHtml(inv.title)}" data-meta="${escapeHtml(inv.person_name||'')}">${escapeHtml(inv.title)}<small>${escapeHtml(inv.person_name||'')}</small></button>`).join('');
-                investigationSuggestions.hidden=!investigationSuggestions.innerHTML;
-                investigationSuggestions.querySelectorAll('[data-linked-investigation]').forEach(btn=>btn.addEventListener('click',()=>{linkedInvestigations.push({id:btn.dataset.linkedInvestigation,title:btn.dataset.title,meta:btn.dataset.meta});syncInvestigations();renderInvestigations();investigationSearch.value='';investigationSuggestions.hidden=true;investigationSuggestions.innerHTML='';}));
-            });
-        }
-        const startLabel=item?.start_label||((item?.start_name||item?.start_insee_code)?`${item.start_name||''}${item.start_insee_code?` (${item.start_insee_code})`:''}`:'');
-        $('#battue-commune-search').value=startLabel;
-        $('#battue-commune-suggestions').hidden=true;
-        $('#battue-commune-suggestions').innerHTML='';
-        setupCommuneAutocomplete($('#battue-commune-search'),form.elements.start_insee_code,$('#battue-commune-suggestions'));
+        // Personnes liées : menu de choix unique avec les zones ★ principales / ☆ secondaires (linked_persons « id:primary,id:secondary »)
+        const linkedPersons=(item?.linked_persons||seedPersons||[]).map(p=>({id:Number(p.person_id),title:p.person_name||p.name||'',kind:'person',primary:(p.role||'primary')!=='secondary'})).filter(p=>p.id);
+        const linkedInput=$('#battue-linked-persons'),peopleBox=$('#battue-person-search');
+        const syncLinked=()=>{const v=pkValue(peopleBox.querySelector('.pk'))||{people:[]};if(linkedInput)linkedInput.value=(v.people||[]).filter(p=>p.id).map(p=>`${p.id}:${p.primary?'primary':'secondary'}`).join(',');};
+        peopleBox.innerHTML=pkField({name:'battue_people_json',kind:'person',roles:{main:false},value:{people:linkedPersons}});
+        if(linkedInput)linkedInput.value=linkedPersons.map(p=>`${p.id}:${p.primary?'primary':'secondary'}`).join(',');
+        if(!peopleBox.dataset.pkBound){peopleBox.dataset.pkBound='1';pkBindQuickCreate(peopleBox);peopleBox.addEventListener('picker-change',()=>syncLinked());}
+        // Enquêtes liées : menu de choix unique (champ linked_investigations « 3,8 »)
+        pkSet($('#battue-investigation-search'),(item?.linked_investigations||[]).map(inv=>({id:Number(inv.investigation_id||inv.id),title:inv.title||`Enquête #${inv.investigation_id||inv.id}`,kind:'investigation',meta:inv.person_name||''})));
+        // Commune de départ : menu des lieux ; la battue garde le code INSEE (start_insee_code) de la commune choisie
+        const communeField=$('#battue-commune-search');
+        pkSet(communeField,item?.start_insee_code?{id:-1,kind:'place',title:item.start_name||item.start_insee_code,name:item.start_name||item.start_insee_code,short:item.start_insee_code,group:'base'}:null);
+        if(!communeField.dataset.pkBattue){communeField.dataset.pkBattue='1';communeField.addEventListener('picker-change',async event=>{const it=event.detail.item,form=$('#battue-form');form.elements.start_insee_code.value='';if(!it||it.free)return;
+            const fold=v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+            try{const data=await api('commune_suggestions',{q:it.name||it.title});const rows=(data.communes||[]).filter(r=>fold(r.name)===fold(it.name||it.title));const hit=rows.find(r=>!it.county||fold(r.admin2)===fold(it.county))||(rows.length===1?rows[0]:null);
+                if(hit)form.elements.start_insee_code.value=hit.insee_code;else{toast('Ce lieu n’est pas une commune française connue : choisis une commune de France.','error');pkSet(communeField,null);}}catch(error){toast(error.message,'error');}});}
         $('#battue-dialog-title').textContent=item?'Modifier la battue':'Nouvelle battue';
         $('#battue-submit').textContent=item?'Enregistrer':'Créer la battue';
         $('#battue-dialog').showModal();
@@ -6904,8 +6634,6 @@ ${backupSectionHtml()}
             ['kind','title','url','notes','status','reminder_mode','reminder_due_at'].forEach(f=>{if(form.elements[f])form.elements[f].value=item[f]||'';});
             if(form.elements.reminder_mode&&!form.elements.reminder_mode.value)form.elements.reminder_mode.value='none';
             form.dataset.editItemId=item.id||'';
-            if(item.linked_person_name){const pSearch=$('#investigation-item-person-search');if(pSearch)pSearch.value=item.linked_person_name||'';}
-            const pId=$('#investigation-item-person-id');if(pId)pId.value=item.linked_person_id||'';
         }else{
             form.dataset.editItemId='';
         }
@@ -6919,43 +6647,11 @@ ${backupSectionHtml()}
         renderSelectedDigests();
         digestInput.oninput=debounce(async()=>{const q=digestInput.value.trim();if(q.length<2){digestResults.innerHTML='';return;}try{const result=await api('archive_digest_search',{q});digestResults.innerHTML=(result.rows||[]).slice(0,12).map(digest=>`<button class="relation-result" type="button" data-investigation-archive-digest-candidate="${digest.id}"><strong>${escapeHtml(archiveDigestOptionLabel(digest)||'Suivi sans intitulé')}</strong><small>${escapeHtml([digest.status,digest.searched].filter(Boolean).join(' · '))}</small></button>`).join('')||'<p>Aucun suivi trouvé.</p>';$$('[data-investigation-archive-digest-candidate]',digestResults).forEach(candidate=>candidate.addEventListener('click',()=>{const digest=(result.rows||[]).find(row=>Number(row.id)===Number(candidate.dataset.investigationArchiveDigestCandidate));if(digest&&!selectedDigests.some(row=>Number(row.id)===Number(digest.id)))selectedDigests.push(digest);digestInput.value='';digestResults.innerHTML='';renderSelectedDigests();}));}catch(error){digestResults.innerHTML=`<p>${escapeHtml(error.message||'Recherche indisponible.')}</p>`;}},220);
         digestSelected.onclick=event=>{const remove=event.target.closest('[data-remove-investigation-archive-digest]');if(!remove)return;selectedDigests=selectedDigests.filter(digest=>Number(digest.id)!==Number(remove.dataset.removeInvestigationArchiveDigest));renderSelectedDigests();};
-        // Person autocomplete
-        // Multi-person chips
-        const personSearch=$('#investigation-item-person-search'),personSugg=$('#investigation-item-person-suggestions'),personsList=$('#investigation-item-persons-list'),personIdsInput=$('#investigation-item-person-ids');
+        // Personnes liées : menu de choix unique (champ linked_person_ids « 12,45 »)
         let itemLinkedPersons=[];
-        function renderItemPersonChips(){
-            if(!personsList)return;
-            personsList.innerHTML=itemLinkedPersons.map(p=>`<span style="display:inline-flex;align-items:center;gap:.3rem;background:var(--accent,#0066cc);color:#fff;border-radius:12px;padding:.15rem .55rem .15rem .45rem;font-size:.8em;font-weight:600"><span>${escapeHtml(p.name)}</span><button type="button" data-remove-item-person="${p.id}" aria-label="Retirer" style="background:none;border:none;color:#fff;font-size:1em;cursor:pointer;padding:0;line-height:1">×</button></span>`).join('');
-            personsList.querySelectorAll('[data-remove-item-person]').forEach(btn=>btn.addEventListener('click',()=>{itemLinkedPersons=itemLinkedPersons.filter(p=>String(p.id)!==btn.dataset.removeItemPerson);if(personIdsInput)personIdsInput.value=itemLinkedPersons.map(p=>p.id).join(',');renderItemPersonChips();}));
-        }
-        // Pre-fill existing persons if editing
-        if(item?.linked_person_ids){
-            const ids=String(item.linked_person_ids).split(',').filter(Boolean);
-            const names=String(item.linked_person_names||'').split('|');
-            itemLinkedPersons=ids.map((id,i)=>({id,name:names[i]||id}));
-        }else if(item?.linked_person_id&&item?.linked_person_name){
-            itemLinkedPersons=[{id:String(item.linked_person_id),name:item.linked_person_name}];
-        }else{itemLinkedPersons=[];}
-        if(personIdsInput)personIdsInput.value=itemLinkedPersons.map(p=>p.id).join(',');
-        renderItemPersonChips();
-        if(personSearch){
-            personSearch.addEventListener('input',debounce(async()=>{
-                const q=personSearch.value.trim();if(q.length<2){personSugg.hidden=true;return;}
-                try{const d=await api('people',{q,limit:8});
-                personSugg.innerHTML=d.people.map(p=>`<button type="button" class="place-suggestion" data-item-pid="${p.id}" data-item-pname="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('')||'<div class="place-no-result">Aucun résultat</div>';
-                personSugg.hidden=false;}catch(_){}
-            },200));
-            personSugg.addEventListener('click',event=>{
-                const btn=event.target.closest('[data-item-pid]');if(!btn)return;
-                const pid=btn.dataset.itemPid,pname=btn.dataset.itemPname||btn.textContent.trim();
-                if(!itemLinkedPersons.some(p=>p.id===pid)){
-                    itemLinkedPersons.push({id:pid,name:pname});
-                    if(personIdsInput)personIdsInput.value=itemLinkedPersons.map(p=>p.id).join(',');
-                    renderItemPersonChips();
-                }
-                personSearch.value='';personSugg.hidden=true;
-            });
-        }
+        if(item?.linked_person_ids){const names=String(item.linked_person_names||'').split('|');itemLinkedPersons=String(item.linked_person_ids).split(',').filter(Boolean).map((id,i)=>({id:Number(id),title:names[i]||'',kind:'person'}));}
+        else if(item?.linked_person_id)itemLinkedPersons=[{id:Number(item.linked_person_id),title:item.linked_person_name||'',kind:'person'}];
+        pkSet($('#investigation-item-person-search'),itemLinkedPersons);pkBindQuickCreate($('#investigation-item-dialog'));
         const reminderButton=$('#download-investigation-reminder');if(reminderButton)reminderButton.onclick=()=>downloadInvestigationReminderIcs(form);
         $('#investigation-item-dialog').showModal();
     }
@@ -6985,9 +6681,9 @@ ${backupSectionHtml()}
         mediaSelect.innerHTML='<option value="" disabled>— Choisis d’abord une personne —</option>';
         const previewWrap=$('#inv-media-preview-wrap'),previewBox=$('#inv-media-preview');
         previewWrap.style.display='none';previewBox.innerHTML='';
-        const personSearch=$('#inv-media-person-search'),personIdInput=$('#inv-media-person-id'),personSugg=$('#inv-media-person-suggestions');
-        personSearch.value='';personIdInput.value='';personSugg.hidden=true;personSugg.innerHTML='';
-        let invMediaPeople=[];
+        // la personne dont on montre les médias : menu de choix unique (champ inv_media_person_id ; inv_media_person_name suit)
+        const personField=$('#inv-media-person-search');
+        pkSet(personField,null);form.elements.inv_media_person_name.value='';
         const loadMediaForPerson=async(pid)=>{
             try{
                 const det=await api('person',{id:pid});
@@ -7033,31 +6729,14 @@ ${backupSectionHtml()}
                 syncPreviewHighlights();
             }catch(e){toast(e.message,'error');}
         };
-        // If personId is provided, pre-fill
+        personField.onchangePick=async item=>{form.elements.inv_media_person_name.value=item?.title||'';if(item&&!item.free&&item.id)await loadMediaForPerson(Number(item.id));else{mediaSelect.innerHTML='<option value="" disabled>— Choisis d’abord une personne —</option>';previewWrap.style.display='none';previewBox.innerHTML='';}};
+        if(!personField.dataset.pkInvMedia){personField.dataset.pkInvMedia='1';personField.addEventListener('picker-change',event=>personField.onchangePick?.(event.detail.item));}
+        // personne connue : pré-remplie
         if(personId){
-            try{
-                const det=await api('person',{id:personId});
-                personSearch.value=personName(det.person)||'';
-                personIdInput.value=personId;
-                await loadMediaForPerson(personId);
-            }catch(_){}
+            const known=Number(state.currentPerson?.person?.id)===Number(personId)?{id:Number(personId),title:personName(state.currentPerson.person),kind:'person'}:Number(personId);
+            pkSet(personField,known);if(known.title)form.elements.inv_media_person_name.value=known.title;
+            await loadMediaForPerson(personId);
         }
-        // Person search autocomplete
-        personSearch.addEventListener('input',debounce(async()=>{
-            const q=personSearch.value.trim();
-            if(q.length<2){personSugg.hidden=true;return;}
-            try{const d=await api('people',{q,limit:8});invMediaPeople=d.people||[];
-            personSugg.innerHTML=invMediaPeople.map(p=>`<button type="button" class="place-suggestion" data-inv-media-pid="${p.id}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('')||'<div class="place-no-result">Aucun résultat</div>';
-            personSugg.hidden=false;}catch(_){}
-        },200));
-        personSugg.addEventListener('click',async event=>{
-            const btn=event.target.closest('[data-inv-media-pid]');if(!btn)return;
-            const pid=Number(btn.dataset.invMediaPid);
-            const person=invMediaPeople.find(p=>Number(p.id)===pid);
-            personSearch.value=personName(person)||'';personIdInput.value=pid;personSugg.hidden=true;
-            await loadMediaForPerson(pid);
-        });
-        onOutsideClick('inv-media-person',e=>{if(!e.target.closest('#inv-media-person-suggestions')&&!e.target.closest('#inv-media-person-search'))personSugg.hidden=true;});
         $('#investigation-media-dialog').showModal();
     }
     function updateMediaCreateEventFields(){const form=$('#media-form'),creating=form.elements.create_event?.checked;$('#media-create-event-fields').hidden=!creating;form.elements.event_id.disabled=!!creating;if(creating)form.elements.census_id.value='';}
@@ -7105,15 +6784,13 @@ ${backupSectionHtml()}
         const form=$('#investigation-item-event-form');form.reset();
         form.elements.investigation_id.value=investigationId;
         form.elements.item_id.value=itemId||'';
-        const personIdInput=$('#investigation-item-event-person-id');
-        const personSearch=$('#investigation-item-event-person-search');
-        const personSugg=$('#investigation-item-event-person-suggestions');
+        // la personne dont on montre les événements : menu de choix unique (champ person_id)
+        const personField=$('#investigation-item-event-person-search');
         const select=$('#investigation-item-event-select');
         const submitButton=$('#investigation-item-event-submit');
-        personSearch.value='';personIdInput.value='';personSugg.hidden=true;personSugg.innerHTML='';
+        pkSet(personField,null);
         select.innerHTML='<option value="" disabled>— Choisis d’abord une personne —</option>';
         if(submitButton)submitButton.disabled=true;
-        let evtPeople=[];
         const loadEventsForPerson=async(pid)=>{
             try{
                 const det=await api('person',{id:pid});
@@ -7122,29 +6799,9 @@ ${backupSectionHtml()}
                 if(submitButton)submitButton.disabled=!events.length;
             }catch(e){toast(e.message,'error');}
         };
-        if(personId){
-            try{
-                const det=await api('person',{id:personId});
-                personSearch.value=personName(det.person)||'';
-                personIdInput.value=personId;
-                await loadEventsForPerson(personId);
-            }catch(_){}
-        }
-        personSearch.addEventListener('input',debounce(async()=>{
-            const q=personSearch.value.trim();
-            if(q.length<2){personSugg.hidden=true;return;}
-            try{const d=await api('people',{q,limit:8});evtPeople=d.people||[];
-            personSugg.innerHTML=evtPeople.map(p=>`<button type="button" class="place-suggestion" data-evt-pid="${p.id}">${escapeHtml(personName(p))}<small>${escapeHtml(years(p))}</small></button>`).join('')||'<div class="place-no-result">Aucun résultat</div>';
-            personSugg.hidden=false;}catch(_){}
-        },200));
-        personSugg.addEventListener('click',async event=>{
-            const btn=event.target.closest('[data-evt-pid]');if(!btn)return;
-            const pid=Number(btn.dataset.evtPid);
-            const person=evtPeople.find(p=>Number(p.id)===pid);
-            personSearch.value=personName(person)||'';personIdInput.value=pid;personSugg.hidden=true;
-            await loadEventsForPerson(pid);
-        });
-        onOutsideClick('inv-item-event-person',e=>{if(!e.target.closest('#investigation-item-event-person-suggestions')&&!e.target.closest('#investigation-item-event-person-search'))personSugg.hidden=true;});
+        personField.onchangePick=async item=>{if(item&&!item.free&&item.id)await loadEventsForPerson(Number(item.id));else{select.innerHTML='<option value="" disabled>— Choisis d’abord une personne —</option>';if(submitButton)submitButton.disabled=true;}};
+        if(!personField.dataset.pkItemEvent){personField.dataset.pkItemEvent='1';personField.addEventListener('picker-change',event=>personField.onchangePick?.(event.detail.item));}
+        if(personId){pkSet(personField,Number(personId));await loadEventsForPerson(personId);}
         $('#investigation-item-event-dialog').showModal();
     }
     function openInvestigationUploadDialog(investigationId,personId,items=[],folders=[]){const form=$('#media-form');form.reset();form.elements.person_id.value=personId;form.elements.investigation_id.value=investigationId;if(form.elements.battue_item_id)form.elements.battue_item_id.value='';form.elements.event_id.value='';form.elements.census_id.value='';form.elements.event_id.closest('label').hidden=true;$('#media-census-label').hidden=true;$('#media-create-event-toggle').hidden=true;$('#media-create-event-fields').hidden=true;$('#media-correspondence-fields').hidden=true;$('#media-files-input')?.setAttribute('accept','image/*,application/pdf,audio/*,video/*,.aif,.aiff,.aifc');$('#media-folder-input')?.setAttribute('accept','image/*,application/pdf,audio/*,video/*,.aif,.aiff,.aifc');const mediaDialogTitleInv=$('#media-dialog-title');if(mediaDialogTitleInv)mediaDialogTitleInv.textContent='Ajouter des médias';form.querySelector('[name="investigation_item_ids[]"]').innerHTML=items.map(item=>`<option value="${item.id}">${escapeHtml(item.title)}</option>`).join('');const folderSelect=form.querySelector('[name="investigation_folder_id"]');if(folderSelect)folderSelect.innerHTML=`<option value="">Racine de l’enquête</option>${folders.map(folder=>`<option value="${folder.id}" ${Number(state.investigationFolderId||0)===Number(folder.id)?'selected':''}>${'— '.repeat(Math.max(0,investigationFolderPath(folders,folder.id).length-1))}${escapeHtml(folder.name)}</option>`).join('')}`;$('#media-investigation-fields').hidden=false;renderLabelPicker('#media-label-picker','media',0,[]);$('#media-dialog').showModal();}
@@ -7203,7 +6860,7 @@ ${backupSectionHtml()}
             +(choices.length?`<label>Médias existants<select id="event-media-select" multiple size="4">${optionsHtml}</select></label>`:'')
             +`<label style="margin-top:8px">Importer des fichiers<input type="file" id="event-media-file" multiple accept="image/*,.pdf,application/pdf,audio/*,video/*"></label><label class="check-row"><input type="checkbox" id="event-media-group-upload" checked> Réunir les fichiers importés en un même document</label>`
             +`<div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px"><button type="button" class="button small secondary" id="event-media-cancel">Annuler</button><button type="button" class="button small" id="event-media-confirm">Enregistrer</button></div>`;
-        const refresh=async()=>{const personId=Number($('#event-form').elements.person_id.value)||state.currentPersonId;const refreshed=await api('person',{id:personId});detail.media=refreshed.media||detail.media;renderEventMediaPanel(detail,eventId,panel);const confidenceMediaId=Number($('#event-confidence-media')?.value||0);renderEventConfidenceMediaChoices(detail,confidenceMediaId);const list=$('#event-media-list');if(list){const items=mediaForEvent(detail.media||[],eventId);list.innerHTML=items.length?`<p class="form-help">${plural(items.length,'document lié','documents liés')} à cet événement.</p>`:'';}};
+        const refresh=async()=>{const personId=Number($('#event-form').elements.person_id.value)||state.currentPersonId;const refreshed=await api('person',{id:personId});detail.media=refreshed.media||detail.media;renderEventMediaPanel(detail,eventId,panel);const confidenceMediaId=Number(pkValue($('#event-confidence-media'))||0);renderEventConfidenceMediaChoices(detail,confidenceMediaId);const list=$('#event-media-list');if(list){const items=mediaForEvent(detail.media||[],eventId);list.innerHTML=items.length?`<p class="form-help">${plural(items.length,'document lié','documents liés')} à cet événement.</p>`:'';}};
         panel.querySelector('#event-media-cancel')?.addEventListener('click',()=>panel.remove());
         panel.querySelector('[data-event-group-create]')?.addEventListener('click',async()=>{const ids=$$('[data-event-group-media]:checked',panel).map(input=>Number(input.value));if(ids.length<2){toast('Coche au moins deux médias.','error');return;}try{await api('group_entity_media',{},{method:'POST',body:{entity_type:'event',entity_id:eventId,person_id:state.currentPersonId,media_ids:ids}});toast('Document groupé créé.');await refresh();}catch(error){toast(error.message,'error');}});
         panel.querySelector('[data-event-group-separate]')?.addEventListener('click',async()=>{const ids=$$('[data-event-group-media]:checked',panel).map(input=>Number(input.value));const item=linkedItems.find(row=>Number(row.id)===ids[0]);const key=item&&eventCollectionKey(item,eventId);if(!key||!ids.length||ids.some(id=>eventCollectionKey(linkedItems.find(row=>Number(row.id)===id),eventId)!==key)){toast('Sélectionne les éléments d’un seul document groupé.','error');return;}try{await api('ungroup_entity_media',{},{method:'POST',body:{entity_type:'event',entity_id:eventId,person_id:state.currentPersonId,collection_key:key}});toast('Document dissocié.');await refresh();}catch(error){toast(error.message,'error');}});
@@ -7246,9 +6903,9 @@ ${backupSectionHtml()}
         $('#entity-media-existing-help').textContent=choices.length?'Maintiens ⌘ pour sélectionner plusieurs images ou documents déjà associés à cette personne.':'Aucun média existant disponible à lier : tu peux importer un nouveau fichier ci-dessous.';
         $('#entity-media-dialog').showModal();
     }
-    function clearCensusMemberPerson(keepSearch=false){const form=$('#census-member-form');form.elements.person_id.value='';if(!keepSearch)$('#census-member-search').value='';$('#census-member-selected').hidden=true;$('#census-member-selected span').textContent='';$('#census-member-results').innerHTML='<p>Saisis au moins deux caractères.</p>';}
-    function selectCensusMemberPerson(personId,name,yearText=''){const form=$('#census-member-form');form.elements.person_id.value=personId;$('#census-member-search').value=name||'';if(!form.elements.display_name.value.trim())form.elements.display_name.value=name||'';$('#census-member-selected span').textContent=`Fiche liée : ${name||'Personne'}${yearText?` · ${yearText}`:''} · #${personId}`;$('#census-member-selected').hidden=false;$('#census-member-results').innerHTML='';}
-    function openCensusMemberDialog(censusId,returnPersonId,member=null){const form=$('#census-member-form');form.reset();form.elements.id.value=member?.id||'';form.elements.census_id.value=censusId;form.elements.return_person_id.value=returnPersonId;form.elements.person_id.value=member?.person_id||'';if(form.elements.member_first_name)form.elements.member_first_name.value=member?.first_name||'';['display_name','age_text','birth_place','occupation','employer','nationality','household_position','personal_status','extra_info'].forEach(field=>form.elements[field].value=member?.[field]||'');$('#census-member-dialog-title').textContent=member?'Modifier un membre':'Ajouter un membre';$('#census-member-submit').textContent=member?'Enregistrer':'Ajouter';$('#census-member-results').innerHTML='<p>Saisis au moins deux caractères.</p>';const linkedName=member?.person_name||member?.display_name||'';$('#census-member-search').value=member?.person_id?linkedName:'';if(member?.person_id)selectCensusMemberPerson(member.person_id,linkedName,relationYears(member));else clearCensusMemberPerson();$('#census-member-dialog').showModal();setTimeout(()=>$('#census-member-search').focus(),30);}
+    function clearCensusMemberPerson(){pkSet($('#census-member-search'),null);}
+    function selectCensusMemberPerson(personId,name){const form=$('#census-member-form');pkSet($('#census-member-search'),Number(personId)?{id:Number(personId),title:name||'',kind:'person'}:null);if(name&&!form.elements.display_name.value.trim())form.elements.display_name.value=name;}
+    function openCensusMemberDialog(censusId,returnPersonId,member=null){const form=$('#census-member-form');form.reset();form.elements.id.value=member?.id||'';form.elements.census_id.value=censusId;form.elements.return_person_id.value=returnPersonId;if(form.elements.member_first_name)form.elements.member_first_name.value=member?.first_name||'';['display_name','age_text','birth_place','occupation','employer','nationality','household_position','personal_status','extra_info'].forEach(field=>form.elements[field].value=member?.[field]||'');$('#census-member-dialog-title').textContent=member?'Modifier un membre':'Ajouter un membre';$('#census-member-submit').textContent=member?'Enregistrer':'Ajouter';const linkedName=member?.person_name||member?.display_name||'';if(member?.person_id)selectCensusMemberPerson(member.person_id,linkedName);else clearCensusMemberPerson();$('#census-member-dialog').showModal();setTimeout(()=>$('#census-member-search .pk-search:not([hidden]) .pk-input')?.focus(),30);}
     function onlineSheetCheckRowHtml(field,fieldLabel,check,custom=false){
         const status=check?.status||'';
         const comment=check?.comment||'';
@@ -8161,7 +7818,7 @@ ${backupSectionHtml()}
         canvas.addEventListener('pointerup',onUp);
     }
 
-    function showTagPersonForm(pct,drawEl,existingTag=null,type='person'){type=existingTag?tagType(existingTag):(type==='signature'?'signature':'person');const form=$(type==='signature'?'#lightbox-signature-form':'#lightbox-tag-form');const otherForm=$(type==='signature'?'#lightbox-tag-form':'#lightbox-signature-form');if(!form)return;if(existingTag){exitTagMode();}if(otherForm){otherForm.hidden=true;otherForm.innerHTML='';}state.lightboxTagEditId=existingTag?existingTag.id:null;renderMediaTagList();if(existingTag){document.querySelectorAll('#lightbox-tag-canvas .tag-box').forEach(box=>{box.classList.toggle('tag-box-hover',Number(box.dataset.tagId)===existingTag.id);});}let searchCtrl=null;const initialName=existingTag?(existingTag.first_name+' '+existingTag.last_name).trim():'';const initialConf=existingTag?existingTag.confidence:'certain';const initialNote=existingTag?(existingTag.note||''):'';const title=type==='signature'?(existingTag?'Modifier cette signature':'À qui appartient cette signature ?'):(existingTag?'Modifier cette identification':'Qui apparaît dans la zone sélectionnée ?');const notePlaceholder=type==='signature'?'Ex : signature en bas à droite de l’acte':'Ex : 3e personne en partant de la gauche';form.innerHTML=`<div class="tag-form-inner"><div class="tag-form-hint">${title}</div><div class="tag-form-search-wrap"><input type="text" id="tag-person-search" class="lightbox-input" placeholder="Rechercher un prénom ou nom…" autocomplete="off" value="${escapeHtml(initialName)}"><div id="tag-person-results" class="tag-person-results" hidden></div></div><input type="hidden" id="tag-person-id" value="${existingTag?existingTag.person_id:''}"><label for="tag-confidence" style="margin-top:8px">Niveau de certitude</label><select id="tag-confidence" class="lightbox-input"><option value="certain">✓ Certain à 100 %</option><option value="probable">Certainement elle / lui</option><option value="possible">Peut-être elle / lui</option><option value="uncertain">Incertain</option></select><label for="tag-note" style="margin-top:8px">Note (optionnel)</label><input type="text" id="tag-note" class="lightbox-input" placeholder="${escapeHtml(notePlaceholder)}" value="${escapeHtml(initialNote)}"><div class="tag-form-actions"><button type="button" class="button small secondary" id="tag-form-cancel">Annuler</button><button type="button" class="button small" id="tag-form-confirm">Enregistrer</button></div></div>`;form.hidden=false;$('#tag-confidence').value=initialConf;const searchInput=$('#tag-person-search'),resultsEl=$('#tag-person-results'),personIdInput=$('#tag-person-id');let searchTimeout;searchInput.addEventListener('input',()=>{clearTimeout(searchTimeout);const q=searchInput.value.trim();if(q.length<2){resultsEl.hidden=true;return;}searchTimeout=setTimeout(async()=>{try{const data=await api('search',{type:'persons',q,limit:10});const people=data.data||[];resultsEl.innerHTML=people.map(p=>{const nm=escapeHtml((p.first_name+' '+p.last_name).trim()||'(Sans nom)');const dates=p.birth_year?(p.death_year?p.birth_year+' — '+p.death_year:p.birth_year+' — ?'):'';return `<button type="button" class="tag-person-result" data-id="${p.id}" data-name="${escapeHtml((p.first_name+' '+p.last_name).trim())}" data-person-id="${p.id}"><strong>${nm}</strong>${dates?`<small>${escapeHtml(dates)}</small>`:''}<span class="tag-person-result-goto">↗️ Voir la fiche</span></button>`;}).join('');resultsEl.hidden=!people.length;resultsEl.querySelectorAll('.tag-person-result').forEach(el=>{el.addEventListener('click',e=>{if(e.target.closest('.tag-person-result-goto')){e.preventDefault();e.stopPropagation();const pid=Number(el.dataset.id);const openBtn=document.querySelector(`[data-open-person="${pid}"]`);if(openBtn){openBtn.click();}else{document.dispatchEvent(new CustomEvent('genealogy:open-person',{detail:{id:pid}}));}return;}personIdInput.value=el.dataset.id;searchInput.value=el.dataset.name;resultsEl.hidden=true;});el.addEventListener('mouseenter',()=>{document.querySelectorAll('#lightbox-tag-canvas .tag-box').forEach(box=>{if(box.dataset.personId===String(el.dataset.id))box.classList.add('tag-box-hover');});});el.addEventListener('mouseleave',()=>{document.querySelectorAll('#lightbox-tag-canvas .tag-box.tag-box-hover').forEach(box=>box.classList.remove('tag-box-hover'));});});}catch(_){}},220);});function closeForm(){if(drawEl)drawEl.remove();form.hidden=true;state.lightboxTagEditId=null;document.querySelectorAll('#lightbox-tag-canvas .tag-box-hover').forEach(box=>box.classList.remove('tag-box-hover'));renderMediaTagList();}$('#tag-form-cancel').addEventListener('click',closeForm);$('#tag-form-confirm').addEventListener('click',async()=>{const personId=Number(personIdInput.value);if(!personId){toast('Sélectionne une personne dans la liste.','error');return;}const confidence=$('#tag-confidence').value;const note=$('#tag-note').value.trim();if(existingTag){await updateMediaTag(existingTag.id,{personId,confidence,note,tag_type:type});}else{if(drawEl?.classList?.contains("face-suggestion-box")){const faceIndex=Number(drawEl.dataset.faceIndex);if(Number.isFinite(faceIndex))state.lightboxFaceSuggestions=(state.lightboxFaceSuggestions||[]).filter((_,index)=>index!==faceIndex);}await saveMediaTag({pct,personId,confidence,note,tag_type:type});}closeForm();if(!existingTag)exitTagMode();});}
+    function showTagPersonForm(pct,drawEl,existingTag=null,type='person'){type=existingTag?tagType(existingTag):(type==='signature'?'signature':'person');const form=$(type==='signature'?'#lightbox-signature-form':'#lightbox-tag-form');const otherForm=$(type==='signature'?'#lightbox-tag-form':'#lightbox-signature-form');if(!form)return;if(existingTag){exitTagMode();}if(otherForm){otherForm.hidden=true;otherForm.innerHTML='';}state.lightboxTagEditId=existingTag?existingTag.id:null;renderMediaTagList();if(existingTag){document.querySelectorAll('#lightbox-tag-canvas .tag-box').forEach(box=>{box.classList.toggle('tag-box-hover',Number(box.dataset.tagId)===existingTag.id);});}let searchCtrl=null;const initialName=existingTag?(existingTag.first_name+' '+existingTag.last_name).trim():'';const initialConf=existingTag?existingTag.confidence:'certain';const initialNote=existingTag?(existingTag.note||''):'';const title=type==='signature'?(existingTag?'Modifier cette signature':'À qui appartient cette signature ?'):(existingTag?'Modifier cette identification':'Qui apparaît dans la zone sélectionnée ?');const notePlaceholder=type==='signature'?'Ex : signature en bas à droite de l’acte':'Ex : 3e personne en partant de la gauche';form.innerHTML=`<div class="tag-form-inner"><div class="tag-form-hint">${title}</div><div class="tag-form-search-wrap" id="tag-person-search">${pkField({name:'tag_person_pick',kind:'person',value:existingTag?.person_id?{id:Number(existingTag.person_id),title:initialName,kind:'person'}:null})}</div><input type="hidden" id="tag-person-id" value="${existingTag?existingTag.person_id:''}"><label for="tag-confidence" style="margin-top:8px">Niveau de certitude</label><select id="tag-confidence" class="lightbox-input"><option value="certain">✓ Certain à 100 %</option><option value="probable">Certainement elle / lui</option><option value="possible">Peut-être elle / lui</option><option value="uncertain">Incertain</option></select><label for="tag-note" style="margin-top:8px">Note (optionnel)</label><input type="text" id="tag-note" class="lightbox-input" placeholder="${escapeHtml(notePlaceholder)}" value="${escapeHtml(initialNote)}"><div class="tag-form-actions"><button type="button" class="button small secondary" id="tag-form-cancel">Annuler</button><button type="button" class="button small" id="tag-form-confirm">Enregistrer</button></div></div>`;form.hidden=false;$('#tag-confidence').value=initialConf;const personIdInput=$('#tag-person-id');const tagPicker=$('#tag-person-search');pkBindQuickCreate(tagPicker);/* la personne : menu de choix unique */tagPicker.addEventListener('picker-change',event=>{const it=event.detail.item;personIdInput.value=it&&!it.free?it.id:'';});setTimeout(()=>tagPicker.querySelector('.pk-search:not([hidden]) .pk-input')?.focus(),30);function closeForm(){if(drawEl)drawEl.remove();form.hidden=true;state.lightboxTagEditId=null;document.querySelectorAll('#lightbox-tag-canvas .tag-box-hover').forEach(box=>box.classList.remove('tag-box-hover'));renderMediaTagList();}$('#tag-form-cancel').addEventListener('click',closeForm);$('#tag-form-confirm').addEventListener('click',async()=>{const personId=Number(personIdInput.value);if(!personId){toast('Choisis une personne.','error');return;}const confidence=$('#tag-confidence').value;const note=$('#tag-note').value.trim();if(existingTag){await updateMediaTag(existingTag.id,{personId,confidence,note,tag_type:type});}else{if(drawEl?.classList?.contains("face-suggestion-box")){const faceIndex=Number(drawEl.dataset.faceIndex);if(Number.isFinite(faceIndex))state.lightboxFaceSuggestions=(state.lightboxFaceSuggestions||[]).filter((_,index)=>index!==faceIndex);}await saveMediaTag({pct,personId,confidence,note,tag_type:type});}closeForm();if(!existingTag)exitTagMode();});}
 
     async function saveMediaTag({pct,personId,confidence,note,tag_type='person'}){const item=state.lightboxMedia[state.lightboxIndex];if(!item)return;try{await api('save_media_tag',{},{method:'POST',body:{media_id:item.id,person_id:personId,tag_type,x:pct.x,y:pct.y,w:pct.w,h:pct.h,confidence,note}});await loadMediaTags(item.id);toast(tag_type==='signature'?'Signature enregistrée.':'Identification enregistrée.');}catch(error){toast(error.message,'error');}}
 

@@ -520,9 +520,8 @@
         const cp = Number(A().state.currentPersonId) || 0;
         return new Promise(res => { let done = false;
             ext.openDialog({eyebrow: 'PRÉSENTATION', title, submitLabel: 'Choisir',
-                body: `<label>Personne${A().collectionPersonField('kn_pick', cp ? {id: cp, first_name: 'La personne affichée', last_name: ''} : null, 'Nom, prénom…')}</label>`,
-                onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); setTimeout(() => { q?.focus(); q?.select(); }, 30);
-                    if (cp) api('person', {id: cp}).then(r => { if (r.person && dg.querySelector('[name=kn_pick]')?.value == cp && q) q.value = A().personName(r.person); }).catch(() => {});
+                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'kn_pick', kind: 'person', value: cp || null})}</div>${cp ? '<p class="muted">La personne affichée en ce moment, ou × pour en chercher une autre.</p>' : ''}`,
+                onOpen: dg => { setTimeout(() => (dg.querySelector('.pk-search:not([hidden]) .pk-input') || dg.querySelector('.pk-chosen .go'))?.focus(), 30);
                     dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
                 onSubmit: f => { const v = Number(f.elements.kn_pick?.value) || 0; if (!v) { toast('Choisis une personne.', 'error'); return false; } done = true; res(v); }}); });
     }
@@ -531,18 +530,26 @@
         const rx = /\.(mp4|m4v|webm|mov|ogv|mp3|m4a|wav|ogg|oga|aac|flac|aiff?)$/i;
         return new Promise(res => { let done = false;
             ext.openDialog({eyebrow: 'PRÉSENTATION', title, submitLabel: 'Choisir',
-                body: `<label>Fichier de l’ordinateur (il va dans les médias)<input type="file" name="f" accept="video/*,audio/*"></label><p class="muted">ou des médias :</p><label>Chercher<input type="search" data-mq placeholder="Titre, nom de fichier…" autocomplete="off"></label><div data-mres class="kn-avpick"></div>`,
+                body: `<label>Fichier de l’ordinateur (il va dans les médias)<input type="file" name="f" accept="video/*,audio/*"></label><p class="muted">ou des médias :</p><div class="pk"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🎬</span><input type="text" class="pk-input" data-mq placeholder="Titre, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher une vidéo ou un son"></div><div class="pk-list is-static" data-mres></div></div>`,
                 onOpen: dg => { const q = dg.querySelector('[data-mq]'), box = dg.querySelector('[data-mres]'); let tm = 0;
-                    const go = async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 80}).catch(() => ({rows: []}))).rows || []).filter(m => rx.test(m.filename || '')); box._rows = rows;
-                        box.innerHTML = rows.map((m, i) => `<label class="checkbox-line"><input type="radio" name="mp" value="${i}"> ${/\.(mp4|m4v|webm|mov|ogv)$/i.test(m.filename) ? '🎬' : '🎵'} ${esc(m.title || m.filename)}</label>`).join('') || '<p class="muted">Aucune vidéo ni aucun son trouvé.</p>'; };
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go();
+                    // liste au format du menu de choix : symbole, titre, ligne grise ; clic ou Entrée = choisir
+                    const isVid = m => /\.(mp4|m4v|webm|mov|ogv)$/i.test(m.filename || '');
+                    let act = 0;
+                    const pickRow = i => { const m = box._rows?.[i]; if (!m) return; done = true; res({media_id: Number(m.id), filename: m.filename, kind: isVid(m) ? 'video' : 'audio', title: m.title || ''}); dg.close(); };
+                    const paintOn = () => box.querySelectorAll('.pk-item').forEach((r, k) => { r.classList.toggle('on', k === act); if (k === act) r.scrollIntoView({block: 'nearest'}); });
+                    const go = async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 80}).catch(() => ({rows: []}))).rows || []).filter(m => rx.test(m.filename || '')); box._rows = rows; act = 0;
+                        box.innerHTML = rows.length ? `<div class="pk-head"><span>${rows.length} ${rows.length > 1 ? 'médias trouvés' : 'média trouvé'}</span><span>↑ ↓ Entrée</span></div><div class="pk-scroll">${rows.map((m, i) => `<div class="pk-item pk-row${i ? '' : ' on'}" role="option" data-i="${i}"><span class="pk-ic" aria-hidden="true">${isVid(m) ? '🎬' : '🎵'}</span><div class="pk-txt"><div class="pk-name">${esc(m.title || m.filename)}</div><div class="pk-meta">${esc([isVid(m) ? 'Vidéo' : 'Son', m.title && m.title !== m.filename ? m.filename : '', m.date_text].filter(Boolean).join(' · '))}</div></div></div>`).join('')}</div>`
+                            : `<div class="pk-empty">Aucune vidéo ni aucun son${q.value.trim() ? ` pour « ${esc(q.value.trim())} »` : ''}.</div>`; };
+                    box.addEventListener('click', e => { const r = e.target.closest('[data-i]'); if (r) pickRow(Number(r.dataset.i)); });
+                    q.addEventListener('keydown', e => { const n = box._rows?.length || 0;
+                        if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && n) { e.preventDefault(); act = (act + (e.key === 'ArrowDown' ? 1 : -1) + n) % n; paintOn(); }
+                        else if (e.key === 'Enter' && n) { e.preventDefault(); pickRow(act); } });
+                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go(); setTimeout(() => q.focus(), 30);
                     dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
                 onSubmit: async f => {
                     const file = f.querySelector('[name=f]').files?.[0];
                     if (file) { const kind = /^video\//.test(file.type) || /\.(mp4|m4v|webm|mov|ogv)$/i.test(file.name) ? 'video' : 'audio'; const u = await uploadBlob(file, file.name, kind); done = true; res({...u, kind, title: file.name.replace(/\.[^.]+$/, '')}); return; }
-                    const x = f.querySelector('[name=mp]:checked'), m = x && f.querySelector('[data-mres]')._rows?.[Number(x.value)];
-                    if (!m) { toast('Choisis un fichier.', 'error'); return false; }
-                    done = true; res({media_id: Number(m.id), filename: m.filename, kind: /\.(mp4|m4v|webm|mov|ogv)$/i.test(m.filename) ? 'video' : 'audio', title: m.title || ''});
+                    toast('Choisis un fichier, ou clique une vidéo ou un son de la liste.', 'error'); return false;
                 }}); });
     }
     const BASE_FONTS = ['Helvetica Neue', 'Helvetica', 'Arial', 'Avenir Next', 'Futura', 'Gill Sans', 'Optima', 'Verdana', 'Trebuchet MS', 'Segoe UI', 'Calibri', 'Candara', 'Georgia', 'Garamond', 'EB Garamond', 'Palatino', 'Book Antiqua', 'Baskerville', 'Times New Roman', 'Didot', 'Bodoni 72', 'Cochin', 'Hoefler Text', 'Rockwell', 'Courier New', 'American Typewriter', 'Copperplate', 'Brush Script MT', 'Snell Roundhand', 'Zapfino', 'Apple Chancery', 'Lucida Handwriting', 'Papyrus', 'Impact', 'Chalkboard SE', 'Comic Sans MS', 'serif', 'sans-serif', 'monospace', 'cursive'];
@@ -925,7 +932,7 @@
                     return `${F('Sorte', `<select data-kn-x="ckind">${kinds.map(([k, v]) => `<option value="${esc(k)}" ${o.spec?.kind === k ? 'selected' : ''}>${esc(`${v.icon || ''} ${v.label}`)}</option>`).join('')}</select>`)}${F('Titre', `<input type="text" data-kn-x="ctitle" value="${esc(o.spec?.o?.title || '')}" maxlength="200">`)}
                     ${F('Les chiffres (1re ligne : Catégorie ; Série 1 ; Série 2…)', `<textarea rows="6" data-kn-x="cdata">${esc(chartText(o.spec))}</textarea>`)}
                     <div class="kn-g2">${F('Couleurs', `<select data-kn-x="cpal">${opt([['', 'Vives'], ['pastel', 'Pastel'], ['terre', 'Terre'], ['mer', 'Mer'], ['sepia', 'Sépia (ancien)'], ['gris', 'Gris']], o.spec?.o?.palette || '')}</select>`)}${F('Légende', `<select data-kn-x="cleg">${opt([['', 'Selon la sorte'], ['bottom', 'En bas'], ['right', 'À droite'], ['none', 'Aucune']], o.spec?.o?.legend || '')}</select>`)}</div>${F('Couleur des textes', iColor(of('color', 'color'), o.color || th.fg))}`; }),
-                sec('person', 'Généalogie', one && o.t === 'person', () => `<label class="kn-f"><span>Personne</span>${A().collectionPersonField('kn_person', o.pid ? {id: o.pid, first_name: o.data?.name || `Fiche n°${o.pid}`, last_name: ''} : null, 'Nom, prénom…')}</label>
+                sec('person', 'Généalogie', one && o.t === 'person', () => `<div class="kn-f"><span>Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'kn_person', kind: 'person', value: o.pid ? (o.data?.name ? {id: o.pid, title: o.data.name} : o.pid) : null})}</div>
                     ${F('Montrer', iSel(of('view') + ' data-kn-re="1"', [['card', '🪪 La fiche'], ['photo', '🖼️ Le portrait'], ['tree', '🌳 Petit arbre'], ['timeline', '🗓️ Frise de sa vie']], o.view || 'card'))}
                     <div class="kn-row">${o.pid ? B('prefresh', '🔄 Relire la fiche') : ''}</div>${o.data?.at ? `<p class="muted">Ce qui est montré vient de la fiche (relue le ${esc(o.data.at)}) : la présentation se lit même sans la base. « Relire la fiche » la met à jour.</p>` : ''}`),
                 sec('media', 'Vidéo / son', one && ['video', 'audio'].includes(o.t), () => `<div class="kn-row">${B('avreplace', '🎬 Changer…')}</div><div class="kn-row">${iChk(of('autoplay'), o.autoplay, 'Lecture automatique')}${iChk(of('loop'), o.loop, 'En boucle')}${o.t === 'video' ? iChk(of('muted'), o.muted, 'Sans le son') : ''}${iChk(of('controls'), o.controls, 'Boutons de lecture visibles')}</div><div class="kn-g2">${F('Volume', iRange(of('vol'), o.vol ?? 1, 0, 1, .05))}${F('Commencer à (s)', iNum(of('start'), o.start ?? 0, 'min="0"'))}</div>`),
@@ -981,7 +988,6 @@
         function paintInsp() {
             dlg.querySelectorAll('[data-kn-tab]').forEach(b => b.classList.toggle('is-cur', b.dataset.knTab === tab));
             ibody.innerHTML = [['format', paneFormat], ['anim', paneAnim], ['slide', paneSlide], ['objs', paneObjs], ['doc', paneDoc]].map(([k, f]) => `<div class="kn-pane" data-kn-pane="${k}" ${k === tab ? '' : 'hidden'}>${f()}</div>`).join('');
-            A().bindCollectionPersonFields?.(ibody);
             ext.tbApply?.(dlg, 'keynote');
         }
         /* ─── les réglages de l'inspecteur ─── */
@@ -1028,7 +1034,7 @@
             if (el.type === 'checkbox' && !isChange) return;
             const kind = el.dataset.knK, val = el.type === 'checkbox' ? el.checked : kind === 'num' ? (el.value === '' ? undefined : Number(el.value)) : el.value;
             if (el.dataset.knX) return special(el.dataset.knX, el, isChange);
-            if (el.name === 'kn_person' || el.matches('[data-cp-input]')) return;
+            if (el.name === 'kn_person' || el.closest('.pk')) return; // le menu de choix : écouté par cp-pick
             if (el.dataset.knF) {
                 const k = el.dataset.knF, objs = selObjs(); if (!objs.length) return;
                 objs.forEach(o => { if (['x', 'y', 'w', 'h'].includes(k)) { if (val === undefined || !Number.isFinite(val)) return; o[k] = k === 'w' || k === 'h' ? Math.max(4, val) : val; } else if (val === undefined || val === false || (val === '' && k !== 'text')) delete o[k]; else o[k] = val; if (k === 'kind' && ['line', 'arrowline'].includes(val) && o.h > 80) o.h = 40; });

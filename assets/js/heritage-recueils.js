@@ -15,6 +15,9 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     for (const key of ['personBlocks', 'lists']) ext[key] = ext[key] || {};
     const esc = value => A().escapeHtml(value ?? '');
+    // fiches, enquêtes et battues : le menu de choix unique (docs/PICKER.md) ; les autres sortes gardent recueil_search
+    const PK_KINDS = ['person', 'investigation', 'battue'];
+    const PKF = o => window.LCNDA_PICKER.pickerField(o);
     const nl = value => esc(value).replace(/\n/g, '<br>');
     const S = () => A().state;
     const toast = (...a) => A().toast(...a);
@@ -539,22 +542,27 @@
     /* ─── Rattacher une page (ou juste une image) à une fiche, un bloc, une enquête, une battue, l'Atelier, un village ─── */
     const LINK_KINDS = [['person', '👤 Une fiche (ses médias ou un de ses blocs)'], ['investigation', '🔍 Une enquête'], ['battue', '🧭 Une battue'], ['atelier_project', '📚 Un projet de l’Atelier'], ['village', '🏘️ Un village'], ['family_booklet', '📘 Un livret de famille'], ['pet', '🐾 Un animal']];
     function pageLinkDialog({page, image, scope = 'page'}) {
+        let pkItem = null; // la chose choisie dans le menu de choix unique
         dialog({eyebrow: 'RATTACHER', title: `${D.recueil.title} — ${pageName(page)}`, wide: true, submitLabel: 'Rattacher',
             body: `<fieldset class="h-rc-modes"><legend>Quoi ?</legend>
                     <label class="checkbox-line"><input type="radio" name="scope" value="page" ${scope === 'page' ? 'checked' : ''}> <b>Toute la page</b> <small class="muted">(elle apparaîtra dans « Recueils » de la fiche, du village, de l’enquête…)</small></label>
                     <label class="checkbox-line"><input type="radio" name="scope" value="image" ${scope === 'image' ? 'checked' : ''} ${image ? '' : 'disabled'}> <b>Juste cette image</b> <small class="muted">(elle s’ajoute aux médias de la fiche, à un bloc, aux pièces de l’enquête…)</small></label></fieldset>
                 ${image ? `<p class="h-rc-linkthumb"><img src="${esc(thumbUrl(image))}" alt=""> <small class="muted">${esc(versionById(image.version_id)?.name || '')}${image.role === 'detail' ? ' · détail' : ''}</small></p>` : ''}
                 <div class="form-grid"><label>À quoi ?<select name="kind">${LINK_KINDS.map(([k, l]) => `<option value="${k}">${l}</option>`).join('')}</select></label>
-                    <label>Chercher<input type="search" name="q" placeholder="Nom, titre, commune… (2 lettres au moins)" autocomplete="off"></label></div>
-                <label>Résultat<select name="key" size="6" required></select></label>
+                    <label data-rc-qbox>Chercher<input type="search" name="q" placeholder="Nom, titre, commune… (2 lettres au moins)" autocomplete="off"></label></div>
+                <div data-rc-pk hidden></div>
+                <label data-rc-keybox>Résultat<select name="key" size="6" required></select></label>
                 <label data-rc-where hidden><span data-rc-wherelabel>Où exactement ?</span><select name="target"></select></label>
                 <label>Note <small class="muted">(facultatif)</small><input name="note" placeholder="Il est cité à la ligne 12"></label>`,
             onOpen: d => {
                 const $ = sel => d.querySelector(sel), kind = $('[name=kind]'), q = $('[name=q]'), keySel = $('[name=key]'), where = $('[data-rc-where]'), target = $('[name=target]');
                 const scopeNow = () => d.querySelector('[name=scope]:checked')?.value || 'page';
                 let t = 0, folders = [];
+                const pkBox = $('[data-rc-pk]'), usePk = () => PK_KINDS.includes(kind.value);
+                const setMode = () => { const on = usePk(); $('[data-rc-qbox]').hidden = on; $('[data-rc-keybox]').hidden = on; keySel.disabled = on; keySel.required = !on; pkBox.hidden = !on; pkItem = null; pkBox.innerHTML = on ? PKF({name: 'key', kind: kind.value}) : ''; };
+                pkBox.addEventListener('picker-change', e => { pkItem = e.detail.item?.id ? e.detail.item : null; fillWhere(); });
                 const fillWhere = async () => {
-                    const k = kind.value, key = keySel.value, sc = scopeNow();
+                    const k = kind.value, key = usePk() ? (pkItem ? String(pkItem.id) : '') : keySel.value, sc = scopeNow();
                     where.hidden = true; target.innerHTML = ''; target.required = false;
                     if (!key) return;
                     if (sc === 'page' && k !== 'investigation') return;
@@ -567,25 +575,25 @@
                     target.required = true; where.hidden = false;
                 };
                 const search = async () => {
+                    if (usePk()) { fillWhere(); return; }
                     const v = q.value.trim();
-                    if (v.length < 2 && kind.value === 'person') { keySel.innerHTML = ''; fillWhere(); return; }
                     const r = await get('recueil_search', {type: kind.value, q: v}).catch(() => ({results: []}));
                     keySel.innerHTML = (r.results || []).map(x => `<option value="${esc(x.key)}">${esc(x.label)}${x.extra ? ` (${esc(x.extra)})` : ''}</option>`).join('');
                     if (keySel.options.length) keySel.selectedIndex = 0;
                     fillWhere();
                 };
                 q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(search, 250); });
-                kind.addEventListener('change', () => { q.value = ''; search(); q.focus(); });
+                kind.addEventListener('change', () => { q.value = ''; setMode(); search(); if (!usePk()) q.focus(); });
                 keySel.addEventListener('change', fillWhere);
                 d.querySelectorAll('[name=scope]').forEach(r => r.addEventListener('change', fillWhere));
-                search(); setTimeout(() => q.focus(), 50);
+                setMode(); search(); setTimeout(() => (usePk() ? pkBox.querySelector('.pk-input') : q)?.focus(), 50);
             },
             onSubmit: async form => {
                 const f = Object.fromEntries(new FormData(form));
                 if (!f.key) { toast('Choisis dans la liste à quoi rattacher.', 'error'); return false; }
                 if (f.scope === 'image') {
                     if (!f.target) { toast('Choisis où mettre l’image.', 'error'); return false; }
-                    const label = form.querySelector('[name=key]').selectedOptions[0]?.textContent || '';
+                    const label = PK_KINDS.includes(f.kind) ? (pkItem?.title || '') : (form.querySelector('select[name=key]').selectedOptions[0]?.textContent || '');
                     const r = await post('recueil_link_media', {media_id: image.media_id, target: f.target, note: f.note, label, title: `${D.recueil.title} — ${pageName(page)}`});
                     toast((r.result || r).already ? 'Cette image y était déjà rattachée.' : 'Image rattachée.');
                 } else {
@@ -670,18 +678,25 @@
         let chosen = l ? {key: l.entity_key, label: l.label} : null;
         dialog({eyebrow: 'RECUEIL', title: l ? 'Rattachement' : 'Rattacher le recueil', wide: true, submitLabel: 'Enregistrer',
             body: `<div class="form-grid"><label>À quoi ?<select name="entity_type">${Object.entries(LINK_TYPES).map(([k, [icon, label]]) => `<option value="${k}" ${l?.entity_type === k ? 'selected' : ''}>${icon} ${label}</option>`).join('')}</select></label>
-                <label>Chercher<input type="search" data-rc-ls placeholder="Nom, titre…" value="${esc(l?.label || '')}"></label></div>
+                <label data-rc-lsbox>Chercher<input type="search" data-rc-ls placeholder="Nom, titre…" value="${esc(l?.label || '')}"></label></div>
+                <div data-rc-lpk hidden></div>
                 <div class="h-rc-results" data-rc-lr></div>
                 ${rangeFields(D.pages, l?.page_from, l?.page_to)}
                 <label>Note <small class="muted">(facultatif)</small><input name="note" value="${esc(l?.note || '')}" placeholder="Il est cité à la ligne 12"></label>`,
             onOpen: dl => {
                 const type = dl.querySelector('[name=entity_type]'), q = dl.querySelector('[data-rc-ls]'), box = dl.querySelector('[data-rc-lr]');
                 let timer = 0;
-                const search = async () => { const r = await get('recueil_search', {type: type.value, q: q.value.trim()}).catch(() => ({results: []}));
+                const pk = dl.querySelector('[data-rc-lpk]');
+                pk.addEventListener('picker-change', e => { const it = e.detail.item; chosen = it?.id ? {key: String(it.id), label: it.title} : null; });
+                const search = async () => {
+                    const on = PK_KINDS.includes(type.value); pk.hidden = !on; box.hidden = on; dl.querySelector('[data-rc-lsbox]').hidden = on;
+                    if (on) { box.innerHTML = ''; if (!pk.querySelector('.pk')) pk.innerHTML = PKF({name: 'rc_pick', kind: type.value, value: chosen && l?.entity_type === type.value ? {id: Number(chosen.key), title: chosen.label} : null}); return; }
+                    pk.innerHTML = '';
+                    const r = await get('recueil_search', {type: type.value, q: q.value.trim()}).catch(() => ({results: []}));
                     box.innerHTML = (r.results || []).map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" ${chosen?.key === x.key ? 'checked' : ''}> ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="muted">Rien trouvé.</p>';
                     box.querySelectorAll('[name=pick]').forEach(r2 => r2.addEventListener('change', () => { chosen = {key: r2.value, label: r2.dataset.label}; })); };
                 q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(search, 250); });
-                type.addEventListener('change', () => { chosen = null; q.value = ''; search(); });
+                type.addEventListener('change', () => { chosen = null; q.value = ''; pk.innerHTML = ''; search(); });
                 search();
             },
             onSubmit: async form => {

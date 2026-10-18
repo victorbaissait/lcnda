@@ -178,19 +178,22 @@
         if (b) { e.preventDefault(); open(b.dataset.employerOpen); return; }
         if (e.target.closest?.('[data-employer-new]')) { e.preventDefault(); open(''); }
     });
-    // Champ « Employeur » d'un formulaire : propose les employeurs connus et un accès à leur fiche
-    let known = null;
-    document.addEventListener('focusin', async e => {
+    // Champ « Employeur » d'un formulaire : le menu de choix unique (employeurs connus, ou un nom libre).
+    // Le champ texte d'origine reste celui qui part au serveur (même nom, même texte) ; il est seulement caché.
+    document.addEventListener('focusin', e => {
         const input = e.target;
-        if (!input.matches?.('input[name="employer"], input[data-employer-field]')) return;
-        if (!input.nextElementSibling?.matches?.('.h-emp-field-link')) {
-            input.insertAdjacentHTML('afterend', '<button type="button" class="link-button h-emp-field-link">🏢 Fiche de cet employeur</button>');
-            input.nextElementSibling.addEventListener('click', () => { const v = input.value.trim(); if (!v) { toast('Écris d’abord le nom de l’employeur.'); return; } open(v, false); });
-        }
-        if (!document.getElementById('h-emp-known')) {
-            try { known = known || (await api('list', {type: 'employers', limit: 500})).rows || []; } catch (_) { known = []; }
-            document.body.insertAdjacentHTML('beforeend', `<datalist id="h-emp-known">${known.map(k => `<option value="${esc(k.name)}">`).join('')}</datalist>`);
-        }
-        input.setAttribute('list', 'h-emp-known');
+        if (!input.matches?.('input[name="employer"], input[data-employer-field]') || input.dataset.empPk) return;
+        input.dataset.empPk = '1';
+        const val = input.value.trim();
+        input.insertAdjacentHTML('afterend', `<div class="h-emp-pk">${window.LCNDA_PICKER.pickerField({name: 'employer_pick', kind: 'employer', allowFree: true, value: val ? 'txt:' + val : null, placeholder: input.placeholder || 'Nom de l’employeur…'})}<button type="button" class="link-button h-emp-field-link">🏢 Fiche de cet employeur</button></div>`);
+        const box = input.nextElementSibling;
+        box.querySelector('.pk > input[type=hidden]')?.removeAttribute('name'); // rien de plus n'est envoyé au serveur
+        input.hidden = true;
+        box.addEventListener('picker-change', ev => { const it = ev.detail.item; input.value = it ? it.title : ''; input.dispatchEvent(new Event('input', {bubbles: true})); input.dispatchEvent(new Event('change', {bubbles: true})); });
+        box.addEventListener('picker-open', ev => { ev.preventDefault(); open(ev.detail.item?.title || input.value.trim(), false); });
+        box.querySelector('.h-emp-field-link').addEventListener('click', () => { const v = input.value.trim(); if (!v) { toast('Choisis d’abord l’employeur.'); return; } open(v, false); });
+        // un nom déjà connu montre la pastille de l'employeur (et non un simple texte)
+        if (val) api('picker_search', {kind: 'employer', q: val, limit: 5}).then(d => { const it = (d.groups || []).flatMap(g => g.items).find(x => String(x.title).toLowerCase() === val.toLowerCase()); if (it) window.LCNDA_PICKER.pickerSet(box.querySelector('.pk'), it); }).catch(() => {});
+        setTimeout(() => box.querySelector('.pk-input:not([hidden])')?.focus(), 0);
     });
 })();

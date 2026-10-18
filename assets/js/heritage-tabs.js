@@ -13,6 +13,8 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     ext.maintenance = ext.maintenance || {};
     const esc = value => A().escapeHtml(value ?? '');
+    // le nom de la personne choisie (menu de choix unique) est gardé à côté du champ, pour le titre de l'écran
+    document.addEventListener('picker-change', e => { const w = e.target.closest?.('[data-ct-pwrap]'); if (w) w.dataset.pname = e.detail.item?.title || ''; });
     const toast = (...args) => A().toast(...args);
     const S = () => A().state;
     const isCurrent = token => token === S().workspaceToken && S().module === 'maintenance';
@@ -109,7 +111,7 @@
     }};
     const screenSelect = (cur, attr) => `<select ${attr}>${screenTargets().map(([g, items]) => `<optgroup label="${esc(g)}">${items.map(([v, l]) => `<option value="${esc(v)}" ${cur === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</optgroup>`).join('')}${myLists.length ? `<optgroup label="Mes listes">${myLists.map(l => `<option value="mylist:${Number(l.id)}" ${cur === 'mylist:' + l.id ? 'selected' : ''}>${esc((l.icon || '📋') + ' ' + l.name)}</option>`).join('')}</optgroup>` : ''}<optgroup label="Une personne"><option value="person:" ${String(cur).startsWith('person:') ? 'selected' : ''}>Fiche d’une personne…</option></optgroup><optgroup label="Une commune">${Object.entries(PLACE_KINDS).map(([k, l]) => `<option value="${k}:" ${placeKind(cur) === k ? 'selected' : ''}>${l}</option>`).join('')}</optgroup></select>`;
     ext.dashboardConfig.app_screen = {
-        html: wd => { const c = {target: 'module:carte', height: 560, ...(wd.config || {})}; setTimeout(() => A().bindCollectionPersonFields?.(document.getElementById('workspace')), 0);
+        html: wd => { const c = {target: 'module:carte', height: 560, ...(wd.config || {})};
             ext.dashboardConfig.app_screen._place = c;
             setTimeout(() => {
                 const sel = document.querySelector('.h-ct-wcfg [data-ctw="target"]'), ed = sel?.closest('.h-ct-wcfg'); if (!ed) return;
@@ -123,11 +125,11 @@
                 });
             }, 0);
             return `<fieldset class="h-ct-wcfg"><legend>Écran de l’app</legend><label>Écran ${screenSelect(c.target, 'data-ctw="target"')}</label>${placeKind(c.target) ? placeHtml(c) : ''}
-                <label>Personne <small>(pour « Fiche d’une personne »)</small>${A().collectionPersonField('ctw_person', String(c.target).startsWith('person:') ? {id: Number(c.target.slice(7)), first_name: c.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>
+                <div data-ct-pwrap data-pname="${esc(c.personName || '')}"><span class="pk-lab">Personne <small>(pour « Fiche d’une personne »)</small></span>${window.LCNDA_PICKER.pickerField({name: 'ctw_person', kind: 'person', value: String(c.target).startsWith('person:') ? Number(c.target.slice(7)) || null : null})}</div>
                 <label>Titre <small>(facultatif)</small><input data-ctw="title" value="${esc(c.title || '')}"></label>
                 <label>Hauteur <select data-ctw="height">${HEIGHTS.map(([v, l]) => `<option value="${v}" ${String(c.height) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-ctw="sidebar" ${c.sidebar ? 'checked' : ''}> avec sa colonne de gauche (menus de l’écran)</label></fieldset>`; },
-        read: ed => { let target = ed.querySelector('[data-ctw="target"]')?.value || 'module:carte'; const pid = Number(ed.querySelector('[name=ctw_person]')?.value) || 0, pname = ed.querySelector('[data-cp-input="ctw_person"]')?.value || '';
+        read: ed => { let target = ed.querySelector('[data-ctw="target"]')?.value || 'module:carte'; const pid = Number(ed.querySelector('[name=ctw_person]')?.value) || 0, pname = ed.querySelector('[data-ct-pwrap]')?.dataset.pname || '';
             if (target.startsWith('person:')) target = pid ? 'person:' + pid : 'module:personnes';
             const pl = ext.dashboardConfig.app_screen._place;
             if (placeKind(target)) { if (pl && placeKind(pl.target) === placeKind(target) && placeKey(pl.target)) return {target: pl.target, ...cleanPlace(pl), title: ed.querySelector('[data-ctw="title"]')?.value || '', height: Number(ed.querySelector('[data-ctw="height"]')?.value) || 560, sidebar: false}; target = placeKind(target) === 'village' ? 'list:villages' : 'graph:place_monograph'; }
@@ -244,7 +246,7 @@
             kind = '📺 Écran'; label = String(c.target || '').startsWith('person:') ? (c.personName || 'Fiche d’une personne') : targetLabel(c.target);
             settings = `<div class="form-grid h-ct-piece-set"><label>Écran ${screenSelect(String(c.target || '').startsWith('person:') ? 'person:' : c.target, 'data-ct-p="target"')}</label>
                 ${placeKind(c.target) ? placeHtml(c) : ''}
-                ${String(c.target || '').startsWith('person:') ? `<label>Personne ${A().collectionPersonField('ctp_person' + i, Number(String(c.target).slice(7)) ? {id: Number(String(c.target).slice(7)), first_name: c.personName || '', last_name: ''} : null, 'Nom de la personne')}</label>` : ''}
+                ${String(c.target || '').startsWith('person:') ? `<div data-ct-pwrap data-pname="${esc(c.personName || '')}"><span class="pk-lab">Personne</span>${window.LCNDA_PICKER.pickerField({name: 'ctp_person' + i, kind: 'person', value: Number(String(c.target).slice(7)) || null})}</div>` : ''}
                 <label>Titre <small>(facultatif)</small><input data-ct-p="title" value="${esc(c.title || '')}" placeholder="${esc(label)}"></label>
                 <label>Hauteur <select data-ct-p="height">${HEIGHTS.map(([v, l]) => `<option value="${v}" ${String(c.height || 560) === v ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 <label class="checkbox-line"><input type="checkbox" data-ct-p="sidebar" ${c.sidebar ? 'checked' : ''}> avec sa colonne de gauche (ses menus)</label></div>`;
@@ -306,12 +308,12 @@
                 if (k === 'target') { if (el.value.startsWith('person:')) c.target = 'person:' + (Number(c.personId) || ''); paint(); }
             }));
             ws.querySelectorAll('[data-ct-i]').forEach(li => { const x = t.widgets[Number(li.dataset.ctI)]; if (x?.type === 'app_screen' && placeKind(x.config?.target)) bindPlace(li, cfgOf(Number(li.dataset.ctI))); });
-            app.bindCollectionPersonFields?.(ws);
-            ws.querySelectorAll('[data-ct-i]').forEach(li => li.addEventListener('click', () => setTimeout(() => {
-                const h = li.querySelector('input[type=hidden][name^=ctp_person]'); if (!h) return;
-                const i = Number(li.dataset.ctI), c = cfgOf(i), id = Number(h.value) || 0;
-                if (id && c.target !== 'person:' + id) { c.target = 'person:' + id; c.personId = id; c.personName = li.querySelector('[data-cp-input]')?.value || ''; }
-            }, 0)));
+            // la personne de l'écran « Fiche d'une personne » : menu de choix unique
+            ws.querySelectorAll('[data-ct-i]').forEach(li => li.addEventListener('picker-change', e => {
+                if (!String(e.detail.name).startsWith('ctp_person')) return;
+                const i = Number(li.dataset.ctI), c = cfgOf(i), id = Number(e.detail.value) || 0;
+                if (id && c.target !== 'person:' + id) { c.target = 'person:' + id; c.personId = id; c.personName = e.detail.item?.title || ''; }
+            }));
             const swap = (i, j) => { [t.widgets[i], t.widgets[j]] = [t.widgets[j], t.widgets[i]]; paint(); };
             ws.querySelectorAll('[data-ct-wup]').forEach(b => b.addEventListener('click', () => swap(Number(b.dataset.ctWup), Number(b.dataset.ctWup) - 1)));
             ws.querySelectorAll('[data-ct-wdown]').forEach(b => b.addEventListener('click', () => swap(Number(b.dataset.ctWdown), Number(b.dataset.ctWdown) + 1)));

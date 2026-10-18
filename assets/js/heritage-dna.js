@@ -10,6 +10,7 @@
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
     const A = () => window.LCNDA_APP;
     const S = () => A().state;
+    const PKF = o => window.LCNDA_PICKER.pickerField(o); // le menu de choix unique (docs/PICKER.md)
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
     const post = (action, body) => api(action, {}, {method: 'POST', body});
@@ -143,7 +144,7 @@
         const d = k.data || {};
         ext.openDialog({eyebrow: 'ADN', title: k.id ? 'Modifier le test' : 'Nouveau test', wide: true, submitLabel: 'Enregistrer',
             body: `${!prefs().ack ? lawHtml(false) : ''}<div class="form-grid">
-                <label>Personne testée${A().collectionPersonField('dna_person', k.person_id ? {id: k.person_id, first_name: k.person_name || '', last_name: ''} : null, 'Nom de la personne…')}</label>
+                <div><span class="pk-lab">Personne testée</span>${PKF({name: 'dna_person', kind: 'person', value: Number(k.person_id) || null})}</div>
                 <label>Nom du test <small>(si la personne n’est pas dans l’arbre)</small><input name="label" value="${esc(k.label || '')}" maxlength="160"></label>
                 <label>Société / origine<input name="company" list="dna-companies" value="${esc(k.company || '')}"><datalist id="dna-companies">${COMPANIES.map(c => `<option value="${esc(c)}">`).join('')}</datalist></label>
                 <label>Type<select name="test_type">${TYPES.map(([v, l]) => `<option value="${v}" ${(k.test_type || 'autosomal') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
@@ -155,7 +156,7 @@
                 <label class="span-2">Origines estimées <small>(une ligne par région : « Bretagne ; 42 »)</small><textarea name="ethnicity" rows="5">${esc(ethText(d.ethnicity))}</textarea></label>
                 <label>Marqueurs Y-STR<textarea name="y_str" rows="4" placeholder="DYS393=13, DYS390=24…">${esc(d.y_str || '')}</textarea></label><label>Mutations ADNmt<textarea name="mt_mutations" rows="4" placeholder="16519C, 263G…">${esc(d.mt_mutations || '')}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label></div>`,
-            onOpen: dlg => A().bindCollectionPersonFields(dlg),
+            onOpen: () => {},
             onDelete: k.id ? async () => { if (!await A().confirmBox('Supprimer ce test, ses correspondances et ses segments ?', {title: 'Supprimer le test', okLabel: 'Supprimer le test'})) return false; await post('delete_dna_kit', {id: k.id}); toast('Test supprimé.'); await refresh(); } : undefined,
             onSubmit: async f => { const v = Object.fromEntries(new FormData(f));
                 try { await post('save_dna_kit', {id: k.id || 0, person_id: Number(v.dna_person) || 0, label: v.label, company: v.company, test_type: v.test_type, kit_number: v.kit_number, test_date: v.test_date, haplo_y: v.haplo_y, haplo_mt: v.haplo_mt,
@@ -256,7 +257,7 @@
                 <label>Plus long segment (cM)<input name="longest_cm" inputmode="decimal" value="${esc(m.longest_cm || '')}"></label><label>cM sur le X<input name="x_cm" inputmode="decimal" value="${esc(d.x_cm || '')}"></label>
                 <div class="span-2 h-dna-guess" data-dna-guess></div>
                 <label>Relation proposée par la société<input name="relationship" value="${esc(m.relationship || '')}"></label><label>Côté<select name="side">${SIDES.map(([v, l]) => `<option value="${v}" ${(m.side || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>Fiche dans l’arbre${A().collectionPersonField('dna_mperson', m.person_id ? {id: m.person_id, first_name: m.person_name || '', last_name: ''} : null, 'Si tu sais qui c’est…')}</label>
+                <div><span class="pk-lab">Fiche dans l’arbre</span>${PKF({name: 'dna_mperson', kind: 'person', value: Number(m.person_id) || null, placeholder: 'Si tu sais qui c’est…'})}</div>
                 <label>Ancêtre(s) commun(s) (MRCA)<input name="mrca" value="${esc(d.mrca || '')}" placeholder="Jean Martin et Marie Durand"></label>
                 <label>Suivi<select name="status">${STATUSES.map(([v, l]) => `<option value="${v}" ${(m.status || '') === v ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><label>Étoiles (0 à 5)<input name="stars" type="number" min="0" max="5" value="${esc(d.stars || '')}"></label>
                 <div class="span-2"><span class="section-label">Groupes</span><div class="h-dna-gpick">${data.groups.map(g => `<label class="checkbox-line"><input type="checkbox" name="g_${g.id}" ${(m.groups || []).includes(g.id) ? 'checked' : ''}> <span class="h-dna-gchip" style="--c:${color(g.color)}">${esc(g.name)}</span></label>`).join('') || '<small class="muted">Aucun groupe (« 🗂️ Groupes »).</small>'}</div></div>
@@ -265,7 +266,7 @@
                 <label>Contact<input name="contact" value="${esc(d.contact || '')}"></label><label>Pays<input name="country" value="${esc(d.country || '')}"></label>
                 <label class="span-2">Correspondances en commun <small>(une par ligne ou séparées par ; — sert à la méthode de Leeds)</small><textarea name="shared_matches" rows="3">${esc((d.shared_matches || []).join('\n'))}</textarea></label>
                 <label class="span-2">Notes<textarea name="notes" rows="3">${esc(d.notes || '')}</textarea></label></div>`,
-            onOpen: dlg => { A().bindCollectionPersonFields(dlg); const box = dlg.querySelector('[data-dna-guess]'), inp = dlg.querySelector('[data-dna-cm]');
+            onOpen: dlg => { const box = dlg.querySelector('[data-dna-guess]'), inp = dlg.querySelector('[data-dna-cm]');
                 const paint = () => { const g = guess(inp.value); box.innerHTML = g.length ? `<b>Relation probable (${fmt(num(inp.value), 1)} cM, ${fmt(pctOf(inp.value), 2)} %)</b> : ${g.slice(0, 5).map(x => `${esc(x.name)} <small>${Math.round(x.p * 100)} %</small>`).join(' · ')}` : '<small class="muted">Tape les cM partagés : la relation probable s’affiche ici.</small>'; };
                 inp.addEventListener('input', paint); paint(); },
             onDelete: m.id ? async () => { if (!await A().confirmBox(`Supprimer « ${m.name} » ?`, {title: 'Supprimer la correspondance', okLabel: 'Supprimer la correspondance'})) return false; await post('delete_dna_match', {id: m.id}); toast('Supprimée.'); await refresh(); } : undefined,
@@ -565,13 +566,14 @@
         // le nom de la personne (jamais un numéro) : celui choisi, celui d'un test, ou celui de la fiche ouverte
         const cp = S().currentPerson?.person, pname = (Number(f.linePerson) === pid && f.linePersonName && !/^#\d+$/.test(f.linePersonName) ? f.linePersonName : '') || data.kits.find(k => k.person_id === pid)?.person_name || (cp && Number(cp.id) === pid ? A().personName(cp) : '');
         return `${header('ADN', '🌳 Lignées Y, mt et X', 'D’après ton arbre : de qui viennent l’ADN-Y (père du père du père…), l’ADN mitochondrial (mère de la mère…) et l’ADN-X d’une personne. Utile pour savoir qui faire tester, et pour lire un haplogroupe ou une correspondance sur le X.')}
-            <div class="h-dna-filters"><label>Personne${A().collectionPersonField('dna_lp', pid ? {id: pid, first_name: pname || '…', last_name: ''} : null, 'Tape un nom, un prénom…')}</label><label>Générations<input type="number" min="1" max="14" value="${esc(f.lineDepth || 10)}" data-dna-ld></label><button type="button" class="button small" data-dna-lgo>Afficher</button></div>
+            <div class="h-dna-filters"><div class="h-dna-lp"><span class="pk-lab">Personne</span>${PKF({name: 'dna_lp', kind: 'person', value: pid ? (pname ? {id: pid, title: pname} : pid) : null})}</div><label>Générations<input type="number" min="1" max="14" value="${esc(f.lineDepth || 10)}" data-dna-ld></label><button type="button" class="button small" data-dna-lgo>Afficher</button></div>
             <div class="h-dna-lines" data-dna-lines>${pid ? '<p class="muted">Calcul…</p>' : '<p class="muted">Choisis une personne.</p>'}</div>`;
     }, async bind(root) {
-        A().bindCollectionPersonFields(root);
-        const f = filt(); root.querySelector('[data-dna-lgo]').addEventListener('click', () => { f.linePerson = Number(root.querySelector('[name=dna_lp]').value) || f.linePerson; f.linePersonName = root.querySelector('[data-cp-input="dna_lp"]').value; f.lineDepth = Number(root.querySelector('[data-dna-ld]').value) || 10; go('lines'); });
+        const f = filt();
+        root.querySelector('.h-dna-lp')?.addEventListener('picker-change', e => { f.linePersonName = e.detail.item?.title || ''; });
+        root.querySelector('[data-dna-lgo]').addEventListener('click', () => { f.linePerson = Number(root.querySelector('[name=dna_lp]').value) || f.linePerson; f.lineDepth = Number(root.querySelector('[data-dna-ld]').value) || 10; go('lines'); });
         const pid = Number(f.linePerson) || data.kits.find(k => k.person_id)?.person_id || Number(S().currentPersonId) || 0; if (!pid) return;
-        let r; try { r = await api('dna_lines', {person_id: pid, depth: f.lineDepth || 10}); const inp = root.querySelector('[data-cp-input="dna_lp"]'); if (inp && r.person && (!inp.value || inp.value === '…' || /^#\d+$/.test(inp.value))) { inp.value = A().personName(r.person); } } catch (e) { root.querySelector('[data-dna-lines]').innerHTML = `<p class="h-dna-warn">${esc(e.message)}</p>`; return; }
+        let r; try { r = await api('dna_lines', {person_id: pid, depth: f.lineDepth || 10}); } catch (e) { root.querySelector('[data-dna-lines]').innerHTML = `<p class="h-dna-warn">${esc(e.message)}</p>`; return; }
         const pl = p => `<li><span class="h-dna-gen">G${p.gen}</span> <button type="button" class="table-link" data-open-person="${p.id}">${esc(p.name || '?')}</button> <small class="muted">${esc([p.birth, p.death].filter(Boolean).map(d => String(d).slice(0, 4)).join('–'))}</small>${haplo(p.id)}</li>`;
         const haplo = id => { const k = data.kits.filter(x => x.person_id === id); return k.length ? ` <span class="h-dna-hap">${k.map(x => [x.haplo_y && 'Y ' + x.haplo_y, x.haplo_mt && 'mt ' + x.haplo_mt].filter(Boolean).join(' · ')).filter(Boolean).join(' / ')}</span>` : ''; };
         const male = r.person.gender === 'male';

@@ -266,9 +266,9 @@
     const lchip = l => `<span class="h-pr-lchip" data-type="${l.type}" data-id="${l.id}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)} <button type="button" data-pr-unlink aria-label="Retirer">×</button></span>`;
     function linksField(links = []) {
         return `<div class="h-pr-links" data-pr-links><span class="section-label">Rattaché à</span><span class="h-pr-linkchips">${links.map(lchip).join('')}</span>
-            <span class="h-pr-addlink"><input type="search" data-pr-lq placeholder="Ajouter une personne, une enquête, une partie d’enquête…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></span></div>`;
+            <div class="h-pr-addlink" data-pr-lpk style="flex:1 1 320px;min-width:min(100%,320px)">${window.LCNDA_PICKER.pickerField({name: 'pr_link', kind: 'person,investigation', placeholder: 'Ajouter une personne, une enquête…'})}</div>
+            <span class="h-pr-addlink"><input type="search" data-pr-lq placeholder="ou une partie d’enquête…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></span></div>`;
     }
-    let invCache = null;
     function bindLinks(root) {
         const box = root.querySelector('[data-pr-links]'); if (!box) return;
         const input = box.querySelector('[data-pr-lq]'), sugg = box.querySelector('.h-pr-lsugg'); let t = 0;
@@ -278,16 +278,19 @@
             if (!box.querySelector(`.h-pr-lchip[data-type="${s.dataset.addType}"][data-id="${s.dataset.addId}"]`)) box.querySelector('.h-pr-linkchips').insertAdjacentHTML('beforeend', lchip({type: s.dataset.addType, id: s.dataset.addId, name: s.dataset.addName}));
             input.value = ''; sugg.hidden = true; input.focus();
         });
+        // personnes et enquêtes : le menu de choix unique (recherche mélangée) ; il ne part pas avec le formulaire
+        const pk = box.querySelector('[data-pr-lpk]');
+        pk?.querySelector('.pk > input[type=hidden]')?.removeAttribute('name');
+        pk?.addEventListener('picker-change', e => { const it = e.detail.item; if (!it?.id) return; const type = it.kind === 'investigation' ? 'investigation' : 'person';
+            if (!box.querySelector(`.h-pr-lchip[data-type="${type}"][data-id="${Number(it.id)}"]`)) box.querySelector('.h-pr-linkchips').insertAdjacentHTML('beforeend', lchip({type, id: Number(it.id), name: it.title}));
+            window.LCNDA_PICKER.pickerSet(pk.querySelector('.pk'), null); });
+        // parties d'enquête : pas encore une sorte du menu de choix unique, l'ancienne recherche reste pour elles
         input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sugg.querySelector('[data-add-type]')?.click(); } });
         input.addEventListener('input', () => { clearTimeout(t); const q = input.value.trim(); if (q.length < 2) { sugg.hidden = true; return; } t = setTimeout(async () => {
-            let people = [], invs = [], parts = [];
-            await Promise.all([
-                api('search', {type: 'persons', q, limit: 8}).then(r => { people = r.data || []; }).catch(() => {}),
-                (invCache ? Promise.resolve() : api('investigations', {status: 'all'}).then(r => { invCache = r.investigations || []; })).then(() => { invs = invCache.filter(i => String(i.title || '').toLowerCase().includes(q.toLowerCase())).slice(0, 6); }).catch(() => {}),
-                api('periodical_link_search', {q}).then(r => { parts = r.items || []; }).catch(() => {}),
-            ]);
+            let parts = [];
+            await api('periodical_link_search', {q}).then(r => { parts = r.items || []; }).catch(() => {});
             const b = (type, id, name) => `<button type="button" data-add-type="${type}" data-add-id="${id}" data-add-name="${esc(name)}">${LINK_IC[type]} ${esc(name)}</button>`;
-            sugg.innerHTML = [...people.map(p => b('person', p.id, A().personName(p))), ...invs.map(i => b('investigation', i.id, i.title)), ...parts.map(x => b('investigation_item', x.id, x.name))].join('') || '<small class="muted">Rien trouvé.</small>';
+            sugg.innerHTML = parts.map(x => b('investigation_item', x.id, x.name)).join('') || '<small class="muted">Rien trouvé.</small>';
             sugg.hidden = false; }, 220); });
     }
     const readLinks = form => { const out = {persons: [], investigations: [], investigation_items: []}; form.querySelectorAll('.h-pr-lchip').forEach(c => out[{person: 'persons', investigation: 'investigations', investigation_item: 'investigation_items'}[c.dataset.type]]?.push(Number(c.dataset.id))); return out; };

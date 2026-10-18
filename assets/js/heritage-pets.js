@@ -314,13 +314,16 @@
     function rowHtml(list, r = {}) {
         const n = 'r' + (++rowSeq);
         return `<div class="h-pet-row" data-pet-row="${list}">${LISTS[list].cols.map(([k, l, opts]) => k === 'person'
-            ? `<label class="h-pet-pf">${esc(l)}<span class="collection-person-field"><input type="text" data-cp-input="pp_${n}" value="${esc(r.name || '')}" placeholder="Tape un nom…" autocomplete="off"><input type="hidden" name="pp_${n}" value="${Number(r.person_id) || ''}" data-pet-pid><span class="collection-person-list" hidden></span></span></label>`
+            ? `<div class="h-pet-pf" data-pet-pname="${esc(r.name || '')}"><span class="pk-lab">${esc(l)}</span>${window.LCNDA_PICKER.pickerField({name: 'pp_' + n, kind: 'person', allowFree: true, value: Number(r.person_id) ? Number(r.person_id) : (r.name ? 'txt:' + r.name : null)})}</div>`
             : opts ? `<label>${esc(l)}<select data-k="${k}">${[...new Set(['', ...opts, r[k] || ''])].map(o => `<option ${o === (r[k] || '') ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select></label>`
             : `<label>${esc(l)}<input data-k="${k}" value="${esc(r[k] || '')}"></label>`).join('')}<button type="button" class="h-pet-x" data-pet-rowdel title="Retirer" aria-label="Retirer">×</button></div>`;
     }
     const readRows = (form, list) => [...form.querySelectorAll(`[data-pet-row="${list}"]`)].map(row => {
         const o = {}; row.querySelectorAll('[data-k]').forEach(x => { o[x.dataset.k] = x.value.trim(); });
-        if (list === 'owners') { o.person_id = Number(row.querySelector('[data-pet-pid]').value) || 0; o.name = row.querySelector('[data-cp-input]').value.trim(); }
+        if (list === 'owners') { // menu de choix unique : une fiche (id) ou un nom sans fiche (« txt:… »)
+            const raw = row.querySelector('.pk > input[type=hidden]')?.value || '';
+            if (raw.startsWith('txt:')) { o.person_id = 0; o.name = raw.slice(4).trim(); } else { o.person_id = Number(raw) || 0; o.name = o.person_id ? (row.querySelector('[data-pet-pname]')?.dataset.petPname || '').trim() : ''; }
+        }
         return o;
     });
     // les champs du formulaire, rangés par les réglages (un champ caché garde sa valeur)
@@ -377,13 +380,13 @@
             </div>`,
             onOpen: dlg => {
                 const body = dlg.querySelector('.h-dialog-body') || dlg;
-                A().bindCollectionPersonFields(body);
+                body.addEventListener('picker-change', e => { const box = e.target.closest('[data-pet-pname]'); if (box) box.dataset.petPname = e.detail.item?.title || ''; });
                 applyEditorCfg(body, body.querySelector('[name=species]')?.value || d.species);
                 body.querySelector('[name=species]')?.addEventListener('change', e => applyEditorCfg(body, e.target.value));
                 if (opts.jump) setTimeout(() => { const sec = dlg.querySelector('#' + opts.jump); if (sec) { sec.hidden = false; sec.scrollIntoView({block: 'start'}); } }, 60);
                 body.addEventListener('click', e => {
                     const j = e.target.closest('[data-pet-jump]'); if (j) { e.preventDefault(); dlg.querySelector('#' + j.dataset.petJump)?.scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
-                    const add = e.target.closest('[data-pet-add]'); if (add) { const box = body.querySelector(`[data-pet-list="${add.dataset.petAdd}"]`); box.insertAdjacentHTML('beforeend', rowHtml(add.dataset.petAdd)); A().bindCollectionPersonFields(box.lastElementChild); box.lastElementChild.querySelector('input, select')?.focus(); return; }
+                    const add = e.target.closest('[data-pet-add]'); if (add) { const box = body.querySelector(`[data-pet-list="${add.dataset.petAdd}"]`); box.insertAdjacentHTML('beforeend', rowHtml(add.dataset.petAdd)); box.lastElementChild.querySelector('input, select')?.focus(); return; }
                     if (e.target.closest('[data-pet-rowdel]')) e.target.closest('.h-pet-row').remove();
                 });
             },

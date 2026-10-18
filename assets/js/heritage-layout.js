@@ -1074,9 +1074,9 @@
             let chosen = it?.dyn?.id || 0;
             ext.openDialog({eyebrow: 'OBJET DYNAMIQUE', title: it ? 'Texte lié à une fiche' : 'Insérer le texte d’une fiche', submitLabel: it ? 'Mettre à jour' : 'Insérer',
                 body: `<p class="muted">Le texte suit la fiche : si elle change dans la généalogie, « 🔗 Mettre à jour les liens » (ou la réouverture du document) le refait.</p>
-                    <label>Personne ${A().collectionPersonField('ly_dyn', chosen ? {id: chosen, first_name: `Fiche n°${chosen}`, last_name: ''} : null, 'Nom, prénom…')}</label>
+                    <div><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'ly_dyn', kind: 'person', value: chosen || null})}</div>
                     <fieldset><legend>Ce qu’il faut montrer</legend>${DYN_FIELDS.map(([k, l]) => `<label class="checkbox-line"><input type="checkbox" name="f_${k}" ${f0.includes(k) ? 'checked' : ''}> ${esc(l)}</label>`).join('')}</fieldset>`,
-                onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); if (chosen) api('person', {id: chosen}).then(r => { if (r.person && dg.querySelector('[name=ly_dyn]').value == chosen) q.value = A().personName(r.person); }).catch(() => {}); },
+                onOpen: dg => { if (!chosen) setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); }, // la fiche déjà liée est relue par le menu
                 onSubmit: async f => { chosen = Number(f.elements.ly_dyn?.value) || 0;
                     if (!chosen) { toast('Choisis une personne.', 'error'); return false; }
                     const fields = DYN_FIELDS.map(([k]) => k).filter(k => f.elements['f_' + k]?.checked); if (!fields.length) { toast('Coche au moins une chose à montrer.', 'error'); return false; }
@@ -1561,7 +1561,7 @@
             let done = false;
             const dlg = ext.openDialog({eyebrow: 'PLACER UNE IMAGE', title: 'Choisir une image', wide: true, submitLabel: 'Placer',
                 body: `<label class="h-rc-drop"><input type="file" name="file" accept="image/png,image/jpeg,image/webp,image/gif"><span>📁 Une image de l’ordinateur (intégrée au document)…</span></label>
-                    <p class="muted">… ou une photo de la base : elle reste <b>liée</b> (objet dynamique) — retouchée dans l’app, elle se met à jour ici.</p><input type="search" data-q placeholder="Chercher…">
+                    <p class="muted">… ou une photo de la base : elle reste <b>liée</b> (objet dynamique) — retouchée dans l’app, elle se met à jour ici.</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-q placeholder="Titre ou nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher une photo"></div></div>
                     <div class="ly-imgpick" data-list>${rows.map(r => `<label title="${esc(r.title || r.filename)}"><input type="radio" name="pick" value="${r.id}"><img src="media/${encodeURIComponent(r.filename)}" alt="" loading="lazy"><span>${esc(r.title || r.filename)}</span></label>`).join('') || '<p class="muted">Aucune photo dans la base.</p>'}</div>`,
                 onOpen: d => d.querySelector('[data-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
                 onSubmit: async f => {
@@ -1779,7 +1779,7 @@
                     <label>Fond perdu (mm) <input type="number" step="0.5" min="0" max="20" name="bleed" value="${d.bleed}"></label><label>Ligne-bloc (mm) <input type="number" step="0.5" min="0" max="60" name="slug" value="${d.slug}"></label></div>
                     <p class="muted">Marges en millimètres. Le fond perdu (trait rouge) dépasse de la page pour les images à bord perdu ; la ligne-bloc (trait bleu) garde la place des notes pour l’imprimeur. Les deux s’impriment avec « PDF avec fond perdu et traits de coupe ».</p></fieldset>` : ''}
                 ${mode === 'family' ? `<label>Qui <select name="scope"><option value="ancestors">les ancêtres de…</option><option value="descendants">les descendants de…</option><option value="both">ancêtres et descendants de…</option><option value="all">toute la base</option></select></label>
-                <label>Personne de départ ${A().collectionPersonField('book_root', start ? {id: start, first_name: localStorage.getItem('genealogie-sosa-root-name') || ('Personne #' + start), last_name: ''} : null, 'Le de cujus par défaut')}</label>
+                <div><span class="pk-lab">Personne de départ</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'book_root', kind: 'person', value: start || null})}</div>
                 <label>Générations <input type="number" name="generations" min="1" max="30" value="5"></label><label>Ordre des fiches <select name="order"><option value="book">celui de l’arbre</option><option value="generation">par génération</option><option value="birth">par naissance</option><option value="name">par nom</option></select></label>
                 <label>Titre <input name="title" placeholder="automatique si vide"></label><label>Sous-titre <input name="subtitle"></label><label>Auteur <input name="author"></label><label>Photos par personne <input type="number" name="photo_count" min="0" max="8" value="3"></label>
                 <label class="span-2">Préface <textarea name="preface" rows="3" maxlength="8000"></textarea></label><label class="span-2">Mot de la fin <textarea name="epilogue" rows="2" maxlength="8000"></textarea></label>

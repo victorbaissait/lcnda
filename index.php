@@ -29,7 +29,7 @@ header('X-Content-Type-Options: nosniff');
     <meta name="color-scheme" content="light">
     <title>Carnet numérique des ancêtres</title>
     <link rel="stylesheet" href="assets/css/app.css?v=225">
-    <link rel="stylesheet" href="assets/css/picker.css?v=1">
+    <link rel="stylesheet" href="assets/css/picker.css?v=2">
     <link rel="stylesheet" href="assets/css/heritage.css?v=203">
     <link rel="stylesheet" href="assets/css/layout.css?v=11">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
@@ -300,8 +300,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="form-section-label" style="margin:0 0 .5rem;font-size:.75em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)">Localisation</div>
         <div class="form-grid">
             <label class="span-2">Cimetière<input name="cemetery_name" placeholder="Cimetière de…"></label>
-            <label>Ville<input name="place_name" placeholder="Ville" autocomplete="off"><input type="hidden" name="place_id"></label>
-            <label>Pays<input name="country" placeholder="France"></label>
+            <div class="pk-host span-2"><span>Ville</span><div data-place-picker><div class="pk" data-picker="place" data-pk-opts='{"name":"place_id","kind":"place","multiple":false,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="place_id" value=""></div></div><input type="hidden" name="place_name"><input type="hidden" name="country"></div>
             <label class="span-2">Adresse<input name="address" placeholder="Adresse du cimetière"></label>
             <label class="span-2">Emplacement / plan (division, carré, rangée, numéro…)<input name="plan_ref" placeholder="Division 4, carré B, rangée 3, tombe 12…"></label>
         </div>
@@ -340,12 +339,9 @@ header('X-Content-Type-Options: nosniff');
     <form method="dialog" id="grave-person-form">
         <div class="modal-head"><div><span class="eyebrow">CIMETIÈRE</span><h2>Ajouter une personne à la sépulture</h2></div><button class="icon-button" value="cancel" aria-label="Fermer">×</button></div>
         <input type="hidden" name="grave_id">
-        <input type="hidden" name="selected_person_id">
-        <p class="form-help">Recherche une personne déjà présente dans l'arbre (tombe familiale accueillant plusieurs personnes).</p>
+        <p class="form-help">Choisis une personne de l'arbre (tombe familiale accueillant plusieurs personnes).</p>
         <div class="form-grid">
-            <label class="span-2">Rechercher une personne<input type="text" id="grave-person-search" placeholder="Prénom ou nom…" autocomplete="off"></label>
-            <div class="span-2" id="grave-person-results"><p>Saisis au moins deux caractères.</p></div>
-            <p class="span-2" id="grave-person-selected" hidden><span></span></p>
+            <div class="pk-host span-2"><span>Personne</span><div class="pk" data-picker="person" id="grave-person-search" data-pk-opts='{"name":"selected_person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="selected_person_id" value=""></div></div>
         </div>
         <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Ajouter</button></div>
     </form>
@@ -356,7 +352,6 @@ header('X-Content-Type-Options: nosniff');
         <div class="modal-head"><div><span class="eyebrow">ÉVÉNEMENT</span><h2 id="event-dialog-title">Ajouter un événement</h2></div><button class="icon-button" value="cancel">×</button></div>
         <input type="hidden" name="id">
         <input type="hidden" name="person_id">
-        <input type="hidden" name="place_id">
         <input type="hidden" name="precise_lat">
         <input type="hidden" name="precise_lon">
         <input type="hidden" name="work_fields">
@@ -390,8 +385,7 @@ header('X-Content-Type-Options: nosniff');
             <label>Équivalence automatique<input name="date_converted" readonly placeholder="Calculée si la date est reconnue"></label>
             <label>Date alternative / équivalence<input name="date_alternative" placeholder="Note manuelle, autre lecture…"></label>
             <label>Titre ou précision<input name="title"></label>
-            <label>Lieu<input name="place_name" placeholder="Saint-Amand-Montrond" autocomplete="off" data-place-autocomplete></label>
-            <label>Pays<input name="country" value="France"></label>
+            <div class="pk-host span-2"><span>Lieu</span><div data-place-picker><div class="pk" data-picker="place" data-pk-opts='{"name":"place_id","kind":"place","multiple":false,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="place_id" value=""></div></div><input type="hidden" name="place_name"><input type="hidden" name="country" value="France"></div>
             <label>Adresse<input name="address" placeholder="ex. 12 rue de l'Église" autocomplete="off"></label>
             <label>Informations complémentaires<input name="extra_info" placeholder="précisions sur le lieu, l'adresse…" autocomplete="off"></label>
             <div class="span-2 former-place-toggle-wrap">
@@ -411,7 +405,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="dialog-labels-block" id="event-sponsors-section" hidden><span class="section-label">Parrain/Marraine</span><div id="event-sponsors-block"><div id="event-sponsors-list"></div><button type="button" class="button small secondary" id="add-sponsor-btn">+ Ajouter un parrain / une marraine</button></div></div>
         <div class="dialog-labels-block"><span class="section-label">Témoins</span><div id="event-witnesses-block"><div id="event-witnesses-list"></div><button type="button" class="button small secondary" id="add-witness-btn">+ Ajouter un témoin</button></div></div>
         <div class="dialog-labels-block"><span class="section-label">Étiquettes</span><div id="event-label-picker"></div></div>
-        <div class="dialog-labels-block event-confidence-block"><span class="section-label">Fiabilité du fait</span><div class="event-confidence-grid"><label>Niveau de confiance<select name="fact_confidence"><option value="unknown">Non évalué</option><option value="certain">Certain</option><option value="deduced">Déduit</option><option value="estimated">Estimé</option><option value="doubt">Doute</option></select></label><label>Origine / raisonnement<div class="place-input-wrap event-confidence-origin-wrap"><input name="confidence_origin" id="event-confidence-origin" placeholder="Ex. âge indiqué au mariage de son frère…" autocomplete="off"><div id="event-confidence-person-suggestions" class="place-suggestions" hidden></div></div><small class="form-help">Commence un prénom ou un nom à la fin de la phrase pour le compléter.</small></label><div class="span-2 event-confidence-media-field"><label for="event-confidence-media">Média de preuve <small>(facultatif)</small></label><label class="event-confidence-media-person">Recherche par personne <small>(facultatif)</small><div class="place-input-wrap"><input id="event-confidence-media-person-search" placeholder="Limiter aux médias d’une personne…" autocomplete="off"><div id="event-confidence-media-person-suggestions" class="place-suggestions" hidden></div></div></label><small class="form-help" id="event-confidence-media-scope-help">Laisse vide pour chercher dans tous les médias de la généalogie.</small><div class="place-input-wrap"><input id="event-confidence-media-search" placeholder="Rechercher un acte, une personne, une cote…" autocomplete="off"><div id="event-confidence-media-suggestions" class="place-suggestions" hidden></div></div><select name="confidence_media_id" id="event-confidence-media"><option value="">Aucun média précis</option></select><small class="form-help">Le lien déjà présent sur une autre fiche est conservé.</small></div></div></div>
+        <div class="dialog-labels-block event-confidence-block"><span class="section-label">Fiabilité du fait</span><div class="event-confidence-grid"><label>Niveau de confiance<select name="fact_confidence"><option value="unknown">Non évalué</option><option value="certain">Certain</option><option value="deduced">Déduit</option><option value="estimated">Estimé</option><option value="doubt">Doute</option></select></label><label>Origine / raisonnement<div class="place-input-wrap event-confidence-origin-wrap"><input name="confidence_origin" id="event-confidence-origin" placeholder="Ex. âge indiqué au mariage de son frère…" autocomplete="off"><div id="event-confidence-person-suggestions" class="place-suggestions" hidden></div></div><small class="form-help">Commence un prénom ou un nom à la fin de la phrase pour le compléter.</small></label><div class="span-2 event-confidence-media-field pk-host"><span>Média de preuve <small>(facultatif)</small></span><div class="pk" data-picker="media" id="event-confidence-media" data-pk-opts='{"name":"confidence_media_id","kind":"media","multiple":false,"placeholder":"Acte, photo, document… (titre ou nom du fichier)","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="confidence_media_id" value=""></div><small class="form-help">Le lien déjà présent sur une autre fiche est conservé.</small></div></div></div>
         <div class="modal-actions"><button type="button" class="button secondary" id="open-event-type">Nouveau type</button><span class="spacer"></span><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="event-submit">Ajouter</button></div>
     </form>
 </dialog>
@@ -589,9 +583,7 @@ header('X-Content-Type-Options: nosniff');
         <div class="form-grid one-column">
             <label>Utiliser<select name="entry_mode"><option value="existing">Une personne existante</option><option value="new">Créer une nouvelle personne</option><option value="none">Aucun</option><option value="none_suspected">Aucun suspecté</option></select></label>
             <div id="relation-existing-fields">
-                <label>Rechercher par prénom ou nom<input id="relation-search" autocomplete="off" placeholder="Commence à saisir un nom…"></label>
-                <div class="relation-results" id="relation-results"><p>Saisis au moins deux caractères.</p></div>
-                <input type="hidden" name="related_id">
+                <div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="relation-search" data-pk-opts='{"name":"related_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="related_id" value=""></div></div>
             </div>
             <div id="relation-new-fields" hidden>
                 <div class="relation-new-grid"><label>Prénom<input name="new_first_name"></label><label>Nom<input name="new_last_name"></label></div>
@@ -604,7 +596,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <dialog class="modal" id="investigation-dialog">
-    <form method="dialog" id="investigation-form"><div class="modal-head"><div><span class="eyebrow">ENQUÊTE GÉNÉALOGIQUE</span><h2 id="investigation-dialog-title">Nouvelle enquête</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="id"><input type="hidden" name="person_id"><input type="hidden" name="additional_persons" id="investigation-extra-persons"><input type="hidden" name="linked_battues" id="investigation-linked-battues"><div class="form-grid"><label class="span-2">Ce que je cherche<input name="title" required placeholder="Retrouver l’acte de mariage…"></label><label class="span-2">Question précise<textarea name="question" rows="3"></textarea></label><label class="span-2">Ce que je sais déjà<textarea name="known_facts" rows="4"></textarea></label><label class="span-2">Documents déjà disponibles<textarea name="documents" rows="4"></textarea></label><label>État<select name="status"><option value="open">En cours</option><option value="paused">En pause</option><option value="closed">Terminée</option></select></label></div><div class="investigation-extra-persons-section"><div class="investigation-extra-persons-header"><span>Personne principale de l’enquête</span><small>L’enquête est rangée dans sa fiche. Tu peux en choisir une autre.</small></div><div id="investigation-main-person" style="margin-bottom:.5rem"></div><div class="place-input-wrap" style="position:relative"><input id="investigation-main-person-search" autocomplete="off" placeholder="Changer de personne principale…"><div class="place-suggestions" id="investigation-main-person-suggestions" hidden></div></div></div><div class="investigation-extra-persons-section"><div class="investigation-extra-persons-header"><span>Personnes supplémentaires dans l’enquête</span><small>En plus de la personne principale, tu peux y associer d’autres personnes (ex. : les deux mariés d’un acte).</small></div><div id="investigation-extra-persons-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.5rem;min-height:0"></div><div class="place-input-wrap" style="position:relative"><input id="investigation-extra-person-search" autocomplete="off" placeholder="Ajouter une personne…"><div class="place-suggestions" id="investigation-extra-person-suggestions" hidden></div></div></div><div class="investigation-extra-persons-section"><div class="investigation-extra-persons-header"><span>Battues liées</span><small>Associe une ou plusieurs battues à cette enquête.</small></div><div id="investigation-linked-battues-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.5rem;min-height:0"></div><div class="place-input-wrap" style="position:relative"><input id="investigation-battue-search" autocomplete="off" placeholder="Ajouter une battue…"><div class="place-suggestions" id="investigation-battue-suggestions" hidden></div></div></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Enregistrer</button></div></form>
+    <form method="dialog" id="investigation-form"><div class="modal-head"><div><span class="eyebrow">ENQUÊTE GÉNÉALOGIQUE</span><h2 id="investigation-dialog-title">Nouvelle enquête</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="id"><input type="hidden" name="person_id"><input type="hidden" name="additional_persons" id="investigation-extra-persons"><div class="form-grid"><label class="span-2">Ce que je cherche<input name="title" required placeholder="Retrouver l’acte de mariage…"></label><label class="span-2">Question précise<textarea name="question" rows="3"></textarea></label><label class="span-2">Ce que je sais déjà<textarea name="known_facts" rows="4"></textarea></label><label class="span-2">Documents déjà disponibles<textarea name="documents" rows="4"></textarea></label><label>État<select name="status"><option value="open">En cours</option><option value="paused">En pause</option><option value="closed">Terminée</option></select></label></div><div class="investigation-extra-persons-section"><div class="investigation-extra-persons-header"><span>Personnes de l’enquête</span><small>L’enquête est rangée dans la fiche de la personne principale. Ajoute les autres (ex. : les deux mariés d’un acte) en principales ou en secondaires.</small></div><div id="investigation-people"></div></div><div class="investigation-extra-persons-section"><div class="investigation-extra-persons-header"><span>Battues liées</span><small>Associe une ou plusieurs battues à cette enquête.</small></div><div class="pk" data-picker="battue" id="investigation-battue-search" data-pk-opts='{"name":"linked_battues","kind":"battue","multiple":true,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="linked_battues" value=""></div></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Enregistrer</button></div></form>
 </dialog>
 <dialog class="modal" id="battue-dialog">
     <form method="dialog" id="battue-form">
@@ -612,42 +604,34 @@ header('X-Content-Type-Options: nosniff');
         <input type="hidden" name="id">
         <input type="hidden" name="start_insee_code">
         <input type="hidden" name="linked_persons" id="battue-linked-persons">
-        <input type="hidden" name="linked_investigations" id="battue-linked-investigations">
         <div class="form-grid">
             <label>Titre<input id="battue-title" name="title" required placeholder="Naissance de Jean Dupont"></label>
             <label>Type de recherche<select name="target_type"></select></label>
             <label class="span-2">Ce que l'on cherche<input name="target_text" placeholder="Nom, personne, couple, événement…"></label>
-            <label class="span-2">Commune de départ
-                <div class="place-input-wrap">
-                    <input id="battue-commune-search" autocomplete="off" placeholder="Tape pour chercher une commune française…">
-                    <div class="place-suggestions" id="battue-commune-suggestions" hidden></div>
-                </div>
-            </label>
+            <div class="pk-host span-2"><span>Commune de départ <small>(commune française)</small></span><div class="pk" data-picker="place" id="battue-commune-search" data-pk-opts='{"name":"battue_commune_pick","kind":"place","multiple":false,"placeholder":"Commune française…","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="battue_commune_pick" value=""></div></div>
             <label>Niveaux à générer<select name="max_level"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></label>
             <label>État<select name="status"><option value="open">En cours</option><option value="paused">En pause</option><option value="closed">Terminée</option></select></label>
             <label class="span-2">Notes<textarea name="notes" rows="3"></textarea></label>
         </div>
         <div class="investigation-extra-persons-section">
             <div class="investigation-extra-persons-header"><span>Personnes liées à la battue</span><small>La battue apparaîtra dans la fiche de chaque personne liée.</small></div>
-            <div id="battue-linked-persons-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.5rem;min-height:0"></div>
-            <div class="place-input-wrap" style="position:relative"><input id="battue-person-search" autocomplete="off" placeholder="Ajouter une personne…"><div class="place-suggestions" id="battue-person-suggestions" hidden></div></div>
+            <div id="battue-person-search"></div>
         </div>
         <div class="investigation-extra-persons-section">
             <div class="investigation-extra-persons-header"><span>Enquêtes liées</span><small>Associe une ou plusieurs enquêtes à cette battue.</small></div>
-            <div id="battue-linked-investigations-list" style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.5rem;min-height:0"></div>
-            <div class="place-input-wrap" style="position:relative"><input id="battue-investigation-search" autocomplete="off" placeholder="Ajouter une enquête…"><div class="place-suggestions" id="battue-investigation-suggestions" hidden></div></div>
+            <div class="pk" data-picker="investigation" id="battue-investigation-search" data-pk-opts='{"name":"linked_investigations","kind":"investigation","multiple":true,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="linked_investigations" value=""></div>
         </div>
         <div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="battue-submit">Créer la battue</button></div>
     </form>
 </dialog>
 <dialog class="modal small-modal" id="investigation-item-dialog">
-    <form method="dialog" id="investigation-item-form"><div class="modal-head"><div><span class="eyebrow" id="investigation-item-eyebrow">PISTE EXPLORÉE</span><h2 id="investigation-item-dialog-title">Ajouter une piste ou une source</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="archive_digest_id"><div class="form-grid one-column"><label>Nature<select name="kind"><option value="lead">Piste</option><option value="link">Lien consulté</option><option value="source">Source</option><option value="document">Document</option><option value="note">Note</option></select></label><label>Intitulé<input name="title" required></label><label>Adresse Internet<input name="url" type="url" placeholder="https://…"></label><label>Conclusion<textarea name="notes" rows="5"></textarea></label><label>Résultat<select name="status"><option value="explored">Explorée</option><option value="promising">Prometteuse</option><option value="to_explore_priority">À explorer (prioritaire)</option><option value="to_explore">À explorer (pas prioritaire)</option><option value="closed">Fermée / écartée</option></select></label><div class="reminder-fields"><label>Rappel<select name="reminder_mode"><option value="none">Aucun rappel</option><option value="on">À faire à cette date</option><option value="before">À faire avant cette date</option><option value="after">À faire après cette date</option></select></label><label>Date du rappel<input name="reminder_due_at" type="date"></label><button type="button" class="button small secondary" id="download-investigation-reminder">Télécharger calendrier</button></div><label>Suivi des registres dépouillés <small>(facultatif)</small><input name="archive_digest_search" autocomplete="off" placeholder="Ex : recensement 1921, Vulaines-sur-Seine…"><div class="relation-results" data-investigation-archive-digest-results></div><small data-investigation-archive-digest-selected></small></label><label>Personnes liées<div id="investigation-item-persons-list" style="display:flex;flex-wrap:wrap;gap:.3rem .4rem;margin-bottom:.4rem;min-height:0"></div><div class="place-input-wrap" style="position:relative"><input id="investigation-item-person-search" autocomplete="off" placeholder="Ajouter une personne…"><div class="place-suggestions" id="investigation-item-person-suggestions" hidden></div></div><input type="hidden" name="linked_person_ids" id="investigation-item-person-ids"></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-submit">Ajouter</button></div></form>
+    <form method="dialog" id="investigation-item-form"><div class="modal-head"><div><span class="eyebrow" id="investigation-item-eyebrow">PISTE EXPLORÉE</span><h2 id="investigation-item-dialog-title">Ajouter une piste ou une source</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="archive_digest_id"><div class="form-grid one-column"><label>Nature<select name="kind"><option value="lead">Piste</option><option value="link">Lien consulté</option><option value="source">Source</option><option value="document">Document</option><option value="note">Note</option></select></label><label>Intitulé<input name="title" required></label><label>Adresse Internet<input name="url" type="url" placeholder="https://…"></label><label>Conclusion<textarea name="notes" rows="5"></textarea></label><label>Résultat<select name="status"><option value="explored">Explorée</option><option value="promising">Prometteuse</option><option value="to_explore_priority">À explorer (prioritaire)</option><option value="to_explore">À explorer (pas prioritaire)</option><option value="closed">Fermée / écartée</option></select></label><div class="reminder-fields"><label>Rappel<select name="reminder_mode"><option value="none">Aucun rappel</option><option value="on">À faire à cette date</option><option value="before">À faire avant cette date</option><option value="after">À faire après cette date</option></select></label><label>Date du rappel<input name="reminder_due_at" type="date"></label><button type="button" class="button small secondary" id="download-investigation-reminder">Télécharger calendrier</button></div><label>Suivi des registres dépouillés <small>(facultatif)</small><input name="archive_digest_search" autocomplete="off" placeholder="Ex : recensement 1921, Vulaines-sur-Seine…"><div class="relation-results" data-investigation-archive-digest-results></div><small data-investigation-archive-digest-selected></small></label><div class="pk-host"><span>Personnes liées</span><div class="pk" data-picker="person" id="investigation-item-person-search" data-pk-opts='{"name":"linked_person_ids","kind":"person","multiple":true,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="linked_person_ids" value=""></div></div></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-submit">Ajouter</button></div></form>
 </dialog>
 <dialog class="modal small-modal" id="investigation-media-dialog">
-    <form method="dialog" id="investigation-media-form"><div class="modal-head"><div><span class="eyebrow">MÉDIA D’ENQUÊTE</span><h2>Associer des médias existants</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><div class="form-grid one-column"><label>Personne<div class="place-input-wrap" style="position:relative"><input name="inv_media_person_name" id="inv-media-person-search" autocomplete="off" placeholder="Commence à saisir un nom…"><div class="place-suggestions" id="inv-media-person-suggestions" hidden></div></div><input type="hidden" name="inv_media_person_id" id="inv-media-person-id"></label><div id="inv-media-preview-wrap" style="display:none;margin:.4rem 0"><div id="inv-media-preview" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start"></div></div><label>Média(s)<select name="media_ids[]" multiple size="8" required></select><small>Maintiens ⌘ pour choisir plusieurs médias. Choisis d’abord une personne pour voir ses médias.</small></label><label>Dossier de l’enquête<select name="folder_id" id="investigation-media-folder"></select></label><label>Piste(s) concernée(s)<select name="item_ids[]" multiple size="6"></select><small>Facultatif : un média peut concerner plusieurs pistes.</small></label><label>Classement<select name="verdict"><option value="interesting">Intéressant</option><option value="rejected">Rejeté</option></select></label><label>Pourquoi ?<textarea name="reason" rows="5" required placeholder="Intéressant car la date indiquée est 1856…"></textarea></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Associer</button></div></form>
+    <form method="dialog" id="investigation-media-form"><div class="modal-head"><div><span class="eyebrow">MÉDIA D’ENQUÊTE</span><h2>Associer des médias existants</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><div class="form-grid one-column"><div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="inv-media-person-search" data-pk-opts='{"name":"inv_media_person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="inv_media_person_id" value=""></div><input type="hidden" name="inv_media_person_name"></div><div id="inv-media-preview-wrap" style="display:none;margin:.4rem 0"><div id="inv-media-preview" style="display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start"></div></div><label>Média(s)<select name="media_ids[]" multiple size="8" required></select><small>Maintiens ⌘ pour choisir plusieurs médias. Choisis d’abord une personne pour voir ses médias.</small></label><label>Dossier de l’enquête<select name="folder_id" id="investigation-media-folder"></select></label><label>Piste(s) concernée(s)<select name="item_ids[]" multiple size="6"></select><small>Facultatif : un média peut concerner plusieurs pistes.</small></label><label>Classement<select name="verdict"><option value="interesting">Intéressant</option><option value="rejected">Rejeté</option></select></label><label>Pourquoi ?<textarea name="reason" rows="5" required placeholder="Intéressant car la date indiquée est 1856…"></textarea></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button">Associer</button></div></form>
 </dialog>
 <dialog class="modal small-modal" id="investigation-item-event-dialog">
-    <form method="dialog" id="investigation-item-event-form"><div class="modal-head"><div><span class="eyebrow">ÉVÉNEMENT D’ENQUÊTE</span><h2>Lier un événement</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="item_id"><input type="hidden" name="person_id" id="investigation-item-event-person-id"><div class="form-grid one-column"><label>Personne<div class="place-input-wrap" style="position:relative"><input id="investigation-item-event-person-search" autocomplete="off" placeholder="Commence à saisir un nom…"><div class="place-suggestions" id="investigation-item-event-person-suggestions" hidden></div></div></label><label>Événement<select name="event_id" id="investigation-item-event-select" size="8" required></select><small>Choisis d’abord une personne pour voir ses événements.</small></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-event-submit">Lier</button></div></form>
+    <form method="dialog" id="investigation-item-event-form"><div class="modal-head"><div><span class="eyebrow">ÉVÉNEMENT D’ENQUÊTE</span><h2>Lier un événement</h2></div><button class="icon-button" value="cancel">×</button></div><input type="hidden" name="investigation_id"><input type="hidden" name="item_id"><div class="form-grid one-column"><div class="pk-host"><span>Personne</span><div class="pk" data-picker="person" id="investigation-item-event-person-search" data-pk-opts='{"name":"person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":false,"roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="person_id" value=""></div></div><label>Événement<select name="event_id" id="investigation-item-event-select" size="8" required></select><small>Choisis d’abord une personne pour voir ses événements.</small></label></div><div class="modal-actions"><button value="cancel" class="button secondary">Annuler</button><button type="submit" value="default" class="button" id="investigation-item-event-submit">Lier</button></div></form>
 </dialog>
 
 <dialog class="modal small-modal" id="view-dialog">
@@ -830,12 +814,11 @@ header('X-Content-Type-Options: nosniff');
 <dialog class="modal" id="census-dialog">
     <form method="dialog" id="census-form">
         <div class="modal-head"><div><span class="eyebrow">RECENSEMENT</span><h2 id="census-dialog-title">Recensement</h2></div><button class="icon-button" value="cancel">×</button></div>
-        <input type="hidden" name="id"><input type="hidden" name="person_id"><input type="hidden" name="year"><input type="hidden" name="is_special" value="0"><input type="hidden" name="place_id"><input type="hidden" name="precise_lat"><input type="hidden" name="precise_lon">
+        <input type="hidden" name="id"><input type="hidden" name="person_id"><input type="hidden" name="year"><input type="hidden" name="is_special" value="0"><input type="hidden" name="precise_lat"><input type="hidden" name="precise_lon">
         <div class="form-grid">
             <label>État<select name="status"><option value="todo">À chercher</option><option value="found">Trouvé</option><option value="not_found">Non trouvé</option><option value="not_born">Pas encore né</option><option value="not_in_france">Pas encore en France</option><option value="dead">Déjà décédé</option></select></label>
             <label>Date précise ou cote<input name="date_text" placeholder="Recensement de 1856, vue 12…"></label>
-            <label>Lieu<input name="place_name" placeholder="Commune" autocomplete="off" data-place-autocomplete></label>
-            <label>Pays<input name="country" value="France"></label>
+            <div class="pk-host span-2"><span>Lieu</span><div data-place-picker><div class="pk" data-picker="place" data-pk-opts='{"name":"place_id","kind":"place","multiple":false,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="place_id" value=""></div></div><input type="hidden" name="place_name"><input type="hidden" name="country" value="France"></div>
             <label class="span-2">Adresse<input name="address" placeholder="Rue, hameau, maison…"></label>
             <div class="span-2 event-precise-block" id="census-precise-block"></div>
             <label>Prénom relevé<input name="census_first_name" autocomplete="off" placeholder="Prénom dans le recensement"></label>
@@ -861,11 +844,9 @@ header('X-Content-Type-Options: nosniff');
 <dialog class="modal small-modal" id="census-member-dialog">
     <form method="dialog" id="census-member-form">
         <div class="modal-head"><div><span class="eyebrow">FOYER</span><h2 id="census-member-dialog-title">Ajouter un membre</h2></div><button class="icon-button" value="cancel">×</button></div>
-        <input type="hidden" name="id"><input type="hidden" name="census_id"><input type="hidden" name="return_person_id"><input type="hidden" name="person_id">
+        <input type="hidden" name="id"><input type="hidden" name="census_id"><input type="hidden" name="return_person_id">
         <div class="form-grid one-column">
-            <label>Fiche existante, si connue<input id="census-member-search" autocomplete="off" placeholder="Prénom, nom, variante…"></label>
-            <div class="relation-results census-member-results" id="census-member-results"><p>Saisis au moins deux caractères.</p></div>
-            <div class="selected-census-person" id="census-member-selected" hidden><span></span><button type="button" class="button small secondary" id="clear-census-member-person">Changer</button></div>
+            <div class="pk-host"><span>Fiche existante, si connue</span><div class="pk" data-picker="person" id="census-member-search" data-pk-opts='{"name":"person_id","kind":"person","multiple":false,"placeholder":"","allowFree":false,"allowCreate":"auto","roles":null,"animals":1,"label":""}' data-pk-value="[]"><input type="hidden" name="person_id" value=""></div></div>
             <label>Prénom relevé<input name="member_first_name" autocomplete="off" placeholder="Prénom dans le recensement"></label>
             <label>Nom relevé<input name="display_name" placeholder="Nom dans le recensement"></label>
             <label>Âge / naissance<input name="age_text"></label>
@@ -1102,79 +1083,79 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=399" defer></script>
-<script src="assets/js/app-picker.js?v=1" defer></script>
+<script src="assets/js/app.js?v=400" defer></script>
+<script src="assets/js/app-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
-<script src="assets/js/app-jeu.js?v=4" defer></script>
-<script src="assets/js/app-chronologie.js?v=5" defer></script>
-<script src="assets/js/app-comparaison.js?v=4" defer></script>
-<script src="assets/js/app-carte.js?v=5" defer></script>
+<script src="assets/js/app-jeu.js?v=5" defer></script>
+<script src="assets/js/app-chronologie.js?v=6" defer></script>
+<script src="assets/js/app-comparaison.js?v=5" defer></script>
+<script src="assets/js/app-carte.js?v=6" defer></script>
 <script src="assets/js/app-enquetes.js?v=4" defer></script>
-<script src="assets/js/app-tableau-de-bord.js?v=4" defer></script>
+<script src="assets/js/app-tableau-de-bord.js?v=5" defer></script>
 <script src="assets/js/app-harmony.js?v=4" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
-<script src="assets/js/app-listes.js?v=7" defer></script>
+<script src="assets/js/app-listes.js?v=8" defer></script>
 <script src="assets/js/app-maintenance.js?v=8" defer></script>
-<script src="assets/js/app-recherche.js?v=5" defer></script>
-<script src="assets/js/app-graphiques.js?v=5" defer></script>
+<script src="assets/js/app-recherche.js?v=6" defer></script>
+<script src="assets/js/app-graphiques.js?v=6" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
-<script src="assets/js/heritage.js?v=18" defer></script>
-<script src="assets/js/heritage-tools.js?v=8" defer></script>
-<script src="assets/js/heritage-links.js?v=10" defer></script>
-<script src="assets/js/heritage-more.js?v=112" defer></script>
-<script src="assets/js/heritage-records.js?v=2" defer></script>
-<script src="assets/js/heritage-research.js?v=21" defer></script>
+<script src="assets/js/heritage.js?v=19" defer></script>
+<script src="assets/js/heritage-tools.js?v=9" defer></script>
+<script src="assets/js/heritage-links.js?v=11" defer></script>
+<script src="assets/js/heritage-more.js?v=113" defer></script>
+<script src="assets/js/heritage-records.js?v=3" defer></script>
+<script src="assets/js/heritage-research.js?v=22" defer></script>
 <script src="assets/js/heritage-av.js?v=9" defer></script>
-<script src="assets/js/heritage-recueil-table.js?v=4" defer></script>
-<script src="assets/js/heritage-recueils.js?v=15" defer></script>
+<script src="assets/js/heritage-recueil-table.js?v=5" defer></script>
+<script src="assets/js/heritage-recueils.js?v=16" defer></script>
 <script src="assets/js/heritage-depouillements.js?v=14" defer></script>
 <script src="assets/js/heritage-addrmap.js?v=6" defer></script>
-<script src="assets/js/heritage-studio-av.js?v=40" defer></script>
-<script src="assets/js/heritage-calendars.js?v=8" defer></script>
-<script src="assets/js/heritage-assemble.js?v=3" defer></script>
+<script src="assets/js/heritage-studio-av.js?v=41" defer></script>
+<script src="assets/js/heritage-calendars.js?v=9" defer></script>
+<script src="assets/js/heritage-assemble.js?v=4" defer></script>
 <script src="assets/js/heritage-columns.js?v=1" defer></script>
 <script src="assets/js/heritage-atelier-widgets.js?v=2" defer></script>
 <script src="assets/js/heritage-voters.js?v=3" defer></script>
-<script src="assets/js/heritage-widgets.js?v=30" defer></script>
-<script src="assets/js/heritage-tabs.js?v=6" defer></script>
+<script src="assets/js/heritage-widgets.js?v=31" defer></script>
+<script src="assets/js/heritage-tabs.js?v=7" defer></script>
 <script src="assets/js/heritage-suggestions.js?v=1" defer></script>
-<script src="assets/js/heritage-employers.js?v=2" defer></script>
-<script src="assets/js/heritage-book.js?v=3" defer></script>
+<script src="assets/js/heritage-employers.js?v=3" defer></script>
+<script src="assets/js/heritage-book.js?v=4" defer></script>
 <script src="assets/js/heritage-layout-facts.js?v=1" defer></script>
-<script src="assets/js/heritage-layout.js?v=28" defer></script>
+<script src="assets/js/heritage-layout.js?v=29" defer></script>
 <script src="assets/js/heritage-edittools.js?v=11" defer></script>
 <script src="assets/js/heritage-editorkeys.js?v=8" defer></script>
-<script src="assets/js/heritage-livrets.js?v=6" defer></script>
-<script src="assets/js/heritage-pets.js?v=16" defer></script>
+<script src="assets/js/heritage-livrets.js?v=7" defer></script>
+<script src="assets/js/heritage-pets.js?v=17" defer></script>
 <script src="assets/js/heritage-board-shapes.js?v=2" defer></script>
 <script src="assets/js/heritage-board-kit.js?v=16" defer></script>
-<script src="assets/js/heritage-boards.js?v=24" defer></script>
+<script src="assets/js/heritage-boards.js?v=25" defer></script>
 <script src="assets/js/heritage-dnd.js?v=8" defer></script>
-<script src="assets/js/heritage-studio.js?v=53" defer></script>
+<script src="assets/js/heritage-studio.js?v=54" defer></script>
 <script src="assets/js/heritage-retouch-simple.js?v=5" defer></script>
-<script src="assets/js/heritage-fiches.js?v=11" defer></script>
+<script src="assets/js/heritage-fiches.js?v=12" defer></script>
 <script src="assets/js/heritage-genealogies.js?v=3" defer></script>
-<script src="assets/js/heritage-periodicals.js?v=5" defer></script>
+<script src="assets/js/heritage-periodicals.js?v=6" defer></script>
 <script src="assets/js/heritage-diagrams-render.js?v=3" defer></script>
-<script src="assets/js/heritage-diagrams.js?v=4" defer></script>
-<script src="assets/js/heritage-vector.js?v=14" defer></script>
-<script src="assets/js/heritage-vector-map.js?v=8" defer></script>
-<script src="assets/js/heritage-vector-tree.js?v=6" defer></script>
-<script src="assets/js/heritage-vector-cards.js?v=3" defer></script>
-<script src="assets/js/heritage-vector-seal.js?v=3" defer></script>
+<script src="assets/js/heritage-diagrams.js?v=5" defer></script>
+<script src="assets/js/heritage-vector.js?v=15" defer></script>
+<script src="assets/js/heritage-vector-map.js?v=9" defer></script>
+<script src="assets/js/heritage-vector-tree.js?v=7" defer></script>
+<script src="assets/js/heritage-vector-cards.js?v=5" defer></script>
+<script src="assets/js/heritage-vector-seal.js?v=4" defer></script>
 <script src="assets/js/heritage-research-gaps.js?v=1" defer></script>
-<script src="assets/js/heritage-faces.js?v=3" defer></script>
+<script src="assets/js/heritage-faces.js?v=4" defer></script>
 <script src="assets/js/heritage-lightbox-layout.js?v=2" defer></script>
 <script src="assets/js/heritage-diagram-kinds.js?v=3" defer></script>
-<script src="assets/js/heritage-artist.js?v=5" defer></script>
-<script src="assets/js/heritage-transcribe.js?v=5" defer></script>
-<script src="assets/js/heritage-slideshow.js?v=6" defer></script>
-<script src="assets/js/heritage-keynote.js?v=5" defer></script>
-<script src="assets/js/heritage-house.js?v=13" defer></script>
+<script src="assets/js/heritage-artist.js?v=6" defer></script>
+<script src="assets/js/heritage-transcribe.js?v=6" defer></script>
+<script src="assets/js/heritage-slideshow.js?v=7" defer></script>
+<script src="assets/js/heritage-keynote.js?v=6" defer></script>
+<script src="assets/js/heritage-house.js?v=14" defer></script>
 <script src="assets/js/heritage-house3d.js?v=7" defer></script>
 <script src="assets/js/heritage-house-lib.js?v=4" defer></script>
-<script src="assets/js/heritage-dna.js?v=6" defer></script>
-<script src="assets/js/heritage-press-ads.js?v=4" defer></script>
+<script src="assets/js/heritage-dna.js?v=7" defer></script>
+<script src="assets/js/heritage-press-ads.js?v=5" defer></script>
 <script src="assets/js/museum-viewer.js?v=9" defer></script>
 <script src="assets/js/heritage-museum.js?v=12" defer></script>
 <script>

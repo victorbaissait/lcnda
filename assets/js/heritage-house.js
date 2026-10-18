@@ -14,6 +14,9 @@
     const A = () => window.LCNDA_APP;
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
     const api = (...a) => A().api(...a);
+    // 🔍 menu de choix unique (assets/js/app-picker.js) ; pkItems : les choses choisies dans un champ (avec leur nom)
+    const PK = () => window.LCNDA_PICKER || A();
+    const pkItems = el => { let v = []; try { v = JSON.parse(el?.dataset.pkValue || '[]'); } catch (_) {} return (Array.isArray(v) ? v : []).filter(it => it && !it.free && it.id); };
     const post = (action, body) => api(action, {}, {method: 'POST', body});
     const toast = (...a) => A().toast(...a);
     const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -323,7 +326,7 @@
                 const chips = [...(m.people || []).map(p => `<button type="button" class="h-hs-chip" data-hs-popen="${p.id}" title="Habitant${p.role ? ` : ${esc(p.role)}` : ''} — ouvrir la fiche">👤 ${esc(p.label)}</button>`), ...roomP.map(p => `<button type="button" class="h-hs-chip" data-hs-popen="${p.id}" title="Liée à la pièce « ${esc(p.room)} » — ouvrir la fiche">🕯 ${esc(p.label)}</button>`),
                     ...cs.map((c, i) => `<button type="button" class="h-hs-chip is-census" data-hs-copen="${i}" title="${esc(c.label)}${c.ver ? ` — époque : ${esc(verName((H.versions || []).find(v => v.id === c.ver) || {}))}` : ''} — ouvrir la fiche où il est">📋 ${esc(c.short || c.label)}</button>`)];
                 pane.innerHTML = `<div class="h-hs-form"><h4>🔗 Rattachée à</h4><div class="h-hs-links">${chips.join('') || '<span class="muted">Rien pour l’instant : ajoute des habitants et des recensements (plus bas).</span>'}</div>
-                    <label>Lieu<input type="search" data-hs-placeq value="${esc(placeText)}" placeholder="Commune, hameau, adresse…" autocomplete="off"></label><div data-hs-placeres class="h-hs-res"></div>
+                    <div data-hs-placepk><span class="pk-lab">Lieu</span>${PK().pickerField({name: 'hs_place', kind: 'place', allowFree: true, value: placeId ? {id: placeId, title: placeText || `#${placeId}`, name: String(placeText || '').split(',')[0] || `#${placeId}`} : placeText ? 'txt:' + placeText : null})}</div>
                     <label>Époque (en quelques mots)<input data-hs-m="period" value="${esc(period)}" placeholder="ex. 1850 – 1930"></label>
                     <h4>👥 Les habitants</h4><ul class="h-hs-people">${(m.people || []).map((p, i) => `<li><button type="button" class="link-button" data-hs-popen="${p.id}">${esc(p.label)}</button><input data-hs-prole="${i}" value="${esc(p.role || '')}" placeholder="rôle, années (né ici, 1880–1920…)"><button type="button" class="icon-button" data-hs-pdel="${i}" title="Retirer">×</button></li>`).join('') || '<li class="muted">Personne pour l’instant.</li>'}</ul>
                     <button type="button" class="button small secondary" data-hs-cmd="addpeople">＋ Un habitant…</button>
@@ -432,20 +435,18 @@
             const who = r => (r.members || []).map(x => [x.first_name, x.last_name].filter(Boolean).join(' ') || x.display_name).filter(Boolean);
             const mineR = r => (r.members || []).some(x => pids.has(+x.person_id)), vl = verList(), picked = new Set();
             ext.openDialog({eyebrow: 'MAISON', title: '＋ Un recensement', submitLabel: 'Rattacher', wide: true,
-                body: `<input type="search" class="h-hs-cq" data-q placeholder="Chercher : nom, commune, rue, année…" autocomplete="off"><div class="h-hs-cres" data-res><p class="muted">Chargement…</p></div>
+                body: `<span class="pk-lab">Recensements à rattacher</span><div class="h-pk-solo">${PK().pickerField({name: 'hs_census', kind: 'census', multiple: true})}</div><p class="muted small" data-hs-chint></p>
                     <div class="form-grid"><label class="checkbox-line"><input type="checkbox" name="addp" checked> Ajouter aussi les personnes du foyer comme habitants</label>${vl.length ? `<label>À l’époque<select name="ver"><option value="">— aucune —</option>${vl.map(v => `<option value="${esc(v.id)}" ${v === verCur() ? 'selected' : ''}>🕰 ${esc(verName(v))}</option>`).join('')}</select></label>` : ''}</div>`,
                 onOpen: async dg => {
-                    const res = dg.querySelector('[data-res]'), q = dg.querySelector('[data-q]');
-                    const draw = () => { const words = norm(q.value).split(/\s+/).filter(Boolean); let l = rows.filter(r => !m.census.some(c => +c.id === +r.id));
-                        l = words.length ? l.filter(r => { const t = norm(`${r.year} ${r.place || ''} ${r.address || ''} ${who(r).join(' ')}`); return words.every(w => t.includes(w)); }) : [...l.filter(mineR), ...l.filter(r => !mineR(r))];
-                        res.innerHTML = (l.slice(0, 80).map(r => `<label class="h-hs-crow"><input type="checkbox" value="${r.id}" ${picked.has(+r.id) ? 'checked' : ''}><span><b>${esc(lab(r).label)}</b><small class="muted">${esc(who(r).slice(0, 6).join(', '))}${who(r).length > 6 ? '…' : ''}${mineR(r) ? ' · 🏠 un habitant y est' : ''}</small></span></label>`).join('')
-                            || `<p class="muted">${rows.length ? 'Aucun recensement ne correspond.' : 'Aucun recensement dans l’arbre pour l’instant (il se note dans la fiche d’une personne, bloc Recensements).'}</p>`) + (l.length > 80 ? '<p class="muted">… affine la recherche pour voir les autres.</p>' : ''); };
-                    res.addEventListener('change', e => { const n = +e.target.value; if (e.target.checked) picked.add(n); else picked.delete(n); });
-                    q.addEventListener('input', draw); setTimeout(() => q.focus(), 30);
-                    try { rows = (await api('census_households', {})).records || []; } catch (e) { res.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; } draw(); },
-                onSubmit: f => { if (!picked.size) { toast('Coche au moins un recensement.', 'error'); return false; }
+                    // le menu de choix unique (sorte census) ; les foyers (habitants) viennent de census_households
+                    const field = dg.querySelector('.pk'), hint = dg.querySelector('[data-hs-chint]');
+                    setTimeout(() => field.querySelector('.pk-input')?.focus(), 30);
+                    field.addEventListener('picker-change', e => { picked.clear(); (e.detail.items || []).forEach(it => { if (it.id && !m.census.some(c => +c.id === +it.id)) picked.add(+it.id); else if (it.id) toast(`${it.title} est déjà rattaché.`); });
+                        hint.textContent = [...picked].map(cid => { const r = rows.find(x => +x.id === cid); return r ? who(r).slice(0, 6).join(', ') + (mineR(r) ? ' · 🏠 un habitant y est' : '') : ''; }).filter(Boolean).join(' — '); });
+                    try { rows = (await api('census_households', {})).records || []; } catch (e) { hint.textContent = e.message; } },
+                onSubmit: f => { if (!picked.size) { toast('Choisis au moins un recensement.', 'error'); return false; }
                     const ver = f.elements.ver?.value || '', addp = f.elements.addp.checked; let np = 0;
-                    picked.forEach(cid => { const r = rows.find(x => +x.id === cid); if (!r) return; const pr = (r.members || []).find(x => +x.is_primary && +x.person_id) || (r.members || []).find(x => +x.person_id);
+                    picked.forEach(cid => { const r = rows.find(x => +x.id === cid) || {id: cid, year: '', members: []}; if (!r.year) { const it = pkItems(f.querySelector('.pk')).find(x => +x.id === cid); if (it) { m.census.push({id: cid, label: String(it.title).slice(0, 200), short: String(it.title).replace(/^Recensement /, '').slice(0, 120), pid: 0, ...(ver ? {ver} : {})}); return; } } const pr = (r.members || []).find(x => +x.is_primary && +x.person_id) || (r.members || []).find(x => +x.person_id);
                         m.census.push({id: cid, ...lab(r), pid: pr ? +pr.person_id : 0, ...(ver ? {ver} : {})});
                         if (addp) (r.members || []).forEach(x => { const pid = +x.person_id; if (!pid || (m.people || []).some(p => +p.id === pid)) return; m.people = [...(m.people || []), {id: pid, label: [x.first_name, x.last_name].filter(Boolean).join(' ') || x.display_name || 'Personne', role: [x.household_position, r.year].filter(Boolean).join(', ').slice(0, 200)}]; np++; }); });
                     tab = 'house'; commit(`${picked.size} recensement${picked.size > 1 ? 's' : ''} rattaché${picked.size > 1 ? 's' : ''}`); badge(); if (np) toast(`${np} habitant${np > 1 ? 's' : ''} ajouté${np > 1 ? 's' : ''} depuis le recensement.`); }});
@@ -603,9 +604,9 @@
         /* ─── les commandes ─── */
         const placeItem = (base) => { const f = F(), r = stage.getBoundingClientRect(), x = (r.width / 2 - panX) / zoom, y = (r.height / 2 - panY) / zoom, g = H.grid || 10; const it = {id: uid('i'), x: Math.round(x / g) * g, y: Math.round(y / g) * g, rot: 0, ...base}; f.items.push(it); sel = {type: 'item', id: it.id}; setTool('select'); tab = 'props'; commit(`${it.name || libOf(it.kind)?.[1] || 'Objet'} posé`); };
         const pickPerson = title => new Promise(res => { let done = false;
-            ext.openDialog({eyebrow: 'MAISON', title, submitLabel: 'Ajouter', body: `<label>Personne${A().collectionPersonField('hs_pick', null, 'Nom, prénom…')}</label>`,
-                onOpen: dg => { setTimeout(() => dg.querySelector('[data-cp-input]')?.focus(), 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
-                onSubmit: f => { const id = Number(f.elements.hs_pick?.value) || 0; if (!id) { toast('Choisis une personne.', 'error'); return false; } done = true; res({id, label: f.querySelector('[data-cp-input]').value}); }}); });
+            ext.openDialog({eyebrow: 'MAISON', title, submitLabel: 'Ajouter', body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${PK().pickerField({name: 'hs_pick', kind: 'person'})}</div>`,
+                onOpen: dg => { setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30); dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
+                onSubmit: f => { const it = pkItems(f.querySelector('.pk'))[0]; if (!it) { toast('Choisis une personne.', 'error'); return false; } done = true; res({id: Number(it.id), label: it.title || ''}); }}); });
         async function import3d() {
             const inp = Object.assign(document.createElement('input'), {type: 'file', accept: '.obj,.stl,.glb,.gltf,.mtl', multiple: true});
             inp.onchange = async () => {
@@ -729,13 +730,23 @@
             if (d.hsVedit) { const v = (H.versions || []).find(q => q.id === d.hsVedit); if (v) verDialog(v); return; }
             if (d.hsVdel) { stopPlay(); delVer(d.hsVdel); return; }
             if (d.hsRpdel !== undefined) { const rm = F().rooms.find(q => q.id === sel?.id); rm?.people?.splice(Number(d.hsRpdel), 1); return commit('Personne retirée'); }
-            if (d.hsPlace !== undefined) { const p = pane.querySelector('[data-hs-placeres]')._rows[Number(d.hsPlace)]; placeId = Number(p.id) || 0; placeText = p.name + (p.detail ? `, ${p.detail}` : ''); if (name === 'Maison de famille') { name = `Maison de ${p.name}`; $('[data-hs-name]').value = name; } pane.querySelector('[data-hs-placeres]').innerHTML = ''; dirty = true; paintSide(); return; }
         });
         dlg.addEventListener('dblclick', e => { const b = e.target.closest('[data-hs-floor]'); if (!b) return; const f = H.floors[Number(b.dataset.hsFloor)]; A().askText({title: 'Renommer l’étage', value: f.name, okLabel: 'Renommer'}).then(n => { if (n?.trim()) { f.name = n.trim().slice(0, 60); commit('Étage renommé'); } }); });
         let tmr = 0;
         // 👻 calque d'un autre étage : la liste (en haut ou dans l'onglet Étage) et sa transparence
         dlg.addEventListener('change', e => { const el = e.target; if (el.matches?.('[data-hs-ver]')) { stopPlay(); const v0 = el.value; if (v0 === '__new' || v0 === '__manage') { paintVers(); CMD[v0 === '__new' ? 'vernew' : 'vers'](); } else switchVer(v0); return; } if (!el.matches?.('[data-hs-ghost]')) return; F().ghost = el.value; delete F().showBelow; later('Calque'); render(); });
         dlg.addEventListener('input', e => { const el = e.target; if (!el.matches?.('[data-hs-ghostop]')) return; H.ghostOp = Number(el.value) / 100; dirty = true; render(); });
+        // le lieu de la maison : le menu de choix unique (un lieu de la base, ou un texte gardé tel quel) → place_id + place_text
+        pane.addEventListener('picker-change', async e => {
+            if (!e.target.closest('[data-hs-placepk]')) return;
+            const it = e.detail.item; dirty = true;
+            if (!it) { placeId = 0; placeText = ''; return; }
+            if (it.free) { placeId = 0; placeText = it.title; return; }
+            const nm = String(it.name || it.title).replace(/\s*\(.*\)$/, '');
+            placeId = Number(it.id) || 0; placeText = [nm, it.short].filter(Boolean).join(', ');
+            try { const c = await ext.placeCoords?.(it); if (c?.text) placeText = c.text; } catch (_) {} // « Tulle, Corrèze, France », comme avant
+            if (name === 'Maison de famille') { name = `Maison de ${nm}`; $('[data-hs-name]').value = name; }
+        });
         pane.addEventListener('input', e => {
             const el = e.target, f = F(), v = el.type === 'checkbox' ? el.checked : el.value;
             if (el.matches('[data-hs-libq]')) { libQ = el.value; clearTimeout(tmr); tmr = setTimeout(() => { const p0 = el.selectionStart; el.blur(); paintSide(); /* le champ quitté le temps de redessiner (sinon le panneau ne bouge pas pendant la frappe) */ const i = pane.querySelector('[data-hs-libq]'); i.focus(); i.setSelectionRange(p0, p0); }, 200); return; }
@@ -746,7 +757,6 @@
             if (el.dataset.hsM) { if (el.dataset.hsM === 'period') period = v; else H.meta[el.dataset.hsM] = v; dirty = true; return; }
             if (el.dataset.hsProle !== undefined) { H.meta.people[Number(el.dataset.hsProle)].role = v; dirty = true; return; }
             if (el.dataset.hsCver !== undefined) { const c = H.meta.census[Number(el.dataset.hsCver)]; if (v) c.ver = v; else delete c.ver; badge(); later('Recensement rattaché à l’époque'); return; }
-            if (el.matches('[data-hs-placeq]')) { placeText = el.value; placeId = 0; dirty = true; clearTimeout(tmr); tmr = setTimeout(async () => { const rows = ((await api('board_place_search', {q: el.value.trim()}).catch(() => ({places: []}))).places || []), box = pane.querySelector('[data-hs-placeres]'); box._rows = rows; box.innerHTML = rows.map((p, i) => `<button type="button" class="link-button" data-hs-place="${i}">📍 ${esc(p.name)} <small class="muted">${esc(p.detail || '')}</small></button>`).join(''); }, 250); return; }
             if (el.dataset.hsP && sel) {
                 if (sel.type === 'wall' && ['len', 'ang', 'ax', 'ay', 'bx', 'by'].includes(el.dataset.hsP) && !el._geo) return; // la géométrie d'un mur : appliquée une fois la valeur finie (sinon les coins voisins se décrochent en cours de frappe)
                 const k = el.dataset.hsP, o = sel.type === 'wall' ? f.walls.find(q => q.id === sel.id) : sel.type === 'room' ? f.rooms.find(q => q.id === sel.id) : sel.type === 'item' ? f.items.find(q => q.id === sel.id) : sel.type === 'opening' ? f.openings.find(q => q.id === sel.id) : sel.type === 'label' ? f.labels.find(q => q.id === sel.id) : null; if (!o) return;
@@ -844,25 +854,25 @@
         const form = dlg2.querySelector('#census-form'); if (!form) return;
         let box = dlg2.querySelector('[data-hs-cbox]');
         if (!box) { box = document.createElement('div'); box.className = 'dialog-labels-block h-hs-cbox'; box.dataset.hsCbox = '1'; (dlg2.querySelector('#census-dialog-household-block') || form.querySelector('.modal-actions'))?.after(box);
-            box.addEventListener('click', e => censusBoxClick(e, box)); box.addEventListener('change', e => { if (e.target.matches('[data-hs-cbh]')) censusVerSel(box); }); }
+            box.addEventListener('click', e => censusBoxClick(e, box)); box.addEventListener('picker-change', e => { if (!e.target.closest('[data-hs-cbh]')) return; const it = e.detail.item; box._hid = it && !(box._linked || []).some(l => l.id === Number(it.id)) ? Number(it.id) : 0; if (it && !box._hid) toast('Cette maison est déjà rattachée.'); censusVerSel(box); }); }
         const cid = Number(form.elements.id?.value) || 0; box.dataset.cid = String(cid);
         if (!cid) { box.innerHTML = '<span class="section-label">🏠 Maison</span><p class="muted">Enregistre d’abord le recensement : tu pourras ensuite lui rattacher la maison où vivait le foyer (et l’époque de la maison).</p>'; return; }
         box.innerHTML = '<span class="section-label">🏠 Maison</span><p class="muted">…</p>';
         let linked = [], all = []; try { [linked, all] = await Promise.all([api('house_links', {census_id: cid}).then(r => r.items || []), api('houses').then(r => r.items || [])]); } catch (e) { box.innerHTML = `<span class="section-label">🏠 Maison</span><p class="muted">${esc(e.message)}</p>`; return; }
-        if (Number(box.dataset.cid) !== cid) return; box._all = all;
+        if (Number(box.dataset.cid) !== cid) return; box._all = all; box._linked = linked; box._hid = 0;
         const free = all.filter(h => !linked.some(l => l.id === h.id));
         box.innerHTML = `<span class="section-label">🏠 Maison</span>${linked.map(h => `<div class="h-hs-cbrow">${h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span class="h-hs-cbico">🏠</span>'}<div><b>${esc(h.name)}</b><small class="muted">${esc([h.place, h.ver_label ? `🕰 époque : ${h.ver_label}` : (h.versions ? 'aucune époque choisie' : '')].filter(Boolean).join(' · '))}</small></div><button type="button" class="button small" data-hs-cbopen="${h.id}" data-ver="${esc(h.ver || '')}">🏠 Ouvrir la maison</button><button type="button" class="icon-button" data-hs-cbdel="${h.id}" title="Détacher la maison de ce recensement">×</button></div>`).join('')}
-            <div class="h-hs-cbadd">${free.length ? `<select data-hs-cbh aria-label="Maison à rattacher"><option value="">— rattacher une maison —</option>${free.map(h => `<option value="${h.id}">${esc(h.name)}${h.place ? ` · ${esc(h.place)}` : ''}</option>`).join('')}</select><select data-hs-cbv aria-label="Époque de la maison" hidden></select><button type="button" class="button small secondary" data-hs-cbadd>＋ Rattacher</button>` : ''}<button type="button" class="button small secondary" data-hs-cbnew title="Dessiner la maison de ce foyer">＋ Nouvelle maison</button></div>
+            <div class="h-hs-cbadd">${free.length ? `<div class="h-hs-cbpick" data-hs-cbh>${PK().pickerField({name: 'hs_cb_house', kind: 'house', placeholder: 'Rattacher une maison : nom, lieu…'}).replace(' name="hs_cb_house"', '')}</div><select data-hs-cbv aria-label="Époque de la maison" hidden></select><button type="button" class="button small secondary" data-hs-cbadd>＋ Rattacher</button>` : ''}<button type="button" class="button small secondary" data-hs-cbnew title="Dessiner la maison de ce foyer">＋ Nouvelle maison</button></div>
             <small class="muted">Rattachée tout de suite (sans attendre « Enregistrer »). Dans la maison : onglet Maison → « 📋 Les recensements ».</small>`;
     }
-    function censusVerSel(box) { const h = (box._all || []).find(x => x.id === Number(box.querySelector('[data-hs-cbh]')?.value)), sel2 = box.querySelector('[data-hs-cbv]'), v = h?.links?.versions || []; if (!sel2) return; sel2.hidden = !v.length; sel2.innerHTML = `<option value="">— époque de la maison —</option>${v.map(x => `<option value="${esc(x.id)}">🕰 ${esc([x.date, x.label].filter(Boolean).join(' · '))}</option>`).join('')}`; }
+    function censusVerSel(box) { const h = (box._all || []).find(x => x.id === Number(box._hid)), sel2 = box.querySelector('[data-hs-cbv]'), v = h?.links?.versions || []; if (!sel2) return; sel2.hidden = !v.length; sel2.innerHTML = `<option value="">— époque de la maison —</option>${v.map(x => `<option value="${esc(x.id)}">🕰 ${esc([x.date, x.label].filter(Boolean).join(' · '))}</option>`).join('')}`; }
     async function censusBoxClick(e, box) {
         const b = e.target.closest('button'); if (!b) return; const cid = Number(box.dataset.cid), dlg2 = box.closest('dialog');
         const leave = async () => { if (censusDirty && !await A().confirmBox('Le recensement a des changements non enregistrés.', {title: 'Ouvrir la maison quand même ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dlg2.close(); return true; };
         try {
             if (b.dataset.hsCbopen) { if (!await leave()) return; return open({id: Number(b.dataset.hsCbopen), ver: b.dataset.ver || '', onClose: () => ext.refreshView?.()}); }
             if (b.dataset.hsCbdel) { await post('house_link', {house_id: Number(b.dataset.hsCbdel), census_id: cid, on: false}); toast('Maison détachée du recensement.'); return censusHouseBox(dlg2); }
-            if (b.hasAttribute('data-hs-cbadd')) { const hid = Number(box.querySelector('[data-hs-cbh]')?.value); if (!hid) return toast('Choisis une maison.', 'error'); await post('house_link', {house_id: hid, census_id: cid, ver: box.querySelector('[data-hs-cbv]')?.value || '', on: true}); toast('Maison rattachée au recensement.'); return censusHouseBox(dlg2); }
+            if (b.hasAttribute('data-hs-cbadd')) { const hid = Number(box._hid) || 0; if (!hid) return toast('Choisis une maison.', 'error'); await post('house_link', {house_id: hid, census_id: cid, ver: box.querySelector('[data-hs-cbv]')?.value || '', on: true}); toast('Maison rattachée au recensement.'); return censusHouseBox(dlg2); }
             if (b.hasAttribute('data-hs-cbnew')) { if (!await leave()) return; const f = dlg2.querySelector('#census-form'), yr = f?.elements.year?.value || '', place = f?.elements.place_name?.value || '';
                 const addr = f?.elements.address?.value || '', pl0 = place.split(',')[0].trim(), census = {id: cid, label: `Recensement ${yr}${pl0 ? ` · ${pl0}` : ''}${addr ? ` · ${addr}` : ''}`.slice(0, 200), short: `${yr}${pl0 || addr ? ` · ${pl0 || addr}` : ''}`.slice(0, 120), pid: Number(f?.elements.person_id?.value) || 0};
                 return open({onClose: () => ext.refreshView?.(), preset: {name: pl0 ? `Maison de ${pl0}` : 'Maison de famille', placeText: place, period: yr, census}}); }

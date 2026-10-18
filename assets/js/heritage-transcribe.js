@@ -260,8 +260,8 @@
         function linkPerson(i) {
             const p = t.data.people[i];
             ext.openDialog({eyebrow: 'TRANSCRIPTION', title: `Relier « ${p.name} » à une fiche`, submitLabel: 'Relier',
-                body: `<label>Personne${A().collectionPersonField('tx_pick', null, 'Nom, prénom…')}</label>`,
-                onOpen: dg => { const q = dg.querySelector('[data-cp-input]'); q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input')); }, 30); }, // les fiches du nom lu s’affichent tout de suite
+                body: `<div class="h-pk-solo"><span class="pk-lab">Personne</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'tx_pick', kind: 'person', value: p.person_id || null})}</div>`,
+                onOpen: dg => { const q = dg.querySelector('.pk-search:not([hidden]) .pk-input'); if (!q) return; q.value = p.name; setTimeout(() => { q.focus(); q.dispatchEvent(new Event('input', {bubbles: true})); }, 30); }, // les fiches du nom lu s’affichent tout de suite
                 onSubmit: f => { const chosen = Number(f.elements.tx_pick?.value) || 0; if (!chosen) { toast('Choisis une fiche.', 'error'); return false; } p.person_id = chosen; touch(); paintPeople(); }});
         }
         $('[data-tx-found]').addEventListener('click', async e => {

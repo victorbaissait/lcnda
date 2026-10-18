@@ -101,7 +101,7 @@
     }
     function searchHtml(kind, target, placeholder, hidden) {
         const k = K[kindOf(kind.split(',')[0])], mixed = kind.includes(',');
-        return `<div class="pk-search" data-target="${esc(target)}"${hidden ? ' hidden' : ''}><div class="pk-box"><span class="pk-ico" aria-hidden="true">${mixed ? '🔍' : (k.ico || '🔍')}</span><input type="text" class="pk-input" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-autocomplete="list" placeholder="${esc(placeholder)}"><span class="pk-kbd" hidden>Échap</span></div><div class="pk-list" role="listbox" hidden></div></div>`;
+        return `<div class="pk-search" data-target="${esc(target)}"${hidden ? ' hidden' : ''}><div class="pk-box"><span class="pk-ico" aria-hidden="true">${mixed ? '🔍' : (k.ico || k.sym || '🔍')}</span><input type="text" class="pk-input" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="false" aria-autocomplete="list" placeholder="${esc(placeholder)}"><span class="pk-kbd" hidden>Échap</span></div><div class="pk-list" role="listbox" hidden></div></div>`;
     }
 
     // ── valeur : normalisation et champ caché ──
@@ -128,12 +128,17 @@
 
     // ── le champ ──
     const CTRL = new WeakMap();
+    /** roleList absent → la liste habituelle ; false ou [] → pas de menu « rôle ▾ » du tout. */
+    const roleListOf = r => r.roleList === false || (Array.isArray(r.roleList) && !r.roleList.length) ? [] : Array.isArray(r.roleList) ? r.roleList : ROLES;
     function pickerField(o = {}) {
-        const opts = {name: o.name || 'picker', kind: String(o.kind || 'person'), multiple: !!o.multiple, placeholder: o.placeholder || '', allowFree: !!o.allowFree,
-            allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: Array.isArray(o.roles.roleList) && o.roles.roleList.length ? o.roles.roleList : ROLES} : null,
-            animals: o.animals === false ? 0 : 1, label: o.label || ''};
+        const f = o.filter && typeof o.filter === 'object' ? o.filter : {};
+        const opts = {name: o.name == null ? 'picker' : String(o.name), kind: String(o.kind || 'person'), multiple: !!o.multiple, placeholder: o.placeholder || '', allowFree: !!o.allowFree,
+            allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: roleListOf(o.roles)} : null,
+            animals: o.animals === false ? 0 : 1, label: o.label || '',
+            noName: o.hiddenName === false || o.name === '', inline: !!o.inline,
+            filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : ''}};
         const c = makeCtrl(opts, o.value);
-        return `<div class="pk${opts.roles ? ' pk-roles' : ''}" data-picker="${esc(opts.kind)}" data-pk-opts="${esc(JSON.stringify(opts))}" data-pk-value="${esc(JSON.stringify(stateOut(c)))}">${innerHtml(c)}</div>`;
+        return `<div class="pk${opts.roles ? ' pk-roles' : ''}${opts.inline ? ' pk-inline' : ''}" data-picker="${esc(opts.kind)}" data-pk-opts="${esc(JSON.stringify(opts))}" data-pk-value="${esc(JSON.stringify(stateOut(c)))}">${innerHtml(c)}</div>`;
     }
     function makeCtrl(opts, value) {
         const kind = kindOf(opts.kind.split(',')[0]);
@@ -153,7 +158,7 @@
     }
     const stateOut = c => c.opts.roles ? {main: c.main, people: c.people} : c.items;
     function innerHtml(c) {
-        const o = c.opts, k = K[c.kind], hid = `<input type="hidden" name="${esc(o.name)}" value="${esc(hiddenValue(c))}">`;
+        const o = c.opts, k = K[c.kind], hid = `<input type="hidden"${o.noName ? '' : ` name="${esc(o.name)}"`} value="${esc(hiddenValue(c))}">`; // hiddenName:false → rien d'ajouté au formulaire autour
         if (o.roles) {
             return hid + (o.roles.main ? `<span class="pk-lab">⭐ Personne principale <small>— une seule</small></span><div class="pk-mainslot">${mainHtml(c)}</div>${searchHtml('person', 'main', o.placeholder || 'Choisir la personne principale…', !!c.main)}` : '')
                 + `<div class="pk-zone prim" data-zone="primary"><div class="pk-zone-h"><b>★ ${o.roles.main ? 'Autres personnes principales' : 'Personnes principales'}</b><small>au cœur de la recherche</small></div><div class="pk-chips2" data-zone-chips="primary">${zoneChips(c, true)}</div>${searchHtml('person', 'primary', '＋ Ajouter une personne principale…')}</div>`
@@ -172,7 +177,8 @@
     function zoneChips(c, primary) {
         return c.people.map((p, i) => ({p, i})).filter(x => !!x.p.primary === primary).map(({p, i}) => {
             const info = p.free ? 'sans fiche' : [p.short, sosaOf(p) ? `Sosa ${sosaOf(p)}` : ''].filter(Boolean).join(' · ');
-            const role = p.role ? `<button type="button" class="role" data-pk="role" data-i="${i}" data-ia-done="1" title="Changer le rôle">${esc(p.role)} ▾</button>` : `<button type="button" class="role empty" data-pk="role" data-i="${i}" data-ia-done="1" title="Donner un rôle (facultatif)">rôle ▾</button>`;
+            const noMenu = !(c.opts.roles.roleList || []).length && c.opts.roles.roleList !== undefined;
+            const role = noMenu ? (p.role ? `<span class="role static">${esc(p.role)}</span>` : '') : p.role ? `<button type="button" class="role" data-pk="role" data-i="${i}" data-ia-done="1" title="Changer le rôle">${esc(p.role)} ▾</button>` : `<button type="button" class="role empty" data-pk="role" data-i="${i}" data-ia-done="1" title="Donner un rôle (facultatif)">rôle ▾</button>`;
             return `<span class="pk-chip2${p.free ? ' free' : ''}" draggable="true" data-i="${i}">${sym(p)}<b>${p.free ? `« ${esc(p.title)} »` : esc(p.title)}</b>${info ? `<small>${esc(info)}</small>` : ''}${role}<button type="button" class="tg${primary ? '' : ' off'}" data-pk="toggle" data-i="${i}" data-ia-done="1" title="${primary ? 'Passer en secondaire' : 'Passer en principale'}">${primary ? '★' : '☆'}</button><button type="button" class="x" data-pk="remove" data-i="${i}" data-ia-done="1" title="Retirer" aria-label="Retirer ${esc(p.title)}">×</button></span>`;
         }).join('');
     }
@@ -199,7 +205,8 @@
         if (o.roles) detail.items = {main: c.main, people: c.people}; else if (o.multiple) detail.items = c.items; else detail.item = c.items[0] || null;
         el.dispatchEvent(new CustomEvent('picker-change', {bubbles: true, detail}));
         // compatibilité avec l'ancien champ collectionPersonField
-        if (!o.roles && !o.multiple && c.kind === 'person') { const it = c.items[0]; el.dispatchEvent(new CustomEvent('cp-pick', {bubbles: true, detail: {id: it && !it.free ? Number(it.id) : 0, name: it ? it.title : '', field: o.name}})); }
+        // (seulement quand une fiche est choisie : un retrait ne donne que picker-change)
+        if (!o.roles && !o.multiple && c.kind === 'person') { const it = c.items[0]; if (it && !it.free && Number(it.id) > 0) el.dispatchEvent(new CustomEvent('cp-pick', {bubbles: true, detail: {id: Number(it.id), name: it.title, field: o.name}})); }
         el.querySelector(':scope > input[type=hidden]').dispatchEvent(new Event('change', {bubbles: true}));
     }
 
@@ -232,7 +239,11 @@
         el.addEventListener('focusout', e => { const s = e.target.closest('.pk-search'); if (s) setTimeout(() => { if (!s.contains(document.activeElement)) closeList(s); }, 150); });
         el.addEventListener('keydown', e => onKey(c, e));
         el.addEventListener('mousedown', e => { if (e.target.closest('.pk-list')) e.preventDefault(); if (e.target.closest('.pk-box') && !e.target.matches('input')) { e.preventDefault(); e.target.closest('.pk-box').querySelector('input').focus(); } });
-        el.addEventListener('click', e => onClick(c, e));
+        el.addEventListener('click', e => {
+            // posé dans un <label> : un clic sur un bouton ou une ligne ne doit pas être renvoyé vers une case du label
+            if (el.closest('label') && !e.target.closest('input, textarea, select')) e.preventDefault();
+            onClick(c, e);
+        });
         el.addEventListener('mouseover', e => { const r = e.target.closest('.pk-row'); if (!r) return; const s = r.closest('.pk-search'), st = S(s); const i = Number(r.dataset.row); if (st.active !== i) { st.active = i; s.querySelectorAll('.pk-row').forEach(x => x.classList.toggle('on', Number(x.dataset.row) === i)); } });
         el.addEventListener('scroll', e => { if (e.target.classList?.contains('pk-scroll')) maybeMore(c, e.target.closest('.pk-search')); }, true);
         dragBind(c);
@@ -260,7 +271,10 @@
         if (m && kind.split(',').includes('person')) {
             try { const map = A().sosaMap?.() || {}; const id = Object.keys(map).find(k => Number(map[k]) === Number(m[1])); if (id) q = `#${id}`; } catch (_) {}
         }
-        return {kind, q, animals: c.opts.animals === 0 ? 0 : 1};
+        const f = c.opts.filter || {}, extra = {};
+        if (f.person_id) extra.person_id = f.person_id;
+        if (f.media_type) extra.media_type = f.media_type;
+        return {kind, q, animals: c.opts.animals === 0 ? 0 : 1, ...extra};
     }
     async function run(c, s, more = false) {
         const st = S(s), q = s.querySelector('.pk-input').value.trim();
@@ -351,9 +365,35 @@
         s.querySelector('.pk-kbd')?.toggleAttribute('hidden', list.hidden);
         s.querySelector('.pk-input')?.setAttribute('aria-expanded', list.hidden ? 'false' : 'true');
         if (keepScroll) { const sc = list.querySelector('.pk-scroll'); if (sc) sc.scrollTop = sc0; }
+        placeList(c, s);
         // liste courte qui ne défile pas encore : on charge la suite tout de suite
         requestAnimationFrame(() => maybeMore(c, s));
     }
+    /** Liste en absolu sous la case ; vers le haut si la place manque dessous (conteneur qui coupe, bas d'écran), sinon en position fixe. */
+    function placeList(c, s) {
+        const list = s.querySelector('.pk-list');
+        list.classList.remove('pk-up', 'pk-fixed'); list.style.cssText = '';
+        if (list.hidden || c.opts.inline || c.el.closest('.pk-dialog')) return;
+        const br = s.querySelector('.pk-box').getBoundingClientRect();
+        let lo = 0, hi = window.innerHeight, clipped = false;
+        for (let a = s.parentElement; a && a !== document.body && a !== document.documentElement; a = a.parentElement) {
+            const cs = getComputedStyle(a);
+            if (/hidden|auto|scroll|clip/.test(cs.overflowY + cs.overflowX)) { const r = a.getBoundingClientRect(); lo = Math.max(lo, r.top); hi = Math.min(hi, r.bottom); clipped = true; }
+        }
+        const want = Math.min(list.scrollHeight || 300, 460), need = Math.min(want, 220);
+        const below = hi - br.bottom - 8, above = br.top - lo - 8;
+        if (below >= need) { if (below < want) list.style.maxHeight = `${Math.floor(below)}px`; return; }
+        if (above >= need && above > below) { list.classList.add('pk-up'); if (above < want) list.style.maxHeight = `${Math.floor(above)}px`; return; }
+        if (!clipped) return;
+        // le conteneur est trop petit : la liste sort de lui, posée sur l'écran
+        const vb = window.innerHeight - br.bottom - 8, va = br.top - 8, up = va > vb;
+        list.classList.add('pk-fixed');
+        Object.assign(list.style, {position: 'fixed', left: `${br.left}px`, width: `${br.width}px`, right: 'auto', margin: '0', maxHeight: `${Math.max(140, Math.min(460, up ? va : vb))}px`,
+            top: up ? 'auto' : `${br.bottom + 6}px`, bottom: up ? `${window.innerHeight - br.top + 6}px` : 'auto'});
+    }
+    const replaceOpen = () => document.querySelectorAll('.pk .pk-list:not([hidden])').forEach(l => { const el = l.closest('.pk'), c = CTRL.get(el); if (c) placeList(c, l.closest('.pk-search')); });
+    window.addEventListener('resize', replaceOpen);
+    document.addEventListener('scroll', e => { if (!e.target.closest?.('.pk-list') && document.querySelector('.pk .pk-list.pk-fixed:not([hidden])')) replaceOpen(); }, true);
     function setActive(s, i) {
         const st = S(s), n = st.flat.length; if (!n) return;
         st.active = (i + n) % n;
@@ -455,11 +495,77 @@
         const ev = new CustomEvent('picker-map', {bubbles: true, cancelable: true, detail: {kind: 'place', text, item, field: c.opts.name, pick: it => { const n = norm(it, 'place'); if (n && s) pick(c, s, n); }}});
         c.el.dispatchEvent(ev);
         if (s) closeList(s);
-        if (!ev.defaultPrevented) {
-            const p = item || {};
-            if (p.id && A().setModule && A().state) { try { A().state.mapPlaceId = p.id; } catch (_) {} toast(`Ouvre la Carte pour voir ${p.title || 'ce lieu'}.`); }
-            else toast('La carte n’est pas disponible depuis ce champ.');
-        }
+        if (ev.defaultPrevented) return;
+        // personne n'écoute : petite carte où l'on clique un point
+        mapDialog({item, text}).then(it => {
+            if (!it) return;
+            if (s) pick(c, s, it);
+            else if (item) { const i = c.items.findIndex(x => keyOf(x) === keyOf(item)); if (i >= 0) { c.items[i] = it; renderChosen(c); emit(c); } }
+        });
+    }
+
+    // ── 🗺 petite carte : un clic propose les lieux les plus proches, ou « Créer un lieu ici » ──
+    const tileUrl = (z, x, y) => { const bg = document.documentElement.dataset.mapBackground || 'color'; try { const u = A().mapTileUrl?.(bg, z, x, y); if (u) return u; } catch (_) {} return `https://tile.openstreetmap.org/${z}/${x}/${y}.png`; };
+    const toPx = (lat, lon, z) => { const n = 256 * 2 ** z, r = Math.max(-85, Math.min(85, lat)) * Math.PI / 180; return [(lon + 180) / 360 * n, (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2 * n]; };
+    const toLatLon = (x, y, z) => { const n = 256 * 2 ** z, lon = x / n * 360 - 180, lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / n))) * 180 / Math.PI; return [lat, lon]; };
+    function mapDialog({item = null, text = ''} = {}) {
+        return new Promise(resolve => {
+            const d = document.createElement('dialog'); d.className = 'modal pk-map-dialog';
+            d.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">LIEU</span><h2>🗺 Choisir sur la carte</h2></div><button class="icon-button" type="button" data-pkm-close aria-label="Fermer" data-ia-done="1">×</button></div>
+                <div class="pk-map-body"><div class="pk-map" tabindex="0" aria-label="Carte : clique l’endroit du lieu"><div class="pk-map-tiles"></div><span class="pk-map-pin" hidden></span>
+                <div class="pk-map-zoom"><button type="button" data-pkm-zoom="1" data-ia-done="1" title="Zoomer">+</button><button type="button" data-pkm-zoom="-1" data-ia-done="1" title="Dézoomer">−</button></div></div>
+                <div class="pk-map-side"><p class="pk-map-help">Clique l’endroit du lieu sur la carte (glisse pour te déplacer, molette pour zoomer).</p><div class="pk-map-res pk-list is-static" hidden></div>
+                <div class="pk-map-new" hidden><span class="pk-lab">＋ Créer un lieu ici</span><div class="pk-map-newrow"><input type="text" class="pk-map-name" placeholder="Nom du lieu" value="${esc(text)}"><button type="button" class="button small" data-pkm-create data-ia-done="1">Créer</button></div><small class="pk-map-coords"></small></div></div></div>
+                <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-pkm-close data-ia-done="1">Annuler</button></div></form>`;
+            document.body.appendChild(d);
+            const map = d.querySelector('.pk-map'), tiles = d.querySelector('.pk-map-tiles'), pin = d.querySelector('.pk-map-pin'), res = d.querySelector('.pk-map-res'), nw = d.querySelector('.pk-map-new');
+            let z = item?.lat != null ? 12 : 5, center = item?.lat != null ? [Number(item.lat), Number(item.lon)] : [46.6, 2.5], point = item?.lat != null ? [Number(item.lat), Number(item.lon)] : null, found = [], result = null, seq = 0;
+            const draw = () => {
+                const w = map.clientWidth, h = map.clientHeight, [cx, cy] = toPx(center[0], center[1], z), x0 = cx - w / 2, y0 = cy - h / 2, n = 2 ** z;
+                let html = '';
+                for (let tx = Math.floor(x0 / 256); tx <= Math.floor((x0 + w) / 256); tx++) for (let ty = Math.floor(y0 / 256); ty <= Math.floor((y0 + h) / 256); ty++) {
+                    if (ty < 0 || ty >= n) continue;
+                    html += `<img src="${esc(tileUrl(z, ((tx % n) + n) % n, ty))}" alt="" draggable="false" referrerpolicy="no-referrer" style="left:${tx * 256 - x0}px;top:${ty * 256 - y0}px">`;
+                }
+                tiles.innerHTML = html;
+                if (point) { const [px, py] = toPx(point[0], point[1], z); pin.hidden = false; pin.style.left = `${px - x0}px`; pin.style.top = `${py - y0}px`; } else pin.hidden = true;
+            };
+            const near = async () => {
+                const my = ++seq; res.hidden = false; res.innerHTML = '<div class="pk-loading"><span class="pk-spin"></span> Lieux proches…</div>';
+                nw.hidden = false; d.querySelector('.pk-map-coords').textContent = `${point[0].toFixed(5)}, ${point[1].toFixed(5)}`;
+                let data; try { data = await get({kind: 'place', near: `${point[0].toFixed(6)},${point[1].toFixed(6)}`}); } catch (err) { res.innerHTML = `<div class="pk-empty">${esc(err.message)}</div>`; return; }
+                if (my !== seq) return;
+                found = []; let html = '';
+                (data.groups || []).forEach(g => { if (!g.items.length) return; html += `<div class="pk-grp${g.key === 'base' ? '' : ' gray'}">${esc(g.label)}</div>`; g.items.forEach(it => { html += rowHtml(it, '', found.length, false).replace('pk-item pk-row', 'pk-item pk-row pk-map-row'); found.push(it); }); });
+                res.innerHTML = html ? `<div class="pk-scroll">${html}</div>` : '<div class="pk-empty">Aucun lieu connu près d’ici : crée-le ci-dessous.</div>';
+                const nm = d.querySelector('.pk-map-name'); if (!nm.value.trim() && found[0]) nm.value = found[0].name || found[0].title;
+            };
+            const finish = v => { result = v; d.close(); };
+            d.addEventListener('close', () => { d.remove(); resolve(result); });
+            d.querySelectorAll('[data-pkm-close]').forEach(b => b.addEventListener('click', () => finish(null)));
+            d.addEventListener('click', e => {
+                const r = e.target.closest('.pk-map-row'); if (r) { finish(found[Number(r.dataset.row)] || null); return; }
+                const zb = e.target.closest('[data-pkm-zoom]'); if (zb) { z = Math.max(2, Math.min(18, z + Number(zb.dataset.pkmZoom))); draw(); return; }
+                if (e.target.closest('[data-pkm-create]')) {
+                    const name = d.querySelector('.pk-map-name').value.trim();
+                    if (!name) { toast('Donne un nom au lieu.'); d.querySelector('.pk-map-name').focus(); return; }
+                    post('picker_place_adopt', {name, lat: point[0], lon: point[1]}).then(r2 => finish({...(r2.item || {}), id: Number(r2.id), kind: 'place', group: 'base', title: r2.item?.title || name})).catch(err => toast(err.message, 'error'));
+                }
+            });
+            d.querySelector('.pk-map-name').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); d.querySelector('[data-pkm-create]').click(); } });
+            // glisser = se déplacer ; clic sans bouger = choisir le point
+            let drag = null;
+            map.addEventListener('pointerdown', e => { if (e.target.closest('.pk-map-zoom')) return; drag = {x: e.clientX, y: e.clientY, c: toPx(center[0], center[1], z), moved: false}; map.setPointerCapture(e.pointerId); });
+            map.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true; if (drag.moved) { center = toLatLon(drag.c[0] - dx, drag.c[1] - dy, z); draw(); } });
+            map.addEventListener('pointerup', e => {
+                if (!drag) return; const moved = drag.moved; drag = null; if (moved) return;
+                const r = map.getBoundingClientRect(), [cx, cy] = toPx(center[0], center[1], z);
+                point = toLatLon(cx - map.clientWidth / 2 + (e.clientX - r.left), cy - map.clientHeight / 2 + (e.clientY - r.top), z);
+                draw(); near();
+            });
+            map.addEventListener('wheel', e => { e.preventDefault(); z = Math.max(2, Math.min(18, z + (e.deltaY < 0 ? 1 : -1))); draw(); }, {passive: false});
+            d.showModal(); draw(); if (point) near();
+        });
     }
     /** « ↗ Fiche / Lieu / Ouvrir » : la fiche d'une personne s'ouvre ; pour le reste l'outil écoute picker-open. */
     function openItem(el, it) {
@@ -599,7 +705,7 @@
             const title = o.title || (mixed ? 'Choisir…' : kind === 'person' ? (o.multiple ? 'Choisir des personnes' : 'Choisir une personne') : kind === 'place' ? (o.multiple ? 'Choisir des lieux' : 'Choisir un lieu') : `Choisir : ${k.label.replace(/^\S+\s/, '').toLowerCase()}`);
             const d = document.createElement('dialog'); d.className = 'modal small-modal pk-dialog';
             d.innerHTML = `<form method="dialog"><div class="modal-head"><div><span class="eyebrow">${esc(o.eyebrow || 'CHOISIR')}</span><h2>${esc(title)}</h2></div><button class="icon-button" value="cancel" type="button" data-pk-close aria-label="Fermer" data-ia-done="1">×</button></div>
-                <div class="pk-dialog-body">${o.label ? `<span class="pk-lab">${esc(o.label)}</span>` : ''}${pickerField({...o, name: o.name || 'pk_dialog', kind, value: o.value ?? null})}</div>
+                <div class="pk-dialog-body">${o.label ? `<span class="pk-lab">${esc(o.label)}</span>` : ''}${pickerField({...o, name: o.name || 'pk_dialog', kind, value: o.value ?? null, inline: true})}</div>
                 <div class="modal-actions"><span class="spacer"></span><button type="button" class="button secondary" data-pk-close data-ia-done="1">Annuler</button>${o.multiple || o.roles ? `<button type="submit" class="button" data-ia-done="1">${esc(o.okLabel || 'Choisir')}</button>` : ''}</div></form>`;
             document.body.appendChild(d);
             const field = d.querySelector('.pk'), c = bind(field);

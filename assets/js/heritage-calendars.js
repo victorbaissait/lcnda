@@ -236,20 +236,13 @@
             return data.events.filter(e => !pk || String(e[pk] || '') === pv).map(e => ({uid: 'g' + e.id, y: e.y, m: e.m, d: e.d, approx: e.approx, group: e.group === 'other' && !p.groupOthers ? 'type:' + e.type : e.group,
             title: `${e.type}${e.who.length ? ' — ' + e.who.map(w => w.name).join(' et ') : ''}`, sub: [e.text && e.text !== String(e.y) ? e.text : '', e.place].filter(Boolean).join(' · '), raw: e}));
         },
-        extraToolbar: (data) => placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : `<input type="search" data-cal-person placeholder="👤 Une seule personne…" list="h-cal-people"><datalist id="h-cal-people"></datalist>`}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
+        extraToolbar: (data) => placeSelect(data) + `<span class="h-cal-person">${genea().person ? `👤 <b>${esc(genea().personName)}</b> <button type="button" class="icon-button" data-cal-person-clear title="Toute la famille">✕</button>` : window.LCNDA_PICKER.pickerField({name: 'cal_person', kind: 'person', placeholder: 'Une seule personne…'})}</span>${data.undated ? `<small class="muted">${A().plural(data.undated, 'événement')} sans date lisible</small>` : ''}`,
         bindExtra: (sec, data, p, c, {reload, draw}) => {
             sec.querySelector('[data-cal-place-clear]')?.addEventListener('click', () => { genea().place = ''; draw(); });
             sec.querySelector('[data-cal-place]')?.addEventListener('input', e => { const o = [...sec.querySelectorAll('#h-cal-places option')].find(x => x.value === e.target.value); if (o) { genea().place = o.dataset.key; draw(); } });
             sec.querySelector('[data-cal-person-clear]')?.addEventListener('click', () => { Object.assign(genea(), {person: 0, personName: ''}); reload(); });
-            const inp = sec.querySelector('[data-cal-person]'); if (!inp) return;
-            let found = [], timer = 0;
-            inp.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(async () => {
-                const v = inp.value.trim(), hit = found.find(x => `${x.label}${x.extra ? ` (${x.extra})` : ''}` === v);
-                if (hit) { Object.assign(genea(), {person: Number(hit.key), personName: hit.label}); return reload(); }
-                if (v.length < 2) return;
-                found = (await A().api('recueil_search', {type: 'person', q: v})).results || [];
-                sec.querySelector('#h-cal-people').innerHTML = found.map(x => `<option value="${esc(`${x.label}${x.extra ? ` (${x.extra})` : ''}`)}">`).join('');
-            }, 200); });
+            // une seule personne : le menu de choix unique
+            sec.querySelector('.h-cal-person')?.addEventListener('picker-change', e => { const it = e.detail.item; if (e.detail.name !== 'cal_person' || !it?.id) return; Object.assign(genea(), {person: Number(it.id), personName: it.title}); reload(); });
         },
         onOpen: (it, {p}) => {
             const e = it.raw, alts = e.d ? A().converterCalendarOptions.filter(([t]) => t !== 'gregorian').map(([t, n]) => [n, altText(e.y, e.m, e.d, t)]).filter(x => x[1]) : [];

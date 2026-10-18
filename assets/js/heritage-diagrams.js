@@ -256,7 +256,7 @@
             return `<div class="h-dg-app">${stats ? `<h4>📊 Des chiffres de l’app</h4><p class="muted">Remplace le tableau par une statistique : un exemple, une statistique de l’app (noms, lieux, âges…) ou une de « Mes statistiques » (faites dans Maintenance → Éditeur de statistiques, avec tous leurs critères).</p>
                 <label>Statistique<select data-dg-src><option value="">Chargement…</option></select></label><label class="checkbox-line"><input type="checkbox" data-dg-srclive> 🔄 Tenir à jour (relire les chiffres à chaque affichage)</label><button type="button" class="button small" data-dg-srcgo>Prendre ces chiffres</button>` : ''}
                 ${people ? `<h4>👥 Des personnes de la base</h4><p class="muted">${k === 'timeline' ? 'Chaque personne devient une ligne, de sa naissance à son décès (rôle : Homme ou Femme, à changer à volonté).' : 'Leurs naissances, mariages et décès deviennent des dates de la frise.'}</p>
-                <div class="h-pr-addlink"><input type="search" data-dg-pq placeholder="Tape un nom…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></div>` : ''}
+                <div class="h-pr-addlink" data-dg-pq>${window.LCNDA_PICKER.pickerField({name: 'dg_addp', kind: 'person'})}</div>` : ''}
                 ${!stats && !people ? '<p class="muted">Ce type de diagramme se remplit à la main, en collant un tableau ou avec un CSV (onglet Données).</p>' : ''}</div>`;
         };
         function bindAppPane() {
@@ -270,13 +270,11 @@
                     if (!spec.o.title || spec.o.title === kindOf().sample().o?.title) spec.o.title = label;
                     tab = 'data'; paint(); later(); toast(`${pairs.length} valeur${pairs.length > 1 ? 's' : ''} prise${pairs.length > 1 ? 's' : ''} dans l’app.`); } catch (e) { toast(e.message, 'error'); }
             });
-            const input = pane.querySelector('[data-dg-pq]'); if (!input) return;
-            const sugg = input.nextElementSibling; let t = 0;
-            input.addEventListener('input', () => { clearTimeout(t); const q = input.value.trim(); if (q.length < 2) { sugg.hidden = true; return; } t = setTimeout(async () => {
-                const people = (await api('search', {type: 'persons', q, limit: 10}).catch(() => ({}))).data || [];
-                sugg.innerHTML = people.map(p => `<button type="button" data-dg-addp="${p.id}">👤 ${esc(A().personName(p))}</button>`).join('') || '<small class="muted">Personne.</small>'; sugg.hidden = false; }, 220); });
-            sugg.addEventListener('click', async e => { const b = e.target.closest('[data-dg-addp]'); if (!b) return;
-                const r = await api('diagram_people', {ids: b.dataset.dgAddp}).catch(err => { toast(err.message, 'error'); return null; }); const p = r?.people?.[0]; if (!p) return;
+            const box = pane.querySelector('[data-dg-pq]'); if (!box) return;
+            // une personne choisie avec le menu de choix unique : ses dates entrent dans le diagramme
+            box.addEventListener('picker-change', async e => { const pid = Number(e.detail.value) || 0; if (!pid) return;
+                window.LCNDA_PICKER.pickerSet(box.querySelector('.pk'), null); // le champ se vide pour la suivante
+                const r = await api('diagram_people', {ids: String(pid)}).catch(err => { toast(err.message, 'error'); return null; }); const p = r?.people?.[0]; if (!p) return;
                 const y = v => String(v || '').replace(/-00/g, '').replace(/^(\d{4})-(\d{2})-(\d{2})$/, '$3/$2/$1').replace(/^(\d{4})-(\d{2})$/, '$2/$1');
                 if (spec.kind === 'timeline') {
                     if (!p.birth) return toast(`${p.name} : pas de date de naissance dans sa fiche.`, 'error');
@@ -287,26 +285,29 @@
                 } else {
                     spec.rows = [...(spec.rows || []), ...(p.birth ? [{date: y(p.birth), label: `Naissance de ${p.name}`}] : []), ...(p.death ? [{date: y(p.death), label: `Décès de ${p.name}`}] : [])];
                 }
-                input.value = ''; sugg.hidden = true; later(); toast(`${p.name} ajouté${p.gender === 'female' ? 'e' : ''}.`); });
+                later(); toast(`${p.name} ajouté${p.gender === 'female' ? 'e' : ''}.`); });
         }
         /* rattacher à des personnes, enquêtes, parties d'enquête, projets de l'Atelier */
         const lchip = l => `<span class="h-pr-lchip" data-type="${esc(l.type)}" data-id="${Number(l.id)}">${LINK_IC[l.type] || '🔗'} ${esc(l.name)} <button type="button" data-dg-unlink aria-label="Retirer">×</button></span>`;
         const linksHtml = () => `<div class="h-pr-links"><p class="muted">Le diagramme apparaît alors sur la fiche de la personne, dans l’enquête ou dans le projet de l’Atelier. Pour le poser ailleurs : un widget (Maintenance → Éditeur de widgets), un bloc de fiche, la mise en page.</p><span class="h-pr-linkchips">${rec.links.map(lchip).join('') || '<small class="muted">Rattaché à rien pour l’instant.</small>'}</span>
-            <span class="h-pr-addlink"><input type="search" data-dg-lq placeholder="Une personne, une enquête, une partie d’enquête, un projet…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></span></div>`;
+            <div class="h-pr-addlink" data-dg-lpk style="flex:1 1 320px;min-width:min(100%,320px)">${window.LCNDA_PICKER.pickerField({name: 'dg_link', kind: 'person,investigation', placeholder: 'Une personne, une enquête…'})}</div>
+            <span class="h-pr-addlink"><input type="search" data-dg-lq placeholder="ou une partie d’enquête, un projet de l’Atelier…" autocomplete="off"><span class="h-pr-lsugg" hidden></span></span></div>`;
         let invCache = null, projCache = null;
         function bindLinks() {
             const input = pane.querySelector('[data-dg-lq]'), sugg = input.nextElementSibling; let t = 0;
             pane.querySelector('.h-pr-linkchips').addEventListener('click', e => { const c = e.target.closest('[data-dg-unlink]')?.closest('.h-pr-lchip'); if (!c) return; rec.links = rec.links.filter(l => !(l.type === c.dataset.type && Number(l.id) === Number(c.dataset.id))); dirty = true; paint(); });
+            // personnes et enquêtes : le menu de choix unique (recherche mélangée)
+            pane.querySelector('[data-dg-lpk]')?.addEventListener('picker-change', e => { const it = e.detail.item; if (!it?.id) return; const type = it.kind === 'investigation' ? 'investigation' : 'person';
+                if (!rec.links.some(l => l.type === type && Number(l.id) === Number(it.id))) rec.links.push({type, id: Number(it.id), name: it.title}); dirty = true; paint(); });
+            // parties d'enquête et projets de l'Atelier : pas encore dans le menu de choix unique, l'ancienne recherche reste pour eux
             input.addEventListener('input', () => { clearTimeout(t); const q = input.value.trim(), ql = q.toLowerCase(); if (q.length < 2) { sugg.hidden = true; return; } t = setTimeout(async () => {
-                let people = [], invs = [], parts = [], projs = [];
+                let parts = [], projs = [];
                 await Promise.all([
-                    api('search', {type: 'persons', q, limit: 8}).then(r => { people = r.data || []; }).catch(() => {}),
-                    (invCache ? Promise.resolve() : api('investigations', {status: 'all'}).then(r => { invCache = r.investigations || []; })).then(() => { invs = (invCache || []).filter(i => String(i.title || '').toLowerCase().includes(ql)).slice(0, 6); }).catch(() => {}),
                     api('periodical_link_search', {q}).then(r => { parts = r.items || []; }).catch(() => {}),
                     (projCache ? Promise.resolve() : api('atelier_projects').then(r => { projCache = r.projects || []; })).then(() => { projs = (projCache || []).filter(p => String(p.title || '').toLowerCase().includes(ql)).slice(0, 6); }).catch(() => {}),
                 ]);
                 const b = (type, id, name) => `<button type="button" data-add-type="${type}" data-add-id="${Number(id)}" data-add-name="${esc(name)}">${LINK_IC[type]} ${esc(name)}</button>`;
-                sugg.innerHTML = [...people.map(p => b('person', p.id, A().personName(p))), ...invs.map(i => b('investigation', i.id, i.title)), ...parts.map(x => b('investigation_item', x.id, x.name)), ...projs.map(p => b('atelier_project', p.id, p.title))].join('') || '<small class="muted">Rien trouvé.</small>';
+                sugg.innerHTML = [...parts.map(x => b('investigation_item', x.id, x.name)), ...projs.map(p => b('atelier_project', p.id, p.title))].join('') || '<small class="muted">Rien trouvé.</small>';
                 sugg.hidden = false; }, 220); });
             input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); sugg.querySelector('[data-add-type]')?.click(); } });
             sugg.addEventListener('click', e => { const s = e.target.closest('[data-add-type]'); if (!s) return; if (!rec.links.some(l => l.type === s.dataset.addType && Number(l.id) === Number(s.dataset.addId))) rec.links.push({type: s.dataset.addType, id: Number(s.dataset.addId), name: s.dataset.addName}); dirty = true; paint(); pane.querySelector('[data-dg-lq]')?.focus(); });

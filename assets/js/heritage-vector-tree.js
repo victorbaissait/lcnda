@@ -323,7 +323,7 @@
         let chosenName = '';
         ext.openDialog({eyebrow: 'ARBRE DÉCORATIF', title: '🌳 Un arbre à imprimer en grand', submitLabel: 'Fabriquer l’arbre', wide: true,
             body: `<div class="h-dt-form"><p class="muted">L’arbre est fabriqué comme un dessin : il s’ouvre ensuite dans l’outil de dessin vectoriel pour changer les couleurs, les polices, les textes, ajouter des ornements, un blason… puis l’exporter en PDF ou en image, à la taille voulue.</p>
-                <label class="h-dt-person">Personne au centre (ou au pied de l’arbre)${A().collectionPersonField('person', null, 'Tape un nom…')}</label>
+                <div class="h-dt-person"><span class="pk-lab">Personne au centre (ou au pied de l’arbre)</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'person', kind: 'person', value: cur || null})}</div>
                 <fieldset class="h-dt-shapes-box"><legend>Forme</legend><input type="hidden" name="shape" value="${shape0}"><div class="h-dt-shapes" data-tbg="dt-shapes" data-tbg-label="Formes de l’arbre">${SHAPES.map(([k, l]) => `<button type="button" class="h-dt-shape${shape0 === k ? ' is-on' : ''}" data-dt-shape="${k}" data-tb-label="${esc(l)}" aria-pressed="${shape0 === k}"><svg viewBox="0 0 48 48" aria-hidden="true">${SHAPE_ICON[k]}</svg><small>${esc(l)}</small></button>`).join('')}</div></fieldset>
                 <div class="h-dt-tools" data-tbg="dt-tools" data-tbg-label="Boutons de la fenêtre"><button type="button" class="button small secondary" data-dt-cmd="fmts">⚙️ Mes formats</button><button type="button" class="button small secondary" data-dt-cmd="themes">🎨 Mes styles</button><button type="button" class="button small secondary" data-dt-cmd="newtheme">＋ Créer un style</button><button type="button" class="button small secondary" data-dt-cmd="reset">↺ Réglages par défaut</button>${ext.tbButton ? ext.tbButton('decortree') : ''}</div>
                 <div class="form-grid"><label>Générations<select name="gens">${gensOpts(shape0).map(([k, l], _, all) => `<option value="${k}" ${Math.min(Number(v('gens', 5)) || 5, all.at(-1)[0]) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -337,9 +337,8 @@
                 <div class="form-grid"><label>Titre<input name="title" maxlength="120" value="${esc(v('title', ''))}" placeholder="Arbre de la famille …"></label><label>Sous-titre<input name="subtitle" maxlength="160" value="${esc(v('subtitle', ''))}" placeholder="Établi par … en ${new Date().getFullYear()}"></label>
                     <label>Place du titre${sel('titlePos', [['bottom', 'En bas'], ['top', 'En haut']], v('titlePos', 'bottom'))}</label></div></div>`,
             onOpen: dg => {
-                const hid = dg.querySelector('input[type=hidden][name=person]'), inp = dg.querySelector('[data-cp-input="person"]');
                 dg.addEventListener('cp-pick', e => { chosenName = e.detail.name; });
-                if (cur) { hid.value = cur; api('person', {id: cur}).then(r => { const p = r.person || r, n = A().personName(p); if (n && !inp.value) { inp.value = n; chosenName = n; } const tt = dg.querySelector('[name=title]'); if (!tt.value && p.last_name) tt.placeholder = `Arbre de la famille ${p.last_name}`; }).catch(() => {}); }
+                if (cur) { api('person', {id: cur}).then(r => { const p = r.person || r, n = A().personName(p); if (n && !chosenName) chosenName = n; const tt = dg.querySelector('[name=title]'); if (!tt.value && p.last_name) tt.placeholder = `Arbre de la famille ${p.last_name}`; }).catch(() => {}); }
                 // le nombre de générations suit la forme choisie
                 const setShape = k => { dg.querySelector('input[name=shape]').value = k; dg.querySelectorAll('[data-dt-shape]').forEach(b => { b.classList.toggle('is-on', b.dataset.dtShape === k); b.setAttribute('aria-pressed', b.dataset.dtShape === k); });
                     const g = dg.querySelector('[name=gens]'), cur2 = Number(g.value), opts = gensOpts(k); g.innerHTML = opts.map(([n, l]) => `<option value="${n}" ${Math.min(cur2, opts.at(-1)[0]) === n ? 'selected' : ''}>${l}</option>`).join(''); };
@@ -364,7 +363,7 @@
                 writeJ(PREF, {...o, person: undefined});
                 toast('Fabrication de l’arbre…');
                 try { const doc = await build(o); if (!doc.count) { toast('Aucun ancêtre trouvé.', 'error'); return false; } delete doc.count;
-                    ext.openVectorEditor({doc, name: o.title || `Arbre — ${chosenName || f.querySelector('[data-cp-input="person"]')?.value || 'famille'}`, onSaved: onDone, onClose: onDone}); }
+                    ext.openVectorEditor({doc, name: o.title || `Arbre — ${chosenName || 'famille'}`, onSaved: onDone, onClose: onDone}); }
                 catch (e) { toast(e.message, 'error'); return false; }
             }});
     }
