@@ -397,6 +397,7 @@ try {
         'research_gaps' => json_response(research_gaps_data($pdo, $_GET)),
         'faces_index' => json_response(faces_index($pdo)),
         'artist_items' => json_response(['items' => artist_items_for($pdo, safe_int($_GET['person_id'] ?? 0))]),
+        'art' => json_response(art_api_get($pdo, $_GET)), // 🎨 moteur des catalogues d'artistes (lib/art_engine.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
         'online_registers' => json_response(online_registers($pdo, (string) ($_GET['code'] ?? ''), trim((string) ($_GET['name'] ?? '')))),
@@ -9503,6 +9504,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'artist_remote' => artist_remote($data),
             'artist_fetch_image' => artist_fetch_image($pdo,$data),
             'artist_upload_image' => artist_upload_image($pdo,$data),
+            'art_write' => art_api_post($pdo,$data),
             'face_ignore' => face_ignore($pdo,$data),
             'faces_reset' => faces_reset($pdo,$data),
             'update_media_tag' => update_media_tag($pdo,$data),
@@ -10633,6 +10635,7 @@ function merge_people(PDO $pdo,array $data): array
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
     if(function_exists('diagram_links_person'))diagram_links_person($pdo,$source,$target);
     if(function_exists('dna_links_person'))dna_links_person($pdo,$source,$target);
+    if(function_exists('art_merge_person'))art_merge_person($pdo,$source,$target); // 🎨 crédits, propriétaires… des catalogues d'artistes
     // Cases « bloc à afficher » cochées sur l'une ou l'autre fiche
     $flags=array_values(array_filter(array_column($pdo->query('PRAGMA table_info(persons)')->fetchAll(),'name'),static fn($c)=>preg_match('/^show_[a-z_]+_block$/',(string)$c)));
     foreach($flags as $flag)$pdo->prepare("UPDATE persons SET {$flag}=1 WHERE id=? AND (SELECT {$flag} FROM persons WHERE id=?)=1")->execute([$target,$source]);
@@ -10652,7 +10655,7 @@ function merge_people(PDO $pdo,array $data): array
 function merge_person_references(PDO $pdo,int $target,int $source): void
 {
     $tables=$pdo->query("SELECT name,sql FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'")->fetchAll();
-    $noFk=['living_contacts'=>['person_id'],'event_witnesses'=>['person_id'],'media_tags'=>['person_id'],'investigation_persons'=>['person_id'],'person_online_sheets'=>['person_id'],'grave_persons'=>['person_id'],'artist_items'=>['person_id']];
+    $noFk=['living_contacts'=>['person_id'],'event_witnesses'=>['person_id'],'media_tags'=>['person_id'],'investigation_persons'=>['person_id'],'person_online_sheets'=>['person_id'],'grave_persons'=>['person_id'],'items'=>['person_id'],'person_profiles'=>['person_id']]; // 🎨 items : fiches du moteur (lib/art_engine.php ; remplace artist_items)
     foreach($tables as $t){
         $table=(string)$t['name'];
         if($table==='persons'||stripos((string)$t['sql'],'VIRTUAL TABLE')!==false||str_starts_with($table,'person_search'))continue;

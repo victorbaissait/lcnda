@@ -64,7 +64,11 @@ P.pickerField({name: 'places', kind: 'place', multiple: true});
 // 7. Une autre sorte
 P.pickerField({name: 'source_id', kind: 'source'});
 P.pickerField({name: 'label_ids', kind: 'label', multiple: true});
-// kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census
+// kinds : person, place, source, media, investigation, battue, label, house, periodical, employer, census, artwork
+
+// 🎨 une fiche du moteur des œuvres (disque, morceau, œuvre d'art, exposition, type créé par l'utilisateur…) : docs/TYPES.md
+P.pickerField({name: 'release', kind: 'artwork', filter: {art_kind: 'release,master', art_person: 12}});
+// valeur : l'id de la fiche (items.id) ; l'item a art_kind (la sorte) ; « ↗ Ouvrir » ouvre la fiche dans son catalogue
 
 // 8. Recherche mélangée (filtres « Tout (9) · 👤 Personnes (2)… », Tab passe d'un filtre à l'autre)
 P.pickerField({name: 'target', kind: 'person,place,investigation,house,source'});
@@ -151,6 +155,7 @@ Champs en plus selon la sorte :
 | média | `filename`, `thumb` (`media/…`), `media_type` |
 | personne | `initials`, `gender` (`male`/`female`/`unknown`), `thumb` (portrait), `kind: 'animal'` pour un animal |
 | étiquette | `color` |
+| artwork (fiches du moteur) | `art_kind` (clé du type), `thumb` (première photo) ; filtres `art_kind=` (types, séparés par des virgules) et `art_person=` |
 | enquête | `person_id` |
 | employeur | `key` |
 

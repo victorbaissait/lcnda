@@ -26,6 +26,7 @@
         periodical: {sym: '📰', add: '＋ Ajouter une revue…', one: 'revue', fem: true, none: 'Aucune revue', label: '📰 Revues'},
         employer: {sym: '🏭', add: '＋ Ajouter un employeur…', one: 'employeur', none: 'Aucun employeur', label: '🏭 Employeurs'},
         census: {sym: '📋', add: '＋ Ajouter un recensement…', one: 'recensement', none: 'Aucun recensement', label: '📋 Recensements'},
+        artwork: {sym: '🎨', add: '＋ Ajouter une fiche…', one: 'fiche', fem: true, none: 'Aucune fiche', label: '🎨 Œuvres'},
     };
     const kindOf = k => K[k] ? k : 'person';
     const isPerson = it => it && (it.kind === 'person' || it.kind === 'animal');
@@ -136,7 +137,7 @@
             allowCreate: o.allowCreate === undefined ? 'auto' : !!o.allowCreate, roles: o.roles ? {main: o.roles.main !== false, roleList: roleListOf(o.roles)} : null,
             animals: o.animals === false ? 0 : 1, label: o.label || '',
             noName: o.hiddenName === false || o.name === '', inline: !!o.inline,
-            filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : ''}};
+            filter: {person_id: Number(f.person_id) || 0, media_type: ['image', 'audio', 'video', 'document'].includes(f.media_type) ? f.media_type : '', art_kind: String(f.art_kind || '').replace(/[^a-z0-9_,]/g, ''), art_person: Number(f.art_person) || 0}};
         const c = makeCtrl(opts, o.value);
         return `<div class="pk${opts.roles ? ' pk-roles' : ''}${opts.inline ? ' pk-inline' : ''}" data-picker="${esc(opts.kind)}" data-pk-opts="${esc(JSON.stringify(opts))}" data-pk-value="${esc(JSON.stringify(stateOut(c)))}">${innerHtml(c)}</div>`;
     }
@@ -274,6 +275,8 @@
         const f = c.opts.filter || {}, extra = {};
         if (f.person_id) extra.person_id = f.person_id;
         if (f.media_type) extra.media_type = f.media_type;
+        if (f.art_kind) extra.art_kind = f.art_kind;
+        if (f.art_person) extra.art_person = f.art_person;
         return {kind, q, animals: c.opts.animals === 0 ? 0 : 1, ...extra};
     }
     async function run(c, s, more = false) {
@@ -585,6 +588,7 @@
         if (it.kind === 'investigation' && app.state && app.setModule) { close(); app.state.currentInvestigationId = it.id; app.state.enquetesTab = 'enquetes'; app.setModule('enquetes'); return; }
         if (it.kind === 'battue' && app.state && app.setModule) { close(); app.state.currentBattueId = it.id; app.state.enquetesTab = 'battues'; app.setModule('enquetes'); return; }
         if (it.kind === 'house' && window.LCNDA_EXT?.openHouse) { window.LCNDA_EXT.openHouse({id: it.id}); return; }
+        if (it.kind === 'artwork' && window.LCNDA_EXT?.artistCatalog?.openItem) { window.LCNDA_EXT.artistCatalog.openItem(it.id); return; }
         toast(`« ${it.title} » : ouvre-le depuis son outil.`);
     }
 

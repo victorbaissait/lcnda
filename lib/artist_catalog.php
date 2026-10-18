@@ -5,24 +5,21 @@ declare(strict_types=1);
  * 🎨 Le catalogue d'un artiste (interface : assets/js/heritage-artist.js) : bibliographie (livres de lui ou sur lui),
  * catalogue des œuvres avec inventaire (où elles sont, à qui, dans quel état), discographie (album par album, morceau par
  * morceau, paroles, notes, photos du disque, éditions et pressages comme sur Discogs) et filmographie.
- * Chaque élément est une ligne d'artist_items (personne, genre, titre, année, et le reste en JSON).
+ * Chaque élément est une ligne de la table générique items (moteur : lib/art_engine.php).
  * Les imports (Discogs, MusicBrainz, Open Library, Wikidata — qui donne aussi les identifiants IMDb —, TMDb) passent par
  * le serveur : les adresses sont construites ici à partir d'identifiants vérifiés, jamais reçues toutes faites.
  */
 
-const ARTIST_KINDS = ['book', 'work', 'release', 'film'];
+require_once __DIR__ . '/art_engine.php'; // le moteur : sortes, liens, personnes citées, réglages
+
+const ARTIST_KINDS = ART_BUILTIN_KINDS; // + les sortes créées par l'utilisateur (art_kind_ok)
 const ARTIST_UA = 'LCNDA/0.6 (logiciel de genealogie ; +https://github.com/victorbaissait/lcnda)';
 /** les sites d'où l'on peut rapatrier une image (pochette, affiche, couverture, photo d'œuvre) */
 const ARTIST_IMG_HOSTS = ['i.discogs.com', 'img.discogs.com', 'st.discogs.com', 'covers.openlibrary.org', 'archive.org', 'upload.wikimedia.org', 'commons.wikimedia.org', 'image.tmdb.org', 'coverartarchive.org', 'mzstatic.com'];
 
 function artist_ensure(PDO $pdo): void
 {
-    static $done = false;
-    if ($done) { return; }
-    $pdo->exec("CREATE TABLE IF NOT EXISTS artist_items (id INTEGER PRIMARY KEY AUTOINCREMENT, person_id INTEGER NOT NULL, kind TEXT NOT NULL, title TEXT NOT NULL DEFAULT '',
-        year INTEGER, data TEXT NOT NULL DEFAULT '{}', sort_order INTEGER NOT NULL DEFAULT 0, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
-    $pdo->exec('CREATE INDEX IF NOT EXISTS idx_artist_items_person ON artist_items(person_id, kind)');
-    $done = true;
+    art_ensure($pdo);
 }
 
 /** nettoie récursivement ce qu'envoie le navigateur : clés simples, textes bornés, listes bornées */
@@ -44,77 +41,13 @@ function artist_clean(mixed $v, int $depth = 0): mixed
     return is_bool($v) || $v === null ? $v : null;
 }
 
-function artist_year(array $d): ?int
-{
-    foreach (['year', 'date', 'released'] as $k) { if (preg_match('/\b(1[0-9]{3}|20[0-9]{2})\b/', (string) ($d[$k] ?? ''), $m)) { return (int) $m[1]; } }
-    return null;
-}
-
-function artist_items_for(PDO $pdo, int $personId): array
-{
-    artist_ensure($pdo);
-    $s = $pdo->prepare('SELECT id, kind, title, year, data, sort_order, updated_at FROM artist_items WHERE person_id=? ORDER BY kind, sort_order, COALESCE(year, 9999), id');
-    $s->execute([$personId]);
-    return array_map(static fn($r) => ['id' => (int) $r['id'], 'kind' => $r['kind'], 'title' => $r['title'], 'year' => $r['year'] !== null ? (int) $r['year'] : null,
-        'data' => json_decode((string) $r['data'], true) ?: [], 'sort' => (int) $r['sort_order'], 'updated_at' => $r['updated_at']], $s->fetchAll());
-}
-
-function save_artist_item(PDO $pdo, array $d): array
-{
-    artist_ensure($pdo);
-    $personId = safe_int($d['person_id'] ?? 0);
-    $p = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $p->execute([$personId]); if (!$p->fetchColumn()) { throw new RuntimeException('Personne introuvable.'); }
-    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
-    $kind = (string) ($d['kind'] ?? ''); if (!in_array($kind, ARTIST_KINDS, true)) { throw new RuntimeException('Genre d’élément inconnu.'); }
-    $data = artist_clean(is_array($d['data'] ?? null) ? $d['data'] : []);
-    $json = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    if (strlen((string) $json) > 3_000_000) { throw new RuntimeException('Élément trop volumineux.'); }
-    $title = mb_substr(trim(safe_text($data['title'] ?? '')), 0, 500); if ($title === '') { $title = 'Sans titre'; }
-    $year = artist_year($data);
-    $id = safe_int($d['id'] ?? 0);
-    if ($id) {
-        $u = $pdo->prepare('UPDATE artist_items SET title=?, year=?, data=?, updated_at=CURRENT_TIMESTAMP WHERE id=? AND person_id=? AND kind=?');
-        $u->execute([$title, $year, $json, $id, $personId, $kind]);
-        if (!$u->rowCount()) { throw new RuntimeException('Élément introuvable.'); }
-    } else {
-        $n = $pdo->prepare('SELECT COALESCE(MAX(sort_order),0)+1 FROM artist_items WHERE person_id=? AND kind=?'); $n->execute([$personId, $kind]);
-        $pdo->prepare('INSERT INTO artist_items(person_id, kind, title, year, data, sort_order) VALUES(?,?,?,?,?,?)')->execute([$personId, $kind, $title, $year, $json, (int) $n->fetchColumn()]);
-        $id = (int) $pdo->lastInsertId();
-    }
-    return ['id' => $id];
-}
-
-/** plusieurs éléments d'un coup (import d'une discographie, d'une filmographie…) */
-function save_artist_items(PDO $pdo, array $d): array
-{
-    $ids = [];
-    $own = !$pdo->inTransaction(); if ($own) { $pdo->beginTransaction(); } // l'API en ouvre souvent déjà une
-    try {
-        foreach (array_slice(is_array($d['items'] ?? null) ? $d['items'] : [], 0, 500) as $it) {
-            if (!is_array($it)) { continue; }
-            $ids[] = save_artist_item($pdo, ['person_id' => $d['person_id'] ?? 0, 'kind' => $it['kind'] ?? '', 'data' => $it['data'] ?? [], 'id' => $it['id'] ?? 0])['id'];
-        }
-        if ($own) { $pdo->commit(); }
-    } catch (Throwable $e) { if ($own) { $pdo->rollBack(); } throw $e; }
-    return ['ids' => $ids];
-}
-
-function delete_artist_item(PDO $pdo, array $d): array
-{
-    artist_ensure($pdo);
-    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, safe_int($d['person_id'] ?? 0)); }
-    $pdo->prepare('DELETE FROM artist_items WHERE id=? AND person_id=?')->execute([safe_int($d['id'] ?? 0), safe_int($d['person_id'] ?? 0)]);
-    return ['ok' => true];
-}
-
-function reorder_artist_items(PDO $pdo, array $d): array
-{
-    artist_ensure($pdo);
-    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, safe_int($d['person_id'] ?? 0)); }
-    $s = $pdo->prepare('UPDATE artist_items SET sort_order=? WHERE id=? AND person_id=?');
-    foreach (array_slice(is_array($d['ids'] ?? null) ? $d['ids'] : [], 0, 2000) as $i => $id) { $s->execute([$i + 1, safe_int($id), safe_int($d['person_id'] ?? 0)]); }
-    return ['ok' => true];
-}
+/* Les fiches elles-mêmes sont rangées par le moteur générique (lib/art_engine.php : table items) ; ces noms restent pour
+ * les routes déjà en place d'api.php (artist_items, save_artist_item…). */
+function artist_items_for(PDO $pdo, int $personId): array { return art_items_for($pdo, $personId); }
+function save_artist_item(PDO $pdo, array $d): array { return art_save_item($pdo, $d); }
+function save_artist_items(PDO $pdo, array $d): array { return art_save_items($pdo, $d); }
+function delete_artist_item(PDO $pdo, array $d): array { return art_delete_item($pdo, $d); }
+function reorder_artist_items(PDO $pdo, array $d): array { return art_reorder_items($pdo, $d); }
 
 /* ═════════ Les imports ═════════ */
 

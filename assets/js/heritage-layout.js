@@ -243,6 +243,7 @@
         if (Number(it.mediaId) > 0) o.mediaId = Math.round(Number(it.mediaId));
         if (it.type === 'frame' && Number(it.diagramId) > 0) o.diagramId = Math.round(Number(it.diagramId));
         if (it.type === 'text' && it.dyn?.type === 'person' && Number(it.dyn.id) > 0) o.dyn = {type: 'person', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).filter(f => DYN_FIELDS.some(d => d[0] === f)), at: String(it.dyn.at || '').slice(0, 40)};
+        if (it.type === 'text' && it.dyn?.type === 'art' && Number(it.dyn.id) > 0) o.dyn = {type: 'art', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).map(String).slice(0, 60), part: String(it.dyn.part || '').slice(0, 20), at: String(it.dyn.at || '').slice(0, 40)}; // 🎨 notice qui suit sa fiche
         return o;
     }
 
@@ -1086,7 +1087,7 @@
                     const want = `media/${r.filename}`; if (it.src !== want) { it.src = want; it.srcName = r.title || r.filename; linkState[it.id] = 'updated'; changed++; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok';
                 });
             }
-            for (const it of dyn) { try { const h = await personDynHtml(it.dyn.id, it.dyn.fields); if (h !== it.html) { it.html = h; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = 'ok'; it.dyn.at = new Date().toISOString().slice(0, 16); } catch (_) { linkState[it.id] = 'missing'; } }
+            for (const it of dyn) { try { const h = it.dyn.type === 'art' ? await ext.artistCatalogue.noticeHtml(it.dyn) : await personDynHtml(it.dyn.id, it.dyn.fields); if (h !== it.html) { it.html = h; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = 'ok'; it.dyn.at = new Date().toISOString().slice(0, 16); } catch (_) { linkState[it.id] = 'missing'; } }
             for (const it of trees) { try { const r = await treeSvg(it.tree, lookOf()), src = svgSrc(r.svg); if (src !== it.src) { it.src = src; it.srcName = r.name; it.tree.at = new Date().toISOString().slice(0, 16); changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
             for (const it of dgs) { try { const svg = ext.diagramSvg ? await ext.diagramSvg(it.diagramId) : ''; if (!svg) { linkState[it.id] = 'missing'; continue; } const src = svgSrc(svg); if (src !== it.src) { it.src = src; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
             if (changed) { commit('Objets dynamiques mis à jour'); render(); }
@@ -2280,7 +2281,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
             const mine = docs.filter(x => !x.is_design), designs = docs.filter(x => x.is_design);
             const card = (x, kind) => `<article class="ly-card">${coverHtml(x.cover)}<div><b>${esc(x.name)}</b><small>${A().plural(x.pages, 'page')} · ${esc(String(x.updated_at || '').slice(0, 16).replace('T', ' '))}</small><div class="ly-cardbtns">${kind === 'doc' ? `<button type="button" class="button small" data-open="${x.id}">Ouvrir</button>` : `<button type="button" class="button small" data-usedesign="${x.id}">Utiliser</button><button type="button" class="button small secondary" data-open="${x.id}">Modifier</button>`}<button type="button" class="button small secondary" data-dup="${x.id}">Dupliquer</button><button type="button" class="button small secondary" data-ren="${x.id}">Renommer</button><button type="button" class="button small secondary" data-exp="${x.id}">Exporter</button><button type="button" class="button small secondary danger" data-del="${x.id}">🗑</button></div></div></article>`;
             dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">LIVRE DE FAMILLE</span><h2>📐 Mise en page</h2><p>Un atelier façon InDesign : pages, gabarits, calques, textes, formes, images, nuancier… Pars d’une page blanche, des données de la famille ou d’un design.</p></div><button class="icon-button" type="button" data-close aria-label="Fermer">×</button></div>
-                <div class="ly-libbody"><div class="ly-row ly-libtop"><button type="button" class="button" data-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-new="design">🎨 Nouveau depuis un design</button><button type="button" class="button secondary" data-new="blank">📄 Page blanche</button><label class="button secondary">⬆️ Importer un document<input type="file" accept=".json,application/json" data-import hidden></label><button type="button" class="button secondary" data-defaults>⚙️ Réglages par défaut</button></div>
+                <div class="ly-libbody"><div class="ly-row ly-libtop"><button type="button" class="button" data-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-new="catalogue">🖼 Catalogue raisonné</button><button type="button" class="button secondary" data-new="discography">💿 Discographie</button><button type="button" class="button secondary" data-new="design">🎨 Nouveau depuis un design</button><button type="button" class="button secondary" data-new="blank">📄 Page blanche</button><label class="button secondary">⬆️ Importer un document<input type="file" accept=".json,application/json" data-import hidden></label><button type="button" class="button secondary" data-defaults>⚙️ Réglages par défaut</button></div>
                 <h3>📚 Mes livres (${mine.length})</h3><div class="ly-cards">${mine.map(x => card(x, 'doc')).join('') || A().emptyState({icon: '📚', text: 'Aucun livre pour l’instant', hint: 'Commence par un livre fait d’après la famille : il se remplit avec les fiches.', action: {label: '👪 Nouveau livre d’après la famille', attrs: 'data-new="family"'}})}</div>
                 <h3>🎨 Mes designs (${designs.length})</h3><div class="ly-cards">${designs.map(x => card(x, 'design')).join('') || '<p class="muted">Un design est un modèle : ouvre un livre, puis Fichier → « Enregistrer comme design ». Les designs de l’app (ci-dessous) peuvent aussi être modifiés et enregistrés à ton nom.</p>'}</div>
                 <h3>✨ Designs de l’app</h3><div class="ly-cards">${builtins().map(({th, doc}) => `<article class="ly-card">${coverHtml(doc)}<div><b>${esc(th.name)}</b><small>${esc(th.titleFont)} · ${esc(th.bodyFont)}</small><div class="ly-cardbtns"><button type="button" class="button small" data-builtin="${th.id}">Utiliser</button><button type="button" class="button small secondary" data-editbuiltin="${th.id}">Modifier (à mon nom)</button></div></div></article>`).join('')}</div></div>`;
@@ -2319,6 +2320,7 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     }
     /** Nouveau document : page blanche, d'après un design, ou d'après la famille (avec un design) */
     async function newDocWizard(mode, onSaved, {designId = 0, builtin = ''} = {}) {
+        if ((mode === 'catalogue' || mode === 'discography') && ext.artistCatalogue?.wizard) return ext.artistCatalogue.wizard({mode, onSaved}); // 🎨
         let mineDesigns = []; try { mineDesigns = (await api('layout_docs')).docs.filter(x => x.is_design); } catch (_) {}
         const d = defaults(), S = A().state, start = S.bootstrap?.startPersonId;
         const designOpts = [...THEMES.map(th => [`b:${th.id}`, `✨ ${th.name}`]), ...mineDesigns.map(x => [`m:${x.id}`, `🎨 ${x.name}`])];
@@ -2370,6 +2372,8 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     // pour Listes → 🛠️ Outils de modification
     ext.openLayoutDoc = async (id, onSaved) => { const r = await api('layout_doc', {id}); return openEditor({id: r.id, name: r.name, doc: r.doc, isDesign: !!r.is_design, onSaved, rev: r.rev}); };
     ext.newLayoutDoc = (mode, onSaved) => newDocWizard(mode, onSaved);
+    // 🎨 pour heritage-artist-catalogue.js : fabriquer un livre (catalogue raisonné, discographie) avec les mêmes briques que le livre de famille
+    ext.layoutKit = {SIZES, THEMES, themeDoc, baseStyles, baseSwatches, folioMaster, defaults, cleanDoc, nid, box, flow, textItem, shapeItem, coverItems, openEditor};
     ext.layoutCoverHtml = (cover, w) => coverHtml(cover, w);
     ext.lists.layout_books = async token => {
         const S = A().state, ws = A().$('#workspace'), UI = window.LCNDA_UI;

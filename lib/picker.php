@@ -12,11 +12,12 @@ declare(strict_types=1);
  * Toutes les requêtes sont préparées ; q n'est jamais collé dans le SQL.
  */
 
-const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census'];
+const PICKER_KINDS = ['person', 'place', 'source', 'media', 'investigation', 'battue', 'label', 'house', 'periodical', 'employer', 'census', 'artwork'];
 const PICKER_LABELS = [
     'person' => '👤 Personnes', 'place' => '📍 Lieux', 'source' => '📚 Sources', 'media' => '🖼 Médias',
     'investigation' => '🔍 Enquêtes', 'battue' => '🧭 Battues', 'label' => '🏷 Étiquettes', 'house' => '🏠 Maisons',
     'periodical' => '📰 Revues', 'employer' => '🏭 Employeurs', 'census' => '📋 Recensements',
+    'artwork' => '🎨 Œuvres',
 ];
 // pays tapés en abrégé après un nom de lieu (« springfield usa »)
 const PICKER_COUNTRY_ALIASES = [
@@ -103,6 +104,9 @@ function picker_search(PDO $pdo, array $get): array
         'recent_ids' => array_slice(array_map('intval', explode(',', (string) ($get['recent_ids'] ?? ''))), 0, 60),
         'media_flag' => in_array($get['media_flag'] ?? '', ['notr', 'tr', 'sig'], true) ? $get['media_flag'] : '',
         'with_text' => (string) ($get['with_text'] ?? '') === '1']; // avec la transcription (relecture d'un média choisi)
+    // 🎨 fiches des catalogues d'artistes : sortes (« release,master ») et artiste
+    $opts['art_kind'] = (string) preg_replace('/[^a-z0-9_,]/', '', strtolower((string) ($get['art_kind'] ?? '')));
+    $opts['art_person'] = max(0, (int) ($get['art_person'] ?? 0));
     // near=lat,lon : les lieux les plus proches d'un point cliqué sur la carte
     if (in_array('place', $kinds, true) && preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/', (string) ($get['near'] ?? ''), $m)) {
         return ['groups' => picker_places_near($pdo, (float) $m[1], (float) $m[2], min($limit, 30)), 'more' => false, 'next_offset' => 0];
@@ -165,6 +169,7 @@ function picker_kind(PDO $pdo, string $kind, string $q, int $offset, int $limit,
             'periodical' => picker_periodicals($pdo, $q, $offset, $limit),
             'employer' => picker_employers($pdo, $q, $offset, $limit),
             'census' => picker_census($pdo, $q, $offset, $limit),
+            'artwork' => function_exists('picker_art_items') ? picker_art_items($pdo, $q, $offset, $limit, $opts) : ['total' => 0, 'items' => []],
         };
         return ['groups' => [['kind' => $kind, 'key' => $kind, 'label' => PICKER_LABELS[$kind], 'total' => $r['total'], 'items' => $r['items']]],
             'more' => $offset + $limit < $r['total']];

@@ -527,6 +527,7 @@ function heritage_person_data(PDO $pdo, int $personId): array
         'voter' => function_exists('voter_data') ? voter_data($pdo, $personId) : null,
         'booklets' => function_exists('booklet_person_mentions') ? booklet_person_mentions($pdo, $personId) : [],
         'artist' => function_exists('artist_items_for') ? artist_items_for($pdo, $personId) : [],
+        'artist_cited' => function_exists('art_person_cited') ? art_person_cited($pdo, $personId) : [], // 🎨 « Lié à » : les catalogues d'artistes qui la citent
         'pets' => function_exists('pets_for_person') ? pets_for_person($pdo, $personId) : [],
         'animal' => function_exists('pet_of_person') && (string) $pdo->query('SELECT kind FROM persons WHERE id=' . $personId)->fetchColumn() === 'animal' && pet_of_person($pdo, $personId) ? pet_detail($pdo, pet_of_person($pdo, $personId)) : null,
         'boards' => function_exists('boards_linked') ? boards_linked($pdo, 'person', $personId) : [],

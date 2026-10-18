@@ -15,7 +15,7 @@ declare(strict_types=1);
  * « try { ALTER TABLE … } catch » dans api.php ou upload.php.
  */
 
-const SCHEMA_VERSION = 46;
+const SCHEMA_VERSION = 47;
 
 /** @return array<int, callable(PDO): void> numéro de structure => migration qui y mène */
 function migration_steps(): array
@@ -67,6 +67,7 @@ function migration_steps(): array
         44 => 'schema_v44',
         45 => 'schema_v45',
         46 => 'schema_v46',
+        47 => 'schema_v47',
     ];
 }
 
@@ -2036,4 +2037,13 @@ function schema_v46(PDO $pdo): void
         created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
         updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )");
+}
+
+/** 🎨 Fiches « œuvres et réalisations » (moteur générique, lib/art_engine.php) : items (les fiches ; l'ancienne table
+ *  artist_items y est recopiée, mêmes numéros, puis supprimée), item_types, type_fields, type_links, item_people,
+ *  item_links (index tirés du JSON des fiches), profiles et person_profiles (le profil « Artiste »), layout_prefs. */
+function schema_v47(PDO $pdo): void
+{
+    if (!function_exists('art_schema')) { require_once __DIR__ . '/art_engine.php'; }
+    art_schema($pdo);
 }
