@@ -34,6 +34,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/layout.css?v=11">
     <link rel="stylesheet" href="assets/css/museum.css?v=1">
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
+    <link rel="stylesheet" href="assets/css/ui.css?v=1">
 </head></html>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
@@ -1094,6 +1095,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-enquetes.js?v=4" defer></script>
 <script src="assets/js/app-tableau-de-bord.js?v=6" defer></script>
 <script src="assets/js/app-harmony.js?v=4" defer></script>
+<script src="assets/js/app-ui.js?v=1" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
 <script src="assets/js/app-listes.js?v=8" defer></script>
 <script src="assets/js/app-maintenance.js?v=8" defer></script>
