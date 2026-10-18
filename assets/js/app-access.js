@@ -3,7 +3,9 @@
  * chargement : classes « a11y-… » et variables « --a11y-… » sur <html> (styles : assets/css/access.css).
  * Couleurs : filtre SVG de correction (daltonisation, matrices de Machado 2009) + palette sûre Okabe-Ito pour les
  * couleurs de sens ; aperçu « voir comme… » (filtre de simulation). Texte, contraste, focus, grandes cibles, curseur,
- * mouvement, durée des messages, lecture à voix haute (speechSynthesis).
+ * mouvement, durée des messages, lecture à voix haute (speechSynthesis), sous-titres toujours affichés (pistes <track> et
+ * aperçu des montages), description des images pour les lecteurs d'écran (alt des médias, descriptions écrites gardées dans
+ * « genealogie-media-alt »), mode « une chose à la fois » (html.a11y-simple), dictée vocale (SpeechRecognition, fr-FR).
  * API : window.LCNDA_EXT.access = {get, set, reset, apply, simulate, speak, stop} ; page : LCNDA_EXT.maintenance.accessibilite(token).
  */
 (() => {
@@ -33,6 +35,7 @@
         focus: false, big: false, cursor: false,
         calm: false, toastX: 1,
         tts: false, rate: 1, voice: '',
+        subs: false, alt: false, simple: false, dictate: false,
     });
     let P = DEFAULTS();
     const load = () => {
@@ -102,10 +105,13 @@
     const OI = ['#E69F00', '#56B4E9', '#009E73', '#F0E442', '#0072B2', '#D55E00', '#CC79A7', '#999999'];
 
     /* ═════ Appliquer à toute l'app ═════ */
+    /* Atkinson Hyperlegible et OpenDyslexic sont embarquées (assets/fonts/, licence SIL OFL, @font-face dans access.css) :
+       elles marchent partout, même hors ligne. Comic Sans est celle de l'ordinateur (absente sous Linux le plus souvent). */
     const FONTS = {
         app: {label: 'Celle de l’app', stack: ''},
-        legible: {label: 'Très lisible', want: ['Atkinson Hyperlegible Next', 'Atkinson Hyperlegible'], fallback: 'Verdana', stack: '"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", Verdana, Tahoma, "DejaVu Sans", sans-serif'},
-        dys: {label: 'Pour la dyslexie', want: ['OpenDyslexic', 'OpenDyslexic3', 'Open-Dyslexic'], fallback: 'Comic Sans MS', stack: 'OpenDyslexic, OpenDyslexic3, "Open-Dyslexic", "Comic Sans MS", "Comic Neue", Verdana, sans-serif'},
+        legible: {label: 'Très lisible', face: 'Atkinson Hyperlegible', stack: '"Atkinson Hyperlegible", Verdana, Tahoma, "DejaVu Sans", sans-serif'},
+        dys: {label: 'OpenDyslexic', group: 'dys', face: 'OpenDyslexic', stack: 'OpenDyslexic, "Comic Sans MS", Verdana, sans-serif'},
+        comic: {label: 'Comic Sans', group: 'dys', system: 'Comic Sans MS', stack: '"Comic Sans MS", "Comic Sans", "Comic Neue", OpenDyslexic, Verdana, sans-serif'},
     };
     function fontExists(name) {
         try {
@@ -113,15 +119,16 @@
             return ['monospace', 'serif', 'sans-serif'].some(base => { c.font = `72px ${base}`; const w0 = c.measureText(t).width; c.font = `72px "${name}", ${base}`; return c.measureText(t).width !== w0; });
         } catch (_) { return false; }
     }
-    const fontInstalled = k => (FONTS[k].want || []).find(fontExists) || '';
-    const fallbackFont = k => [FONTS[k].fallback, 'Verdana', 'Tahoma'].find(fontExists) || 'sans-serif';
+    /* la police de l'ordinateur est-elle là ? (Comic Sans) — « Comic Sans MS » ou « Comic Sans » */
+    const comicInstalled = () => (comicInstalled.v ??= ['Comic Sans MS', 'Comic Sans'].some(fontExists));
 
-    const CLASSES = ['a11y-filter', 'a11y-safe', 'a11y-shapes', 'a11y-zoom', 'a11y-lh', 'a11y-spacing', 'a11y-font', 'a11y-underline', 'a11y-contrast', 'a11y-focus', 'a11y-big', 'a11y-cursor', 'a11y-calm', 'a11y-sim'];
+    const CLASSES = ['a11y-filter', 'a11y-safe', 'a11y-shapes', 'a11y-zoom', 'a11y-lh', 'a11y-spacing', 'a11y-font', 'a11y-underline', 'a11y-contrast', 'a11y-focus', 'a11y-big', 'a11y-cursor', 'a11y-calm', 'a11y-sim', 'a11y-subs', 'a11y-alt', 'a11y-simple', 'a11y-dictate'];
     function apply() {
         const on = {
             'a11y-safe': P.safe, 'a11y-shapes': P.shapes, 'a11y-zoom': P.size !== 100, 'a11y-lh': P.lh != null,
             'a11y-spacing': P.ls > 0 || P.ws > 0, 'a11y-font': P.font !== 'app', 'a11y-underline': P.underline, 'a11y-contrast': P.contrast,
             'a11y-focus': P.focus, 'a11y-big': P.big, 'a11y-cursor': P.cursor, 'a11y-calm': P.calm, 'a11y-sim': !!sim,
+            'a11y-subs': P.subs, 'a11y-alt': P.alt, 'a11y-simple': P.simple, 'a11y-dictate': P.dictate && !dictationWhy(),
         };
         const filters = [];
         if (P.cb !== 'none' && P.fix > 0) { updateFixFilter(); filters.push('url(#a11y-fix)'); }
@@ -136,6 +143,7 @@
         set('--a11y-font', P.font !== 'app' ? FONTS[P.font].stack : null);
         root.dataset.a11yToast = String(P.toastX);
         applyGender(); remapCharts(); showSimBanner(); updateFloating();
+        if (document.body) { applySubs(); applyAlt(); updateSimpleBar(); trackModule(); if (!P.dictate || dictationWhy()) { dictStop(true); hideMic(); } }
     }
 
     /* couleurs homme / femme : celles de l'app (Maintenance → couleurs des fiches) remplacées par une paire sûre, si elles sont différentes */
@@ -313,17 +321,372 @@
         if (banner.parentNode !== host) { try { banner.hidePopover?.(); } catch (_) {} host.appendChild(banner); }
         if (CAN_POP) { try { if (banner.matches(':popover-open')) banner.hidePopover(); banner.showPopover(); } catch (_) {} }
     }
-    const onLayerChange = () => { placeBanner(); updateFloating(); };
+    const onLayerChange = () => { placeBanner(); updateFloating(); syncLightboxField(); };
     setInterval(() => { if (sim && banner && !banner.isConnected) placeBanner(); }, 1000); // la fenêtre qui le portait a été retirée
     document.addEventListener('toggle', e => { if (e.target !== banner && e.target.matches?.('dialog, [popover]')) setTimeout(onLayerChange); }, true);
     document.addEventListener('close', () => setTimeout(onLayerChange), true);
     new MutationObserver(list => { if (list.some(m => m.attributeName === 'open')) setTimeout(onLayerChange); }).observe(document.documentElement, {attributes: true, attributeFilter: ['open'], subtree: true});
 
+    /* ═════ Sous-titres toujours affichés ═════ */
+    /* Une vidéo qui a une piste de sous-titres (<track kind="subtitles|captions">) la montre d'office (en français s'il y en a une) ;
+       l'aperçu des montages (heritage-studio-av.js) lit la classe « a11y-subs » pour dessiner la piste « Sous-titres » même cachée. */
+    const shownTracks = new Map(); // piste → mode d'avant
+    function showTracks(v) {
+        const list = v.textTracks ? [...v.textTracks].filter(t => t.kind === 'subtitles' || t.kind === 'captions') : [];
+        if (!list.length || list.some(t => t.mode === 'showing')) return; // déjà une piste affichée (choisie par la personne)
+        const t = list.find(x => /^fr/i.test(x.language || '')) || list[0];
+        if (!shownTracks.has(t)) shownTracks.set(t, t.mode);
+        try { t.mode = 'showing'; } catch (_) {}
+    }
+    function hookVideo(v) {
+        if (!v._a11ySubs) {
+            v._a11ySubs = true;
+            v.textTracks?.addEventListener?.('addtrack', () => { if (P.subs) setTimeout(() => showTracks(v)); });
+            v.addEventListener('loadedmetadata', () => { if (P.subs) showTracks(v); });
+        }
+        showTracks(v);
+    }
+    function applySubs() {
+        if (P.subs) { document.querySelectorAll('video').forEach(hookVideo); return; }
+        shownTracks.forEach((mode, t) => { try { t.mode = mode === 'showing' ? 'hidden' : mode; } catch (_) {} });
+        shownTracks.clear();
+    }
+
+    /* ═════ Description des images pour les lecteurs d'écran (texte alternatif) ═════ */
+    /* Toute image dont l'adresse est un fichier des médias (media/…) reçoit un « alt » utile : la description écrite pour les
+       lecteurs d'écran (fenêtre du média), sinon titre + date + lieu + personnes. Les infos viennent de picker_search (100 à la
+       fois, gardées en mémoire). Les petites images posées à côté d'un nom et les images de décoration reçoivent alt="".
+       Un alt déjà bien écrit par l'app est gardé. Quand le réglage est coupé, chaque image retrouve son alt d'avant. */
+    const ALT_KEY = 'genealogie-media-alt'; // {numéro du média: description} — copié dans la base par app.js
+    let altCache = null;
+    const readAlts = () => {
+        if (altCache) return altCache;
+        try { const o = JSON.parse(localStorage.getItem(ALT_KEY) || '{}'); altCache = o && typeof o === 'object' && !Array.isArray(o) ? o : {}; } catch (_) { altCache = {}; }
+        return altCache;
+    };
+    function writeAlt(id, text) {
+        const o = {...readAlts()}, t = String(text || '').replace(/\s+/g, ' ').trim().slice(0, 600);
+        if (t) o[id] = t; else delete o[id];
+        altCache = o;
+        try { if (Object.keys(o).length) localStorage.setItem(ALT_KEY, JSON.stringify(o)); else localStorage.removeItem(ALT_KEY); } catch (_) {}
+        if (P.alt) scanAlt(document);
+    }
+    const byFile = new Map(), byId = new Map(), names = new Map(), missing = new Set();
+    const wantFiles = new Set(), wantIds = new Set();
+    let catalog = {offset: 0, done: false};
+    const pick = params => (A().api ? A().api('picker_search', params) : fetch(`api.php?${new URLSearchParams({action: 'picker_search', ...params})}`, {headers: {Accept: 'application/json'}}).then(r => r.json()));
+    const itemsOf = r => (r?.groups || []).flatMap(g => g.items || []);
+    function remember(it, full = false) {
+        if (!it?.id) return;
+        const m = byId.get(it.id) || {id: it.id};
+        Object.assign(m, {title: it.title || '', filename: it.filename || '', media_type: String(it.media_type || '').toLowerCase(), date_text: it.date_text || '', year: it.year || '', place: it.place || '', tag: it.tag || '', people: (it.people_ids || []).map(Number)});
+        if (full) { m.description = String(it.description || ''); m.full = true; }
+        byId.set(it.id, m);
+        [it.filename, it.thumbnail].forEach(f => { if (f) { byFile.set(f, it.id); missing.delete(f); } });
+    }
+    function mediaFile(img) {
+        const src = img.getAttribute('src') || ''; if (!src || /^(data|blob|about):/i.test(src)) return '';
+        let u; try { u = new URL(src, location.href); } catch (_) { return ''; }
+        if (u.origin !== location.origin) return '';
+        const m = u.pathname.match(/\/media\/(.+)$/); if (!m) return '';
+        try { return decodeURIComponent(m[1]); } catch (_) { return m[1]; }
+    }
+    const fileLike = t => !t || (/\.[a-z0-9]{2,5}$/i.test(t) && !/\s/.test(t)) || /^[0-9a-f]{16,}/i.test(t);
+    const GENERIC = /^(image|images|photo|photographie|aper[çc]u|vignette|miniature|portrait|m[ée]dia|document|capture|img|picture|thumbnail|thumb|fichier|illustration|logo|icon|ic[ôo]ne)$/i;
+    const goodAlt = a => { const t = String(a || '').trim(); return t.length >= 4 && !fileLike(t) && !GENERIC.test(t); };
+    const joinFr = l => (l.length < 2 ? l.join('') : `${l.slice(0, -1).join(', ')} et ${l.at(-1)}`);
+    const firstSentence = t => { const x = String(t || '').replace(/\s+/g, ' ').trim(); const m = x.match(/^.{20,200}?[.!?…](\s|$)/); return (m ? m[0] : x.slice(0, 200)).trim(); };
+    /** Le texte lu pour un média (null tant que ses infos ne sont pas arrivées). */
+    function altFor(id) {
+        const own = readAlts()[id]; if (own) return own;
+        const m = byId.get(Number(id)); if (!m) return null;
+        const kind = m.tag ? m.tag.charAt(0) + m.tag.slice(1).toLowerCase() : m.media_type === 'document' || m.media_type === 'pdf' ? 'Document' : 'Photo';
+        const title = fileLike(m.title) ? '' : m.title.trim();
+        let s = title || kind;
+        const when = m.date_text || String(m.year || ''), extra = [when && !title.includes(when) ? when : '', m.place && !title.includes(m.place) ? m.place : ''].filter(Boolean);
+        if (extra.length) s += ` (${extra.join(', ')})`;
+        const who = m.people.map(i => names.get(i)).filter(Boolean).filter(n => !title.includes(n));
+        if (who.length) s += ` — ${who.length > 4 ? `${who.slice(0, 3).join(', ')} et ${who.length - 3} autres personnes` : joinFr(who)}`;
+        if (!title && m.description) s += `. ${firstSentence(m.description)}`;
+        return s;
+    }
+    /* petite image posée à côté d'un nom (pastille, avatar) : le nom est déjà lu, l'image est décorative */
+    function tinyBesideText(img) {
+        const r = img.getBoundingClientRect(); if (!r.width || r.width > 44 || r.height > 44) return false;
+        const box = img.closest('button, a, li, label, [class*="chip"], [class*="row"], [class*="item"], [class*="av"]');
+        return !!box && box.textContent.replace(/\s+/g, '').length > 1;
+    }
+    function markAlt(img, text) {
+        if (!img.hasAttribute('data-a11y-alt-orig')) img.setAttribute('data-a11y-alt-orig', img.hasAttribute('alt') ? img.getAttribute('alt') : '\u0001');
+        if (img.getAttribute('alt') !== text) img.setAttribute('alt', text);
+        img.dataset.a11yAlt = text;
+    }
+    function processImg(img) {
+        const cur = img.getAttribute('alt'), mine = img.dataset.a11yAlt != null && cur === img.dataset.a11yAlt;
+        const file = mediaFile(img);
+        if (!file) { if (cur == null) markAlt(img, img.getAttribute('title') || ''); return; } // pas un média : décoration (ou son titre)
+        const id = byFile.get(file);
+        if (id == null) { if (!missing.has(file)) { wantFiles.add(file); scheduleResolve(); } else if (cur == null) markAlt(img, ''); return; }
+        const m = byId.get(id);
+        if (!m?.full || m.people.some(i => !names.has(i))) { wantIds.add(id); scheduleResolve(); }
+        if (tinyBesideText(img)) { if (cur == null || mine || !goodAlt(cur)) markAlt(img, ''); return; }
+        const own = readAlts()[id];
+        if (!own && cur != null && !mine && goodAlt(cur)) return; // déjà bien décrite par l'app
+        const text = altFor(id); if (text != null) markAlt(img, text);
+    }
+    function scanAlt(root) {
+        if (!P.alt || !root) return;
+        if (root.tagName === 'IMG') processImg(root); else root.querySelectorAll?.('img').forEach(processImg);
+    }
+    function applyAlt() {
+        if (P.alt) { scanAlt(document); syncLightboxField(); return; }
+        document.querySelectorAll('img[data-a11y-alt-orig]').forEach(img => {
+            const o = img.getAttribute('data-a11y-alt-orig');
+            if (o === '\u0001') img.removeAttribute('alt'); else img.setAttribute('alt', o);
+            img.removeAttribute('data-a11y-alt-orig'); delete img.dataset.a11yAlt;
+        });
+        syncLightboxField();
+    }
+    let resolveTimer = 0, resolving = false, again = false;
+    const scheduleResolve = () => { clearTimeout(resolveTimer); resolveTimer = setTimeout(resolveMedia, 120); };
+    async function resolveMedia() {
+        if (resolving) { again = true; return; }
+        resolving = true;
+        try {
+            // 1. les numéros des fichiers inconnus : les médias du plus récent au plus ancien, 100 à la fois, jusqu'à les avoir tous
+            const unknown = () => [...wantFiles].filter(f => !byFile.has(f));
+            if (unknown().length && catalog.done) catalog = {offset: 0, done: false, again: true}; // un média ajouté depuis : on relit le début
+            for (let guard = 0; unknown().length && !catalog.done && guard < 80; guard++) {
+                const r = await pick({kind: 'media', limit: 100, offset: catalog.offset});
+                const list = itemsOf(r); list.forEach(it => remember(it));
+                catalog.offset += 100;
+                if (!r?.more || !list.length || catalog.again) catalog.done = true;
+            }
+            catalog.done = true;
+            wantFiles.forEach(f => { if (!byFile.has(f)) missing.add(f); }); wantFiles.clear();
+            scanAlt(document); // repère les médias affichés dont il manque la description ou les noms
+            // 2. description de chaque média affiché (100 à la fois)
+            const shown = [...wantIds], ids = shown.filter(id => !byId.get(id)?.full); wantIds.clear();
+            for (let i = 0; i < ids.length; i += 100) itemsOf(await pick({kind: 'media', ids: ids.slice(i, i + 100).join(','), with_text: 1})).forEach(it => remember(it, true));
+            ids.forEach(id => { const m = byId.get(id); if (m) m.full = true; });
+            // 3. les noms des personnes rattachées (100 à la fois)
+            const pids = [...new Set(shown.flatMap(id => byId.get(id)?.people || []))].filter(i => !names.has(i));
+            for (let i = 0; i < pids.length; i += 100) {
+                const got = itemsOf(await pick({kind: 'person', ids: pids.slice(i, i + 100).join(','), animals: 1}));
+                got.forEach(it => names.set(Number(it.id), String(it.title || '').trim()));
+            }
+            pids.forEach(i => { if (!names.has(i)) names.set(i, ''); });
+            wantIds.clear(); scanAlt(document); syncLightboxField();
+        } catch (e) { console.warn('[accessibilité] description des images :', e); }
+        finally { resolving = false; if (again) { again = false; scheduleResolve(); } }
+    }
+    /* la fenêtre d'un média : un champ « Description de l'image (lue à voix haute) » sous la note */
+    let lbTimer = 0;
+    function syncLightboxField() {
+        const desc = document.getElementById('lightbox-description'); let box = document.getElementById('a11y-lb-alt');
+        const st = A().state, item = st?.lightboxMedia?.[st.lightboxIndex];
+        const isImg = item && (/^(image|document)$/i.test(String(item.media_type || '')) && /\.(jpe?g|png|gif|webp|tiff?|bmp|heic|avif)$/i.test(item.filename || ''));
+        if (!P.alt || !desc || !isImg || !item.id || !document.getElementById('lightbox')?.open) { box?.remove(); return; }
+        if (!box) {
+            box = document.createElement('div'); box.id = 'a11y-lb-alt'; box.className = 'a11y-lb-alt';
+            box.innerHTML = `<label for="a11y-lb-alt-text">Description de l’image <small>(lue à voix haute)</small></label>
+                <textarea id="a11y-lb-alt-text" rows="2" maxlength="600"></textarea>
+                <small class="a11y-lb-hint">Pour qui ne voit pas l’écran : son lecteur d’écran lira ce texte. Dis ce qu’on voit, en une ou deux phrases. Gardé tout de suite, sans « Enregistrer ».</small>`;
+            const ta = box.querySelector('textarea');
+            ta.addEventListener('input', () => { clearTimeout(lbTimer); const id = box.dataset.id; lbTimer = setTimeout(() => writeAlt(id, ta.value), 350); });
+            ta.addEventListener('blur', () => { clearTimeout(lbTimer); writeAlt(box.dataset.id, ta.value); });
+            desc.after(box);
+        }
+        const ta = box.querySelector('textarea');
+        ta.disabled = desc.disabled || desc.readOnly;
+        if (box.dataset.id !== String(item.id)) {
+            box.dataset.id = String(item.id); ta.value = readAlts()[item.id] || '';
+            if (!byId.has(Number(item.id))) remember({id: Number(item.id), title: item.title, filename: item.filename, thumbnail: item.thumbnail, media_type: item.media_type, date_text: item.date_text}, false);
+        }
+        const auto = (() => { const own = readAlts()[item.id]; if (!own) return altFor(item.id); const keep = altCache; altCache = {...keep}; delete altCache[item.id]; const a = altFor(item.id); altCache = keep; return a; })();
+        ta.placeholder = auto ? `Sinon, on lira : « ${auto} »` : 'Ce qu’on voit : « Joseph et Louise devant la ferme, en habits de fête »';
+    }
+    /* un seul observateur pour les images et les vidéos ajoutées ou changées */
+    let mediaQueue = new Set(), mediaTimer = 0;
+    function flushMedia() {
+        mediaTimer = 0; const list = [...mediaQueue]; mediaQueue.clear();
+        list.forEach(n => {
+            if (!n.isConnected) return;
+            if (P.alt) scanAlt(n);
+            if (P.subs) { if (n.tagName === 'VIDEO') hookVideo(n); else n.querySelectorAll?.('video').forEach(hookVideo); }
+            if (n.id === 'lightbox-image') syncLightboxField();
+        });
+    }
+    function watchMedia() {
+        new MutationObserver(muts => {
+            if (!P.alt && !P.subs) return;
+            muts.forEach(m => { if (m.type === 'attributes') mediaQueue.add(m.target); else m.addedNodes.forEach(n => { if (n.nodeType === 1 && (n.tagName === 'IMG' || n.tagName === 'VIDEO' || n.firstElementChild)) mediaQueue.add(n); }); });
+            if (mediaQueue.size && !mediaTimer) mediaTimer = setTimeout(flushMedia, 80);
+        }).observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['src']});
+        document.addEventListener('keydown', e => { if (P.alt && /^Arrow(Left|Right)$/.test(e.key) && document.getElementById('lightbox')?.open) setTimeout(syncLightboxField, 60); });
+    }
+
+    /* ═════ Mode « une chose à la fois » ═════ */
+    /* Presque tout est en CSS (html.a11y-simple dans access.css) ; ici : l'écran ouvert (html[data-a11y-module]) et le bandeau
+       « Mode simple — Tout afficher », toujours là pour tout réafficher. */
+    function trackModule() {
+        const a = document.querySelector('.main-nav .nav-item.is-active'), m = a?.dataset.module || '';
+        if (root.dataset.a11yModule !== m) root.dataset.a11yModule = m;
+    }
+    function watchNav() { const nav = document.querySelector('.main-nav'); if (nav) new MutationObserver(trackModule).observe(nav, {subtree: true, childList: true, attributes: true, attributeFilter: ['class']}); trackModule(); }
+    let simpleBar = null;
+    function updateSimpleBar() {
+        if (!P.simple) { simpleBar?.remove(); return; }
+        if (!simpleBar) {
+            simpleBar = document.createElement('div'); simpleBar.className = 'a11y-simplebar'; simpleBar.setAttribute('role', 'region'); simpleBar.setAttribute('aria-label', 'Mode simple');
+            simpleBar.innerHTML = '<span class="a11y-simplebar-txt"><span aria-hidden="true">🧩</span> Mode simple</span><button type="button" data-a11y-simple-off title="Remettre tous les boutons et tous les outils à l’écran">Tout afficher</button>';
+            simpleBar.addEventListener('click', e => { if (e.target.closest('[data-a11y-simple-off]')) simpleOff(); });
+        }
+        if (simpleBar.parentNode !== document.body) document.body.appendChild(simpleBar);
+    }
+    function simpleOff() {
+        P.simple = false; save(); apply(); refreshPage();
+        toast('Tout est réaffiché. Pour revenir au mode simple : Maintenance → Accessibilité.');
+    }
+
+    /* ═════ Dictée vocale ═════ */
+    /* Un petit 🎤 dans le champ texte où l'on écrit ; clic (ou Ctrl + Maj + Espace) = dicter en français ; le texte va au curseur,
+       la ponctuation dite (« virgule », « point », « à la ligne »…) devient des signes. Web Speech API (Chrome, Edge, Safari) ;
+       pas dans l'app de bureau (Electron n'a pas le service de reconnaissance) ni dans Firefox : le réglage l'explique. */
+    const SRec = () => window.SpeechRecognition || window.webkitSpeechRecognition || null;
+    const IS_DESKTOP = (() => { try { return !!(window.lcnda && typeof window.lcnda.chooseImportFile === 'function') || /\bElectron\//.test(navigator.userAgent); } catch (_) { return false; } })();
+    const IS_MAC = /Mac|iPhone|iPad/i.test(navigator.platform || navigator.userAgent || '');
+    function dictationWhy() { return IS_DESKTOP ? 'desktop' : !SRec() ? 'none' : ''; }
+    const DICT_KEY_LABEL = IS_MAC ? '⌃ ⇧ Espace' : 'Ctrl + Maj + Espace';
+    const NOT_HERE = 'Ta machine ne propose pas la dictée ici. Sur Mac, utilise la dictée du système : touche 🎤 ou deux fois Fn. Sur Windows : touche Windows + H.';
+    const WB = '(?<![\\p{L}\\p{N}])', WE = '(?![\\p{L}\\p{N}])'; // début et fin de mot (lettres accentuées comprises)
+    const W = (src, out) => [new RegExp(WB + src + WE, 'giu'), out];
+    const SAY = [
+        W('nouveau paragraphe', '\n\n'), W('(?:retour )?à la ligne', '\n'), W('nouvelle ligne', '\n'),
+        W('points? de suspension', '…'), W("point d['’ ]?interrogation", '?'), W("point d['’ ]?exclamation", '!'),
+        W('point[- ]virgule', ';'), W('deux[- ]points', ':'),
+        W('(?:ouvre[rz]?|ouvrez) les guillemets', '«'), W('(?:ferme[rz]?|fermez) les guillemets', '»'),
+        W('(?:ouvre[rz]?|ouvrez) la parenthèse', '('), W('(?:ferme[rz]?|fermez) la parenthèse', ')'),
+        W('virgule', ','), [new RegExp(WB + "point" + WE + "(?!\\s+(?:de|du|des|d['’]|sur|final)" + WE + ")", 'giu'), '.'],
+    ];
+    /** La ponctuation dite → les signes, avec les espaces à la française. */
+    function punctuate(raw, multiline = true) {
+        let t = ` ${String(raw || '')} `;
+        SAY.forEach(([re, out]) => { t = t.replace(re, ` ${out} `); });
+        t = t.replace(/[ \t]+/g, ' ')
+            .replace(/ ?\n ?/g, '\n')
+            .replace(/ +([,.…)])/g, '$1')
+            .replace(/([(«]) +/g, '$1')
+            .replace(/« */g, '« ').replace(/ *»/g, ' »')
+            .replace(/ *([;:?!])/g, ' $1')
+            .replace(/([,.;:?!…)»])(?=[\p{L}\p{N}«(])/gu, '$1 ')
+            .replace(/([.?!…]\s+|\n)(\p{Ll})/gu, (m, a, b) => a + b.toUpperCase());
+        if (!multiline) t = t.replace(/\s*\n+\s*/g, ' ');
+        return t.replace(/^ +| +$/g, '').replace(/^\n+/, multiline ? '\n' : '');
+    }
+    /** Met le texte dicté au curseur du champ (majuscule en début de phrase, espaces autour). */
+    function insertDictated(el, raw) {
+        const multi = el.tagName === 'TEXTAREA';
+        let text = punctuate(raw, multi); if (!text.trim() && !/\n/.test(text)) return '';
+        const v = el.value ?? '', s = el.selectionStart ?? v.length, e = el.selectionEnd ?? s, before = v.slice(0, s), after = v.slice(e);
+        if (/(^|[.!?…]\s*|\n\s*)$/.test(before)) text = text.replace(/^(\s*«?\s*)(\p{Ll})/u, (m, a, b) => a + b.toUpperCase());
+        if (before && !/[\s(«'’-]$/.test(before) && !/^[\s,.…)\n]/.test(text)) text = ` ${text}`;
+        if (after && /^[\p{L}\p{N}«(]/u.test(after) && !/\s$/.test(text)) text += ' ';
+        el.focus();
+        let ok = false;
+        try { el.setSelectionRange?.(s, e); ok = document.execCommand('insertText', false, text); } catch (_) { ok = false; }
+        if (!ok || (el.value ?? '') === v) { el.setRangeText(text, s, e, 'end'); el.dispatchEvent(new InputEvent('input', {bubbles: true, inputType: 'insertText', data: text})); }
+        return text;
+    }
+    const OK_TYPES = /^(text|)$/i;
+    function dictTarget(el) {
+        if (!el || !(el instanceof HTMLElement) || el.disabled || el.readOnly) return null;
+        if (el.tagName === 'TEXTAREA') { if (el.closest('.a11y-skip, [data-no-dictation]')) return null; return el.getBoundingClientRect().width >= 120 ? el : null; }
+        if (el.tagName !== 'INPUT' || !OK_TYPES.test(el.getAttribute('type') || '')) return null;
+        if (/^(numeric|decimal|tel|email|url|search)$/i.test(el.inputMode || '') || el.hasAttribute('data-ui-date') || el.classList.contains('ui-num-input')) return null;
+        if (el.closest('.a11y-skip, [data-no-dictation], .pk-field, .pk-input, [class*="picker"], .search-box, [role="combobox"], .ui-search, .a11y-range') || el.getAttribute('role') === 'combobox' || el.getAttribute('aria-autocomplete')) return null;
+        return el.getBoundingClientRect().width >= 120 ? el : null;
+    }
+    let mic = null, micFor = null, rec = null, recFor = null, recWanted = false, bubble = null;
+    function micButton() {
+        if (mic) return mic;
+        mic = document.createElement('button'); mic.type = 'button'; mic.className = 'a11y-mic'; mic.textContent = '🎤';
+        mic.setAttribute('aria-label', `Dicter dans ce champ (${DICT_KEY_LABEL})`); mic.title = `Dicter : parle, le texte s’écrit au curseur (${DICT_KEY_LABEL}, Échap pour arrêter)`;
+        mic.addEventListener('mousedown', e => e.preventDefault()); // le champ garde le curseur
+        mic.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); if (rec) dictStop(); else if (micFor) dictStart(micFor); });
+        return mic;
+    }
+    function placeMic() {
+        if (!mic || !micFor || !micFor.isConnected) return;
+        const r = micFor.getBoundingClientRect(); if (!r.width) { hideMic(); return; }
+        const tall = r.height > 50, size = 30;
+        placeFixed(mic, hostFor(micFor), r.right - size - 4, tall ? r.top + 4 : r.top + (r.height - size) / 2);
+        if (bubble?.isConnected) placeFixed(bubble, hostFor(micFor), Math.max(8, r.right - 300), r.bottom + 6);
+    }
+    function showMic(el) { micFor = el; micButton(); mic.classList.toggle('is-on', !!rec && recFor === el); placeMic(); }
+    function hideMic() { if (rec && micFor === recFor) return; mic?.remove(); micFor = null; }
+    document.addEventListener('focusin', e => { if (!P.dictate || dictationWhy()) return; const t = dictTarget(e.target); if (t) showMic(t); else if (e.target !== mic) hideMic(); });
+    document.addEventListener('focusout', () => setTimeout(() => { const a = document.activeElement; if (a !== micFor && a !== mic && !(rec && recFor === micFor)) hideMic(); }, 120));
+    addEventListener('scroll', () => { if (mic?.isConnected) placeMic(); }, true);
+    addEventListener('resize', () => { if (mic?.isConnected) placeMic(); });
+    function setBubble(text) {
+        if (!micFor) return;
+        if (!bubble) { bubble = document.createElement('div'); bubble.className = 'a11y-dict-bubble'; bubble.setAttribute('role', 'status'); bubble.setAttribute('aria-live', 'polite'); }
+        bubble.innerHTML = `<b><span class="a11y-dict-dot" aria-hidden="true"></span>Je t’écoute…</b>${text ? `<span>« ${esc(text)} »</span>` : '<span>Parle, puis clique sur 🎤 ou appuie sur Échap pour arrêter. Dis « virgule », « point », « à la ligne » pour la ponctuation.</span>'}`;
+        if (!bubble.isConnected) hostFor(micFor).appendChild(bubble);
+        placeMic();
+    }
+    function dictStart(el) {
+        const why = dictationWhy(); if (why) { toast(NOT_HERE, 'error'); return; }
+        dictStop(true);
+        const Ctor = SRec(); let r;
+        try { r = new Ctor(); } catch (_) { toast(NOT_HERE, 'error'); return; }
+        r.lang = 'fr-FR'; r.continuous = true; r.interimResults = true; r.maxAlternatives = 1;
+        rec = r; recFor = el; recWanted = true; showMic(el); mic.classList.add('is-on'); mic.setAttribute('aria-pressed', 'true'); setBubble('');
+        r.onresult = ev => {
+            if (rec !== r) return;
+            let interim = '';
+            for (let i = ev.resultIndex; i < ev.results.length; i++) {
+                const res = ev.results[i], txt = res[0]?.transcript || '';
+                if (res.isFinal) { if (recFor?.isConnected) insertDictated(recFor, txt); } else interim += txt;
+            }
+            setBubble(interim.trim());
+        };
+        r.onerror = ev => {
+            if (rec !== r) return;
+            const msg = {'not-allowed': 'Le micro est refusé : autorise-le pour ce site (le cadenas à gauche de l’adresse), puis réessaie.', 'service-not-allowed': NOT_HERE, 'audio-capture': 'Aucun micro trouvé : branche-en un ou vérifie les réglages du son.', network: 'La dictée de ce navigateur a besoin d’Internet. Sur Mac, la dictée du système marche hors ligne : touche 🎤 ou deux fois Fn.', 'language-not-supported': NOT_HERE}[ev.error];
+            if (msg) toast(msg, 'error');
+            if (ev.error !== 'no-speech' && ev.error !== 'aborted') recWanted = false;
+        };
+        r.onend = () => { if (rec !== r) return; if (recWanted && recFor?.isConnected && document.activeElement === recFor) { try { r.start(); return; } catch (_) {} } dictStop(true); };
+        try { r.start(); } catch (_) { dictStop(true); toast(NOT_HERE, 'error'); }
+    }
+    function dictStop(silent = false) {
+        const r = rec; rec = null; recWanted = false;
+        if (r) { try { r.onend = null; r.stop(); } catch (_) {} }
+        bubble?.remove();
+        if (mic) { mic.classList.remove('is-on'); mic.removeAttribute('aria-pressed'); }
+        const f = recFor; recFor = null;
+        if (!silent && f?.isConnected) f.focus();
+        if (document.activeElement !== micFor) hideMic();
+    }
+    document.addEventListener('keydown', e => {
+        if (rec && e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); dictStop(); return; }
+        if (!P.dictate || dictationWhy() || !(e.ctrlKey && e.shiftKey && !e.altKey && !e.metaKey && (e.code === 'Space' || e.key === ' '))) return;
+        const t = dictTarget(document.activeElement); if (!t) return;
+        e.preventDefault(); e.stopPropagation();
+        if (rec) dictStop(); else { showMic(t); dictStart(t); }
+    }, true);
+
     /* ═════ La page Maintenance → Accessibilité ═════ */
     let pageToken = 0;
     const isOn = k => !!P[k];
-    const toggle = (k, label, sub = '') => `<label class="ui-toggle a11y-toggle"><input type="checkbox" data-a11y-bool="${k}" ${isOn(k) ? 'checked' : ''}><i></i><span>${label}${sub ? `<small>${sub}</small>` : ''}</span></label>`;
-    const help = text => `<span class="a11y-help-slot" data-a11y-help="${esc(text)}"></span>`;
+    /* C8 : interrupteur ; avec une aide, la bulle « ? » se met juste à côté (hors du libellé, pour ne pas basculer en cliquant dessus) */
+    const toggle = (k, label, sub = '', {help: h = '', faq = '', disabled = false} = {}) => {
+        const t = `<label class="ui-toggle a11y-toggle ${disabled ? 'is-disabled' : ''}"><input type="checkbox" data-a11y-bool="${k}" ${isOn(k) && !disabled ? 'checked' : ''} ${disabled ? 'disabled' : ''}><i></i><span>${label}${sub ? `<small>${sub}</small>` : ''}</span></label>`;
+        return h ? `<div class="a11y-trow">${t}${help(h, faq)}</div>` : t;
+    };
+    const help = (text, faq = '') => `<span class="a11y-help-slot" data-a11y-help="${esc(text)}" ${faq ? `data-a11y-faq="${esc(faq)}"` : ''}></span>`;
     /* C3 : libellé · curseur · case chiffrée avec unité (double-clic = valeur de départ) */
     const range = (k, label, {min, max, step, unit = '', factor = 1, dec = 0, def, autoText = ''}) => {
         const v = P[k], shown = v == null ? def : v;
@@ -335,10 +698,19 @@
     const cbCard = k => `<label class="a11y-cb ${P.cb === k ? 'is-on' : ''}"><input type="radio" name="a11y-cb" value="${k}" ${P.cb === k ? 'checked' : ''}>
         <span class="a11y-cb-dots" ${CB[k].m ? `style="filter:url(#a11y-sim-${k})"` : ''} aria-hidden="true">${dots.map(c => `<i style="background:${c}"></i>`).join('')}</span>
         <b>${esc(CB[k].label)}</b><small>${esc(CB[k].hint)}</small></label>`;
+    const FONT_NOTE = {
+        app: 'Arial, comme d’habitude.',
+        legible: 'Atkinson Hyperlegible : faite pour les personnes qui voient mal (lettres qu’on ne confond pas : I l 1, O 0). Toujours disponible.',
+        dys: 'Lettres alourdies en bas, pour qu’elles ne se retournent pas. Toujours disponible.',
+    };
     const fontCard = k => {
-        const f = FONTS[k], inst = k === 'app' ? '' : fontInstalled(k);
-        const fb = k === 'app' ? '' : fallbackFont(k), note = k === 'app' ? 'Arial, comme d’habitude.' : inst ? `✓ « ${inst} » est installée.` : `⚠ Pas installée sur cet ordinateur : on prend ${fb === 'sans-serif' ? 'une police simple de l’ordinateur' : fb} à la place.`;
-        return `<label class="a11y-font-card ${P.font === k ? 'is-on' : ''}"><input type="radio" name="a11y-font" value="${k}" ${P.font === k ? 'checked' : ''}><b style="${f.stack ? `font-family:${esc(f.stack)}` : ''}">${esc(f.label)}</b><span class="a11y-font-sample" style="${f.stack ? `font-family:${esc(f.stack)}` : ''}">Jean-Baptiste MARTIN, né en 1784</span><small class="${inst || k === 'app' ? '' : 'is-warn'}">${esc(note)}</small></label>`;
+        const f = FONTS[k], st = f.stack ? `font-family:${esc(f.stack)}` : '';
+        let note = FONT_NOTE[k] || '', warn = false;
+        if (k === 'comic') {
+            if (comicInstalled()) note = 'Comic Sans MS, la police de ton ordinateur : ronde et simple, souvent conseillée pour la dyslexie.';
+            else { warn = true; note = 'Comic Sans n’est pas sur cet ordinateur (fréquent sous Linux) : l’app prend OpenDyslexic à la place. Choisis plutôt « OpenDyslexic ».'; }
+        }
+        return `<label class="a11y-font-card ${P.font === k ? 'is-on' : ''} ${warn ? 'is-missing' : ''}"><input type="radio" name="a11y-font" value="${k}" ${P.font === k ? 'checked' : ''}><b style="${st}">${esc(f.label)}</b><span class="a11y-font-sample" style="${st}">Jean-Baptiste MARTIN, né en 1784 à Saint-Céré</span><small class="${warn ? 'is-warn' : ''}">${warn ? '⚠ ' : ''}${esc(note)}</small></label>`;
     };
     function pageHtml() {
         let pal = []; try { pal = A().getStatsColors?.() || []; } catch (_) {}
@@ -346,7 +718,7 @@
         const voices = TTS ? frVoices() : [];
         const reduceOs = matchMedia?.('(prefers-reduced-motion: reduce)').matches;
         return `<section class="page a11y-page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>♿ Accessibilité</h2>
-            <p>Pour voir, lire et utiliser l’app plus facilement : couleurs, texte, contraste, clavier, mouvement, lecture à voix haute. Chaque réglage s’applique tout de suite, partout dans l’app, et reste gardé avec ta généalogie.</p></div>
+            <p>Pour voir, lire et utiliser l’app plus facilement : couleurs, texte, contraste, interface simplifiée, clavier, mouvement, voix, lecteur d’écran, sous-titres, dictée. Chaque réglage s’applique tout de suite, partout dans l’app, et reste gardé avec ta généalogie.</p></div>
             <div class="page-actions"><button type="button" class="button secondary" data-a11y-reset>↺ Tout remettre comme avant</button></div></header>
 
         <section class="maintenance-panel a11y-sec" id="a11y-colors"><h3>🎨 Couleurs et daltonisme ${help('Choisis la sorte de daltonisme : l’app corrige ses couleurs pour que tu les distingues mieux. Les petites pastilles montrent comment ces couleurs sont vues.')}</h3>
@@ -374,14 +746,20 @@
             ${range('ls', 'Espace entre les lettres', {min: 0, max: 0.2, step: 0.01, unit: '%', factor: 100, def: 0})}
             ${range('ws', 'Espace entre les mots', {min: 0, max: 0.5, step: 0.02, unit: '%', factor: 100, def: 0})}
             <p><button type="button" class="link-button" data-a11y-dys>Mettre les espacements conseillés pour la dyslexie</button></p>
-            <h4>Police</h4><div class="a11y-fonts" role="radiogroup" aria-label="Police">${Object.keys(FONTS).map(fontCard).join('')}</div>
-            <p class="muted a11y-small">Les polices « Atkinson Hyperlegible » et « OpenDyslexic » sont gratuites : une fois installées sur l’ordinateur (atkinsonhyperlegible.com, opendyslexic.org), l’app les prend toute seule.</p>
+            <h4>Police</h4><div class="a11y-fonts" role="radiogroup" aria-label="Police">${['app', 'legible'].map(fontCard).join('')}
+                <div class="a11y-font-group" role="group" aria-labelledby="a11y-font-dys"><span class="a11y-font-group-t" id="a11y-font-dys">Pour la dyslexie : choisis celle qui te va</span><div class="a11y-font-pair">${['dys', 'comic'].map(fontCard).join('')}</div></div></div>
+            <p class="muted a11y-small">« Atkinson Hyperlegible » et « OpenDyslexic » sont rangées dans l’app (polices libres, licence SIL OFL) : rien à installer, et elles marchent sans internet.</p>
             <div class="a11y-toggles">${toggle('underline', 'Liens toujours soulignés', 'Pour reconnaître un lien sans compter sur sa couleur.')}</div>
         </section>
 
         <section class="maintenance-panel a11y-sec" id="a11y-contrast"><h3>🌓 Contraste</h3>
             <p class="muted">Textes gris passés en noir (ou en blanc en mode sombre), bordures plus marquées, fonds unis sans quadrillage. Marche en clair et en sombre.</p>
             <div class="a11y-toggles">${toggle('contrast', 'Contraste élevé')}</div>
+        </section>
+
+        <section class="maintenance-panel a11y-sec" id="a11y-simple"><h3>🧩 Une chose à la fois</h3>
+            <p class="muted">Une interface plus calme : moins de boutons, de chiffres et de décorations, les actions principales plus grandes, et un seul panneau à la fois (le tableau de bord sans sa colonne de réglages, les fiches sur une seule colonne, pas d’écran divisé). Rien n’est supprimé : le petit bandeau « Mode simple — Tout afficher », en bas à droite, remet tout d’un clic.</p>
+            <div class="a11y-toggles">${toggle('simple', 'Mode « une chose à la fois »', 'Cache les outils avancés ou rarement utilisés : ADN, comparaison, animaux, écran divisé, nouvelle fenêtre, réglages du tableau de bord, supprimer / verrouiller une fiche, historique, filtres avancés de la carte…', {help: 'Moins de choses à l’écran pour se concentrer sur l’essentiel. Les outils cachés reviennent avec « Tout afficher », en bas à droite de l’écran.', faq: 'Comment simplifier l’écran (mode « une chose à la fois ») ?'})}</div>
         </section>
 
         <section class="maintenance-panel a11y-sec" id="a11y-input"><h3>🖱 Clavier et souris</h3>
@@ -407,6 +785,22 @@
                 <button type="button" class="button small secondary" data-a11y-try ${TTS ? '' : 'disabled'}>🔊 Essayer</button><button type="button" class="button small secondary" data-a11y-stop ${TTS ? '' : 'disabled'}>⏹ Arrêter</button></div>
         </section>
 
+        <section class="maintenance-panel a11y-sec" id="a11y-reader"><h3>🦮 Lecteur d’écran</h3>
+            <p class="muted">Pour les personnes qui ne voient pas l’écran et l’écoutent avec un lecteur d’écran (VoiceOver sur Mac, NVDA ou JAWS sur Windows).</p>
+            <div class="a11y-toggles">${toggle('alt', 'Décrire les images', 'Chaque photo ou document de tes médias est décrit à voix haute : la « Description de l’image » écrite dans la fenêtre du média, sinon son titre, sa date, son lieu et les personnes rattachées. Les petites images à côté d’un nom et les décorations sont passées sous silence.', {help: 'Le lecteur d’écran lit un texte à la place de chaque image. Pour l’écrire toi-même : ouvre un média, champ « Description de l’image (lue à voix haute) ».', faq: 'Comment faire lire la description des images par un lecteur d’écran ?'})}</div>
+        </section>
+
+        <section class="maintenance-panel a11y-sec" id="a11y-video"><h3>🎬 Vidéos et montages</h3>
+            <div class="a11y-toggles">${toggle('subs', 'Sous-titres toujours affichés', 'Les vidéos qui ont des sous-titres les montrent d’office (en français s’il y en a). Dans le montage, la piste « Sous-titres » se voit à la lecture même si tu l’as cachée (l’œil) ; la vidéo exportée, elle, ne change pas.', {help: 'Pour lire ce qui est dit sans devoir allumer les sous-titres à chaque fois.', faq: 'Comment afficher toujours les sous-titres des vidéos et des montages ?'})}</div>
+        </section>
+
+        <section class="maintenance-panel a11y-sec" id="a11y-dictation"><h3>🎤 Dictée vocale</h3>
+            ${dictationWhy() ? `<p class="a11y-note is-warn" role="note">⚠ ${esc(NOT_HERE)}</p>` : ''}
+            <p class="muted">Parle au lieu de taper : un petit 🎤 apparaît dans le champ texte où tu écris. Clique dessus (ou <kbd>${esc(DICT_KEY_LABEL)}</kbd>), parle, et le texte s’écrit au curseur. Dis « virgule », « point », « point d’interrogation », « deux points », « à la ligne » ou « nouveau paragraphe » pour la ponctuation. <b>Échap</b> ou un nouveau clic sur 🎤 arrête.</p>
+            <div class="a11y-toggles">${toggle('dictate', 'Dictée vocale dans les champs texte', dictationWhy() ? 'Pas disponible ici (voir au-dessus).' : 'En français. Pas dans les cases de recherche, les dates, les nombres ni les mots de passe.', {help: 'Le navigateur écoute le micro seulement quand tu cliques sur 🎤. La première fois, il demande la permission d’utiliser le micro.', faq: 'Comment remplir un champ en parlant (dictée vocale) ?', disabled: !!dictationWhy()})}</div>
+            <div class="a11y-dict-try" data-a11y-dict-try hidden><label class="a11y-range-lab" for="a11y-dict-try">Essaie ici</label><textarea id="a11y-dict-try" rows="3" placeholder="Clique ici, puis sur 🎤 : « Joseph est né à Tulle virgule en 1784 point »"></textarea></div>
+        </section>
+
         <section class="maintenance-panel a11y-sec a11y-help-sec" id="a11y-aide"><h3>ℹ️ Aide</h3>
             <dl class="a11y-dl">
                 <dt>Couleurs et daltonisme</dt><dd>La correction change un peu toutes les couleurs de l’écran pour que le rouge et le vert (ou le bleu et le jaune) ne se confondent plus. « Couleurs faciles à distinguer » remplace les couleurs qui ont un sens (erreur, réussi, homme, femme, graphiques). « Formes » ajoute un symbole pour ne jamais dépendre de la couleur seule.</dd>
@@ -416,17 +810,15 @@
                 <dt>Clavier et souris</dt><dd>Pour travailler sans souris (Tab, Maj+Tab, Entrée) ou avec une souris difficile à viser.</dd>
                 <dt>Mouvement</dt><dd>Pour les personnes que les animations gênent ou fatiguent, et pour avoir le temps de lire les messages.</dd>
                 <dt>Lecture à voix haute</dt><dd>Utilise la voix de l’ordinateur ; rien n’est envoyé sur internet par l’app.</dd>
+                <dt>Une chose à la fois</dt><dd>Cache ce qui sert rarement pour garder l’essentiel, en plus grand. « Tout afficher » (en bas à droite) remet tout.</dd>
+                <dt>Lecteur d’écran</dt><dd>Donne un texte à chaque image de tes médias. Le mieux : écrire toi-même ce qu’on voit, dans la fenêtre du média.</dd>
+                <dt>Sous-titres</dt><dd>Allume d’office les sous-titres des vidéos et la piste « Sous-titres » des montages, à la lecture.</dd>
+                <dt>Dictée vocale</dt><dd>Utilise la reconnaissance de la voix du navigateur (Chrome et Edge passent par internet ; Safari peut le faire sur l’ordinateur). Dans l’app de bureau, utilise la dictée du système : sur Mac, touche 🎤 ou deux fois Fn ; sur Windows, touche Windows + H.</dd>
             </dl>
             <p class="muted a11y-small">Ces réglages sont gardés avec ta généalogie (comme l’apparence) : ils suivent sa sauvegarde et la retrouvent sur un autre ordinateur.</p>
         </section>
 
-        <aside class="maintenance-panel a11y-ideas"><h3>💡 Autres idées d’accessibilité <small>(pas encore actives)</small></h3>
-            <p class="muted">Dis lesquelles te seraient utiles :</p>
-            <ul><li><b>Sous-titres toujours affichés</b> dans les montages et les vidéos.</li>
-                <li><b>Description des images</b> (texte alternatif des médias) lue par les lecteurs d’écran.</li>
-                <li><b>Mode « une chose à la fois »</b> : une interface simplifiée, avec moins de boutons à l’écran.</li>
-                <li><b>Dictée vocale</b> pour remplir les champs en parlant.</li></ul>
-        </aside></section>`;
+        </section>`;
     }
     /* cases chiffrées des curseurs */
     const fmt = (v, dec) => (Number.isFinite(v) ? v.toFixed(dec).replace('.', ',') : '');
@@ -470,16 +862,17 @@
         }
         if (k === 'font') page.querySelectorAll('.a11y-font-card').forEach(c => c.classList.toggle('is-on', c.querySelector('input').checked));
         if (k === 'tts') { const r = page.querySelector('[data-a11y-range="rate"]'); r?.classList.toggle('is-disabled', !P.tts); }
+        if (k === 'dictate') { const t = page.querySelector('[data-a11y-dict-try]'); if (t) t.hidden = !(P.dictate && !dictationWhy()); }
     }
     function refreshPage() { const page = document.querySelector('.a11y-page'); if (page && ext.maintenance?.accessibilite) { const st = A().state; ext.maintenance.accessibilite(st ? st.workspaceToken : 0, true); } }
     function mountHelp(page) {
         page.querySelectorAll('[data-a11y-help]').forEach(slot => {
-            const text = slot.dataset.a11yHelp, UI = window.LCNDA_UI;
-            if (UI?.helpTip) { slot.replaceWith(UI.helpTip(text, FAQ_Q)); return; }
+            const text = slot.dataset.a11yHelp, faq = slot.dataset.a11yFaq || FAQ_Q, UI = window.LCNDA_UI;
+            if (UI?.helpTip) { slot.replaceWith(UI.helpTip(text, faq)); return; }
             const b = document.createElement('button'); b.type = 'button'; b.className = 'ui-help a11y-help'; b.textContent = '?'; b.title = 'Aide'; b.setAttribute('aria-label', `Aide : ${text}`); b.setAttribute('aria-expanded', 'false');
             const bub = document.createElement('span'); bub.className = 'a11y-bubble'; bub.hidden = true; bub.innerHTML = `${esc(text)} <a href="#" data-a11y-faq>En savoir plus (FAQ) →</a>`;
             b.addEventListener('click', e => { e.preventDefault(); bub.hidden = !bub.hidden; b.setAttribute('aria-expanded', String(!bub.hidden)); });
-            bub.querySelector('[data-a11y-faq]').addEventListener('click', async e => { e.preventDefault(); const st = A().state; if (st && A().setModule) { st.maintenanceTab = 'faq'; await A().setModule('maintenance'); for (let i = 0; i < 30; i++) { const q = document.querySelector('[data-faq-q]'); if (q) { q.value = FAQ_Q; q.dispatchEvent(new Event('input', {bubbles: true})); return; } await new Promise(r => setTimeout(r, 100)); } } });
+            bub.querySelector('[data-a11y-faq]').addEventListener('click', async e => { e.preventDefault(); const st = A().state; if (st && A().setModule) { st.maintenanceTab = 'faq'; await A().setModule('maintenance'); for (let i = 0; i < 30; i++) { const q = document.querySelector('[data-faq-q]'); if (q) { q.value = faq; q.dispatchEvent(new Event('input', {bubbles: true})); return; } await new Promise(r => setTimeout(r, 100)); } } });
             slot.replaceWith(b, bub);
         });
     }
@@ -490,11 +883,11 @@
         const y = keepScroll ? ws.scrollTop : 0;
         ws.innerHTML = pageHtml(); ws.scrollTop = y;
         const page = ws.querySelector('.a11y-page'); pageToken++;
-        bindRanges(page); mountHelp(page); afterChange('cb'); afterChange('tts');
+        bindRanges(page); mountHelp(page); afterChange('cb'); afterChange('tts'); afterChange('dictate');
         remapCharts(page);
         page.addEventListener('change', e => {
             const t = e.target;
-            if (t.matches('[data-a11y-bool]')) { P[t.dataset.a11yBool] = t.checked; save(); apply(); afterChange(t.dataset.a11yBool); return; }
+            if (t.matches('[data-a11y-bool]')) { P[t.dataset.a11yBool] = t.checked; save(); apply(); afterChange(t.dataset.a11yBool); if (t.dataset.a11yBool === 'simple' && t.checked) toast('Mode simple : moins de boutons. Pour tout réafficher, clique sur « Tout afficher » en bas à droite.'); return; }
             if (t.name === 'a11y-cb') { P.cb = t.value; if (t.value !== 'none' && !P.safe) { P.safe = true; const s = page.querySelector('[data-a11y-bool="safe"]'); if (s) s.checked = true; } save(); apply(); afterChange('cb'); return; }
             if (t.name === 'a11y-font') { P.font = t.value; save(); apply(); afterChange('font'); return; }
             if (t.matches('[data-a11y-voice]')) { P.voice = t.value; save(); }
@@ -508,7 +901,7 @@
             if (b.hasAttribute('data-a11y-stop')) { stop(); return; }
             if (b.hasAttribute('data-a11y-dys')) { P.lh = 1.5; P.ls = 0.12; P.ws = 0.16; save(); apply(); refreshPage(); toast('Espacements conseillés appliqués.'); return; }
             if (b.hasAttribute('data-a11y-reset')) {
-                const ok = A().confirmBox ? await A().confirmBox('Tous les réglages d’accessibilité reviennent comme au départ (couleurs, texte, contraste, clavier, mouvement, voix).', {title: 'Tout remettre comme avant', okLabel: '↺ Tout remettre comme avant', danger: true}) : true;
+                const ok = A().confirmBox ? await A().confirmBox('Tous les réglages d’accessibilité reviennent comme au départ (couleurs, texte, contraste, clavier, mouvement, voix, sous-titres, images, mode simple, dictée). Les descriptions d’images que tu as écrites sont gardées.', {title: 'Tout remettre comme avant', okLabel: '↺ Tout remettre comme avant', danger: true}) : true;
                 if (!ok) return;
                 reset(); toast('Accessibilité remise comme avant.');
             }
@@ -518,11 +911,12 @@
     function reset() { P = DEFAULTS(); try { localStorage.removeItem(KEY); } catch (_) {} stop(); sim = ''; try { sessionStorage.removeItem(SIM_KEY); } catch (_) {} apply(); refreshPage(); }
     function set(k, v) { if (typeof k === 'object') Object.assign(P, k); else P[k] = v; save(); apply(); }
 
-    ext.access = {get: () => ({...P}), set, reset, apply, simulate, speak, stop, personPageText, fixMatrix, OI, KEY};
+    ext.access = {get: () => ({...P}), set, reset, apply, simulate, speak, stop, personPageText, fixMatrix, OI, KEY,
+        punctuate, insertDictated, dictationWhy, altFor, mediaAlts: readAlts, setMediaAlt: writeAlt, simpleOff};
 
     /* ═════ Démarrage : appliqué tout de suite, avant même l'app ═════ */
     load();
-    const start = () => { ensureSvg(); apply(); watchToasts(); watchWorkspace(); watchCharts(); if (TTS) try { speechSynthesis.addEventListener?.('voiceschanged', () => { if (document.querySelector('.a11y-page #a11y-voice-sel option:only-child')) refreshPage(); }); } catch (_) {} };
+    const start = () => { ensureSvg(); apply(); watchToasts(); watchWorkspace(); watchCharts(); watchMedia(); watchNav(); if (TTS) try { speechSynthesis.addEventListener?.('voiceschanged', () => { if (document.querySelector('.a11y-page #a11y-voice-sel option:only-child')) refreshPage(); }); } catch (_) {} };
     if (document.body) start(); else document.addEventListener('DOMContentLoaded', start);
-    addEventListener('storage', e => { if (e.key === KEY) { load(); apply(); } }); // un autre onglet a changé les réglages
+    addEventListener('storage', e => { if (e.key === KEY) { load(); apply(); } if (e.key === ALT_KEY) { altCache = null; if (P.alt) scanAlt(document); } }); // un autre onglet a changé les réglages
 })();

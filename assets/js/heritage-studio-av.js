@@ -677,6 +677,9 @@
     const trackOf = (P, c, list) => { const k = KIND_OF_LIST[list]; if (typeof c.track === 'number') c.track = 'A' + c.track; if (c.track && P.tracks.some(t => t.id === c.track && t.kind === k)) return c.track; return P.tracks.find(t => t.kind === k)?.id || ''; };
     const trackIdx = (P, id) => P.tracks.findIndex(t => t.id === id);
     const trackHidden = (P, id) => !!P.tracks.find(t => t.id === id)?.hidden;
+    /* ♿ Accessibilité « Sous-titres toujours affichés » : à la lecture (pas à l'export), la piste « Sous-titres » se voit même cachée */
+    const subsAlwaysOn = () => document.documentElement.classList.contains('a11y-subs');
+    const isSubText = (P, x) => !!x.sub || /^sous-titres/i.test(P.tracks.find(t => t.id === trackOf(P, x, 'texts'))?.name || '');
     /** Moments de chaque morceau de la piste 1 (un fondu enchaîné fait se chevaucher deux morceaux) */
     function layoutV1(P) {
         let t = 0; return P.v1.map((c, k) => { const len = Math.max(0.05, clen(c)), d = k && c.tr?.type === 'cross' ? Math.min(c.tr.d || 1, len / 2, clen(P.v1[k - 1]) / 2) : 0; const at = Math.max(0, t - d); t = at + len; return {c, at, end: at + len, cross: d}; });
@@ -833,7 +836,7 @@
                 let a = (c.opacity ?? 100) / 100; if (c.fade !== false) { if (local < 0.5) a *= local / 0.5; if (len - local < 0.5) a *= (len - local) / 0.5; }
                 drawClip(e.el, c, it.local, Math.max(0, a), false);
             });
-            P.texts.filter(x => tt >= x.at && tt < x.at + x.dur && !trackHidden(P, trackOf(P, x, 'texts'))).sort((a, b) => trackIdx(P, trackOf(P, b, 'texts')) - trackIdx(P, trackOf(P, a, 'texts'))).forEach(x => drawText(x, tt));
+            P.texts.filter(x => tt >= x.at && tt < x.at + x.dur && (!trackHidden(P, trackOf(P, x, 'texts')) || (out === 'preview' && subsAlwaysOn() && isSubText(P, x)))).sort((a, b) => trackIdx(P, trackOf(P, b, 'texts')) - trackIdx(P, trackOf(P, a, 'texts'))).forEach(x => drawText(x, tt));
             if (out === 'preview' && api.decorate) { g.save(); api.decorate(g, W, H, tt); g.restore(); } // cadre de l'élément choisi (aperçu seulement)
         }
         const loop = () => {

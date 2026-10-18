@@ -1,6 +1,22 @@
 /* LCNDA — ♿ Accessibilité (assets/js/app-access.js). Tout est déclenché par des classes « a11y-… » sur <html>
  * et des variables « --a11y-… » ; sans réglage, rien ici ne change l'app (sauf le respect de prefers-reduced-motion). */
 
+/* ═════ Polices embarquées (assets/fonts/, licence SIL OFL 1.1 : voir OFL.txt dans chaque dossier) ═════ */
+/* Atkinson Hyperlegible (Braille Institute) et OpenDyslexic (Abbie Gonzalez), paquets @fontsource 5.3.0 ;
+   chargées seulement quand on les choisit (ou sur la page Accessibilité), et sans internet. */
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-ext-400-italic.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-400-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-ext-700-normal.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-700-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: 700; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-ext-700-italic.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Atkinson Hyperlegible"; font-style: italic; font-weight: 700; font-display: swap; src: url("../fonts/atkinson-hyperlegible/atkinson-hyperlegible-latin-700-italic.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "OpenDyslexic"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/opendyslexic/opendyslexic-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "OpenDyslexic"; font-style: italic; font-weight: 400; font-display: swap; src: url("../fonts/opendyslexic/opendyslexic-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "OpenDyslexic"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/opendyslexic/opendyslexic-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "OpenDyslexic"; font-style: italic; font-weight: 700; font-display: swap; src: url("../fonts/opendyslexic/opendyslexic-latin-700-italic.woff2") format("woff2"); }
+
 /* ═════ Couleurs : filtre de correction et de simulation ═════ */
 /* sur <html> le filtre ne casse pas les éléments « position: fixed » ; les fenêtres (top layer) ne sont pas
    couvertes par celui de <html> : elles reçoivent le leur */
@@ -173,6 +189,10 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 .a11y-light summary { cursor: pointer; font-weight: 700; padding: 4px 0; }
 .a11y-fonts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
 .a11y-font-sample { font-size: 15px; }
+.a11y-font-group { grid-column: 1 / -1; display: grid; gap: 6px; align-content: start; }
+.a11y-font-group-t { font-size: 12.5px; font-weight: 800; }
+.a11y-font-pair { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+.a11y-font-card.is-missing .a11y-font-sample { opacity: .8; }
 .a11y-font-card small.is-warn { color: #8a5a00; }
 :root[data-theme="dark"] .a11y-font-card small.is-warn { color: #f0c060; }
 
@@ -237,9 +257,16 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 .a11y-dl { display: grid; grid-template-columns: minmax(140px, 200px) 1fr; gap: 8px 16px; margin: 8px 0; }
 .a11y-dl dt { font-weight: 800; }
 .a11y-dl dd { margin: 0; color: var(--muted); line-height: 1.5; }
-.a11y-ideas { border-style: dashed !important; }
-.a11y-ideas h3 small { font-weight: 400; color: var(--muted); font-size: 13px; }
-.a11y-ideas ul { margin: 6px 0 0; padding-left: 20px; line-height: 1.6; }
+.a11y-trow { display: flex; align-items: flex-start; gap: 8px; }
+.a11y-trow > .ui-toggle { flex: 0 1 auto; min-width: 0; }
+.a11y-trow > .ui-help, .a11y-trow > .a11y-help { flex: none; margin-top: 1px; }
+.a11y-trow > .a11y-bubble { flex-basis: 100%; }
+.a11y-trow:has(> .a11y-bubble:not([hidden])) { flex-wrap: wrap; }
+.a11y-page .ui-toggle.is-disabled { opacity: .45; cursor: not-allowed; }
+.a11y-page kbd { font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1; border: 1px solid currentColor; padding: 2px 5px; border-radius: 3px; white-space: nowrap; }
+.a11y-dict-try { display: grid; gap: 6px; max-width: 680px; margin: 6px 0 0; }
+.a11y-dict-try[hidden] { display: none; }
+.a11y-dict-try textarea { width: 100%; font: inherit; }
 
 @media (max-width: 640px) {
     .a11y-page .page-header { flex-direction: column; align-items: stretch; }
@@ -264,3 +291,75 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 .a11y-size-preview.is-on { display: grid; gap: 4px; }
 .a11y-size-preview span { font-size: calc(15px * var(--a11y-prev, 1)); font-weight: 700; line-height: 1.35; }
 .a11y-size-preview small { color: var(--muted, #666); font-size: 12px; }
+
+/* ═════ Description des images : le champ dans la fenêtre d'un média ═════ */
+.a11y-lb-alt { display: grid; gap: 4px; margin: 4px 0 10px; }
+.a11y-lb-alt label { font-weight: 700; }
+.a11y-lb-alt label small { font-weight: 400; color: var(--muted); }
+.a11y-lb-alt textarea { width: 100%; box-sizing: border-box; font: inherit; min-height: 52px; resize: vertical; }
+.a11y-lb-hint { color: var(--muted); font-size: 12px; line-height: 1.4; }
+
+/* ═════ Dictée vocale ═════ */
+.a11y-mic { position: fixed; z-index: 2147482000; width: 30px; height: 30px; padding: 0; border: 2px solid #111; border-radius: 50%; background: #fff; color: #111;
+    font-size: 15px; line-height: 1; cursor: pointer; display: grid; place-items: center; box-shadow: 2px 2px 0 rgba(5,93,255,.35); }
+.a11y-mic:hover { background: #0a4fd6; border-color: #0a4fd6; }
+.a11y-mic.is-on { background: #d0182f; border-color: #8a0f1f; box-shadow: 0 0 0 4px rgba(208,24,47,.25); animation: a11y-mic-pulse 1.2s ease-in-out infinite; }
+@keyframes a11y-mic-pulse { 50% { box-shadow: 0 0 0 8px rgba(208,24,47,.12); } }
+.a11y-dict-bubble { position: fixed; z-index: 2147482000; width: min(300px, calc(100vw - 16px)); box-sizing: border-box; display: grid; gap: 4px; padding: 8px 10px;
+    background: #fff; color: #111; border: 2px solid #111; box-shadow: 4px 4px 0 rgba(5,93,255,.3); font: 400 12.5px/1.4 Arial, Helvetica, sans-serif; }
+.a11y-dict-bubble b { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+.a11y-dict-dot { width: 9px; height: 9px; border-radius: 50%; background: #d0182f; flex: none; }
+:root[data-theme="dark"] .a11y-mic, :root[data-theme="dark"] .a11y-dict-bubble { background: #242424; color: #e8e8e8; border-color: #888; }
+:root[data-theme="dark"] .a11y-mic.is-on { background: #d0182f; color: #fff; border-color: #ff8a98; }
+
+/* ═════ Mode « une chose à la fois » (html.a11y-simple ; écran ouvert : html[data-a11y-module]) ═════ */
+/* le bandeau, toujours là pour tout réafficher */
+.a11y-simplebar { position: fixed; right: 16px; bottom: 16px; z-index: 185; display: flex; align-items: center; gap: 10px; padding: 6px 6px 6px 12px;
+    background: #fff; color: #111; border: 2px solid #111; box-shadow: 4px 4px 0 rgba(5,93,255,.3); font: 700 13px/1.2 Arial, Helvetica, sans-serif; }
+.a11y-simplebar button { border: 2px solid #111; background: #0a4fd6; color: #fff; font: inherit; padding: 7px 12px; cursor: pointer; min-height: 34px; }
+.a11y-simplebar button:hover { background: #111; }
+:root[data-theme="dark"] .a11y-simplebar { background: #242424; color: #e8e8e8; border-color: #888; }
+:root[data-theme="dark"] .a11y-simplebar button { border-color: #e8e8e8; }
+html.a11y-simple .workspace { padding-bottom: 64px; }
+
+/* barre du haut : la navigation seulement, en plus grand ; les outils d'écran (diviser, nouvelle fenêtre, consultation, généalogies) cachés */
+html.a11y-simple .topbar { grid-template-columns: var(--sidebar) 1fr; }
+html.a11y-simple .topbar-meta { display: none; }
+html.a11y-simple .nav-item > span { display: none; }
+html.a11y-simple .nav-item { font-size: 17px; padding: 9px 14px; }
+html.a11y-simple .main-nav .nav-item:is([data-module="animaux"], [data-module="adn"], [data-module="comparaison"]):not(.is-active) { display: none; }
+/* décorations et numéros */
+html.a11y-simple .brand::after,
+html.a11y-simple :is(.sidebar-top, .page-header) .eyebrow,
+html.a11y-simple :is(.card-index, .side-number) { display: none !important; }
+html.a11y-simple .workspace { background-image: none; }
+/* un seul panneau : pas d'écran divisé */
+html.a11y-simple #side-panel-open, html.a11y-simple .side-panel { display: none !important; }
+html.a11y-simple body.has-side-panel #app { width: 100vw !important; height: 100vh !important; }
+/* colonne de gauche : les réglages et compteurs du bas cachés, l'action principale gardée */
+html.a11y-simple .sidebar-footer :is(.button.secondary, small, .muted, [data-person-count]) { display: none !important; }
+html.a11y-simple .sidebar-footer .dashboard-footer-actions:not(:has(> :not(.secondary))) { display: none; }
+html.a11y-simple .sidebar-footer:not(:has(.button:not(.secondary))) { display: none; }
+html.a11y-simple[data-a11y-module="personnes"] .sidebar-content .check-line { display: none !important; }
+/* tableau de bord : pas de catalogue de widgets à gauche, pas d'outils sur les widgets, une colonne */
+html.a11y-simple[data-a11y-module="dashboard"] .app-shell:not(.is-not-ready) .sidebar,
+html.a11y-simple[data-a11y-module="dashboard"] .sidebar-reopen { display: none !important; }
+html.a11y-simple[data-a11y-module="dashboard"] .app-shell:not(.is-not-ready) .workspace { grid-column: 1 / -1; }
+html.a11y-simple .dashboard-widget-tools { display: none !important; }
+html.a11y-simple :is(.dashboard-grid, .person-page .card-grid) > * { grid-column: 1 / -1 !important; }
+html.a11y-simple :is(.dashboard-grid, .person-page) { max-width: 980px; }
+html.a11y-simple .person-page { margin-inline: auto; }
+/* fiche : les actions rares cachées (récit en diaporama, supprimer, verrouiller, historique, retirer un parent / conjoint / enfant) */
+html.a11y-simple .person-hero :is(.h-ss-storybtn, .icon-delete, .icon-unlock, .icon-lock, .icon-history, .eyebrow),
+html.a11y-simple .relations-strip [data-remove-relation] { display: none !important; }
+/* carte : les filtres avancés et l'enregistrement en vidéo cachés ; « Recentrer » reste */
+html.a11y-simple .tool-strip :is(.map-year-filter, .h-oldmap-ctl, [data-h-film]) { display: none !important; }
+/* actions principales plus grandes */
+html.a11y-simple :is(.page-actions, .sidebar-footer, .modal-actions, .card-head-actions, .person-hero) .button:not(.secondary),
+html.a11y-simple #new-person { font-size: 15px !important; padding: 11px 18px !important; min-height: 44px; }
+html.a11y-simple .person-hero .icon-action, html.a11y-simple .card-head-actions .icon-action { min-width: 38px; min-height: 38px; }
+
+@media (max-width: 640px) {
+    .a11y-simplebar { right: 10px; bottom: 10px; font-size: 12px; padding: 4px 4px 4px 10px; }
+    html.a11y-simple .nav-item { font-size: 15px; padding: 8px 10px; }
+}
