@@ -5,6 +5,7 @@ require __DIR__ . '/lib/bootstrap.php';
 require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
 require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .heredis)
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
+require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
 const EVENT_FACT_CONFIDENCE_LEVELS = ['unknown','certain','deduced','estimated','doubt'];
@@ -353,6 +354,7 @@ try {
         'vector_map_places' => json_response(vector_map_places($pdo, (float) ($_GET['n'] ?? 0), (float) ($_GET['s'] ?? 0), (float) ($_GET['w'] ?? 0), (float) ($_GET['e'] ?? 0))),
         'diagram_people' => json_response(diagram_people($pdo, array_map('intval', explode(',', (string) ($_GET['ids'] ?? ''))))),
         'person_names' => json_response(person_names($pdo)),
+        'picker_search' => json_response(picker_search($pdo, $_GET)),
         'periodical_link_search' => json_response(periodical_link_search($pdo, (string) ($_GET['q'] ?? ''))),
         'press_ads' => json_response(press_ads_all($pdo)),
         'topic_sheet_templates' => json_response(['templates' => topic_sheet_templates($pdo)]),
@@ -9058,6 +9060,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'add_event' => add_event($pdo,$data),
             'save_event' => save_event($pdo,$data),
             'delete_event' => delete_event($pdo,$data),
+            'picker_place_adopt' => picker_place_adopt($pdo,$data),
             'restore_change' => restore_change($pdo,$data),
             'add_note' => add_note($pdo,$data),
             'save_note' => save_note($pdo,$data),

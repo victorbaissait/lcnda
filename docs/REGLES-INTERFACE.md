@@ -27,6 +27,8 @@ Maquette : `docs/design/choix-lieux-et-autres.html`. Même champ, même liste, m
 - **Recherche mélangée** (« une personne, une enquête, un lieu… ») : filtres en haut avec le nombre trouvé (« Tout (9) », « 👤 Personnes (2) »…), résultats rangés par sorte, chaque ligne au format de sa sorte ; Tab passe d'un filtre à l'autre.
 - **Ne changent pas** : les petits menus à choix fixes (Portrait / Paysage, Style, État…) restent des menus déroulants simples.
 
+**Mode d’emploi technique (à suivre pour tout nouvel outil) : `docs/PICKER.md`** — composant `assets/js/app-picker.js` (`pickerField`, `pickerView`, `openPicker`), styles `assets/css/picker.css`, recherche `lib/picker.php` (`picker_search`).
+
 ## Outils communs à utiliser (window.LCNDA_APP)
 
 - `confirmBox(message, {title, okLabel, danger})` au lieu de `confirm()` ; `toast()` au lieu de `alert()` ; `askText()` pour une question.
