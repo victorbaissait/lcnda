@@ -1155,10 +1155,14 @@
         const S = A().state, ws = A().$('#workspace');
         let items = []; try { items = (await api('houses')).items || []; } catch (e) { toast(e.message, 'error'); }
         if (token !== S.workspaceToken || S.module !== 'listes') return;
-        let q = '', view = 'cards'; try { view = localStorage.getItem(VIEW_KEY) === 'table' ? 'table' : 'cards'; } catch (_) {}
+        // H10 : « N maisons · [Liste | Fiches] · Trier : … », retenus pour cette liste (l'ancien réglage ▦ Cartes / ☰ Tableau sert de départ)
+        const UI = window.LCNDA_UI, KEY = 'listes:houses';
+        let q = '', old = 'cards'; try { old = localStorage.getItem(VIEW_KEY) === 'table' ? 'list' : 'cards'; } catch (_) {}
+        let view = UI?.viewOf ? (UI.viewOf(KEY, old) === 'list' ? 'table' : 'cards') : (old === 'list' ? 'table' : 'cards'), sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent';
         const linkText = h => [...(h.links?.people || []).map(p => p.label), ...(h.links?.census || []).map(c => c.label)].join(' ');
-        const draw = () => { const list = items.filter(h => norm(`${h.name} ${h.place} ${h.period} ${linkText(h)}`).includes(norm(q)));
-            ws.querySelectorAll('[data-hs-view]').forEach(b => b.classList.toggle('is-active', b.dataset.hsView === view));
+        const draw = () => { let list = items.filter(h => norm(`${h.name} ${h.place} ${h.period} ${linkText(h)}`).includes(norm(q)));
+            if (UI?.sortItems) list = UI.sortItems(list, sort, {name: h => h.name, date: h => h.updated_at});
+            ws.querySelector('[data-hs-bar]')?.setCount?.(list.length);
             const acts = h => `<button type="button" class="button small" data-hs-open="${h.id}">Ouvrir</button><button type="button" class="button small secondary" data-hs-ren="${h.id}" title="Renommer">✎</button><button type="button" class="button small secondary" data-hs-del="${h.id}" title="Supprimer">🗑</button>`;
             const none = A().empty(items.length ? 'Aucune maison ne correspond.' : 'Aucune maison pour l’instant : « ＋ Nouvelle maison ».');
             ws.querySelector('[data-hs-grid]').innerHTML = !list.length ? none : view === 'table'
@@ -1166,12 +1170,13 @@
                 : `<div class="h-hs-cards">${list.map(h => `<article class="h-hs-card"><button type="button" class="h-hs-cimg" data-hs-open="${h.id}">${h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span>🏠</span>'}</button><div><h3><button type="button" class="table-link" data-hs-open="${h.id}">${esc(h.name)}</button></h3><p class="muted">${esc([h.place, h.period].filter(Boolean).join(' · ') || 'Lieu à préciser')}</p><p class="muted">${h.floors} étage${h.floors > 1 ? 's' : ''} · ${h.rooms} pièce${h.rooms > 1 ? 's' : ''}${h.people ? ` · ${h.people} habitant${h.people > 1 ? 's' : ''}` : ''}${versText(h) ? ` · ${esc(versText(h))}` : ''}</p>
                     <div class="h-hs-linked"><small class="muted">Rattachée à :</small><div class="h-hs-links">${linkChips(h)}</div></div><div class="h-hs-cact">${acts(h)}</div></div></article>`).join('')}</div>`; };
         ws.innerHTML = `<section class="page collection-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🏠 Maisons de famille</h2><p>Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs.</p></div><button type="button" class="button" data-hs-new>＋ Nouvelle maison</button></header>
-            <div class="h-et-bar"><input type="search" data-hs-q placeholder="Chercher une maison (nom, lieu, époque, personne, recensement)…"><span class="segmented"><button type="button" data-hs-view="cards">▦ Cartes</button><button type="button" data-hs-view="table">☰ Tableau</button></span></div><div data-hs-grid></div></section>`;
+            <div class="h-et-bar"><input type="search" data-hs-q placeholder="Chercher une maison (nom, lieu, époque, personne, recensement)…"></div><div data-hs-bar></div><div data-hs-grid></div></section>`;
+        { const slot = ws.querySelector('[data-hs-bar]');
+            if (slot && UI?.sortBar) { const bar = UI.sortBar({count: items.length, label: 'maison', feminine: true, value: sort, view: {key: KEY, dflt: old, what: 'maisons', onChange: v => { view = v === 'list' ? 'table' : 'cards'; draw(); }}, onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }}); bar.dataset.hsBar = ''; slot.replaceWith(bar); } else slot?.remove(); }
         draw();
         const again = () => { if (S.module === 'listes' && S.listType === 'houses') listPage(++S.workspaceToken); };
         ws.onclick = async e => { const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
             try { if (d.hsNew !== undefined) return open({onSaved: again, onClose: again}); if (d.hsOpen) return open({id: Number(d.hsOpen), onSaved: again, onClose: again});
-                if (d.hsView) { view = d.hsView; try { localStorage.setItem(VIEW_KEY, view); } catch (_) {} return draw(); }
                 if (d.hsGop !== undefined) { if (!Number(d.hsGop)) return toast('Ce recensement n’est relié à aucune fiche.', 'error'); return A().openPersonById?.(Number(d.hsGop)); }
                 if (d.hsRen) { const h = items.find(x => x.id === Number(d.hsRen)), n = await A().askText({title: 'Renommer la maison', message: 'Nouveau nom :', value: h.name, okLabel: 'Renommer'}); if (!n?.trim()) return; await post('rename_house', {id: h.id, name: n.trim()}); return again(); }
                 if (d.hsDel) { const h = items.find(x => x.id === Number(d.hsDel)); if (!await A().confirmBox('', {title: `Supprimer la maison « ${h.name} » ?`, okLabel: 'Supprimer la maison'})) return; await post('delete_house', {id: h.id}); return again(); } } catch (err) { toast(err.message, 'error'); } };

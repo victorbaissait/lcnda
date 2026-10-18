@@ -118,6 +118,22 @@ list.after(more);              // « Voir les 20 suivantes ↓ » ; more.update(
 
 Choix de base : `recent`, `old`, `az`, `za` (+ `extra`), ou `options` pour tout remplacer.
 
+### H10 — « Liste | Fiches » juste avant « Trier »
+
+```js
+const KEY = 'listes:ma_liste';                      // une clé par liste
+let sort = UI.sortOf(KEY), view = UI.viewOf(KEY);   // retenus (localStorage « lcnda-sort: » / « lcnda-view: »)
+const bar = UI.sortBar({count: rows.length, label: 'projet', value: sort,
+    view: {key: KEY, what: 'projets', onChange: v => { view = v; draw(); }},   // pose le choix segmenté avant « Trier »
+    onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }});
+const list = UI.sortItems(rows, sort, {name: r => r.title, date: r => r.updated_at});
+box.innerHTML = UI.itemsHtml(view, list.map(r => ({thumb: '<img …>', name: r.title, open: `data-x-open="${r.id}"`,
+    lines: ['ligne grise', '…'], date: 'Modifié le …', actions: '<button …>'})));   // ou UI.cardsHtml / UI.rowsHtml
+```
+
+- `UI.viewToggle({key, value, onChange, what, dflt})` seul (classe `.segmented.ui-viewtoggle`, `.value`, `.set(v)`) ; sans `key`, l'appelant retient le choix lui-même. `UI.putViewToggle(bar, toggle)` le pose dans une barre C6 déjà faite. Aussi `A().viewToggle`.
+- « Liste » = tableau existant ou `UI.rowsHtml` (petite vignette, nom, ligne grise, date) ; « Fiches » = `UI.cardsHtml` (grande vignette 150 px) ou les cartes propres à la liste. Styles dans `ui.css` (clair, sombre, téléphone).
+
 ## C7 — Chargement et messages
 
 Ces trois-là rendent du **HTML** (texte échappé) :

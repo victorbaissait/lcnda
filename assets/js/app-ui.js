@@ -384,16 +384,66 @@
 
     /* ═════ C6 Trier et voir la suite ═════ */
     const SORTS = [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']];
-    /** C6 — sortBar({count, label, many, options, value, onChange, feminine}) → l'élément (.setCount(n), .select) */
-    UI.sortBar = ({count = 0, label = 'élément', many = '', options = null, extra = [], value = 'recent', onChange = null, feminine = false} = {}) => {
+    /** C6 — sortBar({count, label, many, options, value, onChange, feminine, view}) → l'élément (.setCount(n), .select, .view)
+     *  view : {key, value, onChange, what} ajoute « Liste | Fiches » juste avant « Trier » (H10). */
+    UI.sortBar = ({count = 0, label = 'élément', many = '', options = null, extra = [], value = 'recent', onChange = null, feminine = false, view = null} = {}) => {
         const opts = (options || [...SORTS.map(([v, l]) => [v, feminine ? l.replace('récents', 'récentes').replace('anciens', 'anciennes') : l]), ...extra]).map(o => (Array.isArray(o) ? o : [o.value, o.label]));
         const w = h('div', 'ui-sortbar', `<span class="ui-sortbar-count"></span><label class="ui-sortbar-sort">Trier : <select>${opts.map(([v, l]) => `<option value="${esc(v)}"${String(v) === String(value) ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`);
         w.select = w.querySelector('select');
         w.setCount = n => { w.querySelector('.ui-sortbar-count').textContent = plural(n, label, many); };
         w.setCount(count);
         w.select.addEventListener('change', () => onChange?.(w.select.value));
+        if (view) { w.view = view.nodeType ? view : UI.viewToggle(view); UI.putViewToggle(w, w.view); }
         return w;
     };
+
+    /* ═════ Liste | Fiches : l'affichage d'une liste, retenu pour chaque liste (H10) ═════
+     * « Liste » = lignes compactes ou tableau (vignette, nom, ligne grise, date) ; « Fiches » = cartes avec une grande vignette. */
+    const VIEW_PREFIX = 'lcnda-view:';
+    /** viewOf(key, dflt) → 'list' | 'cards' (ce que cette liste montrait la dernière fois) */
+    UI.viewOf = (key, dflt = 'list') => { try { const v = localStorage.getItem(VIEW_PREFIX + key); return v === 'cards' || v === 'list' ? v : dflt; } catch (_) { return dflt; } };
+    UI.setView = (key, v) => { try { localStorage.setItem(VIEW_PREFIX + key, v === 'cards' ? 'cards' : 'list'); } catch (_) {} };
+    /** viewToggle({key, value, onChange, what}) → le choix segmenté « Liste | Fiches » (.value, .set(v)).
+     *  Avec key, le choix est retenu (localStorage « lcnda-view:<key> ») ; sans key, c'est à l'appelant de le retenir. */
+    UI.viewToggle = ({key = '', value = null, onChange = null, what = 'éléments', dflt = 'list'} = {}) => {
+        let cur = value === 'cards' || value === 'list' ? value : (key ? UI.viewOf(key, dflt) : dflt);
+        const w = h('span', 'segmented ui-viewtoggle');
+        w.setAttribute('role', 'group'); w.setAttribute('aria-label', `Affichage des ${what}`);
+        w.innerHTML = `<button type="button" data-view="list" title="En liste : une ligne par élément (vignette, nom, détails, date)">Liste</button><button type="button" data-view="cards" title="En fiches : une carte par élément, avec une grande vignette">Fiches</button>`;
+        const paint = () => w.querySelectorAll('button').forEach(b => { const on = b.dataset.view === cur; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', String(on)); });
+        w.set = (v, silent = false) => { const nv = v === 'cards' ? 'cards' : 'list'; if (nv === cur) return; cur = nv; if (key) UI.setView(key, cur); paint(); if (!silent) onChange?.(cur); };
+        Object.defineProperty(w, 'value', {get: () => cur});
+        w.addEventListener('click', e => { const b = e.target.closest('button[data-view]'); if (b) { e.preventDefault(); e.stopPropagation(); w.set(b.dataset.view); } });
+        paint();
+        return w;
+    };
+    /** putViewToggle(bar, toggle) : pose « Liste | Fiches » juste avant « Trier » dans une barre C6 */
+    UI.putViewToggle = (bar, toggle) => {
+        if (!bar || !toggle) return toggle;
+        const lab = bar.querySelector('.ui-sortbar-sort');
+        bar.classList.add('has-view');
+        if (lab) lab.before(toggle); else bar.appendChild(toggle);
+        return toggle;
+    };
+    /* une carte ou une ligne commune : {thumb (html), name (texte), nameHtml, open (attributs du clic, ex. 'data-x="3"'), lines: [texte | {html}], date, actions (html), disabled, cls} */
+    const itemLine = l => (l && typeof l === 'object' ? l.html : esc(l));
+    const itemOpen = (it, cls, inner, tag = 'button') => (it.open ? `<button type="button" class="${cls}" ${it.open}${it.disabled ? ' disabled' : ''} title="Ouvrir « ${esc(it.name || '')} »">${inner}</button>` : `<${tag === 'button' ? 'span' : tag} class="${cls}">${inner}</${tag === 'button' ? 'span' : tag}>`);
+    const itemName = (it, cls) => (it.nameHtml ? `<span class="${cls}">${it.nameHtml}</span>` : it.open ? `<button type="button" class="table-link ${cls}" ${it.open}${it.disabled ? ' disabled' : ''}>${esc(it.name || 'Sans titre')}</button>` : `<strong class="${cls}">${esc(it.name || 'Sans titre')}</strong>`);
+    /** cardsHtml(items) → les fiches (grande vignette, nom, lignes grises, date, boutons) */
+    UI.cardsHtml = (items = []) => `<div class="ui-cards">${items.map(it => `<article class="ui-card${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${itemOpen(it, 'ui-card-thumb', it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-card-body">${itemName(it, 'ui-card-name')}${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).map(l => `<small class="muted">${itemLine(l)}</small>`).join('')}${it.date ? `<small class="muted ui-card-date">${esc(it.date)}</small>` : ''}</div>${it.actions ? `<div class="ui-card-act">${it.actions}</div>` : ''}</article>`).join('')}</div>`;
+    /** rowsHtml(items) → la liste compacte (petite vignette, nom, ligne grise, date, boutons) */
+    UI.rowsHtml = (items = []) => `<div class="ui-rows">${items.map(it => `<div class="ui-row${it.disabled ? ' is-disabled' : ''}${it.cls ? ' ' + it.cls : ''}"${it.attrs ? ' ' + it.attrs : ''}>${itemOpen(it, 'ui-row-thumb', it.thumb || '<span class="ui-card-ico">•</span>')}<div class="ui-row-main">${itemName(it, 'ui-row-name')}${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).length ? `<small class="muted">${(it.lines || []).filter(l => l && (typeof l !== 'object' || l.html)).map(itemLine).join(' · ')}</small>` : ''}</div>${it.date ? `<small class="muted ui-row-date">${esc(it.date)}</small>` : '<span></span>'}${it.actions ? `<div class="ui-row-act">${it.actions}</div>` : '<span></span>'}</div>`).join('')}</div>`;
+    /** le tri d'une liste, retenu pour chaque liste (« lcnda-sort:<key> ») */
+    UI.sortOf = (key, dflt = 'recent') => { try { return localStorage.getItem('lcnda-sort:' + key) || dflt; } catch (_) { return dflt; } };
+    UI.setSort = (key, v) => { try { localStorage.setItem('lcnda-sort:' + key, v); } catch (_) {} };
+    /** sortItems(rows, sort, {name, date}) → copie rangée : recent / old (date) ; az / za (nom) */
+    UI.sortItems = (rows, sort, {name = r => r.name || r.title || '', date = r => r.updated_at || r.created_at || ''} = {}) => {
+        const by = {recent: (a, b) => String(date(b) || '').localeCompare(String(date(a) || '')), old: (a, b) => String(date(a) || '').localeCompare(String(date(b) || '')),
+            az: (a, b) => String(name(a) || '').localeCompare(String(name(b) || ''), 'fr', {sensitivity: 'base', numeric: true}), za: (a, b) => String(name(b) || '').localeCompare(String(name(a) || ''), 'fr', {sensitivity: 'base', numeric: true})}[sort];
+        return by ? [...rows].sort(by) : [...rows];
+    };
+    /** itemsHtml(view, items) → l'un ou l'autre */
+    UI.itemsHtml = (view, items) => (view === 'cards' ? UI.cardsHtml(items) : UI.rowsHtml(items));
     /** C6 — moreButton({remaining, step, onClick, feminine}) → le bouton « Voir les N suivants ↓ » (.update(remaining)) */
     UI.moreButton = ({remaining = 0, step = 20, onClick = null, feminine = false} = {}) => {
         const b = h('button', 'ui-more'); b.type = 'button';
@@ -674,7 +724,7 @@
         clearTimeout(timer);
         timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, 30);
     }).observe(document.documentElement, {childList: true, subtree: true});
-    const attach = () => { const app = window.LCNDA_APP; if (app && app.ui !== UI) app.ui = UI; };
+    const attach = () => { const app = window.LCNDA_APP; if (app && app.ui !== UI) app.ui = UI; if (app && !app.viewToggle) app.viewToggle = UI.viewToggle; };
     attach();
     document.addEventListener('DOMContentLoaded', () => { attach(); scan(document); });
     addEventListener('load', attach);

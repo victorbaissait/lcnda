@@ -2360,9 +2360,24 @@
         st.bdListSort = st.bdListSort || {};
         const sort = st.bdListSort[kind] || {i: -1, dir: 1};
         if (sort.i >= 0) { const f = cols[sort.i][2]; rows = [...rows].sort((a, b) => { const x = f(a), y = f(b); return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), 'fr')) * sort.dir; }); }
+        // H10 : « N lignes · [Liste | Fiches] · Trier : … », l'affichage retenu pour chaque liste
+        const UI = window.LCNDA_UI, view = UI?.viewOf ? UI.viewOf(`listes:${kind}`) : 'list';
+        const open = r => kind === 'boards_list' ? `data-bd-go="${r.id}"` : kind === 'investigations_list' ? `data-bd-inv="${r.id}"` : kind === 'battues_list' ? `data-bd-bat="${r.id}"` : `data-bd-ate="${r.id}"`;
+        const strip = h => String(h ?? '').replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+        const icon = r => kind === 'boards_list' ? (r.thumb ? `<img src="${esc(r.thumb)}" alt="">` : `<span class="ui-card-ico">${esc(r.icon || '🧩')}</span>`) : `<span class="ui-card-ico">${esc(kind === 'atelier_list' ? (r.icon || '📚') : kind === 'battues_list' ? '🧭' : '🔍')}</span>`;
+        const dateCol = cols.findIndex(c => /^Modifi|^Échéance/.test(c[0]));
+        const item = r => ({thumb: icon(r), name: r.title || 'Sans titre', open: open(r), lines: [cols.slice(1).map((c, k) => { const t = k + 1 === dateCol ? '' : strip(c[1](r)); return t && /^\d/.test(t) ? `${c[0]} : ${t}` : t; }).filter(Boolean).join(' · ')], date: dateCol >= 0 && strip(cols[dateCol][1](r)) ? `${cols[dateCol][0]} : ${strip(cols[dateCol][1](r))}` : ''});
         A().$('#workspace').innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${esc(title)}</h2><p>${fmt(rows.length)} ligne${rows.length > 1 ? 's' : ''}. Un clic sur un titre l’ouvre ; un clic sur une colonne trie.</p></div></header>
-            ${rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${sort.i === i ? (sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'})}</section>`;
+            <div data-bd-sortbar></div>
+            ${rows.length && view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(rows.map(item)) : rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${sort.i === i ? (sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'})}</section>`;
         const ws = A().$('#workspace');
+        const slot = ws.querySelector('[data-bd-sortbar]');
+        if (slot && UI?.sortBar && rows.length) {
+            const num = i => rows.some(r => typeof cols[i][2](r) === 'number');
+            const options = [['-1:1', 'Dans l’ordre de départ'], ...cols.flatMap(([h], i) => /^Modifi|^Échéance/.test(h) ? [[`${i}:-1`, `${h} : les plus récents`], [`${i}:1`, `${h} : les plus anciens`]] : num(i) ? [[`${i}:-1`, `${h} : du plus grand au plus petit`], [`${i}:1`, `${h} : du plus petit au plus grand`]] : [[`${i}:1`, `${h} : A → Z`], [`${i}:-1`, `${h} : Z → A`]])];
+            const bar = UI.sortBar({count: rows.length, label: 'ligne', feminine: true, options, value: `${sort.i}:${sort.i < 0 ? 1 : sort.dir}`, view: {key: `listes:${kind}`, what: 'lignes', onChange: () => listPage(++st.workspaceToken, kind)}, onChange: v => { const [i, dir] = v.split(':').map(Number); st.bdListSort[kind] = {i, dir}; listPage(++st.workspaceToken, kind); }});
+            slot.replaceWith(bar);
+        } else slot?.remove();
         A().bindTableLinks?.();
         ws.querySelectorAll('[data-bd-sort]').forEach(x => x.addEventListener('click', () => { const i = Number(x.dataset.bdSort); st.bdListSort[kind] = {i, dir: sort.i === i ? -sort.dir : 1}; listPage(++st.workspaceToken, kind); }));
         ws.querySelectorAll('[data-bd-go]').forEach(x => x.addEventListener('click', () => go(Number(x.dataset.bdGo))));

@@ -73,7 +73,12 @@
         if (s.id) return renderDigest(token);
         const data = await get('archive_digest_search', {q: s.q || '', record_type: s.type || '', status: s.status || ''});
         if (!isCurrent(token)) return;
-        const rows = data.rows || [], types = data.types || {}, statuses = data.statuses || {};
+        const types = data.types || {}, statuses = data.statuses || {};
+        // H10 : « N dépouillements · [Liste | Fiches] · Trier : … », retenus pour cette liste
+        const UI = window.LCNDA_UI, KEY = 'listes:depouillements';
+        const sort = UI?.sortOf ? UI.sortOf(KEY, '') : '', view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
+        const nameOf = r => `${types[r.record_type] || r.record_type || 'Dépouillement'}${r.year_text ? ' · ' + r.year_text : ''}`;
+        const rows = sort && UI?.sortItems ? UI.sortItems(data.rows || [], sort, {name: nameOf, date: r => r.updated_at || r.created_at || ''}) : (data.rows || []);
         const ws = A().$('#workspace');
         const groups = new Map();
         rows.forEach(r => { const c = (r.place_name || r.city_name || r.city_alias || 'Commune non précisée').trim(); if (!groups.has(c)) groups.set(c, []); groups.get(c).push(r); });
@@ -88,6 +93,10 @@
                     ${r.page_total || r.doc_pages ? `<small class="muted">${r.page_total ? `📷 ${plural(r.page_total, 'vue', 'vues')} en ligne` : ''}${r.page_total && r.doc_pages ? ' · ' : ''}${r.doc_pages ? `📄 document de ${plural(r.doc_pages, 'page', 'pages')}` : ''}</small>` : ''}
                     <small>${esc(statuses[r.status] || r.status || '')} · 👥 ${(r.people || []).length} · 🏠 ${plural(households(r.people || []), 'foyer', 'foyers')}${ls ? ` · <b class="h-rc-warn">${plural(ls, 'photo à ranger', 'photos à ranger')}</b>` : ''}</small></span></button>`;
         };
+        const line = r => { const pages = pagesOf(r), cover = (r.media || []).find(m => isImage(m) && String(m.archive_page_number || '').trim()) || (r.media || []).find(isImage);
+            const done = pages.filter(p => ['checked', 'empty'].includes(p.status)).length, total = Number(r.page_total) || pages.length, pct = total ? Math.min(100, Math.round(done / total * 100)) : 0;
+            return {thumb: cover ? `<img src="${esc(thumb(cover))}" alt="" loading="lazy">` : '<span class="ui-card-ico">📜</span>', name: nameOf(r), open: `data-dp-open="${r.id}"`, lines: [[r.archive_service, r.archive_reference].filter(Boolean).join(' · '), `${statuses[r.status] || r.status || ''} · ${plural(pages.length, 'page', 'pages')} · ${pct} % dépouillé · 👥 ${(r.people || []).length}`], date: ''}; };
+        const group = list => view === 'list' && UI?.rowsHtml ? UI.rowsHtml(list.map(line)) : `<div class="h-rc-grid">${list.map(card).join('')}</div>`;
         ws.innerHTML = `<section class="page collection-page h-rc h-dp">
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
                 <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
@@ -95,9 +104,11 @@
             <div class="collection-toolbar"><input type="search" data-dp-q value="${esc(s.q || '')}" placeholder="Commune, cote, année, service d’archives…">
                 <select data-dp-type><option value="">Tous les types</option>${Object.entries(types).map(([k, l]) => `<option value="${esc(k)}" ${s.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
                 <select data-dp-status><option value="">Tous les états</option>${Object.entries(statuses).map(([k, l]) => `<option value="${esc(k)}" ${s.status === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>
-            ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3><div class="h-rc-grid">${list.map(card).join('')}</div>`).join('')
+            ${rows.length ? '<div data-dp-bar></div>' + [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')
             : (s.q || s.type || s.status ? A().emptyState({icon: '🔍', text: 'Aucun dépouillement ne correspond.'}) : A().emptyState({icon: '📑', text: 'Aucun dépouillement pour l’instant', hint: 'La fiche du dépouillement se remplit dans Recherche.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-dp-new'}}))}</section>`;
         const sec = ws.querySelector('.h-dp');
+        const slot = sec.querySelector('[data-dp-bar]');
+        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: rows.length, label: 'dépouillement', value: sort, extra: [], options: [['', 'Par commune'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], view: {key: KEY, dflt: 'cards', what: 'dépouillements', onChange: () => ext.lists.depouillements(++S().workspaceToken)}, onChange: v => { UI.setSort(KEY, v); ext.lists.depouillements(++S().workspaceToken); }}));
         sec.querySelectorAll('[data-dp-open]').forEach(b => b.addEventListener('click', () => { Object.assign(s, {id: Number(b.dataset.dpOpen), page: '', tab: 'pages', image: 0}); ext.lists.depouillements(++S().workspaceToken); }));
         sec.querySelectorAll('[data-dp-new]').forEach(b => b.addEventListener('click', newInResearch));
         sec.querySelector('[data-dp-research]').addEventListener('click', () => openInResearch(0));

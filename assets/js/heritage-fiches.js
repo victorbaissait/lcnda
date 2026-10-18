@@ -357,9 +357,22 @@
         const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
         A().$('#workspace').innerHTML = `<section class="page collection-page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📒 Fiches</h2><p>Les fiches sur un sujet (onglet « Fiches ») : clique sur une fiche pour l’ouvrir.</p></div>
                 <div class="page-actions"><button type="button" class="button" data-fi-listnew>＋ Nouvelle fiche</button></div></header>
-            ${sheets.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée le</th></tr></thead><tbody>${sheets.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${esc(fmtDate(s.updated_at))}</td></tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: {label: '＋ Nouvelle fiche', attrs: 'data-fi-listnew'}})}</section>`;
-        const ws = A().$('#workspace');
-        ws.querySelectorAll('[data-fi-listopen]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiListopen); A().setModule('fiches'); }));
+            ${sheets.length ? '<div data-fi-bar></div><div data-fi-items></div>' : A().emptyState({icon: '📒', text: 'Aucune fiche pour l’instant', hint: 'Une fiche rassemble texte, images, personnes, cartes et listes sur un sujet.', action: {label: '＋ Nouvelle fiche', attrs: 'data-fi-listnew'}})}</section>`;
+        const ws = A().$('#workspace'), UI = window.LCNDA_UI;
+        // H10 : « N fiches · [Liste | Fiches] · Trier : … », retenus pour cette liste
+        const KEY = 'listes:topic_sheets_list';
+        let sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY) : 'list';
+        const draw = () => {
+            const box = ws.querySelector('[data-fi-items]'); if (!box) return;
+            const list = UI?.sortItems ? UI.sortItems(sheets, sort, {name: x => x.title, date: x => x.updated_at}) : sheets;
+            box.innerHTML = view === 'cards' && UI?.cardsHtml
+                ? UI.cardsHtml(list.map(x => ({thumb: `<span class="ui-card-ico">${esc(x.icon || '📒')}</span>`, name: x.title || 'Fiche sans titre', open: `data-fi-listopen="${x.id}"`, lines: [x.subtitle, `${x.blocks} bloc${x.blocks > 1 ? 's' : ''}`], date: x.updated_at ? `Modifiée le ${fmtDate(x.updated_at)}` : ''})))
+                : `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée le</th></tr></thead><tbody>${list.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${esc(fmtDate(s.updated_at))}</td></tr>`).join('')}</tbody></table></div>`;
+            box.querySelectorAll('[data-fi-listopen]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiListopen); A().setModule('fiches'); }));
+        };
+        const slot = ws.querySelector('[data-fi-bar]');
+        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: sheets.length, label: 'fiche', feminine: true, value: sort, view: {key: KEY, what: 'fiches', onChange: v => { view = v; draw(); }}, onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }}));
+        draw();
         ws.querySelectorAll('[data-fi-listnew]').forEach(b => b.addEventListener('click', newSheet));
     };
     ext.fichesInternals = {md}; // pour les essais

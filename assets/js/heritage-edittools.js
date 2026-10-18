@@ -72,25 +72,11 @@
     // les cartes des projets (C6) : grande vignette, nom, détails, date, boutons
     const ensureCss = () => { if (document.getElementById('h-et-css')) return; const st = document.createElement('style'); st.id = 'h-et-css'; st.textContent = `
 .h-et-bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
-.h-et-view.segmented{display:inline-grid;grid-template-columns:auto auto;margin:0 4px 0 0;vertical-align:middle}
-.h-et-view.segmented button{min-height:32px;padding:0 14px;font-size:12.5px;font-weight:800;color:var(--ink,#080808);background:var(--white,#fff);border:2px solid var(--ink,#080808)}
-.h-et-view.segmented button.is-active{color:#fff;background:var(--blue-bright,#055dff)}
-.ui-sortbar{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
-.h-et-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:12px;padding:0 4px 4px 0}
-.h-et-card{display:flex;flex-direction:column;border:2px solid var(--ink,#080808);background:var(--white,#fff);box-shadow:4px 4px 0 var(--blue-bright,#055dff);overflow:hidden;min-width:0}
-.h-et-card.is-disabled{opacity:.6}
-.h-et-cardthumb{display:flex;align-items:center;justify-content:center;height:150px;background:#f1f2f4;border:0;border-bottom:2px solid var(--ink,#080808);padding:0;cursor:pointer;overflow:hidden;width:100%;box-shadow:none}
-.h-et-cardthumb img{width:100%;height:100%;object-fit:cover}
-.h-et-cardthumb .h-et-ico,.h-et-cardthumb .h-et-cover{font-size:46px}
-.h-et-cardbody{display:grid;gap:2px;padding:8px 10px 4px;min-width:0}
-.h-et-cardname{font-weight:800;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.h-et-card .h-et-act{display:flex;gap:6px;padding:6px 10px 10px;margin-top:auto;align-items:center}
+.h-et-bar .ui-sortbar{display:inline-flex;align-items:center;gap:8px;flex-wrap:wrap}
+.h-et-cards .ui-card-act .button{min-height:30px}
+.h-et-cards .ui-card-thumb .h-et-ico,.h-et-cards .ui-card-thumb .h-et-cover{font-size:46px}
 .h-et-page .ui-more{margin:14px auto 0;display:block}
-@media (max-width:520px){.h-et-cards{grid-template-columns:1fr;gap:14px}.h-et-cardthumb{height:170px}}
-:root[data-theme="dark"] .h-et-view.segmented button{color:#eee;background:#1f1f1f;border-color:#eee}
-:root[data-theme="dark"] .h-et-view.segmented button.is-active{color:#fff;background:var(--blue-bright,#055dff)}
-:root[data-theme="dark"] .h-et-card{background:#242424;border-color:#e8e8e8;box-shadow:4px 4px 0 #4d9fff}
-:root[data-theme="dark"] .h-et-cardthumb{background:#1b1b1b;border-color:#e8e8e8}`; document.head.appendChild(st); };
+`; document.head.appendChild(st); };
     ext.lists = ext.lists || {};
     ext.lists.edit_tools = async token => {
         const S = A().state, ws = A().$('#workspace');
@@ -118,7 +104,7 @@
             const cnt = ws.querySelector('[data-et-of]'); if (cnt) cnt.textContent = !loading && list.length !== rows.length ? `sur ${rows.length}` : '';
             if (loading) { box.innerHTML = U?.skeleton ? U.skeleton(4) : '<div class="loading-block">Chargement…</div>'; return; }
             box.innerHTML = list.length ? (view === 'cards'
-                ? `<div class="h-et-cards">${part.map(r => `<article class="h-et-card${r.disabled ? ' is-disabled' : ''}"><button type="button" class="h-et-cardthumb" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''} title="Ouvrir « ${esc(r.name)} »">${r.thumb}</button><div class="h-et-cardbody"><button type="button" class="table-link h-et-cardname" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button><small class="muted">${esc(r.info)}</small><small class="muted">Modifié le ${esc(fmtDate(r.date))}</small></div>${acts(r)}</article>`).join('')}</div>`
+                ? `<div class="h-et-cards">${U.cardsHtml(part.map(r => ({thumb: r.thumb, name: r.name, open: `data-et-open="${r.id}"`, disabled: r.disabled, lines: [r.info], date: `Modifié le ${fmtDate(r.date)}`, actions: acts(r).replace(/^<div class="h-et-act">|<\/div>$/g, '')})))}</div>`
                 : `<div class="data-table-wrap"><table class="data-table h-et-table"><thead><tr><th></th><th>Nom</th><th>Détails</th><th>Modifié le</th><th></th></tr></thead><tbody>${part.map(r => `<tr><td class="h-et-thumb">${r.thumb}</td><td><button type="button" class="table-link" data-et-open="${r.id}" ${r.disabled ? 'disabled' : ''}>${esc(r.name)}</button></td><td class="muted">${esc(r.info)}</td><td>${esc(fmtDate(r.date))}</td><td>${acts(r)}</td></tr>`).join('')}</tbody></table></div>`)
                 : rows.length ? A().emptyState({icon: '🔎', text: `Aucun projet pour « ${q.trim()} »`, hint: 'Vérifie l’orthographe, ou cherche un autre mot (nom, photo, détails).', action: {label: '× Effacer la recherche', attrs: 'data-et-clear'}})
                     : A().emptyState({icon: t.icon || '🗂️', text: `Aucun projet de ${t.what} pour l’instant`, hint: 'Commence-en un : il apparaîtra ici, avec les autres, pour le rouvrir plus tard.', action: {label: t.createLabel, attrs: 'data-et-new'}});
@@ -140,10 +126,10 @@
             view = viewOf(tab);
             const slot = ws.querySelector('[data-et-sortslot]');
             // « Liste | Fiches » (onglet segmenté de l'app), juste avant « Trier »
-            const seg = document.createElement('span'); seg.className = 'segmented h-et-view'; seg.setAttribute('role', 'group'); seg.setAttribute('aria-label', 'Affichage des projets');
-            seg.innerHTML = `<button type="button" class="${view === 'list' ? 'is-active' : ''}" data-et-view="list" aria-pressed="${view === 'list'}" title="En tableau : vignette, nom, détails, date">Liste</button><button type="button" class="${view === 'cards' ? 'is-active' : ''}" data-et-view="cards" aria-pressed="${view === 'cards'}" title="En fiches : une carte par projet, avec une grande vignette">Fiches</button>`;
-            if (U?.sortBar) { const bar = U.sortBar({count: rows.length, label: 'projet', value: sort, onChange: v => { sort = v; shown = STEP; try { localStorage.setItem(SORT_KEY, v); } catch (_) {} drawList(); }}); bar.dataset.etSortbar = ''; slot.replaceWith(bar); const lab = bar.querySelector('.ui-sortbar-sort'); if (lab) lab.before(seg); else bar.appendChild(seg); }
-            else slot.outerHTML = seg.outerHTML + `<label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
+            // (le composant commun UI.viewToggle ; le choix reste rangé par outil dans VIEW_KEY)
+            const viewOpt = {value: view, what: 'projets', onChange: v => { view = v; const all = views(); all[tab] = v; try { localStorage.setItem(VIEW_KEY, JSON.stringify(all)); } catch (_) {} drawList(); }};
+            if (U?.sortBar) { const bar = U.sortBar({count: rows.length, label: 'projet', value: sort, view: viewOpt, onChange: v => { sort = v; shown = STEP; try { localStorage.setItem(SORT_KEY, v); } catch (_) {} drawList(); }}); bar.dataset.etSortbar = ''; slot.replaceWith(bar); }
+            else slot.outerHTML = `<label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
             load();
         };
         drawPage();
@@ -158,7 +144,6 @@
                 if (d.etRestore !== undefined) return ext.openRestore?.();
                 if (d.etIdp !== undefined) return ext.openIdPhotoBatch?.();
                 if (d.etClear !== undefined) { q = ''; const i = ws.querySelector('[data-et-q]'); if (i) { i.value = ''; i.dispatchEvent(new Event('input', {bubbles: true})); } shown = STEP; return drawList(); }
-                if (d.etView) { view = d.etView === 'cards' ? 'cards' : 'list'; try { localStorage.setItem(VIEW_KEY, JSON.stringify({...views(), [tab]: view})); } catch (_) {} ws.querySelectorAll('[data-et-view]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.etView === view))); ws.querySelectorAll('[data-et-view]').forEach(x => x.classList.toggle('is-active', x.dataset.etView === view)); return drawList(); }
                 if (d.etVxblason !== undefined) return ext.openVectorEditor?.({coat: {title: 'Blason'}, onSaved: again, onClose: again});
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);

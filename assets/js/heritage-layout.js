@@ -2358,19 +2358,26 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
     ext.newLayoutDoc = (mode, onSaved) => newDocWizard(mode, onSaved);
     ext.layoutCoverHtml = (cover, w) => coverHtml(cover, w);
     ext.lists.layout_books = async token => {
-        const S = A().state, ws = A().$('#workspace');
+        const S = A().state, ws = A().$('#workspace'), UI = window.LCNDA_UI;
+        // H10 : « N documents · [Liste | Fiches] · Trier : … », retenus pour cette liste
+        const KEY = 'listes:layout_books';
+        let sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY) : 'list';
         const draw = async () => {
             let docs = []; try { docs = (await api('layout_docs')).docs; } catch (err) { toast(err.message, 'error'); }
+            if (UI?.sortItems) docs = UI.sortItems(docs || [], sort, {name: x => x.name, date: x => x.updated_at});
             if (token !== S.workspaceToken || S.module !== 'listes') return;
             const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
             const row = x => `<tr><td class="ly-listcover">${coverHtml(x.cover, 46)}</td><td><button type="button" class="table-link" data-lyl-open="${x.id}">${esc(x.name)}</button></td><td>${x.is_design ? '🎨 Design' : '📖 Livre'}</td><td>${x.pages}</td><td>${esc(fmtDate(x.updated_at))}</td>
                 <td><div class="ly-listact"><button type="button" class="button small" data-lyl-open="${x.id}">${x.is_design ? 'Modifier' : 'Ouvrir'}</button>${x.is_design ? `<button type="button" class="button small secondary" data-lyl-use="${x.id}">Utiliser</button>` : ''}<button type="button" class="button small secondary" data-lyl-dup="${x.id}">Dupliquer</button><button type="button" class="button small secondary" data-lyl-ren="${x.id}">Renommer</button><button type="button" class="button small secondary" data-lyl-exp="${x.id}">Exporter</button><button type="button" class="button small secondary danger" data-lyl-del="${x.id}">🗑</button></div></td></tr>`;
             const books = docs.filter(x => !x.is_design), designs = docs.filter(x => x.is_design);
-            const table = (list, empty) => list.length ? `<div class="data-table-wrap"><table class="data-table ly-listtable"><thead><tr><th></th><th>Nom</th><th>Sorte</th><th>Pages</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>` : A().empty(empty);
+            const acts = x => `<button type="button" class="button small" data-lyl-open="${x.id}">${x.is_design ? 'Modifier' : 'Ouvrir'}</button>${x.is_design ? `<button type="button" class="button small secondary" data-lyl-use="${x.id}">Utiliser</button>` : ''}<button type="button" class="icon-button small" data-lyl-dup="${x.id}" title="Dupliquer" aria-label="Dupliquer">⧉</button><button type="button" class="icon-button small" data-lyl-ren="${x.id}" title="Renommer" aria-label="Renommer">✎</button><button type="button" class="icon-button small" data-lyl-exp="${x.id}" title="Exporter" aria-label="Exporter">⤓</button><button type="button" class="icon-button small" data-lyl-del="${x.id}" title="Supprimer" aria-label="Supprimer">🗑</button>`;
+            const table = (list, empty) => list.length && view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(list.map(x => ({thumb: coverHtml(x.cover, 96) || `<span class="ui-card-ico">${x.is_design ? '🎨' : '📕'}</span>`, name: x.name, open: `data-lyl-open="${x.id}"`, lines: [`${x.is_design ? '🎨 Design' : '📖 Livre'} · ${x.pages} page${x.pages > 1 ? 's' : ''}`], date: x.updated_at ? `Modifié le ${fmtDate(x.updated_at)}` : '', actions: acts(x)}))) : list.length ? `<div class="data-table-wrap"><table class="data-table ly-listtable"><thead><tr><th></th><th>Nom</th><th>Sorte</th><th>Pages</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>` : A().empty(empty);
             ws.innerHTML = `<section class="page collection-page ly-listpage" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📐 Livres de famille</h2><p>Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut.</p></div>
                 <div class="page-actions"><button type="button" class="button" data-lyl-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-lyl-new="design">🎨 Depuis un design</button><button type="button" class="button secondary" data-lyl-new="blank">📄 Page blanche</button><button type="button" class="button secondary" data-lyl-defaults>⚙️ Réglages par défaut</button><button type="button" class="button secondary" data-lyl-studio>📐 Ouvrir l’atelier</button></div></header>
-                <h3>📖 Livres (${books.length})</h3>${table(books, 'Aucun livre pour l’instant : « 👪 Nouveau livre d’après la famille ».')}
+                ${docs.length ? '<div data-lyl-bar></div>' : ''}<h3>📖 Livres (${books.length})</h3>${table(books, 'Aucun livre pour l’instant : « 👪 Nouveau livre d’après la famille ».')}
                 <h3>🎨 Mes designs (${designs.length})</h3>${table(designs, 'Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « 📐 Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ».')}</section>`;
+            const slot = ws.querySelector('[data-lyl-bar]');
+            if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: docs.length, label: 'document', value: sort, view: {key: KEY, what: 'documents', onChange: v => { view = v; draw(); }}, onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }}));
         };
         await draw();
         const again = () => { if (S.module === 'listes' && S.listType === 'layout_books') draw(); };

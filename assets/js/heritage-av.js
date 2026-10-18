@@ -240,7 +240,7 @@
                 <label>Rattaché à <select id="av-owner"><option value="">Tout</option>${presentGroups.map(g => `<option value="${g[0]}"${p.owner === g[0] ? ' selected' : ''}>${esc(g[1])}</option>`).join('')}${unlinked ? `<option value="none"${p.owner === 'none' ? ' selected' : ''}>Rattaché à rien</option>` : ''}</select><span data-help="Montre seulement ce qui est rattaché à une sorte de fiche (personne, battue, enquête…), ou à rien du tout."></span></label>
                 <span class="av-count muted" id="av-count"></span>
             </div>
-            <div class="data-table-wrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
+            <div id="av-cards" hidden></div><div class="data-table-wrap" id="av-tablewrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
             <div id="av-player-host"></div>` : A().empty(`Aucun${kind === 'video' ? 'e vidéo' : ' son'} : ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`)}
         </section>`;
         const reloadAv = () => { if (st.module === 'listes') ext.lists?.[kind === 'video' ? 'videos' : 'audios']?.(++st.workspaceToken); };
@@ -283,9 +283,25 @@
                 <td class="av-edit-col">${it.original ? `<button type="button" class="icon-button" data-av-original="${it.id}" title="${kind === 'video' ? 'Voir' : 'Écouter'} l’original (avant modification)">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}</td>
             </tr>`;
         };
+        // H10 : « Liste | Fiches » juste avant « Trier », retenu pour chaque liste (sons, vidéos)
+        const UI = window.LCNDA_UI, VKEY = `listes:${kind === 'video' ? 'videos' : 'audios'}`;
+        let disp = UI?.viewOf ? UI.viewOf(VKEY) : 'list';
+        const sortLab = $('#av-sort')?.closest('label');
+        if (sortLab && UI?.viewToggle) sortLab.before(UI.viewToggle({key: VKEY, what: kind === 'video' ? 'vidéos' : 'sons', onChange: v => { disp = v; draw(); }}));
+        const cardItem = it => {
+            const playing = it.id === player.current, src = `media/${encodeURIComponent(it.filename || '')}`;
+            return {cls: `is-clickable${playing ? ' is-playing' : ''}${it.exists ? '' : ' is-missing'}`, attrs: `data-av-row="${it.id}"`, name: nameOf(it),
+                thumb: kind === 'video' && it.exists && it.filename ? `<video src="${esc(src)}#t=1" preload="metadata" muted playsinline></video>` : `<span class="ui-card-ico">${it.exists ? K.icon : '⚠️'}</span>`,
+                lines: [it.owners.length ? ownerText(it) : 'Rattaché à rien', [fmtDur(it.duration), it.date_text, it.format].filter(Boolean).join(' · '), it.exists ? '' : 'Fichier introuvable'],
+                date: it.created_at ? `Ajouté le ${fmtAdded(it.created_at)}` : '',
+                actions: `${it.exists ? `<button type="button" class="button small" data-av-play="${it.id}" aria-label="Lire">${playing && !player.paused ? '❚❚' : '▶'}</button>` : ''}${it.original ? `<button type="button" class="icon-button small" data-av-original="${it.id}" title="${kind === 'video' ? 'Voir' : 'Écouter'} l’original (avant modification)">🕰️</button>` : ''}${it.exists ? `<button type="button" class="icon-button small" data-av-edit="${it.id}" title="Modifier : couper, améliorer le son, assembler… (l’original est gardé)">✏️</button>` : ''}`};
+        };
         const draw = () => {
             view = sorted(filtered(items, p), p.sort);
-            $('#av-body').innerHTML = view.length ? view.map(rowHtml).join('') : `<tr><td colspan="9" class="muted">Rien ne correspond.</td></tr>`;
+            const cards = disp === 'cards' && UI?.cardsHtml;
+            $('#av-cards').hidden = !cards; $('#av-tablewrap').hidden = !!cards;
+            if (cards) { $('#av-body').innerHTML = ''; $('#av-cards').innerHTML = view.length ? UI.cardsHtml(view.map(cardItem)) : '<p class="muted">Rien ne correspond.</p>'; }
+            else { $('#av-cards').innerHTML = ''; $('#av-body').innerHTML = view.length ? view.map(rowHtml).join('') : `<tr><td colspan="9" class="muted">Rien ne correspond.</td></tr>`; }
             const dur = view.reduce((s, it) => s + (it.duration || 0), 0);
             $('#av-count').textContent = `${view.length} ${view.length > 1 ? K.many : K.one}${view.length !== items.length ? ` sur ${items.length}` : ''}${dur ? ` · ${fmtDur(dur)} en tout` : ''}`;
             player.updatePos();
@@ -304,7 +320,7 @@
         $('#av-q').addEventListener('input', e => { clearTimeout(qTimer); qTimer = setTimeout(() => { p.q = e.target.value; (st.hAvQ ||= {})[kind] = p.q; draw(); }, 200); });
         $('#av-sort').addEventListener('change', e => { p.sort = e.target.value; savePrefs(kind, {sort: p.sort}); draw(); });
         $('#av-owner').addEventListener('change', e => { p.owner = e.target.value; savePrefs(kind, {owner: p.owner}); draw(); });
-        $('#av-body').addEventListener('click', e => {
+        const onListClick = e => {
             const pb = e.target.closest('[data-av-play]');
             if (pb) return play(Number(pb.dataset.avPlay));
             const ed = e.target.closest('[data-av-edit]');
@@ -315,7 +331,9 @@
             if (own) { const [mid, i] = own.dataset.avOwner.split(':').map(Number); const o = items.find(x => x.id === mid)?.owners[i]; if (o) goOwner(o); return; }
             const tr = e.target.closest('[data-av-row]');
             if (tr && !e.target.closest('button, a')) { const id = Number(tr.dataset.avRow); if (id !== player.current) play(id); }
-        });
+        };
+        $('#av-body').addEventListener('click', onListClick);
+        $('#av-cards').addEventListener('click', onListClick);
 
         const n = await measureDurations(kind, items, alive, setDur);
         if (n && alive() && p.sort.startsWith('dur')) draw();

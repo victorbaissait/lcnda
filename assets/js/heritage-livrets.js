@@ -29,17 +29,26 @@
         if (st.hBooklet) return showBooklet(token, st.hBooklet);
         let data; try { data = await api('booklets', {q: st.hBookletQ || ''}); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
-        const rows = data.booklets || [];
+        // H10 : « N livrets · [Liste | Fiches] · Trier : … », retenus pour cette liste
+        const UI = window.LCNDA_UI, KEY = 'listes:family_booklets';
+        const sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
+        const rows = UI?.sortItems ? UI.sortItems(data.booklets || [], sort, {name: r => r.title, date: r => r.updated_at}) : (data.booklets || []);
+        const cover = r => (r.cover || r.media?.[0]) ? A().mediaThumbHtml(r.cover || r.media[0]) : '';
+        const where = r => [r.commune, r.marriage_date && 'mariage ' + r.marriage_date].filter(Boolean).join(' · ') || 'Commune et date à compléter';
+        const counts = r => `${fmt(r.children)} enfant${r.children > 1 ? 's' : ''} · ${fmt(r.linked)}/${fmt(r.people)} personne${r.people > 1 ? 's' : ''} reliée${r.linked > 1 ? 's' : ''} · ${fmt(r.media_count)} photo${r.media_count > 1 ? 's' : ''}`;
+        const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
         A().$('#workspace').innerHTML = `<section class="page h-booklets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Livrets de famille</h2>
             <p>La transcription complète des livrets de famille : délivrance, époux et épouse, leurs parents, le mariage, les enfants et toutes les mentions. Relie chaque personne à sa fiche : le livret y apparaît, et ses dates peuvent y être reportées.</p></div>
             <div class="page-actions"><button type="button" class="button" data-bk-new>📘 + Nouveau livret</button></div></header>
             <div class="list-toolbar"><div class="search-box" style="position:static;max-width:500px"><div class="search-row"><input data-bk-q placeholder="Chercher un nom, une commune…" value="${esc(st.hBookletQ || '')}"><button aria-label="Rechercher">⌕</button></div></div></div>
-            ${rows.length ? `<div class="h-bk-grid">${rows.map(r => `<button type="button" class="h-bk-card" data-bk-open="${r.id}">
-                <span class="h-bk-cover">${(r.cover || r.media?.[0]) ? A().mediaThumbHtml(r.cover || r.media[0]) : '<span class="h-bk-coverart">LIVRET<br>DE<br>FAMILLE</span>'}</span>
-                <span class="h-bk-info"><strong>${esc(r.title)}</strong><small>${esc([r.commune, r.marriage_date && 'mariage ' + r.marriage_date].filter(Boolean).join(' · ') || 'Commune et date à compléter')}</small>
-                <small>${fmt(r.children)} enfant${r.children > 1 ? 's' : ''} · ${fmt(r.linked)}/${fmt(r.people)} personne${r.people > 1 ? 's' : ''} reliée${r.linked > 1 ? 's' : ''} · ${fmt(r.media_count)} photo${r.media_count > 1 ? 's' : ''}</small></span></button>`).join('')}</div>`
+            ${rows.length ? `<div data-bk-bar></div>${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: cover(r) || '<span class="ui-card-ico">📘</span>', name: r.title, open: `data-bk-open="${r.id}"`, lines: [where(r), counts(r)], date: r.updated_at ? `Modifié le ${fmtDate(r.updated_at)}` : ''}))) : `<div class="h-bk-grid">${rows.map(r => `<button type="button" class="h-bk-card" data-bk-open="${r.id}">
+                <span class="h-bk-cover">${cover(r) || '<span class="h-bk-coverart">LIVRET<br>DE<br>FAMILLE</span>'}</span>
+                <span class="h-bk-info"><strong>${esc(r.title)}</strong><small>${esc(where(r))}</small>
+                <small>${counts(r)}</small></span></button>`).join('')}</div>`}`
                 : (st.hBookletQ ? A().emptyState({icon: '🔍', text: 'Aucun livret ne correspond.'}) : A().emptyState({icon: '📘', text: 'Aucun livret pour l’instant', hint: 'Tu recopies ce qui est écrit, page par page, et tu relies les personnes à leurs fiches.', action: {label: '＋ Nouveau livret', attrs: 'data-bk-new'}}))}</section>`;
         const ws = A().$('#workspace');
+        const slot = ws.querySelector('[data-bk-bar]');
+        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: rows.length, label: 'livret', value: sort, view: {key: KEY, dflt: 'cards', what: 'livrets', onChange: () => ext.lists.family_booklets(++st.workspaceToken)}, onChange: v => { UI.setSort(KEY, v); ext.lists.family_booklets(++st.workspaceToken); }}));
         let t = 0; ws.querySelector('[data-bk-q]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.hBookletQ = e.target.value; ext.lists.family_booklets(++st.workspaceToken); }, 300); });
         ws.querySelectorAll('[data-bk-new]').forEach(b => b.addEventListener('click', () => openEditor(null)));
         ws.querySelectorAll('[data-bk-open]').forEach(b => b.addEventListener('click', () => { st.hBooklet = Number(b.dataset.bkOpen); ext.lists.family_booklets(++st.workspaceToken); }));

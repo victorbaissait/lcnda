@@ -158,7 +158,7 @@
                 <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⬇️ CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
             <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${k}">${l}</button>`).join('')}</div>
             <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${k}">${esc(l)}</button>`).join('')}</div>
-            ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><button type="button" class="${dispOf(f) === 'list' ? 'is-on' : ''}" data-pr-disp="list">📋 Liste</button><button type="button" class="${dispOf(f) === 'cards' ? 'is-on' : ''}" data-pr-disp="cards">🗂️ Fiches</button><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
+            ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
             <div class="h-pr-filters">
                 <input type="search" data-pr-f="q" value="${esc(f.q)}" placeholder="Chercher (titre, auteur, lieu, nom cité, ce qu’on voit, notes…)">
                 <select data-pr-f="periodical">${opt('', 'Toutes (revues, collections, séries)', f.periodical)}${conts.map(p => opt(p.id, p.title, f.periodical)).join('')}</select>
@@ -226,14 +226,15 @@
         const save = patch => { lsSet(PREFS, {...prefs(), ...patch}); draw(); };
         ws.querySelectorAll('[data-pr-fam]').forEach(b => b.addEventListener('click', () => save({fam: b.dataset.prFam, periodical: '', kind: ''})));
         ws.querySelectorAll('[data-pr-view]').forEach(b => b.addEventListener('click', () => save({view: b.dataset.prView})));
-        ws.querySelectorAll('[data-pr-disp]').forEach(b => b.addEventListener('click', () => { const p = prefs(); save({dispBy: {...p.dispBy, [p.fam || 'all']: b.dataset.prDisp}}); }));
         ws.querySelector('[data-pr-group]')?.addEventListener('change', e => { const p = prefs(); save({groupBy: {...p.groupBy, [p.fam || 'all']: e.target.checked ? 'category' : ''}}); });
         ws.querySelector('[data-pr-types]')?.addEventListener('click', () => typesDialog());
         let t = 0;
         ws.querySelectorAll('[data-pr-f]').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { clearTimeout(t); t = setTimeout(() => { const pos = el.selectionStart; save({[el.dataset.prF]: el.value}); const again = A().$(`[data-pr-f="${el.dataset.prF}"]`); if (again && el.tagName !== 'SELECT') { again.focus(); try { again.setSelectionRange(pos, pos); } catch (_) {} } }, el.tagName === 'SELECT' ? 0 : 300); }));
         // C6 : « N éléments · Trier : [menu] » (le premier critère ; « Ensuite par… » affine)
         const sb = ws.querySelector('[data-pr-sortbar]'), UI = window.LCNDA_UI;
-        if (sb && UI?.sortBar) { const cur = prefs().sort?.[0] || ''; sb.replaceWith(UI.sortBar({count: Number(sb.dataset.count) || 0, label: 'élément', value: cur, options: [['', 'Dans l’ordre de départ'], ...Object.entries(SORTS).map(([v, [l]]) => [v, l])],
+        // H10 : « Liste | Fiches » juste avant « Trier » (numéros, livres, films et « À acheter » ; retenu pour chaque type)
+        const pf = prefs(), view = ['issues', 'wanted'].includes(pf.view) ? {value: dispOf(pf), what: 'éléments', onChange: v => { const p = prefs(); save({dispBy: {...p.dispBy, [p.fam || 'all']: v}}); }} : null;
+        if (sb && UI?.sortBar) { const cur = prefs().sort?.[0] || ''; sb.replaceWith(UI.sortBar({count: Number(sb.dataset.count) || 0, label: 'élément', value: cur, view, options: [['', 'Dans l’ordre de départ'], ...Object.entries(SORTS).map(([v, [l]]) => [v, l])],
             onChange: v => { const s = [...prefs().sort]; s[0] = v; save({sort: s.filter((x, k) => x || k < 3)}); }})); }
         ws.querySelectorAll('[data-pr-sort]').forEach(el => el.addEventListener('change', () => { const s = [...prefs().sort]; s[Number(el.dataset.prSort)] = el.value; save({sort: s.filter((v, k) => v || k < 3)}); }));
         ws.querySelector('[data-pr-reset]').addEventListener('click', () => save({q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: ''}));

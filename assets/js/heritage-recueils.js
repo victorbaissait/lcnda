@@ -70,14 +70,19 @@
         if (s.id) return renderRecueil(token);
         const data = await get('recueils', {q: s.q || ''});
         if (!isCurrent(token)) return;
-        const rows = data.recueils || [];
+        // H10 : « N recueils · [Liste | Fiches] · Trier : … », retenus pour cette liste
+        const UI = window.LCNDA_UI, KEY = 'listes:recueils';
+        const sort = UI?.sortOf ? UI.sortOf(KEY, 'az') : 'az', view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
+        const rows = UI?.sortItems ? UI.sortItems(data.recueils || [], sort, {name: r => r.title, date: r => r.updated_at}) : (data.recueils || []);
+        const pctOf = r => r.pages ? Math.round(r.transcribed / r.pages * 100) : 0;
+        const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
         const ws = A().$('#workspace');
         ws.innerHTML = `<section class="page collection-page h-rc">
             <header class="page-header"><div><span class="eyebrow">LISTES · MÉDIAS</span><h2>📚 Recueils</h2>
                 <p>Un recueil rassemble des pages photographiées dans l’ordre : un registre, une liste de prisonniers, un cahier, un album. Tu peux y transcrire chaque page, garder plusieurs campagnes de photos (celles d’il y a dix ans et les nouvelles) et choisir, page par page, la meilleure image.</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-h-open-list="media">🖼️ Tous les médias</button><button type="button" class="button" data-rc-new>+ Nouveau recueil</button></div></header>
             ${rows.length || s.q ? `<div class="collection-toolbar"><input type="search" data-rc-q value="${esc(s.q || '')}" placeholder="Chercher un recueil (titre, cote, lieu)…"></div>` : ''}
-            ${rows.length ? `<div class="h-rc-grid">${rows.map(r => {
+            ${rows.length ? '<div data-rc-bar></div>' : ''}${rows.length && view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="ui-card-ico">${esc(r.icon || '📚')}</span>`, name: r.title, open: `data-open-recueil="${r.id}"`, lines: [[r.reference, r.place_text, r.date_text].filter(Boolean).join(' · '), `${plural(r.pages, 'page', 'pages')} · ${pctOf(r)} % transcrit`], date: r.updated_at ? `Modifié le ${fmtDate(r.updated_at)}` : ''}))) : rows.length ? `<div class="h-rc-grid">${rows.map(r => {
                 const pct = r.pages ? Math.round(r.transcribed / r.pages * 100) : 0;
                 return `<button type="button" class="h-rc-card" data-open-recueil="${r.id}">
                     <span class="h-rc-cover">${r.cover ? `<img src="${esc(thumbUrl(r.cover))}" alt="" loading="lazy">` : `<span class="h-rc-cover-empty">${esc(r.icon || '📚')}</span>`}${r.pages ? `<span class="h-rc-badge">${plural(r.pages, 'page', 'pages')}</span>` : ''}</span>
@@ -89,6 +94,8 @@
             : (s.q ? A().emptyState({icon: '🔍', text: 'Aucun recueil ne correspond.'}) : A().emptyState({icon: '📚', text: 'Aucun recueil pour l’instant', hint: 'Crée le recueil (registre, liste, cahier…), puis ajoute tes photos : chaque photo devient une page.', action: {label: '＋ Nouveau recueil', attrs: 'data-rc-new'}}))}
         </section>`;
         const sec = ws.querySelector('.h-rc');
+        const slot = sec.querySelector('[data-rc-bar]');
+        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: rows.length, label: 'recueil', value: sort, view: {key: KEY, dflt: 'cards', what: 'recueils', onChange: () => ext.lists.recueils(++S().workspaceToken)}, onChange: v => { UI.setSort(KEY, v); ext.lists.recueils(++S().workspaceToken); }}));
         sec.querySelectorAll('[data-rc-new]').forEach(b => b.addEventListener('click', () => recueilDialog(null)));
         let timer = 0;
         sec.querySelector('[data-rc-q]')?.addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); ext.lists.recueils(++S().workspaceToken).then(() => { const i = A().$('[data-rc-q]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }, 250); });
