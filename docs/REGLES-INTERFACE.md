@@ -27,6 +27,18 @@ Maquette : `docs/design/choix-lieux-et-autres.html`. Même champ, même liste, m
 - **Recherche mélangée** (« une personne, une enquête, un lieu… ») : filtres en haut avec le nombre trouvé (« Tout (9) », « 👤 Personnes (2) »…), résultats rangés par sorte, chaque ligne au format de sa sorte ; Tab passe d'un filtre à l'autre.
 - **Ne changent pas** : les petits menus à choix fixes (Portrait / Paysage, Style, État…) restent des menus déroulants simples.
 
+## Choisir une image (ou un son, une vidéo) dans la base : fenêtre unique en vignettes (validé)
+
+> **STANDARD OBLIGATOIRE** (validé par l'utilisateur) : partout où l'on prend une image, un son ou une vidéo de l'app (faire-part, mise en page, retouche, diaporama, montage, tableaux, maison, sceaux, musée, tableau de bord…), c'est cette fenêtre, jamais une galerie faite à la main.
+
+Maquette : `docs/design/choix-image.html`.
+- **En haut** : case de recherche au style du menu de choix (titre, cote, personnes, lieu, année) + filtres avec le nombre trouvé : « Tout (n) », « 📷 Photos (n) », « 📄 Documents (n) », la personne de l'outil (pastille « 👤 Nom × », mise d'office si l'outil en a une), « 🕘 Récentes », « ⭐ Portraits » ; taille des vignettes (grandes / petites / liste), retenue d'une fois sur l'autre.
+- **Vignettes** : image, étiquette de sorte (PHOTO, ACTE, CARTE…), titre, « année · lieu » ou cote. Une seule image : clic = choisie, Entrée = valider. Plusieurs : case ✓ sur chaque vignette, compteur « N images · N choisies », bouton « Utiliser ces N images ». Clavier ↑ ↓ ← →, Espace pour cocher, Entrée.
+- **Aperçu à droite** : l'image en grand, titre, sorte · année · lieu, taille en pixels et « assez grande pour imprimer en A5 » (ou trop petite), cote, pastilles des personnes, « ↗ Ouvrir le média ».
+- **En bas** : zone « 📁 Glisse une image ici, colle-la (⌘V) ou importe-la depuis l'ordinateur » ; boutons « 📁 Importer… » et « 📋 Coller » à gauche ; « Annuler » et le bouton principal à droite. Une image importée entre dans les médias et se coche.
+- **Dans un champ** : la même pastille que le menu de choix (petite vignette, titre, année, « ↗ Ouvrir », « 🖼 Changer », « × ») ; « Changer » rouvre la fenêtre filtrée sur la personne de l'outil.
+- **Sons et vidéos** : même fenêtre, vignette avec ▶ et la durée.
+
 **Mode d’emploi technique (à suivre pour tout nouvel outil) : `docs/PICKER.md`** — composant `assets/js/app-picker.js` (`pickerField`, `pickerView`, `openPicker`), styles `assets/css/picker.css`, recherche `lib/picker.php` (`picker_search`).
 
 ## Outils communs à utiliser (window.LCNDA_APP)
