@@ -106,3 +106,68 @@ function ascii_fold(string $value): string
     $stripped = preg_replace('/\p{Mn}+/u', '', $folded);
     return $stripped ?? $folded;
 }
+
+/**
+ * Clé de recherche : minuscules, sans accents, tirets et ponctuation remplacés par des espaces.
+ * « Jean-Baptiste » → « jean baptiste », « KÉVIN » → « kevin », « Œuvray » → « oeuvray ».
+ */
+function search_fold(?string $value): string
+{
+    static $cache = [];
+    $value = (string) $value;
+    if ($value === '') { return ''; }
+    if (isset($cache[$value])) { return $cache[$value]; }
+    if (count($cache) > 50000) { $cache = []; }
+    return $cache[$value] = trim((string) preg_replace('/[^a-z0-9]+/', ' ', strtolower(ascii_fold($value))));
+}
+
+/** Fonction SQL lc_fold(x) = search_fold(x), branchée sur chaque connexion (db()). */
+function register_search_fold(PDO $pdo): void
+{
+    $pdo->sqliteCreateFunction('lc_fold', static fn($v): string => search_fold($v === null ? '' : (string) $v), 1, defined('PDO::SQLITE_DETERMINISTIC') ? PDO::SQLITE_DETERMINISTIC : 0);
+}
+
+/**
+ * Condition SQL « $expr contient le mot cherché », sans tenir compte des accents, de la casse ni des tirets.
+ * $raw : paramètre lié à « %mot tapé% » ; $fold : « %search_fold(mot)% » ; $loose : search_loose_like(search_fold(mot)).
+ * Rapide sur une grande base : les comparaisons simples (LIKE, en C) passent d'abord ; la fonction PHP lc_fold()
+ * ne sert que pour les noms qui ont un accent, un tiret ou une apostrophe ET qui ressemblent déjà au mot cherché.
+ */
+function fold_like_sql(string $expr, string $raw, string $fold, string $loose): string
+{
+    return "({$expr} LIKE {$raw} COLLATE NOCASE OR {$expr} LIKE {$fold} COLLATE NOCASE OR ({$expr} GLOB '*[^ -&(-,.-~]*' AND {$expr} LIKE {$loose} AND lc_fold({$expr}) LIKE {$fold}))";
+}
+
+/**
+ * Motif LIKE large pour un mot replié : les lettres qui peuvent porter un accent deviennent « _ » (une lettre,
+ * accentuée ou non), les espaces et « oe »/« ae » (œ, æ) « % ». « helene » → « %h_l_n_% » trouve « Hélène ».
+ */
+function search_loose_like(string $folded): string
+{
+    $p = str_replace(['oe', 'ae', 'ss'], ' ', $folded);
+    $p = (string) preg_replace('/[aeiouycn]/', '_', $p);
+    $p = (string) preg_replace('/\s+/', '%', trim($p));
+    return '%' . $p . '%';
+}
+
+/** Les trois valeurs à lier pour fold_like_sql() : [brut, replié, large]. */
+function fold_like_params(string $word): array
+{
+    $word = trim($word, '%');
+    $fold = search_fold($word);
+    if ($fold === '') { $fold = mb_strtolower($word); }
+    return ['%' . $word . '%', '%' . $fold . '%', search_loose_like($fold)];
+}
+
+/** Expression SQL pour trier sans tenir compte des accents (« Élise » avec les E, « Œuvray » avec les O). */
+function fold_sort_sql(string $expr): string
+{
+    return "(CASE WHEN {$expr} GLOB '*[^ -&(-,.-~]*' THEN lc_fold({$expr}) ELSE lower(trim({$expr})) END)";
+}
+
+/** Paramètres « ? » de fold_like_sql($expr, '?', '?', '?'), dans l'ordre où ils apparaissent. */
+function fold_like_args(string $word): array
+{
+    [$raw, $fold, $loose] = fold_like_params($word);
+    return [$raw, $fold, $loose, $fold];
+}

@@ -312,7 +312,7 @@
     const toRoman = n => ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV'][n] || String(n);
     // jours dans le mois ; avant 1583, calendrier julien : une année sur quatre est bissextile (29 février 1500 existe)
     const dim = (m, y) => m === 2 && y < 1583 ? (y % 4 === 0 ? 29 : 28) : new Date(Date.UTC(y, m, 0)).getUTCDate();
-    const MIN_YEAR = 1000; // la base ne range l'année des dates qu'à partir de l'an 1000 (api.php, add_event / update_event)
+    const MIN_YEAR = 1; // la base range l'année des dates de l'an 1 à 2099 (api.php, event_year_and_converted)
     const NOW_Y = new Date().getFullYear();
     function oneDate(s) {
         s = s.trim().replace(/^le\s+/, ''); let m;

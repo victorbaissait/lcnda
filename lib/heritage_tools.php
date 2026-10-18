@@ -736,6 +736,14 @@ function sync_apply(PDO $pdo, array $data): never
             $localId = $idOf($t, $c['uid']);
             // Fiche verrouillée : le paquet du cousin ne la modifie pas
             if ($t === 'persons' && $localId && (int) $pdo->query('SELECT COALESCE(is_locked,0) FROM persons WHERE id=' . (int) $localId)->fetchColumn()) { $lockedSkipped = ($lockedSkipped ?? 0) + 1; continue; }
+            // … ni ses événements, ni ses notes (ceux du couple si l'un des deux est verrouillé)
+            if ($localId && in_array($t, ['events', 'notes'], true)) {
+                $lockSql = $t === 'events'
+                    ? 'SELECT 1 FROM events e LEFT JOIN families f ON f.id=e.family_id JOIN persons p ON p.id IN (e.person_id, f.partner1_id, f.partner2_id) WHERE e.id=? AND COALESCE(p.is_locked,0)=1 LIMIT 1'
+                    : "SELECT 1 FROM notes n JOIN persons p ON n.entity_type='person' AND p.id=n.entity_id WHERE n.id=? AND COALESCE(p.is_locked,0)=1 LIMIT 1";
+                $lk = $pdo->prepare($lockSql); $lk->execute([(int) $localId]);
+                if ($lk->fetchColumn()) { $lockedSkipped = ($lockedSkipped ?? 0) + 1; continue; }
+            }
             if ($c['op'] === 'delete') {
                 if ($localId) {
                     if ($t === 'persons' && function_exists('delete_person')) {

@@ -183,6 +183,7 @@ function db(): PDO
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
     $pdo->exec('PRAGMA foreign_keys = ON');
+    register_search_fold($pdo); // lc_fold(x) : recherche sans accents ni tirets (lib/text.php)
     // Une écriture qui trouve la base occupée attend jusqu'à 30 s (au lieu d'échouer) : utile quand plusieurs
     // processus PHP travaillent en même temps (relais) pendant une opération longue.
     $pdo->exec('PRAGMA busy_timeout = 30000');
@@ -194,6 +195,7 @@ function db(): PDO
         }
     } catch (Throwable $_) {
     }
+    drop_unexpected_schema_objects($pdo);
     migrate_database($pdo, DB_PATH);
     // Communes françaises (contours, voisinages, GeoNames) : chargées une fois si la base ne les a pas.
     ensure_reference_data($pdo, DB_PATH);
@@ -205,6 +207,26 @@ function db(): PDO
  * Utilisée par l'écran d'installation (créer une première personne / importer un fichier)
  * pour permettre un premier usage sans passer par scripts/import.php.
  */
+/**
+ * Sécurité : l'application ne crée aucun TRIGGER ni aucune VIEW. Une base ouverte (sauvegarde, fichier reçu…)
+ * qui en contient en a reçu d'ailleurs : ils sont supprimés avant toute écriture, pour qu'aucun code caché
+ * ne s'exécute pendant les modifications. Si un jour l'app en prévoit, les ajouter à $allowed.
+ */
+function drop_unexpected_schema_objects(PDO $pdo): void
+{
+    $allowed = [];
+    try {
+        $rows = $pdo->query("SELECT type,name FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_NUM);
+        foreach ($rows as [$type, $name]) {
+            if (in_array($name, $allowed, true)) { continue; }
+            $pdo->exec('DROP ' . ($type === 'view' ? 'VIEW' : 'TRIGGER') . ' IF EXISTS "' . str_replace('"', '""', (string) $name) . '"');
+            error_log('LCNDA : ' . $type . ' inattendu supprimé de la base : ' . $name);
+        }
+    } catch (Throwable $_) {
+        // base en lecture seule ou occupée : on réessaiera à la prochaine ouverture
+    }
+}
+
 function init_empty_database(): void
 {
     if (is_file(DB_PATH)) {

@@ -25,6 +25,11 @@ try {
         'video/mp4'=>'mp4','video/quicktime'=>'mov','video/webm'=>'webm','audio/webm'=>'webm'
     ];$pdo=db();$isPostcard=isset($_POST['postcard_pair'])&&$_POST['postcard_pair']!=='0';$isGroupedUpload=isset($_POST['group_upload'])&&$_POST['group_upload']!=='0';if($isPostcard&&$count!==2)throw new RuntimeException('Une carte postale recto/verso doit contenir exactement deux images : recto puis verso.');$postcardGroup=($isPostcard||($isGroupedUpload&&$count>1))?bin2hex(random_bytes(8)):'';$investigationFolderId=safe_int($_POST['investigation_folder_id']??0)?:null;if($investigationFolderId){$folderCheck=$pdo->prepare('SELECT 1 FROM investigation_media_folders WHERE id=? AND investigation_id=?');$folderCheck->execute([$investigationFolderId,$investigationId]);if(!$folderCheck->fetchColumn())throw new RuntimeException('Dossier d’enquête introuvable.');}$pdo->beginTransaction();$created=[];
     try{
+        // Fiche verrouillée : on n'y rattache pas de nouveau média (ni à l'un de ses événements)
+        if($personId&&!$battueItemId&&!$archiveDigestId&&!$collectionType&&!$investigationId){
+            $lockCheck=$pdo->prepare('SELECT COALESCE(is_locked,0) FROM persons WHERE id=?');$lockCheck->execute([$personId]);
+            if((int)$lockCheck->fetchColumn()===1)throw new RuntimeException('Fiche verrouillée. Déverrouille-la avant de modifier ou supprimer cette personne.');
+        }
         if($battueItemId){
             $checkBattueItem=$pdo->prepare('SELECT 1 FROM battue_search_items WHERE id=?');
             $checkBattueItem->execute([$battueItemId]);

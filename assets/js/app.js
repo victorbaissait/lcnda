@@ -1697,7 +1697,11 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
                 if (st.tasks) parts.push(`${plural(st.tasks,'tâche devenue','tâches devenues')} des rappels`);
                 if (st.media) parts.push(`${plural(st.media,'média')}`);
                 const missing = Number(st.media_missing || 0);
-                result.innerHTML = `<p>Import terminé : ${parts.join(', ')}.</p>`
+                // liens impossibles ignorés à l'import (quelqu'un qui serait son propre ancêtre…) : on le dit
+                const warns = [...(Number(st.loops_skipped || 0) ? [`${plural(Number(st.loops_skipped),'lien familial impossible ignoré','liens familiaux impossibles ignorés')} (une personne qui serait son propre ancêtre)`] : []), ...(Array.isArray(st.warnings) ? st.warnings.slice(0, 8).map(String) : [])];
+                const warnHtml = warns.length ? `<div class="notice warning"><p>⚠️ À vérifier :</p><ul>${warns.map(w => `<li>${escapeHtml(w)}</li>`).join('')}</ul></div>` : '';
+                if (warns.length && !missing) { result.innerHTML = `<p>Import terminé : ${parts.join(', ')}.</p>${warnHtml}<button type="button" class="button" data-install-continue>Continuer</button>`; result.querySelector('[data-install-continue]').addEventListener('click', () => location.reload()); return; }
+                result.innerHTML = `<p>Import terminé : ${parts.join(', ')}.</p>${warnHtml}`
                     + (missing ? `<p class="muted">${plural(missing,'fichier')} de média ${Number(missing)<2?'introuvable':'introuvables'} : les fiches existent, mais sans le fichier. Avec une base .db seule, utilise plutôt la « Sauvegarde complète (.zip) » (Maintenance → Export), qui contient les médias.</p><p><button class="button" type="button" data-install-continue>Continuer</button></p>` : '<p class="muted">Rechargement…</p>');
                 if (missing) result.querySelector('[data-install-continue]').addEventListener('click', () => location.reload());
                 else setTimeout(() => location.reload(), 900);

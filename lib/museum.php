@@ -373,7 +373,9 @@ function museum_package(PDO $pdo, int $id, string $format, ZipArchive $zip): arr
         if ($relative === '') { return ''; }
         if (isset($done[$relative])) { return $done[$relative]; } // même photo exposée deux fois : un seul fichier
         return $done[$relative] = (function () use ($relative, $image, $zip, $format, &$n): string {
-        try { $path = media_file_path($relative); } catch (Throwable) { return ''; } // jamais hors du dossier des médias (base reçue piégée : « ../… »)
+        // jamais hors du dossier des médias (base reçue piégée : « ../… »)
+        $root = realpath(MEDIA_DIR); $path = realpath(MEDIA_DIR . '/' . $relative);
+        if (!$root || !$path || !str_starts_with($path, $root . DIRECTORY_SEPARATOR)) { return ''; }
         if (!is_file($path)) { return ''; }
         $n++;
         if ($image) {

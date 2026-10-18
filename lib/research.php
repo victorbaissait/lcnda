@@ -301,11 +301,15 @@ function quick_search_data(PDO $pdo, string $q): array
     $words = array_slice($words, 0, 5);
     $out = ['persons' => [], 'battues' => [], 'investigations' => [], 'places' => []];
     if (!$words && $only === null) { return $out; }
-    $like = static function (array $cols) use ($words): array {
+    // chaque mot, sans tenir compte des accents ni des tirets (« helene » trouve Hélène) ; $extra : condition en plus
+    // (ex. les variantes de nom), écrite avec {raw} et {fold} à la place des paramètres
+    $like = static function (array $cols, string $extra = '') use ($words): array {
         $where = []; $params = [];
         foreach ($words as $i => $w) {
-            $where[] = '(' . implode(' OR ', array_map(static fn($c) => "{$c} LIKE :w{$i} COLLATE NOCASE", $cols)) . ')';
-            $params[":w{$i}"] = '%' . $w . '%';
+            $parts = array_map(static fn($c) => fold_like_sql($c, ":w{$i}", ":f{$i}", ":l{$i}"), $cols);
+            if ($extra !== '') { $parts[] = strtr($extra, ['{raw}' => ":w{$i}", '{fold}' => ":f{$i}", '{loose}' => ":l{$i}"]); }
+            $where[] = '(' . implode(' OR ', $parts) . ')';
+            [$params[":w{$i}"], $params[":f{$i}"], $params[":l{$i}"]] = fold_like_params($w);
         }
         return [$where ? implode(' AND ', $where) : '1', $params];
     };
@@ -318,8 +322,10 @@ function quick_search_data(PDO $pdo, string $q): array
     };
     if ($only === null || $only === 'persons') {
         if ($words) {
-            [$w, $p] = $like(["trim(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''))", 'p.last_name', 'p.first_name']);
-            $out['persons'] = $run(person_select() . " WHERE {$w} ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE LIMIT 8", $p);
+            // nom complet (et nom de famille regroupé), puis les variantes de nom, comme le panneau Personnes
+            $variant = "EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND " . fold_like_sql("(COALESCE(nv.first_name,'')||' '||COALESCE(nv.middle_name,'')||' '||COALESCE(nv.last_name,''))", '{raw}', '{fold}', '{loose}') . ")";
+            [$w, $p] = $like(["(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')||' '||COALESCE(g.name,''))"], $variant);
+            $out['persons'] = $run(person_select() . " WHERE {$w} ORDER BY " . fold_sort_sql('p.last_name') . ', ' . fold_sort_sql('p.first_name') . ' LIMIT 8', $p);
         }
     }
     if ($only === null || $only === 'battues') {

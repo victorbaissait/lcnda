@@ -117,7 +117,11 @@ function checkContent(db, mediaDir, label) {
 
   await step('import d’un GEDCOM « à la Hérédis » : tous les champs sont repris', async () => {
     await withServer(dirA, media, async (s) => {
-      const { stats } = await importFile(s, fixture, 'complet.ged');
+      // Ouvert depuis le disque, comme l'app de bureau : la photo au chemin complet est reprise.
+      // (Un .ged envoyé par une page web ne va jamais chercher de fichier ailleurs sur le disque.)
+      const local = await s.importLocalFile(fixture);
+      if (local.status !== 200 || local.data.error) throw new Error('import refusé : ' + (local.data.error || local.status));
+      const { stats } = local.data;
       assert.deepEqual([stats.persons, stats.families, stats.sources, stats.citations, stats.media, stats.media_missing], [3, 1, 1, 2, 1, 0]);
       exported['5.5.1'] = await exportFile(s, '5.5.1');
       exported['7'] = await exportFile(s, '7');

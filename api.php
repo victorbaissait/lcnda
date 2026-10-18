@@ -488,7 +488,7 @@ try {
             }
         }
     }
-    json_response(['error' => $e->getMessage()], 500);
+    json_response(['error' => readable_error_message($e)], 500);
 }
 
 function bootstrap_data(PDO $pdo): never
@@ -1054,7 +1054,7 @@ function dashboard_sosa_progress(PDO $pdo, int $rootId = 0): array
 function dashboard_duplicate_groups(PDO $pdo): array
 {
     return $pdo->query("WITH base AS (
-            SELECT p.id,lower(trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,''))) AS norm_name,
+            SELECT p.id,lc_fold(trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,''))) AS norm_name,
                    trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) AS label,
                    (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) AS birth_year
             FROM persons p
@@ -1643,8 +1643,11 @@ function people_list(PDO $pdo): never
         $tokens = preg_split('/\s+/u', $search, -1, PREG_SPLIT_NO_EMPTY) ?: [];
         foreach (array_slice($tokens,0,6) as $index=>$token) {
             $key=':q'.$index;
-            $where[] = "(p.first_name LIKE {$key} COLLATE NOCASE OR p.middle_name LIKE {$key} COLLATE NOCASE OR p.last_name LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.middle_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR g.name LIKE {$key} COLLATE NOCASE OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$key} COLLATE NOCASE OR nv.middle_name LIKE {$key} COLLATE NOCASE OR nv.last_name LIKE {$key} COLLATE NOCASE)))";
+            $foldKey=':f'.$index; // même mot sans accents ni tirets (« helene » trouve Hélène, « jean-baptiste » Jean Baptiste)
+            $looseKey=':l'.$index;
+            $where[] = "(p.first_name LIKE {$key} COLLATE NOCASE OR p.middle_name LIKE {$key} COLLATE NOCASE OR p.last_name LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.middle_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR trim(p.first_name||' '||p.last_name) LIKE {$key} COLLATE NOCASE OR g.name LIKE {$key} COLLATE NOCASE OR EXISTS(SELECT 1 FROM name_variants nv WHERE nv.person_id=p.id AND (nv.first_name LIKE {$key} COLLATE NOCASE OR nv.middle_name LIKE {$key} COLLATE NOCASE OR nv.last_name LIKE {$key} COLLATE NOCASE)) OR ({$foldKey}!='%%' AND (".fold_like_sql("(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,'')||' '||COALESCE(g.name,''))",$key,$foldKey,$looseKey)." OR EXISTS(SELECT 1 FROM name_variants nv2 WHERE nv2.person_id=p.id AND ".fold_like_sql("(COALESCE(nv2.first_name,'')||' '||COALESCE(nv2.middle_name,'')||' '||COALESCE(nv2.last_name,''))",$key,$foldKey,$looseKey)."))))";
             $params[$key] = '%' . $token . '%';
+            [, $params[$foldKey], $params[$looseKey]] = fold_like_params($token);
         }
     }
     if ($group) {
@@ -1653,7 +1656,7 @@ function people_list(PDO $pdo): never
     }
     $kind = (string) ($_GET['kind'] ?? '');
     if ($kind === 'animal') { $where[] = "p.kind='animal'"; } elseif ($kind === 'human') { $where[] = "p.kind<>'animal'"; }
-    $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,p.last_name COLLATE NOCASE,p.first_name COLLATE NOCASE LIMIT :limit OFFSET :offset";
+    $sql = person_select() . ($where ? ' WHERE ' . implode(' AND ', $where) : '') . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 WHEN p.last_name GLOB '[?X]*' OR lower(p.last_name)='inconnu' THEN 2 ELSE 0 END,".fold_sort_sql('p.last_name').",".fold_sort_sql('p.first_name').",p.id LIMIT :limit OFFSET :offset";
     $stmt = $pdo->prepare($sql);
     foreach ($params as $key => $value) $stmt->bindValue($key, $value);
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -2724,6 +2727,11 @@ function list_data(PDO $pdo): never
         $genderCond .= " AND EXISTS(SELECT 1 FROM events be JOIN event_types bt ON bt.id=be.event_type_id JOIN places bp ON bp.id=be.place_id WHERE be.person_id=p.id AND bt.gedcom_tag='BIRT' AND bp.name LIKE ?)";
         $genderParams[] = '%' . $birthPlaceText . '%';
     }
+    // Les animaux ont leur propre liste : « Personnes » ne les montre pas, sauf demande explicite (kind=all ou animal),
+    // comme le panneau Personnes en base « famille ».
+    $listKind = safe_text($_GET['kind'] ?? 'human');
+    if ($listKind === 'animal') { $genderCond .= " AND p.kind='animal'"; }
+    elseif ($listKind !== 'all') { $genderCond .= " AND COALESCE(p.kind,'human')<>'animal'"; }
     $labelId = safe_int($_GET['label_id'] ?? 0);
     if ($labelId) {
         $genderCond .= " AND EXISTS(SELECT 1 FROM label_links ll WHERE ll.entity_type='person' AND ll.entity_id=p.id AND ll.label_id=?)";
@@ -2748,8 +2756,8 @@ function list_data(PDO $pdo): never
     $courrierFilter = safe_text($_GET['courrier_filter'] ?? '');
     if (!in_array($courrierFilter, ['', 'fait_utilise', 'fait_non_utilise', 'fait_tous', 'tous'], true)) $courrierFilter = '';
     $data = match ($type) {
-        'events' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT e.id,e.date_text,e.year,t.label AS type,p.id AS person_id,trim(p.first_name||' '||p.last_name) AS person,trim(pl.name || CASE WHEN COALESCE(pl.subdivision,'')<>'' THEN ', '||pl.subdivision ELSE '' END) AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN places pl ON pl.id=e.place_id WHERE t.label LIKE ? OR p.first_name LIKE ? OR p.last_name LIKE ? ORDER BY COALESCE(e.year,9999) LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute([$like,$like,$like]); return $s->fetchAll(); })(),
-        'places' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT pl.*,count(e.id) AS event_count FROM places pl LEFT JOIN events e ON e.place_id=pl.id WHERE pl.name LIKE ? OR pl.subdivision LIKE ? OR pl.alternate_names LIKE ? OR pl.country LIKE ? GROUP BY pl.id ORDER BY event_count DESC,pl.name,pl.subdivision LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute([$like,$like,$like,$like]); return $s->fetchAll(); })(),
+        'events' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT e.id,e.date_text,e.year,t.label AS type,COALESCE(p.id,f1.id,f2.id) AS person_id,CASE WHEN p.id IS NOT NULL THEN trim(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')) ELSE trim(trim(COALESCE(f1.first_name,'')||' '||COALESCE(f1.last_name,''))||CASE WHEN f1.id IS NOT NULL AND f2.id IS NOT NULL THEN ' et ' ELSE '' END||trim(COALESCE(f2.first_name,'')||' '||COALESCE(f2.last_name,''))) END AS person,f1.id AS partner1_id,f2.id AS partner2_id,trim(pl.name || CASE WHEN COALESCE(pl.subdivision,'')<>'' THEN ', '||pl.subdivision ELSE '' END) AS place FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families fa ON fa.id=e.family_id LEFT JOIN persons f1 ON f1.id=fa.partner1_id LEFT JOIN persons f2 ON f2.id=fa.partner2_id LEFT JOIN places pl ON pl.id=e.place_id WHERE " . list_event_search_sql() . " ORDER BY COALESCE(e.year,9999),e.sort_date,e.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(list_event_search_params($like)); return $s->fetchAll(); })(),
+        'places' => (function () use ($pdo, $like, $fetchLimit, $offset) { $s=$pdo->prepare("SELECT pl.*,(SELECT count(*) FROM events e WHERE e.place_id=pl.id) AS event_count FROM places pl WHERE " . list_place_where_sql($pdo) . " ORDER BY event_count DESC," . fold_sort_sql('pl.name') . "," . fold_sort_sql("COALESCE(pl.subdivision,'')") . ",pl.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(list_place_search_params($like)); return $s->fetchAll(); })(),
         'media' => media_list_rows($pdo, $like, $fetchLimit, $offset, safe_text($_GET['scope'] ?? ''), safe_int($_GET['person_id'] ?? 0), $mediaCity, $mediaDateFrom, $mediaDateTo),
         'labels' => labels_list_rows($pdo, $like, $fetchLimit, $offset),
         'census' => census_list_rows($pdo,$like,$fetchLimit,$offset),
@@ -2764,7 +2772,7 @@ function list_data(PDO $pdo): never
         'daboville' => daboville_list_rows($pdo, $like, $fetchLimit, $offset, $sosaRootId, $dabovilleSort),
         'signatures' => signature_list_rows($pdo, $like, $fetchLimit, $offset),
         'archives' => departmental_archives_rows($like, $fetchLimit, $offset),
-        default => (function () use ($pdo, $like, $fetchLimit, $offset, $genderCond, $genderParams) { $s=$pdo->prepare(person_select() . " WHERE (p.first_name LIKE ? OR p.last_name LIKE ? OR g.name LIKE ?)" . $genderCond . " ORDER BY p.last_name,p.first_name LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(array_merge([$like,$like,$like], $genderParams)); return $s->fetchAll(); })(),
+        default => (function () use ($pdo, $like, $fetchLimit, $offset, $genderCond, $genderParams) { $s=$pdo->prepare(person_select() . " WHERE " . list_person_search_sql() . $genderCond . " ORDER BY CASE WHEN trim(COALESCE(p.last_name,''))='' THEN 1 ELSE 0 END," . fold_sort_sql('p.last_name') . "," . fold_sort_sql('p.first_name') . ",p.id LIMIT {$fetchLimit} OFFSET {$offset}"); $s->execute(array_merge(list_person_search_params($like), $genderParams)); return $s->fetchAll(); })(),
     };
     $hasMore = count($data) > $limit;
     if ($hasMore) $data = array_slice($data, 0, $limit);
@@ -2773,14 +2781,69 @@ function list_data(PDO $pdo): never
     if ($type === 'employers') { $mentions = employer_block_mentions($pdo); foreach ($data as &$er) { $er['people'] = employer_people($pdo, (string) $er['id'], $mentions); $er['person_count'] = count($er['people']); } unset($er); }
     $remainingCount = $hasMore ? max(1, count_list_remaining($pdo,$type,$like,$offset + count($data),$genderCond,$genderParams,safe_text($_GET['scope'] ?? ''),safe_int($_GET['person_id'] ?? 0),$reminderMode,$mediaCity,$mediaDateFrom,$mediaDateTo,$sosaRootId,$sosaSort,$sosaMissing,$sosaImpossible,$reminderCategory,$dabovilleSort,$courrierFilter)) : 0;
     $extra = $type === 'reminders' ? ['reminder_summary' => reminder_summary($pdo, $like, $reminderMode, $reminderCategory), 'reminder_categories' => standalone_reminder_categories()] : ($type === 'research_budget' ? ['research_budget_summary' => research_budget_summary($pdo, $like)] : ($type === 'courriers' ? ['courrier_summary' => courrier_summary($pdo, $like), 'courrier_organismes' => courrier_organismes(), 'courrier_statuts' => courrier_statuts()] : []));
-    json_response(array_merge(['type' => $type, 'rows' => $data, 'offset'=>$offset, 'limit'=>$limit, 'hasMore'=>$hasMore, 'remainingCount'=>$remainingCount, 'gender'=>$gender, 'reminder_mode'=>$reminderMode, 'reminder_category'=>$reminderCategory, 'city'=>$mediaCity, 'date_from'=>$mediaDateFrom, 'date_to'=>$mediaDateTo, 'sosa_root_id'=>$sosaRootId, 'sosa_sort'=>$sosaSort, 'sosa_missing'=>$sosaMissing ? 1 : 0, 'sosa_impossible'=>$sosaImpossible ? 1 : 0, 'daboville_sort'=>$dabovilleSort, 'courrier_filter'=>$courrierFilter], $extra));
+    json_response(array_merge(['type' => $type, 'rows' => $data, 'offset'=>$offset, 'limit'=>$limit, 'hasMore'=>$hasMore, 'remainingCount'=>$remainingCount, 'gender'=>implode(',', $genders), 'kind'=>$listKind, 'reminder_mode'=>$reminderMode, 'reminder_category'=>$reminderCategory, 'city'=>$mediaCity, 'date_from'=>$mediaDateFrom, 'date_to'=>$mediaDateTo, 'sosa_root_id'=>$sosaRootId, 'sosa_sort'=>$sosaSort, 'sosa_missing'=>$sosaMissing ? 1 : 0, 'sosa_impossible'=>$sosaImpossible ? 1 : 0, 'daboville_sort'=>$dabovilleSort, 'courrier_filter'=>$courrierFilter], $extra));
+}
+
+/** Listes → Personnes : recherche dans le prénom, le nom et le nom regroupé, sans tenir compte des accents ni des tirets. */
+function list_person_search_sql(): string
+{
+    return fold_like_sql("(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,'')||' '||COALESCE(g.name,''))", '?', '?', '?');
+}
+
+/** Paramètres de list_person_search_sql() (dans l'ordre des « ? »). */
+function list_person_search_params(string $like): array
+{
+    return fold_like_args($like);
+}
+
+/** Listes → Événements : type, personne, ou l'un des deux conjoints pour un événement de couple. */
+function list_event_search_sql(): string
+{
+    return '(' . fold_like_sql('t.label', '?', '?', '?')
+        . ' OR ' . fold_like_sql("(COALESCE(p.first_name,'')||' '||COALESCE(p.last_name,''))", '?', '?', '?')
+        . ' OR ' . fold_like_sql("(COALESCE(f1.first_name,'')||' '||COALESCE(f1.last_name,'')||' '||COALESCE(f2.first_name,'')||' '||COALESCE(f2.last_name,''))", '?', '?', '?') . ')';
+}
+
+function list_event_search_params(string $like): array
+{
+    $one = fold_like_args($like);
+    return array_merge($one, $one, $one);
+}
+
+/**
+ * Listes → Lieux : seulement les lieux de la généalogie (cités par un événement, un recensement… : toute colonne
+ * place_id), et ceux créés à la main ; pas les ~80 000 communes et villes du répertoire jamais utilisées.
+ * Filtre explicite : places_scope=all montre tout le répertoire.
+ */
+function list_place_where_sql(PDO $pdo): string
+{
+    $search = '(' . fold_like_sql('pl.name', '?', '?', '?') . " OR pl.subdivision LIKE ? COLLATE NOCASE OR pl.alternate_names LIKE ? COLLATE NOCASE OR pl.country LIKE ? COLLATE NOCASE)";
+    if (safe_text($_GET['places_scope'] ?? '') === 'all') return $search;
+    static $used = null;
+    if ($used === null) {
+        $parts = [];
+        foreach ($pdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name<>'places' AND sql NOT LIKE 'CREATE VIRTUAL%'")->fetchAll(PDO::FETCH_COLUMN) as $table) {
+            foreach (array_column($pdo->query('PRAGMA table_info(' . $pdo->quote((string) $table) . ')')->fetchAll(), 'name') as $col) {
+                if ($col === 'place_id' || str_ends_with((string) $col, '_place_id')) {
+                    $parts[] = 'SELECT "' . str_replace('"', '""', (string) $col) . '" FROM "' . str_replace('"', '""', (string) $table) . '" WHERE "' . str_replace('"', '""', (string) $col) . '" IS NOT NULL';
+                }
+            }
+        }
+        $used = $parts ? implode(' UNION ', $parts) : 'SELECT NULL';
+    }
+    return "(pl.geoname_id IS NULL OR pl.id IN ({$used})) AND " . $search;
+}
+
+function list_place_search_params(string $like): array
+{
+    return array_merge(fold_like_args($like), [$like, $like, $like]);
 }
 
 function count_list_remaining(PDO $pdo,string $type,string $like,int $loaded,string $genderCond='',array $genderParams=[],string $scope='',int $personId=0,string $reminderMode='',string $city='',string $dateFrom='',string $dateTo='',int $sosaRootId=0,string $sosaSort='sosa_asc',bool $sosaMissing=false,bool $sosaImpossible=false,string $reminderCategory='',string $dabovilleSort='daboville_asc',string $courrierFilter=''): int
 {
     $total=match($type){
-        'events'=>(function()use($pdo,$like){$s=$pdo->prepare("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id WHERE t.label LIKE ? OR p.first_name LIKE ? OR p.last_name LIKE ?");$s->execute([$like,$like,$like]);return (int)$s->fetchColumn();})(),
-        'places'=>(function()use($pdo,$like){$s=$pdo->prepare('SELECT count(*) FROM places WHERE name LIKE ? OR subdivision LIKE ? OR alternate_names LIKE ? OR country LIKE ?');$s->execute([$like,$like,$like,$like]);return (int)$s->fetchColumn();})(),
+        'events'=>(function()use($pdo,$like){$s=$pdo->prepare("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id LEFT JOIN persons p ON p.id=e.person_id LEFT JOIN families fa ON fa.id=e.family_id LEFT JOIN persons f1 ON f1.id=fa.partner1_id LEFT JOIN persons f2 ON f2.id=fa.partner2_id WHERE ".list_event_search_sql());$s->execute(list_event_search_params($like));return (int)$s->fetchColumn();})(),
+        'places'=>(function()use($pdo,$like){$s=$pdo->prepare('SELECT count(*) FROM places pl WHERE '.list_place_where_sql($pdo));$s->execute(list_place_search_params($like));return (int)$s->fetchColumn();})(),
         'census'=>(function()use($pdo,$like){$s=$pdo->prepare("SELECT count(DISTINCT cr.id) FROM census_records cr LEFT JOIN places pl ON pl.id=cr.place_id LEFT JOIN census_members cm ON cm.census_id=cr.id LEFT JOIN persons p ON p.id=cm.person_id WHERE cr.year LIKE ? OR cr.address LIKE ? OR pl.name LIKE ? OR cm.display_name LIKE ? OR p.first_name LIKE ? OR p.last_name LIKE ?");$s->execute([$like,$like,$like,$like,$like,$like]);return (int)$s->fetchColumn();})(),
         'labels'=>(function()use($pdo,$like){$s=$pdo->prepare('SELECT count(*) FROM labels WHERE name LIKE ? OR description LIKE ?');$s->execute([$like,$like]);return (int)$s->fetchColumn();})(),
         'changes'=>(int)$pdo->query('SELECT count(*) FROM change_log')->fetchColumn(),
@@ -2803,7 +2866,7 @@ function count_list_remaining(PDO $pdo,string $type,string $like,int $loaded,str
         'daboville'=>daboville_list_count($pdo,$like,$sosaRootId,$dabovilleSort),
         'signatures'=>signature_list_count($pdo,$like),
         'archives'=>departmental_archives_count($like),
-        default=>(function()use($pdo,$like,$genderCond,$genderParams){$s=$pdo->prepare("SELECT count(*) FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id WHERE (p.first_name LIKE ? OR p.last_name LIKE ? OR g.name LIKE ?)".$genderCond);$s->execute(array_merge([$like,$like,$like],$genderParams));return (int)$s->fetchColumn();})(),
+        default=>(function()use($pdo,$like,$genderCond,$genderParams){$s=$pdo->prepare("SELECT count(*) FROM persons p LEFT JOIN surname_groups g ON g.id=p.surname_group_id WHERE ".list_person_search_sql().$genderCond);$s->execute(array_merge(list_person_search_params($like),$genderParams));return (int)$s->fetchColumn();})(),
     };
     return max(0,$total-$loaded);
 }
@@ -3107,7 +3170,7 @@ function sosa_list_rows(PDO $pdo,string $like,int $limit,int $offset,int $rootId
                 'marr_year' => $person['marr_year'] ?? '',
                 'death_date' => $person['death_date'] ?? '',
                 'death_year' => $person['death_year'] ?? '',
-                'status' => count($sosa['personSosas'][(int)$person['id']] ?? []) > 1 ? 'doublon' : 'renseigné',
+                'status' => count($sosa['personSosas'][(int)$person['id']] ?? []) > 1 ? 'implexe' : 'renseigné',
                 'missing' => 0,
                 'impossible' => 0,
             ];
@@ -8275,12 +8338,12 @@ function duplicate_candidates(PDO $pdo): never
         SELECT p.id,p.first_name,p.last_name,p.middle_name,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='BIRT' ORDER BY e.id LIMIT 1) birth_year,
         (SELECT e.year FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id=p.id AND t.gedcom_tag='DEAT' ORDER BY e.id LIMIT 1) death_year,
-        lower(p.last_name) AS last_key, lower(substr(p.first_name,1,3)) AS first_key
+        lc_fold(p.last_name) AS last_key, substr(lc_fold(p.first_name),1,3) AS first_key, lc_fold(p.first_name) AS first_full
         FROM persons p WHERE trim(COALESCE(p.last_name,''))<>'' AND trim(COALESCE(p.first_name,''))<>''
     )
     SELECT p1.id id1,p2.id id2,p1.first_name first1,p1.last_name last1,p2.first_name first2,p2.last_name last2,p1.birth_year birth1,p2.birth_year birth2,p1.death_year death1,p2.death_year death2,
-        (CASE WHEN lower(p1.first_name)=lower(p2.first_name) THEN 40 ELSE 0 END+
-         CASE WHEN lower(p1.last_name)=lower(p2.last_name) THEN 35 ELSE 0 END+
+        (CASE WHEN p1.first_full=p2.first_full THEN 40 ELSE 0 END+
+         CASE WHEN p1.last_key=p2.last_key THEN 35 ELSE 0 END+
          CASE WHEN p1.birth_year IS NOT NULL AND p2.birth_year IS NOT NULL AND abs(p1.birth_year-p2.birth_year)<=2 THEN 20 ELSE 0 END+
          CASE WHEN p1.death_year IS NOT NULL AND p2.death_year IS NOT NULL AND abs(p1.death_year-p2.death_year)<=2 THEN 15 ELSE 0 END) score
     FROM person_years p1 JOIN person_years p2 ON p2.last_key=p1.last_key AND p2.first_key=p1.first_key AND p1.id<p2.id
@@ -9110,6 +9173,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
 {
     $pdo->beginTransaction();
     try {
+        assert_write_target_unlocked($pdo,$action,$data); // fiche verrouillée : rien de ce qui la touche ne change
         $result = match ($action) {
             'save_person' => save_person($pdo,$data),
             'set_person_lock' => set_person_lock($pdo,$data),
@@ -9461,8 +9525,31 @@ function handle_write(PDO $pdo, string $action, array $data): never
         json_response(['ok'=>true,'result'=>$result]);
     } catch(Throwable $e){
         if($pdo->inTransaction())$pdo->rollBack();
-        json_response(['error'=>$e->getMessage()],422);
+        json_response(['error'=>readable_error_message($e)],422);
     }
+}
+
+/**
+ * Message lisible pour l'utilisateur : une erreur de la base (contrainte, clé étrangère…) est traduite
+ * en français simple, sans le texte SQL (le détail part dans le journal du serveur).
+ */
+function readable_error_message(Throwable $e): string
+{
+    if(!($e instanceof PDOException))return $e->getMessage();
+    $raw=$e->getMessage();
+    error_log('LCNDA erreur base : '.$raw);
+    if(stripos($raw,'FOREIGN KEY')!==false)return 'Cet enregistrement est lié à un élément qui n’existe pas (ou plus) : une fiche, un lieu ou un type a peut-être été supprimé. Recharge la page et réessaie.';
+    if(stripos($raw,'CHECK constraint')!==false){
+        if(preg_match('/gender/i',$raw))return 'Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu.';
+        if(preg_match('/living_status/i',$raw))return 'Statut invalide : choisis Vivant, Décédé ou Inconnu.';
+        if(preg_match('/scope/i',$raw))return 'Portée invalide : l’événement doit concerner une personne ou un couple.';
+        return 'Une valeur saisie n’est pas acceptée (choix hors de la liste). Vérifie le formulaire et réessaie.';
+    }
+    if(stripos($raw,'UNIQUE constraint')!==false)return 'Cet élément existe déjà (doublon refusé).';
+    if(stripos($raw,'NOT NULL constraint')!==false)return 'Un champ obligatoire est vide. Vérifie le formulaire et réessaie.';
+    if(stripos($raw,'database is locked')!==false||stripos($raw,'busy')!==false)return 'La base est occupée par une autre opération. Réessaie dans un instant.';
+    if(str_starts_with($raw,'SQLSTATE'))return 'L’enregistrement a échoué (erreur de la base). Réessaie ; si ça recommence, fais une sauvegarde et signale-le.';
+    return $raw;
 }
 
 function allowed_label_entity_types(): array
@@ -9595,6 +9682,88 @@ function assert_person_unlocked(PDO $pdo, int $id): void
     }
 }
 
+/**
+ * Verrou des fiches, vérifié une fois pour toutes les écritures qui touchent une personne (ou un de ses événements,
+ * ou un couple dont elle fait partie) : variantes de nom, portrait, mentions familiales, hypothèses, preuves,
+ * étiquettes, sources citées, médias rattachés et leur rangement, témoins et coordonnées d'un événement.
+ * Les fonctions qui vérifiaient déjà le verrou le refont sans dommage.
+ */
+function assert_write_target_unlocked(PDO $pdo, string $action, array $data): void
+{
+    $one = static function (string $sql, int $id) use ($pdo): array {
+        if (!$id) return [];
+        $s = $pdo->prepare($sql); $s->execute([$id]); $r = $s->fetch(PDO::FETCH_NUM);
+        return $r ?: [];
+    };
+    $entity = static function (string $type, int $id) use ($pdo): void {
+        if (!$id) return;
+        if ($type === 'person') assert_person_unlocked($pdo, $id);
+        elseif ($type === 'event') assert_event_unlocked($pdo, $id);
+        elseif ($type === 'family') assert_family_unlocked($pdo, $id);
+    };
+    $pid = safe_int($data['person_id'] ?? 0);
+    $id = safe_int($data['id'] ?? 0);
+    switch ($action) {
+        case 'add_variant': case 'set_portrait': case 'set_relation_status': case 'reorder_person_media':
+            if ($pid) assert_person_unlocked($pdo, $pid);
+            break;
+        case 'update_variant': case 'delete_variant': case 'set_primary_variant':
+            [$owner] = $one('SELECT person_id FROM name_variants WHERE id=?', $id) + [0];
+            if ($owner) assert_person_unlocked($pdo, (int) $owner);
+            break;
+        case 'save_hypothesis': case 'save_evidence': case 'delete_hypothesis': case 'delete_evidence':
+            $table = str_contains($action, 'hypothesis') ? 'hypotheses' : 'evidence_records';
+            [$owner] = $one("SELECT person_id FROM {$table} WHERE id=?", $id) + [0];
+            if ($owner) assert_person_unlocked($pdo, (int) $owner);
+            if ($pid && !str_starts_with($action, 'delete')) assert_person_unlocked($pdo, $pid);
+            break;
+        case 'set_label_links':
+            $entity(safe_text($data['entity_type'] ?? ''), safe_int($data['entity_id'] ?? 0));
+            break;
+        case 'save_source': case 'delete_source':
+            $linkId = safe_int($data['link_id'] ?? 0);
+            if ($linkId) { [$t, $e] = $one('SELECT entity_type,entity_id FROM source_links WHERE id=?', $linkId) + ['', 0]; $entity((string) $t, (int) $e); }
+            elseif ($action === 'delete_source' && $id) {
+                $s = $pdo->prepare('SELECT entity_type,entity_id FROM source_links WHERE source_record_id=?'); $s->execute([$id]);
+                foreach ($s->fetchAll(PDO::FETCH_NUM) as [$t, $e]) $entity((string) $t, (int) $e);
+            }
+            if ($action === 'save_source' && $linkId) {
+                if (($data['entity_type'] ?? 'person') === 'event') $entity('event', safe_int($data['event_id'] ?? 0));
+                elseif ($pid) assert_person_unlocked($pdo, $pid);
+            }
+            break;
+        case 'reorder_entity_media': case 'group_entity_media': case 'ungroup_entity_media': case 'link_entity_media':
+        case 'add_media_link': case 'remove_media_link':
+            $type = safe_text($data['entity_type'] ?? 'person');
+            $eid = safe_int($data['entity_id'] ?? 0) ?: ($type === 'person' ? $pid : 0);
+            $entity($type, $eid);
+            if ($pid && $type !== 'person') assert_person_unlocked($pdo, $pid);
+            break;
+        case 'save_event_witnesses': case 'save_event_precise':
+            assert_event_unlocked($pdo, safe_int($data['event_id'] ?? 0));
+            break;
+    }
+}
+
+/** Un événement de famille touche les deux conjoints : aucun des deux ne doit être verrouillé. */
+function assert_family_unlocked(PDO $pdo, int $familyId): void
+{
+    if(!$familyId)return;
+    $stmt=$pdo->prepare('SELECT partner1_id,partner2_id FROM families WHERE id=?');$stmt->execute([$familyId]);$f=$stmt->fetch();
+    if(!$f)return;
+    foreach(['partner1_id','partner2_id'] as $k)if($f[$k]!==null&&person_is_locked($pdo,(int)$f[$k]))throw new RuntimeException('Fiche verrouillée ('.person_label_by_id($pdo,(int)$f[$k]).'). Déverrouille-la avant de modifier ce couple.');
+}
+
+/** Vérifie que la fiche (ou le couple) qui porte cet événement n'est pas verrouillée. */
+function assert_event_unlocked(PDO $pdo, int $eventId): void
+{
+    if(!$eventId)return;
+    $stmt=$pdo->prepare('SELECT person_id,family_id FROM events WHERE id=?');$stmt->execute([$eventId]);$e=$stmt->fetch();
+    if(!$e)return;
+    if($e['person_id'])assert_person_unlocked($pdo,(int)$e['person_id']);
+    if($e['family_id'])assert_family_unlocked($pdo,(int)$e['family_id']);
+}
+
 function untouched_people_where(): string
 {
     return "NOT EXISTS (
@@ -9657,21 +9826,132 @@ function ensure_child_link(PDO $pdo, int $familyId, int $childId): void
     if(!$stmt->fetchColumn())$pdo->prepare("INSERT INTO family_children(family_id,child_id,relation_to_partner1,relation_to_partner2,position) VALUES(?,?,'biological','biological',(SELECT COALESCE(max(position),0)+1 FROM family_children WHERE family_id=?))")->execute([$familyId,$childId,$familyId]);
 }
 
+/** Nom affichable d'une fiche par son numéro (pour le journal et les messages). */
+function person_label_by_id(PDO $pdo, int $id): string
+{
+    $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$row=$stmt->fetch();
+    $name=$row?trim(full_name($row)):'';
+    return $name!==''?$name:'la fiche #'.$id;
+}
+
+/** Famille du couple (a,b), quel que soit l'ordre des partenaires ; 0 s'il n'existe pas. */
+function couple_family_id(PDO $pdo, int $a, int $b): int
+{
+    $stmt=$pdo->prepare('SELECT id FROM families WHERE (partner1_id=CAST(? AS INTEGER) AND partner2_id=CAST(? AS INTEGER)) OR (partner1_id=CAST(? AS INTEGER) AND partner2_id=CAST(? AS INTEGER)) ORDER BY id LIMIT 1');
+    $stmt->execute([$a,$b,$b,$a]);
+    return (int)$stmt->fetchColumn();
+}
+
+/** Parents connus d'un enfant (toutes ses familles confondues). */
+function child_parent_ids(PDO $pdo, int $childId): array
+{
+    $stmt=$pdo->prepare('SELECT f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=CAST(? AS INTEGER) ORDER BY f.id');
+    $stmt->execute([$childId]);$ids=[];
+    foreach($stmt->fetchAll() as $f)foreach(['partner1_id','partner2_id'] as $k)if($f[$k]!==null&&!in_array((int)$f[$k],$ids,true))$ids[]=(int)$f[$k];
+    return $ids;
+}
+
+/** Lien (adopté, biologique…) de l'enfant avec ce parent, lu dans ses familles ; « biological » par défaut. */
+function child_relation_to(PDO $pdo, int $childId, int $parentId): string
+{
+    $stmt=$pdo->prepare('SELECT f.partner1_id,f.partner2_id,fc.relation_to_partner1,fc.relation_to_partner2 FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=CAST(? AS INTEGER)');
+    $stmt->execute([$childId]);
+    foreach($stmt->fetchAll() as $r){
+        if((int)$r['partner1_id']===$parentId)return (string)($r['relation_to_partner1']?:'biological');
+        if((int)$r['partner2_id']===$parentId)return (string)($r['relation_to_partner2']?:'biological');
+    }
+    return 'biological';
+}
+
+/** Supprime une famille restée vide (aucun enfant, un seul partenaire au plus, rien de rattaché). */
+function drop_family_if_empty(PDO $pdo, int $familyId): void
+{
+    $stmt=$pdo->prepare('SELECT partner1_id,partner2_id FROM families WHERE id=?');$stmt->execute([$familyId]);$f=$stmt->fetch();
+    if(!$f||($f['partner1_id']!==null&&$f['partner2_id']!==null))return;
+    $count=$pdo->prepare('SELECT count(*) FROM family_children WHERE family_id=?');$count->execute([$familyId]);
+    if((int)$count->fetchColumn()>0)return;
+    if(family_attachment_counts($pdo,$familyId)['total']>0)return;
+    $pdo->prepare('DELETE FROM families WHERE id=?')->execute([$familyId]);
+}
+
+/** Met l'enfant dans la famille $familyId (en gardant ses liens adopté/biologique avec chaque parent), et le retire de ses autres familles. */
+function move_child_to_family(PDO $pdo, int $childId, int $familyId): void
+{
+    $stmt=$pdo->prepare('SELECT partner1_id,partner2_id FROM families WHERE id=?');$stmt->execute([$familyId]);$f=$stmt->fetch();
+    if(!$f)return;
+    $rel1=$f['partner1_id']!==null?child_relation_to($pdo,$childId,(int)$f['partner1_id']):'biological';
+    $rel2=$f['partner2_id']!==null?child_relation_to($pdo,$childId,(int)$f['partner2_id']):'biological';
+    $old=$pdo->prepare('SELECT family_id FROM family_children WHERE child_id=? AND family_id<>?');$old->execute([$childId,$familyId]);$oldIds=array_map('intval',$old->fetchAll(PDO::FETCH_COLUMN));
+    $pdo->prepare('DELETE FROM family_children WHERE child_id=? AND family_id<>?')->execute([$childId,$familyId]);
+    ensure_child_link($pdo,$familyId,$childId);
+    $pdo->prepare('UPDATE family_children SET relation_to_partner1=?,relation_to_partner2=? WHERE family_id=? AND child_id=?')->execute([$rel1,$rel2,$familyId,$childId]);
+    foreach($oldIds as $oid)drop_family_if_empty($pdo,$oid);
+}
+
+/** Ce qui est rattaché à une famille (mariage et autres événements, notes, médias, sources, étiquettes). */
+function family_attachment_counts(PDO $pdo, int $familyId): array
+{
+    $one=function(string $sql)use($pdo,$familyId):int{$s=$pdo->prepare($sql);$s->execute(array_fill(0,substr_count($sql,'?'),$familyId));return (int)$s->fetchColumn();};
+    $c=[
+        'events'=>$one('SELECT count(*) FROM events WHERE family_id=?'),
+        // y compris ce qui est posé sur les événements du couple (la source d'un mariage…)
+        'notes'=>$one("SELECT count(*) FROM notes WHERE (entity_type='family' AND entity_id=?) OR (entity_type='event' AND entity_id IN (SELECT id FROM events WHERE family_id=?))"),
+        'media'=>$one("SELECT count(*) FROM media_links WHERE (entity_type='family' AND entity_id=?) OR (entity_type='event' AND entity_id IN (SELECT id FROM events WHERE family_id=?))"),
+        'sources'=>$one("SELECT count(*) FROM source_links WHERE (entity_type='family' AND entity_id=?) OR (entity_type='event' AND entity_id IN (SELECT id FROM events WHERE family_id=?))"),
+        'labels'=>$one("SELECT count(*) FROM label_links WHERE entity_type='family' AND entity_id=?"),
+    ];
+    $c['total']=array_sum($c);
+    return $c;
+}
+
+/**
+ * Ajoute $parentId comme parent de $childId, sans jamais donner trois parents à l'enfant
+ * ni créer deux familles pour un même couple.
+ */
 function add_parent_child(PDO $pdo, int $parentId, int $childId): void
 {
-    $already=$pdo->prepare('SELECT 1 FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? AND (f.partner1_id=? OR f.partner2_id=?)');$already->execute([$childId,$parentId,$parentId]);
-    if($already->fetchColumn())return;
-    // 1) L'enfant a déjà un seul parent connu : le nouveau parent prend la place libre de cette famille
-    //    (sinon, avec la famille du nouveau parent et d'un autre conjoint, l'enfant aurait trois parents).
-    $open=$pdo->prepare('SELECT f.id,f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? AND (f.partner1_id IS NULL OR f.partner2_id IS NULL) ORDER BY f.id LIMIT 1');$open->execute([$childId]);$family=$open->fetch();
-    if($family){$slot=$family['partner1_id']===null?'partner1_id':'partner2_id';$pdo->prepare("UPDATE families SET {$slot}=? WHERE id=?")->execute([$parentId,$family['id']]);return;}
-    // 2) L'enfant n'a encore aucun parent : il rejoint une famille de ce parent (même fratrie que ses autres enfants).
-    $hasParents=$pdo->prepare('SELECT 1 FROM family_children WHERE child_id=? LIMIT 1');$hasParents->execute([$childId]);
-    if(!$hasParents->fetchColumn()){
-        $existingFamily=$pdo->prepare('SELECT id FROM families WHERE partner1_id=? OR partner2_id=? ORDER BY CASE WHEN partner1_id IS NOT NULL AND partner2_id IS NOT NULL THEN 0 ELSE 1 END,id');$existingFamily->execute([$parentId,$parentId]);
-        if($familyId=$existingFamily->fetchColumn()){ensure_child_link($pdo,(int)$familyId,$childId);return;}
+    $current=child_parent_ids($pdo,$childId);
+    if(in_array($parentId,$current,true))return;
+    // 1) L'enfant n'a encore aucun parent.
+    if(!$current){
+        $fams=$pdo->prepare('SELECT id,partner1_id,partner2_id FROM families WHERE partner1_id=CAST(? AS INTEGER) OR partner2_id=CAST(? AS INTEGER) ORDER BY id');$fams->execute([$parentId,$parentId]);$fams=$fams->fetchAll();
+        $couples=array_values(array_filter($fams,fn($f)=>$f['partner1_id']!==null&&$f['partner2_id']!==null));
+        $singles=array_values(array_filter($fams,fn($f)=>$f['partner1_id']===null||$f['partner2_id']===null));
+        // une seule union, rien d'autre : l'enfant rejoint ce couple (même fratrie que ses autres enfants)
+        if(count($couples)===1&&!$singles){ensure_child_link($pdo,(int)$couples[0]['id'],$childId);return;}
+        // un parent seul (déjà une famille sans conjoint) : même fratrie
+        if($singles){ensure_child_link($pdo,(int)$singles[0]['id'],$childId);return;}
+        // plusieurs unions : on ne choisit pas l'autre parent à la place de l'utilisateur
+        $pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,NULL)')->execute([$parentId]);ensure_child_link($pdo,(int)$pdo->lastInsertId(),$childId);return;
     }
-    $pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,NULL)')->execute([$parentId]);$familyId=(int)$pdo->lastInsertId();ensure_child_link($pdo,$familyId,$childId);
+    // 2) L'enfant a déjà un parent connu : le couple (parent connu + nouveau parent) devient sa famille.
+    if(count($current)===1){
+        $known=$current[0];
+        $existing=couple_family_id($pdo,$known,$parentId);
+        if($existing){move_child_to_family($pdo,$childId,$existing);return;}
+        // famille du parent connu avec une place libre, où l'enfant est seul : on remplit la place
+        $open=$pdo->prepare('SELECT f.id,f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=CAST(? AS INTEGER) AND (f.partner1_id IS NULL OR f.partner2_id IS NULL) ORDER BY f.id');$open->execute([$childId]);
+        foreach($open->fetchAll() as $family){
+            $n=$pdo->prepare('SELECT count(*) FROM family_children WHERE family_id=?');$n->execute([$family['id']]);
+            if((int)$n->fetchColumn()===1){
+                $slot=$family['partner1_id']===null?'partner1_id':'partner2_id';
+                $pdo->prepare("UPDATE families SET {$slot}=? WHERE id=?")->execute([$parentId,$family['id']]);
+                move_child_to_family($pdo,$childId,(int)$family['id']); // retire d'éventuelles autres familles à un parent
+                return;
+            }
+        }
+        // sinon (frères et sœurs dans cette famille) : un nouveau couple pour cet enfant seulement
+        $pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,?)')->execute([$known,$parentId]);
+        move_child_to_family($pdo,$childId,(int)$pdo->lastInsertId());
+        return;
+    }
+    // 3) L'enfant a déjà deux parents : seulement si le nouveau forme déjà un couple avec l'un d'eux.
+    foreach($current as $known){
+        $existing=couple_family_id($pdo,$known,$parentId);
+        if($existing){move_child_to_family($pdo,$childId,$existing);return;}
+    }
+    $names=implode(' et ',array_map(fn($id)=>person_label_by_id($pdo,$id),array_slice($current,0,2)));
+    throw new RuntimeException(person_label_by_id($pdo,$childId).' a déjà deux parents ('.$names.'). Retire d’abord l’un des deux, puis ajoute '.person_label_by_id($pdo,$parentId).'.');
 }
 
 function ensure_single_parent_child(PDO $pdo, int $parentId, int $childId): void
@@ -9710,7 +9990,7 @@ function add_relation(PDO $pdo,array $data): array
         $exists=$pdo->prepare('SELECT id FROM families WHERE (partner1_id=? AND partner2_id=?) OR (partner1_id=? AND partner2_id=?) LIMIT 1');$exists->execute([$personId,$relatedId,$relatedId,$personId]);
         if(!$exists->fetchColumn())$pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,?)')->execute([$personId,$relatedId]);
     }
-    log_change($pdo,'person',$personId,'add-relation','Ajout d’une relation '.$type.' avec la fiche #'.$relatedId);return ['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type];
+    log_change($pdo,'person',$personId,'add-relation',relation_log_text('Ajout',$pdo,$personId,$relatedId,$type));return ['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type];
 }
 
 function set_relation_status(PDO $pdo,array $data): array
@@ -10301,6 +10581,13 @@ function merge_people(PDO $pdo,array $data): array
     $target=safe_int($data['target_id']??0);$source=safe_int($data['source_id']??0);if(!$target||!$source||$target===$source)throw new RuntimeException('Fusion impossible');
     $a=summary_person($pdo,$target);$b=summary_person($pdo,$source);if(!$a||!$b)throw new RuntimeException('Fiche introuvable');
     assert_person_unlocked($pdo,$target);assert_person_unlocked($pdo,$source);
+    // Deux fiches d'un même couple, ou un ancêtre et son descendant, ne sont pas des doublons : la fusion casserait l'arbre.
+    $na=trim(full_name($a))?:'la fiche #'.$target;$nb=trim(full_name($b))?:'la fiche #'.$source;
+    if(couple_family_id($pdo,$target,$source))throw new RuntimeException('Fusion impossible : '.$na.' et '.$nb.' forment un couple. Deux conjoints ne sont pas la même personne.');
+    if(person_is_ancestor_of($pdo,$target,$source)||person_is_ancestor_of($pdo,$source,$target)){
+        [$anc,$desc]=person_is_ancestor_of($pdo,$target,$source)?[$na,$nb]:[$nb,$na];
+        throw new RuntimeException('Fusion impossible : '.$anc.' est un ancêtre de '.$desc.'. Un ancêtre et son descendant ne sont pas la même personne.');
+    }
     $pdo->prepare("INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,source_note,position) VALUES(?,'merged',?,?,?,'Nom conservé avant fusion de la fiche #{$source}',(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))")->execute([$target,$b['first_name']??'',$b['middle_name']??'',$b['last_name']??'',$target]);
     merge_person_references($pdo,$target,$source);
     if(function_exists('periodical_links_person'))periodical_links_person($pdo,$source,$target);
@@ -11379,15 +11666,29 @@ function move_investigation_media(PDO $pdo,array $data): array
     return ['link_ids'=>array_values($linkIds),'folder_id'=>$folderId,'investigation_id'=>$investigationId];
 }
 
+/** Texte du journal pour un lien ajouté ou retiré, en français et avec les noms. */
+function relation_log_text(string $verb, PDO $pdo, int $personId, int $relatedId, string $type): string
+{
+    $a=person_label_by_id($pdo,$personId);$b=person_label_by_id($pdo,$relatedId);
+    if($type==='spouse')return $verb.' du lien de couple entre '.$a.' et '.$b;
+    return $verb.' de '.$b.' comme '.($type==='parent'?'parent':'enfant').' de '.$a;
+}
+
 function detach_parent_child(PDO $pdo, int $parentId, int $childId): void
 {
-    $stmt=$pdo->prepare('SELECT f.id,f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=? AND (f.partner1_id=? OR f.partner2_id=?)');$stmt->execute([$childId,$parentId,$parentId]);
-    foreach($stmt->fetchAll() as $family){
+    $stmt=$pdo->prepare('SELECT f.id,f.partner1_id,f.partner2_id FROM family_children fc JOIN families f ON f.id=fc.family_id WHERE fc.child_id=CAST(? AS INTEGER) AND (f.partner1_id=CAST(? AS INTEGER) OR f.partner2_id=CAST(? AS INTEGER))');$stmt->execute([$childId,$parentId,$parentId]);
+    $families=$stmt->fetchAll();
+    if(!$families)throw new RuntimeException(person_label_by_id($pdo,$parentId).' n’est pas parent de '.person_label_by_id($pdo,$childId).' : rien à retirer.');
+    foreach($families as $family){
         $other=(int)($family['partner1_id']==$parentId?($family['partner2_id']??0):($family['partner1_id']??0));
+        $otherRel=$other?child_relation_to($pdo,$childId,$other):'biological';
         $pdo->prepare('DELETE FROM family_children WHERE family_id=? AND child_id=?')->execute([$family['id'],$childId]);
-        if($other)add_parent_child($pdo,$other,$childId);
-        $count=$pdo->prepare('SELECT count(*) FROM family_children WHERE family_id=?');$count->execute([$family['id']]);
-        if((int)$count->fetchColumn()===0&&(!$family['partner1_id']||!$family['partner2_id']))$pdo->prepare('DELETE FROM families WHERE id=?')->execute([$family['id']]);
+        // l'autre parent reste parent de l'enfant, dans une famille à lui seul (jamais remis d'office avec le parent retiré)
+        if($other){
+            ensure_single_parent_child($pdo,$other,$childId);
+            $pdo->prepare("UPDATE family_children SET relation_to_partner1=? WHERE child_id=? AND family_id IN (SELECT id FROM families WHERE partner1_id=? AND partner2_id IS NULL)")->execute([$otherRel,$childId,$other]);
+        }
+        drop_family_if_empty($pdo,(int)$family['id']);
     }
 }
 
@@ -11399,20 +11700,52 @@ function remove_relation(PDO $pdo,array $data): array
     if($type==='parent')detach_parent_child($pdo,$relatedId,$personId);
     elseif($type==='child')detach_parent_child($pdo,$personId,$relatedId);
     else{
-        $stmt=$pdo->prepare('SELECT id,partner1_id,partner2_id FROM families WHERE (partner1_id=? AND partner2_id=?) OR (partner1_id=? AND partner2_id=?)');$stmt->execute([$personId,$relatedId,$relatedId,$personId]);
-        foreach($stmt->fetchAll() as $family){
-            $children=$pdo->prepare('SELECT child_id FROM family_children WHERE family_id=?');$children->execute([$family['id']]);
-            $childIds=array_map('intval',$children->fetchAll(PDO::FETCH_COLUMN));
-            $pdo->prepare('DELETE FROM family_children WHERE family_id=?')->execute([$family['id']]);$pdo->prepare('DELETE FROM families WHERE id=?')->execute([$family['id']]);
-            foreach($childIds as $childId){ensure_single_parent_child($pdo,$personId,$childId);ensure_single_parent_child($pdo,$relatedId,$childId);}
+        $stmt=$pdo->prepare('SELECT id,partner1_id,partner2_id FROM families WHERE (partner1_id=CAST(? AS INTEGER) AND partner2_id=CAST(? AS INTEGER)) OR (partner1_id=CAST(? AS INTEGER) AND partner2_id=CAST(? AS INTEGER))');$stmt->execute([$personId,$relatedId,$relatedId,$personId]);
+        $families=$stmt->fetchAll();
+        if(!$families)throw new RuntimeException(person_label_by_id($pdo,$personId).' et '.person_label_by_id($pdo,$relatedId).' ne sont pas liés comme couple : rien à retirer.');
+        // Sûr : on ne retire le lien que s'il n'emporte rien avec lui (mariage, notes, médias, sources, enfants communs).
+        foreach($families as $family){
+            $fid=(int)$family['id'];$c=family_attachment_counts($pdo,$fid);
+            $kids=$pdo->prepare('SELECT child_id FROM family_children WHERE family_id=?');$kids->execute([$fid]);$kidIds=array_map('intval',$kids->fetchAll(PDO::FETCH_COLUMN));
+            $parts=[];
+            if($c['events']){$t=$pdo->prepare("SELECT count(*) FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.family_id=? AND t.gedcom_tag='MARR'");$t->execute([$fid]);$m=(int)$t->fetchColumn();$o=$c['events']-$m;if($m)$parts[]=$m>1?$m.' mariages':'un mariage';if($o)$parts[]=plural_fr($o,'autre événement','autres événements');}
+            if($c['sources'])$parts[]=plural_fr($c['sources'],'source','sources');
+            if($c['notes'])$parts[]=plural_fr($c['notes'],'note','notes');
+            if($c['media'])$parts[]=plural_fr($c['media'],'média','médias');
+            if($c['labels'])$parts[]=plural_fr($c['labels'],'étiquette','étiquettes');
+            $kids=$kidIds?plural_fr(count($kidIds),'enfant','enfants').' ensemble ('.implode(', ',array_map(fn($k)=>person_label_by_id($pdo,$k),array_slice($kidIds,0,3))).(count($kidIds)>3?'…':'').')':'';
+            if($parts||$kids){
+                $many=count($parts)>1||($parts&&preg_match('/^(\d+) /',$parts[0],$mm)&&(int)$mm[1]>1);
+                $all=$parts;if($kids)$all[]=$kids;
+                $last=array_pop($all);$list=$all?implode(', ',$all).' et '.$last:$last;
+                $todo=[];
+                if($parts)$todo[]=$many?'supprime-les d’abord':'supprime-le d’abord';
+                if($kids)$todo[]=count($kidIds)>1?'retire d’abord les liens de parent de ces enfants':'retire d’abord le lien de parent de cet enfant';
+                throw new RuntimeException('Ce couple a '.$list.' : '.implode(' et ',$todo).', ou garde le lien.');
+            }
         }
+        foreach($families as $family)$pdo->prepare('DELETE FROM families WHERE id=?')->execute([$family['id']]);
     }
-    log_change($pdo,'person',$personId,'remove-relation','Suppression d’une relation '.$type.' avec la fiche #'.$relatedId);return ['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type];
+    log_change($pdo,'person',$personId,'remove-relation',relation_log_text('Retrait',$pdo,$personId,$relatedId,$type));return ['person_id'=>$personId,'related_id'=>$relatedId,'relation_type'=>$type];
+}
+
+/** « 1 enfant », « 2 enfants » (0 et 1 au singulier). */
+function plural_fr(int $n, string $one, string $many): string
+{
+    return $n.' '.($n>1?$many:$one);
+}
+
+/** Sexe et statut : seulement les valeurs connues (sinon message clair au lieu d'une erreur de la base). */
+function validate_person_choices(array $data): void
+{
+    if(array_key_exists('gender',$data)&&!in_array(safe_text($data['gender']),['male','female','nonbinary','unknown'],true))throw new RuntimeException('Sexe invalide : choisis Homme, Femme, Non binaire ou Inconnu.');
+    if(array_key_exists('living_status',$data)&&!in_array(safe_text($data['living_status']),['living','deceased','unknown'],true))throw new RuntimeException('Statut invalide : choisis Vivant, Décédé ou Inconnu.');
 }
 
 function save_person(PDO $pdo,array $data): array
 {
     $id=safe_int($data['id']??0);
+    validate_person_choices($data);
     if(!$id){
         $first=safe_text($data['first_name']??'');$last=safe_text($data['last_name']??'');
         if($first===''&&$last==='')throw new RuntimeException('Indique au moins un prénom ou un nom');
@@ -11427,6 +11760,10 @@ function save_person(PDO $pdo,array $data): array
     $stmt=$pdo->prepare('SELECT * FROM persons WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Personne introuvable');
     assert_person_unlocked($pdo,$id);
+    // comme à la création : une fiche garde au moins un prénom ou un nom
+    $firstAfter=array_key_exists('first_name',$data)?safe_text($data['first_name']):safe_text($before['first_name']??'');
+    $lastAfter=array_key_exists('last_name',$data)?safe_text($data['last_name']):safe_text($before['last_name']??'');
+    if($firstAfter===''&&$lastAfter===''&&(safe_text($before['first_name']??'')!==''||safe_text($before['last_name']??'')!==''))throw new RuntimeException('Indique au moins un prénom ou un nom');
     $allowed=['first_name','middle_name','last_name','prefix','suffix','gender','living_status','reference_number','surname_group_id','occupation','height_text','physical_description','eye_color','skin_color','nationality','ethnicity','verify_status','mort_pour_la_france'];
     $set=[];$values=[];
     foreach($allowed as $field)if(array_key_exists($field,$data)){$set[]="$field=?";$values[]=$field==='surname_group_id'?(safe_int($data[$field])?:null):safe_text($data[$field]);}
@@ -11565,6 +11902,7 @@ function restore_deleted_person(PDO $pdo,array $change,array $before): array
 function add_variant(PDO $pdo,array $data): array
 {
     $personId=safe_int($data['person_id']??0);if(!$personId)throw new RuntimeException('Personne manquante');
+    if(!person_exists($pdo,$personId))throw new RuntimeException('Personne introuvable : la fiche a peut-être été supprimée.');
     $sourceMediaId=safe_int($data['source_media_id']??0)?:null;
     if($sourceMediaId&&!media_visible_for_person($pdo,$sourceMediaId,$personId))throw new RuntimeException('Cette image source n’est pas liée à la fiche.');
     $stmt=$pdo->prepare('INSERT INTO name_variants(person_id,type,first_name,middle_name,last_name,from_year,to_year,date_text,source_note,source_media_id,position) VALUES(?,?,?,?,?,?,?,?,?,?,(SELECT COALESCE(max(position),0)+1 FROM name_variants WHERE person_id=?))');
@@ -11641,6 +11979,40 @@ function link_event_confidence_media(PDO $pdo,int $eventId,?int $mediaId): void
     $pdo->prepare("INSERT INTO media_links(media_id,entity_type,entity_id,position) VALUES(?,?,?,?)")->execute([$mediaId,'event',$eventId,(int)$position->fetchColumn()]);
 }
 
+/**
+ * Année d'un événement (pour les tris, les âges, les frises), de l'an 1 à 2099 : « 08/12/1920 » → 1920,
+ * « vers 845 » → 845, « 7 mai » → aucune. Une date républicaine (« 15 brumaire an II ») est convertie en
+ * grégorien (qm_rep_text_iso) : année 1793 et, si rien n'est noté, « Grégorien : 05/11/1793 » comme équivalent.
+ * Rend [année ou null, équivalent].
+ */
+function event_year_and_converted(string $date, string $converted, string $calendar): array
+{
+    if ($calendar === 'republican' || preg_match('/\ban\s+[ivx\d]/iu', $date)) {
+        $iso = function_exists('qm_rep_text_iso') ? qm_rep_text_iso($date) : null;
+        if ($iso) {
+            [$y, $mo, $d] = array_map('intval', explode('-', $iso));
+            if ($converted === '') $converted = 'Grégorien : ' . sprintf('%02d/%02d/%04d', $d, $mo, $y);
+            return [$y, $converted];
+        }
+    }
+    $year = event_year_from_text($date);
+    if ($year === null && $converted !== '') $year = event_year_from_text(preg_replace('/^[^:]*:\s*/u', '', $converted) ?? $converted);
+    return [$year, $converted];
+}
+
+function event_year_from_text(string $text): ?int
+{
+    $t = ' ' . $text . ' ';
+    if (preg_match('/(?<!\d)\d{1,2}[\/.\-]\d{1,2}[\/.\-](\d{1,4})(?!\d)/u', $t, $m)) { $y = (int) $m[1]; return $y >= 1 && $y <= 2099 ? $y : null; }
+    if (preg_match('/(?<!\d)(\d{4})[\/.\-]\d{1,2}[\/.\-]\d{1,2}(?!\d)/u', $t, $m)) { $y = (int) $m[1]; return $y >= 1 && $y <= 2099 ? $y : null; }
+    if (preg_match('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/', $t, $m)) return (int) $m[1];
+    // les jours devant un mois (« 7 mai », « 1er juin ») ne sont pas des années
+    $months = 'janv|f[ée]vr|mars|avr|mai|juin|juil|ao[uû]t|sept|oct|nov|d[ée]c|jan|feb|mar|apr|may|jun|jul|aug|sep|dec';
+    $t = preg_replace('/(?<!\d)\d{1,2}\s*(?:er|e)?\s+(?=(?:' . $months . '))/iu', ' ', $t) ?? $t;
+    if (preg_match('/(?<![\d°\/#])(\d{1,3})(?![\d°\/])/u', $t, $m)) { $y = (int) $m[1]; return $y >= 1 ? $y : null; }
+    return null;
+}
+
 function add_event(PDO $pdo,array $data): array
 {
     // Portée de l'événement : 'person' (par défaut, inchangé) ou 'family' (ex: Mariage),
@@ -11651,19 +12023,22 @@ function add_event(PDO $pdo,array $data): array
         if(!$familyId||!$typeId)throw new RuntimeException('Famille ou type d’événement manquant');
         $checkFamily=$pdo->prepare('SELECT id FROM families WHERE id=?');$checkFamily->execute([$familyId]);
         if(!$checkFamily->fetch())throw new RuntimeException('Famille introuvable');
+        assert_family_unlocked($pdo,$familyId);
     } else {
         if(!$personId||!$typeId)throw new RuntimeException('Personne ou type d’événement manquant');
+        if(!person_exists($pdo,$personId))throw new RuntimeException('Personne introuvable : la fiche a peut-être été supprimée.');
+        assert_person_unlocked($pdo,$personId);
     }
+    if(!record_exists($pdo,'event_types',$typeId))throw new RuntimeException('Type d’événement introuvable : choisis-en un dans la liste.');
     $dateConverted=safe_text($data['date_converted']??'');
-    preg_match('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/',$date,$m);
-    if(!isset($m[1])&&$dateConverted!=='')preg_match('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/',$dateConverted,$m);
-    $year=isset($m[1])?(int)$m[1]:null;
+    $year=null; // calculée plus bas, une fois le calendrier connu
     $placeId=place_id_from_data($pdo,$data);
     $preciseLat=isset($data['precise_lat'])&&$data['precise_lat']!==''?(float)$data['precise_lat']:null;
     $preciseLon=isset($data['precise_lon'])&&$data['precise_lon']!==''?(float)$data['precise_lon']:null;
     $workFields=work_fields_from_data($pdo,$typeId,$data);
     $dateCalendar=safe_text($data['date_calendar']??'gregorian');
     if(!in_array($dateCalendar,['gregorian','julian','republican','islamic','hebrew'],true))$dateCalendar='gregorian';
+    [$year,$dateConverted]=event_year_and_converted($date,$dateConverted,$dateCalendar);
     $factConfidence=event_fact_confidence($data);
     $confidenceOrigin=safe_text($data['confidence_origin']??'');
     $confidenceMediaId=safe_int($data['confidence_media_id']??0)?:null;
@@ -11704,16 +12079,17 @@ function save_event(PDO $pdo,array $data): array
     if(!$id||!$typeId)throw new RuntimeException('Événement ou type manquant');
     $stmt=$pdo->prepare('SELECT * FROM events WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Événement introuvable');
+    assert_event_unlocked($pdo,$id);
+    if(!record_exists($pdo,'event_types',$typeId))throw new RuntimeException('Type d’événement introuvable : choisis-en un dans la liste.');
     $dateConverted=safe_text($data['date_converted']??'');
-    preg_match('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/',$date,$m);
-    if(!isset($m[1])&&$dateConverted!=='')preg_match('/(?<!\d)(1[0-9]{3}|20[0-9]{2})(?!\d)/',$dateConverted,$m);
-    $year=isset($m[1])?(int)$m[1]:null;
+    $year=null; // calculée plus bas, une fois le calendrier connu
     $placeId=place_id_from_data($pdo,$data);
     $preciseLat=isset($data['precise_lat'])&&$data['precise_lat']!==''?(float)$data['precise_lat']:null;
     $preciseLon=isset($data['precise_lon'])&&$data['precise_lon']!==''?(float)$data['precise_lon']:null;
     $workFields=work_fields_from_data($pdo,$typeId,$data);
     $dateCalendar=safe_text($data['date_calendar']??($before['date_calendar']??'gregorian'));
     if(!in_array($dateCalendar,['gregorian','julian','republican','islamic','hebrew'],true))$dateCalendar='gregorian';
+    [$year,$dateConverted]=event_year_and_converted($date,$dateConverted,$dateCalendar);
     $dateAlternative=safe_text($data['date_alternative']??'');
     $factConfidence=event_fact_confidence($data,(string)($before['fact_confidence']??'unknown'));
     $confidenceOrigin=safe_text($data['confidence_origin']??($before['confidence_origin']??''));
@@ -11739,6 +12115,7 @@ function delete_event(PDO $pdo,array $data): array
     $id=safe_int($data['id']??0);if(!$id)throw new RuntimeException('Événement manquant');
     $stmt=$pdo->prepare('SELECT e.*,t.label AS type_label FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Événement introuvable');
+    assert_event_unlocked($pdo,$id);
     $mediaLinks=$pdo->prepare("SELECT * FROM media_links WHERE entity_type='event' AND entity_id=?");$mediaLinks->execute([$id]);
     $sourceLinks=$pdo->prepare("SELECT * FROM source_links WHERE entity_type='event' AND entity_id=?");$sourceLinks->execute([$id]);
     $notes=$pdo->prepare("SELECT * FROM notes WHERE entity_type='event' AND entity_id=?");$notes->execute([$id]);
@@ -11827,6 +12204,7 @@ function delete_online_sheet(PDO $pdo,array $data): array
 function add_note(PDO $pdo,array $data): array
 {
     $personId=safe_int($data['person_id']??0);$body=safe_text($data['body']??'');if(!$personId||$body==='')throw new RuntimeException('Personne ou contenu manquant');
+    if(!person_exists($pdo,$personId))throw new RuntimeException('Personne introuvable : la fiche a peut-être été supprimée.');
     assert_person_unlocked($pdo,$personId);
     $stmt=$pdo->prepare("INSERT INTO notes(entity_type,entity_id,title,body,created_at,updated_at) VALUES('person',?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)");$stmt->execute([$personId,safe_text($data['title']??''),$body]);$id=(int)$pdo->lastInsertId();log_change($pdo,'note',$id,'create','Ajout d’une note à la fiche #'.$personId);return ['id'=>$id];
 }
@@ -11863,6 +12241,9 @@ function add_web_source(PDO $pdo,array $data): array
     $personId=safe_int($data['person_id']??0);$title=safe_text($data['title']??'');$url=safe_text($data['url']??'');$type=source_type($data['source_type']??'internet');
     [$entityType,$entityId]=source_target($data,$personId);
     if(!$personId||$title==='')throw new RuntimeException('Personne et titre obligatoires');
+    if(!person_exists($pdo,$personId))throw new RuntimeException('Personne introuvable : la fiche a peut-être été supprimée.');
+    assert_person_unlocked($pdo,$personId);
+    if($entityType==='event'){if(!record_exists($pdo,'events',$entityId))throw new RuntimeException('Événement introuvable');assert_event_unlocked($pdo,$entityId);}
     if($url!==''&&(!filter_var($url,FILTER_VALIDATE_URL)||!in_array(parse_url($url,PHP_URL_SCHEME),['http','https'],true)))throw new RuntimeException('Adresse Internet invalide');
     $stmt=$pdo->prepare('INSERT INTO sources(source_type,title,author,agency,publication,url,text) VALUES(?,?,?,?,?,?,?)');
     $stmt->execute([$type,$title,safe_text($data['author']??''),safe_text($data['website']??''),safe_text($data['accessed_at']??''),$url,safe_text($data['text']??'')]);

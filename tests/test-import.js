@@ -127,7 +127,8 @@ async function download(s, base, action) {
 
   await step('sauvegarde complète (.zip) : base + photo', async () => {
     await withServer(path.join(tmp, 'A'), async (s, base) => {
-      const r = await upload(s, base, fs.readFileSync(ged), 'complet.ged');
+      // Ouvert depuis le disque (comme l'app de bureau) : la photo au chemin complet est reprise
+      const r = await s.importLocalFile(ged);
       assert.equal(r.status, 200, JSON.stringify(r.data));
       zip = await download(s, base, 'export_full_backup');
       db = await download(s, base, 'export_sqlite');
