@@ -43,31 +43,16 @@
         return dl;
     }
 
-    /** Choisir un autre son ou une autre vidéo : de la base, ou un fichier de l'ordinateur. */
-    /** Choisir un son, une vidéo ou (kind 'visual') une vidéo ou une photo : un fichier de l'ordinateur ou un média de la base */
-    function pickOther(kind) {
-        return new Promise(async resolve => {
-            let rows = [];
-            const kinds = kind === 'any' ? ['video', 'image', 'audio'] : kind === 'visual' ? ['video', 'image'] : [kind];
-            for (const k of kinds) { try { rows.push(...(await A().api('media_av_list', {kind: k})).items.filter(i => i.exists).map(i => ({...i, kind: k}))); } catch (_) {} }
-            let done = false;
-            const what = kind === 'any' ? 'une vidéo, une photo ou un son' : kind === 'visual' ? 'une vidéo ou une photo' : kind === 'video' ? 'une vidéo' : 'un son';
-            const icon = r => r.kind === 'image' ? `<img class="h-avx-pickthumb" src="${url(r.filename)}" alt="" loading="lazy">` : r.kind === 'video' ? '🎬' : '🎵';
-            const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: kind === 'any' ? 'Ajouter un rush' : kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son', wide: true, submitLabel: 'Ajouter',
-                body: `<label class="h-rc-drop"><input type="file" name="file" accept="${kind === 'any' ? 'video/*,image/*,audio/*' : kind === 'visual' ? 'video/*,image/*' : kind + '/*'}"><span>📁 Un fichier de l’ordinateur…</span></label>
-                    <p class="muted">… ou ${what} déjà dans la base :</p>
-                    <div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🎬</span><input type="text" class="pk-input" data-avx-q placeholder="Titre ou nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher"></div></div>
-                    <div class="h-rc-results" data-avx-list>${rows.map((r, i) => `<label class="checkbox-line"><input type="radio" name="pick" value="${i}"> ${icon(r)} ${esc(r.title || r.filename)} <small class="muted">${r.duration ? fmt(r.duration, false) : r.kind === 'image' ? 'photo' : ''}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
-                onOpen: d => d.querySelector('[data-avx-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-avx-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
-                onSubmit: form => {
-                    const f = form.querySelector('[name=file]').files[0], pick = form.querySelector('[name=pick]:checked');
-                    if (f) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : kind === 'any' ? (/^audio\//.test(f.type) ? 'audio' : '') : kind === 'visual' ? '' : kind; if (!k) { toast(kind === 'any' ? 'Ce fichier n’est ni une vidéo, ni une photo, ni un son.' : 'Ce fichier n’est ni une vidéo ni une photo.', 'error'); return false; } done = true; resolve({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f, kind: k}); return; }
-                    if (pick) { const r = rows[Number(pick.value)]; if (!r) return false; done = true; resolve({src: url(r.filename), title: r.title || r.filename, media: r, kind: r.kind}); return; }
-                    toast('Choisis un fichier ou un élément de la liste.', 'error'); return false;
-                },
-            });
-            dl.addEventListener('close', () => { if (!done) resolve(null); });
-        });
+    /** Choisir un son, une vidéo ou (kind 'visual') une vidéo ou une photo, ou (kind 'any') un rush : la fenêtre unique des médias
+     *  (un fichier de l'ordinateur y entre dans les Médias et se coche). Résout {src, title, media, kind} — une liste si multiple — ou null. */
+    async function pickOther(kind, {multiple = false} = {}) {
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des médias n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const types = kind === 'any' ? ['video', 'image', 'audio'] : kind === 'visual' ? ['video', 'image'] : [kind];
+        const title = kind === 'any' ? (multiple ? 'Ajouter des rushes' : 'Ajouter un rush') : kind === 'visual' ? 'Ajouter une vidéo ou une photo' : kind === 'video' ? 'Ajouter une vidéo' : 'Ajouter un son';
+        const r = await P.openMediaPicker({types, multiple, eyebrow: 'ASSEMBLER', title, ...(multiple ? {} : {okLabel: 'Ajouter'})});
+        if (!r) return null;
+        const conv = it => ({src: url(it.filename), title: it.title || it.filename, kind: it.media_type, media: {...it, kind: it.media_type, duration_seconds: it.duration, exists: true}});
+        return multiple ? (Array.isArray(r) ? r : [r]).map(conv) : conv(r);
     }
 
     /** Envoi du résultat : nouvelle version (montrée ou non) ou copie à part. L'original reste toujours. */
@@ -1331,7 +1316,7 @@
             if (n) toast(`${n} rush${n > 1 ? 'es' : ''} ajouté${n > 1 ? 's' : ''} : glisse-les sur la frise.`);
         });
         $('[data-mt-pane="rush"]').addEventListener('click', async e => {
-            if (e.target.closest('[data-mt-rbase]')) { const o = await pickOther('any'); if (o) await pushSource(o, o.kind); return; }
+            if (e.target.closest('[data-mt-rbase]')) { const list = await pickOther('any', {multiple: true}); for (const o of list || []) await pushSource(o, o.kind); return; } // plusieurs rushes d'un coup
             if (e.target.closest('[data-mt-rnewdir]')) { if (await newFolder(rushDir)) drawRush(true); return; }
             const crumb = e.target.closest('[data-mt-rdir]'); if (crumb) { rushDir = crumb.dataset.mtRdir; return drawRush(true); }
             const fo = e.target.closest('[data-mt-rfolder]');

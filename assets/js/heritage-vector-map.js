@@ -611,16 +611,15 @@
         }
         /* ─── image de référence quelconque : un fichier ou une photo de la base ─── */
         function refImageDialog() {
-            const d = ed.doc();
+            const d = ed.doc(); let picked = null;
             ext.openDialog({eyebrow: 'PLAN', title: 'Image de référence', submitLabel: 'Poser l’image',
                 body: `<p class="muted">Un cadastre ancien, une photo aérienne, un plan scanné, un croquis… posé sous le dessin, en transparence, pour dessiner par-dessus. Il ne s’exporte pas (sauf si tu le demandes).</p>
-                    <label>Fichier de l’ordinateur<input type="file" name="f" accept="image/*"></label><p class="muted">ou une image de la base :</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-mq placeholder="Titre, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher dans les médias"></div></div><div data-mres class="vx-mmedia"></div>
+                    <label>Fichier de l’ordinateur<input type="file" name="f" accept="image/*"></label><span class="pk-lab">ou une image de la base</span>${window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image'], eyebrow: 'PLAN', title: 'Image de référence'}) : ''}
                     <label>Transparence (%)<input type="range" name="op" min="10" max="100" value="50"></label>`,
-                onOpen: dg => { const q = dg.querySelector('[data-mq]'), res = dg.querySelector('[data-mres]'); let t = 0;
-                    q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(async () => { const r0 = await api('list', {type: 'media', q: q.value.trim(), limit: 24}).catch(() => ({rows: []})), rows = (r0.rows || r0.data || []).filter(m => /\.(jpe?g|png|webp|gif)$/i.test(m.filename || ''));
-                        res.innerHTML = rows.map(m => `<label title="${esc(m.title || m.filename)}"><input type="radio" name="mpick" value="${esc('media/' + m.filename)}"><img src="${esc('media/' + m.filename)}" alt="" loading="lazy"></label>`).join('') || '<p class="muted">Rien trouvé.</p>'; }, 250); }); },
+                // l'image de la base : le champ de la fenêtre unique des médias (pastille, « 🖼 Changer »)
+                onOpen: dg => dg.addEventListener('media-change', e => { picked = e.detail.item; }),
                 onSubmit: async f => {
-                    const file = f.querySelector('[name=f]').files?.[0], media = f.querySelector('[name=mpick]:checked')?.value, op = num(f.querySelector('[name=op]').value, 50) / 100;
+                    const file = f.querySelector('[name=f]').files?.[0], media = picked?.filename ? 'media/' + picked.filename : '', op = num(f.querySelector('[name=op]').value, 50) / 100;
                     let src = '';
                     try { if (file) src = await ed.normImage(await new Promise((ok, ko) => { const r = new FileReader(); r.onload = () => ok(r.result); r.onerror = ko; r.readAsDataURL(file); }), file.type); else if (media) src = await ed.normImage(await ed.toDataUrl(media)); }
                     catch (e) { toast(e.message || 'Image illisible.', 'error'); return false; }

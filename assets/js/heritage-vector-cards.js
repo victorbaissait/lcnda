@@ -158,7 +158,7 @@
                     <label>Sens<select name="orient"><option value="port">Portrait</option><option value="land" ${pf.orient === 'land' ? 'selected' : ''}>Paysage</option></select></label>
                     <div><span class="pk-lab">Remplir depuis une fiche</span><span class="h-fp-who" data-fp-who>${(window.LCNDA_PICKER || A()).pickerField({name: 'fp_person', kind: 'person'})}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></div></div>
                 <div class="form-grid h-fp-fields" data-fp-fields data-dnd-off data-ord-off></div>
-                <label class="checkbox-line"><input type="checkbox" name="usephoto"> Avec une photo <small class="muted" data-fp-photo>(celle de la fiche, ou à choisir)</small></label><input type="file" name="photofile" accept="image/*" hidden>
+                <div class="h-fp-photo"><label class="checkbox-line"><input type="checkbox" name="usephoto"> Avec une photo <small class="muted" data-fp-photo>(celle de la fiche, ou à choisir)</small></label> <button type="button" class="button small secondary" data-fp-pickphoto>🖼 Choisir la photo…</button></div>
                 <p class="muted">Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis Fichier → Imprimer / PDF ou Exporter.</p></div>`,
             onOpen: dg => {
                 const box = dg.querySelector('[data-fp-fields]');
@@ -185,7 +185,12 @@
                     else if (t.matches('[data-fp-back]') && t.value) { const b = baseFields(kind).find(x => x.key === t.value); if (b) { const at = KINDS[kind].fields.findIndex(x => x[0] === b.key); let pos = fields.findIndex(f => KINDS[kind].fields.findIndex(x => x[0] === f.key) > at); fields.splice(pos < 0 ? fields.length : pos, 0, b); changed(); } } });
                 dg.addEventListener('change', e => { const t = e.target; if (t.name === 'kind') setKind(t.value);
                     if (['format', 'orient', 'cw', 'ch'].includes(t.name)) { const p = prefs(); p[t.name] = t.value; savePrefs(p); if (t.name === 'format') dg.querySelector('.h-fp-custom').hidden = t.value !== 'custom'; }
-                    if (t.name === 'usephoto' && t.checked && !photoFile) dg.querySelector('[name=photofile]').click(); if (t.name === 'photofile' && t.files?.[0]) { const f = t.files[0], r = new FileReader(); r.onload = () => { photoFile = {data: r.result}; dg.querySelector('[data-fp-photo]').textContent = `(${f.name})`; }; r.readAsDataURL(f); } });
+                    if (t.name === 'usephoto' && t.checked && !photoFile) pickPhoto(); });
+                // la photo : la fenêtre unique des médias, filtrée sur la personne du faire-part (une photo de l'ordinateur y entre et se coche)
+                const pickPhoto = async () => { const m = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image'], person: personId || null, eyebrow: 'FAIRE-PART', title: 'La photo du faire-part', okLabel: 'Prendre cette photo'});
+                    if (!m) { if (!photoFile) dg.querySelector('[name=usephoto]').checked = false; return; }
+                    photoFile = m.filename; dg.querySelector('[name=usephoto]').checked = true; dg.querySelector('[data-fp-photo]').textContent = `(${m.title || m.filename})`; };
+                dg.querySelector('[data-fp-pickphoto]').addEventListener('click', pickPhoto);
                 const fill = async pid => { try { const r = await fillFrom(kind, pid); grab(); Object.entries(r.values).forEach(([k, v]) => { const f = fields.find(x => x.role === k); if (f && v) f.value = v; }); draw(); if (r.photo) { photoFile = r.photo; dg.querySelector('[data-fp-photo]').textContent = '(la photo de la fiche)'; } toast(`Rempli depuis la fiche de ${r.label} : relis et complète.`); } catch (e) { toast(e.message, 'error'); } };
                 dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-fp-who] .pk-search:not([hidden]) .pk-input')?.focus(); });
                 dg.querySelector('[data-fp-who]').addEventListener('cp-pick', e => { if (!e.detail.id) return; personId = e.detail.id; fill(personId); });

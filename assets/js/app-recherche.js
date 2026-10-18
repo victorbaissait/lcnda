@@ -596,28 +596,13 @@
             ...(row.media||[]).map(media=>String(media.archive_page_number||'').trim())
         ].filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}));
         const pageOptions=`<option value="">Non rattaché à une page</option>${pageNumbers.map(number=>`<option value="${escapeHtml(number)}" ${String(number)===String(pageNumber||'')?'selected':''}>Page / vue ${escapeHtml(number)}</option>`).join('')}`;
-        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal small-modal" id="archive-digest-media-dialog"><form id="archive-digest-media-form"><div class="modal-head"><div><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>Ajouter un média</h2><p>${escapeHtml([row.city_name||row.place_name,row.archive_reference].filter(Boolean).join(' · ')||'Registre')}</p></div><button class="icon-button" type="button" data-close-archive-digest-media>×</button></div><div class="form-grid one-column"><label>Page / vue liée<select name="page_number">${pageOptions}</select></label><label>Ajouter<select name="mode"><option value="new">Un nouveau fichier</option><option value="existing">Un média existant</option></select></label><div data-archive-digest-new-media><label>Titre<input name="title" placeholder="Ex : Table décennale 1803-1812, vue 42"></label><label>Fichier(s)<input name="files[]" type="file" multiple accept="image/*,.pdf,audio/*,video/*"></label></div><div data-archive-digest-existing-media hidden><label>Chercher un média existant<input name="media_search" autocomplete="off" placeholder="Titre ou nom du fichier…"></label><input type="hidden" name="media_id"><p class="selected-relation" data-archive-digest-selected-media hidden></p><div class="relation-results" data-archive-digest-media-results></div></div></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close-archive-digest-media>Annuler</button><button class="button" type="submit" data-archive-digest-media-submit>Importer</button></div></form></dialog>`);
+        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal small-modal" id="archive-digest-media-dialog"><form id="archive-digest-media-form"><div class="modal-head"><div><span class="eyebrow">DÉPOUILLEMENT D’ARCHIVE</span><h2>Ajouter un média</h2><p>${escapeHtml([row.city_name||row.place_name,row.archive_reference].filter(Boolean).join(' · ')||'Registre')}</p></div><button class="icon-button" type="button" data-close-archive-digest-media>×</button></div><div class="form-grid one-column"><label>Page / vue liée<select name="page_number">${pageOptions}</select></label><label>Ajouter<select name="mode"><option value="new">Un nouveau fichier</option><option value="existing">Un média existant</option></select></label><div data-archive-digest-new-media><label>Titre<input name="title" placeholder="Ex : Table décennale 1803-1812, vue 42"></label><label>Fichier(s)<input name="files[]" type="file" multiple accept="image/*,.pdf,audio/*,video/*"></label></div><div data-archive-digest-existing-media hidden><span class="pk-lab">Un média existant</span>${window.LCNDA_PICKER?.mediaField?window.LCNDA_PICKER.mediaField({name:'media_id',types:['image','document','audio','video'],eyebrow:'DÉPOUILLEMENT D’ARCHIVE',title:'Choisir un média existant',okLabel:'Prendre ce média',allowImport:false}):'<input type="hidden" name="media_id">'}</div></div><div class="modal-actions"><span class="spacer"></span><button class="button secondary" type="button" data-close-archive-digest-media>Annuler</button><button class="button" type="submit" data-archive-digest-media-submit>Importer</button></div></form></dialog>`);
         const dialog=$('#archive-digest-media-dialog'),form=$('#archive-digest-media-form',document);
-        const mode=form.elements.mode,newMedia=$('[data-archive-digest-new-media]',dialog),existingMedia=$('[data-archive-digest-existing-media]',dialog),results=$('[data-archive-digest-media-results]',dialog),selected=$('[data-archive-digest-selected-media]',dialog),submit=$('[data-archive-digest-media-submit]',dialog);
+        const mode=form.elements.mode,newMedia=$('[data-archive-digest-new-media]',dialog),existingMedia=$('[data-archive-digest-existing-media]',dialog),submit=$('[data-archive-digest-media-submit]',dialog);
         const syncMode=()=>{const isExisting=mode.value==='existing';newMedia.hidden=isExisting;existingMedia.hidden=!isExisting;submit.textContent=isExisting?'Ajouter le média':'Importer';};
         mode.addEventListener('change',syncMode);syncMode();
         $$('[data-close-archive-digest-media]',dialog).forEach(button=>button.addEventListener('click',()=>dialog.close()));
-        form.elements.media_search.addEventListener('input',debounce(async()=>{
-            const q=form.elements.media_search.value.trim();
-            if(q.length<2){results.innerHTML='';return;}
-            try{
-                const data=await api('archive_digest_media_search',{q});
-                results.innerHTML=(data.rows||[]).map(item=>`<button type="button" class="relation-result" data-archive-digest-existing-media="${item.id}" data-title="${escapeHtml(item.title||item.filename||'Média sans titre')}">${normalizedMediaType(item)==='image'&&item.thumbnail?`<img src="media/${encodeURIComponent(item.thumbnail)}" alt="">`:`<span class="pdf-pill">${mediaTypeShortLabelWithIcon(item)}</span>`}<span><strong>${escapeHtml(item.title||item.filename||'Média sans titre')}</strong><small>${escapeHtml(mediaTypeShortLabel(item))}</small></span></button>`).join('')||'<p>Aucun média trouvé.</p>';
-            }catch(error){results.innerHTML=`<p>${escapeHtml(error.message||'Recherche indisponible.')}</p>`;}
-        },220));
-        results.addEventListener('click',event=>{
-            const button=event.target.closest('[data-archive-digest-existing-media]');
-            if(!button)return;
-            form.elements.media_id.value=button.dataset.archiveDigestExistingMedia;
-            selected.hidden=false;
-            selected.textContent=`Média choisi : ${button.dataset.title||''}`;
-            results.innerHTML='';
-        });
+        // « Un média existant » : la fenêtre unique des médias (champ mediaField, valeur dans media_id)
         form.addEventListener('submit',async event=>{
             event.preventDefault();
             if(mode.value==='existing'){

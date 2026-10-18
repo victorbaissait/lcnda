@@ -1555,31 +1555,12 @@
         return dl;
     }
     /* ═════════════ Images : une photo de la base, ou un fichier de l'ordinateur (intégré, réduit) ═════════════ */
-    function pickImage() {
-        return new Promise(async resolve => {
-            let rows = []; try { rows = (await api('media_av_list', {kind: 'image'})).items.filter(i => i.exists); } catch (_) {}
-            let done = false;
-            const dlg = ext.openDialog({eyebrow: 'PLACER UNE IMAGE', title: 'Choisir une image', wide: true, submitLabel: 'Placer',
-                body: `<label class="h-rc-drop"><input type="file" name="file" accept="image/png,image/jpeg,image/webp,image/gif"><span>📁 Une image de l’ordinateur (intégrée au document)…</span></label>
-                    <p class="muted">… ou une photo de la base : elle reste <b>liée</b> (objet dynamique) — retouchée dans l’app, elle se met à jour ici.</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-q placeholder="Titre ou nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher une photo"></div></div>
-                    <div class="ly-imgpick" data-list>${rows.map(r => `<label title="${esc(r.title || r.filename)}"><input type="radio" name="pick" value="${r.id}"><img src="media/${encodeURIComponent(r.filename)}" alt="" loading="lazy"><span>${esc(r.title || r.filename)}</span></label>`).join('') || '<p class="muted">Aucune photo dans la base.</p>'}</div>`,
-                onOpen: d => d.querySelector('[data-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-list] label').forEach(l => { l.hidden = !l.textContent.toLowerCase().includes(q); }); }),
-                onSubmit: async f => {
-                    const file = f.file.files[0], pick = f.querySelector('[name=pick]:checked');
-                    if (file) { if (!/^image\/(png|jpeg|webp|gif)$/.test(file.type)) { toast('Image PNG, JPEG, WebP ou GIF seulement.', 'error'); return false; } const src = await shrink(file); done = true; resolve({src, name: file.name}); return; }
-                    if (pick) { const r = rows.find(x => x.id === Number(pick.value)); done = true; resolve({src: `media/${r.filename}`, name: r.title || r.filename, mediaId: r.id}); return; }
-                    toast('Choisis une image.', 'error'); return false;
-                }});
-            dlg.addEventListener('close', () => { if (!done) resolve(null); });
-        });
-    }
-    /** Une image de l'ordinateur, réduite (2 400 px au plus) pour garder le document léger */
-    function shrink(file) {
-        return new Promise((resolve, reject) => {
-            const url = URL.createObjectURL(file), im = new Image();
-            im.onload = () => { const k = Math.min(1, 2400 / Math.max(im.naturalWidth, im.naturalHeight)), c = document.createElement('canvas'); c.width = Math.round(im.naturalWidth * k); c.height = Math.round(im.naturalHeight * k); c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); URL.revokeObjectURL(url); resolve(c.toDataURL(file.type === 'image/png' || file.type === 'image/gif' ? 'image/png' : 'image/jpeg', 0.88)); };
-            im.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Image illisible.')); }; im.src = url;
-        });
+    async function pickImage() {
+        // la fenêtre unique des médias : la photo reste liée (objet dynamique) ; une image de l'ordinateur entre dans les Médias
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const r = await P.openMediaPicker({types: ['image'], eyebrow: 'PLACER UNE IMAGE', title: 'Choisir une image', okLabel: 'Placer cette image',
+            intro: 'Elle reste liée (objet dynamique) : retouchée dans l’app, elle se met à jour ici.'});
+        return r ? {src: `media/${r.filename}`, name: r.title || r.filename, mediaId: r.id} : null;
     }
 
     /* ═════════════ Texte chaîné, sommaire, index : ce qu'affiche chaque bloc (calculé, jamais enregistré) ═════════════ */

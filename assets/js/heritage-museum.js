@@ -392,10 +392,30 @@
     }
     const itemPayload = it => ({id: it.id, room_id: it.room_id, kind: it.kind, wall: it.wall, media_id: it.media_id, object_id: it.object_id, person_id: it.person_id, file: it.file, title: it.title, cartel: it.cartel, description: it.description, in_tour: it.in_tour, settings: it.settings});
 
-    /** Choisir une photo de la base ou un objet de famille. */
+    /** Choisir des photos : la fenêtre unique des médias (plusieurs) ; le cartel se fait comme avant (date, personne, cote). */
+    async function pickMediaItems(room, done) {
+        const P = window.LCNDA_PICKER;
+        const list = await P.openMediaPicker({types: ['image'], multiple: true, eyebrow: 'MUSÉE', title: 'Choisir des photos ou documents', okLabel: 'Ajouter à la salle',
+            intro: 'Chaque élément pourra ensuite recevoir son cartel et son audio (✎).'});
+        if (!list?.length) return;
+        const full = await P.loadMedia(list.map(m => m.id), true), names = {};
+        for (const pid of [...new Set(list.map(m => Number((m.people_ids || [])[0]) || 0).filter(Boolean))]) {
+            try { const p = (await api('person', {id: pid})).person || {}; names[pid] = `${p.first_name || ''} ${p.last_name || ''}`.trim(); } catch (_) {}
+        }
+        let n = 0;
+        for (const m of list) {
+            const f = full.find(x => Number(x.id) === Number(m.id)) || m, pid = Number((m.people_ids || [])[0]) || null;
+            const cartel = [m.date_text, pid ? names[pid] : '', m.cote].filter(Boolean).join('\n');
+            try { await post('save_museum_item', {room_id: room.id, kind: /acte|registre|lettre|document|carte/i.test(m.title || '') ? 'document' : 'photo', wall: 'back', media_id: m.id, person_id: pid, title: m.title || '', cartel, description: f.description || '', in_tour: 1}); n++; }
+            catch (e) { toast(`${m.title || 'Image'} : ${e.message}`, 'error'); }
+        }
+        if (n) { toast(`${A().plural(n, 'élément ajouté', 'éléments ajoutés')}.`); done(); }
+    }
+    /** Choisir un objet de famille (grille au style de la fenêtre des médias) ; les photos passent par pickMediaItems. */
     function pickDialog(what, room, done) {
+        if (what !== 'object' && window.LCNDA_PICKER?.openMediaPicker) return pickMediaItems(room, done);
         const d = ext.openDialog({eyebrow: 'MUSÉE', title: what === 'object' ? 'Choisir un objet de famille' : 'Choisir des photos ou documents', wide: true, submitLabel: 'Ajouter à la salle',
-            body: `<input type="search" data-me-q placeholder="${what === 'object' ? 'Nom de l’objet…' : 'Titre, date, nom d’une personne…'}" class="h-me-search"><div class="h-me-pick" data-me-results><p class="muted">Recherche…</p></div><p class="muted">Clique pour choisir (plusieurs possibles). Chaque élément pourra ensuite recevoir son cartel et son audio (✎).</p>`,
+            body: `<div class="pk"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🔍</span><input type="text" class="pk-input" data-me-q placeholder="${what === 'object' ? 'Nom de l’objet…' : 'Titre, date, nom d’une personne…'}" autocomplete="off" spellcheck="false" aria-label="Chercher"></div></div><div class="mpk-grid size-big h-mu-known" data-me-results role="listbox" aria-multiselectable="true"><p class="muted">Recherche…</p></div><p class="muted">Clique pour choisir (plusieurs possibles). Chaque élément pourra ensuite recevoir son cartel et son audio (✎).</p>`,
             onSubmit: async () => {
                 const chosen = [...d.querySelectorAll('[data-me-pick].is-chosen')];
                 if (!chosen.length) { toast('Choisis au moins un élément.', 'error'); return false; }
@@ -414,8 +434,8 @@
             const q = d.querySelector('[data-me-q]').value.trim();
             try {
                 const items = (await api('museum_pick', {what: what === 'object' ? 'objects' : 'media', q})).items;
-                out.innerHTML = items.length ? items.map(r => `<button type="button" class="h-me-pick-item" data-me-pick="${esc(JSON.stringify({id: r.id, title: r.title, kind: r.kind, description: r.description, date_text: r.date_text, person_name: r.person_name, person_id: r.person_id, document_reference: r.document_reference}))}">${r.url ? `<img src="${esc(r.url)}" alt="" loading="lazy">` : '<span>🏺</span>'}<small>${esc(r.title || 'Sans titre')}${r.date_text ? ' · ' + esc(r.date_text) : ''}${r.person_name ? '<br>' + esc(r.person_name) : ''}</small></button>`).join('') : `<p class="muted">${what === 'object' ? 'Aucun objet de famille (Listes → Objets de famille).' : 'Aucune image trouvée.'}</p>`;
-                out.querySelectorAll('[data-me-pick]').forEach(b => b.addEventListener('click', () => b.classList.toggle('is-chosen')));
+                out.innerHTML = items.length ? items.map(r => `<button type="button" class="mpk-tile" role="option" aria-selected="false" data-me-pick="${esc(JSON.stringify({id: r.id, title: r.title, kind: r.kind, description: r.description, date_text: r.date_text, person_name: r.person_name, person_id: r.person_id, document_reference: r.document_reference}))}">${r.url ? `<span class="mpk-im"><img src="${esc(r.url)}" alt="" loading="lazy"></span>` : '<span class="mpk-im doc"><span aria-hidden="true">🏺</span></span>'}<span class="mpk-ck" aria-hidden="true"></span><span class="mpk-ty">${what === 'object' ? 'OBJET' : 'PHOTO'}</span><span class="mpk-tt"><b>${esc(r.title || 'Sans titre')}</b><small>${esc([r.kind || r.date_text, r.person_name].filter(Boolean).join(' · ')) || '&nbsp;'}</small></span></button>`).join('') : `<p class="muted">${what === 'object' ? 'Aucun objet de famille (Listes → Objets de famille).' : 'Aucune image trouvée.'}</p>`;
+                out.querySelectorAll('[data-me-pick]').forEach(b => b.addEventListener('click', () => { const on = b.classList.toggle('is-chosen'); b.classList.toggle('on', on); b.setAttribute('aria-selected', String(on)); b.querySelector('.mpk-ck').textContent = on ? '✓' : ''; }));
             } catch (error) { out.textContent = error.message; }
         };
         let t = 0; d.querySelector('[data-me-q]').addEventListener('input', () => { clearTimeout(t); t = setTimeout(search, 250); });

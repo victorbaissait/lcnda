@@ -1528,21 +1528,11 @@
         };
         const placeFile = file => { if (!file || !/^image\//.test(file.type)) return toast('Ce fichier n’est pas une image.', 'error'); const u = URL.createObjectURL(file), im = new Image(); im.onload = () => { placeImage(im, file.name || 'Image'); URL.revokeObjectURL(u); }; im.onerror = () => { URL.revokeObjectURL(u); toast('Image illisible.', 'error'); }; im.src = u; };
         const placeUrl = (url, name) => { const im = new Image(); im.onload = () => placeImage(im, name); im.onerror = () => toast('Image introuvable.', 'error'); im.src = url; };
-        function placeDialog() {
-            const pd = document.createElement('dialog'); pd.className = 'modal h-modal h-rt-pick';
-            pd.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>🖼️ Placer une image</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-                <div class="h-rt-pick-bar"><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-q placeholder="Titre, cote, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher une photo"></div></div><label class="button small">📥 De l’ordinateur<input type="file" accept="image/*" data-file hidden></label></div>
-                <p class="muted small">Elle arrive sur un nouveau calque. Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V / Ctrl+V).</p>
-                <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
-            document.body.append(pd); pd.addEventListener('close', () => pd.remove()); pd.querySelector('[data-x]').addEventListener('click', () => pd.close());
-            let timer = 0, seq = 0;
-            const load = async () => { const n = ++seq, grid = pd.querySelector('[data-grid]'); let items = []; try { items = (await api('image_pick', {q: pd.querySelector('[data-q]').value.trim()})).media || []; } catch (er) { grid.innerHTML = `<p class="muted">${esc(er.message)}</p>`; return; } if (n !== seq) return;
-                grid.innerHTML = items.length ? items.map(m => `<button type="button" class="h-rt-pick-item pk-card" data-f="${esc(m.filename)}" data-t="${esc(m.title || m.filename)}"><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy"><span class="pk-name">${esc(m.title || m.filename)}</span>${m.people || m.date_text ? `<small class="pk-meta">${esc([m.people, m.date_text].filter(Boolean).join(' · '))}</small>` : ''}</button>`).join('') : '<p class="muted">Aucune photo trouvée.</p>'; };
-            pd.querySelector('[data-q]').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 250); });
-            pd.querySelector('[data-grid]').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; pd.close(); placeUrl(`media/${encodeURIComponent(b.dataset.f)}`, b.dataset.t); });
-            pd.querySelector('[data-file]').addEventListener('change', e => { const f = e.target.files?.[0]; if (f) { pd.close(); placeFile(f); } });
-            pd.querySelector('[data-q]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); pd.querySelector('[data-f]')?.click(); } });
-            ext.pickMenuCss?.(); pd.showModal(); pd.querySelector('[data-q]').focus(); load();
+        /** 🖼️ Placer une image : la fenêtre unique des médias (une image de l'ordinateur y entre et se coche). */
+        async function placeDialog() {
+            const it = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image'], eyebrow: 'RETOUCHE', title: 'Placer une image', okLabel: 'Placer cette image',
+                intro: 'Elle arrive sur un nouveau calque. Tu peux aussi glisser un fichier sur la photo, ou coller une image copiée (⌘V / Ctrl+V).'});
+            if (it?.filename) placeUrl(`media/${encodeURIComponent(it.filename)}`, it.title || it.filename);
         }
         // une image glissée depuis l'ordinateur sur la photo, ou collée (⌘V) : placée sur un nouveau calque
         stage.addEventListener('dragover', e => { if ([...(e.dataTransfer?.types || [])].includes('Files')) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; } });
@@ -1798,15 +1788,13 @@
         }
         function batchPanel(box, a) {
             const chosen = new Map();
-            box.innerHTML = `<section class="h-rt-batch"><h3>« ${esc(a.name)} » sur plusieurs photos</h3><div class="h-rt-batchbar"><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-bq placeholder="Titre, cote, lieu…" autocomplete="off" spellcheck="false" aria-label="Chercher des photos"></div></div><label class="checkbox-line"><input type="checkbox" data-bshow checked> afficher la nouvelle version</label></div>
-                <div class="h-rt-batchres" data-bres></div><p data-bsel class="muted">Aucune photo choisie.</p><div class="h-rt-batchgo"><button type="button" class="button" data-bgo disabled>Appliquer</button><progress data-bprog max="1" value="0" hidden></progress><small data-bstate></small></div></section>`;
-            const res = box.querySelector('[data-bres]'), q = box.querySelector('[data-bq]'), go = box.querySelector('[data-bgo]');
+            // les photos : la fenêtre unique des médias, en plusieurs (cases ✓) ; elles s'affichent en pastilles
+            const field = window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: '', multiple: true, types: ['image'], title: 'Les photos à retoucher', okLabel: 'Prendre ces photos', placeholder: '＋ Choisir des photos…'}) : '';
+            box.innerHTML = `<section class="h-rt-batch"><h3>« ${esc(a.name)} » sur plusieurs photos</h3><div class="h-rt-batchbar"><div class="h-rt-batchfield" style="flex:1 1 260px;min-width:0">${field}</div><label class="checkbox-line"><input type="checkbox" data-bshow checked> afficher la nouvelle version</label></div>
+                <p data-bsel class="muted">Aucune photo choisie.</p><div class="h-rt-batchgo"><button type="button" class="button" data-bgo disabled>Appliquer</button><progress data-bprog max="1" value="0" hidden></progress><small data-bstate></small></div></section>`;
+            const go = box.querySelector('[data-bgo]');
             const syncSel = () => { box.querySelector('[data-bsel]').textContent = chosen.size ? `${A().plural(chosen.size, 'photo choisie', 'photos choisies')}.` : 'Aucune photo choisie.'; go.disabled = !chosen.size; };
-            let t = 0; const search = async () => { const r = await api('list', {type: 'media', q: q.value.trim(), limit: 80}).catch(() => ({rows: []}));
-                const rows = (r.rows || []).filter(m => (m.media_type || 'image') === 'image' && /\.(jpe?g|png|webp|gif|bmp|tiff?)$/i.test(m.filename || ''));
-                res.innerHTML = rows.map(m => `<label class="h-rt-bpick ${chosen.has(m.id) ? 'is-on' : ''}"><input type="checkbox" value="${m.id}" ${chosen.has(m.id) ? 'checked' : ''}><img src="media/${encodeURIComponent(m.thumbnail || m.filename)}" alt="" loading="lazy"><small>${esc(m.title || m.filename)}</small></label>`).join('') || '<p class="muted">Aucune photo trouvée.</p>';
-                res.querySelectorAll('input').forEach(c => c.addEventListener('change', () => { const m = rows.find(x => String(x.id) === c.value); if (c.checked) chosen.set(m.id, m); else chosen.delete(m.id); c.closest('label').classList.toggle('is-on', c.checked); syncSel(); })); };
-            q.addEventListener('input', () => { clearTimeout(t); t = setTimeout(search, 250); }); search();
+            box.addEventListener('media-change', e => { chosen.clear(); (e.detail.items || []).filter(m => /\.(jpe?g|png|webp|gif|bmp|tiff?)$/i.test(m.filename || '')).forEach(m => chosen.set(m.id, m)); syncSel(); });
             go.addEventListener('click', async () => {
                 const list = [...chosen.values()], prog = box.querySelector('[data-bprog]'), state = box.querySelector('[data-bstate]'), show = box.querySelector('[data-bshow]').checked;
                 go.disabled = true; prog.hidden = false; prog.max = list.length; let ok = 0;
@@ -2218,30 +2206,17 @@
     ext.openRetouch = openRetouch;
 
     /** Listes → Médias → « 🎚️ Retoucher » : une photo de l'app (les plus récentes, ou filtrées) ou une photo importée, puis la Retouche */
-    function pickRetouch({restore = false} = {}) {
+    async function pickRetouch({restore = false} = {}) {
         const open = item => { const st = A().state; st.lightboxMedia = [item]; st.lightboxIndex = 0; openRetouch('', null, restore ? {advanced: true, tab: 'restore'} : {}); };
-        const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
-        dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">RETOUCHE</span><h2>${restore ? 'Quelle photo restaurer ?' : 'Quelle photo retoucher ?'}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-            <div class="h-rt-pick-bar"><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-q placeholder="Titre, cote, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher une photo"></div></div><button type="button" class="button small secondary" data-projects title="Rouvrir un travail de retouche enregistré">📂 Projets</button><button type="button" class="button small secondary" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button><label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp" data-file hidden>📥 Importer une photo</label></div>
-            <p class="muted small">Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.</p>
-            <div class="h-rt-pick-grid" data-grid><div class="loading-block">Chargement…</div></div>`;
-        document.body.append(dlg);
-        dlg.addEventListener('close', () => dlg.remove());
-        dlg.querySelector('[data-x]').addEventListener('click', () => dlg.close());
-        let items = [], timer = 0, seq = 0;
-        const load = async () => {
-            const n = ++seq, grid = dlg.querySelector('[data-grid]');
-            try { items = (await api('image_pick', {q: dlg.querySelector('[data-q]').value.trim()})).media || []; } catch (e) { if (n === seq) grid.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; }
-            if (n !== seq) return;
-            grid.innerHTML = items.length ? items.map((m, i) => `<button type="button" class="h-rt-pick-item pk-card" data-i="${i}" title="${esc(m.title || m.filename)}"><img loading="lazy" alt="" src="media/${encodeURIComponent(m.thumbnail || m.filename)}"><span class="pk-name">${esc(m.title || m.filename)}</span>${m.people || m.date_text ? `<small class="pk-meta">${esc([m.people, m.date_text].filter(Boolean).join(' · '))}</small>` : ''}</button>`).join('') : '<p class="muted">Aucune photo ne correspond. Importe-en une avec « 📥 Importer une photo ».</p>';
-        };
-        dlg.querySelector('[data-q]').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
-        dlg.querySelector('[data-q]').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); dlg.querySelector('[data-grid] [data-i]')?.click(); } });
-        ext.pickMenuCss?.();
-        dlg.querySelector('[data-grid]').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; const m = items[+b.dataset.i]; dlg.close(); open(m); });
-        // ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias puis ouverte
-        dlg.querySelector('[data-projects]').addEventListener('click', () => retouchProjectsDialog({onOpen: async p => { dlg.close(); await ext.openRetouchProject(p.id); }}));
-        dlg.querySelector('[data-blank]').addEventListener('click', () => {
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) return toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error');
+        // la fenêtre unique des médias, avec « 📂 Projets » et « ⬜ Canevas vide » en plus
+        const m = await P.openMediaPicker({types: ['image'], eyebrow: 'RETOUCHE', title: restore ? 'Quelle photo restaurer ?' : 'Quelle photo retoucher ?', okLabel: restore ? 'Restaurer cette photo' : 'Retoucher cette photo',
+            intro: 'Une photo importée est ajoutée aux Médias (sans être rattachée à une fiche) ; ses retouches sont gardées comme versions.',
+            extra: '<button type="button" class="mpk-chip" data-projects title="Rouvrir un travail de retouche enregistré">📂 Projets</button><button type="button" class="mpk-chip" data-blank title="Une image vide, pour dessiner, écrire ou assembler des calques">⬜ Canevas vide</button>',
+            onOpen: (dlg, {close}) => {
+                dlg.querySelector('[data-projects]').addEventListener('click', () => retouchProjectsDialog({onOpen: async p => { close(); await ext.openRetouchProject(p.id); }}));
+                // ⬜ Canevas vide : une image de la taille voulue (blanche, transparente ou d'une couleur), ajoutée aux Médias puis ouverte
+                dlg.querySelector('[data-blank]').addEventListener('click', () => {
             const SIZES = [['1920x1080', 'Écran 16:9 — 1920 × 1080'], ['1080x1080', 'Carré — 1080 × 1080'], ['1240x1754', 'A4 portrait (150 dpi) — 1240 × 1754'], ['1754x1240', 'A4 paysage (150 dpi) — 1754 × 1240'], ['2480x3508', 'A4 portrait (300 dpi) — 2480 × 3508'], ['1500x2100', 'Carte postale — 1500 × 2100'], ['custom', 'Autre taille…']];
             ext.openDialog({eyebrow: 'RETOUCHE', title: '⬜ Partir d’un canevas vide', submitLabel: 'Créer et ouvrir',
                 body: `<div class="form-grid"><label class="span-2">Format<select name="size">${SIZES.map(([k, l]) => `<option value="${k}">${esc(l)}</option>`).join('')}</select></label>
@@ -2259,24 +2234,15 @@
                     const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
                     const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                     if (!r.ok || j.error) { toast(j.error || 'Création impossible.', 'error'); return false; }
-                    dlg.close(); if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
+                    close(); if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
                     open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image', fresh: true});
                 },
             });
-        });
-        dlg.querySelector('[data-file]').addEventListener('change', async e => {
-            const f = e.target.files?.[0]; if (!f) return;
-            const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[a-z0-9]+$/i, '').slice(0, 300));
-            try {
-                const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}});
-                const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
-                if (!r.ok || j.error) throw new Error(j.error || 'Import impossible.');
-                dlg.close(); toast('Photo importée dans les Médias.');
-                if (A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
-                open({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: fd.get('title'), media_type: 'image', fresh: true});
-            } catch (err) { toast(err.message, 'error'); }
-        });
-        dlg.showModal(); load();
+                });
+            }});
+        if (!m) return;
+        if (m.imported && A().state.module === 'listes') Promise.resolve(A().renderList?.()).catch(() => {});
+        open({...m, thumbnail: m.thumbnail || m.filename, media_type: 'image'});
     }
     ext.pickRetouch = pickRetouch;
     ext.openRestore = () => pickRetouch({restore: true}); // 🧭 restaurer une vieille photo, pas à pas

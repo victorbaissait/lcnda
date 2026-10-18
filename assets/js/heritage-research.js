@@ -598,7 +598,9 @@
                 const search = async () => {
                     const pkKind = APP_PK[kindSel.value]; pk.hidden = !pkKind; dl.querySelector('[data-app-qbox]').hidden = !!pkKind;
                     res.hidden = !!pkKind;
-                    if (pkKind) { res.innerHTML = ''; if (!pk.querySelector('.pk')) pk.innerHTML = window.LCNDA_PICKER.pickerField({name: 'app_pick', kind: pkKind, value: chosen && APP_PK[d.kind] === pkKind ? {id: Number(chosen.key), title: chosen.label, short: chosen.extra || ''} : null}); return; }
+                    if (pkKind) { res.innerHTML = ''; const val = chosen && APP_PK[d.kind] === pkKind ? {id: Number(chosen.key), title: chosen.label, short: chosen.extra || ''} : null;
+                        // une image, un son, une vidéo : la fenêtre unique des médias ; le reste : le menu de choix unique
+                        if (!pk.querySelector('.pk, [data-media-field]')) pk.innerHTML = pkKind === 'media' && window.LCNDA_PICKER.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image', 'audio', 'video', 'document'], value: val, title: 'Une image, un son, une vidéo'}) : window.LCNDA_PICKER.pickerField({name: 'app_pick', kind: pkKind, value: val}); return; }
                     pk.innerHTML = '';
                     const list = await appSearch(kindSel.value, q.value.trim()).catch(() => []);
                     res.innerHTML = list.map(x => `<label class="checkbox-line"><input type="radio" name="pick" value="${esc(x.key)}" data-label="${esc(x.label)}" data-extra="${esc(x.extra || '')}" ${chosen?.key === x.key ? 'checked' : ''}>${x.thumb ? `<img src="media/${encodeURIComponent(x.thumb)}" alt="" class="h-at-appthumb">` : ''} ${esc(x.label)} ${x.extra ? `<small class="muted">${esc(x.extra)}</small>` : ''}</label>`).join('') || '<p class="muted">Rien trouvé.</p>';

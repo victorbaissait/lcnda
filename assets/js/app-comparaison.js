@@ -7,46 +7,19 @@
     function renderComparisonSidebar(content,footer){
         const modeToggle=`<div class="segmented comparison-mode-toggle"><button class="${state.comparisonMode!=='images'?'is-active ':''}comparison-mode-btn" data-comparison-mode="personnes">Personnes</button><button class="${state.comparisonMode==='images'?'is-active ':''}comparison-mode-btn" data-comparison-mode="images">Images</button></div>`;
         if(state.comparisonMode==='images'){
-            content.innerHTML=`${modeToggle}<div class="search-box"><label for="comparison-image-search">Chercher un média, une personne, une cote…</label><div class="search-row"><input id="comparison-image-search" value="${escapeHtml(state.imageCompare.query)}" placeholder="Chercher un média, une personne, une cote…" autocomplete="off"></div><div class="media-compare-scope" id="comparison-image-scope"><button type="button" class="media-compare-scope-btn ${!state.imageCompare.scope?'is-active':''}" data-scope="">Tous</button><button type="button" class="media-compare-scope-btn ${state.imageCompare.scope==='person'?'is-active':''}" data-scope="person">Personne</button><button type="button" class="media-compare-scope-btn ${state.imageCompare.scope==='origin'?'is-active':''}" data-scope="origin">Enquête / battue</button><button type="button" class="media-compare-scope-btn ${state.imageCompare.scope==='name'?'is-active':''}" data-scope="name">Nom</button><button type="button" class="media-compare-scope-btn ${state.imageCompare.scope==='cote'?'is-active':''}" data-scope="cote">Côte</button></div><div id="comparison-image-suggestions" class="person-suggestions"></div></div><div id="comparison-image-results" class="person-list">${state.imageCompare.query.trim().length>=2?'':'<p>Saisis au moins deux caractères.</p>'}</div>`;
+            // images A et B : la fenêtre unique des médias, dans un champ (pastille, « 🖼 Changer », ×) — comme les personnes A et B
+            const mfSide=(side,label)=>{const it=state.imageCompare[side];const value=it?.id?{...it,thumb:it.thumb||(normalizedMediaType(it)==='image'&&(it.thumbnail||it.filename)?`media/${encodeURIComponent(it.thumbnail||it.filename)}`:'')}:null;return `<div class="pk-host"><span>${label}</span><div data-compare-mf="${side}">${window.LCNDA_PICKER?.mediaField?window.LCNDA_PICKER.mediaField({name:'',types:['image','document'],value,title:`Choisir ${label.toLowerCase()}`,okLabel:'Comparer'}):''}</div></div>`;};
+            content.innerHTML=`${modeToggle}<div class="search-box comparison-pickers">${mfSide('left','L’image A')}${mfSide('right','L’image B')}</div>`;
             footer.innerHTML=`<button class="button small secondary" id="clear-image-comparison">Réinitialiser</button>`;
-            const search=$('#comparison-image-search'),resultsBox=$('#comparison-image-results'),scopeBar=$('#comparison-image-scope'),suggestionsBox=$('#comparison-image-suggestions');
-            const renderImgResults=()=>{
-                const rows=state.imageCompare.results||[];
-                resultsBox.innerHTML=rows.length?rows.map(item=>`<article class="saved-item media-compare-result-row"><span>${mediaCompareThumb(item)}<span class="media-compare-info"><strong>${escapeHtml(item.title||item.attachment_label||item.filename)}</strong><small>${escapeHtml([item.date_text,item.document_reference,item.attachment_label].filter(Boolean).join(' · ')||'Même contexte')}</small></span></span><span class="saved-actions"><button type="button" data-image-side="left" data-image-pick="${item.id}">A</button><button type="button" data-image-side="right" data-image-pick="${item.id}">B</button></span></article>`).join(''):'<p>Aucun média trouvé.</p>';
-            };
-            // « Personne » : la personne se choisit avec le menu de choix unique, ses médias s'affichent
-            const renderPersonSuggestions=()=>{
-                if(!suggestionsBox)return;
-                if(state.imageCompare.scope!=='person'){suggestionsBox.innerHTML='';return;}
-                if(suggestionsBox.querySelector('.pk'))return;
-                const id=Number(state.imageCompare.personId)||0;
-                suggestionsBox.innerHTML=(window.LCNDA_PICKER?.pickerField({name:'image_compare_person',kind:'person',allowCreate:false,value:id?{id,title:state.imageCompare.personName||'',kind:'person'}:null})||'').replace(' name="image_compare_person"','');
-            };
-            suggestionsBox?.addEventListener('picker-change',event=>{const it=event.detail.item;state.imageCompare.personId=it&&!it.free?Number(it.id):0;state.imageCompare.personName=it?it.title:'';persistUiState();runImgSearch();},{signal:sidebarSignal()});
-            const runImgSearch=debounce(async()=>{
-                state.imageCompare.query=search.value;persistUiState();
-                const q=search.value.trim();
-                const personChosen=state.imageCompare.scope==='person'&&Number(state.imageCompare.personId);
-                if(q.length<2&&!personChosen){state.imageCompare.results=[];resultsBox.innerHTML=state.imageCompare.scope==='person'?'<p>Choisis une personne, ou saisis au moins deux caractères.</p>':'<p>Saisis au moins deux caractères.</p>';renderPersonSuggestions();return;}
-                const params={type:'media',q,limit:40,scope:state.imageCompare.scope};
-                if(state.imageCompare.scope==='person'&&state.imageCompare.personId)params.person_id=state.imageCompare.personId;
-                const data=await api('list',params);
-                state.imageCompare.results=data.rows||[];
-                renderImgResults();
-            },260);
-            search.addEventListener('input',()=>runImgSearch(),{signal:sidebarSignal()});
-            scopeBar.addEventListener('click',event=>{const btn=event.target.closest('[data-scope]');if(!btn)return;state.imageCompare.scope=btn.dataset.scope;state.imageCompare.personId=0;state.imageCompare.personName='';state.imageCompare.personSuggestions=[];$$('.media-compare-scope-btn',scopeBar).forEach(b=>b.classList.toggle('is-active',b===btn));renderPersonSuggestions();runImgSearch();},{signal:sidebarSignal()});
-            renderPersonSuggestions();
+            content.addEventListener('media-change',async event=>{
+                const side=event.target.closest('[data-compare-mf]')?.dataset.compareMf;if(!side)return;
+                const it=event.detail.item;
+                state.imageCompare[side]=it?await fetchMediaCompareInfo({...it,thumbnail:it.thumbnail||it.filename,document_reference:it.cote||it.document_reference||'',date_text:it.date_text||''}):null;
+                persistUiState();await renderComparison();
+            },{signal:sidebarSignal()});
             content.addEventListener('click',async event=>{
                 const modeBtn=event.target.closest('[data-comparison-mode]');
-                if(modeBtn){state.comparisonMode=modeBtn.dataset.comparisonMode;persistUiState();renderSidebar();await renderComparison();return;}
-                const pickBtn=event.target.closest('[data-image-pick]');
-                if(pickBtn){
-                    const id=Number(pickBtn.dataset.imagePick);
-                    const found=(state.imageCompare.results||[]).find(item=>Number(item.id)===id);
-                    if(found){state.imageCompare[pickBtn.dataset.imageSide]=found;await renderComparison();}
-                    return;
-                }
+                if(modeBtn){state.comparisonMode=modeBtn.dataset.comparisonMode;persistUiState();renderSidebar();await renderComparison();}
             },{signal:sidebarSignal()});
             $('#clear-image-comparison').addEventListener('click',async()=>{state.imageCompare={left:null,right:null,query:'',scope:'',results:[],personId:0,personName:'',personSuggestions:[]};persistUiState();renderSidebar();await renderComparison();},{signal:sidebarSignal()});
             return;
@@ -143,12 +116,12 @@
         if(right&&!right.people_links)right=await fetchMediaCompareInfo(right);
         if(token!==state.workspaceToken||state.module!=='comparaison'||state.comparisonMode!=='images')return;
         state.imageCompare.left=left;state.imageCompare.right=right;
-        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">MODE COMPARAISON</span><h2>Comparer deux documents</h2><p>Choisis deux médias dans la colonne de gauche (recherche par média, personne, nom ou cote) pour les comparer côte à côte, avec zoom indépendant sur chaque image.</p></div></header>
+        $('#workspace').innerHTML=`<section class="page"><header class="page-header"><div><span class="eyebrow">MODE COMPARAISON</span><h2>Comparer deux documents</h2><p>Choisis deux médias dans la colonne de gauche (« L’image A », « L’image B » : recherche par titre, cote, personne, lieu ou année) pour les comparer côte à côte, avec zoom indépendant sur chaque image.</p></div></header>
         <div class="media-compare-grid" id="comparison-image-grid">${comparisonImagePane('Document A',left,'left')}${comparisonImagePane('Document B',right,'right')}</div>${comparisonOverlayHtml(left,right)}</section>`;
         const grid=$('#comparison-image-grid');
         setupComparisonImageZoom(grid);
         $('#signature-overlay-opacity')?.addEventListener('input',event=>{$('.signature-overlay-top').style.opacity=String((Number(event.target.value)||0)/100);});
-        $$('[data-image-remove]',grid).forEach(button=>button.addEventListener('click',async()=>{state.imageCompare[button.dataset.imageRemove]=null;await renderComparisonImages();}));
+        $$('[data-image-remove]',grid).forEach(button=>button.addEventListener('click',async()=>{const side=button.dataset.imageRemove;state.imageCompare[side]=null;persistUiState();const f=document.querySelector(`[data-compare-mf="${side}"] [data-media-field]`);if(f)window.LCNDA_PICKER?.mediaSet?.(f,null);await renderComparisonImages();}));
     }
 
     window.LCNDA_PARTS = window.LCNDA_PARTS || {};

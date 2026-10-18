@@ -16,26 +16,11 @@
     const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => rej(new Error('Image illisible')); i.src = src; });
     const rad = d => d * Math.PI / 180;
 
-    /** Choisir des photos : de la base (recherche) ou de l'ordinateur. */
-    function pickImages() {
-        return new Promise(async resolve => {
-            let rows = [];
-            try { rows = ((await A().api('list', {type: 'media', limit: 400})).rows || []).filter(r => r.filename && (r.media_type || 'image') === 'image'); } catch (_) {}
-            let done = false;
-            const dl = ext.openDialog({eyebrow: 'ASSEMBLER', title: 'Ajouter des photos', wide: true, submitLabel: 'Ajouter',
-                body: `<label class="h-rc-drop"><input type="file" name="files" accept="image/*" multiple><span>📁 Des photos de l’ordinateur…</span></label>
-                    <p class="muted">… ou des photos déjà dans la base :</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-as-q placeholder="Titre ou nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher"></div></div>
-                    <div class="h-as-pick" data-as-list>${rows.map(r => `<label title="${esc(r.title || r.filename)}"><input type="checkbox" name="pick" value="${r.id}"><img src="${esc(url(r.thumbnail || r.filename))}" alt="" loading="lazy"><small>${esc(r.title || r.filename)}</small></label>`).join('') || '<p class="muted">Rien dans la base.</p>'}</div>`,
-                onOpen: d => d.querySelector('[data-as-q]').addEventListener('input', e => { const q = e.target.value.toLowerCase(); d.querySelectorAll('[data-as-list] label').forEach(l => { l.hidden = !l.title.toLowerCase().includes(q); }); }),
-                onSubmit: form => {
-                    const files = [...form.querySelector('[name=files]').files].map(f => ({src: URL.createObjectURL(f), name: f.name.replace(/\.[^.]+$/, '')}));
-                    const picks = [...form.querySelectorAll('[name=pick]:checked')].map(c => rows.find(r => String(r.id) === c.value)).filter(Boolean).map(r => ({src: url(r.filename), name: r.title || r.filename, media: r}));
-                    if (!files.length && !picks.length) { toast('Choisis au moins une photo.', 'error'); return false; }
-                    done = true; resolve([...picks, ...files]);
-                },
-            });
-            dl.addEventListener('close', () => { if (!done) resolve(null); });
-        });
+    /** Choisir des photos : la fenêtre unique des médias, en plusieurs (une photo de l'ordinateur y entre et se coche). */
+    async function pickImages() {
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const list = await P.openMediaPicker({types: ['image'], multiple: true, eyebrow: 'ASSEMBLER', title: 'Ajouter des photos'});
+        return list ? list.map(r => ({src: url(r.filename), name: r.title || r.filename, media: {...r, thumbnail: r.thumbnail || r.filename}})) : null;
     }
 
     /**

@@ -203,27 +203,11 @@
             step();
         }
         /* ─── ajouter ─── */
-        function pickMedia({kind = 'image', multi = true, title = 'Choisir'} = {}) {
-            const rx = kind === 'image' ? /\.(jpe?g|png|webp|gif)$/i : /\.(mp3|m4a|wav|ogg|oga|webm|aiff?|aac|flac)$/i;
-            return new Promise(res => {
-                let done = false;
-                ext.openDialog({eyebrow: 'DIAPORAMA', title, submitLabel: multi ? 'Ajouter' : 'Choisir',
-                    body: `<label>Fichier${multi ? 's' : ''} de l’ordinateur (ils vont dans les médias)<input type="file" name="f" accept="${kind === 'image' ? 'image/*' : 'audio/*'}" ${multi ? 'multiple' : ''}></label><p class="muted">ou de la base :</p><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">${kind === 'image' ? '🖼' : '🎵'}</span><input type="text" class="pk-input" data-mq placeholder="Titre, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher dans les médias"></div></div><div data-mres class="${kind === 'image' ? 'vx-mmedia h-ss-pick' : 'h-ss-picka'}"></div>`,
-                    onOpen: dg => { const q = dg.querySelector('[data-mq]'), box = dg.querySelector('[data-mres]'); let tm = 0;
-                        const go = async () => { const res = await api('list', {type: 'media', q: q.value.trim(), limit: 60}).catch(() => ({rows: []})), rows = (res.rows || res.data || []).filter(m => rx.test(m.filename || '')); box._rows = rows;
-                            box.innerHTML = rows.map((m, i) => kind === 'image' ? `<label title="${esc(m.title || m.filename)}"><input type="${multi ? 'checkbox' : 'radio'}" name="mp" value="${i}"><img src="${esc(mediaUrl(m.thumbnail || m.filename))}" alt="" loading="lazy"></label>` : `<label class="checkbox-line"><input type="radio" name="mp" value="${i}"> 🎵 ${esc(m.title || m.filename)}</label>`).join('') || '<p class="muted">Rien trouvé.</p>'; };
-                        q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go();
-                        dg.addEventListener('close', () => { if (!done) res([]); }, {once: true}); },
-                    onSubmit: async f => {
-                        const out = [], files = [...(f.querySelector('[name=f]').files || [])], rows = f.querySelector('[data-mres]')._rows || [];
-                        for (const file of files) { const fd = new FormData(); fd.append('file', file); fd.append('kind', kind === 'image' ? 'image' : 'audio'); fd.append('title', file.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
-                            const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) { toast(`${file.name} : ${j.error || 'envoi impossible'}`, 'error'); continue; }
-                            out.push({media_id: j.result.media_id, filename: j.result.filename, title: file.name.replace(/\.[^.]+$/, '')}); }
-                        [...f.querySelectorAll('[name=mp]:checked')].forEach(x => { const m = rows[Number(x.value)]; out.push({media_id: Number(m.id), filename: m.filename, title: m.title || ''}); });
-                        if (!out.length) { toast('Choisis au moins un fichier.', 'error'); return false; }
-                        done = true; res(out);
-                    }});
-            });
+        /** Photos ou son : la fenêtre unique des médias (un fichier de l'ordinateur y entre et se coche). Résout [{media_id, filename, title}] ([] si rien). */
+        async function pickMedia({kind = 'image', multi = true, title = 'Choisir'} = {}) {
+            const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des médias n’est pas encore prête. Réessaie dans un instant.', 'error'); return []; }
+            const r = await P.openMediaPicker({types: [kind === 'image' ? 'image' : 'audio'], multiple: multi, eyebrow: 'DIAPORAMA', title});
+            return (r ? (Array.isArray(r) ? r : [r]) : []).map(m => ({media_id: Number(m.id), filename: m.filename, title: m.title || ''}));
         }
         async function addPhotos() { const list = await pickMedia({title: 'Ajouter des photos'}); if (!list.length) return; list.forEach(m => show.slides.splice(cur + 1 + list.indexOf(m), 0, newSlide('photo', {media_id: m.media_id, filename: m.filename, text: m.title || ''}))); cur = Math.min(show.slides.length - 1, cur + 1); touch(); await rebuild(); }
         /* ─── ✨ le récit d'une personne : titre, photos, carte des lieux de sa vie, biographie ─── */

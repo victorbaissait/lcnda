@@ -11,7 +11,7 @@ Mode d'emploi pour un développeur (ou un futur Claude) qui crée ou modifie un 
 > Ne changent pas : les petits menus à choix fixes (Portrait / Paysage, Style, État…) restent des `<select>` simples.
 
 Maquettes validées : `docs/design/choix-personne.html`, `docs/design/choix-personnes-roles.html`,
-`docs/design/choix-lieux-et-autres.html`.
+`docs/design/choix-lieux-et-autres.html`, `docs/design/choix-image.html` (images, sons, vidéos : voir plus bas).
 
 ## Fichiers
 
@@ -20,6 +20,7 @@ Maquettes validées : `docs/design/choix-personne.html`, `docs/design/choix-pers
 | `assets/js/app-picker.js` | le composant (champ, liste, pastilles, rôles, lecture, petite fenêtre) |
 | `assets/css/picker.css` | ses styles, variante sombre comprise (`:root[data-theme="dark"]`) |
 | `lib/picker.php` | la recherche : `picker_search()` (GET `picker_search`) et `picker_place_adopt()` (POST) |
+| `assets/js/app-media-picker.js` | 🖼 la fenêtre des images, sons et vidéos (`openMediaPicker`) et son champ (`mediaField`) |
 
 `index.php` charge `assets/css/picker.css` et `assets/js/app-picker.js` (après `app.js` de préférence ; l'ordre n'est pas
 obligatoire). Les fonctions sont sur `window.LCNDA_PICKER` et aussi sur `window.LCNDA_APP` (`A().pickerField(…)`,
@@ -92,6 +93,8 @@ sortes — l'outil doit alors écouter `picker-create`), `roles`, `animals: fals
   (`overflow: hidden/auto`) est trop petit.
 - `filter: {person_id, media_type}` (médias) : seulement les médias rattachés à cette personne, et/ou d'un type
   (`image`, `audio`, `video`, `document`). Ex. `pickerField({name: 'media_id', kind: 'media', filter: {person_id: 12, media_type: 'image'}})`.
+  Pour choisir une image, un son ou une vidéo **à l'œil**, c'est `mediaField` / `openMediaPicker` (plus bas) ; `kind: 'media'`
+  ne sert plus que dans une recherche mélangée.
 - `roles: {roleList: false}` (ou `[]`) : pas de menu « rôle ▾ » du tout (un rôle déjà enregistré reste affiché, en simple texte).
 
 La case montre le symbole de la sorte (🔍 personne, 📍 lieu, 📚 source, 🖼 média, 🔍 enquête, 🧭 battue, 🏷 étiquette,
@@ -167,6 +170,76 @@ groupes `base` puis `fr`, distance dans la ligne grise).
   `{name, country?, lat?, lon?}` sans geoname_id : crée un lieu tapé à la main ou cliqué sur la carte.
 - Toutes les requêtes sont préparées ; `q` n'est jamais collé dans le SQL. Une table absente (ancienne base) donne une
   liste vide, sans erreur.
+
+## 🖼 Choisir une image, un son, une vidéo : `openMediaPicker` / `mediaField`
+
+> **Règle obligatoire** (docs/REGLES-INTERFACE.md, « Choisir une image… », maquette `docs/design/choix-image.html`) :
+> partout où l'on prend une image, un son ou une vidéo **de l'app**, c'est cette fenêtre — jamais une galerie faite à la
+> main, ni `api('list', {type: 'media'})` branché sur une grille. Un simple `<input type=file>` pour un fichier de
+> l'ordinateur seul ne change pas.
+
+Fichiers : `assets/js/app-media-picker.js` (à charger après `app-picker.js`), styles dans `assets/css/picker.css`
+(bloc « Choisir une image »), recherche `picker_search` avec `kind=media` (`lib/picker.php`). Les fonctions sont sur
+`window.LCNDA_PICKER`, `window.LCNDA_APP` et `window.LCNDA_MEDIA_PICKER`.
+
+```js
+const P = window.LCNDA_PICKER; // ou A()
+
+// 1. Un bouton « Choisir une image » : une image (ou null si Annuler / Échap)
+const m = await P.openMediaPicker({types: ['image'], title: 'La photo du faire-part', okLabel: 'Prendre cette photo'});
+if (m) img.src = `media/${encodeURIComponent(m.filename)}`;
+
+// 2. Plusieurs : une liste (cases ✓, « Utiliser ces N images ») ; null si Annuler
+const list = await P.openMediaPicker({multiple: true, types: ['image']});
+
+// 3. Sons et vidéos (vignette ▶ et durée), filtrés d'office sur la personne de l'outil (pastille « 👤 Nom × »)
+const av = await P.openMediaPicker({types: ['video', 'audio'], person: personId, eyebrow: 'MONTAGE', title: 'Ajouter un rush'});
+
+// 4. Dans un formulaire : la pastille du champ (petite vignette, titre, année, « ↗ Ouvrir », « 🖼 Changer », ×) + champ caché
+form.innerHTML += `<span class="pk-lab">Photo</span>${P.mediaField({name: 'media_id', types: ['image'], person: 12, value: row.media_id})}`;
+P.mediaField({name: 'media_ids', multiple: true, value: [4, 5]});   // → <input type=hidden name="media_ids" value="4,5">
+form.addEventListener('media-change', e => console.log(e.detail.item)); // aussi « picker-change » et « change » sur le champ caché
+P.mediaValue(fieldEl);       // 12 | [4, 5] | null
+P.mediaSet(fieldEl, 45);     // ne déclenche pas media-change
+
+// 5. Boutons en plus dans la barre (ex. « 📂 Projets ») : HTML dans extra, branchés dans onOpen
+await P.openMediaPicker({extra: '<button type="button" class="mpk-chip" data-x>📂 Projets</button>',
+    onOpen: (dlg, {finish, close}) => dlg.querySelector('[data-x]').addEventListener('click', () => { close(); openProjects(); })});
+```
+
+Options de `openMediaPicker` : `types` (`['image']` par défaut ; `'audio'`, `'video'`, `'document'`), `multiple`,
+`person` (id ou `{id, title}` : filtre mis d'office, qu'on peut retirer), `title`, `eyebrow`, `intro` (une phrase sous
+le titre), `okLabel`, `allowImport` (`true` par défaut : glisser-déposer, ⌘V, « 📁 Importer… », « 📋 Coller »),
+`value` (ids déjà choisis), `flags: true` (filtres « 📝 Pas encore transcrites », « ✅ Déjà transcrites »,
+« ✍ Avec une signature repérée » ; `flag: 'sig'` en met un d'office), `portraits: true` (« ⭐ Portraits » d'office),
+`extra` / `onOpen`. Options de `mediaField` : `name` (`''` = rien dans le formulaire), `types`, `multiple`, `person`,
+`value` (id, objet `{id, title, filename, thumb}` ou liste), `title`, `okLabel`, `placeholder`, `allowImport`.
+
+L'item rendu (comme les autres sortes du menu de choix) : `{kind: 'media', id, title, filename, thumbnail, thumb
+('media/…'), media_type ('image'|'audio'|'video'|'document'|'pdf'), sort ('photo'|'document'|'audio'|'video'), tag
+(PHOTO, ACTE, CARTE, PORTRAIT, LETTRE, TOMBE, SON, VIDÉO…), year, date_text, place (lieu de l'événement lié), cote,
+duration (secondes, si connue), portrait (0/1), has_tr (0/1), people_ids, people_count, imported (true si importé dans
+la fenêtre)}`. Pour la transcription ou la description : `await P.loadMedia([id], true)`.
+
+Dans la fenêtre : filtres avec le nombre trouvé (« Tout (n) », « 📷 Photos », « 📄 Documents », « 🎧 Sons »,
+« 🎬 Vidéos », la personne, « 🕘 Récentes » = les 40 derniers ajoutés et les derniers choisis, « ⭐ Portraits » =
+cochés « photo de la personne » ou portrait d'une fiche) ; taille des vignettes (grandes, petites, liste) retenue
+(`localStorage`, clé `lcnda-media-picker-size`) ; la liste se charge en descendant (40 par 40) ; clavier ↑ ↓ ← →,
+Espace (cocher), Entrée (valider), Échap (fermer, seulement cette fenêtre : elle s'empile au-dessus des éditeurs plein
+écran) ; une seule image : clic = choisie, double-clic ou Entrée = prise. À droite, l'aperçu : taille lue sur l'image
+et « assez grande pour imprimer en A6 / A5 / A4 » à 300 ppp (sinon « petite : écran seulement »), cote, personnes
+liées (un clic montre leurs médias), « ↗ Ouvrir le média » (la visionneuse, par-dessus ; `picker-open` sur `document`
+pour s'en occuper soi-même). Un fichier importé passe par `api.php?action=retouch_media` (`kind=image|audio|video`) :
+il entre dans les Médias, sans fiche, reste en tête de la grille et se coche.
+
+Côté serveur (`picker_search`, `kind=media`) : `media_types=image,audio`, `media_sort=photo|document|audio|video`,
+`portraits=1`, `recent=1` (+ `recent_ids=`), `media_flag=notr|tr|sig`, `person_id=`, `counts=1` (→ `counts:
+{all, photo, document, audio, video, portraits, recent}` pour la recherche en cours, sans la sorte choisie),
+`with_text=1` (avec `transcription` et `description`). La recherche porte aussi sur la date et sur le lieu et
+l'année des événements liés. Requêtes préparées ; une colonne absente (ancienne base) est remplacée par une valeur vide.
+
+Une grille qui n'est pas faite de médias (signatures repérées, objets de famille du musée) reprend le même style :
+`<div class="mpk-grid size-big">` et des `<button class="mpk-tile">` avec `.mpk-im`, `.mpk-ty`, `.mpk-tt`, `.mpk-ck`.
 
 ## Ajouter une sorte
 

@@ -525,32 +525,11 @@
                     dg.addEventListener('close', () => { if (!done) res(0); }, {once: true}); },
                 onSubmit: f => { const v = Number(f.elements.kn_pick?.value) || 0; if (!v) { toast('Choisis une personne.', 'error'); return false; } done = true; res(v); }}); });
     }
-    /** une vidéo ou un son des médias (ou de l'ordinateur) */
-    function pickAV(title = 'Une vidéo ou un son') {
-        const rx = /\.(mp4|m4v|webm|mov|ogv|mp3|m4a|wav|ogg|oga|aac|flac|aiff?)$/i;
-        return new Promise(res => { let done = false;
-            ext.openDialog({eyebrow: 'PRÉSENTATION', title, submitLabel: 'Choisir',
-                body: `<label>Fichier de l’ordinateur (il va dans les médias)<input type="file" name="f" accept="video/*,audio/*"></label><p class="muted">ou des médias :</p><div class="pk"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🎬</span><input type="text" class="pk-input" data-mq placeholder="Titre, nom du fichier…" autocomplete="off" spellcheck="false" aria-label="Chercher une vidéo ou un son"></div><div class="pk-list is-static" data-mres></div></div>`,
-                onOpen: dg => { const q = dg.querySelector('[data-mq]'), box = dg.querySelector('[data-mres]'); let tm = 0;
-                    // liste au format du menu de choix : symbole, titre, ligne grise ; clic ou Entrée = choisir
-                    const isVid = m => /\.(mp4|m4v|webm|mov|ogv)$/i.test(m.filename || '');
-                    let act = 0;
-                    const pickRow = i => { const m = box._rows?.[i]; if (!m) return; done = true; res({media_id: Number(m.id), filename: m.filename, kind: isVid(m) ? 'video' : 'audio', title: m.title || ''}); dg.close(); };
-                    const paintOn = () => box.querySelectorAll('.pk-item').forEach((r, k) => { r.classList.toggle('on', k === act); if (k === act) r.scrollIntoView({block: 'nearest'}); });
-                    const go = async () => { const rows = ((await api('list', {type: 'media', q: q.value.trim(), limit: 80}).catch(() => ({rows: []}))).rows || []).filter(m => rx.test(m.filename || '')); box._rows = rows; act = 0;
-                        box.innerHTML = rows.length ? `<div class="pk-head"><span>${rows.length} ${rows.length > 1 ? 'médias trouvés' : 'média trouvé'}</span><span>↑ ↓ Entrée</span></div><div class="pk-scroll">${rows.map((m, i) => `<div class="pk-item pk-row${i ? '' : ' on'}" role="option" data-i="${i}"><span class="pk-ic" aria-hidden="true">${isVid(m) ? '🎬' : '🎵'}</span><div class="pk-txt"><div class="pk-name">${esc(m.title || m.filename)}</div><div class="pk-meta">${esc([isVid(m) ? 'Vidéo' : 'Son', m.title && m.title !== m.filename ? m.filename : '', m.date_text].filter(Boolean).join(' · '))}</div></div></div>`).join('')}</div>`
-                            : `<div class="pk-empty">Aucune vidéo ni aucun son${q.value.trim() ? ` pour « ${esc(q.value.trim())} »` : ''}.</div>`; };
-                    box.addEventListener('click', e => { const r = e.target.closest('[data-i]'); if (r) pickRow(Number(r.dataset.i)); });
-                    q.addEventListener('keydown', e => { const n = box._rows?.length || 0;
-                        if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && n) { e.preventDefault(); act = (act + (e.key === 'ArrowDown' ? 1 : -1) + n) % n; paintOn(); }
-                        else if (e.key === 'Enter' && n) { e.preventDefault(); pickRow(act); } });
-                    q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(go, 250); }); go(); setTimeout(() => q.focus(), 30);
-                    dg.addEventListener('close', () => { if (!done) res(null); }, {once: true}); },
-                onSubmit: async f => {
-                    const file = f.querySelector('[name=f]').files?.[0];
-                    if (file) { const kind = /^video\//.test(file.type) || /\.(mp4|m4v|webm|mov|ogv)$/i.test(file.name) ? 'video' : 'audio'; const u = await uploadBlob(file, file.name, kind); done = true; res({...u, kind, title: file.name.replace(/\.[^.]+$/, '')}); return; }
-                    toast('Choisis un fichier, ou clique une vidéo ou un son de la liste.', 'error'); return false;
-                }}); });
+    /** une vidéo ou un son : la fenêtre unique des médias (un fichier de l'ordinateur y entre et se coche) */
+    async function pickAV(title = 'Une vidéo ou un son', types = ['video', 'audio']) {
+        const P = window.LCNDA_PICKER; if (!P?.openMediaPicker) { toast('La fenêtre des médias n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const m = await P.openMediaPicker({types, eyebrow: 'PRÉSENTATION', title, okLabel: 'Choisir'});
+        return m ? {media_id: Number(m.id), filename: m.filename, kind: m.media_type === 'video' ? 'video' : 'audio', title: m.title || ''} : null;
     }
     const BASE_FONTS = ['Helvetica Neue', 'Helvetica', 'Arial', 'Avenir Next', 'Futura', 'Gill Sans', 'Optima', 'Verdana', 'Trebuchet MS', 'Segoe UI', 'Calibri', 'Candara', 'Georgia', 'Garamond', 'EB Garamond', 'Palatino', 'Book Antiqua', 'Baskerville', 'Times New Roman', 'Didot', 'Bodoni 72', 'Cochin', 'Hoefler Text', 'Rockwell', 'Courier New', 'American Typewriter', 'Copperplate', 'Brush Script MT', 'Snell Roundhand', 'Zapfino', 'Apple Chancery', 'Lucida Handwriting', 'Papyrus', 'Impact', 'Chalkboard SE', 'Comic Sans MS', 'serif', 'sans-serif', 'monospace', 'cursive'];
     let localFonts = null;
@@ -1155,7 +1134,7 @@
                 case 'bgall': { const b = JSON.stringify(S().bg || {type: 'theme'}); show.slides.forEach(s => { s.bg = JSON.parse(b); }); paintAll(); commit(); return toast('Ce fond va maintenant à toutes les diapositives.'); }
                 case 'theme': show.theme = THEMES[arg] ? arg : show.theme; paintAll(); return commit();
                 case 'dclear': setPath(show, arg, undefined); paintAll(); return commit();
-                case 'music': { const m = await pickAV('Une musique pendant la lecture'); if (!m) return; if (m.kind !== 'audio') return toast('Choisis un son (MP3, M4A, WAV…).', 'error'); show.music = {media_id: m.media_id, filename: m.filename, title: m.title || 'Musique'}; paintInsp(); return commit(); }
+                case 'music': { const m = await pickAV('Une musique pendant la lecture', ['audio']); if (!m) return; if (m.kind !== 'audio') return toast('Choisis un son (MP3, M4A, WAV…).', 'error'); show.music = {media_id: m.media_id, filename: m.filename, title: m.title || 'Musique'}; paintInsp(); return commit(); }
                 case 'nomusic': show.music = null; paintInsp(); return commit();
                 case 'osel': { const q = obj(arg); if (q) { sel = new Set([q.id]); afterSel(); } return; }
                 case 'ohide': { const q = obj(arg); if (q) { if (q.hide) delete q.hide; else q.hide = true; touch(true); } return; }

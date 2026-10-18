@@ -7040,10 +7040,8 @@ ${backupSectionHtml()}
         const initial=state.lightboxMedia[state.lightboxIndex];
         if(!initial)return;
         $('#media-compare-dialog')?.remove();
-        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal media-compare-dialog" id="media-compare-dialog"><div class="modal-head"><div><span class="eyebrow">MÉDIAS</span><h2>Comparer deux documents</h2></div><button class="icon-button" value="cancel" type="button" id="media-compare-close">×</button></div><div class="media-compare-body"><div class="media-compare-search"><div class="media-compare-search-col"><label for="media-compare-search">Chercher un média, une personne, une cote…</label><input id="media-compare-search" placeholder="Chercher un média, une personne, une cote…" autocomplete="off"><div class="media-compare-scope" id="media-compare-scope"><button type="button" class="media-compare-scope-btn is-active" data-scope="">Tous</button><button type="button" class="media-compare-scope-btn" data-scope="person">Personne</button><button type="button" class="media-compare-scope-btn" data-scope="origin">Enquête / battue</button><button type="button" class="media-compare-scope-btn" data-scope="name">Nom</button><button type="button" class="media-compare-scope-btn" data-scope="cote">Côte</button></div><div id="media-compare-suggestions" class="person-suggestions"></div></div><div class="media-compare-results-col"><div class="media-compare-results-label" id="media-compare-results-label"></div><div id="media-compare-results"></div></div></div><div class="media-compare-grid" id="media-compare-grid"></div></div></dialog>`);
-        const dialog=$('#media-compare-dialog'),search=$('#media-compare-search'),results=$('#media-compare-results'),resultsLabel=$('#media-compare-results-label'),grid=$('#media-compare-grid'),scopeBar=$('#media-compare-scope'),suggestionsBox=$('#media-compare-suggestions');
-        let mediaCompareScope='';
-        let mediaComparePersonId=0,mediaComparePersonName='',mediaComparePersonSuggestions=[];
+        document.body.insertAdjacentHTML('beforeend',`<dialog class="modal media-compare-dialog" id="media-compare-dialog"><div class="modal-head"><div><span class="eyebrow">MÉDIAS</span><h2>Comparer deux documents</h2></div><button class="icon-button" value="cancel" type="button" id="media-compare-close">×</button></div><div class="media-compare-body"><div class="media-compare-search"><div class="media-compare-search-col"><span class="pk-lab">Un autre document de tes médias</span><button type="button" class="pk-box media-compare-pickbtn" id="media-compare-search"><span class="pk-ico" aria-hidden="true">🖼</span><span>Chercher : titre, cote, personne, lieu, année…</span></button><small class="muted">La fenêtre des médias s’ouvre, filtrée sur la personne du document quand il y en a une.</small></div><div class="media-compare-results-col"><div class="media-compare-results-label" id="media-compare-results-label"></div><div id="media-compare-results"></div></div></div><div class="media-compare-grid" id="media-compare-grid"></div></div></dialog>`);
+        const dialog=$('#media-compare-dialog'),search=$('#media-compare-search'),results=$('#media-compare-results'),resultsLabel=$('#media-compare-results-label'),grid=$('#media-compare-grid');
         let left=initial,right=null,pickTarget='right',baseCandidates=(state.lightboxMedia||[]).filter(item=>Number(item.id)!==Number(left.id));
         const setupCompareZoom=()=>setupComparisonImageZoom(grid);
         const renderGrid=()=>{
@@ -7058,111 +7056,46 @@ ${backupSectionHtml()}
             const people=(item.people_links||item.people||[]).map(p=>p.name).filter(Boolean);
             return people[0]||'';
         };
+        // à droite : les documents du même endroit (la visionneuse d'où l'on vient) ; le reste passe par la fenêtre des médias
         const renderResults=list=>{
             const name=targetEntityName();
-            resultsLabel.innerHTML=`Choisis un média pour <span class="media-compare-target-tag">${pickTarget==='left'?'Document A':'Document B'}</span>${name?`<span class="media-compare-target-name">${escapeHtml(name)}</span>`:''}`;
-            results.classList.toggle('is-search-list',search.value.trim().length>=2);
+            resultsLabel.innerHTML=`Du même endroit, pour <span class="media-compare-target-tag">${pickTarget==='left'?'Document A':'Document B'}</span>${name?`<span class="media-compare-target-name">${escapeHtml(name)}</span>`:''}`;
             const filtered=list.filter(item=>Number(item.id)!==currentExcludedId());
-            results.innerHTML=filtered.length?filtered.map(item=>`<button type="button" data-media-candidate="${item.id}">${mediaCompareThumb(item)}<span class="media-compare-info"><strong>${escapeHtml(item.title||item.attachment_label||item.filename)}</strong><small>${escapeHtml([item.date_text,item.document_reference,item.attachment_label].filter(Boolean).join(' · ')||'Même contexte')}</small></span></button>`).join(''):'<p>Aucun média trouvé.</p>';
+            results.innerHTML=filtered.length?filtered.map(item=>`<button type="button" data-media-candidate="${item.id}">${mediaCompareThumb(item)}<span class="media-compare-info"><strong>${escapeHtml(item.title||item.attachment_label||item.filename)}</strong><small>${escapeHtml([item.date_text,item.document_reference,item.attachment_label].filter(Boolean).join(' · ')||'Même contexte')}</small></span></button>`).join(''):'<p>Pas d’autre document ici : cherche dans tes médias.</p>';
         };
-        const setPickTarget=target=>{pickTarget=target;renderGrid();renderResults(state.mediaCompareResults||baseCandidates);search.focus();};
-        const renderMediaComparePersonSuggestions=()=>{
-            if(!suggestionsBox||mediaCompareScope!=='person')return;
-            if(mediaComparePersonId){
-                suggestionsBox.innerHTML=`<span class="person-suggestion-locked">Personne choisie : <strong>${escapeHtml(mediaComparePersonName)}</strong> <button type="button" data-person-suggest-clear="1">changer</button></span>`;
-                return;
-            }
-            const list=mediaComparePersonSuggestions||[];
-            suggestionsBox.innerHTML=list.length?`<span class="person-suggestion-label">Suggestions :</span>${list.map(p=>`<button type="button" class="person-suggestion-chip" data-person-suggest="${p.id}" data-person-suggest-name="${escapeHtml(personName(p))}">${escapeHtml(personName(p))}${years(p)?` <small>${escapeHtml(years(p))}</small>`:''}</button>`).join('')}`:'';
+        const choose=found=>{
+            if(pickTarget==='left'){left=found;baseCandidates=(state.lightboxMedia||[]).filter(item=>Number(item.id)!==Number(left.id));}
+            else right=found;
+            pickTarget='right';
+            renderGrid();
+            renderResults(baseCandidates);
         };
-        state.mediaCompareResults=baseCandidates;
+        const setPickTarget=target=>{pickTarget=target;renderGrid();renderResults(baseCandidates);search.focus();};
         renderGrid();
         renderResults(baseCandidates);
         fetchMediaCompareInfo(initial).then(enriched=>{
             if(left===initial){left=enriched;renderGrid();}
         });
+        // 🖼 la fenêtre unique des médias (par-dessus), filtrée sur la personne du document
+        search.addEventListener('click',async()=>{
+            const ref=pickTarget==='left'?(right||left):left;
+            const pid=Number((ref?.people_links||[])[0]?.id||0)||null;
+            const it=await window.LCNDA_PICKER?.openMediaPicker?.({types:['image','document'],person:pid,eyebrow:'COMPARER',title:pickTarget==='left'?'Le document A':'Le document B',okLabel:'Comparer'});
+            if(!it)return;
+            if(Number(it.id)===currentExcludedId()){toast('C’est déjà l’autre document.');return;}
+            choose(await fetchMediaCompareInfo({...it,thumbnail:it.thumbnail||it.filename,document_reference:it.cote||'',date_text:it.date_text||''}));
+        });
         results.addEventListener('click',event=>{
             const btn=event.target.closest('[data-media-candidate]');if(!btn)return;
-            const id=Number(btn.dataset.mediaCandidate);
-            const found=(state.mediaCompareResults||baseCandidates).find(item=>Number(item.id)===id);
-            if(!found)return;
-            if(pickTarget==='left'){left=found;baseCandidates=(state.lightboxMedia||[]).filter(item=>Number(item.id)!==Number(left.id));}
-            else right=found;
-            pickTarget='right';
-            renderGrid();
-            renderResults(state.mediaCompareResults||baseCandidates);
+            const found=baseCandidates.find(item=>Number(item.id)===Number(btn.dataset.mediaCandidate));
+            if(found)choose(found);
         });
         grid.addEventListener('click',event=>{
             const pickBtn=event.target.closest('[data-compare-pick]');
             if(pickBtn){setPickTarget(pickBtn.dataset.comparePick);return;}
             const removeBtn=event.target.closest('[data-compare-remove]');
-            if(removeBtn){right=null;pickTarget='right';renderGrid();renderResults(state.mediaCompareResults||baseCandidates);}
+            if(removeBtn){right=null;pickTarget='right';renderGrid();renderResults(baseCandidates);}
         });
-        let compareSeq=0;// une recherche plus lente qui revient après la suivante n'écrase pas ses résultats
-        search.addEventListener('input',debounce(async()=>{
-            const seq=++compareSeq;
-            if(mediaComparePersonId){mediaComparePersonId=0;mediaComparePersonName='';}
-            const q=search.value.trim();
-            if(q.length<2){state.mediaCompareResults=baseCandidates;mediaComparePersonSuggestions=[];renderMediaComparePersonSuggestions();renderResults(baseCandidates);return;}
-            if(mediaCompareScope==='person'&&!mediaComparePersonId){
-                api('people',{q,limit:8}).then(peopleData=>{
-                    mediaComparePersonSuggestions=peopleData.people||[];
-                    renderMediaComparePersonSuggestions();
-                }).catch(()=>{});
-            }else if(suggestionsBox){
-                suggestionsBox.innerHTML='';
-            }
-            const params={type:'media',q,limit:30,scope:mediaCompareScope};
-            if(mediaCompareScope==='person'&&mediaComparePersonId)params.person_id=mediaComparePersonId;
-            try{
-                const data=await api('list',params);
-                if(seq!==compareSeq)return;
-                state.mediaCompareResults=data.rows||[];
-                renderResults(state.mediaCompareResults);
-            }catch(error){if(seq===compareSeq)toast(error.message,'error');}
-        },260));
-        scopeBar.addEventListener('click',event=>{
-            const btn=event.target.closest('[data-scope]');if(!btn)return;
-            mediaCompareScope=btn.dataset.scope;
-            mediaComparePersonId=0;mediaComparePersonName='';mediaComparePersonSuggestions=[];
-            $$('.media-compare-scope-btn',scopeBar).forEach(b=>b.classList.toggle('is-active',b===btn));
-            renderMediaComparePersonSuggestions();
-            const q=search.value.trim();
-            if(q.length<2){state.mediaCompareResults=baseCandidates;renderResults(baseCandidates);return;}
-            const seq=++compareSeq;
-            api('list',{type:'media',q,limit:30,scope:mediaCompareScope}).then(data=>{
-                if(seq!==compareSeq)return;
-                state.mediaCompareResults=data.rows||[];
-                renderResults(state.mediaCompareResults);
-            }).catch(error=>{if(seq===compareSeq)toast(error.message,'error');});
-        });
-        if(suggestionsBox){
-            suggestionsBox.addEventListener('click',event=>{
-                const suggestBtn=event.target.closest('[data-person-suggest]');
-                if(suggestBtn){
-                    mediaComparePersonId=Number(suggestBtn.dataset.personSuggest);
-                    mediaComparePersonName=suggestBtn.dataset.personSuggestName||'';
-                    search.value=mediaComparePersonName;
-                    renderMediaComparePersonSuggestions();
-                    api('list',{type:'media',q:mediaComparePersonName,limit:30,scope:mediaCompareScope,person_id:mediaComparePersonId}).then(data=>{
-                        state.mediaCompareResults=data.rows||[];
-                        renderResults(state.mediaCompareResults);
-                    });
-                    return;
-                }
-                const suggestClearBtn=event.target.closest('[data-person-suggest-clear]');
-                if(suggestClearBtn){
-                    mediaComparePersonId=0;mediaComparePersonName='';
-                    renderMediaComparePersonSuggestions();
-                    const q=search.value.trim();
-                    if(q.length<2)return;
-                    api('list',{type:'media',q,limit:30,scope:mediaCompareScope}).then(data=>{
-                        state.mediaCompareResults=data.rows||[];
-                        renderResults(state.mediaCompareResults);
-                    });
-                }
-            });
-        }
         $('#media-compare-close').addEventListener('click',()=>{dialog.close();dialog.remove();});
         dialog.addEventListener('close',()=>dialog.remove());
         dialog.showModal();

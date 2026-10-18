@@ -103,7 +103,7 @@
                 return `<div class="h-media-role"><h5>${esc(label)}</h5><div class="collection-media-edit">${items.map(m => `<span class="collection-media-item">${A().mediaThumbHtml(m)}<button type="button" data-h-media-remove="${m.id}" aria-label="Retirer">✕</button></span>`).join('')}</div>
                 <input type="file" multiple data-h-upload-role="${esc(role)}" accept="${esc(accept || 'image/*,application/pdf')}"></div>`;
             }).join('')}
-            ${id ? `<div class="h-media-link h-pk-solo"><span class="pk-lab">Ou lier un média déjà dans l’application</span>${pfLocal({name: 'h_media_link', kind: 'media', placeholder: 'Titre, cote, nom du fichier…'})}<select data-h-media-link-role>${roles.map(([role, label]) => `<option value="${esc(role)}">${esc(label)}</option>`).join('')}</select></div>` : '<small class="muted">Les fichiers choisis sont envoyés à l’enregistrement.</small>'}
+            ${id ? `<div class="h-media-link h-pk-solo"><span class="pk-lab">Ou lier un média déjà dans l’application</span>${window.LCNDA_PICKER?.mediaField ? window.LCNDA_PICKER.mediaField({name: '', types: ['image', 'document', 'audio', 'video'], title: 'Lier un média de l’application', okLabel: 'Lier ce média', placeholder: 'Choisir dans les médias…'}) : pfLocal({name: 'h_media_link', kind: 'media', placeholder: 'Titre, cote, nom du fichier…'})}<select data-h-media-link-role>${roles.map(([role, label]) => `<option value="${esc(role)}">${esc(label)}</option>`).join('')}</select></div>` : '<small class="muted">Les fichiers choisis sont envoyés à l’enregistrement.</small>'}
         </div>`;
     }
     function bindMediaEditor(root) {
@@ -117,14 +117,14 @@
                 catch (error) { toast(error.message, 'error'); }
             }
         });
-        // « Lier un média déjà dans l'application » : le menu de choix unique (sorte media)
+        // « Lier un média déjà dans l'application » : la fenêtre unique des médias (champ mediaField)
         box.addEventListener('picker-change', async event => {
-            const it = event.detail.item, field = event.target.closest('.pk');
+            const it = event.detail.item, field = event.target.closest('[data-media-field], .pk');
             if (!it?.id || !field) return;
             try {
                 await api('link_collection_media', {}, {method: 'POST', body: {collection_type: type, collection_id: id, media_id: it.id, role: box.querySelector('[data-h-media-link-role]').value}});
                 toast(`« ${it.title} » lié. Il apparaîtra après l’enregistrement.`);
-                PK().pickerSet(field, null);
+                if (field.matches('[data-media-field]')) window.LCNDA_PICKER.mediaSet(field, null); else PK().pickerSet(field, null);
             } catch (error) { toast(error.message, 'error'); }
         });
     }
@@ -363,51 +363,17 @@
 :root[data-theme="dark"] .h-rt-pick .pk-card{border-color:#3a3a3a}:root[data-theme="dark"] .h-rt-pick .pk-card:hover{border-color:#ddd}:root[data-theme="dark"] .h-rt-pick .pk-card.on{border-color:#4d9fff;background:#16263d;box-shadow:inset 0 -4px 0 #4d9fff}:root[data-theme="dark"] .h-rt-pick .pk-card mark{background:#6b5a00}`;
         document.head.appendChild(st);
     }
-    function pickImage({eyebrow = 'MÉDIAS', title = 'Choisir une image', intro = '', filter = '', filters = true, allowImport = true, extra = ''} = {}) {
-        return new Promise(resolve => {
-            let done = false, items = [], timer = 0, seq = 0, active = 0;
-            const finish = v => { if (done) return; done = true; resolve(v); dlg.close(); };
-            const dlg = document.createElement('dialog'); dlg.className = 'modal h-modal h-rt-pick';
-            dlg.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><button type="button" class="icon-button" data-x aria-label="Fermer">×</button></div>
-                <div class="h-rt-pick-bar"><div class="pk h-pick-q"><div class="pk-box"><span class="pk-ico" aria-hidden="true">🖼</span><input type="text" class="pk-input" data-q placeholder="Titre, cote, date, nom d’une personne…" autocomplete="off" spellcheck="false" aria-label="Chercher une image"></div></div>${filters ? `<select data-f aria-label="Filtre">${[['', 'Toutes les images'], ['notr', 'Pas encore transcrites'], ['tr', 'Déjà transcrites'], ['sig', 'Avec une signature repérée']].map(([k, l]) => `<option value="${k}" ${k === filter ? 'selected' : ''}>${l}</option>`).join('')}</select>` : ''}${extra}${allowImport ? '<label class="button small"><input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-file hidden>📥 Image de l’ordinateur</label>' : ''}</div>
-                ${intro ? `<p class="muted small">${intro}</p>` : ''}<div class="pk-head h-pick-head" data-head hidden></div><div class="h-rt-pick-grid" data-grid role="listbox"><div class="loading-block">Chargement…</div></div>`;
-            pickMenuCss();
-            document.body.append(dlg);
-            dlg.addEventListener('close', () => { dlg.remove(); if (!done) { done = true; resolve(null); } });
-            dlg.querySelector('[data-x]').addEventListener('click', () => dlg.close());
-            const grid = dlg.querySelector('[data-grid]'), q = dlg.querySelector('[data-q]'), f = dlg.querySelector('[data-f]');
-            const load = async () => { const n = ++seq;
-                try { items = (await A().api('image_pick', {q: q.value.trim(), filter: f?.value || ''})).media || []; } catch (e) { if (n === seq) grid.innerHTML = `<p class="muted">${esc(e.message)}</p>`; return; }
-                if (n !== seq) return;
-                active = 0;
-                const head = dlg.querySelector('[data-head]'); head.hidden = !items.length;
-                head.innerHTML = `<span>${items.length} ${items.length > 1 ? 'images trouvées' : 'image trouvée'}</span><span>↑ ↓ ← → Entrée</span>`;
-                // cartes au style du menu de choix : vignette, titre (lettres tapées surlignées), ligne grise, badge
-                const qq = q.value.trim(), hl = t => { const e = esc(t); if (qq.length < 2) return e; const i = e.toLowerCase().indexOf(esc(qq).toLowerCase()); return i < 0 ? e : e.slice(0, i) + '<mark>' + e.slice(i, i + esc(qq).length) + '</mark>' + e.slice(i + esc(qq).length); };
-                grid.innerHTML = items.length ? items.map((m, i) => `<button type="button" class="h-rt-pick-item pk-card${i === 0 ? ' on' : ''}" role="option" data-i="${i}" title="${esc(m.title || m.filename)}"><img loading="lazy" alt="" src="media/${encodeURIComponent(m.thumbnail || m.filename)}">${Number(m.has_tr) ? '<b class="pk-badge2 blue h-pick-badge" title="Déjà transcrite">📝 transcrite</b>' : ''}<span class="pk-name">${hl(m.title || m.filename)}</span>${m.people || m.date_text ? `<small class="pk-meta">${esc([m.people, m.date_text].filter(Boolean).join(' · '))}</small>` : ''}</button>`).join('')
-                    : `<p class="muted pk-empty">${q.value.trim() || f?.value ? 'Aucune image ne correspond.' : 'Aucune image dans l’app pour l’instant.'}${allowImport ? ' Prends-en une sur l’ordinateur (« 📥 Image de l’ordinateur »).' : ''}</p>`; };
-            q.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(load, 220); });
-            // clavier comme le menu : ↑ ↓ ← → pour choisir, Entrée pour valider
-            const setOn = i => { const cards = [...grid.querySelectorAll('.pk-card')]; if (!cards.length) return; active = (i + cards.length) % cards.length; cards.forEach((c, k) => c.classList.toggle('on', k === active)); cards[active].scrollIntoView({block: 'nearest'}); };
-            const perRow = () => { const cards = grid.querySelectorAll('.pk-card'); if (cards.length < 2) return 1; const top = cards[0].offsetTop; let n = 0; for (const c of cards) { if (c.offsetTop !== top) break; n++; } return n || 1; };
-            q.addEventListener('keydown', e => {
-                if (e.key === 'Enter') { e.preventDefault(); if (items[active]) finish(items[active]); }
-                else if (e.key === 'ArrowRight' && q.selectionStart === q.value.length) { e.preventDefault(); setOn(active + 1); }
-                else if (e.key === 'ArrowLeft' && q.selectionEnd === 0) { e.preventDefault(); setOn(active - 1); }
-                else if (e.key === 'ArrowDown') { e.preventDefault(); setOn(active + perRow()); }
-                else if (e.key === 'ArrowUp') { e.preventDefault(); setOn(active - perRow()); }
-            });
-            f?.addEventListener('change', load);
-            grid.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) finish(items[+b.dataset.i]); });
-            dlg.querySelector('[data-file]')?.addEventListener('change', async e => { const file = e.target.files?.[0]; if (!file) return;
-                const fd = new FormData(); fd.append('file', file); fd.append('kind', 'image'); fd.append('title', file.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
-                grid.innerHTML = '<div class="loading-block">Envoi de l’image…</div>';
-                try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'Envoi impossible.');
-                    finish({id: j.result.media_id, filename: j.result.filename, thumbnail: j.result.filename, title: file.name.replace(/\.[^.]+$/, ''), transcription: '', imported: true}); }
-                catch (err) { toast(err.message, 'error'); load(); } });
-            dlg.showModal(); q.focus(); load();
-            dlg._pickFinish = finish; // pour les boutons ajoutés (« extra »)
-        });
+    /** 🖼️ Choisir une image de l'app : la fenêtre unique (app-media-picker.js, maquette docs/design/choix-image.html).
+     *  Même promesse qu'avant pour les outils : {id, filename, thumbnail, title, transcription, has_tr, imported…} ou null.
+     *  filters : les filtres « transcrites / signature repérée » en plus ; filter : celui qui est mis d'office. */
+    async function pickImage({eyebrow = 'MÉDIAS', title = 'Choisir une image', intro = '', filter = '', filters = true, allowImport = true, extra = '', person = null} = {}) {
+        const P = window.LCNDA_PICKER;
+        if (!P?.openMediaPicker) { toast('La fenêtre des images n’est pas encore prête. Réessaie dans un instant.', 'error'); return null; }
+        const it = await P.openMediaPicker({types: ['image'], eyebrow, title, intro, allowImport, flags: !!filters, flag: filter, extra, person});
+        if (!it) return null;
+        // la transcription n'est pas dans la liste (trop longue) : relue pour l'image choisie
+        const [full] = await P.loadMedia([it.id], true).catch(() => []);
+        return {...it, ...(full || {}), thumbnail: (full || it).thumbnail || it.filename, transcription: full?.transcription || '', imported: !!it.imported};
     }
     setTimeout(() => { ext.miniMap = miniMap; ext.uploadFiles = uploadFiles; ext.openDialog = openDialog; ext.tools = tools; ext.refreshView = refreshView; ext.mediaEditorHtml = mediaEditorHtml; ext.bindMediaEditor = bindMediaEditor; ext.uploadMediaEditor = uploadMediaEditor; ext.placeField = placeField; ext.thumbs = thumbs; ext.pickImage = pickImage; ext.pickMenuCss = pickMenuCss; ext.placeCoords = placeTextAndCoords; pickMenuCss(); }, 0);
     const finite = v => v !== null && v !== '' && v !== undefined && Number.isFinite(Number(v));

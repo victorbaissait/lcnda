@@ -95,7 +95,14 @@ function picker_search(PDO $pdo, array $get): array
     $offset = max(0, (int) ($get['offset'] ?? 0));
     $limit = max(1, min(100, (int) ($get['limit'] ?? 30)));
     $opts = ['animals' => (string) ($get['animals'] ?? '1') !== '0', 'mixed' => count($kinds) > 1,
-        'person_id' => max(0, (int) ($get['person_id'] ?? 0)), 'media_type' => in_array($get['media_type'] ?? '', ['image', 'audio', 'video', 'document'], true) ? $get['media_type'] : ''];
+        'person_id' => max(0, (int) ($get['person_id'] ?? 0)), 'media_type' => in_array($get['media_type'] ?? '', ['image', 'audio', 'video', 'document'], true) ? $get['media_type'] : '',
+        // fenêtre « Choisir une image » (openMediaPicker) : sortes permises, une sorte, portraits, récentes, transcription / signature
+        'media_types' => array_values(array_intersect(explode(',', strtolower((string) ($get['media_types'] ?? ''))), ['image', 'audio', 'video', 'document'])),
+        'media_sort' => in_array($get['media_sort'] ?? '', ['photo', 'document', 'audio', 'video'], true) ? $get['media_sort'] : '',
+        'portraits' => (string) ($get['portraits'] ?? '') === '1', 'recent' => (string) ($get['recent'] ?? '') === '1',
+        'recent_ids' => array_slice(array_map('intval', explode(',', (string) ($get['recent_ids'] ?? ''))), 0, 60),
+        'media_flag' => in_array($get['media_flag'] ?? '', ['notr', 'tr', 'sig'], true) ? $get['media_flag'] : '',
+        'with_text' => (string) ($get['with_text'] ?? '') === '1']; // avec la transcription (relecture d'un média choisi)
     // near=lat,lon : les lieux les plus proches d'un point cliqué sur la carte
     if (in_array('place', $kinds, true) && preg_match('/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/', (string) ($get['near'] ?? ''), $m)) {
         return ['groups' => picker_places_near($pdo, (float) $m[1], (float) $m[2], min($limit, 30)), 'more' => false, 'next_offset' => 0];
@@ -112,7 +119,12 @@ function picker_search(PDO $pdo, array $get): array
 
     if (count($kinds) === 1) {
         $r = picker_kind($pdo, $kinds[0], $q, $offset, $limit, $opts);
-        return ['groups' => $r['groups'], 'more' => $r['more'], 'next_offset' => $offset + $limit];
+        $out = ['groups' => $r['groups'], 'more' => $r['more'], 'next_offset' => $offset + $limit];
+        // counts=1 (médias) : le nombre trouvé pour chaque filtre de la fenêtre « Choisir une image »
+        if ($kinds[0] === 'media' && (string) ($get['counts'] ?? '') === '1') {
+            try { $out['counts'] = picker_media_counts($pdo, $q, $opts); } catch (Throwable $e) { error_log('[picker] media counts : ' . $e->getMessage()); }
+        }
+        return $out;
     }
     // recherche mélangée : la même tranche dans chaque sorte
     $groups = [];
@@ -675,33 +687,159 @@ function picker_sources(PDO $pdo, string $q, int $offset, int $limit): array
     ], $rows)];
 }
 
-function picker_media(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
+/** Colonnes de la table media (les anciennes bases n'ont pas toutes les colonnes ajoutées plus tard). */
+function picker_media_cols(PDO $pdo): array
 {
-    $params = [];
+    static $cols = null;
+    if ($cols === null) { $cols = array_flip(array_column($pdo->query('PRAGMA table_info(media)')->fetchAll(PDO::FETCH_ASSOC), 'name')); }
+    return $cols;
+}
+
+/** Colonne de media si elle existe, sinon une valeur par défaut (SQL). */
+function picker_media_col(PDO $pdo, string $col, string $default = "''"): string
+{
+    return isset(picker_media_cols($pdo)[$col]) ? "m.{$col}" : $default;
+}
+
+/** Sorte d'un média pour la fenêtre de choix : photo, document (acte, papier, carte…), audio, vidéo (SQL). */
+function picker_media_sort_sql(PDO $pdo): string
+{
+    $links = picker_table_exists($pdo, 'media_links') ? " OR EXISTS(SELECT 1 FROM media_links sl WHERE sl.media_id=m.id AND sl.entity_type='source')" : '';
+    $subject = picker_media_col($pdo, 'media_subject_type');
+    $corr = picker_media_col($pdo, 'correspondence_type');
+    return "CASE WHEN lower(m.media_type)='audio' THEN 'audio' WHEN lower(m.media_type)='video' THEN 'video'
+        WHEN lower(m.media_type) IN ('document','pdf') OR trim(COALESCE(m.document_title,''))<>'' OR trim(COALESCE(m.document_url,''))<>''
+            OR COALESCE({$subject},'') IN ('voter_card','id_card','driving_permit') OR trim(COALESCE({$corr},''))<>''
+            OR picker_fold(m.title) LIKE 'acte %' OR picker_fold(m.title) LIKE 'registre%' OR picker_fold(m.title) LIKE 'contrat %'{$links} THEN 'document' ELSE 'photo' END";
+}
+
+/**
+ * Filtres de la fenêtre « Choisir une image » (openMediaPicker) : sortes permises (media_types=image,audio), une sorte
+ * (media_sort=photo|document|audio|video), portraits, récentes (+ recent_ids), transcription / signature (media_flag).
+ * Renvoie la condition SQL (sans la sorte quand $withSort est faux : pour les compteurs).
+ */
+function picker_media_filters(PDO $pdo, array $opts, array &$params, bool $withSort = true): string
+{
+    $where = '';
     $links = picker_table_exists($pdo, 'media_links');
-    // aussi la cote (document_reference) et le nom des personnes rattachées
-    $names = $links ? "(SELECT group_concat(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''),' ; ') FROM media_links ml JOIN persons p ON p.id=ml.entity_id WHERE ml.media_id=m.id AND ml.entity_type='person')" : "''";
-    $where = picker_text_where(['m.title', 'm.filename', 'm.description', 'm.document_title', 'm.document_reference', $names], $q, $params);
     if (!empty($opts['person_id']) && $links) { $where .= " AND EXISTS(SELECT 1 FROM media_links pl2 WHERE pl2.media_id=m.id AND pl2.entity_type='person' AND pl2.entity_id=:pid)"; $params[':pid'] = (int) $opts['person_id']; }
     if (!empty($opts['media_type'])) {
         if ($opts['media_type'] === 'document') { $where .= " AND m.media_type IN ('document','pdf')"; }
         else { $where .= ' AND m.media_type = :mt'; $params[':mt'] = $opts['media_type']; }
     }
+    $types = $opts['media_types'] ?? [];
+    if ($types) {
+        $list = [];
+        foreach ($types as $t) { $list = [...$list, ...($t === 'document' ? ['document', 'pdf'] : [$t])]; }
+        $in = [];
+        foreach (array_values(array_unique($list)) as $i => $t) { $in[] = ":mts{$i}"; $params[":mts{$i}"] = $t; }
+        $where .= ' AND lower(m.media_type) IN (' . implode(',', $in) . ") AND trim(COALESCE(m.filename,''))<>''";
+    }
+    $flag = $opts['media_flag'] ?? '';
+    if ($flag === 'notr') { $where .= " AND trim(COALESCE(m.transcription,''))=''"; }
+    elseif ($flag === 'tr') { $where .= " AND trim(COALESCE(m.transcription,''))<>''"; }
+    elseif ($flag === 'sig') {
+        $where .= picker_table_exists($pdo, 'media_tags') ? " AND EXISTS(SELECT 1 FROM media_tags t WHERE t.media_id=m.id AND COALESCE(t.tag_type,'person')='signature')" : ' AND 0';
+    }
+    if (!$withSort) { return $where; }
+    if (!empty($opts['media_sort'])) { $where .= ' AND (' . picker_media_sort_sql($pdo) . ') = :msort'; $params[':msort'] = $opts['media_sort']; }
+    if (!empty($opts['portraits'])) { $where .= ' AND ' . picker_media_portrait_sql(); }
+    if (!empty($opts['recent'])) { $where .= ' AND ' . picker_media_recent_sql($opts['recent_ids'] ?? []); }
+    return $where;
+}
+
+/** Portrait : coché « photo de la personne », ou choisi comme portrait d'une fiche. */
+function picker_media_portrait_sql(): string
+{
+    return "(COALESCE(m.is_person_photo,0)=1 OR EXISTS(SELECT 1 FROM persons pp WHERE pp.portrait_media_id=m.id))";
+}
+
+/** Récentes : les 40 derniers médias ajoutés, et ceux choisis dernièrement dans la fenêtre (ids entiers déjà vérifiés). */
+function picker_media_recent_sql(array $ids): string
+{
+    $ids = array_slice(array_values(array_filter(array_map('intval', $ids), static fn(int $i): bool => $i > 0)), 0, 60);
+    return '(m.id IN (SELECT id FROM media ORDER BY id DESC LIMIT 40)' . ($ids ? ' OR m.id IN (' . implode(',', $ids) . ')' : '') . ')';
+}
+
+/** Compteurs des filtres de la fenêtre (pour la recherche en cours, sans la sorte choisie). */
+function picker_media_counts(PDO $pdo, string $q, array $opts): array
+{
+    picker_register($pdo);
+    $params = [];
+    $where = picker_text_where(picker_media_text_columns($pdo), $q, $params) . picker_media_filters($pdo, $opts, $params, false);
+    $sql = 'SELECT count(*) AS total, sum(s=\'photo\') AS photo, sum(s=\'document\') AS document, sum(s=\'audio\') AS audio, sum(s=\'video\') AS video, sum(pt) AS portraits, sum(rc) AS recent FROM (SELECT '
+        . picker_media_sort_sql($pdo) . ' AS s, ' . picker_media_portrait_sql() . ' AS pt, ' . picker_media_recent_sql($opts['recent_ids'] ?? []) . " AS rc FROM media m WHERE {$where})";
+    $s = $pdo->prepare($sql);
+    $s->execute(picker_params($sql, $params));
+    $r = $s->fetch(PDO::FETCH_ASSOC) ?: [];
+    return array_map(static fn($v): int => (int) $v, ['all' => $r['total'] ?? 0, 'photo' => $r['photo'] ?? 0, 'document' => $r['document'] ?? 0,
+        'audio' => $r['audio'] ?? 0, 'video' => $r['video'] ?? 0, 'portraits' => $r['portraits'] ?? 0, 'recent' => $r['recent'] ?? 0]);
+}
+
+/** Où chercher le texte tapé : titre, fichier, description, document et cote, date, personnes, lieu et année des événements liés. */
+function picker_media_text_columns(PDO $pdo): array
+{
+    $links = picker_table_exists($pdo, 'media_links');
+    $names = $links ? "(SELECT group_concat(COALESCE(p.first_name,'')||' '||COALESCE(p.middle_name,'')||' '||COALESCE(p.last_name,''),' ; ') FROM media_links ml JOIN persons p ON p.id=ml.entity_id WHERE ml.media_id=m.id AND ml.entity_type='person')" : "''";
+    $places = $links ? "(SELECT group_concat(COALESCE(pl.name,'')||' '||COALESCE(e.year,''),' ; ') FROM media_links ml JOIN events e ON e.id=ml.entity_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ml.media_id=m.id AND ml.entity_type='event')" : "''";
+    return ['m.title', 'm.filename', 'm.description', 'm.document_title', 'm.document_reference', 'm.date_text', $names, $places];
+}
+
+/** Étiquette de sorte posée sur la vignette (PHOTO, ACTE, CARTE…). */
+function picker_media_tag(array $r): string
+{
+    $type = strtolower((string) $r['media_type']);
+    if ($type === 'audio') { return 'SON'; }
+    if ($type === 'video') { return 'VIDÉO'; }
+    if ($type === 'pdf') { return 'PDF'; }
+    if ($type === 'document') { return 'DOC'; }
+    $subject = (string) ($r['subject'] ?? '');
+    if (in_array($subject, ['voter_card', 'id_card'], true)) { return 'CARTE'; }
+    if ($subject === 'driving_permit') { return 'PERMIS'; }
+    if ($subject === 'grave_photo') { return 'TOMBE'; }
+    if ($subject === 'war_memorial_photo') { return 'MONUMENT'; }
+    if (trim((string) ($r['postcard'] ?? '')) !== '') { return 'CARTE'; }
+    if (trim((string) ($r['corr'] ?? '')) !== '') { return 'LETTRE'; }
+    if ((int) ($r['portrait'] ?? 0)) { return 'PORTRAIT'; }
+    if (($r['sort'] ?? '') === 'document') { return 'ACTE'; }
+    return 'PHOTO';
+}
+
+function picker_media(PDO $pdo, string $q, int $offset, int $limit, array $opts = []): array
+{
+    $params = [];
+    $links = picker_table_exists($pdo, 'media_links');
+    // aussi la cote (document_reference), la date, le nom des personnes rattachées, le lieu et l'année des événements liés
+    $where = picker_text_where(picker_media_text_columns($pdo), $q, $params) . picker_media_filters($pdo, $opts, $params);
     $people = $links ? "(SELECT count(*) FROM media_links ml WHERE ml.media_id=m.id AND ml.entity_type='person')" : '0';
-    [$total, $rows] = picker_page($pdo, "SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, m.document_reference, {$people} AS n", "FROM media m WHERE {$where}", 'm.id DESC', $params, $offset, $limit);
+    $pids = $links ? "(SELECT group_concat(entity_id) FROM (SELECT DISTINCT entity_id FROM media_links WHERE media_id=m.id AND entity_type='person' ORDER BY position, id LIMIT 8))" : "''";
+    $ev = $links ? "(SELECT %s FROM media_links ml JOIN events e ON e.id=ml.entity_id LEFT JOIN places pl ON pl.id=e.place_id WHERE ml.media_id=m.id AND ml.entity_type='event' ORDER BY e.year IS NULL, e.year LIMIT 1)" : "''";
+    $select = "SELECT m.id, m.title, m.filename, m.thumbnail, m.media_type, m.date_text, m.document_reference, m.created_at, {$people} AS n, {$pids} AS pids,
+        " . sprintf($ev, 'COALESCE(pl.name,\'\')') . ' AS place, ' . sprintf($ev, 'e.year') . ' AS ev_year, ' . picker_media_sort_sql($pdo) . ' AS sort, ' . picker_media_portrait_sql() . " AS portrait,
+        CASE WHEN trim(COALESCE(m.transcription,''))<>'' THEN 1 ELSE 0 END AS has_tr, " . picker_media_col($pdo, 'duration_seconds', 'NULL') . ' AS duration, '
+        . picker_media_col($pdo, 'media_subject_type') . ' AS subject, ' . picker_media_col($pdo, 'postcard_group') . ' AS postcard, ' . picker_media_col($pdo, 'correspondence_type') . ' AS corr'
+        . (!empty($opts['with_text']) ? ", substr(COALESCE(m.transcription,''), 1, 20000) AS transcription, m.description" : '');
+    [$total, $rows] = picker_page($pdo, $select, "FROM media m WHERE {$where}", 'm.id DESC', $params, $offset, $limit);
     $types = ['image' => 'Photo', 'document' => 'Document', 'audio' => 'Audio', 'video' => 'Vidéo', 'pdf' => 'PDF'];
     $icons = ['audio' => '🎧', 'video' => '🎬', 'document' => '📄', 'pdf' => '📄'];
     return ['total' => $total, 'items' => array_map(static function ($r) use ($types, $icons) {
         $type = (string) $r['media_type'];
         $thumb = $type === 'image' ? (trim((string) $r['thumbnail']) ?: trim((string) $r['filename'])) : trim((string) $r['thumbnail']);
         $n = (int) $r['n'];
+        $date = trim((string) $r['date_text']);
+        $year = preg_match('/(?<!\d)(\d{4})(?!\d)/', $date, $m) ? $m[1] : (string) ($r['ev_year'] ?? '');
         return [
             'kind' => 'media', 'id' => (int) $r['id'], 'title' => trim((string) $r['title']) ?: (string) $r['filename'] ?: 'Média #' . $r['id'],
-            'meta' => implode(' · ', array_filter([$types[$type] ?? ucfirst($type), trim((string) $r['date_text']), trim((string) $r['document_reference']), $n ? picker_plural($n, 'personne') : ''])),
+            'meta' => implode(' · ', array_filter([$types[$type] ?? ucfirst($type), $date, trim((string) $r['document_reference']), $n ? picker_plural($n, 'personne') : ''])),
             'badge' => 'Média', 'badge_style' => '', 'group' => 'media', 'icon' => $icons[$type] ?? '🖼',
-            'thumb' => $thumb !== '' ? 'media/' . rawurlencode($thumb) : '', 'short' => trim((string) $r['date_text']),
-            'filename' => (string) $r['filename'], 'media_type' => $type,
-        ];
+            'thumb' => $thumb !== '' ? 'media/' . rawurlencode($thumb) : '', 'short' => $date ?: $year,
+            'filename' => (string) $r['filename'], 'thumbnail' => trim((string) $r['thumbnail']), 'media_type' => $type,
+            // pour la fenêtre « Choisir une image » (openMediaPicker)
+            'sort' => (string) $r['sort'], 'tag' => picker_media_tag($r), 'year' => $year, 'date_text' => $date, 'place' => (string) ($r['place'] ?? ''),
+            'cote' => trim((string) $r['document_reference']), 'duration' => $r['duration'] !== null && (float) $r['duration'] > 0 ? round((float) $r['duration'], 1) : null,
+            'portrait' => (int) $r['portrait'], 'has_tr' => (int) $r['has_tr'], 'people_ids' => array_values(array_filter(array_map('intval', explode(',', (string) $r['pids'])))),
+            'people_count' => $n, 'created_at' => (string) $r['created_at'],
+        ] + (array_key_exists('transcription', $r) ? ['transcription' => (string) $r['transcription'], 'description' => (string) $r['description']] : []);
     }, $rows)];
 }
 

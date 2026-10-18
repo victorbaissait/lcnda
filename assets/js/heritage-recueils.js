@@ -517,8 +517,7 @@
                 <h4>📚 Une photo du recueil</h4>
                 <div class="h-rc-covgrid">${shown.concat(others).map(i => tile(i.media_id, thumbUrl(i), (pageById(i.page_id) ? pageName(pageById(i.page_id)) : 'À ranger') + ' · ' + (versionById(i.version_id)?.name || ''), cur?.chosen && cur.media_id === i.media_id)).join('') || '<p class="muted">Pas encore de photo dans le recueil.</p>'}</div>
                 <h4>🖼️ Une image déjà dans Médias</h4>
-                <input type="search" data-rc-covq placeholder="Chercher par titre, cote… (2 lettres au moins)">
-                <div class="h-rc-covgrid" data-rc-covres></div>`,
+                <button type="button" class="pk-box h-rc-covmedia" data-rc-covpick><span class="pk-ico" aria-hidden="true">🖼</span><span>Choisir dans les médias : titre, cote, personne, lieu, année…</span></button>`,
             onOpen: d => {
                 const pick = async mid => { await save(mid); d.close(); };
                 const bindTiles = root => root.querySelectorAll('[data-rc-covmid]').forEach(b => b.addEventListener('click', () => pick(Number(b.dataset.rcCovmid))));
@@ -528,13 +527,11 @@
                     const f = e.target.files[0]; if (!f) return;
                     try { const ids = await uploadPhotos(r.id, [f]); if (ids[0]) await pick(ids[0]); } catch (err) { toast(err.message, 'error'); }
                 });
-                let t = 0; const res = d.querySelector('[data-rc-covres]');
-                d.querySelector('[data-rc-covq]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(async () => {
-                    const q = e.target.value.trim(); if (q.length < 2) { res.innerHTML = ''; return; }
-                    const m = ((await get('heritage_media_search', {q}).catch(() => ({media: []}))).media || []).filter(x => (x.media_type || 'image') === 'image');
-                    res.innerHTML = m.map(x => tile(x.id, `media/${encodeURIComponent(x.thumbnail || x.filename)}`, x.title || x.filename, false)).join('') || '<p class="muted">Aucune image trouvée.</p>';
-                    bindTiles(res);
-                }, 250); });
+                // une image de Médias : la fenêtre unique des médias
+                d.querySelector('[data-rc-covpick]').addEventListener('click', async () => {
+                    const m = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image'], eyebrow: 'RECUEIL', title: 'L’image de la couverture', okLabel: 'Prendre pour la couverture'});
+                    if (m) await pick(Number(m.id));
+                });
             }});
         return dl;
     }
