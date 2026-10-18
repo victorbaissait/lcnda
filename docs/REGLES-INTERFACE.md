@@ -39,6 +39,27 @@ Maquette : `docs/design/choix-image.html`.
 - **Dans un champ** : la même pastille que le menu de choix (petite vignette, titre, année, « ↗ Ouvrir », « 🖼 Changer », « × ») ; « Changer » rouvre la fenêtre filtrée sur la personne de l'outil.
 - **Sons et vidéos** : même fenêtre, vignette avec ▶ et la durée.
 
+## Champs et petits éléments communs (C1 à C8, validés)
+
+Maquette : `docs/design/champs-communs.html`. Un seul composant pour chacun, partout :
+- **C1 Cases de recherche / filtres de listes** : comme le menu de choix — loupe à gauche, « Chercher… » + exemples, × pour vider, Échap vide aussi, touche « / » pour aller dans la case ; plus de bouton ⌕.
+- **C2 Couleur** : pastille + nom/code ; fenêtre avec couleurs de l'app, couleurs récentes (partagées), 💧 pipette, 🎨 autre couleur, code #, « Aucune » (hachuré) quand ça a un sens, transparence quand ça a un sens.
+- **C3 Curseurs** : libellé · curseur · case chiffrée tapable avec unité (%, mm, °, px, ppp) ; double-clic = valeur de départ.
+- **C4 Dates** : texte libre comme dans un acte (« 7 mai 1925 », « 08/12/1960 », « vers 1784 », « avant 1800 », « entre 1880 et 1885 », « an II ») ; dessous « ✓ Compris : … » ou « ⚠️ date impossible » ; 📅 facultatif.
+- **C5 Onglets** : deux modèles seulement — onglets de page (segmenté, bleu = actif) et filtres (pastilles avec le nombre trouvé, noir = actif) ; classe active unique `is-active`.
+- **C6 Listes** : barre « N éléments · Trier : [menu] » (plus récents, plus anciens, A → Z, Z → A + choix propres) et « Voir les N suivants ↓ » en bas.
+- **C7 Chargement et messages** : un seul rond qui tourne + texte (ou squelettes gris pour une liste) ; messages dans la page en 4 sortes : ℹ️ info (bleu), ⚠️ attention (jaune), ⛔ erreur (rouge), ✓ réussi (vert).
+- **C8 Aide et petits boutons** : bulle « ? » (une phrase + « En savoir plus (FAQ) → ») ; 3 tailles de boutons icône (32, 26, outil) ; × pour fermer partout, ✕/🗑 pour retirer ; un seul aspect désactivé (opacité .45, curseur interdit) ; interrupteur pour on/off.
+
+## Éditeurs (E1 à E5, validés)
+
+Maquette : `docs/design/editeurs.html`.
+- **E1 Barre du haut** : icône · nom tapable · menus (Fichier, Édition, Objet, Affichage…) · ↶ ↷ · … · « ✓ Enregistré » · ⚙️ Personnaliser · ⤓ Exporter ▾ (un seul menu) · 💾 Enregistrer (bleu) · ⛶ · ×. « ✓ Enregistré » toujours dans cette zone, sans toast.
+- **E2 Panneau de droite** : sections repliables dans le même ordre (Position et taille, Couleur, Texte, Effets…), mêmes champs (C2, C3), sections ouvertes retenues.
+- **E3 Export** : une seule fenêtre — PDF, PNG, JPG, SVG, Imprimer, Fichier de l'outil ; qualité ; fond perdu et traits de coupe ; nom du fichier ; « Ranger aussi une copie dans les médias » ; aperçu ; Annuler / « ⤓ Exporter en … ».
+- **E4 Déposer un fichier** : partout la même zone « 📁 Glisse ici…, colle-le (⌘V) ou choisis-le » qui s'allume en bleu au survol ; le fichier entre dans les médias.
+- **E5 Police** : une seule liste — recherche, récentes en haut, polices de l'app et de l'ordinateur, chaque nom écrit dans sa police avec le texte choisi.
+
 **Mode d’emploi technique (à suivre pour tout nouvel outil) : `docs/PICKER.md`** — composant `assets/js/app-picker.js` (`pickerField`, `pickerView`, `openPicker`), styles `assets/css/picker.css`, recherche `lib/picker.php` (`picker_search`).
 
 ## Outils communs à utiliser (window.LCNDA_APP)

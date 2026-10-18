@@ -1,0 +1,116 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="../../assets/css/app.css">
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 30px;max-width:1180px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:17px}
+.lab{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+/* ── le champ ── */
+.pp{position:relative}
+.pp-box{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;min-height:44px;padding:0 10px}
+.pp-box:focus-within{outline:3px solid rgba(5,93,255,.35);outline-offset:0}
+.pp-ico{font-size:15px;opacity:.6}
+.pp-box input{flex:1;border:0;outline:0;font:inherit;font-size:15px;min-width:60px;background:transparent;padding:10px 0}
+.pp-kbd{font-size:11px;color:#888;white-space:nowrap}
+/* ── la liste ── */
+.pp-list{margin-top:6px;border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);max-height:none}
+.pp-head{display:flex;justify-content:space-between;padding:7px 12px;font-size:12px;color:#666;border-bottom:1px solid #e3e5ea}
+.pp-item{display:flex;align-items:center;gap:11px;padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f1f4}
+.pp-item.on{background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff}
+.pp-av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 13px system-ui;color:#fff;flex:none;background-size:cover;background-position:center}
+.pp-av.m{background:#3c78d8}.pp-av.f{background:#d9488f}.pp-av.u{background:#8a8f99}.pp-av.a{background:#e9a23b}
+.pp-txt{flex:1;min-width:0}
+.pp-name{font-weight:700;font-size:14.5px}.pp-name mark{background:#fff1a8;color:inherit;padding:0}
+.pp-meta{font-size:12.5px;color:#666;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp-badge{font:700 11px/1 system-ui;border:1.5px solid #111;padding:3px 6px;white-space:nowrap}
+.pp-badge.sosa{background:#055dff;color:#fff;border-color:#055dff}
+.pp-foot{display:flex;flex-direction:column}
+.pp-act{display:flex;align-items:center;gap:9px;padding:9px 12px;font-weight:700;font-size:13.5px;border-top:1px solid #e3e5ea;color:#055dff}
+.pp-act.muted{color:#555;font-weight:600}
+.pp-hint{font-size:11.5px;color:#888;padding:7px 12px;border-top:1px solid #e3e5ea;background:#fafbfc}
+/* ── choisi ── */
+.pp-chip{display:inline-flex;align-items:center;gap:9px;border:2px solid #111;background:#fff;padding:5px 6px 5px 5px;box-shadow:3px 3px 0 rgba(5,93,255,.25);max-width:100%}
+.pp-chip .pp-av{width:30px;height:30px;font-size:12px}
+.pp-chip b{font-size:14.5px}.pp-chip small{color:#666;font-size:12.5px}
+.pp-chip .x{border:0;background:none;font-size:18px;cursor:pointer;padding:0 6px;color:#555}
+.pp-chip .go{border:1.5px solid #111;background:#fff;font-size:12px;padding:2px 6px;cursor:pointer}
+.pp-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+.pp-chips .pp-chip{box-shadow:none;padding:3px 4px 3px 3px}.pp-chips .pp-av{width:24px;height:24px;font-size:10px}
+.pp-empty{padding:14px 12px;font-size:13.5px;color:#555}
+.note{font-size:12.5px;color:#555;margin-top:12px;line-height:1.5}
+
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.sw{width:24px;height:24px;border:2px solid #111;display:inline-block}
+.sw.sel{outline:3px solid #055dff;outline-offset:2px}
+.colbox{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:10px;margin-top:8px;max-width:360px}
+.colbox small{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:6px 0 5px}
+.sl{display:grid;grid-template-columns:110px 1fr 74px;gap:10px;align-items:center;margin:6px 0}
+.sl b{font-size:13px}.sl input[type=range]{width:100%;accent-color:#055dff}
+.unit{display:flex;border:2px solid #111;height:30px;align-items:center}.unit input{width:44px;border:0;font:600 13px system-ui;padding:0 6px;outline:0}.unit span{font-size:12px;color:#666;padding-right:6px}
+.seg{display:inline-flex;border:2px solid #111}.seg span{padding:7px 13px;font:700 13px system-ui;border-right:2px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+.filt2{display:flex;gap:6px;flex-wrap:wrap}.filt2 span{border:1.5px solid #111;padding:4px 9px;font:600 12px system-ui;background:#fff}.filt2 span.on{background:#111;color:#fff}
+.datehelp{font-size:12px;color:#055dff;margin-top:5px}
+.help{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1.5px solid #055dff;color:#055dff;font:800 11px system-ui;margin-left:6px}
+.bub{border:2px solid #111;background:#fffbe6;padding:8px 10px;font-size:12.5px;max-width:330px;margin-top:6px;box-shadow:3px 3px 0 rgba(0,0,0,.12)}
+.notice{border:2px solid;padding:8px 12px;font-size:13px;display:flex;gap:8px;margin:5px 0}
+.notice.i{border-color:#055dff;background:#eef4ff}.notice.w{border-color:#e1a500;background:#fff8e1}.notice.e{border-color:#d0182f;background:#fff0f1}.notice.ok{border-color:#1aa34a;background:#ecfaf0}
+.spin{width:16px;height:16px;border:3px solid #cdd6e6;border-top-color:#055dff;border-radius:50%;display:inline-block;vertical-align:-3px;margin-right:8px}
+.skel{height:12px;background:linear-gradient(90deg,#eceff3,#f7f8fa,#eceff3);margin:6px 0}
+.sortrow{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e3e5ea;padding-bottom:8px}
+.sel2{border:2px solid #111;padding:5px 9px;font:600 13px system-ui;background:#fff}
+.more{border:2px dashed #9aa1ad;text-align:center;padding:9px;font:700 13px system-ui;color:#055dff;margin-top:8px}
+.ib{width:32px;height:32px;border:2px solid #111;background:#fff;display:inline-grid;place-items:center;font-size:15px;box-shadow:2px 2px 0 rgba(5,93,255,.3)}
+.ib.s{width:26px;height:26px;font-size:12px}.ib.dis{opacity:.45;cursor:not-allowed}
+.tog{display:inline-flex;align-items:center;gap:8px;font-size:13.5px}.tog i{width:34px;height:20px;border-radius:12px;background:#055dff;position:relative}.tog i:after{content:'';position:absolute;right:3px;top:3px;width:14px;height:14px;background:#fff;border-radius:50%}
+</style></head><body>
+<h1>🧩 Les champs et petits éléments communs — propositions</h1>
+<p class="sub">Chaque élément aura UNE seule forme dans toute l’app. Numéros = ce que tu peux valider ou refuser un par un.</p>
+<div class="grid">
+<div class="case"><span class="tag"><span class="num">C1</span>Cases de recherche et filtres de listes</span><h3>Comme le menu de choix</h3>
+<div class="pp"><div class="pp-box"><span class="pp-ico">🔍</span><input value="borie" style="font-size:15px"><span class="pp-kbd">× · /</span></div></div>
+<p class="note">Aujourd’hui 4 styles et 3 mots (« Chercher », « Rechercher », « Filtrer »). Demain : loupe à gauche, « Chercher… » + exemples, × pour vider, Échap aussi, la touche « / » met le curseur dans la case. Plus de bouton ⌕ à droite.</p></div>
+
+<div class="case"><span class="tag"><span class="num">C2</span>Couleur</span><h3>Un seul choix de couleur</h3>
+<div class="row"><span class="sw" style="background:#7a2a2a"></span><b style="font-size:13.5px">Bordeaux</b><span style="font-size:12px;color:#666">#7A2A2A ▾</span></div>
+<div class="colbox"><small>Couleurs de l’app</small><div class="row"><span class="sw" style="background:#111"></span><span class="sw" style="background:#fff"></span><span class="sw" style="background:#055dff"></span><span class="sw sel" style="background:#7a2a2a"></span><span class="sw" style="background:#a88a4a"></span><span class="sw" style="background:#2f6b3a"></span><span class="sw" style="background:#d9488f"></span><span class="sw" style="background:repeating-linear-gradient(45deg,#fff 0 4px,#e33 4px 5px)" title="Aucune"></span></div>
+<small>Récentes</small><div class="row"><span class="sw" style="background:#c9a25a"></span><span class="sw" style="background:#3c78d8"></span><span class="sw" style="background:#e8dcc4"></span></div>
+<div class="row" style="margin-top:8px"><span class="btn" style="padding:5px 9px;font-size:12px">💧 Pipette</span><span class="btn" style="padding:5px 9px;font-size:12px">🎨 Autre couleur…</span><span class="unit"><input value="#7A2A2A" style="width:76px"></span></div></div></div>
+
+<div class="case"><span class="tag"><span class="num">C3</span>Curseurs</span><h3>Toujours la valeur tapable, avec l’unité</h3>
+<div class="sl"><b>Opacité</b><input type="range" value="55"><span class="unit"><input value="55"><span>%</span></span></div>
+<div class="sl"><b>Épaisseur</b><input type="range" value="20"><span class="unit"><input value="2"><span>mm</span></span></div>
+<div class="sl"><b>Rotation</b><input type="range" value="50"><span class="unit"><input value="0"><span>°</span></span></div>
+<p class="note">Aujourd’hui 47 curseurs n’affichent même pas leur valeur. Double-clic sur le curseur = revenir à la valeur de départ.</p></div>
+
+<div class="case"><span class="tag"><span class="num">C4</span>Dates</span><h3>On écrit comme dans un acte</h3>
+<span class="lab">Date</span><div class="pp-box"><input value="vers mars 1784" style="font-size:15px"><span class="pp-kbd">📅</span></div>
+<div class="datehelp">✓ Compris : <b>vers mars 1784</b> (environ, ± 1 an)</div>
+<p class="note">Partout pareil : « 7 mai 1925 », « 08/12/1960 », « vers 1784 », « avant 1800 », « entre 1880 et 1885 », « an II »… La date comprise s’affiche dessous (ou « ⚠️ date impossible : 30 février »). Le calendrier 📅 reste possible.</p></div>
+
+<div class="case"><span class="tag"><span class="num">C5</span>Onglets et filtres</span><h3>Deux modèles seulement</h3>
+<span class="lab">Onglets (changer de page)</span><div class="seg"><span class="on">Propriétés</span><span>Calques</span><span>Document</span></div>
+<span class="lab" style="margin-top:12px">Filtres (trier ce qu’on voit)</span><div class="filt2"><span class="on">Tout (24)</span><span>📷 Photos (18)</span><span>📄 Documents (6)</span></div>
+<p class="note">Aujourd’hui 10 styles d’onglets différents.</p></div>
+
+<div class="case"><span class="tag"><span class="num">C6</span>Trier et voir la suite</span><h3>Même barre au-dessus des listes</h3>
+<div class="sortrow"><span style="font-size:13px;color:#666">42 fiches</span><span style="font-size:13px">Trier : <span class="sel2">Les plus récentes ▾</span></span></div>
+<div class="skel" style="width:80%"></div><div class="skel" style="width:65%"></div>
+<div class="more">Voir les 20 suivantes ↓</div>
+<p class="note">Mêmes choix partout : plus récentes, plus anciennes, A → Z, Z → A (+ ceux propres à la liste).</p></div>
+
+<div class="case"><span class="tag"><span class="num">C7</span>Chargement et messages</span><h3>Un seul « ça charge », 4 messages</h3>
+<div style="font-size:13.5px"><span class="spin"></span>Chargement des médias…</div>
+<div class="notice i">ℹ️ Les communes du monde se préparent (une seule fois).</div>
+<div class="notice w">⚠️ Cette photo est petite : bien à l’écran, floue à l’impression.</div>
+<div class="notice e">⛔ Impossible d’enregistrer : la base est verrouillée.</div>
+<div class="notice ok">✓ Enregistré</div></div>
+
+<div class="case"><span class="tag"><span class="num">C8</span>Aide « ? » et petits boutons</span><h3>Une aide courte au même endroit</h3>
+<div style="font-size:13.5px;font-weight:700">Fond perdu <span class="help">?</span></div>
+<div class="bub">La marge de 3 à 5 mm qui sera coupée par l’imprimeur, pour que les images aillent jusqu’au bord. <a href="#" style="color:#055dff">En savoir plus (FAQ) →</a></div>
+<div class="row" style="margin-top:12px"><span class="ib">×</span><span class="ib">✎</span><span class="ib s">🗑</span><span class="ib dis">↶</span><span class="tog"><i></i>Afficher les dates</span></div>
+<p class="note">3 tailles de boutons seulement, × pour fermer partout, un seul aspect « désactivé ».</p></div>
+</div></body></html>
