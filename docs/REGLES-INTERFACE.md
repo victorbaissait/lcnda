@@ -75,6 +75,17 @@ Maquette : `docs/design/artistes.html` (fiches A à H). Un seul moteur de « typ
 - **Modulable** : panneau « ⚙️ Champs affichés » (👁 afficher/masquer, ⠿ ou ↑↓ réordonner, champs perso, ↺) pour la fiche, la liste, les vignettes et l'export ; page de l'artiste à sections ordonnables ; tout dans les « 💾 Réglages enregistrés ».
 - **Catalogue raisonné** : liste dédiée (barre H10) et, dans la mise en page, l'assistant « 📖 Nouveau catalogue raisonné » (et « 💿 Discographie ») : parties et champs de notice à choisir, notices dynamiques.
 
+## Profils, types d'œuvres et blocs communs (validé)
+
+Maquette : `docs/design/profils-et-oeuvres.html` (images I à AC). Même moteur de « types » configurables que les outils Artistes : tout est une fiche d'un type (définition : champs, groupes, liens, affichage par défaut), avec les mêmes listes (H10), le même panneau « ⚙️ Champs affichés », la même frise et la même carte.
+- **Types d'œuvres** : 131 types en 12 familles (arts visuels, musique, scène, écrit, image animée et son, design et métiers d'art, espace et paysage, numérique et jeux, modélisme et loisirs, saveurs et senteurs, fiches qui relient, mes types). Chaînes : sculpture → fontes, pièce → mises en scène → représentations → tournées, série → saisons → épisodes, morceau → enregistrements → parutions.
+- **Créer son type** : assistant en 5 étapes, 24 sortes de champs, champs repris d'autres types, liens, liste et vignettes.
+- **Métiers d'art** : les 16 domaines et la liste officielle des métiers ; profil « artisan d'art » (apprentissage, compagnonnage, MOF, Maître d'art, EPV, atelier, poinçons).
+- **Inventions et découvertes** : brevets par pays, prototypes, licences ; découvertes (espèce, comète, gène, site…), nommage, publications.
+- **Profils à cocher** sur une fiche (artiste, artisan d'art, acteur/performeur, sportif, politique, scientifique, explorateur, militaire, agriculteur… et ses propres profils) : chaque profil ajoute ses sections ; une personne peut en avoir plusieurs ; page combinée avec frise colorée par profil.
+- **Représentations façon setlist.fm** : concert/spectacle avec setlist (rappels, reprises, invités, notes), tournées, statistiques (titres les plus joués, première/dernière fois…).
+- **Blocs pour toute personne** : « 📰 Dans les médias » (+ liste Revue de presse), « 🏆 Concours et récompenses » (décorations, championnats, concours insolites ; liste Palmarès), « 🎓 Diplômes et formation ».
+
 **Mode d’emploi technique (à suivre pour tout nouvel outil) : `docs/PICKER.md`** — composant `assets/js/app-picker.js` (`pickerField`, `pickerView`, `openPicker`), styles `assets/css/picker.css`, recherche `lib/picker.php` (`picker_search`).
 
 ## Outils communs à utiliser (window.LCNDA_APP)

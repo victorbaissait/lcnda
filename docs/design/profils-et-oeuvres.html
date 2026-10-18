@@ -1,0 +1,1089 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="../../assets/css/app.css">
+<title>Maquette — Profils et types modulables</title>
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1100px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;max-width:1300px;margin:0 0 30px}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:18px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px}
+.note{font-size:12.5px;color:#555;margin-top:12px;line-height:1.5}
+.muted{color:#666}
+small.g{color:#666;font-size:12.5px}
+/* pastilles du menu de choix */
+.pp-box{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;min-height:38px;padding:0 10px}
+.pp-ico{font-size:14px;opacity:.6}.pp-box input{flex:1;border:0;outline:0;font:inherit;font-size:14px;background:transparent;padding:8px 0}
+.pp-kbd{font-size:11px;color:#888;border:1px solid #bbb;padding:0 5px}
+.pp-av{width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font:700 10px system-ui;color:#fff;flex:none}
+.pp-av.m{background:#3c78d8}.pp-av.f{background:#d9488f}.pp-av.u{background:#8a8f99}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #111;background:#fff;padding:2px 5px 2px 3px;font-size:13px;white-space:nowrap;margin:2px 4px 2px 0}
+.chip.b{border-color:#055dff;background:#eef4ff}.chip.gr{border-color:#9aa1ad;background:#f3f4f6;color:#444}
+.chip .r{font-size:11.5px;color:#055dff;font-weight:700}.chip .go{font-size:11px;border:1px solid #111;padding:0 4px}
+.chip .q{width:20px;height:20px;border-radius:50%;background:#c4c8cf;color:#fff;display:inline-grid;place-items:center;font:800 11px system-ui}
+.ochip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #111;background:#fff;padding:2px 6px 2px 3px;font-size:13px;margin:2px 4px 2px 0;white-space:nowrap}
+.ochip i{font-style:normal;width:22px;height:22px;display:inline-grid;place-items:center;background:#f0f1f4;font-size:12px}
+.ochip.link{border-color:#055dff;color:#055dff;font-weight:600}
+/* boutons */
+.btn{display:inline-block;border:2px solid #111;padding:6px 11px;font:700 12.5px system-ui;background:#fff;box-shadow:2px 2px 0 rgba(5,93,255,.3);white-space:nowrap}
+.btn.p{background:#055dff;color:#fff;border-color:#055dff}.btn.s{padding:3px 8px;font-size:11.5px}.btn.d{color:#d0182f}
+.ib{width:26px;height:26px;border:1.5px solid #111;background:#fff;display:inline-grid;place-items:center;font-size:12px}
+.seg{display:inline-flex;border:2px solid #111}.seg span{padding:5px 11px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+.filt{display:flex;gap:6px;flex-wrap:wrap}.filt span{border:1.5px solid #111;padding:3px 9px;font:600 12px system-ui;background:#fff}.filt span.on{background:#111;color:#fff}
+.sel2{border:2px solid #111;padding:5px 9px;font:600 12.5px system-ui;background:#fff;white-space:nowrap}
+.act{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.act span{background:#eaf1ff;border:1.5px solid #055dff;color:#055dff;padding:3px 8px;font:700 12px system-ui}
+/* barre E1 */
+.top{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;padding:8px 10px;flex-wrap:wrap;margin-bottom:12px}
+.top .ey{font:700 10.5px system-ui;letter-spacing:.1em;color:#055dff}.top h4{margin:0;font-size:16px}
+.top .sp{flex:1}.top .st{font-size:12px;color:#1aa34a;font-weight:700}
+.crumb{font-size:12.5px;color:#666;margin-bottom:8px}.crumb b{color:#055dff}
+/* fiche */
+.sheet{display:grid;grid-template-columns:300px 1fr 300px;gap:22px}
+.sheet.two{grid-template-columns:330px minmax(0,1fr)}.sheet>div{min-width:0}.side .ochip,.side .chip,.dl .ochip{white-space:normal;max-width:100%}.side{overflow-wrap:anywhere}.sec>.sh{flex-wrap:wrap}.reccard .hd{min-width:0}
+.cover{aspect-ratio:1;border:2px solid #111;position:relative;overflow:hidden}
+.cv1{background:radial-gradient(circle at 70% 30%,#f4c542 0 18%,transparent 19%),linear-gradient(135deg,#1d2b64,#7b2ff7 55%,#f107a3)}
+.cv1:after{content:'PARIS CANAILLE';position:absolute;left:14px;bottom:14px;color:#fff;font:900 22px/1 Georgia,serif;letter-spacing:.04em}
+.cv2{background:repeating-linear-gradient(0deg,#e9e3d3 0 18px,#ddd5c1 18px 19px)}
+.cv3{background:radial-gradient(circle,#111 0 8%,#e8b923 8% 30%,#111 30% 100%);border-radius:50%}
+.cv4{background:linear-gradient(160deg,#fbf7ec,#e8dcc4)}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.thumbs div{aspect-ratio:1;border:1.5px solid #111;position:relative;overflow:hidden}.thumbs .cv1:after,.minicov .cv1:after{font-size:9px;left:4px;bottom:14px}.thumbs small{position:absolute;bottom:2px;left:3px;font:700 9px system-ui;background:#fff;padding:0 3px}
+.dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;margin:0 0 12px;font-size:14px}.dl dt{color:#666}.dl dd{margin:0}
+.h2{font-size:22px;margin:0 0 4px}.h2 small{font-size:14px;color:#666;font-weight:500}
+.sec{border-top:2px solid #111;margin-top:14px;padding-top:8px}
+.sec>.sh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.sec>.sh b{font-size:15px}.sec>.sh .sp{flex:1}
+table.t{width:100%;border-collapse:collapse;font-size:13px}table.t td,table.t th{padding:5px 7px;border-bottom:1px solid #e3e5ea;text-align:left;vertical-align:top}table.t th{font-size:11.5px;color:#666;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+table.t td.n{color:#666;width:34px}table.t td.d{text-align:right;font-variant-numeric:tabular-nums;width:50px}
+.tk-cr{font-size:12px;color:#555;margin-top:2px}
+.rec{display:inline-block;font:700 10.5px system-ui;border:1.5px solid #7b2ff7;color:#7b2ff7;padding:1px 5px;margin-left:4px;background:#f6f0ff}
+.side{border:2px solid #111;background:#fafbfc;padding:10px 12px;font-size:13px}.side h5{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#055dff}
+.side+.side{margin-top:12px}
+.star{color:#e1a500}
+.wave{height:30px;background:repeating-linear-gradient(90deg,#055dff 0 2px,transparent 2px 4px);mask:linear-gradient(0deg,#000,#000);opacity:.75;clip-path:polygon(0 50%,3% 20%,6% 70%,9% 30%,12% 60%,15% 10%,18% 80%,21% 40%,24% 60%,27% 25%,30% 75%,33% 35%,36% 65%,39% 15%,42% 85%,45% 30%,48% 70%,51% 20%,54% 60%,57% 40%,60% 80%,63% 25%,66% 55%,69% 35%,72% 70%,75% 20%,78% 60%,81% 45%,84% 75%,87% 30%,90% 60%,93% 40%,96% 55%,100% 50%,100% 52%,0 52%)}
+.player{display:flex;align-items:center;gap:8px;border:1.5px solid #111;padding:4px 8px;background:#fff;min-width:260px}
+.player .pl{width:22px;height:22px;border-radius:50%;background:#055dff;color:#fff;display:grid;place-items:center;font-size:10px}
+.player .wave{flex:1;height:22px}
+.reccard{border:2px solid #111;padding:10px 12px;margin-bottom:10px;background:#fff}
+.reccard.main{box-shadow:4px 4px 0 rgba(123,47,247,.25);border-color:#7b2ff7}
+.reccard .hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.reccard .hd b{font-size:14.5px}
+.kind{font:800 10px system-ui;letter-spacing:.08em;padding:2px 6px;background:#111;color:#fff}
+.kind.mix{background:#7b2ff7}.kind.take{background:#e1a500}.kind.rem{background:#1aa34a}.kind.live{background:#d0182f}.kind.edit{background:#3c78d8}
+.rtree{display:block;border-left:3px solid #d8cff5;margin-left:12px;padding-left:12px}
+.paint{aspect-ratio:4/5;border:10px solid #8a6a3a;outline:2px solid #111;background:radial-gradient(ellipse at 30% 70%,#4f7a3a 0 25%,transparent 26%),radial-gradient(ellipse at 70% 40%,#d9b45a 0 12%,transparent 13%),linear-gradient(180deg,#8fb6d8 0 45%,#6d8f4e 45% 75%,#4b6a35 75%)}
+.tl{position:relative;margin-left:10px;border-left:3px solid #055dff;padding-left:16px}
+.tl .ev{position:relative;margin-bottom:10px;font-size:13px}.tl .ev:before{content:'';position:absolute;left:-24px;top:3px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid #055dff}
+.tl .ev.sale:before{background:#e1a500;border-color:#e1a500}.tl .ev.now:before{background:#055dff}
+.tl .ev b{font-size:13.5px}.price{font:700 12px system-ui;background:#fff8e1;border:1.5px solid #e1a500;padding:0 5px;margin-left:4px}
+.minis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.minis div{border:1.5px solid #111;padding:4px;font-size:11.5px}.minis i{display:block;aspect-ratio:4/5;margin-bottom:3px}
+.badge{font:700 10.5px system-ui;border:1.5px solid #111;padding:1px 5px;white-space:nowrap}
+.badge.ok{border-color:#1aa34a;color:#1aa34a}.badge.w{border-color:#e1a500;color:#a87900;background:#fff8e1}.badge.b{border-color:#055dff;color:#055dff}
+/* panneau champs */
+.layout2{display:grid;grid-template-columns:1fr 420px;gap:22px}
+.pan{border:2px solid #111;background:#fff}
+.pan .ph{padding:10px 12px;border-bottom:2px solid #111;display:flex;align-items:center;gap:8px}.pan .ph b{font-size:15px}.pan .ph .sp{flex:1}
+.pan details{border-bottom:1px solid #e3e5ea;padding:8px 12px}.pan summary{font:800 13px system-ui;list-style:none;display:flex;gap:6px;align-items:center}.pan summary::-webkit-details-marker{display:none}
+.pan summary .c{font:600 11px system-ui;color:#888;margin-left:auto}
+.fr{display:grid;grid-template-columns:18px 26px 1fr auto auto;gap:6px;align-items:center;padding:4px 2px;border-bottom:1px dashed #eceef2;font-size:13px}
+.fr .grip{color:#999;cursor:grab}.fr .eye{font-size:13px}.fr.off{opacity:.5}.fr.off .lbl{text-decoration:line-through}
+.fr .ty{font:600 10.5px system-ui;color:#777;border:1px solid #ccd;padding:0 4px}
+.fr .tools{display:flex;gap:2px}.fr .tools span{width:22px;height:22px;border:1px solid #bbb;display:inline-grid;place-items:center;font-size:11px;background:#fff}
+.fr.cust .lbl{color:#055dff;font-weight:700}
+.fr.drag{background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff,0 4px 10px rgba(0,0,0,.15)}
+.tog{display:inline-flex;align-items:center;gap:8px;font-size:13px}.tog i{width:30px;height:18px;border-radius:12px;background:#055dff;position:relative;display:inline-block}.tog i:after{content:'';position:absolute;right:2px;top:2px;width:14px;height:14px;background:#fff;border-radius:50%}.tog.off i{background:#c4c8cf}.tog.off i:after{right:auto;left:2px}
+.pop{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:12px;font-size:13px}
+.pop .tys{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.pop .tys span{border:1.5px solid #111;padding:6px 4px;text-align:center;font:600 12px system-ui}.pop .tys span.on{border-color:#055dff;background:#eef4ff;color:#055dff}
+.fld{display:flex;flex-direction:column;font-size:12px;font-weight:700;gap:3px;margin-bottom:8px}.fld input,.fld .in{border:2px solid #111;padding:6px 8px;font:500 13.5px system-ui;background:#fff}
+.fld .ok{font:600 11.5px system-ui;color:#1aa34a}
+.edit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 14px}
+.grp{font:800 11px system-ui;letter-spacing:.1em;color:#055dff;text-transform:uppercase;margin:12px 0 6px;grid-column:1/-1;display:flex;gap:6px;align-items:center}
+.grp:after{content:'';flex:1;height:2px;background:#e3e5ea}
+/* page artiste */
+.hero{display:flex;gap:16px;align-items:center;border:2px solid #111;padding:12px;background:linear-gradient(90deg,#fff,#f5f0ff)}
+.hero .ph0{width:84px;height:84px;border-radius:50%;background:#3c78d8;color:#fff;display:grid;place-items:center;font:800 26px system-ui}
+.blocks{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:12px}
+.blk{border:2px solid #111;background:#fff;grid-column:span 12}.blk.s6{grid-column:span 6}.blk.s4{grid-column:span 4}
+.blk .bh{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1.5px solid #111;background:#fafbfc}.blk .bh b{font-size:14px}.blk .bh .sp{flex:1}.blk .bb{padding:8px 10px;font-size:13px}
+.blk .bh .grip{color:#999}
+.blk.drag{outline:3px dashed #055dff;outline-offset:3px;opacity:.85}
+.minicov{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.minicov div{font-size:11.5px}.minicov i{position:relative;overflow:hidden;display:block;aspect-ratio:1;border:1.5px solid #111;margin-bottom:3px}
+.ord{border:2px solid #111;background:#fff}
+/* liste CR */
+.lbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #e3e5ea;padding-bottom:10px}
+.lbar .pp-box{flex:1;min-width:240px}
+.dd{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:10px 12px;width:300px;font-size:13px}
+.dd b{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:8px 0 4px}
+.dd label{display:flex;gap:6px;align-items:center;margin:2px 0}
+table.cr td{font-size:12.5px}table.cr td.im i{display:block;width:44px;height:54px;border:1.5px solid #111}
+.wiz{display:grid;grid-template-columns:420px 1fr;gap:20px}
+.page{background:#fff;border:1px solid #bbb;box-shadow:0 6px 18px rgba(0,0,0,.18);aspect-ratio:210/297;padding:26px 28px;font-family:Georgia,'Times New Roman',serif;font-size:10.5px;line-height:1.45;color:#222;position:relative}
+.page h6{font:700 9px system-ui;letter-spacing:.2em;color:#8a6a3a;margin:0 0 10px;text-transform:uppercase}
+.page .no{font:700 26px Georgia,serif;color:#8a6a3a}.page .ti{font:italic 700 17px Georgia,serif;margin:0 0 2px}
+.page .meta{font-size:10.5px}.page .lbl{font:700 7.5px system-ui;letter-spacing:.14em;color:#8a6a3a;text-transform:uppercase;margin:8px 0 2px;display:block}
+.page .folio{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:9px;color:#888}
+.spread{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#ddd;padding:14px}
+/* schéma */
+.dm{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.dmc{border:2px solid #111;padding:10px;background:#fff;font-size:12px}.dmc h5{margin:0 0 8px;font-size:13.5px}
+.ent{border:1.5px solid #111;padding:5px 7px;margin:0 0 4px;background:#fafbfc}.ent b{font-size:12.5px}.ent small{display:block;color:#666;font-size:11px}
+.arr{text-align:center;color:#055dff;font:700 11px system-ui;margin:-1px 0 3px}
+.ent.core{background:#eef4ff;border-color:#055dff}
+.ent.x{background:#fff8e1;border-color:#e1a500}
+.legend{display:flex;gap:16px;font-size:12px;margin-top:10px;flex-wrap:wrap}
+.legend span i{display:inline-block;width:14px;height:14px;border:1.5px solid #111;vertical-align:-2px;margin-right:4px}
+/* ——— ajouts maquette profils (même langage visuel que A–H) ——— */
+.fams{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.famc{border:2px solid #111;background:#fff}.famc .fh{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1.5px solid #111;background:#fafbfc}.famc .fh b{font-size:14px}.famc .fh .sp{flex:1}.famc .fh small{font:700 11px system-ui;color:#888}
+.famc .fb{padding:8px 10px}.famc .ch{font-size:11.5px;color:#555;border-top:1px dashed #e3e5ea;margin-top:6px;padding-top:5px}
+.tyc{display:inline-flex;align-items:center;gap:4px;border:1.5px solid #111;background:#fff;padding:2px 6px;font-size:12.5px;margin:2px 3px 2px 0;white-space:nowrap}
+.tyc.v{border-color:#1aa34a}.tyc.v:after{content:'✓';color:#1aa34a;font-weight:800;font-size:11px}
+.tyc.d{border-color:#055dff;background:#eef4ff;color:#055dff;font-weight:700}.tyc.d:after{content:'★';color:#e1a500;font-size:11px}
+.tyc.u{border-style:dashed;border-color:#7b2ff7;color:#7b2ff7;font-weight:700}
+.famc.mine{border-color:#7b2ff7;border-style:dashed}
+.sumg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sumc{border:1.5px solid #111;background:#fff;padding:7px 9px;font-size:12px;line-height:1.4}.sumc b{font-size:13px}.sumc .k{color:#055dff;font-weight:700;font-size:11.5px;display:block;margin:2px 0}
+.sumc .s{color:#e1a500}
+.bronze{aspect-ratio:3/4;border:2px solid #111;background:radial-gradient(ellipse 22% 13% at 50% 18%,#6b4a2b 0 96%,transparent 100%),radial-gradient(ellipse 30% 40% at 50% 52%,#7a5532 0 96%,transparent 100%),linear-gradient(180deg,transparent 0 86%,#e7e3dc 86% 100%),linear-gradient(180deg,#f3f1ec,#dcd8cf);position:relative}
+.bronze:after{content:'';position:absolute;left:30%;right:30%;bottom:14%;height:8%;background:#3d3d3d}
+.poster{aspect-ratio:3/4;border:2px solid #111;background:linear-gradient(180deg,#d0182f 0 30%,#f4c542 30% 32%,#1d2b64 32% 100%);position:relative;overflow:hidden}
+.poster:before{content:'FÊTE DE LA SAINT-JEAN';position:absolute;left:8px;right:8px;top:12px;color:#fff;font:900 17px/1.05 Georgia,serif;text-align:center}
+.poster:after{content:'TULLE · 23-24 JUIN 1952';position:absolute;left:0;right:0;bottom:16px;color:#f4c542;font:800 12px system-ui;text-align:center;letter-spacing:.08em}
+.poster i{position:absolute;left:30%;top:42%;width:40%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#f4c542 0 35%,#d0182f 36% 60%,transparent 61%)}
+.score{aspect-ratio:3/4;border:2px solid #111;background:repeating-linear-gradient(180deg,#fff 0 10px,#111 10px 11px,#fff 11px 14px,#111 14px 15px,#fff 15px 18px,#111 18px 19px,#fff 19px 22px,#111 22px 23px,#fff 23px 26px,#111 26px 27px,#fff 27px 44px);position:relative}
+.score:before{content:'Concerto pour accordéon';position:absolute;top:6px;left:0;right:0;text-align:center;font:italic 700 12px Georgia,serif;background:#fff}
+.mvt{display:grid;grid-template-columns:34px 1fr 110px 70px 56px;gap:6px;align-items:center;border-bottom:1px solid #e3e5ea;padding:5px 2px;font-size:13px}
+.mvt .rn{font:800 13px Georgia,serif;color:#7b2ff7}
+.tree3{display:grid;grid-template-columns:260px 1fr;gap:16px}
+.lvl{border-left:4px solid #055dff;padding-left:10px;margin-bottom:10px}
+.lvl.l2{border-color:#7b2ff7}.lvl.l3{border-color:#e1a500}.lvl.l4{border-color:#1aa34a}
+.lvl .lt{font:800 10px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#055dff}.lvl.l2 .lt{color:#7b2ff7}.lvl.l3 .lt{color:#a87900}.lvl.l4 .lt{color:#1aa34a}
+.kind.mes{background:#7b2ff7}.kind.rep{background:#e1a500}.kind.tour{background:#1aa34a}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;font:600 11px system-ui}.cal span{border:1px solid #d5d8de;padding:3px;text-align:center;background:#fff}.cal span.on{background:#e1a500;color:#fff;border-color:#e1a500}.cal span.h{border:0;background:none;color:#888}
+/* assistant */
+.steps{display:flex;gap:0;border:2px solid #111;margin-bottom:12px}.steps span{flex:1;padding:7px 10px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff;color:#555}.steps span:last-child{border-right:0}.steps span.on{background:#055dff;color:#fff}.steps span.dn{background:#eef4ff;color:#055dff}
+.wiz3{display:grid;grid-template-columns:270px 1fr 330px;gap:16px}
+.icg{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}.icg span{border:1.5px solid #d5d8de;text-align:center;padding:4px 0;font-size:15px;background:#fff}.icg span.on{border-color:#055dff;background:#eef4ff;outline:2px solid #055dff}
+.cf{display:grid;grid-template-columns:16px 22px 1fr auto auto auto;gap:6px;align-items:center;padding:5px 4px;border:1.5px solid #d5d8de;background:#fff;margin-bottom:4px;font-size:12.5px}
+.cf .grip{color:#999}.cf .ty{font:600 10.5px system-ui;color:#555;border:1px solid #ccd;padding:0 4px;white-space:nowrap}.cf .src{font:700 10px system-ui;color:#1aa34a;border:1px solid #1aa34a;padding:0 4px;white-space:nowrap}
+.cf.sel{border-color:#055dff;box-shadow:inset 4px 0 0 #055dff;background:#f6f9ff}
+.cf .def{font-size:11px;color:#777}
+.gbox{border:2px solid #111;padding:6px 8px 4px;margin-bottom:10px;background:#fafbfc}.gbox>.gh{display:flex;gap:6px;align-items:center;font:800 11px system-ui;letter-spacing:.1em;text-transform:uppercase;color:#055dff;margin-bottom:5px}.gbox>.gh .sp{flex:1}
+.lib label{display:flex;gap:6px;align-items:center;font-size:12.5px;padding:3px 0;border-bottom:1px dashed #eceef2}.lib label small{margin-left:auto;color:#888;font-size:11px}
+.tys2{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.tys2 span{border:1.5px solid #111;padding:4px 3px;text-align:center;font:600 11.5px system-ui;background:#fff}
+/* frise, carrière */
+.gantt{border:2px solid #111;background:#fff;padding:8px 10px;font-size:12px}
+.grow{display:grid;grid-template-columns:170px 1fr;align-items:center;gap:8px;margin:3px 0}
+.grow .tr{position:relative;height:20px;background:repeating-linear-gradient(90deg,#f3f4f6 0 calc(10% - 1px),#e3e5ea calc(10% - 1px) 10%)}
+.grow .bar{position:absolute;top:2px;height:16px;font:700 10px/16px system-ui;color:#fff;padding:0 4px;overflow:hidden;white-space:nowrap}
+.gax{display:grid;grid-template-columns:170px 1fr;gap:8px;font:600 10.5px system-ui;color:#888}.gax div:last-child{display:flex;justify-content:space-between}
+.c-pol{background:#055dff}.c-art{background:#7b2ff7}.c-spo{background:#1aa34a}.c-inv{background:#e1a500}.c-med{background:#d0182f}.c-gr{background:#8a8f99}
+.pfb{display:inline-flex;align-items:center;gap:5px;font:800 10.5px system-ui;letter-spacing:.06em;padding:2px 7px;color:#fff;text-transform:uppercase}
+.blk.p-pol{border-top:5px solid #055dff}.blk.p-art{border-top:5px solid #7b2ff7}.blk.p-spo{border-top:5px solid #1aa34a}.blk.p-inv{border-top:5px solid #e1a500}.blk.p-med{border-top:5px solid #d0182f}
+.medal{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font:800 11px system-ui;color:#111;border:2px solid #111;margin-right:4px}
+.medal.o{background:#f4c542}.medal.a{background:#d5d8de}.medal.b{background:#d99a5b}
+.res{font:700 11px system-ui;padding:0 5px;border:1.5px solid #111}.res.w{background:#e8f7ee;border-color:#1aa34a;color:#1aa34a}.res.l{background:#fdecee;border-color:#d0182f;color:#d0182f}
+.map{border:2px solid #111;background:linear-gradient(135deg,#eef4ff,#f6f9ff);position:relative;height:150px;overflow:hidden}
+.map:before{content:'';position:absolute;left:18%;top:10%;width:62%;height:82%;background:#dfe8f5;clip-path:polygon(30% 0,62% 4%,80% 18%,100% 30%,92% 58%,96% 80%,70% 100%,40% 94%,18% 100%,8% 70%,0 44%,14% 20%)}
+.map .pin{position:absolute;width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px #111}
+.map .lab{position:absolute;font:700 10px system-ui;background:#fff;border:1px solid #111;padding:0 3px}
+.quote{border-left:4px solid #d0182f;padding:4px 10px;background:#fff7f8;font:italic 13px/1.45 Georgia,serif;margin:6px 0}
+.mcard{border:2px solid #111;background:#fff;padding:8px 10px;margin-bottom:8px;display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:start}
+.mcard .mt{width:64px;height:64px;border:1.5px solid #111;display:grid;place-items:center;font-size:24px;position:relative}
+.mcard .mt small{position:absolute;bottom:1px;right:2px;font:700 9px system-ui;background:#fff;padding:0 2px}
+.mtag{font:800 9.5px system-ui;letter-spacing:.08em;padding:1px 5px;color:#fff;text-transform:uppercase}
+.tone{font:700 10.5px system-ui;padding:0 5px;border:1.5px solid}
+.tone.pos{color:#1aa34a;border-color:#1aa34a}.tone.neu{color:#666;border-color:#999}.tone.neg{color:#d0182f;border-color:#d0182f}
+.strip{display:flex;align-items:flex-end;gap:2px;height:52px;border-bottom:2px solid #111;padding:0 2px}
+.strip i{flex:1;background:#d0182f;opacity:.8}
+.flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12.5px}.flow .ent{margin:0}.flow .ar{color:#055dff;font-weight:800}
+.claims{counter-reset:c;font-size:12.5px;margin:4px 0 0;padding:0;list-style:none}.claims li{counter-increment:c;padding:2px 0 2px 22px;position:relative}.claims li:before{content:counter(c)'.';position:absolute;left:0;font-weight:800;color:#e1a500}
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.figs div{aspect-ratio:1;border:1.5px solid #111;background:#fff;position:relative;background-image:linear-gradient(45deg,transparent 47%,#111 47% 49%,transparent 49%),radial-gradient(circle at 60% 40%,transparent 0 20%,#111 20% 21%,transparent 21%),linear-gradient(0deg,transparent 30%,#111 30% 31%,transparent 31%)}.figs small{position:absolute;bottom:2px;left:3px;font:700 9px system-ui;background:#fff;padding:0 2px}
+.specimen{aspect-ratio:4/5;border:2px solid #111;background:radial-gradient(ellipse 10% 14% at 50% 30%,#7b2ff7 0 95%,transparent 100%),radial-gradient(ellipse 8% 10% at 40% 45%,#b38be9 0 95%,transparent 100%),radial-gradient(ellipse 8% 10% at 60% 48%,#b38be9 0 95%,transparent 100%),linear-gradient(90deg,transparent 49%,#4f7a3a 49% 51%,transparent 51%),#f7f3e8;position:relative}
+.specimen:after{content:'HERBIER · Holotype';position:absolute;right:6px;bottom:6px;font:700 9px system-ui;background:#fff;border:1px solid #111;padding:1px 4px}
+.kinds{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.kinds div{border:1.5px solid #111;padding:6px 8px;font-size:12px;background:#fff}.kinds b{display:block;font-size:13px}.kinds strong{font-weight:800}
+.pfcard{border:2px solid #111;background:#fff;padding:6px 10px;margin-bottom:6px;display:grid;grid-template-columns:16px 1fr auto;gap:8px;align-items:center;font-size:13px}
+.edit-grid>.fld{min-width:0}.fld input{min-width:0;width:100%;box-sizing:border-box}.fld .in{min-width:0;overflow-wrap:anywhere}
+</style></head><body>
+<h1>🧩 Profils modulables — tous les types d’œuvres, tes propres types, inventions, découvertes, médias, politique, sport, métiers d’art, scène</h1>
+<p class="sub">Maquette à valider (suite des fiches A à H déjà validées). Un seul moteur de « types » : chaque sorte de chose (une sculpture, un brevet, un mandat, une compétition, un passage à la radio, un concert…) est une fiche avec ses groupes de champs, ce qui s’affiche, et les liens possibles. Tu peux tout masquer, ranger, compléter, et créer tes propres types.</p>
+
+<!-- ═══════════ I. FAMILLES DE TYPES ═══════════ -->
+<section class="case" id="familles"><span class="tag"><span class="num">I</span>Tous les types d’œuvres</span><h3>« ＋ Nouvelle œuvre » : tous les types, rangés par grandes familles</h3>
+<div class="top"><span>🎨</span><div><div class="ey">JOSEPH MARTIN · ŒUVRES</div><h4>Quelle sorte d’œuvre ?</h4></div><span class="sp"></span><span class="btn s">⚙️ Gérer les types</span><span class="btn p s">✎ Créer mon propre type…</span><span class="ib">×</span></div>
+<div class="pp-box" style="margin-bottom:8px"><span class="pp-ico">🔍</span><input value="" placeholder="Chercher un type… (ex. : bronze, opéra, affiche, ferronnerie, podcast)"><span class="pp-kbd">/</span></div>
+<div class="filt" id="famfilt" style="margin-bottom:10px"></div>
+<div class="fams" id="fams">
+ <div class="famc"><div class="fh"><b>🖼️ Arts visuels</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc v">🖼️ Peinture</span><span class="tyc">✏️ Dessin</span><span class="tyc">🎨 Aquarelle · pastel · gouache</span><span class="tyc">🪵 Gravure · estampe</span><span class="tyc d">🗿 Sculpture</span><span class="tyc">🧱 Installation</span><span class="tyc">📷 Photographie</span><span class="tyc">✂️ Collage · assemblage</span><span class="tyc">🏛 Fresque · peinture murale</span><span class="tyc">🧯 Street art · graffiti</span><span class="tyc">◼️ Mosaïque</span><span class="tyc">🪟 Vitrail</span><span class="tyc">📜 Icône · enluminure</span><span class="tyc">🖋 Calligraphie</span><span class="tyc">🖍 Illustration</span><span class="tyc">🌾 Land art</span><span class="tyc">🧍 Performance</span>
+  <div class="ch">Chaînes : Gravure → <b>états</b> → <b>tirages</b> · Sculpture → modèle → <b>fontes</b> · Photo → <b>négatif</b> → <b>tirages</b> → éditions · Installation → <b>lieux successifs</b></div></div></div>
+ <div class="famc"><div class="fh"><b>🎵 Musique</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc v">🎵 Morceau · chanson</span><span class="tyc v">🎙 Enregistrement</span><span class="tyc v">💿 Parution (disque)</span><span class="tyc v">📀 Album</span><span class="tyc d">🎻 Concerto</span><span class="tyc">🎼 Symphonie</span><span class="tyc">🎹 Sonate · musique de chambre</span><span class="tyc">🎼 Autre musique savante</span><span class="tyc">🎭 Opéra (partition)</span><span class="tyc">⛪ Oratorio · cantate · messe</span><span class="tyc">🎞 Musique de film</span><span class="tyc">🩰 Musique de scène · de ballet</span><span class="tyc">📝 Arrangement · orchestration</span><span class="tyc">📻 Indicatif · jingle</span><span class="tyc">🎺 Hymne · fanfare · chorale</span><span class="tyc">📄 Partition éditée</span><span class="tyc v">🎤 Concert · tournée</span>
+  <div class="ch">Chaîne : Œuvre → <b>mouvements</b> → <b>interprétations</b> → enregistrements → parutions (déjà validé en B)</div></div></div>
+ <div class="famc"><div class="fh"><b>🎭 Scène</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc d">🎭 Pièce de théâtre</span><span class="tyc">🎭 Opéra (production)</span><span class="tyc">🩰 Ballet · danse</span><span class="tyc">🎶 Comédie musicale</span><span class="tyc">🎤 Seul en scène · humour</span><span class="tyc">🎪 Arts du cirque</span><span class="tyc">🪆 Marionnettes</span><span class="tyc">💃 Cabaret · revue · music-hall</span><span class="tyc">📖 Conte · récit</span><span class="tyc">🎩 Magie · illusion</span><span class="tyc">🗣 Lecture · mise en voix</span><span class="tyc">🚶 Spectacle de rue</span><span class="tyc">🎆 Son et lumière · fête</span><span class="tyc">🎟 Représentation (setlist)</span><span class="tyc">🚌 Tournée</span><span class="tyc">🎪 Festival</span>
+  <div class="ch">Chaîne : Œuvre → <b>mise en scène / production</b> → <b>représentations</b> (setlist, distribution du soir) → <b>tournée</b> — voir K et U</div></div></div>
+ <div class="famc"><div class="fh"><b>✍️ Écrit</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc v">📚 Livre (édition)</span><span class="tyc v">📝 Texte (roman, nouvelle…)</span><span class="tyc">📖 Recueil de poésie</span><span class="tyc">🪶 Poème</span><span class="tyc">📰 Article · chronique</span><span class="tyc">🎓 Essai · thèse · mémoire</span><span class="tyc">🎶 Paroles de chanson</span><span class="tyc">🎬 Scénario</span><span class="tyc">📜 Livret (opéra, ballet)</span><span class="tyc">💬 Bande dessinée</span><span class="tyc">🌐 Traduction</span><span class="tyc">✉️ Correspondance publiée</span><span class="tyc">🗞 Revue · fanzine fondé</span><span class="tyc">📕 Ouvrage collectif · dictionnaire</span><span class="tyc">🗣 Discours (texte)</span>
+  <div class="ch">Chaînes : Texte → <b>éditions</b> → exemplaires · BD : série → <b>albums</b> → <b>planches</b> originales</div></div></div>
+ <div class="famc"><div class="fh"><b>🎬 Image animée et son</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc v">🎬 Film</span><span class="tyc">🎞 Court métrage</span><span class="tyc">🎥 Documentaire</span><span class="tyc">🐭 Cinéma d’animation</span><span class="tyc">📺 Série TV</span><span class="tyc">📺 Émission de télévision</span><span class="tyc">📻 Émission de radio</span><span class="tyc">🎧 Podcast</span><span class="tyc">📻 Feuilleton radio</span><span class="tyc">📹 Clip vidéo</span><span class="tyc">📢 Film publicitaire</span><span class="tyc">📼 Film amateur · de famille</span><span class="tyc">▶️ Vidéo en ligne</span><span class="tyc">🗣 Doublage · voix</span>
+  <div class="ch">Chaîne : Série → <b>saisons</b> → <b>épisodes</b> → diffusions · Rôles et voix : voir W (acteur)</div></div></div>
+ <div class="famc"><div class="fh"><b>🔨 Design et métiers d’art</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc d">🪧 Affiche · graphisme</span><span class="tyc">🔤 Logo · identité visuelle</span><span class="tyc">🅰️ Police de caractères</span><span class="tyc">🪑 Design d’objet</span><span class="tyc">👗 Mode (collection → modèle)</span><span class="tyc d">⚒️ Ferronnerie d’art</span><span class="tyc">🏺 Céramique · faïence · porcelaine</span><span class="tyc">🫙 Verre · cristal</span><span class="tyc">💍 Orfèvrerie · bijou</span><span class="tyc">🧵 Tapisserie · tissage</span><span class="tyc">🪡 Broderie · dentelle</span><span class="tyc">🪵 Ébénisterie · marqueterie</span><span class="tyc">📕 Reliure</span><span class="tyc">🎻 Lutherie · facture d’instruments</span><span class="tyc">🕰 Horlogerie</span><span class="tyc">🏅 Médaille · sceau</span><span class="tyc">🔖 Ex-libris</span>
+  <div class="ch"><b>＋ 16 domaines, ~280 métiers</b> (liste officielle française des métiers d’art) : voir <b>S</b> · fiche détaillée : <b>T</b></div></div></div>
+ <div class="famc"><div class="fh"><b>🏛 Espace et paysage</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc">🏠 Architecture · bâtiment</span><span class="tyc">🌳 Jardin · paysage</span><span class="tyc">🗺 Urbanisme · aménagement</span><span class="tyc">🗽 Monument · mémorial</span><span class="tyc">🎭 Décor · scénographie</span><span class="tyc">🛋 Décoration intérieure</span><span class="tyc">🌉 Ouvrage d’art (pont…)</span>
+  <div class="ch">Chaîne : Projet → <b>plans</b> → <b>chantier</b> → états successifs (transformations, démolition)</div></div></div>
+ <div class="famc"><div class="fh"><b>💻 Numérique et jeux</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc">🕹 Jeu vidéo</span><span class="tyc">🎲 Jeu de société</span><span class="tyc">🐉 Jeu de rôle · scénario</span><span class="tyc">💾 Logiciel · application</span><span class="tyc">🌐 Site web</span><span class="tyc">✨ Art numérique · génératif</span><span class="tyc">🧊 Modèle 3D</span>
+  <div class="ch">Chaîne : Œuvre → <b>versions</b> / éditions / extensions → plateformes</div></div></div>
+ <div class="famc"><div class="fh"><b>🧩 Modélisme et loisirs créatifs</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc">✈️ Maquette · modèle réduit</span><span class="tyc">🚂 Réseau ferroviaire miniature</span><span class="tyc">🏞 Diorama</span><span class="tyc">🪖 Figurine peinte</span><span class="tyc">⚙️ Automate</span><span class="tyc">🧶 Tricot · couture (patron)</span><span class="tyc">📒 Album · scrapbooking</span><span class="tyc">💐 Création florale</span>
+  <div class="ch">Maquette : échelle, matériaux, kit (marque, réf.), heures de travail, concours</div></div></div>
+ <div class="famc"><div class="fh"><b>🍷 Saveurs et senteurs</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc">🍲 Recette · plat créé</span><span class="tyc">🍷 Cuvée · spiritueux</span><span class="tyc">🌹 Parfum</span><span class="tyc">🧀 Produit du terroir</span><span class="tyc">🍎 Variété créée (rose, pomme…)</span>
+  <div class="ch">Ingrédients, millésimes, médailles aux concours, étiquettes (images)</div></div></div>
+ <div class="famc"><div class="fh"><b>🔗 Fiches qui relient</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc v">🏛 Exposition</span><span class="tyc">🎪 Festival</span><span class="tyc">🏆 Prix · concours</span><span class="tyc">🗂 Série · collection</span><span class="tyc">🤝 Commande · mécène</span><span class="tyc">🏚 Atelier · studio</span>
+  <div class="ch">Ce ne sont pas des œuvres : elles regroupent des œuvres et des personnes</div></div></div>
+ <div class="famc mine"><div class="fh"><b style="color:#7b2ff7">✎ Mes types</b><span class="sp"></span><small class="cnt"></small></div><div class="fb">
+  <span class="tyc u">🎠 Char de carnaval</span><span class="tyc u">👞 Sabot sculpté</span>
+  <div style="margin-top:6px"><span class="btn s">✎ Créer mon propre type…</span> <span class="btn s">📥 Importer un type</span></div>
+  <div class="ch">Tes types ont les mêmes outils que les autres (champs affichés, liste, export, catalogue) — voir L</div></div></div>
+</div>
+<div class="legend"><span><span class="tyc v" style="margin:0">validé</span> déjà dans A–H</span><span><span class="tyc d" style="margin:0">★</span> fiche détaillée dans cette maquette</span><span><span class="tyc u" style="margin:0">✎</span> créé par toi</span><span>Chaque type se range dans une famille ; un type peut être caché (⚙️ Gérer les types) s’il ne te sert jamais.</span></div>
+
+<div class="sec"><div class="sh"><b>Ce que contient la fiche de chaque nouveau type</b><small class="g">★ = affiché d’office · le reste est dans « ⚙️ Champs affichés » (masqué au départ)</small></div>
+<div class="sumg">
+ <div class="sumc"><b>🗿 Sculpture</b><span class="k">Modèle → fontes / tirages</span><span class="s">★</span> matériau, technique (fonte, taille directe, modelage), dimensions, signature, cachet du fondeur, n° de tirage, fondeur, patine, socle ; agrandissements, réductions, droits d’édition</div>
+ <div class="sumc"><b>🧱 Installation</b><span class="k">Œuvre → présentations successives</span><span class="s">★</span> éléments (liste avec matériaux), lieux successifs 📍 et dates, plans de montage, notice, surface, son/vidéo, conditions d’exposition, démontage, éléments conservés</div>
+ <div class="sumc"><b>📷 Photographie</b><span class="k">Négatif → tirages → éditions</span><span class="s">★</span> date et lieu de prise 📍, appareil, objectif, film, procédé (gélatino-argentique, autochrome, numérique…), tirages (date, papier, format, n°/tirage), éditions, personnes visibles 👤</div>
+ <div class="sumc"><b>✈️ Maquette · modèle réduit</b><span class="k">Œuvre (+ kit)</span><span class="s">★</span> sujet (avion, bateau…), échelle (1/72…), matériaux, kit (marque, référence) ou scratch, heures, peinture, concours et prix, où elle est</div>
+ <div class="sumc"><b>🎭 Opéra</b><span class="k">Partition → productions → représentations</span><span class="s">★</span> compositeur, librettiste 👤, actes, langue, rôles (voix : soprano…), effectif, création (date, salle, chef, distribution), productions et reprises</div>
+ <div class="sumc"><b>🩰 Ballet · danse</b><span class="k">Chorégraphie → création → reprises</span><span class="s">★</span> chorégraphe 👤, musique (🎵 lien), décors, costumes, durée, création (compagnie, lieu, date), distribution (rôle → danseur 👤), reprises, notation (Benesh, Laban), vidéo</div>
+ <div class="sumc"><b>🎼 Musique savante</b><span class="k">Œuvre → mouvements → interprétations</span><span class="s">★</span> forme, n° de catalogue (op., BWV, K., D., Hob.…), tonalité, effectif, mouvements, durée, composition, dédicataire 👤, commande, création, manuscrit, éditeur</div>
+ <div class="sumc"><b>⛪ Oratorio · cantate · messe</b><span class="k">comme musique savante +</span><span class="s">★</span> texte (auteur, langue, source biblique), solistes et voix, chœur, numéros (air, récitatif, chœur), occasion liturgique, lieu de création (église 📍)</div>
+ <div class="sumc"><b>🎭 Pièce de théâtre</b><span class="k">Pièce → mises en scène → représentations → tournées</span><span class="s">★</span> auteur, genre, actes, personnages, écriture, publication (📚), mises en scène (équipe, distribution), représentations, tournées</div>
+ <div class="sumc"><b>🪧 Affiche · graphisme</b><span class="k">Œuvre → états → exemplaires</span><span class="s">★</span> commanditaire, sujet (événement 📅, élection 🗳), imprimeur, procédé, format, tirage, date d’affichage, mentions (visa, timbre), où conservée (cote)</div>
+ <div class="sumc"><b>🎤 Seul en scène · humour</b><span class="k">Spectacle → sketches → dates</span><span class="s">★</span> auteur(s), metteur en scène 👤, sketches (chacun une fiche), durée, première, nombre de dates, captation TV/DVD, salles, setlist du soir (U)</div>
+ <div class="sumc"><b>🎪 Arts du cirque</b><span class="k">Numéro → spectacles → dates</span><span class="s">★</span> discipline (trapèze, jonglage, clown, dressage…), agrès, compagnie / cirque 🏷, partenaires 👤, musique, durée, figures, prix (festival de Monte-Carlo), photos</div>
+ <div class="sumc"><b>💬 Bande dessinée</b><span class="k">Série → albums → planches</span><span class="s">★</span> scénariste, dessinateur, coloriste 👤, éditeur, prépublication (revue), planches originales (n°, technique, propriétaire, ventes)</div>
+ <div class="sumc"><b>🪵 Gravure · estampe</b><span class="k">Matrice → états → tirages</span><span class="s">★</span> technique (eau-forte, burin, bois, litho, sérigraphie), matrice (cuivre, pierre), états, tirage (n°/total, épreuve d’artiste), imprimeur, papier, cachet, catalogue</div>
+ <div class="sumc"><b>🏠 Architecture · bâtiment</b><span class="k">Projet → plans → chantier → états</span><span class="s">★</span> adresse 📍 (carte), maître d’ouvrage, architecte, entreprises 👤, dates (permis, chantier, livraison), style, matériaux, protection MH, transformations</div>
+ <div class="sumc"><b>🕹 Jeu vidéo · 🎲 jeu de société</b><span class="k">Jeu → versions / éditions → extensions</span><span class="s">★</span> éditeur, studio, plateformes ou matériel, joueurs, durée, âge, mécaniques, crédits par métier, ventes, prix (As d’or…)</div>
+ <div class="sumc"><b>📺 Série · 📻 émission · 🎧 podcast</b><span class="k">Série → saisons → épisodes → diffusions</span><span class="s">★</span> chaîne / station / plateforme, créateurs, présentateurs 👤, épisodes (n°, titre, date, durée, invités 👤, fichier son/vidéo), audiences</div>
+ <div class="sumc"><b>💾 Logiciel · 🌐 site</b><span class="k">Œuvre → versions</span><span class="s">★</span> langage, licence, versions (n°, date, nouveautés), adresse web et archive, dépôt de code, utilisateurs, captures d’écran</div>
+ <div class="sumc"><b>🏺 Céramique · 🫙 verre</b><span class="k">Pièce (+ série)</span><span class="s">★</span> terre / verre, technique (tournage, soufflage, moulage), cuisson, émail ou décor, marque sous la pièce, atelier, dimensions</div>
+ <div class="sumc"><b>👗 Mode</b><span class="k">Collection → modèles → pièces</span><span class="s">★</span> saison, défilé (date, lieu), modèle (n°, nom, tissus, mannequin 👤), atelier, pièces conservées, photos de défilé</div>
+</div></div>
+</section>
+
+<!-- ═══════════ J. SCULPTURE + AFFICHE ═══════════ -->
+<section class="case" id="sculpture"><span class="tag"><span class="num">J</span>Nouvelles fiches · sculpture et affiche</span><h3>Une sculpture et toutes ses fontes ; une affiche, son imprimeur, son tirage et ce qu’elle annonçait</h3>
+<div class="top"><span>🗿</span><div><div class="ey">SCULPTURE · BRONZE · CR S-12</div><h4>La Corrézienne</h4></div><span class="seg" style="margin-left:14px"><span class="on">Lecture</span><span>✎ Modifier</span></span><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">⛶</span><span class="ib">×</span></div>
+<div class="sheet">
+ <div>
+  <div class="bronze"></div>
+  <div class="thumbs"><div style="background:#e9e6df"><small>PLÂTRE</small></div><div style="background:#7a5532"><small>CACHET</small></div><div style="background:#cfd8e3"><small>PROFIL</small></div><div style="background:#f3f1ec"><small>ESQUISSE</small></div></div>
+  <div class="side" style="margin-top:12px"><h5>🧱 Modèle d’origine</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Matériau</dt><dd>Plâtre patiné, 1931</dd><dt>Où</dt><dd>Musée du Cloître, Tulle <small class="g">inv. 1975.3.1</small></dd><dt>Terre cuite</dt><dd>esquisse, 22 cm · famille</dd><dt>Moule</dt><dd>détruit en 1990 <small class="g">(📄 PV)</small></dd></dl></div>
+ </div>
+ <div>
+  <h2 class="h2">La Corrézienne <small>· 1931 · bronze</small></h2>
+  <div style="margin:2px 0 10px"><span class="badge ok">✓ Œuvre certaine</span> <span class="badge b">8 + 4 EA</span> <span class="badge w">1 fonte posthume</span></div>
+  <dl class="dl">
+   <dt>Technique</dt><dd>Fonte à la cire perdue, d’après un modèle en plâtre</dd><dt>Dimensions</dt><dd>H. 64 × L. 22 × P. 20 cm · 14,5 kg <small class="g">(sans le socle)</small></dd>
+   <dt>Signé</dt><dd>« J. MARTIN » sur la terrasse · cachet « Susse Fres Fondeurs Paris »</dd>
+   <dt>Socle</dt><dd>Marbre vert de mer, H. 8 cm · plaque « À Marie » <small class="g">(fonte n° 1 seulement)</small></dd>
+   <dt>Modèle</dt><dd><span class="chip"><span class="pp-av f">MM</span>Marie MARTIN <span class="r">a posé</span></span> <small class="g">sa fille, à 19 ans</small></dd></dl>
+  <div class="sec"><div class="sh"><b>🔥 Fontes et tirages</b><small class="g">12 exemplaires · 9 localisés</small><span class="sp"></span><span class="filt"><span class="on">Toutes 12</span><span>Du vivant 11</span><span>Posthumes 1</span></span><span class="btn s">＋ Ajouter une fonte</span></div>
+   <table class="t"><tr><th>N°</th><th>Fondeur</th><th>Fondue</th><th>Procédé</th><th>Patine</th><th>Où / à qui</th><th></th></tr>
+    <tr style="background:#eef4ff"><td><b>1/8</b></td><td><span class="ochip"><i>🏭</i>Susse</span></td><td>1932</td><td>cire perdue</td><td>brun nuancé</td><td><span class="chip"><span class="pp-av m">PB</span>Paul BORIE</span> salon, Tulle</td><td>⭐ la nôtre</td></tr>
+    <tr><td>2/8</td><td>Susse</td><td>1932</td><td>cire perdue</td><td>brun nuancé</td><td>Musée Labenche, Brive <small class="g">inv. 82.4</small></td><td>↗</td></tr>
+    <tr><td>3/8 – 6/8</td><td>Susse</td><td>1933-1950</td><td>cire perdue</td><td>vert antique</td><td><small class="g">4 collections privées · 2 ventes</small></td><td>▸</td></tr>
+    <tr><td>7/8</td><td>Rudier</td><td>1958</td><td>au sable</td><td>noire</td><td><span class="ochip"><i>📍</i>Mairie de Laguenne</span> hall</td><td>↗</td></tr>
+    <tr><td>8/8</td><td>Coubertin</td><td><b>1989</b></td><td>cire perdue</td><td>brun</td><td><span class="badge w">posthume</span> ayants droit</td><td>↗</td></tr>
+    <tr><td>EA I – IV</td><td>Susse</td><td>1932</td><td>cire perdue</td><td>dorée (EA I)</td><td>EA I : <span class="chip"><span class="pp-av f">MM</span>Marie MARTIN</span></td><td>▸</td></tr></table>
+   <p class="note">Chaque fonte est une petite fiche : cachet et numéro gravés, poids, patineur, propriétaires successifs (même provenance qu’en C), ventes et prix, photos de l’exemplaire.</p></div>
+  <div class="sec"><div class="sh"><b>↔ Agrandissements, réductions, versions</b></div>
+   <div><span class="ochip link"><i>🗿</i>Réduction 32 cm</span> 1935, Susse, 25 ex. · <span class="ochip link"><i>🗿</i>Monument aux morts de Laguenne</span> pierre, H. 2,10 m, 1934 · <span class="ochip link"><i>🖼</i>Étude peinte CR 61</span></div></div>
+ </div>
+ <div>
+  <div class="side"><h5>⚖️ Édition et droits</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Tirage prévu</dt><dd>8 + 4 EA <small class="g">(limite légale : 12)</small></dd><dt>Contrat</dt><dd>Susse, 1931 · 📄</dd><dt>Droits</dt><dd>ayants droit Martin</dd><dt>Avis comité</dt><dd>fonte 8/8 : authentifiée 1990</dd></dl></div>
+  <div class="side"><h5>🏛 Expositions</h5><div>1932 · Salon des Artistes français <small class="g">n° 3412 (plâtre)</small></div><div>2021 · Rétrospective, Brive <small class="g">fonte 2/8</small></div></div>
+  <div class="side"><h5>🔗 Lié à</h5><div><span class="ochip"><i>📅</i>Inauguration monument, 1934</span></div><div><span class="ochip"><i>📰</i>La Montagne, 12 nov. 1934</span></div><div><span class="ochip"><i>🏭</i>Fonderie Susse</span> <small class="g">(employeur / organisme)</small></div></div>
+ </div>
+</div>
+
+<div class="sec" style="margin-top:22px;border-top:3px solid #111;padding-top:14px"><div class="sh"><b style="font-size:16px">🪧 Affiche · graphisme</b><small class="g">même modèle : fiche + exemplaires + liens</small></div>
+<div class="sheet" style="grid-template-columns:200px 1fr 320px">
+ <div><div class="poster"><i></i></div><div class="thumbs"><div style="background:#d0182f"><small>ÉTAT 1</small></div><div style="background:#1d2b64"><small>AVANT LA LETTRE</small></div><div style="background:#e9e3d3"><small>MAQUETTE</small></div><div style="background:#f4c542"><small>MUR</small></div></div></div>
+ <div>
+  <h2 class="h2" style="font-size:19px">Fête de la Saint-Jean, Tulle <small>· 1952 · lithographie</small></h2>
+  <dl class="dl" style="font-size:13px">
+   <dt>Commanditaire</dt><dd><span class="ochip link"><i>🏛</i>Ville de Tulle · comité des fêtes</span></dd>
+   <dt>Annonce</dt><dd><span class="ochip link"><i>📅</i>Fête de la Saint-Jean, 23-24 juin 1952</span></dd>
+   <dt>Imprimeur</dt><dd><span class="ochip"><i>🏭</i>Imprimerie Mazeyrie, Tulle</span> · lithographie en 4 couleurs</dd>
+   <dt>Format</dt><dd>120 × 160 cm <small class="g">(double grand aigle)</small> · existe aussi en 40 × 60 cm</dd>
+   <dt>Tirage</dt><dd>500 ex. + 50 petit format</dd><dt>Affichée</dt><dd>du 1er au 24 juin 1952 · Tulle, Brive, Uzerche</dd>
+   <dt>Texte</dt><dd>« Grande fête de la Saint-Jean · bal · feu d’artifice · concours de bourrée »</dd>
+   <dt>Mentions</dt><dd>« Imp. Mazeyrie » en bas à droite · timbre fiscal · visa de la préfecture n° 52-118</dd></dl>
+ </div>
+ <div>
+  <div class="side"><h5>📍 Exemplaires connus</h5><div>Archives départementales de la Corrèze <small class="g">cote 6 Fi 1952/4</small></div><div>Le nôtre : <small class="g">plié, bon état · 📦 grenier</small></div></div>
+  <div class="side"><h5>🗳 Aussi pour les élections</h5><p style="margin:0">Une affiche peut être liée à une <b>élection</b> du profil politique (P) : « Affiche de campagne · Henri BORIE · législatives 1958 » apparaît dans la ligne de l’élection.</p></div>
+ </div>
+</div></div>
+</section>
+
+<!-- ═══════════ K. CONCERTO + THÉÂTRE ═══════════ -->
+<section class="case" id="concerto"><span class="tag"><span class="num">K</span>Nouvelles fiches · musique savante et théâtre</span><h3>Un concerto (mouvements, création, interprétations → enregistrements) et une pièce (mises en scène → représentations → tournées)</h3>
+<div class="top"><span>🎻</span><div><div class="ey">MUSIQUE SAVANTE · CONCERTO · OP. 12</div><h4>Concerto pour accordéon et orchestre en ré mineur</h4></div><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="sheet" style="grid-template-columns:180px 1fr 360px">
+ <div><div class="score"></div><p class="note">Manuscrit autographe · 64 p. · 🖼 fenêtre des médias</p></div>
+ <div>
+  <dl class="dl" style="font-size:13px">
+   <dt>Compositeur</dt><dd><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span></dd>
+   <dt>Catalogue</dt><dd><b>op. 12</b> · JM 34 <small class="g">(catalogue thématique) — le système se choisit : op., BWV, K., D., Hob., RV, S., L., HWV ou le tien</small></dd>
+   <dt>Forme · tonalité</dt><dd>Concerto · ré mineur · 3 mouvements · ≈ 24 min</dd>
+   <dt>Effectif</dt><dd>accordéon solo · 2.2.2.2 – 2.2.0.0 – timbales – cordes</dd>
+   <dt>Composé</dt><dd>entre 1961 et 1962 · <span class="ochip"><i>📍</i>Tulle (19)</span></dd>
+   <dt>Dédicataire</dt><dd><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">frère</span></span></dd>
+   <dt>Commande</dt><dd>Radio-Limoges (ORTF) · 📄 lettre du 3 fév. 1961</dd>
+   <dt>Création</dt><dd>14 mars 1963 · Limoges, Grand-Théâtre · soliste <span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN</span> · Orchestre de chambre de Limoges · dir. R. Vidal</dd>
+   <dt>Édition</dt><dd>Éd. Choudens, 1964 · cotage A.C. 21.034</dd></dl>
+  <div class="sec"><div class="sh"><b>🎼 Mouvements</b></div>
+   <div class="mvt"><span class="rn">I.</span><span><b>Allegro moderato</b> <small class="g">« La Montagne »</small></span><span>ré mineur · 4/4</span><span>9:40</span><span>▶</span></div>
+   <div class="mvt"><span class="rn">II.</span><span><b>Valse lente</b> <small class="g">« Souvenir de Laguenne »</small></span><span>fa majeur · 3/4</span><span>7:15</span><span>▶</span></div>
+   <div class="mvt"><span class="rn">III.</span><span><b>Rondo – Bourrée</b> <small class="g">cadence écrite</small></span><span>ré majeur · 3/8</span><span>7:05</span><span>▶</span></div></div>
+ </div>
+ <div>
+  <div class="side"><h5>🎤 Interprétations</h5>
+   <div class="reccard" style="padding:6px 8px;margin-bottom:6px"><div class="hd"><span class="kind live">CRÉATION</span><b>1963 · Limoges</b></div><small class="g">P. MARTIN · dir. R. Vidal</small><div><span class="rec">🎙 bande ORTF</span></div></div>
+   <div class="reccard" style="padding:6px 8px;margin-bottom:6px"><div class="hd"><span class="kind take">STUDIO</span><b>1965 · Paris</b></div><small class="g">P. MARTIN · Orch. Lamoureux</small><div><span class="rec">🎚 Mix stéréo</span> → <span class="ochip link"><i>💿</i>Erato LDE 3201</span></div></div>
+   <div class="reccard" style="padding:6px 8px;margin-bottom:0"><div class="hd"><span class="kind rem">CONCERT</span><b>2012 · Brive</b></div><small class="g">soliste <span class="chip gr"><span class="q">?</span>N. Valade</span> · 2 dates</small></div>
+   <p class="note" style="margin:6px 0 0">Interprétation → enregistrement → parution : la même chaîne que le morceau (B).</p></div>
+  <div class="side"><h5>📍 Manuscrit</h5><p style="margin:0">BnF, Musique · Ms. 21 344 · 📄 scan</p></div>
+ </div>
+</div>
+
+<div class="sec" style="margin-top:22px;border-top:3px solid #111;padding-top:14px"><div class="sh"><b style="font-size:16px">🎭 Pièce de théâtre · « La Veillée »</b><small class="g">Pièce → mises en scène → représentations → tournées</small><span class="sp"></span><span class="seg"><span class="on">Arbre</span><span>Tableau</span><span>Calendrier</span><span>Carte</span></span></div>
+<div class="tree3">
+ <div>
+  <div class="lvl"><span class="lt">La pièce (le texte)</span><dl class="dl" style="font-size:12.5px;margin:2px 0 0"><dt>Auteur</dt><dd><span class="chip"><span class="pp-av f">LB</span>Louise BORIE</span></dd><dt>Genre</dt><dd>comédie dramatique · 3 actes</dd><dt>Écrite</dt><dd>1949</dd><dt>Personnages</dt><dd>7 (4 F, 3 H)</dd><dt>Publiée</dt><dd><span class="ochip link"><i>📚</i>L’Avant-scène n° 52</span></dd><dt>Adaptée</dt><dd><span class="ochip link"><i>📻</i>Radio-Limoges, 1955</span></dd></dl></div>
+ </div>
+ <div>
+  <div class="lvl l2"><span class="lt">Mise en scène 1 · création</span>
+   <div class="hd" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="kind mes">CRÉATION</span><b>Compagnie du Limousin · 1951</b><small class="g">mise en scène <span class="chip"><span class="pp-av m">HB</span>Henri BORIE</span> · décors J. MARTIN · musique <span class="ochip link"><i>🎵</i>La Veillée (valse)</span></small></div>
+   <table class="t" style="margin-top:4px"><tr><th>Personnage</th><th>Interprète</th><th>Remplaçant(e)</th></tr><tr><td>Mélanie, la grand-mère</td><td><span class="chip"><span class="pp-av f">LB</span>Louise BORIE</span></td><td>—</td></tr><tr><td>Jean, le fils</td><td><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN</span></td><td><span class="chip gr"><span class="q">?</span>A. Faure</span> (12 dates)</td></tr><tr><td>… 5 autres</td><td colspan="2"><small class="g">▸ voir toute la distribution</small></td></tr></table>
+   <div class="lvl l3" style="margin-top:8px"><span class="lt">Représentations · 38</span>
+    <div style="display:grid;grid-template-columns:1fr 210px;gap:12px"><table class="t"><tr><th>Date</th><th>Lieu</th><th>Salle</th><th>Spect.</th><th>Note</th></tr><tr><td>12 mai 1951</td><td>📍 Tulle</td><td>Théâtre municipal</td><td>420</td><td><span class="badge b">première</span></td></tr><tr><td>13 mai 1951</td><td>📍 Tulle</td><td>Théâtre municipal</td><td>380</td><td></td></tr><tr><td>2 juin 1951</td><td>📍 Brive</td><td>Salle des fêtes</td><td>510</td><td>joué en plein air</td></tr></table>
+    <div><div class="cal"><span class="h">L</span><span class="h">M</span><span class="h">M</span><span class="h">J</span><span class="h">V</span><span class="h">S</span><span class="h">D</span><span></span><span></span><span></span><span></span><span></span><span class="on">12</span><span class="on">13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span class="on">19</span><span class="on">20</span></div><small class="g">mai 1951</small></div></div></div>
+   <div class="lvl l4"><span class="lt">Tournées</span><div><span class="kind tour">TOURNÉE</span> <b>Tournée du Limousin, été 1951</b> <small class="g">· 22 dates · 14 villes · 🗺 carte · 9 200 spectateurs</small></div></div>
+  </div>
+  <div class="lvl l2"><span class="lt">Mise en scène 2 · reprise</span><div><span class="kind mes">REPRISE</span> <b>Théâtre de l’Union, Limoges · 1978</b> <small class="g">mise en scène <span class="chip gr"><span class="q">?</span>Cl. Roux</span> · 64 représentations · 1 tournée · captation FR3</small></div></div>
+ </div>
+</div></div>
+</section>
+
+<!-- ═══════════ L. CRÉER UN TYPE ═══════════ -->
+<section class="case" id="creertype"><span class="tag"><span class="num">L</span>Créer son propre type</span><h3>« ✎ Créer un type d’œuvre » : nommer, choisir une icône, composer les champs (les tiens ou ceux d’autres types), ranger, relier</h3>
+<div class="steps"><span class="dn">1 · Nom et icône ✓</span><span class="on">2 · Champs et groupes</span><span>3 · Liens possibles</span><span>4 · Liste et vignettes</span><span>5 · Aperçu</span></div>
+<div class="wiz3">
+ <div>
+  <div class="fld">Nom du type<input value="Char de carnaval"></div>
+  <div class="fld">Au pluriel<input value="Chars de carnaval"></div>
+  <div class="fld">Icône<div class="icg"><span class="on">🎠</span><span>🎭</span><span>🎉</span><span>🚜</span><span>🎪</span><span>🏵</span><span>🪅</span><span>🎈</span><span>🌸</span><span>🐉</span><span>🛞</span><span>🎊</span><span>👑</span><span>⭐</span><span>🔍</span><span>＋</span></div></div>
+  <div class="fld">Famille<div class="in">🧩 Modélisme et loisirs créatifs ▾</div></div>
+  <div class="fld">Partir de…<div class="in">○ Rien · ● Un type existant : <b>🧱 Installation</b> ▾</div></div>
+  <div class="fld">Fiches « parties »<div class="in" style="font-weight:500">☑ un char a des <b>éditions</b> (une par année de défilé) <small class="g">— comme fonte, mise en scène…</small></div></div>
+  <p class="note">Ce type est rangé avec les autres : liste avec la barre H10, ⚙️ champs affichés, export, catalogue, « Lié à ». <b>📤 Exporter le type</b> pour le donner à un cousin.</p>
+ </div>
+ <div>
+  <div class="gbox"><div class="gh">▾ L’œuvre<span class="sp"></span><span class="ib" style="width:22px;height:22px">✎</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Titre</b> <small class="g">obligatoire</small></span><span class="ty">Aa texte</span><span class="src">base</span><span class="def"></span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Thème</b></span><span class="ty">☑ liste</span><span></span><span class="def">Folklore · Fable · Actualité…</span></div>
+   <div class="cf sel"><span class="grip">⠿</span><span>👁</span><span><b>Dimensions</b> <small class="g">L × l × H</small></span><span class="ty">📐 dimensions</span><span class="src">↙ Peinture</span><span class="def">unité : m</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Matériaux</b></span><span class="ty">🏷 étiquettes</span><span class="src">↙ Sculpture</span><span class="def">papier mâché, bois</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Heures de travail</b></span><span class="ty">⏱ durée</span><span></span><span class="def">en heures</span></div></div>
+  <div class="gbox"><div class="gh">▾ Le défilé (une édition)<span class="sp"></span><span class="ib" style="width:22px;height:22px">✎</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Carnaval</b></span><span class="ty">📅 événement</span><span></span><span class="def">Carnaval de Tulle</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Date</b></span><span class="ty">📅 date C4</span><span class="src">base</span><span class="def"></span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Constructeurs</b></span><span class="ty">👤 personnes + rôle</span><span class="src">↙ Disque · Crédits</span><span class="def">rôles : chef, peintre…</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Parcours</b></span><span class="ty">📍 lieux</span><span class="src">↙ Installation</span><span class="def"></span></div>
+   <div class="cf"><span class="grip">⠿</span><span style="opacity:.5">🚫</span><span style="opacity:.5"><s>Budget</s></span><span class="ty">💶 montant</span><span></span><span class="def">masqué à la lecture</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Prix au concours</b></span><span class="ty">⭐ note / prix</span><span></span><span class="def">1er, 2e, 3e…</span></div>
+   <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Photos et films</b></span><span class="ty">🖼 images / vidéos</span><span class="src">base</span><span class="def">fenêtre des médias</span></div></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap"><span class="btn s">＋ Ajouter un champ</span><span class="btn s">＋ Ajouter un groupe</span><span class="btn s">↙ Reprendre d’un autre type…</span></div>
+  <div class="pop" style="margin-top:10px"><b>Réglages du champ « Dimensions »</b>
+   <dl class="dl" style="font-size:12.5px;margin:6px 0 0"><dt>Libellé</dt><dd>Dimensions</dd><dt>Aide (bulle ?)</dt><dd>« Mesures du char monté, sans les personnages »</dd><dt>Valeur de départ</dt><dd>— · unité : <b>m</b> ▾</dd><dt>Obligatoire</dt><dd><span class="tog off"><i></i></span></dd><dt>Affiché d’office</dt><dd><span class="tog"><i></i>fiche · liste · vignettes</span></dd><dt>Dans la recherche</dt><dd><span class="tog"><i></i>filtre « Dimensions » dans Filtrer ▾</span></dd></dl></div>
+ </div>
+ <div>
+  <div class="pan">
+   <div class="ph"><b>＋ Champs à ajouter</b></div>
+   <div style="padding:8px 10px"><b style="font-size:12px">Champ perso — choisis sa sorte</b>
+    <div class="tys2" style="margin-top:6px"><span>Aa Texte</span><span>¶ Texte long</span><span>123 Nombre</span><span>📅 Date (C4)</span><span>🕑 Période</span><span>⏱ Durée</span><span>📐 Dimensions</span><span>⚖️ Mesure + unité</span><span>💶 Montant</span><span>☑ Liste de choix</span><span>🏷 Étiquettes</span><span>☐ Oui / non</span><span>⭐ Note</span><span>🔗 Lien web</span><span>🔢 Code · n°</span><span>👤 Personne + rôle</span><span>📍 Lieu</span><span>📎 Fiche liée</span><span>🖼 Image · son · vidéo</span><span>📄 Document</span><span>📋 Tableau (lignes)</span><span>🎨 Couleur (C2)</span><span>📝 Note</span><span>🧮 Calcul</span></div></div>
+   <div style="padding:8px 10px;border-top:2px solid #111"><b style="font-size:12px">Bibliothèque : champs des autres types</b>
+    <div class="pp-box" style="margin:6px 0;min-height:32px"><span class="pp-ico">🔍</span><input placeholder="Chercher un champ…"></div>
+    <div class="lib">
+     <label>☑ 📐 Dimensions <small>🖼 Peinture</small></label>
+     <label>☑ 🏷 Matériaux <small>🗿 Sculpture</small></label>
+     <label>☑ 👤 Crédits (personne + rôle) <small>💿 Disque</small></label>
+     <label>☑ 📍 Lieux successifs <small>🧱 Installation</small></label>
+     <label>☐ 📋 Pistes <small>💿 Disque</small></label>
+     <label>☐ 🏛 Provenance (étapes) <small>🖼 Peinture</small></label>
+     <label>☐ 🔥 Fontes et tirages <small>🗿 Sculpture</small></label>
+     <label>☐ 🎭 Distribution <small>🎭 Théâtre</small></label>
+     <label>☐ 🏛 Expositions <small>🖼 Peinture</small></label>
+     <label>☐ 📜 Brevets <small>💡 Invention</small></label>
+     <label>☐ 🩺 États et restaurations <small>🖼 Peinture</small></label>
+     <label>☐ 📦 Mon exemplaire <small>💿 Disque</small></label></div>
+    <p class="note" style="margin:6px 0 0">Un champ repris garde sa forme et son nom (tu peux le renommer) ; les fiches gardent leurs valeurs si tu le retires.</p></div>
+   <div style="padding:8px 10px;border-top:2px solid #111"><b style="font-size:12px">Étape 3 · liens possibles</b>
+    <div class="lib"><label>☑ 🎵 Morceau <small>« musique du char »</small></label><label>☑ 🪧 Affiche <small>« annoncé par »</small></label><label>☑ 📅 Événement <small>« défile à »</small></label><label>☐ ＋ autre type… <small>nom du lien</small></label></div></div>
+  </div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ M. INVENTION ═══════════ -->
+<section class="case" id="invention"><span class="tag"><span class="num">M</span>Inventions</span><h3>La fiche d’une invention : brevets pays par pays, prototypes, co-inventeurs, licences, objets fabriqués</h3>
+<div class="top"><span>💡</span><div><div class="ey">INVENTION · OUTILLAGE AGRICOLE</div><h4>Le sécateur à cliquet « Martin »</h4></div><span class="seg" style="margin-left:14px"><span class="on">Lecture</span><span>✎ Modifier</span></span><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="sheet">
+ <div>
+  <div class="figs" style="grid-template-columns:1fr"><div style="aspect-ratio:4/3"><small>FIG. 1 · brevet FR 1 054 321</small></div></div>
+  <div class="figs" style="margin-top:6px"><div><small>FIG. 2</small></div><div><small>FIG. 3</small></div><div style="background:#7a5532;background-image:none"><small>PROTO</small></div></div>
+  <div class="side" style="margin-top:12px"><h5>👥 Inventeurs</h5>
+   <div><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">inventeur principal</span></span></div>
+   <div><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN <span class="r">dessins</span></span></div>
+   <div><span class="chip gr"><span class="q">?</span>Émile Chassaing <span class="r">co-inventeur (US)</span></span></div></div>
+  <div class="side"><h5>🏆 Prix</h5><div>🥇 Concours Lépine 1953 · médaille d’or</div><div>Foire de Paris 1954 · diplôme d’honneur</div><small class="g">(aussi dans « 🏆 Concours et récompenses » de Pierre)</small></div>
+ </div>
+ <div>
+  <h2 class="h2">Sécateur à cliquet <small>· conçu vers 1950 · Laguenne</small></h2>
+  <dl class="dl" style="font-size:13px"><dt>Domaine</dt><dd>Outillage · viticulture, arboriculture</dd><dt>Problème</dt><dd>couper des branches épaisses sans forcer (vignerons âgés)</dd><dt>Principe</dt><dd>lame qui avance par crans à chaque pression (cliquet)</dd><dt>Première idée</dt><dd>vers 1950 · 📄 carnet de croquis p. 14</dd><dt>Atelier</dt><dd><span class="ochip"><i>📍</i>Forge Martin, Laguenne</span></dd></dl>
+  <div class="sec"><div class="sh"><b>📜 Brevets</b><small class="g">5 pays · 1 famille de brevets</small><span class="sp"></span><span class="btn s">＋ Ajouter un brevet</span></div>
+   <table class="t"><tr><th>Pays</th><th>N°</th><th>Dépôt</th><th>Délivrance</th><th>Déposant</th><th>Statut</th></tr>
+    <tr style="background:#eef4ff"><td>🇫🇷 France</td><td><b>FR 1 054 321</b></td><td>4 mars 1952</td><td>9 sept. 1953</td><td>P. MARTIN</td><td><span class="badge">tombé (1972)</span></td></tr>
+    <tr><td>🇧🇪 Belgique</td><td>BE 518 207</td><td>2 mars 1953</td><td>15 avr. 1953</td><td>P. MARTIN</td><td><span class="badge">tombé</span></td></tr>
+    <tr><td>🇨🇭 Suisse</td><td>CH 312 450</td><td>3 mars 1953</td><td>31 janv. 1956</td><td>P. MARTIN</td><td><span class="badge">tombé</span></td></tr>
+    <tr><td>🇺🇸 États-Unis</td><td>US 2 789 412</td><td>2 mars 1953</td><td>23 avr. 1957</td><td>P. MARTIN, É. Chassaing</td><td><span class="badge">tombé</span></td></tr>
+    <tr><td>🇮🇹 Italie</td><td>—</td><td>1953</td><td>—</td><td>P. MARTIN</td><td><span class="badge w">refusé</span></td></tr></table>
+   <div class="reccard" style="margin-top:8px"><div class="hd"><span class="kind" style="background:#e1a500">BREVET FR 1 054 321</span><b>« Sécateur à commande par cliquet »</b><span style="flex:1"></span><span class="ochip"><i>📄</i>brevet complet · 4 p.</span><span class="ochip link"><i>🔗</i>Espacenet</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div><small class="g">Revendications (3)</small><ol class="claims"><li>Sécateur dont la lame avance par crans…</li><li>Ressort de rappel logé dans la poignée…</li><li>Verrou de sécurité à pouce.</li></ol></div><dl class="dl" style="font-size:12px;margin:4px 0 0"><dt>Classe</dt><dd>A01G 3/02</dd><dt>Mandataire</dt><dd>Cabinet Régimbeau</dd><dt>Annuités</dt><dd>payées jusqu’en 1971</dd><dt>Publié</dt><dd>BOPI n° 37, 1953</dd><dt>Cité par</dt><dd>4 brevets ultérieurs</dd></dl></div></div></div>
+  <div class="sec"><div class="sh"><b>🔧 Prototypes</b></div><div class="tl"><div class="ev"><b>1950</b> · prototype n° 1, bois et fer <small class="g">· 📷 · cassé</small></div><div class="ev"><b>1952</b> · prototype n° 3 <small class="g">· présenté au Lépine · gardé par la famille 📦</small></div></div></div>
+  <div class="sec"><div class="sh"><b>🏭 Licences et exploitation</b></div>
+   <table class="t"><tr><th>Entreprise</th><th>Pays</th><th>Années</th><th>Conditions</th><th>Fabriqués</th></tr><tr><td><span class="ochip link"><i>🏭</i>Manufacture Pradier, Thiers</span></td><td>France</td><td>1954-1972</td><td>5 % des ventes</td><td>≈ 180 000</td></tr><tr><td><span class="ochip"><i>🏭</i>True Temper Corp.</span></td><td>USA</td><td>1957-1963</td><td>forfait 12 000 $</td><td>?</td></tr></table></div>
+ </div>
+ <div>
+  <div class="side"><h5>⚖️ Antériorités et procès</h5><div>Brevet allemand DE 801 112 (1949) opposé en Italie → refus</div><div style="margin-top:4px">1961 · contrefaçon, tribunal de Lyon · <b>gagné</b> · 📄 jugement</div></div>
+  <div class="side"><h5>📦 Objets fabriqués</h5><div class="minis" style="grid-template-columns:repeat(3,1fr)"><div><i style="background:#8a8f99"></i>Modèle « Pradier 54 »</div><div><i style="background:#d0182f"></i>Version luxe</div><div><i style="background:#e9e3d3"></i>Boîte et notice</div></div><small class="g">exemplaires de la famille, catalogue de vente 1956 (📚)</small></div>
+  <div class="side"><h5>🔗 Lié à</h5><div><span class="ochip link"><i>🔬</i>Découverte : …</span></div><div><span class="ochip link"><i>💡</i>Invention dérivée : greffoir 1958</span></div><div><span class="ochip"><i>📰</i>3 passages dans les médias</span></div><div><span class="ochip"><i>🏭</i>Pradier (employeurs)</span></div></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ N. DÉCOUVERTE ═══════════ -->
+<section class="case" id="decouverte"><span class="tag"><span class="num">N</span>Découvertes</span><h3>La fiche d’une découverte : quoi, quand, où, qui, comment publiée, comment nommée, reconnue ou contestée</h3>
+<div class="top"><span>🔬</span><div><div class="ey">DÉCOUVERTE · ESPÈCE NOUVELLE · BOTANIQUE</div><h4>Ophrys martinii (l’Ophrys de Laguenne)</h4></div><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="sheet">
+ <div><div class="specimen"></div><div class="thumbs"><div style="background:#b38be9"><small>FLEUR</small></div><div style="background:#4f7a3a"><small>STATION</small></div><div style="background:#e9e3d3"><small>PLANCHE</small></div><div style="background:#f7f3e8"><small>ÉTIQUETTE</small></div></div>
+  <div class="side" style="margin-top:12px"><h5>🗺 Lieu de la découverte</h5><div class="map" style="height:110px"><span class="pin" style="left:48%;top:52%;background:#7b2ff7"></span><span class="lab" style="left:52%;top:46%">Puy de Laguenne</span></div><small class="g">📍 Laguenne (19) · 45.24 N, 1.78 E · 380 m · coteau calcaire</small></div></div>
+ <div>
+  <dl class="dl" style="font-size:13px">
+   <dt>Sorte</dt><dd>Espèce nouvelle (plante) <small class="g">— la liste change les champs : comète, astéroïde, étoile, gène, molécule, maladie, fossile, minéral, site archéologique, grotte, épave, manuscrit, loi ou théorème, source…</small></dd>
+   <dt>Domaine</dt><dd>Botanique · orchidées</dd><dt>Date</dt><dd>12 mai 1956 <small class="g">✓ Compris : 12 mai 1956</small></dd>
+   <dt>Découvreurs</dt><dd><span class="chip"><span class="pp-av f">LB</span>Louise BORIE <span class="r">a trouvé la plante</span></span><span class="chip gr"><span class="q">?</span>Pr H. Garrigues <span class="r">a décrit l’espèce</span></span></dd>
+   <dt>Méthode</dt><dd>herborisation · comparaison au Muséum · caryotype (1978)</dd>
+   <dt>Spécimen type</dt><dd>Holotype : herbier du Muséum, Paris · <b>P00412233</b> · 📷</dd></dl>
+  <div class="sec"><div class="sh"><b>🏷 Nommage</b></div><dl class="dl" style="font-size:13px;margin:0"><dt>Nom</dt><dd><i>Ophrys martinii</i> Garrigues, 1957</dd><dt>En l’honneur de</dt><dd><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span> <small class="g">(son père, naturaliste amateur)</small></dd><dt>Statut</dt><dd>accepté 1957 → <b>synonyme</b> de <i>Ophrys aranifera</i> subsp. … depuis 2005</dd><dt>Nom commun</dt><dd>Ophrys de Laguenne</dd></dl></div>
+  <div class="sec"><div class="sh"><b>📚 Publications</b><span class="sp"></span><span class="btn s">＋ Ajouter</span></div><table class="t"><tr><th>Date</th><th>Publication</th><th>Auteurs</th><th></th></tr><tr><td>1957</td><td><b>Première description</b> · Bull. Soc. bot. France 104 : 211-214</td><td>Garrigues, Borie</td><td>DOI ↗</td></tr><tr><td>1978</td><td>Caryologie des Ophrys du Limousin · Candollea 33</td><td>Dumas</td><td>📄</td></tr><tr><td>2005</td><td>Révision : mise en synonymie · Jour. Europ. Orch.</td><td>Delteil</td><td>📄</td></tr></table></div>
+  <div class="sec"><div class="sh"><b>⚖️ Reconnaissance et controverses</b></div><div class="tl"><div class="ev"><b>1957</b> · acceptée · prix Montagne de la Soc. botanique</div><div class="ev sale"><b>1960</b> · <b>priorité contestée</b> : un abbé de Brive dit l’avoir vue en 1951 · 📄 lettres</div><div class="ev now"><b>2005</b> · rétrogradée en sous-espèce</div></div></div>
+ </div>
+ <div>
+  <div class="side"><h5>🔗 Liens entre découvertes et inventions</h5>
+   <div class="flow" style="flex-direction:column;align-items:stretch"><div class="ent core"><b>🔬 Découverte</b><small>Ophrys martinii, 1956</small></div><div class="arr">↓ publiée dans</div><div class="ent"><b>📚 Publication</b><small>Bull. Soc. bot., 1957</small></div><div class="arr">↓ a mené à</div><div class="ent x"><b>💡 Invention</b><small>« boîte d’herborisation » · brevet FR 1 190 004</small></div><div class="arr">↓ fabriquée</div><div class="ent"><b>📦 Objet</b><small>exemplaire de la famille</small></div></div>
+   <p class="note" style="margin:6px 0 0">Liens possibles : « publiée dans », « a mené à », « confirme », « contredit », « découverte en même temps que », « nommée d’après ».</p></div>
+  <div class="side"><h5>🗂 Champs selon la sorte</h5>
+   <div class="kinds" style="grid-template-columns:1fr 1fr"><div><b>☄️ Comète</b>désignation (C/1956 R1), orbite, observatoire, instrument</div><div><b>🧬 Gène</b>organisme, chromosome, fonction, n° GenBank</div><div><b>🏺 Site archéo.</b>période, fouilles (campagnes), objets, musée</div><div><b>🦴 Fossile</b>âge, couche, gisement, n° de collection</div></div></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ O. DANS LES MÉDIAS ═══════════ -->
+<section class="case" id="medias"><span class="tag"><span class="num">O</span>Pour toute personne</span><h3>« 📰 Dans les médias » sur la fiche, la fiche d’un passage, et la liste « Revue de presse »</h3>
+<div class="layout2" style="grid-template-columns:1fr 470px">
+ <div>
+  <div class="blk p-med"><div class="bh"><span class="grip">⠿</span><b>📰 Dans les médias</b><small class="g">23 passages · 1934 – 2021</small><span class="sp"></span><span class="filt"><span class="on">Tout 23</span><span>📰 Presse 14</span><span>📻 Radio 4</span><span>📺 TV 3</span><span>🌐 Web 2</span></span><span class="btn s">Tout voir</span><span class="btn s">＋ Ajouter</span></div><div class="bb">
+   <div class="strip"><i style="height:20%"></i><i style="height:0"></i><i style="height:40%"></i><i style="height:100%"></i><i style="height:60%"></i><i style="height:20%"></i><i style="height:0"></i><i style="height:20%"></i><i style="height:40%"></i><i style="height:0"></i><i style="height:0"></i><i style="height:20%"></i><i style="height:0"></i><i style="height:0"></i><i style="height:60%"></i></div>
+   <div style="display:flex;justify-content:space-between;font:600 10.5px system-ui;color:#888;margin:2px 0 8px"><span>1930</span><span>1950</span><span>1970</span><span>1990</span><span>2010</span></div>
+   <div class="mcard"><div class="mt" style="background:#e9e3d3">📰<small>SCAN</small></div><div><span class="mtag c-med">Interview</span> <b>« Le chanteur de Tulle revient au pays »</b><br><small class="g">La Montagne · 3 mai 1958 · p. 6 · par <span class="chip gr"><span class="q">?</span>R. Lavaud <span class="r">journaliste</span></span></small><div class="quote">« Je chante pour ceux qui travaillent à la manufacture… »</div></div><div style="text-align:right"><span class="tone pos">positif</span></div></div>
+   <div class="mcard"><div class="mt" style="background:#eef4ff">📻<small>12:40</small></div><div><span class="mtag c-pol">Invité</span> <b>« Les copains du dimanche » · Radio-Limoges</b><br><small class="g">14 juin 1959 · 12:40 · animé par <span class="chip gr"><span class="q">?</span>J. Pierrot</span> · avec <span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN</span></small><div style="margin-top:4px"><span class="player" style="min-width:220px"><span class="pl">▶</span><span class="wave"></span><small>12:40</small></span></div></div><div style="text-align:right"><span class="ochip"><i>📝</i>transcription</span></div></div>
+   <div class="mcard"><div class="mt" style="background:#111;color:#fff">📺<small>2:05</small></div><div><span class="mtag c-gr">Nécrologie</span> <b>Journal régional FR3 Limousin</b><br><small class="g">12 sept. 1975 · 2:05 · archive INA · sujet : sa mort, sa carrière</small></div><div style="text-align:right"><span class="tone neu">neutre</span></div></div>
+  </div></div>
+  <div class="sec"><div class="sh"><b>📋 Revue de presse</b><small class="g">la liste dédiée (toutes les personnes ou une seule)</small></div>
+   <div class="lbar"><div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="Chercher… (titre, média, journaliste, extrait)"><span class="pp-kbd">/</span></div><span class="sel2">Filtrer ▾ <span style="background:#055dff;color:#fff;padding:0 5px;border-radius:8px">2</span></span><span class="seg"><span class="on">Liste</span><span>Fiches</span><span>Frise</span></span><span class="sel2">Trier : plus anciens ▾</span></div>
+   <div class="act"><span>Joseph MARTIN ×</span><span>Presse écrite ×</span><small class="g" style="align-self:center">Tout effacer</small></div>
+   <table class="t"><tr><th>Date</th><th>Média</th><th>Titre / émission</th><th>Type</th><th>Page · durée</th><th>Ton</th><th>Fichier</th></tr>
+    <tr><td>12 nov. 1934</td><td><span class="ochip link"><i>📰</i>La Montagne</span></td><td>Inauguration du monument de Laguenne</td><td>photo publiée</td><td>p. 3</td><td><span class="tone pos">+</span></td><td>📄</td></tr>
+    <tr><td>3 mai 1958</td><td><span class="ochip link"><i>📰</i>La Montagne</span></td><td>Le chanteur de Tulle revient au pays</td><td>interview</td><td>p. 6</td><td><span class="tone pos">+</span></td><td>📄</td></tr>
+    <tr><td>avril 1959</td><td><span class="ochip link"><i>📰</i>Paris Match</span></td><td>Les nouvelles voix de la chanson</td><td>portrait</td><td>p. 44-47</td><td><span class="tone pos">+</span></td><td>📄</td></tr>
+    <tr><td>1962</td><td><span class="ochip link"><i>📰</i>Le Figaro</span></td><td>« Chansons de la rue » : un disque inégal</td><td>critique · avis</td><td>p. 18</td><td><span class="tone neg">−</span></td><td>📄</td></tr></table>
+   <p class="note">Le média (« La Montagne ») est une fiche de l’outil existant <b>Listes → Revues et magazines</b> : clic → tous ses numéros et toutes les personnes qui y paraissent.</p></div>
+ </div>
+ <div class="pan">
+  <div class="ph"><b>📰 Un passage dans les médias</b><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:10px 12px">
+   <div class="fld">Sorte de média<div class="filt"><span class="on">📰 Presse</span><span>📻 Radio</span><span>📺 TV</span><span>🎧 Podcast</span><span>🌐 Web</span><span>🎞 Actualités filmées</span><span>📚 Livre</span><span>📢 Affiche</span></div></div>
+   <div class="fld">Type de passage<div class="in">Interview ▾ <small class="g">— portrait, reportage, citation, photo publiée, débat, invité, chronique, tribune, nécrologie, avis de naissance/mariage, critique, faits divers, petite annonce, publicité…</small></div></div>
+   <div class="edit-grid" style="grid-template-columns:1fr 1fr">
+    <div class="fld">Date<input value="3 mai 1958"><span class="ok">✓ Compris : 3 mai 1958</span></div>
+    <div class="fld">Média<div class="in" style="padding:3px 5px"><span class="ochip" style="margin:0"><i>📰</i>La Montagne ↗ ×</span></div></div>
+    <div class="fld">Titre / émission<input value="Le chanteur de Tulle revient au pays"></div>
+    <div class="fld">Page · durée<input value="p. 6 · 1/2 page"></div>
+    <div class="fld">Journaliste / animateur<div class="in" style="padding:3px 5px"><span class="chip gr" style="margin:0"><span class="q">?</span>R. Lavaud ×</span></div></div>
+    <div class="fld">Autres personnes<div class="in" style="padding:3px 5px"><span class="chip" style="margin:0"><span class="pp-av f">MM</span>Marie ×</span> ＋</div></div>
+    <div class="fld">Sujet<input value="retour à Tulle, tournée d’été"></div>
+    <div class="fld">Ton<div class="in">😊 positif ▾</div></div></div>
+   <div class="fld">Extrait<div class="in" style="font-style:italic">« Je chante pour ceux qui travaillent à la manufacture… »</div></div>
+   <div class="fld">Fichier (scan, son, vidéo)<div class="in" style="padding:3px 5px"><span class="ochip" style="margin:0"><i>📄</i>Montagne_1958-05-03_p6.jpg · ↗ Ouvrir · 🖼 Changer · ×</span></div></div>
+   <div class="fld">Transcription · lien<div class="in" style="font-weight:500">📝 1 240 mots (transcription automatique ✓) · 🔗 gallica.bnf.fr/…</div></div>
+   <div class="fld">Fait partie de<div class="in" style="font-weight:500">📅 Tournée d’été 1958 · 💿 Paris canaille</div></div>
+  </div>
+  <div style="padding:8px 12px;border-top:2px solid #111;display:flex;gap:6px"><span class="btn d s">Supprimer</span><span class="sp" style="flex:1"></span><span class="btn s">Annuler</span><span class="btn p s">💾 Enregistrer</span></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ P. POLITIQUE ═══════════ -->
+<section class="case" id="politique"><span class="tag"><span class="num">P</span>Profil · homme / femme politique</span><h3>Mandats, élections, partis, gouvernement, textes et votes — en sections qu’on range et qu’on cache</h3>
+<div class="layout2" style="grid-template-columns:1fr 360px">
+ <div>
+  <div class="hero" style="background:linear-gradient(90deg,#fff,#eef4ff)"><div class="ph0" style="background:#055dff">HB</div><div><div class="ey" style="font:700 10.5px system-ui;color:#055dff;letter-spacing:.1em">🏛 HOMME POLITIQUE · MAIRE, DÉPUTÉ, SECRÉTAIRE D’ÉTAT</div><h2 class="h2" style="margin:2px 0">Henri BORIE <small>· 1902 – 1981</small></h2><small class="g">4 mandats électifs · 9 élections (7 gagnées) · 1 portefeuille · Radical puis UDSR</small><div style="margin-top:6px"><span class="ochip link"><i>🏛</i>Base Sycomore (Assemblée)</span><span class="ochip link"><i>📖</i>Wikidata</span></div></div></div>
+  <div class="gantt" style="margin-top:12px"><b style="font-size:13px">📈 Frise de carrière</b>
+   <div class="gax" style="margin-top:6px"><div></div><div><span>1930</span><span>1940</span><span>1950</span><span>1960</span><span>1970</span><span>1980</span></div></div>
+   <div class="grow"><span>Conseiller municipal, Tulle</span><div class="tr"><span class="bar c-pol" style="left:10%;width:20%">1935</span></div></div>
+   <div class="grow"><span>Maire de Tulle</span><div class="tr"><span class="bar c-pol" style="left:30%;width:4%">1945</span><span class="bar c-pol" style="left:34%;width:48%">1947 – 1971</span></div></div>
+   <div class="grow"><span>Conseiller général</span><div class="tr"><span class="bar c-pol" style="left:30%;width:30%;opacity:.7">canton de Tulle-Nord</span></div></div>
+   <div class="grow"><span>Député de la Corrèze</span><div class="tr"><span class="bar c-pol" style="left:42%;width:14%">IVe Rép.</span><span class="bar c-pol" style="left:64%;width:10%">Ve</span></div></div>
+   <div class="grow"><span>Secrétaire d’État</span><div class="tr"><span class="bar c-inv" style="left:48%;width:2%"></span><span style="position:absolute;left:51%;top:2px;font:700 10px system-ui">Agriculture 1954</span></div></div>
+   <div class="grow"><span>Parti</span><div class="tr"><span class="bar c-gr" style="left:0;width:34%">Radical</span><span class="bar" style="left:34%;width:34%;background:#3c78d8">UDSR</span></div></div></div>
+  <div class="blocks">
+   <div class="blk p-pol"><div class="bh"><span class="grip">⠿</span><b>🏛 Mandats et fonctions</b><small class="g">électifs et nominatifs</small><span class="sp"></span><span class="btn s">＋ Ajouter</span></div><div class="bb"><table class="t"><tr><th>Fonction</th><th>Niveau</th><th>Où</th><th>Dates</th><th>Prédécesseur</th><th>Successeur</th></tr>
+    <tr><td><b>Maire</b></td><td>communal</td><td><span class="ochip"><i>📍</i>Tulle (19)</span></td><td>1947 – 1971</td><td><span class="chip gr"><span class="q">?</span>J. Lafon</span></td><td><span class="chip gr"><span class="q">?</span>G. Mons</span></td></tr>
+    <tr><td><b>Député</b> · groupe UDSR</td><td>national</td><td><span class="ochip"><i>📍</i>Corrèze, 1re circ.</span></td><td>1951 – 1958 · 1962 – 1967</td><td>—</td><td>—</td></tr>
+    <tr><td><b>Secrétaire d’État</b> à l’Agriculture</td><td>gouvernement</td><td>gouv. Mendès France</td><td>juin 1954 – févr. 1955</td><td>—</td><td>—</td></tr>
+    <tr><td>Président · commission de l’agriculture</td><td>nominatif</td><td>Assemblée nationale</td><td>1956 – 1958</td><td></td><td></td></tr></table></div></div>
+   <div class="blk p-pol"><div class="bh"><span class="grip">⠿</span><b>🗳 Élections</b><small class="g">9 · 7 gagnées</small><span class="sp"></span><span class="btn s">Tout voir</span></div><div class="bb"><table class="t"><tr><th>Date</th><th>Scrutin</th><th>Tour</th><th>Voix</th><th>%</th><th>Résultat</th><th>Adversaires</th><th>Affiche</th></tr>
+    <tr><td>17 juin 1951</td><td>Législatives · Corrèze</td><td>unique</td><td>38 412</td><td>31,2</td><td><span class="res w">élu</span></td><td>liste PCF, SFIO</td><td><span class="ochip link"><i>🪧</i>1951</span></td></tr>
+    <tr><td>23 nov. 1958</td><td>Législatives · 1re circ.</td><td>1er</td><td>14 205</td><td>38,0</td><td><span class="res">2e tour</span></td><td><span class="chip gr"><span class="q">?</span>J. Montalat</span></td><td><span class="ochip link"><i>🪧</i>1958</span></td></tr>
+    <tr><td>30 nov. 1958</td><td>Législatives · 1re circ.</td><td>2e</td><td>19 880</td><td>47,1</td><td><span class="res l">battu</span></td><td><span class="chip gr"><span class="q">?</span>J. Montalat</span></td><td></td></tr></table></div></div>
+   <div class="blk s6 p-pol"><div class="bh"><span class="grip">⠿</span><b>📜 Textes, votes, propositions</b></div><div class="bb"><div>1952 · <b>proposition de loi</b> n° 4521 sur les calamités agricoles · rapporteur</div><div>1954 · décret sur les prix du lait · signataire</div><div>1956 · vote : pouvoirs spéciaux en Algérie · <b>pour</b></div><small class="g">18 textes · 210 votes (scrutins publics importés)</small></div></div>
+   <div class="blk s6 p-pol"><div class="bh"><span class="grip">⠿</span><b>👥 Partis, groupes, commissions</b></div><div class="bb"><div><span class="ochip"><i>🏷</i>Parti radical</span> 1928-1947 · secrétaire fédéral</div><div><span class="ochip"><i>🏷</i>UDSR</span> 1947-1964 · membre du bureau</div><div>Commissions : agriculture (prés.), finances</div></div></div>
+   <div class="blk s4 p-pol"><div class="bh"><span class="grip">⠿</span><b>🗣 Discours</b></div><div class="bb">12 · dont 3 enregistrés (📰 médias)</div></div>
+   <div class="blk s4 p-pol"><div class="bh"><span class="grip">⠿</span><b>🎖 Décorations</b></div><div class="bb">Légion d’honneur (officier, 1955) · Mérite agricole</div></div>
+   <div class="blk s4 p-pol"><div class="bh"><span class="grip">⠿</span><b>🗺 Carte des mandats</b></div><div class="bb"><div class="map" style="height:70px"><span class="pin" style="left:50%;top:50%;background:#055dff"></span><span class="lab" style="left:54%;top:40%">Tulle</span></div></div></div>
+   <div class="blk s4 p-pol"><div class="bh"><span class="grip">⠿</span><b>🤝 Collaborateurs</b></div><div class="bb"><span class="chip"><span class="pp-av f">LB</span>Louise BORIE <span class="r">secrétaire</span></span> + 3</div></div>
+   <div class="blk s4 p-pol"><div class="bh"><span class="grip">⠿</span><b>⚠️ Controverses, affaires</b></div><div class="bb">1960 · « affaire des marchés de la caserne » · non-lieu 1962 · 📰 4</div></div>
+   <div class="blk s4 p-pol"><div class="bh"><span class="grip">⠿</span><b>📚 Ouvrages · 📰 Médias</b></div><div class="bb">2 livres · 41 passages</div></div>
+  </div>
+ </div>
+ <div class="pan">
+  <div class="ph"><b>⚙️ Organiser le profil politique</b><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:8px 12px;font-size:12.5px;color:#555">Comme pour l’artiste : ⠿ ou ↑↓ pour ranger, 👁 pour cacher, largeur ½ ⅓ ligne.</div>
+  <div style="padding:0 12px 10px">
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📈 Frise de carrière</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏛 Mandats et fonctions</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🗳 Élections</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📜 Textes, votes</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">👥 Partis, groupes</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏢 Gouvernement</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🗣 Discours</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🎖 Décorations</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🗺 Carte des mandats</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">🤝 Collaborateurs</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">⚠️ Controverses</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📰 Dans les médias</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="btn s">＋ Ajouter une section</span><span class="btn s">Modèle : Parlementaire ▾</span></div>
+   <p class="note">Modèles de départ : <b>Élu local</b> (mandats, conseils, réalisations dans la commune), <b>Parlementaire</b>, <b>Ministre</b>, <b>Militant</b>, <b>Diplomate</b>, <b>Fonctionnaire d’autorité</b> (préfet…).</p>
+   <div class="side"><h5>🗳 Fiche d’une élection</h5><small>date · scrutin (municipales, cantonales, régionales, législatives, sénatoriales, européennes, présidentielle, référendum, interne au parti) · circonscription 📍 · tour · inscrits, votants, voix, % · résultat · colistiers 👤 · adversaires 👤 avec leurs voix · profession de foi 📄 · affiche 🪧 · résultats par commune (tableau) · presse 📰</small></div>
+  </div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ Q. SPORTIF ═══════════ -->
+<section class="case" id="sportif"><span class="tag"><span class="num">Q</span>Profil · sportif / athlète</span><h3>Clubs, sélections, résultats, records, médailles, statistiques par saison — et chaque sport a ses propres champs</h3>
+<div class="layout2" style="grid-template-columns:1fr 380px">
+ <div>
+  <div class="hero" style="background:linear-gradient(90deg,#fff,#e8f7ee)"><div class="ph0" style="background:#d9488f">CB</div><div><div class="ey" style="font:700 10.5px system-ui;color:#1aa34a;letter-spacing:.1em">🏉 SPORTIVE · RUGBY À XV ET À 7 · ATHLÉTISME (JEUNES)</div><h2 class="h2" style="margin:2px 0">Camille BORIE <small>· née en 1994 · 3e ligne aile, n° 7</small></h2><small class="g">4 clubs · 52 sélections · 2 médailles internationales · 1 record régional</small></div></div>
+  <div class="gantt" style="margin-top:12px"><b style="font-size:13px">📈 Carrière · clubs et sélections</b>
+   <div class="gax" style="margin-top:6px"><div></div><div><span>2006</span><span>2010</span><span>2014</span><span>2018</span><span>2022</span><span>2026</span></div></div>
+   <div class="grow"><span>Clubs</span><div class="tr"><span class="bar c-gr" style="left:0;width:20%">US Tulle</span><span class="bar c-spo" style="left:20%;width:30%">CA Brive</span><span class="bar" style="left:50%;width:35%;background:#d0182f">Stade toulousain</span><span class="bar c-spo" style="left:85%;width:15%;opacity:.7">Brive</span></div></div>
+   <div class="grow"><span>Équipe de France XV</span><div class="tr"><span class="bar c-pol" style="left:38%;width:42%">52 sélections</span></div></div>
+   <div class="grow"><span>France à 7</span><div class="tr"><span class="bar c-pol" style="left:80%;width:12%;opacity:.7">JO 2024</span></div></div>
+   <div class="grow"><span>Blessures</span><div class="tr"><span class="bar c-med" style="left:70%;width:6%">genou</span></div></div></div>
+  <div class="blocks">
+   <div class="blk p-spo"><div class="bh"><span class="grip">⠿</span><b>🏟 Clubs et équipes</b><span class="sp"></span><span class="btn s">＋ Ajouter</span></div><div class="bb"><table class="t"><tr><th>Club</th><th>Dates</th><th>Arrivée</th><th>Maillot</th><th>Poste</th><th>Matchs</th></tr>
+    <tr><td><span class="ochip"><i>🏟</i>US Tulle</span> (formation)</td><td>2001 – 2010</td><td>licence jeune</td><td>—</td><td>centre</td><td>—</td></tr>
+    <tr><td><span class="ochip"><i>🏟</i>CA Brive</span></td><td>2010 – 2016</td><td>formée au club</td><td>7</td><td>3e ligne aile</td><td>88</td></tr>
+    <tr><td><span class="ochip"><i>🏟</i>Stade toulousain</span></td><td>2016 – 2023</td><td>transfert · contrat 3 ans</td><td>7</td><td>3e ligne aile</td><td>121</td></tr></table></div></div>
+   <div class="blk s6 p-spo"><div class="bh"><span class="grip">⠿</span><b>🥇 Médailles et titres</b></div><div class="bb"><div><span class="medal a">2</span><b>JO Paris 2024</b> · rugby à 7 · argent</div><div style="margin-top:4px"><span class="medal o">1</span><b>Tournoi des Six Nations 2018</b> · Grand Chelem</div><div style="margin-top:4px"><span class="medal b">3</span>Coupe du monde 2021 · bronze</div><div style="margin-top:4px">🏆 Championne de France Élite 1 : 2019, 2022</div></div></div>
+   <div class="blk s6 p-spo"><div class="bh"><span class="grip">⠿</span><b>⏱ Records</b></div><div class="bb"><table class="t"><tr><th>Épreuve</th><th>Perf.</th><th>Sorte</th><th>Homologué</th></tr><tr><td>100 m cadettes</td><td>12″14</td><td>régional Limousin 2010</td><td>✓ FFA</td></tr><tr><td>Essais en une saison</td><td>14</td><td>record du club</td><td>—</td></tr><tr><td>200 m</td><td>25″02</td><td>personnel</td><td>—</td></tr></table></div></div>
+   <div class="blk p-spo"><div class="bh"><span class="grip">⠿</span><b>📊 Statistiques par saison</b><small class="g">colonnes selon le sport · ⚙️</small><span class="sp"></span><span class="filt"><span class="on">Club</span><span>Sélection</span><span>Total</span></span></div><div class="bb"><table class="t"><tr><th>Saison</th><th>Équipe</th><th>Matchs</th><th>Titul.</th><th>Minutes</th><th>Essais</th><th>Points</th><th>Plaquages</th><th>🟨</th><th>🟥</th></tr>
+    <tr><td>2017-18</td><td>Toulouse</td><td>19</td><td>17</td><td>1 312</td><td>9</td><td>45</td><td>212</td><td>1</td><td>0</td></tr>
+    <tr><td>2018-19</td><td>Toulouse</td><td>21</td><td>21</td><td>1 580</td><td><b>14</b></td><td>70</td><td>241</td><td>2</td><td>0</td></tr>
+    <tr><td>2019-20</td><td>Toulouse</td><td>8</td><td>6</td><td>490</td><td>2</td><td>10</td><td>74</td><td>0</td><td>0</td></tr></table></div></div>
+   <div class="blk s4 p-spo"><div class="bh"><span class="grip">⠿</span><b>🏁 Résultats</b></div><div class="bb">212 matchs · <span class="res w">V 141</span> <span class="res l">D 63</span> N 8 · par compétition ▸</div></div>
+   <div class="blk s4 p-spo"><div class="bh"><span class="grip">⠿</span><b>🧑‍🏫 Entraîneurs · coéquipières</b></div><div class="bb"><span class="chip gr"><span class="q">?</span>A. Gourdon</span> + 4 · 61 coéquipières</div></div>
+   <div class="blk s4 p-spo"><div class="bh"><span class="grip">⠿</span><b>🩹 Blessures · 🎽 équipement · 🔁 reconversion</b></div><div class="bb">ligament croisé 2020 (7 mois) · kinésithérapeute depuis 2024</div></div>
+  </div>
+ </div>
+ <div>
+  <div class="pan">
+   <div class="ph"><b>⚙️ Colonnes · rugby à XV</b><span class="sp"></span><span class="ib">×</span></div>
+   <div style="padding:8px 12px">
+    <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Matchs · titularisations</span><span class="ty">nombre</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+    <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Essais · points</span><span class="ty">nombre</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+    <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">Pénalités · transformations</span><span class="ty">nombre</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+    <div class="fr cust"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Plaquages</span><span class="ty">perso</span><span class="tools"><span>✎</span><span>🗑</span></span></div>
+    <div style="margin-top:6px"><span class="btn s">＋ Ajouter une colonne</span> <span class="btn s">🧮 Colonne calculée</span></div></div></div>
+  <div class="side" style="margin-top:12px"><h5>🏅 Tous les sports, chacun ses champs</h5>
+   <div class="kinds" style="grid-template-columns:1fr 1fr">
+    <div><b>⚽ Collectifs</b>poste, n° de maillot, club, transferts (montant), sélections, buts/passes</div>
+    <div><b>🏃 Individuels</b>épreuve, temps/distance, vent, catégorie d’âge, records homologués</div>
+    <div><b>🏇 Équestres</b>cheval → <strong>fiche animal 🐾</strong> existante, propriétaire, haras, épreuve, barres, chrono</div>
+    <div><b>🥋 Arts martiaux</b>grades (ceintures, dan, date, jury 👤), club, kata, compétitions</div>
+    <div><b>🥊 Combat</b>palmarès V-D-N, KO, catégorie de poids, adversaires 👤, ceintures de titre</div>
+    <div><b>♟ Échecs · jeux</b>classement Elo (courbe), titres (MI, GMI), parties (PGN)</div>
+    <div><b>🏎 Mécaniques</b>véhicule, n°, écurie, copilote 👤, circuit, tour le plus rapide</div>
+    <div><b>⛵ Nautiques</b>bateau (fiche), classe, équipage 👤, régate, temps compensé</div>
+    <div><b>🏔 Alpinisme</b>sommets, voies, cotation, ascensions (date, cordée 👤), premières</div>
+    <div><b>🎮 E-sport</b>jeu, pseudo, équipe, tournois, gains, classement</div>
+    <div><b>🚴 Cyclisme</b>courses, étapes, maillots, jours de course, équipes</div>
+    <div><b>🎯 Tir, pêche, pétanque…</b>score, prises (poids), doublette/triplette 👤</div></div>
+   <p class="note" style="margin:6px 0 0">Plus de 120 sports en liste (licences par fédération) ; chacun apporte ses colonnes de statistiques et ses champs de résultat ; tu peux en créer un.</p></div>
+  <div class="side"><h5>🏁 Un résultat</h5><small>compétition (fiche : édition, lieu 📍, dates) · épreuve · catégorie · date · tour / phase · classement « 3e sur 48 » · performance (temps, score, distance, points) · adversaire ou équipe adverse · partenaires 👤 · médaille · record battu · photo, vidéo, presse 📰</small></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ R. PAGE COMBINÉE ═══════════ -->
+<section class="case" id="combine"><span class="tag"><span class="num">R</span>Une personne, plusieurs profils</span><h3>La page de Pierre MARTIN : accordéoniste, inventeur, rugbyman et maire — tout ensemble, ou profil par profil</h3>
+<div class="layout2" style="grid-template-columns:1fr 360px">
+ <div>
+  <div class="hero"><div class="ph0">PM</div><div style="flex:1"><h2 class="h2" style="margin:0 0 4px">Pierre MARTIN <small>· 1902 Tulle – 1988 Laguenne</small></h2>
+   <div style="display:flex;gap:5px;flex-wrap:wrap"><span class="pfb c-art">🎨 Artiste · accordéon</span><span class="pfb c-inv">💡 Inventeur</span><span class="pfb c-spo">🏉 Sportif</span><span class="pfb c-pol">🏛 Élu local</span><span class="pfb c-gr">🎖 Ancien combattant</span><span class="pfb" style="background:#fff;color:#055dff;border:1.5px dashed #055dff">＋ profil</span></div>
+   <div style="margin-top:8px"><span class="seg"><span class="on">Tout mélangé</span><span>🎨 Artiste</span><span>💡 Inventeur</span><span>🏉 Sport</span><span>🏛 Politique</span></span></div></div></div>
+  <div class="gantt" style="margin-top:12px"><b style="font-size:13px">📈 Frise de vie · toutes les facettes</b>
+   <div class="gax" style="margin-top:6px"><div></div><div><span>1900</span><span>1920</span><span>1940</span><span>1960</span><span>1980</span></div></div>
+   <div class="grow"><span>🎨 Musique</span><div class="tr"><span class="bar c-art" style="left:22%;width:56%">accordéon · 1 concerto créé · 9 disques</span></div></div>
+   <div class="grow"><span>🏉 Rugby</span><div class="tr"><span class="bar c-spo" style="left:30%;width:8%">CA Brive</span></div></div>
+   <div class="grow"><span>🎖 Militaire</span><div class="tr"><span class="bar c-gr" style="left:49%;width:2%">39-40</span></div></div>
+   <div class="grow"><span>💡 Inventions</span><div class="tr"><span class="bar c-inv" style="left:62%;width:22%">2 brevets</span></div></div>
+   <div class="grow"><span>🏛 Politique</span><div class="tr"><span class="bar c-pol" style="left:74%;width:22%">maire de Laguenne</span></div></div>
+   <div class="grow"><span>📰 Médias</span><div class="tr"><span class="bar c-med" style="left:30%;width:3%"></span><span class="bar c-med" style="left:58%;width:4%"></span><span class="bar c-med" style="left:63%;width:2%"></span></div></div></div>
+  <div class="blocks">
+   <div class="blk s6"><div class="bh"><span class="grip">⠿</span><b>👤 Identité, famille</b><small class="g">(la fiche de toujours)</small></div><div class="bb">Fils de Jean MARTIN et Anne LAFON · frère de Joseph · époux de Jeanne BOS · 3 enfants</div></div>
+   <div class="blk s6 p-inv"><div class="bh"><span class="grip">⠿</span><b>💡 Inventions</b></div><div class="bb"><span class="ochip link"><i>💡</i>Sécateur à cliquet</span> 5 brevets · <span class="ochip link"><i>💡</i>Greffoir</span></div></div>
+   <div class="blk s6 p-art"><div class="bh"><span class="grip">⠿</span><b>💿 Discographie · 🎤 concerts</b></div><div class="bb">9 disques · 312 concerts · dédicataire du <span class="ochip link"><i>🎻</i>Concerto op. 12</span></div></div>
+   <div class="blk s6 p-pol"><div class="bh"><span class="grip">⠿</span><b>🏛 Mandats</b></div><div class="bb">Maire de Laguenne 1959 – 1977 · 3 élections</div></div>
+   <div class="blk s4 p-spo"><div class="bh"><span class="grip">⠿</span><b>🏉 Carrière sportive</b></div><div class="bb">CA Brive 1924-30 · finale 1925</div></div>
+   <div class="blk s4"><div class="bh"><span class="grip">⠿</span><b>🏆 Concours et récompenses</b></div><div class="bb">Lépine 1953 · Mérite agricole</div></div>
+   <div class="blk s4 p-med"><div class="bh"><span class="grip">⠿</span><b>📰 Dans les médias</b></div><div class="bb">17 passages</div></div>
+  </div>
+  <p class="note">« Tout mélangé » : une seule page, sections de tous les profils dans l’ordre que tu choisis. « 🎨 Artiste » : seulement ce profil (page E). Les blocs communs (identité, médias, récompenses, formation) restent toujours visibles. Le liseré de couleur dit de quel profil vient la section.</p>
+ </div>
+ <div class="pan">
+  <div class="ph"><b>⚙️ Organiser la page de Pierre</b><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:8px 12px">
+   <b style="font-size:12px">Profils de cette personne</b>
+   <div class="pfcard" style="margin-top:6px"><span class="grip">⠿</span><span><span class="pfb c-art">🎨 Artiste</span> <small class="g">8 sections</small></span><span class="tog"><i></i></span></div>
+   <div class="pfcard"><span class="grip">⠿</span><span><span class="pfb c-inv">💡 Inventeur</span> <small class="g">5 sections</small></span><span class="tog"><i></i></span></div>
+   <div class="pfcard"><span class="grip">⠿</span><span><span class="pfb c-spo">🏉 Sportif</span> <small class="g">4 sections</small></span><span class="tog"><i></i></span></div>
+   <div class="pfcard"><span class="grip">⠿</span><span><span class="pfb c-pol">🏛 Élu local</span> <small class="g">6 sections</small></span><span class="tog"><i></i></span></div>
+   <div class="pfcard" style="opacity:.55"><span class="grip">⠿</span><span><span class="pfb c-gr">🎖 Ancien combattant</span> <small class="g">caché</small></span><span class="tog off"><i></i></span></div>
+   <b style="font-size:12px;display:block;margin-top:10px">Sections, dans l’ordre de la page</b>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📈 Frise de vie</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">👤 Identité, famille</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr drag"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl" style="border-left:4px solid #e1a500;padding-left:4px">💡 Inventions</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl" style="border-left:4px solid #7b2ff7;padding-left:4px">💿 Discographie</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl" style="border-left:4px solid #055dff;padding-left:4px">🏛 Mandats</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl" style="border-left:4px solid #7b2ff7;padding-left:4px">🖼️ Œuvres</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl" style="border-left:4px solid #1aa34a;padding-left:4px">🏉 Carrière sportive</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="btn s">＋ Ajouter un profil</span><span class="btn s">＋ Ajouter une section</span></div>
+   <div style="margin-top:10px"><span class="tog"><i></i>Réglage propre à Pierre</span><br><span class="tog off"><i></i>Masquer les sections vides</span></div>
+   <p class="note">Tout se range dans « 💾 Réglages enregistrés » (ex. « Fiche courte pour le livre de famille »). Une section cachée garde ses données.</p>
+  </div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ S. MÉTIERS D'ART ═══════════ -->
+<section class="case" id="metiersart"><span class="tag"><span class="num">S</span>Métiers d’art</span><h3>Les 16 domaines de la liste officielle des métiers d’art — chaque métier propose son type d’œuvre</h3>
+<div class="pp-box" style="margin-bottom:8px"><span class="pp-ico">🔍</span><input placeholder="Chercher un métier… (ferronnier, dinandier, plumassier, luthier…)"><span class="pp-kbd">/</span></div>
+<div class="sumg" id="ma">
+ <div class="sumc"><b>🏛 Architecture et jardins</b><span class="k cnt"></span><span class="ml">Tailleur de pierre · Sculpteur sur pierre · Marbrier · Maçon du patrimoine · Charpentier · Chaumier · Lauzier · Ardoisier · Couvreur-ornemaniste · Zingueur-ornemaniste · Staffeur-stucateur · Fresquiste · Peintre en décor · Mosaïste · Rocailleur · Fontainier · Treillageur · Paveur, caladeur · Jardinier du patrimoine · Parqueteur · Escaliéteur</span></div>
+ <div class="sumc"><b>🪑 Ameublement et décoration</b><span class="k cnt"></span><span class="ml">Ébéniste · Marqueteur · Menuisier en sièges · Tapissier d’ameublement · Tapissier décorateur · Doreur sur bois · Laqueur · Sculpteur sur bois · Tourneur sur bois · Vernisseur au tampon · Canneur-rempailleur · Vannier · Encadreur · Peintre sur mobilier · Miroitier · Gainier · Ornemaniste · Mouleur · Fabricant de papier peint · Cirier</span></div>
+ <div class="sumc"><b>💍 Bijouterie, joaillerie, orfèvrerie, horlogerie</b><span class="k cnt"></span><span class="ml">Bijoutier · Joaillier · Sertisseur · Polisseur · Lapidaire · Diamantaire · Chaîniste · Orfèvre · Planeur · Ciseleur · Graveur · Guillocheur · Émailleur · Argenteur-doreur · Horloger · Pendulier · Fabricant de boîtes de montres · Bijoutier fantaisie · Perlier</span></div>
+ <div class="sumc"><b>🏺 Céramique</b><span class="k cnt"></span><span class="ml">Céramiste · Potier · Faïencier · Porcelainier · Grésier · Tourneur · Mouleur-modeleur · Décorateur sur céramique · Peintre sur porcelaine · Émailleur · Biscuitier · Santonnier · Poêlier · Tuilier, briquetier d’art · Carreleur d’art</span></div>
+ <div class="sumc"><b>👜 Cuir</b><span class="k cnt"></span><span class="ml">Maroquinier · Sellier-harnacheur · Sellier-maroquinier · Malletier · Gainier · Bottier · Cordonnier-bottier · Tanneur · Mégissier · Corroyeur · Parcheminier · Doreur sur cuir · Gaufreur sur cuir · Sellier garnisseur</span></div>
+ <div class="sumc"><b>🎻 Facture instrumentale</b><span class="k cnt"></span><span class="ml">Luthier (quatuor) · Luthier en guitare · Archetier · Facteur d’orgues · Facteur de pianos · Facteur de clavecins · Facteur d’accordéons · Facteur d’instruments à vent · Facteur de cuivres · Facteur de harpes · Facteur de percussions · Facteur de cornemuses (cabrette) · Facteur de vielles à roue · Facteur d’instruments mécaniques · Accordeur-restaurateur</span></div>
+ <div class="sumc"><b>🧸 Jeux, jouets, ouvrages mécaniques, modèles réduits</b><span class="k cnt"></span><span class="ml">Fabricant de jouets · Fabricant de poupées · Automatier · Maquettiste · Modéliste · Fabricant de figurines · Fabricant de soldats de plomb · Fabricant de jeux en bois · Restaurateur de manèges · Fabricant de cerfs-volants</span></div>
+ <div class="sumc"><b>💡 Luminaire</b><span class="k cnt"></span><span class="ml">Fabricant de luminaires · Lustrier · Bronzier · Monteur en bronze · Abat-jouriste · Cristallier-lustrier · Restaurateur de luminaires</span></div>
+ <div class="sumc" style="border-color:#055dff;background:#f6f9ff"><b>⚒️ Métal</b><span class="k cnt"></span><span class="ml">Ferronnier d’art · Forgeron · Maréchal-ferrant · Serrurier d’art · Dinandier · Chaudronnier d’art · Fondeur d’art · Fondeur de cloches · Potier d’étain · Ciseleur · Repousseur · Graveur médailleur · Coutelier · Taillandier · Armurier · Damasquineur · Émailleur sur métal · Patineur · Tôlier d’art</span></div>
+ <div class="sumc"><b>👒 Mode et accessoires</b><span class="k cnt"></span><span class="ml">Couturier (flou, tailleur) · Tailleur · Chemisier · Corsetier · Modiste · Chapelier · Gantier · Plumassier · Parurier floral · Éventailliste · Fabricant de parapluies · Boutonnier · Fourreur · Lunetier d’art · Perruquier-posticheur · Brodeur de mode · Parurier</span></div>
+ <div class="sumc"><b>📜 Papier, graphisme, impression</b><span class="k cnt"></span><span class="ml">Relieur · Doreur sur cuir (reliure) · Papetier à la main · Marbreur de papier · Dominotier · Cartonnier · Graveur (taille-douce, bois) · Imprimeur en taille-douce · Lithographe · Sérigraphe · Typographe · Fondeur de caractères · Calligraphe · Enlumineur · Héraldiste · Cartier</span></div>
+ <div class="sumc"><b>🩺 Restauration</b><span class="k cnt"></span><span class="ml">de peintures · de sculptures · de meubles · d’objets d’art · de textiles · de tapis et tapisseries · de céramiques · de verre et vitraux · de livres et documents · de photographies · de métal · d’instruments · d’horlogerie · de mosaïques · de peintures murales · de cadres et dorures</span></div>
+ <div class="sumc"><b>🎭 Spectacle</b><span class="k cnt"></span><span class="ml">Décorateur, constructeur de décors · Peintre de décors · Costumier · Accessoiriste · Perruquier · Maquilleur · Facteur de marionnettes · Fabricant de masques · Plumassier de revue · Bottier de spectacle · Armurier de scène</span></div>
+ <div class="sumc"><b>🦴 Tabletterie</b><span class="k cnt"></span><span class="ml">Tabletier · Cornier · Peignier · Pipier · Nacrier · Écailliste · Tourneur sur os · Graveur sur os · Brossier-pinceletier</span></div>
+ <div class="sumc"><b>🧵 Textile</b><span class="k cnt"></span><span class="ml">Tisserand · Licier (haute et basse lice) · Tapissier en tapis · Brodeur · Brodeur d’or · Dentellier (fuseaux, aiguille) · Passementier · Teinturier · Imprimeur sur étoffes · Feutrier · Fileur · Rentrayeur · Tricoteur d’art · Plisseur · Cordier · Natteur</span></div>
+ <div class="sumc"><b>🫙 Verre et cristal</b><span class="k cnt"></span><span class="ml">Souffleur de verre · Verrier à la main · Cristallier · Tailleur sur cristal · Graveur sur verre · Verrier au chalumeau · Pâte de verre · Verrier fusing · Maître verrier · Vitrailliste · Émailleur sur verre · Doreur sur verre · Miroitier-argenteur · Verrier scientifique</span></div>
+</div>
+<p class="note">Choisir un métier ouvre le bon type d’œuvre (pièce de ferronnerie, reliure, instrument, vitrail…) avec ses champs de départ ; la liste officielle complète (≈ 280 métiers) est fournie, recherche par nom ou ancien nom (« taillandier », « dinandier »).</p>
+<div class="sec"><div class="sh"><b>🔨 Profil « artisan d’art »</b><small class="g">s’ajoute au profil artiste ou se coche seul · sections ordonnables comme en E</small></div>
+<div class="blocks" style="margin-top:4px">
+ <div class="blk s4 p-art"><div class="bh"><b>🧑‍🏭 Formation et apprentissage</b></div><div class="bb"><dl class="dl" style="font-size:12.5px;margin:0"><dt>Maître d’apprentissage</dt><dd><span class="chip"><span class="pp-av m">JM</span>Jean MARTIN <span class="r">son père</span></span></dd><dt>Contrat</dt><dd>1916 – 1919 · 📄</dd><dt>CAP</dt><dd>Ferronnier, 1919 (🎓 Diplômes)</dd><dt>Écoles</dt><dd>École Boulle (cours du soir)</dd></dl></div></div>
+ <div class="blk s4 p-art"><div class="bh"><b>🛠 Compagnonnage</b></div><div class="bb"><dl class="dl" style="font-size:12.5px;margin:0"><dt>Devoir</dt><dd>Compagnons du Devoir</dd><dt>Nom</dt><dd>« Limousin la Fidélité »</dd><dt>Tour de France</dt><dd>Lyon 1920 → Bordeaux → Paris 1924 <small class="g">🗺</small></dd><dt>Chef-d’œuvre</dt><dd><span class="ochip link"><i>⚒️</i>Rampe miniature, 1923</span></dd><dt>Reçu</dt><dd>Toussaint 1923, Lyon</dd></dl></div></div>
+ <div class="blk s4 p-art"><div class="bh"><b>🎖 Titres</b></div><div class="bb"><div>🇫🇷 <b>Meilleur Ouvrier de France</b> 1936 · classe ferronnerie · 📄 diplôme</div><div>Maître d’art (titre du ministère) · 1994 <small class="g">— pour un descendant</small></div><div>Entreprise du patrimoine vivant (EPV) : l’atelier, 2008</div></div></div>
+ <div class="blk s6 p-art"><div class="bh"><b>🏭 Atelier · entreprise</b></div><div class="bb"><span class="ochip link"><i>🏭</i>Forge Martin, Laguenne</span> <small class="g">(fiche de l’outil Employeurs)</small> · fondée 1888 · 4 générations · compagnons et apprentis 👤 (12) · clients · catalogue · registre de commandes (📄)</div></div>
+ <div class="blk s6 p-art"><div class="bh"><b>🔏 Poinçons et marques</b></div><div class="bb"><span class="ochip"><i>◼</i>« P.M. » dans un losange</span> 1925-1960 · <span class="ochip"><i>◼</i>« FORGE MARTIN LAGUENNE »</span> plaque · photos et relevés · registre de la garantie (orfèvres)</div></div>
+</div></div>
+</section>
+
+<!-- ═══════════ T. FERRONNERIE ═══════════ -->
+<section class="case" id="ferronnerie"><span class="tag"><span class="num">T</span>Métiers d’art · une pièce</span><h3>La fiche d’une pièce de ferronnerie : commande, techniques, poinçon, atelier, protection, restaurations</h3>
+<div class="top"><span>⚒️</span><div><div class="ey">FERRONNERIE D’ART · GRILLE · MH</div><h4>Grille d’honneur de l’hôtel de ville de Tulle</h4></div><span class="seg" style="margin-left:14px"><span class="on">Lecture</span><span>✎ Modifier</span></span><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="sheet">
+ <div>
+  <div style="aspect-ratio:4/3;border:2px solid #111;background:repeating-linear-gradient(90deg,#f3f1ec 0 14px,#222 14px 17px),#f3f1ec;position:relative"><div style="position:absolute;left:0;right:0;top:0;height:22%;background:radial-gradient(circle at 50% 100%,transparent 0 40%,#222 40% 43%,transparent 43%),#f3f1ec;border-bottom:3px solid #222"></div></div>
+  <div class="thumbs"><div style="background:#e9e3d3"><small>DESSIN</small></div><div style="background:#222"><small>DÉTAIL</small></div><div style="background:#cfd8e3"><small>POINÇON</small></div><div style="background:#8a8f99"><small>1990</small></div></div>
+  <div class="side" style="margin-top:12px"><h5>✏️ Dessins préparatoires</h5><div><span class="ochip"><i>📄</i>Élévation 1/10 · lavis · 1927</span></div><div><span class="ochip"><i>📄</i>Gabarit des volutes 1/1</span></div><div><span class="ochip"><i>📄</i>Devis 18 400 F</span></div></div>
+ </div>
+ <div>
+  <h2 class="h2">Grille d’honneur <small>· 1927-1928 · fer forgé</small></h2>
+  <div style="margin:2px 0 10px"><span class="badge b">Inscrite MH 1986</span> <span class="badge ok">en place</span> <span class="badge">État : bon</span></div>
+  <dl class="dl" style="font-size:13px">
+   <dt>Commanditaire</dt><dd><span class="ochip link"><i>🏛</i>Ville de Tulle</span> · délibération du 3 mars 1927 · maire <span class="chip gr"><span class="q">?</span>J. Lafon</span></dd>
+   <dt>Installée</dt><dd><span class="ochip"><i>📍</i>Hôtel de ville, Tulle · cour d’honneur</span> · 14 juillet 1928</dd>
+   <dt>Concepteur</dt><dd><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">dessin et forge</span></span></dd>
+   <dt>Métal</dt><dd>fer puddlé, tôle repoussée, rehauts de feuille d’or</dd>
+   <dt>Techniques</dt><dd><span class="tyc">forgé</span><span class="tyc">rivé</span><span class="tyc">embrevé</span><span class="tyc">repoussé</span><span class="tyc">doré</span> <small class="g">(soudé : non)</small></dd>
+   <dt>Dimensions</dt><dd>L. 6,40 × H. 3,20 m · 2 vantaux + imposte · ≈ 1,2 t</dd>
+   <dt>Décor</dt><dd>volutes en C et S, armes de la ville, monogramme « RF », feuilles d’acanthe</dd>
+   <dt>Poinçon / marque</dt><dd>« P.M. » losange + « FORGE MARTIN 1928 » au revers du vantail gauche · 📷</dd></dl>
+  <div class="sec"><div class="sh"><b>👥 Atelier et compagnons</b></div>
+   <table class="t"><tr><th>Personne</th><th>Rôle</th><th>Travail</th></tr><tr><td><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN</span></td><td>maître</td><td>dessin, volutes, montage</td></tr><tr><td><span class="chip"><span class="pp-av m">JM</span>Jean MARTIN</span></td><td>forgeron</td><td>barreaudage</td></tr><tr><td><span class="chip gr"><span class="q">?</span>« Berry l’Ami du Trait »</span></td><td>compagnon</td><td>imposte</td></tr><tr><td><span class="chip gr"><span class="q">?</span>R. Soulier</span></td><td>apprenti</td><td>finitions · 15 ans</td></tr></table></div>
+  <div class="sec"><div class="sh"><b>🩺 États et restaurations</b></div><div class="tl"><div class="ev"><b>1944</b> · vantail droit criblé (combats de juin) · réparé par l’atelier</div><div class="ev"><b>1990</b> · décapage, métallisation, redorure · <span class="chip gr"><span class="q">?</span>Ateliers Lefèvre</span> · 📄 rapport DRAC</div><div class="ev now"><b>2024</b> · bon état</div></div></div>
+ </div>
+ <div>
+  <div class="side"><h5>🏛 Protection</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Statut</dt><dd>Inscrite aux Monuments historiques</dd><dt>Arrêté</dt><dd>12 juin 1986</dd><dt>Base</dt><dd>Mérimée PA19000… ↗</dd><dt>Inventaire</dt><dd>dossier IA19… ↗</dd></dl></div>
+  <div class="side"><h5>💶 Commande</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Devis</dt><dd>18 400 F (1927)</dd><dt>Payé</dt><dd>19 950 F · 📄 mandat</dd><dt>Délais</dt><dd>14 mois</dd></dl></div>
+  <div class="side"><h5>🔗 Lié à</h5><div><span class="ochip"><i>📅</i>Inauguration, 14 juil. 1928</span></div><div><span class="ochip"><i>📰</i>La Croix de la Corrèze, 1928</span></div><div><span class="ochip link"><i>⚒️</i>Rampe de l’escalier (même chantier)</span></div><div><span class="ochip"><i>🏆</i>MOF 1936 (pièce citée)</span></div></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ U. REPRÉSENTATION / SETLIST ═══════════ -->
+<section class="case" id="setlist"><span class="tag"><span class="num">U</span>Scène · un soir</span><h3>La fiche d’un concert ou d’une représentation, avec sa setlist (façon setlist.fm), reliée aux morceaux, sketches, rôles</h3>
+<div class="top"><span>🎤</span><div><div class="ey">CONCERT · TOURNÉE D’ÉTÉ 1958 · DATE 12/31</div><h4>Joseph MARTIN à Tulle, 14 juillet 1958</h4></div><span class="seg" style="margin-left:14px"><span class="on">Lecture</span><span>✎ Modifier</span></span><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="filt" style="margin-bottom:10px"><span class="on">🎵 Concert</span><span>🎤 Humour (sketches)</span><span>🎭 Théâtre (scènes, rôles du soir)</span><span>🩰 Danse</span><span>🎪 Cirque (numéros)</span><span>🎼 Orchestre (programme)</span><span>📖 Conte</span><small class="g" style="align-self:center">— la même fiche ; la setlist s’adapte</small></div>
+<div class="sheet">
+ <div>
+  <div class="poster" style="aspect-ratio:3/4"><i></i></div>
+  <div class="thumbs"><div style="background:#e9e3d3"><small>BILLET</small></div><div style="background:#3c78d8"><small>SCÈNE</small></div><div style="background:#111"><small>PUBLIC</small></div><div style="background:#d0182f"><small>LOGES</small></div></div>
+  <div class="side" style="margin-top:12px"><h5>🎟 La soirée</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Lieu</dt><dd><span class="ochip"><i>📍</i>Place de la Cathédrale, Tulle</span></dd><dt>Salle</dt><dd>plein air · scène du comité des fêtes</dd><dt>Tournée</dt><dd><span class="ochip link"><i>🚌</i>Été 1958 · 31 dates</span></dd><dt>Festival</dt><dd>Fête nationale de Tulle</dd><dt>1re partie</dt><dd><span class="ochip link"><i>👥</i>Les Gars de Tulle</span></dd><dt>Spectateurs</dt><dd>≈ 3 000</dd><dt>Durée</dt><dd>1 h 32 · 20 h 45 – 22 h 17</dd><dt>Affiche</dt><dd><span class="ochip link"><i>🪧</i>Affiche de la tournée</span></dd><dt>Billet</dt><dd>200 F · 📄 scan</dd></dl></div>
+ </div>
+ <div>
+  <div class="sec" style="margin-top:0;border-top:0"><div class="sh"><b>📋 Setlist</b><small class="g">16 titres · 2 rappels</small><span class="sp"></span><span class="btn s">＋ Ajouter un titre</span><span class="btn s">📋 Copier la setlist d’un autre soir</span></div>
+   <table class="t">
+    <tr><th>#</th><th>Titre</th><th>Notes</th><th></th></tr>
+    <tr><td class="n">1</td><td><span class="ochip link"><i>🎵</i>Paris canaille</span></td><td></td><td>▶</td></tr>
+    <tr><td class="n">2</td><td><span class="ochip link"><i>🎵</i>La complainte du marin</span></td><td><span class="badge b">1re fois jouée en public</span></td><td>▶</td></tr>
+    <tr><td class="n">3</td><td><span class="ochip link"><i>🎵</i>Fin de bal</span> <small class="g">avec</small> <span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">accordéon</span></span></td><td>invité</td><td></td></tr>
+    <tr><td class="n">4</td><td><span class="ochip link"><i>🎵</i>Le temps des cerises</span></td><td><span class="badge">reprise</span> de J.-B. Clément · version acoustique</td><td></td></tr>
+    <tr><td class="n">–</td><td><i class="muted">Entracte · bourrée par la Société des Gars de Tulle</i></td><td>interlude</td><td></td></tr>
+    <tr><td class="n">5–14</td><td><small class="g">▸ 10 titres</small></td><td></td><td></td></tr>
+    <tr style="background:#fff8e1"><td class="n">R1</td><td><b>Rappel</b> · <span class="ochip link"><i>🎵</i>Les cerisiers</span></td><td>dédiée à <span class="chip"><span class="pp-av f">MM</span>Marie MARTIN</span></td><td></td></tr>
+    <tr style="background:#fff8e1"><td class="n">R2</td><td><b>Rappel</b> · <span class="ochip link"><i>🎵</i>La Marseillaise</span></td><td>avec tout le public · <span class="badge w">inachevée</span> (orage)</td><td></td></tr></table>
+   <p class="note">Chaque ligne pointe vers la fiche du morceau (ou du sketch, du numéro, de la scène) ; un titre inconnu crée sa fiche d’un clic. Notes possibles : 1re fois jouée, dernière fois, reprise de…, version (acoustique, longue…), invité 👤, dédiée à 👤, inachevée, a capella, joué avec telle formation, en medley avec…</p></div>
+  <div class="sec"><div class="sh"><b>👥 Sur scène · dans la salle</b></div>
+   <div><small class="g">Sur scène :</small> <span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN <span class="r">chant</span></span><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">accordéon</span></span><span class="chip gr"><span class="q">?</span>R. Bos <span class="r">contrebasse</span></span> <small class="g">· formation « Joseph Martin et son orchestre »</small></div>
+   <div style="margin-top:4px"><small class="g">Dans le public :</small> <span class="chip"><span class="pp-av f">LB</span>Louise BORIE</span><span class="chip"><span class="pp-av f">MM</span>Marie MARTIN</span><span class="chip"><span class="pp-av m">PB</span>Paul BORIE <span class="r">6 ans</span></span> <small class="g">— la famille dans la salle</small></div></div>
+ </div>
+ <div>
+  <div class="side"><h5>🎙 Captations</h5><div class="player" style="min-width:0"><span class="pl">▶</span><span class="wave"></span><small>1:32:10</small></div><div style="margin-top:4px"><span class="ochip"><i>🔊</i>tulle58.mp3 · bande amateur</span></div><div><span class="ochip"><i>🎞</i>film 8 mm · 3 min</span></div><p class="note" style="margin:4px 0 0">→ devient un enregistrement « en public » du morceau (B).</p></div>
+  <div class="side"><h5>📰 Presse</h5><div><span class="ochip link"><i>📰</i>La Montagne, 16 juil. 1958</span> <span class="tone pos">+</span></div><div class="quote" style="font-size:12px">« Une place noire de monde… »</div></div>
+  <div class="side"><h5>🎭 Au théâtre, ce soir-là</h5><small>La même fiche pour une représentation de « La Veillée » (K) : scènes jouées, <b>rôles du soir</b> (titulaire ou <b>remplaçant / doublure</b> 👤), incidents, rappels, recette.</small></div>
+  <div class="side"><h5>🎼 Pour un orchestre</h5><small>Programme (œuvres → mouvements), chef 👤, solistes 👤, bis.</small></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ V. LISTE + STATISTIQUES ═══════════ -->
+<section class="case" id="concerts"><span class="tag"><span class="num">V</span>Scène · toutes les dates</span><h3>« Concerts et représentations » : liste (barre H10), carte, frise, et statistiques façon setlist.fm</h3>
+<div class="lbar"><div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="Chercher… (ville, salle, morceau joué, tournée)"><span class="pp-kbd">/</span></div><span class="sel2">Filtrer ▾ <span style="background:#055dff;color:#fff;padding:0 5px;border-radius:8px">1</span></span><span class="seg"><span>Liste</span><span>Fiches</span><span>Carte</span><span>Frise</span><span class="on">📊 Statistiques</span></span><span class="sel2">Trier : plus récents ▾</span></div>
+<div class="act"><span>Joseph MARTIN ×</span><small class="g" style="align-self:center">Tout effacer · 312 concerts · 1931 – 1972 · 9 tournées</small></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:6px">
+ <div class="blk" style="grid-column:auto"><div class="bh"><b>🔝 Morceaux les plus joués</b><span class="sp"></span><small class="g">sur 312 soirs</small></div><div class="bb">
+  <table class="t"><tr><th>Morceau</th><th>Fois</th><th>1re</th><th>Dernière</th></tr>
+   <tr><td>Paris canaille</td><td><b>288</b></td><td>1958</td><td>1972</td></tr><tr><td>La complainte du marin</td><td>201</td><td>14/07/1958</td><td>1971</td></tr><tr><td>Fin de bal</td><td>174</td><td>1956</td><td>1972</td></tr><tr><td>Le temps des cerises <small class="g">(reprise)</small></td><td>96</td><td>1948</td><td>1969</td></tr><tr><td>Les cerisiers</td><td>44</td><td>1958</td><td>1966</td></tr></table></div></div>
+ <div class="blk" style="grid-column:auto"><div class="bh"><b>📅 Concerts par année</b></div><div class="bb"><div class="strip" style="height:90px"><i style="height:10%;background:#7b2ff7"></i><i style="height:20%;background:#7b2ff7"></i><i style="height:30%;background:#7b2ff7"></i><i style="height:15%;background:#7b2ff7"></i><i style="height:70%;background:#7b2ff7"></i><i style="height:100%;background:#7b2ff7"></i><i style="height:85%;background:#7b2ff7"></i><i style="height:60%;background:#7b2ff7"></i><i style="height:50%;background:#7b2ff7"></i><i style="height:40%;background:#7b2ff7"></i><i style="height:30%;background:#7b2ff7"></i><i style="height:10%;background:#7b2ff7"></i></div><div style="display:flex;justify-content:space-between;font:600 10.5px system-ui;color:#888"><span>1950</span><span>1958 · 41</span><span>1972</span></div>
+  <div style="margin-top:8px"><div class="filt"><span class="on">Années</span><span>Pays 4</span><span>Villes 118</span><span>Salles 164</span></div></div>
+  <dl class="dl" style="font-size:12.5px;margin:8px 0 0"><dt>Durée moyenne</dt><dd>1 h 24</dd><dt>Titres par soir</dt><dd>14,6 en moyenne</dd><dt>Ville la plus visitée</dt><dd>Tulle (23 fois)</dd></dl></div></div>
+ <div class="blk" style="grid-column:auto"><div class="bh"><b>🗺 Carte des lieux</b></div><div class="bb"><div class="map" style="height:180px"><span class="pin" style="left:45%;top:55%;background:#7b2ff7;width:20px;height:20px"></span><span class="lab" style="left:52%;top:52%">Tulle 23</span><span class="pin" style="left:40%;top:30%;background:#7b2ff7;width:16px;height:16px"></span><span class="lab" style="left:46%;top:26%">Paris 19</span><span class="pin" style="left:56%;top:68%;background:#7b2ff7"></span><span class="pin" style="left:30%;top:62%;background:#7b2ff7"></span><span class="pin" style="left:62%;top:40%;background:#7b2ff7"></span></div><small class="g">taille du repère = nombre de soirs · clic → la liste filtrée</small></div></div>
+ <div class="blk" style="grid-column:span 2"><div class="bh"><b>🚌 Setlist type d’une tournée</b><small class="g">Été 1958 · 31 dates</small></div><div class="bb"><table class="t"><tr><th>Pos.</th><th>Titre le plus souvent à cette place</th><th>Joué</th><th>Barre</th></tr><tr><td>1</td><td>Paris canaille</td><td>29 / 31</td><td><div style="height:10px;width:94%;background:#7b2ff7"></div></td></tr><tr><td>2</td><td>La complainte du marin</td><td>25 / 31</td><td><div style="height:10px;width:80%;background:#7b2ff7"></div></td></tr><tr><td>3</td><td>Fin de bal</td><td>18 / 31</td><td><div style="height:10px;width:58%;background:#7b2ff7"></div></td></tr><tr><td>R1</td><td>Les cerisiers</td><td>22 / 31</td><td><div style="height:10px;width:71%;background:#e1a500"></div></td></tr></table></div></div>
+ <div class="blk" style="grid-column:auto"><div class="bh"><b>🤫 Jamais joués en public</b></div><div class="bb">7 morceaux enregistrés mais jamais sur scène : <span class="ochip link"><i>🎵</i>Valse pour Jeanne</span> <span class="ochip link"><i>🎵</i>Le moulin</span> …</div></div>
+ <div class="blk" style="grid-column:span 3"><div class="bh"><b>⚖️ Comparer deux soirs</b><span class="sp"></span><span class="sel2">14 juil. 1958 · Tulle ▾</span><span class="sel2">2 mai 1966 · Paris, Bobino ▾</span></div><div class="bb" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12.5px"><div><b>Tous les deux (9)</b><br>Paris canaille · Fin de bal · La complainte…</div><div><b style="color:#7b2ff7">Seulement 1958 (7)</b><br>Le temps des cerises · Les cerisiers…</div><div><b style="color:#1aa34a">Seulement 1966 (11)</b><br>Toujours · Chansons de la rue…</div></div></div>
+</div>
+<p class="note">Même outil pour un humoriste (sketches les plus joués), un acteur (nombre de représentations par rôle, remplacements), un orchestre (œuvres et chefs les plus fréquents). Une <b>tournée</b> est une fiche qui regroupe ses dates (carte de l’itinéraire, setlist type).</p>
+</section>
+
+<!-- ═══════════ W. ACTEUR ═══════════ -->
+<section class="case" id="acteur"><span class="tag"><span class="num">W</span>Profil · acteur / actrice</span><h3>Cinéma, télévision, théâtre, voix, publicité : chaque rôle détaillé, filmographie et théâtrographie triables, statistiques</h3>
+<div class="layout2" style="grid-template-columns:1fr 400px">
+ <div>
+  <div class="hero" style="background:linear-gradient(90deg,#fff,#fdecee)"><div class="ph0" style="background:#d9488f">LB</div><div><div class="ey" style="font:700 10.5px system-ui;color:#d0182f;letter-spacing:.1em">🎬 ACTRICE · THÉÂTRE, CINÉMA, TÉLÉVISION, VOIX</div><h2 class="h2" style="margin:2px 0">Louise BORIE <small>· 1915 – 2003 · nom de scène « Louise Bory »</small></h2><small class="g">14 films · 6 séries (38 épisodes) · 22 rôles au théâtre (1 140 représentations) · 31 doublages</small></div></div>
+  <div class="lbar" style="margin-top:10px"><div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="Chercher un rôle, un film, un partenaire…"></div><span class="sel2">Filtrer ▾</span><span class="seg"><span class="on">Liste</span><span>Fiches</span><span>Frise</span></span><span class="sel2">Trier : plus anciens ▾</span></div>
+  <div class="filt" style="margin:8px 0"><span class="on">Tout (73)</span><span>🎬 Cinéma (14)</span><span>📺 Télévision (6)</span><span>🎭 Théâtre (22)</span><span>🗣 Voix (31)</span><span>📢 Publicité (3)</span></div>
+  <table class="t"><tr><th>Année</th><th>Œuvre</th><th>Personnage</th><th>Type</th><th>Réalisation / mise en scène</th><th>Crédit</th></tr>
+   <tr><td>1938</td><td>🎬 <span class="ochip link"><i>🎬</i>Le Moulin rouge de Tulle</span></td><td>une lavandière</td><td>figuration</td><td><span class="chip gr"><span class="q">?</span>J. Choux</span></td><td><span class="badge">non créditée</span></td></tr>
+   <tr><td>1951</td><td>🎭 <span class="ochip link"><i>🎭</i>La Veillée (création)</span></td><td>Mélanie</td><td><b>principal</b></td><td><span class="chip"><span class="pp-av m">HB</span>Henri BORIE</span></td><td>38 représ. · création</td></tr>
+   <tr><td>1959</td><td>🎬 <span class="ochip link"><i>🎬</i>Rue des Bouchers</span></td><td>Mme Lacombe</td><td>secondaire</td><td><span class="chip gr"><span class="q">?</span>J. Séverac</span></td><td>« Louise Bory »</td></tr>
+   <tr><td>1967-1970</td><td>📺 <span class="ochip link"><i>📺</i>Le Commissaire de Tulle</span></td><td>la concierge</td><td>récurrent · 6 ép.</td><td><span class="chip gr"><span class="q">?</span>Cl. Lorrain</span></td><td>S3 ép. 2-7</td></tr>
+   <tr><td>1972</td><td>🗣 <span class="ochip link"><i>🎬</i>Le Chat de la meunière (VF)</span></td><td>voix de la meunière</td><td>doublage</td><td>dir. artistique <span class="chip gr"><span class="q">?</span>Cl. Arsène</span></td><td>voix française de l’actrice anglaise</td></tr></table>
+  <div class="reccard main" style="margin-top:10px"><div class="hd"><span class="kind" style="background:#d0182f">RÔLE</span><b>Mme Lacombe · « Rue des Bouchers » (1959)</b><span style="flex:1"></span><span class="ochip"><i>💶</i>cachet 180 000 F · 📄 contrat</span></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px"><dl class="dl" style="font-size:12.5px;margin:0"><dt>Type</dt><dd>secondaire · 9 scènes</dd><dt>Au générique</dt><dd>« Louise Bory » (6e)</dd><dt>Tournage</dt><dd>avril – juin 1959</dd><dt>Lieux</dt><dd><span class="ochip"><i>📍</i>Tulle</span><span class="ochip"><i>📍</i>Studios de Boulogne</span></dd><dt>Partenaires</dt><dd><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span> + 4</dd></dl><div><div class="thumbs" style="grid-template-columns:repeat(3,1fr);margin-top:0"><div style="background:#111"><small>PLATEAU</small></div><div style="background:#8a8f99"><small>PHOTO</small></div><div style="background:#e9e3d3"><small>SCRIPT</small></div></div><small class="g">Anecdote : a appris la bourrée pour la scène du bal…</small></div></div></div>
+ </div>
+ <div>
+  <div class="side"><h5>🎓 Formation · métier</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Formation</dt><dd>Conservatoire de Paris 1934-36 · classe de <span class="chip gr"><span class="q">?</span>R. Lambert</span></dd><dt>Agents</dt><dd>Agence Delorme (1955-70)</dd><dt>Syndicat</dt><dd>SFA-CGT</dd><dt>Castings</dt><dd>12 notés · 5 obtenus</dd></dl></div>
+  <div class="side"><h5>🏆 Prix et nominations</h5><div>1952 · Prix du Syndicat de la critique · <span class="res w">lauréate</span></div><div>1988 · Molière du second rôle · <span class="res">nommée</span></div></div>
+  <div class="side"><h5>📊 Statistiques</h5>
+   <b style="font-size:11.5px">Rôles par décennie</b><div class="strip" style="height:46px;margin-bottom:2px"><i style="height:20%;background:#d0182f"></i><i style="height:45%;background:#d0182f"></i><i style="height:100%;background:#d0182f"></i><i style="height:80%;background:#d0182f"></i><i style="height:60%;background:#d0182f"></i><i style="height:25%;background:#d0182f"></i></div><div style="display:flex;justify-content:space-between;font:600 10px system-ui;color:#888"><span>1930</span><span>1950</span><span>1980</span></div>
+   <dl class="dl" style="font-size:12.5px;margin:8px 0 0"><dt>Réalisateurs</dt><dd>Cl. Lorrain (6) · J. Séverac (3)</dd><dt>Partenaires</dt><dd>Joseph MARTIN (5) · R. Bos (4)</dd><dt>Principal / sec.</dt><dd>21 / 34 · figuration 9</dd></dl></div>
+  <div class="side"><h5>🗂 Sections du profil (ordonnables)</h5><small>Filmographie · Télévision · Théâtrographie · Voix (doublage, animation, jeux vidéo, livres audio, radio) · Publicité et mannequinat · Clips · Formation · Agents · Castings · Prix · Statistiques · 🎤 Représentations (V) · 📰 Médias</small></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ X. SÉRIE → SAISONS → ÉPISODES ═══════════ -->
+<section class="case" id="serie"><span class="tag"><span class="num">X</span>Image animée · une série complète</span><h3>Série → saisons → épisodes, et ce que la personne y a fait (rôle ou métier, épisodes cochés en lot)</h3>
+<div class="top"><span>📺</span><div><div class="ey">SÉRIE TÉLÉVISÉE · ORTF · 1958 – 1996</div><h4>Le Commissaire de Tulle</h4></div><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div style="display:grid;grid-template-columns:260px 1fr 330px;gap:18px">
+ <div>
+  <div class="cover" style="aspect-ratio:3/4;background:linear-gradient(160deg,#111,#3c78d8)"></div>
+  <dl class="dl" style="font-size:12.5px;margin-top:10px"><dt>Chaîne</dt><dd>RTF → ORTF → Antenne 2</dd><dt>Pays</dt><dd>France</dd><dt>Genre</dt><dd>policier</dd><dt>Créateur</dt><dd><span class="chip gr"><span class="q">?</span>Cl. Lorrain</span></dd><dt>Diffusion</dt><dd>1958 – 1996 · terminée</dd><dt>Taille</dt><dd>5 saisons enregistrées ici · 62 épisodes (sur 110)</dd><dt>Générique</dt><dd>🎵 indicatif · ▶</dd></dl>
+  <p class="note">Même modèle pour : émissions TV et radio, podcasts, feuilletons radiophoniques, mangas et BD en volumes, sagas de livres (cycle → tomes).</p>
+ </div>
+ <div>
+  <div class="sec" style="margin-top:0;border-top:0"><div class="sh"><b>📂 Saisons</b><span class="sp"></span><span class="btn s">＋ Ajouter une saison</span></div>
+   <table class="t"><tr><th>Saison</th><th>Années</th><th>Épisodes</th><th>Responsable</th><th>DVD</th></tr><tr><td>1</td><td>1958-1960</td><td>12</td><td>Cl. Lorrain</td><td>coffret INA 1</td></tr><tr><td>2</td><td>1961-1964</td><td>16</td><td>Cl. Lorrain</td><td>coffret INA 2</td></tr><tr style="background:#eef4ff"><td><b>3</b></td><td>1966-1970</td><td>14</td><td>Cl. Lorrain</td><td>coffret INA 3</td></tr></table></div>
+  <div class="sec"><div class="sh"><b>🎞 Saison 3 · épisodes</b><span class="sp"></span><span class="filt"><span class="on">Tous 14</span><span>Avec Louise 6</span></span></div>
+   <table class="t"><tr><th></th><th>N°</th><th>Titre</th><th>1re diffusion</th><th>Durée</th><th>Réalisation</th><th>Audience</th></tr>
+    <tr><td>☐</td><td>3×01</td><td>Le commissaire mène l’enquête</td><td>8 janv. 1966</td><td>1 h 30</td><td>Cl. Lorrain</td><td>—</td></tr>
+    <tr style="background:#eef4ff"><td>☑</td><td>3×02</td><td><b>Une affaire de famille</b></td><td>5 mars 1966</td><td>1 h 28</td><td>Cl. Lorrain</td><td>61 %</td></tr>
+    <tr style="background:#eef4ff"><td>☑</td><td>3×03 – 3×07</td><td><small class="g">5 épisodes</small></td><td>1966-1968</td><td></td><td></td><td></td></tr>
+    <tr><td>☐</td><td>3×08</td><td>Les eaux troubles</td><td>2 nov. 1968</td><td>1 h 31</td><td>J.-P. Marchand</td><td>—</td></tr></table>
+   <div class="reccard" style="margin-top:8px"><div class="hd"><span class="kind edit">ÉPISODE 3×02</span><b>Une affaire de famille</b></div><dl class="dl" style="font-size:12.5px;margin:6px 0 0"><dt>Titre original</dt><dd>—</dd><dt>Scénario</dt><dd><span class="chip gr"><span class="q">?</span>J. Remy</span></dd><dt>Résumé</dt><dd>Un notaire de Corrèze est retrouvé mort…</dd><dt>Invités</dt><dd><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN <span class="r">le maire</span></span></dd><dt>Tournage</dt><dd><span class="ochip"><i>📍</i>Laguenne</span><span class="ochip"><i>📍</i>Tulle</span></dd><dt>Musique</dt><dd><span class="ochip link"><i>🎵</i>Fin de bal</span></dd><dt>Vidéo</dt><dd>🎞 archive INA · ▶</dd></dl></div></div>
+ </div>
+ <div>
+  <div class="pan"><div class="ph"><b>👤 Louise BORIE dans cette série</b><span class="sp"></span><span class="ib">×</span></div>
+   <div style="padding:10px 12px">
+    <div class="filt" style="margin-bottom:8px"><span class="on">🎭 Rôle</span><span>🛠 Métier</span></div>
+    <div class="fld">Personnage<input value="Mme Pichon, la concierge"></div>
+    <div class="fld">Sorte de rôle<div class="in">récurrent ▾ <small class="g">principal, récurrent, invité, figuration, caméo, cascade, voix</small></div></div>
+    <div class="fld">Épisodes<div class="in" style="font-weight:500">Saison <b>3</b> · épisodes <b>2</b> à <b>7</b> <span class="btn s">Cocher</span><br><small class="g">ou coche-les dans la liste ☑ · « toute la saison » · « toute la série »</small></div></div>
+    <div class="fld">Au générique<input value="Louise Bory"></div>
+    <div class="fld">Cachet par épisode<input value="1 200 F"></div>
+    <p class="note" style="margin:4px 0 0">En « 🛠 Métier » : scénariste, réalisatrice, compositrice, productrice, monteuse, technicienne… avec les mêmes épisodes cochés en lot. Sur la fiche de Louise : « récurrente · S3 ép. 2-7 (6 épisodes) ».</p></div>
+   <div style="padding:8px 12px;border-top:2px solid #111;display:flex;gap:6px"><span class="btn d s">Retirer</span><span style="flex:1"></span><span class="btn s">Annuler</span><span class="btn p s">💾 Enregistrer</span></div></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ Y. SCIENTIFIQUE ═══════════ -->
+<section class="case" id="scientifique"><span class="tag"><span class="num">Y</span>Profil · scientifique / inventeur</span><h3>Thèse, postes, publications, élèves (filiation académique), académies, missions, nommages — avec ses inventions (M) et découvertes (N)</h3>
+<div class="layout2" style="grid-template-columns:1fr 380px">
+ <div>
+  <div class="hero" style="background:linear-gradient(90deg,#fff,#fff8e1)"><div class="ph0" style="background:#d9488f">AM</div><div><div class="ey" style="font:700 10.5px system-ui;color:#a87900;letter-spacing:.1em">🔬 SCIENTIFIQUE · BOTANIQUE, GÉNÉTIQUE VÉGÉTALE</div><h2 class="h2" style="margin:2px 0">Anne MARTIN <small>· 1931 – 2019 · fille de Pierre</small></h2><small class="g">Dr ès sciences 1962 · 84 publications · 1 brevet · 3 découvertes · 11 doctorants · 2 espèces à son nom</small><div style="margin-top:6px"><span class="ochip link"><i>🆔</i>ORCID</span><span class="ochip link"><i>📖</i>IdRef</span><span class="ochip link"><i>📚</i>Google Scholar</span></div></div></div>
+  <div class="blocks">
+   <div class="blk s6 p-inv"><div class="bh"><span class="grip">⠿</span><b>🎓 Thèse</b></div><div class="bb"><dl class="dl" style="font-size:12.5px;margin:0"><dt>Titre</dt><dd>« Les Ophrys du Massif central : cytologie et hybridation »</dd><dt>Soutenue</dt><dd>14 juin 1962 · <span class="ochip"><i>📍</i>Univ. de Toulouse</span></dd><dt>Directeur</dt><dd><span class="chip gr"><span class="q">?</span>Pr H. Garrigues</span></dd><dt>Jury</dt><dd>3 👤 · mention très honorable</dd><dt>Texte</dt><dd>📄 · theses.fr ↗</dd></dl></div></div>
+   <div class="blk s6 p-inv"><div class="bh"><span class="grip">⠿</span><b>🏛 Laboratoires et postes</b></div><div class="bb"><table class="t"><tr><td>1958-62</td><td>attachée de recherche</td><td><span class="ochip"><i>🏛</i>CNRS · lab. Garrigues</span></td></tr><tr><td>1963-80</td><td>maître de conf. → prof.</td><td><span class="ochip"><i>🏛</i>Univ. de Limoges</span></td></tr><tr><td>1980-96</td><td><b>directrice</b></td><td><span class="ochip"><i>🏛</i>INRA Clermont</span></td></tr></table><small class="g">les institutions sont des fiches Employeurs</small></div></div>
+   <div class="blk p-inv"><div class="bh"><span class="grip">⠿</span><b>📚 Publications</b><small class="g">84 · 2 140 citations</small><span class="sp"></span><span class="btn s">📥 Importer (DOI, ORCID, HAL)</span><span class="btn s">Tout voir</span></div><div class="bb"><table class="t"><tr><th>Année</th><th>Titre</th><th>Revue</th><th>Co-auteurs</th><th>Cit.</th></tr><tr><td>1957</td><td>Une nouvelle Ophrys du Limousin</td><td>Bull. Soc. bot. Fr.</td><td><span class="chip gr"><span class="q">?</span>Garrigues</span><span class="chip"><span class="pp-av f">LB</span>L. BORIE</span></td><td>34</td></tr><tr><td>1974</td><td>Polyploidy in European Ophrys</td><td>Nature 251</td><td>+ 3</td><td>412</td></tr></table></div></div>
+   <div class="blk s6 p-inv"><div class="bh"><span class="grip">⠿</span><b>🌳 Filiation académique</b></div><div class="bb">
+    <div class="flow" style="flex-direction:column;align-items:stretch;font-size:12px"><div class="ent"><b>Pr H. Garrigues</b><small>son directeur de thèse</small></div><div class="arr">↓ directeur de thèse de</div><div class="ent core"><b>Anne MARTIN</b><small>thèse 1962</small></div><div class="arr">↓ directrice de thèse de (11)</div><div style="display:flex;gap:4px;flex-wrap:wrap"><span class="chip gr"><span class="q">?</span>J. Dumas 1978</span><span class="chip gr"><span class="q">?</span>M. Roux 1983</span><span class="chip">+ 9</span></div></div></div></div>
+   <div class="blk s6 p-inv"><div class="bh"><span class="grip">⠿</span><b>🧭 Missions · conférences</b></div><div class="bb"><div>1969 · mission au Liban (Ophrys) · 3 sem. · → <b>expédition</b> (Z)</div><div>1975 · conférence invitée, Congrès int. de botanique, Leningrad</div><small class="g">14 conférences · 4 missions</small></div></div>
+   <div class="blk s4 p-inv"><div class="bh"><span class="grip">⠿</span><b>🏅 Académies · sociétés</b></div><div class="bb">Soc. botanique de France (présidente 1985) · Académie d’agriculture (1990)</div></div>
+   <div class="blk s4 p-inv"><div class="bh"><span class="grip">⠿</span><b>🏷 Porte son nom</b></div><div class="bb"><i>Ophrys annae</i> (1981) · astéroïde (31042) Annemartin</div></div>
+   <div class="blk s4 p-inv"><div class="bh"><span class="grip">⠿</span><b>📓 Carnets de labo</b></div><div class="bb">22 carnets scannés (médias) · 1958-1996</div></div>
+  </div>
+ </div>
+ <div class="pan"><div class="ph"><b>⚙️ Organiser le profil scientifique</b><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:8px 12px">
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🧪 Disciplines et domaines</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🎓 Thèse</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏛 Laboratoires et postes</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📚 Publications</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">💡 Inventions · 📜 brevets</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🔬 Découvertes</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🌳 Filiation académique</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🤝 Collaborations</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">💶 Financements</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🧭 Missions · conférences</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏅 Académies, distinctions</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏷 Porte son nom</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📓 Carnets de laboratoire</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <p class="note">Une publication est une fiche « Écrit · article » : DOI, revue (Revues et magazines), volume, pages, co-auteurs 👤 dans l’ordre, citations, PDF.</p></div></div>
+</div>
+</section>
+
+<!-- ═══════════ Z. EXPLORATEUR ═══════════ -->
+<section class="case" id="explorateur"><span class="tag"><span class="num">Z</span>Profil · explorateur — une expédition</span><h3>La fiche d’une expédition : itinéraire sur la carte, membres, moyens, premières, carnets, collectes et où elles sont aujourd’hui</h3>
+<div class="top"><span>🧭</span><div><div class="ey">EXPÉDITION · SAHARA · 1934</div><h4>Mission Limousin – Hoggar</h4></div><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="sheet" style="grid-template-columns:1fr 1fr 320px">
+ <div>
+  <div class="map" style="height:260px;background:linear-gradient(160deg,#f3f1ec,#e7e3dc)"><svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><polyline points="10,85 25,70 38,72 50,55 58,40 70,35 78,18" fill="none" stroke="#e1a500" stroke-width="1.6" stroke-dasharray="3 1.5"/></svg>
+   <span class="pin" style="left:9%;top:83%;background:#e1a500"></span><span class="lab" style="left:12%;top:86%">1 · Alger</span><span class="pin" style="left:37%;top:70%;background:#e1a500"></span><span class="lab" style="left:40%;top:73%">3 · In Salah</span><span class="pin" style="left:57%;top:38%;background:#e1a500"></span><span class="lab" style="left:60%;top:41%">5 · Tamanrasset</span><span class="pin" style="left:77%;top:16%;background:#d0182f"></span><span class="lab" style="left:62%;top:6%">▲ Assekrem 2 780 m</span></div>
+  <table class="t" style="margin-top:6px"><tr><th>Étape</th><th>Lieu</th><th>Dates</th><th>Moyen</th></tr><tr><td>1</td><td>📍 Alger</td><td>2 janv.</td><td>bateau puis camion</td></tr><tr><td>2–4</td><td>Laghouat, Ghardaïa, In Salah</td><td>janv. – févr.</td><td>2 camions Latil</td></tr><tr><td>5</td><td>📍 Tamanrasset</td><td>18 févr.</td><td>méharis</td></tr><tr><td>▲</td><td><b>pic sans nom de l’Atakor</b></td><td>3 mars 1934</td><td>cordée</td></tr></table>
+ </div>
+ <div>
+  <dl class="dl" style="font-size:13px"><dt>Dates</dt><dd>28 déc. 1933 – 4 mai 1934</dd><dt>Objectif</dt><dd>relever la flore et les roches de l’Atakor</dd><dt>Commanditaire</dt><dd>Société de géographie</dd><dt>Financeurs</dt><dd>Muséum · Conseil général de la Corrèze · souscription</dd><dt>Premières</dt><dd><b>1re ascension</b> d’un piton de l’Atakor · 1re traversée en camion Tulle–Tamanrasset</dd></dl>
+  <div class="sec"><div class="sh"><b>👥 Membres</b></div>
+   <div><span class="chip"><span class="pp-av m">RM</span>René MARTIN <span class="r">chef, médecin</span></span><span class="chip"><span class="pp-av f">LB</span>Louise BORIE <span class="r">botaniste</span></span><span class="chip gr"><span class="q">?</span>A. Vergne <span class="r">géologue</span></span><span class="chip gr"><span class="q">?</span>M. Laval <span class="r">cinéaste</span></span><span class="chip gr"><span class="q">?</span>Ag Mohamed <span class="r">guide</span></span></div></div>
+  <div class="sec"><div class="sh"><b>📓 Carnets, photos, films</b></div><div><span class="ochip"><i>📓</i>Carnet de route de René · 112 p.</span><span class="ochip"><i>📷</i>214 photos</span><span class="ochip"><i>🎞</i>« Au pays des Touaregs » (film 16 mm)</span></div></div>
+  <div class="sec"><div class="sh"><b>🧪 Collectes</b><small class="g">où elles sont aujourd’hui</small></div><table class="t"><tr><td>312 plantes séchées</td><td>Muséum, Paris</td></tr><tr><td>roches volcaniques</td><td>École des mines</td></tr><tr><td>objets touaregs (12)</td><td>musée du quai Branly</td></tr><tr><td>casque colonial de René</td><td>famille · 📦</td></tr></table></div>
+  <div class="sec"><div class="sh"><b>⚠️ Incidents</b></div><div>camion perdu dans l’erg · 4 jours sans eau</div></div>
+ </div>
+ <div>
+  <div class="side"><h5>📚 Récits et conférences</h5><div><span class="ochip link"><i>📚</i>Au cœur du Hoggar (1936)</span></div><div>René : 23 conférences 1934-36 · 📰</div></div>
+  <div class="side"><h5>🗺 Cartes tracées</h5><div>carte au 1/200 000 de l’Atakor · 📄</div></div>
+  <div class="side"><h5>🏷 Toponymes</h5><div>« Guelta Martin » (nom donné, non officiel)</div></div>
+  <div class="side"><h5>🧭 Profil explorateur</h5><small>Sections : expéditions (liste, carte de toutes, frise) · premières · toponymes donnés / à son nom · collectes · récits · conférences · sociétés (Société de géographie, Explorers Club) · distinctions · présence médias.</small></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ AA. PROFILS / VOCATIONS ═══════════ -->
+<section class="case" id="vocations"><span class="tag"><span class="num">AA</span>Profils à cocher</span><h3>Sur la fiche : « Cette personne était… » — on coche un ou plusieurs profils, chacun ajoute ses sections ; on peut créer le sien</h3>
+<div class="layout2" style="grid-template-columns:1fr 440px">
+ <div>
+  <div class="pop" style="box-shadow:5px 5px 0 rgba(5,93,255,.3)"><b style="font-size:15px">🧩 Profils de Pierre MARTIN</b> <small class="g">— coche ce qui le décrit ; tu pourras régler les sections de chacun</small>
+   <div class="pp-box" style="margin:8px 0;min-height:32px"><span class="pp-ico">🔍</span><input placeholder="Chercher un profil…"></div>
+   <div id="voc" style="columns:3;column-gap:14px;font-size:13px">
+    <div style="break-inside:avoid;margin-bottom:4px"><div class="grp"style="margin-top:0">Création et scène</div>
+    <label>☑ 🎨 Artiste</label><br><label>☑ 🔨 Artisan d’art</label><br><label>☐ 🎬 Acteur · performeur</label><br><label>☐ ✍️ Écrivain · journaliste</label><br><label>☐ 📷 Photographe</label><br><label>☐ 🏛 Architecte</label></div><div style="break-inside:avoid;margin-bottom:4px"><div class="grp">Sport et aventure</div>
+    <label>☑ 🏉 Sportif</label><br><label>☐ 🧭 Explorateur</label><br><label>☐ ✈️ Aviateur · ⚓ marin</label><br><label>☐ 🏔 Alpiniste</label></div><div style="break-inside:avoid;margin-bottom:4px"><div class="grp">Savoir</div>
+    <label>☑ 💡 Inventeur</label><br><label>☐ 🔬 Scientifique</label><br><label>☐ 👩‍🏫 Enseignant</label><br><label>☐ 🩺 Médecin · soignant</label><br><label>☐ ⚖️ Juriste · magistrat</label><br><label>☐ 📚 Collectionneur · érudit</label></div><div style="break-inside:avoid;margin-bottom:4px"><div class="grp">Vie publique</div>
+    <label>☑ 🏛 Élu local</label><br><label>☐ 🗳 Homme / femme politique</label><br><label>☐ ✊ Syndicaliste · militant</label><br><label>☐ 🤝 Bénévole · associatif</label><br><label>☐ ⛪ Religieux · clergé</label><br><label>☐ 🕊 Diplomate · fonctionnaire</label></div><div style="break-inside:avoid;margin-bottom:4px"><div class="grp">Armes et courage</div>
+    <label>☑ 🎖 Militaire · ancien combattant</label><br><label>☐ ✊ Résistant</label><br><label>☐ 🚒 Sauveteur · pompier</label><br><label>☐ 👮 Gendarme · policier</label></div><div style="break-inside:avoid;margin-bottom:4px"><div class="grp">Travail</div>
+    <label>☐ 🏭 Entrepreneur · industriel</label><br><label>☐ 🛒 Commerçant · artisan</label><br><label>☐ 🐄 Agriculteur · éleveur</label><br><label>☐ 🚂 Cheminot · ouvrier</label><br><label>☐ 🌍 Émigré · expatrié</label></div><div style="break-inside:avoid;margin-bottom:4px"><div class="grp"style="color:#7b2ff7">✎ Mes profils</div>
+    <label style="color:#7b2ff7">☐ 🎺 Musicien de fanfare</label><br><label style="color:#7b2ff7">☐ 🐝 Apiculteur</label></div></div>
+   <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap"><span class="btn s">✎ Créer mon propre profil…</span><span style="flex:1"></span><span class="btn s">Annuler</span><span class="btn p s">Appliquer</span></div></div>
+  <div class="sec"><div class="sh"><b>Ce que chaque profil ajoute</b><small class="g">exemples · tout se règle ensuite</small></div>
+   <div class="kinds">
+    <div><b>🎖 Militaire</b>relie les <strong>fiches militaires existantes</strong> (registre matricule, campagnes, blessures, unités) · décorations · lettres du front</div>
+    <div><b>🐄 Agriculteur · éleveur</b>exploitation 📍, surfaces, cheptel (fiches animaux 🐾), <strong>concours agricoles</strong> (🏆), coopératives, mutuelle</div>
+    <div><b>⛪ Religieux</b>ordination, vœux, ordre ou diocèse, paroisses et charges 📍, missions</div>
+    <div><b>🏭 Entrepreneur</b>entreprises (Employeurs), dates, associés 👤, produits, marques déposées, effectifs, bilans</div>
+    <div><b>🩺 Médecin · soignant</b>diplômes (🎓), installations 📍, hôpitaux, spécialités, patientèle, épidémies</div>
+    <div><b>👩‍🏫 Enseignant</b>postes (écoles 📍), classes, matières, élèves 👤 (photos de classe), inspections</div>
+    <div><b>✊ Résistant</b>réseaux, mouvements, pseudonymes, actions, arrestation, homologation, médailles</div>
+    <div><b>🚒 Sauveteur · pompier</b>corps, grades, interventions, sauvetages, médailles d’honneur</div></div></div>
+ </div>
+ <div>
+  <div class="pan"><div class="ph"><b>✎ Créer un profil · « Musicien de fanfare »</b><span class="sp"></span><span class="ib">×</span></div>
+   <div style="padding:10px 12px">
+    <div class="steps" style="margin-bottom:8px"><span class="dn">1 · Nom</span><span class="on">2 · Sections</span><span>3 · Page</span></div>
+    <div class="fld">Nom et icône<div class="in">🎺 Musicien de fanfare · couleur <span style="display:inline-block;width:14px;height:14px;background:#e1a500;border:1px solid #111;vertical-align:-2px"></span></div></div>
+    <b style="font-size:12px">Sections reprises d’autres profils</b>
+    <div class="lib"><label>☑ 🎤 Concerts et représentations <small>Artiste</small></label><label>☑ 🏆 Concours et récompenses <small>Commun</small></label><label>☑ 👥 Groupes et formations <small>Artiste</small></label><label>☐ 📈 Frise de carrière <small>Politique</small></label><label>☐ 📊 Statistiques par saison <small>Sportif</small></label></div>
+    <b style="font-size:12px;display:block;margin-top:8px">Mes sections (avec mes champs)</b>
+    <div class="cf" style="margin-top:4px"><span class="grip">⠿</span><span>👁</span><span><b>Instruments joués</b></span><span class="ty">📋 tableau</span><span></span><span class="def">instrument · de · à</span></div>
+    <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Défilés et sorties</b></span><span class="ty">📎 fiches liées</span><span></span><span class="def">→ 📅 événements</span></div>
+    <div class="cf"><span class="grip">⠿</span><span>👁</span><span><b>Uniforme</b></span><span class="ty">🖼 images</span><span></span><span class="def"></span></div>
+    <div style="margin-top:6px"><span class="btn s">＋ Ajouter une section</span></div>
+    <p class="note">Un profil = un nom + une icône + une couleur + une liste de sections (reprises ou tiennes) + un ordre de départ. Exportable, partageable.</p></div></div>
+  <div class="side" style="margin-top:12px"><h5>🧱 Comment la page se compose</h5>
+   <div class="flow" style="flex-direction:column;align-items:stretch;font-size:12px"><div class="ent core"><b>Blocs communs (toujours)</b><small>identité, famille, événements · 📰 médias · 🏆 récompenses · 🎓 formation</small></div><div class="arr">＋ pour chaque profil coché</div><div class="ent"><b>Sections du profil</b><small>dans l’ordre du modèle, liseré de sa couleur</small></div><div class="arr">↓ puis ⚙️ Organiser (R)</div><div class="ent x"><b>Ta page</b><small>sections rangées, cachées, largeur ; réglage pour cette personne ou pour tous</small></div></div></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ AB. CONCOURS ET RÉCOMPENSES ═══════════ -->
+<section class="case" id="recompenses"><span class="tag"><span class="num">AB</span>Pour toute personne</span><h3>« 🏆 Concours et récompenses » : prix, décorations, championnats, concours sérieux ou insolites — et la liste « Palmarès »</h3>
+<div class="layout2" style="grid-template-columns:1fr 440px">
+ <div>
+  <div class="lbar"><div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="Chercher… (concours, titre, lieu, organisateur)"><span class="pp-kbd">/</span></div><span class="sel2">Filtrer ▾</span><span class="seg"><span class="on">Liste</span><span>Fiches</span><span>Frise</span></span><span class="sel2">Trier : plus anciens ▾</span></div>
+  <div class="filt" style="margin:8px 0"><span class="on">Tout (19)</span><span>🎖 Décorations (4)</span><span>🏅 Sport (5)</span><span>🃏 Jeu (3)</span><span>🍽 Gastronomie (2)</span><span>🤪 Insolite (2)</span><span>🐄 Agricole (2)</span><span>🎨 Artistique (1)</span></div>
+  <table class="t"><tr><th>Date</th><th>Récompense</th><th>Catégorie</th><th>Épreuve · performance</th><th>Rang</th><th>Lieu · organisateur</th><th></th></tr>
+   <tr><td>1919</td><td>Certificat d’études · <b>1er du canton</b></td><td>scolaire</td><td>—</td><td>1 / 64</td><td>📍 Tulle</td><td>📄</td></tr>
+   <tr><td>1925</td><td>Finaliste, championnat de France de rugby</td><td>sport · <b>national</b></td><td>finale perdue 6-11</td><td>2</td><td>📍 Toulouse · FFR</td><td>📰</td></tr>
+   <tr><td>1936</td><td><b>Meilleur Ouvrier de France</b></td><td>professionnel</td><td>ferronnerie</td><td>lauréat</td><td>📍 Paris</td><td>📄</td></tr>
+   <tr><td>1953</td><td>Concours Lépine · <b>médaille d’or</b></td><td>invention</td><td><span class="ochip link"><i>💡</i>sécateur</span></td><td>1</td><td>📍 Paris</td><td>🖼</td></tr>
+   <tr><td>1955</td><td>Chevalier du <b>Mérite agricole</b></td><td>décoration</td><td>décret du 12 juil.</td><td>—</td><td>JO p. 7012</td><td>📄</td></tr>
+   <tr><td>1962</td><td>Concours de la vache limousine · 2e prix</td><td>agricole</td><td><span class="ochip link"><i>🐾</i>Marquise</span></td><td>2 / 31</td><td>📍 Comice de Tulle</td><td>📷</td></tr>
+   <tr><td>1971</td><td><b>Plus belle moustache</b> de Corrèze</td><td>insolite</td><td>note du jury 18/20</td><td>1 / 22</td><td>📍 Fête de Laguenne</td><td>📷</td></tr>
+   <tr><td>1978</td><td>Concours de belote · 3e édition</td><td>jeu</td><td>2 140 points · avec <span class="chip gr"><span class="q">?</span>R. Bos</span></td><td>3 / 48</td><td>📍 Café du Pont</td><td>🏆</td></tr>
+   <tr><td>1982</td><td>Plus gros mangeur de tripous</td><td>gastronomie · insolite</td><td>2,4 kg en 10 min</td><td>1 / 12</td><td>📍 Naucelle · confrérie</td><td>📰</td></tr></table>
+  <div class="gantt" style="margin-top:10px"><b style="font-size:12.5px">🏆 Frise du palmarès</b><div class="gax" style="margin-top:4px"><div></div><div><span>1910</span><span>1930</span><span>1950</span><span>1970</span><span>1990</span></div></div>
+   <div class="grow"><span>Toutes</span><div class="tr"><span class="bar c-inv" style="left:11%;width:1%"></span><span class="bar c-spo" style="left:19%;width:1%"></span><span class="bar c-art" style="left:33%;width:1%"></span><span class="bar c-inv" style="left:54%;width:1%"></span><span class="bar c-pol" style="left:56%;width:1%"></span><span class="bar c-spo" style="left:65%;width:1%"></span><span class="bar c-med" style="left:76%;width:1%"></span><span class="bar c-gr" style="left:85%;width:1%"></span><span class="bar c-med" style="left:90%;width:1%"></span></div></div></div>
+ </div>
+ <div class="pan"><div class="ph"><b>🏆 Une récompense</b><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:10px 12px">
+   <div class="fld">Catégorie<div class="filt"><span>🏅 Sport</span><span>🃏 Jeu</span><span>🍽 Gastronomie</span><span class="on">🤪 Insolite</span><span>🐄 Agricole</span><span>🎨 Artistique</span><span>🎓 Scolaire</span><span>🛠 Professionnel</span><span>💄 Beauté</span><span>🦸 Bravoure</span><span>🎖 Décoration</span><span>＋ libre</span></div></div>
+   <div class="edit-grid" style="grid-template-columns:1fr 1fr">
+    <div class="fld">Concours<div class="in" style="padding:3px 5px"><span class="ochip" style="margin:0"><i>🏆</i>Plus belle moustache de Corrèze ↗ ×</span></div></div>
+    <div class="fld">Édition<input value="7e · 1971"></div>
+    <div class="fld">Niveau<div class="in">local ▾ <small class="g">local, départemental, régional, national, international, mondial</small></div></div>
+    <div class="fld">Épreuve<input value="moustache à l’ancienne"></div>
+    <div class="fld">Date<input value="15 août 1971"><span class="ok">✓ Compris : 15 août 1971</span></div>
+    <div class="fld">Lieu<div class="in" style="padding:3px 5px"><span class="ochip" style="margin:0"><i>📍</i>Laguenne (19) ×</span></div></div>
+    <div class="fld">Performance<input value="18 / 20"></div>
+    <div class="fld">Rang<input value="1er sur 22"></div>
+    <div class="fld">Titre obtenu<input value="Moustache d’or 1971"></div>
+    <div class="fld">Montant · lot<input value="un jambon"></div>
+    <div class="fld">Organisateur<input value="Comité des fêtes"></div>
+    <div class="fld">Jury<div class="in" style="padding:3px 5px"><span class="chip" style="margin:0"><span class="pp-av f">LB</span>Louise ×</span> ＋</div></div></div>
+   <div class="fld">Trophée, photo, coupure<div class="in" style="padding:3px 5px"><span class="ochip" style="margin:0"><i>🖼</i>moustache71.jpg · ↗ · 🖼 Changer · ×</span></div></div>
+   <div class="fld">Récompense quoi<div class="in" style="font-weight:500">📎 une œuvre, une invention, un animal 🐾, une équipe… (lien)</div></div>
+   <div class="fld">Source<div class="in" style="font-weight:500">📰 La Montagne, 17 août 1971 · ou Journal officiel (n°, page)</div></div>
+   <p class="note">Les décorations (Légion d’honneur, Mérite, médailles militaires, du travail, de la famille…) ont en plus : grade, promotion, décret, dossier (base Léonore ↗), parrain 👤.</p></div>
+  <div style="padding:8px 12px;border-top:2px solid #111;display:flex;gap:6px"><span class="btn d s">Supprimer</span><span style="flex:1"></span><span class="btn s">Annuler</span><span class="btn p s">💾 Enregistrer</span></div></div>
+</div>
+</section>
+
+<!-- ═══════════ AC. DIPLÔMES ET FORMATION ═══════════ -->
+<section class="case" id="formation"><span class="tag"><span class="num">AC</span>Pour toute personne</span><h3>« 🎓 Diplômes et formation » : écoles successives, diplômes, apprentissages, bulletins, photos de classe et camarades</h3>
+<div class="layout2" style="grid-template-columns:1fr 420px">
+ <div>
+  <div class="gantt"><b style="font-size:13px">🏫 Parcours scolaire et formation · Pierre MARTIN</b>
+   <div class="gax" style="margin-top:6px"><div></div><div><span>1907</span><span>1911</span><span>1915</span><span>1919</span><span>1923</span><span>1927</span></div></div>
+   <div class="grow"><span>École de Laguenne</span><div class="tr"><span class="bar c-pol" style="left:0;width:25%">CP → CM2</span></div></div>
+   <div class="grow"><span>Cours complémentaire, Tulle</span><div class="tr"><span class="bar c-pol" style="left:25%;width:15%">2 ans</span></div></div>
+   <div class="grow"><span>Apprentissage</span><div class="tr"><span class="bar c-inv" style="left:45%;width:15%">forge du père</span></div></div>
+   <div class="grow"><span>Compagnonnage</span><div class="tr"><span class="bar c-art" style="left:65%;width:20%">Tour de France</span></div></div>
+   <div class="grow"><span>Service militaire</span><div class="tr"><span class="bar c-gr" style="left:85%;width:10%">brevet de mitrailleur</span></div></div></div>
+  <div class="sec"><div class="sh"><b>🎓 Diplômes</b><span class="sp"></span><span class="btn s">＋ Ajouter</span></div>
+   <table class="t"><tr><th>Date</th><th>Diplôme</th><th>Spécialité · série</th><th>Établissement</th><th>Mention · rang</th><th>Document</th></tr>
+    <tr><td>juin 1914</td><td><b>Certificat d’études primaires</b></td><td>—</td><td>📍 Tulle (centre d’examen)</td><td>1er du canton</td><td>📄 diplôme</td></tr>
+    <tr><td>1919</td><td><b>CAP</b></td><td>ferronnier</td><td>📍 Chambre des métiers, Tulle</td><td>bien</td><td>📄</td></tr>
+    <tr><td>1924</td><td>Brevet militaire</td><td>mitrailleur</td><td>126e RI, Brive</td><td>—</td><td>→ fiche militaire</td></tr>
+    <tr><td>1931</td><td>Permis de conduire</td><td>catégorie B</td><td>préfecture de la Corrèze</td><td>—</td><td>📷</td></tr></table>
+   <p class="note">Liste prête : certificat d’études, brevet (élémentaire, supérieur, BEPC), CAP, BEP, bac (série / spécialités), BTS, DUT, licence, master, doctorat, grandes écoles, diplômes professionnels, permis (conduire, bateau, chasse, pilote), brevets militaires, aviation, marine, secourisme… ou texte libre.</p></div>
+ </div>
+ <div>
+  <div class="side"><h5>📸 Photo de classe · Laguenne 1912</h5>
+   <div style="aspect-ratio:16/10;border:2px solid #111;background:repeating-linear-gradient(90deg,#c9c1ae 0 22px,#b3aa94 22px 24px),#c9c1ae;position:relative"><span style="position:absolute;left:30%;top:40%;width:26px;height:26px;border:2px solid #055dff;border-radius:50%"></span><span class="lab" style="position:absolute;left:34%;top:62%;font:700 10px system-ui;background:#fff;border:1px solid #111;padding:0 3px">Pierre</span><span style="position:absolute;left:62%;top:30%;width:26px;height:26px;border:2px solid #055dff;border-radius:50%"></span></div>
+   <small class="g">visages déjà reconnus (outil Visages) : 4 personnes de ta base</small>
+   <div style="margin-top:4px"><small class="g">Camarades :</small> <span class="chip"><span class="pp-av m">PM</span>Pierre</span><span class="chip gr"><span class="q">?</span>R. Bos</span><span class="chip">+ 2</span></div>
+   <div><small class="g">Maître :</small> <span class="chip gr"><span class="q">?</span>M. Delmas <span class="r">instituteur</span></span></div></div>
+  <div class="side"><h5>📒 Livrets et bulletins</h5><div><span class="ochip"><i>📄</i>Livret scolaire 1907-1914</span></div><div><span class="ochip"><i>📄</i>Bulletins trimestriels (8)</span></div><div><span class="ochip"><i>📄</i>Contrat d’apprentissage 1916</span></div></div>
+  <div class="side"><h5>🏫 Une étape de scolarité</h5><small>établissement (fiche, 📍), classe ou niveau, années, interne / externe, professeurs 👤, camarades 👤, matières, résultats, prix de fin d’année (→ 🏆), photos, bulletins</small></div>
+ </div>
+</div>
+</section>
+<script>
+document.querySelectorAll('#fams .famc').forEach(c=>{const n=c.querySelectorAll('.tyc').length;c.querySelector('.cnt').textContent=n+' types';});
+const fams=[...document.querySelectorAll('#fams .famc')];const tot=fams.reduce((s,c)=>s+c.querySelectorAll('.tyc').length,0);
+document.getElementById('famfilt').innerHTML='<span class="on">Tout ('+tot+')</span>'+fams.map(c=>'<span>'+c.querySelector('b').textContent+' ('+c.querySelectorAll('.tyc').length+')</span>').join('');
+let m=0;document.querySelectorAll('#ma .sumc').forEach(c=>{const n=c.querySelector('.ml').textContent.split('·').length;m+=n;c.querySelector('.cnt').textContent=n+' métiers';});
+document.title+=' ';window.__counts={tot,m};
+</script>
+</body></html>
