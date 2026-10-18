@@ -168,7 +168,13 @@
     }
     function openPaletteEditor(onChange) {
         ext.openDialog({eyebrow: 'MODE PLAN', title: '⚙️ Les éléments du plan', wide: true, submitLabel: 'Fermer', body: '<p class="muted">Range les groupes et les éléments avec ↑ ↓, décoche ce que tu ne veux pas voir, crée tes éléments. C’est gardé tout de suite (et aussi dans Maintenance → Montage, retouche, mise en page et son).</p><div data-vme-box></div>',
-            onOpen: dg => { const box = dg.querySelector('[data-vme-box]'), redraw = () => { box.innerHTML = paletteEditorHtml(); }; redraw(); bindPaletteEditor(box, redraw, onChange); }, onSubmit: () => { onChange?.(); }});
+            onOpen: dg => { const box = dg.querySelector('[data-vme-box]'), redraw = () => { box.innerHTML = paletteEditorHtml(); }; redraw(); bindPaletteEditor(box, redraw, onChange);
+                // 💾 réglages enregistrés : l'ordre, ce qui est montré, et les éléments à soi (passent d'un ordinateur à l'autre)
+                const pbox = ext.vectorPresets?.({tool: 'plan', label: 'cette palette du plan', toolName: 'la palette du plan', get: () => JSON.parse(JSON.stringify(readP())),
+                    set: d => { const P = {}; if (Array.isArray(d.order)) P.order = d.order.filter(x => typeof x === 'string').slice(0, 40); if (Array.isArray(d.hiddenGroups)) P.hiddenGroups = d.hiddenGroups.filter(x => typeof x === 'string').slice(0, 40);
+                        if (d.items && typeof d.items === 'object') P.items = Object.fromEntries(Object.entries(d.items).slice(0, 40).map(([k, v]) => [String(k).slice(0, 30), {order: arr(v?.order).filter(x => typeof x === 'string').slice(0, 300), hidden: arr(v?.hidden).filter(x => typeof x === 'string').slice(0, 300)}]));
+                        P.custom = arr(d.custom).map(cleanCustom).filter(Boolean).slice(0, 200); writeP(P); redraw(); onChange?.(); }});
+                if (pbox) box.before(pbox); }, onSubmit: () => { onChange?.(); }});
     }
     /** ＋ / ✎ un élément à soi : un genre de départ (son allure), un nom, une couleur, une largeur ; un symbole peut être dessiné soi-même (ce qui est choisi dans le dessin) */
     function editCustom(id, {selection = []} = {}) {
@@ -199,7 +205,7 @@
         const F = [['a4l', 'A4 paysage', 1123, 794], ['a4p', 'A4 portrait', 794, 1123], ['a3l', 'A3 paysage', 1587, 1123], ['a3p', 'A3 portrait', 1123, 1587], ['a2l', 'A2 paysage', 2245, 1587], ['sq', 'Carré', 1200, 1200], ['screen', 'Écran 16:9', 1920, 1080]];
         ext.openDialog({eyebrow: 'CARTE', title: '🗺️ Une nouvelle carte', submitLabel: 'Créer la carte',
             body: `<div class="form-grid"><label>Nom<input name="name" maxlength="120" placeholder="Plan du village en 1850"></label><label>Format<select name="fmt">${F.map(f => `<option value="${f[0]}" ${f[0] === 'a3l' ? 'selected' : ''}>${esc(f[1])}</option>`).join('')}</select></label></div>
-                <label class="checkbox-line"><input type="checkbox" name="geo" checked> Situer la carte tout de suite (conseillé) : le lieu et la largeur couverte donnent la bonne échelle, et la carte n’est pas déformée</label><label class="checkbox-line"><input type="checkbox" name="grid" checked> Grille d’échelle pendant le dessin</label>`,
+                <label class="checkbox-line"><input type="checkbox" name="geo" checked> Situer la carte tout de suite (conseillé) : le lieu et la largeur couverte donnent la bonne échelle, et la carte n’est pas déformée</label><label class="checkbox-line"><input type="checkbox" name="grid" checked> <span data-help="Un quadrillage bleu en kilomètres (ou mètres) aide à dessiner aux bonnes distances ; il ne s’imprime jamais.">Grille d’échelle pendant le dessin</span></label>`,
             onSubmit: f => { const fm = F.find(x => x[0] === f.querySelector('[name=fmt]').value) || F[2], name = f.querySelector('[name=name]').value.trim() || 'Ma carte';
                 ext.openVectorEditor?.({doc: {w: fm[2], h: fm[3], bg: '#ffffff', objs: [], kind: 'map', map: {on: true, style: 'modern', auto: true, kmgrid: f.querySelector('[name=grid]').checked, ...(f.querySelector('[name=geo]').checked ? {askGeo: true} : {})}}, name, tab: 'map', onSaved: again, onClose: again}); }});
     }

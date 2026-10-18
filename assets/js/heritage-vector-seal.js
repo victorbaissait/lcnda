@@ -185,8 +185,10 @@
         mid.push(...monogram(o.initials || '', cx, shape === 'exlibris' ? cy + 6 : cy, mono, st, ink, {bigMiddle: o.bigMiddle !== false, emboss}));
         // la légende autour
         if (hasLeg) { const ls = shape === 'wax' ? 22 : 26, lr = R; const lf = shape === 'wax' ? C.light : C.main;
-            if (top) legend.push(ringText(top.toLocaleUpperCase('fr-FR'), cx, cy, lr, ls, legFont, lf));
-            if (bot) legend.push(ringText(bot.toLocaleUpperCase('fr-FR'), cx, cy, lr, ls, legFont, lf, {bottom: true}));
+            // ➰ un texte qui suit le cercle (modifiable ensuite : texte, police, position) ; sinon, une lettre par objet
+            const V = ext.vectorInternals, ring = (t, bottom) => V?.ringPts ? {id: uid(), type: 'textpath', name: bottom ? 'Légende du bas' : 'Légende du haut', text: t, pts: V.ringPts(cx, cy, lr), closed: true, start: 25, align: 'middle', side: bottom ? 'bottom' : 'top', offset: n2(-ls * .36), size: ls, font: legFont, fill: lf, sw: 0, ls: n2(ls * .1)} : ringText(t, cx, cy, lr, ls, legFont, lf, {bottom});
+            if (top) legend.push(ring(top.toLocaleUpperCase('fr-FR'), false));
+            if (bot) legend.push(ring(bot.toLocaleUpperCase('fr-FR'), true));
             if (top && bot) [-1, 1].forEach(sd => legend.push(T('✦', cx + sd * lr, cy + 7, 16, legFont, lf, {name: 'Étoile'})));
         }
         return {w: S, h: S, bg: 'transparent', kind: 'seal', objs: [{id: uid(), type: 'group', layer: true, name: 'Fond et cadre', children: back}, {id: uid(), type: 'group', layer: true, name: 'Monogramme', children: mid}, ...(legend.length ? [{id: uid(), type: 'group', layer: true, name: 'Légende', children: legend}] : [])]};
@@ -206,23 +208,23 @@
                     <div class="h-sl-src"><button type="button" class="button small" data-sl-media>📷 Un acte des médias…</button><button type="button" class="button small secondary" data-sl-known title="Une signature déjà encadrée dans la visionneuse (Signatures identifiées)">✍️ Une signature déjà repérée…</button><label class="button small secondary">💻 De l’ordinateur<input type="file" accept="image/*" data-sl-file hidden></label><span class="muted" data-sl-name></span></div>
                     <div class="h-sl-work"><div class="h-sl-stage" data-sl-stage><p class="muted">Aucune image pour l’instant.</p></div>
                         <div class="h-sl-side"><div class="h-sl-prev" data-sl-prev><p class="muted">L’aperçu de la signature s’affiche ici.</p></div>
-                            <label>Encre ↔ papier <small class="muted" data-sl-thrv></small><input type="range" name="thr" min="40" max="250" value="140"></label>
-                            <label>Effacer les petites taches<input type="range" name="speck" min="0" max="120" value="14"></label>
+                            <label><span data-help="Plus à droite : plus de gris devient de l’encre (un trait pâle réapparaît) ; plus à gauche : seulement l’encre la plus foncée (les taches disparaissent). Réglé tout seul au départ.">Encre ↔ papier</span> <small class="muted" data-sl-thrv></small><input type="range" name="thr" min="40" max="250" value="140"></label>
+                            <label><span data-help="Les points d’encre plus petits que cette taille sont effacés (poussières, piqûres du papier).">Effacer les petites taches</span><input type="range" name="speck" min="0" max="120" value="14"></label>
                             <label>Épaisseur du trait<select name="grow"><option value="-1">Plus fin</option><option value="0" selected>Comme l’original</option><option value="1">Plus épais</option><option value="2">Bien plus épais</option></select></label>
-                            <label class="checkbox-line"><input type="checkbox" name="lines"> Effacer les lignes du registre</label>
+                            <label class="checkbox-line"><input type="checkbox" name="lines"> <span data-help="Retire les longues lignes droites imprimées ou tracées du registre qui traversent la signature.">Effacer les lignes du registre</span></label>
                             <label>Couleur<select name="ink">${INKS.map(([v, l]) => `<option value="${v}">${esc(l)}</option>`).join('')}</select></label>
                             <div><span class="pk-lab">De qui est cette signature ?</span>${pickPersonHtml('sl')}</div>
                             <label>Légende sous la signature (facultatif)<input name="caption" placeholder="ex. Jean Martin, 1832 — acte de mariage"></label>
                             <label class="checkbox-line"><input type="checkbox" name="tomedia" checked> Ranger aussi l’image (fond transparent) dans les médias de la personne</label></div></div>
                 </section>
-                <section data-sl-pane="seal" hidden>
+                <section data-sl-pane="seal" hidden><div data-sl-presets></div>
                     <div class="h-sl-work"><div class="h-sl-sealprev" data-sl-sprev></div>
                         <div class="h-sl-side"><div><span class="pk-lab">D’après une personne</span>${pickPersonHtml('sl2')}</div>
                             <div class="form-grid"><label>Initiales<input name="initials" value="JM" maxlength="6"></label><label>Lettres<select name="letters">${Object.entries(LETTERS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label>
                                 <label>Forme<select name="shape">${Object.entries(SHAPES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Couleur<select name="color">${Object.entries(COLORS).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label>
                                 <label class="span-2">Légende du haut<input name="top" placeholder="ex. FAMILLE MARTIN"></label><label class="span-2">Légende du bas<input name="bottom" placeholder="ex. TULLE · 1832"></label></div>
                             <label class="checkbox-line"><input type="checkbox" name="bigMiddle" checked> La lettre du nom au milieu, plus grande (3 initiales)</label>
-                            <label>Variante du bord de cire<input type="range" name="seed" min="1" max="9" value="3"></label></div></div>
+                            <label><span data-help="Le bord d’un cachet de cire est irrégulier : chaque variante l’écrase autrement.">Variante du bord de cire</span><input type="range" name="seed" min="1" max="9" value="3"></label></div></div>
                 </section></div>`,
             onOpen: dg => {
                 const $ = s => dg.querySelector(s), form = dg.querySelector('form');
@@ -278,6 +280,17 @@
                 function sealPrev() { const o = Object.fromEntries(new FormData(form)); o.bigMiddle = form.elements.bigMiddle.checked; const V = ext.vectorInternals; if (!V?.docSvg) { sp.innerHTML = '<p class="muted">Aperçu indisponible.</p>'; return; } try { sp.innerHTML = V.docSvg(buildSeal(o)); } catch (e) { sp.innerHTML = `<p class="muted">${esc(e.message)}</p>`; } }
                 dg.querySelector('[data-sl-pane="seal"]').addEventListener('input', () => sealPrev());
                 dg.querySelector('[data-sl-pane="seal"]').addEventListener('change', () => sealPrev());
+                // 💾 réglages enregistrés du sceau (lettres, forme, couleur, légendes) et du détourage
+                const pbox = ext.vectorPresets?.({tool: 'sceau', label: 'ces réglages du sceau', toolName: 'les signatures et sceaux',
+                    get: () => { const e = form.elements; return {initials: e.initials.value, letters: e.letters.value, shape: e.shape.value, color: e.color.value, top: e.top.value, bottom: e.bottom.value, bigMiddle: e.bigMiddle.checked, seed: e.seed.value, speck: e.speck.value, grow: e.grow.value, lines: e.lines.checked, ink: e.ink.value}; },
+                    set: d => { const e = form.elements; ['initials', 'letters', 'shape', 'color', 'top', 'bottom', 'seed', 'speck', 'grow', 'ink'].forEach(k => { const el = e[k]; if (el && d[k] !== undefined && (el.tagName !== 'SELECT' || [...el.options].some(op => op.value === String(d[k])))) el.value = String(d[k]).slice(0, 120); });
+                        e.bigMiddle.checked = d.bigMiddle !== false; e.lines.checked = !!d.lines; sealPrev(); if (img) preview(); }});
+                if (pbox) $('[data-sl-presets]').appendChild(pbox);
+                // E4 : une image d'acte déposée (ou collée) sur la zone entre dans les médias, puis s'ouvre ici
+                const U = window.LCNDA_UI || A().ui, P2 = window.LCNDA_PICKER || A();
+                U?.bindFileDrop?.(stage, async files => { const f2 = files[0]; if (!f2) return; try { const m = P2?.importMediaFile ? await P2.importMediaFile(f2, ['image']) : null; if (m?.filename) { await loadImg(mediaUrl(m.filename), m.title || f2.name); toast('Image rangée dans les médias.'); return; } } catch (e) { toast(`Pas rangée dans les médias : ${e.message}`, 'error'); }
+                    const r = new FileReader(); r.onload = () => loadImg(r.result, f2.name); r.readAsDataURL(f2); }, {accept: 'image/*'});
+                if (!img) stage.innerHTML = '<p class="muted">Aucune image pour l’instant : choisis un acte, ou glisse une image ici (⌘V pour la coller).</p>';
                 setMode(mode);
             },
             onSubmit: async form => {

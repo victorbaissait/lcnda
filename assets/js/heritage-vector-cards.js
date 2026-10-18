@@ -65,6 +65,95 @@
         return out;
     }
     const sep = (st, W, y, u) => { const ac = STYLES[st].accent; return [P(`M${n2(W / 2 - 70 * u)} ${n2(y)}H${n2(W / 2 - 8 * u)}M${n2(W / 2 + 8 * u)} ${n2(y)}H${n2(W / 2 + 70 * u)}`, {stroke: ac, sw: 1 * u, name: 'Filet'}), P(`M${n2(W / 2)} ${n2(y - 5 * u)}L${n2(W / 2 + 5 * u)} ${n2(y)}L${n2(W / 2)} ${n2(y + 5 * u)}L${n2(W / 2 - 5 * u)} ${n2(y)}Z`, {fill: ac, name: 'Losange'})]; };
+    /* ═════════ ❦ Bibliothèque d'ornements anciens (pour le dessin vectoriel : onglet « Ornements ») ═════════
+     * Des chemins SVG simples (droites, courbes de Bézier, arcs), chacun dans sa boîte (w × h) ; f = rempli, s = trait (épaisseur), op = transparence.
+     * Le dessin les met à l'échelle et à la couleur choisie ; ensuite tout reste modifiable (Sélection directe, Couleur…). */
+    const f2 = v => Math.round(v * 100) / 100;
+    const circ = (cx, cy, r) => `M${f2(cx - r)} ${f2(cy)}A${f2(r)} ${f2(r)} 0 1 0 ${f2(cx + r)} ${f2(cy)}A${f2(r)} ${f2(r)} 0 1 0 ${f2(cx - r)} ${f2(cy)}Z`;
+    const ell = (cx, cy, rx, ry) => `M${f2(cx - rx)} ${f2(cy)}A${f2(rx)} ${f2(ry)} 0 1 0 ${f2(cx + rx)} ${f2(cy)}A${f2(rx)} ${f2(ry)} 0 1 0 ${f2(cx - rx)} ${f2(cy)}Z`;
+    /** une feuille en amande de (x1, y1) à (x2, y2), demi-largeur w */
+    const leaf = (x1, y1, x2, y2, w) => { const mx = (x1 + x2) / 2, my = (y1 + y2) / 2, L = Math.hypot(x2 - x1, y2 - y1) || 1, nx = -(y2 - y1) / L * w, ny = (x2 - x1) / L * w; return `M${f2(x1)} ${f2(y1)}Q${f2(mx + nx)} ${f2(my + ny)} ${f2(x2)} ${f2(y2)}Q${f2(mx - nx)} ${f2(my - ny)} ${f2(x1)} ${f2(y1)}Z`; };
+    /** n pétales autour d'un centre */
+    const petals = (cx, cy, n, r1, r2, w, a0 = -Math.PI / 2) => Array.from({length: n}, (_, i) => { const a = a0 + i * 2 * Math.PI / n; return leaf(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1, cx + Math.cos(a) * r2, cy + Math.sin(a) * r2, w); }).join('');
+    /** une courbe lisse passant par des points (Catmull-Rom → Bézier) */
+    const spline = (pts, closed = false) => { const n = pts.length; if (n < 2) return ''; const Pt = i => closed ? pts[(i + n) % n] : pts[Math.max(0, Math.min(n - 1, i))];
+        let d = `M${f2(pts[0][0])} ${f2(pts[0][1])}`; for (let i = 0; i < (closed ? n : n - 1); i++) { const p0 = Pt(i - 1), p1 = Pt(i), p2 = Pt(i + 1), p3 = Pt(i + 2);
+            d += `C${f2(p1[0] + (p2[0] - p0[0]) / 6)} ${f2(p1[1] + (p2[1] - p0[1]) / 6)} ${f2(p2[0] - (p3[0] - p1[0]) / 6)} ${f2(p2[1] - (p3[1] - p1[1]) / 6)} ${f2(p2[0])} ${f2(p2[1])}`; } return d + (closed ? 'Z' : ''); };
+    /** les points d'une volute (spirale qui se resserre) : départ à l'angle a0, sens dir (1 : aiguilles d'une montre) */
+    const voluteP = (cx, cy, r, turns = 1.5, dir = 1, a0 = 0) => { const N = Math.round(turns * 8), out = []; for (let i = 0; i <= N; i++) { const t = i / N, a = a0 + dir * t * turns * 2 * Math.PI, rr = r * (1 - t * .78); out.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr]); } return out; };
+    const volute = (...a) => spline(voluteP(...a));
+    /** symétrie gauche-droite d'un chemin absolu (M L C Q H V Z) autour de x = cx */
+    const mirror = (d, cx) => { let k = ''; return String(d).replace(/([MLCQHVZ])|(-?\d*\.?\d+)/gi, (m, c, nb) => { if (c) { k = c.toUpperCase(); mirror.i = 0; return c; } const v = Number(nb), i = mirror.i++; return String(f2(k === 'V' || (k !== 'H' && i % 2 === 1) ? v : 2 * cx - v)); }); };
+    const both = (d, cx) => d + mirror(d, cx);
+    /** symétrie haut-bas autour de y = cy */
+    const mirrorY = (d, cy) => { let k = ''; return String(d).replace(/([MLCQHVZ])|(-?\d*\.?\d+)/gi, (m, c, nb) => { if (c) { k = c.toUpperCase(); mirrorY.i = 0; return c; } const v = Number(nb), i = mirrorY.i++; return String(f2(k === 'H' || (k !== 'V' && i % 2 === 0) ? v : 2 * cy - v)); }); };
+    /** les quatre coins d'un cadre (rectangulaire) : le dessin du coin haut-gauche, reflété */
+    const corners = (d, cx, cy) => d + mirror(d, cx) + mirrorY(d, cy) + mirrorY(mirror(d, cx), cy);
+    const poly = pts => 'M' + pts.map(p => `${f2(p[0])} ${f2(p[1])}`).join('L') + 'Z';
+    const starD = (cx, cy, n, R, r, a0 = -Math.PI / 2) => poly(Array.from({length: n * 2}, (_, i) => { const a = a0 + i * Math.PI / n, q = i % 2 ? r : R; return [cx + Math.cos(a) * q, cy + Math.sin(a) * q]; }));
+    const rays = (cx, cy, r1, r2, a1, a2, n) => Array.from({length: n}, (_, i) => { const a = (a1 + (a2 - a1) * i / (n - 1)) * Math.PI / 180; return `M${f2(cx + Math.cos(a) * r1)} ${f2(cy + Math.sin(a) * r1)}L${f2(cx + Math.cos(a) * r2)} ${f2(cy + Math.sin(a) * r2)}`; }).join('');
+    const pearls = (pts, r) => pts.map(([x, y]) => circ(x, y, r)).join('');
+    const rectD = (x, y, w, h) => `M${f2(x)} ${f2(y)}H${f2(x + w)}V${f2(y + h)}H${f2(x)}Z`;
+    // un coin à filet rentrant (quart de cercle creusé) : cadre w × h, rayon r, marge m
+    const notchRect = (m, w, h, r) => `M${f2(m + r)} ${f2(m)}H${f2(w - m - r)}A${f2(r)} ${f2(r)} 0 0 0 ${f2(w - m)} ${f2(m + r)}V${f2(h - m - r)}A${f2(r)} ${f2(r)} 0 0 0 ${f2(w - m - r)} ${f2(h - m)}H${f2(m + r)}A${f2(r)} ${f2(r)} 0 0 0 ${f2(m)} ${f2(h - m - r)}V${f2(m + r)}A${f2(r)} ${f2(r)} 0 0 0 ${f2(m + r)} ${f2(m)}Z`;
+    const lys = (() => { const r = 'M54 58C70 40 92 36 92 52C92 62 82 66 74 60C82 58 84 50 78 48C70 46 60 54 56 64Z'; return 'M50 5C64 22 64 42 50 62C36 42 36 22 50 5Z' + both(r, 50) + 'M28 62H72V69H28Z' + both('M50 69C49 78 44 86 36 92L50 92Z', 50); })();
+    const acanthe = (() => { const half = [[50, 97], [45, 82], [30, 80], [37, 68], [21, 62], [32, 52], [18, 42], [33, 36], [26, 22], [41, 24], [50, 4]]; return spline([...half, ...half.slice(1, -1).reverse().map(([x, y]) => [100 - x, y])], true) + leaf(50, 90, 50, 14, 1.6); })();
+    const ORN_CATS = [['fleurons', 'Fleurons'], ['coins', 'Coins'], ['filets', 'Filets'], ['culs', 'Culs-de-lampe'], ['cadres', 'Cadres'], ['lettrines', 'Lettrines']];
+    const O = (k, n, cat, w, h, parts, extra = {}) => ({k, n, cat, w, h, parts, ...extra});
+    const ORNAMENTS = [
+        // — fleurons (100 × 100)
+        O('fl_feuille', 'Feuille', 'fleurons', 100, 100, [{d: leaf(50, 96, 50, 4, 22) + leaf(50, 88, 50, 14, 1.4), f: 1, eo: 1}], {tags: 'feuille nervure'}),
+        O('fl_trefle', 'Trèfle', 'fleurons', 100, 100, [{d: circ(50, 28, 16) + circ(31, 52, 16) + circ(69, 52, 16) + leaf(50, 50, 50, 97, 4), f: 1}], {tags: 'trèfle'}),
+        O('fl_quatre', 'Quatre-feuilles', 'fleurons', 100, 100, [{d: circ(50, 27, 19) + circ(73, 50, 19) + circ(50, 73, 19) + circ(27, 50, 19), f: 1}, {d: circ(50, 50, 7), f: 1}], {tags: 'quatrefeuille gothique'}),
+        O('fl_rosace6', 'Rosace à six pétales', 'fleurons', 100, 100, [{d: petals(50, 50, 6, 9, 48, 13), f: 1}, {d: circ(50, 50, 8), f: 1}], {tags: 'rosace fleur'}),
+        O('fl_rosace8', 'Rosace double', 'fleurons', 100, 100, [{d: petals(50, 50, 8, 10, 48, 9), f: 1}, {d: petals(50, 50, 8, 9, 30, 6, -Math.PI / 2 + Math.PI / 8), f: 1, op: .6}, {d: circ(50, 50, 7), f: 1}], {tags: 'rosace fleur'}),
+        O('fl_etoile', 'Rose des vents', 'fleurons', 100, 100, [{d: poly(Array.from({length: 16}, (_, i) => { const a = -Math.PI / 2 + i * Math.PI / 8, r = i % 4 === 0 ? 48 : i % 2 === 0 ? 30 : 10; return [50 + Math.cos(a) * r, 50 + Math.sin(a) * r]; })), f: 1}], {tags: 'étoile boussole'}),
+        O('fl_lys', 'Fleur de lys', 'fleurons', 100, 100, [{d: lys, f: 1}], {tags: 'lys royal héraldique'}),
+        O('fl_palmette', 'Palmette', 'fleurons', 100, 100, [{d: Array.from({length: 7}, (_, i) => { const a = (-160 + i * 140 / 6) * Math.PI / 180, L = 40 + 14 * Math.sin(Math.PI * i / 6); return leaf(50, 80, 50 + Math.cos(a) * L, 80 + Math.sin(a) * L, 7); }).join('') + 'M30 82Q50 70 70 82Q60 96 50 96Q40 96 30 82Z', f: 1}], {tags: 'palmette antique éventail'}),
+        O('fl_coeur', 'Cœur fleuronné', 'fleurons', 100, 100, [{d: 'M50 92C22 72 6 54 16 36C26 20 42 24 50 38C58 24 74 20 84 36C94 54 78 72 50 92Z' + leaf(50, 36, 36, 6, 6) + leaf(50, 36, 64, 6, 6), f: 1}], {tags: 'cœur amour mariage'}),
+        O('fl_acanthe', 'Feuille d’acanthe', 'fleurons', 100, 100, [{d: acanthe, f: 1, eo: 1}], {tags: 'acanthe feuille classique'}),
+        O('fl_croix', 'Croix fleuronnée', 'fleurons', 100, 100, [{d: rectD(44, 20, 12, 60) + rectD(20, 44, 60, 12) + [0, 90, 180, 270].map(a => { const r = a * Math.PI / 180, at = (x, y) => [50 + (x - 50) * Math.cos(r) - (y - 50) * Math.sin(r), 50 + (x - 50) * Math.sin(r) + (y - 50) * Math.cos(r)]; return [[50, 8, 7], [41, 15, 6], [59, 15, 6]].map(([x, y, rr]) => circ(...at(x, y), rr)).join(''); }).join(''), f: 1}], {tags: 'croix baptême deuil'}),
+        O('fl_rinceau', 'Rinceau', 'fleurons', 100, 100, [{d: spline([...voluteP(26, 58, 18, 1.2, -1, 0).reverse(), [50, 50], ...voluteP(74, 42, 18, 1.2, -1, Math.PI)]), s: 3.4}, {d: leaf(50, 50, 40, 30, 5) + leaf(50, 50, 60, 70, 5), f: 1}], {tags: 'rinceau volute s'}),
+        O('fl_soleil', 'Soleil', 'fleurons', 100, 100, [{d: circ(50, 50, 16), f: 1}, {d: Array.from({length: 16}, (_, i) => { const a = i * Math.PI / 8, r1 = 21, r2 = i % 2 ? 36 : 47, w = .12; return poly([[50 + Math.cos(a - w) * r1, 50 + Math.sin(a - w) * r1], [50 + Math.cos(a) * r2, 50 + Math.sin(a) * r2], [50 + Math.cos(a + w) * r1, 50 + Math.sin(a + w) * r1]]); }).join(''), f: 1}], {tags: 'soleil rayons'}),
+        // — coins (100 × 100, l'angle en haut à gauche)
+        O('co_volute', 'Coin à volutes', 'coins', 100, 100, [{d: 'M3 96V3H96', s: 2.4}, {d: 'M11 70V11H70', s: 1}, {d: volute(30, 30, 17, 1.4, 1, Math.PI * .75), s: 2.6}, {d: leaf(70, 11, 88, 11, 4) + leaf(11, 70, 11, 88, 4), f: 1}], {tags: 'belle époque coin volute'}),
+        O('co_nouveau', 'Coin Art nouveau', 'coins', 100, 100, [{d: spline([[4, 98], [8, 52], [22, 24], [52, 8], [98, 4]]), s: 2.4}, {d: spline([[14, 92], [18, 46], [42, 20], [92, 14]]), s: 1.2}, {d: leaf(20, 40, 38, 30, 6) + leaf(36, 20, 30, 40, 5) + leaf(10, 70, 26, 60, 5) + leaf(66, 10, 60, 26, 5), f: 1}, {d: circ(24, 24, 5), f: 1}], {tags: 'art nouveau tige fleur'}),
+        O('co_deco', 'Coin Art déco', 'coins', 100, 100, [{d: 'M2 98V2H98M12 98V12H98M22 98V22H98', s: 1.6}, {d: rays(2, 2, 34, 62, 12, 78, 7), s: 1.4}, {d: rectD(28, 28, 10, 10), f: 1}], {tags: 'art déco gradins éventail'}),
+        O('co_filet', 'Coin à filet arrondi', 'coins', 100, 100, [{d: 'M3 98V34A31 31 0 0 0 34 3H98', s: 3}, {d: 'M12 98V44A32 32 0 0 0 44 12H98', s: 1.2}, {d: circ(12, 12, 5), f: 1}], {tags: 'classique filet arrondi'}),
+        O('co_fleuron', 'Coin fleuronné', 'coins', 100, 100, [{d: 'M4 96V4H96', s: 1.4}, {d: leaf(12, 12, 46, 46, 9) + leaf(16, 16, 50, 22, 6) + leaf(16, 16, 22, 50, 6), f: 1}, {d: circ(12, 12, 6), f: 1}], {tags: 'fleuron coin feuilles'}),
+        O('co_perle', 'Coin perlé', 'coins', 100, 100, [{d: 'M0 0H58L0 58Z', f: 1}, {d: pearls(Array.from({length: 6}, (_, i) => [68 - i * 12.4, 6 + i * 12.4]), 3.4), f: 1}], {tags: 'perles triangle coin'}),
+        // — filets (300 × 40)
+        O('fi_losange', 'Filet au losange', 'filets', 300, 40, [{d: 'M8 20H134M166 20H292', s: 2}, {d: poly([[150, 8], [162, 20], [150, 32], [138, 20]]), f: 1}, {d: circ(126, 20, 3) + circ(174, 20, 3), f: 1}], {tags: 'séparateur losange'}),
+        O('fi_double', 'Filet double', 'filets', 300, 40, [{d: leaf(6, 15, 294, 15, 2.2), f: 1}, {d: 'M30 25H270', s: 1}], {tags: 'filet anglais gras maigre'}),
+        O('fi_onde', 'Filet ondulé', 'filets', 300, 40, [{d: spline(Array.from({length: 13}, (_, i) => [6 + i * 24, 20 + (i % 2 ? -9 : 9) * (i && i < 12 ? 1 : 0)])), s: 2.2}], {tags: 'onde vague'}),
+        O('fi_perles', 'Filet perlé', 'filets', 300, 40, [{d: Array.from({length: 15}, (_, i) => circ(10 + i * 20, 20, 1.5 + 4.5 * Math.sin(Math.PI * (i + .5) / 15))).join(''), f: 1}], {tags: 'perles chapelet'}),
+        O('fi_chevrons', 'Filet Art déco', 'filets', 300, 40, [{d: 'M6 20H110M190 20H294', s: 1.6}, {d: 'M114 30L126 10L138 30L150 10L162 30L174 10L186 30', s: 2}, {d: 'M6 27H100M200 27H294', s: .8}], {tags: 'art déco chevrons zigzag'}),
+        O('fi_volutes', 'Filet à volutes', 'filets', 300, 40, [{d: volute(132, 20, 12, 1.3, 1, Math.PI) + mirror(volute(132, 20, 12, 1.3, 1, Math.PI), 150), s: 2.2}, {d: leaf(10, 20, 118, 20, 2) + leaf(182, 20, 290, 20, 2), f: 1}, {d: poly([[150, 13], [155, 20], [150, 27], [145, 20]]), f: 1}], {tags: 'volutes séparateur'}),
+        O('fi_accolade', 'Accolade', 'filets', 300, 40, [{d: both(spline([[8, 32], [60, 30], [120, 28], [140, 22], [150, 8]]), 150), s: 2.4}], {tags: 'accolade titre'}),
+        O('fi_fleuron', 'Filet au fleuron', 'filets', 300, 40, [{d: 'M8 20H120M180 20H292', s: 1.6}, {d: circ(150, 13, 6) + circ(142, 22, 6) + circ(158, 22, 6) + leaf(150, 22, 150, 38, 3) + leaf(128, 20, 120, 20, 3) + leaf(172, 20, 180, 20, 3), f: 1}], {tags: 'fleuron trèfle séparateur'}),
+        // — culs-de-lampe (160 × 100)
+        O('cl_triangle', 'Cul-de-lampe en triangle', 'culs', 160, 100, [{d: Array.from({length: 7}, (_, i) => leaf(10 + i * 9.5, 8 + i * 11, 150 - i * 9.5, 8 + i * 11, 2.2 - i * .18)).join('') + poly([[80, 82], [86, 90], [80, 98], [74, 90]]), f: 1}], {tags: 'triangle fin de chapitre'}),
+        O('cl_goutte', 'Goutte et volutes', 'culs', 160, 100, [{d: 'M80 96C64 76 66 54 80 40C94 54 96 76 80 96Z', f: 1}, {d: volute(56, 34, 16, 1.3, -1, 0) + mirror(volute(56, 34, 16, 1.3, -1, 0), 80) + 'M20 12H140', s: 2.2}], {tags: 'goutte larme'}),
+        O('cl_fleuri', 'Cul-de-lampe fleuri', 'culs', 160, 100, [{d: both(spline([[80, 20], [60, 34], [34, 36], [14, 24]]), 80), s: 2.2}, {d: leaf(80, 18, 80, 94, 10) + leaf(56, 33, 44, 52, 6) + leaf(104, 33, 116, 52, 6) + leaf(32, 34, 22, 52, 5) + leaf(128, 34, 138, 52, 5) + circ(80, 14, 6), f: 1}], {tags: 'fleur branches'}),
+        O('cl_deco', 'Éventail Art déco', 'culs', 160, 100, [{d: 'M8 10H152', s: 2}, {d: rays(80, 14, 10, 78, 20, 160, 11), s: 1.6}, {d: 'M30 16A50 50 0 0 0 130 16', s: 1}, {d: circ(80, 14, 6), f: 1}], {tags: 'art déco éventail soleil'}),
+        O('cl_vase', 'Urne', 'culs', 160, 100, [{d: 'M64 10H96L92 18C112 26 114 52 98 70L104 88H56L62 70C46 52 48 26 68 18Z', f: 1}, {d: leaf(64, 30, 20, 20, 9) + leaf(96, 30, 140, 20, 9) + leaf(62, 52, 26, 62, 7) + leaf(98, 52, 134, 62, 7), f: 1}], {tags: 'urne vase antique'}),
+        // — cadres (300 × 400)
+        O('ca_belle', 'Cadre Belle Époque', 'cadres', 300, 400, [{d: rectD(6, 6, 288, 388), s: 2.4}, {d: rectD(16, 16, 268, 368), s: 1}, {d: corners(volute(40, 40, 22, 1.4, 1, Math.PI * .75), 150, 200), s: 2}, {d: both(spline([[150, 20], [128, 30], [112, 24], [118, 14]]), 150), s: 1.6}, {d: circ(150, 22, 5), f: 1}], {tags: 'belle époque 1900 cadre volutes'}),
+        O('ca_nouveau', 'Cadre Art nouveau', 'cadres', 300, 400, [{d: 'M14 394V120A136 106 0 0 1 286 120V394Z', s: 2.4}, {d: 'M26 384V124A124 96 0 0 1 274 124V384Z', s: 1}, {d: both(spline([[8, 396], [16, 300], [4, 210], [22, 130], [70, 40], [150, 6]]), 150), s: 1.8}, {d: [[12, 300, 34, 284], [8, 220, 32, 210], [24, 140, 46, 140], [60, 52, 80, 66]].map(([a, b, c, d]) => leaf(a, b, c, d, 6) + mirror(leaf(a, b, c, d, 6), 150)).join('') + circ(150, 14, 7), f: 1}], {tags: 'art nouveau arche tige 1900'}),
+        O('ca_deco', 'Cadre Art déco', 'cadres', 300, 400, [{d: rectD(4, 4, 292, 392), s: 2}, {d: rectD(14, 14, 272, 372), s: 1}, {d: 'M24 70V24H70M230 24H276V70M276 330V376H230M70 376H24V330', s: 2.4}, {d: rays(150, 14, 20, 64, 20, 160, 9), s: 1.2}, {d: rectD(144, 376, 12, 12) + rectD(140, 8, 20, 12), f: 1}], {tags: 'art déco 1925 gradins soleil'}),
+        O('ca_medaillon', 'Médaillon perlé', 'cadres', 300, 400, [{d: ell(150, 210, 132, 180), s: 2.6}, {d: ell(150, 210, 120, 168), s: 1}, {d: pearls(Array.from({length: 36}, (_, i) => { const a = i * Math.PI / 18; return [150 + Math.cos(a) * 141, 210 + Math.sin(a) * 189]; }), 3.2) + both('M150 30C130 4 104 6 108 22C112 36 134 34 150 30Z', 150) + circ(150, 30, 7), f: 1}], {tags: 'médaillon ovale perles portrait nœud'}),
+        O('ca_cartouche', 'Cartouche à enroulements', 'cadres', 300, 400, [{d: notchRect(20, 300, 400, 34), s: 2.4}, {d: notchRect(30, 300, 400, 30), s: 1}, {d: corners(volute(26, 26, 18, 1.5, 1, Math.PI * .25), 150, 200), s: 2.2}], {tags: 'cartouche enroulements baroque'}),
+        O('ca_filets', 'Cadre à filets', 'cadres', 300, 400, [{d: notchRect(6, 300, 400, 26), s: 3.2}, {d: notchRect(16, 300, 400, 22), s: 1}, {d: circ(16, 16, 5) + circ(284, 16, 5) + circ(16, 384, 5) + circ(284, 384, 5), f: 1}], {tags: 'classique filets coins'}),
+        // — lettrines (100 × 100 ; la lettre se choisit en la posant)
+        O('le_carre', 'Lettrine carrée', 'lettrines', 100, 100, [{d: rectD(3, 3, 94, 94), s: 2.4}, {d: rectD(10, 10, 80, 80), s: .9}, {d: circ(10, 10, 3) + circ(90, 10, 3) + circ(10, 90, 3) + circ(90, 90, 3), f: 1}], {letter: {x: 50, y: 74, size: 62}, tags: 'lettrine initiale'}),
+        O('le_medievale', 'Lettrine médiévale', 'lettrines', 100, 100, [{d: rectD(3, 3, 94, 94), f: 1, op: .16}, {d: rectD(3, 3, 94, 94), s: 2.4}, {d: volute(18, 18, 11, 1.3, 1, Math.PI) + volute(82, 82, 11, 1.3, 1, 0), s: 1.6}, {d: leaf(24, 82, 10, 92, 4) + leaf(76, 18, 90, 8, 4), f: 1}], {letter: {x: 50, y: 74, size: 64, font: 'UnifrakturMaguntia, "Old English Text MT", Georgia, serif'}, tags: 'lettrine gothique enluminure'}),
+        O('le_nouveau', 'Lettrine Art nouveau', 'lettrines', 100, 100, [{d: 'M8 97V40A42 36 0 0 1 92 40V97Z', s: 2.2}, {d: spline([[4, 98], [6, 60], [14, 30], [40, 8]]), s: 1.4}, {d: leaf(6, 66, 18, 56, 4) + leaf(10, 40, 22, 36, 4) + circ(42, 8, 3.5), f: 1}], {letter: {x: 52, y: 82, size: 58}, tags: 'lettrine art nouveau arche'}),
+        O('le_deco', 'Lettrine Art déco', 'lettrines', 100, 100, [{d: rectD(3, 3, 94, 94), s: 1.6}, {d: 'M10 30V10H30M70 10H90V30M90 70V90H70M30 90H10V70', s: 2.4}, {d: rays(50, 3, 6, 18, 30, 150, 5), s: 1.2}], {letter: {x: 50, y: 76, size: 60, font: 'Didot, "Bodoni 72", Georgia, serif'}, tags: 'lettrine art déco'}),
+        O('le_cercle', 'Lettrine cerclée', 'lettrines', 100, 100, [{d: circ(50, 50, 46), s: 2.4}, {d: circ(50, 50, 39), s: .9}, {d: pearls(Array.from({length: 8}, (_, i) => [50 + Math.cos(i * Math.PI / 4) * 46, 50 + Math.sin(i * Math.PI / 4) * 46]), 3.4), f: 1}], {letter: {x: 50, y: 70, size: 52}, tags: 'lettrine ronde médaillon'}),
+        O('le_feuillage', 'Lettrine au feuillage', 'lettrines', 100, 100, [{d: rectD(3, 3, 94, 94), s: 1.8}, {d: Array.from({length: 12}, (_, i) => { const t = i / 12, x = 50 + 40 * Math.cos(t * 2 * Math.PI), y = 50 + 40 * Math.sin(t * 2 * Math.PI), a = t * 2 * Math.PI + Math.PI / 2; return leaf(x, y, x + Math.cos(a) * 12, y + Math.sin(a) * 12, 3.2); }).join(''), f: 1, op: .55}], {letter: {x: 50, y: 70, size: 50}, tags: 'lettrine couronne feuilles laurier'}),
+    ];
+    ext.vectorOrnaments = {CATS: ORN_CATS, items: ORNAMENTS};
+
     /* mesure, pour que les textes tiennent dans la largeur */
     let mc = null; const measure = (t, font, size, bold) => { mc = mc || document.createElement('canvas').getContext('2d'); mc.font = `${bold ? 'bold ' : ''}${size}px ${font}`; return Math.max(...String(t || ' ').split('\n').map(l => mc.measureText(l).width)); };
     const fitSize = (t, font, max, maxW, bold) => { let s = max; while (s > 6 && measure(t, font, s, bold) > maxW) s *= .93; return s; };
@@ -73,10 +162,12 @@
 
     /* o.fields : les champs dans l'ordre, [{key, role, label, value, hidden, size, italic}] ; role = intro, name, date, detail, family ou custom */
     const CSIZE = {s: 12, n: 14, l: 20, t: 36};
-    async function build(o) {
+    /** la taille d'une face (ou d'un volet) de la carte, en pixels */
+    const cardSize = o => { const fmt = o.format === 'custom' ? ['custom', '', CM(Math.min(120, Math.max(3, Number(o.cw) || 10))), CM(Math.min(120, Math.max(3, Number(o.ch) || 15)))] : (FORMATS.find(f => f[0] === o.format) || FORMATS[0]), land = o.orient === 'land'; return [land ? fmt[3] : fmt[2], land ? fmt[2] : fmt[3]]; };
+    /** une face de la carte (W × H) avec les champs de o.fields */
+    async function buildOne(o, W, H) {
         const st = STYLES[o.style] ? o.style : 'classique', S = STYLES[st];
-        const fmt = o.format === 'custom' ? ['custom', '', CM(Math.min(120, Math.max(3, Number(o.cw) || 10))), CM(Math.min(120, Math.max(3, Number(o.ch) || 15)))] : (FORMATS.find(f => f[0] === o.format) || FORMATS[0]), land = o.orient === 'land';
-        const W = land ? fmt[3] : fmt[2], H = land ? fmt[2] : fmt[3], u = Math.min(W, H) / 400, maxW = W * .76;
+        const u = Math.min(W, H) / 400, maxW = W * .76;
         const fields = (o.fields || []).filter(f => !f.hidden && String(f.value || '').trim()), texts = [], photo = [];
         const custom = (f, font, y) => { const s = CSIZE[f.size] * u || 14 * u, fnt = f.size === 't' ? S.script : font, w2 = f.size === 't' ? String(f.value) : wrap(f.value, fnt, s, maxW), sz = f.size === 't' ? fitSize(w2, fnt, s, maxW) : s; texts.push(T(w2, W / 2, y + sz * .95, sz, fnt, f.size === 't' ? S.accent : S.ink, {italic: !!f.italic, bold: !!f.bold, name: f.label})); return (w2.split('\n').length * 1.25 + .8) * sz; };
         let y = H * (o.photo ? .1 : .16);
@@ -105,6 +196,87 @@
         const room = Math.max(0, H * .9 - y); if (room > 0) [...texts, ...photo].forEach(t => { if (t.y !== undefined) t.y = n2(t.y + room / 2); if (t.clip) t.clip.y = n2(t.clip.y + room / 2); (t.children || []).forEach(c => { c.y = n2(c.y + room / 2); }); });
         if (sepY !== null) texts.push(...sep(st, W, sepY + room / 2, u));
         return {w: W, h: H, bg: S.paper, kind: 'card', objs: [{id: uid(), type: 'group', layer: true, name: 'Cadre et ornements', children: frame(st, W, H)}, ...(photo.length ? [{id: uid(), type: 'group', layer: true, name: 'Photo', children: photo}] : []), {id: uid(), type: 'group', layer: true, name: 'Textes', children: texts}]};
+    }
+
+    /* ═════════ 📄 Recto-verso, cartes pliées, enveloppe assortie ═════════ */
+    const FOLDS = {single: {label: 'Carte simple', n: 1}, duplex: {label: 'Recto-verso', n: 1}, fold2: {label: 'Carte pliée en 2', n: 2}, fold3: {label: 'Pliée en 3 volets', n: 3}, fold4: {label: 'Pliée en 4 volets (accordéon)', n: 4}};
+    const PANEL_NAMES = {duplex: [['Recto'], ['Verso']], fold2: [['Dos (4e de couverture)', 'Couverture'], ['Intérieur gauche', 'Intérieur droit']], fold3: [['Rabat (se replie dedans)', 'Dos', 'Couverture'], ['Intérieur gauche', 'Intérieur milieu', 'Intérieur droit']], fold4: [['Volet 4', 'Volet 3', 'Dos', 'Couverture'], ['Intérieur 1', 'Intérieur 2', 'Intérieur 3', 'Intérieur 4']]};
+    // enveloppes (en mm, posées en paysage) ; « auto » : la plus petite où la carte pliée entre (2 mm de jeu)
+    const ENVELOPES = [['c6', 'C6 (16,2 × 11,4 cm)', 162, 114], ['dl', 'DL (22 × 11 cm)', 220, 110], ['c5', 'C5 (22,9 × 16,2 cm)', 229, 162], ['q14', 'Carrée 14 × 14 cm', 140, 140], ['q16', 'Carrée 16 × 16 cm', 160, 160], ['q17', 'Carrée 17 × 17 cm', 170, 170], ['q22', 'Carrée 22 × 22 cm', 220, 220], ['c4', 'C4 (32,4 × 22,9 cm)', 324, 229]];
+    const MMPX = mm => Math.round(mm / 25.4 * 96);
+    function envFor(W, H, want) {
+        if (want && want !== 'auto') { const e = ENVELOPES.find(x => x[0] === want); if (e) return e; }
+        const a = Math.max(W, H) / 96 * 25.4 + 2, b = Math.min(W, H) / 96 * 25.4 + 2, square = Math.abs(W - H) / Math.max(W, H) < .08;
+        const fits = ENVELOPES.filter(e => e[2] >= a && e[3] >= b).sort((x, y) => x[2] * x[3] - y[2] * y[3]);
+        return (square ? fits.find(e => e[2] === e[3]) : fits.find(e => e[2] !== e[3])) || fits[0] || ENVELOPES[ENVELOPES.length - 1];
+    }
+    const STYLE_ORN = {belle: 'fl_rinceau', nouveau: 'fl_acanthe', deco: 'fl_soleil', annees50: 'fl_rosace6', classique: 'fl_lys', moderne: 'fl_quatre', deuil: 'fl_croix'};
+    /** un ornement de la bibliothèque, centré en (cx, cy), de la taille donnée */
+    function ornament(k, cx, cy, size, color) {
+        const it = ORNAMENTS.find(x => x.k === k), K = ext.boardKit; if (!it || !K?.absPath) return null;
+        const s = size / Math.max(it.w, it.h), ox = cx - it.w * s / 2, oy = cy - it.h * s / 2;
+        const d = dd => K.pathStr(K.absPath(dd).map(([c, ...a]) => { const r = [c]; for (let j = 0; j < a.length; j += 2) r.push(ox + a[j] * s, oy + a[j + 1] * s); return r; }));
+        return {id: uid(), type: 'group', name: it.n, children: it.parts.map(p => ({id: uid(), type: 'svgpath', name: it.n, d: d(p.d), fill: p.f ? color : 'none', stroke: p.s ? color : 'none', sw: p.s ? n2(p.s * s) : 0, cap: 'round', join: 'round', ...(p.eo ? {evenodd: true} : {}), ...(p.op ? {op: p.op} : {})}))};
+    }
+    const moveAll = (objs, dx, dy) => { const V = ext.vectorInternals; objs.forEach(o => V?.mapObj ? V.mapObj(o, (x, y) => [x + dx, y + dy]) : null); return objs; };
+    /** une face toute faite (W × H), posée en (dx, dy) : ses calques fondus dans ceux du document */
+    async function facePanel(o, W, H, fields, dx, dy, {photo = false, orn = 0} = {}) {
+        const st = STYLES[o.style] ? o.style : 'classique', S = STYLES[st], has = fields.some(f => !f.hidden && String(f.value || '').trim());
+        const one = await buildOne({...o, fields, photo: photo ? o.photo : ''}, W, H), out = {};
+        one.objs.forEach(l => { out[l.name] = moveAll(l.children || [], dx, dy); });
+        if (!has || orn) { const u = Math.min(W, H) / 400, g = ornament(STYLE_ORN[st] || 'fl_lys', dx + W / 2, dy + (has ? H * .82 : H / 2), (has ? 46 : orn === 1 ? 64 : 100) * u, S.accent); if (g) (out['Cadre et ornements'] = out['Cadre et ornements'] || []).push(g); }
+        return out;
+    }
+    /** l'enveloppe : expéditeur en haut à gauche, timbre, destinataire ; même papier, même encre, un filet du style */
+    function envelopePanel(o, EW, EH, dx, dy) {
+        const st = STYLES[o.style] ? o.style : 'classique', S = STYLES[st], u = Math.min(EW, EH) / 400, objs = [];
+        objs.push({id: uid(), type: 'rect', name: 'Enveloppe', x: dx, y: dy, w: EW, h: EH, r: 0, fill: S.paper, stroke: 'none', sw: 0});
+        const m = 14 * u; objs.push(R(dx + m, dy + m, EW - 2 * m, EH - 2 * m, {stroke: S.accent, sw: 1.2 * u, name: 'Filet de l’enveloppe'}));
+        const sw = MMPX(24), sh = MMPX(30); objs.push({id: uid(), type: 'rect', name: 'Place du timbre', x: n2(dx + EW - m * 2 - sw), y: n2(dy + m * 2), w: sw, h: sh, r: 0, fill: 'none', stroke: S.accent, sw: n2(1 * u), dash: 'dash'});
+        objs.push(T('Timbre', dx + EW - m * 2 - sw / 2, dy + m * 2 + sh / 2 + 5 * u, 11 * u, S.serif, S.accent, {italic: true, name: 'Timbre'}));
+        const g = ornament(STYLE_ORN[st] || 'fl_lys', dx + m * 2 + 18 * u, dy + m * 2 + 18 * u, 34 * u, S.accent); if (g) objs.push(g);
+        const from = String(o.envFrom || '').trim(); if (from) objs.push({...T(from, dx + m * 2 + 44 * u, dy + m * 2 + 12 * u, 11 * u, S.serif, S.ink, {name: 'Expéditeur'}), align: 'start'});
+        const to = String(o.envTo || '').trim() || 'Prénom NOM\nAdresse\nCode postal VILLE', lines = to.split('\n').slice(0, 8), fs = Math.min(17 * u, EH * .06);
+        const tx = dx + EW * .46, ty = dy + EH * .56;
+        objs.push({...T(lines.join('\n'), tx, ty, fs, S.serif, S.ink, {name: 'Destinataire'}), align: 'start'});
+        objs.push({id: uid(), type: 'svgpath', name: 'Filets d’adresse', d: lines.map((_, i) => `M${n2(tx)} ${n2(ty + fs * .35 + i * fs * 1.2)}H${n2(dx + EW - m * 3)}`).join(''), fill: 'none', stroke: S.accent, sw: n2(.5 * u), op: .5});
+        return objs;
+    }
+    async function build(o) {
+        const mode = FOLDS[o.fold] ? o.fold : 'single', [W, H] = cardSize(o);
+        if (mode === 'single' && !o.env) return buildOne(o, W, H);
+        const st = STYLES[o.style] ? o.style : 'classique', S = STYLES[st], G = Math.round(Math.max(80, Math.min(W, H) * .16)), names = PANEL_NAMES[mode] || [['Carte']];
+        const all = (o.fields || []).map(f => ({...f})), front = all.filter(f => ['intro', 'name', 'date'].includes(f.role) || (f.role === 'custom' && f.size === 't')), rest = all.filter(f => !front.includes(f));
+        const layers = {'Cadre et ornements': [], Photo: [], Textes: [], Enveloppe: []}, add = out => Object.entries(out).forEach(([k, v]) => { (layers[k] = layers[k] || []).push(...v); });
+        const pages = []; let y = 0;
+        if (mode === 'single') { add(await facePanel(o, W, H, all, 0, 0, {photo: true})); pages.push({name: 'Carte', x: 0, y: 0, w: W, h: H, panels: [{name: 'Carte', x: 0, w: W}]}); y = H + G; }
+        else {
+            const n = FOLDS[mode].n, FW = W * n;
+            // dehors : la couverture à droite (le texte principal et la photo), le dos avec un ornement
+            for (let i = 0; i < n; i++) { const dx = i * W;
+                if (mode === 'duplex' || i === n - 1) add(await facePanel(o, W, H, mode === 'duplex' ? front : front, dx, 0, {photo: true}));
+                else add(await facePanel(o, W, H, [], dx, 0, {orn: i === n - 2 ? 1 : 2})); }
+            pages.push({name: mode === 'duplex' ? 'Recto' : 'Extérieur', x: 0, y: 0, w: FW, h: H, panels: names[0].map((nm, i) => ({name: nm, x: i * W, w: W}))});
+            // dedans : les autres champs, un par volet (le dernier prend ce qui reste)
+            const per = Array.from({length: n}, () => []); rest.filter(f => !f.hidden && String(f.value || '').trim()).forEach((f, i) => per[Math.min(i, n - 1)].push(f));
+            if (n === 2 && per[0].length && !per[1].length) { per[1] = per[0]; per[0] = []; } // une carte pliée : le texte à droite, l'ornement à gauche
+            for (let i = 0; i < n; i++) add(await facePanel(o, W, H, per[i], i * W, H + G, {}));
+            pages.push({name: mode === 'duplex' ? 'Verso' : 'Intérieur', x: 0, y: H + G, w: FW, h: H, back: true, panels: names[1].map((nm, i) => ({name: nm, x: i * W, w: W}))});
+            y = 2 * (H + G);
+        }
+        let EW = 0;
+        if (o.env) { const e = envFor(W, H, o.envFmt); EW = MMPX(e[2]); const EH = MMPX(e[3]); layers.Enveloppe.push(...envelopePanel(o, EW, EH, 0, y)); pages.push({name: `Enveloppe ${e[1].split(' (')[0]}`, role: 'env', x: 0, y, w: EW, h: EH, panels: [{name: e[1], x: 0, w: EW}]}); y += EH; }
+        const docW = Math.max(...pages.map(p => p.w)), docH = y - (o.env ? 0 : G);
+        const objs = Object.entries(layers).filter(([, v]) => v.length).map(([k, v]) => ({id: uid(), type: 'group', layer: true, name: k, children: v}));
+        return {w: docW, h: docH, bg: S.paper, kind: 'card', objs, pages, fold: {mode, pw: W, ph: H, ...(o.env ? {env: envFor(W, H, o.envFmt)[0]} : {})}};
+    }
+    /** l'adresse d'une personne : son nom, puis la dernière adresse ou résidence connue */
+    async function addressOf(pid) {
+        const r = await api('person', {id: pid}), p = r.person || {}, ev = (r.events || []).slice();
+        const nm = `${String(p.first_name || '').trim()} ${String(p.last_name || '').trim().toLocaleUpperCase('fr-FR')}`.trim();
+        const withAddr = ev.filter(e => String(e.address || '').trim()), resi = ev.filter(e => e.gedcom_tag === 'RESI' && (e.address || e.place_name));
+        const best = [...withAddr, ...resi].sort((a, b) => (Number(b.year) || 0) - (Number(a.year) || 0))[0];
+        return [nm, best?.address ? String(best.address).trim() : '', best?.place_name || ''].filter(Boolean).join('\n');
     }
 
     /* ─── remplir depuis une fiche ─── */
@@ -152,14 +324,20 @@
         const fieldsHtml = () => `${fields.map(fieldHtml).join('') || '<p class="muted span-2">Aucun champ : ajoute-en un.</p>'}<div class="h-fp-addrow span-2"><button type="button" class="button small secondary" data-fp-add>＋ Ajouter un champ</button>
             ${missing().length ? `<select data-fp-back><option value="">Remettre un champ enlevé…</option>${missing().map(m => `<option value="${esc(m.key)}">${esc(m.label)}</option>`).join('')}</select>` : ''}<button type="button" class="button small secondary" data-fp-reset title="Revenir aux champs d’origine de ce modèle">↺ Réinitialiser</button></div>`;
         ext.openDialog({eyebrow: 'FAIRE-PART ET AFFICHES', title: '📰 Un faire-part, une affiche', submitLabel: 'Créer et ouvrir', wide: true,
-            body: `<div class="h-fp-form"><div class="h-fp-kinds">${Object.entries(KINDS).map(([k, v]) => `<label class="h-fp-kind"><input type="radio" name="kind" value="${k}" ${k === kind0 ? 'checked' : ''}><span>${esc(v.label)}</span></label>`).join('')}</div>
+            body: `<div class="h-fp-form"><div data-fp-presets></div><div class="h-fp-kinds">${Object.entries(KINDS).map(([k, v]) => `<label class="h-fp-kind"><input type="radio" name="kind" value="${k}" ${k === kind0 ? 'checked' : ''}><span>${esc(v.label)}</span></label>`).join('')}</div>
                 <div class="form-grid"><label>Style<select name="style">${Object.entries(STYLES).map(([k, v]) => `<option value="${k}">${esc(v.label)}</option>`).join('')}</select></label><label>Format<select name="format">${formatOptions(pf.format || 'c10')}</select></label>
                     <div class="h-fp-custom span-2" ${pf.format === 'custom' ? '' : 'hidden'}><label>Largeur (cm)<input type="number" name="cw" min="3" max="120" step="0.1" value="${esc(pf.cw || 10)}"></label><label>Hauteur (cm)<input type="number" name="ch" min="3" max="120" step="0.1" value="${esc(pf.ch || 15)}"></label></div>
                     <label>Sens<select name="orient"><option value="port">Portrait</option><option value="land" ${pf.orient === 'land' ? 'selected' : ''}>Paysage</option></select></label>
-                    <div><span class="pk-lab">Remplir depuis une fiche</span><span class="h-fp-who" data-fp-who>${(window.LCNDA_PICKER || A()).pickerField({name: 'fp_person', kind: 'person'})}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></div></div>
+                    <label><span data-help="Recto-verso : deux faces. Pliée en 2, 3 ou 4 : la carte a plusieurs volets ; le dessin montre les plis (traits roses) et s’imprime face par face, ou sur A4 avec les traits de coupe et de pli (⤓ Exporter → Recto-verso sur A4)." data-help-faq="faire-part plié">Pliage</span><select name="fold">${Object.entries(FOLDS).map(([k, v]) => `<option value="${k}" ${(pf.fold || 'single') === k ? 'selected' : ''}>${esc(v.label)}</option>`).join('')}</select></label>
+                    <div><span class="pk-lab"><span data-help="Les noms, dates, lieux et parents de la fiche remplissent les champs ; relis-les et complète avant de créer.">Remplir depuis une fiche</span></span><span class="h-fp-who" data-fp-who>${(window.LCNDA_PICKER || A()).pickerField({name: 'fp_person', kind: 'person'})}<button type="button" class="button small secondary" data-fp-fill>${personId ? '↻ La personne affichée' : 'Remplir'}</button></span></div></div>
                 <div class="form-grid h-fp-fields" data-fp-fields data-dnd-off data-ord-off></div>
                 <div class="h-fp-photo"><label class="checkbox-line"><input type="checkbox" name="usephoto"> Avec une photo <small class="muted" data-fp-photo>(celle de la fiche, ou à choisir)</small></label> <button type="button" class="button small secondary" data-fp-pickphoto>🖼 Choisir la photo…</button></div>
-                <p class="muted">Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis Fichier → Imprimer / PDF ou Exporter.</p></div>`,
+                <fieldset class="h-fp-env"><legend><label class="checkbox-line"><input type="checkbox" name="env" ${pf.env ? 'checked' : ''}> ✉️ Enveloppe assortie <span data-help="Une page de plus dans le document : l’enveloppe au bon format (C6, DL, C5 ou carrée, selon la carte), dans le même style, avec l’adresse du destinataire et l’expéditeur. Elle s’imprime à sa taille." data-help-faq="enveloppe assortie"></span></label></legend>
+                    <div class="form-grid" data-fp-envbox ${pf.env ? '' : 'hidden'}><label>Format de l’enveloppe<select name="envFmt"><option value="auto">Automatique (selon la carte)</option>${ENVELOPES.map(e => `<option value="${e[0]}" ${pf.envFmt === e[0] ? 'selected' : ''}>${esc(e[1])}</option>`).join('')}</select></label>
+                        <div data-fp-envwho><span class="pk-lab">Destinataire</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'env_person', kind: 'person'})}</div>
+                        <label class="span-2">Adresse du destinataire<textarea name="envTo" rows="3" placeholder="Prénom NOM&#10;12 rue des Écoles&#10;19000 Tulle"></textarea></label>
+                        <label class="span-2">Expéditeur (en haut à gauche)<textarea name="envFrom" rows="2" placeholder="Famille Martin&#10;3 place de l’Église, 19000 Tulle">${esc(pf.envFrom || '')}</textarea></label></div></fieldset>
+                <p class="muted">Coche ou décoche un champ pour l’afficher ou le masquer, ↑ ↓ pour le ranger, 🗑 pour l’enlever. Le faire-part s’ouvre ensuite dans le dessin vectoriel : tout se retouche (textes, couleurs, polices, ornements), puis « ⤓ Exporter » (PDF, image, impression, recto-verso sur A4).</p></div>`,
             onOpen: dg => {
                 const box = dg.querySelector('[data-fp-fields]');
                 const grab = () => fields.forEach(f => { const el = box.querySelector(`[name="f_${CSS.escape(f.key)}"]`); if (el) f.value = el.value; });
@@ -184,7 +362,8 @@
                     else if (t.matches('[data-fp-label]')) { fields[i].label = t.value.trim().slice(0, 60) || 'Champ'; keepFields(kind, fields); }
                     else if (t.matches('[data-fp-back]') && t.value) { const b = baseFields(kind).find(x => x.key === t.value); if (b) { const at = KINDS[kind].fields.findIndex(x => x[0] === b.key); let pos = fields.findIndex(f => KINDS[kind].fields.findIndex(x => x[0] === f.key) > at); fields.splice(pos < 0 ? fields.length : pos, 0, b); changed(); } } });
                 dg.addEventListener('change', e => { const t = e.target; if (t.name === 'kind') setKind(t.value);
-                    if (['format', 'orient', 'cw', 'ch'].includes(t.name)) { const p = prefs(); p[t.name] = t.value; savePrefs(p); if (t.name === 'format') dg.querySelector('.h-fp-custom').hidden = t.value !== 'custom'; }
+                    if (['format', 'orient', 'cw', 'ch', 'fold', 'envFmt', 'envFrom'].includes(t.name)) { const p = prefs(); p[t.name] = t.value; savePrefs(p); if (t.name === 'format') dg.querySelector('.h-fp-custom').hidden = t.value !== 'custom'; }
+                    if (t.name === 'env') { const p = prefs(); p.env = t.checked; savePrefs(p); dg.querySelector('[data-fp-envbox]').hidden = !t.checked; }
                     if (t.name === 'usephoto' && t.checked && !photoFile) pickPhoto(); });
                 // la photo : la fenêtre unique des médias, filtrée sur la personne du faire-part (une photo de l'ordinateur y entre et se coche)
                 const pickPhoto = async () => { const m = await window.LCNDA_PICKER?.openMediaPicker?.({types: ['image'], person: personId || null, eyebrow: 'FAIRE-PART', title: 'La photo du faire-part', okLabel: 'Prendre cette photo'});
@@ -195,16 +374,28 @@
                 dg.querySelector('[data-fp-fill]').addEventListener('click', () => { if (personId) fill(personId); else dg.querySelector('[data-fp-who] .pk-search:not([hidden]) .pk-input')?.focus(); });
                 dg.querySelector('[data-fp-who]').addEventListener('cp-pick', e => { if (!e.detail.id) return; personId = e.detail.id; fill(personId); });
                 dg._fpGrab = () => { grab(); return fields; };
+                // ✉️ le destinataire : le menu de choix des personnes remplit l'adresse (modifiable)
+                dg.querySelector('[data-fp-envwho]').addEventListener('cp-pick', async e => { e.stopPropagation(); if (!e.detail.id) return; try { const a = await addressOf(e.detail.id), ta = dg.querySelector('[name=envTo]'); ta.value = a; if (!/\n/.test(a)) toast('Pas d’adresse connue dans la fiche : complète-la.'); } catch (err) { toast(err.message, 'error'); } });
+                // 💾 réglages enregistrés : modèle, style, format, pliage, enveloppe et champs (sans les textes)
+                const f0 = dg.querySelector('form') || dg, fv = n => f0.querySelector(`[name="${n}"]`);
+                const pbox = ext.vectorPresets?.({tool: 'faire-part', label: 'ces réglages du faire-part', toolName: 'le faire-part',
+                    get: () => { grab(); return {kind, style: fv('style').value, format: fv('format').value, cw: fv('cw').value, ch: fv('ch').value, orient: fv('orient').value, fold: fv('fold').value, env: fv('env').checked, envFmt: fv('envFmt').value, envFrom: fv('envFrom').value, fields: fields.map(({key, role, label, hidden, size, italic, bold}) => ({key, role, label, hidden, size, italic, bold}))}; },
+                    set: d => { if (KINDS[d.kind]) { const r = f0.querySelector(`[name=kind][value="${d.kind}"]`); if (r) r.checked = true; if (Array.isArray(d.fields)) keepFields(d.kind, d.fields); setKind(d.kind); }
+                        ['style', 'format', 'cw', 'ch', 'orient', 'fold', 'envFmt', 'envFrom'].forEach(k => { const el = fv(k); if (el && d[k] !== undefined && (el.tagName !== 'SELECT' || [...el.options].some(op => op.value === String(d[k])))) el.value = String(d[k]); });
+                        fv('env').checked = !!d.env; dg.querySelector('[data-fp-envbox]').hidden = !d.env; dg.querySelector('.h-fp-custom').hidden = fv('format').value !== 'custom';
+                        const p = prefs(); ['format', 'orient', 'cw', 'ch', 'fold', 'envFmt', 'envFrom'].forEach(k => { p[k] = fv(k).value; }); p.env = !!d.env; savePrefs(p); }});
+                if (pbox) dg.querySelector('[data-fp-presets]').appendChild(pbox);
             },
             onSubmit: async f => {
                 const dg = f.closest('dialog') || f, o = Object.fromEntries(new FormData(f)); o.kind = kind; o.fields = (dg._fpGrab ? dg._fpGrab() : fields).map(x => ({...x}));
                 if (f.querySelector('[name=usephoto]').checked && photoFile) { const im = typeof photoFile === 'string' ? await toData(photoFile) : await (async () => { const i = await new Promise(ok => { const x = new Image(); x.onload = () => ok(x); x.onerror = () => ok(null); x.src = photoFile.data; }); return i ? {src: photoFile.data, ratio: i.naturalWidth / i.naturalHeight} : null; })(); if (im) { o.photo = im.src; o.photoRatio = Math.max(.55, Math.min(1.4, im.ratio)); } }
+                o.env = !!f.querySelector('[name=env]')?.checked;
                 const doc = await build(o), nm = o.fields.find(x => x.role === 'name')?.value || '';
-                ext.openVectorEditor({doc, name: `${KINDS[o.kind].label.replace(/^\S+\s/, '')} — ${nm}`.trim().replace(/ —$/, ''), onSaved: onDone, onClose: onDone});
+                ext.openVectorEditor({doc, name: `${KINDS[o.kind].label.replace(/^\S+\s/, '')} — ${nm}`.trim().replace(/ —$/, ''), personId: personId || 0, onSaved: onDone, onClose: onDone});
             }});
     }
     ext.openCardMaker = openMaker;
-    ext.cardInternals = {build, fillFrom, KINDS, STYLES, FORMATS};
+    ext.cardInternals = {build, buildOne, fillFrom, addressOf, envFor, KINDS, STYLES, FORMATS, FOLDS, ENVELOPES};
     ext.editToolsExtra = ext.editToolsExtra || [];
     ext.editToolsExtra.push({key: 'cards', icon: '📰', label: 'Faire-part et affiches', what: 'faire-part',
         load: async () => ((await api('vector_docs')).docs || []).filter(d => d.kind === 'card').map(d => ({id: d.id, name: d.name, date: d.updated_at, thumb: d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : '<span class="h-et-ico">📰</span>', info: 'Dessin vectoriel'})),
