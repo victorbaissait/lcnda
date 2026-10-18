@@ -1,0 +1,504 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="../../assets/css/app.css">
+<title>Maquette — Artistes modulables</title>
+<style>
+body{background:#f4f5f7;padding:28px;font-family:var(--font,Inter,system-ui,sans-serif);color:#111;margin:0}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#666;margin:0 0 22px;font-size:14px;max-width:1100px}
+.case{background:#fff;border:2px solid #111;box-shadow:6px 6px 0 rgba(5,93,255,.25);padding:18px 20px 22px;max-width:1300px;margin:0 0 30px}
+.case>.tag{font:700 11px/1 system-ui;letter-spacing:.12em;color:#055dff;text-transform:uppercase}
+.case>h3{margin:6px 0 14px;font-size:18px}
+.num{display:inline-block;background:#055dff;color:#fff;font:800 12px system-ui;padding:3px 7px;margin-right:6px}
+.note{font-size:12.5px;color:#555;margin-top:12px;line-height:1.5}
+.muted{color:#666}
+small.g{color:#666;font-size:12.5px}
+/* pastilles du menu de choix */
+.pp-box{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;min-height:38px;padding:0 10px}
+.pp-ico{font-size:14px;opacity:.6}.pp-box input{flex:1;border:0;outline:0;font:inherit;font-size:14px;background:transparent;padding:8px 0}
+.pp-kbd{font-size:11px;color:#888;border:1px solid #bbb;padding:0 5px}
+.pp-av{width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font:700 10px system-ui;color:#fff;flex:none}
+.pp-av.m{background:#3c78d8}.pp-av.f{background:#d9488f}.pp-av.u{background:#8a8f99}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #111;background:#fff;padding:2px 5px 2px 3px;font-size:13px;white-space:nowrap;margin:2px 4px 2px 0}
+.chip.b{border-color:#055dff;background:#eef4ff}.chip.gr{border-color:#9aa1ad;background:#f3f4f6;color:#444}
+.chip .r{font-size:11.5px;color:#055dff;font-weight:700}.chip .go{font-size:11px;border:1px solid #111;padding:0 4px}
+.chip .q{width:20px;height:20px;border-radius:50%;background:#c4c8cf;color:#fff;display:inline-grid;place-items:center;font:800 11px system-ui}
+.ochip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid #111;background:#fff;padding:2px 6px 2px 3px;font-size:13px;margin:2px 4px 2px 0;white-space:nowrap}
+.ochip i{font-style:normal;width:22px;height:22px;display:inline-grid;place-items:center;background:#f0f1f4;font-size:12px}
+.ochip.link{border-color:#055dff;color:#055dff;font-weight:600}
+/* boutons */
+.btn{display:inline-block;border:2px solid #111;padding:6px 11px;font:700 12.5px system-ui;background:#fff;box-shadow:2px 2px 0 rgba(5,93,255,.3);white-space:nowrap}
+.btn.p{background:#055dff;color:#fff;border-color:#055dff}.btn.s{padding:3px 8px;font-size:11.5px}.btn.d{color:#d0182f}
+.ib{width:26px;height:26px;border:1.5px solid #111;background:#fff;display:inline-grid;place-items:center;font-size:12px}
+.seg{display:inline-flex;border:2px solid #111}.seg span{padding:5px 11px;font:700 12.5px system-ui;border-right:2px solid #111;background:#fff}.seg span:last-child{border-right:0}.seg span.on{background:#055dff;color:#fff}
+.filt{display:flex;gap:6px;flex-wrap:wrap}.filt span{border:1.5px solid #111;padding:3px 9px;font:600 12px system-ui;background:#fff}.filt span.on{background:#111;color:#fff}
+.sel2{border:2px solid #111;padding:5px 9px;font:600 12.5px system-ui;background:#fff;white-space:nowrap}
+.act{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.act span{background:#eaf1ff;border:1.5px solid #055dff;color:#055dff;padding:3px 8px;font:700 12px system-ui}
+/* barre E1 */
+.top{display:flex;align-items:center;gap:8px;border:2px solid #111;background:#fff;padding:8px 10px;flex-wrap:wrap;margin-bottom:12px}
+.top .ey{font:700 10.5px system-ui;letter-spacing:.1em;color:#055dff}.top h4{margin:0;font-size:16px}
+.top .sp{flex:1}.top .st{font-size:12px;color:#1aa34a;font-weight:700}
+.crumb{font-size:12.5px;color:#666;margin-bottom:8px}.crumb b{color:#055dff}
+/* fiche */
+.sheet{display:grid;grid-template-columns:300px 1fr 300px;gap:22px}
+.sheet.two{grid-template-columns:330px minmax(0,1fr)}.sheet>div{min-width:0}.side .ochip,.side .chip,.dl .ochip{white-space:normal;max-width:100%}.side{overflow-wrap:anywhere}.sec>.sh{flex-wrap:wrap}.reccard .hd{min-width:0}
+.cover{aspect-ratio:1;border:2px solid #111;position:relative;overflow:hidden}
+.cv1{background:radial-gradient(circle at 70% 30%,#f4c542 0 18%,transparent 19%),linear-gradient(135deg,#1d2b64,#7b2ff7 55%,#f107a3)}
+.cv1:after{content:'PARIS CANAILLE';position:absolute;left:14px;bottom:14px;color:#fff;font:900 22px/1 Georgia,serif;letter-spacing:.04em}
+.cv2{background:repeating-linear-gradient(0deg,#e9e3d3 0 18px,#ddd5c1 18px 19px)}
+.cv3{background:radial-gradient(circle,#111 0 8%,#e8b923 8% 30%,#111 30% 100%);border-radius:50%}
+.cv4{background:linear-gradient(160deg,#fbf7ec,#e8dcc4)}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px}
+.thumbs div{aspect-ratio:1;border:1.5px solid #111;position:relative;overflow:hidden}.thumbs .cv1:after,.minicov .cv1:after{font-size:9px;left:4px;bottom:14px}.thumbs small{position:absolute;bottom:2px;left:3px;font:700 9px system-ui;background:#fff;padding:0 3px}
+.dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 16px;margin:0 0 12px;font-size:14px}.dl dt{color:#666}.dl dd{margin:0}
+.h2{font-size:22px;margin:0 0 4px}.h2 small{font-size:14px;color:#666;font-weight:500}
+.sec{border-top:2px solid #111;margin-top:14px;padding-top:8px}
+.sec>.sh{display:flex;align-items:center;gap:8px;margin-bottom:6px}.sec>.sh b{font-size:15px}.sec>.sh .sp{flex:1}
+table.t{width:100%;border-collapse:collapse;font-size:13px}table.t td,table.t th{padding:5px 7px;border-bottom:1px solid #e3e5ea;text-align:left;vertical-align:top}table.t th{font-size:11.5px;color:#666;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+table.t td.n{color:#666;width:34px}table.t td.d{text-align:right;font-variant-numeric:tabular-nums;width:50px}
+.tk-cr{font-size:12px;color:#555;margin-top:2px}
+.rec{display:inline-block;font:700 10.5px system-ui;border:1.5px solid #7b2ff7;color:#7b2ff7;padding:1px 5px;margin-left:4px;background:#f6f0ff}
+.side{border:2px solid #111;background:#fafbfc;padding:10px 12px;font-size:13px}.side h5{margin:0 0 6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#055dff}
+.side+.side{margin-top:12px}
+.star{color:#e1a500}
+.wave{height:30px;background:repeating-linear-gradient(90deg,#055dff 0 2px,transparent 2px 4px);mask:linear-gradient(0deg,#000,#000);opacity:.75;clip-path:polygon(0 50%,3% 20%,6% 70%,9% 30%,12% 60%,15% 10%,18% 80%,21% 40%,24% 60%,27% 25%,30% 75%,33% 35%,36% 65%,39% 15%,42% 85%,45% 30%,48% 70%,51% 20%,54% 60%,57% 40%,60% 80%,63% 25%,66% 55%,69% 35%,72% 70%,75% 20%,78% 60%,81% 45%,84% 75%,87% 30%,90% 60%,93% 40%,96% 55%,100% 50%,100% 52%,0 52%)}
+.player{display:flex;align-items:center;gap:8px;border:1.5px solid #111;padding:4px 8px;background:#fff;min-width:260px}
+.player .pl{width:22px;height:22px;border-radius:50%;background:#055dff;color:#fff;display:grid;place-items:center;font-size:10px}
+.player .wave{flex:1;height:22px}
+.reccard{border:2px solid #111;padding:10px 12px;margin-bottom:10px;background:#fff}
+.reccard.main{box-shadow:4px 4px 0 rgba(123,47,247,.25);border-color:#7b2ff7}
+.reccard .hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.reccard .hd b{font-size:14.5px}
+.kind{font:800 10px system-ui;letter-spacing:.08em;padding:2px 6px;background:#111;color:#fff}
+.kind.mix{background:#7b2ff7}.kind.take{background:#e1a500}.kind.rem{background:#1aa34a}.kind.live{background:#d0182f}.kind.edit{background:#3c78d8}
+.rtree{display:block;border-left:3px solid #d8cff5;margin-left:12px;padding-left:12px}
+.paint{aspect-ratio:4/5;border:10px solid #8a6a3a;outline:2px solid #111;background:radial-gradient(ellipse at 30% 70%,#4f7a3a 0 25%,transparent 26%),radial-gradient(ellipse at 70% 40%,#d9b45a 0 12%,transparent 13%),linear-gradient(180deg,#8fb6d8 0 45%,#6d8f4e 45% 75%,#4b6a35 75%)}
+.tl{position:relative;margin-left:10px;border-left:3px solid #055dff;padding-left:16px}
+.tl .ev{position:relative;margin-bottom:10px;font-size:13px}.tl .ev:before{content:'';position:absolute;left:-24px;top:3px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid #055dff}
+.tl .ev.sale:before{background:#e1a500;border-color:#e1a500}.tl .ev.now:before{background:#055dff}
+.tl .ev b{font-size:13.5px}.price{font:700 12px system-ui;background:#fff8e1;border:1.5px solid #e1a500;padding:0 5px;margin-left:4px}
+.minis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.minis div{border:1.5px solid #111;padding:4px;font-size:11.5px}.minis i{display:block;aspect-ratio:4/5;margin-bottom:3px}
+.badge{font:700 10.5px system-ui;border:1.5px solid #111;padding:1px 5px;white-space:nowrap}
+.badge.ok{border-color:#1aa34a;color:#1aa34a}.badge.w{border-color:#e1a500;color:#a87900;background:#fff8e1}.badge.b{border-color:#055dff;color:#055dff}
+/* panneau champs */
+.layout2{display:grid;grid-template-columns:1fr 420px;gap:22px}
+.pan{border:2px solid #111;background:#fff}
+.pan .ph{padding:10px 12px;border-bottom:2px solid #111;display:flex;align-items:center;gap:8px}.pan .ph b{font-size:15px}.pan .ph .sp{flex:1}
+.pan details{border-bottom:1px solid #e3e5ea;padding:8px 12px}.pan summary{font:800 13px system-ui;list-style:none;display:flex;gap:6px;align-items:center}.pan summary::-webkit-details-marker{display:none}
+.pan summary .c{font:600 11px system-ui;color:#888;margin-left:auto}
+.fr{display:grid;grid-template-columns:18px 26px 1fr auto auto;gap:6px;align-items:center;padding:4px 2px;border-bottom:1px dashed #eceef2;font-size:13px}
+.fr .grip{color:#999;cursor:grab}.fr .eye{font-size:13px}.fr.off{opacity:.5}.fr.off .lbl{text-decoration:line-through}
+.fr .ty{font:600 10.5px system-ui;color:#777;border:1px solid #ccd;padding:0 4px}
+.fr .tools{display:flex;gap:2px}.fr .tools span{width:22px;height:22px;border:1px solid #bbb;display:inline-grid;place-items:center;font-size:11px;background:#fff}
+.fr.cust .lbl{color:#055dff;font-weight:700}
+.fr.drag{background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff,0 4px 10px rgba(0,0,0,.15)}
+.tog{display:inline-flex;align-items:center;gap:8px;font-size:13px}.tog i{width:30px;height:18px;border-radius:12px;background:#055dff;position:relative;display:inline-block}.tog i:after{content:'';position:absolute;right:2px;top:2px;width:14px;height:14px;background:#fff;border-radius:50%}.tog.off i{background:#c4c8cf}.tog.off i:after{right:auto;left:2px}
+.pop{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:12px;font-size:13px}
+.pop .tys{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.pop .tys span{border:1.5px solid #111;padding:6px 4px;text-align:center;font:600 12px system-ui}.pop .tys span.on{border-color:#055dff;background:#eef4ff;color:#055dff}
+.fld{display:flex;flex-direction:column;font-size:12px;font-weight:700;gap:3px;margin-bottom:8px}.fld input,.fld .in{border:2px solid #111;padding:6px 8px;font:500 13.5px system-ui;background:#fff}
+.fld .ok{font:600 11.5px system-ui;color:#1aa34a}
+.edit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px 14px}
+.grp{font:800 11px system-ui;letter-spacing:.1em;color:#055dff;text-transform:uppercase;margin:12px 0 6px;grid-column:1/-1;display:flex;gap:6px;align-items:center}
+.grp:after{content:'';flex:1;height:2px;background:#e3e5ea}
+/* page artiste */
+.hero{display:flex;gap:16px;align-items:center;border:2px solid #111;padding:12px;background:linear-gradient(90deg,#fff,#f5f0ff)}
+.hero .ph0{width:84px;height:84px;border-radius:50%;background:#3c78d8;color:#fff;display:grid;place-items:center;font:800 26px system-ui}
+.blocks{display:grid;grid-template-columns:repeat(12,1fr);gap:12px;margin-top:12px}
+.blk{border:2px solid #111;background:#fff;grid-column:span 12}.blk.s6{grid-column:span 6}.blk.s4{grid-column:span 4}
+.blk .bh{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1.5px solid #111;background:#fafbfc}.blk .bh b{font-size:14px}.blk .bh .sp{flex:1}.blk .bb{padding:8px 10px;font-size:13px}
+.blk .bh .grip{color:#999}
+.blk.drag{outline:3px dashed #055dff;outline-offset:3px;opacity:.85}
+.minicov{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.minicov div{font-size:11.5px}.minicov i{position:relative;overflow:hidden;display:block;aspect-ratio:1;border:1.5px solid #111;margin-bottom:3px}
+.ord{border:2px solid #111;background:#fff}
+/* liste CR */
+.lbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #e3e5ea;padding-bottom:10px}
+.lbar .pp-box{flex:1;min-width:240px}
+.dd{border:2px solid #111;background:#fff;box-shadow:5px 5px 0 rgba(5,93,255,.3);padding:10px 12px;width:300px;font-size:13px}
+.dd b{display:block;font:700 10.5px system-ui;letter-spacing:.08em;color:#777;text-transform:uppercase;margin:8px 0 4px}
+.dd label{display:flex;gap:6px;align-items:center;margin:2px 0}
+table.cr td{font-size:12.5px}table.cr td.im i{display:block;width:44px;height:54px;border:1.5px solid #111}
+.wiz{display:grid;grid-template-columns:420px 1fr;gap:20px}
+.page{background:#fff;border:1px solid #bbb;box-shadow:0 6px 18px rgba(0,0,0,.18);aspect-ratio:210/297;padding:26px 28px;font-family:Georgia,'Times New Roman',serif;font-size:10.5px;line-height:1.45;color:#222;position:relative}
+.page h6{font:700 9px system-ui;letter-spacing:.2em;color:#8a6a3a;margin:0 0 10px;text-transform:uppercase}
+.page .no{font:700 26px Georgia,serif;color:#8a6a3a}.page .ti{font:italic 700 17px Georgia,serif;margin:0 0 2px}
+.page .meta{font-size:10.5px}.page .lbl{font:700 7.5px system-ui;letter-spacing:.14em;color:#8a6a3a;text-transform:uppercase;margin:8px 0 2px;display:block}
+.page .folio{position:absolute;bottom:12px;left:0;right:0;text-align:center;font-size:9px;color:#888}
+.spread{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:#ddd;padding:14px}
+/* schéma */
+.dm{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.dmc{border:2px solid #111;padding:10px;background:#fff;font-size:12px}.dmc h5{margin:0 0 8px;font-size:13.5px}
+.ent{border:1.5px solid #111;padding:5px 7px;margin:0 0 4px;background:#fafbfc}.ent b{font-size:12.5px}.ent small{display:block;color:#666;font-size:11px}
+.arr{text-align:center;color:#055dff;font:700 11px system-ui;margin:-1px 0 3px}
+.ent.core{background:#eef4ff;border-color:#055dff}
+.ent.x{background:#fff8e1;border-color:#e1a500}
+.legend{display:flex;gap:16px;font-size:12px;margin-top:10px;flex-wrap:wrap}
+.legend span i{display:inline-block;width:14px;height:14px;border:1.5px solid #111;vertical-align:-2px;margin-right:4px}
+</style></head><body>
+<h1>🎨 Artistes — fiches complètes, liées entre elles, et modulables</h1>
+<p class="sub">Maquette à valider (étape 1). Chaque sorte (disque, morceau, peinture, livre, film…) a ses champs ; tu choisis ce qui s’affiche, dans quel ordre, tu ajoutes tes propres champs ; et tout est relié : un morceau connaît ses prises et ses mixages, et sur quels disques ils figurent ; une peinture connaît ses propriétaires, ses expositions et les livres qui la citent.</p>
+
+<!-- ═══════════ A. LE DISQUE ═══════════ -->
+<section class="case" id="disque"><span class="tag"><span class="num">A</span>Discographie · une parution</span><h3>La fiche d’un disque, comme sur Discogs (mais reliée à la généalogie)</h3>
+<div class="top"><span>💿</span><div><div class="ey">DISQUE · 45 TOURS (EP)</div><h4>Paris canaille</h4></div><span class="seg" style="margin-left:14px"><span class="on">Lecture</span><span>✎ Modifier</span></span><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">⛶</span><span class="ib">×</span></div>
+<div class="crumb">🎨 Joseph MARTIN › 💿 Discographie › <b>Paris canaille</b> · fait partie de l’album « <u>Paris canaille (toutes éditions)</u> » · 4 éditions</div>
+<div class="sheet">
+ <div>
+  <div class="cover cv1"></div>
+  <div class="thumbs"><div class="cv1"><small>RECTO</small></div><div class="cv2"><small>VERSO</small></div><div class="cv3"><small>FACE A</small></div><div class="cv4"><small>MATRICE</small></div></div>
+  <p class="note">🖼 Les photos viennent de la fenêtre unique des médias (Recto, Verso, Rond central, Livret, Matrice…). Clic = en grand.</p>
+  <div class="side"><h5>📦 Mon exemplaire</h5>
+   <dl class="dl" style="font-size:13px;margin:0"><dt>Disque</dt><dd>Très bon (VG+)</dd><dt>Pochette</dt><dd>Bon (G+) · coin corné</dd><dt>Rangé</dt><dd>Grenier, caisse n° 3</dd><dt>Payé</dt><dd>12 € · brocante 2019</dd><dt>Valeur</dt><dd>25 – 40 € <small class="g">(mars 2026)</small></dd><dt>Dédicace</dt><dd>« À Louise » · <span class="chip"><span class="pp-av f">LB</span>Louise BORIE<span class="go">↗</span></span></dd></dl></div>
+ </div>
+ <div>
+  <h2 class="h2">Joseph MARTIN – Paris canaille <small>· 1958</small></h2>
+  <dl class="dl">
+   <dt>Label</dt><dd><span class="ochip link"><i>🏷</i>Polydor</span> – 21 812 <small class="g">(n° de catalogue)</small></dd>
+   <dt>Format</dt><dd>Vinyle · 7″ · 45 tours · EP · Mono · Pochette ouvrante</dd>
+   <dt>Pays</dt><dd>France</dd>
+   <dt>Sortie</dt><dd>mars 1958</dd>
+   <dt>Genre</dt><dd>Chanson · <span class="muted">Style :</span> Chanson réaliste, Musette</dd>
+   <dt>Studio</dt><dd><span class="ochip"><i>📍</i>Studio Pathé-Marconi, Boulogne</span></dd>
+  </dl>
+  <div class="sec"><div class="sh"><b>Pistes</b><small class="g">4 titres · 10:38</small><span class="sp"></span><span class="filt"><span class="on">Avec les crédits</span><span>Paroles</span></span></div>
+   <table class="t">
+    <tr><td class="n">A1</td><td><b>Paris canaille</b> <span class="rec">🎚 Mix mono 1958</span><div class="tk-cr">Paroles et musique – Léo Ferré · Orchestre – Jacques Météhen</div></td><td><span class="player" style="min-width:150px"><span class="pl">▶</span><span class="wave"></span></span></td><td class="d">2:41</td></tr>
+    <tr><td class="n">A2</td><td><b>La complainte du marin</b> <span class="rec">🎙 Prise 3</span><div class="tk-cr">Paroles – <span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span> · Musique – Henri Lafon</div></td><td></td><td class="d">2:58</td></tr>
+    <tr><td class="n">B1</td><td><b>Fin de bal</b> <span class="rec">🎚 Mix mono 1958</span><div class="tk-cr">Accordéon – <span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">frère</span></span></div></td><td></td><td class="d">2:47</td></tr>
+    <tr><td class="n">B2</td><td><b>Les cerisiers</b> <span class="rec">🎙 Prise 1</span></td><td></td><td class="d">2:12</td></tr>
+   </table>
+   <p class="note">Chaque piste pointe vers un <b>enregistrement</b> (une prise, un mixage, un remaster) qui pointe vers le <b>morceau</b>. Clic sur la pastille violette → la fiche du morceau (voir B).</p></div>
+  <div class="sec"><div class="sh"><b>Crédits</b><small class="g">les noms de ta généalogie sont des pastilles cliquables</small></div>
+   <div style="columns:2;font-size:13px">
+    <div>Chant – <span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span></div>
+    <div>Accordéon – <span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN</span> <small class="g">(B1)</small></div>
+    <div>Direction d’orchestre – Jacques Météhen</div>
+    <div>Prise de son – <span class="chip gr"><span class="q">?</span>René Dufour</span></div>
+    <div>Photo de pochette – Studio Harcourt</div>
+    <div>Production – <span class="ochip link"><i>🏷</i>Polydor</span></div>
+   </div></div>
+  <div class="sec"><div class="sh"><b>Éditions et pressages</b><small class="g">même album, autres parutions</small><span class="sp"></span><span class="btn s">＋ Ajouter une édition</span></div>
+   <table class="t"><tr><th>Titre</th><th>Format</th><th>Label · n°</th><th>Pays</th><th>Année</th><th></th></tr>
+    <tr style="background:#eef4ff"><td><b>Paris canaille</b> <small class="g">(celle-ci)</small></td><td>7″ 45 t EP</td><td>Polydor 21 812</td><td>France</td><td>1958</td><td>⭐ 1re</td></tr>
+    <tr><td>Paris canaille</td><td>7″ 45 t EP, réédition</td><td>Polydor 21 812 S</td><td>Belgique</td><td>1959</td><td>↗</td></tr>
+    <tr><td>Chansons de Paris</td><td>LP 33 t 25 cm</td><td>Polydor 530 041</td><td>France</td><td>1960</td><td>↗</td></tr>
+    <tr><td>L’intégrale 1955-1965</td><td>3 × CD, remasterisé</td><td>Universal 984 112-3</td><td>Europe</td><td>2008</td><td>↗</td></tr></table></div>
+ </div>
+ <div>
+  <div class="side"><h5>🔢 Identifiants</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Code-barres</dt><dd>—</dd><dt>Matrice face A</dt><dd>21812 A M3</dd><dt>Matrice face B</dt><dd>21812 B M3</dd><dt>SACEM</dt><dd>BIEM</dd><dt>Discogs</dt><dd><u>r4012233</u></dd><dt>MusicBrainz</dt><dd><u>8f2c…</u></dd></dl></div>
+  <div class="side"><h5>🔗 Lié à</h5>
+   <div><span class="ochip link"><i>🎵</i>4 morceaux</span><span class="ochip link"><i>🎙</i>2 prises · 🎚 2 mixages</span></div>
+   <div><span class="ochip"><i>🎬</i>« Rue des Bouchers » (1959) — B.O.</span></div>
+   <div><span class="ochip"><i>📚</i>Mémoires (1970), p. 112</span></div>
+   <div><span class="ochip"><i>📅</i>Concert, Tulle, 14 juil. 1958</span></div>
+   <div><span class="ochip"><i>📍</i>Studio Pathé-Marconi</span></div>
+   <div style="margin-top:6px"><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN <span class="r">artiste</span></span><span class="chip"><span class="pp-av m">PM</span>Pierre MARTIN <span class="r">accordéon</span></span><span class="chip"><span class="pp-av f">LB</span>Louise BORIE <span class="r">dédicace</span></span></div>
+   <p class="note" style="margin:6px 0 0">Les liens se voient des deux côtés : la fiche de Pierre MARTIN montre « joue sur Paris canaille (1958) ».</p></div>
+  <div class="side"><h5>✎ Mes champs</h5><dl class="dl" style="font-size:13px;margin:0"><dt>Acheté par</dt><dd>Mon grand-père</dd><dt>Souvenir</dt><dd>Passait au bal du 14 juillet</dd></dl></div>
+  <div class="side"><h5>📝 Notes</h5><p style="margin:0">Pochette illustrée par Studio Harcourt. Mention « Grand Prix du Disque 1958 » au verso.</p></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ B. LE MORCEAU ═══════════ -->
+<section class="case" id="morceau"><span class="tag"><span class="num">B</span>Musique · l’œuvre</span><h3>La fiche d’un morceau : ses prises, ses mixages, ses versions, et sur quels disques ils figurent</h3>
+<div class="top"><span>🎵</span><div><div class="ey">MORCEAU (ŒUVRE MUSICALE)</div><h4>La complainte du marin</h4></div><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="btn p s">💾 Enregistrer</span><span class="ib">×</span></div>
+<div class="sheet two">
+ <div>
+  <div class="side"><h5>✍️ L’œuvre</h5><dl class="dl" style="font-size:13px;margin:0">
+   <dt>Paroles</dt><dd><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span></dd>
+   <dt>Musique</dt><dd><span class="chip gr"><span class="q">?</span>Henri Lafon</span></dd>
+   <dt>Écrite</dt><dd>vers 1956 <small class="g">✓ Compris : vers 1956</small></dd>
+   <dt>Lieu</dt><dd><span class="ochip"><i>📍</i>Tulle (19)</span></dd>
+   <dt>Éditeur</dt><dd><span class="ochip link"><i>🏷</i>Éditions Raoul Breton</span></dd>
+   <dt>Dépôt SACEM</dt><dd>12 mars 1957 · ISWC T-901.234.567-1</dd>
+   <dt>Langue</dt><dd>Français</dd><dt>Tonalité</dt><dd>ré mineur · 3/4 valse</dd>
+   <dt>D’après</dt><dd><span class="ochip link"><i>📚</i>poème « Le marin » (Mémoires)</span></dd></dl></div>
+  <div class="side"><h5>📄 Partitions et paroles</h5><div><span class="ochip"><i>📄</i>Partition manuscrite · 1956</span></div><div><span class="ochip"><i>📄</i>Petit format Breton · 1958</span></div><p class="note" style="margin:4px 0 0">Paroles complètes, couplets annotés (clic → les notes du vers).</p></div>
+  <div class="side"><h5>🎤 Reprises par d’autres</h5><div>Yvette Horner · 1962 <small class="g">(instrumental)</small></div><div>Les Frères Jacques · 1965</div></div>
+ </div>
+ <div>
+  <div class="sec" style="margin-top:0;border-top:0"><div class="sh"><b>🎙 Enregistrements</b><small class="g">3 prises · 3 mixages · 1 remaster · 1 public</small><span class="sp"></span><span class="seg"><span class="on">Arbre</span><span>Tableau</span></span><span class="btn s">＋ Ajouter un enregistrement</span></div>
+   <div class="reccard"><div class="hd"><span class="kind take">PRISE</span><b>Prise 1</b><small class="g">· 4 fév. 1958 · Studio Pathé-Marconi · 3:05</small><span style="flex:1"></span><span class="badge">non retenue</span></div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:6px"><span class="player"><span class="pl">▶</span><span class="wave"></span><small>3:05</small></span><span class="ochip"><i>🔊</i>prise1_bande.wav · 52 Mo</span><span class="btn s">🖼 Changer</span></div></div>
+   <div class="reccard main"><div class="hd"><span class="kind take">PRISE</span><b>Prise 3</b> <span class="star">★ retenue</span><small class="g">· 4 fév. 1958 · 2:58</small><span style="flex:1"></span><small class="g">Chant <span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span> Ingé son <span class="chip gr"><span class="q">?</span>René Dufour</span></small></div>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:6px"><span class="player"><span class="pl">▶</span><span class="wave"></span><small>2:58</small></span><span class="ochip"><i>🔊</i>prise3.wav</span></div>
+    <div class="rtree" style="margin-top:8px">
+     <div class="reccard"><div class="hd"><span class="kind mix">MIXAGE</span><b>Mix mono 1958</b><small class="g">· mixé par René Dufour · 2:58</small><span style="flex:1"></span><span class="ochip link"><i>💿</i>3 parutions</span></div>
+      <table class="t" style="margin-top:6px"><tr><th>Parution</th><th>Piste</th><th>Format</th><th>Année</th><th>Durée</th></tr>
+       <tr><td><span class="ochip link"><i>💿</i>Paris canaille</span></td><td>A2</td><td>7″ 45 t EP</td><td>1958</td><td class="d">2:58</td></tr>
+       <tr><td><span class="ochip link"><i>💿</i>Paris canaille (Belgique)</span></td><td>A2</td><td>7″ 45 t EP</td><td>1959</td><td class="d">2:58</td></tr>
+       <tr><td><span class="ochip link"><i>💿</i>Chansons de Paris</span></td><td>B3</td><td>LP 25 cm</td><td>1960</td><td class="d">2:56</td></tr></table></div>
+     <div class="reccard"><div class="hd"><span class="kind mix">MIXAGE</span><b>Mix stéréo 1965</b><small class="g">· pour l’album « Toujours »</small><span style="flex:1"></span><span class="ochip link"><i>💿</i>1 parution</span></div></div>
+     <div class="rtree"><div class="reccard"><div class="hd"><span class="kind rem">REMASTER</span><b>Remaster 2008</b><small class="g">· d’après le mix stéréo · Universal</small><span style="flex:1"></span><span class="player" style="min-width:160px"><span class="pl">▶</span><span class="wave"></span></span><span class="ochip link"><i>💿</i>L’intégrale (CD 1, piste 7)</span></div></div></div>
+     <div class="reccard"><div class="hd"><span class="kind edit">VERSION</span><b>Version radio (édit)</b><small class="g">· 2:31 · couplet 3 coupé</small><span style="flex:1"></span><span class="ochip link"><i>💿</i>45 t promo Radio-Luxembourg</span></div></div>
+    </div></div>
+   <div class="reccard"><div class="hd"><span class="kind live">PUBLIC</span><b>En public, Tulle</b><small class="g">· 14 juil. 1958 · bande amateur</small><span style="flex:1"></span><span class="ochip"><i>📅</i>Concert du 14 juillet</span><span class="ochip"><i>🔊</i>tulle58.mp3</span></div></div>
+   <p class="note">Le modèle (comme MusicBrainz) : <b>Morceau</b> (l’œuvre écrite) → <b>Enregistrements</b> (prise, mixage, remaster, version, en public ; chacun peut venir d’un autre) → <b>Pistes</b> de chaque <b>parution</b> (disque, single, compilation, réédition). Chaque enregistrement peut avoir son fichier son (fenêtre unique des médias : sons, ▶ et durée) et ses crédits.</p></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ C. LA PEINTURE ═══════════ -->
+<section class="case" id="peinture"><span class="tag"><span class="num">C</span>Œuvres · une peinture</span><h3>La fiche d’une peinture : inventaire, provenance, expositions, bibliographie, œuvres liées</h3>
+<div class="top"><span>🖼️</span><div><div class="ey">PEINTURE · CR 47</div><h4>Le moulin de Laguenne</h4></div><span class="sp"></span><span class="st">✓ Enregistré</span><span class="btn s">⚙️ Champs affichés</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div class="sheet">
+ <div>
+  <div class="paint"></div>
+  <div class="thumbs"><div class="cv4"><small>DOS</small></div><div style="background:#cfd8e3"><small>SIGNATURE</small></div><div style="background:#2b2b2b"><small>UV</small></div><div style="background:#e7e1d2"><small>1924</small></div></div>
+  <div class="side" style="margin-top:12px"><h5>🔢 Numéros</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Catalogue raisonné</dt><dd><b>CR 47</b></dd><dt>Inventaire famille</dt><dd>A-001</dd><dt>Musée</dt><dd>—</dd><dt>Ancien n°</dt><dd>« 12 » au dos (étiquette 1932)</dd><dt>Vente</dt><dd>Drouot 1987, lot 112</dd></dl></div>
+ </div>
+ <div>
+  <h2 class="h2">Le moulin de Laguenne <small>· 1921</small></h2>
+  <div style="margin:2px 0 10px"><span class="badge ok">✓ Œuvre certaine</span> <span class="badge b">Dans la famille</span> <span class="badge">État : bon</span></div>
+  <dl class="dl">
+   <dt>Technique</dt><dd>Huile sur toile</dd><dt>Dimensions</dt><dd>46 × 55 cm <small class="g">(toile 10 F paysage)</small> · encadré 62 × 71 cm</dd>
+   <dt>Signé, daté</dt><dd>en bas à droite « J. Martin 21 »</dd><dt>Inscriptions</dt><dd>au dos : « Laguenne, été 1921 »</dd>
+   <dt>Lieu peint</dt><dd><span class="ochip"><i>📍</i>Laguenne (19)</span></dd><dt>Série</dt><dd><span class="ochip link"><i>🗂</i>Les moulins de la Corrèze (5)</span></dd></dl>
+  <div class="sec"><div class="sh"><b>🏛 Provenance</b><small class="g">qui l’a eue, quand, comment</small><span class="sp"></span><span class="btn s">＋ Ajouter une étape</span></div>
+   <div class="tl">
+    <div class="ev"><b>1921 – 1938</b> · l’artiste, <span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN</span> <small class="g">atelier de Tulle</small></div>
+    <div class="ev"><b>1938</b> · donnée à sa fille <span class="chip"><span class="pp-av f">MM</span>Marie MARTIN</span> <small class="g">pour son mariage · 📄 lettre</small></div>
+    <div class="ev sale"><b>12 juin 1987</b> · vendue à Drouot, Paris, lot 112 <span class="price">8 500 F</span> <small class="g">à un collectionneur privé (Lyon)</small></div>
+    <div class="ev sale"><b>2004</b> · rachetée par <span class="chip"><span class="pp-av f">LB</span>Louise BORIE</span> <span class="price">3 200 €</span> <small class="g">galerie Dumas, Brive</small></div>
+    <div class="ev now"><b>depuis 2015</b> · <span class="chip"><span class="pp-av m">PB</span>Paul BORIE</span> <small class="g">par héritage · salon, Tulle</small></div>
+   </div></div>
+  <div class="sec"><div class="sh"><b>🖼 Expositions</b><small class="g">chaque exposition est une fiche, reliée à toutes ses œuvres</small><span class="sp"></span><span class="btn s">＋ Ajouter à une exposition…</span></div>
+   <table class="t"><tr><th>Exposition</th><th>Lieu</th><th>Dates</th><th>N° au catalogue</th><th>Prêtée par</th></tr>
+    <tr><td><span class="ochip link"><i>🖼</i>Salon des Indépendants</span></td><td>Paris, Grand Palais</td><td>1922</td><td>n° 2311</td><td>l’artiste</td></tr>
+    <tr><td><span class="ochip link"><i>🖼</i>Peintres de la Corrèze</span></td><td>Tulle, musée du Cloître</td><td>1950</td><td>n° 18, repr. p. 9</td><td>Marie MARTIN</td></tr>
+    <tr><td><span class="ochip link"><i>🖼</i>Joseph Martin, rétrospective</span></td><td>Brive, musée Labenche</td><td>2021</td><td>n° 7, ill. coul.</td><td>Paul BORIE</td></tr></table></div>
+  <div class="sec"><div class="sh"><b>📚 Bibliographie de l’œuvre</b></div>
+   <div><span class="ochip link"><i>📚</i>Catalogue « Peintres de la Corrèze », 1950</span> p. 9, n° 18, repr.</div>
+   <div><span class="ochip link"><i>📰</i>La Montagne, 3 mai 1950</span> « une lumière d’été… »</div>
+   <div><span class="ochip link"><i>📚</i>J. Martin, catalogue raisonné (2021)</span> CR 47, p. 64</div></div>
+ </div>
+ <div>
+  <div class="side"><h5>📍 Où est-elle</h5><p style="margin:0"><b>Collection privée</b> · <span class="chip"><span class="pp-av m">PB</span>Paul BORIE</span><br><span class="ochip"><i>📍</i>Tulle (19)</span> · salon</p></div>
+  <div class="side"><h5>🩺 États et restaurations</h5><div class="tl" style="margin-left:6px"><div class="ev"><b>1987</b> · craquelures, vernis jauni</div><div class="ev"><b>2005</b> · restaurée par A. Vidal <small class="g">(rentoilage, 📄 rapport)</small></div><div class="ev now"><b>2024</b> · bon état</div></div></div>
+  <div class="side"><h5>💶 Valeur et assurance</h5><dl class="dl" style="font-size:12.5px;margin:0"><dt>Estimée</dt><dd>4 000 – 6 000 €</dd><dt>Par</dt><dd>Étude Bastide, 2024</dd><dt>Assurée</dt><dd>MAIF, contrat 12…</dd></dl></div>
+  <div class="side"><h5>🔗 Œuvres liées</h5><div class="minis">
+   <div><i style="background:#e7e1d2"></i>Étude au fusain <small class="g">CR 46</small></div>
+   <div><i style="background:linear-gradient(#8fb6d8,#6d8f4e)"></i>Réplique 1935 <small class="g">CR 112</small></div>
+   <div><i style="background:repeating-linear-gradient(45deg,#ddd 0 3px,#fff 3px 6px)"></i>Gravure d’après <small class="g">1950</small></div>
+   <div><i style="background:#6d8f4e"></i>Pendant <small class="g">CR 48</small></div></div>
+   <p class="note" style="margin:6px 0 0">Liens : étude pour, esquisse, réplique, variante, gravure d’après, pendant, même série…</p></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ D. CHAMPS AFFICHÉS ═══════════ -->
+<section class="case" id="champs"><span class="tag"><span class="num">D</span>Modulable</span><h3>« ⚙️ Champs affichés » : afficher, masquer, ranger, ajouter ses propres champs</h3>
+<div class="layout2">
+ <div>
+  <div class="filt" style="margin-bottom:10px"><span>📚 Livre</span><span class="on">💿 Disque</span><span>🎵 Morceau</span><span>🖼️ Œuvre d’art</span><span>🎬 Film</span><span>🎭 Spectacle</span><span>📷 Photo</span><span>🏛 Exposition</span></div>
+  <p class="note" style="margin-top:0">Le formulaire suit l’ordre du panneau : mêmes groupes, même ordre. Un champ masqué garde ce qui y est écrit (il ne s’affiche plus, ni à la lecture ni à l’export). À la lecture, un champ vide ne s’affiche jamais.</p>
+  <div class="edit-grid">
+   <div class="grp">Parution</div>
+   <div class="fld">Titre<input value="Paris canaille"></div>
+   <div class="fld">Artiste crédité<div class="in" style="padding:3px 5px"><span class="chip" style="margin:0"><span class="pp-av m">JM</span>Joseph MARTIN <span class="go">↗</span> ×</span></div></div>
+   <div class="fld">Sortie<input value="mars 1958"><span class="ok">✓ Compris : mars 1958</span></div>
+   <div class="fld">Label<div class="in" style="padding:3px 5px"><span class="ochip" style="margin:0"><i>🏷</i>Polydor ×</span></div></div>
+   <div class="fld">N° de catalogue<input value="21 812"></div>
+   <div class="fld">Format<input value="Vinyle · 7″ · 45 tours · EP"></div>
+   <div class="grp">Mes champs</div>
+   <div class="fld" style="color:#055dff">Acheté par<input value="Mon grand-père"></div>
+   <div class="fld" style="color:#055dff">Souvenir<input value="Passait au bal du 14 juillet"></div>
+   <div class="fld" style="color:#055dff">Écouté sur<div class="in">☐ Tourne-disque ☑ Radio</div></div>
+  </div>
+  <div class="pop" style="max-width:520px;margin-top:14px"><b>＋ Ajouter un champ</b>
+   <div class="fld" style="margin-top:8px">Nom du champ<input value="Écouté sur"></div>
+   <div style="font:700 12px system-ui">Sorte de champ</div>
+   <div class="tys"><span>Aa Texte</span><span>¶ Texte long</span><span>123 Nombre</span><span>📅 Date</span><span>🔗 Lien</span><span>👤 Personne</span><span>📍 Lieu</span><span>🖼 Image / son</span><span class="on">☑ Liste de choix</span><span>⭐ Note /5</span><span>💶 Montant</span><span>☐ Oui / non</span></div>
+   <div class="fld">Choix (un par ligne)<input value="Tourne-disque · Radio · Juke-box"></div>
+   <label class="checkbox-line"><input type="checkbox" checked> Pour toutes les fiches « Disque » de tous les artistes</label>
+   <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px"><span class="btn">Annuler</span><span class="btn p">＋ Ajouter le champ</span></div></div>
+ </div>
+ <div class="pan">
+  <div class="ph"><b>⚙️ Champs affichés</b><span class="muted" style="font-size:12px">· 💿 Disque</span><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:8px 12px;border-bottom:1px solid #e3e5ea"><div class="pp-box" style="min-height:32px"><span class="pp-ico">🔍</span><input placeholder="Chercher un champ…"><span class="pp-kbd">/</span></div>
+   <div class="seg" style="margin-top:8px"><span class="on">La fiche</span><span>La liste</span><span>Les vignettes</span><span>L’export</span></div></div>
+  <details open><summary>▾ Parution <span class="c">8 sur 10</span></summary>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Titre</span><span class="ty">texte</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Artiste crédité</span><span class="ty">👤</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr drag"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Sortie</span><span class="ty">📅</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Label · n° de catalogue</span><span class="ty">🏷</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Format et détails</span><span class="ty">liste</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Pays</span><span class="ty">texte</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">Code-barres</span><span class="ty">texte</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">Matrice / runout</span><span class="ty">texte</span><span class="tools"><span>↑</span><span>↓</span></span></div></details>
+  <details open><summary>▾ Pistes et crédits <span class="c">3 sur 4</span></summary>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Pistes (avec durées)</span><span class="ty">tableau</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Crédits par piste</span><span class="ty">👤 rôles</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Crédits du disque</span><span class="ty">👤 rôles</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">Paroles</span><span class="ty">¶</span><span class="tools"><span>↑</span><span>↓</span></span></div></details>
+  <details><summary>▸ Éditions et pressages <span class="c">1 sur 1</span></summary></details>
+  <details><summary>▸ Mon exemplaire (collection) <span class="c">4 sur 7</span></summary></details>
+  <details><summary>▸ Identifiants et liens <span class="c">2 sur 6</span></summary></details>
+  <details open><summary>▾ Mes champs <span class="c">3 sur 3</span></summary>
+   <div class="fr cust"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Acheté par</span><span class="ty">texte</span><span class="tools"><span>↑</span><span>↓</span><span>✎</span><span>🗑</span></span></div>
+   <div class="fr cust"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Souvenir</span><span class="ty">¶</span><span class="tools"><span>↑</span><span>↓</span><span>✎</span><span>🗑</span></span></div>
+   <div class="fr cust"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">Écouté sur</span><span class="ty">liste</span><span class="tools"><span>↑</span><span>↓</span><span>✎</span><span>🗑</span></span></div>
+   <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="btn s">＋ Ajouter un champ</span><span class="btn s">＋ Ajouter un groupe</span><span class="sel2" style="font-size:11.5px">Remettre un champ enlevé… ▾</span></div></details>
+  <div style="padding:10px 12px;border-top:2px solid #111;font-size:12.5px">
+   <div class="tog" style="margin-bottom:6px"><i></i> Cacher les champs vides à la lecture</div>
+   <div class="tog off" style="margin-bottom:8px"><i></i> Réglage propre à cet artiste (sinon : pour tous)</div>
+   <b>💾 Réglages enregistrés</b> <span class="sel2" style="font-size:11.5px">« Collectionneur vinyles » ▾</span>
+   <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap"><span class="btn s">Enregistrer sous ce nom</span><span class="btn s">⤓ Exporter</span><span class="btn s">⤒ Importer un réglage</span><span class="btn s">↺ Réinitialiser</span></div></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ E. PAGE ARTISTE ═══════════ -->
+<section class="case" id="page"><span class="tag"><span class="num">E</span>La page de l’artiste</span><h3>Toutes ses facettes, en sections qu’on range et qu’on cache</h3>
+<div class="layout2">
+ <div>
+  <div class="hero"><div class="ph0">JM</div><div><div class="top" style="border:0;padding:0;margin:0;background:none"><div class="ey">🎨 ARTISTE · CHANTEUR, PEINTRE</div></div><h2 class="h2" style="margin:2px 0">Joseph MARTIN <small>· « Jo Martin », « Le Chanteur de Tulle »</small></h2><small class="g">° 1898 Tulle · † 1975 Brive · 18 disques · 112 œuvres · 3 livres · 2 films</small><div style="margin-top:6px"><span class="ochip link"><i>🌐</i>Site officiel</span><span class="ochip link"><i>💿</i>Discogs</span><span class="ochip link"><i>🎬</i>IMDb</span><span class="ochip link"><i>📖</i>Wikidata</span></div></div></div>
+  <div class="blocks">
+   <div class="blk s6"><div class="bh"><span class="grip">⠿</span><b>🎭 Identité artistique</b><span class="sp"></span><span class="ib" style="width:22px;height:22px">⋯</span></div><div class="bb">
+    <dl class="dl" style="font-size:12.5px;margin:0"><dt>Noms de scène</dt><dd>Jo Martin (1930-1950) · Le Chanteur de Tulle</dd><dt>Groupes</dt><dd><span class="ochip link"><i>👥</i>Les Gars de Tulle</span> 1928-1934, chant</dd><dt>Labels</dt><dd><span class="ochip"><i>🏷</i>Polydor</span> 1955-62 · <span class="ochip"><i>🏷</i>Barclay</span> 1962-70</dd><dt>Galeries</dt><dd><span class="ochip"><i>🏛</i>Galerie Dumas, Brive</span></dd><dt>Formation</dt><dd>Beaux-Arts de Limoges · élève de <span class="chip gr"><span class="q">?</span>A. Lagarde</span></dd><dt>Influences</dt><dd>Aristide Bruant, Corot</dd></dl></div></div>
+   <div class="blk s6"><div class="bh"><span class="grip">⠿</span><b>🏆 Prix et distinctions</b><span class="sp"></span><span class="ib" style="width:22px;height:22px">⋯</span></div><div class="bb">
+    <div>1958 · Grand Prix du Disque (Académie Charles-Cros) — <span class="ochip link"><i>💿</i>Paris canaille</span></div><div>1950 · Médaille d’argent, Salon de Tulle — <span class="ochip link"><i>🖼</i>Le moulin</span></div><div>1966 · nommé, César… <small class="g">(lauréat / nommé)</small></div></div></div>
+   <div class="blk drag"><div class="bh"><span class="grip">⠿</span><b>💿 Discographie</b><small class="g">18 · <span class="filt" style="display:inline-flex"><span class="on">Albums 6</span><span>Singles 9</span><span>Compilations 3</span></span></small><span class="sp"></span><span class="btn s">Tout voir</span></div><div class="bb"><div class="minicov">
+    <div><i class="cv1"></i>Paris canaille<br><small class="g">1958 · EP</small></div><div><i style="background:linear-gradient(#e8b923,#d0182f)"></i>Chansons de la rue<br><small class="g">1962 · LP</small></div><div><i style="background:linear-gradient(135deg,#111,#555)"></i>Toujours<br><small class="g">1965 · LP</small></div><div><i class="cv2"></i>Le temps des cerises<br><small class="g">1965 · single</small></div><div><i style="background:#3c78d8"></i>En public à Tulle<br><small class="g">1966 · live</small></div><div><i style="background:#1aa34a"></i>L’intégrale<br><small class="g">2008 · 3 CD</small></div></div></div></div>
+   <div class="blk s6"><div class="bh"><span class="grip">⠿</span><b>🖼️ Œuvres · catalogue raisonné</b><span class="sp"></span><span class="btn s">Tout voir</span></div><div class="bb">112 œuvres · 64 dans la famille · 9 musées · 21 où ? inconnu<br><div class="minicov" style="grid-template-columns:repeat(4,1fr);margin-top:6px"><div><i class="paint" style="border-width:4px"></i>CR 47</div><div><i style="background:#e7e1d2"></i>CR 46</div><div><i style="background:linear-gradient(#8fb6d8,#6d8f4e)"></i>CR 112</div><div><i style="background:#6d8f4e"></i>CR 48</div></div></div></div>
+   <div class="blk s6"><div class="bh"><span class="grip">⠿</span><b>🏛 Expositions</b><span class="sp"></span><span class="btn s">Tout voir</span></div><div class="bb"><div>1922 · Salon des Indépendants, Paris <small class="g">· 3 œuvres</small></div><div>1950 · Peintres de la Corrèze, Tulle <small class="g">· 12 œuvres · catalogue</small></div><div>2021 · Rétrospective, Brive <small class="g">· 46 œuvres</small></div></div></div>
+   <div class="blk s4"><div class="bh"><span class="grip">⠿</span><b>📚 Bibliographie</b></div><div class="bb">3 de lui · 7 sur lui · 2 catalogues</div></div>
+   <div class="blk s4"><div class="bh"><span class="grip">⠿</span><b>🎬 Filmographie</b></div><div class="bb">2 films · 1 B.O.</div></div>
+   <div class="blk s4"><div class="bh"><span class="grip">⠿</span><b>📅 Concerts et tournées</b></div><div class="bb">48 dates · carte des villes</div></div>
+  </div>
+ </div>
+ <div class="pan">
+  <div class="ph"><b>⚙️ Organiser la page de l’artiste</b><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:8px 12px;font-size:12.5px;color:#555">Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : ½, ⅓ ou toute la ligne.</div>
+  <div style="padding:0 12px 10px">
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📝 Biographie</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🎭 Identité artistique</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏆 Prix et distinctions</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr drag"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">💿 Discographie</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🎵 Morceaux (œuvres musicales)</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🖼️ Œuvres · catalogue raisonné</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🏛 Expositions</span><span class="ty">½</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📚 Bibliographie</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🎬 Filmographie</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">📅 Concerts et tournées</span><span class="ty">⅓</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">🎭 Spectacles et rôles</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">📷 Photographies</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">🚫</span><span class="lbl">📰 Presse et critiques</span><span class="ty">ligne</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">🔗 Liens officiels</span><span class="ty">en-tête</span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr cust"><span class="grip">⠿</span><span class="eye">👁</span><span class="lbl">✎ Ses instruments</span><span class="ty">perso</span><span class="tools"><span>↑</span><span>↓</span><span>✎</span><span>🗑</span></span></div>
+   <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap"><span class="btn s">＋ Ajouter une section</span><span class="sel2" style="font-size:11.5px">Modèle : Musicien ▾</span></div>
+   <p class="note">Modèles de départ selon la discipline (Musicien, Peintre, Écrivain, Cinéaste, Photographe, Sculpteur, Architecte…) ; tout se change ensuite. Gardé dans « 💾 Réglages enregistrés » (outil « artistes »).</p></div>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ F. LISTE CATALOGUE RAISONNÉ ═══════════ -->
+<section class="case" id="liste"><span class="tag"><span class="num">F</span>Liste · barre H10</span><h3>Le catalogue raisonné : la liste complète des œuvres d’un artiste, filtrée et triée</h3>
+<div class="top"><span>🖼️</span><div><div class="ey">CATALOGUE RAISONNÉ</div><h4>Joseph MARTIN — 112 œuvres</h4></div><span class="seg" style="margin-left:14px"><span>📚 Livres</span><span class="on">🖼️ Œuvres</span><span>💿 Disques</span><span>🎵 Morceaux</span><span>🎬 Films</span><span>🏛 Expos</span></span><span class="sp"></span><span class="btn p s">＋ Nouvelle œuvre</span><span class="btn s">📥 Importer</span><span class="btn s">📖 Faire le livre…</span><span class="btn s">⤓ Exporter ▾</span><span class="ib">×</span></div>
+<div style="display:grid;grid-template-columns:1fr 300px;gap:16px">
+ <div>
+  <div class="lbar"><div class="pp-box"><span class="pp-ico">🔍</span><input placeholder="Chercher… (ex. moulin, CR 47, Laguenne, 1921)"><span class="pp-kbd">/</span></div><span class="sel2">Filtrer ▾ <b style="background:#055dff;color:#fff;padding:0 6px;margin-left:4px">3</b></span><span class="seg"><span class="on">Liste</span><span>Fiches</span></span><span class="sel2">Trier : N° du catalogue ▾</span><span class="ib">⚙️</span></div>
+  <div class="act"><span>Huile ×</span><span>1918 – 1930 ×</span><span>Dans la famille ×</span><span style="background:none;border-color:transparent;color:#666">Tout effacer</span></div>
+  <div style="font-size:12.5px;color:#666;margin:6px 0">23 œuvres · valeur estimée 61 000 €</div>
+  <table class="t cr"><tr><th>N°</th><th></th><th>Titre</th><th>Date</th><th>Technique</th><th>Dimensions</th><th>Où</th><th>Propriétaire</th><th>Attribution</th><th>Expos</th></tr>
+   <tr><td><b>CR 12</b></td><td class="im"><i style="background:linear-gradient(#cfd8e3,#7a8a9a)"></i></td><td><b>Brume sur la Corrèze</b></td><td>1919</td><td>Huile sur carton</td><td>33 × 41</td><td>Tulle</td><td><span class="chip"><span class="pp-av f">MM</span>Marie MARTIN</span></td><td><span class="badge ok">certaine</span></td><td>2</td></tr>
+   <tr><td><b>CR 31</b></td><td class="im"><i style="background:linear-gradient(#e8b923,#a87900)"></i></td><td><b>Les moissons</b></td><td>1920</td><td>Huile sur toile</td><td>60 × 73</td><td>Brive</td><td><span class="chip"><span class="pp-av m">PB</span>Paul BORIE</span></td><td><span class="badge ok">certaine</span></td><td>1</td></tr>
+   <tr style="background:#eaf1ff;box-shadow:inset 4px 0 0 #055dff"><td><b>CR 47</b></td><td class="im"><i class="paint" style="border-width:3px"></i></td><td><b>Le moulin de Laguenne</b></td><td>1921</td><td>Huile sur toile</td><td>46 × 55</td><td>Tulle</td><td><span class="chip"><span class="pp-av m">PB</span>Paul BORIE</span></td><td><span class="badge ok">certaine</span></td><td>3</td></tr>
+   <tr><td><b>CR 52</b></td><td class="im"><i style="background:#6d8f4e"></i></td><td><b>Le pont de la Barrière</b></td><td>vers 1923</td><td>Huile sur toile</td><td>50 × 61</td><td>?</td><td><span class="muted">inconnu</span></td><td><span class="badge w">attribuée</span></td><td>0</td></tr>
+   <tr><td><b>CR 60</b></td><td class="im"><i style="background:#d8c3a5"></i></td><td><b>Portrait de Marie</b></td><td>1924</td><td>Huile sur toile</td><td>55 × 46</td><td>Tulle</td><td><span class="chip"><span class="pp-av f">LB</span>Louise BORIE</span></td><td><span class="badge ok">certaine</span></td><td>2</td></tr>
+   <tr><td><b>CR 66</b></td><td class="im"><i style="background:#9aa1ad"></i></td><td><b>Nature morte aux pommes</b></td><td>1928</td><td>Huile sur panneau</td><td>27 × 35</td><td>?</td><td><span class="muted">vendue 1987</span></td><td><span class="badge w">douteuse</span></td><td>0</td></tr>
+  </table>
+  <div style="border:2px dashed #9aa1ad;text-align:center;padding:8px;font:700 13px system-ui;color:#055dff;margin-top:8px">Voir les 17 suivantes ↓</div>
+ </div>
+ <div class="dd" style="width:auto"><b>Technique</b><label><input type="checkbox" checked> Huile (64)</label><label><input type="checkbox"> Aquarelle (21)</label><label><input type="checkbox"> Dessin, fusain (19)</label><label><input type="checkbox"> Gravure (8)</label>
+  <b>Période</b><div style="display:flex;gap:6px;align-items:center"><span class="pp-box" style="min-height:28px;width:70px"><input value="1918" style="padding:3px 0"></span>–<span class="pp-box" style="min-height:28px;width:70px"><input value="1930" style="padding:3px 0"></span></div>
+  <b>Où est l’œuvre</b><label><input type="checkbox" checked> Dans la famille (64)</label><label><input type="checkbox"> Musée (9)</label><label><input type="checkbox"> Où ? inconnu (21)</label>
+  <b>Lieu de conservation</b><div class="pp-box" style="min-height:30px"><span class="pp-ico">📍</span><input placeholder="Une ville, un musée…" style="padding:4px 0;font-size:13px"></div>
+  <b>Propriétaire</b><div class="pp-box" style="min-height:30px"><span class="pp-ico">🔍</span><input placeholder="Nom, prénom…" style="padding:4px 0;font-size:13px"></div>
+  <b>Attribution</b><label><input type="checkbox"> Certaine</label><label><input type="checkbox"> Attribuée, atelier, entourage</label><label><input type="checkbox"> Douteuse, rejetée</label>
+  <b>Autres</b><label><input type="checkbox"> Exposée au moins une fois</label><label><input type="checkbox"> Sans photo</label><label><input type="checkbox"> Citée dans un livre</label></div>
+</div>
+<p class="note">Même barre partout (H10) : 🔍 · Filtrer ▾ (rubriques) · Liste | Fiches · Trier ▾ (n° du catalogue, date, titre A → Z, valeur, dimensions…). ⚙️ choisit les colonnes (même panneau que D, onglet « La liste »). La liste retient ses réglages.</p>
+</section>
+
+<!-- ═══════════ G. NOUVEAU CATALOGUE RAISONNÉ ═══════════ -->
+<section class="case" id="livre"><span class="tag"><span class="num">G</span>Mise en page · nouveau document</span><h3>« 📖 Nouveau catalogue raisonné » : le livre complet, fait tout seul, puis modifiable</h3>
+<div class="wiz">
+ <div class="pan">
+  <div class="ph"><div><div style="font:700 10.5px system-ui;letter-spacing:.1em;color:#055dff">NOUVEAU DOCUMENT</div><b>📖 Un catalogue raisonné</b></div><span class="sp"></span><span class="ib">×</span></div>
+  <div style="padding:10px 12px">
+   <div class="seg" style="margin-bottom:10px"><span>👪 Livre de famille</span><span class="on">🖼️ Catalogue raisonné</span><span>💿 Discographie</span></div>
+   <span style="font:700 12px system-ui">Artiste</span><div style="margin:4px 0 8px"><span class="chip"><span class="pp-av m">JM</span>Joseph MARTIN · 1898-1975 <span class="go">↗</span> ×</span></div>
+   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="fld">Design<div class="in">✨ Musée ▾</div></div><div class="fld">Format<div class="in">23 × 28 cm ▾</div></div><div class="fld">Œuvres<div class="in">Les 112 (filtres de la liste) ▾</div></div><div class="fld">Ordre<div class="in">N° du catalogue ▾</div></div></div>
+   <div style="font:800 12px system-ui;margin:6px 0 4px">Les parties du livre</div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Couverture</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Introduction, biographie</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Chronologie</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Notices des œuvres <small class="g">(par période)</small></span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Liste des expositions</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Bibliographie générale</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Index des titres, des lieux, des propriétaires</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr"><span class="grip">⠿</span><span class="eye">☑</span><span class="lbl">Concordances (n° CR ↔ inventaire ↔ ventes)</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div class="fr off"><span class="grip">⠿</span><span class="eye">☐</span><span class="lbl">Œuvres non retrouvées (en annexe)</span><span></span><span class="tools"><span>↑</span><span>↓</span></span></div>
+   <div style="font:800 12px system-ui;margin:10px 0 4px">Dans chaque notice <small class="g">(le panneau D, onglet « L’export »)</small></div>
+   <div class="filt"><span class="on">Image</span><span class="on">N°</span><span class="on">Titre</span><span class="on">Date</span><span class="on">Technique</span><span class="on">Dimensions</span><span class="on">Signature</span><span class="on">Provenance</span><span class="on">Expositions</span><span class="on">Bibliographie</span><span>Valeur</span><span>Propriétaire actuel</span><span class="on">Notes</span><span class="on">Œuvres liées</span></div>
+   <div class="fld" style="margin-top:8px">Mise en page des notices<div class="in">1 œuvre par page (grande image) ▾</div></div>
+   <div class="tog off"><i></i> Cacher le nom des propriétaires vivants (« collection privée »)</div>
+   <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px"><span class="btn">Annuler</span><span class="btn p">📖 Faire le livre (≈ 140 pages)</span></div></div>
+ </div>
+ <div>
+  <div class="spread">
+   <div class="page"><h6>Les années corréziennes · 1918 – 1930</h6>
+    <div style="aspect-ratio:46/55;width:78%;margin:6px auto 12px" class="paint"></div>
+    <div style="font-size:8.5px;color:#888;text-align:center">Fig. 47 — Le moulin de Laguenne, 1921 (détail de la signature p. 65)</div>
+    <div class="folio">64</div></div>
+   <div class="page"><h6>Notices</h6>
+    <span class="no">47</span>
+    <p class="ti">Le moulin de Laguenne</p>
+    <div class="meta">1921<br>Huile sur toile, 46 × 55 cm<br>Signé et daté en bas à droite : <i>J. Martin 21</i><br>Au dos, inscription : <i>Laguenne, été 1921</i><br>Inv. famille A-001</div>
+    <span class="lbl">Provenance</span>L’artiste ; donné à sa fille Marie Martin, 1938 ; vente Paris, Drouot, 12 juin 1987, lot 112 ; collection particulière, Lyon ; galerie Dumas, Brive ; acquis par Louise Borie, 2004 ; par descendance, collection particulière.
+    <span class="lbl">Expositions</span>Paris, Salon des Indépendants, 1922, n° 2311 ; Tulle, musée du Cloître, <i>Peintres de la Corrèze</i>, 1950, n° 18 ; Brive, musée Labenche, <i>Joseph Martin, rétrospective</i>, 2021, n° 7.
+    <span class="lbl">Bibliographie</span><i>Peintres de la Corrèze</i>, cat. exp., Tulle, 1950, p. 9, n° 18, repr. ; <i>La Montagne</i>, 3 mai 1950.
+    <span class="lbl">Œuvres en rapport</span>Étude au fusain (CR 46) ; réplique de 1935 (CR 112) ; gravure d’après, 1950.
+    <span class="lbl">Notes</span>Le moulin, détruit en 1944, est connu par une carte postale (fig. 12).
+    <div class="folio">65</div></div>
+  </div>
+  <p class="note">Comme « 👪 Livre d’après la famille » : le livre est fait page par page dans la mise en page (textes chaînés, sommaire, index automatiques) ; chaque notice est un <b>objet dynamique</b> lié à la fiche de l’œuvre : « ↻ Mettre à jour les objets dynamiques » reprend une provenance corrigée. Même assistant pour une <b>discographie en livre</b> (une double page par album : pochette, pistes, crédits, éditions).</p>
+ </div>
+</div>
+</section>
+
+<!-- ═══════════ H. MODÈLE DE DONNÉES ═══════════ -->
+<section class="case" id="modele"><span class="tag"><span class="num">H</span>Comment c’est relié</span><h3>Les fiches et leurs liens, domaine par domaine</h3>
+<div class="dm">
+ <div class="dmc"><h5>🎵 Musique</h5>
+  <div class="ent core"><b>Morceau</b><small>l’œuvre écrite : paroles, musique, éditeur, ISWC, date</small></div><div class="arr">↓ enregistré en</div>
+  <div class="ent core"><b>Enregistrement</b><small>prise, mixage, remaster, version, en public · fichier son · date, studio</small></div><div class="arr">↓ figure sur (piste A2, 2:58)</div>
+  <div class="ent core"><b>Parution</b><small>disque, single, EP, compilation, réédition · label, n° cat., format, pays</small></div><div class="arr">↑ regroupées dans</div>
+  <div class="ent"><b>Album (toutes éditions)</b><small>le « master » Discogs</small></div><div class="arr">↓ mon</div>
+  <div class="ent x"><b>Exemplaire</b><small>état, valeur, rangement, dédicace</small></div>
+  <div class="ent"><b>Concert / tournée</b><small>lieu, date, programme → morceaux</small></div></div>
+ <div class="dmc"><h5>🖼️ Art (peinture, dessin, sculpture, gravure, photo)</h5>
+  <div class="ent core"><b>Œuvre</b><small>n° CR, inventaire, technique, dimensions, signature, attribution</small></div><div class="arr">↓ a eu</div>
+  <div class="ent"><b>Étapes de provenance</b><small>propriétaire (👤 ou institution), dates, vente, prix</small></div>
+  <div class="ent"><b>États, restaurations</b><small>date, restaurateur, rapport</small></div>
+  <div class="ent x"><b>Tirages, fontes, épreuves</b><small>bronze 3/8, fondeur ; tirage photo, papier</small></div><div class="arr">↔ montrée dans (n° 18)</div>
+  <div class="ent core"><b>Exposition</b><small>lieu, dates, commissaire, catalogue → 📚</small></div><div class="arr">↔ en rapport avec</div>
+  <div class="ent"><b>Œuvre liée</b><small>étude, réplique, gravure d’après, pendant, série</small></div></div>
+ <div class="dmc"><h5>📚 Livres et textes</h5>
+  <div class="ent core"><b>Texte (l’œuvre)</b><small>roman, poème, article, thèse ; sujets ; adaptations</small></div><div class="arr">↓ publié en</div>
+  <div class="ent core"><b>Édition</b><small>éditeur, collection, ISBN, date, tirage, pages, format, traducteur, illustrateur, préface, dépôt légal</small></div><div class="arr">↓ mon</div>
+  <div class="ent x"><b>Exemplaire</b><small>dédicacé à 👤, état, où</small></div>
+  <div class="ent"><b>Critique, article</b><small>revue (outil Revues), date, extrait</small></div>
+  <div class="ent"><b>Cite</b><small>une œuvre, un disque, un film (page, fig.)</small></div></div>
+ <div class="dmc"><h5>🎬 Films et 🎭 spectacles</h5>
+  <div class="ent core"><b>Film / série / pièce</b><small>titre original, genre, durée, pays, réalisateur, production</small></div><div class="arr">↓</div>
+  <div class="ent"><b>Saison → épisode</b><small>ou mise en scène → représentations (lieu, dates)</small></div>
+  <div class="ent"><b>Participation</b><small>👤 rôle (personnage), métier, crédité ou non</small></div>
+  <div class="ent"><b>Sorties</b><small>pays, date, titre local, support DVD/VHS</small></div>
+  <div class="ent"><b>Festival, prix</b><small>lauréat / nommé</small></div>
+  <div class="ent"><b>Musique du film</b><small>→ 🎵 morceaux, 💿 B.O.</small></div></div>
+</div>
+<div class="dm" style="grid-template-columns:1fr 1fr;margin-top:14px">
+ <div class="dmc"><h5>🎨 L’artiste (sa fiche de la généalogie)</h5><small>Noms de scène (avec périodes) · groupes et collectifs (membres 👤, instruments, dates) · organisations : labels, éditeurs, galeries, agents, producteurs (périodes) · formation (écoles, maîtres 👤) · prix et distinctions → œuvre · influences · liens officiels · chronologie.</small></div>
+ <div class="dmc"><h5>🔗 Partout</h5><small>Personnes avec rôles (menu de choix unique, une personne sans fiche = « ? ») · lieux 📍 · médias (images, sons, vidéos : fenêtre unique) · sources · étiquettes · « Mes champs » · chaque lien se lit des deux côtés (« Lié à » en bas de chaque fiche, et sur la fiche des personnes).</small></div>
+</div>
+<div class="legend"><span><i style="background:#eef4ff;border-color:#055dff"></i>fiche principale</span><span><i style="background:#fafbfc"></i>fiche ou liste reliée</span><span><i style="background:#fff8e1;border-color:#e1a500"></i>objet physique que tu possèdes</span></div>
+</section>
+</body></html>
