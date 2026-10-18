@@ -41,8 +41,8 @@ html.a11y-safe .investigation-media.interesting { box-shadow: 5px 5px 0 #8fd6c0 
 html.a11y-safe .investigation-media.rejected { box-shadow: 5px 5px 0 #f0b98f !important; }
 
 /* ═════ Formes en plus des couleurs ═════ */
-html.a11y-shapes .toast.error::before, html.a11y-shapes .ui-status-txt.is-error::before, html.a11y-shapes .a11y-demo-msg.is-bad::before { content: "⛔ "; }
-html.a11y-shapes .toast.success::before, html.a11y-shapes .a11y-demo-msg.is-good::before { content: "✓ "; font-weight: 900; }
+html.a11y-shapes .toast.error:not(.ui-toast)::before, html.a11y-shapes .ui-status-txt.is-error::before, html.a11y-shapes .a11y-demo-msg.is-bad::before { content: "⛔ "; }
+html.a11y-shapes .toast.success:not(.ui-toast)::before, html.a11y-shapes .a11y-demo-msg.is-good::before { content: "✓ "; font-weight: 900; }
 html.a11y-shapes .a11y-demo-msg.is-warn::before, html.a11y-shapes .issue.warning > :first-child::before { content: "⚠ "; }
 html.a11y-shapes .issue.error > :first-child::before { content: "⛔ "; }
 /* hommes en carré arrondi, femmes en rond */
@@ -258,3 +258,9 @@ html.side-right .a11y-dock, .app-shell.sidebar-collapsed ~ .a11y-dock { left: 16
 @media (max-width: 850px) {
     .a11y-dock { left: 10px; bottom: 10px; }
 }
+
+/* Aperçu de la taille du texte pendant le glissement du curseur */
+.a11y-size-preview { display: none; margin: -2px 0 10px; padding: 10px 14px; border: 2px dashed var(--blue-bright, #055dff); background: var(--card-bg, #fff); }
+.a11y-size-preview.is-on { display: grid; gap: 4px; }
+.a11y-size-preview span { font-size: calc(15px * var(--a11y-prev, 1)); font-weight: 700; line-height: 1.35; }
+.a11y-size-preview small { color: var(--muted, #666); font-size: 12px; }

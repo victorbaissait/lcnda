@@ -1099,7 +1099,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=7" defer></script>
 <script src="assets/js/app-harmony.js?v=4" defer></script>
 <script src="assets/js/app-ui.js?v=2" defer></script>
-<script src="assets/js/app-access.js?v=2" defer></script>
+<script src="assets/js/app-access.js?v=3" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
 <script src="assets/js/app-listes.js?v=10" defer></script>
 <script src="assets/js/app-maintenance.js?v=10" defer></script>

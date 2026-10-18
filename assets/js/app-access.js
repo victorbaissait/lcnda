@@ -394,7 +394,7 @@
         <section class="maintenance-panel a11y-sec" id="a11y-motion"><h3>🎞 Mouvement</h3>
             <p class="muted">Moins de choses qui bougent : pas d’animations, pas de glissements, pas de défilement animé.${reduceOs ? ' <b>Ton ordinateur demande déjà moins d’animations : c’est respecté.</b>' : ''}</p>
             <div class="a11y-toggles">${toggle('calm', 'Réduire les animations et le défilement animé')}</div>
-            <div class="a11y-row"><span class="a11y-range-lab">Les messages restent affichés</span><div class="segmented a11y-seg" role="radiogroup" aria-label="Durée des messages">${[[1, 'normal (4 s)'], [2, '2 fois plus (8 s)'], [3, '3 fois plus (13 s)']].map(([v, l]) => `<button type="button" class="${P.toastX === v ? 'is-active' : ''}" data-a11y-toastx="${v}" aria-pressed="${P.toastX === v}">${l}</button>`).join('')}</div>
+            <div class="a11y-row"><span class="a11y-range-lab">Les messages restent affichés</span><div class="segmented a11y-seg" role="radiogroup" aria-label="Durée des messages">${[[1, 'normal (6 s)'], [2, '2 fois plus (12 s)'], [3, '3 fois plus (18 s)']].map(([v, l]) => `<button type="button" class="${P.toastX === v ? 'is-active' : ''}" data-a11y-toastx="${v}" aria-pressed="${P.toastX === v}">${l}</button>`).join('')}</div>
                 <button type="button" class="button small secondary" data-a11y-trytoast>Essayer</button></div>
         </section>
 
@@ -436,7 +436,24 @@
             const f = Number(box.dataset.factor) || 1, dec = Number(box.dataset.dec) || 0, def = Number(box.dataset.def), auto = box.dataset.auto;
             const show = () => { if (document.activeElement === num) return; if (P[k] == null && auto) { num.value = ''; num.placeholder = auto; box.classList.add('is-auto'); } else { num.value = fmt(Number(r.value) * f, dec); box.classList.remove('is-auto'); } };
             const setV = v => { r.value = String(v); P[k] = Number(r.value); save(); apply(); show(); afterChange(k); };
-            r.addEventListener('input', () => setV(r.value));
+            if (k === 'size') {
+                /* Taille du texte : pendant le glissement, seul l'aperçu grossit (sinon toute la page, curseur compris, bouge sous la souris) ;
+                   on applique au lâcher, en gardant le curseur à la même place à l'écran. */
+                const prev = document.createElement('div'); prev.className = 'a11y-size-preview'; prev.setAttribute('aria-hidden', 'true');
+                prev.innerHTML = '<span>Jean-Baptiste MARTIN, né le 7 mai 1784 à Tulle</span><small>Aperçu : la page prendra cette taille quand tu lâcheras le curseur.</small>';
+                box.after(prev);
+                const preview = () => { num.value = fmt(Number(r.value) * f, dec); prev.style.setProperty('--a11y-prev', String(Number(r.value) / 100)); prev.classList.add('is-on'); };
+                const applyKeep = () => {
+                    prev.classList.remove('is-on');
+                    if (Number(r.value) === P.size) { show(); return; }
+                    const top = box.getBoundingClientRect().top;
+                    setV(r.value);
+                    const fix = () => { for (let el = box.parentElement; el; el = el.parentElement) { const d = box.getBoundingClientRect().top - top; if (Math.abs(d) <= 1) return; if (el.scrollHeight > el.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(el).overflowY)) el.scrollTop += d / (parseFloat(getComputedStyle(el).zoom) || 1); } const d = box.getBoundingClientRect().top - top; if (Math.abs(d) > 1) document.scrollingElement.scrollTop += d; };
+                    requestAnimationFrame(() => { fix(); requestAnimationFrame(fix); });
+                };
+                r.addEventListener('input', preview);
+                r.addEventListener('change', applyKeep);
+            } else r.addEventListener('input', () => setV(r.value));
             r.addEventListener('dblclick', () => { if (auto) { P[k] = null; r.value = String(def); save(); apply(); show(); afterChange(k); } else setV(def); });
             const commit = () => { const raw = num.value.trim(); if (!raw && auto) { P[k] = null; save(); apply(); show(); return; } const v = Number(raw.replace(',', '.').replace(/[^\d.+-]/g, '')) / f; if (!Number.isFinite(v)) { show(); return; } setV(Math.min(Number(r.max), Math.max(Number(r.min), v))); };
             num.addEventListener('change', commit);
@@ -486,7 +503,7 @@
             const b = e.target.closest('button, a'); if (!b) return;
             if (b.dataset.a11ySim != null) { simulate(b.dataset.a11ySim); return; }
             if (b.dataset.a11yToastx) { P.toastX = Number(b.dataset.a11yToastx); save(); apply(); page.querySelectorAll('[data-a11y-toastx]').forEach(x => { const on = x === b; x.classList.toggle('is-active', on); x.setAttribute('aria-pressed', String(on)); }); return; }
-            if (b.hasAttribute('data-a11y-trytoast')) { toast(`Voici un message : il reste ${P.toastX === 1 ? '4' : P.toastX === 2 ? '8' : '13'} secondes environ.`); return; }
+            if (b.hasAttribute('data-a11y-trytoast')) { toast(`Voici un message : il reste ${P.toastX === 1 ? '6' : P.toastX === 2 ? '12' : '18'} secondes environ.`); return; }
             if (b.hasAttribute('data-a11y-try')) { speak('Bonjour ! Voici la voix qui lira tes textes. Jean-Baptiste Martin, né le 7 mai 1784 à Figeac, dans le Lot.'); return; }
             if (b.hasAttribute('data-a11y-stop')) { stop(); return; }
             if (b.hasAttribute('data-a11y-dys')) { P.lh = 1.5; P.ls = 0.12; P.ws = 0.16; save(); apply(); refreshPage(); toast('Espacements conseillés appliqués.'); return; }
