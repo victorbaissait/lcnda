@@ -1084,7 +1084,7 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=401" defer></script>
+<script src="assets/js/app.js?v=402" defer></script>
 <script src="assets/js/app-picker.js?v=2" defer></script>
 <script src="assets/js/app-media-picker.js?v=1" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
@@ -1096,16 +1096,17 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-tableau-de-bord.js?v=6" defer></script>
 <script src="assets/js/app-harmony.js?v=4" defer></script>
 <script src="assets/js/app-ui.js?v=1" defer></script>
+<script src="assets/js/app-access.js?v=1" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
 <script src="assets/js/app-listes.js?v=8" defer></script>
-<script src="assets/js/app-maintenance.js?v=8" defer></script>
+<script src="assets/js/app-maintenance.js?v=9" defer></script>
 <script src="assets/js/app-recherche.js?v=7" defer></script>
 <script src="assets/js/app-graphiques.js?v=6" defer></script>
 <script src="assets/js/sea-route.js?v=1" defer></script>
 <script src="assets/js/heritage.js?v=20" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=114" defer></script>
+<script src="assets/js/heritage-more.js?v=115" defer></script>
 <script src="assets/js/heritage-records.js?v=3" defer></script>
 <script src="assets/js/heritage-research.js?v=23" defer></script>
 <script src="assets/js/heritage-av.js?v=9" defer></script>
