@@ -138,12 +138,12 @@
             <header class="h-tx-top"><span class="h-tx-logo">📜</span><input data-tx="title" class="h-tx-title" maxlength="200" placeholder="Titre de l’acte (ex. Baptême de Jean Martin, 1790)" value="${esc(t.title)}">
                 <select data-tx="kind" title="Genre d’acte">${KINDS.map(([k, l]) => `<option value="${k}" ${t.kind === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 <input data-tx="date_text" placeholder="Date" value="${esc(t.date_text)}" title="Date de l’acte"><input data-tx="place" placeholder="Lieu" value="${esc(t.place)}" title="Paroisse, commune"><input data-tx="source" placeholder="Source (AD, cote, vue)" value="${esc(t.source)}" title="Archives, cote, numéro de vue">
-                <span class="spacer"></span><span class="muted h-tx-status" data-tx-status></span>
-                <button type="button" class="button small" data-tx-cmd="save" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
+                <span class="spacer"></span><span class="muted h-tx-status" data-tx-status data-ui-status></span>
+                <button type="button" class="button small secondary" data-tx-cmd="export" title="Le texte (.txt), l’impression ou un PDF (image + texte)">⤓ Exporter ▾</button><button type="button" class="button small" data-tx-cmd="save" title="Enregistrer" data-shortcut="${esc(ext.shortcutLabel?.('⌘S') || '⌘S')}">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('transcribe') : ''}<button type="button" class="icon-button" data-tx-cmd="close" title="Fermer">×</button></header>
             <div class="h-tx-main">
                 <section class="h-tx-left">
                     <div class="h-tx-tools"><button type="button" data-tx-cmd="image" title="Choisir l’image de l’acte (base ou ordinateur)">🖼️ Image…</button><span class="h-tx-sep"></span>
-                        <button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone (elle se relie au passage choisi dans le texte)" data-shortcut="Z">▭ Zone</button>
+                        <button type="button" data-tx-tool="pan" title="Déplacer l’image, ou barre d’espace" data-shortcut="H">✋</button><button type="button" data-tx-tool="zone" title="Dessiner une zone (elle se relie au passage choisi dans le texte)" data-shortcut="Z" data-help="Choisis un passage dans le texte, puis dessine un rectangle sur l’image : les deux restent liés (un clic sur l’un montre l’autre).">▭ Zone</button>
                         <button type="button" data-tx-cmd="zin" title="Zoom avant">＋</button><button type="button" data-tx-cmd="zout" title="Zoom arrière">－</button><button type="button" data-tx-cmd="fit" title="Toute l’image">⤢</button><button type="button" data-tx-cmd="rot" title="Tourner de 90°">⟳</button><span class="h-tx-sep"></span>
                         <label title="Contraste">◐<input type="range" data-tx-view="contrast" min="50" max="300" value="${t.data.view.contrast}"></label><label title="Luminosité">☀<input type="range" data-tx-view="bright" min="40" max="220" value="${t.data.view.bright}"></label>
                         <label class="checkbox-line" title="Négatif : encre claire sur fond sombre"><input type="checkbox" data-tx-view="invert" ${t.data.view.invert ? 'checked' : ''}>Négatif</label><label class="checkbox-line"><input type="checkbox" data-tx-view="gray" ${t.data.view.gray ? 'checked' : ''}>Gris</label></div>
@@ -151,10 +151,10 @@
                     <div class="h-tx-zonebar" data-tx-zonebar hidden></div>
                 </section>
                 <section class="h-tx-right">
-                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Maintenance)">✍️ Lire (manuscrit)</button>
+                    <div class="h-tx-tools"><button type="button" data-tx-cmd="ocr" title="Lire un texte imprimé ou tapé (pose aussi les zones ligne par ligne)">🔎 Lire (imprimé)</button><button type="button" data-tx-cmd="htr" title="Reconnaissance d’écriture manuscrite, si un modèle est installé (Maintenance)" data-help="La lecture d’une écriture à la main (HTR) : elle demande un modèle installé dans Maintenance. Relis toujours : elle se trompe sur les noms." data-help-faq="transcription">✍️ Lire (manuscrit)</button>
                         <select data-tx-lang title="Langue du texte"><option value="fra">Français</option><option value="lat">Latin</option><option value="fra+lat">Français + latin</option><option value="eng">Anglais</option><option value="deu">Allemand</option><option value="ita">Italien</option><option value="spa">Espagnol</option></select>
-                        <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers">🧭 Repérer</button><span class="spacer"></span>
-                        <details class="h-tx-more"><summary>⤓ Plus</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="txt">⤓ Texte (.txt)</button><button type="button" data-tx-cmd="print">🖨️ Imprimer (image + texte)</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button></div></details></div>
+                        <button type="button" data-tx-cmd="template" title="Un modèle d’acte à compléter">📋 Modèle</button><button type="button" data-tx-cmd="detect" title="Repérer les noms, dates, lieux et métiers" data-help="Cherche dans le texte les noms (avec leur rôle : parrain, témoin…), les dates (même en toutes lettres ou au calendrier républicain), les lieux et les métiers, pour les relier aux fiches.">🧭 Repérer</button><span class="spacer"></span>
+                        <details class="h-tx-more"><summary>⋯ Plus</summary><div><button type="button" data-tx-cmd="tomedia">↪ Mettre le texte dans le média</button><button type="button" data-tx-cmd="copy">📋 Copier le texte</button></div></details></div>
                     <div class="h-tx-chars">${SPECIAL.map(c => `<button type="button" data-tx-char="${esc(c)}" title="Insérer ${esc(c)}">${esc(c)}</button>`).join('')}</div>
                     <div class="h-tx-editor"><div class="h-tx-mirror" data-tx-mirror aria-hidden="true"></div><textarea data-tx-body spellcheck="false" placeholder="La transcription, ligne à ligne comme sur l’acte. Choisis un passage, puis dessine sa zone sur l’image (▭ Zone) : les deux restent liés.">${esc(t.body)}</textarea></div>
                     <div class="h-tx-found" data-tx-found></div>
@@ -162,8 +162,17 @@
             </div></div>`;
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'transcribe', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const $ = s => dlg.querySelector(s), area = $('[data-tx-body]'), mirror = $('[data-tx-mirror]'), svg = $('[data-tx-svg]'), world = $('[data-tx-world]'), img = $('[data-tx-img]'), stage = $('[data-tx-stage]');
-        const status = s => { $('[data-tx-status]').textContent = s || ''; };
+        const UI = window.LCNDA_UI || {}, STATES = {'modifié': 'dirty', '✓ Enregistré': 'saved', 'Enregistrement…': 'saving'};
+        const status = s => { const el = $('[data-tx-status]'); if (STATES[s] && UI.savedStatus) UI.savedStatus(el, STATES[s]); else el.textContent = s || ''; };
         const touch = () => { dirty = true; status('modifié'); };
+        // E4 : une image glissée (ou collée) sur l'acte entre dans les Médias et devient l'image de l'acte
+        UI.bindFileDrop?.(stage, async files => {
+            const f = files[0], fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'image'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', A().state.csrf);
+            try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': A().state.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
+                if (t.data.zones.length && !await A().confirmBox('Elles étaient posées pour l’ancienne image.', {title: 'Garder les zones déjà posées ?', okLabel: 'Garder les zones', cancelLabel: 'Les retirer', danger: false})) t.data.zones = [];
+                t.media_id = Number(j.result.media_id); t.filename = j.result.filename; touch(); await loadImage(); toast('L’image est dans les Médias et devient l’image de l’acte.');
+            } catch (e) { toast(`${f.name} : ${e.message}`, 'error'); }
+        }, {accept: 'image/*'});
         /* ─── l'image ─── */
         const applyView = () => { world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`); };
         const fit = () => { const r = stage.getBoundingClientRect(); if (!imgW) return; const rot = (t.data.view.rot || 0) % 180 !== 0, w = rot ? imgH : imgW, h = rot ? imgW : imgH; zoom = clamp(Math.min((r.width - 20) / w, (r.height - 20) / h), .02, 20); panX = (r.width - w * zoom) / 2; panY = (r.height - h * zoom) / 2; applyView(); };
@@ -321,7 +330,7 @@
             ['title', 'kind', 'date_text', 'place', 'source'].forEach(k => { t[k] = $(`[data-tx="${k}"]`).value; }); t.body = area.value;
             if (!t.title.trim()) { const subj = t.data.people.find(p => p.role === 'sujet' || p.role === 'défunt'); t.title = `${KINDS.find(k => k[0] === t.kind)?.[1] || 'Acte'}${subj ? ` de ${subj.name}` : ''}${t.date_text ? `, ${t.date_text}` : ''}`; $('[data-tx="title"]').value = t.title; }
             status('Enregistrement…');
-            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status('✓ Enregistré'); toast(toMedia ? 'Enregistré, et le texte est dans la transcription du média.' : 'Transcription enregistrée (Listes → Outils de modification → Transcription d’actes).'); ctx.onSaved?.(t.id); }
+            try { const r = await post('save_act_transcription', {id: t.id, title: t.title, kind: t.kind, media_id: t.media_id, date_text: t.date_text, place: t.place, source: t.source, body: t.body, data: t.data, to_media: toMedia ? 1 : 0}); t.id = r.result.id; dirty = false; status('✓ Enregistré'); if (toMedia) toast('Enregistré, et le texte est dans la transcription du média.'); ctx.onSaved?.(t.id); }
             catch (e) { status(''); toast(e.message, 'error'); }
         }
         function printIt() {
@@ -352,6 +361,14 @@
             if (k === 'txt') { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = `${(A().safeExportFilename ? A().safeExportFilename($('[data-tx="title"]').value || 'transcription', 'transcription') : 'transcription')}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); return; }
             if (k === 'copy') { navigator.clipboard?.writeText(area.value).then(() => toast('Texte copié.')).catch(() => toast('Copie impossible ici.', 'error')); return; }
             if (k === 'print') return printIt();
+            if (k === 'export') { // E3 : une seule fenêtre d'export
+                if (!UI.openExportDialog) return printIt();
+                const nm = $('[data-tx="title"]').value || 'transcription';
+                return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: `${area.value.trim().split(/\s+/).filter(Boolean).length} mots${t.filename ? ' · avec l’image de l’acte' : ''}`, formats: [
+                    {id: 'file', label: '📝 Texte', hint: 'le texte seul (.txt)', ext: 'txt', run: async o => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([area.value], {type: 'text/plain;charset=utf-8'})); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 3000); }},
+                    {id: 'pdf', hint: 'image + texte (« Enregistrer en PDF »)', ext: '', run: async () => printIt()},
+                    {id: 'print', hint: 'image + texte', run: async () => printIt()}]});
+            }
         });
         dlg.addEventListener('input', e => {
             const v = e.target.dataset.txView; if (v) { t.data.view[v] = e.target.type === 'checkbox' ? e.target.checked : Number(e.target.value); filter(); touch(); return; }

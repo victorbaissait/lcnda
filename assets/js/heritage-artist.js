@@ -102,7 +102,7 @@
         try { const d = await api('person', {id: pid}); person = d.person || d; await load(); } catch (e) { return toast(e.message, 'error'); }
         const dlg = document.createElement('dialog'); dlg.className = 'modal h-ar-dlg';
         dlg.innerHTML = `<div class="h-ar"><header class="h-ar-top"><div><span class="eyebrow">🎨 CATALOGUE DE L’ARTISTE</span><h2>${esc(A().personName ? A().personName(person) : `${person.first_name || ''} ${person.last_name || ''}`)}</h2></div>
-            <nav class="segmented h-ar-tabs" data-ar-tabs></nav><span class="spacer"></span><button type="button" class="button small secondary" data-ar-cmd="keys" title="Jeton Discogs, clé TMDb">🔑 Clés</button>${ext.fullButton ? ext.fullButton('artist') : ''}<button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer">×</button></header>
+            <nav class="segmented h-ar-tabs" data-ar-tabs></nav><span class="spacer"></span><button type="button" class="button small secondary" data-ar-cmd="keys" title="Jeton Discogs, clé TMDb" data-help="Facultatives : un jeton Discogs permet de chercher un disque par son nom, une clé TMDb donne les affiches des films. Elles restent dans ce navigateur.">🔑 Clés</button>${ext.fullButton ? ext.fullButton('artist') : ''}<button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer">×</button></header>
             <div class="h-ar-body" data-ar-body></div></div>`;
         document.body.appendChild(dlg); ext.fullInit?.(dlg, 'artist', true); dlg.showModal(); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         const body = dlg.querySelector('[data-ar-body]');
@@ -118,8 +118,8 @@
             const ql = q.toLowerCase(), list = sorted(current().filter(i => !ql || JSON.stringify(i.data).toLowerCase().includes(ql)), prefs.sort);
             const bar = `<div class="h-ar-bar"><input type="search" data-ar-q placeholder="Chercher (titre, label, lieu, paroles…)" value="${esc(q)}"><select data-ar-sort>${[['year', 'Par année'], ['recent', 'Plus récents d’abord'], ['title', 'Par titre'], ['perso', 'Mon ordre']].map(([k, l]) => `<option value="${k}" ${prefs.sort === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
                 ${tab === 'work' ? `<span class="segmented"><button type="button" class="${prefs.workView !== 'table' ? 'is-active' : ''}" data-ar-wv="cards">Vignettes</button><button type="button" class="${prefs.workView === 'table' ? 'is-active' : ''}" data-ar-wv="table">Inventaire</button></span>` : ''}
-                <span class="spacer"></span><button type="button" class="button small" data-ar-cmd="add">＋ Ajouter un${tab === 'work' ? 'e' : ''} ${KINDS[tab][2]}</button><button type="button" class="button small secondary" data-ar-cmd="import">📥 Importer</button>
-                <details class="h-hs-menu"><summary class="button small secondary">⤓ Exporter</summary><div><button type="button" data-ar-cmd="csv">Tableur (CSV)</button><button type="button" data-ar-cmd="print">🖨️ Imprimer${tab === 'work' ? ' l’inventaire illustré' : ''}</button><button type="button" data-ar-cmd="json">Sauvegarde (JSON)</button></div></details></div>`;
+                <span class="spacer"></span><button type="button" class="button small" data-ar-cmd="add">＋ Ajouter un${tab === 'work' ? 'e' : ''} ${KINDS[tab][2]}</button><button type="button" class="button small secondary" data-ar-cmd="import" data-help="Remplit le catalogue depuis Discogs, MusicBrainz, Apple Music, Open Library, Wikidata ou TMDb : tu choisis ce qui entre, rien n’est écrasé.">📥 Importer</button>
+                <button type="button" class="button small secondary" data-ar-cmd="export" title="Tableur (CSV), impression ou PDF, sauvegarde (JSON)">⤓ Exporter ▾</button></div>`;
             const move = it => prefs.sort === 'perso' ? `<span class="h-ar-move"><button type="button" class="icon-button" data-ar-up="${it.id}" title="Monter">↑</button><button type="button" class="icon-button" data-ar-down="${it.id}" title="Descendre">↓</button></span>` : '';
             let h;
             if (!list.length) h = q ? A().emptyState({icon: '🔎', text: 'Rien ne correspond', hint: 'Change les mots cherchés.'})
@@ -159,6 +159,7 @@
                 <h4>${tab === 'release' ? 'Photos du disque (pochette, verso, disque, livret…)' : tab === 'film' ? 'Affiche, photos' : tab === 'work' ? 'Photos de l’œuvre' : 'Couverture'}</h4>${photosHtml(d.photos)}
                 ${tab === 'release' ? `<h4>Titres <small class="muted" data-ar-tot></small></h4>${rowsHtml('tracks', d.tracks, COLS.tracks)}<h4>Crédits</h4>${rowsHtml('credits', d.credits, COLS.credits)}<h4>Éditions et pressages (comme sur Discogs)</h4>${rowsHtml('versions', d.versions, COLS.versions)}` : ''}</div>`;
             const tot = (d.tracks || []).reduce((a, t) => a + secs(t.dur), 0), tt = body.querySelector('[data-ar-tot]'); if (tt) tt.textContent = tot ? `durée totale ${hms(tot)}` : '';
+            const phz = body.querySelector('[data-ar-photos]'); if (phz) window.LCNDA_UI?.bindFileDrop?.(phz, files => addPhotoFiles(files), {accept: 'image/*'}); // E4
         }
         const sync = () => { // les champs du formulaire → draft
             if (!draft) return;
@@ -173,6 +174,8 @@
             try { const r = await post('save_artist_item', {person_id: pid, kind: tab, id: it.id || 0, data: draft}); changed = true; await load(); const fresh = items.find(i => i.id === r.id); draft = null; view = tab === 'release' && fresh ? {item: fresh, mode: 'read'} : null; paint(); toast('Enregistré.'); } catch (e) { toast(e.message, 'error'); }
         }
         async function addPhoto(ph) { sync(); draft.photos.push(ph); paint(); }
+        /** des photos de l'ordinateur (bouton, glisser-déposer ou ⌘V) : elles entrent dans les Médias, puis dans l'élément */
+        async function addPhotoFiles(files) { for (const f of files.slice(0, 12)) { try { const r = await post('artist_upload_image', {person_id: pid, title: `${draft.title || KINDS[tab][2]} — ${f.name}`, data: await fileToData(f)}); await addPhoto({m: r.id, f: r.filename, k: draft.photos.length ? 'autre' : 'recto'}); } catch (er) { toast(er.message, 'error'); } } }
         dlg.addEventListener('input', e => { if (e.target.matches('[data-ar-q]')) { q = e.target.value; const pos = e.target.selectionStart; paint(); const i = body.querySelector('[data-ar-q]'); i.focus(); i.setSelectionRange(pos, pos); } });
         dlg.addEventListener('change', e => {
             if (e.target.matches('[data-ar-sort]')) { prefs.sort = e.target.value; writeJ(PREFS, prefs); paint(); }
@@ -203,12 +206,21 @@
             if (c === 'add') return startEdit({id: 0, data: {title: '', ...(tab === 'book' ? {role: 'auteur', bkind: 'livre', authors: A().personName?.(person) || ''} : tab === 'work' ? {status: 'famille', inv: nextInv()} : tab === 'release' ? {rtype: 'album', artist: A().personName?.(person) || ''} : {fkind: 'long'})}});
             if (c === 'save') return saveDraft();
             if (c === 'del') { if (!await A().confirmBox('', {title: 'Supprimer cet élément du catalogue ?', okLabel: 'Supprimer l’élément'})) return; try { await post('delete_artist_item', {person_id: pid, id: view.item.id}); changed = true; await load(); view = null; draft = null; paint(); } catch (er) { toast(er.message, 'error'); } return; }
-            if (c === 'phfile') { const inp = Object.assign(document.createElement('input'), {type: 'file', accept: 'image/*', multiple: true}); inp.onchange = async () => { for (const f of [...inp.files].slice(0, 12)) { try { const r = await post('artist_upload_image', {person_id: pid, title: `${draft.title || KINDS[tab][2]} — ${f.name}`, data: await fileToData(f)}); await addPhoto({m: r.id, f: r.filename, k: draft.photos.length ? 'autre' : 'recto'}); } catch (er) { toast(er.message, 'error'); } } }; inp.click(); return; }
+            if (c === 'phfile') { const inp = Object.assign(document.createElement('input'), {type: 'file', accept: 'image/*', multiple: true}); inp.onchange = () => addPhotoFiles([...inp.files]); inp.click(); return; }
             if (c === 'phurl') { const u = await A().askText({title: 'Une image depuis une adresse', message: 'Adresse https d’une image de Discogs, MusicBrainz (Cover Art Archive), Open Library, Wikimedia Commons, TMDb ou Apple.', value: '', okLabel: 'Rapatrier'}); if (!u) return; try { const r = await post('artist_fetch_image', {person_id: pid, url: u.trim(), title: draft.title || ''}); await addPhoto({m: r.id, f: r.filename, k: draft.photos.length ? 'autre' : 'recto'}); } catch (er) { toast(er.message, 'error'); } return; }
             if (c === 'phmedia') { const m = await pickMedia(); if (m) await addPhoto({m: m.id, f: m.filename, k: draft.photos.length ? 'autre' : 'recto'}); return; }
             if (c === 'import') return openImport();
             if (c === 'keys') return editKeys();
             if (c === 'csv' || c === 'json' || c === 'print') return exportKind(c);
+            if (c === 'export') { // E3 : une seule fenêtre d'export
+                const UI = window.LCNDA_UI || {}; if (!UI.openExportDialog) return exportKind('print');
+                const nm = `${A().personName?.(person) || 'artiste'} — ${KINDS[tab][1]}`;
+                return UI.openExportDialog({title: nm, defaultName: nm, quality: false, info: A().plural(current().length, 'élément'), formats: [
+                    {id: 'csv', label: '📊 Tableur', hint: 'CSV (Excel, Numbers, LibreOffice)', ext: 'csv', run: async o => exportKind('csv', o.filename)},
+                    {id: 'pdf', hint: tab === 'work' ? 'l’inventaire illustré (« Enregistrer en PDF »)' : 'la liste illustrée (« Enregistrer en PDF »)', ext: '', run: async () => exportKind('print')},
+                    {id: 'print', hint: tab === 'work' ? 'l’inventaire illustré' : 'la liste illustrée', run: async () => exportKind('print')},
+                    {id: 'file', label: '💾 Sauvegarde', hint: 'JSON, pour une autre base', ext: 'json', run: async o => exportKind('json', o.filename)}]});
+            }
         });
         const nextInv = () => { const nums = items.filter(i => i.kind === 'work').map(i => Number(String(i.data.inv || '').match(/(\d+)\s*$/)?.[1] || 0)); const n = (nums.length ? Math.max(...nums) : 0) + 1, pre = (items.find(i => i.kind === 'work' && /\d+\s*$/.test(i.data.inv || ''))?.data.inv || '').replace(/\d+\s*$/, ''); return `${pre}${String(n).padStart(3, '0')}`; };
         // une image des médias : le même choix d'image que partout (heritage.js pickImage : vignettes, recherche au style du menu)
@@ -220,13 +232,13 @@
                 <label>Clé TMDb (filmographies avec affiches)<input name="tmdb" value="${esc(k.tmdb || '')}" autocomplete="off" placeholder="themoviedb.org → Paramètres → API (clé v3, 32 caractères)"></label>`,
                 onSubmit: f => { writeJ(KEYS, {discogs: f.elements.discogs.value.trim(), tmdb: f.elements.tmdb.value.trim()}); toast('Clés enregistrées.'); }});
         }
-        function exportKind(how) {
+        function exportKind(how, filename = '') {
             const list = sorted(current(), prefs.sort), name = `${A().safeExportFilename ? A().safeExportFilename(A().personName?.(person) || 'artiste', 'artiste') : 'artiste'}-${tab}`;
             const cols = FIELDS[tab].map(f => f[0]), dl = (blob, fn) => { const a = Object.assign(document.createElement('a'), {href: URL.createObjectURL(blob), download: fn}); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); };
-            if (how === 'json') return dl(new Blob([JSON.stringify({kind: tab, items: list.map(i => i.data)}, null, 1)], {type: 'application/json'}), `${name}.json`);
+            if (how === 'json') return dl(new Blob([JSON.stringify({kind: tab, items: list.map(i => i.data)}, null, 1)], {type: 'application/json'}), filename || `${name}.json`);
             if (how === 'csv') { const q2 = v => `"${String(v ?? '').replace(/^([=+\-@\t\r])/, "'$1").replace(/"/g, '""')}"`, sel = (list, k) => (list.find(x => x[0] === k) || [])[3]; const head = FIELDS[tab].map(f => f[1]).concat(tab === 'release' ? ['Titres'] : []);
                 const rows = list.map(i => cols.map(k => { const opt = sel(FIELDS[tab], k); return opt ? label(opt, i.data[k]) : i.data[k]; }).concat(tab === 'release' ? [(i.data.tracks || []).map(t => `${t.pos || ''} ${t.title}${t.dur ? ` (${t.dur})` : ''}`).join(' | ')] : []));
-                return dl(new Blob(['﻿' + [head, ...rows].map(r => r.map(q2).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}), `${name}.csv`); }
+                return dl(new Blob(['﻿' + [head, ...rows].map(r => r.map(q2).join(';')).join('\r\n')], {type: 'text/csv;charset=utf-8'}), filename || `${name}.csv`); }
             const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée.', 'error');
             const abs = s => s ? new URL(s, location.href).href : '';
             const rowsH = list.map(i => `<tr><td>${photoSrc((i.data.photos || [])[0]) ? `<img src="${esc(abs(photoSrc(i.data.photos[0])))}">` : ''}</td><td>${tab === 'work' ? `<b>${esc(i.data.inv || '')}</b>` : esc(i.year || '')}</td><td><b>${esc(i.title)}</b>${FIELDS[tab].filter(f => !['title', 'inv', 'note', 'notes', 'synopsis', 'cast'].includes(f[0]) && i.data[f[0]]).map(f => `<br><small>${esc(f[1])} : ${esc(f[3] ? label(f[3], i.data[f[0]]) : i.data[f[0]])}</small>`).join('')}${tab === 'release' && (i.data.tracks || []).length ? `<ol>${i.data.tracks.map(t => `<li>${esc(t.title)}${t.dur ? ` <small>${esc(t.dur)}</small>` : ''}</li>`).join('')}</ol>` : ''}</td></tr>`).join('');

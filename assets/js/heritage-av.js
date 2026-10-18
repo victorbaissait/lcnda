@@ -134,12 +134,12 @@
             <div class="av-media"></div>
             <div class="av-controls">
                 <button type="button" class="button small secondary" data-av="prev" title="${word} précédent(e)">⏮</button>
-                <button type="button" class="button small secondary" data-av="back" title="Reculer de ${fmtSkip(skip)} (réglable dans Maintenance › Apparence)">−${fmtSkip(skip)}</button>
+                <button type="button" class="button small secondary" data-av="back" title="Reculer de ${fmtSkip(skip)} (réglable dans Maintenance › Apparence)" data-help="Recule (ou avance avec le bouton d’à côté) de quelques secondes : la durée se règle dans Maintenance → Apparence.">−${fmtSkip(skip)}</button>
                 <button type="button" class="button small av-toggle" data-av="toggle" title="Lecture / pause">▶</button>
                 <button type="button" class="button small secondary" data-av="fwd" title="Avancer de ${fmtSkip(skip)} (réglable dans Maintenance › Apparence)">+${fmtSkip(skip)}</button>
                 <button type="button" class="button small secondary" data-av="next" title="${word} suivant(e)">⏭</button>
                 <span class="av-rate">Vitesse <select class="av-rate-select" aria-label="Vitesse">${rateOptions(p.rate)}</select><input type="range" class="av-rate-range" min="${RATE_MIN}" max="${RATE_MAX}" step="0.05" value="${p.rate}" aria-label="Vitesse (curseur)" title="Glisser : de ${fmtRate(RATE_MIN)} à ${fmtRate(RATE_MAX)} · double-clic : 1×"><output class="av-rate-out">${fmtRate(p.rate)}</output><button type="button" class="button small secondary av-rate-reset" title="Remettre la vitesse normale (1×)"${p.rate === 1 ? ' disabled' : ''}>↺ 1×</button></span>
-                <label class="av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}> Enchaîner ${opts.chainLabel || (kind === 'audio' ? 'les sons' : 'les vidéos')}</label>
+                <label class="av-auto"><input type="checkbox" class="av-auto-box"${p.auto ? ' checked' : ''}> Enchaîner ${opts.chainLabel || (kind === 'audio' ? 'les sons' : 'les vidéos')}<span data-help="À la fin d’un${kind === 'audio' ? ' son, le suivant' : 'e vidéo, la suivante'} de la liste démarre tout${kind === 'audio' ? ' seul' : 'e seule'}, dans l’ordre du tri choisi."></span></label>
                 <button type="button" class="button small secondary" data-av="size" title="Agrandir / réduire la vidéo" hidden>⤢</button>
                 <button type="button" class="button small ghost" data-av="close" title="Fermer le lecteur">✕</button>
             </div>
@@ -237,13 +237,23 @@
             ${items.length ? `<div class="collection-toolbar av-toolbar">
                 <input type="search" id="av-q" value="${esc(p.q)}" placeholder="Chercher un titre, une fiche, une battue…">
                 <label>Trier <select id="av-sort">${SORTS.map(([v, l]) => `<option value="${v}"${p.sort === v ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <label>Rattaché à <select id="av-owner"><option value="">Tout</option>${presentGroups.map(g => `<option value="${g[0]}"${p.owner === g[0] ? ' selected' : ''}>${esc(g[1])}</option>`).join('')}${unlinked ? `<option value="none"${p.owner === 'none' ? ' selected' : ''}>Rattaché à rien</option>` : ''}</select></label>
+                <label>Rattaché à <select id="av-owner"><option value="">Tout</option>${presentGroups.map(g => `<option value="${g[0]}"${p.owner === g[0] ? ' selected' : ''}>${esc(g[1])}</option>`).join('')}${unlinked ? `<option value="none"${p.owner === 'none' ? ' selected' : ''}>Rattaché à rien</option>` : ''}</select><span data-help="Montre seulement ce qui est rattaché à une sorte de fiche (personne, battue, enquête…), ou à rien du tout."></span></label>
                 <span class="av-count muted" id="av-count"></span>
             </div>
             <div class="data-table-wrap"><table class="data-table av-table"><thead><tr><th class="av-play-col"></th><th>Titre</th><th>Durée</th><th>Rattaché à</th><th>Date</th><th>Ajouté le</th><th>Taille</th><th>Format</th><th class="av-edit-col"></th></tr></thead><tbody id="av-body"></tbody></table></div>
             <div id="av-player-host"></div>` : A().empty(`Aucun${kind === 'video' ? 'e vidéo' : ' son'} : ajoute un fichier ${kind === 'video' ? 'MP4, MOV ou WEBM' : 'MP3, M4A, WAV, AIFF ou OGG'} sur une fiche, une battue, une enquête… et ${kind === 'video' ? 'elle' : 'il'} apparaîtra ici.`)}
         </section>`;
         const reloadAv = () => { if (st.module === 'listes') ext.lists?.[kind === 'video' ? 'videos' : 'audios']?.(++st.workspaceToken); };
+        // E4 : un son (ou une vidéo) glissé ou collé sur la liste entre dans les Médias, sans fiche
+        window.LCNDA_UI?.bindFileDrop?.(ws.querySelector('.av-page'), async files => {
+            let n = 0;
+            for (const f of files.slice(0, 20)) {
+                const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', kind); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', st.csrf);
+                try { const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': st.csrf}}), j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible'); n++; }
+                catch (e) { A().toast(`${f.name} : ${e.message}`, 'error'); }
+            }
+            if (n) { A().toast(`${A().plural(n, kind === 'video' ? 'vidéo ajoutée' : 'son ajouté', kind === 'video' ? 'vidéos ajoutées' : 'sons ajoutés')} aux Médias (sans fiche pour l’instant).`); reloadAv(); }
+        }, {accept: kind === 'video' ? 'video/*' : 'audio/*'});
         ws.querySelector('[data-av-projnew]')?.addEventListener('click', () => ext.newAudioProject?.(reloadAv));
         ws.querySelector('[data-av-projects]')?.addEventListener('click', () => ext.openAudioProjects?.(reloadAv));
         ws.querySelector('[data-av-montage]')?.addEventListener('click', () => ext.openMontage?.(kind, () => { if (st.module === 'listes') ext.lists?.[kind === 'video' ? 'videos' : 'audios']?.(++st.workspaceToken); }));

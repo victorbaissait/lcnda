@@ -13,6 +13,21 @@
     'use strict';
     const A = () => window.LCNDA_APP;
     const ext = window.LCNDA_EXT = window.LCNDA_EXT || {};
+    const UIx = () => window.LCNDA_UI || {};
+    /* la barre du haut commune (E1) des éditeurs son et montage : quelques règles à elle, en clair et en sombre */
+    (() => { if (document.getElementById('h-avx-css2')) return; const st = document.createElement('style'); st.id = 'h-avx-css2'; st.textContent = `
+.h-avx .modal-head.h-avx-bar{align-items:center;flex-wrap:wrap;gap:6px 12px}
+.h-avx-titlebox{display:flex;align-items:center;gap:8px;min-width:0}
+.h-avx-namebox{display:grid;min-width:0}.h-avx-namebox .eyebrow{line-height:1.1}
+.h-avx-name{font-weight:800;font-size:17px;border:1.5px solid transparent;padding:2px 6px;background:transparent;color:inherit;width:300px;max-width:42vw;min-height:0;box-shadow:none}
+.h-avx-name:hover,.h-avx-name:focus{border-color:currentColor;outline:0}
+.h-avx-bar .h-avx-headbtns{margin-left:auto;flex-wrap:wrap}
+.h-avx-bar .ui-topbar-hist{display:inline-flex;gap:4px}
+.h-avx-help2{margin-top:-4px}
+.h-avx-montage .h-avx-name{width:220px}
+.h-avx-montage>.modal-head.h-avx-bar .h-avx-headbtns .button{width:auto;height:auto;min-height:30px;padding:4px 10px;font-size:12.5px}
+.h-avx-wave.is-drag-over,.h-mt-top.is-drag-over{outline:3px dashed #2a7de1;outline-offset:-4px}
+@media (max-width:700px){.h-avx-name{width:160px}}`; document.head.appendChild(st); })();
     const esc = v => A().escapeHtml(v ?? '');
     const toast = (...a) => A().toast(...a);
     const S = () => A().state;
@@ -28,10 +43,14 @@
     const audioCtx = () => (AC && AC.state !== 'closed') ? AC : (AC = new (window.AudioContext || window.webkitAudioContext)());
 
     /** Grande fenêtre de travail (fermée par ✕ ou Échap, avec une question s'il reste des changements). */
-    function bigDialog({eyebrow, title, body, onClose, id = ''}) {
+    /** bar (facultatif) : la barre du haut des éditeurs (E1) — {icon, undo (HTML des ↶ ↷), exportAttrs, saveAttrs, saveTitle} :
+     *  icône · nom tapable (data-avx-name) · menus · ↶ ↷ · « ✓ Enregistré » · ⚙️ Personnaliser · ⤓ Exporter ▾ · 💾 Enregistrer · ⛶ · × */
+    function bigDialog({eyebrow, title, body, onClose, id = '', bar = null}) {
         const dl = document.createElement('dialog');
         dl.className = 'modal h-modal h-modal-wide h-avx';
-        dl.innerHTML = `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><span class="h-avx-headbtns">${id && ext.fullButton ? ext.fullButton(id) : ''}<button type="button" class="icon-button" data-avx-close aria-label="Fermer">×</button></span></div><div class="h-avx-body">${body}</div>`;
+        dl.innerHTML = bar ? `<div class="modal-head h-avx-bar"><div class="h-avx-titlebox">${bar.icon ? `<span class="ui-topbar-icon" aria-hidden="true">${esc(bar.icon)}</span>` : ''}<span class="h-avx-namebox"><span class="eyebrow">${esc(eyebrow)}</span><input class="h-avx-name" data-avx-name value="${esc(title)}" maxlength="160" aria-label="Nom du projet" title="Le nom du projet (pour le retrouver dans 📂 Projets…)"></span>${bar.undo || ''}</div>
+                <span class="h-avx-headbtns"><span class="ui-status" data-ui-status></span>${id && ext.tbButton ? ext.tbButton(id) : ''}${bar.exportAttrs ? `<button type="button" class="button small secondary" ${bar.exportAttrs} title="Exporter un fichier (et, si tu veux, une copie dans les médias)">⤓ Exporter ▾</button>` : ''}${bar.saveAttrs ? `<button type="button" class="button small" ${bar.saveAttrs} data-shortcut="⌘S" title="${esc(bar.saveTitle || 'Enregistrer')}">💾 Enregistrer</button>` : ''}${id && ext.fullButton ? ext.fullButton(id) : ''}<button type="button" class="icon-button" data-avx-close aria-label="Fermer" title="Fermer">×</button></span></div><div class="h-avx-body">${body}</div>`
+            : `<div class="modal-head"><div><span class="eyebrow">${esc(eyebrow)}</span><h2>${esc(title)}</h2></div><span class="h-avx-headbtns">${id && ext.fullButton ? ext.fullButton(id) : ''}<button type="button" class="icon-button" data-avx-close aria-label="Fermer">×</button></span></div><div class="h-avx-body">${body}</div>`;
         if (id) ext.fullInit?.(dl, id);
         document.body.appendChild(dl);
         if (id) ext.editorKeysAttach?.(dl, id === 'video' ? 'montage' : id); // ⌨️ raccourcis à soi
@@ -310,39 +329,53 @@
             ['denoise', '🧹 Réduire le souffle', 'any'], ['clarity', '🗣️ Voix plus nette', 'any'], ['hum', '〰️ Enlever le bourdonnement', 'any'], ['silences', '⏩ Raccourcir les longs blancs', 'all'], ['mono', '🎧 Mono', 'all'],
             ['insert', '➕ Ajouter un son…', 'all'],
         ];
-        const dl = bigDialog({eyebrow: 'MODIFIER LE SON', id: 'audio', title: media.title || media.filename, onClose: async () => { stop(); return !dirty || await A().confirmBox('Les modifications du son seront perdues.', {title: 'Fermer sans enregistrer les modifications ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
+        const dl = bigDialog({eyebrow: 'MODIFIER LE SON', id: 'audio', title: projName || media.title || media.filename,
+            bar: {icon: '🎧', undo: '<span class="ui-topbar-hist"><button type="button" class="icon-button small" data-avx-undo disabled data-shortcut="⌘Z" title="Annuler">↶</button><button type="button" class="icon-button small" data-avx-redo disabled data-shortcut="⇧⌘Z" title="Rétablir">↷</button></span>', exportAttrs: 'data-au-export', saveAttrs: 'data-au-saveproj', saveTitle: 'Enregistrer le projet son, pour y revenir plus tard (⌘S)'}, onClose: async () => { stop(); return !dirty || await A().confirmBox('Les modifications du son seront perdues.', {title: 'Fermer sans enregistrer les modifications ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
             body: `<div class="h-avx-top"><span class="h-avx-time"><b data-avx-cur>0:00.0</b> / <span data-avx-total></span></span><span class="h-avx-sel muted" data-avx-seltxt></span>
                     <span class="h-avx-zoom" data-tbg="au-zoom" data-tbg-label="Zoom"><button type="button" class="button small secondary" data-avx-zoom="fit" title="Tout voir">⤢ Tout</button><button type="button" class="button small secondary" data-avx-zoom="sel" title="Zoomer sur la sélection">🔍 Sélection</button><button type="button" class="button small secondary" data-avx-zoom="out">−</button><button type="button" class="button small secondary" data-avx-zoom="in">+</button></span></div>
                 <div class="h-avx-wave"><canvas data-avx-canvas></canvas></div>
-                <input type="range" class="h-avx-scroll" data-avx-scroll min="0" max="1000" value="0" aria-label="Défiler">
+                <input type="range" class="h-avx-scroll" data-avx-scroll min="0" max="1000" value="0" aria-label="Défiler" data-ui-done="other-scale">
                 <div class="h-avx-transport" data-tbg="au-transport" data-tbg-label="Lecture"><button type="button" class="button" data-avx-play data-shortcut="Espace">▶ Écouter</button><button type="button" class="button small secondary" data-avx-home title="Au début">⏮</button>
-                    <button type="button" class="button small secondary" data-avx-undo disabled data-shortcut="⌘Z">↶ Annuler</button><button type="button" class="button small secondary" data-avx-redo disabled data-shortcut="⇧⌘Z">↷ Rétablir</button>
-                    <span class="muted h-avx-tip" data-tb-label="Aide (glisser, Espace, molette)">Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom</span>${ext.tbButton ? ext.tbButton('audio') : ''}</div>
+                    <span class="muted h-avx-tip" data-tb-label="Aide (glisser, Espace, molette)">Glisse sur l’onde pour sélectionner · clic = se placer · Espace = écouter · molette = défiler, Ctrl + molette = zoom</span></div>
                 <div class="h-avx-ops" data-tbg="au-ops" data-tbg-label="Outils du son">${OPS.map(([k, label, need]) => `<button type="button" class="button small secondary" data-avx-op="${k}" data-need="${need}"${k === 'cut' ? ' data-shortcut="⌫"' : ''}>${label}</button>`).join('')}</div>
-                <p class="muted h-avx-help" data-avx-help>Les réglages s’appliquent à la sélection ; sans sélection, à tout le son.</p>
+                <p class="muted h-avx-help" data-avx-help>Les réglages s’appliquent à la sélection ; sans sélection, à tout le son.</p><p class="muted h-avx-help2"><span data-help="« Réduire le souffle » : choisis d’abord un passage où l’on n’entend que le bruit, il sert d’exemple. « Voix plus nette » rend la parole plus claire. « Normaliser » monte le volume au plus fort sans saturer." data-help-faq="modifier un son">Que fait chaque outil ?</span></p>
                 ${ver.html}
-                <div class="modal-actions"><button type="button" class="button small secondary" data-au-projects title="Rouvrir un son en cours de travail">📂 Projets…</button><button type="button" class="button small secondary" data-au-saveproj title="Garde le son en cours de travail pour y revenir plus tard (⌘S)" data-shortcut="⌘S">💾 Enregistrer le projet</button><span class="h-mt-projname" data-au-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Le son fini : nouvelle version, copie, nouveau son ou fichier téléchargé">💾 Enregistrer…</button></div>`});
+                <div class="modal-actions"><button type="button" class="button small secondary" data-au-projects title="Rouvrir un son en cours de travail">📂 Projets…</button><span class="h-mt-projname" data-au-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Le son fini : nouvelle version (l’original est gardé), copie, nouveau son ou fichier téléchargé">📥 Garder dans les médias…</button></div>`});
         ext.tbApply?.(dl, 'audio');
         const $ = s => dl.querySelector(s), cv = $('[data-avx-canvas]'), g = cv.getContext('2d');
         bindVersions(dl, media, 'audio', () => { dirty = false; dl.close(); onDone?.(); });
         // 💾 Projet audio : le son en cours (FLAC, sans perte) gardé à part pour y revenir ; « Enregistrer… » reste pour le son fini
-        const showProj = () => { const el = $('[data-au-projname]'); if (el) el.textContent = projId ? `🎧 ${projName}${dirty ? ' · modifié' : ''}` : ''; };
+        const showProj = () => { const el = $('[data-au-projname]'); if (el) el.textContent = projId ? `🎧 ${projName}` : ''; UIx().savedStatus?.(dl, dirty ? 'dirty' : projId ? 'saved' : ''); };
         let projBusy = false;
         async function saveProject(asNew = false) {
             if (projBusy) return; stop();
-            let name = projName;
-            if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet son', message: 'Nom du projet (pour le retrouver dans « 📂 Projets… » ou Listes → Outils de modification) :', value: projName || media.title || 'Mon son', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
-            projBusy = true; const btn = $('[data-au-saveproj]'), l0 = btn.textContent; btn.disabled = true;
+            let name = ($('[data-avx-name]')?.value || '').trim().slice(0, 160) || projName;
+            if (asNew || !name) { const n = await A().askText({title: 'Enregistrer le projet son', message: 'Nom du projet (pour le retrouver dans « 📂 Projets… » ou Listes → Outils de modification) :', value: name || media.title || 'Mon son', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
+            projBusy = true; const btn = $('[data-au-saveproj]'), l0 = btn.textContent; btn.disabled = true; UIx().savedStatus?.(dl, 'saving');
             try {
                 const blob = await encodeFlac(buf, x => { btn.textContent = `Préparation… ${Math.round(x * 100)} %`; }); btn.textContent = `Envoi (${(blob.size / 1048576).toFixed(1)} Mo)…`;
                 const fd = new FormData(); fd.append('file', blob, 'projet.flac'); fd.append('id', String(asNew ? 0 : projId)); fd.append('name', name); fd.append('media_id', String(media.id || 0)); fd.append('source', proj?.source || media.filename || ''); fd.append('duration', String(buf.duration)); fd.append('csrf', S().csrf);
                 const r = await fetch('api.php?action=save_audio_project', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({error: 'Réponse illisible du serveur'}));
                 if (!r.ok || j.error) throw new Error(j.error || 'Enregistrement impossible.');
-                projId = j.result.id; projName = j.result.name; dirty = false; showProj(); toast(`Projet « ${projName} » enregistré : tu peux y revenir quand tu veux.`);
-            } catch (err) { toast(err.message, 'error'); }
+                projId = j.result.id; projName = j.result.name; dirty = false; const ni = $('[data-avx-name]'); if (ni) ni.value = projName; showProj();
+            } catch (err) { UIx().savedStatus?.(dl, 'error'); toast(err.message, 'error'); }
             finally { projBusy = false; btn.disabled = false; btn.textContent = l0; }
         }
         $('[data-au-saveproj]').addEventListener('click', () => saveProject());
+        // ⤓ Exporter : un fichier son (E3, la fenêtre commune), et si on veut une copie dans les médias
+        $('[data-au-export]').addEventListener('click', async () => {
+            stop(); if (!UIx().openExportDialog) return $('[data-avx-save]').click();
+            const mb = bps => Math.max(1, Math.round(buf.duration * bps / 1048576)), pcm = buf.sampleRate * buf.numberOfChannels * 2, nm = ($('[data-avx-name]')?.value || media.title || 'son').trim();
+            const enc = async (f, onStep) => f === 'ogg' ? encodeOpus(buf, onStep) : f === 'mp3' ? encodeMp3(buf, 128, onStep) : f === 'flac' ? encodeFlac(buf, onStep) : f === 'aiff' ? encodeAiff(buf) : encodeWav(buf);
+            const run = f => async o => { const go = document.querySelector('dialog.ui-export[open] [data-ui-go]'); const blob = await enc(f, x => { if (go) go.textContent = `Compression… ${Math.round(x * 100)} %`; });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+                if (o.saveCopy && f !== 'aiff') { await uploadResult(media, blob, f, {mode: 'copy', duration: buf.duration, title: `${nm} (${f.toUpperCase()})`}); toast('Fichier téléchargé, et une copie est rangée dans les médias.'); onDone?.(); } };
+            const formats = [{id: 'mp3', label: '🎵 MP3', hint: `lu partout · ~${mb(16000)} Mo`, ext: 'mp3', run: run('mp3')}, {id: 'wav', label: '🎚 WAV', hint: `sans perte · ~${mb(pcm)} Mo`, ext: 'wav', run: run('wav')}, {id: 'flac', label: '🗜 FLAC', hint: `sans perte, léger · ~${mb(pcm * .55)} Mo`, ext: 'flac', run: run('flac')}];
+            if (await opusSupported()) formats.push({id: 'ogg', label: '🗣 Ogg Opus', hint: `le plus léger · ~${mb(buf.numberOfChannels > 1 ? 16000 : 9000)} Mo`, ext: 'ogg', run: run('ogg')});
+            formats.push({id: 'aiff', label: '🍎 AIFF', hint: 'GarageBand, Logic', ext: 'aiff', run: run('aiff')}, {id: 'base', label: '📥 Dans les médias…', hint: 'nouvelle version, copie (réglages)', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
+            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, info: `${fmt(buf.duration, false)} · ${buf.numberOfChannels > 1 ? 'stéréo' : 'mono'} · ${(buf.sampleRate / 1000).toLocaleString('fr-FR')} kHz${media.id ? ' · la copie est rattachée aux mêmes fiches' : ''}`, formats});
+        });
+        $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProj(); });
         $('[data-au-projects]').addEventListener('click', () => audioProjectsDialog({current: projId, onOpen: async p => { if (dirty && !await A().confirmBox('Les modifications du son seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer ce son ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await ext.openAudioProject(p.id, onDone); }}));
         dl.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } });
         setTimeout(showProj, 0);
@@ -410,8 +443,8 @@
         dl.addEventListener('keydown', e => { if (e.target.closest('input, textarea, select')) return; if (e.key === ' ') { e.preventDefault(); $('[data-avx-play]').click(); }
             if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); (e.shiftKey ? $('[data-avx-redo]') : $('[data-avx-undo]')).click(); }
             if ((e.key === 'Delete' || e.key === 'Backspace') && sel) { e.preventDefault(); op('cut'); } });
-        $('[data-avx-undo]').addEventListener('click', () => { const h = history.pop(); if (!h) return; stop(); future.push({buf, sel, cursor}); ({buf, sel, cursor} = h); dirty = true; view = {start: 0, dur: buf.duration}; buildPeaks(); draw(); });
-        $('[data-avx-redo]').addEventListener('click', () => { const h = future.pop(); if (!h) return; stop(); history.push({buf, sel, cursor}); ({buf, sel, cursor} = h); view = {start: 0, dur: buf.duration}; buildPeaks(); draw(); });
+        $('[data-avx-undo]').addEventListener('click', () => { const h = history.pop(); if (!h) return; stop(); future.push({buf, sel, cursor}); ({buf, sel, cursor} = h); dirty = true; view = {start: 0, dur: buf.duration}; buildPeaks(); draw(); showProj(); });
+        $('[data-avx-redo]').addEventListener('click', () => { const h = future.pop(); if (!h) return; stop(); history.push({buf, sel, cursor}); ({buf, sel, cursor} = h); dirty = true; view = {start: 0, dur: buf.duration}; buildPeaks(); draw(); showProj(); });
         // opérations
         const range = () => { const sr = buf.sampleRate; return sel ? [Math.floor(sel.a * sr), Math.ceil(sel.b * sr)] : [0, buf.length]; };
         /** Applique fn (async, sur un morceau) à la sélection ou à tout, et recolle. */
@@ -459,6 +492,17 @@
             finally { busy.forEach(b => { b.disabled = false; }); help.textContent = 'Les réglages s’appliquent à la sélection ; sans sélection, à tout le son.'; draw(); }
         }
         dl.querySelectorAll('[data-avx-op]').forEach(b => b.addEventListener('click', () => op(b.dataset.avxOp)));
+        // E4 : un son glissé (ou collé) sur l'onde entre dans les Médias, puis s'ajoute à la fin (il est sélectionné)
+        UIx().bindFileDrop?.($('.h-avx-wave'), async files => {
+            const f = files[0]; stop();
+            try {
+                const fd = new FormData(); fd.append('file', f, f.name); fd.append('kind', 'audio'); fd.append('title', f.name.replace(/\.[^.]+$/, '')); fd.append('csrf', S().csrf);
+                const r = await fetch('api.php?action=retouch_media', {method: 'POST', body: fd, headers: {'X-CSRF-Token': S().csrf}}); const j = await r.json().catch(() => ({})); if (!r.ok || j.error) throw new Error(j.error || 'envoi impossible');
+                const ob = await resample(await ctx.decodeAudioData(await f.arrayBuffer()), buf.sampleRate, buf.numberOfChannels), at = buf.length;
+                setBuf(concatBufs([buf, ob], buf.numberOfChannels, buf.sampleRate)); sel = {a: at / buf.sampleRate, b: buf.duration}; draw();
+                toast(`« ${f.name} » est dans les Médias et ajouté à la fin (il est sélectionné).`);
+            } catch (err) { toast(`${f.name} : ${err.message}`, 'error'); }
+        }, {accept: 'audio/*'});
         // enregistrer
         $('[data-avx-save]').addEventListener('click', async () => {
             stop();
@@ -880,7 +924,8 @@
         const undetach = a => { if (!a?.detached) return; [...P.v1, ...P.v2].forEach(v => { if (v.detached === a.id) { v.mute = false; delete v.detached; } }); };
         const ver = await versionsHtml(media);
         const MP = montagePrefs();
-        const dl = bigDialog({eyebrow: '🎬 MONTAGE VIDÉO', id: 'video', title: media.title || media.filename || 'Nouveau montage', onClose: async () => { eng?.pause(); return !dirty || await A().confirmBox('💾 Enregistrer le projet le garde pour plus tard.', {title: 'Fermer sans enregistrer le projet ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
+        const dl = bigDialog({eyebrow: 'MONTAGE VIDÉO', id: 'video', title: projName || media.title || media.filename || 'Nouveau montage',
+            bar: {icon: '🎬', undo: '<span class="ui-topbar-hist"><button type="button" class="icon-button small" data-mt-cmd="undo" data-mt-op="undo" title="Annuler (⌘Z)" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="icon-button small" data-mt-cmd="redo" data-mt-op="redo" title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z" disabled>↷</button></span>', exportAttrs: 'data-mt-export', saveAttrs: 'data-mt-saveproj', saveTitle: 'Enregistrer le projet de montage, pour le rouvrir et continuer plus tard (⌘S)'}, onClose: async () => { eng?.pause(); return !dirty || await A().confirmBox('💾 Enregistrer le projet le garde pour plus tard.', {title: 'Fermer sans enregistrer le projet ?', okLabel: 'Fermer sans enregistrer', danger: true}); },
             body: `<div class="h-mt">
                 <div class="h-mt-top">
                     <div class="h-mt-stage"><canvas data-mt-canvas width="1280" height="720"></canvas><p class="h-mt-empty" data-mt-empty hidden>Importe tes vidéos et photos dans l’onglet 🎞️ Rush, puis glisse-les sur la frise (ou « ➕ Vidéo / photo à la suite »).</p></div>
@@ -894,9 +939,8 @@
                     </aside>
                 </div>
                 <div class="h-mt-transport" data-tbg="mt-transport" data-tbg-label="Lecture"><button type="button" class="button" data-mt-play data-shortcut="Espace">▶ Lire</button><button type="button" class="button small secondary" data-mt-home title="Au début">⏮</button><span class="h-avx-time" data-tb-label="Temps (où on en est / durée)"><b data-mt-cur>0:00.0</b> / <span data-mt-total></span></span>
-                    <label class="h-mt-zoomr" data-tb-label="Zoom de la frise" title="Aussi ⌘ + / ⌘ − (Ctrl + / Ctrl − sur PC et Linux), ⌘ 0 pour revenir">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label>${ext.tbButton ? ext.tbButton('video') : ''}</div>
+                    <label class="h-mt-zoomr" data-tb-label="Zoom de la frise" title="Aussi ⌘ + / ⌘ − (Ctrl + / Ctrl − sur PC et Linux), ⌘ 0 pour revenir">Zoom de la frise <input type="range" min="4" max="200" value="40" data-mt-zoom></label></div>
                 <div class="h-mt-ops" data-tbg="mt-ops" data-tbg-label="Outils du montage">
-                    <button type="button" class="button small secondary" data-mt-op="undo" title="Annuler (⌘Z)" data-shortcut="⌘Z" disabled>↶</button><button type="button" class="button small secondary" data-mt-op="redo" title="Rétablir (⇧⌘Z)" data-shortcut="⇧⌘Z" disabled>↷</button>
                     <button type="button" class="button small secondary" data-mt-op="split" title="Coupe le morceau choisi à la tête de lecture" data-shortcut="B">✂️ Couper ici</button>
                     <button type="button" class="button small secondary" data-mt-op="start" title="Le morceau choisi commence à la tête de lecture">⟦ Commence ici</button>
                     <button type="button" class="button small secondary" data-mt-op="end" title="Le morceau choisi finit à la tête de lecture">⟧ Finit ici</button>
@@ -917,7 +961,7 @@
                 <div class="h-mt-tl" data-mt-tl></div>
                 <p class="muted h-avx-help">Clique sur la frise pour te placer, sur un élément pour le choisir ; glisse un élément pour le déplacer dans le temps, ou sur une autre piste du même genre (vidéos et photos vont sur toutes les pistes vidéo, texte ↔ texte, son ↔ son). Espace = lire / pause · ⌫ ou Suppr = enlever · B = couper ici · ◇ = image clé.</p>
                 ${ver.html}
-                <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button secondary" data-mt-saveproj title="Garde le montage pour le rouvrir et continuer plus tard (⌘S)" data-shortcut="⌘S">💾 Enregistrer le projet</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM)">📤 Exporter la vidéo…</button></div></div>`});
+                <div class="modal-actions"><button type="button" class="button secondary" data-mt-projects title="Rouvrir un montage enregistré">📂 Projets…</button><span class="h-mt-projname" data-mt-projname></span><span class="spacer"></span><button type="button" class="button secondary" data-avx-cancel>Fermer</button><button type="button" class="button" data-avx-save title="Fabrique le fichier vidéo (MP4 ou WebM, plusieurs formats d’image) et le range dans les médias : nouvelle version, copie ou nouvelle vidéo">📥 Garder dans les médias…</button></div></div>`});
         dl.classList.add('h-avx-montage'); dl.classList.toggle('mt-left', MP.side === 'left'); dl.classList.toggle('mt-nohelp', !MP.help);
         dl.style.setProperty('--mt-stage', MP.stage + 'vh'); dl.style.setProperty('--mt-lane', MP.lane + 'px');
         [['colV1', 'v1'], ['colV2', 'v2'], ['colT', 't'], ['colA', 'a']].forEach(([k, v]) => { dl.style.setProperty(`--mt-c-${v}`, MP[k]); dl.style.setProperty(`--mt-i-${v}`, inkOn(MP[k])); });
@@ -973,7 +1017,7 @@
         const soundFx = (pre, f) => `${chk(pre + '.clarity', '🗣️ Voix plus nette', f.clarity)}${chk(pre + '.noise', '🧹 Moins de souffle et de grondement', f.noise)}${rng(pre + '.bass', 'Graves', -12, 12, 1, f.bass || 0, ' dB')}${rng(pre + '.treble', 'Aigus', -12, 12, 1, f.treble || 0, ' dB')}${chk(pre + '.mono', '🎧 Mono (le même son des deux côtés)', f.mono)}`;
         const speedHtml = c => `${rng('speed', 'Vitesse', 0.1, 10, 0.05, spd(c), ' ×')}<label class="h-avx-row">Vitesse exacte <input type="number" class="h-mt-num" min="0.1" max="10" step="0.05" value="${spd(c)}" data-mt-k="speedn"> ×</label><div class="h-mt-quick">${montagePrefs().speeds.map(v => `<button type="button" data-mt-speed="${v}" class="${spd(c) === v ? 'is-on' : ''}">${String(v).replace('.', ',')} ×</button>`).join('')}<button type="button" data-mt-speededit title="Choisir les vitesses de ces boutons (aussi dans Maintenance → Montage)">✎</button></div>${chk('pitch', 'garder la hauteur de la voix', c.pitch !== false)}`;
         const clipSound = c => `<details class="h-mt-isec h-mt-sfx" ${c.afx && Object.values(c.afx).some(Boolean) ? 'open' : ''}><summary><b>🔊 Son de ce morceau</b></summary>${soundFx('afx', c.afx || {})}<div class="h-mt-quick"><button type="button" data-mt-afxall title="Mettre ces réglages du son sur tous les morceaux et sons du projet">Appliquer à tous les sons du projet</button><button type="button" data-mt-afxreset>↺ Remettre comme au départ</button></div><p class="muted">Pour tout le film d’un coup : onglet 🔊 Son.</p></details>`;
-        const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
+        const kbHtml = c => `<label class="h-avx-row">Effet Ken Burns <select data-mt-k="kb">${KB.map(([k, l]) => `<option value="${k}" ${(c.kb ?? (P.kbAuto ? 'auto' : '')) === k ? 'selected' : ''}>${l}</option>`).join('')}</select><span data-help="Un lent mouvement de caméra sur la photo : elle s’approche, s’éloigne ou glisse doucement pendant qu’elle est à l’écran."></span></label>`;
         const imgDur = c => `<label class="h-avx-row">Durée à l’écran <input type="number" class="h-mt-num" min="0.1" max="3600" step="0.1" value="${Math.round(clen(c) * 10) / 10}" data-mt-k="imgdur"> s</label><div class="h-mt-quick">${[2, 3, 5, 8, 10, 15].map(v => `<button type="button" data-mt-imgdur="${v}">${v} s</button>`).join('')}</div>`;
         const rng = (k, label, min, max, step, v, unit = '') => `<label class="h-avx-row">${label} <input type="range" min="${min}" max="${max}" step="${step}" value="${v}" data-mt-k="${k}"><output data-u="${unit}">${unit === '%' ? Math.round(v * 100) + ' %' : v + unit}</output></label>`;
         const lookHtml = (L, scope) => `<div class="h-mt-looks">${LOOKS.map(([n], i) => `<button type="button" class="button small secondary" data-mt-look="${scope}:${i}">${esc(n)}</button>`).join('')}</div>
@@ -995,8 +1039,8 @@
         const isec = (c, key, flag, title, icon, body, open = true) => `<details class="h-mt-isec" ${open ? 'open' : ''}><summary>${flag ? `<input type="checkbox" data-mt-k="${flag}" ${c[flag] !== false ? 'checked' : ''} title="Activer / couper">` : ''}<b>${title}</b><span class="h-mt-iico">${icon}</span><button type="button" class="h-mt-ireset" data-mt-ireset="${key}" title="Remettre comme au départ">↺</button></summary><div class="h-mt-ibody">${body}</div></details>`;
         function inspectorHtml(c, main) {
             const local = localOf(c), rows = key => IROWS[key].map(r => irow(c, local, r)).join('');
-            return `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><b>🎛️ Réglages de l’image</b><span class="muted">◇ image clé à ${fmt(local - c.from)}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select></label></div>
-                ${isec(c, 'comp', '', 'Composition', '◐', rows('comp') + `<div class="h-mt-irow"><span>Mode de fusion</span><select data-mt-k="blend">${BLENDS.map(([k, l]) => `<option value="${k}" ${(c.blend || 'source-over') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div>`)}
+            return `<div class="h-mt-insp" data-mt-insp><div class="h-mt-ihead"><b>🎛️ Réglages de l’image</b><span class="muted">◇ image clé à ${fmt(local - c.from)}</span><label class="h-mt-ease">Entre deux images clés <select data-mt-k="ease"><option value="smooth" ${c.ease !== 'linear' ? 'selected' : ''}>en douceur</option><option value="linear" ${c.ease === 'linear' ? 'selected' : ''}>régulier</option></select><span data-help="Une image clé fixe un réglage (taille, place, rotation…) à un moment du film ; entre deux images clés, l’image passe de l’une à l’autre, en douceur ou à vitesse régulière."></span></label></div>
+                ${isec(c, 'comp', '', 'Composition', '◐', rows('comp') + `<div class="h-mt-irow"><span>Mode de fusion</span><select data-mt-k="blend">${BLENDS.map(([k, l]) => `<option value="${k}" ${(c.blend || 'source-over') === k ? 'selected' : ''}>${l}</option>`).join('')}</select><span data-help="Comment cette image se mélange avec celle de dessous : « Produit » assombrit, « Superposition claire » éclaircit, « Normal » la pose simplement dessus."></span></div>`)}
                 ${isec(c, 'tf', 'tfOn', 'Transformer', '⬚', rows('tf'))}
                 ${isec(c, 'crop', 'cropOn', 'Recadrer', '⌗', rows('crop'), false)}
                 ${isec(c, 'dist', 'distOn', 'Distorsion', '▱', rows('dist'), false)}
@@ -1032,7 +1076,7 @@
             else if (sel.track === 'texts') item.innerHTML = `<h4>🔤 Titre / texte</h4>${trackSel('texts', c)}<label class="h-mt-txt">Texte <textarea rows="3" data-mt-k="text">${esc(c.text)}</textarea></label>
                 <label class="h-avx-row">Mouvement <select data-mt-k="anim">${ANIMS.map(([k, l]) => `<option value="${k}" ${c.anim === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
                 ${rng('dur', 'Durée', 0.5, 30, 0.1, c.dur, ' s')}${rng('size', 'Taille', 2, 20, 0.5, c.size ?? 6, ' %')}
-                <label class="h-avx-row">Police <select data-mt-k="font">${FONTS_V.map(([k, l]) => `<option value="${esc(k)}" ${c.font === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
+                <div class="h-avx-row">Police <input type="hidden" data-mt-k="font" value="${esc(c.font || FONTS_V[0][0])}"><button type="button" class="button small secondary" data-mt-fontpick style="${esc(`font-family:${c.font || FONTS_V[0][0]}`)}" title="Choisir la police (recherche, récentes, polices de l’ordinateur)">${esc((FONTS_V.find(f => f[0] === c.font) || [0, String(c.font || 'Georgia').split(',')[0].replace(/"/g, '')])[1])} ▾</button></div>
                 <label class="h-avx-row">Couleur <input type="color" value="${esc(c.color || '#ffffff')}" data-mt-k="color"> Fond <input type="color" value="${esc(c.bg || '#000000')}" data-mt-k="bg" ${c.bg ? '' : 'disabled'}><label class="checkbox-line"><input type="checkbox" data-mt-k="hasbg" ${c.bg ? 'checked' : ''}> bandeau</label></label>
                 ${rng('x', 'Position horizontale', 0, 100, 1, c.x ?? 50, ' %')}${rng('y', 'Position verticale', 0, 100, 1, c.y ?? 80, ' %')}
                 <label class="h-avx-row">Alignement <select data-mt-k="align">${[['center', 'centré'], ['left', 'à gauche'], ['right', 'à droite']].map(([k, l]) => `<option value="${k}" ${(c.align || 'center') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label>
@@ -1054,6 +1098,15 @@
         // réglages → modèle
         const setK = (obj, k, v) => { const ks = k.split('.'); let o = obj; ks.slice(0, -1).forEach(x => { o[x] = o[x] || {}; o = o[x]; }); o[ks.at(-1)] = v; };
         const audioFx = k => /^(fx\.(clarity|noise|mute|volume|bass|treble|mono)$|afx\.)/.test(k);
+        // E5 : la police d'un titre, dans la fenêtre commune des polices
+        dl.querySelector('.h-mt-side').addEventListener('click', async e => {
+            const b = e.target.closest('[data-mt-fontpick]'); if (!b || !UIx().openFontPicker) return;
+            const inp = b.parentElement.querySelector('[data-mt-k="font"]'), c = selected(), cur = String(inp.value || '').split(',')[0].replace(/"/g, '').trim();
+            const f = await UIx().openFontPicker({value: cur, sample: String(c?.text || 'Mon film').slice(0, 40)}); if (!f) return;
+            const known = FONTS_V.find(x => x[1] === f || x[0].split(',')[0].replace(/"/g, '') === f);
+            inp.value = known ? known[0] : `"${String(f).replace(/["\\]/g, '')}", sans-serif`; b.style.fontFamily = inp.value; b.textContent = `${known ? known[1] : f} ▾`;
+            inp.dispatchEvent(new Event('input', {bubbles: true}));
+        });
         dl.querySelector('.h-mt-side').addEventListener('input', e => {
             const tfEl = e.target.closest('[data-mt-tf]');
             if (tfEl) { // un réglage de l'inspecteur : la valeur fixe, ou l'image clé du moment s'il y en a
@@ -1309,6 +1362,8 @@
             const dir = t.dataset.mtRfolder ?? t.dataset.mtRdir, r = e.dataTransfer.getData('text/x-lcnda-rush'), f = e.dataTransfer.getData('text/x-lcnda-rfolder');
             if (r !== '') moveRush(Number(r), dir); else if (f && f !== dir) moveFolder(f, dir);
         });
+        // E4 : des vidéos, photos ou sons glissés (ou collés) sur le montage deviennent des rushes ; ils entrent dans les Médias à l'enregistrement du projet
+        UIx().bindFileDrop?.(dl.querySelector('.h-mt-top'), async files => { let n = 0; for (const f of files) { const k = /^image\//.test(f.type) ? 'image' : /^video\//.test(f.type) ? 'video' : /^audio\//.test(f.type) ? 'audio' : ''; if (k && await pushSource({src: URL.createObjectURL(f), title: f.name.replace(/\.[^.]+$/, ''), file: f}, k) !== null) n++; } if (n) { $('[data-mt-tab="rush"]')?.click(); toast(`${n} rush${n > 1 ? 'es' : ''} ajouté${n > 1 ? 's' : ''} : glisse-les sur la frise. Ils entrent dans les Médias quand tu enregistres le projet.`); } }, {accept: 'video/*,image/*,audio/*'});
         $('[data-mt-pane="rush"]').addEventListener('change', async e => {
             const inp = e.target.closest('[data-mt-rimport]'); if (!inp) return;
             const files = [...inp.files]; inp.value = ''; let n = 0;
@@ -1489,13 +1544,14 @@
         });
         // 💾 Enregistrer le projet : le montage est gardé (Listes → Vidéos → 🎬 Montage, ou 📂 Projets…) ; les rushes importés
         // de l'ordinateur sont d'abord envoyés dans les Médias (un projet ne garde que des médias de la base)
-        const showProjName = () => { const el = $('[data-mt-projname]'); if (el) el.textContent = projId ? `🎬 ${projName}${dirty ? ' · modifié' : ''}` : ''; };
+        const showProjName = () => { const el = $('[data-mt-projname]'); if (el) el.textContent = projId ? `🎬 ${projName}` : ''; UIx().savedStatus?.(dl, dirty ? 'dirty' : projId ? 'saved' : ''); };
         let savingProj = false;
         async function saveProject(asNew = false) {
             if (savingProj) return; eng?.pause();
-            let name = projName;
-            if (!projId || asNew) { const n = await A().askText({title: 'Enregistrer le projet', message: 'Nom du projet de montage :', value: projName || (media.id ? media.title : '') || 'Mon montage', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
-            savingProj = true; const btn = $('[data-mt-saveproj]'), l0 = btn.textContent; btn.disabled = true;
+            let name = ($('[data-avx-name]')?.value || '').trim().slice(0, 160);
+            if (name === 'Nouveau montage' && !projId) name = '';
+            if (asNew || !name) { const n = await A().askText({title: 'Enregistrer le projet', message: 'Nom du projet de montage :', value: name || projName || (media.id ? media.title : '') || 'Mon montage', okLabel: 'Enregistrer'}); if (n === null) return; name = n.trim().slice(0, 160); if (!name) return toast('Donne un nom au projet.', 'error'); }
+            savingProj = true; const btn = $('[data-mt-saveproj]'), l0 = btn.textContent; btn.disabled = true; UIx().savedStatus?.(dl, 'saving');
             try {
                 const local = P.sources.filter(x => !/^media\//.test(x.src));
                 for (const [k, x] of local.entries()) {
@@ -1508,12 +1564,31 @@
                 }
                 btn.textContent = 'Enregistrement…';
                 const res = await A().api('save_montage_project', {}, {method: 'POST', body: {id: asNew ? 0 : projId, name, project: {...JSON.parse(JSON.stringify(P)), duration: montageEnd(P)}}});
-                projId = res.result.id; projName = res.result.name; dirty = false; showProjName();
-                toast(local.length ? `Projet « ${projName} » enregistré (${local.length > 1 ? `les ${local.length} fichiers importés sont` : 'le fichier importé est'} maintenant dans les Médias).` : `Projet « ${projName} » enregistré.`);
-            } catch (err) { toast(err.message, 'error'); }
+                projId = res.result.id; projName = res.result.name; dirty = false; const ni = $('[data-avx-name]'); if (ni) ni.value = projName; showProjName();
+                if (local.length) toast(`${local.length > 1 ? `Les ${local.length} fichiers importés sont` : 'Le fichier importé est'} maintenant dans les Médias.`);
+            } catch (err) { UIx().savedStatus?.(dl, 'error'); toast(err.message, 'error'); }
             finally { savingProj = false; btn.disabled = false; btn.textContent = l0; drawRush(true); }
         }
         $('[data-mt-saveproj]').addEventListener('click', () => saveProject());
+        $('[data-avx-name]')?.addEventListener('input', () => { dirty = true; showProjName(); });
+        // ⤓ Exporter (E3, la fenêtre commune) : un fichier MP4 / WebM avec les réglages de départ (Maintenance), une copie dans les médias si on veut ;
+        // « 📥 Dans les médias… » garde la fenêtre complète (plusieurs formats d'image, nouvelle version…)
+        $('[data-mt-export]').addEventListener('click', async () => {
+            eng?.pause();
+            if (!UIx().openExportDialog) return $('[data-avx-save]').click();
+            const types = recordTypes(); const nm = ($('[data-avx-name]')?.value || projName || media.title || 'Montage').trim(), T = montageEnd(P), MP2 = montagePrefs();
+            const vid = (t) => async o => {
+                if (!P.v1.length && !P.v2.length) throw new Error('le montage est vide : ajoute une vidéo');
+                const go = document.querySelector('dialog.ui-export[open] [data-ui-go]'); eng.destroy(); eng = null;
+                try { const blob = await recordMontage(P, t[0], x => { if (go) go.textContent = `Enregistrement… ${Math.round(x * 100)} %`; }, {height: Number(MP2.height) || 0, quality: Number(MP2.quality) || 5, fps: Number(MP2.fps) || 30, abr: Number(MP2.abr) || 128});
+                    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = o.filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+                    if (o.saveCopy) { await uploadResult(media, blob, t[1], {mode: 'copy', duration: T, title: nm}); toast('Vidéo téléchargée, et une copie est rangée dans les médias.'); onDone?.(); } }
+                finally { await rebuild(); drawTl(); }
+            };
+            const formats = types.map(t => ({id: t[1], label: t[1] === 'mp4' ? '🎬 MP4' : '🎞 WebM', hint: t[1] === 'mp4' ? 'lu partout' : 'léger (navigateurs, VLC)', ext: t[1], run: vid(t)}));
+            formats.push({id: 'srt', label: '💬 Sous-titres', hint: 'fichier .srt', ext: '', run: async () => exportSubs()}, {id: 'base', label: '📥 Dans les médias…', hint: 'plusieurs formats, nouvelle version', ext: '', run: async () => { setTimeout(() => $('[data-avx-save]').click(), 50); }});
+            await UIx().openExportDialog({title: nm, defaultName: nm, quality: false, saveCopy: true, value: MP2.fmt, info: `${fmt(T, false)} · rejoué en temps réel pour être enregistré (laisse la fenêtre ouverte) · taille, qualité et images par seconde : Maintenance → Montage`, formats});
+        });
         $('[data-mt-projects]').addEventListener('click', () => projectsDialog({current: projId, onOpen: async pr => { if (dirty && !await A().confirmBox('Les modifications du montage seront perdues.', {title: 'Ouvrir un autre projet sans enregistrer celui-ci ?', okLabel: 'Ouvrir sans enregistrer', danger: true})) return false; dirty = false; dl.close(); await openProject(pr.id, onDone); }}));
         document.addEventListener('keydown', e => { if (!dl.open || [...document.querySelectorAll('dialog[open]')].at(-1) !== dl) return; if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); saveProject(e.shiftKey); } }, {signal: keyAc.signal});
         // ── Un menu en haut, à côté du titre (comme la Retouche) : tout ce que fait le montage ──
@@ -1536,7 +1611,7 @@
             const b = e.target.closest('[data-mt-cmd]'); if (!b) { if (!e.target.closest('.h-mt-menubar')) closeMenus(); return; }
             closeMenus(); const k = b.dataset.mtCmd, [a, v] = k.split(':'), q = sel0 => dl.querySelector(sel0)?.click();
             if (k === 'proj') return saveProject(); if (k === 'projas') return saveProject(true);
-            if (k === 'projects') return q('[data-mt-projects]'); if (k === 'export') return q('[data-avx-save]'); if (k === 'close') return q('[data-avx-close]');
+            if (k === 'projects') return q('[data-mt-projects]'); if (k === 'export') return q('[data-mt-export]'); if (k === 'close') return q('[data-avx-close]');
             if (k === 'undo') return undoTo(hpos - 1); if (k === 'redo') return undoTo(hpos + 1);
             if (a === 'op') return q(`[data-mt-op="${v}"]`);
             if (k === 'import') return q('[data-mt-rimport]'); if (k === 'base') { q('[data-mt-tab="rush"]'); return q('[data-mt-rbase]'); }
@@ -1616,8 +1691,11 @@
     const toolbarSets = which => cleanSets(readJson(TB_SETS, {})[which], cleanToolbar);
     const saveToolbarSets = (which, list) => { const all = readJson(TB_SETS, {}); all[which] = list; return writeJson(TB_SETS, all); };
     const downloadJson = (name, obj) => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(obj, null, 2)], {type: 'application/json'})); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500); };
-    const presetBar = (id, sets, what) => `<div class="h-pp-presets h-mtp-presets" data-set="${id}"><strong>💾 Réglages enregistrés</strong>${sets.length ? `<select data-set-pick aria-label="Réglages enregistrés">${sets.map((x, i) => `<option value="${i}">${esc(x.name)}${x.date ? ' — ' + esc(x.date) : ''}</option>`).join('')}</select><button type="button" class="button small" data-set-apply>Appliquer</button><button type="button" class="button small secondary" data-set-del title="Supprimer ces réglages enregistrés">🗑</button>` : `<span class="muted">Aucun pour l’instant.</span>`}
-        <button type="button" class="button small secondary" data-set-save title="Garder ${esc(what)} sous un nom">💾 Enregistrer sous un nom…</button><span class="h-pp-sep"></span><button type="button" class="button small secondary" data-set-export title="Un fichier .json avec ${esc(what)} et les ensembles">⤓ Exporter</button><label class="button small secondary">⤒ Importer<input type="file" accept=".json,application/json" data-set-import hidden></label></div>`;
+    const presetBar = (id, sets, what) => `<div class="h-pp-presets h-mtp-presets" data-set="${id}"><strong>💾 Réglages enregistrés</strong>${sets.length ? `<select data-set-pick aria-label="Réglages enregistrés">${sets.map((x, i) => `<option value="${i}">${esc(x.name)}${x.date ? ' — ' + esc(x.date) : ''}</option>`).join('')}</select><button type="button" class="button small" data-set-apply>Appliquer</button><button type="button" class="button small secondary" data-set-exportone title="Exporter ce réglage dans un fichier (pour un autre ordinateur ou une autre personne)">⤓ Exporter</button><button type="button" class="button small secondary" data-set-del title="Supprimer ces réglages enregistrés">🗑</button>` : `<span class="muted">Aucun pour l’instant.</span>`}
+        <button type="button" class="button small secondary" data-set-save title="Garder ${esc(what)} sous un nom">💾 Enregistrer sous ce nom…</button><label class="button small secondary" title="Un fichier .json exporté depuis LCNDA (un réglage, ou un ancien fichier d’ensembles)">⤒ Importer un réglage<input type="file" accept=".json,application/json" data-set-import hidden></label></div>`;
+    /* un réglage dans un fichier : {lcnda: 'reglage', outil, nom, version: 1, donnees} → lcnda-reglage-<outil>-<nom>.json */
+    const slugOf = n => String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^A-Za-z0-9]+/g, '-').replace(/^-+|-+$/g, '').toLowerCase().slice(0, 50) || 'reglage';
+    const OUTIL_LABEL = o => o === 'montage-disposition' ? 'la disposition du montage' : /^boutons-/.test(o) ? `les boutons de « ${(EDITORS.find(e => e[0] === o.slice(8)) || [0, o.slice(8)])[1]} »` : `l’outil « ${o} »`;
     ext.maintenance.montage_prefs = async token => {
         const st = S(), ws = A().$('#workspace');
         const lsJson = readJson;
@@ -1697,8 +1775,8 @@
         const applyLayout = v => { const cur = readJson(MT_KEY, {}); writeJson(MT_KEY, {...cur, ...cleanLayout(v)}); };
         const applyToolbar = v => { const all = lsJson('genealogie-toolbars', {}); all[which] = cleanToolbar(v); writeJson('genealogie-toolbars', all); };
         const setOps = {
-            layout: {list: layoutSets, save: list => writeJson(LAYOUT_SETS, list), now: layoutNow, apply: applyLayout, clean: cleanLayout, type: 'lcnda-montage-disposition', file: 'disposition-montage'},
-            toolbar: {list: () => toolbarSets(which), save: list => saveToolbarSets(which, list), now: toolbarNow, apply: applyToolbar, clean: cleanToolbar, type: 'lcnda-boutons-editeur', file: () => `boutons-${which}`},
+            layout: {list: layoutSets, save: list => writeJson(LAYOUT_SETS, list), now: layoutNow, apply: applyLayout, clean: cleanLayout, type: 'lcnda-montage-disposition', file: 'disposition-montage', outil: () => 'montage-disposition'},
+            toolbar: {list: () => toolbarSets(which), save: list => saveToolbarSets(which, list), now: toolbarNow, apply: applyToolbar, clean: cleanToolbar, type: 'lcnda-boutons-editeur', file: () => `boutons-${which}`, outil: () => `boutons-${which}`},
         };
         ws.addEventListener('input', e => { const el = e.target.closest('[data-mtp]'); if (el?.type === 'color') { const sw = ws.querySelector(`[data-mtp-sw="${el.dataset.mtp}"]`); if (sw) { sw.style.background = el.value; sw.style.color = inkOn(el.value); } return; } if (el?.type === 'range') el.nextElementSibling.textContent = el.value + (el.dataset.mtp === 'stage' ? ' %' : ' px'); }, {signal: ac.signal});
         ws.addEventListener('change', async e => {
@@ -1707,6 +1785,19 @@
             const op = setOps[inp.closest('[data-set]').dataset.set], file = inp.files?.[0]; inp.value = ''; if (!file) return;
             if (file.size > 2e6) return toast('Fichier trop gros pour des réglages.', 'error');
             let data; try { data = JSON.parse(await file.text()); } catch (_) { return toast('Ce fichier n’est pas un fichier de réglages LCNDA.', 'error'); }
+            if (data?.lcnda === 'reglage') {
+                let outil = String(data.outil || '');
+                if (outil !== op.outil()) {
+                    if (op === setOps.toolbar && /^boutons-/.test(outil) && EDITORS.some(x => x[0] === outil.slice(8))) { which = st.montagePrefsEditor = outil.slice(8); }
+                    else return toast(`Ce fichier est un réglage pour ${OUTIL_LABEL(outil)}, pas pour ${OUTIL_LABEL(op.outil())} : importe-le à sa place.`, 'error');
+                }
+                if (!data.donnees || typeof data.donnees !== 'object') return toast('Ce réglage est vide ou abîmé.', 'error');
+                const list = op.list(); let name = cleanName(data.nom) || 'Réglage importé';
+                while (list.some(y => y.name === name)) { const n = await A().askText({title: 'Ce nom est déjà pris', message: `Un réglage s’appelle déjà « ${name} ». Quel nom pour celui-ci ?`, value: `${name} (2)`.slice(0, 80), okLabel: 'Importer'}); if (n === null) return; name = cleanName(n); if (!name) return; }
+                list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.clean(data.donnees)});
+                if (op.save(list.slice(-60))) { draw(); toast(`Réglage « ${name} » importé : choisis-le puis « Appliquer ».`); }
+                return;
+            }
             if (data?.type !== op.type) return toast(op === setOps.layout ? 'Ce fichier n’est pas une disposition du montage.' : 'Ce fichier n’est pas un réglage de boutons.', 'error');
             if (op === setOps.toolbar && data.editor && data.editor !== which) { which = st.montagePrefsEditor = EDITORS.some(x => x[0] === data.editor) ? data.editor : which; }
             const list = op.list(), add = cleanSets(data.sets, op.clean); let n = 0;
@@ -1731,6 +1822,7 @@
                 if (e.target.closest('[data-set-save]')) { const name = cleanName((await window.LCNDA_APP.askText({message: bar.dataset.set === 'layout' ? 'Nom de cette disposition (ex. Grand écran) :' : 'Nom de ces boutons (ex. L’essentiel) :'})) || ''); if (!name) return; const list = op.list().filter(x => x.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: op.now()}); if (op.save(list)) { draw(); toast(`Ensemble « ${name} » enregistré.`); } return; }
                 if (e.target.closest('[data-set-apply]')) { const x = pick(); if (!x || !await A().confirmBox('', {title: `Remplacer les réglages actuels par l’ensemble « ${x.name} » ?`, okLabel: 'Remplacer'})) return; op.apply(x.v); draw(); toast(`Ensemble « ${x.name} » appliqué.`); return; }
                 if (e.target.closest('[data-set-del]')) { const x = pick(); if (!x || !await A().confirmBox('', {title: `Supprimer l’ensemble « ${x.name} » ?`, okLabel: 'Supprimer l’ensemble'})) return; op.save(op.list().filter(y => y !== x && y.name !== x.name)); draw(); return; }
+                if (e.target.closest('[data-set-exportone]')) { const x = pick(); if (!x) return; downloadJson(`lcnda-reglage-${op.outil()}-${slugOf(x.name)}.json`, {lcnda: 'reglage', outil: op.outil(), nom: x.name, version: 1, donnees: x.v}); toast(`Fichier prêt : il s’importe dans Maintenance → Montage, retouche, mise en page et son (« ⤒ Importer un réglage »).`); return; }
                 if (e.target.closest('[data-set-export]')) { const f = typeof op.file === 'function' ? op.file() : op.file; downloadJson(`${f}-${new Date().toISOString().slice(0, 10)}.json`, {type: op.type, version: 1, editor: bar.dataset.set === 'toolbar' ? which : undefined, name: bar.dataset.set === 'layout' ? 'Disposition exportée' : 'Boutons exportés', current: op.now(), sets: op.list()}); return; }
                 return;
             }
