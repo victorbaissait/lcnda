@@ -165,6 +165,25 @@ function validate_restore_database(string $path): array
     return ['persons' => $persons, 'media_files' => $files];
 }
 
+/**
+ * Copie un fichier de l'archive en s'arrêtant s'il dépasse la taille annoncée (+1 Mo) : une archive dont l'en-tête
+ * ment ne peut pas écrire plus que prévu. Renvoie le nombre d'octets copiés, ou false.
+ */
+function backup_bounded_copy($in, $out, int $declared)
+{
+    $limit = max(0, $declared) + 1048576;
+    $copied = 0;
+    while (!feof($in)) {
+        $chunk = fread($in, 1048576);
+        if ($chunk === false) { return false; }
+        $copied += strlen($chunk);
+        if ($copied > $limit) { return false; }
+        if (fwrite($out, $chunk) === false) { return false; }
+        if ($chunk === '') { break; }
+    }
+    return $copied;
+}
+
 function restore_package_upload(array $file): never
 {
     @set_time_limit(0);
@@ -187,6 +206,7 @@ function restore_package_upload(array $file): never
     $incoming = $dir . '/.ouverture-' . bin2hex(random_bytes(6)) . '.sqlite';
     $stats = ['format' => 'sqlite', 'media_copied' => 0, 'media_already_present' => 0];
     $zip = null;
+    $written = []; // médias copiés depuis l'archive (retirés si l'ouverture échoue)
     try {
         $ext = strtolower(pathinfo((string) $file['name'], PATHINFO_EXTENSION));
         $mediaEntries = [];
@@ -211,9 +231,21 @@ function restore_package_upload(array $file): never
                 if (in_array(strtolower(pathinfo($name, PATHINFO_EXTENSION)), BACKUP_MEDIA_EXTENSIONS, true)) { $mediaEntries[$i] = $name; }
             }
             if ($dbEntry === null) { throw new RuntimeException('Aucune base (.db) dans cette archive.'); }
+            // Taille une fois décompressée : jamais plus que la place libre (un petit .zip piégé peut gonfler à des Go)
+            $declared = (int) ($zip->statIndex($dbEntry)['size'] ?? 0);
+            foreach (array_keys($mediaEntries) as $i) {
+                $st = $zip->statIndex($i); $size = (int) ($st['size'] ?? 0); $packed = max(1, (int) ($st['comp_size'] ?? 0));
+                // une photo, un son ou une vidéo se compressent peu : 100 fois plus gros une fois ouvert = archive piégée
+                if ($size > 50 * 1048576 && $size / $packed > 100) { throw new RuntimeException('Cette archive contient un fichier anormal (« ' . basename((string) $st['name']) . ' ») : elle n’est pas ouverte.'); }
+                $declared += $size;
+            }
+            $free = @disk_free_space(is_dir(MEDIA_DIR) ? MEDIA_DIR : dirname($incoming));
+            if ($free !== false && $declared > $free - 1073741824) { // garder au moins 1 Go libre
+                throw new RuntimeException('Pas assez de place sur le disque pour ouvrir cette sauvegarde (il faut environ ' . max(1, (int) round($declared / 1048576)) . ' Mo libres).');
+            }
             $in = $zip->getStream((string) $zip->getNameIndex($dbEntry));
             $out = fopen($incoming, 'wb');
-            $copied = ($in && $out) ? @stream_copy_to_stream($in, $out) : false;
+            $copied = ($in && $out) ? backup_bounded_copy($in, $out, (int) ($zip->statIndex($dbEntry)['size'] ?? 0)) : false;
             if ($in) { fclose($in); } if ($out) { fclose($out); }
             if ($copied === false || ($encrypted && !@filesize($incoming))) {
                 if ($encrypted) { @unlink($incoming); $zip->close(); $zip = null; json_response(['error' => 'Mot de passe incorrect.', 'password_required' => true, 'wrong_password' => true], 401); }
@@ -235,9 +267,12 @@ function restore_package_upload(array $file): never
                 if (!is_dir(dirname($target))) { mkdir(dirname($target), 0775, true); }
                 $in = $zip->getStream($name);
                 $out = fopen($target . '.part', 'wb');
-                if (!$in || !$out || stream_copy_to_stream($in, $out) === false) { throw new RuntimeException('Copie impossible : ' . $relative); }
+                $written[] = $target . '.part';
+                $index = array_search($name, $mediaEntries, true);
+                if (!$in || !$out || backup_bounded_copy($in, $out, (int) ($zip->statIndex((int) $index)['size'] ?? 0)) === false) { throw new RuntimeException('Copie impossible : ' . $relative); }
                 fclose($in); fclose($out);
                 rename($target . '.part', $target);
+                $written[] = $target;
                 $stats['media_copied']++;
             }
         }
@@ -253,6 +288,7 @@ function restore_package_upload(array $file): never
         if (!rename($incoming, DB_PATH)) { throw new RuntimeException('Impossible de mettre la base en place.'); }
     } catch (Throwable $e) {
         if (is_file($incoming)) { @unlink($incoming); }
+        foreach ($written as $path) { if (is_file($path)) { @unlink($path); } } // pas de médias orphelins si l'ouverture échoue
         json_response(['error' => $e->getMessage()], 422);
     } finally {
         if ($zip instanceof ZipArchive) { @$zip->close(); }

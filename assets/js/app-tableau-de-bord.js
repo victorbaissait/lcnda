@@ -515,7 +515,7 @@
         return card(index,'Liste de travail quotidienne',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-module="recherche">Recherche</button>`);
     }
     function dashboardArchiveFavoritesCard(index,items,spanClass){
-        const body=dashboardListRows(items,'Aucune archive disponible.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(`${item.code||''} · ${item.name||item.department||'Archives'}`)}</strong><small>${escapeHtml(item.search_url||item.url||'Lien à vérifier')}</small></div>${item.search_url||item.url?`<a class="button small secondary" href="${escapeHtml(item.search_url||item.url)}" target="_blank" rel="noopener">Ouvrir</a>`:''}</article>`);
+        const body=dashboardListRows(items,'Aucune archive disponible.',item=>`<article class="dashboard-row"><div><strong>${escapeHtml(`${item.code||''} · ${item.name||item.department||'Archives'}`)}</strong><small>${escapeHtml(item.search_url||item.url||'Lien à vérifier')}</small></div>${item.search_url||item.url?`<a class="button small secondary" href="${escapeHtml(window.LCNDA_APP.safeUrl?.(item.search_url||item.url)||'#')}" target="_blank" rel="noopener">Ouvrir</a>`:''}</article>`);
         return card(index,'Archives favorites',items.length,body,spanClass,`<button class="button small secondary" data-dashboard-list="archives">Archives</button>`);
     }
     function dashboardRereadCard(index,items,spanClass){

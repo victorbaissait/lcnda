@@ -416,7 +416,7 @@
                 inner = `<svg class="ly-svg" width="${Math.max(w, 1)}" height="${Math.max(h, 1)}" viewBox="0 0 ${Math.max(w, 1)} ${Math.max(h, 1)}" overflow="visible"><path d="${d}" fill="${it.type === 'line' || (it.type === 'path' && !it.closed) ? 'none' : fillP}" ${sAttr}/><defs>${defs.join('')}</defs></svg>`;
             }
         }
-        const linkWrap = it.link && ctx.print ? s => `<a href="${esc(it.link)}" target="_blank" rel="noopener noreferrer">${s}</a>` : s => s;
+        const linkWrap = it.link && ctx.print ? s => `<a href="${esc(A().safeUrl?.(it.link) || '#')}" target="_blank" rel="noopener noreferrer">${s}</a>` : s => s;
         return `<div ${attrs}>${linkWrap(inner)}</div>`;
     }
     /** Les objets d'une page dans l'ordre d'affichage : calque du bas d'abord */
