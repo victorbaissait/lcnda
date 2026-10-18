@@ -1,0 +1,110 @@
+/* LCNDA — 🧩 Puzzle (outil Jeu, assets/js/app-puzzle.js). Même allure noir et blanc que le jeu de l'oie. */
+
+.pz-page [hidden] { display: none !important; }
+.pz-msgline .ui-notice, .pz-setup .ui-notice { margin: 0; }
+
+/* ── préparation ── */
+.pz-setup .pz-setup-top { grid-template-columns: minmax(160px, 1fr) minmax(200px, 2fr); }
+.pz-fs { display: grid; gap: 12px; min-width: 0; }
+.pz-image-empty, .pz-image-card { display: flex; align-items: center; gap: 14px; border: 2px dashed #9a9a9a; background: #f6f6f6; padding: 12px; min-height: 84px; }
+.pz-image-empty > span { font-size: 34px; line-height: 1; }
+.pz-image-empty strong, .pz-image-card strong { display: block; font-size: 15px; }
+.pz-image-empty small, .pz-image-card small { display: block; font-weight: 600; color: #555; margin-top: 3px; }
+.pz-image-card { border-style: solid; border-color: #000; background: #fff; }
+.pz-image-card img { width: 112px; height: 80px; object-fit: cover; border: 2px solid #000; background: #eee; flex: none; }
+.pz-image-card > div { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.pz-src { display: flex; flex-wrap: wrap; gap: 10px; }
+.pz-drop .ui-drop { padding: 16px; font-weight: 600; }
+.pz-counts { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pz-count { min-width: 54px; min-height: 38px; padding: 6px 12px; border: 2px solid #000; background: #fff; color: #000; font: inherit; font-weight: 900; border-radius: 999px; cursor: pointer; }
+.pz-count:hover { background: #f0f0f0; }
+.pz-count.is-active { background: #000; color: #fff; }
+.pz-setup .pz-custom { display: inline-flex; align-items: center; gap: 6px; font-weight: 800; }
+.pz-setup .pz-custom input { width: 96px; }
+.pz-estimate { margin: 0; font-size: 15px; font-weight: 700; }
+.pz-estimate small { font-weight: 600; color: #555; }
+.pz-opts { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: center; }
+.pz-setup .pz-opts .ui-toggle { display: inline-flex; font-weight: 800; font-size: 14px; }
+.pz-setup .pz-opts .ui-toggle input { min-height: 0; padding: 0; border: 0; }
+.pz-setup .pz-opt-select { min-width: 220px; }
+.pz-start { font-size: 16px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── partie ── */
+.pz-wrap { border: 4px solid #000; background: #fff; box-shadow: 9px 9px 0 #d7d7d7; display: grid; grid-template-rows: auto 1fr auto; min-width: 0; }
+.pz-wrap.is-full, .pz-wrap:fullscreen { position: fixed; inset: 0; z-index: 9000; box-shadow: none; border-width: 0; height: 100vh; height: 100dvh; width: 100vw; }
+.pz-bar { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; padding: 10px 12px; border-bottom: 3px solid #000; background: #fff; }
+.pz-clock { display: flex; align-items: center; gap: 8px; }
+.pz-time { font: 900 28px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: -.02em; min-width: 5ch; font-variant-numeric: tabular-nums; }
+.pz-progress { display: grid; gap: 4px; min-width: 190px; flex: 1; font-weight: 800; font-size: 13.5px; }
+.pz-progress small { font-weight: 700; color: #555; min-height: 1em; }
+.pz-meter { display: block; height: 8px; border: 2px solid #000; background: #fff; }
+.pz-meter b { display: block; height: 100%; width: 0; background: #0b63e5; transition: width .25s; }
+.pz-tools { display: flex; flex-wrap: wrap; gap: 6px; }
+.pz-btn { width: 36px; height: 36px; display: inline-grid; place-items: center; border: 2px solid #000; background: #fff; color: #000; font: inherit; font-size: 17px; font-weight: 900; cursor: pointer; padding: 0; }
+.pz-btn:hover { background: #f0f0f0; }
+.pz-btn[aria-pressed="true"], .pz-btn.is-on { background: #000; color: #fff; }
+.pz-btn:focus-visible { outline: 3px solid #0b63e5; outline-offset: 2px; }
+.pz-stage { position: relative; height: clamp(360px, calc(100vh - 330px), 1400px); min-height: 360px; background: #e8e3d8; overflow: hidden; outline: 0; touch-action: none; }
+.pz-wrap.is-full .pz-stage, .pz-wrap:fullscreen .pz-stage { height: auto; min-height: 0; }
+.pz-stage canvas { display: block; position: absolute; inset: 0; touch-action: none; cursor: grab; transition: filter .2s; }
+.pz-stage canvas.is-dragging { cursor: grabbing; }
+.pz-stage.is-paused canvas { filter: blur(22px) grayscale(.4); }
+.pz-stage.is-paused .pz-model { display: none; }
+.pz-model { position: absolute; right: 10px; bottom: 10px; margin: 0; width: min(190px, 32%); border: 3px solid #000; background: #fff; box-shadow: 4px 4px 0 rgba(0,0,0,.25); cursor: zoom-in; z-index: 2; }
+.pz-model.is-big { width: min(520px, 80%); cursor: zoom-out; }
+.pz-model img { display: block; width: 100%; height: auto; max-height: 60vh; object-fit: contain; background: #eee; }
+.pz-model figcaption { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; padding: 2px 6px; border-top: 2px solid #000; }
+.pz-loading, .pz-pause, .pz-win { position: absolute; inset: 0; display: grid; place-items: center; z-index: 3; padding: 16px; }
+.pz-loading { background: rgba(255,255,255,.75); }
+.pz-loaderr { max-width: 520px; }
+.pz-pause { background: rgba(0,0,0,.12); }
+.pz-pause > div, .pz-win-card { display: grid; gap: 10px; justify-items: center; text-align: center; background: #fff; border: 4px solid #000; box-shadow: 9px 9px 0 rgba(0,0,0,.25); padding: 20px 26px; max-width: 420px; }
+.pz-pause strong { font-size: 22px; }
+.pz-pause span { font-weight: 700; color: #444; }
+.pz-win { background: rgba(255,255,255,.15); }
+.pz-win-card strong { font-size: 24px; }
+.pz-win-card p { margin: 0; font-weight: 700; font-size: 16px; }
+.pz-win-card .pz-win-rec { color: #8a5a00; }
+.pz-win-ico { font-size: 40px; line-height: 1; }
+.pz-win-acts { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 4px; }
+.pz-hint { margin: 0; padding: 8px 12px; border-top: 2px solid #000; font-size: 13px; font-weight: 700; color: #444; background: #fff; }
+.pz-msg { font-weight: 800; }
+
+/* ── colonne de gauche ── */
+.pz-side-title { margin: 14px 2px 6px; font-size: 11.5px; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; color: #444; }
+.pz-side-done strong::before { content: '✓ '; color: #198754; }
+
+@media (max-width: 700px) {
+    .pz-setup .pz-setup-top { grid-template-columns: 1fr; }
+    .pz-time { font-size: 24px; }
+    .pz-bar { gap: 8px; padding: 8px; }
+    .pz-progress { min-width: 0; flex-basis: 100%; order: 3; }
+    .pz-tools { gap: 4px; }
+    .pz-btn { width: 34px; height: 34px; font-size: 15px; }
+    .pz-stage { height: calc(100vh - 300px); min-height: 340px; }
+    .pz-image-card img { width: 84px; height: 64px; }
+    .pz-src .button { flex: 1 1 100%; }
+}
+
+/* ── mode sombre (écrit à la main : la table et les cartes) ── */
+:root[data-theme="dark"] .pz-stage { background: #26231f; }
+:root[data-theme="dark"] .pz-wrap, :root[data-theme="dark"] .pz-bar, :root[data-theme="dark"] .pz-hint { background: #212121; border-color: #e8e8e8; }
+:root[data-theme="dark"] .pz-btn, :root[data-theme="dark"] .pz-count, :root[data-theme="dark"] .pz-meter { background: #212121; color: #e8e8e8; border-color: #e8e8e8; }
+:root[data-theme="dark"] .pz-btn[aria-pressed="true"], :root[data-theme="dark"] .pz-btn.is-on, :root[data-theme="dark"] .pz-count.is-active { background: #e8e8e8; color: #111; }
+:root[data-theme="dark"] .pz-pause > div, :root[data-theme="dark"] .pz-win-card, :root[data-theme="dark"] .pz-model, :root[data-theme="dark"] .pz-image-card { background: #212121; border-color: #e8e8e8; }
+:root[data-theme="dark"] .pz-loading { background: rgba(20,20,20,.75); }
+/* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
+:root[data-theme="dark"] .pz-image-empty{background:#252525}
+:root[data-theme="dark"] .pz-image-empty small,:root[data-theme="dark"] .pz-image-card small{color:#c7c7c7}
+:root[data-theme="dark"] .pz-image-card img{background:#292929}
+:root[data-theme="dark"] .pz-count:hover{background:#282828}
+:root[data-theme="dark"] .pz-estimate small{color:#c7c7c7}
+:root[data-theme="dark"] .pz-progress small{color:#c7c7c7}
+:root[data-theme="dark"] .pz-btn:hover{background:#282828}
+:root[data-theme="dark"] .pz-model img{background:#292929}
+:root[data-theme="dark"] .pz-pause span{color:#c7c7c7}
+:root[data-theme="dark"] .pz-win-card .pz-win-rec{color:#f4d59a}
+:root[data-theme="dark"] .pz-side-title{color:#c7c7c7}
+:root[data-theme="dark"] .pz-side-done strong::before{color:#a8e6c9}
+/* ═════ fin du mode sombre automatique ═════ */

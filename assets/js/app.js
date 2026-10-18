@@ -390,7 +390,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     state.scrollPositions = persisted.scrollPositions || {};
 
     const modules = {
-        jeu: ['JEU', 'Jeu de l’oie / Serpents et échelles / Petits chevaux'],
+        jeu: ['JEU', 'Jeu de l’oie / Serpents et échelles / Petits chevaux / Puzzle'],
         dashboard: ['01 — PILOTER', 'Tableau de bord'],
         personnes: ['02 — EXPLORER', 'Personnes'], animaux: ['02 — EXPLORER', 'Animaux'], graphiques: ['03 — VISUALISER', 'Graphiques'],
         carte: ['04 — LOCALISER', 'Carte'], listes: ['05 — INVENTORIER', 'Listes'],

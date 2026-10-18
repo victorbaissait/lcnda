@@ -41,6 +41,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/profils.css?v=1">
     <link rel="stylesheet" href="assets/css/sciences.css?v=1">
     <link rel="stylesheet" href="assets/css/blocs.css?v=1">
+    <link rel="stylesheet" href="assets/css/puzzle.css?v=1">
 </head></html>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
@@ -1093,11 +1094,12 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=411" defer></script>
+<script src="assets/js/app.js?v=412" defer></script>
 <script src="assets/js/app-picker.js?v=5" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
-<script src="assets/js/app-jeu.js?v=5" defer></script>
+<script src="assets/js/app-puzzle.js?v=1" defer></script>
+<script src="assets/js/app-jeu.js?v=6" defer></script>
 <script src="assets/js/app-chronologie.js?v=6" defer></script>
 <script src="assets/js/app-comparaison.js?v=6" defer></script>
 <script src="assets/js/app-carte.js?v=7" defer></script>
@@ -1115,7 +1117,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=133" defer></script>
+<script src="assets/js/heritage-more.js?v=134" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
