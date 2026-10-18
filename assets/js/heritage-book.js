@@ -48,7 +48,7 @@
       <label>Qui <select name="scope"><option value="all" ${c.scope === 'all' ? 'selected' : ''}>toute la base</option><option value="ancestors" ${c.scope === 'ancestors' ? 'selected' : ''}>les ancêtres de…</option><option value="descendants" ${c.scope === 'descendants' ? 'selected' : ''}>les descendants de…</option><option value="both" ${c.scope === 'both' ? 'selected' : ''}>ancêtres et descendants de…</option></select></label>
       <div><span class="pk-lab">Personne de départ</span>${(window.LCNDA_PICKER || A()).pickerField({name: 'book_root', kind: 'person', value: start || null})}</div>
       <label>Générations <input type="number" name="generations" min="1" max="30" value="${esc(c.generations)}"></label>
-      <label>Ordre des fiches ${sel('order', [['book', 'celui de l’arbre (Sosa, d’Aboville)'], ['generation', 'par génération'], ['birth', 'par date de naissance'], ['name', 'par nom (alphabétique)']])}</label>
+      <label><span data-help="L’ordre de l’arbre suit les numéros Sosa (ancêtres) ou d’Aboville (descendants) : la personne, ses parents, ses grands-parents…">Ordre des fiches</span> ${sel('order', [['book', 'celui de l’arbre (Sosa, d’Aboville)'], ['generation', 'par génération'], ['birth', 'par date de naissance'], ['name', 'par nom (alphabétique)']])}</label>
     </div></fieldset>
     <div class="h-book-cols">
       <fieldset><legend>2. Le livre, dans l’ordre</legend>${orderList('sections', SECTIONS, c.sections, c.off)}</fieldset>
@@ -66,12 +66,12 @@
       <label>Style ${sel('theme', [['modern', 'Moderne (noir et bleu)'], ['classic', 'Classique (bordeaux, centré)'], ['elegant', 'Élégant (doré)'], ['sepia', 'Sépia (papier ancien)'], ['minimal', 'Sobre (gris)']])}</label>
       <label>Police ${sel('font', [['sans', 'Sans empattement (Arial)'], ['serif', 'Avec empattement (Georgia)'], ['mono', 'Machine à écrire']])}</label>
       <label>Format de page ${sel('paper', [['A4', 'A4'], ['A5', 'A5 (petit livre)'], ['letter', 'Lettre US']])}</label>
-      <label>Mise en page ${sel('flow', [['page', 'une fiche par page'], ['flow', 'à la suite (moins de pages)']])}</label>
+      <label><span data-help="Une fiche par page : chaque personne commence en haut d’une page. À la suite : les fiches s’enchaînent, le livre a moins de pages.">Mise en page</span> ${sel('flow', [['page', 'une fiche par page'], ['flow', 'à la suite (moins de pages)']])}</label>
       <label>Couleur <span class="h-book-color"><input type="color" name="accent" value="${esc(c.accent || '#006dcc')}"><button type="button" class="link-button" data-book-accent-reset>${c.accent ? 'celle du style' : '(celle du style)'}</button></span></label>
     </div></fieldset>
     <fieldset><legend>6. Le format</legend><div class="h-book-formats">${FORMATS.map(([k, l, h, main]) => `<button type="button" class="button ${main ? '' : 'secondary'} small" data-book-format="${k}" title="${esc(h)}">${l}</button>`).join('')}</div>
       <p class="muted h-book-note">PDF : ouvre le livre, puis « Imprimer / enregistrer en PDF ». Les photos sont rangées dans les fichiers HTML, Word et ePub quand elles sont petites ; en Markdown, elles restent des liens vers le dossier des médias.</p>
-      <p><button type="button" class="link-button" data-book-reset>Remettre les réglages de départ</button></p></fieldset>
+      <p class="h-book-regl" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button type="button" class="button small secondary" data-book-export title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter mes réglages</button><button type="button" class="button small secondary" data-book-import title="Remettre des réglages exportés (fichier .json)">⤒ Importer un réglage</button><button type="button" class="link-button" data-book-reset>Remettre les réglages de départ</button></p></fieldset>
   </form>
 </section>`;
     };
@@ -97,6 +97,25 @@
             const mv = e.target.closest('[data-book-move]');
             if (mv) { const li = mv.closest('li'); if (mv.dataset.bookMove === '-1' && li.previousElementSibling) li.parentElement.insertBefore(li, li.previousElementSibling); else if (mv.dataset.bookMove === '1' && li.nextElementSibling) li.parentElement.insertBefore(li.nextElementSibling, li); persist(); return; }
             if (e.target.closest('[data-book-accent-reset]')) { form.dataset.accentSet = '0'; const c = read(form); c.accent = ''; save(c); A().toast('Couleur du style choisi.'); return; }
+            if (e.target.closest('[data-book-export]')) { // ⤓ les réglages du livre dans un fichier : {lcnda:'reglage', outil, nom, version, donnees}
+                const c = read(form), nom = String(await A().askText({title: 'Exporter mes réglages', message: 'Nom de ce réglage :', value: c.title || 'Mon livre de famille', okLabel: 'Exporter'}) ?? '').trim().slice(0, 60); if (!nom) return;
+                const {title, subtitle, author, preface, epilogue, ...rest} = c, slug = nom.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'reglage';
+                const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda: 'reglage', outil: 'livre-de-famille', nom, version: 1, donnees: {...rest, title, subtitle, author, preface, epilogue}}, null, 1)], {type: 'application/json'})); a.download = `lcnda-reglage-livre-de-famille-${slug}.json`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+                return;
+            }
+            if (e.target.closest('[data-book-import]')) {
+                const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json'; inp.hidden = true; inp.dataset.uiOff = ''; document.body.appendChild(inp);
+                inp.addEventListener('change', async () => {
+                    const f = inp.files?.[0]; inp.remove(); if (!f) return;
+                    let data; try { data = JSON.parse(await f.text()); } catch (_) { A().toast('Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible).', 'error'); return; }
+                    if (data?.lcnda !== 'reglage' || !data.donnees || typeof data.donnees !== 'object') { A().toast('Ce fichier n’est pas un réglage LCNDA.', 'error'); return; }
+                    if (data.outil !== 'livre-de-famille') { A().toast(`Ce réglage vient d’un autre outil (« ${String(data.outil || '?').slice(0, 40)} ») : il ne va pas dans le livre de famille.`, 'error'); return; }
+                    if (!await A().confirmBox('Tes réglages actuels du livre seront remplacés.', {title: `Mettre le réglage « ${String(data.nom || '').slice(0, 60)} » ?`, okLabel: 'Mettre ce réglage', danger: false})) return;
+                    const ok = {}; Object.keys(DEF).forEach(k => { if (data.donnees[k] !== undefined) ok[k] = typeof DEF[k] === 'number' ? Number(data.donnees[k]) || DEF[k] : Array.isArray(DEF[k]) ? (Array.isArray(data.donnees[k]) ? data.donnees[k].map(String) : DEF[k]) : String(data.donnees[k]).slice(0, 8000); });
+                    save({...load(), ...ok}); const sec = form.closest('.h-book'); sec.outerHTML = ext.familyBookPanelHtml(); ext.bindFamilyBook(exportUrl); A().toast(`Réglage « ${String(data.nom || '').slice(0, 60)} » mis.`);
+                });
+                inp.click(); return;
+            }
             if (e.target.closest('[data-book-reset]')) { if (!await A().confirmBox('', {title: 'Remettre tous les réglages du livre comme au départ ?', okLabel: 'Réinitialiser'})) return; localStorage.removeItem(KEY); const sec = form.closest('.h-book'); sec.outerHTML = ext.familyBookPanelHtml(); ext.bindFamilyBook(exportUrl); return; }
             const f = e.target.closest('[data-book-format]'); if (!f) return;
             const c = read(form); save(c);

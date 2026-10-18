@@ -97,6 +97,8 @@
                 const k = a.name.toLowerCase();
                 if (k === 'style') { const v = cleanStyle(a.value); if (v) n.setAttribute('style', v); else n.removeAttribute('style'); }
                 else if ((k === 'data-ps' || k === 'data-cs') && /^[a-z0-9_-]{1,40}$/i.test(a.value)) { /* style de paragraphe / de caractère */ }
+                else if (k === 'data-fn' && n.tagName === 'SUP' && /^[a-z0-9_-]{1,40}$/i.test(a.value)) { /* appel de note (numéroté à l'affichage) */ }
+                else if (k === 'data-cm' && n.tagName === 'SPAN' && /^[a-z0-9_-]{1,40}$/i.test(a.value)) { /* passage commenté (relecture) */ }
                 else if (k === 'href' && n.tagName === 'A' && /^(https?:\/\/|mailto:|#)/i.test(a.value.trim())) { n.setAttribute('target', '_blank'); n.setAttribute('rel', 'noopener noreferrer'); }
                 else if (k === 'target' || k === 'rel') { /* posés ci-dessus */ }
                 else n.removeAttribute(a.name);
@@ -161,7 +163,7 @@
             swatches: baseSwatches(t), paraStyles: baseStyles(t), charStyles: [{id: 'cs-em', name: 'Accent', color: 'sw-accent', italic: true}, {id: 'cs-caps', name: 'Petites capitales', caps: 'small', track: 40}, {id: 'cs-bold', name: 'Gras', weight: 700}],
             layers: [{id: 'L1', name: 'Calque 1', visible: true, locked: false, color: '#4a7dff'}],
             masters: [folioMaster(d, t), {id: 'B', name: 'B-Sans folio', items: []}],
-            pages: [{id: nid('p'), master: 'A', items: []}]};
+            pages: [{id: nid('p'), master: 'A', items: []}], uid: nid('d'), fn: {place: 'block', restart: 'none'}, notes: {}, review: {comments: []}};
     }
     function textItem(o) { return {id: nid('t'), type: 'text', layer: 'L1', x: 20, y: 20, w: 100, h: 30, rot: 0, html: '<p data-ps="ps-body"><br></p>', inset: 0, columns: 1, gutter: 4, valign: 'top', fill: 'none', stroke: {c: 'none', w: 0}, opacity: 100, ...o}; }
     function shapeItem(type, o) { return {id: nid('s'), type, layer: 'L1', x: 20, y: 20, w: 50, h: 50, rot: 0, fill: type === 'line' || type === 'frame' ? 'none' : 'sw-light', stroke: {c: type === 'frame' ? 'none' : 'sw-black', w: type === 'line' ? 1 : 0.5}, opacity: 100, ...o}; }
@@ -185,8 +187,29 @@
         out.masters = (Array.isArray(d.masters) ? d.masters : []).filter(m => m && idOk(m.id)).slice(0, 40).map(m => ({id: m.id, name: String(m.name || 'Gabarit').slice(0, 60), items: items(m.items)}));
         out.pages = (Array.isArray(d.pages) ? d.pages : []).slice(0, 2000).map(p => ({id: idOk(p?.id) ? p.id : nid('p'), master: out.masters.some(m => m.id === p?.master) ? p.master : '', items: items(p?.items)}));
         if (!out.pages.length) out.pages.push({id: nid('p'), master: out.masters[0]?.id || '', items: []});
+        // l'identité du document (relecture), ses notes de bas de page et les commentaires des relecteurs
+        out.uid = /^[a-z0-9]{6,40}$/i.test(String(d.uid || '')) ? d.uid : nid('d');
+        out.fn = {place: d.fn?.place === 'chapter' ? 'chapter' : 'block', restart: ['none', 'chapter', 'page'].includes(d.fn?.restart) ? d.fn.restart : (d.fn?.place === 'chapter' ? 'chapter' : 'none')};
+        out.notes = {}; Object.entries(d.notes && typeof d.notes === 'object' ? d.notes : {}).slice(0, 5000).forEach(([k, n]) => { if (!idOk(k) || !n || typeof n !== 'object') return; const o = {text: String(n.text || '').slice(0, 3000)}; if (Number(n.src) > 0) { o.src = Math.round(Number(n.src)); o.srcLabel = String(n.srcLabel || '').slice(0, 400); } out.notes[k] = o; });
+        out.review = cleanReview(d.review);
         return out;
     }
+    /** Les commentaires de relecture : texte, auteur, réponses, résolu, suggestion de changement (remplacer « … » par « … ») */
+    function cleanReview(rv) {
+        const txt = (v, n) => String(v ?? '').slice(0, n), when = v => /^\d{4}-\d{2}-\d{2}T[\d:.]+Z?$/.test(String(v || '')) ? String(v) : new Date().toISOString();
+        const list = (Array.isArray(rv?.comments) ? rv.comments : []).slice(0, 3000).filter(c => c && /^[a-z0-9_-]{1,40}$/i.test(String(c.id || ''))).map(c => {
+            const o = {id: c.id, text: txt(c.text, 4000), author: txt(c.author, 80) || 'Moi', at: when(c.at), resolved: !!c.resolved, item: /^[a-z0-9_-]{1,40}$/i.test(String(c.item || '')) ? c.item : '', quote: txt(c.quote, 600), page: clamp(c.page ?? -1, -1, 5000)};
+            if (c.status && ['accepted', 'refused'].includes(c.status)) o.status = c.status;
+            if (c.suggest && typeof c.suggest === 'object') o.suggest = {from: txt(c.suggest.from, 2000), to: txt(c.suggest.to, 2000)};
+            o.replies = (Array.isArray(c.replies) ? c.replies : []).slice(0, 200).filter(r => r && r.text).map(r => ({id: /^[a-z0-9_-]{1,40}$/i.test(String(r.id || '')) ? r.id : nid('r'), text: txt(r.text, 4000), author: txt(r.author, 80) || 'Moi', at: when(r.at)}));
+            return o;
+        });
+        return {comments: list};
+    }
+    const AUTO_KINDS = ['toc', 'index', 'places', 'jobs', 'notes', 'biblio'];
+    const TREE_MODES = [['asc', 'Ascendance (les ancêtres)'], ['desc', 'Descendance (les enfants, petits-enfants…)'], ['both', 'Sablier (ancêtres en haut, descendants en bas)'], ['fan', 'Éventail (roue des ancêtres)']];
+    const TREE_STYLES = [['classic', 'Classique (cases arrondies, couleur du livre)'], ['color', 'Couleurs (bleu les hommes, rose les femmes)'], ['plain', 'Sobre (simple trait)'], ['cartouche', 'Cartouche (double filet)']];
+    const cleanTree = t => ({root: Math.round(Number(t.root)), mode: TREE_MODES.some(m => m[0] === t.mode) ? t.mode : 'asc', gens: clamp(Math.round(Number(t.gens) || 4), 2, 10), style: TREE_STYLES.some(m => m[0] === t.style) ? t.style : 'classic', photos: !!t.photos, dates: t.dates !== false, places: !!t.places, at: String(t.at || '').slice(0, 40)});
     function paintOk(f) { return f === 'none' || hexOk(f) || /^(sw|gr)-[a-z0-9_-]{1,36}$/i.test(String(f || '')); }
     function cleanItem(it) {
         if (!it || typeof it !== 'object' || !['text', ...SHAPES, 'image'].includes(it.type)) return null;
@@ -209,8 +232,10 @@
         if (typeof it.link === 'string' && /^(https?:\/\/|mailto:)/i.test(it.link)) o.link = it.link.slice(0, 1000);
         // texte chaîné, sommaire et index automatiques, objets dynamiques (média de l'app, texte d'une fiche)
         if (it.type === 'text' && /^[a-z0-9_-]{1,40}$/i.test(String(it.next || ''))) o.next = it.next;
-        if (it.type === 'text' && ['toc', 'index'].includes(it.auto)) { o.auto = it.auto; o.autoStyles = (Array.isArray(it.autoStyles) ? it.autoStyles : []).filter(x => /^[a-z0-9_-]{1,40}$/i.test(String(x))).slice(0, 12); o.autoPs = /^[a-z0-9_-]{1,40}$/i.test(String(it.autoPs || '')) ? it.autoPs : 'ps-body'; o.autoDots = it.autoDots !== false;
-            if (Array.isArray(it.names)) o.names = it.names.filter(n => typeof n === 'string').slice(0, 20000).map(n => n.slice(0, 160)); }
+        if (it.type === 'text' && AUTO_KINDS.includes(it.auto)) { o.auto = it.auto; o.autoStyles = (Array.isArray(it.autoStyles) ? it.autoStyles : []).filter(x => /^[a-z0-9_-]{1,40}$/i.test(String(x))).slice(0, 12); o.autoPs = /^[a-z0-9_-]{1,40}$/i.test(String(it.autoPs || '')) ? it.autoPs : 'ps-body'; o.autoDots = it.autoDots !== false;
+            if (Array.isArray(it.names)) o.names = it.names.filter(n => typeof n === 'string').slice(0, 20000).map(n => n.slice(0, 160));
+            if (Array.isArray(it.terms)) o.terms = it.terms.filter(n => typeof n === 'string' && n.trim()).slice(0, 20000).map(n => n.slice(0, 120)); }
+        if (it.type === 'frame' && it.tree && Number(it.tree.root) > 0) o.tree = cleanTree(it.tree);
         if (Number(it.mediaId) > 0) o.mediaId = Math.round(Number(it.mediaId));
         if (it.type === 'frame' && Number(it.diagramId) > 0) o.diagramId = Math.round(Number(it.diagramId));
         if (it.type === 'text' && it.dyn?.type === 'person' && Number(it.dyn.id) > 0) o.dyn = {type: 'person', id: Math.round(Number(it.dyn.id)), fields: (Array.isArray(it.dyn.fields) ? it.dyn.fields : []).filter(f => DYN_FIELDS.some(d => d[0] === f)), at: String(it.dyn.at || '').slice(0, 40)};
@@ -313,7 +338,9 @@
     function docCss(doc, scope) {
         const S = `${scope} `;
         return [...doc.paraStyles.map(s => `${S}[data-ps="${s.id}"]{${styleCss(doc, s, true)}}${s.drop ? `${S}[data-ps="${s.id}"]::first-letter{float:left;font-size:${r1(clamp(s.drop, 2, 8) * (s.lead || 14) * PT * 0.95)}px;line-height:1;margin:${r1(PT * 2)}px ${r1(PT * 4)}px 0 0;font-weight:700;color:${colorOf(doc, s.dropColor || s.color, 'inherit')}}` : ''}`),
-            ...doc.charStyles.map(s => `${S}[data-cs="${s.id}"]{${styleCss(doc, s, false)}}`)].join('\n');
+            ...doc.charStyles.map(s => `${S}[data-cs="${s.id}"]{${styleCss(doc, s, false)}}`),
+            // les notes en bas des blocs : le texte courant, plus petit
+            (() => { const b = doc.paraStyles.find(x => x.id === 'ps-body') || {}; return `${S}.ly-fnotes{${styleCss(doc, {font: b.font, size: r1((b.size || 11) * 0.78), lead: r1((b.lead || 15) * 0.78), color: b.color}, false)};text-align:left}`; })()].join('\n');
     }
 
     /* ═════════════ Rendu (en texte HTML : le même pour l'écran, l'impression et le fichier HTML) ═════════════ */
@@ -369,7 +396,7 @@
             const ins = px(it.inset || 0), cols = clamp(it.columns || 1, 1, 12), jc = {top: 'flex-start', middle: 'center', bottom: 'flex-end', justify: 'space-between'}[it.valign || 'top'];
             const editing = ctx.editingId === it.id;
             const body = editing ? it.html : tokens(it.html, ctx);
-            inner = `${back}<div class="ly-txtbox" style="padding:${ins}px;justify-content:${jc}"><div class="ly-txt" ${editing ? 'contenteditable="true" spellcheck="true"' : ''} style="column-count:${cols};column-gap:${px(it.gutter ?? 4)}px">${wrapFloats(doc, it, ctx.others || [])}${body}</div></div>`;
+            inner = `${back}<div class="ly-txtbox" style="padding:${ins}px;justify-content:${jc}"><div class="ly-txt" ${editing ? 'contenteditable="true" spellcheck="true"' : ''} style="column-count:${cols};column-gap:${px(it.gutter ?? 4)}px">${wrapFloats(doc, it, ctx.others || [])}${body}</div>${it._fn && !editing ? `<div class="ly-fnotes">${it._fn}</div>` : ''}</div>`;
         } else {
             const defs = [], d = shapePath(it, w, h), sAttr = strokeAttrs(doc, it, defs, key), fillP = svgPaint(doc, it.fill, defs, key + 'f');
             if (it.type === 'frame' || it.type === 'image') {
@@ -399,7 +426,7 @@
         const guides = ctx.print || ctx.preview ? '' : `<div class="ly-margins" style="left:${px(m.l)}px;top:${px(m.t)}px;right:${px(m.r)}px;bottom:${px(m.b)}px">${doc.page.columns > 1 ? Array.from({length: doc.page.columns - 1}, (_, k) => { const cw = (doc.page.w - m.l - m.r - doc.page.gutter * (doc.page.columns - 1)) / doc.page.columns; const x = (cw + doc.page.gutter) * (k + 1); return `<i style="left:${px(x - doc.page.gutter)}px;width:${px(doc.page.gutter)}px"></i>`; }).join('') : ''}</div>`;
         const items = ordered(doc, pg.items);
         const outer = ctx.print || ctx.preview ? '' : `${doc.page.bleed ? `<div class="ly-bleed" style="inset:-${px(doc.page.bleed)}px"></div>` : ''}${doc.page.slug ? `<div class="ly-slug" style="inset:-${px((doc.page.bleed || 0) + doc.page.slug)}px"></div>` : ''}`;
-        return `<div class="ly-page${isLeftPage(doc, i) ? ' is-left' : ''}" data-page="${i}" style="width:${W}px;height:${H}px;background:${cssPaint(doc, doc.page.paper)}">${outer}${guides}${masterItems.map(it => itemHtml(doc, it, {...c, master: true, others: all})).join('')}${items.map(it => itemHtml(doc, it, {...c, others: all})).join('')}${ctx.print ? '' : `<span class="ly-pageno">${c.pageNo}${master ? ` · ${esc(master.name.split('-')[0])}` : ''}</span>`}</div>`;
+        return `<div class="ly-page${isLeftPage(doc, i) ? ' is-left' : ''}" data-page="${i}" style="width:${W}px;height:${H}px;background:${cssPaint(doc, doc.page.paper)}">${outer}${guides}${masterItems.map(it => itemHtml(doc, it, {...c, master: true, others: all})).join('')}${items.map(it => itemHtml(doc, it, {...c, others: all})).join('')}${ctx.annot?.size ? items.filter(it => ctx.annot.has(it.id)).map(it => `<span class="ly-cmark" style="left:${px(it.x + it.w) - 7}px;top:${Math.max(0, px(it.y) - 7)}px">${ctx.annot.get(it.id).join(',')}</span>`).join('') : ''}${ctx.print ? '' : `<span class="ly-pageno">${c.pageNo}${master ? ` · ${esc(master.name.split('-')[0])}` : ''}</span>`}</div>`;
     }
     /** Le titre du dernier chapitre (style « Chapitre ») commencé sur cette page ou avant : pour le titre courant {chapitre} */
     let chapCache = {sig: '', list: []};
@@ -419,7 +446,7 @@
         for (; i < n; i += 2) out.push(i + 1 < n ? [i, i + 1] : [i]);
         return out;
     }
-    const BASE_CSS = `.ly-page{position:relative;overflow:hidden;flex:none}.ly-item{position:absolute;transform-origin:50% 50%;box-sizing:border-box}.ly-svg{position:absolute;left:0;top:0;overflow:visible}.ly-txtbox{position:absolute;inset:0;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}.ly-txt{outline:none;column-fill:auto;height:auto;max-height:100%;overflow-wrap:break-word}.ly-txt p,.ly-txt h1,.ly-txt h2,.ly-txt h3,.ly-txt h4{margin:0}.ly-txt ul,.ly-txt ol{margin:0;padding-left:1.4em}.ly-txt a{color:inherit}.ly-wrapf{pointer-events:none}.ly-toc{display:flex;align-items:baseline;gap:.35em}.ly-toc .ly-tl{flex:1;min-width:1em;border-bottom:1px dotted currentColor;transform:translateY(-.3em)}.ly-toc .ly-tsp{flex:1}[data-cont]{text-indent:0!important}`;
+    const BASE_CSS = `.ly-page{position:relative;overflow:hidden;flex:none;color:#111}.ly-item{position:absolute;transform-origin:50% 50%;box-sizing:border-box}.ly-svg{position:absolute;left:0;top:0;overflow:visible}.ly-txtbox{position:absolute;inset:0;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}.ly-txt{outline:none;column-fill:auto;height:auto;max-height:100%;overflow-wrap:break-word}.ly-txt p,.ly-txt h1,.ly-txt h2,.ly-txt h3,.ly-txt h4{margin:0}.ly-txt ul,.ly-txt ol{margin:0;padding-left:1.4em}.ly-txt a{color:inherit}.ly-wrapf{pointer-events:none}.ly-toc{display:flex;align-items:baseline;gap:.35em}.ly-toc .ly-tl{flex:1;min-width:1em;border-bottom:1px dotted currentColor;transform:translateY(-.3em)}.ly-toc .ly-tsp{flex:1}[data-cont]{text-indent:0!important}.ly-fnotes{margin-top:auto;padding-top:1mm;border-top:.5pt solid currentColor;flex:none}.ly-fnotes p,.ly-fnote{margin:0 0 .6mm;text-indent:0}.ly-fnote sup,.ly-fnotes sup{font-size:70%}sup[data-fn]{font-size:65%;line-height:0}`;
     /* ═════════════ Designs (modèles de départ) : intégrés à l'app, ou enregistrés par soi (is_design) ═════════════ */
     const THEMES = [
         {id: 'classique', name: 'Classique', titleFont: 'Garamond', bodyFont: 'Georgia', accent: '#7a2e2e', paper: '#fffdf8', text: '#2a2522', soft: '#7a6f66', light: '#f1e7dc', cover: 'frame', person: 'side', ornament: '❦'},
@@ -488,8 +515,9 @@
         measureHost.innerHTML = `<style>${BASE_CSS}${docCss(doc, '.ly-measure')}</style><div class="ly-page" style="width:${px(doc.page.w)}px;height:${px(doc.page.h)}px">${itemHtml(doc, {...it, x: 0, y: 0, rot: 0}, {pageNo: 1, pages: 1, others: (others || []).map(o => ({...o, x: o.x - it.x, y: o.y - it.y}))})}</div>`;
         const t = measureHost.querySelector('.ly-txt'), bx = measureHost.querySelector('.ly-txtbox'); if (!t || !bx) return false;
         // le texte est toujours en colonnes (même une seule) : ce qui ne tient pas part dans une colonne de plus, sur le côté
-        t.style.height = bx.clientHeight - px(it.inset || 0) * 2 + 'px';
-        return t.scrollWidth > t.clientWidth + 2 || t.scrollHeight > bx.clientHeight - px(it.inset || 0) * 2 + 1;
+        const fnH = measureHost.querySelector('.ly-fnotes')?.offsetHeight || 0; // les notes en bas du bloc prennent leur place
+        t.style.height = bx.clientHeight - px(it.inset || 0) * 2 - fnH + 'px';
+        return t.scrollWidth > t.clientWidth + 2 || t.scrollHeight > bx.clientHeight - px(it.inset || 0) * 2 - fnH + 1;
     }
     const paraHtml = p => `<p data-ps="${p.ps}">${p.lead ? `<b>${esc(p.lead)}</b> ` : ''}${esc(p.text)}</p>`;
     /** Combien de paragraphes tiennent dans ce cadre (un paragraphe trop long est coupé entre deux mots) */
@@ -577,38 +605,23 @@
     }
     /* ═════════════ L'éditeur ═════════════ */
     const TOOLS = [['select', '➤', 'Sélection (V)', 'v'], ['text', 'T', 'Texte (T)', 't'], ['frame', '⊠', 'Cadre d’image (F)', 'f'], ['rect', '▭', 'Rectangle (M)', 'm'], ['ellipse', '◯', 'Ellipse (L)', 'l'], ['polygon', '⬡', 'Polygone (Y)', 'y'], ['star', '☆', 'Étoile (E)', 'e'], ['line', '╲', 'Ligne (\\)', '\\'], ['pen', '✒︎', 'Plume (P) : clic = point, double-clic ou Entrée = fini', 'p'], ['hand', '✋', 'Main (H)', 'h'], ['zoom', '🔍', 'Zoom (Z) — Alt pour reculer', 'z']];
-    const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['history', '🕘', 'Historique'], ['doc', '⚙️', 'Document']];
+    const PANELS = [['pages', '📄', 'Pages'], ['layers', '🗂', 'Calques'], ['obj', '🔧', 'Objet'], ['text', '🅰', 'Texte'], ['color', '🎨', 'Couleur'], ['links', '🔗', 'Liens'], ['review', '💬', 'Relecture'], ['history', '🕘', 'Historique'], ['doc', '⚙️', 'Document']];
     let localFonts = null;
     const fontList = () => { let mine = []; try { mine = JSON.parse(localStorage.getItem(FONTS_KEY) || '[]'); } catch (_) {} return [...new Set([...(Array.isArray(mine) ? mine : []).map(fontOk).filter(Boolean), ...(localFonts || []), ...BASE_FONTS])]; };
-    /* Choix d'une police : un champ et une liste à nous (celle du système ne défile pas dans l'app de bureau) — on tape pour filtrer, chaque police est montrée dans son dessin */
-    const fontPickHtml = (attrs, value = '', placeholder = 'Georgia…') => `<span class="ly-fontpick"><input ${attrs} value="${esc(value)}" placeholder="${esc(placeholder)}" autocomplete="off" spellcheck="false" data-fontpick><button type="button" class="ly-fontpick-open" tabindex="-1" aria-label="Toutes les polices" data-fontpick-open>▾</button><div class="ly-fontlist" hidden role="listbox"></div></span>`;
+    /* E5 : choix d'une police — la case garde le nom (on peut le taper) ; « Aa ▾ » ouvre la liste commune (récentes, de l'app, de l'ordinateur, chacune dans son dessin) */
+    const fontPickHtml = (attrs, value = '', placeholder = 'Georgia…') => `<span class="ly-fontpick"><input ${attrs} value="${esc(value)}" placeholder="${esc(placeholder)}" autocomplete="off" spellcheck="false" data-fontpick><button type="button" class="ly-fontpick-open" aria-label="Choisir la police dans la liste" title="Choisir la police dans la liste" data-fontpick-open>Aa ▾</button></span>`;
     function bindFontPick(root) {
         if (root.dataset.fontpickBound) return; root.dataset.fontpickBound = '1';
-        const listOf = inp => inp.closest('.ly-fontpick')?.querySelector('.ly-fontlist');
-        const fill = (inp, all = false) => {
-            const box = listOf(inp); if (!box) return;
-            const q = all ? '' : inp.value.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-            const fonts = fontList().filter(f => !q || f.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').includes(q));
-            box.innerHTML = fonts.length ? fonts.map(f => `<button type="button" role="option" data-fp="${esc(f)}" style="font-family:'${fontOk(f)}',sans-serif">${esc(f)}</button>`).join('') : '<p class="ly-help">Aucune police de ce nom. « 🖥 Polices de l’ordinateur » pour toutes les voir, ou tape son nom exact puis Entrée.</p>';
-            box.hidden = false; box.scrollTop = 0;
-        };
-        const close = () => root.querySelectorAll('.ly-fontlist').forEach(b => { b.hidden = true; });
-        const pick = (inp, f) => { inp.value = f; close(); inp.dispatchEvent(new Event('change', {bubbles: true})); };
-        root.addEventListener('focusin', e => { if (e.target.matches?.('[data-fontpick]')) fill(e.target, true); });
-        root.addEventListener('input', e => { if (e.target.matches?.('[data-fontpick]')) fill(e.target); });
-        root.addEventListener('mousedown', e => { if (e.target.closest('.ly-fontlist, [data-fontpick-open]')) e.preventDefault(); }); // le texte choisi reste choisi
-        root.addEventListener('click', e => {
-            const o = e.target.closest('[data-fontpick-open]'); if (o) { const inp = o.parentElement.querySelector('[data-fontpick]'); const box = listOf(inp); if (box.hidden) fill(inp, true); else close(); return; }
-            const b = e.target.closest('[data-fp]'); if (b) { e.stopPropagation(); pick(b.closest('.ly-fontpick').querySelector('[data-fontpick]'), b.dataset.fp); return; }
-            if (!e.target.closest('.ly-fontpick')) close();
+        const pick = (inp, f) => { inp.value = fontOk(f); inp.dispatchEvent(new Event('change', {bubbles: true})); };
+        root.addEventListener('mousedown', e => { if (e.target.closest('[data-fontpick-open]')) e.preventDefault(); }); // le texte choisi reste choisi
+        root.addEventListener('click', async e => {
+            const o = e.target.closest('[data-fontpick-open]'); if (!o) return; e.preventDefault();
+            const inp = o.parentElement.querySelector('[data-fontpick]'), UI = window.LCNDA_UI;
+            if (!UI?.openFontPicker) { inp.focus(); return; }
+            const sample = (getSelection()?.toString() || '').trim().slice(0, 40) || 'Notre famille';
+            const f = await UI.openFontPicker({value: inp.value, sample}); if (f) pick(inp, f);
         });
-        root.addEventListener('keydown', e => {
-            const inp = e.target.closest?.('[data-fontpick]'); if (!inp) return; const box = listOf(inp), items = [...box.querySelectorAll('[data-fp]')];
-            if (e.key === 'Escape') { if (!box.hidden) { e.preventDefault(); e.stopPropagation(); close(); } return; }
-            if (e.key === 'Enter') { e.preventDefault(); const cur = box.querySelector('.is-cur') || (box.hidden ? null : items[0]); if (cur && !box.hidden) pick(inp, cur.dataset.fp); else if (inp.value.trim()) pick(inp, fontOk(inp.value.trim())); return; }
-            if (e.key === 'ArrowDown' || e.key === 'ArrowUp') { e.preventDefault(); if (box.hidden) fill(inp, true); const its = [...box.querySelectorAll('[data-fp]')]; let k = its.findIndex(x => x.classList.contains('is-cur')); its[k]?.classList.remove('is-cur'); k = Math.max(0, Math.min(its.length - 1, k + (e.key === 'ArrowDown' ? 1 : -1))); its[k]?.classList.add('is-cur'); its[k]?.scrollIntoView({block: 'nearest'}); }
-        });
-        root.addEventListener('focusout', e => { if (e.target.matches?.('[data-fontpick]')) setTimeout(() => { if (!root.contains(document.activeElement) || !document.activeElement.closest('.ly-fontpick')) close(); }, 150); });
+        root.addEventListener('keydown', e => { const inp = e.target.closest?.('[data-fontpick]'); if (inp && e.key === 'Enter') { e.preventDefault(); if (inp.value.trim()) pick(inp, inp.value.trim()); } });
     }
 
     async function openEditor({id = 0, name = 'Sans titre', doc, isDesign = false, onSaved}) {
@@ -618,12 +631,13 @@
         const dl = document.createElement('dialog'); dl.className = 'modal ly-editor'; dl.dataset.dndOff = ''; dl.dataset.ownClose = '1'; // l'atelier a ses propres flèches : pas de poignée ⠿ de l'app (elle cassait la grille avec un seul calque)
         dl.innerHTML = `<div class="ly-top">
                 <span class="ly-brand">📐</span><input class="ly-name" data-ly-name value="${esc(docName)}" aria-label="Nom du document"><span class="ly-kind" data-ly-kind></span>
-                <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['pdf', '📄 Exporter en PDF (imprimer)…'], ['pdfbleed', '📄 PDF avec fond perdu et traits de coupe…'], ['html', '🌐 Exporter en page HTML'], ['json', '⬇️ Exporter le fichier du document (.json)'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '🔗 Mettre à jour les liens (photos, fiches)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
+                <span class="ly-menus" data-tbg="ly-menus" data-tbg-label="Menus du haut">${menu('Fichier', [['save', '💾 Enregistrer', '⌘S'], ['saveas', 'Enregistrer une copie…'], ['savedesign', '🎨 Enregistrer comme design…'], ['-'], ['export', '⤓ Exporter (PDF, ePub, HTML, fichier)…'], ['-'], ['preflight', '✅ Contrôle avant impression…'], ['relink', '↻ Mettre à jour les objets dynamiques (photos, fiches, arbres)'], ['stylelib', '🎨 Mes styles (pour tous mes documents)…'], ['-'], ['close', 'Fermer']])}
                 ${menu('Édition', [['undo', '↶ Annuler', '⌘Z'], ['redo', '↷ Rétablir', '⇧⌘Z'], ['-'], ['cut', 'Couper', '⌘X'], ['copy', 'Copier', '⌘C'], ['paste', 'Coller', '⌘V'], ['dup', 'Dupliquer', '⌘D'], ['del', 'Supprimer', '⌫'], ['-'], ['all', 'Tout sélectionner', '⌘A'], ['none', 'Désélectionner', 'Échap']])}
-                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…']])}
+                ${menu('Objet', [['front', 'Premier plan', '⇧⌘]'], ['fwd', 'Avancer', '⌘]'], ['back', 'Reculer', '⌘['], ['bottom', 'Arrière-plan', '⇧⌘['], ['-'], ['lock', '🔒 Verrouiller / déverrouiller'], ['hide', '🙈 Masquer'], ['showall', '👁 Tout afficher'], ['-'], ['fitframe', 'Ajuster le cadre au contenu'], ['place', '🖼️ Placer une image (liée si elle vient de l’app)…'], ['-'], ['chain', '➜ Chaîner le bloc de texte vers un autre…'], ['autoflow', '⤵ Faire couler le texte sur de nouvelles pages'], ['unchain', 'Couper le chaînage'], ['-'], ['toc', '📑 Insérer une table des matières'], ['index', '🔤 Insérer un index des noms'], ['idxplaces', '📍 Insérer un index des lieux'], ['idxjobs', '🔨 Insérer un index des métiers'], ['-'], ['fnote', '¹ Insérer une note de bas de page…'], ['cite', '📚 Citer une source (en note)…'], ['notesblock', '🗒 Insérer les notes du chapitre'], ['biblio', '📚 Insérer la bibliographie'], ['-'], ['tree', '🌳 Insérer un arbre généalogique (objet dynamique)…'], ['dynperson', '👤 Insérer le texte d’une fiche (objet dynamique)…'], ['dyndiagram', '📊 Insérer un diagramme (objet dynamique)…']])}
                 ${menu('Page', [['addend', '➕ Ajouter une page à la fin'], ['insert', '➕ Insérer des pages…'], ['duppage', 'Dupliquer la page'], ['delpage', '🗑 Supprimer la page'], ['-'], ['masters', '📄 Gabarit de plusieurs pages…'], ['-'], ['goto', 'Aller à la page…', '⌘J'], ['first', '⏮ Première page'], ['prev', '‹ Page précédente', 'Pg↑'], ['next', 'Page suivante ›', 'Pg↓'], ['last', 'Dernière page ⏭']])}
+                ${menu('Relecture', [['comment', '💬 Commenter le passage ou l’objet choisi…'], ['suggest', '✎ Suggérer une modification du texte choisi…'], ['reviewpanel', '🗂 Voir les commentaires'], ['-'], ['sendreview', '📨 Envoyer à un cousin (fichier de relecture)…'], ['importreview', '⤒ Importer les commentaires d’un cousin…'], ['annot', '📝 PDF annoté (avec les commentaires)…']])}
                 ${menu('Affichage', [['zin', 'Zoom avant', '⌘+'], ['zout', 'Zoom arrière', '⌘−'], ['zfit', 'Page entière', '⌘0'], ['z100', 'Taille réelle (100 %)', '⌘1'], ['-'], ['guides', 'Repères et marges'], ['snap', 'Magnétisme'], ['preview', 'Aperçu (sans repères)', 'W']])}</span>
-                <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small" data-ly-cmd="save">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
+                <span class="ly-hbtns" data-tbg="ly-hist" data-tbg-label="Annuler / rétablir (en haut)"><button type="button" class="ly-hbtn" data-ly-cmd="undo" title="Annuler (⌘Z)">↶</button><button type="button" class="ly-hbtn" data-ly-cmd="redo" title="Rétablir (⇧⌘Z)">↷</button></span><span class="ly-spacer"></span><span class="ly-state" data-ly-state data-ui-status></span>${ext.tbButton ? ext.tbButton('layout') : ''}<button type="button" class="button small secondary" data-ly-cmd="export" title="Exporter : PDF, ePub, HTML, impression, fichier du document">⤓ Exporter ▾</button><button type="button" class="button small" data-ly-cmd="save" title="Enregistrer" data-shortcut="⌘S">💾 Enregistrer</button>${ext.fullButton ? ext.fullButton('layout') : ''}<button type="button" class="icon-button" data-ly-cmd="close" aria-label="Fermer">×</button></div>
             <div class="ly-main"><div class="ly-tools" data-tbg="ly-tools" data-tbg-label="Outils (colonne de gauche)">${TOOLS.map(([k, ic, l, key]) => `<button type="button" data-ly-tool="${k}" title="${esc(l.replace(` (${String(key || '').toUpperCase()})`, ''))}" data-shortcut="${esc(String(key || '').toUpperCase())}" class="${k === 'select' ? 'is-on' : ''}">${ic}</button>`).join('')}<div class="ly-fs" title="Fond et contour de l’objet choisi : clic = choisir la couleur" data-shortcut="X"><button type="button" data-ly-target="fill" class="ly-fs-fill" title="Fond : clic pour choisir la couleur"></button><button type="button" data-ly-target="stroke" class="ly-fs-stroke" title="Contour : clic pour choisir la couleur"></button><button type="button" class="ly-fs-swap" data-ly-fsswap title="Intervertir fond et contour (⇧X)" data-shortcut="⇧X">⇄</button><button type="button" class="ly-fs-none" data-ly-fsnone title="Aucune couleur pour le fond ou le contour choisi (/)" data-shortcut="/">⧄</button><input type="color" data-ly-fspick tabindex="-1" aria-hidden="true"></div></div>
                 <div class="ly-canvas" data-ly-canvas tabindex="0"><div class="ly-board" data-ly-board></div></div>
                 <aside class="ly-panels"><span class="ly-resize" data-ly-resize title="Glisser pour élargir ou rétrécir le panneau (double-clic : taille de départ)"></span><div class="ly-ptabs" data-tbg="ly-tabs" data-tbg-label="Onglets du panneau de droite">${PANELS.map(([k, ic, l]) => `<button type="button" data-ly-panel="${k}" class="${k === panel ? 'is-on' : ''}" title="${l}">${ic}<span>${l}</span></button>`).join('')}</div><div class="ly-pbody" data-ly-pbody data-dnd-off></div></aside></div>
@@ -632,6 +646,7 @@
             <style data-ly-css></style>`;
         document.body.appendChild(dl);
         ext.tbApply?.(dl, 'layout');
+        window.LCNDA_UI?.harmonizeTopbar?.(dl.querySelector('.ly-top')); // E1 : ✓ Enregistré · ⚙️ · ⤓ Exporter · 💾 · ⛶ · ×
         ext.editorKeysAttach?.(dl, 'layout'); // ⌨️ raccourcis à soi // menus, outils, onglets et barre du bas rangés ou cachés à sa façon (⚙️ Personnaliser, ou Maintenance)
         const $ = q => dl.querySelector(q), board = $('[data-ly-board]'), canvas = $('[data-ly-canvas]'), pbody = $('[data-ly-pbody]');
         bindFontPick(pbody);
@@ -648,7 +663,8 @@
         $('[data-ly-resize]').addEventListener('dblclick', () => { main.style.gridTemplateColumns = ''; try { localStorage.removeItem(PW_KEY); } catch (_) {} });
         function menu(label, items) { return `<details class="ly-menu" data-tb="menu-${esc(label)}" data-tb-label="Menu ${esc(label)}"><summary>${label}</summary><div class="ly-menu-list">${items.map(([k, l, sc]) => k === '-' ? '<hr>' : `<button type="button" data-ly-cmd="${k}"><span>${l}</span>${sc ? `<kbd>${sc}</kbd>` : ''}</button>`).join('')}</div></details>`; }
         const msg = t => { $('[data-ly-msg]').textContent = t || ''; };
-        const setDirty = (v = true) => { dirty = v; $('[data-ly-state]').textContent = dirty ? '● modifié' : (docId ? '✓ enregistré' : 'pas encore enregistré'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };
+        const status = st => { const el = $('[data-ly-state]'); if (!el) return; if (window.LCNDA_UI?.savedStatus) window.LCNDA_UI.savedStatus(el, st); else el.textContent = {saved: '✓ Enregistré', dirty: '• modifié', saving: 'Enregistrement…', error: '⚠️ Pas enregistré'}[st] || st; };
+        const setDirty = (v = true) => { dirty = v; status(dirty || !docId ? 'dirty' : 'saved'); $('[data-ly-kind]').textContent = design ? '🎨 design' : ''; };
         /* Historique : chaque modification est une étape nommée ; ↶ ↷ (⌘Z, ⇧⌘Z) ou un clic sur une étape y revient */
         const snapshot = () => JSON.stringify({D, cur});
         let timeline = [{snap: snapshot(), label: 'Ouverture du document', at: new Date()}], pos = 0;
@@ -686,7 +702,7 @@
             board.style.zoom = zoom; board.classList.toggle('no-guides', !guides || preview);
             drawSel(); syncChrome(); renderPanel();
             if (editingId) { const t = board.querySelector(`.ly-item[data-id="${CSS.escape(editingId)}"] .ly-txt`); if (t) { bindEditing(t); } }
-            markOverflow();
+            markOverflow(); drawBubbles();
         }
         /** Un texte qui ne tient pas dans son cadre : petit ⊞ rouge, comme dans InDesign */
         function markOverflow() { board.querySelectorAll('.ly-text').forEach(el => { const t = el.querySelector('.ly-txt'), bx = el.querySelector('.ly-txtbox'); if (!t || !bx) return; const over = t.scrollHeight > bx.clientHeight + 2 || t.scrollWidth > bx.clientWidth + 2; el.classList.toggle('is-over', over); }); scheduleLight(); }
@@ -719,7 +735,7 @@
 
         /* — texte : édition dans le cadre — */
         function startEditing(it) {
-            if (it.auto) { panel = 'obj'; sel = [it.id]; render(); return msg(it.auto === 'toc' ? 'Le sommaire se remplit tout seul (réglages dans Objet).' : 'L’index se remplit tout seul (réglages dans Objet).'); }
+            if (it.auto) { panel = 'obj'; sel = [it.id]; render(); return msg(`${({toc: 'Le sommaire', index: 'L’index des noms', places: 'L’index des lieux', jobs: 'L’index des métiers', notes: 'Le bloc des notes', biblio: 'La bibliographie'})[it.auto] || 'Ce bloc'} se remplit tout seul (réglages dans Objet).`); }
             const head = chainHead(it);
             if (head !== it) { if (head.auto) return msg('Ce bloc est la suite d’un sommaire ou d’un index automatique.'); const pi = pageOfItem(head.id); if (pi >= 0 && pi !== cur) { cur = pi; } msg('Texte chaîné : il s’écrit dans son premier bloc (la suite se remplit toute seule).'); it = head; }
             if (it.dyn) { // la question d'abord, puis on revient ici sans l'objet dynamique
@@ -779,6 +795,7 @@
         /* — créer, déplacer, transformer à la souris — */
         let drag = null, pen = null;
         canvas.addEventListener('pointerdown', e => {
+            const bub = e.target.closest('.ly-cbub'); if (bub) { e.preventDefault(); e.stopPropagation(); focusCm = bub.dataset.lyCgo; panel = 'review'; drawBubbles(); renderPanel(); pbody.querySelector('.ly-cm.is-focus')?.scrollIntoView({block: 'nearest'}); return; }
             if (e.button === 1 || tool === 'hand' || e.target.closest('.ly-master-banner')) { if (e.target.closest('.ly-master-banner')) return; const sx = canvas.scrollLeft, sy = canvas.scrollTop, x0 = e.clientX, y0 = e.clientY; const mv = ev => { canvas.scrollLeft = sx - (ev.clientX - x0); canvas.scrollTop = sy - (ev.clientY - y0); }; const up = () => { removeEventListener('pointermove', mv); removeEventListener('pointerup', up); }; addEventListener('pointermove', mv); addEventListener('pointerup', up); return; }
             { // le petit + rouge d'un texte qui déborde : un clic dessus, puis un clic sur un autre bloc, et la suite y continue (comme dans InDesign)
                 const ov = !linkFrom && e.target.closest('.ly-item.ly-text.is-over:not(.ly-has-next):not(.ly-from-master)');
@@ -963,9 +980,13 @@
         function fitFrame() { const it = one(); if (!it) return; if (it.type === 'text') { const el = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"] .ly-txt`); if (el) { it.h = r1(el.scrollHeight / MM + (it.inset || 0) * 2 + 0.5); commit(); render(); } return; } if (it.src) { const im = new Image(); im.onload = () => { it.h = r1(it.w * im.naturalHeight / im.naturalWidth); it.imgS = 100; it.imgX = 0; it.imgY = 0; commit(); render(); }; im.src = it.src; } }
         async function placeImage(target = null) {
             const res = await pickImage(); if (!res) return;
-            let it = target && (target.type === 'frame') ? target : one()?.type === 'frame' ? one() : null;
-            if (!it) { const b = box(D, cur); const im = await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = res.src; }); const ratio = im ? im.naturalHeight / im.naturalWidth : 0.75, w = Math.min(b.w, 100); it = shapeItem('frame', {x: b.x, y: b.y, w, h: r1(w * ratio), layer: activeLayer(), fit: 'fill'}); curList().push(it); }
-            it.src = res.src; it.srcName = res.name; if (res.mediaId) it.mediaId = res.mediaId; else delete it.mediaId; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; commit(); render();
+            await placeSrc(res, target && (target.type === 'frame') ? target : one()?.type === 'frame' ? one() : null); commit(); render();
+        }
+        /** Une image dans un cadre (celui donné, sinon un nouveau dans les marges, décalé de k fois 8 mm) */
+        async function placeSrc(res, target = null, k = 0) {
+            let it = target;
+            if (!it) { const b = box(D, cur); const im = await new Promise(r => { const x = new Image(); x.onload = () => r(x); x.onerror = () => r(null); x.src = res.src; }); const ratio = im ? im.naturalHeight / im.naturalWidth : 0.75, w = Math.min(b.w, 100); it = shapeItem('frame', {x: r1(b.x + k * 8), y: r1(b.y + k * 8), w, h: r1(w * ratio), layer: activeLayer(), fit: 'fill'}); curList().push(it); }
+            it.src = res.src; it.srcName = res.name; if (res.mediaId) it.mediaId = res.mediaId; else delete it.mediaId; delete it.tree; it.fill = it.fill === 'sw-light' ? 'none' : it.fill; sel = [it.id]; return it;
         }
         /* ─── Texte chaîné : un texte qui continue d'un bloc à l'autre, sur plusieurs pages ─── */
         let linkFrom = null;
@@ -1010,10 +1031,26 @@
             m.items.push(it); sel = [it.id]; commit(`Gabarit : ${it.name}`); render();
         }
         /** Table des matières ou index des noms, qui se remplissent tout seuls */
+        const AUTO_NAMES = {toc: 'Table des matières', index: 'Index des noms', places: 'Index des lieux', jobs: 'Index des métiers', notes: 'Notes du chapitre', biblio: 'Bibliographie'};
         async function insertAuto(kind) {
             if (editMaster) return msg('Pas dans un gabarit : sur une page.');
-            const b = box(D, cur), it = textItem({x: b.x, y: b.y, w: b.w, h: b.h, layer: activeLayer(), name: kind === 'toc' ? 'Table des matières' : 'Index des noms', auto: kind,
-                autoStyles: kind === 'toc' ? D.paraStyles.filter(s => ['ps-chapter'].includes(s.id)).map(s => s.id) : [], autoPs: kind === 'toc' ? 'ps-body' : 'ps-list', columns: kind === 'index' ? 2 : 1, gutter: 6});
+            if (editingId) stopEditing();
+            const b = box(D, cur), it = textItem({x: b.x, y: b.y, w: b.w, h: b.h, layer: activeLayer(), name: AUTO_NAMES[kind], auto: kind,
+                autoStyles: kind === 'toc' ? D.paraStyles.filter(s => ['ps-chapter'].includes(s.id)).map(s => s.id) : [], autoPs: kind === 'toc' ? 'ps-body' : 'ps-list', columns: ['index', 'places', 'jobs'].includes(kind) ? 2 : 1, gutter: 6});
+            if (kind === 'notes' || kind === 'biblio') {
+                if (kind === 'notes') { it.h = Math.min(b.h, 60); it.y = r1(b.y + b.h - it.h); if (D.fn?.place !== 'chapter' && await A().confirmBox('Les notes du chapitre se rangeront dans ce bloc au lieu du bas de chaque texte (Document → Notes de bas de page).', {title: 'Mettre les notes en fin de chapitre ?', okLabel: 'Oui, en fin de chapitre', cancelLabel: 'Non, garder en bas des blocs', danger: false})) D.fn = {place: 'chapter', restart: 'chapter'}; }
+                curList().push(it); sel = [it.id]; panel = 'obj'; commit(AUTO_NAMES[kind]); render();
+                return msg(kind === 'notes' ? '🗒 Les notes du chapitre se rangent ici toutes seules.' : '📚 La bibliographie se remplit avec les sources citées en note.');
+            }
+            if (kind === 'places' || kind === 'jobs') {
+                const cs = kind === 'places' ? {id: 'cs-index-place', name: 'Lieu à indexer'} : {id: 'cs-index-job', name: 'Métier à indexer'};
+                if (!D.charStyles.some(c => c.id === cs.id)) D.charStyles.push(cs);
+                if (await A().confirmBox(`Sinon : seulement les mots marqués avec le style de caractère « ${cs.name} ».`, {title: kind === 'places' ? 'Chercher aussi les lieux de ta généalogie ?' : 'Chercher aussi les métiers de ta généalogie ?', okLabel: 'Oui, les chercher', cancelLabel: 'Non, seulement les mots marqués', danger: false})) {
+                    try { const r = await api('layout_index_terms'); it.terms = (kind === 'places' ? r.places : r.jobs) || []; } catch (err) { toast(err.message, 'error'); }
+                }
+                curList().push(it); sel = [it.id]; panel = 'obj'; commit(AUTO_NAMES[kind]); render();
+                return msg(`${AUTO_NAMES[kind]} : rangé de A à Z, avec les pages. S’il est long : Objet → Faire couler le texte.`);
+            }
             if (kind === 'index') {
                 if (!D.charStyles.some(c => c.id === 'cs-index')) D.charStyles.push({id: 'cs-index', name: 'Nom à indexer'});
                 if (await A().confirmBox('Sinon : seulement les noms marqués avec le style de caractère « Nom à indexer ».', {title: 'Chercher aussi les noms des personnes de la généalogie ?', okLabel: 'Oui, chercher les noms', cancelLabel: 'Non, seulement les noms marqués', danger: false})) {
@@ -1030,7 +1067,8 @@
             const frames = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && (it.mediaId || /^media\//.test(it.src || '')));
             const dyn = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.dyn);
             const dgs = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && it.diagramId);
-            if (!frames.length && !dyn.length && !dgs.length) { if (!silent) msg('Aucun objet lié dans ce document.'); return; }
+            const trees = [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(it => it.type === 'frame' && it.tree);
+            if (!frames.length && !dyn.length && !dgs.length && !trees.length) { if (!silent) msg('Aucun objet dynamique dans ce document (photos liées, textes de fiches, diagrammes, arbres).'); return; }
             let changed = 0;
             if (frames.length) {
                 try { mediaRows = (await api('media_av_list', {kind: 'image'})).items || []; } catch (_) { mediaRows = mediaRows || []; }
@@ -1042,10 +1080,11 @@
                 });
             }
             for (const it of dyn) { try { const h = await personDynHtml(it.dyn.id, it.dyn.fields); if (h !== it.html) { it.html = h; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = 'ok'; it.dyn.at = new Date().toISOString().slice(0, 16); } catch (_) { linkState[it.id] = 'missing'; } }
+            for (const it of trees) { try { const r = await treeSvg(it.tree, lookOf()), src = svgSrc(r.svg); if (src !== it.src) { it.src = src; it.srcName = r.name; it.tree.at = new Date().toISOString().slice(0, 16); changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
             for (const it of dgs) { try { const svg = ext.diagramSvg ? await ext.diagramSvg(it.diagramId) : ''; if (!svg) { linkState[it.id] = 'missing'; continue; } const src = svgSrc(svg); if (src !== it.src) { it.src = src; changed++; linkState[it.id] = 'updated'; } else linkState[it.id] = linkState[it.id] === 'updated' ? 'updated' : 'ok'; } catch (_) { linkState[it.id] = 'missing'; } }
-            if (changed) { commit('Liens mis à jour'); render(); }
+            if (changed) { commit('Objets dynamiques mis à jour'); render(); }
             const miss = Object.values(linkState).filter(v => v === 'missing').length;
-            if (!silent || changed || miss) msg(`🔗 Liens : ${changed ? `${changed} mis à jour` : 'tout est à jour'}${miss ? `, ${miss} introuvable${miss > 1 ? 's' : ''}` : ''}.`);
+            if (!silent || changed || miss) msg(`↻ Objets dynamiques : ${changed ? `${changed} mis à jour` : 'tout est à jour'}${miss ? `, ${miss} introuvable${miss > 1 ? 's' : ''}` : ''}.`);
             if (panel === 'links') renderPanel();
         }
         /** ✏️ Modifier l'original : la photo s'ouvre dans la retouche ; à la fermeture, le cadre se met à jour */
@@ -1086,6 +1125,190 @@
                     commit('Texte lié à une fiche'); render();
                 }});
         }
+        /* ─── ¹ Notes de bas de page et 📚 citations : l'appel <sup data-fn> est numéroté tout seul (resolveDoc), le texte est dans D.notes ─── */
+        const askBox = (title, message, value = '', okLabel = 'Valider') => A().askText({title, message, value, okLabel}).then(v => (v === null || v === undefined ? null : String(v)));
+        function caretBlock() { const t = editEl(); if (!t) { msg('Double-clic dans un bloc de texte, place le curseur où va l’appel de note, puis recommence.'); return null; } return t; }
+        function putNote(text, extra = {}) {
+            const t = editEl(); if (!t) return;
+            const r = restoreRange() || (() => { const rr = document.createRange(); rr.selectNodeContents(t.lastElementChild || t); rr.collapse(false); return rr; })();
+            r.collapse(false);
+            const k = nid('n'); D.notes = D.notes || {}; D.notes[k] = {text: String(text).slice(0, 3000), ...extra};
+            const sup = document.createElement('sup'); sup.setAttribute('data-fn', k); sup.textContent = String((board.querySelectorAll('sup[data-fn]').length || 0) + 1);
+            r.insertNode(sup); const after = document.createRange(); after.setStartAfter(sup); after.collapse(true); const sl = getSelection(); sl.removeAllRanges(); sl.addRange(after); savedRange = after;
+            const f = findItem(editingId); if (f) f.it.html = readEditing(t); setDirty(); markOverflow();
+            msg('¹ Note ajoutée : tous les numéros se remettent dans l’ordre quand tu sors du texte (Échap).');
+        }
+        async function insertNote() { if (!caretBlock()) return; const v = await askBox('¹ Note de bas de page', 'Texte de la note (il s’écrit en bas du bloc, ou en fin de chapitre) :', '', 'Ajouter la note'); if (v && v.trim()) putNote(v.trim()); }
+        const folioTxt = v => { v = String(v || '').trim(); return /^\d+\s*[rv°]?$/i.test(v) ? `f° ${v.replace(/\s+/g, '')}` : v; };
+        const citeText = (f, src) => [f.agency.value.trim() || (src?.title || ''), f.cote.value.trim() || (!f.agency.value.trim() ? '' : src?.title || ''), folioTxt(f.folio.value), f.date.value.trim(), f.extra.value.trim()].filter(Boolean).join(', ');
+        const biblioLabel = (f, src) => `${[f.agency.value.trim(), src?.title || '', f.cote.value.trim() ? `cote ${f.cote.value.trim().replace(/^cote\s+/i, '')}` : ''].filter(Boolean).join(', ')}${src?.author ? ` — ${src.author}` : ''}.`;
+        function citeDialog() {
+            if (!caretBlock()) return;
+            const P = window.LCNDA_PICKER || A(); let src = null;
+            ext.openDialog({eyebrow: 'NOTE · SOURCE', title: '📚 Citer une source', submitLabel: 'Écrire la note',
+                body: `<p class="muted">La référence s’écrit en note, à l’endroit du curseur, au format des archives (« AD Corrèze, 3 E 123, f° 12 ») ; la source entre dans la bibliographie (Objet → Insérer la bibliographie).</p>
+                    <div><span class="pk-lab">Source</span>${P.pickerField({name: 'ly_src', kind: 'source'})}</div>
+                    <div class="form-grid"><label>Dépôt (archives) <input name="agency" placeholder="AD Corrèze" maxlength="200"></label><label>Cote <input name="cote" placeholder="3 E 123" maxlength="200"></label>
+                    <label><span data-help="Le numéro de la feuille (f° 12, f° 12 v° pour le verso), de la page ou de la vue en ligne.">Folio, page ou vue</span> <input name="folio" placeholder="12" maxlength="60"></label><label>Date de l’acte <input name="date" data-ui-date="nocal" placeholder="7 mai 1850" maxlength="80"></label>
+                    <label class="span-2">À ajouter (facultatif) <input name="extra" placeholder="acte de baptême de Jean" maxlength="300"></label></div>
+                    <p class="ly-citeprev" data-cite-prev></p>`,
+                onOpen: dg => {
+                    const f = dg.querySelector('form'), prev = dg.querySelector('[data-cite-prev]');
+                    const draw = () => { const t = src ? citeText(f, src) : ''; prev.textContent = t ? `Note : ${t}` : 'Choisis une source : la note s’écrit ici.'; };
+                    dg.addEventListener('picker-change', async e => {
+                        if (e.detail?.name !== 'ly_src') return; const id = Number(e.detail.value) || 0; src = null;
+                        if (id) { try { const r = await api('layout_source', {id}); src = r.source; f.agency.value = src.agency || ''; f.cote.value = src.cote || ''; const c = (r.citations || []).find(x => x.folio || x.date); if (c && !f.folio.value) f.folio.value = c.folio || ''; } catch (err) { toast(err.message, 'error'); } }
+                        draw();
+                    });
+                    dg.addEventListener('input', draw); draw(); setTimeout(() => dg.querySelector('.pk-input')?.focus(), 30);
+                },
+                onSubmit: f => { if (!src) { toast('Choisis une source.', 'error'); return false; } putNote(citeText(f, src), {src: src.id, srcLabel: biblioLabel(f, src)}); msg('📚 Citation ajoutée en note (et dans la bibliographie).'); }});
+        }
+        /** Les appels de note d'un bloc, dans le texte qu'on écrit ou dans le document */
+        function editNote(k, remove = false) {
+            const t = editEl(), it = t ? findItem(editingId)?.it : chainHead(one() || {});
+            if (remove) {
+                if (t) { t.querySelectorAll(`sup[data-fn="${CSS.escape(k)}"]`).forEach(x => x.remove()); if (it) it.html = readEditing(t); setDirty(); }
+                else if (it?.html) { const d = document.createElement('div'); d.innerHTML = it.html; d.querySelectorAll(`sup[data-fn="${CSS.escape(k)}"]`).forEach(x => x.remove()); it.html = sanitizeHtml(d.innerHTML); }
+                delete D.notes[k]; if (t) { renderPanel(); return; } commit('Note retirée'); render(); return;
+            }
+            askBox('¹ Modifier la note', 'Texte de la note :', D.notes?.[k]?.text || '', 'Enregistrer').then(v => { if (v === null || !D.notes?.[k]) return; D.notes[k].text = v.trim().slice(0, 3000); if (t) { setDirty(); renderPanel(); } else { commit('Note modifiée'); render(); } });
+        }
+
+        /* ─── 🌳 Arbre généalogique : un cadre d'image qui suit la base (objet dynamique), dessiné en SVG ─── */
+        const lookOf = () => { const st = id => D.paraStyles.find(x => x.id === id) || {}; return {accent: colorOf(D, 'sw-accent', '#7a2e2e'), text: colorOf(D, 'sw-text', '#222222'), soft: colorOf(D, 'sw-soft', '#6b6b6b'), light: colorOf(D, 'sw-light', '#f3ece4'), paper: colorOf(D, 'sw-paper', '#ffffff'), font: fontOk(st('ps-body').font) || 'Georgia', title: fontOk(st('ps-name').font || st('ps-title').font) || 'Georgia'}; };
+        function treeDialog(it = null) {
+            const S = A().state, t0 = it?.tree || {root: Number(S.currentPersonId) || Number(S.bootstrap?.startPersonId) || 0, mode: 'asc', gens: 4, style: 'classic', photos: true, dates: true, places: false};
+            const P = window.LCNDA_PICKER || A();
+            ext.openDialog({eyebrow: 'OBJET DYNAMIQUE', title: it ? '🌳 Modifier l’arbre' : '🌳 Insérer un arbre généalogique', submitLabel: it ? 'Mettre à jour l’arbre' : 'Insérer l’arbre',
+                body: `<p class="muted">L’arbre est dessiné d’après la base : il se refait tout seul à l’ouverture du document et avec « ↻ Mettre à jour les objets dynamiques ». Il s’imprime et passe dans le PDF comme une image nette.</p>
+                    <div><span class="pk-lab">Personne</span>${P.pickerField({name: 'ly_tree', kind: 'person', value: t0.root || null})}</div>
+                    <div class="form-grid"><label>Forme <select name="mode">${TREE_MODES.map(([k, l]) => `<option value="${k}" ${k === t0.mode ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
+                    <label><span data-help="Combien de rangées : 2 = la personne et ses parents (ou ses enfants), 4 = jusqu’aux arrière-grands-parents. Au-delà de 6, les cases deviennent petites.">Générations</span> <input type="range" name="gens" min="2" max="8" step="1" value="${t0.gens}" data-unit=""></label>
+                    <label>Style des cases <select name="tstyle">${TREE_STYLES.map(([k, l]) => `<option value="${k}" ${k === t0.style ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label><span></span>
+                    <label class="ui-toggle"><input type="checkbox" name="photos" ${t0.photos ? 'checked' : ''}><i></i>Photos des fiches</label><label class="ui-toggle"><input type="checkbox" name="dates" ${t0.dates !== false ? 'checked' : ''}><i></i>Dates</label><label class="ui-toggle"><input type="checkbox" name="places" ${t0.places ? 'checked' : ''}><i></i>Lieux</label></div>`,
+                onSubmit: async f => {
+                    const root = Number(f.elements.ly_tree?.value) || 0; if (!root) { toast('Choisis la personne de l’arbre.', 'error'); return false; }
+                    const cfg = cleanTree({root, mode: f.mode.value, gens: f.gens.value, style: f.tstyle.value, photos: f.photos.checked, dates: f.dates.checked, places: f.places.checked});
+                    msg('🌳 Je dessine l’arbre…'); const r = await treeSvg(cfg, lookOf()); cfg.at = new Date().toISOString().slice(0, 16);
+                    const src = svgSrc(r.svg);
+                    if (it) { const ratio = r.h / r.w; it.tree = cfg; it.src = src; it.srcName = r.name; it.h = r1(it.w * ratio); }
+                    else { const b = box(D, cur), ratio = r.h / r.w; let w = b.w, h = w * ratio; if (h > b.h) { h = b.h; w = h / ratio; } const n = shapeItem('frame', {x: r1(b.x + (b.w - w) / 2), y: b.y, w: r1(w), h: r1(h), layer: activeLayer(), fit: 'fit', fill: 'none', stroke: {c: 'none', w: 0}, name: 'Arbre'}); Object.assign(n, {src, srcName: r.name, tree: cfg}); curList().push(n); sel = [n.id]; }
+                    linkState[(it || one())?.id] = 'ok'; commit(it ? 'Arbre modifié' : 'Arbre inséré'); render(); msg(`🌳 ${r.name} : ${A().plural(r.count, 'personne')}.`);
+                }});
+        }
+
+        /* ─── 💬 Relecture : commentaires ancrés à un passage (<span data-cm>) ou à un objet, réponses, résolu, suggestions ─── */
+        const REVIEWER_KEY = 'genealogie-layout-reviewer';
+        const reviewerName = () => { try { return localStorage.getItem(REVIEWER_KEY) || ''; } catch (_) { return ''; } };
+        const reviewer = async () => { let n = reviewerName(); if (n) return n; n = String(await askBox('💬 Ton nom', 'Ton prénom (il signe tes commentaires) :', '', 'Valider') || '').trim().slice(0, 60); if (n) { try { localStorage.setItem(REVIEWER_KEY, n); } catch (_) {} } return n || 'Moi'; };
+        const comments = () => { D.review = D.review || {comments: []}; D.review.comments = D.review.comments || []; return D.review.comments; };
+        let focusCm = '';
+        const wrapRange = (t, r, id) => blocksOf(t, r).forEach(b => { const rr = document.createRange(); rr.selectNodeContents(b); if (b.contains(r.startContainer) || b === r.startContainer) rr.setStart(r.startContainer, r.startOffset); if (b.contains(r.endContainer) || b === r.endContainer) rr.setEnd(r.endContainer, r.endOffset); if (rr.collapsed) return; const sp = document.createElement('span'); sp.setAttribute('data-cm', id); sp.appendChild(rr.extractContents()); rr.insertNode(sp); });
+        const textItems = () => [...D.pages.flatMap(p => p.items), ...D.masters.flatMap(m => m.items)].filter(x => x.type === 'text');
+        function unwrapCm(id) { textItems().forEach(it => { if (!String(it.html || '').includes(`data-cm="${id}"`)) return; const d = document.createElement('div'); d.innerHTML = it.html; d.querySelectorAll(`[data-cm="${CSS.escape(id)}"]`).forEach(x => x.replaceWith(...x.childNodes)); it.html = sanitizeHtml(d.innerHTML); }); }
+        /** Remettre le surlignage d'après les mots cités (commentaire importé, ou rouvert) */
+        function wrapQuote(it, quote, id) {
+            if (!it || it.type !== 'text' || !quote) return false; const d = document.createElement('div'); d.innerHTML = it.html || '';
+            const w = document.createTreeWalker(d, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) { const k = n.data.indexOf(quote); if (k < 0) continue; const r = document.createRange(); r.setStart(n, k); r.setEnd(n, k + quote.length); const sp = document.createElement('span'); sp.setAttribute('data-cm', id); sp.appendChild(r.extractContents()); r.insertNode(sp); it.html = sanitizeHtml(d.innerHTML); return true; }
+            return false;
+        }
+        async function addComment(suggest) {
+            const t = editEl(), r = t ? restoreRange() : null, range = r && !r.collapsed ? r.cloneRange() : null;
+            const quote = range ? range.toString().replace(/\s+/g, ' ').trim().slice(0, 600) : '';
+            if (suggest && !quote) return msg('Choisis d’abord les mots à changer : double-clic dans le texte, puis sélectionne-les.');
+            const target = t ? findItem(editingId)?.it : one();
+            if (!target) return msg('Choisis un objet, ou des mots dans un texte (double-clic), puis « 💬 Commenter ».');
+            const v = suggest ? await askBox('✎ Suggérer une modification', `Remplacer « ${quote.slice(0, 120)} » par :`, quote, 'Suggérer') : await askBox('💬 Commentaire', quote ? `Ton commentaire sur « ${quote.slice(0, 120)} » :` : 'Ton commentaire sur cet objet :', '', 'Ajouter le commentaire');
+            if (v === null || (!suggest && !v.trim()) || (suggest && v === quote)) return;
+            const author = await reviewer();
+            const c = {id: nid('c'), text: suggest ? '' : v.trim().slice(0, 4000), author, at: new Date().toISOString(), resolved: false, item: target.id, quote, page: pageOfItem(target.id), replies: []};
+            if (suggest) c.suggest = {from: quote, to: v.slice(0, 2000)};
+            if (range && editEl()) { wrapRange(editEl(), range, c.id); const f = findItem(editingId); if (f) f.it.html = readEditing(editEl()); }
+            comments().push(c); focusCm = c.id; panel = 'review';
+            if (editingId) stopEditing(); else { commit(suggest ? 'Suggestion ajoutée' : 'Commentaire ajouté'); render(); }
+            msg(suggest ? '✎ Suggestion notée : elle s’accepte ou se refuse dans Relecture.' : '💬 Commentaire ajouté.');
+        }
+        function applySuggestion(c, accept) {
+            if (editingId) stopEditing();
+            const it = findItem(c.item)?.it; let done = !accept;
+            if (it?.type === 'text') {
+                const d = document.createElement('div'); d.innerHTML = it.html || ''; const sp = [...d.querySelectorAll(`[data-cm="${CSS.escape(c.id)}"]`)];
+                if (accept && sp.length) { sp[0].replaceWith(document.createTextNode(c.suggest.to)); sp.slice(1).forEach(x => x.remove()); done = true; }
+                else if (accept) { const w = document.createTreeWalker(d, NodeFilter.SHOW_TEXT); let n; while (!done && (n = w.nextNode())) { const k = n.data.indexOf(c.suggest.from); if (k >= 0) { n.data = n.data.slice(0, k) + c.suggest.to + n.data.slice(k + c.suggest.from.length); done = true; } } }
+                else sp.forEach(x => x.replaceWith(...x.childNodes));
+                it.html = sanitizeHtml(d.innerHTML);
+            }
+            if (!done) return msg('Le passage a changé depuis : la suggestion ne peut plus s’appliquer toute seule. Change le texte à la main, puis « Résoudre ».');
+            c.resolved = true; c.status = accept ? 'accepted' : 'refused'; commit(accept ? 'Suggestion acceptée' : 'Suggestion refusée'); render();
+        }
+        function drawBubbles() {
+            board.querySelectorAll('.ly-cbub').forEach(x => x.remove()); if (preview || editMaster) return;
+            comments().filter(c => !c.resolved).forEach(c => {
+                let pe = null, top = 0; const span = board.querySelector(`[data-cm="${CSS.escape(c.id)}"]`);
+                if (span) { pe = span.closest('.ly-page'); if (!pe) return; const r = span.getBoundingClientRect(), pr = pe.getBoundingClientRect(), k = pr.height / px(D.page.h) || 1; top = (r.top - pr.top) / k; }
+                else { const pi = pageOfItem(c.item); if (pi < 0) return; pe = board.querySelector(`.ly-page[data-page="${pi}"]`); const it = D.pages[pi].items.find(x => x.id === c.item); top = it ? px(it.y) : 0; }
+                if (!pe) return;
+                const b = document.createElement('button'); b.type = 'button'; b.className = `ly-cbub${pe.classList.contains('is-left') ? ' is-left' : ''}${c.id === focusCm ? ' is-focus' : ''}`; b.dataset.lyCgo = c.id;
+                // deux bulles à la même hauteur : la suivante se pose dessous
+                let y = Math.max(0, r1(top)); const used = [...pe.querySelectorAll('.ly-cbub')].map(x => parseFloat(x.style.top) || 0); while (used.some(u => Math.abs(u - y) < 28 / (zoom || 1))) y += 28 / (zoom || 1);
+                b.title = `${c.author} : ${c.suggest ? `remplacer « ${c.suggest.from} » par « ${c.suggest.to} »` : c.text}`.slice(0, 300); b.textContent = c.suggest ? '✎' : '💬'; b.style.top = `${y}px`; pe.appendChild(b);
+            });
+        }
+        const pickFile = accept => new Promise(res => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = accept; inp.hidden = true; inp.dataset.uiOff = ''; inp.addEventListener('change', () => { res(inp.files?.[0] || null); inp.remove(); }); document.body.appendChild(inp); inp.click(); setTimeout(() => { if (!inp.files?.length) { /* fenêtre fermée sans choix */ } }, 0); });
+        function exportReview(file) {
+            let name = file || `${slug(docName)}-relecture.json`; if (!/relecture/i.test(name)) name = name.replace(/\.json$/i, '') + '-relecture.json';
+            download(name, new Blob([JSON.stringify({lcnda: 'relecture', version: 1, outil: 'mise-en-page', name: docName, uid: D.uid, from: reviewerName(), at: new Date().toISOString(), doc: D})], {type: 'application/json'}));
+            toast('📨 Fichier de relecture prêt : envoie-le à ton cousin. Il l’importe dans 📐 Mise en page, commente, puis te renvoie le sien (Relecture → Importer).');
+        }
+        async function importReview() {
+            const f = await pickFile('.json,application/json'); if (!f) return;
+            if (f.size > 40e6) return toast('Fichier trop gros.', 'error');
+            let data; try { data = JSON.parse(await f.text()); } catch (_) { return toast('Ce fichier n’est pas un fichier de relecture LCNDA.', 'error'); }
+            const list = data?.doc?.review?.comments || data?.comments;
+            if (data?.lcnda !== 'relecture' || !Array.isArray(list)) return toast(data?.lcnda === 'reglage' ? 'C’est un fichier de réglage, pas un fichier de relecture.' : 'Ce fichier n’est pas un fichier de relecture LCNDA (📨 Envoyer à un cousin).', 'error');
+            if (data.uid && D.uid && data.uid !== D.uid && !await A().confirmBox('Ce fichier de relecture a été fait pour un autre document. Importer quand même ses commentaires ?', {title: 'Un autre document ?', okLabel: 'Importer quand même'})) return;
+            if (editingId) stopEditing();
+            const incoming = cleanReview({comments: list}).comments; let added = 0, replies = 0, closed = 0;
+            incoming.forEach(c => {
+                const mine = comments().find(x => x.id === c.id);
+                if (!mine) { comments().push(c); added++; if (!c.resolved && c.quote) wrapQuote(findItem(c.item)?.it, c.quote, c.id); return; }
+                c.replies.forEach(r => { if (!mine.replies.some(x => x.id === r.id)) { mine.replies.push(r); replies++; } });
+                if (c.resolved && !mine.resolved) { mine.resolved = true; if (c.status) mine.status = c.status; unwrapCm(c.id); closed++; }
+            });
+            if (!added && !replies && !closed) return toast('Rien de nouveau dans ce fichier : ses commentaires sont déjà là.');
+            commit('Commentaires importés'); panel = 'review'; render();
+            toast(`${A().plural(added, 'commentaire ajouté', 'commentaires ajoutés')}, ${A().plural(replies, 'réponse ajoutée', 'réponses ajoutées')}${closed ? `, ${A().plural(closed, 'résolu', 'résolus')}` : ''}${data.from ? ` (de ${data.from})` : ''}.`);
+        }
+        function panelReview() {
+            const all = comments(), f = dl.dataset.cmf || 'open', list = all.filter(c => f === 'all' || (f === 'open' ? !c.resolved : c.resolved));
+            const cnt = k => k === 'all' ? all.length : all.filter(c => (k === 'open' ? !c.resolved : c.resolved)).length;
+            const when = d => { const x = new Date(d); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR', {day: 'numeric', month: 'short'}) + ' ' + x.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'}); };
+            const card = c => { const pi = pageOfItem(c.item); return `<article class="ly-cm${c.resolved ? ' is-done' : ''}${c.id === focusCm ? ' is-focus' : ''}" data-ly-cm="${esc(c.id)}"><header><b>${esc(c.author)}</b><small>${esc(when(c.at))}${pi >= 0 ? ` · page ${pi + (D.page.start || 1)}` : ''}</small>${c.status ? `<span class="ly-cmst">${c.status === 'accepted' ? '✓ acceptée' : '✕ refusée'}</span>` : c.resolved ? '<span class="ly-cmst">✓ résolu</span>' : ''}</header>
+                ${c.quote ? `<blockquote>« ${esc(c.quote)} »</blockquote>` : '<small class="ly-help">sur un objet de la page</small>'}${c.text ? `<p>${esc(c.text)}</p>` : ''}
+                ${c.suggest ? `<p class="ly-cmsug">✎ Remplacer par « <b>${esc(c.suggest.to)}</b> »</p>${!c.resolved ? '<div class="ly-row"><button type="button" class="button small" data-ly-cmacc>✓ Accepter</button><button type="button" class="button small secondary" data-ly-cmref>✕ Refuser</button></div>' : ''}` : ''}
+                ${c.replies.map(r => `<div class="ly-cmrep"><b>${esc(r.author)}</b> <small>${esc(when(r.at))}</small><p>${esc(r.text)}</p></div>`).join('')}
+                <div class="ly-row"><button type="button" class="button small secondary" data-ly-cmreply>↩ Répondre</button><button type="button" class="button small secondary" data-ly-cmres>${c.resolved ? '↺ Rouvrir' : '✓ Résoudre'}</button>${pi >= 0 ? '<button type="button" class="button small secondary" data-ly-cmgo>Aller</button>' : ''}<button type="button" class="icon-button small" data-ly-cmdel title="Supprimer le commentaire">🗑</button></div></article>`; };
+            return sec('Commentaires', `<p class="ly-help">Choisis des mots (double-clic dans un texte) ou un objet, puis « 💬 Commenter » ou « ✎ Suggérer ». Les bulles au bord des pages montrent où ils sont.</p>
+                    <div class="ly-row"><button type="button" class="button small" data-ly-cmd="comment">💬 Commenter</button><button type="button" class="button small secondary" data-ly-cmd="suggest">✎ Suggérer</button></div>
+                    <div class="ui-filters ly-cmfilters">${[['open', 'Ouverts'], ['done', 'Résolus'], ['all', 'Tout']].map(([k, l]) => `<button type="button" class="${k === f ? 'is-active' : ''}" data-ly-cmf="${k}">${l} (${cnt(k)})</button>`).join('')}</div>
+                    <div class="ly-cms">${list.map(card).join('') || (A().emptyState ? A().emptyState({icon: '💬', text: f === 'done' ? 'Aucun commentaire résolu' : 'Aucun commentaire', hint: 'Choisis des mots dans un texte, puis « 💬 Commenter ».'}) : '<p class="ly-help">Aucun commentaire.</p>')}</div>`)
+                + sec('Envoyer à un cousin', `<p class="ly-help">Le fichier de relecture contient le livre : ton cousin l’importe dans son LCNDA (📐 Mise en page → Importer), ajoute ses commentaires, puis te renvoie le sien. Ou envoie-lui le PDF annoté, à lire sur papier.</p>
+                    <div class="ly-row"><button type="button" class="button small" data-ly-cmd="sendreview">📨 Fichier de relecture…</button><button type="button" class="button small secondary" data-ly-cmd="importreview">⤒ Importer ses commentaires…</button><button type="button" class="button small secondary" data-ly-cmd="annot">📝 PDF annoté…</button></div>
+                    <label class="ly-f"><span>Ton nom</span><input type="text" data-ly-reviewer value="${esc(reviewerName())}" maxlength="60" placeholder="il signe tes commentaires"></label>`);
+        }
+        /* ─── E4 : une image glissée (ou collée) sur la table de montage entre dans les médias et se place, liée ─── */
+        async function dropImages(files) {
+            const MP = window.LCNDA_MEDIA_PICKER; if (!MP?.importMediaFile) return toast('L’envoi des images n’est pas encore prêt. Réessaie dans un instant.', 'error');
+            if (editingId) stopEditing();
+            const list = files.filter(f => /^image\//.test(f.type)).slice(0, 20); if (!list.length) return toast('Seules les images se posent sur la page.', 'error');
+            msg(`Envoi de ${A().plural(list.length, 'image')} dans les médias…`); let k = 0;
+            for (const f of list) {
+                try { const m = await MP.importMediaFile(f, ['image']); await placeSrc({src: `media/${m.filename}`, name: m.title || m.filename, mediaId: m.id}, k === 0 && one()?.type === 'frame' && !one().src ? one() : null, k); k++; }
+                catch (err) { toast(err.message, 'error'); }
+            }
+            if (k) { commit(`${A().plural(k, 'image déposée', 'images déposées')}`); render(); msg(`🖼️ ${A().plural(k, 'image')} dans les médias et sur la page (liée${k > 1 ? 's' : ''}).`); } else msg('');
+        }
         /* ─── 🎨 Mes styles : gardés pour tous les documents ─── */
         const SL_KEY = 'genealogie-layout-stylesets';
         function styleLibrary() {
@@ -1093,15 +1316,17 @@
             const saveSets = l => { try { localStorage.setItem(SL_KEY, JSON.stringify(l)); return true; } catch (_) { toast('Plus de place : supprime un ensemble.', 'error'); return false; } };
             const dg = ext.openDialog({eyebrow: 'STYLES', title: '🎨 Mes styles, pour tous mes documents', wide: true,
                 body: `<p class="muted">Garde les styles de paragraphe et de caractère (et les couleurs du nuancier qu’ils utilisent) de ce document, pour les remettre dans un autre. Les styles du même nom sont remplacés, les autres ajoutés.</p>
-                    <div class="ly-row"><input data-slname placeholder="Nom de l’ensemble (ex. « Mon livre classique »)" maxlength="60"><button type="button" class="button small" data-sladd>＋ Garder les styles de ce document</button></div><div data-sllist></div>`,
+                    <div class="ly-row"><input data-slname placeholder="Nom de l’ensemble (ex. « Mon livre classique »)" maxlength="60"><button type="button" class="button small" data-sladd>＋ Garder les styles de ce document</button><button type="button" class="button small secondary" data-slimp title="Un ensemble de styles exporté d’un autre ordinateur (fichier .json)">⤒ Importer un réglage</button></div><div data-sllist></div>`,
                 onOpen: d => {
-                    const draw = () => { const l = sets(); d.querySelector('[data-sllist]').innerHTML = l.length ? `<ol class="ly-sllist">${l.map((x, i) => `<li><b>${esc(x.name)}</b> <small class="muted">${A().plural(x.paraStyles.length, 'style')} de paragraphe · ${x.charStyles.length} de caractère</small><span><button type="button" class="button small" data-slput="${i}">Mettre dans ce document</button><button type="button" class="icon-button" data-sldel="${i}" title="Supprimer">🗑</button></span></li>`).join('')}</ol>` : '<p class="muted">Aucun ensemble gardé.</p>'; };
+                    const draw = () => { const l = sets(); d.querySelector('[data-sllist]').innerHTML = l.length ? `<ol class="ly-sllist">${l.map((x, i) => `<li><b>${esc(x.name)}</b> <small class="muted">${A().plural(x.paraStyles.length, 'style')} de paragraphe · ${x.charStyles.length} de caractère</small><span><button type="button" class="button small" data-slput="${i}">Mettre dans ce document</button><button type="button" class="button small secondary" data-slexp="${i}" title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter</button><button type="button" class="icon-button" data-sldel="${i}" title="Supprimer">🗑</button></span></li>`).join('')}</ol>` : '<p class="muted">Aucun ensemble gardé.</p>'; };
                     draw();
                     d.addEventListener('click', e => {
                         if (e.target.closest('[data-sladd]')) { const name = d.querySelector('[data-slname]').value.trim() || docName; const used = new Set(JSON.stringify([D.paraStyles, D.charStyles]).match(/(sw|gr)-[a-z0-9_-]+/gi) || []); const l = sets(); l.push({name, paraStyles: D.paraStyles, charStyles: D.charStyles, swatches: D.swatches.filter(x => used.has(x.id))}); if (saveSets(l)) { toast(`Styles gardés : « ${name} ».`); draw(); } return; }
                         const put = e.target.closest('[data-slput]'); if (put) { const x = sets()[Number(put.dataset.slput)]; if (!x) return; const merge = (arr, add) => { add.forEach(s0 => { const k = arr.findIndex(y => y.id === s0.id); if (k >= 0) arr[k] = JSON.parse(JSON.stringify(s0)); else arr.push(JSON.parse(JSON.stringify(s0))); }); };
                             merge(D.paraStyles, x.paraStyles); merge(D.charStyles, x.charStyles); merge(D.swatches, x.swatches || []); commit(`Styles « ${x.name} » mis dans le document`); render(); toast('Styles mis dans le document : tout le texte qui les utilise suit.'); dg.close(); return; }
-                        const del = e.target.closest('[data-sldel]'); if (del) { const l = sets(); l.splice(Number(del.dataset.sldel), 1); saveSets(l); draw(); }
+                        const del = e.target.closest('[data-sldel]'); if (del) { const l = sets(); l.splice(Number(del.dataset.sldel), 1); saveSets(l); draw(); return; }
+                        const ex = e.target.closest('[data-slexp]'); if (ex) { const x = sets()[Number(ex.dataset.slexp)]; if (x) reglageExport('mise-en-page', x.name, {paraStyles: x.paraStyles, charStyles: x.charStyles, swatches: x.swatches || []}); return; }
+                        if (e.target.closest('[data-slimp]')) { reglageImport('mise-en-page', 'les styles de la mise en page', sets().map(x => x.name)).then(r => { if (!r) return; const tmp = cleanDoc({paraStyles: r.donnees.paraStyles, charStyles: r.donnees.charStyles, swatches: r.donnees.swatches}); if (!tmp.paraStyles.length && !tmp.charStyles.length) return toast('Ce réglage ne contient aucun style.', 'error'); const l = sets(); l.push({name: r.nom, paraStyles: tmp.paraStyles, charStyles: tmp.charStyles, swatches: tmp.swatches.filter(x => x.id !== 'sw-paper' || (r.donnees.swatches || []).some(y => y?.id === 'sw-paper'))}); if (saveSets(l)) { toast(`Réglage « ${r.nom} » importé.`); draw(); } }); }
                     });
                 }});
         }
@@ -1157,6 +1382,10 @@
             }
             // 🔎 ce que dit le texte, comparé aux fiches (dates et lieux de naissance, baptême, décès, inhumation, mariage)
             if (ext.factCheck) { try { issues.push(...await ext.factCheck(textBlocks(V))); } catch (_) { add('info', -1, '', 'Vérification des faits impossible pour le moment (la base ne répond pas).'); } }
+            // ¹ notes : un appel sans texte, ou des notes « en fin de chapitre » sans bloc pour les recevoir
+            V.pages.forEach((pg, i) => pg.items.forEach(it => { if (it.type !== 'text') return; [...String(it.html || '').matchAll(/data-fn="([a-z0-9_-]+)"/gi)].forEach(m => { if (!D.notes?.[m[1]]?.text?.trim()) add('warn', i, it.id, 'Appel de note sans texte : Texte → « Notes de ce bloc » pour l’écrire.'); }); }));
+            if (D.fn?.place === 'chapter' && Object.keys(D.notes || {}).length && !D.pages.some(p => p.items.some(it => it.auto === 'notes'))) add('warn', -1, '', 'Les notes vont « en fin de chapitre », mais aucun bloc ne les reçoit : Objet → « Insérer les notes du chapitre » (ou Document → Notes : en bas du bloc).');
+            const openCm = (D.review?.comments || []).filter(c => !c.resolved).length; if (openCm) add('info', -1, '', `${A().plural(openCm, 'commentaire de relecture', 'commentaires de relecture')} pas encore ${openCm > 1 ? 'résolus' : 'résolu'} (onglet 💬 Relecture). Ils ne s’impriment pas.`);
             const fonts = new Set([...D.paraStyles, ...D.charStyles].map(x => x.font).filter(Boolean)); D.pages.forEach(p => p.items.forEach(it => { (String(it.html || '').match(/font-family:\s*([^;"]+)/g) || []).forEach(x => fonts.add(x.replace(/font-family:\s*/, '').split(',')[0].replace(/&quot;|['"]/g, '').trim())); }));
             [...fonts].filter(f => f && !/^(serif|sans-serif|monospace|cursive|system-ui)$/i.test(f) && !fontOkHere(f)).forEach(f => add('warn', -1, '', `Police « ${f} » absente de cet ordinateur : une autre la remplace à l’impression.`));
             if (!D.page.bleed) add('info', -1, '', 'Pas de fond perdu (Document → Fond perdu, 3 à 5 mm) : nécessaire si des images ou couleurs vont jusqu’au bord.');
@@ -1172,13 +1401,15 @@
             if (CMD_LABELS[cmd]) act = CMD_LABELS[cmd];
             dl.querySelectorAll('details.ly-menu[open]').forEach(d => d.removeAttribute('open'));
             const C = {
-                save: () => save(), saveas: () => save({copy: true}), savedesign: () => save({design: true}), pdf: () => exportPrint(), pdfbleed: () => exportPrint(true), html: () => exportHtml(), json: () => exportJson(), close: () => close(),
+                save: () => save(), saveas: () => save({copy: true}), savedesign: () => save({design: true}), export: () => exportDialog(), pdf: () => exportDialog('pdf'), pdfbleed: () => exportDialog('pdf'), html: () => exportDialog('html'), json: () => exportDialog('file'), close: () => close(),
                 undo, redo, cut: () => copy(true), copy: () => copy(), paste: () => paste(), dup, del, all: () => { sel = curList().filter(x => !x.hidden && !locked(x)).map(x => x.id); drawSel(); renderPanel(); }, none: () => { sel = []; drawSel(); renderPanel(); },
                 front: () => arrange('front'), fwd: () => arrange('fwd'), back: () => arrange('back'), bottom: () => arrange('bottom'), lock: lockToggle, hide: () => { selected().forEach(x => { x.hidden = true; }); sel = []; commit(); render(); }, showall: () => { curList().forEach(x => { delete x.hidden; }); commit(); render(); }, fitframe: fitFrame, place: () => placeImage(),
                 addend: () => addPages(1, D.pages.length), insert: insertPagesDialog, masters: () => mastersDialog(), duppage: dupPage, delpage: delPage, goto: gotoDialog, first: () => goPage(0), prev: () => goPage(cur - 1), next: () => goPage(cur + 1), last: () => goPage(D.pages.length - 1),
                 zin: () => setZoom(zoom * 1.25), zout: () => setZoom(zoom / 1.25), zfit: zoomFit, z100: () => setZoom(1), guides: () => { guides = !guides; render(); }, snap: () => { snapOn = !snapOn; syncChrome(); msg(snapOn ? 'Magnétisme activé.' : 'Magnétisme coupé.'); }, preview: () => { preview = !preview; render(); },
                 endmaster: () => { editMaster = null; sel = []; render(); },
-                preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), dynperson: () => dynPersonDialog(), dyndiagram: () => insertDiagram(),
+                preflight: () => preflight(), relink: () => refreshLinks(false), stylelib: () => styleLibrary(), toc: () => insertAuto('toc'), index: () => insertAuto('index'), idxplaces: () => insertAuto('places'), idxjobs: () => insertAuto('jobs'), notesblock: () => insertAuto('notes'), biblio: () => insertAuto('biblio'), dynperson: () => dynPersonDialog(), dyndiagram: () => insertDiagram(),
+                tree: () => treeDialog(), fnote: () => insertNote(), cite: () => citeDialog(),
+                comment: () => addComment(false), suggest: () => addComment(true), reviewpanel: () => { panel = 'review'; renderPanel(); }, sendreview: () => exportDialog('review'), importreview: () => importReview(), annot: () => exportDialog('annot'),
                 chain: () => { const it = one(); if (it?.type !== 'text') return msg('Choisis d’abord un bloc de texte.'); if (it.next) return msg('Ce bloc est déjà chaîné (« Couper le chaînage » d’abord).'); linkFrom = it.id; canvas.classList.add('is-linking'); render(); msg('➜ Clique sur le bloc de texte qui reçoit la suite (sur n’importe quelle page). Échap : annuler.'); },
                 unchain: () => { const it = one(); if (!it?.next) return msg('Ce bloc n’est pas chaîné vers un autre.'); delete it.next; commit('Chaînage coupé'); render(); },
                 autoflow: () => autoflow(),
@@ -1210,6 +1441,7 @@
             if (pen && e.key === 'Enter') { e.preventDefault(); finishPen(false); return; }
             if (pen && e.key === 'Escape') { pen = null; pageEl()?.querySelector('.ly-penline')?.remove(); return; }
             if (mod && k === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; } if (mod && k === 'y') { e.preventDefault(); redo(); return; }
+            if (mod && k === 'v' && !clip) return; // rien de copié ici : on laisse coller une image de l'ordinateur (E4)
             if (mod && ['c', 'x', 'v', 'd', 'a', 'j', '0', '1', '=', '+', '-', ']', '['].includes(k)) {
                 e.preventDefault(); ({c: () => copy(), x: () => copy(true), v: () => paste(e.shiftKey || e.altKey), d: dup, a: () => exec('all'), j: gotoDialog, 0: zoomFit, 1: () => setZoom(1), '=': () => setZoom(zoom * 1.25), '+': () => setZoom(zoom * 1.25), '-': () => setZoom(zoom / 1.25), ']': () => arrange(e.shiftKey ? 'front' : 'fwd'), '[': () => arrange(e.shiftKey ? 'bottom' : 'back')})[k]?.(); return;
             }
@@ -1230,32 +1462,60 @@
             if (editingId) stopEditing();
             let name = String(docName || '').trim() || 'Sans titre';
             if (asCopy || asDesign) { const n = await ask(asDesign ? 'Nom du design (il sera proposé pour les prochains livres) :' : 'Nom de la copie :', asDesign ? `${name} (design)` : `${name} (copie)`); if (!n) return; name = n.trim().slice(0, 160); }
+            if (!asCopy && !asDesign) status('saving');
             try {
                 const res = (await post('save_layout_doc', {id: asCopy || asDesign ? 0 : docId, name, is_design: asDesign ? 1 : (asCopy ? 0 : (design ? 1 : 0)), doc: D})).result;
-                if (!asCopy && !asDesign) { docId = res.id; docName = res.name; setDirty(false); toast(`« ${res.name} » enregistré.`); }
+                if (!asCopy && !asDesign) { docId = res.id; docName = res.name; setDirty(false); } // « ✓ Enregistré » en haut, sans message
                 else toast(asDesign ? `Design « ${res.name} » enregistré : il est proposé pour les nouveaux livres.` : `Copie « ${res.name} » enregistrée.`);
                 onSaved?.();
-            } catch (err) { toast(err.message, 'error'); }
+            } catch (err) { if (!asCopy && !asDesign) status('error'); toast(err.message, 'error'); }
         }
         async function close() { if (editingId) stopEditing(); if (dirty && !await A().confirmBox('Les dernières modifications seront perdues.', {title: 'Fermer sans enregistrer ?', okLabel: 'Fermer sans enregistrer', danger: true})) return; keyAc.abort(); dl.close(); }
         dl.addEventListener('cancel', e => { if (e.target !== dl) return; e.preventDefault(); const om = dl.querySelectorAll('details.ly-menu[open]'); if (om.length) { om.forEach(d => d.removeAttribute('open')); return; } if (editingId) { stopEditing(); return; } if (pen) { pen = null; render(); return; } close(); });
         dl.addEventListener('close', () => { keyAc.abort(); dl.remove(); onSaved?.(); });
         const docForExport = () => { if (editingId) stopEditing(); return D; };
-        function exportPrint(bleed = false) { if (bleed && !D.page.bleed) toast('Le document n’a pas de fond perdu (Document → Fond perdu) : seuls les traits de coupe sont ajoutés.'); const html = printHtml(docForExport(), docName, true, {bleed}); const w = window.open('', '_blank'); if (!w) return toast('Fenêtre bloquée : autorise les fenêtres pour cette page.', 'error'); w.document.open(); w.document.write(html); w.document.close(); toast('Le livre s’ouvre : « Imprimer », puis « Enregistrer en PDF ».'); }
-        async function exportHtml() { msg('Préparation du fichier HTML (les images sont intégrées)…'); const html = await inlineImages(printHtml(docForExport(), docName, false)); download(`${slug(docName)}.html`, new Blob([html], {type: 'text/html'})); msg(''); }
-        function exportJson() { download(`${slug(docName)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: docName, is_design: design ? 1 : 0, doc: docForExport()}, null, 1)], {type: 'application/json'})); }
+        function exportPrint(bleed = false, {annot = false, autoPrint = false} = {}) {
+            if (bleed && !D.page.bleed) toast('Le document n’a pas de fond perdu (Document → Fond perdu) : seuls les traits de coupe sont ajoutés.');
+            const html = printHtml(docForExport(), docName, true, {bleed, annot, autoPrint}); const w = window.open('', '_blank');
+            if (!w) throw new Error('fenêtre bloquée : autorise les fenêtres pour cette page.');
+            w.document.open(); w.document.write(html); w.document.close(); toast(autoPrint ? 'Le livre s’ouvre et l’impression se lance.' : 'Le livre s’ouvre : « Imprimer », puis « Enregistrer en PDF ».');
+        }
+        async function exportHtml(file) { msg('Préparation du fichier HTML (les images sont intégrées)…'); const html = await inlineImages(printHtml(docForExport(), docName, false)); download(file || `${slug(docName)}.html`, new Blob([html], {type: 'text/html'})); msg(''); }
+        function exportJson(file) { download(file || `${slug(docName)}.json`, new Blob([JSON.stringify({type: 'lcnda-mise-en-page-livre', version: 1, name: docName, is_design: design ? 1 : 0, doc: docForExport()}, null, 1)], {type: 'application/json'})); }
+        async function exportEpub(file) { msg('Préparation du livre numérique (ePub)…'); try { const blob = await buildEpub(docForExport(), docName); download(file || `${slug(docName)}.epub`, blob); msg(`📱 ePub prêt (${Math.max(1, Math.round(blob.size / 1024))} Ko) : il s’ouvre dans Livres, Kobo, Calibre…`); } catch (err) { msg(''); throw err; } }
+        /** E3 : une seule fenêtre pour tous les exports */
+        function exportDialog(value = 'pdf') {
+            if (editingId) stopEditing();
+            const UI = window.LCNDA_UI; if (!UI?.openExportDialog) return exportPrint();
+            const open = (D.review?.comments || []).filter(c => !c.resolved).length;
+            return UI.openExportDialog({title: docName || 'Mon livre', defaultName: docName || 'livre', bleed: true, quality: false, value,
+                info: `${A().plural(D.pages.length, 'page')} · ${String(r1(D.page.w)).replace('.', ',')} × ${String(r1(D.page.h)).replace('.', ',')} mm${D.page.bleed ? ` · fond perdu ${String(D.page.bleed).replace('.', ',')} mm` : ''}`,
+                preview: () => { const el = document.createElement('div'); el.className = 'ly-expprev'; el.innerHTML = coverHtml(D, 170); return el; },
+                formats: [
+                    {id: 'pdf', ext: '', hint: 'par l’impression', run: o => exportPrint(o.bleed)},
+                    {id: 'print', run: o => exportPrint(o.bleed, {autoPrint: true})},
+                    {id: 'epub', label: '📱 ePub', hint: 'liseuse, téléphone, tablette', ext: 'epub', quality: false, run: o => exportEpub(o.filename)},
+                    {id: 'html', label: '🌐 HTML', hint: 'une page, photos comprises', ext: 'html', quality: false, run: o => exportHtml(o.filename)},
+                    {id: 'annot', label: '📝 PDF annoté', hint: open ? `avec ${A().plural(open, 'commentaire')}` : 'avec les commentaires', ext: '', run: o => exportPrint(o.bleed, {annot: true})},
+                    {id: 'review', label: '💬 Relecture', hint: 'à envoyer à un cousin', ext: 'json', quality: false, run: o => exportReview(o.filename)},
+                    {id: 'file', hint: 'le document (.json)', ext: 'json', run: o => exportJson(o.filename)},
+                ]});
+        }
 
         /* — panneaux de droite — */
         const pid = () => 'p' + Math.random().toString(36).slice(2, 7);
         const num = (k, label, v, {min = -9999, max = 9999, step = 0.1, unit = 'mm', attr = 'data-ly-set'} = {}) => `<label class="ly-f"><span>${label}</span><input type="number" ${attr}="${k}" value="${r1(v)}" min="${min}" max="${max}" step="${step}"><em>${unit}</em></label>`;
         const sel2 = (k, label, opts, v, attr = 'data-ly-set') => `<label class="ly-f"><span>${label}</span><select ${attr}="${k}">${opts.map(([a, b]) => `<option value="${esc(a)}" ${String(a) === String(v) ? 'selected' : ''}>${esc(b)}</option>`).join('')}</select></label>`;
         const paintSel = (k, label, v) => `<label class="ly-f"><span>${label}</span><select data-ly-set="${k}"><option value="none" ${v === 'none' ? 'selected' : ''}>Aucun</option>${D.swatches.map(s => `<option value="${esc(s.id)}" ${s.id === v ? 'selected' : ''}>${s.type === 'grad' ? '▤ ' : '■ '}${esc(s.name)}</option>`).join('')}${hexOk(v) ? `<option value="${v}" selected>${v}</option>` : ''}</select><i class="ly-chip" style="background:${cssPaint(D, v)}"></i></label>`;
-        const sec = (title, body, open = true) => `<details class="ly-sec" ${open ? 'open' : ''}><summary>${title}</summary><div class="ly-secb">${body}</div></details>`;
+        // E2 : sections repliables communes, ouvertes ou fermées comme la dernière fois (le titre est écrit tel quel, sans code)
+        const secKey = t => 'ly-' + fold(t).replace(/\([^)]*\)/g, '').replace(/[^a-z]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+        const sec = (title, body, open = true) => window.LCNDA_UI?.panelSection ? window.LCNDA_UI.panelSection({title, key: secKey(title), open, body}) : `<details class="ly-sec" ${open ? 'open' : ''}><summary>${esc(title)}</summary><div class="ly-secb">${body}</div></details>`;
+        const help = (label, phrase, faq = '') => `<span data-help="${esc(phrase)}"${faq ? ` data-help-faq="${esc(faq)}"` : ''}>${label}</span>`;
         function renderPanel() {
             if (!pbody.isConnected) return;
             dl.querySelectorAll('[data-ly-panel]').forEach(b => b.classList.toggle('is-on', b.dataset.lyPanel === panel)); // l'onglet suit toujours le panneau montré
             const keepScroll = pbody.scrollTop;
-            pbody.innerHTML = ({pages: panelPages, layers: panelLayers, obj: panelObj, text: panelText, color: panelColor, links: panelLinks, history: panelHistory, doc: panelDoc}[panel] || panelPages)();
+            pbody.innerHTML = ({pages: panelPages, layers: panelLayers, obj: panelObj, text: panelText, color: panelColor, links: panelLinks, review: panelReview, history: panelHistory, doc: panelDoc}[panel] || panelPages)();
             if (panel === 'history') pbody.querySelector('.is-current')?.scrollIntoView({block: 'nearest'});
             pbody.scrollTop = keepScroll;
             // vignette : réduite, avec un contour à son échelle (sinon une page blanche disparaît sur le panneau blanc)
@@ -1278,7 +1538,7 @@
         function panelPages() {
             const many = D.pages.length > 120;
             const mopts = sel0 => `<option value="" ${!sel0 ? 'selected' : ''}>Aucun gabarit</option>${D.masters.map(m => `<option value="${esc(m.id)}" ${m.id === sel0 ? 'selected' : ''}>${esc(m.name)}</option>`).join('')}`;
-            return sec('Gabarits', `<div class="ly-row ly-pmaster"><label class="ly-f ly-inline"><span>Page ${cur + (D.page.start || 1)} :</span><select data-ly-pmaster title="Ajouter, enlever ou remplacer le gabarit de cette page">${mopts(D.pages[cur]?.master || '')}</select></label><button type="button" class="button small secondary" data-ly-mmulti title="Mettre, enlever ou remplacer un gabarit sur plusieurs pages">Plusieurs pages…</button></div>
+            return sec('Gabarits', `<div class="ly-row ly-pmaster"><label class="ly-f ly-inline">${help(`Page ${cur + (D.page.start || 1)} :`, 'Le gabarit est un fond commun à plusieurs pages (numéro de page, titre courant, filets) : ce qui est posé sur le gabarit apparaît sur toutes ses pages.', 'gabarit')}<select data-ly-pmaster title="Ajouter, enlever ou remplacer le gabarit de cette page">${mopts(D.pages[cur]?.master || '')}</select></label><button type="button" class="button small secondary" data-ly-mmulti title="Mettre, enlever ou remplacer un gabarit sur plusieurs pages">Plusieurs pages…</button></div>
                 <div class="ly-masters">${D.masters.map(m => `<div class="ly-mrow"><b>${esc(m.name)}</b><span>${D.pages.filter(p => p.master === m.id).length} p.</span><button type="button" class="button small secondary" data-ly-medit="${esc(m.id)}">Modifier</button><button type="button" class="button small secondary" data-ly-mapply="${esc(m.id)}" title="Appliquer à la page ${cur + 1}">→ p. ${cur + 1}</button><button type="button" class="icon-button small" data-ly-mren="${esc(m.id)}" title="Renommer">✎</button><button type="button" class="icon-button small" data-ly-mdel="${esc(m.id)}" title="Supprimer">🗑</button></div>`).join('')}</div>
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-mnew>＋ Nouveau gabarit</button><button type="button" class="button small secondary" data-ly-mnone>Page sans gabarit</button><button type="button" class="button small secondary" data-ly-mdetach title="Les éléments du gabarit deviennent modifiables sur cette page">Détacher les éléments</button></div>`)
                 + sec(`Pages (${D.pages.length})`, `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="addend">＋ Page à la fin</button><button type="button" class="button small secondary" data-ly-cmd="insert">＋ Insérer…</button><button type="button" class="button small secondary" data-ly-cmd="duppage">Dupliquer</button><button type="button" class="button small secondary" data-ly-cmd="delpage">🗑</button></div>
@@ -1296,18 +1556,21 @@
             if (!its.length) return `<p class="ly-help">Choisis un objet sur la page (outil ➤). Double-clic sur un texte pour l’écrire, sur un cadre pour y placer une image.</p>` + sec('Outils', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">🖼️ Placer une image</button></div>`);
             let h = '';
             if (it) {
-                h += sec('Transformation', `<div class="ly-grid2">${num('x', 'X', it.x)}${num('y', 'Y', it.y)}${num('w', 'L', it.w, {min: 0})}${num('h', 'H', it.h, {min: 0})}${num('rot', 'Angle', it.rot || 0, {min: -360, max: 360, step: 1, unit: '°'})}<label class="ly-f ly-check"><input type="checkbox" data-ly-set="lockRatio" ${it.lockRatio ? 'checked' : ''}> Proportions</label></div>
+                h += sec('Position et taille', `<div class="ly-grid2">${num('x', 'X', it.x)}${num('y', 'Y', it.y)}${num('w', 'L', it.w, {min: 0})}${num('h', 'H', it.h, {min: 0})}${num('rot', 'Angle', it.rot || 0, {min: -360, max: 360, step: 1, unit: '°'})}<label class="ly-f ly-check"><input type="checkbox" data-ly-set="lockRatio" ${it.lockRatio ? 'checked' : ''}> Proportions</label></div>
                     <div class="ly-row"><button type="button" class="button small secondary" data-ly-flip="flipX">⇋ Miroir H</button><button type="button" class="button small secondary" data-ly-flip="flipY">⇵ Miroir V</button></div><label class="ly-f"><span>Nom</span><input type="text" data-ly-set="name" value="${esc(it.name || '')}" placeholder="(dans Calques)"></label>`);
+            }
+            const f0 = its[0];
+            h += sec('Couleur', `${paintSel('fill', 'Fond', f0.fill)}${paintSel('stroke.c', 'Contour', f0.stroke?.c || 'none')}<div class="ly-grid2">${num('stroke.w', 'Épaisseur', f0.stroke?.w || 0, {min: 0, max: 100, step: 0.25, unit: 'pt'})}${sel2('stroke.dash', 'Type', DASHES, f0.stroke?.dash || 'solid')}${sel2('stroke.cap', 'Bouts', [['butt', 'Droits'], ['round', 'Arrondis'], ['square', 'Carrés']], f0.stroke?.cap || 'butt')}${sel2('stroke.join', 'Angles', [['miter', 'Pointus'], ['round', 'Arrondis'], ['bevel', 'Biseautés']], f0.stroke?.join || 'miter')}</div>${['rect', 'frame', 'text'].includes(f0.type) ? num('radius', 'Angles arrondis', f0.radius || 0, {min: 0, max: 500, step: 0.5}) : ''}`);
+            h += sec('Effets', `<div class="ly-grid2">${num('opacity', 'Opacité', f0.opacity ?? 100, {min: 0, max: 100, step: 1, unit: '%'})}${sel2('blend', help('Fusion', 'Comment la couleur de l’objet se mélange à ce qui est dessous : « Produit » assombrit, « Superposition » éclaircit.'), BLENDS, f0.blend || 'normal')}${num('feather', help('Contour progressif', 'Adoucit les bords de l’objet sur cette largeur, comme un flou du pourtour.'), f0.feather || 0, {min: 0, max: 50, step: 0.5})}</div>
+                <label class="ly-f ly-check"><input type="checkbox" data-ly-set="shadow.on" ${f0.shadow?.on ? 'checked' : ''}> Ombre portée</label>${f0.shadow?.on ? `<div class="ly-grid2">${num('shadow.x', 'Décalage X', f0.shadow.x ?? 1.5)}${num('shadow.y', 'Décalage Y', f0.shadow.y ?? 1.5)}${num('shadow.blur', 'Flou', f0.shadow.blur ?? 2, {min: 0, max: 50})}${num('shadow.o', 'Opacité', f0.shadow.o ?? 50, {min: 0, max: 100, step: 1, unit: '%'})}<label class="ly-f"><span>Couleur</span><input type="color" data-ly-set="shadow.c" value="${esc(f0.shadow.c || '#000000')}"></label></div>` : ''}`, false);
+            if (it) {
                 if (it.type === 'polygon' || it.type === 'star') h += sec('Forme', `${num('sides', it.type === 'star' ? 'Branches' : 'Côtés', it.sides || (it.type === 'star' ? 5 : 6), {min: 3, max: 60, step: 1, unit: ''})}${it.type === 'star' ? num('inner', 'Creux', it.inner || 45, {min: 5, max: 100, step: 1, unit: '%'}) : ''}`);
                 if (it.type === 'path') h += sec('Tracé', `<label class="ly-f ly-check"><input type="checkbox" data-ly-set="smooth" ${it.smooth ? 'checked' : ''}> Courbe douce</label><label class="ly-f ly-check"><input type="checkbox" data-ly-set="closed" ${it.closed ? 'checked' : ''}> Fermé</label>`);
                 if (['rect', 'ellipse', 'polygon', 'star', 'frame'].includes(it.type)) h += sec('Convertir la forme', `<div class="ly-row">${[['rect', '▭'], ['ellipse', '◯'], ['polygon', '⬡'], ['star', '☆']].map(([k, ic]) => `<button type="button" class="button small secondary" data-ly-convert="${k}" title="En ${k}">${ic}</button>`).join('')}</div>`, false);
             }
-            const f0 = its[0];
-            h += sec('Fond et contour', `${paintSel('fill', 'Fond', f0.fill)}${paintSel('stroke.c', 'Contour', f0.stroke?.c || 'none')}<div class="ly-grid2">${num('stroke.w', 'Épaisseur', f0.stroke?.w || 0, {min: 0, max: 100, step: 0.25, unit: 'pt'})}${sel2('stroke.dash', 'Type', DASHES, f0.stroke?.dash || 'solid')}${sel2('stroke.cap', 'Bouts', [['butt', 'Droits'], ['round', 'Arrondis'], ['square', 'Carrés']], f0.stroke?.cap || 'butt')}${sel2('stroke.join', 'Angles', [['miter', 'Pointus'], ['round', 'Arrondis'], ['bevel', 'Biseautés']], f0.stroke?.join || 'miter')}</div>${['rect', 'frame', 'text'].includes(f0.type) ? num('radius', 'Angles arrondis', f0.radius || 0, {min: 0, max: 500, step: 0.5}) : ''}`);
-            h += sec('Effets', `<div class="ly-grid2">${num('opacity', 'Opacité', f0.opacity ?? 100, {min: 0, max: 100, step: 1, unit: '%'})}${sel2('blend', 'Fusion', BLENDS, f0.blend || 'normal')}${num('feather', 'Contour progressif', f0.feather || 0, {min: 0, max: 50, step: 0.5})}</div>
-                <label class="ly-f ly-check"><input type="checkbox" data-ly-set="shadow.on" ${f0.shadow?.on ? 'checked' : ''}> Ombre portée</label>${f0.shadow?.on ? `<div class="ly-grid2">${num('shadow.x', 'Décalage X', f0.shadow.x ?? 1.5)}${num('shadow.y', 'Décalage Y', f0.shadow.y ?? 1.5)}${num('shadow.blur', 'Flou', f0.shadow.blur ?? 2, {min: 0, max: 50})}${num('shadow.o', 'Opacité', f0.shadow.o ?? 50, {min: 0, max: 100, step: 1, unit: '%'})}<label class="ly-f"><span>Couleur</span><input type="color" data-ly-set="shadow.c" value="${esc(f0.shadow.c || '#000000')}"></label></div>` : ''}`, false);
-            if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', 'Le texte voisin', WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
-            if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.diagramId ? `<p class="ly-help">📊 Diagramme <b>lié</b>${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : ''} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »).</p><div class="ly-row"><button type="button" class="button small" data-ly-editdg>✏️ Modifier le diagramme</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button></div>` : it.mediaId ? `<p class="ly-help">Image <b>liée</b> à une photo de l’app${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : linkState[it.id] === 'updated' ? ' — mise à jour' : ''} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✏️ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
+            if (it && it.type !== 'text') h += sec('Habillage du texte', `${sel2('wrap.mode', help('Le texte voisin', 'Les blocs de texte posés sous cet objet le contournent au lieu de passer dessous.', 'habillage'), WRAPS, it.wrap?.mode || 'none')}${num('wrap.off', 'Distance', it.wrap?.off ?? 3, {min: 0, max: 100, step: 0.5})}<p class="ly-help">Les blocs de texte de la page contournent cet objet.</p>`, !!it.wrap?.mode && it.wrap.mode !== 'none');
+            if (it?.type === 'frame' && it.tree) h += sec('🌳 Arbre (objet dynamique)', `<p class="ly-help">${esc(TREE_MODES.find(m => m[0] === it.tree.mode)?.[1] || '')} · ${A().plural(it.tree.gens, 'génération')}${it.tree.at ? ` · mis à jour le ${esc(it.tree.at.replace('T', ' à '))}` : ''}${linkState[it.id] === 'missing' ? ' — ⛔ personne introuvable' : ''}. Il suit la base : il se refait à l’ouverture du document et avec « ↻ Mettre à jour ».</p><div class="ly-row"><button type="button" class="button small" data-ly-treeedit>✏️ Modifier l’arbre…</button><button type="button" class="button small secondary" data-ly-treeupd>↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-treeopen>↗ Fiche</button><button type="button" class="button small secondary" data-ly-treedetach title="L’arbre reste tel quel et ne suit plus la base">Détacher</button></div>`);
+            else if (it?.type === 'frame' && it.src) h += sec('🔗 Objet dynamique', it.diagramId ? `<p class="ly-help">📊 Diagramme <b>lié</b>${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : ''} : modifié dans Graphiques → Mes diagrammes, il se redessine ici (« Mettre à jour »).</p><div class="ly-row"><button type="button" class="button small" data-ly-editdg>✏️ Modifier le diagramme</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button></div>` : it.mediaId ? `<p class="ly-help">Image <b>liée</b> à une photo de l’app${linkState[it.id] === 'missing' ? ' — ⛔ introuvable' : linkState[it.id] === 'updated' ? ' — mise à jour' : ''} : elle reste en pleine qualité (rien n’est réduit), et toute retouche faite dans l’app arrive ici.</p><div class="ly-row"><button type="button" class="button small" data-ly-editorig>✏️ Modifier l’original (retouche)</button><button type="button" class="button small secondary" data-ly-cmd="relink">↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-unlinkimg title="L’image ne suit plus la photo de l’app">Incorporer (ne plus suivre)</button></div>`
                 : '<p class="ly-help">Image incorporée au document. Pour qu’elle suive une photo de l’app (et ses retouches) : « Remplacer l’image » et choisis-la dans la base.</p>');
             if (it?.type === 'frame') h += sec('Cadre d’image', `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="place">🖼️ ${it.src ? 'Remplacer' : 'Placer'} l’image</button>${it.src ? '<button type="button" class="button small secondary" data-ly-imgclear>Vider</button><button type="button" class="button small secondary" data-ly-cmd="fitframe">Cadre au contenu</button>' : ''}</div>${sel2('fit', 'Ajustement', FITS, it.fit || 'fill')}<div class="ly-grid2">${num('imgS', 'Échelle', it.imgS || 100, {min: 5, max: 2000, step: 1, unit: '%'})}${num('imgX', 'Décalage X', it.imgX || 0)}${num('imgY', 'Décalage Y', it.imgY || 0)}</div>`);
             if (it?.type === 'text') h += sec('Bloc de texte', `<div class="ly-grid2">${num('columns', 'Colonnes', it.columns || 1, {min: 1, max: 12, step: 1, unit: ''})}${num('gutter', 'Gouttière', it.gutter ?? 4, {min: 0, max: 50, step: 0.5})}${num('inset', 'Marge intérieure', it.inset || 0, {min: 0, max: 100, step: 0.5})}${sel2('valign', 'Vertical', [['top', 'En haut'], ['middle', 'Au milieu'], ['bottom', 'En bas'], ['justify', 'Justifié']], it.valign || 'top')}</div><div class="ly-row"><button type="button" class="button small secondary" data-ly-cmd="fitframe">Ajuster la hauteur au texte</button></div>`);
@@ -1315,7 +1578,9 @@
                 const head = chainHead(it), list = chainList(head), k = list.indexOf(it), pg = idv => pageOfItem(idv) + (D.page.start || 1);
                 h += sec('➜ Texte chaîné', `${list.length > 1 ? `<p class="ly-help">Bloc ${k + 1} sur ${list.length} : ${list.map((x, j) => `<button type="button" class="link-button" data-ly-chaingo="${esc(x.id)}">${j === k ? '<b>' : ''}p. ${pg(x.id)}${j === k ? '</b>' : ''}</button>`).join(' → ')}</p>` : '<p class="ly-help">Un texte peut continuer d’un bloc à l’autre, sur d’autres pages : il passe tout seul à la suite quand le premier est plein.</p>'}
                     <div class="ly-row">${it.next ? '<button type="button" class="button small secondary" data-ly-cmd="unchain">Couper après ce bloc</button>' : '<button type="button" class="button small secondary" data-ly-cmd="chain">➜ Chaîner vers un bloc…</button>'}<button type="button" class="button small secondary" data-ly-cmd="autoflow" title="Ajoute des pages (même gabarit) et des blocs chaînés jusqu’à ce que tout le texte tienne">⤵ Faire couler sur de nouvelles pages</button></div>`, list.length > 1 || !!it.auto);
-                if (it.auto) h += sec(it.auto === 'toc' ? '📑 Table des matières' : '🔤 Index des noms', it.auto === 'toc'
+                if (['places', 'jobs'].includes(it.auto)) h += sec(it.auto === 'places' ? '📍 Index des lieux' : '🔨 Index des métiers', `<p class="ly-help">Mots marqués avec le style de caractère « ${it.auto === 'places' ? 'Lieu' : 'Métier'} à indexer »${it.terms?.length ? `, et ${A().plural(it.terms.length, it.auto === 'places' ? 'lieu' : 'métier', it.auto === 'places' ? 'lieux' : 'métiers')} de ta base ${it.terms.length > 1 ? 'cherchés' : 'cherché'} dans le texte` : ''}. Rangé de A à Z, avec les pages.</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-idxterms>${it.terms?.length ? '↻ Recharger ceux de la base' : '＋ Chercher ceux de la base'}</button>${it.terms?.length ? '<button type="button" class="button small secondary" data-ly-idxtermsnone>Seulement les mots marqués</button>' : ''}</div>`);
+                else if (['notes', 'biblio'].includes(it.auto)) h += sec(it.auto === 'notes' ? '🗒 Notes du chapitre' : '📚 Bibliographie', `<p class="ly-help">${it.auto === 'notes' ? 'Les notes appelées dans le chapitre où se trouve ce bloc s’y rangent toutes seules, numérotées (Document → Notes de bas de page).' : 'Les sources citées en note (« 📚 Citer une source ») s’y rangent toutes seules, de A à Z.'}</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}`);
+                else if (it.auto) h += sec(it.auto === 'toc' ? '📑 Table des matières' : '🔤 Index des noms', it.auto === 'toc'
                     ? `<p class="ly-help">Elle reprend, dans l’ordre des pages, les paragraphes de ces styles (le 1er au premier niveau, les suivants en retrait) :</p><div class="ly-autost">${D.paraStyles.map(s0 => `<label class="ly-f ly-check"><input type="checkbox" data-ly-autost="${esc(s0.id)}" ${(it.autoStyles || []).includes(s0.id) ? 'checked' : ''}> ${esc(s0.name)}${(it.autoStyles || []).includes(s0.id) ? ` <small>(niveau ${(it.autoStyles || []).indexOf(s0.id) + 1})</small>` : ''}</label>`).join('')}</div>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-body')}<label class="ly-f ly-check"><input type="checkbox" data-ly-set="autoDots" ${it.autoDots !== false ? 'checked' : ''}> Points de conduite (……… 12)</label>`
                     : `<p class="ly-help">Noms marqués avec le style de caractère « Nom à indexer »${it.names?.length ? `, et ${A().plural(it.names.length, 'personne')} de la généalogie ${it.names.length > 1 ? 'cherchées' : 'cherchée'} dans le texte` : ''}. Rangé par nom de famille, avec les pages.</p>${sel2('autoPs', 'Style des lignes', D.paraStyles.map(s0 => [s0.id, s0.name]), it.autoPs || 'ps-list')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-idxnames>${it.names?.length ? '↻ Recharger les noms de la généalogie' : '＋ Chercher les noms de la généalogie'}</button>${it.names?.length ? '<button type="button" class="button small secondary" data-ly-idxnone>Seulement les noms marqués</button>' : ''}</div>`);
                 if (it.dyn) h += sec('👤 Objet dynamique : fiche', `<p class="ly-help">Ce texte suit une fiche de la généalogie${it.dyn.at ? ` (mis à jour le ${esc(it.dyn.at.replace('T', ' à '))})` : ''}. L’écrire à la main le détache.</p><div class="ly-row"><button type="button" class="button small" data-ly-dynupd>↻ Mettre à jour</button><button type="button" class="button small secondary" data-ly-dynedit>Changer la fiche ou ce qu’on montre…</button><button type="button" class="button small secondary" data-ly-dynopen>↗ Ouvrir la fiche</button><button type="button" class="button small secondary" data-ly-dyndetach>Détacher</button></div>`);
@@ -1329,7 +1594,7 @@
         }
         function panelText() {
             const it = one(), ed = !!editingId, fonts = fontList();
-            const fontPick = `<label class="ly-f ly-f-font"><span>Police</span>${fontPickHtml('data-ly-char="font-family"')}</label><div class="ly-row"><button type="button" class="button small secondary" data-ly-localfonts>🖥 Polices de l’ordinateur</button></div>`;
+            const fontPick = `<label class="ly-f ly-f-font"><span>Police</span>${fontPickHtml('data-ly-char="font-family"')}</label>`;
             const charSec = sec('Caractère', `${fontPick}<div class="ly-grid2">${sel2('font-weight', 'Graisse', [['', '—'], ['300', 'Light'], ['400', 'Regular'], ['500', 'Medium'], ['600', 'Semibold'], ['700', 'Bold'], ['900', 'Black']], '', 'data-ly-char')}${sel2('font-style', 'Style', [['', '—'], ['normal', 'Romain'], ['italic', 'Italique']], '', 'data-ly-char')}${num('font-size', 'Corps', '', {min: 3, max: 400, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${num('line-height', 'Interlignage', '', {min: 3, max: 400, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${num('letter-spacing', 'Approche', '', {min: -200, max: 1000, step: 5, unit: '‰', attr: 'data-ly-char'})}${num('top', 'Ligne de base', '', {min: -100, max: 100, step: 0.5, unit: 'pt', attr: 'data-ly-char'})}${sel2('caps', 'Capitales', [['', '—'], ['none', 'Normales'], ['small', 'Petites capitales'], ['all', 'Toutes capitales']], '', 'data-ly-char')}${sel2('font-kerning', 'Crénage', [['', '—'], ['auto', 'Automatique'], ['none', 'Aucun']], '', 'data-ly-char')}</div>
                 <div class="ly-row ly-tbtns"><button type="button" data-ly-exec="bold" title="Gras"><b>G</b></button><button type="button" data-ly-exec="italic" title="Italique"><i>I</i></button><button type="button" data-ly-exec="underline" title="Souligné"><u>S</u></button><button type="button" data-ly-exec="strikeThrough" title="Barré"><s>B</s></button><button type="button" data-ly-exec="superscript" title="Exposant">x²</button><button type="button" data-ly-exec="subscript" title="Indice">x₂</button><button type="button" data-ly-exec="removeFormat" title="Enlever la mise en forme">⌫</button></div>
                 <label class="ly-f"><span>Couleur</span><select data-ly-char="color"><option value="">Nuancier…</option>${D.swatches.filter(s => s.type !== 'grad').map(s => `<option value="${esc(s.c)}">■ ${esc(s.name)}</option>`).join('')}</select></label>
@@ -1337,11 +1602,15 @@
             const paraSec = sec('Paragraphe', `<div class="ly-row ly-tbtns">${[['left', '⯇', 'À gauche'], ['center', '≡', 'Centré'], ['right', '⯈', 'À droite'], ['justify', '☰', 'Justifié'], ['justify-all', '▤', 'Justifié, dernière ligne aussi']].map(([k, ic, t]) => `<button type="button" data-ly-palign="${k}" title="${t}">${ic}</button>`).join('')}</div>
                 <div class="ly-grid2">${num('margin-left', 'Retrait gauche', '', {attr: 'data-ly-para'})}${num('margin-right', 'Retrait droit', '', {attr: 'data-ly-para'})}${num('text-indent', '1re ligne', '', {attr: 'data-ly-para'})}${num('margin-top', 'Espace avant', '', {attr: 'data-ly-para'})}${num('margin-bottom', 'Espace après', '', {attr: 'data-ly-para'})}${sel2('hyphens', 'Césure', [['', '—'], ['auto', 'Oui'], ['manual', 'Non']], '', 'data-ly-para')}</div>
                 <div class="ly-row"><button type="button" class="button small secondary" data-ly-exec="insertUnorderedList">• Liste</button><button type="button" class="button small secondary" data-ly-exec="insertOrderedList">1. Liste</button><button type="button" class="button small secondary" data-ly-link>🔗 Lien</button></div>
+                <div class="ly-row"><button type="button" class="button small secondary" data-ly-cmd="fnote" title="Une note numérotée toute seule, à l’endroit du curseur">¹ Note</button><button type="button" class="button small secondary" data-ly-cmd="cite" title="La référence d’une source de ta base, en note">📚 Citer une source</button><button type="button" class="button small secondary" data-ly-cmd="comment" title="Un commentaire de relecture sur les mots choisis">💬 Commenter</button><button type="button" class="button small secondary" data-ly-cmd="suggest" title="Proposer un autre texte à la place des mots choisis">✎ Suggérer</button></div>
                 <div class="ly-row"><span class="ly-help">Insérer :</span>${[['{page}', 'n° de page'], ['{pages}', 'nb de pages'], ['{titre}', 'titre'], ['—', 'tiret'], ['« ', '«'], [' »', '»'], [' ', 'espace insécable'], ['…', '…'], ['❦', '❦']].map(([v, l]) => `<button type="button" class="button small secondary" data-ly-ins="${esc(v)}" title="${esc(l)}">${esc(l.length > 3 ? l : v.trim() || l)}</button>`).join('')}</div>`);
             const styles = sec('Styles de paragraphe', `<div class="ly-styles">${D.paraStyles.map(s => `<div class="ly-srow"><button type="button" data-ly-pstyle="${esc(s.id)}" style="font-family:'${fontOk(s.font)}';color:${colorOf(D, s.color, '#111')}">${esc(s.name)}</button><button type="button" class="icon-button small" data-ly-pstedit="${esc(s.id)}" title="Modifier le style (tout le livre suit)">✎</button></div>`).join('')}</div><div class="ly-row"><button type="button" class="button small secondary" data-ly-psnew>＋ Nouveau style</button></div>`)
                 + sec('Styles de caractère', `<div class="ly-styles">${D.charStyles.map(s => `<div class="ly-srow"><button type="button" data-ly-cstyle="${esc(s.id)}">${esc(s.name)}</button><button type="button" class="icon-button small" data-ly-cstedit="${esc(s.id)}" title="Modifier">✎</button></div>`).join('')}<div class="ly-srow"><button type="button" data-ly-cstyle="">Aucun (enlever)</button></div></div><div class="ly-row"><button type="button" class="button small secondary" data-ly-csnew>＋ Nouveau style</button></div>`, false);
             const intro = ed ? '<p class="ly-help">✏️ Tu écris dans un bloc : les réglages s’appliquent au texte choisi (sinon au paragraphe ou à tout le bloc). Échap pour sortir.</p>' : it?.type === 'text' ? '<p class="ly-help">Bloc choisi : les réglages s’appliquent à tout son texte. Double-clic pour écrire dedans.</p>' : '<p class="ly-help">Choisis un bloc de texte (outil T pour en tracer un).</p>';
-            return intro + charSec + paraSec + styles;
+            // les notes appelées dans ce bloc : les relire, les changer, les retirer
+            const tgt = ed ? findItem(editingId)?.it : it?.type === 'text' ? chainHead(it) : null, ids = tgt ? [...String((ed ? editEl()?.innerHTML : tgt.html) || '').matchAll(/data-fn="([a-z0-9_-]+)"/gi)].map(m => m[1]) : [];
+            const notesSec = ids.length ? sec(`Notes de ce bloc (${ids.length})`, `<ol class="ly-fnlist">${ids.map(k => `<li><span>${esc(D.notes?.[k]?.text || '…')}${D.notes?.[k]?.src ? ' <small>📚</small>' : ''}</span><button type="button" class="icon-button small" data-ly-fnedit="${esc(k)}" title="Modifier la note">✎</button><button type="button" class="icon-button small" data-ly-fndel="${esc(k)}" title="Retirer la note">✕</button></li>`).join('')}</ol>`) : '';
+            return intro + charSec + paraSec + notesSec + styles;
         }
         function panelColor() {
             const it = one(), target = fillTarget, cur0 = it ? (target === 'fill' ? it.fill : it.stroke?.c) : '';
@@ -1350,13 +1619,13 @@
                 + sec('Nuancier', `<div class="ly-swatches"><button type="button" class="ly-sw is-none${cur0 === 'none' ? ' is-cur' : ''}" data-ly-sw="none" title="Aucun"></button>${D.swatches.map(s => `<button type="button" class="ly-sw${cur0 === s.id ? ' is-cur' : ''}" data-ly-sw="${esc(s.id)}" title="${esc(s.name)}" style="background:${cssPaint(D, s.id)}"></button>`).join('')}</div>
                     <div class="ly-swlist">${D.swatches.map(s => `<div class="ly-swrow"><i style="background:${cssPaint(D, s.id)}"></i><span>${esc(s.name)}</span>${s.type === 'grad' ? `<button type="button" class="icon-button small" data-ly-gedit="${esc(s.id)}" title="Modifier le dégradé">✎</button>` : `<input type="color" value="${esc(s.c)}" data-ly-swc="${esc(s.id)}" title="Changer la couleur (tout le livre suit)">`}<button type="button" class="icon-button small" data-ly-swren="${esc(s.id)}" title="Renommer">Aa</button>${s.id === 'sw-paper' ? '' : `<button type="button" class="icon-button small" data-ly-swdel="${esc(s.id)}" title="Supprimer">🗑</button>`}</div>`).join('')}</div>
                     <div class="ly-row"><input type="color" data-ly-newc value="#336699"><button type="button" class="button small secondary" data-ly-swnew>＋ Ajouter la couleur</button><button type="button" class="button small secondary" data-ly-grnew>＋ Nouveau dégradé</button></div>`)
-                + (gr ? sec(`Dégradé « ${esc(gr.name)} »`, `${sel2('kind', 'Type', [['linear', 'Linéaire'], ['radial', 'Radial']], gr.kind, 'data-ly-gset')}${num('angle', 'Angle', gr.angle || 0, {min: -360, max: 360, step: 1, unit: '°', attr: 'data-ly-gset'})}<div class="ly-gbar" style="background:${cssPaint(D, gr.id)}"></div>${gr.stops.map((st, i) => `<div class="ly-grow"><input type="color" value="${st.c}" data-ly-gstop="${i}" data-k="c"><input type="range" min="0" max="100" value="${st.p}" data-ly-gstop="${i}" data-k="p"><span>${st.p} %</span>${gr.stops.length > 2 ? `<button type="button" class="icon-button small" data-ly-gdel="${i}">✕</button>` : ''}</div>`).join('')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-gadd>＋ Arrêt de couleur</button></div>`) : '')
+                + (gr ? sec(`Dégradé « ${gr.name} »`, `${sel2('kind', 'Type', [['linear', 'Linéaire'], ['radial', 'Radial']], gr.kind, 'data-ly-gset')}${num('angle', 'Angle', gr.angle || 0, {min: -360, max: 360, step: 1, unit: '°', attr: 'data-ly-gset'})}<div class="ly-gbar" style="background:${cssPaint(D, gr.id)}"></div>${gr.stops.map((st, i) => `<div class="ly-grow"><input type="color" value="${st.c}" data-ly-gstop="${i}" data-k="c"><input type="range" min="0" max="100" value="${st.p}" data-ly-gstop="${i}" data-k="p"><span>${st.p} %</span>${gr.stops.length > 2 ? `<button type="button" class="icon-button small" data-ly-gdel="${i}">✕</button>` : ''}</div>`).join('')}<div class="ly-row"><button type="button" class="button small secondary" data-ly-gadd>＋ Arrêt de couleur</button></div>`) : '')
                 + sec('Couleur libre', `<div class="ly-row"><input type="color" data-ly-free value="${hexOk(cur0) ? cur0 : '#888888'}"><span class="ly-help">pour l’objet choisi, sans l’ajouter au nuancier</span></div>`, false);
         }
         function panelLinks() {
             const rows = []; D.pages.forEach((p, i) => p.items.forEach(it => { if (it.src !== undefined && it.type === 'frame') rows.push({i, it}); })); D.masters.forEach(m => m.items.forEach(it => { if (it.type === 'frame') rows.push({i: -1, m, it}); }));
-            const dyn = []; D.pages.forEach((p, i) => p.items.forEach(it => { if (it.dyn) dyn.push({i, it}); }));
-            return `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="relink">↻ Mettre à jour tous les liens</button></div>` + (dyn.length ? sec(`Textes liés à des fiches (${dyn.length})`, `<div class="ly-links">${dyn.map(({i, it}) => `<div class="ly-linkrow"><span class="ly-noimg">👤</span><span><b>${esc(plainOf(it.html).slice(0, 60))}</b><small>page ${i + (D.page.start || 1)} · ${linkState[it.id] === 'missing' ? '⛔ fiche introuvable' : 'suit la fiche'}</small></span><button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button></div>`).join('')}</div>`) : '') + sec(`Liens — images placées (${rows.filter(r => r.it.src).length})`, rows.length ? `<div class="ly-links">${rows.map(({i, m, it}) => `<div class="ly-linkrow">${it.src ? `<img src="${esc(it.src)}" alt="">` : '<span class="ly-noimg">vide</span>'}<span><b>${esc(it.srcName || (it.src?.startsWith('data:') ? 'Image intégrée' : it.src?.replace('media/', '') || 'Cadre vide'))}</b><small>${m ? esc(m.name) : `page ${i + (D.page.start || 1)}`} · ${it.src?.startsWith('data:') ? 'intégrée au document' : it.mediaId ? ({missing: '⛔ introuvable', updated: '🔗 liée · mise à jour'}[linkState[it.id]] || '🔗 liée · à jour') : it.src ? 'photo de la base' : '—'}</small></span>${it.mediaId && !m ? `<button type="button" class="button small secondary" data-ly-editorig2="${esc(it.id)}" title="Retoucher la photo de l’app">✏️</button>` : ''}${m ? '' : `<button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button><button type="button" class="button small secondary" data-ly-linkrep="${i}:${esc(it.id)}">Remplacer</button>`}</div>`).join('')}</div>` : '<p class="ly-help">Aucun cadre d’image : outil ⊠ ou Objet → Placer une image.</p>');
+            const dyn = [], trs = []; D.pages.forEach((p, i) => p.items.forEach(it => { if (it.dyn) dyn.push({i, it}); if (it.tree) trs.push({i, it}); }));
+            return `<div class="ly-row"><button type="button" class="button small" data-ly-cmd="relink">↻ Mettre à jour les objets dynamiques</button></div>` + (trs.length ? sec(`Arbres (${trs.length})`, `<div class="ly-links">${trs.map(({i, it}) => `<div class="ly-linkrow"><span class="ly-noimg">🌳</span><span><b>${esc(it.srcName || 'Arbre')}</b><small>page ${i + (D.page.start || 1)} · ${linkState[it.id] === 'missing' ? '⛔ personne introuvable' : 'suit la base'}</small></span><button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button></div>`).join('')}</div>`) : '') + (dyn.length ? sec(`Textes liés à des fiches (${dyn.length})`, `<div class="ly-links">${dyn.map(({i, it}) => `<div class="ly-linkrow"><span class="ly-noimg">👤</span><span><b>${esc(plainOf(it.html).slice(0, 60))}</b><small>page ${i + (D.page.start || 1)} · ${linkState[it.id] === 'missing' ? '⛔ fiche introuvable' : 'suit la fiche'}</small></span><button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button></div>`).join('')}</div>`) : '') + sec(`Liens — images placées (${rows.filter(r => r.it.src).length})`, rows.length ? `<div class="ly-links">${rows.map(({i, m, it}) => `<div class="ly-linkrow">${it.src ? `<img src="${esc(it.src)}" alt="">` : '<span class="ly-noimg">vide</span>'}<span><b>${esc(it.srcName || (it.src?.startsWith('data:') ? 'Image intégrée' : it.src?.replace('media/', '') || 'Cadre vide'))}</b><small>${m ? esc(m.name) : `page ${i + (D.page.start || 1)}`} · ${it.src?.startsWith('data:') ? 'intégrée au document' : it.mediaId ? ({missing: '⛔ introuvable', updated: '🔗 liée · mise à jour'}[linkState[it.id]] || '🔗 liée · à jour') : it.src ? 'photo de la base' : '—'}</small></span>${it.mediaId && !m ? `<button type="button" class="button small secondary" data-ly-editorig2="${esc(it.id)}" title="Retoucher la photo de l’app">✏️</button>` : ''}${m ? '' : `<button type="button" class="button small secondary" data-ly-linkgo="${i}:${esc(it.id)}">Aller</button><button type="button" class="button small secondary" data-ly-linkrep="${i}:${esc(it.id)}">Remplacer</button>`}</div>`).join('')}</div>` : '<p class="ly-help">Aucun cadre d’image : outil ⊠ ou Objet → Placer une image.</p>');
         }
         function panelHistory() {
             const t = d => d.toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
@@ -1368,15 +1637,19 @@
             const P = D.page, M = P.margin;
             return sec('Format du document', `<label class="ly-f"><span>Titre du livre ({titre})</span><input type="text" data-ly-doc="title" value="${esc(D.title || '')}"></label>
                 <label class="ly-f"><span>Format</span><select data-ly-doc="size"><option value="">Personnalisé</option>${allSizes().map(([k, l, w, h]) => `<option value="${k}" ${Math.abs(P.w - w) < 0.2 && Math.abs(P.h - h) < 0.2 ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></label>
-                <div class="ly-grid2">${num('w', 'Largeur', P.w, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('h', 'Hauteur', P.h, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('m.t', 'Haut', M.t, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.b', 'Bas', M.b, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.i', P.facing ? 'Petit fond' : 'Gauche', M.i, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.o', P.facing ? 'Grand fond' : 'Droite', M.o, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('columns', 'Colonnes', P.columns, {min: 1, max: 12, step: 1, unit: '', attr: 'data-ly-doc'})}${num('gutter', 'Gouttière', P.gutter, {min: 0, max: 60, attr: 'data-ly-doc'})}${num('bleed', 'Fond perdu', P.bleed, {min: 0, max: 30, attr: 'data-ly-doc'})}${num('slug', 'Ligne-bloc', P.slug || 0, {min: 0, max: 80, attr: 'data-ly-doc'})}${num('start', '1re page n°', P.start || 1, {min: 1, max: 9999, step: 1, unit: '', attr: 'data-ly-doc'})}</div>
+                <div class="ly-grid2">${num('w', 'Largeur', P.w, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('h', 'Hauteur', P.h, {min: 30, max: 1500, attr: 'data-ly-doc'})}${num('m.t', 'Haut', M.t, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.b', 'Bas', M.b, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.i', P.facing ? 'Petit fond' : 'Gauche', M.i, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('m.o', P.facing ? 'Grand fond' : 'Droite', M.o, {min: 0, max: 300, attr: 'data-ly-doc'})}${num('columns', 'Colonnes', P.columns, {min: 1, max: 12, step: 1, unit: '', attr: 'data-ly-doc'})}${num('gutter', 'Gouttière', P.gutter, {min: 0, max: 60, attr: 'data-ly-doc'})}${num('bleed', help('Fond perdu', 'La marge de 3 à 5 mm autour de la page, coupée par l’imprimeur : les images qui vont jusqu’au bord doivent la remplir.', 'fond perdu'), P.bleed, {min: 0, max: 30, attr: 'data-ly-doc'})}${num('slug', help('Ligne-bloc', 'Une bande en dehors du fond perdu pour les notes à l’imprimeur (titre, date) ; elle ne s’imprime qu’avec les traits de coupe.'), P.slug || 0, {min: 0, max: 80, attr: 'data-ly-doc'})}${num('start', '1re page n°', P.start || 1, {min: 1, max: 9999, step: 1, unit: '', attr: 'data-ly-doc'})}</div>
                 <label class="ly-f ly-check"><input type="checkbox" data-ly-doc="facing" ${P.facing ? 'checked' : ''}> Pages en vis-à-vis (livre)</label>${paintSel('paper', 'Papier', P.paper).replace('data-ly-set="paper"', 'data-ly-doc="paper"')}
-                <p class="ly-help">Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>.</p>`);
+                <p class="ly-help">Les nouveaux documents partent des <button type="button" class="link-button" data-ly-defaults>réglages par défaut</button>.</p>`)
+                + sec('Notes de bas de page', `${sel2('fnplace', help('Les notes vont', 'En bas du bloc : chaque note s’écrit sous le texte qui l’appelle. En fin de chapitre : toutes les notes du chapitre se rangent dans le bloc « Notes du chapitre » (Objet → Insérer les notes du chapitre).', 'notes de bas de page'), [['block', 'en bas du bloc de texte'], ['chapter', 'en fin de chapitre']], D.fn?.place || 'block', 'data-ly-fn')}${sel2('fnrestart', 'Numéros', [['none', 'qui se suivent dans tout le livre'], ['chapter', 'qui recommencent à 1 à chaque chapitre'], ['page', 'qui recommencent à 1 à chaque page']], D.fn?.restart || 'none', 'data-ly-fn')}
+                    <p class="ly-help">${A().plural(Object.keys(D.notes || {}).length, 'note')} dans le document. Pour en ajouter une : double-clic dans un texte, place le curseur, puis Texte → « ¹ Note » ou « 📚 Citer une source ».</p>`, false);
         }
 
         /* — panneaux : ce qu'on change — */
         const setPath = (o, k, v) => { const ks = k.split('.'); let t = o; ks.slice(0, -1).forEach(x => { t[x] = t[x] && typeof t[x] === 'object' ? t[x] : {}; t = t[x]; }); t[ks.at(-1)] = v; };
         const labelOfField = el => (el.closest('label')?.querySelector('span')?.textContent || el.closest('label')?.firstChild?.textContent || '').trim();
         pbody.addEventListener('change', async e => {
+            if (e.target.matches('[data-ly-fn]')) { D.fn = {place: 'block', restart: 'none', ...(D.fn || {})}; if (e.target.dataset.lyFn === 'fnplace') D.fn.place = e.target.value; else D.fn.restart = e.target.value; commit('Notes de bas de page : réglage'); render(); return; }
+            if (e.target.matches('[data-ly-reviewer]')) { try { localStorage.setItem(REVIEWER_KEY, e.target.value.trim().slice(0, 60)); } catch (_) {} return; }
             if (e.target.matches('[data-ly-autost]')) { const it = one(); if (!it) return; const k = e.target.dataset.lyAutost; it.autoStyles = (it.autoStyles || []).filter(x => x !== k); if (e.target.checked) it.autoStyles.push(k); commit('Sommaire : styles'); render(); return; }
             if (e.target.matches('[data-ly-pmaster]')) { const v = e.target.value, m = D.masters.find(x => x.id === v); D.pages[cur].master = m ? m.id : ''; act = m ? `Gabarit « ${m.name} » sur la page ${cur + 1}` : `Gabarit enlevé de la page ${cur + 1}`; commit(); render(); return; }
             const el = e.target; act = labelOfField(el) ? `${labelOfField(el)} changé` : '';
@@ -1433,6 +1706,25 @@
             if (e.target.closest('[data-ly-dyndetach]')) { const it = one(); if (it) { delete it.dyn; commit('Texte détaché de la fiche'); render(); } return; }
             if (e.target.closest('[data-ly-idxnames]')) { const it = one(); try { const r = await api('person_names'); it.names = (r.persons || []).map(p => `${p.first_name || ''}|${p.last_name || ''}`); commit('Index : noms de la généalogie'); render(); } catch (err) { toast(err.message, 'error'); } return; }
             if (e.target.closest('[data-ly-idxnone]')) { const it = one(); delete it.names; commit('Index : noms marqués seulement'); render(); return; }
+            const fe = e.target.closest('[data-ly-fnedit]'); if (fe) return editNote(fe.dataset.lyFnedit);
+            const fdl = e.target.closest('[data-ly-fndel]'); if (fdl) return editNote(fdl.dataset.lyFndel, true);
+            if (e.target.closest('[data-ly-idxterms]')) { const it = one(); if (!it) return; try { const r = await api('layout_index_terms'); it.terms = (it.auto === 'places' ? r.places : r.jobs) || []; commit('Index : mots de la base'); render(); } catch (err) { toast(err.message, 'error'); } return; }
+            if (e.target.closest('[data-ly-idxtermsnone]')) { const it = one(); if (it) { delete it.terms; commit('Index : mots marqués seulement'); render(); } return; }
+            if (e.target.closest('[data-ly-treeedit]')) return treeDialog(one());
+            if (e.target.closest('[data-ly-treeupd]')) { const it = one(); if (!it?.tree) return; msg('🌳 Je redessine l’arbre…'); try { const r = await treeSvg(it.tree, lookOf()); it.src = svgSrc(r.svg); it.srcName = r.name; it.tree.at = new Date().toISOString().slice(0, 16); linkState[it.id] = 'ok'; commit('Arbre mis à jour'); render(); msg('🌳 Arbre à jour d’après la base.'); } catch (err) { linkState[it.id] = 'missing'; msg(''); toast(err.message, 'error'); } return; }
+            if (e.target.closest('[data-ly-treedetach]')) { const it = one(); if (it?.tree) { delete it.tree; commit('Arbre détaché de la base'); render(); } return; }
+            if (e.target.closest('[data-ly-treeopen]')) { const it = one(); if (!it?.tree) return; if (!dirty || await A().confirmBox('Les dernières modifications ne sont pas enregistrées (enregistre d’abord si besoin).', {title: 'Fermer la mise en page pour ouvrir la fiche ?', okLabel: 'Fermer sans enregistrer', danger: true})) { A().state.currentPersonId = it.tree.root; keyAc.abort(); dl.close(); A().setModule('personnes'); } return; }
+            const cmf = e.target.closest('[data-ly-cmf]'); if (cmf) { dl.dataset.cmf = cmf.dataset.lyCmf; renderPanel(); return; }
+            const cmEl = e.target.closest('[data-ly-cm]'), cB = e.target.closest('button');
+            if (cmEl && cB) {
+                const c = comments().find(x => x.id === cmEl.dataset.lyCm); if (!c) return;
+                if (cB.matches('[data-ly-cmacc]')) return applySuggestion(c, true);
+                if (cB.matches('[data-ly-cmref]')) return applySuggestion(c, false);
+                if (cB.matches('[data-ly-cmreply]')) { const v = await askBox('↩ Répondre', `Ta réponse à ${c.author} :`, '', 'Répondre'); if (!v || !v.trim()) return; c.replies.push({id: nid('r'), text: v.trim().slice(0, 4000), author: await reviewer(), at: new Date().toISOString()}); focusCm = c.id; commit('Réponse ajoutée'); render(); return; }
+                if (cB.matches('[data-ly-cmres]')) { if (editingId) stopEditing(); c.resolved = !c.resolved; if (c.resolved) unwrapCm(c.id); else { delete c.status; wrapQuote(findItem(c.item)?.it, c.quote, c.id); } focusCm = c.id; commit(c.resolved ? 'Commentaire résolu' : 'Commentaire rouvert'); render(); return; }
+                if (cB.matches('[data-ly-cmgo]')) { const pi = pageOfItem(c.item); if (pi >= 0) { focusCm = c.id; goPage(pi); sel = [c.item]; drawSel(); } return; }
+                if (cB.matches('[data-ly-cmdel]')) { if (!await A().confirmBox(c.text || c.quote || '', {title: 'Supprimer ce commentaire ?', okLabel: 'Supprimer le commentaire'})) return; if (editingId) stopEditing(); unwrapCm(c.id); D.review.comments = comments().filter(x => x !== c); commit('Commentaire supprimé'); render(); return; }
+            }
             const b = e.target.closest('button, [data-ly-lpick]'); if (!b) return; const d = b.dataset;
             // double-clic sur le nom d'un calque : le renommer (le premier clic redessine la liste, le dblclick natif se perd)
             if (d.lyLpick !== undefined && e.detail === 2) { const l = D.layers.find(x => x.id === b.closest('[data-ly-layer]')?.dataset.lyLayer), v = await ask('Nom du calque :', l?.name); if (l && v) { l.name = v.slice(0, 60); commit(); renderPanel(); } return; }
@@ -1548,6 +1840,7 @@
                 }});
         }
 
+        window.LCNDA_UI?.bindFileDrop?.(canvas, files => dropImages(files), {accept: 'image/*'}); // E4 : glisser ou coller une image
         setDirty(!id); render(); syncHistory(); requestAnimationFrame(() => zoomFit());
         ext.fullInit?.(dl, 'layout', true); // plein écran par défaut ; ⛶ pour passer en fenêtre (retenu)
         dl.showModal(); canvas.focus({preventScroll: true}); // les raccourcis (V, T, M…) marchent tout de suite
@@ -1586,10 +1879,10 @@
     /** Le document tel qu'il s'affiche : textes chaînés répartis de cadre en cadre, sommaires et index remplis */
     function resolveDoc(doc, {editingId = null} = {}) {
         const all = []; doc.pages.forEach((p, i) => p.items.forEach(it => all.push({it, i})));
-        const special = all.some(({it}) => it.next || it.auto); if (!special) return doc;
-        const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length]).concat(p.items.filter(it => it.wrap && it.wrap.mode !== 'none').map(it => [it.id, it.x, it.y, it.w, it.h, it.wrap.mode, it.wrap.off, it.hidden])))]);
+        const special = all.some(({it}) => it.next || it.auto || (it.type === 'text' && String(it.html || '').includes('data-fn'))); if (!special) return doc;
+        const key = editingId + '|' + JSON.stringify([doc.page, doc.paraStyles, doc.charStyles, doc.fn, doc.notes, doc.pages.map(p => p.items.filter(it => it.type === 'text').map(it => [it.id, it.html, it.x, it.y, it.w, it.h, it.next, it.auto, it.autoStyles, it.autoPs, it.columns, it.inset, it.gutter, (it.names || []).length, (it.terms || []).length]).concat(p.items.filter(it => it.wrap && it.wrap.mode !== 'none').map(it => [it.id, it.x, it.y, it.w, it.h, it.wrap.mode, it.wrap.off, it.hidden])))]);
         // seuls les textes sont recalculés (et gardés en mémoire) ; les autres objets viennent toujours du document, tels quels
-        const live = V0 => { const tx = new Map(); V0.pages.forEach(p => p.items.forEach(x => { if (x.type === 'text') tx.set(x.id, x); })); return {...doc, pages: doc.pages.map(p => ({...p, items: p.items.map(x => { const c = x.type === 'text' && tx.get(x.id); return c ? {...x, html: c.html, ...(c._follow !== undefined ? {_follow: c._follow} : {})} : x; })}))}; };
+        const live = V0 => { const tx = new Map(); V0.pages.forEach(p => p.items.forEach(x => { if (x.type === 'text') tx.set(x.id, x); })); return {...doc, pages: doc.pages.map(p => ({...p, items: p.items.map(x => { const c = x.type === 'text' && tx.get(x.id); return c ? {...x, html: c.html, ...(c._follow !== undefined ? {_follow: c._follow} : {}), ...(c._fn ? {_fn: c._fn} : {})} : x; })}))}; };
         if (resolveCache.key === key) return live(resolveCache.out);
         const V = JSON.parse(JSON.stringify(doc)), byId = new Map(); V.pages.forEach((p, i) => p.items.forEach(it => byId.set(it.id, {it, i, p})));
         const targets = new Set(); byId.forEach(({it}) => { if (it.next && byId.has(it.next)) targets.add(it.next); });
@@ -1604,33 +1897,73 @@
         // 2. sommaires et index, d'après les pages telles qu'elles sont maintenant
         const start = V.page.start || 1, pageTexts = V.pages.map(p => [...p.items].filter(x => x.type === 'text' && !x.auto).sort((a, b) => a.y - b.y || a.x - b.x));
         byId.forEach(({it}) => {
-            if (!it.auto || targets.has(it.id)) return;
+            if (!it.auto || targets.has(it.id) || ['notes', 'biblio'].includes(it.auto)) return;
             let html = '';
             if (it.auto === 'toc') {
                 const want = it.autoStyles?.length ? it.autoStyles : ['ps-chapter'], rows = [];
                 pageTexts.forEach((list, i) => list.forEach(t => { const d = document.createElement('div'); d.innerHTML = t.html || ''; d.querySelectorAll('[data-ps]').forEach(b => { const lvl = want.indexOf(b.dataset.ps); const txt = (b.textContent || '').replace(/\s+/g, ' ').trim(); if (lvl >= 0 && txt && !b.hasAttribute('data-cont')) rows.push({txt, lvl, page: i + start}); }); }));
                 html = rows.map(r => `<p data-ps="${esc(it.autoPs || 'ps-body')}" class="ly-toc" style="margin-left:${r.lvl * 5}mm"><span>${esc(r.txt)}</span>${it.autoDots !== false ? '<i class="ly-tl"></i>' : '<i class="ly-tsp"></i>'}<span>${r.page}</span></p>`).join('') || '<p data-ps="ps-body"><em>(Le sommaire se remplit avec les paragraphes en style « Chapitre », ou ceux choisis dans Objet.)</em></p>';
-            } else {
-                const map = new Map(), add = (name, page) => { const k = fold(name); if (!map.has(k)) map.set(k, {name, pages: new Set()}); map.get(k).pages.add(page); };
-                const key = t => fold(t).split(/[^a-z0-9'-]+/).filter(Boolean).join(' ');
-                const names = (it.names || []).map(n => { const [f, l] = n.split('|'); return {f: f || '', l: l || '', k: key(`${f} ${l}`), r: key(`${l} ${f}`)}; }).filter(n => n.k.includes(' ') && n.k.length > 4);
-                pageTexts.forEach((list, i) => {
-                    const page = i + start, d = document.createElement('div'); d.innerHTML = list.map(t => t.html || '').join(' ');
-                    d.querySelectorAll('[data-cs="cs-index"]').forEach(sp => { const t = (sp.textContent || '').replace(/\s+/g, ' ').trim(); if (t) add(t, page); });
-                    if (names.length) { // tous les groupes de 2 à 4 mots de la page, pour trouver vite « prénom nom » et « nom prénom »
-                        const toks = fold(d.textContent || '').split(/[^a-z0-9'-]+/).filter(Boolean), grams = new Set();
-                        for (let a = 0; a < toks.length; a++) for (let n = 2; n <= 4 && a + n <= toks.length; n++) grams.add(toks.slice(a, a + n).join(' '));
-                        names.forEach(n => { if (grams.has(n.k) || grams.has(n.r)) add(`${n.l.toUpperCase()} ${n.f}`.trim(), page); }); }
+            } else html = indexHtml(it, pageTexts, start);
+            if (it.next) runChain(it, html); else it.html = html;
+        });
+        // 3. les notes de bas de page : numérotées dans l'ordre de lecture (à 1 à chaque chapitre ou page si demandé), en bas du bloc ou en fin de chapitre
+        const fnPlace = V.fn?.place || 'block', restart = V.fn?.restart || 'none', refs = [], notesAt = new Map();
+        let n = 0, chap = 0;
+        V.pages.forEach((p, i) => {
+            if (restart === 'page') n = 0;
+            [...p.items].filter(x => x.type === 'text' && (!x.auto || x.auto === 'notes')).sort((a, b) => a.y - b.y || a.x - b.x).forEach(f => {
+                if (f.auto === 'notes') { if (!f._follow) notesAt.set(f.id, chap); return; }
+                if (!String(f.html || '').includes('data-fn') && !String(f.html || '').includes('ps-chapter')) return;
+                const d = document.createElement('div'); d.innerHTML = f.html || ''; let touched = false; const mine = [];
+                d.querySelectorAll('[data-ps="ps-chapter"], sup[data-fn]').forEach(el => {
+                    if (el.tagName !== 'SUP') { if (!el.hasAttribute('data-cont')) { chap++; if (restart === 'chapter') n = 0; } return; }
+                    n++; if (el.textContent !== String(n)) { el.textContent = String(n); touched = true; }
+                    const r = {id: el.dataset.fn, n, chap, page: i}; refs.push(r); mine.push(r);
                 });
-                const rows = [...map.values()].sort((a, b) => fold(a.name).localeCompare(fold(b.name)));
-                let letter = '';
-                const pagesTxt = set => { const ps = [...set].sort((a, b) => a - b), out = []; for (let k = 0; k < ps.length; k++) { let j = k; while (j + 1 < ps.length && ps[j + 1] === ps[j] + 1) j++; out.push(j > k + 1 ? `${ps[k]}–${ps[j]}` : j === k + 1 ? `${ps[k]}, ${ps[j]}` : String(ps[k])); k = j; } return out.join(', '); };
-                html = rows.map(r => { const l = fold(r.name)[0]?.toUpperCase() || '#'; const head = l !== letter ? `<p data-ps="ps-head">${esc(l)}</p>` : ''; letter = l; return `${head}<p data-ps="${esc(it.autoPs || 'ps-list')}">${esc(r.name)}, ${pagesTxt(r.pages)}</p>`; }).join('') || '<p data-ps="ps-body"><em>(L’index se remplit avec les noms marqués en style de caractère « Nom à indexer », et les personnes de la généalogie trouvées dans le texte.)</em></p>';
+                if (touched) f.html = d.innerHTML;
+                if (fnPlace === 'block' && mine.length) f._fn = mine.map(r => `<p class="ly-fnote"><sup>${r.n}</sup> ${esc(V.notes?.[r.id]?.text || '…')}</p>`).join('');
+            });
+        });
+        byId.forEach(({it}) => {
+            if (!['notes', 'biblio'].includes(it.auto) || targets.has(it.id)) return;
+            let html;
+            if (it.auto === 'notes') {
+                const c0 = notesAt.get(it.id) ?? 0, mine = refs.filter(r => r.chap === c0);
+                html = fnPlace !== 'chapter' ? '<p data-ps="ps-body"><em>(Les notes sont en bas de chaque bloc de texte. Pour les avoir ici, en fin de chapitre : Document → Notes de bas de page.)</em></p>'
+                    : mine.map(r => `<p data-ps="${esc(it.autoPs || 'ps-list')}" class="ly-fnote"><sup>${r.n}</sup> ${esc(V.notes?.[r.id]?.text || '…')}</p>`).join('') || '<p data-ps="ps-body"><em>(Aucune note dans ce chapitre : elles se rangent ici toutes seules.)</em></p>';
+            } else {
+                const seen = new Map(); refs.forEach(r => { const nt = V.notes?.[r.id]; if (nt?.src && !seen.has(nt.src)) seen.set(nt.src, nt.srcLabel || nt.text); });
+                html = [...seen.values()].sort((a, b) => fold(a).localeCompare(fold(b))).map(t => `<p data-ps="${esc(it.autoPs || 'ps-list')}">${esc(t)}</p>`).join('') || '<p data-ps="ps-body"><em>(La bibliographie se remplit avec les sources citées en note : Texte → « 📚 Citer une source ».)</em></p>';
             }
             if (it.next) runChain(it, html); else it.html = html;
         });
         resolveCache = {key, out: V};
         return live(V);
+    }
+    /** Index des noms, des lieux ou des métiers : les mots marqués (style de caractère) et ceux de la base trouvés dans le texte, avec les pages */
+    const INDEX_MARK = {index: 'cs-index', places: 'cs-index-place', jobs: 'cs-index-job'};
+    const INDEX_EMPTY = {index: '(L’index se remplit avec les noms marqués en style de caractère « Nom à indexer », et les personnes de la généalogie trouvées dans le texte.)',
+        places: '(L’index des lieux se remplit avec les mots marqués « Lieu à indexer », et les lieux de ta base trouvés dans le texte.)', jobs: '(L’index des métiers se remplit avec les mots marqués « Métier à indexer », et les métiers de ta base trouvés dans le texte.)'};
+    function indexHtml(it, pageTexts, start) {
+        const kind = it.auto, map = new Map(), add = (name, page) => { const k = fold(name); if (!map.has(k)) map.set(k, {name, pages: new Set()}); map.get(k).pages.add(page); };
+        const key = t => fold(t).split(/[^a-z0-9'-]+/).filter(Boolean).join(' ');
+        const names = kind !== 'index' ? [] : (it.names || []).map(n => { const [f, l] = n.split('|'); return {f: f || '', l: l || '', k: key(`${f} ${l}`), r: key(`${l} ${f}`)}; }).filter(n => n.k.includes(' ') && n.k.length > 4);
+        const cap = t => t.charAt(0).toUpperCase() + t.slice(1);
+        const terms = kind === 'index' ? [] : (it.terms || []).map(t => ({label: kind === 'jobs' ? cap(t.trim()) : t.trim(), k: key(t)})).filter(t => t.k.length >= 3);
+        pageTexts.forEach((list, i) => {
+            const page = i + start, d = document.createElement('div'); d.innerHTML = list.map(t => String(t.html || '').replace(/<\/(p|div|li|h\d)>|<br\s*\/?>/gi, '$& ')).join(' '); // un espace entre deux paragraphes : « deux » et « Naves » restent deux mots
+            d.querySelectorAll(`[data-cs="${INDEX_MARK[kind]}"]`).forEach(sp => { const t = (sp.textContent || '').replace(/\s+/g, ' ').trim(); if (t) add(kind === 'jobs' ? cap(t) : t, page); });
+            if (!names.length && !terms.length) return;
+            // tous les groupes de 1 à 4 mots de la page, pour trouver vite « prénom nom », « nom prénom », un lieu, un métier
+            const toks = fold(d.textContent || '').split(/[^a-z0-9'-]+/).filter(Boolean), grams = new Set();
+            for (let a = 0; a < toks.length; a++) for (let m = 1; m <= 4 && a + m <= toks.length; m++) grams.add(toks.slice(a, a + m).join(' '));
+            names.forEach(nm => { if (grams.has(nm.k) || grams.has(nm.r)) add(`${nm.l.toUpperCase()} ${nm.f}`.trim(), page); });
+            terms.forEach(t => { if (grams.has(t.k) || (kind === 'jobs' && (grams.has(t.k + 's') || grams.has(t.k + 'x') || grams.has(t.k + 'e') || grams.has(t.k + 'es')))) add(t.label, page); });
+        });
+        const rows = [...map.values()].sort((a, b) => fold(a.name).localeCompare(fold(b.name)));
+        let letter = '';
+        const pagesTxt = set => { const ps = [...set].sort((a, b) => a - b), out = []; for (let k = 0; k < ps.length; k++) { let j = k; while (j + 1 < ps.length && ps[j + 1] === ps[j] + 1) j++; out.push(j > k + 1 ? `${ps[k]}–${ps[j]}` : j === k + 1 ? `${ps[k]}, ${ps[j]}` : String(ps[k])); k = j; } return out.join(', '); };
+        return rows.map(r => { const l = fold(r.name)[0]?.toUpperCase() || '#'; const head = l !== letter ? `<p data-ps="ps-head">${esc(l)}</p>` : ''; letter = l; return `${head}<p data-ps="${esc(it.autoPs || 'ps-list')}">${esc(r.name)}, ${pagesTxt(r.pages)}</p>`; }).join('') || `<p data-ps="ps-body"><em>${esc(INDEX_EMPTY[kind] || '')}</em></p>`;
     }
     /* ── Objets dynamiques : le texte d'une fiche de la généalogie ── */
     const DYN_FIELDS = [['name', 'Nom complet'], ['life', 'Naissance et décès (dates et lieux)'], ['parents', 'Parents'], ['partners', 'Conjoints'], ['children', 'Enfants'], ['occupation', 'Profession'], ['events', 'Tous les événements'], ['notes', 'Notes']];
@@ -1651,11 +1984,220 @@
         return out.join('') || `<p data-ps="ps-body">${esc(nm(p) || 'Fiche')}</p>`;
     }
 
+    /* ═════════════ 🌳 L'arbre généalogique dynamique : dessiné en SVG d'après la base (lib/layout_extra.php → layout_tree_data) ═════════════ */
+    const photoCache = new Map();
+    /** La photo d'une fiche, réduite et rangée dans le dessin (une image SVG ne charge rien d'autre qu'elle-même) */
+    function photoData(file) {
+        if (!file || !/^[A-Za-z0-9._%\-/]{1,240}$/.test(file)) return Promise.resolve('');
+        if (photoCache.has(file)) return photoCache.get(file);
+        const pr = new Promise(res => { const im = new Image(); im.onload = () => { try { const S = 96, c = document.createElement('canvas'); c.width = c.height = S; const g = c.getContext('2d'), k = Math.max(S / im.naturalWidth, S / im.naturalHeight), w = im.naturalWidth * k, h = im.naturalHeight * k; g.fillStyle = '#fff'; g.fillRect(0, 0, S, S); g.drawImage(im, (S - w) / 2, (S - h) / 3, w, h); res(c.toDataURL('image/jpeg', 0.82)); } catch (_) { res(''); } }; im.onerror = () => res(''); im.src = `media/${file}`; });
+        photoCache.set(file, pr); return pr;
+    }
+    let measureCtx = null;
+    const textW = (t, size, family, weight = 400) => { measureCtx = measureCtx || document.createElement('canvas').getContext('2d'); measureCtx.font = `${weight} ${size}px "${family}", serif`; return measureCtx.measureText(String(t)).width; };
+    const fitTxt = (t, max, size, family, weight) => { t = String(t || ''); if (textW(t, size, family, weight) <= max) return t; while (t.length > 1 && textW(t + '…', size, family, weight) > max) t = t.slice(0, -1); return t.trimEnd() + '…'; };
+    async function treeSvg(cfg, look) {
+        const data = await api('layout_tree_data', {root_id: cfg.root, mode: cfg.mode === 'fan' ? 'asc' : cfg.mode, gens: cfg.gens});
+        const people = []; const walk = n => { if (!n?.p) return; people.push(n.p); (n.families || []).forEach(f => { if (f.spouse) people.push(f.spouse); f.children.forEach(walk); }); };
+        people.push(data.root, ...Object.values(data.ancestors || {})); if (data.descendants) walk(data.descendants);
+        const photos = new Map(); if (cfg.photos) await Promise.all([...new Set(people.map(p => p?.photo).filter(Boolean))].map(async f => photos.set(f, await photoData(f))));
+        const F = look.font, FT = look.title, st = cfg.style, out = [], defs = [];
+        const GEN = {male: ['#e3edfb', '#5b86c5'], female: ['#fbe4ee', '#c96b8f'], unknown: ['#eeeeee', '#9a9a9a']};
+        const life = p => !cfg.dates ? '' : p.by && p.dy ? `${p.by} – ${p.dy}` : p.by ? `° ${p.by}` : p.dy ? `† ${p.dy}` : '';
+        const W = 168, H0 = 40 + (cfg.dates ? 12 : 0) + (cfg.places ? 11 : 0), PH = cfg.photos ? 44 : 0;
+        let clipN = 0;
+        /** Une case : style, photo ou initiales, prénom, NOM, dates (et lieux), numéro */
+        const card = (x, y, p, {w = W, h = Math.max(H0, PH + 10), num = '', root = false, spouse = ''} = {}) => {
+            if (!p) return '';
+            const [gf, gs] = GEN[p.gender] || GEN.unknown, sw = root ? 2 : 1.1;
+            const fill = st === 'color' ? gf : st === 'plain' || st === 'cartouche' ? look.paper : look.light, stroke = st === 'color' ? gs : st === 'plain' ? look.soft : look.accent;
+            let g = st === 'cartouche' ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${fill}" stroke="${stroke}" stroke-width="${sw + 0.6}"/><rect x="${x + 3}" y="${y + 3}" width="${w - 6}" height="${h - 6}" rx="1" fill="none" stroke="${stroke}" stroke-width="0.6"/>`
+                : `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${st === 'plain' ? 0 : 7}" fill="${fill}" stroke="${stroke}" stroke-width="${st === 'plain' ? 0.8 : sw}"/>`;
+            let tx = x + 9;
+            if (cfg.photos) {
+                const cx = x + 8 + 20, cy = y + h / 2, ph = photos.get(p.photo);
+                if (ph) { const id = `tc${++clipN}`; defs.push(`<clipPath id="${id}"><circle cx="${cx}" cy="${cy}" r="20"/></clipPath>`); g += `<image x="${cx - 20}" y="${cy - 20}" width="40" height="40" href="${ph}" xlink:href="${ph}" clip-path="url(#${id})" preserveAspectRatio="xMidYMid slice"/><circle cx="${cx}" cy="${cy}" r="20" fill="none" stroke="${stroke}" stroke-width="0.8"/>`; }
+                else { const ini = ((p.first || '').trim()[0] || '') + ((p.last || '').trim()[0] || ''); g += `<circle cx="${cx}" cy="${cy}" r="20" fill="${gf}" stroke="${gs}" stroke-width="0.8"/><text x="${cx}" y="${cy + 5}" text-anchor="middle" font-size="14" font-weight="700" fill="${gs}">${esc(ini.toUpperCase() || '?')}</text>`; }
+                tx = x + 8 + 40 + 7;
+            }
+            const maxW = x + w - 7 - tx, lines = [];
+            const nameColor = st === 'classic' || st === 'cartouche' ? look.accent : look.text;
+            lines.push([fitTxt(p.first || ' ', maxW, 10.5, F), 10.5, 400, look.text, F]);
+            lines.push([fitTxt(String(p.last || '').toUpperCase(), maxW, 11.5, FT, 700), 11.5, 700, nameColor, FT]);
+            if (cfg.dates && life(p)) lines.push([fitTxt(life(p), maxW, 9, F), 9, 400, look.soft, F]);
+            if (cfg.places && (p.bp || p.dp)) lines.push([fitTxt([p.bp && `° ${p.bp}`, p.dp && `† ${p.dp}`].filter(Boolean).join(' · '), maxW, 8, F), 8, 400, look.soft, F]);
+            if (spouse) lines.push([fitTxt(spouse, maxW, 8, F), 8, 400, look.soft, F]);
+            const total = lines.reduce((a, l) => a + l[1] * 1.22, 0); let yy = y + (h - total) / 2;
+            lines.forEach(([t, sz, wt, col, fam]) => { yy += sz * 1.22; g += `<text x="${r1(tx)}" y="${r1(yy - sz * 0.25)}" font-size="${sz}" font-weight="${wt}" fill="${col}" font-family="${esc(fam)}, serif">${esc(t)}</text>`; });
+            if (num) g += `<text x="${x + w - 5}" y="${y + 10}" text-anchor="end" font-size="7.5" fill="${look.soft}">${esc(num)}</text>`;
+            return g;
+        };
+        const line = d => `<path d="${d}" fill="none" stroke="${st === 'color' ? '#8a8a8a' : look.soft}" stroke-width="1"/>`;
+        const anc = data.ancestors || {}, G = cfg.gens, CH = Math.max(H0, PH + 10);
+        let minX = 0, minY = 0, maxX = 0, maxY = 0; const grow = (x, y, w, h) => { minX = Math.min(minX, x); minY = Math.min(minY, y); maxX = Math.max(maxX, x + w); maxY = Math.max(maxY, y + h); };
+        const spouseTxt = n => (n.families || []).map(f => f.spouse ? `∞ ${[f.spouse.first, String(f.spouse.last || '').toUpperCase()].filter(Boolean).join(' ')}` : '').filter(Boolean).join(' · ');
+        /** La descendance, de haut en bas : les feuilles côte à côte, chaque parent au milieu de ses enfants */
+        const descLayout = (root, y0) => {
+            let next = 0; const GAPX = 14, GAPY = 46, H = CH + (cfg.dates ? 0 : 0) + 10;
+            const place = (n, d) => { const kids = (n.families || []).flatMap(f => f.children); n._d = d; if (!kids.length) { n._x = next; next += W + GAPX; } else { kids.forEach(k => place(k, d + 1)); n._x = (kids[0]._x + kids.at(-1)._x) / 2; } n._kids = kids; };
+            place(root, 0);
+            const draw = n => { const x = n._x, y = y0 + n._d * (H + GAPY); grow(x, y, W, H);
+                out.push(card(x, y, n.p, {h: H, root: n === root, spouse: spouseTxt(n)}));
+                if (n._kids.length) { const my = y + H + GAPY / 2; out.push(line(`M${x + W / 2},${y + H}V${my}`)); out.push(line(`M${n._kids[0]._x + W / 2},${my}H${n._kids.at(-1)._x + W / 2}`)); n._kids.forEach(k => { out.push(line(`M${k._x + W / 2},${my}V${y0 + k._d * (H + GAPY)}`)); draw(k); }); } };
+            draw(root); return root._x;
+        };
+        if (cfg.mode === 'asc') { // de gauche à droite : la personne, puis ses parents, ses grands-parents…
+            const GX = 34, rows = 2 ** (G - 1), RH = CH + 10, tot = rows * RH;
+            const pos = n => { const g = Math.floor(Math.log2(n)), i = n - 2 ** g; return {x: g * (W + GX), y: (i + 0.5) * tot / 2 ** g - CH / 2}; };
+            Object.keys(anc).map(Number).sort((a, b) => a - b).forEach(n => { const c = pos(n), ch = pos(n >> 1); out.push(line(`M${ch.x + W},${ch.y + CH / 2}H${ch.x + W + GX / 2}V${c.y + CH / 2}H${c.x}`)); });
+            const r = pos(1); out.push(card(r.x, r.y, data.root, {root: true, num: '1'})); grow(r.x, r.y, W, CH);
+            Object.entries(anc).forEach(([n, p]) => { const c = pos(Number(n)); out.push(card(c.x, c.y, p, {num: n})); grow(c.x, c.y, W, CH); });
+        } else if (cfg.mode === 'desc') descLayout(data.descendants || {p: data.root}, 0);
+        else if (cfg.mode === 'both') { // sablier : les ancêtres au-dessus, les descendants dessous, la personne au milieu
+            const GX = 12, GY = 40, slots = 2 ** (G - 1), tot = slots * (W + GX);
+            const pos = n => { const g = Math.floor(Math.log2(n)), i = n - 2 ** g; return {x: (i + 0.5) * tot / 2 ** g - W / 2, y: -g * (CH + GY)}; };
+            const rootX = descLayout(data.descendants || {p: data.root}, 0), dx = rootX - pos(1).x;
+            Object.keys(anc).map(Number).forEach(n => { const c = pos(n), ch = pos(n >> 1), my = ch.y - GY / 2; out.push(line(`M${ch.x + dx + W / 2},${ch.y}V${my}H${c.x + dx + W / 2}V${c.y + CH}`)); });
+            Object.entries(anc).forEach(([n, p]) => { const c = pos(Number(n)); out.push(card(c.x + dx, c.y, p, {num: n})); grow(c.x + dx, c.y, W, CH); });
+        } else { // éventail : une roue des ancêtres, la personne au centre
+            const R0 = 62, DR = 74, P2 = Math.PI;
+            const pt = (r, a) => [r1(r * Math.cos(a)), r1(r * Math.sin(a))];
+            const seg = (r1_, r2, a1, a2) => { const [x1, y1] = pt(r2, a1), [x2, y2] = pt(r2, a2), [x3, y3] = pt(r1_, a2), [x4, y4] = pt(r1_, a1), big = a2 - a1 > P2 ? 1 : 0; return `M${x1},${y1}A${r2},${r2} 0 ${big} 1 ${x2},${y2}L${x3},${y3}A${r1_},${r1_} 0 ${big} 0 ${x4},${y4}Z`; };
+            const colorOfP = (p, g) => st === 'color' ? (GEN[p.gender] || GEN.unknown) : st === 'plain' ? [look.paper, look.soft] : [g % 2 ? look.light : look.paper, look.accent];
+            for (let g = 1; g < G; g++) for (let i = 0; i < 2 ** g; i++) { const n = 2 ** g + i, p = anc[n], a1 = P2 + i * P2 / 2 ** g, a2 = a1 + P2 / 2 ** g, ri = R0 + (g - 1) * DR, ro = ri + DR;
+                const [fl, sk] = p ? colorOfP(p, g) : ['none', look.soft]; out.push(`<path d="${seg(ri, ro, a1, a2)}" fill="${fl}" stroke="${sk}" stroke-width="${st === 'cartouche' ? 1.6 : 0.9}"${p ? '' : ' stroke-dasharray="3 3"'}/>`);
+                if (!p) continue;
+                const am = (a1 + a2) / 2, rm = ri + DR / 2, deg = am * 180 / P2, arc = (ri + 6) * (a2 - a1);
+                const ls = [[p.first || '', 400, F], [String(p.last || '').toUpperCase(), 700, FT], ...(cfg.dates && life(p) ? [[life(p), 400, F]] : [])];
+                if (g <= 2) { // le texte suit le cercle
+                    const sz = g === 1 ? 11 : 9.5, [cx, cy] = pt(rm, am), rot = deg + 90; let yy = -((ls.length - 1) * sz * 1.2) / 2;
+                    out.push(`<g transform="translate(${cx},${cy}) rotate(${r1(rot)})">${ls.map(([t, wt, fam]) => { const y = yy; yy += sz * 1.2; return `<text x="0" y="${r1(y + sz * 0.35)}" text-anchor="middle" font-size="${sz}" font-weight="${wt}" fill="${wt === 700 && st !== 'color' ? look.accent : look.text}" font-family="${esc(fam)}, serif">${esc(fitTxt(t, Math.min(arc * 0.92, 150), sz, fam, wt))}</text>`; }).join('')}</g>`);
+                } else { // le texte rayonne
+                    const sz = Math.max(5, Math.min(9, arc / (ls.length * 1.25))), flip = deg > 270 ? 0 : 180, [cx, cy] = pt(rm, am); let yy = -((ls.length - 1) * sz * 1.2) / 2;
+                    out.push(`<g transform="translate(${cx},${cy}) rotate(${r1(deg + flip)})">${ls.map(([t, wt, fam]) => { const y = yy; yy += sz * 1.2; return `<text x="0" y="${r1(y + sz * 0.35)}" text-anchor="middle" font-size="${r1(sz)}" font-weight="${wt}" fill="${look.text}" font-family="${esc(fam)}, serif">${esc(fitTxt(t, DR - 8, sz, fam, wt))}</text>`; }).join('')}</g>`);
+                }
+            }
+            const p = data.root, [fl, sk] = colorOfP(p, 0); out.push(`<path d="M${-R0},0A${R0},${R0} 0 0 1 ${R0},0Z" fill="${fl}" stroke="${sk}" stroke-width="1.6"/>`);
+            const ph = cfg.photos && photos.get(p.photo); if (ph) { defs.push('<clipPath id="tcroot"><circle cx="0" cy="-41" r="17"/></clipPath>'); out.push(`<image x="-17" y="-58" width="34" height="34" href="${ph}" xlink:href="${ph}" clip-path="url(#tcroot)" preserveAspectRatio="xMidYMid slice"/>`); }
+            out.push(`<text x="0" y="${ph ? -14 : -24}" text-anchor="middle" font-size="10" fill="${look.text}" font-family="${esc(F)}, serif">${esc(fitTxt(p.first, 104, 10, F))}</text><text x="0" y="${ph ? -3 : -10}" text-anchor="middle" font-size="11" font-weight="700" fill="${st === 'color' ? look.text : look.accent}" font-family="${esc(FT)}, serif">${esc(fitTxt(String(p.last || '').toUpperCase(), 104, 11, FT, 700))}</text>${!ph && cfg.dates && life(p) ? `<text x="0" y="4" text-anchor="middle" font-size="9" fill="${look.soft}" font-family="${esc(F)}, serif">${esc(life(p))}</text>` : ''}`);
+            const R = R0 + (G - 1) * DR; grow(-R, -R, 2 * R, R + 4);
+        }
+        const pad = 8, w = r1(maxX - minX + pad * 2), h = r1(maxY - minY + pad * 2);
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" font-family="${esc(F)}, serif"><defs>${defs.join('')}</defs><g transform="translate(${r1(pad - minX)},${r1(pad - minY)})">${out.join('')}</g></svg>`;
+        const kind = {asc: 'Ascendance', desc: 'Descendance', both: 'Arbre', fan: 'Éventail'}[cfg.mode] || 'Arbre';
+        return {svg, w, h, name: `${kind} de ${data.root?.name || 'la personne'}`, count: new Set(people.filter(Boolean).map(p => p.id)).size};
+    }
+    /* ═════════════ 📱 ePub (EPUB 3) : fabriqué dans le navigateur, un petit ZIP (« stored », ou deflate si le navigateur sait) ═════════════ */
+    const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+    const crc32 = u8 => { let c = 0xffffffff; for (let i = 0; i < u8.length; i++) c = CRC[(c ^ u8[i]) & 0xff] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+    async function deflateRaw(u8) { if (typeof CompressionStream !== 'function') return null; try { const st = new Blob([u8]).stream().pipeThrough(new CompressionStream('deflate-raw')); return new Uint8Array(await new Response(st).arrayBuffer()); } catch (_) { return null; } }
+    /** files : [{name, data (Uint8Array ou texte), store}] → Blob ZIP (le premier fichier tel quel : le « mimetype » de l'ePub) */
+    async function makeZip(files, type = 'application/zip') {
+        const enc = new TextEncoder(), parts = [], central = []; let offset = 0;
+        const d = new Date(), dosTime = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1), dosDate = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+        for (const f of files) {
+            const name = enc.encode(f.name), raw = typeof f.data === 'string' ? enc.encode(f.data) : f.data, crc = crc32(raw);
+            let body = raw, method = 0; if (!f.store && raw.length > 64) { const z = await deflateRaw(raw); if (z && z.length < raw.length) { body = z; method = 8; } }
+            const utf = /[^\x20-\x7e]/.test(f.name) ? 0x0800 : 0;
+            const h = new DataView(new ArrayBuffer(30)); h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, utf, true); h.setUint16(8, method, true); h.setUint16(10, dosTime, true); h.setUint16(12, dosDate, true); h.setUint32(14, crc, true); h.setUint32(18, body.length, true); h.setUint32(22, raw.length, true); h.setUint16(26, name.length, true); h.setUint16(28, 0, true);
+            parts.push(new Uint8Array(h.buffer), name, body);
+            const c = new DataView(new ArrayBuffer(46)); c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, utf, true); c.setUint16(10, method, true); c.setUint16(12, dosTime, true); c.setUint16(14, dosDate, true); c.setUint32(16, crc, true); c.setUint32(20, body.length, true); c.setUint32(24, raw.length, true); c.setUint16(28, name.length, true); c.setUint32(42, offset, true);
+            central.push(new Uint8Array(c.buffer), name);
+            offset += 30 + name.length + body.length;
+        }
+        const cdSize = central.reduce((a, x) => a + x.length, 0), e = new DataView(new ArrayBuffer(22));
+        e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, cdSize, true); e.setUint32(16, offset, true);
+        return new Blob([...parts, ...central, new Uint8Array(e.buffer)], {type});
+    }
+    const xmlEsc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+    /** Le livre en ePub : un fichier XHTML par chapitre (style « Chapitre »), les images, les notes à la fin de chaque chapitre, la couverture, la table des matières */
+    async function buildEpub(doc0, name) {
+        const V = resolveDoc(doc0), title = String(doc0.title || name || 'Mon livre').trim() || 'Mon livre', enc = new TextEncoder();
+        const images = [], imgBySrc = new Map();
+        const addImage = async src => {
+            if (imgBySrc.has(src)) return imgBySrc.get(src);
+            let bytes = null, mt = '';
+            try {
+                if (src.startsWith('data:')) { const m = /^data:(image\/[a-z+]+);base64,(.*)$/.exec(src); if (m) { mt = m[1]; const bin = atob(m[2]); bytes = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i); } }
+                else if (srcOk(src)) { const r = await fetch(src); if (r.ok) { const b = await r.blob(); mt = b.type || ''; bytes = new Uint8Array(await b.arrayBuffer()); } }
+            } catch (_) { bytes = null; }
+            const ext = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/gif': 'gif', 'image/webp': 'webp', 'image/svg+xml': 'svg'}[mt];
+            if (!bytes || !ext) { imgBySrc.set(src, null); return null; }
+            const file = `images/img${String(images.length + 1).padStart(3, '0')}.${ext}`; images.push({file, mt, bytes}); imgBySrc.set(src, file); return file;
+        };
+        // 1. tout le texte et les images dans l'ordre de lecture (page après page, de haut en bas) ; sommaires et index sont remplacés par la table de l'ePub
+        const flow = [], start = V.page.start || 1; let coverPage = -1;
+        V.pages.forEach((p, i) => { if (coverPage < 0 && i === 0 && p.items.some(it => it.type === 'text' && /data-ps="ps-title"/.test(it.html || ''))) coverPage = 0; });
+        for (const [i, p] of V.pages.entries()) {
+            if (i === coverPage) continue;
+            for (const it of [...p.items].filter(x => !x.hidden).sort((a, b) => a.y - b.y || a.x - b.x)) {
+                if (it.type === 'text') { if (['toc', 'index', 'places', 'jobs', 'notes'].includes(it.auto)) continue; flow.push({kind: 'text', html: tokens(it.html || '', {pageNo: '', pages: '', title, chapter: ''}), page: i + start}); }
+                else if ((it.type === 'frame' || it.type === 'image') && it.src) { const f = await addImage(it.src); if (f) flow.push({kind: 'img', file: f, alt: it.srcName || it.name || 'Image'}); }
+            }
+        }
+        // 2. les paragraphes en XHTML (styles → classes), coupés en chapitres
+        const chapters = []; let curCh = null, fnK = 0;
+        const newChapter = t => { curCh = {title: t, body: [], notes: []}; chapters.push(curCh); };
+        const ser = new XMLSerializer(), toX = el => ser.serializeToString(el).replace(/ xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/g, '');
+        for (const b of flow) {
+            if (b.kind === 'img') { if (!curCh) newChapter(title); curCh.body.push(`<figure class="img"><img src="${b.file}" alt="${xmlEsc(b.alt)}"/></figure>`); continue; }
+            const d = document.createElement('div'); d.innerHTML = b.html; d.querySelectorAll('.ly-wrapf').forEach(x => x.remove()); d.querySelectorAll('[data-cm]').forEach(x => x.replaceWith(...x.childNodes));
+            [...d.children].forEach(el => {
+                const ps = el.getAttribute('data-ps') || '', txt = (el.textContent || '').replace(/\s+/g, ' ').trim();
+                const head = (ps === 'ps-chapter' || ps === 'ps-name') && !el.hasAttribute('data-cont') && txt; // un chapitre, ou la page d'une personne
+                if (head) newChapter(txt); else if (!curCh) newChapter(title);
+                el.querySelectorAll('sup[data-fn]').forEach(s => { const k = ++fnK, id = s.dataset.fn, nShown = (s.textContent || String(k)).trim(); curCh.notes.push({k, n: nShown, text: V.notes?.[id]?.text || ''}); s.removeAttribute('data-fn'); s.innerHTML = ''; const a = document.createElement('a'); a.setAttribute('epub:type', 'noteref'); a.setAttribute('href', `#fn${k}`); a.setAttribute('id', `fnref${k}`); a.textContent = nShown; s.appendChild(a); });
+                el.querySelectorAll('[data-ps],[data-cs]').forEach(x => { const c = [x.getAttribute('data-ps'), x.getAttribute('data-cs')].filter(Boolean).join(' '); x.removeAttribute('data-ps'); x.removeAttribute('data-cs'); if (c) x.setAttribute('class', c); });
+                const c = [ps, el.getAttribute('data-cs')].filter(Boolean).join(' '); el.removeAttribute('data-ps'); el.removeAttribute('data-cs'); el.removeAttribute('data-cont'); if (c) el.setAttribute('class', c);
+                el.querySelectorAll('[contenteditable],[spellcheck]').forEach(x => { x.removeAttribute('contenteditable'); x.removeAttribute('spellcheck'); });
+                let x = toX(el); if (head && curCh.body.length === 0) x = x.replace(/^<p\b/, '<h1').replace(/<\/p>$/, '</h1>');
+                curCh.body.push(x);
+            });
+        }
+        if (!chapters.length) newChapter(title);
+        // 3. la couverture : une image (la photo de la couverture, le titre, le sous-titre)
+        const cov = coverPage >= 0 ? V.pages[coverPage] : null, covText = id => { const it = cov?.items.find(x => x.type === 'text' && (x.html || '').includes(`data-ps="${id}"`)); if (!it) return ''; const d = document.createElement('div'); d.innerHTML = it.html; return (d.querySelector(`[data-ps="${id}"]`)?.textContent || '').trim(); };
+        const subtitle = covText('ps-subtitle'), author = covText('ps-author').replace(/^par\s+/i, ''), look = {accent: colorOf(V, 'sw-accent', '#7a2e2e'), paper: colorOf(V, 'sw-paper', '#ffffff'), text: colorOf(V, 'sw-text', '#222')};
+        let photo = ''; const ph = cov?.items.find(x => (x.type === 'frame' || x.type === 'image') && x.src && !x.tree); if (ph) { try { photo = ph.src.startsWith('data:') ? ph.src : await new Promise(res => { const im = new Image(); im.onload = () => { try { const c = document.createElement('canvas'), k = Math.min(1, 1200 / im.naturalWidth); c.width = im.naturalWidth * k; c.height = im.naturalHeight * k; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); res(c.toDataURL('image/jpeg', 0.85)); } catch (_) { res(''); } }; im.onerror = () => res(''); im.src = ph.src; }); } catch (_) { photo = ''; } }
+        const wrapT = (t, n) => { const w = String(t).split(/\s+/), out = []; let l = ''; w.forEach(x => { if ((l + ' ' + x).trim().length > n && l) { out.push(l); l = x; } else l = (l + ' ' + x).trim(); }); if (l) out.push(l); return out.slice(0, 4); };
+        const tl = wrapT(title, 18), coverSvg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 600 900" width="600" height="900"><rect width="600" height="900" fill="${xmlEsc(look.paper)}"/>${photo ? `<image x="0" y="0" width="600" height="520" preserveAspectRatio="xMidYMid slice" href="${photo}" xlink:href="${photo}"/>` : `<rect x="40" y="40" width="520" height="820" fill="none" stroke="${xmlEsc(look.accent)}" stroke-width="3"/>`}
+            ${tl.map((l, k) => `<text x="300" y="${(photo ? 610 : 380) + k * 62}" text-anchor="middle" font-family="Georgia, serif" font-size="54" font-weight="700" fill="${xmlEsc(look.accent)}">${xmlEsc(l)}</text>`).join('')}${subtitle ? `<text x="300" y="${(photo ? 610 : 380) + tl.length * 62 + 20}" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-style="italic" fill="${xmlEsc(look.text)}">${xmlEsc(subtitle.slice(0, 50))}</text>` : ''}${author ? `<text x="300" y="840" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="${xmlEsc(look.text)}">${xmlEsc(author.slice(0, 60))}</text>` : ''}</svg>`;
+        images.unshift({file: 'images/cover.svg', mt: 'image/svg+xml', bytes: enc.encode(coverSvg), cover: true});
+        // 4. les styles : ceux du livre, en tailles relatives (la liseuse choisit la taille du texte)
+        const body = V.paraStyles.find(x => x.id === 'ps-body') || {size: 11}, bs = body.size || 11;
+        const css = `body{margin:0 4%;font-family:"${fontOk(body.font) || 'Georgia'}",serif;line-height:1.45}p{margin:0 0 .5em}h1{margin:1.2em 0 .8em;page-break-after:avoid}figure.img{margin:1em 0;text-align:center}figure.img img{max-width:100%;height:auto}sup{font-size:.7em;line-height:0}a[epub|type="noteref"]{text-decoration:none}aside.notes{margin-top:2em;border-top:1px solid #999;padding-top:.6em;font-size:.85em}aside.notes p{margin:0 0 .4em}.cover{margin:0;padding:0;text-align:center}.cover img{max-width:100%;max-height:100vh}
+${V.paraStyles.map(s0 => `.${s0.id}{${[s0.font && `font-family:"${fontOk(s0.font)}",serif`, s0.size && `font-size:${r1(s0.size / bs * 100) / 100}em`, s0.weight && `font-weight:${clamp(s0.weight, 100, 900)}`, s0.italic && 'font-style:italic', s0.caps === 'small' && 'font-variant:small-caps', s0.caps === 'all' && 'text-transform:uppercase', s0.align && `text-align:${s0.align === 'justify-all' ? 'justify' : s0.align}`, s0.color && `color:${colorOf(V, s0.color, '#111')}`, s0.indent && `text-indent:${r1(s0.indent / 4)}em`].filter(Boolean).join(';')}}`).join('\n')}
+${V.charStyles.map(s0 => `.${s0.id}{${[s0.weight && `font-weight:${clamp(s0.weight, 100, 900)}`, s0.italic && 'font-style:italic', s0.caps === 'small' && 'font-variant:small-caps', s0.color && `color:${colorOf(V, s0.color, 'inherit')}`].filter(Boolean).join(';')}}`).join('\n')}`;
+        // 5. les fichiers de l'ePub
+        const xhtml = (t, inner, extra = '') => `<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html>\n<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" lang="fr" xml:lang="fr"><head><meta charset="UTF-8"/><title>${xmlEsc(t)}</title><link rel="stylesheet" type="text/css" href="style.css"/></head><body${extra}>${inner}</body></html>`;
+        const chFiles = chapters.map((c, k) => ({file: `chap${String(k + 1).padStart(3, '0')}.xhtml`, title: c.title,
+            data: xhtml(c.title, `<section epub:type="chapter">${c.body[0]?.startsWith('<h1') ? '' : `<h1 class="ps-chapter">${xmlEsc(c.title)}</h1>`}${c.body.join('\n')}</section>${c.notes.length ? `<aside class="notes" epub:type="footnotes">${c.notes.map(n => `<aside epub:type="footnote" id="fn${n.k}"><p><a href="#fnref${n.k}">${xmlEsc(n.n)}</a>. ${xmlEsc(n.text)}</p></aside>`).join('')}</aside>` : ''}`)}));
+        const uid = `urn:lcnda:${doc0.uid || nid('d')}`;
+        const modified = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+        const nav = xhtml('Table des matières', `<nav epub:type="toc" id="toc"><h1>Table des matières</h1><ol>${chFiles.map(c => `<li><a href="${c.file}">${xmlEsc(c.title)}</a></li>`).join('')}</ol></nav><nav epub:type="landmarks" hidden="hidden"><ol><li><a epub:type="cover" href="cover.xhtml">Couverture</a></li><li><a epub:type="bodymatter" href="${chFiles[0].file}">Début du livre</a></li></ol></nav>`);
+        const ncx = `<?xml version="1.0" encoding="UTF-8"?>\n<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1"><head><meta name="dtb:uid" content="${xmlEsc(uid)}"/><meta name="dtb:depth" content="1"/><meta name="dtb:totalPageCount" content="0"/><meta name="dtb:maxPageNumber" content="0"/></head><docTitle><text>${xmlEsc(title)}</text></docTitle><navMap>${chFiles.map((c, k) => `<navPoint id="np${k + 1}" playOrder="${k + 1}"><navLabel><text>${xmlEsc(c.title)}</text></navLabel><content src="${c.file}"/></navPoint>`).join('')}</navMap></ncx>`;
+        const coverX = xhtml(title, '<div class="cover"><img src="images/cover.svg" alt="Couverture"/></div>', ' epub:type="cover"');
+        const opf = `<?xml version="1.0" encoding="UTF-8"?>\n<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="bookid" xml:lang="fr"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="bookid">${xmlEsc(uid)}</dc:identifier><dc:title>${xmlEsc(title)}</dc:title><dc:language>fr</dc:language>${author ? `<dc:creator>${xmlEsc(author)}</dc:creator>` : ''}<dc:publisher>LCNDA</dc:publisher><meta property="dcterms:modified">${modified}</meta><meta name="cover" content="cover-image"/></metadata>
+<manifest><item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/><item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml"/><item id="css" href="style.css" media-type="text/css"/><item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
+${images.map((im, k) => `<item id="${im.cover ? 'cover-image' : `img${k}`}" href="${im.file}" media-type="${im.mt}"${im.cover ? ' properties="cover-image"' : ''}/>`).join('\n')}
+${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="application/xhtml+xml"/>`).join('\n')}</manifest>
+<spine toc="ncx"><itemref idref="cover" linear="yes"/>${chFiles.map((c, k) => `<itemref idref="ch${k + 1}"/>`).join('')}</spine></package>`;
+        const container = '<?xml version="1.0" encoding="UTF-8"?>\n<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="OEBPS/content.opf" media-type="application/oebps-package+xml"/></rootfiles></container>';
+        return makeZip([{name: 'mimetype', data: 'application/epub+zip', store: true}, {name: 'META-INF/container.xml', data: container}, {name: 'OEBPS/content.opf', data: opf}, {name: 'OEBPS/nav.xhtml', data: nav}, {name: 'OEBPS/toc.ncx', data: ncx}, {name: 'OEBPS/style.css', data: css}, {name: 'OEBPS/cover.xhtml', data: coverX},
+            ...chFiles.map(c => ({name: `OEBPS/${c.file}`, data: c.data})), ...images.map(im => ({name: `OEBPS/${im.file}`, data: im.bytes, store: /jpe?g|png|gif|webp/.test(im.mt)}))], 'application/epub+zip');
+    }
     /* ═════════════ Exports ═════════════ */
     const slug = n => String(n || 'livre').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 80) || 'livre';
     const download = (name, blob) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); };
-    function printHtml(doc0, name, withButton, {bleed = false} = {}) {
+    function printHtml(doc0, name, withButton, {bleed = false, annot = false, autoPrint = false} = {}) {
         const doc = resolveDoc(doc0);
+        // 📝 PDF annoté : les passages commentés surlignés, un numéro au bord de chaque objet commenté, la liste des commentaires à la fin
+        const cms = annot ? (doc.review?.comments || []) : [], num = new Map(cms.map((c, k) => [c.id, k + 1]));
+        const pageOfCm = c => { const k = doc.pages.findIndex(p => p.items.some(it => it.id === c.item || String(it.html || '').includes(`data-cm="${c.id}"`))); return k >= 0 ? k : c.page; };
+        const annotMap = new Map(); cms.forEach(c => { if (c.item && !c.quote) { const l = annotMap.get(c.item) || []; l.push(num.get(c.id)); annotMap.set(c.item, l); } });
+        const annotCss = annot ? `[data-cm]{background:#fff0a0;box-shadow:0 0 0 1px #f0c419}${cms.map(c => `[data-cm="${c.id}"]::after{content:"[${num.get(c.id)}]";color:#c4161c;font:700 8px/1 Arial,sans-serif;vertical-align:super}`).join('')}.ly-cmark{position:absolute;z-index:9;min-width:14px;height:14px;padding:0 3px;border-radius:7px;background:#c4161c;color:#fff;font:700 9px/14px Arial,sans-serif;text-align:center}
+            .ly-annot{margin:12px auto;padding:14mm;background:#fff;box-sizing:border-box;font:11pt/1.45 Georgia,serif;color:#111;break-before:page;page-break-before:always}.ly-annot h1{font-size:18pt;margin:0 0 4mm}.ly-annot li{margin:0 0 3mm}.ly-annot .q{background:#fff0a0}.ly-annot small{color:#666}.ly-annot .s{color:#0b5cad}` : '';
+        const annotList = annot ? `<section class="ly-annot" style="width:${px(doc.page.w)}px"><h1>💬 Commentaires de relecture (${cms.length})</h1>${cms.length ? `<ol>${cms.map(c => { const pg = pageOfCm(c); return `<li><b>[${num.get(c.id)}]</b> ${pg >= 0 ? `<small>page ${pg + (doc.page.start || 1)} · </small>` : ''}<small>${esc(c.author)} · ${esc(new Date(c.at).toLocaleDateString('fr-FR'))}${c.resolved ? ` · ${c.status === 'accepted' ? 'acceptée' : c.status === 'refused' ? 'refusée' : 'résolu'}` : ''}</small><br>${c.quote ? `<span class="q">« ${esc(c.quote)} »</span><br>` : ''}${esc(c.text)}${c.suggest ? `<br><span class="s">✎ Remplacer « ${esc(c.suggest.from)} » par « ${esc(c.suggest.to)} »</span>` : ''}${c.replies.map(r => `<br>↳ <small>${esc(r.author)} :</small> ${esc(r.text)}`).join('')}</li>`; }).join('')}</ol>` : '<p>Aucun commentaire.</p>'}</section>` : '';
         // avec fond perdu : la feuille est agrandie du fond perdu et d'une bande pour les traits de coupe (la ligne-bloc, sinon 8 mm)
         const B = bleed ? doc.page.bleed || 0 : 0, M = bleed ? Math.max(8, doc.page.slug || 0) : 0, W = doc.page.w + 2 * (B + M), H = doc.page.h + 2 * (B + M);
         // traits de coupe, repères de montage (cibles), gamme de couleurs et ligne d'informations, comme pour un imprimeur
@@ -1664,17 +2206,32 @@
             const bar = ['#00aeef', '#ec008c', '#fff200', '#000000', '#00a651', '#ed1c24', '#2e3192', '#808080', '#bfbfbf'].map((c, k) => `<rect x="${r1(o + px(6) + k * px(4))}" y="${r1(mid - px(1.6))}" width="${r1(px(4))}" height="${r1(px(3.2))}" fill="${c}" stroke="none"/>`).join('');
             const info = `<text x="${r1(o)}" y="${r1(px(H) - mid + px(1))}" font-size="${r1(px(2.2))}" font-family="Arial, sans-serif" fill="#000" stroke="none">${esc(name)} · page ${i + (doc.page.start || 1)} · ${r1(doc.page.w)} × ${r1(doc.page.h)} mm · fond perdu ${r1(B)} mm · ${new Date().toLocaleString('fr-FR')}</text>`;
             return `<svg class="ly-marks" width="${px(W)}" height="${px(H)}" stroke="#000" stroke-width="0.5">${[[o, o], [o + pw, o], [o, o + ph], [o + pw, o + ph]].map(([x, y], k) => { const sx = k % 2 ? 1 : -1, sy = k > 1 ? 1 : -1; return ln(x + sx * g, y, x + sx * (g + L), y) + ln(x, y + sy * g, x, y + sy * (g + L)); }).join('')}${M >= 6 ? reg(o + pw / 2, mid) + reg(o + pw / 2, px(H) - mid) + reg(mid, o + ph / 2) + reg(px(W) - mid, o + ph / 2) + bar + info : ''}</svg>`; };
-        const pages = doc.pages.map((_, i) => { const pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i}); return bleed ? `<div class="ly-sheet" style="width:${px(W)}px;height:${px(H)}px">${marks(i)}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(doc.page.w + 2 * B)}px;height:${px(doc.page.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg; }).join('');
+        const pages = doc.pages.map((_, i) => { const pg = pageHtml(doc, i, {print: true, preview: true, keyPrefix: 'p' + i, annot: annotMap}); return bleed ? `<div class="ly-sheet" style="width:${px(W)}px;height:${px(H)}px">${marks(i)}<div class="ly-bleedclip" style="left:${px(M)}px;top:${px(M)}px;width:${px(doc.page.w + 2 * B)}px;height:${px(doc.page.h + 2 * B)}px;background:${cssPaint(doc, doc.page.paper)}"><div style="position:absolute;left:${px(B)}px;top:${px(B)}px">${pg.replace('class="ly-page', 'class="ly-page is-bleed')}</div></div></div>` : pg; }).join('');
         return `<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>${esc(name)}</title><base href="${esc(location.href.replace(/[^/]*$/, ''))}"><style>${BASE_CSS}${docCss(doc, 'body')}
             @page{size:${W}mm ${H}mm;margin:0}html,body{margin:0;padding:0;background:#888}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}
             .ly-page{margin:12px auto;box-shadow:0 2px 12px rgba(0,0,0,.35)}.ly-page.is-bleed{overflow:visible;margin:0;box-shadow:none}.ly-sheet{position:relative;margin:12px auto;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.35)}.ly-bleedclip{position:absolute;overflow:hidden}.ly-marks{position:absolute;left:0;top:0}.ly-bar{position:sticky;top:0;z-index:9;display:flex;gap:10px;align-items:center;padding:10px 16px;background:#111;color:#fff;font:14px system-ui}.ly-bar button{font:inherit;padding:6px 14px;border-radius:6px;border:0;background:#2f6bff;color:#fff;cursor:pointer}
-            @media print{html,body{background:none}.ly-bar{display:none}.ly-page,.ly-sheet{margin:0;box-shadow:none;break-after:page;page-break-after:always}.ly-sheet .ly-page{break-after:auto;page-break-after:auto}}</style></head><body>${withButton ? `<div class="ly-bar"><b>${esc(name)}</b> · ${A().plural(doc.pages.length, 'page')} · ${r1(W)} × ${r1(H)} mm${bleed ? ` (page ${r1(doc.page.w)} × ${r1(doc.page.h)} + fond perdu ${r1(B)} mm et traits de coupe)` : ''}<span style="flex:1"></span><button onclick="print()">🖨 Imprimer / enregistrer en PDF</button></div>` : ''}${pages}</body></html>`;
+            @media print{html,body{background:none}.ly-bar{display:none}.ly-page,.ly-sheet{margin:0;box-shadow:none;break-after:page;page-break-after:always}.ly-sheet .ly-page{break-after:auto;page-break-after:auto}.ly-annot{margin:0}}${annotCss}</style></head><body>${withButton ? `<div class="ly-bar"><b>${esc(name)}</b> · ${A().plural(doc.pages.length, 'page')} · ${r1(W)} × ${r1(H)} mm${bleed ? ` (page ${r1(doc.page.w)} × ${r1(doc.page.h)} + fond perdu ${r1(B)} mm et traits de coupe)` : ''}${annot ? ` · ${A().plural(cms.length, 'commentaire')}` : ''}<span style="flex:1"></span><button onclick="print()">🖨 Imprimer / enregistrer en PDF</button></div>` : ''}${pages}${annotList}${autoPrint ? '<script>addEventListener("load",()=>setTimeout(()=>print(),400))<\/script>' : ''}</body></html>`;
     }
     /** Fichier HTML autonome : les photos de la base sont intégrées */
     async function inlineImages(html) {
         const srcs = [...new Set([...html.matchAll(/href="(media\/[^"]+)"/g)].map(m => m[1]))], map = {};
         await Promise.all(srcs.map(async s0 => { try { const b = await (await fetch(s0.replace(/&amp;/g, '&'))).blob(); map[s0] = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(b); }); } catch (_) {} }));
         return html.replace(/<base [^>]*>/, '').replace(/href="(media\/[^"]+)"/g, (m0, s0) => map[s0] ? `href="${map[s0]}"` : m0);
+    }
+
+    /* ═════════════ Réglages enregistrés : ⤓ un fichier .json à garder ou à passer à un autre ordinateur, ⤒ et le remettre ═════════════ */
+    const chooseFile = accept => new Promise(res => { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = accept; inp.hidden = true; inp.dataset.uiOff = ''; inp.addEventListener('change', () => { res(inp.files?.[0] || null); inp.remove(); }); document.body.appendChild(inp); inp.click(); });
+    const reglageExport = (outil, nom, donnees) => download(`lcnda-reglage-${outil}-${slug(nom).toLowerCase()}.json`, new Blob([JSON.stringify({lcnda: 'reglage', outil, nom, version: 1, donnees}, null, 1)], {type: 'application/json'}));
+    /** Lire un fichier de réglage de cet outil ; un autre outil ou un autre fichier est refusé avec un message clair ; un nom déjà pris est redemandé */
+    async function reglageImport(outil, label, taken = []) {
+        const f = await chooseFile('.json,application/json'); if (!f) return null;
+        if (f.size > 5e6) { toast('Fichier trop gros pour un réglage.', 'error'); return null; }
+        let data; try { data = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible).', 'error'); return null; }
+        if (data?.lcnda !== 'reglage' || !data.donnees || typeof data.donnees !== 'object') { toast('Ce fichier n’est pas un réglage LCNDA.', 'error'); return null; }
+        if (data.outil !== outil) { toast(`Ce réglage vient d’un autre outil (« ${String(data.outil || '?').slice(0, 40)} ») : il ne va pas dans ${label}.`, 'error'); return null; }
+        let nom = String(data.nom || 'Réglage importé').replace(/[<>"`]/g, '').trim().slice(0, 60) || 'Réglage importé';
+        while (taken.includes(nom)) { const v = await A().askText({title: 'Ce nom est déjà pris', message: `Tu as déjà un réglage « ${nom} ». Nom pour celui-ci :`, value: `${nom} (importé)`, okLabel: 'Importer'}); if (v === null || v === undefined) return null; nom = String(v).replace(/[<>"`]/g, '').trim().slice(0, 60) || nom; }
+        return {nom, donnees: data.donnees};
     }
 
     /* ═════════════ Réglages par défaut ═════════════ */
@@ -1736,6 +2293,11 @@
             if (!e.target.matches('[data-import]')) return; const f = e.target.files?.[0]; e.target.value = ''; if (!f) return;
             if (f.size > 30e6) return toast('Fichier trop gros.', 'error');
             let data; try { data = JSON.parse(await f.text()); } catch (_) { return toast('Ce fichier n’est pas un document de mise en page LCNDA.', 'error'); }
+            if (data?.lcnda === 'relecture' && data.doc) { // 📨 un livre envoyé pour relecture : il devient un document, à commenter puis à renvoyer
+                try { const doc = cleanDoc(data.doc); await post('save_layout_doc', {name: `Relecture — ${String(data.name || 'livre')}`.slice(0, 160), is_design: 0, doc}); toast(`Livre à relire importé${data.from ? ` (de ${data.from})` : ''} : ouvre-le, commente (menu Relecture), puis « 📨 Envoyer à un cousin » pour renvoyer tes commentaires.`); draw(); } catch (err) { toast(err.message, 'error'); }
+                return;
+            }
+            if (data?.lcnda === 'reglage') return toast('C’est un fichier de réglage : il s’importe dans le document ouvert, Fichier → « Mes styles » → « Importer un réglage ».', 'error');
             if (data?.type !== 'lcnda-mise-en-page-livre' || !data.doc) return toast('Ce fichier n’est pas un document de mise en page LCNDA.', 'error');
             try { const doc = cleanDoc(data.doc); await post('save_layout_doc', {name: String(data.name || 'Document importé').slice(0, 160), is_design: data.is_design ? 1 : 0, doc}); toast('Document importé.'); draw(); } catch (err) { toast(err.message, 'error'); }
         });

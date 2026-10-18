@@ -66,12 +66,33 @@
         const S = A().state; if (token !== S.workspaceToken) return;
         const cals = [...(document.querySelector('#lightbox-date-calendar')?.options || [])].map(o => [o.value, o.textContent]);
         const ws = document.getElementById('workspace');
-        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🖼️ Visionneuse d’images</h2><p>Ce qu’on voit à droite quand on ouvre une image, dans quel ordre, et les calendriers proposés pour une date.</p></div></header>
-            <div class="lb-prefs"><section class="maintenance-panel"><h3>Colonne de droite</h3><p class="muted">↑ ↓ pour ranger ; décoche pour cacher la rubrique.</p><div class="order-list" data-lb-list="sec">${rows(SECTIONS, read(SKEY, {}))}</div>
+        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">MAINTENANCE</span><h2>🖼️ Visionneuse d’images</h2><p>Ce qu’on voit à droite quand on ouvre une image, dans quel ordre, et les calendriers proposés pour une date.</p></div>
+            <div class="page-actions"><button type="button" class="button small secondary" data-lb-export title="Un fichier .json, à garder ou à passer à un autre ordinateur">⤓ Exporter ce réglage</button><button type="button" class="button small secondary" data-lb-import title="Remettre un réglage exporté (fichier .json)">⤒ Importer un réglage</button></div></header>
+            <div class="lb-prefs"><section class="maintenance-panel"><h3>Colonne de droite</h3><p class="muted"><span data-help="L’ordre des rubriques à droite de l’image ouverte. Une rubrique cachée garde ce qui y est écrit : elle n’est simplement plus montrée.">↑ ↓ pour ranger ; décoche pour cacher la rubrique.</span></p><div class="order-list" data-lb-list="sec">${rows(SECTIONS, read(SKEY, {}))}</div>
                 <div class="page-actions action-zone"><button type="button" class="button small" data-lb-save="sec">Enregistrer</button><button type="button" class="button small secondary" data-lb-reset="sec">↺ Remettre comme au départ</button></div></section>
             <section class="maintenance-panel"><h3>« Calendrier de cette date »</h3><p class="muted">Les calendriers proposés dans la visionneuse, les événements et les médias. Le grégorien reste toujours proposé ; une date déjà notée dans un calendrier caché le garde.</p><div class="order-list" data-lb-list="cal">${rows(cals, read(CKEY, {}), ['gregorian'])}</div>
                 <div class="page-actions action-zone"><button type="button" class="button small" data-lb-save="cal">Enregistrer</button><button type="button" class="button small secondary" data-lb-reset="cal">Tous, dans l’ordre d’origine</button></div></section></div></section>`;
-        ws.querySelector('.page').addEventListener('click', e => {
+        ws.querySelector('.page').addEventListener('click', async e => {
+            if (e.target.closest('[data-lb-export]')) { // ⤓ {lcnda:'reglage', outil, nom, version, donnees}
+                const nom = String(await A().askText({title: 'Exporter ce réglage', message: 'Nom de ce réglage :', value: 'Ma visionneuse', okLabel: 'Exporter'}) ?? '').trim().slice(0, 60); if (!nom) return;
+                const slug = nom.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '').toLowerCase() || 'reglage';
+                const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify({lcnda: 'reglage', outil: 'visionneuse', nom, version: 1, donnees: {sections: collect(ws.querySelector('[data-lb-list="sec"]')), calendars: collect(ws.querySelector('[data-lb-list="cal"]'))}}, null, 1)], {type: 'application/json'})); a.download = `lcnda-reglage-visionneuse-${slug}.json`; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+                return;
+            }
+            if (e.target.closest('[data-lb-import]')) {
+                const inp = document.createElement('input'); inp.type = 'file'; inp.accept = '.json,application/json'; inp.hidden = true; inp.dataset.uiOff = ''; document.body.appendChild(inp);
+                inp.addEventListener('change', async () => {
+                    const f = inp.files?.[0]; inp.remove(); if (!f) return;
+                    let data; try { data = JSON.parse(await f.text()); } catch (_) { toast('Ce fichier n’est pas un réglage LCNDA (il n’est pas lisible).', 'error'); return; }
+                    if (data?.lcnda !== 'reglage' || !data.donnees || typeof data.donnees !== 'object') { toast('Ce fichier n’est pas un réglage LCNDA.', 'error'); return; }
+                    if (data.outil !== 'visionneuse') { toast(`Ce réglage vient d’un autre outil (« ${String(data.outil || '?').slice(0, 40)} ») : il ne va pas dans la visionneuse.`, 'error'); return; }
+                    const ok = v => v && Array.isArray(v.order) ? {order: v.order.map(String).slice(0, 80), hidden: (Array.isArray(v.hidden) ? v.hidden : []).map(String).slice(0, 80)} : null;
+                    const sec = ok(data.donnees.sections), cal = ok(data.donnees.calendars);
+                    if (!sec && !cal) { toast('Ce réglage est vide.', 'error'); return; }
+                    if (sec) write(SKEY, sec); if (cal) write(CKEY, cal); applySections(); applyCalendars(); ext.maintenance.viewer_prefs(S.workspaceToken); toast(`Réglage « ${String(data.nom || '').slice(0, 60)} » mis.`);
+                });
+                inp.click(); return;
+            }
             const up = e.target.closest('[data-up],[data-down]'); if (up) { const r = up.closest('.lb-row'); if (up.hasAttribute('data-up')) r.previousElementSibling?.before(r); else r.nextElementSibling?.after(r); return; }
             const sv = e.target.closest('[data-lb-save]'); if (sv) { const k = sv.dataset.lbSave, v = collect(ws.querySelector(`[data-lb-list="${k}"]`)); write(k === 'sec' ? SKEY : CKEY, v); if (k === 'sec') applySections(); else applyCalendars(); toast('Enregistré.'); return; }
             const rs = e.target.closest('[data-lb-reset]'); if (rs) { const k = rs.dataset.lbReset; try { localStorage.removeItem(k === 'sec' ? SKEY : CKEY); } catch (_) {} if (k === 'cal') document.querySelectorAll('select[name="date_calendar"] option, #lightbox-date-calendar option').forEach(o => { o.hidden = false; }); applySections(); ext.maintenance.viewer_prefs(S.workspaceToken); toast('Remis comme au départ.'); }

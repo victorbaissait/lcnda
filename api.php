@@ -6,6 +6,7 @@ require __DIR__ . '/lib/gedcom.php';   // import / export GEDCOM
 require __DIR__ . '/lib/heredis.php';  // fichier Hérédis natif (.hmw / .heredis)
 require __DIR__ . '/lib/backup.php';   // sauvegarde complète (base + médias), ouverture d'une base .db
 require_once __DIR__ . '/lib/picker.php'; // 🔍 menu de choix unique (assets/js/app-picker.js, docs/PICKER.md)
+require_once __DIR__ . '/lib/layout_extra.php'; // 📐 mise en page : arbre dynamique, citations, vérificateur, index des lieux et métiers
 
 // SITE_DEFAULTS_PATH est défini dans lib/paths.php
 const EVENT_FACT_CONFIDENCE_LEVELS = ['unknown','certain','deduced','estimated','doubt'];
@@ -367,6 +368,10 @@ try {
         'retouch_project' => json_response(retouch_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'montage_project' => json_response(montage_project_get($pdo, safe_int($_GET['id'] ?? 0))),
         'layout_family_data' => json_response(layout_family_data($pdo, $_GET)),
+        'layout_tree_data' => json_response(layout_tree_data($pdo, $_GET)),
+        'layout_source' => json_response(layout_source($pdo, safe_int($_GET['id'] ?? 0))),
+        'layout_check_data' => json_response(layout_check_data($pdo, $_GET)),
+        'layout_index_terms' => json_response(layout_index_terms($pdo)),
         'topic_sheet' => json_response(topic_sheet_detail($pdo, safe_int($_GET['id'] ?? 0))),
         'media_brief' => json_response(media_brief($pdo, (string) ($_GET['ids'] ?? ''))),
         'board' => json_response(board_detail($pdo, safe_int($_GET['id'] ?? 0))),
