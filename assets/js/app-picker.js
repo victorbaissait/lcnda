@@ -231,7 +231,7 @@
     function bind(el) {
         if (CTRL.has(el)) return CTRL.get(el);
         let opts, value; try { opts = JSON.parse(el.dataset.pkOpts || '{}'); } catch (_) { opts = {}; } try { value = JSON.parse(el.dataset.pkValue || 'null'); } catch (_) { value = null; }
-        if (!opts.name) opts = {name: el.querySelector('input[type=hidden]')?.name || 'picker', kind: el.dataset.picker || 'person', multiple: false, allowCreate: 'auto', roles: null, animals: 1};
+        if (!opts.name && !el.dataset.pkOpts) opts = {name: el.querySelector('input[type=hidden]')?.name || 'picker', kind: el.dataset.picker || 'person', multiple: false, allowCreate: 'auto', roles: null, animals: 1};
         const c = makeCtrl(opts, opts.roles ? value : Array.isArray(value) ? value : value);
         c.el = el; CTRL.set(el, c);
         if (!el.querySelector('.pk-search')) el.innerHTML = innerHtml(c);

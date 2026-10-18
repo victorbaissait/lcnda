@@ -34,7 +34,8 @@
     "test:depouillements": "node tests/test-depouillements.js",
     "test:addrmap": "node tests/test-addrmap.js",
     "test:sosa-stats-tabs": "node tests/test-sosa-stats-tabs.js",
-    "test:artist": "node tests/test-artist.js"
+    "test:artist": "node tests/test-artist.js",
+    "test:blocs": "node tests/test-blocs.js"
   },
   "devDependencies": {
     "electron": "^44.5.1",

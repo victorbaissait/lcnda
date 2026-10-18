@@ -36,6 +36,7 @@ header('X-Content-Type-Options: nosniff');
     <link rel="stylesheet" href="assets/css/diagrams.css?v=29">
     <link rel="stylesheet" href="assets/css/ui.css?v=4">
     <link rel="stylesheet" href="assets/css/artist.css?v=1">
+    <link rel="stylesheet" href="assets/css/blocs.css?v=1">
 </head></html>
 <body>
 <div class="app-shell<?= $ready ? '' : ' is-not-ready' ?>" id="app">
@@ -1088,8 +1089,8 @@ header('X-Content-Type-Options: nosniff');
 </dialog>
 
 <script>window.GENEALOGY_READY = <?= $ready ? 'true' : 'false' ?>;window.INSTALL_CSRF = <?= json_encode($installCsrf) ?>;window.LCNDA_SETTINGS = <?= json_encode($ready ? app_settings_for_page() : null, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;</script>
-<script src="assets/js/app.js?v=407" defer></script>
-<script src="assets/js/app-picker.js?v=4" defer></script>
+<script src="assets/js/app.js?v=408" defer></script>
+<script src="assets/js/app-picker.js?v=5" defer></script>
 <script src="assets/js/app-media-picker.js?v=2" defer></script>
 <script src="assets/js/app-piece-archives.js?v=7" defer></script>
 <script src="assets/js/app-jeu.js?v=5" defer></script>
@@ -1102,7 +1103,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/app-ui.js?v=6" defer></script>
 <script src="assets/js/app-access.js?v=5" defer></script>
 <script src="assets/js/app-sidegroups.js?v=6" defer></script>
-<script src="assets/js/app-listes.js?v=12" defer></script>
+<script src="assets/js/app-listes.js?v=13" defer></script>
 <script src="assets/js/app-maintenance.js?v=11" defer></script>
 <script src="assets/js/app-recherche.js?v=9" defer></script>
 <script src="assets/js/app-graphiques.js?v=7" defer></script>
@@ -1110,7 +1111,7 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage.js?v=22" defer></script>
 <script src="assets/js/heritage-tools.js?v=9" defer></script>
 <script src="assets/js/heritage-links.js?v=11" defer></script>
-<script src="assets/js/heritage-more.js?v=128" defer></script>
+<script src="assets/js/heritage-more.js?v=129" defer></script>
 <script src="assets/js/heritage-records.js?v=5" defer></script>
 <script src="assets/js/heritage-research.js?v=26" defer></script>
 <script src="assets/js/heritage-av.js?v=12" defer></script>
@@ -1166,6 +1167,10 @@ header('X-Content-Type-Options: nosniff');
 <script src="assets/js/heritage-artist-list.js?v=8" defer></script>
 <script src="assets/js/heritage-artist-import.js?v=8" defer></script>
 <script src="assets/js/heritage-artist-catalogue.js?v=8" defer></script>
+<script src="assets/js/heritage-blocs.js?v=1" defer></script>
+<script src="assets/js/heritage-blocs-press.js?v=1" defer></script>
+<script src="assets/js/heritage-blocs-awards.js?v=1" defer></script>
+<script src="assets/js/heritage-blocs-school.js?v=1" defer></script>
 <script src="assets/js/heritage-transcribe.js?v=8" defer></script>
 <script src="assets/js/heritage-slideshow.js?v=10" defer></script>
 <script src="assets/js/heritage-keynote.js?v=9" defer></script>
