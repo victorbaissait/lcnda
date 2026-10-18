@@ -162,7 +162,7 @@
         if (pf) out.push({id: 'place', label: pf.label, type: 'place', chipPrefix: 'À', test: (it, v) => !v || (typeof v === 'object' ? U.place(it.data[pf.key])?.plid === Number(v.id) : U.placeTitle(it.data[pf.key]).toLowerCase().includes(String(v).replace(/^txt:/, '').toLowerCase()))});
         const pe = fs.find(f => f.type === 'person');
         if (pe) out.push({id: 'person', label: pe.label, type: 'person', chipPrefix: pe.label, test: (it, v) => !v || (typeof v === 'object' ? U.person(it.data[pe.key])?.pid === Number(v.id) : U.nameOf(it.data[pe.key]).toLowerCase().includes(String(v).replace(/^txt:/, '').toLowerCase()))});
-        if (fs.some(f => f.type === 'photos')) out.push({id: 'nophoto', label: 'Sans photo', group: 'Autres', type: 'check', test: (it, v) => !v || !(it.data.photos || []).length});
+        if (fs.some(f => f.type === 'photos')) out.push({id: 'nophoto', label: 'Sans photo', group: 'Autres', type: 'check', test: (it, v) => !v || !ART.arr(it.data.photos).length});
         return [...out, ...extra.map(x => typeof x === 'function' ? x(store) : x).flat()];
     };
 

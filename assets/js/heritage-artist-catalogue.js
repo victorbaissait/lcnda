@@ -47,9 +47,9 @@
         });
         // un disque : les pistes, les crédits, les éditions
         if (it.kind === 'release') {
-            if (use.some(f => f.key === 'tracks') && (it.data.tracks || []).length) { out.push(p('ps-head', 'Pistes')); it.data.tracks.forEach(t => out.push(t.heading ? p('ps-head', esc(t.title)) : p('ps-list', `<b>${esc(t.pos || '')}</b> ${esc(t.title)}${t.dur ? ` (${esc(t.dur)})` : ''}`))); }
+            if (use.some(f => f.key === 'tracks') && ART.arr(it.data.tracks).length) { out.push(p('ps-head', 'Pistes')); it.data.tracks.forEach(t => out.push(t.heading ? p('ps-head', esc(t.title)) : p('ps-list', `<b>${esc(t.pos || '')}</b> ${esc(t.title)}${t.dur ? ` (${esc(t.dur)})` : ''}`))); }
             if (use.some(f => f.key === 'credits')) sec('Crédits', esc(ART.normPeople(it.data.credits).map(c => `${c.role ? `${c.role} : ` : ''}${c.title || c.txt}`).join(' ; ')));
-            if (use.some(f => f.key === 'versions')) sec('Éditions', esc((it.data.versions || []).map(v => [v.year, v.country, v.label, v.catno, v.format].filter(Boolean).join(' ')).join(' ; ')));
+            if (use.some(f => f.key === 'versions')) sec('Éditions', esc(ART.arr(it.data.versions).map(v => [v.year, v.country, v.label, v.catno, v.format].filter(Boolean).join(' ')).join(' ; ')));
         }
         use.filter(f => f.type === 'longtext').forEach(f => { const t = it.data[f.key]; if (t) sec(f.label, esc(t).replace(/\n/g, '<br>')); });
         return out.join('');
@@ -173,8 +173,8 @@
                 chapter('Index', [{ps: 'ps-head', text: 'Titres'}, ...titles, ...(places.length ? [{ps: 'ps-head', text: 'Lieux'}, ...places] : []), ...(owners.length && !o.hide ? [{ps: 'ps-head', text: 'Propriétaires'}, ...owners] : [])], 2); }
             if (part === 'concord') chapter('Concordances', list.map(i => ({ps: 'ps-list', text: [i.data.catref || i.data.catno, i.data.inv && `inv. ${i.data.inv}`, i.data.museum_inv && `musée ${i.data.museum_inv}`, i.data.sale].filter(Boolean).join(' ↔ ') || i.title})), 2);
             if (part === 'lost') chapter('Œuvres non retrouvées', list.filter(i => ['inconnu', 'perdu', 'detruit'].includes(i.data.status)).map(i => ({ps: 'ps-list', lead: i.data.catref || '', text: `${i.title}${i.year ? `, ${i.year}` : ''}`})));
-            if (part === 'tracks') { const t = []; list.forEach(r => (r.data.tracks || []).filter(x => !x.heading).forEach(x => t.push({ps: 'ps-list', text: `${x.title} — ${r.title}${r.year ? ` (${r.year})` : ''}, ${x.pos || ''}`}))); chapter('Index des morceaux', t.sort((a, b) => a.text.localeCompare(b.text, 'fr')), 2); }
-            if (part === 'credits') { const m = new Map(); list.forEach(r => [...ART.normPeople(r.data.credits), ...(r.data.tracks || []).flatMap(x => ART.normPeople(x.credits))].forEach(c => { const n = c.title || c.txt; if (!n) return; if (!m.has(n)) m.set(n, new Set()); m.get(n).add(`${c.role ? `${c.role}, ` : ''}${r.title}`); })); chapter('Musiciens et crédits', [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr')).map(([n, s]) => ({ps: 'ps-list', text: `${n} — ${[...s].join(' ; ')}`})), 2); }
+            if (part === 'tracks') { const t = []; list.forEach(r => ART.arr(r.data.tracks).filter(x => !x.heading).forEach(x => t.push({ps: 'ps-list', text: `${x.title} — ${r.title}${r.year ? ` (${r.year})` : ''}, ${x.pos || ''}`}))); chapter('Index des morceaux', t.sort((a, b) => a.text.localeCompare(b.text, 'fr')), 2); }
+            if (part === 'credits') { const m = new Map(); list.forEach(r => [...ART.normPeople(r.data.credits), ...ART.arr(r.data.tracks).flatMap(x => ART.normPeople(x.credits))].forEach(c => { const n = c.title || c.txt; if (!n) return; if (!m.has(n)) m.set(n, new Set()); m.get(n).add(`${c.role ? `${c.role}, ` : ''}${r.title}`); })); chapter('Musiciens et crédits', [...m.entries()].sort((a, b) => a[0].localeCompare(b[0], 'fr')).map(([n, s]) => ({ps: 'ps-list', text: `${n} — ${[...s].join(' ; ')}`})), 2); }
         });
         if (!doc.pages.length) page();
         return doc;

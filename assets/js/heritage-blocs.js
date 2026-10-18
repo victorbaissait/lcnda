@@ -103,7 +103,7 @@
             this.person = r.person || {}; this.items = r.items || []; this.links = r.links || []; this.people = r.people || []; this.cited = [];
             this.global = r.settings?.global || {}; this.personSet = null; this.presets = Array.isArray(r.settings?.presets?.list) ? r.settings.presets.list : []; this.types = [];
             this.readonly = !!r.readonly || document.body.classList.contains('is-kiosk');
-            this.items.forEach(it => { it.data = it.data || {}; try { ART.defs[it.kind]?.upgrade?.(it.data); } catch (_) {} });
+            this.items.forEach(it => { it.data = ART.sane ? ART.sane(it.kind, it.data) : (it.data || {}); try { ART.defs[it.kind]?.upgrade?.(it.data); } catch (_) {} });
             this.byId = new Map(this.items.map(i => [i.id, i])); this.settings = this.global;
             return this;
         }

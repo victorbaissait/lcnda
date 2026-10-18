@@ -180,7 +180,9 @@
             groups.push({key: 'notes', label: 'Notes', icon: '📝', zone: 'right', fields: [{key: 'notes', label: 'Notes', type: 'longtext', star: true, bare: true}]});
             return {key, label: W.label.trim(), many: (W.many || `${W.label.trim()}s`).trim(), icon: W.icon || '✦', family: fam.key, domain: fam.domain, groups, list: W.list, card: W.card, export: W.export.length ? W.export : undefined, partKind: W.parts.on ? (W.parts.key || '') : '', userType: !forSave || undefined};
         }
-        async function save() {
+        let saving = null; // un seul enregistrement à la fois : ⌘S ou double clic ne créent pas deux types
+        function save() { if (!saving) saving = save1().finally(() => { saving = null; }); return saving; }
+        async function save1() {
             if (!W.label.trim()) { step = 0; paint(); A().toast('Donne un nom au type.', 'error'); dlg.querySelector('[data-w="label"]')?.focus(); return; }
             if (W.parts.on && !W.parts.label.trim()) { step = 0; paint(); A().toast('Donne un nom aux fiches « parties ».', 'error'); dlg.querySelector('[data-wp="label"]')?.focus(); return; }
             const btn = dlg.querySelector('[data-w-save]'); if (btn) btn.disabled = true;

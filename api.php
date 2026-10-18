@@ -1966,6 +1966,7 @@ function person_detail(PDO $pdo, int $id): never
     $stmt = $pdo->prepare(person_select() . ' WHERE p.id=?');
     $stmt->execute([$id]);
     $person = $stmt->fetch();
+    $stmt->closeCursor(); // pas de lecture laissée ouverte : une écriture plus loin attendrait sinon un verrou qu'elle ne peut pas obtenir
     if (!$person) json_response(['error' => 'Personne introuvable'], 404);
 
     $events = $pdo->prepare("SELECT e.*,t.label AS type_label,t.gedcom_tag,t.icon,t.color,pl.name AS place_name,pl.subdivision,pl.county,pl.state,pl.country,pl.latitude,pl.longitude,

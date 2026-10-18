@@ -34,6 +34,7 @@ $GLOBALS['ART_EXTRA_TYPES'] = (is_array($GLOBALS['ART_EXTRA_TYPES'] ?? null) ? $
 /** les profils intégrés connus du serveur (le navigateur en déclare le reste : ART.profiles) — nom, icône */
 const PROFILS_BUILTIN = [
     'politic' => ['Homme / femme politique', '🗳'], 'elu_local' => ['Élu local', '🏛'], 'sport' => ['Sportif · athlète', '🏅'],
+    'artisan' => ['Artisan d’art', '🔨'], 'actor' => ['Acteur, actrice, performeur', '🎬'],
 ];
 
 /** fiche verrouillée (ou mode consultation) : rien ne s'écrit — même règle que api.php, aussi hors de api.php */
@@ -79,7 +80,9 @@ function profils_defs(PDO $pdo): array
 /** GET op=profiles : les profils d'une personne + le catalogue */
 function profils_get(PDO $pdo, int $personId): array
 {
-    return ['profiles' => $personId > 0 ? profils_of_person($pdo, $personId) : [], 'defs' => profils_defs($pdo)];
+    $g = art_setting($pdo, 'global') ?? [];
+    $pc = is_array($g['ppage']['profColors'] ?? null) ? array_filter($g['ppage']['profColors'], static fn($c) => is_string($c) && preg_match('/^#[0-9a-fA-F]{6}$/', $c)) : [];
+    return ['profiles' => $personId > 0 ? profils_of_person($pdo, $personId) : [], 'defs' => profils_defs($pdo), 'prof_colors' => $pc ?: new stdClass()];
 }
 
 /** « Appliquer » de la fenêtre des profils : plusieurs cases d'un coup (on : [{key, label, icon}], off : [clés]), dans l'ordre donné */
@@ -158,4 +161,53 @@ function profils_sync_artist(PDO $pdo, int $personId, int $isArtist): void
     } else {
         $pdo->prepare("DELETE FROM person_profiles WHERE person_id=? AND profile_key='artist'")->execute([$personId]);
     }
+}
+
+/** la liste « 🧩 Cette personne était… » (onglet Listes) : les personnes qui ont au moins un profil, avec leurs profils,
+ *  années, métier (filtre « Métier ») et photo — rien n'est écrit pendant cette lecture */
+function profils_people(PDO $pdo): array
+{
+    art_ensure($pdo);
+    $rows = $pdo->query("SELECT p.id, p.first_name, p.last_name, p.gender, COALESCE(p.occupation,'') AS occupation, COALESCE(p.is_locked,0) AS is_locked, p.updated_at,
+            (SELECT group_concat(pp.profile_key, ',') FROM (SELECT profile_key FROM person_profiles WHERE person_id=p.id ORDER BY sort_order, profile_key) pp) AS profs,
+            COALESCE(p.is_artist,0) AS is_artist
+        FROM persons p WHERE COALESCE(p.kind,'person')<>'animal' AND (COALESCE(p.is_artist,0)=1 OR EXISTS (SELECT 1 FROM person_profiles x WHERE x.person_id=p.id)) ORDER BY p.last_name COLLATE NOCASE, p.first_name COLLATE NOCASE LIMIT 20000")->fetchAll(PDO::FETCH_ASSOC);
+    if (!$rows) { return ['people' => [], 'defs' => profils_defs($pdo)]; }
+    $ids = implode(',', array_map(static fn($r) => (int) $r['id'], $rows));
+    $life = [];
+    try {
+        foreach ($pdo->query("SELECT e.person_id, t.gedcom_tag AS tag, MIN(e.year) AS y FROM events e JOIN event_types t ON t.id=e.event_type_id WHERE e.person_id IN ({$ids}) AND t.gedcom_tag IN ('BIRT','DEAT') AND e.year IS NOT NULL GROUP BY e.person_id, t.gedcom_tag")->fetchAll(PDO::FETCH_ASSOC) as $e) {
+            $life[(int) $e['person_id']][$e['tag'] === 'BIRT' ? 'birth' : 'death'] = (int) $e['y'];
+        }
+    } catch (Throwable $e) {}
+    $items = [];
+    foreach ($pdo->query("SELECT person_id, count(*) AS n FROM items WHERE person_id IN ({$ids}) AND substr(type_key,1,8)<>'profile_' AND type_key<>'profile' GROUP BY person_id")->fetchAll(PDO::FETCH_ASSOC) as $r) { $items[(int) $r['person_id']] = (int) $r['n']; }
+    $photos = [];
+    try {
+        foreach ($pdo->query("SELECT l.entity_id AS pid, m.filename FROM media_links l JOIN media m ON m.id=l.media_id WHERE l.entity_type='person' AND l.entity_id IN ({$ids}) AND m.media_type='image' AND COALESCE(m.is_person_photo,0)=1 ORDER BY l.position DESC")->fetchAll(PDO::FETCH_ASSOC) as $r) { $photos[(int) $r['pid']] = (string) $r['filename']; }
+    } catch (Throwable $e) {}
+    $own = [];
+    foreach ($pdo->query("SELECT key, data FROM layout_prefs WHERE key LIKE 'person:%'")->fetchAll(PDO::FETCH_ASSOC) as $r) { $d = json_decode((string) $r['data'], true); if (!empty($d['own'])) { $own[(int) substr((string) $r['key'], 7)] = true; } }
+    $people = array_map(static function ($r) use ($life, $items, $photos, $own) {
+        $id = (int) $r['id']; $keys = array_values(array_filter(explode(',', (string) ($r['profs'] ?? ''))));
+        if ((int) $r['is_artist'] && !in_array('artist', $keys, true)) { $keys[] = 'artist'; }
+        return ['id' => $id, 'first_name' => (string) $r['first_name'], 'last_name' => (string) $r['last_name'], 'gender' => (string) $r['gender'], 'occupation' => (string) $r['occupation'],
+            'birth' => $life[$id]['birth'] ?? null, 'death' => $life[$id]['death'] ?? null, 'profiles' => $keys, 'items' => $items[$id] ?? 0, 'photo' => $photos[$id] ?? '',
+            'own' => isset($own[$id]), 'is_locked' => (int) $r['is_locked'] === 1, 'updated_at' => (string) ($r['updated_at'] ?? '')];
+    }, $rows);
+    return ['people' => $people, 'defs' => profils_defs($pdo)];
+}
+
+/** les réglages des pages (Maintenance) : le standard, les réglages enregistrés, les personnes qui ont un réglage propre */
+function profils_page_settings(PDO $pdo): array
+{
+    art_ensure($pdo);
+    $people = [];
+    $s = $pdo->query("SELECT l.key, l.data, l.updated_at, p.id, p.first_name, p.last_name, p.gender FROM layout_prefs l JOIN persons p ON p.id=CAST(substr(l.key, 8) AS INTEGER) WHERE l.key LIKE 'person:%' ORDER BY l.updated_at DESC");
+    foreach ($s->fetchAll(PDO::FETCH_ASSOC) as $r) {
+        $d = json_decode((string) $r['data'], true) ?: [];
+        if (empty($d['own'])) { continue; }
+        $people[] = ['id' => (int) $r['id'], 'first_name' => (string) $r['first_name'], 'last_name' => (string) $r['last_name'], 'gender' => (string) $r['gender'], 'updated_at' => (string) $r['updated_at'], 'data' => $d];
+    }
+    return ['global' => art_setting($pdo, 'global') ?? new stdClass(), 'presets' => art_setting($pdo, 'presets') ?? new stdClass(), 'people' => $people];
 }

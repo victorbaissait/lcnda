@@ -216,7 +216,9 @@ textarea.ar-in { resize: vertical; }
 .ar-hero p { margin: 2px 0 6px; }
 .ar-blocks { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
 .ar-blk { border: var(--line); background: var(--white); grid-column: span 12; min-width: 0; }
-.ar-blk.w-6 { grid-column: span 6; } .ar-blk.w-4 { grid-column: span 4; } .ar-blk.w-0 { display: none; }
+.ar-blk.w-9 { grid-column: span 9; } .ar-blk.w-8 { grid-column: span 8; } .ar-blk.w-6 { grid-column: span 6; } .ar-blk.w-4 { grid-column: span 4; } .ar-blk.w-0 { display: none; }
+.ar-blk.has-lis { border-top: 5px solid var(--pf); } /* le liseré choisi pour une section (⚙️ Organiser la page) */
+.ar-ocol { display: inline-flex; align-items: center; gap: 2px; } .ar-colreset { border: 0; background: none; color: var(--muted); cursor: pointer; padding: 0 2px; font-size: 13px; }
 .ar-bh { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-bottom: 1.5px solid var(--ink); background: var(--card-head-bg, #fafbfc); flex-wrap: wrap; }
 .ar-bh b { font-size: 14px; }
 .ar-bh .ar-grip { padding: 0; }
@@ -245,6 +247,7 @@ textarea.ar-in { resize: vertical; }
 .ar-pgrp summary .gtools button, .ar-fr .tools button { width: 22px; height: 22px; border: 1px solid #bbb; background: var(--white); font-size: 11px; padding: 0; cursor: pointer; color: inherit; }
 .ar-fr { display: grid; grid-template-columns: 16px 26px minmax(0, 1fr) auto auto; gap: 6px; align-items: center; padding: 4px 2px; border-bottom: 1px dashed #eceef2; font-size: 13px; }
 .ar-fr .lbl { overflow-wrap: anywhere; }
+.ar-fr:has(.ar-ocol) { grid-template-columns: 16px 26px minmax(0, 1fr) auto auto auto; }
 .ar-fr.off { opacity: .55; } .ar-fr.off .lbl { text-decoration: line-through; }
 .ar-fr.cust .lbl { color: var(--blue-bright); font-weight: 700; }
 .ar-fr.drag { background: var(--blue-soft); box-shadow: inset 4px 0 0 var(--blue-bright), 0 4px 10px rgba(0, 0, 0, .15); }
@@ -312,7 +315,7 @@ textarea.ar-in { resize: vertical; }
     .ar-sheet, .ar-sheet.no-left, .ar-sheet.no-right { grid-template-columns: minmax(0, 1fr); }
     .ar-panel { position: absolute; right: 0; top: 0; bottom: 0; z-index: 5; max-width: 100vw; width: min(420px, 100vw); }
     .ar-wrap { position: relative; }
-    .ar-blk.w-6, .ar-blk.w-4 { grid-column: span 12; }
+    .ar-blk.w-9, .ar-blk.w-8, .ar-blk.w-6, .ar-blk.w-4 { grid-column: span 12; }
     .ar-wiz { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 640px) {
@@ -328,12 +331,25 @@ textarea.ar-in { resize: vertical; }
     .ar-tabs { overflow-x: auto; max-width: 100%; }
 }
 
+/* ═════ Lecture seule (fiche verrouillée, mode consultation) : les boutons qui modifient disparaissent ═════ */
+.ar-rotag { font: 700 11.5px system-ui, sans-serif; padding: 2px 8px; border: 1.5px solid var(--muted); color: var(--muted); white-space: nowrap; }
+.ar-ro .ar-mode, .ar-ro [data-ar-cmd="edit"], .ar-ro [data-ar-cmd="new"], .ar-ro [data-ar-cmd="save"], .ar-ro [data-ar-cmd="delete"], .ar-ro [data-ar-cmd="import"],
+.ar-ro [data-ar-cmd="addfield"], .ar-ro [data-oe-mode="new"], .ar-ro [data-pf-choose], .ar-ro [data-pf-choose-pid], .ar-ro [data-pf-edit], .ar-ro [data-pf-new],
+.ar-ro [data-ar-new], .ar-ro [data-ar-newrec], .ar-ro [data-ar-newed], .ar-ro [data-ar-import], .ar-ro [data-ar-up], .ar-ro [data-ar-down], .ar-ro .ar-move,
+.ar-ro [data-ar-editprofile], .ar-ro [data-sc-editprofile], .ar-ro [data-oe-editartisan], .ar-ro [data-oe-newchild], .ar-ro [data-oe-import],
+.ar-ro [data-sc-new], .ar-ro [data-sc-newrole], .ar-ro [data-sc-newperf], .ar-ro [data-sc-newdate], .ar-ro [data-sc-addseason], .ar-ro [data-sc-addeps], .ar-ro [data-sc-addep],
+.ar-ro [data-sc-editrole], .ar-ro [data-sc-editep], .ar-ro [data-sc-editactor], .ar-ro [data-sc-setactor], .ar-ro [data-sc-mkrole], .ar-ro [data-sc-import], .ar-ro [data-sc-torec],
+.ar-ro [data-sc-psave], .ar-ro [data-sc-pdel], .ar-ro [data-sl-add], .ar-ro [data-sl-addread], .ar-ro [data-sl-copy], .ar-ro [data-sl-paste], .ar-ro [data-sl-mk],
+.ar-ro [data-pf-sport], .ar-ro [data-pf-artist], .ar-ro [data-m-new], .ar-ro [data-m-import], .ar-ro [data-m-edit], .ar-ro [data-m-del], .ar-ro [data-ph-add], .ar-ro [data-ph-fetch] { display: none !important; }
+
 /* ═════ Mode sombre écrit à la main ═════ */
 :root[data-theme="dark"] .ar-hero { background: linear-gradient(90deg, var(--white), #2a2336); }
 :root[data-theme="dark"] .ar-chip.is-free { background: #2c2f35; color: #c9ccd2; }
 :root[data-theme="dark"] .ar-ochip i { background: #33363c; }
 :root[data-theme="dark"] .ar-rec { background: #2a2140; color: #b38cff; border-color: #b38cff; }
 :root[data-theme="dark"] .ar-thumbs small { background: #222; color: #eee; }
+/* la page du livre (aperçu) reste du papier : ses titres gardent leur encre */
+:root[data-theme="dark"] .ar-spread .no, :root[data-theme="dark"] .ar-spread .lbl { color: #8a6a3a; }
 /* ═════ Mode sombre automatique (scripts/build-dark-css.py, ne pas modifier à la main) ═════ */
 :root[data-theme="dark"] .ar-status{color:#a6e7bd}
 :root[data-theme="dark"] .ar-note{color:#c7c7c7}
@@ -356,6 +372,4 @@ textarea.ar-in { resize: vertical; }
 :root[data-theme="dark"] .ar-icons span{border:1.5px solid #454554}
 :root[data-theme="dark"] .ar-choice{border:1px solid #454554}
 :root[data-theme="dark"] .ar-spread{background:#303030}
-:root[data-theme="dark"] .ar-spread .no{color:#d9cbb5}
-:root[data-theme="dark"] .ar-spread .lbl{color:#d9cbb5}
 /* ═════ fin du mode sombre automatique ═════ */

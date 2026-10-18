@@ -111,10 +111,10 @@
         let lat = Number(m[1]), lon = Number(m[3]); if (/s/i.test(m[2] || '')) lat = -Math.abs(lat); if (/[ow]/i.test(m[4] || '')) lon = -Math.abs(lon); return Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180 ? [lat, lon] : null; };
     const COORDS = new Map();
     /** un emplacement de carte : groupes [{color, line, pts: [{plid, coords, label, n}]}] ; dessiné dès qu'il est dans la page */
-    SC.mapSlot = (groups, {height = 260, empty = 'Aucun lieu avec ses coordonnées.'} = {}) => `<div class="sc-map" data-sc-map="${esc(JSON.stringify({groups, height, empty}))}"><p class="muted">🗺 Carte…</p></div>`;
+    SC.mapSlot = (groups, {height = 260, empty = 'Aucun lieu avec ses coordonnées.'} = {}) => `<div class="sci-map" data-sci-map="${esc(JSON.stringify({groups, height, empty}))}"><p class="muted">🗺 Carte…</p></div>`;
     async function drawMap(el) {
-        if (el.dataset.scDone) return; el.dataset.scDone = '1';
-        let cfg; try { cfg = JSON.parse(el.dataset.scMap); } catch (_) { el.innerHTML = ''; return; }
+        if (el.dataset.sciDone) return; el.dataset.sciDone = '1';
+        let cfg; try { cfg = JSON.parse(el.dataset.sciMap); } catch (_) { el.innerHTML = ''; return; }
         const need = [...new Set(cfg.groups.flatMap(g => g.pts).map(p => Number(p.plid)).filter(id => id > 0 && !COORDS.has(id)))];
         if (need.length) { try { const r = await A().api('sciences', {op: 'coords', ids: need.join(',')}); (r.places || []).forEach(p => COORDS.set(p.id, p)); } catch (_) {} need.forEach(id => { if (!COORDS.has(id)) COORDS.set(id, null); }); }
         const pts = [], paths = [];
@@ -125,8 +125,8 @@
         if (!el.isConnected) return;
         el.innerHTML = pts.length && ext.miniMap ? ext.miniMap(pts, paths, {height: cfg.height || 260}) : `<p class="muted sc-mapnone">🗺 ${esc(cfg.empty || 'Aucun lieu avec ses coordonnées.')}</p>`;
     }
-    SC.drawMaps = root => root?.querySelectorAll?.('[data-sc-map]:not([data-sc-done])').forEach(drawMap);
-    if (typeof MutationObserver !== 'undefined' && document.documentElement) new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) { if (n.nodeType !== 1) continue; if (n.matches?.('[data-sc-map]')) drawMap(n); else if (n.firstElementChild) SC.drawMaps(n); } }).observe(document.documentElement, {childList: true, subtree: true});
+    SC.drawMaps = root => root?.querySelectorAll?.('[data-sci-map]:not([data-sci-done])').forEach(drawMap);
+    if (typeof MutationObserver !== 'undefined' && document.documentElement) new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) { if (n.nodeType !== 1) continue; if (n.matches?.('[data-sci-map]')) drawMap(n); else if (n.firstElementChild) SC.drawMaps(n); } }).observe(document.documentElement, {childList: true, subtree: true});
 
     /* ═════════ Des vues communes ═════════ */
     // des personnes avec leur rôle, en pastilles (« Pierre MARTIN inventeur principal »)
@@ -161,7 +161,7 @@
         const dl = [['Classe', p.cls], ['Mandataire', p.agent], ['Annuités', p.annuities], ['Publié', p.published], ['Cité par', p.cited_by && (/^\d+$/.test(String(p.cited_by).trim()) ? plural(Number(p.cited_by), 'brevet ultérieur', 'brevets ultérieurs') : p.cited_by)], ['Famille', p.family]].filter(x => x[1]);
         if (!claims.length && !dl.length && !p.title && !p.doc && !p.url) return '';
         const url = safeUrl(p.url) || espacenet(p);
-        return `<div class="ar-reccard sc-patent ${p.main ? 'is-main' : ''}"><div class="sc-rhd"><span class="sc-kind">BREVET ${esc(patentNo(p))}</span>${p.title ? `<b>« ${esc(p.title)} »</b>` : ''}<span class="spacer"></span>${p.doc ? `<span class="ar-ochip"><i>📄</i>${esc(p.doc)}</span>` : ''}${url ? extLink(url, /espacenet/.test(url) ? 'Espacenet' : 'Voir en ligne') : ''}</div>
+        return `<div class="ar-reccard sc-patent ${p.main ? 'is-main' : ''}"><div class="sci-rhd"><span class="sci-kind">BREVET ${esc(patentNo(p))}</span>${p.title ? `<b>« ${esc(p.title)} »</b>` : ''}<span class="spacer"></span>${p.doc ? `<span class="ar-ochip"><i>📄</i>${esc(p.doc)}</span>` : ''}${url ? extLink(url, /espacenet/.test(url) ? 'Espacenet' : 'Voir en ligne') : ''}</div>
             <div class="sc-pgrid">${claims.length ? `<div><small class="ar-g">Revendications (${claims.length})</small><ol class="sc-claims">${claims.map(c => `<li>${esc(c)}</li>`).join('')}</ol></div>` : '<div></div>'}${dl.length ? `<dl class="ar-dl sc-dl-s">${dl.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}</div></div>`; };
     ART.views.sc_patents = {
         meta: (ctx, it) => { const l = it.data?.patents || []; if (!l.length) return ''; const c = new Set(l.map(p => p.country).filter(Boolean)).size, fam = new Set(l.map(p => String(p.family || '').trim() || '1')).size;
@@ -171,7 +171,7 @@
             const rows = l.map(p => `<tr class="${p.main ? 'is-me' : ''}"><td>${flag(p.country)} ${esc(cname(p.country))}</td><td>${p.main ? `<b>${esc(patentNo(p))}</b>` : esc(patentNo(p))}</td><td>${esc(p.filed || '—')}</td><td>${esc(p.granted || '—')}</td><td>${esc(p.applicant || '')}</td><td>${pBadge(p)}</td></tr>`).join('');
             const cards = [...l].sort((a, b) => (b.main ? 1 : 0) - (a.main ? 1 : 0)).map(p => patentCard(p, ctx)).filter(Boolean);
             return `<div class="ar-scroll"><table class="ar-t sc-ptable"><thead><tr><th>Pays</th><th>N°</th><th>Dépôt</th><th>Délivrance</th><th>Déposant</th><th>Statut</th></tr></thead><tbody>${rows}</tbody></table></div>${cards[0] || ''}${cards.length > 1 ? `<details class="sc-more"><summary>${esc(plural(cards.length - 1, 'autre brevet détaillé', 'autres brevets détaillés'))}</summary>${cards.slice(1).join('')}</details>` : ''}`; },
-        text: (ctx, it) => (it.data?.patents || []).map(patentNo).join(', '),
+        text: (ctx, it) => ART.arr(it.data?.patents).map(patentNo).join(', '),
     };
     ART.views.sc_patent_count = {read: (ctx, it) => { const l = it.data?.patents || []; if (!l.length) return ''; return esc(`${plural(l.length, 'brevet')} · ${plural(new Set(l.map(p => p.country).filter(Boolean)).size, 'pays', 'pays')}`); },
         text: (ctx, it) => { const l = it.data?.patents || []; return l.length ? plural(l.length, 'brevet') : ''; }};
@@ -179,7 +179,7 @@
     ART.views.sc_licences = {read: (ctx, it, f, v) => { const l = v || []; return `<div class="ar-scroll"><table class="ar-t"><thead><tr><th>Entreprise</th><th>Pays</th><th>Années</th><th>Conditions</th><th>Fabriqués</th></tr></thead><tbody>${l.map(r => `<tr><td>${typeof r.company === 'object' ? refChip(r.company, 'employer') : esc(r.company || '')}</td><td>${esc(r.country || '')}</td><td>${esc(r.years || '')}</td><td>${esc(r.terms || '')}</td><td>${esc(r.made || '')}</td></tr>`).join('')}</tbody></table></div>`; }};
     ART.views.sc_disputes = {read: (ctx, it, f, v) => (v || []).map(r => `<div class="sc-line"><b>${esc(r.date || '?')}</b> · ${esc([lab(DISP, r.kind), r.what].filter(Boolean).join(' : '))}${r.court ? `, ${esc(r.court)}` : ''}${r.outcome ? ` · <b>${esc(lab(OUTCOME, r.outcome))}</b>` : ''}${docChip(r.doc)}</div>`).join('')};
     ART.views.sc_objects = {read: (ctx, it, f, v) => { const st = ctx.store; return `<div class="sc-minis">${(v || []).map(r => { const ref = U.ref(r.obj), o = ref?.iid ? st.get(ref.iid) : null, col = /^#[0-9a-f]{6}$/i.test(String(r.color || '').trim()) ? r.color.trim() : '';
-        return `<button type="button" class="sc-mini" ${ref?.iid ? `data-ar-open="${ref.iid}"` : ''}>${o && U.photoSrc((o.data?.photos || [])[0]) ? U.cover(o, 'sc-mi') : `<i class="sc-mi" style="${col ? `background:${esc(col)}` : ''}"></i>`}<span>${esc(r.name || ref?.title || ref?.txt || '')}</span><small>${esc([r.year, r.where].filter(Boolean).join(' · '))}</small></button>`; }).join('')}</div>`; }};
+        return `<button type="button" class="sci-mini" ${ref?.iid ? `data-ar-open="${ref.iid}"` : ''}>${o && U.photoSrc(ART.arr(o.data?.photos)[0]) ? U.cover(o, 'sc-mi') : `<i class="sc-mi" style="${col ? `background:${esc(col)}` : ''}"></i>`}<span>${esc(r.name || ref?.title || ref?.txt || '')}</span><small>${esc([r.year, r.where].filter(Boolean).join(' · '))}</small></button>`; }).join('')}</div>`; }};
     ART.views.sc_prizes = {read: (ctx, it, f, v) => `${(v || []).map(r => { const k = String(r.rank || '').toLowerCase(); const ic = /\bor\b|1er|premier|lauréat/.test(k) ? '🥇' : /argent|2e/.test(k) ? '🥈' : /bronze|3e/.test(k) ? '🥉' : '🏆';
         return `<div class="sc-line">${ic} ${esc([r.prize, r.year].filter(Boolean).join(' '))}${r.rank ? ` · ${esc(r.rank)}` : ''}${r.note ? ` <small class="ar-g">${esc(r.note)}</small>` : ''}</div>`; }).join('')}<small class="ar-g">(aussi dans « 🏆 Concours et récompenses » de la personne)</small>`};
     /** les liens vers d'autres fiches, avec leur nom (« invention dérivée : greffoir 1958 ») */
@@ -192,7 +192,7 @@
             return `<h2 class="ar-h2">${esc(it.title)}${conc || d.place ? ` <small>· ${esc([conc, U.placeTitle(d.place)].filter(Boolean).join(' · '))}</small>` : ''}</h2>`; },
         badges: (ctx, it) => { const d = it.data || {}, b = []; if (d.status) b.push(`<span class="ar-badge b">${esc(lab(ISTAT, d.status))}</span>`); const np = (d.patents || []).length; if (np) b.push(`<span class="ar-badge">📜 ${esc(plural(np, 'brevet'))}</span>`);
             if ((d.prototypes || []).length) b.push(`<span class="ar-badge">🔧 ${esc(plural(d.prototypes.length, 'prototype'))}</span>`); return b.length ? `<div class="ar-badges">${b.join('')}</div>` : ''; },
-        cardLine: it => [it.data?.date, it.data?.domain, (it.data?.patents || []).length && plural(it.data.patents.length, 'brevet')].filter(Boolean).join(' · '),
+        cardLine: it => [it.data?.date, it.data?.domain, ART.arr(it.data?.patents).length && plural(it.data.patents.length, 'brevet')].filter(Boolean).join(' · '),
         newData: () => ({status: 'idee', patents: [], prototypes: []}),
         groups: [
             {key: 'main', label: 'L’invention', zone: 'main', fields: [
@@ -236,13 +236,13 @@
         export: ['photos', 'title', 'date', 'domain', 'problem', 'principle', 'place', 'inventors', 'patents', 'prototypes', 'licences', 'disputes', 'prizes', 'notes'],
         listExtra: [{key: '_patents', label: 'Brevets', type: 'computed', view: 'sc_patent_count'}],
         searchHint: 'ex. sécateur, FR 1 054 321, Lépine, 1952',
-        filters: store => { const l = store.of('invention'), doms = [...new Set(l.map(i => String(i.data.domain || '').trim()).filter(Boolean))].sort(), cs = [...new Set(l.flatMap(i => (i.data.patents || []).map(p => p.country)).filter(Boolean))];
+        filters: store => { const l = store.of('invention'), doms = [...new Set(l.map(i => String(i.data.domain || '').trim()).filter(Boolean))].sort(), cs = [...new Set(l.flatMap(i => ART.arr(i.data.patents).map(p => p.country)).filter(Boolean))];
             return [{id: 'dom', label: 'Domaine', group: 'Domaine', type: 'check', options: doms.map(d => [d, `${d} (${l.filter(i => i.data.domain === d).length})`]), test: (it, v) => !v?.length || v.includes(it.data.domain)},
-                {id: 'country', label: 'Breveté en', group: 'Breveté en', type: 'check', options: cs.map(c => [c, `${flag(c)} ${cname(c)}`]), test: (it, v) => !v?.length || (it.data.patents || []).some(p => v.includes(p.country))},
+                {id: 'country', label: 'Breveté en', group: 'Breveté en', type: 'check', options: cs.map(c => [c, `${flag(c)} ${cname(c)}`]), test: (it, v) => !v?.length || ART.arr(it.data.patents).some(p => v.includes(p.country))},
                 {id: 'st', label: 'Où en est-elle', group: 'Où en est-elle', type: 'check', options: ISTAT.filter(x => x[0] && l.some(i => i.data.status === x[0])).map(x => [x[0], x[1]]), test: (it, v) => !v?.length || v.includes(it.data.status)},
-                {id: 'pat', label: 'Avec au moins un brevet', group: 'Autres', type: 'check', test: (it, v) => !v || (it.data.patents || []).length > 0},
-                {id: 'live', label: 'Brevet encore en vigueur', group: 'Autres', type: 'check', test: (it, v) => !v || (it.data.patents || []).some(p => ['vigueur', 'delivre', 'depose', 'examen'].includes(p.status))},
-                {id: 'lic', label: 'Exploitée (licence)', group: 'Autres', type: 'check', test: (it, v) => !v || (it.data.licences || []).length > 0}]; },
+                {id: 'pat', label: 'Avec au moins un brevet', group: 'Autres', type: 'check', test: (it, v) => !v || ART.arr(it.data.patents).length > 0},
+                {id: 'live', label: 'Brevet encore en vigueur', group: 'Autres', type: 'check', test: (it, v) => !v || ART.arr(it.data.patents).some(p => ['vigueur', 'delivre', 'depose', 'examen'].includes(p.status))},
+                {id: 'lic', label: 'Exploitée (licence)', group: 'Autres', type: 'check', test: (it, v) => !v || ART.arr(it.data.licences).length > 0}]; },
         sorts: [['year', 'Par année'], ['recent', 'Les plus récentes'], ['patents', 'Le plus de brevets'], ['az', 'A → Z'], ['za', 'Z → A'], ['perso', 'Mon ordre']],
     });
 
@@ -413,7 +413,7 @@
     // des tris de plus pour les listes (ART.sorters : extension du tri du moteur, heritage-artist-list.js)
     ART.sorters = ART.sorters || {};
     ART.sorters.citations = (a, b) => (U.num(b.data?.citations) || 0) - (U.num(a.data?.citations) || 0) || (Number(a.year) || 9999) - (Number(b.year) || 9999);
-    ART.sorters.patents = (a, b) => (b.data?.patents || []).length - (a.data?.patents || []).length || String(a.title).localeCompare(String(b.title), 'fr');
+    ART.sorters.patents = (a, b) => ART.arr(b.data?.patents).length - ART.arr(a.data?.patents).length || String(a.title).localeCompare(String(b.title), 'fr');
     SC.yr = yr;
 
     /* ═════════ Pour les sections de la page (profils inventeur, scientifique, explorateur) ═════════ */

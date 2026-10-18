@@ -15,6 +15,8 @@ function houses_ensure(PDO $pdo): void
 {
     static $done = false;
     if ($done) { return; }
+    // d'abord une simple lecture : écrire (CREATE) pendant la lecture d'une fiche ferait « base verrouillée » quand un enregistrement passe en même temps
+    if ((int) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name IN ('houses','house_models')")->fetchColumn() === 2) { $done = true; return; }
     $pdo->exec("CREATE TABLE IF NOT EXISTS houses (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL DEFAULT '', place_id INTEGER, place_text TEXT NOT NULL DEFAULT '',
         period TEXT NOT NULL DEFAULT '', data_json TEXT NOT NULL DEFAULT '{}', thumb TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)");
     $pdo->exec("CREATE TABLE IF NOT EXISTS house_models (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL DEFAULT '', ext TEXT NOT NULL, filename TEXT NOT NULL, size INTEGER NOT NULL DEFAULT 0,
@@ -101,8 +103,9 @@ function house_links_fresh(PDO $pdo, array $rows): array
 /** les maisons rattachées à une personne (habitant, pièce, ou un recensement où elle est) ou à un recensement — pour le bloc « 🏠 Maisons » de la fiche et la fenêtre d'un recensement */
 function house_links_lookup(PDO $pdo, int $personId, int $censusId): array
 {
-    houses_ensure($pdo);
     if ($personId <= 0 && $censusId <= 0) { return []; }
+    // une lecture : pas de table créée ici (pas encore de maison = rien à montrer)
+    if ((int) $pdo->query("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='houses'")->fetchColumn() === 0) { return []; }
     $mine = [];
     if ($personId > 0) { $s = $pdo->prepare('SELECT DISTINCT census_id FROM census_members WHERE person_id=?'); $s->execute([$personId]); $mine = array_map('intval', $s->fetchAll(PDO::FETCH_COLUMN)); }
     $out = [];

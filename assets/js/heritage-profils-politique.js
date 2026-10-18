@@ -161,16 +161,16 @@
         return {body: `${map}<div class="ar-chipsrow">${pl.map(x => `${U.placeChip(x.p.plid ? {plid: x.p.plid, title: x.p.title} : x.p.txt)}<small class="ar-g">${x.n}</small>`).join(' ')}</div>`, count: pl.length};
     }};
     S.pol_collab = {icon: '🤝', label: 'Collaborateurs', w: '⅓', profile: P, render: C => {
-        const st = C.store, it = fiche(st), l = ART.normPeople(it?.data?.collaborators || []), ctx = it ? ART.ctx(st, it) : null;
+        const st = C.store, it = fiche(st), l = ART.normPeople(ART.arr(it?.data?.collaborators)), ctx = it ? ART.ctx(st, it) : null;
         return {body: l.length ? `${l.slice(0, 3).map(r => U.personChip(r, r.role, ctx)).join(' ')}${l.length > 3 ? ` + ${l.length - 3}` : ''}` : PF.muted('Secrétaire, suppléant, attachés… : « … » pour les noter.'), count: l.length || '', empty: !l.length, actions: editP(st)};
     }};
     S.pol_affairs = {icon: '⚠️', label: 'Controverses, affaires', w: '⅓', profile: P, render: C => {
         const l = sortY(C.store.of('pol_affair'));
-        return {body: l.length ? l.map(a => `<div>${esc(PF.year(a.data.date) || '')} · ${open(a, `« ${esc(a.title)} »`)}${a.data.outcome ? ` · ${esc(lab(AFFAIR, a.data.outcome))}${PF.year(a.data.outcome_date) ? ` ${PF.year(a.data.outcome_date)}` : ''}` : ''}${(a.data.press || []).length ? ` · 📰 ${a.data.press.length}` : ''}</div>`).join('') : PF.muted('Aucune affaire notée.'), count: l.length || '', empty: !l.length, actions: PF.newBtn('pol_affair', '＋')};
+        return {body: l.length ? l.map(a => `<div>${esc(PF.year(a.data.date) || '')} · ${open(a, `« ${esc(a.title)} »`)}${a.data.outcome ? ` · ${esc(lab(AFFAIR, a.data.outcome))}${PF.year(a.data.outcome_date) ? ` ${PF.year(a.data.outcome_date)}` : ''}` : ''}${ART.arr(a.data.press).length ? ` · 📰 ${a.data.press.length}` : ''}</div>`).join('') : PF.muted('Aucune affaire notée.'), count: l.length || '', empty: !l.length, actions: PF.newBtn('pol_affair', '＋')};
     }};
     S.pol_books = {icon: '📚', label: 'Ouvrages · médias', w: '⅓', profile: P, render: C => {
-        const st = C.store, it = fiche(st), own = (it?.data?.books || []).length, bk = st.of('book').length;
-        return {body: `<p>${esc([Math.max(own, bk) && plural(Math.max(own, bk), 'livre'), (it?.data?.press || []).length && plural(it.data.press.length, 'article')].filter(Boolean).join(' · ') || 'Aucun ouvrage noté.')}</p>${(it?.data?.books || []).slice(0, 4).map(b => U.refChip(b, '📚')).join(' ')}`, empty: !own && !bk, actions: editP(st)};
+        const st = C.store, it = fiche(st), own = ART.arr(it?.data?.books).length, bk = st.of('book').length;
+        return {body: `<p>${esc([Math.max(own, bk) && plural(Math.max(own, bk), 'livre'), ART.arr(it?.data?.press).length && plural(it.data.press.length, 'article')].filter(Boolean).join(' · ') || 'Aucun ouvrage noté.')}</p>${ART.arr(it?.data?.books).slice(0, 4).map(b => U.refChip(b, '📚')).join(' ')}`, empty: !own && !bk, actions: editP(st)};
     }};
     S.pol_bio = {icon: '📝', label: 'Parcours politique', w: 'ligne', profile: P, render: C => { const st = C.store, it = fiche(st), b = it?.data?.bio; return {body: b ? `<div class="ar-long">${esc(b).replace(/\n/g, '<br>')}</div>` : PF.muted('Pas encore de texte : « … » pour l’écrire.'), empty: !b, actions: editP(st)}; }};
 

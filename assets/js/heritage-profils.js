@@ -41,7 +41,11 @@
     const GUESS = {artist: 'creation', craft: 'creation', crafts: 'creation', artisan: 'creation', artisan_art: 'creation', actor: 'creation', performer: 'creation', scientist: 'savoir', science: 'savoir', inventor: 'savoir', explorer: 'aventure'};
     const FIXED = {artist: '#7b2ff7', politic: '#055dff', elu_local: '#055dff', sport: '#1aa34a', inventor: '#e1a500', scientist: '#e1a500', military: '#6b7280', craft: '#c2410c', actor: '#d0182f', explorer: '#0e9aa7'};
     const PALETTE = ['#7b2ff7', '#055dff', '#1aa34a', '#e1a500', '#d0182f', '#0e9aa7', '#c2410c', '#be185d', '#4d7c0f', '#6b7280'];
-    PF.color = key => { const p = ART.profiles[key]; if (/^#[0-9a-f]{6}$/i.test(p?.color || '')) return p.color; if (FIXED[key]) return FIXED[key]; let h = 0; for (const c of String(key)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; };
+    PF.profColors = {}; // la couleur choisie pour un profil (réglage standard, « Organiser la page » ou Maintenance)
+    PF.color = key => { const c = PF.profColors?.[key]; if (/^#[0-9a-f]{6}$/i.test(c || '')) return c; const p = ART.profiles[key]; if (/^#[0-9a-f]{6}$/i.test(p?.color || '')) return p.color; if (FIXED[key]) return FIXED[key]; let h = 0; for (const c of String(key)) h = (h * 31 + c.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; };
+    /** l'encre lisible sur la couleur d'un profil (jaune clair → texte foncé) ; les deux variables CSS d'une pastille ou d'une barre */
+    PF.ink = c => { const m = /^#([0-9a-f]{6})$/i.exec(String(c || '')); if (!m) return '#fff'; const n = parseInt(m[1], 16), f = v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }; const L = .2126 * f(n >> 16) + .7152 * f((n >> 8) & 255) + .0722 * f(n & 255); return L > .3 ? '#111' : '#fff'; };
+    PF.vars = c => `--pf:${esc(c)};--pf-ink:${PF.ink(c)}`;
     const fold = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
     const groupKey = g => { if (!g) return ''; if (PF.GROUPS.some(x => x[0] === g)) return g; const f = fold(g); return (PF.GROUPS.find(x => fold(x[1]) === f) || [''])[0]; };
     PF.norm = p => ({...p, label: p.label || p.key, icon: p.icon || '✦', color: PF.color(p.key), desc: p.desc || p.hint || '', group: groupKey(p.group) || GUESS[p.key] || (p.user ? 'mine' : 'autre')});
@@ -194,20 +198,40 @@
     let defsAt = 0;
     PF.refreshDefs = async (force = false) => {
         if (!force && Date.now() - defsAt < 30000) return;
-        try { const r = await A().api('art', {op: 'profiles', person_id: 0}); PF.loadDefs(r.defs); defsAt = Date.now(); } catch (_) {}
+        try { const r = await A().api('art', {op: 'profiles', person_id: 0}); PF.loadDefs(r.defs); if (r.prof_colors && typeof r.prof_colors === 'object') PF.profColors = r.prof_colors; defsAt = Date.now(); } catch (_) {}
     };
     // la boutique du catalogue charge aussi les profils de l'utilisateur
     if (ART.Store && !ART.Store.prototype._pfWrapped) {
         const load0 = ART.Store.prototype.load;
-        ART.Store.prototype.load = async function () { await PF.refreshDefs(); this._pfLater = {}; this._pfDetail = null; this._pfLoading = null; return load0.call(this); };
+        ART.Store.prototype.load = async function () { await PF.refreshDefs(); this._pfLater = {}; this._pfDetail = null; this._pfLoading = null; const r = await load0.call(this); PF.profColors = {...(this.global?.ppage?.profColors || {})}; return r; };
         ART.Store.prototype._pfWrapped = true;
     }
 
     /* ═════════ Enregistrer une fiche d'un autre profil : pas de « Cocher Artiste ? » ═════════ */
     const save0 = ART.saveItem;
+    /** les profils qui peuvent porter une sorte (comme $GLOBALS['ART_EXTRA_TYPES'] côté serveur) : le premier est celui qu'on propose */
+    const SHARED = {tour: ['artist', 'actor'], stage_piece: ['artist', 'actor'], series: ['artist', 'actor'], season: ['artist', 'actor'], episode: ['artist', 'actor']};
+    PF.kindProfiles = kind => {
+        if (ART.profiles.artisan?.craftKinds?.includes(kind)) return ['artisan', 'artist']; // une pièce de métier d'art : « Artisan d'art » d'abord
+        if (SHARED[kind]) return SHARED[kind];
+        if (Array.isArray(ART.defs[kind]?.profiles)) return ART.defs[kind].profiles;
+        const p = PF.kindProfile(kind); return p ? [p] : [];
+    };
     ART.saveItem = async (store, kind, id, data) => {
-        const prof = PF.kindProfile(kind);
-        if (!prof || prof === 'artist') return save0(store, kind, id, data);
+        const profs = PF.kindProfiles(kind);
+        if (!profs.length || (profs.length === 1 && profs[0] === 'artist') || ART.sci?.KIND_PROFILE?.[kind]) return save0(store, kind, id, data); // sciences : leur propre question (heritage-sciences.js)
+        if (profs.length > 1) { // plusieurs profils possibles : on propose le bon s'il n'y en a aucun (pas « Artiste » pour une ferronnerie)
+            const have = (store.person.profiles || []).map(p => p.profile_key);
+            if (Number(store.person.is_artist)) have.push('artist');
+            if (!profs.some(k => have.includes(k))) {
+                const P = ART.profiles[profs[0]] || {label: profs[0], icon: '✦'}, def = ART.defs[kind] || {};
+                const ok = await A().confirmBox(`La fiche de ${store.name} n’est pas encore cochée « ${P.label} ». La cocher pour y ranger ${def.fem ? 'cette' : 'ce'} ${String(def.label || 'fiche').toLowerCase()} ?`, {title: `${P.icon} Cocher « ${P.label} » ?`, okLabel: `Cocher « ${P.label} »`});
+                if (!ok) throw new Error('');
+                await ART.write('set_profile', {person_id: store.pid, profile: profs[0], on: 1, label: P.label, icon: P.icon});
+                store.person.profiles = [...(store.person.profiles || []), {profile_key: profs[0], item_id: null}];
+                if (profs[0] === 'artist') store.person.is_artist = 1;
+            }
+        }
         const pf = ART.defs[kind]?.parentField, parent_id = pf ? (U.ref(data[pf])?.iid || 0) : 0;
         const r = await ART.write('save_item', {person_id: store.pid, kind, id: id || 0, data, parent_id});
         return r.id;
@@ -321,7 +345,7 @@
         });
         dlg.addEventListener('change', e => { if (e.target.matches('[data-w-k]')) { grab(); paint(); } });
         dlg.addEventListener('submit', async e => {
-            e.preventDefault(); grab();
+            e.preventDefault(); if (dlg._busy) return; grab(); // un seul profil créé, même avec Entrée répétée
             if (W.step === 1 && !W.label) { toast('Donne un nom à ce profil.', 'error'); return; }
             if (W.step === 2 && !W.reuse.length && !W.mine.length) { toast('Choisis au moins une section (reprise ou à toi).', 'error'); return; }
             if (W.step < 3) { W.step++; paint(); return; }
@@ -330,28 +354,28 @@
             const order = secList().map(x => x.k.startsWith('mine:') ? mine.find((m, i) => `mine:${W.mine[i].key || i}` === x.k)?.key : x.k).filter(Boolean);
             const sections = [...W.reuse.map(r => ({reuse: r})), ...mine.map(({_i, ...m}) => m)];
             const pos = new Map(order.map((k, i) => [k, i])); sections.sort((a, b) => (pos.get(a.reuse || a.key) ?? 99) - (pos.get(b.reuse || b.key) ?? 99));
-            const btn = dlg.querySelector('[type=submit]'); btn.disabled = true;
+            const btn = dlg.querySelector('[type=submit]'); btn.disabled = true; dlg._busy = true;
             try {
                 const r = await ART.write('save_profile_def', {key: key || '', label: W.label, icon: W.icon, def: {color: W.color, group: 'mine', sections, order: sections.map(s => s.reuse || `${key || '?'}__${s.key}`)}});
                 await PF.refreshDefs(true);
                 if (!ART.profiles[r.key]) PF.loadDefs([{key: r.key, label: W.label, icon: W.icon, origin: 'user', def: {color: W.color, sections}}]);
                 result = r.key; A().toast?.(`✓ Profil « ${W.label} » ${old ? 'enregistré' : 'créé'}`, 'success'); dlg.close();
-            } catch (er) { btn.disabled = false; toast(er.message, 'error'); }
+            } catch (er) { btn.disabled = false; toast(er.message, 'error'); } finally { dlg._busy = false; }
         });
         dlg.addEventListener('close', () => { dlg.remove(); resolve(result); });
         document.body.appendChild(dlg); paint(); dlg.showModal();
     });
 
     /* ═════════ AA · Sur la fiche : le bloc « 🧩 Cette personne était… » et la ligne du formulaire ═════════ */
-    const badge = (p, attrs = '') => `<span class="pf-b" style="--pf:${esc(PF.color(p.key))}" ${attrs}>${esc(p.icon || ART.profiles[p.key]?.icon || '✦')} ${esc(ART.profiles[p.key]?.label || p.label || p.key)}</span>`;
+    const badge = (p, attrs = '') => `<span class="pf-b" style="${PF.vars(PF.color(p.key))}" ${attrs}>${esc(p.icon || ART.profiles[p.key]?.icon || '✦')} ${esc(ART.profiles[p.key]?.label || p.label || p.key)}</span>`;
     PF.badge = badge;
     ext.personBlocks = ext.personBlocks || {};
     ext.personBlocks.profiles = (index, detail, opts = {}) => {
         const p = detail.person; if (!p || p.kind === 'animal') return '';
         const list = Array.isArray(detail.heritage?.profiles) ? detail.heritage.profiles : (Number(p.is_artist) ? [{key: 'artist', label: 'Artiste', icon: '🎨'}] : []);
-        const edit = opts.editOnly || (x => x);
+        const edit = Number(p.is_locked) || p.kiosk ? (() => '') : (opts.editOnly || (x => x)); // fiche verrouillée : pas de « Choisir ses profils… »
         const known = list.filter(x => ART.profiles[x.key] || x.label);
-        const body = known.length ? `<div class="pf-badges">${known.map(x => `<button type="button" class="pf-b is-btn" style="--pf:${esc(PF.color(x.key))}" data-pf-page-pid="${p.id}" data-pf-view="${esc(x.key)}" title="Ouvrir la page de ce profil">${esc(x.icon || ART.profiles[x.key]?.icon || '✦')} ${esc(ART.profiles[x.key]?.label || x.label || x.key)}</button>`).join('')}</div>
+        const body = known.length ? `<div class="pf-badges">${known.map(x => `<button type="button" class="pf-b is-btn" style="${PF.vars(PF.color(x.key))}" data-pf-page-pid="${p.id}" data-pf-view="${esc(x.key)}" title="Ouvrir la page de ce profil">${esc(x.icon || ART.profiles[x.key]?.icon || '✦')} ${esc(ART.profiles[x.key]?.label || x.label || x.key)}</button>`).join('')}</div>
             <div class="ar-row"><button type="button" class="button small" data-pf-page-pid="${p.id}" data-pf-view="all">🧩 Ouvrir sa page</button>${edit(`<button type="button" class="button small secondary" data-pf-choose-pid="${p.id}">🧩 Choisir ses profils…</button>`)}</div>`
             : `<p class="muted pf-small">Artiste, sportif, élu, militaire, agriculteur, enseignant… : coche ce que cette personne était ; chaque profil ajoute ses sections à sa page.</p>${edit(`<div class="ar-row"><button type="button" class="button small secondary" data-pf-choose-pid="${p.id}">🧩 Choisir ses profils…</button></div>`)}`;
         return A().card(index, '🧩 Cette personne était…', known.length || '', `<div class="pf-block">${body}</div>`, 'span-12');
@@ -385,7 +409,9 @@
     });
 
     /* ═════════ R · La page d'une personne à plusieurs profils ═════════ */
-    const WIDTH = {'ligne': 'w-12', '½': 'w-6', '⅓': 'w-4'};
+    const WIDTH = {'ligne': 'w-12', '¾': 'w-9', '⅔': 'w-8', '½': 'w-6', '⅓': 'w-4'};
+    /** la couleur d'un profil sur la page de cette personne (son réglage propre, sinon le standard) */
+    PF.colorIn = (st, key) => { const c = (cfgOf(st).ppage || {}).profColors?.[key]; return /^#[0-9a-f]{6}$/i.test(c || '') ? c : PF.color(key); };
     const cfgOf = st => (st.personSet?.own ? st.personSet : st.global) || {};
     const tgtOf = st => { if (st.personSet?.own) return st.personSet; st.global = st.global || {}; return st.global; };
     PF.cfgOf = cfgOf; PF.tgtOf = tgtOf;
@@ -403,11 +429,11 @@
     PF.profileCfg = (st, pk) => {
         const P = ART.profiles[pk] || {}, keys = PF.sectionKeys(st, pk), all = cfgOf(st);
         if (pk === 'artist') { const s = all.page || {}, M = ART.models, m = M[s.model || ARTIST_MODEL[st.person?.artist_discipline] || 'musicien'] || M.musicien || {order: keys, hidden: []};
-            return {order: [...new Set([...(s.order || m.order || []), ...keys])].filter(k => keys.includes(k)), hidden: new Set(s.hidden || m.hidden || []), widths: s.widths || {}, model: s.model || ''}; }
+            return {order: [...new Set([...(s.order || m.order || []), ...keys])].filter(k => keys.includes(k)), hidden: new Set(s.hidden || m.hidden || []), widths: s.widths || {}, colors: s.colors || {}, model: s.model || ''}; }
         const s = all.pfpages?.[pk] || {}, models = Array.isArray(P.models) ? Object.fromEntries(P.models.filter(k => ART.models[k]).map(k => [k, ART.models[k]])) : P.models || {}, mk = s.model || P.defaultModel?.(st) || Object.keys(models)[0], m = models[mk] || {order: keys, hidden: []};
         const order = [...new Set(['pf_frise', ...(s.order || m.order || keys), ...keys, ...commonKeys()])].filter(k => k === 'pf_frise' || keys.includes(k) || commonKeys().includes(k));
         const hidden = new Set([...(s.hidden || m.hidden || []), ...((m.hidden || []).filter(k => !(s.order || []).includes(k) && s.hidden))]);
-        return {order, hidden, widths: s.widths || {}, model: mk, models};
+        return {order, hidden, widths: s.widths || {}, colors: s.colors || {}, model: mk, models};
     };
     /** la page « Tout mélangé » : l'ordre de toutes les sections, le profil de chacune */
     PF.allCfg = st => {
@@ -419,7 +445,7 @@
         commonKeys().forEach(k => { if (!owner[k]) { owner[k] = 'common'; defaults.push(k); } });
         const order = [...new Set([...(s.order || []).filter(k => owner[k]), ...defaults])];
         const hidden = new Set([...(s.hidden || []), ...[...defHidden].filter(k => !(s.order || []).includes(k))]);
-        return {order, hidden, widths: s.widths || {}, owner, profOrder, profHidden, hideEmpty: !!s.hideEmpty};
+        return {order, hidden, widths: s.widths || {}, colors: s.colors || {}, profColors: s.profColors || {}, owner, profOrder, profHidden, hideEmpty: !!s.hideEmpty};
     };
     /** une section : celles des profils, les sections ajoutées (texte), et celles de l'artiste ajoutées */
     PF.section = (st, k) => {
@@ -443,10 +469,10 @@
         const ticks = []; for (let y = lo; y <= hi; y += step) ticks.push(y);
         const pct = y => ((y - lo) / (hi - lo)) * 100;
         const one = b => { const a = b.a, z = (Number.isFinite(b.b) ? b.b : b.a) + 1, l = pct(a), w = Math.max(pct(z) - l, 1.2), tip = `${b.text ? `${b.text} · ` : ''}${a}${z - 1 > a ? `–${z - 1}` : ''}`;
-            const st = `left:${l.toFixed(2)}%;width:${w.toFixed(2)}%;${b.color ? `--pf:${esc(b.color)};` : ''}${b.dim ? 'opacity:.7;' : ''}`;
+            const st = `left:${l.toFixed(2)}%;width:${w.toFixed(2)}%;${b.color ? `${PF.vars(b.color)};` : ''}${b.dim ? 'opacity:.7;' : ''}`;
             return b.id ? `<button type="button" class="pf-bar" style="${st}" data-ar-open="${Number(b.id)}" title="${esc(tip)}">${esc(b.text || '')}</button>` : `<span class="pf-bar" style="${st}" title="${esc(tip)}">${esc(b.text || '')}</span>`; };
         return `<div class="pf-gantt" style="--steps:${ticks.length - 1}"><div class="pf-gax"><span></span><div>${ticks.map(t => `<span style="left:${pct(t).toFixed(2)}%">${t}</span>`).join('')}</div></div>
-            ${rows.map(r => `<div class="pf-grow" style="${r.color ? `--pf:${esc(r.color)}` : ''}"><span class="pf-glab" title="${esc(r.label)}">${esc(r.label)}</span><div class="pf-tr">${r.bars.filter(b => Number.isFinite(b.a)).map(one).join('')}</div></div>`).join('')}</div>`;
+            ${rows.map(r => `<div class="pf-grow" style="${r.color ? PF.vars(r.color) : ''}"><span class="pf-glab" title="${esc(r.label)}">${esc(r.label)}</span><div class="pf-tr">${r.bars.filter(b => Number.isFinite(b.a)).map(one).join('')}</div></div>`).join('')}</div>`;
     };
     /** des périodes qui se chevauchent → une seule, avec les textes de chacune (frise « Tout mélangé ») */
     PF.mergeBars = bars => { const out = []; [...bars].filter(b => Number.isFinite(b.a)).sort((x, y) => x.a - y.a).forEach(b => { const z = Number.isFinite(b.b) ? b.b : b.a, cur = out[out.length - 1];
@@ -517,7 +543,9 @@
     const paintArtist = ART.paintPage, orgArtist = ART.openOrganizer;
     const secState = {};
     const renderSec = (C, k, S0, view) => { try { return S0.render(C, {state: secState[k], view}) || {body: ''}; } catch (e) { console.error(e); return {body: PF.muted('Cette section n’a pas pu s’afficher.'), empty: true}; } };
-    const blockHtml = (C, k, S0, w, pk, r) => `<section class="ar-blk pf-blk ${WIDTH[w] || 'w-12'} ${pk && pk !== 'common' ? 'has-pf' : ''}" data-sec="${esc(k)}" style="--pf:${esc(pk && pk !== 'common' ? PF.color(pk) : 'transparent')}"><div class="ar-bh"><span class="ar-grip" title="Ranger : ⚙️ Organiser la page">⠿</span><b>${esc(S0.icon || '')} ${esc(S0.label)}</b>${r.count ? ` <small class="ar-g">${esc(r.count)}</small>` : ''}${r.head || ''}<span class="spacer"></span>${r.actions || ''}</div><div class="ar-bb">${r.body || ''}</div></section>`;
+    /** le liseré d'une section : sa couleur à elle, sinon celle de son profil (les sections communes : aucun) */
+    const lisOf = (C, cfg, k, pk) => ART.secColor ? ART.secColor(cfg?.colors, k, pk && pk !== 'common' ? PF.colorIn(C.store, pk) : '') : (pk && pk !== 'common' ? PF.color(pk) : '');
+    const blockHtml = (C, k, S0, w, pk, r, col = lisOf(C, null, k, pk)) => `<section class="ar-blk pf-blk ${WIDTH[w] || 'w-12'} ${col ? 'has-pf' : ''}" data-sec="${esc(k)}" style="--pf:${esc(col || 'transparent')}"><div class="ar-bh"><span class="ar-grip" title="Ranger : ⚙️ Organiser la page">⠿</span><b>${esc(S0.icon || '')} ${esc(S0.label)}</b>${r.count ? ` <small class="ar-g">${esc(r.count)}</small>` : ''}${r.head || ''}<span class="spacer"></span>${r.actions || ''}</div><div class="ar-bb">${r.body || ''}</div></section>`;
     const visibleKeys = st => { const cfg = PF.allCfg(st); return cfg.profOrder.filter(k => !cfg.profHidden.has(k)); };
     /** la vue : « Tout mélangé » ou un profil ; un seul profil (visible) = sa page directement */
     const viewOf = C => { const vis = visibleKeys(C.store), v = C.S.pview || C.prefs?.pview?.[C.pid] || 'all'; if (vis.length === 1 && PF.keysOf(C.store).length === 1) return vis[0]; return v === 'all' || vis.includes(v) ? v : 'all'; };
@@ -529,16 +557,16 @@
     function heroAll(C, view) {
         const st = C.store, keys = PF.allCfg(st).profOrder;
         return `<header class="ar-hero pf-hero">${photoHtml(st)}<div class="pf-hmain"><h2>${esc(st.name)}${PF.life(st) ? ` <small>· ${esc(PF.life(st))}</small>` : ''}</h2>
-            <div class="pf-badges">${keys.map(k => { const P = ART.profiles[k], sub = P.sub?.(st); return `<button type="button" class="pf-b is-btn" style="--pf:${esc(PF.color(k))}" data-pf-view="${esc(k)}">${esc(P.icon)} ${esc(P.label)}${sub ? ` · ${esc(sub)}` : ''}</button>`; }).join('')}<button type="button" class="pf-b is-add" data-pf-choose>＋ profil</button></div>
+            <div class="pf-badges">${keys.map(k => { const P = ART.profiles[k], sub = (() => { try { return P.sub?.(st); } catch (e) { console.error(e); return ''; } })(); return `<button type="button" class="pf-b is-btn" style="${PF.vars(PF.colorIn(st, k))}" data-pf-view="${esc(k)}">${esc(P.icon)} ${esc(P.label)}${sub ? ` · ${esc(sub)}` : ''}</button>`; }).join('')}${st.readonly ? '' : '<button type="button" class="pf-b is-add" data-pf-choose>＋ profil</button>'}</div>
             <div class="pf-segrow">${segHtml(C, view)}</div></div></header>`;
     }
     function heroOne(C, pk, extra = '') {
         const st = C.store, P = ART.profiles[pk], h = (() => { try { return P.hero?.(C) || {}; } catch (e) { console.error(e); return {}; } })();
-        return `<header class="ar-hero pf-hero is-one" style="--pf:${esc(PF.color(pk))}">${photoHtml(st)}<div class="pf-hmain"><span class="eyebrow pf-ey">${esc(h.eyebrow || `${P.icon} ${P.label}`.toLocaleUpperCase('fr-FR'))}</span><h2>${esc(st.name)}${h.sub || PF.life(st) ? ` <small>· ${esc(h.sub || PF.life(st))}</small>` : ''}</h2>${h.summary || P.summary ? `<small class="ar-g">${esc(h.summary || (() => { try { return P.summary(st); } catch (_) { return ''; } })())}</small>` : ''}${h.links?.length ? `<div class="ar-hero-links">${linksHtml(h.links)}</div>` : ''}</div>${extra}</header>`;
+        return `<header class="ar-hero pf-hero is-one" style="${PF.vars(PF.colorIn(st, pk))}">${photoHtml(st)}<div class="pf-hmain"><span class="eyebrow pf-ey">${esc(h.eyebrow || `${P.icon} ${P.label}`.toLocaleUpperCase('fr-FR'))}</span><h2>${esc(st.name)}${h.sub || PF.life(st) ? ` <small>· ${esc(h.sub || PF.life(st))}</small>` : ''}</h2>${h.summary || P.summary ? `<small class="ar-g">${esc(h.summary || (() => { try { return P.summary(st); } catch (_) { return ''; } })())}</small>` : ''}${h.links?.length ? `<div class="ar-hero-links">${linksHtml(h.links)}</div>` : ''}</div>${extra}</header>`;
     }
     function paintPf(C, body) {
         const st = C.store, view = viewOf(C); C.S.pview = view;
-        const bar = () => `<div class="pf-switch"><div class="pf-badges">${PF.allCfg(st).profOrder.map(k => `<button type="button" class="pf-b is-btn ${k === view ? 'is-on' : ''}" style="--pf:${esc(PF.color(k))}" data-pf-view="${esc(k)}">${esc(ART.profiles[k].icon)} ${esc(ART.profiles[k].label)}</button>`).join('')}<button type="button" class="pf-b is-add" data-pf-choose>＋ profil</button></div>${segHtml(C, view)}</div>`;
+        const bar = () => `<div class="pf-switch"><div class="pf-badges">${PF.allCfg(st).profOrder.map(k => `<button type="button" class="pf-b is-btn ${k === view ? 'is-on' : ''}" style="${PF.vars(PF.colorIn(st, k))}" data-pf-view="${esc(k)}">${esc(ART.profiles[k].icon)} ${esc(ART.profiles[k].label)}</button>`).join('')}${st.readonly ? '' : '<button type="button" class="pf-b is-add" data-pf-choose>＋ profil</button>'}</div>${segHtml(C, view)}</div>`;
         if (view === 'artist') {
             body.innerHTML = `${bar()}<div data-pf-artist></div>`;
             paintArtist(C, body.querySelector('[data-pf-artist]'));
@@ -547,14 +575,15 @@
             if (view === 'all') { cfg = PF.allCfg(st); owner = cfg.owner; list = cfg.order.filter(k => !cfg.hidden.has(k) && (owner[k] === 'common' || !cfg.profHidden.has(owner[k]))); }
             else { cfg = PF.profileCfg(st, view); list = cfg.order.filter(k => !cfg.hidden.has(k)); list.forEach(k => { owner[k] = commonKeys().includes(k) || k === 'pf_frise' ? 'common' : view; }); }
             const hideEmpty = !!PF.allCfg(st).hideEmpty;
-            const secs = list.map(k => { const S0 = PF.section(st, k); if (!S0) return ''; const r = renderSec(C, k, S0, view); if (hideEmpty && (r.empty || r.count === 0)) return '';
-                const S1 = k === 'pf_frise' && view !== 'all' ? {...S0, label: 'Frise de carrière'} : S0; return blockHtml(C, k, S1, cfg.widths[k] || S0.w, owner[k], r); }).join('');
+            const secs = list.map(k => { const S0 = PF.section(st, k); if (!S0 || S0.hideIf?.(C, view)) return ''; /* hideIf : une section en double avec celle d'un autre profil */ const r = renderSec(C, k, S0, view); if (hideEmpty && (r.empty || r.count === 0)) return '';
+                const S1 = k === 'pf_frise' && view !== 'all' ? {...S0, label: 'Frise de carrière'} : S0; return blockHtml(C, k, S1, cfg.widths[k] || S0.w, owner[k], r, lisOf(C, cfg, k, owner[k])); }).join('');
             const single = PF.keysOf(st).length === 1;
-            body.innerHTML = `<div class="ar-page pf-page">${view === 'all' ? heroAll(C, view) : single ? heroOne(C, view, '<button type="button" class="pf-b is-add pf-addone" data-pf-choose title="Cocher un autre profil (artiste, sportif, élu…)">＋ profil</button>') : bar() + heroOne(C, view)}<div class="ar-blocks">${secs || `<p class="muted">Toutes les sections sont cachées : « ⚙️ Organiser la page ».</p>`}</div>${view === 'all' ? '<p class="pf-note">« Tout mélangé » : les sections de tous ses profils, dans l’ordre que tu choisis (⚙️ Organiser la page). Le liseré de couleur dit de quel profil vient la section ; les blocs communs restent toujours visibles.</p>' : ''}</div>`;
+            body.innerHTML = `<div class="ar-page pf-page">${view === 'all' ? heroAll(C, view) : single ? heroOne(C, view, st.readonly ? '' : '<button type="button" class="pf-b is-add pf-addone" data-pf-choose title="Cocher un autre profil (artiste, sportif, élu…)">＋ profil</button>') : bar() + heroOne(C, view)}<div class="ar-blocks">${secs || `<p class="muted">Toutes les sections sont cachées : « ⚙️ Organiser la page ».</p>`}</div>${view === 'all' ? '<p class="pf-note">« Tout mélangé » : les sections de tous ses profils, dans l’ordre que tu choisis (⚙️ Organiser la page). Le liseré de couleur dit de quel profil vient la section ; les blocs communs restent toujours visibles.</p>' : ''}</div>`;
         }
         body.onclick = async e => {
             const t = e.target.closest('button'); if (!t) return;
             if (t.dataset.pfView) { C.S.pview = t.dataset.pfView; C.prefs.pview = {...(C.prefs.pview || {}), [C.pid]: t.dataset.pfView}; C.savePrefs?.(); C.paint(true); return; }
+            if ((t.hasAttribute('data-pf-choose') || t.dataset.pfEdit || t.dataset.pfNew) && st.readonly) return C.roMsg?.(); // fiche verrouillée, consultation
             if (t.hasAttribute('data-pf-choose')) return PF.openChooser(C.pid, {name: st.name, onDone: async () => { await C.reload(); C.paint(true); }});
             if (t.dataset.pfEdit) return PF.editFiche(C, t.dataset.pfEdit);
             if (t.dataset.pfNew) return C.newItem(t.dataset.pfNew);
@@ -584,8 +613,8 @@
         const save = async () => { const s = st(); s.settings = s.personSet?.own ? s.personSet : s.global; try { await ART.persistSettings(s); } catch (e) { toast(e.message, 'error'); } C.paint(false); paint(); };
         /** la configuration à modifier, déjà remplie avec ce qu'on voit */
         const page = () => { const view = viewOf(C), t = tgtOf(st());
-            if (view === 'all') { const c = PF.allCfg(st()); t.ppage = t.ppage || {}; const p = t.ppage; p.order = p.order || [...c.order]; p.hidden = p.hidden || [...c.hidden]; p.widths = p.widths || {}; p.profOrder = p.profOrder || [...c.profOrder]; p.profHidden = p.profHidden || [...c.profHidden]; c.order.forEach(k => { if (!p.order.includes(k)) p.order.push(k); }); return p; }
-            const c = PF.profileCfg(st(), view); t.pfpages = t.pfpages || {}; const p = t.pfpages[view] = t.pfpages[view] || {}; p.order = p.order || [...c.order]; p.hidden = p.hidden || [...c.hidden]; p.widths = p.widths || {}; p.custom = p.custom || []; c.order.forEach(k => { if (!p.order.includes(k)) p.order.push(k); }); return p; };
+            if (view === 'all') { const c = PF.allCfg(st()); t.ppage = t.ppage || {}; const p = t.ppage; p.colors = p.colors || {}; p.profColors = p.profColors || {}; p.order = p.order || [...c.order]; p.hidden = p.hidden || [...c.hidden]; p.widths = p.widths || {}; p.profOrder = p.profOrder || [...c.profOrder]; p.profHidden = p.profHidden || [...c.profHidden]; c.order.forEach(k => { if (!p.order.includes(k)) p.order.push(k); }); return p; }
+            const c = PF.profileCfg(st(), view); t.pfpages = t.pfpages || {}; const p = t.pfpages[view] = t.pfpages[view] || {}; p.colors = p.colors || {}; p.order = p.order || [...c.order]; p.hidden = p.hidden || [...c.hidden]; p.widths = p.widths || {}; p.custom = p.custom || []; c.order.forEach(k => { if (!p.order.includes(k)) p.order.push(k); }); return p; };
         function paint() {
             const view = viewOf(C), s = st(), first = youngName(s);
             if (!PF.isCombined(s) || view === 'artist') { close(); return orgArtist(C); }
@@ -593,19 +622,24 @@
             const cfg = one ? PF.profileCfg(s, view) : PF.allCfg(s), list = cfg.order.filter(k => PF.section(s, k));
             const ownerOf = k => one ? (commonKeys().includes(k) || k === 'pf_frise' ? 'common' : view) : cfg.owner[k];
             const nSec = pk => PF.profileCfg(s, pk).order.filter(k => k !== 'pf_frise' && !commonKeys().includes(k) && !PF.profileCfg(s, pk).hidden.has(k)).length;
-            const profCards = one ? '' : `<b class="pf-sub">Profils de cette personne</b><div class="pf-cards">${cfg.profOrder.map((k, i) => { const off = cfg.profHidden.has(k); return `<div class="pf-card ${off ? 'off' : ''}" data-pfkey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><span>${badge({key: k})} <small class="ar-g">${off ? 'caché' : plural(nSec(k), 'section')}</small></span><span class="tools"><button type="button" data-p-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-p-mv="1" ${i < cfg.profOrder.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span><label class="ui-toggle" title="${off ? 'Montrer' : 'Cacher'} ce profil sur la page"><input type="checkbox" data-p-tog ${off ? '' : 'checked'}><i></i></label></div>`; }).join('')}</div>`;
+            const profCards = one ? '' : `<b class="pf-sub">Profils de cette personne</b><div class="pf-cards">${cfg.profOrder.map((k, i) => { const off = cfg.profHidden.has(k); return `<div class="pf-card ${off ? 'off' : ''}" data-pfkey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><span>${badge({key: k})} <small class="ar-g">${off ? 'caché' : plural(nSec(k), 'section')}</small></span><span class="ar-ocol" data-p-col="${esc(k)}"></span><span class="tools"><button type="button" data-p-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-p-mv="1" ${i < cfg.profOrder.length - 1 ? '' : 'disabled'} title="Descendre">↓</button></span><label class="ui-toggle" title="${off ? 'Montrer' : 'Cacher'} ce profil sur la page"><input type="checkbox" data-p-tog ${off ? '' : 'checked'}><i></i></label></div>`; }).join('')}</div>`;
             const rows = list.map((k, i) => { const S0 = PF.section(s, k), on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w, ow = ownerOf(k), lab = k === 'pf_frise' && one ? 'Frise de carrière' : S0.label;
                 const dim = !one && ow !== 'common' && cfg.profHidden.has(ow);
                 return `<div class="ar-fr ${on && !dim ? '' : 'off'} ${S0.custom ? 'cust' : ''}" data-okey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><button type="button" class="ar-eye" data-o-eye title="${on ? 'Cacher' : 'Montrer'}">${on ? '👁' : '🚫'}</button><span class="lbl pf-lbl" style="--pf:${esc(ow !== 'common' ? PF.color(ow) : 'transparent')}">${esc(S0.icon || '')} ${esc(lab)}${dim ? ' <small class="ar-g">(profil caché)</small>' : ''}</span>
-                    <select class="ty ar-wsel" data-o-w title="Largeur">${['ligne', '½', '⅓'].map(x => `<option ${x === w ? 'selected' : ''}>${x}</option>`).join('')}</select><span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('');
+                    <select class="ty ar-wsel" data-o-w title="Largeur">${ART.widthOptions ? ART.widthOptions(w) : ''}</select><span class="ar-ocol" data-o-col="${esc(k)}"></span><span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('');
             const models = one ? Object.entries(cfg.models || {}) : [];
             aside.innerHTML = `<div class="ar-ph"><b>⚙️ ${one ? `Organiser le profil ${esc(String(P.label).toLocaleLowerCase('fr-FR'))}` : `Organiser la page de ${esc(first)}`}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
-                <p class="ar-phelp">${one ? 'Comme pour l’artiste : ⠿ ou ↑ ↓ pour ranger, 👁 pour cacher, largeur ½ ⅓ ligne.' : 'Range les profils et les sections (⠿ ou ↑ ↓), cache-les (👁), choisis leur largeur.'}</p>${profCards}
+                <p class="ar-phelp">${one ? 'Comme pour l’artiste : ⠿ ou ↑ ↓ pour ranger, 👁 pour cacher, la largeur (toute la ligne, ¾, ⅔, ½, ⅓) et la couleur du liseré.' : 'Range les profils et les sections (⠿ ou ↑ ↓), cache-les (👁), choisis leur largeur et la couleur de leur liseré (la pastille d’un profil : sa couleur).'}</p>${profCards}
                 <b class="pf-sub">Sections, dans l’ordre de la page</b><div class="ar-plist">${rows}</div>
                 <div class="ar-pbtns">${one ? '' : '<button type="button" class="button small secondary" data-o-addprof>＋ Ajouter un profil</button>'}<button type="button" class="button small secondary" data-o-add>＋ Ajouter une section</button>${models.length > 1 ? `<select class="ar-in" data-o-model title="Modèle de départ">${models.map(([k, m]) => `<option value="${esc(k)}" ${k === cfg.model ? 'selected' : ''}>Modèle : ${esc(m.label)}</option>`).join('')}</select>` : ''}</div>
                 ${one && P.organizerNote ? `<p class="ar-phelp">${P.organizerNote}</p>` : ''}
                 <div class="pf-togs"><label class="ui-toggle"><input type="checkbox" data-o-own ${s.personSet?.own ? 'checked' : ''}><i></i>Réglage propre à ${esc(first)}</label>${one ? '' : `<label class="ui-toggle"><input type="checkbox" data-o-empty ${PF.allCfg(s).hideEmpty ? 'checked' : ''}><i></i>Masquer les sections vides</label>`}</div>
                 <p class="ar-phelp">Tout se range dans « 💾 Réglages enregistrés » (⚙️ Champs affichés d’une fiche). Une section cachée garde ses données.</p></div>`;
+            // C2 : la couleur du liseré de chaque section, et celle de chaque profil
+            ART.mountSecColors?.(aside, cfg.colors, k => { const ow = ownerOf(k); return ow && ow !== 'common' ? PF.colorIn(s, ow) : ''; }, (k, v) => { const p = page(); p.colors = {...(p.colors || {})}; if (v == null) delete p.colors[k]; else p.colors[k] = v; save(); });
+            aside.querySelectorAll('[data-p-col]').forEach(slot => { const pk = slot.dataset.pCol, UI = window.LCNDA_UI; if (!UI?.colorField) return;
+                const f = UI.colorField({value: PF.colorIn(s, pk), compact: true}); f.title = 'Couleur de ce profil (pastilles, liserés, frise)'; slot.appendChild(f);
+                f.input.addEventListener('change', () => { if (!/^#[0-9a-f]{6}$/i.test(f.input.value || '')) return; const t = tgtOf(st()); t.ppage = t.ppage || {}; t.ppage.profColors = {...(t.ppage.profColors || {}), [pk]: f.input.value.slice(0, 7)}; save(); }); });
         }
         aside.onclick = async e => {
             const b = e.target.closest('button'); if (!b) return;
@@ -625,7 +659,7 @@
             const t = e.target, k = t.closest('[data-okey]')?.dataset.okey;
             if (t.matches('[data-o-w]')) { page().widths[k] = t.value; return save(); }
             if (t.matches('[data-p-tog]')) { const p = page(), pk = t.closest('[data-pfkey]').dataset.pfkey; p.profHidden = t.checked ? p.profHidden.filter(x => x !== pk) : [...new Set([...p.profHidden, pk])]; return save(); }
-            if (t.matches('[data-o-model]')) { const tg = tgtOf(st()), view = viewOf(C); tg.pfpages = tg.pfpages || {}; const old = tg.pfpages[view] || {}; tg.pfpages[view] = {model: t.value, widths: old.widths || {}, custom: old.custom || []}; return save(); }
+            if (t.matches('[data-o-model]')) { const tg = tgtOf(st()), view = viewOf(C); tg.pfpages = tg.pfpages || {}; const old = tg.pfpages[view] || {}; tg.pfpages[view] = {model: t.value, widths: old.widths || {}, colors: old.colors || {}, custom: old.custom || []}; return save(); }
             if (t.matches('[data-o-empty]')) { const p = page(); p.hideEmpty = t.checked; return save(); }
             if (t.matches('[data-o-own]')) { const s = st(); if (t.checked) { s.personSet = {...clone(s.global || {}), ...(s.personSet || {}), own: true}; s.personSet.kinds = clone(s.global?.kinds || {}); Object.values(s.personSet.kinds).forEach(K => { delete K.custom; }); } else if (s.personSet) s.personSet.own = false; return save(); }
         };

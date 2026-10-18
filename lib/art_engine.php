@@ -374,9 +374,11 @@ function art_setting(PDO $pdo, string $key): ?array
 function art_boot(PDO $pdo, int $personId): array
 {
     art_ensure($pdo);
-    $p = $pdo->prepare('SELECT id, first_name, last_name, gender, is_artist, artist_discipline FROM persons WHERE id=?'); $p->execute([$personId]);
+    $p = $pdo->prepare('SELECT id, first_name, last_name, gender, is_artist, artist_discipline, COALESCE(is_locked,0) AS is_locked FROM persons WHERE id=?'); $p->execute([$personId]);
     $person = $p->fetch(PDO::FETCH_ASSOC);
     if (!$person) { throw new RuntimeException('Fiche introuvable.'); }
+    $person['is_locked'] = (int) $person['is_locked'];
+    if (function_exists('kiosk_state') && !empty(kiosk_state()['on'])) { $person['is_locked'] = 1; $person['kiosk'] = 1; } // mode consultation : lecture seule
     $pp = $pdo->prepare('SELECT profile_key, item_id FROM person_profiles WHERE person_id=? ORDER BY sort_order, profile_key'); $pp->execute([$personId]);
     $person['profiles'] = $pp->fetchAll(PDO::FETCH_ASSOC);
     // naissance et décès (année, lieu) pour l'en-tête de la page de l'artiste
@@ -425,7 +427,7 @@ function art_save_item(PDO $pdo, array $d): array
     $profOwn = $kindProfiles !== ['artist'] && !(function_exists('sciences_kind_ok') && sciences_kind_ok($kind));
     if ($profOwn) {
         $hp = $pdo->prepare('SELECT count(*) FROM person_profiles WHERE person_id=? AND profile_key IN (' . implode(',', array_fill(0, count($kindProfiles), '?')) . ')'); $hp->execute([$personId, ...$kindProfiles]);
-        if (!(int) $hp->fetchColumn()) { $pdo->prepare('INSERT OR IGNORE INTO profiles(key, label, icon, origin) VALUES(?,?,?,\'builtin\')')->execute([$kindProfiles[0], $kindProfiles[0], '']); $pdo->prepare('INSERT OR IGNORE INTO person_profiles(person_id, profile_key) VALUES(?,?)')->execute([$personId, $kindProfiles[0]]); }
+        if (!(int) $hp->fetchColumn()) { $pl = defined('PROFILS_BUILTIN') ? (PROFILS_BUILTIN[$kindProfiles[0]] ?? null) : null; $pdo->prepare('INSERT OR IGNORE INTO profiles(key, label, icon, origin) VALUES(?,?,?,\'builtin\')')->execute([$kindProfiles[0], $pl[0] ?? $kindProfiles[0], $pl[1] ?? '']); $pdo->prepare('INSERT OR IGNORE INTO person_profiles(person_id, profile_key) VALUES(?,?)')->execute([$personId, $kindProfiles[0]]); }
         if (($xt = art_extra_types()[$kind] ?? null) && is_array($xt)) { $pdo->prepare("INSERT OR IGNORE INTO item_types(key, label, plural, icon, family, domain, parent_type, origin) VALUES(?,?,?,?,?,?,?,'builtin')")->execute([$kind, (string) $xt[0], (string) ($xt[1] ?? $xt[0]), (string) ($xt[2] ?? '✦'), (string) ($xt[3] ?? 'autre'), (string) ($xt[3] ?? 'autre'), (string) ($xt[4] ?? '')]); }
     }
     $sciOwn = function_exists('sciences_before_save') && sciences_before_save($pdo, $personId, $kind, $d); // 🔬 profil inventeur / scientifique / explorateur
@@ -522,6 +524,7 @@ function art_restore_item(PDO $pdo, array $d): array
     if ($e->fetchColumn()) { return ['id' => $id, 'already' => true]; }
     $p = $pdo->prepare('SELECT 1 FROM persons WHERE id=?'); $p->execute([$pid]);
     if (!$p->fetchColumn()) { throw new RuntimeException('La fiche de la personne n’existe plus : impossible de remettre cet élément.'); }
+    if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $pid); } // fiche verrouillée : rien ne revient non plus
     $data = artist_clean(is_array($it['data'] ?? null) ? $it['data'] : []); $data = is_array($data) ? $data : [];
     $dt = art_date_text($data); [$dmin, $dmax] = art_date_bounds($dt);
     $pdo->prepare('INSERT INTO items(id, type_key, person_id, parent_id, title, date_text, date_min, date_max, year, place_id, data, sort_order) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)')->execute([$id, $kind, $pid,
@@ -691,6 +694,7 @@ function art_api_get(PDO $pdo, array $g): array
         'cited' => ['items' => art_person_cited($pdo, safe_int($g['person_id'] ?? 0))],
         'types' => ['types' => art_types_all($pdo)],
         'profiles' => profils_get($pdo, safe_int($g['person_id'] ?? 0)), // 🧩 lib/profils.php
+        'profile_people' => profils_people($pdo), 'page_settings' => profils_page_settings($pdo), // 🧩 liste « Cette personne était… », Maintenance
         default => throw new RuntimeException('Demande inconnue.'),
     };
 }

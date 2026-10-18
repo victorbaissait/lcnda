@@ -84,7 +84,7 @@
     ART.profiles = ART.profiles || {};
     const SECS = ['artisan_formation', 'artisan_compagnonnage', 'artisan_titres', 'artisan_atelier', 'artisan_poincons', 'artisan_pieces'];
     const CRAFT_KINDS = ['o_ferronnerie', 'o_piece_art', 'o_ceramique', 'o_verre', 'o_orfevrerie', 'o_tapisserie', 'o_broderie', 'o_ebenisterie', 'o_reliure', 'o_lutherie', 'o_horlogerie', 'o_medaille', 'o_mosaique', 'o_vitrail'];
-    ART.profiles.artisan = {key: 'artisan', label: 'Artisan d’art', icon: '🔨', color: '#c2410c', group: 'creation', type: 'profile_artisan', kinds: ['o_ferronnerie'], sections: SECS, // kinds = ses onglets d'office (les autres pièces : « ＋ Nouvelle œuvre » ou « ⚒️ Métiers d’art »)
+    ART.profiles.artisan = {key: 'artisan', label: 'Artisan d’art', icon: '🔨', color: '#c2410c', group: 'creation', type: 'profile_artisan', kinds: ['o_ferronnerie'], craftKinds: CRAFT_KINDS, sections: SECS, // kinds = ses onglets d'office (les autres pièces : « ＋ Nouvelle œuvre » ou « ⚒️ Métiers d’art »)
        
         desc: 'apprentissage, compagnonnage, MOF, Maître d’art, EPV, atelier, poinçons', help: 'Apprentissage, compagnonnage, MOF, Maître d’art, EPV, atelier, poinçons — s’ajoute au profil artiste ou se coche seul.',
         models: {artisan: {label: 'Artisan d’art', order: SECS, hidden: []}}, defaultModel: () => 'artisan',

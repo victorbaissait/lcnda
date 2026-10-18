@@ -244,8 +244,8 @@
             count: l.length || '', empty: !l.length && !matches, actions: `${PF.newBtn('sp_result', '＋')}${l.length ? PF.allBtn('sp_result') : ''}`};
     }};
     S.sp_people = {icon: '🧑‍🏫', label: 'Entraîneurs · coéquipiers', w: '⅓', profile: K, render: C => {
-        const st = C.store, it = fiche(st), ctx = it ? ART.ctx(st, it) : null, co = ART.normPeople(it?.data?.coaches || []), tm = ART.normPeople(it?.data?.teammates || []);
-        const extra = new Set(st.of('sp_result').flatMap(r => ART.normPeople(r.data.partners || []).map(p => p.pid || p.txt))).size;
+        const st = C.store, it = fiche(st), ctx = it ? ART.ctx(st, it) : null, co = ART.normPeople(ART.arr(it?.data?.coaches)), tm = ART.normPeople(ART.arr(it?.data?.teammates));
+        const extra = new Set(st.of('sp_result').flatMap(r => ART.normPeople(ART.arr(r.data.partners)).map(p => p.pid || p.txt))).size;
         return {body: co.length || tm.length || extra ? `${co.slice(0, 2).map(p => U.personChip(p, p.role || 'entraîneur', ctx)).join(' ')}${co.length > 2 ? ` + ${co.length - 2}` : ''}<br>${tm.length || extra ? `<small class="ar-g">${esc(plural(Math.max(tm.length, extra), PF.female(st) ? 'coéquipière' : 'coéquipier'))}</small> ${tm.slice(0, 3).map(p => U.personChip(p, p.role, ctx)).join(' ')}` : ''}` : PF.muted('Entraîneurs et coéquipiers : « … » pour les noter.'), empty: !co.length && !tm.length && !extra, actions: PF.editBtn(K)};
     }};
     S.sp_body = {icon: '🩹', label: 'Blessures · équipement · reconversion', w: '⅓', profile: K, render: C => {

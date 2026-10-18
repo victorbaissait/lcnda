@@ -76,9 +76,9 @@
                 {id: 'place', label: 'Lieu de conservation', type: 'place', chipPrefix: 'À', test: (it, v) => !v || (typeof v === 'object' ? U.place(it.data.location)?.plid === Number(v.id) : U.placeTitle(it.data.location).toLowerCase().includes(String(v).replace(/^txt:/, '').toLowerCase()))},
                 {id: 'owner', label: 'Propriétaire', type: 'person', chipPrefix: 'Chez', test: (it, v) => !v || (typeof v === 'object' ? U.person(it.data.owner)?.pid === Number(v.id) : U.nameOf(it.data.owner).toLowerCase().includes(String(v).replace(/^txt:/, '').toLowerCase()))},
                 {id: 'attr', label: 'Attribution', group: 'Attribution', type: 'check', options: [['certaine', 'Certaine'], ['autre', 'Attribuée, atelier, entourage'], ['doute', 'Douteuse, rejetée']], test: (it, v) => { if (!v.length) return true; const a = it.data.attribution || 'certaine'; return v.some(x => x === 'certaine' ? a === 'certaine' : x === 'autre' ? ['attribuee', 'atelier', 'entourage'].includes(a) : ['douteuse', 'rejetee'].includes(a)); }},
-                {id: 'exposed', label: 'Exposée au moins une fois', group: 'Autres', type: 'check', test: (it, v, st) => !v || (it.data.exhibitions || []).length > 0},
-                {id: 'nophoto', label: 'Sans photo', group: 'Autres', type: 'check', test: (it, v) => !v || !(it.data.photos || []).length},
-                {id: 'cited', label: 'Citée dans un livre', group: 'Autres', type: 'check', test: (it, v) => !v || (it.data.literature || []).length > 0}]; },
+                {id: 'exposed', label: 'Exposée au moins une fois', group: 'Autres', type: 'check', test: (it, v, st) => !v || ART.arr(it.data.exhibitions).length > 0},
+                {id: 'nophoto', label: 'Sans photo', group: 'Autres', type: 'check', test: (it, v) => !v || !ART.arr(it.data.photos).length},
+                {id: 'cited', label: 'Citée dans un livre', group: 'Autres', type: 'check', test: (it, v) => !v || ART.arr(it.data.literature).length > 0}]; },
         upgrade: d => { const lines = v => String(v).split(/\n+/).map(x => x.trim()).filter(Boolean);
             if (d.note && !d.notes) { d.notes = d.note; delete d.note; }
             if (typeof d.provenance === 'string') d.provenance = lines(d.provenance).map(x => ({how: x}));
@@ -91,7 +91,7 @@
     const nextRef = store => { const n = store.of('work').map(w => Number(String(w.data.catref || '').match(/(\d+)\s*$/)?.[1] || 0)); return `CR ${(n.length ? Math.max(...n) : 0) + 1}`; };
     // la série : « Les moulins de la Corrèze (5) »
     ART.ft.text_series = null;
-    ART.views.expo_count = {read: (ctx, it) => String((it.data?.exhibitions || []).length || 0), text: (ctx, it) => String((it.data?.exhibitions || []).length || 0)};
+    ART.views.expo_count = {read: (ctx, it) => String(ART.arr(it.data?.exhibitions).length || 0), text: (ctx, it) => String(ART.arr(it.data?.exhibitions).length || 0)};
 
     /* provenance : la frise (rond bleu = possession, jaune = vente, plein = aujourd'hui) */
     ART.views.provenance = {

@@ -88,11 +88,11 @@
         timeline: st => [...(st.of('profile_scientist')[0]?.data?.positions || []).map(p => ({from: U.yearOf(p.from), to: U.yearOf(p.to), label: p.title || SC.refTitle(p.inst, 'empid')})), ...st.of('discovery').map(it => ({from: it.year, label: it.title}))]};
     ART.profiles.inventor = {key: 'inventor', label: 'Inventeur', icon: '💡', color: '#e1a500', group: 'Savoir', type: 'profile_inventor', kinds: ['invention'],
         hint: 'inventions, brevets pays par pays, prototypes, licences, objets fabriqués, concours', models: ['inventeur'],
-        summary: st => { const l = st.of('invention'), np = l.reduce((a, it) => a + (it.data.patents || []).length, 0); return [l.length && plural(l.length, 'invention'), np && plural(np, 'brevet')].filter(Boolean).join(' · '); },
+        summary: st => { const l = st.of('invention'), np = l.reduce((a, it) => a + ART.arr(it.data.patents).length, 0); return [l.length && plural(l.length, 'invention'), np && plural(np, 'brevet')].filter(Boolean).join(' · '); },
         timeline: st => st.of('invention').map(it => ({from: it.year, label: it.title}))};
     ART.profiles.explorer = {key: 'explorer', label: 'Explorateur', icon: '🧭', color: '#0aa1a8', group: 'Sport et aventure', type: 'profile_explorer', kinds: ['expedition'],
         hint: 'expéditions sur la carte, membres, premières, collectes, récits, toponymes, sociétés', models: ['explorateur'],
-        summary: st => { const l = st.of('expedition'); return [l.length && plural(l.length, 'expédition'), l.reduce((a, it) => a + (it.data.firsts || []).length, 0) && plural(l.reduce((a, it) => a + (it.data.firsts || []).length, 0), 'première')].filter(Boolean).join(' · '); },
+        summary: st => { const l = st.of('expedition'); return [l.length && plural(l.length, 'expédition'), l.reduce((a, it) => a + ART.arr(it.data.firsts).length, 0) && plural(l.reduce((a, it) => a + ART.arr(it.data.firsts).length, 0), 'première')].filter(Boolean).join(' · '); },
         timeline: st => st.of('expedition').map(it => { const ys = String(it.data.dates || it.year || '').match(/\b(1[0-9]{3}|20[0-9]{2})\b/g) || []; return {from: ys[0] || it.year, to: ys[ys.length - 1], label: it.title}; })};
 
     /* ═════════ Les sections de la page ═════════ */
@@ -162,17 +162,17 @@
 
     /* — inventeur — */
     const INVO = ['inventor'];
-    const allPatents = C => C.store.of('invention').flatMap(it => (it.data.patents || []).map(p => ({...p, it})));
+    const allPatents = C => C.store.of('invention').flatMap(it => ART.arr(it.data.patents).map(p => ({...p, it})));
     SC.section('inv_workshop', {icon: '🔧', label: 'L’inventeur et son atelier', w: '⅓', profiles: INVO, render: C => { const d = SC.pdata(C, 'inventor');
         const body = [d.trade && `<div class="sc-line">${esc(d.trade)}</div>`, (d.workshop_name || d.workshop) && `<div class="sc-line">🔧 ${esc(d.workshop_name || '')} ${U.placeChip(d.workshop)}</div>`, d.domains && `<div class="sc-line ar-g">${esc(d.domains)}</div>`, d.associations && `<div class="sc-line">${esc(d.associations)}</div>`, d.bio && `<div class="ar-long">${esc(d.bio).replace(/\n/g, '<br>')}</div>`].filter(Boolean).join('');
         return {body: body || '<p class="muted">Métier, atelier, domaines : « … » pour les écrire.</p>', actions: SC.editBtn('inventor')}; }});
     SC.section('inv_patents', {icon: '📜', label: 'Tous ses brevets', w: 'ligne', profiles: INVO, render: C => { const l = allPatents(C), c = new Set(l.map(p => p.country).filter(Boolean));
         return {count: l.length ? `${plural(l.length, 'brevet')} · ${plural(c.size, 'pays', 'pays')}` : '', body: l.length ? `<div class="ar-scroll"><table class="ar-t sc-ptable"><thead><tr><th>Invention</th><th>Pays</th><th>N°</th><th>Dépôt</th><th>Délivrance</th><th>Statut</th></tr></thead><tbody>${l.map(p => `<tr class="is-click ${p.main ? 'is-me' : ''}" data-ar-row-open="${p.it.id}"><td>${esc(p.it.title)}</td><td>${SC.flag(p.country)} ${esc(SC.cname(p.country))}</td><td>${esc(SC.patentNo(p))}</td><td>${esc(p.filed || '—')}</td><td>${esc(p.granted || '—')}</td><td>${SC.pBadge(p)}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">Aucun brevet : sur la fiche d’une invention, « 📜 Brevets » → une ligne par pays.</p>'}; }});
-    SC.section('inv_licences', {icon: '🏭', label: 'Licences et exploitation', w: '½', profiles: INVO, render: C => { const l = C.store.of('invention').flatMap(it => (it.data.licences || []).map(r => ({...r, it})));
+    SC.section('inv_licences', {icon: '🏭', label: 'Licences et exploitation', w: '½', profiles: INVO, render: C => { const l = C.store.of('invention').flatMap(it => ART.arr(it.data.licences).map(r => ({...r, it})));
         return {count: l.length, body: l.length ? `<div class="ar-scroll"><table class="ar-t"><thead><tr><th>Entreprise</th><th>Invention</th><th>Années</th><th>Fabriqués</th></tr></thead><tbody>${l.map(r => `<tr><td>${typeof r.company === 'object' ? SC.refChip(r.company, 'employer') : esc(r.company || '')}${r.country ? ` <small class="ar-g">${esc(r.country)}</small>` : ''}</td><td><button type="button" class="ar-linkbtn" data-ar-open="${r.it.id}">${esc(r.it.title)}</button></td><td>${esc(r.years || '')}</td><td>${esc(r.made || '')}</td></tr>`).join('')}</tbody></table></div>` : '<p class="muted">Aucune licence notée.</p>'}; }});
-    SC.section('inv_prizes', {icon: '🏆', label: 'Concours d’inventeurs', w: '⅓', profiles: INVO, render: C => { const l = C.store.of('invention').flatMap(it => (it.data.prizes || []).map(r => ({...r, it})));
+    SC.section('inv_prizes', {icon: '🏆', label: 'Concours d’inventeurs', w: '⅓', profiles: INVO, render: C => { const l = C.store.of('invention').flatMap(it => ART.arr(it.data.prizes).map(r => ({...r, it})));
         return {count: l.length, body: l.length ? l.map(r => `<div class="sc-line">🏆 ${esc([r.prize, r.year].filter(Boolean).join(' '))}${r.rank ? ` · ${esc(r.rank)}` : ''} <small class="ar-g">${esc(r.it.title)}</small></div>`).join('') : '<p class="muted">Concours Lépine, foires, expositions : sur la fiche de chaque invention.</p>'}; }});
-    SC.section('inv_objects', {icon: '📦', label: 'Objets fabriqués', w: '⅓', profiles: INVO, render: C => { const l = C.store.of('invention').flatMap(it => (it.data.objects || []).map(r => ({...r, it})));
+    SC.section('inv_objects', {icon: '📦', label: 'Objets fabriqués', w: '⅓', profiles: INVO, render: C => { const l = C.store.of('invention').flatMap(it => ART.arr(it.data.objects).map(r => ({...r, it})));
         return {count: l.length, body: l.length ? l.map(r => `<div class="sc-line">📦 ${U.ref(r.obj)?.iid ? U.refChip(r.obj, '📦') : esc(r.name || '')}${r.year ? ` · ${esc(r.year)}` : ''} <small class="ar-g">${esc([r.where, r.it.title].filter(Boolean).join(' · '))}</small></div>`).join('') : '<p class="muted">Aucun objet noté.</p>'}; }});
 
     /* les modèles de départ (⚙️ Organiser la page → « Modèle : … ») */

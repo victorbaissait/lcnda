@@ -74,7 +74,22 @@
         architecte: {label: 'Architecte', order: ['bio', 'works', 'identity', 'prizes', 'biblio', 'expos', 'press', 'links', 'photos', 'discography', 'tracks', 'filmo', 'concerts', 'shows'], hidden: ['discography', 'tracks', 'filmo', 'concerts', 'shows', 'photos']},
     });
     const MODEL_OF = {musicien: 'musicien', chanteur: 'musicien', compositeur: 'musicien', chef: 'musicien', groupe: 'musicien', peintre: 'peintre', plasticien: 'peintre', ecrivain: 'ecrivain', poete: 'ecrivain', dramaturge: 'ecrivain', cineaste: 'cineaste', acteur: 'cineaste', videaste: 'cineaste', danseur: 'cineaste', photographe: 'photographe', sculpteur: 'sculpteur', architecte: 'architecte'};
-    const WIDTH = {'ligne': 'w-12', '½': 'w-6', '⅓': 'w-4', 'en-tête': 'w-0'};
+    const WIDTH = {'ligne': 'w-12', '¾': 'w-9', '⅔': 'w-8', '½': 'w-6', '⅓': 'w-4', 'en-tête': 'w-0'};
+    /** les largeurs d'une section de page, rangées comme ailleurs dans l'app (de la plus large à la plus étroite) */
+    ART.PAGE_WIDTHS = [['ligne', 'toute la ligne'], ['¾', '¾'], ['⅔', '⅔'], ['½', '½'], ['⅓', '⅓']];
+    ART.PAGE_WIDTH_CLASS = WIDTH;
+    ART.widthOptions = w => ART.PAGE_WIDTHS.map(([v, l]) => `<option value="${v}" ${v === w ? 'selected' : ''}>${l}</option>`).join('');
+    /** la couleur du liseré d'une section : réglage de la section (« none » = aucun), sinon celle donnée (profil), sinon rien */
+    ART.secColor = (colors, k, dflt = '') => { const c = colors?.[k]; if (c === 'none') return ''; return /^#[0-9a-f]{6}$/i.test(c || '') ? c : dflt; };
+    /** dans un panneau « Organiser » : une pastille C2 par ligne [data-o-col] (Aucune = pas de liseré) et ↺ (couleur de départ) */
+    ART.mountSecColors = (root, colors, dflt, onSet) => root.querySelectorAll('[data-o-col]').forEach(slot => {
+        const k = slot.dataset.oCol, UI = window.LCNDA_UI, raw = colors?.[k], cur = raw === 'none' ? '' : (ART.secColor(colors, k, dflt(k)) || '');
+        if (!UI?.colorField) return;
+        const f = UI.colorField({value: cur || '#7b2ff7', allowNone: true, compact: true}); if (!cur) f.value = '';
+        f.title = 'Couleur du liseré de la section'; slot.appendChild(f);
+        f.input.addEventListener('change', () => onSet(k, f.input.value || 'none'));
+        if (raw) { const r = document.createElement('button'); r.type = 'button'; r.className = 'ar-colreset'; r.textContent = '↺'; r.title = 'Revenir à la couleur de départ'; r.addEventListener('click', () => onSet(k, null)); slot.appendChild(r); }
+    });
     /** la page telle qu'on la montre : ordre, cachées, largeurs (réglage de l'artiste, sinon global, sinon le modèle de sa discipline) */
     /* le modèle de départ : celui de la discipline d'artiste, sinon celui du premier profil coché (Scientifique, Explorateur…) */
     const defModel = st => MODEL_OF[st.person.artist_discipline] || (!Number(st.person.is_artist) && (st.person.profiles || []).map(p => ART.profiles?.[p.profile_key]?.models?.[0]).find(m => m && M[m])) || 'musicien';
@@ -84,7 +99,7 @@
         const custom = s.custom || [];
         const order = [...new Set([...(s.order || model.order), ...Object.keys(P), ...custom.map(c => c.key)])].filter(k => P[k] || custom.some(c => c.key === k));
         const hidden = new Set(s.hidden || model.hidden);
-        return {order, hidden, widths: s.widths || {}, custom, modelKey: s.model || defModel(store)};
+        return {order, hidden, widths: s.widths || {}, colors: s.colors || {}, custom, modelKey: s.model || defModel(store)};
     }
     /* les profils (l'actuel « Artiste » ; d'autres viendront : politique, sportif…) : une section de page dit à quel profil
        elle appartient (profile, « artist » par défaut) ; la page ne montre que celles des profils cochés sur la fiche */
@@ -106,7 +121,8 @@
         const hero = `<header class="ar-hero">${p.photo ? `<span class="ar-hero-ph" style="background-image:url('media/${encodeURIComponent(p.photo)}')"></span>` : `<span class="ar-hero-ph ${{male: 'm', female: 'f'}[p.gender] || 'u'}">${esc(U.initials(st.name))}</span>`}<div><span class="eyebrow">${heroEyebrow(st, disc)}</span>
             <h2>${esc(st.name)}${(d.stage_names || []).length ? ` <small>· ${d.stage_names.map(r => `« ${esc(r.name)} »`).join(', ')}</small>` : ''}</h2><p class="ar-g">${esc([life, ...profilesOf(st).filter(k => k !== 'artist').map(k => ART.profiles?.[k]?.summary?.(st))].filter(Boolean).join(' · '))}</p>${linksOn && links.length ? `<div class="ar-hero-links">${links.map(l => `<a class="ar-ochip is-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer"><i>${ICON(l.url)}</i>${esc(l.label || l.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0])}</a>`).join('')}</div>` : ''}</div></header>`;
         const secs = cfg.order.filter(k => !cfg.hidden.has(k) && k !== 'links').map(k => { const S0 = secOf(cfg, k, st); if (!S0) return ''; const r = S0.render(C, {state: secState[k]}); const w = cfg.widths[k] || S0.w;
-            return `<section class="ar-blk ${WIDTH[w] || 'w-12'}" data-sec="${esc(k)}"><div class="ar-bh"><span class="ar-grip" title="Ranger : ⚙️ Organiser la page">⠿</span><b>${esc(S0.icon)} ${esc(S0.label)}</b>${r.count ? ` <small class="ar-g">${r.count}</small>` : ''}${r.head || ''}<span class="spacer"></span>${r.actions || ''}</div><div class="ar-bb">${r.body}</div></section>`; }).join('');
+            const col = ART.secColor(cfg.colors, k);
+            return `<section class="ar-blk ${WIDTH[w] || 'w-12'}${col ? ' has-lis' : ''}" data-sec="${esc(k)}"${col ? ` style="--pf:${esc(col)}"` : ''}><div class="ar-bh"><span class="ar-grip" title="Ranger : ⚙️ Organiser la page">⠿</span><b>${esc(S0.icon)} ${esc(S0.label)}</b>${r.count ? ` <small class="ar-g">${r.count}</small>` : ''}${r.head || ''}<span class="spacer"></span>${r.actions || ''}</div><div class="ar-bb">${r.body}</div></section>`; }).join('');
         body.innerHTML = `<div class="ar-page">${hero}<div class="ar-blocks">${secs}</div></div>`;
         body.onclick = e => { const b = e.target.closest('[data-ar-dtab]'); if (b) { secState.discography = b.dataset.arDtab === secState.discography ? 'all' : b.dataset.arDtab; ART.paintPage(C, body); return; }
             if (e.target.closest('[data-ar-editprofile]')) { const it = prof(C); if (it) C.open(it.id, {edit: true}); else C.newItem('profile', {title: st.name}); } };
@@ -123,11 +139,12 @@
         function paint() {
             const cfg = pageCfg(C.store), list = cfg.order;
             aside.innerHTML = `<div class="ar-ph"><b>⚙️ Organiser la page${profilesOf(C.store).includes('artist') ? ' de l’artiste' : ` de ${esc(C.store.name)}`}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
-                <p class="ar-phelp">Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : ½, ⅓ ou toute la ligne.</p><div class="ar-plist">${list.map((k, i) => { const S0 = secOf(cfg, k, C.store); if (!S0) return ''; const on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w;
+                <p class="ar-phelp">Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : toute la ligne, ¾, ⅔, ½ ou ⅓ ; la pastille : la couleur du liseré.</p><div class="ar-plist">${list.map((k, i) => { const S0 = secOf(cfg, k, C.store); if (!S0) return ''; const on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w;
                     return `<div class="ar-fr ${on ? '' : 'off'} ${S0.custom ? 'cust' : ''}" data-okey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><button type="button" class="ar-eye" data-o-eye title="${on ? 'Cacher' : 'Montrer'}">${on ? '👁' : '🚫'}</button><span class="lbl">${esc(S0.icon)} ${esc(S0.label)}</span>
-                        ${k === 'links' ? '<span class="ty">en-tête</span>' : `<select class="ty ar-wsel" data-o-w title="Largeur">${['ligne', '½', '⅓'].map(x => `<option ${x === w ? 'selected' : ''}>${x}</option>`).join('')}</select>`}<span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('')}</div>
+                        ${k === 'links' ? '<span class="ty">en-tête</span>' : `<select class="ty ar-wsel" data-o-w title="Largeur">${ART.widthOptions(w)}</select><span class="ar-ocol" data-o-col="${esc(k)}"></span>`}<span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('')}</div>
                 <div class="ar-pbtns"><button type="button" class="button small secondary" data-o-add>＋ Ajouter une section</button><select class="ar-in" data-o-model title="Modèle de départ selon la discipline">${Object.entries(M).map(([k, m]) => `<option value="${k}" ${k === cfg.modelKey ? 'selected' : ''}>Modèle : ${esc(m.label)}</option>`).join('')}</select></div>
                 <p class="ar-phelp">Modèles de départ selon la discipline (Musicien, Peintre, Écrivain, Cinéaste, Photographe, Sculpteur, Architecte…) ; tout se change ensuite. Gardé dans « 💾 Réglages enregistrés » (outil « artistes ») : « ⚙️ Champs affichés » d’une fiche.</p></div>`;
+            ART.mountSecColors(aside, cfg.colors, () => '', (k, v) => { const p0 = page(); p0.colors = {...(p0.colors || {})}; if (v == null) delete p0.colors[k]; else p0.colors[k] = v; save(); });
         }
         aside.onclick = async e => { const b = e.target.closest('button'); if (!b) return; const row = b.closest('[data-okey]'), k = row?.dataset.okey, pg = () => page();
             if (b.dataset.oClose !== undefined) return close();
@@ -139,7 +156,7 @@
                 // le champ du même nom dans le profil, pour l'écrire
                 const g = C.store.global = C.store.global || {}; g.kinds = g.kinds || {}; const K = g.kinds.profile = g.kinds.profile || {}; (K.custom = K.custom || []).push({key, label: n.trim().slice(0, 60), type: 'longtext', star: true});
                 return save(); } };
-        aside.onchange = e => { const k = e.target.closest('[data-okey]')?.dataset.okey; if (e.target.matches('[data-o-w]')) { page().widths[k] = e.target.value; save(); } if (e.target.matches('[data-o-model]')) { const t = tgt(); t.page = {model: e.target.value, widths: t.page?.widths || {}, custom: t.page?.custom || []}; save(); } };
+        aside.onchange = e => { const k = e.target.closest('[data-okey]')?.dataset.okey; if (e.target.matches('[data-o-w]')) { page().widths[k] = e.target.value; save(); } if (e.target.matches('[data-o-model]')) { const t = tgt(); t.page = {model: e.target.value, widths: t.page?.widths || {}, colors: t.page?.colors || {}, custom: t.page?.custom || []}; save(); } };
         let drag = null;
         aside.ondragstart = e => { drag = e.target.closest('[data-okey]'); drag?.classList.add('drag'); };
         aside.ondragover = e => { if (!drag) return; const o = e.target.closest('[data-okey]'); if (!o || o === drag) return; e.preventDefault(); const r = o.getBoundingClientRect(); if (e.clientY < r.top + r.height / 2) o.before(drag); else o.after(drag); };

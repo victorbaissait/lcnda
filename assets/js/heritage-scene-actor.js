@@ -92,14 +92,14 @@
         store.of('film').forEach(f => { const d = f.data || {}; if (byWork.has(f.id) || !(d.role || ACTING.test(d.jobs || ''))) return;
             out.push({key: `f${f.id}`, src: 'film', id: f.id, domain: fkindDom(d.fkind), year: Number(f.year) || SC.dayOf(d.year)?.y || 0, work: {iid: f.id, title: f.title, kind: 'film'}, character: d.role || '', rkind: '', job: d.jobs || '', director: d.director || null, credit: '', photos: d.photos}); });
         // les séries : ce que la personne y a fait (X)
-        (store.of('series') || []).forEach(s => (s.data?.participants || []).forEach((p, i) => { if (U.person(p.who)?.pid !== Number(store.pid)) return; if (byWork.has(s.id) && p.mode !== 'job') return;
+        (store.of('series') || []).forEach(s => ART.arr(s.data?.participants).forEach((p, i) => { if (U.person(p.who)?.pid !== Number(store.pid)) return; if (byWork.has(s.id) && p.mode !== 'job') return;
             const eps = Array.isArray(p.eps) ? p.eps : [];
             out.push({key: `s${s.id}_${i}`, src: 'series', id: s.id, domain: ['emission_radio', 'feuilleton_radio', 'podcast'].includes(s.data?.skind) ? 'radio' : 'tv', year: SC.dayOf(s.data?.dates)?.y || Number(s.year) || 0, yearText: s.data?.dates || '',
                 work: {iid: s.id, title: s.title, kind: 'series'}, character: p.mode === 'job' ? '' : (p.character || ''), rkind: p.mode === 'job' ? '' : (p.rkind || ''), job: p.mode === 'job' ? (p.job || 'métier') : '', director: s.data?.creator ? ART.normPeople(s.data.creator)[0] : null,
                 credit: p.credit && p.credit !== store.name ? `« ${p.credit} »` : '', eps: SC.epsLabel ? SC.epsLabel(store, s, eps) : (eps.length ? plural(eps.length, 'épisode') : ''), epsN: eps.length, photos: s.data?.photos}); }));
         // les soirs (U) : ses rôles du soir, regroupés par mise en scène et par rôle
         const stage = new Map();
-        SC.concerts(store).forEach(c => (c.data?.cast_night || []).forEach(r => { if (U.person(r.who)?.pid !== Number(store.pid)) return;
+        SC.concerts(store).forEach(c => (Array.isArray(c.data?.cast_night) ? c.data.cast_night : []).forEach(r => { if (U.person(r.who)?.pid !== Number(store.pid)) return;
             const st = U.ref(c.data?.staging), wk = st?.iid ? `i${st.iid}` : `t${fold(c.data?.show || c.title)}`, k = `${wk}|${fold(r.role)}`;
             const x = stage.get(k) || {st, show: c.data?.show || c.title, role: r.role || '', n: 0, subst: 0, ys: [], first: c}; x.n++; if (r.status === 'remplacant' || r.status === 'doublure') x.subst++; if (r.status === 'creation') x.creation = true;
             const y = SC.dayOf(c.data?.date)?.y || Number(c.year); if (y) x.ys.push(y); stage.set(k, x); }));
@@ -262,7 +262,7 @@
         return {count: l.length || '', body: (l.length ? l.map(x => `<div class="sc-mline">${x}</div>`).join('') : '<p class="muted">Rien de noté : « … » pour l’écrire.</p>') + (d.union ? `<p class="ar-g">Syndicat : ${esc(d.union)}</p>` : ''), actions: editBtn}; }};
     PS.actor_castings = {icon: '🎬', label: 'Castings', w: '⅓', profile: 'actor', render: C => { const l = prof(C)?.data?.castings || [], ok = l.filter(r => r.result === 'obtenu').length;
         return {count: l.length || '', body: l.length ? `<p><b>${esc(plural(l.length, 'casting noté', 'castings notés'))}</b> · ${esc(plural(ok, 'obtenu'))}</p>${l.slice(-5).reverse().map(r => `<div class="sc-mline">${esc([r.date, r.project, r.role].filter(Boolean).join(' · '))} ${r.result ? `<span class="ar-badge ${r.result === 'obtenu' ? 'ok' : ''}">${esc({obtenu: 'obtenu', rappel: 'rappelé(e)', non: 'pas retenu(e)', attente: 'en attente'}[r.result] || r.result)}</span>` : ''}</div>`).join('')}` : '<p class="muted">Aucun casting noté.</p>', actions: editBtn}; }};
-    PS.actor_prizes = {icon: '🏆', label: 'Prix et nominations', w: '⅓', profile: 'actor', render: C => { const p = prof(C), l = [...(p?.data?.prizes || []), ...C.store.of('role').flatMap(r => (r.data?.prizes || []).map(x => ({...x, work: {iid: r.id, title: r.title, kind: 'role'}})))].sort((a, b) => (Number(U.yearOf(a.year)) || 0) - (Number(U.yearOf(b.year)) || 0));
+    PS.actor_prizes = {icon: '🏆', label: 'Prix et nominations', w: '⅓', profile: 'actor', render: C => { const p = prof(C), l = [...ART.arr(p?.data?.prizes), ...C.store.of('role').flatMap(r => ART.arr(r.data?.prizes).map(x => ({...x, work: {iid: r.id, title: r.title, kind: 'role'}})))].sort((a, b) => (Number(U.yearOf(a.year)) || 0) - (Number(U.yearOf(b.year)) || 0));
         return {count: l.length || '', body: l.length ? l.map(r => `<div class="sc-mline">${esc(r.year || '')} · ${esc(r.prize || '')}${r.work ? ` — ${U.refChip(r.work)}` : ''} <span class="sc-res ${r.status === 'nomme' ? '' : 'w'}">${r.status === 'nomme' ? 'nommé(e)' : 'lauréat(e)'}</span></div>`).join('') : '<p class="muted">Aucun prix noté.</p>', actions: editBtn}; }};
     PS.actor_skills = {icon: '🗣', label: 'Compétences, physique, voix', w: '⅓', profile: 'actor', render: C => { const d = prof(C)?.data || {}, f = ART.fieldsOf(ART.defs.profile_actor).filter(x => ['skills', 'identity'].includes(ART.defs.profile_actor.groups.find(g => g.fields.includes(x))?.key) && !['title', 'stage_names'].includes(x.key));
         const lines = f.map(x => { const v = d[x.key]; if (!v || (Array.isArray(v) && !v.length)) return ''; return `<dt>${esc(x.label)}</dt><dd>${esc(ART.ft[x.type]?.text ? ART.ft[x.type].text(x, v) : String(v))}</dd>`; }).join('');
@@ -286,6 +286,8 @@
     ART.profiles.actor.defaultModel = () => 'acteur';
     ART.profiles.actor.sections = ACTOR_KEYS;
     // pour « Cette personne était… » et la page combinée (heritage-profils.js) : groupe, sortes, frise, en-tête
+    // « Tout mélangé » d'un acteur : l'ancienne « Filmographie » de l'artiste ferait doublon avec « Rôles · filmographie » et « Filmographie » de l'acteur
+    if (ART.pageSections.filmo) ART.pageSections.filmo.hideIf = (C, view) => view === 'all' && SC.isActor(C.store);
     Object.assign(ART.profiles.actor, {group: 'creation', desc: 'rôles au cinéma, à la télévision, au théâtre, voix, publicité ; filmographie, statistiques',
         kinds: ['role', 'series', 'concert'],
         summary: st => actorSummary(SC.actorEntries(st)),

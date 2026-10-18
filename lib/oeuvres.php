@@ -9,6 +9,7 @@ declare(strict_types=1);
  *  - les clés permises (« o_… » et la fiche de profil « profile_artisan »), déclarées au moteur par $GLOBALS['ART_EXTRA_TYPES']
  *    (lu par art_extra_types() de lib/art_engine.php) : clé => [nom, pluriel, icône, famille, type parent, profil(s)] ;
  *    les œuvres sont rangées dans le profil « artist » (case « Artiste » proposée au premier enregistrement, comme A–H) ;
+ *    les pièces de métiers d'art dans « artisan » ou « artist » (« Artisan d’art » proposé d'abord) ;
  *  - oeuvres_register_type() : la ligne item_types d'un type (nom, icône) écrite au premier enregistrement d'une fiche, pour
  *    que le menu de choix (« artwork ») et les pastilles disent « Sculpture 🗿 » ;
  *  - oeuvres_subline() : la ligne grise d'une fiche dans le menu de choix et « Lié à ».
@@ -24,7 +25,7 @@ const OEUVRES_TYPES = [
     'o_mes' => ['Mise en scène', 'Mises en scène', '🎭', 'stage', 'o_piece', ['artist']],
     'o_representation' => ['Représentation', 'Représentations', '🎟', 'stage', 'o_mes', ['artist']],
     'o_tournee' => ['Tournée', 'Tournées', '🚌', 'stage', 'o_mes', ['artist']],
-    'o_ferronnerie' => ['Ferronnerie d’art', 'Pièces de ferronnerie', '⚒️', 'design', '', ['artist']],
+    'o_ferronnerie' => ['Ferronnerie d’art', 'Pièces de ferronnerie', '⚒️', 'design', '', ['artisan', 'artist']],
     'o_dessin' => ['Dessin', 'Dessins', '✏️', 'visual', '', ['artist']],
     'o_aquarelle' => ['Aquarelle · pastel · gouache', 'Aquarelles, pastels, gouaches', '🎨', 'visual', '', ['artist']],
     'o_gravure' => ['Gravure · estampe', 'Gravures et estampes', '🪵', 'visual', '', ['artist']],
@@ -33,8 +34,8 @@ const OEUVRES_TYPES = [
     'o_collage' => ['Collage · assemblage', 'Collages et assemblages', '✂️', 'visual', '', ['artist']],
     'o_fresque' => ['Fresque · peinture murale', 'Fresques et peintures murales', '🏛', 'visual', '', ['artist']],
     'o_streetart' => ['Street art · graffiti', 'Street art', '🧯', 'visual', '', ['artist']],
-    'o_mosaique' => ['Mosaïque', 'Mosaïques', '◼️', 'visual', '', ['artist']],
-    'o_vitrail' => ['Vitrail', 'Vitraux', '🪟', 'visual', '', ['artist']],
+    'o_mosaique' => ['Mosaïque', 'Mosaïques', '◼️', 'visual', '', ['artisan', 'artist']],
+    'o_vitrail' => ['Vitrail', 'Vitraux', '🪟', 'visual', '', ['artisan', 'artist']],
     'o_icone' => ['Icône · enluminure', 'Icônes et enluminures', '📜', 'visual', '', ['artist']],
     'o_calligraphie' => ['Calligraphie', 'Calligraphies', '🖋', 'visual', '', ['artist']],
     'o_illustration' => ['Illustration', 'Illustrations', '🖍', 'visual', '', ['artist']],
@@ -94,18 +95,18 @@ const OEUVRES_TYPES = [
     'o_police' => ['Police de caractères', 'Polices de caractères', '🅰️', 'design', '', ['artist']],
     'o_design' => ['Design d’objet', 'Objets (design)', '🪑', 'design', '', ['artist']],
     'o_mode' => ['Mode (collection → modèle)', 'Collections de mode', '👗', 'design', '', ['artist']],
-    'o_ceramique' => ['Céramique · faïence · porcelaine', 'Céramiques', '🏺', 'design', '', ['artist']],
-    'o_verre' => ['Verre · cristal', 'Pièces de verre', '🫙', 'design', '', ['artist']],
-    'o_orfevrerie' => ['Orfèvrerie · bijou', 'Pièces d’orfèvrerie et bijoux', '💍', 'design', '', ['artist']],
-    'o_tapisserie' => ['Tapisserie · tissage', 'Tapisseries et tissages', '🧵', 'design', '', ['artist']],
-    'o_broderie' => ['Broderie · dentelle', 'Broderies et dentelles', '🪡', 'design', '', ['artist']],
-    'o_ebenisterie' => ['Ébénisterie · marqueterie', 'Meubles', '🪵', 'design', '', ['artist']],
-    'o_reliure' => ['Reliure', 'Reliures', '📕', 'design', '', ['artist']],
-    'o_lutherie' => ['Instrument (lutherie, facture)', 'Instruments', '🎻', 'design', '', ['artist']],
-    'o_horlogerie' => ['Horlogerie', 'Pièces d’horlogerie', '🕰', 'design', '', ['artist']],
-    'o_medaille' => ['Médaille · sceau', 'Médailles et sceaux', '🏅', 'design', '', ['artist']],
+    'o_ceramique' => ['Céramique · faïence · porcelaine', 'Céramiques', '🏺', 'design', '', ['artisan', 'artist']],
+    'o_verre' => ['Verre · cristal', 'Pièces de verre', '🫙', 'design', '', ['artisan', 'artist']],
+    'o_orfevrerie' => ['Orfèvrerie · bijou', 'Pièces d’orfèvrerie et bijoux', '💍', 'design', '', ['artisan', 'artist']],
+    'o_tapisserie' => ['Tapisserie · tissage', 'Tapisseries et tissages', '🧵', 'design', '', ['artisan', 'artist']],
+    'o_broderie' => ['Broderie · dentelle', 'Broderies et dentelles', '🪡', 'design', '', ['artisan', 'artist']],
+    'o_ebenisterie' => ['Ébénisterie · marqueterie', 'Meubles', '🪵', 'design', '', ['artisan', 'artist']],
+    'o_reliure' => ['Reliure', 'Reliures', '📕', 'design', '', ['artisan', 'artist']],
+    'o_lutherie' => ['Instrument (lutherie, facture)', 'Instruments', '🎻', 'design', '', ['artisan', 'artist']],
+    'o_horlogerie' => ['Horlogerie', 'Pièces d’horlogerie', '🕰', 'design', '', ['artisan', 'artist']],
+    'o_medaille' => ['Médaille · sceau', 'Médailles et sceaux', '🏅', 'design', '', ['artisan', 'artist']],
     'o_exlibris' => ['Ex-libris', 'Ex-libris', '🔖', 'design', '', ['artist']],
-    'o_piece_art' => ['Pièce de métier d’art', 'Pièces de métiers d’art', '⚒️', 'design', '', ['artist']],
+    'o_piece_art' => ['Pièce de métier d’art', 'Pièces de métiers d’art', '⚒️', 'design', '', ['artisan', 'artist']],
     'o_architecture' => ['Architecture · bâtiment', 'Bâtiments', '🏠', 'space', '', ['artist']],
     'o_jardin' => ['Jardin · paysage', 'Jardins', '🌳', 'space', '', ['artist']],
     'o_urbanisme' => ['Urbanisme · aménagement', 'Aménagements', '🗺', 'space', '', ['artist']],

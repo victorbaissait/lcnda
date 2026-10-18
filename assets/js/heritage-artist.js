@@ -79,7 +79,7 @@
         return `<button type="button" class="ar-ochip is-link" data-ar-open="${r.iid}"><i>${esc(icon || ART.defs[r.kind]?.icon || '✦')}</i>${esc(r.title || `#${r.iid}`)}${extra}</button>`;
     };
     U.placeChip = v => { const r = U.place(v); if (!r) return ''; return r.plid ? `<button type="button" class="ar-ochip" data-ar-place="${r.plid}"><i>📍</i>${esc(r.title)}</button>` : `<span class="ar-ochip is-free"><i>📍</i>${esc(r.txt)}</span>`; };
-    U.cover = (it, cls = 'ar-cov') => { const src = U.photoSrc((it?.data?.photos || [])[0]); return src ? `<img class="${cls}" src="${esc(src)}" alt="" loading="lazy" data-ar-img>` : `<span class="${cls} is-empty">${esc(ART.defs[it?.kind]?.icon || '✦')}</span>`; };
+    U.cover = (it, cls = 'ar-cov') => { const src = U.photoSrc(ART.arr(it?.data?.photos)[0]); return src ? `<img class="${cls}" src="${esc(src)}" alt="" loading="lazy" data-ar-img>` : `<span class="${cls} is-empty">${esc(ART.defs[it?.kind]?.icon || '✦')}</span>`; };
 
     /* ═════════ Les réglages « Champs affichés » : définition + réglage global (ou propre à l'artiste) ═════════ */
     const TABS = ['fiche', 'liste', 'vignettes', 'export'];
@@ -103,6 +103,23 @@
         return {groups, fields, hideEmpty: store?.settings?.hideEmpty !== false, def};
     };
 
+    /** des données reçues remises en forme d'après la définition : une liste attendue (lignes, personnes, photos, fiches liées,
+     *  étiquettes) qui n'en est pas une devient une liste vide — un fichier importé ou un envoi forgé ne casse pas l'affichage */
+    /** une liste, ou une liste vide (une valeur d'un autre type venue d'un envoi forgé ou d'un vieux fichier) */
+    ART.arr = v => Array.isArray(v) ? v : [];
+    const LISTY = new Set(['rows', 'people', 'photos', 'items', 'tags', 'list']);
+    ART.sane = (kind, data) => {
+        const d = data && typeof data === 'object' && !Array.isArray(data) ? data : {};
+        (ART.defs[kind]?.groups || []).forEach(g => (g.fields || []).forEach(f => {
+            const v = d[f.key]; if (v == null) return;
+            if (LISTY.has(f.type) && !Array.isArray(v)) d[f.key] = f.type === 'photos' && v && typeof v === 'object' ? [v] : [];
+            else if (LISTY.has(f.type) && f.type === 'rows') d[f.key] = v.filter(r => r && typeof r === 'object' && !Array.isArray(r));
+            else if (['person', 'place', 'item', 'media', 'document'].includes(f.type) && typeof v !== 'object' && typeof v !== 'string') d[f.key] = String(v);
+        }));
+        if (d.title != null && typeof d.title !== 'string') d.title = String(d.title);
+        return d;
+    };
+
     /* ═════════ Les données d'un artiste (une « boutique » par catalogue ouvert) ═════════ */
     class Store {
         constructor(pid) { this.pid = pid; this.items = []; this.links = []; this.people = []; this.byId = new Map(); this.extra = new Map(); this.settings = {}; this.global = {}; this.personSet = null; this.presets = []; this.types = []; this.cited = []; this.person = {}; }
@@ -111,9 +128,11 @@
             this.person = r.person || {}; this.items = r.items || []; this.links = r.links || []; this.people = r.people || []; this.cited = r.cited || [];
             this.global = r.settings?.global || {}; this.personSet = r.settings?.person || null; this.presets = Array.isArray(r.settings?.presets?.list) ? r.settings.presets.list : [];
             this.types = r.types || []; ART.loadTypes(this.types);
-            this.items.forEach(it => { it.person_id = this.pid; it.data = it.data || {}; try { ART.defs[it.kind]?.upgrade?.(it.data); } catch (_) {} }); // les fiches d'avant : mises au format du moteur (enregistré à la prochaine modification)
+            this.items.forEach(it => { it.person_id = this.pid; it.data = ART.sane(it.kind, it.data); try { ART.defs[it.kind]?.upgrade?.(it.data); } catch (_) {} }); // les fiches d'avant : mises au format du moteur (enregistré à la prochaine modification)
             this.byId = new Map(this.items.map(i => [i.id, i]));
             this.settings = this.personSet?.own ? this.personSet : this.global;
+            // fiche verrouillée ou mode consultation : tout se lit, rien ne se modifie
+            this.readonly = !!Number(this.person.is_locked) || !!this.person.kiosk || !!document.body?.classList?.contains('is-kiosk');
             return this;
         }
         get name() { const p = this.person; return `${p.first_name || ''} ${String(p.last_name || '').toLocaleUpperCase('fr-FR')}`.trim() || 'Artiste'; }
@@ -122,7 +141,7 @@
         /** une fiche d'un autre artiste (ouverte depuis un lien) */
         async ensure(id) {
             id = Number(id); if (this.get(id)) return this.get(id);
-            const r = await api('art', {op: 'item', id}); const it = r.item; try { ART.defs[it.kind]?.upgrade?.(it.data); } catch (_) {} this.extra.set(it.id, it);
+            const r = await api('art', {op: 'item', id}); const it = r.item; it.data = ART.sane(it.kind, it.data); try { ART.defs[it.kind]?.upgrade?.(it.data); } catch (_) {} this.extra.set(it.id, it);
             (r.links || []).forEach(l => { if (!this.links.some(x => x.id === l.id)) this.links.push(l); });
             (r.people || []).forEach(p => { if (!this.people.some(x => x.item_id === p.item_id && x.person_id === p.person_id && x.field === p.field)) this.people.push(p); });
             return it;
@@ -314,13 +333,16 @@
             Object.assign(S, {view: 'item', id: it.id, kind: it.kind, edit, draft: edit ? clone(it.data || {}) : null, dirty: false}); paint(true);
         }
         function newItem(kind, preset = {}) {
+            if (store.readonly) return roMsg();
             const def = ART.defs[kind]; if (!def) return;
             const data = {title: '', ...(def.newData ? def.newData(store) : {}), ...preset};
             if (S.view !== 'item' || S.id) S.back.push({view: S.view, kind: S.kind, id: S.id});
             Object.assign(S, {view: 'item', kind, id: 0, edit: true, draft: data, dirty: false, newData: data}); paint(true);
             setTimeout(() => body.querySelector('[data-fk="title"] input')?.focus(), 30);
         }
-        function startEdit() { const it = store.get(S.id); if (!it) return; S.edit = true; S.draft = clone(it.data || {}); S.dirty = false; paint(); }
+        const roMsg = () => toast(store.person.kiosk || document.body.classList.contains('is-kiosk') ? 'Mode consultation : rien ne peut être modifié.' : 'Fiche verrouillée : déverrouille la fiche de la personne pour la modifier.', 'error');
+        C.readonly = () => !!store.readonly; C.roMsg = roMsg;
+        function startEdit() { if (store.readonly) return roMsg(); const it = store.get(S.id); if (!it) return; S.edit = true; S.draft = clone(it.data || {}); S.dirty = false; paint(); }
         const current = () => S.id ? store.get(S.id) : {id: 0, kind: S.kind, title: S.draft?.title || '', data: S.draft || {}, person_id: pid};
         C.current = current;
 
@@ -332,7 +354,7 @@
                 const eb = (def.eyebrow ? def.eyebrow(it, store) : def.label || '').toLocaleUpperCase('fr-FR');
                 return `<span class="ar-ticon">${esc(def.icon || '✦')}</span><div class="ar-tname"><span class="eyebrow">${esc(eb)}</span><h2>${esc((S.edit ? S.draft?.title : it.title) || (it.id ? 'Sans titre' : `${def.fem ? 'Nouvelle' : 'Nouveau'} : ${String(def.label || '').toLowerCase()}`))}</h2></div>
                     ${it.id && !it.summary ? `<span class="segmented ar-mode"><button type="button" class="${S.edit ? '' : 'is-active'}" data-ar-cmd="read">Lecture</button><button type="button" class="${S.edit ? 'is-active' : ''}" data-ar-cmd="edit">✎ Modifier</button></span>` : ''}
-                    <span class="spacer"></span><span class="ar-status" data-ui-status></span>
+                    <span class="spacer"></span>${store.readonly ? `<span class="ar-rotag" title="Rien ne peut être modifié ici">🔒 ${store.person.kiosk ? 'Consultation' : 'Fiche verrouillée'}</span>` : ''}<span class="ar-status" data-ui-status></span>
                     <button type="button" class="button small secondary" data-ar-cmd="fields" title="Afficher, masquer, ranger les champs ; ajouter les tiens">⚙️ Champs affichés</button>
                     ${it.id ? '<button type="button" class="button small secondary" data-ar-cmd="export" title="La fiche en PDF, à imprimer, ou en fichier">⤓ Exporter ▾</button>' : ''}
                     ${S.edit ? `<button type="button" class="button small" data-ar-cmd="save" data-shortcut="⌘S">💾 Enregistrer</button>` : ''}${full}<button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer" title="Fermer">×</button>`;
@@ -343,7 +365,7 @@
             const n = S.view === 'list' ? store.of(S.kind).length : 0;
             return `<span class="ar-ticon">${S.view === 'page' && PH ? esc(PH.icon) : S.view === 'page' ? esc(ART.profiles?.[(store.person.profiles || [])[0]?.profile_key]?.icon || '🎨') : esc(def.icon || '✦')}</span><div class="ar-tname"><span class="eyebrow">${esc(eb)}</span><h2>${esc(store.name)}${S.view === 'list' ? ` — ${esc(plural(n, String(def.label || '').toLowerCase(), String(def.many || '').toLowerCase()))}` : ''}</h2></div>
                 <nav class="segmented ar-tabs" data-ar-tabs><button type="button" class="${S.view === 'page' ? 'is-active' : ''}" data-ar-tab="page">${esc(PH?.tab || '🎨 Page')}</button>${kinds.map(k => `<button type="button" class="${S.view === 'list' && S.kind === k ? 'is-active' : ''}" data-ar-tab="${k}">${esc(ART.defs[k].icon)} ${esc(ART.defs[k].tab || ART.defs[k].many)}</button>`).join('')}<button type="button" data-ar-cmd="morekinds" title="Les autres sortes de fiches, et créer la tienne">＋</button></nav>
-                <span class="spacer"></span>
+                <span class="spacer"></span>${store.readonly ? `<span class="ar-rotag" title="Rien ne peut être modifié ici">🔒 ${store.person.kiosk ? 'Consultation' : 'Fiche verrouillée'}</span>` : ''}
                 ${S.view === 'list' ? `<button type="button" class="button small" data-ar-cmd="new">＋ ${def.fem ? 'Nouvelle' : 'Nouveau'} ${esc(String(def.label || '').toLowerCase())}</button><button type="button" class="button small secondary" data-ar-cmd="import" data-help="Remplit le catalogue depuis Discogs, MusicBrainz, Apple Music, Open Library, Wikidata, TMDb, un tableau, ou un fichier exporté d’ici : tu choisis ce qui entre, rien n’est écrasé.">📥 Importer</button>${['work', 'release', 'master'].includes(S.kind) ? `<button type="button" class="button small secondary" data-ar-cmd="book" title="Le catalogue raisonné ou la discographie en livre, dans la mise en page">📖 Faire le livre…</button>` : ''}<button type="button" class="button small secondary" data-ar-cmd="export" title="Tableur, PDF, impression, fichier (réimportable)">⤓ Exporter ▾</button>` : `<button type="button" class="button small" data-ar-cmd="morekinds" data-oe-mode="new" title="Toutes les sortes d’œuvres, rangées par familles">＋ Nouvelle œuvre</button><button type="button" class="button small secondary" data-ar-cmd="organize" title="Ranger, cacher les sections, choisir leur largeur">⚙️ Organiser la page</button>`}
                 <button type="button" class="button small secondary" data-ar-cmd="keys" title="Jeton Discogs, clé TMDb (facultatifs, gardés dans ce navigateur)">🔑</button>${full}<button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer" title="Fermer">×</button>`;
         }
@@ -354,6 +376,8 @@
             return `<div class="ar-crumb">${owner} › <button type="button" class="ar-linkbtn" data-ar-tab="${esc(it.kind)}">${esc(def.icon || '')} ${esc(def.many || '')}</button> › <b>${esc(it.title || (S.draft?.title) || 'Nouvelle fiche')}</b>${extra}</div>`;
         }
         function paint(top = true) {
+            dlg.classList.toggle('ar-ro', !!store.readonly); // lecture seule : les boutons qui modifient sont cachés (artist.css)
+            if (store.readonly && S.edit) { S.edit = false; S.draft = null; S.dirty = false; if (!S.id) { S.view = 'list'; } }
             if (top) $('[data-ar-top]').innerHTML = topHtml();
             const keep = body.scrollTop;
             if (S.view === 'item') {
@@ -373,6 +397,7 @@
         function save() { if (!saving) saving = saveOnce().finally(() => { saving = null; }); return saving; }
         async function saveOnce() {
             if (!S.edit) return;
+            if (store.readonly) return roMsg();
             collect(body, store, current(), S.draft);
             if (!String(S.draft.title || '').trim()) { toast('Il faut un titre.', 'error'); body.querySelector('[data-fk="title"] input')?.focus(); return; }
             const def = ART.defs[S.kind]; def.beforeSave?.(S.draft, store);

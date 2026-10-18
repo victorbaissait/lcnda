@@ -112,7 +112,7 @@
                         let it; try { it = c.full ? await c.full() : clone(c.item); } catch (er) { toast(`${c.title} : ${er.message}`, 'error'); continue; }
                         if (!it) continue; it.data.title = String(it.data.title || c.title || '').trim() || 'Sans titre';
                         const kind = it.kind || tab; tidy(kind, it.data); if (nodup && have.has(sameKey({kind, data: it.data}))) { skipped++; continue; }
-                        if (imgs) { const ph = []; for (const p of (it.data.photos || []).slice(0, 8)) { if (!p.u) { ph.push(p); continue; } try { const r = await post('artist_fetch_image', {person_id: pid, url: p.u, title: it.data.title}); ph.push({mid: r.id, f: r.filename, k: p.k, c: p.c || ''}); } catch (_) { ph.push(p); } } it.data.photos = ph; } // pas rapatriée : l'adresse reste, « ↻ Réessayer de rapatrier » dans le formulaire
+                        if (imgs) { const ph = []; for (const p of ART.arr(it.data.photos).slice(0, 8)) { if (!p.u) { ph.push(p); continue; } try { const r = await post('artist_fetch_image', {person_id: pid, url: p.u, title: it.data.title}); ph.push({mid: r.id, f: r.filename, k: p.k, c: p.c || ''}); } catch (_) { ph.push(p); } } it.data.photos = ph; } // pas rapatriée : l'adresse reste, « ↻ Réessayer de rapatrier » dans le formulaire
                         out.push({kind, data: it.data}); have.add(sameKey({kind, data: it.data})); done++;
                         if (out.length >= 20) { await ART.write('save_items', {person_id: pid, items: out.splice(0), ...extra}); }
                     }

@@ -75,7 +75,7 @@
         upgrade: d => { (d.tracks || []).forEach(t => { if (typeof t.credits === 'string') t.credits = t.credits.split(/\s*·\s*/).filter(Boolean).map(x => { const m = x.match(/^(.*?)\s*:\s*(.+)$/); return m ? {role: m[1].trim(), pname: m[2].trim()} : {pname: x.trim()}; }); });
             if (Array.isArray(d.credits)) d.credits = d.credits.map(c => c && c.name && !c.pid && !c.pname ? {pname: c.name, role: c.role || '', tracks: c.tracks || ''} : c); },
         linkedSkip: ['recording', 'org'],
-        linkedExtra: (ctx, it) => { const st = ctx.store, recs = (it.data?.tracks || []).map(t => U.ref(t.rec)).filter(r => r?.iid).map(r => st.get(r.iid)).filter(Boolean);
+        linkedExtra: (ctx, it) => { const st = ctx.store, recs = ART.arr(it.data?.tracks).map(t => U.ref(t.rec)).filter(r => r?.iid).map(r => st.get(r.iid)).filter(Boolean);
             const works = new Set(recs.map(r => U.ref(r.data?.work)?.iid).filter(Boolean)); const n = k => recs.filter(r => (r.data.rkind || 'prise') === k).length;
             const bits = [n('prise') && `🎙 ${U.plural(n('prise'), 'prise')}`, n('mixage') && `🎚 ${U.plural(n('mixage'), 'mixage')}`, n('remaster') && `✨ ${U.plural(n('remaster'), 'remaster')}`].filter(Boolean);
             return (works.size ? `<div><span class="ar-ochip is-link"><i>🎵</i>${esc(U.plural(works.size, 'morceau', 'morceaux'))}</span>${bits.length ? `<span class="ar-ochip is-link">${esc(bits.join(' · '))}</span>` : ''}</div>` : ''); },
@@ -84,7 +84,7 @@
     /* les pistes : « Avec les crédits » / « Paroles », la pastille violette de l'enregistrement (→ le morceau), le lecteur */
     const PREFK = 'genealogie-artist-tracks';
     ART.views.tracks = {
-        meta: (ctx, it) => { const t = (it.data?.tracks || []).filter(x => !x.heading); const tot = t.reduce((a, x) => a + U.secs(x.dur), 0); return t.length ? `${esc(U.plural(t.length, 'titre'))}${tot ? ` · ${U.hms(tot)}` : ''}` : ''; },
+        meta: (ctx, it) => { const t = ART.arr(it.data?.tracks).filter(x => !x.heading); const tot = t.reduce((a, x) => a + U.secs(x.dur), 0); return t.length ? `${esc(U.plural(t.length, 'titre'))}${tot ? ` · ${U.hms(tot)}` : ''}` : ''; },
         actions: () => { const p = (() => { try { return JSON.parse(localStorage.getItem(PREFK) || '{}'); } catch (_) { return {}; } })(); return `<span class="ui-filters ar-tfilt"><button type="button" class="${p.credits === false ? '' : 'is-active'}" data-ar-tf="credits">Avec les crédits</button><button type="button" class="${p.lyrics ? 'is-active' : ''}" data-ar-tf="lyrics">Paroles</button></span>`; },
         read: (ctx, it) => {
             const st = ctx.store, d = it.data || {}, tracks = d.tracks || [], disc = ART.normPeople(d.credits);
