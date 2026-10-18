@@ -42,7 +42,7 @@ function board_detail(PDO $pdo, int $id): array
     $s = $pdo->prepare('SELECT * FROM boards WHERE id=?'); $s->execute([$id]);
     $b = $s->fetch();
     if (!$b) { throw new RuntimeException('Tableau introuvable.'); }
-    $data = json_decode((string) $b['data_json'], true) ?: ['items' => []];
+    $data = board_clean_read((string) $b['data_json']);
     // médias posés sur le tableau : leurs fichiers et leur sorte
     $mids = [];
     foreach ($data['items'] ?? [] as $it) { if (!empty($it['media_id'])) { $mids[] = (int) $it['media_id']; } }
@@ -60,6 +60,24 @@ function board_detail(PDO $pdo, int $id): array
     return ['id' => (int) $b['id'], 'title' => (string) $b['title'], 'icon' => (string) $b['icon'], 'color' => (string) $b['color'], 'owner_type' => (string) $b['owner_type'],
         'owner_id' => (int) $b['owner_id'], 'owner_label' => board_owner_label($pdo, (string) $b['owner_type'], (int) $b['owner_id']), 'part' => (string) $b['part'], 'status' => (string) ($b['status'] ?? 'open'),
         'parent_id' => $b['parent_id'] !== null ? (int) $b['parent_id'] : null, 'path' => $path, 'data' => $data, 'media' => $media, 'updated_at' => $b['updated_at']];
+}
+
+/**
+ * Contenu d'un tableau relu depuis la base, repassé au même nettoyage qu'à l'enregistrement :
+ * une base ou une sauvegarde venue d'ailleurs (un cousin…) ne peut pas glisser de code dans un tableau.
+ */
+function board_clean_read(string $json): array
+{
+    $data = json_decode($json, true);
+    if (!is_array($data)) { return ['items' => []]; }
+    $data['items'] = array_values(array_filter(array_map(static fn($it) => is_array($it) ? board_clean_item($it) : null, array_slice(is_array($data['items'] ?? null) ? $data['items'] : [], 0, 3000))));
+    $data['links'] = board_clean_links($data['links'] ?? []);
+    foreach (['bgColor'] as $k) { if (isset($data[$k]) && !preg_match('/^#[0-9a-f]{6}$/i', (string) $data[$k])) { $data[$k] = ''; } }
+    if (isset($data['bg']) && !in_array($data['bg'], ['dots', 'grid', 'lines', 'plain', 'paper', 'dark', 'cork', 'custom'], true)) { $data['bg'] = 'dots'; }
+    if (isset($data['bgPattern']) && !in_array($data['bgPattern'], ['', 'dots', 'grid', 'lines'], true)) { $data['bgPattern'] = ''; }
+    $data['layers'] = array_values(array_filter(array_map(static fn($l) => is_array($l) && ($id0 = preg_replace('/[^a-z0-9_-]/i', '', (string) ($l['id'] ?? ''))) !== '' ? ['id' => $id0, 'name' => mb_substr(safe_text($l['name'] ?? 'Calque'), 0, 60) ?: 'Calque', 'hidden' => !empty($l['hidden']), 'locked' => !empty($l['locked'])] : null, array_slice(is_array($data['layers'] ?? null) ? $data['layers'] : [], 0, 30))));
+    $data['steps'] = array_values(array_filter(array_map(static fn($st) => is_array($st) && is_numeric($st['w'] ?? null) ? ['id' => preg_replace('/[^a-z0-9_-]/i', '', (string) ($st['id'] ?? '')) ?: 's' . bin2hex(random_bytes(3)), 'name' => mb_substr(safe_text($st['name'] ?? ''), 0, 80), 'x' => (float) ($st['x'] ?? 0), 'y' => (float) ($st['y'] ?? 0), 'w' => max(10, (float) $st['w']), 'h' => max(10, (float) ($st['h'] ?? 10))] : null, array_slice(is_array($data['steps'] ?? null) ? $data['steps'] : [], 0, 100))));
+    return $data;
 }
 
 /** Garde ce qui est sûr dans un élément du tableau (les textes restent des textes, les adresses web sont vérifiées) */
@@ -252,7 +270,7 @@ function boards_linked(PDO $pdo, string $kind, int $id): array
         $parts = [];
         if ($r['parent_id'] === null && $r['owner_type'] === $kind && (int) $r['owner_id'] === $id) { $parts[] = (string) $r['part']; }
         if (str_contains((string) $r['data_json'], '"links"')) {
-            foreach ((json_decode((string) $r['data_json'], true)['links'] ?? []) as $l) { if (($l['kind'] ?? '') === $kind && (int) ($l['id'] ?? 0) === $id) { $parts[] = (string) ($l['part'] ?? ''); } }
+            foreach (board_clean_links(json_decode((string) $r['data_json'], true)['links'] ?? []) as $l) { if (($l['kind'] ?? '') === $kind && (int) ($l['id'] ?? 0) === $id) { $parts[] = (string) ($l['part'] ?? ''); } }
         }
         if (!$parts) { continue; }
         unset($r['data_json'], $r['parent_id']);
@@ -273,7 +291,7 @@ function board_snapshot_detail(PDO $pdo, int $id): array
 {
     $s = $pdo->prepare('SELECT * FROM board_snapshots WHERE id=?'); $s->execute([$id]); $r = $s->fetch();
     if (!$r) { throw new RuntimeException('Instantané introuvable.'); }
-    return ['id' => (int) $r['id'], 'board_id' => (int) $r['board_id'], 'label' => (string) $r['label'], 'created_at' => (string) $r['created_at'], 'data' => json_decode((string) $r['data_json'], true) ?: ['items' => []]];
+    return ['id' => (int) $r['id'], 'board_id' => (int) $r['board_id'], 'label' => (string) $r['label'], 'created_at' => (string) $r['created_at'], 'data' => board_clean_read((string) $r['data_json'])];
 }
 function save_board_snapshot(PDO $pdo, array $data): array
 {
