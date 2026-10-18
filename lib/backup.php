@@ -134,6 +134,22 @@ function is_restore_upload(array $file): bool
 }
 
 /** Contrôle qu'un fichier est bien une base de l'application, lisible et intacte. Renvoie le nombre de personnes. */
+/**
+ * Une base reçue d'ailleurs ne garde ni déclencheur (TRIGGER) ni vue : l'app n'en crée aucun, et un déclencheur
+ * caché pourrait modifier la base à chaque enregistrement (réécrire un réglage, renommer une fiche…).
+ */
+function backup_strip_triggers(string $path): int
+{
+    $db = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    $removed = 0;
+    foreach ($db->query("SELECT type, name FROM sqlite_master WHERE type IN ('trigger','view')")->fetchAll(PDO::FETCH_ASSOC) as $o) {
+        $db->exec('DROP ' . ($o['type'] === 'view' ? 'VIEW' : 'TRIGGER') . ' IF EXISTS "' . str_replace('"', '""', (string) $o['name']) . '"');
+        $removed++;
+    }
+    $db = null;
+    return $removed;
+}
+
 function validate_restore_database(string $path): array
 {
     try {
@@ -146,6 +162,9 @@ function validate_restore_database(string $path): array
     if ($missing) {
         throw new RuntimeException('Ce fichier n’est pas une base du Carnet numérique des ancêtres (tables absentes : ' . implode(', ', $missing) . ').');
     }
+    $check = null;
+    backup_strip_triggers($path);
+    $check = new PDO('sqlite:' . $path, null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     $version = (int) $check->query('PRAGMA user_version')->fetchColumn();
     if ($version > SCHEMA_VERSION) {
         throw new RuntimeException('Cette base vient d’une version plus récente de l’application : mets LCNDA à jour pour l’ouvrir.');

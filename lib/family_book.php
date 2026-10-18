@@ -341,7 +341,7 @@ function family_book_csv(array $m): string
 {
     $rows = [['Nom', 'Prénoms', 'Numéro', 'Naissance', 'Décès', 'Parents', 'Conjoint(s)', 'Enfants']];
     foreach ($m['persons'] as $p) { $rows[] = [$p['last_name'], $p['first_name'], $p['number'], $p['birth'], $p['death'], implode(' ; ', $p['parents']), implode(' ; ', $p['partners']), implode(' ; ', $p['children'])]; }
-    return "\xEF\xBB\xBF" . implode("\r\n", array_map(static fn($r) => implode(';', array_map(static fn($c) => '"' . str_replace('"', '""', (string) $c) . '"', $r)), $rows)) . "\r\n";
+    return "\xEF\xBB\xBF" . implode("\r\n", array_map(static fn($r) => implode(';', array_map(static fn($c) => '"' . str_replace('"', '""', (is_string($c) && $c !== '' && strpbrk($c[0], "=+-@\t\r") !== false && !is_numeric($c) ? "'" : '') . (string) $c) . '"', $r)), $rows)) . "\r\n";
 }
 
 /* ─────────────── ePub (liseuse) et OpenDocument (LibreOffice, Word) ─────────────── */

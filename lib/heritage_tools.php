@@ -27,6 +27,11 @@ function kiosk_state(): array
  */
 function kiosk_guard(string $action, bool $isWrite): void
 {
+    // Réglages d'affichage en consultation : l'écran les garde pour la séance, mais rien n'est écrit dans la base
+    // (un visiteur ne peut pas y glisser un réglage piégé pour le propriétaire).
+    if ($action === 'save_settings' && kiosk_state()['on']) {
+        json_response(['ok' => true, 'saved' => 0, 'kiosk' => true]);
+    }
     if (kiosk_state()['on'] && kiosk_blocks($action, $isWrite)) {
         json_response(['error' => 'Mode consultation : rien ne peut être modifié. Pour en sortir, clique sur « Quitter la consultation » et donne le mot de passe.', 'kiosk' => true], 423);
     }

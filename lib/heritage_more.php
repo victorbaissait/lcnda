@@ -471,7 +471,7 @@ function vault_open(PDO $pdo, ?array $file, string $password): never
     $name = 'genealogie-backup-' . date('Ymd-His') . '-' . bin2hex(random_bytes(2)) . '-rendue-par-un-cousin.db';
     try { $h = vault_decrypt_file((string) $file['tmp_name'], $dir . '/' . $name, $password); }
     catch (Throwable $e) { @unlink($dir . '/' . $name); json_response(['error' => $e->getMessage()], 422); }
-    try { $test = new PDO('sqlite:' . $dir . '/' . $name); $n = (int) $test->query('SELECT count(*) FROM persons')->fetchColumn(); }
+    try { if (function_exists('backup_strip_triggers')) { backup_strip_triggers($dir . '/' . $name); } $test = new PDO('sqlite:' . $dir . '/' . $name); $n = (int) $test->query('SELECT count(*) FROM persons')->fetchColumn(); }
     catch (Throwable $e) { @unlink($dir . '/' . $name); json_response(['error' => 'La copie déchiffrée n’est pas une base lisible.'], 422); }
     json_response(['ok' => true, 'file' => $name, 'persons' => $n, 'created_at' => $h['created_at'] ?? '', 'owner' => $h['owner'] ?? '']);
 }

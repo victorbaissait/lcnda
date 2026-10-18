@@ -92,7 +92,7 @@
     const cmp = keys => (a, b) => { for (const k of keys) { const s = SORTS[k]; if (!s) continue; const x = s[1](a), y = s[1](b); if (x < y) return s[2] ? 1 : -1; if (x > y) return s[2] ? -1 : 1; } return 0; };
 
     /* ─── Filtres ─── */
-    const prefs = () => { const p = {fam: '', view: 'issues', q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: '', dispBy: {}, groupBy: {}, sort: ['family', 'periodical', 'date'], ...ls(PREFS, {})}; if (!p.dispBy || typeof p.dispBy !== 'object') p.dispBy = {}; if (!p.groupBy || typeof p.groupBy !== 'object') p.groupBy = {}; if (!Array.isArray(p.sort)) p.sort = ['family', 'periodical', 'date']; return p; };
+    const prefs = () => { const p = {fam: '', view: 'issues', q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: '', dispBy: {}, groupBy: {}, sort: ['family', 'periodical', 'date'], ...ls(PREFS, {})}; if (!p.dispBy || typeof p.dispBy !== 'object') p.dispBy = {}; if (!p.groupBy || typeof p.groupBy !== 'object') p.groupBy = {}; if (!Array.isArray(p.sort)) p.sort = ['family', 'periodical', 'date']; if (!/^[\w-]{0,40}$/.test(String(p.fam ?? ''))) p.fam = ''; if (!/^[\w-]{1,40}$/.test(String(p.view ?? ''))) p.view = 'issues'; return p; }; // réglage relu (base reçue, autre poste) : jamais de code glissé
     const textOfIssue = i => [i.number, i.title, i.date_text, pOf(i)?.title, ...Object.values(i.data || {}), ...(i.links || []).map(l => l.name), ...(i.labels || []).map(l => l.name),
         ...D.articles.filter(a => a.issue_id === i.id).flatMap(a => [a.title, a.authors, a.rubric, ...Object.values(a.data || {})])].join(' ').toLowerCase();
     const textOfArticle = a => [a.title, a.authors, a.pages, a.rubric, ...Object.values(a.data || {}), ...(a.links || []).map(l => l.name), ...(a.labels || []).map(l => l.name), pOf(a)?.title, issueOf(a)?.number, issueOf(a)?.title].join(' ').toLowerCase();
@@ -152,12 +152,12 @@
         const fams = [['', '📚 Tout'], ...allFams().map(k => [k, famName(k)])];
         const kinds = Object.entries(D.kinds).filter(([k]) => !f.fam || (D.family_kinds?.[baseOf(f.fam)] || []).includes(k));
         const total = wanted.reduce((s, i) => s + (money(i.data?.cover_price) || 0), 0);
-        const newBtns = (f.fam ? [f.fam] : allFams()).map((k, n) => `<button type="button" class="button ${n ? 'secondary' : ''}" data-pr-new="issue" data-fam="${k}">＋ ${esc(Wf(k).item)}</button>`).join('');
+        const newBtns = (f.fam ? [f.fam] : allFams()).map((k, n) => `<button type="button" class="button ${n ? 'secondary' : ''}" data-pr-new="issue" data-fam="${esc(k)}">＋ ${esc(Wf(k).item)}</button>`).join('');
         ws.innerHTML = `<section class="page h-pr">
             <header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📚 Revues, livres et documentaires</h2><p>Ce que tu as lu, vu, ce que tu veux acheter ; chaque article, chapitre ou moment, et qui ou quoi y est cité.</p></div>
                 <div class="page-actions">${newBtns}<button type="button" class="button secondary" data-pr-new="periodical">＋ ${esc(f.fam ? Wf(f.fam).cont : 'Revue, collection, série')}</button><button type="button" class="button secondary" data-pr-atelier title="Mettre ce qui est affiché dans un projet de l’Atelier">📚 Vers l’Atelier</button><button type="button" class="button secondary" data-pr-csv>⬇️ CSV</button><button type="button" class="button secondary" data-pr-types title="Les types (revue, livre, documentaire, podcast, les tiens), leurs champs, leur affichage">⚙️ Réglages</button></div></header>
-            <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${k}">${l}</button>`).join('')}</div>
-            <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${k}">${esc(l)}</button>`).join('')}</div>
+            <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${esc(k)}">${esc(l)}</button>`).join('')}</div>
+            <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${esc(k)}">${esc(l)}</button>`).join('')}</div>
             ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
             <div data-pr-sortbar data-count="${f.view === 'articles' ? articles.length : f.view === 'periodicals' ? conts.length : f.view === 'wanted' ? wanted.length : issues.length}"></div>
             <div class="h-pr-filters h-pr-then"><span class="h-pr-sorts">Ensuite par ${sortSel(1)} puis ${sortSel(2)}</span></div>

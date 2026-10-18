@@ -447,7 +447,7 @@ function link_safe_resolve(string $url): ?string
     $host = strtolower(trim((string) ($parts['host'] ?? ''), '[]'));
     if (!in_array($scheme, ['http', 'https'], true) || $host === '' || isset($parts['user']) || isset($parts['pass'])) return null;
     $port = (int) ($parts['port'] ?? ($scheme === 'https' ? 443 : 80));
-    $public = static fn(string $ip): bool => (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+    $public = 'link_ip_public';
     if (filter_var($host, FILTER_VALIDATE_IP)) {
         return $public($host) ? '' : null;            // adresse écrite en chiffres : rien à figer
     } else {
@@ -461,10 +461,33 @@ function link_safe_resolve(string $url): ?string
     return $host . ':' . $port . ':' . (str_contains($ip, ':') ? '[' . $ip . ']' : $ip);
 }
 
+/**
+ * Adresse IP publique ? Les adresses IPv6 qui cachent une IPv4 (::ffff:127.0.0.1, ::127.0.0.1, 64:ff9b::…, 2002:…)
+ * sont ramenées à cette IPv4 avant le test ; réseau partagé des opérateurs (100.64/10), adresses IPv6 locales
+ * (fc00::/7, fe80::/10) refusés aussi.
+ */
+function link_ip_public(string $ip): bool
+{
+    $bin = @inet_pton($ip);
+    if ($bin === false) { return false; }
+    if (strlen($bin) === 16) {
+        $embedded = null;
+        if (str_starts_with($bin, str_repeat("\0", 10) . "\xff\xff") || str_starts_with($bin, str_repeat("\0", 12))) { $embedded = substr($bin, 12, 4); } // ::ffff:a.b.c.d, ::a.b.c.d
+        elseif (str_starts_with($bin, "\x00\x64\xff\x9b" . str_repeat("\0", 8))) { $embedded = substr($bin, 12, 4); } // 64:ff9b::/96 (NAT64)
+        elseif (str_starts_with($bin, "\x20\x02")) { $embedded = substr($bin, 2, 4); } // 2002::/16 (6to4)
+        if ($embedded !== null) { return $embedded !== "\0\0\0\0" && link_ip_public((string) inet_ntop($embedded)); }
+        if ((ord($bin[0]) & 0xfe) === 0xfc || (ord($bin[0]) === 0xfe && (ord($bin[1]) & 0xc0) === 0x80)) { return false; } // fc00::/7, fe80::/10
+    } elseif (ord($bin[0]) === 100 && (ord($bin[1]) & 0xc0) === 64) {
+        return false; // 100.64.0.0/10
+    }
+    return (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+}
+
 /** Options cURL communes à la vérification des liens (sans suivre les redirections : on les suit à la main, en revérifiant chaque saut). */
 function link_curl_options(string $resolve, bool $verify = true): array
 {
     return ($resolve !== '' ? [CURLOPT_RESOLVE => [$resolve]] : []) + [CURLOPT_RANGE => '0-2047', CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_PROXY => '', CURLOPT_NOPROXY => '*', // jamais par un proxy : l'adresse vérifiée est bien celle qu'on joint
         CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 20, CURLOPT_SSL_VERIFYPEER => $verify, CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
         CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, verification de liens genealogiques)', CURLOPT_HTTPHEADER => ['Accept: text/html,*/*;q=0.8', 'Accept-Language: fr,en;q=0.8']]
         + ($verify ? lcnda_curl_tls() : []);
