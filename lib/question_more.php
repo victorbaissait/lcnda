@@ -350,13 +350,13 @@ function question_special(PDO $pdo, string $question, int $personId = 0): ?array
     }
 
     // ── nés tel jour / tel mois (« nés un 25 décembre », « nés en mai »)
-    if (preg_match('/\b(nee?s?|naissances?|marie(?:e|s|es)?|morte?s?|decede(?:e|s|es)?)\b.*\b(?:un |le |en )?(\d{1,2})? ?(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)\b(?! \d{4})/', $t, $m)) {
-        $mon = array_search($m[3], array_map(static fn($x) => strtolower(ascii_fold($x)), QM_MONTHS), true); $day = $m[2] !== '' ? (int) $m[2] : 0;
+    if (preg_match('/\b(nee?s?|naissances?|marie(?:e|s|es)?|morte?s?|decede(?:e|s|es)?)\b.*?\b(?:un |le |en )?(?:(\d{1,2})(?:er)? )?(janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)\b(?! \d{4})/', $t, $m)) {
+        $mon = array_search($m[3], array_map(static fn($x) => strtolower(ascii_fold($x)), QM_MONTHS), true); $day = ($m[2] ?? '') !== '' ? (int) $m[2] : 0;
         $evt = preg_match('/^(morte?s?|decede)/', $m[1]) ? 'd' : (str_starts_with($m[1], 'mari') ? 'm' : 'b'); $ids = [];
         if ($evt === 'm') { foreach (qm_couples($pdo) as $c) { if ($c['md'] && (int) substr($c['md'], 5, 2) === $mon && (!$day || (int) substr($c['md'], 8, 2) === $day)) { array_push($ids, ...array_filter([$c['a'], $c['b']])); } } }
         else { foreach ($kept() as $id => $p) { $d = $p[$evt . 'd']; if ($d && (int) substr($d, 5, 2) === $mon && (!$day || (int) substr($d, 8, 2) === $day)) { $ids[] = $id; } } }
-        $lab = ($day ? "le {$day} " : 'en ') . QM_MONTHS[$mon];
-        return qm_answer(array_merge([['b' => 'naissance', 'd' => 'décès', 'm' => 'mariage'][$evt] . ' ' . $lab], $fl), count($ids) . ' personne(s).', ['ids' => array_values(array_unique($ids))]);
+        $lab = ($day ? 'le ' . ($day === 1 ? '1er' : $day) . ' ' : 'en ') . QM_MONTHS[$mon];
+        return qm_answer(array_merge([['b' => 'naissance', 'd' => 'décès', 'm' => 'mariage'][$evt] . ' ' . $lab], $fl), (($n = count(array_unique($ids))) < 2 ? "{$n} personne." : "{$n} personnes."), ['ids' => array_values(array_unique($ids))]);
     }
     return null;
 }
