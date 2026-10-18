@@ -108,17 +108,19 @@
     const plural = (n, w) => U.plural(n, w);
 
     /* ── un tableau (pistes, étapes de provenance, expositions, éditions…) : colonnes typées, ⠿ ↑ ↓ ✕ ── */
-    const cellEdit = (c, v) => { const t = c.type || 'text';
+    /* cellules d'autres sortes (employeur, revue, source…) : ART.cellTypes[type] = {edit, get, read, text} (ex. heritage-sciences.js) */
+    ART.cellTypes = ART.cellTypes || {}; ART.cellHook = true;
+    const cellEdit = (c, v) => { const t = c.type || 'text'; if (ART.cellTypes?.[t]) return ART.cellTypes[t].edit(c, v);
         if (t === 'select') return `<select class="ar-in" data-c="${esc(c.key)}">${ch(c).map(([k, l]) => `<option value="${esc(k)}" ${String(v ?? '') === String(k) ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
         if (t === 'person' || t === 'place' || t === 'item') return `<span class="ar-pk" data-c="${esc(c.key)}" data-ct="${t}" ${t === 'item' ? `data-art-create="${esc((c.kinds || [])[0] || '')}"` : ''}>${pk({kind: t === 'item' ? 'artwork' : t, allowFree: c.free !== false, allowCreate: t !== 'item' || !!(c.kinds || []).length, value: pkVal(v, t === 'item' ? 'artwork' : t), filter: t === 'item' ? {art_kind: (c.kinds || []).join(',')} : undefined})}</span>`;
         if (t === 'longtext') return `<textarea class="ar-in" data-c="${esc(c.key)}" rows="2" placeholder="${esc(c.label)}">${esc(v ?? '')}</textarea>`;
         if (t === 'bool') return `<label class="checkbox-line"><input type="checkbox" data-c="${esc(c.key)}" ${v ? 'checked' : ''}> ${esc(c.label)}</label>`;
         return `<input class="ar-in" data-c="${esc(c.key)}" value="${esc(v ?? '')}" placeholder="${esc(c.ph || c.label)}" ${['number', 'money'].includes(t) ? 'inputmode="decimal"' : ''} ${t === 'date' ? 'data-ui-date="nocal"' : ''}>`; };
-    const cellGet = (cell, c) => { const t = c.type || 'text'; if (t === 'person' || t === 'place' || t === 'item') return fromItem(pkItems(cell)[0], t === 'item' ? 'artwork' : t); if (t === 'bool') return !!cell.checked; return (cell.value ?? '').trim(); };
-    const cellRead = (c, v, ctx) => { const t = c.type || 'text'; if (v == null || v === '') return '';
+    const cellGet = (cell, c) => { const t = c.type || 'text'; if (ART.cellTypes?.[t]) return ART.cellTypes[t].get(cell, c); if (t === 'person' || t === 'place' || t === 'item') return fromItem(pkItems(cell)[0], t === 'item' ? 'artwork' : t); if (t === 'bool') return !!cell.checked; return (cell.value ?? '').trim(); };
+    const cellRead = (c, v, ctx) => { const t = c.type || 'text'; if (v == null || v === '') return ''; if (ART.cellTypes?.[t]) return ART.cellTypes[t].read(c, v, ctx);
         if (t === 'person') return U.personChip(v, '', ctx); if (t === 'place') return U.placeChip(v); if (t === 'item') return U.refChip(v, (c.kinds || []).length === 1 ? ART.defs[c.kinds[0]]?.icon : '');
         if (t === 'select') return esc(lab(c, v)); if (t === 'money') return `<span class="ar-price">${esc(U.money(v))}</span>`; if (t === 'url') return T.url.read(c, v); if (t === 'bool') return v ? '✓' : ''; return esc(v); };
-    const cellText = (c, v) => { const t = c.type || 'text'; if (t === 'person') return U.nameOf(v); if (t === 'place') return U.placeTitle(v); if (t === 'item') return U.refTitle(v); if (t === 'select') return lab(c, v); if (t === 'money') return U.money(v); if (t === 'bool') return v ? 'oui' : ''; return String(v ?? ''); };
+    const cellText = (c, v) => { const t = c.type || 'text'; if (ART.cellTypes?.[t]) return ART.cellTypes[t].text(c, v); if (t === 'person') return U.nameOf(v); if (t === 'place') return U.placeTitle(v); if (t === 'item') return U.refTitle(v); if (t === 'select') return lab(c, v); if (t === 'money') return U.money(v); if (t === 'bool') return v ? 'oui' : ''; return String(v ?? ''); };
     ART.cellRead = cellRead; ART.cellText = cellText;
     const rowHtml = (f, r, i) => `<div class="ar-row-e" data-i="${i}"><span class="ar-grip" title="Glisser pour ranger" draggable="true">⠿</span><div class="ar-cells">${(f.cols || []).map(c => `<span class="ar-cell ${c.w ? `w-${c.w}` : ''}" title="${esc(c.label)}">${cellEdit(c, r[c.key])}</span>`).join('')}</div>
         <span class="ar-ract">${f.more ? `<button type="button" class="icon-button small ${f.more.some(m => r[m.key]) ? 'is-on' : ''}" data-r-more title="${esc(f.moreLabel || 'Plus')}">📝</button>` : ''}<button type="button" class="icon-button small" data-r-up title="Monter">↑</button><button type="button" class="icon-button small" data-r-down title="Descendre">↓</button><button type="button" class="icon-button small" data-r-del title="Retirer">✕</button></span>

@@ -15,7 +15,7 @@
         const l = [...list], y = it => Number(it.year) || 9999, t = it => String(it.title || '');
         const cmp = {year: (a, b) => y(a) - y(b) || a.sort - b.sort, date: (a, b) => y(a) - y(b), recent: (a, b) => y(b) - y(a), az: (a, b) => t(a).localeCompare(t(b), 'fr'), za: (a, b) => t(b).localeCompare(t(a), 'fr'), perso: (a, b) => a.sort - b.sort,
             catref: (a, b) => (num(a.data.catref) || 1e9) - (num(b.data.catref) || 1e9) || t(a).localeCompare(t(b), 'fr'), value: (a, b) => (U.num(b.data.value) || 0) - (U.num(a.data.value) || 0),
-            size: (a, b) => (U.num(b.data.h) * U.num(b.data.w) || 0) - (U.num(a.data.h) * U.num(a.data.w) || 0)}[how] || ((a, b) => y(a) - y(b));
+            size: (a, b) => (U.num(b.data.h) * U.num(b.data.w) || 0) - (U.num(a.data.h) * U.num(a.data.w) || 0)}[how] || ART.sorters?.[how] || ((a, b) => y(a) - y(b));
         return l.sort(cmp);
     }
     ART.sortItems = sortItems;

@@ -111,6 +111,7 @@ function art_schema(PDO $pdo): void
 function art_kind_ok(PDO $pdo, string $kind): bool
 {
     if (in_array($kind, ART_BUILTIN_KINDS, true)) { return true; }
+    if (function_exists('sciences_kind_ok') && sciences_kind_ok($kind)) { return true; } // 🔬 lib/sciences.php
     if (!preg_match('/^t_[a-z0-9_]{1,40}$/', $kind)) { return false; }
     art_ensure($pdo);
     $s = $pdo->prepare("SELECT 1 FROM item_types WHERE key=? AND origin='user'"); $s->execute([$kind]);
@@ -259,6 +260,7 @@ function art_summary(array $r): array
 function art_subline(array $d, string $kind): string
 {
     $pick = static fn(array $keys) => implode(' · ', array_values(array_filter(array_map(static fn($k) => is_scalar($d[$k] ?? null) ? trim((string) $d[$k]) : '', $keys))));
+    if (function_exists('sciences_subline') && ($sci = sciences_subline($d, $kind)) !== null) { return mb_substr($sci, 0, 160); } // 🔬
     return mb_substr(match ($kind) {
         'release' => $pick(['format', 'catno']), 'work' => $pick(['catref', 'technique']), 'recording' => $pick(['rkind', 'date', 'dur']),
         'book' => $pick(['isbn']), 'film' => $pick(['jobs', 'role']), 'exhibition' => $pick(['venue', 'dates']), default => $pick(['date', 'note']),
@@ -402,7 +404,8 @@ function art_save_item(PDO $pdo, array $d): array
     if ($isArtist === false) { throw new RuntimeException('Personne introuvable.'); }
     if (function_exists('assert_person_unlocked')) { assert_person_unlocked($pdo, $personId); }
     $kind = (string) ($d['kind'] ?? ''); if (!art_kind_ok($pdo, $kind)) { throw new RuntimeException('Sorte de fiche inconnue.'); }
-    if (!(int) $isArtist) {
+    $sciOwn = function_exists('sciences_before_save') && sciences_before_save($pdo, $personId, $kind, $d); // 🔬 profil inventeur / scientifique / explorateur
+    if (!$sciOwn && !(int) $isArtist) {
         if (empty($d['make_artist'])) { throw new RuntimeException('Cette fiche n’est pas cochée « Artiste » : coche « Artiste » sur la fiche (Modifier la fiche) avant d’y ranger un élément du catalogue.'); }
         art_make_artist($pdo, $personId, (string) ($d['discipline'] ?? ''));
     }
@@ -430,6 +433,7 @@ function art_save_item(PDO $pdo, array $d): array
         $id = (int) $pdo->lastInsertId();
     }
     art_reindex($pdo, $id, $data);
+    if (function_exists('sciences_after_save')) { sciences_after_save($pdo, $personId, $kind, $id); } // 🔬
     if ($kind === 'profile') { $pdo->prepare("INSERT INTO person_profiles(person_id, profile_key, item_id) VALUES(?, 'artist', ?) ON CONFLICT(person_id, profile_key) DO UPDATE SET item_id=excluded.item_id")->execute([$personId, $id]); }
     return ['id' => $id];
 }
@@ -626,7 +630,7 @@ function picker_art_items(PDO $pdo, string $q, int $offset, int $limit, array $o
     $where = ['1=1']; $params = [];
     $kinds = array_values(array_filter(explode(',', (string) ($opts['art_kind'] ?? '')), static fn($k) => (bool) preg_match('/^[a-z0-9_]{1,44}$/', $k)));
     if ($kinds) { $where[] = 'i.type_key IN (' . implode(',', array_fill(0, count($kinds), '?')) . ')'; array_push($params, ...$kinds); }
-    else { $where[] = "i.type_key<>'profile'"; }
+    else { $where[] = "i.type_key<>'profile' AND substr(i.type_key, 1, 8)<>'profile_'"; }
     if (!empty($opts['art_person'])) { $where[] = 'i.person_id=?'; $params[] = (int) $opts['art_person']; }
     $ids = function_exists('picker_ids') ? picker_ids() : [];
     if ($ids) { $where[] = 'i.id IN (' . implode(',', array_map('intval', $ids)) . ')'; }

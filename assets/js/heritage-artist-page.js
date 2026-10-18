@@ -76,12 +76,15 @@
     const MODEL_OF = {musicien: 'musicien', chanteur: 'musicien', compositeur: 'musicien', chef: 'musicien', groupe: 'musicien', peintre: 'peintre', plasticien: 'peintre', ecrivain: 'ecrivain', poete: 'ecrivain', dramaturge: 'ecrivain', cineaste: 'cineaste', acteur: 'cineaste', videaste: 'cineaste', danseur: 'cineaste', photographe: 'photographe', sculpteur: 'sculpteur', architecte: 'architecte'};
     const WIDTH = {'ligne': 'w-12', '½': 'w-6', '⅓': 'w-4', 'en-tête': 'w-0'};
     /** la page telle qu'on la montre : ordre, cachées, largeurs (réglage de l'artiste, sinon global, sinon le modèle de sa discipline) */
+    /* le modèle de départ : celui de la discipline d'artiste, sinon celui du premier profil coché (Scientifique, Explorateur…) */
+    const defModel = st => MODEL_OF[st.person.artist_discipline] || (!Number(st.person.is_artist) && (st.person.profiles || []).map(p => ART.profiles?.[p.profile_key]?.models?.[0]).find(m => m && M[m])) || 'musicien';
+    const heroEyebrow = (st, disc) => profilesOf(st).map(k => k === 'artist' ? `🎨 ARTISTE${disc ? ` · ${esc(disc.toLocaleUpperCase('fr-FR'))}` : ''}` : ART.profiles?.[k] ? esc(`${ART.profiles[k].icon} ${String(ART.profiles[k].label).toLocaleUpperCase('fr-FR')}`) : '').filter(Boolean).join(' · ') || '🎨 ARTISTE';
     function pageCfg(store) {
-        const s = store.settings?.page || {}, model = M[s.model || MODEL_OF[store.person.artist_discipline] || 'musicien'] || M.musicien;
+        const s = store.settings?.page || {}, model = M[s.model || defModel(store)] || M.musicien;
         const custom = s.custom || [];
         const order = [...new Set([...(s.order || model.order), ...ALL, ...custom.map(c => c.key)])].filter(k => P[k] || custom.some(c => c.key === k));
         const hidden = new Set(s.hidden || model.hidden);
-        return {order, hidden, widths: s.widths || {}, custom, modelKey: s.model || MODEL_OF[store.person.artist_discipline] || 'musicien'};
+        return {order, hidden, widths: s.widths || {}, custom, modelKey: s.model || defModel(store)};
     }
     /* les profils (l'actuel « Artiste » ; d'autres viendront : politique, sportif…) : une section de page dit à quel profil
        elle appartient (profile, « artist » par défaut) ; la page ne montre que celles des profils cochés sur la fiche */
@@ -89,7 +92,7 @@
     ART.profiles.artist = {key: 'artist', label: 'Artiste', icon: '🎨', type: 'profile', models: M};
     const profilesOf = st => { const l = (st.person.profiles || []).map(p => p.profile_key); if (Number(st.person.is_artist) && !l.includes('artist')) l.push('artist'); return l.length ? l : ['artist']; };
     const secOf0 = (cfg, k) => P[k] || (cfg.custom.find(c => c.key === k) ? {icon: '✎', label: cfg.custom.find(c => c.key === k).label, w: '⅓', custom: true, render: C => { const p = prof(C), v = p?.data?.[k]; return {body: v ? `<div class="ar-long">${esc(v).replace(/\n/g, '<br>')}</div>` : '<p class="muted">Vide : « … » pour l’écrire.</p>', actions: editBtn}; }} : null);
-    const secOf = (cfg, k, st = null) => { const S0 = secOf0(cfg, k); if (S0 && st && !profilesOf(st).includes(S0.profile || 'artist')) return null; return S0; };
+    const secOf = (cfg, k, st = null) => { const S0 = secOf0(cfg, k); if (S0 && st && !(S0.profiles || [S0.profile || 'artist']).some(x => profilesOf(st).includes(x))) return null; return S0; };
     const secState = {};
 
     ART.paintPage = (C, body) => {
@@ -100,8 +103,8 @@
         const links = (d.links || []).filter(l => /^https?:/.test(l.url || ''));
         const ICON = u => /discogs/.test(u) ? '💿' : /imdb/.test(u) ? '🎬' : /wikipedia|wikidata/.test(u) ? '📖' : '🌐';
         const linksOn = !cfg.hidden.has('links');
-        const hero = `<header class="ar-hero">${p.photo ? `<span class="ar-hero-ph" style="background-image:url('media/${encodeURIComponent(p.photo)}')"></span>` : `<span class="ar-hero-ph ${{male: 'm', female: 'f'}[p.gender] || 'u'}">${esc(U.initials(st.name))}</span>`}<div><span class="eyebrow">🎨 ARTISTE${disc ? ` · ${esc(disc.toLocaleUpperCase('fr-FR'))}` : ''}</span>
-            <h2>${esc(st.name)}${(d.stage_names || []).length ? ` <small>· ${d.stage_names.map(r => `« ${esc(r.name)} »`).join(', ')}</small>` : ''}</h2><p class="ar-g">${esc(life)}</p>${linksOn && links.length ? `<div class="ar-hero-links">${links.map(l => `<a class="ar-ochip is-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer"><i>${ICON(l.url)}</i>${esc(l.label || l.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0])}</a>`).join('')}</div>` : ''}</div></header>`;
+        const hero = `<header class="ar-hero">${p.photo ? `<span class="ar-hero-ph" style="background-image:url('media/${encodeURIComponent(p.photo)}')"></span>` : `<span class="ar-hero-ph ${{male: 'm', female: 'f'}[p.gender] || 'u'}">${esc(U.initials(st.name))}</span>`}<div><span class="eyebrow">${heroEyebrow(st, disc)}</span>
+            <h2>${esc(st.name)}${(d.stage_names || []).length ? ` <small>· ${d.stage_names.map(r => `« ${esc(r.name)} »`).join(', ')}</small>` : ''}</h2><p class="ar-g">${esc([life, ...profilesOf(st).filter(k => k !== 'artist').map(k => ART.profiles?.[k]?.summary?.(st))].filter(Boolean).join(' · '))}</p>${linksOn && links.length ? `<div class="ar-hero-links">${links.map(l => `<a class="ar-ochip is-link" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer"><i>${ICON(l.url)}</i>${esc(l.label || l.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0])}</a>`).join('')}</div>` : ''}</div></header>`;
         const secs = cfg.order.filter(k => !cfg.hidden.has(k) && k !== 'links').map(k => { const S0 = secOf(cfg, k, st); if (!S0) return ''; const r = S0.render(C, {state: secState[k]}); const w = cfg.widths[k] || S0.w;
             return `<section class="ar-blk ${WIDTH[w] || 'w-12'}" data-sec="${esc(k)}"><div class="ar-bh"><span class="ar-grip" title="Ranger : ⚙️ Organiser la page">⠿</span><b>${esc(S0.icon)} ${esc(S0.label)}</b>${r.count ? ` <small class="ar-g">${r.count}</small>` : ''}${r.head || ''}<span class="spacer"></span>${r.actions || ''}</div><div class="ar-bb">${r.body}</div></section>`; }).join('');
         body.innerHTML = `<div class="ar-page">${hero}<div class="ar-blocks">${secs}</div></div>`;
@@ -119,7 +122,7 @@
         const save = async () => { C.store.settings = C.store.personSet?.own ? C.store.personSet : C.store.global; try { await ART.persistSettings(C.store); } catch (e) { A().toast(e.message, 'error'); } C.paint(false); paint(); };
         function paint() {
             const cfg = pageCfg(C.store), list = cfg.order;
-            aside.innerHTML = `<div class="ar-ph"><b>⚙️ Organiser la page de l’artiste</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
+            aside.innerHTML = `<div class="ar-ph"><b>⚙️ Organiser la page${profilesOf(C.store).includes('artist') ? ' de l’artiste' : ` de ${esc(C.store.name)}`}</b><span class="spacer"></span><button type="button" class="icon-button small" data-o-close aria-label="Fermer">×</button></div><div class="ar-pbody">
                 <p class="ar-phelp">Glisse ⠿ (ou ↑ ↓) pour ranger, 👁 pour cacher. La largeur : ½, ⅓ ou toute la ligne.</p><div class="ar-plist">${list.map((k, i) => { const S0 = secOf(cfg, k, C.store); if (!S0) return ''; const on = !cfg.hidden.has(k), w = cfg.widths[k] || S0.w;
                     return `<div class="ar-fr ${on ? '' : 'off'} ${S0.custom ? 'cust' : ''}" data-okey="${esc(k)}" draggable="true"><span class="ar-grip">⠿</span><button type="button" class="ar-eye" data-o-eye title="${on ? 'Cacher' : 'Montrer'}">${on ? '👁' : '🚫'}</button><span class="lbl">${esc(S0.icon)} ${esc(S0.label)}</span>
                         ${k === 'links' ? '<span class="ty">en-tête</span>' : `<select class="ty ar-wsel" data-o-w title="Largeur">${['ligne', '½', '⅓'].map(x => `<option ${x === w ? 'selected' : ''}>${x}</option>`).join('')}</select>`}<span class="tools"><button type="button" data-o-mv="-1" ${i ? '' : 'disabled'} title="Monter">↑</button><button type="button" data-o-mv="1" ${i < list.length - 1 ? '' : 'disabled'} title="Descendre">↓</button>${S0.custom ? '<button type="button" data-o-del title="Retirer">🗑</button>' : ''}</span></div>`; }).join('')}</div>

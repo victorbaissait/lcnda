@@ -398,6 +398,7 @@ try {
         'faces_index' => json_response(faces_index($pdo)),
         'artist_items' => json_response(['items' => artist_items_for($pdo, safe_int($_GET['person_id'] ?? 0))]),
         'art' => json_response(art_api_get($pdo, $_GET)), // 🎨 moteur des catalogues d'artistes (lib/art_engine.php)
+        'sciences' => json_response(sciences_api_get($pdo, $_GET)), // 🔬 coordonnées des lieux (lib/sciences.php)
         'blocs' => json_response(blocs_api_get($pdo, $_GET)), // 📰 🏆 🎓 blocs communs (lib/blocs.php)
         'quick_search' => json_response(quick_search_data($pdo, safe_text($_GET['q'] ?? ''))),
         'implexe' => json_response(implexe_data($pdo, safe_int($_GET['id'] ?? 0) ?: (int) $pdo->query('SELECT id FROM persons WHERE is_start=1 LIMIT 1')->fetchColumn())),
@@ -9506,6 +9507,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'artist_fetch_image' => artist_fetch_image($pdo,$data),
             'artist_upload_image' => artist_upload_image($pdo,$data),
             'art_write' => art_api_post($pdo,$data),
+            'sciences_remote' => sciences_remote($data), // 🔬 publications : DOI (Crossref), ORCID, HAL
             'blocs_write' => blocs_api_post($pdo,$data),
             'face_ignore' => face_ignore($pdo,$data),
             'faces_reset' => faces_reset($pdo,$data),

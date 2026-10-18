@@ -338,9 +338,9 @@
                     ${S.edit ? `<button type="button" class="button small" data-ar-cmd="save" data-shortcut="⌘S">💾 Enregistrer</button>` : ''}${full}<button type="button" class="icon-button" data-ar-cmd="close" aria-label="Fermer" title="Fermer">×</button>`;
             }
             const kinds = ART.tabKinds(store), def = ART.defs[S.kind] || {};
-            const eb = S.view === 'page' ? 'ARTISTE · SA PAGE' : S.kind === 'work' ? 'CATALOGUE RAISONNÉ' : `CATALOGUE · ${String(def.many || '').toLocaleUpperCase('fr-FR')}`;
+            const eb = S.view === 'page' ? `${((store.person.profiles || []).map(p => ART.profiles?.[p.profile_key]?.label).filter(Boolean).join(' · ') || 'Artiste').toLocaleUpperCase('fr-FR')} · SA PAGE` : S.kind === 'work' ? 'CATALOGUE RAISONNÉ' : `CATALOGUE · ${String(def.many || '').toLocaleUpperCase('fr-FR')}`;
             const n = S.view === 'list' ? store.of(S.kind).length : 0;
-            return `<span class="ar-ticon">${S.view === 'page' ? '🎨' : esc(def.icon || '✦')}</span><div class="ar-tname"><span class="eyebrow">${esc(eb)}</span><h2>${esc(store.name)}${S.view === 'list' ? ` — ${esc(plural(n, String(def.label || '').toLowerCase(), String(def.many || '').toLowerCase()))}` : ''}</h2></div>
+            return `<span class="ar-ticon">${S.view === 'page' ? esc(ART.profiles?.[(store.person.profiles || [])[0]?.profile_key]?.icon || '🎨') : esc(def.icon || '✦')}</span><div class="ar-tname"><span class="eyebrow">${esc(eb)}</span><h2>${esc(store.name)}${S.view === 'list' ? ` — ${esc(plural(n, String(def.label || '').toLowerCase(), String(def.many || '').toLowerCase()))}` : ''}</h2></div>
                 <nav class="segmented ar-tabs" data-ar-tabs><button type="button" class="${S.view === 'page' ? 'is-active' : ''}" data-ar-tab="page">🎨 Page</button>${kinds.map(k => `<button type="button" class="${S.view === 'list' && S.kind === k ? 'is-active' : ''}" data-ar-tab="${k}">${esc(ART.defs[k].icon)} ${esc(ART.defs[k].tab || ART.defs[k].many)}</button>`).join('')}<button type="button" data-ar-cmd="morekinds" title="Les autres sortes de fiches, et créer la tienne">＋</button></nav>
                 <span class="spacer"></span>
                 ${S.view === 'list' ? `<button type="button" class="button small" data-ar-cmd="new">＋ ${def.fem ? 'Nouvelle' : 'Nouveau'} ${esc(String(def.label || '').toLowerCase())}</button><button type="button" class="button small secondary" data-ar-cmd="import" data-help="Remplit le catalogue depuis Discogs, MusicBrainz, Apple Music, Open Library, Wikidata, TMDb, un tableau, ou un fichier exporté d’ici : tu choisis ce qui entre, rien n’est écrasé.">📥 Importer</button>${['work', 'release', 'master'].includes(S.kind) ? `<button type="button" class="button small secondary" data-ar-cmd="book" title="Le catalogue raisonné ou la discographie en livre, dans la mise en page">📖 Faire le livre…</button>` : ''}<button type="button" class="button small secondary" data-ar-cmd="export" title="Tableur, PDF, impression, fichier (réimportable)">⤓ Exporter ▾</button>` : `<button type="button" class="button small secondary" data-ar-cmd="organize" title="Ranger, cacher les sections, choisir leur largeur">⚙️ Organiser la page</button>`}
@@ -433,9 +433,12 @@
     ART.tabKinds = store => {
         const base = ['book', 'work', 'release', 'track_work', 'film', 'exhibition'], disc = store.person.artist_discipline || '', prefs = readJ(PREFS, {});
         const want = new Set(base.filter(k => store.of(k).length || (k === 'book') || (k === 'work' && !MUSIC.includes(disc) && !SCREEN.includes(disc)) || (['release', 'track_work'].includes(k) && MUSIC.includes(disc)) || (k === 'film' && SCREEN.includes(disc)) || (k === 'exhibition' && store.of('work').length)));
+        const profs = (store.person.profiles || []).map(p => p.profile_key), artistic = Number(store.person.is_artist) || profs.includes('artist') || !profs.length; // les profils cochés (ART.profiles[k].kinds)
+        if (!artistic) base.forEach(k => { if (!store.of(k).length) want.delete(k); });
+        profs.forEach(p => (ART.profiles?.[p]?.kinds || []).forEach(k => want.add(k)));
         // les sortes « de rangement » (albums, enregistrements, organisations…) restent dans « ＋ », sauf si on les a ajoutées
         const quiet = new Set(['master', 'recording', 'org', 'copy', 'concert', 'text', 'profile']);
-        Object.keys(ART.defs).forEach(k => { if ((store.of(k).length && !quiet.has(k)) || (prefs.extraTabs || []).includes(k)) want.add(k); });
+        Object.keys(ART.defs).forEach(k => { if ((store.of(k).length && !quiet.has(k) && !ART.defs[k].hidden) || (prefs.extraTabs || []).includes(k)) want.add(k); });
         return [...want].filter(k => ART.defs[k]).sort((a, b) => (base.indexOf(a) + 1 || 99) - (base.indexOf(b) + 1 || 99));
     };
     ART.setVisible = (store, kind, tab, key, on) => {
