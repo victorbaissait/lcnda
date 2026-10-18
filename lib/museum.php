@@ -373,7 +373,7 @@ function museum_package(PDO $pdo, int $id, string $format, ZipArchive $zip): arr
         if ($relative === '') { return ''; }
         if (isset($done[$relative])) { return $done[$relative]; } // même photo exposée deux fois : un seul fichier
         return $done[$relative] = (function () use ($relative, $image, $zip, $format, &$n): string {
-        $path = MEDIA_DIR . '/' . $relative;
+        try { $path = media_file_path($relative); } catch (Throwable) { return ''; } // jamais hors du dossier des médias (base reçue piégée : « ../… »)
         if (!is_file($path)) { return ''; }
         $n++;
         if ($image) {
