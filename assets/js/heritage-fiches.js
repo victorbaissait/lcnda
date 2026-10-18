@@ -234,7 +234,11 @@
             if (d.fiUp !== undefined && i > 0) { [c.blocks[i - 1], c.blocks[i]] = [c.blocks[i], c.blocks[i - 1]]; await save(); return renderSheet(token); }
             if (d.fiDown !== undefined && i < c.blocks.length - 1) { [c.blocks[i + 1], c.blocks[i]] = [c.blocks[i], c.blocks[i + 1]]; await save(); return renderSheet(token); }
             if (d.fiDup !== undefined) { const b = JSON.parse(JSON.stringify(c.blocks[i])); b.id = uid(); c.blocks.splice(i + 1, 0, b); await save(); return renderSheet(token); }
-            if (d.fiDel !== undefined) { const b = c.blocks[i]; if (!await A().confirmBox(`Supprimer le bloc « ${titleOf(b)} » ?`, {title: 'Supprimer le bloc', okLabel: 'Supprimer le bloc'})) return; c.blocks.splice(i, 1); await save(); return refresh(); }
+            if (d.fiDel !== undefined) { // H7 : supprimé tout de suite, « ↶ Annuler » le remet à sa place
+                const b = c.blocks[i]; c.blocks.splice(i, 1); await save();
+                const same = () => { if (cur !== c) throw new Error('la fiche n’est plus ouverte'); };
+                A().undoToast?.(`Bloc « ${titleOf(b)} » supprimé`, {undo: async () => { same(); c.blocks.splice(Math.min(i, c.blocks.length), 0, b); await save(); if (S().module === 'fiches') refresh(); }, redo: async () => { same(); const k = c.blocks.indexOf(b); if (k >= 0) { c.blocks.splice(k, 1); await save(); } if (S().module === 'fiches') refresh(); }});
+                return refresh(); }
             if (d.fiEdit !== undefined) return editBlock(i, null, t.closest('[data-fi-block]'));
         });
     }
@@ -364,14 +368,23 @@
         let sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY) : 'list';
         const draw = () => {
             const box = ws.querySelector('[data-fi-items]'); if (!box) return;
-            const list = UI?.sortItems ? UI.sortItems(sheets, sort, {name: x => x.title, date: x => x.updated_at}) : sheets;
+            const words = fold(q).split(/\s+/).filter(Boolean), list0 = sheets.filter(x => words.every(w => fold(`${x.title} ${x.subtitle || ''}`).includes(w)));
+            const list = UI?.sortItems ? UI.sortItems(list0, sort, {name: x => x.title, date: x => x.updated_at}) : list0;
+            bar?.setCount(`${A().plural(list.length, 'fiche')}${list.length !== sheets.length ? ` sur ${sheets.length}` : ''}`);
+            if (!list.length) { box.innerHTML = A().emptyState({icon: '🔎', text: `Aucune fiche pour « ${q.trim()} »`, hint: 'Vérifie l’orthographe, ou cherche un autre mot (titre, sous-titre).'}); return; }
             box.innerHTML = view === 'cards' && UI?.cardsHtml
                 ? UI.cardsHtml(list.map(x => ({thumb: `<span class="ui-card-ico">${esc(x.icon || '📒')}</span>`, name: x.title || 'Fiche sans titre', open: `data-fi-listopen="${x.id}"`, lines: [x.subtitle, `${x.blocks} bloc${x.blocks > 1 ? 's' : ''}`], date: x.updated_at ? `Modifiée le ${fmtDate(x.updated_at)}` : ''})))
                 : `<div class="data-table-wrap"><table class="data-table"><thead><tr><th>Fiche</th><th>Sous-titre</th><th>Blocs</th><th>Modifiée le</th></tr></thead><tbody>${list.map(s => `<tr><td><button type="button" class="table-link" data-fi-listopen="${s.id}">${esc((s.icon || '📒') + ' ' + s.title)}</button></td><td>${esc(s.subtitle || '')}</td><td>${s.blocks}</td><td>${esc(fmtDate(s.updated_at))}</td></tr>`).join('')}</tbody></table></div>`;
             box.querySelectorAll('[data-fi-listopen]').forEach(b => b.addEventListener('click', () => { S().ficheId = Number(b.dataset.fiListopen); A().setModule('fiches'); }));
         };
         const slot = ws.querySelector('[data-fi-bar]');
-        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: sheets.length, label: 'fiche', feminine: true, value: sort, view: {key: KEY, what: 'fiches', onChange: v => { view = v; draw(); }}, onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }}));
+        // H10 : la barre commune (🔍 Chercher · Liste | Fiches · Trier), retenue pour cette liste
+        let q = '';
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const bar = slot && UI?.listBar ? UI.listBar({key: KEY, search: {placeholder: 'Chercher une fiche… (titre, sous-titre)'}, view: {what: 'fiches', onChange: v => { view = v; draw(); }},
+            sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+            onChange: (b, {what}) => { q = b.q; sort = b.sort; UI.setSort(KEY, sort); if (what !== 'view') draw(); }}) : null;
+        if (bar) { ({q, sort, view} = bar.state); slot.replaceWith(bar); }
         draw();
         ws.querySelectorAll('[data-fi-listnew]').forEach(b => b.addEventListener('click', newSheet));
     };

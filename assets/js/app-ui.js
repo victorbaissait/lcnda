@@ -453,6 +453,169 @@
         return b;
     };
 
+    /* ═════ H10 La barre commune des listes : 🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier : … ▾ ═════
+     * Maquette : docs/design/messages-et-listes.html. Sous la barre : les filtres actifs en pastilles bleues « Femmes × » + « Tout effacer ».
+     * Tout est retenu pour chaque liste (localStorage « lcnda-listbar:<key> »). Mode d'emploi : docs/UI.md. */
+    const LB_PREFIX = 'lcnda-listbar:';
+    let lbFocus = null;
+    const lbEmpty = v => v == null || v === '' || v === false || (Array.isArray(v) && !v.length);
+    const optList = f => (f.options || []).map(o => (Array.isArray(o) ? {value: String(o[0]), label: o[1], chip: o[2]} : {value: String(o.value), label: o.label, chip: o.chip}));
+    const placeTitle = v => (v && typeof v === 'object' ? (v.title || v.name || '') : String(v || '').replace(/^txt:/, ''));
+    /** listBar({key, search, filters, view, sort, count, onChange}) → l'élément (.state, .setCount(n), .adoptSort(barreC6), .setFilter(id, v), .clear(), .input) */
+    UI.listBar = ({key = '', search = {}, filters = [], view = null, sort = null, count = null, onChange = null, remember = true} = {}) => {
+        const saved = key && remember === true ? store.get(LB_PREFIX + key, null) : null; // remember: 'given' = les valeurs données gagnent (la liste range déjà ses réglages), mais la barre les écrit aussi
+        const st = {q: '', filters: {}, view: 'list', sort: ''};
+        filters.forEach(f => {
+            let v = f.value ?? (f.type === 'check' && f.options ? [] : f.type === 'check' ? false : '');
+            if (saved?.f && Object.prototype.hasOwnProperty.call(saved.f, f.id)) v = saved.f[f.id];
+            if (f.type === 'check' && f.options && !Array.isArray(v)) v = lbEmpty(v) ? [] : [String(v)];
+            if ((f.type === 'radio' || f.type === 'select') && f.options && v !== '' && !optList(f).some(o => o.value === String(v))) v = f.dflt ?? '';
+            st.filters[f.id] = v;
+        });
+        if (search) st.q = saved?.q ?? search.value ?? '';
+        if (sort && !sort.nodeType) { const opts = sort.options || []; st.sort = String(saved?.sort ?? sort.value ?? ''); if (opts.length && !opts.some(o => String(Array.isArray(o) ? o[0] : o.value) === st.sort)) st.sort = String(sort.value ?? (Array.isArray(opts[0]) ? opts[0][0] : opts[0].value)); }
+        const w = h('div', 'ui-listbar');
+        w.innerHTML = `<div class="ui-listbar-row"><span class="ui-listbar-search"></span><span class="ui-listbar-filter"></span><span class="ui-listbar-view"></span><span class="ui-listbar-sort"></span></div><div class="ui-listbar-active" hidden></div>`;
+        const $ = s => w.querySelector(s);
+        const save = () => { if (key && remember) store.set(LB_PREFIX + key, {q: st.q, f: st.filters, sort: st.sort, view: st.view}); };
+        const emit = what => { save(); try { onChange?.(w.state, {what}); } catch (e) { console.error(e); } };
+        Object.defineProperty(w, 'state', {get: () => ({q: st.q, filters: {...st.filters}, view: st.view, sort: st.sort})});
+        /* 🔍 Chercher (C1) */
+        if (search) {
+            const sf = UI.searchField({placeholder: search.placeholder || 'Chercher…', value: st.q, delay: search.delay ?? 250, label: search.label || '', onInput: v => { if (v === st.q) return; st.q = v; lbFocus = {key, at: Date.now(), caret: sf.input.selectionStart}; paintActive(); emit('q'); }});
+            sf.classList.add('ui-listbar-q'); $('.ui-listbar-search').appendChild(sf); w.input = sf.input;
+        } else $('.ui-listbar-search').remove();
+        /* Filtrer ▾ */
+        const isActive = f => { const v = st.filters[f.id]; if (lbEmpty(v)) return false; if ((f.type === 'radio' || f.type === 'select') && String(v) === String(f.dflt ?? '')) return false; return true; };
+        const chipsOf = f => {
+            const v = st.filters[f.id]; if (!isActive(f)) return [];
+            if (f.chip) { const c = f.chip(v); return (Array.isArray(c) ? c : [c]).filter(Boolean).map((t, i) => ({t, rm: () => (f.type === 'check' && f.options ? st.filters[f.id] = (st.filters[f.id] || []).filter((_, j) => j !== i) : st.filters[f.id] = f.type === 'check' && f.options ? [] : f.type === 'check' ? false : (f.dflt ?? ''))})); }
+            if (f.type === 'check' && f.options) return (v || []).map(x => { const o = optList(f).find(o2 => o2.value === String(x)); return {t: o?.chip || o?.label || x, rm: () => { st.filters[f.id] = st.filters[f.id].filter(y => String(y) !== String(x)); }}; });
+            if (f.type === 'check') return [{t: f.chipLabel || f.label, rm: () => { st.filters[f.id] = false; }}];
+            if (f.type === 'radio' || f.type === 'select') { const o = optList(f).find(o2 => o2.value === String(v)); return [{t: o?.chip || `${f.label} : ${o?.label || v}`, rm: () => { st.filters[f.id] = f.dflt ?? ''; }}]; }
+            if (f.type === 'place' || f.type === 'person' || f.kind) return [{t: `${f.chipPrefix ?? `${f.label} :`} ${placeTitle(v)}`.trim(), rm: () => { st.filters[f.id] = ''; }}];
+            const dt = f.type !== 'date' ? v : /^\d{4}-\d\d-\d\d$/.test(String(v)) ? new Date(`${v}T12:00:00`).toLocaleDateString('fr-FR', {day: 'numeric', month: 'long', year: 'numeric'}) : (UI.readDate?.(String(v))?.label || v);
+            return [{t: `${f.chipPrefix ?? `${f.label} :`} ${dt}`.trim(), rm: () => { st.filters[f.id] = ''; }}];
+        };
+        let fbtn = null;
+        if (filters.length) {
+            fbtn = h('button', 'ui-listbar-btn ui-listbar-fbtn'); fbtn.type = 'button'; fbtn.setAttribute('aria-haspopup', 'true');
+            $('.ui-listbar-filter').appendChild(fbtn);
+            fbtn.addEventListener('click', () => (openPop?.anchor === fbtn ? closePop() : openMenu()));
+        } else $('.ui-listbar-filter').remove();
+        const paintBtn = () => { if (!fbtn) return; const n = filters.filter(isActive).length; fbtn.innerHTML = `Filtrer ▾${n ? ` <b class="ui-listbar-n" aria-label="${n} actif${n > 1 ? 's' : ''}">${n}</b>` : ''}`; fbtn.classList.toggle('has-active', n > 0); fbtn.setAttribute('aria-expanded', String(openPop?.anchor === fbtn)); };
+        const changed = (f, what = 'filter') => { paintActive(); emit(what); };
+        function menuRow(f) {
+            const v = st.filters[f.id], nm = `lb-${key || 'x'}-${f.id}`.replace(/[^\w-]/g, '_');
+            if (f.type === 'check' && f.options) return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${(v || []).map(String).includes(o.value) ? ' checked' : ''}> ${esc(o.label)}</label>`).join('');
+            if (f.type === 'check') return `<label class="checkbox-line ui-listbar-opt"><input type="checkbox" data-lb-f="${esc(f.id)}"${v ? ' checked' : ''}${f.disabled?.(st.filters) ? ' disabled' : ''}> ${esc(f.text || f.label)}</label>`;
+            if (f.type === 'radio') return optList(f).map(o => `<label class="checkbox-line ui-listbar-opt"><input type="radio" name="${nm}" data-lb-f="${esc(f.id)}" value="${esc(o.value)}"${String(v) === o.value ? ' checked' : ''}> ${esc(o.label)}</label>`).join('');
+            if (f.type === 'select') return `<select class="ui-listbar-sel" data-lb-f="${esc(f.id)}" aria-label="${esc(f.label)}">${optList(f).map(o => `<option value="${esc(o.value)}"${String(v) === o.value ? ' selected' : ''}>${esc(o.label)}</option>`).join('')}</select>`;
+            if (f.type === 'place' || f.type === 'person' || f.kind) {
+                const P = window.LCNDA_PICKER, kind = f.kind || f.type;
+                if (!P?.pickerField) return `<input data-lb-f="${esc(f.id)}" value="${esc(placeTitle(v))}" placeholder="${esc(f.placeholder || '')}">`;
+                const val = v && typeof v === 'object' && v.id ? {id: Number(v.id), title: v.title || '', kind} : v ? (typeof v === 'object' ? `txt:${placeTitle(v)}` : String(v).startsWith('txt:') || /^\d+$/.test(String(v)) ? String(v) : `txt:${v}`) : null;
+                return `<div class="ui-listbar-pk" data-lb-pk="${esc(f.id)}">${P.pickerField({name: nm, hiddenName: false, kind, inline: true, allowFree: f.allowFree !== false, allowCreate: false, value: val, ...(f.picker || {})})}</div>`;
+            }
+            if (f.type === 'date') return `<input class="ui-listbar-in" data-lb-f="${esc(f.id)}" type="${f.native ? 'date' : 'text'}" value="${esc(v || '')}" placeholder="${esc(f.placeholder || '')}"${f.native ? '' : ' data-ui-date="nocal"'}>`;
+            return `<input class="ui-listbar-in" data-lb-f="${esc(f.id)}" value="${esc(v || '')}" placeholder="${esc(f.placeholder || '')}">`;
+        }
+        function openMenu() {
+            const box = h('div', 'ui-listbar-menu');
+            box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Filtrer');
+            const groups = []; filters.forEach(f => { const g = f.group || f.label; let gr = groups.find(x => x.g === g); if (!gr) groups.push(gr = {g, fs: []}); gr.fs.push(f); });
+            box.innerHTML = groups.map(gr => `<div class="ui-listbar-group"><b>${esc(gr.g)}</b>${gr.fs.map(f => `<div class="ui-listbar-f" data-lb-row="${esc(f.id)}">${f.group && f.group !== f.label && f.type !== 'check' ? `<small>${esc(f.label)}</small>` : ''}${menuRow(f)}</div>`).join('')}</div>`).join('') + `<div class="ui-listbar-menu-foot"><button type="button" class="ui-listbar-clear" data-lb-clear>Tout effacer</button><button type="button" class="button small" data-lb-done>Fermer</button></div>`;
+            const find = id => filters.find(f => f.id === id);
+            const refreshDisabled = () => filters.forEach(f => { if (!f.disabled) return; const i = box.querySelector(`[data-lb-f="${CSS.escape(f.id)}"]`); if (i) { i.disabled = !!f.disabled(st.filters); if (i.disabled && st.filters[f.id]) { st.filters[f.id] = false; i.checked = false; } } });
+            box.addEventListener('change', e => {
+                const t = e.target, f = find(t.dataset?.lbF); if (!f) return;
+                if (f.type === 'check' && f.options) st.filters[f.id] = [...box.querySelectorAll(`[data-lb-f="${CSS.escape(f.id)}"]:checked`)].map(i => i.value);
+                else if (f.type === 'check') st.filters[f.id] = t.checked;
+                else st.filters[f.id] = t.value.trim();
+                refreshDisabled(); changed(f);
+            });
+            box.addEventListener('picker-change', e => {
+                const host = e.target.closest?.('[data-lb-pk]'); const f = host && find(host.dataset.lbPk); if (!f) return;
+                const it = e.detail.item; st.filters[f.id] = it ? (it.free ? `txt:${it.title}` : {id: Number(it.id), title: it.title || it.name || ''}) : '';
+                changed(f);
+            });
+            box.addEventListener('click', e => {
+                if (e.target.closest('[data-lb-done]')) { closePop(); fbtn.focus(); return; }
+                if (e.target.closest('[data-lb-clear]')) { w.clear(); closePop(); fbtn.focus(); }
+            });
+            const pop = popup(fbtn, box, {onClose: paintBtn});
+            pop.anchor = fbtn; pop.lbKey = key || null; paintBtn();
+            setTimeout(() => box.querySelector('input, select, button')?.focus());
+        }
+        /* Liste | Fiches */
+        if (view) {
+            const vo = view.nodeType ? null : (view === true ? {} : view);
+            const vt = view.nodeType ? view : UI.viewToggle({key: vo.key ?? key, value: vo.value ?? (saved?.view || null), dflt: vo.dflt || 'list', what: vo.what || 'éléments', onChange: v => { st.view = v; vo.onChange?.(v); emit('view'); }});
+            st.view = vt.value; w.view = vt; $('.ui-listbar-view').appendChild(vt);
+        } else $('.ui-listbar-view').remove();
+        /* Trier : … ▾ */
+        const sortSlot = $('.ui-listbar-sort');
+        if (sort && !sort.nodeType) {
+            const opts = (sort.options || []).map(o => (Array.isArray(o) ? o : [o.value, o.label]));
+            sortSlot.innerHTML = `<label class="ui-sortbar-sort">Trier : <select>${opts.map(([v, l]) => `<option value="${esc(v)}"${String(v) === st.sort ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>`;
+            w.select = sortSlot.querySelector('select');
+            w.select.addEventListener('change', () => { st.sort = w.select.value; sort.onChange?.(st.sort); emit('sort'); });
+        }
+        /** adoptSort(barreC6) : reprend « Trier » (et « Liste | Fiches ») d'une barre C6 déjà faite (ex. table._sortBar) ; elle se cache */
+        w.adoptSort = bar => {
+            if (!bar) { if (w._adopted) { sortSlot.replaceChildren(); sortSlot.remove(); w._adopted = false; w.select = null; } return w; }
+            if (bar === w) return w;
+            const lab = bar.querySelector('.ui-sortbar-sort'), vt = bar.querySelector('.ui-viewtoggle');
+            if (lab) {
+                sortSlot.replaceChildren(lab); w.select = lab.querySelector('select'); w._adopted = true; if (!sortSlot.parentNode) w.querySelector('.ui-listbar-row').appendChild(sortSlot);
+                // le tri de la barre reprise est retenu aussi pour cette liste (et remis au prochain affichage)
+                const sel = w.select;
+                if (sel) {
+                    if (!sel._lbHooked) { sel._lbHooked = true; sel.addEventListener('change', () => { st.sort = sel.value; w._sortKnown = true; save(); }); }
+                    const want = w._sortKnown ? st.sort : String(saved?.sort ?? '');
+                    w._sortKnown = true;
+                    if (want && sel.value !== want && [...sel.options].some(o => o.value === want)) { sel.value = want; sel.dispatchEvent(new Event('change')); } else st.sort = sel.value;
+                }
+            }
+            if (vt && !w.view) { let slot = $('.ui-listbar-view'); if (!slot) { slot = h('span', 'ui-listbar-view'); sortSlot.before(slot); } slot.replaceChildren(vt); w.view = vt; }
+            const cnt = bar.querySelector('.ui-sortbar-count')?.textContent; if (cnt && !w._countSet) setCountText(cnt);
+            bar.hidden = true; bar.classList.add('ui-listbar-adopted');
+            const old = bar.setCount; bar.setCount = n => { old?.(n); setCountText(bar.querySelector('.ui-sortbar-count')?.textContent || ''); };
+            return w;
+        };
+        /* pastilles des filtres actifs + « Tout effacer » */
+        const act = $('.ui-listbar-active');
+        const countEl = h('span', 'ui-listbar-count');
+        const setCountText = t => { countEl.textContent = count === false ? '' : (t || ''); paintActive(); };
+        w.setCount = (n, label = count?.label || 'élément', many = count?.many || '') => { w._countSet = true; setCountText(typeof n === 'number' ? plural(n, label, many) : String(n ?? '')); };
+        function paintActive() {
+            const chips = []; filters.forEach(f => chipsOf(f).forEach(c => chips.push({...c, f})));
+            act.replaceChildren();
+            if (countEl.textContent) act.appendChild(countEl);
+            chips.forEach(c => { const b = h('button', 'ui-listbar-chip'); b.type = 'button'; b.title = 'Retirer ce filtre'; b.innerHTML = `${esc(c.t)} <span aria-hidden="true">×</span>`; b.addEventListener('click', () => { c.rm(); changed(c.f); const next = act.querySelector('.ui-listbar-chip'); (next || fbtn)?.focus(); }); act.appendChild(b); });
+            if (chips.length > 1 || (chips.length && st.q)) { const b = h('button', 'ui-listbar-clearall'); b.type = 'button'; b.textContent = 'Tout effacer'; b.addEventListener('click', () => { w.clear(true); fbtn?.focus(); }); act.appendChild(b); }
+            act.hidden = !act.childNodes.length;
+            paintBtn();
+        }
+        /** setFilter(id, valeur, silent) ; clear(withSearch) remet tous les filtres (et la recherche si withSearch) */
+        w.setFilter = (id, v, silent = false) => { if (!(id in st.filters)) return; st.filters[id] = v; paintActive(); if (silent) save(); else emit('filter'); };
+        w.clear = (withSearch = false) => {
+            filters.forEach(f => { st.filters[f.id] = f.type === 'check' && f.options ? [] : f.type === 'check' ? false : (f.dflt ?? ''); });
+            if (withSearch && w.input && st.q) { st.q = ''; w.input.value = ''; }
+            paintActive(); emit('clear');
+        };
+        if (sort && sort.nodeType) w.adoptSort(sort);
+        if (!sortSlot.childNodes.length) sortSlot.remove();
+        if (count && typeof count === 'object') w.setCount(count.n ?? count.count ?? 0, count.label, count.many);
+        paintActive(); save();
+        // une liste qui se redessine en entier : la barre neuve reprend le curseur dans « Chercher » et le menu Filtrer ouvert
+        if (key && lbFocus?.key === key && Date.now() - lbFocus.at < 3000 && w.input) { const c = lbFocus.caret; setTimeout(() => { if (!w.isConnected || editable(document.activeElement)) return; w.input.focus(); try { w.input.setSelectionRange(c, c); } catch (_) {} }); }
+        if (key && openPop?.lbKey === key && !openPop.anchor?.isConnected && fbtn) { closePop(); setTimeout(() => { if (w.isConnected && !openPop) openMenu(); }); }
+        return w;
+    };
+    /** listBarState(key) → ce que la barre de cette liste retient ({q, f, sort, view}) ou null */
+    UI.listBarState = key => store.get(LB_PREFIX + key, null);
+
     /* ═════ C7 Chargement et messages (HTML à insérer) ═════ */
     UI.spinner = (text = 'Chargement…') => `<div class="ui-spinner" role="status"><span class="ui-spin" aria-hidden="true"></span><span>${esc(text)}</span></div>`;
     UI.skeleton = (lines = 3) => `<div class="ui-skeleton" aria-hidden="true">${Array.from({length: Math.max(1, lines)}, (_, i) => `<div class="ui-skel" style="width:${[82, 65, 74, 58, 90, 70][i % 6]}%"></div>`).join('')}</div>`;
@@ -724,7 +887,7 @@
         clearTimeout(timer);
         timer = setTimeout(() => { const nodes = [...queued]; queued = new Set(); nodes.forEach(n => { if (n.isConnected) scan(n); }); }, 30);
     }).observe(document.documentElement, {childList: true, subtree: true});
-    const attach = () => { const app = window.LCNDA_APP; if (app && app.ui !== UI) app.ui = UI; if (app && !app.viewToggle) app.viewToggle = UI.viewToggle; };
+    const attach = () => { const app = window.LCNDA_APP; if (app && app.ui !== UI) app.ui = UI; if (app && !app.viewToggle) app.viewToggle = UI.viewToggle; if (app && !app.listBar) app.listBar = UI.listBar; };
     attach();
     document.addEventListener('DOMContentLoaded', () => { attach(); scan(document); });
     addEventListener('load', attach);

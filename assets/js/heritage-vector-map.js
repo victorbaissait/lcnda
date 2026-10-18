@@ -161,7 +161,7 @@
             if (b.hasAttribute('data-gup')) { sec.previousElementSibling?.before(sec); savePaletteFrom(box); onChange?.(); return; }
             if (b.hasAttribute('data-gdown')) { sec.nextElementSibling?.after(sec); savePaletteFrom(box); onChange?.(); return; }
             if (b.dataset.vmeEd) { if (await editCustom(b.dataset.vmeEd)) { redraw(); onChange?.(); } return; }
-            if (b.dataset.vmeDel) { if (!await A().confirmBox('Ce qui est déjà dessiné avec reste sur les plans.', {title: 'Supprimer cet élément ?', okLabel: 'Supprimer l’élément'})) return; const P = readP(); P.custom = arr(P.custom).filter(c => c?.id !== b.dataset.vmeDel); writeP(P); redraw(); onChange?.(); return; }
+            if (b.dataset.vmeDel) { const id = b.dataset.vmeDel; A().undoLocalChange('Élément supprimé (ce qui est déjà dessiné avec reste sur les plans)', [PKEY], () => { const P = readP(); P.custom = arr(P.custom).filter(c => c?.id !== id); writeP(P); }, () => { if (box.isConnected) { redraw(); onChange?.(); } }); redraw(); onChange?.(); return; }
             if (b.hasAttribute('data-vme-new')) { if (await editCustom(null)) { redraw(); onChange?.(); } return; }
             if (b.hasAttribute('data-vme-reset')) { if (!await A().confirmBox('Tes éléments sont gardés.', {title: 'Remettre l’ordre et l’affichage de départ ?', okLabel: 'Réinitialiser'})) return; const P = readP(); delete P.order; delete P.hiddenGroups; delete P.items; writeP(P); redraw(); onChange?.(); } });
         box.addEventListener('change', e => { if (e.target.matches('input[type=checkbox]')) { savePaletteFrom(box); onChange?.(); } });

@@ -389,7 +389,7 @@
         redraw();
         dlg.querySelector('[data-who-q]')?.addEventListener('input', () => { shown = STEP; redraw(); });
         dlg.querySelector('[data-who-csv]')?.addEventListener('click', () => {
-            const q = x => `"${String(x ?? '').replace(/"/g, '""')}"`;
+            const q = x => `"${(A().csvSafe || (x => String(x ?? '')))(x).replace(/"/g, '""')}"`; // pas de formule glissée dans un tableur
             const csv = '\ufeff' + [['Nom', 'Prénoms', 'Naissance', 'Décès', 'Métier'].map(q).join(';'), ...people.map(p => [p.last_name, p.first_name, p.birth_date || p.birth_year || '', p.death_date || p.death_year || '', p.occupation].map(q).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (A().safeExportFilename?.(csvName) || 'personnes') + '.csv'; document.body.appendChild(a); a.click(); a.remove();
         });
@@ -1181,7 +1181,7 @@
     /* ── Export d'une de « Mes statistiques » : image PNG, tableau CSV, impression (et PDF) ── */
     const statFileName = d => (A().safeExportFilename ? A().safeExportFilename(d.name || 'statistique', 'statistique') : 'statistique');
     function statCsv(d, datas) {
-        const q = v => { const t = String(v ?? ''); return /[;"\n]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; };
+        const q = v => { const t = (A().csvSafe || (x => String(x ?? '')))(v); return /[;"\n\r]/.test(t) ? `"${t.replace(/"/g, '""')}"` : t; }; // pas de formule glissée dans un tableur
         const lines = [];
         const one = (part, data, title) => {
             if (title) lines.push(q(title));

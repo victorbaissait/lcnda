@@ -186,8 +186,10 @@
         ws.querySelectorAll('[data-ct-hide]').forEach(b => b.addEventListener('click', () => { const t = find(b.dataset.ctHide); t.hidden = !t.hidden; menuHidden(t.id, t.hidden); save(list); refresh(); }));
         ws.querySelectorAll('[data-ct-del]').forEach(b => b.addEventListener('click', async () => {
             const t = find(b.dataset.ctDel);
-            if (!await A().confirmBox(`Supprimer l’onglet « ${t.name || 'Mon onglet'} » ? Les widgets, listes et statistiques qu’il montrait ne sont pas supprimés.`, {title: 'Supprimer l’onglet', okLabel: 'Supprimer l’onglet'})) return;
-            save(list.filter(x => x.id !== t.id)); toast('Onglet supprimé.'); refresh();
+            // H7 : supprimé tout de suite (ses widgets, listes et statistiques restent), « ↶ Annuler » le remet
+            const before = JSON.parse(JSON.stringify(list)), again = () => { if (S().module === 'maintenance') refresh(); };
+            save(list.filter(x => x.id !== t.id)); refresh();
+            A().undoToast?.(`Onglet « ${t.name || 'Mon onglet'} » supprimé`, {undo: () => { save(before); again(); }, redo: () => { save(before.filter(x => x.id !== t.id)); again(); }});
         }));
         ws.querySelector('[data-ct-import]').addEventListener('change', async e => {
             const file = e.target.files[0]; if (!file) return;

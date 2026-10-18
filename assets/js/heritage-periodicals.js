@@ -159,23 +159,11 @@
             <div class="h-pr-views h-pr-fams">${fams.map(([k, l]) => `<button type="button" class="${f.fam === k ? 'is-on' : ''}" data-pr-fam="${k}">${l}</button>`).join('')}</div>
             <div class="h-pr-views">${views.map(([k, l]) => `<button type="button" class="${f.view === k ? 'is-on' : ''}" data-pr-view="${k}">${esc(l)}</button>`).join('')}</div>
             ${['issues', 'wanted'].includes(f.view) ? `<div class="h-pr-views h-pr-disp"><label class="checkbox-line"><input type="checkbox" data-pr-group ${groupOf(f) === 'category' ? 'checked' : ''}> Grouper par catégorie</label></div>` : ''}
-            <div class="h-pr-filters">
-                <input type="search" data-pr-f="q" value="${esc(f.q)}" placeholder="Chercher (titre, auteur, lieu, nom cité, ce qu’on voit, notes…)">
-                <select data-pr-f="periodical">${opt('', 'Toutes (revues, collections, séries)', f.periodical)}${conts.map(p => opt(p.id, p.title, f.periodical)).join('')}</select>
-                <select data-pr-f="kind">${opt('', 'Toutes les sortes', f.kind)}${kinds.map(([v, l]) => opt(v, l, f.kind)).join('')}</select>
-                <select data-pr-f="cat">${opt('', 'Toutes les catégories', f.cat)}${categories().map(c => opt(c, c, f.cat)).join('')}${opt('__none', 'Sans catégorie', f.cat)}</select>
-                <select data-pr-f="status">${opt('', 'Où j’en suis : tout', f.status)}${Object.entries(D.statuses).map(([v, l]) => opt(v || '__none', l, f.status)).join('')}</select>
-                <select data-pr-f="label">${opt('', 'Toutes les étiquettes', f.label)}${labels.map(l => opt(l.id, l.name, f.label)).join('')}</select>
-                <select data-pr-f="inv">${opt('', 'Toutes les enquêtes', f.inv)}${invs.map(l => opt(l.id, l.name, f.inv)).join('')}</select>
-                <input type="search" data-pr-f="who" value="${esc(f.who)}" placeholder="Personne citée…">
-                <label class="h-pr-years">Années <input type="number" data-pr-f="y0" value="${esc(f.y0)}" placeholder="de"> – <input type="number" data-pr-f="y1" value="${esc(f.y1)}" placeholder="à"></label>
-                <span class="h-pr-sorts">Ensuite par ${sortSel(1)} puis ${sortSel(2)}</span>
-                <button type="button" class="link-button" data-pr-reset>Tout effacer</button>
-            </div>
             <div data-pr-sortbar data-count="${f.view === 'articles' ? articles.length : f.view === 'periodicals' ? conts.length : f.view === 'wanted' ? wanted.length : issues.length}"></div>
+            <div class="h-pr-filters h-pr-then"><span class="h-pr-sorts">Ensuite par ${sortSel(1)} puis ${sortSel(2)}</span></div>
             <div data-pr-body>${f.view === 'articles' ? articlesTable(articles) : f.view === 'periodicals' ? periodicalCards(conts) : f.view === 'wanted' ? `<p class="h-pr-total">${wanted.length} à acheter ou commandé${wanted.length > 1 ? 's' : ''}${total ? ` · environ <strong>${esc(euro(total))}</strong> au prix affiché` : ''}</p>${issuesShown(wanted, f, true)}` : issuesShown(issues, f)}</div>
         </section>`;
-        bind(ws, {issues, articles, wanted});
+        bind(ws, {issues, articles, wanted}, {w, conts, kinds, labels, invs});
     }
     /** les éléments en liste ou en fiches, groupés par catégorie si on veut */
     function issuesShown(rows, f, buy = false) {
@@ -222,22 +210,29 @@
                 ${last ? `<small class="muted">Dernier : ${esc(issueName(last))} ${esc(last.date_text || '')}</small>` : ''}${labelChips(p.labels)}
                 <div class="page-actions compact"><button type="button" class="button small secondary" data-pr-only="${p.id}">Voir tout</button><button type="button" class="button small secondary" data-pr-addissue="${p.id}">＋ ${esc(Wf(fm).item)}</button></div></article>`; }).join('')}</div>`;
     }
-    function bind(ws, rows) {
+    function bind(ws, rows, {w = W[''], conts = [], kinds = [], labels = [], invs = []} = {}) {
         const save = patch => { lsSet(PREFS, {...prefs(), ...patch}); draw(); };
         ws.querySelectorAll('[data-pr-fam]').forEach(b => b.addEventListener('click', () => save({fam: b.dataset.prFam, periodical: '', kind: ''})));
         ws.querySelectorAll('[data-pr-view]').forEach(b => b.addEventListener('click', () => save({view: b.dataset.prView})));
         ws.querySelector('[data-pr-group]')?.addEventListener('change', e => { const p = prefs(); save({groupBy: {...p.groupBy, [p.fam || 'all']: e.target.checked ? 'category' : ''}}); });
         ws.querySelector('[data-pr-types]')?.addEventListener('click', () => typesDialog());
-        let t = 0;
-        ws.querySelectorAll('[data-pr-f]').forEach(el => el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', () => { clearTimeout(t); t = setTimeout(() => { const pos = el.selectionStart; save({[el.dataset.prF]: el.value}); const again = A().$(`[data-pr-f="${el.dataset.prF}"]`); if (again && el.tagName !== 'SELECT') { again.focus(); try { again.setSelectionRange(pos, pos); } catch (_) {} } }, el.tagName === 'SELECT' ? 0 : 300); }));
-        // C6 : « N éléments · Trier : [menu] » (le premier critère ; « Ensuite par… » affine)
+        // H10 : la barre commune (🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier) ; les choix restent rangés dans les réglages de la liste (PREFS), « Ensuite par… » affine le tri
         const sb = ws.querySelector('[data-pr-sortbar]'), UI = window.LCNDA_UI;
-        // H10 : « Liste | Fiches » juste avant « Trier » (numéros, livres, films et « À acheter » ; retenu pour chaque type)
-        const pf = prefs(), view = ['issues', 'wanted'].includes(pf.view) ? {value: dispOf(pf), what: 'éléments', onChange: v => { const p = prefs(); save({dispBy: {...p.dispBy, [p.fam || 'all']: v}}); }} : null;
-        if (sb && UI?.sortBar) { const cur = prefs().sort?.[0] || ''; sb.replaceWith(UI.sortBar({count: Number(sb.dataset.count) || 0, label: 'élément', value: cur, view, options: [['', 'Dans l’ordre de départ'], ...Object.entries(SORTS).map(([v, [l]]) => [v, l])],
-            onChange: v => { const s = [...prefs().sort]; s[0] = v; save({sort: s.filter((x, k) => x || k < 3)}); }})); }
+        const pf = prefs(), view = ['issues', 'wanted'].includes(pf.view) ? {key: '', value: dispOf(pf), what: 'éléments', onChange: v => { const p = prefs(); save({dispBy: {...p.dispBy, [p.fam || 'all']: v}}); }} : null;
+        if (sb && UI?.listBar) {
+            const sel = (id, label, first, opts, v) => ({id, label, type: 'select', options: [['', first], ...opts.map(([k, l]) => [String(k), l, `${label} : ${l}`])], value: String(v || '')});
+            const bar = UI.listBar({key: `listes:periodicals:${pf.fam || 'all'}`, remember: 'given', search: {placeholder: 'Chercher… (titre, auteur, lieu, nom cité, ce qu’on voit, notes)', value: pf.q || ''},
+                filters: [sel('periodical', w.cont || 'Revue, collection, série', 'Toutes', conts.map(p => [p.id, p.title]), pf.periodical), sel('kind', 'Sorte', 'Toutes les sortes', kinds, pf.kind),
+                    sel('cat', 'Catégorie', 'Toutes les catégories', [...categories().map(c => [c, c]), ['__none', 'Sans catégorie']], pf.cat), sel('status', 'Où j’en suis', 'Tout', Object.entries(D.statuses).map(([v, l]) => [v || '__none', l]), pf.status),
+                    sel('label', 'Étiquette', 'Toutes les étiquettes', labels.map(l => [l.id, l.name]), pf.label), sel('inv', 'Enquête', 'Toutes les enquêtes', invs.map(l => [l.id, l.name]), pf.inv),
+                    {id: 'who', label: 'Personne citée', type: 'text', placeholder: 'Nom de la personne…', value: pf.who || ''},
+                    {id: 'y0', group: 'Années', label: 'De', type: 'text', placeholder: '1900', chipPrefix: 'Depuis', value: pf.y0 || ''}, {id: 'y1', group: 'Années', label: 'À', type: 'text', placeholder: '1950', chipPrefix: 'Jusqu’à', value: pf.y1 || ''}],
+                view, sort: {options: [['', 'Dans l’ordre de départ'], ...Object.entries(SORTS).map(([v, [l]]) => [v, l])], value: pf.sort?.[0] || ''},
+                onChange: (b, {what}) => { if (what === 'view') return; const s0 = [...prefs().sort]; s0[0] = b.sort; save({q: b.q, ...b.filters, sort: s0.filter((x, k) => x || k < 3)}); }});
+            bar.setCount(Number(sb.dataset.count) || 0, 'élément');
+            sb.replaceWith(bar);
+        }
         ws.querySelectorAll('[data-pr-sort]').forEach(el => el.addEventListener('change', () => { const s = [...prefs().sort]; s[Number(el.dataset.prSort)] = el.value; save({sort: s.filter((v, k) => v || k < 3)}); }));
-        ws.querySelector('[data-pr-reset]').addEventListener('click', () => save({q: '', periodical: '', kind: '', status: '', label: '', who: '', inv: '', y0: '', y1: '', cat: ''}));
         ws.querySelectorAll('[data-pr-new]').forEach(b => b.addEventListener('click', () => b.dataset.prNew === 'periodical' ? periodicalDialog(null, prefs().fam || 'revue') : issueDialog(null, Number(prefs().periodical) || 0, b.dataset.fam)));
         ws.querySelectorAll('[data-pr-only]').forEach(b => b.addEventListener('click', () => save({view: 'issues', periodical: b.dataset.prOnly})));
         ws.querySelectorAll('[data-pr-addissue]').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); issueDialog(null, Number(b.dataset.prAddissue)); }));

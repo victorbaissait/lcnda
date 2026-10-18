@@ -101,8 +101,23 @@
         }
         return cells.map((row, r) => row.map((_, c) => { try { const v = val(r, c); return typeof v === 'number' ? (Number.isFinite(v) ? v : '#DIV/0') : v; } catch (_) { return '#ERREUR'; } }));
     }
+    /* Défense en profondeur : une couleur ou un masque venus d'un tableau importé ne peuvent rien glisser d'autre dans un style ou un attribut.
+     * Couleur acceptée : #hex, rgb()/rgba(), hsl()/hsla(), un nom simple (transparent, red…) ; sinon la valeur par défaut de l'élément.
+     * Masque accepté : seulement une image data:image/(png|jpeg|webp);base64,… */
+    const safeCol = (c, fb = '') => { if (c == null || c === '') return c; const t = String(c).trim(); return /^#[0-9a-f]{3,8}$/i.test(t) || /^[a-z]{3,20}$/i.test(t) || /^(rgb|hsl)a?\([\d\s.,%]+\)$/i.test(t) ? t : fb; };
+    const safeMask = m => /^data:image\/(png|jpeg|webp);base64,[a-z0-9+/=\s]+$/i.test(String(m || '')) ? String(m).replace(/\s+/g, '') : '';
+    const SAFE_COLOR_KEYS = ['color', 'fill', 'stroke', 'lbColor', 'lbBg', 'lbBorder', 'hfill', 'headColor'];
+    function safeItem(it) {
+        if (!it || typeof it !== 'object') return it;
+        const o = {...it};
+        SAFE_COLOR_KEYS.forEach(k => { if (k in o) o[k] = safeCol(o[k]); });
+        if ('mask' in o && o.mask) o.mask = safeMask(o.mask);
+        if (o.cfill && typeof o.cfill === 'object') o.cfill = Object.fromEntries(Object.entries(o.cfill).map(([k, v]) => [k, safeCol(v)]));
+        return o;
+    }
     /** La grille d'un tableur, avec les cellules fusionnées (rowspan / colspan) */
     function tableHtml(it) {
+        it = safeItem(it);
         const cells = it.cells?.length ? it.cells : [['']], vals = tableValues(cells), nrow = cells.length, ncol = Math.max(...cells.map(r => r.length)), cw = Array.from({length: ncol}, (_, c) => it.colw?.[c] || 100), tot = cw.reduce((s0, x) => s0 + x, 0);
         const cover = new Map(); // "r:c" → la fusion qui commence ici, ou true si la cellule est couverte
         for (const m of it.merges || []) { if (m.r >= nrow || m.c >= ncol) continue; const rs = Math.min(m.rs, nrow - m.r), cs = Math.min(m.cs, ncol - m.c); for (let r = m.r; r < m.r + rs; r++) for (let c = m.c; c < m.c + cs; c++) cover.set(r + ':' + c, r === m.r && c === m.c ? {rs, cs} : true); }
@@ -415,6 +430,7 @@
         // ce qui change le dessin d'un élément (pas sa place) ; un trait qui contourne change aussi quand un obstacle bouge
         const contentSig = it => { const {x, y, z, w, h, locked, ...rest} = it; if (it.type === 'line') return JSON.stringify(it) + (it.path === 'avoid' && !it.bends?.length ? JSON.stringify(routePts(it)) : ''); return ['timeline', 'map', 'frame'].includes(it.type) ? JSON.stringify({...rest, w, h}) : JSON.stringify(rest); };
         function itemInner(it) {
+            it = safeItem(it); // couleurs et masque filtrés (voir safeItem)
             const LIST_CSS = {bullet: 'disc', num: 'decimal', roman: 'upper-roman', alpha: 'lower-alpha', ALPHA: 'upper-alpha', dash: '"– "', check: '"☐ "'};
             const txt = v => { if (!it.list || !LIST_CSS[it.list] || !v) return esc(v || '').replace(/\n/g, '<br>'); const tag = ['num', 'roman', 'alpha', 'ALPHA'].includes(it.list) ? 'ol' : 'ul'; return `<${tag} class="h-bi-list" style="list-style-type:${LIST_CSS[it.list]}">${String(v).split('\n').map(li => `<li>${esc(li) || '&nbsp;'}</li>`).join('')}</${tag}>`; };
             const textStyle = `font-size:${it.fs || 18}px;color:${it.color || '#111'};font-weight:${it.weight || (it.bold ? 700 : 400)};font-style:${it.italic ? 'italic' : 'normal'};text-decoration:${[it.underline && 'underline', it.strike && 'line-through'].filter(Boolean).join(' ') || 'none'};text-align:${['left', 'center', 'right', 'justify'].includes(it.align) ? it.align : 'left'};font-family:${esc(cssFont(it.font))}`;
@@ -622,6 +638,8 @@
         const snap = () => JSON.stringify({items, layers, steps});
         const commit = () => { const s = snap(); if (hpos >= 0 && history[hpos] === s) return; history = history.slice(0, hpos + 1); history.push(s); if (history.length > 150) history.shift(); hpos = history.length - 1; queueSave(true); };
         const restore = i => { if (i < 0 || i >= history.length || ro()) return; hpos = i; { const h0 = JSON.parse(history[i]); if (Array.isArray(h0)) items = h0; else { items = h0.items || []; layers = h0.layers || []; steps = h0.steps || []; } } sel = new Set([...sel].filter(byId)); clampCell(); render(); queueSave(true); };
+        // H7 : une suppression faite sans question ; « ↶ Annuler » dans le message en bas à gauche (tant que rien d'autre n'a changé depuis)
+        const undoable = message => { const at = hpos; A().undoToast?.(message, {undo: () => { if (!root.isConnected) throw new Error('le tableau est fermé'); if (hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans la barre du tableau'); restore(at - 1); }, redo: () => { if (root.isConnected && hpos === at - 1) restore(at); }}); };
         const ownerData = {owner_type: b.owner_type, owner_id: b.owner_id, part: b.part};
         function queueSave(changed) {
             if (changed) { dirty = true; changes++; status('Modifié…'); }
@@ -1067,7 +1085,7 @@
         }
         function tableCsv(it) {
             const vals = tableValues(it.cells), q = v => /[";\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
-            const csv = '\ufeff' + vals.map(r => r.map(v => q(typeof v === 'number' ? String(v).replace('.', ',') : String(v))).join(';')).join('\n');
+            const csv = '\ufeff' + vals.map(r => r.map(v => q(typeof v === 'number' ? String(v).replace('.', ',') : (A().csvSafe || (x => String(x ?? '')))(String(v)))).join(';')).join('\n'); // pas de formule glissée dans un tableur
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = (root.querySelector('[data-bd-title]').value.trim() || 'tableau') + ' - tableur.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
         }
         async function openItem(it) {
@@ -2094,7 +2112,7 @@
                 const lk = e.target.closest('[data-llock]'); if (lk) { const l0 = L(lk.dataset.llock); l0.locked = !l0.locked; changed(); return; }
                 const up = e.target.closest('[data-lup]'); if (up) { const i = layers.findIndex(x => x.id === up.dataset.lup); if (i < layers.length - 1) { [layers[i], layers[i + 1]] = [layers[i + 1], layers[i]]; restackLayers(); } changed(); return; }
                 const ls = e.target.closest('[data-lsel]'); if (ls) { sel = new Set(items.filter(i => i.layer === ls.dataset.lsel && !hiddenIds.has(i.id)).map(i => i.id)); render(); draw(); return; }
-                const dl = e.target.closest('[data-ldel]'); if (dl) { if (ro()) return; const id0 = dl.dataset.ldel; if (!await A().confirmBox('Supprimer ce calque ? Ses éléments restent, sur le calque principal.', {title: 'Supprimer le calque', okLabel: 'Supprimer le calque'})) return; items.forEach(i => { if (i.layer === id0) delete i.layer; }); layers = layers.filter(x => x.id !== id0); if (activeLayer === id0) activeLayer = ''; render(); commit(); draw(); }
+                const dl = e.target.closest('[data-ldel]'); if (dl) { if (ro()) return; const id0 = dl.dataset.ldel, nm = layers.find(x => x.id === id0)?.name || ''; items.forEach(i => { if (i.layer === id0) delete i.layer; }); layers = layers.filter(x => x.id !== id0); if (activeLayer === id0) activeLayer = ''; render(); commit(); draw(); undoable(`Calque${nm ? ` « ${nm} »` : ''} supprimé (ses éléments restent sur le calque principal)`); }
             });
             m.addEventListener('change', e => { const a = e.target.closest('[data-lact]'); if (a) { activeLayer = a.dataset.lact; draw(); } const n = e.target.closest('[data-lname]'); if (n) { const l0 = layers.find(x => x.id === n.dataset.lname); if (l0) { l0.name = n.value.trim() || l0.name; queueSave(true); } } });
             setTimeout(() => document.addEventListener('pointerdown', function off(ev) { if (!m.contains(ev.target) && !btn.contains(ev.target)) { m.remove(); document.removeEventListener('pointerdown', off, true); } }, true), 0);
@@ -2259,7 +2277,7 @@
             body: `<div class="form-grid"><label class="span-2">Titre<input name="title" placeholder="Qui est le père de Marie ?" required></label>${owner.owner_type ? `<label class="span-2">Partie <small class="muted">(facultatif)</small><input name="part" placeholder="Piste 1, les témoins…"></label>` : ''}</div>
                 <h4>Pour commencer</h4><div class="h-bd-templates">${TEMPLATES.map(([k, i, l, h], n) => `<label class="h-bd-tpl"><input type="radio" name="tpl" value="${k}" ${n ? '' : 'checked'}><span class="h-bd-tplicon">${i}</span><strong>${esc(l)}</strong><small>${esc(h)}</small></label>`).join('')}</div>
                 ${mine.length ? `<h4>Mes modèles</h4><div class="h-bd-templates" data-bd-mytpl>${mine.map(t => `<label class="h-bd-tpl"><input type="radio" name="tpl" value="my:${esc(t.id)}"><span class="h-bd-tplicon">${esc(t.icon || '⭐')}</span><strong>${esc(t.name)}</strong><small>${esc(t.hint || `${t.items.length} élément${t.items.length > 1 ? 's' : ''}`)}</small><button type="button" class="h-bd-tpldel" data-bd-tpldel="${esc(t.id)}" title="Supprimer ce modèle" aria-label="Supprimer ce modèle">×</button></label>`).join('')}</div>` : '<p class="muted"><small>Pour faire tes propres modèles : dans un tableau, ⬇ Exporter → ⭐ En faire un modèle.</small></p>'}`,
-            onOpen: d => d.querySelector('[data-bd-mytpl]')?.addEventListener('click', async e => { const x = e.target.closest('[data-bd-tpldel]'); if (!x) return; e.preventDefault(); const t = myTemplates().find(t0 => t0.id === x.dataset.bdTpldel); if (!t || !await A().confirmBox(`Supprimer le modèle « ${t.name} » ?`, {title: 'Supprimer le modèle', okLabel: 'Supprimer le modèle'})) return; try { localStorage.setItem(TPL_KEY, JSON.stringify(myTemplates().filter(t0 => t0.id !== t.id))); } catch (_) {} x.closest('.h-bd-tpl').remove(); }),
+            onOpen: d => d.querySelector('[data-bd-mytpl]')?.addEventListener('click', async e => { const x = e.target.closest('[data-bd-tpldel]'); if (!x) return; e.preventDefault(); const t = myTemplates().find(t0 => t0.id === x.dataset.bdTpldel); if (!t) return; const card = x.closest('.h-bd-tpl'), next = card.nextSibling, par = card.parentNode; A().undoLocalChange(`Modèle « ${t.name} » supprimé`, [TPL_KEY], () => localStorage.setItem(TPL_KEY, JSON.stringify(myTemplates().filter(t0 => t0.id !== t.id))), w => { if (!par.isConnected) return; if (w === 'undo') par.insertBefore(card, next && next.parentNode === par ? next : null); else card.remove(); }); card.remove(); }),
             onSubmit: async form => {
                 const title = form.elements.title.value.trim() || 'Tableau sans titre', v = form.elements.tpl.value;
                 let data;
@@ -2358,32 +2376,48 @@
         const cols = kind === 'boards_list' ? [['Tableau', r => `<button type="button" class="table-link" data-bd-go="${r.id}">${esc((r.icon || '🧩') + ' ' + r.title)}</button>`, r => r.title], ['Rangé dans', r => `${OWNER_ICONS[r.owner_type] || '🧩'} ${esc(r.owner_type ? r.owner_label || OWNERS[r.owner_type] : 'Libre')}`, r => r.owner_label], ['Partie', r => esc(r.part), r => r.part], ['Éléments', r => fmt(r.item_count), r => Number(r.item_count)], ['Dossiers', r => fmt(r.sub_count), r => Number(r.sub_count)], ['Modifié', r => esc(String(r.updated_at || '').slice(0, 10)), r => r.updated_at]] : conf[2];
         const title = kind === 'boards_list' ? 'Tableaux' : conf[0];
         st.bdListSort = st.bdListSort || {};
-        const sort = st.bdListSort[kind] || {i: -1, dir: 1};
-        if (sort.i >= 0) { const f = cols[sort.i][2]; rows = [...rows].sort((a, b) => { const x = f(a), y = f(b); return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), 'fr')) * sort.dir; }); }
-        // H10 : « N lignes · [Liste | Fiches] · Trier : … », l'affichage retenu pour chaque liste
-        const UI = window.LCNDA_UI, view = UI?.viewOf ? UI.viewOf(`listes:${kind}`) : 'list';
+        // H10 : la barre commune (🔍 Chercher · Filtrer ▾ · Liste | Fiches · Trier), retenue pour chaque liste ; la liste se redessine seule
+        const UI = window.LCNDA_UI, KEY = `listes:${kind}`, all = rows;
+        const fold = t => String(t ?? '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
         const open = r => kind === 'boards_list' ? `data-bd-go="${r.id}"` : kind === 'investigations_list' ? `data-bd-inv="${r.id}"` : kind === 'battues_list' ? `data-bd-bat="${r.id}"` : `data-bd-ate="${r.id}"`;
         const strip = h => String(h ?? '').replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
         const icon = r => kind === 'boards_list' ? (r.thumb ? `<img src="${esc(r.thumb)}" alt="">` : `<span class="ui-card-ico">${esc(r.icon || '🧩')}</span>`) : `<span class="ui-card-ico">${esc(kind === 'atelier_list' ? (r.icon || '📚') : kind === 'battues_list' ? '🧭' : '🔍')}</span>`;
         const dateCol = cols.findIndex(c => /^Modifi|^Échéance/.test(c[0]));
         const item = r => ({thumb: icon(r), name: r.title || 'Sans titre', open: open(r), lines: [cols.slice(1).map((c, k) => { const t = k + 1 === dateCol ? '' : strip(c[1](r)); return t && /^\d/.test(t) ? `${c[0]} : ${t}` : t; }).filter(Boolean).join(' · ')], date: dateCol >= 0 && strip(cols[dateCol][1](r)) ? `${cols[dateCol][0]} : ${strip(cols[dateCol][1](r))}` : ''});
-        A().$('#workspace').innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${esc(title)}</h2><p>${fmt(rows.length)} ligne${rows.length > 1 ? 's' : ''}. Un clic sur un titre l’ouvre ; un clic sur une colonne trie.</p></div></header>
-            <div data-bd-sortbar></div>
-            ${rows.length && view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(rows.map(item)) : rows.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${sort.i === i ? (sort.dir > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'})}</section>`;
+        const num = i => all.some(r => typeof cols[i][2](r) === 'number');
+        const sortOptions = [['-1:1', 'Dans l’ordre de départ'], ...cols.flatMap(([h], i) => /^Modifi|^Échéance/.test(h) ? [[`${i}:-1`, `${h} : les plus récents`], [`${i}:1`, `${h} : les plus anciens`]] : num(i) ? [[`${i}:-1`, `${h} : du plus grand au plus petit`], [`${i}:1`, `${h} : du plus petit au plus grand`]] : [[`${i}:1`, `${h} : A → Z`], [`${i}:-1`, `${h} : Z → A`]])];
+        const groupOf = r => kind === 'boards_list' ? String(r.owner_type || '') : String(r.status || '');
+        const groupLabel = g => kind === 'boards_list' ? `${OWNER_ICONS[g] || '🧩'} ${g ? OWNERS[g] || g : 'Libre'}` : (STATUS[g] || g || '—');
+        const groups = [...new Set(all.map(groupOf))];
+        const old = st.bdListSort[kind];
         const ws = A().$('#workspace');
-        const slot = ws.querySelector('[data-bd-sortbar]');
-        if (slot && UI?.sortBar && rows.length) {
-            const num = i => rows.some(r => typeof cols[i][2](r) === 'number');
-            const options = [['-1:1', 'Dans l’ordre de départ'], ...cols.flatMap(([h], i) => /^Modifi|^Échéance/.test(h) ? [[`${i}:-1`, `${h} : les plus récents`], [`${i}:1`, `${h} : les plus anciens`]] : num(i) ? [[`${i}:-1`, `${h} : du plus grand au plus petit`], [`${i}:1`, `${h} : du plus petit au plus grand`]] : [[`${i}:1`, `${h} : A → Z`], [`${i}:-1`, `${h} : Z → A`]])];
-            const bar = UI.sortBar({count: rows.length, label: 'ligne', feminine: true, options, value: `${sort.i}:${sort.i < 0 ? 1 : sort.dir}`, view: {key: `listes:${kind}`, what: 'lignes', onChange: () => listPage(++st.workspaceToken, kind)}, onChange: v => { const [i, dir] = v.split(':').map(Number); st.bdListSort[kind] = {i, dir}; listPage(++st.workspaceToken, kind); }});
-            slot.replaceWith(bar);
-        } else slot?.remove();
-        A().bindTableLinks?.();
-        ws.querySelectorAll('[data-bd-sort]').forEach(x => x.addEventListener('click', () => { const i = Number(x.dataset.bdSort); st.bdListSort[kind] = {i, dir: sort.i === i ? -sort.dir : 1}; listPage(++st.workspaceToken, kind); }));
-        ws.querySelectorAll('[data-bd-go]').forEach(x => x.addEventListener('click', () => go(Number(x.dataset.bdGo))));
-        ws.querySelectorAll('[data-bd-inv]').forEach(x => x.addEventListener('click', () => { Object.assign(st, {enquetesTab: 'enquetes', currentBattueId: 0, currentInvestigationId: Number(x.dataset.bdInv)}); A().setModule('enquetes'); }));
-        ws.querySelectorAll('[data-bd-bat]').forEach(x => x.addEventListener('click', () => { Object.assign(st, {enquetesTab: 'battue', currentInvestigationId: 0, currentBattueId: Number(x.dataset.bdBat)}); A().setModule('enquetes'); }));
-        ws.querySelectorAll('[data-bd-ate]').forEach(x => x.addEventListener('click', () => { st.atelier = {...(st.atelier || {}), project: Number(x.dataset.bdAte), sel: []}; Object.assign(st, {enquetesTab: 'atelier', currentInvestigationId: 0, currentBattueId: 0}); A().setModule('enquetes'); }));
+        ws.innerHTML = `<section class="page"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>${esc(title)}</h2><p data-bd-count></p></div></header>
+            ${all.length ? '<div data-bd-bar></div>' : ''}<div data-bd-body></div></section>`;
+        const body = ws.querySelector('[data-bd-body]');
+        const bar = all.length ? UI.listBar({key: KEY, search: {placeholder: kind === 'boards_list' ? 'Chercher un tableau… (titre, enquête, battue)' : kind === 'battues_list' ? 'Chercher une battue… (titre, commune, personne)' : kind === 'atelier_list' ? 'Chercher un projet… (titre, sorte)' : 'Chercher une enquête… (titre, personne)'},
+            filters: groups.length > 1 ? [{id: 'group', label: kind === 'boards_list' ? 'Rangé dans' : 'État', type: 'check', options: groups.map(g => [g, groupLabel(g)])}] : [],
+            view: {what: 'lignes', onChange: () => paint()}, sort: {options: sortOptions, value: old ? `${old.i}:${old.i < 0 ? 1 : old.dir}` : '-1:1'},
+            onChange: (b, {what}) => { if (what !== 'view') paint(); }}) : null;
+        if (bar) ws.querySelector('[data-bd-bar]').replaceWith(bar);
+        const paint = () => {
+            if (!body.isConnected) return;
+            const b = bar ? bar.state : {q: '', filters: {}, sort: '-1:1', view: 'list'}, q = fold(b.q).trim(), want = b.filters.group || [];
+            const [si, sd] = String(b.sort || '-1:1').split(':').map(Number);
+            st.bdListSort[kind] = {i: si, dir: sd || 1};
+            let list = all.filter(r => (!q || fold(cols.map(c => strip(c[1](r))).join(' ')).includes(q)) && (!want.length || want.includes(groupOf(r))));
+            if (si >= 0 && cols[si]) { const f = cols[si][2]; list = [...list].sort((a, c) => { const x = f(a), y = f(c); return (typeof x === 'number' && typeof y === 'number' ? x - y : String(x ?? '').localeCompare(String(y ?? ''), 'fr')) * (sd || 1); }); }
+            ws.querySelector('[data-bd-count]').textContent = `${fmt(list.length)} ligne${list.length > 1 ? 's' : ''}${list.length !== all.length ? ` sur ${fmt(all.length)}` : ''}. Un clic sur un titre l’ouvre ; un clic sur une colonne trie.`;
+            bar?.setCount(list.length, 'ligne');
+            body.innerHTML = list.length && b.view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(list.map(item)) : list.length ? `<div class="data-table-wrap"><table class="data-table"><thead><tr>${cols.map(([h], i) => `<th><button type="button" data-bd-sort="${i}">${esc(h)}${si === i ? (sd > 0 ? ' ▲' : ' ▼') : ''}</button></th>`).join('')}</tr></thead><tbody>${list.map(r => `<tr>${cols.map(c => `<td>${c[1](r)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
+                : all.length ? A().emptyState({icon: '🔍', text: 'Rien ne correspond à ta recherche', hint: 'Change les mots cherchés ou retire un filtre.'}) : A().emptyState({icon: '🧩', text: kind === 'boards_list' ? 'Aucun tableau pour l’instant' : 'Rien pour l’instant', hint: 'Les tableaux se créent dans Enquêtes → Tableaux.'});
+            A().bindTableLinks?.();
+            body.querySelectorAll('[data-bd-sort]').forEach(x => x.addEventListener('click', () => { const i = Number(x.dataset.bdSort), v = `${i}:${si === i ? -(sd || 1) : 1}`; if (bar?.select) { bar.select.value = v; bar.select.dispatchEvent(new Event('change')); } }));
+            body.querySelectorAll('[data-bd-go]').forEach(x => x.addEventListener('click', () => go(Number(x.dataset.bdGo))));
+            body.querySelectorAll('[data-bd-inv]').forEach(x => x.addEventListener('click', () => { Object.assign(st, {enquetesTab: 'enquetes', currentBattueId: 0, currentInvestigationId: Number(x.dataset.bdInv)}); A().setModule('enquetes'); }));
+            body.querySelectorAll('[data-bd-bat]').forEach(x => x.addEventListener('click', () => { Object.assign(st, {enquetesTab: 'battue', currentInvestigationId: 0, currentBattueId: Number(x.dataset.bdBat)}); A().setModule('enquetes'); }));
+            body.querySelectorAll('[data-bd-ate]').forEach(x => x.addEventListener('click', () => { st.atelier = {...(st.atelier || {}), project: Number(x.dataset.bdAte), sel: []}; Object.assign(st, {enquetesTab: 'atelier', currentInvestigationId: 0, currentBattueId: 0}); A().setModule('enquetes'); }));
+        };
+        paint();
     };
     for (const k of ['investigations_list', 'battues_list', 'atelier_list', 'boards_list']) ext.lists[k] = token => listPage(token, k);
     // bloc de la fiche d'une personne : les tableaux qui lui sont associés

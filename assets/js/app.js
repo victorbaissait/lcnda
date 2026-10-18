@@ -1043,7 +1043,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         const nameOf=id=>people[id]?`${personName(people[id])}${years(people[id])?` · ${years(people[id])}`:''}`:`Fiche n° ${id} (supprimée ?)`;
         box.innerHTML=kinds.map(([kind,title])=>`<section class="maintenance-panel order-editor block-order-editor"><h3>${escapeHtml(title)} <small>(${found[kind].length})</small></h3>${found[kind].length?`<div class="person-exception-list">${found[kind].sort((a,b)=>nameOf(a).localeCompare(nameOf(b),'fr')).map(id=>`<div class="person-exception-row"><button class="link-button" type="button" data-exception-open="${id}">${escapeHtml(nameOf(id))}</button><button class="button small secondary" type="button" data-exception-delete="genealogie-${kind}-${id}">Retirer l’exception</button></div>`).join('')}</div>`:'<p class="muted">Aucune fiche : toutes suivent le réglage commun.</p>'}</section>`).join('');
         $$('[data-exception-open]',box).forEach(button=>button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.exceptionOpen);setModule('personnes');}));
-        $$('[data-exception-delete]',box).forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('Elle suivra le réglage de toutes les fiches.',{title:'Retirer le réglage particulier de cette fiche ?',okLabel:'Retirer le réglage'}))return;localStorage.removeItem(button.dataset.exceptionDelete);toast('Exception retirée.');renderDesignTools();}));
+        $$('[data-exception-delete]',box).forEach(button=>button.addEventListener('click',()=>{const k=button.dataset.exceptionDelete;undoLocalChange('Réglage particulier de la fiche retiré',[k],()=>localStorage.removeItem(k),()=>renderDesignTools());renderDesignTools();}));
     }
     function readWebSearchSitesEditor(list){const rows=$$('.order-row',list);return {order:rows.map(row=>row.dataset.orderKey),hidden:rows.filter(row=>!row.querySelector('input[type="checkbox"]')?.checked).map(row=>row.dataset.orderKey)};}
     function bindWebSearchSitesEditors(root=document){
@@ -1258,14 +1258,130 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     const outsideClickHandlers={};
     function onOutsideClick(key,fn){if(outsideClickHandlers[key])document.removeEventListener('click',outsideClickHandlers[key]);outsideClickHandlers[key]=fn;document.addEventListener('click',fn);}
 
-    function toast(message, type = '') {
-        const item = document.createElement('div');
-        item.className = `toast ${type}`;
-        item.textContent = message;
-        $('#toast-region').append(item);
-        setTimeout(() => item.remove(), 4200);
+    /* ═════ H7 Messages après une action : un seul composant (docs/REGLES-INTERFACE.md, maquette docs/design/messages-et-listes.html) ═════
+     * Toujours en bas à gauche, 6 s (× le réglage d'accessibilité « Les messages restent affichés »), barre bleue du temps qui reste,
+     * en pause quand la souris (ou le clavier) est dessus. Sortes : '' noir (action faite, avec un bouton facultatif),
+     * 'success' vert « ✓ … », 'error' rouge « ⛔ … » (avec « Réessayer » si retry est donné).
+     * toast(message, type, {action:{label, run}, retry, duration}) → l'élément (.close()). Les anciens appels toast(msg) / toast(msg,'error') ne changent pas. */
+    let toastRegion=null;
+    function toastHost(){
+        const ds=[...document.querySelectorAll('dialog[open]')].filter(d=>{try{return d.matches(':modal');}catch(_){return false;}});
+        return ds.at(-1)||document.body;
+    }
+    function placeToastRegion(){
+        toastRegion=toastRegion||document.getElementById('toast-region');
+        if(!toastRegion){toastRegion=document.createElement('div');toastRegion.className='toast-region';toastRegion.id='toast-region';toastRegion.setAttribute('aria-live','polite');}
+        const host=toastHost();
+        if(toastRegion.parentNode!==host){
+            host.appendChild(toastRegion);
+            // une fenêtre qui se ferme (et souvent disparaît) rend les messages à la page
+            if(host.tagName==='DIALOG'&&!host._toastBack){host._toastBack=true;host.addEventListener('close',()=>{host._toastBack=false;setTimeout(()=>{if(toastRegion&&toastRegion.parentNode===host||!toastRegion.isConnected){document.body.appendChild(toastRegion);showToastLayer();}});});}
+        }
+        showToastLayer();
+        return toastRegion;
+    }
+    function showToastLayer(){
+        // au-dessus de tout (même d'une fenêtre ouverte) : popover quand le navigateur le permet
+        if(!('popover' in HTMLElement.prototype)||!toastRegion)return;
+        if(!toastRegion.hasAttribute('popover'))toastRegion.setAttribute('popover','manual');
+        try{if(toastRegion.matches(':popover-open'))toastRegion.hidePopover();if(toastRegion.children.length)toastRegion.showPopover();}catch(_){}
+    }
+    const TOAST_MS=6000;
+    function toast(message, type = '', opts = {}) {
+        if(typeof opts!=='object'||!opts)opts={};
+        const region=placeToastRegion();
+        const kind=type==='error'||type==='erreur'?'error':type==='success'||type==='ok'?'success':'';
+        const item=document.createElement('div');
+        item.className=`toast ui-toast${kind?` ${kind}`:''}`;
+        item.setAttribute('role',kind==='error'?'alert':'status');
+        item._a11yKept=true; // la durée est gérée ici (réglage d'accessibilité compris)
+        let text=String(message??'');
+        const startsWithIcon=/^\s*[^\p{L}\p{N}\s«"'(]/u.test(text);
+        const ico=kind==='error'&&!startsWithIcon?'⛔':kind==='success'&&!startsWithIcon?'✓':'';
+        item.innerHTML=`${ico?`<span class="ui-toast-ico" aria-hidden="true">${ico}</span>`:''}<span class="ui-toast-text"></span><span class="ui-toast-acts"></span><span class="ui-toast-bar" aria-hidden="true"></span>`;
+        item.querySelector('.ui-toast-text').textContent=text;
+        const acts=item.querySelector('.ui-toast-acts');
+        const buttons=[];
+        if(opts.action&&opts.action.label)buttons.push(opts.action);
+        if(kind==='error'&&typeof opts.retry==='function')buttons.push({label:'Réessayer',run:opts.retry});
+        (opts.actions||[]).forEach(a=>a&&a.label&&buttons.push(a));
+        buttons.forEach(a=>{const b=document.createElement('button');b.type='button';b.className='ui-toast-btn';b.textContent=a.label;if(a.title)b.title=a.title;b.addEventListener('click',async e=>{e.stopPropagation();if(b.disabled)return;b.disabled=true;if(a.close!==false)close();try{await a.run?.(e);}catch(error){console.error(error);}});acts.appendChild(b);});
+        if(!buttons.length)acts.remove();
+        const x=Number(document.documentElement.dataset.a11yToast)||1;
+        const total=Math.max(1500,(Number(opts.duration)||TOAST_MS)*(x>1?x:1));
+        let left=total,last=performance.now(),paused=false,raf=0,closed=false;
+        const bar=item.querySelector('.ui-toast-bar');
+        const tick=now=>{if(closed)return;if(!paused){left-=now-last;}last=now;bar.style.width=`${Math.max(0,left/total*100)}%`;if(left<=0)return close();raf=requestAnimationFrame(tick);};
+        const pause=()=>{paused=true;item.classList.add('is-paused');};
+        const resume=()=>{if(item.matches(':hover')||item.contains(document.activeElement))return;paused=false;last=performance.now();item.classList.remove('is-paused');};
+        item.addEventListener('mouseenter',pause);item.addEventListener('mouseleave',resume);
+        item.addEventListener('focusin',pause);item.addEventListener('focusout',()=>setTimeout(resume));
+        function close(){if(closed)return;closed=true;cancelAnimationFrame(raf);item.classList.add('is-leaving');setTimeout(()=>{item.remove();if(toastRegion&&!toastRegion.children.length){try{toastRegion.hidePopover?.();}catch(_){}}},160);}
+        item.close=close;
+        // pas plus de 4 messages à la fois : le plus ancien part
+        const old=[...region.querySelectorAll('.toast:not(.is-leaving)')];if(old.length>=4)old[0].close?.()??old[0].remove();
+        region.append(item);
+        showToastLayer();
+        raf=requestAnimationFrame(tick);
+        return item;
+    }
+    /** ↶ Défaire au lieu de demander avant : undoToast('Note supprimée', {undo, redo, what}) — noir, « ↶ Annuler ».
+     *  Après Annuler : « ↶ Annulé : … » avec « ↷ Rétablir » (si redo) ; une erreur → rouge avec « Réessayer ».
+     *  undo / redo peuvent être async (attendus). Renvoie l'élément du message. */
+    function undoToast(message, {undo=null, redo=null, icon=null, undoneText=''}={}){
+        const msg=String(message??'');
+        const ic=icon??(/supprim|retir|effac|vid|détach/i.test(msg)&&!/^\s*[^\p{L}\p{N}\s«"'(]/u.test(msg)?'🗑':'');
+        const doUndo=async()=>{
+            try{await undo?.();}
+            catch(error){toast(`Impossible d’annuler : ${error.message||error}`,'error',{retry:doUndo});return;}
+            const what=undoneText||msg.replace(/[.!]+$/,'');toast(/«/.test(what)?`↶ Annulé : ${what}`:`↶ Annulé : « ${what} »`,'',redo?{action:{label:'↷ Rétablir',run:doRedo}}:{});
+        };
+        const doRedo=async()=>{
+            try{await redo?.();}
+            catch(error){toast(`Impossible de rétablir : ${error.message||error}`,'error',{retry:doRedo});return;}
+            undoToast(message,{undo,redo,icon,undoneText});
+        };
+        return toast(`${ic?`${ic} `:''}${msg}`,'',undo?{action:{label:'↶ Annuler',run:doUndo}}:{});
+    }
+    /** ↶ Défaire une suppression gardée sur cet ordinateur (localStorage) : les clés sont relues avant et après change(),
+     *  « ↶ Annuler » remet l'avant, « ↷ Rétablir » l'après ; after('undo'|'redo') redessine l'écran. */
+    function undoLocalChange(message, keys, change, after=null){
+        const read=()=>keys.map(k=>{try{return localStorage.getItem(k);}catch(_){return null;}});
+        const write=v=>keys.forEach((k,i)=>{try{if(v[i]==null)localStorage.removeItem(k);else localStorage.setItem(k,v[i]);}catch(_){}});
+        const before=read();change();const later=read();
+        return undoToast(message,{undo:async()=>{write(before);await after?.('undo');},redo:async()=>{write(later);await after?.('redo');}});
+    }
+    /** Suppression gardée dans le journal des modifications (événement, note, source, média, enquête, piste, battue…) :
+     *  undoDelete({type:'note', id, message, redo, after}) → « ↶ Annuler » remet l'élément en base (restore_last_delete), puis after(). */
+    function undoDelete({type, id, message='Supprimé.', redo=null, after=null}={}){
+        return undoToast(message,{
+            undo:async()=>{await api('restore_last_delete',{}, {method:'POST',body:{entity_type:type,entity_id:Number(id)}});await after?.('undo');},
+            redo:redo?async()=>{await redo();await after?.('redo');}:null,
+        });
+    }
+    /** Supprimer tout de suite côté serveur + « ↶ Annuler » : deleteWithUndo({action:'delete_note', body:{id}, type:'note', id, message, after})
+     *  after('delete'|'undo'|'redo') redessine l'écran ; une erreur à la suppression part en message rouge. */
+    async function deleteWithUndo({action, body, type, id, message='Supprimé.', after=null}={}){
+        const del=()=>api(action,{},{method:'POST',body});
+        try{await del();}catch(error){toast(error.message,'error');return false;}
+        undoDelete({type,id,message,redo:del,after});
+        try{await after?.('delete');}catch(error){console.error(error);}
+        return true;
     }
 
+    /** Exports CSV faits dans le navigateur : une cellule de texte qui commence par = + - @ tabulation ou retour chariot
+     *  serait lue comme une formule par un tableur (injection) : on la préfixe d'une apostrophe, sauf un vrai nombre (-12,5).
+     *  csvSafe(v) → le texte protégé ; csvCell(v, {sep:';', quote:'auto'|'always'}) → la cellule prête (guillemets si besoin). */
+    function csvSafe(v){
+        if(v==null)return '';
+        if(typeof v==='number'||typeof v==='bigint')return String(v);
+        const t=String(v);
+        return /^[=+\-@\t\r]/.test(t)&&!/^[-+]?\d+(?:[.,\s\u00a0\u202f]\d+)*(?:[eE][-+]?\d+)?$/.test(t)?`'${t}`:t;
+    }
+    function csvCell(v,{sep=';',quote='auto'}={}){
+        const t=csvSafe(v);
+        return quote==='always'||t.includes(sep)||/["\n\r]/.test(t)?`"${t.replace(/"/g,'""')}"`:t;
+    }
     function safeExportFilename(value, fallback='graphique'){
         const cleaned=String(value||fallback).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/gi,'-').replace(/^-+|-+$/g,'').toLowerCase();
         return cleaned||fallback;
@@ -1781,8 +1897,8 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             if(b.matches('[data-my-preset-dup]'))return openPresetEditor({from:id});
             if(b.matches('[data-my-preset-export]'))return exportSettingFile('presets',presetLabel(id),{preset:{name:presetLabel(id),...allDesignPresets()[id]}});
             if(b.matches('[data-my-preset-rename]')){const store=presetStore(),p=store.custom[id];const n=await askText({title:'Renommer le design',message:'Nouveau nom :',value:p.name,okLabel:'Renommer'});if(!n||!n.trim())return;p.name=n.trim().slice(0,60);savePresetStore(store);renderDesignTools();return;}
-            if(b.matches('[data-my-preset-del]')){const store=presetStore(),p=store.custom[id];if(!await confirmBox('',{title:`Supprimer le design « ${p.name} » ?`,okLabel:'Supprimer le design'}))return;delete store.custom[id];store.order=store.order.filter(x=>x!==id);store.hidden=store.hidden.filter(x=>x!==id);savePresetStore(store);
-                if(readDesignSettings().preset===id){const d=readDesignSettings();d.preset='portfolio';localStorage.setItem('genealogie-design',JSON.stringify(d));applyDesign();}toast('Design supprimé.');renderDesignTools();}
+            if(b.matches('[data-my-preset-del]')){const store=presetStore(),p=store.custom[id];return undoLocalChange(`Design « ${p.name} » supprimé`,[CUSTOM_PRESETS_KEY,'genealogie-design'],()=>{delete store.custom[id];store.order=store.order.filter(x=>x!==id);store.hidden=store.hidden.filter(x=>x!==id);savePresetStore(store);
+                if(readDesignSettings().preset===id){const d=readDesignSettings();d.preset='portfolio';localStorage.setItem('genealogie-design',JSON.stringify(d));applyDesign();}renderDesignTools();},()=>{applyDesign();renderDesignTools();});}
         });
         box.querySelector('[data-my-preset-import]').addEventListener('click',async()=>{
             const store=presetStore();
@@ -3108,8 +3224,9 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         $$('[data-online-shot-open]').forEach(button=>button.addEventListener('click',()=>{const sheet=(detail.onlineSheets||[]).find(item=>Number(item.id)===Number(button.dataset.onlineShotOpen));if(sheet)openLightbox([{id:sheet.screenshot_media_id,filename:sheet.screenshot_filename,thumbnail:sheet.screenshot_thumbnail,media_type:'image',title:sheet.screenshot_title||'Capture de l’arbre'}],0,true);}));
         $$('[data-edit-online-sheet]').forEach(button=>button.addEventListener('click',()=>openOnlineSheetDialog(detail.person.id,(detail.onlineSheets||[]).find(item=>Number(item.id)===Number(button.dataset.editOnlineSheet)))));
         $$('[data-delete-online-sheet]').forEach(button=>button.addEventListener('click',async()=>{
-            if(!await confirmBox('',{title:'Supprimer cette fiche en ligne ?',okLabel:'Supprimer la fiche en ligne'}))return;
-            try{await api('delete_online_sheet',{},{method:'POST',body:{id:button.dataset.deleteOnlineSheet}});toast('Fiche en ligne supprimée.');await selectPerson(detail.person.id);}catch(error){toast(error.message,'error');}
+            // H7 : supprimée tout de suite, « ↶ Annuler » la remet (journal des modifications)
+            const id=Number(button.dataset.deleteOnlineSheet),pid=detail.person.id;
+            await deleteWithUndo({action:'delete_online_sheet',body:{id},type:'person_online_sheet',id,message:'Fiche en ligne supprimée',after:()=>state.module==='personnes'&&Number(state.currentPersonId)===Number(pid)&&selectPerson(pid,false)});
         }));
         $$('[data-add-source-inline]').forEach(button=>button.addEventListener('click',()=>openSourceDialog(detail.person.id)));
         $$('[data-open-person]').forEach(button => button.addEventListener('click', () => selectPerson(Number(button.dataset.openPerson))));
@@ -3147,10 +3264,10 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         }));
         $$('[data-add-event-hypothesis]').forEach(button=>button.addEventListener('click',()=>openHypothesisDialog(detail.person.id,detail,null,Number(button.dataset.addEventHypothesis))));
         $$('[data-edit-hypothesis]').forEach(button=>button.addEventListener('click',()=>openHypothesisDialog(detail.person.id,detail,detail.hypotheses.find(item=>Number(item.id)===Number(button.dataset.editHypothesis)))));
-        $$('[data-delete-hypothesis]').forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer cette hypothèse ?',okLabel:'Supprimer l’hypothèse'}))return;await api('delete_hypothesis',{}, {method:'POST',body:{id:button.dataset.deleteHypothesis}});toast('Hypothèse supprimée.');await selectPerson(detail.person.id);}));
+        $$('[data-delete-hypothesis]').forEach(button=>button.addEventListener('click',async()=>{/* H7 : supprimée tout de suite, « ↶ Annuler » */const id=Number(button.dataset.deleteHypothesis),pid=detail.person.id;await deleteWithUndo({action:'delete_hypothesis',body:{id},type:'hypothesis',id,message:'Hypothèse supprimée',after:()=>state.module==='personnes'&&Number(state.currentPersonId)===Number(pid)&&selectPerson(pid,false)});}));
         $$('[data-add-event-evidence]').forEach(button=>button.addEventListener('click',()=>openEvidenceDialog(detail.person.id,detail,null,Number(button.dataset.addEventEvidence))));
         $$('[data-edit-evidence]').forEach(button=>button.addEventListener('click',()=>openEvidenceDialog(detail.person.id,detail,detail.evidence.find(item=>Number(item.id)===Number(button.dataset.editEvidence)))));
-        $$('[data-delete-evidence]').forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer cette preuve ?',okLabel:'Supprimer la preuve'}))return;await api('delete_evidence',{}, {method:'POST',body:{id:button.dataset.deleteEvidence}});toast('Preuve supprimée.');await selectPerson(detail.person.id);}));
+        $$('[data-delete-evidence]').forEach(button=>button.addEventListener('click',async()=>{/* H7 : supprimée tout de suite, « ↶ Annuler » */const id=Number(button.dataset.deleteEvidence),pid=detail.person.id;await deleteWithUndo({action:'delete_evidence',body:{id},type:'evidence',id,message:'Preuve supprimée',after:()=>state.module==='personnes'&&Number(state.currentPersonId)===Number(pid)&&selectPerson(pid,false)});}));
         $$('[data-remove-relation]').forEach(button => button.addEventListener('click',async()=>{
             const related=[...detail.parents,...detail.partners,...detail.children].find(person=>Number(person.id)===Number(button.dataset.relatedId));
             if(!await confirmBox('Le lien de parenté est retiré ; aucune fiche n’est supprimée.',{title:`Retirer ${personName(related||{})} des ${button.dataset.removeRelation==='spouse'?'conjoints':button.dataset.removeRelation==='parent'?'parents':'enfants'} ?`,okLabel:'Retirer le lien'}))return;
@@ -3237,18 +3354,19 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         }));
         $$('[data-delete-event]').forEach(button => button.addEventListener('click', async () => {
             const item = detail.events.find(event => Number(event.id) === Number(button.dataset.deleteEvent));
-            if (!await confirmBox('', {title: `Supprimer l’événement « ${item?.type_label || 'sélectionné'} » ?`, okLabel: 'Supprimer l’événement'})) return;
-            try { await api('delete_event',{}, {method:'POST',body:{id:button.dataset.deleteEvent}}); toast('Événement supprimé.'); await selectPerson(state.currentPersonId); } catch (error) { toast(error.message,'error'); }
+            // H7 : supprimé tout de suite, « ↶ Annuler » le remet (journal des modifications)
+            const id = Number(button.dataset.deleteEvent), pid = state.currentPersonId, del = () => api('delete_event',{}, {method:'POST',body:{id}});
+            try { await del(); undoDelete({type: 'event', id, message: `Événement « ${item?.type_label || 'sélectionné'} » supprimé`, redo: del, after: () => state.module === 'personnes' && state.currentPersonId === pid && selectPerson(pid)}); await selectPerson(pid); } catch (error) { toast(error.message,'error'); }
         }));
         $$('[data-edit-note]').forEach(button => button.addEventListener('click', () => openNoteDialog(detail.person.id, detail.notes.find(item => Number(item.id) === Number(button.dataset.editNote)))));
         $$('[data-delete-note]').forEach(button => button.addEventListener('click', async () => {
-            if (!await confirmBox('', {title: 'Supprimer cette note ?', okLabel: 'Supprimer la note'})) return;
-            try { await api('delete_note',{}, {method:'POST',body:{id:button.dataset.deleteNote}}); toast('Note supprimée.'); await selectPerson(state.currentPersonId); } catch (error) { toast(error.message,'error'); }
+            const id = Number(button.dataset.deleteNote), pid = state.currentPersonId, del = () => api('delete_note',{}, {method:'POST',body:{id}});
+            try { await del(); undoDelete({type: 'note', id, message: 'Note supprimée', redo: del, after: () => state.module === 'personnes' && state.currentPersonId === pid && selectPerson(pid)}); await selectPerson(pid); } catch (error) { toast(error.message,'error'); }
         }));
         $$('[data-edit-source]').forEach(button => button.addEventListener('click', () => openSourceDialog(detail.person.id, detail.sources.find(item => Number(item.id) === Number(button.dataset.editSource) && String(item.link_id || '') === String(button.dataset.sourceLink || '')) || detail.sources.find(item => Number(item.id) === Number(button.dataset.editSource)))));
         $$('[data-delete-source]').forEach(button => button.addEventListener('click', async () => {
-            if (!await confirmBox('', {title: 'Supprimer cette source ou citation ?', okLabel: 'Supprimer'})) return;
-            try { await api('delete_source',{}, {method:'POST',body:{id:button.dataset.deleteSource,link_id:button.dataset.sourceLink || 0}}); toast('Source supprimée.'); await selectPerson(state.currentPersonId); } catch (error) { toast(error.message,'error'); }
+            const id = Number(button.dataset.deleteSource), linkId = button.dataset.sourceLink || 0, pid = state.currentPersonId, del = () => api('delete_source',{}, {method:'POST',body:{id,link_id:linkId}});
+            try { await del(); undoDelete({type: 'source', id, message: 'Source supprimée', redo: del, after: () => state.module === 'personnes' && state.currentPersonId === pid && selectPerson(pid)}); await selectPerson(pid); } catch (error) { toast(error.message,'error'); }
         }));
         bindEntityLabelsFields();
     }
@@ -3465,7 +3583,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     function bindBudgetButtons(root=document){
         $$('[data-edit-budget-item]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editBudgetItem);const row=(state.currentListRows||[]).find(item=>Number(item.id)===id);if(row)openBudgetEditForm(row);});});
-        $$('[data-delete-budget-item]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer cette ligne de budget ?',okLabel:'Supprimer la ligne'}))return;try{await api('delete_research_budget_item',{}, {method:'POST',body:{id:Number(button.dataset.deleteBudgetItem)}});toast('Ligne de budget supprimée.');await renderList();}catch(error){toast(error.message,'error');}});});
+        $$('[data-delete-budget-item]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{/* H7 : supprimée tout de suite, « ↶ Annuler » la remet telle quelle */const id=Number(button.dataset.deleteBudgetItem),del=()=>api('delete_research_budget_item',{}, {method:'POST',body:{id}});try{await del();undoDelete({type:'research_budget',id,message:'Ligne de budget supprimée',redo:del,after:()=>listAgain('research_budget')});await renderList();}catch(error){toast(error.message,'error');}});});
     }
     function readCourrierCopyOrder(raw){try{const data=JSON.parse(raw||'{}');return data&&typeof data==='object'?data:{references:'',quantity:1,format:'numerique'};}catch(_){return {references:'',quantity:1,format:'numerique'};}}
     function syncCourrierCopyOrder(form,setDefaultObject=false){if(!form)return;const isCopyOrder=form.elements.organisme?.value==='copies';const panel=$('#courrier-copy-order',form);if(panel)panel.hidden=!isCopyOrder;if(isCopyOrder&&setDefaultObject&&!form.elements.objet.value)form.elements.objet.value='Commande de copies';if(!isCopyOrder&&form.elements.copy_order_json)form.elements.copy_order_json.value='';}
@@ -3492,7 +3610,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
     }
     function bindCourrierButtons(root=document){
         $$('[data-edit-courrier-item]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editCourrierItem);const row=(state.currentListRows||[]).find(item=>Number(item.id)===id);if(row)openCourrierEditForm(row);});});
-        $$('[data-delete-courrier-item]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer ce courrier du registre ?',okLabel:'Supprimer le courrier'}))return;try{await api('delete_courrier',{}, {method:'POST',body:{id:Number(button.dataset.deleteCourrierItem)}});toast('Courrier supprimé.');await renderList();}catch(error){toast(error.message,'error');}});});
+        $$('[data-delete-courrier-item]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{/* H7 : supprimé tout de suite, « ↶ Annuler » le remet tel quel */const id=Number(button.dataset.deleteCourrierItem),del=()=>api('delete_courrier',{}, {method:'POST',body:{id}});try{await del();undoDelete({type:'courrier',id,message:'Courrier supprimé du registre',redo:del,after:()=>listAgain('courriers')});await renderList();}catch(error){toast(error.message,'error');}});});
         $$('[data-courrier-fait]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{try{await api('set_courrier_fait',{}, {method:'POST',body:{id:Number(button.dataset.courrierFait),fait:Number(button.dataset.fait),fait_type:button.dataset.faitType||''}});toast(Number(button.dataset.fait)===1?'Courrier classé dans les faits.':'Courrier remis en cours.');await renderList();}catch(error){toast(error.message,'error');}});});
     }
     async function setReminderDone(itemId,done,sourceType='investigation_item'){
@@ -3540,7 +3658,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
         form.elements.reminder_due_at.value=row.reminder_due_at||'';
         dlg.showModal();
     }
-    function bindReminderButtons(root=document){$$('[data-reminder-done]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{try{await setReminderDone(Number(button.dataset.reminderDone),Number(button.dataset.done)===1,button.dataset.reminderSource||'investigation_item');}catch(error){toast(error.message,'error');}});});$$('[data-delete-standalone-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer ce rappel ?',okLabel:'Supprimer le rappel'}))return;try{await api('delete_standalone_reminder',{}, {method:'POST',body:{id:Number(button.dataset.deleteStandaloneReminder)}});toast('Rappel supprimé.');await renderList();}catch(error){toast(error.message,'error');}});});$$('[data-edit-standalone-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editStandaloneReminder);const row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type==='standalone');if(row)openStandaloneReminderEditForm(row);});});$$('[data-edit-investigation-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editInvestigationReminder);const row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type!=='standalone');if(row)openInvestigationReminderEditDialog(row);});});$$('[data-clear-investigation-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{if(!await confirmBox('La piste liée sera conservée.',{title:'Supprimer ce rappel ?',okLabel:'Supprimer le rappel'}))return;try{await api('clear_investigation_item_reminder',{}, {method:'POST',body:{id:Number(button.dataset.clearInvestigationReminder)}});toast('Rappel supprimé.');await renderList();}catch(error){toast(error.message,'error');}});});}
+    function bindReminderButtons(root=document){$$('[data-reminder-done]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{try{await setReminderDone(Number(button.dataset.reminderDone),Number(button.dataset.done)===1,button.dataset.reminderSource||'investigation_item');}catch(error){toast(error.message,'error');}});});$$('[data-delete-standalone-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{/* H7 : supprimé tout de suite, « ↶ Annuler » le remet tel quel */const id=Number(button.dataset.deleteStandaloneReminder),del=()=>api('delete_standalone_reminder',{}, {method:'POST',body:{id}});try{await del();undoDelete({type:'standalone_reminder',id,message:'Rappel supprimé',redo:del,after:()=>state.module==='listes'?listAgain(state.listType):refreshScreen()});await renderList();}catch(error){toast(error.message,'error');}});});$$('[data-edit-standalone-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editStandaloneReminder);const row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type==='standalone');if(row)openStandaloneReminderEditForm(row);});});$$('[data-edit-investigation-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.editInvestigationReminder);const row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type!=='standalone');if(row)openInvestigationReminderEditDialog(row);});});$$('[data-clear-investigation-reminder]:not([data-bound])',root).forEach(button=>{button.dataset.bound='1';button.addEventListener('click',async()=>{/* H7 : retiré tout de suite (la piste reste), « ↶ Annuler » remet la même échéance */const id=Number(button.dataset.clearInvestigationReminder),row=(state.currentListRows||[]).find(r=>Number(r.id)===id&&r.source_type!=='standalone')||{},clear=()=>api('clear_investigation_item_reminder',{}, {method:'POST',body:{id}}),again=()=>state.module==='listes'?listAgain(state.listType):refreshScreen();try{await clear();await renderList();undoToast('Rappel retiré (la piste reste)',{undo:row.reminder_due_at?async()=>{await api('update_investigation_item_reminder',{}, {method:'POST',body:{id,reminder_mode:row.reminder_mode||'on',reminder_due_at:row.reminder_due_at}});if(Number(row.reminder_done)===1)await api('set_reminder_done',{}, {method:'POST',body:{id,done:1,source_type:'investigation_item'}}).catch(()=>{});await again();}:null,redo:async()=>{await clear();await again();}});}catch(error){toast(error.message,'error');}});});}
     function bindTableLinks(){$$('[data-open-person]:not([data-bound])').forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{state.currentPersonId=Number(button.dataset.openPerson);setModule('personnes');});});$$('[data-open-investigation]:not([data-bound])').forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{state.currentInvestigationId=Number(button.dataset.openInvestigation);state.enquetesTab='enquetes';setModule('enquetes');});});$$('[data-open-media]:not([data-bound])').forEach(button=>{button.dataset.bound='1';button.addEventListener('click',()=>{const id=Number(button.dataset.openMedia);const media=(state.currentListRows||[]).filter(row=>row.filename).map(row=>state.listType==='signatures'?{...row,id:Number(row.media_id||row.id)}:row);const index=media.findIndex(row=>Number(row.id)===id);if(index>=0)openLightbox(media,index,!['media','signatures'].includes(state.listType));});});bindReminderButtons();bindBudgetButtons();bindCourrierButtons();bindSortableTables();bindLabelListToggles();}
     function sortTableBy(table,index,direction){
         $$('[data-sort-column]',table).forEach(item=>{item.removeAttribute('data-direction');item.querySelector('.sort-mark')?.remove();});
@@ -4329,7 +4447,7 @@ while(out.length<40)out.push(DEFAULT_STATS_COLORS[out.length%DEFAULT_STATS_COLOR
             const list=shortcutPresets();list.push({name:got.nom,map,saved_at:new Date().toISOString()});saveShortcutPresets(list);renderShortcutSettings();
             toast(`Réglage « ${got.nom} » importé : clique « Appliquer » pour t’en servir.`);
         });
-        $$('[data-preset-delete]').forEach(b=>b.addEventListener('click',async()=>{const list=shortcutPresets();const p=list[Number(b.dataset.presetDelete)];if(!p||!await confirmBox('',{title:`Supprimer le réglage « ${p.name} » ?`,okLabel:'Supprimer le réglage'}))return;list.splice(Number(b.dataset.presetDelete),1);saveShortcutPresets(list);renderShortcutSettings();}));
+        $$('[data-preset-delete]').forEach(b=>b.addEventListener('click',()=>{const list=shortcutPresets();const p=list[Number(b.dataset.presetDelete)];if(!p)return;undoLocalChange(`Réglage « ${p.name} » supprimé`,[SHORTCUT_PRESETS_KEY],()=>{list.splice(Number(b.dataset.presetDelete),1);saveShortcutPresets(list);},()=>renderShortcutSettings());renderShortcutSettings();}));
     }
     function captureShortcut(def){
         if(!def)return;
@@ -5815,10 +5933,7 @@ ${backupSectionHtml()}
         $$('[data-delete-preset]').forEach(button=>button.addEventListener('click',async()=>{
             const presets=designPresets(),preset=presets[button.dataset.deletePreset];
             if(!preset)return;
-            if(!await confirmBox('',{title:`Supprimer le design « ${preset.name||'Sans nom'} » ?`,okLabel:'Supprimer le design'}))return;
-            delete presets[button.dataset.deletePreset];
-            saveDesignPresets(presets);
-            toast('Design supprimé.');
+            undoLocalChange(`Design « ${preset.name||'Sans nom'} » supprimé`,['genealogie-design-presets'],()=>{delete presets[button.dataset.deletePreset];saveDesignPresets(presets);},()=>renderDesignTools());
             renderDesignTools();
         }));
         $('#apply-person-badge-colors')?.addEventListener('click',()=>{savePersonBadgeColors(personBadgeColorsFromPanel());toast('Couleurs des badges appliquées.');if(state.module==='personnes'&&state.currentPersonId)selectPerson(state.currentPersonId,false);});
@@ -5851,10 +5966,7 @@ ${backupSectionHtml()}
         $$('[data-delete-person-badge-preset]').forEach(button=>button.addEventListener('click',async()=>{
             const presets=getPersonBadgeColorPresets(),preset=presets[button.dataset.deletePersonBadgePreset];
             if(!preset)return;
-            if(!await confirmBox('',{title:`Supprimer la palette « ${preset.name||'Sans nom'} » ?`,okLabel:'Supprimer la palette'}))return;
-            delete presets[button.dataset.deletePersonBadgePreset];
-            savePersonBadgeColorPresets(presets);
-            toast('Palette supprimée.');
+            undoLocalChange(`Palette « ${preset.name||'Sans nom'} » supprimée`,[PERSON_BADGE_COLOR_PRESETS_KEY],()=>{delete presets[button.dataset.deletePersonBadgePreset];savePersonBadgeColorPresets(presets);},()=>renderDesignTools());
             renderDesignTools();
         }));
         $$('.order-list:not(.tile-cat-items)').forEach(setupDragOrder);
@@ -6027,7 +6139,7 @@ ${backupSectionHtml()}
         $$('[data-web-search-save]').forEach(button=>button.addEventListener('click',()=>{const list=document.getElementById(button.dataset.webSearchSave);if(!list)return;saveWebSearchSettings(readWebSearchSitesEditor(list),Number(button.dataset.webSearchPersonId)||0);toast('Sites de recherche enregistrés.');renderDesignTools();}));
         $$('[data-reset-web-search]').forEach(button=>button.addEventListener('click',()=>{localStorage.removeItem(`genealogie-web-search-${button.dataset.resetWebSearch}`);toast('Exception de sites supprimée.');renderDesignTools();}));
         $('#ws-custom-add')?.addEventListener('click',async()=>{const label=$('#ws-custom-label').value.trim();const url=$('#ws-custom-url').value.trim();if(!label||!/^https?:\/\/\S+$/i.test(url)){toast('Indique un nom et une adresse qui commence par https://','error');return;}if(!/\{(prénom|prenom|nom|nom_complet|lieu|année|annee|de|à|a|conjoint|requête|requete)\}/i.test(url)&&!await confirmBox('Cette adresse ne contient aucun champ comme {nom} : elle ouvrira toujours la même page.',{title:'Ajouter ce site quand même ?',okLabel:'Ajouter quand même',danger:false}))return;saveWebSearchCustomSites([...webSearchCustomSites(),{key:`custom-${Date.now().toString(36)}`,label,url}]);toast('Site ajouté.');renderDesignTools();});
-        $$('[data-ws-custom-delete]').forEach(button=>button.addEventListener('click',async()=>{if(!await confirmBox('',{title:'Supprimer ce site de la liste ?',okLabel:'Supprimer le site'}))return;saveWebSearchCustomSites(webSearchCustomSites().filter(site=>site.key!==button.dataset.wsCustomDelete));toast('Site supprimé.');renderDesignTools();}));
+        $$('[data-ws-custom-delete]').forEach(button=>button.addEventListener('click',()=>{const site=webSearchCustomSites().find(x=>x.key===button.dataset.wsCustomDelete);undoLocalChange(`Site « ${site?.label||'sans nom'} » supprimé`,['genealogie-web-search-custom'],()=>saveWebSearchCustomSites(webSearchCustomSites().filter(x=>x.key!==button.dataset.wsCustomDelete)),()=>renderDesignTools());renderDesignTools();}));
         renderPersonExceptionsList();
         (window.LCNDA_EXT?.afterDesign||[]).forEach(fn=>{try{fn();}catch(error){console.error(error);}});
     }
@@ -6931,7 +7043,7 @@ ${backupSectionHtml()}
         $('#investigation-item-dialog').showModal();
     }
     /* ═════ 📅 Fichiers de calendrier .ics (RFC 5545) : rappels, événements, anniversaires ═════ */
-    const icsEscape=v=>String(v??'').replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/([,;])/g,'\\$1');
+    const icsEscape=v=>String(v??'').replace(/\\/g,'\\\\').replace(/\r\n|\r|\n/g,'\\n').replace(/([,;])/g,'\\$1'); // un \r seul ne doit pas couper la ligne du .ics
     /** une ligne pliée à 75 octets (UTF-8), les suites commencent par une espace */
     function icsFold(line){
         const enc=new TextEncoder(),out=[];let cur='',size=0;
@@ -7478,13 +7590,14 @@ ${backupSectionHtml()}
             if(!deleteBtn)return;
             const mediaId=Number(deleteBtn.dataset.deleteDuplicate);
             const title=deleteBtn.closest('[data-duplicate-media]')?.querySelector('strong')?.textContent||`#${mediaId}`;
-            if(!await confirmBox('Le fichier importé restera sur le disque.',{title:`Supprimer le média « ${title} » de la base ?`,okLabel:'Supprimer le média'}))return;
+            // H7 : supprimé tout de suite (le fichier reste sur le disque), « ↶ Annuler » le remet avec ses rattachements
             deleteBtn.disabled=true;
+            const before=groups,del=()=>api('delete_media',{}, {method:'POST',body:{media_id:mediaId}});
             try{
-                await api('delete_media',{}, {method:'POST',body:{media_id:mediaId}});
-                toast('Média supprimé de la base.');
+                await del();
                 groups=groups.map(group=>({...group,items:group.items.filter(item=>Number(item.id)!==mediaId)})).filter(group=>group.items.length>1);
                 paint();
+                undoDelete({type:'media',id:mediaId,message:`Média « ${title} » supprimé de la base`,redo:del,after:what=>{groups=what==='undo'?before:groups.map(group=>({...group,items:group.items.filter(item=>Number(item.id)!==mediaId)})).filter(group=>group.items.length>1);if(body.isConnected)paint();}});
             }catch(error){toast(error.message,'error');deleteBtn.disabled=false;}
         });
     }
@@ -7930,14 +8043,23 @@ ${backupSectionHtml()}
             if(btn){btn.disabled=false;btn.textContent=originalLabel;}
         }
     }
+    /** l'écran ouvert, redessiné après « ↶ Annuler » / « ↷ Rétablir » */
+    /** la liste ouverte, redessinée si c'est encore elle */
+    function listAgain(type){if(state.module==='listes'&&state.listType===type)return renderList();}
+    async function refreshScreen(){
+        if(state.module==='enquetes'&&state.currentInvestigationId)return renderInvestigationDetail(state.currentInvestigationId);
+        if(state.module==='enquetes'&&state.currentBattueId)return renderBattueDetail(state.currentBattueId);
+        if(state.module==='personnes'&&state.currentPersonId)return selectPerson(state.currentPersonId,false);
+        return setModule(state.module,false);
+    }
     async function deleteCurrentMedia(){
         const item=state.lightboxMedia[state.lightboxIndex];
         if(!item)return;
-        if(!await confirmBox('Le fichier importé restera sur le disque.',{title:`Supprimer le média « ${item.title || item.attachment_label || item.filename} » de la base ?`,okLabel:'Supprimer le média'}))return;
-        const deletedId=Number(item.id);
+        // H7 : supprimé tout de suite (le fichier reste sur le disque), « ↶ Annuler » le remet avec ses rattachements
+        const deletedId=Number(item.id),del=()=>api('delete_media',{}, {method:'POST',body:{media_id:deletedId}});
         try{
-            await api('delete_media',{}, {method:'POST',body:{media_id:item.id}});
-            toast('Média supprimé de la base.');
+            await del();
+            undoDelete({type:'media',id:deletedId,message:`Média « ${item.title || item.attachment_label || item.filename} » supprimé de la base`,redo:del,after:()=>refreshScreen()});
             $('#lightbox').close();
             state.lightboxMedia=(state.lightboxMedia||[]).filter(media=>Number(media.id)!==deletedId);
             if(state.currentPerson?.media){
@@ -8150,11 +8272,9 @@ ${backupSectionHtml()}
         $$('[data-delete-color-preset]',container).forEach(btn=>btn.addEventListener('click',async()=>{
             const presets=getStatsColorPresets();
             const preset=presets[btn.dataset.deleteColorPreset];
-            if(!preset||!await confirmBox('',{title:`Supprimer la palette « ${preset.name||'Sans nom'} » ?`,okLabel:'Supprimer la palette'}))return;
-            delete presets[btn.dataset.deleteColorPreset];
-            saveStatsColorPresets(presets);
+            if(!preset)return;
+            undoLocalChange(`Palette « ${preset.name||'Sans nom'} » supprimée`,[STATS_COLORS_PRESETS_KEY],()=>{delete presets[btn.dataset.deleteColorPreset];saveStatsColorPresets(presets);},()=>{if(container.isConnected)renderStatsColorPresetsList();});
             renderStatsColorPresetsList();
-            toast('Palette supprimée.');
         }));
     }
     function openBattueLevelColorsDialog(){
@@ -8185,11 +8305,9 @@ ${backupSectionHtml()}
         $$('[data-delete-battue-color-preset]',container).forEach(btn=>btn.addEventListener('click',async()=>{
             const presets=getBattueLevelColorPresets();
             const preset=presets[btn.dataset.deleteBattueColorPreset];
-            if(!preset||!await confirmBox('',{title:`Supprimer la palette « ${preset.name||'Sans nom'} » ?`,okLabel:'Supprimer la palette'}))return;
-            delete presets[btn.dataset.deleteBattueColorPreset];
-            saveBattueLevelColorPresets(presets);
+            if(!preset)return;
+            undoLocalChange(`Palette « ${preset.name||'Sans nom'} » supprimée`,[BATTUE_LEVEL_COLOR_PRESETS_KEY],()=>{delete presets[btn.dataset.deleteBattueColorPreset];saveBattueLevelColorPresets(presets);},()=>{if(container.isConnected)renderBattueLevelColorPresetsList();});
             renderBattueLevelColorPresetsList();
-            toast('Palette supprimée.');
         }));
     }
     function openViewDialog(module,config,id=0,editName=''){
@@ -8328,7 +8446,7 @@ ${backupSectionHtml()}
     // Outils partagés avec assets/js/heritage.js (chargé juste après ce fichier)
     // type de base changé (Listes → Animaux) : compteur, liste de gauche
     function refreshBaseMode(){loadPeople.modeSet=false;state.personTab='all';setCountStatus($('#database-status'),personCountLabel(state.bootstrap.stats.personnes));if(state.module==='personnes'){renderSidebar();loadPeople();}}
-    window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,confirmBox,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
+    window.LCNDA_APP={ics:{build:icsBuild,download:icsDownload,dateOf:icsDateOf,eventEntry:icsEventEntry,fold:icsFold,escape:icsEscape},openEventIcsDialog,addTableSortBar,sortTableBy,addMediaDialogFiles:files=>mediaDialogAddFiles?.(files),exportSettingFile,importSettingFile,settingExportButton,settingImportButton,freeDateToIso,isoToFreeDate,openGraphExportDialog,saveExportCopy,defaultListTypes,mapTileUrl,offlineTileUrl,openPersonById,battueTargetText,bindReminderButtons,investigationFolderPath,openBattueAliasDialog,openBattueDialog,openBattueLevelColorsDialog,openBattueMediaDialog,openBattueSearchDialog,openInvestigationDialog,openInvestigationItemDialog,openInvestigationItemEventDialog,openInvestigationMediaDialog,openInvestigationUploadDialog,bindWebSearchPanels,bindWebSearchSitesEditors,currentCustomTab,currentDashboardPage,dabovilleNumberFor,dashboardBaseType,dashboardGroupItem,dashboardLineageCard,dashboardNormalizeWidget,dashboardPages,dashboardRecentPeople,dashboardSaintCard,defaultDashboardBlockLimits,defaultDashboardBlockSpans,defaultDashboardBlocks,familyMemoryCardHtml,familyObjectCardHtml,fillLineageWidgets,generationLabel,mediaPreviewHtml,personBlockWidthChoices,personEventMap,readWebSearchSitesEditor,saveDashboardPages,sosaNumberFor,sosaNumbersText,webSearchPanelHtml,webSearchSitesEditor,archiveDigestOptionLabel,budgetCategories,budgetCategoryLabel,censusStatusText,confidenceLabel,courrierCopyFormatLabel,courrierCopyFormats,courrierFilters,courrierOrganismeLabel,courrierOrganismes,courrierStatutLabel,courrierStatuts,externalLinks,keepSosaOutsideClick,labelTextColor,lifeText,listControllerSignal,mediaChronologyKey,openListReorderDialog,openMediaDuplicatesDialog,openMediaFaceDetectionDialog,orderedListTypes,reminderCategories,reminderCategoryLabel,reminderIsPast,renderClosedBranchesList,renderFamilyMemoriesList,renderFamilyObjectsList,renderPrecisePlacesList,renewListController,renewSosaSearchController,saveExternalLinks,sosaRootId,sosaSearchSignal,syncCourrierCopyOrder,EVENT_ICON_GLYPHS,bengaliMonthDays,bengaliMonths,bengaliToJdn,bindLabelListToggles,bindReadingAids,burmeseYear,byzantineYear,calendarLabel,calendarYmdToJdn,confidenceText,copticMonths,copticToJdn,easterStyle,englishOldStyle,ethiopicMonths,ethiopicToJdn,eventIconOptionsHtml,formatCalendarDate,formatChineseLunar,formatFileSize,formatKoreanLunar,formatRepublicanDate,formatUmmAlQura,frenchMonthNames,hebrewDateFromJdn,hebrewLeap,hebrewMonthName,hebrewMonthNames,htrLanguageForModel,hypothesisStatus,indianMonthDays,indianMonths,indianToJdn,japaneseEras,jdnToBengali,jdnToCoptic,jdnToEthiopic,jdnToHebrew,jdnToIndian,jdnToIslamic,jdnToJapanese,jdnToJulian,jdnToPersian,jdnToRepublican,koreanLunarParts,labelChip,labelEntityTypesText,mayaLongCount,moduleHash,openSideReorderDialog,orderedMaintenanceTabs,persianMonthDays,persianMonths,persianToJdn,readingAidsHtml,renderDesignTools,renderExportTools,renderMergeTool,renderShortcutSettings,renderUpkeep,republicanLeap,republicanMonths,republicanToJdn,restoreDoneText,romanDate,saveLastRoute,sexagenaryName,thaiMonths,thaiYear,updateBrowserRoute,importUpload,inseeAuto,inseeImportRemote,inseeSize,mediaTypeShortLabel,mediaTypeShortLabelWithIcon,onOutsideClick,researchProximityFieldsHtml,setupDragOrder,typeGlyph,webSearchAllSites,webSearchContext,webSearchGroups,webSearchLifeRange,webSearchParams,webSearchSettings,DEFAULT_GENDER_COLORS,applyGenderColorsToDocument,ascendantsTreeHtml,bindGraphExportControls,defaultGraphStatsItems,descendantsTreeHtml,getStatsColors,getTreeCardFields,graphExportToolbarHtml,loadLineage,openStatsColorsDialog,relationYears,renderGraphStats,safeUrl,saveGenderColors,sosaMap,orderedMapTypes,applyDesign,mapBackgroundSelectHtml,mapRouteColor,isUsableMapCoord,routePeopleSelection,openViewDialog,readDesignSettings,reloadBootstrap,savedView,setupMapRoutePersonControls,setupMapSurnameAutocomplete,setupSavedViewsDrag,sideButton,bindTableLinks,summaryFromState,dataRow,genderText,placeDisplay,debounce,setModule,renderSidebar,normalizedMediaType,mediaCompareThumb,mediaCompareLinkInfo,fetchMediaCompareInfo,persistUiState,sidebarSignal:()=>sidebarController?.signal,loadOcrEngine,refreshBaseMode,baseMode,graphExportCss,safeExportFilename,customTabs,saveCustomTabs,openCustomScreen,orderedGraphDiagramItems,orderedGraphStatsItems,dashboardWidgetLabel,defaultPersonBlocks,formatCalendarByType,gregorianToJdn,jdnToGregorian,converterCalendarOptions,defaultCalendarValue,readDesignSettings,api,$,$$,escapeHtml,formObject,card,empty,toast,undoToast,undoDelete,undoLocalChange,deleteWithUndo,csvSafe,csvCell,refreshScreen,confirmBox,plural,emptyState,state,personName,years,personChip,mediaThumbHtml,parsedGenealogyDate,collectionPersonField,bindCollectionPersonFields,
         uploadCollectionFiles,bindTableLinks,actionButton,openLightbox,selectPerson,setModule,renderList,renderSidebar,lngToX,latToY,xToLng,yToLat,mapTileUrl,mapBackgroundValue,
         drawMap,renderMaintenance,renderLightboxItem,openArchiveRoom,journalierWageSols,entityLabelsField,bindEntityLabelsFields,renderFairsList,askText,appModules:modules,defaultListTypes,defaultMaintenanceTabs,syncCustomDashboardWidgets,renderDashboard,dashboardBlockSettings,saveDashboardBlockSettings,dashboardNewWidget,orderedDashboardWidgetTypes,dashboardWidgetInfo,tileLayerCategories:TILE_LAYER_CATEGORIES};
 

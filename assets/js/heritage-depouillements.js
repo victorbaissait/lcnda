@@ -71,12 +71,13 @@
     ext.lists.depouillements = async token => {
         const s = st();
         if (s.id) return renderDigest(token);
+        // H10 : recherche, filtres (type, état), Liste | Fiches et tri retenus dans la barre commune (« lcnda-listbar:listes:depouillements »)
+        const UI = window.LCNDA_UI, KEY = 'listes:depouillements', saved = UI?.listBarState?.(KEY);
+        if (saved) { s.q = String(saved.q || '').trim(); s.type = saved.f?.type || ''; s.status = saved.f?.status || ''; }
         const data = await get('archive_digest_search', {q: s.q || '', record_type: s.type || '', status: s.status || ''});
         if (!isCurrent(token)) return;
         const types = data.types || {}, statuses = data.statuses || {};
-        // H10 : « N dépouillements · [Liste | Fiches] · Trier : … », retenus pour cette liste
-        const UI = window.LCNDA_UI, KEY = 'listes:depouillements';
-        const sort = UI?.sortOf ? UI.sortOf(KEY, '') : '', view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
+        const sort = saved?.sort ?? (UI?.sortOf ? UI.sortOf(KEY, '') : ''), view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
         const nameOf = r => `${types[r.record_type] || r.record_type || 'Dépouillement'}${r.year_text ? ' · ' + r.year_text : ''}`;
         const rows = sort && UI?.sortItems ? UI.sortItems(data.rows || [], sort, {name: nameOf, date: r => r.updated_at || r.created_at || ''}) : (data.rows || []);
         const ws = A().$('#workspace');
@@ -101,21 +102,22 @@
             <header class="page-header"><div><span class="eyebrow">LISTES · ARCHIVES</span><h2>📜 Dépouillements</h2>
                 <p>Tes dépouillements d’archive page par page : les photos de chaque page, les personnes relevées rangées par foyer, la transcription. <b>Ce sont les mêmes que dans Recherche › Dépouillement d’archive</b> : ce que tu saisis ici y est aussitôt, et inversement.</p></div>
                 <div class="page-actions"><button type="button" class="button secondary" data-dp-research>🔎 Ouvrir dans Recherche</button><button type="button" class="button" data-dp-new>+ Nouveau dépouillement</button></div></header>
-            <div class="collection-toolbar"><input type="search" data-dp-q value="${esc(s.q || '')}" placeholder="Commune, cote, année, service d’archives…">
-                <select data-dp-type><option value="">Tous les types</option>${Object.entries(types).map(([k, l]) => `<option value="${esc(k)}" ${s.type === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>
-                <select data-dp-status><option value="">Tous les états</option>${Object.entries(statuses).map(([k, l]) => `<option value="${esc(k)}" ${s.status === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div>
-            ${rows.length ? '<div data-dp-bar></div>' + [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')
+            <div data-dp-bar></div>
+            ${rows.length ? [...groups.entries()].map(([c, list]) => `<h3 class="h-dp-city">🏘️ ${esc(c)} <small class="muted">${list.length}</small></h3>${group(list)}`).join('')
             : (s.q || s.type || s.status ? A().emptyState({icon: '🔍', text: 'Aucun dépouillement ne correspond.'}) : A().emptyState({icon: '📑', text: 'Aucun dépouillement pour l’instant', hint: 'La fiche du dépouillement se remplit dans Recherche.', action: {label: '＋ Nouveau dépouillement', attrs: 'data-dp-new'}}))}</section>`;
         const sec = ws.querySelector('.h-dp');
         const slot = sec.querySelector('[data-dp-bar]');
-        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: rows.length, label: 'dépouillement', value: sort, extra: [], options: [['', 'Par commune'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], view: {key: KEY, dflt: 'cards', what: 'dépouillements', onChange: () => ext.lists.depouillements(++S().workspaceToken)}, onChange: v => { UI.setSort(KEY, v); ext.lists.depouillements(++S().workspaceToken); }}));
+        if (slot && UI?.listBar) {
+            const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (commune, cote, année, service d’archives)', value: s.q || ''},
+                filters: [{id: 'type', label: 'Type', type: 'radio', options: [['', 'Tous les types'], ...Object.entries(types).map(([k, l]) => [k, l, l])], value: s.type || ''}, {id: 'status', label: 'État', type: 'radio', options: [['', 'Tous les états'], ...Object.entries(statuses).map(([k, l]) => [k, l, l])], value: s.status || ''}],
+                view: {dflt: 'cards', what: 'dépouillements'}, sort: {options: [['', 'Par commune'], ['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+                onChange: b => { s.q = b.q.trim(); s.type = b.filters.type || ''; s.status = b.filters.status || ''; UI.setSort(KEY, b.sort); ext.lists.depouillements(++S().workspaceToken); }});
+            bar.setCount(rows.length, 'dépouillement');
+            slot.replaceWith(bar);
+        }
         sec.querySelectorAll('[data-dp-open]').forEach(b => b.addEventListener('click', () => { Object.assign(s, {id: Number(b.dataset.dpOpen), page: '', tab: 'pages', image: 0}); ext.lists.depouillements(++S().workspaceToken); }));
         sec.querySelectorAll('[data-dp-new]').forEach(b => b.addEventListener('click', newInResearch));
         sec.querySelector('[data-dp-research]').addEventListener('click', () => openInResearch(0));
-        let timer = 0;
-        sec.querySelector('[data-dp-q]').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { s.q = e.target.value.trim(); ext.lists.depouillements(++S().workspaceToken).then(() => { const i = A().$('[data-dp-q]'); if (i) { i.focus(); i.setSelectionRange(i.value.length, i.value.length); } }); }, 300); });
-        sec.querySelector('[data-dp-type]').addEventListener('change', e => { s.type = e.target.value; ext.lists.depouillements(++S().workspaceToken); });
-        sec.querySelector('[data-dp-status]').addEventListener('change', e => { s.status = e.target.value; ext.lists.depouillements(++S().workspaceToken); });
     };
 
     /* ─────────── Un dépouillement ─────────── */
@@ -282,7 +284,12 @@
         body.querySelectorAll('[data-dp-line]').forEach(row => {
             const l = lines.find(x => x.id === Number(row.dataset.dpLine)), ta = row.querySelector('[data-dp-ltext]');
             autosize(ta); ta.addEventListener('input', () => autosize(ta)); ta.addEventListener('blur', () => lineSave(ta, l));
-            row.querySelector('[data-dp-ldel]').addEventListener('click', async () => { if (!await A().confirmBox('Supprimer cette ligne ?', {title: 'Supprimer la ligne', okLabel: 'Supprimer la ligne'})) return; await post('delete_archive_digest_transcription_line', {id: l.id}); D.lines = D.lines.filter(x => x !== l); paint(); });
+            row.querySelector('[data-dp-ldel]').addEventListener('click', async () => { // H7 : supprimée tout de suite, « ↶ Annuler » la remet telle quelle
+                try { await post('delete_archive_digest_transcription_line', {id: l.id}); } catch (e) { toast(e.message, 'error'); return; }
+                D.lines = D.lines.filter(x => x !== l); paint();
+                let line = l; const again = () => { if (body.isConnected) paint(); };
+                A().undoToast?.('Ligne supprimée', {undo: async () => { const res = await post('save_archive_digest_transcription_line', {archive_digest_id: r.id, media_id: line.media_id || '', page_number: line.page_number ?? p.number, line_number: line.line_number, content: line.content, zone_json: line.zone_json || ''}); line = {...line, id: Number((res.result || res).id)}; D.lines.push(line); D.lines.sort((a, b) => (a.page_number - b.page_number) || (a.line_number - b.line_number)); again(); },
+                    redo: async () => { await post('delete_archive_digest_transcription_line', {id: line.id}); D.lines = D.lines.filter(x => x.id !== line.id); again(); }}); });
         });
         const nl = body.querySelector('[data-dp-lnew]');
         nl.addEventListener('keydown', async e => {

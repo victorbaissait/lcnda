@@ -1060,7 +1060,8 @@
         form.addEventListener('click', e => { if (e.target.closest('[data-h-draft-add]')) editDraft(null); }); // aussi le bouton de la liste vide
         draftBox?.addEventListener('click', async e => { const ed = e.target.closest('[data-h-draft-edit]'), del = e.target.closest('[data-h-draft-del]');
             if (ed) editDraft(Number(ed.dataset.hDraftEdit));
-            if (del && await A().confirmBox('', {title: 'Retirer cette étape ?', okLabel: 'Retirer l’étape'})) { drafts.splice(Number(del.dataset.hDraftDel), 1); paintDrafts(); } });
+            if (del) { const k = Number(del.dataset.hDraftDel), gone = drafts[k]; if (!gone) return; drafts.splice(k, 1); paintDrafts(); // H7 : « ↶ Annuler » la remet à sa place
+                A().undoToast?.('Étape retirée', {undo: () => { if (!form.isConnected) throw new Error('le circuit est fermé'); drafts.splice(Math.min(k, drafts.length), 0, gone); paintDrafts(); }, redo: () => { const j = drafts.indexOf(gone); if (j >= 0 && form.isConnected) { drafts.splice(j, 1); paintDrafts(); } }}); } });
         form.addEventListener('submit', async event => {
             event.preventDefault();
             const v = values(form), generate = event.submitter?.value === '1';

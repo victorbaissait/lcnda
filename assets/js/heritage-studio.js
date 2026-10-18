@@ -162,8 +162,8 @@
             toast('Fichier prêt : envoie-le à l’autre personne, elle l’importe dans Maintenance → Apparence.');
         });
         at('data-h-layout-delete', async (list, i, p) => {
-            if (!await A().confirmBox('Les réglages actuels ne changent pas.', {title: `Supprimer la mise en page « ${p.name} » ?`, okLabel: 'Supprimer la mise en page'})) return;
-            list.splice(i, 1); saveProfiles(list); toast('Mise en page supprimée.'); rerender();
+            // H7 : supprimée tout de suite, « ↶ Annuler » la remet (les réglages actuels ne changent pas)
+            A().undoLocalChange(`Mise en page « ${p.name} » supprimée`, [PROFILES_KEY], () => { list.splice(i, 1); saveProfiles(list); }, () => { if (A().state?.module === 'maintenance') rerender(); }); rerender();
         });
     });
     /* ═══════════════ 🗃️ TOUS MES RÉGLAGES (Maintenance → Apparence, après les mises en page) ═══════════════ */
@@ -245,7 +245,7 @@
             if (!name) return; list[i] = {...p, name}; if (saveAllProfiles(list)) { toast('Ensemble renommé.'); rerender(); }
         });
         at('data-h-allset-export', (list, i, p) => { downloadText(`reglages-${slug(p.name)}.lcnda-reglages.json`, fileOf(p.name, p.saved, p.settings)); toast('Fichier prêt : il s’importe dans Maintenance → Apparence → « Mes ensembles de réglages ».'); });
-        at('data-h-allset-delete', async (list, i, p) => { if (!await A().confirmBox('Les réglages actuels ne changent pas.', {title: `Supprimer l’ensemble « ${p.name} » ?`, okLabel: 'Supprimer l’ensemble'})) return; list.splice(i, 1); if (saveAllProfiles(list)) { toast('Ensemble supprimé.'); rerender(); } });
+        at('data-h-allset-delete', async (list, i, p) => { A().undoLocalChange(`Ensemble « ${p.name} » supprimé`, [ALL_PROFILES_KEY], () => { list.splice(i, 1); saveAllProfiles(list); }, () => { if (A().state?.module === 'maintenance') rerender(); }); rerender(); });
     });
     /* ═══════════ ⚙️ BARRES D'OUTILS À SOI (Retouche, Modifier le son, Montage vidéo) ═══════════
      * Un éditeur marque ses rangées d'outils data-tbg="clé" data-tbg-label="nom" ; « ⚙️ Personnaliser » range, montre
@@ -355,7 +355,9 @@
                 const sel = dlg.querySelector('[data-ws-pick]'); sel.add(new Option(r.nom, r.nom)); sel.value = r.nom;
                 toast(`Réglages « ${r.nom} » importés : « Appliquer » pour les utiliser.`); return;
             }
-            if (ev.target.closest('[data-ws-del]')) { const x = picked(); if (!x || !await A().confirmBox('', {title: `Supprimer les réglages enregistrés « ${x.name} » ?`, okLabel: 'Supprimer'})) return; wsSave(id, wsList(id).filter(y => y.name !== x.name)); const sel = dlg.querySelector('[data-ws-pick]'); sel.selectedOptions[0]?.remove(); sel.value = ''; toast('Supprimé.'); return; }
+            if (ev.target.closest('[data-ws-del]')) { const x = picked(); if (!x) return; const sel = dlg.querySelector('[data-ws-pick]'), opt = sel.selectedOptions[0];
+                A().undoLocalChange(`Réglages « ${x.name} » supprimés`, [WS_KEY], () => wsSave(id, wsList(id).filter(y => y.name !== x.name)), what => { if (!dlg.isConnected || !opt) return; if (what === 'undo') sel.add(opt); else opt.remove(); sel.value = ''; });
+                opt?.remove(); sel.value = ''; return; }
             if (ev.target.closest('[data-ws-save]')) { (async () => { const name = String((await A().askText?.({title: 'Réglages enregistrés', message: 'Nom de ces réglages (boutons montrés et leur ordre) :', value: '', okLabel: 'Enregistrer'})) ?? '').trim().slice(0, 60); if (!name) return;
                 const list = wsList(id).filter(y => y.name !== name); list.push({name, date: new Date().toLocaleDateString('fr-FR'), v: cur()}); wsSave(id, list.slice(-60));
                 const all = tbAll(); all[id] = cur(); try { localStorage.setItem(TB_KEY, JSON.stringify(all)); } catch (_) {} ext.tbApply(root, id); toast(`Réglages « ${name} » enregistré (aussi dans Maintenance → Montage, retouche, mise en page et son).`); dlg.close(); })(); return; }
@@ -1651,6 +1653,8 @@
             photoKey = ''; photo(); layerCanvases.clear(); drawLayers().forEach(renderLayer);
             hpos = i; syncControls(); refreshLayers(); refreshHistory(); syncCrop();
         };
+        // H7 : une suppression faite sans question ; « ↶ Annuler » dans le message en bas à gauche (tant que rien d'autre n'a changé depuis)
+        const undoable = message => { const at = hpos; A().undoToast?.(message, {undo: () => { if (!dlg.isConnected) throw new Error('la retouche est fermée'); if (hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans la barre de l’outil'); restore(at - 1); }, redo: () => { if (dlg.isConnected && hpos === at - 1) restore(at); }}); };
         const undoBtn = $('[data-rt-undo]'), redoBtn = $('[data-rt-redo]');
         function refreshHistory() {
             undoBtn.disabled = hpos <= 0; redoBtn.disabled = hpos >= history.length - 1; onHist?.();
@@ -1728,9 +1732,9 @@
             if (e.target.closest('[data-rt-llock]')) { l.locked = !l.locked; refreshLayers(); commit(`${l.name} ${l.locked ? 'verrouillé' : 'déverrouillé'}`); return; }
             if (e.target.closest('[data-rt-ldel]')) {
                 if (typeOf(l) === 'group') { loc.arr.splice(loc.arr.indexOf(l), 1, ...l.children); activeLayer = l.children.at(-1)?.id || ''; refreshLayers(); draw(); commit(`Groupe « ${l.name} » supprimé (son contenu reste)`); return; }
-                if (typeOf(l) === 'photo' && !await A().confirmBox('Ses réglages et corrections sont gardés : ⌘Z ou « ↺ Remettre la photo » pour la retrouver.', {title: `Retirer « ${l.name} » des calques ?`, okLabel: 'Retirer'})) return;
-                if (l.ops?.length && !await A().confirmBox('', {title: `Supprimer « ${l.name} » et ce qui est dessus ?`, okLabel: 'Supprimer le calque'})) return;
-                loc.arr.splice(loc.arr.indexOf(l), 1); layerCanvases.delete(l.id); if (maskEdit === l.id) maskEdit = ''; activeLayer = (loc.arr.at(-1) || loc.parent)?.id || ''; moveSel = null; refreshLayers(); draw(); syncControls(); commit(`${l.name} supprimé`); return;
+                const wasPhoto = typeOf(l) === 'photo', hadOps = !!l.ops?.length, h0 = hpos;
+                loc.arr.splice(loc.arr.indexOf(l), 1); layerCanvases.delete(l.id); if (maskEdit === l.id) maskEdit = ''; activeLayer = (loc.arr.at(-1) || loc.parent)?.id || ''; moveSel = null; refreshLayers(); draw(); syncControls(); commit(`${l.name} supprimé`);
+                if ((wasPhoto || hadOps) && hpos !== h0) undoable(wasPhoto ? `« ${l.name} » retiré des calques` : `Calque « ${l.name} » supprimé avec ce qui est dessus`); return;
             }
             if (e.target.closest('[data-rt-ldup]') && typeOf(l) === 'photo') { // une copie de la photo (avec ses réglages) sur un calque à part
                 const m = blankMask(), mg = m.getContext('2d'); mg.fillStyle = '#fff'; mg.fillRect(0, 0, pw, ph);
@@ -2300,7 +2304,7 @@
                 }
                 const li = e.target.closest('[data-i]'); if (!li) return; const list = actList(), a = list[Number(li.dataset.i)]; if (!a) return;
                 if (e.target.closest('[data-actexp]')) return ext.reglageExport('retouche', a.name, {st: a.st, adj: a.adj || []});
-                if (e.target.closest('[data-actdel]')) { if (!await A().confirmBox('', {title: `Supprimer l’action « ${a.name} » ?`, okLabel: 'Supprimer l’action'})) return; list.splice(Number(li.dataset.i), 1); actSave(list); return draw2(); }
+                if (e.target.closest('[data-actdel]')) { A().undoLocalChange(`Action « ${a.name} » supprimée`, [ACT_KEY], () => { list.splice(Number(li.dataset.i), 1); actSave(list); }, () => { if (d2.isConnected) draw2(); }); return draw2(); }
                 if (e.target.closest('[data-acthere]')) { actApplyHere(a); d2.close(); return; }
                 if (e.target.closest('[data-actbatch]')) return batchPanel(d2.querySelector('[data-batch]'), a);
             });

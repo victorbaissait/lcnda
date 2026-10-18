@@ -142,33 +142,37 @@
         const st = S();
         if (st.hPet && st.hPetView === 'pedigree') return showPedigree(token, st.hPet);
         if (st.hPet) return showPet(token, st.hPet);
+        // H10 : la barre commune (🔍 Chercher · Filtrer ▾ Espèce, État · Liste | Fiches · Trier), retenue pour cette liste
+        const lbSaved = window.LCNDA_UI?.listBarState?.('listes:pets'); if (lbSaved) { st.hPetQ = lbSaved.q || ''; st.hPetSpecies = lbSaved.f?.species || ''; }
         if (st.hPetSpecies && !SPECIES[st.hPetSpecies]) st.hPetSpecies = '';
         let data; try { data = await api('pets', {q: st.hPetQ || '', species: st.hPetSpecies || ''}); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
         // H10 : « N animaux · [Liste | Fiches] · Trier : … », retenus pour cette liste
         const UI = window.LCNDA_UI, KEY = 'listes:pets';
-        const sort = UI?.sortOf ? UI.sortOf(KEY, 'az') : 'az', view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
-        const rows = UI?.sortItems ? UI.sortItems(data.pets || [], sort, {name: r => r.title, date: r => r.updated_at || r.created_at || ''}) : (data.pets || []);
+        const sort = lbSaved?.sort || (UI?.sortOf ? UI.sortOf(KEY, 'az') : 'az'), view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
+        const lifeF = lbSaved?.f?.life || [], all = data.pets || [];
+        const rows = UI?.sortItems ? UI.sortItems(all.filter(r => !lifeF.length || lifeF.includes(r.deceased ? 'gone' : 'alive')), sort, {name: r => r.title, date: r => r.updated_at || r.created_at || ''}) : (data.pets || []);
         const alive = rows.filter(r => !r.deceased).length;
         const kind = r => [iconOf(r.species) + ' ' + (r.breed || String(speciesLabel(r.species) || r.species_label || '').split(/[ ,(]/)[0]), r.color].filter(Boolean).join(' · ');
         A().$('#workspace').innerHTML = `<section class="page h-pets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Animaux de compagnie</h2>
             <p>Les animaux de la famille, d’hier et d’aujourd’hui : une fiche pour chacun (photos, race, puce, éleveur, santé, souvenirs…), reliée à leurs maîtres. Avec leurs parents, on fait le pedigree d’un animal de race, sa descendance et son taux de consanguinité.<br>Deux façons de faire, au choix pour chaque animal : <strong>la fiche d’ici seulement</strong>, plus discrète, qui reste dans cette liste sans se mêler à tes fiches de personnes ; ou <strong>en plus une fiche complète</strong>, comme une personne (arbre, événements, sources…), avec la case en le créant ou « ＋ Fiche complète » plus tard.</p></div>
             <div class="page-actions"><label class="h-pet-mode" title="Famille : les animaux à côté des personnes. Élevage : une base d’animaux (la liste de gauche, le compteur et les statistiques partent des animaux). Les deux : tout mêlé.">Type de base <select data-pet-mode>${[['family', '👪 Famille'], ['breeding', '🐾 Élevage'], ['both', '👪🐾 Les deux']].map(([k, l]) => `<option value="${k}" ${baseMode() === k ? 'selected' : ''}>${l}</option>`).join('')}</select></label><button type="button" class="button secondary" data-pet-prefs title="Espèces, parties et champs du formulaire">⚙️ Réglages</button><button type="button" class="button" data-pet-new>🐾 + Nouvel animal</button></div></header>
-            <div class="list-toolbar h-pet-toolbar"><div class="search-box" style="position:static;max-width:420px"><div class="search-row"><input data-pet-q placeholder="Nom, race, puce, éleveur, maître…" value="${esc(st.hPetQ || '')}"><button aria-label="Rechercher">⌕</button></div></div>
-                <div class="h-pet-chips"><button type="button" class="${!st.hPetSpecies ? 'is-on' : ''}" data-pet-sp="">Tous</button>${visibleSpecies(st.hPetSpecies).map(([k, l]) => `<button type="button" class="${st.hPetSpecies === k ? 'is-on' : ''}" data-pet-sp="${k}">${iconOf(k)} ${esc(l.split(/[ ,(]/)[0])}</button>`).join('')}</div>
-                <span class="muted">${fmt(rows.length)} animal${rows.length > 1 ? 'ux' : ''}${rows.length ? ` · ${fmt(alive)} en vie` : ''}</span></div>
-            ${rows.length ? `<div data-pet-bar></div>${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '', lines: [r.registered_name && r.registered_name !== r.title ? r.registered_name : '', kind(r), r.owners.length ? r.owners.slice(0, 2).join(', ') : ''], date: lifespan(r) || ''}))) : `<div class="h-pet-grid">${rows.map(r => `<button type="button" class="h-pet-card ${r.deceased ? 'is-gone' : ''}" data-pet-open="${r.id}">
+            <div data-pet-bar></div>
+            ${rows.length ? `${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="ui-card-ico">${iconOf(r.species)}</span>`, name: `${r.title}${r.sex ? (r.sex === 'M' ? ' ♂' : ' ♀') : ''}`, open: `data-pet-open="${r.id}"`, cls: r.deceased ? 'is-gone' : '', lines: [r.registered_name && r.registered_name !== r.title ? r.registered_name : '', kind(r), r.owners.length ? r.owners.slice(0, 2).join(', ') : ''], date: lifespan(r) || ''}))) : `<div class="h-pet-grid">${rows.map(r => `<button type="button" class="h-pet-card ${r.deceased ? 'is-gone' : ''}" data-pet-open="${r.id}">
                 <span class="h-pet-cover">${r.media?.[0] ? A().mediaThumbHtml(r.media[0]) : `<span class="h-pet-icon">${iconOf(r.species)}</span>`}</span>
                 <span class="h-pet-info"><strong>${esc(r.title)}${r.sex ? ` <span class="h-pet-sex is-${r.sex}">${r.sex === 'M' ? '♂' : '♀'}</span>` : ''}${r.person_id ? ' <span class="h-pet-full" title="A aussi une fiche complète">👤</span>' : ''}</strong>${r.registered_name && r.registered_name !== r.title ? `<small class="h-pet-reg">${esc(r.registered_name)}</small>` : ''}
                 <small>${esc([iconOf(r.species) + ' ' + (r.breed || String(speciesLabel(r.species) || r.species_label || '').split(/[ ,(]/)[0]), r.color].filter(Boolean).join(' · '))}</small>
                 <small class="muted">${esc(lifespan(r) || 'Dates à compléter')}${r.owners.length ? ' · ' + esc(r.owners.slice(0, 2).join(', ')) : ''}</small>
                 <small class="muted">${r.offspring ? `${fmt(r.offspring)} petit${r.offspring > 1 ? 's' : ''} · ` : ''}${r.titles ? `🏆 ${fmt(r.titles)} · ` : ''}${fmt(r.media_count)} photo${r.media_count > 1 ? 's' : ''}</small></span></button>`).join('')}</div>`}`
-                : (st.hPetQ || st.hPetSpecies ? A().emptyState({icon: '🔍', text: 'Aucun animal ne correspond.'}) : A().emptyState({icon: '🐾', text: 'Aucun animal pour l’instant', hint: 'Son nom, sa photo, ses maîtres… et pour un animal de race, ses parents, pour faire son pedigree.', action: {label: '＋ Nouvel animal', attrs: 'data-pet-new'}}))}</section>`;
+                : (st.hPetQ || st.hPetSpecies || lifeF.length ? A().emptyState({icon: '🔍', text: 'Aucun animal ne correspond.'}) : A().emptyState({icon: '🐾', text: 'Aucun animal pour l’instant', hint: 'Son nom, sa photo, ses maîtres… et pour un animal de race, ses parents, pour faire son pedigree.', action: {label: '＋ Nouvel animal', attrs: 'data-pet-new'}}))}</section>`;
         const ws = A().$('#workspace');
         const slot = ws.querySelector('[data-pet-bar]');
-        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: rows.length, label: 'animal', many: 'animaux', value: sort, view: {key: KEY, dflt: 'cards', what: 'animaux', onChange: () => ext.lists.pets(++st.workspaceToken)}, onChange: v => { UI.setSort(KEY, v); ext.lists.pets(++st.workspaceToken); }}));
-        let t = 0; ws.querySelector('[data-pet-q]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.hPetQ = e.target.value; ext.lists.pets(++st.workspaceToken); }, 300); });
-        ws.querySelectorAll('[data-pet-sp]').forEach(b => b.addEventListener('click', () => { st.hPetSpecies = b.dataset.petSp; ext.lists.pets(++st.workspaceToken); }));
+        if (slot && UI?.listBar) { const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher… (nom, race, puce, éleveur, maître)', value: st.hPetQ || ''},
+            filters: [{id: 'species', label: 'Espèce', type: 'radio', options: [['', 'Toutes'], ...visibleSpecies(st.hPetSpecies).map(([k, l]) => [k, `${iconOf(k)} ${l.split(/[ ,(]/)[0]}`, `${iconOf(k)} ${l.split(/[ ,(]/)[0]}`])], value: st.hPetSpecies || ''},
+                {id: 'life', label: 'État', type: 'check', options: [['alive', 'En vie'], ['gone', 'Disparus']]}],
+            view: {dflt: 'cards', what: 'animaux'}, sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+            onChange: b => { st.hPetQ = b.q; st.hPetSpecies = b.filters.species || ''; UI.setSort(KEY, b.sort); ext.lists.pets(++st.workspaceToken); }});
+            bar.setCount(`${fmt(rows.length)} animal${rows.length > 1 ? 'ux' : ''}${rows.length ? ` · ${fmt(alive)} en vie` : ''}`); slot.replaceWith(bar); }
         ws.querySelectorAll('[data-pet-new]').forEach(b => b.addEventListener('click', () => openEditor(null)));
         ws.querySelector('[data-pet-prefs]').addEventListener('click', () => { st.maintenanceTab = 'pet_prefs'; A().setModule('maintenance'); });
         ws.querySelector('[data-pet-mode]').addEventListener('change', e => { try { localStorage.setItem('genealogie-base-mode', e.target.value); } catch (_) {} toast({family: 'Base de famille.', breeding: 'Base d’élevage : la liste de gauche, le compteur et les statistiques partent des animaux.', both: 'Personnes et animaux mêlés.'}[e.target.value]); A().refreshBaseMode?.(); });
@@ -301,7 +305,7 @@
         ws.querySelector('[data-ped-print]').addEventListener('click', () => window.print());
         ws.querySelector('[data-ped-csv]').addEventListener('click', () => {
             const lab = (g, i) => { let s = ''; let x = i; for (let k = g; k > 0; k--) { s = (x % 2 ? 'M' : 'P') + s; x = Math.floor(x / 2); } return s; };
-            const q = v => /[";\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? '');
+            const q = v0 => { const v = (A().csvSafe || (x => String(x ?? '')))(v0); return /[";\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; }; // pas de formule glissée dans un tableur
             const csv = '﻿' + [['Génération', 'Position (P = père, M = mère)', 'Nom', 'Nom officiel', 'Sexe', 'Race', 'Robe', 'Naissance', 'Inscription', 'Titres'].join(';'), ...slots.map(s => [s.g, lab(s.g, s.i), s.p?.title || s.name, s.p?.registered_name || '', s.p?.sex || '', s.p?.breed || '', s.p?.color || '', s.p?.birth_date || '', s.p?.registration || '', (s.p?.titles || []).join(', ')].map(q).join(';'))].join('\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = `Pedigree ${me.title}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
         });

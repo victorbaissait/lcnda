@@ -2701,17 +2701,33 @@ function list_data(PDO $pdo): never
     // Filtre optionnel par sexe, utilisé uniquement par la liste "persons".
     // Valeurs acceptées : male, female, unknown (regroupe tout ce qui n'est
     // ni male ni female). Vide/absent = pas de filtre (tous).
-    $gender = safe_text($_GET['gender'] ?? '');
-    if (!in_array($gender, ['male', 'female', 'unknown'], true)) $gender = '';
+    // Plusieurs valeurs possibles, séparées par des virgules (barre des listes : cases Hommes / Femmes / Inconnu).
+    $genders = array_values(array_intersect(['male', 'female', 'unknown'], array_map('trim', explode(',', safe_text($_GET['gender'] ?? '')))));
     $genderCond = '';
     $genderParams = [];
-    if ($gender !== '') {
-        if ($gender === 'unknown') {
-            $genderCond = " AND p.gender NOT IN ('male','female')";
-        } else {
-            $genderCond = " AND p.gender=?";
-            $genderParams[] = $gender;
+    if ($genders && count($genders) < 3) {
+        $parts = [];
+        foreach ($genders as $g) {
+            if ($g === 'unknown') $parts[] = "COALESCE(p.gender,'') NOT IN ('male','female')";
+            else { $parts[] = 'p.gender=?'; $genderParams[] = $g; }
         }
+        $genderCond = ' AND (' . implode(' OR ', $parts) . ')';
+    }
+    // Lieu de naissance (un lieu de la base, ou un nom tapé) et étiquette : liste « persons » seulement.
+    $birthPlaceId = safe_int($_GET['birth_place_id'] ?? 0);
+    $birthPlaceText = safe_text($_GET['birth_place'] ?? '');
+    if ($birthPlaceId) {
+        // le lieu choisi, ou un lieu du même nom (ses quartiers, un doublon) : « Né(e) à Tulle »
+        $genderCond .= " AND EXISTS(SELECT 1 FROM events be JOIN event_types bt ON bt.id=be.event_type_id JOIN places bp ON bp.id=be.place_id WHERE be.person_id=p.id AND bt.gedcom_tag='BIRT' AND (bp.id=? OR bp.name=(SELECT name FROM places WHERE id=?) COLLATE NOCASE))";
+        array_push($genderParams, $birthPlaceId, $birthPlaceId);
+    } elseif ($birthPlaceText !== '') {
+        $genderCond .= " AND EXISTS(SELECT 1 FROM events be JOIN event_types bt ON bt.id=be.event_type_id JOIN places bp ON bp.id=be.place_id WHERE be.person_id=p.id AND bt.gedcom_tag='BIRT' AND bp.name LIKE ?)";
+        $genderParams[] = '%' . $birthPlaceText . '%';
+    }
+    $labelId = safe_int($_GET['label_id'] ?? 0);
+    if ($labelId) {
+        $genderCond .= " AND EXISTS(SELECT 1 FROM label_links ll WHERE ll.entity_type='person' AND ll.entity_id=p.id AND ll.label_id=?)";
+        $genderParams[] = $labelId;
     }
     $reminderMode = safe_text($_GET['reminder_mode'] ?? '');
     if (!in_array($reminderMode, ['on', 'before', 'after'], true)) $reminderMode = '';
@@ -5913,6 +5929,43 @@ function restore_change(PDO $pdo,array $data): array
     throw new RuntimeException('Type de restauration non pris en charge.');
 }
 
+/** ↶ Annuler juste après une suppression (H7) : remet la dernière suppression journalisée de cet élément. */
+function restore_last_delete(PDO $pdo,array $data): array
+{
+    $type=(string)($data['entity_type']??'');$id=safe_int($data['entity_id']??0);
+    // une simple ligne, gardée entière dans le journal au moment de la suppression (rappel, ligne de budget, courrier)
+    // (et ses lignes liées gardées dans « _children » : étiquettes posées, membres d'une branche)
+    $simple=['standalone_reminder'=>'standalone_reminders','research_budget'=>'research_budget','courrier'=>'courriers',
+        'hypothesis'=>'hypotheses','evidence'=>'evidence_records','person_online_sheet'=>'person_online_sheets','living_contact'=>'living_contacts',
+        'branch'=>'branches','view'=>'saved_views','label'=>'labels'];
+    $childTables=['label_links','branch_people'];
+    if($id&&isset($simple[$type])){
+        $table=$simple[$type];
+        $stmt=$pdo->prepare("SELECT * FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
+        $stmt->execute([$type,$id]);$change=$stmt->fetch();
+        $row=$change?(json_decode((string)($change['before_json']??''),true)?:[]):[];
+        if(!$row||safe_int($row['id']??0)!==$id)throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
+        $exists=$pdo->prepare("SELECT 1 FROM {$table} WHERE id=?");$exists->execute([$id]);
+        if($exists->fetchColumn())throw new RuntimeException('Cet élément existe déjà.');
+        $children=is_array($row['_children']??null)?$row['_children']:[];
+        unset($row['_children']);
+        insert_snapshot_row($pdo,$table,$row);
+        foreach($children as $childTable=>$rows){
+            if(!in_array($childTable,$childTables,true)||!is_array($rows))continue;
+            foreach($rows as $child)if(is_array($child)&&$child)insert_snapshot_row($pdo,$childTable,$child,true);
+        }
+        log_change($pdo,$type,$id,'restore','Suppression annulée #'.$id,null,['restored_from_change_id'=>(int)$change['id']]);
+        return ['entity_type'=>$type,'entity_id'=>$id];
+    }
+    $allowed=['event','note','source','media','battue','battue_item','battue_alias','investigation','investigation_item','investigation_media'];
+    if(!$id||!in_array($type,$allowed,true))throw new RuntimeException('Rien à remettre.');
+    $stmt=$pdo->prepare("SELECT id FROM change_log WHERE action='delete' AND entity_type=? AND entity_id=? ORDER BY id DESC LIMIT 1");
+    $stmt->execute([$type,$id]);
+    $changeId=(int)$stmt->fetchColumn();
+    if(!$changeId)throw new RuntimeException('Cette suppression n’a pas été trouvée dans le journal.');
+    return restore_change($pdo,['id'=>$changeId]);
+}
+
 function record_exists(PDO $pdo,string $table,int $id): bool
 {
     $allowed=['persons','families','events','event_types','places','media','notes','sources','census_records','battues','battue_search_items','battue_commune_aliases','saved_views','investigations','investigation_items','investigation_media','graves'];
@@ -9075,6 +9128,7 @@ function handle_write(PDO $pdo, string $action, array $data): never
             'delete_event' => delete_event($pdo,$data),
             'picker_place_adopt' => picker_place_adopt($pdo,$data),
             'restore_change' => restore_change($pdo,$data),
+            'restore_last_delete' => restore_last_delete($pdo,$data),
             'add_note' => add_note($pdo,$data),
             'save_note' => save_note($pdo,$data),
             'delete_note' => delete_note($pdo,$data),
@@ -9495,9 +9549,11 @@ function delete_label(PDO $pdo,array $data): array
     $stmt->execute([$id]);
     $old=$stmt->fetch();
     if(!$old)throw new RuntimeException('Étiquette introuvable.');
+    // les étiquettes posées partent avec elle (ON DELETE CASCADE) : gardées dans le journal pour « ↶ Annuler »
+    $links=$pdo->prepare('SELECT * FROM label_links WHERE label_id=? ORDER BY id');$links->execute([$id]);$linkRows=$links->fetchAll();
     $delete=$pdo->prepare('DELETE FROM labels WHERE id=?');
     $delete->execute([$id]);
-    log_change($pdo,'label',$id,'delete','Étiquette supprimée',$old,null);
+    log_change($pdo,'label',$id,'delete','Étiquette supprimée',$old+['_children'=>['label_links'=>$linkRows]],null);
     return ['id'=>$id];
 }
 
@@ -12305,8 +12361,9 @@ function delete_branch(PDO $pdo,array $data): array
     $stmt->execute([$id]);
     $branch=$stmt->fetch();
     if(!$branch)throw new RuntimeException('Branche introuvable.');
+    $members=$pdo->prepare('SELECT * FROM branch_people WHERE branch_id=?');$members->execute([$id]);$memberRows=$members->fetchAll();
     $pdo->prepare('DELETE FROM branches WHERE id=?')->execute([$id]);
-    log_change($pdo,'branch',$id,'delete','Suppression de la branche « '.$branch['name'].' »',$branch,null);
+    log_change($pdo,'branch',$id,'delete','Suppression de la branche « '.$branch['name'].' »',$branch+['_children'=>['branch_people'=>$memberRows]],null);
     return ['id'=>$id];
 }
 
@@ -12323,7 +12380,7 @@ function reorder_view(PDO $pdo,array $data): array
 
 function delete_view(PDO $pdo,array $data): array
 {
-    $id=safe_int($data['id']??0);if(!$id)throw new RuntimeException('ID manquant');$stmt=$pdo->prepare('SELECT * FROM saved_views WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Vue introuvable');$pdo->prepare("DELETE FROM label_links WHERE entity_type='view' AND entity_id=?")->execute([$id]);$pdo->prepare('DELETE FROM saved_views WHERE id=?')->execute([$id]);log_change($pdo,'view',$id,'delete','Vue enregistrée supprimée : '.$before['name'],$before,null);return ['id'=>$id];
+    $id=safe_int($data['id']??0);if(!$id)throw new RuntimeException('ID manquant');$stmt=$pdo->prepare('SELECT * FROM saved_views WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();if(!$before)throw new RuntimeException('Vue introuvable');$links=$pdo->prepare("SELECT * FROM label_links WHERE entity_type='view' AND entity_id=? ORDER BY id");$links->execute([$id]);$before['_children']=['label_links'=>$links->fetchAll()];$pdo->prepare("DELETE FROM label_links WHERE entity_type='view' AND entity_id=?")->execute([$id]);$pdo->prepare('DELETE FROM saved_views WHERE id=?')->execute([$id]);log_change($pdo,'view',$id,'delete','Vue enregistrée supprimée : '.$before['name'],$before,null);return ['id'=>$id];
 }
 
 function update_view(PDO $pdo,array $data): array

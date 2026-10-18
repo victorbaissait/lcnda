@@ -806,7 +806,7 @@
                 if (x === 'full') ext.downloadText(slug + '.lcnda-projet.json', JSON.stringify(fullProject(), null, 1), 'application/json');
                 if (x === 'docx') { const a = document.createElement('a'); a.href = URL.createObjectURL(toDocx()); a.download = slug + '.docx'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); }
                 if (x === 'print') { printProject(); return; }
-                if (x === 'csv') { const q = s => '"' + String(s ?? '').replace(/"/g, '""') + '"'; ext.downloadText(slug + '.csv', '﻿' + [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'].map(q).join(';'), ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''].map(q).join(';'))].join('\n'), 'text/csv'); }
+                if (x === 'csv') { const q = s => '"' + (A().csvSafe || (x => String(x ?? '')))(s).replace(/"/g, '""') + '"'; /* pas de formule glissée dans un tableur */ ext.downloadText(slug + '.csv', '﻿' + [['Sorte', 'Titre', 'Auteurs', 'Date', 'Dossiers', 'Étiquettes', 'Référence'].map(q).join(';'), ...live().map(i => [tl(i), i.title, i.type === 'reference' ? creatorsOf(i).map(c => [c.last, c.first].filter(Boolean).join(' ')).join(' ; ') : '', year(i) || i.data.date || '', i.folders.map(f => pathOf(f).map(y => y.name).join(' › ')).join(' ; '), (i.tags || []).join(', '), i.type === 'reference' ? cite(i, false) : ''].map(q).join(';'))].join('\n'), 'text/csv'); }
                 toast('Fichier prêt.');
             })),
         });
@@ -1166,7 +1166,7 @@
             const t = e.target, [sec, i] = at(t);
             if (t.closest('[data-cfg-emoji]')) { const input = t.closest('.h-at-iconfield').querySelector('input'); return ext.pickEmoji?.(input); }
             if (t.closest('[data-cfg-move]')) { const l = listOf(sec), j = i + Number(t.closest('[data-cfg-move]').dataset.cfgMove); if (j >= 0 && j < l.length) { [l[i], l[j]] = [l[j], l[i]]; saveCfg(); again(); } return; }
-            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; if (!await A().confirmBox(`Supprimer « ${x.label} » ?${sec === 'types' ? ' Les éléments déjà faits avec cette sorte gardent leurs valeurs.' : ''}`, {title: 'Supprimer cet élément', okLabel: 'Supprimer'})) return; listOf(sec).splice(i, 1); saveCfg(); again(); return; }
+            if (t.closest('[data-cfg-del]')) { const x = listOf(sec)[i]; A().undoLocalChange(`« ${x.label} » supprimé${sec === 'types' ? ' (les éléments déjà faits gardent leurs valeurs)' : ''}`, [CFG_KEY], () => { listOf(sec).splice(i, 1); saveCfg(); }, () => { CFG = loadCfg(); if (A().state?.module === 'maintenance') again(); }); again(); return; }
             if (t.closest('[data-cfg-view-add]')) return viewDialog(null);
             if (t.closest('[data-cfg-view-edit]')) return viewDialog(CFG.nav[i]);
             if (t.closest('[data-cfg-type-add]')) return typeDialog(null);
@@ -1197,7 +1197,7 @@
             if (t.closest('[data-cfg-pupdate]')) { const list = profiles(), i = pi('data-cfg-pupdate'); if (!list[i] || !await A().confirmBox(`Remplacer « ${list[i].name} » par les réglages actuels ?`, {title: 'Mettre à jour les réglages', okLabel: 'Remplacer'})) return; list[i] = {...list[i], saved: new Date().toISOString(), settings: cleanCfg(readCfg())}; saveProfiles(list); toast('Mis à jour.'); again(); return; }
             if (t.closest('[data-cfg-prename]')) { const list = profiles(), i = pi('data-cfg-prename'); if (!list[i]) return; A().askText({title: 'Renommer', message: 'Nouveau nom :', value: list[i].name, okLabel: 'Renommer'}).then(n => { if (!n?.trim()) return; list[i].name = n.trim().slice(0, 60); saveProfiles(list); again(); }); return; }
             if (t.closest('[data-cfg-pexport]')) { const x = profiles()[pi('data-cfg-pexport')]; if (x) { downloadCfg(x.name, x.settings); } return; }
-            if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i] || !await A().confirmBox(`Supprimer les réglages enregistrés « ${list[i].name} » ? (les réglages actuels ne changent pas)`, {title: 'Supprimer les réglages', okLabel: 'Supprimer les réglages'})) return; list.splice(i, 1); saveProfiles(list); again(); return; }
+            if (t.closest('[data-cfg-pdel]')) { const list = profiles(), i = pi('data-cfg-pdel'); if (!list[i]) return; A().undoLocalChange(`Réglages « ${list[i].name} » supprimés`, [PROFILES_KEY], () => { list.splice(i, 1); saveProfiles(list); }, () => { if (A().state?.module === 'maintenance') again(); }); again(); return; }
             if (t.closest('[data-cfg-reset]')) return resetSections(['nav', 'types', 'folders', 'plans']);
         }, {signal: ws._cfgCtl.signal});
 

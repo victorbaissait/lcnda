@@ -63,7 +63,7 @@
             if (b.matches('[data-ps-apply]')) { try { await set(JSON.parse(JSON.stringify(it.data))); toast(`Réglages « ${it.name} » appliqués.`); } catch (err) { toast(err.message, 'error'); } return; }
             if (b.matches('[data-ps-update]')) { if (!await A().confirmBox('', {title: `Remplacer « ${it.name} » par les réglages actuels ?`, okLabel: 'Remplacer'})) return; add(it.name, get()); toast('Réglage mis à jour.'); return; }
             if (b.matches('[data-ps-export]')) { downloadBlob(new Blob([JSON.stringify({lcnda: 'reglage', outil: tool, nom: it.name, version: 1, donnees: it.data}, null, 2)], {type: 'application/json'}), `lcnda-reglage-${tool}-${slug(it.name)}.json`); return; }
-            if (b.matches('[data-ps-del]')) { if (!await A().confirmBox('', {title: `Supprimer le réglage « ${it.name} » ?`, okLabel: 'Supprimer', danger: true})) return; l.splice(i, 1); if (keep(l)) draw(); }
+            if (b.matches('[data-ps-del]')) { A().undoLocalChange(`Réglage « ${it.name} » supprimé`, [KEY], () => { l.splice(i, 1); keep(l); }, () => { if (box.isConnected) draw(); }); draw(); }
         });
         box.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('[data-ps-name]')) { e.preventDefault(); box.querySelector('[data-ps-save]').click(); } });
         draw(); return box;
@@ -648,6 +648,8 @@
         const unsnap = t => JSON.parse(t, (k, v) => k === 'src' && typeof v === 'string' && v.startsWith('@img:') ? imgStore.get(v) || '' : v);
         const commit = (label = '') => { hist = hist.slice(0, hi + 1); hist.push(snapshot()); if (hist.length > 150) hist.shift(); hi = hist.length - 1; dirty = false; markDirty(); status(label ? `✓ ${label}` : ''); render(); };
         const restore = i => { if (i < 0 || i >= hist.length) return; hi = i; doc = cleanDoc(unsnap(hist[hi])); sel = sel.filter(id => byId(id)); nodeSel = null; dirty = false; markDirty(); render(); };
+        // H7 : une suppression faite sans question ; « ↶ Annuler » dans le message en bas à gauche (tant que rien d'autre n'a changé depuis)
+        const undoable = message => { const at = hi; A().undoToast?.(message, {undo: () => { if (!dlg.isConnected) throw new Error('le dessin est fermé'); if (hi !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans la barre de l’outil'); restore(at - 1); }, redo: () => { if (dlg.isConnected && hi === at - 1) restore(at); }}); };
         /* vue */
         const applyView = () => { world.setAttribute('transform', `translate(${n2(panX)} ${n2(panY)}) scale(${zoom})`); $('[data-vx-zoom]').textContent = `${Math.round(zoom * 100)} %`; drawPages(); drawUi(); drawGrid(); };
         const fit = () => { const r = stage.getBoundingClientRect(); zoom = clamp(Math.min((r.width - 60) / doc.w, (r.height - 60) / doc.h), 0.02, 40); panX = (r.width - doc.w * zoom) / 2; panY = (r.height - doc.h * zoom) / 2; applyView(); };
@@ -1276,7 +1278,7 @@
                 if (b.matches('[data-vx-llock]')) { o.locked = !o.locked; if (o.locked) sel = sel.filter(s => s !== o.id); commit(o.locked ? 'Verrouillé' : 'Déverrouillé'); return; }
                 if (b.matches('[data-vx-lup]') && i < arr.length - 1) { [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]; commit('Calque monté'); return; }
                 if (b.matches('[data-vx-ldown]') && i > 0) { [arr[i], arr[i - 1]] = [arr[i - 1], arr[i]]; commit('Calque descendu'); return; }
-                if (b.matches('[data-vx-ldel]')) { if (isLayerGroup(o) && (o.children || []).length && !await A().confirmBox('', {title: `Supprimer « ${o.name || 'ce groupe'} » et tout ce qu’il contient ?`, okLabel: 'Supprimer le groupe'})) return; arr.splice(i, 1); sel = sel.filter(s => s !== o.id); if (scope.includes(o.id)) scope = scope.slice(0, scope.indexOf(o.id)); commit('Supprimé'); return; }
+                if (b.matches('[data-vx-ldel]')) { const big = isLayerGroup(o) && (o.children || []).length; arr.splice(i, 1); sel = sel.filter(s => s !== o.id); if (scope.includes(o.id)) scope = scope.slice(0, scope.indexOf(o.id)); commit('Supprimé'); if (big) undoable(`« ${o.name || 'Groupe'} » supprimé avec ce qu’il contient`); return; }
                 return; }
             if (b.dataset.blCharge) { blasonState.charge = b.dataset.blCharge; paintPanel(); return; }
             if (b.matches('[data-bl-make]')) { const {obj, blazon} = makeBlason(blasonState, {x: (doc.w - Math.min(doc.w * .7, doc.h * .7 / 1.2)) / 2, y: (doc.h - Math.min(doc.w * .7, doc.h * .7 / 1.2) * 1.2) / 2, width: Math.min(doc.w * .7, doc.h * .7 / 1.2)}); cur().push(obj); sel = [obj.id]; lastBlazon = blazon; ctx.onBlazon?.(blazon); commit('Blason créé'); paintPanel(); return; }

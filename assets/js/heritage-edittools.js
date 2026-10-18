@@ -100,8 +100,7 @@
         const drawList = () => {
             const box = ws.querySelector('[data-et-list]'); if (!box) return;
             const t = tool(), list = visible(), part = list.slice(0, shown), U = UI();
-            const bar = ws.querySelector('[data-et-sortbar]'); if (bar?.setCount) bar.setCount(loading ? 0 : list.length);
-            const cnt = ws.querySelector('[data-et-of]'); if (cnt) cnt.textContent = !loading && list.length !== rows.length ? `sur ${rows.length}` : '';
+            const bar = ws.querySelector('.ui-listbar'); if (bar?.setCount) bar.setCount(loading ? '' : `${A().plural(list.length, 'projet')}${list.length !== rows.length ? ` sur ${rows.length}` : ''}`);
             if (loading) { box.innerHTML = U?.skeleton ? U.skeleton(4) : '<div class="loading-block">Chargement…</div>'; return; }
             box.innerHTML = list.length ? (view === 'cards'
                 ? `<div class="h-et-cards">${U.cardsHtml(part.map(r => ({thumb: r.thumb, name: r.name, open: `data-et-open="${r.id}"`, disabled: r.disabled, lines: [r.info], date: `Modifié le ${fmtDate(r.date)}`, actions: acts(r).replace(/^<div class="h-et-act">|<\/div>$/g, '')})))}</div>`
@@ -120,16 +119,19 @@
             const t = tool(), U = UI();
             ws.innerHTML = `<section class="page collection-page h-et-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🛠️ Outils de modification</h2><p>Les projets des outils de l’app : choisis un outil, puis ouvre, cherche, trie, renomme ou commence un projet.</p></div><div class="page-actions"><button type="button" class="button small secondary" data-et-arrange title="L’ordre des outils, et ceux qu’on montre">⚙️ Ranger les outils</button></div></header>
                 <div class="segmented enquetes-tab-toggle h-et-tabs">${allTools().map(x => `<button type="button" class="${x.key === tab ? 'is-active ' : ''}enquetes-tab-btn" data-et-tab="${x.key}"><span class="enquetes-tab-icon" aria-hidden="true">${x.icon}</span><span>${esc(x.label)}</span></button>`).join('')}</div>
-                <div class="h-et-bar"><input type="search" data-et-q placeholder="Chercher un projet… (nom, photo, détails)" value="${esc(q)}"><span data-et-sortslot></span><small class="muted" data-et-of></small><span class="spacer"></span><button type="button" class="button" data-et-new>${esc(t.createLabel)}</button>${t.extra || ''}</div>
+                <div class="h-et-bar"><span class="spacer"></span><button type="button" class="button" data-et-new>${esc(t.createLabel)}</button>${t.extra || ''}</div>
+                <div data-et-sortslot></div>
                 <div data-et-list></div></section>`;
             ensureCss();
             view = viewOf(tab);
             const slot = ws.querySelector('[data-et-sortslot]');
-            // « Liste | Fiches » (onglet segmenté de l'app), juste avant « Trier »
-            // (le composant commun UI.viewToggle ; le choix reste rangé par outil dans VIEW_KEY)
-            const viewOpt = {value: view, what: 'projets', onChange: v => { view = v; const all = views(); all[tab] = v; try { localStorage.setItem(VIEW_KEY, JSON.stringify(all)); } catch (_) {} drawList(); }};
-            if (U?.sortBar) { const bar = U.sortBar({count: rows.length, label: 'projet', value: sort, view: viewOpt, onChange: v => { sort = v; shown = STEP; try { localStorage.setItem(SORT_KEY, v); } catch (_) {} drawList(); }}); bar.dataset.etSortbar = ''; slot.replaceWith(bar); }
-            else slot.outerHTML = `<label class="h-et-sort">Trier <select data-et-sort>${[['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']].map(([k, l]) => `<option value="${k}" ${k === sort ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
+            // H10 : la barre commune (🔍 Chercher · Liste | Fiches · Trier), retenue pour chaque outil (« lcnda-listbar:listes:edit_tools:<outil> »)
+            const viewOpt = {key: '', value: view, what: 'projets', onChange: v => { view = v; const all = views(); all[tab] = v; try { localStorage.setItem(VIEW_KEY, JSON.stringify(all)); } catch (_) {} drawList(); }};
+            const bar = U.listBar({key: `listes:edit_tools:${tab}`, search: {placeholder: 'Chercher un projet… (nom, photo, détails)', value: q}, view: viewOpt,
+                sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+                onChange: b => { q = b.q; if (b.sort !== sort) { sort = b.sort; try { localStorage.setItem(SORT_KEY, sort); } catch (_) {} } shown = STEP; drawList(); }});
+            ({q, sort} = bar.state); view = bar.state.view;
+            slot.replaceWith(bar);
             load();
         };
         drawPage();
@@ -143,7 +145,7 @@
                 if (d.etStudio !== undefined) return ext.openLayoutStudio?.();
                 if (d.etRestore !== undefined) return ext.openRestore?.();
                 if (d.etIdp !== undefined) return ext.openIdPhotoBatch?.();
-                if (d.etClear !== undefined) { q = ''; const i = ws.querySelector('[data-et-q]'); if (i) { i.value = ''; i.dispatchEvent(new Event('input', {bubbles: true})); } shown = STEP; return drawList(); }
+                if (d.etClear !== undefined) { const i = ws.querySelector('.ui-listbar input[type=search]'); if (i) { i.value = ''; i.dispatchEvent(new Event('input', {bubbles: true})); i.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'})); } q = ''; shown = STEP; return drawList(); }
                 if (d.etVxblason !== undefined) return ext.openVectorEditor?.({coat: {title: 'Blason'}, onSaved: again, onClose: again});
                 if (d.etX && t.onExtra) return t.onExtra(d.etX, again); // les boutons en plus d'un outil ajouté
                 if (d.etOpen) return t.open(Number(d.etOpen), again);
@@ -151,7 +153,6 @@
                 if (d.etDel) { const r = rows.find(x => x.id === Number(d.etDel)); if (!await A().confirmBox('Les photos, vidéos et sons restent dans les Médias.', {title: `Supprimer le projet « ${r?.name} » ?`, okLabel: 'Supprimer le projet'})) return; await t.remove(r.id); toast('Projet supprimé.'); return load(); }
             } catch (err) { toast(err.message, 'error'); }
         };
-        ws.oninput = e => { if (e.target.matches('[data-et-q]')) { q = e.target.value; shown = STEP; drawList(); } };
-        ws.onchange = e => { if (e.target.matches('[data-et-sort]')) { sort = e.target.value; drawList(); } };
+        ws.oninput = null; ws.onchange = null;
     };
 })();

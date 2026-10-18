@@ -148,7 +148,7 @@
             A().toast?.(`${A().plural(lines.length, 'ligne collée', 'lignes collées')}.`);
         }
         function csv() {
-            const cell = v => /[";\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
+            const cell = v0 => { const v = (A().csvSafe || (x => String(x ?? '')))(v0); return /[";\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v; }; // pas de formule glissée dans un tableur
             const out = [t.cols.map(c => cell(c.name || '')).join(';'), ...t.rows.map(r => t.cols.map(c => cell(String(r.c[c.id] || ''))).join(';'))].join('\r\n');
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + out], {type: 'text/csv;charset=utf-8'})); a.download = 'tableau.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
         }

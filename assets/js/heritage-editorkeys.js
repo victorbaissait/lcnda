@@ -234,7 +234,7 @@
             if (d.ekTab) { kind = d.ekTab; try { localStorage.setItem(TAB, kind); } catch (_) {} return draw(); }
             if (d.ekSet) return captureKey(kind, d.ekSet, cmds(kind).find(r => r[0] === d.ekSet)?.[1] || d.ekSet, draw);
             if (d.ekDel) { const p = prefs(); delete p[kind][d.ekDel]; savePrefs(p); toast('Raccourci retiré.'); return draw(); }
-            if (d.ekClear !== undefined) { if (!await A().confirmBox('Les raccourcis de départ de l’outil reviennent.', {title: 'Retirer tous tes raccourcis de cet outil ?', okLabel: 'Retirer mes raccourcis'})) return; const p = prefs(); p[kind] = {}; savePrefs(p); return draw(); }
+            if (d.ekClear !== undefined) { A().undoLocalChange('Tes raccourcis de cet outil sont retirés (ceux de départ reviennent)', [KEY], () => { const p = prefs(); p[kind] = {}; savePrefs(p); }, () => { if (box.isConnected) draw(); }); return draw(); }
         };
         box.oninput = e => { if (e.target.matches('[data-ek-q]')) { q = e.target.value; const pos = e.target.selectionStart; draw(); const i = box.querySelector('[data-ek-q]'); i.focus(); i.setSelectionRange(pos, pos); } };
     };

@@ -498,6 +498,8 @@
         const ws = A().$('#workspace');
         ext.maintenance.board_prefs.ac?.abort(); const ac = ext.maintenance.board_prefs.ac = new AbortController(), signal = ac.signal;
         const pal = () => p.palettes.find(x => x.id === p.palette) || p.palettes[0];
+        // H7 : retirer une palette, une pointe, une forme, une liste de polices : tout de suite, « ↶ Annuler » remet le brouillon d'avant (rien n'est enregistré avant « Enregistrer »)
+        const draftUndo = msg => { const before = JSON.stringify(p), tk = token; setTimeout(() => { const after = JSON.stringify(p); const here = () => { if (tk !== st.workspaceToken) throw new Error('les réglages des tableaux sont fermés'); }; A().undoToast?.(msg, {undo: () => { here(); p = JSON.parse(before); draw(); }, redo: () => { here(); p = JSON.parse(after); draw(); }}); }); };
         const TABS = [['colors', '🎨 Couleurs'], ['heads', '➤ Pointes'], ['shapes', '⬠ Formes'], ['fonts', '🔤 Polices'], ['sizes', '📏 Tailles et arrondi'], ['table', '▦ Tableur'], ['brushes', '🖌 Pinceaux'], ['menus', '☰ Menus et options']];
         const draw = () => {
             if (token !== st.workspaceToken) return;
@@ -617,8 +619,9 @@
             if (e.target.closest('[data-bp-setdel]')) {
                 const n = ws.querySelector('[data-bp-set]').value, l = sets(), it = l[Number(n)];
                 if (n === '' || !it) { toast('Choisis d’abord les réglages à supprimer.', 'error'); return; }
-                if (!await A().confirmBox(`Supprimer les réglages enregistrés « ${it.name} » ? (les réglages en cours ne changent pas)`, {title: 'Supprimer les réglages', okLabel: 'Supprimer les réglages'})) return;
-                l.splice(Number(n), 1); if (saveSets(l)) { collect(); draw(); toast(`« ${it.name} » supprimé.`); }
+                // H7 : supprimés tout de suite, « ↶ Annuler » les remet (gardés sur cet ordinateur)
+                const tk = token, again = () => { if (tk === st.workspaceToken) { collect(); draw(); } };
+                collect(); A().undoLocalChange(`Réglages « ${it.name} » supprimés`, [SETS_KEY], () => { l.splice(Number(n), 1); saveSets(l); }, again); draw();
                 return;
             }
             if (e.target.closest('[data-bp-reset]')) { if (!await A().confirmBox('Revenir aux réglages d’origine des tableaux ? Tes palettes, formes, listes de polices et pinceaux à toi seront retirés.', {title: 'Réglages d’origine', okLabel: 'Revenir aux réglages d’origine', danger: true})) return; p = DEFAULTS(); savePrefs(p); draw(); toast('Réglages d’origine remis.'); return; }
@@ -633,12 +636,12 @@
                 return;
             }
             if (e.target.closest('[data-bp-palnew], [data-bp-paldup]')) { collect(); const dup = !!e.target.closest('[data-bp-paldup]'); const n = {id: 'p' + Date.now().toString(36), name: dup ? pal().name + ' (copie)' : 'Ma palette', colors: JSON.parse(JSON.stringify(dup ? pal().colors : PALETTE0))}; p.palettes.push(n); p.palette = n.id; draw(); return; }
-            if (e.target.closest('[data-bp-paldel]')) { if (!await A().confirmBox(`Supprimer la palette « ${pal().name} » ?`, {title: 'Supprimer la palette', okLabel: 'Supprimer la palette'})) return; p.palettes = p.palettes.filter(x => x.id !== p.palette); p.palette = p.palettes[0].id; draw(); return; }
+            if (e.target.closest('[data-bp-paldel]')) { draftUndo(`Palette « ${pal().name} » retirée`); p.palettes = p.palettes.filter(x => x.id !== p.palette); p.palette = p.palettes[0].id; draw(); return; }
             // formes
             const sh = e.target.closest('.h-bp-shape');
             if (sh && e.target.closest('[data-bp-shtoggle]')) { collect(); const k = sh.dataset.k; p.shapesHidden = p.shapesHidden.includes(k) ? p.shapesHidden.filter(x => x !== k) : [...p.shapesHidden, k]; draw(); return; }
             if (e.target.closest('[data-bp-hnew]')) { collect(); headMaker(p, h => { p.customHeads.push(h); p.heads.push(h.k); draw(); toast(`Pointe « ${h.n} » créée : elle est dans la liste (n’oublie pas « Enregistrer »).`); }); return; }
-            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { if (!await A().confirmBox('Supprimer cette pointe ? (les traits qui l’utilisent prennent un triangle)', {title: 'Supprimer la pointe', okLabel: 'Supprimer la pointe'})) return; collect(); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
+            const hd = e.target.closest('[data-bp-hdel]'); if (hd) { collect(); draftUndo('Pointe retirée (les traits qui l’utilisent prennent un triangle)'); p.customHeads = p.customHeads.filter(h => h.k !== hd.dataset.bpHdel); p.heads = p.heads.filter(h => h !== hd.dataset.bpHdel); if (p.headStart === hd.dataset.bpHdel) p.headStart = 'none'; if (p.headEnd === hd.dataset.bpHdel) p.headEnd = 'triangle'; draw(); return; }
             if (sh && e.target.closest('[data-bp-shquick]')) { collect(); const nm = shapeByKey(sh.dataset.k, p)?.n || 'La forme'; if (p.quickShapes.includes(sh.dataset.k)) { toast(`⚡ « ${nm} » est déjà dans l’accès rapide (en haut de cet onglet ; ✕ sur elle pour l’en retirer).`); return; } p.quickShapes.push(sh.dataset.k); draw(); toast(`⚡ « ${nm} » ajoutée à l’accès rapide : elle est en haut de cet onglet, et dans la barre de l’outil Formes. N’oublie pas « Enregistrer ».`); return; }
             if (sh && e.target.closest('[data-bp-qleft], [data-bp-qright]')) { const sib = e.target.closest('[data-bp-qleft]') ? sh.previousElementSibling : sh.nextElementSibling; if (sib) sh.parentNode.insertBefore(...(e.target.closest('[data-bp-qleft]') ? [sh, sib] : [sib, sh])); return; }
             const vecDone = k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { const i = p.customShapes.findIndex(x => x.k === k); if (i >= 0) p.customShapes[i] = made; else p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); };
@@ -646,11 +649,11 @@
             if (sh && e.target.closest('[data-bp-shvec]')) { collect(); const s0 = shapeByKey(sh.dataset.k, p); if (s0) ext.openVectorEditor?.({shape: {...s0, d: s0.s && s0.s !== 100 ? s0.d : s0.d}, onShape: vecDone}); return; }
             if (sh && e.target.closest('[data-bp-shfrom]')) { collect(); openComposer({base: sh.dataset.k, onSave: k => { const made = prefs().customShapes.find(x => x.k === k); if (made) { p.customShapes.push(made); if (!p.quickShapes.includes(k)) p.quickShapes.push(k); savePrefs(p); } draw(); }}); return; }
             if (sh && e.target.closest('[data-bp-unquick]')) { collect(); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
-            if (sh && e.target.closest('[data-bp-shdel]')) { if (!await A().confirmBox('Supprimer cette forme ? (les tableaux qui l’utilisent la gardent)', {title: 'Supprimer la forme', okLabel: 'Supprimer la forme'})) return; collect(); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
+            if (sh && e.target.closest('[data-bp-shdel]')) { collect(); draftUndo('Forme retirée (les tableaux qui l’utilisent la gardent)'); p.customShapes = p.customShapes.filter(s => s.k !== sh.dataset.k); p.quickShapes = p.quickShapes.filter(k => k !== sh.dataset.k); draw(); return; }
             // polices
             if (e.target.closest('[data-bp-flnew]')) { collect(); p.fontLists.push({name: 'Ma liste', fonts: []}); draw(); return; }
             const fl = e.target.closest('[data-fl]');
-            if (fl && e.target.closest('[data-bp-fldel]')) { if (!await A().confirmBox('Supprimer cette liste de polices ?', {title: 'Supprimer la liste de polices', okLabel: 'Supprimer la liste'})) return; collect(); p.fontLists.splice(Number(fl.dataset.fl), 1); draw(); return; }
+            if (fl && e.target.closest('[data-bp-fldel]')) { collect(); draftUndo('Liste de polices retirée'); p.fontLists.splice(Number(fl.dataset.fl), 1); draw(); return; }
             if (fl && e.target.closest('[data-bp-fdel]')) { collect(); p.fontLists[Number(fl.dataset.fl)].fonts.splice(Number(e.target.closest('[data-j]').dataset.j), 1); draw(); return; }
             if (fl && e.target.closest('[data-bp-fpick]')) {
                 const f = await window.LCNDA_UI?.openFontPicker?.({title: 'Ajouter une police à la liste'}); if (!f) return;

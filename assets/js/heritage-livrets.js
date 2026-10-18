@@ -27,11 +27,13 @@
     ext.lists.family_booklets = async token => {
         const st = S();
         if (st.hBooklet) return showBooklet(token, st.hBooklet);
+        // H10 : la barre commune (🔍 Chercher · Liste | Fiches · Trier), retenue pour cette liste
+        const lbSaved = window.LCNDA_UI?.listBarState?.('listes:family_booklets'); if (lbSaved) st.hBookletQ = lbSaved.q || '';
         let data; try { data = await api('booklets', {q: st.hBookletQ || ''}); } catch (error) { toast(error.message, 'error'); return; }
         if (!isCurrent(token)) return;
         // H10 : « N livrets · [Liste | Fiches] · Trier : … », retenus pour cette liste
         const UI = window.LCNDA_UI, KEY = 'listes:family_booklets';
-        const sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
+        const sort = lbSaved?.sort || (UI?.sortOf ? UI.sortOf(KEY) : 'recent'), view = UI?.viewOf ? UI.viewOf(KEY, 'cards') : 'cards';
         const rows = UI?.sortItems ? UI.sortItems(data.booklets || [], sort, {name: r => r.title, date: r => r.updated_at}) : (data.booklets || []);
         const cover = r => (r.cover || r.media?.[0]) ? A().mediaThumbHtml(r.cover || r.media[0]) : '';
         const where = r => [r.commune, r.marriage_date && 'mariage ' + r.marriage_date].filter(Boolean).join(' · ') || 'Commune et date à compléter';
@@ -40,16 +42,17 @@
         A().$('#workspace').innerHTML = `<section class="page h-booklets"><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>Livrets de famille</h2>
             <p>La transcription complète des livrets de famille : délivrance, époux et épouse, leurs parents, le mariage, les enfants et toutes les mentions. Relie chaque personne à sa fiche : le livret y apparaît, et ses dates peuvent y être reportées.</p></div>
             <div class="page-actions"><button type="button" class="button" data-bk-new>📘 + Nouveau livret</button></div></header>
-            <div class="list-toolbar"><div class="search-box" style="position:static;max-width:500px"><div class="search-row"><input data-bk-q placeholder="Chercher un nom, une commune…" value="${esc(st.hBookletQ || '')}"><button aria-label="Rechercher">⌕</button></div></div></div>
-            ${rows.length ? `<div data-bk-bar></div>${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: cover(r) || '<span class="ui-card-ico">📘</span>', name: r.title, open: `data-bk-open="${r.id}"`, lines: [where(r), counts(r)], date: r.updated_at ? `Modifié le ${fmtDate(r.updated_at)}` : ''}))) : `<div class="h-bk-grid">${rows.map(r => `<button type="button" class="h-bk-card" data-bk-open="${r.id}">
+            <div data-bk-bar></div>
+            ${rows.length ? `${view === 'list' && UI?.rowsHtml ? UI.rowsHtml(rows.map(r => ({thumb: cover(r) || '<span class="ui-card-ico">📘</span>', name: r.title, open: `data-bk-open="${r.id}"`, lines: [where(r), counts(r)], date: r.updated_at ? `Modifié le ${fmtDate(r.updated_at)}` : ''}))) : `<div class="h-bk-grid">${rows.map(r => `<button type="button" class="h-bk-card" data-bk-open="${r.id}">
                 <span class="h-bk-cover">${cover(r) || '<span class="h-bk-coverart">LIVRET<br>DE<br>FAMILLE</span>'}</span>
                 <span class="h-bk-info"><strong>${esc(r.title)}</strong><small>${esc(where(r))}</small>
                 <small>${counts(r)}</small></span></button>`).join('')}</div>`}`
                 : (st.hBookletQ ? A().emptyState({icon: '🔍', text: 'Aucun livret ne correspond.'}) : A().emptyState({icon: '📘', text: 'Aucun livret pour l’instant', hint: 'Tu recopies ce qui est écrit, page par page, et tu relies les personnes à leurs fiches.', action: {label: '＋ Nouveau livret', attrs: 'data-bk-new'}}))}</section>`;
         const ws = A().$('#workspace');
         const slot = ws.querySelector('[data-bk-bar]');
-        if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: rows.length, label: 'livret', value: sort, view: {key: KEY, dflt: 'cards', what: 'livrets', onChange: () => ext.lists.family_booklets(++st.workspaceToken)}, onChange: v => { UI.setSort(KEY, v); ext.lists.family_booklets(++st.workspaceToken); }}));
-        let t = 0; ws.querySelector('[data-bk-q]').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { st.hBookletQ = e.target.value; ext.lists.family_booklets(++st.workspaceToken); }, 300); });
+        if (slot && UI?.listBar) { const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher un nom, une commune…', value: st.hBookletQ || ''}, view: {dflt: 'cards', what: 'livrets'},
+            sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+            onChange: b => { st.hBookletQ = b.q; UI.setSort(KEY, b.sort); ext.lists.family_booklets(++st.workspaceToken); }}); bar.setCount(rows.length, 'livret'); slot.replaceWith(bar); }
         ws.querySelectorAll('[data-bk-new]').forEach(b => b.addEventListener('click', () => openEditor(null)));
         ws.querySelectorAll('[data-bk-open]').forEach(b => b.addEventListener('click', () => { st.hBooklet = Number(b.dataset.bkOpen); ext.lists.family_booklets(++st.workspaceToken); }));
     };
@@ -189,7 +192,7 @@
                     if (p) { const pr = PRESETS[p.dataset.bkPreset]; Object.entries(pr).forEach(([k, v]) => { const el = form.elements[k]; if (!el || k === 'label') return; if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === v)) el.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(v.split(',')[0].replace(/"/g, ''))}</option>`); el.value = v; }); read(); g.preset = p.dataset.bkPreset; return; }
                     const mp = e.target.closest('[data-bk-myname]'); if (mp) { const x = myDesigns().find(y => y.name === mp.dataset.bkMyname); if (!x) return; g = {...effectiveDesign({}), ...x.design}; Object.entries(x.design).forEach(([k, v]) => { const el = form.elements[k]; if (!el || typeof v === 'object' || el instanceof RadioNodeList) return; if (el.tagName === 'SELECT' && ![...el.options].some(o => o.value === String(v))) el.insertAdjacentHTML('beforeend', `<option value="${esc(v)}">${esc(String(v).replace(/^local:/, '').split(',')[0].replace(/"/g, ''))}</option>`); el.value = v; }); ['size', 'title_size'].forEach(k => { if (x.design[k]) { dl.querySelector(`[data-bk-num="${k}"]`).value = x.design[k]; } });
                         const ord = [...(x.design.order || []), ...SECTIONS.map(y => y[0]).filter(k => !(x.design.order || []).includes(k))]; dl.querySelector('[data-bk-order]').innerHTML = orderLis(g, ord); applyDesign(pageEl, g); toast(`Apparence « ${x.name} » appliquée (« Enregistrer » pour la garder sur ce livret).`); return; }
-                    const md = e.target.closest('[data-bk-mydelname]'); if (md) { const nm = md.dataset.bkMydelname; if (!await A().confirmBox(`Supprimer l’apparence « ${nm} » ?`, {title: 'Supprimer l’apparence', okLabel: 'Supprimer l’apparence'})) return; try { localStorage.setItem(MY_DESIGNS, JSON.stringify(myDesigns().filter(x => x.name !== nm))); } catch (_) {} dl.querySelector('[data-bk-mine]').innerHTML = mineHtml(); return; }
+                    const md = e.target.closest('[data-bk-mydelname]'); if (md) { const nm = md.dataset.bkMydelname; A().undoLocalChange(`Apparence « ${nm} » supprimée`, [MY_DESIGNS], () => { try { localStorage.setItem(MY_DESIGNS, JSON.stringify(myDesigns().filter(x => x.name !== nm))); } catch (_) {} }, () => { const mine = dl.querySelector('[data-bk-mine]'); if (mine) mine.innerHTML = mineHtml(); }); dl.querySelector('[data-bk-mine]').innerHTML = mineHtml(); return; }
                     if (e.target.closest('[data-bk-mysave]')) { read(); ext.openDialog({eyebrow: 'LIVRET DE FAMILLE', title: 'Enregistrer cette apparence', submitLabel: 'Enregistrer', body: '<label>Nom de l’apparence<input name="nm" maxlength="60" value="Mon livret" required></label><p class="muted">Elle sera proposée dans « Mes apparences », pour tous les livrets (sans l’image de couverture, propre à chaque livret).</p>',
                         onSubmit: f2 => { const nm = f2.elements.nm.value.trim() || 'Mon livret'; const {label, cover_media, cover_mode, ...design} = g; const l = [...myDesigns().filter(x => x.name !== nm), {name: nm, design}].slice(-40); try { localStorage.setItem(MY_DESIGNS, JSON.stringify(l)); } catch (_) { toast('Impossible de garder l’apparence.', 'error'); return false; } toast(`Apparence « ${nm} » enregistrée : elle est dans « Mes apparences ».`); const box = dl.querySelector('[data-bk-mine]'); if (box) box.innerHTML = mineHtml(); }}); return; }
                     const mv = e.target.closest('[data-bk-move]');

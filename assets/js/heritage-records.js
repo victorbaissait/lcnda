@@ -280,7 +280,7 @@
         ws.querySelector('[data-rv-print]').addEventListener('click', () => window.print());
         ws.querySelector('[data-rv-csv]').addEventListener('click', () => {
             const cols = d.fields.filter(x => !['heading', 'media'].includes(x.type));
-            const q = val => '"' + String(val ?? '').replace(/"/g, '""') + '"';
+            const q = val => '"' + (A().csvSafe || (x => String(x ?? '')))(val).replace(/"/g, '""') + '"'; // pas de formule glissée dans un tableur
             const stepTxt = (x, items) => (items || []).map((it, i) => `${x.item} ${i + 1}${it.done ? ' ✔' : ''} : ` + x.fields.map(sf => textOf(sf, it[sf.key], people)).filter(Boolean).join(', ')).join(' | ');
             const lines = [[...cols.map(x => x.label), ...(r.status ? ['Suivi'] : [])].map(q).join(';'), ...rows.map(rec => [...cols.map(x => x.type === 'steps' ? stepTxt(x, rec.data[x.key]) : x.type === 'date' ? rec.data[x.key] : textOf(x, rec.data[x.key], people)), ...(r.status ? [rec.status === 'done' ? r.done : r.todo] : [])].map(q).join(';'))];
             const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + lines.join('\n')], {type: 'text/csv'})); a.download = (L.name || 'liste').replace(/[^\p{L}\p{N}]+/gu, '-') + '.csv'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);

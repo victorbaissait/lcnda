@@ -263,6 +263,8 @@
         const snap0 = () => JSON.stringify(H);
         const commit = (label = '') => { hist = hist.slice(0, hpos + 1); hist.push(snap0()); if (hist.length > 120) hist.shift(); hpos = hist.length - 1; dirty = true; status(label); render(); };
         const restore = i => { if (i < 0 || i >= hist.length) return; hpos = i; H = JSON.parse(hist[hpos]); fi = clamp(fi, 0, H.floors.length - 1); sel = null; dirty = true; render(); };
+        // H7 : une suppression faite sans question ; « ↶ Annuler » dans le message en bas à gauche (tant que rien d'autre n'a changé depuis)
+        const undoable = message => { const at = hpos; A().undoToast?.(message, {undo: () => { if (!dlg.isConnected) throw new Error('la maison est fermée'); if (hpos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans la barre de l’outil'); restore(at - 1); }, redo: () => { if (dlg.isConnected && hpos === at - 1) restore(at); }}); };
         /* ─── vue ─── */
         const toW = e => { const r = svg.getBoundingClientRect(); return [(e.clientX - r.left - panX) / zoom, (e.clientY - r.top - panY) / zoom]; };
         const applyView = () => world.setAttribute('transform', `translate(${panX} ${panY}) scale(${zoom})`);
@@ -538,9 +540,9 @@
         }
         async function delVer(vid) {
             const v = (H.versions || []).find(q => q.id === vid); if (!v) return;
-            if (!await (H.versions.length === 1 ? A().confirmBox(`Le plan « ${verName(v)} » reste, sans date.`, {title: 'Ne plus avoir d’époques ?', okLabel: 'Retirer les époques'}) : A().confirmBox('', {title: `Supprimer l’époque « ${verName(v)} » et son plan ?`, okLabel: 'Supprimer l’époque'}))) return;
+            const onlyOne = H.versions.length === 1, vName = verName(v); // H7 : sans question ; « ↶ Annuler » dans le message
             if (H.versions.length === 1) { H.versions = []; delete H.ver; } else { if (v.id === H.ver) { const l = verList(), i = l.indexOf(v); switchVer((l[i + 1] || l[i - 1]).id, true); } H.versions = H.versions.filter(q => q !== v); }
-            (H.meta.census || []).forEach(c => { if (c.ver === vid) delete c.ver; }); sel = null; commit('Époque supprimée'); badge();
+            (H.meta.census || []).forEach(c => { if (c.ver === vid) delete c.ver; }); sel = null; commit('Époque supprimée'); badge(); undoable(onlyOne ? `Époques retirées (le plan « ${vName} » reste, sans date)` : `Époque « ${vName} » supprimée avec son plan`);
         }
         function play() {
             if (playT) return stopPlay(); const l = verList(); if (l.length < 2) return toast('Crée au moins deux époques (＋ Nouvelle époque) pour voir la maison évoluer.', 'error');
@@ -902,7 +904,7 @@
         async function setsCmd(k, idx) {
             const l = setsList(), cur = l[idx];
             if (k === 'apply' && cur) { applySet(cur.v); paintSnap(); commit(`Réglage « ${cur.name} » appliqué`); return; }
-            if (k === 'del' && cur) { if (!await A().confirmBox('', {title: `Supprimer le réglage « ${cur.name} » ?`, okLabel: 'Supprimer'})) return; l.splice(idx, 1); setsSave(l); paintSnap(); return; }
+            if (k === 'del' && cur) { A().undoLocalChange(`Réglage « ${cur.name} » supprimé`, [SETS_KEY], () => { l.splice(idx, 1); setsSave(l); }, () => { if (dlg.isConnected) paintSnap(); }); paintSnap(); return; }
             if (k === 'export' && cur) { downloadText(JSON.stringify({lcnda: 'reglage', outil: SETS_TOOL, nom: cur.name, version: 1, donnees: cur.v}, null, 1), `lcnda-reglage-${SETS_TOOL}-${slug(cur.name)}.json`); toast('Fichier prêt : il s’importe dans 🧲 Aimants → « ⤒ Importer un réglage ».'); return; }
             if (k === 'save') { const n = String(await A().askText({title: '💾 Enregistrer ces réglages', message: 'Nom de ces réglages (aimants, grille, épaisseur des murs, hauteur des yeux, lumière) :', value: cur?.name || 'Mes réglages', okLabel: 'Enregistrer'}) || '').trim().slice(0, 80); if (!n) return;
                 const at = l.findIndex(x => x.name === n); if (at >= 0 && !await A().confirmBox('', {title: `Remplacer le réglage « ${n} » ?`, okLabel: 'Remplacer'})) return;
@@ -1013,13 +1015,13 @@
                     body: `<p class="muted">Du plus haut au plus bas. Renomme, change la hauteur, ou supprime un étage (avec tout ce qu’il contient).</p><table class="h-hs-floortab"><thead><tr><th>Nom</th><th>Hauteur (cm)</th><th>Contenu</th><th></th></tr></thead><tbody>${rows().map(([f, i]) => `<tr data-fl="${i}"><td><input data-fn value="${esc(f.name)}" maxlength="60"></td><td><input data-fh type="number" min="150" max="800" value="${f.height}"></td><td class="muted">${f.walls.length} mur${f.walls.length > 1 ? 's' : ''}, ${f.rooms.length} pièce${f.rooms.length > 1 ? 's' : ''}, ${f.items.length} objet${f.items.length > 1 ? 's' : ''}</td><td><button type="button" class="button small danger" data-fdel>🗑 Supprimer</button></td></tr>`).join('')}</tbody></table>`,
                     onOpen: dg => dg.addEventListener('click', e => { const b = e.target.closest('[data-fdel]'); if (!b) return; const tr = b.closest('tr'); if (dg.querySelectorAll('tr[data-fl]:not(.is-del)').length < 2) return toast('Il faut au moins un étage.', 'error'); tr.classList.toggle('is-del'); b.textContent = tr.classList.contains('is-del') ? '↺ Garder' : '🗑 Supprimer'; }),
                     onSubmit: async form => { const del = []; form.querySelectorAll('tr[data-fl]').forEach(tr => { const f = H.floors[Number(tr.dataset.fl)]; if (tr.classList.contains('is-del')) { del.push(f); return; } f.name = tr.querySelector('[data-fn]').value.trim().slice(0, 60) || f.name; const h = Number(tr.querySelector('[data-fh]').value); if (h >= 150 && h <= 800) f.height = h; });
-                        if (del.length && !await A().confirmBox('', {title: `Supprimer ${del.map(f => `« ${f.name} »`).join(', ')} et tout ce qu’${del.length > 1 ? 'ils contiennent' : 'il contient'} ?`, okLabel: del.length > 1 ? 'Supprimer les étages' : 'Supprimer l’étage'})) return false;
-                        const cur = F(); H.floors = H.floors.filter(f => !del.includes(f)); fi = Math.max(0, H.floors.indexOf(cur)); if (!H.floors.includes(cur)) fi = Math.max(0, H.floors.findIndex(f => f.level === 0)); sel = null; commit(del.length ? `${del.length} étage${del.length > 1 ? 's' : ''} supprimé${del.length > 1 ? 's' : ''}` : 'Étages'); }}); },
+                        const cur = F(); H.floors = H.floors.filter(f => !del.includes(f)); fi = Math.max(0, H.floors.indexOf(cur)); if (!H.floors.includes(cur)) fi = Math.max(0, H.floors.findIndex(f => f.level === 0)); sel = null; commit(del.length ? `${del.length} étage${del.length > 1 ? 's' : ''} supprimé${del.length > 1 ? 's' : ''}` : 'Étages');
+                        if (del.length) undoable(`${del.map(f => `« ${f.name} »`).join(', ')} supprimé${del.length > 1 ? 's' : ''} avec ce qu’${del.length > 1 ? 'ils contenaient' : 'il contenait'}`); }}); },
             dupfloor: () => { const src = F(), f = newFloor(Math.max(...H.floors.map(q => q.level)) + 1), map = new Map(); f.walls = src.walls.map(w => { const n = {...JSON.parse(JSON.stringify(w)), id: uid('w')}; map.set(w.id, n.id); return n; }); f.openings = src.openings.filter(o => o.type === 'window').map(o => ({...o, id: uid('o'), wall: map.get(o.wall)})); f.wallT = src.wallT; f.height = src.height; H.floors.push(f); fi = H.floors.length - 1; commit(`${f.name} (murs repris)`); },
-            delfloor: async () => { if (H.floors.length < 2) return toast('Il faut au moins un étage.', 'error'); if (!await A().confirmBox('', {title: `Supprimer « ${F().name} » et tout ce qu’il contient ?`, okLabel: 'Supprimer l’étage'})) return; H.floors.splice(fi, 1); fi = 0; sel = null; commit('Étage supprimé'); },
+            delfloor: async () => { if (H.floors.length < 2) return toast('Il faut au moins un étage.', 'error'); const nm = F().name; H.floors.splice(fi, 1); fi = 0; sel = null; commit('Étage supprimé'); undoable(`Étage « ${nm} » supprimé`); },
             import3d: () => import3d(), importimg: () => importImg(), importplan: () => importPlan(), calib: calibrate, refalign: refAlign, importhouse: () => importHouseFile(),
             refmove: () => { if (!H.ref || H.ref.lock) return; H.ref.moving = !H.ref.moving; if (H.ref.moving) setTool('select'); hint(H.ref.moving ? '✥ Glisse le plan ancien (sur un endroit vide du plan) ; reclique « ✥ Déplacer » pour finir.' : HINTS[tool]); render(); },
-            refdel: async () => { if (!await A().confirmBox('L’image reste dans les médias.', {title: 'Retirer le plan ancien du fond ?', okLabel: 'Retirer'})) return; toggleTrace(false); H.ref = null; commit('Plan ancien retiré'); },
+            refdel: async () => { toggleTrace(false); H.ref = null; commit('Plan ancien retiré'); undoable('Plan ancien retiré du fond (l’image reste dans les médias)'); },
             refhere: () => { if (!H.ref) return; H.ref.floor = F().id; commit('Plan ancien sous cet étage'); }, trace: () => toggleTrace(),
             export: exportDlg, memadd: () => memAdd(),
             font: async () => { const lb = F().labels.find(q => q.id === sel?.id); if (!lb) return; const fnt = await UI()?.openFontPicker?.({value: lb.font || 'Georgia', sample: lb.text || 'Maison de famille'}); if (fnt) { lb.font = String(fnt).slice(0, 80); commit('Police'); } },
@@ -1162,7 +1164,7 @@
         const linkText = h => [...(h.links?.people || []).map(p => p.label), ...(h.links?.census || []).map(c => c.label)].join(' ');
         const draw = () => { let list = items.filter(h => norm(`${h.name} ${h.place} ${h.period} ${linkText(h)}`).includes(norm(q)));
             if (UI?.sortItems) list = UI.sortItems(list, sort, {name: h => h.name, date: h => h.updated_at});
-            ws.querySelector('[data-hs-bar]')?.setCount?.(list.length);
+            ws.querySelector('.ui-listbar')?.setCount?.(`${A().plural(list.length, 'maison')}${list.length !== items.length ? ` sur ${items.length}` : ''}`);
             const acts = h => `<button type="button" class="button small" data-hs-open="${h.id}">Ouvrir</button><button type="button" class="button small secondary" data-hs-ren="${h.id}" title="Renommer">✎</button><button type="button" class="button small secondary" data-hs-del="${h.id}" title="Supprimer">🗑</button>`;
             const none = A().empty(items.length ? 'Aucune maison ne correspond.' : 'Aucune maison pour l’instant : « ＋ Nouvelle maison ».');
             ws.querySelector('[data-hs-grid]').innerHTML = !list.length ? none : view === 'table'
@@ -1170,9 +1172,14 @@
                 : `<div class="h-hs-cards">${list.map(h => `<article class="h-hs-card"><button type="button" class="h-hs-cimg" data-hs-open="${h.id}">${h.thumb ? `<img src="${esc(h.thumb)}" alt="">` : '<span>🏠</span>'}</button><div><h3><button type="button" class="table-link" data-hs-open="${h.id}">${esc(h.name)}</button></h3><p class="muted">${esc([h.place, h.period].filter(Boolean).join(' · ') || 'Lieu à préciser')}</p><p class="muted">${h.floors} étage${h.floors > 1 ? 's' : ''} · ${h.rooms} pièce${h.rooms > 1 ? 's' : ''}${h.people ? ` · ${h.people} habitant${h.people > 1 ? 's' : ''}` : ''}${versText(h) ? ` · ${esc(versText(h))}` : ''}</p>
                     <div class="h-hs-linked"><small class="muted">Rattachée à :</small><div class="h-hs-links">${linkChips(h)}</div></div><div class="h-hs-cact">${acts(h)}</div></div></article>`).join('')}</div>`; };
         ws.innerHTML = `<section class="page collection-page" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>🏠 Maisons de famille</h2><p>Les plans des maisons de la famille, en 2D et en 3D : leurs pièces, leurs meubles, leurs habitants, leurs recensements, leurs époques et leurs souvenirs.</p></div><button type="button" class="button" data-hs-new>＋ Nouvelle maison</button></header>
-            <div class="h-et-bar"><input type="search" data-hs-q placeholder="Chercher une maison (nom, lieu, époque, personne, recensement)…"></div><div data-hs-bar></div><div data-hs-grid></div></section>`;
+            <div data-hs-bar></div><div data-hs-grid></div></section>`;
+        // H10 : la barre commune (🔍 Chercher · Liste | Fiches · Trier), retenue pour cette liste
         { const slot = ws.querySelector('[data-hs-bar]');
-            if (slot && UI?.sortBar) { const bar = UI.sortBar({count: items.length, label: 'maison', feminine: true, value: sort, view: {key: KEY, dflt: old, what: 'maisons', onChange: v => { view = v === 'list' ? 'table' : 'cards'; draw(); }}, onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }}); bar.dataset.hsBar = ''; slot.replaceWith(bar); } else slot?.remove(); }
+            const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher une maison… (nom, lieu, époque, personne, recensement)'}, view: {dflt: old, what: 'maisons', onChange: v => { view = v === 'list' ? 'table' : 'cards'; draw(); }},
+                sort: {options: [['recent', 'Les plus récentes'], ['old', 'Les plus anciennes'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+                onChange: (b, {what}) => { q = b.q; sort = b.sort; UI.setSort(KEY, sort); if (what !== 'view') draw(); }});
+            q = bar.state.q; sort = bar.state.sort; view = bar.state.view === 'list' ? 'table' : 'cards';
+            slot.replaceWith(bar); }
         draw();
         const again = () => { if (S.module === 'listes' && S.listType === 'houses') listPage(++S.workspaceToken); };
         ws.onclick = async e => { const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
@@ -1180,7 +1187,7 @@
                 if (d.hsGop !== undefined) { if (!Number(d.hsGop)) return toast('Ce recensement n’est relié à aucune fiche.', 'error'); return A().openPersonById?.(Number(d.hsGop)); }
                 if (d.hsRen) { const h = items.find(x => x.id === Number(d.hsRen)), n = await A().askText({title: 'Renommer la maison', message: 'Nouveau nom :', value: h.name, okLabel: 'Renommer'}); if (!n?.trim()) return; await post('rename_house', {id: h.id, name: n.trim()}); return again(); }
                 if (d.hsDel) { const h = items.find(x => x.id === Number(d.hsDel)); if (!await A().confirmBox('', {title: `Supprimer la maison « ${h.name} » ?`, okLabel: 'Supprimer la maison'})) return; await post('delete_house', {id: h.id}); return again(); } } catch (err) { toast(err.message, 'error'); } };
-        ws.oninput = e => { if (e.target.matches('[data-hs-q]')) { q = e.target.value; draw(); } };
+        ws.oninput = null;
     }
 
     /* ═════════ 🏠 Le bloc « Maisons » de la fiche d'une personne ═════════ */

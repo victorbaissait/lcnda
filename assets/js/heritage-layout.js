@@ -63,7 +63,11 @@
             try { localStorage.setItem(FORMATS_KEY, JSON.stringify(list)); } catch (_) {}
             sel.insertBefore(new Option(allSizes().find(x => x[0] === k)[1], k), sel.querySelector('option[value="custom"]')); sel.value = k; note(); toast(`Format « ${name} » enregistré : il est proposé pour les prochains documents.`);
         });
-        del.addEventListener('click', async () => { const k = sel.value, f = myFormats().find(x => x.k === k); if (!f || !await A().confirmBox('', {title: `Supprimer le format « ${f.name} » ?`, okLabel: 'Supprimer le format'})) return; try { localStorage.setItem(FORMATS_KEY, JSON.stringify(myFormats().filter(x => x.k !== k))); } catch (_) {} sel.querySelector(`option[value="${k}"]`)?.remove(); sel.value = 'custom'; note(); });
+        del.addEventListener('click', async () => { const k = sel.value, f = myFormats().find(x => x.k === k); if (!f) return;
+            // H7 : supprimé tout de suite, « ↶ Annuler » le remet (gardé sur cet ordinateur)
+            const opt = sel.querySelector(`option[value="${k}"]`), optAt = opt?.nextSibling || null, optParent = opt?.parentNode;
+            A().undoLocalChange(`Format « ${f.name} » supprimé`, [FORMATS_KEY], () => { try { localStorage.setItem(FORMATS_KEY, JSON.stringify(myFormats().filter(x => x.k !== k))); } catch (_) {} }, what => { if (!sel.isConnected || !opt || !optParent) return; if (what === 'undo') { optParent.insertBefore(opt, optAt && optAt.parentNode === optParent ? optAt : null); sel.value = k; } else { opt.remove(); sel.value = 'custom'; } note(); });
+            opt?.remove(); sel.value = 'custom'; note(); });
         dg._formatMm = () => sel.value === 'design' ? null : {w: clamp(mmW(), 30, 1500), h: clamp(mmH(), 30, 1500)};
         note();
     }
@@ -676,6 +680,8 @@
         const goTo = i => { if (i < 0 || i >= timeline.length) return; if (editingId) stopEditing(); const o = JSON.parse(timeline[i].snap); D = o.D; cur = Math.min(o.cur, D.pages.length - 1); sel = []; editingId = null; pos = i; setDirty(); render(); };
         const undo = () => { if (editingId) stopEditing(); if (pos <= 0) return msg('Rien à annuler.'); msg(`Annulé : ${timeline[pos].label}`); goTo(pos - 1); };
         const redo = () => { if (pos >= timeline.length - 1) return msg('Rien à rétablir.'); goTo(pos + 1); msg(`Rétabli : ${timeline[pos].label}`); };
+        // H7 : une suppression faite sans question ; « ↶ Annuler » dans le message en bas à gauche (tant que rien d'autre n'a changé depuis)
+        const undoable = message => { const at = pos; A().undoToast?.(message, {undo: () => { if (!dl.isConnected) throw new Error('la mise en page est fermée'); if (pos !== at) throw new Error('d’autres changements ont suivi : utilise ↶ dans la barre de l’outil'); undo(); }, redo: () => { if (dl.isConnected && pos === at - 1) redo(); }}); };
         function syncHistory() {
             const u = dl.querySelector('[data-ly-cmd="undo"].ly-hbtn'), r = dl.querySelector('[data-ly-cmd="redo"].ly-hbtn');
             if (u) { u.disabled = pos <= 0; u.title = pos > 0 ? `Annuler : ${timeline[pos].label} (⌘Z)` : 'Rien à annuler'; }
@@ -974,7 +980,7 @@
                 }});
         }
         async function gotoDialog() { const v = await ask(`Aller à la page (1 à ${D.pages.length}) :`, String(cur + 1)); if (v) goPage(Number(v) - 1); }
-        async function delPage() { if (D.pages.length < 2) return msg('Il faut garder au moins une page.'); if (D.pages[cur].items.length && !await A().confirmBox('', {title: `Supprimer la page ${cur + 1} et ce qu’elle contient ?`, okLabel: 'Supprimer la page'})) return; D.pages.splice(cur, 1); cur = Math.min(cur, D.pages.length - 1); sel = []; commit(); render(); }
+        async function delPage() { if (D.pages.length < 2) return msg('Il faut garder au moins une page.'); const n = cur + 1; D.pages.splice(cur, 1); cur = Math.min(cur, D.pages.length - 1); sel = []; commit(`Page ${n} supprimée`); render(); undoable(`Page ${n} supprimée`); }
         function dupPage() { const p = JSON.parse(JSON.stringify(D.pages[cur])); p.id = nid('p'); const orig = D.pages[cur].items; p.items.forEach(it => { it.id = nid('c'); }); relink(orig, p.items); D.pages.splice(cur + 1, 0, p); commit(); goPage(cur + 1); }
         function lockToggle() { const its = selected(); if (!its.length) return; const v = !its.every(x => x.locked); its.forEach(x => { x.locked = v; }); commit(); render(); }
         function fitFrame() { const it = one(); if (!it) return; if (it.type === 'text') { const el = board.querySelector(`.ly-item[data-id="${CSS.escape(it.id)}"] .ly-txt`); if (el) { it.h = r1(el.scrollHeight / MM + (it.inset || 0) * 2 + 0.5); commit(); render(); } return; } if (it.src) { const im = new Image(); im.onload = () => { it.h = r1(it.w * im.naturalHeight / im.naturalWidth); it.imgS = 100; it.imgX = 0; it.imgY = 0; commit(); render(); }; im.src = it.src; } }
@@ -1723,7 +1729,7 @@
                 if (cB.matches('[data-ly-cmreply]')) { const v = await askBox('↩ Répondre', `Ta réponse à ${c.author} :`, '', 'Répondre'); if (!v || !v.trim()) return; c.replies.push({id: nid('r'), text: v.trim().slice(0, 4000), author: await reviewer(), at: new Date().toISOString()}); focusCm = c.id; commit('Réponse ajoutée'); render(); return; }
                 if (cB.matches('[data-ly-cmres]')) { if (editingId) stopEditing(); c.resolved = !c.resolved; if (c.resolved) unwrapCm(c.id); else { delete c.status; wrapQuote(findItem(c.item)?.it, c.quote, c.id); } focusCm = c.id; commit(c.resolved ? 'Commentaire résolu' : 'Commentaire rouvert'); render(); return; }
                 if (cB.matches('[data-ly-cmgo]')) { const pi = pageOfItem(c.item); if (pi >= 0) { focusCm = c.id; goPage(pi); sel = [c.item]; drawSel(); } return; }
-                if (cB.matches('[data-ly-cmdel]')) { if (!await A().confirmBox(c.text || c.quote || '', {title: 'Supprimer ce commentaire ?', okLabel: 'Supprimer le commentaire'})) return; if (editingId) stopEditing(); unwrapCm(c.id); D.review.comments = comments().filter(x => x !== c); commit('Commentaire supprimé'); render(); return; }
+                if (cB.matches('[data-ly-cmdel]')) { if (editingId) stopEditing(); unwrapCm(c.id); D.review.comments = comments().filter(x => x !== c); commit('Commentaire supprimé'); render(); undoable('Commentaire supprimé'); return; }
             }
             const b = e.target.closest('button, [data-ly-lpick]'); if (!b) return; const d = b.dataset;
             // double-clic sur le nom d'un calque : le renommer (le premier clic redessine la liste, le dblclick natif se perd)
@@ -1748,7 +1754,7 @@
             if (d.lyGadd !== undefined) { const g = D.swatches.find(s => s.id === dl.dataset.grad); if (g && g.stops.length < 8) { g.stops.push({c: '#888888', p: 50}); g.stops.sort((a, c) => a.p - c.p); commit(); render(); } return; }
             if (d.lyGdel !== undefined) { const g = D.swatches.find(s => s.id === dl.dataset.grad); if (g && g.stops.length > 2) { g.stops.splice(Number(d.lyGdel), 1); commit(); render(); } return; }
             if (d.lySwren) { const s0 = swatch(D, d.lySwren), n = await ask('Nom :', s0?.name); if (s0 && n) { s0.name = n.slice(0, 60); commit(); renderPanel(); } return; }
-            if (d.lySwdel) { const used = JSON.stringify(D).split(`"${d.lySwdel}"`).length - 2; if (!await A().confirmBox(used > 0 ? `Cette nuance sert ${used} fois : ces objets passeront en noir.` : '', {title: 'Supprimer cette nuance ?', okLabel: 'Supprimer la nuance'})) return; D.swatches = D.swatches.filter(s => s.id !== d.lySwdel); const txt = JSON.stringify(D).split(`"${d.lySwdel}"`).join('"sw-black"'); D = JSON.parse(txt); commit(); render(); return; }
+            if (d.lySwdel) { const used = JSON.stringify(D).split(`"${d.lySwdel}"`).length - 2; D.swatches = D.swatches.filter(s => s.id !== d.lySwdel); const txt = JSON.stringify(D).split(`"${d.lySwdel}"`).join('"sw-black"'); D = JSON.parse(txt); commit('Nuance supprimée'); render(); undoable(used > 0 ? `Nuance supprimée (${used} objet${used > 1 ? 's passent' : ' passe'} en noir)` : 'Nuance supprimée'); return; }
             if (d.lyFlip) { selected().forEach(it => { it[d.lyFlip] = !it[d.lyFlip]; }); commit(); render(); return; }
             if (d.lyConvert) { selected().forEach(it => { if (it.type === 'frame') it.shape = d.lyConvert; else it.type = d.lyConvert; }); commit(); render(); return; }
             if (d.lyImgclear !== undefined) { const it = one(); if (it) { it.src = ''; delete it.srcName; commit(); render(); } return; }
@@ -1776,7 +1782,7 @@
                 if (d.lyLlock !== undefined) { l.locked = !l.locked; commit(); render(); return; }
                 if (d.lyLup !== undefined && i > 0) { [D.layers[i - 1], D.layers[i]] = [D.layers[i], D.layers[i - 1]]; commit(); render(); return; }
                 if (d.lyLdown !== undefined && i < D.layers.length - 1) { [D.layers[i + 1], D.layers[i]] = [D.layers[i], D.layers[i + 1]]; commit(); render(); return; }
-                if (d.lyLdel !== undefined) { if (D.layers.length < 2) return msg('Il faut au moins un calque.'); if (!await A().confirmBox('', {title: `Supprimer le calque « ${l.name} » et ses objets ?`, okLabel: 'Supprimer le calque'})) return; D.layers.splice(i, 1); [...D.pages.map(p => p.items), ...D.masters.map(m => m.items)].forEach(list => { for (let k = list.length - 1; k >= 0; k--) if (list[k].layer === l.id) list.splice(k, 1); }); commit(); render(); return; }
+                if (d.lyLdel !== undefined) { if (D.layers.length < 2) return msg('Il faut au moins un calque.'); D.layers.splice(i, 1); [...D.pages.map(p => p.items), ...D.masters.map(m => m.items)].forEach(list => { for (let k = list.length - 1; k >= 0; k--) if (list[k].layer === l.id) list.splice(k, 1); }); commit(`Calque « ${l.name} » supprimé`); render(); undoable(`Calque « ${l.name} » supprimé`); return; }
                 dl.dataset.layer = l.id; renderPanel(); return; }
             if (d.lyLnew !== undefined) { const n = await ask('Nom du calque :', `Calque ${D.layers.length + 1}`); if (!n) return; const colors = ['#4a7dff', '#ff4a6e', '#2bb673', '#f5a623', '#9b59b6', '#00b3c7']; const l = {id: nid('L'), name: n.slice(0, 60), visible: true, locked: false, color: colors[D.layers.length % colors.length]}; D.layers.unshift(l); dl.dataset.layer = l.id; commit(); renderPanel(); return; }
             if (d.lyPickobj) { sel = [d.lyPickobj]; drawSel(); renderPanel(); return; }
@@ -2362,10 +2368,16 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
         // H10 : « N documents · [Liste | Fiches] · Trier : … », retenus pour cette liste
         const KEY = 'listes:layout_books';
         let sort = UI?.sortOf ? UI.sortOf(KEY) : 'recent', view = UI?.viewOf ? UI.viewOf(KEY) : 'list';
-        const draw = async () => {
-            let docs = []; try { docs = (await api('layout_docs')).docs; } catch (err) { toast(err.message, 'error'); }
-            if (UI?.sortItems) docs = UI.sortItems(docs || [], sort, {name: x => x.name, date: x => x.updated_at});
+        // H10 : la barre commune (🔍 Chercher · Filtrer ▾ Sorte · Liste | Fiches · Trier), retenue pour cette liste
+        let all = null, q = '', kinds = [];
+        const fold = t => String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        const draw = async (refetch = true) => {
+            if (refetch || !all) { all = []; try { all = (await api('layout_docs')).docs || []; } catch (err) { toast(err.message, 'error'); } }
             if (token !== S.workspaceToken || S.module !== 'listes') return;
+            const saved = UI?.listBarState?.(KEY); if (saved) { q = saved.q || ''; kinds = saved.f?.kind || []; sort = saved.sort || sort; }
+            const words = fold(q).split(/\s+/).filter(Boolean);
+            let docs = all.filter(x => words.every(w => fold(x.name).includes(w)) && (!kinds.length || kinds.includes(x.is_design ? 'design' : 'book')));
+            if (UI?.sortItems) docs = UI.sortItems(docs, sort, {name: x => x.name, date: x => x.updated_at});
             const fmtDate = d => { const x = new Date(String(d || '').replace(' ', 'T')); return isNaN(x) ? '' : x.toLocaleDateString('fr-FR'); };
             const row = x => `<tr><td class="ly-listcover">${coverHtml(x.cover, 46)}</td><td><button type="button" class="table-link" data-lyl-open="${x.id}">${esc(x.name)}</button></td><td>${x.is_design ? '🎨 Design' : '📖 Livre'}</td><td>${x.pages}</td><td>${esc(fmtDate(x.updated_at))}</td>
                 <td><div class="ly-listact"><button type="button" class="button small" data-lyl-open="${x.id}">${x.is_design ? 'Modifier' : 'Ouvrir'}</button>${x.is_design ? `<button type="button" class="button small secondary" data-lyl-use="${x.id}">Utiliser</button>` : ''}<button type="button" class="button small secondary" data-lyl-dup="${x.id}">Dupliquer</button><button type="button" class="button small secondary" data-lyl-ren="${x.id}">Renommer</button><button type="button" class="button small secondary" data-lyl-exp="${x.id}">Exporter</button><button type="button" class="button small secondary danger" data-lyl-del="${x.id}">🗑</button></div></td></tr>`;
@@ -2374,10 +2386,16 @@ ${chFiles.map((c, k) => `<item id="ch${k + 1}" href="${c.file}" media-type="appl
             const table = (list, empty) => list.length && view === 'cards' && UI?.cardsHtml ? UI.cardsHtml(list.map(x => ({thumb: coverHtml(x.cover, 96) || `<span class="ui-card-ico">${x.is_design ? '🎨' : '📕'}</span>`, name: x.name, open: `data-lyl-open="${x.id}"`, lines: [`${x.is_design ? '🎨 Design' : '📖 Livre'} · ${x.pages} page${x.pages > 1 ? 's' : ''}`], date: x.updated_at ? `Modifié le ${fmtDate(x.updated_at)}` : '', actions: acts(x)}))) : list.length ? `<div class="data-table-wrap"><table class="data-table ly-listtable"><thead><tr><th></th><th>Nom</th><th>Sorte</th><th>Pages</th><th>Modifié le</th><th></th></tr></thead><tbody>${list.map(row).join('')}</tbody></table></div>` : A().empty(empty);
             ws.innerHTML = `<section class="page collection-page ly-listpage" data-dnd-off><header class="page-header"><div><span class="eyebrow">LISTES</span><h2>📐 Livres de famille</h2><p>Les livres faits dans l’atelier de mise en page (façon InDesign) et tes designs : ouvre-les, crée-en un, règle les réglages par défaut.</p></div>
                 <div class="page-actions"><button type="button" class="button" data-lyl-new="family">👪 Nouveau livre d’après la famille</button><button type="button" class="button secondary" data-lyl-new="design">🎨 Depuis un design</button><button type="button" class="button secondary" data-lyl-new="blank">📄 Page blanche</button><button type="button" class="button secondary" data-lyl-defaults>⚙️ Réglages par défaut</button><button type="button" class="button secondary" data-lyl-studio>📐 Ouvrir l’atelier</button></div></header>
-                ${docs.length ? '<div data-lyl-bar></div>' : ''}<h3>📖 Livres (${books.length})</h3>${table(books, 'Aucun livre pour l’instant : « 👪 Nouveau livre d’après la famille ».')}
-                <h3>🎨 Mes designs (${designs.length})</h3>${table(designs, 'Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « 📐 Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ».')}</section>`;
+                ${all.length ? '<div data-lyl-bar></div>' : ''}${!kinds.length || kinds.includes('book') ? `<h3>📖 Livres (${books.length})</h3>${table(books, q.trim() ? `Aucun livre pour « ${q.trim()} ».` : 'Aucun livre pour l’instant : « 👪 Nouveau livre d’après la famille ».')}` : ''}
+                ${!kinds.length || kinds.includes('design') ? `<h3>🎨 Mes designs (${designs.length})</h3>${table(designs, q.trim() ? `Aucun design pour « ${q.trim()} ».` : 'Aucun design à toi : dans un livre, Fichier → « Enregistrer comme design », ou « 📐 Ouvrir l’atelier » → Designs de l’app → « Modifier (à mon nom) ».')}` : ''}</section>`;
             const slot = ws.querySelector('[data-lyl-bar]');
-            if (slot && UI?.sortBar) slot.replaceWith(UI.sortBar({count: docs.length, label: 'document', value: sort, view: {key: KEY, what: 'documents', onChange: v => { view = v; draw(); }}, onChange: v => { sort = v; UI.setSort(KEY, v); draw(); }}));
+            if (slot && UI?.listBar) {
+                const bar = UI.listBar({key: KEY, search: {placeholder: 'Chercher un livre ou un design… (nom)'}, filters: [{id: 'kind', label: 'Sorte', type: 'check', options: [['book', '📖 Livres'], ['design', '🎨 Designs']]}],
+                    view: {what: 'documents', onChange: v => { view = v; draw(false); }}, sort: {options: [['recent', 'Les plus récents'], ['old', 'Les plus anciens'], ['az', 'A → Z'], ['za', 'Z → A']], value: sort},
+                    onChange: (b, {what}) => { sort = b.sort; UI.setSort(KEY, sort); if (what !== 'view') draw(false); }});
+                bar.setCount(`${A().plural(docs.length, 'document')}${docs.length !== all.length ? ` sur ${all.length}` : ''}`);
+                slot.replaceWith(bar);
+            }
         };
         await draw();
         const again = () => { if (S.module === 'listes' && S.listType === 'layout_books') draw(); };
