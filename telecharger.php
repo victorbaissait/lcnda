@@ -12,6 +12,18 @@ if (!class_exists('ZipArchive')) {
     exit('La création de l’archive ZIP n’est pas disponible sur ce serveur PHP.');
 }
 
+// Un autre site ne peut pas lancer ce calcul (lourd) à ta place, et un seul téléchargement se prépare à la fois.
+if (in_array((string) ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? ''), ['cross-site', 'same-site'], true)) {
+    http_response_code(403);
+    exit('Téléchargement refusé : ouvre ce lien depuis l’application.');
+}
+$lock = fopen(sys_get_temp_dir() . '/lcnda-download.lock', 'c');
+if ($lock === false || !flock($lock, LOCK_EX | LOCK_NB)) {
+    http_response_code(429);
+    header('Retry-After: 10');
+    exit('Un téléchargement est déjà en préparation. Réessaie dans quelques secondes.');
+}
+
 $temporary = tempnam(sys_get_temp_dir(), 'lcnda-download-');
 if ($temporary === false) {
     http_response_code(500);

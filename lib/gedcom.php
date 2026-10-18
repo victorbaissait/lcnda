@@ -684,6 +684,14 @@ function gedcom_ansel_to_utf8(string $text): string
 }
 
 /** Importe un fichier GEDCOM (.ged) : voir l'en-tête du fichier. $mediaBaseDir : dossier des médias d'une archive GedZip. */
+/** Vrai type du contenu d'un fichier (pas seulement son extension) : image, son, vidéo ou PDF. */
+function gedimport_real_media_type(string $path): bool
+{
+    if (!function_exists('finfo_open')) return true;
+    $mime = (string) (new finfo(FILEINFO_MIME_TYPE))->file($path);
+    return (bool) preg_match('#^(image/|audio/|video/|application/pdf$)#', $mime);
+}
+
 function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = null): array
 {
     $content = file_get_contents($path);
@@ -753,7 +761,8 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
     $mediaIndex = $mediaBaseDir !== null ? gedimport_index_media_dir($mediaBaseDir) : [];
     $insertMedia = $pdo->prepare('INSERT INTO media(title,description,media_type,filename,thumbnail,date_text) VALUES(?,?,?,?,?,?)');
     $insertMediaLink = $pdo->prepare('INSERT INTO media_links(media_id,entity_type,entity_id,position) VALUES(?,?,?,?)');
-    $resolveMedia = static function (stdClass $obje) use ($pdo, $byXref, $mediaIndex, $insertMedia, &$mediaMap, &$stats, $textOf, $noteText): ?int {
+    $fromDisk = $mediaBaseDir !== null; // fichier .ged ouvert depuis l'ordinateur (app de bureau), pas envoyé par une page web
+    $resolveMedia = static function (stdClass $obje) use ($pdo, $byXref, $mediaIndex, $insertMedia, &$mediaMap, &$stats, $textOf, $noteText, $fromDisk): ?int {
         $v = trim($obje->value);
         $key = null;
         if (preg_match('/^@([^@]+)@$/', $v, $m)) {
@@ -772,8 +781,9 @@ function import_gedcom_into_db(PDO $pdo, string $path, ?string $mediaBaseDir = n
             $allowed = (bool) preg_match('/\.(jpe?g|png|gif|webp|heic|tiff?|bmp|pdf|mp3|m4a|wav|aiff?|aifc|ogg|mp4|mov|webm)$/i', $name);
             if ($allowed && $mediaIndex) { $stored = gedimport_store_media($mediaIndex, $raw); }
             if (!$stored && $allowed && is_file(MEDIA_DIR . '/' . $name)) { $stored = $name; }          // déjà dans LCNDA
-            // Fichier sur l'ordinateur : chemin complet Mac/Linux (« /Users/… ») ou Windows (« C:\Users\… », écrit par Hérédis PC)
-            if (!$stored && $allowed && preg_match('#^(/|[A-Za-z]:/)#', $path) && is_file($path)) {
+            // Fichier sur l'ordinateur : chemin complet Mac/Linux (« /Users/… ») ou Windows (« C:\Users\… », écrit par Hérédis PC).
+            // Seulement pour un .ged ouvert depuis l'ordinateur (pas un fichier envoyé), et si le contenu est bien une image, un son, une vidéo ou un PDF.
+            if (!$stored && $allowed && $fromDisk && preg_match('#^(/|[A-Za-z]:/)#', $path) && is_file($path) && gedimport_real_media_type($path)) {
                 if (!is_dir(MEDIA_DIR)) { @mkdir(MEDIA_DIR, 0775, true); }
                 $target = bin2hex(random_bytes(16)) . '.' . strtolower(pathinfo($name, PATHINFO_EXTENSION));
                 if (@copy($path, MEDIA_DIR . '/' . $target)) { $stored = $target; }

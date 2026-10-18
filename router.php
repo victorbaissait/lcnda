@@ -113,6 +113,12 @@ if ($path === '' || str_contains($path, "\0") || str_contains($path, '..') || st
     return router_deny(400);
 }
 
+// Noms d'hôte locaux seulement (protection contre le « DNS rebinding », voir lib/host_guard.php).
+require_once __DIR__ . '/lib/host_guard.php';
+if (!lcnda_host_guard()) {
+    return true;
+}
+
 // Application de bureau : Electron fournit un secret (variable d'environnement) et l'ajoute à chaque requête
 // de sa fenêtre. Sans lui, aucune page, aucune API, aucun média n'est servi : un autre programme ou une
 // page web ouverte dans un navigateur ne peut pas interroger la base locale.

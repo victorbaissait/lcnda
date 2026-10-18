@@ -436,49 +436,131 @@ function link_inventory(PDO $pdo): array
 }
 
 /**
+ * Adresse vérifiable sans risque : http(s), et le nom pointe vers une adresse publique (pas 127.0.0.1, ni le réseau
+ * de la maison 192.168…, ni 169.254…) — sinon un lien piégé (GEDCOM reçu d'un cousin…) ferait interroger le réseau local.
+ * Renvoie l'entrée CURLOPT_RESOLVE « nom:port:ip » qui fige l'adresse vérifiée (« » pour une adresse en chiffres), ou null si elle est refusée.
+ */
+function link_safe_resolve(string $url): ?string
+{
+    $parts = parse_url($url);
+    $scheme = strtolower((string) ($parts['scheme'] ?? ''));
+    $host = strtolower(trim((string) ($parts['host'] ?? ''), '[]'));
+    if (!in_array($scheme, ['http', 'https'], true) || $host === '' || isset($parts['user']) || isset($parts['pass'])) return null;
+    $port = (int) ($parts['port'] ?? ($scheme === 'https' ? 443 : 80));
+    $public = static fn(string $ip): bool => (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
+    if (filter_var($host, FILTER_VALIDATE_IP)) {
+        return $public($host) ? '' : null;            // adresse écrite en chiffres : rien à figer
+    } else {
+        if ($host === 'localhost' || str_ends_with($host, '.localhost') || str_ends_with($host, '.local') || !str_contains($host, '.')) return null;
+        $ips = gethostbynamel($host) ?: [];
+        foreach ((@dns_get_record($host, DNS_AAAA) ?: []) as $rec) { if (!empty($rec['ipv6'])) $ips[] = $rec['ipv6']; }
+        if (!$ips) return null;
+        foreach ($ips as $ip) { if (!$public($ip)) return null; }   // un seul enregistrement local suffit à refuser
+    }
+    $ip = $ips[0];
+    return $host . ':' . $port . ':' . (str_contains($ip, ':') ? '[' . $ip . ']' : $ip);
+}
+
+/** Options cURL communes à la vérification des liens (sans suivre les redirections : on les suit à la main, en revérifiant chaque saut). */
+function link_curl_options(string $resolve, bool $verify = true): array
+{
+    return ($resolve !== '' ? [CURLOPT_RESOLVE => [$resolve]] : []) + [CURLOPT_RANGE => '0-2047', CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 20, CURLOPT_SSL_VERIFYPEER => $verify, CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
+        CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, verification de liens genealogiques)', CURLOPT_HTTPHEADER => ['Accept: text/html,*/*;q=0.8', 'Accept-Language: fr,en;q=0.8']]
+        + ($verify ? lcnda_curl_tls() : []);
+}
+
+/** Suit les redirections (6 au plus) d'une réponse déjà reçue, en revérifiant chaque nouvelle adresse. */
+function link_follow_redirects(int $code, string $url, string $location, bool $verify = true): array
+{
+    $hops = 0; $error = '';
+    while (in_array($code, [301, 302, 303, 307, 308], true) && $location !== '' && $hops < 6) {
+        $next = link_absolute_url($url, $location);
+        $resolve = link_safe_resolve($next);
+        if ($resolve === null) { return [0, $url, 'Redirection vers une adresse locale refusée']; }
+        $ch = curl_init($next);
+        curl_setopt_array($ch, link_curl_options($resolve, $verify));
+        curl_exec($ch);
+        $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        $location = (string) (curl_getinfo($ch, CURLINFO_REDIRECT_URL) ?: '');
+        $error = curl_errno($ch) ? curl_strerror(curl_errno($ch)) : '';
+        unset($ch);
+        $url = $next; $hops++;
+    }
+    return [$code, $url, $error];
+}
+
+/** Adresse absolue d'une redirection « Location: /chemin » ou « //site/chemin ». */
+function link_absolute_url(string $base, string $location): string
+{
+    if (preg_match('#^https?://#i', $location)) return $location;
+    $b = parse_url($base);
+    $origin = ($b['scheme'] ?? 'https') . '://' . ($b['host'] ?? '') . (isset($b['port']) ? ':' . $b['port'] : '');
+    if (str_starts_with($location, '//')) return ($b['scheme'] ?? 'https') . ':' . $location;
+    if (str_starts_with($location, '/')) return $origin . $location;
+    $path = (string) ($b['path'] ?? '/');
+    return $origin . substr($path, 0, (int) strrpos($path, '/') + 1) . $location;
+}
+
+/**
  * Contrôle de quelques adresses (20 au plus par appel, en parallèle) : suit les redirections ; si la page ne répond
  * plus, cherche une copie sur Internet Archive (archive.org). Ne modifie aucun lien : le résultat est seulement noté.
+ * Les adresses locales (127.0.0.1, réseau de la maison…) ne sont jamais interrogées.
  */
 function check_links(PDO $pdo, array $data): array
 {
     $urls = array_slice(array_values(array_unique(array_filter(array_map('strval', (array) ($data['urls'] ?? [])), static fn($u) => (bool) preg_match('#^https?://#i', $u)))), 0, 20);
     if (!$urls || !function_exists('curl_multi_init')) { return ['checked' => []]; }
-    $mh = curl_multi_init(); $handles = [];
+    $mh = curl_multi_init(); $handles = []; $refused = [];
     foreach ($urls as $u) {
+        $resolve = link_safe_resolve($u);
+        if ($resolve === null) { $refused[$u] = true; continue; }
         $ch = curl_init($u);
-        curl_setopt_array($ch, [CURLOPT_NOBODY => false, CURLOPT_RANGE => '0-2047', CURLOPT_RETURNTRANSFER => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 6,
-            CURLOPT_CONNECTTIMEOUT => 10, CURLOPT_TIMEOUT => 20, CURLOPT_SSL_VERIFYPEER => true, CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-            CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS,
-            CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, verification de liens genealogiques)', CURLOPT_HTTPHEADER => ['Accept: text/html,*/*;q=0.8', 'Accept-Language: fr,en;q=0.8']] + lcnda_curl_tls());
+        curl_setopt_array($ch, link_curl_options($resolve));
         curl_multi_add_handle($mh, $ch);
         $handles[$u] = $ch;
     }
     // Résultat de chaque adresse (en parallèle, curl_errno() ne le donne pas : on lit les messages du lot)
     $results = [];
-    do {
-        $status = curl_multi_exec($mh, $running);
+    if ($handles) {
+        do {
+            $status = curl_multi_exec($mh, $running);
+            while ($info = curl_multi_info_read($mh)) { $results[spl_object_id($info['handle'])] = (int) $info['result']; }
+            if ($running) { curl_multi_select($mh, 1.0); }
+        } while ($running && $status === CURLM_OK);
         while ($info = curl_multi_info_read($mh)) { $results[spl_object_id($info['handle'])] = (int) $info['result']; }
-        if ($running) { curl_multi_select($mh, 1.0); }
-    } while ($running && $status === CURLM_OK);
-    while ($info = curl_multi_info_read($mh)) { $results[spl_object_id($info['handle'])] = (int) $info['result']; }
+    }
     $out = [];
     $save = $pdo->prepare('INSERT INTO link_checks(url,status,final_url,archive_url,error,checked_at) VALUES(?,?,?,?,?,CURRENT_TIMESTAMP)
         ON CONFLICT(url) DO UPDATE SET status=excluded.status, final_url=excluded.final_url, archive_url=excluded.archive_url, error=excluded.error, checked_at=CURRENT_TIMESTAMP');
-    foreach ($handles as $u => $ch) {
+    foreach ($urls as $u) {
+        if (isset($refused[$u])) {
+            $error = 'Adresse locale ou introuvable : non vérifiée';
+            $save->execute([$u, null, '', '', $error]);
+            $out[] = ['url' => $u, 'status' => 0, 'ok' => false, 'doubtful' => true, 'final_url' => '', 'archive_url' => '', 'error' => $error];
+            continue;
+        }
+        $ch = $handles[$u];
         $code = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        $final = (string) curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+        $location = (string) (curl_getinfo($ch, CURLINFO_REDIRECT_URL) ?: '');
         $errno = $results[spl_object_id($ch)] ?? curl_errno($ch);
         $error = $errno ? curl_strerror($errno) : '';
         curl_multi_remove_handle($mh, $ch);
+        $final = $u;
+        if ($location !== '') {
+            [$code, $final, $hopError] = link_follow_redirects($code, $u, $location);
+            if ($hopError !== '') $error = $hopError;
+        }
         // Certificat du site incomplet (les navigateurs le complètent, pas curl) : on regarde seulement si la page répond
-        if (!$code && in_array($errno, [60, 77], true)) {
+        if (!$code && in_array($errno, [60, 77], true) && ($resolve = link_safe_resolve($u)) !== null) {
             $retry = curl_init($u);
-            curl_setopt_array($retry, [CURLOPT_NOBODY => true, CURLOPT_FOLLOWLOCATION => true, CURLOPT_MAXREDIRS => 6, CURLOPT_TIMEOUT => 20, CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS, CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTP | CURLPROTO_HTTPS, CURLOPT_USERAGENT => 'Mozilla/5.0 (LCNDA, verification de liens genealogiques)']);
+            curl_setopt_array($retry, [CURLOPT_NOBODY => true] + link_curl_options($resolve, false));
             curl_exec($retry);
             $code = (int) curl_getinfo($retry, CURLINFO_RESPONSE_CODE);
-            $final = (string) curl_getinfo($retry, CURLINFO_EFFECTIVE_URL);
+            $location = (string) (curl_getinfo($retry, CURLINFO_REDIRECT_URL) ?: '');
             unset($retry); // curl_close() : sans effet depuis PHP 8, obsolète en 8.5
+            $final = $u;
+            if ($location !== '') { [$code, $final] = link_follow_redirects($code, $u, $location, false); }
             $error = $code ? 'Certificat du site incomplet (la page répond)' : $error;
         }
         $ok = ($code >= 200 && $code < 400) || $code === 416; // 416 : la page existe (plage refusée)

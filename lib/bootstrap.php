@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/host_guard.php'; // noms d'hôte locaux seulement (aussi sous Apache / MAMP, sans router.php)
+if (!lcnda_host_guard()) exit;
 require_once __DIR__ . '/paths.php';   // APP_ROOT, DATA_DIR, MEDIA_DIR
 require_once __DIR__ . '/text.php';    // ascii_fold()
 require_once __DIR__ . '/migrations.php'; // migrate_database(), SCHEMA_VERSION

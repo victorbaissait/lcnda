@@ -1840,9 +1840,10 @@ function daboville_positions(PDO $pdo, int $rootId, int $guardLimit = 200000): a
     while ($queue && $guard < $guardLimit) {
         $guard++;
         [$pid, $number] = array_shift($queue);
-        $key = $pid . ':' . $number;
-        if (isset($seen[$key])) continue;
-        $seen[$key] = true;
+        // Chaque personne n'est développée qu'une fois : ses autres numéros (implexe) sont notés mais pas redéroulés,
+        // ce qui évite aussi une boucle sans fin si l'arbre en contient une (personne devenue son propre ancêtre).
+        if (isset($seen[$pid])) continue;
+        $seen[$pid] = true;
         $children = daboville_children_ordered($pdo, $pid);
         $index = 0;
         foreach ($children as $childId) {
@@ -1851,7 +1852,7 @@ function daboville_positions(PDO $pdo, int $rootId, int $guardLimit = 200000): a
             $positions[$childNumber] = $childId;
             $personDaboville[$childId] ??= [];
             $personDaboville[$childId][] = $childNumber;
-            $queue[] = [$childId, $childNumber];
+            if (!isset($seen[$childId])) $queue[] = [$childId, $childNumber];
         }
     }
     $collapsed = [];
@@ -6147,6 +6148,8 @@ function restore_deleted_investigation_media(PDO $pdo,array $change,array $befor
  */
 function csv_row($out, array $fields): void
 {
+    // Un texte qui commence par = + - @ serait lu comme une formule par Excel / Numbers / LibreOffice : on le protège par une apostrophe.
+    $fields = array_map(static fn($v) => is_string($v) && $v !== '' && strpbrk($v[0], "=+-@\t\r") !== false && !is_numeric($v) ? "'" . $v : $v, $fields);
     fputcsv($out, $fields, ',', '"', '\\');
 }
 
@@ -9622,12 +9625,28 @@ function ensure_single_parent_child(PDO $pdo, int $parentId, int $childId): void
     $pdo->prepare('INSERT INTO families(partner1_id,partner2_id) VALUES(?,NULL)')->execute([$parentId]);$familyId=(int)$pdo->lastInsertId();ensure_child_link($pdo,$familyId,$childId);
 }
 
+/** Vrai si $ancestorId est un ancêtre (à n'importe quelle génération) de $personId. */
+function person_is_ancestor_of(PDO $pdo, int $ancestorId, int $personId): bool
+{
+    $stmt=$pdo->prepare("WITH RECURSIVE up(id) AS (
+            SELECT CAST(? AS INTEGER) UNION
+            SELECT p.pid FROM up JOIN family_children fc ON fc.child_id=up.id JOIN families f ON f.id=fc.family_id
+            JOIN (SELECT id AS fid, partner1_id AS pid FROM families UNION ALL SELECT id, partner2_id FROM families) p ON p.fid=f.id AND p.pid IS NOT NULL
+        ) SELECT 1 FROM up WHERE id=CAST(? AS INTEGER) LIMIT 1");
+    $stmt->execute([$personId,$ancestorId]);
+    return (bool)$stmt->fetchColumn();
+}
+
 function add_relation(PDO $pdo,array $data): array
 {
     $personId=safe_int($data['person_id']??0);$relatedId=safe_int($data['related_id']??0);$type=safe_text($data['relation_type']??'');
     if(!$personId||!$relatedId||!in_array($type,['parent','child','spouse'],true))throw new RuntimeException('Relation incomplète');
     if($personId===$relatedId)throw new RuntimeException('Une personne ne peut pas être liée à elle-même');
     if(!person_exists($pdo,$personId)||!person_exists($pdo,$relatedId))throw new RuntimeException('Personne introuvable');
+    assert_person_unlocked($pdo,$personId);assert_person_unlocked($pdo,$relatedId);
+    // Pas de boucle dans l'arbre : un parent ne peut pas être aussi un descendant de son enfant.
+    [$parentId,$childId]=$type==='parent'?[$relatedId,$personId]:($type==='child'?[$personId,$relatedId]:[0,0]);
+    if($parentId&&person_is_ancestor_of($pdo,$childId,$parentId))throw new RuntimeException('Impossible : cette personne serait à la fois l’ancêtre et le descendant de l’autre. Vérifie le sens du lien (parent ou enfant).');
     if($type==='parent')add_parent_child($pdo,$relatedId,$personId);
     elseif($type==='child'){$pdo->prepare("UPDATE persons SET children_status='unknown' WHERE id=?")->execute([$personId]);add_parent_child($pdo,$personId,$relatedId);}
     else{
@@ -11320,6 +11339,7 @@ function remove_relation(PDO $pdo,array $data): array
 {
     $personId=safe_int($data['person_id']??0);$relatedId=safe_int($data['related_id']??0);$type=safe_text($data['relation_type']??'');
     if(!$personId||!$relatedId||!in_array($type,['parent','child','spouse'],true))throw new RuntimeException('Relation incomplète');
+    assert_person_unlocked($pdo,$personId);assert_person_unlocked($pdo,$relatedId);
     if($type==='parent')detach_parent_child($pdo,$relatedId,$personId);
     elseif($type==='child')detach_parent_child($pdo,$personId,$relatedId);
     else{
@@ -11384,12 +11404,12 @@ function delete_person(PDO $pdo,array $data): array
     $ids=array_map('intval',$eventIds->fetchAll(PDO::FETCH_COLUMN));
     if($ids){
         $placeholders=implode(',',array_fill(0,count($ids),'?'));
-        foreach(['media_links','source_links','notes'] as $table){
+        foreach(['media_links','source_links','notes','label_links'] as $table){
             $pdo->prepare("DELETE FROM {$table} WHERE entity_type='event' AND entity_id IN ({$placeholders})")->execute($ids);
         }
     }
 
-    foreach(['media_links','source_links','notes'] as $table){
+    foreach(['media_links','source_links','notes','label_links'] as $table){
         $pdo->prepare("DELETE FROM {$table} WHERE entity_type='person' AND entity_id=?")->execute([$id]);
     }
     if(function_exists('pet_detach_person'))pet_detach_person($pdo,$id); // la fiche d'animal (la liste) reste, avec son nom, ses dates
@@ -11445,9 +11465,9 @@ function person_delete_snapshot(PDO $pdo,int $personId): array
         $stmt=$pdo->prepare("SELECT id FROM {$table} WHERE {$column}=?");$stmt->execute([$personId]);
         foreach($stmt->fetchAll(PDO::FETCH_COLUMN) as $rowId)$snapshot['nulls'][]=['table'=>$table,'column'=>$column,'id'=>(int)$rowId,'value'=>$personId];
     }
-    // Notes, médias et sources rattachés à la fiche ou à ses événements
+    // Notes, médias, sources et étiquettes rattachés à la fiche ou à ses événements
     $eventIds=array_map(static fn($row)=>(int)$row['id'],$snapshot['rows']['events']??[]);
-    foreach(['media_links','source_links','notes'] as $table){
+    foreach(['media_links','source_links','notes','label_links'] as $table){
         $stmt=$pdo->prepare("SELECT * FROM {$table} WHERE entity_type='person' AND entity_id=?");$stmt->execute([$personId]);
         foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $row)$snapshot['links'][$table][]=$row;
         if($eventIds){
@@ -11751,6 +11771,7 @@ function delete_online_sheet(PDO $pdo,array $data): array
 function add_note(PDO $pdo,array $data): array
 {
     $personId=safe_int($data['person_id']??0);$body=safe_text($data['body']??'');if(!$personId||$body==='')throw new RuntimeException('Personne ou contenu manquant');
+    assert_person_unlocked($pdo,$personId);
     $stmt=$pdo->prepare("INSERT INTO notes(entity_type,entity_id,title,body,created_at,updated_at) VALUES('person',?,?,?,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)");$stmt->execute([$personId,safe_text($data['title']??''),$body]);$id=(int)$pdo->lastInsertId();log_change($pdo,'note',$id,'create','Ajout d’une note à la fiche #'.$personId);return ['id'=>$id];
 }
 
@@ -11759,6 +11780,7 @@ function save_note(PDO $pdo,array $data): array
     $id=safe_int($data['id']??0);$body=safe_text($data['body']??'');if(!$id||$body==='')throw new RuntimeException('Note ou contenu manquant');
     $stmt=$pdo->prepare('SELECT * FROM notes WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Note introuvable');
+    if($before['entity_type']==='person')assert_person_unlocked($pdo,(int)$before['entity_id']);
     $pdo->prepare('UPDATE notes SET title=?,body=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')->execute([safe_text($data['title']??''),$body,$id]);
     $stmt->execute([$id]);$after=$stmt->fetch();log_change($pdo,'note',$id,'update','Modification de la note #'.$id,$before,$after);return $after;
 }
@@ -11768,6 +11790,7 @@ function delete_note(PDO $pdo,array $data): array
     $id=safe_int($data['id']??0);if(!$id)throw new RuntimeException('Note manquante');
     $stmt=$pdo->prepare('SELECT * FROM notes WHERE id=?');$stmt->execute([$id]);$before=$stmt->fetch();
     if(!$before)throw new RuntimeException('Note introuvable');
+    if($before['entity_type']==='person')assert_person_unlocked($pdo,(int)$before['entity_id']);
     $labelLinks=$pdo->prepare("SELECT * FROM label_links WHERE entity_type='note' AND entity_id=?");$labelLinks->execute([$id]);
     $snapshot=[
         '_restore_kind'=>'note_delete',
